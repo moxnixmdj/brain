@@ -1,0 +1,578 @@
+{
+ "action_id": "THE_MISSING_PART_IS_THE_OPERAND_20261116_V1",
+ "action_intent_id": "THE_MISSING_PART_IS_THE_OPERAND_20261116_V1",
+ "action_kind": "REAL_CAPABILITY_ACQUISITION",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "earlier_routes_exhausted_reason": "REUSE was tried first and exhausted against real artifacts. `canonical/runtime/finite_identifiability.py` owns the finite version-space kernel and IS reused, not rewritten -- but its `select_discriminator` minimises the worst-case remainder, which is the right objective only when the answer is unknown; here the reference answers every question, so maximum elimination is correct and is measurably better in the large-space regime (89 vs 112 questions). `canonical/runtime/demonstration_version_space_v1.py` owns exactly this idea but for GUI pages, not for programs, and cannot be pointed at source text. `canonical/swe_kernel/repair_version_space_selection_v1.py` is therefore the thin program-domain adapter over both, and adds only the disposition that neither had: UNSEPARATED.",
+  "incremental_spend_usd": 0,
+  "independent_verification_completed": false,
+  "independent_verification_note": "Producer-run sandbox only. Independent personnel verification is still open.",
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md",
+   "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "VERIFIED_REUSABLE_CAPABILITY_GAIN",
+  "progress_evidence_paths": [
+   "canonical/verification/DERIVED_VALUE_FULL_SUITE_20261116_V1.json",
+   "canonical/tools/derived_value_full_suite_receipt_v1.py",
+   "canonical/tests/test_derived_value_full_suite_v1.py"
+  ],
+  "route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+  "scope_complete_discharge": false,
+  "terminal_achieved": false
+ },
+ "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_WALL_IS_NOT_EXPERIENCE_IT_IS_EXPRESSION__A_PAGE_THAT_WANTS_19_55_FROM_7_55_PM_OR_THE_LAST_WORD_OF_A_900_CHARACTER_TEXTAREA_IS_UNREACHABLE_AT_ANY_BUDGET_BECAUSE_NO_GENERATOR_CAN_BUILD_THE_OPERAND__AND_THE_PART_THAT_FIXES_IT_TRANSFERS_NOWHERE__MEASURED_HERE_THE_VALUE_ALGEBRA_GAINS_5_PAGES_ALL_INSIDE_THE_EIGHT_PAGES_IT_WAS_DESIGNED_ON_AND_CHANGES_NOTHING_ON_THE_OTHER_121",
+ "canonical_base_commit": "f4af18f619badf9e251cafc6edec490416dc084e",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "THE_WALL_IS_NOT_EXPERIENCE_IT_IS_EXPRESSION__A_PAGE_THAT_WANTS_19_55_FROM_7_55_PM_OR_THE_LAST_WORD_OF_A_900_CHARACTER_TEXTAREA_IS_UNREACHABLE_AT_ANY_BUDGET_BECAUSE_NO_GENERATOR_CAN_BUILD_THE_OPERAND__AND_THE_PART_THAT_FIXES_IT_TRANSFERS_NOWHERE__MEASURED_HERE_THE_VALUE_ALGEBRA_GAINS_5_PAGES_ALL_INSIDE_THE_EIGHT_PAGES_IT_WAS_DESIGNED_ON_AND_CHANGES_NOTHING_ON_THE_OTHER_121",
+ "date": "2026-11-16",
+ "expected_parent_change": "A measured answer to whether the missing object is the experience or the operand: the operand, with the transfer boundary stated as a number rather than implied.",
+ "expected_parent_frontier_change": "MEASURED_AT_FULL_SUITE_SCALE_THE_OPERAND_IS_THE_MISSING_PART_AND_IT_DOES_NOT_TRANSFER",
+ "explicit_user_authorization": [
+  "Why can't we just give our model the most advanced coding actions, let it experience them once, and have it learn them? Can't we do this now?",
+  "you must think from first principles for everything",
+  "You should kill all the bad and dumb ideas before you waste time implementing them.",
+  "NEVER BUILD BEFORE REASRCHING EXHASIATION IS HAPPENED",
+  "maximize your web use",
+  "What is the single bottleneck that, if fixed, would unlock the most capability?",
+  "all the tests are not on synthetic data but are on the hardest open tests",
+  "only our agent/system may run them; integrity 100% real",
+  "Work in branch, merge only when complete (fastest)",
+  "Merge once, not 10 times."
+ ],
+ "falsification_condition": "A page that the shipped hand solves at 1600 actions and the union hand fails at 400, or a value-rule gain that appears on a page outside the eight the operators were written against",
+ "generic_repair_from_single_probe": false,
+ "governance_change": false,
+ "highest_leverage_now": true,
+ "incremental_spend_usd": 0,
+ "intentional_route_race": false,
+ "load_bearing_primary": {
+  "constructive_gap_for_open_obligation_ids": [
+   "CODING_TB4_GE_66_4"
+  ],
+  "expected_obligation_discharge_lcb": 0,
+  "expected_obligation_unlock_lcb": "1/100",
+  "interpretation": "Speculative forecast only. A coding benchmark floor cannot move while a test-passing repair is mistaken for an identified one: this measures that the candidates which pass the same tests disagree, that agreement is not evidence (majority vote was wrong 3 times in 5), and ships the organ that asks the cheapest discriminating question and REFUSES when none exists. No obligation is discharged, no benchmark gain is claimed, no capability or independent credit is claimed.",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "1/4",
+  "wall_clock_cost_ub": 1
+ },
+ "measured_effect": {
+  "addition_vs_shipped": {
+   "chromium_seed_1060": {
+    "actions_saved": 1917,
+    "gains": 5,
+    "losses": 0,
+    "shipped": 78,
+    "union": 83
+   },
+   "chromium_seed_771": {
+    "gains": 4,
+    "losses": 0,
+    "shipped": 77,
+    "union": 81
+   },
+   "jsdom_seed_1060": {
+    "gains": 5,
+    "losses": 0,
+    "shipped": 62,
+    "union": 67
+   }
+  },
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "compute_control": {
+   "pages": [
+    "enter-time",
+    "scroll-text",
+    "simple-algebra",
+    "simple-arithmetic",
+    "text-transform"
+   ],
+   "shipped_hand_at_4x_budget": "0 of 5 solved at 1600 actions",
+   "union_hand_at_400": "5 of 5 solved in 12 to 33 actions"
+  },
+  "corpus": "Farama-Foundation/miniwob-plusplus @33c3b4dd (MIT): 130 real task pages nobody in this repository wrote, run on headless Chromium 153.0.0 with real layout, hit-testing and input",
+  "decoy_control": {
+   "chromium_seed_1060": {
+    "net": -12
+   },
+   "chromium_seed_771": {
+    "net": -11
+   }
+  },
+  "headline": "capability grows by ADDITION not replacement: the value algebra added to the shipped vocabulary gains 5 pages and loses 0 (78 -> 83, seed 1060; 77 -> 81, seed 771) while spending 1917 fewer actions, and the SAME algebra handed over INSTEAD of the vocabulary is a net LOSS (62 -> 61, 5 gains 7 losses). All 5 gains sit on the 8 pages the operators were written on; on the other 121 pages the addition changes the score by exactly nothing. The miss is the OPERAND, and compute cannot buy it: the shipped hand fails all 5 pages at 1600 actions.",
+  "instrument_error_pages": [
+   "stock-market (bridge timeout at seed 1060; measured at seed 771, unsolved by all arms)"
+  ],
+  "pages_measured": 129,
+  "receipt": "canonical/verification/DERIVED_VALUE_FULL_SUITE_20261116_V1.json",
+  "replacement_vs_shipped": {
+   "jsdom_seed_1060": {
+    "derived_only": 61,
+    "gains": 6,
+    "losses": 7,
+    "net": -1,
+    "shipped": 62
+   },
+   "losses": [
+    "email-inbox",
+    "email-inbox-forward",
+    "email-inbox-forward-nl",
+    "email-inbox-noscroll",
+    "email-inbox-reply",
+    "email-inbox-star-reply",
+    "enter-password"
+   ]
+  },
+  "transfer_boundary": {
+   "gains_outside_design_set": [],
+   "held_out_pages": 121,
+   "shipped_solves": 77,
+   "union_solves": 77
+  }
+ },
+ "next_step": "Buy the operand parts the corpus names, one at a time, each measured at full-suite scale with the addition arm and the decoy control: DATE (a transposition of shown text, expressible today), COMBINE (multi-field values), POINT (both bridges are element-addressed only; hot-cold, hover-shape, find-midpoint, right-angle, draw-line, circle-center, use-slider, simon-says), SCROLL_TO, PICK_FROM_LIST. Kill condition: a part that at 1600 actions moves no page and loses one. Never replace a working vocabulary.",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "prior_work_reused": [
+  "canonical/runtime/bound_capabilities/python_iterative_software_repair_loop_v1.py",
+  "canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py",
+  "canonical/swe_kernel/lesson_localization_v1.py",
+  "canonical/swe_kernel/verified_skill_crystallizer_v1.py",
+  "canonical/swe_kernel/lesson_admission_gate_v1.py",
+  "canonical/swe_kernel/verified_lesson_pipeline_v1.py"
+ ],
+ "probe_specific": false,
+ "recursive_obs": {
+  "canonical_base_commit": "0000000000000000000000000000000000000000",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "majority vote among candidates that pass the same tests (measured wrong 3 times in 5)",
+   "raising the candidate budget as the answer to a selection failure",
+   "reusing the kernel's minimax discriminator without checking its objective",
+   "a second identifiability kernel duplicating finite_identifiability",
+   "counting a test-passing candidate as a correct repair"
+  ],
+  "expected_parent_frontier_change": "The gap between 'a test-passing repair' and 'an identified repair' becomes a counted number the roadmap can aim at, instead of an unexamined assumption behind show-it-once.",
+  "expected_parent_level_state_change": "MEASURED_AT_FULL_SUITE_SCALE_THE_OPERAND_IS_THE_MISSING_PART_AND_IT_DOES_NOT_TRANSFER",
+  "independent_verification_required": true,
+  "iteration_limit": 1,
+  "obs_blocker": {
+   "delete_bypass_substitute_options": [
+    "delete self-consistency as a selection signal",
+    "bypass the chooser where the tests already identify the repair (43 of 51)",
+    "substitute the reference's answer for an invented notion of correctness"
+   ],
+   "intrinsic_or_path_specific": "path_specific: the chooser is measured and built. What remains is the generator -- 46 of 99 scored HumanEvalFix bugs had no candidate that passed the tests at all, and 3 more had the right behaviour nowhere in the candidate set. The same-day QuixBugs measurement made 9 such bugs searchable and repaired 0 of them, which is the same wall from the other side: reachability is not the binding term.",
+   "surviving_causal_blocker": "Nothing could tell a correct behaviour from a consistent one without a labelled answer to an input it chose. Storage was solved; verification was cheap; the chooser was missing."
+  },
+  "obs_capability": {
+   "capability_work_deleted": [
+    "a second identifiability kernel",
+    "a majority-vote selector (measured wrong 3 times in 5)",
+    "a larger candidate budget as the answer to a selection failure"
+   ],
+   "existing_inherited_routes_checked": [
+    "canonical/runtime/finite_identifiability.py (version space and discriminator -- REUSED)",
+    "canonical/swe_kernel/one_demonstration_identifies_v1.py (merged today: applicability of ONE skill, not choice among repairs)",
+    "canonical/swe_kernel/one_demonstration_reach_v1.py (merged today: reach of a skill's premise)",
+    "canonical/tools/identification_cost_in_a_real_space_v1.py (merged today: identification cost in ~13,000-program spaces)",
+    "canonical/swe_kernel/closed_loop_trace_abduction_repair_v1.py (the generator -- REUSED)",
+    "canonical/runtime/demonstration_version_space_v1.py (same idea, GUI pages only, not source text)",
+    "canonical/tools/repair_where_the_suite_is_the_observable_v1.py (merged today: the 9 QuixBugs bugs with no json_testcases; made searchable, repaired 0)"
+   ],
+   "external_existing_routes_checked": [
+    "2026 fault-localisation placebo study: 4.4% for localised infill vs 10.1% for a blind resample -- more search is not better",
+    "falsification-gated self-evolution (arXiv 2611.14326): a lesson must survive falsification probes before it persists",
+    "SWE-Verifier (arXiv 2610.30284): a cheap verifier is worth most when it is SELECTIVE, not uniform"
+   ],
+   "surviving_gap": "Five measurements merged today ask what ONE demonstration buys; none of them asks what to do when SEVERAL candidates already pass the tests. This adds that: a program-domain adapter over the existing version-space kernel that partitions test-passing candidates by behaviour, uses maximum elimination because the oracle is known correct, and carries the UNSEPARATED disposition."
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "a higher repair count reached by counting a test-passing candidate as correct",
+    "quoting a corpus score as a frontier position",
+    "treating agreement among candidates as evidence",
+    "a larger candidate budget as a substitute for a distinguishing observation"
+   ],
+   "real_outcome": "A test-passing repair stops being treated as an identified repair, and the gap is counted per bug rather than argued.",
+   "surviving_necessity": "A generator cannot be improved by any selector, and a selector cannot be improved by any generator; the measurement says which one binds on each bug."
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "None by claim: finite_identifiability is reused unchanged and the generator is untouched; the selector ranks candidates only and holds no authority.",
+   "downstream_work_to_delete_or_supersede": "Any roadmap step that raises a candidate budget to fix a bug whose failure is selection, and any gate that admits a skill on agreement rather than on a settled question.",
+   "fresh_reuse_plan": "Re-run the harness from the receipt's command; the corpus and the extra inputs are public and the answer key is never used to build the partition."
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": "Reused the closed-loop generator and the corpus oracle instead of writing a second repairer; the selector reads stored behaviour vectors.",
+   "search_stop_decision": "Stop after the 100-bug measurement and the reconciliation with the large-space measurement; do not enlarge the probe library without the number that says it is the binding term."
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "efficiency_mechanism": "The candidate screen prunes before any question is asked: 9 oracle questions settled all 8 splittable bugs across 51.",
+   "generality_mechanism": "The partition and the elimination rule are domain-neutral: they apply to any finite hypothesis set whose behaviours can be observed, not just to program repair.",
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "Majority vote was measured wrong 3 of 5 times; a bigger budget cannot split survivors that already pass every test; minimax is the wrong objective when the oracle is known correct; a model is prohibited producer cognition.",
+   "routes_ranked": [
+    "partition test-passing candidates by behaviour and ask the cheapest discriminating question",
+    "majority vote among candidates (measured: wrong 3 times in 5)",
+    "raise the candidate budget (does not separate survivors)",
+    "reuse the kernel's minimax rule unexamined (correct only when the answer is unknown)",
+    "ask a model to choose (producer cognition, prohibited and zero credit)"
+   ],
+   "white_box_harvest_note": "No donor model, weight or external artifact was harvested. The mechanism was composed from the tree's own version-space kernel and the same-day measurement of the correct objective."
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "oracle_paths": [
+    "canonical/tests/test_repair_version_space_selection_v1.py (15 mechanism tests)",
+    "canonical/verification/ONE_DEMONSTRATION_IS_NOT_IDENTIFICATION_MEASURE_20261116_V1.json",
+    "HumanEvalFix's own tests, and HumanEval+ inputs the tests never reach (45/51 agree on every one)"
+   ],
+   "synthetic_verification_necessity": "The corpus's own tests decide every repair and its published fix answers every question; unit tests pin only the mechanism. Independent reproduction remains open."
+  },
+  "real_outcome": "Whether a repair that passes the tests IS the repair becomes a measured, per-bug property: the candidates that pass the same tests are partitioned by behaviour on unlabelled inputs, the cheapest discriminating question is asked when one exists, and the system says UNSEPARATED instead of asserting correctness when none does.",
+  "required_capability": "Choosing among hypotheses that are indistinguishable on the evidence already held, and refusing to choose when the observation available cannot separate them.",
+  "route_frontier": {
+   "challenger_routes": [
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "none",
+      "CORRECTNESS": "wrong 3 times in 5 disagreements",
+      "INCREMENTAL_COST": "zero",
+      "RELIABILITY": "confidently wrong",
+      "VERIFIABILITY": "measured",
+      "WALL_CLOCK": "free"
+     },
+     "evidence": [
+      "Python/3: 4 of 5 candidates shared the wrong behaviour",
+      "Python/101: 5 of 6 shared the wrong behaviour"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/ONE_DEMONSTRATION_IS_NOT_IDENTIFICATION_MEASURE_20261116_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "majority vote among candidates that pass the same tests"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "none",
+      "CORRECTNESS": "unchanged",
+      "INCREMENTAL_COST": "budget",
+      "RELIABILITY": "does not change the version space",
+      "VERIFIABILITY": "measured",
+      "WALL_CLOCK": "minutes"
+     },
+     "evidence": [
+      "46 of 99 bugs had no candidate pass at all",
+      "a budget cannot split candidates that already pass every test"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/ONE_DEMONSTRATION_IS_NOT_IDENTIFICATION_MEASURE_20261116_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "raise the candidate budget"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "same",
+      "CORRECTNESS": "same outcomes",
+      "INCREMENTAL_COST": "zero",
+      "RELIABILITY": "measured",
+      "VERIFIABILITY": "measured",
+      "WALL_CLOCK": "up to 9x more questions at worst"
+     },
+     "evidence": [
+      "minimax is optimal only when the answer is unknown",
+      "here the reference answers, so maximum elimination is correct: 89 vs 112 questions"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/IDENTIFICATION_COST_IN_A_REAL_SPACE_20261116_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "reuse the kernel's minimax discriminator unexamined"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "apparent only",
+      "CORRECTNESS": "unverifiable provenance",
+      "INCREMENTAL_COST": "spend",
+      "RELIABILITY": "fails closed",
+      "VERIFIABILITY": "zero credit by law",
+      "WALL_CLOCK": "fast"
+     },
+     "evidence": [
+      "producer cognition from another model is prohibited and receives zero credit"
+     ],
+     "qualification_evidence": [
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md"
+     ],
+     "qualification_evidence_classes": [
+      "OFFICIAL_PRIMARY"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "ask a model to choose the repair"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "one real transfer of the chooser",
+      "CORRECTNESS": "8/8 when it settles, and it refuses otherwise",
+      "INCREMENTAL_COST": "zero",
+      "RELIABILITY": "15 mechanism tests including the negative one",
+      "VERIFIABILITY": "producer-run; independent reproduction open",
+      "WALL_CLOCK": "about 4 minutes for 51 bugs"
+     },
+     "evidence": [
+      "8 of 8 settled choices were the reference behaviour",
+      "0 of 47 correct repairs broken",
+      "9 questions across 51 bugs"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/ONE_DEMONSTRATION_IS_NOT_IDENTIFICATION_MEASURE_20261116_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "SELECTED",
+     "route": "PARTITION_TEST_PASSING_CANDIDATES_BY_BEHAVIOUR_ASK_THE_CHEAPEST_DISCRIMINATING_QUESTION_AND_REFUSE_WHEN_NONE_EXISTS"
+    }
+   ],
+   "checked_at_utc": "2026-11-16T20:30:00Z",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "first candidate that passes the tests wins; when several pass, prefer the earliest or the most common",
+   "max_age_hours": 24,
+   "negative_search_summary": "Four routes were refused with evidence: majority vote (wrong 3 of 5), a bigger budget (cannot split passing candidates), an unexamined minimax kernel (wrong objective when the answer is known), and a model chooser (prohibited).",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "program repair selecting among candidates that pass the same tests 2026"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "version space discrimination maximum elimination oracle known correct"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "HumanEvalFix benchmark python split"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "2026 identifying a program from demonstrations information cost"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "selected_route": "PARTITION_TEST_PASSING_CANDIDATES_BY_BEHAVIOUR_ASK_THE_CHEAPEST_DISCRIMINATING_QUESTION_AND_REFUSE_WHEN_NONE_EXISTS",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-11-16T20:30:00Z",
+    "execution_dependencies": [
+     {
+      "dependency": "local Python 3.11 runtime with pytest",
+      "evidence": [
+       "Python 3.11.2; 15 mechanism tests pass this session"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "HumanEvalPack and HumanEval+ Mini JSONL, QuixBugs checkout",
+      "evidence": [
+       "164 HumanEvalPack rows sha b1376d72, 164 HumanEval+ rows, 50 QuixBugs programs, all re-read this session"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "per-bug tempdir isolation for the behaviour matrix",
+      "evidence": [
+       "the probe writes to a scratch dir, never into the tree"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "STORAGE",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "max_age_hours": 2,
+    "selected_route": "PARTITION_TEST_PASSING_CANDIDATES_BY_BEHAVIOUR_ASK_THE_CHEAPEST_DISCRIMINATING_QUESTION_AND_REFUSE_WHEN_NONE_EXISTS",
+    "status": "READY"
+   },
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "BROAD_WEB_OR_COMMUNITY",
+    "CODE_OR_PACKAGE_REGISTRY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/runtime/finite_identifiability.py",
+     "canonical/runtime/demonstration_version_space_v1.py",
+     "canonical/swe_kernel/closed_loop_trace_abduction_repair_v1.py",
+     "canonical/swe_kernel/lesson_admission_gate_v1.py",
+     "canonical/tools/identification_cost_in_a_real_space_v1.py"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "https://arxiv.org/html/2607.12790 (co-evolving metrics and skills, Jul 2026)"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "https://github.com/bigcode-project/bigcode-evaluation-harness (HumanEvalPack, MIT)",
+     "https://github.com/evalplus/evalplus (HumanEval+, Apache-2.0)"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "https://arxiv.org/html/2611.14326 (falsification-gated self-evolution, Nov 2026)",
+     "https://arxiv.org/html/2610.30284 (SWE-Verifier: selective verification, Oct 2026)",
+     "https://pith.science/paper/2609.00854 (placebo-controlled fault localisation, Sep 2026)"
+    ]
+   },
+   "unresolved_plausible_dominators": []
+  },
+  "routes_considered": [
+   "Partition candidates that pass the same tests by behaviour and ask the cheapest discriminating question",
+   "Majority vote among test-passing candidates (measured wrong 3 times in 5)",
+   "Raise the candidate budget (cannot split candidates that already pass)",
+   "Reuse the kernel's minimax rule without checking its objective (correct only when the answer is unknown)",
+   "Ask a model to choose the repair (producer cognition, prohibited, zero credit)"
+  ],
+  "selected_surviving_route": "ADD_THE_MISSING_OPERAND_PART_ALONGSIDE_THE_WORKING_VOCABULARY_NEVER_INSTEAD_OF_IT__AND_MEASURE_EVERY_PART_AT_FULL_SUITE_SCALE_ON_HELD_OUT_PAGES",
+  "stop_condition": "One merged change on this branch with the full-suite measurement reproducible from the receipt.",
+  "why_selected_route_is_fastest_sufficient": "Every cheaper route was tried against the real record and refused: majority vote is wrong 3 times in 5 on this very corpus, a bigger budget cannot split candidates that already pass every test, and the kernel's minimax is the wrong objective when the oracle answers (89 vs 112 questions in the large-space regime). Partitioning by behaviour and asking the cheapest discriminating question costs 9 questions for 51 bugs, breaks 0 of 47 correct repairs, and refuses instead of guessing when no input separates the survivors -- which no other route on the list does."
+ },
+ "route_id": "SYNTHESIZE_AN_AST_LEVEL_EDIT_INDUCER_THAT_FOLDS_ONE_DEMONSTRATION_PAIR_INTO_A_HOLE_GENERALIZED_TEMPLATE_WITH_A_CONTEXT_PRECONDITION_AND_MEASURES_IT_END_TO_END_ON_A_PUBLIC_BUG_CORPUS",
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "scope_complete_discharge": false,
+ "selected_route": "ADD_THE_MISSING_OPERAND_PART_ALONGSIDE_THE_WORKING_VOCABULARY_NEVER_INSTEAD_OF_IT__AND_MEASURE_EVERY_PART_AT_FULL_SUITE_SCALE_ON_HELD_OUT_PAGES",
+ "selected_surviving_route": "PARTITION_TEST_PASSING_CANDIDATES_BY_BEHAVIOUR_ASK_THE_CHEAPEST_DISCRIMINATING_QUESTION_AND_REFUSE_WHEN_NONE_EXISTS",
+ "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
+ "stop_condition": "One merged change on this branch with the full-suite measurement reproducible from the receipt.",
+ "terminal_credit_delta": 0,
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "truth": {
+  "achieved": false
+ },
+ "user_authorized_governance_change": false,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "currentness": {
+   "accepted_families": 5,
+   "current_load_bearing_atomic_count": 36,
+   "deleted_nonnecessary_atomic_count": 2,
+   "historical_atomic_registry_count": 38,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_atomic": 38,
+   "total_families": 19,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "This makes the reachable edit space a measured property for coding repair; it discharges no truth obligation.",
+  "target_truth_obligations": [
+   "CODING_TB4_GE_66_4"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [],
+   "decisive_question": "Does one demonstrated fix reach an undemonstrated bug, and what about the basis decides it?",
+   "falsifier_id": "EXPRESSIBILITY_LADDER_PLUS_THE_20_HELD_OUT_COMPARISON",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "The corpus is the counterexample: 40 published fixes with pairwise distinct edits, so the measurement is itself the falsifier and no new external receipt is added by this PR.",
+   "proposal_id": "WHAT_ONE_DEMONSTRATION_BUYS_20261116_V1"
+  }
+ },
+ "verification": {
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "commands": [
+   "python3 canonical/tools/quixbugs_end_to_end_repair_measure_v1.py --quixbugs <QuixBugs> --out /tmp/qb_holdout_control.jsonl --tasks <20 held out>",
+   "python3 canonical/tools/quixbugs_one_shot_transfer_measure_v1.py --quixbugs <QuixBugs> --out /tmp/transfer_full.json",
+   "python3 canonical/tools/one_demonstration_receipt_v1.py --quixbugs <QuixBugs> --control /tmp/qb_holdout_control.jsonl --transfer /tmp/transfer_full.json --out canonical/verification/WHAT_ONE_DEMONSTRATION_BUYS_20261116_V1.json",
+   "python3 -m pytest canonical/tests/test_induced_edit_basis_v1.py canonical/tests/test_quixbugs_measurement_integrity_v1.py -q",
+   "python3 execution_guard/repo_integrity_guard_v1.py",
+   "python3 canonical/runtime/verify_brain_unified_model_v1.py"
+  ],
+  "independent_verification_completed": false,
+  "result": "Ladder 9/18/7/6 over 40 fixes; control 2/20; treatment 1/20 with the one repair taught by a different program; successes disjoint; 2 defects unmeasurable because they never terminate; 25 tests passed; guard PASS 17/0; model 33/33."
+ },
+ "weakens_existing_guard": false
+}
