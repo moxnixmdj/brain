@@ -1,0 +1,606 @@
+{
+  "authority": "NONE__PRODUCER_RUN_AUDIT_OF_TARGET_NOT_A_SOLVER",
+  "corpus": {
+    "tasks": 40,
+    "upstream": "https://github.com/jkoppel/QuixBugs"
+  },
+  "reading": "A_SEARCH_TOO_WEAK: the published fix is one edit and the enumerated space contains it, so the refusal was search, not expressiveness. B_SPACE_TOO_SMALL: one edit, but not in the space -- the generator must widen. C_MULTI_EDIT: the published fix is more than one edit from the defective program, so a one-edit mechanism cannot express it at all. NO_EXAMPLES: nothing to search against.",
+  "refused_tasks": [
+    "breadth_first_search",
+    "depth_first_search",
+    "detect_cycle",
+    "find_first_in_sorted",
+    "flatten",
+    "gcd",
+    "hanoi",
+    "is_valid_parenthesization",
+    "kheapsort",
+    "knapsack",
+    "levenshtein",
+    "longest_common_subsequence",
+    "minimum_spanning_tree",
+    "possible_change",
+    "powerset",
+    "reverse_linked_list",
+    "rpn_eval",
+    "shortest_path_length",
+    "shortest_path_lengths",
+    "shortest_paths",
+    "shunting_yard",
+    "sqrt",
+    "subsequences",
+    "to_base",
+    "topological_ordering",
+    "wrap"
+  ],
+  "rows": [
+    {
+      "answer": "def bitcount(n):\n    count = 0\n    while n:\n        n &= n - 1\n        count += 1\n    return count",
+      "kind": "task",
+      "published_fix_edits": 1,
+      "published_fix_kinds": [
+        "OPERATOR"
+      ],
+      "space_contains_published_fix": true,
+      "space_size": 1094,
+      "task": "bitcount",
+      "verdict": "A_SEARCH_TOO_WEAK",
+      "was_repaired_in_the_run": true
+    },
+    {
+      "kind": "task",
+      "task": "breadth_first_search",
+      "verdict": "NO_EXAMPLES__NOT_SEARCHABLE",
+      "was_repaired_in_the_run": false
+    },
+    {
+      "answer": "def bucketsort(arr, k):\n    counts = [0] * k\n    for x in arr:\n        counts[x] += 1\n    sorted_arr = []\n    for i, count in enumerate(counts):\n        sorted_arr.extend([i] * count)\n    return sorted_arr",
+      "kind": "task",
+      "published_fix_edits": 1,
+      "published_fix_kinds": [
+        "NAME"
+      ],
+      "space_contains_published_fix": true,
+      "space_size": 5817,
+      "task": "bucketsort",
+      "verdict": "A_SEARCH_TOO_WEAK",
+      "was_repaired_in_the_run": true
+    },
+    {
+      "kind": "task",
+      "task": "depth_first_search",
+      "verdict": "NO_EXAMPLES__NOT_SEARCHABLE",
+      "was_repaired_in_the_run": false
+    },
+    {
+      "kind": "task",
+      "task": "detect_cycle",
+      "verdict": "NO_EXAMPLES__NOT_SEARCHABLE",
+      "was_repaired_in_the_run": false
+    },
+    {
+      "answer": "def find_first_in_sorted(arr, x):\n    lo = 0\n    hi = len(arr)\n    while lo < hi:\n        mid = (lo + hi) // 2\n        if x == arr[mid] and (mid == 0 or x != arr[mid - 1]):\n            return mid\n        elif x <= arr[mid]:\n            hi = mid\n        else:\n            lo = mid + 1\n    return -1",
+      "kind": "task",
+      "published_fix_edits": 1,
+      "published_fix_kinds": [
+        "OPERATOR"
+      ],
+      "space_contains_published_fix": true,
+      "space_size": 11471,
+      "task": "find_first_in_sorted",
+      "verdict": "A_SEARCH_TOO_WEAK",
+      "was_repaired_in_the_run": false
+    },
+    {
+      "answer": "def find_in_sorted(arr, x):\n\n    def binsearch(start, end):\n        if start == end:\n            return -1\n        mid = start + (end - start) // 2\n        if x < arr[mid]:\n            return binsearch(start, mid)\n        elif x > arr[mid]:\n            return binsearch(mid + 1, end)\n        else:\n            return mid\n    return binsearch(0, len(arr))",
+      "kind": "task",
+      "published_fix_edits": 1,
+      "published_fix_kinds": [
+        "EXPRESSION"
+      ],
+      "space_contains_published_fix": true,
+      "space_size": 10521,
+      "task": "find_in_sorted",
+      "verdict": "A_SEARCH_TOO_WEAK",
+      "was_repaired_in_the_run": true
+    },
+    {
+      "answer": "def flatten(arr):\n    for x in arr:\n        if isinstance(x, list):\n            for y in flatten(x):\n                yield y\n        else:\n            yield x",
+      "kind": "task",
+      "published_fix_edits": 1,
+      "published_fix_kinds": [
+        "EXPRESSION"
+      ],
+      "space_contains_published_fix": true,
+      "space_size": 4119,
+      "task": "flatten",
+      "verdict": "A_SEARCH_TOO_WEAK",
+      "was_repaired_in_the_run": false
+    },
+    {
+      "answer": "def gcd(a, b):\n    if b == 0:\n        return a\n    else:\n        return gcd(b, a % b)",
+      "kind": "task",
+      "nearest": {
+        "answer_at_divergence": "a % b)",
+        "candidate": "a % b",
+        "common_prefix_chars": 79,
+        "replacement": "b",
+        "space_at_divergence": "b)\n'\\nInput:\\n    a: A nonnegative int\\n    b: A nonnegative"
+      },
+      "published_fix_edits": 1,
+      "published_fix_kinds": [
+        "ARGUMENT"
+      ],
+      "space_contains_published_fix": false,
+      "space_size": 1966,
+      "task": "gcd",
+      "verdict": "B_SPACE_TOO_SMALL",
+      "was_repaired_in_the_run": false
+    },
+    {
+      "answer": "def get_factors(n):\n    if n == 1:\n        return []\n    for i in range(2, int(n ** 0.5) + 1):\n        if n % i == 0:\n            return [i] + get_factors(n // i)\n    return [n]",
+      "kind": "task",
+      "nearest": {
+        "answer_at_divergence": "n]",
+        "candidate": "n == 1",
+        "common_prefix_chars": 175,
+        "replacement": "(n == 1)",
+        "space_at_divergence": "]\n'\\nPrime Factorization\\n\\n\\nFactors an int using naive tri"
+      },
+      "published_fix_edits": 1,
+      "published_fix_kinds": [
+        "EXPRESSION"
+      ],
+      "space_contains_published_fix": false,
+      "space_size": 7894,
+      "task": "get_factors",
+      "verdict": "B_SPACE_TOO_SMALL",
+      "was_repaired_in_the_run": true
+    },
+    {
+      "answer": "def hanoi(height, start=1, end=3):\n    steps = []\n    if height > 0:\n        helper = ({1, 2, 3} - {start} - {end}).pop()\n        steps.extend(hanoi(height - 1, start, helper))\n        steps.append((start, end))\n        steps.extend(hanoi(height - 1, helper, end))\n    return steps",
+      "kind": "task",
+      "published_fix_edits": 1,
+      "published_fix_kinds": [
+        "NAME"
+      ],
+      "space_contains_published_fix": true,
+      "space_size": 12595,
+      "task": "hanoi",
+      "verdict": "A_SEARCH_TOO_WEAK",
+      "was_repaired_in_the_run": false
+    },
+    {
+      "answer": "def is_valid_parenthesization(parens):\n    depth = 0\n    for paren in parens:\n        if paren == '(':\n            depth += 1\n        else:\n            depth -= 1\n            if depth < 0:\n                return False\n    return depth == 0",
+      "kind": "task",
+      "nearest": {
+        "answer_at_divergence": "== 0",
+        "candidate": "True",
+        "common_prefix_chars": 235,
+        "replacement": "depth + 0",
+        "space_at_divergence": "+ 0\n\"\\nNested Parens\\nInput:\\n    parens: A string of parent"
+      },
+      "published_fix_edits": 1,
+      "published_fix_kinds": [
+        "EXPRESSION"
+      ],
+      "space_contains_published_fix": false,
+      "space_size": 2267,
+      "task": "is_valid_parenthesization",
+      "verdict": "B_SPACE_TOO_SMALL",
+      "was_repaired_in_the_run": false
+    },
+    {
+      "answer": "def kheapsort(arr, k):\n    import heapq\n    heap = arr[:k]\n    heapq.heapify(heap)\n    for x in arr[k:]:\n        yield heapq.heappushpop(heap, x)\n    while heap:\n        yield heapq.heappop(heap)",
+      "kind": "task",
+      "nearest": {
+        "answer_at_divergence": "k:]:\n        yield heapq.heappushpop(heap, x)\n    while heap",
+        "candidate": "arr",
+        "common_prefix_chars": 100,
+        "replacement": "(arr)[0]",
+        "space_at_divergence": "0]:\n        yield heapq.heappushpop(heap, x)\n    while heap:"
+      },
+      "published_fix_edits": 1,
+      "published_fix_kinds": [
+        "EXPRESSION"
+      ],
+      "space_contains_published_fix": false,
+      "space_size": 5997,
+      "task": "kheapsort",
+      "verdict": "B_SPACE_TOO_SMALL",
+      "was_repaired_in_the_run": false
+    },
+    {
+      "answer": "def knapsack(capacity, items):\n    from collections import defaultdict\n    memo = defaultdict(int)\n    for i in range(1, len(items) + 1):\n        weight, value = items[i - 1]\n        for j in range(1, capacity + 1):\n            memo[i, j] = memo[i - 1, j]\n            if weight <= j:\n                memo[i, j] = max(memo[i, j], value + memo[i - 1, j - weight])\n    return memo[len(items), capacity]",
+      "kind": "task",
+      "published_fix_edits": 1,
+      "published_fix_kinds": [
+        "OPERATOR"
+      ],
+      "space_contains_published_fix": true,
+      "space_size": 18413,
+      "task": "knapsack",
+      "verdict": "A_SEARCH_TOO_WEAK",
+      "was_repaired_in_the_run": false
+    },
+    {
+      "answer": "def kth(arr, k):\n    pivot = arr[0]\n    below = [x for x in arr if x < pivot]\n    above = [x for x in arr if x > pivot]\n    num_less = len(below)\n    num_lessoreq = len(arr) - len(above)\n    if k < num_less:\n        return kth(below, k)\n    elif k >= num_lessoreq:\n        return kth(above, k - num_lessoreq)\n    else:\n        return pivot",
+      "kind": "task",
+      "nearest": {
+        "answer_at_divergence": "num_lessoreq)\n    else:\n        return pivot",
+        "candidate": "k",
+        "common_prefix_chars": 295,
+        "replacement": "(k) - 1",
+        "space_at_divergence": "1)\n    else:\n        return pivot\n'\\nQuickSelect\\n\\nThis is "
+      },
+      "published_fix_edits": 1,
+      "published_fix_kinds": [
+        "EXPRESSION"
+      ],
+      "space_contains_published_fix": false,
+      "space_size": 11519,
+      "task": "kth",
+      "verdict": "B_SPACE_TOO_SMALL",
+      "was_repaired_in_the_run": true
+    },
+    {
+      "answer": "def lcs_length(s, t):\n    from collections import Counter\n    dp = Counter()\n    for i in range(len(s)):\n        for j in range(len(t)):\n            if s[i] == t[j]:\n                dp[i, j] = dp[i - 1, j - 1] + 1\n    return max(dp.values()) if dp else 0",
+      "kind": "task",
+      "published_fix_edits": 1,
+      "published_fix_kinds": [
+        "EXPRESSION"
+      ],
+      "space_contains_published_fix": true,
+      "space_size": 11307,
+      "task": "lcs_length",
+      "verdict": "A_SEARCH_TOO_WEAK",
+      "was_repaired_in_the_run": true
+    },
+    {
+      "answer": "def levenshtein(source, target):\n    if source == '' or target == '':\n        return len(source) or len(target)\n    elif source[0] == target[0]:\n        return levenshtein(source[1:], target[1:])\n    else:\n        return 1 + min(levenshtein(source, target[1:]), levenshtein(source[1:], target[1:]), levenshtein(source[1:], target))",
+      "kind": "task",
+      "nearest": {
+        "answer_at_divergence": "(source[1:], target[1:])\n    else:\n        return 1 + min(le",
+        "candidate": "1 + levenshtein(source[1:], target[1:])",
+        "common_prefix_chars": 171,
+        "replacement": "levenshtein",
+        "space_at_divergence": "\n    else:\n        return 1 + min(levenshtein(source, target"
+      },
+      "published_fix_edits": 1,
+      "published_fix_kinds": [
+        "EXPRESSION"
+      ],
+      "space_contains_published_fix": false,
+      "space_size": 16567,
+      "task": "levenshtein",
+      "verdict": "B_SPACE_TOO_SMALL",
+      "was_repaired_in_the_run": false
+    },
+    {
+      "answer": "def lis(arr):\n    ends = {}\n    longest = 0\n    for i, val in enumerate(arr):\n        prefix_lengths = [j for j in range(1, longest + 1) if arr[ends[j]] < val]\n        length = max(prefix_lengths) if prefix_lengths else 0\n        if length == longest or val < arr[ends[length + 1]]:\n            ends[length + 1] = i\n            longest = max(longest, length + 1)\n    return longest",
+      "kind": "task",
+      "nearest": {
+        "answer_at_divergence": "ongest, length + 1)\n    return longest",
+        "candidate": "length + 1",
+        "common_prefix_chars": 343,
+        "replacement": "max((length + 1), 0)",
+        "space_at_divergence": "ength + 1, 0)\n    return longest\n'\\nLongest Increasing Subse"
+      },
+      "published_fix_edits": 1,
+      "published_fix_kinds": [
+        "EXPRESSION"
+      ],
+      "space_contains_published_fix": false,
+      "space_size": 13643,
+      "task": "lis",
+      "verdict": "B_SPACE_TOO_SMALL",
+      "was_repaired_in_the_run": true
+    },
+    {
+      "answer": "def longest_common_subsequence(a, b):\n    if not a or not b:\n        return ''\n    elif a[0] == b[0]:\n        return a[0] + longest_common_subsequence(a[1:], b[1:])\n    else:\n        return max(longest_common_subsequence(a, b[1:]), longest_common_subsequence(a[1:], b), key=len)",
+      "kind": "task",
+      "published_fix_edits": 1,
+      "published_fix_kinds": [
+        "EXPRESSION"
+      ],
+      "space_contains_published_fix": true,
+      "space_size": 11296,
+      "task": "longest_common_subsequence",
+      "verdict": "A_SEARCH_TOO_WEAK",
+      "was_repaired_in_the_run": false
+    },
+    {
+      "answer": "def max_sublist_sum(arr):\n    max_ending_here = 0\n    max_so_far = 0\n    for x in arr:\n        max_ending_here = max(0, max_ending_here + x)\n        max_so_far = max(max_so_far, max_ending_here)\n    return max_so_far",
+      "kind": "task",
+      "published_fix_edits": 1,
+      "published_fix_kinds": [
+        "EXPRESSION"
+      ],
+      "space_contains_published_fix": true,
+      "space_size": 3269,
+      "task": "max_sublist_sum",
+      "verdict": "A_SEARCH_TOO_WEAK",
+      "was_repaired_in_the_run": true
+    },
+    {
+      "answer": "def mergesort(arr):\n\n    def merge(left, right):\n        result = []\n        i = 0\n        j = 0\n        while i < len(left) and j < len(right):\n            if left[i] <= right[j]:\n                result.append(left[i])\n                i += 1\n            else:\n                result.append(right[j])\n                j += 1\n        result.extend(left[i:] or right[j:])\n        return result\n    if len(arr) <= 1:\n        return arr\n    else:\n        middle = len(arr) // 2\n        left = mergesort(arr[:middle])\n        right = mergesort(arr[middle:])\n        return merge(left, right)",
+      "kind": "task",
+      "nearest": {
+        "answer_at_divergence": "1:\n        return arr\n    else:\n        middle = len(arr) //",
+        "candidate": "len(arr) == 0",
+        "common_prefix_chars": 410,
+        "replacement": "LtE",
+        "space_at_divergence": "0:\n        return arr\n    else:\n        middle = len(arr) //"
+      },
+      "published_fix_edits": 1,
+      "published_fix_kinds": [
+        "OPERATOR"
+      ],
+      "space_contains_published_fix": false,
+      "space_size": 21061,
+      "task": "mergesort",
+      "verdict": "B_SPACE_TOO_SMALL",
+      "was_repaired_in_the_run": true
+    },
+    {
+      "kind": "task",
+      "task": "minimum_spanning_tree",
+      "verdict": "NO_EXAMPLES__NOT_SEARCHABLE",
+      "was_repaired_in_the_run": false
+    },
+    {
+      "answer": "def next_palindrome(digit_list):\n    high_mid = len(digit_list) // 2\n    low_mid = (len(digit_list) - 1) // 2\n    while high_mid < len(digit_list) and low_mid >= 0:\n        if digit_list[high_mid] == 9:\n            digit_list[high_mid] = 0\n            digit_list[low_mid] = 0\n            high_mid += 1\n            low_mid -= 1\n        else:\n            digit_list[high_mid] += 1\n            if low_mid != high_mid:\n                digit_list[low_mid] += 1\n            return digit_list\n    return [1] + (len(digit_list) - 1) * [0] + [1]",
+      "kind": "task",
+      "published_fix_edits": 1,
+      "published_fix_kinds": [
+        "EXPRESSION"
+      ],
+      "space_contains_published_fix": true,
+      "space_size": 15452,
+      "task": "next_palindrome",
+      "verdict": "A_SEARCH_TOO_WEAK",
+      "was_repaired_in_the_run": true
+    },
+    {
+      "answer": "def next_permutation(perm):\n    for i in range(len(perm) - 2, -1, -1):\n        if perm[i] < perm[i + 1]:\n            for j in range(len(perm) - 1, i, -1):\n                if perm[i] < perm[j]:\n                    next_perm = list(perm)\n                    next_perm[i], next_perm[j] = (perm[j], perm[i])\n                    next_perm[i + 1:] = reversed(next_perm[i + 1:])\n                    return next_perm",
+      "kind": "task",
+      "published_fix_edits": 2,
+      "published_fix_kinds": [
+        "NAME"
+      ],
+      "space_contains_published_fix": false,
+      "space_size": 18057,
+      "task": "next_permutation",
+      "verdict": "C_MULTI_EDIT",
+      "was_repaired_in_the_run": true
+    },
+    {
+      "answer": "def pascal(n):\n    rows = [[1]]\n    for r in range(1, n):\n        row = []\n        for c in range(0, r + 1):\n            upleft = rows[r - 1][c - 1] if c > 0 else 0\n            upright = rows[r - 1][c] if c < r else 0\n            row.append(upleft + upright)\n        rows.append(row)\n    return rows",
+      "kind": "task",
+      "published_fix_edits": 1,
+      "published_fix_kinds": [
+        "EXPRESSION"
+      ],
+      "space_contains_published_fix": true,
+      "space_size": 13700,
+      "task": "pascal",
+      "verdict": "A_SEARCH_TOO_WEAK",
+      "was_repaired_in_the_run": true
+    },
+    {
+      "answer": "def possible_change(coins, total):\n    if total == 0:\n        return 1\n    if total < 0 or not coins:\n        return 0\n    first, *rest = coins\n    return possible_change(coins, total - first) + possible_change(rest, total)",
+      "kind": "task",
+      "nearest": {
+        "answer_at_divergence": "not coins:\n        return 0\n    first, *rest = coins\n    ret",
+        "candidate": "total < 0",
+        "common_prefix_chars": 91,
+        "replacement": "(total < 0) or (total < 0)",
+        "space_at_divergence": "total < 0:\n        return 0\n    first, *rest = coins\n    ret"
+      },
+      "published_fix_edits": 1,
+      "published_fix_kinds": [
+        "EXPRESSION"
+      ],
+      "space_contains_published_fix": false,
+      "space_size": 5726,
+      "task": "possible_change",
+      "verdict": "B_SPACE_TOO_SMALL",
+      "was_repaired_in_the_run": false
+    },
+    {
+      "answer": "def powerset(arr):\n    if arr:\n        first, *rest = arr\n        rest_subsets = powerset(rest)\n        return rest_subsets + [[first] + subset for subset in rest_subsets]\n    else:\n        return [[]]",
+      "kind": "task",
+      "nearest": {
+        "answer_at_divergence": "[[first] + subset for subset in rest_subsets]\n    else:\n    ",
+        "candidate": "[[first] + subset for subset in rest_subsets]",
+        "common_prefix_chars": 126,
+        "replacement": "rest_subsets + 0",
+        "space_at_divergence": "0\n    else:\n        return [[]]\n\"\\nPower Set\\n\\nInput:\\n    "
+      },
+      "published_fix_edits": 1,
+      "published_fix_kinds": [
+        "EXPRESSION"
+      ],
+      "space_contains_published_fix": false,
+      "space_size": 3853,
+      "task": "powerset",
+      "verdict": "B_SPACE_TOO_SMALL",
+      "was_repaired_in_the_run": false
+    },
+    {
+      "answer": "def quicksort(arr):\n    if not arr:\n        return []\n    pivot = arr[0]\n    lesser = quicksort([x for x in arr[1:] if x < pivot])\n    greater = quicksort([x for x in arr[1:] if x >= pivot])\n    return lesser + [pivot] + greater",
+      "kind": "task",
+      "published_fix_edits": 1,
+      "published_fix_kinds": [
+        "OPERATOR"
+      ],
+      "space_contains_published_fix": true,
+      "space_size": 9555,
+      "task": "quicksort",
+      "verdict": "A_SEARCH_TOO_WEAK",
+      "was_repaired_in_the_run": true
+    },
+    {
+      "kind": "task",
+      "task": "reverse_linked_list",
+      "verdict": "NO_EXAMPLES__NOT_SEARCHABLE",
+      "was_repaired_in_the_run": false
+    },
+    {
+      "answer": "def rpn_eval(tokens):\n\n    def op(symbol, a, b):\n        return {'+': lambda a, b: a + b, '-': lambda a, b: a - b, '*': lambda a, b: a * b, '/': lambda a, b: a / b}[symbol](a, b)\n    stack = []\n    for token in tokens:\n        if isinstance(token, float):\n            stack.append(token)\n        else:\n            a = stack.pop()\n            b = stack.pop()\n            stack.append(op(token, b, a))\n    return stack.pop()",
+      "kind": "task",
+      "nearest": {
+        "answer_at_divergence": "a))\n    return stack.pop()",
+        "candidate": "a",
+        "common_prefix_chars": 396,
+        "replacement": "b",
+        "space_at_divergence": "b))\n    return stack.pop()\n\"\\nReverse Polish Notation\\n\\nFou"
+      },
+      "published_fix_edits": 1,
+      "published_fix_kinds": [
+        "ARGUMENT"
+      ],
+      "space_contains_published_fix": false,
+      "space_size": 14991,
+      "task": "rpn_eval",
+      "verdict": "B_SPACE_TOO_SMALL",
+      "was_repaired_in_the_run": false
+    },
+    {
+      "kind": "task",
+      "task": "shortest_path_length",
+      "verdict": "NO_EXAMPLES__NOT_SEARCHABLE",
+      "was_repaired_in_the_run": false
+    },
+    {
+      "kind": "task",
+      "task": "shortest_path_lengths",
+      "verdict": "NO_EXAMPLES__NOT_SEARCHABLE",
+      "was_repaired_in_the_run": false
+    },
+    {
+      "kind": "task",
+      "task": "shortest_paths",
+      "verdict": "NO_EXAMPLES__NOT_SEARCHABLE",
+      "was_repaired_in_the_run": false
+    },
+    {
+      "answer": "def shunting_yard(tokens):\n    precedence = {'+': 1, '-': 1, '*': 2, '/': 2}\n    rpntokens = []\n    opstack = []\n    for token in tokens:\n        if isinstance(token, int):\n            rpntokens.append(token)\n        else:\n            while opstack and precedence[token] <= precedence[opstack[-1]]:\n                rpntokens.append(opstack.pop())\n            opstack.append(token)\n    while opstack:\n        rpntokens.append(opstack.pop())\n    return rpntokens",
+      "kind": "task",
+      "nearest": {
+        "answer_at_divergence": "        opstack.append(token)\n    while opstack:\n        rpn",
+        "candidate": "{'+': 1, '-': 1, '*': 2, '/': 2}",
+        "common_prefix_chars": 351,
+        "replacement": "({'+': 1, '-': 1, '*': 2, '/': 2})",
+        "space_at_divergence": "while opstack:\n        rpntokens.append(opstack.pop())\n    r"
+      },
+      "published_fix_edits": 1,
+      "published_fix_kinds": [
+        "STRUCTURE"
+      ],
+      "space_contains_published_fix": false,
+      "space_size": 12845,
+      "task": "shunting_yard",
+      "verdict": "B_SPACE_TOO_SMALL",
+      "was_repaired_in_the_run": false
+    },
+    {
+      "answer": "def sieve(max):\n    primes = []\n    for n in range(2, max + 1):\n        if all((n % p > 0 for p in primes)):\n            primes.append(n)\n    return primes",
+      "kind": "task",
+      "published_fix_edits": 1,
+      "published_fix_kinds": [
+        "CALLEE"
+      ],
+      "space_contains_published_fix": true,
+      "space_size": 5979,
+      "task": "sieve",
+      "verdict": "A_SEARCH_TOO_WEAK",
+      "was_repaired_in_the_run": true
+    },
+    {
+      "answer": "def sqrt(x, epsilon):\n    approx = x / 2\n    while abs(x - approx ** 2) > epsilon:\n        approx = 0.5 * (approx + x / approx)\n    return approx",
+      "kind": "task",
+      "published_fix_edits": 1,
+      "published_fix_kinds": [
+        "EXPRESSION"
+      ],
+      "space_contains_published_fix": true,
+      "space_size": 5187,
+      "task": "sqrt",
+      "verdict": "A_SEARCH_TOO_WEAK",
+      "was_repaired_in_the_run": false
+    },
+    {
+      "answer": "def subsequences(a, b, k):\n    if k == 0:\n        return [[]]\n    ret = []\n    for i in range(a, b + 1 - k):\n        ret.extend(([i] + rest for rest in subsequences(i + 1, b, k - 1)))\n    return ret",
+      "kind": "task",
+      "nearest": {
+        "answer_at_divergence": "[]]\n    ret = []\n    for i in range(a, b + 1 - k):\n        r",
+        "candidate": "k == 0",
+        "common_prefix_chars": 58,
+        "replacement": "(k == 0)",
+        "space_at_divergence": "]\n    ret = []\n    for i in range(a, b + 1 - k):\n        ret"
+      },
+      "published_fix_edits": 1,
+      "published_fix_kinds": [
+        "EXPRESSION"
+      ],
+      "space_contains_published_fix": false,
+      "space_size": 8792,
+      "task": "subsequences",
+      "verdict": "B_SPACE_TOO_SMALL",
+      "was_repaired_in_the_run": false
+    },
+    {
+      "answer": "def to_base(num, b):\n    result = ''\n    alphabet = string.digits + string.ascii_uppercase\n    while num > 0:\n        i = num % b\n        num = num // b\n        result = alphabet[i] + result\n    return result",
+      "kind": "task",
+      "published_fix_edits": 2,
+      "published_fix_kinds": [
+        "EXPRESSION"
+      ],
+      "space_contains_published_fix": false,
+      "space_size": 6082,
+      "task": "to_base",
+      "verdict": "C_MULTI_EDIT",
+      "was_repaired_in_the_run": false
+    },
+    {
+      "kind": "task",
+      "task": "topological_ordering",
+      "verdict": "NO_EXAMPLES__NOT_SEARCHABLE",
+      "was_repaired_in_the_run": false
+    },
+    {
+      "answer": "def wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(' ', 0, cols + 1)\n        if end == -1:\n            end = cols\n        line, text = (text[:end], text[end:])\n        lines.append(line)\n    lines.append(text)\n    return lines",
+      "kind": "task",
+      "nearest": {
+        "answer_at_divergence": "lines.append(text)\n    return lines",
+        "candidate": "[]",
+        "common_prefix_chars": 230,
+        "replacement": "([])",
+        "space_at_divergence": "return lines\n\"\\nWrap Text\\n\\nGiven a long string and a colum"
+      },
+      "published_fix_edits": 1,
+      "published_fix_kinds": [
+        "STRUCTURE"
+      ],
+      "space_contains_published_fix": false,
+      "space_size": 9239,
+      "task": "wrap",
+      "verdict": "B_SPACE_TOO_SMALL",
+      "was_repaired_in_the_run": false
+    }
+  ],
+  "schema": "BRAIN_REPAIR_SPACE_AUDIT_V1",
+  "verdict_tally_all_tasks": {
+    "A_SEARCH_TOO_WEAK": 15,
+    "B_SPACE_TOO_SMALL": 14,
+    "C_MULTI_EDIT": 2,
+    "NO_EXAMPLES__NOT_SEARCHABLE": 9
+  },
+  "verdict_tally_refused_only": {
+    "A_SEARCH_TOO_WEAK": 6,
+    "B_SPACE_TOO_SMALL": 10,
+    "C_MULTI_EDIT": 1,
+    "NO_EXAMPLES__NOT_SEARCHABLE": 9
+  }
+}
