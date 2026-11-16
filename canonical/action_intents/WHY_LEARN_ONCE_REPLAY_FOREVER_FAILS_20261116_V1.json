@@ -42,7 +42,7 @@
   },
   "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_TREE_NEVER_SEPARATED_THE_LEARNED_OPERATION_FROM_THE_PLAN_IT_PRODUCED_SO_REPLAY_WAS_COUNTED_AS_REUSE_WHEN_A_PLAN_IS_ONLY_VALID_ON_THE_STATE_IT_WAS_MADE_FOR",
-  "canonical_base_commit": "57a83e9e8ca49f4c3404d5c643960af973b8986f",
+  "canonical_base_commit": "b6f847e8973244b337ca880c20ed2638551fe337",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -182,7 +182,7 @@
   ],
   "probe_specific": false,
   "recursive_obs": {
-    "canonical_base_commit": "57a83e9e8ca49f4c3404d5c643960af973b8986f",
+    "canonical_base_commit": "b6f847e8973244b337ca880c20ed2638551fe337",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "counting a recorded plan as a reusable action",
@@ -349,7 +349,7 @@
           "route": "RE_DECIDE_EVERY_ACTION_PROVE_THE_PREMISE_ON_THE_LIVE_STATE_AND_POSTCONDITION_CHECK_THE_CLAIMED_SENTENCE_INSTEAD_OF_REPLAYING_THE_PLAN"
         }
       ],
-      "checked_at_utc": "2026-11-16T22:55:00Z",
+      "checked_at_utc": "2026-11-16T22:45:00Z",
       "comparison_dimensions": [
         "CORRECTNESS",
         "CAPABILITY_STRENGTH",
@@ -389,7 +389,7 @@
       "selected_route": "RE_DECIDE_EVERY_ACTION_PROVE_THE_PREMISE_ON_THE_LIVE_STATE_AND_POSTCONDITION_CHECK_THE_CLAIMED_SENTENCE_INSTEAD_OF_REPLAYING_THE_PLAN",
       "selected_route_preflight": {
         "all_required_dependencies_ready": true,
-        "checked_at_utc": "2026-11-16T22:55:00Z",
+        "checked_at_utc": "2026-11-16T22:45:00Z",
         "execution_dependencies": [
           {
             "dependency": "local Python 3.11 runtime with the repository's own venv",
