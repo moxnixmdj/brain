@@ -31226,18 +31226,18 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 456,
+  "knowledge_documents": 457,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6862,
+  "research_index_records": 6864,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 449,
-  "source_index_modules": 1979
+  "source_index_modules": 1981
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "ff2420b710d51bbe2659a08c12c7888a3447a51ad148c24a35d49e1135a33ed9"
+  "value": "14d99cdb38e4215d8a53c9878cfd8d67bf71fa5a45bdebaa356e20bb35f08754"
  },
  "engines": [
   {
@@ -62260,6 +62260,83 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 13123,
+   "headings": [
+    "The hand was never the bottleneck. The operand was.",
+    "1. The question, and the answer in one paragraph",
+    "2. What was built, and why it is the smallest thing that works",
+    "3. The measurement that decided it (and killed my first idea)",
+    "The negative result, stated plainly",
+    "4. Four defects the corpus found that I did not",
+    "5. So what is true about the plan?",
+    "6. The single bottleneck, restated after today",
+    "7. Ranked next work (pre-registered)",
+    "8. Honest limits"
+   ],
+   "kind": "DOCUMENT",
+   "path": "THE_HAND_WAS_NEVER_THE_BOTTLENECK_20261116_V1.md",
+   "sha256": "724866dfd923ab53a83f7d85342e69efdf590bd52ee7bb92b29378aab8aa1887",
+   "summary": "**2026-11-16 · branch `arena/0ec412aa-brain` · base `85b7036b` · measured on MiniWoB++ with real Chromium, no model, $0**",
+   "terms": {
+    "1500": 4,
+    "400": 8,
+    "400a": 5,
+    "action": 7,
+    "actions": 14,
+    "all": 6,
+    "already": 7,
+    "arithmetic": 4,
+    "because": 7,
+    "before": 5,
+    "both": 5,
+    "cannot": 6,
+    "canonical": 5,
+    "control": 5,
+    "each": 6,
+    "every": 7,
+    "experience": 5,
+    "fail": 11,
+    "false": 5,
+    "first": 6,
+    "hand": 9,
+    "learning": 5,
+    "measured": 8,
+    "needs": 7,
+    "no": 15,
+    "not": 34,
+    "nothing": 6,
+    "number": 5,
+    "once": 5,
+    "one": 18,
+    "only": 9,
+    "page": 26,
+    "pages": 15,
+    "pass": 8,
+    "rule": 8,
+    "same": 8,
+    "search": 9,
+    "so": 12,
+    "solved": 8,
+    "still": 5,
+    "they": 5,
+    "today": 5,
+    "true": 5,
+    "two": 6,
+    "value": 5,
+    "verifier": 5,
+    "were": 6,
+    "wrong": 7
+   },
+   "title": "The hand was never the bottleneck. The operand was.",
+   "title_terms": [
+    "bottleneck",
+    "hand",
+    "never",
+    "operand"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 5873,
    "headings": [
     "The Honest Status — 2026-11-12",
@@ -80503,10 +80580,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1258,
+  "included_source_count": 1259,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "5a058c4fb459c49cdad5c26def654bf9fd6f1b3b8c12c8166570b15f4aed8b96"
+  "source_tree_digest": "362da7c9f3ac48bab47dcdc9bf3bb9c40d6730444810b44d44105488726f0125"
  },
  "research_index": [
   {
@@ -161615,6 +161692,23 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/DERIVED_VALUE_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/DERIVED_VALUE_20261116_V1.json",
+   "schema": "BRAIN_DERIVED_VALUE_MEASURE_V1",
+   "sha256": "98533b8e6d67fb5bb941c0d5908f15775af9d59089b21f1e8d0ae0d2d71f8345",
+   "status": "",
+   "terms": {
+    "20261116": 1,
+    "derived": 1,
+    "v1": 1,
+    "value": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-02",
    "id": "research:canonical/verification/DIFFERENTIAL_DOMINANCE_COMPILER_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -169718,6 +169812,24 @@
     "verification": 1,
     "wolfram": 1,
     "zero": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/INERT_ACTION_PRIOR_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/INERT_ACTION_PRIOR_20261116_V1.json",
+   "schema": "BRAIN_INERT_ACTION_PRIOR_MEASURE_V1",
+   "sha256": "a9d78e879a38ce533f29c54b7b686b4b999e7a9799b004145f85b2f868dfb29e",
+   "status": "",
+   "terms": {
+    "20261116": 1,
+    "action": 1,
+    "inert": 1,
+    "prior": 1,
+    "v1": 1
    }
   },
   {
@@ -264424,6 +264536,57 @@
    "capability": false,
    "classification": "ORPHAN",
    "executable_entry_point": false,
+   "id": "source:canonical/runtime/derived_value_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/derived_value_v1.py",
+   "sha256": "fd99969772766657e6b910c0f3a6e3f417cd27d436c326272f068b150f7715df",
+   "summary": "The value to type is usually a COMPUTATION over what is on the page, not a word found in it.",
+   "symbol_count": 12,
+   "symbols": [
+    "_linear_side",
+    "clock24",
+    "control_labels",
+    "derivations",
+    "evaluate_arithmetic",
+    "format_number",
+    "quoted_spans",
+    "rule_of",
+    "solve_linear",
+    "typed_actions",
+    "visible_texts",
+    "words_of"
+   ],
+   "terms": {
+    "clock24": 1,
+    "computation": 1,
+    "control_labels": 1,
+    "derivations": 1,
+    "derived": 1,
+    "evaluate_arithmetic": 1,
+    "format_number": 1,
+    "found": 1,
+    "linear_side": 1,
+    "not": 1,
+    "over": 1,
+    "page": 1,
+    "quoted_spans": 1,
+    "rule_of": 1,
+    "solve_linear": 1,
+    "type": 1,
+    "typed_actions": 1,
+    "usually": 1,
+    "v1": 1,
+    "value": 2,
+    "visible_texts": 1,
+    "word": 1,
+    "words_of": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
    "id": "source:canonical/runtime/deterministic_decision_primitives.py",
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
@@ -278262,6 +278425,38 @@
     "semantic_match": 1,
     "verifier": 2,
     "verify": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/inert_action_prior_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/inert_action_prior_v1.py",
+   "sha256": "6e281130073eaccdf36d0436fa90056024ac98f56bcae71877316afa9d266c8f",
+   "summary": "Which of the offered actions can do nothing here — learned by property, not by page.",
+   "symbol_count": 2,
+   "symbols": [
+    "InertActionPrior",
+    "classify"
+   ],
+   "terms": {
+    "action": 1,
+    "actions": 1,
+    "classify": 1,
+    "here": 1,
+    "inert": 1,
+    "inertactionprior": 1,
+    "learned": 1,
+    "not": 1,
+    "nothing": 1,
+    "offered": 1,
+    "page": 1,
+    "prior": 1,
+    "property": 1,
+    "v1": 1
    }
   },
   {

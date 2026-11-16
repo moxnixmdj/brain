@@ -184,7 +184,23 @@ of search, experience, or parameters would have revealed that. One page, read ca
    nothing yet admits it.
 5. **Weights last**, from identified, contrastive, admitted traces only. Not before 1–4 exist.
 
-## 8. Honest limits
+## 8. The artifact a new runtime module invalidates, and the one thing it taught me
+
+`canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json` is content-addressed over the tree it
+indexes, and `canonical/runtime` is one of those trees. Adding two modules therefore broke the
+digest and CI failed on `recompilation_is_byte_identical` — correctly, and with no way to see
+why except the published tail, which this workflow does publish on purpose.
+
+Regenerated with `canonical/runtime/compile_brain_unified_model_v1.py` (never by hand):
+**33/33 PASS**, recompilation byte-identical, `MODEL 14d99cdb…`. `test_brain_unified_model_v1`
++ `test_goal_compiler` + `test_goal_compiler_world_binding_v1`: **137 tests, OK**.
+
+The lesson is not "remember to recompile". It is that **a part is never free**: two files that
+touch no shared code still changed the identity of the whole artifact, which is the same
+arithmetic as `A_NEW_PART_COSTS_CODE_ONE_LESSON_BUYS_THE_WORD_20261112_V1` — the price of a new
+component is paid somewhere you did not look, and in this tree the somewhere is content-hashed.
+
+## 9. Honest limits
 
 - Eight pages, one seed (1060), one substrate (headless Chromium 153.0.8010.0, 480×360), one
   session, producer-run. Not independent verification, not a leaderboard entry.
