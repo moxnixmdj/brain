@@ -192,7 +192,13 @@ digest and CI failed on `recompilation_is_byte_identical` — correctly, and wit
 why except the published tail, which this workflow does publish on purpose.
 
 Regenerated with `canonical/runtime/compile_brain_unified_model_v1.py` (never by hand):
-**33/33 PASS**, recompilation byte-identical, `MODEL 14d99cdb…`. `test_brain_unified_model_v1`
+**33/33 PASS**, recompilation byte-identical, `MODEL 59bfd709…`.
+
+Two rounds were needed, and the second is the general lesson: `canonical/verification` and the
+research record are indexed too, so compiling *before* the last edit to a receipt or a write-up
+leaves a digest that is already stale. The order that works is **write everything, then
+compile, then verify, then do not touch an indexed file again** — checked here by compiling twice
+and comparing bytes (`IDEMPOTENT`). `test_brain_unified_model_v1`
 + `test_goal_compiler` + `test_goal_compiler_world_binding_v1`: **137 tests, OK**.
 
 The lesson is not "remember to recompile". It is that **a part is never free**: two files that

@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "14d99cdb38e4215d8a53c9878cfd8d67bf71fa5a45bdebaa356e20bb35f08754"
+  "value": "59bfd709f018f0b417f7366a39b89a4fb76dc9344ab815306a4c6eba5044f940"
  },
  "engines": [
   {
@@ -62260,7 +62260,7 @@
   },
   {
    "authority": "NOT_A_LAW",
-   "bytes": 13123,
+   "bytes": 14216,
    "headings": [
     "The hand was never the bottleneck. The operand was.",
     "1. The question, and the answer in one paragraph",
@@ -62271,26 +62271,26 @@
     "5. So what is true about the plan?",
     "6. The single bottleneck, restated after today",
     "7. Ranked next work (pre-registered)",
-    "8. Honest limits"
+    "8. The artifact a new runtime module invalidates, and the one thing it taught me",
+    "9. Honest limits"
    ],
    "kind": "DOCUMENT",
    "path": "THE_HAND_WAS_NEVER_THE_BOTTLENECK_20261116_V1.md",
-   "sha256": "724866dfd923ab53a83f7d85342e69efdf590bd52ee7bb92b29378aab8aa1887",
+   "sha256": "f8faa55f91b54e04e8cbfd74689aefd5a32326bfed25160517c95c0e2333810c",
    "summary": "**2026-11-16 · branch `arena/0ec412aa-brain` · base `85b7036b` · measured on MiniWoB++ with real Chromium, no model, $0**",
    "terms": {
-    "1500": 4,
     "400": 8,
     "400a": 5,
     "action": 7,
     "actions": 14,
     "all": 6,
     "already": 7,
-    "arithmetic": 4,
+    "arithmetic": 5,
     "because": 7,
     "before": 5,
     "both": 5,
     "cannot": 6,
-    "canonical": 5,
+    "canonical": 8,
     "control": 5,
     "each": 6,
     "every": 7,
@@ -62298,32 +62298,33 @@
     "fail": 11,
     "false": 5,
     "first": 6,
-    "hand": 9,
+    "hand": 10,
     "learning": 5,
     "measured": 8,
     "needs": 7,
-    "no": 15,
-    "not": 34,
+    "no": 17,
+    "not": 36,
     "nothing": 6,
     "number": 5,
     "once": 5,
-    "one": 18,
+    "one": 20,
     "only": 9,
     "page": 26,
     "pages": 15,
-    "pass": 8,
+    "pass": 9,
     "rule": 8,
-    "same": 8,
+    "runtime": 5,
+    "same": 9,
     "search": 9,
+    "see": 5,
     "so": 12,
     "solved": 8,
-    "still": 5,
+    "still": 6,
     "they": 5,
+    "thing": 5,
     "today": 5,
     "true": 5,
-    "two": 6,
-    "value": 5,
-    "verifier": 5,
+    "two": 8,
     "were": 6,
     "wrong": 7
    },
@@ -80583,7 +80584,7 @@
   "included_source_count": 1259,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "362da7c9f3ac48bab47dcdc9bf3bb9c40d6730444810b44d44105488726f0125"
+  "source_tree_digest": "8ee1cd848938edf6d68c03b4bee1aa9b788b9b411c49b8c65a0a118b13435d4e"
  },
  "research_index": [
   {
