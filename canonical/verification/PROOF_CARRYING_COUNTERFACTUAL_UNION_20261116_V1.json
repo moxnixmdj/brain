@@ -202,7 +202,16 @@
     "canonical/verification/WHAT_ONE_VERIFIED_REPAIR_TRAVELS_20261116_V1.json",
     "canonical/verification/THE_SENTENCE_DID_NOT_HAVE_TO_SAY_SUBMIT_20261116_V1.json",
     "canonical/verification/INSTANT_LEARNING_IN_A_NEW_ENVIRONMENT_20261116_V1.json",
-    "canonical/verification/INSTANT_LEARNING_SHUFFLED_CONTROL_20261116_V1.json"
+    "canonical/verification/INSTANT_LEARNING_SHUFFLED_CONTROL_20261116_V1.json",
+    "THE_MISSING_PART_IS_THE_OPERAND_NOT_THE_EXPERIENCE_20261116_V1.md",
+    "WHY_LEARN_ONCE_REPLAY_FOREVER_FAILS_20261116_V1.md",
+    "canonical/action_intents/READ_FIRST_AND_LEARN_ONLY_FOR_A_NAMED_GAP_20261116_V1.json",
+    "canonical/action_intents/THE_MISSING_PART_IS_THE_OPERAND_20261116_V1.json",
+    "canonical/action_intents/WHY_LEARN_ONCE_REPLAY_FOREVER_FAILS_20261116_V1.json",
+    "canonical/verification/ACTION_REPLAY_UNDER_CHANGE_20261116_V1.json",
+    "canonical/verification/DERIVED_VALUE_FULL_SUITE_20261116_V1.json",
+    "canonical/verification/LEARN_OR_READ_BOARD_20261116_V1.json",
+    "canonical/verification/READ_FIRST_AND_LEARN_ONLY_FOR_A_NAMED_GAP_20261116_V1.json"
   ],
   "exact_decision_past_enumeration_wall": {
     "measured_effect": {
@@ -234,7 +243,7 @@
     "subsequences",
     "wrap"
   ],
-  "generated_at_utc": "2026-11-16T23:06:34.790115+00:00",
+  "generated_at_utc": "2026-11-16T23:37:03.353401+00:00",
   "hard_nonclaims": [
     "NOT_A_FRONTIER_SCORE",
     "NOT_SWE_BENCH",
@@ -249,6 +258,7 @@
     "NO_MODEL_CALLS",
     "NO_NETWORK_CALLS",
     "NO_WEIGHT_UPDATE",
+    "NO_REPLAY_FOREVER_ANYWHERE_CLAIM",
     "PRODUCER_RUN_NOT_INDEPENDENT_VERIFICATION",
     "TERMINAL_TRUTH_UNTOUCHED"
   ],
@@ -401,7 +411,10 @@
     "no_receipt_task_outside_real_corpus": true,
     "no_screen_only_verdict_counted_as_repair": true,
     "observable_gap_receipt_read": true,
+    "operand_addition_is_bounded_to_its_design_set": true,
+    "read_first_policy_is_measured_and_does_not_forbid_learning": true,
     "repaired_and_open_partition_corpus": true,
+    "replay_forever_is_falsified_by_state_drift": true,
     "selection_measurement_read": true,
     "verified_union_is_24_not_the_projected_26": true
   },
@@ -774,6 +787,17 @@
         "canonical/tools/what_one_verified_repair_travels_v1.py",
         "canonical/swe_kernel/induced_edit_basis_v1.py"
       ]
+    },
+    "read_first_operand_and_replay_drift": {
+      "count": 5,
+      "missing": [],
+      "present": [
+        "canonical/runtime/learn_or_read_v1.py",
+        "canonical/runtime/derived_value_v1.py",
+        "canonical/swe_kernel/action_replay_under_change_v1.py",
+        "canonical/tools/derived_value_full_suite_receipt_v1.py",
+        "canonical/tools/learn_or_read_board_v1.py"
+      ]
     }
   },
   "model_dependency_count": 0,
@@ -966,6 +990,208 @@
       "topological_ordering"
     ]
   },
+  "read_first_operand_and_replay_drift": {
+    "operand": {
+      "addition_vs_shipped": {
+        "chromium_seed_1060": {
+          "actions_saved": 1917,
+          "gains": 5,
+          "losses": 0,
+          "shipped": 78,
+          "union": 83
+        },
+        "chromium_seed_771": {
+          "gains": 4,
+          "losses": 0,
+          "shipped": 77,
+          "union": 81
+        },
+        "jsdom_seed_1060": {
+          "gains": 5,
+          "losses": 0,
+          "shipped": 62,
+          "union": 67
+        }
+      },
+      "authority": "NONE__PRODUCER_RUN_SANDBOX",
+      "compute_control": {
+        "pages": [
+          "enter-time",
+          "scroll-text",
+          "simple-algebra",
+          "simple-arithmetic",
+          "text-transform"
+        ],
+        "shipped_hand_at_4x_budget": "0 of 5 solved at 1600 actions",
+        "union_hand_at_400": "5 of 5 solved in 12 to 33 actions"
+      },
+      "corpus": "Farama-Foundation/miniwob-plusplus @33c3b4dd (MIT): 130 real task pages nobody in this repository wrote, run on headless Chromium 153.0.0 with real layout, hit-testing and input",
+      "decoy_control": {
+        "chromium_seed_1060": {
+          "net": -12
+        },
+        "chromium_seed_771": {
+          "net": -11
+        }
+      },
+      "headline": "capability grows by ADDITION not replacement: the value algebra added to the shipped vocabulary gains 5 pages and loses 0 (78 -> 83, seed 1060; 77 -> 81, seed 771) while spending 1917 fewer actions, and the SAME algebra handed over INSTEAD of the vocabulary is a net LOSS (62 -> 61, 5 gains 7 losses). All 5 gains sit on the 8 pages the operators were written on; on the other 121 pages the addition changes the score by exactly nothing. The miss is the OPERAND, and compute cannot buy it: the shipped hand fails all 5 pages at 1600 actions.",
+      "instrument_error_pages": [
+        "stock-market (bridge timeout at seed 1060; measured at seed 771, unsolved by all arms)"
+      ],
+      "pages_measured": 129,
+      "receipt": "canonical/verification/DERIVED_VALUE_FULL_SUITE_20261116_V1.json",
+      "replacement_vs_shipped": {
+        "jsdom_seed_1060": {
+          "derived_only": 61,
+          "gains": 6,
+          "losses": 7,
+          "net": -1,
+          "shipped": 62
+        },
+        "losses": [
+          "email-inbox",
+          "email-inbox-forward",
+          "email-inbox-forward-nl",
+          "email-inbox-noscroll",
+          "email-inbox-reply",
+          "email-inbox-star-reply",
+          "enter-password"
+        ]
+      },
+      "transfer_boundary": {
+        "gains_outside_design_set": [],
+        "held_out_pages": 121,
+        "shipped_solves": 77,
+        "union_solves": 77
+      }
+    },
+    "read_first": {
+      "cells": {
+        "demonstrable_but_reading_lost": 21,
+        "out_of_reach_of_both": 43,
+        "reading_wins_and_demonstrable": 57,
+        "reading_wins_where_nothing_was_demonstrable": 9
+      },
+      "composition_rule": {
+        "LEARN_pages": 41,
+        "LEARN_pages_reading_won": 0,
+        "LEARN_rate": 0.0,
+        "READ_pages": 89,
+        "READ_pages_reading_won": 66,
+        "READ_rate": 0.742,
+        "false_negatives": "0 -- the rule never forbids learning on a page the reading loses"
+      },
+      "denominator_warning": "the ladder's 78 demonstrated pages were reached by a search that could SEE the page's reward. A deployed agent is not given that. The reading arm never reads a reward, which is why the two are reported per page and intersected rather than compared as rates.",
+      "instrument": "canonical/tools/learn_or_read_board_v1.py",
+      "pages": 130,
+      "pages_a_search_demonstrated": 78,
+      "reading_arm_won": 66,
+      "substrate": "chromium, miniwob-plusplus 130 pages, seed 1060, 30-action budget, zero experience for the reading arm",
+      "the_two_facts": {
+        "learning_had_nothing_to_add_on": 57,
+        "named_gaps_a_policy_may_be_acquired_for": 21,
+        "of_which_share_of_demonstrable": 0.7308,
+        "reading_beat_trying_on": 9
+      }
+    },
+    "receipts": [
+      "canonical/verification/READ_FIRST_AND_LEARN_ONLY_FOR_A_NAMED_GAP_20261116_V1.json",
+      "canonical/verification/DERIVED_VALUE_FULL_SUITE_20261116_V1.json",
+      "canonical/verification/ACTION_REPLAY_UNDER_CHANGE_20261116_V1.json"
+    ],
+    "replay": {
+      "arms": {
+        "drift": {
+          "matches": 106,
+          "matches_at_zero_drift": 106,
+          "reading": "zero drift is necessary for a correct replay and not sufficient",
+          "stale": 122,
+          "stale_at_zero_drift": 4
+        },
+        "live_re_decision": {
+          "pairs": 228,
+          "premise_held_after_the_change": 228
+        },
+        "replay_of_the_record": {
+          "differs_but_holds": 4,
+          "does_not_parse": 47,
+          "matches_live": 106,
+          "silent_corruption": 71,
+          "silent_corruption_share": 0.3114,
+          "stale": 122,
+          "stale_share": 0.5351
+        }
+      },
+      "authority": "NONE__PRODUCER_RUN_SANDBOX",
+      "candidate_sites_per_sample": [
+        1400,
+        1820,
+        2240,
+        2660
+      ],
+      "corpus_files": 5562,
+      "corpus_sha256": "dbfd2a3db52ff9680881cbd087e379842859ec7d5a34ac6872192b957a8c3cf6",
+      "eligible_sites": 509,
+      "external_state": {
+        "guard_and_go": "29.0% of passing SWE-bench Verified patches retain code the human deleted; a deletion-check retrofit drops resolution 63.2% to 41.9% on 34 tasks (Aug 2026)",
+        "osworld_2": "44.3% binary over ~318 tool calls per median workflow; 0.995^318 is about 0.20",
+        "stair": "abstract plan reuse lifts to 81.2% and 79.2% while raw unabstracted trajectories transfer substantially worse",
+        "swe_touch": "a plausible mid-run repo edit cuts resolve by 7.7 points across 9 models; 63.3% of flipped runs end in retained conflict; 59.0% of real sessions contain user edits (arXiv 2608.02499)",
+        "trajectory_reduction": "a SWE-bench Verified trajectory averages 48.4K tokens over 40 steps and 22-30% can be dropped while Pass% rises to 66.5"
+      },
+      "files": 62,
+      "files_with_several_eligible_sites": 119,
+      "incremental_spend_usd": 0,
+      "measured_at_commit": "c3a4c75ef5fa13c2c46708255fc822e8b677f4d8",
+      "model_calls": 0,
+      "network_calls": 0,
+      "pairs": 228,
+      "per_sample_staleness": {
+        "0": 35,
+        "1": 30,
+        "2": 27,
+        "3": 30
+      },
+      "samples": 4,
+      "what_this_does_not_claim": [
+        "no capability credit, no benchmark rank, no terminal credit",
+        "no claim that zero drift is sufficient, nor that a fingerprint is a proof",
+        "no claim that these 228 pairs are the whole population: four independent samples put staleness at 45-58%"
+      ],
+      "witness": {
+        "first_order": [
+          "bootstrap_diff_interval.high",
+          "wilson_interval.high",
+          "REPLAY_MATCHES_LIVE",
+          0
+        ],
+        "path": "canonical/capabilities/internalized/causal_falsification/agent_replay_v1/agent_replay/stats.py",
+        "reading": "24 of the 56 files in the sample contain both a replay that matches live and a replay that silently corrupts: composition is not commutative in safety",
+        "reverse_order": [
+          "wilson_interval.high",
+          "bootstrap_diff_interval.high",
+          "SILENT_CORRUPTION",
+          -33
+        ],
+        "second_witness": {
+          "first_order": [
+            "_sentence.present",
+            "_text_world.trailing",
+            "REPLAY_MATCHES_LIVE",
+            0
+          ],
+          "path": "canonical/capabilities/true/generators/file_question_taught_words_gen_v1.py",
+          "reverse_order": [
+            "_text_world.trailing",
+            "_sentence.present",
+            "SILENT_CORRUPTION",
+            -62
+          ]
+        }
+      }
+    },
+    "status": "READ_FIRST_FOR_A_NAMED_GAP_ADD_THE_MISSING_OPERAND_NEVER_REPLAY_A_PLAN_AS_A_MACRO"
+  },
   "receipt_arms_ignored": [
     {
       "arm": "summary.all_other_fixes",
@@ -1101,6 +1327,6 @@
     "receipt": "canonical/verification/RERUN_THE_LEARNED_ARMS_REPAIRS_20261116_V1.json",
     "screen_said_pass_runner_said_no_in_the_record": 0
   },
-  "what_this_is": "A set-algebra audit of measured receipts against the real published corpus, using only clean held-out arms, plus an effect-based census of mechanisms already in the tree. The 24/40 union is now also one composed run under the corpus pytest, and the audit reads the later invariance, exact-decision, browser and new-environment measurements without crediting any of them as new capability. It also indexes the separate selection measurement among test-passing HumanEvalFix candidates; that measurement is not a QuixBugs repair receipt. It is not a solver.",
+  "what_this_is": "A set-algebra audit of measured receipts against the real published corpus, using only clean held-out arms, plus an effect-based census of mechanisms already in the tree. The 24/40 union is now also one composed run under the corpus pytest, and the audit reads the later invariance, exact-decision, browser, new-environment, read-first, operand and replay-drift measurements without crediting any of them as new capability. It also indexes the separate selection measurement among test-passing HumanEvalFix candidates; that measurement is not a QuixBugs repair receipt. It is not a solver.",
   "what_this_is_not": "Not a repair contest, not a capability, not a benchmark score, not independent verification, not a proof of correctness, not a sentience claim, and not permission to merge over a red or missing referee."
 }

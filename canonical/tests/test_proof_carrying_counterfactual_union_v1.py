@@ -105,6 +105,15 @@ class HardOpenPopulationAuditTests(unittest.TestCase):
             "canonical/verification/THE_SENTENCE_DID_NOT_HAVE_TO_SAY_SUBMIT_20261116_V1.json",
             "canonical/verification/INSTANT_LEARNING_IN_A_NEW_ENVIRONMENT_20261116_V1.json",
             "canonical/verification/INSTANT_LEARNING_SHUFFLED_CONTROL_20261116_V1.json",
+            "THE_MISSING_PART_IS_THE_OPERAND_NOT_THE_EXPERIENCE_20261116_V1.md",
+            "WHY_LEARN_ONCE_REPLAY_FOREVER_FAILS_20261116_V1.md",
+            "canonical/action_intents/READ_FIRST_AND_LEARN_ONLY_FOR_A_NAMED_GAP_20261116_V1.json",
+            "canonical/action_intents/THE_MISSING_PART_IS_THE_OPERAND_20261116_V1.json",
+            "canonical/action_intents/WHY_LEARN_ONCE_REPLAY_FOREVER_FAILS_20261116_V1.json",
+            "canonical/verification/ACTION_REPLAY_UNDER_CHANGE_20261116_V1.json",
+            "canonical/verification/DERIVED_VALUE_FULL_SUITE_20261116_V1.json",
+            "canonical/verification/LEARN_OR_READ_BOARD_20261116_V1.json",
+            "canonical/verification/READ_FIRST_AND_LEARN_ONLY_FOR_A_NAMED_GAP_20261116_V1.json",
         ):
             self.assertIn(path, mod.EVIDENCE_READ)
 
@@ -143,6 +152,7 @@ class HardOpenPopulationAuditTests(unittest.TestCase):
             "exact_decision_past_enumeration",
             "invariance_and_in_run_learning",
             "environment_cost_and_composition",
+            "read_first_operand_and_replay_drift",
         ):
             self.assertIn(group, census["groups"])
             self.assertEqual(census["groups"][group]["missing"], [])
@@ -178,6 +188,35 @@ class HardOpenPopulationAuditTests(unittest.TestCase):
         self.assertIn("COMPOSED_REPAIR_ONE_RUN_20261116_V1.json", mod.REPAIR_RECEIPTS)
         self.assertIn("ARM_LEARNED_IN_ONE_RUN_20261116_V1.json", mod.REPAIR_RECEIPTS)
         self.assertNotIn("WHAT_ONE_VERIFIED_REPAIR_TRAVELS_20261116_V1.json", mod.REPAIR_RECEIPTS)
+
+    def test_final_main_evidence_is_read_without_credit(self) -> None:
+        path = ROOT / "canonical" / "verification" / "PROOF_CARRYING_COUNTERFACTUAL_UNION_20261116_V1.json"
+        data = json.loads(path.read_text(encoding="utf-8"))
+        for key in (
+            "read_first_policy_is_measured_and_does_not_forbid_learning",
+            "operand_addition_is_bounded_to_its_design_set",
+            "replay_forever_is_falsified_by_state_drift",
+        ):
+            self.assertTrue(data["invariants"][key], key)
+        section = data["read_first_operand_and_replay_drift"]
+        self.assertEqual(
+            section["status"],
+            "READ_FIRST_FOR_A_NAMED_GAP_ADD_THE_MISSING_OPERAND_NEVER_REPLAY_A_PLAN_AS_A_MACRO",
+        )
+        self.assertEqual(section["read_first"]["composition_rule"]["LEARN_pages"], 41)
+        self.assertEqual(section["read_first"]["composition_rule"]["READ_pages"], 89)
+        self.assertEqual(section["read_first"]["composition_rule"]["READ_pages_reading_won"], 66)
+        self.assertEqual(section["operand"]["transfer_boundary"]["held_out_pages"], 121)
+        self.assertEqual(section["operand"]["transfer_boundary"]["shipped_solves"], 77)
+        self.assertEqual(section["operand"]["transfer_boundary"]["union_solves"], 77)
+        self.assertEqual(section["operand"]["addition_vs_shipped"]["chromium_seed_1060"]["gains"], 5)
+        self.assertEqual(section["replay"]["arms"]["live_re_decision"]["pairs"], 228)
+        self.assertEqual(section["replay"]["arms"]["replay_of_the_record"]["silent_corruption"], 71)
+        self.assertEqual(section["replay"]["arms"]["replay_of_the_record"]["stale"], 122)
+        self.assertIn("NO_REPLAY_FOREVER_ANYWHERE_CLAIM", data["hard_nonclaims"])
+        self.assertIn("NO_CAPABILITY_REGISTERED", data["hard_nonclaims"])
+        self.assertEqual(data["incremental_spend_usd"], 0)
+        self.assertEqual(data["model_dependency_count"], 0)
 
     def test_selection_measurement_is_read_but_not_counted_as_a_quixbugs_repair(self) -> None:
         path = ROOT / "canonical" / "verification" / "ONE_DEMONSTRATION_IS_NOT_IDENTIFICATION_MEASURE_20261116_V1.json"

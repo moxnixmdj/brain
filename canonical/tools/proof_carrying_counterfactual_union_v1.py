@@ -165,6 +165,13 @@ MECHANISM_GROUPS: dict[str, tuple[str, ...]] = {
         "canonical/swe_kernel/operator_semantics_v1.py",
         "canonical/swe_kernel/hierarchical_skill_library_v1.py",
     ),
+    "read_first_operand_and_replay_drift": (
+        "canonical/runtime/learn_or_read_v1.py",
+        "canonical/runtime/derived_value_v1.py",
+        "canonical/swe_kernel/action_replay_under_change_v1.py",
+        "canonical/tools/derived_value_full_suite_receipt_v1.py",
+        "canonical/tools/learn_or_read_board_v1.py",
+    ),
 }
 
 SUPERSEDES = (
@@ -217,6 +224,17 @@ EVIDENCE_READ = (
     "canonical/verification/THE_SENTENCE_DID_NOT_HAVE_TO_SAY_SUBMIT_20261116_V1.json",
     "canonical/verification/INSTANT_LEARNING_IN_A_NEW_ENVIRONMENT_20261116_V1.json",
     "canonical/verification/INSTANT_LEARNING_SHUFFLED_CONTROL_20261116_V1.json",
+    # Final main move before the single merge: read-first named gaps, operand
+    # addition, and replay-under-change drift. Read once; no further chase.
+    "THE_MISSING_PART_IS_THE_OPERAND_NOT_THE_EXPERIENCE_20261116_V1.md",
+    "WHY_LEARN_ONCE_REPLAY_FOREVER_FAILS_20261116_V1.md",
+    "canonical/action_intents/READ_FIRST_AND_LEARN_ONLY_FOR_A_NAMED_GAP_20261116_V1.json",
+    "canonical/action_intents/THE_MISSING_PART_IS_THE_OPERAND_20261116_V1.json",
+    "canonical/action_intents/WHY_LEARN_ONCE_REPLAY_FOREVER_FAILS_20261116_V1.json",
+    "canonical/verification/ACTION_REPLAY_UNDER_CHANGE_20261116_V1.json",
+    "canonical/verification/DERIVED_VALUE_FULL_SUITE_20261116_V1.json",
+    "canonical/verification/LEARN_OR_READ_BOARD_20261116_V1.json",
+    "canonical/verification/READ_FIRST_AND_LEARN_ONLY_FOR_A_NAMED_GAP_20261116_V1.json",
 )
 
 
@@ -345,6 +363,10 @@ def audit(quixbugs_root: pathlib.Path, root: pathlib.Path = ROOT) -> dict[str, A
     invariance_intent = read_json(A / "THE_INVARIANCE_IS_THE_REACH_20261116_V1.json") if (A / "THE_INVARIANCE_IS_THE_REACH_20261116_V1.json").is_file() else None
     decide_intent = read_json(A / "DECIDE_PAST_THE_ENUMERATION_WALL_20261116_V1.json") if (A / "DECIDE_PAST_THE_ENUMERATION_WALL_20261116_V1.json").is_file() else None
     environment_intent = read_json(A / "THE_PRICE_OF_A_NEW_ENVIRONMENT_20261116_V1.json") if (A / "THE_PRICE_OF_A_NEW_ENVIRONMENT_20261116_V1.json").is_file() else None
+    read_first = read_json(V / "READ_FIRST_AND_LEARN_ONLY_FOR_A_NAMED_GAP_20261116_V1.json") if (V / "READ_FIRST_AND_LEARN_ONLY_FOR_A_NAMED_GAP_20261116_V1.json").is_file() else None
+    operand = read_json(A / "THE_MISSING_PART_IS_THE_OPERAND_20261116_V1.json") if (A / "THE_MISSING_PART_IS_THE_OPERAND_20261116_V1.json").is_file() else None
+    replay = read_json(A / "WHY_LEARN_ONCE_REPLAY_FOREVER_FAILS_20261116_V1.json") if (A / "WHY_LEARN_ONCE_REPLAY_FOREVER_FAILS_20261116_V1.json").is_file() else None
+    replay_receipt = read_json(V / "ACTION_REPLAY_UNDER_CHANGE_20261116_V1.json") if (V / "ACTION_REPLAY_UNDER_CHANGE_20261116_V1.json").is_file() else None
     answer_key_counts = [
         row["answer_keys_present"] for row in census["rows"]
         if isinstance(row.get("answer_keys_present"), int)
@@ -434,6 +456,35 @@ def audit(quixbugs_root: pathlib.Path, root: pathlib.Path = ROOT) -> dict[str, A
             and environment_intent.get("measured_effect", {}).get("break_even_requests_per_machine") == 6.44
             and environment_intent.get("measured_effect", {}).get("refusals", {}).get("effect_needs_composition") == ["TARBALL REPLACE"]
         ),
+        "read_first_policy_is_measured_and_does_not_forbid_learning": bool(
+            read_first
+            and read_first.get("measured_effect", {}).get("composition_rule", {}).get("LEARN_pages") == 41
+            and read_first.get("measured_effect", {}).get("composition_rule", {}).get("READ_pages") == 89
+            and read_first.get("measured_effect", {}).get("composition_rule", {}).get("READ_pages_reading_won") == 66
+            and str(read_first.get("measured_effect", {}).get("composition_rule", {}).get("false_negatives", "")).startswith("0")
+            and read_first.get("measured_effect", {}).get("cells", {}).get("reading_wins_where_nothing_was_demonstrable") == 9
+        ),
+        "operand_addition_is_bounded_to_its_design_set": bool(
+            operand
+            and operand.get("measured_effect", {}).get("addition_vs_shipped", {}).get("chromium_seed_1060", {}).get("gains") == 5
+            and operand.get("measured_effect", {}).get("addition_vs_shipped", {}).get("chromium_seed_1060", {}).get("losses") == 0
+            and operand.get("measured_effect", {}).get("addition_vs_shipped", {}).get("chromium_seed_1060", {}).get("actions_saved") == 1917
+            and operand.get("measured_effect", {}).get("transfer_boundary", {}).get("held_out_pages") == 121
+            and operand.get("measured_effect", {}).get("transfer_boundary", {}).get("shipped_solves") == 77
+            and operand.get("measured_effect", {}).get("transfer_boundary", {}).get("union_solves") == 77
+            and operand.get("measured_effect", {}).get("transfer_boundary", {}).get("gains_outside_design_set") == []
+            and str(operand.get("measured_effect", {}).get("compute_control", {}).get("shipped_hand_at_4x_budget", "")).startswith("0 of 5")
+        ),
+        "replay_forever_is_falsified_by_state_drift": bool(
+            replay
+            and replay_receipt
+            and replay.get("measured_effect", {}).get("arms", {}).get("live_re_decision", {}).get("pairs") == 228
+            and replay.get("measured_effect", {}).get("arms", {}).get("live_re_decision", {}).get("premise_held_after_the_change") == 228
+            and replay.get("measured_effect", {}).get("arms", {}).get("replay_of_the_record", {}).get("matches_live") == 106
+            and replay.get("measured_effect", {}).get("arms", {}).get("replay_of_the_record", {}).get("silent_corruption") == 71
+            and replay.get("measured_effect", {}).get("arms", {}).get("replay_of_the_record", {}).get("stale") == 122
+            and replay_receipt.get("counts", {}).get("SILENT_CORRUPTION") == 71
+        ),
     }
     audit_pass = all(invariants.values())
     return {
@@ -498,6 +549,17 @@ def audit(quixbugs_root: pathlib.Path, root: pathlib.Path = ROOT) -> dict[str, A
             "measured_effect": (environment_intent or {}).get("measured_effect", {}),
             "status": "COST_MOVES_FROM_REQUESTS_TO_ENVIRONMENTS_NOT_ZERO_AND_NOT_ALL_COMPUTER_USE",
         },
+        "read_first_operand_and_replay_drift": {
+            "receipts": [
+                "canonical/verification/READ_FIRST_AND_LEARN_ONLY_FOR_A_NAMED_GAP_20261116_V1.json",
+                "canonical/verification/DERIVED_VALUE_FULL_SUITE_20261116_V1.json",
+                "canonical/verification/ACTION_REPLAY_UNDER_CHANGE_20261116_V1.json",
+            ],
+            "read_first": (read_first or {}).get("measured_effect", {}),
+            "operand": (operand or {}).get("measured_effect", {}),
+            "replay": (replay or {}).get("measured_effect", {}),
+            "status": "READ_FIRST_FOR_A_NAMED_GAP_ADD_THE_MISSING_OPERAND_NEVER_REPLAY_A_PLAN_AS_A_MACRO",
+        },
         "verified_repair_rerun": {
             "receipt": "canonical/verification/RERUN_THE_LEARNED_ARMS_REPAIRS_20261116_V1.json",
             "claimed_repaired": (rerun or {}).get("claimed_repaired"),
@@ -554,8 +616,8 @@ def audit(quixbugs_root: pathlib.Path, root: pathlib.Path = ROOT) -> dict[str, A
             "A set-algebra audit of measured receipts against the real published corpus, using only "
             "clean held-out arms, plus an effect-based census of mechanisms already in the tree. "
             "The 24/40 union is now also one composed run under the corpus pytest, and the audit "
-            "reads the later invariance, exact-decision, browser and new-environment measurements "
-            "without crediting any of them as new capability. It also indexes the separate selection "
+            "reads the later invariance, exact-decision, browser, new-environment, read-first, "
+            "operand and replay-drift measurements without crediting any of them as new capability. It also indexes the separate selection "
             "measurement among test-passing HumanEvalFix candidates; that measurement is not a "
             "QuixBugs repair receipt. It is not a solver."
         ),
@@ -578,6 +640,7 @@ def audit(quixbugs_root: pathlib.Path, root: pathlib.Path = ROOT) -> dict[str, A
             "NO_MODEL_CALLS",
             "NO_NETWORK_CALLS",
             "NO_WEIGHT_UPDATE",
+            "NO_REPLAY_FOREVER_ANYWHERE_CLAIM",
             "PRODUCER_RUN_NOT_INDEPENDENT_VERIFICATION",
             "TERMINAL_TRUTH_UNTOUCHED",
         ],
