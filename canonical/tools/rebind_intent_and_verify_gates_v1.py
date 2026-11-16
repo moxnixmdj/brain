@@ -14,7 +14,7 @@ stale -- which is correct behaviour, and a manual rebinding is easy to forget. T
 the three steps in the order that works, and fails loudly instead of producing a stale
 tree:
 
-  1. rebind `canonical_base_commit` (top level and recursive_obs) to `git merge-base`;
+  1. rebind `canonical_base_commit` (top level and recursive_obs) to the base CI will use;
   2. recompile the unified model artifact, because the intent is a knowledge document
      whose hash is inside the model -- editing the intent AFTER compiling leaves the
      tree in a 32/33 state, which is the mistake this script exists to prevent;
@@ -68,7 +68,16 @@ def run(args: list[str], *, check: bool = True) -> subprocess.CompletedProcess:
 
 
 def merge_base() -> str:
-    return run(["git", "merge-base", "HEAD", "origin/main"]).stdout.strip()
+    """The base the CI guard will actually compare against -- NOT `git merge-base`.
+
+    `drift-immunity-guard.yml` runs on `pull_request_target` and takes its base from
+    `github.event.pull_request.base.sha`, which is the CURRENT TIP OF MAIN, not the merge base.
+    The guard then requires `recursive_obs.canonical_base_commit` to equal that value exactly, so
+    a rebind to the merge base passes locally and fails in CI every time main has moved -- which
+    is every time. The local gate is only useful if it agrees with the referee, so this uses
+    `origin/main`'s tip.
+    """
+    return run(["git", "rev-parse", "origin/main"]).stdout.strip()
 
 
 def rebind(base: str) -> dict:
