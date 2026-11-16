@@ -1,0 +1,104 @@
+{
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "benchmark_or_family_rank_authority": null,
+ "canonical_base_commit": "6ace93187227a167fc929912044c0c47be30951b",
+ "capability_credit_delta": 0,
+ "causal_blocker": "THE_HALF_THAT_ACTS_RESOLVED_AN_ELEMENT_TO_AN_INDEX_AND_THE_HALF_THAT_LEARNED_DESCRIBED_IT_IN_A_PRIVATE_GRAMMAR_SO_EVERY_BIT_OF_EXPERIENCE_WAS_WRITTEN_IN_A_LANGUAGE_THE_ACTION_PATH_NEVER_READ",
+ "claim_under_test": "'After he does them at least once he would learn all of those permanently, so we solve everything on a computer.' Prior rounds measured the RATE of one-shot generalisation. This round asks about the PRICE, and about whether the learned thing is even written in the language the acting half reads.",
+ "corrections": [
+  "The hypothesis that a small shared vocabulary would saturate was tested and is FALSE: the second half of experience added 57% of the final vocabulary.",
+  "An empty description is not evidence the page cannot name an element. 318 elements have no text and no id and are named correctly by class and order; reporting them as 3.32-bit ambiguity was my language's silence, not the page's.",
+  "More predicates do not make a description cheaper: median 27 survivors with one property vs 63 with two, because the recorded count is over syntactic descriptions, many of which select the same element."
+ ],
+ "date": "2026-11-16",
+ "decision": "MEASURED__AND_IT_LOCATES_THE_BOTTLENECK_IN_THE_VOCABULARY_NOT_IN_THE_LEARNER",
+ "external_confirmation_fetched_2026_11_16": {
+  "BEPA (arXiv 2601.05787)": "names the same defect: expert traces 'often operate in tool-level action spaces that a single end-to-end policy cannot directly imitate' -- structural mismatch between what was demonstrated and what can be acted on",
+  "DOM vs Screenshots (2026)": "'hybrid agents lose grounding when their two channels disagree about which element is the same element', and 'accessibility-tree agents lose grounding when a page rerenders a list and element indices reshuffle mid-task' -- exactly the finding that ordinals are 95%, not 100%, stable",
+  "GUI-Primitives (EMNLP 2026)": "list ordinal is understood at 0.82-0.90 conditional on a correct candidate, so position is a real identity signal, and 'most failures reflect candidate localization'"
+ },
+ "files": {
+  "canonical/runtime/one_description_language_v1.py": "2eac3ddd264000a28bde070751f7aa2aeb086896c0504812ba5c2eb6b774093b",
+  "canonical/runtime/what_one_experience_buys_v1.py": "0daf4515536b2a6b506782e10ef156dc867676abc1450e420ce650a87c2ab050",
+  "canonical/tests/test_one_description_language_v1.py": "0455fb037b19bd76de6119f45b7c92276b30ef9bc3d45cc020b68d09f19fe830",
+  "canonical/tests/test_what_one_experience_buys_v1.py": "0b2d9e6a0ab0a83e6167ad405d157ec076b94cc2ee8e2335cfbe476f2fcf3e63"
+ },
+ "generated_utc": "2026-11-16T23:22:14Z",
+ "honest_limits": [
+  "AUTHORITY NONE -- one producer run in one sandbox.",
+  "Part 1 and 2 READ a recorded run; they are not a new experiment and say so.",
+  "The 0.929-bit figure is for elements the page's own properties name; it does not claim a pixel-only surface can be named this way, and does not cover canvas or remote-desktop surfaces.",
+  "one_description_language_v1 is a SIGNATURE, not a judge: it says which elements are indistinguishable, never which is correct. instruction_contract_v1 still decides, unchanged.",
+  "Ordinal stability was measured on 5 pages x 5 seeds; 12 of 241 descriptions changed, so a stored ordinal without its peer-count would be a silent wrong answer.",
+  "Nothing is credited: no capability, weight, terminal or family-rank claim."
+ ],
+ "laws": [
+  "The thing that acts and the thing that learns must describe the element the same way, or experience is written in a language nothing reads.",
+  "One experience is one bit; a step costs 5.43. That is arithmetic about what one observation separates, not a shortcoming of the learner.",
+  "The price of a description is log2 of the descriptions that still fit, so the only lever that lowers it is REMOVING descriptions -- never more pages.",
+  "A description that cannot report how many other elements it also selects cannot report its own price.",
+  "An ordinal is stable only while its peer-count is; store the count or do not store the ordinal."
+ ],
+ "measured_effect": {
+  "part_1_the_price": {
+   "bits_per_step": 5.428,
+   "max_descriptions_left": 255,
+   "median_descriptions_left": 51,
+   "of_which_share": 0.9943,
+   "read_from": "canonical/verification/MINIWOB_ONE_SUCCESS_GENERALISATION_20261111_V5.json",
+   "steps_needing_more_than_one_demonstration": 174,
+   "steps_recorded": 175,
+   "what_one_experience_pays": "about one bit, because each description is struck out or not by a binary question"
+  },
+  "part_2_does_it_compound": {
+   "added_by_the_second_half": 55,
+   "curve_at_half": 41,
+   "distinct_descriptions": 96,
+   "new_descriptions_per_task": 1.231,
+   "reuse_ratio": 1.823,
+   "saturates": false,
+   "share_added_by_the_second_half": 0.57,
+   "tasks": 78,
+   "tasks_sharing_a_description_with_an_earlier_task": 38,
+   "verdict": "THE_VOCABULARY_KEEPS_GROWING__EXPERIENCE_LOWERS_THE_PRICE_OF_A_DESCRIPTION_ALREADY_PAID_FOR_AND_NOT_THE_NUMBER_A_NEW_TASK_NEEDS"
+  },
+  "part_3_the_two_languages": {
+   "acting": "instruction_policy_v1 -> instruction_contract_v1 + anchored_frame_v1 -> an element INDEX",
+   "learning": "demonstration_version_space_v1 -> its own private tuple grammar",
+   "measurement": "1415 actionable elements on 130 real pages: 946 (66.9%) named to exactly one element by a description; 318 have neither own words nor an id (class + order names them); 151 have a name that repeats (order separates the twins); mean bits 0.929 vs 5.428 for the learner",
+   "ordinal_stability": {
+    "changed": 12,
+    "consequence": "an ordinal is stored WITH its peer-count, or it is not stored",
+    "descriptions_checked": 241,
+    "invariant_across_5_seeds": 229,
+    "share": 0.95,
+    "why_they_change": "peer count differs per instance (email-inbox rows 5/6/10)"
+   },
+   "shared_imports": 0
+  }
+ },
+ "receipt_id": "THE_HAND_AND_THE_LEARNER_SPOKE_DIFFERENTLY_20261116_V1",
+ "schema": "PROJECT_BRAIN_VERIFICATION_RECEIPT_V1",
+ "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
+ "terminal_credit_delta": 0,
+ "tests": {
+  "count": 18,
+  "files": [
+   "canonical/tests/test_what_one_experience_buys_v1.py",
+   "canonical/tests/test_one_description_language_v1.py"
+  ],
+  "result": "18 passed"
+ },
+ "the_wrong_answer_this_replaces": "'Learning is weak, so learn more.' The learner is not weak. What was wrong is that a learned description and an acted index are two vocabularies, so experience bought bits in a currency the action path never cashes.",
+ "verification": {
+  "how_reproduced": [
+   "python3 -c \"from canonical.runtime import what_one_experience_buys_v1 as W; print(W.verdict())\"",
+   "python3 -m pytest canonical/tests/test_one_description_language_v1.py canonical/tests/test_what_one_experience_buys_v1.py -q"
+  ]
+ },
+ "what_was_built": [
+  "canonical/runtime/what_one_experience_buys_v1.py -- prices one experience in bits from the recorded run and reports whether the vocabulary saturates",
+  "canonical/runtime/one_description_language_v1.py -- ONE description of an element, its inverse, its bits, its ordinal, and a round-trip check",
+  "18 tests across the two modules"
+ ]
+}
