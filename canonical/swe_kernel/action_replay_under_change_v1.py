@@ -35,6 +35,7 @@ import difflib
 import hashlib
 import json
 import pathlib
+import subprocess
 import sys
 import tempfile
 from typing import Any, Iterable, Mapping, Sequence
@@ -91,6 +92,16 @@ def replay_plan(plan: Sequence[tuple[int, int, list[str]]], text: str) -> str:
             continue
         lines[i1:i2] = replacement
     return "".join(lines)
+
+
+def _commit() -> str:
+    """The commit the measurement ran on, so the receipt names its own state."""
+    try:
+        out = subprocess.run(["git", "rev-parse", "HEAD"], cwd=str(ROOT), capture_output=True,
+                             text=True, timeout=20)
+        return (out.stdout or "").strip()
+    except Exception:  # pragma: no cover - git absent
+        return ""
 
 
 def first_changed_index(before: str, after: str) -> int | None:
@@ -275,8 +286,10 @@ def measure(pattern: str = DEFAULT_PATTERN, *, pairs: int = DEFAULT_PAIRS,
             records.append(record)
 
     fingerprint = hashlib.sha256()
+    corpus_files = 0
     for file in sorted(q for q in ROOT.glob(pattern) if q.is_file()):
         fingerprint.update(("%s:%d\n" % (file.relative_to(ROOT), file.stat().st_size)).encode())
+        corpus_files += 1
     counts: dict[str, int] = {}
     for record in records:
         counts[record["status"]] = counts.get(record["status"], 0) + 1
@@ -297,6 +310,8 @@ def measure(pattern: str = DEFAULT_PATTERN, *, pairs: int = DEFAULT_PAIRS,
         "network_calls": 0,
         "pattern": pattern,
         "corpus_sha256": fingerprint.hexdigest(),
+        "corpus_files": corpus_files,
+        "measured_at_commit": _commit(),
         "samples": [{"index": run["index"], "candidates": run["candidates"], "eligible_sites": run["eligible_sites"],
                      "files_with_two_eligible_sites": run["files_with_two_eligible_sites"],
                      "pairs": len(run["records"])} for run in runs],
