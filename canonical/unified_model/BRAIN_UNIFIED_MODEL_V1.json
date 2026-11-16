@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 457,
+  "knowledge_documents": 458,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6863,
+  "research_index_records": 6864,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 449,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "8a0cb1915244c17a20e7682398f34be7b937b8a9ab4500becbb0371c260ec182"
+  "value": "2b943e56549ebb5e7a68fd2e2ed918feb028003f76d54a5726c191bfb367aa54"
  },
  "engines": [
   {
@@ -62184,6 +62184,90 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 26316,
+   "headings": [
+    "The goal is a counterfactual world model, not a memory",
+    "0. The short answer",
+    "1. What is real and what is not",
+    "2. Your three premises, answered from first principles",
+    "2.1 Identifiability — a single trace is consistent with exponentially many hypotheses",
+    "2.2 Vocabulary insufficiency — repetition cannot separate success from failure",
+    "2.3 Synthesis–verification asymmetry — replay is not composition",
+    "3. Why \"learn faster and better\" is the wrong optimization",
+    "4. Our own model, own weights, every bit calculated, no knowledge house",
+    "5. What \"understanding\" means here, and what sentience does not",
+    "6. Why \"solve literally any computer use, perfectly and permanently\" is impossible — not merely hard",
+    "7. The smartest things to do (fastest, optimal, from our perspective)",
+    "8. This turn's receipts (exact numbers)",
+    "9. Honest status",
+    "The one-sentence answer"
+   ],
+   "kind": "DOCUMENT",
+   "path": "THE_GOAL_IS_A_COUNTERFACTUAL_WORLD_MODEL_20261116_V1.md",
+   "sha256": "e23eee1c37b070b12bbab5dcbd69ae20c5f35fd1258cadbfcfa4b8f73d028546",
+   "summary": "**Date:** 2026-11-16 (UTC). **Branch:** `arena/5ea0bf08-brain`. **Authority:** NONE — producer-run sandbox measurement, no terminal truth, no leaderboard entry, no sentience/capability/family/weight claim.",
+   "terms": {
+    "16": 7,
+    "2026": 11,
+    "after": 8,
+    "all": 10,
+    "already": 9,
+    "answer": 9,
+    "any": 9,
+    "cannot": 7,
+    "canonical": 17,
+    "claim": 8,
+    "computer": 9,
+    "counterfactual": 18,
+    "derived": 8,
+    "environment": 15,
+    "every": 8,
+    "executable": 8,
+    "executed": 13,
+    "false": 12,
+    "goal": 20,
+    "half": 7,
+    "here": 10,
+    "https": 21,
+    "instant": 10,
+    "intervention": 8,
+    "knowledge": 12,
+    "learning": 10,
+    "measured": 10,
+    "missing": 8,
+    "model": 16,
+    "never": 8,
+    "new": 15,
+    "no": 46,
+    "not": 63,
+    "one": 10,
+    "only": 9,
+    "own": 9,
+    "pr": 8,
+    "published": 9,
+    "real": 17,
+    "swe-bench": 8,
+    "tasks": 15,
+    "tests": 10,
+    "use": 12,
+    "verdict": 11,
+    "verified": 10,
+    "vocabulary": 11,
+    "weights": 20,
+    "wrong": 9
+   },
+   "title": "The goal is a counterfactual world model, not a memory",
+   "title_terms": [
+    "counterfactual",
+    "goal",
+    "memory",
+    "model",
+    "not",
+    "world"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 21846,
    "headings": [
     "The goal is the bottleneck — 16 November 2026",
@@ -80584,10 +80668,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1259,
+  "included_source_count": 1260,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "bcddb0ae0845ea58a2053880b7f23bf772865e921a063cac45293e2f4e6bb510"
+  "source_tree_digest": "d05760863893b66723ee6d344ce54c0adb246fae6823bb84ddd1560c086c73d1"
  },
  "research_index": [
   {
@@ -169903,6 +169987,23 @@
     "v1": 1,
     "vocabulary": 1,
     "wall": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/INTERVENTIONAL_GOAL_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/INTERVENTIONAL_GOAL_20261116_V1.json",
+   "schema": "BRAIN_INTERVENTIONAL_GOAL_MEASURE_V1",
+   "sha256": "59a5b761cdffda9d44995763f30dc775629ac273be46f7025e1b48b8873b0d46",
+   "status": "",
+   "terms": {
+    "20261116": 1,
+    "goal": 1,
+    "interventional": 1,
+    "v1": 1
    }
   },
   {
