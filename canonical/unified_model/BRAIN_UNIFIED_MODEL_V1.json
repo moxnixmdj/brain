@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 456,
+  "knowledge_documents": 457,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6862,
+  "research_index_records": 6863,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 449,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "ff2420b710d51bbe2659a08c12c7888a3447a51ad148c24a35d49e1135a33ed9"
+  "value": "931780dabac040837f7db5948f97792d9e99735f2f499b59f6d96ba765065bdb"
  },
  "engines": [
   {
@@ -54136,6 +54136,87 @@
     "six",
     "things",
     "true"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 13413,
+   "headings": [
+    "Instant learning, one demonstration, and the thing that actually stops it",
+    "1. The answer in one paragraph",
+    "2. What is real",
+    "3. The measurement that settles it",
+    "4. Why it is wrong — three obstructions, each with a different cure",
+    "5. The single bottleneck",
+    "6. What about \"we must build our own weights from scratch\"?",
+    "7. What is genuinely revolutionary here, and what is not",
+    "8. The smartest next moves, in order",
+    "9. Reproduce every number here",
+    "10. Honest limits of this document"
+   ],
+   "kind": "DOCUMENT",
+   "path": "ONE_DEMONSTRATION_IS_NOT_IDENTIFICATION_20261116_V1.md",
+   "sha256": "e846c7915949c051d03deab87c6181f7c3e0fb4259fdf35ffc4cc1a47e37c76f",
+   "summary": "**Date:** 2026-11-16 · **Branch:** `arena/c43f3a6d-brain` · **Cost:** $0 · zero model calls **Question you asked:** *\"Instant learning + instant learning in new arbitrary environments — we already solved those perfectly. Doesn't this mean this is a perfect solution for all computer use? Give the model the smartest actions once and it learns them permanently. Is this true, or are there things that ",
+   "terms": {
+    "100": 7,
+    "40": 5,
+    "43": 6,
+    "46": 5,
+    "47": 5,
+    "51": 16,
+    "all": 6,
+    "already": 8,
+    "answer": 8,
+    "behaviour": 24,
+    "bugs": 12,
+    "candidate": 14,
+    "candidates": 6,
+    "cannot": 7,
+    "canonical": 6,
+    "class": 6,
+    "correct": 12,
+    "demonstration": 7,
+    "did": 5,
+    "every": 8,
+    "had": 8,
+    "here": 10,
+    "inputs": 8,
+    "instant": 8,
+    "knowledge": 6,
+    "library": 8,
+    "measured": 6,
+    "model": 8,
+    "must": 7,
+    "never": 8,
+    "no": 20,
+    "not": 29,
+    "once": 6,
+    "one": 29,
+    "only": 10,
+    "oracle": 8,
+    "own": 8,
+    "parameters": 6,
+    "passed": 7,
+    "question": 10,
+    "real": 11,
+    "right": 12,
+    "set": 8,
+    "system": 6,
+    "tests": 15,
+    "those": 6,
+    "were": 6,
+    "wrong": 13
+   },
+   "title": "Instant learning, one demonstration, and the thing that actually stops it",
+   "title_terms": [
+    "actually",
+    "demonstration",
+    "instant",
+    "learning",
+    "one",
+    "stops",
+    "thing"
    ]
   },
   {
@@ -80503,10 +80584,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1258,
+  "included_source_count": 1259,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "5a058c4fb459c49cdad5c26def654bf9fd6f1b3b8c12c8166570b15f4aed8b96"
+  "source_tree_digest": "5c38e603262c987c5624e93b4db0545f48761ee455cbd1203d8546696eaca176"
  },
  "research_index": [
   {
@@ -173568,6 +173649,26 @@
     "reality": 1,
     "status": 1,
     "terminal": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/ONE_DEMONSTRATION_IS_NOT_IDENTIFICATION_MEASURE_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/ONE_DEMONSTRATION_IS_NOT_IDENTIFICATION_MEASURE_20261116_V1.json",
+   "schema": "BRAIN_ONE_DEMONSTRATION_IS_NOT_IDENTIFICATION_MEASURE_V1",
+   "sha256": "5636d8501ff45965fc7b91bff6a6f2c84610775fbe485a06b0fdb9be8bcad534",
+   "status": "",
+   "terms": {
+    "20261116": 1,
+    "demonstration": 1,
+    "identification": 1,
+    "measure": 1,
+    "not": 1,
+    "one": 1,
+    "v1": 1
    }
   },
   {
