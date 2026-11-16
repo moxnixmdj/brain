@@ -1,0 +1,481 @@
+{
+ "action_id": "ZERO_EXPERIENCE_INSTRUCTION_POLICY_20261116_V1",
+ "action_intent_id": "ZERO_EXPERIENCE_INSTRUCTION_POLICY_20261116_V1",
+ "action_kind": "GOVERNANCE_GUARD",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "incremental_spend_usd": 0,
+  "independent_verification_completed": false,
+  "independent_verification_note": "Producer-run sandbox only. Independent personnel verification is still open.",
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+  "progress_evidence_paths": [
+   "canonical/swe_kernel/patch_verdict_amplification_v1.py",
+   "canonical/tools/patch_verdict_amplification_measure_v1.py",
+   "canonical/verification/PATCH_VERDICT_AMPLIFICATION_20261116_V1.json",
+   "canonical/verification/SPECIFICATION_FROM_STRUCTURE_20261116_V2_REDUCTION_FIXED.json",
+   "WHAT_A_PASS_IS_WORTH_20261116_V1.md",
+   "canonical/swe_kernel/learned_skill_verdict_v1.py",
+   "canonical/verification/LEARNED_SKILL_VERDICT_20261116_V1.json"
+  ],
+  "route_class": "REUSE",
+  "scope_complete_discharge": false,
+  "terminal_achieved": false
+ },
+ "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_TREE_COULD_NOT_SAY_WHAT_A_PASSING_TEST_SUITE_IS_WORTH_AND_ASSUMED_THAT_A_CONFIRMED_LAW_WOULD_ADD_ON_TOP_OF_IT__MEASURED_ON_16_OWN_SUITES_THE_SUITE_REJECTED_77_OF_96_BEHAVIOUR_ALTERING_CANDIDATES_AND_A_LAW_CONFIRMED_ON_THE_PRISTINE_MODULE_REJECTED_ZERO_OF_THE_19_IT_ACCEPTED_EVEN_THOUGH_THE_LAW_WAS_POINTED_AT_THE_MUTATED_FUNCTION_IN_ALL_19",
+ "canonical_base_commit": "4de9acde7cd18140465ef8b0dcd7c6b50d0f32d5",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "THE_BINDING_CONSTRAINT_IS_OBSERVABLE_CONTENT_AND_CONTRACT_COVERAGE_NOT_EXPERIENCE__A_ZERO_EXPERIENCE_ARM_SOLVES_39_OF_130_REAL_PAGES_AND_REFUSES_63_WITH_A_TYPED_REASON_WHILE_ONLY_12_OF_ITS_28_ACTED_FAILURES_ARE_EXECUTION_ERRORS",
+ "date": "2026-11-16",
+ "expected_parent_change": "An agent with no experience of any page is measured on 130 real computer-use pages: 39 solved (0.300), 58.2% of the 67 it can parse, 63 refused with a typed reason, no reward read, no search, no external model.",
+ "expected_parent_frontier_change": "Capability work is aimed at the causal observable and contract coverage, not at experience: an arm that has never seen a page solves 30% of them, so what is missing is what the agent can see and express, not what it has done.",
+ "explicit_user_authorization": [
+  "Instant learning + instant learning in new arbitrary environments -- we solved those perfectly. Doesn't that mean we can solve any computer use?",
+  "Give the model the most advanced actions, let it do a thing once, it learns it permanently, and every computer task plus the most advanced software engineering is solved. Am I right or wrong? What is real, what is not, and what are the smartest things we can do?",
+  "You must think from first principles for everything",
+  "You should kill all the bad and dumb ideas before you waste time implementing them.",
+  "NEVER BUILD BEFORE REASRCHING EXHASIATAION IS HAPPENED",
+  "maximize your web use",
+  "all the tests are not on synthetic data but are on the hardest open tests",
+  "Testing on bugs we already know work is not progress -- that is self-congratulation.",
+  "YOU SURE THIS THE SMARTEST APPROACH?",
+  "Work in branch, merge only when complete (fastest)",
+  "Merge once, not 10 times."
+ ],
+ "falsification_condition": "A run of the same harness in which a law confirmed on the pristine module rejects a candidate the real suite accepted, in any arm, at a rate materially above zero; or a pair where the arm using the suite's own arguments makes the laws speak and kill where the invented arm did not.",
+ "generic_repair_from_single_probe": false,
+ "governance_change": false,
+ "highest_leverage_now": true,
+ "incremental_spend_usd": 0,
+ "intentional_route_race": false,
+ "load_bearing_primary": {
+  "constructive_gap_for_open_obligation_ids": [
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "expected_obligation_discharge_lcb": 0,
+  "expected_obligation_unlock_lcb": "1/100",
+  "interpretation": "Speculative forecast only: repairing the read-only failure signal is the cheapest currently available prerequisite to verified general capability work. No obligation discharge, benchmark gain, capability credit or independent verification is claimed.",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "1/2",
+  "wall_clock_cost_ub": 1
+ },
+ "measured_effect": {
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "question": "Instant learning + instant learning in new arbitrary environments -- we solved those perfectly. Doesn't that mean we can solve any computer use?",
+  "pages": 130,
+  "seed": 1060,
+  "solved": 39,
+  "of_all_pages": 0.3,
+  "acted_pages": 67,
+  "of_acted": 0.582,
+  "refused_with_a_typed_reason": 63,
+  "partial_credit_without_success": 0,
+  "fix_progression": [
+   24,
+   27,
+   32,
+   36,
+   39
+  ],
+  "experience": "none - a fresh arm per page, nothing carried between pages",
+  "reward": "never read by the agent",
+  "external_model": "none, in any role",
+  "laws_measured": [
+   "a frozen index is not an action, and neither is a frozen label: the page blanks its own text on the first press and renumbers its elements, so identity is positional and the ledger must be written positionally too",
+   "where a thing is counts as observed state: a text-only fingerprint read a page that had become a different arrangement of blank rects as unchanged",
+   "a submenu header is hovered, not clicked",
+   "a widget's orientation is its track's, not its handle's; vertical sliders invert",
+   "never act on half an instruction"
+  ],
+  "receipt": "canonical/verification/PROJECT_BRAIN_INSTRUCTION_POLICY_VERIFICATION_20261116_V1.json"
+ },
+ "next_step": "Attach the measured verdict budget to every lesson admission: a lesson admitted against a suite carries that suite's rejection rate and survivor list, so permanence is bounded by what the verdict could distinguish.",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "paths": [
+  "WHAT_A_PASS_IS_WORTH_20261116_V1.md",
+  "canonical/swe_kernel/causal_trace_to_skill_compiler_v1.py",
+  "canonical/swe_kernel/learned_skill_verdict_v1.py",
+  "canonical/tests/test_learned_skill_verdict_v1.py",
+  "canonical/verification/LEARNED_SKILL_VERDICT_20261116_V1.json"
+ ],
+ "prior_work_reused": [
+  "canonical/swe_kernel/specification_from_structure_v1.py",
+  "canonical/tools/specification_from_structure_measure_v1.py",
+  "canonical/verification/SPECIFICATION_FROM_STRUCTURE_20261116_V1.json",
+  "canonical/runtime/bound_capabilities/python_tests_mutation_score.py",
+  "THE_VERIFIER_IS_KNOWLEDGE_NOT_LEARNING_20261116_V1.md",
+  "canonical/swe_kernel/causal_trace_to_skill_compiler_v1.py",
+  "canonical/astra_runtime/skills/COMPILED_WORKFLOWS_BUNDLE_V1.json"
+ ],
+ "probe_specific": false,
+ "recursive_obs": {
+  "canonical_base_commit": "4de9acde7cd18140465ef8b0dcd7c6b50d0f32d5",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "adding law shapes until a number moves",
+   "deleting the arm that disagrees",
+   "counting a child-process failure as a pass",
+   "calling an invented relation a law because it has a name"
+  ],
+  "expected_parent_level_state_change": "Verifier work is aimed at vocabulary that names what code means (relations taken from real assertions, method-level laws) instead of at more shape-derived relations, which are measured at exactly zero added value on top of a real suite.",
+  "iteration_limit": 1,
+  "obs_blocker": {
+   "delete_bypass_substitute_options": [
+    "delete the assumption",
+    "reuse the real suites",
+    "measure instead of argue"
+   ],
+   "intrinsic_or_path_specific": "intrinsic: the vocabulary of shape-derived laws is insufficient by construction for real code; path_specific: the reduction and grid defects were measured and fixed here",
+   "surviving_causal_blocker": "The verdict's reach is the reach of the knowledge inside it, and this tree's laws contain no knowledge of what the code means."
+  },
+  "obs_capability": {
+   "capability_work_deleted": [
+    "adding more shape-derived law kinds before measuring whether any kind can add anything",
+    "enlarging the invented argument grid, measured to change nothing because invention is not the binding constraint",
+    "deleting the control arm that disagrees with the newer arm"
+   ],
+   "existing_inherited_routes_checked": [
+    "canonical/swe_kernel/specification_from_structure_v1.py (structure-only laws, already built and measured)",
+    "canonical/tools/specification_from_structure_measure_v1.py (its harness)",
+    "canonical/swe_kernel/test_suite_admission_v1.py and lesson_admission_gate_v1.py (existing verdict gates)",
+    "canonical/runtime/verified_bound_capability_execution_adapter_v1.py (existing execution carrier)"
+   ],
+   "external_existing_routes_checked": [
+    "PROBE at ASE '26: 77% of developer instances admitted at least one surviving program variant under the existing suite (reported in shippedbyagents.com, 2026-10)",
+    "TestSuiteBench (arXiv:2610.13065): generated suites are 88-96% valid and 38-56% mutation score -- valid but weak",
+    "UTBoost (ACL 2025): 26 of 500 SWE-bench Verified tasks have tests that accept wrong patches after expert screening",
+    "All Smoke, No Alarm (arXiv:2606.18168): 80.2% of 86,156 agent-authored test-file patches carry weak or no oracle signals"
+   ],
+   "surviving_gap": "No verdict in this tree can say anything about what code MEANS. The measured value of a pass (0.8021) and of a confirmed structural law on top of it (0.0) bound how much permanence any learned thing may claim."
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "a higher kill count reached by adding law shapes",
+    "a comparison in which the losing arm is not printed"
+   ],
+   "real_outcome": "The value of a pass, and the value a confirmed law adds to it, stop being assumptions.",
+   "surviving_necessity": "Every learning loop in this tree ends at the verdict; the verdict has to be measured where the tests are real."
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "None. This measures a verdict; it owns no new capability.",
+   "downstream_work_to_delete_or_supersede": "The V1 structure-only receipt is superseded by the V2 re-measurement made with the fixed reduction; the V1 amplifier result (0.00) is confirmed, not superseded.",
+   "fresh_reuse_plan": "Re-run the harness on any corpus with module/test name pairs; the mutation engine and the suites are the only inputs."
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": "Baseline suite runs are reused for every candidate; law confirmation is prepared once per pair per arm.",
+   "search_stop_decision": "Stop after the three arms agree; do not add law kinds without a measurement that says which kind could add anything."
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "Adding shapes without measuring is the failure mode the receipt already contains; enlarging the invented grid was measured and changes nothing because invention is not the binding constraint.",
+   "routes_ranked": [
+    "measure both gates on real suites",
+    "add structural law kinds",
+    "enlarge the invented grid"
+   ]
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "oracle_paths": [
+    "canonical/tests/test_patch_verdict_amplification_v1.py",
+    "canonical/tests/test_patch_verdict_amplification_measure_v1.py",
+    "canonical/verification/PATCH_VERDICT_AMPLIFICATION_20261116_V1.json"
+   ],
+   "synthetic_verification_necessity": "The oracle is the repository's own unedited test files; the controls are unit tests of the instrument; independent reproduction remains open."
+  },
+  "real_outcome": "A pass is worth what its suite covers: 80.2% of behaviour-altering candidates rejected here, per pair between 1 of 6 and 6 of 6. A law confirmed on the code as it stands added exactly zero on top of that, and the census shows why: the only law kind that confirms on real code is the word 'it ran', which a pass has already said, and the informative relations are refuted by the code itself. The same question asked of the tree's own learned skills: the four exercisable ones really do the edit, and the verdict attached to all eleven admits a program that writes nothing, 4 of 4.",
+  "required_capability": "A verdict that can speak about what a program means rather than about the shape of its definitions, plus the discipline of recording what each verdict was worth.",
+  "route_frontier": {
+   "challenger_routes": [
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "none: the kinds that could speak are refuted by the code itself",
+      "CORRECTNESS": "would report kills made by laws the code contradicts",
+      "INCREMENTAL_COST": "permanent complexity",
+      "RELIABILITY": "unknown",
+      "VERIFIABILITY": "cannot say which kind would help",
+      "WALL_CLOCK": "days per kind"
+     },
+     "evidence": [
+      "the per-kind census shows the missed function is vocabulary, and TOTALITY already confirms 71 of 120"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/PATCH_VERDICT_AMPLIFICATION_20261116_V1.json records zero kills for every kind"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "add more law kinds of the same structural family until a kill appears"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "0.0000 in every arm",
+      "CORRECTNESS": "no change",
+      "INCREMENTAL_COST": "small",
+      "RELIABILITY": "identical",
+      "VERIFIABILITY": "already measured",
+      "WALL_CLOCK": "minutes"
+     },
+     "evidence": [
+      "the recorded-grid arm uses the suite's own arguments and still kills zero of 19"
+     ],
+     "qualification_evidence": [
+      "both the invented and the recorded arms are in the receipt, against the same candidates"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "enlarge the invented argument grid"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "no gain",
+      "CORRECTNESS": "loses the 19 survivors' coverage report",
+      "INCREMENTAL_COST": "negative",
+      "RELIABILITY": "unchanged",
+      "VERIFIABILITY": "loses the per-pair verdict budget",
+      "WALL_CLOCK": "saves the law pass"
+     },
+     "evidence": [
+      "the suite rejects 0.8021 of behaviour-altering candidates on its own"
+     ],
+     "qualification_evidence": [
+      "per-pair spread 1/6 to 6/6 shows a suite's worth is not uniform, so a bare pass carries no known strength"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "NON_DOMINATING",
+     "route": "trust the suites alone and drop the whole law instrument"
+    }
+   ],
+   "checked_at_utc": "2026-11-16T16:51:43Z",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "assume a law confirmed on the code as it stands amplifies a passing test suite, without measuring what the pass was worth",
+   "max_age_hours": 24,
+   "negative_search_summary": "No existing route in this tree or in the 2026 literature reports a structural law that adds value on top of a real suite; the literature's own numbers (38-56% mutation scores for generated suites, 77% of instances admitting a survivor, 26 of 500 Verified tests accepting wrong patches) describe the same residual from the other side.",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "All Smoke, No Alarm agent-authored test patches 80.2% oracle signals arXiv 2606.18168"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "SWE-bench Verified 26 of 500 tasks tests accepted incorrect patches weak test cases study"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "metamorphic relations derived from specifications verification 2026 arXiv"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "mutation testing score as adequacy measure of test suites limitations 2026 code agents"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "selected_route": "MEASURE_THE_VERDICT_INSTEAD_OF_ARGUING_IT_ONE_GATE_IS_THE_REAL_UNEDITED_TEST_SUITE_THE_OTHER_IS_A_LAW_CONFIRMED_ON_THE_PRISTINE_MODULE_AND_EVERY_ARM_IS_REPORTED",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-11-16T16:51:43Z",
+    "execution_dependencies": [
+     {
+      "dependency": "local Python 3.11 runtime with pytest 9.2.0 in .venv",
+      "evidence": [
+       "this session ran 41 tests across the three touched test files, and 96 candidate suite runs"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "this repository's own module/test pairs (65 discovered, 16 measured)",
+      "evidence": [
+       "paired by name convention under canonical/swe_kernel and canonical/tools; the test files are unedited by this PR"
+      ],
+      "evidence_classes": [
+       "BRAIN_INHERITED"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "this repository's own mutation engine (canonical/runtime/bound_capabilities/python_tests_mutation_score.py)",
+      "evidence": [
+       "96 behaviour-altering candidates produced and measured this session"
+      ],
+      "evidence_classes": [
+       "BRAIN_INHERITED"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "max_age_hours": 2,
+    "selected_route": "MEASURE_THE_VERDICT_INSTEAD_OF_ARGUING_IT_ONE_GATE_IS_THE_REAL_UNEDITED_TEST_SUITE_THE_OTHER_IS_A_LAW_CONFIRMED_ON_THE_PRISTINE_MODULE_AND_EVERY_ARM_IS_REPORTED",
+    "status": "READY"
+   },
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/swe_kernel/specification_from_structure_v1.py",
+     "canonical/verification/SPECIFICATION_FROM_STRUCTURE_20261116_V1.json",
+     "canonical/runtime/bound_capabilities/python_tests_mutation_score.py"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "https://shippedbyagents.com/posts/mutation-testing-for-agent-generated-code (PROBE at ASE '26: 77% of instances admitted at least one surviving variant; mutation score is a lower bound)",
+     "https://dev.to/applab_743/green-tests-can-still-be-dead-tests-auditing-agent-generated-suites-5ee0 (mutation score measures behavioural sensitivity, not semantic quality)",
+     "https://aiwiki.ai/wiki/swe-bench_verified (arXiv:2503.15223: >15% of Verified instances have incomplete test patches)"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "pytest 9.2.0 installed from PyPI (files.pythonhosted.org) into /home/user/brain/.venv this session",
+     "canonical/runtime/bound_capabilities/python_tests_mutation_score.py (the mutation operators this measurement uses)"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "https://arxiv.org/abs/2606.18168 (All Smoke, No Alarm: 80.2% of 86,156 agent-authored test-file patches carry weak or no oracle signals)",
+     "https://ddkang.substack.com/p/swe-bench-verified-is-flawed-despite (UTBoost, ACL 2025: 26 of 500 SWE-bench Verified tasks accept wrong patches after expert screening)",
+     "https://arxiv.org/html/2610.13065v1 (TestSuiteBench: generated suites 88-96% valid, 38-56% mutation score)",
+     "https://arxiv.org/abs/2605.25101 (metamorphic relations are derived from specifications, not from code shape)"
+    ]
+   },
+   "unresolved_plausible_dominators": []
+  },
+  "routes_considered": [
+   "Add more law kinds of the same structural family",
+   "Enlarge the invented argument grid",
+   "Use the arguments the real suite passed as the grid (the route taken, as a separate arm)",
+   "Keep the control arm out of the report once the recorded arm exists",
+   "Report every arm and decompose the zero per law kind"
+  ],
+  "selected_route": "MEASURE_THE_VERDICT_INSTEAD_OF_ARGUING_IT_ONE_GATE_IS_THE_REAL_UNEDITED_TEST_SUITE_THE_OTHER_IS_A_LAW_CONFIRMED_ON_THE_PRISTINE_MODULE_AND_EVERY_ARM_IS_REPORTED",
+  "selected_surviving_route": "MEASURE_THE_VERDICT_INSTEAD_OF_ARGUING_IT_ONE_GATE_IS_THE_REAL_UNEDITED_TEST_SUITE_THE_OTHER_IS_A_LAW_CONFIRMED_ON_THE_PRISTINE_MODULE_AND_EVERY_ARM_IS_REPORTED",
+  "selected_surviving_route_class": "REUSE",
+  "stop_condition": "The two gates are measured on this tree's own suites with every arm reported, the law census per kind is in the receipt, and no capability, family, terminal or weight credit is claimed.",
+  "why_selected_route_is_fastest_sufficient": "The suites, the mutation engine and the structure kernel already exist; the only new work is one harness. Any other route would have had to invent the oracle it was trying to measure."
+ },
+ "route_id": "MEASURE_THE_VERDICT_INSTEAD_OF_ARGUING_IT_ONE_GATE_IS_THE_REAL_UNEDITED_TEST_SUITE_THE_OTHER_IS_A_LAW_CONFIRMED_ON_THE_PRISTINE_MODULE_AND_EVERY_ARM_IS_REPORTED",
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "scope_complete_discharge": false,
+ "selected_route": "MEASURE_THE_VERDICT_INSTEAD_OF_ARGUING_IT_ONE_GATE_IS_THE_REAL_UNEDITED_TEST_SUITE_THE_OTHER_IS_A_LAW_CONFIRMED_ON_THE_PRISTINE_MODULE_AND_EVERY_ARM_IS_REPORTED",
+ "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
+ "stop_condition": "The two gates are measured on this tree's own suites with every arm reported, the law census per kind is in the receipt, and no capability, family, terminal or weight credit is claimed.",
+ "terminal_credit_delta": 0,
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "truth": {
+  "achieved": false
+ },
+ "user_authorized_governance_change": false,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "currentness": {
+   "accepted_families": 5,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "This measures the verdict; it discharges no truth obligation and claims no terminal credit.",
+  "target_truth_obligations": [
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [],
+   "decisive_question": "Of the wrong variants the real suite accepts, can a law confirmed on the code as it stands reject any -- and if not, which law kind was missing?",
+   "falsifier_id": "A_LAW_CONFIRMED_ON_THE_PRISTINE_MODULE_REJECTING_A_SURVIVOR_IN_ANY_ARM",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "The rerun is itself the counterexample to the inherited claim; no new external receipt is added by this PR.",
+   "proposal_id": "WHAT_A_PASS_IS_WORTH_20261116_V1"
+  }
+ },
+ "verification": {
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "commands": [
+   "python3 canonical/tests/test_instruction_policy_v1.py",
+   "python3 canonical/tests/test_instruction_contract_v1.py",
+   "python3 -m canonical.runtime.compile_brain_unified_model_v1",
+   "python3 -m canonical.runtime.verify_brain_unified_model_v1"
+  ],
+  "independent_verification_completed": false,
+  "result": "20 policy tests and 22 contract tests pass; the 130-page measure is 39 solved; model 33/33 PASS."
+ },
+ "weakens_existing_guard": false
+}
