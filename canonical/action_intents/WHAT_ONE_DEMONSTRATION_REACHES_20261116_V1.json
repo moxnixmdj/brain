@@ -42,7 +42,7 @@
   },
   "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_TREE_CALLED_A_DEMONSTRATION_SOLVED_BECAUSE_THE_STORED_SKILL_REPRODUCED_ITS_OWN_EXAMPLE_AND_NEVER_MEASURED_HOW_MUCH_OF_A_REAL_REPOSITORY_THE_SINGLE_DEMONSTRATION_REACHES",
-  "canonical_base_commit": "080a8ad7326a0b10063b461ad6514b68cdb3c50d",
+  "canonical_base_commit": "ec087313b9903e7a3e26c29bfb135ecad8735022",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -162,7 +162,7 @@
   ],
   "probe_specific": false,
   "recursive_obs": {
-    "canonical_base_commit": "080a8ad7326a0b10063b461ad6514b68cdb3c50d",
+    "canonical_base_commit": "ec087313b9903e7a3e26c29bfb135ecad8735022",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "enumerating more hand-written mutation kinds",
@@ -329,7 +329,7 @@
           "route": "MEASURE_THE_REACH_OF_ONE_DEMONSTRATION_BY_EXECUTING_THE_STORED_SKILL_AT_A_STRIDE_SAMPLE_OF_A_REAL_REPOSITORY_AND_CLASSIFYING_EVERY_DECLINE_AS_A_CLASS_OF_SITE_THAT_NEEDS_ITS_OWN_OPERATION"
         }
       ],
-      "checked_at_utc": "2026-11-16T19:12:01Z",
+      "checked_at_utc": "2026-11-16T19:19:12Z",
       "comparison_dimensions": [
         "CORRECTNESS",
         "CAPABILITY_STRENGTH",
@@ -369,7 +369,7 @@
       "selected_route": "MEASURE_THE_REACH_OF_ONE_DEMONSTRATION_BY_EXECUTING_THE_STORED_SKILL_AT_A_STRIDE_SAMPLE_OF_A_REAL_REPOSITORY_AND_CLASSIFYING_EVERY_DECLINE_AS_A_CLASS_OF_SITE_THAT_NEEDS_ITS_OWN_OPERATION",
       "selected_route_preflight": {
         "all_required_dependencies_ready": true,
-        "checked_at_utc": "2026-11-16T19:12:01Z",
+        "checked_at_utc": "2026-11-16T19:19:12Z",
         "execution_dependencies": [
           {
             "dependency": "local Python 3.11 runtime with pytest 9.2.0",
