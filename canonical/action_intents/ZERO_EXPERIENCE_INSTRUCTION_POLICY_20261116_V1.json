@@ -28,13 +28,11 @@
   "producer_cognition_model_dependency_count": 0,
   "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
   "progress_evidence_paths": [
-   "canonical/swe_kernel/patch_verdict_amplification_v1.py",
-   "canonical/tools/patch_verdict_amplification_measure_v1.py",
-   "canonical/verification/PATCH_VERDICT_AMPLIFICATION_20261116_V1.json",
-   "canonical/verification/SPECIFICATION_FROM_STRUCTURE_20261116_V2_REDUCTION_FIXED.json",
-   "WHAT_A_PASS_IS_WORTH_20261116_V1.md",
-   "canonical/swe_kernel/learned_skill_verdict_v1.py",
-   "canonical/verification/LEARNED_SKILL_VERDICT_20261116_V1.json"
+   "canonical/runtime/instruction_policy_v1.py",
+   "canonical/runtime/instruction_contract_v1.py",
+   "canonical/tests/test_instruction_policy_v1.py",
+   "canonical/tests/test_instruction_contract_v1.py",
+   "canonical/verification/PROJECT_BRAIN_INSTRUCTION_POLICY_VERIFICATION_20261116_V1.json"
   ],
   "route_class": "REUSE",
   "scope_complete_discharge": false,
