@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "0a8442aebf357a92504b4b84fed8f01d221e76e4d7a2f28a9cd308d17b5ec742"
+  "value": "dd2d1b809920f4eb7e509f9fdfde0f983360b6e0ff54935ce3b381ed7b6060eb"
  },
  "engines": [
   {
@@ -65900,7 +65900,7 @@
   },
   {
    "authority": "NOT_A_LAW",
-   "bytes": 19828,
+   "bytes": 20094,
    "headings": [
     "What is real, what is not, and the one bottleneck — 16 November 2026",
     "1. The claim is five claims, and they do not chain",
@@ -65920,19 +65920,19 @@
    ],
    "kind": "DOCUMENT",
    "path": "WHAT_IS_REAL_AND_THE_ONE_BOTTLENECK_20261116_V1.md",
-   "sha256": "e808ae8993cb94fba4cc214b2f08ab50d69eedd553a9c5517a32d71e90b05dd9",
+   "sha256": "0f53cb24fb1f056eacf219f4584740738c9930da82a2e5d387d1d2e3e6cf045a",
    "summary": "Authority: **NONE**. Producer-run sandbox measurement on branch `arena/51709a27-brain`, base `a0265cc6`. No capability registered, no family flipped, no weight touched, `truth.achieved` unchanged. Independent verification is open.",
    "terms": {
     "37": 6,
     "action": 13,
-    "actions": 21,
+    "actions": 22,
     "all": 10,
     "already": 7,
-    "any": 11,
+    "any": 12,
     "because": 7,
     "both": 7,
     "budget": 13,
-    "but": 7,
+    "but": 8,
     "coverage": 9,
     "demonstration": 7,
     "depth": 11,
@@ -65947,29 +65947,29 @@
     "knowledge": 9,
     "learning": 13,
     "measured": 12,
-    "more": 11,
+    "more": 10,
     "most": 7,
     "needs": 7,
-    "no": 16,
+    "no": 17,
     "not": 56,
     "nothing": 7,
     "one": 27,
     "only": 9,
     "oracle": 8,
     "own": 7,
-    "page": 15,
-    "pages": 17,
+    "page": 18,
+    "pages": 18,
     "prior": 8,
     "real": 13,
     "same": 15,
-    "so": 11,
-    "state": 12,
+    "search": 7,
+    "so": 12,
+    "state": 13,
     "states": 7,
     "success": 13,
-    "than": 7,
+    "than": 8,
     "thing": 7,
     "two": 7,
-    "wall": 7,
     "wrong": 13
    },
    "title": "What is real, what is not, and the one bottleneck — 16 November 2026",
@@ -80343,7 +80343,7 @@
   "included_source_count": 1256,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "5d799b80fe04041fb5e22e494d868d3d44a33955e8f04afdeccc1d62270bc3df"
+  "source_tree_digest": "ba9e215a517dbd7aa764188dd61af2815a8797810e9619fcf72c43cf0a76b976"
  },
  "research_index": [
   {
