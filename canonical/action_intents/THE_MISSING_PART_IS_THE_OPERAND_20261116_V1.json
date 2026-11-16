@@ -40,7 +40,7 @@
  },
  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_WALL_IS_NOT_EXPERIENCE_IT_IS_EXPRESSION__A_PAGE_THAT_WANTS_19_55_FROM_7_55_PM_OR_THE_LAST_WORD_OF_A_900_CHARACTER_TEXTAREA_IS_UNREACHABLE_AT_ANY_BUDGET_BECAUSE_NO_GENERATOR_CAN_BUILD_THE_OPERAND__AND_THE_PART_THAT_FIXES_IT_TRANSFERS_NOWHERE__MEASURED_HERE_THE_VALUE_ALGEBRA_GAINS_5_PAGES_ALL_INSIDE_THE_EIGHT_PAGES_IT_WAS_DESIGNED_ON_AND_CHANGES_NOTHING_ON_THE_OTHER_121",
- "canonical_base_commit": "f4af18f619badf9e251cafc6edec490416dc084e",
+ "canonical_base_commit": "fba7d0e2f438615a676fd1800a7e7b63051b6010",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -164,7 +164,7 @@
  ],
  "probe_specific": false,
  "recursive_obs": {
-  "canonical_base_commit": "0000000000000000000000000000000000000000",
+  "canonical_base_commit": "fba7d0e2f438615a676fd1800a7e7b63051b6010",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "majority vote among candidates that pass the same tests (measured wrong 3 times in 5)",

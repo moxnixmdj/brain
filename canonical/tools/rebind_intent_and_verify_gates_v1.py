@@ -30,8 +30,31 @@ import subprocess
 import sys
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
-INTENT = ROOT / "canonical/action_intents/ONE_DEMONSTRATION_IS_NOT_IDENTIFICATION_20261116_V1.json"
 ARTIFACT = "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json"
+
+
+def intent_added_by_this_branch(base: str) -> pathlib.Path:
+    """The ONE intent this branch adds, found from the diff rather than named here.
+
+    Hardcoding the path was a real defect: the tool kept rewriting an intent that had already
+    merged, which put a second `canonical/action_intents/*.json` into the diff. Both referees
+    count every intent file in the diff -- `DRIFT` fails MULTIPLE_ACTION_INTENTS_IN_ONE_PR and
+    `admission` fails EXACTLY_ONE_ACTION_INTENT_REQUIRED -- so a rebind of a merged intent is
+    indistinguishable from adding a second one, and the gates correctly refuse.
+
+    A merged intent is history: its recorded base is the base it was measured against, and
+    rewriting it destroys provenance for no benefit. Only the added intent is ours to bind.
+    """
+    done = subprocess.run(["git", "diff", "--name-status", f"{base}...HEAD", "--",
+                           "canonical/action_intents/"],
+                          cwd=ROOT, capture_output=True, text=True, check=True)
+    added = [line.split("\t")[-1] for line in done.stdout.splitlines()
+             if line.startswith("A\t") and line.rstrip().endswith(".json")]
+    if len(added) != 1:
+        raise SystemExit(
+            f"NEED_EXACTLY_ONE_ADDED_INTENT (found {len(added)}): {added}. If this branch adds "
+            "none, there is nothing to rebind; if it adds two, the gates will refuse the PR.")
+    return ROOT / added[0]
 
 
 def run(args: list[str], *, check: bool = True) -> subprocess.CompletedProcess:
@@ -49,13 +72,15 @@ def merge_base() -> str:
 
 
 def rebind(base: str) -> dict:
-    intent = json.loads(INTENT.read_text(encoding="utf-8"))
-    if intent.get("canonical_base_commit") != base:
+    intent_path = intent_added_by_this_branch(base)
+    intent = json.loads(intent_path.read_text(encoding="utf-8"))
+    was = intent.get("canonical_base_commit")
+    if was != base:
         intent["canonical_base_commit"] = base
         intent["recursive_obs"]["canonical_base_commit"] = base
-        INTENT.write_text(json.dumps(intent, indent=1, sort_keys=True) + "\n", encoding="utf-8")
-        return {"rebound": True, "was": intent.get("canonical_base_commit"), "now": base}
-    return {"rebound": False, "now": base}
+        intent_path.write_text(json.dumps(intent, indent=1, sort_keys=True) + "\n", encoding="utf-8")
+        return {"rebound": True, "was": was, "now": base, "intent": intent_path.name}
+    return {"rebound": False, "now": base, "intent": intent_path.name}
 
 
 def main() -> int:
@@ -65,7 +90,7 @@ def main() -> int:
         print("MERGE_BASE_UNAVAILABLE")
         return 2
     state = rebind(base)
-    print("BASE", base, "(rebound)" if state["rebound"] else "(already bound)")
+    print("BASE", base, "(rebound)" if state["rebound"] else "(already bound)", "|", state["intent"])
 
     print("COMPILE", run([sys.executable, "canonical/runtime/compile_brain_unified_model_v1.py",
                           "--output", ARTIFACT]).stdout.strip().splitlines()[0])
