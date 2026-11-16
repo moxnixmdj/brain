@@ -41,7 +41,7 @@
     "terminal_achieved": false
   },
   "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
-  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::ONE_DEMONSTRATION_LEARNS_A_DOMAIN_AND_A_DOMAIN_IS_DECIDED_BY_THE_SENSE_NOT_BY_MORE_ATTEMPTS",
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_TREE_NEVER_MEASURED_HOW_MUCH_OF_A_TASK_ONE_DEMONSTRATION_LICENSES_SO_ONE_SUCCESS_WAS_COUNTED_AS_LEARNING_THE_ENVIRONMENT_WHEN_IT_LEARNS_ONE_TRAJECTORY_AND_AN_UNDECIDABLE_SET_THAT_NO_FURTHER_EXPERIENCE_CAN_CLOSE",
   "canonical_base_commit": "6f78086bc2ee7b4992bee6e21aaa422f4be1eba1",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
@@ -300,8 +300,8 @@
       ],
       "synthetic_verification_necessity": "The corpus's own published tests are the oracle; unit tests pin only the mechanism and the measurement's integrity. Independent reproduction remains open."
     },
-    "real_outcome": "On 228 real two-step compositions the learned operation stayed legal after the change in 228 of 228 pairs, the recorded plan was valid in 106 (46.5%), stale in 122 (53.5%) and silently corrupt in 71 (31.1%); every correct replay had zero drift and 4 stale replays had zero drift, so drift is necessary and not sufficient.",
-    "required_capability": "Re-deciding instead of replaying: re-prove the premise on the live state, apply the realization the proof produces, and re-read the result against the sentence the operation claims.",
+    "real_outcome": "On 168 real states of a real repository, the best single demonstration of a real task has a true domain of 112 states for a status-level goal and 56 for a goal with a premise it never sets; under a status-level sense 24 of 168 premise-task states are undecidable, 16 of them failing silently while looking exactly like states where the plan works; carrying the premise in the sense moves that to 0 with the domain unchanged; command output as a sense collapses 168 states into 3 classes and licenses none of them.",
+    "required_capability": "Guarding instead of remembering: check the plan's premise on the live state before the first action, check the goal after the last, and where the premise is not expressible in the available senses, make it observable or refuse -- because the undecidable set does not shrink with more attempts.",
     "route_frontier": {
       "challenger_routes": [
         {
@@ -374,7 +374,7 @@
           "route": "RE_DECIDE_EVERY_ACTION_PROVE_THE_PREMISE_ON_THE_LIVE_STATE_AND_POSTCONDITION_CHECK_THE_CLAIMED_SENTENCE_INSTEAD_OF_REPLAYING_THE_PLAN"
         }
       ],
-      "checked_at_utc": "2026-11-16T22:45:00Z",
+      "checked_at_utc": "2026-11-16T23:27:49Z",
       "comparison_dimensions": [
         "CORRECTNESS",
         "CAPABILITY_STRENGTH",
@@ -411,10 +411,10 @@
         "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
         "BEFORE_SCARCE_GATE_SPEND"
       ],
-      "selected_route": "RE_DECIDE_EVERY_ACTION_PROVE_THE_PREMISE_ON_THE_LIVE_STATE_AND_POSTCONDITION_CHECK_THE_CLAIMED_SENTENCE_INSTEAD_OF_REPLAYING_THE_PLAN",
+      "selected_route": "MEASURE_THE_DOMAIN_OF_A_DEMONSTRATION_AND_SCORE_IT_AGAINST_EVERY_SENSE_THAT_COULD_CERTIFY_IT",
       "selected_route_preflight": {
         "all_required_dependencies_ready": true,
-        "checked_at_utc": "2026-11-16T22:45:00Z",
+        "checked_at_utc": "2026-11-16T23:27:49Z",
         "execution_dependencies": [
           {
             "dependency": "local Python 3.11 runtime with the repository's own venv",
@@ -465,7 +465,7 @@
         "execution_dependencies_complete": true,
         "failed_dependencies": [],
         "max_age_hours": 2,
-        "selected_route": "RE_DECIDE_EVERY_ACTION_PROVE_THE_PREMISE_ON_THE_LIVE_STATE_AND_POSTCONDITION_CHECK_THE_CLAIMED_SENTENCE_INSTEAD_OF_REPLAYING_THE_PLAN",
+        "selected_route": "MEASURE_THE_DOMAIN_OF_A_DEMONSTRATION_AND_SCORE_IT_AGAINST_EVERY_SENSE_THAT_COULD_CERTIFY_IT",
         "status": "READY"
       },
       "source_classes_checked": [
@@ -497,17 +497,17 @@
       "unresolved_plausible_dominators": []
     },
     "routes_considered": [
-      "Replay the recorded plan and trust it (checked: 53.5% stale, 31.1% silently corrupt)",
-      "Fingerprint the touched region and refuse stale replays only (checked: necessary, not sufficient; 4 stale replays had zero drift)",
-      "Store one plan per state (checked: unbounded, and each plan is still unproved on the next state)",
-      "Re-use the existing repair loop on the changed file (checked: it re-decides one candidate at a time and never composes learned actions)",
-      "Re-decide every action with its premise re-proved on the live state and its sentence re-read after acting (selected)"
+      "Count one success as learning the environment (checked: the demonstration's domain is 112 of 168 states, and 56 of 168 when the task has a premise)",
+      "Assume full observability and replay the demonstration (checked: 24 of 168 states are undecidable at the status sense, 16 of them silently wrong)",
+      "Close the gap with more demonstrations (checked: 4 groups can be licensed by no demonstration at all, and the undecidable set is invariant to experience)",
+      "Trust the tool's own success message as the goal's truth (checked: 3 classes over 168 states, none inside the plan's domain)",
+      "Measure the plan's exact domain and score every sense against it, then guard or refuse (selected)"
     ],
-    "selected_route": "SYNTHESIZE_AN_AST_LEVEL_EDIT_INDUCER_THAT_FOLDS_ONE_DEMONSTRATION_PAIR_INTO_A_HOLE_GENERALIZED_TEMPLATE_WITH_A_CONTEXT_PRECONDITION",
-    "selected_surviving_route": "RE_DECIDE_EVERY_ACTION_PROVE_THE_PREMISE_ON_THE_LIVE_STATE_AND_POSTCONDITION_CHECK_THE_CLAIMED_SENTENCE_INSTEAD_OF_REPLAYING_THE_PLAN",
+    "selected_route": "MEASURE_THE_DOMAIN_OF_A_DEMONSTRATION_AND_SCORE_IT_AGAINST_EVERY_SENSE_THAT_COULD_CERTIFY_IT",
+    "selected_surviving_route": "MEASURE_THE_DOMAIN_OF_A_DEMONSTRATION_AND_SCORE_IT_AGAINST_EVERY_SENSE_THAT_COULD_CERTIFY_IT",
     "selected_surviving_route_class": "SYNTHESIZE_NEW_PRIMITIVE",
-    "stop_condition": "One merged change on this branch whose four-sample measurement and the reverse-order witness are reproducible by one command.",
-    "why_selected_route_is_fastest_sufficient": "It is the only route that keeps the 228 of 228 legality the measurement says is available without accepting the 53.5% staleness: the check is one parse and one name scan, cheaper than generating a plan, and it is the same code path for a file edit and a GUI action.",
+    "stop_condition": "One merged change on this branch whose 168-state measurement, its five senses and its six pinned laws are reproducible by two commands.",
+    "why_selected_route_is_fastest_sufficient": "It is the only route that answers the claim on a closed environment where the ground truth is fully known: the model costs |S|x|A| real transitions once, after which every sense is scored on the same states for free, which is what turns 'one try is not enough' into a number and a lever -- the same code path for a git command and a GUI action.",
     "why_this_is_not_another_organ": "It replaces a list with a fold over experience and reuses the existing repair primitive, the corpus oracle and the hashing/verification discipline; the only new machinery is induction and the rung classifier, and both are measured."
   },
   "route_id": "MEASURE_THE_DOMAIN_OF_A_DEMONSTRATION_AND_SCORE_IT_AGAINST_EVERY_SENSE_THAT_COULD_CERTIFY_IT",
