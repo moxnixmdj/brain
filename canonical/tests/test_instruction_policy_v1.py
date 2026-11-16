@@ -194,7 +194,9 @@ def test_a_contract_refusal_is_a_refusal_for_the_arm_too() -> None:
     arm = policy.ContractArm()
     arm.begin(page, 0)
     refused = contract_lib.compile_contract("Drag the cube into the black box.", page)
-    assert refused["refusal"] == contract_lib.SPATIAL
+    # CORRECTED 2026-11-16: this used to assert SPATIAL ("needs geometry"), which was the refusal
+    # this project's own wall diagnosis mistook for a budget problem. It now names the dimension.
+    assert refused["refusal"] == contract_lib.OBSERVABLE_ABSENT
     assert contract_lib.check_contract(refused, [(page, "")])["verdict"] == contract_lib.UNCHECKABLE
 
 

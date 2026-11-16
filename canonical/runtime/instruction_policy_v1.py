@@ -74,7 +74,7 @@ _TERMINAL = frozenset("submit ok login log in sign in agree confirm done continu
 # set of selections, a slider nudged repeatedly. Only these may repeat an identical action; a
 # single CLICK_NAMED that repeats is always a no-op loop and is blocked.
 _REPEATABLE = frozenset({"PRESS_SEQUENCE", "PRESS_SEQUENCE_BY_INDEX", "SELECT_SET", "EXPAND",
-                         "ORDER", "SET_CONTROL"})
+                         "ORDER", "SET_CONTROL", "DRAG_DESCRIBED", "MOVE_DIRECTION"})
 
 
 # --------------------------------------------------------------------------- #
@@ -136,6 +136,41 @@ def _horizontal(elements, index: int, track: int | None = None) -> bool:
         if width != height:
             return width > height
     return True
+
+
+def _holding(observation: Mapping[str, Any]) -> bool:
+    return observation.get("holding") is not None
+
+
+def _inside(element: Mapping[str, Any], box) -> bool:
+    own = element.get("box")
+    if not isinstance(own, (list, tuple)) or len(own) != 4 or not isinstance(box, (list, tuple)):
+        return False
+    return (own[0] >= box[0] and own[1] >= box[1]
+            and own[0] + own[2] <= box[0] + box[2] and own[1] + own[3] <= box[1] + box[3])
+
+
+def _one_step_along(elements, member: int, direction: str) -> int:
+    """The element one step along the axis: the nearest addressable box in that direction."""
+    source = next((e for e in elements if int(e["index"]) == member), None)
+    if source is None or not isinstance(source.get("box"), (list, tuple)):
+        return member
+    x, y, w, h = source["box"]
+    sx, sy = x + w / 2.0, y + h / 2.0
+    best, best_distance = member, None
+    for element in elements:
+        index = int(element.get("index", -1))
+        box = element.get("box")
+        if index == member or not _pressable(elements, index) or not isinstance(box, (list, tuple)):
+            continue
+        cx, cy = box[0] + box[2] / 2.0, box[1] + box[3] / 2.0
+        delta = (cy - sy) if direction == "down" else (sy - cy)
+        if delta <= 0:
+            continue
+        distance = abs(delta) + abs(cx - sx) * 0.01
+        if best_distance is None or distance < best_distance:
+            best, best_distance = index, distance
+    return best
 
 
 def _nearest_box(elements, box, used=frozenset(), tolerance: float = 14.0,
@@ -418,11 +453,54 @@ def action_for_clause(clause: Mapping[str, Any], observation: Mapping[str, Any],
         return f"click@{index}"
 
     if operator == "CLICK_LABELLED":
+        # A clause from the DESCRIPTOR path names one index and no labels: its subject was resolved
+        # from an observable attribute ("the black box"), so the press is at that element -- and it
+        # is re-resolved on the LIVE page by the same descriptor, because an index captured at
+        # compile time is not an action (measured: these pages renumber between observations).
+        if "labels" not in clause and clause.get("index") is not None:
+            if _pressable(elements, int(clause["index"])):
+                return f"click@{int(clause['index'])}"
+            again = contract_lib.descriptor.describe(str(clause.get("provenance") or ""), observation)
+            if again.outcome in (contract_lib.descriptor.RESOLVED,) and again.subject is not None:
+                return f"click@{again.subject}"
+            return None
         index = _first_matching(elements, clause.get("labels") or [],
                                 also=tuple(clause.get("also_match") or ()))
         if index is None:
             return None
         return f"click@{index}"
+
+    if operator == "DRAG_DESCRIBED":
+        # grab each named thing, then drop it inside the target -- computed from the boxes present
+        # NOW, never from an index captured earlier.
+        target = int(clause.get("target") or -1)
+        elements_by_index = {int(e["index"]): e for e in elements}
+        if target not in elements_by_index:
+            return None
+        target_box = elements_by_index[target].get("box")
+        members = [int(m) for m in clause.get("members") or []]
+        for member in members:
+            element = elements_by_index.get(member)
+            if element is None:
+                continue
+            if _holding(observation):
+                return f"drop@{target}"
+            if isinstance(target_box, (list, tuple)) and len(target_box) == 4 \
+                    and _inside(element, target_box):
+                continue                      # this one already arrived
+            return f"grab@{member}"
+        return None
+
+    if operator == "MOVE_DIRECTION":
+        members = [int(m) for m in clause.get("members") or []]
+        direction = str(clause.get("direction") or "")
+        for member in members:
+            if not _pressable(elements, member):
+                return None
+            if _holding(observation):
+                return f"drop@{_one_step_along(elements, member, direction)}"
+            return f"grab@{member}"
+        return None
 
     if operator == "PRESS_SEQUENCE":
         for label in clause.get("labels") or []:

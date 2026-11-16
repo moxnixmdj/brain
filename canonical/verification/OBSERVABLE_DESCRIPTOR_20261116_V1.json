@@ -1,0 +1,145 @@
+{
+ "schema": "PROJECT_BRAIN_OBSERVABLE_DESCRIPTOR_VERIFICATION_V1",
+ "measured": "2026-11-16",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX__NOT_INDEPENDENT_VERIFICATION",
+ "question": "The refusal census named 16 pages as 'needs geometry' and 12 as 'no clause understood'. Is the wall in the observation, or in the vocabulary that reads it?",
+ "protocol": {
+  "pages": 130,
+  "source": "Farama-Foundation/miniwob-plusplus miniwob/html, real chromium substrate",
+  "seed": 1060,
+  "experience": "none - a fresh arm per page",
+  "search": "none",
+  "reward": "never read by the agent",
+  "external_model": "none, in any role",
+  "budget": "<=30 actions per page",
+  "fixtures": "canonical/tests/fixtures/real_observations_20261116_v1.json (16 pages captured verbatim from the bridge)"
+ },
+ "answer": "THE WALL WAS IN THE VOCABULARY, NOT IN THE OBSERVATION.",
+ "evidence": {
+  "before": {
+   "solved": 39,
+   "of_all": 0.3,
+   "refused": 51,
+   "census": {
+    "REFUSED__SPATIAL_NEEDS_GEOMETRY": 16,
+    "REFUSED__NO_CLAUSE_UNDERSTOOD": 12,
+    "REFUSED__MULTI_APP_STATE_OUTSIDE_OBSERVATION": 12,
+    "REFUSED__LABEL_NOT_ON_THE_PAGE": 4,
+    "REFUSED__STYLE_NOT_IN_OBSERVATION": 3,
+    "REFUSED__VISUAL_QUANTITY_NEEDS_PIXELS": 2,
+    "REFUSED__FUZZY_NO_DECIDABLE_PREDICATE": 1,
+    "REFUSED__CONTINUOUS_NO_END_STATE": 1
+   }
+  },
+  "after": {
+   "solved": 43,
+   "of_all": 0.331,
+   "refused": 44,
+   "census": {
+    "REFUSED__SPATIAL_NEEDS_GEOMETRY": 5,
+    "REFUSED__NO_CLAUSE_UNDERSTOOD": 11,
+    "REFUSED__CONTINUOUS_NO_END_STATE": 3,
+    "REFUSED__LABEL_NOT_ON_THE_PAGE": 4,
+    "REFUSED__THE_DESCRIPTION_NEEDS_A_DIMENSION_THE_OBSERVATION_LACKS": 3,
+    "REFUSED__VISUAL_QUANTITY_NEEDS_PIXELS": 2,
+    "REFUSED__MULTI_APP_STATE_OUTSIDE_OBSERVATION": 12,
+    "REFUSED__STYLE_NOT_IN_OBSERVATION": 3,
+    "REFUSED__FUZZY_NO_DECIDABLE_PREDICATE": 1
+   }
+  },
+  "delta_solved": 4,
+  "delta_refused": -7,
+  "what_was_actually_in_the_channel": {
+   "colour": "every described box on click-color/click-shape/drag-shapes-2 carries its own fill",
+   "geometry": "every element carries its box; the two boxes of drag-box differ by 4x in area",
+   "shape": "the SVG tag distinguishes polygon / rect / circle",
+   "ranking": "the boxes are enough to order a list and to say which is 'smaller'"
+  },
+  "why_it_was_refused_anyway": "the compiler matched NAMES against a fixed list of operators. A description that was not on that list was refused, and the refusal was named after the wrong missing thing."
+ },
+ "laws_measured": [
+  {
+   "law": "FILTER THEN PICK, NEVER PICK THEN FILTER",
+   "evidence": "click-shape: the triangle is the 4th addressable element; picking first and checking would have failed on every page where the target is not first."
+  },
+  {
+   "law": "A COMPARISON IS AGAINST THE OTHER CANDIDATES, AND THE PAGE FRAME IS NOT A CANDIDATE",
+   "evidence": "drag-box: the body is 480x210 and wins 'the larger box' by 30x until the moved element's ANCESTORS are removed from the pool. A thing cannot be dragged into the container it is already in."
+  },
+  {
+   "law": "AN AMBIGUITY IS AN ANSWER",
+   "evidence": "drag-shapes-2 has two unfilled 70x50 boxes; the resolver returns AMBIGUOUS and the instruction's own word ('left') decides. Resolving by order would have reported a guess as a success."
+  },
+  {
+   "law": "NAME THE DIMENSION THAT IS MISSING, NOT THE ONE THAT IS CONVENIENT",
+   "evidence": "drag-shapes says 'the black box' and the bin has NO fill: the page does not state the colour. Falling back to the page's own asymmetry is allowed only with the evidence recorded on the clause (PAGE_ASYMMETRY__FILL_ASYMMETRY)."
+  },
+  {
+   "law": "A QUOTED NAME IS A NAME",
+   "evidence": "click-dialog-2 regressed for one run because 'OK' was handed to the descriptor resolver and 'ok' is a size word. Quotes short-circuit the resolver."
+  }
+ ],
+ "corrections_made_to_merged_claims": [
+  {
+   "claim": "'Click on the white colored box' needs pixels (REFUSED__SPATIAL)",
+   "status": "FALSE, corrected",
+   "why": "the element's own fill is in the observation"
+  },
+  {
+   "claim": "the 16 SPATIAL refusals were geometry problems",
+   "status": "FALSE, corrected",
+   "why": "5 remain genuinely geometric (angle, midpoint, freehand draw, colour wheel); the rest are described targets"
+  },
+  {
+   "claim": "the wall diagnosis WHERE_THE_WALL_ACTUALLY_IS_20261116_V1.json filed 32 of 37 pages under 'budget'",
+   "status": "NOT A BUDGET PROBLEM",
+   "why": "an agent with 30 actions and no search now solves 43 of 130, including pages the 1500-action search failed on (enter-time, simple-arithmetic, text-transform, search-engine, use-slider). Search cannot find an action the vocabulary cannot express."
+  }
+ ],
+ "passed_pages": [
+  "ascending-numbers",
+  "choose-list",
+  "click-button",
+  "click-button-sequence",
+  "click-checkboxes",
+  "click-checkboxes-large",
+  "click-checkboxes-transfer",
+  "click-collapsible",
+  "click-collapsible-nodelay",
+  "click-color",
+  "click-dialog-2",
+  "click-link",
+  "click-menu",
+  "click-menu-2",
+  "click-option",
+  "click-pie",
+  "click-pie-nodelay",
+  "click-scroll-list",
+  "click-shape",
+  "click-tab",
+  "click-tab-2-easy",
+  "click-test-2",
+  "click-test-transfer",
+  "click-widget",
+  "drag-circle",
+  "drag-single-shape",
+  "enter-date",
+  "enter-password",
+  "enter-text",
+  "enter-text-2",
+  "enter-text-dynamic",
+  "enter-time",
+  "find-greatest",
+  "focus-text",
+  "login-user",
+  "navigate-tree",
+  "read-table",
+  "search-engine",
+  "simple-algebra",
+  "simple-arithmetic",
+  "text-transform",
+  "unicode-test",
+  "use-spinner"
+ ],
+ "what_this_does_not_prove": "It does not raise the ceiling of what is expressible. 44 pages are still refused and 12 of those need state that lives outside the observation (email, contacts, calendar). The number is capability on these pages, not a benchmark claim."
+}

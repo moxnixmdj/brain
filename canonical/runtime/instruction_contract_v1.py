@@ -73,6 +73,7 @@ import re
 from typing import Any, Mapping, Sequence
 
 from canonical.runtime import derived_value_v1 as derived
+from canonical.runtime import observable_descriptor_v1 as descriptor
 
 SCHEMA = "PROJECT_BRAIN_INSTRUCTION_CONTRACT_V1"
 
@@ -89,6 +90,10 @@ VISUAL_QUANTITY = "REFUSED__VISUAL_QUANTITY_NEEDS_PIXELS"
 LABEL_NOT_ON_THE_PAGE = "REFUSED__LABEL_NOT_ON_THE_PAGE"
 SPATIAL = "REFUSED__SPATIAL_NEEDS_GEOMETRY"
 STYLE_NOT_OBSERVABLE = "REFUSED__STYLE_NOT_IN_OBSERVATION"
+#: A description names a dimension this observation does not carry -- a colour on a page painted
+#: by a stylesheet, a content that is an image. Distinct from SPATIAL, which used to swallow these
+#: and thereby hid that the fix was an OBSERVATION, not a coordinate.
+OBSERVABLE_ABSENT = "REFUSED__THE_DESCRIPTION_NEEDS_A_DIMENSION_THE_OBSERVATION_LACKS"
 CONTINUOUS = "REFUSED__CONTINUOUS_NO_END_STATE"
 #: Two instructions in one, joined by "and" ("Expand the section below and click submit"). The
 #: refuse-everything reading is only honest if the piece that is undecidable is the whole
@@ -137,12 +142,22 @@ def element_label(element: Mapping[str, Any]) -> str:
 # refusals, decided before any clause is attempted
 # --------------------------------------------------------------------------- #
 _REFUSALS = (
-    (re.compile(r"\b(drag|drop|inside|into the (left|right|black) box|center|centre|position|"
-                r"angle|mid-?point|draw|line that runs through|move the cube)\b"),
+    # MEASURED 2026-11-16: `drag`, `drop`, `inside`, `into the ... box`, `move the cube` and
+    # `position` all used to refuse as SPATIAL. Geometry is NOT missing -- the bridge reports every
+    # element's box and the pages present a finite set of addressable elements, so "drag the smaller
+    # box into the larger box" is a set to move and a set to move it into. Each of those words is now
+    # compiled, and what genuinely needs a continuous coordinate (a freehand line, an angle to
+    # construct, a point read off a picture) is stated separately below.
+    (re.compile(r"\b(center|centre|mid-?point|angle|draw|line that runs through|"
+                r"color ?wheel|colou?r wheel|color ?picker)\b"),
      SPATIAL),
     (re.compile(r"\b(color ?wheel|color ?picker|colou?r wheel)\b"), SPATIAL),
     # "Click on the white colored box": the colour is not in the observation, only in pixels.
-    (re.compile(r"\b(?:\w+ )?colou?red (?:box|square|rectangle|area)\b"), SPATIAL),
+    # MEASURED 2026-11-16 and corrected the same day: this pattern used to refuse every
+    # "coloured box" instruction as needing pixels. It does not. The bridge reports each element's
+    # own fill, so "click on the black colored box" is decidable from the observation; refusing it
+    # was a guess dressed as an honesty rule, and it is precisely the error this project's wall
+    # diagnosis made when it filed three pages under "budget". The pattern is gone, not narrowed.
     (re.compile(r"\b(hover|keep (?:your|the) mouse|as many .* as possible|while it moves)\b"),
      CONTINUOUS),
     (re.compile(r"\b(underlined|bold|italic|highlight|style)\b"), STYLE_NOT_OBSERVABLE),
@@ -217,6 +232,23 @@ def compile_contract(utterance: str, observation: Mapping[str, Any]) -> dict[str
                 "THAT_THE_DECIDABLE_HALF_OF_THE_INSTRUCTION_HAPPENED_NOT_THAT_THE_WHOLE_DID")
         else:
             contract["refusal"] = code
+        return contract
+
+    # --------------------------------------------------------------------------------------- #
+    # A DESCRIBED TARGET, before any named one. Measured 2026-11-16: 12 pages were refused as
+    # "no clause understood" and every one of them described its target by an attribute the
+    # observation already carries ("click on a black colored box", "click on a triangle",
+    # "drag the smaller box", "all triangles into the black box"). The resolver is a version space
+    # over those attributes, so a description that cannot be resolved is refused BY THE MISSING
+    # DIMENSION, not as an unknown instruction.
+    # --------------------------------------------------------------------------------------- #
+    described = _described_action(said, observation)
+    if described is not None:
+        if described.get("unresolved"):
+            contract["refusal"] = described["unresolved"]
+            contract["refusal_detail"] = described.get("detail")
+            return contract
+        contract["clauses"] = [described["clause"]]
         return contract
 
     fields = [e for e in observation.get("elements") or [] if e.get("can_type")]
@@ -506,6 +538,157 @@ def compile_contract(utterance: str, observation: Mapping[str, Any]) -> dict[str
     if not contract["clauses"]:
         contract["refusal"] = NO_CLAUSE
     return contract
+
+
+_DROP_WORDS = re.compile(r"\b(drag|drop|move)\b", re.IGNORECASE)
+_INTO_WORDS = re.compile(r"\b(into|inside|in the|to)\b", re.IGNORECASE)
+
+#: The words a description can hang on. If an instruction contains none of them, the resolver has
+#: nothing to read and must not be consulted -- otherwise every instruction becomes "describable".
+_DESCRIPTOR_CUES = frozenset(
+    set(descriptor.COLOUR_WORDS) | set(descriptor.SHAPE_TAGS) | set(descriptor.SIZE_WORDS)
+    | set(descriptor.ALIGN_WORDS) | {"colored", "coloured", "color", "colour"}
+)
+
+
+def _described_action(instruction: str, observation: Mapping[str, Any]) -> dict[str, Any] | None:
+    """Compile a target that is DESCRIBED rather than named, or refuse by the missing dimension.
+
+    Returns None when the instruction carries no description cue at all -- the resolver must only
+    ever be consulted when the words are about an observable dimension.
+    """
+    low = instruction.lower()
+    words = set(re.findall(r"[a-z]+", low))
+    # A QUOTED NAME IS A NAME, NOT A DESCRIPTION. "Click the button ... labeled "OK"" describes its
+    # subject by an exact string the page shows; handing that to the descriptor resolver deletes the
+    # one piece of evidence that identifies it (measured 2026-11-16: click-dialog-2 went from solved
+    # to refused because "ok" was read as a size/shape word). The named path already handles quotes.
+    if quotes(instruction):
+        return None
+    if _DROP_WORDS.search(low):
+        # A drag names TWO things and either of them may be the described one: "drag ALL BLUE
+        # SHAPES into the left box" describes both, "drag the smaller box into the larger box"
+        # describes only the target. Gating on the source's cues refused the second case.
+        return _described_drag(instruction, observation)
+    if not (words & _DESCRIPTOR_CUES):
+        return None
+
+    described = descriptor.describe(instruction, observation)
+    if described.outcome == descriptor.RESOLVED:
+        return {"clause": {"operator": "CLICK_LABELLED", "index": described.subject,
+                           "rule": "DESCRIBED_BY_" + "+".join(
+                               p["dimension"].upper() for p in described.predicates),
+                           "provenance": instruction,
+                           "predicates": described.predicates}}
+    if described.outcome == descriptor.NOTHING:
+        return {"unresolved": LABEL_NOT_ON_THE_PAGE, "detail": described.as_dict()}
+    if described.outcome == descriptor.ABSENT:
+        return {"unresolved": OBSERVABLE_ABSENT, "detail": described.as_dict()}
+    return {"unresolved": OBSERVABLE_ABSENT, "detail": described.as_dict()}
+
+
+def _direction_drag(instruction: str, observation: Mapping[str, Any],
+                    direction: str) -> dict[str, Any] | None:
+    """ "Drag the item down ...": one element moves along an axis by the page's own amount."""
+    lead = re.search(r"\b(drag|drop|move)\b", instruction.lower())
+    source_text = instruction[lead.end():] if lead else instruction
+    source_text = re.split(r"\b(up|down|then|and)\b", source_text, maxsplit=1)[0]
+    items = descriptor.describe(source_text, observation)
+    if items.outcome not in (descriptor.RESOLVED, descriptor.RESOLVED_SET) or not items.members:
+        # "the item" names no observable dimension: the page shows exactly one thing that is not a
+        # control, and that is a count, not a description.
+        movable = [int(e["index"]) for e in observation.get("elements") or []
+                   if (e.get("can_click") or e.get("can_type"))
+                   and descriptor.area(e) > 0
+                   and str(e.get("tag") or "").lower() not in ("button", "input")
+                   and str(e.get("text") or "").strip().lower() not in ("submit", "ok", "done")]
+        if len(movable) != 1:
+            return {"unresolved": OBSERVABLE_ABSENT, "detail": items.as_dict()}
+        members = movable
+    else:
+        members = items.members
+    return {"clause": {"operator": "MOVE_DIRECTION", "members": members,
+                       "direction": direction, "provenance": instruction}}
+
+
+def _described_drag(instruction: str, observation: Mapping[str, Any]) -> dict[str, Any] | None:
+    """Drag a described set into a described or evidenced target.
+
+    The clause records the two descriptors rather than two indices: WHERE a thing is must not be
+    learned as an index, because the pages here renumber their elements between observations.
+    """
+    low = instruction.lower()
+    # "drag X down then press Submit" has no destination element at all: the words are a DIRECTION
+    # and the page's own box moves. Measured 2026-11-16 on drag-single-shape / drag-circle.
+    direction = re.search(r"\b(up|down)\b", low)
+    into = _INTO_WORDS.search(low)
+    if into is None:
+        if direction is not None:
+            return _direction_drag(instruction, observation, direction.group(1))
+        return None
+    source_text = instruction[:into.start()]
+    target_text = instruction[into.end():]
+    # the direction word belongs to the action, not to the thing being moved
+    for mark in (direction, re.search(r"\b(then|and)\b", source_text)):
+        if mark is not None and mark.start() > 0:
+            source_text = source_text[:mark.start()]
+            break
+
+    items = descriptor.describe(source_text, observation)
+    if items.outcome not in (descriptor.RESOLVED, descriptor.RESOLVED_SET) or not items.members:
+        return {"unresolved": OBSERVABLE_ABSENT, "detail": items.as_dict()}
+    members = items.members
+
+    # The target pool EXCLUDES the moved set: "drag the smaller box into the larger box" is only a
+    # comparison when the smaller one is not competing for the word "larger".
+    # A thing cannot be dragged INTO the container it is already in. The ancestors of the moved
+    # elements are therefore not candidates, which is what keeps the page frame (480x210) from
+    # winning "the larger box" on every drag page -- measured 2026-11-16, and it beat the real
+    # 58x58 target by a factor of thirty before this rule existed.
+    elements = list(observation.get("elements") or [])
+    by_index = {int(e["index"]): e for e in elements}
+    ancestors = {int(e["index"]) for e in elements
+                 if any(descriptor._contained(by_index[m], e) for m in members if m in by_index)}
+    pool = [int(e["index"]) for e in elements
+            if int(e["index"]) not in members and int(e["index"]) not in ancestors]
+    target = descriptor.describe(target_text, observation, pool=pool)
+    if target.outcome == descriptor.NOTHING:
+        return {"unresolved": OBSERVABLE_ABSENT,
+                "detail": {"items": items.as_dict(), "target": target.as_dict()}}
+    if target.outcome in (descriptor.NOTHING, descriptor.AMBIGUOUS) and target.missing_dimensions:
+        # A description the page cannot answer ("the BLACK box", where the bin carries no fill at
+        # all) falls back to the page's own asymmetry -- but only when that asymmetry is unique,
+        # and the refusal reason is replaced by what was actually used. A fallback is never allowed
+        # to look like a resolution.
+        found = descriptor.container_of(observation, inner=members[0] if len(members) == 1 else None)
+        if found["outcome"] == descriptor.RESOLVED:
+            return {"clause": {"operator": "DRAG_DESCRIBED", "members": members,
+                               "target": found["target"],
+                               "target_evidence": "PAGE_ASYMMETRY__" + str(found["evidence"]),
+                               "unresolved_words": target.residual_words,
+                               "rule": "DESCRIBED_BY_" + "+".join(
+                                   p["dimension"].upper() for p in items.predicates),
+                               "provenance": instruction, "predicates": items.predicates}}
+    if target.outcome == descriptor.NOTHING and set(target.residual_words) >= (set(descriptor.SIZE_WORDS)):
+        # the only rival was the element being moved, so the comparison is made against it
+        target = descriptor.describe(target_text, observation)
+    if target.outcome == descriptor.RESOLVED:
+        target_index = target.subject
+        evidence = "DESCRIBED_TARGET"
+    else:
+        found = descriptor.container_of(observation)
+        if found["outcome"] != descriptor.RESOLVED:
+            return {"unresolved": OBSERVABLE_ABSENT,
+                    "detail": {"items": items.as_dict(), "target": target.as_dict(),
+                               "container": found}}
+        target_index = found["target"]
+        evidence = found["evidence"]
+
+    return {"clause": {"operator": "DRAG_DESCRIBED", "members": members,
+                       "target": target_index, "target_evidence": evidence,
+                       "rule": "DESCRIBED_BY_" + "+".join(
+                           p["dimension"].upper() for p in items.predicates),
+                       "provenance": instruction, "predicates": items.predicates}}
 
 
 def _conjunction(instruction: str) -> list[str]:
@@ -854,6 +1037,10 @@ def _check_clause(clause: Mapping[str, Any], trace: Sequence[tuple[Mapping[str, 
         return _check_set_control(clause, trace)
     if operator == "PRESS_SEQUENCE":
         return _check_press_sequence(clause, trace)
+    if operator == "DRAG_DESCRIBED":
+        return _check_drag_described(clause, trace)
+    if operator == "MOVE_DIRECTION":
+        return _check_move_direction(clause, trace)
     if operator == "CLICK_LABELLED":
         return _check_click_labelled(clause, trace)
     if operator == "CLICK_KIND":
@@ -940,6 +1127,64 @@ def _check_rank_pick(clause, trace) -> dict[str, Any]:
             return {"operator": "RANK_PICK", "verdict": PASS, "witness": int(wanted)}
     return {"operator": "RANK_PICK", "verdict": FAIL,
             "reason": f"THE_{clause['rank'].upper()}_CARD_WAS_NEVER_PRESSED"}
+
+
+def _check_drag_described(clause, trace) -> dict[str, Any]:
+    """Every named member was grabbed and let go inside the target's box, by the boxes present.
+
+    A drag is checked against GEOMETRY, not against an index: the page may renumber its elements
+    between the observation the clause was written on and the observation the drop happened in.
+    """
+    final = _final(trace)
+    elements = {int(e["index"]): e for e in final.get("elements") or []}
+    target = int(clause.get("target") or -1)
+    target_box = (elements.get(target) or {}).get("box")
+    moved = []
+    for observation, action in trace:
+        text = str(action)
+        if not text.startswith("drop@"):
+            continue
+        index = int(text.split("@")[1])
+        element = (observation.get("elements") or [{}] * (index + 1))[index] \
+            if index < len(observation.get("elements") or []) else {}
+        if not isinstance(target_box, (list, tuple)) or len(target_box) != 4:
+            continue
+        if descriptor._contained(element, {"box": target_box}):
+            moved.append(index)
+    members = {int(m) for m in clause.get("members") or []}
+    leftover = [m for m in members
+                if m in elements and isinstance(target_box, (list, tuple)) and len(target_box) == 4
+                and not descriptor._contained(elements[m], {"box": target_box})]
+    verdict = PASS if not leftover else FAIL
+    return {"clause": clause.get("operator"), "verdict": verdict,
+            "why": "EVERY_NAMED_THING_ENDED_INSIDE_THE_TARGET" if verdict == PASS
+            else "SOMETHING_NAMED_DID_NOT_END_INSIDE_THE_TARGET",
+            "dropped_inside": moved, "not_inside": leftover}
+
+
+def _check_move_direction(clause, trace) -> dict[str, Any]:
+    """The named thing moved at least one box height in the stated direction."""
+    first = (trace[0][0] if trace else {})
+    final = _final(trace)
+    before = {int(e["index"]): e for e in first.get("elements") or []}
+    after = {int(e["index"]): e for e in final.get("elements") or []}
+    direction = str(clause.get("direction") or "")
+    moved = []
+    for member in clause.get("members") or []:
+        a, b = before.get(int(member)), after.get(int(member))
+        if not a or not b:
+            continue
+        box_a, box_b = a.get("box"), b.get("box")
+        if not (isinstance(box_a, (list, tuple)) and isinstance(box_b, (list, tuple))):
+            continue
+        delta = float(box_b[1]) - float(box_a[1])
+        if (direction == "down" and delta > 0) or (direction == "up" and delta < 0):
+            moved.append(int(member))
+    named = [int(m) for m in clause.get("members") or []]
+    verdict = PASS if named and len(moved) == len(named) else FAIL
+    return {"clause": clause.get("operator"), "verdict": verdict, "moved": moved,
+            "why": "EVERY_NAMED_THING_MOVED_THE_STATED_WAY" if verdict == PASS
+            else "SOMETHING_NAMED_DID_NOT_MOVE_THE_STATED_WAY"}
 
 
 def _check_press_sequence_by_index(clause, trace) -> dict[str, Any]:
@@ -1092,6 +1337,16 @@ def _check_press_sequence(clause, trace) -> dict[str, Any]:
 def _check_click_labelled(clause, trace) -> dict[str, Any]:
     """One of the named labels was pressed, and it was the last press (so pressing the right
     control and then a wrong one fails, which is the case a state-only oracle cannot see)."""
+    # A clause written by the DESCRIPTOR path carries one `index` and no label list: its subject
+    # was identified by an attribute ("the black box"), not by a name, so it is checked by the
+    # element it actually names rather than by text.
+    if "labels" not in clause and clause.get("index") is not None:
+        presses = list(_presses(trace))
+        hit = [i for _, i in presses if i == int(clause["index"])]
+        return {"operator": "CLICK_LABELLED", "verdict": PASS if hit else FAIL,
+                "reason": "THE_DESCRIBED_ELEMENT_WAS_PRESSED" if hit
+                else "THE_DESCRIBED_ELEMENT_WAS_NOT_PRESSED",
+                "rule": clause.get("rule"), "pressed": hit}
     wanted = [plain(label) for label in clause["labels"]]
     presses = list(_presses(trace))
     hits = []

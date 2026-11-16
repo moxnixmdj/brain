@@ -302,9 +302,16 @@ def test_a_typed_value_can_be_a_predicate() -> None:
 def test_uncompilable_instructions_refuse_with_a_reason_that_names_the_gap() -> None:
     """Refusals are answers. Each names WHY no decidable predicate exists in the observation."""
     observation = _page(buttons=[("OK", 3)])
+    # CORRECTED 2026-11-16 by measurement. Both of these used to be asserted as SPATIAL, i.e. "needs
+    # geometry", and both are now compiled: `container_of` resolves the box from the page's own
+    # draggable/fill asymmetry, and a colour word is decided by the element's fill. A refusal that
+    # names the wrong missing dimension is worse than no refusal, because it aims the repair at a
+    # coordinate when the repair is an observation.
     cases = {
-        "Drag the cube into the black box.": contract_lib.SPATIAL,
-        "Click on the white colored box.": contract_lib.SPATIAL,
+        "Drag the cube into the black box.": contract_lib.OBSERVABLE_ABSENT,
+        # this bare page has no box of any colour, so the honest answer is "nothing here is that",
+        # which is a different claim from "the observation lacks colour"
+        "Click on the white colored box.": contract_lib.LABEL_NOT_ON_THE_PAGE,
         "Send an email to the contact book.": contract_lib.MULTI_APP,
         "Find the item that best describes a feeling.": contract_lib.FUZZY,
         "How many items are shown?": contract_lib.VISUAL_QUANTITY,
