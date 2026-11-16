@@ -1,0 +1,488 @@
+{
+ "action_id": "SPECIFICATION_FROM_STRUCTURE_20261116_V1",
+ "action_intent_id": "SPECIFICATION_FROM_STRUCTURE_20261116_V1",
+ "action_kind": "GOVERNANCE_GUARD",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "earlier_routes_exhausted_reason": "DELETE is not applicable: nothing is deleted, the mutation engine is reused as it is. BYPASS is impossible: there is no other route to a spec-free verdict. REUSE is the selected route and is the first applicable one: this tree's own mutation engine supplies the variants and this tree's own code supplies the corpus.",
+  "incremental_spend_usd": 0,
+  "independent_verification_completed": false,
+  "independent_verification_note": "Producer-run sandbox only. Independent personnel verification is still open.",
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "GOVERNANCE_GUARD_NO_PROGRESS_CLAIM",
+  "progress_evidence_paths": [
+   "THE_VERIFIER_IS_KNOWLEDGE_NOT_LEARNING_20261116_V1.md",
+   "canonical/swe_kernel/specification_from_structure_v1.py",
+   "canonical/tools/specification_from_structure_measure_v1.py",
+   "canonical/tests/test_specification_from_structure_v1.py",
+   "canonical/verification/SPECIFICATION_FROM_STRUCTURE_20261116_V1.json",
+   "canonical/action_intents/SPECIFICATION_FROM_STRUCTURE_20261116_V1.json"
+  ],
+  "route_class": "REUSE",
+  "scope_complete_discharge": false,
+  "terminal_achieved": false
+ },
+ "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_SINGLE_BOTTLENECK_WAS_NAMED_AS_THE_VERIFIER_WITHOUT_MEASURING_HOW_MUCH_VERIFIER_STRUCTURE_ALONE_CAN_SUPPLY__MEASURED_ON_THIS_TREES_OWN_CODE_EIGHT_OF_EIGHTY_NINE_BEHAVIOURAL_PERTURBATIONS_ARE_REJECTED_BY_A_LAW_CONFIRMED_BY_EXECUTION_TWENTY_THREE_MORE_ONLY_BY_IT_STILL_RAN_AND_FIFTY_EIGHT_ARE_INDISTINGUISHABLE__SO_THE_VERIFIER_IS_KNOWLEDGE_THAT_MUST_BE_ACQUIRED_AND_IS_NOT_AN_OUTCOME_OF_LEARNING",
+ "canonical_base_commit": "fcd3ec29dfcd47d82bfa96823e0ee640bcb78b92",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "THE_SINGLE_BOTTLENECK_WAS_NAMED_AS_THE_VERIFIER_WITHOUT_MEASURING_HOW_MUCH_VERIFIER_STRUCTURE_ALONE_CAN_SUPPLY__MEASURED_ON_THIS_TREES_OWN_CODE_EIGHT_OF_EIGHTY_NINE_BEHAVIOURAL_PERTURBATIONS_ARE_REJECTED_BY_A_LAW_CONFIRMED_BY_EXECUTION_TWENTY_THREE_MORE_ONLY_BY_IT_STILL_RAN_AND_FIFTY_EIGHT_ARE_INDISTINGUISHABLE__SO_THE_VERIFIER_IS_KNOWLEDGE_THAT_MUST_BE_ACQUIRED_AND_IS_NOT_AN_OUTCOME_OF_LEARNING",
+ "date": "2026-11-16",
+ "expected_parent_change": "canonical/swe_kernel/specification_from_structure_v1.py added (laws proposed from structure, confirmed by execution); canonical/tools/specification_from_structure_measure_v1.py added (the measurement); canonical/tests/test_specification_from_structure_v1.py added (20 tests); canonical/verification/SPECIFICATION_FROM_STRUCTURE_20261116_V1.json added (the receipt); THE_VERIFIER_IS_KNOWLEDGE_NOT_LEARNING_20261116_V1.md added; canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json recompiled.",
+ "expected_parent_frontier_change": "THE_VERIFIER_CEASES_TO_BE_AN_ASSUMED_SINGLE_BOTTLENECK_AND_BECOMES_A_MEASURED_COEFFICIENT__STRUCTURE_ALONE_SUPPLIES_A_REAL_BUT_WEAK_ORACLE_EIGHT_OF_EIGHTY_NINE_PERTURBATIONS_REJECTED_BY_A_CONFIRMED_LAW_AND_FIFTY_EIGHT_INDISTINGUISHABLE__THE_WALL_IS_A_VOCABULARY_WALL_MEASURED_AT_SIXTY_FIVE_PERCENT__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT__NO_FAMILY_FLIPPED",
+ "explicit_user_authorization": "Owner instruction this session, verbatim: 'Is this true, or are there things that are wrong? What is real and what is not, and what are the smartest things we can do?', 'you must think from first principles for everything', 'kill all the bad and dumb ideas before you waste time implementing them', 'Work in branch, merge only when complete (fastest)', 'Merge once, not 10 times'. The three ceilings quoted this session were identifiability, the insufficiency certificate, and the synthesis-verification asymmetry.",
+ "falsification_condition": "FALSIFIED if any confirmed law is used after it failed on the baseline; if a vacuous law judges a variant; if a variant is judged by a law about a function it did not change; if a module's top-level code executes; if the receipt's killed, killed-by-totality and survived counts do not sum to the variants; or if any capability, family, benchmark or terminal credit is claimed.",
+ "generic_repair_from_single_probe": false,
+ "governance_change": false,
+ "highest_leverage_now": true,
+ "incremental_spend_usd": 0,
+ "intentional_route_race": false,
+ "load_bearing_primary": {
+  "canonical_base_commit": "fcd3ec29dfcd47d82bfa96823e0ee640bcb78b92",
+  "constructive_gap_for_open_obligation_ids": [
+   "CODING_TB4_GE_66_4"
+  ],
+  "expected_obligation_discharge_lcb": 0,
+  "expected_obligation_unlock_lcb": "1/2",
+  "interpretation": "DISCHARGES_NOTHING_AND_CLAIMS_NO_CAPABILITY__REPLACES_AN_ASSUMED_BOTTLENECK_WITH_A_MEASURED_COEFFICIENT",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "stop_condition": "A_SPECIFICATION_DERIVED_FROM_STRUCTURE_IS_CONFIRMED_BY_EXECUTING_THE_PROGRAM_AS_IT_STANDS_AND_MEASURED_ON_THIS_TREES_OWN_CODE__FOUR_INSTRUMENT_DEFECTS_AND_TWO_DENOMINATOR_ERRORS_FOUND_AND_PINNED_BY_TWENTY_TESTS__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT",
+  "success_probability_lcb": 0.9,
+  "wall_clock_cost_ub": 1
+ },
+ "measured_effect": {
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "blind_spot_rate": 0.651685,
+  "corpus": "canonical/swe_kernel and canonical/tools, 169 files, read as they are",
+  "denominator_errors_found_and_corrected": 2,
+  "files_scanned": 169,
+  "functions_offered": 871,
+  "functions_reached_by_the_grid": 384,
+  "functions_with_a_non_trivial_confirmed_law": 23,
+  "incremental_spend_usd": 0,
+  "instrument_defects_found_and_pinned": 4,
+  "laws_confirmed": 407,
+  "laws_not_applicable": 2028,
+  "laws_proposed": 2791,
+  "laws_refuted_by_the_program": 179,
+  "laws_vacuous_discarded": 177,
+  "model_calls": 0,
+  "modules_judged": 12,
+  "modules_offering_a_callable_function": 122,
+  "modules_where_a_law_was_confirmed": 16,
+  "network_calls": 0,
+  "not_distinguished": 58,
+  "rejected_by_a_confirmed_law": 8,
+  "rejected_only_by_it_still_ran": 23,
+  "rejection_rate_by_a_law": 0.089888,
+  "tests": 20,
+  "variants_from_this_trees_own_mutation_engine": 89
+ },
+ "next_step": "GROW_THE_LAW_VOCABULARY_AS_KNOWLEDGE_AND_REQUIRE_THAT_REJECTIONS_BY_A_CONFIRMED_LAW_RISE_WITHOUT_THE_VACUOUS_COUNT_RISING__THEN_USE_IT_AS_AN_AMPLIFIER_ON_A_REAL_TEST_SUITE_BY_MEASURING_ONLY_THE_SURVIVORS_THE_SUITE_MISSES",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "prior_work_reused": [
+  "canonical/tools/miniwob_one_success_generalisation_measure_v1.py",
+  "canonical/tools/miniwob_chromium_bridge_v1.mjs",
+  "canonical/runtime/systematic_exploration_v1.py",
+  "canonical/verification/MINIWOB_ONE_SUCCESS_GENERALISATION_20261111_V5.json"
+ ],
+ "probe_specific": false,
+ "recursive_obs": {
+  "canonical_base_commit": "fcd3ec29dfcd47d82bfa96823e0ee640bcb78b92",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "BUILD_A_LEARNER_ON_TOP_OF_UNVERIFIED_EXPERIENCE",
+   "CALL_A_MODEL_TO_JUDGE_WHICH_IS_FORBIDDEN_AND_IMPORTS_THE_SAME_UNVERIFIABILITY",
+   "WRITE_TESTS_FOR_THE_TREE_AND_COUNT_THE_ARTIFACTS_AS_LEARNING",
+   "COUNT_A_VACUOUS_LAW_AS_A_CONFIRMED_LAW",
+   "JUDGE_A_VARIANT_WITH_A_LAW_ABOUT_A_FUNCTION_IT_DID_NOT_CHANGE"
+  ],
+  "expected_parent_level_state_change": "THE_VERIFIER_CEASES_TO_BE_AN_ASSUMED_SINGLE_BOTTLENECK_AND_BECOMES_A_MEASURED_COEFFICIENT__STRUCTURE_ALONE_SUPPLIES_A_REAL_BUT_WEAK_ORACLE_EIGHT_OF_EIGHTY_NINE_PERTURBATIONS_REJECTED_BY_A_CONFIRMED_LAW_AND_FIFTY_EIGHT_INDISTINGUISHABLE__THE_WALL_IS_A_VOCABULARY_WALL_MEASURED_AT_SIXTY_FIVE_PERCENT__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT__NO_FAMILY_FLIPPED",
+  "iteration_limit": 1,
+  "obs_blocker": {
+   "delete_bypass_substitute_options": [
+    "DELETE not applicable: the laws are the mechanism and are kept",
+    "BYPASS impossible: no other route produces a spec-free verdict",
+    "SUBSTITUTE forbidden: a model judgement is law-forbidden and imports the unverifiability"
+   ],
+   "intrinsic_or_path_specific": "path_specific: the measurement binds this corpus and this vocabulary; the coefficient would move with a larger vocabulary, which is exactly why the finding is about knowledge rather than about compute.",
+   "surviving_causal_blocker": "A verdict on correctness is knowledge about what correct means, and knowledge is acquired, not learned from experience of the thing being judged."
+  },
+  "obs_capability": {
+   "capability_work_deleted": [
+    "no new learner",
+    "no new store",
+    "no new model",
+    "no new benchmark harness"
+   ],
+   "existing_inherited_routes_checked": [
+    "canonical/runtime/bound_capabilities/python_tests_mutation_score.py (the variants, reused unchanged)",
+    "canonical/swe_kernel/test_suite_admission_v1.py (mutation-based suite admission, reused as the vocabulary of verdicts)",
+    "canonical/swe_kernel/lesson_admission_gate_v1.py (the same confirmation-before-judgement discipline, one level up)",
+    "canonical/swe_kernel/metamorphic_cli_compiler_v1.py (metamorphic signatures for CLI identification, not for code)"
+   ],
+   "external_existing_routes_checked": [
+    "property-based testing (Hypothesis) requires the property to be supplied by a caller; it does not derive one",
+    "mutation testing measures a suite that already exists; it supplies no law",
+    "metamorphic testing literature supplies relation shapes, which are knowledge, and this is the same channel"
+   ],
+   "surviving_gap": "65% of behavioural perturbations of this tree's own code are separated by no law this vocabulary can express; the vocabulary is knowledge about what names mean, and it is the wall."
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "proving learning by counting generated artifacts",
+    "reporting a mutation score as a correctness proof",
+    "treating 'the tests passed' as a specification"
+   ],
+   "real_outcome": "How much of a verifier structure alone can supply is measured on this tree's own code instead of assumed: 8 of 89 behavioural perturbations rejected by a law confirmed by execution, 23 more only by 'it still ran', 58 indistinguishable.",
+   "surviving_necessity": "Every loop still ends at a verdict; a verdict that needs nobody's test is the object this session measured."
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "None. This measures a verifier's coverage; it registers no capability.",
+   "downstream_work_to_delete_or_supersede": "Any plan that treats 'the tests passed' as evidence without asking what the tests can detect.",
+   "fresh_reuse_plan": "Re-run the tool on the same roots; it is deterministic. Reproduce on an independent machine before any credit."
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": "Reused the existing mutation engine and the existing bounded-child pattern instead of writing a second one.",
+   "search_stop_decision": "Stop after the coefficient is measured and pinned by tests; do not add a learner or a vocabulary law that no test can refute."
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "A larger skill library and more demonstrations were already measured at zero bits; a model judge is forbidden; writing tests for the tree counts artifacts, not verdicts.",
+   "routes_ranked": [
+    "classify by recorded terminal status",
+    "re-run the whole benchmark",
+    "raise the budget",
+    "add primitives",
+    "read the page specs"
+   ]
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "oracle_paths": [
+    "canonical/tests/test_where_the_wall_actually_is_v1.py",
+    "canonical/verification/WHERE_THE_WALL_ACTUALLY_IS_20261116_V1.json"
+   ],
+   "synthetic_verification_necessity": "No synthetic corpus is used: the judged code is this repository's own and the variants come from its own engine. Unit controls pin the instrument's own defects, and the receipt labels every number as producer-run."
+  },
+  "real_outcome": "How much of a verifier structure alone can supply is measured on this tree's own code instead of assumed: 8 of 89 behavioural perturbations rejected by a law confirmed by execution, 23 more only by 'it still ran', 58 indistinguishable.",
+  "required_capability": "A verdict on a piece of code that is available without a test file, a specification or a model, and that is confirmed on the program itself before it is allowed to judge anything.",
+  "route_frontier": {
+   "challenger_routes": [
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "no new information",
+      "CORRECTNESS": "would produce the same 55 of 92",
+      "INCREMENTAL_COST": "full",
+      "RELIABILITY": "identical result",
+      "VERIFIABILITY": "already verified producer-side",
+      "WALL_CLOCK": "about two hours of the whole suite"
+     },
+     "evidence": [
+      "canonical/verification/MINIWOB_ONE_SUCCESS_GENERALISATION_20261111_V5.json already is that run: 78 of 130 demonstrated"
+     ],
+     "qualification_evidence": [
+      "the V5 receipt's own per-task stages were counted: 78 of 130 demonstrated, 55 of 92 held out"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "re-run the full 130-page benchmark on chromium with the whole hand"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "one page for doubled compute",
+      "CORRECTNESS": "budget is near-inelastic here",
+      "INCREMENTAL_COST": "high",
+      "RELIABILITY": "exponential cost in depth",
+      "VERIFIABILITY": "measured",
+      "WALL_CLOCK": "about 27 minutes"
+     },
+     "evidence": [
+      "2.26x the baseline budget converted 1 page in 37"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/WHERE_THE_WALL_ACTUALLY_IS_20261116_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "raise the action budget until the pages convert"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "unmeasured",
+      "CORRECTNESS": "unfounded by the data",
+      "INCREMENTAL_COST": "high and permanent",
+      "RELIABILITY": "also raises branching factor",
+      "VERIFIABILITY": "cannot say which primitive",
+      "WALL_CLOCK": "days"
+     },
+     "evidence": [
+      "no page closed on exhaustion, so no page is evidence for a specific missing primitive"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/WHERE_THE_WALL_ACTUALLY_IS_20261116_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "add an action primitive because the pages look like they need one"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "diagnosis of the agent, not an agent-side measurement; nothing is claimed",
+      "CORRECTNESS": "diagnosis only",
+      "INCREMENTAL_COST": "low",
+      "RELIABILITY": "requires care against peeking",
+      "VERIFIABILITY": "spec is external",
+      "WALL_CLOCK": "hours"
+     },
+     "evidence": [
+      "the page spec states the goal condition, but this diagnoses the agent rather than measuring it"
+     ],
+     "qualification_evidence": [
+      "canonical/tools/miniwob_where_the_wall_actually_is_v1.py"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "read each page's own source to decide which primitive it needs"
+    }
+   ],
+   "checked_at_utc": "2026-11-16T18:00:00Z",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "assume the verifier is the bottleneck and that faster learning will supply it",
+   "max_age_hours": 24,
+   "negative_search_summary": "No external system was found that derives a specification from code structure and confirms it by execution on the program itself without a model; the property-based and metamorphic literature supplies relation shapes but always requires the caller to bring the property.",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "OSWorld 2.0 long-horizon computer use agents benchmark 2026 verification state drift"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "Veritas verifier generation harness agent tasks arxiv 2611.13336"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "agents generate their own verifiers bottleneck 2026 VerifierBench test-time verification"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "MiniWoB++ benchmark saturated 2026 web agents small task suite still useful evaluation"
+    },
+    {
+     "intent": "FAILURE_MODE",
+     "query": "2026 continual learning agents why in-context experience does not become capability without weights skill library drift"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "selected_route": "REUSE_THE_TREES_OWN_MUTATION_ENGINE_ON_THE_TREES_OWN_CODE_TO_MEASURE_HOW_MUCH_OF_A_VERIFIER_STRUCTURE_ALONE_CAN_SUPPLY",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-11-16T18:00:00Z",
+    "execution_dependencies": [
+     {
+      "dependency": "local Python 3.11 runtime with pytest",
+      "evidence": [
+       "producer ran the classifier suite: 11 passed"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "headless Chromium 153 via npm (@sparticuz/chromium, puppeteer-core)",
+      "evidence": [
+       "50,154 actions executed against real pages with real mouse and key input"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "MiniWoB++ task pages at the receipt's upstream commit",
+      "evidence": [
+       "upstream HEAD is 33c3b4ddef8c6eb67c57a29663d844b1eda7e614, the byte-identical tree the baseline used"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "max_age_hours": 2,
+    "selected_route": "REUSE_THE_TREES_OWN_MUTATION_ENGINE_ON_THE_TREES_OWN_CODE_TO_MEASURE_HOW_MUCH_OF_A_VERIFIER_STRUCTURE_ALONE_CAN_SUPPLY",
+    "status": "READY"
+   },
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/tools/miniwob_one_success_generalisation_measure_v1.py",
+     "canonical/tools/miniwob_chromium_bridge_v1.mjs",
+     "canonical/runtime/systematic_exploration_v1.py",
+     "canonical/verification/MINIWOB_ONE_SUCCESS_GENERALISATION_20261111_V5.json"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "https://github.com/Farama-Foundation/miniwob-plusplus (MIT, upstream 33c3b4ddef8c6eb67c57a29663d844b1eda7e614 byte-identical to the receipt)",
+     "https://www.sota2.com/research/dataset/miniwob (2026 reporting of MiniWoB++ agent scores, used only to bound how hard the suite is)"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "https://registry.npmjs.org/jsdom (31.0.1, the substrate the baseline receipt was taken on)",
+     "https://registry.npmjs.org/@sparticuz/chromium (chromium 153, real layout and hit-testing)",
+     "https://registry.npmjs.org/puppeteer-core (25.17.0, the input pipeline the bridge drives)"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "https://arxiv.org/abs/2606.29537 (OSWorld 2.0: best configuration 20.6% binary; failures are state loss and skipped verification)",
+     "https://arxiv.org/abs/2611.13336 (Veritas: self-improvement is gated by the verifier)",
+     "https://arxiv.org/html/2610.28679 (VerifierBench: generated verifiers mostly reject valid solutions)",
+     "https://arxiv.org/pdf/2608.03874 (ContinualSkillBench: in-context skill maintenance at parity with no library)"
+    ]
+   },
+   "unresolved_plausible_dominators": []
+  },
+  "routes_considered": [
+   "Re-run the whole 130-page benchmark on chromium with the whole hand (checked: this already exists as the V5 receipt)",
+   "Raise the action budget on the unsolved pages and see whether they convert",
+   "Add action primitives (scroll, coordinate pointing) and measure whether pages convert",
+   "Read each page's own source to decide which primitive it needs (peeking at the spec: a diagnosis, not an agent-side result)",
+   "Classify each page by the terminal status its own search recorded"
+  ],
+  "selected_route": "REUSE_THE_TREES_OWN_MUTATION_ENGINE_ON_THE_TREES_OWN_CODE_TO_MEASURE_HOW_MUCH_OF_A_VERIFIER_STRUCTURE_ALONE_CAN_SUPPLY",
+  "selected_surviving_route": "REUSE_THE_TREES_OWN_MUTATION_ENGINE_ON_THE_TREES_OWN_CODE_TO_MEASURE_HOW_MUCH_OF_A_VERIFIER_STRUCTURE_ALONE_CAN_SUPPLY",
+  "selected_surviving_route_class": "REUSE",
+  "stop_condition": "A_SPECIFICATION_DERIVED_FROM_STRUCTURE_IS_CONFIRMED_BY_EXECUTING_THE_PROGRAM_AS_IT_STANDS_AND_MEASURED_ON_THIS_TREES_OWN_CODE__FOUR_INSTRUMENT_DEFECTS_AND_TWO_DENOMINATOR_ERRORS_FOUND_AND_PINNED_BY_TWENTY_TESTS__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT",
+  "why_selected_route_is_fastest_sufficient": "The mutation engine, the corpus and the bounded-child pattern already exist; the only new thing is the derivation of laws and their confirmation, which is minutes of AST work and seconds of execution. Building a learner first would have produced candidates with no way to tell which were right, which is the failure this measurement exists to quantify."
+ },
+ "route_id": "SPECIFICATION_FROM_STRUCTURE_20261116_V1",
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "scope_complete_discharge": false,
+ "selected_route": "REUSE_THE_TREES_OWN_MUTATION_ENGINE_ON_THE_TREES_OWN_CODE_TO_MEASURE_HOW_MUCH_OF_A_VERIFIER_STRUCTURE_ALONE_CAN_SUPPLY",
+ "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
+ "stop_condition": "A_SPECIFICATION_DERIVED_FROM_STRUCTURE_IS_CONFIRMED_BY_EXECUTING_THE_PROGRAM_AS_IT_STANDS_AND_MEASURED_ON_THIS_TREES_OWN_CODE__FOUR_INSTRUMENT_DEFECTS_AND_TWO_DENOMINATOR_ERRORS_FOUND_AND_PINNED_BY_TWENTY_TESTS__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT",
+ "terminal_credit_delta": 0,
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "truth": {
+  "achieved": false
+ },
+ "user_authorized_governance_change": false,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "checked_at_utc": "2026-11-16T18:00:00Z",
+  "currentness": {
+   "accepted_families": 5,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "This classifies the residual coverage gap for computer use; it discharges no truth obligation.",
+  "target_truth_obligations": [
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [],
+   "decisive_question": "Is each unsolved held-out page unreachable, merely unexplored, state-blind, or nothing-offered -- and therefore which repair does it ask for?",
+   "falsifier_id": "FOUR_WORLD_CLASSIFICATION_TESTS_PLUS_THE_1500_ACTION_RERUN",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "The rerun is itself the counterexample to the inherited claim; no new external receipt is added by this PR.",
+   "proposal_id": "WHERE_THE_WALL_ACTUALLY_IS_20261116_V1"
+  }
+ },
+ "verification": {
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "commands": [
+   "python3 -m unittest canonical.tests.test_specification_from_structure_v1",
+   "python3 canonical/tools/specification_from_structure_measure_v1.py --max-modules 40 --json canonical/verification/SPECIFICATION_FROM_STRUCTURE_20261116_V1.json",
+   "python3 execution_guard/repo_integrity_guard_v1.py",
+   "python3 execution_guard/agent_orientation_check_v1.py verify"
+  ],
+  "independent_verification_completed": false
+ },
+ "weakens_existing_guard": false
+}
