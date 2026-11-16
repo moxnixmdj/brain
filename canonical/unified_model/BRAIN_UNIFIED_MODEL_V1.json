@@ -31228,16 +31228,16 @@
   "engines": 26,
   "knowledge_documents": 473,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6909,
+  "research_index_records": 6912,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 450,
-  "source_index_modules": 1987
+  "source_index_modules": 1988
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "24d56245bcb13a84d6b5e7737e5288afb32aa394ad1c31b6c5f9e192677ac789"
+  "value": "655e666370be956fc332fb4561b57f5cac6d5435984602c06c8dc3da37f6fe13"
  },
  "engines": [
   {
@@ -171717,6 +171717,24 @@
    "action_id": "",
    "capability": false,
    "date": "",
+   "id": "research:canonical/verification/LEARN_OR_READ_BOARD_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/LEARN_OR_READ_BOARD_20261116_V1.json",
+   "schema": "PROJECT_BRAIN_LEARN_OR_READ_EVIDENCE_V1",
+   "sha256": "084bdd9e331b790c23caed358757ff7379e057b95ca72e9aa40c69bcb8176e03",
+   "status": "",
+   "terms": {
+    "20261116": 1,
+    "board": 1,
+    "learn": 1,
+    "read": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
    "id": "research:canonical/verification/LEARN_TO_LEARN_BENCHMARK_20261103_V1.json",
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/LEARN_TO_LEARN_BENCHMARK_20261103_V1.json",
@@ -193026,6 +193044,29 @@
     "state": 1,
     "v1": 2,
     "verify": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "2026-11-16",
+   "id": "research:canonical/verification/READ_FIRST_AND_LEARN_ONLY_FOR_A_NAMED_GAP_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/READ_FIRST_AND_LEARN_ONLY_FOR_A_NAMED_GAP_20261116_V1.json",
+   "schema": "PROJECT_BRAIN_VERIFICATION_RECEIPT_V1",
+   "sha256": "6334eb702ced54eeb390014d4fb626f2a3b88c3fee82058b1c14e34cf1c97f7d",
+   "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
+   "terms": {
+    "20261116": 1,
+    "a_ladder_that_reports_how_well_one_success_generalises_cannot_say_where_learning_has_nothing_to_add_so_acquisition_was_never_gated_on_whether_the_reading_already_determines_the_action": 1,
+    "first": 1,
+    "gap": 1,
+    "learn": 1,
+    "named": 1,
+    "only": 1,
+    "proposed__producer_measured__independent_verification_open": 1,
+    "read": 1,
+    "v1": 1
    }
   },
   {
@@ -239126,6 +239167,39 @@
    }
   },
   {
+   "action_id": "READ_FIRST_AND_LEARN_ONLY_FOR_A_NAMED_GAP_20261116_V1",
+   "capability": false,
+   "date": "2026-11-16",
+   "id": "research:canonical/action_intents/READ_FIRST_AND_LEARN_ONLY_FOR_A_NAMED_GAP_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/READ_FIRST_AND_LEARN_ONLY_FOR_A_NAMED_GAP_20261116_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "105a825ad86b1384c28a1d0fa8a9330338109a9225319b562ed685088a14b5e9",
+   "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
+   "terms": {
+    "20261116": 1,
+    "a_ladder_that_reports_how_well_one_success_generalises_cannot_say_where_learning_has_nothing_to_add_so_acquisition_was_never_gated_on_whether_the_reading_already_determines_the_action": 1,
+    "authority": 1,
+    "build_a_frame__container_plus_identifier_plus_path__so_one_coordinate_change_serves_every_record_shaped_page_instead_of_one_vocabulary_entry_per_app": 1,
+    "first": 1,
+    "frontier": 1,
+    "gap": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "learn": 1,
+    "measured": 1,
+    "named": 1,
+    "none": 1,
+    "one": 1,
+    "only": 1,
+    "proposed__producer_measured__independent_verification_open": 1,
+    "read": 1,
+    "read_first_and_learn_only_for_a_named_gap_20261116_v1": 1,
+    "sandbox": 1,
+    "unchanged": 1,
+    "v1": 1
+   }
+  },
+  {
    "action_id": "READ_THE_ARTIFACT_NOT_THE_BOOKKEEPING_V1_20261031_V1",
    "capability": false,
    "date": "2026-10-31",
@@ -281947,6 +282021,35 @@
     "synthesised": 1,
     "true_on": 1,
     "typed": 1,
+    "v1": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/learn_or_read_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/learn_or_read_v1.py",
+   "sha256": "6993b3edb7081a19642cd232a38bc2e3deab9a666c1daf15f8a6a1ea1ba573da",
+   "summary": "WHEN YOU MUST LEARN, AND WHEN LEARNING CAN ONLY HURT.",
+   "symbol_count": 3,
+   "symbols": [
+    "Decision",
+    "composition_rule",
+    "decide"
+   ],
+   "terms": {
+    "composition_rule": 1,
+    "decide": 1,
+    "decision": 1,
+    "hurt": 1,
+    "learn": 2,
+    "learning": 1,
+    "must": 1,
+    "only": 1,
+    "read": 1,
     "v1": 1
    }
   },

@@ -1,0 +1,111 @@
+{
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "benchmark_or_family_rank_authority": null,
+ "canonical_base_commit": "9d3a37625d71c4551d1437345e2d085549f79ef1",
+ "capability_credit_delta": 0,
+ "causal_blocker": "A_LADDER_THAT_REPORTS_HOW_WELL_ONE_SUCCESS_GENERALISES_CANNOT_SAY_WHERE_LEARNING_HAS_NOTHING_TO_ADD_SO_ACQUISITION_WAS_NEVER_GATED_ON_WHETHER_THE_READING_ALREADY_DETERMINES_THE_ACTION",
+ "claim_under_test": "'After he does them at least once he would learn all of those permanently, so we solve everything on a computer.' The storage half is measured elsewhere in this tree (~60-70% of unseen instances, 0 of the generalising tasks survive an instruction change). The half never measured is whether learning should happen AT ALL on a given task, and that is what decides the architecture.",
+ "corrections": [
+  "The user's sentence is not wrong about storage and it is not the plan: 'learn it once and it is permanent' is true of STORAGE and false of GENERATION, and the decision that matters precedes both -- whether to acquire at all.",
+  "This round did not re-measure one-success generalisation, and must not be read as contradicting it. It puts the arm that has no experience beside it on the same pages for the first time.",
+  "The 21 'demonstrable but reading lost' pages are the only measured case for acquisition, and they are the right target for a policy -- not the 78."
+ ],
+ "date": "2026-11-16",
+ "decision": "MEASURED__AND_THE_ANSWER_REORDERS_THE_PLAN",
+ "external_confirmation_fetched_2026_11_16": {
+  "More Skills, Worse Agents? (arXiv 2605.24050, Sep 2026)": {
+   "finding": "performance degrades as libraries grow -- up to 21 points -- and the cause is skill SHADOWING (selecting the wrong skill more often), not context overhead, which is indistinguishable from zero",
+   "url": "https://awesomepapers.io/ai-agents/papers/2605.24050",
+   "why_it_matters": "the failure is selection, which is exactly what a pre-action READ/LEARN gate is: it is a selection rule that can say 'use nothing'."
+  },
+  "SkillLens (arXiv 2605.23899, Microsoft Research, May 2026)": {
+   "finding": "model-generated skills improve performance in 75% of extractor-target pairings and DEGRADE it in 25% (delta < 0); ALFWorld is the most fragile domain at 47%",
+   "url": "https://arxiv.org/pdf/2605.23899",
+   "why_it_matters": "this is the same effect measured from the other side. Their unit is a skill x target pairing; ours is a page. Both say the default must be NOT to inject, and that the decision has to be made before the policy is used."
+  },
+  "SkillsBench (Li et al. 2026) via arXiv 2605.20023": {
+   "finding": "16 of 84 tasks show NEGATIVE deltas when skills are provided; software engineering has the smallest average gain of any domain (+4.5pp)",
+   "url": "https://arxiv.org/html/2605.20023v1"
+  },
+  "When Continual Learning Moves to Memory (arXiv 2604.27003, Apr 2026)": {
+   "finding": "raw trajectories hinder adaptation, abstract insights are safer to reuse; 'negative transfer concentrates on hard cases -- cross-task retrieval disproportionately harms cases the agent cannot yet solve on its own, while cases it already handles are comparatively robust'",
+   "url": "https://arxiv.org/html/2604.27003v1",
+   "why_it_matters": "this is my measured result in their vocabulary: my 57/78 are the 'comparatively robust' cases and my 21 are the hard ones. It also gives the shape of the fix -- store an ABSTRACT procedure with its applicability condition, never a trace."
+  },
+  "when_should_an_agent_retrieve_instead_of_read (registered, Sep 2026)": {
+   "finding": "retrieval leads only in the zero-interference limit (+0.062 nats) and loses at every interference level containing confusable distractors (down to -1.226)",
+   "why_it_matters": "registers the boundary of the analogy: theirs is text evidence access, ours is policy acquisition. Both refute 'retrieval/learning is unconditionally good'."
+  }
+ },
+ "files": {
+  "canonical/runtime/learn_or_read_v1.py": "6993b3edb7081a19642cd232a38bc2e3deab9a666c1daf15f8a6a1ea1ba573da",
+  "canonical/tests/test_learn_or_read_v1.py": "f521350b0c6dca0d718badfbb0a4d4aac08050c5fa0355faa08d6b36dc25f508",
+  "canonical/tools/learn_or_read_board_v1.py": "f3b338378ea552f18029729e5f57c965053390a38fc0a2ae6d48998c517b2be6",
+  "canonical/verification/LEARN_OR_READ_BOARD_20261116_V1.json": "084bdd9e331b790c23caed358757ff7379e057b95ca72e9aa40c69bcb8176e03"
+ },
+ "generated_utc": "2026-11-16T22:48:04Z",
+ "honest_limits": [
+  "AUTHORITY NONE -- one producer run in one sandbox.",
+  "The ladder's demonstrations came from a search allowed to see the page reward; the reading arm reads none. That asymmetry is why the two are intersected per page rather than compared as rates.",
+  "decide() is a compile-side gate. It does not itself acquire anything, and no acquisition is credited here.",
+  "130 MiniWoB++ pages at one seed with a 30-action budget. Not a benchmark claim, not a family rank.",
+  "The 23 READ-but-lost pages show the gate is necessary and not sufficient: it says where learning may help, not that the reading is complete."
+ ],
+ "laws": [
+  "A ladder over arms that all assume a demonstration was found cannot say whether a demonstration should be sought.",
+  "On a task the sentence already determines, acquiring a policy adds nothing and makes the agent depend on a procedure instead of the page -- the grounding-displacement failure, measured elsewhere at 59% of gross gain cancelled.",
+  "Where no demonstration is reachable at all, reading still wins: 9 pages a budgeted search never demonstrated are solved from the instruction.",
+  "A gate is only trustworthy if it fails closed and never forbids the acquisition that is needed. This one has 0 false negatives on 130 pages.",
+  "The 2026 literature measured the same effect independently: 25% of skill deployments degrade performance (47% in ALFWorld), and the cause is selection, not context. A default that injects must be replaced by a gate that can say 'use nothing'."
+ ],
+ "measured_effect": {
+  "cells": {
+   "demonstrable_but_reading_lost": 21,
+   "out_of_reach_of_both": 43,
+   "reading_wins_and_demonstrable": 57,
+   "reading_wins_where_nothing_was_demonstrable": 9
+  },
+  "composition_rule": {
+   "LEARN_pages": 41,
+   "LEARN_pages_reading_won": 0,
+   "LEARN_rate": 0.0,
+   "READ_pages": 89,
+   "READ_pages_reading_won": 66,
+   "READ_rate": 0.742,
+   "false_negatives": "0 -- the rule never forbids learning on a page the reading loses"
+  },
+  "denominator_warning": "the ladder's 78 demonstrated pages were reached by a search that could SEE the page's reward. A deployed agent is not given that. The reading arm never reads a reward, which is why the two are reported per page and intersected rather than compared as rates.",
+  "instrument": "canonical/tools/learn_or_read_board_v1.py",
+  "pages": 130,
+  "pages_a_search_demonstrated": 78,
+  "reading_arm_won": 66,
+  "substrate": "chromium, miniwob-plusplus 130 pages, seed 1060, 30-action budget, zero experience for the reading arm",
+  "the_two_facts": {
+   "learning_had_nothing_to_add_on": 57,
+   "named_gaps_a_policy_may_be_acquired_for": 21,
+   "of_which_share_of_demonstrable": 0.7308,
+   "reading_beat_trying_on": 9
+  }
+ },
+ "receipt_id": "READ_FIRST_AND_LEARN_ONLY_FOR_A_NAMED_GAP_20261116_V1",
+ "schema": "PROJECT_BRAIN_VERIFICATION_RECEIPT_V1",
+ "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
+ "terminal_credit_delta": 0,
+ "tests": {
+  "count": 9,
+  "file": "canonical/tests/test_learn_or_read_v1.py",
+  "result": "88 passed across the six instruction-path suites"
+ },
+ "the_wrong_answer_this_replaces": "Every one-success number in this tree was obtained by exploring until the page's own reward fired, so the ladder could only report 'how well does one success generalise'. It could not report that on 73% of the pages it can reach at all, an arm with NO experience already wins -- because that arm was never on the same board.",
+ "verification": {
+  "how_reproduced": [
+   "python3 -m canonical.tools.learn_or_read_board_v1 --html-dir <miniwob>/html --nodes <puppeteer> --seed 1060 --decide",
+   "python3 -m pytest canonical/tests/test_learn_or_read_v1.py -q"
+  ]
+ },
+ "what_was_built": [
+  "canonical/runtime/learn_or_read_v1.py -- decide(instruction, observation) BEFORE any action: READ forbids acquisition, LEARN names the gap",
+  "canonical/tools/learn_or_read_board_v1.py -- runs the zero-experience arm and intersects it per page with the recorded ladder, refusing if the denominators disagree",
+  "canonical/tests/test_learn_or_read_v1.py -- 9 tests, including the safety property that the gate never says READ on a page the reading loses"
+ ]
+}
