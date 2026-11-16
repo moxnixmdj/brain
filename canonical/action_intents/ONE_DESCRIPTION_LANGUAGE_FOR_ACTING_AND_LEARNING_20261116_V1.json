@@ -5,7 +5,7 @@
  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
  "agent_orientation": {
   "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
-  "contract_sha256": "ae9e0cdb841a755a714f57b5ba40eed511e50a621b9f83f3040f03cc0b77c865",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
   "conversation_memory_is_authority": false,
   "incremental_spend_usd": 0,
   "independent_verification_completed": false,
