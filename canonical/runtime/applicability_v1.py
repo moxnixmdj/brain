@@ -26,8 +26,13 @@ the grammar and not about the world. A caller may only withhold a plan on IDENTI
 
 COST. Candidate requirements are subsets of the facts present in EVERY success -- a fact absent
 from any success cannot be necessary. That is candidate elimination, and it is usually way below
-the 2^n of enumerating every conjunction. The enumeration is explicitly bounded and reports
-BOUNDED rather than silently truncating.
+the 2^n of enumerating every conjunction. Up to `max_candidate_facts` the space is enumerated
+exactly as before. Beyond the cap the learner no longer refuses: `count_survivors` decides the
+same version space by inclusion-exclusion over the FAILURE rows (2^|failures| terms instead of
+2^|facts|), the least-demanding survivor is found by search in size order, and the list is
+materialised only when it is affordable. `BOUNDED` remains, but now only when neither axis fits
+the stated budgets -- a refusal about compute, never about a case that is decidable. The
+certificate (`insufficiency_witness`) and this learner agree on every case both can reach.
 
 Authority NONE. Pure function of the evidence handed to it. Zero model dependency, $0.
 """
@@ -75,6 +80,9 @@ class Boundary:
     reason: str
     #: Every requirement still consistent with the evidence, each sorted. Empty unless the
     #: evidence supports at least one. Query selection needs the whole set, not just its edges.
+    #: Past the enumeration cap the COUNT stays exact (`survivor_count`, inclusion-extraction
+    #: over the failure rows) while this field lists only when the list fits `LIST_MAX`; at
+    #: scale the selector splits by arithmetic on the count, never by walking this tuple.
     survivors: tuple[tuple[str, ...], ...] = ()
 
     @property
@@ -293,6 +301,145 @@ def insufficiency_witness(evidence: Sequence[tuple[Iterable[str], bool]]) -> dic
     return None
 
 
+# --------------------------------------------------------------------------- exact arithmetic
+# THE COMBINATORICS REPAIR, NAMED BY THE WALL. `THE_WALL_IS_IN_THE_VOCABULARY_AND_IT_CAN_NOW_BE_
+# PROVED_20261113_V1.md` measured that closing the vocabulary removes the separation obstruction
+# and moves the obstacle to 2^23 = 8,388,608 hypotheses against a cap of 12, then stopped rather
+# than ship "add negation" as the end of it. The repair it named: decide by arithmetic over the
+# evidence instead of enumerating the space. A survivor is a subset C of A (the facts every
+# success shares) that is not contained in any failure; writing D_i = A \ F_i, C survives iff C
+# hits every D_i. Counting those by inclusion-exclusion over the D_i costs 2^|failures| terms --
+# and the failure side is exactly what chosen questions keep small.
+IE_MAX_LOG2 = 18
+LIST_MAX = 100_000
+SEARCH_MAX = 1 << 20
+
+
+def _success_intersection(
+    rows: Sequence[tuple[frozenset[str], bool]],
+) -> frozenset[str] | None:
+    """A = the facts present in EVERY success, or None when there is no success to scope from."""
+    successes = [state for state, ok in rows if ok]
+    if not successes:
+        return None
+    allowed = frozenset(successes[0])
+    for state in successes[1:]:
+        allowed = allowed & state
+    return allowed
+
+
+def count_survivors(
+    allowed: Iterable[str],
+    exclusions: Iterable[Iterable[str]],
+) -> int | None:
+    """`|{C ⊆ allowed : C hits every exclusion}|` exactly, or None when the budget is exceeded.
+
+    Inclusion-exclusion over the EXCLUSIONS, not over `allowed`: 2^|exclusions| terms of simple
+    mask arithmetic, independent of how large the fact set is. With no exclusions every subset
+    survives (2^|allowed|), which is the successes-only space the selector needs before any
+    failure has been observed. An empty exclusion makes the count 0 -- that is the certificate's
+    separation-impossible case, reached here by arithmetic rather than by enumeration.
+    """
+    universe = frozenset(allowed)
+    index = {fact: i for i, fact in enumerate(sorted(universe))}
+    masks: list[int] = []
+    for exclusion in exclusions:
+        try:
+            masks.append(sum(1 << index[f] for f in frozenset(exclusion) & universe))
+        except KeyError:  # pragma: no cover -- intersection above makes this unreachable
+            return None
+    if len(masks) > IE_MAX_LOG2:
+        return None
+    total = len(universe)
+    count = 0
+
+    def _walk(i: int, union: int, parity: int) -> None:
+        nonlocal count
+        if i == len(masks):
+            count += parity * (1 << (total - union.bit_count()))
+            return
+        _walk(i + 1, union | masks[i], -parity)
+        _walk(i + 1, union, parity)
+
+    _walk(0, 0, 1)
+    return count
+
+
+def _least_demanding_survivor(
+    allowed: frozenset[str],
+    exclusions: Sequence[frozenset[str]],
+) -> tuple[str, ...] | None:
+    """The lex-first smallest survivor -- `min(sorted, key=len)` -- without listing them all.
+
+    Search in size order over `sorted(allowed)`, so the first hit IS the first minimum-length
+    element of the sorted survivor list. None when the visit budget is exceeded.
+    """
+    ordered = sorted(allowed)
+    visits = 0
+    for size in range(len(ordered) + 1):
+        for combo in itertools.combinations(ordered, size):
+            visits += 1
+            if visits > SEARCH_MAX:
+                return None
+            if all(set(combo) & d for d in exclusions):
+                return tuple(combo)
+    return None  # pragma: no cover -- empty exclusions cannot occur past learn's refusals
+
+
+def _list_survivors(
+    allowed: frozenset[str],
+    exclusions: Sequence[frozenset[str]],
+    limit: int = LIST_MAX,
+) -> list[frozenset[str]] | None:
+    """Every survivor by backtracking, output-sensitively; None when the visit budget is exceeded.
+
+    Prunes a branch the moment some exclusion can no longer be hit by the facts still to come,
+    so the cost tracks the number of survivors found rather than 2^|allowed|.
+    """
+    ordered = sorted(allowed)
+    out: list[frozenset[str]] = []
+    visits = 0
+    visit_cap = limit * 8 + 1024
+
+    def _walk(i: int, chosen: frozenset[str]) -> bool:
+        nonlocal visits
+        visits += 1
+        if visits > visit_cap:
+            return False
+        remaining = ordered[i:]
+        for d in exclusions:
+            if not (chosen & d) and not (set(remaining) & d):
+                return True  # this branch cannot produce a survivor; prune it
+        if i == len(ordered):
+            out.append(chosen)
+            return len(out) <= limit
+        fact = ordered[i]
+        if not _walk(i + 1, chosen | {fact}):
+            return False
+        return _walk(i + 1, chosen)
+
+    if not _walk(0, frozenset()):
+        return None
+    return out
+
+
+def _reduces_identically(keys: Iterable[str]) -> bool:
+    """True when `reduce_requirement` is the identity on every subset of `keys`.
+
+    The arithmetic path counts RAW survivors; `learn` reports DISTINCT ones. When no literal in
+    the space implies another (checked through the sensor's own `implies`, including the
+    representative that maps a fact to its equivalence class), raw and distinct coincide and the
+    count is exact for the reported status. When they do not coincide, the caller lists and
+    reduces instead, or says BOUNDED.
+    """
+    from canonical.runtime.fact_entailment_v1 import implies, reduce_requirement
+
+    items = tuple(sorted(set(keys)))
+    if any(reduce_requirement({f}) != (f,) for f in items):
+        return False
+    return not any(a != b and implies(a, b) for a in items for b in items)
+
+
 def candidate_requirements(
     evidence: Sequence[tuple[Iterable[str], bool]],
     *,
@@ -313,15 +460,24 @@ def candidate_requirements(
     "no requirement".
     """
     rows = [(normalise_state(state), bool(ok)) for state, ok in (evidence or [])]
-    successes = [state for state, ok in rows if ok]
-    if not successes:
+    allowed = _success_intersection(rows)
+    if allowed is None:
         return ()
-    allowed: frozenset[str] = frozenset(successes[0])
-    for state in successes[1:]:
-        allowed = allowed & state
     keys = tuple(sorted(allowed))
     if len(keys) > max_candidate_facts:
-        return ()
+        # Beyond the enumeration cap the space is decided by arithmetic, and the LIST is
+        # materialised only when it is affordable. () remains "cannot choose", never "none".
+        failures = [state for state, ok in rows if not ok]
+        exclusions = [allowed - state for state in failures]
+        count = count_survivors(allowed, exclusions)
+        if count is None or count > LIST_MAX:
+            return ()
+        listed = _list_survivors(allowed, exclusions)
+        if listed is None:
+            return ()
+        from canonical.runtime.fact_entailment_v1 import distinct_requirements
+
+        return distinct_requirements(listed)
     space = VersionSpace([
         conjunction(subset)
         for size in range(len(keys) + 1)
@@ -366,15 +522,94 @@ def learn(
         return _empty(UNDETERMINED, "NO_SUCCESS__NOTHING_TO_SCOPE")
 
     # Candidate elimination: a fact missing from any success cannot be necessary.
-    allowed: frozenset[str] = frozenset(successes[0])
-    for state in successes[1:]:
-        allowed = allowed & state
+    allowed = _success_intersection(rows)
+    if allowed is None:  # pragma: no cover -- the early refusals guarantee a success
+        return _empty(UNDETERMINED, "NO_SUCCESS__NOTHING_TO_SCOPE")
     keys = tuple(sorted(allowed))
+
+    def _finish(reduced: tuple[tuple[str, ...], ...]) -> Boundary:
+        # Count DISTINCT requirements, not spellings. Two survivors can denote the same set of
+        # satisfying worlds: `manifest.json` is decided as "a .json named manifest" and
+        # `structured.json` as "a .json", so the first implies the second and
+        # {manifest, structured} IS {manifest}. Measured: that pair was reported AMBIGUOUS and the
+        # selector reported no reachable state could ever split it -- a permanent fake limit that
+        # withheld `required` even though the evidence already determined it. Reducing by the
+        # sensor's own implications removes the redundant literal without removing any requirement.
+        ordered_survivors = reduced
+        general = tuple(sorted(min(reduced, key=len)))
+        specific = tuple(sorted(max(reduced, key=len)))
+        status = IDENTIFIED if len(reduced) == 1 else AMBIGUOUS
+        return Boundary(
+            schema=SCHEMA,
+            status=status,
+            required=general if status == IDENTIFIED else None,
+            most_general=general,
+            most_specific=specific,
+            survivor_count=len(reduced),
+            successes=len(successes),
+            failures=len(failures),
+            candidate_facts=keys,
+            reason="ONE_CONSISTENT_REQUIREMENT" if status == IDENTIFIED else "SEVERAL_CONSISTENT_REQUIREMENTS",
+            survivors=ordered_survivors,
+        )
+
     if len(keys) > max_candidate_facts:
-        return _empty(
-            BOUNDED,
-            f"{len(keys)}_CANDIDATE_FACTS_EXCEEDS_{max_candidate_facts}",
-            keys,
+        # BEYOND THE ENUMERATION CAP: the same version space, decided by arithmetic over the
+        # evidence instead of by listing 2^|keys| hypotheses. See `count_survivors`.
+        exclusions = [allowed - state for state in failures]
+        count = count_survivors(allowed, exclusions)
+        if count is None:
+            return _empty(
+                BOUNDED,
+                f"{len(failures)}_FAILURE_ROWS_EXCEED_IE_BUDGET_2^{IE_MAX_LOG2}",
+                keys,
+            )
+        if count == 0:
+            return _empty(
+                INCONSISTENT,
+                "NO_CONJUNCTION_OF_OBSERVED_FACTS_SEPARATES_SUCCESSES_FROM_FAILURES",
+                keys,
+            )
+        if not _reduces_identically(keys):
+            # Raw survivors are not distinct requirements; the count alone cannot decide the
+            # status, so list (output-sensitively) and reduce, or admit the compute refusal.
+            listed = _list_survivors(allowed, exclusions)
+            if listed is None:
+                return _empty(
+                    BOUNDED,
+                    f"CANONICALISATION_ACTIVE_AND_{count}_SURVIVORS_EXCEED_LIST_BUDGET_{LIST_MAX}",
+                    keys,
+                )
+            from canonical.runtime.fact_entailment_v1 import distinct_requirements
+
+            return _finish(distinct_requirements(listed))
+        if count == 1:
+            # A itself survives whenever anything does, so the unique survivor IS A.
+            return _finish((tuple(sorted(allowed)),))
+        general_survivor = _least_demanding_survivor(allowed, exclusions)
+        if general_survivor is None:
+            return _empty(
+                BOUNDED,
+                f"LEAST_DEMANDING_SEARCH_EXCEEDS_{SEARCH_MAX}_VISITS",
+                keys,
+            )
+        listed = _list_survivors(allowed, exclusions) if count <= LIST_MAX else None
+        return Boundary(
+            schema=SCHEMA,
+            status=AMBIGUOUS,
+            required=None,
+            most_general=general_survivor,
+            most_specific=tuple(sorted(allowed)),
+            survivor_count=count,
+            successes=len(successes),
+            failures=len(failures),
+            candidate_facts=keys,
+            reason="SEVERAL_CONSISTENT_REQUIREMENTS",
+            # Exact count, listed only when affordable: query selection at this scale goes
+            # through the arithmetic path (`contrast_selection_v1`), not through this field.
+            survivors=(
+                tuple(sorted(tuple(sorted(c)) for c in listed)) if listed is not None else ()
+            ),
         )
 
     hypotheses = [
@@ -395,33 +630,9 @@ def learn(
         )
 
     sets = [as_set(h) for h in alive]
-    # Count DISTINCT requirements, not spellings. Two survivors can denote the same set of
-    # satisfying worlds: `manifest.json` is decided as "a .json named manifest" and
-    # `structured.json` as "a .json", so the first implies the second and
-    # {manifest, structured} IS {manifest}. Measured: that pair was reported AMBIGUOUS and the
-    # selector reported no reachable state could ever split it -- a permanent fake limit that
-    # withheld `required` even though the evidence already determined it. Reducing by the
-    # sensor's own implications removes the redundant literal without removing any requirement.
-    from canonical.runtime.fact_entailment_v1 import distinct_requirements, reduce_requirement
+    from canonical.runtime.fact_entailment_v1 import distinct_requirements
 
-    reduced = distinct_requirements(sets)
-    ordered_survivors = reduced
-    general = tuple(sorted(min(reduced, key=len)))
-    specific = tuple(sorted(max(reduced, key=len)))
-    status = IDENTIFIED if len(reduced) == 1 else AMBIGUOUS
-    return Boundary(
-        schema=SCHEMA,
-        status=status,
-        required=general if status == IDENTIFIED else None,
-        most_general=general,
-        most_specific=specific,
-        survivor_count=len(reduced),
-        successes=len(successes),
-        failures=len(failures),
-        candidate_facts=keys,
-        reason="ONE_CONSISTENT_REQUIREMENT" if status == IDENTIFIED else "SEVERAL_CONSISTENT_REQUIREMENTS",
-        survivors=ordered_survivors,
-    )
+    return _finish(distinct_requirements(sets))
 
 
 def admits(required: Iterable[str], state: Iterable[str] | None) -> bool:

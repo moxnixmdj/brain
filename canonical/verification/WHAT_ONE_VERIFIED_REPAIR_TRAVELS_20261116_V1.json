@@ -1,0 +1,1087 @@
+{
+ "schema": "BRAIN_WHAT_ONE_VERIFIED_REPAIR_TRAVELS_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "model_dependency_count": 0,
+ "external_capability_provider_count": 0,
+ "network_calls_at_run_time": 0,
+ "demonstrations": 24,
+ "rung_1_same_bug": {
+  "applicable": 24,
+  "fired": 80,
+  "survived_examples": 17,
+  "fired_pairs": 0,
+  "transfers": 0,
+  "repaired": 15,
+  "tasks_fired_on": [],
+  "count_tasks_fired_on": 0,
+  "tasks_repaired": [],
+  "reproduces_the_accepted_program": 14
+ },
+ "rung_2_same_bug_renamed": {
+  "applicable": 24,
+  "fired": 80,
+  "survived_examples": 17,
+  "fired_pairs": 0,
+  "transfers": 0,
+  "repaired": 15,
+  "tasks_fired_on": [],
+  "count_tasks_fired_on": 0,
+  "tasks_repaired": [],
+  "reproduces_the_accepted_program": 0
+ },
+ "rung_3_a_different_bug": {
+  "applicable": 24,
+  "fired": 0,
+  "survived_examples": 0,
+  "fired_pairs": 333,
+  "transfers": 11,
+  "repaired": 0,
+  "tasks_fired_on": [
+   "bitcount",
+   "breadth_first_search",
+   "bucketsort",
+   "depth_first_search",
+   "detect_cycle",
+   "find_first_in_sorted",
+   "find_in_sorted",
+   "flatten",
+   "gcd",
+   "get_factors",
+   "hanoi",
+   "is_valid_parenthesization",
+   "kheapsort",
+   "knapsack",
+   "kth",
+   "lcs_length",
+   "levenshtein",
+   "lis",
+   "longest_common_subsequence",
+   "max_sublist_sum",
+   "mergesort",
+   "minimum_spanning_tree",
+   "next_palindrome",
+   "next_permutation",
+   "pascal",
+   "possible_change",
+   "powerset",
+   "quicksort",
+   "rpn_eval",
+   "shortest_path_length",
+   "shortest_path_lengths",
+   "shortest_paths",
+   "shunting_yard",
+   "sieve",
+   "sqrt",
+   "subsequences",
+   "to_base",
+   "topological_ordering",
+   "wrap"
+  ],
+  "count_tasks_fired_on": 39,
+  "tasks_repaired": [
+   "find_first_in_sorted",
+   "find_in_sorted",
+   "mergesort",
+   "next_palindrome",
+   "quicksort"
+  ],
+  "reproduces_the_accepted_program": 0
+ },
+ "cross_demonstration_support": {
+  "templates_from_all_demonstrations": 47,
+  "templates_supported_by_two_or_more_independent_bugs": 5
+ },
+ "rows": [
+  {
+   "task": "bitcount",
+   "examples": 9,
+   "rung_1_same_bug": {
+    "templates": 2,
+    "fired": 1,
+    "survived_examples": 1,
+    "repaired": 1,
+    "reproduces_the_accepted_program": true
+   },
+   "rung_2_same_bug_renamed": {
+    "applicable": true,
+    "fired": 1,
+    "restored": 1,
+    "survived_examples": 1,
+    "repaired": 1
+   },
+   "rung_3_a_different_bug": {
+    "applicable": true,
+    "targets": 40,
+    "fired_on": [],
+    "survived_examples_on": [],
+    "repaired_on": []
+   }
+  },
+  {
+   "task": "bucketsort",
+   "examples": 7,
+   "rung_1_same_bug": {
+    "templates": 2,
+    "fired": 1,
+    "survived_examples": 1,
+    "repaired": 1,
+    "reproduces_the_accepted_program": true
+   },
+   "rung_2_same_bug_renamed": {
+    "applicable": true,
+    "fired": 1,
+    "restored": 1,
+    "survived_examples": 1,
+    "repaired": 1
+   },
+   "rung_3_a_different_bug": {
+    "applicable": true,
+    "targets": 40,
+    "fired_on": [
+     "find_first_in_sorted",
+     "mergesort"
+    ],
+    "survived_examples_on": [],
+    "repaired_on": []
+   }
+  },
+  {
+   "task": "find_first_in_sorted",
+   "examples": 7,
+   "rung_1_same_bug": {
+    "templates": 2,
+    "fired": 6,
+    "survived_examples": 1,
+    "repaired": 1,
+    "reproduces_the_accepted_program": true
+   },
+   "rung_2_same_bug_renamed": {
+    "applicable": true,
+    "fired": 6,
+    "restored": 6,
+    "survived_examples": 1,
+    "repaired": 1
+   },
+   "rung_3_a_different_bug": {
+    "applicable": true,
+    "targets": 40,
+    "fired_on": [
+     "breadth_first_search",
+     "depth_first_search",
+     "detect_cycle",
+     "find_in_sorted",
+     "gcd",
+     "get_factors",
+     "hanoi",
+     "is_valid_parenthesization",
+     "knapsack",
+     "kth",
+     "levenshtein",
+     "lis",
+     "mergesort",
+     "next_palindrome",
+     "pascal",
+     "possible_change",
+     "quicksort",
+     "shortest_path_length",
+     "sqrt",
+     "subsequences",
+     "to_base",
+     "topological_ordering",
+     "wrap"
+    ],
+    "survived_examples_on": [
+     "find_in_sorted",
+     "quicksort"
+    ],
+    "repaired_on": [
+     "find_in_sorted",
+     "quicksort"
+    ]
+   }
+  },
+  {
+   "task": "find_in_sorted",
+   "examples": 7,
+   "rung_1_same_bug": {
+    "templates": 2,
+    "fired": 4,
+    "survived_examples": 1,
+    "repaired": 1,
+    "reproduces_the_accepted_program": true
+   },
+   "rung_2_same_bug_renamed": {
+    "applicable": true,
+    "fired": 4,
+    "restored": 4,
+    "survived_examples": 1,
+    "repaired": 1
+   },
+   "rung_3_a_different_bug": {
+    "applicable": true,
+    "targets": 40,
+    "fired_on": [
+     "breadth_first_search",
+     "depth_first_search",
+     "detect_cycle",
+     "find_first_in_sorted",
+     "gcd",
+     "get_factors",
+     "hanoi",
+     "is_valid_parenthesization",
+     "knapsack",
+     "kth",
+     "levenshtein",
+     "lis",
+     "mergesort",
+     "next_palindrome",
+     "pascal",
+     "possible_change",
+     "quicksort",
+     "shortest_path_length",
+     "sqrt",
+     "subsequences",
+     "to_base",
+     "topological_ordering",
+     "wrap"
+    ],
+    "survived_examples_on": [
+     "find_first_in_sorted",
+     "quicksort"
+    ],
+    "repaired_on": [
+     "find_first_in_sorted",
+     "quicksort"
+    ]
+   }
+  },
+  {
+   "task": "gcd",
+   "examples": 6,
+   "rung_1_same_bug": {
+    "templates": 4,
+    "fired": 3,
+    "survived_examples": 0,
+    "repaired": 0,
+    "reproduces_the_accepted_program": false
+   },
+   "rung_2_same_bug_renamed": {
+    "applicable": true,
+    "fired": 3,
+    "restored": 3,
+    "survived_examples": 0,
+    "repaired": 0
+   },
+   "rung_3_a_different_bug": {
+    "applicable": true,
+    "targets": 40,
+    "fired_on": [
+     "breadth_first_search",
+     "bucketsort",
+     "depth_first_search",
+     "find_first_in_sorted",
+     "find_in_sorted",
+     "flatten",
+     "get_factors",
+     "hanoi",
+     "kheapsort",
+     "knapsack",
+     "kth",
+     "lcs_length",
+     "levenshtein",
+     "lis",
+     "longest_common_subsequence",
+     "max_sublist_sum",
+     "mergesort",
+     "minimum_spanning_tree",
+     "next_palindrome",
+     "next_permutation",
+     "pascal",
+     "possible_change",
+     "powerset",
+     "quicksort",
+     "rpn_eval",
+     "shortest_path_length",
+     "shortest_path_lengths",
+     "shortest_paths",
+     "shunting_yard",
+     "sieve",
+     "sqrt",
+     "subsequences",
+     "topological_ordering",
+     "wrap"
+    ],
+    "survived_examples_on": [],
+    "repaired_on": []
+   }
+  },
+  {
+   "task": "get_factors",
+   "examples": 11,
+   "rung_1_same_bug": {
+    "templates": 6,
+    "fired": 4,
+    "survived_examples": 0,
+    "repaired": 0,
+    "reproduces_the_accepted_program": false
+   },
+   "rung_2_same_bug_renamed": {
+    "applicable": true,
+    "fired": 4,
+    "restored": 4,
+    "survived_examples": 0,
+    "repaired": 0
+   },
+   "rung_3_a_different_bug": {
+    "applicable": true,
+    "targets": 40,
+    "fired_on": [
+     "bitcount",
+     "find_first_in_sorted",
+     "hanoi",
+     "knapsack",
+     "kth",
+     "lcs_length",
+     "levenshtein",
+     "lis",
+     "longest_common_subsequence",
+     "mergesort",
+     "next_palindrome",
+     "next_permutation",
+     "pascal",
+     "possible_change",
+     "shortest_path_length",
+     "shortest_path_lengths",
+     "shortest_paths",
+     "sieve",
+     "subsequences",
+     "wrap"
+    ],
+    "survived_examples_on": [],
+    "repaired_on": []
+   }
+  },
+  {
+   "task": "hanoi",
+   "examples": 8,
+   "rung_1_same_bug": {
+    "templates": 2,
+    "fired": 1,
+    "survived_examples": 0,
+    "repaired": 0,
+    "reproduces_the_accepted_program": false
+   },
+   "rung_2_same_bug_renamed": {
+    "applicable": true,
+    "fired": 1,
+    "restored": 1,
+    "survived_examples": 0,
+    "repaired": 0
+   },
+   "rung_3_a_different_bug": {
+    "applicable": true,
+    "targets": 40,
+    "fired_on": [
+     "knapsack",
+     "lcs_length",
+     "lis",
+     "minimum_spanning_tree",
+     "shortest_path_lengths",
+     "shortest_paths",
+     "wrap"
+    ],
+    "survived_examples_on": [],
+    "repaired_on": []
+   }
+  },
+  {
+   "task": "is_valid_parenthesization",
+   "examples": 3,
+   "rung_1_same_bug": {
+    "templates": 2,
+    "fired": 1,
+    "survived_examples": 1,
+    "repaired": 1,
+    "reproduces_the_accepted_program": true
+   },
+   "rung_2_same_bug_renamed": {
+    "applicable": true,
+    "fired": 1,
+    "restored": 1,
+    "survived_examples": 1,
+    "repaired": 1
+   },
+   "rung_3_a_different_bug": {
+    "applicable": true,
+    "targets": 40,
+    "fired_on": [
+     "breadth_first_search",
+     "depth_first_search",
+     "detect_cycle",
+     "possible_change"
+    ],
+    "survived_examples_on": [],
+    "repaired_on": []
+   }
+  },
+  {
+   "task": "knapsack",
+   "examples": 10,
+   "rung_1_same_bug": {
+    "templates": 2,
+    "fired": 1,
+    "survived_examples": 0,
+    "repaired": 0,
+    "reproduces_the_accepted_program": false
+   },
+   "rung_2_same_bug_renamed": {
+    "applicable": true,
+    "fired": 1,
+    "restored": 1,
+    "survived_examples": 0,
+    "repaired": 0
+   },
+   "rung_3_a_different_bug": {
+    "applicable": true,
+    "targets": 40,
+    "fired_on": [
+     "find_in_sorted",
+     "is_valid_parenthesization",
+     "kth",
+     "next_permutation",
+     "possible_change"
+    ],
+    "survived_examples_on": [],
+    "repaired_on": []
+   }
+  },
+  {
+   "task": "kth",
+   "examples": 7,
+   "rung_1_same_bug": {
+    "templates": 2,
+    "fired": 1,
+    "survived_examples": 1,
+    "repaired": 1,
+    "reproduces_the_accepted_program": true
+   },
+   "rung_2_same_bug_renamed": {
+    "applicable": true,
+    "fired": 1,
+    "restored": 1,
+    "survived_examples": 1,
+    "repaired": 1
+   },
+   "rung_3_a_different_bug": {
+    "applicable": true,
+    "targets": 40,
+    "fired_on": [
+     "quicksort"
+    ],
+    "survived_examples_on": [],
+    "repaired_on": []
+   }
+  },
+  {
+   "task": "lcs_length",
+   "examples": 9,
+   "rung_1_same_bug": {
+    "templates": 2,
+    "fired": 3,
+    "survived_examples": 1,
+    "repaired": 1,
+    "reproduces_the_accepted_program": true
+   },
+   "rung_2_same_bug_renamed": {
+    "applicable": true,
+    "fired": 3,
+    "restored": 3,
+    "survived_examples": 1,
+    "repaired": 1
+   },
+   "rung_3_a_different_bug": {
+    "applicable": true,
+    "targets": 40,
+    "fired_on": [
+     "hanoi",
+     "knapsack",
+     "shortest_path_length",
+     "shortest_path_lengths",
+     "shortest_paths"
+    ],
+    "survived_examples_on": [],
+    "repaired_on": []
+   }
+  },
+  {
+   "task": "levenshtein",
+   "examples": 7,
+   "rung_1_same_bug": {
+    "templates": 2,
+    "fired": 2,
+    "survived_examples": 0,
+    "repaired": 0,
+    "reproduces_the_accepted_program": false
+   },
+   "rung_2_same_bug_renamed": {
+    "applicable": true,
+    "fired": 2,
+    "restored": 2,
+    "survived_examples": 0,
+    "repaired": 0
+   },
+   "rung_3_a_different_bug": {
+    "applicable": true,
+    "targets": 40,
+    "fired_on": [
+     "bitcount",
+     "find_first_in_sorted",
+     "get_factors",
+     "hanoi",
+     "knapsack",
+     "lcs_length",
+     "lis",
+     "next_palindrome",
+     "next_permutation",
+     "pascal",
+     "shortest_paths",
+     "sieve",
+     "subsequences",
+     "wrap"
+    ],
+    "survived_examples_on": [],
+    "repaired_on": []
+   }
+  },
+  {
+   "task": "lis",
+   "examples": 12,
+   "rung_1_same_bug": {
+    "templates": 2,
+    "fired": 1,
+    "survived_examples": 1,
+    "repaired": 1,
+    "reproduces_the_accepted_program": true
+   },
+   "rung_2_same_bug_renamed": {
+    "applicable": true,
+    "fired": 1,
+    "restored": 1,
+    "survived_examples": 1,
+    "repaired": 1
+   },
+   "rung_3_a_different_bug": {
+    "applicable": true,
+    "targets": 40,
+    "fired_on": [],
+    "survived_examples_on": [],
+    "repaired_on": []
+   }
+  },
+  {
+   "task": "longest_common_subsequence",
+   "examples": 10,
+   "rung_1_same_bug": {
+    "templates": 2,
+    "fired": 7,
+    "survived_examples": 0,
+    "repaired": 0,
+    "reproduces_the_accepted_program": false
+   },
+   "rung_2_same_bug_renamed": {
+    "applicable": true,
+    "fired": 7,
+    "restored": 7,
+    "survived_examples": 0,
+    "repaired": 0
+   },
+   "rung_3_a_different_bug": {
+    "applicable": true,
+    "targets": 40,
+    "fired_on": [
+     "breadth_first_search",
+     "bucketsort",
+     "depth_first_search",
+     "find_first_in_sorted",
+     "find_in_sorted",
+     "flatten",
+     "gcd",
+     "get_factors",
+     "hanoi",
+     "kheapsort",
+     "knapsack",
+     "kth",
+     "lcs_length",
+     "levenshtein",
+     "lis",
+     "max_sublist_sum",
+     "mergesort",
+     "minimum_spanning_tree",
+     "next_palindrome",
+     "next_permutation",
+     "pascal",
+     "possible_change",
+     "powerset",
+     "quicksort",
+     "rpn_eval",
+     "shortest_path_length",
+     "shortest_path_lengths",
+     "shortest_paths",
+     "shunting_yard",
+     "sieve",
+     "sqrt",
+     "subsequences",
+     "topological_ordering",
+     "wrap"
+    ],
+    "survived_examples_on": [
+     "mergesort",
+     "next_palindrome"
+    ],
+    "repaired_on": [
+     "mergesort",
+     "next_palindrome"
+    ]
+   }
+  },
+  {
+   "task": "max_sublist_sum",
+   "examples": 6,
+   "rung_1_same_bug": {
+    "templates": 2,
+    "fired": 1,
+    "survived_examples": 1,
+    "repaired": 1,
+    "reproduces_the_accepted_program": true
+   },
+   "rung_2_same_bug_renamed": {
+    "applicable": true,
+    "fired": 1,
+    "restored": 1,
+    "survived_examples": 1,
+    "repaired": 1
+   },
+   "rung_3_a_different_bug": {
+    "applicable": true,
+    "targets": 40,
+    "fired_on": [
+     "bucketsort",
+     "find_first_in_sorted",
+     "find_in_sorted",
+     "kth",
+     "lcs_length",
+     "lis",
+     "mergesort",
+     "next_palindrome",
+     "sqrt",
+     "to_base"
+    ],
+    "survived_examples_on": [],
+    "repaired_on": []
+   }
+  },
+  {
+   "task": "mergesort",
+   "examples": 14,
+   "rung_1_same_bug": {
+    "templates": 2,
+    "fired": 13,
+    "survived_examples": 1,
+    "repaired": 1,
+    "reproduces_the_accepted_program": true
+   },
+   "rung_2_same_bug_renamed": {
+    "applicable": true,
+    "fired": 13,
+    "restored": 13,
+    "survived_examples": 1,
+    "repaired": 1
+   },
+   "rung_3_a_different_bug": {
+    "applicable": true,
+    "targets": 40,
+    "fired_on": [
+     "breadth_first_search",
+     "bucketsort",
+     "depth_first_search",
+     "find_first_in_sorted",
+     "find_in_sorted",
+     "flatten",
+     "gcd",
+     "get_factors",
+     "hanoi",
+     "kheapsort",
+     "knapsack",
+     "kth",
+     "lcs_length",
+     "levenshtein",
+     "lis",
+     "longest_common_subsequence",
+     "max_sublist_sum",
+     "minimum_spanning_tree",
+     "next_palindrome",
+     "next_permutation",
+     "pascal",
+     "possible_change",
+     "powerset",
+     "quicksort",
+     "rpn_eval",
+     "shortest_path_length",
+     "shortest_path_lengths",
+     "shortest_paths",
+     "shunting_yard",
+     "sieve",
+     "sqrt",
+     "subsequences",
+     "topological_ordering",
+     "wrap"
+    ],
+    "survived_examples_on": [
+     "next_palindrome"
+    ],
+    "repaired_on": [
+     "next_palindrome"
+    ]
+   }
+  },
+  {
+   "task": "minimum_spanning_tree",
+   "examples": 0,
+   "rung_1_same_bug": {
+    "templates": 2,
+    "fired": 2,
+    "survived_examples": 2,
+    "repaired": 1,
+    "reproduces_the_accepted_program": false
+   },
+   "rung_2_same_bug_renamed": {
+    "applicable": true,
+    "fired": 2,
+    "restored": 2,
+    "survived_examples": 2,
+    "repaired": 1
+   },
+   "rung_3_a_different_bug": {
+    "applicable": true,
+    "targets": 40,
+    "fired_on": [
+     "find_in_sorted",
+     "mergesort",
+     "shortest_paths"
+    ],
+    "survived_examples_on": [],
+    "repaired_on": []
+   }
+  },
+  {
+   "task": "next_palindrome",
+   "examples": 5,
+   "rung_1_same_bug": {
+    "templates": 2,
+    "fired": 8,
+    "survived_examples": 1,
+    "repaired": 1,
+    "reproduces_the_accepted_program": true
+   },
+   "rung_2_same_bug_renamed": {
+    "applicable": true,
+    "fired": 8,
+    "restored": 8,
+    "survived_examples": 1,
+    "repaired": 1
+   },
+   "rung_3_a_different_bug": {
+    "applicable": true,
+    "targets": 40,
+    "fired_on": [
+     "breadth_first_search",
+     "bucketsort",
+     "depth_first_search",
+     "find_first_in_sorted",
+     "find_in_sorted",
+     "flatten",
+     "gcd",
+     "get_factors",
+     "hanoi",
+     "kheapsort",
+     "knapsack",
+     "kth",
+     "lcs_length",
+     "levenshtein",
+     "lis",
+     "longest_common_subsequence",
+     "max_sublist_sum",
+     "mergesort",
+     "minimum_spanning_tree",
+     "next_permutation",
+     "pascal",
+     "possible_change",
+     "powerset",
+     "quicksort",
+     "rpn_eval",
+     "shortest_path_length",
+     "shortest_path_lengths",
+     "shortest_paths",
+     "shunting_yard",
+     "sieve",
+     "sqrt",
+     "subsequences",
+     "topological_ordering",
+     "wrap"
+    ],
+    "survived_examples_on": [
+     "mergesort"
+    ],
+    "repaired_on": [
+     "mergesort"
+    ]
+   }
+  },
+  {
+   "task": "next_permutation",
+   "examples": 8,
+   "rung_1_same_bug": {
+    "templates": 2,
+    "fired": 4,
+    "survived_examples": 0,
+    "repaired": 0,
+    "reproduces_the_accepted_program": false
+   },
+   "rung_2_same_bug_renamed": {
+    "applicable": true,
+    "fired": 4,
+    "restored": 4,
+    "survived_examples": 0,
+    "repaired": 0
+   },
+   "rung_3_a_different_bug": {
+    "applicable": true,
+    "targets": 40,
+    "fired_on": [
+     "find_first_in_sorted",
+     "find_in_sorted",
+     "lcs_length",
+     "levenshtein",
+     "lis",
+     "longest_common_subsequence",
+     "mergesort",
+     "next_palindrome",
+     "shunting_yard"
+    ],
+    "survived_examples_on": [],
+    "repaired_on": []
+   }
+  },
+  {
+   "task": "pascal",
+   "examples": 5,
+   "rung_1_same_bug": {
+    "templates": 2,
+    "fired": 5,
+    "survived_examples": 1,
+    "repaired": 1,
+    "reproduces_the_accepted_program": true
+   },
+   "rung_2_same_bug_renamed": {
+    "applicable": true,
+    "fired": 5,
+    "restored": 5,
+    "survived_examples": 1,
+    "repaired": 1
+   },
+   "rung_3_a_different_bug": {
+    "applicable": true,
+    "targets": 40,
+    "fired_on": [
+     "breadth_first_search",
+     "bucketsort",
+     "depth_first_search",
+     "find_first_in_sorted",
+     "find_in_sorted",
+     "flatten",
+     "gcd",
+     "get_factors",
+     "hanoi",
+     "kheapsort",
+     "knapsack",
+     "kth",
+     "lcs_length",
+     "levenshtein",
+     "lis",
+     "longest_common_subsequence",
+     "max_sublist_sum",
+     "mergesort",
+     "minimum_spanning_tree",
+     "next_palindrome",
+     "next_permutation",
+     "possible_change",
+     "powerset",
+     "quicksort",
+     "rpn_eval",
+     "shortest_path_length",
+     "shortest_path_lengths",
+     "shortest_paths",
+     "shunting_yard",
+     "sieve",
+     "sqrt",
+     "subsequences",
+     "topological_ordering",
+     "wrap"
+    ],
+    "survived_examples_on": [
+     "find_in_sorted"
+    ],
+    "repaired_on": [
+     "find_in_sorted"
+    ]
+   }
+  },
+  {
+   "task": "quicksort",
+   "examples": 13,
+   "rung_1_same_bug": {
+    "templates": 2,
+    "fired": 4,
+    "survived_examples": 2,
+    "repaired": 1,
+    "reproduces_the_accepted_program": true
+   },
+   "rung_2_same_bug_renamed": {
+    "applicable": true,
+    "fired": 4,
+    "restored": 4,
+    "survived_examples": 2,
+    "repaired": 1
+   },
+   "rung_3_a_different_bug": {
+    "applicable": true,
+    "targets": 40,
+    "fired_on": [
+     "breadth_first_search",
+     "depth_first_search",
+     "detect_cycle",
+     "find_first_in_sorted",
+     "find_in_sorted",
+     "gcd",
+     "get_factors",
+     "hanoi",
+     "is_valid_parenthesization",
+     "knapsack",
+     "kth",
+     "levenshtein",
+     "lis",
+     "mergesort",
+     "next_palindrome",
+     "pascal",
+     "possible_change",
+     "shortest_path_length",
+     "sqrt",
+     "subsequences",
+     "to_base",
+     "topological_ordering",
+     "wrap"
+    ],
+    "survived_examples_on": [
+     "find_first_in_sorted",
+     "find_in_sorted"
+    ],
+    "repaired_on": [
+     "find_first_in_sorted",
+     "find_in_sorted"
+    ]
+   }
+  },
+  {
+   "task": "rpn_eval",
+   "examples": 6,
+   "rung_1_same_bug": {
+    "templates": 4,
+    "fired": 4,
+    "survived_examples": 0,
+    "repaired": 0,
+    "reproduces_the_accepted_program": false
+   },
+   "rung_2_same_bug_renamed": {
+    "applicable": true,
+    "fired": 4,
+    "restored": 4,
+    "survived_examples": 0,
+    "repaired": 0
+   },
+   "rung_3_a_different_bug": {
+    "applicable": true,
+    "targets": 40,
+    "fired_on": [
+     "depth_first_search",
+     "find_in_sorted",
+     "lis",
+     "minimum_spanning_tree",
+     "shortest_path_length"
+    ],
+    "survived_examples_on": [],
+    "repaired_on": []
+   }
+  },
+  {
+   "task": "sieve",
+   "examples": 6,
+   "rung_1_same_bug": {
+    "templates": 2,
+    "fired": 1,
+    "survived_examples": 1,
+    "repaired": 1,
+    "reproduces_the_accepted_program": true
+   },
+   "rung_2_same_bug_renamed": {
+    "applicable": true,
+    "fired": 1,
+    "restored": 1,
+    "survived_examples": 1,
+    "repaired": 1
+   },
+   "rung_3_a_different_bug": {
+    "applicable": true,
+    "targets": 40,
+    "fired_on": [
+     "depth_first_search"
+    ],
+    "survived_examples_on": [],
+    "repaired_on": []
+   }
+  },
+  {
+   "task": "to_base",
+   "examples": 10,
+   "rung_1_same_bug": {
+    "templates": 4,
+    "fired": 2,
+    "survived_examples": 0,
+    "repaired": 0,
+    "reproduces_the_accepted_program": false
+   },
+   "rung_2_same_bug_renamed": {
+    "applicable": true,
+    "fired": 2,
+    "restored": 2,
+    "survived_examples": 0,
+    "repaired": 0
+   },
+   "rung_3_a_different_bug": {
+    "applicable": true,
+    "targets": 40,
+    "fired_on": [
+     "find_first_in_sorted",
+     "lis",
+     "pascal",
+     "possible_change",
+     "quicksort",
+     "sieve",
+     "sqrt",
+     "subsequences"
+    ],
+    "survived_examples_on": [],
+    "repaired_on": []
+   }
+  }
+ ]
+}

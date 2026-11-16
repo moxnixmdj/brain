@@ -1,0 +1,135 @@
+{
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "benchmark_or_family_rank_authority": null,
+ "canonical_base_commit": "51e0e8491938c17020c136857e0aed613dcf40d0",
+ "capability_credit_delta": 0,
+ "claim_under_test": "An instruction arm with no experience, no search, no model and no parameters can be moved off two failures the refusal census could not see, because they are not vocabulary gaps: (a) the page grades on a press the sentence never names, and (b) the sentence names a COORDINATE inside a widget rather than a control. Neither is fixed by adding words to a compiler.",
+ "corrections": [
+  "The 'drag pages dispatch without registering reward' note was wrong about the cause. drag-box moved the box to exactly the right place ([94,86,28,28] inside [73,75,58,58]) and had no way to say 'Submit'; drag-cube is won by a bare Submit because its layout starts correct.",
+  "The label LABEL_NOT_ON_THE_PAGE was true of the OBSERVATION and false of the page on all three click-tab-2 pages: `Quis` was in the third tab's panel, reachable, and the arm had no name for a tab.",
+  "The 11/10/2016 pages did NOT need a locale. The picker writes back `12/05/2016` when a day is chosen, and pressing a day above 12 makes that literal unambiguous -- the page declares its own field order.",
+  "The first cut of the picker keyed three case-variants of the same word into one list, counted one December as two, and answered AMBIGUOUS on the first real page.",
+  "The existing test test_executes_only_what_it_fully_understood caught the implied ending firing on a HALF-understood instruction and pressing Submit over unfinished work. The arm was fixed, not the test."
+ ],
+ "date": "2026-11-16",
+ "decision": "BUILT_AND_MEASURED",
+ "files": {
+  "canonical/runtime/implied_ending_v1.py": "5f7200727b198811a35db80b9207e11df671b18d1560ef18a1529f6af7551207",
+  "canonical/runtime/instruction_contract_v1.py": "0d7fd126ad015fecacab3ab7a896733adf3b6ce2cfb1623031dd2060a19c9ac7",
+  "canonical/runtime/instruction_policy_v1.py": "1af71dc0fcfb156bef118ab91986d0b5a47b01e94732c5dd2cb0718a8839ae10",
+  "canonical/runtime/picker_answer_v1.py": "3286f8113c9855aece0127a5c78b2e4a55af20c47882122167b66a4910a11451",
+  "canonical/tests/test_implied_ending_and_picker_v1.py": "fc78775e54ec8d25c800a4c94a2d8f154fc416043843af33ba979a08f9b43eb1",
+  "canonical/tools/miniwob_contract_arm_arm_v1.py": "be5d4d786a6a891459f2ee08a117d50cc246d214a2ba0f8aab27ebaf8508bb31"
+ },
+ "honest_limits": [
+  "AUTHORITY NONE -- one producer run in one sandbox, not independent verification.",
+  "66/130 is these 130 pages at three seeds with a 30-action budget. Not a benchmark claim, not a family rank.",
+  "The 17 pages that are executed-and-lost still fail; the 8 HALF_UNDERSTOOD pages name a part of the sentence that is still not compiled. Neither is fixed by this round.",
+  "The picker understands dates and times only. It is not a general widget reader, and it refuses rather than guesses when the page shows a part twice.",
+  "Nothing here is memory: the ending and the picker answer are derived from (sentence, observation) on every look, and nothing is carried between pages."
+ ],
+ "laws": [
+  "A census that reports why the arm DECLINED and not why it STOPPED measures its own optimism.",
+  "An action is finished when the page says so, not when the sentence does. The sentence is evidence about the page, not a complete specification of it.",
+  "Two legal readings is not ambiguity to be resolved by convention; it is a question the page can be asked.",
+  "Half an instruction earns no ending: delivering work that was never done, confidently, is the trace a wrong answer makes.",
+  "An index is the bridge's name for an element and a list position is where it sits. They agree until they do not."
+ ],
+ "measured_effect": {
+  "experience": "none",
+  "external_model": "none",
+  "instrument": "canonical/tools/miniwob_contract_arm_arm_v1.py",
+  "pages_gained": [
+   "choose-date",
+   "choose-date-easy",
+   "choose-date-medium",
+   "choose-date-nodelay",
+   "click-collapsible-2",
+   "click-collapsible-2-nodelay",
+   "click-tab-2",
+   "click-tab-2-hard",
+   "click-tab-2-medium",
+   "drag-box",
+   "drag-cube",
+   "drag-shapes",
+   "use-autocomplete",
+   "use-autocomplete-nodelay"
+  ],
+  "parameters": 0,
+  "refusal_census_of_the_remaining_64": {
+   "EXECUTED_AND_LOST": 17,
+   "REFUSED__CONTINUOUS_NO_END_STATE": 3,
+   "REFUSED__FUZZY_NO_DECIDABLE_PREDICATE": 1,
+   "REFUSED__HALF_UNDERSTOOD": 8,
+   "REFUSED__LABEL_NOT_ON_THE_PAGE": 4,
+   "REFUSED__MULTI_APP_STATE_OUTSIDE_OBSERVATION": 1,
+   "REFUSED__NO_CLAUSE_UNDERSTOOD": 10,
+   "REFUSED__SPATIAL_NEEDS_GEOMETRY": 5,
+   "REFUSED__STYLE_NOT_IN_OBSERVATION": 3,
+   "REFUSED__THE_ARM_CANNOT_ACT": 6,
+   "REFUSED__THE_DESCRIPTION_NEEDS_A_DIMENSION_THE_OBSERVATION_LACKS": 3,
+   "REFUSED__THE_RECORD_IS_NOT_IN_THE_OBSERVATION_YET_BUT_IS_REACHABLE": 1,
+   "REFUSED__VISUAL_QUANTITY_NEEDS_PIXELS": 2
+  },
+  "regressions": [],
+  "replication": {
+   "seed_1061": {
+    "after": 56,
+    "before": 47,
+    "delta": 9
+   },
+   "seed_1062": {
+    "after": 57,
+    "before": 49,
+    "delta": 8
+   }
+  },
+  "reward": "read only after the arm stops, and only to record whether it was right",
+  "search": "none",
+  "seed_1060": {
+   "after": 66,
+   "before": 52,
+   "delta": 14,
+   "of_all": 0.5077,
+   "refused": 24
+  },
+  "stopping_state_of_the_78_unsolved_at_baseline": {
+   "BUDGET": 0,
+   "THE_ARM_HAD_NOTHING_LEFT_TO_SAY": 59,
+   "THE_PAGE_FAILED_IT": 19
+  },
+  "substrate": "chromium, Farama-Foundation/miniwob-plusplus, 130 pages, 30-action budget"
+ },
+ "receipt_id": "THE_SENTENCE_DID_NOT_HAVE_TO_SAY_SUBMIT_20261116_V1",
+ "schema": "PROJECT_BRAIN_VERIFICATION_RECEIPT_V1",
+ "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
+ "terminal_credit_delta": 0,
+ "tests": {
+  "alongside": [
+   "test_anchored_frame_v1",
+   "test_instruction_contract_v1",
+   "test_instruction_policy_v1",
+   "test_observable_descriptor_v1"
+  ],
+  "count": 17,
+  "file": "canonical/tests/test_implied_ending_and_picker_v1.py",
+  "result": "114 passed, 4 subtests"
+ },
+ "the_wrong_answer_this_replaces": "The refusal census. It recorded WHY the arm declined and never why a page it had accepted was lost, so 19 pages that the PAGE failed and 59 that the arm stopped short of were both counted as 'not refused' -- a measurement of its own optimism. Recording the episode's stopping state is what exposed both defects within one turn.",
+ "verification": {
+  "how_reproduced": [
+   "python3 -m pytest canonical/tests/test_implied_ending_and_picker_v1.py -q",
+   "python3 -m canonical.tools.miniwob_contract_arm_arm_v1 --html-dir <miniwob>/html --nodes <puppeteer> --seed 1060 --action-budget 30"
+  ]
+ },
+ "what_was_built": [
+  "canonical/runtime/implied_ending_v1.py -- the one control that means 'deliver this', pressed only after every act the sentence named is done",
+  "canonical/runtime/picker_answer_v1.py -- a date read as components; the widget's STATE read (which month is shown) before any part is answered; a probe that makes the page declare its own notation when the sentence is genuinely ambiguous",
+  "SELECT_PICKER operator + _check_select_picker -- judged on the field's own value, never on which elements were pressed",
+  "EXPAND re-finds its headers every page by 'still shut', because indices renumber when a section opens",
+  "_reveal: a tab is a container; the walk steps through sections of an exclusive accordion instead of re-pressing the first",
+  "two ledgers in the arm -- 'pressed at all' and 'pressed THE TARGET' -- because one press of a step retired a FIND clause",
+  "_first_matching(prefer_own_word=True) -- a container whose subtree contains the target is not the target",
+  "_label_at by index, not by list position"
+ ]
+}

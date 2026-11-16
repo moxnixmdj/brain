@@ -316,8 +316,14 @@ def test_uncompilable_instructions_refuse_with_a_reason_that_names_the_gap() -> 
         "Find the item that best describes a feeling.": contract_lib.FUZZY,
         "How many items are shown?": contract_lib.VISUAL_QUANTITY,
         "Click the underlying style toggle.": contract_lib.STYLE_NOT_OBSERVABLE,
-        "Click the button.": contract_lib.NO_CLAUSE,
     }
+    # CORRECTED 2026-11-16 BY MEASUREMENT, again. `"Click the button."` sat in this dictionary as
+    # NO_CLAUSE_UNDERSTOOD, and it was wrong: the page on this very fixture states one element
+    # whose tag is `button`, and `click-test` is that instruction on a real page. A test that
+    # asserts a refusal is a test that can bless a blindness. It now compiles to CLICK_KIND.
+    compiled = contract_lib.compile_contract("Click the button.", observation)
+    assert compiled["refusal"] is None, compiled["refusal"]
+    assert [c["operator"] for c in compiled["clauses"]] == ["CLICK_KIND"], compiled["clauses"]
     for utterance, expected in cases.items():
         compiled = contract_lib.compile_contract(utterance, observation)
         assert compiled["refusal"] == expected, (utterance, compiled["refusal"])
