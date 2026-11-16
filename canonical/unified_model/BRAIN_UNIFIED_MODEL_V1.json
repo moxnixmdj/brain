@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 458,
+  "knowledge_documents": 460,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6864,
+  "research_index_records": 6873,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 449,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "2b943e56549ebb5e7a68fd2e2ed918feb028003f76d54a5726c191bfb367aa54"
+  "value": "324ad3edc743f6412d3a831e76c685692982050163bf854756053036915e384b"
  },
  "engines": [
   {
@@ -61728,6 +61728,86 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 6620,
+   "headings": [
+    "The edit space is the program, not a list — a hypothesis is a rewrite, and a comparison is part of the grammar",
+    "The claim on trial",
+    "What four rounds of measurement did to that claim",
+    "Where the refusals were — measured, not guessed",
+    "What was built and removed in the same turn",
+    "What is real, and what is not",
+    "What this is not"
+   ],
+   "kind": "DOCUMENT",
+   "path": "THE_EDIT_SPACE_IS_THE_PROGRAM_NOT_A_LIST_20261116_V1.md",
+   "sha256": "b076750de58266556ad208deea06168effb550eae2207bf3a6b695b2fee510da",
+   "summary": "**2026-11-16 · branch `arena/b399b1d7-brain` · 40 real published bugs, no model, no weights, no network**",
+   "terms": {
+    "40": 7,
+    "actions": 3,
+    "all": 3,
+    "any": 4,
+    "best": 3,
+    "budget": 3,
+    "built": 3,
+    "cannot": 6,
+    "comparison": 4,
+    "corpus": 3,
+    "coverage": 3,
+    "each": 3,
+    "edit": 4,
+    "edits": 4,
+    "every": 4,
+    "family": 3,
+    "four": 3,
+    "generator": 3,
+    "grammar": 3,
+    "hypothesis": 7,
+    "inside": 3,
+    "instant": 4,
+    "learning": 6,
+    "lesson": 3,
+    "list": 6,
+    "missing": 4,
+    "model": 4,
+    "more": 3,
+    "move": 4,
+    "never": 5,
+    "no": 11,
+    "not": 19,
+    "nothing": 4,
+    "once": 3,
+    "one": 16,
+    "only": 5,
+    "oracle": 3,
+    "own": 4,
+    "part": 4,
+    "plus": 3,
+    "program": 4,
+    "real": 6,
+    "refusals": 6,
+    "rewrite": 7,
+    "run": 4,
+    "search": 4,
+    "so": 5,
+    "space": 9
+   },
+   "title": "The edit space is the program, not a list — a hypothesis is a rewrite, and a comparison is part of the grammar",
+   "title_terms": [
+    "comparison",
+    "edit",
+    "grammar",
+    "hypothesis",
+    "list",
+    "not",
+    "part",
+    "program",
+    "rewrite",
+    "space"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 11263,
    "headings": [
     "The environment is not in the key",
@@ -65989,6 +66069,82 @@
     "means",
     "not",
     "operator"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 18090,
+   "headings": [
+    "What a pass is worth",
+    "1. The two numbers",
+    "2. Why the zero is not a broken instrument",
+    "3. What the zero is made of",
+    "4. What this does to the claim \"do it once and keep it forever\"",
+    "4b. The same question asked of the learned skills themselves",
+    "4c. From a survey to a gate: what the four adversarial arms forced",
+    "5. The three challenges, answered by this measurement rather than by prose",
+    "6. The smartest next moves, ranked, each falsifiable",
+    "7. What is not real here",
+    "Artifacts"
+   ],
+   "kind": "DOCUMENT",
+   "path": "WHAT_A_PASS_IS_WORTH_20261116_V1.md",
+   "sha256": "1bacd8b425d136224f438ecb49fadc1a0f3b4da6976bab0fbf2a507bcf978697",
+   "summary": "**Measured on this repository's own code, its own unedited test files, and its own mutation engine. $0, no model, no network, no synthetic data. Producer-run. `truth.achieved` stays false.**",
+   "terms": {
+    "19": 12,
+    "80.2": 6,
+    "accepted": 8,
+    "admitted": 6,
+    "all": 7,
+    "answer": 7,
+    "arm": 7,
+    "because": 6,
+    "canonical": 10,
+    "claim": 9,
+    "code": 14,
+    "confirmed": 8,
+    "every": 12,
+    "file": 14,
+    "four": 7,
+    "function": 13,
+    "here": 8,
+    "https": 7,
+    "instrument": 10,
+    "law": 21,
+    "learned": 9,
+    "measured": 7,
+    "mutation": 8,
+    "name": 7,
+    "no": 17,
+    "not": 42,
+    "nothing": 10,
+    "one": 16,
+    "only": 9,
+    "own": 12,
+    "pairs": 7,
+    "pass": 14,
+    "real": 19,
+    "same": 11,
+    "sentence": 9,
+    "shape": 7,
+    "skill": 10,
+    "skills": 11,
+    "so": 9,
+    "still": 8,
+    "suite": 24,
+    "test": 11,
+    "tree": 13,
+    "two": 8,
+    "verdict": 17,
+    "worth": 8,
+    "wrong": 12,
+    "zero": 7
+   },
+   "title": "What a pass is worth",
+   "title_terms": [
+    "pass",
+    "worth"
    ]
   },
   {
@@ -80668,10 +80824,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1260,
+  "included_source_count": 1262,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "d05760863893b66723ee6d344ce54c0adb246fae6823bb84ddd1560c086c73d1"
+  "source_tree_digest": "0f32c1b9f774ceadade6fea8418835b6fd1b02831642fa1871524420ec9db2b6"
  },
  "research_index": [
   {
@@ -155175,6 +155331,25 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/COMPARISONS_CLOSE_THE_LAST_MILE_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/COMPARISONS_CLOSE_THE_LAST_MILE_20261116_V1.json",
+   "schema": "BRAIN_GRAMMAR_CLOSED_REPAIR_RECEIPT_V1",
+   "sha256": "f530134ad0370214990eedf134044ab8e2dde89d4b5f2abdfa43398cf88de4b9",
+   "status": "",
+   "terms": {
+    "20261116": 1,
+    "close": 1,
+    "comparisons": 1,
+    "last": 1,
+    "mile": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-07",
    "id": "research:canonical/verification/COMPLETE_SELECTED_ROUTE_COVER_SINGLE_ABC_FRONTIER_WOLFRAM_VERIFY_20261007_V2.json",
    "kind": "RESEARCH_RECORD",
@@ -170378,6 +170553,24 @@
    "action_id": "",
    "capability": false,
    "date": "",
+   "id": "research:canonical/verification/LEARNED_SKILL_VERDICT_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/LEARNED_SKILL_VERDICT_20261116_V1.json",
+   "schema": "PROJECT_BRAIN_LEARNED_SKILL_VERDICT_RECEIPT_20261116_V1",
+   "sha256": "c3d47a18b99b9f38d96c7cd95768e31c51aa495096ac288a68dd76aa89a46ca8",
+   "status": "",
+   "terms": {
+    "20261116": 1,
+    "learned": 1,
+    "skill": 1,
+    "v1": 1,
+    "verdict": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
    "id": "research:canonical/verification/LEARN_TO_LEARN_BENCHMARK_20261103_V1.json",
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/LEARN_TO_LEARN_BENCHMARK_20261103_V1.json",
@@ -179139,6 +179332,24 @@
     "swebench": 1,
     "v1": 1,
     "verified": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/PATCH_VERDICT_AMPLIFICATION_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/PATCH_VERDICT_AMPLIFICATION_20261116_V1.json",
+   "schema": "PROJECT_BRAIN_PATCH_VERDICT_AMPLIFICATION_RECEIPT_20261116_V1",
+   "sha256": "f63d682e5376a760bcc3d116aa3d2023434a066737b484740753eed5e6834907",
+   "status": "",
+   "terms": {
+    "20261116": 1,
+    "amplification": 1,
+    "patch": 1,
+    "v1": 1,
+    "verdict": 1
    }
   },
   {
@@ -192161,6 +192372,25 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/REGION_REWRITES_AND_THE_REFUSAL_AUDIT_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/REGION_REWRITES_AND_THE_REFUSAL_AUDIT_20261116_V1.json",
+   "schema": "BRAIN_GRAMMAR_CLOSED_REPAIR_RECEIPT_V1",
+   "sha256": "4bd5edb2d10ed9a4702c969ab562137fbd043c13c254186a775579e55c0fa1a9",
+   "status": "",
+   "terms": {
+    "20261116": 1,
+    "audit": 1,
+    "refusal": 1,
+    "region": 1,
+    "rewrites": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-04",
    "id": "research:canonical/verification/RELATIVE_ELO_ABSOLUTE_PROOF_NONTRANSPORT_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -197989,6 +198219,25 @@
     "specification": 1,
     "structure": 1,
     "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/SPECIFICATION_FROM_STRUCTURE_20261116_V2_REDUCTION_FIXED.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/SPECIFICATION_FROM_STRUCTURE_20261116_V2_REDUCTION_FIXED.json",
+   "schema": "PROJECT_BRAIN_SPECIFICATION_FROM_STRUCTURE_RECEIPT_20261116_V2",
+   "sha256": "d601601fa5e9a1ea0604c5d757caad4149e21783236864d3924fd39ecd8238c9",
+   "status": "",
+   "terms": {
+    "20261116": 1,
+    "fixed": 1,
+    "reduction": 1,
+    "specification": 1,
+    "structure": 1,
+    "v2": 1
    }
   },
   {
@@ -207560,6 +207809,26 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/THE_EDIT_SPACE_IS_THE_PROGRAM_NOT_A_LIST_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/THE_EDIT_SPACE_IS_THE_PROGRAM_NOT_A_LIST_20261116_V1.json",
+   "schema": "BRAIN_GRAMMAR_CLOSED_REPAIR_RECEIPT_V1",
+   "sha256": "5d4bb083e8a386c1443a8b90962d9922e5445d1806a19bd964e23456ba0d4fe2",
+   "status": "",
+   "terms": {
+    "20261116": 1,
+    "edit": 1,
+    "list": 1,
+    "not": 1,
+    "program": 1,
+    "space": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-10",
    "id": "research:canonical/verification/TLAC_MREL_IDENTITY_DISCRIMINATOR_VERIFY_20261010_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -210862,6 +211131,24 @@
     "showing": 1,
     "trusted": 1,
     "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/WHERE_THE_REFUSALS_ACTUALLY_WERE_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/WHERE_THE_REFUSALS_ACTUALLY_WERE_20261116_V1.json",
+   "schema": "BRAIN_REPAIR_SPACE_AUDIT_V1",
+   "sha256": "a3fc2357b77fd1fb18d2141c854728247c18773e02a72f0a500b875d91cf7fd4",
+   "status": "",
+   "terms": {
+    "20261116": 1,
+    "actually": 1,
+    "refusals": 1,
+    "v1": 1,
+    "were": 1
    }
   },
   {
@@ -239872,6 +240159,51 @@
    }
   },
   {
+   "action_id": "THE_EDIT_SPACE_IS_THE_PROGRAM_NOT_A_LIST_20261116_V1",
+   "capability": false,
+   "date": "2026-11-16",
+   "id": "research:canonical/action_intents/THE_EDIT_SPACE_IS_THE_PROGRAM_NOT_A_LIST_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/THE_EDIT_SPACE_IS_THE_PROGRAM_NOT_A_LIST_20261116_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "0fa2f9dd1828f43ccd221cd7ac7c8dd4c7d413fdf7ebd34301ec06affc4680ce",
+   "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
+   "terms": {
+    "20261116": 1,
+    "atom": 1,
+    "becomes": 1,
+    "being": 1,
+    "composition": 1,
+    "costs": 1,
+    "counts": 1,
+    "edit": 1,
+    "express": 1,
+    "fixes": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "generated": 1,
+    "hypothesis": 1,
+    "insertion": 1,
+    "less": 1,
+    "list": 1,
+    "node": 1,
+    "not": 2,
+    "one": 1,
+    "permutation": 1,
+    "program": 1,
+    "proposed__producer_measured__independent_verification_open": 1,
+    "provably": 1,
+    "quarter": 1,
+    "reaches": 1,
+    "region": 1,
+    "rewrite": 1,
+    "search": 1,
+    "shape": 1,
+    "space": 2,
+    "statement": 1,
+    "stops": 1
+   }
+  },
+  {
    "action_id": "THE_EVERYDAY_COMMANDS_ARE_PINNED_BY_A_SUITE_NOT_A_PROBE_V1_20261024_V1",
    "capability": false,
    "date": "2026-10-25",
@@ -242778,6 +243110,51 @@
     "operator": 1,
     "v1": 1,
     "what_an_operator_means_is_a_computation_not_a_list_20261112_v1": 1
+   }
+  },
+  {
+   "action_id": "WHAT_A_PASS_IS_WORTH_20261116_V1",
+   "capability": false,
+   "date": "2026-11-16",
+   "id": "research:canonical/action_intents/WHAT_A_PASS_IS_WORTH_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/WHAT_A_PASS_IS_WORTH_20261116_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "da6357845e5890c887a43a881eee1fa761500ff42c811d70ecd6821556d440e9",
+   "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
+   "terms": {
+    "20261116": 1,
+    "added": 1,
+    "aimed": 1,
+    "assertions": 1,
+    "code": 1,
+    "exactly": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "instead": 1,
+    "laws": 1,
+    "means": 1,
+    "measure_the_verdict_instead_of_arguing_it_one_gate_is_the_real_unedited_test_suite_the_other_is_a_law_confirmed_on_the_pristine_module_and_every_arm_is_reported": 1,
+    "measured": 1,
+    "method-level": 1,
+    "more": 1,
+    "names": 1,
+    "pass": 1,
+    "proposed__producer_measured__independent_verification_open": 1,
+    "real": 2,
+    "relations": 2,
+    "shape-derived": 1,
+    "suite": 1,
+    "taken": 1,
+    "the_tree_could_not_say_what_a_passing_test_suite_is_worth_and_assumed_that_a_confirmed_law_would_add_on_top_of_it__measured_on_16_own_suites_the_suite_rejected_77_of_96_behaviour_altering_candidates_and_a_law_confirmed_on_the_pristine_module_rejected_zero_of_the_19_it_accepted_even_though_the_law_was_pointed_at_the_mutated_function_in_all_19": 1,
+    "top": 1,
+    "v1": 1,
+    "value": 1,
+    "verifier": 1,
+    "vocabulary": 1,
+    "what_a_pass_is_worth_20261116_v1": 1,
+    "work": 1,
+    "worth": 1,
+    "zero": 1
    }
   },
   {
