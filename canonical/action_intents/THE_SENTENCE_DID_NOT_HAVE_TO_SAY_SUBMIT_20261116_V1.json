@@ -1,7 +1,7 @@
 {
  "action_id": "THE_SENTENCE_DID_NOT_HAVE_TO_SAY_SUBMIT_20261116_V1",
  "action_intent_id": "THE_SENTENCE_DID_NOT_HAVE_TO_SAY_SUBMIT_20261116_V1",
- "action_kind": "CAPABILITY_ROUND",
+ "action_kind": "REAL_CAPABILITY_ACQUISITION",
  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
  "agent_orientation": {
   "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
@@ -50,7 +50,7 @@
  "causal_blocker": "THE_PAGE_GRADES_ON_A_PRESS_AND_A_COORDINATE_THE_SENTENCE_NEVER_NAMES__SO_THE_ARM_THAT_UNDERSTOOD_EVERY_WORD_STOPPED_ONE_UNSTATED_ACT_SHORT_AND_REPORTED_IT_ONLY_AS_NOT_REFUSED",
  "date": "2026-11-16",
  "expected_parent_change": "the instruction arm moves from 52 to 66 of 130 real pages at seed 1060, and 47->56, 49->57 at two further seeds, with zero regressions; no parameter is added and no reward is read",
- "expected_parent_frontier_change": "frontier unchanged: measured in one sandbox, AUTHORITY NONE",
+ "expected_parent_frontier_change": "66 of 130 real pages solved from the instruction alone (from 52), replicated 47->56 and 49->57 at two further seeds, zero regressions; no parameter added and no reward read",
  "explicit_user_authorization": [
   "Is this true, or are there things that are wrong? What is real and what is not, and what are the smartest things we can do?",
   "Why can't we just give our model the most advanced coding actions and let him experience them once and then he will learn them?",
@@ -117,7 +117,7 @@
  ],
  "probe_specific": false,
  "recursive_obs": {
-  "canonical_base_commit": "01b28004754030ea17fa5b73f164d84cab4a5cc9",
+  "canonical_base_commit": "66c90b85b78e46080be4c49f8dced04293826278",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "one vocabulary entry per application",
@@ -127,7 +127,7 @@
    "matching a control by class prefix",
    "compiling a sentence's value once, at time zero"
   ],
-  "expected_parent_level_state_change": "9 more real pages solved with zero regression; the MULTI_APP class reduced from 12 pages to 1; and the census corrected so that an arm which cannot act can no longer be counted as quiet.",
+  "expected_parent_level_state_change": "66 of 130 real pages solved from the instruction alone (from 52), replicated 47->56 and 49->57 at two further seeds, zero regressions; no parameter added and no reward read",
   "iteration_limit": 1,
   "obs_blocker": {
    "delete_bypass_substitute_options": [
