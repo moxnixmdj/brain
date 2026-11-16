@@ -40,14 +40,14 @@
  },
  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A_REPAIR_THAT_PASSES_THE_TESTS_IS_NOT_AN_IDENTIFIED_REPAIR__CANDIDATES_THAT_PASS_THE_SAME_TESTS_DISAGREE__AND_SELF_CONSISTENCY_CANNOT_CHOOSE__MAJORITY_VOTE_WAS_WRONG_3_TIMES_IN_5__THE_CHOICE_NEEDS_A_LABELLED_ANSWER_TO_AN_INPUT_SOMEONE_CHOSE",
- "canonical_base_commit": "ac1e1f44b5",
+ "canonical_base_commit": "ac1e1f44b513f1e8a05aaaa1c38ac079a8fad1b3",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
  "causal_blocker": "A_REPAIR_THAT_PASSES_THE_TESTS_IS_NOT_AN_IDENTIFIED_REPAIR__CANDIDATES_THAT_PASS_THE_SAME_TESTS_DISAGREE__AND_SELF_CONSISTENCY_CANNOT_CHOOSE__MAJORITY_VOTE_WAS_WRONG_3_TIMES_IN_5__THE_CHOICE_NEEDS_A_LABELLED_ANSWER_TO_AN_INPUT_SOMEONE_CHOSE",
  "date": "2026-11-16",
  "expected_parent_change": "Whether the set of edits the system can consider is derived from the program and the goal rather than enumerated by a person",
- "expected_parent_frontier_change": "Identification stops being treated as a property of the learner and becomes a measured per-task split between the space and the observation, with a one-question test for which one binds.",
+ "expected_parent_frontier_change": "Selection stops being a heuristic and becomes an exact computation with a refusal outcome; the gap between 'a test-passing repair' and 'an identified repair' becomes a counted number the roadmap can aim at, instead of an unexamined assumption behind show-it-once.",
  "explicit_user_authorization": [
   "Why can't we just give our model the most advanced coding actions, let it experience them once, and have it learn them? Can't we do this now?",
   "you must think from first principles for everything",
@@ -124,64 +124,67 @@
  ],
  "probe_specific": false,
  "recursive_obs": {
-  "canonical_base_commit": "c423e578373006595098450de89874a3d2fad239",
+  "canonical_base_commit": "ac1e1f44b513f1e8a05aaaa1c38ac079a8fad1b3",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
-   "enumerating more hand-written mutation kinds",
-   "spending more search budget on a basis that cannot contain the answer",
-   "teaching whole files instead of the smallest differing position",
-   "counting a self-taught repair as transfer"
+   "majority vote among candidates that pass the same tests (measured wrong 3 times in 5)",
+   "raising the candidate budget as the answer to a selection failure",
+   "reusing the kernel's minimax discriminator without checking its objective",
+   "a second identifiability kernel duplicating finite_identifiability",
+   "counting a test-passing candidate as a correct repair"
   ],
-  "expected_parent_frontier_change": "The space of edits the system can consider stops being a list an author imagined: a demonstration is folded into a template whose context is its applicability condition, so which fixes are reachable is a measured property of the basis instead of a silent ceiling, and the next capability work is aimed at the rungs the corpus proves are missing.",
-  "expected_parent_level_state_change": "Identification stops being treated as a property of the learner and becomes a measured per-task split between the space and the observation, with a one-question test for which one binds.",
+  "expected_parent_frontier_change": "The gap between 'a test-passing repair' and 'an identified repair' becomes a counted number the roadmap can aim at, instead of an unexamined assumption behind show-it-once.",
+  "expected_parent_level_state_change": "Selection stops being a heuristic and becomes an exact computation with a refusal outcome; the gap between 'a test-passing repair' and 'an identified repair' becomes a counted number the roadmap can aim at, instead of an unexamined assumption behind show-it-once.",
   "independent_verification_required": true,
   "iteration_limit": 1,
   "obs_blocker": {
    "delete_bypass_substitute_options": [
-    "delete the hand-written list as the definition of the space",
-    "bypass enumeration by folding demonstrations",
-    "substitute the corpus's own tests for any invented notion of correctness"
+    "delete self-consistency as a selection signal",
+    "bypass the chooser where the tests already identify the repair (43 of 51)",
+    "substitute the reference's answer for an invented notion of correctness"
    ],
-   "intrinsic_or_path_specific": "path_specific: the vocabulary ceiling is a design choice and was removed here; the multi-position and insertion rungs, and non-terminating defects, remain open.",
-   "surviving_causal_blocker": "The hypothesis space of edits: identity does not transport across programs, so a lesson must be abstracted past the edit it was learned from."
+   "intrinsic_or_path_specific": "path_specific: the chooser is now measured and built. What remains is the generator -- 46 of 99 scored bugs had no candidate that passed the tests at all, and 3 more had the right behaviour nowhere in the candidate set. No question fixes those.",
+   "surviving_causal_blocker": "Nothing could tell a correct behaviour from a consistent one without a labelled answer to an input it chose. Storage was solved; verification was cheap; the chooser was missing."
   },
   "obs_capability": {
    "capability_work_deleted": [
-    "a second lesson store or admission gate",
-    "another hand-written mutation kind",
-    "a larger search budget on an inexpressible edit"
+    "a second identifiability kernel",
+    "a majority-vote selector (measured wrong 3 times in 5)",
+    "a larger candidate budget as the answer to a selection failure"
    ],
    "existing_inherited_routes_checked": [
-    "verified_skill_crystallizer_v1.anti_unify_code_rule (token-level; no site context)",
-    "python_test_guided_patch_search_v1 mutation list (no ast.AugAssign rule)",
-    "python_iterative_software_repair_loop_v1 (candidate-only, strict progress)",
-    "lesson_localization_v1 (refuses shape changes by design)"
+    "canonical/runtime/finite_identifiability.py (version space and discriminator -- REUSED)",
+    "canonical/runtime/demonstration_version_space_v1.py (same idea, GUI pages only, not source text)",
+    "canonical/swe_kernel/closed_loop_trace_abduction_repair_v1.py (the generator -- REUSED)",
+    "canonical/swe_kernel/lesson_admission_gate_v1.py (gates admission, not selection)",
+    "canonical/tools/identification_cost_in_a_real_space_v1.py (merged the same day; large-space regime)"
    ],
    "external_existing_routes_checked": [
-    "QuixBugs itself, as the corpus and the oracle",
-    "2026 verifier-gated self-improvement literature (the verifier is the gate once a candidate exists)"
+    "2026 fault-localisation placebo study: 4.4% for localised infill vs 10.1% for a blind resample -- more search is not better",
+    "falsification-gated self-evolution (arXiv 2611.14326): a lesson must survive falsification probes before it persists",
+    "SWE-Verifier (arXiv 2610.30284): a cheap verifier is worth most when it is SELECTIVE, not uniform"
    ],
-   "surviving_gap": "An edit basis whose content is folded from demonstrations and whose applicability is a context precondition, so the reachable space is not a list an author imagined."
+   "surviving_gap": "A program-domain adapter over the existing version-space kernel that (a) partitions candidates that already pass the same tests, (b) uses maximum elimination rather than minimax because the oracle is known correct, and (c) carries the UNSEPARATED disposition that says agreement is not evidence."
   },
   "obs_goal": {
    "proxy_goals_deleted": [
-    "a higher repair count reached by loosening what counts as repaired",
-    "counting a self-taught repair as transfer",
-    "treating a longer candidate list as more capability",
-    "quoting a corpus score as a frontier position"
+    "a higher repair count reached by counting a test-passing candidate as correct",
+    "quoting a corpus score as a frontier position",
+    "treating agreement among candidates as evidence",
+    "a larger candidate budget as a substitute for a distinguishing observation"
    ],
-   "real_outcome": "Whether a demonstrated fix can reach an undemonstrated bug becomes a measured property of the edit basis instead of an open question answered by assertion.",
-   "surviving_necessity": "Coding capability is gated on a correct candidate existing at all; no oracle, budget or weight can select a hypothesis the basis cannot build."
+   "real_outcome": "A test-passing repair stops being treated as an identified repair, and the gap is counted per bug rather than argued.",
+   "surviving_necessity": "A generator cannot be improved by any selector, and a selector cannot be improved by any generator; the measurement says which one binds on each bug."
   },
   "obs_inherited_system": {
-   "adjacent_capabilities_absorbed": "None by claim: the existing repair primitive and corpus oracle are reused unchanged; the induced basis adds candidates only and holds no authority.",
-   "downstream_work_to_delete_or_supersede": "Any roadmap step that adds another hand-written mutation kind, or that raises a candidate budget to fix a bug whose edit is not expressible.",
-   "fresh_reuse_plan": "Recompute the ladder and re-run both bases from the receipt's commands; the corpus is public and the answer key is never needed."
+   "adjacent_capabilities_absorbed": "None by claim: finite_identifiability is reused unchanged and the generator is untouched; the selector ranks candidates only and holds no authority.",
+   "downstream_work_to_delete_or_supersede": "Any roadmap step that raises a candidate budget to fix a bug whose failure is selection, and any gate that admits a skill on agreement rather than on a settled question.",
+   "fresh_reuse_plan": "Re-run the harness from the receipt's command; the corpus and the extra inputs are public and the answer key is never used to build the partition."
   },
   "obs_obs": {
    "affected_layers_only_on_revalidation": true,
-   "analysis_steps_deleted_or_cached": "Reused the existing repair loop and patch-search primitive instead of writing a second repairer; the corpus's own test files are used unmodified.",
-   "search_stop_decision": "Stop after the ladder and the 20/20 comparison; do not add template rungs without the measurement that says which rung is missing."
+   "analysis_steps_deleted_or_cached": "Reused the closed-loop generator and the corpus oracle instead of writing a second repairer; the selector reads stored behaviour vectors.",
+   "search_stop_decision": "Stop after the 100-bug measurement and the reconciliation with the large-space measurement; do not enlarge the probe library without the number that says it is the binding term."
   },
   "obs_solution": {
    "deletion_first_order_applied": [
@@ -194,95 +197,98 @@
     "CONFIGURE",
     "INTEGRATE"
    ],
-   "efficiency_mechanism": "Templates prune the space before execution: 224 candidates instead of 5,021 for the same held-out half.",
-   "generality_mechanism": "Anti-unification with shared holes plus a node-type context precondition, so one demonstration yields a rule that fires wherever its precondition literally holds.",
+   "efficiency_mechanism": "The candidate screen prunes before any question is asked: 9 oracle questions settled all 8 splittable bugs across 51.",
+   "generality_mechanism": "The partition and the elimination rule are domain-neutral: they apply to any finite hypothesis set whose behaviours can be observed, not just to program repair.",
    "implementation_still_necessary": true,
-   "losing_routes_reason": "The list edit is a hard zero on real fixes; the budget cannot reach an inexpressible edit; the token rule has no position or context; a model is prohibited producer cognition.",
+   "losing_routes_reason": "Majority vote was measured wrong 3 of 5 times; a bigger budget cannot split survivors that already pass every test; minimax is the wrong objective when the oracle is known correct; a model is prohibited producer cognition.",
    "routes_ranked": [
-    "induce node-level templates from demonstration pairs",
-    "add an AugAssign rule to the hand-written list",
-    "raise the candidate budget",
-    "reuse the token anti-unifier",
-    "ask a model to write the patch"
+    "partition test-passing candidates by behaviour and ask the cheapest discriminating question",
+    "majority vote among candidates (measured: wrong 3 times in 5)",
+    "raise the candidate budget (does not separate survivors)",
+    "reuse the kernel's minimax rule unexamined (correct only when the answer is unknown)",
+    "ask a model to choose (producer cognition, prohibited and zero credit)"
    ],
-   "white_box_harvest_note": "The canonical ladder is recorded in full; the WHITE_BOX_HARVEST step was considered and found empty. No donor model, weight or external artifact was harvested: the mechanism was induced from the corpus's own demonstration pairs and the tree's own repair primitive."
+   "white_box_harvest_note": "No donor model, weight or external artifact was harvested. The mechanism was composed from the tree's own version-space kernel and the same-day measurement of the correct objective."
   },
   "obs_verification": {
    "direct_real_effect_verification_considered": true,
    "existing_oracle_considered": true,
    "oracle_paths": [
-    "canonical/tests/test_induced_edit_basis_v1.py",
-    "canonical/tests/test_quixbugs_measurement_integrity_v1.py",
-    "canonical/verification/WHAT_ONE_DEMONSTRATION_BUYS_20261116_V1.json"
+    "canonical/tests/test_repair_version_space_selection_v1.py (15 mechanism tests)",
+    "canonical/verification/ONE_DEMONSTRATION_IS_NOT_IDENTIFICATION_MEASURE_20261116_V1.json",
+    "HumanEvalFix's own tests, and HumanEval+ inputs the tests never reach (45/51 agree on every one)"
    ],
-   "synthetic_verification_necessity": "The corpus's own published tests are the oracle; unit tests pin only the mechanism and the measurement's integrity. Independent reproduction remains open."
+   "synthetic_verification_necessity": "The corpus's own tests decide every repair and its published fix answers every question; unit tests pin only the mechanism. Independent reproduction remains open."
   },
-  "real_outcome": "Each of the corpus's 40 fixes is assigned the rung of edit space that could express it, the two bases are run end to end on the same 20 held-out bugs, and the next capability work is aimed at the rungs the measurement proves are missing instead of at more candidates.",
-  "required_capability": "Compiling one demonstrated fix into a template that generalizes to holes, and reporting honestly where it fires, where it repairs, and where no candidate can exist at all.",
+  "real_outcome": "Whether a repair that passes the tests IS the repair becomes a measured, per-bug property: the candidates that pass the same tests are partitioned by behaviour on unlabelled inputs, the cheapest discriminating question is asked when one exists, and the system says UNSEPARATED instead of asserting correctness when none does.",
+  "required_capability": "Choosing among hypotheses that are indistinguishable on the evidence already held, and refusing to choose when the observation available cannot separate them.",
   "route_frontier": {
    "challenger_routes": [
     {
      "comparison": {
-      "CAPABILITY_STRENGTH": "one operator class, nothing general",
-      "CORRECTNESS": "lift one bug of forty",
-      "INCREMENTAL_COST": "low",
-      "RELIABILITY": "leaves 26 of 40 untouched",
+      "CAPABILITY_STRENGTH": "none",
+      "CORRECTNESS": "wrong 3 times in 5 disagreements",
+      "INCREMENTAL_COST": "zero",
+      "RELIABILITY": "confidently wrong",
       "VERIFIABILITY": "measured",
-      "WALL_CLOCK": "under a minute"
+      "WALL_CLOCK": "free"
      },
      "evidence": [
-      "bitcount needs ^= -> &=, which the list cannot express: 280 candidates, 0 accepted"
+      "Python/3: 4 of 5 candidates shared the wrong behaviour",
+      "Python/101: 5 of 6 shared the wrong behaviour"
      ],
      "qualification_evidence": [
-      "canonical/verification/WHAT_ONE_DEMONSTRATION_BUYS_20261116_V1.json (ladder: 9 leaf, 18 node, 7 multi, 6 shape)"
+      "canonical/verification/ONE_DEMONSTRATION_IS_NOT_IDENTIFICATION_MEASURE_20261116_V1.json"
      ],
      "qualification_evidence_classes": [
       "DIRECT_PROBE"
      ],
      "resolution": "DISQUALIFIED",
-     "route": "extend the hand-written mutation list with an ast.AugAssign rule and re-run the corpus"
+     "route": "majority vote among candidates that pass the same tests"
     },
     {
      "comparison": {
       "CAPABILITY_STRENGTH": "none",
-      "CORRECTNESS": "no candidate exists to find",
-      "INCREMENTAL_COST": "high",
-      "RELIABILITY": "budget does not change expressibility",
+      "CORRECTNESS": "unchanged",
+      "INCREMENTAL_COST": "budget",
+      "RELIABILITY": "does not change the version space",
       "VERIFIABILITY": "measured",
-      "WALL_CLOCK": "about 25 minutes for 20 tasks"
+      "WALL_CLOCK": "minutes"
      },
      "evidence": [
-      "the control spent 5,021 candidates and repaired 2 of 20; bitcount returns 0 at 280 because the edit is not expressible"
+      "46 of 99 bugs had no candidate pass at all",
+      "a budget cannot split candidates that already pass every test"
      ],
      "qualification_evidence": [
-      "/tmp/qb_holdout_control.jsonl via canonical/verification/WHAT_ONE_DEMONSTRATION_BUYS_20261116_V1.json"
+      "canonical/verification/ONE_DEMONSTRATION_IS_NOT_IDENTIFICATION_MEASURE_20261116_V1.json"
      ],
      "qualification_evidence_classes": [
       "DIRECT_PROBE"
      ],
      "resolution": "DISQUALIFIED",
-     "route": "raise the candidate budget on the existing repair loop"
+     "route": "raise the candidate budget"
     },
     {
      "comparison": {
-      "CAPABILITY_STRENGTH": "cannot express the rung",
-      "CORRECTNESS": "wrong level of representation",
+      "CAPABILITY_STRENGTH": "same",
+      "CORRECTNESS": "same outcomes",
       "INCREMENTAL_COST": "zero",
-      "RELIABILITY": "would silently teach nothing",
-      "VERIFIABILITY": "read, not run",
-      "WALL_CLOCK": "no run needed"
+      "RELIABILITY": "measured",
+      "VERIFIABILITY": "measured",
+      "WALL_CLOCK": "up to 9x more questions at worst"
      },
      "evidence": [
-      "it unifies token snippets and carries no AST position or site context; it cannot express a containment wrap"
+      "minimax is optimal only when the answer is unknown",
+      "here the reference answers, so maximum elimination is correct: 89 vs 112 questions"
      ],
      "qualification_evidence": [
-      "canonical/swe_kernel/verified_skill_crystallizer_v1.py lines 447-456, 470-477"
+      "canonical/verification/IDENTIFICATION_COST_IN_A_REAL_SPACE_20261116_V1.json"
      ],
      "qualification_evidence_classes": [
       "DIRECT_PROBE"
      ],
      "resolution": "DISQUALIFIED",
-     "route": "reuse verified_skill_crystallizer_v1.anti_unify_code_rule as the inducer"
+     "route": "reuse the kernel's minimax discriminator unexamined"
     },
     {
      "comparison": {
@@ -303,31 +309,33 @@
       "OFFICIAL_PRIMARY"
      ],
      "resolution": "DISQUALIFIED",
-     "route": "ask another model to write the patch or the templates"
+     "route": "ask a model to choose the repair"
     },
     {
      "comparison": {
-      "CAPABILITY_STRENGTH": "one real transfer plus a measured ladder",
-      "CORRECTNESS": "verdict is the corpus's own test on a fresh copy",
+      "CAPABILITY_STRENGTH": "one real transfer of the chooser",
+      "CORRECTNESS": "8/8 when it settles, and it refuses otherwise",
       "INCREMENTAL_COST": "zero",
-      "RELIABILITY": "224 candidates, reproducible from the receipt",
-      "VERIFIABILITY": "producer-run, independent reproduction open",
-      "WALL_CLOCK": "177 s for 20 held-out tasks"
+      "RELIABILITY": "15 mechanism tests including the negative one",
+      "VERIFIABILITY": "producer-run; independent reproduction open",
+      "WALL_CLOCK": "about 4 minutes for 51 bugs"
      },
      "evidence": [
-      "1 of 20 held-out bugs repaired by a template taught by a different program (pascal <- find_in_sorted), verified by the corpus's own tests"
+      "8 of 8 settled choices were the reference behaviour",
+      "0 of 47 correct repairs broken",
+      "9 questions across 51 bugs"
      ],
      "qualification_evidence": [
-      "canonical/verification/WHAT_ONE_DEMONSTRATION_BUYS_20261116_V1.json"
+      "canonical/verification/ONE_DEMONSTRATION_IS_NOT_IDENTIFICATION_MEASURE_20261116_V1.json"
      ],
      "qualification_evidence_classes": [
       "DIRECT_PROBE"
      ],
      "resolution": "SELECTED",
-     "route": "SYNTHESIZE_AN_AST_LEVEL_EDIT_INDUCER_THAT_FOLDS_ONE_DEMONSTRATION_PAIR_INTO_A_HOLE_GENERALIZED_TEMPLATE_WITH_A_CONTEXT_PRECONDITION_AND_MEASURES_IT_END_TO_END_ON_A_PUBLIC_BUG_CORPUS"
+     "route": "PARTITION_TEST_PASSING_CANDIDATES_BY_BEHAVIOUR_ASK_THE_CHEAPEST_DISCRIMINATING_QUESTION_AND_REFUSE_WHEN_NONE_EXISTS"
     }
    ],
-   "checked_at_utc": "2026-11-16T15:44:03Z",
+   "checked_at_utc": "2026-11-16T20:30:00Z",
    "comparison_dimensions": [
     "CORRECTNESS",
     "CAPABILITY_STRENGTH",
@@ -337,25 +345,25 @@
     "VERIFIABILITY"
    ],
    "discovery_required": true,
-   "incumbent_route": "extend the hand-written mutation list and raise the candidate budget when a bug does not close",
+   "incumbent_route": "first candidate that passes the tests wins; when several pass, prefer the earliest or the most common",
    "max_age_hours": 24,
-   "negative_search_summary": "Four routes were searched and refused with evidence: a single added mutation kind, more candidate budget, the existing token anti-unifier, and a model-written patch.",
+   "negative_search_summary": "Four routes were refused with evidence: majority vote (wrong 3 of 5), a bigger budget (cannot split passing candidates), an unexamined minimax kernel (wrong objective when the answer is known), and a model chooser (prohibited).",
    "query_families": [
     {
      "intent": "CAPABILITY_VECTOR",
-     "query": "program repair from a single demonstration transfer to unseen bugs 2026"
-    },
-    {
-     "intent": "SUPPLIER_OR_PRODUCT",
-     "query": "QuixBugs bug corpus python programs tests published"
+     "query": "program repair selecting among candidates that pass the same tests 2026"
     },
     {
      "intent": "IMPLEMENTATION_FORM",
-     "query": "anti-unification edit template hole generalization program repair"
+     "query": "version space discrimination maximum elimination oracle known correct"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "HumanEvalFix benchmark python split"
     },
     {
      "intent": "RECENCY_OR_NEW_RELEASE",
-     "query": "2026 automatic program repair vocabulary expressibility limit"
+     "query": "2026 identifying a program from demonstrations information cost"
     }
    ],
    "refresh_triggers": [
@@ -364,15 +372,15 @@
     "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
     "BEFORE_SCARCE_GATE_SPEND"
    ],
-   "selected_route": "SYNTHESIZE_AN_AST_LEVEL_EDIT_INDUCER_THAT_FOLDS_ONE_DEMONSTRATION_PAIR_INTO_A_HOLE_GENERALIZED_TEMPLATE_WITH_A_CONTEXT_PRECONDITION_AND_MEASURES_IT_END_TO_END_ON_A_PUBLIC_BUG_CORPUS",
+   "selected_route": "PARTITION_TEST_PASSING_CANDIDATES_BY_BEHAVIOUR_ASK_THE_CHEAPEST_DISCRIMINATING_QUESTION_AND_REFUSE_WHEN_NONE_EXISTS",
    "selected_route_preflight": {
     "all_required_dependencies_ready": true,
-    "checked_at_utc": "2026-11-16T19:36:54Z",
+    "checked_at_utc": "2026-11-16T20:30:00Z",
     "execution_dependencies": [
      {
-      "dependency": "local Python 3.11 runtime with pytest 9.2.0",
+      "dependency": "local Python 3.11 runtime with pytest",
       "evidence": [
-       "Python 3.11.2 with pytest 9.2.0 re-probed this turn; 8 tests in canonical/tests/test_identification_cost_in_a_real_space_v1.py pass"
+       "Python 3.11.2; 15 mechanism tests pass this session"
       ],
       "evidence_classes": [
        "DIRECT_PROBE"
@@ -385,9 +393,9 @@
       "volatility": "STATIC"
      },
      {
-      "dependency": "jkoppel/QuixBugs checkout (python_programs, python_testcases, json_testcases)",
+      "dependency": "HumanEvalPack and HumanEval+ Mini JSONL, QuixBugs checkout",
       "evidence": [
-       "jkoppel/QuixBugs checkout re-probed this turn: 31 json_testcases, 50 python_programs"
+       "164 HumanEvalPack rows sha b1376d72, 164 HumanEval+ rows, 50 QuixBugs programs, all re-read this session"
       ],
       "evidence_classes": [
        "DIRECT_PROBE"
@@ -400,9 +408,9 @@
       "volatility": "STATIC"
      },
      {
-      "dependency": "local filesystem tempdir for per-task isolation",
+      "dependency": "per-bug tempdir isolation for the behaviour matrix",
       "evidence": [
-       "per-task tempdir isolation re-confirmed across the 23 measured tasks; the corpus's published expected values answer every question"
+       "the probe writes to a scratch dir, never into the tree"
       ],
       "evidence_classes": [
        "DIRECT_PROBE"
@@ -418,57 +426,56 @@
     "execution_dependencies_complete": true,
     "failed_dependencies": [],
     "max_age_hours": 2,
-    "selected_route": "SYNTHESIZE_AN_AST_LEVEL_EDIT_INDUCER_THAT_FOLDS_ONE_DEMONSTRATION_PAIR_INTO_A_HOLE_GENERALIZED_TEMPLATE_WITH_A_CONTEXT_PRECONDITION_AND_MEASURES_IT_END_TO_END_ON_A_PUBLIC_BUG_CORPUS",
+    "selected_route": "PARTITION_TEST_PASSING_CANDIDATES_BY_BEHAVIOUR_ASK_THE_CHEAPEST_DISCRIMINATING_QUESTION_AND_REFUSE_WHEN_NONE_EXISTS",
     "status": "READY"
    },
    "source_classes_checked": [
     "BRAIN_INHERITED",
     "OFFICIAL_PRIMARY",
-    "CODE_OR_PACKAGE_REGISTRY",
-    "BROAD_WEB_OR_COMMUNITY"
+    "BROAD_WEB_OR_COMMUNITY",
+    "CODE_OR_PACKAGE_REGISTRY"
    ],
    "source_evidence": {
     "BRAIN_INHERITED": [
-     "canonical/swe_kernel/verified_skill_crystallizer_v1.py",
-     "canonical/swe_kernel/lesson_localization_v1.py",
+     "canonical/runtime/finite_identifiability.py",
+     "canonical/runtime/demonstration_version_space_v1.py",
+     "canonical/swe_kernel/closed_loop_trace_abduction_repair_v1.py",
      "canonical/swe_kernel/lesson_admission_gate_v1.py",
-     "canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py",
-     "canonical/runtime/bound_capabilities/python_iterative_software_repair_loop_v1.py"
+     "canonical/tools/identification_cost_in_a_real_space_v1.py"
     ],
     "BROAD_WEB_OR_COMMUNITY": [
-     "https://www.sota2.com/research/dataset/miniwob (2026 aggregate reporting, used only to bound suite difficulty)"
+     "https://arxiv.org/html/2607.12790 (co-evolving metrics and skills, Jul 2026)"
     ],
     "CODE_OR_PACKAGE_REGISTRY": [
-     "https://github.com/jkoppel/QuixBugs (MIT; 40 buggy programs, 40 pytest files, JSON test data)",
-     "https://pypi.org/project/pytest (9.2.0, the runner every verdict goes through)"
+     "https://github.com/bigcode-project/bigcode-evaluation-harness (HumanEvalPack, MIT)",
+     "https://github.com/evalplus/evalplus (HumanEval+, Apache-2.0)"
     ],
     "OFFICIAL_PRIMARY": [
-     "https://arxiv.org/html/2605.11030v1 (executable benchmarking suite for tool-using agents, May 2026)",
-     "https://arxiv.org/pdf/2507.04103 (how to train your LLM web agent: task horizons of 2-5 steps)"
+     "https://arxiv.org/html/2611.14326 (falsification-gated self-evolution, Nov 2026)",
+     "https://arxiv.org/html/2610.30284 (SWE-Verifier: selective verification, Oct 2026)",
+     "https://pith.science/paper/2609.00854 (placebo-controlled fault localisation, Sep 2026)"
     ]
    },
    "unresolved_plausible_dominators": []
   },
   "routes_considered": [
-   "Reuse the crystallizer's token anti-unification to induce the rule (checked: it cannot express position-level containment and has no site context)",
-   "Extend the hand-listed mutation list with an AugAssign rule and re-run (checked against the ladder: it lifts one bug and leaves 26 of 40 untouched)",
-   "Raise the candidate budget on the existing loop (checked: 280 candidates already return zero on bitcount because the edit is not expressible)",
-   "Induce node-level templates from demonstration pairs and let the corpus's oracle decide",
-   "Ask a model to write the patch (refused: producer cognition, zero credit)"
+   "Partition candidates that pass the same tests by behaviour and ask the cheapest discriminating question",
+   "Majority vote among test-passing candidates (measured wrong 3 times in 5)",
+   "Raise the candidate budget (cannot split candidates that already pass)",
+   "Reuse the kernel's minimax rule without checking its objective (correct only when the answer is unknown)",
+   "Ask a model to choose the repair (producer cognition, prohibited, zero credit)"
   ],
-  "selected_route": "SYNTHESIZE_AN_AST_LEVEL_EDIT_INDUCER_THAT_FOLDS_ONE_DEMONSTRATION_PAIR_INTO_A_HOLE_GENERALIZED_TEMPLATE_WITH_A_CONTEXT_PRECONDITION",
-  "selected_surviving_route": "SYNTHESIZE_AN_AST_LEVEL_EDIT_INDUCER_THAT_FOLDS_ONE_DEMONSTRATION_PAIR_INTO_A_HOLE_GENERALIZED_TEMPLATE_WITH_A_CONTEXT_PRECONDITION_AND_MEASURES_IT_END_TO_END_ON_A_PUBLIC_BUG_CORPUS",
-  "selected_surviving_route_class": "SYNTHESIZE_NEW_PRIMITIVE",
-  "stop_condition": "One merged change on this branch, with the corpus measurement reproducible from the receipt.",
-  "why_selected_route_is_fastest_sufficient": "Every cheaper route was tried against a real artifact and refused: the crystallizer's token anti-unification cannot express position-level containment and has no site context, and the existing repair primitive has no ast.AugAssign rule at all. Inducing a template from one demonstration pair and letting the corpus's own tests decide costs two runs; adding another hand-written mutation kind would lift one bug of forty and leave the question unmeasured.",
-  "why_this_is_not_another_organ": "It replaces a list with a fold over experience and reuses the existing repair primitive, the corpus oracle and the hashing/verification discipline; the only new machinery is induction and the rung classifier, and both are measured."
+  "selected_surviving_route": "PARTITION_TEST_PASSING_CANDIDATES_BY_BEHAVIOUR_ASK_THE_CHEAPEST_DISCRIMINATING_QUESTION_AND_REFUSE_WHEN_NONE_EXISTS",
+  "stop_condition": "One merged change on this branch with the 100-bug measurement reproducible from the receipt.",
+  "why_selected_route_is_fastest_sufficient": "Every cheaper route was tried against the real record and refused: majority vote is wrong 3 times in 5 on this very corpus, a bigger budget cannot split candidates that already pass every test, and the kernel's minimax is the wrong objective when the oracle answers (89 vs 112 questions in the large-space regime). Partitioning by behaviour and asking the cheapest discriminating question costs 9 questions for 51 bugs, breaks 0 of 47 correct repairs, and refuses instead of guessing when no input separates the survivors -- which no other route on the list does."
  },
  "route_id": "SYNTHESIZE_AN_AST_LEVEL_EDIT_INDUCER_THAT_FOLDS_ONE_DEMONSTRATION_PAIR_INTO_A_HOLE_GENERALIZED_TEMPLATE_WITH_A_CONTEXT_PRECONDITION_AND_MEASURES_IT_END_TO_END_ON_A_PUBLIC_BUG_CORPUS",
  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
  "scope_complete_discharge": false,
- "selected_route": "SYNTHESIZE_AN_AST_LEVEL_EDIT_INDUCER_THAT_FOLDS_ONE_DEMONSTRATION_PAIR_INTO_A_HOLE_GENERALIZED_TEMPLATE_WITH_A_CONTEXT_PRECONDITION_AND_MEASURES_IT_END_TO_END_ON_A_PUBLIC_BUG_CORPUS",
+ "selected_route": "PARTITION_TEST_PASSING_CANDIDATES_BY_BEHAVIOUR_ASK_THE_CHEAPEST_DISCRIMINATING_QUESTION_AND_REFUSE_WHEN_NONE_EXISTS",
+ "selected_surviving_route": "PARTITION_TEST_PASSING_CANDIDATES_BY_BEHAVIOUR_ASK_THE_CHEAPEST_DISCRIMINATING_QUESTION_AND_REFUSE_WHEN_NONE_EXISTS",
  "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
- "stop_condition": "One merged change on this branch, with the corpus measurement reproducible from the receipt.",
+ "stop_condition": "One merged change on this branch with the 100-bug measurement reproducible from the receipt.",
  "terminal_credit_delta": 0,
  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
  "truth": {
