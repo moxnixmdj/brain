@@ -31228,7 +31228,7 @@
   "engines": 26,
   "knowledge_documents": 462,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6881,
+  "research_index_records": 6882,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 450,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "f791f647ba5be8077e131117379fe7572ff3d4a8522756bec4e464888c680972"
+  "value": "f409a8c131804e9dae23a754846737e3ca6d5199cd1159cd449c30a85c6770b9"
  },
  "engines": [
   {
@@ -241761,6 +241761,51 @@
     "v1": 1,
     "vocabulary": 1,
     "wall": 1
+   }
+  },
+  {
+   "action_id": "THE_WALL_WAS_IN_THE_VOCABULARY_20261116_V1",
+   "capability": false,
+   "date": "2026-11-16",
+   "id": "research:canonical/action_intents/THE_WALL_WAS_IN_THE_VOCABULARY_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/THE_WALL_WAS_IN_THE_VOCABULARY_20261116_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "000b814f1df3fa8f2c528618e9e0c6028642a98654663021ea8721f4ef70be66",
+   "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
+   "terms": {
+    "1500": 1,
+    "20261116": 1,
+    "30": 1,
+    "32": 1,
+    "37": 1,
+    "actions": 2,
+    "agent": 1,
+    "aimed": 1,
+    "budget": 1,
+    "capability": 1,
+    "computer": 1,
+    "diagnosis": 1,
+    "experience": 1,
+    "failed": 1,
+    "filed": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "language": 1,
+    "more": 2,
+    "no": 1,
+    "not": 2,
+    "now": 1,
+    "observable": 1,
+    "own": 1,
+    "pages": 2,
+    "project": 1,
+    "proposed__producer_measured__independent_verification_open": 1,
+    "reads": 1,
+    "reuse_the_existing_chromium_instrument_and_classify_each_unsolved_pages_terminal_explorer_status_into_one_of_four_worlds": 1,
+    "search": 3,
+    "solves": 1,
+    "the_refusal_census_named_the_wrong_missing_thing__16_pages_were_filed_as_needs_geometry_when_every_box_was_already_in_the_observation__and_12_as_no_clause_understood_when_the_description_was_a_colour_or_a_shape_the_bridge_reports": 1,
+    "wall": 2
    }
   },
   {

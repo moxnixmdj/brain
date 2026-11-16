@@ -143,7 +143,7 @@
  },
  "recursive_obs": {
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
-  "canonical_base_commit": "a0265cc6a443ad3304b3acdfce08f2397191ce82",
+  "canonical_base_commit": "e53278dc7fc3cf7dda5bca321edaca0c15d121f2",
   "real_outcome": "Each of the 37 held-out pages that yields no first success is assigned to the world its own terminal explorer status proves, so the next capability work is aimed by measurement instead of by an inherited assumption.",
   "required_capability": "Honest classification of a search failure into unreachable, unexplored, state-blind or nothing-offered, with the repair each implies.",
   "iteration_limit": 1,
@@ -164,7 +164,7 @@
   "selected_surviving_route": "REUSE_THE_EXISTING_CHROMIUM_INSTRUMENT_AND_CLASSIFY_EACH_UNSOLVED_PAGES_TERMINAL_EXPLORER_STATUS_INTO_ONE_OF_FOUR_WORLDS",
   "selected_surviving_route_class": "REUSE",
   "why_selected_route_is_fastest_sufficient": "The instrument, the chromium bridge, the explorer and its four terminal statuses already exist and already decide unreachable versus unexplored. Reusing them costs one run and answers the question that ranks all further work; adding primitives or learners first would spend the same time on a hypothesis nobody had tested.",
-  "expected_parent_level_state_change": "Coverage work is aimed at the action prior and the state key instead of at more action primitives that no page is evidence for.",
+  "expected_parent_level_state_change": "Capability work on computer use is aimed at the OBSERVABLE and the language that reads it, not at more search and not at more experience: the project's own wall diagnosis filed 32 of 37 unsolved pages under 'budget' and an agent with 30 actions and no search now solves pages that 1500 actions of search failed on.",
   "stop_condition": "The 37 pages are classified into worlds by their own recorded terminal status and the receipt states no capability, family, terminal or weight credit.",
   "obs_goal": {
    "real_outcome": "The residual coverage gap is located, not assumed, so the highest-leverage next capability is chosen by evidence.",
@@ -244,7 +244,7 @@
   },
   "route_frontier": {
    "discovery_required": true,
-   "checked_at_utc": "2026-11-16T13:54:14Z",
+   "checked_at_utc": "2026-11-16T20:03:01Z",
    "max_age_hours": 24,
    "source_classes_checked": [
     "BRAIN_INHERITED",
@@ -402,7 +402,7 @@
    "unresolved_plausible_dominators": [],
    "selected_route": "REUSE_THE_EXISTING_CHROMIUM_INSTRUMENT_AND_CLASSIFY_EACH_UNSOLVED_PAGES_TERMINAL_EXPLORER_STATUS_INTO_ONE_OF_FOUR_WORLDS",
    "selected_route_preflight": {
-    "checked_at_utc": "2026-11-16T13:54:14Z",
+    "checked_at_utc": "2026-11-16T20:03:01Z",
     "max_age_hours": 2,
     "selected_route": "REUSE_THE_EXISTING_CHROMIUM_INSTRUMENT_AND_CLASSIFY_EACH_UNSOLVED_PAGES_TERMINAL_EXPLORER_STATUS_INTO_ONE_OF_FOUR_WORLDS",
     "status": "READY",
