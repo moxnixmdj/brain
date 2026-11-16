@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 473,
+  "knowledge_documents": 475,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6909,
+  "research_index_records": 6916,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 451,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "0963ad906f7f3ce5eb4b1fb91e4b6c976a63c55431625f694464b2470af0038a"
+  "value": "8fd6bb0c0ece3f45d336a6edf4d3e46d908614bdd033f0d74aa711042ad7d22b"
  },
  "engines": [
   {
@@ -81980,10 +81980,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1275,
+  "included_source_count": 1277,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "904bc5b42f54363582c790207f5fe40c4016df64682fb8962234c6e73891c1ba"
+  "source_tree_digest": "923c40d9e0aecdf06831da07e49a2295b81331092f98c5658d3c82cee3557d40"
  },
  "research_index": [
   {
@@ -238507,7 +238507,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/ONE_TRY_LEARNS_A_DOMAIN_NOT_THE_ENVIRONMENT_20261116_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "f342e91c1352923dde43ba70690dbb3b3a63e25932c6c323f453fc2826b99080",
+   "sha256": "6a9777cfe4392608678e6680ba13a363d0371764434220c3b8b941e806dad31a",
    "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
    "terms": {
     "20261116": 1,
