@@ -37,7 +37,7 @@ composition rather than a guess about applicability. For each pair it records th
 The third question is what "replay forever" means operationally — in a code file and in a GUI window
 alike: re-issue a recorded action sequence onto a state that has moved.
 
-**Receipt** (`canonical/verification/ACTION_REPLAY_UNDER_CHANGE_20261116_V1.json`): 4 independent
+**Receipt** (`canonical/verification/ACTION_REPLAY_UNDER_CHANGE_20261116_V1.json`). The corpus moves, so the receipt names the exact tree it measured (`corpus_sha256` plus `measured_at_commit`); later merges of unrelated files leave that measurement as a measurement of the named corpus, and re-running the command reproduces the method on whatever the tree is then. This run: 4 independent
 samples over `canonical/**/*.py`, corpus `sha256 dbfd2a3d…3cf6` (5,562 files, commit `c3a4c75e`), 509 eligible sites, **228 ordered pairs
 in 62 files**:
 
