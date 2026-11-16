@@ -41,7 +41,7 @@
   },
   "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::EVERY_REMAINING_REFUSAL_IN_THE_NEW_ENVIRONMENT_MEASUREMENT_WAS_A_COMPOSITION_OR_AN_EXPRESSIVITY_GAP_AND_NEITHER_HAD_BEEN_SEPARATED_FROM_A_SEARCH_BUDGET_SO_THE_NEXT_BOTTLENECK_COULD_NOT_BE_NAMED",
-  "canonical_base_commit": "989cac08384b3550d5013a7ba9235df12ad350af",
+  "canonical_base_commit": "d57dcd71894b3dfb8c6138c8500718de6ef8bf45",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -118,7 +118,7 @@
   ],
   "probe_specific": false,
   "recursive_obs": {
-    "canonical_base_commit": "989cac08384b3550d5013a7ba9235df12ad350af",
+    "canonical_base_commit": "d57dcd71894b3dfb8c6138c8500718de6ef8bf45",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "treating a search budget as a proof of impossibility",
