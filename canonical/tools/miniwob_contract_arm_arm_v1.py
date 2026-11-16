@@ -51,11 +51,20 @@ def run_page(bridge: Any, task: str, seed: int, budget: int) -> dict[str, Any]:
     arm.begin(observation, seed)
 
     actions: list[str] = []
+    # WHY THE EPISODE ENDED IS PART OF THE MEASUREMENT. A page that stops because the arm ran out
+    # of THINGS TO SAY and a page that stops because it said thirty WRONG THINGS are different
+    # failures with different repairs, and the refusal census conflated them. Recorded per page.
+    stopping = "BUDGET"
     for _ in range(int(budget)):
-        if measure.succeeded(observation) or measure.failed(observation):
+        if measure.succeeded(observation):
+            stopping = "SUCCEEDED"
+            break
+        if measure.failed(observation):
+            stopping = "THE_PAGE_FAILED_IT"
             break
         action = arm.next_action(observation)
         if action is None:
+            stopping = "THE_ARM_HAD_NOTHING_LEFT_TO_SAY"
             break
         actions.append(action)
         observation = bridge.act(measure.parse_action(action))
@@ -89,6 +98,8 @@ def run_page(bridge: Any, task: str, seed: int, budget: int) -> dict[str, Any]:
         "refused_part": arm.contract.get("refused_part"),
         "operators": [c["operator"] for c in arm.contract.get("clauses") or []],
         "actions": actions,
+        "stopping": stopping,
+        "still_holding": [str(c.get("operator")) for c in arm.contract.get("clauses") or []],
         "won": won,
         "failed": bool(measure.failed(observation)),
     }

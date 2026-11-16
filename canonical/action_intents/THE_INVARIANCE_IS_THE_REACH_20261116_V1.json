@@ -44,7 +44,7 @@
   },
   "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_LEARNED_ARM_WAS_A_REPLAY_AND_NEVER_DEMONSTRATED_THAT_ONE_VERIFIED_DEMONSTRATION_BECOMES_A_RULE_SO_THE_ONLY_MECHANISM_THAT_COULD_TURN_ONE_EXPERIENCE_INTO_PERMANENT_CAPABILITY_HAD_NEVER_BEEN_MEASURED",
-  "canonical_base_commit": "51e0e8491938c17020c136857e0aed613dcf40d0",
+  "canonical_base_commit": "c210d2d9d3d3f9fa50da037edc186f482b470a5f",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -168,7 +168,7 @@
   ],
   "probe_specific": false,
   "recursive_obs": {
-    "canonical_base_commit": "51e0e8491938c17020c136857e0aed613dcf40d0",
+    "canonical_base_commit": "c210d2d9d3d3f9fa50da037edc186f482b470a5f",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "counting a replayed lesson as learning",
