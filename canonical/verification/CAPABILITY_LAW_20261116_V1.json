@@ -8,6 +8,15 @@
   },
   "computer_use": {
     "external_context": "OSWorld 2.0 (arXiv 2606.29537): best agent 20.6% of 108 workflows, failing by skipping verification and spending under 7% of budget detecting its own errors",
+    "horizon": {
+      "chains": 3,
+      "every_step_legal_and_passing": 3,
+      "false_invalidations_on_controls": 0,
+      "lead_in_steps": 2,
+      "receipt": "canonical/verification/STANDING_FACTS_20261116_V1.json",
+      "standing_fact_ledger_detected": 3,
+      "why": "a per-action check only ever asks about the action in front of it, so a legal step that falsifies an earlier verified fact is invisible to it. Re-validating exactly the facts the current step frame can touch costs one hash per fact and localises the cause two steps before the symptom"
+    },
     "invisible_with_a_name_level_view": 0.2353,
     "novel": {
       "density": 0.5,
@@ -53,7 +62,7 @@
       "why": "the intent is the recorded consequence, so any difference is an error: with a full state observation every wrong action is caught, and a wrong action that leaves the state identical did not miss the goal"
     },
     "status": "MEASURED_ON_A_SHELL_ENVIRONMENT",
-    "what_remains_unmeasured": "a GUI whose only observable is pixels or DOM -- a projection, not the state -- and workflows longer than one action, where an error is only visible after composition",
+    "what_remains_unmeasured": "a GUI whose only observable is pixels or DOM -- a projection, not the state -- and what to do after an invalidation: the ledger proves a fact false and does not repair it, and a fact carried by remote state rather than by a path is outside it",
     "what_was_run": "34 mechanically derived wrong actions over 9 real shell transformations, real programs on a real disk, real reset"
   },
   "incremental_spend_usd": 0,
@@ -101,6 +110,10 @@
     "determinacy": {
       "path": "canonical/verification/SYSTEMATIC_EDIT_SUPPLY_20261116_V1.json",
       "sha256": "98a8c2f651e7f676f59769aabd269e93be02754b4f570b057f5d8f9bd7e88df1"
+    },
+    "facts": {
+      "path": "canonical/verification/STANDING_FACTS_20261116_V1.json",
+      "sha256": "54d5a368584db8be8bb9543cb9b9669db5f1a26b142169c8b9dbc8a1cb52932f"
     },
     "memory": {
       "path": "canonical/verification/SKILL_RECURRENCE_20261116_V1.json",

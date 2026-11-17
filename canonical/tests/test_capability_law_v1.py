@@ -34,7 +34,7 @@ def test_the_law_is_reproducible_and_pins_its_receipts(report: dict) -> None:
     assert live["operating_point"] == report["operating_point"]
     assert live["leverage"] == report["leverage"]
     assert set(report["receipts"]) == {"determinacy", "value", "memory", "observation", "permanence",
-                                       "computer", "projection", "contract"}
+                                       "computer", "projection", "contract", "facts"}
 
 
 def test_the_terms_are_the_published_numbers(report: dict) -> None:
@@ -96,6 +96,12 @@ def test_computer_use_carries_a_receipt_instead_of_an_assumption(report: dict) -
                                    "frame_plus_intervention": 0.9706, "full": 1.0}
     assert prospective["false_alarms_on_correct_novel_actions"] == 0
     assert prospective["content_only_errors"]["frame_only"] < prospective["content_only_errors"]["full"]
+    horizon = cell["horizon"]
+    assert horizon["chains"] == 3
+    assert horizon["every_step_legal_and_passing"] == 3
+    assert horizon["standing_fact_ledger_detected"] == 3
+    assert horizon["false_invalidations_on_controls"] == 0
+    assert horizon["lead_in_steps"] == 2
     assert "OSWorld" in cell["external_context"]
 
 

@@ -60,6 +60,7 @@ RECEIPTS = {
     "computer": "canonical/verification/COMPUTER_USE_CHECK_DENSITY_20261116_V1.json",
     "projection": "canonical/verification/DISTINGUISHING_PROJECTION_20261116_V1.json",
     "contract": "canonical/verification/PREDICTIVE_CONTRACT_20261116_V1.json",
+    "facts": "canonical/verification/STANDING_FACTS_20261116_V1.json",
 }
 
 # The published ceiling for an inducer with full AST and context machinery on real systematic edits.
@@ -109,6 +110,7 @@ def compose(*, pins: Mapping[str, str] | None = None) -> dict[str, Any]:
     computer, computer_sha = _load("computer", pins=pins)
     projection, projection_sha = _load("projection", pins=pins)
     contract, contract_sha = _load("contract", pins=pins)
+    known, known_sha = _load("facts", pins=pins)
 
     determined = float(_field(supply, "by_rung/shape_only/determined_share", "supply"))
     value_determined = (float(_field(value, "by_rung/shape_only/derive_arm/pairs_where_derivation_was_right",
@@ -206,6 +208,7 @@ def compose(*, pins: Mapping[str, str] | None = None) -> dict[str, Any]:
                 ("computer", RECEIPTS["computer"], computer_sha),
                 ("projection", RECEIPTS["projection"], projection_sha),
                 ("contract", RECEIPTS["contract"], contract_sha),
+                ("facts", RECEIPTS["facts"], known_sha),
             )
         },
         "law": "P(correct behaviour | one action) = P(determined) x P(seen); P(seen) = density x strength",
@@ -289,9 +292,25 @@ def compose(*, pins: Mapping[str, str] | None = None) -> dict[str, Any]:
                         "frame -- which paths the action may touch -- carries most of it, a declared or derived "
                         "relation carries the bytes, and what remains is a located hole in the vocabulary"),
             },
-            "what_remains_unmeasured": ("a GUI whose only observable is pixels or DOM -- a projection, not "
-                                         "the state -- and workflows longer than one action, where an error "
-                                         "is only visible after composition"),
+            "horizon": {
+                "receipt": RECEIPTS["facts"],
+                "chains": int(_field(known, "chains_run", "facts")),
+                "every_step_legal_and_passing":
+                    int(_field(known, "per_step_only/claims_success_on_every_step", "facts")),
+                "standing_fact_ledger_detected":
+                    int(_field(known, "frame_scoped_ledger/detected", "facts")),
+                "false_invalidations_on_controls":
+                    int(_field(known, "frame_scoped_ledger/false_invalidations_on_controls", "facts")),
+                "lead_in_steps": _field(known, "lead_in_steps/min", "facts"),
+                "why": ("a per-action check only ever asks about the action in front of it, so a legal step "
+                        "that falsifies an earlier verified fact is invisible to it. Re-validating exactly the "
+                        "facts the current step frame can touch costs one hash per fact and localises the "
+                        "cause two steps before the symptom"),
+            },
+            "what_remains_unmeasured": ("a GUI whose only observable is pixels or DOM -- a projection, not the "
+                                        "state -- and what to do after an invalidation: the ledger proves a "
+                                        "fact false and does not repair it, and a fact carried by remote state "
+                                        "rather than by a path is outside it"),
             "external_context": ("OSWorld 2.0 (arXiv 2606.29537): best agent 20.6% of 108 workflows, "
                                  "failing by skipping verification and spending under 7% of budget "
                                  "detecting its own errors"),
@@ -349,6 +368,12 @@ def summarize(report: Mapping[str, Any]) -> str:
     lines.append("  content-only errors: frame %s | full %s"
                  % (prospective["content_only_errors"]["frame_only"],
                     prospective["content_only_errors"]["full"]))
+    horizon = use["horizon"]
+    lines.append("  over a sequence: every step legal on %s of %s chains; standing-fact ledger detected %s, "
+                 "false invalidations %s, lead %s step(s)"
+                 % (horizon["every_step_legal_and_passing"], horizon["chains"],
+                    horizon["standing_fact_ledger_detected"], horizon["false_invalidations_on_controls"],
+                    horizon["lead_in_steps"]))
     lines.append("  still unmeasured: %s" % use["what_remains_unmeasured"])
     return "\n".join(lines)
 

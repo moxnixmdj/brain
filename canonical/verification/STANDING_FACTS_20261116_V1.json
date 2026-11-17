@@ -1,0 +1,701 @@
+{
+  "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+  "chains_run": 3,
+  "control_chains": 3,
+  "cost": {
+    "facts_revalidated_frame_scoped": 3,
+    "note": "one hash per at-risk path per step, read from the contract's frame before the step runs"
+  },
+  "environment": {
+    "chains": [
+      "archive_matches_workfile",
+      "manifest_describes_the_file",
+      "bundle_holds_the_copy"
+    ],
+    "kind": "real directory, real programs from PATH, real sabotage, independent goal command",
+    "why_real": "each sabotage step is a legal invocation whose own contract holds; the earlier fact is falsified inside that step's licensed frame, which is precisely the case a per-action check cannot see"
+  },
+  "frame_scoped_ledger": {
+    "control_chains_that_raised": [],
+    "detected": 3,
+    "false_invalidations_on_controls": 0,
+    "localized_to_the_step_that_caused_it": 3,
+    "of": 3
+  },
+  "goal_check": {
+    "failed_on": [
+      "archive_matches_workfile",
+      "manifest_describes_the_file",
+      "bundle_holds_the_copy"
+    ],
+    "note": "the symptom appears at the last step in every chain -- after the work is already done, with no localization",
+    "of": 3
+  },
+  "incremental_spend_usd": 0,
+  "lead_in_steps": {
+    "max": 2,
+    "min": 2,
+    "values": [
+      2,
+      2,
+      2
+    ]
+  },
+  "limit": "the ledger proves a fact is false, not what to do about it; it re-validates content hashes of paths, so a fact about a property no path carries -- a remote service, a lock held in another process -- is outside it. Repair after invalidation is a separate question and is not measured here",
+  "missing_programs": [],
+  "model_calls": 0,
+  "network_calls": 0,
+  "per_chain": [
+    {
+      "chain": "archive_matches_workfile",
+      "control": {
+        "frame_scoped": {
+          "facts_revalidated": 0,
+          "first_invalidation_step": null,
+          "invalidations": []
+        },
+        "goal": {
+          "command": "gunzip -c work.dat.gz | cmp - work.dat",
+          "returncode": 0,
+          "symptom": "",
+          "symptom_at_step": 4
+        },
+        "name": "archive_matches_workfile",
+        "per_step_only": {
+          "claims_success": true,
+          "verdicts": [
+            "HOLDS",
+            "HOLDS",
+            "HOLDS",
+            "HOLDS"
+          ]
+        },
+        "rehash_all": {
+          "facts_revalidated": 18,
+          "invalidations": 0
+        },
+        "sabotage": false,
+        "steps": [
+          {
+            "contract_verdict": "HOLDS",
+            "delta_paths": [
+              "work.dat"
+            ],
+            "facts_at_risk": 0,
+            "frame_touched": [
+              "work.dat"
+            ],
+            "invalidated": [],
+            "invalidated_if_rehash_all": 0,
+            "name": "copy_in",
+            "sabotage": false,
+            "step": 1
+          },
+          {
+            "contract_verdict": "HOLDS",
+            "delta_paths": [
+              "work.dat.gz"
+            ],
+            "facts_at_risk": 0,
+            "frame_touched": [
+              "work.dat.gz"
+            ],
+            "invalidated": [],
+            "invalidated_if_rehash_all": 0,
+            "name": "compress",
+            "sabotage": false,
+            "step": 2
+          },
+          {
+            "contract_verdict": "HOLDS",
+            "delta_paths": [
+              "digest.txt"
+            ],
+            "facts_at_risk": 0,
+            "frame_touched": [
+              "digest.txt"
+            ],
+            "invalidated": [],
+            "invalidated_if_rehash_all": 0,
+            "name": "digest_the_archive",
+            "sabotage": false,
+            "step": 3
+          },
+          {
+            "contract_verdict": "HOLDS",
+            "delta_paths": [
+              "digest.bak"
+            ],
+            "facts_at_risk": 0,
+            "frame_touched": [
+              "digest.bak"
+            ],
+            "invalidated": [],
+            "invalidated_if_rehash_all": 0,
+            "name": "keep_the_digest",
+            "sabotage": false,
+            "step": 4
+          }
+        ]
+      },
+      "sabotaged": {
+        "frame_scoped": {
+          "facts_revalidated": 1,
+          "first_invalidation_step": 3,
+          "invalidations": [
+            {
+              "established_at": 1,
+              "invalidated_at": 3,
+              "path": "work.dat"
+            }
+          ]
+        },
+        "goal": {
+          "command": "gunzip -c work.dat.gz | cmp - work.dat",
+          "returncode": 1,
+          "symptom": "- work.dat differ: char 1, line 1",
+          "symptom_at_step": 5
+        },
+        "name": "archive_matches_workfile",
+        "per_step_only": {
+          "claims_success": true,
+          "verdicts": [
+            "HOLDS",
+            "HOLDS",
+            "HOLDS",
+            "HOLDS",
+            "HOLDS"
+          ]
+        },
+        "rehash_all": {
+          "facts_revalidated": 23,
+          "invalidations": 1
+        },
+        "sabotage": true,
+        "steps": [
+          {
+            "contract_verdict": "HOLDS",
+            "delta_paths": [
+              "work.dat"
+            ],
+            "facts_at_risk": 0,
+            "frame_touched": [
+              "work.dat"
+            ],
+            "invalidated": [],
+            "invalidated_if_rehash_all": 0,
+            "name": "copy_in",
+            "sabotage": false,
+            "step": 1
+          },
+          {
+            "contract_verdict": "HOLDS",
+            "delta_paths": [
+              "work.dat.gz"
+            ],
+            "facts_at_risk": 0,
+            "frame_touched": [
+              "work.dat.gz"
+            ],
+            "invalidated": [],
+            "invalidated_if_rehash_all": 0,
+            "name": "compress",
+            "sabotage": false,
+            "step": 2
+          },
+          {
+            "contract_verdict": "HOLDS",
+            "delta_paths": [
+              "work.dat"
+            ],
+            "facts_at_risk": 1,
+            "frame_touched": [
+              "work.dat"
+            ],
+            "invalidated": [
+              {
+                "established_at": 1,
+                "invalidated_at": 3,
+                "path": "work.dat"
+              }
+            ],
+            "invalidated_if_rehash_all": 1,
+            "name": "overwrite_workfile",
+            "sabotage": true,
+            "step": 3
+          },
+          {
+            "contract_verdict": "HOLDS",
+            "delta_paths": [
+              "digest.txt"
+            ],
+            "facts_at_risk": 0,
+            "frame_touched": [
+              "digest.txt"
+            ],
+            "invalidated": [],
+            "invalidated_if_rehash_all": 0,
+            "name": "digest_the_archive",
+            "sabotage": false,
+            "step": 4
+          },
+          {
+            "contract_verdict": "HOLDS",
+            "delta_paths": [
+              "digest.bak"
+            ],
+            "facts_at_risk": 0,
+            "frame_touched": [
+              "digest.bak"
+            ],
+            "invalidated": [],
+            "invalidated_if_rehash_all": 0,
+            "name": "keep_the_digest",
+            "sabotage": false,
+            "step": 5
+          }
+        ]
+      }
+    },
+    {
+      "chain": "manifest_describes_the_file",
+      "control": {
+        "frame_scoped": {
+          "facts_revalidated": 0,
+          "first_invalidation_step": null,
+          "invalidations": []
+        },
+        "goal": {
+          "command": "sha256sum -c manifest.txt",
+          "returncode": 0,
+          "symptom": "sorted.txt: OK",
+          "symptom_at_step": 4
+        },
+        "name": "manifest_describes_the_file",
+        "per_step_only": {
+          "claims_success": true,
+          "verdicts": [
+            "HOLDS",
+            "HOLDS",
+            "HOLDS",
+            "HOLDS"
+          ]
+        },
+        "rehash_all": {
+          "facts_revalidated": 18,
+          "invalidations": 0
+        },
+        "sabotage": false,
+        "steps": [
+          {
+            "contract_verdict": "HOLDS",
+            "delta_paths": [
+              "sorted.txt"
+            ],
+            "facts_at_risk": 0,
+            "frame_touched": [
+              "sorted.txt"
+            ],
+            "invalidated": [],
+            "invalidated_if_rehash_all": 0,
+            "name": "sort_in",
+            "sabotage": false,
+            "step": 1
+          },
+          {
+            "contract_verdict": "HOLDS",
+            "delta_paths": [
+              "manifest.txt"
+            ],
+            "facts_at_risk": 0,
+            "frame_touched": [
+              "manifest.txt"
+            ],
+            "invalidated": [],
+            "invalidated_if_rehash_all": 0,
+            "name": "hash_it",
+            "sabotage": false,
+            "step": 2
+          },
+          {
+            "contract_verdict": "HOLDS",
+            "delta_paths": [
+              "manifest.bak"
+            ],
+            "facts_at_risk": 0,
+            "frame_touched": [
+              "manifest.bak"
+            ],
+            "invalidated": [],
+            "invalidated_if_rehash_all": 0,
+            "name": "keep_the_manifest",
+            "sabotage": false,
+            "step": 3
+          },
+          {
+            "contract_verdict": "HOLDS",
+            "delta_paths": [
+              "manifest.digest"
+            ],
+            "facts_at_risk": 0,
+            "frame_touched": [
+              "manifest.digest"
+            ],
+            "invalidated": [],
+            "invalidated_if_rehash_all": 0,
+            "name": "hash_the_manifest",
+            "sabotage": false,
+            "step": 4
+          }
+        ]
+      },
+      "sabotaged": {
+        "frame_scoped": {
+          "facts_revalidated": 1,
+          "first_invalidation_step": 3,
+          "invalidations": [
+            {
+              "established_at": 1,
+              "invalidated_at": 3,
+              "path": "sorted.txt"
+            }
+          ]
+        },
+        "goal": {
+          "command": "sha256sum -c manifest.txt",
+          "returncode": 1,
+          "symptom": "sorted.txt: FAILED\nsha256sum: WARNING: 1 computed checksum did NOT match",
+          "symptom_at_step": 5
+        },
+        "name": "manifest_describes_the_file",
+        "per_step_only": {
+          "claims_success": true,
+          "verdicts": [
+            "HOLDS",
+            "HOLDS",
+            "HOLDS",
+            "HOLDS",
+            "HOLDS"
+          ]
+        },
+        "rehash_all": {
+          "facts_revalidated": 23,
+          "invalidations": 1
+        },
+        "sabotage": true,
+        "steps": [
+          {
+            "contract_verdict": "HOLDS",
+            "delta_paths": [
+              "sorted.txt"
+            ],
+            "facts_at_risk": 0,
+            "frame_touched": [
+              "sorted.txt"
+            ],
+            "invalidated": [],
+            "invalidated_if_rehash_all": 0,
+            "name": "sort_in",
+            "sabotage": false,
+            "step": 1
+          },
+          {
+            "contract_verdict": "HOLDS",
+            "delta_paths": [
+              "manifest.txt"
+            ],
+            "facts_at_risk": 0,
+            "frame_touched": [
+              "manifest.txt"
+            ],
+            "invalidated": [],
+            "invalidated_if_rehash_all": 0,
+            "name": "hash_it",
+            "sabotage": false,
+            "step": 2
+          },
+          {
+            "contract_verdict": "HOLDS",
+            "delta_paths": [
+              "sorted.txt"
+            ],
+            "facts_at_risk": 1,
+            "frame_touched": [
+              "sorted.txt"
+            ],
+            "invalidated": [
+              {
+                "established_at": 1,
+                "invalidated_at": 3,
+                "path": "sorted.txt"
+              }
+            ],
+            "invalidated_if_rehash_all": 1,
+            "name": "overwrite_sorted",
+            "sabotage": true,
+            "step": 3
+          },
+          {
+            "contract_verdict": "HOLDS",
+            "delta_paths": [
+              "manifest.bak"
+            ],
+            "facts_at_risk": 0,
+            "frame_touched": [
+              "manifest.bak"
+            ],
+            "invalidated": [],
+            "invalidated_if_rehash_all": 0,
+            "name": "keep_the_manifest",
+            "sabotage": false,
+            "step": 4
+          },
+          {
+            "contract_verdict": "HOLDS",
+            "delta_paths": [
+              "manifest.digest"
+            ],
+            "facts_at_risk": 0,
+            "frame_touched": [
+              "manifest.digest"
+            ],
+            "invalidated": [],
+            "invalidated_if_rehash_all": 0,
+            "name": "hash_the_manifest",
+            "sabotage": false,
+            "step": 5
+          }
+        ]
+      }
+    },
+    {
+      "chain": "bundle_holds_the_copy",
+      "control": {
+        "frame_scoped": {
+          "facts_revalidated": 0,
+          "first_invalidation_step": null,
+          "invalidations": []
+        },
+        "goal": {
+          "command": "tar -xzOf bundle.tar copy.dat | cmp - copy.dat",
+          "returncode": 1,
+          "symptom": "gzip: stdin: not in gzip format\ntar: Child returned status 1\ntar: Error is not recoverable: exiting now\ncmp: EOF on - which is empty",
+          "symptom_at_step": 4
+        },
+        "name": "bundle_holds_the_copy",
+        "per_step_only": {
+          "claims_success": true,
+          "verdicts": [
+            "HOLDS",
+            "HOLDS",
+            "HOLDS",
+            "HOLDS"
+          ]
+        },
+        "rehash_all": {
+          "facts_revalidated": 18,
+          "invalidations": 0
+        },
+        "sabotage": false,
+        "steps": [
+          {
+            "contract_verdict": "HOLDS",
+            "delta_paths": [
+              "copy.dat"
+            ],
+            "facts_at_risk": 0,
+            "frame_touched": [
+              "copy.dat"
+            ],
+            "invalidated": [],
+            "invalidated_if_rehash_all": 0,
+            "name": "copy_in",
+            "sabotage": false,
+            "step": 1
+          },
+          {
+            "contract_verdict": "HOLDS",
+            "delta_paths": [
+              "bundle.tar"
+            ],
+            "facts_at_risk": 0,
+            "frame_touched": [
+              "bundle.tar"
+            ],
+            "invalidated": [],
+            "invalidated_if_rehash_all": 0,
+            "name": "bundle",
+            "sabotage": false,
+            "step": 2
+          },
+          {
+            "contract_verdict": "HOLDS",
+            "delta_paths": [
+              "bundle.digest"
+            ],
+            "facts_at_risk": 0,
+            "frame_touched": [
+              "bundle.digest"
+            ],
+            "invalidated": [],
+            "invalidated_if_rehash_all": 0,
+            "name": "digest_the_bundle",
+            "sabotage": false,
+            "step": 3
+          },
+          {
+            "contract_verdict": "HOLDS",
+            "delta_paths": [
+              "bundle.digest.bak"
+            ],
+            "facts_at_risk": 0,
+            "frame_touched": [
+              "bundle.digest.bak"
+            ],
+            "invalidated": [],
+            "invalidated_if_rehash_all": 0,
+            "name": "keep_the_digest",
+            "sabotage": false,
+            "step": 4
+          }
+        ]
+      },
+      "sabotaged": {
+        "frame_scoped": {
+          "facts_revalidated": 1,
+          "first_invalidation_step": 3,
+          "invalidations": [
+            {
+              "established_at": 1,
+              "invalidated_at": 3,
+              "path": "copy.dat"
+            }
+          ]
+        },
+        "goal": {
+          "command": "tar -xzOf bundle.tar copy.dat | cmp - copy.dat",
+          "returncode": 1,
+          "symptom": "gzip: stdin: not in gzip format\ntar: Child returned status 1\ntar: Error is not recoverable: exiting now\ncmp: EOF on - which is empty",
+          "symptom_at_step": 5
+        },
+        "name": "bundle_holds_the_copy",
+        "per_step_only": {
+          "claims_success": true,
+          "verdicts": [
+            "HOLDS",
+            "HOLDS",
+            "HOLDS",
+            "HOLDS",
+            "HOLDS"
+          ]
+        },
+        "rehash_all": {
+          "facts_revalidated": 23,
+          "invalidations": 1
+        },
+        "sabotage": true,
+        "steps": [
+          {
+            "contract_verdict": "HOLDS",
+            "delta_paths": [
+              "copy.dat"
+            ],
+            "facts_at_risk": 0,
+            "frame_touched": [
+              "copy.dat"
+            ],
+            "invalidated": [],
+            "invalidated_if_rehash_all": 0,
+            "name": "copy_in",
+            "sabotage": false,
+            "step": 1
+          },
+          {
+            "contract_verdict": "HOLDS",
+            "delta_paths": [
+              "bundle.tar"
+            ],
+            "facts_at_risk": 0,
+            "frame_touched": [
+              "bundle.tar"
+            ],
+            "invalidated": [],
+            "invalidated_if_rehash_all": 0,
+            "name": "bundle",
+            "sabotage": false,
+            "step": 2
+          },
+          {
+            "contract_verdict": "HOLDS",
+            "delta_paths": [
+              "copy.dat"
+            ],
+            "facts_at_risk": 1,
+            "frame_touched": [
+              "copy.dat"
+            ],
+            "invalidated": [
+              {
+                "established_at": 1,
+                "invalidated_at": 3,
+                "path": "copy.dat"
+              }
+            ],
+            "invalidated_if_rehash_all": 1,
+            "name": "overwrite_copy",
+            "sabotage": true,
+            "step": 3
+          },
+          {
+            "contract_verdict": "HOLDS",
+            "delta_paths": [
+              "bundle.digest"
+            ],
+            "facts_at_risk": 0,
+            "frame_touched": [
+              "bundle.digest"
+            ],
+            "invalidated": [],
+            "invalidated_if_rehash_all": 0,
+            "name": "digest_the_bundle",
+            "sabotage": false,
+            "step": 4
+          },
+          {
+            "contract_verdict": "HOLDS",
+            "delta_paths": [
+              "bundle.digest.bak"
+            ],
+            "facts_at_risk": 0,
+            "frame_touched": [
+              "bundle.digest.bak"
+            ],
+            "invalidated": [],
+            "invalidated_if_rehash_all": 0,
+            "name": "keep_the_digest",
+            "sabotage": false,
+            "step": 5
+          }
+        ]
+      }
+    }
+  ],
+  "per_step_only": {
+    "chains": [
+      "archive_matches_workfile",
+      "manifest_describes_the_file",
+      "bundle_holds_the_copy"
+    ],
+    "claims_success_on_every_step": 3,
+    "note": "every step is judged against its own contract, and every one of them holds",
+    "of": 3
+  },
+  "rehash_all": {
+    "detected": 3,
+    "facts_revalidated": 69,
+    "note": "correct but blind to cost: it hashes every fact after every step"
+  },
+  "sabotaged_chains": 3,
+  "schema": "BRAIN_STANDING_FACTS_V1",
+  "what_this_shows": "3 real chains, each sabotaged by a legal action that silently falsifies what an earlier step established. Judging every step against its own contract -- the state of the art this tree reached last round -- claims success on 3 of 3, because every step really is legal. A ledger of standing facts, re-validating only what the current step's frame can touch, catches 3 of 3, localises the causal step in 3, and raises on 0 of 3 unsabotaged controls, at a cost of 3 hashes against 69 for re-hashing everything. The independent goal command fails on 3 of 3 chains, always at the last step: the symptom arrives 2 step(s) after the cause, and per-action checking cannot see the gap between them."
+}
