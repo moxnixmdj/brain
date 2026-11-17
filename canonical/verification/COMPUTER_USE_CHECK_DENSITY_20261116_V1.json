@@ -1,0 +1,181 @@
+{
+  "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+  "density_by_observation": {
+    "coarse": {
+      "CRASH": 13,
+      "DIFFERS": 16,
+      "INDISTINGUISHABLE": 1,
+      "NO_EFFECT": 4,
+      "caught_by_any_check": 33,
+      "density": 0.9706,
+      "indistinguishable_share": 0.0294,
+      "mutants": 34
+    },
+    "full": {
+      "CRASH": 13,
+      "DIFFERS": 17,
+      "INDISTINGUISHABLE": 0,
+      "NO_EFFECT": 4,
+      "caught_by_any_check": 34,
+      "density": 1.0,
+      "indistinguishable_share": 0.0,
+      "mutants": 34
+    },
+    "listing": {
+      "CRASH": 13,
+      "DIFFERS": 9,
+      "INDISTINGUISHABLE": 8,
+      "NO_EFFECT": 4,
+      "caught_by_any_check": 26,
+      "density": 0.7647,
+      "indistinguishable_share": 0.2353,
+      "mutants": 34
+    }
+  },
+  "density_by_regime": {
+    "coarse": {
+      "novel_caught_only_by_crash_or_no_effect": true,
+      "novel_density": 0.5,
+      "novel_invisible": 0.5,
+      "replay_density": 0.9706,
+      "replay_invisible": 0.0294
+    },
+    "full": {
+      "novel_caught_only_by_crash_or_no_effect": true,
+      "novel_density": 0.5,
+      "novel_invisible": 0.5,
+      "replay_density": 1.0,
+      "replay_invisible": 0.0
+    },
+    "listing": {
+      "novel_caught_only_by_crash_or_no_effect": true,
+      "novel_density": 0.5,
+      "novel_invisible": 0.5,
+      "replay_density": 0.7647,
+      "replay_invisible": 0.2353
+    }
+  },
+  "environment": {
+    "kind": "real directory, real programs from PATH, real subprocesses, real reset",
+    "observation_models": {
+      "coarse": "relative name and size",
+      "full": "relative name, size, content hash per file",
+      "listing": "relative name only"
+    },
+    "what_an_oracle_needs": "a recorded consequence to compare against; in replay the intent is the recorded consequence, so no human specification is required"
+  },
+  "examples": {
+    "caught_only_by_content": {
+      "coarse": "INDISTINGUISHABLE",
+      "full": "DIFFERS",
+      "mutant": "wrong_source",
+      "task": "tar"
+    },
+    "indistinguishable_under_full": null
+  },
+  "incremental_spend_usd": 0,
+  "model_calls": 0,
+  "mutants": 34,
+  "network_calls": 0,
+  "per_task": [
+    {
+      "full": {
+        "CRASH": 0,
+        "DIFFERS": 2,
+        "INDISTINGUISHABLE": 0,
+        "NO_EFFECT": 0
+      },
+      "mutants": 2,
+      "task": "gzip"
+    },
+    {
+      "full": {
+        "CRASH": 3,
+        "DIFFERS": 2,
+        "INDISTINGUISHABLE": 0,
+        "NO_EFFECT": 0
+      },
+      "mutants": 5,
+      "task": "sort"
+    },
+    {
+      "full": {
+        "CRASH": 1,
+        "DIFFERS": 2,
+        "INDISTINGUISHABLE": 0,
+        "NO_EFFECT": 1
+      },
+      "mutants": 4,
+      "task": "base64"
+    },
+    {
+      "full": {
+        "CRASH": 1,
+        "DIFFERS": 2,
+        "INDISTINGUISHABLE": 0,
+        "NO_EFFECT": 1
+      },
+      "mutants": 4,
+      "task": "tr"
+    },
+    {
+      "full": {
+        "CRASH": 1,
+        "DIFFERS": 2,
+        "INDISTINGUISHABLE": 0,
+        "NO_EFFECT": 1
+      },
+      "mutants": 4,
+      "task": "sed"
+    },
+    {
+      "full": {
+        "CRASH": 1,
+        "DIFFERS": 2,
+        "INDISTINGUISHABLE": 0,
+        "NO_EFFECT": 1
+      },
+      "mutants": 4,
+      "task": "sha256sum"
+    },
+    {
+      "full": {
+        "CRASH": 2,
+        "DIFFERS": 2,
+        "INDISTINGUISHABLE": 0,
+        "NO_EFFECT": 0
+      },
+      "mutants": 4,
+      "task": "cp"
+    },
+    {
+      "full": {
+        "CRASH": 1,
+        "DIFFERS": 1,
+        "INDISTINGUISHABLE": 0,
+        "NO_EFFECT": 0
+      },
+      "mutants": 2,
+      "task": "split"
+    },
+    {
+      "full": {
+        "CRASH": 3,
+        "DIFFERS": 2,
+        "INDISTINGUISHABLE": 0,
+        "NO_EFFECT": 0
+      },
+      "mutants": 5,
+      "task": "tar"
+    }
+  ],
+  "schema": "BRAIN_COMPUTER_USE_CHECK_DENSITY_V1",
+  "tasks_run": 9,
+  "tasks_skipped": [
+    {
+      "reason": "the declared correct command did not work (rc=0): ",
+      "task": "gunzip"
+    }
+  ],
+  "what_this_shows": "34 mechanically derived wrong actions on 9 real shell transformations in a real directory: a replay differential catches 1.0 of them under a full state observation (0.0 silently identical), 0.9706 under a name-and-size observation (0.0294 silently identical) and 0.7647 under a listing (0.2353 silently identical). That completeness is not a property of the agent: without a recorded consequence -- novel work, where there is nothing to replay -- only crashes and no-ops are visible, so density falls to 0.5 even with a full digest. Computer-use check density is therefore neither zero nor fixed: it is set by how much of the state the agent can see, and by whether it has a consequence to compare against."
+}
