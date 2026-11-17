@@ -31226,18 +31226,18 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 515,
+  "knowledge_documents": 516,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6995,
+  "research_index_records": 6997,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 452,
-  "source_index_modules": 1995
+  "source_index_modules": 1996
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "c2971c43acec24f1cae0051c7e361db750c97449c71f68fd6128ecebc3cd51dc"
+  "value": "1bb32a057cab25020dd78a8559def718cbc7b125aa1508649d11e1e0597058a0"
  },
  "engines": [
   {
@@ -69302,6 +69302,80 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 5963,
+   "headings": [
+    "The judge cannot read the anchor",
+    "Why this exists",
+    "What was built",
+    "The anchor corpus is real",
+    "Results (all on the real corpus)",
+    "Honest limits",
+    "Sources"
+   ],
+   "kind": "DOCUMENT",
+   "path": "VERDICT_ANCHOR_THE_JUDGE_CANNOT_READ_20261117_V1.md",
+   "sha256": "6dfd63b5412469fd4a226e3638a4e78e87b54209aae525850f434a9592297861",
+   "summary": "**Receipt:** `canonical/verification/VERDICT_ANCHOR_ADMISSION_20261117_V1.json` **Mechanism:** `canonical/runtime/verdict_anchor_admission_v1.py` **Tests:** `canonical/tests/test_verdict_anchor_admission_v1.py` — 11/11 **Rank:** 2 of `ranked_next_with_pass_fail` in `ONE_LOOP_ONE_TAIL_VERDICT_20261117_V1.json` **Authority:** NONE — producer-run sandbox, $0, no model called.",
+   "terms": {
+    "228": 5,
+    "2610.11464": 3,
+    "admission": 5,
+    "always-pass": 4,
+    "always_pass_collapse": 3,
+    "anchor": 12,
+    "arxiv": 4,
+    "cannot": 5,
+    "canonical": 4,
+    "capability": 4,
+    "collapse": 5,
+    "condition": 3,
+    "constant": 3,
+    "corpus": 8,
+    "every": 3,
+    "fail": 3,
+    "false": 4,
+    "honest": 5,
+    "instrument": 5,
+    "itself": 3,
+    "judge": 12,
+    "kill": 3,
+    "known-false": 4,
+    "loop": 4,
+    "measured": 5,
+    "never": 3,
+    "no": 5,
+    "not": 8,
+    "one": 7,
+    "only": 7,
+    "own": 5,
+    "pairs": 3,
+    "pass": 5,
+    "pinned": 3,
+    "plan": 5,
+    "ranked": 3,
+    "read": 3,
+    "real": 8,
+    "receipt": 4,
+    "refused": 8,
+    "replay": 5,
+    "replay_equals_live": 3,
+    "repository": 3,
+    "site": 4,
+    "source": 5,
+    "tests": 3,
+    "verdict": 4,
+    "verifier": 5
+   },
+   "title": "The judge cannot read the anchor",
+   "title_terms": [
+    "anchor",
+    "cannot",
+    "judge",
+    "read"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 7111,
    "headings": [
     "WAKE REPLAY CLOSES THE LIBRARY LOOP — measured",
@@ -85153,10 +85227,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1317,
+  "included_source_count": 1318,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "e3d7614d0eeab22c75d192213e7f8ea6697fb397c9af943ce811bf342d04b578"
+  "source_tree_digest": "a5fe4c44a4e40ea39eec1c122d5a03e3d17ebc91ccc2998a8e7792d0564d3269"
  },
  "research_index": [
   {
@@ -216231,6 +216305,24 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/VERDICT_ANCHOR_ADMISSION_20261117_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/VERDICT_ANCHOR_ADMISSION_20261117_V1.json",
+   "schema": "PROJECT_BRAIN_VERIFICATION_RECEIPT_V1",
+   "sha256": "1e346bfe7da739abd3f994bbd28bd536cf0be2104097e17aafd93791ea5d68f5",
+   "status": "",
+   "terms": {
+    "20261117": 1,
+    "admission": 1,
+    "anchor": 1,
+    "v1": 1,
+    "verdict": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-11",
    "id": "research:canonical/verification/VERIFIED_IMPROVEMENT_LOOP_V2_ACTIVATION_VERIFY_20261011_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -250500,6 +250592,51 @@
     "not": 1,
     "receipt": 2,
     "verifier": 2
+   }
+  },
+  {
+   "action_id": "VERDICT_ANCHOR_ADMISSION_20261117_V1",
+   "capability": false,
+   "date": "2026-11-17",
+   "id": "research:canonical/action_intents/VERDICT_ANCHOR_ADMISSION_20261117_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/VERDICT_ANCHOR_ADMISSION_20261117_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+   "sha256": "95002de49fa25c0c3367ef4c47dab920e9f908067d5b24c24f3904a9907ab408",
+   "status": "PROPOSED__ZERO_CREDIT__NO_TERMINAL_CLAIM",
+   "terms": {
+    "20261117": 1,
+    "admission": 1,
+    "anchor": 1,
+    "anchor_every_self_judged_verdict_to_a_real_replay_corpus_the_judge_cannot_read": 1,
+    "anchored": 1,
+    "axis": 1,
+    "blocker": 1,
+    "builds": 1,
+    "cannot": 1,
+    "collapsing": 1,
+    "coverage-class": 1,
+    "deepest": 1,
+    "gains": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "index": 1,
+    "instrument": 1,
+    "judge": 1,
+    "later": 1,
+    "lease": 1,
+    "loop": 1,
+    "names": 1,
+    "observation-verdict": 1,
+    "own": 1,
+    "parts": 1,
+    "piece": 1,
+    "prior": 1,
+    "proposed__zero_credit__no_terminal_claim": 1,
+    "ranked": 1,
+    "re-key": 1,
+    "sit": 1,
+    "smuggle": 1,
+    "so": 1
    }
   },
   {
@@ -327181,6 +327318,42 @@
     "value": 1,
     "wanted_columns": 1,
     "words_matching": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/verdict_anchor_admission_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/verdict_anchor_admission_v1.py",
+   "sha256": "e33015c47517fff06c2194f7fea80a6485995a342ce172d3cc8b7ead1d0aa973",
+   "summary": "Admit a self-judged verdict only if its judge cannot read the anchor it is graded against.",
+   "symbol_count": 4,
+   "symbols": [
+    "AnchorError",
+    "_normalize",
+    "admission_errors",
+    "anchor_from_replay_records"
+   ],
+   "terms": {
+    "admission": 1,
+    "admission_errors": 1,
+    "admit": 1,
+    "against": 1,
+    "anchor": 2,
+    "anchor_from_replay_records": 1,
+    "anchorerror": 1,
+    "cannot": 1,
+    "graded": 1,
+    "judge": 1,
+    "normalize": 1,
+    "only": 1,
+    "read": 1,
+    "self-judged": 1,
+    "v1": 1,
+    "verdict": 2
    }
   },
   {
