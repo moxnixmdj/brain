@@ -42,7 +42,7 @@
   },
   "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_FIVE_MEASURED_TERMS_HAD_NEVER_BEEN_COMPOSED_SO_LEVERAGE_WAS_READ_OFF_SLOPE_AND_SLOPE_SAYS_SPEND_ANYWHERE",
-  "canonical_base_commit": "a5e93b098cbaa2d3782286fc6d09efc14b71bdc1",
+  "canonical_base_commit": "cae454c9963b68dc530e6ddad0675cffda3ba921",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -128,7 +128,7 @@
       "systematic_editing_from_one_example": "SyDIT, PLDI 2011: from edit pairs in five large projects, mimics the human correctly on 70% (39/56) of systematic edits"
     },
     "incremental_spend_usd": 0,
-    "measured_at_commit": "a5e93b098cbaa2d3782286fc6d09efc14b71bdc1",
+    "measured_at_commit": "cae454c9963b68dc530e6ddad0675cffda3ba921",
     "model_calls": 0,
     "network_calls": 0,
     "what_this_does_not_claim": "The product assumes independence, which is a modelling choice: the terms come from different populations (245 within-commit pairs, 691 sites, 228 replay pairs). The 0.70 determinacy ceiling is the best published system, not an impossibility proof."
@@ -152,7 +152,7 @@
   ],
   "probe_specific": false,
   "recursive_obs": {
-    "canonical_base_commit": "a5e93b098cbaa2d3782286fc6d09efc14b71bdc1",
+    "canonical_base_commit": "cae454c9963b68dc530e6ddad0675cffda3ba921",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "reading leverage off a partial derivative without asking whether the term can move",
@@ -359,7 +359,7 @@
       "selected_route": "MEASURE_THE_SUPPLY_AND_DETERMINACY_OF_ONE_DEMONSTRATION_ON_REAL_COMMIT_HISTORY",
       "selected_route_preflight": {
         "all_required_dependencies_ready": true,
-        "checked_at_utc": "2026-11-17T03:03:38Z",
+        "checked_at_utc": "2026-11-17T03:13:02Z",
         "execution_dependencies": [
           {
             "dependency": "local Python 3.11 runtime with pytest",
@@ -476,8 +476,8 @@
       "python3 -m pytest canonical/tests/test_capability_law_v1.py -q",
       "python3 canonical/swe_kernel/capability_law_v1.py --pinned",
       "python3 canonical/runtime/compile_brain_unified_model_v1.py",
-      "python3 execution_guard/repo_integrity_guard_v1.py --base a5e93b098cbaa2d3782286fc6d09efc14b71bdc1",
-      "python3 canonical/runtime/enforce_goal_hierarchy.py --base a5e93b098cbaa2d3782286fc6d09efc14b71bdc1 --head HEAD"
+      "python3 execution_guard/repo_integrity_guard_v1.py --base cae454c9963b68dc530e6ddad0675cffda3ba921",
+      "python3 canonical/runtime/enforce_goal_hierarchy.py --base cae454c9963b68dc530e6ddad0675cffda3ba921 --head HEAD"
     ],
     "receipt": "canonical/verification/CAPABILITY_LAW_20261116_V1.json"
   },
