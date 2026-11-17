@@ -1,0 +1,649 @@
+{
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+ "action_id": "THE_INDEX_BUYS_COST_NOT_FEASIBILITY_20261116_V1",
+ "action_intent_id": "THE_INDEX_BUYS_COST_NOT_FEASIBILITY_20261116_V1",
+ "action_kind": "REAL_CAPABILITY_ACQUISITION",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "incremental_spend_usd": 0,
+  "independent_verification_completed": false,
+  "independent_verification_note": "Producer-run sandbox only. Independent verification still open.",
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+  "progress_evidence_paths": [
+   "canonical/verification/THE_INDEX_BUYS_COST_NOT_FEASIBILITY_20261116_V1.json",
+   "THE_INDEX_BUYS_COST_NOT_FEASIBILITY_20261116_V1.md"
+  ],
+  "route_class": "DELETE",
+  "scope_complete_discharge": false,
+  "terminal_achieved": false
+ },
+ "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_TREE_NAMED_THE_INDEX_AS_THE_SINGLE_BOTTLENECK_BUT_A_PERFECT_INDEX_IS_WORTH_17.4_PERCENT_OF_ACT_CALLS_AND_ZERO_OF_FEASIBILITY_WHILE_29879_OF_39879_ACT_CALLS_ARE_SPENT_FINDING_A_PLAN_OF_MEAN_LENGTH_3.2_",
+ "canonical_base_commit": "bcb32d3e6c3819dc23a3af34739140aa28e0407c",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "THE_TREE_NAMED_THE_INDEX_AS_THE_SINGLE_BOTTLENECK_BUT_A_PERFECT_INDEX_IS_WORTH_17.4_PERCENT_OF_ACT_CALLS_AND_ZERO_OF_FEASIBILITY_WHILE_29879_OF_39879_ACT_CALLS_ARE_SPENT_FINDING_A_PLAN_OF_MEAN_LENGTH_3.2_",
+ "date": "2026-11-16",
+ "expected_parent_change": "The index stops being the top of the build order: its whole value is measured at 17.4% of act_calls against a transition model's 99.58% upper bound, and 100% of the unsolvable rows are rows where no choice among the five policies helps. Nothing is built this round; the deliverable is the price list that reorders the queue.",
+ "expected_parent_frontier_change": "Work is aimed at the object the tree already names as its goal and its own model_v1.py admits it does not contain -- a learned (state, action) -> next state -- rather than at the index over strategies that all work.",
+ "explicit_user_authorization": [
+  "Instant learning + instant learning in new arbitrary environments -- we solved those perfectly. Doesn't that mean we can solve any computer use?",
+  "Give the model the most advanced actions, let it do a thing once, it learns it permanently, and every computer task plus the most advanced software engineering is solved. Am I right or wrong?",
+  "You must think from first principles for everything",
+  "You should kill all the bad and dumb ideas before you waste time implementing them.",
+  "NEVER BUILD BEFORE REASRCHING IS EXHASIATAION IS HAPPENED",
+  "maximize your web use",
+  "all the tests are not on synthetic data but are on the hardest open tests",
+  "Testing on bugs we already know work is not progress -- that is self-congratulation.",
+  "YOU SURE THIS THE SMARTEST APPROACH?",
+  "Work in branch, merge only when complete (fastest)",
+  "Merge once, not 10 times."
+ ],
+ "falsification_condition": "An instance that is solvable by exactly one policy at adequate budget; or a satisfiable instance the best fixed policy fails and a per-kind index saves; or any of the six exhausted state spaces found to contain the goal.",
+ "files": {
+  "canonical/verification/THE_INDEX_BUYS_COST_NOT_FEASIBILITY_20261116_V1.json": "7748020eb772817b8529235993f052aa8fc67e3505a42c17eaa53af6b9350d79",
+  "THE_INDEX_BUYS_COST_NOT_FEASIBILITY_20261116_V1.md": "f19ff7bbce8358558db4d2ccb581d1a715d41ae141382d8329f52481b7660f99"
+ },
+ "generic_repair_from_single_probe": false,
+ "governance_change": false,
+ "highest_leverage_now": true,
+ "incremental_spend_usd": 0,
+ "intentional_route_race": false,
+ "load_bearing_primary": {
+  "open_obligation_ids": [
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "constructive_gap_for_open_obligation_ids": [
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "expected_obligation_discharge_lcb": 0,
+  "expected_obligation_unlock_lcb": "2/100",
+  "success_probability_lcb": "4/5",
+  "wall_clock_cost_ub": 3600,
+  "interpretation": "Speculative forecast only. This round discharges no obligation, claims no benchmark gain, no capability credit and no independent verification. Its claim is a price: a perfect index would save at most 17.4% of the action budget on the tree's own 52 satisfiable instances, and 0.00 points of feasibility."
+ },
+ "measured_effect": {
+  "instrument": "canonical/tools/cross_kind_learning_to_learn_benchmark_v1.py via its own _solve_with, 20 kinds x 3 instances = 60 instances, node_budget swept",
+  "reads_only": true,
+  "new_module_added": false,
+  "budget_sweep": {
+   "note": "solved counts are 'at least one of the five policies solves it'",
+   "node_budget_40": {
+    "solved": 45,
+    "of": 60,
+    "train": 25,
+    "test": 20
+   },
+   "node_budget_80": {
+    "solved": 46,
+    "of": 60,
+    "train": 26,
+    "test": 20
+   },
+   "node_budget_160": {
+    "solved": 49,
+    "of": 60,
+    "train": 26,
+    "test": 23
+   },
+   "node_budget_320": {
+    "solved": 50,
+    "of": 60,
+    "train": 27,
+    "test": 23
+   },
+   "node_budget_640": {
+    "solved": 51,
+    "of": 60,
+    "train": 27,
+    "test": 24
+   },
+   "node_budget_1280": {
+    "solved": 52,
+    "of": 60,
+    "train": 27,
+    "test": 25
+   }
+  },
+  "the_8_that_never_solve": {
+   "count": 8,
+   "finding": "UNSATISFIABLE_OR_UNREACHABLE_WITHIN_THE_SEARCH_DEPTH_CAP__NOT_A_POLICY_FAILURE",
+   "evidence": "exhaustive reachable-state enumeration, no node budget, depth cap 14 = the search's own max_depth",
+   "rows": [
+    {
+     "kind": "ring_rotate",
+     "instance": 0,
+     "reachable_states": 3,
+     "max_discovery_depth": 1,
+     "goal": "ABSENT",
+     "proof": "COMPLETE__state_space_exhausted"
+    },
+    {
+     "kind": "ring_rotate",
+     "instance": 1,
+     "reachable_states": 3,
+     "max_discovery_depth": 1,
+     "goal": "ABSENT",
+     "proof": "COMPLETE__state_space_exhausted"
+    },
+    {
+     "kind": "ring_rotate",
+     "instance": 2,
+     "reachable_states": 3,
+     "max_discovery_depth": 1,
+     "goal": "ABSENT",
+     "proof": "COMPLETE__state_space_exhausted"
+    },
+    {
+     "kind": "queue_rotate",
+     "instance": 2,
+     "reachable_states": 13,
+     "max_discovery_depth": 3,
+     "goal": "ABSENT",
+     "proof": "COMPLETE__state_space_exhausted"
+    },
+    {
+     "kind": "two_jug_pour",
+     "instance": 0,
+     "reachable_states": 16,
+     "max_discovery_depth": 7,
+     "goal": "ABSENT",
+     "proof": "COMPLETE__state_space_exhausted"
+    },
+    {
+     "kind": "dial_lock",
+     "instance": 2,
+     "reachable_states": 27,
+     "max_discovery_depth": 6,
+     "goal": "ABSENT",
+     "proof": "COMPLETE__state_space_exhausted"
+    },
+    {
+     "kind": "stack_pushout",
+     "instance": 0,
+     "reachable_states": 32,
+     "max_discovery_depth": "<=14",
+     "goal": "ABSENT",
+     "proof": "EMPTY_WITHIN_SEARCH_DEPTH__STATE_SPACE_UNBOUNDED"
+    },
+    {
+     "kind": "stack_pushout",
+     "instance": 1,
+     "reachable_states": 110,
+     "max_discovery_depth": "<=14",
+     "goal": "ABSENT",
+     "proof": "EMPTY_WITHIN_SEARCH_DEPTH__STATE_SPACE_UNBOUNDED"
+    }
+   ],
+   "honest_limit": "stack_pushout's reachable space is unbounded (a probe run reached discovery depth 6251 and was stopped at a 50000-state cap), so for those two the claim is 'no goal state reachable within the depth the searcher is allowed', NOT 'unsatisfiable'. The other six are exhausted exactly.",
+   "what_this_is_not": "an instrument artifact: nothing about the policy set, the index, or learning enters these six rows"
+  },
+  "at_adequate_budget_the_choice_stops_discriminating": {
+   "node_budget_1280": {
+    "satisfiable_instances": 52,
+    "solved_by_5_of_5_policies": 42,
+    "solved_by_4_of_5_policies": 10,
+    "solved_by_exactly_1_policy": 0,
+    "solved_by_0_of_5_policies": 0,
+    "note": "every satisfiable instance is solved by at least 4 of the 5 policies; NO instance is solved by exactly one"
+   },
+   "node_budget_40_for_contrast": {
+    "solved_by_5_of_5": 31,
+    "solved_by_1_of_5": 4,
+    "solved_by_0_of_5": 7
+   },
+   "interpretation": "The '4/30 solved by exactly one policy' shape that motivated a policy index is a property of STARVED SEARCH, not of the problems. It disappears entirely at 1280 nodes."
+  },
+  "instance_sensitivity_survives_but_only_as_cost": {
+   "result": "13/18 kinds with >=2 solvable instances have a different CHEAPEST policy on a different instance",
+   "example": "binary_odometer: instance 0 needs 15860 act_calls under its cheapest policy, instance 1 needs 38",
+   "interpretation": "The tree's instance-sensitivity finding is CONFIRMED and is not a budget artifact. But it names the cheapest policy, not the only working one -- so it is a fact about cost, and it is the one real reason an index could pay."
+  },
+  "the_price_of_the_index": {
+   "currency": "act_calls at node_budget=1280 over 52 satisfiable instances",
+   "oracle_perfect_index": 39879,
+   "best_fixed_policy_repeat_last": 48274,
+   "train_best_policy_bfs_lex": 50752,
+   "oracle_saving_vs_best_fixed_pct": 17.4,
+   "oracle_saving_vs_train_best_pct": 21.4,
+   "heldout_split_only": {
+    "oracle": 32083,
+    "best_fixed": 36562,
+    "train_best": 39272,
+    "oracle_saving_vs_best_fixed_pct": 12.3,
+    "oracle_saving_vs_train_best_pct": 18.3
+   },
+   "feasibility_change_from_a_perfect_index": "0.00 percentage points (all 52 already solvable under any of >=4 policies)"
+  },
+  "the_same_budget_spent_where_it_dominates": {
+   "total_act_calls_by_cheapest_winning_search": 39879,
+   "total_plan_length_in_those_same_instances": 167,
+   "mean_plan_length": 3.2,
+   "max_plan_length": 14,
+   "search_to_execution_ratio_mean": 129,
+   "search_to_execution_ratio_median": 10,
+   "max_ratio_single_instance": {
+    "kind": "binary_odometer",
+    "instance": 0,
+    "act_calls": 15860,
+    "plan_length": 7,
+    "ratio": 2266
+   },
+   "a_perfect_transition_model_would_remove_pct_of_act_calls": 99.58,
+   "why_this_is_the_same_budget": "both numbers are act_calls spent by the same runs at the same node budget on the same 52 instances; the only difference is what the calls are FOR -- choosing a strategy versus discovering the transitions the plan is made of"
+  },
+  "the_discriminating_rows_only": {
+   "note": "a row where all five policies win cannot distinguish any chooser from a coin",
+   "discriminating_heldout_rows": "8/30",
+   "tree_key": {
+    "answered": "5/8",
+    "correct": "3/8"
+   },
+   "computed_from_a_depth_3_effect_probe": "8/8",
+   "attribution_control": {
+    "always_bfs_lex": "6/8",
+    "always_repeat_last": "6/8",
+    "always_never_last": "6/8"
+   },
+   "verdict": "The computed arm beats the control by 2 rows out of 8 and costs 72-120 act_calls to compute. This is NOT evidence that a smarter feature is the frontier; it is the control that killed the claim before it was made. Recorded because the number looked like a win."
+  },
+  "injectivity_is_reachable_and_still_worthless": {
+   "question": "the tree reports no granularity of its key is injective on the policy distinction; is a deeper effect probe injective?",
+   "answer": "yes at depth 3, and it does not help",
+   "depth_sweep_unique_keys_of_20_kinds": {
+    "1": 19,
+    "2": 19,
+    "3": 20,
+    "4": 20,
+    "5": 20
+   },
+   "cost_to_build_one_signature_act_calls": {
+    "mean": 133.7,
+    "max": 234
+   },
+   "heldout_rows_answered_by_the_injective_key": "1/30",
+   "heldout_rows_answered_by_the_tree_coarse_key": "16/30",
+   "heldout_correct_by_the_tree_coarse_key": "8/30",
+   "heldout_correct_by_the_exact_key": "4/30",
+   "conclusion": "Injectivity is purchasable and buys nothing: the injective key answers 1 of 30 held-out rows. Finer is strictly WORSE than coarser on held-out accuracy (8/30 vs 4/30), which reproduces the tree's own reason for a coarse key. A key can be made injective, or transferable, and the measurement says not both -- but the reason it does not matter here is that with adequate search there is nothing left to choose between."
+  }
+ },
+ "next_step": "Fill the model_v1.py socket with a transition function learned from the tree's own acting -- per-action effect induction over the state the environment already reports, no weights, no external model -- and score it by the one number this round fixed: act_calls spent versus plan length executed, currently 39879 versus 167.",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "paths": [
+  "canonical/verification/THE_INDEX_BUYS_COST_NOT_FEASIBILITY_20261116_V1.json",
+  "THE_INDEX_BUYS_COST_NOT_FEASIBILITY_20261116_V1.md"
+ ],
+ "prior_work_reused": [
+  "canonical/tools/cross_kind_learning_to_learn_benchmark_v1.py (_solve_with, _heldout_kinds, NODE_BUDGET) -- unmodified",
+  "canonical/tools/cross_kind_compounding_benchmark_v1.py (_kinds) -- unmodified",
+  "canonical/runtime/learn_to_learn_v1.py (POLICIES, features, feature_key, search) -- unmodified",
+  "canonical/tools/the_index_is_the_bottleneck_v1.py -- read, its sweep reproduced at higher budget not replaced",
+  "canonical/runtime/applicability_v1.py, precondition_discovery_v1.py, contrast_selection_v1.py -- read; the vocabulary repair already exists and was not rebuilt",
+  "canonical/runtime/model_v1.py -- read; the socket this round prices, not rebuilt"
+ ],
+ "probe_specific": false,
+ "recursive_obs": {
+  "canonical_base_commit": "bcb32d3e6c3819dc23a3af34739140aa28e0407c",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "the recommended index repair",
+   "a finer or deeper feature key",
+   "a new learning mechanism",
+   "a larger search budget as the fix",
+   "the index as the single bottleneck"
+  ],
+  "expected_parent_level_state_change": "Work is aimed at the object the tree already names as its goal and its own model_v1.py admits it does not contain -- a learned (state, action) -> next state -- rather than at the index over strategies that all work.",
+  "iteration_limit": 1,
+  "obs_blocker": {
+   "delete_bypass_substitute_options": [
+    "delete the assumption that a non-injective key is a feasibility loss",
+    "reuse the tree's own benchmark and search as the instrument",
+    "measure the price before repairing"
+   ],
+   "intrinsic_or_path_specific": "intrinsic: an index chooses among strategies, so its value is bounded by the regret of the best fixed choice; path_specific: on this synthetic benchmark that regret is 17.4%",
+   "surviving_causal_blocker": "THE_TREE_NAMED_THE_INDEX_AS_THE_SINGLE_BOTTLENECK_BUT_A_PERFECT_INDEX_IS_WORTH_17.4_PERCENT_OF_ACT_CALLS_AND_ZERO_OF_FEASIBILITY_WHILE_29879_OF_39879_ACT_CALLS_ARE_SPENT_FINDING_A_PLAN_OF_MEAN_LENGTH_3.2_"
+  },
+  "obs_capability": {
+   "capability_work_deleted": [
+    "a claim that repairing the index is the top of the build order (measured: 17.4% vs 99.58%)",
+    "a claim that the 8 unsolvable rows are a choice problem (measured: goal absent from the reachable space)",
+    "my own 8/8 effect-probe result (killed by a 6/8 constant-policy control)"
+   ],
+   "existing_inherited_routes_checked": [
+    "canonical/tools/the_index_is_the_bottleneck_v1.py (its sweep, reproduced at higher budget)",
+    "canonical/tools/cross_kind_learning_to_learn_benchmark_v1.py (_solve_with, NODE_BUDGET)",
+    "canonical/runtime/learn_to_learn_v1.py (POLICIES, features, feature_key, search)",
+    "canonical/runtime/applicability_v1.py (state-fact keyed learner, vocabulary_gap witness)",
+    "canonical/runtime/precondition_discovery_v1.py (recovers an unnameable precondition; refuses to register it)",
+    "canonical/runtime/contrast_selection_v1.py (ranks the next observation from VISITED states only)",
+    "canonical/runtime/model_v1.py (a socket; 'this file does not contain a model')",
+    "canonical/runtime/world_probe_v1.py (hand-written sensors, fails closed)"
+   ],
+   "external_existing_routes_checked": [
+    "Skill-V arXiv 2610.11781: skills as falsifiable contracts with pre/postconditions; gains from maintenance not growth",
+    "SkillOps arXiv 2605.13716: skill contract (P,O,A,V,F) with artifact-precondition edges",
+    "SkillFusion arXiv 2610.15481: typed scoped constraints, hard vs soft conflicts",
+    "SkillCommit arXiv 2608.15165: scope overreach causes negative transfer; replay gates each scope expansion",
+    "CompoSkill arXiv 2608.16246: individually-safe skills compose into harmful paths"
+   ],
+   "surviving_gap": "No transition function is learned anywhere in canonical/runtime/: no predict_effect, no rollout, no (state, action) -> next state. The tree names a counterfactual world model as its goal and its own socket file states it does not contain one."
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "a higher score on already-solved instances",
+    "a finer feature key",
+    "a bigger search budget"
+   ],
+   "real_outcome": "Solve what is solvable at the least action cost, and stop calling a costing choice a capability wall.",
+   "surviving_necessity": "The only quantity that separates the two candidate next projects is act_calls: 17.4% for a perfect index versus 99.58% for a consequence model."
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "the constant-policy control absorbs the 'smarter feature helps' explanation",
+   "downstream_work_to_delete_or_supersede": "the belief that the index is the single bottleneck; the index is now a cost instrument",
+   "fresh_reuse_plan": "re-run the budget sweep and the price measurement whenever POLICIES, NODE_BUDGET or the kind set changes"
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": "the exhaustive state-space enumeration is cached in the receipt for the 6 complete rows; it is not re-run",
+   "search_stop_decision": "stopped when the price of the index, its control, and the status of every unsolvable row were all measured and my own best-looking result had been killed by its control"
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "implementation_still_necessary": false,
+   "losing_routes_reason": "Building the index repair would have optimised 17.4% of act_calls and 0.00 points of feasibility, while a 99.58% term was already named in the tree and unbuilt.",
+   "routes_ranked": [
+    "DELETE the index-repair plan (taken: the measurement reorders it)",
+    "REUSE the tree's benchmark and search as the instrument (taken)",
+    "SYNTHESIZE a transition model (next, not this round)",
+    "SYNTHESIZE a deeper effect key (measured: injective and worthless, 1/30 held-out)"
+   ]
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "none used beyond the tree's own synthetic kinds, which are the substrate being measured and are named as such in every limit"
+  },
+  "real_outcome": "A perfect index over the five search strategies is worth 17.4% of the action budget and 0.00 points of feasibility on the tree's own 52 satisfiable instances; 29879 of 39879 act_calls go to finding a plan whose execution is 167 actions.",
+  "required_capability": "Choose the right action without spending the action -- a consequence model.",
+  "route_frontier": {
+   "challenger_routes": [
+    {
+     "route": "repair the index key so it is injective on the policy distinction",
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "unchanged",
+      "CAPABILITY_STRENGTH": "0.00 points of feasibility",
+      "WALL_CLOCK": "weeks",
+      "INCREMENTAL_COST": "a new key family plus a store",
+      "RELIABILITY": "unknown on new kinds",
+      "VERIFIABILITY": "measurable"
+     },
+     "evidence": [
+      "a perfect, free oracle index saves 17.4% of act_calls and 0.00 points of feasibility",
+      "0 of 52 satisfiable instances are solved by exactly one policy at 1280 nodes",
+      "an injective depth-3 effect key answers 1 of 30 held-out rows"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_INDEX_BUYS_COST_NOT_FEASIBILITY_20261116_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ]
+    },
+    {
+     "route": "a deeper or finer effect feature",
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "worse: 4/30 correct vs the coarse key's 8/30",
+      "CAPABILITY_STRENGTH": "none",
+      "WALL_CLOCK": "days",
+      "INCREMENTAL_COST": "133.7 act_calls per signature",
+      "RELIABILITY": "unknown",
+      "VERIFIABILITY": "measured"
+     },
+     "evidence": [
+      "depth-3 signature is injective 20/20 kinds and answers 1/30 held-out rows",
+      "the coarse key is more accurate than the exact one on held-out kinds"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_INDEX_BUYS_COST_NOT_FEASIBILITY_20261116_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ]
+    },
+    {
+     "route": "learn a (state, action) -> next state transition function and plan in it",
+     "resolution": "SELECTED",
+     "comparison": {
+      "CORRECTNESS": "not built; the 99.58% is an upper bound",
+      "CAPABILITY_STRENGTH": "removes up to 99.58% of act_calls",
+      "WALL_CLOCK": "unknown",
+      "INCREMENTAL_COST": "one module on an existing socket",
+      "RELIABILITY": "unknown",
+      "VERIFIABILITY": "the same act_calls meter, 39879 vs 167"
+     },
+     "evidence": [
+      "search-to-execution ratio 129x mean, 2266x worst single instance",
+      "no transition learner exists in canonical/runtime/",
+      "model_v1.py states it contains no model"
+     ],
+     "qualification_evidence": [
+      "canonical/runtime/model_v1.py",
+      "canonical/verification/THE_INDEX_BUYS_COST_NOT_FEASIBILITY_20261116_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE",
+      "BRAIN_INHERITED"
+     ]
+    }
+   ],
+   "checked_at_utc": "2026-11-17T02:48:38Z",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "repair the index key, as the previous document recommended",
+   "max_age_hours": 24,
+   "negative_search_summary": "No route in this tree or in the 2026 literature makes the index a feasibility instrument: the skill-contract line (Skill-V, SkillOps, SkillFusion, SkillCommit) addresses composition and scope of applicability, not the ability to predict an action's consequence without spending it. Nothing in canonical/runtime/ learns (state, action) -> next state.",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "2026 agent transition model state action next state model-based planning vs model-free"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "learned forward model deterministic environment action effect induction tabular"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "skill applicability index scope precondition 2026 arXiv agent"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "model-based agent explicit world model computer use 2026"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "selected_route": "DEMOTE_THE_INDEX_FROM_SINGLE_BOTTLENECK_BECAUSE_AT_AN_ADEQUATE_SEARCH_BUDGET_EVERY_SATISFIABLE_INSTANCE_IS_SOLVED_BY_AT_LEAST_FOUR_OF_FIVE_STRATEGIES_AND_A_PERFECT_INDEX_BUYS_COST_NOT_FEASIBILITY",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-11-17T02:48:38Z",
+    "execution_dependencies": [
+     {
+      "dependency": "python3 running the tree's own benchmark modules",
+      "evidence": [
+       "the budget sweep, price measurement and state-space enumerations all ran"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "LOCAL_RUNTIME",
+      "observed_at_utc": "2026-11-17T02:48:38Z",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "canonical/runtime/model_v1.py socket present as the next build target",
+      "evidence": [
+       "read this round; it states it contains no model"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "STORAGE",
+      "observed_at_utc": "2026-11-17T02:48:38Z",
+      "required": false,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "max_age_hours": 2,
+    "selected_route": "DEMOTE_THE_INDEX_FROM_SINGLE_BOTTLENECK_BECAUSE_AT_AN_ADEQUATE_SEARCH_BUDGET_EVERY_SATISFIABLE_INSTANCE_IS_SOLVED_BY_AT_LEAST_FOUR_OF_FIVE_STRATEGIES_AND_A_PERFECT_INDEX_BUYS_COST_NOT_FEASIBILITY",
+    "status": "READY"
+   },
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/tools/cross_kind_learning_to_learn_benchmark_v1.py",
+     "canonical/tools/cross_kind_compounding_benchmark_v1.py",
+     "canonical/runtime/learn_to_learn_v1.py",
+     "canonical/runtime/model_v1.py",
+     "canonical/runtime/applicability_v1.py",
+     "canonical/runtime/precondition_discovery_v1.py",
+     "canonical/runtime/contrast_selection_v1.py"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "https://arxiv.org/html/2610.11781 (Skill-V)",
+     "https://arxiv.org/html/2605.13716 (SkillOps)",
+     "https://arxiv.org/html/2610.15481 (SkillFusion)",
+     "https://pith.science/paper/2608.15165 (SkillCommit)",
+     "https://arxiv.org/html/2608.16246 (CompoSkill)"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "stdlib only this round; no package installed or used in the result-bearing path"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "The 2026 skill-contract literature addresses applicability scope, not consequence prediction"
+    ]
+   },
+   "unresolved_plausible_dominators": []
+  },
+  "routes_considered": [
+   "DELETE",
+   "REUSE",
+   "COMPOSE",
+   "SYNTHESIZE_NEW_PRIMITIVE"
+  ],
+  "selected_surviving_route": "DEMOTE_THE_INDEX_FROM_SINGLE_BOTTLENECK_BECAUSE_AT_AN_ADEQUATE_SEARCH_BUDGET_EVERY_SATISFIABLE_INSTANCE_IS_SOLVED_BY_AT_LEAST_FOUR_OF_FIVE_STRATEGIES_AND_A_PERFECT_INDEX_BUYS_COST_NOT_FEASIBILITY",
+  "stop_condition": "The price of a perfect index is reported with its control, the eight unsolvable rows are proven or explicitly bounded, my own 8/8 result is reported with the constant-policy control that killed it, and no capability, family, terminal or weight credit is claimed.",
+  "why_selected_route_is_fastest_sufficient": "One number reorders the queue: the same action meter prices a perfect index at 17.4% and a consequence model at up to 99.58%, so the model is the sufficient route and repairing the index is not."
+ },
+ "route_id": "DEMOTE_THE_INDEX_FROM_SINGLE_BOTTLENECK_BECAUSE_AT_AN_ADEQUATE_SEARCH_BUDGET_EVERY_SATISFIABLE_INSTANCE_IS_SOLVED_BY_AT_LEAST_FOUR_OF_FIVE_STRATEGIES_AND_A_PERFECT_INDEX_BUYS_COST_NOT_FEASIBILITY",
+ "scope_and_limits": "AUTHORITY NONE. Producer-run sandbox. 20 hand-written synthetic kinds x 3 instances, 5 search strategies. No transition model was built; 99.58% is an upper bound from substituting true plan length, not a measured learner. stack_pushout instances 0 and 1 are NOT proven unsatisfiable (unbounded state space). Not a claim about computer use in general.",
+ "scope_complete_discharge": false,
+ "selected_route": "DEMOTE_THE_INDEX_FROM_SINGLE_BOTTLENECK_BECAUSE_AT_AN_ADEQUATE_SEARCH_BUDGET_EVERY_SATISFIABLE_INSTANCE_IS_SOLVED_BY_AT_LEAST_FOUR_OF_FIVE_STRATEGIES_AND_A_PERFECT_INDEX_BUYS_COST_NOT_FEASIBILITY",
+ "status": "PROPOSED__ZERO_CREDIT__NO_TERMINAL_CLAIM",
+ "stop_condition": "The price of a perfect index is reported with its control, the eight unsolvable rows are proven or explicitly bounded, my own 8/8 result is reported with the constant-policy control that killed it, and no capability, family, terminal or weight credit is claimed.",
+ "terminal_achieved": false,
+ "terminal_credit_delta": 0,
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "truth": {
+  "achieved": false
+ },
+ "user_authorized_governance_change": false,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "currentness": {
+   "accepted_families": 5,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "This measures reach on real pages; it discharges no truth obligation and claims no terminal credit.",
+  "target_truth_obligations": [
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [],
+   "decisive_question": "Of the pages no budget, search order or prior can reach, how many are unreachable because the answer is a value nothing on the page states -- and does generating that value reach them?",
+   "falsifier_id": "A_PAGE_WHERE_THE_DERIVED_CANDIDATE_CHANGES_AN_OUTCOME_FOR_THE_WORSE_OR_A_DECOY_SUCCEEDS_WHERE_THE_DERIVED_VALUE_FAILS",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "Two of my own conclusions were found wrong and are recorded rather than hidden: a malformed action produced a false 'blind observation' claim, and a consolidator that hardcodes null produced a false 'the four arms never differed' claim. Both were retracted before this PR and are named in the receipt.",
+   "proposal_id": "THE_ANSWER_WAS_A_VALUE_NOTHING_STATED_20261117_V1"
+  }
+ },
+ "verification": {
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "commands": [
+   "python3 execution_guard/repo_integrity_guard_v1.py --ci --root . --base c6c21a2c  # violations=0",
+   "python3 canonical/runtime/enforce_goal_hierarchy.py --base c6c21a2c --head HEAD  # DRIFT_GUARD_PASS",
+   "python3 canonical/runtime/verify_brain_unified_model_v1.py  # 33/33 PASS",
+   "python -m unittest test_brain_unified_model_v1 test_goal_compiler test_goal_compiler_world_binding_v1  # 137 OK"
+  ]
+ },
+ "weakens_existing_guard": false
+}
