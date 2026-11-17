@@ -40,7 +40,7 @@
  },
  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A_PAID_FOR_CONSEQUENCE_MODEL_TRANSFERS_TO_A_NEW_INSTANCE_33_OF_33_AND_TO_A_NEW_ENVIRONMENT_0_OF_48_BECAUSE_ZERO_FOREIGN_TRANSITIONS_ARE_EVER_CONSULTED",
- "canonical_base_commit": "d2e0aa07937ee1993dcac84cffff8bac5eb2a1e7",
+ "canonical_base_commit": "98f60e7c87db0c1b042afa7ed71c381005209da6",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -219,7 +219,7 @@
  ],
  "probe_specific": false,
  "recursive_obs": {
-  "canonical_base_commit": "d2e0aa07937ee1993dcac84cffff8bac5eb2a1e7",
+  "canonical_base_commit": "98f60e7c87db0c1b042afa7ed71c381005209da6",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "the law-based consequence model (SET/ADD/MOD/TABLE classes)",

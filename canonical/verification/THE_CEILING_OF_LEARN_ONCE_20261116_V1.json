@@ -1,0 +1,171 @@
+{
+ "acquisition_is_solved": {
+  "method": "k6_minimum_adequate_policy_cover_v1.minimum_policy_cover, exact, checked against an independent exhaustive search; validity confirmed by mapping the returned labels back to plans because _normalize returns reprs, not plans",
+  "reading": "acquisition is not the constraint. Four experiences, exactly, licence every distinguishable situation for task A -- and one for task C. The number of experiences needed was never the open question.",
+  "task_A": {
+   "exact": 4,
+   "greedy": 4,
+   "smaller_cover_exists": false
+  },
+  "task_C": {
+   "exact": 1,
+   "greedy": 1,
+   "smaller_cover_exists": false
+  },
+  "uncoverable_task_C": 28
+ },
+ "authority": "NONE__PRODUCER_RUN_ARITHMETIC_OVER_MERGED_RECEIPTS",
+ "composition_is_a_separate_wall": {
+  "both_accepted": true,
+  "each_rule_accepted_individually": [
+   true,
+   true
+  ],
+  "net_change_is_nothing": true,
+  "reading": "each rule is verified by the demonstration that taught it; the check is LOCAL, so a local check cannot see a global revert. 'N verified skills' is not evidence about a sequence of two, and real coding work is a sequence.",
+  "sequence_reason": "STEP_REVERTED_EARLIER_STATE:step2",
+  "sequence_verdict": "FAIL",
+  "steps": [
+   "CHANGED",
+   "REVERTED"
+  ]
+ },
+ "conclusion": "The claim is right about acquisition and wrong about yield. Acquisition is exact: four experiences licence every distinguishable situation on the measured environment, and no fewer will do. But one-experience memory serves 4.81% of real edits end to end -- one in twenty-one -- and 0 of 14 multi-line edits. On top of that, verified pieces do not compose: two individually accepted skills produce a sequence whose net change is nothing, and every local check passes both steps. So 'learn each once and everything is solved' is false by two measured factors, neither of which is learning speed. The single bottleneck is not how fast the system learns; it is that real work is mostly not repetition, and that the correctness of a sequence is not implied by the correctness of its steps.",
+ "incremental_spend_usd": 0,
+ "kind": "receipt",
+ "model_calls": 0,
+ "network_calls": 0,
+ "producer_cognition_model_dependency_count": 0,
+ "reused_not_rebuilt": [
+  "LEARN_ONCE_KEEP_FOREVER_SERVES_A_TWENTIETH_OF_REAL_EDITS_20261116_V1.md",
+  "ONE_DEMONSTRATION_AMORTISES_A_SIXTH_OF_REAL_WORK_20261116_V1.md",
+  "SKILLS_DONT_COMPOSE_20261112_V1.md",
+  "ONE_DEMONSTRATION_BASIN_20261116_V1.md",
+  "canonical/swe_kernel/skill_sequence_verify_v1.py -- verify_sequence, unchanged",
+  "canonical/swe_kernel/verified_skill_crystallizer_v1.py -- VerifiedSkillStore, unchanged",
+  "canonical/runtime/k6_minimum_adequate_policy_cover_v1.py -- exact cover, unchanged"
+ ],
+ "schema": "THE_CEILING_OF_LEARN_ONCE_20261116_V1",
+ "terms": {
+  "cross_repo_multi_line_strict": {
+   "approx": 0.021,
+   "as_recorded": "2.1%",
+   "exact_ratio": [
+    21,
+    1000
+   ],
+   "receipt": "LEARN_ONCE_KEEP_FOREVER_SERVES_A_TWENTIETH_OF_REAL_EDITS_20261116_V1.md",
+   "unit": "a brand-new repository, multi-line edits, strict context",
+   "value": "2.1%"
+  },
+  "end_to_end_exact": {
+   "approx": 0.048137,
+   "as_recorded": "31/644",
+   "exact_ratio": [
+    31,
+    644
+   ],
+   "receipt": "LEARN_ONCE_KEEP_FOREVER_SERVES_A_TWENTIETH_OF_REAL_EDITS_20261116_V1.md",
+   "unit": "sites served exactly by permanent memory, end to end",
+   "value": "31/644"
+  },
+  "induction_determinacy": {
+   "approx": 0.549296,
+   "as_recorded": "78/142",
+   "exact_ratio": [
+    39,
+    71
+   ],
+   "receipt": "ONE_DEMONSTRATION_AMORTISES_A_SIXTH_OF_REAL_WORK_20261116_V1.md",
+   "unit": "pairs that genuinely need induction and are reproduced",
+   "value": "78/142"
+  },
+  "multi_line_strict_served": {
+   "approx": 0.0,
+   "as_recorded": "0/14",
+   "exact_ratio": [
+    0,
+    1
+   ],
+   "receipt": "LEARN_ONCE_KEEP_FOREVER_SERVES_A_TWENTIETH_OF_REAL_EDITS_20261116_V1.md",
+   "unit": "MULTI-LINE (advanced) edits served exactly by memory",
+   "value": "0/14"
+  },
+  "recurrence_loose": {
+   "approx": 0.276411,
+   "as_recorded": "191/691",
+   "exact_ratio": [
+    191,
+    691
+   ],
+   "receipt": "LEARN_ONCE_KEEP_FOREVER_SERVES_A_TWENTIETH_OF_REAL_EDITS_20261116_V1.md",
+   "unit": "share of 691 real changed sites with an earlier same-signature site",
+   "value": "191/691"
+  },
+  "recurrence_strict": {
+   "approx": 0.158385,
+   "as_recorded": "102/644",
+   "exact_ratio": [
+    51,
+    322
+   ],
+   "receipt": "LEARN_ONCE_KEEP_FOREVER_SERVES_A_TWENTIETH_OF_REAL_EDITS_20261116_V1.md",
+   "unit": "share with one context line on BOTH sides",
+   "value": "102/644"
+  },
+  "replay_determinacy_strict": {
+   "approx": 0.303922,
+   "as_recorded": "31/102",
+   "exact_ratio": [
+    31,
+    102
+   ],
+   "receipt": "LEARN_ONCE_KEEP_FOREVER_SERVES_A_TWENTIETH_OF_REAL_EDITS_20261116_V1.md",
+   "unit": "share of recurring sites replaying EXACTLY across time",
+   "value": "31/102"
+  },
+  "verbatim_share_of_correct": {
+   "approx": 0.420408,
+   "as_recorded": "103/245",
+   "exact_ratio": [
+    103,
+    245
+   ],
+   "receipt": "ONE_DEMONSTRATION_AMORTISES_A_SIXTH_OF_REAL_WORK_20261116_V1.md",
+   "unit": "share of sibling pairs that are copy-paste, not induction",
+   "value": "103/245"
+  }
+ },
+ "the_ceiling": {
+  "advanced_edits_ceiling": "0 of 14 multi-line edits served exactly; 2.1% cross-repository",
+  "learn_once_serves": "31/644",
+  "learn_once_serves_approx": 0.048137,
+  "one_in": 20.8,
+  "percent_of_real_edits": 4.814,
+  "remainder": "613/644",
+  "the_rest_is": "synthesis plus a mechanical check, and where no check exists, refusal -- not more experience"
+ },
+ "three_way_split_of_real_work": {
+  "MEMORISE": {
+   "share": "31/644",
+   "why": "it recurs in a form replay reproduces exactly"
+  },
+  "REFUSE": {
+   "share": "unmeasured, and the least honest number in this tree",
+   "why": "where no mechanical postcondition exists, the correct output is a refusal, and this tree has not measured how much real work that is"
+  },
+  "SYNTHESISE": {
+   "share": "613/644",
+   "why": "novel or needs a value the demonstration cannot supply; 31 of 64 wrong predictions were exactly this constant_differs class"
+  }
+ },
+ "whether_learning_rate_is_the_bottleneck": {
+  "answer": "NO",
+  "what_would_move_it": [
+   "raising recurrence (it rises with time in one repository: 0.149 -> 0.394 by chronological quarter, and saturates under 40% of gross)",
+   "raising determinacy on the inductive remainder (54.9% today)",
+   "measuring the REFUSE share, which nobody has"
+  ],
+  "why": "learning rate multiplies a term that is already small. Making acquisition infinitely fast leaves the fraction of work that memory can serve unchanged at 4.81%, because that fraction is a property of the WORK, not of the learner."
+ }
+}

@@ -21,11 +21,13 @@ mod = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(mod)
 
 EXPECTED_REPAIRED_UNION = (
-    "bitcount", "bucketsort", "find_first_in_sorted", "find_in_sorted",
+    "bitcount", "breadth_first_search", "bucketsort", "depth_first_search",
+    "detect_cycle", "find_first_in_sorted", "find_in_sorted", "flatten",
     "gcd", "get_factors", "hanoi", "is_valid_parenthesization", "knapsack",
     "kth", "lcs_length", "levenshtein", "lis", "longest_common_subsequence",
     "max_sublist_sum", "mergesort", "minimum_spanning_tree", "next_palindrome",
-    "next_permutation", "pascal", "quicksort", "rpn_eval", "sieve", "to_base",
+    "next_permutation", "pascal", "quicksort", "reverse_linked_list", "rpn_eval",
+    "shunting_yard", "sieve", "sqrt", "to_base", "wrap",
 )
 
 
@@ -148,13 +150,15 @@ class HardOpenPopulationAuditTests(unittest.TestCase):
         self.assertEqual(data["composed_run"]["seconds"], 387.8)
         self.assertEqual(sum(len(v) for v in data["composed_run"]["by_arm"].values()), 24)
         self.assertEqual(data["composed_run"]["status"], "MEASURED_ONE_RUN_NOT_CAPABILITY_GAIN_OVER_THE_PYTEST_REJUDGED_UNION")
-        self.assertEqual(data["repaired_union_count"], 24)
-        self.assertEqual(data["hard_open_population_count"], 16)
-        self.assertEqual(data["unmeasurable_without_published_input_output_examples_count"], 8)
+        self.assertEqual(data["repaired_union_count"], 32)
+        self.assertEqual(data["hard_open_population_count"], 8)
+        # Four no-JSON tasks remain unmeasurable (no published I/O examples);
+        # the other four were closed by the verifier-root fix / insert composition.
+        self.assertEqual(data["unmeasurable_without_published_input_output_examples_count"], 4)
         self.assertEqual(data["verified_repair_rerun"]["claimed_repaired"], 20)
         self.assertEqual(len(data["verified_repair_rerun"]["confirmed"]), 16)
         self.assertTrue(data["invariants"]["claimed_learned_arm_superseded_by_pytest_rerun"])
-        self.assertTrue(data["invariants"]["verified_union_is_24_not_the_projected_26"])
+        self.assertTrue(data["invariants"]["verified_union_is_32_after_insert_and_verifier_roots"])
 
     def test_new_mechanism_groups_are_present_by_effect(self) -> None:
         census = mod.mechanism_census(ROOT)

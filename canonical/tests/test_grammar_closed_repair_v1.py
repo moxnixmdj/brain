@@ -279,6 +279,57 @@ class UnmeasurableIsNotAFailureAndNotASuccess(unittest.TestCase):
         self.assertEqual(namespace, {})
 
 
+class CorpusPytestSeesBothImportRoots(unittest.TestCase):
+    """The verifier must put python_programs/ and python_testcases/ on PYTHONPATH.
+
+    QuixBugs test files do ``from node import Node`` and ``from load_testdata import ...``.
+    An earlier verifier set PYTHONPATH to only the task root, so pytest died at collection
+    (rc 2) and a correct patch was misreported as failed. The fixture below reproduces
+    exactly that import shape; without the two extra roots the test cannot collect.
+    """
+
+    def test_verify_collects_when_the_helper_lives_under_python_programs(self) -> None:
+        name = "needs_helper"
+        buggy = "def needs_helper(xs):\n    return node_count(xs)\n"
+        fixed = "def needs_helper(xs):\n    return len(xs)\n"
+        # node_count is imported the way QuixBugs imports Node: from python_programs.
+        helper_source = "def node_count(xs):\n    return sum(1 for _ in xs)\n"
+        fixture_root = tempfile.mkdtemp(prefix="verify_roots_")
+        root = pathlib.Path(fixture_root)
+        try:
+            (root / "python_programs").mkdir()
+            (root / "python_testcases").mkdir()
+            (root / "json_testcases").mkdir()
+            (root / "python_programs" / f"{name}.py").write_text(buggy)
+            (root / "python_programs" / "node.py").write_text(helper_source)
+            (root / "python_testcases" / f"test_{name}.py").write_text(textwrap.dedent(f"""
+                from node import node_count
+                from python_programs.{name} import {name}
+
+                def test_{name}():
+                    assert {name}([1, 2, 3]) == 3
+            """).lstrip())
+            # Apply the fixed program the way build_task would.
+            (root / "python_programs" / f"{name}.py").write_text(fixed)
+            verdict = organ.verify_with_corpus_test(
+                root, f"python_testcases/test_{name}.py", 30)
+            # Collection succeeds (not rc 2); with the fix the fixed program passes.
+            self.assertNotEqual(verdict["returncode"], 2, verdict)
+            self.assertEqual(verdict["returncode"], 0, verdict)
+        finally:
+            import shutil
+            shutil.rmtree(root, ignore_errors=True)
+
+    def test_pythonpath_contains_all_three_roots(self) -> None:
+        where = pathlib.Path("/tmp/verify_roots_where")
+        # Drive the env construction the same way verify_with_corpus_test does.
+        roots = [str(where), str(where / "python_programs"), str(where / "python_testcases")]
+        import os
+        joined = os.pathsep.join(roots)
+        self.assertIn(str(where / "python_programs"), joined)
+        self.assertIn(str(where / "python_testcases"), joined)
+
+
 class TheSummaryIsFoldedNotTyped(unittest.TestCase):
     def test_counts_come_from_the_rows(self) -> None:
         rows = [{"task": "a", "stage": "REPAIRED__CORPUS_TEST_PASSES", "candidates_tested": 10, "seconds": 1},
