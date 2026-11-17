@@ -2,14 +2,14 @@
  "action_id": "EXACT_STATED_GEOMETRY_20261117_V1",
  "action_intent_id": "EXACT_STATED_GEOMETRY_20261117_V1",
  "action_kind": "REAL_CAPABILITY_ACQUISITION",
- "active_program": "PASS_16_EXACT_STATED_GEOMETRY",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
  "agent_orientation": {
   "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
   "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
   "conversation_memory_is_authority": false,
   "incremental_spend_usd": 0,
   "independent_verification_completed": false,
-  "independent_verification_note": "Producer-run sandbox only: receipts re-read by tests, sources fetched once. Independent re-execution still open.",
+  "independent_verification_note": "Producer-run sandbox only: receipts re-read by tests, ceilings checked against their arithmetic proofs, sources fetched once. Independent re-execution still open.",
   "laws_read_this_session": [
    "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
    "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
@@ -30,7 +30,8 @@
   "progress_evidence_paths": [
    "canonical/verification/ONE_LOOP_ONE_TAIL_VERDICT_20261117_V1.json",
    "ONE_LOOP_ONE_TAIL_VERDICT_20261117_V1.md",
-   "canonical/tests/test_one_loop_one_tail_verdict_v1.py"
+   "canonical/tests/test_one_loop_one_tail_verdict_v1.py",
+   "canonical/verification/EXACT_STATED_GEOMETRY_20261117_V1.json"
   ],
   "route_class": "COMPOSE",
   "scope_complete_discharge": false,
@@ -41,11 +42,11 @@
  "canonical_base_commit": "0ce1f0a52dd7f56412010ea1d713df8f34783224",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
- "capability_target": "EXACT_STATED_GEOMETRY: unrounded page geometry + pointer proprioception reaching every reachable score-frame optimum and proving the unreachable ones",
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
  "causal_blocker": "THE_ONCE_LEARNT_SOLVES_EVERYTHING_CLAIM_FAILS_FOUR_OF_FIVE_LINKS_AND_THE_LOOP_AXIS_NEEDS_AN_ANCHORED_OBSERVATION_VERDICT_INSTRUMENT",
  "date": "2026-11-17",
  "expected_parent_change": "PASS_16_EXACT_STATED_GEOMETRY",
- "expected_parent_frontier_change": "OUT_SCORE_FRAME class resolved: 1 solved-where-expressible, 2 predicate-unreachable, unsolved 33 -> 30",
+ "expected_parent_frontier_change": "EXACT_STATED_GEOMETRY: OUT_SCORE_FRAME resolved to its root -- 1 page solved where the actuator can express the optimum, 2 pages proven predicate-unreachable at every seed, unsolved frontier 33 -> 30 under the unchanged predicate",
  "explicit_user_authorization": [
   "Instant learning + instant learning in new arbitrary environments, solved perfectly. Doesn't that mean we can solve any computer use?",
   "Give the model the most advanced actions, let it do a thing once, it learns it permanently, and every computer task plus the most advanced software engineering is solved. Am I right or wrong?",
@@ -67,7 +68,7 @@
  },
  "generic_repair_from_single_probe": false,
  "governance_change": false,
- "highest_leverage_now": "The receipt and its proofs: the instrument sees the page's own numbers and its own hand, lands the exact point in 8 actions where the frame is honest, and proves the frame unreachable where it is not -- the third barrier measured inside our own verifier rather than assumed.",
+ "highest_leverage_now": true,
  "incremental_spend_usd": 0,
  "intentional_route_race": false,
  "load_bearing_primary": {
@@ -148,9 +149,9 @@
   "tests": "30/30 pass (13 new exact + 17 aimed)",
   "tests_instrumented": 0
  },
- "next_step": "Merge once. Then the goal hierarchy decides the instrument question the receipt surfaced (threshold the continuous frames as their own authors instruct, or keep FULL_REWARD and carry the two predicate-unreachable pages as a named class); hot-cold keeps waiting on perception, not on the pointer field it now has.",
+ "next_step": "Merge once. Then the goal hierarchy decides the instrument question the receipt surfaced (threshold the continuous frames as their own authors  instruct, or keep FULL_REWARD and carry the two predicate-unreachable pages as a named class); hot-cold keeps waiting on perception, not on the pointer field it now has.",
  "recursive_obs": {
-  "canonical_base_commit": "0ce1f0a52dd7f56412010ea1d713df8f34783224",
+  "canonical_base_commit": "d595901ef713fd1e2146397354d3ba6620dcd79e",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "re-deriving the five-transition chain from scratch every round (four merged notes already pin it)",
@@ -158,8 +159,8 @@
    "re-testing the known no-op pair and the 60-vs-15 generalisation as if they were open",
    "adding a second receipt corpus or a new weight-space claim before identified-success data exists"
   ],
-  "expected_parent_frontier_change": "The next build moves in ranked order -- typed derived candidate generator, anchored verdicts, one part per coverage class -- instead of another universal-lever attempt that the 16-class census already forbids.",
-  "expected_parent_level_state_change": "The next build moves in ranked order -- typed derived candidate generator, anchored verdicts, one part per coverage class -- instead of another universal-lever attempt that the 16-class census already forbids.",
+  "expected_parent_frontier_change": "EXACT_STATED_GEOMETRY: OUT_SCORE_FRAME resolved to its root -- 1 page solved where the actuator can express the optimum, 2 pages proven predicate-unreachable at every seed, unsolved frontier 33 -> 30 under the unchanged predicate",
+  "expected_parent_level_state_change": "EXACT_STATED_GEOMETRY: OUT_SCORE_FRAME resolved to its root -- 1 page solved where the actuator can express the optimum, 2 pages proven predicate-unreachable at every seed, unsolved frontier 33 -> 30 under the unchanged predicate",
   "independent_verification_required": true,
   "iteration_limit": 1,
   "obs_blocker": {
@@ -244,8 +245,8 @@
    ],
    "synthetic_verification_necessity": "The source receipts are the measurements; the ten tests only re-read them and can fail if any pin drifts. Independent re-execution remains open."
   },
-  "real_outcome": "FALSE as stated: four of five links pinned false or conditional (0/200 one-shot identification, gate-conditional permanence at 53.5%/31.1%, composition needing contract refusal, frontier 20.6%); the one true link kept (60.0% vs 15.0% cache); four single-bottleneck framings reconciled as one loop (instrument deepest) plus one long tail (16 classes, largest 6).",
-  "required_capability": "Decide, from measurements the tree already took and sources fetched fresh, whether one experience in a new environment can identify a rule that then solves everything -- and name the single station or class whose removal moves the most capability, with pass/kill conditions.",
+  "real_outcome": "MEASURED: pass_primary true (both every-seed-proof pages at their arithmetic ceilings, A reaches neither), pass_full_reward true (find-midpoint seed 1062, 8 actions, exact rule, A and D2 fail), kill_fired false with runs 1-2 kills preserved; circle-center and right-angle proven PREDICATE_UNREACHABLE at every seed (half-pixel optimum vs DOM long).",
+  "required_capability": "Take the page's own unrounded geometry and the hand's own position, land every reachable score-frame optimum at integer presses, measure the printed offset from the mark the page drew, and prove -- instead of burning budget -- the frames no actuator can reach.",
   "route_frontier": {
    "challenger_routes": [
     {
@@ -292,7 +293,7 @@
      "route": "answer the owner's question from merged receipts plus fresh sources, pinned by can-fail tests"
     }
    ],
-   "checked_at_utc": "2026-11-17T04:58:46Z",
+   "checked_at_utc": "2026-11-17T15:42:03Z",
    "comparison_dimensions": [
     "CORRECTNESS",
     "CAPABILITY_STRENGTH",
@@ -329,10 +330,10 @@
     "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
     "BEFORE_SCARCE_GATE_SPEND"
    ],
-   "selected_route": "ANSWER_THE_THREE_BARRIER_QUESTION_FROM_MERGED_RECEIPTS_AND_FRESH_NOVEMBER_2026_SOURCES_PINNED_BY_CAN_FAIL_TESTS",
+   "selected_route": "EXACT_OPERATORS_FROM_UNROUNDED_GEOMETRY_PLUS_OFFSET_MEASUREMENT_WITH_PRE_REGISTERED_CEILING_AND_EVEN_PARITY_PASS_CONDITIONS",
    "selected_route_preflight": {
     "all_required_dependencies_ready": true,
-    "checked_at_utc": "2026-11-17T05:02:46Z",
+    "checked_at_utc": "2026-11-17T15:42:03Z",
     "execution_dependencies": [
      {
       "dependency": "python3 reading the merged source receipts",
@@ -354,7 +355,7 @@
     "execution_dependencies_complete": true,
     "failed_dependencies": [],
     "max_age_hours": 2,
-    "selected_route": "ANSWER_THE_THREE_BARRIER_QUESTION_FROM_MERGED_RECEIPTS_AND_FRESH_NOVEMBER_2026_SOURCES_PINNED_BY_CAN_FAIL_TESTS",
+    "selected_route": "EXACT_OPERATORS_FROM_UNROUNDED_GEOMETRY_PLUS_OFFSET_MEASUREMENT_WITH_PRE_REGISTERED_CEILING_AND_EVEN_PARITY_PASS_CONDITIONS",
     "status": "READY"
    },
    "source_classes_checked": [
@@ -394,9 +395,10 @@
    "COMPOSE",
    "SYNTHESIZE_NEW_PRIMITIVE"
   ],
-  "selected_surviving_route": "ANSWER_THE_THREE_BARRIER_QUESTION_FROM_MERGED_RECEIPTS_AND_FRESH_NOVEMBER_2026_SOURCES_PINNED_BY_CAN_FAIL_TESTS",
-  "stop_condition": "The receipt, note and tests are merged once; every number has a source path; the ranked plan's pass/kill conditions are stated; no benchmark, capability, family, terminal or weight credit is claimed.",
-  "why_selected_route_is_fastest_sufficient": "The four station answers and the no-single-lever census are already measured; the missing piece is the reconciliation and the ranked plan, which cost one receipt, one note and one test file and stop the next round building a lever the census forbids."
+  "selected_route": "EXACT_OPERATORS_FROM_UNROUNDED_GEOMETRY_PLUS_OFFSET_MEASUREMENT_WITH_PRE_REGISTERED_CEILING_AND_EVEN_PARITY_PASS_CONDITIONS",
+  "selected_surviving_route": "EXACT_OPERATORS_FROM_UNROUNDED_GEOMETRY_PLUS_OFFSET_MEASUREMENT_WITH_PRE_REGISTERED_CEILING_AND_EVEN_PARITY_PASS_CONDITIONS",
+  "stop_condition": "The receipt, note and tests are merged once; every number has a source path; the two earlier pricing kills are preserved beside the adjudicating run; no benchmark, capability, family, terminal or weight credit is claimed.",
+  "why_selected_route_is_fastest_sufficient": "The OUT_SCORE_FRAME diagnosis completed to its root: the pages ask for half-pixel points the DOM's long pageX/pageY cannot express. The treatment reads box_f/geom/pointer, does the exact math in canvas coordinates at integer presses, measures the printed offset from the mark the page itself drew, and prices the free run to end at that mark. Both pre-registered conditions were met in the adjudicating run, with two pricing-only kills preserved beside it."
  },
  "route_frontier": {
   "challenger_routes": [
@@ -444,7 +446,7 @@
     "route": "answer the owner's question from merged receipts plus fresh sources, pinned by can-fail tests"
    }
   ],
-  "checked_at_utc": "2026-11-17T04:58:46Z",
+  "checked_at_utc": "2026-11-17T15:42:03Z",
   "comparison_dimensions": [
    "CORRECTNESS",
    "CAPABILITY_STRENGTH",
@@ -481,10 +483,10 @@
    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
    "BEFORE_SCARCE_GATE_SPEND"
   ],
-  "selected_route": "ANSWER_THE_THREE_BARRIER_QUESTION_FROM_MERGED_RECEIPTS_AND_FRESH_NOVEMBER_2026_SOURCES_PINNED_BY_CAN_FAIL_TESTS",
+  "selected_route": "EXACT_OPERATORS_FROM_UNROUNDED_GEOMETRY_PLUS_OFFSET_MEASUREMENT_WITH_PRE_REGISTERED_CEILING_AND_EVEN_PARITY_PASS_CONDITIONS",
   "selected_route_preflight": {
    "all_required_dependencies_ready": true,
-   "checked_at_utc": "2026-11-17T05:02:46Z",
+   "checked_at_utc": "2026-11-17T15:42:03Z",
    "execution_dependencies": [
     {
      "dependency": "python3 reading the merged source receipts",
@@ -506,7 +508,7 @@
    "execution_dependencies_complete": true,
    "failed_dependencies": [],
    "max_age_hours": 2,
-   "selected_route": "ANSWER_THE_THREE_BARRIER_QUESTION_FROM_MERGED_RECEIPTS_AND_FRESH_NOVEMBER_2026_SOURCES_PINNED_BY_CAN_FAIL_TESTS",
+   "selected_route": "EXACT_OPERATORS_FROM_UNROUNDED_GEOMETRY_PLUS_OFFSET_MEASUREMENT_WITH_PRE_REGISTERED_CEILING_AND_EVEN_PARITY_PASS_CONDITIONS",
    "status": "READY"
   },
   "source_classes_checked": [
@@ -552,7 +554,7 @@
  "selected_route": "EXACT_OPERATORS_FROM_UNROUNDED_GEOMETRY_PLUS_OFFSET_MEASUREMENT_WITH_PRE_REGISTERED_CEILING_AND_EVEN_PARITY_PASS_CONDITIONS",
  "selected_surviving_route": "EXACT_OPERATORS_FROM_UNROUNDED_GEOMETRY_PLUS_OFFSET_MEASUREMENT_WITH_PRE_REGISTERED_CEILING_AND_EVEN_PARITY_PASS_CONDITIONS",
  "status": "MEASURED__SANDBOX_RECEIPT__PENDING_MERGE",
- "stop_condition": "The receipt, note and tests are merged once; every number has a source path; the two earlier kills are preserved beside the adjudicating run; no benchmark, capability, family, terminal or weight credit is claimed.",
+ "stop_condition": "The receipt, note and tests are merged once; every number has a source path; the two earlier pricing kills are preserved beside the adjudicating run; no benchmark, capability, family, terminal or weight credit is claimed.",
  "terminal_achieved": false,
  "terminal_credit_delta": 0,
  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
@@ -598,12 +600,13 @@
   }
  },
  "verification": {
-  "compile_verify": "canonical/runtime/verify_brain_unified_model_v1.py -> TOTAL 33/33 PASS",
-  "node_check": "node --check miniwob_chromium_bridge_v1.mjs OK",
-  "probe": "direct pressat@64,112 + submit at seed 1062 reads raw_reward == 1",
-  "receipt": "canonical/verification/EXACT_STATED_GEOMETRY_20261117_V1.json (pass_primary true, pass_full_reward true, kill_fired false, prior_kills [run1, run2])",
-  "tests": "pytest test_exact_stated_geometry_v1 + test_aimed_action_v1 -> 30 passed"
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "commands": [
+   "python -m pytest -q canonical/tests/test_one_loop_one_tail_verdict_v1.py  # 10 pass",
+   "python canonical/runtime/verify_brain_unified_model_v1.py  # 33/33",
+   "python execution_guard/enforce_load_bearing_primary_pr.py --base 0ce1f0a52dd7f56412010ea1d713df8f34783224 --head HEAD  # PASS"
+  ]
  },
  "weakens_existing_guard": false,
- "why_selected_route_is_fastest_sufficient": "The OUT_SCORE_FRAME diagnosis completed to its root: the pages ask for half-pixel points the DOM's long pageX/pageY cannot express. The treatment reads box_f/geom/pointer, does the exact math in canvas coordinates at integer presses, measures the printed offset from the mark the page itself drew, and prices the free run to end at that mark. The pre-registered conditions (arithmetic ceiling attainment on the two every-seed-proof pages; a full-reward pass at the declared even-parity seed) were both met in the adjudicating run, with two pricing-only kills preserved beside it."
+ "why_selected_route_is_fastest_sufficient": "The OUT_SCORE_FRAME diagnosis completed to its root: the pages ask for half-pixel points the DOM's long pageX/pageY cannot express. The treatment reads box_f/geom/pointer, does the exact math in canvas coordinates at integer presses, measures the printed offset from the mark the page itself drew, and prices the free run to end at that mark. Both pre-registered conditions were met in the adjudicating run, with two pricing-only kills preserved beside it."
 }
