@@ -1,0 +1,78 @@
+{
+ "action_id": "A_LEARNED_SUCCESS_IS_REMEMBERED_UNDER_ITS_OWN_GOAL_V1_20261116_V1",
+ "action_intent_id": "A_LEARNED_SUCCESS_IS_REMEMBERED_UNDER_ITS_OWN_GOAL_V1_20261116_V1",
+ "action_kind": "REAL_CAPABILITY_ACQUISITION",
+ "action_summary": "The transfer store keyed every closed goal on the constant string \"goal\", so recall matched across goals and wrote false successes to disk. The key is now the effect the goal asks for, both parts already computed by the route before the key is used: \"effect|target=<target>|suffix=<suffix>\". The goal's words are deliberately NOT part of the key, because two sentences asking for the same file in the same format are the same job, and keying on prose would rebuild the paraphrase cache-miss cost that fingerprint_key was rewritten to remove (its own comment measures that at ~1268 ms per new name against ~265 ms for a repeat). The change is one line plus the measurement that justifies it.",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "incremental_spend_usd": 0,
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+  "progress_evidence_paths": [
+   "canonical/runtime/computer_env_v1.py",
+   "canonical/tests/test_learned_success_is_remembered_under_its_own_goal_v1.py",
+   "WHAT_IS_REAL_AND_WHAT_IS_NOT_20261116_V1.md"
+  ],
+  "route_class": "ADAPT"
+ },
+ "benchmark_or_family_rank_authority": false,
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A learned success was not a memory of the goal it succeeded at. computer_env_v1._discover_impl kept every closed goal under the constant gkey=\"goal\", while the fingerprint deliberately excludes the target, so the goal's identity appeared nowhere in the memory key and recall matched across goals. Measured 2026-11-16 on this machine: thirteen unrelated goals left thirteen rows in the transfer store, every one recording reached=True, with plans naming whatever single program happened to touch the target first -- run_iconv for one goal, run_gp-display-src for another, x86_64-linux-gnu-cpp for another, run_unexpand for another, run_bzip2 for one that really did compress. A row for a wrong program was indistinguishable from a row for a right one. Answers were saved only because _verify_plan re-executes a recalled plan against the target actually requested; every other reader of the store -- audits, similarity scoring, episode counts, and the evidence bonus in transfer_learning_v1.recall -- was reading a plan labelled correct that was not.",
+ "canonical_base_commit": "e2fff59bbfacc50010661a76c8c87920d8b12567",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "A learned success was not a memory of the goal it succeeded at. computer_env_v1._discover_impl kept every closed goal under the constant gkey=\"goal\", while the fingerprint deliberately excludes the target, so the goal's identity appeared nowhere in the memory key and recall matched across goals. Measured 2026-11-16 on this machine: thirteen unrelated goals left thirteen rows in the transfer store, every one recording reached=True, with plans naming whatever single program happened to touch the target first -- run_iconv for one goal, run_gp-display-src for another, x86_64-linux-gnu-cpp for another, run_unexpand for another, run_bzip2 for one that really did compress. A row for a wrong program was indistinguishable from a row for a right one. Answers were saved only because _verify_plan re-executes a recalled plan against the target actually requested; every other reader of the store -- audits, similarity scoring, episode counts, and the evidence bonus in transfer_learning_v1.recall -- was reading a plan labelled correct that was not.",
+ "date": "2026-11-16",
+ "expected_parent_change": "canonical/runtime/computer_env_v1.py: gkey becomes the effect the goal asks for instead of the constant \"goal\", with the thirteen-row measurement recorded above it. canonical/tests/test_learned_success_is_remembered_under_its_own_goal_v1.py: 3 tests that drive the real _discover_impl against a temporary store; mutating the line back to \"goal\" kills them with \"two different goals were remembered under one key\". canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json recompiled in a later commit, after the intent, because the artifact is content-addressed over canonical/runtime.",
+ "expected_parent_frontier_change": "A goal that closed is remembered as a fact about that goal and nothing else, so a later goal asking for a different effect neither recalls it nor is credited with it, while a paraphrase of the same job still recalls instead of paying for a fresh search.",
+ "falsification_condition": "FALSIFIED if two goals asking for different effects share a memory key, if the shared constant \"goal\" ever reappears as a goal_key, if a repeated or paraphrased goal of the same effect stops sharing its key, or if the new tests pass with the line reverted.",
+ "highest_leverage_now": true,
+ "load_bearing_primary": {
+  "constructive_gap_for_open_obligation_ids": [],
+  "expected_obligation_discharge_lcb": 0,
+  "expected_obligation_unlock_lcb": "1/100",
+  "interpretation": "Speculative forecast only. A memory that credits a wrong program to a goal is a reliability defect in the one mechanism the coding barrier depends on for repeated work; correcting the key makes each recalled plan evidence about its own job and nothing else.",
+  "open_obligation_ids": [
+   "CODING_TB4_GE_66_4"
+  ],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "1/4",
+  "wall_clock_cost_ub": 1
+ },
+ "resolution": "SELECTED",
+ "route_id": "A_LEARNED_SUCCESS_IS_REMEMBERED_UNDER_ITS_OWN_GOAL_V1_20261116_V1",
+ "routes_considered": [
+  "REUSE_THE_FINGERPRINT_AS_IS__REJECTED_ITS_OWN_COMMENT_MEASURES_THAT_PUTTING_THE_TARGET_IN_THE_KEY_COSTS_1268MS_PER_NEW_NAME_AGAINST_265MS_FOR_A_REPEAT",
+  "KEY_ON_THE_GOAL_PROSE__REJECTED_EVERY_PARAPHRASE_BECOMES_A_CACHE_MISS_WHICH_IS_THE_COST_THE_FINGERPRINT_CHANGE_REMOVED",
+  "DELETE_THE_LEARNED_PLAN_AND_KEEP_ONLY_A_FINGERPRINT__REJECTED_THE_PLAN_IS_WHAT_MAKES_THE_SECOND_TIME_CHEAP_AND_VERIFY_PLAN_ALREADY_REEXECUTES_IT",
+  "ADAPT_THE_KEY_TO_THE_EFFECT_THE_GOAL_ASKS_FOR",
+  "SYNTHESIZE_A_NEW_MEMORY_SCHEMA__REJECTED_A_NEW_PART_FOR_A_ONE_LINE_DEFECT"
+ ],
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "selected_route": "A_LEARNED_SUCCESS_IS_REMEMBERED_UNDER_ITS_OWN_GOAL_V1_20261116_V1",
+ "selected_surviving_route": "A_LEARNED_SUCCESS_IS_REMEMBERED_UNDER_ITS_OWN_GOAL_V1_20261116_V1",
+ "stop_condition": "STOP when two goals asking for different effects cannot share a memory key, when repeating or paraphrasing the same effect still hits its memory, and when reverting the line makes the new tests fail.",
+ "terminal_credit_delta": 0,
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "user_authorized_governance_change": false,
+ "weakens_existing_guard": [],
+ "why_selected_route_is_fastest_sufficient": "One line at the one site that was wrong. The goal's identity was already computed by the route -- target and suffix exist before the key is used -- so nothing was invented and nothing was added to the hot path. The route order was walked: DELETE was not available (the memory is load-bearing and its verifier already prevents wrong answers); BYPASS and REUSE found no existing goal-scoped key; ADAPT was chosen."
+}
