@@ -309,6 +309,39 @@ class HardOpenPopulationAuditTests(unittest.TestCase):
         self.assertIn("canonical/tools/the_four_levers_of_learning_from_experience_v1.py", mod.MECHANISM_GROUPS["four_levers_and_edit_supply"])
         self.assertIn("canonical/swe_kernel/systematic_edit_supply_v1.py", mod.MECHANISM_GROUPS["four_levers_and_edit_supply"])
 
+    def test_final_index_specification_and_value_layer_are_read_without_credit(self) -> None:
+        path = ROOT / "canonical" / "verification" / "PROOF_CARRYING_COUNTERFACTUAL_UNION_20261116_V1.json"
+        data = json.loads(path.read_text(encoding="utf-8"))
+        section = data["index_specification_and_value_layer"]
+        self.assertEqual(
+            section["status"],
+            "INDEX_AND_FRAME_ARE_NECESSARY_SHARED_DEFECTS_NOT_A_SINGLE_SUFFICIENT_LEVER",
+        )
+        self.assertEqual(
+            section["index"]["verdict"],
+            "NO_GRANULARITY_OF_THESE_FEATURES_SEPARATES_WHAT_THE_POLICY_DEPENDS_ON",
+        )
+        self.assertEqual(len(section["index"]["sweep"]), 5)
+        self.assertEqual(section["index"]["usable_key_families"], [])
+        self.assertEqual(section["composition"]["summary"]["solved"], 14)
+        self.assertEqual(section["composition"]["summary"]["proven_unreachable"], 2)
+        self.assertEqual(section["composition"]["summary"]["relaxed_plans_that_break_the_frame"], 15)
+        self.assertEqual(section["composition"]["summary"]["prediction_mismatches"], 0)
+        self.assertEqual(section["value_inference"]["measured_effect"]["arms"]["value_layer"]["derive"]["precision_when_fired"], 0.2143)
+        self.assertEqual(section["value_inference"]["measured_effect"]["arms"]["value_layer"]["derive_contrast"]["precision_when_fired"], 0.4)
+        self.assertTrue(data["invariants"]["index_key_lacks_the_observable_not_just_granularity"])
+        self.assertTrue(data["invariants"]["composition_needs_a_frame_and_proves_its_refusals"])
+        self.assertTrue(data["invariants"]["inferred_edit_values_are_guesses_until_execution"])
+        for claim in (
+            "NO_GRANULARITY_OF_THESE_FEATURES_AS_A_REPAIR",
+            "NO_COMPOSITION_CLOSES_COMPUTER_USE",
+            "NO_INFERRED_VALUE_AS_AN_ESTABLISHED_FACT",
+            "NO_INDEX_OR_SPECIFICATION_FIX_AS_TERMINAL_UNLOCK",
+        ):
+            self.assertIn(claim, data["hard_nonclaims"])
+        self.assertIn("canonical/tools/the_index_is_the_bottleneck_v1.py", mod.MECHANISM_GROUPS["index_specification_and_value_layer"])
+        self.assertIn("canonical/tools/compose_measured_effects_v1.py", mod.MECHANISM_GROUPS["index_specification_and_value_layer"])
+
     def test_final_proved_composition_is_read_without_credit(self) -> None:
         path = ROOT / "canonical" / "verification" / "PROOF_CARRYING_COUNTERFACTUAL_UNION_20261116_V1.json"
         data = json.loads(path.read_text(encoding="utf-8"))

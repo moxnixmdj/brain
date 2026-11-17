@@ -104,7 +104,7 @@ class Site:
     """One hunk of one file in one commit: what the developer removed, added, and around what."""
 
     __slots__ = ("file", "removed", "added", "before", "after", "skel", "holes_removed",
-                 "holes_added", "ctx_before", "ctx_after")
+                 "holes_added", "ctx_before", "ctx_after", "context_tokens")
 
     def __init__(self, file: str, removed: Sequence[str], added: Sequence[str],
                  before: Sequence[str] = (), after: Sequence[str] = ()) -> None:
@@ -121,6 +121,8 @@ class Site:
         self.holes_added = tuple(hole for part in added_parts for hole in part[1])
         self.ctx_before = tuple(abstract(line)[0] for line in self.before)
         self.ctx_after = tuple(abstract(line)[0] for line in self.after)
+        self.context_tokens = tuple(hole for line in list(self.before) + list(self.after)
+                                    for hole in abstract(line)[1])
 
     @property
     def size(self) -> int:
@@ -197,7 +199,102 @@ def siblings(a: Site, b: Site, context_lines: int, both: bool = True) -> bool:
     return True
 
 
-def induce(demo: Site, target: Site) -> dict[str, Any]:
+_NUMERIC = re.compile(r"^\d+(?:\.\d+)*$")
+
+
+def _numeric(text: str) -> str | None:
+    """Unquote a token when it is a number or a dotted version, so arithmetic can see it."""
+    raw = text
+    if len(raw) >= 2 and raw[0] == raw[-1] and raw[0] in "\"'":
+        raw = raw[1:-1]
+    return raw if _NUMERIC.match(raw) else None
+
+
+def _shift(demo_value: str, demo_base: str, target_base: str) -> str | None:
+    """Carry the demonstration's own arithmetic onto the target's number.
+
+    1.0 -> 1.1 taught at 2.0 gives 2.1: the rule is the difference, not the digits. Only the
+    finest component that the demonstration actually moved is shifted, and the answer is returned in
+    the target's own quoting style.
+    """
+    demo_num, base_num, target_num = _numeric(demo_value), _numeric(demo_base), _numeric(target_base)
+    if not (demo_num and base_num and target_num):
+        return None
+    demo_parts, base_parts, target_parts = (part.split(".") for part in (demo_num, base_num, target_num))
+    if not (len(demo_parts) == len(base_parts) == len(target_parts)):
+        return None
+    moved = [i for i, (a, b) in enumerate(zip(demo_parts, base_parts)) if a != b]
+    if len(moved) != 1:
+        return None
+    index = moved[0]
+    try:
+        delta = int(demo_parts[index]) - int(base_parts[index])
+        shifted = int(target_parts[index]) + delta
+    except ValueError:
+        return None
+    if shifted < 0:
+        return None
+    out_parts = list(target_parts)
+    out_parts[index] = str(shifted)
+    text = ".".join(out_parts)
+    if len(demo_value) >= 2 and demo_value[0] == demo_value[-1] and demo_value[0] in "\"'":
+        return demo_value[0] + text + demo_value[0]
+    return text
+
+
+def _from_context(demo: Site, target: Site, demo_token: str) -> str | None:
+    """Find the demonstration's value in the target's own neighbourhood.
+
+    SyDIT's move: a constant in the pattern is replaced by the constant at the code location it is
+    being applied to. Here the demonstration's context and the target's context line up by rung, so
+    the token in the same slot of the corresponding line is the one that belongs there.
+    """
+    demo_context = list(demo.context_tokens)
+    target_context = list(target.context_tokens)
+    if len(demo_context) != len(target_context):
+        return None
+    for index, (kind, text) in enumerate(demo_context):
+        if text == demo_token and target_context[index][0] == kind:
+            candidate = target_context[index][1]
+            if candidate != demo_token:
+                return candidate
+    return None
+
+
+def _derive(demo: Site, target: Site, demo_token: str,
+            contrast: Site | None = None) -> str | None:
+    """A value derived from the target beats a value copied from the demonstration.
+
+    With a ``contrast`` — a second demonstration of the same operation — the arithmetic is only
+    trusted when replaying the contrast's own rule on the demonstration's base reproduces the
+    demonstration's value. One demonstration proposes a shift; two demonstrations can falsify it.
+    """
+    looked_up = _from_context(demo, target, demo_token)
+    if looked_up is not None:
+        return looked_up
+    for (kind, demo_base), (_kind2, target_base) in zip(demo.holes_removed, target.holes_removed):
+        shifted = _shift(demo_token, demo_base, target_base)
+        if shifted is None:
+            continue
+        if contrast is not None and not _contrast_agrees(contrast, demo_base, demo_token):
+            return None
+        return shifted
+    return None
+
+
+def _contrast_agrees(contrast: Site, demo_base: str, demo_token: str) -> bool:
+    """Does the contrast's own arithmetic, replayed on the demo's base, give the demo's value?"""
+    for (kind, base), (_k2, added) in zip(contrast.holes_removed, contrast.holes_added):
+        if not added:
+            continue
+        replayed = _shift(added, base, demo_base)
+        if replayed is not None and replayed == demo_token:
+            return True
+    return False
+
+
+def induce(demo: Site, target: Site, *, derive: bool = False,
+           contrast: Site | None = None) -> dict[str, Any]:
     """Apply the demonstration's edit to the target's tokens and say what happened.
 
     Every token in the output is marked with where it came from: bound from the target, or copied
@@ -214,6 +311,7 @@ def induce(demo: Site, target: Site) -> dict[str, Any]:
 
     lines: list[str] = []
     copied_flags: list[list[bool]] = []
+    derived_tokens = 0
     for template in demo.skel[1]:
         pieces: list[str] = []
         flags: list[bool] = []
@@ -228,8 +326,14 @@ def induce(demo: Site, target: Site) -> dict[str, Any]:
                 pieces.append(mapping[source])
                 flags.append(False)
             else:
-                pieces.append(source)
-                flags.append(True)
+                derived = _derive(demo, target, source, contrast) if derive else None
+                if derived is not None:
+                    pieces.append(derived)
+                    flags.append(False)
+                    derived_tokens += 1
+                else:
+                    pieces.append(source)
+                    flags.append(True)
             cursor = match.end()
         pieces.append(template[cursor:])
         lines.append("".join(pieces))
@@ -251,7 +355,8 @@ def induce(demo: Site, target: Site) -> dict[str, Any]:
                 verdict = "constant_differs" if was_copied else "rebound_wrong"
             elif verdict == "constant_differs" and not was_copied:
                 verdict = "rebound_wrong"
-    return {"verdict": verdict, "lines": lines, "copied": copied_flags}
+    return {"verdict": verdict, "lines": lines, "copied": copied_flags,
+            "derived": derived_tokens}
 
 
 def read_corpus(path: pathlib.Path) -> list[dict[str, Any]]:
@@ -293,21 +398,28 @@ def extract(repo: pathlib.Path, name: str, *, stride: int = 8, keep: int = 70,
                      "skipped_empty": skipped_empty}
 
 
-def _score(pairs: Iterable[tuple[str, Site, Site]]) -> dict[str, Any]:
+def _score(pairs: Iterable[tuple[str, Site, Site, Site | None]], *, derive: bool = False,
+           use_contrast: bool = False) -> dict[str, Any]:
     outcomes = {name: 0 for name in VERDICTS}
     pairs_count = 0
     determined = lucky = 0
     per_size: dict[int, dict[str, int]] = {}
     examples: list[dict[str, Any]] = []
-    for _repo, demo, target in pairs:
+    derived_pairs = [0, 0]
+    for _repo, demo, target, third in pairs:
         if set(demo.tokens()) == set(target.tokens()):
             # A verbatim repeat: the same edit text belongs here too, so copying the demonstration
             # is correct and nothing has to be induced. Counted as determined, never as a guess.
             verdict = "verbatim" if demo.added == target.added else "constant_differs"
             result = {"verdict": verdict, "lines": list(demo.added), "copied": [[False] * len(demo.added)]}
         else:
-            result = induce(demo, target)
+            result = induce(demo, target, derive=derive,
+                            contrast=third if use_contrast else None)
             verdict = result["verdict"]
+            if result.get("derived"):
+                derived_pairs[0] += 1
+                if verdict == "exact":
+                    derived_pairs[1] += 1
         pairs_count += 1
         outcomes[verdict] += 1
         bucket = min(demo.size, 6)
@@ -329,6 +441,8 @@ def _score(pairs: Iterable[tuple[str, Site, Site]]) -> dict[str, Any]:
                                  "target_added": list(target.added[:2]),
                                  "predicted": list(result["lines"][:2])})
     return {"pairs": pairs_count, "outcomes": outcomes, "determined": determined,
+            "pairs_where_derivation_fired": derived_pairs[0],
+            "pairs_where_derivation_was_right": derived_pairs[1],
             "lucky": lucky, "wrong": pairs_count - determined - lucky,
             "determined_share": round(determined / pairs_count, 4) if pairs_count else 0.0,
             "lucky_share": round(lucky / pairs_count, 4) if pairs_count else 0.0,
@@ -358,15 +472,24 @@ def evaluate(records: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
             row["commits"] += 1
             if len(sites) < 2:
                 continue
-            commit_pairs = [(repo, sites[i], sites[j])
-                            for i in range(len(sites)) for j in range(len(sites))
-                            if i < j and siblings(sites[i], sites[j], context_lines, both)]
+            commit_pairs = []
+            for i in range(len(sites)):
+                for j in range(len(sites)):
+                    if i >= j or not siblings(sites[i], sites[j], context_lines, both):
+                        continue
+                    third = next((sites[k] for k in range(len(sites))
+                                  if k not in (i, j)
+                                  and siblings(sites[i], sites[k], context_lines, both)
+                                  and siblings(sites[j], sites[k], context_lines, both)), None)
+                    commit_pairs.append((repo, sites[i], sites[j], third))
             if not commit_pairs:
                 continue
             multi_site += 1
             row["with_siblings"] += 1
             pairs.extend(commit_pairs)
-        scored = _score(pairs)
+        scored = _score(pairs, derive=False)
+        scored["derive_arm"] = _score(pairs, derive=True)
+        scored["contrast_arm"] = _score(pairs, derive=True, use_contrast=True)
         determined_commits = _determined_commits(sites_by_commit, context_lines, both)
         scored.update({
             "context_lines": context_lines,
@@ -464,6 +587,19 @@ def summarize(report: Mapping[str, Any]) -> str:
                         row["wrong"], row["wrong_share"]))
         lines.append("    raw outcomes: " + ", ".join("%s %d" % (name, row["outcomes"][name])
                                                       for name in VERDICTS))
+        for arm, label in ((None, "copy"), ("derive_arm", "derive"),
+                           ("contrast_arm", "derive+contrast")):
+            arm_row = row if arm is None else row[arm]
+            verbatim = row["outcomes"]["verbatim"]
+            generalising = row["pairs"] - verbatim
+            matched = arm_row["determined"] - verbatim + arm_row["lucky"]
+            fired = arm_row.get("pairs_where_derivation_fired", 0)
+            right = arm_row.get("pairs_where_derivation_was_right", 0)
+            lines.append("    arm %-16s matched %3d/%3d (%.1f%%) wrong %3d fired %3d right %3d%s"
+                         % (label, matched, generalising,
+                            100.0 * matched / generalising if generalising else 0.0,
+                            arm_row["wrong"], fired, right,
+                            " (%.1f%% when it fires)" % (100.0 * right / fired) if fired else ""))
         for size, bucket in row["by_demonstration_size"].items():
             lines.append("    demo size %-2s pairs %3d determined %3d lucky %3d wrong %3d"
                          % (size, bucket["pairs"], bucket["determined"], bucket["lucky"],

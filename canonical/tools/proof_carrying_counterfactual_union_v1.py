@@ -195,6 +195,13 @@ MECHANISM_GROUPS: dict[str, tuple[str, ...]] = {
         "canonical/runtime/demonstration_version_space_v1.py",
         "canonical/runtime/contrast_selection_v1.py",
     ),
+    "index_specification_and_value_layer": (
+        "canonical/tools/the_index_is_the_bottleneck_v1.py",
+        "canonical/tools/compose_measured_effects_v1.py",
+        "canonical/swe_kernel/systematic_edit_supply_v1.py",
+        "canonical/runtime/contrast_selection_v1.py",
+        "canonical/runtime/applicability_v1.py",
+    ),
 }
 
 SUPERSEDES = (
@@ -288,6 +295,20 @@ EVIDENCE_READ = (
     "canonical/tests/test_the_four_levers_of_learning_from_experience_v1.py",
     "canonical/tests/test_systematic_edit_supply_v1.py",
     "canonical/tests/fixtures/systematic_edit_corpus_v1.jsonl",
+    # Closing main move: the shared defect is the index/specification, not
+    # more learning; composition needs a frame, and inferred values are guesses.
+    "COMPOSITION_CLOSES_ONE_AND_PROVES_TWO_20261116_V1.md",
+    "THE_BOTTLENECK_IS_THE_INDEX_NOT_THE_LEARNING_20261116_V1.md",
+    "canonical/action_intents/COMPOSITION_CLOSES_ONE_AND_PROVES_TWO_20261116_V1.json",
+    "canonical/action_intents/SYSTEMATIC_EDIT_VALUE_LAYER_DERIVATION_20261116_V1.json",
+    "canonical/action_intents/THE_BOTTLENECK_IS_THE_INDEX_NOT_THE_LEARNING_20261116_V1.json",
+    "canonical/verification/COMPOSE_MEASURED_EFFECTS_20261116_V1.json",
+    "canonical/verification/SYSTEMATIC_EDIT_DERIVATION_20261116_V1.json",
+    "canonical/verification/THE_INDEX_IS_THE_BOTTLENECK_20261116_V1.json",
+    "canonical/tools/compose_measured_effects_v1.py",
+    "canonical/tools/the_index_is_the_bottleneck_v1.py",
+    "canonical/tests/test_compose_measured_effects_v1.py",
+    "canonical/tests/test_the_index_is_the_bottleneck_v1.py",
 )
 
 
@@ -431,6 +452,12 @@ def audit(quixbugs_root: pathlib.Path, root: pathlib.Path = ROOT) -> dict[str, A
     supply_receipt = read_json(V / "SYSTEMATIC_EDIT_SUPPLY_20261116_V1.json") if (V / "SYSTEMATIC_EDIT_SUPPLY_20261116_V1.json").is_file() else None
     arithmetic_intent = read_json(A / "YOU_ARE_WRONG_ABOUT_ONCE_AND_IT_IS_ARITHMETIC_20261116_V1.json") if (A / "YOU_ARE_WRONG_ABOUT_ONCE_AND_IT_IS_ARITHMETIC_20261116_V1.json").is_file() else None
     supply_intent = read_json(A / "ONE_DEMONSTRATION_AMORTISES_A_SIXTH_OF_REAL_WORK_20261116_V1.json") if (A / "ONE_DEMONSTRATION_AMORTISES_A_SIXTH_OF_REAL_WORK_20261116_V1.json").is_file() else None
+    compose_effects = read_json(V / "COMPOSE_MEASURED_EFFECTS_20261116_V1.json") if (V / "COMPOSE_MEASURED_EFFECTS_20261116_V1.json").is_file() else None
+    index_receipt = read_json(V / "THE_INDEX_IS_THE_BOTTLENECK_20261116_V1.json") if (V / "THE_INDEX_IS_THE_BOTTLENECK_20261116_V1.json").is_file() else None
+    derivation_receipt = read_json(V / "SYSTEMATIC_EDIT_DERIVATION_20261116_V1.json") if (V / "SYSTEMATIC_EDIT_DERIVATION_20261116_V1.json").is_file() else None
+    compose_intent = read_json(A / "COMPOSITION_CLOSES_ONE_AND_PROVES_TWO_20261116_V1.json") if (A / "COMPOSITION_CLOSES_ONE_AND_PROVES_TWO_20261116_V1.json").is_file() else None
+    index_intent = read_json(A / "THE_BOTTLENECK_IS_THE_INDEX_NOT_THE_LEARNING_20261116_V1.json") if (A / "THE_BOTTLENECK_IS_THE_INDEX_NOT_THE_LEARNING_20261116_V1.json").is_file() else None
+    value_intent = read_json(A / "SYSTEMATIC_EDIT_VALUE_LAYER_DERIVATION_20261116_V1.json") if (A / "SYSTEMATIC_EDIT_VALUE_LAYER_DERIVATION_20261116_V1.json").is_file() else None
     answer_key_counts = [
         row["answer_keys_present"] for row in census["rows"]
         if isinstance(row.get("answer_keys_present"), int)
@@ -640,6 +667,36 @@ def audit(quixbugs_root: pathlib.Path, root: pathlib.Path = ROOT) -> dict[str, A
             and supply_intent.get("measured_effect", {}).get("arms", {}).get("determinacy", {}).get("forced_by_the_demonstration") == 31
             and supply_intent.get("measured_effect", {}).get("arms", {}).get("determinacy", {}).get("wrong") == 64
         ),
+        "index_key_lacks_the_observable_not_just_granularity": bool(
+            index_receipt
+            and index_intent
+            and len(index_receipt.get("sweep", [])) == 5
+            and index_receipt.get("usable_key_families") == []
+            and index_receipt.get("verdict") == "NO_GRANULARITY_OF_THESE_FEATURES_SEPARATES_WHAT_THE_POLICY_DEPENDS_ON"
+            and index_intent.get("measured_effect", {}).get("instance_sensitivity", {}).get("kinds_whose_policy_set_changes_with_instance") == 5
+            and index_intent.get("measured_effect", {}).get("cross_language", {}).get("store_offered_any_non_python") is False
+            and len(index_intent.get("measured_effect", {}).get("cross_language", {}).get("transferred_and_narrow", [])) == 4
+            and index_intent.get("measured_effect", {}).get("retrieval_ceiling_on_real_prs", {}).get("kinds_with_zero_matches") == 7
+        ),
+        "composition_needs_a_frame_and_proves_its_refusals": bool(
+            compose_effects
+            and compose_intent
+            and compose_effects.get("summary", {}).get("solved") == 14
+            and compose_effects.get("summary", {}).get("solved_with_two_steps") == 1
+            and compose_effects.get("summary", {}).get("proven_unreachable") == 2
+            and compose_effects.get("summary", {}).get("prediction_mismatches") == 0
+            and compose_effects.get("summary", {}).get("unrequested_side_effects") == 0
+            and compose_effects.get("summary", {}).get("relaxed_plans_that_break_the_frame") == 15
+            and compose_intent.get("measured_effect", {}).get("solved_before_composition") == 13
+        ),
+        "inferred_edit_values_are_guesses_until_execution": bool(
+            value_intent
+            and derivation_receipt
+            and value_intent.get("measured_effect", {}).get("arms", {}).get("value_layer", {}).get("derive", {}).get("precision_when_fired") == 0.2143
+            and value_intent.get("measured_effect", {}).get("arms", {}).get("value_layer", {}).get("derive_contrast", {}).get("precision_when_fired") == 0.4
+            and value_intent.get("measured_effect", {}).get("arms", {}).get("value_layer", {}).get("derive", {}).get("derivation_fired") == 42
+            and derivation_receipt.get("commits_in_corpus") == 393
+        ),
     }
     audit_pass = all(invariants.values())
     return {
@@ -757,6 +814,30 @@ def audit(quixbugs_root: pathlib.Path, root: pathlib.Path = ROOT) -> dict[str, A
             "supply": (supply_intent or {}).get("measured_effect", {}),
             "status": "ONCE_IS_ARITHMETIC_AND_REAL_WORK_SUPPLY_IS_ABOUT_ONE_SIXTH",
         },
+        "index_specification_and_value_layer": {
+            "receipts": [
+                "canonical/verification/THE_INDEX_IS_THE_BOTTLENECK_20261116_V1.json",
+                "canonical/verification/COMPOSE_MEASURED_EFFECTS_20261116_V1.json",
+                "canonical/verification/SYSTEMATIC_EDIT_DERIVATION_20261116_V1.json",
+            ],
+            "index": {
+                "verdict": (index_receipt or {}).get("verdict", ""),
+                "reading": (index_receipt or {}).get("reading", ""),
+                "sweep": (index_receipt or {}).get("sweep", []),
+                "usable_key_families": (index_receipt or {}).get("usable_key_families", []),
+                "measured_effect": (index_intent or {}).get("measured_effect", {}),
+            },
+            "composition": {
+                "summary": (compose_effects or {}).get("summary", {}),
+                "measured_effect": (compose_intent or {}).get("measured_effect", {}),
+                "status": "COMPOSITION_CLOSES_ONE_REFUSAL_PROVES_TWO_AND_NEEDS_A_FRAME",
+            },
+            "value_inference": {
+                "measured_effect": (value_intent or {}).get("measured_effect", {}),
+                "status": "A_STORED_VALUE_IS_A_STORED_GUESS_ONLY_EXECUTION_CLOSES_IT",
+            },
+            "status": "INDEX_AND_FRAME_ARE_NECESSARY_SHARED_DEFECTS_NOT_A_SINGLE_SUFFICIENT_LEVER",
+        },
         "verified_repair_rerun": {
             "receipt": "canonical/verification/RERUN_THE_LEARNED_ARMS_REPAIRS_20261116_V1.json",
             "claimed_repaired": (rerun or {}).get("claimed_repaired"),
@@ -845,6 +926,10 @@ def audit(quixbugs_root: pathlib.Path, root: pathlib.Path = ROOT) -> dict[str, A
             "NO_PROOF_COMPOSITION_AS_SINGLE_LEVER",
             "NO_ONCE_IDENTIFIES_A_RULE",
             "NO_ONE_DEMONSTRATION_COVERS_MOST_REAL_WORK",
+            "NO_GRANULARITY_OF_THESE_FEATURES_AS_A_REPAIR",
+            "NO_COMPOSITION_CLOSES_COMPUTER_USE",
+            "NO_INFERRED_VALUE_AS_AN_ESTABLISHED_FACT",
+            "NO_INDEX_OR_SPECIFICATION_FIX_AS_TERMINAL_UNLOCK",
             "PRODUCER_RUN_NOT_INDEPENDENT_VERIFICATION",
             "TERMINAL_TRUTH_UNTOUCHED",
         ],

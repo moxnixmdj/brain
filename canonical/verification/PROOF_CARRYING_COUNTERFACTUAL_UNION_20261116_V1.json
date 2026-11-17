@@ -233,7 +233,19 @@
     "canonical/swe_kernel/systematic_edit_supply_v1.py",
     "canonical/tests/test_the_four_levers_of_learning_from_experience_v1.py",
     "canonical/tests/test_systematic_edit_supply_v1.py",
-    "canonical/tests/fixtures/systematic_edit_corpus_v1.jsonl"
+    "canonical/tests/fixtures/systematic_edit_corpus_v1.jsonl",
+    "COMPOSITION_CLOSES_ONE_AND_PROVES_TWO_20261116_V1.md",
+    "THE_BOTTLENECK_IS_THE_INDEX_NOT_THE_LEARNING_20261116_V1.md",
+    "canonical/action_intents/COMPOSITION_CLOSES_ONE_AND_PROVES_TWO_20261116_V1.json",
+    "canonical/action_intents/SYSTEMATIC_EDIT_VALUE_LAYER_DERIVATION_20261116_V1.json",
+    "canonical/action_intents/THE_BOTTLENECK_IS_THE_INDEX_NOT_THE_LEARNING_20261116_V1.json",
+    "canonical/verification/COMPOSE_MEASURED_EFFECTS_20261116_V1.json",
+    "canonical/verification/SYSTEMATIC_EDIT_DERIVATION_20261116_V1.json",
+    "canonical/verification/THE_INDEX_IS_THE_BOTTLENECK_20261116_V1.json",
+    "canonical/tools/compose_measured_effects_v1.py",
+    "canonical/tools/the_index_is_the_bottleneck_v1.py",
+    "canonical/tests/test_compose_measured_effects_v1.py",
+    "canonical/tests/test_the_index_is_the_bottleneck_v1.py"
   ],
   "exact_decision_past_enumeration_wall": {
     "measured_effect": {
@@ -465,7 +477,7 @@
       ]
     }
   },
-  "generated_at_utc": "2026-11-17T00:50:44.337507+00:00",
+  "generated_at_utc": "2026-11-17T00:59:12.185067+00:00",
   "gui_invariance_and_operand_boundary": {
     "identity_invariance": {
       "identity_arms": 15,
@@ -2724,6 +2736,10 @@
     "NO_PROOF_COMPOSITION_AS_SINGLE_LEVER",
     "NO_ONCE_IDENTIFIES_A_RULE",
     "NO_ONE_DEMONSTRATION_COVERS_MOST_REAL_WORK",
+    "NO_GRANULARITY_OF_THESE_FEATURES_AS_A_REPAIR",
+    "NO_COMPOSITION_CLOSES_COMPUTER_USE",
+    "NO_INFERRED_VALUE_AS_AN_ESTABLISHED_FACT",
+    "NO_INDEX_OR_SPECIFICATION_FIX_AS_TERMINAL_UNLOCK",
     "PRODUCER_RUN_NOT_INDEPENDENT_VERIFICATION",
     "TERMINAL_TRUTH_UNTOUCHED"
   ],
@@ -2747,6 +2763,412 @@
     "wrap"
   ],
   "incremental_spend_usd": 0,
+  "index_specification_and_value_layer": {
+    "composition": {
+      "measured_effect": {
+        "abstract_states_exhausted": 4,
+        "adaptation_trials": 29,
+        "authority": "NONE__PRODUCER_RUN_SANDBOX",
+        "demonstration_baseline_for_comparison": {
+          "of": 16,
+          "solved": 11,
+          "trials": 34
+        },
+        "executed_steps": 15,
+        "executions": 15,
+        "headline": "composition closes the one refusal it can and proves the other two impossible (4 abstract states exhausted); zero prediction errors in 15 audited steps; 15 plans met the stated goal and broke something else, and the frame rejected all of them",
+        "machines": 4,
+        "measured_cells": 29,
+        "prediction_mismatches": 0,
+        "proven_unreachable": 2,
+        "receipts": [
+          "canonical/verification/COMPOSE_MEASURED_EFFECTS_20261116_V1.json"
+        ],
+        "relaxed_plans_that_break_the_frame": 15,
+        "requests": 16,
+        "solved": 14,
+        "solved_before_composition": 13,
+        "solved_with_two_steps": 1,
+        "trials_in_total": 44,
+        "unrequested_side_effects": 0,
+        "usable_operators": 14,
+        "what": "offline breadth-first composition over the measured (atom, state class) table on four real machines, with a frame condition and a per-step prediction audit"
+      },
+      "status": "COMPOSITION_CLOSES_ONE_REFUSAL_PROVES_TWO_AND_NEEDS_A_FRAME",
+      "summary": {
+        "abstract_states_exhausted": 4,
+        "adaptation_trials": 29,
+        "executions": 15,
+        "machines": 4,
+        "measured_cells": 29,
+        "per_machine": {
+          "FILESYSTEM": {
+            "adaptation_trials": 9,
+            "executions": 4,
+            "explored": 0,
+            "proven_unreachable": 0,
+            "solved": 4,
+            "two_step": 0,
+            "usable_operators": 4
+          },
+          "GIT": {
+            "adaptation_trials": 6,
+            "executions": 2,
+            "explored": 4,
+            "proven_unreachable": 2,
+            "solved": 2,
+            "two_step": 0,
+            "usable_operators": 2
+          },
+          "SQLITE": {
+            "adaptation_trials": 6,
+            "executions": 4,
+            "explored": 0,
+            "proven_unreachable": 0,
+            "solved": 4,
+            "two_step": 0,
+            "usable_operators": 6
+          },
+          "TARBALL": {
+            "adaptation_trials": 8,
+            "executions": 5,
+            "explored": 0,
+            "proven_unreachable": 0,
+            "solved": 4,
+            "two_step": 1,
+            "usable_operators": 2
+          }
+        },
+        "prediction_mismatches": 0,
+        "proven_unreachable": 2,
+        "relaxed_plans_that_break_the_frame": 15,
+        "requests": 16,
+        "solved": 14,
+        "solved_with_two_steps": 1,
+        "trials_in_total": 44,
+        "unrequested_side_effects": 0,
+        "usable_operators": 14
+      }
+    },
+    "index": {
+      "measured_effect": {
+        "contradiction_resolved": {
+          "compression_within_family": "59 -> 35 oracle questions, 41% fewer, on a never-seen period-12",
+          "cross_kind_compounding": "0 saved across 10 kinds (no abstraction mechanism at all)"
+        },
+        "cross_kind_learning_to_learn": {
+          "beat_default": "1/10",
+          "beat_random_mean": "3/10",
+          "verdict": "NO_COMPOUNDING"
+        },
+        "cross_language": {
+          "store_offered_any_non_python": false,
+          "transferred_and_narrow": [
+            "python",
+            "javascript",
+            "c",
+            "cpp"
+          ],
+          "wall": "THE_PROPOSER"
+        },
+        "instance_sensitivity": {
+          "example": {
+            "grid_walk": {
+              "0": "dfs_reversed only",
+              "1": "five policies",
+              "2": "NONE"
+            }
+          },
+          "kinds_unsolvable_on_every_instance": [
+            "ring_rotate"
+          ],
+          "kinds_whose_policy_set_changes_with_instance": 5
+        },
+        "instrument_correction": "first draft reported four kinds unsolvable by any policy; that was instance 1 of 3. Only ring_rotate is unsolvable everywhere; the other three are solvable at instance 2.",
+        "insufficiency_certificate": {
+          "closed_vocabulary_size": 31,
+          "hypotheses_needing_enumeration": 8388608,
+          "learner_enumeration_cap": 12,
+          "reading": "obstacle moves from representation to combinatorics"
+        },
+        "key_sweep": [
+          {
+            "answerable": "5/8",
+            "collisions": 2,
+            "family": "tree_coarse",
+            "keys": 8
+          },
+          {
+            "answerable": "4/7",
+            "collisions": 3,
+            "family": "coarser_still",
+            "keys": 7
+          },
+          {
+            "answerable": "11/14",
+            "collisions": 2,
+            "family": "finer_mid",
+            "keys": 14
+          },
+          {
+            "answerable": "13/16",
+            "collisions": 2,
+            "family": "finest_exact_features",
+            "keys": 16
+          },
+          {
+            "answerable": "19/20",
+            "collisions": 0,
+            "family": "one_key_per_kind",
+            "keys": 20
+          }
+        ],
+        "retrieval_ceiling_on_real_prs": {
+          "files": 76,
+          "kinds_with_a_matching_pr": 1,
+          "kinds_with_zero_matches": 7,
+          "pull_requests": 13,
+          "seconds": 350.6
+        },
+        "reused_not_rebuilt": [
+          "cross_kind_compounding_benchmark_v1",
+          "cross_kind_learning_to_learn_benchmark_v1",
+          "cross_language_lesson_transfer_probe_v1",
+          "hold_out_the_precision_curve_20261112_v1",
+          "COMPRESSION_MAKES_EXPERIENCE_COMPOUND_20261112_V1",
+          "INSUFFICIENCY_CERTIFICATE_20261113_V1"
+        ],
+        "usable_key_families": [],
+        "verdict": "NO_GRANULARITY_OF_THESE_FEATURES_SEPARATES_WHAT_THE_POLICY_DEPENDS_ON"
+      },
+      "reading": "A key has to be injective on the distinction the policy depends on. If every family either collides kinds that need different policies or degenerates to one key per kind, the features do not CONTAIN that distinction and no bucketing of them can supply it. The repair is a new observable, not a finer grid.",
+      "sweep": [
+        {
+          "answerable": 5,
+          "answerable_fraction": 0.625,
+          "collision_detail": [
+            {
+              "distinct_winner_sets": 3,
+              "key": "b1_m2_r1_d0_g0",
+              "kinds": [
+                "grid_walk",
+                "dial_lock",
+                "toggle_bank",
+                "adjacent_sort",
+                "sliding_pairs",
+                "stack_pushout",
+                "letter_shift",
+                "double_dial",
+                "tri_lock"
+              ]
+            },
+            {
+              "distinct_winner_sets": 2,
+              "key": "b1_m1_r0_d0_g0",
+              "kinds": [
+                "reverse_string",
+                "last_wins"
+              ]
+            }
+          ],
+          "collisions": 2,
+          "keys": 8,
+          "kinds": 20,
+          "name": "tree_coarse__b(2,4,6)_m(.45,.8)_r(1.5,3)_d(0,3,10)"
+        },
+        {
+          "answerable": 4,
+          "answerable_fraction": 0.5714,
+          "collision_detail": [
+            {
+              "distinct_winner_sets": 2,
+              "key": "b1_m1_r0_d0_g0",
+              "kinds": [
+                "grid_walk",
+                "toggle_bank",
+                "bit_register",
+                "parity_lights",
+                "stack_pushout",
+                "letter_shift",
+                "double_dial"
+              ]
+            },
+            {
+              "distinct_winner_sets": 2,
+              "key": "b0_m1_r0_d0_g0",
+              "kinds": [
+                "cyclic_counter",
+                "dial_lock",
+                "adjacent_sort",
+                "queue_rotate",
+                "sliding_pairs",
+                "ring_rotate",
+                "tri_lock"
+              ]
+            },
+            {
+              "distinct_winner_sets": 2,
+              "key": "b1_m0_r0_d0_g0",
+              "kinds": [
+                "two_jug_pour",
+                "reverse_string"
+              ]
+            }
+          ],
+          "collisions": 3,
+          "keys": 7,
+          "kinds": 20,
+          "name": "coarser_still"
+        },
+        {
+          "answerable": 11,
+          "answerable_fraction": 0.7857,
+          "collision_detail": [
+            {
+              "distinct_winner_sets": 2,
+              "key": "b3_m4_r2_d1_g0",
+              "kinds": [
+                "grid_walk",
+                "stack_pushout",
+                "letter_shift"
+              ]
+            },
+            {
+              "distinct_winner_sets": 2,
+              "key": "b2_m4_r1_d1_g0",
+              "kinds": [
+                "dial_lock",
+                "adjacent_sort",
+                "sliding_pairs",
+                "tri_lock"
+              ]
+            }
+          ],
+          "collisions": 2,
+          "keys": 14,
+          "kinds": 20,
+          "name": "finer_mid"
+        },
+        {
+          "answerable": 13,
+          "answerable_fraction": 0.8125,
+          "collision_detail": [
+            {
+              "distinct_winner_sets": 2,
+              "key": "{\"branching\": 4, \"moved_fraction\": 1.0, \"reachable_growth\": 2.25, \"single_action_goal_depth\": 0, \"start_reaches_goal_already\": false}",
+              "kinds": [
+                "grid_walk",
+                "letter_shift"
+              ]
+            },
+            {
+              "distinct_winner_sets": 2,
+              "key": "{\"branching\": 3, \"moved_fraction\": 1.0, \"reachable_growth\": 2.0, \"single_action_goal_depth\": 0, \"start_reaches_goal_already\": false}",
+              "kinds": [
+                "dial_lock",
+                "adjacent_sort",
+                "sliding_pairs",
+                "tri_lock"
+              ]
+            }
+          ],
+          "collisions": 2,
+          "keys": 16,
+          "kinds": 20,
+          "name": "finest_exact_features"
+        },
+        {
+          "answerable": 19,
+          "answerable_fraction": 0.95,
+          "collision_detail": [],
+          "collisions": 0,
+          "keys": 20,
+          "kinds": 20,
+          "name": "trivial_one_key_per_kind"
+        }
+      ],
+      "usable_key_families": [],
+      "verdict": "NO_GRANULARITY_OF_THESE_FEATURES_SEPARATES_WHAT_THE_POLICY_DEPENDS_ON"
+    },
+    "receipts": [
+      "canonical/verification/THE_INDEX_IS_THE_BOTTLENECK_20261116_V1.json",
+      "canonical/verification/COMPOSE_MEASURED_EFFECTS_20261116_V1.json",
+      "canonical/verification/SYSTEMATIC_EDIT_DERIVATION_20261116_V1.json"
+    ],
+    "status": "INDEX_AND_FRAME_ARE_NECESSARY_SHARED_DEFECTS_NOT_A_SINGLE_SUFFICIENT_LEVER",
+    "value_inference": {
+      "measured_effect": {
+        "arms": {
+          "unchanged_from_the_supply_receipt": {
+            "corpus_sha256_prefix": "b47d9c9c23e641a8",
+            "determined": 134,
+            "determined_share": 0.5469,
+            "pairs": 245,
+            "reading": "the copy arm reproduces the published receipt exactly, which makes the delta attributable",
+            "supply_share": 0.1604,
+            "verbatim": 103
+          },
+          "value_layer": {
+            "copy": {
+              "constant_differs": 31,
+              "derivation_fired": 0,
+              "generalising_pairs": 142,
+              "matched_of_generalising": 78,
+              "rebound_wrong": 20,
+              "wrong": 64
+            },
+            "derive": {
+              "constant_differs": 12,
+              "derivation_fired": 42,
+              "derivation_right": 9,
+              "generalising_pairs": 142,
+              "matched_of_generalising": 84,
+              "precision_when_fired": 0.2143,
+              "rebound_wrong": 33,
+              "wrong": 58
+            },
+            "derive_contrast": {
+              "derivation_fired": 15,
+              "derivation_right": 6,
+              "generalising_pairs": 142,
+              "matched_of_generalising": 82,
+              "precision_when_fired": 0.4,
+              "wrong": 60
+            },
+            "reading": "an inferred value is right one time in five; a second demonstration doubles that and makes the system abstain more; neither establishes the value, so only execution closes it"
+          }
+        },
+        "authority": "NONE__PRODUCER_RUN_SANDBOX",
+        "corpus": {
+          "path": "canonical/tests/fixtures/systematic_edit_corpus_v1.jsonl",
+          "records": 393,
+          "repos": [
+            "pallets/click",
+            "pallets/itsdangerous",
+            "pallets/markupsafe",
+            "pypa/packaging",
+            "pypa/pyproject-hooks"
+          ],
+          "schema": "systematic_edit_corpus_v1",
+          "sha256": "b47d9c9c23e641a8865a79d9dce3059a306257813d28114ed6029a9606cbde5a"
+        },
+        "external_state": {
+          "agentic_refactoring": "arXiv 2511.04824: 26.1% of agentic commits carry explicit refactoring intent; the two most frequent operations are rename and type change",
+          "our_own_replay_measurement": "action_replay_under_change_v1: 228 real compositions, 53.5% stale, 31.1% silently corrupt, legality held in 228 of 228",
+          "refactoring_share_2026": "GitClear 2026 (623M changes): refactoring fell from 21% of changed lines in 2022 to 3.8% in 2026 while within-commit copy/paste rose to 15.7%",
+          "repetitiveness_of_code_changes": "Nguyen et al., ASE 2013: 2,841 Java projects, 1.8M revisions; repetitiveness 70-100% at size 1 and decaying exponentially with size",
+          "structural_changes_are_systematic": "Kim et al.: about 75% of structural changes to mature software are systematic, but not identical in context",
+          "systematic_editing_from_one_example": "SyDIT, PLDI 2011: from edit pairs in five large projects, mimics the human correctly on 70% (39/56) of systematic edits"
+        },
+        "incremental_spend_usd": 0,
+        "measured_at_commit": "e9955d59c68e5e953c6f83720599827ba7c12f62",
+        "model_calls": 0,
+        "network_calls": 0,
+        "what_this_does_not_claim": "No new capability. Derivation pairs holes by position, shifts one dotted component and matches context by slot index; the contrast arm can only fire on commits with three sibling sites, so its coverage is bounded by the same supply that limits everything else."
+      },
+      "status": "A_STORED_VALUE_IS_A_STORED_GUESS_ONLY_EXECUTION_CLOSES_IT"
+    }
+  },
   "invariance_and_reach": {
     "alpha_canonical_preconditions": {
       "candidates_proposed": 384,
@@ -2867,10 +3289,13 @@
     "browser_zero_experience_census_is_66_with_no_regressions": true,
     "claimed_learned_arm_superseded_by_pytest_rerun": true,
     "composed_run_is_one_run_one_judge_24_of_40": true,
+    "composition_needs_a_frame_and_proves_its_refusals": true,
     "declared_format_prior_is_too_small_to_be_a_single_lever": true,
     "exact_decision_past_enumeration_wall_is_not_capability_credit": true,
     "gui_identity_invariance_is_vacuous_by_construction": true,
     "gui_judge_has_no_task_equivalence_to_quotient": true,
+    "index_key_lacks_the_observable_not_just_granularity": true,
+    "inferred_edit_values_are_guesses_until_execution": true,
     "invariance_changes_reach_not_capability": true,
     "new_environment_cost_law_is_bounded_and_shuffle_invariant": true,
     "no_answer_key_count_above_zero_in_measured_receipts": true,
@@ -3872,6 +4297,17 @@
         "canonical/swe_kernel/test_suite_admission_v1.py",
         "canonical/swe_kernel/weight_update_admission_v1.py",
         "canonical/swe_kernel/learned_skill_verdict_v1.py"
+      ]
+    },
+    "index_specification_and_value_layer": {
+      "count": 5,
+      "missing": [],
+      "present": [
+        "canonical/tools/the_index_is_the_bottleneck_v1.py",
+        "canonical/tools/compose_measured_effects_v1.py",
+        "canonical/swe_kernel/systematic_edit_supply_v1.py",
+        "canonical/runtime/contrast_selection_v1.py",
+        "canonical/runtime/applicability_v1.py"
       ]
     },
     "invariance_and_in_run_learning": {

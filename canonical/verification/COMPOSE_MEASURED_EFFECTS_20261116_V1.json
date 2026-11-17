@@ -1,0 +1,609 @@
+{
+ "schema": "BRAIN_COMPOSE_MEASURED_EFFECTS_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "model_dependency_count": 0,
+ "external_capability_provider_count": 0,
+ "network_calls_at_run_time": 0,
+ "planning_is_offline_over_the_measured_table": true,
+ "every_step_audited_against_its_prediction": true,
+ "refusal_is_a_proof_not_a_budget": true,
+ "max_depth": 3,
+ "summary": {
+  "machines": 4,
+  "requests": 16,
+  "solved": 14,
+  "solved_with_two_steps": 1,
+  "proven_unreachable": 2,
+  "abstract_states_exhausted": 4,
+  "prediction_mismatches": 0,
+  "unrequested_side_effects": 0,
+  "relaxed_plans_that_break_the_frame": 15,
+  "usable_operators": 14,
+  "adaptation_trials": 29,
+  "executions": 15,
+  "trials_in_total": 44,
+  "measured_cells": 29,
+  "per_machine": {
+   "FILESYSTEM": {
+    "usable_operators": 4,
+    "adaptation_trials": 9,
+    "executions": 4,
+    "solved": 4,
+    "two_step": 0,
+    "proven_unreachable": 0,
+    "explored": 0
+   },
+   "GIT": {
+    "usable_operators": 2,
+    "adaptation_trials": 6,
+    "executions": 2,
+    "solved": 2,
+    "two_step": 0,
+    "proven_unreachable": 2,
+    "explored": 4
+   },
+   "TARBALL": {
+    "usable_operators": 2,
+    "adaptation_trials": 8,
+    "executions": 5,
+    "solved": 4,
+    "two_step": 1,
+    "proven_unreachable": 0,
+    "explored": 0
+   },
+   "SQLITE": {
+    "usable_operators": 6,
+    "adaptation_trials": 6,
+    "executions": 4,
+    "solved": 4,
+    "two_step": 0,
+    "proven_unreachable": 0,
+    "explored": 0
+   }
+  }
+ },
+ "rows": [
+  {
+   "machine": "FILESYSTEM",
+   "atoms_offered": 5,
+   "adaptation_trials": 9,
+   "executions": 4,
+   "measured_cells": 9,
+   "usable_operators": 4,
+   "operators": [
+    {
+     "atom": "FS_A1",
+     "state_class": "TARGET_ABSENT",
+     "effect": "PERSIST",
+     "addressable": true
+    },
+    {
+     "atom": "FS_A1",
+     "state_class": "TARGET_EXISTS",
+     "effect": "REPLACE",
+     "addressable": true
+    },
+    {
+     "atom": "FS_A2",
+     "state_class": "TARGET_EXISTS",
+     "effect": "REMOVE",
+     "addressable": true
+    },
+    {
+     "atom": "FS_A4",
+     "state_class": "TARGET_EXISTS",
+     "effect": "PERSIST",
+     "addressable": true
+    }
+   ],
+   "requests": [
+    {
+     "index": 0,
+     "effect": "PERSIST",
+     "status": "PLANNED",
+     "explored": 1,
+     "depth": 1,
+     "plan": [
+      {
+       "atom": "FS_A1",
+       "effect": "PERSIST"
+      }
+     ],
+     "executed": true,
+     "prediction_agreed_all_steps": true,
+     "trail": [
+      {
+       "atom": "FS_A1",
+       "prediction_agreed": true
+      }
+     ],
+     "unrequested_side_effects": 0,
+     "relaxed_plans_that_break_the_frame": 1,
+     "reader_agrees": true,
+     "outcome": "SOLVED"
+    },
+    {
+     "index": 1,
+     "effect": "PERSIST",
+     "status": "PLANNED",
+     "explored": 1,
+     "depth": 1,
+     "plan": [
+      {
+       "atom": "FS_A1",
+       "effect": "PERSIST"
+      }
+     ],
+     "executed": true,
+     "prediction_agreed_all_steps": true,
+     "trail": [
+      {
+       "atom": "FS_A1",
+       "prediction_agreed": true
+      }
+     ],
+     "unrequested_side_effects": 0,
+     "relaxed_plans_that_break_the_frame": 1,
+     "reader_agrees": true,
+     "outcome": "SOLVED"
+    },
+    {
+     "index": 2,
+     "effect": "REPLACE",
+     "status": "PLANNED",
+     "explored": 1,
+     "depth": 1,
+     "plan": [
+      {
+       "atom": "FS_A1",
+       "effect": "REPLACE"
+      }
+     ],
+     "executed": true,
+     "prediction_agreed_all_steps": true,
+     "trail": [
+      {
+       "atom": "FS_A1",
+       "prediction_agreed": true
+      }
+     ],
+     "unrequested_side_effects": 0,
+     "relaxed_plans_that_break_the_frame": 1,
+     "reader_agrees": true,
+     "outcome": "SOLVED"
+    },
+    {
+     "index": 3,
+     "effect": "REMOVE",
+     "status": "PLANNED",
+     "explored": 1,
+     "depth": 1,
+     "plan": [
+      {
+       "atom": "FS_A2",
+       "effect": "REMOVE"
+      }
+     ],
+     "executed": true,
+     "prediction_agreed_all_steps": true,
+     "trail": [
+      {
+       "atom": "FS_A2",
+       "prediction_agreed": true
+      }
+     ],
+     "unrequested_side_effects": 0,
+     "relaxed_plans_that_break_the_frame": 2,
+     "reader_agrees": true,
+     "outcome": "SOLVED"
+    }
+   ],
+   "solved": 4,
+   "solved_with_two_steps": 0,
+   "unrequested_side_effects": 0,
+   "relaxed_plans_that_break_the_frame": 5,
+   "proven_unreachable": 0,
+   "abstract_states_exhausted": 0,
+   "prediction_mismatches": 0,
+   "seconds": 0.03
+  },
+  {
+   "machine": "GIT",
+   "atoms_offered": 5,
+   "adaptation_trials": 6,
+   "executions": 2,
+   "measured_cells": 6,
+   "usable_operators": 2,
+   "operators": [
+    {
+     "atom": "GIT_A1",
+     "state_class": "TARGET_ABSENT",
+     "effect": "PERSIST",
+     "addressable": true
+    },
+    {
+     "atom": "GIT_A1",
+     "state_class": "TARGET_EXISTS",
+     "effect": "PERSIST",
+     "addressable": true
+    }
+   ],
+   "requests": [
+    {
+     "index": 0,
+     "effect": "PERSIST",
+     "status": "PLANNED",
+     "explored": 1,
+     "depth": 1,
+     "plan": [
+      {
+       "atom": "GIT_A1",
+       "effect": "PERSIST"
+      }
+     ],
+     "executed": true,
+     "prediction_agreed_all_steps": true,
+     "trail": [
+      {
+       "atom": "GIT_A1",
+       "prediction_agreed": true
+      }
+     ],
+     "unrequested_side_effects": 0,
+     "relaxed_plans_that_break_the_frame": 1,
+     "reader_agrees": true,
+     "outcome": "SOLVED"
+    },
+    {
+     "index": 1,
+     "effect": "PERSIST",
+     "status": "PLANNED",
+     "explored": 1,
+     "depth": 1,
+     "plan": [
+      {
+       "atom": "GIT_A1",
+       "effect": "PERSIST"
+      }
+     ],
+     "executed": true,
+     "prediction_agreed_all_steps": true,
+     "trail": [
+      {
+       "atom": "GIT_A1",
+       "prediction_agreed": true
+      }
+     ],
+     "unrequested_side_effects": 0,
+     "relaxed_plans_that_break_the_frame": 1,
+     "reader_agrees": true,
+     "outcome": "SOLVED"
+    },
+    {
+     "index": 2,
+     "effect": "REPLACE",
+     "status": "PROVEN_UNREACHABLE_UNDER_THE_OFFERED_ATOMS",
+     "explored": 2,
+     "depth": 0,
+     "plan": [],
+     "executed": false,
+     "outcome": "PROVEN_UNREACHABLE_UNDER_THE_OFFERED_ATOMS"
+    },
+    {
+     "index": 3,
+     "effect": "REMOVE",
+     "status": "PROVEN_UNREACHABLE_UNDER_THE_OFFERED_ATOMS",
+     "explored": 2,
+     "depth": 0,
+     "plan": [],
+     "executed": false,
+     "outcome": "PROVEN_UNREACHABLE_UNDER_THE_OFFERED_ATOMS"
+    }
+   ],
+   "solved": 2,
+   "solved_with_two_steps": 0,
+   "unrequested_side_effects": 0,
+   "relaxed_plans_that_break_the_frame": 2,
+   "proven_unreachable": 2,
+   "abstract_states_exhausted": 4,
+   "prediction_mismatches": 0,
+   "seconds": 0.23
+  },
+  {
+   "machine": "TARBALL",
+   "atoms_offered": 4,
+   "adaptation_trials": 8,
+   "executions": 5,
+   "measured_cells": 8,
+   "usable_operators": 2,
+   "operators": [
+    {
+     "atom": "TAR_A1",
+     "state_class": "TARGET_ABSENT",
+     "effect": "PERSIST",
+     "addressable": true
+    },
+    {
+     "atom": "TAR_A2",
+     "state_class": "TARGET_EXISTS",
+     "effect": "REMOVE",
+     "addressable": true
+    }
+   ],
+   "requests": [
+    {
+     "index": 0,
+     "effect": "PERSIST",
+     "status": "PLANNED",
+     "explored": 1,
+     "depth": 1,
+     "plan": [
+      {
+       "atom": "TAR_A1",
+       "effect": "PERSIST"
+      }
+     ],
+     "executed": true,
+     "prediction_agreed_all_steps": true,
+     "trail": [
+      {
+       "atom": "TAR_A1",
+       "prediction_agreed": true
+      }
+     ],
+     "unrequested_side_effects": 0,
+     "relaxed_plans_that_break_the_frame": 1,
+     "reader_agrees": true,
+     "outcome": "SOLVED"
+    },
+    {
+     "index": 1,
+     "effect": "PERSIST",
+     "status": "PLANNED",
+     "explored": 1,
+     "depth": 1,
+     "plan": [
+      {
+       "atom": "TAR_A1",
+       "effect": "PERSIST"
+      }
+     ],
+     "executed": true,
+     "prediction_agreed_all_steps": true,
+     "trail": [
+      {
+       "atom": "TAR_A1",
+       "prediction_agreed": true
+      }
+     ],
+     "unrequested_side_effects": 0,
+     "relaxed_plans_that_break_the_frame": 1,
+     "reader_agrees": true,
+     "outcome": "SOLVED"
+    },
+    {
+     "index": 2,
+     "effect": "REPLACE",
+     "status": "PLANNED",
+     "explored": 2,
+     "depth": 2,
+     "plan": [
+      {
+       "atom": "TAR_A1",
+       "effect": "PERSIST"
+      },
+      {
+       "atom": "TAR_A2",
+       "effect": "REMOVE"
+      }
+     ],
+     "executed": true,
+     "prediction_agreed_all_steps": true,
+     "trail": [
+      {
+       "atom": "TAR_A1",
+       "prediction_agreed": true
+      },
+      {
+       "atom": "TAR_A2",
+       "prediction_agreed": true
+      }
+     ],
+     "unrequested_side_effects": 0,
+     "relaxed_plans_that_break_the_frame": 1,
+     "reader_agrees": true,
+     "outcome": "SOLVED"
+    },
+    {
+     "index": 3,
+     "effect": "REMOVE",
+     "status": "PLANNED",
+     "explored": 1,
+     "depth": 1,
+     "plan": [
+      {
+       "atom": "TAR_A2",
+       "effect": "REMOVE"
+      }
+     ],
+     "executed": true,
+     "prediction_agreed_all_steps": true,
+     "trail": [
+      {
+       "atom": "TAR_A2",
+       "prediction_agreed": true
+      }
+     ],
+     "unrequested_side_effects": 0,
+     "relaxed_plans_that_break_the_frame": 1,
+     "reader_agrees": true,
+     "outcome": "SOLVED"
+    }
+   ],
+   "solved": 4,
+   "solved_with_two_steps": 1,
+   "unrequested_side_effects": 0,
+   "relaxed_plans_that_break_the_frame": 4,
+   "proven_unreachable": 0,
+   "abstract_states_exhausted": 0,
+   "prediction_mismatches": 0,
+   "seconds": 0.26
+  },
+  {
+   "machine": "SQLITE",
+   "atoms_offered": 4,
+   "adaptation_trials": 6,
+   "executions": 4,
+   "measured_cells": 6,
+   "usable_operators": 6,
+   "operators": [
+    {
+     "atom": "SQL_A1",
+     "state_class": "TARGET_ABSENT",
+     "effect": "PERSIST",
+     "addressable": true
+    },
+    {
+     "atom": "SQL_A1",
+     "state_class": "TARGET_EXISTS",
+     "effect": "PERSIST",
+     "addressable": true
+    },
+    {
+     "atom": "SQL_A2",
+     "state_class": "TARGET_ABSENT",
+     "effect": "REMOVE",
+     "addressable": true
+    },
+    {
+     "atom": "SQL_A2",
+     "state_class": "TARGET_EXISTS",
+     "effect": "REMOVE",
+     "addressable": true
+    },
+    {
+     "atom": "SQL_A3",
+     "state_class": "TARGET_ABSENT",
+     "effect": "REPLACE",
+     "addressable": true
+    },
+    {
+     "atom": "SQL_A3",
+     "state_class": "TARGET_EXISTS",
+     "effect": "REPLACE",
+     "addressable": true
+    }
+   ],
+   "requests": [
+    {
+     "index": 0,
+     "effect": "PERSIST",
+     "status": "PLANNED",
+     "explored": 1,
+     "depth": 1,
+     "plan": [
+      {
+       "atom": "SQL_A1",
+       "effect": "PERSIST"
+      }
+     ],
+     "executed": true,
+     "prediction_agreed_all_steps": true,
+     "trail": [
+      {
+       "atom": "SQL_A1",
+       "prediction_agreed": true
+      }
+     ],
+     "unrequested_side_effects": 0,
+     "relaxed_plans_that_break_the_frame": 1,
+     "reader_agrees": true,
+     "outcome": "SOLVED"
+    },
+    {
+     "index": 1,
+     "effect": "PERSIST",
+     "status": "PLANNED",
+     "explored": 1,
+     "depth": 1,
+     "plan": [
+      {
+       "atom": "SQL_A1",
+       "effect": "PERSIST"
+      }
+     ],
+     "executed": true,
+     "prediction_agreed_all_steps": true,
+     "trail": [
+      {
+       "atom": "SQL_A1",
+       "prediction_agreed": true
+      }
+     ],
+     "unrequested_side_effects": 0,
+     "relaxed_plans_that_break_the_frame": 1,
+     "reader_agrees": true,
+     "outcome": "SOLVED"
+    },
+    {
+     "index": 2,
+     "effect": "REPLACE",
+     "status": "PLANNED",
+     "explored": 1,
+     "depth": 1,
+     "plan": [
+      {
+       "atom": "SQL_A3",
+       "effect": "REPLACE"
+      }
+     ],
+     "executed": true,
+     "prediction_agreed_all_steps": true,
+     "trail": [
+      {
+       "atom": "SQL_A3",
+       "prediction_agreed": true
+      }
+     ],
+     "unrequested_side_effects": 0,
+     "relaxed_plans_that_break_the_frame": 1,
+     "reader_agrees": true,
+     "outcome": "SOLVED"
+    },
+    {
+     "index": 3,
+     "effect": "REMOVE",
+     "status": "PLANNED",
+     "explored": 1,
+     "depth": 1,
+     "plan": [
+      {
+       "atom": "SQL_A2",
+       "effect": "REMOVE"
+      }
+     ],
+     "executed": true,
+     "prediction_agreed_all_steps": true,
+     "trail": [
+      {
+       "atom": "SQL_A2",
+       "prediction_agreed": true
+      }
+     ],
+     "unrequested_side_effects": 0,
+     "relaxed_plans_that_break_the_frame": 1,
+     "reader_agrees": true,
+     "outcome": "SOLVED"
+    }
+   ],
+   "solved": 4,
+   "solved_with_two_steps": 0,
+   "unrequested_side_effects": 0,
+   "relaxed_plans_that_break_the_frame": 4,
+   "proven_unreachable": 0,
+   "abstract_states_exhausted": 0,
+   "prediction_mismatches": 0,
+   "seconds": 1.08
+  }
+ ]
+}
