@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "8c8c6267c9575b1077912baa8f8f1955e22f9229f5fd800c5ffc233b0ca937b0"
+  "value": "96c34691a7170d8cf17b1384dccb59e338c5d5b76e400a14aca4d3a3234f52e9"
  },
  "engines": [
   {
@@ -236894,7 +236894,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/COMPUTER_USE_ORACLE_SYNTHESIS_20261116_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "c74f2a6ebb343536861781b507531763fc3dba9c04f9c1d0d808b769d0326724",
+   "sha256": "311e28c2506edae9f276f06bf7307eddb2f3b3ce59ac52535b6e150f274e7689",
    "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
    "terms": {
     "0.1167": 1,
