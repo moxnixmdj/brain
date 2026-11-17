@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "a8f1de8c1612b7cc237d4953fbc382c4f132bc27c451d4835a1284959d8f808c"
+  "value": "479b878d675eed6cebf9426367ff97835aa74d2c5162f3c785e16fb19c8d7439"
  },
  "engines": [
   {
@@ -239066,7 +239066,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/EXACT_STATED_GEOMETRY_20261117_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
-   "sha256": "778f5cea598b886a5aa42334bcdafee3a4f3d89499f063ce3f0e17438c818204",
+   "sha256": "6ff6ae18de15ff3dfe1ba052cdeaf078d4f8dd3bc7e0d69beb2db6c1ea59d50e",
    "status": "MEASURED__SANDBOX_RECEIPT__PENDING_MERGE",
    "terms": {
     "20261117": 1,
