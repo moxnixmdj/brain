@@ -267,3 +267,75 @@ metadata `historical_run_command`, explicitly indicating provenance rather than 
 floor subsequently held at 595. This does not make the old run independently verified or
 supply a missing check. The admission and artifact problems are not resolved, the capability
 feature is not independently validated, and no merge was attempted.
+
+## Follow-up: tracing the decision path, 17 November 2026
+
+The deeper audit changed the priority **within** grounded feedback. Before widening the probe
+space, prevent successful execution from being reported as a verified correct answer. The
+current learning route and the standalone settlement primitive have separate defects:
+
+1. **A live route reports correctness without checking target correctness.**
+   `canonical/runtime/creature_runtime_v1.py`'s `sovereign_perform`, for a supplied
+   `_sovereign_learn_tasks` item, asks `synthesize_or_disambiguate_skill` for an organ and then
+   calls `_eval_learned_organ` on each target. It sets `ok`, `verified`, and `correct` from
+   whether those calls executed, not whether their results match the oracle or an independent
+   verdict. It then settles its prediction under `settled_skill_synthesis`. In a local,
+   deliberately constructed **unit-level diagnostic** (not a capability benchmark), seed
+   examples came from `3*x-4`; the callable oracle returned `3*x-4` except at target
+   `(987654321,)`, where it returned `-999999`. The actual route returned
+   `DISAMBIGUATED_AND_CRYSTALLIZED`, `ok=True`, `verified=True`, `correct=True`, and answer
+   `2962962959`; the target was not queried. The three oracle calls during synthesis were
+   reported as three. This counterexample shows a false correctness claim on this bounded route,
+   not an error rate on real tasks. Existing tests can still pass: the four related existing
+   test files below produced **75 passed**, including 20 for this live route.
+2. **The standalone settlement helper can report SETTLED after every hypothesis was
+   contradicted.** In another constructed diagnostic, hypotheses predicted 0 and 1 with priors
+   0.995 and 0.005; the oracle answered 9. `settle` returned `SETTLED`, with winner `a`,
+   confidence 0.995 and one query, even though `last_observation_explained_by_none` was true.
+   It checks posterior concentration immediately after the observation, before checking that
+   flag; the no-probe and no-oracle exits can also precede the flag. This is a real local
+   correctness bug, **not evidence that fixing it improves agent performance**. In the call
+   sites found in this audit, the organ graph constructs a `VersionSpace` and calls
+   `select_probe`, but its main loop uses `synthesize_discriminating_input` and its own
+   filtering; `settle` itself was only found in tests. The taught-edit admission code likewise
+   uses its own loop rather than `settle`. Fixing `settle` alone would therefore not repair
+   the live false-correctness route. A temporary local correction and four unit tests passed
+   together with the 75 tests; they were **not retained**, because shipping a fix confined to
+   an apparently unused decision helper would not be the promised connected feature.
+3. **The graph's metadata is not the actual decision.** The graph calculates
+   `settlement_probe` and `settlement_gain`, then selects its actual query through
+   `synthesize_discriminating_input`, first using `_candidate_probe_inputs` and, on its
+   fallback path, `_settlement_probe_space`. The reported posterior is initialized from the
+   earlier examples and is not updated as that loop asks its questions. Also,
+   `_survivors_disagree_on_domain` calls `derive_probe_space`, not a supplied exhaustive
+   reachable domain: absence of disagreement on this sampled diagonal cannot establish
+   interchangeability on all inputs. The fixed grid has off-diagonal probes for two and three
+   arguments, so the diagonal issue is a limitation of the derived/fallback space, **not** a
+   claim that all multi-input queries are diagonal. AST literals and their neighborhoods also
+   do not cover every way programs can differ.
+4. **Registration precedes an independent final verdict.** `register_organ` persists an organ
+   and can make it primary, while the learning route's later target calls do not independently
+   verify semantic correctness. Fixing the output labels alone would leave a potentially
+   refuted candidate in memory. A complete repair needs a provisional-versus-admitted lifecycle,
+   scoped replay and revocation, and an out-of-band adjudicator with no answer-key access by the
+   solver. An oracle used during synthesis is feedback, not a hidden independent test; directly
+   querying it at every evaluation target would leak the test answers into the solving process.
+   Unknown, failed execution, contradictory evidence, and verified failure must remain distinct.
+   Calibration must not settle an unknown as an independent pass or a semantic failure.
+
+The next work is thus **not** just a bigger numeric grid. A useful integrated feature must
+keep task-time feedback separate from sealed final checks, refuse self-certification, manage
+provisional memory on failure/restart, and update the actual live path and its consumers.
+It must account for query, wall-clock and isolation costs. The diagnostic above does not
+establish how to do this safely for arbitrary computer use, nor that the existing learning
+route is the SWE benchmark adapter. No complete integrated fix was shipped in this follow-up.
+
+Recent work on [active learning of temporal specifications](https://arxiv.org/html/2611.17866)
+illustrates the value of distinguishing feasible executions, but its guarantees depend on a
+bounded hypothesis class and teacher assumptions; they do not turn a sampled program grid
+into a proof of general correctness. [Senior SWE-Bench](https://snorkel.ai/leaderboard/senior-swe-bench/)
+reports 50 public Harbor-compatible tasks and model-based validation/taste review; availability
+and a no-external-model-compatible grading path have not been established here. The current
+PR still has two failed `verify` jobs. Detailed GitHub job logs could not be fetched from this
+sandbox on the latest attempt, so the earlier locally reproduced admission and compiled-artifact
+failures remain diagnoses, not a fresh confirmation of the current remote job logs.
