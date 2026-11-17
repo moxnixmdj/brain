@@ -39,7 +39,7 @@
  },
  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_GENERATOR_THAT_PROPOSES_WHAT_TO_TYPE_COULD_ONLY_COPY_TEXT_THE_PAGE_ALREADY_SHOWED_SO_A_PAGE_WHOSE_ANSWER_IS_A_VALUE_NOTHING_STATES_WAS_UNSOLVABLE_AT_ANY_BUDGET",
- "canonical_base_commit": "68e8d11bcddd87e4dffc38a19093dbd782879919",
+ "canonical_base_commit": "abc0c49f0e2726d3e1180414f5760e0f89469311",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -134,7 +134,7 @@
  ],
  "probe_specific": false,
  "recursive_obs": {
-  "canonical_base_commit": "68e8d11bcddd87e4dffc38a19093dbd782879919",
+  "canonical_base_commit": "abc0c49f0e2726d3e1180414f5760e0f89469311",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "the copy-only candidate generator",

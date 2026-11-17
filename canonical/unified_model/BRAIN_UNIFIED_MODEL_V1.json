@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "d0cc14c90a4ff49f09713c091e7e1780231acac3f12a619362844b52fc1791f0"
+  "value": "740f234f95a1ce6519f84803618fb5fcf9a4f50b3129f25724b974ba20dbca72"
  },
  "engines": [
   {
@@ -243161,7 +243161,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/THE_ANSWER_WAS_A_VALUE_NOTHING_STATED_20261117_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
-   "sha256": "8da59ac863fc81c9a7ea3ef290419eb9b3417fe1377b516c0eba66c9a0fa3567",
+   "sha256": "ae6d9c48a86de6085ece8dddddb9a6a4d7d9844bdcfa3d394796d22aa740c886",
    "status": "PROPOSED__ZERO_CREDIT__NO_TERMINAL_CLAIM",
    "terms": {
     "20261117": 1,
