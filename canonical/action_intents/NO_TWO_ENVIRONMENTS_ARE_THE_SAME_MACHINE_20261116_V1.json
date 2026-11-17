@@ -40,7 +40,7 @@
  },
  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::NO_PAIR_OF_THE_TREES_20_ENVIRONMENTS_IS_THE_SAME_MACHINE_UNDER_A_RENAMING_190_OF_190_PAIRS_PROVEN_DISTINCT_SO_THE_MEASURED_0_OF_48_TRANSFER_WAS_A_PROPERTY_OF_THE_SUBSTRATE_NOT_A_MISSING_MECHANISM",
- "canonical_base_commit": "d595901ef713fd1e2146397354d3ba6620dcd79e",
+ "canonical_base_commit": "cc49c9f3d2a77e97bd51a42f21a680ce1c961af2",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -171,7 +171,7 @@
  ],
  "probe_specific": false,
  "recursive_obs": {
-  "canonical_base_commit": "d595901ef713fd1e2146397354d3ba6620dcd79e",
+  "canonical_base_commit": "cc49c9f3d2a77e97bd51a42f21a680ce1c961af2",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "the transfer question as a mechanism gap",
