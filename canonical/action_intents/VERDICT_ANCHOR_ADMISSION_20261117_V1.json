@@ -1,0 +1,649 @@
+{
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+ "action_id": "VERDICT_ANCHOR_ADMISSION_20261117_V1",
+ "action_intent_id": "VERDICT_ANCHOR_ADMISSION_20261117_V1",
+ "action_kind": "REAL_CAPABILITY_ACQUISITION",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "incremental_spend_usd": 0,
+  "independent_verification_completed": false,
+  "independent_verification_note": "Producer-run sandbox only: outcomes computed by the mechanism over a merged receipt; tests re-read both receipts. Independent re-execution still open.",
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+  "progress_evidence_paths": [
+   "canonical/verification/VERDICT_ANCHOR_ADMISSION_20261117_V1.json",
+   "VERDICT_ANCHOR_THE_JUDGE_CANNOT_READ_20261117_V1.md",
+   "canonical/tests/test_verdict_anchor_admission_v1.py"
+  ],
+  "route_class": "COMPOSE",
+  "scope_complete_discharge": false,
+  "terminal_achieved": false
+ },
+ "benchmark_or_family_rank_authority": "NONE__PRODUCER_RUN_ADMISSION_MECHANISM",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_ONCE_LEARNT_SOLVES_EVERYTHING_CLAIM_FAILS_FOUR_OF_FIVE_LINKS_AND_THE_LOOP_AXIS_NEEDS_AN_ANCHORED_OBSERVATION_VERDICT_INSTRUMENT",
+ "canonical_base_commit": "c893520a7cdad72c67dbff3d3f6026d3c74f05fb",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "THE_ONCE_LEARNT_SOLVES_EVERYTHING_CLAIM_FAILS_FOUR_OF_FIVE_LINKS_AND_THE_LOOP_AXIS_NEEDS_AN_ANCHORED_OBSERVATION_VERDICT_INSTRUMENT",
+ "date": "2026-11-17",
+ "expected_parent_change": "Rank 2 of the merged ranked plan is executed: a self-judged verdict loop is admitted only against an anchor of runner-outcome ground truth it cannot read, and the always-pass collapse is caught at admission on 118 real known-false canaries from the merged replay receipt.",
+ "expected_parent_frontier_change": "The loop axis's deepest station gains the piece its own blocker lease names -- an anchored observation-verdict instrument -- so later ranked builds (coverage-class parts, prior re-key) sit on verdicts a collapsing judge cannot smuggle into the index.",
+ "explicit_user_authorization": [
+  "Instant learning + instant learning in new arbitrary environments, solved perfectly. Doesn't that mean we can solve any computer use?",
+  "Give the model the most advanced actions, let it do a thing once, it learns it permanently, and every computer task plus the most advanced software engineering is solved. Am I right or wrong?",
+  "You must think from first principles for everything",
+  "You should kill all the bad and dumb ideas before you waste time implementing them.",
+  "NEVER BUILD BEFORE RESEARCHING EXHAUSTION HAS HAPPENED",
+  "maximize your web use",
+  "all the tests are not on synthetic data but are on the hardest open tests",
+  "Testing on bugs we already know work is not progress -- that is self-congratulation.",
+  "YOU SURE THIS THE SMARTEST APPROACH?",
+  "Work in branch, merge only when complete (fastest)",
+  "Merge once, not 10 times.",
+  "anchor every self-judged verdict to data the judging loop cannot read (rank 2, pass: always-pass collapse detected at admission; kill: the anchor is readable by the thing it judges)"
+ ],
+ "falsification_condition": "A judge that names the label domain admitted (ANCHOR_READABLE_BY_JUDGE gone while a judge still references the labels); always-pass admitted on the real corpus (ALWAYS_PASS_COLLAPSE no longer fires on the 118 known-false canaries); the source-receipt sha pin failing; an anchor without both polarities passing admission; or the honest site instrument refused.",
+ "files": {
+  "canonical/verification/VERDICT_ANCHOR_ADMISSION_20261117_V1.json": "1e346bfe7da739abd3f994bbd28bd536cf0be2104097e17aafd93791ea5d68f5",
+  "VERDICT_ANCHOR_THE_JUDGE_CANNOT_READ_20261117_V1.md": "6dfd63b5412469fd4a226e3638a4e78e87b54209aae525850f434a9592297861",
+  "canonical/tests/test_verdict_anchor_admission_v1.py": "aadc9bfd726fe50da99269b9528fe5d934e842da288db78bebede677251d6ea4",
+  "canonical/runtime/verdict_anchor_admission_v1.py": "e33015c47517fff06c2194f7fea80a6485995a342ce172d3cc8b7ead1d0aa973"
+ },
+ "generic_repair_from_single_probe": false,
+ "governance_change": false,
+ "highest_leverage_now": true,
+ "incremental_spend_usd": 0,
+ "intentional_route_race": false,
+ "load_bearing_primary": {
+  "open_obligation_ids": [],
+  "constructive_gap_for_open_obligation_ids": [
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "expected_obligation_discharge_lcb": "0",
+  "expected_obligation_unlock_lcb": "1/100",
+  "success_probability_lcb": "1/4",
+  "wall_clock_cost_ub": 3600,
+  "interpretation": "Speculative forecast only. This pass discharges nothing and claims no benchmark, capability or terminal credit: it executes rank 2 of the merged ranked plan (anchored verdict admission) over the merged real corpus and pins the outcomes with can-fail tests. The gap named is the computer-use obligation the ranked plan targets."
+ },
+ "measured_effect": {
+  "instrument": "verdict_anchor_admission_v1.admission_errors over the 228 real replay pairs of ACTION_REPLAY_UNDER_CHANGE_20261116_V1.json (runner outcome as ground truth)",
+  "new_modules": [
+   "canonical/runtime/verdict_anchor_admission_v1.py (stdlib admission mechanism)",
+   "canonical/tests/test_verdict_anchor_admission_v1.py (11 tests, stdlib only)"
+  ],
+  "judges": {
+   "honest_site_instrument": "admitted, no errors",
+   "always_pass": "refused ALWAYS_PASS_COLLAPSE on 118 real known-false canaries",
+   "label_reading_judge": "refused ANCHOR_READABLE_BY_JUDGE:replay_equals_live",
+   "never_fails_history": "refused NEVER_FAILS_HISTORY (3 prior verdicts, zero failures)",
+   "single_false_endorsement": "refused ENDORSES_KNOWN_FALSE",
+   "constant_fail_garbage_crash": "refused ALWAYS_FAIL_COLLAPSE / JUDGE_OUTPUT_INVALID / JUDGE_ERROR",
+   "one_polarity_anchor": "refused ANCHOR_WITHOUT_NEGATIVE_CASE / ANCHOR_WITHOUT_POSITIVE_CASE"
+  },
+  "corpus": "228 pairs, 110 hold / 118 do not; site separator planned_line==live_line holds 228/228 (measured)",
+  "pass_kill": "plan pass held (collapse detected at admission); plan kill held (label-reading judge refused)",
+  "tests": {
+   "count": 11,
+   "passed_locally": "11/11",
+   "can_fail_mutations": 5
+  },
+  "no_new_benchmark_run": true
+ },
+ "next_step": "Ranked plan after rank 2: (3) one part per coverage class in size order (5 -> 4 -> ...), each with its own pass/kill -- a class part must not regress a solved class; (4) re-key the inert prior by instruction-bound liveness -- transfer must beat shuffled re-key; (5) weights last -- procedure + prior only, every bit calculated, ready_to_train stays False until identified-success data exists at scale (precision floor 0.069 says it does not yet).",
+ "route_frontier": {
+  "challenger_routes": [
+   {
+    "route": "rebuild a universal single-lever part for coverage",
+    "resolution": "DISQUALIFIED",
+    "comparison": {
+     "CORRECTNESS": "falsified by the 16-class census, largest class 6",
+     "CAPABILITY_STRENGTH": "no class holds a majority",
+     "WALL_CLOCK": "n/a",
+     "INCREMENTAL_COST": "n/a",
+     "RELIABILITY": "test_no_class_holds_more_than_six_pages fails any fabricated lever",
+     "VERIFIABILITY": "measured"
+    },
+    "evidence": [
+     "46 unsolved pages, 16 classes, largest 6"
+    ],
+    "qualification_evidence": [
+     "canonical/verification/DECLARED_TRIGGER_AND_OPERAND_TAXONOMY_20261116_V1.json"
+    ],
+    "qualification_evidence_classes": [
+     "DIRECT_PROBE"
+    ]
+   },
+   {
+    "route": "re-run the replay corpus to rebuild the anchor by hand each time",
+    "resolution": "DISQUALIFIED",
+    "comparison": {
+     "CORNESS": "n/a",
+     "CORRECTNESS": "re-testing merged measurements is banned as self-congratulation; the corpus is already pinned by sha256",
+     "CAPABILITY_STRENGTH": "adds no mechanism -- admission needs the anchor, not a fresh run",
+     "WALL_CLOCK": "hours per re-run vs one sha pin",
+     "INCREMENTAL_COST": "re-running 228 pairs per pass",
+     "RELIABILITY": "the source receipt is already CI-pinned by the verdict suite",
+     "VERIFIABILITY": "measured: source receipt sha pinned in the test"
+    },
+    "evidence": [
+     "ACTION_REPLAY_UNDER_CHANGE_20261116_V1.json sha256 pinned; 228 pairs already measured"
+    ],
+    "qualification_evidence": [
+     "canonical/verification/ACTION_REPLAY_UNDER_CHANGE_20261116_V1.json"
+    ],
+    "qualification_evidence_classes": [
+     "DIRECT_PROBE"
+    ]
+   },
+   {
+    "route": "leave ordinary self-judged verdicts unanchored because two benchmarks already anchor theirs",
+    "resolution": "DISQUALIFIED",
+    "comparison": {
+     "CORRECTNESS": "Who-Verifies (2610.11464): without anchors the verifier collapses to always-pass while downstream scores look fine",
+     "CAPABILITY_STRENGTH": "per-benchmark anchors do not cover the loop's own verdicts -- rank 2 says every self-judged verdict",
+     "WALL_CLOCK": "n/a",
+     "INCREMENTAL_COST": "n/a",
+     "RELIABILITY": "measured here: always-pass admitted without the gate",
+     "VERIFIABILITY": "measured"
+    },
+    "evidence": [
+     "always_pass admitted == no errors without this mechanism; refused ALWAYS_PASS_COLLAPSE with it"
+    ],
+    "qualification_evidence": [
+     "canonical/verification/VERDICT_ANCHOR_ADMISSION_20261117_V1.json"
+    ],
+    "qualification_evidence_classes": [
+     "DIRECT_PROBE"
+    ]
+   },
+   {
+    "route": "build the general admission mechanism over the merged real corpus (source-separated judge, both polarities, collapse and history refusals)",
+    "resolution": "SELECTED",
+    "comparison": {
+     "CORRECTNESS": "every outcome computed by the mechanism over the 228 real pairs and pinned by the test",
+     "CAPABILITY_STRENGTH": "kills the Who-Verifies collapse at admission for any judge, not one benchmark",
+     "WALL_CLOCK": "one module, one test file, one receipt, one note",
+     "INCREMENTAL_COST": "stdlib only, $0, no corpus re-run",
+     "RELIABILITY": "11/11 local; five can-fail mutations documented",
+     "VERIFIABILITY": "source receipt sha256-pinned; judge outcomes re-computed by the test"
+    },
+    "evidence": [
+     "ALWAYS_PASS_COLLAPSE on 118 real known-false canaries",
+     "ANCHOR_READABLE_BY_JUDGE on the label-reading judge"
+    ],
+    "qualification_evidence": [
+     "canonical/verification/VERDICT_ANCHOR_ADMISSION_20261117_V1.json"
+    ],
+    "qualification_evidence_classes": [
+     "DIRECT_PROBE"
+    ]
+   }
+  ],
+  "checked_at_utc": "2026-11-17T21:14:00Z",
+  "comparison_dimensions": [
+   "CORRECTNESS",
+   "CAPABILITY_STRENGTH",
+   "WALL_CLOCK",
+   "INCREMENTAL_COST",
+   "RELIABILITY",
+   "VERIFIABILITY"
+  ],
+  "discovery_required": true,
+  "incumbent_route": "anchor only the benchmark-specific verifiers (astra hidden verifier, AutomationBench private owner receipt) and leave ordinary self-judged verdicts unanchored",
+  "max_age_hours": 24,
+  "negative_search_summary": "Project search found two per-benchmark anchors (astra_hidden_verifier, automationbench_private_owner_receipt_verifier) and no general admission gate for self-judged verdicts; web rounds for this prompt (7 searches, 20 pinned sources) found Who-Verifies (2610.11464) measuring the collapse but no mechanism that refuses it at admission on a real corpus.",
+  "query_families": [
+   {
+    "intent": "CAPABILITY_VECTOR",
+    "query": "2026 verifier bottleneck agent skill learning arxiv"
+   },
+   {
+    "intent": "IMPLEMENTATION_FORM",
+    "query": "one-shot skill generation vs progressive arxiv 2026"
+   },
+   {
+    "intent": "SUPPLIER_OR_PRODUCT",
+    "query": "agent skill contracts preconditions postconditions applicability"
+   },
+   {
+    "intent": "RECENCY_OR_NEW_RELEASE",
+    "query": "memory outside model weights knowledge access beats model size 2026"
+   }
+  ],
+  "refresh_triggers": [
+   "BEFORE_EXPENSIVE_EXECUTION",
+   "AFTER_MATERIAL_ROUTE_FAILURE",
+   "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+   "BEFORE_SCARCE_GATE_SPEND"
+  ],
+  "selected_route": "ANCHOR_EVERY_SELF_JUDGED_VERDICT_TO_A_REAL_REPLAY_CORPUS_THE_JUDGE_CANNOT_READ",
+  "selected_route_preflight": {
+   "all_required_dependencies_ready": true,
+   "checked_at_utc": "2026-11-17T21:14:00Z",
+   "execution_dependencies": [
+    {
+     "dependency": "python3 running the admission mechanism over the merged replay receipt",
+     "evidence": [
+      "11/11 tests pass; honest judge admitted; ALWAYS_PASS_COLLAPSE fires on 118 real known-false canaries"
+     ],
+     "evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "evidence_scope": "GLOBAL",
+     "kind": "LOCAL_RUNTIME",
+     "observed_at_utc": "2026-11-17T21:14:00Z",
+     "required": true,
+     "scope": "GLOBAL",
+     "status": "READY",
+     "volatility": "STATIC"
+    }
+   ],
+   "execution_dependencies_complete": true,
+   "failed_dependencies": [],
+   "max_age_hours": 2,
+   "selected_route": "ANCHOR_EVERY_SELF_JUDGED_VERDICT_TO_A_REAL_REPLAY_CORPUS_THE_JUDGE_CANNOT_READ",
+   "status": "READY"
+  },
+  "source_classes_checked": [
+   "BRAIN_INHERITED",
+   "OFFICIAL_PRIMARY",
+   "CODE_OR_PACKAGE_REGISTRY",
+   "BROAD_WEB_OR_COMMUNITY"
+  ],
+  "source_evidence": {
+   "BRAIN_INHERITED": [
+    "ONE_LOOP_ONE_TAIL_VERDICT_20261117_V1.md (ranked plan rank 2, two-axis bottleneck)",
+    "ACTION_REPLAY_UNDER_CHANGE_20261116_V1.json (the 228-pair corpus)",
+    "PROOF_CARRYING_COUNTERFACTUAL_UNION_20261116_V1.json (53.5% stale / 31.1% silent ungated)",
+    "THE_INSTRUMENT_NOT_THE_EXPERIENCE_20261117_V1.md (first-case wrong on 81%)"
+   ],
+   "OFFICIAL_PRIMARY": [
+    "https://arxiv.org/abs/2610.11464 (Who Verifies the Verifier -- always-pass collapse)",
+    "https://arxiv.org/abs/2604.01687 (EvoSkills -- verifier ablation -30pp)",
+    "https://arxiv.org/abs/2607.27733 (VeriSkill -- verifier-evidenced revisions only)"
+   ],
+   "CODE_OR_PACKAGE_REGISTRY": [
+    "stdlib only; no package in the result-bearing path"
+   ],
+   "BROAD_WEB_OR_COMMUNITY": [
+    "20 pinned sources in the receipt; none claims one-shot solves new environments"
+   ]
+  },
+  "unresolved_plausible_dominators": []
+ },
+ "route_id": "ANCHOR_EVERY_SELF_JUDGED_VERDICT_TO_A_REAL_REPLAY_CORPUS_THE_JUDGE_CANNOT_READ",
+ "routes_considered": [
+  "DELETE",
+  "REUSE",
+  "ADAPT",
+  "COMPOSE",
+  "SYNTHESIZE_NEW_PRIMITIVE"
+ ],
+ "scope_and_limits": "AUTHORITY NONE. Producer-run sandbox: the mechanism is executed over a merged measurement, not re-measured; tests re-read the receipt and the source receipt. No benchmark, capability, family, terminal or weight credit. No external model, no weights, stdlib only, $0. Sentience not claimed. Admission detects collapse; it does not certify judge accuracy beyond the anchor (one real corpus, 228 pairs).",
+ "scope_complete_discharge": false,
+ "selected_route": "ANCHOR_EVERY_SELF_JUDGED_VERDICT_TO_A_REAL_REPLAY_CORPUS_THE_JUDGE_CANNOT_READ",
+ "selected_surviving_route": "ANCHOR_EVERY_SELF_JUDGED_VERDICT_TO_A_REAL_REPLAY_CORPUS_THE_JUDGE_CANNOT_READ",
+ "status": "PROPOSED__ZERO_CREDIT__NO_TERMINAL_CLAIM",
+ "stop_condition": "The mechanism, receipt, note and tests are merged once; every outcome is computed by the mechanism over the pinned real corpus; the plan's pass/kill conditions are stated as held; no benchmark, capability, family, terminal or weight credit is claimed.",
+ "terminal_achieved": false,
+ "terminal_credit_delta": 0,
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "truth": {
+  "achieved": false
+ },
+ "user_authorized_governance_change": false,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "currentness": {
+   "accepted_families": 5,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "unresolved_atomic": 22,
+   "total_families": 19,
+   "total_atomic": 38,
+   "terminal": false,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "meta_envelope_open_count": 8,
+   "total_open_truth_obligations": 30,
+   "historical_atomic_registry_count": 38,
+   "deleted_nonnecessary_atomic_count": 2,
+   "current_load_bearing_atomic_count": 36
+  },
+  "fresh_reality_authority": false,
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "This executes rank 2 of the merged ranked plan (anchored verdict admission) over a merged measurement; it discharges no truth obligation and claims no terminal credit.",
+  "target_truth_obligations": [
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [],
+   "decisive_question": "Can admission refuse a self-judged verdict loop that reads its anchor, passes every known-false canary, or has never failed -- on real runner-outcome ground truth?",
+   "falsifier_id": "A_LABEL_READING_OR_ALWAYS_PASS_JUDGE_ADMITTED_ON_THE_REAL_CORPUS",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "The four judges the collapse literature predicts (always-pass, label-reading, never-fails, single-false-endorsement) are all refused on the real 228-pair corpus, and the honest site instrument is admitted; the test file re-computes every outcome.",
+   "proposal_id": "VERDICT_ANCHOR_ADMISSION_20261117_V1"
+  }
+ },
+ "verification": {
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "commands": [
+   "python -m pytest -q canonical/tests/test_verdict_anchor_admission_v1.py  # 11 pass",
+   "python canonical/runtime/verify_brain_unified_model_v1.py  # 33/33",
+   "python execution_guard/enforce_load_bearing_primary_pr.py --base c893520a7cdad72c67dbff3d3f6026d3c74f05fb --head HEAD  # PASS"
+  ]
+ },
+ "why_selected_route_is_fastest_sufficient": "The corpus and the collapse are already measured and merged; the missing piece ranked by the verdict is the admission mechanism itself, which is one stdlib module, one test file, one receipt and one note over data the tree already holds -- no re-run, no new benchmark, no weights.",
+ "weakens_existing_guard": false,
+ "recursive_obs": {
+  "canonical_base_commit": "c893520a7cdad72c67dbff3d3f6026d3c74f05fb",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "leaving ordinary self-judged verdicts unanchored because two benchmarks already anchor theirs",
+   "re-running the 228-pair replay corpus to rebuild the anchor each pass (re-testing merged measurements)",
+   "certifying judge accuracy beyond the anchor (admission detects collapse only)",
+   "any weight-training step before precision 0.069 has an identified-success corpus"
+  ],
+  "expected_parent_frontier_change": "The loop axis's deepest station gains the piece its own blocker lease names -- an anchored observation-verdict instrument -- so later ranked builds (coverage-class parts, prior re-key) sit on verdicts a collapsing judge cannot smuggle into the index.",
+  "expected_parent_level_state_change": "The loop axis's deepest station gains the piece its own blocker lease names -- an anchored observation-verdict instrument -- so later ranked builds (coverage-class parts, prior re-key) sit on verdicts a collapsing judge cannot smuggle into the index.",
+  "independent_verification_required": true,
+  "iteration_limit": 1,
+  "obs_blocker": {
+   "delete_bypass_substitute_options": [
+    "bypass by trusting a judge that scores well downstream (Who-Verifies: downstream is unchanged by collapse)",
+    "substitute a re-run of the merged corpus for the pinned anchor (re-testing, banned)",
+    "widen the tolerance so one polarity of anchor passes (the plan's kill condition)"
+   ],
+   "intrinsic_or_path_specific": "intrinsic: on the loop axis every station's output is only correctable by an observation-verdict pair the representation can express; on the coverage axis the remainder is a 16-class long tail with largest class 6, so no single lever exists by measurement.",
+   "surviving_causal_blocker": "Coverage long tail (30 remain: 2 predicate-unreachable + 28 ordinary) plus judge accuracy beyond the anchor -- admission now refuses collapse, but a judge still has to be right on cases the anchor does not hold, which is the identifiability barrier (0/200, floor 0.069)."
+  },
+  "obs_capability": {
+   "capability_work_deleted": [
+    "a per-benchmark-only anchor story (two instances exist; rank 2 demands every self-judged verdict)",
+    "another universal-lever attempt on the 16-class tail",
+    "any weight-training step before an identified-success corpus exists"
+   ],
+   "existing_inherited_routes_checked": [
+    "proved_composition_v1 (premise re-proved on the state after every effect; the no-op pair is refused before execution)",
+    "lesson_admission_gate_v1 (storage gated; zero-drift 106/106 vs 53.5% stale ungated)",
+    "one_case_chosen_not_assumed (the observing instrument chosen, first-case 4/21 -> suite 16/16)",
+    "skill_sequence_verify_v1 (textual post-hoc interference witness)"
+   ],
+   "external_existing_routes_checked": [
+    "arXiv 2610.11781 Skill-V (versioned falsifiable contracts with applicability filters)",
+    "arXiv 2610.00972 VeriHarness (evolving verifier skills +6.4)",
+    "arXiv 2603.23013 knowledge access beats model size (8B+memory 30.5 vs 235B bare 13.7 F1)"
+   ],
+   "surviving_gap": "One part per coverage class in size order (28 ordinary gaps), the inert prior re-keyed by instruction-bound liveness, and judge accuracy beyond the anchor (identifiability)."
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "quoting one more external paper as if it settled the owner's claim",
+    "calling the loop-form revolution a one-shot revolution",
+    "counting a re-derived number as a new measurement",
+    "a universal lever claim over a 16-class tail"
+   ],
+   "real_outcome": "Rank 2 executed: the admission mechanism refuses always-pass on 118 real known-false canaries, refuses the label-reading judge at source separation, refuses never-fails histories, and admits the honest site instrument -- plan pass and kill both held on the real corpus.",
+   "surviving_necessity": "Capability on the remainder moves one class at a time; the loop moves only if its verdicts are anchored. Both statements are measurements, not preferences."
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "Reuses the load-bearing admission pattern, the hidden-verifier separation idea (verifier distinct from executor) and the discrimination-ratchet lesson; adds no benchmark claim.",
+   "downstream_work_to_delete_or_supersede": "Any roadmap step that re-opens the five-transition chain, claims a single coverage lever, or trains weights before an identified-success corpus exists.",
+   "fresh_reuse_plan": "Later ranked builds (coverage-class parts, prior re-key) pass their self-judged verdicts through this gate before entering the index."
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": "Research exhaustion reused this prompt's seven web rounds and twenty pinned sources plus the project-side reads of the admission gate, hidden verifier, private-owner verifier and discrimination ratchet; no new literature round was needed for rank 2.",
+   "search_stop_decision": "Stop: Who-Verifies names the collapse, the tree holds the real corpus, and the ranked plan already ranks the fix -- another search would buy citations, not a mechanism."
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "efficiency_mechanism": "The anchor is a measurement the tree already made (228 pairs, sha-pinned), so the pass costs one stdlib module, one test file, one receipt and one note and re-runs nothing.",
+   "generality_mechanism": "The two-axis reconciliation applies to any future bottleneck claim: name the station on the loop, or name the class on the tail -- never both at once.",
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "Re-running the corpus is re-testing (banned as self-congratulation); per-benchmark anchors leave the loop's own verdicts unanchored (the measured collapse surface); weight training without identified-success data would bake precision 0.069 into parameters.",
+   "routes_ranked": [
+    "build the general admission mechanism over the merged real corpus (selected)",
+    "re-run the corpus to rebuild the anchor by hand",
+    "anchor only the two benchmark-specific verifiers and leave the loop's own verdicts alone",
+    "train weights now on the current corpus"
+   ],
+   "white_box_harvest_note": "No donor model, weight or external artifact was harvested; sources were read as text, never run, and no external model was called."
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "oracle_paths": [
+    "canonical/verification/ACTION_REPLAY_UNDER_CHANGE_20261116_V1.json",
+    "canonical/verification/VERDICT_ANCHOR_ADMISSION_20261117_V1.json",
+    "canonical/tests/test_verdict_anchor_admission_v1.py"
+   ],
+   "synthetic_verification_necessity": "The corpus is a merged real measurement; the tests re-read it and re-compute every judge outcome through the mechanism. Independent re-execution remains open."
+  },
+  "real_outcome": "Rank 2 of the merged ranked plan is executed: a self-judged verdict loop is admitted only against an anchor of runner-outcome ground truth it cannot read, and the always-pass collapse is caught at admission on 118 real known-false canaries from the merged replay receipt.",
+  "required_capability": "Refuse, at admission and on real runner-outcome ground truth, any self-judged verdict loop that reads its anchor, rubber-stamps known-false claims, or has never failed -- and admit the instrument that discriminates.",
+  "route_frontier": {
+   "challenger_routes": [
+    {
+     "route": "rebuild a universal single-lever part for coverage",
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "falsified by the 16-class census, largest class 6",
+      "CAPABILITY_STRENGTH": "no class holds a majority",
+      "WALL_CLOCK": "n/a",
+      "INCREMENTAL_COST": "n/a",
+      "RELIABILITY": "test_no_class_holds_more_than_six_pages fails any fabricated lever",
+      "VERIFIABILITY": "measured"
+     },
+     "evidence": [
+      "46 unsolved pages, 16 classes, largest 6"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/DECLARED_TRIGGER_AND_OPERAND_TAXONOMY_20261116_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ]
+    },
+    {
+     "route": "re-run the replay corpus to rebuild the anchor by hand each time",
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORNESS": "n/a",
+      "CORRECTNESS": "re-testing merged measurements is banned as self-congratulation; the corpus is already pinned by sha256",
+      "CAPABILITY_STRENGTH": "adds no mechanism -- admission needs the anchor, not a fresh run",
+      "WALL_CLOCK": "hours per re-run vs one sha pin",
+      "INCREMENTAL_COST": "re-running 228 pairs per pass",
+      "RELIABILITY": "the source receipt is already CI-pinned by the verdict suite",
+      "VERIFIABILITY": "measured: source receipt sha pinned in the test"
+     },
+     "evidence": [
+      "ACTION_REPLAY_UNDER_CHANGE_20261116_V1.json sha256 pinned; 228 pairs already measured"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/ACTION_REPLAY_UNDER_CHANGE_20261116_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ]
+    },
+    {
+     "route": "leave ordinary self-judged verdicts unanchored because two benchmarks already anchor theirs",
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "Who-Verifies (2610.11464): without anchors the verifier collapses to always-pass while downstream scores look fine",
+      "CAPABILITY_STRENGTH": "per-benchmark anchors do not cover the loop's own verdicts -- rank 2 says every self-judged verdict",
+      "WALL_CLOCK": "n/a",
+      "INCREMENTAL_COST": "n/a",
+      "RELIABILITY": "measured here: always-pass admitted without the gate",
+      "VERIFIABILITY": "measured"
+     },
+     "evidence": [
+      "always_pass admitted == no errors without this mechanism; refused ALWAYS_PASS_COLLAPSE with it"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/VERDICT_ANCHOR_ADMISSION_20261117_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ]
+    },
+    {
+     "route": "build the general admission mechanism over the merged real corpus (source-separated judge, both polarities, collapse and history refusals)",
+     "resolution": "SELECTED",
+     "comparison": {
+      "CORRECTNESS": "every outcome computed by the mechanism over the 228 real pairs and pinned by the test",
+      "CAPABILITY_STRENGTH": "kills the Who-Verifies collapse at admission for any judge, not one benchmark",
+      "WALL_CLOCK": "one module, one test file, one receipt, one note",
+      "INCREMENTAL_COST": "stdlib only, $0, no corpus re-run",
+      "RELIABILITY": "11/11 local; five can-fail mutations documented",
+      "VERIFIABILITY": "source receipt sha256-pinned; judge outcomes re-computed by the test"
+     },
+     "evidence": [
+      "ALWAYS_PASS_COLLAPSE on 118 real known-false canaries",
+      "ANCHOR_READABLE_BY_JUDGE on the label-reading judge"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/VERDICT_ANCHOR_ADMISSION_20261117_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ]
+    }
+   ],
+   "checked_at_utc": "2026-11-17T21:14:00Z",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "anchor only the benchmark-specific verifiers (astra hidden verifier, AutomationBench private owner receipt) and leave ordinary self-judged verdicts unanchored",
+   "max_age_hours": 24,
+   "negative_search_summary": "Project search found two per-benchmark anchors (astra_hidden_verifier, automationbench_private_owner_receipt_verifier) and no general admission gate for self-judged verdicts; web rounds for this prompt (7 searches, 20 pinned sources) found Who-Verifies (2610.11464) measuring the collapse but no mechanism that refuses it at admission on a real corpus.",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "2026 verifier bottleneck agent skill learning arxiv"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "one-shot skill generation vs progressive arxiv 2026"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "agent skill contracts preconditions postconditions applicability"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "memory outside model weights knowledge access beats model size 2026"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "selected_route": "ANCHOR_EVERY_SELF_JUDGED_VERDICT_TO_A_REAL_REPLAY_CORPUS_THE_JUDGE_CANNOT_READ",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-11-17T21:14:00Z",
+    "execution_dependencies": [
+     {
+      "dependency": "python3 running the admission mechanism over the merged replay receipt",
+      "evidence": [
+       "11/11 tests pass; honest judge admitted; ALWAYS_PASS_COLLAPSE fires on 118 real known-false canaries"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "LOCAL_RUNTIME",
+      "observed_at_utc": "2026-11-17T21:14:00Z",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "max_age_hours": 2,
+    "selected_route": "ANCHOR_EVERY_SELF_JUDGED_VERDICT_TO_A_REAL_REPLAY_CORPUS_THE_JUDGE_CANNOT_READ",
+    "status": "READY"
+   },
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "ONE_LOOP_ONE_TAIL_VERDICT_20261117_V1.md (ranked plan rank 2, two-axis bottleneck)",
+     "ACTION_REPLAY_UNDER_CHANGE_20261116_V1.json (the 228-pair corpus)",
+     "PROOF_CARRYING_COUNTERFACTUAL_UNION_20261116_V1.json (53.5% stale / 31.1% silent ungated)",
+     "THE_INSTRUMENT_NOT_THE_EXPERIENCE_20261117_V1.md (first-case wrong on 81%)"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "https://arxiv.org/abs/2610.11464 (Who Verifies the Verifier -- always-pass collapse)",
+     "https://arxiv.org/abs/2604.01687 (EvoSkills -- verifier ablation -30pp)",
+     "https://arxiv.org/abs/2607.27733 (VeriSkill -- verifier-evidenced revisions only)"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "stdlib only; no package in the result-bearing path"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "20 pinned sources in the receipt; none claims one-shot solves new environments"
+    ]
+   },
+   "unresolved_plausible_dominators": []
+  },
+  "selected_surviving_route": "ANCHOR_EVERY_SELF_JUDGED_VERDICT_TO_A_REAL_REPLAY_CORPUS_THE_JUDGE_CANNOT_READ",
+  "why_selected_route_is_fastest_sufficient": "The four station answers and the no-single-lever census are already measured; the missing piece is the reconciliation and the ranked plan, which cost one receipt, one note and one test file and stop the next round building a lever the census forbids.",
+  "stop_condition": "The mechanism, receipt, note and tests are merged once; every outcome is computed by the mechanism over the pinned real corpus; the plan's pass/kill conditions are stated as held; no benchmark, capability, family, terminal or weight credit is claimed.",
+  "routes_considered": [
+   "DELETE",
+   "BYPASS",
+   "REUSE",
+   "COMPOSE",
+   "SYNTHESIZE_NEW_PRIMITIVE"
+  ]
+ }
+}
