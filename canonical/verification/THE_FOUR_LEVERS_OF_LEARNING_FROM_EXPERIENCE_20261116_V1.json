@@ -1,0 +1,289 @@
+{
+ "authority": "NONE__PRODUCER_RUN_COMPUTATION_OVER_EXISTING_RECEIPTS",
+ "demonstration_point_profile": {
+  "best": {
+   "bits": 3.629293843023017,
+   "distinct_answers": 5,
+   "x": 0
+  },
+  "best_fraction_of_space": 0.6534,
+  "bits_before": 5.5546,
+  "mean_bits": 1.1578,
+  "points": [
+   {
+    "bits": 0.8171568501397175,
+    "distinct_answers": 33,
+    "x": -6
+   },
+   {
+    "bits": 0.8930674138518535,
+    "distinct_answers": 31,
+    "x": -5
+   },
+   {
+    "bits": 1.1601984045315072,
+    "distinct_answers": 26,
+    "x": -4
+   },
+   {
+    "bits": 1.4706258612502925,
+    "distinct_answers": 21,
+    "x": -3
+   },
+   {
+    "bits": 1.8553267973625092,
+    "distinct_answers": 16,
+    "x": -2
+   },
+   {
+    "bits": 2.2457207451411643,
+    "distinct_answers": 14,
+    "x": -1
+   },
+   {
+    "bits": 3.629293843023017,
+    "distinct_answers": 5,
+    "x": 0
+   },
+   {
+    "bits": 2.9269708811765294,
+    "distinct_answers": 10,
+    "x": 1
+   },
+   {
+    "bits": 2.172188251538682,
+    "distinct_answers": 15,
+    "x": 2
+   },
+   {
+    "bits": 1.7372656266894313,
+    "distinct_answers": 20,
+    "x": 3
+   },
+   {
+    "bits": 1.4289629672070259,
+    "distinct_answers": 25,
+    "x": 4
+   },
+   {
+    "bits": 1.226568946632864,
+    "distinct_answers": 29,
+    "x": 5
+   },
+   {
+    "bits": 1.1415209458383675,
+    "distinct_answers": 30,
+    "x": 6
+   },
+   {
+    "bits": 1.1661411767483782,
+    "distinct_answers": 30,
+    "x": 7
+   },
+   {
+    "bits": 1.0667864997322916,
+    "distinct_answers": 31,
+    "x": 8
+   },
+   {
+    "bits": 1.1441369683152631,
+    "distinct_answers": 31,
+    "x": 9
+   },
+   {
+    "bits": 1.0207269883199386,
+    "distinct_answers": 32,
+    "x": 10
+   },
+   {
+    "bits": 1.0207269883199386,
+    "distinct_answers": 32,
+    "x": 11
+   },
+   {
+    "bits": 0.851404519808586,
+    "distinct_answers": 33,
+    "x": 12
+   },
+   {
+    "bits": 0.9798669745746862,
+    "distinct_answers": 33,
+    "x": 13
+   },
+   {
+    "bits": 0.803711436400369,
+    "distinct_answers": 34,
+    "x": 14
+   },
+   {
+    "bits": 0.8671252660034785,
+    "distinct_answers": 33,
+    "x": 15
+   },
+   {
+    "bits": 0.8010954139234734,
+    "distinct_answers": 34,
+    "x": 16
+   },
+   {
+    "bits": 0.8853114994561029,
+    "distinct_answers": 33,
+    "x": 17
+   },
+   {
+    "bits": 0.8079610308731313,
+    "distinct_answers": 33,
+    "x": 18
+   },
+   {
+    "bits": 0.8245720745141174,
+    "distinct_answers": 34,
+    "x": 19
+   },
+   {
+    "bits": 0.7555271277516376,
+    "distinct_answers": 34,
+    "x": 20
+   },
+   {
+    "bits": 0.7746036586503555,
+    "distinct_answers": 34,
+    "x": 21
+   },
+   {
+    "bits": 0.6864821809891577,
+    "distinct_answers": 35,
+    "x": 22
+   },
+   {
+    "bits": 0.7311601697148999,
+    "distinct_answers": 34,
+    "x": 23
+   },
+   {
+    "bits": 0.7450968086947647,
+    "distinct_answers": 34,
+    "x": 24
+   },
+   {
+    "bits": 0.7346664896378909,
+    "distinct_answers": 36,
+    "x": 25
+   },
+   {
+    "bits": 0.6642400201888004,
+    "distinct_answers": 35,
+    "x": 26
+   },
+   {
+    "bits": 0.7207298506580262,
+    "distinct_answers": 35,
+    "x": 27
+   },
+   {
+    "bits": 0.7715885639678817,
+    "distinct_answers": 34,
+    "x": 28
+   },
+   {
+    "bits": 0.7055587118878783,
+    "distinct_answers": 35,
+    "x": 29
+   },
+   {
+    "bits": 0.6035005952468149,
+    "distinct_answers": 36,
+    "x": 30
+   }
+  ],
+  "points_worth_exactly_zero": [],
+  "pool_size": 37,
+  "variety_predicts_information": {
+   "points": 37,
+   "rank_agreements": 2,
+   "reading": "the worst point offers 36 distinct answers and buys 0.60 bits; the best offers 5 and buys 3.63. Answer variety is not information.",
+   "verdict": "NO"
+  },
+  "worst": {
+   "bits": 0.6035005952468149,
+   "distinct_answers": 36,
+   "x": 30
+  }
+ },
+ "equal_cost_comparison": [
+  {
+   "bits_before": 5.5546,
+   "demonstration_removes_at_most": 5.3576,
+   "even_question_removes": 0.9997,
+   "lopsided_question_removes": 0.1485,
+   "survivors_before": 47
+  },
+  {
+   "bits_before": 3.8074,
+   "demonstration_removes_at_most": 3.8074,
+   "even_question_removes": 1.0,
+   "lopsided_question_removes": 0.3712,
+   "survivors_before": 14
+  },
+  {
+   "bits_before": 2.0,
+   "demonstration_removes_at_most": 2.0,
+   "even_question_removes": 1.0,
+   "lopsided_question_removes": 0.8113,
+   "survivors_before": 4
+  },
+  {
+   "bits_before": 1.0,
+   "demonstration_removes_at_most": 1.0,
+   "even_question_removes": 1.0,
+   "lopsided_question_removes": 1.0,
+   "survivors_before": 2
+  }
+ ],
+ "incremental_spend_usd": 0,
+ "kind": "receipt",
+ "law": "bits_after = log2(|H|/|G|) - I(E) - sum I(q) - I(interface); learning ends at 0. I(E) <= log2(|Y|) for ONE demonstration, whatever |H| is. The prior is the only term not billed per interaction.",
+ "levers": {
+  "answer_alphabet_over_pool": 176,
+  "bits_after_one": 3.817623257511431,
+  "bits_after_three": 1.632268215499513,
+  "bits_before": 5.554588851677638,
+  "bits_removed_by_each_further_demo": 1.092677521005959,
+  "bits_removed_by_one": 1.7369655941662066,
+  "collisions": [],
+  "demonstration_ceiling_bits": 7.459431618637297,
+  "distinct_functions": 47,
+  "invariance_group_order": 1.0,
+  "space_entries": 47,
+  "verified_by_rerun_20261116": {
+   "accuracy_after_one_then_ask": 1.0,
+   "accuracy_one_example_narrow_prior": 1.0,
+   "leader_accuracy_after_one": 0.1,
+   "leader_accuracy_after_three": 0.8,
+   "queries_to_settle_after_one": 2.0,
+   "survivors_after_one": 14.1,
+   "survivors_after_three": 3.1,
+   "targets_exact_after_one": 0,
+   "targets_exact_after_three": 5,
+   "targets_settled_after_one_then_ask": 10
+  }
+ },
+ "producer_cognition_model_dependency_count": 0,
+ "schema": "THE_FOUR_LEVERS_OF_LEARNING_FROM_EXPERIENCE_V1",
+ "state_name_arm": {
+  "as_is": {
+   "carried_model_survived": 7,
+   "cases": 10,
+   "warm_cheaper": 8,
+   "warm_dearer": 2
+  },
+  "reading": "A carried transition model is a table keyed on state NAMES. A rename is an invariant transformation of the task and it destroys 7/10 of the wins. Under the law this is lever 1: the space was quotiented by the wrong group, so the model memorised a spelling. It is not a coverage failure and no amount of further experience repairs it, because every further experience is billed in the same spelling.",
+  "renamed": {
+   "carried_model_survived": 0,
+   "cases": 10,
+   "warm_cheaper": 1,
+   "warm_dearer": 9
+  },
+  "source": "canonical/tools/instant_learning_boundary_probe_v1.py"
+ }
+}
