@@ -31226,7 +31226,7 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 476,
+  "knowledge_documents": 477,
   "receipt_backed_capabilities": 294,
   "research_index_records": 6918,
   "routing_tokens": 2373,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "45db11b03970563c425abb004a085250f0c2d34c8b6a0c4eedbcd74a52a98f07"
+  "value": "53e497ca2e54b8b95c2393c73833afde57474219ba7e84edd97b6887b2e4ecab"
  },
  "engines": [
   {
@@ -47210,6 +47210,83 @@
     "solution",
     "summary",
     "system"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 10977,
+   "headings": [
+    "Compose only what is proved — 16 November 2026",
+    "The claim on trial",
+    "What was built — the rule the receipts kept naming",
+    "The measurement — two proved operations, this repository's own code",
+    "The single bottleneck, reconciled",
+    "What the field measures, November 2026 (nothing here is holy)",
+    "What this does NOT solve — stated so nobody can read this receipt as more than it is",
+    "The smartest next moves, in order (from the receipts, not from taste)"
+   ],
+   "kind": "DOCUMENT",
+   "path": "COMPOSE_ONLY_WHAT_IS_PROVED_20261116_V1.md",
+   "sha256": "a5edfa9e5da1d0ab10d43fdc3543e68c6b3baf4ccf7f045ec23b0e977afee88b",
+   "summary": "**Authority: NONE.** Producer-run sandbox measurement on branch `arena/c7439a6e-brain`, base `57a83e9e`. No capability registered, no family flipped, no weight touched, `truth.achieved` unchanged. Independent verification is open. `$0`, no model, no network.",
+   "terms": {
+    "36": 4,
+    "after": 4,
+    "all": 9,
+    "arxiv": 7,
+    "attempts": 8,
+    "box": 6,
+    "candidate": 4,
+    "claim": 4,
+    "compose": 5,
+    "composition": 5,
+    "computer": 4,
+    "correct": 4,
+    "each": 4,
+    "every": 11,
+    "first": 5,
+    "half": 4,
+    "measured": 5,
+    "measurement": 4,
+    "named": 5,
+    "never": 4,
+    "no": 20,
+    "not": 12,
+    "observation": 4,
+    "one": 18,
+    "only": 5,
+    "own": 7,
+    "pass": 4,
+    "premise": 12,
+    "proof": 9,
+    "proposal": 5,
+    "proved": 6,
+    "question": 4,
+    "reach": 6,
+    "refused": 4,
+    "rule": 7,
+    "same": 6,
+    "says": 6,
+    "second": 4,
+    "sequence": 4,
+    "skills": 5,
+    "so": 5,
+    "space": 4,
+    "step": 15,
+    "still": 5,
+    "two": 7,
+    "under": 5,
+    "verifier": 5,
+    "world": 5
+   },
+   "title": "Compose only what is proved — 16 November 2026",
+   "title_terms": [
+    "16",
+    "2026",
+    "compose",
+    "november",
+    "only",
+    "proved"
    ]
   },
   {
@@ -82064,10 +82141,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1278,
+  "included_source_count": 1279,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "6f291307702153e43a7fe22401d4325f43fe034c8dfa288ff69448c4752f3b30"
+  "source_tree_digest": "67dcd709bcfa8d84175ba122416569d2ea6ff3cd00182acff3b4125a3d671b67"
  },
  "research_index": [
   {
