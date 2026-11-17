@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "55e32b1ead7dda12ac8cff3879288afc0e631d543c68802d4dfff959351a8ca5"
+  "value": "41c85bf16fa5b91ed3248976851af4b8b6bbeb7ab835c31356420fb1301d5fbf"
  },
  "engines": [
   {
@@ -237548,7 +237548,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/CAUSAL_DEPENDENCY_REPAIR_20261116_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "0ff5293026c31060785fa678fb013b0162354ca9b44a7a27da50ce8219669e12",
+   "sha256": "86eb2858585785c087441a02d9104f2b88940fda51b796467a6beca7d21bdb30",
    "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
    "terms": {
     "14": 1,

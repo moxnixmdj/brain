@@ -194,50 +194,60 @@
   "probe_specific": false,
   "recursive_obs": {
     "canonical_base_commit": "88374cf3abe47c0ce1c97b60013583e92fcf25a5",
-    "canonical_generation_or_commit": "88374cf3abe47c0ce1c97b60013583e92fcf25a5",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
-      "treating a step that passes as a fact that still holds",
-      "re-hashing every fact after every step (correct but 23x the cost here)",
-      "waiting for the goal check to reveal an error that was written two steps earlier",
+      "reading a read set off argv, which misses a path named by a file and names a path whose content is never read",
+      "instrumenting every program to emit a trace (does not exist here, and annotating the dependency is the thing being discovered)",
+      "redoing every step from the beginning (works; 14 steps against 8, and blind to what to redo when a rebuild is too large)",
+      "letting a repair propagate on the intent to re-run a step instead of on a measured change",
       "crediting detection as repair"
     ],
     "expected_parent_frontier_change": "A repair needs the read set, and the read set is not on the command line. In two of three real chains the path that goes false is named by another file -- `tar -cf bundle.tar -T list.txt`, `xargs sha256sum < list.txt` -- so the argv-derived read set names only list.txt, blames a step that merely lists the name, re-runs it, changes nothing, and leaves the archive holding the previous bytes while the goal command reports `- payload.dat differ: char 1, line 1`. Repairing by the argv set restores the independent goal on 1 of 3 chains (the control, where the dependency is syntactic). One intervention per candidate path -- perturb it, re-run the step, compare its consequence -- recovers the declared read set exactly on 3 of 3 chains: 8 steps redone against 8 for the hand-authored set and 14 for rebuilding everything, 0 missed, 0 over-declared, 86 real probes, 0 model calls. The control chain separates nothing, so the gap is the dependency and not the method. Detection (previous receipt) is not repair; this is repair, with a dependency set the agent discovered for itself.",
     "expected_parent_level_state_change": "A repair needs the read set, and the read set is not on the command line. In two of three real chains the path that goes false is named by another file -- `tar -cf bundle.tar -T list.txt`, `xargs sha256sum < list.txt` -- so the argv-derived read set names only list.txt, blames a step that merely lists the name, re-runs it, changes nothing, and leaves the archive holding the previous bytes while the goal command reports `- payload.dat differ: char 1, line 1`. Repairing by the argv set restores the independent goal on 1 of 3 chains (the control, where the dependency is syntactic). One intervention per candidate path -- perturb it, re-run the step, compare its consequence -- recovers the declared read set exactly on 3 of 3 chains: 8 steps redone against 8 for the hand-authored set and 14 for rebuilding everything, 0 missed, 0 over-declared, 86 real probes, 0 model calls. The control chain separates nothing, so the gap is the dependency and not the method. Detection (previous receipt) is not repair; this is repair, with a dependency set the agent discovered for itself.",
     "independent_verification_required": true,
     "iteration_limit": 1,
-    "obs_blocker": "A_REPAIR_NEEDS_THE_STEPS_THAT_CONSUMED_THE_FACT_THAT_WENT_FALSE_AND_AN_ARGV_READ_SET_IS_WRONG_IN_BOTH_DIRECTIONS_MISSING_A_PATH_NAMED_BY_A_FILE_AND_NAMING_A_PATH_WHOSE_CONTENT_WAS_NEVER_READ",
+    "obs_blocker": {
+      "delete_bypass_substitute_options": [
+        "delete the command line as the source of the read set",
+        "bypass tracing infrastructure with a counterfactual on the state the step can already see",
+        "substitute the state itself for a hand-authored ground-truth dependency set"
+      ],
+      "intrinsic_or_path_specific": "intrinsic: what a process read is a fact about the process and the state it ran against, not about the learner. Either perturbing the path changes the consequence or it does not.",
+      "surviving_causal_blocker": "A repair needs the steps that consumed the fact that went false. The syntactic read set is wrong in both directions at once: in 2 of 3 real chains a path is named by another file (a tar list, an xargs stdin), so the argv set misses a reader, and it names a path whose content the step never read, so it blames a step it does not need and can pass for the wrong reason."
+    },
     "obs_capability": {
       "capability_work_deleted": [
-        "a second lesson store or admission gate",
-        "another hand-written mutation kind",
-        "a larger search budget on an inexpressible edit"
+        "a tracing layer or per-program instrumentation",
+        "a second dependency store beside the fact ledger",
+        "a model that proposes which steps to redo"
       ],
       "existing_inherited_routes_checked": [
-        "learned_skill_verdict_v1.run_program (runs a program in a thrown-away copy; has no notion of a state moving under it)",
-        "one_demonstration_reach_v1 (measures reach of a stored requirement; assumes the state it measured on)",
-        "applicability_v1 (learns a requirement from outcomes; licenses only from contrasts)",
-        "python_iterative_software_repair_loop_v1 (applies one candidate at a time; never composes two learned actions)"
+        "canonical/swe_kernel/standing_facts_v1.py (detects that a fact went false; has no notion of who consumed it)",
+        "canonical/swe_kernel/predictive_contract_v1.py (a frame says which paths an action MAY touch, not which it read)",
+        "canonical/runtime/dependency_superset_delta_v5.py (a superset of relevance for a goal, not a per-step read set)",
+        "canonical/swe_kernel/repair_input_dependency_gate_v1.py (gates repair input on a declared dependency)",
+        "canonical/swe_kernel/closed_loop_trace_abduction_repair_v1.py (abduces from a trace, does not perturb)"
       ],
       "external_existing_routes_checked": [
-        "QuixBugs itself, as the corpus and the oracle",
-        "2026 verifier-gated self-improvement literature (the verifier is the gate once a candidate exists)"
+        "TRACE-FIX (arXiv 2610.25776) versioned residual state, with its own stated dependency limit",
+        "CausalFlow (arXiv 2605.25338) step-level counterfactual repair, alternatives from a model",
+        "agent-interface #165 dependency-discovery issue, which states the primitive question"
       ],
-      "surviving_gap": "An executor that treats every learned action as a decision procedure plus a premise, re-proves the premise on the live state, and postcondition-checks the claimed sentence after acting."
+      "surviving_gap": "A discovery rule for the read set -- perturb a candidate path, re-run the step, compare its consequence -- and a replay that redoes exactly the steps whose inputs moved."
     },
     "obs_goal": {
       "proxy_goals_deleted": [
-        "a higher repair count reached by loosening what counts as repaired",
-        "counting a self-taught repair as transfer",
-        "treating a longer candidate list as more capability",
-        "quoting a corpus score as a frontier position"
+        "counting a detection as a repair",
+        "counting a repair as done because it re-ran something",
+        "quoting the number of steps redone as if fewer were always better"
       ],
-      "real_outcome": "The permanent object is the method (decision procedure + premise + cost) and the verifier, never the plan: a learned action may veto but never license, every application re-proves its premise on the live state and re-reads the result against the sentence it claims, and composition re-checks the second premise against the first step's effect instead of against the record.",
-      "surviving_necessity": "Coding capability is gated on a correct candidate existing at all; no oracle, budget or weight can select a hypothesis the basis cannot build."
+      "real_outcome": "The permanent object is the discovery rule, not the read set: dependency is established by intervention on the state in front of the step, and a repair is judged only by a goal command it does not control.",
+      "surviving_necessity": "Repair is gated on knowing which steps consumed the false fact; without that, a repair either rebuilds everything or declares success with the work wrong."
     },
     "obs_inherited_system": {
-      "adjacent_capabilities_absorbed": "None by claim: the existing repair primitive and corpus oracle are reused unchanged; the induced basis adds candidates only and holds no authority.",
-      "downstream_work_to_delete_or_supersede": "Any roadmap step that adds another hand-written mutation kind, or that raises a candidate budget to fix a bug whose edit is not expressible.",
-      "fresh_reuse_plan": "Recompute the ladder and re-run both bases from the receipt's commands; the corpus is public and the answer key is never needed."
+      "adjacent_capabilities_absorbed": "None by claim: the fact ledger, the frames, the action environment and the goal commands are reused unchanged; the discovery rule adds a read set and holds no authority.",
+      "downstream_work_to_delete_or_supersede": "Any roadmap step that proposes to instrument programs for dependency tracing, or that treats an argv read set as a dependency set.",
+      "fresh_reuse_plan": "Re-run the receipt's commands: the chains are built from programs on PATH, the state is a temporary directory, and no corpus or answer key is needed."
     },
     "obs_obs": {
       "affected_layers_only_on_revalidation": true,
@@ -272,14 +282,14 @@
       "direct_real_effect_verification_considered": true,
       "existing_oracle_considered": true,
       "oracle_paths": [
-        "canonical/tests/test_action_replay_under_change_v1.py",
-        "canonical/verification/ACTION_REPLAY_UNDER_CHANGE_20261116_V1.json",
-        "canonical/verification/LEARNED_SKILL_VERDICT_20261116_V1.json"
+        "canonical/verification/CAUSAL_DEPENDENCY_REPAIR_20261116_V1.json",
+        "canonical/tests/test_causal_dependency_repair_v1.py",
+        "canonical/verification/CAPABILITY_LAW_20261116_V1.json"
       ],
-      "synthetic_verification_necessity": "The corpus's own published tests are the oracle; unit tests pin only the mechanism and the measurement's integrity. Independent reproduction remains open."
+      "synthetic_verification_necessity": "No synthetic case is used: every chain is a real directory, real programs from PATH, real sabotage, and an independent goal command that fails before the repair and passes after it in the exact-match arm."
     },
-    "real_outcome": "On 268 real commits from five public repositories, 16.0 percent contain a sibling site at the loosest rung and 11.6 percent when the neighbourhood must match on both sides. Across 245 sibling pairs the demonstrated edit reproduced the developer's edit 181 times, but 103 of those were verbatim repeats; on the 142 pairs needing induction it was right 78 times (0.5493) and wrong 64. Determinacy fell from 53 percent at one changed line to 21 percent at five.",
-    "required_capability": "Routing instead of promising: decide from the target's own context whether memory applies (verbatim or clean binding), whether the edit invents a value the target does not determine, or whether there is no sibling at all -- and only let memory run in the first case, with the postcondition checked because a forced prediction cannot be told from a lucky one at run time.",
+    "real_outcome": "The read set a repair needs is discovered, not declared: a step depends on a path iff perturbing that path changes the step's consequence, so one real re-run per candidate path replaces both the hand-authored ground truth and any syntactic reading of the command line. The repair then redoes only the steps whose inputs actually moved, in plan order, and its success is judged by a goal command it does not control.",
+    "required_capability": "Given a state, a command and a set of candidate paths, decide which paths the command's consequence depends on -- by intervention, with no model, no trace and no annotation -- and then restore the goal by re-running only the dependent steps.",
     "route_frontier": {
       "challenger_routes": [
         {
@@ -449,18 +459,18 @@
       "why_this_is_not_another_organ": "It adds one function and one replay rule, and it deletes the assumption that a command line names its inputs."
     },
     "routes_considered": [
-      "Count one success as having learned the action (checked: only 16.0% of commits even have a sibling)",
-      "Assume a demonstration determines the sibling edit (checked: on 142 induction pairs it matched 78 and was wrong 64)",
-      "Credit verbatim repeats as learning (checked: 103 of 181 matches are copy-paste)",
-      "Rely on a shape match without context (checked: supply falls from 16.0% to 11.6% and precision rises to 73.3% when the neighbourhood must match)",
-      "Route on the measured classes: verbatim/clean-binding from memory, value-inventing by synthesis, no-sibling by synthesis with verification (selected)"
+      "discover the read set by one intervention per candidate path, then replay only what moved (selected)",
+      "read the read set off the command line",
+      "instrument every program so it emits a dependency trace",
+      "redo every step from the beginning",
+      "ask a model which steps to redo"
     ],
     "selected_route": "DISCOVER_THE_READ_SET_BY_INTERVENTION_INSTEAD_OF_READING_IT_OFF_THE_COMMAND_LINE_AND_REPAIR_ONLY_WHAT_MOVED",
-    "selected_surviving_route": "RE_VALIDATE_THE_FACTS_A_STEP_FRAME_CAN_TOUCH_SO_A_LEGAL_STEP_CANNOT_SILENTLY_FALSIFY_EARLIER_PROGRESS",
+    "selected_surviving_route": "DISCOVER_THE_READ_SET_BY_INTERVENTION_INSTEAD_OF_READING_IT_OFF_THE_COMMAND_LINE_AND_REPAIR_ONLY_WHAT_MOVED",
     "selected_surviving_route_class": "SYNTHESIZE_NEW_PRIMITIVE",
-    "stop_condition": "One merged change on this branch in which a legal step that falsifies an earlier verified fact is detected at the causal step, with controls showing no false invalidations and a lead measured against the symptom.",
-    "why_selected_route_is_fastest_sufficient": "It needs no model and no new store: frames acquired last round already name the paths a step may touch, so the invalidation rule is a set intersection and a hash, and it localises the cause instead of the symptom.",
-    "why_this_is_not_another_organ": "It adds a dict of hashes and one rule, and it deletes the assumption that a verified fact persists. Nothing is trained and nothing is stored beyond the run."
+    "stop_condition": "One merged change on this branch in which the dependency a repair needs is discovered by intervention rather than declared, the repair restores an independent goal command that fails without it, and a control chain in which the dependency is syntactic shows the method does not over-declare.",
+    "why_selected_route_is_fastest_sufficient": "It needs no model and no new store, it reuses the action environment, the goal commands and the fact ledger that already exist, and it recovers the hand-authored read set exactly at one subprocess per candidate path.",
+    "why_this_is_not_another_organ": "It adds one function and one replay rule to a module that already existed, and it deletes the assumption that a command line names its inputs."
   },
   "route_id": "DISCOVER_THE_READ_SET_BY_INTERVENTION_INSTEAD_OF_READING_IT_OFF_THE_COMMAND_LINE_AND_REPAIR_ONLY_WHAT_MOVED",
   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
