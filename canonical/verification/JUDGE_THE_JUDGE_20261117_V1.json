@@ -1,0 +1,1410 @@
+{
+  "schema": "BRAIN_JUDGE_THE_JUDGE_V1",
+  "authority": "NONE__PRODUCER_RUN_AUDIT_OF_THE_INSTRUMENT_NOT_A_SOLVER",
+  "upstream": "https://github.com/jkoppel/QuixBugs",
+  "model_dependency_count": 0,
+  "external_capability_provider_count": 0,
+  "network_calls_at_run_time": 0,
+  "rule": "a judge is admissible for a task only if it passes the corpus's corrected program and fails its defective one",
+  "summary": {
+    "tasks_offered": 31,
+    "naive_judge_rejects_the_answer": [
+      "flatten",
+      "hanoi",
+      "kheapsort",
+      "knapsack",
+      "levenshtein",
+      "longest_common_subsequence",
+      "sqrt"
+    ],
+    "naive_rejections_repaired_by_comparison": [
+      "flatten",
+      "kheapsort"
+    ],
+    "test_files_that_transform_the_data": [
+      "hanoi"
+    ],
+    "tasks_audited": 31,
+    "judge_admissible": 26,
+    "judge_inadmissible": 5,
+    "inadmissible_tasks": [
+      "hanoi",
+      "knapsack",
+      "levenshtein",
+      "longest_common_subsequence",
+      "sqrt"
+    ],
+    "causes": {
+      "TIMEOUT_TOO_SHORT": 2,
+      "VALUE_DISAGREES": 3
+    },
+    "reference_passes_the_real_judge": 31,
+    "cheap_judge_rejects_the_answer": [
+      "hanoi",
+      "knapsack",
+      "levenshtein",
+      "longest_common_subsequence",
+      "sqrt"
+    ],
+    "cheap_judge_accepts_the_bug": [],
+    "seconds": 13.8
+  },
+  "rows": [
+    {
+      "task": "bitcount",
+      "kind": "task",
+      "cases": 9,
+      "program_sha256": "585fc5e7140a87d698574ad74acfd4cf5de4e03e460dea7e87725e2694b60b8c",
+      "stage": "AUDITED",
+      "reference": {
+        "naive": {
+          "PASS": 9
+        },
+        "materialised": {
+          "PASS": 9
+        },
+        "slow": {
+          "PASS": 9
+        }
+      },
+      "defective": {
+        "materialised": {
+          "TIMEOUT": 9
+        }
+      },
+      "real_judge": {
+        "corpus_test_passes": true,
+        "returncode": 0,
+        "tail": [
+          ".........                                                                [100%]",
+          "9 passed in 0.01s"
+        ]
+      },
+      "test_file": {
+        "available": true,
+        "loads": 1,
+        "rewrites": [],
+        "normalises_the_data": false
+      },
+      "judge_passes_the_answer": true,
+      "naive_judge_passes_the_answer": true,
+      "judge_fails_the_bug": true,
+      "judge_is_admissible": true,
+      "recommended_comparison": "materialised"
+    },
+    {
+      "task": "bucketsort",
+      "kind": "task",
+      "cases": 7,
+      "program_sha256": "1cc4197c2ee524ec8dd3a45c0e943acf31fa429cb8b179195334f51ff939b9fd",
+      "stage": "AUDITED",
+      "reference": {
+        "naive": {
+          "PASS": 7
+        },
+        "materialised": {
+          "PASS": 7
+        },
+        "slow": {
+          "PASS": 7
+        }
+      },
+      "defective": {
+        "materialised": {
+          "PASS": 1,
+          "FAIL": 6
+        }
+      },
+      "real_judge": {
+        "corpus_test_passes": true,
+        "returncode": 0,
+        "tail": [
+          ".......                                                                  [100%]",
+          "7 passed in 0.01s"
+        ]
+      },
+      "test_file": {
+        "available": true,
+        "loads": 1,
+        "rewrites": [],
+        "normalises_the_data": false
+      },
+      "judge_passes_the_answer": true,
+      "naive_judge_passes_the_answer": true,
+      "judge_fails_the_bug": true,
+      "judge_is_admissible": true,
+      "recommended_comparison": "materialised"
+    },
+    {
+      "task": "find_first_in_sorted",
+      "kind": "task",
+      "cases": 7,
+      "program_sha256": "59bdf7033f9b0f0f63aed032d18e89f30e333eee8689354b666d12ef4d7e3fda",
+      "stage": "AUDITED",
+      "reference": {
+        "naive": {
+          "PASS": 7
+        },
+        "materialised": {
+          "PASS": 7
+        },
+        "slow": {
+          "PASS": 7
+        }
+      },
+      "defective": {
+        "materialised": {
+          "PASS": 4,
+          "RAISED": 1,
+          "TIMEOUT": 2
+        }
+      },
+      "real_judge": {
+        "corpus_test_passes": true,
+        "returncode": 0,
+        "tail": [
+          ".......                                                                  [100%]",
+          "7 passed in 0.01s"
+        ]
+      },
+      "test_file": {
+        "available": true,
+        "loads": 1,
+        "rewrites": [],
+        "normalises_the_data": false
+      },
+      "judge_passes_the_answer": true,
+      "naive_judge_passes_the_answer": true,
+      "judge_fails_the_bug": true,
+      "judge_is_admissible": true,
+      "recommended_comparison": "materialised"
+    },
+    {
+      "task": "find_in_sorted",
+      "kind": "task",
+      "cases": 7,
+      "program_sha256": "b640b4bcb1b2c0f7875de8f13df191f4e61ddf7e6fbdcfc42d477ec60885d3c7",
+      "stage": "AUDITED",
+      "reference": {
+        "naive": {
+          "PASS": 7
+        },
+        "materialised": {
+          "PASS": 7
+        },
+        "slow": {
+          "PASS": 7
+        }
+      },
+      "defective": {
+        "materialised": {
+          "PASS": 5,
+          "RAISED": 2
+        }
+      },
+      "real_judge": {
+        "corpus_test_passes": true,
+        "returncode": 0,
+        "tail": [
+          ".......                                                                  [100%]",
+          "7 passed in 0.01s"
+        ]
+      },
+      "test_file": {
+        "available": true,
+        "loads": 1,
+        "rewrites": [],
+        "normalises_the_data": false
+      },
+      "judge_passes_the_answer": true,
+      "naive_judge_passes_the_answer": true,
+      "judge_fails_the_bug": true,
+      "judge_is_admissible": true,
+      "recommended_comparison": "materialised"
+    },
+    {
+      "task": "flatten",
+      "kind": "task",
+      "cases": 7,
+      "program_sha256": "5023275fe603f1ebade0027073c3d116274d405069ea350076f220f10ff451e2",
+      "stage": "AUDITED",
+      "reference": {
+        "naive": {
+          "FAIL": 7
+        },
+        "materialised": {
+          "PASS": 7
+        },
+        "slow": {
+          "PASS": 7
+        }
+      },
+      "defective": {
+        "materialised": {
+          "FAIL": 6,
+          "PASS": 1
+        }
+      },
+      "real_judge": {
+        "corpus_test_passes": true,
+        "returncode": 0,
+        "tail": [
+          ".......                                                                  [100%]",
+          "7 passed in 0.01s"
+        ]
+      },
+      "test_file": {
+        "available": true,
+        "loads": 1,
+        "rewrites": [],
+        "normalises_the_data": false
+      },
+      "judge_passes_the_answer": true,
+      "naive_judge_passes_the_answer": false,
+      "judge_fails_the_bug": true,
+      "judge_is_admissible": true,
+      "recommended_comparison": "materialised"
+    },
+    {
+      "task": "gcd",
+      "kind": "task",
+      "cases": 6,
+      "program_sha256": "d68e155c2af40d787f617f03c596005edabee3d9e33626b9185d83650895636f",
+      "stage": "AUDITED",
+      "reference": {
+        "naive": {
+          "PASS": 6
+        },
+        "materialised": {
+          "PASS": 6
+        },
+        "slow": {
+          "PASS": 6
+        }
+      },
+      "defective": {
+        "materialised": {
+          "PASS": 1,
+          "RAISED": 5
+        }
+      },
+      "real_judge": {
+        "corpus_test_passes": true,
+        "returncode": 0,
+        "tail": [
+          "......                                                                   [100%]",
+          "6 passed in 0.01s"
+        ]
+      },
+      "test_file": {
+        "available": true,
+        "loads": 1,
+        "rewrites": [],
+        "normalises_the_data": false
+      },
+      "judge_passes_the_answer": true,
+      "naive_judge_passes_the_answer": true,
+      "judge_fails_the_bug": true,
+      "judge_is_admissible": true,
+      "recommended_comparison": "materialised"
+    },
+    {
+      "task": "get_factors",
+      "kind": "task",
+      "cases": 11,
+      "program_sha256": "7eff7ef2adbb266142cf20e8fa64b05b16ec7e1536a20fa10f036091b1d3290d",
+      "stage": "AUDITED",
+      "reference": {
+        "naive": {
+          "PASS": 11
+        },
+        "materialised": {
+          "PASS": 11
+        },
+        "slow": {
+          "PASS": 11
+        }
+      },
+      "defective": {
+        "materialised": {
+          "PASS": 1,
+          "FAIL": 10
+        }
+      },
+      "real_judge": {
+        "corpus_test_passes": true,
+        "returncode": 0,
+        "tail": [
+          "...........                                                              [100%]",
+          "11 passed in 0.01s"
+        ]
+      },
+      "test_file": {
+        "available": true,
+        "loads": 1,
+        "rewrites": [],
+        "normalises_the_data": false
+      },
+      "judge_passes_the_answer": true,
+      "naive_judge_passes_the_answer": true,
+      "judge_fails_the_bug": true,
+      "judge_is_admissible": true,
+      "recommended_comparison": "materialised"
+    },
+    {
+      "task": "hanoi",
+      "kind": "task",
+      "cases": 8,
+      "program_sha256": "edd1ceeb79b556a6d15e3bc21f625c5776b46c10f94a754531d39a6f7e120f9e",
+      "stage": "AUDITED",
+      "reference": {
+        "naive": {
+          "PASS": 1,
+          "FAIL": 7
+        },
+        "materialised": {
+          "PASS": 1,
+          "FAIL": 7
+        },
+        "slow": {
+          "PASS": 1,
+          "FAIL": 7
+        }
+      },
+      "defective": {
+        "materialised": {
+          "PASS": 1,
+          "FAIL": 7
+        }
+      },
+      "real_judge": {
+        "corpus_test_passes": true,
+        "returncode": 0,
+        "tail": [
+          "........                                                                 [100%]",
+          "8 passed in 0.01s"
+        ]
+      },
+      "test_file": {
+        "available": true,
+        "loads": 1,
+        "rewrites": [
+          "testdata = [[inp, [tuple(x) for x in out]] for inp, out in testdata]"
+        ],
+        "normalises_the_data": true
+      },
+      "judge_passes_the_answer": false,
+      "naive_judge_passes_the_answer": false,
+      "judge_fails_the_bug": true,
+      "judge_is_admissible": false,
+      "cause": "VALUE_DISAGREES",
+      "recommended_comparison": "materialised"
+    },
+    {
+      "task": "is_valid_parenthesization",
+      "kind": "task",
+      "cases": 3,
+      "program_sha256": "2340cddfce49b055a5a7a70c3341351bf130702512278bafaed5d5b345d0ba60",
+      "stage": "AUDITED",
+      "reference": {
+        "naive": {
+          "PASS": 3
+        },
+        "materialised": {
+          "PASS": 3
+        },
+        "slow": {
+          "PASS": 3
+        }
+      },
+      "defective": {
+        "materialised": {
+          "PASS": 2,
+          "FAIL": 1
+        }
+      },
+      "real_judge": {
+        "corpus_test_passes": true,
+        "returncode": 0,
+        "tail": [
+          "...                                                                      [100%]",
+          "3 passed in 0.01s"
+        ]
+      },
+      "test_file": {
+        "available": true,
+        "loads": 1,
+        "rewrites": [],
+        "normalises_the_data": false
+      },
+      "judge_passes_the_answer": true,
+      "naive_judge_passes_the_answer": true,
+      "judge_fails_the_bug": true,
+      "judge_is_admissible": true,
+      "recommended_comparison": "materialised"
+    },
+    {
+      "task": "kheapsort",
+      "kind": "task",
+      "cases": 4,
+      "program_sha256": "0cabf3d462d941ec01f261f2d794d960ab8ba497c42140cedbc3c872f772cea8",
+      "stage": "AUDITED",
+      "reference": {
+        "naive": {
+          "FAIL": 4
+        },
+        "materialised": {
+          "PASS": 4
+        },
+        "slow": {
+          "PASS": 4
+        }
+      },
+      "defective": {
+        "materialised": {
+          "PASS": 1,
+          "FAIL": 3
+        }
+      },
+      "real_judge": {
+        "corpus_test_passes": true,
+        "returncode": 0,
+        "tail": [
+          "....                                                                     [100%]",
+          "4 passed in 0.01s"
+        ]
+      },
+      "test_file": {
+        "available": true,
+        "loads": 1,
+        "rewrites": [],
+        "normalises_the_data": false
+      },
+      "judge_passes_the_answer": true,
+      "naive_judge_passes_the_answer": false,
+      "judge_fails_the_bug": true,
+      "judge_is_admissible": true,
+      "recommended_comparison": "materialised"
+    },
+    {
+      "task": "knapsack",
+      "kind": "task",
+      "cases": 10,
+      "program_sha256": "ce8ab048641f73e89cf0f196237a0c13d1e78025f6c44f4e92e4fd834f10123b",
+      "stage": "AUDITED",
+      "reference": {
+        "naive": {
+          "PASS": 9,
+          "TIMEOUT": 1
+        },
+        "materialised": {
+          "PASS": 9,
+          "TIMEOUT": 1
+        },
+        "slow": {
+          "PASS": 9,
+          "TIMEOUT": 1
+        }
+      },
+      "defective": {
+        "materialised": {
+          "PASS": 3,
+          "FAIL": 6,
+          "TIMEOUT": 1
+        }
+      },
+      "real_judge": {
+        "corpus_test_passes": true,
+        "returncode": 0,
+        "tail": [
+          ".........s                                                               [100%]",
+          "9 passed, 1 skipped in 0.03s"
+        ]
+      },
+      "test_file": {
+        "available": true,
+        "loads": 1,
+        "rewrites": [],
+        "normalises_the_data": false
+      },
+      "judge_passes_the_answer": false,
+      "naive_judge_passes_the_answer": false,
+      "judge_fails_the_bug": true,
+      "judge_is_admissible": false,
+      "cause": "VALUE_DISAGREES",
+      "recommended_comparison": "materialised"
+    },
+    {
+      "task": "kth",
+      "kind": "task",
+      "cases": 7,
+      "program_sha256": "505b7d8079de35173a8371dc40e6064d12f597441e1e7c49b782ed3892c37e7b",
+      "stage": "AUDITED",
+      "reference": {
+        "naive": {
+          "PASS": 7
+        },
+        "materialised": {
+          "PASS": 7
+        },
+        "slow": {
+          "PASS": 7
+        }
+      },
+      "defective": {
+        "materialised": {
+          "RAISED": 4,
+          "PASS": 3
+        }
+      },
+      "real_judge": {
+        "corpus_test_passes": true,
+        "returncode": 0,
+        "tail": [
+          ".......                                                                  [100%]",
+          "7 passed in 0.01s"
+        ]
+      },
+      "test_file": {
+        "available": true,
+        "loads": 1,
+        "rewrites": [],
+        "normalises_the_data": false
+      },
+      "judge_passes_the_answer": true,
+      "naive_judge_passes_the_answer": true,
+      "judge_fails_the_bug": true,
+      "judge_is_admissible": true,
+      "recommended_comparison": "materialised"
+    },
+    {
+      "task": "lcs_length",
+      "kind": "task",
+      "cases": 9,
+      "program_sha256": "ab35b03aa24601348e41e39b70514c9837d5d029009862c0b1d9c90e09b9f532",
+      "stage": "AUDITED",
+      "reference": {
+        "naive": {
+          "PASS": 9
+        },
+        "materialised": {
+          "PASS": 9
+        },
+        "slow": {
+          "PASS": 9
+        }
+      },
+      "defective": {
+        "materialised": {
+          "FAIL": 8,
+          "PASS": 1
+        }
+      },
+      "real_judge": {
+        "corpus_test_passes": true,
+        "returncode": 0,
+        "tail": [
+          ".........                                                                [100%]",
+          "9 passed in 0.01s"
+        ]
+      },
+      "test_file": {
+        "available": true,
+        "loads": 1,
+        "rewrites": [],
+        "normalises_the_data": false
+      },
+      "judge_passes_the_answer": true,
+      "naive_judge_passes_the_answer": true,
+      "judge_fails_the_bug": true,
+      "judge_is_admissible": true,
+      "recommended_comparison": "materialised"
+    },
+    {
+      "task": "levenshtein",
+      "kind": "task",
+      "cases": 7,
+      "program_sha256": "55f92da7c06a1eb1e398b557d18dee92d550a0ccfc72e65007729a83eda36266",
+      "stage": "AUDITED",
+      "reference": {
+        "naive": {
+          "PASS": 5,
+          "TIMEOUT": 2
+        },
+        "materialised": {
+          "PASS": 5,
+          "TIMEOUT": 2
+        },
+        "slow": {
+          "PASS": 6,
+          "TIMEOUT": 1
+        }
+      },
+      "defective": {
+        "materialised": {
+          "FAIL": 4,
+          "TIMEOUT": 2,
+          "PASS": 1
+        }
+      },
+      "real_judge": {
+        "corpus_test_passes": true,
+        "returncode": 0,
+        "tail": [
+          "...s...                                                                  [100%]",
+          "6 passed, 1 skipped in 0.90s"
+        ]
+      },
+      "test_file": {
+        "available": true,
+        "loads": 1,
+        "rewrites": [],
+        "normalises_the_data": false
+      },
+      "judge_passes_the_answer": false,
+      "naive_judge_passes_the_answer": false,
+      "judge_fails_the_bug": true,
+      "judge_is_admissible": false,
+      "cause": "TIMEOUT_TOO_SHORT",
+      "recommended_comparison": "slow"
+    },
+    {
+      "task": "lis",
+      "kind": "task",
+      "cases": 12,
+      "program_sha256": "fe9e751f62674299be95f5026c30c778ec331eb449caaa9a13f6b2908e44a016",
+      "stage": "AUDITED",
+      "reference": {
+        "naive": {
+          "PASS": 12
+        },
+        "materialised": {
+          "PASS": 12
+        },
+        "slow": {
+          "PASS": 12
+        }
+      },
+      "defective": {
+        "materialised": {
+          "PASS": 8,
+          "FAIL": 4
+        }
+      },
+      "real_judge": {
+        "corpus_test_passes": true,
+        "returncode": 0,
+        "tail": [
+          "............                                                             [100%]",
+          "12 passed in 0.01s"
+        ]
+      },
+      "test_file": {
+        "available": true,
+        "loads": 1,
+        "rewrites": [],
+        "normalises_the_data": false
+      },
+      "judge_passes_the_answer": true,
+      "naive_judge_passes_the_answer": true,
+      "judge_fails_the_bug": true,
+      "judge_is_admissible": true,
+      "recommended_comparison": "materialised"
+    },
+    {
+      "task": "longest_common_subsequence",
+      "kind": "task",
+      "cases": 10,
+      "program_sha256": "93215319e44f895561f14567dd6098e2b8fc04497d4d71f5c21c9267fc2a02da",
+      "stage": "AUDITED",
+      "reference": {
+        "naive": {
+          "PASS": 9,
+          "TIMEOUT": 1
+        },
+        "materialised": {
+          "PASS": 9,
+          "TIMEOUT": 1
+        },
+        "slow": {
+          "PASS": 10
+        }
+      },
+      "defective": {
+        "materialised": {
+          "PASS": 6,
+          "TIMEOUT": 1,
+          "FAIL": 3
+        }
+      },
+      "real_judge": {
+        "corpus_test_passes": true,
+        "returncode": 0,
+        "tail": [
+          "..........                                                               [100%]",
+          "10 passed in 0.14s"
+        ]
+      },
+      "test_file": {
+        "available": true,
+        "loads": 1,
+        "rewrites": [],
+        "normalises_the_data": false
+      },
+      "judge_passes_the_answer": false,
+      "naive_judge_passes_the_answer": false,
+      "judge_fails_the_bug": true,
+      "judge_is_admissible": false,
+      "cause": "TIMEOUT_TOO_SHORT",
+      "recommended_comparison": "slow"
+    },
+    {
+      "task": "max_sublist_sum",
+      "kind": "task",
+      "cases": 6,
+      "program_sha256": "aab26d9f3984f177adcff110fe72de97e54c5f85ad476c38e49c949a873d85b5",
+      "stage": "AUDITED",
+      "reference": {
+        "naive": {
+          "PASS": 6
+        },
+        "materialised": {
+          "PASS": 6
+        },
+        "slow": {
+          "PASS": 6
+        }
+      },
+      "defective": {
+        "materialised": {
+          "FAIL": 4,
+          "PASS": 2
+        }
+      },
+      "real_judge": {
+        "corpus_test_passes": true,
+        "returncode": 0,
+        "tail": [
+          "......                                                                   [100%]",
+          "6 passed in 0.01s"
+        ]
+      },
+      "test_file": {
+        "available": true,
+        "loads": 1,
+        "rewrites": [],
+        "normalises_the_data": false
+      },
+      "judge_passes_the_answer": true,
+      "naive_judge_passes_the_answer": true,
+      "judge_fails_the_bug": true,
+      "judge_is_admissible": true,
+      "recommended_comparison": "materialised"
+    },
+    {
+      "task": "mergesort",
+      "kind": "task",
+      "cases": 14,
+      "program_sha256": "9e1911f1da8b7535c52d19f73d32238e72066b859a853c09cbd2644214f79d61",
+      "stage": "AUDITED",
+      "reference": {
+        "naive": {
+          "PASS": 14
+        },
+        "materialised": {
+          "PASS": 14
+        },
+        "slow": {
+          "PASS": 14
+        }
+      },
+      "defective": {
+        "materialised": {
+          "PASS": 1,
+          "RAISED": 13
+        }
+      },
+      "real_judge": {
+        "corpus_test_passes": true,
+        "returncode": 0,
+        "tail": [
+          "..............                                                           [100%]",
+          "14 passed in 0.01s"
+        ]
+      },
+      "test_file": {
+        "available": true,
+        "loads": 1,
+        "rewrites": [],
+        "normalises_the_data": false
+      },
+      "judge_passes_the_answer": true,
+      "naive_judge_passes_the_answer": true,
+      "judge_fails_the_bug": true,
+      "judge_is_admissible": true,
+      "recommended_comparison": "materialised"
+    },
+    {
+      "task": "next_palindrome",
+      "kind": "task",
+      "cases": 5,
+      "program_sha256": "e383f403abe2f85fff232871f691b560d5aadd6cccbfbbf205d25099abe734ce",
+      "stage": "AUDITED",
+      "reference": {
+        "naive": {
+          "PASS": 5
+        },
+        "materialised": {
+          "PASS": 5
+        },
+        "slow": {
+          "PASS": 5
+        }
+      },
+      "defective": {
+        "materialised": {
+          "PASS": 4,
+          "FAIL": 1
+        }
+      },
+      "real_judge": {
+        "corpus_test_passes": true,
+        "returncode": 0,
+        "tail": [
+          ".....                                                                    [100%]",
+          "5 passed in 0.01s"
+        ]
+      },
+      "test_file": {
+        "available": true,
+        "loads": 1,
+        "rewrites": [],
+        "normalises_the_data": false
+      },
+      "judge_passes_the_answer": true,
+      "naive_judge_passes_the_answer": true,
+      "judge_fails_the_bug": true,
+      "judge_is_admissible": true,
+      "recommended_comparison": "materialised"
+    },
+    {
+      "task": "next_permutation",
+      "kind": "task",
+      "cases": 8,
+      "program_sha256": "14ffc36c80bf3bba8db91b7e0fa6be14a8011130ddeaccf33ed62638eac1b25b",
+      "stage": "AUDITED",
+      "reference": {
+        "naive": {
+          "PASS": 8
+        },
+        "materialised": {
+          "PASS": 8
+        },
+        "slow": {
+          "PASS": 8
+        }
+      },
+      "defective": {
+        "materialised": {
+          "FAIL": 8
+        }
+      },
+      "real_judge": {
+        "corpus_test_passes": true,
+        "returncode": 0,
+        "tail": [
+          "........                                                                 [100%]",
+          "8 passed in 0.01s"
+        ]
+      },
+      "test_file": {
+        "available": true,
+        "loads": 1,
+        "rewrites": [],
+        "normalises_the_data": false
+      },
+      "judge_passes_the_answer": true,
+      "naive_judge_passes_the_answer": true,
+      "judge_fails_the_bug": true,
+      "judge_is_admissible": true,
+      "recommended_comparison": "materialised"
+    },
+    {
+      "task": "pascal",
+      "kind": "task",
+      "cases": 5,
+      "program_sha256": "4445ef075a5f987d005bba5587c58f4697a90675be09171af2ca4009f64824a1",
+      "stage": "AUDITED",
+      "reference": {
+        "naive": {
+          "PASS": 5
+        },
+        "materialised": {
+          "PASS": 5
+        },
+        "slow": {
+          "PASS": 5
+        }
+      },
+      "defective": {
+        "materialised": {
+          "PASS": 1,
+          "FAIL": 1,
+          "RAISED": 3
+        }
+      },
+      "real_judge": {
+        "corpus_test_passes": true,
+        "returncode": 0,
+        "tail": [
+          ".....                                                                    [100%]",
+          "5 passed in 0.01s"
+        ]
+      },
+      "test_file": {
+        "available": true,
+        "loads": 1,
+        "rewrites": [],
+        "normalises_the_data": false
+      },
+      "judge_passes_the_answer": true,
+      "naive_judge_passes_the_answer": true,
+      "judge_fails_the_bug": true,
+      "judge_is_admissible": true,
+      "recommended_comparison": "materialised"
+    },
+    {
+      "task": "possible_change",
+      "kind": "task",
+      "cases": 10,
+      "program_sha256": "e21854dbb1a8f299bab639e71797a14989ab6bd6b700665a2056c48a70154917",
+      "stage": "AUDITED",
+      "reference": {
+        "naive": {
+          "PASS": 10
+        },
+        "materialised": {
+          "PASS": 10
+        },
+        "slow": {
+          "PASS": 10
+        }
+      },
+      "defective": {
+        "materialised": {
+          "PASS": 1,
+          "RAISED": 9
+        }
+      },
+      "real_judge": {
+        "corpus_test_passes": true,
+        "returncode": 0,
+        "tail": [
+          "..........                                                               [100%]",
+          "10 passed in 0.05s"
+        ]
+      },
+      "test_file": {
+        "available": true,
+        "loads": 1,
+        "rewrites": [],
+        "normalises_the_data": false
+      },
+      "judge_passes_the_answer": true,
+      "naive_judge_passes_the_answer": true,
+      "judge_fails_the_bug": true,
+      "judge_is_admissible": true,
+      "recommended_comparison": "materialised"
+    },
+    {
+      "task": "powerset",
+      "kind": "task",
+      "cases": 5,
+      "program_sha256": "3e3deb045ed61fbe82725cd7e7b0fb4d00f411f87f0f91358109ec0204c61ae9",
+      "stage": "AUDITED",
+      "reference": {
+        "naive": {
+          "PASS": 5
+        },
+        "materialised": {
+          "PASS": 5
+        },
+        "slow": {
+          "PASS": 5
+        }
+      },
+      "defective": {
+        "materialised": {
+          "FAIL": 4,
+          "PASS": 1
+        }
+      },
+      "real_judge": {
+        "corpus_test_passes": true,
+        "returncode": 0,
+        "tail": [
+          ".....                                                                    [100%]",
+          "5 passed in 0.01s"
+        ]
+      },
+      "test_file": {
+        "available": true,
+        "loads": 1,
+        "rewrites": [],
+        "normalises_the_data": false
+      },
+      "judge_passes_the_answer": true,
+      "naive_judge_passes_the_answer": true,
+      "judge_fails_the_bug": true,
+      "judge_is_admissible": true,
+      "recommended_comparison": "materialised"
+    },
+    {
+      "task": "quicksort",
+      "kind": "task",
+      "cases": 13,
+      "program_sha256": "4bc023d77dcdaeaaf5b284a03eecf0f73765ff216efecadd1d5ed78382ac89a3",
+      "stage": "AUDITED",
+      "reference": {
+        "naive": {
+          "PASS": 13
+        },
+        "materialised": {
+          "PASS": 13
+        },
+        "slow": {
+          "PASS": 13
+        }
+      },
+      "defective": {
+        "materialised": {
+          "PASS": 12,
+          "FAIL": 1
+        }
+      },
+      "real_judge": {
+        "corpus_test_passes": true,
+        "returncode": 0,
+        "tail": [
+          ".............                                                            [100%]",
+          "13 passed in 0.01s"
+        ]
+      },
+      "test_file": {
+        "available": true,
+        "loads": 1,
+        "rewrites": [],
+        "normalises_the_data": false
+      },
+      "judge_passes_the_answer": true,
+      "naive_judge_passes_the_answer": true,
+      "judge_fails_the_bug": true,
+      "judge_is_admissible": true,
+      "recommended_comparison": "materialised"
+    },
+    {
+      "task": "rpn_eval",
+      "kind": "task",
+      "cases": 6,
+      "program_sha256": "4a473b1beaa9eb8155fcb079917e390d0584d8ebdfc6d6d8c88069609854194a",
+      "stage": "AUDITED",
+      "reference": {
+        "naive": {
+          "PASS": 6
+        },
+        "materialised": {
+          "PASS": 6
+        },
+        "slow": {
+          "PASS": 6
+        }
+      },
+      "defective": {
+        "materialised": {
+          "FAIL": 3,
+          "PASS": 3
+        }
+      },
+      "real_judge": {
+        "corpus_test_passes": true,
+        "returncode": 0,
+        "tail": [
+          "......                                                                   [100%]",
+          "6 passed in 0.01s"
+        ]
+      },
+      "test_file": {
+        "available": true,
+        "loads": 1,
+        "rewrites": [],
+        "normalises_the_data": false
+      },
+      "judge_passes_the_answer": true,
+      "naive_judge_passes_the_answer": true,
+      "judge_fails_the_bug": true,
+      "judge_is_admissible": true,
+      "recommended_comparison": "materialised"
+    },
+    {
+      "task": "shunting_yard",
+      "kind": "task",
+      "cases": 6,
+      "program_sha256": "b010f04bbfc6158888d97498cc8e0adb323b9f8285fbf5b908c7d4c8c48cfb68",
+      "stage": "AUDITED",
+      "reference": {
+        "naive": {
+          "PASS": 6
+        },
+        "materialised": {
+          "PASS": 6
+        },
+        "slow": {
+          "PASS": 6
+        }
+      },
+      "defective": {
+        "materialised": {
+          "PASS": 2,
+          "FAIL": 4
+        }
+      },
+      "real_judge": {
+        "corpus_test_passes": true,
+        "returncode": 0,
+        "tail": [
+          "......                                                                   [100%]",
+          "6 passed in 0.01s"
+        ]
+      },
+      "test_file": {
+        "available": true,
+        "loads": 1,
+        "rewrites": [],
+        "normalises_the_data": false
+      },
+      "judge_passes_the_answer": true,
+      "naive_judge_passes_the_answer": true,
+      "judge_fails_the_bug": true,
+      "judge_is_admissible": true,
+      "recommended_comparison": "materialised"
+    },
+    {
+      "task": "sieve",
+      "kind": "task",
+      "cases": 6,
+      "program_sha256": "577f762267c71617107ca3ec8d509012a7d6b692fb94432f943cd5b694ad5ffc",
+      "stage": "AUDITED",
+      "reference": {
+        "naive": {
+          "PASS": 6
+        },
+        "materialised": {
+          "PASS": 6
+        },
+        "slow": {
+          "PASS": 6
+        }
+      },
+      "defective": {
+        "materialised": {
+          "PASS": 1,
+          "FAIL": 5
+        }
+      },
+      "real_judge": {
+        "corpus_test_passes": true,
+        "returncode": 0,
+        "tail": [
+          "......                                                                   [100%]",
+          "6 passed in 0.01s"
+        ]
+      },
+      "test_file": {
+        "available": true,
+        "loads": 1,
+        "rewrites": [],
+        "normalises_the_data": false
+      },
+      "judge_passes_the_answer": true,
+      "naive_judge_passes_the_answer": true,
+      "judge_fails_the_bug": true,
+      "judge_is_admissible": true,
+      "recommended_comparison": "materialised"
+    },
+    {
+      "task": "sqrt",
+      "kind": "task",
+      "cases": 7,
+      "program_sha256": "e3623a160e6ada452b36ce0bd2370fc031943e2c1ae93aae5f0c82865e083ebf",
+      "stage": "AUDITED",
+      "reference": {
+        "naive": {
+          "PASS": 5,
+          "FAIL": 2
+        },
+        "materialised": {
+          "PASS": 5,
+          "FAIL": 2
+        },
+        "slow": {
+          "PASS": 5,
+          "FAIL": 2
+        }
+      },
+      "defective": {
+        "materialised": {
+          "TIMEOUT": 6,
+          "PASS": 1
+        }
+      },
+      "real_judge": {
+        "corpus_test_passes": true,
+        "returncode": 0,
+        "tail": [
+          ".......                                                                  [100%]",
+          "7 passed in 0.01s"
+        ]
+      },
+      "test_file": {
+        "available": true,
+        "loads": 1,
+        "rewrites": [],
+        "normalises_the_data": false
+      },
+      "judge_passes_the_answer": false,
+      "naive_judge_passes_the_answer": false,
+      "judge_fails_the_bug": true,
+      "judge_is_admissible": false,
+      "cause": "VALUE_DISAGREES",
+      "recommended_comparison": "materialised"
+    },
+    {
+      "task": "subsequences",
+      "kind": "task",
+      "cases": 12,
+      "program_sha256": "0566273a521b768c0f9d8ba33d95bc7a10447b654327ad0d3460500245bef7c3",
+      "stage": "AUDITED",
+      "reference": {
+        "naive": {
+          "PASS": 12
+        },
+        "materialised": {
+          "PASS": 12
+        },
+        "slow": {
+          "PASS": 12
+        }
+      },
+      "defective": {
+        "materialised": {
+          "FAIL": 10,
+          "PASS": 2
+        }
+      },
+      "real_judge": {
+        "corpus_test_passes": true,
+        "returncode": 0,
+        "tail": [
+          "............                                                             [100%]",
+          "12 passed in 0.01s"
+        ]
+      },
+      "test_file": {
+        "available": true,
+        "loads": 1,
+        "rewrites": [],
+        "normalises_the_data": false
+      },
+      "judge_passes_the_answer": true,
+      "naive_judge_passes_the_answer": true,
+      "judge_fails_the_bug": true,
+      "judge_is_admissible": true,
+      "recommended_comparison": "materialised"
+    },
+    {
+      "task": "to_base",
+      "kind": "task",
+      "cases": 10,
+      "program_sha256": "e6f2d42474e4e641f08d2e6d5c0e8c8bf8a540e79aaaf1ab903031c163193744",
+      "stage": "AUDITED",
+      "reference": {
+        "naive": {
+          "PASS": 10
+        },
+        "materialised": {
+          "PASS": 10
+        },
+        "slow": {
+          "PASS": 10
+        }
+      },
+      "defective": {
+        "materialised": {
+          "PASS": 3,
+          "FAIL": 7
+        }
+      },
+      "real_judge": {
+        "corpus_test_passes": true,
+        "returncode": 0,
+        "tail": [
+          "..........                                                               [100%]",
+          "10 passed in 0.01s"
+        ]
+      },
+      "test_file": {
+        "available": true,
+        "loads": 1,
+        "rewrites": [],
+        "normalises_the_data": false
+      },
+      "judge_passes_the_answer": true,
+      "naive_judge_passes_the_answer": true,
+      "judge_fails_the_bug": true,
+      "judge_is_admissible": true,
+      "recommended_comparison": "materialised"
+    },
+    {
+      "task": "wrap",
+      "kind": "task",
+      "cases": 5,
+      "program_sha256": "eb76433536ae58fa2955fbe053a8f9e45e7deb7d3894048acb7cdab13f1f5282",
+      "stage": "AUDITED",
+      "reference": {
+        "naive": {
+          "PASS": 5
+        },
+        "materialised": {
+          "PASS": 5
+        },
+        "slow": {
+          "PASS": 5
+        }
+      },
+      "defective": {
+        "materialised": {
+          "FAIL": 5
+        }
+      },
+      "real_judge": {
+        "corpus_test_passes": true,
+        "returncode": 0,
+        "tail": [
+          ".....                                                                    [100%]",
+          "5 passed in 0.01s"
+        ]
+      },
+      "test_file": {
+        "available": true,
+        "loads": 1,
+        "rewrites": [],
+        "normalises_the_data": false
+      },
+      "judge_passes_the_answer": true,
+      "naive_judge_passes_the_answer": true,
+      "judge_fails_the_bug": true,
+      "judge_is_admissible": true,
+      "recommended_comparison": "materialised"
+    }
+  ]
+}
