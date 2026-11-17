@@ -1,0 +1,319 @@
+{
+ "schema": "PROJECT_BRAIN_VERIFICATION_RECEIPT_V1",
+ "receipt_id": "ONE_LOOP_ONE_TAIL_VERDICT_20261117_V1",
+ "authority": "NONE__NO_NEW_EXECUTION__AGGREGATES_MERGED_RECEIPTS_AND_FETCHED_PUBLIC_SOURCES",
+ "status": "PROPOSED__AGGREGATED_FROM_MERGED_RECEIPTS__EVERY_NUMBER_PINNED_BY_TESTS",
+ "generated_utc": "2026-11-17T04:40:00Z",
+ "question_as_asked": {
+  "claim": "instant learning + instant learning in new arbitrary environments solved perfectly, give the model the smartest actions, experience once, learn permanently => all computer use + advanced SWE solved. true or false? what is real vs not? is it revolutionary compared to current learning? can we do it NOW with advanced coding actions, experience once, permanent knowledge?",
+  "standing_frame": [
+   "identifiability (can one experience be separated from its alternatives)",
+   "vocabulary insufficiency (can the deciding fact be stated at all)",
+   "synthesis-verification asymmetry (can what was synthesized be checked by what is being synthesized)"
+  ]
+ },
+ "verdict": {
+  "the_claim_as_stated": "FALSE",
+  "why_in_one_sentence": "Four of the five links are measured false or conditional in this tree (once=0/200 identified, permanence without a gate corrupts, skills compose into no-ops, frontier 20.6%); the one real link - verified experience generalises 4x a cache - is real, gated, contract-checked experience reuse, which is also exactly what the November-2026 literature converges on.",
+  "five_transitions": [
+   {
+    "step": 1,
+    "statement": "act at all",
+    "measured": "56/92 MiniWoB pages reachable with one hand",
+    "status": "REAL_PARTIAL_PRECONDITION_NOT_THE_PRIZE",
+    "source": "THESIS_VERDICT_ONE_DEMO_AND_THE_SINGLE_BOTTLENECK_20261116_V1.md"
+   },
+   {
+    "step": 2,
+    "statement": "one success -> rule -> permanent reuse",
+    "measured": "60.0% vs 15.0% cache vs 18.9% prior on unseen instances (4x cache); 52/92 never demonstrated even once; three practice instances only +6.1",
+    "status": "REAL_BUT_SHARP_DIMINISHING",
+    "source": "canonical/verification/OPEN_BENCHMARK_ONE_SUCCESS_GENERALISATION_20261114_V1.json"
+   },
+   {
+    "step": 3,
+    "statement": "learn permanently",
+    "measured": "ungated: 228 real compositions, 53.5% stale, 31.1% silently corrupt; gated: zero-drift (106/106)",
+    "status": "CONDITIONAL_ON_GATE",
+    "source": "canonical/verification/PROOF_CARRYING_COUNTERFACTUAL_UNION_20261116_V1.json"
+   },
+   {
+    "step": 4,
+    "statement": "skills compose",
+    "measured": "known no-op pair (<=10 -> <10 then <10 -> <=10) passes every per-step check; only sequence/post-hoc and proved-premise composition catch it",
+    "status": "FALSE_UNCONDITIONALLY_NOW_REFUSED_BY_CONTRACT",
+    "source": "canonical/swe_kernel/proved_composition_v1.py + SKILLS_DONT_COMPOSE_20261112_V1.md"
+   },
+   {
+    "step": 5,
+    "statement": "solves all computer use + advanced SWE",
+    "measured": "frontier 20.6% on OSWorld 2.0; repeated syntax ~2.2% SWE-bench Verified",
+    "status": "FALSE",
+    "source": "THESIS_VERDICT_ONE_DEMO_AND_THE_SINGLE_BOTTLENECK_20261116_V1.md"
+   }
+  ],
+  "true_core_inside_the_claim": "Verified, gated, effect-checked experience reuse is real and large: 4x cache generalisation; zero-weight instant knowledge; ~7 ops per new environment; composition 24/40 + 31/80 with zero damage; the field's Nov-2026 training-free gains (+4.5..+18.8, ALFWorld +32.6, Trace2Skill 6/8) are the same core."
+ },
+ "the_three_barriers_measured": {
+  "identifiability": {
+   "one_shot": "0/200 successes identified",
+   "chosen_queries": "25/25 at 2.76 mean chosen queries; bits 5.5546 -> 3.8176; chosen query carries 1.9088 bits vs demo 1.0927 = 1.747x",
+   "source": "IDENTIFIABILITY chosen-query measurement (pass-13 receipts)"
+  },
+  "vocabulary_insufficiency": {
+   "flag": "unrepairable_by_repetition True (INSUFFICIENCY_CERTIFICATE_20261113_V1.json)",
+   "oracle_failed": "4 arms x 1200 actions on value-nothing-stated pages, all failed",
+   "source": "canonical/verification/THE_ANSWER_WAS_A_VALUE_NOTHING_STATED_20261117_V1.json"
+  },
+  "synthesis_verification_asymmetry": {
+   "replay": "53.5% stale / 31.1% silently corrupt ungated",
+   "instrument": "first-case choice wrong on 81% of cases; FIRST_CASE 4/21 vs BEST_CASE 13/21 vs ALL_CASES 16/16; chosen observation +9 tasks",
+   "source": "THE_INSTRUMENT_NOT_THE_EXPERIENCE_20261117_V1.md + PROOF_CARRYING receipt"
+  }
+ },
+ "two_axes_of_the_single_bottleneck_question": {
+  "loop_axis": {
+   "stations": [
+    "GOAL (what must hold)",
+    "GENERATE (what may be proposed)",
+    "ACT",
+    "VERIFY (did it hold)",
+    "INDEX (how it is filed and re-found)"
+   ],
+   "each_station_was_once_called_the_single_bottleneck": [
+    {
+     "station": "GOAL",
+     "claim": "goal sense",
+     "measured": "premise-dependent sense 112/168 -> 168/168",
+     "source": "THE_GOAL_IS_THE_BOTTLENECK_20261116_V1.md"
+    },
+    {
+     "station": "GENERATE",
+     "claim": "candidate set",
+     "measured": "oracle failed 4x1200; page-copy-only proposals; one arithmetic-reading fix 11 -> 13/14 and 1232 -> 472 actions",
+     "source": "WHAT_IS_REAL_AND_THE_ONE_CLASS_OF_PAGE_20261117_V1.md"
+    },
+    {
+     "station": "VERIFY",
+     "claim": "the instrument",
+     "measured": "FIRST_CASE 4/21 vs ALL_CASES 16/16, +9 tasks",
+     "source": "THE_INSTRUMENT_NOT_THE_EXPERIENCE_20261117_V1.md"
+    },
+    {
+     "station": "INDEX",
+     "claim": "the index",
+     "measured": "5 index families 0 usable; rename 7/10 -> 0/10; key-contains defects as sentences",
+     "source": "THE_BOTTLENECK_IS_THE_INDEX_NOT_THE_LEARNING_20261116_V1.md + SEPARATION_IS_THE_BOTTLENECK_20261116_V1.md"
+    }
+   ],
+   "deepest_station": "OBSERVATION_VERDICT_INSTRUMENT",
+   "why": [
+    "identifiability: experience carries no information without the observation that separates it (0/200 one-shot; chosen queries carry 1.747x the bits of the demo)",
+    "vocabulary: a verdict over names the page does not contain is undecidable (24 undecidable -> 0 with premise sense; certificate unrepairable by repetition)",
+    "synthesis-verification: every other station's output (generation, storage, composition) is only correctable by a verdict reading an observable the representation actually contains - and external Nov-2026 work shows a verdict without an anchor degenerates to always-pass (2610.11464)"
+   ]
+  },
+  "coverage_axis": {
+   "finding": "NO_SINGLE_LEVER_ON_COVERAGE",
+   "measured": "46 unsolved pages in 16 classes, largest class 6; no class holds more than six pages (test_pinned)",
+   "source": "canonical/verification/DECLARED_TRIGGER_AND_OPERAND_TAXONOMY_20261116_V1.json"
+  },
+  "reconciliation": "The tree's four 'single bottleneck' answers are not contradictions: goal-sense, generator, instrument, and index are four stations of ONE judgment loop, each measured as a wall on different task families; coverage over task classes is a different axis where NO single lever exists (16 classes, largest 6). On the loop axis the deepest station is the observation-verdict instrument because the other three barriers (identifiability, vocabulary, synthesis-verification) are all failures of that station; on the coverage axis the answer is one part per class, in demand order, never one universal part."
+ },
+ "can_we_do_it_now": {
+  "answer": "NO_AS_STATED_THREE_MEASURED_REASONS",
+  "reasons": [
+   {
+    "reason": "actions must be derived per state, not given",
+    "measured": "aimed arm A (pre-given actions) 0/46 vs derived G 13/46 vs D 0/46 at 400/seed1060",
+    "source": "canonical/verification/AIMED_ACTIONS_OVER_THE_UNSOLVED_SET_20261116_V1.json"
+   },
+   {
+    "reason": "one experience does not identify the rule",
+    "measured": "0/200 one-shot; precision floor 0.069 at recall 0.9; needs 2.76 chosen queries",
+    "source": "identifiability measurement"
+   },
+   {
+    "reason": "permanence without an anchored verifier corrupts",
+    "measured": "53.5% stale / 31.1% silent corruption ungated; always-pass grader trains just as well when anchors removed (2610.11464)",
+    "source": "PROOF_CARRYING receipt + Who-Verifies"
+   }
+  ],
+  "what_is_doable_now": [
+   "derive candidates from what the instruction and page state (13/46 already, from 0)",
+   "gate every stored unit at admission (zero-drift 106/106)",
+   "re-prove premises live before every step (proved_composition refuses the no-op pair before execution)",
+   "choose the observing instrument rather than the first one (16/16 suite judge, +9 chosen)",
+   "keep knowledge out of parameters entirely (zero-weight content-addressed store)"
+  ]
+ },
+ "instant_knowledge_no_part": {
+  "design": "facts never enter parameters; a zero-weight content-addressed store answers from measured bytes; parameters are capped for knowledge at 2 bits/param and ready_to_train=False until identified-success data exists (precision 0.069 today)",
+  "external_corroboration": [
+   "knowledge access beats model size (2603.23013)",
+   "parametric memory un-auditable/un-deletable (2603.07670)",
+   "external memory relocates the CL bottleneck to retrieval (2604.27003)"
+  ]
+ },
+ "external_confirmations_fetched_2026_11_16_17": {
+  "VeriHarness (arXiv 2610.00972)": {
+   "url": "https://arxiv.org/abs/2610.00972",
+   "takeaway": "long-horizon agent learning is a verification bottleneck; evolving VERIFIER skills yields +6.2/+6.4 pts over a single rollout; ~26k rollouts released"
+  },
+  "Who Verifies the Verifier (arXiv 2610.11464)": {
+   "url": "https://arxiv.org/abs/2610.11464",
+   "takeaway": "removing anchor guards produces an always-pass grader that trains skills JUST AS WELL; downstream task score cannot certify a self-evolved verifier; industry anchors = hand-written rubrics / human record-once"
+  },
+  "The Measurability Gap (arXiv 2602.20946)": {
+   "url": "https://arxiv.org/abs/2602.20946",
+   "takeaway": "execution scales exponentially while verification bandwidth caps realized value - verification is the structural bottleneck of agent work"
+  },
+  "Learning by Doing (arXiv 2611.01386)": {
+   "url": "https://arxiv.org/abs/2611.01386",
+   "takeaway": "skills compiled from VERIFIED teacher traces: +4.5..+18.8 (tau^3/AppWorld/EnterpriseOps), ALFWorld +32.6 from a weak base with no training - but gain exists ONLY on tasks the teacher solved (failed: +0.6 ~= 0) and no gain on new tasks: external refutation of once-solves-everything"
+  },
+  "GitHub agent-skills study (arXiv 2611.04456)": {
+   "url": "https://arxiv.org/abs/2611.04456",
+   "takeaway": "28.9% of real agent skills on GitHub lack trigger conditions - the phrase-gate defect is real in the wild"
+  },
+  "Progressive Skill Generation RL (arXiv 2608.01678)": {
+   "url": "https://arxiv.org/abs/2608.01678",
+   "takeaway": "one-shot skill generation loses to progressive generation (+14.0 SpreadsheetBench, +10.8 tau^2)"
+  },
+  "SkillRevise (arXiv 2606.01139)": {
+   "url": "https://arxiv.org/abs/2606.01139",
+   "takeaway": "one-shot skills are syntactically well formed yet behaviorally weak; execution-grounded revision + verifier-first selection: 36.05 -> 61.63%"
+  },
+  "CoEvoSkills/EvoSkills (arXiv 2604.01687)": {
+   "url": "https://arxiv.org/abs/2604.01687",
+   "takeaway": "surrogate-verifier ablation costs ~30 pp - dense verifier feedback is the lever in skill evolution"
+  },
+  "Trace2Skill (arXiv 2605.21810)": {
+   "url": "https://arxiv.org/abs/2605.21810",
+   "takeaway": "dense verifier feedback + skill evolution with NO weight updates: 0/8 -> 6/8 hard tasks, beating Claude Code and Codex"
+  },
+  "VASO (arXiv 2606.05395)": {
+   "url": "https://arxiv.org/abs/2606.05395",
+   "takeaway": "skills as formal, model-checked contracts; trace evidence != temporal safety; 97.2% compliance"
+  },
+  "Skill-selection scaling (arXiv 2601.04748)": {
+   "url": "https://arxiv.org/abs/2601.04748",
+   "takeaway": "skill libraries hit a capacity threshold; semantic confusability drives degradation - bigger libraries do not scale"
+  },
+  "SkillComposer (arXiv 2606.05066)": {
+   "url": "https://arxiv.org/abs/2606.05066",
+   "takeaway": "intra-task composition success collapses when composed across tasks; existing harnesses cannot verify composed skills"
+  },
+  "Skill-V (arXiv 2610.11781)": {
+   "url": "https://arxiv.org/abs/2610.11781",
+   "takeaway": "skills as versioned falsifiable contracts with preconditions/postconditions and an applicability filter - the field converges on checkable contracts, maintained not grown"
+  },
+  "CompoSkill (arXiv 2608.16246)": {
+   "url": "https://arxiv.org/abs/2608.16246",
+   "takeaway": "individually scanner-passing skills still compose into harmful paths - per-item verification is not composition verification"
+  },
+  "SkillCommit (arXiv 2608.15165)": {
+   "url": "https://arxiv.org/abs/2608.15165",
+   "takeaway": "scope overreach is the main cause of negative transfer; gate every abstraction by replay of every source instance"
+  },
+  "Agent memory survey (arXiv 2603.07670)": {
+   "url": "https://arxiv.org/abs/2603.07670",
+   "takeaway": "parametric memory is hard to audit, delete, and update; deployed agents favor non-parametric inspectable stores - knowledge outside weights is the field's default"
+  },
+  "Knowledge Access Beats Model Size (arXiv 2603.23013)": {
+   "url": "https://arxiv.org/abs/2603.23013",
+   "takeaway": "8B + memory = 30.5% F1 vs 235B without memory = 13.7% F1; knowledge access, not parameter count, determines quality on personalization - memory > model size"
+  },
+  "When Continual Learning Moves to Memory (arXiv 2604.27003)": {
+   "url": "https://arxiv.org/abs/2604.27003",
+   "takeaway": "external memory relocates the continual-learning bottleneck from parameter updates to retrieval - ungated permanence is not permanence (the tree measured the same at 53.5% stale replay)"
+  },
+  "Hierarchical Memory Tree (arXiv 2603.07024)": {
+   "url": "https://arxiv.org/abs/2603.07024",
+   "takeaway": "raw element identifiers fail cross-website; stages stored with pre/post-conditions and semantic descriptors transfer - corroborates index-by-property over index-by-name"
+  },
+  "World-Model Action Correction (arXiv 2602.15384)": {
+   "url": "https://arxiv.org/abs/2602.15384",
+   "takeaway": "candidate actions are proposed then simulated/graded before execution - proposal + pre-execution verdict, the same loop shape the tree measured"
+  }
+ },
+ "is_it_revolutionary": {
+  "answer": "REVOLUTIONARY_IN_THE_LOOP_NOT_IN_ONE_SHOT",
+  "because": "The one-shot form is refuted everywhere (0/200 here; one-shot skill generation loses repeatedly: 2608.01678, 2606.01139, 2606.11435; Learning-by-Doing gains exist only where a teacher already solved). The loop form - observation -> anchored verdict -> gated permanence -> effect-checked composition, knowledge outside weights - is what the Nov-2026 frontier is converging on, and this tree has it measured end to end where others have fragments."
+ },
+ "nonclaims": [
+  "no new execution was performed in this pass; every number is re-read from merged receipts by the test file",
+  "no external model was called or used; sources were read, not run",
+  "sentience is not claimed or measurable; only three proxies are (state continuity, self-verification, recovery)",
+  "OSWorld-Verified / SWE-bench Pro / QuixBugs (neither set) remain the hardest-open capability bars and were not re-run here",
+  "no single lever exists on coverage; any future pass claiming one fails test_no_class_holds_more_than_six_pages"
+ ],
+ "ranked_next_with_pass_fail": [
+  {
+   "rank": 1,
+   "move": "typed DERIVED candidate generator (replace phrase gates with declared/computed applicability)",
+   "pass": "oracle-unreachable pages become budget-reachable",
+   "kill": "any page that works today changes its spend or verdict",
+   "source": "WHAT_IS_REAL_AND_THE_ONE_CLASS_OF_PAGE_20261117_V1.md section 9"
+  },
+  {
+   "rank": 2,
+   "move": "anchor every self-judged verdict to data the judging loop cannot read (suite/locked corpus)",
+   "pass": "always-pass collapse is detected at admission",
+   "kill": "the anchor is readable by the thing it judges",
+   "source": "Who-Verifies (2610.11464) + tree admission gate"
+  },
+  {
+   "rank": 3,
+   "move": "one part per coverage class in size order (6 -> 5 -> 4 ...), each with its own pass/kill",
+   "pass": "that class's pages become solved without touching others' verdicts",
+   "kill": "a class part regresses a solved class",
+   "source": "taxonomy receipt (16 classes, largest 6)"
+  },
+  {
+   "rank": 4,
+   "move": "re-key the inert prior by instruction-bound liveness property (not by rename)",
+   "pass": "transfer beats shuffled re-key",
+   "kill": "no lift over shuffled",
+   "source": "WHAT_IS_REAL_AND_THE_ONE_CLASS_OF_PAGE_20261117_V1.md section 9"
+  },
+  {
+   "rank": 5,
+   "move": "weights last: procedure + prior only, every bit calculated, no knowledge in parameters",
+   "pass": "2-bit/param ceiling holds and no fact appears from weights",
+   "kill": "any parameter stores a fact",
+   "source": "pass-13/14 constraint (ready_to_train=False)"
+  }
+ ],
+ "honest_limits": [
+  "the five-transition chain and barrier numbers are pinned, not re-measured, in this pass (re-measurement is banned as re-testing known results)",
+  "external takeaways are abstracts/metadata fetched 2026-11-16/17; they corroborate, they do not certify",
+  "the loop-axis ranking (instrument deepest) is an argued synthesis of four merged measurements, itself falsifiable per-station by the receipts named beside each station"
+ ],
+ "tests": {
+  "file": "canonical/tests/test_one_loop_one_tail_verdict_v1.py",
+  "pins": [
+   "receipt structure + FALSE verdict",
+   "five source receipts (open-benchmark headline, V5 held-out 55/92, taxonomy 16/6, aimed 0/13/0 of 46, value-nothing-stated all_failed)",
+   "certificate unrepairable_by_repetition",
+   "proof-carrying 53.5% stale / 31.1% corrupt",
+   "THESIS_VERDICT 56/92 + 60.0% vs 15.0% + 20.6%",
+   "external set >= 15 entries all arxiv urls incl. required ids",
+   "loop axis deepest=instrument; coverage has_single_lever=false",
+   "note file exists and carries the verdict"
+  ],
+  "can_fail": {
+   "mutating the_claim_as_stated to TRUE": "test fails",
+   "raising coverage largest_class to 7 via receipt edit": "test fails against taxonomy receipt",
+   "removing any required external id": "test fails"
+  }
+ },
+ "pinned_source_files_sha256": {
+  "canonical/verification/OPEN_BENCHMARK_ONE_SUCCESS_GENERALISATION_20261114_V1.json": "556f77632655345f8e6067d65af03bd551cc1656a604a960ed7e975d5a7602ad",
+  "canonical/verification/DECLARED_TRIGGER_AND_OPERAND_TAXONOMY_20261116_V1.json": "e4759d24ac54192e60ce1e6e7482e4e77e19bedad797d0903ac7aef46788916a",
+  "canonical/verification/AIMED_ACTIONS_OVER_THE_UNSOLVED_SET_20261116_V1.json": "2548269b36118267b71898ca28f86572ada1fa484edcb31802405fbc172d7627",
+  "canonical/verification/THE_ANSWER_WAS_A_VALUE_NOTHING_STATED_20261117_V1.json": "fbf009548553ce489e5cdda26dee8f4b1bf4684d7255d91ac9a9596603154794",
+  "canonical/verification/INSUFFICIENCY_CERTIFICATE_20261113_V1.json": "0d18c2fdfceed90734fff36a5293d1afb98b6e1118bcacf36a968c0e4129f262",
+  "canonical/verification/PROOF_CARRYING_COUNTERFACTUAL_UNION_20261116_V1.json": "c83abb52f79742d9b92aa67f631f750c2a1731fab6582631a2c37e7f766f1cc9"
+ }
+}
