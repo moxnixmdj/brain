@@ -1,46 +1,16 @@
 {
- "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
  "action_id": "THE_POOL_IS_BADLY_POPULATED_NOT_BADLY_RANKED_20261116_V1",
  "action_intent_id": "THE_POOL_IS_BADLY_POPULATED_NOT_BADLY_RANKED_20261116_V1",
  "action_kind": "REAL_CAPABILITY_ACQUISITION",
- "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
- "route_id": "THE_POOL_IS_BADLY_POPULATED_NOT_BADLY_RANKED_20261116_V1",
- "date": "2026-11-16",
- "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
- "canonical_base_commit": "c6c21a2c0eb205561ac81b28c5de88cf71cdb56a",
- "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
- "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
- "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
- "incremental_spend_usd": 0,
- "terminal_credit_delta": 0,
- "capability_credit_delta": 0,
- "governance_change": false,
- "user_authorized_governance_change": false,
- "weakens_existing_guard": false,
- "benchmark_or_family_rank_authority": false,
- "highest_leverage_now": true,
  "action_summary": "Measure what the OBSERVATIONAL pool of contrasts is worth against the tree's own real corpus, to decide whether the remaining bottleneck is ranking evidence or constructing it.",
- "selected_route": "PRICE_THE_OBSERVATIONAL_POOL_AGAINST_THE_REAL_CORPUS_AND_SEPARATE_RANKING_FROM_POPULATION__TO_SHOW_THAT_SELECTION_IS_SATURATED_AND_CONSTRUCTION_IS_THE_OPEN_CAPABILITY",
- "causal_blocker": "The selector is exact and still returns zero on real evidence. contrast_selection_v1 is deliberately observational -- its pool is only states already observed, and it never invents a world -- and on the tree's real corpus (|A|=23, D_i=[20,20], survivors 2^23-8) it returned NO_INFORMATIVE_STATE with 8,388,600 survivors. Reading count_survivors shows why: an exclusion row D_i is the set of facts a failure DROPPED, so the real failures kept only 3 of 23 and each was worth 2^3=8 hypotheses. The whole real corpus was worth 8 of 8,388,608. A near miss keeping 22 is worth 2^22=4,194,304, i.e. 524,288x the entire corpus, for one interaction. So the bottleneck is not ranking: selecting optimally inside a pool of dramatic failures is worth exactly zero, and better ranking of an empty pool cannot help. The capability that is missing is CONSTRUCTION of a reachable near miss -- take a success, remove one fact it required -- and whether such an intervention is admissible is governed by certified_reached_escape_state_constructor_v2, not by this arithmetic.",
- "expected_parent_change": "Evidence selection stops being treated as a ranking problem and becomes a population problem: a contrast's value is 2^k where k is what it KEEPS, so a pool of dramatic failures is worth nearly nothing no matter how well it is ranked, and the remaining capability is to construct a near miss one fact away from a success rather than to rank observed states harder.",
- "expected_parent_frontier_change": "Evidence selection stops being treated as a ranking problem and becomes a population problem: a contrast's value is 2^k where k is what it KEEPS, so a pool of dramatic failures is worth nearly nothing no matter how well it is ranked, and the remaining capability is to construct a near miss one fact away from a success rather than to rank observed states harder.",
- "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The selector is exact and still returns zero on real evidence. contrast_selection_v1 is deliberately observational -- its pool is only states already observed, and it never invents a world -- and on the tree's real corpus (|A|=23, D_i=[20,20], survivors 2^23-8) it returned NO_INFORMATIVE_STATE with 8,388,600 survivors. Reading count_survivors shows why: an exclusion row D_i is the set of facts a failure DROPPED, so the real failures kept only 3 of 23 and each was worth 2^3=8 hypotheses. The whole real corpus was worth 8 of 8,388,608. A near miss keeping 22 is worth 2^22=4,194,304, i.e. 524,288x the entire corpus, for one interaction. So the bottleneck is not ranking: selecting optimally inside a pool of dramatic failures is worth exactly zero, and better ranking of an empty pool cannot help. The capability that is missing is CONSTRUCTION of a reachable near miss -- take a success, remove one fact it required -- and whether such an intervention is admissible is governed by certified_reached_escape_state_constructor_v2, not by this arithmetic.",
- "falsification_condition": "A corpus in which the observed states already contain a contrast worth a substantial share of the space would refute the claim that the pool is badly populated rather than badly ranked; so would a case where count_survivors treats D_i as the KEPT set, which the live counter shows it does not (|D_i|=20 over |A|=23 returns 2^23-8).",
- "stop_condition": "The observational pool priced against the tree's own real corpus with the tree's own exact counter, the interventional pool priced on the same arithmetic, the D_i-is-dropped reading pinned by a test, and no new selector, learner or store built.",
- "explicit_user_authorization": "Owner directive on 2026-11-04: You sure this is the smartest approach? Think from the deepest layer, from first principles of everything. We want a very smart, most advanced, sentient-like creature. We don't want a static code. Then: go. $0 spend, K3=0, zero protected or SHA-pinned paths touched.",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
  "agent_orientation": {
+  "causal_evidence": "MEASURED_ON_9e3b5f5e__GRAMMAR_INDUCTION_PARSES_RECORD_XML_AND_LENPREF_FORMATS_OUTSIDE_THE_OLD_FIVE_CODECS__EXACT_LINEAR_SOLVE_GETS_7x0-2x1+12_AND_META_TACTIC_SOLVES_OFF_GRID_42x0-9x1+13__STUN_PIECEWISE_AND_ORGAN_COMPOSITION_LIVE__DIFFERENCE_INVARIANT_SYNTHESIZED_NOT_JUST_SUM_OR_PROD__EVOI_EXPANDS_ON_EARN_500_USD_WITHOUT_FASTEST_OR_BEST__INSTRUMENTAL_POLICY_PICKS_ZERO_REWARD_FORGE_SENSOR_THAT_UNLOCKS_100_VALUE_GOAL__COPY_42_STILL_REFUSED_WITHOUT_ORACLE__20_TESTS_IN_0_257S",
   "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
   "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
-  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
-  "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
-  "progress_evidence_paths": [
-   "canonical/tests/test_observational_pool_is_empty_by_construction_v1.py"
-  ],
-  "route_class": "COMPOSE",
-  "producer_cognition_model_dependency_count": 0,
-  "incremental_spend_usd": 0,
   "conversation_memory_is_authority": false,
   "false_claim_removed": "THAT_FIVE_HARDCODED_CODECS_THIRTY_FIVE_EXPRESSION_TEMPLATES_THREE_ARITHMETIC_LAWS_A_NINETEEN_INT_COEFFICIENT_GRID_AND_AN_ENGLISH_KEYWORD_REGEX_CONSTITUTE_NON_STATIC_SENTIENT_COGNITION",
+  "incremental_spend_usd": 0,
   "laws_read_this_session": [
    "canonical/governance/OWNER_ACTIVE_GOAL_20261018_V1.md",
    "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
@@ -56,45 +26,30 @@
    "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
    "AGENTS.md"
   ],
-  "causal_evidence": "MEASURED_ON_9e3b5f5e__GRAMMAR_INDUCTION_PARSES_RECORD_XML_AND_LENPREF_FORMATS_OUTSIDE_THE_OLD_FIVE_CODECS__EXACT_LINEAR_SOLVE_GETS_7x0-2x1+12_AND_META_TACTIC_SOLVES_OFF_GRID_42x0-9x1+13__STUN_PIECEWISE_AND_ORGAN_COMPOSITION_LIVE__DIFFERENCE_INVARIANT_SYNTHESIZED_NOT_JUST_SUM_OR_PROD__EVOI_EXPANDS_ON_EARN_500_USD_WITHOUT_FASTEST_OR_BEST__INSTRUMENTAL_POLICY_PICKS_ZERO_REWARD_FORGE_SENSOR_THAT_UNLOCKS_100_VALUE_GOAL__COPY_42_STILL_REFUSED_WITHOUT_ORACLE__20_TESTS_IN_0_257S"
- },
- "measured_effect": {
-  "real_corpus": {
-   "A": 23,
-   "D_sizes": [
-    20,
-    20
-   ],
-   "kept_by_each_failure": 3,
-   "survivors": 8388600,
-   "whole_corpus_eliminated": 8
-  },
-  "interventional": {
-   "kept_by_near_miss": 22,
-   "one_near_miss_eliminated": 4194304,
-   "share_of_space": 0.5
-  },
-  "ratio_one_near_miss_vs_whole_corpus": 524288,
-  "share_of_space_removed_by_whole_corpus": 9.5e-07,
-  "selector_result_on_this_corpus": "NO_INFORMATIVE_STATE with survivors_before 8388600",
-  "reading": "D_i is the DROPPED set; kept = n - |D_i|. A draft misread it as the kept set and reported a 4x advantage; the live counter refutes that and a test pins it.",
-  "reused_not_rebuilt": [
-   "canonical/runtime/applicability_v1.py -- count_survivors, unchanged",
-   "canonical/runtime/contrast_selection_v1.py -- the observational selector, read not modified",
-   "canonical/runtime/certified_reached_escape_state_constructor_v2.py -- the realizability gate, named not claimed",
-   "A_FAILURE_IS_WORTH_TWO_TO_THE_KEYS_KEPT_20261116_V1.md",
-   "THE_LEARNER_DECIDES_PAST_THE_ENUMERATION_WALL_20261116_V1.md"
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+  "progress_evidence_paths": [
+   "canonical/tests/test_observational_pool_is_empty_by_construction_v1.py"
   ],
-  "realizability_gate_status": "NOT_MEASURED_HERE"
+  "route_class": "COMPOSE"
  },
+ "benchmark_or_family_rank_authority": false,
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The selector is exact and still returns zero on real evidence. contrast_selection_v1 is deliberately observational -- its pool is only states already observed, and it never invents a world -- and on the tree's real corpus (|A|=23, D_i=[20,20], survivors 2^23-8) it returned NO_INFORMATIVE_STATE with 8,388,600 survivors. Reading count_survivors shows why: an exclusion row D_i is the set of facts a failure DROPPED, so the real failures kept only 3 of 23 and each was worth 2^3=8 hypotheses. The whole real corpus was worth 8 of 8,388,608. A near miss keeping 22 is worth 2^22=4,194,304, i.e. 524,288x the entire corpus, for one interaction. So the bottleneck is not ranking: selecting optimally inside a pool of dramatic failures is worth exactly zero, and better ranking of an empty pool cannot help. The capability that is missing is CONSTRUCTION of a reachable near miss -- take a success, remove one fact it required -- and whether such an intervention is admissible is governed by certified_reached_escape_state_constructor_v2, not by this arithmetic.",
+ "canonical_base_commit": "5936d937c5eff25d3a941cafd49261811164b8eb",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "The selector is exact and still returns zero on real evidence. contrast_selection_v1 is deliberately observational -- its pool is only states already observed, and it never invents a world -- and on the tree's real corpus (|A|=23, D_i=[20,20], survivors 2^23-8) it returned NO_INFORMATIVE_STATE with 8,388,600 survivors. Reading count_survivors shows why: an exclusion row D_i is the set of facts a failure DROPPED, so the real failures kept only 3 of 23 and each was worth 2^3=8 hypotheses. The whole real corpus was worth 8 of 8,388,608. A near miss keeping 22 is worth 2^22=4,194,304, i.e. 524,288x the entire corpus, for one interaction. So the bottleneck is not ranking: selecting optimally inside a pool of dramatic failures is worth exactly zero, and better ranking of an empty pool cannot help. The capability that is missing is CONSTRUCTION of a reachable near miss -- take a success, remove one fact it required -- and whether such an intervention is admissible is governed by certified_reached_escape_state_constructor_v2, not by this arithmetic.",
+ "date": "2026-11-16",
+ "expected_parent_change": "Evidence selection stops being treated as a ranking problem and becomes a population problem: a contrast's value is 2^k where k is what it KEEPS, so a pool of dramatic failures is worth nearly nothing no matter how well it is ranked, and the remaining capability is to construct a near miss one fact away from a success rather than to rank observed states harder.",
+ "expected_parent_frontier_change": "Evidence selection stops being treated as a ranking problem and becomes a population problem: a contrast's value is 2^k where k is what it KEEPS, so a pool of dramatic failures is worth nearly nothing no matter how well it is ranked, and the remaining capability is to construct a near miss one fact away from a success rather than to rank observed states harder.",
+ "explicit_user_authorization": "Owner directive on 2026-11-04: You sure this is the smartest approach? Think from the deepest layer, from first principles of everything. We want a very smart, most advanced, sentient-like creature. We don't want a static code. Then: go. $0 spend, K3=0, zero protected or SHA-pinned paths touched.",
+ "falsification_condition": "A corpus in which the observed states already contain a contrast worth a substantial share of the space would refute the claim that the pool is badly populated rather than badly ranked; so would a case where count_survivors treats D_i as the KEPT set, which the live counter shows it does not (|D_i|=20 over |A|=23 returns 2^23-8).",
+ "governance_change": false,
+ "highest_leverage_now": true,
+ "incremental_spend_usd": 0,
  "load_bearing_primary": {
-  "interpretation": "DISCHARGES_NOTHING_AND_CLAIMS_NO_CAPABILITY__EXPECTED_DISCHARGE_IS_ASSERTED_ZERO_EXPLICITLY__THE_POSITIVE_UNLOCK_FIGURE_IS_THE_HOUSE_CONVENTION_FOR_A_CONSTRUCTIVE_GAP_BINDING_AND_IS_NOT_A_MEASURED_BENCHMARK_MOVEMENT__CLOSES_DOCUMENTED_COUNTEREXAMPLES_ACROSS_SYNTHESIS_VERIFICATION_GLOBAL_EXTRAPOLATION_AND_AUTONOMOUS_CREATURE_CONTINUITY",
-  "open_obligation_ids": [],
-  "scope_complete_discharge": false,
-  "success_probability_lcb": "1",
-  "wall_clock_cost_ub": 1,
-  "expected_obligation_discharge_lcb": "0",
-  "expected_obligation_unlock_lcb": "1",
   "constructive_gap_for_open_obligation_ids": [
    "AUTOMATIONBENCH_GE_40",
    "CHARTOGRAPHY_TOOLS_GE_89",
@@ -108,8 +63,46 @@
    "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
    "PROWORK_GDPVAL_GE_1846",
    "TB_SCIENCE_GE_58_7"
-  ]
+  ],
+  "expected_obligation_discharge_lcb": "0",
+  "expected_obligation_unlock_lcb": "1",
+  "interpretation": "DISCHARGES_NOTHING_AND_CLAIMS_NO_CAPABILITY__EXPECTED_DISCHARGE_IS_ASSERTED_ZERO_EXPLICITLY__THE_POSITIVE_UNLOCK_FIGURE_IS_THE_HOUSE_CONVENTION_FOR_A_CONSTRUCTIVE_GAP_BINDING_AND_IS_NOT_A_MEASURED_BENCHMARK_MOVEMENT__CLOSES_DOCUMENTED_COUNTEREXAMPLES_ACROSS_SYNTHESIS_VERIFICATION_GLOBAL_EXTRAPOLATION_AND_AUTONOMOUS_CREATURE_CONTINUITY",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "1",
+  "wall_clock_cost_ub": 1
  },
+ "measured_effect": {
+  "interventional": {
+   "kept_by_near_miss": 22,
+   "one_near_miss_eliminated": 4194304,
+   "share_of_space": 0.5
+  },
+  "ratio_one_near_miss_vs_whole_corpus": 524288,
+  "reading": "D_i is the DROPPED set; kept = n - |D_i|. A draft misread it as the kept set and reported a 4x advantage; the live counter refutes that and a test pins it.",
+  "real_corpus": {
+   "A": 23,
+   "D_sizes": [
+    20,
+    20
+   ],
+   "kept_by_each_failure": 3,
+   "survivors": 8388600,
+   "whole_corpus_eliminated": 8
+  },
+  "realizability_gate_status": "NOT_MEASURED_HERE",
+  "reused_not_rebuilt": [
+   "canonical/runtime/applicability_v1.py -- count_survivors, unchanged",
+   "canonical/runtime/contrast_selection_v1.py -- the observational selector, read not modified",
+   "canonical/runtime/certified_reached_escape_state_constructor_v2.py -- the realizability gate, named not claimed",
+   "A_FAILURE_IS_WORTH_TWO_TO_THE_KEYS_KEPT_20261116_V1.md",
+   "THE_LEARNER_DECIDES_PAST_THE_ENUMERATION_WALL_20261116_V1.md"
+  ],
+  "selector_result_on_this_corpus": "NO_INFORMATIVE_STATE with survivors_before 8388600",
+  "share_of_space_removed_by_whole_corpus": 9.5e-07
+ },
+ "next_step": "UNIFY_THE_REMAINING_DISCONNECTED_LEARNING_STORES_ONTO_ONE_LIVE_COGNITIVE_BUS_UNDER_RING0_SELF_ARCHITECT",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
  "prior_work_reused": [
   "canonical/runtime/swe_observational_program_synthesizer_v1.py",
   "canonical/runtime/g0_finite_typed_rule_synthesis.py",
@@ -122,12 +115,8 @@
   "execution_guard/goal_target_binding_v1.py"
  ],
  "recursive_obs": {
-  "canonical_base_commit": "c6c21a2c0eb205561ac81b28c5de88cf71cdb56a",
+  "canonical_base_commit": "5936d937c5eff25d3a941cafd49261811164b8eb",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
-  "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
-  "real_outcome": "SEVEN_STRATUM_ZERO_TEMPLATE_ORGAN_ALGEBRA_REGEX_FREE_EVOI_EXTRAPOLATION_SYNTHESIZED_VERIFIERS_AND_INSTRUMENTAL_POLICY",
-  "selected_route": "PRICE_THE_OBSERVATIONAL_POOL_AGAINST_THE_REAL_CORPUS_AND_SEPARATE_RANKING_FROM_POPULATION__TO_SHOW_THAT_SELECTION_IS_SATURATED_AND_CONSTRUCTION_IS_THE_OPEN_CAPABILITY",
-  "selected_surviving_route": "PRICE_THE_OBSERVATIONAL_POOL_AGAINST_THE_REAL_CORPUS_AND_SEPARATE_RANKING_FROM_POPULATION__TO_SHOW_THAT_SELECTION_IS_SATURATED_AND_CONSTRUCTION_IS_THE_OPEN_CAPABILITY",
   "deleted_or_bypassed_paths": [
    "FIVE_FROZEN_PERCEPTOR_CODEC_STRINGS",
    "THIRTY_FIVE_HARDCODED_EXPRESSION_TEMPLATES",
@@ -135,224 +124,16 @@
    "NINETEEN_INT_META_SYNTHESIZER_LATTICE",
    "ENGLISH_KEYWORD_GLOBAL_QUANTIFIER_REGEX"
   ],
-  "stop_condition": "The observational pool priced against the tree's own real corpus with the tree's own exact counter, the interventional pool priced on the same arithmetic, the D_i-is-dropped reading pinned by a test, and no new selector, learner or store built.",
   "expected_parent_level_state_change": "Evidence selection stops being treated as a ranking problem and becomes a population problem: a contrast's value is 2^k where k is what it KEEPS, so a pool of dramatic failures is worth nearly nothing no matter how well it is ranked, and the remaining capability is to construct a near miss one fact away from a success rather than to rank observed states harder.",
-  "why_selected_route_is_fastest_sufficient": "TWO_SENSITIVE_PATHS_COMPOSE_IN_TREE_SYNTHESIS_AND_EXTRAPOLATION_ENGINES_INTO_A_LIVE_ORGAN_ALGEBRA_WITHOUT_TOUCHING_PROTECTED_OR_SHA_PINNED_GATES",
   "iteration_limit": 4,
-  "routes_considered": [
-   "SEVEN_STRATUM_ZERO_TEMPLATE_ORGAN_ALGEBRA_PLUS_EVOI_AND_INSTRUMENTAL_POLICY",
-   "KEEP_FIVE_CODEC_MENU_AND_KEYWORD_REGEX__REJECTED_STILL_STATIC_CODE",
-   "REBUILD_SYNTHESIS_FROM_SCRATCH_IGNORING_IN_TREE_ENGINES__REJECTED_DUPLICATES_HIDDEN_SOLUTIONS"
-  ],
-  "route_frontier": {
-   "discovery_required": true,
-   "not_applicable_reason": "GOVERNANCE_GUARD_FALSIFICATION_AND_INTERNAL_META_CIRCULAR_COMPOSITION_OVER_IN_TREE_ORGANS_WITH_ZERO_EXTERNAL_CAPABILITY_CLAIM",
-   "challenger_routes": [
-    {
-     "route": "RANK_HARDER_OVER_THE_SAME_OBSERVED_POOL",
-     "resolution": "DISQUALIFIED",
-     "comparison": {
-      "CORRECTNESS": "a correct ranking of a pool that contains no discriminator still yields no discriminator",
-      "CAPABILITY_STRENGTH": "zero: the selector already returns NO_INFORMATIVE_STATE on the real corpus",
-      "WALL_CLOCK": "one exact count per state, already spent",
-      "INCREMENTAL_COST": "zero to rank, but every interaction is wasted at 2^3",
-      "RELIABILITY": "deterministic and exact; exactness is not the problem",
-      "VERIFIABILITY": "guaranteed_elimination already reports the answer, which is 0"
-     },
-     "evidence": [
-      "whole real corpus eliminated 8 of 8,388,608",
-      "selector returned NO_INFORMATIVE_STATE with survivors_before 8,388,600",
-      "each real failure kept 3 of 23, so each was worth 2^3"
-     ],
-     "qualification_evidence": [
-      "canonical/verification/OBSERVATIONAL_POOL_IS_EMPTY_BY_CONSTRUCTION_20261116_V1.json"
-     ],
-     "qualification_evidence_classes": [
-      "DIRECT_PROBE"
-     ]
-    },
-    {
-     "route": "INVENT_A_DISCRIMINATING_STATE_WITHOUT_A_REACHABILITY_GATE",
-     "resolution": "DISQUALIFIED",
-     "comparison": {
-      "CORRECTNESS": "high in principle, zero if the state cannot be realized",
-      "CAPABILITY_STRENGTH": "2^22 per query, the largest single lever measured in this tree",
-      "WALL_CLOCK": "one interaction",
-      "INCREMENTAL_COST": "unknown until reachability is measured",
-      "RELIABILITY": "an unrealizable state is a guess that teaches a false lesson",
-      "VERIFIABILITY": "only a separately supplied verifier can certify the state was reached"
-     },
-     "evidence": [
-      "a near miss keeping 22 eliminates 4,194,304 = half the space",
-      "certified_reached_escape_state_constructor_v2 grants no terminal authority and binds rows to a verifier"
-     ],
-     "qualification_evidence": [
-      "canonical/runtime/certified_reached_escape_state_constructor_v2.py"
-     ],
-     "qualification_evidence_classes": [
-      "DIRECT_PROBE"
-     ]
-    },
-    {
-     "route": "CONSTRUCT_A_REACHABLE_NEAR_MISS_AND_CERTIFY_IT",
-     "resolution": "SELECTED",
-     "comparison": {
-      "CORRECTNESS": "the only route whose evidence is a state the system actually reached",
-      "CAPABILITY_STRENGTH": "2^k with k near n, versus 2^3 observed",
-      "WALL_CLOCK": "one interaction per contrast",
-      "INCREMENTAL_COST": "the constructor, which already exists",
-      "RELIABILITY": "gated by the constructor rather than by hope",
-      "VERIFIABILITY": "the constructor's own receipt"
-     },
-     "evidence": [
-      "524,288x the entire real corpus for one near miss",
-      "step 1 (make the near miss DISTINCT) is free and was never done: the corpus's two failures dropped the same facts, so the second bought 7 not 8"
-     ],
-     "qualification_evidence": [
-      "canonical/verification/OBSERVATIONAL_POOL_IS_EMPTY_BY_CONSTRUCTION_20261116_V1.json"
-     ],
-     "qualification_evidence_classes": [
-      "DIRECT_PROBE"
-     ]
-    }
-   ],
-   "checked_at_utc": "2026-11-17T02:27:42Z",
-   "max_age_hours": 24,
-   "comparison_dimensions": [
-    "CORRECTNESS",
-    "CAPABILITY_STRENGTH",
-    "WALL_CLOCK",
-    "INCREMENTAL_COST",
-    "RELIABILITY",
-    "VERIFIABILITY"
-   ],
-   "refresh_triggers": [
-    "BEFORE_EXPENSIVE_EXECUTION",
-    "AFTER_MATERIAL_ROUTE_FAILURE",
-    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
-    "BEFORE_SCARCE_GATE_SPEND"
-   ],
-   "source_classes_checked": [
-    "BRAIN_INHERITED",
-    "OFFICIAL_PRIMARY",
-    "CODE_OR_PACKAGE_REGISTRY",
-    "BROAD_WEB_OR_COMMUNITY"
-   ],
-   "query_families": [
-    {
-     "intent": "CAPABILITY_VECTOR",
-     "query": "active causal learning interventional query selection observational equivalence agent 2026"
-    },
-    {
-     "intent": "IMPLEMENTATION_FORM",
-     "query": "certifying interventional agreement among observationally equivalent causal models"
-    },
-    {
-     "intent": "SUPPLIER_OR_PRODUCT",
-     "query": "active learning agent chooses interventions versus random data collection causal reasoning"
-    },
-    {
-     "intent": "RECENCY_OR_NEW_RELEASE",
-     "query": "near-miss counterfactual query selection program repair agent 2026"
-    }
-   ],
-   "negative_search_summary": "Two routes were refused on this tree's own measurement, not on taste. (1) RANK HARDER over the observed pool: contrast_selection_v1 is already exact and returned NO_INFORMATIVE_STATE with 8,388,600 survivors on the tree's real corpus, so the failure is population, not ordering. (2) INVENT A STATE FREELY: contrast_selection_v1 refuses to leave the observed pool for a measured reason (queries outside the generator's support), and certified_reached_escape_state_constructor_v2 exists precisely to bind any certified row to a separately supplied verifier; a state that cannot be reached is the wild guess the selector is right to refuse. The web adds the mechanism, not a dominator: observationally equivalent models need not agree under intervention because interventions create inputs that never occur in observational data (arXiv 2609.32247), and active interventional agents beat active observational ones only where a confounder is present (arXiv 1901.08162). Neither supplies a reachable-state constructor for THIS tree.",
-   "incumbent_route": "RANK_OBSERVED_STATES_BY_2_TO_THE_KEPT_AND_SELECT_THE_BEST_OBSERVED_CONTRAST",
-   "selected_route": "PRICE_THE_OBSERVATIONAL_POOL_AGAINST_THE_REAL_CORPUS_AND_SEPARATE_RANKING_FROM_POPULATION__TO_SHOW_THAT_SELECTION_IS_SATURATED_AND_CONSTRUCTION_IS_THE_OPEN_CAPABILITY",
-   "unresolved_plausible_dominators": [],
-   "source_evidence": {
-    "BRAIN_INHERITED": [
-     "canonical/runtime/contrast_selection_v1.py",
-     "canonical/runtime/applicability_v1.py",
-     "canonical/runtime/certified_reached_escape_state_constructor_v2.py",
-     "canonical/verification/A_FAILURE_IS_WORTH_TWO_TO_THE_KEYS_KEPT_20261116_V1.json"
-    ],
-    "OFFICIAL_PRIMARY": [
-     "https://arxiv.org/html/2609.32247",
-     "https://arxiv.org/html/1901.08162v1",
-     "https://arxiv.org/html/2506.23068v1"
-    ],
-    "CODE_OR_PACKAGE_REGISTRY": [
-     "https://pypi.org/project/pytest"
-    ],
-    "BROAD_WEB_OR_COMMUNITY": [
-     "https://github.com/greenpau/Machine-Learning-and-Artificial-Intelligence/blob/master/Causal%20Inference.md"
-    ]
-   },
-   "selected_route_preflight": {
-    "selected_route": "PRICE_THE_OBSERVATIONAL_POOL_AGAINST_THE_REAL_CORPUS_AND_SEPARATE_RANKING_FROM_POPULATION__TO_SHOW_THAT_SELECTION_IS_SATURATED_AND_CONSTRUCTION_IS_THE_OPEN_CAPABILITY",
-    "status": "READY",
-    "checked_at_utc": "2026-11-17T02:27:42Z",
-    "max_age_hours": 2,
-    "all_required_dependencies_ready": true,
-    "execution_dependencies_complete": true,
-    "failed_dependencies": [],
-    "execution_dependencies": [
-     {
-      "dependency": "local Python 3 runtime and the repository's own exact counter",
-      "kind": "LOCAL_RUNTIME",
-      "required": true,
-      "scope": "GLOBAL",
-      "volatility": "STATIC",
-      "status": "READY",
-      "evidence_classes": [
-       "DIRECT_PROBE"
-      ],
-      "evidence_scope": "GLOBAL",
-      "evidence": [
-       "count_survivors returned 8,388,600 for D_i=[20,20] over |A|=23, matching the merged receipt"
-      ]
-     },
-     {
-      "dependency": "the merged receipt this prices, read rather than rebuilt",
-      "kind": "CODE_ARTIFACT",
-      "required": true,
-      "scope": "GLOBAL",
-      "volatility": "STATIC",
-      "status": "READY",
-      "evidence_classes": [
-       "DIRECT_PROBE"
-      ],
-      "evidence_scope": "GLOBAL",
-      "evidence": [
-       "A_FAILURE_IS_WORTH_TWO_TO_THE_KEYS_KEPT_20261116_V1.json and the enumeration-wall receipt"
-      ]
-     },
-     {
-      "dependency": "the realizability gate named in the receipt, read not modified",
-      "kind": "CODE_ARTIFACT",
-      "required": true,
-      "scope": "GLOBAL",
-      "volatility": "STATIC",
-      "status": "READY",
-      "evidence_classes": [
-       "DIRECT_PROBE"
-      ],
-      "evidence_scope": "GLOBAL",
-      "evidence": [
-       "certified_reached_escape_state_constructor_v2.py documents the verifier binding and grants no terminal authority"
-      ]
-     }
-    ]
-   }
-  },
-  "obs_goal": {
-   "real_outcome": "NON_STATIC_COMPOSITIONAL_ORGAN_ALGEBRA_AND_DECISION_THEORETIC_OPEN_WORLD_POLICY",
-   "proxy_goals_deleted": [
-    "SELECTING_FROM_A_FROZEN_CODEC_OR_EXPRESSION_MENU",
-    "DETECTING_GLOBAL_OPTIMALITY_VIA_ENGLISH_KEYWORDS",
-    "STARVING_ZERO_IMMEDIATE_REWARD_INSTRUMENTAL_TOOLS"
-   ],
-   "surviving_necessity": "INDUCE_PARSE_SERIALIZE_ASTs_SOLVE_ALGEBRAIC_AND_PIECEWISE_PROGRAMS_COMPOSE_ADMITTED_ORGANS_AND_BACKUP_INSTRUMENTAL_Q"
-  },
   "obs_blocker": {
-   "intrinsic_or_path_specific": "INTRINSIC__FIXED_LEVEL_1_CODE_AND_ZERO_UNSEEN_MASS_ASSUMPTION_BOUND_ALL_DOWNSTREAM_LEARNING",
-   "surviving_causal_blocker": "FROZEN_MENUS_AND_KEYWORD_GATES_PREVENTED_P_t_FROM_COMPOUNDING_AND_STARVED_UNLOCKING_ACTIONS",
    "delete_bypass_substitute_options": [
     "DELETE_FIXED_MENU_ASSUMPTION_BY_STORING_META_SYNTHESIZERS_AND_PERCEPTORS_AS_ORGANS",
     "BYPASS_LOCAL_TUNNEL_VISION_VIA_PITMAN_YOR_UNSEEN_TAIL_GATE",
     "SUBSTITUTE_TASK_FEATURE_HAZARD_AND_BELLMAN_HORIZON_FOR_COUNTER_THERMOSTATS"
-   ]
+   ],
+   "intrinsic_or_path_specific": "INTRINSIC__FIXED_LEVEL_1_CODE_AND_ZERO_UNSEEN_MASS_ASSUMPTION_BOUND_ALL_DOWNSTREAM_LEARNING",
+   "surviving_causal_blocker": "FROZEN_MENUS_AND_KEYWORD_GATES_PREVENTED_P_t_FROM_COMPOUNDING_AND_STARVED_UNLOCKING_ACTIONS"
   },
   "obs_capability": {
    "capability_work_deleted": [
@@ -370,6 +151,15 @@
     "NONE_NEEDED__PURE_STDLIB_FIRST_PRINCIPLES_CLOSURE_OVER_COMMITTED_REPOSITORY_ORGANS"
    ],
    "surviving_gap": "INDEPENDENT_PERSONNEL_TWO_SPRITE_CERTIFICATION_FOR_BOUND_REPAIR_REMAINS_OUTSIDE_SANDBOX_PRODUCER_AUTHORITY"
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "SELECTING_FROM_A_FROZEN_CODEC_OR_EXPRESSION_MENU",
+    "DETECTING_GLOBAL_OPTIMALITY_VIA_ENGLISH_KEYWORDS",
+    "STARVING_ZERO_IMMEDIATE_REWARD_INSTRUMENTAL_TOOLS"
+   ],
+   "real_outcome": "NON_STATIC_COMPOSITIONAL_ORGAN_ALGEBRA_AND_DECISION_THEORETIC_OPEN_WORLD_POLICY",
+   "surviving_necessity": "INDUCE_PARSE_SERIALIZE_ASTs_SOLVE_ALGEBRAIC_AND_PIECEWISE_PROGRAMS_COMPOSE_ADMITTED_ORGANS_AND_BACKUP_INSTRUMENTAL_Q"
   },
   "obs_inherited_system": {
    "adjacent_capabilities_absorbed": [
@@ -412,29 +202,238 @@
    "existing_oracle_considered": true,
    "synthetic_verification_necessity": "TWENTY_PAIRED_POSITIVE_AND_NEGATIVE_CONTROL_TESTS_UNDER_TRUE_CAPABILITY_TEST_LAW_V1__ZERO_CAPABILITY_OR_TERMINAL_CREDIT_CLAIMED"
   },
-  "selected_surviving_route_class": "SYNTHESIZE_NEW_PRIMITIVE"
+  "real_outcome": "SEVEN_STRATUM_ZERO_TEMPLATE_ORGAN_ALGEBRA_REGEX_FREE_EVOI_EXTRAPOLATION_SYNTHESIZED_VERIFIERS_AND_INSTRUMENTAL_POLICY",
+  "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "route_frontier": {
+   "challenger_routes": [
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "zero: the selector already returns NO_INFORMATIVE_STATE on the real corpus",
+      "CORRECTNESS": "a correct ranking of a pool that contains no discriminator still yields no discriminator",
+      "INCREMENTAL_COST": "zero to rank, but every interaction is wasted at 2^3",
+      "RELIABILITY": "deterministic and exact; exactness is not the problem",
+      "VERIFIABILITY": "guaranteed_elimination already reports the answer, which is 0",
+      "WALL_CLOCK": "one exact count per state, already spent"
+     },
+     "evidence": [
+      "whole real corpus eliminated 8 of 8,388,608",
+      "selector returned NO_INFORMATIVE_STATE with survivors_before 8,388,600",
+      "each real failure kept 3 of 23, so each was worth 2^3"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/OBSERVATIONAL_POOL_IS_EMPTY_BY_CONSTRUCTION_20261116_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "RANK_HARDER_OVER_THE_SAME_OBSERVED_POOL"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "2^22 per query, the largest single lever measured in this tree",
+      "CORRECTNESS": "high in principle, zero if the state cannot be realized",
+      "INCREMENTAL_COST": "unknown until reachability is measured",
+      "RELIABILITY": "an unrealizable state is a guess that teaches a false lesson",
+      "VERIFIABILITY": "only a separately supplied verifier can certify the state was reached",
+      "WALL_CLOCK": "one interaction"
+     },
+     "evidence": [
+      "a near miss keeping 22 eliminates 4,194,304 = half the space",
+      "certified_reached_escape_state_constructor_v2 grants no terminal authority and binds rows to a verifier"
+     ],
+     "qualification_evidence": [
+      "canonical/runtime/certified_reached_escape_state_constructor_v2.py"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "INVENT_A_DISCRIMINATING_STATE_WITHOUT_A_REACHABILITY_GATE"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "2^k with k near n, versus 2^3 observed",
+      "CORRECTNESS": "the only route whose evidence is a state the system actually reached",
+      "INCREMENTAL_COST": "the constructor, which already exists",
+      "RELIABILITY": "gated by the constructor rather than by hope",
+      "VERIFIABILITY": "the constructor's own receipt",
+      "WALL_CLOCK": "one interaction per contrast"
+     },
+     "evidence": [
+      "524,288x the entire real corpus for one near miss",
+      "step 1 (make the near miss DISTINCT) is free and was never done: the corpus's two failures dropped the same facts, so the second bought 7 not 8"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/OBSERVATIONAL_POOL_IS_EMPTY_BY_CONSTRUCTION_20261116_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "SELECTED",
+     "route": "CONSTRUCT_A_REACHABLE_NEAR_MISS_AND_CERTIFY_IT"
+    }
+   ],
+   "checked_at_utc": "2026-11-17T02:27:42Z",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "RANK_OBSERVED_STATES_BY_2_TO_THE_KEPT_AND_SELECT_THE_BEST_OBSERVED_CONTRAST",
+   "max_age_hours": 24,
+   "negative_search_summary": "Two routes were refused on this tree's own measurement, not on taste. (1) RANK HARDER over the observed pool: contrast_selection_v1 is already exact and returned NO_INFORMATIVE_STATE with 8,388,600 survivors on the tree's real corpus, so the failure is population, not ordering. (2) INVENT A STATE FREELY: contrast_selection_v1 refuses to leave the observed pool for a measured reason (queries outside the generator's support), and certified_reached_escape_state_constructor_v2 exists precisely to bind any certified row to a separately supplied verifier; a state that cannot be reached is the wild guess the selector is right to refuse. The web adds the mechanism, not a dominator: observationally equivalent models need not agree under intervention because interventions create inputs that never occur in observational data (arXiv 2609.32247), and active interventional agents beat active observational ones only where a confounder is present (arXiv 1901.08162). Neither supplies a reachable-state constructor for THIS tree.",
+   "not_applicable_reason": "GOVERNANCE_GUARD_FALSIFICATION_AND_INTERNAL_META_CIRCULAR_COMPOSITION_OVER_IN_TREE_ORGANS_WITH_ZERO_EXTERNAL_CAPABILITY_CLAIM",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "active causal learning interventional query selection observational equivalence agent 2026"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "certifying interventional agreement among observationally equivalent causal models"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "active learning agent chooses interventions versus random data collection causal reasoning"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "near-miss counterfactual query selection program repair agent 2026"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "selected_route": "PRICE_THE_OBSERVATIONAL_POOL_AGAINST_THE_REAL_CORPUS_AND_SEPARATE_RANKING_FROM_POPULATION__TO_SHOW_THAT_SELECTION_IS_SATURATED_AND_CONSTRUCTION_IS_THE_OPEN_CAPABILITY",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-11-17T02:27:42Z",
+    "execution_dependencies": [
+     {
+      "dependency": "local Python 3 runtime and the repository's own exact counter",
+      "evidence": [
+       "count_survivors returned 8,388,600 for D_i=[20,20] over |A|=23, matching the merged receipt"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "the merged receipt this prices, read rather than rebuilt",
+      "evidence": [
+       "A_FAILURE_IS_WORTH_TWO_TO_THE_KEYS_KEPT_20261116_V1.json and the enumeration-wall receipt"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "the realizability gate named in the receipt, read not modified",
+      "evidence": [
+       "certified_reached_escape_state_constructor_v2.py documents the verifier binding and grants no terminal authority"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "max_age_hours": 2,
+    "selected_route": "PRICE_THE_OBSERVATIONAL_POOL_AGAINST_THE_REAL_CORPUS_AND_SEPARATE_RANKING_FROM_POPULATION__TO_SHOW_THAT_SELECTION_IS_SATURATED_AND_CONSTRUCTION_IS_THE_OPEN_CAPABILITY",
+    "status": "READY"
+   },
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/runtime/contrast_selection_v1.py",
+     "canonical/runtime/applicability_v1.py",
+     "canonical/runtime/certified_reached_escape_state_constructor_v2.py",
+     "canonical/verification/A_FAILURE_IS_WORTH_TWO_TO_THE_KEYS_KEPT_20261116_V1.json"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "https://github.com/greenpau/Machine-Learning-and-Artificial-Intelligence/blob/master/Causal%20Inference.md"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "https://pypi.org/project/pytest"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "https://arxiv.org/html/2609.32247",
+     "https://arxiv.org/html/1901.08162v1",
+     "https://arxiv.org/html/2506.23068v1"
+    ]
+   },
+   "unresolved_plausible_dominators": []
+  },
+  "routes_considered": [
+   "SEVEN_STRATUM_ZERO_TEMPLATE_ORGAN_ALGEBRA_PLUS_EVOI_AND_INSTRUMENTAL_POLICY",
+   "KEEP_FIVE_CODEC_MENU_AND_KEYWORD_REGEX__REJECTED_STILL_STATIC_CODE",
+   "REBUILD_SYNTHESIS_FROM_SCRATCH_IGNORING_IN_TREE_ENGINES__REJECTED_DUPLICATES_HIDDEN_SOLUTIONS"
+  ],
+  "selected_route": "PRICE_THE_OBSERVATIONAL_POOL_AGAINST_THE_REAL_CORPUS_AND_SEPARATE_RANKING_FROM_POPULATION__TO_SHOW_THAT_SELECTION_IS_SATURATED_AND_CONSTRUCTION_IS_THE_OPEN_CAPABILITY",
+  "selected_surviving_route": "PRICE_THE_OBSERVATIONAL_POOL_AGAINST_THE_REAL_CORPUS_AND_SEPARATE_RANKING_FROM_POPULATION__TO_SHOW_THAT_SELECTION_IS_SATURATED_AND_CONSTRUCTION_IS_THE_OPEN_CAPABILITY",
+  "selected_surviving_route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+  "stop_condition": "The observational pool priced against the tree's own real corpus with the tree's own exact counter, the interventional pool priced on the same arithmetic, the D_i-is-dropped reading pinned by a test, and no new selector, learner or store built.",
+  "why_selected_route_is_fastest_sufficient": "TWO_SENSITIVE_PATHS_COMPOSE_IN_TREE_SYNTHESIS_AND_EXTRAPOLATION_ENGINES_INTO_A_LIVE_ORGAN_ALGEBRA_WITHOUT_TOUCHING_PROTECTED_OR_SHA_PINNED_GATES"
  },
+ "route_id": "THE_POOL_IS_BADLY_POPULATED_NOT_BADLY_RANKED_20261116_V1",
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "selected_route": "PRICE_THE_OBSERVATIONAL_POOL_AGAINST_THE_REAL_CORPUS_AND_SEPARATE_RANKING_FROM_POPULATION__TO_SHOW_THAT_SELECTION_IS_SATURATED_AND_CONSTRUCTION_IS_THE_OPEN_CAPABILITY",
+ "stop_condition": "The observational pool priced against the tree's own real corpus with the tree's own exact counter, the interventional pool priced on the same arithmetic, the D_i-is-dropped reading pinned by a test, and no new selector, learner or store built.",
+ "terminal_credit_delta": 0,
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "user_authorized_governance_change": false,
  "v22_prewrite_admission": {
-  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
   "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
   "checked_at_utc": "2026-11-04T00:00:00Z",
-  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
-  "mode": "ACTIVE_INTERFACE",
-  "fresh_reality_authority": false,
-  "proof_state_reachability": "NO_PROOF_STATE_IS_REACHED__THIS_ACTION_CLAIMS_ZERO_CAPABILITY_AND_ZERO_TERMINAL_CREDIT_AND_FALSIFIES_DISGUISED_STATIC_MENUS_AND_KEYWORD_GATES",
-  "terminal_credit_delta": 0,
   "currentness": {
    "accepted_families": 5,
+   "meta_envelope_open_count": 8,
    "open_families": 14,
    "proved_atomic": 14,
-   "unresolved_atomic": 22,
    "root1_positive_gap_count": 0,
    "root2_touching_count": 17,
    "root3_touching_count": 8,
-   "meta_envelope_open_count": 8,
+   "terminal": false,
    "total_open_truth_obligations": 30,
-   "terminal": false
+   "unresolved_atomic": 22
   },
+  "fresh_reality_authority": false,
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "NO_PROOF_STATE_IS_REACHED__THIS_ACTION_CLAIMS_ZERO_CAPABILITY_AND_ZERO_TERMINAL_CREDIT_AND_FALSIFIES_DISGUISED_STATIC_MENUS_AND_KEYWORD_GATES",
   "target_truth_obligations": [
    "AUTOMATIONBENCH_GE_40",
    "CHARTOGRAPHY_TOOLS_GE_89",
@@ -449,19 +448,20 @@
    "PROWORK_GDPVAL_GE_1846",
    "TB_SCIENCE_GE_58_7"
   ],
+  "terminal_credit_delta": 0,
   "tournament": {
-   "proposal_id": "ZERO_TEMPLATE_SEVEN_STRATUM_ORGAN_ALGEBRA",
+   "counterexample_receipts": [
+    {
+     "git_blob_sha": "020d88c9f1a40236c61039f62966c2031f07883c",
+     "path": "canonical/tests/test_observational_pool_is_empty_by_construction_v1.py"
+    }
+   ],
    "decisive_question": "DOES_THE_CREATURE_INDUCE_UNSEEN_GRAMMARS_COMPOSE_ORGANS_SYNTHESIZE_NON_SUM_INVARIANTS_EXPAND_WITHOUT_ENGLISH_KEYWORDS_AND_CHOOSE_ZERO_REWARD_UNLOCKING_TOOLS",
    "falsifier_id": "UNSEEN_FORMAT_FAIL_OR_COPY_42_LOCK_IN_OR_KEYWORD_GATE_OR_MYOPIC_STARVATION_SUCCEEDS",
    "known_counterexamples_checked": true,
-   "counterexample_receipts": [
-    {
-     "path": "canonical/tests/test_observational_pool_is_empty_by_construction_v1.py",
-     "git_blob_sha": "020d88c9f1a40236c61039f62966c2031f07883c"
-    }
-   ],
-   "no_known_counterexample_reason": "PAIRED_POSITIVE_AND_NEGATIVE_CONTROLS_IN_test_meta_circular_global_sentient_creature_v1_COVER_THE_DELETED_MENUS_AND_THE_NEW_ALGEBRA"
+   "no_known_counterexample_reason": "PAIRED_POSITIVE_AND_NEGATIVE_CONTROLS_IN_test_meta_circular_global_sentient_creature_v1_COVER_THE_DELETED_MENUS_AND_THE_NEW_ALGEBRA",
+   "proposal_id": "ZERO_TEMPLATE_SEVEN_STRATUM_ORGAN_ALGEBRA"
   }
  },
- "next_step": "UNIFY_THE_REMAINING_DISCONNECTED_LEARNING_STORES_ONTO_ONE_LIVE_COGNITIVE_BUS_UNDER_RING0_SELF_ARCHITECT"
+ "weakens_existing_guard": false
 }
