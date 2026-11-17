@@ -1,0 +1,268 @@
+{
+ "schema": "PROJECT_BRAIN_THE_INDEX_BUYS_COST_NOT_FEASIBILITY_V1",
+ "receipt_id": "THE_INDEX_BUYS_COST_NOT_FEASIBILITY_20261116_V1",
+ "date": "2026-11-16",
+ "generated_utc": "2026-11-17T02:41:59.434096Z",
+ "canonical_base_commit": "c6c21a2c0eb205561ac81b28c5de88cf71cdb56a",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "benchmark_or_family_rank_authority": null,
+ "capability_credit_delta": 0,
+ "terminal_credit_delta": 0,
+ "claim_under_test": "'Instant learning is solved, so give the model the smartest action once and it is solved forever, in any environment.' This round asked what the INDEX -- the thing that decides which lesson applies where, named as the single bottleneck by THE_BOTTLENECK_IS_THE_INDEX_NOT_THE_LEARNING_20261116_V1 -- is actually WORTH, once the search that produces its evidence is not starved.",
+ "decision": "MEASURED__THE_INDEX_BUYS_12_TO_18_PERCENT_OF_COST_AND_ZERO_OF_FEASIBILITY__THE_COST_IS_EXPLORING_NOT_CHOOSING",
+ "the_reordering_in_one_sentence": "The index decides WHICH SEARCH STRATEGY to use; at an adequate budget every strategy solves almost everything, so the index's whole value is 17.4% of act_calls and its value is zero for the 8 instances that cannot be solved at all -- while a perfect transition model would remove 99.58% of them, which is the object the tree names as its goal and explicitly does not contain ('this file does not contain a model' -- canonical/runtime/model_v1.py).",
+ "the_wrong_answer_this_replaces": "That the index is the single bottleneck because no granularity of its features is injective on the policy's distinction. The non-injectivity is REAL and reproduces exactly (see measured_effect.budget_sweep). What does not follow is that repairing it is the top of the order: the policy distinction it fails to resolve changes cost, not solvability.",
+ "measured_effect": {
+  "instrument": "canonical/tools/cross_kind_learning_to_learn_benchmark_v1.py via its own _solve_with, 20 kinds x 3 instances = 60 instances, node_budget swept",
+  "reads_only": true,
+  "new_module_added": false,
+  "budget_sweep": {
+   "note": "solved counts are 'at least one of the five policies solves it'",
+   "node_budget_40": {
+    "solved": 45,
+    "of": 60,
+    "train": 25,
+    "test": 20
+   },
+   "node_budget_80": {
+    "solved": 46,
+    "of": 60,
+    "train": 26,
+    "test": 20
+   },
+   "node_budget_160": {
+    "solved": 49,
+    "of": 60,
+    "train": 26,
+    "test": 23
+   },
+   "node_budget_320": {
+    "solved": 50,
+    "of": 60,
+    "train": 27,
+    "test": 23
+   },
+   "node_budget_640": {
+    "solved": 51,
+    "of": 60,
+    "train": 27,
+    "test": 24
+   },
+   "node_budget_1280": {
+    "solved": 52,
+    "of": 60,
+    "train": 27,
+    "test": 25
+   }
+  },
+  "the_8_that_never_solve": {
+   "count": 8,
+   "finding": "UNSATISFIABLE_OR_UNREACHABLE_WITHIN_THE_SEARCH_DEPTH_CAP__NOT_A_POLICY_FAILURE",
+   "evidence": "exhaustive reachable-state enumeration, no node budget, depth cap 14 = the search's own max_depth",
+   "rows": [
+    {
+     "kind": "ring_rotate",
+     "instance": 0,
+     "reachable_states": 3,
+     "max_discovery_depth": 1,
+     "goal": "ABSENT",
+     "proof": "COMPLETE__state_space_exhausted"
+    },
+    {
+     "kind": "ring_rotate",
+     "instance": 1,
+     "reachable_states": 3,
+     "max_discovery_depth": 1,
+     "goal": "ABSENT",
+     "proof": "COMPLETE__state_space_exhausted"
+    },
+    {
+     "kind": "ring_rotate",
+     "instance": 2,
+     "reachable_states": 3,
+     "max_discovery_depth": 1,
+     "goal": "ABSENT",
+     "proof": "COMPLETE__state_space_exhausted"
+    },
+    {
+     "kind": "queue_rotate",
+     "instance": 2,
+     "reachable_states": 13,
+     "max_discovery_depth": 3,
+     "goal": "ABSENT",
+     "proof": "COMPLETE__state_space_exhausted"
+    },
+    {
+     "kind": "two_jug_pour",
+     "instance": 0,
+     "reachable_states": 16,
+     "max_discovery_depth": 7,
+     "goal": "ABSENT",
+     "proof": "COMPLETE__state_space_exhausted"
+    },
+    {
+     "kind": "dial_lock",
+     "instance": 2,
+     "reachable_states": 27,
+     "max_discovery_depth": 6,
+     "goal": "ABSENT",
+     "proof": "COMPLETE__state_space_exhausted"
+    },
+    {
+     "kind": "stack_pushout",
+     "instance": 0,
+     "reachable_states": 32,
+     "max_discovery_depth": "<=14",
+     "goal": "ABSENT",
+     "proof": "EMPTY_WITHIN_SEARCH_DEPTH__STATE_SPACE_UNBOUNDED"
+    },
+    {
+     "kind": "stack_pushout",
+     "instance": 1,
+     "reachable_states": 110,
+     "max_discovery_depth": "<=14",
+     "goal": "ABSENT",
+     "proof": "EMPTY_WITHIN_SEARCH_DEPTH__STATE_SPACE_UNBOUNDED"
+    }
+   ],
+   "honest_limit": "stack_pushout's reachable space is unbounded (a probe run reached discovery depth 6251 and was stopped at a 50000-state cap), so for those two the claim is 'no goal state reachable within the depth the searcher is allowed', NOT 'unsatisfiable'. The other six are exhausted exactly.",
+   "what_this_is_not": "an instrument artifact: nothing about the policy set, the index, or learning enters these six rows"
+  },
+  "at_adequate_budget_the_choice_stops_discriminating": {
+   "node_budget_1280": {
+    "satisfiable_instances": 52,
+    "solved_by_5_of_5_policies": 42,
+    "solved_by_4_of_5_policies": 10,
+    "solved_by_exactly_1_policy": 0,
+    "solved_by_0_of_5_policies": 0,
+    "note": "every satisfiable instance is solved by at least 4 of the 5 policies; NO instance is solved by exactly one"
+   },
+   "node_budget_40_for_contrast": {
+    "solved_by_5_of_5": 31,
+    "solved_by_1_of_5": 4,
+    "solved_by_0_of_5": 7
+   },
+   "interpretation": "The '4/30 solved by exactly one policy' shape that motivated a policy index is a property of STARVED SEARCH, not of the problems. It disappears entirely at 1280 nodes."
+  },
+  "instance_sensitivity_survives_but_only_as_cost": {
+   "result": "13/18 kinds with >=2 solvable instances have a different CHEAPEST policy on a different instance",
+   "example": "binary_odometer: instance 0 needs 15860 act_calls under its cheapest policy, instance 1 needs 38",
+   "interpretation": "The tree's instance-sensitivity finding is CONFIRMED and is not a budget artifact. But it names the cheapest policy, not the only working one -- so it is a fact about cost, and it is the one real reason an index could pay."
+  },
+  "the_price_of_the_index": {
+   "currency": "act_calls at node_budget=1280 over 52 satisfiable instances",
+   "oracle_perfect_index": 39879,
+   "best_fixed_policy_repeat_last": 48274,
+   "train_best_policy_bfs_lex": 50752,
+   "oracle_saving_vs_best_fixed_pct": 17.4,
+   "oracle_saving_vs_train_best_pct": 21.4,
+   "heldout_split_only": {
+    "oracle": 32083,
+    "best_fixed": 36562,
+    "train_best": 39272,
+    "oracle_saving_vs_best_fixed_pct": 12.3,
+    "oracle_saving_vs_train_best_pct": 18.3
+   },
+   "feasibility_change_from_a_perfect_index": "0.00 percentage points (all 52 already solvable under any of >=4 policies)"
+  },
+  "the_same_budget_spent_where_it_dominates": {
+   "total_act_calls_by_cheapest_winning_search": 39879,
+   "total_plan_length_in_those_same_instances": 167,
+   "mean_plan_length": 3.2,
+   "max_plan_length": 14,
+   "search_to_execution_ratio_mean": 129,
+   "search_to_execution_ratio_median": 10,
+   "max_ratio_single_instance": {
+    "kind": "binary_odometer",
+    "instance": 0,
+    "act_calls": 15860,
+    "plan_length": 7,
+    "ratio": 2266
+   },
+   "a_perfect_transition_model_would_remove_pct_of_act_calls": 99.58,
+   "why_this_is_the_same_budget": "both numbers are act_calls spent by the same runs at the same node budget on the same 52 instances; the only difference is what the calls are FOR -- choosing a strategy versus discovering the transitions the plan is made of"
+  },
+  "the_discriminating_rows_only": {
+   "note": "a row where all five policies win cannot distinguish any chooser from a coin",
+   "discriminating_heldout_rows": "8/30",
+   "tree_key": {
+    "answered": "5/8",
+    "correct": "3/8"
+   },
+   "computed_from_a_depth_3_effect_probe": "8/8",
+   "attribution_control": {
+    "always_bfs_lex": "6/8",
+    "always_repeat_last": "6/8",
+    "always_never_last": "6/8"
+   },
+   "verdict": "The computed arm beats the control by 2 rows out of 8 and costs 72-120 act_calls to compute. This is NOT evidence that a smarter feature is the frontier; it is the control that killed the claim before it was made. Recorded because the number looked like a win."
+  },
+  "injectivity_is_reachable_and_still_worthless": {
+   "question": "the tree reports no granularity of its key is injective on the policy distinction; is a deeper effect probe injective?",
+   "answer": "yes at depth 3, and it does not help",
+   "depth_sweep_unique_keys_of_20_kinds": {
+    "1": 19,
+    "2": 19,
+    "3": 20,
+    "4": 20,
+    "5": 20
+   },
+   "cost_to_build_one_signature_act_calls": {
+    "mean": 133.7,
+    "max": 234
+   },
+   "heldout_rows_answered_by_the_injective_key": "1/30",
+   "heldout_rows_answered_by_the_tree_coarse_key": "16/30",
+   "heldout_correct_by_the_tree_coarse_key": "8/30",
+   "heldout_correct_by_the_exact_key": "4/30",
+   "conclusion": "Injectivity is purchasable and buys nothing: the injective key answers 1 of 30 held-out rows. Finer is strictly WORSE than coarser on held-out accuracy (8/30 vs 4/30), which reproduces the tree's own reason for a coarse key. A key can be made injective, or transferable, and the measurement says not both -- but the reason it does not matter here is that with adequate search there is nothing left to choose between."
+  }
+ },
+ "causal_blocker": "THE_TREE_NAMES_A_COUNTERFACTUAL_WORLD_MODEL_AS_THE_GOAL_AND_ITS_OWN_SOCKET_FILE_STATES_IT_CONTAINS_NO_MODEL__THIS_ROUND_PRICES_THAT_ABSENCE: 99.58_PERCENT_OF_THE_ACTION_BUDGET_GOES_TO_FINDING_A_PLAN_OF_MEAN_LENGTH_3.2_AND_17.4_PERCENT_IS_ALL_A_PERFECT_INDEX_COULD_EVER_SAVE",
+ "what_was_built": {
+  "modules_added": 0,
+  "files_added": [
+   "THE_INDEX_BUYS_COST_NOT_FEASIBILITY_20261116_V1.md",
+   "canonical/verification/THE_INDEX_BUYS_COST_NOT_FEASIBILITY_20261116_V1.json"
+  ],
+  "why_nothing_was_built": "The measurement that decides the next build is a disagreement between two of the tree's own documents, and it resolves against the more recent one. Building an index repair first would have optimised 17.4% while the dominant term sat named and unbuilt. The law 'the best part is no part' applies to the index repair, this round, on measurement."
+ },
+ "corrections_to_my_own_earlier_work_this_round": [
+  "I first measured that a depth-3 effect probe predicts the winning policy 8/8 on discriminating held-out rows, and was about to report it. The attribution control showed always-pick-bfs_lex scores 6/8, so the arm's real gain is 2 rows. The claim was killed before publication; both numbers are kept above.",
+  "I first wrote that 8 of 60 instances are UNSATISFIABLE. Exhaustive enumeration proves that for 6 of them (state space exhausted, <=27 states) and does NOT prove it for the 2 stack_pushout instances, whose reachable space is unbounded and whose goal is merely absent within the allowed depth. The receipt states both.",
+  "The claim that the policy index is the single bottleneck does not survive an adequate search budget. The non-injectivity it rests on reproduces exactly; the priority does not follow from it."
+ ],
+ "honest_limits": [
+  "Authority NONE. Sandbox measurement on the tree's own synthetic benchmark; not independent verification.",
+  "The 20 kinds are the tree's own hand-written generators. 'No policy is the only solver' is a statement about these 20 kinds and 5 search strategies, not about computer use in general.",
+  "act_calls is this benchmark's action meter. 99.58% is the ratio of two sums over the same 52 instances; it is not a claim that a transition model is 240x faster anywhere else.",
+  "No transition model was built or measured this round. The 99.58% is an UPPER BOUND obtained by substituting the true plan length, not a result from a learner.",
+  "stack_pushout instances 0 and 1 are not proven unsatisfiable (unbounded state space).",
+  "The depth-3 injective key was computed on instance 0 only when building train tables; held-out scoring used the same instance index for both train and test rows."
+ ],
+ "laws": [
+  "A cheaper way to CHOOSE among strategies that all work is not the same as a way to SOLVE what none of them solves.",
+  "An index's value is the regret of the best fixed choice. Measure that before repairing the index.",
+  "A feature that separates perfectly on the data it was built on is a fingerprint. Injectivity and transferability must be scored separately, on held-out kinds.",
+  "When a benchmark says 'no policy solves this', enumerate the reachable state space before believing a policy could.",
+  "The best part is no part: the highest-value action this round was not building the repair that the previous document recommended."
+ ],
+ "verification": {
+  "how": "every number above was produced by running the tree's own benchmark modules; no new module was added in the result-bearing path",
+  "scripts": [
+   "/tmp/inj/budget.py",
+   "/tmp/inj/final.py",
+   "/tmp/inj/unsat1.py",
+   "/tmp/inj/unsat_depth.py",
+   "/tmp/inj/depth14.py",
+   "/tmp/inj/cost.py",
+   "/tmp/inj/explore.py",
+   "/tmp/inj/predict.py",
+   "/tmp/inj/control.py",
+   "/tmp/inj/depth.py",
+   "/tmp/inj/inst.py"
+  ],
+  "reproduction_note": "scripts live in /tmp and are not persisted; each is under 60 lines and calls canonical/tools/cross_kind_* directly",
+  "independent_fresh_verdict": null
+ }
+}

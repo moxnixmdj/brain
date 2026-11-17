@@ -41,7 +41,7 @@
   },
   "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_LOOP_JUDGES_WITH_ONE_CORPUS_ORDERED_CASE_THAT_NOBODY_CHOSE_WHICH_ACCEPTS_WRONG_PROGRAMS_81_PERCENT_OF_THE_TIME_AND_SO_LOSES_ANSWERS_THAT_EXIST_WHILE_THE_COST_AXIS_IS_ALREADY_MEASURED_SOLVED",
-  "canonical_base_commit": "bcb32d3e6c3819dc23a3af34739140aa28e0407c",
+  "canonical_base_commit": "a5e93b098cbaa2d3782286fc6d09efc14b71bdc1",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -137,7 +137,7 @@
   ],
   "probe_specific": false,
   "recursive_obs": {
-    "canonical_base_commit": "bcb32d3e6c3819dc23a3af34739140aa28e0407c",
+    "canonical_base_commit": "a5e93b098cbaa2d3782286fc6d09efc14b71bdc1",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "treating an unexamined case order as a screen",
@@ -340,7 +340,7 @@
           "route": "SYNTHESIZE_AN_AST_LEVEL_EDIT_INDUCER_THAT_FOLDS_ONE_DEMONSTRATION_PAIR_INTO_A_HOLE_GENERALIZED_TEMPLATE_WITH_A_CONTEXT_PRECONDITION_AND_MEASURES_IT_END_TO_END_ON_A_PUBLIC_BUG_CORPUS"
         }
       ],
-      "checked_at_utc": "2026-11-17T03:00:02Z",
+      "checked_at_utc": "2026-11-17T03:01:24Z",
       "comparison_dimensions": [
         "CORRECTNESS",
         "CAPABILITY_STRENGTH",
@@ -380,7 +380,7 @@
       "selected_route": "SYNTHESIZE_AN_EXACT_INSTRUMENT_AUDIT_OVER_THE_COMPLETE_FINITE_REPAIR_SPACE_THAT_ASKS_WHICH_CASE_THE_SCREEN_CHOOSES_AND_COUNTS_BOTH_ERROR_DIRECTIONS_AGAINST_THE_CORPUS_OWN_JUDGE",
       "selected_route_preflight": {
         "all_required_dependencies_ready": true,
-        "checked_at_utc": "2026-11-17T03:00:02Z",
+        "checked_at_utc": "2026-11-17T03:01:24Z",
         "execution_dependencies": [
           {
             "dependency": "local Python 3.11 runtime with pytest",
