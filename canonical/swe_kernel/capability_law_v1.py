@@ -63,6 +63,7 @@ RECEIPTS = {
     "facts": "canonical/verification/STANDING_FACTS_20261116_V1.json",
     "repair": "canonical/verification/CAUSAL_DEPENDENCY_REPAIR_20261116_V1.json",
     "demonstration": "canonical/verification/DEMONSTRATION_SUFFICIENCY_20261116_V1.json",
+    "vocabulary": "canonical/verification/VOCABULARY_GROWTH_20261116_V1.json",
 }
 
 # The published ceiling for an inducer with full AST and context machinery on real systematic edits.
@@ -115,6 +116,7 @@ def compose(*, pins: Mapping[str, str] | None = None) -> dict[str, Any]:
     known, known_sha = _load("facts", pins=pins)
     repaired, repaired_sha = _load("repair", pins=pins)
     sufficed, sufficed_sha = _load("demonstration", pins=pins)
+    grew, grew_sha = _load("vocabulary", pins=pins)
 
     determined = float(_field(supply, "by_rung/shape_only/determined_share", "supply"))
     value_determined = (float(_field(value, "by_rung/shape_only/derive_arm/pairs_where_derivation_was_right",
@@ -215,6 +217,7 @@ def compose(*, pins: Mapping[str, str] | None = None) -> dict[str, Any]:
                 ("facts", RECEIPTS["facts"], known_sha),
                 ("repair", RECEIPTS["repair"], repaired_sha),
                 ("demonstration", RECEIPTS["demonstration"], sufficed_sha),
+                ("vocabulary", RECEIPTS["vocabulary"], grew_sha),
             )
         },
         "law": "P(correct behaviour | one action) = P(determined) x P(seen); P(seen) = density x strength",
@@ -363,6 +366,23 @@ def compose(*, pins: Mapping[str, str] | None = None) -> dict[str, Any]:
                         "the question decidable before the second execution: act, ask once more at the state "
                         "that splits them, or refuse because no reading fits"),
             },
+            "vocabulary_growth": {
+                "receipt": RECEIPTS["vocabulary"],
+                "actions": int(_field(grew, "chains", "vocabulary")),
+                "outcomes_realised": sorted(set(_field(grew, "outcomes", "vocabulary").values())),
+                "diagnoses_correct": int(_field(grew, "diagnoses_correct", "vocabulary")),
+                "transfer_holds": int(_field(grew, "transfer_holds", "vocabulary")),
+                "growths": _field(grew, "growths", "vocabulary"),
+                "raw_mtime_field_fires_of": [int(_field(grew, "noise_floor/raw_mtime_field_fires", "vocabulary")),
+                                             int(_field(grew, "noise_floor/repeats", "vocabulary"))],
+                "why": ("a refusal is not an answer, it is the only place a vocabulary can be grown honestly: "
+                        "the failure says which of five things is missing, and the growth is kept only if it is "
+                        "necessary (the flat grammar cannot do it), stable (a repeat reproduces it), "
+                        "transferable (a second action of the same kind is identified by it) and narrow (the "
+                        "distinctions it collapses are printed). The boundary is a missing sensor, not a missing "
+                        "word: `mkdir` has a real effect on disk that every view in the family is blind to, and "
+                        "no amount of experience reaches it"),
+            },
             "what_remains_unmeasured": ("a GUI whose only observable is pixels or DOM -- a projection, not the "
                                         "state; a fact carried by remote state rather than by a path; the outer "
                                         "edge of repair (the candidate set is the state the step can see, and "
@@ -371,7 +391,11 @@ def compose(*, pins: Mapping[str, str] | None = None) -> dict[str, Any]:
                                         "outer edge of sufficiency itself -- a verdict is relative to a stated "
                                         "grammar and to the candidate states generated for it, so a behaviour "
                                         "outside the grammar is refused rather than learned, and two readings "
-                                        "that differ only on a state nobody generated remain conflated"),
+                                        "that differ only on a state nobody generated remain conflated); and the "
+                                        "outer edge of growth -- the vocabulary is searched inside a stated "
+                                        "family of derived views, relations and one-step compositions, so a "
+                                        "primitive that needs a sensor the agent does not have is refused "
+                                        "rather than invented, and a two-step composition is not reached"),
             "external_context": ("OSWorld 2.0 (arXiv 2606.29537): best agent 20.6% of 108 workflows, "
                                  "failing by skipping verification and spending under 7% of budget "
                                  "detecting its own errors"),

@@ -1,0 +1,330 @@
+{
+  "actions": [
+    "already_explained_copy",
+    "nondeterministic_permutation",
+    "composition_not_in_the_flat_grammar",
+    "invisible_action_touch",
+    "unrepresentable_action_mkdir"
+  ],
+  "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+  "chains": 5,
+  "diagnoses_correct": 5,
+  "environment": {
+    "composition_ops": [
+      "sort",
+      "sort_unique",
+      "reverse",
+      "digest",
+      "identity"
+    ],
+    "current_view": "content",
+    "derived_views": [
+      "delta_content",
+      "delta_mtime",
+      "delta_mode",
+      "delta_name"
+    ],
+    "kind": "real directory, real programs from PATH, repeated executions, held-out states",
+    "outcomes_in_order": [
+      "EXPLAINED",
+      "INVISIBLE_IN_THE_CURRENT_VIEW",
+      "NOT_A_FUNCTION_OF_THE_STATE",
+      "OUTSIDE_THE_FLAT_GRAMMAR",
+      "BEYOND_THIS_OBSERVABLE"
+    ],
+    "relations": [
+      "equals_input",
+      "permutation_of_input",
+      "sorted_lines_equal",
+      "line_count_equal",
+      "byte_count_equal"
+    ],
+    "tree_feature_family_reused": [
+      "content",
+      "name",
+      "size",
+      "mode",
+      "mtime"
+    ]
+  },
+  "external_state": {
+    "already_measured_in_this_tree": "demonstration_sufficiency (refusals on 1 of 7 actions, 343 readings each); IDENTIFICATION_COST (median 1037 survivors, 7 of 23 insufficient after every example); an induced action-law vocabulary wrong on 6261 of 19648 transitions -- which is why growth here is never invented, only bought against an observed failure and verified on held-out executions",
+    "classical_anchor": "state abstraction and bisimulation (Li et al. 2006; Abel 2020): the coarsest partition that preserves the dynamics -- realised here as the strongest relation every repeat satisfies",
+    "refused_instrument": "AGENTSCOPE (arXiv 2609.02371) verifies abstractions against neural invariants; a model is not a verifier, so every verdict here is a subprocess exit code and a byte comparison",
+    "the_two_gaps_are_one_operation": "arXiv 2607.09560 (Beyond Fixed Representations): the vocabulary gap is inventing and stabilising new primitives, the verifier gap is judging whether one is worth keeping; representation expands only when the previously untestable becomes testable",
+    "when_to_refine_an_abstraction": "arXiv 2606.06123 (adaptive abstractions via rate-distortion): refine when the error inside the abstraction reaches the error induced by it -- a refusal is that condition at its extreme"
+  },
+  "fixture_timestamps": {
+    "normalised_to": 978307200.0,
+    "why": "a state whose mtimes depend on when it was written is not reproducible"
+  },
+  "growths": {
+    "already_explained_copy": null,
+    "composition_not_in_the_flat_grammar": "sort_unique_then_reverse",
+    "invisible_action_touch": "DERIVED_PREDICATE(mtime_changed)",
+    "nondeterministic_permutation": "PERMUTATION_OF_INPUT(payload.dat)",
+    "unrepresentable_action_mkdir": null
+  },
+  "incremental_spend_usd": 0,
+  "limit": "the growth is searched inside a stated family of derived views, relations and one-step compositions. When nothing in the family sees the action the answer is STOP with the missing sensor named and the effect proved to be on disk -- reported per chain, never hidden behind a generic failure",
+  "missing_programs": [],
+  "model_calls": 0,
+  "model_dependency_count": 0,
+  "network_calls": 0,
+  "noise_floor": {
+    "raw_field_is_reliable": false,
+    "raw_mtime_field_fires": 5,
+    "repeats": 6,
+    "verdict": "the raw timestamp field does not reliably report the action on a freshly written file, so exposing it as a feature would be discarded by the tree's own stability filter"
+  },
+  "outcomes": {
+    "already_explained_copy": "EXPLAINED",
+    "composition_not_in_the_flat_grammar": "OUTSIDE_THE_FLAT_GRAMMAR",
+    "invisible_action_touch": "INVISIBLE_IN_THE_CURRENT_VIEW",
+    "nondeterministic_permutation": "NOT_A_FUNCTION_OF_THE_STATE",
+    "unrepresentable_action_mkdir": "BEYOND_THIS_OBSERVABLE"
+  },
+  "per_chain": [
+    {
+      "chain": "already_explained_copy",
+      "decided_by": "the flat grammar reproduces the consequence at every state",
+      "diagnosis_detail": {
+        "growth": "NONE",
+        "outcome": "EXPLAINED",
+        "readings": {
+          "a": [
+            "copy:payload.dat>out.dat",
+            "append:payload.dat>out.dat"
+          ],
+          "b": [
+            "copy:payload.dat>out.dat",
+            "prefix:payload.dat>out.dat:32",
+            "append:payload.dat>out.dat"
+          ]
+        }
+      },
+      "diagnosis_was_right": true,
+      "expected_outcome": "EXPLAINED",
+      "growth": "NONE",
+      "growth_bought": null,
+      "growth_detail": {
+        "buys": "nothing -- already explained",
+        "cost": "none",
+        "growth": "NONE",
+        "primitive": null
+      },
+      "invocation": "cp payload.dat out.dat",
+      "outcome": "EXPLAINED",
+      "transfer_growth": null,
+      "transfer_invocation": "cp payload.dat keep.dat",
+      "transfer_outcome": "EXPLAINED",
+      "transfer_same_kind": true
+    },
+    {
+      "chain": "nondeterministic_permutation",
+      "decided_by": "two executions of the same state and invocation left different content",
+      "diagnosis_detail": {
+        "growth": "SET_VALUED_CONSEQUENCE",
+        "outcome": "NOT_A_FUNCTION_OF_THE_STATE",
+        "relations_tested": [
+          "equals_input",
+          "permutation_of_input",
+          "sorted_lines_equal",
+          "line_count_equal",
+          "byte_count_equal"
+        ],
+        "unstable_states": [
+          "a",
+          "b"
+        ]
+      },
+      "diagnosis_was_right": true,
+      "expected_outcome": "NOT_A_FUNCTION_OF_THE_STATE",
+      "growth": "SET_VALUED_CONSEQUENCE",
+      "growth_bought": "PERMUTATION_OF_INPUT(payload.dat)",
+      "growth_detail": {
+        "alternative_consequences_the_set_still_admits": [
+          "copy",
+          "identity",
+          "reverse",
+          "sort"
+        ],
+        "buys": "a consequence that reproduces where no exact consequence ever did, and the one property a caller actually needs before running a shuffling transform on a data file: nothing is lost",
+        "chosen": "permutation_of_input",
+        "cost": "order carries no information at this resolution -- the action cannot be told apart from any other transform that preserves the multiset, and the set is wider than one output",
+        "distinct_consequences_observed": 5,
+        "fresh_execution_still_inside_the_set": true,
+        "growth": "SET_VALUED_CONSEQUENCE",
+        "is_genuinely_a_set": true,
+        "primitive": "PERMUTATION_OF_INPUT(payload.dat)",
+        "relations_that_hold_on_every_repeat": [
+          "permutation_of_input",
+          "sorted_lines_equal",
+          "line_count_equal",
+          "byte_count_equal"
+        ]
+      },
+      "invocation": "sort -R payload.dat -o out.dat",
+      "outcome": "NOT_A_FUNCTION_OF_THE_STATE",
+      "transfer_growth": "permutation_of_input",
+      "transfer_invocation": "shuf payload.dat > out.dat",
+      "transfer_outcome": "NOT_A_FUNCTION_OF_THE_STATE",
+      "transfer_same_kind": true
+    },
+    {
+      "chain": "composition_not_in_the_flat_grammar",
+      "decided_by": "the consequence reproduced exactly at every state and no reading of the flat grammar reproduces it",
+      "diagnosis_detail": {
+        "compositions_tested": [
+          "sort",
+          "sort_unique",
+          "reverse",
+          "digest",
+          "identity"
+        ],
+        "growth": "COMPOSE",
+        "outcome": "OUTSIDE_THE_FLAT_GRAMMAR"
+      },
+      "diagnosis_was_right": true,
+      "expected_outcome": "OUTSIDE_THE_FLAT_GRAMMAR",
+      "growth": "COMPOSE",
+      "growth_bought": "sort_unique_then_reverse",
+      "growth_detail": {
+        "buys": "a pipeline the flat grammar cannot express",
+        "cost": "the space grows multiplicatively (73 -> 365) so a composition is bought per observation, never assumed as a closure",
+        "flat_grammar_space": 73,
+        "flat_readings": [],
+        "growth": "COMPOSE",
+        "pipeline_space": 25,
+        "pipelines_that_reproduce_it": [
+          "sort_unique_then_reverse"
+        ],
+        "primitive": "sort_unique_then_reverse"
+      },
+      "invocation": "sort -u -r payload.dat -o out.dat",
+      "outcome": "OUTSIDE_THE_FLAT_GRAMMAR",
+      "transfer_growth": [
+        "sort_unique_then_reverse"
+      ],
+      "transfer_invocation": "sort -r -u payload.dat -o out.dat",
+      "transfer_outcome": "OUTSIDE_THE_FLAT_GRAMMAR",
+      "transfer_same_kind": true
+    },
+    {
+      "chain": "invisible_action_touch",
+      "decided_by": "the content view shows no change at any state, so the action is not refused -- it is accepted as identity",
+      "diagnosis_detail": {
+        "derived_views_that_see_it": [
+          "delta_mtime"
+        ],
+        "growth": "OBSERVABLE",
+        "outcome": "INVISIBLE_IN_THE_CURRENT_VIEW",
+        "silently_accepted_as_identity": true,
+        "tested_views": [
+          "delta_content",
+          "delta_mtime",
+          "delta_mode",
+          "delta_name"
+        ]
+      },
+      "diagnosis_was_right": true,
+      "expected_outcome": "INVISIBLE_IN_THE_CURRENT_VIEW",
+      "growth": "OBSERVABLE",
+      "growth_bought": "DERIVED_PREDICATE(mtime_changed)",
+      "growth_detail": {
+        "buys": "the action stops being silently accepted as doing nothing",
+        "chosen": "delta_mtime",
+        "cost": "one boolean per path on every transition, and a sensor that reports it",
+        "growth": "OBSERVABLE",
+        "primitive": "DERIVED_PREDICATE(mtime_changed)",
+        "separates_from_inaction": [
+          "delta_mtime"
+        ],
+        "stable_separators": [
+          "delta_mtime"
+        ],
+        "why_not_a_field": "the raw value is unstable across repeats and the tree's projection synthesis discards it by stability; only the derived predicate survives"
+      },
+      "invocation": "touch keep.dat",
+      "outcome": "INVISIBLE_IN_THE_CURRENT_VIEW",
+      "transfer_growth": "delta_mtime",
+      "transfer_invocation": "touch payload.dat",
+      "transfer_outcome": "INVISIBLE_IN_THE_CURRENT_VIEW",
+      "transfer_same_kind": true
+    },
+    {
+      "chain": "unrepresentable_action_mkdir",
+      "decided_by": "the content view shows no change at any state, so the action is not refused -- it is accepted as identity",
+      "diagnosis_detail": {
+        "derived_views_that_see_it": [],
+        "growth": "STOP",
+        "outcome": "BEYOND_THIS_OBSERVABLE",
+        "silently_accepted_as_identity": true,
+        "tested_views": [
+          "delta_content",
+          "delta_mtime",
+          "delta_mode",
+          "delta_name"
+        ]
+      },
+      "diagnosis_was_right": true,
+      "expected_outcome": "BEYOND_THIS_OBSERVABLE",
+      "growth": "STOP",
+      "growth_bought": null,
+      "growth_detail": {
+        "buys": "nothing here -- and that is the answer",
+        "cost": "the action stays unlearnable until the interface widens; pretending otherwise is the failure",
+        "effect_on_disk": true,
+        "every_admissible_view_empty": true,
+        "growth": "STOP",
+        "missing_sensor": "the observation enumerates regular files; a directory is not a file, so a created directory is invisible to content, to delta_content, to delta_mtime, to delta_mode and to delta_name alike",
+        "primitive": null,
+        "what_unblocks_it": "an observation that reports path kind (file or directory) and not only file contents; that is an interface change, so it must be requested, not inferred",
+        "why_not_vocabulary": "the effect is real and on disk while every derived view is empty, so no predicate built from the same readings can reach it -- this is a missing sensor, not a missing word"
+      },
+      "invocation": "mkdir newdir",
+      "outcome": "BEYOND_THIS_OBSERVABLE",
+      "transfer_growth": "the observation enumerates regular files; a dire",
+      "transfer_invocation": "mkdir -p newdir",
+      "transfer_outcome": "BEYOND_THIS_OBSERVABLE",
+      "transfer_same_kind": true
+    }
+  ],
+  "schema": "BRAIN_VOCABULARY_GROWTH_V1",
+  "transfer": {
+    "already_explained_copy": {
+      "growth": null,
+      "invocation": "cp payload.dat keep.dat",
+      "outcome": "EXPLAINED",
+      "same_kind": true
+    },
+    "composition_not_in_the_flat_grammar": {
+      "growth": [
+        "sort_unique_then_reverse"
+      ],
+      "invocation": "sort -r -u payload.dat -o out.dat",
+      "outcome": "OUTSIDE_THE_FLAT_GRAMMAR",
+      "same_kind": true
+    },
+    "invisible_action_touch": {
+      "growth": "delta_mtime",
+      "invocation": "touch payload.dat",
+      "outcome": "INVISIBLE_IN_THE_CURRENT_VIEW",
+      "same_kind": true
+    },
+    "nondeterministic_permutation": {
+      "growth": "permutation_of_input",
+      "invocation": "shuf payload.dat > out.dat",
+      "outcome": "NOT_A_FUNCTION_OF_THE_STATE",
+      "same_kind": true
+    },
+    "unrepresentable_action_mkdir": {
+      "growth": "the observation enumerates regular files; a dire",
+      "invocation": "mkdir -p newdir",
+      "outcome": "BEYOND_THIS_OBSERVABLE",
+      "same_kind": true
+    }
+  },
+  "transfer_holds": 5,
+  "what_this_shows": "5 real actions, each failing for a different reason, and the failure itself decides which vocabulary is missing: 5/5 diagnoses match what actually happened, and the growth carries to a held-out action of the same kind 5/5 times. The three growable cases are bought, not declared -- a derived predicate that stops an action being silently accepted as doing nothing, a set-valued consequence that makes an unpredictable action's one load-bearing property testable, and one composition that the flat grammar cannot express. The 1 non-growable case is the boundary that matters: `unrepresentable_action_mkdir` has a real effect on disk and every view in the family is empty, so no predicate built from the same readings can ever reach it -- that is a missing sensor, not a missing word, and no amount of experience closes it. Nothing is trained: a primitive is kept only when it is necessary, stable, transferable and narrow, which is the verifier gap closed by construction instead of declared."
+}
