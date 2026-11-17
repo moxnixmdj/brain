@@ -8,11 +8,11 @@
  "date": "2026-11-16",
  "decision": "THE_DESCRIPTION_WAS_NEVER_THE_PROBLEM__THE_BINDING_WAS",
  "files": {
-  "canonical/runtime/demonstration_version_space_v1.py": "814a75e44ecbd6a015725812520c26b0ddb4a92487148a6e25e91bcc84b0eb67",
+  "canonical/runtime/demonstration_version_space_v1.py": "73c9fb32d0d73ecdd2c517f740f0f5d0ae27e21432f05747f3fa63e2dbb840a2",
   "canonical/runtime/what_one_experience_buys_v1.py": "0daf4515536b2a6b506782e10ef156dc867676abc1450e420ce650a87c2ab050",
   "canonical/tests/test_what_one_experience_buys_v1.py": "0b2d9e6a0ab0a83e6167ad405d157ec076b94cc2ee8e2335cfbe476f2fcf3e63"
  },
- "generated_utc": "2026-11-17T00:12:36Z",
+ "generated_utc": "2026-11-17T00:35:18Z",
  "honest_limits": [
   "AUTHORITY NONE -- one producer run in one sandbox.",
   "The controlled A/B covers 15 tasks chosen BECAUSE the id rule could reach them, so +0.0667 is not the population effect; it is the effect on the tasks where the change can act.",
@@ -25,7 +25,9 @@
   "A property the instruction names is a name. If a page can distinguish an element by a property, the language must be able to bind that property to the instruction, or the page is not unlearnable -- the language is incomplete.",
   "A high number of surviving hypotheses is not ambiguity. Ask what the PREFERRED description selects; if it selects one thing, the survivors measure redundancy.",
   "A one-word fix that turns 0.05 into 1.00 on a page nobody could learn is worth more than a new module, and it is falsifiable in an afternoon.",
-  "Never claim a cross-cutting defect from a number whose definition you have not read."
+  "Never claim a cross-cutting defect from a number whose definition you have not read.",
+  "A hand-written list of fields where a tuple already exists is an omission waiting to be found. Bind the property, not the example.",
+  "Report a +0.002 as +0.002. The size of a change and the correctness of its reason are different questions."
  ],
  "measured_effect_kept": {
   "bits_per_step_still_reported": 5.428,
@@ -62,6 +64,36 @@
   "what_was_deleted": "canonical/runtime/one_description_language_v1.py and its 11 tests. It added nothing the tree did not have. Rebuilding a shipped capability is the failure mode this project forbids."
  },
  "schema": "PROJECT_BRAIN_VERIFICATION_RECEIPT_V1",
+ "second_fix": {
+  "examples": [
+   "click-widget 'a \"radio\" widget' -> name=radio",
+   "navigate-tree 'the folder or file named ...' -> classes=file",
+   "order-food 'items that are meat' -> title=meat",
+   "use-spinner 'select 7 with the spinner' -> for=spinner"
+  ],
+  "measured_census_over_130_pages": {
+   "by_field": {
+    "classes": 8,
+    "for": 1,
+    "name": 5,
+    "title": 5
+   },
+   "properties_named_by_their_instructions": 81,
+   "properties_with_no_binding_before": 19
+  },
+  "paired_same_seed_ab": {
+   "after": 0.4,
+   "before": 0.3978,
+   "better": 1,
+   "delta": 0.0022,
+   "tasks": 23,
+   "the_one_gain": "phone-book 0.15 -> 0.20",
+   "worse": 0
+  },
+  "tests": "165 passed, 27 skipped",
+  "what": "the same hand-written tuple that had omitted id also omitted title, name, for and classes from the slot-binding loop, while the equals loop already read STRUCTURE_FIELDS",
+  "why_kept_despite_being_small": "it DELETES a special case rather than adding one: the loop now reads the tuple the adjacent loop already reads. A law justified it (a single-valued string property an instruction quotes is a name), not a tuned number."
+ },
  "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
  "supersedes": "THE_HAND_AND_THE_LEARNER_SPOKE_DIFFERENTLY_20261116_V1 (its central claim is REFUTED below)",
  "terminal_credit_delta": 0,
