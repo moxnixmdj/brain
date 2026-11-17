@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "f1b47f185fac3ca9612a5645db6b9a2159856d520c806b410767a8eefae5c379"
+  "value": "4c0d63cfdf2f05df5530630c59964cd4641a092e42ef4d9b67afb5d15e4a8f40"
  },
  "engines": [
   {
@@ -246310,7 +246310,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/YOU_ARE_WRONG_ABOUT_ONCE_AND_IT_IS_ARITHMETIC_20261116_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "73c71341ddbfc597e6be1183274285de94b825ee108cb86f7515907565b8fac0",
+   "sha256": "93c4c94fc222c96ce74cd5fc4501eb5d7de15afec72b00eee1efb7171c10793e",
    "status": "COMPLETE",
    "terms": {
     "1.0927": 1,
