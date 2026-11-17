@@ -31228,7 +31228,7 @@
   "engines": 26,
   "knowledge_documents": 507,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6978,
+  "research_index_records": 6979,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 452,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "75b657d9c38d0ded386438386cd28ab800cc80be58d75c5a0f4fa59cf21aa8c1"
+  "value": "b48bbc0a55551bcd4b64c7a973d851aa2a4ac6e1cc7a581969e61ba1689aeba0"
  },
  "engines": [
   {
@@ -233261,6 +233261,51 @@
     "nothing": 2,
     "own": 2,
     "total": 2
+   }
+  },
+  {
+   "action_id": "A_LEARNED_SUCCESS_IS_REMEMBERED_UNDER_ITS_OWN_GOAL_V1_20261116_V1",
+   "capability": false,
+   "date": "2026-11-16",
+   "id": "research:canonical/action_intents/A_LEARNED_SUCCESS_IS_REMEMBERED_UNDER_ITS_OWN_GOAL_V1_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_LEARNED_SUCCESS_IS_REMEMBERED_UNDER_ITS_OWN_GOAL_V1_20261116_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "abdbb8f81ee5a9e8a169017a605cccd3892f1dca58c898e88f3e8a4af7f801b6",
+   "status": "",
+   "terms": {
+    "2026-11-16": 1,
+    "20261116": 1,
+    "a_learned_success_is_remembered_under_its_own_goal_v1_20261116_v1": 2,
+    "about": 1,
+    "across": 1,
+    "actually": 1,
+    "against": 1,
+    "another": 3,
+    "answers": 1,
+    "appeared": 1,
+    "asking": 1,
+    "closed": 2,
+    "every": 3,
+    "goal": 9,
+    "goals": 2,
+    "learned": 2,
+    "memory": 2,
+    "not": 2,
+    "one": 4,
+    "plan": 2,
+    "program": 2,
+    "recalls": 2,
+    "remembered": 2,
+    "row": 2,
+    "so": 2,
+    "store": 2,
+    "success": 2,
+    "target": 3,
+    "thirteen": 2,
+    "under": 2,
+    "v1": 2,
+    "while": 2
    }
   },
   {
