@@ -95,7 +95,7 @@
   "prior_work_reused": "EXPERT_FIX_REPETITION_SWEBENCH_VERIFIED (500 real tasks, 2178 real pieces, operator and provenance per piece), HUMANEVALFIX_REPAIR_SOLVER (100 real bugs, per-type outcomes), INSTANT_LEARNING_IN_A_NEW_ENVIRONMENT (4 real machines, adaptation and crossover), and the mutation grammar parsed live from python_test_guided_patch_search_v1. Nothing was re-run for a number; one number was recomputed independently as a cross-check and agreed to 30 pieces",
   "probe_specific": false,
   "recursive_obs": {
-    "canonical_base_commit": "1a10378379a7c44995c6c4d91ead01ada10e23d6",
+    "canonical_base_commit": "6c942c524463b404cdb1b48dd6351c53fb0f184d",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "building another learner or another grammar (learning multiplies the smallest term)",
