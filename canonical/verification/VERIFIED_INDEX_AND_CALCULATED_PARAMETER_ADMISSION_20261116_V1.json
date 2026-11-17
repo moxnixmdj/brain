@@ -16,7 +16,7 @@
   "capability_credit": "ZERO",
   "equation": "truth in H(I, failure_evidence) AND o in O splits survivors AND V reads the split AND proof is fresh on state in hand",
   "external_capability_provider_count": 0,
-  "generated_at_utc": "2026-11-17T04:18:24.925214+00:00",
+  "generated_at_utc": "2026-11-17T04:21:30.639862+00:00",
   "hard_nonclaims": [
     "NO_EXTERNAL_MODEL_CALLED",
     "NO_EXTERNAL_MODEL_WEIGHTS_OR_OUTPUTS",
@@ -56,7 +56,7 @@
     ],
     "external_model_calls": 0,
     "external_repair_reclassification_credit": "ZERO",
-    "fresh_copy": "/tmp/brain_hard_open_drwzvc6v/quixbugs_fresh",
+    "fresh_copy": "/tmp/brain_hard_open_b17zea77/quixbugs_fresh",
     "fresh_copy_excludes_answer_keys": true,
     "frozen_v2_known_wins_not_retested": [
       "bitcount",

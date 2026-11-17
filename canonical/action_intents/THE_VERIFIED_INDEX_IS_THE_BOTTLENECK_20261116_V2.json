@@ -85,7 +85,7 @@
   },
   "benchmark_or_family_rank_authority": null,
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::ONE_TRACE_IS_STORAGE_NOT_IDENTIFICATION__THE_INDEX_LACKS_THE_CAUSAL_OBSERVABLE__SYNTHESIS_VERIFICATION_ASYMMETRY_REMAINS__NO_CALCULATED_BIT_HAS_PASSED_THE_LIVE_VERIFIER_GATE",
-  "canonical_base_commit": "98f60e7c87db0c1b042afa7ed71c381005209da6",
+  "canonical_base_commit": "7a2c31f6c5000f22e787c1e028fe7e703c615126",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -941,7 +941,7 @@
   ],
   "probe_specific": false,
   "recursive_obs": {
-    "canonical_base_commit": "98f60e7c87db0c1b042afa7ed71c381005209da6",
+    "canonical_base_commit": "7a2c31f6c5000f22e787c1e028fe7e703c615126",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "conventional pretraining or knowledge-house weights before a calculated bit passes the gate",
@@ -1186,7 +1186,7 @@
           "route": "COMPOSE_EXISTING_ORGANS_AND_ADMIT_ONLY_CALCULATED_BITS_AFTER_A_VERIFIED_INDEX_GATE"
         }
       ],
-      "checked_at_utc": "2026-11-17T04:17:19Z",
+      "checked_at_utc": "2026-11-17T04:20:39Z",
       "comparison_dimensions": [
         "CORRECTNESS",
         "CAPABILITY_STRENGTH",
@@ -1226,7 +1226,7 @@
       "selected_route": "COMPOSE_EXISTING_ORGANS_AND_ADMIT_ONLY_CALCULATED_BITS_AFTER_A_VERIFIED_INDEX_GATE",
       "selected_route_preflight": {
         "all_required_dependencies_ready": true,
-        "checked_at_utc": "2026-11-17T04:17:19Z",
+        "checked_at_utc": "2026-11-17T04:20:39Z",
         "execution_dependencies": [
           {
             "dependency": "local Python 3.11 runtime with pytest 9.2.0",
@@ -1387,10 +1387,10 @@
       "/tmp/cgr_venv_cd864fc9/bin/python -m pytest -q canonical/tests/test_verified_index_and_calculated_parameter_admission_v1.py",
       "git archive HEAD | tar -x -C /tmp/clean_model && (cd /tmp/clean_model && python3 canonical/runtime/compile_brain_unified_model_v1.py --output canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json) && cp /tmp/clean_model/canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json",
       "python3 canonical/runtime/verify_brain_unified_model_v1.py",
-      "python3 execution_guard/repo_integrity_guard_v1.py --base 98f60e7c87db0c1b042afa7ed71c381005209da6",
+      "python3 execution_guard/repo_integrity_guard_v1.py --base 7a2c31f6c5000f22e787c1e028fe7e703c615126",
       "python3 execution_guard/agent_orientation_check_v1.py intent-check canonical/action_intents/THE_VERIFIED_INDEX_IS_THE_BOTTLENECK_20261116_V2.json",
-      "python3 canonical/runtime/enforce_goal_hierarchy.py --base 98f60e7c87db0c1b042afa7ed71c381005209da6 --head HEAD",
-      "python3 execution_guard/enforce_load_bearing_primary_pr.py --base 98f60e7c87db0c1b042afa7ed71c381005209da6 --head HEAD",
+      "python3 canonical/runtime/enforce_goal_hierarchy.py --base 7a2c31f6c5000f22e787c1e028fe7e703c615126 --head HEAD",
+      "python3 execution_guard/enforce_load_bearing_primary_pr.py --base 7a2c31f6c5000f22e787c1e028fe7e703c615126 --head HEAD",
       "git diff --check"
     ],
     "independent_verification_completed": false,

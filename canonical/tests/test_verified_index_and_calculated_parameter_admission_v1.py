@@ -212,7 +212,7 @@ class VerifiedIndexAndCalculatedParameterAdmissionTests(unittest.TestCase):
         self.assertIn("zero external repair credit", answer)
         self.assertFalse(intent["truth"]["achieved"])
         self.assertEqual(intent["date"], "2026-11-17")
-        self.assertEqual(intent["canonical_base_commit"], "98f60e7c87db0c1b042afa7ed71c381005209da6")
+        self.assertEqual(intent["canonical_base_commit"], "7a2c31f6c5000f22e787c1e028fe7e703c615126")
         self.assertEqual(intent["capability_credit_delta"], 0)
         self.assertEqual(intent["terminal_credit_delta"], 0)
         self.assertEqual(intent["model_calls"], 0)
