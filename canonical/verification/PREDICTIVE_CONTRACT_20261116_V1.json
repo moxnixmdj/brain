@@ -147,7 +147,7 @@
       "input_sensitive": true,
       "mutants": [
         {
-          "command": "gzip -k -f decoy.txt",
+          "invocation": "gzip -k -f decoy.txt",
           "mechanism": "content_relation",
           "mutant": "wrong_source",
           "reasons": [
@@ -160,7 +160,7 @@
           "verdict_no_contract": "HOLDS"
         },
         {
-          "command": "gzip -f in.txt",
+          "invocation": "gzip -f in.txt",
           "mechanism": "content_relation",
           "mutant": "drop_first_flag",
           "reasons": [
@@ -194,7 +194,7 @@
       "input_sensitive": true,
       "mutants": [
         {
-          "command": "sort decoy.txt -o out.dat",
+          "invocation": "sort decoy.txt -o out.dat",
           "mechanism": "content_relation",
           "mutant": "wrong_source",
           "reasons": [
@@ -207,7 +207,7 @@
           "verdict_no_contract": "HOLDS"
         },
         {
-          "command": "sort in.txt -o sub/out.dat",
+          "invocation": "sort in.txt -o sub/out.dat",
           "mechanism": "content_relation",
           "mutant": "wrong_target",
           "reasons": [
@@ -220,7 +220,7 @@
           "verdict_no_contract": "HOLDS"
         },
         {
-          "command": "sort in.txt -o",
+          "invocation": "sort in.txt -o",
           "mechanism": "frame_or_exit",
           "mutant": "drop_target",
           "reasons": [
@@ -232,7 +232,7 @@
           "verdict_no_contract": "VIOLATED"
         },
         {
-          "command": "sort out.dat -o in.txt",
+          "invocation": "sort out.dat -o in.txt",
           "mechanism": "frame_or_exit",
           "mutant": "swap_source_target",
           "reasons": [
@@ -244,7 +244,7 @@
           "verdict_no_contract": "VIOLATED"
         },
         {
-          "command": "sort in.txt out.dat",
+          "invocation": "sort in.txt out.dat",
           "mechanism": "frame_or_exit",
           "mutant": "drop_first_flag",
           "reasons": [
@@ -277,7 +277,7 @@
       "input_sensitive": true,
       "mutants": [
         {
-          "command": "base64 decoy.txt > out.dat",
+          "invocation": "base64 decoy.txt > out.dat",
           "mechanism": "content_relation",
           "mutant": "wrong_source",
           "reasons": [
@@ -290,7 +290,7 @@
           "verdict_no_contract": "HOLDS"
         },
         {
-          "command": "base64 in.txt > sub/out.dat",
+          "invocation": "base64 in.txt > sub/out.dat",
           "mechanism": "content_relation",
           "mutant": "wrong_target",
           "reasons": [
@@ -303,7 +303,7 @@
           "verdict_no_contract": "HOLDS"
         },
         {
-          "command": "base64 in.txt ",
+          "invocation": "base64 in.txt ",
           "mechanism": "content_relation",
           "mutant": "drop_target",
           "reasons": [
@@ -316,7 +316,7 @@
           "verdict_no_contract": "HOLDS"
         },
         {
-          "command": "base64 out.dat > in.txt",
+          "invocation": "base64 out.dat > in.txt",
           "mechanism": "frame_or_exit",
           "mutant": "swap_source_target",
           "reasons": [
@@ -359,8 +359,8 @@
       "content_clause_origin": "derived_and_perturbation_validated",
       "content_only_mutants": [
         {
-          "command": "tr a-A A-Z < {src} > {dst}",
           "equivalent": false,
+          "invocation": "tr a-A A-Z < {src} > {dst}",
           "mutant": "content_only:a-z",
           "reasons": [
             "nonzero_exit:1"
@@ -370,8 +370,8 @@
           "verdict_full": "VIOLATED"
         },
         {
-          "command": "tr a-z A-A < {src} > {dst}",
           "equivalent": false,
+          "invocation": "tr a-z A-A < {src} > {dst}",
           "mutant": "content_only:A-Z",
           "reasons": [
             "content_clause_broken:derived_byte_map"
@@ -393,7 +393,7 @@
       "input_sensitive": true,
       "mutants": [
         {
-          "command": "tr a-z A-Z < decoy.txt > out.dat",
+          "invocation": "tr a-z A-Z < decoy.txt > out.dat",
           "mechanism": "frame_or_exit",
           "mutant": "wrong_source",
           "reasons": [
@@ -406,7 +406,7 @@
           "verdict_no_contract": "HOLDS"
         },
         {
-          "command": "tr a-z A-Z < in.txt > sub/out.dat",
+          "invocation": "tr a-z A-Z < in.txt > sub/out.dat",
           "mechanism": "frame_or_exit",
           "mutant": "wrong_target",
           "reasons": [
@@ -419,7 +419,7 @@
           "verdict_no_contract": "HOLDS"
         },
         {
-          "command": "tr a-z A-Z < in.txt ",
+          "invocation": "tr a-z A-Z < in.txt ",
           "mechanism": "frame_or_exit",
           "mutant": "drop_target",
           "reasons": [
@@ -431,7 +431,7 @@
           "verdict_no_contract": "HOLDS"
         },
         {
-          "command": "tr a-z A-Z < out.dat > in.txt",
+          "invocation": "tr a-z A-Z < out.dat > in.txt",
           "mechanism": "frame_or_exit",
           "mutant": "swap_source_target",
           "reasons": [
@@ -456,8 +456,8 @@
       "content_clause_origin": "derived_and_perturbation_validated",
       "content_only_mutants": [
         {
-          "command": "sed s/alpha/ALPHB/ {src} > {dst}",
           "equivalent": false,
+          "invocation": "sed s/alpha/ALPHB/ {src} > {dst}",
           "mutant": "content_only:s/alpha/ALPHA/",
           "reasons": [
             "content_clause_broken:derived_literal_substitution"
@@ -479,7 +479,7 @@
       "input_sensitive": true,
       "mutants": [
         {
-          "command": "sed s/alpha/ALPHA/ decoy.txt > out.dat",
+          "invocation": "sed s/alpha/ALPHA/ decoy.txt > out.dat",
           "mechanism": "frame_or_exit",
           "mutant": "wrong_source",
           "reasons": [
@@ -492,7 +492,7 @@
           "verdict_no_contract": "HOLDS"
         },
         {
-          "command": "sed s/alpha/ALPHA/ in.txt > sub/out.dat",
+          "invocation": "sed s/alpha/ALPHA/ in.txt > sub/out.dat",
           "mechanism": "frame_or_exit",
           "mutant": "wrong_target",
           "reasons": [
@@ -505,7 +505,7 @@
           "verdict_no_contract": "HOLDS"
         },
         {
-          "command": "sed s/alpha/ALPHA/ in.txt ",
+          "invocation": "sed s/alpha/ALPHA/ in.txt ",
           "mechanism": "frame_or_exit",
           "mutant": "drop_target",
           "reasons": [
@@ -517,7 +517,7 @@
           "verdict_no_contract": "HOLDS"
         },
         {
-          "command": "sed s/alpha/ALPHA/ out.dat > in.txt",
+          "invocation": "sed s/alpha/ALPHA/ out.dat > in.txt",
           "mechanism": "frame_or_exit",
           "mutant": "swap_source_target",
           "reasons": [
@@ -550,7 +550,7 @@
       "input_sensitive": true,
       "mutants": [
         {
-          "command": "sha256sum decoy.txt > out.dat",
+          "invocation": "sha256sum decoy.txt > out.dat",
           "mechanism": "content_relation",
           "mutant": "wrong_source",
           "reasons": [
@@ -563,7 +563,7 @@
           "verdict_no_contract": "HOLDS"
         },
         {
-          "command": "sha256sum in.txt > sub/out.dat",
+          "invocation": "sha256sum in.txt > sub/out.dat",
           "mechanism": "content_relation",
           "mutant": "wrong_target",
           "reasons": [
@@ -576,7 +576,7 @@
           "verdict_no_contract": "HOLDS"
         },
         {
-          "command": "sha256sum in.txt ",
+          "invocation": "sha256sum in.txt ",
           "mechanism": "content_relation",
           "mutant": "drop_target",
           "reasons": [
@@ -589,7 +589,7 @@
           "verdict_no_contract": "HOLDS"
         },
         {
-          "command": "sha256sum out.dat > in.txt",
+          "invocation": "sha256sum out.dat > in.txt",
           "mechanism": "frame_or_exit",
           "mutant": "swap_source_target",
           "reasons": [
@@ -622,7 +622,7 @@
       "input_sensitive": true,
       "mutants": [
         {
-          "command": "cp decoy.txt out.dat",
+          "invocation": "cp decoy.txt out.dat",
           "mechanism": "content_relation",
           "mutant": "wrong_source",
           "reasons": [
@@ -635,7 +635,7 @@
           "verdict_no_contract": "HOLDS"
         },
         {
-          "command": "cp in.txt sub/out.dat",
+          "invocation": "cp in.txt sub/out.dat",
           "mechanism": "content_relation",
           "mutant": "wrong_target",
           "reasons": [
@@ -648,7 +648,7 @@
           "verdict_no_contract": "HOLDS"
         },
         {
-          "command": "cp in.txt",
+          "invocation": "cp in.txt",
           "mechanism": "frame_or_exit",
           "mutant": "drop_target",
           "reasons": [
@@ -660,7 +660,7 @@
           "verdict_no_contract": "VIOLATED"
         },
         {
-          "command": "cp out.dat in.txt",
+          "invocation": "cp out.dat in.txt",
           "mechanism": "frame_or_exit",
           "mutant": "swap_source_target",
           "reasons": [
@@ -682,8 +682,8 @@
       "content_clause_origin": "declared",
       "content_only_mutants": [
         {
-          "command": "split -l 3 {src} chunk_",
           "equivalent": false,
+          "invocation": "split -l 3 {src} chunk_",
           "mutant": "content_only:2",
           "reasons": [],
           "verdict_frame_only": "UNKNOWN",
@@ -691,8 +691,8 @@
           "verdict_full": "HOLDS"
         },
         {
-          "command": "split -l 2 {src} chunA_",
           "equivalent": false,
+          "invocation": "split -l 2 {src} chunA_",
           "mutant": "content_only:chunk_",
           "reasons": [
             "predicted_creation_missing:chunk*",
@@ -715,7 +715,7 @@
       "input_sensitive": true,
       "mutants": [
         {
-          "command": "split -l 2 decoy.txt chunk_",
+          "invocation": "split -l 2 decoy.txt chunk_",
           "mechanism": "content_relation",
           "mutant": "wrong_source",
           "reasons": [
@@ -727,7 +727,7 @@
           "verdict_no_contract": "HOLDS"
         },
         {
-          "command": "split 2 in.txt chunk_",
+          "invocation": "split 2 in.txt chunk_",
           "mechanism": "frame_or_exit",
           "mutant": "drop_first_flag",
           "reasons": [
@@ -760,7 +760,7 @@
       "input_sensitive": true,
       "mutants": [
         {
-          "command": "tar -cf out.dat decoy.txt",
+          "invocation": "tar -cf out.dat decoy.txt",
           "mechanism": "content_relation",
           "mutant": "wrong_source",
           "reasons": [
@@ -773,7 +773,7 @@
           "verdict_no_contract": "HOLDS"
         },
         {
-          "command": "tar -cf sub/out.dat in.txt",
+          "invocation": "tar -cf sub/out.dat in.txt",
           "mechanism": "content_relation",
           "mutant": "wrong_target",
           "reasons": [
@@ -786,7 +786,7 @@
           "verdict_no_contract": "HOLDS"
         },
         {
-          "command": "tar -cf in.txt",
+          "invocation": "tar -cf in.txt",
           "mechanism": "frame_or_exit",
           "mutant": "drop_target",
           "reasons": [
@@ -798,7 +798,7 @@
           "verdict_no_contract": "VIOLATED"
         },
         {
-          "command": "tar -cf in.txt out.dat",
+          "invocation": "tar -cf in.txt out.dat",
           "mechanism": "frame_or_exit",
           "mutant": "swap_source_target",
           "reasons": [
@@ -810,7 +810,7 @@
           "verdict_no_contract": "VIOLATED"
         },
         {
-          "command": "tar out.dat in.txt",
+          "invocation": "tar out.dat in.txt",
           "mechanism": "frame_or_exit",
           "mutant": "drop_first_flag",
           "reasons": [

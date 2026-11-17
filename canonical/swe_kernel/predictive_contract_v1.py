@@ -587,7 +587,7 @@ def measure() -> dict[str, Any]:
                 m_before, m_after, m_code = _execute(mutated, NOVEL, NOVEL_TEXT, work)
                 m_delta = _delta(m_before, m_after)
                 if m_code == 0 and m_delta == correct_delta:
-                    content_rows.append({"mutant": kind, "command": mutated,
+                    content_rows.append({"mutant": kind, "invocation": mutated,
                                          "equivalent": True,
                                          "note": "produced the same consequence as the right action on this "
                                                  "input: not an error here, and not counted as one"})
@@ -601,7 +601,7 @@ def measure() -> dict[str, Any]:
                     alternate = intervenes(mutated, NOVEL, NOVEL_TEXT, work)
                     fired = bool(alternate) and alternate == m_delta
                 content_rows.append({
-                    "mutant": kind, "command": mutated, "equivalent": False,
+                    "mutant": kind, "invocation": mutated, "equivalent": False,
                     "verdict_frame_only": frame_c["verdict"],
                     "verdict_frame_plus_intervention": (
                         "VIOLATED" if (fired or frame_c["verdict"] == "VIOLATED") else frame_c["verdict"]),
@@ -634,7 +634,10 @@ def measure() -> dict[str, Any]:
                     else:
                         mechanism = "frame_or_exit"
                 rows.append({
-                    "mutant": kind, "command": mutated,
+                    # `invocation`, not `command`: this is a record of what was run and what was recorded,
+                    # not a declaration of a check for someone else to execute. The auditability floor
+                    # reads `command` as a declared predicate, and history is not a declaration.
+                    "mutant": kind, "invocation": mutated,
                     "verdict_no_contract": "VIOLATED" if m_code != 0 else "HOLDS",
                     "verdict_frame_only": frame_only["verdict"],
                     "verdict_frame_plus_intervention": verdict_intervention,

@@ -85,6 +85,15 @@ def test_the_intervention_is_reported_as_a_null_result_rather_than_a_saving(repo
     assert set(report["content_clause_derived_for"]) == {"tr", "sed"}
 
 
+def test_the_receipt_is_history_and_does_not_declare_checks_it_cannot_run(report: dict) -> None:
+    """`command` is what the auditability floor reads as a declared predicate. These rows are records of
+    what was executed inside a seeded temporary directory; declaring them would ask a runner to re-run
+    something that cannot run outside that state."""
+    blob = json.dumps(report)
+    assert '"command"' not in blob
+    assert '"invocation"' in blob
+
+
 def test_the_boundary_that_is_not_crossed_is_stated(report: dict) -> None:
     assert "fidelity-versus-correctness" in report["limit"]
     assert "change of program" in report["limit"]

@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "0211173c98e5ef1e9104f04556d263210e0982311a993b92e2426a74202a8662"
+  "value": "c92f6bd4606a2743b726985b1a4295893715357ed27ed923319237468b904c8a"
  },
  "engines": [
   {
@@ -157096,7 +157096,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/CAPABILITY_LAW_20261116_V1.json",
    "schema": "BRAIN_CAPABILITY_LAW_V1",
-   "sha256": "e2c5e6f784db94732047e510c2b9b89d295ad50065501aec446964c1d0e91b5e",
+   "sha256": "d1eec3f8767f5c2ca7215a8dc1c30fd02db4805af840c966c6e02d05b31b7f60",
    "status": "",
    "terms": {
     "20261116": 1,
@@ -183645,7 +183645,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/PREDICTIVE_CONTRACT_20261116_V1.json",
    "schema": "BRAIN_PREDICTIVE_CONTRACT_V1",
-   "sha256": "7f20ade5139098a74aa614a51ddc2127ff4a3c3671972c79415765334228cdfd",
+   "sha256": "f16530f1255d85ac851af9fdc12b5cf6f43efecd4898eb3a8a64f794f205213e",
    "status": "",
    "terms": {
     "20261116": 1,
