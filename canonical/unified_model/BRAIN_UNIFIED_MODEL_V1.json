@@ -31226,7 +31226,7 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 477,
+  "knowledge_documents": 478,
   "receipt_backed_capabilities": 294,
   "research_index_records": 6920,
   "routing_tokens": 2373,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "da724a54ac7da281ade0523ec853c5f08be473f20a87887d47481e20bba9acde"
+  "value": "973b9a7492d371ed4723fc2b8d484339ccc07331dc8511b76d0f90cd2f6d561f"
  },
  "engines": [
   {
@@ -82220,10 +82220,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1279,
+  "included_source_count": 1280,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "24e66b3c15c0043a54603e55a056a3ef16d32c9a2c5f56d2c8289710a914d8f4"
+  "source_tree_digest": "756d557852289f3fe7843c8533b1e9ce8947f222ac550e6b04bf865013aa91f1"
  },
  "research_index": [
   {
@@ -238418,7 +238418,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/ONE_DEMONSTRATION_AMORTISES_A_SIXTH_OF_REAL_WORK_20261116_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "0b8748e6af1121fa3a2e449133dde2a3285a81b1042b913716cd9edf00759f9f",
+   "sha256": "9da21933520bf4e6ac24357480650574acee529703b38acd1f656f75e578e1af",
    "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
    "terms": {
     "20261116": 1,
