@@ -282,6 +282,33 @@ class HardOpenPopulationAuditTests(unittest.TestCase):
         self.assertEqual(section["measured_effect"]["phrase_blind_arm_design_set"]["blind_solved"], 4)
         self.assertIn("NO_GUI_INVARIANCE_LEVER", data["hard_nonclaims"])
 
+    def test_final_four_levers_and_edit_supply_are_read_without_credit(self) -> None:
+        path = ROOT / "canonical" / "verification" / "PROOF_CARRYING_COUNTERFACTUAL_UNION_20261116_V1.json"
+        data = json.loads(path.read_text(encoding="utf-8"))
+        section = data["four_levers_and_edit_supply"]
+        self.assertEqual(
+            section["status"],
+            "ONCE_IS_ARITHMETIC_AND_REAL_WORK_SUPPLY_IS_ABOUT_ONE_SIXTH",
+        )
+        self.assertIn("bits_after = log2(|H|/|G|)", section["law"])
+        self.assertEqual(round(float(section["levers"]["bits_before"]), 4), 5.5546)
+        self.assertEqual(round(float(section["levers"]["bits_after_one"]), 4), 3.8176)
+        self.assertEqual(section["arithmetic"]["question_over_demonstration_ratio"], 1.747)
+        self.assertEqual(section["arithmetic"]["state_name_arm"]["as_is"]["carried_model_survived"], 7)
+        self.assertEqual(section["arithmetic"]["state_name_arm"]["renamed"]["carried_model_survived"], 0)
+        self.assertEqual(section["supply"]["arms"]["supply"]["siblings_shape_only"], 43)
+        self.assertEqual(section["supply"]["arms"]["supply"]["siblings_context_both"], 31)
+        self.assertEqual(section["supply"]["arms"]["determinacy"]["pairs"], 245)
+        self.assertEqual(section["supply"]["arms"]["determinacy"]["verbatim_repeats"], 103)
+        self.assertEqual(section["supply"]["arms"]["determinacy"]["forced_by_the_demonstration"], 31)
+        self.assertEqual(section["supply"]["arms"]["determinacy"]["wrong"], 64)
+        self.assertTrue(data["invariants"]["one_demonstration_is_arithmetic_not_identification"])
+        self.assertTrue(data["invariants"]["one_demonstration_amortises_only_a_sixth_of_real_work"])
+        self.assertIn("NO_ONCE_IDENTIFIES_A_RULE", data["hard_nonclaims"])
+        self.assertIn("NO_ONE_DEMONSTRATION_COVERS_MOST_REAL_WORK", data["hard_nonclaims"])
+        self.assertIn("canonical/tools/the_four_levers_of_learning_from_experience_v1.py", mod.MECHANISM_GROUPS["four_levers_and_edit_supply"])
+        self.assertIn("canonical/swe_kernel/systematic_edit_supply_v1.py", mod.MECHANISM_GROUPS["four_levers_and_edit_supply"])
+
     def test_final_proved_composition_is_read_without_credit(self) -> None:
         path = ROOT / "canonical" / "verification" / "PROOF_CARRYING_COUNTERFACTUAL_UNION_20261116_V1.json"
         data = json.loads(path.read_text(encoding="utf-8"))

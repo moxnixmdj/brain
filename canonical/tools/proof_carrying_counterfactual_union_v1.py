@@ -189,6 +189,12 @@ MECHANISM_GROUPS: dict[str, tuple[str, ...]] = {
         "canonical/runtime/verified_skill_macro_planner_v1.py",
         "canonical/runtime/capability_composer_v1.py",
     ),
+    "four_levers_and_edit_supply": (
+        "canonical/tools/the_four_levers_of_learning_from_experience_v1.py",
+        "canonical/swe_kernel/systematic_edit_supply_v1.py",
+        "canonical/runtime/demonstration_version_space_v1.py",
+        "canonical/runtime/contrast_selection_v1.py",
+    ),
 }
 
 SUPERSEDES = (
@@ -269,6 +275,19 @@ EVIDENCE_READ = (
     # organ is measured, not a new single lever.
     "COMPOSE_ONLY_WHAT_IS_PROVED_20261116_V1.md",
     "COMPOSE_ONLY_WHAT_IS_PROVED_20261116_V1.json",
+    # Final main move: "once" is arithmetic, and real-work supply for a
+    # demonstration is about one sixth of commits.
+    "YOU_ARE_WRONG_ABOUT_ONCE_AND_IT_IS_ARITHMETIC_20261116_V1.md",
+    "ONE_DEMONSTRATION_AMORTISES_A_SIXTH_OF_REAL_WORK_20261116_V1.md",
+    "canonical/action_intents/YOU_ARE_WRONG_ABOUT_ONCE_AND_IT_IS_ARITHMETIC_20261116_V1.json",
+    "canonical/action_intents/ONE_DEMONSTRATION_AMORTISES_A_SIXTH_OF_REAL_WORK_20261116_V1.json",
+    "canonical/verification/THE_FOUR_LEVERS_OF_LEARNING_FROM_EXPERIENCE_20261116_V1.json",
+    "canonical/verification/SYSTEMATIC_EDIT_SUPPLY_20261116_V1.json",
+    "canonical/tools/the_four_levers_of_learning_from_experience_v1.py",
+    "canonical/swe_kernel/systematic_edit_supply_v1.py",
+    "canonical/tests/test_the_four_levers_of_learning_from_experience_v1.py",
+    "canonical/tests/test_systematic_edit_supply_v1.py",
+    "canonical/tests/fixtures/systematic_edit_corpus_v1.jsonl",
 )
 
 
@@ -408,6 +427,10 @@ def audit(quixbugs_root: pathlib.Path, root: pathlib.Path = ROOT) -> dict[str, A
     gui_census = read_json(V / "GUI_INVARIANCE_IS_VACUOUS_OR_ABSENT_20261116_V1.json") if (V / "GUI_INVARIANCE_IS_VACUOUS_OR_ABSENT_20261116_V1.json").is_file() else None
     gui_intent = read_json(A / "THE_GUI_HAS_NO_INVARIANCE_TO_FIND_20261116_V1.json") if (A / "THE_GUI_HAS_NO_INVARIANCE_TO_FIND_20261116_V1.json").is_file() else None
     proved = read_json(ROOT / "COMPOSE_ONLY_WHAT_IS_PROVED_20261116_V1.json") if (ROOT / "COMPOSE_ONLY_WHAT_IS_PROVED_20261116_V1.json").is_file() else None
+    levers_receipt = read_json(V / "THE_FOUR_LEVERS_OF_LEARNING_FROM_EXPERIENCE_20261116_V1.json") if (V / "THE_FOUR_LEVERS_OF_LEARNING_FROM_EXPERIENCE_20261116_V1.json").is_file() else None
+    supply_receipt = read_json(V / "SYSTEMATIC_EDIT_SUPPLY_20261116_V1.json") if (V / "SYSTEMATIC_EDIT_SUPPLY_20261116_V1.json").is_file() else None
+    arithmetic_intent = read_json(A / "YOU_ARE_WRONG_ABOUT_ONCE_AND_IT_IS_ARITHMETIC_20261116_V1.json") if (A / "YOU_ARE_WRONG_ABOUT_ONCE_AND_IT_IS_ARITHMETIC_20261116_V1.json").is_file() else None
+    supply_intent = read_json(A / "ONE_DEMONSTRATION_AMORTISES_A_SIXTH_OF_REAL_WORK_20261116_V1.json") if (A / "ONE_DEMONSTRATION_AMORTISES_A_SIXTH_OF_REAL_WORK_20261116_V1.json").is_file() else None
     answer_key_counts = [
         row["answer_keys_present"] for row in census["rows"]
         if isinstance(row.get("answer_keys_present"), int)
@@ -592,6 +615,31 @@ def audit(quixbugs_root: pathlib.Path, root: pathlib.Path = ROOT) -> dict[str, A
             and proved.get("boxes", {}).get("B_REFUSED") == 27
             and proved.get("boxes", {}).get("NO_SECOND_CANDIDATE") == 34
         ),
+        "one_demonstration_is_arithmetic_not_identification": bool(
+            levers_receipt
+            and arithmetic_intent
+            and round(float(levers_receipt.get("levers", {}).get("bits_before", 0)), 4) == 5.5546
+            and round(float(levers_receipt.get("levers", {}).get("bits_after_one", 0)), 4) == 3.8176
+            and arithmetic_intent.get("measured_effect", {}).get("bits_before") == 5.5546
+            and arithmetic_intent.get("measured_effect", {}).get("bits_after_one") == 3.8176
+            and arithmetic_intent.get("measured_effect", {}).get("bits_per_chosen_question") == 1.9088
+            and arithmetic_intent.get("measured_effect", {}).get("bits_per_further_demonstration") == 1.0927
+            and arithmetic_intent.get("measured_effect", {}).get("question_over_demonstration_ratio") == 1.747
+            and arithmetic_intent.get("measured_effect", {}).get("state_name_arm", {}).get("as_is", {}).get("carried_model_survived") == 7
+            and arithmetic_intent.get("measured_effect", {}).get("state_name_arm", {}).get("renamed", {}).get("carried_model_survived") == 0
+        ),
+        "one_demonstration_amortises_only_a_sixth_of_real_work": bool(
+            supply_receipt
+            and supply_intent
+            and supply_receipt.get("commits_in_corpus") == 393
+            and supply_receipt.get("scanned") == 268
+            and supply_intent.get("measured_effect", {}).get("arms", {}).get("supply", {}).get("siblings_shape_only") == 43
+            and supply_intent.get("measured_effect", {}).get("arms", {}).get("supply", {}).get("siblings_context_both") == 31
+            and supply_intent.get("measured_effect", {}).get("arms", {}).get("determinacy", {}).get("pairs") == 245
+            and supply_intent.get("measured_effect", {}).get("arms", {}).get("determinacy", {}).get("verbatim_repeats") == 103
+            and supply_intent.get("measured_effect", {}).get("arms", {}).get("determinacy", {}).get("forced_by_the_demonstration") == 31
+            and supply_intent.get("measured_effect", {}).get("arms", {}).get("determinacy", {}).get("wrong") == 64
+        ),
     }
     audit_pass = all(invariants.values())
     return {
@@ -697,6 +745,18 @@ def audit(quixbugs_root: pathlib.Path, root: pathlib.Path = ROOT) -> dict[str, A
             },
             "status": "COMPOSE_ONLY_WHAT_IS_PROVED_AFFIRMATIVE_ORGAN_IS_BOUNDED_NOT_A_SINGLE_LEVER",
         },
+        "four_levers_and_edit_supply": {
+            "receipts": [
+                "canonical/verification/THE_FOUR_LEVERS_OF_LEARNING_FROM_EXPERIENCE_20261116_V1.json",
+                "canonical/verification/SYSTEMATIC_EDIT_SUPPLY_20261116_V1.json",
+            ],
+            "law": (levers_receipt or {}).get("law", ""),
+            "levers": (levers_receipt or {}).get("levers", {}),
+            "state_name_arm": (levers_receipt or {}).get("state_name_arm", {}),
+            "arithmetic": (arithmetic_intent or {}).get("measured_effect", {}),
+            "supply": (supply_intent or {}).get("measured_effect", {}),
+            "status": "ONCE_IS_ARITHMETIC_AND_REAL_WORK_SUPPLY_IS_ABOUT_ONE_SIXTH",
+        },
         "verified_repair_rerun": {
             "receipt": "canonical/verification/RERUN_THE_LEARNED_ARMS_REPAIRS_20261116_V1.json",
             "claimed_repaired": (rerun or {}).get("claimed_repaired"),
@@ -783,6 +843,8 @@ def audit(quixbugs_root: pathlib.Path, root: pathlib.Path = ROOT) -> dict[str, A
             "NO_ONE_DEMONSTRATION_PER_ENVIRONMENT_CLAIM",
             "NO_GUI_INVARIANCE_LEVER",
             "NO_PROOF_COMPOSITION_AS_SINGLE_LEVER",
+            "NO_ONCE_IDENTIFIES_A_RULE",
+            "NO_ONE_DEMONSTRATION_COVERS_MOST_REAL_WORK",
             "PRODUCER_RUN_NOT_INDEPENDENT_VERIFICATION",
             "TERMINAL_TRUTH_UNTOUCHED",
         ],

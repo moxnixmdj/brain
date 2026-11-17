@@ -2,13 +2,13 @@
   "action_id": "SEPARATION_IS_THE_BOTTLENECK_20261116_V1",
   "action_intent_id": "SEPARATION_IS_THE_BOTTLENECK_20261116_V1",
   "action_kind": "REAL_CAPABILITY_ACQUISITION",
-  "action_summary": "Re-audit the now-composed 24/40 repair union against every later main measurement through a2c348... (one-run judge, alpha invariance, exact enumeration-wall decision, browser implied-ending, new-environment cost law, read-first named gaps, operand addition without transfer, replay-under-change drift, phrase trigger and declared-format census, long-tail taxonomy, one-demonstration basin, GUI-invariance/phrase-blind census, and proved composition), falsify earlier single-factor, permanent-replay, single-lever, GUI-invariance and proof-composition-as-final-unlock answers, and bind separation as a necessary condition to the already-existing decision/composition organs by effect.",
+  "action_summary": "Re-audit the now-composed 24/40 repair union against every later main measurement through 8408c78c... (one-run judge, alpha invariance, exact enumeration-wall decision, browser implied-ending, new-environment cost law, read-first named gaps, operand addition without transfer, replay-under-change drift, phrase trigger and declared-format census, long-tail taxonomy, one-demonstration basin, GUI-invariance/phrase-blind census, proved composition, four-levers information arithmetic, and systematic-edit supply on real commit history), falsify earlier single-factor, permanent-replay, single-lever, GUI-invariance, proof-composition-as-final-unlock, once-identifies-a-rule and one-demo-covers-most-work answers, and bind separation as a necessary condition to the already-existing decision/composition organs by effect.",
   "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
   "agent_orientation": {
     "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
     "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
     "conversation_memory_is_authority": false,
-    "earlier_routes_exhausted_reason": "REUSE was tried first: constructive, interventional, admission, identification, invariance, exact-decision, planning/composition, environment-learning, read-first, operand, replay-drift, trigger-census, basin, GUI-invariance and proved-composition organs were read by effect before any answer was written. All main receipts through a2c348... were integrated once; a new learner, verifier, vocabulary, weight house, replay macro, one-lever hunt, GUI-invariance machinery, proof-composition-as-final-unlock claim, or +1/16 composer wiring would duplicate a part or claim an ordinary incremental gain. The selected route composes their measured evidence into one falsifiable audit.",
+    "earlier_routes_exhausted_reason": "REUSE was tried first: constructive, interventional, admission, identification, invariance, exact-decision, planning/composition, environment-learning, read-first, operand, replay-drift, trigger-census, basin, GUI-invariance and proved-composition organs were read by effect before any answer was written. All main receipts through 8408c78c... were integrated once, including the closing four-levers arithmetic and real-work systematic-edit supply; a new learner, verifier, vocabulary, weight house, replay macro, one-lever hunt, GUI-invariance machinery, proof-composition-as-final-unlock claim, once-identifies-a-rule claim, one-demonstration-covers-most-work assumption, or +1/16 composer wiring would duplicate a part or claim an ordinary incremental gain. The selected route composes their measured evidence into one falsifiable audit.",
     "incremental_spend_usd": 0,
     "independent_verification_completed": false,
     "independent_verification_note": "Producer-run sandbox only. Independent personnel verification is still open.",
@@ -71,7 +71,7 @@
   },
   "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::SEPARATION_EQUATION_CLEAN_UNION_AUDIT_6877_FBA7_20261116",
-  "canonical_base_commit": "a2c3480a06f457c225a431e384ff311154882c52",
+  "canonical_base_commit": "8408c78c97d45008c9ec2f0c2d8b72f862ee97c2",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -91,7 +91,7 @@
     "Work in branch, merge only when complete (fastest)",
     "Merge once, not 10 times."
   ],
-  "falsification_condition": "A known repaired task counted as open progress, a synthetic task in the population, an unreconstructible claimed repair counted as confirmed, a screen-only pass or majority vote recorded as identification, the one-run 24/40 miscredited as new capability, the alpha-invariance cost win miscredited as a repair gain, the new-environment cost law read as solving arbitrary computer use, operand addition read as transfer, a stale recorded plan read as a permanent macro, a declared-format prior read as a single lever, the long tail reduced to one bottleneck, a GUI-invariance lever claimed where the judge has no quotient, or proved composition claimed as the final unlock despite 34 no-second-candidate refusals.",
+  "falsification_condition": "A known repaired task counted as open progress, a synthetic task in the population, an unreconstructible claimed repair counted as confirmed, a screen-only pass or majority vote recorded as identification, the one-run 24/40 miscredited as new capability, the alpha-invariance cost win miscredited as a repair gain, the new-environment cost law read as solving arbitrary computer use, operand addition read as transfer, a stale recorded plan read as a permanent macro, a declared-format prior read as a single lever, the long tail reduced to one bottleneck, a GUI-invariance lever claimed where the judge has no quotient, proved composition claimed as the final unlock despite 34 no-second-candidate refusals, one demonstration claimed to identify a rule after leaving 3.8176 of 5.5546 bits, output variety credited as information despite 2 of 37 rank agreements, one demonstration claimed to cover most real work despite 225 of 268 commits having no sibling, or the 1.747x ratio credited as new capability.",
   "generic_repair_from_single_probe": false,
   "governance_change": false,
   "highest_leverage_now": true,
@@ -154,6 +154,82 @@
       "seeded_learn_trials": 120,
       "selector_equivalence_cases": 120
     },
+    "four_levers_and_edit_supply": {
+      "authority": "NONE__PRODUCER_RUN_SANDBOX",
+      "capability_credit": 0,
+      "edit_supply": {
+        "commits_scanned": 268,
+        "commits_with_no_sibling": 225,
+        "corpus": "canonical/tests/fixtures/systematic_edit_corpus_v1.jsonl",
+        "corpus_sha256": "b47d9c9c23e641a8865a79d9dce3059a306257813d28114ed6029a9606cbde5a",
+        "forced_by_the_demonstration": 31,
+        "generalising_pairs": 142,
+        "induced_right": 78,
+        "induced_right_share": 0.5493,
+        "lucky": 47,
+        "pairs": 245,
+        "permanence": "action_replay_under_change_v1 measured 122/228 stale plans and 71/228 silent corruptions despite 228/228 legal operations",
+        "records": 393,
+        "repos": [
+          "pypa/packaging",
+          "pypa/pyproject-hooks",
+          "pallets/click",
+          "pallets/itsdangerous",
+          "pallets/markupsafe"
+        ],
+        "siblings_context_any": 42,
+        "siblings_context_both": 31,
+        "siblings_shape_only": 43,
+        "verbatim_repeats": 103,
+        "wrong": 64,
+        "wrong_diagnosis": {
+          "constant_differs": 31,
+          "mismatch": 13,
+          "rebound_wrong": 20
+        }
+      },
+      "incremental_spend_usd": 0,
+      "law": "bits_after = log2(|H|/|G|) - I(E) - sum I(q) - I(interface); learning ends at 0. The authored prior is the only term not billed per interaction.",
+      "levers": {
+        "answer_variety_points": 37,
+        "answer_variety_rank_agreements": 2,
+        "best_demonstration_point": {
+          "bits": 3.6293,
+          "distinct_answers": 5,
+          "x": 0
+        },
+        "bits_after_one": 3.8176,
+        "bits_before": 5.5546,
+        "bits_per_chosen_question": 1.9088,
+        "bits_per_further_demonstration": 1.0927,
+        "ceiling_binds": false,
+        "invariance_group_order": 1.0,
+        "queries_to_settle_after_one": 2.0,
+        "question_over_demonstration_ratio": 1.747,
+        "space_entries": 47,
+        "state_name_arm": {
+          "as_is": {
+            "carried_model_survived": 7,
+            "warm_cheaper": 8,
+            "warm_dearer": 2
+          },
+          "renamed": {
+            "carried_model_survived": 0,
+            "warm_cheaper": 1,
+            "warm_dearer": 9
+          }
+        },
+        "survivors_after_one": 14.1,
+        "targets_exact_after_one": 0,
+        "targets_settled_after_one_then_ask": 10,
+        "worst_demonstration_point": {
+          "bits": 0.6035,
+          "distinct_answers": 36,
+          "x": 30
+        }
+      },
+      "status": "ONCE_IS_ARITHMETIC_AND_REAL_WORK_SUPPLY_IS_ABOUT_ONE_SIXTH"
+    },
     "gui_invariance_and_operand_boundary": {
       "enter_time_world_rewrite": {
         "0113PM": -1,
@@ -198,7 +274,7 @@
       "tasks": 16,
       "unmeasurable": 8
     },
-    "headline": "separation is a necessary condition, not a single lever, a GUI invariance, or a proved-composition final unlock; one demonstration leaves ten bits and licenses zero requirements, the space must be assembled from each failure, some decisions need the operation proof as the observable, agreement among passing candidates is not identification, and the one-run 24/40 composition plus every later reach/cost/policy/operand/replay/trigger/taxonomy/basin/GUI/proof measurement changes evidence but not the 24/40 capability ceiling",
+    "headline": "separation is a necessary condition, not a single lever, a GUI invariance, a proved-composition final unlock, a one-experience identification, or coverage of most real work; the hypothesis space must be authored and survivors split by a chosen computable observation read by an independent verifier; one demonstration leaves 3.8176 of 5.5546 bits in the measured 47-program space, has a sibling in only 43 of 268 real commits, and the one-run 24/40 composition plus every later reach/cost/policy/operand/replay/trigger/taxonomy/basin/GUI/proof/arithmetic/supply measurement changes evidence but not the 24/40 capability ceiling",
     "identification": {
       "bits_after_one_demonstration_median": 10.018,
       "questions_to_sufficiency_mean": 1.31,
@@ -244,7 +320,12 @@
         "building GUI invariance machinery where the page judge has no quotient",
         "treating a phrase-blind basis as full-surface capability",
         "calling proved composition the final unlock",
-        "treating 31 composed two-step attempts as coverage of the proposal generator or long-horizon verifier"
+        "treating 31 composed two-step attempts as coverage of the proposal generator or long-horizon verifier",
+        "choosing demonstrations by output variety (2 of 37 rank agreements)",
+        "assuming one demonstration has a sibling in real work (225 of 268 commits have none)",
+        "calling the 1.747x question/demonstration ratio a universal constant or new capability",
+        "treating the authored prior or hypothesis space as learned from one trace",
+        "claiming one experience identifies a rule or amortises most real software work"
       ],
       "open_probe": "0/3",
       "reason": "An all-zero open-task result would be vacuous because the instrument also returned zero on five already-solved calibration tasks."
@@ -463,7 +544,13 @@
       "canonical/verification/DECLARED_TRIGGER_AND_OPERAND_TAXONOMY_20261116_V1.json",
       "canonical/verification/ONE_DEMONSTRATION_BASIN_20261116_V1.json",
       "canonical/verification/GUI_INVARIANCE_IS_VACUOUS_OR_ABSENT_20261116_V1.json",
-      "COMPOSE_ONLY_WHAT_IS_PROVED_20261116_V1.json"
+      "COMPOSE_ONLY_WHAT_IS_PROVED_20261116_V1.json",
+      "canonical/verification/THE_FOUR_LEVERS_OF_LEARNING_FROM_EXPERIENCE_20261116_V1.json",
+      "canonical/verification/SYSTEMATIC_EDIT_SUPPLY_20261116_V1.json",
+      "YOU_ARE_WRONG_ABOUT_ONCE_AND_IT_IS_ARITHMETIC_20261116_V1.md",
+      "ONE_DEMONSTRATION_AMORTISES_A_SIXTH_OF_REAL_WORK_20261116_V1.md",
+      "canonical/action_intents/YOU_ARE_WRONG_ABOUT_ONCE_AND_IT_IS_ARITHMETIC_20261116_V1.json",
+      "canonical/action_intents/ONE_DEMONSTRATION_AMORTISES_A_SIXTH_OF_REAL_WORK_20261116_V1.json"
     ],
     "screen_integrity": {
       "learned_arm_screen_disagreements": 0,
@@ -497,7 +584,7 @@
       "screen_disagreements_in_that_record": 0
     }
   },
-  "next_step": "Start all future hard-open work from the 16 audited unrepaired tasks, the 16-class browser long tail and the one measured world-rewrite operand (`enter-time`); derive the next sense/operand from a specific failure and a causal observation that splits it; strip English-phrase triggers in favour of page-declared or computed structure; use predict-prove-act and compose only steps whose premise and proof survive effects; build the still-open proposal generator pointed at unpassed bugs and a per-step verifier for long horizons; never quote a fast-screen pass, majority vote, unreconstructible claimed repair, one-run composition, local operand addition, read-first policy, per-environment cost law, trigger census, taxonomy, basin, phrase-blind basis, GUI-invariance census, or proved-composition measurement as identification, a single lever, or permanent capability.",
+  "next_step": "Start all future hard-open work from the 16 audited unrepaired tasks, the 16-class browser long tail and the one measured world-rewrite operand (`enter-time`); author the hypothesis space before spending an interaction and choose observations that split survivors, not demonstrations with varied outputs; derive the next sense/operand from a specific failure and a causal observation that splits it; strip English-phrase triggers in favour of page-declared or computed structure; use predict-prove-act and compose only steps whose premise and proof survive effects; build the still-open proposal generator pointed at unpassed bugs and a per-step verifier for long horizons; never quote a fast-screen pass, majority vote, unreconstructible claimed repair, one-run composition, local operand addition, read-first policy, per-environment cost law, trigger census, taxonomy, basin, phrase-blind basis, GUI-invariance census, proved-composition measurement, four-levers ratio, or systematic-edit-supply measurement as identification, a single lever, or permanent capability.",
   "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "prior_work_reused": [
     "canonical/tools/grammar_closed_repair_v1.py",
@@ -536,11 +623,16 @@
     "canonical/swe_kernel/one_demonstration_basin_v1.py",
     "canonical/tools/gui_invariance_census_v1.py",
     "canonical/tools/gui_phrase_blind_basis_arm_v1.py",
-    "canonical/swe_kernel/proved_composition_v1.py"
+    "canonical/swe_kernel/proved_composition_v1.py",
+    "canonical/tools/the_four_levers_of_learning_from_experience_v1.py",
+    "canonical/swe_kernel/systematic_edit_supply_v1.py",
+    "canonical/tests/test_the_four_levers_of_learning_from_experience_v1.py",
+    "canonical/tests/test_systematic_edit_supply_v1.py",
+    "canonical/runtime/demonstration_version_space_v1.py"
   ],
   "probe_specific": false,
   "recursive_obs": {
-    "canonical_base_commit": "a2c3480a06f457c225a431e384ff311154882c52",
+    "canonical_base_commit": "8408c78c97d45008c9ec2f0c2d8b72f862ee97c2",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "re-testing known repaired bugs",
@@ -642,7 +734,7 @@
         "reuse the token anti-unifier",
         "ask a model to write the patch"
       ],
-      "search_stop_decision": "Stop after all main measurements through a2c348..., including the one-run 24/40 measurement, alpha-invariance ablation, exact enumeration-wall decision, browser census, four-machine cost law, read-first board, full-suite operand addition, replay-under-change drift audit, phrase-trigger census, 16-class long-tail taxonomy, one-demonstration basin, GUI-invariance / phrase-blind census, and proved-composition measurement. Integrate the final main move once; do not add a new organ, chase further main moves before this merge, replay a stale plan, hunt for one lever, build GUI-invariance machinery, call proved composition the final unlock, or count a cost/reach/policy/local-addition/taxonomy/basin/GUI/proof win as a repair.",
+      "search_stop_decision": "Stop after all main measurements through 8408c78c..., including the one-run 24/40 measurement, alpha-invariance ablation, exact enumeration-wall decision, browser census, four-machine cost law, read-first board, full-suite operand addition, replay-under-change drift audit, phrase-trigger census, 16-class long-tail taxonomy, one-demonstration basin, GUI-invariance / phrase-blind census, proved-composition measurement, four-levers arithmetic and real-work systematic-edit supply. This is the final integrated main move; do not add a new organ, chase further main moves before this merge, assume one demonstration identifies a rule or covers most work, replay a stale plan, hunt for one lever, build GUI-invariance machinery, call proved composition the final unlock, or count a cost/reach/policy/local-addition/taxonomy/basin/GUI/proof win as a repair.",
       "white_box_harvest_note": "The canonical ladder is recorded in full; the WHITE_BOX_HARVEST step was considered and found empty. No donor model, weight or external artifact was harvested: the mechanism was induced from the corpus's own demonstration pairs and the tree's own repair primitive."
     },
     "obs_verification": {
@@ -963,19 +1055,20 @@
     "commands": [
       "python3 canonical/tools/proof_carrying_counterfactual_union_v1.py --quixbugs /tmp/quixbugs --out canonical/verification/PROOF_CARRYING_COUNTERFACTUAL_UNION_20261116_V1.json",
       "/tmp/cgr_venv/bin/python -m pytest -q canonical/tests/test_proof_carrying_counterfactual_union_v1.py",
-      "/tmp/cgr_venv/bin/python -m pytest -q --tb=line <42 selected related suites>",
+      "/tmp/cgr_venv/bin/python -m pytest -q canonical/tests/test_the_four_levers_of_learning_from_experience_v1.py canonical/tests/test_systematic_edit_supply_v1.py",
+      "/tmp/cgr_venv/bin/python -m pytest -q --tb=line <44 selected related suites>",
       "git archive HEAD | tar -x -C /tmp/clean_model && (cd /tmp/clean_model && python3 canonical/runtime/compile_brain_unified_model_v1.py --output canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json) && cp /tmp/clean_model/canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json",
       "python3 canonical/runtime/verify_brain_unified_model_v1.py",
       "python3 execution_guard/repo_integrity_guard_v1.py",
       "python3 execution_guard/agent_orientation_check_v1.py intent-check canonical/action_intents/SEPARATION_IS_THE_BOTTLENECK_20261116_V1.json",
-      "python3 canonical/runtime/enforce_goal_hierarchy.py --base a2c3480a06f457c225a431e384ff311154882c52 --head HEAD",
-      "python3 execution_guard/enforce_load_bearing_primary_pr.py --base a2c3480a06f457c225a431e384ff311154882c52 --head HEAD",
+      "python3 canonical/runtime/enforce_goal_hierarchy.py --base 8408c78c97d45008c9ec2f0c2d8b72f862ee97c2 --head HEAD",
+      "python3 execution_guard/enforce_load_bearing_primary_pr.py --base 8408c78c97d45008c9ec2f0c2d8b72f862ee97c2 --head HEAD",
       "git diff --check"
     ],
     "independent_verification_completed": false,
-    "result": "40 real tasks; one-run one-judge 24/40; 16 hard-open; 8 example-searchable; 8 no-JSON tasks made searchable by PR #6885 with 0/9 repairs; PR #6887 confirmed 16 of 20 claimed learned-arm repairs with 4 unknown; 100 held-out HumanEvalFix selection measurement read separately (8/8 settled, 0 regressions, majority vote wrong 3/5); corrected earlier browser census 52/130; later zero-experience browser census 66/130 with 0 regressions; alpha invariance 0/304 -> 4/384 accepted with 0 new tasks; exact inclusion-extraction 2^23-8 with 0 capability credit; four-machine cost law 13/16 with 3 honest refusals; read-first 66/89 READ pages with 0 false negatives; operand addition 78->83 with 0/121 held-out gains; replay drift 122/228 stale and 71/228 silent corruptions despite 228/228 legal operations; declared-format prior 6/123; 46 unsolved pages in 16 classes with largest 6; basin 168 states/1680 transitions, 112/168 status-level domain, 56/168 premise domain, 24->0 undecidable by sense, 168/168 under command-output-only feedback; GUI 15 identity arms / 13 vacuous, 5 judges / 4 quotient-zero, phrase-blind 4/5 design and 5/123 full surface with 0 blind-only; proved composition 31/80, reach 0.3875/0.5345, 0 damaged, 34 no-second-candidate. 15 new audit tests passed; 42 selected related suites gave 500 passed, 10 pre-existing failures, 1 skipped and 5 subtests passed in 313.76 s; the 9 capability_composer and 1 fabric failures reproduce on clean origin/main at a2c348..., where the same two suites give 10 failed/33 passed/5 subtests; model 33/33 after a clean-archive recompile that fixes the ignored __pycache__ CI-only 32/33 mismatch; guard 17/0; git diff --check clean; compileall reports 5 untouched main-only syntax errors reproduced on a clean origin/main archive."
+    "result": "40 real tasks; one-run one-judge 24/40; 16 hard-open; 8 example-searchable; 8 no-JSON tasks made searchable by PR #6885 with 0/9 repairs; PR #6887 confirmed 16 of 20 claimed learned-arm repairs with 4 unknown; 100 held-out HumanEvalFix selection measurement read separately (8/8 settled, 0 regressions, majority vote wrong 3/5); corrected earlier browser census 52/130; later zero-experience browser census 66/130 with 0 regressions; alpha invariance 0/304 -> 4/384 accepted with 0 new tasks; exact inclusion-extraction 2^23-8 with 0 capability credit; four-machine cost law 13/16 with 3 honest refusals; read-first 66/89 READ pages with 0 false negatives; operand addition 78->83 with 0/121 held-out gains; replay drift 122/228 stale and 71/228 silent corruptions despite 228/228 legal operations; declared-format prior 6/123; 46 unsolved pages in 16 classes with largest 6; basin 168 states/1680 transitions, 112/168 status-level domain, 56/168 premise domain, 24->0 undecidable by sense, 168/168 under command-output-only feedback; GUI 15 identity arms / 13 vacuous, 5 judges / 4 quotient-zero, phrase-blind 4/5 design and 5/123 full surface with 0 blind-only; proved composition 31/80, reach 0.3875/0.5345, 0 damaged, 34 no-second-candidate; four levers 5.5546 -> 3.8176 bits, 1.747x question/demonstration ratio, 2/37 answer-variety rank agreements, state-name model 7/10 -> 0/10; systematic edit supply 43/268 sibling commits, 225/268 no sibling, 103/245 verbatim, 31/245 forced, 78/142 induction-requiring pairs right. 16 new audit tests passed; 22 new main tests passed; 44 selected related suites gave 523 passed, 10 pre-existing failures, 1 skipped, 5 subtests passed and 240 warnings in 326.62s; the 9 capability_composer and 1 fabric failures reproduce on clean origin/main at 8408c78c..., where the same two suites give 10 failed/33 passed/5 subtests and the new main tests give 22 passed; model 33/33 after a clean-archive recompile that fixes the ignored __pycache__ CI-only 32/33 mismatch; guard 17/0; git diff --check clean; compileall reports 5 untouched main-only syntax errors reproduced on a clean origin/main archive."
   },
   "weakens_existing_guard": false,
-  "why_selected_route_is_fastest_sufficient": "Every cheaper route was measured dead or already exists under a non-obvious name: one trace leaves 10.018 bits; more environments become a per-machine cost law; the composed run reaches 24/40 and stops; alpha invariance changes 0/304 to 4/384 survivors without moving capability; exact inclusion-extraction decides 2^23 survivors without enumeration; read-first names 21 gaps with 0 false negatives; an added operand wins 5 design pages and 0 held-out pages; replay drift stales 122/228 plans while the operation stays legal 228/228 times; a declared-format prior covers 6/123 pages; 46 unsolved pages fall into 16 classes with largest 6; one demonstration licenses only 112/168 or 56/168 states while the undecidable set moves with the sense; the GUI judge has 4/5 quotient-zero tasks while a phrase-blind basis adds 0 full-surface pages; and proved composition verifies 31/80 attempts with 0 damage but reach 0.3875 and 34 missing second candidates. Reusing and auditing the existing organs is the only route that does not duplicate a part, hunt for a nonexistent single lever or GUI invariance, call proof composition the final unlock, or claim an ordinary +1/16 as progress.",
-  "why_this_is_not_another_organ": "It composes existing measurements and organs by effect, binds the answer to receipts, and recompiles the content-addressed model from a clean archive; it does not add a learner, verifier, vocabulary, replay macro, one-lever search, GUI-invariance machinery, proved-composition final-unlock claim, weight, or external model."
+  "why_selected_route_is_fastest_sufficient": "Every cheaper route was measured dead or already exists under a non-obvious name: one trace leaves 10.018 bits; more environments become a per-machine cost law; the composed run reaches 24/40 and stops; alpha invariance changes 0/304 to 4/384 survivors without moving capability; exact inclusion-extraction decides 2^23 survivors without enumeration; read-first names 21 gaps with 0 false negatives; an added operand wins 5 design pages and 0 held-out pages; replay drift stales 122/228 plans while the operation stays legal 228/228 times; a declared-format prior covers 6/123 pages; 46 unsolved pages fall into 16 classes with largest 6; one demonstration licenses only 112/168 or 56/168 states while the undecidable set moves with the sense; the GUI judge has 4/5 quotient-zero tasks while a phrase-blind basis adds 0 full-surface pages; proved composition verifies 31/80 attempts with 0 damage but reach 0.3875 and 34 missing second candidates; one demonstration leaves 3.8176 of 5.5546 bits and has a sibling in only 43/268 real commits, with 103/245 pairs being copy-paste and 31/245 genuinely forced. Reusing and auditing the existing organs is the only route that does not duplicate a part, hunt for a nonexistent single lever or GUI invariance, call proof composition the final unlock, claim once identifies a rule or covers most work, or claim an ordinary +1/16 as progress.",
+  "why_this_is_not_another_organ": "It composes existing measurements and organs by effect, binds the answer to receipts, and recompiles the content-addressed model from a clean archive; it does not add a learner, verifier, vocabulary, replay macro, one-lever search, GUI-invariance machinery, proved-composition final-unlock claim, once-identifies-a-rule claim, one-demonstration-covers-most-work assumption, weight, or external model."
 }

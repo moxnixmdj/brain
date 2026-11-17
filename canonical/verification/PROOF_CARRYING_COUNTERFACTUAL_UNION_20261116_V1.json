@@ -222,7 +222,18 @@
     "canonical/action_intents/THE_GUI_HAS_NO_INVARIANCE_TO_FIND_20261116_V1.json",
     "canonical/verification/GUI_INVARIANCE_IS_VACUOUS_OR_ABSENT_20261116_V1.json",
     "COMPOSE_ONLY_WHAT_IS_PROVED_20261116_V1.md",
-    "COMPOSE_ONLY_WHAT_IS_PROVED_20261116_V1.json"
+    "COMPOSE_ONLY_WHAT_IS_PROVED_20261116_V1.json",
+    "YOU_ARE_WRONG_ABOUT_ONCE_AND_IT_IS_ARITHMETIC_20261116_V1.md",
+    "ONE_DEMONSTRATION_AMORTISES_A_SIXTH_OF_REAL_WORK_20261116_V1.md",
+    "canonical/action_intents/YOU_ARE_WRONG_ABOUT_ONCE_AND_IT_IS_ARITHMETIC_20261116_V1.json",
+    "canonical/action_intents/ONE_DEMONSTRATION_AMORTISES_A_SIXTH_OF_REAL_WORK_20261116_V1.json",
+    "canonical/verification/THE_FOUR_LEVERS_OF_LEARNING_FROM_EXPERIENCE_20261116_V1.json",
+    "canonical/verification/SYSTEMATIC_EDIT_SUPPLY_20261116_V1.json",
+    "canonical/tools/the_four_levers_of_learning_from_experience_v1.py",
+    "canonical/swe_kernel/systematic_edit_supply_v1.py",
+    "canonical/tests/test_the_four_levers_of_learning_from_experience_v1.py",
+    "canonical/tests/test_systematic_edit_supply_v1.py",
+    "canonical/tests/fixtures/systematic_edit_corpus_v1.jsonl"
   ],
   "exact_decision_past_enumeration_wall": {
     "measured_effect": {
@@ -254,7 +265,207 @@
     "subsequences",
     "wrap"
   ],
-  "generated_at_utc": "2026-11-17T00:19:43.219245+00:00",
+  "four_levers_and_edit_supply": {
+    "arithmetic": {
+      "answer_variety_predicts_information": {
+        "points": 37,
+        "rank_agreements": 2,
+        "verdict": "NO"
+      },
+      "best_demonstration_point": {
+        "bits": 3.6293,
+        "distinct_answers": 5,
+        "fraction_of_space": 0.6534,
+        "x": 0
+      },
+      "bits_after_one": 3.8176,
+      "bits_before": 5.5546,
+      "bits_per_chosen_question": 1.9088,
+      "bits_per_further_demonstration": 1.0927,
+      "ceiling_binds": false,
+      "demonstration_ceiling_log2_Y": 7.4594,
+      "demos_needed_by_experience_alone": 3.49,
+      "distinct_functions": 47,
+      "invariance_group_order": 1.0,
+      "invariance_note": "the tree's hand-authored space has no spelling duplicates, so the alpha lever is empty there; any space enumerated by syntax has |G|>1",
+      "law": "bits_after = log2(|H|/|G|) - I(E) - sum I(q) - I(interface); ends at 0",
+      "queries_measured": 2.0,
+      "question_over_demonstration_ratio": 1.747,
+      "rerun_this_base": {
+        "boundary_probe": "7/10 CARRIED_MODEL as-is, 0/10 renamed",
+        "one_shot_probe": "14.1/47 survivors after one, 0/10 identified, 10/10 after 2.0 chosen queries"
+      },
+      "reused_not_rebuilt": [
+        "CANON_1_INSTANT_LEARNING_AUDIT_20261112",
+        "one_shot_identifiability_probe_20261112",
+        "instant_learning_boundary_probe_v1",
+        "what_a_success_teaches_20261112",
+        "repair_version_space_selection_v1",
+        "contrast_selection_v1",
+        "demonstration_version_space_v1"
+      ],
+      "space_entries": 47,
+      "state_name_arm": {
+        "as_is": {
+          "carried_model_survived": 7,
+          "warm_cheaper": 8,
+          "warm_dearer": 2
+        },
+        "renamed": {
+          "carried_model_survived": 0,
+          "warm_cheaper": 1,
+          "warm_dearer": 9
+        }
+      },
+      "worst_demonstration_point": {
+        "bits": 0.6035,
+        "distinct_answers": 36,
+        "x": 30
+      }
+    },
+    "law": "bits_after = log2(|H|/|G|) - I(E) - sum I(q) - I(interface); learning ends at 0. I(E) <= log2(|Y|) for ONE demonstration, whatever |H| is. The prior is the only term not billed per interaction.",
+    "levers": {
+      "answer_alphabet_over_pool": 176,
+      "bits_after_one": 3.817623257511431,
+      "bits_after_three": 1.632268215499513,
+      "bits_before": 5.554588851677638,
+      "bits_removed_by_each_further_demo": 1.092677521005959,
+      "bits_removed_by_one": 1.7369655941662066,
+      "collisions": [],
+      "demonstration_ceiling_bits": 7.459431618637297,
+      "distinct_functions": 47,
+      "invariance_group_order": 1.0,
+      "space_entries": 47,
+      "verified_by_rerun_20261116": {
+        "accuracy_after_one_then_ask": 1.0,
+        "accuracy_one_example_narrow_prior": 1.0,
+        "leader_accuracy_after_one": 0.1,
+        "leader_accuracy_after_three": 0.8,
+        "queries_to_settle_after_one": 2.0,
+        "survivors_after_one": 14.1,
+        "survivors_after_three": 3.1,
+        "targets_exact_after_one": 0,
+        "targets_exact_after_three": 5,
+        "targets_settled_after_one_then_ask": 10
+      }
+    },
+    "receipts": [
+      "canonical/verification/THE_FOUR_LEVERS_OF_LEARNING_FROM_EXPERIENCE_20261116_V1.json",
+      "canonical/verification/SYSTEMATIC_EDIT_SUPPLY_20261116_V1.json"
+    ],
+    "state_name_arm": {
+      "as_is": {
+        "carried_model_survived": 7,
+        "cases": 10,
+        "warm_cheaper": 8,
+        "warm_dearer": 2
+      },
+      "reading": "A carried transition model is a table keyed on state NAMES. A rename is an invariant transformation of the task and it destroys 7/10 of the wins. Under the law this is lever 1: the space was quotiented by the wrong group, so the model memorised a spelling. It is not a coverage failure and no amount of further experience repairs it, because every further experience is billed in the same spelling.",
+      "renamed": {
+        "carried_model_survived": 0,
+        "cases": 10,
+        "warm_cheaper": 1,
+        "warm_dearer": 9
+      },
+      "source": "canonical/tools/instant_learning_boundary_probe_v1.py"
+    },
+    "status": "ONCE_IS_ARITHMETIC_AND_REAL_WORK_SUPPLY_IS_ABOUT_ONE_SIXTH",
+    "supply": {
+      "arms": {
+        "by_size": {
+          "2": {
+            "determined": 105,
+            "lucky": 47,
+            "pairs": 197,
+            "wrong": 45
+          },
+          "3": {
+            "determined": 16,
+            "lucky": 0,
+            "pairs": 18,
+            "wrong": 2
+          },
+          "4": {
+            "determined": 9,
+            "lucky": 0,
+            "pairs": 13,
+            "wrong": 4
+          },
+          "5": {
+            "determined": 3,
+            "lucky": 0,
+            "pairs": 14,
+            "wrong": 11
+          },
+          "6": {
+            "determined": 1,
+            "lucky": 0,
+            "pairs": 3,
+            "wrong": 2
+          }
+        },
+        "determinacy": {
+          "forced_by_the_demonstration": 31,
+          "generalising_pairs": 142,
+          "lucky": 47,
+          "matched_share_of_generalising": 0.5493,
+          "pairs": 245,
+          "reading": "42% of what a demonstration gets right is copy-paste; on the pairs needing induction it is right about half the time",
+          "verbatim_repeats": 103,
+          "wrong": 64
+        },
+        "diagnosis_of_wrong": {
+          "constant_differs": 31,
+          "mismatch": 13,
+          "rebound_wrong": 20
+        },
+        "stricter_rung": {
+          "context_both_determined_share": 0.7333,
+          "context_both_pairs": 60,
+          "reading": "requiring the neighbourhood on both sides shrinks supply to 11.6% and raises precision to 73.3%, so the supply figure is a rung, not a constant"
+        },
+        "supply": {
+          "commits_scanned": 268,
+          "reading": "84-88% of real commits have no sibling site: one demonstration amortises nothing there",
+          "siblings_context_both": 31,
+          "siblings_shape_only": 43
+        }
+      },
+      "authority": "NONE__PRODUCER_RUN_SANDBOX",
+      "corpus": {
+        "path": "canonical/tests/fixtures/systematic_edit_corpus_v1.jsonl",
+        "records": 393,
+        "repos": [
+          "pallets/click",
+          "pallets/itsdangerous",
+          "pallets/markupsafe",
+          "pypa/packaging",
+          "pypa/pyproject-hooks"
+        ],
+        "schema": "systematic_edit_corpus_v1",
+        "sha256": "b47d9c9c23e641a8865a79d9dce3059a306257813d28114ed6029a9606cbde5a"
+      },
+      "external_state": {
+        "agentic_refactoring": "arXiv 2511.04824: 26.1% of agentic commits carry explicit refactoring intent; the two most frequent operations are rename and type change",
+        "our_own_replay_measurement": "action_replay_under_change_v1: 228 real compositions, 53.5% stale, 31.1% silently corrupt, legality held in 228 of 228",
+        "refactoring_share_2026": "GitClear 2026 (623M changes): refactoring fell from 21% of changed lines in 2022 to 3.8% in 2026 while within-commit copy/paste rose to 15.7%",
+        "repetitiveness_of_code_changes": "Nguyen et al., ASE 2013: 2,841 Java projects, 1.8M revisions; repetitiveness 70-100% at size 1 and decaying exponentially with size",
+        "structural_changes_are_systematic": "Kim et al.: about 75% of structural changes to mature software are systematic, but not identical in context",
+        "systematic_editing_from_one_example": "SyDIT, PLDI 2011: from edit pairs in five large projects, mimics the human correctly on 70% (39/56) of systematic edits"
+      },
+      "incremental_spend_usd": 0,
+      "measured_at_commit": "725f361b85c1fe85b1f63aa3761d99ed46966860",
+      "model_calls": 0,
+      "network_calls": 0,
+      "what_this_does_not_claim": [
+        "no capability credit, no benchmark rank, no terminal credit",
+        "no claim that five Python repositories are engineering in general",
+        "no claim that a lexical abstraction measures meaning; 'exact' means 'reproduces the bytes'",
+        "no claim that this bounds a stronger inducer; the published ceiling for one is 70%, not 100%"
+      ]
+    }
+  },
+  "generated_at_utc": "2026-11-17T00:50:44.337507+00:00",
   "gui_invariance_and_operand_boundary": {
     "identity_invariance": {
       "identity_arms": 15,
@@ -2511,6 +2722,8 @@
     "NO_ONE_DEMONSTRATION_PER_ENVIRONMENT_CLAIM",
     "NO_GUI_INVARIANCE_LEVER",
     "NO_PROOF_COMPOSITION_AS_SINGLE_LEVER",
+    "NO_ONCE_IDENTIFIES_A_RULE",
+    "NO_ONE_DEMONSTRATION_COVERS_MOST_REAL_WORK",
     "PRODUCER_RUN_NOT_INDEPENDENT_VERIFICATION",
     "TERMINAL_TRUTH_UNTOUCHED"
   ],
@@ -2666,6 +2879,8 @@
     "no_receipt_task_outside_real_corpus": true,
     "no_screen_only_verdict_counted_as_repair": true,
     "observable_gap_receipt_read": true,
+    "one_demonstration_amortises_only_a_sixth_of_real_work": true,
+    "one_demonstration_is_arithmetic_not_identification": true,
     "one_demonstration_learns_a_domain_not_the_environment": true,
     "operand_addition_is_bounded_to_its_design_set": true,
     "phrase_blind_basis_adds_no_full_surface_capability": true,
@@ -3586,6 +3801,16 @@
         "canonical/runtime/applicability_v1.py",
         "canonical/runtime/contrast_selection_v1.py",
         "canonical/tests/test_the_learner_decides_past_the_enumeration_wall_v1.py"
+      ]
+    },
+    "four_levers_and_edit_supply": {
+      "count": 4,
+      "missing": [],
+      "present": [
+        "canonical/tools/the_four_levers_of_learning_from_experience_v1.py",
+        "canonical/swe_kernel/systematic_edit_supply_v1.py",
+        "canonical/runtime/demonstration_version_space_v1.py",
+        "canonical/runtime/contrast_selection_v1.py"
       ]
     },
     "goal_and_counterfactual_verdict": {
