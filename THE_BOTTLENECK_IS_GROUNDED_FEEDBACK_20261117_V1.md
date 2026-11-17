@@ -52,8 +52,14 @@ irreducible information from a user; an excellent verifier alone cannot invent t
   `fact_entailment_v1.py`: stored examples, scoped applicability and fact checking.
 - `canonical/swe_kernel/effect_contract_composition_v1.py` and
   `proved_composition_v1.py`: test compatibility and preservation across composed effects.
-- `canonical/swe_kernel/zygote_worker_pool_v1.py`: an existing process-isolated screening
-  mechanism; suitability for a new use must be established, not assumed.
+- `canonical/swe_kernel/zygote_worker_pool_v1.py` contains distinct execution paths.
+  `ZygotePrewarmedPool.run_isolated` forks with shared filesystem, network, credentials and
+  kernel, computes a deadline but does not enforce it before blocking on pipe reads and
+  `waitpid`; it is **not** a reliable timeout or adversarial security boundary. The separate
+  `screen_python_candidates_cow` delegates to a namespace/seccomp broker; that path has
+  additional confinement and wall-time controls, but its suitability for adversarial use,
+  its test-runner semantics, and final verification need an independent audit. Neither is
+  a justification for running this branch's in-process synthesizer on untrusted code.
 - `canonical/tools/judge_the_judge_v1.py` and
   `canonical/verification/JUDGE_THE_JUDGE_20261117_V1.json`: producer audit of the cheap
   QuixBugs judge. It reports 31 real-judge reference passes, 7 naive false rejections,
@@ -77,6 +83,28 @@ irreducible information from a user; an excellent verifier alone cannot invent t
   understanding. `canonical/swe_kernel/weight_update_admission_v1.py` already supplies an
   admission gate for any future weight experiment; no update is justified by storage alone.
 
+## Corrections on three specific claims
+
+- **One experience:** a repeat of exactly the same fact vector adds no separating fact;
+  this does not rule out new interventions or priors. The tree's
+  `INSUFFICIENCY_CERTIFICATE_20261113_V1.json` is a certificate about **conjunctions of
+  observed positive facts on its finite evidence**, not a proof that every hypothesis class
+  or every kind of repeated experiment is incapable of learning. Its real-repair witness
+  contains two successes and two failures; its separate filename-sensor case illustrates
+  an actual missing distinction. The certificate's own probe has the precise theorem.
+- **~2.2% replay:** some tree reports present this as a measured SWE-bench Verified
+  result, but `THE_VERIFIED_INDEX_IS_THE_BOTTLENECK_20261116_V2.md` identifies it as an
+  owner-supplied premise. This review did not find an underlying reproducible experiment
+  establishing the figure. Do not use it as a measured capability or universal replay
+  ceiling. The qualitative distinction between replay and synthesis does not depend on it.
+- **Missing object-suite observables:** `repair_where_the_suite_is_the_observable_v1.py`
+  already tries the corpus's test file as an observable for the nine non-JSON tasks; its
+  receipt reports zero repairs, six with no screen survivor and three with collection
+  errors at the final corpus test. Collection errors do not establish incorrect patches.
+  The screen uses a pytest stand-in and the same public tests for selection, so neither a
+  screen survivor nor a public-test pass would independently prove generalization. The
+  earlier `NO_EXAMPLES` result describes the example-based arm, not the whole project.
+
 ## External research checked, through 17 November 2026
 
 - [SkillLearnBench](https://arxiv.org/html/2604.20087v1) reports one-shot and iterative
@@ -97,6 +125,15 @@ irreducible information from a user; an excellent verifier alone cannot invent t
 - [OSWorld 2.0](https://arxiv.org/abs/2606.29537v2) reports 108 long-horizon workflows
   and substantial remaining task failure under its stated evaluation. It is context for
   the difficulty of the goal, not an evaluation of our system.
+- [EvoAgentBench](https://arxiv.org/html/2607.05202v1) separates related experience from
+  instance-disjoint tasks and reports inconsistent automatic transfer and negative transfer.
+  Its LLM-based setup is research context, not an approved solver for this project.
+- [SWE-CoWork](https://arxiv.org/abs/2611.20218v1) reports that supplying full requirements
+  improves partial completion without raising whole-task success in its paired comparison.
+  Thus better observation alone does not guarantee implementation. Its public
+  [harness](https://github.com/TokenWave-AI/swe-cowork-bench) describes container images,
+  an eight-hour budget per task, and LLM-simulated colleagues; compatibility with the user's
+  policy and a local independent evaluation is not established.
 - [METR's maintainer study](https://metr.org/notes/2026-03-10-many-swe-bench-passing-prs-would-not-be-merged-into-main/)
   reports that roughly half of sampled test-passing patches from agents studied would not
   be merged, subject to its sample and review assumptions; agents did not get to iterate.
@@ -143,6 +180,14 @@ no measurable held-out improvement at equal cost; leakage; or unverifiable succe
 blocker, not an invented capability. All new learned parameters, if ever justified, must be
 computed from the project's own evidence and separately gated; conventional pretraining and
 using external models as the system are not assumed or required here.
+
+**Practical status on this host:** a user/network/mount namespace can be created and the
+existing namespace launcher prerequisites are present, but that is only a preliminary host
+check, not a security audit or an independent adjudicator. Docker, Podman and `/dev/kvm`
+were not found; the available sandbox and allowed outbound hosts do not by themselves provide
+the SWE-CoWork container setup or privately held evaluation. The four QuixBugs object-suite
+cases and public tests have now also been inspected here, so they are not blind evaluation
+material for a design made in this session. No capability experiment was run in this pass.
 
 The branch's existing PR is open. At the time of this review, the signed repository integrity
 referee passed, but three other workflow checks failed; the job failure steps were visible, while
