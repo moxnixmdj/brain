@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "989df6d98bb1a966cdb79a5e35cf1b63130b4e65f3f1950bb86a95227ddd2c13"
+  "value": "a68496740118bcff1618ec7597d218a0b24aa562bd4b54887988b20e26b47f82"
  },
  "engines": [
   {
@@ -251738,7 +251738,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/WITNESS_INVERSION_20261116_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "630dc5cdf262216cfcd35e96e4e4bf16f9475258d0513566db4b3b72f8babfb4",
+   "sha256": "94c62b7940023fbfa270f78608cf81f9045f6b657dba624ec88d2016a8fdf1a3",
    "status": "PRODUCED",
    "terms": {
     "20261116": 1,
