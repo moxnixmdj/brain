@@ -8,6 +8,15 @@
   },
   "computer_use": {
     "external_context": "OSWorld 2.0 (arXiv 2606.29537): best agent 20.6% of 108 workflows, failing by skipping verification and spending under 7% of budget detecting its own errors",
+    "horizon": {
+      "chains": 3,
+      "every_step_legal_and_passing": 3,
+      "false_invalidations_on_controls": 0,
+      "lead_in_steps": 2,
+      "receipt": "canonical/verification/STANDING_FACTS_20261116_V1.json",
+      "standing_fact_ledger_detected": 3,
+      "why": "a per-action check only ever asks about the action in front of it, so a legal step that falsifies an earlier verified fact is invisible to it. Re-validating exactly the facts the current step frame can touch costs one hash per fact and localises the cause two steps before the symptom"
+    },
     "invisible_with_a_name_level_view": 0.2353,
     "novel": {
       "density": 0.5,
@@ -30,13 +39,50 @@
       "tasks_where_content_alone_suffices": 9,
       "why": "the oracle is not a predicate to be written but an observation to be chosen, under two tests at once: it must separate the action from the ways it can be wrong, and it must reproduce itself on replay. Separation alone admits a timestamp; stability alone admits a name listing"
     },
+    "prospective": {
+      "acquired_from": "one real execution per action",
+      "arms": {
+        "frame_only": 0.9706,
+        "frame_plus_intervention": 0.9706,
+        "full": 1.0,
+        "no_recorded_consequence": 0.5
+      },
+      "content_only_errors": {
+        "frame_only": 0.4,
+        "full": 0.8
+      },
+      "evaluated_on": "a binding never executed during acquisition",
+      "false_alarms_on_correct_novel_actions": 0,
+      "receipt": "canonical/verification/PREDICTIVE_CONTRACT_20261116_V1.json",
+      "why": "a consequence differential only exists after acting and only on a seen binding. A contract acquired from one execution is the prospective form of the same check: the frame -- which paths the action may touch -- carries most of it, a declared or derived relation carries the bytes, and what remains is a located hole in the vocabulary"
+    },
     "receipt": "canonical/verification/COMPUTER_USE_CHECK_DENSITY_20261116_V1.json",
+    "repair": {
+      "chains": 3,
+      "dependency_test": "perturb one candidate path, re-run the step, compare its consequence",
+      "goals_restored": {
+        "argv_read_set": 1,
+        "declared_read_set": 3,
+        "intervention_read_set": 3,
+        "of": 3
+      },
+      "missed_by_intervention": 0,
+      "over_declared_by_intervention": 0,
+      "probes": 86,
+      "receipt": "canonical/verification/CAUSAL_DEPENDENCY_REPAIR_20261116_V1.json",
+      "steps": 17,
+      "steps_redone": {
+        "everything": 14,
+        "intervention": 8
+      },
+      "why": "detection is not repair: to repair you must know which steps consumed the fact that went false, and an argv-derived read set is wrong in both directions -- it names a path whose content the step never read, and it cannot see a path that another file names. The discovery rule is one intervention per candidate path: perturb it, re-run the step, compare its consequence. It recovers the declared read set exactly, with no model, no tracing, and no annotation"
+    },
     "replay": {
       "density": 1.0,
       "why": "the intent is the recorded consequence, so any difference is an error: with a full state observation every wrong action is caught, and a wrong action that leaves the state identical did not miss the goal"
     },
     "status": "MEASURED_ON_A_SHELL_ENVIRONMENT",
-    "what_remains_unmeasured": "a GUI whose only observable is pixels or DOM -- a projection, not the state -- and workflows longer than one action, where an error is only visible after composition",
+    "what_remains_unmeasured": "a GUI whose only observable is pixels or DOM -- a projection, not the state; a fact carried by remote state rather than by a path; and the outer edge of repair itself: the candidate set is the state the step can see, and the probe is a content change, so a dependency on a file outside the sandbox, a lock held by another process, or a file's bare existence is not measured by it",
     "what_was_run": "34 mechanically derived wrong actions over 9 real shell transformations, real programs on a real disk, real reset"
   },
   "incremental_spend_usd": 0,
@@ -77,9 +123,17 @@
       "path": "canonical/verification/COMPUTER_USE_CHECK_DENSITY_20261116_V1.json",
       "sha256": "f4c170c5b98b14f15bc53d0ef0d220fca64d959f6e9cb244091e25b38cf5d107"
     },
+    "contract": {
+      "path": "canonical/verification/PREDICTIVE_CONTRACT_20261116_V1.json",
+      "sha256": "f16530f1255d85ac851af9fdc12b5cf6f43efecd4898eb3a8a64f794f205213e"
+    },
     "determinacy": {
       "path": "canonical/verification/SYSTEMATIC_EDIT_SUPPLY_20261116_V1.json",
       "sha256": "98a8c2f651e7f676f59769aabd269e93be02754b4f570b057f5d8f9bd7e88df1"
+    },
+    "facts": {
+      "path": "canonical/verification/STANDING_FACTS_20261116_V1.json",
+      "sha256": "45d9ada0a4c268f77560797de23b96e296be1e91f61252d362c895154724559d"
     },
     "memory": {
       "path": "canonical/verification/SKILL_RECURRENCE_20261116_V1.json",
@@ -96,6 +150,10 @@
     "projection": {
       "path": "canonical/verification/DISTINGUISHING_PROJECTION_20261116_V1.json",
       "sha256": "feaec76f9531b79d04d0cbc974129c86f6b925d9a1bc1719c149443212f593cb"
+    },
+    "repair": {
+      "path": "canonical/verification/CAUSAL_DEPENDENCY_REPAIR_20261116_V1.json",
+      "sha256": "5642dd7ff525dfe7391d10f738fcdff36998bf9c299a479b0e3a6fbcb295a348"
     },
     "value": {
       "path": "canonical/verification/SYSTEMATIC_EDIT_DERIVATION_20261116_V1.json",

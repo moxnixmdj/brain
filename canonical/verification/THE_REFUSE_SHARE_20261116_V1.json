@@ -1,0 +1,302 @@
+{
+ "authority": "NONE__PRODUCER_RUN_REAL_REPOSITORY_REVERTS",
+ "caveats": [
+  "A commit can be correct and still unguarded; this measures what the repository can certify, not the quality of the change.",
+  "Some reverts fail to apply cleanly and are reported as harness limits, not results.",
+  "Test files are identified by path markers, a declared rule rather than a judgement.",
+  "pytest only; a project's own chosen runner may behave differently."
+ ],
+ "incremental_spend_usd": 0,
+ "instrument_limits": [
+  "pallets/markupsafe: EDITABLE_INSTALL_FAILED",
+  "pallets/itsdangerous: NO_GUARDED_RESULT__HARNESS_UNPROVEN__EXCLUDED",
+  "pypa/pyproject-hooks: BASELINE_DID_NOT_RUN",
+  "encode/httpcore: BASELINE_DID_NOT_RUN",
+  "encode/httpx: BASELINE_DID_NOT_RUN"
+ ],
+ "kind": "receipt",
+ "method": {
+  "control": "a repository that yields no GUARDED verdict is excluded as an instrument limit, never counted as UNGUARDED",
+  "honest": "revert only non-test files, hold tests at the post-commit state, run the project's tests; any failure means the repository can certify the change",
+  "naive": "git revert <sha>; run the project's tests (WRONG: removes the tests too)",
+  "test_path_rule": [
+   "test_",
+   "_test.py",
+   "/tests/",
+   "/test/",
+   "conftest.py",
+   "testing/"
+  ]
+ },
+ "model_calls": 0,
+ "network_calls": "git clone of five public repositories; no inference",
+ "per_repo": {
+  "pallets/click": {
+   "guarded": 2,
+   "measured": 8,
+   "unguarded": 6
+  },
+  "pallets/itsdangerous": {
+   "guarded": 0,
+   "measured": 0,
+   "unguarded": 0
+  },
+  "pallets/markupsafe": {
+   "guarded": 0,
+   "measured": 0,
+   "unguarded": 0
+  },
+  "pypa/packaging": {
+   "guarded": 2,
+   "measured": 6,
+   "unguarded": 4
+  },
+  "pypa/pyproject-hooks": {
+   "guarded": 0,
+   "measured": 0,
+   "unguarded": 0
+  }
+ },
+ "producer_cognition_model_dependency_count": 0,
+ "reading": "UNGUARDED means the project's own tests, at the state its author left them, do not notice when the change is undone. For an agent that gates every action on a mechanical check, that is exactly the set of changes where the correct output is a REFUSAL -- and where an agent that never refuses is silently wrong with nothing to catch it.",
+ "rows": [
+  {
+   "honest_errors": 0,
+   "honest_failed": 0,
+   "honest_passed": 26852,
+   "naive_failed": 0,
+   "naive_would_have_missed_it": false,
+   "non_test_files": [
+    "src/packaging/_parser.py",
+    "src/packaging/requirements.py",
+    "src/packaging/specifiers.py"
+   ],
+   "repo": "pypa/packaging",
+   "sha": "7bcd6d8e",
+   "status": "UNGUARDED",
+   "subject": "Apply some refurb suggestions",
+   "test_files": [
+    "tests/test_specifiers.py",
+    "tests/test_version.py"
+   ]
+  },
+  {
+   "honest_errors": 0,
+   "honest_failed": 1,
+   "honest_passed": 26851,
+   "naive_failed": 0,
+   "naive_would_have_missed_it": true,
+   "non_test_files": [
+    "src/packaging/tags.py"
+   ],
+   "repo": "pypa/packaging",
+   "sha": "a2b3e346",
+   "status": "GUARDED",
+   "subject": "Rename Py_NOGIL to Py_GIL_DISABLED",
+   "test_files": [
+    "tests/test_tags.py"
+   ]
+  },
+  {
+   "honest_errors": 0,
+   "honest_failed": 0,
+   "honest_passed": 26851,
+   "naive_failed": 0,
+   "naive_would_have_missed_it": false,
+   "non_test_files": [
+    ".readthedocs.yml"
+   ],
+   "repo": "pypa/packaging",
+   "sha": "5e84eeb6",
+   "status": "UNGUARDED",
+   "subject": "Stop using deprecated/removed keys on RtD",
+   "test_files": []
+  },
+  {
+   "honest_errors": 0,
+   "honest_failed": 0,
+   "honest_passed": 26825,
+   "naive_failed": 0,
+   "naive_would_have_missed_it": false,
+   "non_test_files": [
+    "CHANGELOG.rst"
+   ],
+   "repo": "pypa/packaging",
+   "sha": "d7ce40d8",
+   "status": "UNGUARDED",
+   "subject": "Fix code blocks in CHANGELOG.md",
+   "test_files": []
+  },
+  {
+   "honest_errors": 0,
+   "honest_failed": 1,
+   "honest_passed": 26822,
+   "naive_failed": 0,
+   "naive_would_have_missed_it": true,
+   "non_test_files": [
+    "src/packaging/tags.py"
+   ],
+   "repo": "pypa/packaging",
+   "sha": "c1346dfd",
+   "status": "GUARDED",
+   "subject": "fix: Detect when a platform is 32-bit more accurately",
+   "test_files": [
+    "tests/test_tags.py"
+   ]
+  },
+  {
+   "honest_errors": 0,
+   "honest_failed": 0,
+   "honest_passed": 26725,
+   "naive_failed": 0,
+   "naive_would_have_missed_it": false,
+   "non_test_files": [
+    "pyproject.toml"
+   ],
+   "repo": "pypa/packaging",
+   "sha": "3030822b",
+   "status": "UNGUARDED",
+   "subject": "Include CHANGELOG.rst in sdist",
+   "test_files": []
+  },
+  {
+   "honest_errors": 0,
+   "honest_failed": 1,
+   "honest_passed": 110,
+   "naive_failed": 1,
+   "naive_would_have_missed_it": false,
+   "non_test_files": [
+    "docs/options.rst"
+   ],
+   "repo": "pallets/click",
+   "sha": "09583679ab7b235039ca712c9b044ac397c64322",
+   "status": "UNGUARDED",
+   "subject": "Fix a bug in the docs",
+   "test_files": []
+  },
+  {
+   "honest_errors": 0,
+   "honest_failed": 2,
+   "honest_passed": 109,
+   "naive_failed": 1,
+   "naive_would_have_missed_it": false,
+   "non_test_files": [
+    "CHANGES",
+    "click/core.py",
+    "docs/options.rst"
+   ],
+   "repo": "pallets/click",
+   "sha": "89d3bfda52d151762e732738b828312a240bf89e",
+   "status": "GUARDED",
+   "subject": "Make it possible to define aliases for the secondary option of boolean",
+   "test_files": [
+    "tests/test_options.py"
+   ]
+  },
+  {
+   "honest_errors": 0,
+   "honest_failed": 1,
+   "honest_passed": 107,
+   "naive_failed": 1,
+   "naive_would_have_missed_it": false,
+   "non_test_files": [
+    "Makefile"
+   ],
+   "repo": "pallets/click",
+   "sha": "c6df8e648a1f81fc661a37a0e94385ee64232d9c",
+   "status": "UNGUARDED",
+   "subject": "Add shortcut for PyPI upload",
+   "test_files": []
+  },
+  {
+   "honest_errors": 0,
+   "honest_failed": 1,
+   "honest_passed": 106,
+   "naive_failed": 1,
+   "naive_would_have_missed_it": false,
+   "non_test_files": [
+    "CHANGES",
+    "click/__init__.py"
+   ],
+   "repo": "pallets/click",
+   "sha": "7e8da55933578a9a439e4f47387a26bb9e85c868",
+   "status": "UNGUARDED",
+   "subject": "Version 5.0",
+   "test_files": []
+  },
+  {
+   "honest_errors": 0,
+   "honest_failed": 1,
+   "honest_passed": 104,
+   "naive_failed": 1,
+   "naive_would_have_missed_it": false,
+   "non_test_files": [
+    "docs/setuptools.rst"
+   ],
+   "repo": "pallets/click",
+   "sha": "5eca206e71cf31eb9befe510ecf262be7a450328",
+   "status": "UNGUARDED",
+   "subject": "Revert \"use source command to activate virtualenv\"",
+   "test_files": []
+  },
+  {
+   "honest_errors": 0,
+   "honest_failed": 2,
+   "honest_passed": 103,
+   "naive_failed": 1,
+   "naive_would_have_missed_it": false,
+   "non_test_files": [
+    "CHANGES",
+    "click/termui.py"
+   ],
+   "repo": "pallets/click",
+   "sha": "36f83d91e27b5b88ee806cb40f284658e2f9cdb5",
+   "status": "GUARDED",
+   "subject": "Password prompt now prints a newline on `^C`.",
+   "test_files": [
+    "tests/test_utils.py"
+   ]
+  },
+  {
+   "honest_errors": 0,
+   "honest_failed": 1,
+   "honest_passed": 101,
+   "naive_failed": 1,
+   "naive_would_have_missed_it": false,
+   "non_test_files": [
+    "CHANGES",
+    "docs/advanced.rst",
+    "docs/api.rst"
+   ],
+   "repo": "pallets/click",
+   "sha": "421e46acbe6b161f1c8df6ddee4857f60f45cabc",
+   "status": "UNGUARDED",
+   "subject": "Documented the use of get_current_context",
+   "test_files": []
+  },
+  {
+   "honest_errors": 0,
+   "honest_failed": 1,
+   "honest_passed": 98,
+   "naive_failed": 1,
+   "naive_would_have_missed_it": false,
+   "non_test_files": [
+    "docs/testing.rst"
+   ],
+   "repo": "pallets/click",
+   "sha": "f705ee430013d737b2159666b0bca9416f191698",
+   "status": "UNGUARDED",
+   "subject": "Add note about subcommands testing. Closes #377",
+   "test_files": []
+  }
+ ],
+ "schema": "THE_REFUSE_SHARE_20261116_V1",
+ "totals": {
+  "commits_measured": 14,
+  "guarded": 4,
+  "guarded_share": 0.2857142857142857,
+  "naive_experiment_would_have_missed": 2,
+  "refuse_share": 0.7142857142857143,
+  "unguarded": 10
+ }
+}
