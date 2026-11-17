@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 516,
+  "knowledge_documents": 517,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6997,
+  "research_index_records": 6999,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 452,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "1bb32a057cab25020dd78a8559def718cbc7b125aa1508649d11e1e0597058a0"
+  "value": "a68496740118bcff1618ec7597d218a0b24aa562bd4b54887988b20e26b47f82"
  },
  "engines": [
   {
@@ -71774,6 +71774,83 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 7926,
+   "headings": [
+    "Why no mechanism can buy reach, and what that means for \"solve everything on a computer\"",
+    "The four propositions",
+    "The strongest version of the claim, built rather than argued",
+    "What the corpus said",
+    "So: is it revolutionary?",
+    "The smartest thing to do"
+   ],
+   "kind": "DOCUMENT",
+   "path": "WHY_NO_MECHANISM_CAN_BUY_REACH_20261116_V1.md",
+   "sha256": "5a7a5b982214c306a29e4d83c62ece89bfbbbefe02529f2f51b63cd5e9901cb5",
+   "summary": "This round asked a question with a shape: *we solved instant learning, and instant learning in a brand-new environment. Doesn't that make this a solution to every problem and all computer use? Give the model the most advanced coding actions, let it experience them once, it learns them permanently, apply them to anything — so we solve everything on a computer, permanently? Is that revolutionary ver",
+   "terms": {
+    "75.2": 3,
+    "action": 5,
+    "all": 4,
+    "alphabet": 4,
+    "answer": 6,
+    "any": 5,
+    "artifact": 4,
+    "because": 3,
+    "built": 4,
+    "byte": 4,
+    "canonical": 4,
+    "claim": 3,
+    "computer": 4,
+    "corpus": 4,
+    "distinction": 3,
+    "edit": 3,
+    "eighteen": 3,
+    "environment": 6,
+    "every": 6,
+    "everything": 4,
+    "existing": 3,
+    "experience": 7,
+    "expression": 8,
+    "false": 4,
+    "fix": 9,
+    "frame": 5,
+    "instant": 4,
+    "message": 4,
+    "new": 5,
+    "no": 6,
+    "not": 20,
+    "one": 7,
+    "only": 7,
+    "over": 5,
+    "own": 7,
+    "rather": 4,
+    "reach": 6,
+    "real": 16,
+    "required": 4,
+    "same": 6,
+    "search": 4,
+    "site": 7,
+    "so": 5,
+    "test": 15,
+    "than": 4,
+    "value": 10,
+    "verification": 6,
+    "witness": 4
+   },
+   "title": "Why no mechanism can buy reach, and what that means for \"solve everything on a computer\"",
+   "title_terms": [
+    "buy",
+    "computer",
+    "everything",
+    "means",
+    "mechanism",
+    "no",
+    "reach",
+    "solve"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 9159,
    "headings": [
     "Why one experience is not enough",
@@ -85227,10 +85304,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1318,
+  "included_source_count": 1319,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "a5fe4c44a4e40ea39eec1c122d5a03e3d17ebc91ccc2998a8e7792d0564d3269"
+  "source_tree_digest": "fb80e07c88bd02a507d657f53b0d9c496ff2132035814e61fd7e31061c1ce2f3"
  },
  "research_index": [
   {
@@ -216862,6 +216939,23 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "2026-11-16",
+   "id": "research:canonical/verification/WITNESS_INVERSION_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/WITNESS_INVERSION_20261116_V1.json",
+   "schema": "BRAIN_WITNESS_INVERSION_V1",
+   "sha256": "f9c8e2d343f61884f27b812b0c4296ef9117ea34384801a0668cbc8cf75fb09e",
+   "status": "",
+   "terms": {
+    "20261116": 1,
+    "inversion": 1,
+    "v1": 1,
+    "witness": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-02",
    "id": "research:canonical/verification/WITNESS_TARGET_BINDING_TOTALIZATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -251634,6 +251728,29 @@
     "swe": 3,
     "typed": 2,
     "v1": 2
+   }
+  },
+  {
+   "action_id": "WITNESS_INVERSION_20261116_V1",
+   "capability": false,
+   "date": "2026-11-16",
+   "id": "research:canonical/action_intents/WITNESS_INVERSION_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/WITNESS_INVERSION_20261116_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "94c62b7940023fbfa270f78608cf81f9045f6b657dba624ec88d2016a8fdf1a3",
+   "status": "PRODUCED",
+   "terms": {
+    "20261116": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "inversion": 1,
+    "produced": 1,
+    "reuse_the_tree_s_judge_discipline_and_the_tree_s_own_mutation_families_as_the_control_arm__add_a_pytest_plugin_that_records_returns_and_raises_inside_the_files_the_fix_touched_and_reads_the_required_value_from_the_failing_assert_or_from_raises_match__localise_by_invertibility_rather_than_by_traceback_depth__propose_only_expressions_over_the_live_frame_s_values_attributes_pure_builtins_and_literals__accept_only_what_the_real_test_accepts_and_always_restore__then_measure_on_real_fix_commits_and_on_a_reverted_human_line": 1,
+    "the_question_is_answered_by_a_mechanism_instead_of_an_opinion__witness_inversion_is_built_and_it_refuses_every_one_of_the_real_defects_the_corpus_contains_because_the_required_value_is_new_content_and_not_a_selection_over_the_artifact_s_own_values__which_is_what_the_75_2_percent_out_of_vocabulary_measurement_predicted_and_what_makes_instant_learning_not_a_solution_to_everything": 1,
+    "the_reach_law_named_expressibility_as_the_binding_term_but_no_organ_existed_that_could_name_an_edit_outside_a_fixed_grammar_without_enumerating_one__and_the_tree_had_no_inversion_or_concolic_or_witness_organ_at_all": 1,
+    "v1": 1,
+    "witness": 1,
+    "witness_inversion_20261116_v1": 1
    }
   },
   {
