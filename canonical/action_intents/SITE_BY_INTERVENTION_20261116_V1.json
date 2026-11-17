@@ -43,7 +43,7 @@
   },
   "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A_CLAIM_WITHOUT_A_CONTRAST_CANNOT_BE_DECIDED__ONE_EXECUTION_SUPPLIES_ONE_ACTION_AND_ZERO_CONTRASTS_SO_WHAT_IT_LEARNS_IS_THE_ACTION_AND_NOT_THE_CHECK__THE_TREE_MEASURED_0_SURVIVORS_AT_6_9_PERCENT_FROM_ONE_OBSERVATION_AGAINST_512_SURVIVORS_AT_96_24_PERCENT_FROM_THREE_CONTRASTS__AND_GROUNDING_BY_INTERVENTION_NAMES_THE_SITE_AND_THE_SHAPE_THAT_OCCURRENCE_CANNOT",
-  "canonical_base_commit": "6c0d26ca731e78fbc57207d313e45e4b34f68039",
+  "canonical_base_commit": "9f504f3f478f13de5da11ff366f1a940b95e62dc",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -103,7 +103,7 @@
     "THE_SPECIFICATION_HAS_TWO_HALVES_AND_HISTORY_SUPPLIES_NEITHER_20261116_V1.md"
   ],
   "recursive_obs": {
-    "canonical_base_commit": "6c0d26ca731e78fbc57207d313e45e4b34f68039",
+    "canonical_base_commit": "9f504f3f478f13de5da11ff366f1a940b95e62dc",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "re-implementing the structural specifier instead of calling derive/child_payload/run_child",

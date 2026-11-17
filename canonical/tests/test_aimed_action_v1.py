@@ -264,3 +264,78 @@ def test_unsolved_pages_read_from_the_taxonomy_receipt():
     tasks = measure.unsolved_pages()
     assert len(tasks) == 46
     assert "circle-center" in tasks and "use-slider" in tasks and "visual-addition" in tasks
+
+
+def test_rgb_and_hsl_colours_both_name_a_hue():
+    # Chrome serialises inline colours to rgb(); a hue rule that only reads hsl never fires.
+    assert aimed._colour_hue("rgb(0, 0, 255)") == pytest.approx(240.0, abs=0.5)
+    assert aimed._colour_hue("hsl(120, 100%, 50%)") == pytest.approx(120.0, abs=0.5)
+    assert aimed._colour_hue("purple") == pytest.approx(280.0, abs=0.5)
+    assert aimed._colour_hue("not a colour") is None
+
+
+def test_instructed_shades_press_every_span_that_paints_the_named_hue():
+    observation = {
+        "utterance": "Select all the shades of blue and press Submit.",
+        "elements": [
+            element(0, -1, "body", box=[0, 0, 480, 360]),
+            element(1, 0, "span", box=[50, 60, 20, 20], can_click=True,
+                    colour="rgb(0, 0, 255)"),
+            element(2, 0, "span", box=[80, 60, 20, 20], can_click=True,
+                    colour="hsl(240, 100%, 50%)"),
+            element(3, 0, "span", box=[110, 60, 20, 20], can_click=True,
+                    colour="rgb(255, 0, 0)"),
+            element(4, 0, "button", text="Submit", box=[30, 175, 98, 34], can_click=True),
+        ]}
+    actions = aimed.aimed_actions(observation)
+    for idx in (1, 2):
+        assert f"click@{idx}" in actions
+        assert aimed.rule_of(observation, f"click@{idx}")["rule"] == "CLICK_INSTRUCTED_SHADE"
+    assert "click@3" not in actions          # red is not a shade of blue
+
+
+def test_box_partition_frees_the_grabs_and_names_the_release():
+    observation = {
+        "utterance": ("Drag all rectangles into the left box and everything else into the "
+                      "right box, then press Submit"),
+        "holding": None,
+        "elements": [
+            element(0, -1, "body", box=[0, 0, 480, 360]),
+            element(1, 0, "div", id="shape-container", box=[10, 80, 100, 60], can_click=True),
+            element(2, 0, "div", id="shape-container", box=[360, 80, 100, 60], can_click=True),
+            element(3, 0, "circle", box=[150, 90, 20, 20], can_click=True),
+            element(4, 0, "rect", box=[200, 90, 30, 15], can_click=True),
+            element(5, 0, "button", text="Submit", box=[30, 175, 98, 34], can_click=True),
+        ]}
+    actions = aimed.aimed_actions(observation)
+    for idx in (3, 4):
+        assert f"grab@{idx}" in actions
+        assert aimed.rule_of(observation, f"grab@{idx}")["rule"] == "GRAB_FOR_BOX_PARTITION"
+    held = dict(observation, holding=4)
+    assert "dropat@60.0,110.0" in aimed.aimed_actions(held)
+    assert aimed.rule_of(held, "dropat@60.0,110.0")["rule"] == "RELEASE_IN_INSTRUCTED_BOX"
+
+
+def test_named_run_selection_gate_offers_gesture_then_style_only_when_selected():
+    base = {
+        "utterance": "give the text viverra. the style underlined and press Submit",
+        "selection": "",
+        "elements": [
+            element(0, -1, "body", box=[0, 0, 480, 360]),
+            element(1, 0, "p", text="Vestibulum duis velit viverra.",
+                    box=[18, 92, 124, 37], can_click=True),
+            element(2, 0, "button", text="underline", box=[60, 30, 40, 20], can_click=True),
+            element(3, 0, "button", text="Submit", box=[30, 175, 98, 34], can_click=True),
+        ]}
+    clean = aimed.aimed_actions(base)
+    assert "doubleat@150.3,103.1" in clean
+    assert "dragat@14.0,117.9,150.0,117.9" in clean
+    assert "click@2" not in clean            # no selection: the style button is not offered
+    wrong = dict(base, selection="velit")
+    wrong_actions = aimed.aimed_actions(wrong)
+    assert wrong_actions[0] == "pressat@470.0,350.0"
+    assert aimed.rule_of(wrong, "pressat@470.0,350.0")["rule"] == "CLEAR_A_WRONG_SELECTION"
+    right = dict(base, selection="viverra.")
+    right_actions = aimed.aimed_actions(right)
+    assert "click@2" in right_actions
+    assert aimed.rule_of(right, "click@2")["rule"] == "STYLE_CONTROL"
