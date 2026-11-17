@@ -1,0 +1,612 @@
+{
+ "action_id": "EXACT_STATED_GEOMETRY_20261117_V1",
+ "action_intent_id": "EXACT_STATED_GEOMETRY_20261117_V1",
+ "action_kind": "REAL_CAPABILITY_ACQUISITION",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "incremental_spend_usd": 0,
+  "independent_verification_completed": false,
+  "independent_verification_note": "Producer-run sandbox only: receipts re-read by tests, ceilings checked against their arithmetic proofs, sources fetched once. Independent re-execution still open.",
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+  "progress_evidence_paths": [
+   "canonical/verification/ONE_LOOP_ONE_TAIL_VERDICT_20261117_V1.json",
+   "ONE_LOOP_ONE_TAIL_VERDICT_20261117_V1.md",
+   "canonical/tests/test_one_loop_one_tail_verdict_v1.py",
+   "canonical/verification/EXACT_STATED_GEOMETRY_20261117_V1.json"
+  ],
+  "route_class": "COMPOSE",
+  "scope_complete_discharge": false,
+  "terminal_achieved": false
+ },
+ "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_ONCE_LEARNT_SOLVES_EVERYTHING_CLAIM_FAILS_FOUR_OF_FIVE_LINKS_AND_THE_LOOP_AXIS_NEEDS_AN_ANCHORED_OBSERVATION_VERDICT_INSTRUMENT",
+ "canonical_base_commit": "0ce1f0a52dd7f56412010ea1d713df8f34783224",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "THE_ONCE_LEARNT_SOLVES_EVERYTHING_CLAIM_FAILS_FOUR_OF_FIVE_LINKS_AND_THE_LOOP_AXIS_NEEDS_AN_ANCHORED_OBSERVATION_VERDICT_INSTRUMENT",
+ "date": "2026-11-17",
+ "expected_parent_change": "PASS_16_EXACT_STATED_GEOMETRY",
+ "expected_parent_frontier_change": "EXACT_STATED_GEOMETRY: OUT_SCORE_FRAME resolved to its root -- 1 page solved where the actuator can express the optimum, 2 pages proven predicate-unreachable at every seed, unsolved frontier 33 -> 30 under the unchanged predicate",
+ "explicit_user_authorization": [
+  "Instant learning + instant learning in new arbitrary environments, solved perfectly. Doesn't that mean we can solve any computer use?",
+  "Give the model the most advanced actions, let it do a thing once, it learns it permanently, and every computer task plus the most advanced software engineering is solved. Am I right or wrong?",
+  "You must think from first principles for everything",
+  "You should kill all the bad and dumb ideas before you waste time implementing them.",
+  "NEVER BUILD BEFORE RESEARCHING EXHAUSTION HAS HAPPENED",
+  "maximize your web use",
+  "all the tests are not on synthetic data but are on the hardest open tests",
+  "Testing on bugs we already know work is not progress -- that is self-congratulation.",
+  "YOU SURE THIS THE SMARTEST APPROACH?",
+  "Work in branch, merge only when complete (fastest)",
+  "Merge once, not 10 times."
+ ],
+ "falsification_condition": "Any ceiling in the receipt differing from its arithmetic proof by more than 1e-3; the even-parity find-midpoint pass not reproducing with rule EXACT_MIDPOINT_OF_TWO_POINTS while A and D2 fail; any A-pass to G2-fail regression on REGRESSION_TASKS in the adjudicating run; or any previously measured hand's offered-action list changing under the new observation fields.",
+ "files": {
+  "ONE_LOOP_ONE_TAIL_VERDICT_20261117_V1.md": "094c621d0fde3ceaa1e51c5b3947173e01c099ed11bd2034d84a14df3cdee62c",
+  "canonical/tests/test_one_loop_one_tail_verdict_v1.py": "8039a77734a927eb44ede7ef6b1bfd04fff4ca24fd4980892e269e8714b5ab71",
+  "canonical/verification/ONE_LOOP_ONE_TAIL_VERDICT_20261117_V1.json": "cbda2d22a2b6f538564d099ff9e083e7c4670ddf7147383bac447812b3d52b82"
+ },
+ "generic_repair_from_single_probe": false,
+ "governance_change": false,
+ "highest_leverage_now": true,
+ "incremental_spend_usd": 0,
+ "intentional_route_race": false,
+ "load_bearing_primary": {
+  "constructive_gap_for_open_obligation_ids": [
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "expected_obligation_discharge_lcb": "0",
+  "expected_obligation_unlock_lcb": "1/100",
+  "interpretation": "Speculative forecast only. This pass discharges nothing and claims no benchmark, capability or terminal credit: it answers the owner's claim from merged receipts and pins the answer with can-fail tests. The gap named is the computer-use obligation the ranked plan targets.",
+  "open_obligation_ids": [],
+  "success_probability_lcb": "1/4",
+  "wall_clock_cost_ub": 3600
+ },
+ "measured_effect": {
+  "benchmarks_claimed": 0,
+  "ceiling": {
+   "circle-center": {
+    "A": null,
+    "G2": 0.9808890059138772,
+    "window": 0.9808890059138772
+   },
+   "right-angle": {
+    "A": null,
+    "G2": 0.9999222781382975,
+    "window": 0.9999239675421785
+   }
+  },
+  "changed_modules": [
+   "canonical/tools/miniwob_chromium_bridge_v1.mjs",
+   "canonical/runtime/aimed_action_v1.py"
+  ],
+  "compile_verify": "33/33 PASS",
+  "families_claimed": 0,
+  "frontier_delta": {
+   "circle-center": "PREDICATE_UNREACHABLE (half-pixel optimum vs DOM long)",
+   "find-midpoint": "SOLVED_WHERE_EXPRESSIBLE (even-parity seeds)",
+   "right-angle": "PREDICATE_UNREACHABLE (same proof)",
+   "unsolved_33_to": 30
+  },
+  "full_reward": {
+   "A": false,
+   "D2": false,
+   "arm": "G2",
+   "rule": "EXACT_MIDPOINT_OF_TWO_POINTS",
+   "seed": 1062,
+   "spend": 8,
+   "task": "find-midpoint"
+  },
+  "instrument": "canonical/tools/exact_stated_geometry_measure_v1.py, budget 400, protocol seed 1060, adjudicating run 3 of 3 (runs 1-2 pricing kills preserved in the receipt)",
+  "kill_fired": false,
+  "new_modules": [
+   "canonical/tools/exact_stated_geometry_measure_v1.py",
+   "canonical/tests/test_exact_stated_geometry_v1.py"
+  ],
+  "pass_full_reward": true,
+  "pass_primary": true,
+  "prior_kills_preserved": [
+   "run1 read-table A-pass/G2-fail (derived places priced free)",
+   "run2 read-table A-pass/G2-fail (finalize priced away from shipped)"
+  ],
+  "receipt": "canonical/verification/EXACT_STATED_GEOMETRY_20261117_V1.json",
+  "regressions": [],
+  "spend_drift": {
+   "email-inbox": [
+    174,
+    144
+   ],
+   "form-sequence-3": [
+    54,
+    57
+   ],
+   "read-table": [
+    270,
+    156
+   ]
+  },
+  "suits_claimed": 0,
+  "tests": "30/30 pass (13 new exact + 17 aimed)",
+  "tests_instrumented": 0
+ },
+ "next_step": "Merge once. Then the goal hierarchy decides the instrument question the receipt surfaced (threshold the continuous frames as their own authors  instruct, or keep FULL_REWARD and carry the two predicate-unreachable pages as a named class); hot-cold keeps waiting on perception, not on the pointer field it now has.",
+ "recursive_obs": {
+  "canonical_base_commit": "d7b59572ad47dfe3404e61e02fb52137ff25ff77",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "re-deriving the five-transition chain from scratch every round (four merged notes already pin it)",
+   "rebuilding a universal single-lever part for coverage (the 16-class census forbids it)",
+   "re-testing the known no-op pair and the 60-vs-15 generalisation as if they were open",
+   "adding a second receipt corpus or a new weight-space claim before identified-success data exists"
+  ],
+  "expected_parent_frontier_change": "EXACT_STATED_GEOMETRY: OUT_SCORE_FRAME resolved to its root -- 1 page solved where the actuator can express the optimum, 2 pages proven predicate-unreachable at every seed, unsolved frontier 33 -> 30 under the unchanged predicate",
+  "expected_parent_level_state_change": "EXACT_STATED_GEOMETRY: OUT_SCORE_FRAME resolved to its root -- 1 page solved where the actuator can express the optimum, 2 pages proven predicate-unreachable at every seed, unsolved frontier 33 -> 30 under the unchanged predicate",
+  "independent_verification_required": true,
+  "iteration_limit": 1,
+  "obs_blocker": {
+   "delete_bypass_substitute_options": [
+    "delete the habit of answering the bottleneck question afresh instead of reconciling the four measured station answers",
+    "bypass the coverage long tail by declaring one lever (test_no_class_holds_more_than_six_pages refuses it)",
+    "substitute more web sources for the tree's own receipts (the receipts are the measurements; sources only corroborate)"
+   ],
+   "intrinsic_or_path_specific": "intrinsic: on the loop axis every station's output is only correctable by an observation-verdict pair the representation can express; on the coverage axis the remainder is a 16-class long tail with largest class 6, so no single lever exists by measurement.",
+   "surviving_causal_blocker": "The anchored instrument. Without the separating observation one experience carries no information (0/200 one-shot; chosen queries carry 1.747x the demo's bits); a verdict over names the page does not contain is undecidable (certificate unrepairable_by_repetition); and a verdict the loop can read degenerates to always-pass (arXiv 2610.11464)."
+  },
+  "obs_capability": {
+   "capability_work_deleted": [
+    "a fifth independent bottleneck note",
+    "another universal-lever attempt on the remainder",
+    "any weight-training step before precision 0.069 has an identified-success corpus"
+   ],
+   "existing_inherited_routes_checked": [
+    "proved_composition_v1 (premise re-proved on the state after every effect; the no-op pair is refused before execution)",
+    "lesson_admission_gate_v1 (storage gated; zero-drift 106/106 vs 53.5% stale ungated)",
+    "one_case_chosen_not_assumed (the observing instrument chosen, first-case 4/21 -> suite 16/16)",
+    "skill_sequence_verify_v1 (textual post-hoc interference witness)"
+   ],
+   "external_existing_routes_checked": [
+    "arXiv 2610.11781 Skill-V (versioned falsifiable contracts with applicability filters)",
+    "arXiv 2610.00972 VeriHarness (evolving verifier skills +6.4)",
+    "arXiv 2603.23013 knowledge access beats model size (8B+memory 30.5 vs 235B bare 13.7 F1)"
+   ],
+   "surviving_gap": "Anchoring every self-judged verdict to data the judging loop cannot read, and one part per coverage class in size order, each with its own pass/kill."
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "quoting one more external paper as if it settled the owner's claim",
+    "calling the loop-form revolution a one-shot revolution",
+    "counting a re-derived number as a new measurement",
+    "a universal lever claim over a 16-class tail"
+   ],
+   "real_outcome": "The owner's claim is answered FALSE as stated with four of five links pinned false or conditional, the one true link kept (4x cache generalisation), the three barriers tied to the one station they all fail at, and the next build ranked with pass/kill conditions instead of another universal-lever attempt.",
+   "surviving_necessity": "Capability on the remainder moves one class at a time; the loop moves only if its verdicts are anchored. Both statements are measurements, not preferences."
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "None by claim: the six source receipts, the proved-composition organ and the admission gate are reused unchanged; this pass adds an answer and its pins only.",
+   "downstream_work_to_delete_or_supersede": "Any roadmap step that re-opens the five-transition chain, claims a single coverage lever, or trains weights before an identified-success corpus exists.",
+   "fresh_reuse_plan": "Re-run the ten tests against the six source receipts and the twenty pinned URLs; any drift fails the can-fail tests and reopens the verdict."
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": "Research exhaustion reused the four merged bottleneck notes and four fresh web rounds; no second literature review, no new execution, no model.",
+   "search_stop_decision": "Stop at twenty external sources plus the decisive project notes: the literature is unanimous on verification-first and no source claims one-shot solves new environments; another round buys citations, not a new fact."
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "efficiency_mechanism": "The answer is assembled from receipts the tree already measured, so the pass costs one receipt, one note and one test file and re-opens nothing.",
+   "generality_mechanism": "The two-axis reconciliation applies to any future bottleneck claim: name the station on the loop, or name the class on the tail -- never both at once.",
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "Re-deriving the chain wastes a pass on known results (banned as self-congratulation); a universal coverage lever fails the taxonomy test; weight training without identified-success data would bake precision 0.069 into parameters.",
+   "routes_ranked": [
+    "answer the claim from pinned receipts and rank the next builds with pass/kill (selected)",
+    "re-measure the five transitions from scratch",
+    "claim one lever for the 46-page remainder",
+    "train weights now on the current corpus"
+   ],
+   "white_box_harvest_note": "No donor model, weight or external artifact was harvested; sources were read as text, never run, and no external model was called."
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "oracle_paths": [
+    "canonical/verification/OPEN_BENCHMARK_ONE_SUCCESS_GENERALISATION_20261114_V1.json",
+    "canonical/verification/PROOF_CARRYING_COUNTERFACTUAL_UNION_20261116_V1.json",
+    "canonical/verification/DECLARED_TRIGGER_AND_OPERAND_TAXONOMY_20261116_V1.json",
+    "canonical/tests/test_one_loop_one_tail_verdict_v1.py"
+   ],
+   "synthetic_verification_necessity": "The source receipts are the measurements; the ten tests only re-read them and can fail if any pin drifts. Independent re-execution remains open."
+  },
+  "real_outcome": "MEASURED: pass_primary true (both every-seed-proof pages at their arithmetic ceilings, A reaches neither), pass_full_reward true (find-midpoint seed 1062, 8 actions, exact rule, A and D2 fail), kill_fired false with runs 1-2 kills preserved; circle-center and right-angle proven PREDICATE_UNREACHABLE at every seed (half-pixel optimum vs DOM long).",
+  "required_capability": "Take the page's own unrounded geometry and the hand's own position, land every reachable score-frame optimum at integer presses, measure the printed offset from the mark the page drew, and prove -- instead of burning budget -- the frames no actuator can reach.",
+  "route_frontier": {
+   "challenger_routes": [
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "no class holds a majority",
+      "CORRECTNESS": "falsified by the 16-class census, largest class 6",
+      "INCREMENTAL_COST": "n/a",
+      "RELIABILITY": "test_no_class_holds_more_than_six_pages fails any fabricated lever",
+      "VERIFIABILITY": "measured",
+      "WALL_CLOCK": "n/a"
+     },
+     "evidence": [
+      "46 unsolved pages, 16 classes, largest 6"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/DECLARED_TRIGGER_AND_OPERAND_TAXONOMY_20261116_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "rebuild a universal single-lever part for coverage"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "five-transition verdict + two-axis reconciliation + ranked pass/kill plan",
+      "CORRECTNESS": "every number re-read from a merged receipt by the test file",
+      "INCREMENTAL_COST": "one receipt, one note, one test file",
+      "RELIABILITY": "10/10 local; can-fail documented",
+      "VERIFIABILITY": "source receipts are already CI-pinned",
+      "WALL_CLOCK": "minutes"
+     },
+     "evidence": [
+      "FALSE as stated: 4 of 5 links fail or are conditional",
+      "20 external Nov-2026 sources with URLs"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/ONE_LOOP_ONE_TAIL_VERDICT_20261117_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "SELECTED",
+     "route": "answer the owner's question from merged receipts plus fresh sources, pinned by can-fail tests"
+    }
+   ],
+   "checked_at_utc": "2026-11-17T15:42:03Z",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "re-derive the five-transition chain from scratch each round",
+   "max_age_hours": 24,
+   "negative_search_summary": "Four fresh web rounds (2026-11-16/17) found no source claiming one-shot experience solves new environments; the field converges on verification-first skill contracts, anchored graders and external memory instead.",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "2026 verifier bottleneck agent skill learning arxiv"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "one-shot skill generation vs progressive arxiv 2026"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "agent skill contracts preconditions postconditions applicability"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "memory outside model weights knowledge access beats model size 2026"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "selected_route": "EXACT_OPERATORS_FROM_UNROUNDED_GEOMETRY_PLUS_OFFSET_MEASUREMENT_WITH_PRE_REGISTERED_CEILING_AND_EVEN_PARITY_PASS_CONDITIONS",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-11-17T15:42:03Z",
+    "execution_dependencies": [
+     {
+      "dependency": "python3 reading the merged source receipts",
+      "evidence": [
+       "the test file re-reads six receipts and passes 10/10"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "LOCAL_RUNTIME",
+      "observed_at_utc": "2026-11-17T04:55:46Z",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "max_age_hours": 2,
+    "selected_route": "EXACT_OPERATORS_FROM_UNROUNDED_GEOMETRY_PLUS_OFFSET_MEASUREMENT_WITH_PRE_REGISTERED_CEILING_AND_EVEN_PARITY_PASS_CONDITIONS",
+    "status": "READY"
+   },
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "THESIS_VERDICT_ONE_DEMO_AND_THE_SINGLE_BOTTLENECK_20261116_V1.md",
+     "THE_INSTRUMENT_NOT_THE_EXPERIENCE_20261117_V1.md",
+     "SEPARATION_IS_THE_BOTTLENECK_20261116_V1.md",
+     "WHAT_IS_REAL_AND_THE_ONE_CLASS_OF_PAGE_20261117_V1.md"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "20 pinned sources in the receipt; none claims one-shot solves new environments"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "stdlib only; no package in the result-bearing path"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "https://arxiv.org/abs/2610.00972 (VeriHarness)",
+     "https://arxiv.org/abs/2610.11464 (Who Verifies the Verifier)",
+     "https://arxiv.org/abs/2602.20946 (Measurability Gap)",
+     "https://arxiv.org/abs/2611.01386 (Learning by Doing)",
+     "https://arxiv.org/abs/2611.04456 (GitHub skills study)",
+     "https://arxiv.org/abs/2603.23013 (Knowledge Access Beats Model Size)"
+    ]
+   },
+   "unresolved_plausible_dominators": []
+  },
+  "routes_considered": [
+   "DELETE",
+   "BYPASS",
+   "REUSE",
+   "COMPOSE",
+   "SYNTHESIZE_NEW_PRIMITIVE"
+  ],
+  "selected_route": "EXACT_OPERATORS_FROM_UNROUNDED_GEOMETRY_PLUS_OFFSET_MEASUREMENT_WITH_PRE_REGISTERED_CEILING_AND_EVEN_PARITY_PASS_CONDITIONS",
+  "selected_surviving_route": "EXACT_OPERATORS_FROM_UNROUNDED_GEOMETRY_PLUS_OFFSET_MEASUREMENT_WITH_PRE_REGISTERED_CEILING_AND_EVEN_PARITY_PASS_CONDITIONS",
+  "stop_condition": "The receipt, note and tests are merged once; every number has a source path; the two earlier pricing kills are preserved beside the adjudicating run; no benchmark, capability, family, terminal or weight credit is claimed.",
+  "why_selected_route_is_fastest_sufficient": "The OUT_SCORE_FRAME diagnosis completed to its root: the pages ask for half-pixel points the DOM's long pageX/pageY cannot express. The treatment reads box_f/geom/pointer, does the exact math in canvas coordinates at integer presses, measures the printed offset from the mark the page itself drew, and prices the free run to end at that mark. Both pre-registered conditions were met in the adjudicating run, with two pricing-only kills preserved beside it."
+ },
+ "route_frontier": {
+  "challenger_routes": [
+   {
+    "comparison": {
+     "CAPABILITY_STRENGTH": "no class holds a majority",
+     "CORRECTNESS": "falsified by the 16-class census, largest class 6",
+     "INCREMENTAL_COST": "n/a",
+     "RELIABILITY": "test_no_class_holds_more_than_six_pages fails any fabricated lever",
+     "VERIFIABILITY": "measured",
+     "WALL_CLOCK": "n/a"
+    },
+    "evidence": [
+     "46 unsolved pages, 16 classes, largest 6"
+    ],
+    "qualification_evidence": [
+     "canonical/verification/DECLARED_TRIGGER_AND_OPERAND_TAXONOMY_20261116_V1.json"
+    ],
+    "qualification_evidence_classes": [
+     "DIRECT_PROBE"
+    ],
+    "resolution": "DISQUALIFIED",
+    "route": "rebuild a universal single-lever part for coverage"
+   },
+   {
+    "comparison": {
+     "CAPABILITY_STRENGTH": "five-transition verdict + two-axis reconciliation + ranked pass/kill plan",
+     "CORRECTNESS": "every number re-read from a merged receipt by the test file",
+     "INCREMENTAL_COST": "one receipt, one note, one test file",
+     "RELIABILITY": "10/10 local; can-fail documented",
+     "VERIFIABILITY": "source receipts are already CI-pinned",
+     "WALL_CLOCK": "minutes"
+    },
+    "evidence": [
+     "FALSE as stated: 4 of 5 links fail or are conditional",
+     "20 external Nov-2026 sources with URLs"
+    ],
+    "qualification_evidence": [
+     "canonical/verification/ONE_LOOP_ONE_TAIL_VERDICT_20261117_V1.json"
+    ],
+    "qualification_evidence_classes": [
+     "DIRECT_PROBE"
+    ],
+    "resolution": "SELECTED",
+    "route": "answer the owner's question from merged receipts plus fresh sources, pinned by can-fail tests"
+   }
+  ],
+  "checked_at_utc": "2026-11-17T15:42:03Z",
+  "comparison_dimensions": [
+   "CORRECTNESS",
+   "CAPABILITY_STRENGTH",
+   "WALL_CLOCK",
+   "INCREMENTAL_COST",
+   "RELIABILITY",
+   "VERIFIABILITY"
+  ],
+  "discovery_required": true,
+  "incumbent_route": "re-derive the five-transition chain from scratch each round",
+  "max_age_hours": 24,
+  "negative_search_summary": "Four fresh web rounds (2026-11-16/17) found no source claiming one-shot experience solves new environments; the field converges on verification-first skill contracts, anchored graders and external memory instead.",
+  "query_families": [
+   {
+    "intent": "CAPABILITY_VECTOR",
+    "query": "2026 verifier bottleneck agent skill learning arxiv"
+   },
+   {
+    "intent": "IMPLEMENTATION_FORM",
+    "query": "one-shot skill generation vs progressive arxiv 2026"
+   },
+   {
+    "intent": "SUPPLIER_OR_PRODUCT",
+    "query": "agent skill contracts preconditions postconditions applicability"
+   },
+   {
+    "intent": "RECENCY_OR_NEW_RELEASE",
+    "query": "memory outside model weights knowledge access beats model size 2026"
+   }
+  ],
+  "refresh_triggers": [
+   "BEFORE_EXPENSIVE_EXECUTION",
+   "AFTER_MATERIAL_ROUTE_FAILURE",
+   "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+   "BEFORE_SCARCE_GATE_SPEND"
+  ],
+  "selected_route": "EXACT_OPERATORS_FROM_UNROUNDED_GEOMETRY_PLUS_OFFSET_MEASUREMENT_WITH_PRE_REGISTERED_CEILING_AND_EVEN_PARITY_PASS_CONDITIONS",
+  "selected_route_preflight": {
+   "all_required_dependencies_ready": true,
+   "checked_at_utc": "2026-11-17T15:42:03Z",
+   "execution_dependencies": [
+    {
+     "dependency": "python3 reading the merged source receipts",
+     "evidence": [
+      "the test file re-reads six receipts and passes 10/10"
+     ],
+     "evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "evidence_scope": "GLOBAL",
+     "kind": "LOCAL_RUNTIME",
+     "observed_at_utc": "2026-11-17T04:55:46Z",
+     "required": true,
+     "scope": "GLOBAL",
+     "status": "READY",
+     "volatility": "STATIC"
+    }
+   ],
+   "execution_dependencies_complete": true,
+   "failed_dependencies": [],
+   "max_age_hours": 2,
+   "selected_route": "EXACT_OPERATORS_FROM_UNROUNDED_GEOMETRY_PLUS_OFFSET_MEASUREMENT_WITH_PRE_REGISTERED_CEILING_AND_EVEN_PARITY_PASS_CONDITIONS",
+   "status": "READY"
+  },
+  "source_classes_checked": [
+   "BRAIN_INHERITED",
+   "OFFICIAL_PRIMARY",
+   "CODE_OR_PACKAGE_REGISTRY",
+   "BROAD_WEB_OR_COMMUNITY"
+  ],
+  "source_evidence": {
+   "BRAIN_INHERITED": [
+    "THESIS_VERDICT_ONE_DEMO_AND_THE_SINGLE_BOTTLENECK_20261116_V1.md",
+    "THE_INSTRUMENT_NOT_THE_EXPERIENCE_20261117_V1.md",
+    "SEPARATION_IS_THE_BOTTLENECK_20261116_V1.md",
+    "WHAT_IS_REAL_AND_THE_ONE_CLASS_OF_PAGE_20261117_V1.md"
+   ],
+   "BROAD_WEB_OR_COMMUNITY": [
+    "20 pinned sources in the receipt; none claims one-shot solves new environments"
+   ],
+   "CODE_OR_PACKAGE_REGISTRY": [
+    "stdlib only; no package in the result-bearing path"
+   ],
+   "OFFICIAL_PRIMARY": [
+    "https://arxiv.org/abs/2610.00972 (VeriHarness)",
+    "https://arxiv.org/abs/2610.11464 (Who Verifies the Verifier)",
+    "https://arxiv.org/abs/2602.20946 (Measurability Gap)",
+    "https://arxiv.org/abs/2611.01386 (Learning by Doing)",
+    "https://arxiv.org/abs/2611.04456 (GitHub skills study)",
+    "https://arxiv.org/abs/2603.23013 (Knowledge Access Beats Model Size)"
+   ]
+  },
+  "unresolved_plausible_dominators": []
+ },
+ "route_id": "ANSWER_THE_THREE_BARRIER_QUESTION_FROM_MERGED_RECEIPTS_AND_FRESH_NOVEMBER_2026_SOURCES_PINNED_BY_CAN_FAIL_TESTS",
+ "routes_considered": [
+  "EXACT OPERATORS FROM UNROUNDED GEOMETRY: box_f + geom + offset family + measured offset via pointer -- selected, measured, both pass conditions met",
+  "WIDEN THE NUDGE GRID: rejected -- the smoke proved a fixed +-1 grid cannot reach a frame offset and would still starve the free run",
+  "CHANGE THE SUITE PREDICATE TO A THRESHOLD: rejected for this branch -- the page authors recommend it, but the predicate belongs to the goal hierarchy, not to a feature; recorded as the instrument finding instead",
+  "READ THE PAGE SOURCE TO HARD-WIRE THE PRESSED POINT: rejected -- pass-14 DISQUALIFIED source-derived page constants (READ_PAGE_SOURCE_TO_HARD_WIRE_WIDGET_PARAMETERS)"
+ ],
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+ "scope_and_limits": "Measurement of the exact-geometry treatment only: prices and offers as declared; no predicate change; no perception; no hot-cold; slider source reading remains disqualified; secondary pages draw-circle/bisect-angle reported, not required.",
+ "scope_complete_discharge": false,
+ "selected_route": "EXACT_OPERATORS_FROM_UNROUNDED_GEOMETRY_PLUS_OFFSET_MEASUREMENT_WITH_PRE_REGISTERED_CEILING_AND_EVEN_PARITY_PASS_CONDITIONS",
+ "selected_surviving_route": "EXACT_OPERATORS_FROM_UNROUNDED_GEOMETRY_PLUS_OFFSET_MEASUREMENT_WITH_PRE_REGISTERED_CEILING_AND_EVEN_PARITY_PASS_CONDITIONS",
+ "status": "MEASURED__SANDBOX_RECEIPT__PENDING_MERGE",
+ "stop_condition": "The receipt, note and tests are merged once; every number has a source path; the two earlier pricing kills are preserved beside the adjudicating run; no benchmark, capability, family, terminal or weight credit is claimed.",
+ "terminal_achieved": false,
+ "terminal_credit_delta": 0,
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "truth": {
+  "achieved": false
+ },
+ "user_authorized_governance_change": false,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "currentness": {
+   "accepted_families": 5,
+   "current_load_bearing_atomic_count": 36,
+   "deleted_nonnecessary_atomic_count": 2,
+   "historical_atomic_registry_count": 38,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_atomic": 38,
+   "total_families": 19,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "This answers the owner's claim from merged receipts; it discharges no truth obligation and claims no terminal credit.",
+  "target_truth_obligations": [
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [],
+   "decisive_question": "Is one experience in a new environment enough to identify a rule that then solves everything, or do the three barriers (identifiability, vocabulary, synthesis-verification) bind first?",
+   "falsifier_id": "A_FIFTH_LINK_OF_THE_CHAIN_MEASURING_TRUE_AFTER_FOUR_ARE_PINNED_FALSE",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "The tree already falsified four of five links; the remaining true link (4x cache generalisation) is pinned as true rather than claimed as the whole chain. Fresh Nov-2026 sources agree: one-shot gains exist only where a teacher already solved the task.",
+   "proposal_id": "ONE_LOOP_ONE_TAIL_VERDICT_20261117_V1"
+  }
+ },
+ "verification": {
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "commands": [
+   "python -m pytest -q canonical/tests/test_one_loop_one_tail_verdict_v1.py  # 10 pass",
+   "python canonical/runtime/verify_brain_unified_model_v1.py  # 33/33",
+   "python execution_guard/enforce_load_bearing_primary_pr.py --base 0ce1f0a52dd7f56412010ea1d713df8f34783224 --head HEAD  # PASS"
+  ]
+ },
+ "weakens_existing_guard": false,
+ "why_selected_route_is_fastest_sufficient": "The OUT_SCORE_FRAME diagnosis completed to its root: the pages ask for half-pixel points the DOM's long pageX/pageY cannot express. The treatment reads box_f/geom/pointer, does the exact math in canvas coordinates at integer presses, measures the printed offset from the mark the page itself drew, and prices the free run to end at that mark. Both pre-registered conditions were met in the adjudicating run, with two pricing-only kills preserved beside it."
+}
