@@ -36,7 +36,7 @@
  },
  "benchmark_or_family_rank_authority": false,
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The three-way split of real work was closed on two of three terms: MEMORISE at 4.814% and SYNTHESISE for the rest, but the REFUSE share -- how much real work has no mechanical postcondition at all -- had never been measured and was labelled the least honest number in the tree. It is now measured: 14 real commits from two real repositories, 4 GUARDED and 10 UNGUARDED, a REFUSE share of 71.4%. A change is GUARDED when the project's own tests, at the state the author left them, fail if only its non-test files are reverted; UNGUARDED means nothing in the repository can tell. The split has a clean shape: behaviour is guarded (a rename that matters, a 32-bit detection, a prompt that breaks on interrupt) and everything else is not (documentation, release bumps, packaging metadata, style). So the bottleneck is not learning speed and not storage: real work is mostly not repetition, and roughly seven changes in ten cannot be mechanically checked by the repository containing them, which means an agent gated on mechanical verification can certify only about a quarter of the work and must be able to REFUSE the rest. The leverage is manufacturing verification, not accelerating learning.",
- "canonical_base_commit": "d595901ef713fd1e2146397354d3ba6620dcd79e",
+ "canonical_base_commit": "18cb1d9c2814c1d92d4feb4d9b0dd19fdf92637d",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -73,29 +73,6 @@
   "wall_clock_cost_ub": 1
  },
  "measured_effect": {
-  "totals": {
-   "commits_measured": 14,
-   "guarded": 4,
-   "unguarded": 10,
-   "refuse_share": 0.7142857142857143
-  },
-  "repositories_measured": [
-   "pypa/packaging",
-   "pallets/click"
-  ],
-  "guarded_examples": [
-   "Make it possible to define aliases for the secondary",
-   "Password prompt now prints a newline on ^C",
-   "Rename Py_NOGIL to Py_GIL_DISABLED",
-   "Detect when a platform is 32-bit more accurately"
-  ],
-  "unguarded_examples": [
-   "Fix a bug in the docs",
-   "Version 5.0",
-   "Apply some refurb suggestions",
-   "Include CHANGELOG.rst in sdist"
-  ],
-  "naive_method_would_have_missed": 2,
   "excluded_as_instrument_limits": [
    "pallets/itsdangerous: NO_GUARDED_RESULT__HARNESS_UNPROVEN",
    "pypa/pyproject-hooks: BASELINE_DID_NOT_RUN",
@@ -103,15 +80,38 @@
    "encode/httpx: BASELINE_DID_NOT_RUN",
    "pallets/markupsafe: EDITABLE_INSTALL_FAILED"
   ],
-  "three_bugs_found_in_the_instrument": [
-   "naive revert removes the tests too",
-   "blob-filtered clone of a historical commit left tests/ without sources",
-   "requiring a green baseline discarded every repository with a pre-existing failure -- click carries one"
+  "guarded_examples": [
+   "Make it possible to define aliases for the secondary",
+   "Password prompt now prints a newline on ^C",
+   "Rename Py_NOGIL to Py_GIL_DISABLED",
+   "Detect when a platform is 32-bit more accurately"
+  ],
+  "naive_method_would_have_missed": 2,
+  "repositories_measured": [
+   "pypa/packaging",
+   "pallets/click"
   ],
   "reused_not_rebuilt": [
    "canonical/tests/fixtures/systematic_edit_corpus_v1.jsonl -- the real commits",
    "THE_CEILING_OF_LEARN_ONCE_20261116_V1.md -- the split this completes",
    "THE_VERIFIER_IS_KNOWLEDGE_NOT_LEARNING_20261116_V1.md -- the claim this answers"
+  ],
+  "three_bugs_found_in_the_instrument": [
+   "naive revert removes the tests too",
+   "blob-filtered clone of a historical commit left tests/ without sources",
+   "requiring a green baseline discarded every repository with a pre-existing failure -- click carries one"
+  ],
+  "totals": {
+   "commits_measured": 14,
+   "guarded": 4,
+   "refuse_share": 0.7142857142857143,
+   "unguarded": 10
+  },
+  "unguarded_examples": [
+   "Fix a bug in the docs",
+   "Version 5.0",
+   "Apply some refurb suggestions",
+   "Include CHANGELOG.rst in sdist"
   ]
  },
  "next_step": "UNIFY_THE_REMAINING_DISCONNECTED_LEARNING_STORES_ONTO_ONE_LIVE_COGNITIVE_BUS_UNDER_RING0_SELF_ARCHITECT",
@@ -128,7 +128,7 @@
   "execution_guard/goal_target_binding_v1.py"
  ],
  "recursive_obs": {
-  "canonical_base_commit": "d595901ef713fd1e2146397354d3ba6620dcd79e",
+  "canonical_base_commit": "18cb1d9c2814c1d92d4feb4d9b0dd19fdf92637d",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "FIVE_FROZEN_PERCEPTOR_CODEC_STRINGS",
@@ -465,8 +465,8 @@
   "tournament": {
    "counterexample_receipts": [
     {
-     "path": "canonical/tests/test_the_refuse_share_v1.py",
-     "git_blob_sha": "06dff671c3727159d28bdfaf2ae88e9ded5bf899"
+     "git_blob_sha": "06dff671c3727159d28bdfaf2ae88e9ded5bf899",
+     "path": "canonical/tests/test_the_refuse_share_v1.py"
     }
    ],
    "decisive_question": "DOES_THE_CREATURE_INDUCE_UNSEEN_GRAMMARS_COMPOSE_ORGANS_SYNTHESIZE_NON_SUM_INVARIANTS_EXPAND_WITHOUT_ENGLISH_KEYWORDS_AND_CHOOSE_ZERO_REWARD_UNLOCKING_TOOLS",
