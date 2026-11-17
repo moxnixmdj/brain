@@ -31228,7 +31228,7 @@
   "engines": 26,
   "knowledge_documents": 477,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6918,
+  "research_index_records": 6920,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 451,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "9ff571dd8765d9aa9034656552cf513dbcc1a314190cb48dfcec98c023e2f850"
+  "value": "6b2ee5a5f6b4b1a99659adc3096b3ba916e38b32288df83f96cc1b0164104e6d"
  },
  "engines": [
   {
@@ -82223,7 +82223,7 @@
   "included_source_count": 1279,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "2c9db70d2b06a3b61b681aa18e9b45148e5d1b87d0bc902f180d8ff6ad01282a"
+  "source_tree_digest": "24e66b3c15c0043a54603e55a056a3ef16d32c9a2c5f56d2c8289710a914d8f4"
  },
  "research_index": [
   {
