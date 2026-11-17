@@ -1,0 +1,320 @@
+{
+  "answers": {
+    "buyable_capability": {
+      "ceiling_if_reach_were_closed": 1.0,
+      "measured_ceiling_now": 0.74,
+      "measured_out_of_grammar": 0.32,
+      "the_gap_that_must_be_bought": 0.42
+    },
+    "is_one_experience_per_action_enough_to_solve_computer_use": "NO",
+    "measured_why": [
+      "75.2% of 2178 real fix pieces from 500 real SWE-bench Verified tasks are rebuilt by no operator any other task's fixes ever produced",
+      "with every other task's fixes as experience -- the asymptote, not a sample -- coverage is 18.7%",
+      "the largest expressible real edit is `delete` (348 pieces, 16.0% of all): a structural removal, and the grammar has can_delete_a_node=False",
+      "on real bugs classified by required edit shape, in-grammar types repair at 74.0% and out-of-grammar types at 32.0% (a 42.0 point separation that no amount of experience closes)",
+      "a new environment costs 29 trials to adapt and only pays back after 25.8 requests in it, so it is a change of currency (requests -> environments), not a free lunch"
+    ],
+    "the_single_bottleneck": "REACH: the set of edits the proposer can name. Search, verification, memory and environment adaptation are all measured and bounded; reach is the term that sets the ceiling, and it is grown by deriving an edit from the failure witness (the test's own expected value at a localised site), never by enumerating more operator families by hand",
+    "what_is_false": [
+      "that experience is the limiting term -- reach is, and experience does not move it",
+      "that competence follows from consequence knowledge: knowing what an action does is silent about which action to take when the needed action has no name in the vocabulary",
+      "that more experience per environment makes it permanent -- permamence holds only where survivors agree, and environment adaptation pays back only after the measured crossover",
+      "that the benchmark is a frontier measure -- SWE-bench Verified was retired in Feb 2026 because frontier models reproduce its gold patches from memory"
+    ],
+    "what_is_true": [
+      "one execution plus a computed sufficiency verdict is enough to know an action's consequence, where the survivors agree",
+      "instant learning in a new environment is real and is a cost law: adapt once, then plan",
+      "verification by execution is exact and cheap, and it is the reason anything here can be trusted",
+      "search over a fixed grammar is effective exactly on the defects inside that grammar"
+    ]
+  },
+  "authority": "NONE__PRODUCER_RUN_RECOMPOSITION_OF_PUBLISHED_RECEIPTS",
+  "grammar": {
+    "can_delete_a_node": false,
+    "can_insert_a_node": false,
+    "can_rename_a_name": false,
+    "families": [
+      "BINOP_SWAP",
+      "BOOL_SWAP",
+      "CALL_FUNC_SWAP",
+      "COMPARE_SWAP",
+      "CONSTANT_REPLACE",
+      "DROPPED_OPERAND",
+      "DROP_NOT",
+      "RANGE_BOUND_ADJUST",
+      "LITERAL"
+    ],
+    "reads_repository_symbols": true,
+    "shapes": [
+      "ADD_OPERAND",
+      "CALL_FUNC_SWAP",
+      "CONSTANT_REPLACE",
+      "DROP_NOT",
+      "OPERATOR",
+      "RANGE_BOUND_ADJUST",
+      "VALUE"
+    ],
+    "source": "canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py"
+  },
+  "grammar_membership_predicts_repair": {
+    "anomalies_of_the_law": [],
+    "every_in_grammar_type_beats_every_out_type": true,
+    "in_grammar": {
+      "bugs": 50,
+      "repair_rate": 0.74,
+      "repaired": 37,
+      "types": [
+        "function misuse",
+        "operator misuse",
+        "value misuse"
+      ]
+    },
+    "law": "P(repair | defect type) is predicted by whether the edit the fix requires is a shape the grammar can name -- not by the amount of experience, and not by the quality of the search. The search does not fail on out-of-grammar defects; it exhausts and correctly reports OPEN",
+    "out_of_grammar": {
+      "bugs": 50,
+      "repair_rate": 0.32,
+      "repaired": 16,
+      "types": [
+        "excess logic",
+        "missing logic",
+        "variable misuse"
+      ]
+    },
+    "recomputation_vs_recording": {
+      "difference": -30,
+      "reading": "the difference is the pieces whose operator exists only inside their own task, which a leave-one-out view cannot hand them; the recomputation agreeing to this size is what makes the asymptote a measurement rather than an assumption",
+      "recomputed_asymptote_pieces": 407,
+      "recording_made_by_another_task": 437
+    },
+    "rows": [
+      {
+        "bug_type": "excess logic",
+        "bugs": 19,
+        "in_grammar": false,
+        "repair_rate": 0.3158,
+        "repaired": 6,
+        "shape": "DELETE"
+      },
+      {
+        "bug_type": "function misuse",
+        "bugs": 6,
+        "in_grammar": true,
+        "repair_rate": 0.8333,
+        "repaired": 5,
+        "shape": "CALL_FUNC_SWAP"
+      },
+      {
+        "bug_type": "missing logic",
+        "bugs": 19,
+        "in_grammar": false,
+        "repair_rate": 0.3158,
+        "repaired": 6,
+        "shape": "INSERT"
+      },
+      {
+        "bug_type": "operator misuse",
+        "bugs": 14,
+        "in_grammar": true,
+        "repair_rate": 0.7143,
+        "repaired": 10,
+        "shape": "OPERATOR"
+      },
+      {
+        "bug_type": "value misuse",
+        "bugs": 30,
+        "in_grammar": true,
+        "repair_rate": 0.7333,
+        "repaired": 22,
+        "shape": "VALUE"
+      },
+      {
+        "bug_type": "variable misuse",
+        "bugs": 12,
+        "in_grammar": false,
+        "repair_rate": 0.3333,
+        "repaired": 4,
+        "shape": "RENAME"
+      }
+    ],
+    "separation": 0.42
+  },
+  "incremental_spend_usd": 0,
+  "law": "P(correct action) = REACH x SEARCH x VERIFICATION; experience moves REACH only by naming new actions, and it names none",
+  "model_calls": 0,
+  "network_calls": 0,
+  "per_environment_learning": {
+    "adaptation_trials": 29,
+    "crossover_requests": 25.78,
+    "learn_each_requests_solved": 11,
+    "learn_each_trials_per_request": 2.125,
+    "machines": 4,
+    "ours_requests_solved": 13,
+    "requests": 16
+  },
+  "reach": {
+    "asymptote_pieces": 407,
+    "by_experience_quartile": [
+      {
+        "coverage": 0.1506,
+        "covered": 89,
+        "pieces": 591,
+        "tasks": [
+          0,
+          125
+        ]
+      },
+      {
+        "coverage": 0.1779,
+        "covered": 82,
+        "pieces": 461,
+        "tasks": [
+          125,
+          250
+        ]
+      },
+      {
+        "coverage": 0.1569,
+        "covered": 80,
+        "pieces": 510,
+        "tasks": [
+          250,
+          375
+        ]
+      },
+      {
+        "coverage": 0.1834,
+        "covered": 113,
+        "pieces": 616,
+        "tasks": [
+          375,
+          500
+        ]
+      }
+    ],
+    "coverage_while_streaming": 0.1671,
+    "coverage_with_all_other_tasks_seen": 0.1869,
+    "covered_while_streaming": 364,
+    "curve_sample": [
+      {
+        "after_tasks": 0,
+        "covered": 0,
+        "operators_known": 0,
+        "pieces": 1,
+        "task": "astropy__astropy-12907"
+      },
+      {
+        "after_tasks": 41,
+        "covered": 0,
+        "operators_known": 14,
+        "pieces": 8,
+        "task": "django__django-11239"
+      },
+      {
+        "after_tasks": 82,
+        "covered": 1,
+        "operators_known": 17,
+        "pieces": 7,
+        "task": "django__django-12406"
+      },
+      {
+        "after_tasks": 123,
+        "covered": 0,
+        "operators_known": 18,
+        "pieces": 1,
+        "task": "django__django-13658"
+      },
+      {
+        "after_tasks": 164,
+        "covered": 0,
+        "operators_known": 24,
+        "pieces": 1,
+        "task": "django__django-14672"
+      },
+      {
+        "after_tasks": 205,
+        "covered": 0,
+        "operators_known": 25,
+        "pieces": 1,
+        "task": "django__django-15741"
+      },
+      {
+        "after_tasks": 246,
+        "covered": 0,
+        "operators_known": 29,
+        "pieces": 2,
+        "task": "django__django-16938"
+      },
+      {
+        "after_tasks": 287,
+        "covered": 1,
+        "operators_known": 30,
+        "pieces": 4,
+        "task": "mwaskom__seaborn-3069"
+      },
+      {
+        "after_tasks": 328,
+        "covered": 2,
+        "operators_known": 32,
+        "pieces": 4,
+        "task": "pylint-dev__pylint-7277"
+      },
+      {
+        "after_tasks": 369,
+        "covered": 0,
+        "operators_known": 33,
+        "pieces": 2,
+        "task": "scikit-learn__scikit-learn-14710"
+      },
+      {
+        "after_tasks": 410,
+        "covered": 0,
+        "operators_known": 36,
+        "pieces": 1,
+        "task": "sphinx-doc__sphinx-8638"
+      },
+      {
+        "after_tasks": 451,
+        "covered": 1,
+        "operators_known": 42,
+        "pieces": 1,
+        "task": "sympy__sympy-15809"
+      },
+      {
+        "after_tasks": 492,
+        "covered": 0,
+        "operators_known": 43,
+        "pieces": 1,
+        "task": "sympy__sympy-23824"
+      }
+    ],
+    "operators_learned": 43,
+    "pieces": 2178,
+    "tasks": 500
+  },
+  "real_fixes": {
+    "made_by_another_task_share": 0.2006,
+    "meaning": "N means no experience of any other task produces this piece of this fix. `delete` and `insert` are structural: they are not a value or an operator being wrong, so no amount of watching values and operators change can name them",
+    "never_seen_share": 0.7521,
+    "operator_kinds": {
+      "NO_OPERATOR": 1741,
+      "delete": 348,
+      "insert": 16,
+      "replace": 73
+    },
+    "pieces": 2178,
+    "provenance": {
+      "L": 103,
+      "M": 437,
+      "N": 1638
+    },
+    "recording_says_made_by_another_task": 437,
+    "structural_share": 0.1671
+  },
+  "receipts": {
+    "environments": "canonical/verification/INSTANT_LEARNING_IN_A_NEW_ENVIRONMENT_20261116_V1.json",
+    "expert_fixes": "canonical/verification/EXPERT_FIX_REPETITION_SWEBENCH_VERIFIED_20261112_V1.json",
+    "humanevalfix": "canonical/verification/HUMANEVALFIX_REPAIR_SOLVER_20261112_V1.json"
+  },
+  "schema": "BRAIN_REACH_OF_THE_GRAMMAR_V1",
+  "what_this_shows": "Measured over 500 real SWE-bench Verified tasks and 2178 real fix pieces, experience does not buy reach: 75.2% of pieces are rebuilt by no operator any other task ever produced, and with every other task's fixes as experience the coverage is 18.7% -- an asymptote, not a sample. The same wall appears from the other side on 100 real HumanEvalFix bugs: in-grammar defect types repair at 74.0%, out-of-grammar types at 32.0%, and the split is exactly whether the required edit is a shape the grammar can name. So the limiting term is REACH, not search, not verification, not memory: consequence knowledge is silent about which action to take when the needed action has no name yet. New environments do not change this -- they cost 29 trials to adapt and pay back only after 25.8 requests."
+}
