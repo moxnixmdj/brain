@@ -57,13 +57,15 @@ const DROP_PAST_MIN_PX = 2;        // and never less than this
 const NUDGES = { up: [0, -1], down: [0, 1], left: [-1, 0], right: [1, 0] };
 const MAX_WAIT_S = 60;
 const AIMED = new Set(['click', 'type', 'hover', 'grab', 'drop', 'nudge', 'triple']);   // actions done AT an element
+const POINTY = new Set(['pressat', 'moveat', 'dropat']);   // actions done AT a place the answer may be, element or not
 const PAGE_CONFIG = {
   epoch: EPOCH_MS,
   skipIds: ['query', 'reward-display', 'sync-task-cover', 'click-canvas'],
   skipTags: ['SCRIPT', 'STYLE', 'LINK', 'META', 'HEAD', 'TITLE', 'BR', 'NOSCRIPT', 'TEMPLATE'],
   nativeClick: ['BUTTON', 'INPUT', 'A', 'OPTION', 'LABEL', 'TEXTAREA', 'SUMMARY', 'AREA'],
   textInputTypes: ['text', 'password', 'email', 'number', 'search', 'tel', 'url', 'date', 'time', 'datetime-local', 'month', 'week', ''],
-  attrs: ['type', 'name', 'for', 'placeholder', 'title', 'alt', 'href', 'role', 'aria-label', 'data-value', 'data-index'],
+  attrs: ['type', 'name', 'for', 'placeholder', 'title', 'alt', 'href', 'role', 'aria-label', 'data-value', 'data-index',
+          'min', 'max', 'step', 'aria-valuemin', 'aria-valuemax', 'aria-valuenow'],
   aimGrid: 7,                      // a covered middle: this many points each way across the element are tried
 };
 
@@ -165,7 +167,29 @@ function inPage(cfg) {
     const out = [];
     current = [];
     function walk(el, parent) {
-      if (SKIP_TAGS.has(el.tagName) || SKIP_IDS.has(el.id)) return '';
+      if (SKIP_TAGS.has(el.tagName) || SKIP_IDS.has(el.id)) {
+        // The instruction region is the instruction, not the page -- with one exception the
+        // hand must still see: a small swatch the region SHOWS with its own inline colour is
+        // content a person could read off the screen, so it is passed through as an inert
+        // (never clickable, never typable) element. Everything else in there stays skipped,
+        // so its echoes never become actions.
+        if (el.id === 'query') {
+          for (const n of el.querySelectorAll('*')) {
+            const bg = n.style && n.style.backgroundColor;
+            if (!bg) continue;
+            const rr = n.getBoundingClientRect();
+            if (!(rr.width > 0 && rr.height > 0) || rr.width > 40 || rr.height > 40) continue;
+            const rec = { index: out.length, parent, tag: n.tagName.toLowerCase(), text: '',
+              box: [Math.round(rr.left), Math.round(rr.top), Math.round(rr.width), Math.round(rr.height)],
+              colour: String(bg).slice(0, 60) };
+            out.push(rec);
+            current.push(n);   // aim/focusedIs look elements up BY THE SAME FLAT ORDER -- a
+                               // swatch in the observation must exist in both arrays or every
+                               // later index aims at the wrong element.
+          }
+        }
+        return '';
+      }
       if (!shown(el)) return '';
       const index = out.length;
       const rec = { index, parent, tag: el.tagName.toLowerCase(), text: '' };
@@ -465,11 +489,32 @@ async function act(action) {
     const seconds = Number(action.seconds);
     if (!(seconds > 0 && seconds <= MAX_WAIT_S)) problem = 'WAIT_NOT_UNDERSTOOD';
     else return settled(() => page.evaluate((s) => window.__bridge.wait(s), seconds));
-  } else if (!AIMED.has(kind)) problem = 'UNKNOWN_ACTION';
+  } else if (!AIMED.has(kind) && !POINTY.has(kind)) problem = 'UNKNOWN_ACTION';
   else if (kind === 'nudge' && !Object.prototype.hasOwnProperty.call(NUDGES, String(action.text))) problem = 'NUDGE_NOT_UNDERSTOOD';
-  else if (held && kind !== 'drop') problem = 'THE_HAND_IS_HOLDING_SOMETHING';       // all it can do is let go
-  else if (!held && kind === 'drop') problem = 'THE_HAND_HOLDS_NOTHING';
-  if (!problem) {
+  else if (held && kind !== 'drop' && kind !== 'dropat') problem = 'THE_HAND_IS_HOLDING_SOMETHING';       // all it can do is let go
+  else if (!held && (kind === 'drop' || kind === 'dropat')) problem = 'THE_HAND_HOLDS_NOTHING';
+  if (!problem && POINTY.has(kind)) {
+    // A place, not an element: the point is given, so nothing is aimed. A point outside the window is not a
+    // point of this page and no press is taken there.
+    const x = Number(action.x), y = Number(action.y);
+    if (!(Number.isFinite(x) && Number.isFinite(y)) || x < 0 || y < 0 || x > VIEWPORT.width || y > VIEWPORT.height) {
+      problem = 'POINT_IS_NOT_IN_THE_WINDOW';
+    } else if (kind === 'pressat') {
+      await page.mouse.click(x, y);
+    } else if (kind === 'moveat') {
+      await page.mouse.move(x, y, { steps: 2 });
+    } else {
+      // Letting go AT a place: the hand releases just past the point on the line it came along, the same
+      // reason a drop goes past the middle of its target (a dragged thing counts as arrived once crossed).
+      const dx = x - heldAt.x, dy = y - heldAt.y, far = Math.hypot(dx, dy);
+      let tx = x, ty = y;
+      if (far > 0) { tx += dx / far * DROP_PAST_MIN_PX; ty += dy / far * DROP_PAST_MIN_PX; }
+      await page.mouse.move(tx, ty, { steps: DRAG_STEPS });
+      await page.mouse.up();
+      held = false; heldAt = null;
+      await page.evaluate(() => window.__bridge.letGo());
+    }
+  } else if (!problem) {
     const aim = await page.evaluate((i, how) => window.__bridge.aim(i, how), action.index, kind);
     if (aim.error) problem = aim.error;
     else if (aim.handled) { /* an option of a drop-down: the page has been told */ }
