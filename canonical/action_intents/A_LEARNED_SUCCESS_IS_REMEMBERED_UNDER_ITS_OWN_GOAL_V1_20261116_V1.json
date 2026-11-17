@@ -57,6 +57,105 @@
   "success_probability_lcb": "1/4",
   "wall_clock_cost_ub": 1
  },
+ "recursive_obs": {
+  "canonical_base_commit": "e2fff59bbfacc50010661a76c8c87920d8b12567",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1 @ e2fff59bbfacc50010661a76c8c87920d8b12567",
+  "deleted_or_bypassed_paths": [
+   "canonical/runtime/goal_truth_v1.py (written then deleted: duplicated verify_round_trip)",
+   "A synthetic twin substrate (rejected before building: tests must be real)"
+  ],
+  "expected_parent_level_state_change": "A goal that closed is remembered as a fact about that goal and nothing else, so a later goal asking for a different effect neither recalls it nor is credited with it, while a paraphrase of the same job still recalls instead of paying for a fresh search.",
+  "obs_blocker": {
+   "delete_bypass_substitute_options": "DELETE: remove the memory -> rejected, the plan is what makes the second time cheap and _verify_plan re-executes it. BYPASS: recall without a key -> rejected, that is the defect. SUBSTITUTE: key on the fingerprint alone -> rejected, its own comment measures the target-in-key cost.",
+   "intrinsic_or_path_specific": "Path specific: one constant assigned at one line.",
+   "surviving_causal_blocker": "gkey was the constant string 'goal'."
+  },
+  "obs_capability": {
+   "capability_work_deleted": "A goal_truth_v1 module written this round was DELETED because program_synthesis_v1.verify_round_trip already verifies the effect.",
+   "existing_inherited_routes_checked": "transfer_learning_v1.remember/recall already take a goal_key; computer_env_v1 already computes target and suffix before the key is used; fingerprint_key already exists and its comment already explains why the target is excluded.",
+   "external_existing_routes_checked": "None needed. This is a key-scope defect in an existing store, not a missing capability.",
+   "surviving_gap": "Only the key's scope was wrong."
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "Making the episode store grow",
+    "Raising the recall hit rate",
+    "Adding a new memory schema"
+   ],
+   "real_outcome": "A closed goal is remembered under the effect it asked for: target plus format.",
+   "surviving_necessity": "Without a goal-scoped key the store records a plan as correct when it solved a different job, and every reader other than _verify_plan trusts that label."
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "No change.",
+   "downstream_work_to_delete_or_supersede": "None; downstream readers simply stop seeing cross-goal plans.",
+   "fresh_reuse_plan": "Reuse the existing goal_key parameter end to end."
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": "Only computer_env_v1 and the unified model artifact.",
+   "analysis_steps_deleted_or_cached": "The per-goal probe scripts written this round were deleted; the finding lives in the intent and the doc.",
+   "search_stop_decision": "Stopped when the mutation killed the tests and the regression failure SET matched the base exactly."
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "implementation_still_necessary": "One line, no new module.",
+   "losing_routes_reason": "Fingerprint-as-is and prose keys both re-create the paraphrase cache-miss the fingerprint change removed; a new schema is a new part for a one-line defect.",
+   "routes_ranked": [
+    "ADAPT",
+    "REUSE_THE_FINGERPRINT_AS_IS",
+    "KEY_ON_THE_GOAL_PROSE",
+    "SYNTHESIZE_A_NEW_MEMORY_SCHEMA"
+   ]
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": "3 tests drive the real _discover_impl against a temporary store and read what was written.",
+   "existing_oracle_considered": "program_synthesis_v1.verify_round_trip and transfer_learning_v1._load are the existing oracles; the tests reuse both rather than reimplementing.",
+   "synthetic_verification_necessity": "None. The tests run real programs on real files."
+  },
+  "real_outcome": "Two goals asking for different effects can no longer share a memory key, and the same or a paraphrased goal still recalls instead of paying for a fresh search.",
+  "required_capability": "A learned plan is stored as evidence about the goal it actually solved.",
+  "route_frontier": {
+   "selected_route_preflight": {
+    "execution_dependencies": [
+     {
+      "dependency": "json",
+      "kind": "PYTHON_STDLIB"
+     },
+     {
+      "dependency": "hashlib",
+      "kind": "PYTHON_STDLIB"
+     },
+     {
+      "dependency": "bzip2/gzip from PATH, exercised by the tests",
+      "kind": "LOCAL_PROGRAM"
+     },
+     {
+      "dependency": "canonical/runtime/transfer_learning_v1.py",
+      "kind": "REPOSITORY_MODULE"
+     }
+    ],
+    "model_dependencies": []
+   }
+  },
+  "routes_considered": [
+   "REUSE_THE_FINGERPRINT_AS_IS__REJECTED_ITS_OWN_COMMENT_MEASURES_THAT_PUTTING_THE_TARGET_IN_THE_KEY_COSTS_1268MS_PER_NEW_NAME_AGAINST_265MS_FOR_A_REPEAT",
+   "KEY_ON_THE_GOAL_PROSE__REJECTED_EVERY_PARAPHRASE_BECOMES_A_CACHE_MISS_WHICH_IS_THE_COST_THE_FINGERPRINT_CHANGE_REMOVED",
+   "DELETE_THE_LEARNED_PLAN_AND_KEEP_ONLY_A_FINGERPRINT__REJECTED_THE_PLAN_IS_WHAT_MAKES_THE_SECOND_TIME_CHEAP_AND_VERIFY_PLAN_ALREADY_REEXECUTES_IT",
+   "ADAPT_THE_KEY_TO_THE_EFFECT_THE_GOAL_ASKS_FOR",
+   "SYNTHESIZE_A_NEW_MEMORY_SCHEMA__REJECTED_A_NEW_PART_FOR_A_ONE_LINE_DEFECT"
+  ],
+  "selected_surviving_route": "A_LEARNED_SUCCESS_IS_REMEMBERED_UNDER_ITS_OWN_GOAL_V1_20261116_V1",
+  "stop_condition": "STOP when two goals asking for different effects cannot share a memory key, when repeating or paraphrasing the same effect still hits its memory, and when reverting the line makes the new tests fail.",
+  "why_selected_route_is_fastest_sufficient": "One line at the one site that was wrong. The goal's identity was already computed by the route -- target and suffix exist before the key is used -- so nothing was invented and nothing was added to the hot path. The route order was walked: DELETE was not available (the memory is load-bearing and its verifier already prevents wrong answers); BYPASS and REUSE found no existing goal-scoped key; ADAPT was chosen."
+ },
  "resolution": "SELECTED",
  "route_id": "A_LEARNED_SUCCESS_IS_REMEMBERED_UNDER_ITS_OWN_GOAL_V1_20261116_V1",
  "routes_considered": [
@@ -73,6 +172,52 @@
  "terminal_credit_delta": 0,
  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
  "user_authorized_governance_change": false,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "checked_at_utc": "2026-11-16T00:00:00Z",
+  "currentness": {
+   "accepted_families": 5,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "NOT_APPLICABLE__REPAIR_OF_AN_EXISTING_MEMORY_KEY_WITH_SANDBOX_MEASUREMENT_ONLY",
+  "target_truth_obligations": [
+   "CODING_TB4_GE_66_4"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [
+    {
+     "git_blob_sha": "d55b3aa43f68ab1863410c79fdab263212175642",
+     "path": "canonical/runtime/computer_env_v1.py"
+    },
+    {
+     "git_blob_sha": "525a8ab71ed804a177130d51b70044a4382bf269",
+     "path": "canonical/tests/test_learned_success_is_remembered_under_its_own_goal_v1.py"
+    },
+    {
+     "git_blob_sha": "55e0e70d8aeb2e90a4ed3c53c98e1aeb76602ea8",
+     "path": "canonical/action_intents/A_LEARNED_SUCCESS_IS_REMEMBERED_UNDER_ITS_OWN_GOAL_V1_20261116_V1.json"
+    }
+   ],
+   "decisive_question": "Does a goal that closed get recalled for a different goal that asks for a different effect?",
+   "falsifier_id": "A_LEARNED_SUCCESS_IS_REMEMBERED_UNDER_ITS_OWN_GOAL_V1_20261116_V1_FALSIFIER",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "Both directions were falsified directly. test_two_unrelated_goals_do_not_share_a_memory_key and test_no_episode_uses_the_shared_constant fail when gkey is reverted to 'goal' (measured: FAILED failures=2, 'two different goals were remembered under one key'). test_repeating_a_goal_reuses_its_key pins that the repair did not defeat recall. test_paraphrase_of_the_same_effect_shares_its_key pins that two sentences asking for the same file and format still hit one memory.",
+   "proposal_id": "A_LEARNED_SUCCESS_IS_REMEMBERED_UNDER_ITS_OWN_GOAL_V1_20261116_V1"
+  }
+ },
  "weakens_existing_guard": [],
  "why_selected_route_is_fastest_sufficient": "One line at the one site that was wrong. The goal's identity was already computed by the route -- target and suffix exist before the key is used -- so nothing was invented and nothing was added to the hot path. The route order was walked: DELETE was not available (the memory is load-bearing and its verifier already prevents wrong answers); BYPASS and REUSE found no existing goal-scoped key; ADAPT was chosen."
 }
