@@ -42,13 +42,13 @@
  },
  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The claim \"experience each advanced action once and it is learned permanently\" was answered only as a list of three levers (coverage, identification, interface prior) with no relation between them, so it could not say which lever to pull first, when a lever is empty, or why one demonstration is worth a bounded amount. It is now an equation: bits_after = log2(|H|/|G|) - I(E) - sum I(q) - I(interface), ending at zero. Measured on the tree's own 47-program space: 5.5546 bits before, 3.8176 after one demonstration, 1.0927 bits per further demonstration versus 1.9088 per chosen question, so a question is worth 1.747x a demonstration at equal interaction cost and experience alone needs 3.49 more demos where questions needed 2.00. The demonstration ceiling log2(|Y|)=7.4594 exceeds 5.5546 and therefore does NOT bind; what binds is that one point leaves 14.1 of 47 hypotheses.",
- "canonical_base_commit": "a2c3480a06",
+ "canonical_base_commit": "a2c3480a06f457c225a431e384ff311154882c52",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
  "causal_blocker": "The claim \"experience each advanced action once and it is learned permanently\" was answered only as a list of three levers (coverage, identification, interface prior) with no relation between them, so it could not say which lever to pull first, when a lever is empty, or why one demonstration is worth a bounded amount. It is now an equation: bits_after = log2(|H|/|G|) - I(E) - sum I(q) - I(interface), ending at zero. Measured on the tree's own 47-program space: 5.5546 bits before, 3.8176 after one demonstration, 1.0927 bits per further demonstration versus 1.9088 per chosen question, so a question is worth 1.747x a demonstration at equal interaction cost and experience alone needs 3.49 more demos where questions needed 2.00. The demonstration ceiling log2(|Y|)=7.4594 exceeds 5.5546 and therefore does NOT bind; what binds is that one point leaves 14.1 of 47 hypotheses.",
  "date": "2026-11-16",
- "expected_parent_change": "One demonstration stops being a claim about the environment and becomes a guarded plan with a measured domain: on 168 real states of a real repository its true domain is 112 (status-level goal) and 56 (goal with a premise the plan does not set); under a status-level sense 24 of 168 premise-task states are undecidable, 16 of them failing silently while looking exactly like states where the plan works; carrying the premise in the sense moves that to 0 with the domain unchanged, while command output as a sense collapses 168 states into 3 classes and licenses none.",
+ "expected_parent_change": "The one-try route stops being a matter of opinion and becomes an inequality that can be aimed at: the prior is the only term not billed per interaction, so effort moves off collecting experience and onto writing the space down and widening the interface.",
  "expected_parent_frontier_change": "The permanent object is the premise check and the verifier, not the demonstration: a learned sequence may be proposed but never licensed, the guard is the premise read on the live state, the postcondition is the goal read after the last action, and where neither is expressible the honest move is refusal or a new observable -- because the undecidable set is invariant to experience.",
  "explicit_user_authorization": [
   "Instant learning in new arbitrary environments is solved perfectly; one-shot learning plus permanent retention equals all computer use and most advanced SWE -- answer whether that is true.",
@@ -153,7 +153,7 @@
  ],
  "probe_specific": false,
  "recursive_obs": {
-  "canonical_base_commit": "a2c3480a06",
+  "canonical_base_commit": "a2c3480a06f457c225a431e384ff311154882c52",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "building a fourth learning probe suite when three exist and are better",
