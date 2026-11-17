@@ -1,0 +1,902 @@
+{
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "classes_experimental_only": [
+  "ENCLOSE",
+  "RECOMBINE"
+ ],
+ "classes_in_the_shipped_space": [
+  "ATTRIBUTE",
+  "BOOLEAN_OP",
+  "CALL",
+  "IF_EXPRESSION",
+  "NEST",
+  "PREPEND_TERM",
+  "SLICE"
+ ],
+ "corpus_commit": "4257f44b0ff1181dedaedee6a447e133219fcebf",
+ "derived_classes": [
+  "ATTRIBUTE",
+  "BOOLEAN_OP",
+  "CALL",
+  "COMMUTE",
+  "IF_EXPRESSION",
+  "INSERT_STATEMENT",
+  "NEST",
+  "PREPEND_TERM",
+  "SLICE"
+ ],
+ "donors": {
+  "ATTRIBUTE": "subsequences",
+  "BOOLEAN_OP": "shunting_yard",
+  "CALL": "powerset",
+  "COMMUTE": "to_base",
+  "ENCLOSE": "the language, not a program",
+  "IF_EXPRESSION": null,
+  "INSERT_STATEMENT": "shunting_yard",
+  "NEST": "subsequences",
+  "PREPEND_TERM": "powerset",
+  "RECOMBINE": "the language, not a program",
+  "SLICE": "kheapsort"
+ },
+ "executed_candidates": 0,
+ "external_capability_provider_count": 0,
+ "measures": "reachability of the corpus's own published fix inside the real space; not a solve, and no execution",
+ "model_dependency_count": 0,
+ "network_calls_at_run_time": 0,
+ "reconciliation_with_the_solve_receipt": "all 8 tasks AIMED_EDITS_FROM_THE_PROGRAM_AND_THE_FAILURE_20261117_V1 solved are reachable in the space with the class recorded there",
+ "rows": [
+  {
+   "atoms": 5,
+   "fix_by_a_derived_class": false,
+   "fix_class": "BASE",
+   "fix_in_the_old_space": true,
+   "fix_in_the_space": true,
+   "fix_kind": "OPERATOR",
+   "fix_replacement": "BitAnd",
+   "fix_site": "n ^= n - 1",
+   "needs_composition": false,
+   "seconds": 0.497,
+   "space_size": 1735,
+   "status": "MEASURED",
+   "task": "bitcount"
+  },
+  {
+   "atoms": 10,
+   "fix_by_a_derived_class": false,
+   "fix_class": "REPLACE",
+   "fix_in_the_old_space": true,
+   "fix_in_the_space": true,
+   "fix_kind": "REPLACE",
+   "fix_replacement": "queue",
+   "fix_site": "True",
+   "needs_composition": false,
+   "seconds": 15.089,
+   "space_size": 21270,
+   "status": "MEASURED",
+   "task": "breadth_first_search"
+  },
+  {
+   "atoms": 11,
+   "fix_by_a_derived_class": true,
+   "fix_class": "CALL",
+   "fix_in_the_old_space": false,
+   "fix_in_the_space": true,
+   "fix_kind": "REPLACE",
+   "fix_replacement": "enumerate(counts)",
+   "fix_site": "enumerate(arr)",
+   "needs_composition": false,
+   "seconds": 8.129,
+   "space_size": 16081,
+   "status": "MEASURED",
+   "task": "bucketsort"
+  },
+  {
+   "atoms": 11,
+   "difference": "insert nodesvisited.add(node)",
+   "fix_by_a_derived_class": false,
+   "fix_class": null,
+   "fix_in_the_old_space": false,
+   "fix_in_the_space": false,
+   "needs_composition": false,
+   "seconds": 5.546,
+   "space_size": 10751,
+   "status": "MEASURED",
+   "task": "depth_first_search"
+  },
+  {
+   "atoms": 6,
+   "difference": "hare.successor is None -> hare is None or hare.successor is None",
+   "fix_by_a_derived_class": false,
+   "fix_class": null,
+   "fix_in_the_old_space": false,
+   "fix_in_the_space": false,
+   "needs_composition": false,
+   "seconds": 1.846,
+   "space_size": 4613,
+   "status": "MEASURED",
+   "task": "detect_cycle"
+  },
+  {
+   "atoms": 9,
+   "fix_by_a_derived_class": false,
+   "fix_class": "BASE",
+   "fix_in_the_old_space": true,
+   "fix_in_the_space": true,
+   "fix_kind": "OPERATOR",
+   "fix_replacement": "Lt",
+   "fix_site": "lo <= hi",
+   "needs_composition": false,
+   "seconds": 23.075,
+   "space_size": 29123,
+   "status": "MEASURED",
+   "task": "find_first_in_sorted"
+  },
+  {
+   "atoms": 10,
+   "fix_by_a_derived_class": false,
+   "fix_class": "BASE",
+   "fix_in_the_old_space": true,
+   "fix_in_the_space": true,
+   "fix_kind": "ATOM_SHAPE",
+   "fix_replacement": "mid + 1",
+   "fix_site": "mid",
+   "needs_composition": false,
+   "seconds": 21.064,
+   "space_size": 28364,
+   "status": "MEASURED",
+   "task": "find_in_sorted"
+  },
+  {
+   "atoms": 9,
+   "fix_by_a_derived_class": false,
+   "fix_class": "REPLACE",
+   "fix_in_the_old_space": true,
+   "fix_in_the_space": true,
+   "fix_kind": "REPLACE",
+   "fix_replacement": "x",
+   "fix_site": "flatten(x)",
+   "needs_composition": false,
+   "seconds": 2.031,
+   "space_size": 6223,
+   "status": "MEASURED",
+   "task": "flatten"
+  },
+  {
+   "atoms": 6,
+   "fix_by_a_derived_class": false,
+   "fix_class": "BASE",
+   "fix_in_the_old_space": true,
+   "fix_in_the_space": true,
+   "fix_kind": "PERMUTE",
+   "fix_replacement": "b,a % b",
+   "fix_site": "gcd(a % b, b)",
+   "needs_composition": false,
+   "seconds": 0.801,
+   "space_size": 3078,
+   "status": "MEASURED",
+   "task": "gcd"
+  },
+  {
+   "atoms": 9,
+   "difference": "[] -> [n]",
+   "fix_by_a_derived_class": false,
+   "fix_class": null,
+   "fix_in_the_old_space": false,
+   "fix_in_the_space": false,
+   "needs_composition": false,
+   "seconds": 6.939,
+   "space_size": 13596,
+   "status": "MEASURED",
+   "task": "get_factors"
+  },
+  {
+   "atoms": 10,
+   "fix_by_a_derived_class": false,
+   "fix_class": "REPLACE",
+   "fix_in_the_old_space": true,
+   "fix_in_the_space": true,
+   "fix_kind": "REPLACE",
+   "fix_replacement": "end",
+   "fix_site": "helper",
+   "needs_composition": false,
+   "seconds": 14.556,
+   "space_size": 20762,
+   "status": "MEASURED",
+   "task": "hanoi"
+  },
+  {
+   "atoms": 6,
+   "fix_by_a_derived_class": false,
+   "fix_class": "REPLACE",
+   "fix_in_the_old_space": true,
+   "fix_in_the_space": true,
+   "fix_kind": "REPLACE",
+   "fix_replacement": "depth == 0",
+   "fix_site": "True",
+   "needs_composition": false,
+   "seconds": 1.216,
+   "space_size": 3286,
+   "status": "MEASURED",
+   "task": "is_valid_parenthesization"
+  },
+  {
+   "atoms": 8,
+   "fix_by_a_derived_class": true,
+   "fix_class": "SLICE",
+   "fix_in_the_old_space": false,
+   "fix_in_the_space": true,
+   "fix_kind": "REPLACE",
+   "fix_replacement": "arr[k:]",
+   "fix_site": "arr",
+   "needs_composition": false,
+   "seconds": 6.345,
+   "space_size": 14236,
+   "status": "MEASURED",
+   "task": "kheapsort"
+  },
+  {
+   "atoms": 15,
+   "fix_by_a_derived_class": false,
+   "fix_class": "BASE",
+   "fix_in_the_old_space": true,
+   "fix_in_the_space": true,
+   "fix_kind": "OPERATOR",
+   "fix_replacement": "LtE",
+   "fix_site": "weight < j",
+   "needs_composition": false,
+   "seconds": 51.295,
+   "space_size": 49416,
+   "status": "MEASURED",
+   "task": "knapsack"
+  },
+  {
+   "atoms": 13,
+   "difference": "k -> k - num_lessoreq",
+   "fix_by_a_derived_class": false,
+   "fix_class": null,
+   "fix_in_the_old_space": false,
+   "fix_in_the_space": false,
+   "needs_composition": false,
+   "seconds": 23.585,
+   "space_size": 29573,
+   "status": "MEASURED",
+   "task": "kth"
+  },
+  {
+   "atoms": 12,
+   "fix_by_a_derived_class": false,
+   "fix_class": "BASE",
+   "fix_in_the_old_space": true,
+   "fix_in_the_space": true,
+   "fix_kind": "ATOM_SHAPE",
+   "fix_replacement": "j - 1",
+   "fix_site": "j",
+   "needs_composition": false,
+   "seconds": 23.179,
+   "space_size": 32259,
+   "status": "MEASURED",
+   "task": "lcs_length"
+  },
+  {
+   "atoms": 8,
+   "difference": "1 + levenshtein(source[1:], target[1:]) -> levenshtein(source[1:], target[1:])",
+   "fix_by_a_derived_class": false,
+   "fix_class": null,
+   "fix_in_the_old_space": false,
+   "fix_in_the_space": false,
+   "needs_composition": false,
+   "seconds": 32.404,
+   "space_size": 38030,
+   "status": "MEASURED",
+   "task": "levenshtein"
+  },
+  {
+   "atoms": 14,
+   "difference": "length + 1 -> max(longest, length + 1)",
+   "fix_by_a_derived_class": false,
+   "fix_class": null,
+   "fix_in_the_old_space": false,
+   "fix_in_the_space": false,
+   "needs_composition": false,
+   "seconds": 33.808,
+   "space_size": 38099,
+   "status": "MEASURED",
+   "task": "lis"
+  },
+  {
+   "atoms": 8,
+   "fix_by_a_derived_class": false,
+   "fix_class": "BASE",
+   "fix_in_the_old_space": true,
+   "fix_in_the_space": true,
+   "fix_kind": "ATOM_SHAPE",
+   "fix_replacement": "b[1:]",
+   "fix_site": "b",
+   "needs_composition": false,
+   "seconds": 16.663,
+   "space_size": 25862,
+   "status": "MEASURED",
+   "task": "longest_common_subsequence"
+  },
+  {
+   "atoms": 8,
+   "fix_by_a_derived_class": false,
+   "fix_class": "REPLACE",
+   "fix_in_the_old_space": true,
+   "fix_in_the_space": true,
+   "fix_kind": "REPLACE",
+   "fix_replacement": "max(0, (max_ending_here + x))",
+   "fix_site": "max_ending_here + x",
+   "needs_composition": false,
+   "seconds": 1.627,
+   "space_size": 4686,
+   "status": "MEASURED",
+   "task": "max_sublist_sum"
+  },
+  {
+   "atoms": 13,
+   "difference": "len(arr) == 0 -> len(arr) <= 1",
+   "fix_by_a_derived_class": false,
+   "fix_class": null,
+   "fix_in_the_old_space": false,
+   "fix_in_the_space": false,
+   "needs_composition": false,
+   "seconds": 79.316,
+   "space_size": 62520,
+   "status": "MEASURED",
+   "task": "mergesort"
+  },
+  {
+   "atoms": 12,
+   "difference": "more than one edit",
+   "fix_by_a_derived_class": false,
+   "fix_class": null,
+   "fix_in_the_old_space": false,
+   "fix_in_the_space": false,
+   "needs_composition": true,
+   "seconds": 30.493,
+   "space_size": 37509,
+   "status": "MEASURED",
+   "task": "minimum_spanning_tree"
+  },
+  {
+   "atoms": 8,
+   "fix_by_a_derived_class": true,
+   "fix_class": "PREPEND_TERM",
+   "fix_in_the_old_space": false,
+   "fix_in_the_space": true,
+   "fix_kind": "REPLACE",
+   "fix_replacement": "(len(digit_list)) - 1",
+   "fix_site": "len(digit_list)",
+   "needs_composition": false,
+   "seconds": 37.498,
+   "space_size": 36298,
+   "status": "MEASURED",
+   "task": "next_palindrome"
+  },
+  {
+   "atoms": 11,
+   "difference": "perm[j] < perm[i] -> perm[i] < perm[j]",
+   "fix_by_a_derived_class": false,
+   "fix_class": null,
+   "fix_in_the_old_space": false,
+   "fix_in_the_space": false,
+   "needs_composition": false,
+   "seconds": 49.383,
+   "space_size": 49155,
+   "status": "MEASURED",
+   "task": "next_permutation"
+  },
+  {
+   "atoms": 11,
+   "fix_by_a_derived_class": false,
+   "fix_class": "BASE",
+   "fix_in_the_old_space": true,
+   "fix_in_the_space": true,
+   "fix_kind": "ATOM_SHAPE",
+   "fix_replacement": "r + 1",
+   "fix_site": "r",
+   "needs_composition": false,
+   "seconds": 30.835,
+   "space_size": 37754,
+   "status": "MEASURED",
+   "task": "pascal"
+  },
+  {
+   "atoms": 8,
+   "difference": "total < 0 -> total < 0 or not coins",
+   "fix_by_a_derived_class": false,
+   "fix_class": null,
+   "fix_in_the_old_space": false,
+   "fix_in_the_space": false,
+   "needs_composition": false,
+   "seconds": 3.872,
+   "space_size": 8464,
+   "status": "MEASURED",
+   "task": "possible_change"
+  },
+  {
+   "atoms": 9,
+   "fix_by_a_derived_class": true,
+   "fix_class": "PREPEND_TERM",
+   "fix_in_the_old_space": false,
+   "fix_in_the_space": true,
+   "fix_kind": "REPLACE",
+   "fix_replacement": "rest_subsets + ([[first] + subset for subset in rest_subsets])",
+   "fix_site": "[[first] + subset for subset in rest_subsets]",
+   "needs_composition": false,
+   "seconds": 2.211,
+   "space_size": 5759,
+   "status": "MEASURED",
+   "task": "powerset"
+  },
+  {
+   "atoms": 9,
+   "fix_by_a_derived_class": false,
+   "fix_class": "BASE",
+   "fix_in_the_old_space": true,
+   "fix_in_the_space": true,
+   "fix_kind": "OPERATOR",
+   "fix_replacement": "GtE",
+   "fix_site": "x > pivot",
+   "needs_composition": false,
+   "seconds": 14.319,
+   "space_size": 22563,
+   "status": "MEASURED",
+   "task": "quicksort"
+  },
+  {
+   "atoms": 6,
+   "difference": "insert prevnode = node",
+   "fix_by_a_derived_class": false,
+   "fix_class": null,
+   "fix_in_the_old_space": false,
+   "fix_in_the_space": false,
+   "needs_composition": false,
+   "seconds": 0.726,
+   "space_size": 2497,
+   "status": "MEASURED",
+   "task": "reverse_linked_list"
+  },
+  {
+   "atoms": 12,
+   "fix_by_a_derived_class": false,
+   "fix_class": "BASE",
+   "fix_in_the_old_space": true,
+   "fix_in_the_space": true,
+   "fix_kind": "PERMUTE",
+   "fix_replacement": "token,b,a",
+   "fix_site": "op(token, a, b)",
+   "needs_composition": false,
+   "seconds": 47.331,
+   "space_size": 44569,
+   "status": "MEASURED",
+   "task": "rpn_eval"
+  },
+  {
+   "atoms": 19,
+   "fix_by_a_derived_class": false,
+   "fix_class": "REPLACE",
+   "fix_in_the_old_space": true,
+   "fix_in_the_space": true,
+   "fix_kind": "REPLACE",
+   "fix_replacement": "distance",
+   "fix_site": "get(unvisited_nodes, nextnode)",
+   "needs_composition": false,
+   "seconds": 128.077,
+   "space_size": 73853,
+   "status": "MEASURED",
+   "task": "shortest_path_length"
+  },
+  {
+   "atoms": 13,
+   "difference": "(j, k) -> (k, j)",
+   "fix_by_a_derived_class": false,
+   "fix_class": null,
+   "fix_in_the_old_space": false,
+   "fix_in_the_space": false,
+   "needs_composition": false,
+   "seconds": 38.199,
+   "space_size": 40901,
+   "status": "MEASURED",
+   "task": "shortest_path_lengths"
+  },
+  {
+   "atoms": 14,
+   "difference": "weight_by_edge[u, v] -> weight_by_node[v]",
+   "fix_by_a_derived_class": false,
+   "fix_class": null,
+   "fix_in_the_old_space": false,
+   "fix_in_the_space": false,
+   "needs_composition": false,
+   "seconds": 20.305,
+   "space_size": 27105,
+   "status": "MEASURED",
+   "task": "shortest_paths"
+  },
+  {
+   "atoms": 10,
+   "fix_by_a_derived_class": true,
+   "fix_class": "INSERT_STATEMENT",
+   "fix_in_the_old_space": false,
+   "fix_in_the_space": true,
+   "fix_kind": "INSERT_STATEMENT",
+   "fix_replacement": "opstack.append(token)",
+   "fix_site": "if isinstance(token, int):\n    rpntokens.append(token)\nelse:",
+   "needs_composition": false,
+   "seconds": 29.573,
+   "space_size": 37004,
+   "status": "MEASURED",
+   "task": "shunting_yard"
+  },
+  {
+   "atoms": 9,
+   "fix_by_a_derived_class": false,
+   "fix_class": "REPLACE",
+   "fix_in_the_old_space": true,
+   "fix_in_the_space": true,
+   "fix_kind": "REPLACE",
+   "fix_replacement": "all",
+   "fix_site": "any",
+   "needs_composition": false,
+   "seconds": 4.547,
+   "space_size": 10100,
+   "status": "MEASURED",
+   "task": "sieve"
+  },
+  {
+   "atoms": 8,
+   "fix_by_a_derived_class": false,
+   "fix_class": "REPLACE",
+   "fix_in_the_old_space": true,
+   "fix_in_the_space": true,
+   "fix_kind": "REPLACE",
+   "fix_replacement": "(approx) ** 2",
+   "fix_site": "approx",
+   "needs_composition": false,
+   "seconds": 3.258,
+   "space_size": 7957,
+   "status": "MEASURED",
+   "task": "sqrt"
+  },
+  {
+   "atoms": 11,
+   "fix_by_a_derived_class": true,
+   "fix_class": "NEST",
+   "fix_in_the_old_space": false,
+   "fix_in_the_space": true,
+   "fix_kind": "REPLACE",
+   "fix_replacement": "[[]]",
+   "fix_site": "[]",
+   "needs_composition": false,
+   "seconds": 8.729,
+   "space_size": 14775,
+   "status": "MEASURED",
+   "task": "subsequences"
+  },
+  {
+   "atoms": 9,
+   "fix_by_a_derived_class": true,
+   "fix_class": "COMMUTE",
+   "fix_in_the_old_space": false,
+   "fix_in_the_space": true,
+   "fix_kind": "COMMUTE",
+   "fix_replacement": "alphabet[i] Add result",
+   "fix_site": "result + alphabet[i]",
+   "needs_composition": false,
+   "seconds": 7.854,
+   "space_size": 15710,
+   "status": "MEASURED",
+   "task": "to_base"
+  },
+  {
+   "atoms": 8,
+   "fix_by_a_derived_class": true,
+   "fix_class": "ATTRIBUTE",
+   "fix_in_the_old_space": false,
+   "fix_in_the_space": true,
+   "fix_kind": "REPLACE",
+   "fix_replacement": "nextnode.incoming_nodes",
+   "fix_site": "nextnode.outgoing_nodes",
+   "needs_composition": false,
+   "seconds": 6.87,
+   "space_size": 13327,
+   "status": "MEASURED",
+   "task": "topological_ordering"
+  },
+  {
+   "atoms": 9,
+   "difference": "insert lines.append(text)",
+   "fix_by_a_derived_class": false,
+   "fix_class": null,
+   "fix_in_the_old_space": false,
+   "fix_in_the_space": false,
+   "needs_composition": false,
+   "seconds": 15.411,
+   "space_size": 23035,
+   "status": "MEASURED",
+   "task": "wrap"
+  }
+ ],
+ "schema": "BRAIN_WHAT_THE_LEARNED_CLASSES_COVER_V2",
+ "summary": {
+  "bugs_measured": 40,
+  "classes_and_what_they_reach": {
+   "ATTRIBUTE": {
+    "donor": "subsequences",
+    "reaches": [
+     "topological_ordering"
+    ],
+    "reaches_not_its_donor": [
+     "topological_ordering"
+    ]
+   },
+   "CALL": {
+    "donor": "powerset",
+    "reaches": [
+     "bucketsort"
+    ],
+    "reaches_not_its_donor": [
+     "bucketsort"
+    ]
+   },
+   "COMMUTE": {
+    "donor": "to_base",
+    "reaches": [
+     "to_base"
+    ],
+    "reaches_not_its_donor": []
+   },
+   "INSERT_STATEMENT": {
+    "donor": "shunting_yard",
+    "reaches": [
+     "shunting_yard"
+    ],
+    "reaches_not_its_donor": []
+   },
+   "NEST": {
+    "donor": "subsequences",
+    "reaches": [
+     "subsequences"
+    ],
+    "reaches_not_its_donor": []
+   },
+   "PREPEND_TERM": {
+    "donor": "powerset",
+    "reaches": [
+     "next_palindrome",
+     "powerset"
+    ],
+    "reaches_not_its_donor": [
+     "next_palindrome"
+    ]
+   },
+   "SLICE": {
+    "donor": "kheapsort",
+    "reaches": [
+     "kheapsort"
+    ],
+    "reaches_not_its_donor": []
+   }
+  },
+  "classes_that_only_reach_their_donor": [
+   "COMMUTE",
+   "INSERT_STATEMENT",
+   "NEST",
+   "SLICE"
+  ],
+  "experimental_probe": {
+   "built_by_the_experimental_rungs": [
+    "get_factors",
+    "kth",
+    "levenshtein",
+    "lis",
+    "mergesort",
+    "next_permutation",
+    "possible_change",
+    "shortest_path_lengths",
+    "shortest_paths"
+   ],
+   "not_built": [
+    "depth_first_search",
+    "detect_cycle",
+    "minimum_spanning_tree",
+    "reverse_linked_list",
+    "wrap"
+   ],
+   "probed": 14,
+   "rows": [
+    {
+     "kind": "insert_statement",
+     "status": "NOT_ONE_EXPRESSION",
+     "task": "depth_first_search"
+    },
+    {
+     "built_by": [],
+     "replacement": "hare is None or hare.successor is None",
+     "site": "hare.successor is None",
+     "status": "PROBED",
+     "task": "detect_cycle"
+    },
+    {
+     "built_by": [
+      "RECOMBINE"
+     ],
+     "replacement": "[n]",
+     "site": "[]",
+     "status": "PROBED",
+     "task": "get_factors"
+    },
+    {
+     "built_by": [
+      "RECOMBINE"
+     ],
+     "replacement": "k - num_lessoreq",
+     "site": "k",
+     "status": "PROBED",
+     "task": "kth"
+    },
+    {
+     "built_by": [
+      "RECOMBINE"
+     ],
+     "replacement": "levenshtein(source[1:], target[1:])",
+     "site": "1 + levenshtein(source[1:], target[1:])",
+     "status": "PROBED",
+     "task": "levenshtein"
+    },
+    {
+     "built_by": [
+      "ENCLOSE",
+      "RECOMBINE"
+     ],
+     "replacement": "max(longest, length + 1)",
+     "site": "length + 1",
+     "status": "PROBED",
+     "task": "lis"
+    },
+    {
+     "built_by": [
+      "RECOMBINE"
+     ],
+     "replacement": "len(arr) <= 1",
+     "site": "len(arr) == 0",
+     "status": "PROBED",
+     "task": "mergesort"
+    },
+    {
+     "kind": null,
+     "status": "NOT_ONE_EXPRESSION",
+     "task": "minimum_spanning_tree"
+    },
+    {
+     "built_by": [
+      "RECOMBINE"
+     ],
+     "replacement": "perm[i] < perm[j]",
+     "site": "perm[j] < perm[i]",
+     "status": "PROBED",
+     "task": "next_permutation"
+    },
+    {
+     "built_by": [
+      "RECOMBINE"
+     ],
+     "replacement": "total < 0 or not coins",
+     "site": "total < 0",
+     "status": "PROBED",
+     "task": "possible_change"
+    },
+    {
+     "kind": "insert_statement",
+     "status": "NOT_ONE_EXPRESSION",
+     "task": "reverse_linked_list"
+    },
+    {
+     "built_by": [
+      "RECOMBINE"
+     ],
+     "replacement": "(k, j)",
+     "site": "(j, k)",
+     "status": "PROBED",
+     "task": "shortest_path_lengths"
+    },
+    {
+     "built_by": [
+      "RECOMBINE"
+     ],
+     "replacement": "weight_by_node[v]",
+     "site": "weight_by_edge[u, v]",
+     "status": "PROBED",
+     "task": "shortest_paths"
+    },
+    {
+     "kind": "insert_statement",
+     "status": "NOT_ONE_EXPRESSION",
+     "task": "wrap"
+    }
+   ],
+   "status": "MEMBERSHIP_AT_THE_SITE__NOT_A_SPACE_WALK"
+  },
+  "fix_in_the_old_space": [
+   "bitcount",
+   "breadth_first_search",
+   "find_first_in_sorted",
+   "find_in_sorted",
+   "flatten",
+   "gcd",
+   "hanoi",
+   "is_valid_parenthesization",
+   "knapsack",
+   "lcs_length",
+   "longest_common_subsequence",
+   "max_sublist_sum",
+   "pascal",
+   "quicksort",
+   "rpn_eval",
+   "shortest_path_length",
+   "sieve",
+   "sqrt"
+  ],
+  "fix_in_the_old_space_count": 18,
+  "fix_in_the_space": 26,
+  "fix_only_by_a_derived_class": [
+   "bucketsort",
+   "kheapsort",
+   "next_palindrome",
+   "powerset",
+   "shunting_yard",
+   "subsequences",
+   "to_base",
+   "topological_ordering"
+  ],
+  "fix_only_by_a_derived_class_count": 8,
+  "fix_reached_by_a_derived_class": [
+   "bucketsort",
+   "kheapsort",
+   "next_palindrome",
+   "powerset",
+   "shunting_yard",
+   "subsequences",
+   "to_base",
+   "topological_ordering"
+  ],
+  "fix_reached_by_a_derived_class_count": 8,
+  "in_the_space_but_nothing_taught": [],
+  "model_dependent_tasks": 0,
+  "needs_composition": [
+   "minimum_spanning_tree"
+  ],
+  "needs_composition_count": 1,
+  "one_edit_the_space_cannot_make": [
+   "depth_first_search",
+   "detect_cycle",
+   "get_factors",
+   "kth",
+   "levenshtein",
+   "lis",
+   "mergesort",
+   "next_permutation",
+   "possible_change",
+   "reverse_linked_list",
+   "shortest_path_lengths",
+   "shortest_paths",
+   "wrap"
+  ],
+  "one_edit_the_space_cannot_make_count": 13,
+  "reached_by_a_class_learned_on_another_program": [
+   "bucketsort",
+   "next_palindrome",
+   "topological_ordering"
+  ],
+  "reached_by_a_class_learned_on_another_program_count": 3,
+  "total_seconds": 848.5
+ },
+ "tests": [
+  "canonical/tests/test_what_the_learned_classes_cover_v1.py",
+  "canonical/tests/test_aimed_edits_from_the_program_and_the_failure_v1.py"
+ ],
+ "tool": "canonical/tools/what_the_learned_classes_cover_v1.py",
+ "tool_sha256": "ad180d540ba818413d02850f2af07fda7d5e02a433de7bcf1ed10c411eac12e7",
+ "upstream": "https://github.com/jkoppel/QuixBugs"
+}
