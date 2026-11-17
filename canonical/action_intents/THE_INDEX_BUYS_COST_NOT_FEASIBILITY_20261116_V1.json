@@ -38,7 +38,7 @@
  },
  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_TREE_NAMED_THE_INDEX_AS_THE_SINGLE_BOTTLENECK_BUT_A_PERFECT_INDEX_IS_WORTH_17.4_PERCENT_OF_ACT_CALLS_AND_ZERO_OF_FEASIBILITY_WHILE_29879_OF_39879_ACT_CALLS_ARE_SPENT_FINDING_A_PLAN_OF_MEAN_LENGTH_3.2_",
- "canonical_base_commit": "6ba681a050facc0499f5a2213a2645a623c61745",
+ "canonical_base_commit": "9d7e8c4b13d276bdda4718670f90684720d7ac6b",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -304,7 +304,7 @@
  ],
  "probe_specific": false,
  "recursive_obs": {
-  "canonical_base_commit": "6ba681a050facc0499f5a2213a2645a623c61745",
+  "canonical_base_commit": "9d7e8c4b13d276bdda4718670f90684720d7ac6b",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "the recommended index repair",
