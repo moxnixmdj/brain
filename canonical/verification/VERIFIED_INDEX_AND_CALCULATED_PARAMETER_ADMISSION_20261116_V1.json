@@ -1,0 +1,2244 @@
+{
+  "answer": "NO_SINGLE_SUFFICIENT_LEVER__HIGHEST_LEVERAGE_NECESSARY_CONDITION_IS_THE_VERIFIED_INDEX",
+  "audit_pass": true,
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "calculated_parameter_admission": {
+    "existing_gate": "canonical/swe_kernel/weight_update_admission_v1.py",
+    "instant_knowledge": "content-addressed zero-weight compiled model; facts remain inspectable and deletable",
+    "knowledge_house": false,
+    "law": "b = C(s, o, I, V); admit only if C is deterministic, o is a live causal observation, I is an invariant closure, V is an independent verifier, the bit is falsifiable, regression-zero on archived solved behavior, and no fact is stored in parameters. Else b = 0 (best part is no part).",
+    "parameter_candidates_admitted": 0,
+    "parameters_added": 0,
+    "status": "ZERO_NEW_PARAMETERS__BEST_PART_IS_NO_PART",
+    "weights_touched": 0,
+    "why_zero_is_optimal": "No calculated bit has passed a live causal split, independent verifier, archive-regression-zero and fresh-state-proof gate. Adding weights now would industrialize an unmeasured update, not solve the missing observable."
+  },
+  "capability_credit": "ZERO",
+  "equation": "truth in H(I, failure_evidence) AND o in O splits survivors AND V reads the split AND proof is fresh on state in hand",
+  "external_capability_provider_count": 0,
+  "generated_at_utc": "2026-11-17T03:21:05.789461+00:00",
+  "hard_nonclaims": [
+    "NO_EXTERNAL_MODEL_CALLED",
+    "NO_EXTERNAL_MODEL_WEIGHTS_OR_OUTPUTS",
+    "NO_CONVENTIONAL_PRETRAINING",
+    "NO_KNOWLEDGE_HOUSE_PARAMETERS",
+    "NO_NEW_WEIGHT_UPDATE_ADMITTED",
+    "NO_TERMINAL_TRUTH",
+    "NO_SENTIENCE_CLAIM",
+    "NO_ALL_COMPUTER_USE_SOLVED_CLAIM",
+    "NO_ADVANCED_SWE_SOLVED_CLAIM",
+    "NO_SYNTHETIC_TASKS",
+    "NO_KNOWN_WIN_RETESTED_AS_PROGRESS",
+    "NO_SCREEN_ONLY_VERDICT_AS_REPAIR",
+    "NO_MAJORITY_VOTE_AS_IDENTIFICATION",
+    "NO_ONE_DEMONSTRATION_AS_PERMANENT_RULE",
+    "NO_SINGLE_SUFFICIENT_LEVER",
+    "NO_BENCHMARK_OR_FAMILY_RANK_AUTHORITY",
+    "NO_TEST_EDIT_OR_TIMEOUT_PLUGIN_SHORTCUT",
+    "PRODUCER_RUN_NOT_INDEPENDENT_VERIFICATION"
+  ],
+  "hard_open_test_integrity": {
+    "all_published_tests_collected_and_invoked": true,
+    "answer_key_directories_found": [],
+    "answer_keys_absent": true,
+    "correct_flag_used": false,
+    "external_model_calls": 0,
+    "fresh_copy": "/tmp/brain_hard_open_v2dxkfba/quixbugs_fresh",
+    "fresh_copy_excludes_answer_keys": true,
+    "incremental_spend_usd": 0,
+    "known_wins_retested": 0,
+    "network_calls_at_run_time": 0,
+    "no_harness_integrity_failure": true,
+    "no_hidden_skips": true,
+    "no_repair_claimed": true,
+    "no_synthetic_tasks": true,
+    "no_test_file_edits": true,
+    "per_test_timeout_seconds": 2.0,
+    "published_test_bytes_hashed": true,
+    "published_test_failures": 16,
+    "published_test_files_present": true,
+    "pytest_plugin_autoload_disabled": true,
+    "returncode_counts": {
+      "1": 16
+    },
+    "rows": [
+      {
+        "collection_node_count": 5,
+        "collection_nodeids": [
+          "python_testcases/test_breadth_first_search.py::test1",
+          "python_testcases/test_breadth_first_search.py::test2",
+          "python_testcases/test_breadth_first_search.py::test3",
+          "python_testcases/test_breadth_first_search.py::test4",
+          "python_testcases/test_breadth_first_search.py::test5"
+        ],
+        "collection_returncode": 0,
+        "collection_stderr_tail": "",
+        "collection_stdout_tail": "python_testcases/test_breadth_first_search.py::test1\npython_testcases/test_breadth_first_search.py::test2\npython_testcases/test_breadth_first_search.py::test3\npython_testcases/test_breadth_first_search.py::test4\npython_testcases/test_breadth_first_search.py::test5\n\n5 tests collected in 0.01s\n",
+        "counts": {
+          "errors": 0,
+          "failed": 1,
+          "passed": 4,
+          "skipped": 0
+        },
+        "harness_errors": [],
+        "invocation_row_count": 5,
+        "invocations": [
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 0,
+              "passed": 1,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_breadth_first_search.py::test1",
+            "returncode": 0,
+            "status": "PUBLISHED_TEST_PASS",
+            "stderr_tail": "",
+            "stdout_tail": ".                                                                        [100%]\n1 passed in 0.01s\n",
+            "timed_out": false
+          },
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 0,
+              "passed": 1,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_breadth_first_search.py::test2",
+            "returncode": 0,
+            "status": "PUBLISHED_TEST_PASS",
+            "stderr_tail": "",
+            "stdout_tail": ".                                                                        [100%]\n1 passed in 0.01s\n",
+            "timed_out": false
+          },
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 1,
+              "passed": 0,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_breadth_first_search.py::test3",
+            "returncode": 1,
+            "status": "PUBLISHED_TEST_FAIL__HARD_OPEN",
+            "stderr_tail": "",
+            "stdout_tail": "F                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_breadth_first_search.py::test3 - IndexError: pop...\n1 failed in 0.01s\n",
+            "timed_out": false
+          },
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 0,
+              "passed": 1,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_breadth_first_search.py::test4",
+            "returncode": 0,
+            "status": "PUBLISHED_TEST_PASS",
+            "stderr_tail": "",
+            "stdout_tail": ".                                                                        [100%]\n1 passed in 0.01s\n",
+            "timed_out": false
+          },
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 0,
+              "passed": 1,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_breadth_first_search.py::test5",
+            "returncode": 0,
+            "status": "PUBLISHED_TEST_PASS",
+            "stderr_tail": "",
+            "stdout_tail": ".                                                                        [100%]\n1 passed in 0.01s\n",
+            "timed_out": false
+          }
+        ],
+        "no_harness_integrity_failure": true,
+        "published_test_file": "python_testcases/test_breadth_first_search.py",
+        "published_test_sha256": "e20b957060c2a39fd2dfd40399e3ed5080f4a98f86f8360edebf81da98454024",
+        "pytest_collection_command_tail": "--disable-warnings --collect-only python_testcases/test_breadth_first_search.py",
+        "pytest_python": "/tmp/cgr_venv_cd864fc9/bin/python",
+        "returncode": 1,
+        "status": "PUBLISHED_TESTS_FAIL_OR_TIMEOUT__HARD_OPEN",
+        "stderr_tail": "\n\n\n\n\n",
+        "stdout_tail": "y::test3\npython_testcases/test_breadth_first_search.py::test4\npython_testcases/test_breadth_first_search.py::test5\n\n5 tests collected in 0.01s\n\n.                                                                        [100%]\n1 passed in 0.01s\n\n.                                                                        [100%]\n1 passed in 0.01s\n\nF                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_breadth_first_search.py::test3 - IndexError: pop...\n1 failed in 0.01s\n\n.                                                                        [100%]\n1 passed in 0.01s\n\n.                                                                        [100%]\n1 passed in 0.01s\n",
+        "task": "breadth_first_search",
+        "timeouts": []
+      },
+      {
+        "collection_node_count": 5,
+        "collection_nodeids": [
+          "python_testcases/test_depth_first_search.py::test1",
+          "python_testcases/test_depth_first_search.py::test2",
+          "python_testcases/test_depth_first_search.py::test3",
+          "python_testcases/test_depth_first_search.py::test4",
+          "python_testcases/test_depth_first_search.py::test5"
+        ],
+        "collection_returncode": 0,
+        "collection_stderr_tail": "",
+        "collection_stdout_tail": "python_testcases/test_depth_first_search.py::test1\npython_testcases/test_depth_first_search.py::test2\npython_testcases/test_depth_first_search.py::test3\npython_testcases/test_depth_first_search.py::test4\npython_testcases/test_depth_first_search.py::test5\n\n5 tests collected in 0.01s\n",
+        "counts": {
+          "errors": 0,
+          "failed": 1,
+          "passed": 4,
+          "skipped": 0
+        },
+        "harness_errors": [],
+        "invocation_row_count": 5,
+        "invocations": [
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 0,
+              "passed": 1,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_depth_first_search.py::test1",
+            "returncode": 0,
+            "status": "PUBLISHED_TEST_PASS",
+            "stderr_tail": "",
+            "stdout_tail": ".                                                                        [100%]\n1 passed in 0.01s\n",
+            "timed_out": false
+          },
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 0,
+              "passed": 1,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_depth_first_search.py::test2",
+            "returncode": 0,
+            "status": "PUBLISHED_TEST_PASS",
+            "stderr_tail": "",
+            "stdout_tail": ".                                                                        [100%]\n1 passed in 0.01s\n",
+            "timed_out": false
+          },
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 0,
+              "passed": 1,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_depth_first_search.py::test3",
+            "returncode": 0,
+            "status": "PUBLISHED_TEST_PASS",
+            "stderr_tail": "",
+            "stdout_tail": ".                                                                        [100%]\n1 passed in 0.01s\n",
+            "timed_out": false
+          },
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 0,
+              "passed": 1,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_depth_first_search.py::test4",
+            "returncode": 0,
+            "status": "PUBLISHED_TEST_PASS",
+            "stderr_tail": "",
+            "stdout_tail": ".                                                                        [100%]\n1 passed in 0.01s\n",
+            "timed_out": false
+          },
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 1,
+              "passed": 0,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_depth_first_search.py::test5",
+            "returncode": 1,
+            "status": "PUBLISHED_TEST_FAIL__HARD_OPEN",
+            "stderr_tail": "",
+            "stdout_tail": "F                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_depth_first_search.py::test5 - RecursionError: m...\n1 failed in 0.01s\n",
+            "timed_out": false
+          }
+        ],
+        "no_harness_integrity_failure": true,
+        "published_test_file": "python_testcases/test_depth_first_search.py",
+        "published_test_sha256": "9c5d8af061cd9b84df545aa1208f7aab8165ab314f7be395ad1d034e028fbc01",
+        "pytest_collection_command_tail": "--disable-warnings --collect-only python_testcases/test_depth_first_search.py",
+        "pytest_python": "/tmp/cgr_venv_cd864fc9/bin/python",
+        "returncode": 1,
+        "status": "PUBLISHED_TESTS_FAIL_OR_TIMEOUT__HARD_OPEN",
+        "stderr_tail": "\n\n\n\n\n",
+        "stdout_tail": "ch.py::test3\npython_testcases/test_depth_first_search.py::test4\npython_testcases/test_depth_first_search.py::test5\n\n5 tests collected in 0.01s\n\n.                                                                        [100%]\n1 passed in 0.01s\n\n.                                                                        [100%]\n1 passed in 0.01s\n\n.                                                                        [100%]\n1 passed in 0.01s\n\n.                                                                        [100%]\n1 passed in 0.01s\n\nF                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_depth_first_search.py::test5 - RecursionError: m...\n1 failed in 0.01s\n",
+        "task": "depth_first_search",
+        "timeouts": []
+      },
+      {
+        "collection_node_count": 6,
+        "collection_nodeids": [
+          "python_testcases/test_detect_cycle.py::test1",
+          "python_testcases/test_detect_cycle.py::test2",
+          "python_testcases/test_detect_cycle.py::test3",
+          "python_testcases/test_detect_cycle.py::test4",
+          "python_testcases/test_detect_cycle.py::test5",
+          "python_testcases/test_detect_cycle.py::test6"
+        ],
+        "collection_returncode": 0,
+        "collection_stderr_tail": "",
+        "collection_stdout_tail": "python_testcases/test_detect_cycle.py::test1\npython_testcases/test_detect_cycle.py::test2\npython_testcases/test_detect_cycle.py::test3\npython_testcases/test_detect_cycle.py::test4\npython_testcases/test_detect_cycle.py::test5\npython_testcases/test_detect_cycle.py::test6\n\n6 tests collected in 0.01s\n",
+        "counts": {
+          "errors": 0,
+          "failed": 1,
+          "passed": 5,
+          "skipped": 0
+        },
+        "harness_errors": [],
+        "invocation_row_count": 6,
+        "invocations": [
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 0,
+              "passed": 1,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_detect_cycle.py::test1",
+            "returncode": 0,
+            "status": "PUBLISHED_TEST_PASS",
+            "stderr_tail": "",
+            "stdout_tail": ".                                                                        [100%]\n1 passed in 0.01s\n",
+            "timed_out": false
+          },
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 0,
+              "passed": 1,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_detect_cycle.py::test2",
+            "returncode": 0,
+            "status": "PUBLISHED_TEST_PASS",
+            "stderr_tail": "",
+            "stdout_tail": ".                                                                        [100%]\n1 passed in 0.01s\n",
+            "timed_out": false
+          },
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 0,
+              "passed": 1,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_detect_cycle.py::test3",
+            "returncode": 0,
+            "status": "PUBLISHED_TEST_PASS",
+            "stderr_tail": "",
+            "stdout_tail": ".                                                                        [100%]\n1 passed in 0.01s\n",
+            "timed_out": false
+          },
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 1,
+              "passed": 0,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_detect_cycle.py::test4",
+            "returncode": 1,
+            "status": "PUBLISHED_TEST_FAIL__HARD_OPEN",
+            "stderr_tail": "",
+            "stdout_tail": "F                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_detect_cycle.py::test4 - AttributeError: 'NoneTy...\n1 failed in 0.01s\n",
+            "timed_out": false
+          },
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 0,
+              "passed": 1,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_detect_cycle.py::test5",
+            "returncode": 0,
+            "status": "PUBLISHED_TEST_PASS",
+            "stderr_tail": "",
+            "stdout_tail": ".                                                                        [100%]\n1 passed in 0.01s\n",
+            "timed_out": false
+          },
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 0,
+              "passed": 1,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_detect_cycle.py::test6",
+            "returncode": 0,
+            "status": "PUBLISHED_TEST_PASS",
+            "stderr_tail": "",
+            "stdout_tail": ".                                                                        [100%]\n1 passed in 0.01s\n",
+            "timed_out": false
+          }
+        ],
+        "no_harness_integrity_failure": true,
+        "published_test_file": "python_testcases/test_detect_cycle.py",
+        "published_test_sha256": "d83aebf17b6d31c810a0935ea148093efb6065576960878c830b59f0007f58d2",
+        "pytest_collection_command_tail": "--disable-warnings --collect-only python_testcases/test_detect_cycle.py",
+        "pytest_python": "/tmp/cgr_venv_cd864fc9/bin/python",
+        "returncode": 1,
+        "status": "PUBLISHED_TESTS_FAIL_OR_TIMEOUT__HARD_OPEN",
+        "stderr_tail": "\n\n\n\n\n\n",
+        "stdout_tail": "cycle.py::test6\n\n6 tests collected in 0.01s\n\n.                                                                        [100%]\n1 passed in 0.01s\n\n.                                                                        [100%]\n1 passed in 0.01s\n\n.                                                                        [100%]\n1 passed in 0.01s\n\nF                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_detect_cycle.py::test4 - AttributeError: 'NoneTy...\n1 failed in 0.01s\n\n.                                                                        [100%]\n1 passed in 0.01s\n\n.                                                                        [100%]\n1 passed in 0.01s\n",
+        "task": "detect_cycle",
+        "timeouts": []
+      },
+      {
+        "collection_node_count": 7,
+        "collection_nodeids": [
+          "python_testcases/test_flatten.py::test_flatten[input_data0-expected0]",
+          "python_testcases/test_flatten.py::test_flatten[input_data1-expected1]",
+          "python_testcases/test_flatten.py::test_flatten[input_data2-expected2]",
+          "python_testcases/test_flatten.py::test_flatten[input_data3-expected3]",
+          "python_testcases/test_flatten.py::test_flatten[input_data4-expected4]",
+          "python_testcases/test_flatten.py::test_flatten[input_data5-expected5]",
+          "python_testcases/test_flatten.py::test_flatten[input_data6-expected6]"
+        ],
+        "collection_returncode": 0,
+        "collection_stderr_tail": "",
+        "collection_stdout_tail": "python_testcases/test_flatten.py::test_flatten[input_data0-expected0]\npython_testcases/test_flatten.py::test_flatten[input_data1-expected1]\npython_testcases/test_flatten.py::test_flatten[input_data2-expected2]\npython_testcases/test_flatten.py::test_flatten[input_data3-expected3]\npython_testcases/test_flatten.py::test_flatten[input_data4-expected4]\npython_testcases/test_flatten.py::test_flatten[input_data5-expected5]\npython_testcases/test_flatten.py::test_flatten[input_data6-expected6]\n\n7 tests collected in 0.01s\n",
+        "counts": {
+          "errors": 0,
+          "failed": 6,
+          "passed": 1,
+          "skipped": 0
+        },
+        "harness_errors": [],
+        "invocation_row_count": 7,
+        "invocations": [
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 1,
+              "passed": 0,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_flatten.py::test_flatten[input_data0-expected0]",
+            "returncode": 1,
+            "status": "PUBLISHED_TEST_FAIL__HARD_OPEN",
+            "stderr_tail": "",
+            "stdout_tail": "F                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_flatten.py::test_flatten[input_data0-expected0]\n1 failed in 0.01s\n",
+            "timed_out": false
+          },
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 0,
+              "passed": 1,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_flatten.py::test_flatten[input_data1-expected1]",
+            "returncode": 0,
+            "status": "PUBLISHED_TEST_PASS",
+            "stderr_tail": "",
+            "stdout_tail": ".                                                                        [100%]\n1 passed in 0.01s\n",
+            "timed_out": false
+          },
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 1,
+              "passed": 0,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_flatten.py::test_flatten[input_data2-expected2]",
+            "returncode": 1,
+            "status": "PUBLISHED_TEST_FAIL__HARD_OPEN",
+            "stderr_tail": "",
+            "stdout_tail": "F                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_flatten.py::test_flatten[input_data2-expected2]\n1 failed in 0.01s\n",
+            "timed_out": false
+          },
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 1,
+              "passed": 0,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_flatten.py::test_flatten[input_data3-expected3]",
+            "returncode": 1,
+            "status": "PUBLISHED_TEST_FAIL__HARD_OPEN",
+            "stderr_tail": "",
+            "stdout_tail": "F                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_flatten.py::test_flatten[input_data3-expected3]\n1 failed in 0.01s\n",
+            "timed_out": false
+          },
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 1,
+              "passed": 0,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_flatten.py::test_flatten[input_data4-expected4]",
+            "returncode": 1,
+            "status": "PUBLISHED_TEST_FAIL__HARD_OPEN",
+            "stderr_tail": "",
+            "stdout_tail": "F                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_flatten.py::test_flatten[input_data4-expected4]\n1 failed in 0.01s\n",
+            "timed_out": false
+          },
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 1,
+              "passed": 0,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_flatten.py::test_flatten[input_data5-expected5]",
+            "returncode": 1,
+            "status": "PUBLISHED_TEST_FAIL__HARD_OPEN",
+            "stderr_tail": "",
+            "stdout_tail": "F                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_flatten.py::test_flatten[input_data5-expected5]\n1 failed in 0.01s\n",
+            "timed_out": false
+          },
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 1,
+              "passed": 0,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_flatten.py::test_flatten[input_data6-expected6]",
+            "returncode": 1,
+            "status": "PUBLISHED_TEST_FAIL__HARD_OPEN",
+            "stderr_tail": "",
+            "stdout_tail": "F                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_flatten.py::test_flatten[input_data6-expected6]\n1 failed in 0.01s\n",
+            "timed_out": false
+          }
+        ],
+        "no_harness_integrity_failure": true,
+        "published_test_file": "python_testcases/test_flatten.py",
+        "published_test_sha256": "8751773222d9310f75ef92e2111298a12e24389cb03aa62b905bcd6ae55f8ee5",
+        "pytest_collection_command_tail": "--disable-warnings --collect-only python_testcases/test_flatten.py",
+        "pytest_python": "/tmp/cgr_venv_cd864fc9/bin/python",
+        "returncode": 1,
+        "status": "PUBLISHED_TESTS_FAIL_OR_TIMEOUT__HARD_OPEN",
+        "stderr_tail": "\n\n\n\n\n\n\n",
+        "stdout_tail": "expected3]\n1 failed in 0.01s\n\nF                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_flatten.py::test_flatten[input_data4-expected4]\n1 failed in 0.01s\n\nF                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_flatten.py::test_flatten[input_data5-expected5]\n1 failed in 0.01s\n\nF                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_flatten.py::test_flatten[input_data6-expected6]\n1 failed in 0.01s\n",
+        "task": "flatten",
+        "timeouts": []
+      },
+      {
+        "collection_node_count": 4,
+        "collection_nodeids": [
+          "python_testcases/test_kheapsort.py::test_kheapsort[input_data0-expected0]",
+          "python_testcases/test_kheapsort.py::test_kheapsort[input_data1-expected1]",
+          "python_testcases/test_kheapsort.py::test_kheapsort[input_data2-expected2]",
+          "python_testcases/test_kheapsort.py::test_kheapsort[input_data3-expected3]"
+        ],
+        "collection_returncode": 0,
+        "collection_stderr_tail": "",
+        "collection_stdout_tail": "python_testcases/test_kheapsort.py::test_kheapsort[input_data0-expected0]\npython_testcases/test_kheapsort.py::test_kheapsort[input_data1-expected1]\npython_testcases/test_kheapsort.py::test_kheapsort[input_data2-expected2]\npython_testcases/test_kheapsort.py::test_kheapsort[input_data3-expected3]\n\n4 tests collected in 0.01s\n",
+        "counts": {
+          "errors": 0,
+          "failed": 3,
+          "passed": 1,
+          "skipped": 0
+        },
+        "harness_errors": [],
+        "invocation_row_count": 4,
+        "invocations": [
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 0,
+              "passed": 1,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_kheapsort.py::test_kheapsort[input_data0-expected0]",
+            "returncode": 0,
+            "status": "PUBLISHED_TEST_PASS",
+            "stderr_tail": "",
+            "stdout_tail": ".                                                                        [100%]\n1 passed in 0.01s\n",
+            "timed_out": false
+          },
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 1,
+              "passed": 0,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_kheapsort.py::test_kheapsort[input_data1-expected1]",
+            "returncode": 1,
+            "status": "PUBLISHED_TEST_FAIL__HARD_OPEN",
+            "stderr_tail": "",
+            "stdout_tail": "F                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_kheapsort.py::test_kheapsort[input_data1-expected1]\n1 failed in 0.01s\n",
+            "timed_out": false
+          },
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 1,
+              "passed": 0,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_kheapsort.py::test_kheapsort[input_data2-expected2]",
+            "returncode": 1,
+            "status": "PUBLISHED_TEST_FAIL__HARD_OPEN",
+            "stderr_tail": "",
+            "stdout_tail": "F                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_kheapsort.py::test_kheapsort[input_data2-expected2]\n1 failed in 0.01s\n",
+            "timed_out": false
+          },
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 1,
+              "passed": 0,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_kheapsort.py::test_kheapsort[input_data3-expected3]",
+            "returncode": 1,
+            "status": "PUBLISHED_TEST_FAIL__HARD_OPEN",
+            "stderr_tail": "",
+            "stdout_tail": "F                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_kheapsort.py::test_kheapsort[input_data3-expected3]\n1 failed in 0.01s\n",
+            "timed_out": false
+          }
+        ],
+        "no_harness_integrity_failure": true,
+        "published_test_file": "python_testcases/test_kheapsort.py",
+        "published_test_sha256": "7751ea3a7611406695c84ed254eddc2afdc17eb3e5962bb9a494b3a307953d7a",
+        "pytest_collection_command_tail": "--disable-warnings --collect-only python_testcases/test_kheapsort.py",
+        "pytest_python": "/tmp/cgr_venv_cd864fc9/bin/python",
+        "returncode": 1,
+        "status": "PUBLISHED_TESTS_FAIL_OR_TIMEOUT__HARD_OPEN",
+        "stderr_tail": "\n\n\n\n",
+        "stdout_tail": " passed in 0.01s\n\nF                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_kheapsort.py::test_kheapsort[input_data1-expected1]\n1 failed in 0.01s\n\nF                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_kheapsort.py::test_kheapsort[input_data2-expected2]\n1 failed in 0.01s\n\nF                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_kheapsort.py::test_kheapsort[input_data3-expected3]\n1 failed in 0.01s\n",
+        "task": "kheapsort",
+        "timeouts": []
+      },
+      {
+        "collection_node_count": 9,
+        "collection_nodeids": [
+          "python_testcases/test_possible_change.py::test_possible_change[input_data1-4]",
+          "python_testcases/test_possible_change.py::test_possible_change[input_data2-121]",
+          "python_testcases/test_possible_change.py::test_possible_change[input_data3-18]",
+          "python_testcases/test_possible_change.py::test_possible_change[input_data4-16]",
+          "python_testcases/test_possible_change.py::test_possible_change[input_data5-568]",
+          "python_testcases/test_possible_change.py::test_possible_change[input_data6-786]",
+          "python_testcases/test_possible_change.py::test_possible_change[input_data7-817]",
+          "python_testcases/test_possible_change.py::test_possible_change[input_data8-981]",
+          "python_testcases/test_possible_change.py::test_possible_change[input_data9-20]"
+        ],
+        "collection_returncode": 0,
+        "collection_stderr_tail": "",
+        "collection_stdout_tail": "possible_change.py::test_possible_change[input_data0-0]\npython_testcases/test_possible_change.py::test_possible_change[input_data1-4]\npython_testcases/test_possible_change.py::test_possible_change[input_data2-121]\npython_testcases/test_possible_change.py::test_possible_change[input_data3-18]\npython_testcases/test_possible_change.py::test_possible_change[input_data4-16]\npython_testcases/test_possible_change.py::test_possible_change[input_data5-568]\npython_testcases/test_possible_change.py::test_possible_change[input_data6-786]\npython_testcases/test_possible_change.py::test_possible_change[input_data7-817]\npython_testcases/test_possible_change.py::test_possible_change[input_data8-981]\npython_testcases/test_possible_change.py::test_possible_change[input_data9-20]\n\n10 tests collected in 0.01s\n",
+        "counts": {
+          "errors": 0,
+          "failed": 9,
+          "passed": 0,
+          "skipped": 0
+        },
+        "harness_errors": [],
+        "invocation_row_count": 9,
+        "invocations": [
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 1,
+              "passed": 0,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_possible_change.py::test_possible_change[input_data1-4]",
+            "returncode": 1,
+            "status": "PUBLISHED_TEST_FAIL__HARD_OPEN",
+            "stderr_tail": "",
+            "stdout_tail": "F                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_possible_change.py::test_possible_change[input_data1-4]\n1 failed in 0.01s\n",
+            "timed_out": false
+          },
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 1,
+              "passed": 0,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_possible_change.py::test_possible_change[input_data2-121]",
+            "returncode": 1,
+            "status": "PUBLISHED_TEST_FAIL__HARD_OPEN",
+            "stderr_tail": "",
+            "stdout_tail": "F                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_possible_change.py::test_possible_change[input_data2-121]\n1 failed in 0.01s\n",
+            "timed_out": false
+          },
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 1,
+              "passed": 0,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_possible_change.py::test_possible_change[input_data3-18]",
+            "returncode": 1,
+            "status": "PUBLISHED_TEST_FAIL__HARD_OPEN",
+            "stderr_tail": "",
+            "stdout_tail": "F                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_possible_change.py::test_possible_change[input_data3-18]\n1 failed in 0.01s\n",
+            "timed_out": false
+          },
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 1,
+              "passed": 0,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_possible_change.py::test_possible_change[input_data4-16]",
+            "returncode": 1,
+            "status": "PUBLISHED_TEST_FAIL__HARD_OPEN",
+            "stderr_tail": "",
+            "stdout_tail": "F                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_possible_change.py::test_possible_change[input_data4-16]\n1 failed in 0.01s\n",
+            "timed_out": false
+          },
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 1,
+              "passed": 0,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_possible_change.py::test_possible_change[input_data5-568]",
+            "returncode": 1,
+            "status": "PUBLISHED_TEST_FAIL__HARD_OPEN",
+            "stderr_tail": "",
+            "stdout_tail": "F                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_possible_change.py::test_possible_change[input_data5-568]\n1 failed in 0.01s\n",
+            "timed_out": false
+          },
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 1,
+              "passed": 0,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_possible_change.py::test_possible_change[input_data6-786]",
+            "returncode": 1,
+            "status": "PUBLISHED_TEST_FAIL__HARD_OPEN",
+            "stderr_tail": "",
+            "stdout_tail": "F                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_possible_change.py::test_possible_change[input_data6-786]\n1 failed in 0.01s\n",
+            "timed_out": false
+          },
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 1,
+              "passed": 0,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_possible_change.py::test_possible_change[input_data7-817]",
+            "returncode": 1,
+            "status": "PUBLISHED_TEST_FAIL__HARD_OPEN",
+            "stderr_tail": "",
+            "stdout_tail": "F                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_possible_change.py::test_possible_change[input_data7-817]\n1 failed in 0.01s\n",
+            "timed_out": false
+          },
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 1,
+              "passed": 0,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_possible_change.py::test_possible_change[input_data8-981]",
+            "returncode": 1,
+            "status": "PUBLISHED_TEST_FAIL__HARD_OPEN",
+            "stderr_tail": "",
+            "stdout_tail": "F                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_possible_change.py::test_possible_change[input_data8-981]\n1 failed in 0.01s\n",
+            "timed_out": false
+          },
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 1,
+              "passed": 0,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_possible_change.py::test_possible_change[input_data9-20]",
+            "returncode": 1,
+            "status": "PUBLISHED_TEST_FAIL__HARD_OPEN",
+            "stderr_tail": "",
+            "stdout_tail": "F                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_possible_change.py::test_possible_change[input_data9-20]\n1 failed in 0.01s\n",
+            "timed_out": false
+          }
+        ],
+        "no_harness_integrity_failure": true,
+        "published_test_file": "python_testcases/test_possible_change.py",
+        "published_test_sha256": "655305d59309352913a710d9bdde631191c83c80a76e78df36d58c7c5c0a964b",
+        "pytest_collection_command_tail": "--disable-warnings --collect-only python_testcases/test_possible_change.py",
+        "pytest_python": "/tmp/cgr_venv_cd864fc9/bin/python",
+        "returncode": 1,
+        "status": "PUBLISHED_TESTS_FAIL_OR_TIMEOUT__HARD_OPEN",
+        "stderr_tail": "\n\n\n\n\n\n\n\n\n",
+        "stdout_tail": "\nF                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_possible_change.py::test_possible_change[input_data7-817]\n1 failed in 0.01s\n\nF                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_possible_change.py::test_possible_change[input_data8-981]\n1 failed in 0.01s\n\nF                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_possible_change.py::test_possible_change[input_data9-20]\n1 failed in 0.01s\n",
+        "task": "possible_change",
+        "timeouts": []
+      },
+      {
+        "collection_node_count": 5,
+        "collection_nodeids": [
+          "python_testcases/test_powerset.py::test_powerset[input_data0-expected0]",
+          "python_testcases/test_powerset.py::test_powerset[input_data1-expected1]",
+          "python_testcases/test_powerset.py::test_powerset[input_data2-expected2]",
+          "python_testcases/test_powerset.py::test_powerset[input_data3-expected3]",
+          "python_testcases/test_powerset.py::test_powerset[input_data4-expected4]"
+        ],
+        "collection_returncode": 0,
+        "collection_stderr_tail": "",
+        "collection_stdout_tail": "python_testcases/test_powerset.py::test_powerset[input_data0-expected0]\npython_testcases/test_powerset.py::test_powerset[input_data1-expected1]\npython_testcases/test_powerset.py::test_powerset[input_data2-expected2]\npython_testcases/test_powerset.py::test_powerset[input_data3-expected3]\npython_testcases/test_powerset.py::test_powerset[input_data4-expected4]\n\n5 tests collected in 0.01s\n",
+        "counts": {
+          "errors": 0,
+          "failed": 4,
+          "passed": 1,
+          "skipped": 0
+        },
+        "harness_errors": [],
+        "invocation_row_count": 5,
+        "invocations": [
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 1,
+              "passed": 0,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_powerset.py::test_powerset[input_data0-expected0]",
+            "returncode": 1,
+            "status": "PUBLISHED_TEST_FAIL__HARD_OPEN",
+            "stderr_tail": "",
+            "stdout_tail": "F                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_powerset.py::test_powerset[input_data0-expected0]\n1 failed in 0.01s\n",
+            "timed_out": false
+          },
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 1,
+              "passed": 0,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_powerset.py::test_powerset[input_data1-expected1]",
+            "returncode": 1,
+            "status": "PUBLISHED_TEST_FAIL__HARD_OPEN",
+            "stderr_tail": "",
+            "stdout_tail": "F                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_powerset.py::test_powerset[input_data1-expected1]\n1 failed in 0.01s\n",
+            "timed_out": false
+          },
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 1,
+              "passed": 0,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_powerset.py::test_powerset[input_data2-expected2]",
+            "returncode": 1,
+            "status": "PUBLISHED_TEST_FAIL__HARD_OPEN",
+            "stderr_tail": "",
+            "stdout_tail": "F                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_powerset.py::test_powerset[input_data2-expected2]\n1 failed in 0.01s\n",
+            "timed_out": false
+          },
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 0,
+              "passed": 1,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_powerset.py::test_powerset[input_data3-expected3]",
+            "returncode": 0,
+            "status": "PUBLISHED_TEST_PASS",
+            "stderr_tail": "",
+            "stdout_tail": ".                                                                        [100%]\n1 passed in 0.01s\n",
+            "timed_out": false
+          },
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 1,
+              "passed": 0,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_powerset.py::test_powerset[input_data4-expected4]",
+            "returncode": 1,
+            "status": "PUBLISHED_TEST_FAIL__HARD_OPEN",
+            "stderr_tail": "",
+            "stdout_tail": "F                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_powerset.py::test_powerset[input_data4-expected4]\n1 failed in 0.01s\n",
+            "timed_out": false
+          }
+        ],
+        "no_harness_integrity_failure": true,
+        "published_test_file": "python_testcases/test_powerset.py",
+        "published_test_sha256": "9b0b816ba26a0a14fc8387946a2c1f08a85cb7c4e5d0c52c29e9fd640ae89d4e",
+        "pytest_collection_command_tail": "--disable-warnings --collect-only python_testcases/test_powerset.py",
+        "pytest_python": "/tmp/cgr_venv_cd864fc9/bin/python",
+        "returncode": 1,
+        "status": "PUBLISHED_TESTS_FAIL_OR_TIMEOUT__HARD_OPEN",
+        "stderr_tail": "\n\n\n\n\n",
+        "stdout_tail": "00%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_powerset.py::test_powerset[input_data1-expected1]\n1 failed in 0.01s\n\nF                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_powerset.py::test_powerset[input_data2-expected2]\n1 failed in 0.01s\n\n.                                                                        [100%]\n1 passed in 0.01s\n\nF                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_powerset.py::test_powerset[input_data4-expected4]\n1 failed in 0.01s\n",
+        "task": "powerset",
+        "timeouts": []
+      },
+      {
+        "collection_node_count": 3,
+        "collection_nodeids": [
+          "python_testcases/test_reverse_linked_list.py::test1",
+          "python_testcases/test_reverse_linked_list.py::test2",
+          "python_testcases/test_reverse_linked_list.py::test3"
+        ],
+        "collection_returncode": 0,
+        "collection_stderr_tail": "",
+        "collection_stdout_tail": "python_testcases/test_reverse_linked_list.py::test1\npython_testcases/test_reverse_linked_list.py::test2\npython_testcases/test_reverse_linked_list.py::test3\n\n3 tests collected in 0.01s\n",
+        "counts": {
+          "errors": 0,
+          "failed": 2,
+          "passed": 1,
+          "skipped": 0
+        },
+        "harness_errors": [],
+        "invocation_row_count": 3,
+        "invocations": [
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 1,
+              "passed": 0,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_reverse_linked_list.py::test1",
+            "returncode": 1,
+            "status": "PUBLISHED_TEST_FAIL__HARD_OPEN",
+            "stderr_tail": "",
+            "stdout_tail": "F                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_reverse_linked_list.py::test1 - assert None == <...\n1 failed in 0.01s\n",
+            "timed_out": false
+          },
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 1,
+              "passed": 0,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_reverse_linked_list.py::test2",
+            "returncode": 1,
+            "status": "PUBLISHED_TEST_FAIL__HARD_OPEN",
+            "stderr_tail": "",
+            "stdout_tail": "F                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_reverse_linked_list.py::test2 - assert None == <...\n1 failed in 0.01s\n",
+            "timed_out": false
+          },
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 0,
+              "passed": 1,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_reverse_linked_list.py::test3",
+            "returncode": 0,
+            "status": "PUBLISHED_TEST_PASS",
+            "stderr_tail": "",
+            "stdout_tail": ".                                                                        [100%]\n1 passed in 0.01s\n",
+            "timed_out": false
+          }
+        ],
+        "no_harness_integrity_failure": true,
+        "published_test_file": "python_testcases/test_reverse_linked_list.py",
+        "published_test_sha256": "3c841e2b0bcbf7f86003e41425ea29eeb1e39fd43b3578a01eb610845ce95247",
+        "pytest_collection_command_tail": "--disable-warnings --collect-only python_testcases/test_reverse_linked_list.py",
+        "pytest_python": "/tmp/cgr_venv_cd864fc9/bin/python",
+        "returncode": 1,
+        "status": "PUBLISHED_TESTS_FAIL_OR_TIMEOUT__HARD_OPEN",
+        "stderr_tail": "\n\n\n",
+        "stdout_tail": "n_testcases/test_reverse_linked_list.py::test1\npython_testcases/test_reverse_linked_list.py::test2\npython_testcases/test_reverse_linked_list.py::test3\n\n3 tests collected in 0.01s\n\nF                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_reverse_linked_list.py::test1 - assert None == <...\n1 failed in 0.01s\n\nF                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_reverse_linked_list.py::test2 - assert None == <...\n1 failed in 0.01s\n\n.                                                                        [100%]\n1 passed in 0.01s\n",
+        "task": "reverse_linked_list",
+        "timeouts": []
+      },
+      {
+        "collection_node_count": 4,
+        "collection_nodeids": [
+          "python_testcases/test_shortest_path_length.py::test1",
+          "python_testcases/test_shortest_path_length.py::test2",
+          "python_testcases/test_shortest_path_length.py::test3",
+          "python_testcases/test_shortest_path_length.py::test4"
+        ],
+        "collection_returncode": 0,
+        "collection_stderr_tail": "",
+        "collection_stdout_tail": "python_testcases/test_shortest_path_length.py::test1\npython_testcases/test_shortest_path_length.py::test2\npython_testcases/test_shortest_path_length.py::test3\npython_testcases/test_shortest_path_length.py::test4\n\n4 tests collected in 0.01s\n",
+        "counts": {
+          "errors": 0,
+          "failed": 2,
+          "passed": 2,
+          "skipped": 0
+        },
+        "harness_errors": [],
+        "invocation_row_count": 4,
+        "invocations": [
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 1,
+              "passed": 0,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_shortest_path_length.py::test1",
+            "returncode": 1,
+            "status": "PUBLISHED_TEST_FAIL__HARD_OPEN",
+            "stderr_tail": "",
+            "stdout_tail": "F                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_shortest_path_length.py::test1 - assert 1 == 4\n1 failed in 0.01s\n",
+            "timed_out": false
+          },
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 1,
+              "passed": 0,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_shortest_path_length.py::test2",
+            "returncode": 1,
+            "status": "PUBLISHED_TEST_FAIL__HARD_OPEN",
+            "stderr_tail": "",
+            "stdout_tail": "F                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_shortest_path_length.py::test2 - assert 10 == 7\n1 failed in 0.01s\n",
+            "timed_out": false
+          },
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 0,
+              "passed": 1,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_shortest_path_length.py::test3",
+            "returncode": 0,
+            "status": "PUBLISHED_TEST_PASS",
+            "stderr_tail": "",
+            "stdout_tail": ".                                                                        [100%]\n1 passed in 0.01s\n",
+            "timed_out": false
+          },
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 0,
+              "passed": 1,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_shortest_path_length.py::test4",
+            "returncode": 0,
+            "status": "PUBLISHED_TEST_PASS",
+            "stderr_tail": "",
+            "stdout_tail": ".                                                                        [100%]\n1 passed in 0.01s\n",
+            "timed_out": false
+          }
+        ],
+        "no_harness_integrity_failure": true,
+        "published_test_file": "python_testcases/test_shortest_path_length.py",
+        "published_test_sha256": "4e8fef27efa2f18103a72698f93dd787525e5a3b1a28550cbdb94e57ba9b142e",
+        "pytest_collection_command_tail": "--disable-warnings --collect-only python_testcases/test_shortest_path_length.py",
+        "pytest_python": "/tmp/cgr_venv_cd864fc9/bin/python",
+        "returncode": 1,
+        "status": "PUBLISHED_TESTS_FAIL_OR_TIMEOUT__HARD_OPEN",
+        "stderr_tail": "\n\n\n\n",
+        "stdout_tail": "::test3\npython_testcases/test_shortest_path_length.py::test4\n\n4 tests collected in 0.01s\n\nF                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_shortest_path_length.py::test1 - assert 1 == 4\n1 failed in 0.01s\n\nF                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_shortest_path_length.py::test2 - assert 10 == 7\n1 failed in 0.01s\n\n.                                                                        [100%]\n1 passed in 0.01s\n\n.                                                                        [100%]\n1 passed in 0.01s\n",
+        "task": "shortest_path_length",
+        "timeouts": []
+      },
+      {
+        "collection_node_count": 4,
+        "collection_nodeids": [
+          "python_testcases/test_shortest_path_lengths.py::test1",
+          "python_testcases/test_shortest_path_lengths.py::test2",
+          "python_testcases/test_shortest_path_lengths.py::test3",
+          "python_testcases/test_shortest_path_lengths.py::test4"
+        ],
+        "collection_returncode": 0,
+        "collection_stderr_tail": "",
+        "collection_stdout_tail": "python_testcases/test_shortest_path_lengths.py::test1\npython_testcases/test_shortest_path_lengths.py::test2\npython_testcases/test_shortest_path_lengths.py::test3\npython_testcases/test_shortest_path_lengths.py::test4\n\n4 tests collected in 0.01s\n",
+        "counts": {
+          "errors": 0,
+          "failed": 4,
+          "passed": 0,
+          "skipped": 0
+        },
+        "harness_errors": [],
+        "invocation_row_count": 4,
+        "invocations": [
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 1,
+              "passed": 0,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_shortest_path_lengths.py::test1",
+            "returncode": 1,
+            "status": "PUBLISHED_TEST_FAIL__HARD_OPEN",
+            "stderr_tail": "",
+            "stdout_tail": "F                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_shortest_path_lengths.py::test1 - AssertionError...\n1 failed in 0.01s\n",
+            "timed_out": false
+          },
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 1,
+              "passed": 0,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_shortest_path_lengths.py::test2",
+            "returncode": 1,
+            "status": "PUBLISHED_TEST_FAIL__HARD_OPEN",
+            "stderr_tail": "",
+            "stdout_tail": "F                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_shortest_path_lengths.py::test2 - AssertionError...\n1 failed in 0.01s\n",
+            "timed_out": false
+          },
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 1,
+              "passed": 0,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_shortest_path_lengths.py::test3",
+            "returncode": 1,
+            "status": "PUBLISHED_TEST_FAIL__HARD_OPEN",
+            "stderr_tail": "",
+            "stdout_tail": "F                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_shortest_path_lengths.py::test3 - assert default...\n1 failed in 0.01s\n",
+            "timed_out": false
+          },
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 1,
+              "passed": 0,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_shortest_path_lengths.py::test4",
+            "returncode": 1,
+            "status": "PUBLISHED_TEST_FAIL__HARD_OPEN",
+            "stderr_tail": "",
+            "stdout_tail": "F                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_shortest_path_lengths.py::test4 - AssertionError...\n1 failed in 0.01s\n",
+            "timed_out": false
+          }
+        ],
+        "no_harness_integrity_failure": true,
+        "published_test_file": "python_testcases/test_shortest_path_lengths.py",
+        "published_test_sha256": "739c06b7341b481b57e72a8b81b4561d47f79e3c8030ddcbf6664850c6f86fa8",
+        "pytest_collection_command_tail": "--disable-warnings --collect-only python_testcases/test_shortest_path_lengths.py",
+        "pytest_python": "/tmp/cgr_venv_cd864fc9/bin/python",
+        "returncode": 1,
+        "status": "PUBLISHED_TESTS_FAIL_OR_TIMEOUT__HARD_OPEN",
+        "stderr_tail": "\n\n\n\n",
+        "stdout_tail": " failed in 0.01s\n\nF                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_shortest_path_lengths.py::test2 - AssertionError...\n1 failed in 0.01s\n\nF                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_shortest_path_lengths.py::test3 - assert default...\n1 failed in 0.01s\n\nF                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_shortest_path_lengths.py::test4 - AssertionError...\n1 failed in 0.01s\n",
+        "task": "shortest_path_lengths",
+        "timeouts": []
+      },
+      {
+        "collection_node_count": 3,
+        "collection_nodeids": [
+          "python_testcases/test_shortest_paths.py::test1",
+          "python_testcases/test_shortest_paths.py::test2",
+          "python_testcases/test_shortest_paths.py::test3"
+        ],
+        "collection_returncode": 0,
+        "collection_stderr_tail": "",
+        "collection_stdout_tail": "python_testcases/test_shortest_paths.py::test1\npython_testcases/test_shortest_paths.py::test2\npython_testcases/test_shortest_paths.py::test3\n\n3 tests collected in 0.01s\n",
+        "counts": {
+          "errors": 0,
+          "failed": 3,
+          "passed": 0,
+          "skipped": 0
+        },
+        "harness_errors": [],
+        "invocation_row_count": 3,
+        "invocations": [
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 1,
+              "passed": 0,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_shortest_paths.py::test1",
+            "returncode": 1,
+            "status": "PUBLISHED_TEST_FAIL__HARD_OPEN",
+            "stderr_tail": "",
+            "stdout_tail": "F                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_shortest_paths.py::test1 - AssertionError: asser...\n1 failed in 0.01s\n",
+            "timed_out": false
+          },
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 1,
+              "passed": 0,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_shortest_paths.py::test2",
+            "returncode": 1,
+            "status": "PUBLISHED_TEST_FAIL__HARD_OPEN",
+            "stderr_tail": "",
+            "stdout_tail": "F                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_shortest_paths.py::test2 - AssertionError: asser...\n1 failed in 0.01s\n",
+            "timed_out": false
+          },
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 1,
+              "passed": 0,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_shortest_paths.py::test3",
+            "returncode": 1,
+            "status": "PUBLISHED_TEST_FAIL__HARD_OPEN",
+            "stderr_tail": "",
+            "stdout_tail": "F                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_shortest_paths.py::test3 - AssertionError: asser...\n1 failed in 0.01s\n",
+            "timed_out": false
+          }
+        ],
+        "no_harness_integrity_failure": true,
+        "published_test_file": "python_testcases/test_shortest_paths.py",
+        "published_test_sha256": "8ee521556000dc6bcf4ae71c6db0f91c387f96e055557ec1accdde824928b4f8",
+        "pytest_collection_command_tail": "--disable-warnings --collect-only python_testcases/test_shortest_paths.py",
+        "pytest_python": "/tmp/cgr_venv_cd864fc9/bin/python",
+        "returncode": 1,
+        "status": "PUBLISHED_TESTS_FAIL_OR_TIMEOUT__HARD_OPEN",
+        "stderr_tail": "\n\n\n",
+        "stdout_tail": "llected in 0.01s\n\nF                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_shortest_paths.py::test1 - AssertionError: asser...\n1 failed in 0.01s\n\nF                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_shortest_paths.py::test2 - AssertionError: asser...\n1 failed in 0.01s\n\nF                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_shortest_paths.py::test3 - AssertionError: asser...\n1 failed in 0.01s\n",
+        "task": "shortest_paths",
+        "timeouts": []
+      },
+      {
+        "collection_node_count": 6,
+        "collection_nodeids": [
+          "python_testcases/test_shunting_yard.py::test_shunting_yard[input_data0-expected0]",
+          "python_testcases/test_shunting_yard.py::test_shunting_yard[input_data1-expected1]",
+          "python_testcases/test_shunting_yard.py::test_shunting_yard[input_data2-expected2]",
+          "python_testcases/test_shunting_yard.py::test_shunting_yard[input_data3-expected3]",
+          "python_testcases/test_shunting_yard.py::test_shunting_yard[input_data4-expected4]",
+          "python_testcases/test_shunting_yard.py::test_shunting_yard[input_data5-expected5]"
+        ],
+        "collection_returncode": 0,
+        "collection_stderr_tail": "",
+        "collection_stdout_tail": "python_testcases/test_shunting_yard.py::test_shunting_yard[input_data0-expected0]\npython_testcases/test_shunting_yard.py::test_shunting_yard[input_data1-expected1]\npython_testcases/test_shunting_yard.py::test_shunting_yard[input_data2-expected2]\npython_testcases/test_shunting_yard.py::test_shunting_yard[input_data3-expected3]\npython_testcases/test_shunting_yard.py::test_shunting_yard[input_data4-expected4]\npython_testcases/test_shunting_yard.py::test_shunting_yard[input_data5-expected5]\n\n6 tests collected in 0.01s\n",
+        "counts": {
+          "errors": 0,
+          "failed": 4,
+          "passed": 2,
+          "skipped": 0
+        },
+        "harness_errors": [],
+        "invocation_row_count": 6,
+        "invocations": [
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 0,
+              "passed": 1,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_shunting_yard.py::test_shunting_yard[input_data0-expected0]",
+            "returncode": 0,
+            "status": "PUBLISHED_TEST_PASS",
+            "stderr_tail": "",
+            "stdout_tail": ".                                                                        [100%]\n1 passed in 0.01s\n",
+            "timed_out": false
+          },
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 0,
+              "passed": 1,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_shunting_yard.py::test_shunting_yard[input_data1-expected1]",
+            "returncode": 0,
+            "status": "PUBLISHED_TEST_PASS",
+            "stderr_tail": "",
+            "stdout_tail": ".                                                                        [100%]\n1 passed in 0.01s\n",
+            "timed_out": false
+          },
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 1,
+              "passed": 0,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_shunting_yard.py::test_shunting_yard[input_data2-expected2]",
+            "returncode": 1,
+            "status": "PUBLISHED_TEST_FAIL__HARD_OPEN",
+            "stderr_tail": "",
+            "stdout_tail": "F                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_shunting_yard.py::test_shunting_yard[input_data2-expected2]\n1 failed in 0.01s\n",
+            "timed_out": false
+          },
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 1,
+              "passed": 0,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_shunting_yard.py::test_shunting_yard[input_data3-expected3]",
+            "returncode": 1,
+            "status": "PUBLISHED_TEST_FAIL__HARD_OPEN",
+            "stderr_tail": "",
+            "stdout_tail": "F                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_shunting_yard.py::test_shunting_yard[input_data3-expected3]\n1 failed in 0.01s\n",
+            "timed_out": false
+          },
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 1,
+              "passed": 0,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_shunting_yard.py::test_shunting_yard[input_data4-expected4]",
+            "returncode": 1,
+            "status": "PUBLISHED_TEST_FAIL__HARD_OPEN",
+            "stderr_tail": "",
+            "stdout_tail": "F                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_shunting_yard.py::test_shunting_yard[input_data4-expected4]\n1 failed in 0.01s\n",
+            "timed_out": false
+          },
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 1,
+              "passed": 0,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_shunting_yard.py::test_shunting_yard[input_data5-expected5]",
+            "returncode": 1,
+            "status": "PUBLISHED_TEST_FAIL__HARD_OPEN",
+            "stderr_tail": "",
+            "stdout_tail": "F                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_shunting_yard.py::test_shunting_yard[input_data5-expected5]\n1 failed in 0.01s\n",
+            "timed_out": false
+          }
+        ],
+        "no_harness_integrity_failure": true,
+        "published_test_file": "python_testcases/test_shunting_yard.py",
+        "published_test_sha256": "6573899a42a8fa12a7b868b863abad256fda5bddc1c07f147c9818fbf3c6cef1",
+        "pytest_collection_command_tail": "--disable-warnings --collect-only python_testcases/test_shunting_yard.py",
+        "pytest_python": "/tmp/cgr_venv_cd864fc9/bin/python",
+        "returncode": 1,
+        "status": "PUBLISHED_TESTS_FAIL_OR_TIMEOUT__HARD_OPEN",
+        "stderr_tail": "\n\n\n\n\n\n",
+        "stdout_tail": "                                                                   [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_shunting_yard.py::test_shunting_yard[input_data3-expected3]\n1 failed in 0.01s\n\nF                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_shunting_yard.py::test_shunting_yard[input_data4-expected4]\n1 failed in 0.01s\n\nF                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_shunting_yard.py::test_shunting_yard[input_data5-expected5]\n1 failed in 0.01s\n",
+        "task": "shunting_yard",
+        "timeouts": []
+      },
+      {
+        "collection_node_count": 7,
+        "collection_nodeids": [
+          "python_testcases/test_sqrt.py::test_sqrt[input_data0-1.4166666666666665]",
+          "python_testcases/test_sqrt.py::test_sqrt[input_data1-1.5]",
+          "python_testcases/test_sqrt.py::test_sqrt[input_data2-1.5]",
+          "python_testcases/test_sqrt.py::test_sqrt[input_data3-2]",
+          "python_testcases/test_sqrt.py::test_sqrt[input_data4-5.196164639727311]",
+          "python_testcases/test_sqrt.py::test_sqrt[input_data5-5.744627526262464]",
+          "python_testcases/test_sqrt.py::test_sqrt[input_data6-13.038404876679632]"
+        ],
+        "collection_returncode": 0,
+        "collection_stderr_tail": "",
+        "collection_stdout_tail": "python_testcases/test_sqrt.py::test_sqrt[input_data0-1.4166666666666665]\npython_testcases/test_sqrt.py::test_sqrt[input_data1-1.5]\npython_testcases/test_sqrt.py::test_sqrt[input_data2-1.5]\npython_testcases/test_sqrt.py::test_sqrt[input_data3-2]\npython_testcases/test_sqrt.py::test_sqrt[input_data4-5.196164639727311]\npython_testcases/test_sqrt.py::test_sqrt[input_data5-5.744627526262464]\npython_testcases/test_sqrt.py::test_sqrt[input_data6-13.038404876679632]\n\n7 tests collected in 0.01s\n",
+        "counts": {
+          "errors": 0,
+          "failed": 6,
+          "passed": 1,
+          "skipped": 0
+        },
+        "harness_errors": [],
+        "invocation_row_count": 7,
+        "invocations": [
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 1,
+              "passed": 0,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_sqrt.py::test_sqrt[input_data0-1.4166666666666665]",
+            "returncode": 124,
+            "status": "PUBLISHED_TEST_TIMEOUT__HARD_OPEN",
+            "stderr_tail": "",
+            "stdout_tail": "",
+            "timed_out": true
+          },
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 0,
+              "passed": 1,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_sqrt.py::test_sqrt[input_data1-1.5]",
+            "returncode": 0,
+            "status": "PUBLISHED_TEST_PASS",
+            "stderr_tail": "",
+            "stdout_tail": ".                                                                        [100%]\n1 passed in 0.01s\n",
+            "timed_out": false
+          },
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 1,
+              "passed": 0,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_sqrt.py::test_sqrt[input_data2-1.5]",
+            "returncode": 124,
+            "status": "PUBLISHED_TEST_TIMEOUT__HARD_OPEN",
+            "stderr_tail": "",
+            "stdout_tail": "",
+            "timed_out": true
+          },
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 1,
+              "passed": 0,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_sqrt.py::test_sqrt[input_data3-2]",
+            "returncode": 124,
+            "status": "PUBLISHED_TEST_TIMEOUT__HARD_OPEN",
+            "stderr_tail": "",
+            "stdout_tail": "",
+            "timed_out": true
+          },
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 1,
+              "passed": 0,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_sqrt.py::test_sqrt[input_data4-5.196164639727311]",
+            "returncode": 124,
+            "status": "PUBLISHED_TEST_TIMEOUT__HARD_OPEN",
+            "stderr_tail": "",
+            "stdout_tail": "",
+            "timed_out": true
+          },
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 1,
+              "passed": 0,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_sqrt.py::test_sqrt[input_data5-5.744627526262464]",
+            "returncode": 124,
+            "status": "PUBLISHED_TEST_TIMEOUT__HARD_OPEN",
+            "stderr_tail": "",
+            "stdout_tail": "",
+            "timed_out": true
+          },
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 1,
+              "passed": 0,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_sqrt.py::test_sqrt[input_data6-13.038404876679632]",
+            "returncode": 124,
+            "status": "PUBLISHED_TEST_TIMEOUT__HARD_OPEN",
+            "stderr_tail": "",
+            "stdout_tail": "",
+            "timed_out": true
+          }
+        ],
+        "no_harness_integrity_failure": true,
+        "published_test_file": "python_testcases/test_sqrt.py",
+        "published_test_sha256": "a8374bfa1ef4d2900e0c12d83c29bf22d34c3b0495a70262bdede53e77e90631",
+        "pytest_collection_command_tail": "--disable-warnings --collect-only python_testcases/test_sqrt.py",
+        "pytest_python": "/tmp/cgr_venv_cd864fc9/bin/python",
+        "returncode": 1,
+        "status": "PUBLISHED_TESTS_FAIL_OR_TIMEOUT__HARD_OPEN",
+        "stderr_tail": "\n\n\n\n\n\n\n",
+        "stdout_tail": "COLLECTION rc=0\npython_testcases/test_sqrt.py::test_sqrt[input_data0-1.4166666666666665]\npython_testcases/test_sqrt.py::test_sqrt[input_data1-1.5]\npython_testcases/test_sqrt.py::test_sqrt[input_data2-1.5]\npython_testcases/test_sqrt.py::test_sqrt[input_data3-2]\npython_testcases/test_sqrt.py::test_sqrt[input_data4-5.196164639727311]\npython_testcases/test_sqrt.py::test_sqrt[input_data5-5.744627526262464]\npython_testcases/test_sqrt.py::test_sqrt[input_data6-13.038404876679632]\n\n7 tests collected in 0.01s\n\n\n.                                                                        [100%]\n1 passed in 0.01s\n\n\n\n\n\n",
+        "task": "sqrt",
+        "timeouts": [
+          "python_testcases/test_sqrt.py::test_sqrt[input_data0-1.4166666666666665]",
+          "python_testcases/test_sqrt.py::test_sqrt[input_data2-1.5]",
+          "python_testcases/test_sqrt.py::test_sqrt[input_data3-2]",
+          "python_testcases/test_sqrt.py::test_sqrt[input_data4-5.196164639727311]",
+          "python_testcases/test_sqrt.py::test_sqrt[input_data5-5.744627526262464]",
+          "python_testcases/test_sqrt.py::test_sqrt[input_data6-13.038404876679632]"
+        ]
+      },
+      {
+        "collection_node_count": 9,
+        "collection_nodeids": [
+          "python_testcases/test_subsequences.py::test_subsequences[input_data3-expected3]",
+          "python_testcases/test_subsequences.py::test_subsequences[input_data4-expected4]",
+          "python_testcases/test_subsequences.py::test_subsequences[input_data5-expected5]",
+          "python_testcases/test_subsequences.py::test_subsequences[input_data6-expected6]",
+          "python_testcases/test_subsequences.py::test_subsequences[input_data7-expected7]",
+          "python_testcases/test_subsequences.py::test_subsequences[input_data8-expected8]",
+          "python_testcases/test_subsequences.py::test_subsequences[input_data9-expected9]",
+          "python_testcases/test_subsequences.py::test_subsequences[input_data10-expected10]",
+          "python_testcases/test_subsequences.py::test_subsequences[input_data11-expected11]"
+        ],
+        "collection_returncode": 0,
+        "collection_stderr_tail": "",
+        "collection_stdout_tail": "s.py::test_subsequences[input_data2-expected2]\npython_testcases/test_subsequences.py::test_subsequences[input_data3-expected3]\npython_testcases/test_subsequences.py::test_subsequences[input_data4-expected4]\npython_testcases/test_subsequences.py::test_subsequences[input_data5-expected5]\npython_testcases/test_subsequences.py::test_subsequences[input_data6-expected6]\npython_testcases/test_subsequences.py::test_subsequences[input_data7-expected7]\npython_testcases/test_subsequences.py::test_subsequences[input_data8-expected8]\npython_testcases/test_subsequences.py::test_subsequences[input_data9-expected9]\npython_testcases/test_subsequences.py::test_subsequences[input_data10-expected10]\npython_testcases/test_subsequences.py::test_subsequences[input_data11-expected11]\n\n12 tests collected in 0.01s\n",
+        "counts": {
+          "errors": 0,
+          "failed": 9,
+          "passed": 0,
+          "skipped": 0
+        },
+        "harness_errors": [],
+        "invocation_row_count": 9,
+        "invocations": [
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 1,
+              "passed": 0,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_subsequences.py::test_subsequences[input_data3-expected3]",
+            "returncode": 1,
+            "status": "PUBLISHED_TEST_FAIL__HARD_OPEN",
+            "stderr_tail": "",
+            "stdout_tail": "F                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_subsequences.py::test_subsequences[input_data3-expected3]\n1 failed in 0.01s\n",
+            "timed_out": false
+          },
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 1,
+              "passed": 0,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_subsequences.py::test_subsequences[input_data4-expected4]",
+            "returncode": 1,
+            "status": "PUBLISHED_TEST_FAIL__HARD_OPEN",
+            "stderr_tail": "",
+            "stdout_tail": "F                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_subsequences.py::test_subsequences[input_data4-expected4]\n1 failed in 0.01s\n",
+            "timed_out": false
+          },
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 1,
+              "passed": 0,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_subsequences.py::test_subsequences[input_data5-expected5]",
+            "returncode": 1,
+            "status": "PUBLISHED_TEST_FAIL__HARD_OPEN",
+            "stderr_tail": "",
+            "stdout_tail": "F                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_subsequences.py::test_subsequences[input_data5-expected5]\n1 failed in 0.01s\n",
+            "timed_out": false
+          },
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 1,
+              "passed": 0,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_subsequences.py::test_subsequences[input_data6-expected6]",
+            "returncode": 1,
+            "status": "PUBLISHED_TEST_FAIL__HARD_OPEN",
+            "stderr_tail": "",
+            "stdout_tail": "F                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_subsequences.py::test_subsequences[input_data6-expected6]\n1 failed in 0.01s\n",
+            "timed_out": false
+          },
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 1,
+              "passed": 0,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_subsequences.py::test_subsequences[input_data7-expected7]",
+            "returncode": 1,
+            "status": "PUBLISHED_TEST_FAIL__HARD_OPEN",
+            "stderr_tail": "",
+            "stdout_tail": "F                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_subsequences.py::test_subsequences[input_data7-expected7]\n1 failed in 0.01s\n",
+            "timed_out": false
+          },
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 1,
+              "passed": 0,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_subsequences.py::test_subsequences[input_data8-expected8]",
+            "returncode": 1,
+            "status": "PUBLISHED_TEST_FAIL__HARD_OPEN",
+            "stderr_tail": "",
+            "stdout_tail": "F                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_subsequences.py::test_subsequences[input_data8-expected8]\n1 failed in 0.01s\n",
+            "timed_out": false
+          },
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 1,
+              "passed": 0,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_subsequences.py::test_subsequences[input_data9-expected9]",
+            "returncode": 1,
+            "status": "PUBLISHED_TEST_FAIL__HARD_OPEN",
+            "stderr_tail": "",
+            "stdout_tail": "F                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_subsequences.py::test_subsequences[input_data9-expected9]\n1 failed in 0.01s\n",
+            "timed_out": false
+          },
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 1,
+              "passed": 0,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_subsequences.py::test_subsequences[input_data10-expected10]",
+            "returncode": 1,
+            "status": "PUBLISHED_TEST_FAIL__HARD_OPEN",
+            "stderr_tail": "",
+            "stdout_tail": "F                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_subsequences.py::test_subsequences[input_data10-expected10]\n1 failed in 0.01s\n",
+            "timed_out": false
+          },
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 1,
+              "passed": 0,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_subsequences.py::test_subsequences[input_data11-expected11]",
+            "returncode": 1,
+            "status": "PUBLISHED_TEST_FAIL__HARD_OPEN",
+            "stderr_tail": "",
+            "stdout_tail": "F                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_subsequences.py::test_subsequences[input_data11-expected11]\n1 failed in 0.01s\n",
+            "timed_out": false
+          }
+        ],
+        "no_harness_integrity_failure": true,
+        "published_test_file": "python_testcases/test_subsequences.py",
+        "published_test_sha256": "1c3c5c6afe504d4dbfdd5710e52431fd258f45619a172cb6bc1111b2361c3b3d",
+        "pytest_collection_command_tail": "--disable-warnings --collect-only python_testcases/test_subsequences.py",
+        "pytest_python": "/tmp/cgr_venv_cd864fc9/bin/python",
+        "returncode": 1,
+        "status": "PUBLISHED_TESTS_FAIL_OR_TIMEOUT__HARD_OPEN",
+        "stderr_tail": "\n\n\n\n\n\n\n\n\n",
+        "stdout_tail": "                                                                     [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_subsequences.py::test_subsequences[input_data9-expected9]\n1 failed in 0.01s\n\nF                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_subsequences.py::test_subsequences[input_data10-expected10]\n1 failed in 0.01s\n\nF                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_subsequences.py::test_subsequences[input_data11-expected11]\n1 failed in 0.01s\n",
+        "task": "subsequences",
+        "timeouts": []
+      },
+      {
+        "collection_node_count": 3,
+        "collection_nodeids": [
+          "python_testcases/test_topological_ordering.py::test1",
+          "python_testcases/test_topological_ordering.py::test2",
+          "python_testcases/test_topological_ordering.py::test3"
+        ],
+        "collection_returncode": 0,
+        "collection_stderr_tail": "",
+        "collection_stdout_tail": "python_testcases/test_topological_ordering.py::test1\npython_testcases/test_topological_ordering.py::test2\npython_testcases/test_topological_ordering.py::test3\n\n3 tests collected in 0.01s\n",
+        "counts": {
+          "errors": 0,
+          "failed": 3,
+          "passed": 0,
+          "skipped": 0
+        },
+        "harness_errors": [],
+        "invocation_row_count": 3,
+        "invocations": [
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 1,
+              "passed": 0,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_topological_ordering.py::test1",
+            "returncode": 1,
+            "status": "PUBLISHED_TEST_FAIL__HARD_OPEN",
+            "stderr_tail": "",
+            "stdout_tail": "F                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_topological_ordering.py::test1 - assert [5, 7, 3...\n1 failed in 0.01s\n",
+            "timed_out": false
+          },
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 1,
+              "passed": 0,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_topological_ordering.py::test2",
+            "returncode": 1,
+            "status": "PUBLISHED_TEST_FAIL__HARD_OPEN",
+            "stderr_tail": "",
+            "stdout_tail": "F                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_topological_ordering.py::test2 - assert [4, 5, 0...\n1 failed in 0.01s\n",
+            "timed_out": false
+          },
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 1,
+              "passed": 0,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_topological_ordering.py::test3",
+            "returncode": 1,
+            "status": "PUBLISHED_TEST_FAIL__HARD_OPEN",
+            "stderr_tail": "",
+            "stdout_tail": "F                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_topological_ordering.py::test3 - AssertionError:...\n1 failed in 0.01s\n",
+            "timed_out": false
+          }
+        ],
+        "no_harness_integrity_failure": true,
+        "published_test_file": "python_testcases/test_topological_ordering.py",
+        "published_test_sha256": "157acae6fcacf3dba45b2ded31818609d034e190d721ac6a060a4adc013a98eb",
+        "pytest_collection_command_tail": "--disable-warnings --collect-only python_testcases/test_topological_ordering.py",
+        "pytest_python": "/tmp/cgr_venv_cd864fc9/bin/python",
+        "returncode": 1,
+        "status": "PUBLISHED_TESTS_FAIL_OR_TIMEOUT__HARD_OPEN",
+        "stderr_tail": "\n\n\n",
+        "stdout_tail": "llected in 0.01s\n\nF                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_topological_ordering.py::test1 - assert [5, 7, 3...\n1 failed in 0.01s\n\nF                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_topological_ordering.py::test2 - assert [4, 5, 0...\n1 failed in 0.01s\n\nF                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_topological_ordering.py::test3 - AssertionError:...\n1 failed in 0.01s\n",
+        "task": "topological_ordering",
+        "timeouts": []
+      },
+      {
+        "collection_node_count": 5,
+        "collection_nodeids": [
+          "python_testcases/test_wrap.py::test_wrap[input_data0-expected0]",
+          "python_testcases/test_wrap.py::test_wrap[input_data1-expected1]",
+          "python_testcases/test_wrap.py::test_wrap[input_data2-expected2]",
+          "python_testcases/test_wrap.py::test_wrap[input_data3-expected3]",
+          "python_testcases/test_wrap.py::test_wrap[input_data4-expected4]"
+        ],
+        "collection_returncode": 0,
+        "collection_stderr_tail": "",
+        "collection_stdout_tail": "python_testcases/test_wrap.py::test_wrap[input_data0-expected0]\npython_testcases/test_wrap.py::test_wrap[input_data1-expected1]\npython_testcases/test_wrap.py::test_wrap[input_data2-expected2]\npython_testcases/test_wrap.py::test_wrap[input_data3-expected3]\npython_testcases/test_wrap.py::test_wrap[input_data4-expected4]\n\n5 tests collected in 0.01s\n",
+        "counts": {
+          "errors": 0,
+          "failed": 5,
+          "passed": 0,
+          "skipped": 0
+        },
+        "harness_errors": [],
+        "invocation_row_count": 5,
+        "invocations": [
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 1,
+              "passed": 0,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_wrap.py::test_wrap[input_data0-expected0]",
+            "returncode": 1,
+            "status": "PUBLISHED_TEST_FAIL__HARD_OPEN",
+            "stderr_tail": "",
+            "stdout_tail": "F                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_wrap.py::test_wrap[input_data0-expected0] - Asse...\n1 failed in 0.01s\n",
+            "timed_out": false
+          },
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 1,
+              "passed": 0,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_wrap.py::test_wrap[input_data1-expected1]",
+            "returncode": 1,
+            "status": "PUBLISHED_TEST_FAIL__HARD_OPEN",
+            "stderr_tail": "",
+            "stdout_tail": "F                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_wrap.py::test_wrap[input_data1-expected1] - Asse...\n1 failed in 0.01s\n",
+            "timed_out": false
+          },
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 1,
+              "passed": 0,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_wrap.py::test_wrap[input_data2-expected2]",
+            "returncode": 1,
+            "status": "PUBLISHED_TEST_FAIL__HARD_OPEN",
+            "stderr_tail": "",
+            "stdout_tail": "F                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_wrap.py::test_wrap[input_data2-expected2] - Asse...\n1 failed in 0.01s\n",
+            "timed_out": false
+          },
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 1,
+              "passed": 0,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_wrap.py::test_wrap[input_data3-expected3]",
+            "returncode": 1,
+            "status": "PUBLISHED_TEST_FAIL__HARD_OPEN",
+            "stderr_tail": "",
+            "stdout_tail": "F                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_wrap.py::test_wrap[input_data3-expected3] - Asse...\n1 failed in 0.01s\n",
+            "timed_out": false
+          },
+          {
+            "counts": {
+              "errors": 0,
+              "failed": 1,
+              "passed": 0,
+              "skipped": 0
+            },
+            "nodeid": "python_testcases/test_wrap.py::test_wrap[input_data4-expected4]",
+            "returncode": 1,
+            "status": "PUBLISHED_TEST_FAIL__HARD_OPEN",
+            "stderr_tail": "",
+            "stdout_tail": "F                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_wrap.py::test_wrap[input_data4-expected4] - Asse...\n1 failed in 0.01s\n",
+            "timed_out": false
+          }
+        ],
+        "no_harness_integrity_failure": true,
+        "published_test_file": "python_testcases/test_wrap.py",
+        "published_test_sha256": "c23a0d457eeec036cedb3296a935231d0d92a5e6334d93172fc8dd79f9abe5e9",
+        "pytest_collection_command_tail": "--disable-warnings --collect-only python_testcases/test_wrap.py",
+        "pytest_python": "/tmp/cgr_venv_cd864fc9/bin/python",
+        "returncode": 1,
+        "status": "PUBLISHED_TESTS_FAIL_OR_TIMEOUT__HARD_OPEN",
+        "stderr_tail": "\n\n\n\n\n",
+        "stdout_tail": " failed in 0.01s\n\nF                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_wrap.py::test_wrap[input_data2-expected2] - Asse...\n1 failed in 0.01s\n\nF                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_wrap.py::test_wrap[input_data3-expected3] - Asse...\n1 failed in 0.01s\n\nF                                                                        [100%]\n=========================== short test summary info ============================\nFAILED python_testcases/test_wrap.py::test_wrap[input_data4-expected4] - Asse...\n1 failed in 0.01s\n",
+        "task": "wrap",
+        "timeouts": []
+      }
+    ],
+    "source_has_correct_python_programs": true,
+    "task_count": 16,
+    "tasks": [
+      "breadth_first_search",
+      "depth_first_search",
+      "detect_cycle",
+      "flatten",
+      "kheapsort",
+      "possible_change",
+      "powerset",
+      "reverse_linked_list",
+      "shortest_path_length",
+      "shortest_path_lengths",
+      "shortest_paths",
+      "shunting_yard",
+      "sqrt",
+      "subsequences",
+      "topological_ordering",
+      "wrap"
+    ],
+    "tasks_with_published_test_failure": 16,
+    "test_isolation": "ONE_REAL_PUBLISHED_NODE_ID_PER_STDLIB_SUBPROCESS_TIMEOUT",
+    "timeout_plugin_dependency": false,
+    "total_collected_published_tests": 85,
+    "total_invoked_published_tests": 85,
+    "total_published_test_failures": 63,
+    "total_published_test_passes": 22,
+    "total_published_test_skips": 0,
+    "total_published_test_timeouts": 6
+  },
+  "incremental_spend_usd": 0,
+  "independent_verification_completed": false,
+  "independent_verification_note": "Producer-run sandbox; independent reproduction is open.",
+  "invariants": {
+    "all_published_tests_collected_and_invoked": true,
+    "all_receipts_and_organs_present": true,
+    "answer_doc_and_action_intent_present": true,
+    "answer_keys_absent_in_fresh_copy": true,
+    "composition_needs_a_frame_and_proves_refusals": true,
+    "cross_kind_transfer_is_zero_without_index": true,
+    "existing_weight_gate_is_reused_not_rebuilt": true,
+    "external_model_not_used": true,
+    "hard_open_population_is_exactly_16": true,
+    "hard_open_timeouts_reported_as_failures_not_harness_errors": true,
+    "identifiability_is_not_one_demonstration": true,
+    "model_has_zero_knowledge_house_dependency": true,
+    "no_harness_integrity_failure": true,
+    "no_hidden_skips": true,
+    "no_known_win_in_hard_open_population": true,
+    "no_network_at_run_time": true,
+    "no_repair_claimed_from_hard_open_run": true,
+    "no_synthetic_tasks": true,
+    "no_test_edits_or_timeout_plugin": true,
+    "published_test_bytes_hashed": true,
+    "published_test_files_present": true,
+    "terminal_truth_untouched": true,
+    "unbound_name_retraction_is_respected": true,
+    "verified_index_lacks_the_policy_observable": true,
+    "vocabulary_insufficiency_requires_a_new_observable": true,
+    "weight_training_fuel_is_not_ready": true,
+    "zero_incremental_spend": true,
+    "zero_new_parameters_admitted": true
+  },
+  "measured_facts": {
+    "composition_with_frame": {
+      "abstract_states_exhausted": 4,
+      "adaptation_trials": 29,
+      "executions": 15,
+      "machines": 4,
+      "measured_cells": 29,
+      "per_machine": {
+        "FILESYSTEM": {
+          "adaptation_trials": 9,
+          "executions": 4,
+          "explored": 0,
+          "proven_unreachable": 0,
+          "solved": 4,
+          "two_step": 0,
+          "usable_operators": 4
+        },
+        "GIT": {
+          "adaptation_trials": 6,
+          "executions": 2,
+          "explored": 4,
+          "proven_unreachable": 2,
+          "solved": 2,
+          "two_step": 0,
+          "usable_operators": 2
+        },
+        "SQLITE": {
+          "adaptation_trials": 6,
+          "executions": 4,
+          "explored": 0,
+          "proven_unreachable": 0,
+          "solved": 4,
+          "two_step": 0,
+          "usable_operators": 6
+        },
+        "TARBALL": {
+          "adaptation_trials": 8,
+          "executions": 5,
+          "explored": 0,
+          "proven_unreachable": 0,
+          "solved": 4,
+          "two_step": 1,
+          "usable_operators": 2
+        }
+      },
+      "prediction_mismatches": 0,
+      "proven_unreachable": 2,
+      "relaxed_plans_that_break_the_frame": 15,
+      "requests": 16,
+      "solved": 14,
+      "solved_with_two_steps": 1,
+      "trials_in_total": 44,
+      "unrequested_side_effects": 0,
+      "usable_operators": 14
+    },
+    "four_levers": {
+      "bits_after_one": 3.817623257511431,
+      "bits_before": 5.554588851677638,
+      "bits_per_further_demonstration": 1.092677521005959,
+      "targets_exact_after_one": 0,
+      "targets_settled_after_one_then_ask": 10
+    },
+    "index": {
+      "reading": "A key has to be injective on the distinction the policy depends on. If every family either collides kinds that need different policies or degenerates to one key per kind, the features do not CONTAIN that distinction and no bucketing of them can supply it. The repair is a new observable, not a finer grid.",
+      "sweep": [
+        {
+          "answerable": 5,
+          "answerable_fraction": 0.625,
+          "collision_detail": [
+            {
+              "distinct_winner_sets": 3,
+              "key": "b1_m2_r1_d0_g0",
+              "kinds": [
+                "grid_walk",
+                "dial_lock",
+                "toggle_bank",
+                "adjacent_sort",
+                "sliding_pairs",
+                "stack_pushout",
+                "letter_shift",
+                "double_dial",
+                "tri_lock"
+              ]
+            },
+            {
+              "distinct_winner_sets": 2,
+              "key": "b1_m1_r0_d0_g0",
+              "kinds": [
+                "reverse_string",
+                "last_wins"
+              ]
+            }
+          ],
+          "collisions": 2,
+          "keys": 8,
+          "kinds": 20,
+          "name": "tree_coarse__b(2,4,6)_m(.45,.8)_r(1.5,3)_d(0,3,10)"
+        },
+        {
+          "answerable": 4,
+          "answerable_fraction": 0.5714,
+          "collision_detail": [
+            {
+              "distinct_winner_sets": 2,
+              "key": "b1_m1_r0_d0_g0",
+              "kinds": [
+                "grid_walk",
+                "toggle_bank",
+                "bit_register",
+                "parity_lights",
+                "stack_pushout",
+                "letter_shift",
+                "double_dial"
+              ]
+            },
+            {
+              "distinct_winner_sets": 2,
+              "key": "b0_m1_r0_d0_g0",
+              "kinds": [
+                "cyclic_counter",
+                "dial_lock",
+                "adjacent_sort",
+                "queue_rotate",
+                "sliding_pairs",
+                "ring_rotate",
+                "tri_lock"
+              ]
+            },
+            {
+              "distinct_winner_sets": 2,
+              "key": "b1_m0_r0_d0_g0",
+              "kinds": [
+                "two_jug_pour",
+                "reverse_string"
+              ]
+            }
+          ],
+          "collisions": 3,
+          "keys": 7,
+          "kinds": 20,
+          "name": "coarser_still"
+        },
+        {
+          "answerable": 11,
+          "answerable_fraction": 0.7857,
+          "collision_detail": [
+            {
+              "distinct_winner_sets": 2,
+              "key": "b3_m4_r2_d1_g0",
+              "kinds": [
+                "grid_walk",
+                "stack_pushout",
+                "letter_shift"
+              ]
+            },
+            {
+              "distinct_winner_sets": 2,
+              "key": "b2_m4_r1_d1_g0",
+              "kinds": [
+                "dial_lock",
+                "adjacent_sort",
+                "sliding_pairs",
+                "tri_lock"
+              ]
+            }
+          ],
+          "collisions": 2,
+          "keys": 14,
+          "kinds": 20,
+          "name": "finer_mid"
+        },
+        {
+          "answerable": 13,
+          "answerable_fraction": 0.8125,
+          "collision_detail": [
+            {
+              "distinct_winner_sets": 2,
+              "key": "{\"branching\": 4, \"moved_fraction\": 1.0, \"reachable_growth\": 2.25, \"single_action_goal_depth\": 0, \"start_reaches_goal_already\": false}",
+              "kinds": [
+                "grid_walk",
+                "letter_shift"
+              ]
+            },
+            {
+              "distinct_winner_sets": 2,
+              "key": "{\"branching\": 3, \"moved_fraction\": 1.0, \"reachable_growth\": 2.0, \"single_action_goal_depth\": 0, \"start_reaches_goal_already\": false}",
+              "kinds": [
+                "dial_lock",
+                "adjacent_sort",
+                "sliding_pairs",
+                "tri_lock"
+              ]
+            }
+          ],
+          "collisions": 2,
+          "keys": 16,
+          "kinds": 20,
+          "name": "finest_exact_features"
+        },
+        {
+          "answerable": 19,
+          "answerable_fraction": 0.95,
+          "collision_detail": [],
+          "collisions": 0,
+          "keys": 20,
+          "kinds": 20,
+          "name": "trivial_one_key_per_kind"
+        }
+      ],
+      "usable_key_families": [],
+      "verdict": "NO_GRANULARITY_OF_THESE_FEATURES_SEPARATES_WHAT_THE_POLICY_DEPENDS_ON"
+    },
+    "insufficiency_certificate": {
+      "failures": 2,
+      "kind": "SEPARATION_IMPOSSIBLE__EVERY_FACT_ALL_SUCCESSES_SHARE_A_FAILURE_ALSO_HAS",
+      "reason": "THE_FACTS_ALL_SUCCESSES_AGREE_ON_ARE_FACTS_A_FAILURE_ALSO_HAS",
+      "schema": "PROJECT_BRAIN_APPLICABILITY_V1",
+      "shared_facts": [
+        "baseline.violates_own_spec",
+        "operator.Gt"
+      ],
+      "successes": 2,
+      "unrepairable_by_repetition": true,
+      "what_would_repair_it": "A_NEW_OBSERVABLE__MORE_RUNS_REPORT_THE_SAME_FACT_VECTOR",
+      "witness_failure_indices": [
+        0,
+        1
+      ]
+    },
+    "unbound_name_retraction": {
+      "bits_per_step_still_reported": 5.428,
+      "elements_where_the_preferred_description_is_ambiguous": {
+        "count": 67,
+        "of": 1415,
+        "share": 0.047
+      },
+      "from": [
+        "what_one_experience_buys_v1.py",
+        "canonical/verification/MINIWOB_ONE_SUCCESS_GENERALISATION_20261111_V5.json"
+      ],
+      "new_descriptions_per_task": 1.231,
+      "steps_recorded": 175,
+      "the_price_of_the_preferred_description": 0.102,
+      "vocabulary_saturates": false,
+      "what_that_number_now_means": "the number of descriptions still alive after one demonstration -- a measure of REDUNDANCY in the language, not of ambiguity and not of a second grammar. It must no longer be quoted as the cost of identifying a step."
+    },
+    "union": {
+      "example_searchable_open": 8,
+      "hard_open": 16,
+      "repaired_union": 24,
+      "unmeasurable_without_examples": 8
+    },
+    "vocabulary_repair_cost": {
+      "certificate_after_closing": null,
+      "closed_vocabulary_size": 31,
+      "hypotheses_that_would_need_enumerating": 8388608,
+      "learn_after_closing": "BOUNDED__TOO_MANY_CANDIDATE_FACTS_TO_ENUMERATE",
+      "learner_enumeration_cap": 12,
+      "reading": "absence removes the separation obstruction but not the enumeration bound, so the obstacle moves from representation to combinatorics",
+      "shared_literals_after_closing": 23
+    },
+    "weight_fuel": {
+      "conclusion": "FUEL_EXISTS_BUT_IS_THIN_AND_NARROW__ENOUGH_TO_VALIDATE_A_SEED_NOT_TO_TRAIN_A_MODEL",
+      "minimum_units_to_try": 5000,
+      "ready_to_train": false,
+      "total_verified_units": 64
+    }
+  },
+  "measured_receipts": {
+    "composition": "canonical/verification/COMPOSE_MEASURED_EFFECTS_20261116_V1.json",
+    "four_levers": "canonical/verification/THE_FOUR_LEVERS_OF_LEARNING_FROM_EXPERIENCE_20261116_V1.json",
+    "index": "canonical/verification/THE_INDEX_IS_THE_BOTTLENECK_20261116_V1.json",
+    "insufficiency": "canonical/verification/INSUFFICIENCY_CERTIFICATE_20261113_V1.json",
+    "unbound_name": "canonical/verification/THE_TREE_ALREADY_SPOKE_ONE_LANGUAGE_20261116_V1.json",
+    "union": "canonical/verification/PROOF_CARRYING_COUNTERFACTUAL_UNION_20261116_V1.json",
+    "weight_fuel": "canonical/verification/WEIGHT_SPACE_FUEL_20261113_V1.json",
+    "why_weights": "canonical/verification/WHY_WEIGHT_SPACE_IS_NOT_THE_MISSING_LAYER_20261112_V1.json"
+  },
+  "model_dependency_count": 0,
+  "network_dependency_count": 0,
+  "organs_by_effect": {
+    "composition_and_frame": [
+      "canonical/swe_kernel/contract_grounded_repair_v1.py",
+      "canonical/swe_kernel/interventional_goal_v1.py",
+      "canonical/swe_kernel/proved_composition_v1.py",
+      "canonical/tools/compose_measured_effects_v1.py",
+      "canonical/runtime/capability_composer_v1.py",
+      "canonical/runtime/verified_skill_macro_planner_v1.py"
+    ],
+    "identifiability_and_separation": [
+      "canonical/runtime/finite_identifiability.py",
+      "canonical/runtime/m5_causal_identifiability.py",
+      "canonical/runtime/applicability_v1.py",
+      "canonical/runtime/contrast_selection_v1.py",
+      "canonical/swe_kernel/one_demonstration_identifies_v1.py",
+      "canonical/swe_kernel/repair_version_space_selection_v1.py"
+    ],
+    "instant_knowledge_and_zero_weight_model": [
+      "canonical/runtime/compile_brain_unified_model_v1.py",
+      "canonical/runtime/verify_brain_unified_model_v1.py",
+      "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json"
+    ],
+    "observable_and_vocabulary": [
+      "canonical/runtime/observable_descriptor_v1.py",
+      "canonical/runtime/fact_entailment_v1.py",
+      "canonical/runtime/world_probe_v1.py",
+      "canonical/tools/insufficiency_certificate_probe_v1.py",
+      "canonical/tools/the_index_is_the_bottleneck_v1.py",
+      "canonical/runtime/what_one_experience_buys_v1.py"
+    ],
+    "verifier_and_admission": [
+      "canonical/swe_kernel/lesson_admission_gate_v1.py",
+      "canonical/swe_kernel/test_suite_admission_v1.py",
+      "canonical/swe_kernel/weight_update_admission_v1.py",
+      "canonical/swe_kernel/learned_skill_verdict_v1.py",
+      "canonical/runtime/instruction_contract_v1.py",
+      "canonical/runtime/instruction_policy_v1.py"
+    ]
+  },
+  "organs_missing": {},
+  "organs_present": {
+    "composition_and_frame": [
+      "canonical/swe_kernel/contract_grounded_repair_v1.py",
+      "canonical/swe_kernel/interventional_goal_v1.py",
+      "canonical/swe_kernel/proved_composition_v1.py",
+      "canonical/tools/compose_measured_effects_v1.py",
+      "canonical/runtime/capability_composer_v1.py",
+      "canonical/runtime/verified_skill_macro_planner_v1.py"
+    ],
+    "identifiability_and_separation": [
+      "canonical/runtime/finite_identifiability.py",
+      "canonical/runtime/m5_causal_identifiability.py",
+      "canonical/runtime/applicability_v1.py",
+      "canonical/runtime/contrast_selection_v1.py",
+      "canonical/swe_kernel/one_demonstration_identifies_v1.py",
+      "canonical/swe_kernel/repair_version_space_selection_v1.py"
+    ],
+    "instant_knowledge_and_zero_weight_model": [
+      "canonical/runtime/compile_brain_unified_model_v1.py",
+      "canonical/runtime/verify_brain_unified_model_v1.py",
+      "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json"
+    ],
+    "observable_and_vocabulary": [
+      "canonical/runtime/observable_descriptor_v1.py",
+      "canonical/runtime/fact_entailment_v1.py",
+      "canonical/runtime/world_probe_v1.py",
+      "canonical/tools/insufficiency_certificate_probe_v1.py",
+      "canonical/tools/the_index_is_the_bottleneck_v1.py",
+      "canonical/runtime/what_one_experience_buys_v1.py"
+    ],
+    "verifier_and_admission": [
+      "canonical/swe_kernel/lesson_admission_gate_v1.py",
+      "canonical/swe_kernel/test_suite_admission_v1.py",
+      "canonical/swe_kernel/weight_update_admission_v1.py",
+      "canonical/swe_kernel/learned_skill_verdict_v1.py",
+      "canonical/runtime/instruction_contract_v1.py",
+      "canonical/runtime/instruction_policy_v1.py"
+    ]
+  },
+  "quixbugs_head": "4257f44b0ff1181dedaedee6a447e133219fcebf",
+  "schema": "PROJECT_BRAIN_VERIFIED_INDEX_AND_CALCULATED_PARAMETER_ADMISSION_V1",
+  "terminal_credit": "ZERO",
+  "three_blockers_as_one_verified_index": {
+    "identifiability": "no split from one trace; chosen causal observation splits survivors",
+    "status": "THREE_PROJECTIONS_OF_ONE_NECESSARY_CONDITION_NOT_A_SINGLE_SUFFICIENT_LEVER",
+    "synthesis_verification_asymmetry": "replay handles repeated syntax; grounded proposal plus execution verifier and frame handle new work",
+    "vocabulary_insufficiency": "index key does not contain the policy-relevant observable; repetition reports the same fact vector"
+  },
+  "upstream": "https://github.com/jkoppel/QuixBugs"
+}
