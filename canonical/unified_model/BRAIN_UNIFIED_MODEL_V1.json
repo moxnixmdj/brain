@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 517,
+  "knowledge_documents": 518,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6999,
+  "research_index_records": 7001,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 452,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "a68496740118bcff1618ec7597d218a0b24aa562bd4b54887988b20e26b47f82"
+  "value": "88824228daccdfffc7c158486749092dcf804a7e4ed9009b5a899ebdda6a24f6"
  },
  "engines": [
   {
@@ -67728,6 +67728,87 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 8361,
+   "headings": [
+    "The term that learning multiplies: why instant learning does not solve all computer use",
+    "The honest answer in one line",
+    "What we built this round",
+    "The result, on real commits",
+    "The number I had to destroy",
+    "Why zero is the answer and not a failure",
+    "What is real and what is not",
+    "Is it revolutionary versus how agents learn today?",
+    "The smartest next move"
+   ],
+   "kind": "DOCUMENT",
+   "path": "THE_TERM_THAT_LEARNING_MULTIPLIES_20261116_V1.md",
+   "sha256": "9a5fa16e084617a115336be669e7113048b6f0f8715bf0c51700ae1851e4e0a7",
+   "summary": "You asked a question with a shape: *we solved instant learning and instant learning in a new environment, so give the model the most advanced coding actions, let it experience each once, it learns them permanently, and we have solved every problem and all computer use. Is that true?*",
+   "terms": {
+    "13": 5,
+    "18": 4,
+    "2026": 4,
+    "after": 3,
+    "agent": 3,
+    "all": 5,
+    "already": 5,
+    "answer": 3,
+    "any": 3,
+    "arrives": 3,
+    "artifact": 8,
+    "because": 6,
+    "behaviour": 4,
+    "both": 6,
+    "bottleneck": 4,
+    "canonical": 5,
+    "capability": 4,
+    "change": 7,
+    "checkability": 4,
+    "code": 6,
+    "every": 8,
+    "exact": 4,
+    "experience": 6,
+    "input": 5,
+    "instant": 4,
+    "itself": 7,
+    "knowledge": 4,
+    "law": 4,
+    "learning": 9,
+    "mechanical": 4,
+    "model": 4,
+    "module": 4,
+    "multiplies": 4,
+    "no": 9,
+    "not": 16,
+    "number": 5,
+    "one": 6,
+    "only": 7,
+    "own": 8,
+    "postcondition": 4,
+    "python": 5,
+    "real": 15,
+    "round": 7,
+    "specification": 9,
+    "term": 7,
+    "tests": 7,
+    "verification": 8,
+    "work": 8
+   },
+   "title": "The term that learning multiplies: why instant learning does not solve all computer use",
+   "title_terms": [
+    "all",
+    "computer",
+    "instant",
+    "learning",
+    "multiplies",
+    "not",
+    "solve",
+    "term",
+    "use"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 10576,
    "headings": [
     "The tree is the input space it was missing",
@@ -85304,10 +85385,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1319,
+  "included_source_count": 1320,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "fb80e07c88bd02a507d657f53b0d9c496ff2132035814e61fd7e31061c1ce2f3"
+  "source_tree_digest": "de5769cb84b1d7429b02f2f252698e74208255b92cc95311ff5ad7ed90c071f7"
  },
  "research_index": [
   {
@@ -159318,6 +159399,24 @@
     "scene": 1,
     "v1": 1,
     "verify": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "2026-11-16",
+   "id": "research:canonical/verification/CHECKABILITY_BY_DIFFERENTIAL_PIN_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/CHECKABILITY_BY_DIFFERENTIAL_PIN_20261116_V1.json",
+   "schema": "BRAIN_CHECKABILITY_BY_DIFFERENTIAL_PIN_V1",
+   "sha256": "0bbdff524e7b54eec9a33e8d1ee51a71580f1732c5072df8e91554f104a3840d",
+   "status": "",
+   "terms": {
+    "20261116": 1,
+    "checkability": 1,
+    "differential": 1,
+    "pin": 1,
+    "v1": 1
    }
   },
   {
@@ -238618,6 +238717,30 @@
     "steps": 1,
     "the_evidence_rank_bind_goal_now_compiles_and_executes_end_to_end_through_a_four_step_chain_enumerate_then_rank_then_extract_then_bind__measured_goals_that_run_to_completion_10_to_11_of_23__compiled_21_to_22_of_23__correct_selection_19_to_20_of_23__all_ten_prior_passers_still_pass": 1,
     "v1": 2
+   }
+  },
+  {
+   "action_id": "CHECKABILITY_BY_DIFFERENTIAL_PIN_20261116_V1",
+   "capability": false,
+   "date": "2026-11-16",
+   "id": "research:canonical/action_intents/CHECKABILITY_BY_DIFFERENTIAL_PIN_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/CHECKABILITY_BY_DIFFERENTIAL_PIN_20261116_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "dfb21a1dba42636c12f60e408124662bb05b2ae07efd610baf46582341dbc344",
+   "status": "PRODUCED",
+   "terms": {
+    "20261116": 1,
+    "checkability": 1,
+    "checkability_by_differential_pin_20261116_v1": 1,
+    "differential": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "measure_the_term_that_learning_multiplies_by_building_a_constructor_that_asks_how_much_unguarded_real_work_already_has_a_postcondition_buildable_without_the_author_s_tests_intent_or_any_model__drive_the_modules_own_public_callables_at_both_states_through_an_alphabet_of_empty_values_plus_the_module_s_own_literals__keep_only_differences_stable_inside_one_interpreter_with_identity_removed__and_test_the_artifact_s_own_doctests_as_the_second_specification_source": 1,
+    "pin": 1,
+    "produced": 1,
+    "the_bottleneck_has_a_mechanism_and_a_number_instead_of_a_slogan__of_19_real_commits_that_ship_no_test_13_can_be_driven_through_their_own_public_surface_and_0_yield_a_stable_differential_pin__the_artifact_s_own_doctests_discriminate_0_times_because_they_move_with_the_code__and_a_first_run_that_reported_21_1_percent_was_refuted_as_a_memory_address_artefact_before_it_reached_a_receipt": 1,
+    "the_learning_rate_is_not_the_bottleneck__learning_multiplies_checkability_and_checkability_is_knowledge__the_discriminating_input_pair_is_not_derivable_from_the_artifact_from_repetition_or_from_any_amount_of_experience__and_this_had_never_been_measured_by_construction_only_argued": 1,
+    "v1": 1
    }
   },
   {

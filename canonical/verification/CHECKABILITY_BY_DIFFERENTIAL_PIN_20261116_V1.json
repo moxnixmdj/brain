@@ -1,0 +1,80 @@
+{
+  "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+  "convergent_measurements": {
+    "external_november_2026": {
+      "arxiv_2607_18057": "4,882 agent-authored PRs: existing tests execute 27.0% of changed Python lines; in 64.8% of Python PRs not one changed line is executed by any test",
+      "conclusion": "the frontier has converged on the same term from the other side: not learning, not weights, not model size -- specification and independent checking",
+      "industry_analysis_nov_2026": "'the verification bottleneck is now the center of the workflow'",
+      "stack_overflow_13_nov_2026": "of 1,000 AI-authored unit tests audited, 9.6% were useful verification checks",
+      "stanford_cs329a_aug_2026": "'verification is the bottleneck for self-improvement' -- the generator-verifier gap"
+    },
+    "in_tree": {
+      "memorisable_share_of_real_fixes": 0.04814,
+      "observational_pool": "badly populated, not badly ranked; one reachable near miss is worth 2^22",
+      "paths": [
+        "canonical/verification/REACH_OF_THE_GRAMMAR_20261116_V1.json",
+        "canonical/verification/WITNESS_INVERSION_20261116_V1.json",
+        "canonical/verification/INSUFFICIENCY_CERTIFICATE_20261113_V1.json",
+        "canonical/verification/OBSERVATIONAL_POOL_IS_EMPTY_BY_CONSTRUCTION_20261116_V1.json"
+      ],
+      "refuse_share_of_real_commits": 0.7142857142857143,
+      "witness_inversion": "18 witnesses captured, 0 invertible, 16 refusals, 18/18 demanded content absent"
+    }
+  },
+  "date": "2026-11-16",
+  "incremental_spend_usd": 0,
+  "model_calls": 0,
+  "network_calls": 0,
+  "reproduce": ".venv/bin/python canonical/swe_kernel/checkability_by_differential_pin_v1.py --corpus --limit 40 --json canonical/verification/CHECKABILITY_BY_DIFFERENTIAL_PIN_20261116_V1.json",
+  "schema": "BRAIN_CHECKABILITY_BY_DIFFERENTIAL_PIN_V1",
+  "the_answer": {
+    "question": "instant learning and instant environment learning are solved, so give the model the most advanced coding actions, let it experience each once, learn it permanently, and all of computer use is solved -- true or false?",
+    "single_bottleneck": "the DISCRIMINATING INPUT: the pair (input, expected outcome) that separates the changed behaviour from the old one. It is knowledge. It arrives with a test, with a demonstration, or with a stated intent -- and it is not derivable from the artifact, from repetition, or from any amount of experience.",
+    "the_law": "P(solved | work) = CHECKABLE(work) x [MEMORISABLE + IN-GRAMMAR + SYNTHESISABLE] x VERIFICATION. Experience enlarges only MEMORISABLE, measured at 4.814% of real fixes.",
+    "verdict": "FALSE as stated, TRUE as a cost law.",
+    "why": "learning multiplies a term that is already small. The term is CHECKABILITY: the share of real work for which an independent, mechanical postcondition exists at all. You cannot learn against nothing, cannot verify what nobody specified, and cannot synthesise towards a target that has not been stated. Learning changes none of those."
+  },
+  "the_smartest_next_move": "stop trying to raise the learning term. Every remaining point of capability is behind specification: construct the DISCRIMINATING INPUT from stated intent (the user's sentence, a demonstration, or a witness the failure itself supplies), then let the existing search and the exact verifier do the rest. Anything that adds experience without adding a discriminating input is spend with a ceiling already measured.",
+  "this_round_s_measurement": {
+    "commits": 40,
+    "converted_into_a_stable_pin": 0,
+    "corpus": [
+      "pypa/packaging 21.0->24.0",
+      "pallets/itsdangerous 2.0.0->2.1.2",
+      "pypa/pyproject-hooks 0.0.1->1.2.0",
+      "hukkin/tomli 1.0.0->2.0.2"
+    ],
+    "drivable_through_the_public_surface": 13,
+    "instrument": "a constructor that asks how much unguarded real work already has a postcondition that can be built without the author's tests, without the author's intent and without a model: drive every public callable of the touched modules through an alphabet of empty-ish values plus the STRING LITERALS THE MODULE ITSELF CONTAINS, at both the parent and the fixed state, and keep only differences that are stable inside one interpreter (identity removed, iterators consumed)",
+    "instrument_failure_caught_before_it_became_a_claim": "the first run reported 21.1% converted (4 of 19). Every one of those 'pins' differed only by a generator's memory address. After removing identity from the comparison and consuming iterators to compare what they yield, the number is 0. The 21.1% is reported here because it was measured, and refuted here because it was an artefact.",
+    "pins": 0,
+    "second_specification_source_tested_and_refused": "the artifact's own doctests: 0 discriminating. A doctest lives in the same file as the code, so the author of a change updates it in the same commit and it passes at BOTH states. The artifact's examples are not an independent specification, however much they look like one.",
+    "shipped_their_own_tests": 21,
+    "the_instrument_is_proven": "canonical/tests/test_checkability_by_differential_pin_v1.py builds a real git history with a real behaviour change and finds the pin, the doctest failure at the parent, and restores nothing because nothing is modified",
+    "unguarded": 19,
+    "unguarded_states": {
+      "NOTHING_PROBEABLE": 6,
+      "NO_DIFFERENCE_VISIBLE_FROM_THE_PUBLIC_SURFACE": 13
+    }
+  },
+  "what_is_true_and_what_is_not": {
+    "declined": [
+      "sentience: unmeasurable, and irrelevant to capability. What we are building is a capability engine, not a creature. The word buys nothing that a measurement can use."
+    ],
+    "false": [
+      "that learning rate is the bottleneck -- it multiplies a small term",
+      "that experience makes reach grow -- 75.2% of real fix pieces are named by no other task's fixes",
+      "that a perfect oracle makes edits namable -- 18 of 18 real witnesses demanded absent content",
+      "that checkability can be manufactured from the artifact -- 0 of 13 drivable unguarded changes",
+      "that the artifact's own examples are an independent spec -- 0 discriminating, they move with the code",
+      "that parameters must hold knowledge to reach capability -- knowledge is instant, weights are structure"
+    ],
+    "true": [
+      "one execution plus a sufficiency verdict settles an action where the survivors agree",
+      "instant learning of a new environment is a real cost law (29 trials, 25.78-request crossover)",
+      "an agent can be built with no knowledge in its parameters and no model in the loop",
+      "exact verification is cheap and is the reason coding compounds where creative work does not",
+      "a domain-blind constructor CAN turn a real behaviour change into a pin when the change is visible on an input the artifact already contains (proven end to end in the test suite)"
+    ]
+  }
+}
