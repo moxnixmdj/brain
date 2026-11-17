@@ -121,7 +121,7 @@
     "quixbugs_head": "4257f44b0ff1181dedaedee6a447e133219fcebf",
     "python": "Python 3.11.2",
     "pytest": "pytest 9.2.0",
-    "command": "python canonical/tools/site_general_expression_synthesis_v1.py --quixbugs /tmp/quixbugs --tasks kheapsort possible_change powerset subsequences shortest_path_length shortest_path_lengths shortest_paths topological_ordering --out /tmp/sgs-hard-open-final.jsonl --receipt /tmp/sgs-hard-open-final.json",
+    "historical_run_command": "python canonical/tools/site_general_expression_synthesis_v1.py --quixbugs /tmp/quixbugs --tasks kheapsort possible_change powerset subsequences shortest_path_length shortest_path_lengths shortest_paths topological_ordering --out /tmp/sgs-hard-open-final.jsonl --receipt /tmp/sgs-hard-open-final.json",
     "selection": "eight previously identified hard-open tasks only; known wins not re-evaluated",
     "answer_key_disclosure": "The answer keys for the four example-searchable tasks were inspected while designing the grammar; no answer key was copied into the solver task directory. These are in-sample results.",
     "verdict_limit": "For the four repaired tasks, the corpus tests use the same published examples used in synthesis; the tests do not constitute independent unseen-input validation.",

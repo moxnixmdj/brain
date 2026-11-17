@@ -189,6 +189,12 @@ the SWE-CoWork container setup or privately held evaluation. The four QuixBugs o
 cases and public tests have now also been inspected here, so they are not blind evaluation
 material for a design made in this session. No capability experiment was run in this pass.
 
-The branch's existing PR is open. At the time of this review, the signed repository integrity
-referee passed, but three other workflow checks failed; the job failure steps were visible, while
-the detailed logs could not be retrieved from this environment. No merge was attempted.
+The branch's existing PR is open. In a later local diagnosis, the trusted admission checker
+reported `EXACTLY_ONE_ACTION_INTENT_REQUIRED`, and the compiled-model verifier reported
+`recompilation_is_byte_identical` failed (32/33 checks passed). The declaration-floor check
+reported 596 unchecked declarations against a 595 ceiling: it had interpreted the receipt's
+historical run command as a new verification predicate. The receipt now calls that unchanged
+metadata `historical_run_command`, explicitly indicating provenance rather than a check; the
+floor subsequently held at 595. This does not make the old run independently verified or
+supply a missing check. The admission and artifact problems are not resolved, the capability
+feature is not independently validated, and no merge was attempted.

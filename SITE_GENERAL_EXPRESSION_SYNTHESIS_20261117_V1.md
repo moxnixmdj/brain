@@ -19,7 +19,9 @@ On QuixBugs commit `4257f44b0ff1181dedaedee6a447e133219fcebf`, with Python and p
 virtual environment, the eight previously identified hard-open tasks were evaluated. Previously
 known wins were not re-evaluated. The machine-readable producer receipt, including the command,
 interpreter version, candidate counts, output hashes and pytest results, is
-`canonical/verification/SITE_GENERAL_EXPRESSION_SYNTHESIS_20261117_V1.json`.
+`canonical/verification/SITE_GENERAL_EXPRESSION_SYNTHESIS_20261117_V1.json`. Its
+`historical_run_command` is provenance for a past producer run, not a declared verification
+predicate; renaming this metadata field did not change the historical results.
 
 | Task | Outcome | Chosen site | Corpus pytest |
 |---|---|---|---|
