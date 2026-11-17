@@ -1523,7 +1523,40 @@ def _discover_impl(gap: str, budget: int = 120, seed: int = 11,
         if _p not in progs:
             progs.append(_p)
     is_goal = lambda snap: target in str(snap)
-    gkey = "goal"
+    # WHAT THE MEMORY IS A MEMORY OF.
+    #
+    # This was the constant string "goal", so every goal this route ever closed
+    # was remembered under one identical key and every recall matched it.  The
+    # fingerprint deliberately excludes the target -- that is right, and the
+    # comment on `fingerprint_key` explains why -- so the goal had no identity
+    # anywhere in the memory key, and "compress input.txt into out.gz" and
+    # "hash input.txt into out.sha256" were the same memory.
+    #
+    # Measured 2026-11-16 by asking this function for thirteen unrelated goals
+    # and reading back the store it wrote.  Twelve distinct goals produced
+    # twelve rows all keyed "goal", each recording reached=True, and the plans
+    # were whatever single program happened to touch the target first:
+    #
+    #   goal -> run_iconv                  (an encoding converter)
+    #   goal -> run_gp-display-src         (a Ghostscript source dumper)
+    #   goal -> run_x86_64-linux-gnu-cpp   (the C preprocessor)
+    #   goal -> run_unexpand               (a whitespace tool)
+    #   goal -> run_bzip2                  (this one was a real compression)
+    #
+    # A goal that reached the target with a wrong program is still a wrong
+    # answer, and it was written to disk as a success.  The route already
+    # parses what the goal asks for -- `target` is the file it must produce and
+    # `suffix` is the format it must be in -- so the goal's identity is those
+    # two facts.  It costs nothing to key on them: both are already computed.
+    #
+    # The target alone is not enough.  'out.gz' and 'out.sha256' differ, but a
+    # goal naming no extension ('... into out') would collide with every other
+    # extensionless target, so the requested format is carried explicitly.
+    # The words of the goal are NOT used: two different sentences asking for
+    # the same file in the same format are the same job, and keying on prose
+    # would make every paraphrase a cache miss -- the exact cost that
+    # `fingerprint_key` was changed to avoid.
+    gkey = "effect|target=%s|suffix=%s" % (target, suffix or "")
 
     _fingerprint: dict[str, Any] | None = None
 
