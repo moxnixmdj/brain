@@ -141,7 +141,7 @@
    "a larger budget as the fix",
    "a stronger prior as the fix"
   ],
-  "expected_parent_level_state_change": "Reach is bounded by what the system may put forward, not by how hard it searches.",
+  "expected_parent_level_state_change": "Work is aimed at what the system is allowed to PUT FORWARD, not at budget, search order or prior strength: four arms including a page-local oracle all spent their whole budget and failed, so the constraint is the candidate set itself.",
   "iteration_limit": 1,
   "obs_blocker": {
    "delete_bypass_substitute_options": [
@@ -405,7 +405,7 @@
    "SYNTHESIZE_NEW_PRIMITIVE"
   ],
   "selected_surviving_route": "MAKE_THE_CANDIDATE_GENERATOR_READ_THE_ARITHMETIC_THE_PAGE_SPELLS_INSTEAD_OF_ONLY_COPYING_TEXT_BECAUSE_FOUR_ARMS_INCLUDING_AN_ORACLE_ALL_SPENT_1200_ACTIONS_AND_FAILED",
-  "stop_condition": "Paired comparison in full, decoy control reported, unfixed pages named with numbers, zero credit claimed.",
+  "stop_condition": "The paired comparison is reported in full, the decoy control is reported, the pages the change does NOT fix are named with their numbers, and no capability, family, terminal or weight credit is claimed.",
   "why_selected_route_is_fastest_sufficient": "One appended candidate, justified by the page's own text, turns two page-instances from unsolvable to 20 actions and moves no other page at all."
  },
  "route_id": "MAKE_THE_CANDIDATE_GENERATOR_READ_THE_ARITHMETIC_THE_PAGE_SPELLS_INSTEAD_OF_ONLY_COPYING_TEXT_BECAUSE_FOUR_ARMS_INCLUDING_AN_ORACLE_ALL_SPENT_1200_ACTIONS_AND_FAILED",
