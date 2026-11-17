@@ -1,0 +1,99 @@
+{
+ "action_id": "TWO_HALVES_TALKED_DIFFERENTLY_WAS_WRONG__THE_ID_WAS_UNBOUND_20261116_V1",
+ "action_intent_id": "TWO_HALVES_TALKED_DIFFERENTLY_WAS_WRONG__THE_ID_WAS_UNBOUND_20261116_V1",
+ "action_kind": "DELETE_A_REBUILT_MODULE_AND_BIND_A_MISSING_NAME",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "incremental_spend_usd": 0,
+  "independent_verification_completed": false,
+  "independent_verification_note": "Producer-run sandbox only. Independent verification still open.",
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+  "progress_evidence_paths": [
+   "canonical/runtime/demonstration_version_space_v1.py",
+   "canonical/runtime/what_one_experience_buys_v1.py",
+   "canonical/tests/test_what_one_experience_buys_v1.py",
+   "canonical/verification/THE_TREE_ALREADY_SPOKE_ONE_LANGUAGE_20261116_V1.json"
+  ],
+  "route_class": "DELETE",
+  "scope_complete_discharge": false,
+  "terminal_achieved": false
+ },
+ "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
+ "blocker_lease_key": "2026-11-16-id-binding::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_LEARNER_COULD_NOT_BIND_AN_ELEMENT_ID_THE_INSTRUCTION_NAMES",
+ "canonical_base_commit": "6ace93187227a167fc929912044c0c47be30951b",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "THE_LEARNER_COULD_NOT_BIND_AN_ELEMENT_ID_THE_INSTRUCTION_NAMES_SO_A_PAGE_WHOSE_ONLY_DISTINGUISHING_PROPERTY_IS_THAT_ID_WAS_UNLEARNABLE",
+ "date": "2026-11-16",
+ "expected_parent_change": "An element whose only distinguishing property is an id the instruction names is now nameable, so grid-coordinate -- previously 0.05 -- is solved 1.00 over 20 fresh instances. The second description language I proposed is deleted as a rebuild of shipped code.",
+ "expected_parent_frontier_change": "Work goes to the binding between what an instruction names and what an element carries, not to inventing vocabularies. A one-word omission cost a whole page; the general question is which other named properties are still unbound.",
+ "explicit_user_authorization": [
+  "Instant learning + instant learning in new arbitrary environments -- we solved those perfectly. Doesn't that mean we can solve any computer use?",
+  "Give the model the most advanced actions, let it do a thing once, it learns it permanently, and every computer task plus the most advanced software engineering is solved. Am I right or wrong?",
+  "You must think from first principles for everything",
+  "You should kill all the bad and dumb ideas before you waste time implementing them.",
+  "NEVER BUILD BEFORE REASRCHING EXHASIATAION IS HAPPENED",
+  "maximize your web use",
+  "all the tests are not on synthetic data but are on the hardest open tests",
+  "Testing on bugs we already know work is not progress -- that is self-congratulation.",
+  "YOU SURE THIS THE SMARTEST APPROACH?",
+  "Work in branch, merge only when complete (fastest)",
+  "Merge once, not 10 times."
+ ],
+ "falsification_condition": "A page where binding a slot test to id changes an outcome for the worse, or grid-coordinate failing to reach 1.00 when replayed on the same seeds.",
+ "files": {},
+ "generic_repair_from_single_probe": false,
+ "governance_change": false,
+ "highest_leverage_now": true,
+ "honest_limits": [
+  "AUTHORITY NONE.",
+  "The A/B covers tasks the id rule can reach, not the population.",
+  "The wider rerun scored 68 of 78 tasks and its apparent click-pie regression was run variance."
+ ],
+ "incremental_spend_usd": 0,
+ "intentional_route_race": false,
+ "measurement": {
+  "controlled_ab": {
+   "after": 0.29,
+   "before": 0.2233,
+   "better": 2,
+   "delta": 0.0667,
+   "tasks": 15,
+   "unchanged": 13,
+   "worse": 0
+  }
+ },
+ "next_probe": "Enumerate every property an instruction can name and check which ones tests_true_of binds. id was one; find the rest the same way rather than by inventing a language.",
+ "probe_specific": true,
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+ "status": "PROPOSED__ZERO_CREDIT__NO_TERMINAL_CLAIM",
+ "terminal_achieved": false,
+ "terminal_credit_delta": 0,
+ "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_CAPABILITIES",
+ "tests": {
+  "count": 165,
+  "result": "165 passed, 27 skipped"
+ },
+ "the_wrong_answer_this_replaces": "WRITE_A_SHARED_DESCRIPTION_LANGUAGE__THE_TREE_ALREADY_HAD_ONE_AND_THE_GAP_WAS_ONE_UNBOUND_FIELD",
+ "weakens_existing_guard": false
+}
