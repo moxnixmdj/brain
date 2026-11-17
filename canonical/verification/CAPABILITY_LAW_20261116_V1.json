@@ -81,6 +81,20 @@
       "receipt": "canonical/verification/PREDICTIVE_CONTRACT_20261116_V1.json",
       "why": "a consequence differential only exists after acting and only on a seen binding. A contract acquired from one execution is the prospective form of the same check: the frame -- which paths the action may touch -- carries most of it, a declared or derived relation carries the bytes, and what remains is a located hole in the vocabulary"
     },
+    "reach": {
+      "coverage_while_streaming": 0.1671,
+      "coverage_with_every_other_task_as_experience": 0.1869,
+      "grammar_can_delete_a_node": false,
+      "grammar_can_insert_a_node": false,
+      "law": "P(correct action) = REACH x SEARCH x VERIFICATION",
+      "never_rebuilt_by_any_other_task": 0.7521,
+      "real_fix_pieces": 2178,
+      "real_tasks": 500,
+      "receipt": "canonical/verification/REACH_OF_THE_GRAMMAR_20261116_V1.json",
+      "repair_in_grammar": 0.74,
+      "repair_out_of_grammar": 0.32,
+      "why": "the ceiling is REACH, not experience and not search. 75.2% of 2178 real fix pieces are rebuilt by no operator any other task's fixes ever produced, and with every other task as experience the coverage is 18.7% -- flat across experience quartiles. On 100 real HumanEvalFix bugs the same split appears from the other side: defect types whose edit shape the grammar can name repair at 74%, the rest at 32%. So one experience per action does not solve computer use; it changes the currency from requests to environments"
+    },
     "receipt": "canonical/verification/COMPUTER_USE_CHECK_DENSITY_20261116_V1.json",
     "repair": {
       "chains": 3,
@@ -107,7 +121,32 @@
       "why": "the intent is the recorded consequence, so any difference is an error: with a full state observation every wrong action is caught, and a wrong action that leaves the state identical did not miss the goal"
     },
     "status": "MEASURED_ON_A_SHELL_ENVIRONMENT",
-    "what_remains_unmeasured": "a GUI whose only observable is pixels or DOM -- a projection, not the state; a fact carried by remote state rather than by a path; the outer edge of repair (the candidate set is the state the step can see, and the probe is a content change, so a dependency on a file outside the sandbox, a lock, or a bare existence is not measured by it); and the outer edge of sufficiency itself -- a verdict is relative to a stated grammar and to the candidate states generated for it, so a behaviour outside the grammar is refused rather than learned, and two readings that differ only on a state nobody generated remain conflated",
+    "vocabulary_growth": {
+      "actions": 5,
+      "diagnoses_correct": 5,
+      "growths": {
+        "already_explained_copy": null,
+        "composition_not_in_the_flat_grammar": "sort_unique_then_reverse",
+        "invisible_action_touch": "DERIVED_PREDICATE(mtime_changed)",
+        "nondeterministic_permutation": "PERMUTATION_OF_INPUT(payload.dat)",
+        "unrepresentable_action_mkdir": null
+      },
+      "outcomes_realised": [
+        "BEYOND_THIS_OBSERVABLE",
+        "EXPLAINED",
+        "INVISIBLE_IN_THE_CURRENT_VIEW",
+        "NOT_A_FUNCTION_OF_THE_STATE",
+        "OUTSIDE_THE_FLAT_GRAMMAR"
+      ],
+      "raw_mtime_field_fires_of": [
+        5,
+        6
+      ],
+      "receipt": "canonical/verification/VOCABULARY_GROWTH_20261116_V1.json",
+      "transfer_holds": 5,
+      "why": "a refusal is not an answer, it is the only place a vocabulary can be grown honestly: the failure says which of five things is missing, and the growth is kept only if it is necessary (the flat grammar cannot do it), stable (a repeat reproduces it), transferable (a second action of the same kind is identified by it) and narrow (the distinctions it collapses are printed). The boundary is a missing sensor, not a missing word: `mkdir` has a real effect on disk that every view in the family is blind to, and no amount of experience reaches it"
+    },
+    "what_remains_unmeasured": "a GUI whose only observable is pixels or DOM -- a projection, not the state; a fact carried by remote state rather than by a path; the outer edge of repair (the candidate set is the state the step can see, and the probe is a content change, so a dependency on a file outside the sandbox, a lock, or a bare existence is not measured by it); and the outer edge of sufficiency itself -- a verdict is relative to a stated grammar and to the candidate states generated for it, so a behaviour outside the grammar is refused rather than learned, and two readings that differ only on a state nobody generated remain conflated); and the outer edge of growth -- the vocabulary is searched inside a stated family of derived views, relations and one-step compositions, so a primitive that needs a sensor the agent does not have is refused rather than invented, and a two-step composition is not reached",
     "what_was_run": "34 mechanically derived wrong actions over 9 real shell transformations, real programs on a real disk, real reset"
   },
   "incremental_spend_usd": 0,
@@ -180,6 +219,10 @@
       "path": "canonical/verification/DISTINGUISHING_PROJECTION_20261116_V1.json",
       "sha256": "feaec76f9531b79d04d0cbc974129c86f6b925d9a1bc1719c149443212f593cb"
     },
+    "reach": {
+      "path": "canonical/verification/REACH_OF_THE_GRAMMAR_20261116_V1.json",
+      "sha256": "5506cc16f62afdd5f568aea65bf74fa0104ac2da1d92bcea62f9aedf870d3ce3"
+    },
     "repair": {
       "path": "canonical/verification/CAUSAL_DEPENDENCY_REPAIR_20261116_V1.json",
       "sha256": "5642dd7ff525dfe7391d10f738fcdff36998bf9c299a479b0e3a6fbcb295a348"
@@ -187,6 +230,10 @@
     "value": {
       "path": "canonical/verification/SYSTEMATIC_EDIT_DERIVATION_20261116_V1.json",
       "sha256": "a7445aad53cb9ff2b3a2daf20aa09e623fa68716a43e88cacdbb43faad92b738"
+    },
+    "vocabulary": {
+      "path": "canonical/verification/VOCABULARY_GROWTH_20261116_V1.json",
+      "sha256": "04eef4e6fe92d7188afb77972b1a8e36e57443da6f65fabdcb26c317dc4d6404"
     }
   },
   "scenarios": [

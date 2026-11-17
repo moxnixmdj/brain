@@ -35,7 +35,7 @@ def test_the_law_is_reproducible_and_pins_its_receipts(report: dict) -> None:
     assert live["leverage"] == report["leverage"]
     assert set(report["receipts"]) == {"determinacy", "value", "memory", "observation", "permanence",
                                        "computer", "projection", "contract", "facts", "repair",
-                                       "demonstration"}
+                                       "demonstration", "vocabulary", "reach"}
 
 
 def test_the_terms_are_the_published_numbers(report: dict) -> None:
@@ -117,10 +117,31 @@ def test_computer_use_carries_a_receipt_instead_of_an_assumption(report: dict) -
     assert shown["task_scoped_not_permanent"] == ["sort_versus_sort_unique", "sort_unique_versus_sort"]
     assert shown["one_shot_pick_wrong_outside_the_task"] == 5
     assert shown["repeating_the_same_execution_ever_helped"] == 0
+    grew = cell["vocabulary_growth"]
+    assert grew["actions"] == 5 and grew["diagnoses_correct"] == 5 and grew["transfer_holds"] == 5
+    assert grew["outcomes_realised"] == ["BEYOND_THIS_OBSERVABLE", "EXPLAINED",
+                                         "INVISIBLE_IN_THE_CURRENT_VIEW",
+                                         "NOT_A_FUNCTION_OF_THE_STATE", "OUTSIDE_THE_FLAT_GRAMMAR"]
+    assert grew["growths"]["nondeterministic_permutation"] == "PERMUTATION_OF_INPUT(payload.dat)"
+    assert grew["growths"]["invisible_action_touch"] == "DERIVED_PREDICATE(mtime_changed)"
+    assert grew["growths"]["already_explained_copy"] is None
+    # the refusal is the point: a missing sensor is never answered with a new word
+    assert grew["growths"]["unrepresentable_action_mkdir"] is None
+    assert grew["raw_mtime_field_fires_of"][1] >= grew["raw_mtime_field_fires_of"][0]
+    reach = cell["reach"]
+    assert reach["real_tasks"] == 500 and reach["real_fix_pieces"] == 2178
+    assert reach["coverage_with_every_other_task_as_experience"] == pytest.approx(0.1869, abs=0.001)
+    assert reach["never_rebuilt_by_any_other_task"] == pytest.approx(0.752, abs=0.001)
+    assert reach["repair_in_grammar"] == pytest.approx(0.74, abs=0.005)
+    assert reach["repair_out_of_grammar"] == pytest.approx(0.32, abs=0.005)
+    # the structural shapes the grammar lacks are the shapes real fixes need
+    assert reach["grammar_can_insert_a_node"] is False and reach["grammar_can_delete_a_node"] is False
+    assert reach["law"] == "P(correct action) = REACH x SEARCH x VERIFICATION"
     # the gap the previous receipt named is closed, and the new limit is stated where the old one was
     assert "does not repair it" not in cell["what_remains_unmeasured"]
     assert "candidate set" in cell["what_remains_unmeasured"]
     assert "relative to a stated grammar" in cell["what_remains_unmeasured"]
+    assert "refused rather than invented" in cell["what_remains_unmeasured"]
 
 
 def test_a_missing_receipt_raises_instead_of_defaulting(tmp_path, monkeypatch) -> None:
