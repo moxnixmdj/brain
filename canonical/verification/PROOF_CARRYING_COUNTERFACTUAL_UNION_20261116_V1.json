@@ -1,0 +1,5053 @@
+{
+  "audit_pass": true,
+  "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+  "browser_zero_experience_census": {
+    "measured_effect": {
+      "experience": "none",
+      "external_model": "none",
+      "instrument": "canonical/tools/miniwob_contract_arm_arm_v1.py",
+      "pages_gained": [
+        "choose-date",
+        "choose-date-easy",
+        "choose-date-medium",
+        "choose-date-nodelay",
+        "click-collapsible-2",
+        "click-collapsible-2-nodelay",
+        "click-tab-2",
+        "click-tab-2-hard",
+        "click-tab-2-medium",
+        "drag-box",
+        "drag-cube",
+        "drag-shapes",
+        "use-autocomplete",
+        "use-autocomplete-nodelay"
+      ],
+      "parameters": 0,
+      "refusal_census_of_the_remaining_64": {
+        "EXECUTED_AND_LOST": 17,
+        "REFUSED__CONTINUOUS_NO_END_STATE": 3,
+        "REFUSED__FUZZY_NO_DECIDABLE_PREDICATE": 1,
+        "REFUSED__HALF_UNDERSTOOD": 8,
+        "REFUSED__LABEL_NOT_ON_THE_PAGE": 4,
+        "REFUSED__MULTI_APP_STATE_OUTSIDE_OBSERVATION": 1,
+        "REFUSED__NO_CLAUSE_UNDERSTOOD": 10,
+        "REFUSED__SPATIAL_NEEDS_GEOMETRY": 5,
+        "REFUSED__STYLE_NOT_IN_OBSERVATION": 3,
+        "REFUSED__THE_ARM_CANNOT_ACT": 6,
+        "REFUSED__THE_DESCRIPTION_NEEDS_A_DIMENSION_THE_OBSERVATION_LACKS": 3,
+        "REFUSED__THE_RECORD_IS_NOT_IN_THE_OBSERVATION_YET_BUT_IS_REACHABLE": 1,
+        "REFUSED__VISUAL_QUANTITY_NEEDS_PIXELS": 2
+      },
+      "regressions": [],
+      "replication": {
+        "seed_1061": {
+          "after": 56,
+          "before": 47,
+          "delta": 9
+        },
+        "seed_1062": {
+          "after": 57,
+          "before": 49,
+          "delta": 8
+        }
+      },
+      "reward": "read only after the arm stops, and only to record whether it was right",
+      "search": "none",
+      "seed_1060": {
+        "after": 66,
+        "before": 52,
+        "delta": 14,
+        "of_all": 0.5077,
+        "refused": 24
+      },
+      "stopping_state_of_the_78_unsolved_at_baseline": {
+        "BUDGET": 0,
+        "THE_ARM_HAD_NOTHING_LEFT_TO_SAY": 59,
+        "THE_PAGE_FAILED_IT": 19
+      },
+      "substrate": "chromium, Farama-Foundation/miniwob-plusplus, 130 pages, 30-action budget"
+    },
+    "receipt": "canonical/verification/THE_SENTENCE_DID_NOT_HAVE_TO_SAY_SUBMIT_20261116_V1.json",
+    "status": "IMPLIED_ENDING_AND_PICKER_ARE_CONTRACT_NOT_NEW_WEIGHTS"
+  },
+  "composed_run": {
+    "by_arm": {
+      "RECORDED_LEARNED_REPAIR": [
+        "hanoi",
+        "knapsack",
+        "levenshtein",
+        "longest_common_subsequence",
+        "minimum_spanning_tree",
+        "to_base"
+      ],
+      "REWRITE_FAMILIES": [
+        "bitcount",
+        "find_first_in_sorted",
+        "find_in_sorted",
+        "gcd",
+        "get_factors",
+        "kth",
+        "lcs_length",
+        "lis",
+        "max_sublist_sum",
+        "mergesort",
+        "next_palindrome",
+        "next_permutation",
+        "pascal",
+        "rpn_eval",
+        "sieve"
+      ],
+      "SYNTHESIZED_FROM_THE_FAILURE": [
+        "bucketsort",
+        "is_valid_parenthesization",
+        "quicksort"
+      ]
+    },
+    "judge": "the corpus's own pytest on a fresh copy with the answer key absent",
+    "receipt": "canonical/verification/COMPOSED_REPAIR_ONE_RUN_20261116_V1.json",
+    "repaired": 24,
+    "seconds": 387.8,
+    "stages": {
+      "NOT_REPAIRED__NO_IMPROVING_CANDIDATE": 6,
+      "NOT_REPAIRED__PARTIAL_EXAMPLES_ONLY": 2,
+      "NO_EXAMPLES": 9,
+      "REPAIRED": 24
+    },
+    "status": "MEASURED_ONE_RUN_NOT_CAPABILITY_GAIN_OVER_THE_PYTEST_REJUDGED_UNION",
+    "tasks": 41
+  },
+  "corpus": {
+    "real_published_test_files": 40,
+    "source_of_task_names": "python_testcases/test_*.py in a fresh clone; no invented task",
+    "task_names": [
+      "bitcount",
+      "breadth_first_search",
+      "bucketsort",
+      "depth_first_search",
+      "detect_cycle",
+      "find_first_in_sorted",
+      "find_in_sorted",
+      "flatten",
+      "gcd",
+      "get_factors",
+      "hanoi",
+      "is_valid_parenthesization",
+      "kheapsort",
+      "knapsack",
+      "kth",
+      "lcs_length",
+      "levenshtein",
+      "lis",
+      "longest_common_subsequence",
+      "max_sublist_sum",
+      "mergesort",
+      "minimum_spanning_tree",
+      "next_palindrome",
+      "next_permutation",
+      "pascal",
+      "possible_change",
+      "powerset",
+      "quicksort",
+      "reverse_linked_list",
+      "rpn_eval",
+      "shortest_path_length",
+      "shortest_path_lengths",
+      "shortest_paths",
+      "shunting_yard",
+      "sieve",
+      "sqrt",
+      "subsequences",
+      "to_base",
+      "topological_ordering",
+      "wrap"
+    ]
+  },
+  "evidence_missing": [],
+  "evidence_read_by_effect": [
+    "THE_EDIT_SPACE_IS_THE_PROGRAM_NOT_A_LIST_20261116_V1.md",
+    "THE_HAND_WAS_NEVER_THE_BOTTLENECK_20261116_V1.md",
+    "THE_JUDGE_WAS_THE_MISSING_PART_20261116_V1.md",
+    "WHAT_ONE_DEMONSTRATION_REACHES_20261116_V1.md",
+    "ONE_DEMONSTRATION_LEAVES_TEN_BITS_20261116_V1.md",
+    "THE_SPACE_IS_ASSEMBLED_NOT_LISTED_20261116_V1.md",
+    "WHAT_ONE_DEMONSTRATION_IDENTIFIES_20261116_V1.md",
+    "WHERE_THE_OBSERVABLE_WAS_MISSING_20261116_V1.md",
+    "ONE_DEMONSTRATION_IS_NOT_IDENTIFICATION_20261116_V1.md",
+    "RERUN_THE_REPAIRS_NOT_THE_CLAIM_20261116_V1.md",
+    "canonical/action_intents/THE_ROW_WAS_ALWAYS_THERE_20261116_V1.json",
+    "canonical/verification/RERUN_THE_LEARNED_ARMS_REPAIRS_20261116_V1.json",
+    "canonical/verification/THE_ROW_WAS_ALWAYS_THERE_20261116_V1.json",
+    "canonical/verification/IDENTIFICATION_COST_IN_A_REAL_SPACE_20261116_V1.json",
+    "canonical/verification/ONE_DEMONSTRATION_IS_NOT_IDENTIFICATION_MEASURE_20261116_V1.json",
+    "canonical/verification/ONE_DEMONSTRATION_IDENTIFIES_20261116_V1.json",
+    "canonical/verification/ONE_DEMONSTRATION_REACH_20261116_V1.json",
+    "canonical/verification/PROJECT_BRAIN_INSTRUCTION_POLICY_VERIFICATION_20261116_V1.json",
+    "canonical/verification/INSTRUCTION_CONTRACT_20261116_V1.json",
+    "canonical/verification/OBSERVABLE_DESCRIPTOR_20261116_V1.json",
+    "canonical/verification/SYNTHESIS_FROM_THE_FAILURE_20261116_V1.json",
+    "canonical/verification/WHERE_THE_OBSERVABLE_WAS_MISSING_20261116_V1.json",
+    "canonical/verification/QUIXBUGS_EDIT_KIND_TRANSFER_20261112_V1.json",
+    "canonical/verification/COMPARISONS_CLOSE_THE_LAST_MILE_20261116_V1.json",
+    "ONE_RUN_THREE_VOCABULARIES_ONE_JUDGE_20261116_V1.md",
+    "THE_INVARIANCE_IS_THE_REACH_20261116_V1.md",
+    "THE_LEARNER_DECIDES_PAST_THE_ENUMERATION_WALL_20261116_V1.md",
+    "THE_PRICE_OF_A_NEW_ENVIRONMENT_20261116_V1.md",
+    "canonical/action_intents/ONE_RUN_THREE_VOCABULARIES_ONE_JUDGE_20261116_V1.json",
+    "canonical/action_intents/THE_INVARIANCE_IS_THE_REACH_20261116_V1.json",
+    "canonical/action_intents/DECIDE_PAST_THE_ENUMERATION_WALL_20261116_V1.json",
+    "canonical/action_intents/THE_SENTENCE_DID_NOT_HAVE_TO_SAY_SUBMIT_20261116_V1.json",
+    "canonical/action_intents/THE_PRICE_OF_A_NEW_ENVIRONMENT_20261116_V1.json",
+    "canonical/verification/COMPOSED_REPAIR_ONE_RUN_20261116_V1.json",
+    "canonical/verification/ARM_LEARNED_IN_ONE_RUN_20261116_V1.json",
+    "canonical/verification/WHAT_ONE_VERIFIED_REPAIR_TRAVELS_20261116_V1.json",
+    "canonical/verification/THE_SENTENCE_DID_NOT_HAVE_TO_SAY_SUBMIT_20261116_V1.json",
+    "canonical/verification/INSTANT_LEARNING_IN_A_NEW_ENVIRONMENT_20261116_V1.json",
+    "canonical/verification/INSTANT_LEARNING_SHUFFLED_CONTROL_20261116_V1.json",
+    "THE_MISSING_PART_IS_THE_OPERAND_NOT_THE_EXPERIENCE_20261116_V1.md",
+    "WHY_LEARN_ONCE_REPLAY_FOREVER_FAILS_20261116_V1.md",
+    "canonical/action_intents/READ_FIRST_AND_LEARN_ONLY_FOR_A_NAMED_GAP_20261116_V1.json",
+    "canonical/action_intents/THE_MISSING_PART_IS_THE_OPERAND_20261116_V1.json",
+    "canonical/action_intents/WHY_LEARN_ONCE_REPLAY_FOREVER_FAILS_20261116_V1.json",
+    "canonical/verification/ACTION_REPLAY_UNDER_CHANGE_20261116_V1.json",
+    "canonical/verification/DERIVED_VALUE_FULL_SUITE_20261116_V1.json",
+    "canonical/verification/LEARN_OR_READ_BOARD_20261116_V1.json",
+    "canonical/verification/READ_FIRST_AND_LEARN_ONLY_FOR_A_NAMED_GAP_20261116_V1.json",
+    "THERE_IS_NO_SINGLE_BOTTLENECK_AND_THE_TRIGGER_WAS_THE_REASON_20261116_V1.md",
+    "ONE_TRY_LEARNS_A_DOMAIN_NOT_THE_ENVIRONMENT_20261116_V1.md",
+    "canonical/action_intents/THE_REMAINDER_IS_A_LONG_TAIL_20261116_V1.json",
+    "canonical/action_intents/ONE_TRY_LEARNS_A_DOMAIN_NOT_THE_ENVIRONMENT_20261116_V1.json",
+    "canonical/verification/DECLARED_TRIGGER_AND_OPERAND_TAXONOMY_20261116_V1.json",
+    "canonical/verification/ONE_DEMONSTRATION_BASIN_20261116_V1.json",
+    "THE_GUI_HAS_NO_INVARIANCE_TO_FIND_20261116_V1.md",
+    "canonical/action_intents/THE_GUI_HAS_NO_INVARIANCE_TO_FIND_20261116_V1.json",
+    "canonical/verification/GUI_INVARIANCE_IS_VACUOUS_OR_ABSENT_20261116_V1.json",
+    "COMPOSE_ONLY_WHAT_IS_PROVED_20261116_V1.md",
+    "COMPOSE_ONLY_WHAT_IS_PROVED_20261116_V1.json",
+    "YOU_ARE_WRONG_ABOUT_ONCE_AND_IT_IS_ARITHMETIC_20261116_V1.md",
+    "ONE_DEMONSTRATION_AMORTISES_A_SIXTH_OF_REAL_WORK_20261116_V1.md",
+    "canonical/action_intents/YOU_ARE_WRONG_ABOUT_ONCE_AND_IT_IS_ARITHMETIC_20261116_V1.json",
+    "canonical/action_intents/ONE_DEMONSTRATION_AMORTISES_A_SIXTH_OF_REAL_WORK_20261116_V1.json",
+    "canonical/verification/THE_FOUR_LEVERS_OF_LEARNING_FROM_EXPERIENCE_20261116_V1.json",
+    "canonical/verification/SYSTEMATIC_EDIT_SUPPLY_20261116_V1.json",
+    "canonical/tools/the_four_levers_of_learning_from_experience_v1.py",
+    "canonical/swe_kernel/systematic_edit_supply_v1.py",
+    "canonical/tests/test_the_four_levers_of_learning_from_experience_v1.py",
+    "canonical/tests/test_systematic_edit_supply_v1.py",
+    "canonical/tests/fixtures/systematic_edit_corpus_v1.jsonl",
+    "COMPOSITION_CLOSES_ONE_AND_PROVES_TWO_20261116_V1.md",
+    "THE_BOTTLENECK_IS_THE_INDEX_NOT_THE_LEARNING_20261116_V1.md",
+    "canonical/action_intents/COMPOSITION_CLOSES_ONE_AND_PROVES_TWO_20261116_V1.json",
+    "canonical/action_intents/SYSTEMATIC_EDIT_VALUE_LAYER_DERIVATION_20261116_V1.json",
+    "canonical/action_intents/THE_BOTTLENECK_IS_THE_INDEX_NOT_THE_LEARNING_20261116_V1.json",
+    "canonical/verification/COMPOSE_MEASURED_EFFECTS_20261116_V1.json",
+    "canonical/verification/SYSTEMATIC_EDIT_DERIVATION_20261116_V1.json",
+    "canonical/verification/THE_INDEX_IS_THE_BOTTLENECK_20261116_V1.json",
+    "canonical/tools/compose_measured_effects_v1.py",
+    "canonical/tools/the_index_is_the_bottleneck_v1.py",
+    "canonical/tests/test_compose_measured_effects_v1.py",
+    "canonical/tests/test_the_index_is_the_bottleneck_v1.py",
+    "canonical/action_intents/AN_UNBOUND_NAME_WAS_THE_MISSING_LINK_20261116_V1.json",
+    "canonical/runtime/what_one_experience_buys_v1.py",
+    "canonical/runtime/demonstration_version_space_v1.py",
+    "canonical/tests/test_what_one_experience_buys_v1.py",
+    "canonical/tests/test_miniwob_one_success_generalisation_v1.py",
+    "canonical/verification/THE_TREE_ALREADY_SPOKE_ONE_LANGUAGE_20261116_V1.json"
+  ],
+  "exact_decision_past_enumeration_wall": {
+    "measured_effect": {
+      "authority": "NONE__PRODUCER_RUN_SANDBOX",
+      "benchmark_credit_claimed": false,
+      "brute_force_seconds": 1.37,
+      "capability_credit_claimed": false,
+      "exhaustive_ie_families": 5058,
+      "inclusion_extraction_seconds": 0.0,
+      "new_tests": "canonical/tests/test_the_learner_decides_past_the_enumeration_wall_v1.py",
+      "protocol": "Inclusion-extraction over the failure rows of the pinned kind-closed corpus; exhaustive equality vs brute force on every universe of size <= 4; 120 seeded learn-vs-enumeration trials at |A| 13..16; 120 forced selector-equivalence cases; consumer batteries 272+82+91; full-suite set-join against a pristine run of the same 357 failing files.",
+      "question": "Can the survivor space the wall round measured at 2^23 be decided exactly without enumerating it?",
+      "raw_survivors_pinned_corpus": 8388600,
+      "receipt": "THE_LEARNER_DECIDES_PAST_THE_ENUMERATION_WALL_20261116_V1.md",
+      "seeded_learn_trials": 120,
+      "selector_equivalence_cases": 120
+    },
+    "receipt": "canonical/action_intents/DECIDE_PAST_THE_ENUMERATION_WALL_20261116_V1.json",
+    "status": "EXACT_INCLUSION_EXTRACTION_NOT_A_NEW_CAPABILITY"
+  },
+  "example_searchable_open_count": 8,
+  "example_searchable_open_tasks": [
+    "flatten",
+    "kheapsort",
+    "possible_change",
+    "powerset",
+    "shunting_yard",
+    "sqrt",
+    "subsequences",
+    "wrap"
+  ],
+  "four_levers_and_edit_supply": {
+    "arithmetic": {
+      "answer_variety_predicts_information": {
+        "points": 37,
+        "rank_agreements": 2,
+        "verdict": "NO"
+      },
+      "best_demonstration_point": {
+        "bits": 3.6293,
+        "distinct_answers": 5,
+        "fraction_of_space": 0.6534,
+        "x": 0
+      },
+      "bits_after_one": 3.8176,
+      "bits_before": 5.5546,
+      "bits_per_chosen_question": 1.9088,
+      "bits_per_further_demonstration": 1.0927,
+      "ceiling_binds": false,
+      "demonstration_ceiling_log2_Y": 7.4594,
+      "demos_needed_by_experience_alone": 3.49,
+      "distinct_functions": 47,
+      "invariance_group_order": 1.0,
+      "invariance_note": "the tree's hand-authored space has no spelling duplicates, so the alpha lever is empty there; any space enumerated by syntax has |G|>1",
+      "law": "bits_after = log2(|H|/|G|) - I(E) - sum I(q) - I(interface); ends at 0",
+      "queries_measured": 2.0,
+      "question_over_demonstration_ratio": 1.747,
+      "rerun_this_base": {
+        "boundary_probe": "7/10 CARRIED_MODEL as-is, 0/10 renamed",
+        "one_shot_probe": "14.1/47 survivors after one, 0/10 identified, 10/10 after 2.0 chosen queries"
+      },
+      "reused_not_rebuilt": [
+        "CANON_1_INSTANT_LEARNING_AUDIT_20261112",
+        "one_shot_identifiability_probe_20261112",
+        "instant_learning_boundary_probe_v1",
+        "what_a_success_teaches_20261112",
+        "repair_version_space_selection_v1",
+        "contrast_selection_v1",
+        "demonstration_version_space_v1"
+      ],
+      "space_entries": 47,
+      "state_name_arm": {
+        "as_is": {
+          "carried_model_survived": 7,
+          "warm_cheaper": 8,
+          "warm_dearer": 2
+        },
+        "renamed": {
+          "carried_model_survived": 0,
+          "warm_cheaper": 1,
+          "warm_dearer": 9
+        }
+      },
+      "worst_demonstration_point": {
+        "bits": 0.6035,
+        "distinct_answers": 36,
+        "x": 30
+      }
+    },
+    "law": "bits_after = log2(|H|/|G|) - I(E) - sum I(q) - I(interface); learning ends at 0. I(E) <= log2(|Y|) for ONE demonstration, whatever |H| is. The prior is the only term not billed per interaction.",
+    "levers": {
+      "answer_alphabet_over_pool": 176,
+      "bits_after_one": 3.817623257511431,
+      "bits_after_three": 1.632268215499513,
+      "bits_before": 5.554588851677638,
+      "bits_removed_by_each_further_demo": 1.092677521005959,
+      "bits_removed_by_one": 1.7369655941662066,
+      "collisions": [],
+      "demonstration_ceiling_bits": 7.459431618637297,
+      "distinct_functions": 47,
+      "invariance_group_order": 1.0,
+      "space_entries": 47,
+      "verified_by_rerun_20261116": {
+        "accuracy_after_one_then_ask": 1.0,
+        "accuracy_one_example_narrow_prior": 1.0,
+        "leader_accuracy_after_one": 0.1,
+        "leader_accuracy_after_three": 0.8,
+        "queries_to_settle_after_one": 2.0,
+        "survivors_after_one": 14.1,
+        "survivors_after_three": 3.1,
+        "targets_exact_after_one": 0,
+        "targets_exact_after_three": 5,
+        "targets_settled_after_one_then_ask": 10
+      }
+    },
+    "receipts": [
+      "canonical/verification/THE_FOUR_LEVERS_OF_LEARNING_FROM_EXPERIENCE_20261116_V1.json",
+      "canonical/verification/SYSTEMATIC_EDIT_SUPPLY_20261116_V1.json"
+    ],
+    "state_name_arm": {
+      "as_is": {
+        "carried_model_survived": 7,
+        "cases": 10,
+        "warm_cheaper": 8,
+        "warm_dearer": 2
+      },
+      "reading": "A carried transition model is a table keyed on state NAMES. A rename is an invariant transformation of the task and it destroys 7/10 of the wins. Under the law this is lever 1: the space was quotiented by the wrong group, so the model memorised a spelling. It is not a coverage failure and no amount of further experience repairs it, because every further experience is billed in the same spelling.",
+      "renamed": {
+        "carried_model_survived": 0,
+        "cases": 10,
+        "warm_cheaper": 1,
+        "warm_dearer": 9
+      },
+      "source": "canonical/tools/instant_learning_boundary_probe_v1.py"
+    },
+    "status": "ONCE_IS_ARITHMETIC_AND_REAL_WORK_SUPPLY_IS_ABOUT_ONE_SIXTH",
+    "supply": {
+      "arms": {
+        "by_size": {
+          "2": {
+            "determined": 105,
+            "lucky": 47,
+            "pairs": 197,
+            "wrong": 45
+          },
+          "3": {
+            "determined": 16,
+            "lucky": 0,
+            "pairs": 18,
+            "wrong": 2
+          },
+          "4": {
+            "determined": 9,
+            "lucky": 0,
+            "pairs": 13,
+            "wrong": 4
+          },
+          "5": {
+            "determined": 3,
+            "lucky": 0,
+            "pairs": 14,
+            "wrong": 11
+          },
+          "6": {
+            "determined": 1,
+            "lucky": 0,
+            "pairs": 3,
+            "wrong": 2
+          }
+        },
+        "determinacy": {
+          "forced_by_the_demonstration": 31,
+          "generalising_pairs": 142,
+          "lucky": 47,
+          "matched_share_of_generalising": 0.5493,
+          "pairs": 245,
+          "reading": "42% of what a demonstration gets right is copy-paste; on the pairs needing induction it is right about half the time",
+          "verbatim_repeats": 103,
+          "wrong": 64
+        },
+        "diagnosis_of_wrong": {
+          "constant_differs": 31,
+          "mismatch": 13,
+          "rebound_wrong": 20
+        },
+        "stricter_rung": {
+          "context_both_determined_share": 0.7333,
+          "context_both_pairs": 60,
+          "reading": "requiring the neighbourhood on both sides shrinks supply to 11.6% and raises precision to 73.3%, so the supply figure is a rung, not a constant"
+        },
+        "supply": {
+          "commits_scanned": 268,
+          "reading": "84-88% of real commits have no sibling site: one demonstration amortises nothing there",
+          "siblings_context_both": 31,
+          "siblings_shape_only": 43
+        }
+      },
+      "authority": "NONE__PRODUCER_RUN_SANDBOX",
+      "corpus": {
+        "path": "canonical/tests/fixtures/systematic_edit_corpus_v1.jsonl",
+        "records": 393,
+        "repos": [
+          "pallets/click",
+          "pallets/itsdangerous",
+          "pallets/markupsafe",
+          "pypa/packaging",
+          "pypa/pyproject-hooks"
+        ],
+        "schema": "systematic_edit_corpus_v1",
+        "sha256": "b47d9c9c23e641a8865a79d9dce3059a306257813d28114ed6029a9606cbde5a"
+      },
+      "external_state": {
+        "agentic_refactoring": "arXiv 2511.04824: 26.1% of agentic commits carry explicit refactoring intent; the two most frequent operations are rename and type change",
+        "our_own_replay_measurement": "action_replay_under_change_v1: 228 real compositions, 53.5% stale, 31.1% silently corrupt, legality held in 228 of 228",
+        "refactoring_share_2026": "GitClear 2026 (623M changes): refactoring fell from 21% of changed lines in 2022 to 3.8% in 2026 while within-commit copy/paste rose to 15.7%",
+        "repetitiveness_of_code_changes": "Nguyen et al., ASE 2013: 2,841 Java projects, 1.8M revisions; repetitiveness 70-100% at size 1 and decaying exponentially with size",
+        "structural_changes_are_systematic": "Kim et al.: about 75% of structural changes to mature software are systematic, but not identical in context",
+        "systematic_editing_from_one_example": "SyDIT, PLDI 2011: from edit pairs in five large projects, mimics the human correctly on 70% (39/56) of systematic edits"
+      },
+      "incremental_spend_usd": 0,
+      "measured_at_commit": "725f361b85c1fe85b1f63aa3761d99ed46966860",
+      "model_calls": 0,
+      "network_calls": 0,
+      "what_this_does_not_claim": [
+        "no capability credit, no benchmark rank, no terminal credit",
+        "no claim that five Python repositories are engineering in general",
+        "no claim that a lexical abstraction measures meaning; 'exact' means 'reproduces the bytes'",
+        "no claim that this bounds a stronger inducer; the published ceiling for one is 70%, not 100%"
+      ]
+    }
+  },
+  "generated_at_utc": "2026-11-17T01:15:59.053941+00:00",
+  "gui_invariance_and_operand_boundary": {
+    "identity_invariance": {
+      "identity_arms": 15,
+      "identity_verdicts": {
+        "INVARIANT": 13,
+        "UNDECIDED__THE_PAGE_WAS_NOT_PERTURBED_SO_THERE_IS_NOTHING_TO_COMPARE": 2
+      },
+      "judge_pages": 5,
+      "judge_quotient_sizes": {
+        "enter-time": 0,
+        "scroll-text": 4,
+        "simple-algebra": 0,
+        "simple-arithmetic": 0,
+        "text-transform": 0
+      },
+      "pages_with_a_nontrivial_quotient": [
+        "scroll-text"
+      ],
+      "quotient_is_real": {
+        "enter-time": "SPELLING_NORMALISATION_ONLY",
+        "scroll-text": "SEMANTIC__trailing dot",
+        "simple-algebra": "SPELLING_NORMALISATION_ONLY",
+        "simple-arithmetic": "SPELLING_NORMALISATION_ONLY",
+        "text-transform": "SPELLING_NORMALISATION_ONLY"
+      }
+    },
+    "judges": [
+      {
+        "accepted_variants": [
+          "as-is"
+        ],
+        "answer": "11",
+        "quotient_kind": "SPELLING_NORMALISATION_ONLY",
+        "quotient_size": 0,
+        "task": "simple-arithmetic"
+      },
+      {
+        "accepted_variants": [
+          "as-is"
+        ],
+        "answer": "25",
+        "quotient_kind": "SPELLING_NORMALISATION_ONLY",
+        "quotient_size": 0,
+        "task": "simple-algebra"
+      },
+      {
+        "accepted_variants": [
+          "as-is"
+        ],
+        "answer": "13:13",
+        "quotient_kind": "SPELLING_NORMALISATION_ONLY",
+        "quotient_size": 0,
+        "task": "enter-time"
+      },
+      {
+        "accepted_variants": [
+          "as-is",
+          "trailing dot",
+          "leading space",
+          "trailing space",
+          "padded"
+        ],
+        "answer": "volutpat",
+        "quotient_kind": "SEMANTIC__trailing dot",
+        "quotient_size": 4,
+        "task": "scroll-text"
+      },
+      {
+        "accepted_variants": [
+          "as-is"
+        ],
+        "answer": "ZC5F",
+        "quotient_kind": "SPELLING_NORMALISATION_ONLY",
+        "quotient_size": 0,
+        "task": "text-transform"
+      }
+    ],
+    "measured_effect": {
+      "enter_time_rejects_the_utterance_itself": {
+        "0113PM": -1,
+        "01:13 PM": -1,
+        "13:13": 1,
+        "13:13:00": -1,
+        "1:13 PM": -1,
+        "1:13PM": -1
+      },
+      "identity_arms_run": 15,
+      "identity_invariant": 13,
+      "identity_undecided_page_not_perturbed": 2,
+      "identity_use_by_the_rules": "derived_value_v1:397 -- index is the ADDRESS of the field to type into, never a term",
+      "instrument_excluded_pages": [
+        "ascending-numbers",
+        "hover-shape",
+        "bisect-angle",
+        "click-pie",
+        "click-pie-nodelay",
+        "drag-cube",
+        "moving-items"
+      ],
+      "judge_pages": 5,
+      "judge_pages_with_quotient_zero": 4,
+      "only_semantic_quotient": "scroll-text trailing dot, caused by the page's own .replace(/[^a-zA-Z0-9]/g,\"\")",
+      "phrase_blind_arm_design_set": {
+        "blind_actions": 126,
+        "blind_solved": 4,
+        "gated_actions": 23,
+        "gated_solved": 5
+      },
+      "phrase_blind_arm_full_surface": {
+        "blind_actions": 2611,
+        "blind_only": [],
+        "blind_solved": 5,
+        "gated_actions": 566,
+        "gated_only": [
+          "enter-text",
+          "enter-text-2",
+          "enter-text-dynamic",
+          "enter-time"
+        ],
+        "gated_solved": 9,
+        "pages": 123
+      },
+      "text_transform_reorder_is_a_truth_not_a_defect": {
+        "F5CZ": -1,
+        "ZC5F": 1
+      }
+    },
+    "phrase_blind_arm": {
+      "blind_actions": 2611,
+      "blind_only": [],
+      "blind_solved": 5,
+      "gated_actions": 566,
+      "gated_only": [
+        "enter-text",
+        "enter-text-2",
+        "enter-text-dynamic",
+        "enter-time"
+      ],
+      "gated_solved": 9,
+      "pages": 123,
+      "per_page": [
+        {
+          "blind": {
+            "actions": 117,
+            "basis_size": 13,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 13
+          },
+          "gated": {
+            "actions": 18,
+            "basis_size": 2,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 2
+          },
+          "task": "book-flight"
+        },
+        {
+          "blind": {
+            "actions": 117,
+            "basis_size": 13,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 13
+          },
+          "gated": {
+            "actions": 18,
+            "basis_size": 2,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 2
+          },
+          "task": "book-flight-nodelay"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 4,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 0,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "button-delay"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 37,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 4,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "buy-ticket"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 0,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 0,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "chase-circle"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 7,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 1,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "choose-date"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 7,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 1,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "choose-date-easy"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 7,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 1,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "choose-date-medium"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 7,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 1,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "choose-date-nodelay"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 22,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 0,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "choose-list"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 3,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 0,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "circle-center"
+        },
+        {
+          "blind": {
+            "actions": 24,
+            "basis_size": 12,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 12
+          },
+          "gated": {
+            "actions": 2,
+            "basis_size": 1,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 1
+          },
+          "task": "click-button"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 4,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 0,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "click-button-sequence"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 19,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 0,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "click-checkboxes"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 32,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 0,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "click-checkboxes-large"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 15,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 0,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "click-checkboxes-soft"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 12,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 0,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "click-checkboxes-transfer"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 8,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 1,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "click-collapsible"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 13,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 4,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "click-collapsible-2"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 13,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 4,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "click-collapsible-2-nodelay"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 8,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 1,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "click-collapsible-nodelay"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 0,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 0,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "click-color"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 7,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 1,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "click-dialog"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 12,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 0,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "click-dialog-2"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 15,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 5,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "click-link"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 9,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 3,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "click-menu"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 3,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 1,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "click-menu-2"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 19,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 0,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "click-option"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 37,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 0,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "click-scroll-list"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 3,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 0,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "click-shades"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 24,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 12,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "click-shape"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 15,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 0,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "click-tab"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 28,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 6,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "click-tab-2"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 20,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 6,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "click-tab-2-easy"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 18,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 5,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "click-tab-2-hard"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 24,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 6,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "click-tab-2-medium"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 5,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 0,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "click-test"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 4,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 0,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "click-test-2"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 4,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 0,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "click-test-transfer"
+        },
+        {
+          "blind": {
+            "actions": 22,
+            "basis_size": 11,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 11
+          },
+          "gated": {
+            "actions": 4,
+            "basis_size": 2,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 2
+          },
+          "task": "click-widget"
+        },
+        {
+          "blind": {
+            "actions": 12,
+            "basis_size": 3,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 3
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 0,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "copy-paste"
+        },
+        {
+          "blind": {
+            "actions": 18,
+            "basis_size": 3,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 3
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 0,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "copy-paste-2"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 15,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 7,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "count-shape"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 7,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 0,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "count-sides"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 57,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 12,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "daily-calendar"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 9,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 2,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "drag-box"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 3,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 0,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "drag-circle"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 15,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 5,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "drag-items"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 27,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 9,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "drag-items-grid"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 3,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 0,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "drag-shapes"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 3,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 0,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "drag-shapes-2"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 3,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 0,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "drag-single-shape"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 8,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 4,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "drag-sort-numbers"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 3,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 0,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "draw-circle"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 3,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 0,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "draw-line"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 120,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 12,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "email-inbox"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 42,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 10,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "email-inbox-delete"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 42,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 10,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "email-inbox-forward"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 42,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 10,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "email-inbox-forward-nl"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 120,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 12,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "email-inbox-forward-nl-turk"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 42,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 10,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "email-inbox-important"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 120,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 12,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "email-inbox-nl-turk"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 42,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 10,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "email-inbox-noscroll"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 42,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 11,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "email-inbox-reply"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 42,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 11,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "email-inbox-star-reply"
+        },
+        {
+          "blind": {
+            "actions": 9,
+            "basis_size": 3,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 3
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 0,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "enter-date"
+        },
+        {
+          "blind": {
+            "actions": 60,
+            "basis_size": 10,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 10
+          },
+          "gated": {
+            "actions": 6,
+            "basis_size": 1,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 1
+          },
+          "task": "enter-password"
+        },
+        {
+          "blind": {
+            "actions": 9,
+            "basis_size": 3,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 3
+          },
+          "gated": {
+            "actions": 3,
+            "answer": "Donovan",
+            "basis_size": 1,
+            "solved": true,
+            "tried": 1
+          },
+          "task": "enter-text"
+        },
+        {
+          "blind": {
+            "actions": 9,
+            "basis_size": 3,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 3
+          },
+          "gated": {
+            "actions": 6,
+            "answer": "DONOVAN",
+            "basis_size": 2,
+            "solved": true,
+            "tried": 2
+          },
+          "task": "enter-text-2"
+        },
+        {
+          "blind": {
+            "actions": 9,
+            "basis_size": 3,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 3
+          },
+          "gated": {
+            "actions": 3,
+            "answer": "ZC5F",
+            "basis_size": 1,
+            "solved": true,
+            "tried": 1
+          },
+          "task": "enter-text-dynamic"
+        },
+        {
+          "blind": {
+            "actions": 9,
+            "basis_size": 3,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 3
+          },
+          "gated": {
+            "actions": 3,
+            "answer": "13:13",
+            "basis_size": 1,
+            "solved": true,
+            "tried": 1
+          },
+          "task": "enter-time"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 6,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 3,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "find-greatest"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 3,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 0,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "find-midpoint"
+        },
+        {
+          "blind": {
+            "actions": 20,
+            "basis_size": 5,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 5
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 0,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "find-word"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 0,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 0,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "focus-text"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 0,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 0,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "focus-text-2"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 5,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 1,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "form-sequence"
+        },
+        {
+          "blind": {
+            "actions": 24,
+            "basis_size": 3,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 3
+          },
+          "gated": {
+            "actions": 8,
+            "basis_size": 1,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 1
+          },
+          "task": "form-sequence-2"
+        },
+        {
+          "blind": {
+            "actions": 372,
+            "basis_size": 31,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 31
+          },
+          "gated": {
+            "actions": 12,
+            "basis_size": 1,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 1
+          },
+          "task": "form-sequence-3"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 7,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 1,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "generate-number"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 11,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 7,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "grid-coordinate"
+        },
+        {
+          "blind": {
+            "actions": 32,
+            "basis_size": 8,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 8
+          },
+          "gated": {
+            "actions": 4,
+            "basis_size": 1,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 1
+          },
+          "task": "guess-number"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 8,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 1,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "highlight-text"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 16,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 2,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "highlight-text-2"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 0,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 0,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "hot-cold"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 15,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 0,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "identify-shape"
+        },
+        {
+          "blind": {
+            "actions": 54,
+            "basis_size": 9,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 9
+          },
+          "gated": {
+            "actions": 12,
+            "basis_size": 2,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 2
+          },
+          "task": "login-user"
+        },
+        {
+          "blind": {
+            "actions": 48,
+            "basis_size": 8,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 8
+          },
+          "gated": {
+            "actions": 12,
+            "basis_size": 2,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 2
+          },
+          "task": "login-user-popup"
+        },
+        {
+          "blind": {
+            "actions": 152,
+            "basis_size": 19,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 19
+          },
+          "gated": {
+            "actions": 24,
+            "basis_size": 3,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 3
+          },
+          "task": "multi-layouts"
+        },
+        {
+          "blind": {
+            "actions": 153,
+            "basis_size": 17,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 17
+          },
+          "gated": {
+            "actions": 45,
+            "basis_size": 5,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 5
+          },
+          "task": "multi-orderings"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 9,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 3,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "navigate-tree"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 3,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 1,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "number-checkboxes"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 14,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 4,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "odd-or-even"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 76,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 12,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "order-food"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 32,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 4,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "phone-book"
+        },
+        {
+          "blind": {
+            "actions": 377,
+            "answer": "Russian",
+            "basis_size": 34,
+            "solved": true,
+            "tried": 29
+          },
+          "gated": {
+            "actions": 130,
+            "answer": "Russian",
+            "basis_size": 10,
+            "solved": true,
+            "tried": 10
+          },
+          "task": "read-table"
+        },
+        {
+          "blind": {
+            "actions": 400,
+            "basis_size": 34,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 25
+          },
+          "gated": {
+            "actions": 160,
+            "basis_size": 10,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 10
+          },
+          "task": "read-table-2"
+        },
+        {
+          "blind": {
+            "actions": 18,
+            "basis_size": 3,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 3
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 0,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "resize-textarea"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 3,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 0,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "right-angle"
+        },
+        {
+          "blind": {
+            "actions": 4,
+            "answer": "volutpat",
+            "basis_size": 5,
+            "solved": true,
+            "tried": 1
+          },
+          "gated": {
+            "actions": 4,
+            "answer": "volutpat",
+            "basis_size": 4,
+            "solved": true,
+            "tried": 1
+          },
+          "task": "scroll-text"
+        },
+        {
+          "blind": {
+            "actions": 15,
+            "basis_size": 5,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 5
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 0,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "scroll-text-2"
+        },
+        {
+          "blind": {
+            "actions": 15,
+            "basis_size": 3,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 3
+          },
+          "gated": {
+            "actions": 5,
+            "basis_size": 1,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 1
+          },
+          "task": "search-engine"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 13,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 2,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "sign-agreement"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 0,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 0,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "simon-says"
+        },
+        {
+          "blind": {
+            "actions": 20,
+            "answer": "25",
+            "basis_size": 11,
+            "solved": true,
+            "tried": 4
+          },
+          "gated": {
+            "actions": 5,
+            "answer": "25",
+            "basis_size": 3,
+            "solved": true,
+            "tried": 1
+          },
+          "task": "simple-algebra"
+        },
+        {
+          "blind": {
+            "actions": 16,
+            "answer": "11",
+            "basis_size": 7,
+            "solved": true,
+            "tried": 4
+          },
+          "gated": {
+            "actions": 4,
+            "answer": "11",
+            "basis_size": 2,
+            "solved": true,
+            "tried": 1
+          },
+          "task": "simple-arithmetic"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 119,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 12,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "social-media"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 69,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 12,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "social-media-all"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 69,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 12,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "social-media-some"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 17,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 2,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "stock-market"
+        },
+        {
+          "blind": {
+            "actions": 105,
+            "basis_size": 15,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 15
+          },
+          "gated": {
+            "actions": 28,
+            "basis_size": 4,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 4
+          },
+          "task": "terminal"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 8,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 1,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "text-editor"
+        },
+        {
+          "blind": {
+            "actions": 77,
+            "answer": "ZC5F",
+            "basis_size": 12,
+            "solved": true,
+            "tried": 11
+          },
+          "gated": {
+            "actions": 7,
+            "answer": "ZC5F",
+            "basis_size": 6,
+            "solved": true,
+            "tried": 1
+          },
+          "task": "text-transform"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 0,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 1,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "tic-tac-toe"
+        },
+        {
+          "blind": {
+            "actions": 34,
+            "basis_size": 17,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 17
+          },
+          "gated": {
+            "actions": 2,
+            "basis_size": 1,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 1
+          },
+          "task": "unicode-test"
+        },
+        {
+          "blind": {
+            "actions": 28,
+            "basis_size": 7,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 7
+          },
+          "gated": {
+            "actions": 8,
+            "basis_size": 2,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 2
+          },
+          "task": "use-autocomplete"
+        },
+        {
+          "blind": {
+            "actions": 28,
+            "basis_size": 7,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 7
+          },
+          "gated": {
+            "actions": 8,
+            "basis_size": 2,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 2
+          },
+          "task": "use-autocomplete-nodelay"
+        },
+        {
+          "blind": {
+            "actions": 28,
+            "basis_size": 7,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 7
+          },
+          "gated": {
+            "actions": 4,
+            "basis_size": 1,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 1
+          },
+          "task": "use-colorwheel"
+        },
+        {
+          "blind": {
+            "actions": 28,
+            "basis_size": 7,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 7
+          },
+          "gated": {
+            "actions": 4,
+            "basis_size": 1,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 1
+          },
+          "task": "use-colorwheel-2"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 4,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 1,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "use-slider"
+        },
+        {
+          "blind": {
+            "actions": 0,
+            "basis_size": 6,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 3,
+            "reason": "NO_TYPEABLE_FIELD",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "use-slider-2"
+        },
+        {
+          "blind": {
+            "actions": 80,
+            "basis_size": 8,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 8
+          },
+          "gated": {
+            "actions": 0,
+            "basis_size": 0,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 0
+          },
+          "task": "use-spinner"
+        },
+        {
+          "blind": {
+            "actions": 68,
+            "basis_size": 4,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 4
+          },
+          "gated": {
+            "actions": 17,
+            "basis_size": 1,
+            "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+            "solved": false,
+            "tried": 1
+          },
+          "task": "visual-addition"
+        }
+      ]
+    },
+    "receipt": "canonical/verification/GUI_INVARIANCE_IS_VACUOUS_OR_ABSENT_20261116_V1.json",
+    "status": "NO_GUI_INVARIANCE_LEVER_THE_REMAINING_BOUNDARY_IS_AN_OPERAND_NOT_ON_THE_PAGE"
+  },
+  "hard_nonclaims": [
+    "NOT_A_FRONTIER_SCORE",
+    "NOT_SWE_BENCH",
+    "NO_SYNTHETIC_TASKS",
+    "NO_KNOWN_WIN_COUNTED_AS_PROGRESS",
+    "NO_SCREEN_ONLY_VERDICT_COUNTED_AS_REPAIR",
+    "NO_MAJORITY_VOTE_AS_SELECTOR",
+    "NO_UNRERUN_CLAIMED_ARM_COUNTED_AS_CONFIRMED",
+    "NO_NEW_LEARNER_OR_VERIFIER",
+    "NO_CAPABILITY_REGISTERED",
+    "NO_PROTECTED_PATH_TOUCHED",
+    "NO_MODEL_CALLS",
+    "NO_NETWORK_CALLS",
+    "NO_WEIGHT_UPDATE",
+    "NO_REPLAY_FOREVER_ANYWHERE_CLAIM",
+    "NO_SINGLE_LEVER_CLAIM",
+    "NO_ONE_DEMONSTRATION_PER_ENVIRONMENT_CLAIM",
+    "NO_GUI_INVARIANCE_LEVER",
+    "NO_PROOF_COMPOSITION_AS_SINGLE_LEVER",
+    "NO_ONCE_IDENTIFIES_A_RULE",
+    "NO_ONE_DEMONSTRATION_COVERS_MOST_REAL_WORK",
+    "NO_GRANULARITY_OF_THESE_FEATURES_AS_A_REPAIR",
+    "NO_COMPOSITION_CLOSES_COMPUTER_USE",
+    "NO_INFERRED_VALUE_AS_AN_ESTABLISHED_FACT",
+    "NO_INDEX_OR_SPECIFICATION_FIX_AS_TERMINAL_UNLOCK",
+    "NO_SECOND_LANGUAGE_5_43_BITS_CLAIM",
+    "NO_ID_BINDING_AS_SINGLE_LEVER",
+    "NO_UNPAIRED_RUN_VARIANCE_CLAIM",
+    "PRODUCER_RUN_NOT_INDEPENDENT_VERIFICATION",
+    "TERMINAL_TRUTH_UNTOUCHED"
+  ],
+  "hard_open_population_count": 16,
+  "hard_open_population_tasks": [
+    "breadth_first_search",
+    "depth_first_search",
+    "detect_cycle",
+    "flatten",
+    "kheapsort",
+    "possible_change",
+    "powerset",
+    "reverse_linked_list",
+    "shortest_path_length",
+    "shortest_path_lengths",
+    "shortest_paths",
+    "shunting_yard",
+    "sqrt",
+    "subsequences",
+    "topological_ordering",
+    "wrap"
+  ],
+  "incremental_spend_usd": 0,
+  "index_specification_and_value_layer": {
+    "composition": {
+      "measured_effect": {
+        "abstract_states_exhausted": 4,
+        "adaptation_trials": 29,
+        "authority": "NONE__PRODUCER_RUN_SANDBOX",
+        "demonstration_baseline_for_comparison": {
+          "of": 16,
+          "solved": 11,
+          "trials": 34
+        },
+        "executed_steps": 15,
+        "executions": 15,
+        "headline": "composition closes the one refusal it can and proves the other two impossible (4 abstract states exhausted); zero prediction errors in 15 audited steps; 15 plans met the stated goal and broke something else, and the frame rejected all of them",
+        "machines": 4,
+        "measured_cells": 29,
+        "prediction_mismatches": 0,
+        "proven_unreachable": 2,
+        "receipts": [
+          "canonical/verification/COMPOSE_MEASURED_EFFECTS_20261116_V1.json"
+        ],
+        "relaxed_plans_that_break_the_frame": 15,
+        "requests": 16,
+        "solved": 14,
+        "solved_before_composition": 13,
+        "solved_with_two_steps": 1,
+        "trials_in_total": 44,
+        "unrequested_side_effects": 0,
+        "usable_operators": 14,
+        "what": "offline breadth-first composition over the measured (atom, state class) table on four real machines, with a frame condition and a per-step prediction audit"
+      },
+      "status": "COMPOSITION_CLOSES_ONE_REFUSAL_PROVES_TWO_AND_NEEDS_A_FRAME",
+      "summary": {
+        "abstract_states_exhausted": 4,
+        "adaptation_trials": 29,
+        "executions": 15,
+        "machines": 4,
+        "measured_cells": 29,
+        "per_machine": {
+          "FILESYSTEM": {
+            "adaptation_trials": 9,
+            "executions": 4,
+            "explored": 0,
+            "proven_unreachable": 0,
+            "solved": 4,
+            "two_step": 0,
+            "usable_operators": 4
+          },
+          "GIT": {
+            "adaptation_trials": 6,
+            "executions": 2,
+            "explored": 4,
+            "proven_unreachable": 2,
+            "solved": 2,
+            "two_step": 0,
+            "usable_operators": 2
+          },
+          "SQLITE": {
+            "adaptation_trials": 6,
+            "executions": 4,
+            "explored": 0,
+            "proven_unreachable": 0,
+            "solved": 4,
+            "two_step": 0,
+            "usable_operators": 6
+          },
+          "TARBALL": {
+            "adaptation_trials": 8,
+            "executions": 5,
+            "explored": 0,
+            "proven_unreachable": 0,
+            "solved": 4,
+            "two_step": 1,
+            "usable_operators": 2
+          }
+        },
+        "prediction_mismatches": 0,
+        "proven_unreachable": 2,
+        "relaxed_plans_that_break_the_frame": 15,
+        "requests": 16,
+        "solved": 14,
+        "solved_with_two_steps": 1,
+        "trials_in_total": 44,
+        "unrequested_side_effects": 0,
+        "usable_operators": 14
+      }
+    },
+    "index": {
+      "measured_effect": {
+        "contradiction_resolved": {
+          "compression_within_family": "59 -> 35 oracle questions, 41% fewer, on a never-seen period-12",
+          "cross_kind_compounding": "0 saved across 10 kinds (no abstraction mechanism at all)"
+        },
+        "cross_kind_learning_to_learn": {
+          "beat_default": "1/10",
+          "beat_random_mean": "3/10",
+          "verdict": "NO_COMPOUNDING"
+        },
+        "cross_language": {
+          "store_offered_any_non_python": false,
+          "transferred_and_narrow": [
+            "python",
+            "javascript",
+            "c",
+            "cpp"
+          ],
+          "wall": "THE_PROPOSER"
+        },
+        "instance_sensitivity": {
+          "example": {
+            "grid_walk": {
+              "0": "dfs_reversed only",
+              "1": "five policies",
+              "2": "NONE"
+            }
+          },
+          "kinds_unsolvable_on_every_instance": [
+            "ring_rotate"
+          ],
+          "kinds_whose_policy_set_changes_with_instance": 5
+        },
+        "instrument_correction": "first draft reported four kinds unsolvable by any policy; that was instance 1 of 3. Only ring_rotate is unsolvable everywhere; the other three are solvable at instance 2.",
+        "insufficiency_certificate": {
+          "closed_vocabulary_size": 31,
+          "hypotheses_needing_enumeration": 8388608,
+          "learner_enumeration_cap": 12,
+          "reading": "obstacle moves from representation to combinatorics"
+        },
+        "key_sweep": [
+          {
+            "answerable": "5/8",
+            "collisions": 2,
+            "family": "tree_coarse",
+            "keys": 8
+          },
+          {
+            "answerable": "4/7",
+            "collisions": 3,
+            "family": "coarser_still",
+            "keys": 7
+          },
+          {
+            "answerable": "11/14",
+            "collisions": 2,
+            "family": "finer_mid",
+            "keys": 14
+          },
+          {
+            "answerable": "13/16",
+            "collisions": 2,
+            "family": "finest_exact_features",
+            "keys": 16
+          },
+          {
+            "answerable": "19/20",
+            "collisions": 0,
+            "family": "one_key_per_kind",
+            "keys": 20
+          }
+        ],
+        "retrieval_ceiling_on_real_prs": {
+          "files": 76,
+          "kinds_with_a_matching_pr": 1,
+          "kinds_with_zero_matches": 7,
+          "pull_requests": 13,
+          "seconds": 350.6
+        },
+        "reused_not_rebuilt": [
+          "cross_kind_compounding_benchmark_v1",
+          "cross_kind_learning_to_learn_benchmark_v1",
+          "cross_language_lesson_transfer_probe_v1",
+          "hold_out_the_precision_curve_20261112_v1",
+          "COMPRESSION_MAKES_EXPERIENCE_COMPOUND_20261112_V1",
+          "INSUFFICIENCY_CERTIFICATE_20261113_V1"
+        ],
+        "usable_key_families": [],
+        "verdict": "NO_GRANULARITY_OF_THESE_FEATURES_SEPARATES_WHAT_THE_POLICY_DEPENDS_ON"
+      },
+      "reading": "A key has to be injective on the distinction the policy depends on. If every family either collides kinds that need different policies or degenerates to one key per kind, the features do not CONTAIN that distinction and no bucketing of them can supply it. The repair is a new observable, not a finer grid.",
+      "sweep": [
+        {
+          "answerable": 5,
+          "answerable_fraction": 0.625,
+          "collision_detail": [
+            {
+              "distinct_winner_sets": 3,
+              "key": "b1_m2_r1_d0_g0",
+              "kinds": [
+                "grid_walk",
+                "dial_lock",
+                "toggle_bank",
+                "adjacent_sort",
+                "sliding_pairs",
+                "stack_pushout",
+                "letter_shift",
+                "double_dial",
+                "tri_lock"
+              ]
+            },
+            {
+              "distinct_winner_sets": 2,
+              "key": "b1_m1_r0_d0_g0",
+              "kinds": [
+                "reverse_string",
+                "last_wins"
+              ]
+            }
+          ],
+          "collisions": 2,
+          "keys": 8,
+          "kinds": 20,
+          "name": "tree_coarse__b(2,4,6)_m(.45,.8)_r(1.5,3)_d(0,3,10)"
+        },
+        {
+          "answerable": 4,
+          "answerable_fraction": 0.5714,
+          "collision_detail": [
+            {
+              "distinct_winner_sets": 2,
+              "key": "b1_m1_r0_d0_g0",
+              "kinds": [
+                "grid_walk",
+                "toggle_bank",
+                "bit_register",
+                "parity_lights",
+                "stack_pushout",
+                "letter_shift",
+                "double_dial"
+              ]
+            },
+            {
+              "distinct_winner_sets": 2,
+              "key": "b0_m1_r0_d0_g0",
+              "kinds": [
+                "cyclic_counter",
+                "dial_lock",
+                "adjacent_sort",
+                "queue_rotate",
+                "sliding_pairs",
+                "ring_rotate",
+                "tri_lock"
+              ]
+            },
+            {
+              "distinct_winner_sets": 2,
+              "key": "b1_m0_r0_d0_g0",
+              "kinds": [
+                "two_jug_pour",
+                "reverse_string"
+              ]
+            }
+          ],
+          "collisions": 3,
+          "keys": 7,
+          "kinds": 20,
+          "name": "coarser_still"
+        },
+        {
+          "answerable": 11,
+          "answerable_fraction": 0.7857,
+          "collision_detail": [
+            {
+              "distinct_winner_sets": 2,
+              "key": "b3_m4_r2_d1_g0",
+              "kinds": [
+                "grid_walk",
+                "stack_pushout",
+                "letter_shift"
+              ]
+            },
+            {
+              "distinct_winner_sets": 2,
+              "key": "b2_m4_r1_d1_g0",
+              "kinds": [
+                "dial_lock",
+                "adjacent_sort",
+                "sliding_pairs",
+                "tri_lock"
+              ]
+            }
+          ],
+          "collisions": 2,
+          "keys": 14,
+          "kinds": 20,
+          "name": "finer_mid"
+        },
+        {
+          "answerable": 13,
+          "answerable_fraction": 0.8125,
+          "collision_detail": [
+            {
+              "distinct_winner_sets": 2,
+              "key": "{\"branching\": 4, \"moved_fraction\": 1.0, \"reachable_growth\": 2.25, \"single_action_goal_depth\": 0, \"start_reaches_goal_already\": false}",
+              "kinds": [
+                "grid_walk",
+                "letter_shift"
+              ]
+            },
+            {
+              "distinct_winner_sets": 2,
+              "key": "{\"branching\": 3, \"moved_fraction\": 1.0, \"reachable_growth\": 2.0, \"single_action_goal_depth\": 0, \"start_reaches_goal_already\": false}",
+              "kinds": [
+                "dial_lock",
+                "adjacent_sort",
+                "sliding_pairs",
+                "tri_lock"
+              ]
+            }
+          ],
+          "collisions": 2,
+          "keys": 16,
+          "kinds": 20,
+          "name": "finest_exact_features"
+        },
+        {
+          "answerable": 19,
+          "answerable_fraction": 0.95,
+          "collision_detail": [],
+          "collisions": 0,
+          "keys": 20,
+          "kinds": 20,
+          "name": "trivial_one_key_per_kind"
+        }
+      ],
+      "usable_key_families": [],
+      "verdict": "NO_GRANULARITY_OF_THESE_FEATURES_SEPARATES_WHAT_THE_POLICY_DEPENDS_ON"
+    },
+    "receipts": [
+      "canonical/verification/THE_INDEX_IS_THE_BOTTLENECK_20261116_V1.json",
+      "canonical/verification/COMPOSE_MEASURED_EFFECTS_20261116_V1.json",
+      "canonical/verification/SYSTEMATIC_EDIT_DERIVATION_20261116_V1.json"
+    ],
+    "status": "INDEX_AND_FRAME_ARE_NECESSARY_SHARED_DEFECTS_NOT_A_SINGLE_SUFFICIENT_LEVER",
+    "value_inference": {
+      "measured_effect": {
+        "arms": {
+          "unchanged_from_the_supply_receipt": {
+            "corpus_sha256_prefix": "b47d9c9c23e641a8",
+            "determined": 134,
+            "determined_share": 0.5469,
+            "pairs": 245,
+            "reading": "the copy arm reproduces the published receipt exactly, which makes the delta attributable",
+            "supply_share": 0.1604,
+            "verbatim": 103
+          },
+          "value_layer": {
+            "copy": {
+              "constant_differs": 31,
+              "derivation_fired": 0,
+              "generalising_pairs": 142,
+              "matched_of_generalising": 78,
+              "rebound_wrong": 20,
+              "wrong": 64
+            },
+            "derive": {
+              "constant_differs": 12,
+              "derivation_fired": 42,
+              "derivation_right": 9,
+              "generalising_pairs": 142,
+              "matched_of_generalising": 84,
+              "precision_when_fired": 0.2143,
+              "rebound_wrong": 33,
+              "wrong": 58
+            },
+            "derive_contrast": {
+              "derivation_fired": 15,
+              "derivation_right": 6,
+              "generalising_pairs": 142,
+              "matched_of_generalising": 82,
+              "precision_when_fired": 0.4,
+              "wrong": 60
+            },
+            "reading": "an inferred value is right one time in five; a second demonstration doubles that and makes the system abstain more; neither establishes the value, so only execution closes it"
+          }
+        },
+        "authority": "NONE__PRODUCER_RUN_SANDBOX",
+        "corpus": {
+          "path": "canonical/tests/fixtures/systematic_edit_corpus_v1.jsonl",
+          "records": 393,
+          "repos": [
+            "pallets/click",
+            "pallets/itsdangerous",
+            "pallets/markupsafe",
+            "pypa/packaging",
+            "pypa/pyproject-hooks"
+          ],
+          "schema": "systematic_edit_corpus_v1",
+          "sha256": "b47d9c9c23e641a8865a79d9dce3059a306257813d28114ed6029a9606cbde5a"
+        },
+        "external_state": {
+          "agentic_refactoring": "arXiv 2511.04824: 26.1% of agentic commits carry explicit refactoring intent; the two most frequent operations are rename and type change",
+          "our_own_replay_measurement": "action_replay_under_change_v1: 228 real compositions, 53.5% stale, 31.1% silently corrupt, legality held in 228 of 228",
+          "refactoring_share_2026": "GitClear 2026 (623M changes): refactoring fell from 21% of changed lines in 2022 to 3.8% in 2026 while within-commit copy/paste rose to 15.7%",
+          "repetitiveness_of_code_changes": "Nguyen et al., ASE 2013: 2,841 Java projects, 1.8M revisions; repetitiveness 70-100% at size 1 and decaying exponentially with size",
+          "structural_changes_are_systematic": "Kim et al.: about 75% of structural changes to mature software are systematic, but not identical in context",
+          "systematic_editing_from_one_example": "SyDIT, PLDI 2011: from edit pairs in five large projects, mimics the human correctly on 70% (39/56) of systematic edits"
+        },
+        "incremental_spend_usd": 0,
+        "measured_at_commit": "e9955d59c68e5e953c6f83720599827ba7c12f62",
+        "model_calls": 0,
+        "network_calls": 0,
+        "what_this_does_not_claim": "No new capability. Derivation pairs holes by position, shifts one dotted component and matches context by slot index; the contrast arm can only fire on commits with three sibling sites, so its coverage is bounded by the same supply that limits everything else."
+      },
+      "status": "A_STORED_VALUE_IS_A_STORED_GUESS_ONLY_EXECUTION_CLOSES_IT"
+    }
+  },
+  "invariance_and_reach": {
+    "alpha_canonical_preconditions": {
+      "candidates_proposed": 384,
+      "judged": 4,
+      "survived_the_programs_own_examples": 4,
+      "tasks_where_it_proposed": 28,
+      "wins_over_bugs_the_three_arms_could_not_repair": [],
+      "won": [
+        "find_in_sorted",
+        "mergesort",
+        "next_palindrome",
+        "quicksort"
+      ]
+    },
+    "capability_gain_over_the_three_arm_composition": 0,
+    "literal_preconditions": {
+      "candidates_proposed": 304,
+      "judged": 0,
+      "survived_the_programs_own_examples": 0,
+      "tasks_where_it_proposed": 23,
+      "wins_over_bugs_the_three_arms_could_not_repair": [],
+      "won": []
+    },
+    "receipts": [
+      "canonical/verification/ARM_LEARNED_IN_ONE_RUN_20261116_V1.json",
+      "canonical/verification/WHAT_ONE_VERIFIED_REPAIR_TRAVELS_20261116_V1.json"
+    ],
+    "status": "DEMONSTRATION_IS_CONTENT_INVARIANCE_IS_REACH",
+    "travel_ladder": {
+      "rung_1_same_bug": {
+        "applicable": 24,
+        "count_tasks_fired_on": 0,
+        "fired": 80,
+        "fired_pairs": 0,
+        "repaired": 15,
+        "reproduces_the_accepted_program": 14,
+        "survived_examples": 17,
+        "tasks_fired_on": [],
+        "tasks_repaired": [],
+        "transfers": 0
+      },
+      "rung_2_same_bug_renamed": {
+        "applicable": 24,
+        "count_tasks_fired_on": 0,
+        "fired": 80,
+        "fired_pairs": 0,
+        "repaired": 15,
+        "reproduces_the_accepted_program": 0,
+        "survived_examples": 17,
+        "tasks_fired_on": [],
+        "tasks_repaired": [],
+        "transfers": 0
+      },
+      "rung_3_a_different_bug": {
+        "applicable": 24,
+        "count_tasks_fired_on": 39,
+        "fired": 0,
+        "fired_pairs": 333,
+        "repaired": 0,
+        "reproduces_the_accepted_program": 0,
+        "survived_examples": 0,
+        "tasks_fired_on": [
+          "bitcount",
+          "breadth_first_search",
+          "bucketsort",
+          "depth_first_search",
+          "detect_cycle",
+          "find_first_in_sorted",
+          "find_in_sorted",
+          "flatten",
+          "gcd",
+          "get_factors",
+          "hanoi",
+          "is_valid_parenthesization",
+          "kheapsort",
+          "knapsack",
+          "kth",
+          "lcs_length",
+          "levenshtein",
+          "lis",
+          "longest_common_subsequence",
+          "max_sublist_sum",
+          "mergesort",
+          "minimum_spanning_tree",
+          "next_palindrome",
+          "next_permutation",
+          "pascal",
+          "possible_change",
+          "powerset",
+          "quicksort",
+          "rpn_eval",
+          "shortest_path_length",
+          "shortest_path_lengths",
+          "shortest_paths",
+          "shunting_yard",
+          "sieve",
+          "sqrt",
+          "subsequences",
+          "to_base",
+          "topological_ordering",
+          "wrap"
+        ],
+        "tasks_repaired": [
+          "find_first_in_sorted",
+          "find_in_sorted",
+          "mergesort",
+          "next_palindrome",
+          "quicksort"
+        ],
+        "transfers": 11
+      }
+    }
+  },
+  "invariants": {
+    "all_declared_mechanism_files_present": true,
+    "all_newly_merged_evidence_files_read": true,
+    "all_task_names_from_real_published_test_files": true,
+    "browser_zero_experience_census_is_66_with_no_regressions": true,
+    "claimed_learned_arm_superseded_by_pytest_rerun": true,
+    "composed_run_is_one_run_one_judge_24_of_40": true,
+    "composition_needs_a_frame_and_proves_its_refusals": true,
+    "declared_format_prior_is_too_small_to_be_a_single_lever": true,
+    "exact_decision_past_enumeration_wall_is_not_capability_credit": true,
+    "gui_identity_invariance_is_vacuous_by_construction": true,
+    "gui_judge_has_no_task_equivalence_to_quotient": true,
+    "index_key_lacks_the_observable_not_just_granularity": true,
+    "inferred_edit_values_are_guesses_until_execution": true,
+    "invariance_changes_reach_not_capability": true,
+    "new_environment_cost_law_is_bounded_and_shuffle_invariant": true,
+    "no_answer_key_count_above_zero_in_measured_receipts": true,
+    "no_known_win_in_open_population": true,
+    "no_majority_vote_counted_as_selector": true,
+    "no_receipt_task_outside_real_corpus": true,
+    "no_screen_only_verdict_counted_as_repair": true,
+    "observable_gap_receipt_read": true,
+    "one_demonstration_amortises_only_a_sixth_of_real_work": true,
+    "one_demonstration_is_arithmetic_not_identification": true,
+    "one_demonstration_learns_a_domain_not_the_environment": true,
+    "operand_addition_is_bounded_to_its_design_set": true,
+    "phrase_blind_basis_adds_no_full_surface_capability": true,
+    "proved_composition_is_bounded_not_a_single_lever": true,
+    "read_first_policy_is_measured_and_does_not_forbid_learning": true,
+    "repaired_and_open_partition_corpus": true,
+    "replay_forever_is_falsified_by_state_drift": true,
+    "selection_measurement_read": true,
+    "the_unsolved_remainder_is_a_long_tail_not_one_bottleneck": true,
+    "unbound_name_binding_is_local_and_retracts_second_language_claim": true,
+    "verified_union_is_24_not_the_projected_26": true
+  },
+  "killed_instruments": [
+    {
+      "calibration_on_already_solved_tasks": "0 / 5",
+      "calibration_tasks_not_counted_as_progress": [
+        "bitcount",
+        "pascal",
+        "quicksort",
+        "is_valid_parenthesization",
+        "rpn_eval"
+      ],
+      "instrument": "canonical/runtime/bound_capabilities/software_patch_cegis_z3_v1.py",
+      "open_task_probe_not_counted_as_progress": [
+        "sqrt",
+        "flatten",
+        "to_base"
+      ],
+      "reason_killed": "A zero result on open tasks would be vacuous because the instrument also returned zero on five already-solved calibration tasks; sqrt hit its own baseline timeout. Do not ship an all-zero open-task run as evidence."
+    }
+  ],
+  "known_wins_not_counted_as_progress": [
+    "bitcount",
+    "bucketsort",
+    "find_first_in_sorted",
+    "find_in_sorted",
+    "gcd",
+    "get_factors",
+    "hanoi",
+    "is_valid_parenthesization",
+    "knapsack",
+    "kth",
+    "lcs_length",
+    "levenshtein",
+    "lis",
+    "longest_common_subsequence",
+    "max_sublist_sum",
+    "mergesort",
+    "minimum_spanning_tree",
+    "next_palindrome",
+    "next_permutation",
+    "pascal",
+    "quicksort",
+    "rpn_eval",
+    "sieve",
+    "to_base"
+  ],
+  "long_tail_trigger_and_basin": {
+    "basin": {
+      "arms": {
+        "command_output_control": {
+          "licensed": 0,
+          "observations": 3,
+          "reading": "the tool's own success message is not the goal's truth: 168 states collapse into 3 classes and no class is inside the plan's domain",
+          "silent_failure": 112,
+          "undecidable": 168
+        },
+        "demonstrations_for_full_licensing": {
+          "cells_no_demonstration_can_license": 4,
+          "decision_classes_premise_task": 9,
+          "premise_task": 1,
+          "status_level_goal": 4
+        },
+        "premise_task_under_all_content": {
+          "licensed": 56,
+          "plan_domain": 56,
+          "reading": "the same demonstration, on the same states, is licensed on its whole domain once the sense carries the premise -- the knowledge did not change, the observable did",
+          "undecidable": 0
+        },
+        "premise_task_under_one_file": {
+          "reading": "reading one file removes a third of the doubt and no more: the residue is exactly the part of the goal that lives in the file nobody opened",
+          "undecidable": 16,
+          "undecidable_share": 0.0952
+        },
+        "premise_task_under_status": {
+          "clear_outside": 96,
+          "licensed": 48,
+          "lucky": 8,
+          "mixed_cells": 4,
+          "reading": "16 states run the demonstration, watch it succeed and are wrong; 8 more work without anything licensing it",
+          "silent_failure": 16,
+          "undecidable": 24,
+          "undecidable_share": 0.1429
+        },
+        "status_level_goal": {
+          "demonstration_actions": 3,
+          "reading": "even a goal the coarsest sense can read leaves a third of the environment outside the demonstration's domain, so one success never covers the states on offer",
+          "states": {
+            "clear_outside": 56,
+            "decision_classes": 20,
+            "demonstration": [
+              "write:a.txt=two",
+              "stage:a.txt",
+              "commit:c1"
+            ],
+            "demonstration_length": 3,
+            "demonstrations_needed": 4,
+            "label": "commit the work as c1 (status-level goal)",
+            "licensed": 112,
+            "licensed_share": 0.6667,
+            "lucky": 0,
+            "mixed_cells": 0,
+            "observations": 64,
+            "plan_domain": 112,
+            "plan_domain_share": 0.6667,
+            "sense": "status",
+            "silent_failure": 0,
+            "states": 168,
+            "uncoverable_cells": 0,
+            "undecidable": 0,
+            "undecidable_share": 0.0,
+            "winning_states": 168
+          },
+          "true_domain": 112,
+          "undecidable_by_status": 0
+        }
+      },
+      "authority": "NONE__PRODUCER_RUN_SANDBOX",
+      "environment": {
+        "actions": [
+          "write:a.txt=two",
+          "write:a.txt=one",
+          "write:b.txt=two",
+          "write:note.log=x",
+          "stage:a.txt",
+          "stage:b.txt",
+          "commit:c1",
+          "rm:a.txt",
+          "branch:dev",
+          "reset:hard"
+        ],
+        "executed_transitions": 1680,
+        "kind": "real git repository in a throw-away directory",
+        "senses": [
+          "status",
+          "status+content(a.txt)",
+          "status+content(all)",
+          "status+content(all)+staged",
+          "feedback(command output)"
+        ],
+        "states": 168,
+        "truncated": false
+      },
+      "external_state": {
+        "across_environments_in_this_tree": "ACROSS_ENVIRONMENTS_20261112_V1: exact rung precision 1.0 over 562 right / 0 wrong; any_rung precision 0.29 with 71 wrong",
+        "computer_use_world_models": "World Models as an Intermediary (2602.00785): direct real-system interaction is undesirable and simulated backends are approximated, not executed, leaving a semantic gap on the live system",
+        "environment_reuse_in_this_tree": "environment_reuse_v1: visit 2 with a stored prior cost exactly visit 1 (1672 interactions, 245 states, plan 18)",
+        "inert_action_prior_in_this_tree": "INERT_ACTION_PRIOR_20261116_V1: arms A/B/C/D all spent 2003-2026 actions and all passed 1 of 6 pages; inert_share_mean 0.3614",
+        "irreversibility": "no undo for a sent payment or a deleted file; today's gates are hand-coded rules and human review catches only 9-26% of coding-agent errors",
+        "test_time_adaptation": "ICLR 2026: persona-driven exploration lifts WebArena multi-site 2% to 23% with about 7M tokens of exploration per site; the gain appears only where transitions are unpredictable and a naive hybrid underperforms"
+      },
+      "incremental_spend_usd": 0,
+      "measured_at_commit": "24d723047d6f07ac26c2c95646b3295d4dcd86d8",
+      "model_calls": 0,
+      "network_calls": 0,
+      "what_this_does_not_claim": [
+        "no capability credit, no benchmark rank, no terminal credit",
+        "no claim that a finer sense is free: it costs a probe, a test or an instrument",
+        "no claim that these 168 states are all of git, or that one environment is all environments",
+        "no claim that the undecidable set is small everywhere; it was measured here, under five senses"
+      ]
+    },
+    "declared_surface": {
+      "declaring_pages": [
+        "enter-date",
+        "enter-password",
+        "enter-time",
+        "guess-number",
+        "login-user",
+        "login-user-popup"
+      ],
+      "input_type_counts": {
+        "(none)": 14,
+        "date": 1,
+        "number": 1,
+        "password": 4,
+        "text": 37,
+        "time": 1
+      },
+      "pages_declaring_a_format": 6,
+      "pages_usable": 123,
+      "pages_with_a_typeable_field": 39,
+      "pages_with_no_typeable_field": 84
+    },
+    "receipts": [
+      "canonical/verification/DECLARED_TRIGGER_AND_OPERAND_TAXONOMY_20261116_V1.json",
+      "canonical/verification/ONE_DEMONSTRATION_BASIN_20261116_V1.json"
+    ],
+    "status": "NO_SINGLE_LEVER_THE_REMAINDER_IS_A_LONG_TAIL_AND_THE_PREMISE_MUST_BE_OBSERVABLE",
+    "taxonomy": {
+      "by_class": {
+        "A_CONSTRAINED_SEARCH": {
+          "n": 2,
+          "pages": [
+            "multi-layouts",
+            "multi-orderings"
+          ]
+        },
+        "A_CONTINUOUS_SIZE": {
+          "n": 1,
+          "pages": [
+            "resize-textarea"
+          ]
+        },
+        "A_COORDINATED_SEQUENCE": {
+          "n": 1,
+          "pages": [
+            "form-sequence-2"
+          ]
+        },
+        "A_COUNT_OF_WHAT_IS_SHOWN": {
+          "n": 1,
+          "pages": [
+            "visual-addition"
+          ]
+        },
+        "A_GEOMETRIC_CONSTRUCTION": {
+          "n": 1,
+          "pages": [
+            "bisect-angle"
+          ]
+        },
+        "A_NAMED_CONTROL": {
+          "n": 2,
+          "pages": [
+            "sign-agreement",
+            "social-media"
+          ]
+        },
+        "A_PERCEPTUAL_PROPERTY": {
+          "n": 5,
+          "pages": [
+            "click-checkboxes-soft",
+            "click-shades",
+            "drag-shapes-2",
+            "hover-shape",
+            "text-editor"
+          ]
+        },
+        "A_POINT_NOT_AN_ELEMENT": {
+          "n": 6,
+          "pages": [
+            "circle-center",
+            "draw-circle",
+            "draw-line",
+            "find-midpoint",
+            "hot-cold",
+            "right-angle"
+          ]
+        },
+        "A_RENDERED_PATTERN": {
+          "n": 1,
+          "pages": [
+            "number-checkboxes"
+          ]
+        },
+        "A_SUSTAINED_MOUSE_STATE": {
+          "n": 2,
+          "pages": [
+            "chase-circle",
+            "moving-items"
+          ]
+        },
+        "A_TIME_PLACED_ON_A_GRID": {
+          "n": 3,
+          "pages": [
+            "choose-date",
+            "choose-date-nodelay",
+            "daily-calendar"
+          ]
+        },
+        "A_VALUE_CARRIED_ACROSS_FIELDS": {
+          "n": 4,
+          "pages": [
+            "copy-paste",
+            "copy-paste-2",
+            "find-word",
+            "read-table-2"
+          ]
+        },
+        "CONTINUOUS_TO_POSITION": {
+          "n": 5,
+          "pages": [
+            "form-sequence",
+            "use-colorwheel",
+            "use-colorwheel-2",
+            "use-slider",
+            "use-slider-2"
+          ]
+        },
+        "FEEDBACK_ACROSS_TURNS": {
+          "n": 3,
+          "pages": [
+            "guess-number",
+            "simon-says",
+            "tic-tac-toe"
+          ]
+        },
+        "FIND_BY_CONTENT": {
+          "n": 5,
+          "pages": [
+            "click-menu",
+            "email-inbox-forward-nl-turk",
+            "social-media-all",
+            "social-media-some",
+            "terminal"
+          ]
+        },
+        "WORLD_KNOWLEDGE": {
+          "n": 4,
+          "pages": [
+            "book-flight",
+            "book-flight-nodelay",
+            "odd-or-even",
+            "order-food"
+          ]
+        }
+      },
+      "classes": 16,
+      "largest_class": 6,
+      "pages_unsolved": 46,
+      "rows": [
+        {
+          "class": "A_GEOMETRIC_CONSTRUCTION",
+          "missing_factor": "the answer is a placement satisfying a stated relation",
+          "task": "bisect-angle",
+          "typeable_fields": 0,
+          "utterance": "Create a line that bisects the angle evenly in two, then press submit."
+        },
+        {
+          "class": "WORLD_KNOWLEDGE",
+          "missing_factor": "the answer is a fact about the world, not a function of the page",
+          "task": "book-flight",
+          "typeable_fields": 2,
+          "utterance": "Book the shortest one-way flight from: South Naknek, AK to: LEB on 12/06/2016."
+        },
+        {
+          "class": "WORLD_KNOWLEDGE",
+          "missing_factor": "the answer is a fact about the world, not a function of the page",
+          "task": "book-flight-nodelay",
+          "typeable_fields": 2,
+          "utterance": "Book the shortest one-way flight from: South Naknek, AK to: LEB on 12/06/2016."
+        },
+        {
+          "class": "A_SUSTAINED_MOUSE_STATE",
+          "missing_factor": "the action is a held state, not a discrete step",
+          "task": "chase-circle",
+          "typeable_fields": 0,
+          "utterance": "Keep your mouse inside the circle as it moves around."
+        },
+        {
+          "class": "A_TIME_PLACED_ON_A_GRID",
+          "missing_factor": "the date is derivable, its cell must be located",
+          "task": "choose-date",
+          "typeable_fields": 0,
+          "utterance": "Select 11/10/2016 as the date and hit submit."
+        },
+        {
+          "class": "A_TIME_PLACED_ON_A_GRID",
+          "missing_factor": "the date is derivable, its cell must be located",
+          "task": "choose-date-nodelay",
+          "typeable_fields": 0,
+          "utterance": "Select 11/10/2016 as the date and hit submit."
+        },
+        {
+          "class": "A_POINT_NOT_AN_ELEMENT",
+          "missing_factor": "no element names the answer; the answer is a location",
+          "task": "circle-center",
+          "typeable_fields": 0,
+          "utterance": "Find and click on the center of the circle, then press submit."
+        },
+        {
+          "class": "A_PERCEPTUAL_PROPERTY",
+          "missing_factor": "the element is present but only a look tells which",
+          "task": "click-checkboxes-soft",
+          "typeable_fields": 0,
+          "utterance": "Select words similar to homes, unhappy, real, chubby and click Submit."
+        },
+        {
+          "class": "FIND_BY_CONTENT",
+          "missing_factor": "the target is present and named; finding it is the work",
+          "task": "click-menu",
+          "typeable_fields": 0,
+          "utterance": "Select Milissent>Harmonia>Anita"
+        },
+        {
+          "class": "A_PERCEPTUAL_PROPERTY",
+          "missing_factor": "the element is present but only a look tells which",
+          "task": "click-shades",
+          "typeable_fields": 0,
+          "utterance": "Select all the shades of blue and press Submit."
+        },
+        {
+          "class": "A_VALUE_CARRIED_ACROSS_FIELDS",
+          "missing_factor": "the page holds the answer; it must be moved and constrained",
+          "task": "copy-paste",
+          "typeable_fields": 2,
+          "utterance": "Copy the text in the textarea below, paste it into the textbox and press Submit."
+        },
+        {
+          "class": "A_VALUE_CARRIED_ACROSS_FIELDS",
+          "missing_factor": "the page holds the answer; it must be moved and constrained",
+          "task": "copy-paste-2",
+          "typeable_fields": 4,
+          "utterance": "Copy the text from the 3rd text area below and paste it into the text input, then press Submit."
+        },
+        {
+          "class": "A_TIME_PLACED_ON_A_GRID",
+          "missing_factor": "the date is derivable, its cell must be located",
+          "task": "daily-calendar",
+          "typeable_fields": 0,
+          "utterance": "Create a 90 mins event named \"Party\", between 12PM and 4PM."
+        },
+        {
+          "class": "A_PERCEPTUAL_PROPERTY",
+          "missing_factor": "the element is present but only a look tells which",
+          "task": "drag-shapes-2",
+          "typeable_fields": 0,
+          "utterance": "Drag all blue shapes into the left box, and everything else into the right box."
+        },
+        {
+          "class": "A_POINT_NOT_AN_ELEMENT",
+          "missing_factor": "no element names the answer; the answer is a location",
+          "task": "draw-circle",
+          "typeable_fields": 0,
+          "utterance": "Draw a circle centered around the marked point by dragging the mouse. Press submit when done."
+        },
+        {
+          "class": "A_POINT_NOT_AN_ELEMENT",
+          "missing_factor": "no element names the answer; the answer is a location",
+          "task": "draw-line",
+          "typeable_fields": 0,
+          "utterance": "Draw a vertical line that runs through the dot, then press submit."
+        },
+        {
+          "class": "FIND_BY_CONTENT",
+          "missing_factor": "the target is present and named; finding it is the work",
+          "task": "email-inbox-forward-nl-turk",
+          "typeable_fields": 0,
+          "utterance": "Find the email from Janot and send it to Wren."
+        },
+        {
+          "class": "A_POINT_NOT_AN_ELEMENT",
+          "missing_factor": "no element names the answer; the answer is a location",
+          "task": "find-midpoint",
+          "typeable_fields": 0,
+          "utterance": "Find and click on the shortest mid-point between the two points, then press submit."
+        },
+        {
+          "class": "A_VALUE_CARRIED_ACROSS_FIELDS",
+          "missing_factor": "the page holds the answer; it must be moved and constrained",
+          "task": "find-word",
+          "typeable_fields": 1,
+          "utterance": "Find the 5th word in the paragraph, type that into the textbox and press \"Submit\"."
+        },
+        {
+          "class": "CONTINUOUS_TO_POSITION",
+          "missing_factor": "the value is derivable, the widget is not a text field",
+          "task": "form-sequence",
+          "typeable_fields": 0,
+          "utterance": "Select 5 with the slider, click the 3rd checkbox, then hit Submit."
+        },
+        {
+          "class": "A_COORDINATED_SEQUENCE",
+          "missing_factor": "each step exists; the sequence is the missing thing",
+          "task": "form-sequence-2",
+          "typeable_fields": 3,
+          "utterance": "Check the 3rd radio button and enter the number \"10\" into the 2nd textbox."
+        },
+        {
+          "class": "FEEDBACK_ACROSS_TURNS",
+          "missing_factor": "no single action is correct; the page must be asked",
+          "task": "guess-number",
+          "typeable_fields": 1,
+          "utterance": "Guess the number between 0-9 and press Submit. Use the feedback below to find the right number."
+        },
+        {
+          "class": "A_POINT_NOT_AN_ELEMENT",
+          "missing_factor": "no element names the answer; the answer is a location",
+          "task": "hot-cold",
+          "typeable_fields": 0,
+          "utterance": "Find and click on the HOT area."
+        },
+        {
+          "class": "A_PERCEPTUAL_PROPERTY",
+          "missing_factor": "the element is present but only a look tells which",
+          "task": "hover-shape",
+          "typeable_fields": 0,
+          "utterance": "Keep the mouse hovered over the colored square."
+        },
+        {
+          "class": "A_SUSTAINED_MOUSE_STATE",
+          "missing_factor": "the action is a held state, not a discrete step",
+          "task": "moving-items",
+          "typeable_fields": 0,
+          "utterance": "Click as many moving circles as possible."
+        },
+        {
+          "class": "A_CONSTRAINED_SEARCH",
+          "missing_factor": "several conditions must hold at once over the page's records",
+          "task": "multi-layouts",
+          "typeable_fields": 3,
+          "utterance": "Search for thriller movies directed by George from year 1994."
+        },
+        {
+          "class": "A_CONSTRAINED_SEARCH",
+          "missing_factor": "several conditions must hold at once over the page's records",
+          "task": "multi-orderings",
+          "typeable_fields": 3,
+          "utterance": "Search for thriller movies directed by George from year 1994."
+        },
+        {
+          "class": "A_RENDERED_PATTERN",
+          "missing_factor": "the answer is a shape that must be built cell by cell",
+          "task": "number-checkboxes",
+          "typeable_fields": 0,
+          "utterance": "Draw the number \"8\" in the checkboxes using the example on the right and press Submit when finished."
+        },
+        {
+          "class": "WORLD_KNOWLEDGE",
+          "missing_factor": "the answer is a fact about the world, not a function of the page",
+          "task": "odd-or-even",
+          "typeable_fields": 0,
+          "utterance": "Mark the numbers below as odd or even and press submit when done."
+        },
+        {
+          "class": "WORLD_KNOWLEDGE",
+          "missing_factor": "the answer is a fact about the world, not a function of the page",
+          "task": "order-food",
+          "typeable_fields": 0,
+          "utterance": "Order 3 items that are meat"
+        },
+        {
+          "class": "A_VALUE_CARRIED_ACROSS_FIELDS",
+          "missing_factor": "the page holds the answer; it must be moved and constrained",
+          "task": "read-table-2",
+          "typeable_fields": 2,
+          "utterance": "Enter the value that corresponds with each label into the form and submit when done."
+        },
+        {
+          "class": "A_CONTINUOUS_SIZE",
+          "missing_factor": "the answer is a size, not a value or an element",
+          "task": "resize-textarea",
+          "typeable_fields": 1,
+          "utterance": "Resize the textarea so that the height is larger than its initial size then press Submit."
+        },
+        {
+          "class": "A_POINT_NOT_AN_ELEMENT",
+          "missing_factor": "no element names the answer; the answer is a location",
+          "task": "right-angle",
+          "typeable_fields": 0,
+          "utterance": "Add a third point to create a right angle, then press submit."
+        },
+        {
+          "class": "A_NAMED_CONTROL",
+          "missing_factor": "the control is named; pressing it is the whole task",
+          "task": "sign-agreement",
+          "typeable_fields": 0,
+          "utterance": "Scroll to the bottom of the textarea, enter the name \"Kanesha\" then press \"Agree\""
+        },
+        {
+          "class": "FEEDBACK_ACROSS_TURNS",
+          "missing_factor": "no single action is correct; the page must be asked",
+          "task": "simon-says",
+          "typeable_fields": 0,
+          "utterance": "Push the buttons in the order displayed."
+        },
+        {
+          "class": "A_NAMED_CONTROL",
+          "missing_factor": "the control is named; pressing it is the whole task",
+          "task": "social-media",
+          "typeable_fields": 0,
+          "utterance": "For the user @lorem, click on the \"Mute\" button."
+        },
+        {
+          "class": "FIND_BY_CONTENT",
+          "missing_factor": "the target is present and named; finding it is the work",
+          "task": "social-media-all",
+          "typeable_fields": 0,
+          "utterance": "Click the \"Reply\" button on all posts by @eget and then click Submit."
+        },
+        {
+          "class": "FIND_BY_CONTENT",
+          "missing_factor": "the target is present and named; finding it is the work",
+          "task": "social-media-some",
+          "typeable_fields": 0,
+          "utterance": "Click the \"Reply\" button on 3 posts by @eget and then click Submit."
+        },
+        {
+          "class": "FIND_BY_CONTENT",
+          "missing_factor": "the target is present and named; finding it is the work",
+          "task": "terminal",
+          "typeable_fields": 1,
+          "utterance": "Use the terminal below to delete a file that has no file extension."
+        },
+        {
+          "class": "A_PERCEPTUAL_PROPERTY",
+          "missing_factor": "the element is present but only a look tells which",
+          "task": "text-editor",
+          "typeable_fields": 0,
+          "utterance": "Using the text editor, give the text viverra. the style underlined and press Submit."
+        },
+        {
+          "class": "FEEDBACK_ACROSS_TURNS",
+          "missing_factor": "no single action is correct; the page must be asked",
+          "task": "tic-tac-toe",
+          "typeable_fields": 0,
+          "utterance": "Playing as 'X', win a game of tic-tac-toe."
+        },
+        {
+          "class": "CONTINUOUS_TO_POSITION",
+          "missing_factor": "the value is derivable, the widget is not a text field",
+          "task": "use-colorwheel",
+          "typeable_fields": 1,
+          "utterance": "Select magenta with the color picker and hit Submit."
+        },
+        {
+          "class": "CONTINUOUS_TO_POSITION",
+          "missing_factor": "the value is derivable, the widget is not a text field",
+          "task": "use-colorwheel-2",
+          "typeable_fields": 1,
+          "utterance": "Select the following color with the color picker and hit Submit."
+        },
+        {
+          "class": "CONTINUOUS_TO_POSITION",
+          "missing_factor": "the value is derivable, the widget is not a text field",
+          "task": "use-slider",
+          "typeable_fields": 0,
+          "utterance": "Select 108 with the slider and hit Submit."
+        },
+        {
+          "class": "CONTINUOUS_TO_POSITION",
+          "missing_factor": "the value is derivable, the widget is not a text field",
+          "task": "use-slider-2",
+          "typeable_fields": 0,
+          "utterance": "Set the sliders to the combination [15,15,16] and submit."
+        },
+        {
+          "class": "A_COUNT_OF_WHAT_IS_SHOWN",
+          "missing_factor": "the count is derivable, nothing else is missing",
+          "task": "visual-addition",
+          "typeable_fields": 1,
+          "utterance": "Type the total number of blocks into the textbox and press Submit."
+        }
+      ]
+    },
+    "why_the_algebra_did_not_transfer": {
+      "cause": "every rule in derived_value_v1.derivations is gated on a hand-written English phrase: LAST_WORD on 'last word'/'ends with', JOIN_SHOWN on 'below'/'shown'/'following'/'these', CLOCK24 on a type=time field or the word 'time', CASE_UPPER on 'upper'/'capital'",
+      "measured_elsewhere": "canonical/verification/DERIVED_VALUE_FULL_SUITE_20261116_V1.json: +5 pages, all inside the 8 design pages, 0 of 121 held out",
+      "reading": "the phrase is a fact about the eight pages the author read, not a fact about a page the author never saw. The part was a lookup with nothing to look up, not a method that failed to generalise."
+    }
+  },
+  "measured_receipts": [
+    {
+      "answer_keys_present": null,
+      "receipt": "COMPARISONS_CLOSE_THE_LAST_MILE_20261116_V1.json",
+      "repaired_count": 18,
+      "repaired_tasks": [
+        "bitcount",
+        "bucketsort",
+        "find_first_in_sorted",
+        "find_in_sorted",
+        "gcd",
+        "get_factors",
+        "is_valid_parenthesization",
+        "kth",
+        "lcs_length",
+        "lis",
+        "max_sublist_sum",
+        "mergesort",
+        "next_palindrome",
+        "next_permutation",
+        "pascal",
+        "quicksort",
+        "rpn_eval",
+        "sieve"
+      ],
+      "sha256": "f530134ad0370214990eedf134044ab8e2dde89d4b5f2abdfa43398cf88de4b9",
+      "status": "READ"
+    },
+    {
+      "answer_keys_present": null,
+      "receipt": "THE_EDIT_SPACE_IS_THE_PROGRAM_NOT_A_LIST_20261116_V1.json",
+      "repaired_count": 14,
+      "repaired_tasks": [
+        "bitcount",
+        "bucketsort",
+        "find_in_sorted",
+        "get_factors",
+        "kth",
+        "lcs_length",
+        "lis",
+        "max_sublist_sum",
+        "mergesort",
+        "next_palindrome",
+        "next_permutation",
+        "pascal",
+        "quicksort",
+        "sieve"
+      ],
+      "sha256": "5d4bb083e8a386c1443a8b90962d9922e5445d1806a19bd964e23456ba0d4fe2",
+      "status": "READ"
+    },
+    {
+      "answer_keys_present": null,
+      "receipt": "REGION_REWRITES_AND_THE_REFUSAL_AUDIT_20261116_V1.json",
+      "repaired_count": 17,
+      "repaired_tasks": [
+        "bitcount",
+        "bucketsort",
+        "find_first_in_sorted",
+        "find_in_sorted",
+        "gcd",
+        "get_factors",
+        "kth",
+        "lcs_length",
+        "lis",
+        "max_sublist_sum",
+        "mergesort",
+        "next_palindrome",
+        "next_permutation",
+        "pascal",
+        "quicksort",
+        "rpn_eval",
+        "sieve"
+      ],
+      "sha256": "4bd5edb2d10ed9a4702c969ab562137fbd043c13c254186a775579e55c0fa1a9",
+      "status": "READ"
+    },
+    {
+      "answer_keys_present": 0,
+      "receipt": "CONTRACT_GROUNDED_REPAIR_20261116_V1.json",
+      "repaired_count": 4,
+      "repaired_tasks": [
+        "bitcount",
+        "next_permutation",
+        "pascal",
+        "quicksort"
+      ],
+      "sha256": "5a29eb0651eba8bdbbeedfc8d10bfe100e47569148f660014c885e2bd23af93a",
+      "status": "READ"
+    },
+    {
+      "answer_keys_present": 0,
+      "receipt": "INTERVENTIONAL_GOAL_20261116_V1.json",
+      "repaired_count": null,
+      "repaired_tasks": [
+        "longest_common_subsequence"
+      ],
+      "sha256": "293a6241aa901795e3f85020c2b4c4d34218520e9c85adf3df89b7c514bcff9d",
+      "status": "READ"
+    },
+    {
+      "answer_keys_present": null,
+      "receipt": "RERUN_THE_LEARNED_ARMS_REPAIRS_20261116_V1.json",
+      "repaired_count": null,
+      "repaired_tasks": [
+        "bucketsort",
+        "find_first_in_sorted",
+        "find_in_sorted",
+        "gcd",
+        "get_factors",
+        "hanoi",
+        "is_valid_parenthesization",
+        "knapsack",
+        "lcs_length",
+        "levenshtein",
+        "longest_common_subsequence",
+        "minimum_spanning_tree",
+        "next_permutation",
+        "pascal",
+        "quicksort",
+        "to_base"
+      ],
+      "sha256": "f7a19a843fba7295553c2f2fde48abdc62eced0b5d9ca1ced793687d1a0ec9a4",
+      "status": "READ"
+    },
+    {
+      "answer_keys_present": null,
+      "receipt": "SYNTHESIS_FROM_THE_FAILURE_20261116_V1.json",
+      "repaired_count": null,
+      "repaired_tasks": [
+        "bucketsort",
+        "is_valid_parenthesization",
+        "quicksort"
+      ],
+      "sha256": "c9964d0f4963ffb48f41de687c917e0d296bd5fa92aedf0a5782026e4173d029",
+      "status": "READ"
+    },
+    {
+      "answer_keys_present": null,
+      "receipt": "WHERE_THE_OBSERVABLE_WAS_MISSING_20261116_V1.json",
+      "repaired_count": 0,
+      "repaired_tasks": [],
+      "sha256": "3b2ff583214b7869038666bf150b95cc3e494c772770325c387c40c151a60c27",
+      "status": "READ"
+    },
+    {
+      "answer_keys_present": null,
+      "receipt": "COMPOSED_REPAIR_ONE_RUN_20261116_V1.json",
+      "repaired_count": 24,
+      "repaired_tasks": [
+        "bitcount",
+        "bucketsort",
+        "find_first_in_sorted",
+        "find_in_sorted",
+        "gcd",
+        "get_factors",
+        "hanoi",
+        "is_valid_parenthesization",
+        "knapsack",
+        "kth",
+        "lcs_length",
+        "levenshtein",
+        "lis",
+        "longest_common_subsequence",
+        "max_sublist_sum",
+        "mergesort",
+        "minimum_spanning_tree",
+        "next_palindrome",
+        "next_permutation",
+        "pascal",
+        "quicksort",
+        "rpn_eval",
+        "sieve",
+        "to_base"
+      ],
+      "sha256": "f2c312d1ed571bd63e427fc417b590d1349fd78df7d951d7f15d85bf683394f2",
+      "status": "READ"
+    },
+    {
+      "answer_keys_present": null,
+      "receipt": "ARM_LEARNED_IN_ONE_RUN_20261116_V1.json",
+      "repaired_count": 24,
+      "repaired_tasks": [
+        "bitcount",
+        "bucketsort",
+        "find_first_in_sorted",
+        "find_in_sorted",
+        "gcd",
+        "get_factors",
+        "hanoi",
+        "is_valid_parenthesization",
+        "knapsack",
+        "kth",
+        "lcs_length",
+        "levenshtein",
+        "lis",
+        "longest_common_subsequence",
+        "max_sublist_sum",
+        "mergesort",
+        "minimum_spanning_tree",
+        "next_palindrome",
+        "next_permutation",
+        "pascal",
+        "quicksort",
+        "rpn_eval",
+        "sieve",
+        "to_base"
+      ],
+      "sha256": "085fc5b7374d464c83cf06a2553361ac5657738e0a587eb5cd5a297315d13e6c",
+      "status": "READ"
+    }
+  ],
+  "mechanism_census_by_effect": {
+    "capture_and_premise": {
+      "count": 4,
+      "missing": [],
+      "present": [
+        "canonical/swe_kernel/verified_skill_crystallizer_v1.py",
+        "canonical/swe_kernel/one_demonstration_reach_v1.py",
+        "canonical/runtime/applicability_v1.py",
+        "canonical/swe_kernel/lesson_admission_gate_v1.py"
+      ]
+    },
+    "constructive_actions_and_operands": {
+      "count": 7,
+      "missing": [],
+      "present": [
+        "canonical/tools/grammar_closed_repair_v1.py",
+        "canonical/tools/quixbugs_required_edit_taxonomy_v1.py",
+        "canonical/runtime/derived_value_v1.py",
+        "canonical/runtime/inert_action_prior_v1.py",
+        "canonical/runtime/anchored_frame_v1.py",
+        "canonical/tools/synthesized_expression_from_the_failure_v1.py",
+        "canonical/tools/miniwob_contract_arm_arm_v1.py"
+      ]
+    },
+    "environment_cost_and_composition": {
+      "count": 10,
+      "missing": [],
+      "present": [
+        "canonical/tools/instant_learning_in_a_new_environment_v1.py",
+        "canonical/runtime/environment_learning_v1.py",
+        "canonical/runtime/capability_planner.py",
+        "canonical/runtime/generic_goal_tool_effect_planner_v1.py",
+        "canonical/runtime/capability_composer_v1.py",
+        "canonical/runtime/verified_skill_macro_planner_v1.py",
+        "canonical/runtime/explicit_recovery_planner.py",
+        "canonical/swe_kernel/predicate_world_abstraction_v1.py",
+        "canonical/swe_kernel/operator_semantics_v1.py",
+        "canonical/swe_kernel/hierarchical_skill_library_v1.py"
+      ]
+    },
+    "exact_decision_past_enumeration": {
+      "count": 3,
+      "missing": [],
+      "present": [
+        "canonical/runtime/applicability_v1.py",
+        "canonical/runtime/contrast_selection_v1.py",
+        "canonical/tests/test_the_learner_decides_past_the_enumeration_wall_v1.py"
+      ]
+    },
+    "four_levers_and_edit_supply": {
+      "count": 4,
+      "missing": [],
+      "present": [
+        "canonical/tools/the_four_levers_of_learning_from_experience_v1.py",
+        "canonical/swe_kernel/systematic_edit_supply_v1.py",
+        "canonical/runtime/demonstration_version_space_v1.py",
+        "canonical/runtime/contrast_selection_v1.py"
+      ]
+    },
+    "goal_and_counterfactual_verdict": {
+      "count": 4,
+      "missing": [],
+      "present": [
+        "canonical/swe_kernel/contract_grounded_repair_v1.py",
+        "canonical/swe_kernel/interventional_goal_v1.py",
+        "canonical/runtime/semantic_operator_counterfactuals.py",
+        "canonical/runtime/contrast_selection_v1.py"
+      ]
+    },
+    "gui_invariance_and_operand_boundary": {
+      "count": 3,
+      "missing": [],
+      "present": [
+        "canonical/tools/gui_invariance_census_v1.py",
+        "canonical/tools/gui_phrase_blind_basis_arm_v1.py",
+        "canonical/runtime/derived_value_v1.py"
+      ]
+    },
+    "hidden_synthesis_and_orchestration": {
+      "count": 7,
+      "missing": [],
+      "present": [
+        "canonical/runtime/counterexample_guided_causal_architecture_synthesizer_v1.py",
+        "canonical/runtime/finite_grid_program_inducer_v1.py",
+        "canonical/runtime/swe_observational_program_synthesizer_v1.py",
+        "canonical/runtime/unified_cognitive_fabric_v1.py",
+        "canonical/swe_kernel/closed_loop_autonomous_controller_v1.py",
+        "canonical/runtime/bound_capabilities/software_patch_cegis_z3_v1.py",
+        "canonical/runtime/bound_capabilities/hardcore_software_engineering_orchestrator_v1.py"
+      ]
+    },
+    "identification_and_separation": {
+      "count": 9,
+      "missing": [],
+      "present": [
+        "canonical/runtime/finite_identifiability.py",
+        "canonical/tools/identification_cost_in_a_real_space_v1.py",
+        "canonical/swe_kernel/one_demonstration_identifies_v1.py",
+        "canonical/swe_kernel/repair_version_space_selection_v1.py",
+        "canonical/swe_kernel/closed_loop_trace_abduction_repair_v1.py",
+        "canonical/tools/version_space_selection_measure_v1.py",
+        "canonical/tools/closed_loop_trace_abduction_measure_v1.py",
+        "canonical/swe_kernel/specification_from_structure_v1.py",
+        "canonical/tools/grammar_closed_repair_v1.py"
+      ]
+    },
+    "independent_witness_and_admission": {
+      "count": 8,
+      "missing": [],
+      "present": [
+        "canonical/runtime/instruction_contract_v1.py",
+        "canonical/runtime/instruction_policy_v1.py",
+        "canonical/runtime/observable_descriptor_v1.py",
+        "canonical/tools/repair_where_the_suite_is_the_observable_v1.py",
+        "canonical/tools/rerun_the_learned_arms_repairs_v1.py",
+        "canonical/swe_kernel/test_suite_admission_v1.py",
+        "canonical/swe_kernel/weight_update_admission_v1.py",
+        "canonical/swe_kernel/learned_skill_verdict_v1.py"
+      ]
+    },
+    "index_specification_and_value_layer": {
+      "count": 5,
+      "missing": [],
+      "present": [
+        "canonical/tools/the_index_is_the_bottleneck_v1.py",
+        "canonical/tools/compose_measured_effects_v1.py",
+        "canonical/swe_kernel/systematic_edit_supply_v1.py",
+        "canonical/runtime/contrast_selection_v1.py",
+        "canonical/runtime/applicability_v1.py"
+      ]
+    },
+    "invariance_and_in_run_learning": {
+      "count": 6,
+      "missing": [],
+      "present": [
+        "canonical/runtime/implied_ending_v1.py",
+        "canonical/runtime/picker_answer_v1.py",
+        "canonical/tools/composed_repair_one_run_v1.py",
+        "canonical/tools/arm_learned_from_its_own_verified_repairs_v1.py",
+        "canonical/tools/what_one_verified_repair_travels_v1.py",
+        "canonical/swe_kernel/induced_edit_basis_v1.py"
+      ]
+    },
+    "long_tail_trigger_and_basin": {
+      "count": 5,
+      "missing": [],
+      "present": [
+        "canonical/runtime/declared_trigger_census_v1.py",
+        "canonical/runtime/derived_value_v1.py",
+        "canonical/runtime/applicability_v1.py",
+        "canonical/runtime/contrast_selection_v1.py",
+        "canonical/swe_kernel/one_demonstration_basin_v1.py"
+      ]
+    },
+    "proved_composition": {
+      "count": 3,
+      "missing": [],
+      "present": [
+        "canonical/swe_kernel/proved_composition_v1.py",
+        "canonical/runtime/verified_skill_macro_planner_v1.py",
+        "canonical/runtime/capability_composer_v1.py"
+      ]
+    },
+    "read_first_operand_and_replay_drift": {
+      "count": 5,
+      "missing": [],
+      "present": [
+        "canonical/runtime/learn_or_read_v1.py",
+        "canonical/runtime/derived_value_v1.py",
+        "canonical/swe_kernel/action_replay_under_change_v1.py",
+        "canonical/tools/derived_value_full_suite_receipt_v1.py",
+        "canonical/tools/learn_or_read_board_v1.py"
+      ]
+    },
+    "unbound_name_binding_and_retraction": {
+      "count": 4,
+      "missing": [],
+      "present": [
+        "canonical/runtime/what_one_experience_buys_v1.py",
+        "canonical/runtime/demonstration_version_space_v1.py",
+        "canonical/tools/miniwob_one_success_generalisation_measure_v1.py",
+        "canonical/tests/test_what_one_experience_buys_v1.py"
+      ]
+    }
+  },
+  "model_dependency_count": 0,
+  "network_dependency_count": 0,
+  "new_environment_cost_law": {
+    "measured_effect": {
+      "adaptation_trials_active": 29,
+      "adaptation_trials_probing_every_atom": 36,
+      "atoms": 18,
+      "atoms_whose_effect_ignores_the_argument": 4,
+      "atoms_whose_only_effect_moves_identity": 1,
+      "authority": "NONE__PRODUCER_RUN_SANDBOX",
+      "break_even_requests_per_machine": 6.44,
+      "break_even_requests_total": 25.78,
+      "cells": 36,
+      "context_sensitive_atoms": "5 of 18 (an action's effect depends on the state class it runs in)",
+      "headline": "instant learning in a new environment is a cost law, not a solution: ~6.4 requests per machine to break even, 13 of 16 solved against 11 by demonstration, and every remaining refusal is composition or expressivity",
+      "inert_cells": "17 of 36 (47.2%)",
+      "machines": 4,
+      "receipts": [
+        "canonical/verification/INSTANT_LEARNING_IN_A_NEW_ENVIRONMENT_20261116_V1.json",
+        "canonical/verification/INSTANT_LEARNING_SHUFFLED_CONTROL_20261116_V1.json"
+      ],
+      "refusals": {
+        "effect_needs_composition": [
+          "TARBALL REPLACE"
+        ],
+        "surface_cannot_express_the_effect": [
+          "GIT REPLACE",
+          "GIT REMOVE"
+        ]
+      },
+      "requests": 16,
+      "requests_solved_by_demonstration": 11,
+      "requests_solved_by_measurement": 13,
+      "shuffled_control": {
+        "note": "re-labelling and re-ordering every atom leaves the measuring agent's solved set identical machine by machine, while the demonstrator's numbers move: its capability is a function of the order actions happen to be offered",
+        "solved_by_demonstration": 12,
+        "solved_by_measurement_unchanged": 13,
+        "trials_by_demonstration": 46
+      },
+      "trials_demonstration": 34,
+      "trials_measurement": 44,
+      "trials_per_request_after_adaptation": 1.0,
+      "trials_per_request_by_demonstration": 2.125,
+      "unclassified_cells": 1,
+      "what": "four real machines (filesystem, git, tarball, sqlite) sharing no command, argument or identity scheme, solved through one shared effect vocabulary learned by one trial per (atom, state class)"
+    },
+    "receipts": [
+      "canonical/verification/INSTANT_LEARNING_IN_A_NEW_ENVIRONMENT_20261116_V1.json",
+      "canonical/verification/INSTANT_LEARNING_SHUFFLED_CONTROL_20261116_V1.json"
+    ],
+    "shuffled_summary": {
+      "adaptation_trials_active": 35,
+      "adaptation_trials_probing_every_atom": 36,
+      "atoms_offered": 18,
+      "atoms_that_cannot_change_the_state": 17,
+      "atoms_whose_effect_ignores_the_argument": 4,
+      "atoms_whose_only_effect_moves_identity": 1,
+      "crossover_requests": 18.67,
+      "learn_each_requests_solved": 12,
+      "learn_each_trials": 46,
+      "learn_each_trials_per_request": 2.875,
+      "machines": 4,
+      "ours_requests_solved": 13,
+      "ours_trials": 50,
+      "per_machine": {
+        "FILESYSTEM": {
+          "adaptation": 9,
+          "context_sensitive_atoms": [
+            "FIL_X1",
+            "FIL_X3",
+            "FIL_X5"
+          ],
+          "learn_each": 8,
+          "ours": 13,
+          "solved": 4,
+          "solved_by_demonstration": 4
+        },
+        "GIT": {
+          "adaptation": 10,
+          "context_sensitive_atoms": [],
+          "learn_each": 14,
+          "ours": 14,
+          "solved": 2,
+          "solved_by_demonstration": 2
+        },
+        "SQLITE": {
+          "adaptation": 8,
+          "context_sensitive_atoms": [],
+          "learn_each": 12,
+          "ours": 12,
+          "solved": 4,
+          "solved_by_demonstration": 3
+        },
+        "TARBALL": {
+          "adaptation": 8,
+          "context_sensitive_atoms": [
+            "TAR_X3",
+            "TAR_X4"
+          ],
+          "learn_each": 12,
+          "ours": 11,
+          "solved": 3,
+          "solved_by_demonstration": 3
+        }
+      },
+      "requests": 16,
+      "requests_solved": 13,
+      "unclassified_atoms": 1
+    },
+    "status": "COST_MOVES_FROM_REQUESTS_TO_ENVIRONMENTS_NOT_ZERO_AND_NOT_ALL_COMPUTER_USE",
+    "summary": {
+      "adaptation_trials_active": 29,
+      "adaptation_trials_probing_every_atom": 36,
+      "atoms_offered": 18,
+      "atoms_that_cannot_change_the_state": 17,
+      "atoms_whose_effect_ignores_the_argument": 4,
+      "atoms_whose_only_effect_moves_identity": 1,
+      "crossover_requests": 25.78,
+      "learn_each_requests_solved": 11,
+      "learn_each_trials": 34,
+      "learn_each_trials_per_request": 2.125,
+      "machines": 4,
+      "ours_requests_solved": 13,
+      "ours_trials": 44,
+      "per_machine": {
+        "FILESYSTEM": {
+          "adaptation": 9,
+          "context_sensitive_atoms": [
+            "FS_A1",
+            "FS_A2",
+            "FS_A4"
+          ],
+          "learn_each": 4,
+          "ours": 13,
+          "solved": 4,
+          "solved_by_demonstration": 4
+        },
+        "GIT": {
+          "adaptation": 6,
+          "context_sensitive_atoms": [],
+          "learn_each": 12,
+          "ours": 10,
+          "solved": 2,
+          "solved_by_demonstration": 2
+        },
+        "SQLITE": {
+          "adaptation": 6,
+          "context_sensitive_atoms": [],
+          "learn_each": 8,
+          "ours": 10,
+          "solved": 4,
+          "solved_by_demonstration": 3
+        },
+        "TARBALL": {
+          "adaptation": 8,
+          "context_sensitive_atoms": [
+            "TAR_A1",
+            "TAR_A2"
+          ],
+          "learn_each": 10,
+          "ours": 11,
+          "solved": 3,
+          "solved_by_demonstration": 2
+        }
+      },
+      "requests": 16,
+      "requests_solved": 13,
+      "unclassified_atoms": 1
+    }
+  },
+  "observable_gap_receipt": {
+    "receipt": "canonical/verification/WHERE_THE_OBSERVABLE_WAS_MISSING_20261116_V1.json",
+    "repaired": 0,
+    "stages": {
+      "NOT_REPAIRED__NO_SURVIVOR_AT_THE_SCREEN": 6,
+      "SCREEN_ACCEPTED__CORPUS_TEST_FAILS": 3
+    },
+    "tasks_measured": 9,
+    "tasks_without_json": [
+      "breadth_first_search",
+      "depth_first_search",
+      "detect_cycle",
+      "minimum_spanning_tree",
+      "reverse_linked_list",
+      "shortest_path_length",
+      "shortest_path_lengths",
+      "shortest_paths",
+      "topological_ordering"
+    ]
+  },
+  "proved_composition": {
+    "boxes": {
+      "A_NOT_PROVED": 15,
+      "B_REFUSED": 27,
+      "COMPOSED_VERIFIED": 31,
+      "NO_SECOND_CANDIDATE": 34,
+      "PREMISE_DIED": 22
+    },
+    "reach": {
+      "compose": 0.3875,
+      "where_premises_held": 0.5345
+    },
+    "receipt": "COMPOSE_ONLY_WHAT_IS_PROVED_20261116_V1.json",
+    "scan": {
+      "files": 5563,
+      "files_with_sites": 4228,
+      "premise_holding_sites": 9290,
+      "scan_seconds": 49.97
+    },
+    "status": "COMPOSE_ONLY_WHAT_IS_PROVED_AFFIRMATIVE_ORGAN_IS_BOUNDED_NOT_A_SINGLE_LEVER",
+    "step_one": {
+      "inline": {
+        "attempted": 36,
+        "proved": 22
+      },
+      "rename": {
+        "attempted": 36,
+        "proved": 35
+      }
+    }
+  },
+  "read_first_operand_and_replay_drift": {
+    "operand": {
+      "addition_vs_shipped": {
+        "chromium_seed_1060": {
+          "actions_saved": 1917,
+          "gains": 5,
+          "losses": 0,
+          "shipped": 78,
+          "union": 83
+        },
+        "chromium_seed_771": {
+          "gains": 4,
+          "losses": 0,
+          "shipped": 77,
+          "union": 81
+        },
+        "jsdom_seed_1060": {
+          "gains": 5,
+          "losses": 0,
+          "shipped": 62,
+          "union": 67
+        }
+      },
+      "authority": "NONE__PRODUCER_RUN_SANDBOX",
+      "compute_control": {
+        "pages": [
+          "enter-time",
+          "scroll-text",
+          "simple-algebra",
+          "simple-arithmetic",
+          "text-transform"
+        ],
+        "shipped_hand_at_4x_budget": "0 of 5 solved at 1600 actions",
+        "union_hand_at_400": "5 of 5 solved in 12 to 33 actions"
+      },
+      "corpus": "Farama-Foundation/miniwob-plusplus @33c3b4dd (MIT): 130 real task pages nobody in this repository wrote, run on headless Chromium 153.0.0 with real layout, hit-testing and input",
+      "decoy_control": {
+        "chromium_seed_1060": {
+          "net": -12
+        },
+        "chromium_seed_771": {
+          "net": -11
+        }
+      },
+      "headline": "capability grows by ADDITION not replacement: the value algebra added to the shipped vocabulary gains 5 pages and loses 0 (78 -> 83, seed 1060; 77 -> 81, seed 771) while spending 1917 fewer actions, and the SAME algebra handed over INSTEAD of the vocabulary is a net LOSS (62 -> 61, 5 gains 7 losses). All 5 gains sit on the 8 pages the operators were written on; on the other 121 pages the addition changes the score by exactly nothing. The miss is the OPERAND, and compute cannot buy it: the shipped hand fails all 5 pages at 1600 actions.",
+      "instrument_error_pages": [
+        "stock-market (bridge timeout at seed 1060; measured at seed 771, unsolved by all arms)"
+      ],
+      "pages_measured": 129,
+      "receipt": "canonical/verification/DERIVED_VALUE_FULL_SUITE_20261116_V1.json",
+      "replacement_vs_shipped": {
+        "jsdom_seed_1060": {
+          "derived_only": 61,
+          "gains": 6,
+          "losses": 7,
+          "net": -1,
+          "shipped": 62
+        },
+        "losses": [
+          "email-inbox",
+          "email-inbox-forward",
+          "email-inbox-forward-nl",
+          "email-inbox-noscroll",
+          "email-inbox-reply",
+          "email-inbox-star-reply",
+          "enter-password"
+        ]
+      },
+      "transfer_boundary": {
+        "gains_outside_design_set": [],
+        "held_out_pages": 121,
+        "shipped_solves": 77,
+        "union_solves": 77
+      }
+    },
+    "read_first": {
+      "cells": {
+        "demonstrable_but_reading_lost": 21,
+        "out_of_reach_of_both": 43,
+        "reading_wins_and_demonstrable": 57,
+        "reading_wins_where_nothing_was_demonstrable": 9
+      },
+      "composition_rule": {
+        "LEARN_pages": 41,
+        "LEARN_pages_reading_won": 0,
+        "LEARN_rate": 0.0,
+        "READ_pages": 89,
+        "READ_pages_reading_won": 66,
+        "READ_rate": 0.742,
+        "false_negatives": "0 -- the rule never forbids learning on a page the reading loses"
+      },
+      "denominator_warning": "the ladder's 78 demonstrated pages were reached by a search that could SEE the page's reward. A deployed agent is not given that. The reading arm never reads a reward, which is why the two are reported per page and intersected rather than compared as rates.",
+      "instrument": "canonical/tools/learn_or_read_board_v1.py",
+      "pages": 130,
+      "pages_a_search_demonstrated": 78,
+      "reading_arm_won": 66,
+      "substrate": "chromium, miniwob-plusplus 130 pages, seed 1060, 30-action budget, zero experience for the reading arm",
+      "the_two_facts": {
+        "learning_had_nothing_to_add_on": 57,
+        "named_gaps_a_policy_may_be_acquired_for": 21,
+        "of_which_share_of_demonstrable": 0.7308,
+        "reading_beat_trying_on": 9
+      }
+    },
+    "receipts": [
+      "canonical/verification/READ_FIRST_AND_LEARN_ONLY_FOR_A_NAMED_GAP_20261116_V1.json",
+      "canonical/verification/DERIVED_VALUE_FULL_SUITE_20261116_V1.json",
+      "canonical/verification/ACTION_REPLAY_UNDER_CHANGE_20261116_V1.json"
+    ],
+    "replay": {
+      "arms": {
+        "drift": {
+          "matches": 106,
+          "matches_at_zero_drift": 106,
+          "reading": "zero drift is necessary for a correct replay and not sufficient",
+          "stale": 122,
+          "stale_at_zero_drift": 4
+        },
+        "live_re_decision": {
+          "pairs": 228,
+          "premise_held_after_the_change": 228
+        },
+        "replay_of_the_record": {
+          "differs_but_holds": 4,
+          "does_not_parse": 47,
+          "matches_live": 106,
+          "silent_corruption": 71,
+          "silent_corruption_share": 0.3114,
+          "stale": 122,
+          "stale_share": 0.5351
+        }
+      },
+      "authority": "NONE__PRODUCER_RUN_SANDBOX",
+      "candidate_sites_per_sample": [
+        1400,
+        1820,
+        2240,
+        2660
+      ],
+      "corpus_files": 5562,
+      "corpus_sha256": "dbfd2a3db52ff9680881cbd087e379842859ec7d5a34ac6872192b957a8c3cf6",
+      "eligible_sites": 509,
+      "external_state": {
+        "guard_and_go": "29.0% of passing SWE-bench Verified patches retain code the human deleted; a deletion-check retrofit drops resolution 63.2% to 41.9% on 34 tasks (Aug 2026)",
+        "osworld_2": "44.3% binary over ~318 tool calls per median workflow; 0.995^318 is about 0.20",
+        "stair": "abstract plan reuse lifts to 81.2% and 79.2% while raw unabstracted trajectories transfer substantially worse",
+        "swe_touch": "a plausible mid-run repo edit cuts resolve by 7.7 points across 9 models; 63.3% of flipped runs end in retained conflict; 59.0% of real sessions contain user edits (arXiv 2608.02499)",
+        "trajectory_reduction": "a SWE-bench Verified trajectory averages 48.4K tokens over 40 steps and 22-30% can be dropped while Pass% rises to 66.5"
+      },
+      "files": 62,
+      "files_with_several_eligible_sites": 119,
+      "incremental_spend_usd": 0,
+      "measured_at_commit": "c3a4c75ef5fa13c2c46708255fc822e8b677f4d8",
+      "model_calls": 0,
+      "network_calls": 0,
+      "pairs": 228,
+      "per_sample_staleness": {
+        "0": 35,
+        "1": 30,
+        "2": 27,
+        "3": 30
+      },
+      "samples": 4,
+      "what_this_does_not_claim": [
+        "no capability credit, no benchmark rank, no terminal credit",
+        "no claim that zero drift is sufficient, nor that a fingerprint is a proof",
+        "no claim that these 228 pairs are the whole population: four independent samples put staleness at 45-58%"
+      ],
+      "witness": {
+        "first_order": [
+          "bootstrap_diff_interval.high",
+          "wilson_interval.high",
+          "REPLAY_MATCHES_LIVE",
+          0
+        ],
+        "path": "canonical/capabilities/internalized/causal_falsification/agent_replay_v1/agent_replay/stats.py",
+        "reading": "24 of the 56 files in the sample contain both a replay that matches live and a replay that silently corrupts: composition is not commutative in safety",
+        "reverse_order": [
+          "wilson_interval.high",
+          "bootstrap_diff_interval.high",
+          "SILENT_CORRUPTION",
+          -33
+        ],
+        "second_witness": {
+          "first_order": [
+            "_sentence.present",
+            "_text_world.trailing",
+            "REPLAY_MATCHES_LIVE",
+            0
+          ],
+          "path": "canonical/capabilities/true/generators/file_question_taught_words_gen_v1.py",
+          "reverse_order": [
+            "_text_world.trailing",
+            "_sentence.present",
+            "SILENT_CORRUPTION",
+            -62
+          ]
+        }
+      }
+    },
+    "status": "READ_FIRST_FOR_A_NAMED_GAP_ADD_THE_MISSING_OPERAND_NEVER_REPLAY_A_PLAN_AS_A_MACRO"
+  },
+  "receipt_arms_ignored": [
+    {
+      "arm": "summary.all_other_fixes",
+      "reason": "Shown 39 QuixBugs fixes; not a clean held-out vocabulary transfer.",
+      "receipt": "QUIXBUGS_EDIT_KIND_TRANSFER_20261112_V1.json"
+    },
+    {
+      "arm": "summary.another_benchmark",
+      "reason": "Claimed 20 repairs; PR #6887 re-judged them under pytest and confirmed 16, with 4 not reconstructible. Superseded by RERUN_THE_LEARNED_ARMS_REPAIRS_20261116_V1.json.",
+      "receipt": "QUIXBUGS_EDIT_KIND_TRANSFER_20261112_V1.json"
+    }
+  ],
+  "repaired_union_count": 24,
+  "repaired_union_tasks": [
+    "bitcount",
+    "bucketsort",
+    "find_first_in_sorted",
+    "find_in_sorted",
+    "gcd",
+    "get_factors",
+    "hanoi",
+    "is_valid_parenthesization",
+    "knapsack",
+    "kth",
+    "lcs_length",
+    "levenshtein",
+    "lis",
+    "longest_common_subsequence",
+    "max_sublist_sum",
+    "mergesort",
+    "minimum_spanning_tree",
+    "next_palindrome",
+    "next_permutation",
+    "pascal",
+    "quicksort",
+    "rpn_eval",
+    "sieve",
+    "to_base"
+  ],
+  "schema": "BRAIN_PROOF_CARRYING_COUNTERFACTUAL_UNION_AUDIT_V1",
+  "selection_measurement": {
+    "corpus": "100 held-out HumanEvalFix bugs; scored bug's own fix was never a lesson",
+    "majority_vote": {
+      "conclusion": "self-consistency is not evidence; a labelled answer to a chosen input is",
+      "examples": {
+        "Python/101": "5 of 6 candidates shared one behaviour; it was wrong",
+        "Python/3": "4 of 5 candidates shared one behaviour; it was wrong"
+      },
+      "measured": "among candidates that pass the SAME tests, the majority behaviour was the WRONG one in 3 of 5 disagreements"
+    },
+    "receipt": "canonical/verification/ONE_DEMONSTRATION_IS_NOT_IDENTIFICATION_MEASURE_20261116_V1.json",
+    "status": "SELECTION_AMONG_TEST_PASSING_CANDIDATES_NOT_A_QUIXBUGS_REPAIR_RECEIPT",
+    "summary": {
+      "behaviours_left_unseparated_by_every_probe": 43,
+      "behaviours_split_by_a_probe": 8,
+      "bugs_asked": 99,
+      "bugs_measured": 51,
+      "chosen_agrees_with_published_fix_on_every_humaneval_plus_input": 45,
+      "chosen_compared_on_humaneval_plus": 51,
+      "correct_after_selection": 48,
+      "correct_before_selection": 47,
+      "crashed_or_unfinished": 1,
+      "did_not_finish": [
+        "Python/156"
+      ],
+      "first_pass_candidate_was_correct": 47,
+      "no_candidate_passed_the_tests": 46,
+      "oracle_questions_asked": 9,
+      "partition_refused": 1,
+      "reference_behaviour_was_in_the_candidate_set": 48,
+      "regressions_caused_by_selection": 0,
+      "settled_and_equal_to_the_reference_behaviour": 8,
+      "settled_by_a_question": 8,
+      "still_wrong_because_the_right_behaviour_was_never_generated": [
+        "Python/1",
+        "Python/101",
+        "Python/92"
+      ],
+      "unseparated_and_equal_to_the_reference_behaviour": 40,
+      "unseparated_total": 43
+    }
+  },
+  "supersedes": [
+    "THE_GOAL_IS_A_COUNTERFACTUAL_WORLD_MODEL_20261116_V1.md",
+    "THE_GOAL_IS_THE_BOTTLENECK_20261116_V1.md",
+    "WHAT_IS_REAL_AND_THE_ONE_BOTTLENECK_20261116_V1.md"
+  ],
+  "unbound_name_binding_and_retraction": {
+    "decision": "THE_DESCRIPTION_WAS_NEVER_THE_PROBLEM__THE_BINDING_WAS",
+    "honest_limits": [
+      "AUTHORITY NONE -- one producer run in one sandbox.",
+      "The controlled A/B covers 15 tasks chosen BECAUSE the id rule could reach them, so +0.0667 is not the population effect; it is the effect on the tasks where the change can act.",
+      "The wider 130-page rerun was NOT clean: 68 of 78 tasks scored, and an apparent click-pie -0.95 was run-to-run variance, proved by the controlled A/B returning click-pie 0.05 both before and after. Run variance on this harness is large enough to fake a large per-task regression, so only paired same-seed A/Bs are admissible.",
+      "id-binding cannot help a page whose ids are unrelated to its instruction (click-pie: 0 id-bound tests, unaffected either way).",
+      "Nothing is credited: no capability, weight, terminal or family-rank claim."
+    ],
+    "measured_effect": {
+      "authority": "NONE__PRODUCER_RUN_SANDBOX",
+      "disclosed_not_clean": "a wider 130-page rerun scored 68 of 78 tasks and its apparent click-pie -0.95 was proved to be run variance by a paired A/B returning 0.05 on both sides",
+      "harness": "canonical/tools/miniwob_one_success_generalisation_measure_v1.py --substrate chromium --arms version_space --test-episodes 20",
+      "id_binding_ab": {
+        "after": 0.29,
+        "before": 0.2233,
+        "better": 2,
+        "delta": 0.0667,
+        "headline": "grid-coordinate 0.05 -> 1.00",
+        "tasks": 15,
+        "unchanged": 13,
+        "worse": 0
+      },
+      "structure_field_ab": {
+        "after": 0.4,
+        "before": 0.3978,
+        "better": 1,
+        "delta": 0.0022,
+        "tasks": 23,
+        "the_one_gain": "phone-book 0.15 -> 0.20",
+        "worse": 0
+      }
+    },
+    "measured_effect_kept": {
+      "bits_per_step_still_reported": 5.428,
+      "elements_where_the_preferred_description_is_ambiguous": {
+        "count": 67,
+        "of": 1415,
+        "share": 0.047
+      },
+      "from": [
+        "what_one_experience_buys_v1.py",
+        "canonical/verification/MINIWOB_ONE_SUCCESS_GENERALISATION_20261111_V5.json"
+      ],
+      "new_descriptions_per_task": 1.231,
+      "steps_recorded": 175,
+      "the_price_of_the_preferred_description": 0.102,
+      "vocabulary_saturates": false,
+      "what_that_number_now_means": "the number of descriptions still alive after one demonstration -- a measure of REDUNDANCY in the language, not of ambiguity and not of a second grammar. It must no longer be quoted as the cost of identifying a step."
+    },
+    "receipt": "canonical/verification/THE_TREE_ALREADY_SPOKE_ONE_LANGUAGE_20261116_V1.json",
+    "retraction": {
+      "how_it_was_refuted": [
+        "I wrote the 'shared language' module, then checked the existing one instead of trusting my own. demonstration_version_space_v1 ALREADY had nth, nth_from_end, nth_slot, nearest, matches(), pick() and _same_element(). My module re-implemented shipped code.",
+        "The tree already names 1415 of 1415 actionable elements: a description that selects exactly one element exists for every single one.",
+        "The 5.43 bits came from descriptions_left, which is hypotheses still ALIVE after a demonstration. Recomputed from the learner's own descriptions_of: median 42 descriptions name one element, log2 = 5.23. It is REDUNDANCY -- 42 ways to say the same thing -- not ambiguity, and not a second grammar.",
+        "Measured on the actual preference: the description the learner prefers carries 0.102 bits and selects more than one element for only 67 of 1415 (4.7%)."
+      ],
+      "what_i_claimed": "That acting and learning spoke two different languages, costing 5.43 bits/step in a private grammar versus 0.93 bits for a shared description, and that deleting the second language was the cheapest lever in the tree.",
+      "what_was_deleted": "canonical/runtime/one_description_language_v1.py and its 11 tests. It added nothing the tree did not have. Rebuilding a shipped capability is the failure mode this project forbids."
+    },
+    "second_fix": {
+      "examples": [
+        "click-widget 'a \"radio\" widget' -> name=radio",
+        "navigate-tree 'the folder or file named ...' -> classes=file",
+        "order-food 'items that are meat' -> title=meat",
+        "use-spinner 'select 7 with the spinner' -> for=spinner"
+      ],
+      "measured_census_over_130_pages": {
+        "by_field": {
+          "classes": 8,
+          "for": 1,
+          "name": 5,
+          "title": 5
+        },
+        "properties_named_by_their_instructions": 81,
+        "properties_with_no_binding_before": 19
+      },
+      "paired_same_seed_ab": {
+        "after": 0.4,
+        "before": 0.3978,
+        "better": 1,
+        "delta": 0.0022,
+        "tasks": 23,
+        "the_one_gain": "phone-book 0.15 -> 0.20",
+        "worse": 0
+      },
+      "tests": "165 passed, 27 skipped",
+      "what": "the same hand-written tuple that had omitted id also omitted title, name, for and classes from the slot-binding loop, while the equals loop already read STRUCTURE_FIELDS",
+      "why_kept_despite_being_small": "it DELETES a special case rather than adding one: the loop now reads the tuple the adjacent loop already reads. A law justified it (a single-valued string property an instruction quotes is a name), not a tuned number."
+    },
+    "status": "ONE_UNBOUND_NAME_IS_A_LOCAL_BINDING_FIX_NOT_A_SECOND_LANGUAGE_OR_SINGLE_LEVER",
+    "what_was_actually_missing": {
+      "the_defect": "tests_true_of offered a slot-binding test -- 'this property IS what the instruction names' -- for tag, type, colour, text, full_text and value, and NEVER for id. slots_returning already knew how to cut a coordinate out of the instruction; nothing bound it to the element's id.",
+      "the_effect": {
+        "controlled_ab": {
+          "after_mean": 0.29,
+          "before_mean": 0.2233,
+          "budget": "identical",
+          "delta": 0.0667,
+          "only_difference": "id-binding",
+          "seeds": "identical",
+          "tasks": 15,
+          "tasks_better": [
+            "grid-coordinate +0.95",
+            "social-media +0.05"
+          ],
+          "tasks_unchanged": 13,
+          "tasks_worse": []
+        },
+        "grid-coordinate": "0.05 -> 1.00 successes over 20 fresh instances"
+      },
+      "the_fix": "one word added to one tuple: (\"tag\", \"type\", \"colour\", \"id\")",
+      "the_page_it_cost": "grid-coordinate: 100 identical empty plot-points, every one tag=circle, classes=plot-point, text=''. The only distinguishing property is id='(2,-1)'. The instruction says 'Click on the grid coordinate (2,-1).' The language could see both sides and join neither."
+    }
+  },
+  "union_projection_status": {
+    "reason": "PR #6887 re-ran the claimed learned-arm repairs from their own record: 16 confirmed, 4 not reconstructible, 0 screen disagreements in that record. The projected 26/40 is superseded by the verified 24/40; main #6892 then ran the three vocabularies together in one command under the corpus's own pytest and measured the same 24/40 in 387.8 s. The earlier union is no longer an arithmetic projection, but capability is unchanged: 16 tasks remain hard-open.",
+    "status": "ONE_COMPOSED_RUN_UNDER_THE_CORPUS_PYTEST_MEASURED_24_OF_40"
+  },
+  "unknown_receipt_tasks_outside_real_corpus": [],
+  "unmeasurable_without_published_input_output_examples": [
+    "breadth_first_search",
+    "depth_first_search",
+    "detect_cycle",
+    "reverse_linked_list",
+    "shortest_path_length",
+    "shortest_path_lengths",
+    "shortest_paths",
+    "topological_ordering"
+  ],
+  "unmeasurable_without_published_input_output_examples_count": 8,
+  "upstream": "https://github.com/jkoppel/QuixBugs",
+  "upstream_head": "4257f44b0ff1181dedaedee6a447e133219fcebf",
+  "verified_repair_rerun": {
+    "claimed_repaired": 20,
+    "confirmed": [
+      "bucketsort",
+      "find_first_in_sorted",
+      "find_in_sorted",
+      "gcd",
+      "get_factors",
+      "hanoi",
+      "is_valid_parenthesization",
+      "knapsack",
+      "lcs_length",
+      "levenshtein",
+      "longest_common_subsequence",
+      "minimum_spanning_tree",
+      "next_permutation",
+      "pascal",
+      "quicksort",
+      "to_base"
+    ],
+    "inapplicable": [
+      "depth_first_search",
+      "next_palindrome",
+      "rpn_eval",
+      "shortest_path_lengths"
+    ],
+    "not_confirmed": [],
+    "receipt": "canonical/verification/RERUN_THE_LEARNED_ARMS_REPAIRS_20261116_V1.json",
+    "screen_said_pass_runner_said_no_in_the_record": 0
+  },
+  "what_this_is": "A set-algebra audit of measured receipts against the real published corpus, using only clean held-out arms, plus an effect-based census of mechanisms already in the tree. The 24/40 union is now also one composed run under the corpus pytest, and the audit reads the later invariance, exact-decision, browser, new-environment, read-first, operand, replay-drift, trigger, long-tail, one-demonstration-basin and GUI-invariance measurements without crediting any of them as new capability. It also indexes the separate selection measurement among test-passing HumanEvalFix candidates; that measurement is not a QuixBugs repair receipt. It is not a solver.",
+  "what_this_is_not": "Not a repair contest, not a capability, not a benchmark score, not independent verification, not a proof of correctness, not a sentience claim, and not permission to merge over a red or missing referee."
+}

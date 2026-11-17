@@ -1,0 +1,1261 @@
+{
+  "action_id": "SEPARATION_IS_THE_BOTTLENECK_20261116_V1",
+  "action_intent_id": "SEPARATION_IS_THE_BOTTLENECK_20261116_V1",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "action_summary": "Re-audit the now-composed 24/40 repair union against every later main measurement through 2833358c... (one-run judge, alpha invariance, exact enumeration-wall decision, browser implied-ending, new-environment cost law, read-first named gaps, operand addition without transfer, replay-under-change drift, phrase trigger and declared-format census, long-tail taxonomy, one-demonstration basin, GUI-invariance/phrase-blind census, proved composition, four-levers information arithmetic, systematic-edit supply, the index/specification sweep, composition with a frame, the value-inference arm, and the unbound-name binding/retraction), falsify earlier single-factor, permanent-replay, single-lever, GUI-invariance, proof-composition-as-final-unlock, once-identifies-a-rule, one-demo-covers-most-work, index-fix-as-terminal-unlock, second-language-5.43-bits and id-binding-as-terminal-unlock answers, and bind separation as a necessary condition to the already-existing decision/composition organs by effect.",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "conversation_memory_is_authority": false,
+    "earlier_routes_exhausted_reason": "REUSE was tried first: constructive, interventional, admission, identification, invariance, exact-decision, planning/composition, environment-learning, read-first, operand, replay-drift, trigger-census, basin, GUI-invariance and proved-composition organs were read by effect before any answer was written. All main receipts through 2833358c... were integrated once, including the closing four-levers arithmetic, real-work systematic-edit supply, index/specification sweep, composition-with-frame, value-inference and unbound-name-binding/retraction arms; a new learner, verifier, vocabulary, weight house, replay macro, one-lever hunt, GUI-invariance machinery, proof-composition-as-final-unlock claim, once-identifies-a-rule claim, one-demonstration-covers-most-work assumption, finer-grid-over-existing-features assumption, index-fix-as-terminal-unlock claim, second-language-5.43-bits claim, id-binding-as-terminal-unlock claim, or +1/16 composer wiring would duplicate a part or claim an ordinary incremental gain. The selected route composes their measured evidence into one falsifiable audit.",
+    "incremental_spend_usd": 0,
+    "independent_verification_completed": false,
+    "independent_verification_note": "Producer-run sandbox only. Independent personnel verification is still open.",
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ],
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+    "progress_evidence_paths": [
+      "SEPARATION_IS_THE_BOTTLENECK_20261116_V1.md",
+      "canonical/action_intents/SEPARATION_IS_THE_BOTTLENECK_20261116_V1.json",
+      "canonical/tools/proof_carrying_counterfactual_union_v1.py",
+      "canonical/tests/test_proof_carrying_counterfactual_union_v1.py",
+      "canonical/verification/PROOF_CARRYING_COUNTERFACTUAL_UNION_20261116_V1.json",
+      "ONE_RUN_THREE_VOCABULARIES_ONE_JUDGE_20261116_V1.md",
+      "THE_INVARIANCE_IS_THE_REACH_20261116_V1.md",
+      "THE_LEARNER_DECIDES_PAST_THE_ENUMERATION_WALL_20261116_V1.md",
+      "THE_PRICE_OF_A_NEW_ENVIRONMENT_20261116_V1.md",
+      "WHERE_THE_SOLUTIONS_LIVE_20261101_V1.md",
+      "canonical/verification/COMPOSED_REPAIR_ONE_RUN_20261116_V1.json",
+      "canonical/verification/ARM_LEARNED_IN_ONE_RUN_20261116_V1.json",
+      "canonical/verification/WHAT_ONE_VERIFIED_REPAIR_TRAVELS_20261116_V1.json",
+      "canonical/verification/THE_SENTENCE_DID_NOT_HAVE_TO_SAY_SUBMIT_20261116_V1.json",
+      "canonical/verification/INSTANT_LEARNING_IN_A_NEW_ENVIRONMENT_20261116_V1.json",
+      "canonical/verification/INSTANT_LEARNING_SHUFFLED_CONTROL_20261116_V1.json",
+      "THE_MISSING_PART_IS_THE_OPERAND_NOT_THE_EXPERIENCE_20261116_V1.md",
+      "WHY_LEARN_ONCE_REPLAY_FOREVER_FAILS_20261116_V1.md",
+      "canonical/action_intents/READ_FIRST_AND_LEARN_ONLY_FOR_A_NAMED_GAP_20261116_V1.json",
+      "canonical/action_intents/THE_MISSING_PART_IS_THE_OPERAND_20261116_V1.json",
+      "canonical/action_intents/WHY_LEARN_ONCE_REPLAY_FOREVER_FAILS_20261116_V1.json",
+      "canonical/verification/ACTION_REPLAY_UNDER_CHANGE_20261116_V1.json",
+      "canonical/verification/DERIVED_VALUE_FULL_SUITE_20261116_V1.json",
+      "canonical/verification/LEARN_OR_READ_BOARD_20261116_V1.json",
+      "canonical/verification/READ_FIRST_AND_LEARN_ONLY_FOR_A_NAMED_GAP_20261116_V1.json",
+      "THERE_IS_NO_SINGLE_BOTTLENECK_AND_THE_TRIGGER_WAS_THE_REASON_20261116_V1.md",
+      "ONE_TRY_LEARNS_A_DOMAIN_NOT_THE_ENVIRONMENT_20261116_V1.md",
+      "canonical/action_intents/THE_REMAINDER_IS_A_LONG_TAIL_20261116_V1.json",
+      "canonical/action_intents/ONE_TRY_LEARNS_A_DOMAIN_NOT_THE_ENVIRONMENT_20261116_V1.json",
+      "canonical/verification/DECLARED_TRIGGER_AND_OPERAND_TAXONOMY_20261116_V1.json",
+      "canonical/verification/ONE_DEMONSTRATION_BASIN_20261116_V1.json",
+      "THE_GUI_HAS_NO_INVARIANCE_TO_FIND_20261116_V1.md",
+      "canonical/action_intents/THE_GUI_HAS_NO_INVARIANCE_TO_FIND_20261116_V1.json",
+      "canonical/verification/GUI_INVARIANCE_IS_VACUOUS_OR_ABSENT_20261116_V1.json",
+      "COMPOSE_ONLY_WHAT_IS_PROVED_20261116_V1.md",
+      "COMPOSE_ONLY_WHAT_IS_PROVED_20261116_V1.json"
+    ],
+    "route_class": "COMPOSE"
+  },
+  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::SEPARATION_EQUATION_CLEAN_UNION_AUDIT_6877_FBA7_20261116",
+  "canonical_base_commit": "2833358c1fd48e97e77c3a6d9ba3ec6c17170cb0",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "capability_credit_delta": 0,
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "SEPARATION_EQUATION_CLEAN_UNION_AUDIT_6877_FBA7_20261116",
+  "date": "2026-11-16",
+  "expected_parent_change": "Which factor of the separation equation binds each task, which real tasks remain open after every clean measured mechanism, why no single lever buys the measured remainder, why the GUI side has no invariance quotient to exploit, and why proof-checked composition is bounded rather than a final unlock.",
+  "expected_parent_frontier_change": "Bottleneck claims stop being single-factor, single-lever, GUI-invariance or proved-composition projections; the hard-open population is audited from clean receipts, the verified union is one composed run under the corpus pytest at 24/40 with 16 hard-open tasks, every later invariance/exact-decision/browser/new-environment/read-first/operand/replay-drift/trigger/long-tail/basin/GUI-census/proved-composition measurement is read without capability credit, separation is retained only as a necessary condition, a stored plan is bound to a fresh proof on the state in hand, and proof-decided observables use predict-prove-act.",
+  "explicit_user_authorization": [
+    "Why can't we just give our model the most advanced coding actions, let it experience them once, and have it learn them? Can't we do this now?",
+    "you must think from first principles for everything",
+    "You should kill all the bad and dumb ideas before you waste time implementing them.",
+    "NEVER BUILD BEFORE REASRCHING EXHASIATION IS HAPPENED",
+    "maximize your web use",
+    "What is the single bottleneck that, if fixed, would unlock the most capability?",
+    "all the tests are not on synthetic data but are on the hardest open tests",
+    "only our agent/system may run them; integrity 100% real",
+    "Work in branch, merge only when complete (fastest)",
+    "Merge once, not 10 times."
+  ],
+  "falsification_condition": "A known repaired task counted as open progress, a synthetic task in the population, an unreconstructible claimed repair counted as confirmed, a screen-only pass or majority vote recorded as identification, the one-run 24/40 miscredited as new capability, the alpha-invariance cost win miscredited as a repair gain, the new-environment cost law read as solving arbitrary computer use, operand addition read as transfer, a stale recorded plan read as a permanent macro, a declared-format prior read as a single lever, the long tail reduced to one bottleneck, a GUI-invariance lever claimed where the judge has no quotient, proved composition claimed as the final unlock despite 34 no-second-candidate refusals, one demonstration claimed to identify a rule after leaving 3.8176 of 5.5546 bits, output variety credited as information despite 2 of 37 rank agreements, one demonstration claimed to cover most real work despite 225 of 268 commits having no sibling, the 1.747x ratio credited as new capability, a finer feature grid credited as a repair despite 0 usable key families, the index or specification fix credited as a terminal unlock, composition without a frame credited as solving computer use, an inferred edit value credited as established knowledge despite 0.2143 precision, the retracted second-language 5.43-bits claim restated, an unpaired 130-page rerun credited over a paired A/B, or the +0.0667 id-binding A/B on 15 chosen tasks credited as a population effect or terminal capability.",
+  "generic_repair_from_single_probe": false,
+  "governance_change": false,
+  "highest_leverage_now": true,
+  "incremental_spend_usd": 0,
+  "intentional_route_race": false,
+  "load_bearing_primary": {
+    "constructive_gap_for_open_obligation_ids": [
+      "CODING_TB4_GE_66_4"
+    ],
+    "expected_obligation_discharge_lcb": 0,
+    "expected_obligation_unlock_lcb": "1/100",
+    "interpretation": "Speculative forecast only. A coding benchmark floor cannot move while the reachable space is a fixed vocabulary, the open-task population is stale, a fast screen can disagree with the published pytest on one probe, and agreement among passing candidates can be mistaken for identification. The union is pytest-rejudged and now measured as one composed run; the final census falsifies a single lever and the GUI-invariance lever; proved composition is bounded; no obligation is discharged, no benchmark gain is claimed, and no capability or independent credit is claimed.",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": "1/4",
+    "wall_clock_cost_ub": 1
+  },
+  "measured_effect": {
+    "authority": "NONE__PRODUCER_RUN_SANDBOX",
+    "browser_census": {
+      "executed_and_lost": 27,
+      "of": 130,
+      "receipt": "canonical/verification/THE_SENTENCE_DID_NOT_HAVE_TO_SAY_SUBMIT_20261116_V1.json",
+      "refused": 24,
+      "regressions": 0,
+      "replication": {
+        "seed_1061": [
+          47,
+          56
+        ],
+        "seed_1062": [
+          49,
+          57
+        ]
+      },
+      "zero_experience_solved": 66
+    },
+    "clean_receipt_union": {
+      "by_arm": {
+        "RECORDED_LEARNED_REPAIR": 6,
+        "REWRITE_FAMILIES": 15,
+        "SYNTHESIZED_FROM_THE_FAILURE": 3
+      },
+      "capability_delta_against_pytest_rejudged_union": 0,
+      "of": 40,
+      "only_hand_written": 8,
+      "only_learned": 6,
+      "repaired": 24,
+      "seconds": 387.8,
+      "status": "ONE_COMPOSED_RUN_WITH_THREE_VOCABULARIES_UNDER_THE_CORPUS_PYTEST_MEASURED_24_OF_40"
+    },
+    "corpus": "jkoppel/QuixBugs (MIT), 40 published bugs, the corpus own pytest as the only judge",
+    "exact_decision_past_enumeration_wall": {
+      "benchmark_credit_claimed": false,
+      "brute_force_seconds": 1.37,
+      "capability_credit_claimed": false,
+      "exhaustive_ie_families": 5058,
+      "inclusion_extraction_seconds": 0.0,
+      "raw_survivors": 8388600,
+      "seeded_learn_trials": 120,
+      "selector_equivalence_cases": 120
+    },
+    "four_levers_and_edit_supply": {
+      "authority": "NONE__PRODUCER_RUN_SANDBOX",
+      "capability_credit": 0,
+      "edit_supply": {
+        "commits_scanned": 268,
+        "commits_with_no_sibling": 225,
+        "corpus": "canonical/tests/fixtures/systematic_edit_corpus_v1.jsonl",
+        "corpus_sha256": "b47d9c9c23e641a8865a79d9dce3059a306257813d28114ed6029a9606cbde5a",
+        "forced_by_the_demonstration": 31,
+        "generalising_pairs": 142,
+        "induced_right": 78,
+        "induced_right_share": 0.5493,
+        "lucky": 47,
+        "pairs": 245,
+        "permanence": "action_replay_under_change_v1 measured 122/228 stale plans and 71/228 silent corruptions despite 228/228 legal operations",
+        "records": 393,
+        "repos": [
+          "pypa/packaging",
+          "pypa/pyproject-hooks",
+          "pallets/click",
+          "pallets/itsdangerous",
+          "pallets/markupsafe"
+        ],
+        "siblings_context_any": 42,
+        "siblings_context_both": 31,
+        "siblings_shape_only": 43,
+        "verbatim_repeats": 103,
+        "wrong": 64,
+        "wrong_diagnosis": {
+          "constant_differs": 31,
+          "mismatch": 13,
+          "rebound_wrong": 20
+        }
+      },
+      "incremental_spend_usd": 0,
+      "law": "bits_after = log2(|H|/|G|) - I(E) - sum I(q) - I(interface); learning ends at 0. The authored prior is the only term not billed per interaction.",
+      "levers": {
+        "answer_variety_points": 37,
+        "answer_variety_rank_agreements": 2,
+        "best_demonstration_point": {
+          "bits": 3.6293,
+          "distinct_answers": 5,
+          "x": 0
+        },
+        "bits_after_one": 3.8176,
+        "bits_before": 5.5546,
+        "bits_per_chosen_question": 1.9088,
+        "bits_per_further_demonstration": 1.0927,
+        "ceiling_binds": false,
+        "invariance_group_order": 1.0,
+        "queries_to_settle_after_one": 2.0,
+        "question_over_demonstration_ratio": 1.747,
+        "space_entries": 47,
+        "state_name_arm": {
+          "as_is": {
+            "carried_model_survived": 7,
+            "warm_cheaper": 8,
+            "warm_dearer": 2
+          },
+          "renamed": {
+            "carried_model_survived": 0,
+            "warm_cheaper": 1,
+            "warm_dearer": 9
+          }
+        },
+        "survivors_after_one": 14.1,
+        "targets_exact_after_one": 0,
+        "targets_settled_after_one_then_ask": 10,
+        "worst_demonstration_point": {
+          "bits": 0.6035,
+          "distinct_answers": 36,
+          "x": 30
+        }
+      },
+      "status": "ONCE_IS_ARITHMETIC_AND_REAL_WORK_SUPPLY_IS_ABOUT_ONE_SIXTH"
+    },
+    "gui_invariance_and_operand_boundary": {
+      "enter_time_world_rewrite": {
+        "0113PM": -1,
+        "01:13 PM": -1,
+        "13:13": 1,
+        "13:13:00": -1,
+        "1:13 PM": -1,
+        "1:13PM": -1
+      },
+      "identity_arms": 15,
+      "identity_invariant_by_construction": 13,
+      "identity_undecided_page_not_perturbed": 2,
+      "judge_pages": 5,
+      "judge_pages_with_quotient_zero": 4,
+      "only_nontrivial_quotient": "scroll-text trailing dot stripped by the page itself",
+      "phrase_blind_design_set": {
+        "blind_actions": 126,
+        "blind_solved": 4,
+        "gated_actions": 23,
+        "gated_solved": 5
+      },
+      "phrase_blind_full_surface": {
+        "blind_actions": 2611,
+        "blind_only": [],
+        "blind_solved": 5,
+        "gated_actions": 566,
+        "gated_solved": 9,
+        "pages": 123
+      },
+      "receipt": "canonical/verification/GUI_INVARIANCE_IS_VACUOUS_OR_ABSENT_20261116_V1.json",
+      "status": "NO_GUI_INVARIANCE_LEVER_OPERAND_VOCABULARY_IS_THE_SURVIVING_BOUNDARY",
+      "text_transform_reorder_is_truth": {
+        "F5CZ": -1,
+        "ZC5F": 1
+      }
+    },
+    "hard_open_population": {
+      "contaminated_arm_ignored": true,
+      "example_searchable": 8,
+      "no_json_tasks_no_longer_unmeasurable": true,
+      "superseded_claimed_arm_ignored": true,
+      "tasks": 16,
+      "unmeasurable": 8
+    },
+    "headline": "separation is a necessary condition, not a single sufficient lever; if one shared defect is named it is the index/specification \u2014 a filing key that lacks the observable the policy depends on and a goal predicate that lacks a frame \u2014 but the composition, value-inference and GUI measurements show that fixing one necessary condition does not unlock most capability; one demonstration leaves 3.8176 of 5.5546 bits in the measured 47-program space and has a sibling in only 43 of 268 real commits, and the one-run 24/40 composition plus every later reach/cost/policy/operand/replay/trigger/taxonomy/basin/GUI/proof/arithmetic/supply/index/frame/value/binding measurement changes evidence but not the 24/40 capability ceiling",
+    "identification": {
+      "bits_after_one_demonstration_median": 10.018,
+      "questions_to_sufficiency_mean": 1.31,
+      "survivors_after_one_demonstration_median": 1037,
+      "tasks_where_no_repair_was_in_the_space": 7
+    },
+    "index_specification_and_value_layer": {
+      "authority": "NONE__PRODUCER_RUN_SANDBOX",
+      "capability_credit": 0,
+      "composition": {
+        "abstract_states_exhausted": 4,
+        "adaptation_trials": 29,
+        "executions": 15,
+        "measured_cells": 29,
+        "of": 16,
+        "prediction_mismatches": 0,
+        "proven_unreachable": 2,
+        "relaxed_plans_breaking_frame_rejected": 15,
+        "remaining_open": [
+          "naming new effects",
+          "turning intention into a predicate with a frame",
+          "scaling the atom x state table"
+        ],
+        "solved_after": 14,
+        "solved_before": 13,
+        "trials_total": 44,
+        "two_step_plans": 1,
+        "unrequested_side_effects": 0,
+        "usable_operators": 14
+      },
+      "incremental_spend_usd": 0,
+      "index": {
+        "cross_kind_compounding": "0 saved across 10 kinds",
+        "cross_language": {
+          "store_offered_any_non_python": false,
+          "transferred_and_narrow": [
+            "python",
+            "javascript",
+            "c",
+            "cpp"
+          ]
+        },
+        "instance_sensitive_kinds": 5,
+        "insufficiency_certificate": {
+          "closed_vocabulary_size": 31,
+          "hypotheses_needing_enumeration": 8388608,
+          "learner_enumeration_cap": 12
+        },
+        "key_sweep": [
+          {
+            "answerable": "5/8",
+            "collisions": 2,
+            "family": "tree_coarse",
+            "keys": 8
+          },
+          {
+            "answerable": "4/7",
+            "collisions": 3,
+            "family": "coarser_still",
+            "keys": 7
+          },
+          {
+            "answerable": "11/14",
+            "collisions": 2,
+            "family": "finer_mid",
+            "keys": 14
+          },
+          {
+            "answerable": "13/16",
+            "collisions": 2,
+            "family": "finest_exact_features",
+            "keys": 16
+          },
+          {
+            "answerable": "19/20",
+            "collisions": 0,
+            "family": "one_key_per_kind",
+            "keys": 20,
+            "reading": "degenerate; transfers nothing"
+          }
+        ],
+        "retrieval_ceiling": {
+          "files": 76,
+          "kinds_with_a_matching_pr": 1,
+          "kinds_with_zero_matches": 7,
+          "pull_requests": 13,
+          "seconds": 350.6
+        },
+        "usable_key_families": [],
+        "verdict": "NO_GRANULARITY_OF_THESE_FEATURES_SEPARATES_WHAT_THE_POLICY_DEPENDS_ON",
+        "within_family_compression": "59 -> 35 oracle questions, 41% fewer, on a never-seen period-12"
+      },
+      "status": "INDEX_AND_FRAME_ARE_NECESSARY_SHARED_DEFECTS_NOT_A_SINGLE_SUFFICIENT_LEVER",
+      "value_inference": {
+        "copy_arm": {
+          "determined": 134,
+          "pairs": 245,
+          "verbatim": 103,
+          "wrong": 64
+        },
+        "derive": {
+          "derivation_fired": 42,
+          "derivation_right": 9,
+          "precision_when_fired": 0.2143,
+          "wrong": 58
+        },
+        "derive_contrast": {
+          "derivation_fired": 15,
+          "derivation_right": 6,
+          "precision_when_fired": 0.4,
+          "wrong": 60
+        },
+        "reading": "a stored value is a stored guess; only execution closes it"
+      }
+    },
+    "invariance_is_reach": {
+      "alpha_canonical": {
+        "candidates": 384,
+        "repaired": 4,
+        "survived_examples": 4,
+        "tasks_fired": 28
+      },
+      "capability_gain_over_three_arm_composition": 0,
+      "literal": {
+        "candidates": 304,
+        "repaired": 0,
+        "survived_examples": 0,
+        "tasks_fired": 23
+      },
+      "receipts": [
+        "canonical/verification/ARM_LEARNED_IN_ONE_RUN_20261116_V1.json",
+        "canonical/verification/WHAT_ONE_VERIFIED_REPAIR_TRAVELS_20261116_V1.json"
+      ],
+      "rung_1_same_bug": "15/24",
+      "rung_2_same_bug_renamed": "15/24",
+      "rung_3_distinct_bugs_repaired": 5,
+      "status": "DEMONSTRATION_IS_CONTENT_INVARIANCE_IS_REACH"
+    },
+    "killed_instruments": {
+      "hidden_cegis_calibration": "0/5",
+      "new_kill_list": [
+        "a fourth hand-written vocabulary",
+        "a new learner or verifier beside the existing decision/composition organs",
+        "weights now under the zero-model and $0 standing constraint",
+        "wiring a composer to win the one measured composition refusal as an incremental +1/16",
+        "more demonstrations, more environments, larger action lists, or more search budget as coverage",
+        "replaying a recorded plan as a permanent macro after state drift",
+        "treating a local operand addition as transfer to held-out pages",
+        "hunting for one lever behind a 16-class long tail",
+        "adding more attempts to close an unobservable premise",
+        "building a declared-format prior for 6 of 123 pages",
+        "building GUI invariance machinery where the page judge has no quotient",
+        "treating a phrase-blind basis as full-surface capability",
+        "calling proved composition the final unlock",
+        "treating 31 composed two-step attempts as coverage of the proposal generator or long-horizon verifier",
+        "choosing demonstrations by output variety (2 of 37 rank agreements)",
+        "assuming one demonstration has a sibling in real work (225 of 268 commits have none)",
+        "calling the 1.747x question/demonstration ratio a universal constant or new capability",
+        "treating the authored prior or hypothesis space as learned from one trace",
+        "claiming one experience identifies a rule or amortises most real software work",
+        "a finer grid over features that do not contain the policy observable (0 usable key families)",
+        "treating the index or specification fix as a terminal unlock",
+        "composition without a frame predicate (15 goal-satisfying plans broke the machine)",
+        "storing an inferred edit value as an established fact (precision 0.2143)",
+        "claiming the 14/16 composed machine result closes computer use",
+        "a second description language costing 5.43 bits/step (retracted; 1415/1415 elements already named)",
+        "an unpaired 130-page rerun or its apparent -0.95 regression (paired A/B returned 0.05 / 0.05)",
+        "one id-binding fix as a single sufficient lever or terminal capability claim",
+        "counting the +0.0667 on 15 chosen tasks as a population effect",
+        "counting +0.0022 on 23 structure-field tasks as more than +0.0022"
+      ],
+      "open_probe": "0/3",
+      "reason": "An all-zero open-task result would be vacuous because the instrument also returned zero on five already-solved calibration tasks."
+    },
+    "long_tail_trigger_and_basin": {
+      "declared_surface": {
+        "input_type_counts": {
+          "(none)": 14,
+          "date": 1,
+          "number": 1,
+          "password": 4,
+          "text": 37,
+          "time": 1
+        },
+        "pages_declaring_a_format": 6,
+        "pages_usable": 123,
+        "pages_with_a_typeable_field": 39,
+        "pages_with_no_typeable_field": 84
+      },
+      "one_demonstration_basin": {
+        "actions": 10,
+        "demonstrations_for_status_level_goal": 4,
+        "executed_transitions": 1680,
+        "groups_no_demonstration_can_license": 4,
+        "licensed_premise_task_all_content": 56,
+        "premise_task_plan_domain": 56,
+        "states": 168,
+        "status_level_goal_plan_domain": 112,
+        "truncated": false,
+        "undecidable_by_sense": {
+          "all_content": 0,
+          "command_output_only": 168,
+          "status": 24,
+          "status_and_one_file": 16
+        }
+      },
+      "receipts": [
+        "canonical/verification/DECLARED_TRIGGER_AND_OPERAND_TAXONOMY_20261116_V1.json",
+        "canonical/verification/ONE_DEMONSTRATION_BASIN_20261116_V1.json"
+      ],
+      "status": "NO_SINGLE_LEVER_LONG_TAIL_AND_OBSERVABLE_PREMISE",
+      "taxonomy": {
+        "classes": 16,
+        "largest_class": 6,
+        "median_class": 2.5,
+        "pages_unsolved": 46
+      },
+      "trigger_is_the_phrase": {
+        "cause": "every derived-value rule is gated on a hand-written English phrase",
+        "scroll_text_reworded": "LAST_WORD fires zero times on the same page",
+        "text_transform_reworded": "JOIN_SHOWN is replaced by PAGE_LITERAL"
+      }
+    },
+    "new_environment_cost_law": {
+      "adaptation_trials_active": 29,
+      "atoms": 18,
+      "break_even_requests_per_machine": 6.44,
+      "break_even_requests_total": 25.78,
+      "cells": 36,
+      "context_sensitive_atoms": "5/18",
+      "inert_cells": "17/36 (47.2%)",
+      "machines": 4,
+      "remaining_refusal_classes": [
+        "surface cannot express the effect",
+        "effect needs composition"
+      ],
+      "requests": 16,
+      "requests_solved_by_demonstration": 11,
+      "requests_solved_by_measurement": 13,
+      "shuffled_control_solved_by_demonstration": 12,
+      "shuffled_control_solved_by_measurement": 13,
+      "status": "COST_LAW_NOT_A_SOLUTION_TO_ARBITRARY_COMPUTER_USE",
+      "trials_per_request_after_adaptation": 1.0,
+      "trials_per_request_by_demonstration": 2.125
+    },
+    "one_demonstration_identifies": {
+      "one_demonstration": {
+        "dangerous_errors": 297,
+        "held_out_precision": 0.069,
+        "held_out_sites": 319,
+        "licensed_requirements": 0
+      },
+      "random_sequences_identified": 0,
+      "real_code_sites": 479,
+      "static_vocabulary_sufficiency": {
+        "blocking_sites": 18,
+        "missing_observable": "operation proof",
+        "proof_cost_ms": 55
+      },
+      "status": "MEASURED_ON_THIS_REPOSITORY_NOT_ON_QUIXBUGS_REPAIR_TASKS",
+      "two_chosen_observations": {
+        "dangerous_errors": 0,
+        "held_out_precision": 1.0,
+        "recall": 0.4545,
+        "requirement": [
+          "use.first_computed",
+          "use.read_once"
+        ]
+      }
+    },
+    "one_run_composition": {
+      "bugs": 40,
+      "judge": "the corpus's own pytest on a fresh copy with the answer key absent",
+      "receipt": "canonical/verification/COMPOSED_REPAIR_ONE_RUN_20261116_V1.json",
+      "repaired": 24,
+      "seconds": 387.8,
+      "status": "PROJECTION_NOW_A_MEASURED_RUN_NOT_NEW_CAPABILITY",
+      "tasks": 41
+    },
+    "proved_composition": {
+      "boxes": {
+        "A_NOT_PROVED": 15,
+        "B_REFUSED": 27,
+        "COMPOSED_VERIFIED": 31,
+        "NO_SECOND_CANDIDATE": 34,
+        "PREMISE_DIED": 22
+      },
+      "composed_verified": 31,
+      "damaged": 0,
+      "premises_held_attempts": 58,
+      "reach_compose": 0.3875,
+      "reach_where_premises_held": 0.5345,
+      "receipt": "COMPOSE_ONLY_WHAT_IS_PROVED_20261116_V1.json",
+      "sampled_sites": 72,
+      "scan": {
+        "files": 5563,
+        "files_with_sites": 4228,
+        "premise_holding_sites": 9290,
+        "scan_seconds": 49.97
+      },
+      "second_step_attempts": 80,
+      "status": "AFFIRMATIVE_ORGAN_IS_MEASURED_BOUNDED_AND_NOT_A_SINGLE_LEVER",
+      "step_one": {
+        "inline": {
+          "attempted": 36,
+          "proved": 22
+        },
+        "rename": {
+          "attempted": 36,
+          "proved": 35
+        }
+      }
+    },
+    "read_first_operand_and_replay_drift": {
+      "operand_addition": {
+        "chromium_seed_1060": {
+          "actions_saved": 1917,
+          "gains": 5,
+          "losses": 0,
+          "shipped": 78,
+          "union": 83
+        },
+        "chromium_seed_771": {
+          "gains": 4,
+          "losses": 0,
+          "shipped": 77,
+          "union": 81
+        },
+        "compute_control": "0 of 5 solved at 1600 actions before the part; 5 of 5 in 12-33 actions after",
+        "decoy_net": {
+          "chromium_seed_1060": -12,
+          "chromium_seed_771": -11
+        },
+        "held_out_pages": 121,
+        "held_out_shipped_solves": 77,
+        "held_out_union_solves": 77,
+        "status": "LOCAL_OPERAND_ADDITION_NOT_TRANSFER"
+      },
+      "read_first": {
+        "LEARN_pages": 41,
+        "READ_pages": 89,
+        "cells": {
+          "demonstrable_but_reading_lost": 21,
+          "out_of_reach_of_both": 43,
+          "reading_wins_and_demonstrable": 57,
+          "reading_wins_where_nothing_was_demonstrable": 9
+        },
+        "demonstrated_by_reward_visible_search": 78,
+        "false_negatives": 0,
+        "pages": 130,
+        "reading_arm_won": 66
+      },
+      "receipts": [
+        "canonical/verification/READ_FIRST_AND_LEARN_ONLY_FOR_A_NAMED_GAP_20261116_V1.json",
+        "canonical/verification/DERIVED_VALUE_FULL_SUITE_20261116_V1.json",
+        "canonical/verification/ACTION_REPLAY_UNDER_CHANGE_20261116_V1.json"
+      ],
+      "replay_under_change": {
+        "corpus_files": 5562,
+        "differs_but_holds": 4,
+        "does_not_parse": 47,
+        "eligible_sites": 509,
+        "files": 62,
+        "matches_live": 106,
+        "operation_legal_after_change": 228,
+        "pairs": 228,
+        "silent_corruption": 71,
+        "stale": 122,
+        "status": "DECISION_PROCEDURE_PLUS_PREMISE_NOT_A_PERMANENT_MACRO",
+        "zero_drift_necessary_not_sufficient": true
+      }
+    },
+    "receipts": [
+      "canonical/verification/PROOF_CARRYING_COUNTERFACTUAL_UNION_20261116_V1.json",
+      "canonical/verification/IDENTIFICATION_COST_IN_A_REAL_SPACE_20261116_V1.json",
+      "canonical/verification/QUIXBUGS_EDIT_KIND_TRANSFER_20261112_V1.json",
+      "canonical/verification/SYNTHESIS_FROM_THE_FAILURE_20261116_V1.json",
+      "canonical/verification/ONE_DEMONSTRATION_IDENTIFIES_20261116_V1.json",
+      "canonical/verification/WHERE_THE_OBSERVABLE_WAS_MISSING_20261116_V1.json",
+      "canonical/verification/ONE_DEMONSTRATION_IS_NOT_IDENTIFICATION_MEASURE_20261116_V1.json",
+      "canonical/verification/RERUN_THE_LEARNED_ARMS_REPAIRS_20261116_V1.json",
+      "canonical/verification/THE_ROW_WAS_ALWAYS_THERE_20261116_V1.json",
+      "canonical/verification/READ_FIRST_AND_LEARN_ONLY_FOR_A_NAMED_GAP_20261116_V1.json",
+      "canonical/verification/DERIVED_VALUE_FULL_SUITE_20261116_V1.json",
+      "canonical/verification/ACTION_REPLAY_UNDER_CHANGE_20261116_V1.json",
+      "canonical/verification/DECLARED_TRIGGER_AND_OPERAND_TAXONOMY_20261116_V1.json",
+      "canonical/verification/ONE_DEMONSTRATION_BASIN_20261116_V1.json",
+      "canonical/verification/GUI_INVARIANCE_IS_VACUOUS_OR_ABSENT_20261116_V1.json",
+      "COMPOSE_ONLY_WHAT_IS_PROVED_20261116_V1.json",
+      "canonical/verification/THE_FOUR_LEVERS_OF_LEARNING_FROM_EXPERIENCE_20261116_V1.json",
+      "canonical/verification/SYSTEMATIC_EDIT_SUPPLY_20261116_V1.json",
+      "YOU_ARE_WRONG_ABOUT_ONCE_AND_IT_IS_ARITHMETIC_20261116_V1.md",
+      "ONE_DEMONSTRATION_AMORTISES_A_SIXTH_OF_REAL_WORK_20261116_V1.md",
+      "canonical/action_intents/YOU_ARE_WRONG_ABOUT_ONCE_AND_IT_IS_ARITHMETIC_20261116_V1.json",
+      "canonical/action_intents/ONE_DEMONSTRATION_AMORTISES_A_SIXTH_OF_REAL_WORK_20261116_V1.json",
+      "THE_BOTTLENECK_IS_THE_INDEX_NOT_THE_LEARNING_20261116_V1.md",
+      "COMPOSITION_CLOSES_ONE_AND_PROVES_TWO_20261116_V1.md",
+      "canonical/action_intents/THE_BOTTLENECK_IS_THE_INDEX_NOT_THE_LEARNING_20261116_V1.json",
+      "canonical/action_intents/COMPOSITION_CLOSES_ONE_AND_PROVES_TWO_20261116_V1.json",
+      "canonical/action_intents/SYSTEMATIC_EDIT_VALUE_LAYER_DERIVATION_20261116_V1.json",
+      "canonical/verification/THE_INDEX_IS_THE_BOTTLENECK_20261116_V1.json",
+      "canonical/verification/COMPOSE_MEASURED_EFFECTS_20261116_V1.json",
+      "canonical/verification/SYSTEMATIC_EDIT_DERIVATION_20261116_V1.json",
+      "canonical/action_intents/AN_UNBOUND_NAME_WAS_THE_MISSING_LINK_20261116_V1.json",
+      "canonical/runtime/what_one_experience_buys_v1.py",
+      "canonical/runtime/demonstration_version_space_v1.py",
+      "canonical/tests/test_what_one_experience_buys_v1.py",
+      "canonical/tests/test_miniwob_one_success_generalisation_v1.py",
+      "canonical/verification/THE_TREE_ALREADY_SPOKE_ONE_LANGUAGE_20261116_V1.json"
+    ],
+    "screen_integrity": {
+      "learned_arm_screen_disagreements": 0,
+      "no_json_probe_over_acceptances": 3,
+      "no_json_tasks_made_searchable": 9,
+      "no_survivor_at_screen": 6,
+      "receipt": "canonical/verification/WHERE_THE_OBSERVABLE_WAS_MISSING_20261116_V1.json",
+      "repaired": 0,
+      "rule": "The screen may order candidates; the published pytest is the only judge. The projected 26/40 union is superseded by the verified 24/40 union.",
+      "screen_accepted_but_corpus_pytest_failed": 3
+    },
+    "selection_among_test_passing_candidates": {
+      "corpus": "100 held-out HumanEvalFix bugs; scored bug own fix never a lesson",
+      "correct_before_selection": 47,
+      "majority_vote_wrong_in_disagreements": "3/5",
+      "no_candidate_passed": 46,
+      "oracle_questions": 9,
+      "reference_behaviour_in_candidate_set": 48,
+      "regressions": 0,
+      "settled_correctly": 8,
+      "status": "SELECTION_MEASUREMENT_NOT_A_QUIXBUGS_REPAIR_RECEIPT",
+      "test_passing_candidates": 51,
+      "unseparated": 43
+    },
+    "unbound_name_binding_and_retraction": {
+      "authority": "NONE__PRODUCER_RUN_SANDBOX",
+      "capability_credit": 0,
+      "controlled_id_binding_ab": {
+        "after_mean": 0.29,
+        "before_mean": 0.2233,
+        "delta": 0.0667,
+        "fix": "one word added to one tuple: (\"tag\", \"type\", \"colour\", \"id\")",
+        "grid_coordinate": "0.05 -> 1.00 successes over 20 fresh instances",
+        "tasks": 15,
+        "tasks_better": [
+          "grid-coordinate +0.95",
+          "social-media +0.05"
+        ],
+        "tasks_unchanged": 13,
+        "tasks_worse": []
+      },
+      "decision": "THE_DESCRIPTION_WAS_NEVER_THE_PROBLEM__THE_BINDING_WAS",
+      "honest_limits": [
+        "controlled A/B covers 15 tasks chosen because the id rule could reach them; +0.0667 is not the population effect",
+        "wider 130-page rerun was not clean: 68 of 78 tasks scored",
+        "apparent click-pie -0.95 was run variance; paired A/B returned 0.05 on both sides",
+        "id-binding cannot help a page whose ids are unrelated to its instruction",
+        "no capability, weight, terminal or family-rank claim"
+      ],
+      "incremental_spend_usd": 0,
+      "retraction": {
+        "bits_per_step_still_reported": 5.428,
+        "deleted": "canonical/runtime/one_description_language_v1.py and its 11 tests",
+        "elements_with_unique_description": "1415/1415",
+        "meaning": "descriptions still alive after one demonstration: redundancy, not ambiguity or a second grammar",
+        "preferred_description_ambiguous": "67/1415",
+        "preferred_description_bits": 0.102,
+        "refuted_by": "demonstration_version_space_v1 already named every actionable element and shipped nth/nth_from_end/nth_slot/nearest/matches/pick/_same_element",
+        "what_was_claimed": "acting and learning spoke two languages costing 5.43 bits/step and deleting the second language was the cheapest lever"
+      },
+      "status": "ONE_UNBOUND_NAME_IS_A_LOCAL_BINDING_FIX_NOT_A_SECOND_LANGUAGE_OR_SINGLE_LEVER",
+      "structure_field_ab": {
+        "after": 0.4,
+        "before": 0.3978,
+        "better": 1,
+        "delta": 0.0022,
+        "one_gain": "phone-book 0.15 -> 0.20",
+        "tasks": 23,
+        "worse": 0
+      }
+    },
+    "verified_repair_rerun": {
+      "claimed": 20,
+      "confirmed": 16,
+      "not_confirmed": 0,
+      "not_reconstructible": 4,
+      "receipt": "canonical/verification/RERUN_THE_LEARNED_ARMS_REPAIRS_20261116_V1.json",
+      "screen_disagreements_in_that_record": 0
+    }
+  },
+  "next_step": "Start all future hard-open work from the 16 audited unrepaired tasks, the 16-class browser long tail and the one measured world-rewrite operand (`enter-time`); author the hypothesis space before spending an interaction and choose observations that split survivors, not demonstrations with varied outputs; name the missing observable that makes the index injective on the policy distinction rather than widening a grid over existing features; turn intention into a predicate with a frame; route value-inventing classes to execution; derive the next sense/operand from a specific failure and a causal observation that splits it; strip English-phrase triggers in favour of page-declared or computed structure; use predict-prove-act and compose only steps whose premise and proof survive effects; build the still-open proposal generator pointed at unpassed bugs and a per-step verifier for long horizons; never quote a fast-screen pass, majority vote, unpaired rerun variance, unreconstructible claimed repair, one-run composition, local operand addition, read-first policy, per-environment cost law, trigger census, taxonomy, basin, phrase-blind basis, GUI-invariance census, proved-composition measurement, four-levers ratio, systematic-edit-supply measurement, index sweep, composition result, value-inference arm, or unbound-name binding result as identification, a single sufficient lever, or permanent capability.",
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "prior_work_reused": [
+    "canonical/tools/grammar_closed_repair_v1.py",
+    "canonical/runtime/derived_value_v1.py",
+    "canonical/swe_kernel/interventional_goal_v1.py",
+    "canonical/runtime/finite_identifiability.py",
+    "canonical/tools/identification_cost_in_a_real_space_v1.py",
+    "canonical/runtime/unified_cognitive_fabric_v1.py",
+    "canonical/swe_kernel/one_demonstration_identifies_v1.py",
+    "canonical/tools/repair_where_the_suite_is_the_observable_v1.py",
+    "canonical/swe_kernel/repair_version_space_selection_v1.py",
+    "canonical/swe_kernel/closed_loop_trace_abduction_repair_v1.py",
+    "canonical/tools/version_space_selection_measure_v1.py",
+    "canonical/tools/closed_loop_trace_abduction_measure_v1.py",
+    "canonical/tools/rerun_the_learned_arms_repairs_v1.py",
+    "canonical/runtime/anchored_frame_v1.py",
+    "canonical/tools/miniwob_contract_arm_arm_v1.py",
+    "canonical/tools/composed_repair_one_run_v1.py",
+    "canonical/tools/arm_learned_from_its_own_verified_repairs_v1.py",
+    "canonical/tools/what_one_verified_repair_travels_v1.py",
+    "canonical/tools/instant_learning_in_a_new_environment_v1.py",
+    "canonical/runtime/capability_planner.py",
+    "canonical/runtime/generic_goal_tool_effect_planner_v1.py",
+    "canonical/runtime/capability_composer_v1.py",
+    "canonical/runtime/verified_skill_macro_planner_v1.py",
+    "canonical/runtime/explicit_recovery_planner.py",
+    "canonical/runtime/environment_learning_v1.py",
+    "canonical/swe_kernel/predicate_world_abstraction_v1.py",
+    "canonical/swe_kernel/operator_semantics_v1.py",
+    "canonical/swe_kernel/hierarchical_skill_library_v1.py",
+    "canonical/runtime/learn_or_read_v1.py",
+    "canonical/swe_kernel/action_replay_under_change_v1.py",
+    "canonical/tools/derived_value_full_suite_receipt_v1.py",
+    "canonical/tools/learn_or_read_board_v1.py",
+    "canonical/runtime/declared_trigger_census_v1.py",
+    "canonical/swe_kernel/one_demonstration_basin_v1.py",
+    "canonical/tools/gui_invariance_census_v1.py",
+    "canonical/tools/gui_phrase_blind_basis_arm_v1.py",
+    "canonical/swe_kernel/proved_composition_v1.py",
+    "canonical/tools/the_four_levers_of_learning_from_experience_v1.py",
+    "canonical/swe_kernel/systematic_edit_supply_v1.py",
+    "canonical/tests/test_the_four_levers_of_learning_from_experience_v1.py",
+    "canonical/tests/test_systematic_edit_supply_v1.py",
+    "canonical/runtime/demonstration_version_space_v1.py",
+    "canonical/tools/the_index_is_the_bottleneck_v1.py",
+    "canonical/tools/compose_measured_effects_v1.py",
+    "canonical/tests/test_the_index_is_the_bottleneck_v1.py",
+    "canonical/tests/test_compose_measured_effects_v1.py",
+    "canonical/runtime/what_one_experience_buys_v1.py",
+    "canonical/tests/test_what_one_experience_buys_v1.py",
+    "canonical/tests/test_miniwob_one_success_generalisation_v1.py"
+  ],
+  "probe_specific": false,
+  "recursive_obs": {
+    "canonical_base_commit": "2833358c1fd48e97e77c3a6d9ba3ec6c17170cb0",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "re-testing known repaired bugs",
+      "counting the QuixBugs-shown transfer arm as held-out progress",
+      "building a fourth hypothesis vocabulary",
+      "shipping the hidden CEGIS instrument after a zero calibration",
+      "counting a fast-screen pass as a repair",
+      "building a fourth vocabulary by guessing",
+      "counting a majority vote among self-consistent candidates as identification",
+      "growing the skill library before a settled question gates admission",
+      "quoting the 20-task claimed learned arm after the 16-task pytest rerun",
+      "treating the earlier browser refusal census as complete",
+      "treating the 24/40 one-run composition as new capability",
+      "treating alpha invariance as a new repair vocabulary",
+      "treating exact inclusion-extraction as a learner that creates hypotheses",
+      "wiring a composer for the single measured composition refusal as ultimate progress",
+      "training weights now under the zero-model constraint",
+      "replaying a recorded plan as a permanent macro after state drift",
+      "treating a local operand addition as transfer to held-out pages",
+      "hunting for one lever behind a 16-class long tail",
+      "adding more attempts to close an unobservable premise",
+      "building a declared-format prior for 6 of 123 pages",
+      "building GUI invariance machinery where the page judge has no quotient",
+      "treating a phrase-blind basis as full-surface capability",
+      "calling proved composition the final unlock",
+      "treating 31 composed two-step attempts as coverage of the proposal generator or long-horizon verifier"
+    ],
+    "expected_parent_frontier_change": "Bottleneck claims stop being single-factor, single-lever, GUI-invariance or proved-composition projections; the hard-open population is audited from clean receipts, the verified union is one composed run under the corpus pytest at 24/40 with 16 hard-open tasks, every later invariance/exact-decision/browser/new-environment/read-first/operand/replay-drift/trigger/long-tail/basin/GUI-census/proved-composition measurement is read without capability credit, separation is retained only as a necessary condition, a stored plan is bound to a fresh proof on the state in hand, and proof-decided observables use predict-prove-act.",
+    "expected_parent_level_state_change": "Bottleneck claims stop being single-factor, single-lever, GUI-invariance or proved-composition projections; the hard-open population is audited from clean receipts, the verified union is one composed run under the corpus pytest at 24/40 with 16 hard-open tasks, every later invariance/exact-decision/browser/new-environment/read-first/operand/replay-drift/trigger/long-tail/basin/GUI-census/proved-composition measurement is read without capability credit, separation is retained only as a necessary condition, a stored plan is bound to a fresh proof on the state in hand, and proof-decided observables use predict-prove-act.",
+    "independent_verification_required": true,
+    "iteration_limit": 1,
+    "obs_blocker": {
+      "delete_bypass_substitute_options": [
+        "delete the hand-written list as the definition of the space",
+        "bypass enumeration by folding demonstrations",
+        "substitute the corpus's own tests for any invented notion of correctness"
+      ],
+      "intrinsic_or_path_specific": "path_specific: the vocabulary ceiling is a design choice and was removed here; the multi-position and insertion rungs, and non-terminating defects, remain open.",
+      "surviving_causal_blocker": "Separation is a necessary condition, not one lever: an invariant-closed, failure-assembled hypothesis space containing the truth, a computable causal observation that carries the premise and splits it, an independent verifier that can read the split, and an affirmative proposal/composition/verification chain that remains bounded. The measured remainder is a long tail; on GUI value tasks the page judge supplies no invariance quotient."
+    },
+    "obs_capability": {
+      "capability_work_deleted": [
+        "a second lesson store or admission gate",
+        "another hand-written mutation kind",
+        "a larger search budget on an inexpressible edit"
+      ],
+      "existing_inherited_routes_checked": [
+        "verified_skill_crystallizer_v1.anti_unify_code_rule (token-level; no site context)",
+        "python_test_guided_patch_search_v1 mutation list (no ast.AugAssign rule)",
+        "python_iterative_software_repair_loop_v1 (candidate-only, strict progress)",
+        "lesson_localization_v1 (refuses shape changes by design)"
+      ],
+      "external_existing_routes_checked": [
+        "QuixBugs itself, as the corpus and the oracle",
+        "2026 verifier-gated self-improvement literature (the verifier is the gate once a candidate exists)"
+      ],
+      "surviving_gap": "A vocabulary/invariance derived from each specific failure, not another demonstration, action list, or weight house; and a causal observable whose verdict is independent of the producer."
+    },
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "a higher repair count reached by loosening what counts as repaired",
+        "counting a self-taught repair as transfer",
+        "treating a longer candidate list as more capability",
+        "quoting a corpus score as a frontier position",
+        "counting a one-run composition, alpha invariance, exact decision, browser gain, or new-environment cost law as new capability"
+      ],
+      "real_outcome": "Whether a demonstrated fix can reach an undemonstrated bug becomes a measured property of the edit basis instead of an open question answered by assertion.",
+      "surviving_necessity": "Coding capability is gated on a correct candidate existing at all; no oracle, budget or weight can select a hypothesis the basis cannot build."
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": "None by claim: the existing repair primitive and corpus oracle are reused unchanged; the induced basis adds candidates only and holds no authority.",
+      "downstream_work_to_delete_or_supersede": "Any roadmap step that adds another hand-written mutation kind, or that raises a candidate budget to fix a bug whose edit is not expressible.",
+      "fresh_reuse_plan": "Recompute the ladder and re-run both bases from the receipt's commands; the corpus is public and the answer key is never needed."
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": "Reused the existing repair loop and patch-search primitive instead of writing a second repairer; the corpus's own test files are used unmodified.",
+      "search_stop_decision": "Stop after the ladder and the 20/20 comparison; do not add template rungs without the measurement that says which rung is missing."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "efficiency_mechanism": "Templates prune the space before execution: 224 candidates instead of 5,021 for the same held-out half.",
+      "generality_mechanism": "Anti-unification with shared holes plus a node-type context precondition, so one demonstration yields a rule that fires wherever its precondition literally holds.",
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "The list edit is a hard zero on real fixes; the budget cannot reach an inexpressible edit; the token rule has no position or context; a model is prohibited producer cognition.",
+      "routes_ranked": [
+        "induce node-level templates from demonstration pairs",
+        "add an AugAssign rule to the hand-written list",
+        "raise the candidate budget",
+        "reuse the token anti-unifier",
+        "ask a model to write the patch"
+      ],
+      "search_stop_decision": "Stop after all main measurements through 2833358c..., including the one-run 24/40 measurement, alpha-invariance ablation, exact enumeration-wall decision, browser census, four-machine cost law, read-first board, full-suite operand addition, replay-under-change drift audit, phrase-trigger census, 16-class long-tail taxonomy, one-demonstration basin, GUI-invariance / phrase-blind census, proved-composition measurement, four-levers arithmetic, real-work systematic-edit supply, index/specification sweep, composition-with-frame, value-inference and unbound-name-binding/retraction arms. This is the final integrated main move; do not add a new organ, chase further main moves before this merge, assume one demonstration identifies a rule or covers most work, call a finer grid or index fix a terminal unlock, restate the retracted second-language claim, call id-binding terminal, replay a stale plan, hunt for one lever, build GUI-invariance machinery, call proved composition the final unlock, or count a cost/reach/policy/local-addition/taxonomy/basin/GUI/proof win as a repair.",
+      "white_box_harvest_note": "The canonical ladder is recorded in full; the WHITE_BOX_HARVEST step was considered and found empty. No donor model, weight or external artifact was harvested: the mechanism was induced from the corpus's own demonstration pairs and the tree's own repair primitive."
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "oracle_paths": [
+        "canonical/tests/test_induced_edit_basis_v1.py",
+        "canonical/tests/test_quixbugs_measurement_integrity_v1.py",
+        "canonical/verification/WHAT_ONE_DEMONSTRATION_BUYS_20261116_V1.json"
+      ],
+      "synthetic_verification_necessity": "The corpus's own published tests are the oracle; unit tests pin only the mechanism and the measurement's integrity. Independent reproduction remains open."
+    },
+    "real_outcome": "The 40 published fixes are partitioned into a one-run, one-judge 24/40 repaired union and a 16-task hard-open population; every later alpha-invariance, exact-decision, browser, new-environment, read-first, operand, replay-drift, trigger, long-tail, basin, GUI-census and proved-composition receipt is read as reach, cost, policy, local addition and evidence, not as a new repair, a permanent plan, a single lever, a GUI invariance, or a final unlock. Separation remains a necessary condition; the measured remainder is a long tail and the next work is a ranked sense/operand, a proposal generator, and a per-step long-horizon verifier.",
+    "required_capability": "A hypothesis space that contains the truth, an invariance that gives one demonstration reach where a quotient exists, a sense carrying the premise, an independent verifier that separates the survivors, a proof-checked composition rule, and a fresh proof on the state in hand before any recorded plan is used. No new learner, verifier, action list, replay macro, one-lever search, GUI-invariance machinery, proof-composition-as-final-unlock claim, or weight update supplies any of these from a single trace.",
+    "route_frontier": {
+      "challenger_routes": [
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "one operator class, nothing general",
+            "CORRECTNESS": "lift one bug of forty",
+            "INCREMENTAL_COST": "low",
+            "RELIABILITY": "leaves 26 of 40 untouched",
+            "VERIFIABILITY": "measured",
+            "WALL_CLOCK": "under a minute"
+          },
+          "evidence": [
+            "bitcount needs ^= -> &=, which the list cannot express: 280 candidates, 0 accepted"
+          ],
+          "qualification_evidence": [
+            "canonical/verification/WHAT_ONE_DEMONSTRATION_BUYS_20261116_V1.json (ladder: 9 leaf, 18 node, 7 multi, 6 shape)"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "extend the hand-written mutation list with an ast.AugAssign rule and re-run the corpus"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "none",
+            "CORRECTNESS": "no candidate exists to find",
+            "INCREMENTAL_COST": "high",
+            "RELIABILITY": "budget does not change expressibility",
+            "VERIFIABILITY": "measured",
+            "WALL_CLOCK": "about 25 minutes for 20 tasks"
+          },
+          "evidence": [
+            "the control spent 5,021 candidates and repaired 2 of 20; bitcount returns 0 at 280 because the edit is not expressible"
+          ],
+          "qualification_evidence": [
+            "/tmp/qb_holdout_control.jsonl via canonical/verification/WHAT_ONE_DEMONSTRATION_BUYS_20261116_V1.json"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "raise the candidate budget on the existing repair loop"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "cannot express the rung",
+            "CORRECTNESS": "wrong level of representation",
+            "INCREMENTAL_COST": "zero",
+            "RELIABILITY": "would silently teach nothing",
+            "VERIFIABILITY": "read, not run",
+            "WALL_CLOCK": "no run needed"
+          },
+          "evidence": [
+            "it unifies token snippets and carries no AST position or site context; it cannot express a containment wrap"
+          ],
+          "qualification_evidence": [
+            "canonical/swe_kernel/verified_skill_crystallizer_v1.py lines 447-456, 470-477"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "reuse verified_skill_crystallizer_v1.anti_unify_code_rule as the inducer"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "apparent only",
+            "CORRECTNESS": "unverifiable provenance",
+            "INCREMENTAL_COST": "spend",
+            "RELIABILITY": "fails closed",
+            "VERIFIABILITY": "zero credit by law",
+            "WALL_CLOCK": "fast"
+          },
+          "evidence": [
+            "producer cognition from another model is prohibited and receives zero credit"
+          ],
+          "qualification_evidence": [
+            "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md"
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "ask another model to write the patch or the templates"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "one real transfer plus a measured ladder",
+            "CORRECTNESS": "verdict is the corpus's own test on a fresh copy",
+            "INCREMENTAL_COST": "zero",
+            "RELIABILITY": "224 candidates, reproducible from the receipt",
+            "VERIFIABILITY": "producer-run, independent reproduction open",
+            "WALL_CLOCK": "177 s for 20 held-out tasks"
+          },
+          "evidence": [
+            "1 of 20 held-out bugs repaired by a template taught by a different program (pascal <- find_in_sorted), verified by the corpus's own tests"
+          ],
+          "qualification_evidence": [
+            "canonical/verification/WHAT_ONE_DEMONSTRATION_BUYS_20261116_V1.json"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "SELECTED",
+          "route": "SYNTHESIZE_AN_AST_LEVEL_EDIT_INDUCER_THAT_FOLDS_ONE_DEMONSTRATION_PAIR_INTO_A_HOLE_GENERALIZED_TEMPLATE_WITH_A_CONTEXT_PRECONDITION_AND_MEASURES_IT_END_TO_END_ON_A_PUBLIC_BUG_CORPUS"
+        }
+      ],
+      "checked_at_utc": "2026-11-17T00:28:18Z",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "discovery_required": true,
+      "incumbent_route": "extend the hand-written mutation list and raise the candidate budget when a bug does not close",
+      "max_age_hours": 24,
+      "negative_search_summary": "Four routes were searched and refused with evidence: a single added mutation kind, more candidate budget, the existing token anti-unifier, and a model-written patch.",
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "program repair from a single demonstration transfer to unseen bugs 2026"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "QuixBugs bug corpus python programs tests published"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "anti-unification edit template hole generalization program repair"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "2026 automatic program repair vocabulary expressibility limit"
+        }
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route": "AUDIT_CLEAN_REPAIR_UNION_AND_BIND_SEPARATION_TO_EXISTING_MECHANISMS",
+      "selected_route_preflight": {
+        "all_required_dependencies_ready": true,
+        "checked_at_utc": "2026-11-17T00:28:18Z",
+        "execution_dependencies": [
+          {
+            "dependency": "local Python 3.11 runtime with pytest 9.2.0",
+            "evidence": [
+              "Python 3.11.2 pytest 9.2.0 re-probed; 8 tests in canonical/tests/test_synthesized_expression_from_the_failure_v1.py pass"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "GLOBAL",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "scope": "GLOBAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "jkoppel/QuixBugs checkout (python_programs, python_testcases, json_testcases)",
+            "evidence": [
+              "jkoppel/QuixBugs checkout re-probed: 50 python_programs, 31 json_testcases; every verdict is its own pytest file"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "GLOBAL",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "scope": "GLOBAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "local filesystem tempdir for per-task isolation",
+            "evidence": [
+              "per-task tempdir with the answer key absent (build_task refuses otherwise), re-confirmed across the 31 measured tasks"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "GLOBAL",
+            "kind": "STORAGE",
+            "required": true,
+            "scope": "GLOBAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          }
+        ],
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "max_age_hours": 2,
+        "selected_route": "AUDIT_CLEAN_REPAIR_UNION_AND_BIND_SEPARATION_TO_EXISTING_MECHANISMS",
+        "status": "READY"
+      },
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/swe_kernel/verified_skill_crystallizer_v1.py",
+          "canonical/swe_kernel/lesson_localization_v1.py",
+          "canonical/swe_kernel/lesson_admission_gate_v1.py",
+          "canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py",
+          "canonical/runtime/bound_capabilities/python_iterative_software_repair_loop_v1.py",
+          "canonical/verification/READ_FIRST_AND_LEARN_ONLY_FOR_A_NAMED_GAP_20261116_V1.json",
+          "canonical/verification/DERIVED_VALUE_FULL_SUITE_20261116_V1.json",
+          "canonical/verification/ACTION_REPLAY_UNDER_CHANGE_20261116_V1.json",
+          "canonical/verification/DECLARED_TRIGGER_AND_OPERAND_TAXONOMY_20261116_V1.json",
+          "canonical/verification/ONE_DEMONSTRATION_BASIN_20261116_V1.json",
+          "canonical/verification/GUI_INVARIANCE_IS_VACUOUS_OR_ABSENT_20261116_V1.json",
+          "COMPOSE_ONLY_WHAT_IS_PROVED_20261116_V1.json"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "https://www.sota2.com/research/dataset/miniwob (2026 aggregate reporting, used only to bound suite difficulty)"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "https://github.com/jkoppel/QuixBugs (MIT; 40 buggy programs, 40 pytest files, JSON test data)",
+          "https://pypi.org/project/pytest (9.2.0, the runner every verdict goes through)"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "https://arxiv.org/html/2605.11030v1 (executable benchmarking suite for tool-using agents, May 2026)",
+          "https://arxiv.org/pdf/2507.04103 (how to train your LLM web agent: task horizons of 2-5 steps)"
+        ]
+      },
+      "unresolved_plausible_dominators": []
+    },
+    "routes_considered": [
+      "Reuse the crystallizer's token anti-unification to induce the rule (checked: it cannot express position-level containment and has no site context)",
+      "Extend the hand-listed mutation list with an AugAssign rule and re-run (checked against the ladder: it lifts one bug and leaves 26 of 40 untouched)",
+      "Raise the candidate budget on the existing loop (checked: 280 candidates already return zero on bitcount because the edit is not expressible)",
+      "Induce node-level templates from demonstration pairs and let the corpus's oracle decide",
+      "Ask a model to write the patch (refused: producer cognition, zero credit)"
+    ],
+    "selected_route": "AUDIT_CLEAN_REPAIR_UNION_AND_BIND_SEPARATION_TO_EXISTING_MECHANISMS",
+    "selected_surviving_route": "AUDIT_CLEAN_REPAIR_UNION_AND_BIND_SEPARATION_TO_EXISTING_MECHANISMS",
+    "selected_surviving_route_class": "COMPOSE",
+    "stop_condition": "One merge on this branch after the required referee is green; no duplicate PR.",
+    "why_selected_route_is_fastest_sufficient": "Every cheaper route was measured dead or already exists under a non-obvious name: one trace leaves 10.018 bits; more environments become a per-machine cost law; the composed run reaches 24/40 and stops; alpha invariance changes 0/304 to 4/384 survivors without moving capability; exact inclusion-extraction decides 2^23 survivors without enumeration; the planner/composer organs for composition and addressing are already present. Reusing and auditing them is the only route that does not duplicate a part or claim an ordinary +1/16 as progress.",
+    "why_this_is_not_another_organ": "It replaces a list with a fold over experience and reuses the existing repair primitive, the corpus oracle and the hashing/verification discipline; the only new machinery is induction and the rung classifier, and both are measured."
+  },
+  "route_id": "AUDIT_CLEAN_REPAIR_UNION_AND_BIND_SEPARATION_TO_EXISTING_MECHANISMS",
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "scope_complete_discharge": false,
+  "selected_route": "AUDIT_CLEAN_REPAIR_UNION_AND_BIND_SEPARATION_TO_EXISTING_MECHANISMS",
+  "selected_surviving_route": "AUDIT_CLEAN_REPAIR_UNION_AND_BIND_SEPARATION_TO_EXISTING_MECHANISMS",
+  "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
+  "stop_condition": "One merge on this branch after the required referee is green; no duplicate PR.",
+  "terminal_credit_delta": 0,
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "truth": {
+    "achieved": false
+  },
+  "user_authorized_governance_change": false,
+  "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "currentness": {
+      "accepted_families": 5,
+      "current_load_bearing_atomic_count": 36,
+      "deleted_nonnecessary_atomic_count": 2,
+      "historical_atomic_registry_count": 38,
+      "meta_envelope_open_count": 8,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "terminal": false,
+      "total_atomic": 38,
+      "total_families": 19,
+      "total_open_truth_obligations": 30,
+      "unresolved_atomic": 22
+    },
+    "fresh_reality_authority": false,
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "This makes the hard-open population auditable; it discharges no truth obligation.",
+    "target_truth_obligations": [
+      "CODING_TB4_GE_66_4"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "counterexample_receipts": [],
+      "decisive_question": "Which real published tasks remain unrepaired by every clean measured mechanism, and does one demonstration separate the surviving hypotheses?",
+      "falsifier_id": "HIDDEN_CEGIS_CALIBRATION_AND_CONTAMINATED_ARM_FILTER",
+      "known_counterexamples_checked": true,
+      "no_known_counterexample_reason": "The killed hidden CEGIS instrument and the contaminated QuixBugs-shown arm are recorded in the union receipt rather than counted as counterexample receipts.",
+      "proposal_id": "SEPARATION_UNION_AUDIT_20261116_V1"
+    }
+  },
+  "verification": {
+    "authority": "NONE__PRODUCER_RUN_SANDBOX",
+    "commands": [
+      "python3 canonical/tools/proof_carrying_counterfactual_union_v1.py --quixbugs /tmp/quixbugs --out canonical/verification/PROOF_CARRYING_COUNTERFACTUAL_UNION_20261116_V1.json",
+      "/tmp/cgr_venv/bin/python -m pytest -q canonical/tests/test_proof_carrying_counterfactual_union_v1.py",
+      "/tmp/cgr_venv/bin/python -m pytest -q canonical/tests/test_what_one_experience_buys_v1.py canonical/tests/test_miniwob_one_success_generalisation_v1.py canonical/tests/test_compose_measured_effects_v1.py canonical/tests/test_the_index_is_the_bottleneck_v1.py canonical/tests/test_systematic_edit_supply_v1.py canonical/tests/test_the_four_levers_of_learning_from_experience_v1.py",
+      "/tmp/cgr_venv/bin/python -m pytest -q --tb=line <48 selected related suites>",
+      "git archive HEAD | tar -x -C /tmp/clean_model && (cd /tmp/clean_model && python3 canonical/runtime/compile_brain_unified_model_v1.py --output canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json) && cp /tmp/clean_model/canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json",
+      "python3 canonical/runtime/verify_brain_unified_model_v1.py",
+      "python3 execution_guard/repo_integrity_guard_v1.py",
+      "python3 execution_guard/agent_orientation_check_v1.py intent-check canonical/action_intents/SEPARATION_IS_THE_BOTTLENECK_20261116_V1.json",
+      "python3 canonical/runtime/enforce_goal_hierarchy.py --base 2833358c1fd48e97e77c3a6d9ba3ec6c17170cb0 --head HEAD",
+      "python3 execution_guard/enforce_load_bearing_primary_pr.py --base 2833358c1fd48e97e77c3a6d9ba3ec6c17170cb0 --head HEAD",
+      "git diff --check"
+    ],
+    "independent_verification_completed": false,
+    "result": "40 real tasks; one-run one-judge 24/40; 16 hard-open; 8 example-searchable; 8 no-JSON tasks made searchable by PR #6885 with 0/9 repairs; PR #6887 confirmed 16 of 20 claimed learned-arm repairs with 4 unknown; 100 held-out HumanEvalFix selection measurement read separately (8/8 settled, 0 regressions, majority vote wrong 3/5); corrected earlier browser census 52/130; later zero-experience browser census 66/130 with 0 regressions; alpha invariance 0/304 -> 4/384 accepted with 0 new tasks; exact inclusion-extraction 2^23-8 with 0 capability credit; four-machine cost law 13/16 with 3 honest refusals; read-first 66/89 READ pages with 0 false negatives; operand addition 78->83 with 0/121 held-out gains; replay drift 122/228 stale and 71/228 silent corruptions despite 228/228 legal operations; declared-format prior 6/123; 46 unsolved pages in 16 classes with largest 6; basin 168 states/1680 transitions, 112/168 status-level domain, 56/168 premise domain, 24->0 undecidable by sense, 168/168 under command-output-only feedback; GUI 15 identity arms / 13 vacuous, 5 judges / 4 quotient-zero, phrase-blind 4/5 design and 5/123 full surface with 0 blind-only; proved composition 31/80, reach 0.3875/0.5345, 0 damaged, 34 no-second-candidate; four levers 5.5546 -> 3.8176 bits, 1.747x question/demonstration ratio, 2/37 answer-variety rank agreements, state-name model 7/10 -> 0/10; systematic edit supply 43/268 sibling commits, 225/268 no sibling, 103/245 verbatim, 31/245 forced, 78/142 induction-requiring pairs right; index sweep 5 families / 0 usable / 2 finest collisions / 5 instance-sensitive kinds, cross-language store 0 non-Python offered but 4 languages transfer with a purpose-built proposer; composition 13/16 -> 14/16, 2 proven unreachable, 15 frame-breaking plans rejected, 0 prediction mismatches; value inference precision 0.2143 / 0.4 with contrast; unbound-name retraction 1415/1415 elements named, 5.428 bits are redundancy, preferred description 0.102 bits and 67/1415 ambiguous, paired id-binding A/B 0.2233 -> 0.29 (+0.0667 on 15 chosen tasks, 0 worse), grid-coordinate 0.05 -> 1.00, structure fields +0.0022 on 23 tasks, wider 130-page rerun not clean and paired A/B refutes -0.95 run variance. 18 new audit tests passed; 212 passed / 27 skipped in six new/modified main suites on clean main; 48 selected related suites gave 715 passed, 10 pre-existing failures, 28 skipped, 5 subtests passed and 240 warnings in 325.47s; the 9 capability_composer and 1 fabric failures reproduce on clean origin/main at 2833358c..., where the same two suites give 10 failed/33 passed/5 subtests and the six new/modified main suites give 212 passed/27 skipped; model 33/33 after a clean-archive recompile that fixes the ignored __pycache__ CI-only 32/33 mismatch; guard 17/0; git diff --check clean; compileall reports 5 untouched main-only syntax errors reproduced on a clean origin/main archive."
+  },
+  "weakens_existing_guard": false,
+  "why_selected_route_is_fastest_sufficient": "Every cheaper route was measured dead or already exists under a non-obvious name: one trace leaves 10.018 bits; more environments become a per-machine cost law; the composed run reaches 24/40 and stops; alpha invariance changes 0/304 to 4/384 survivors without moving capability; exact inclusion-extraction decides 2^23 survivors without enumeration; read-first names 21 gaps with 0 false negatives; an added operand wins 5 design pages and 0 held-out pages; replay drift stales 122/228 plans while the operation stays legal 228/228 times; a declared-format prior covers 6/123 pages; 46 unsolved pages fall into 16 classes with largest 6; one demonstration licenses only 112/168 or 56/168 states while the undecidable set moves with the sense; the GUI judge has 4/5 quotient-zero tasks while a phrase-blind basis adds 0 full-surface pages; proved composition verifies 31/80 attempts with 0 damage but reach 0.3875 and 34 missing second candidates; one demonstration leaves 3.8176 of 5.5546 bits and has a sibling in only 43/268 real commits, with 103/245 pairs being copy-paste and 31/245 genuinely forced; five index-sweep families leave 0 usable keys, composition with a frame reaches 14/16 but still needs effect names and a predicate, inferred edit values are right only 0.2143 of the time when the derivation fires; the shipped description language already names 1415/1415 elements, the 5.428 bits are redundancy, and one id-binding A/B is a local +0.0667 on 15 chosen tasks, not a new grammar. Reusing and auditing the existing organs is the only route that does not duplicate a part, hunt for a nonexistent single lever or GUI invariance, call proof composition the final unlock, claim once identifies a rule or covers most work, call a finer grid or index fix a terminal unlock, restate the retracted second-language claim, call one id-binding fix a single lever, or claim an ordinary +1/16 as progress.",
+  "why_this_is_not_another_organ": "It composes existing measurements and organs by effect, binds the answer to receipts, and recompiles the content-addressed model from a clean archive; it does not add a learner, verifier, vocabulary, replay macro, one-lever search, GUI-invariance machinery, proved-composition final-unlock claim, once-identifies-a-rule claim, one-demonstration-covers-most-work assumption, finer-grid-over-existing-features assumption, index-fix-as-terminal-unlock claim, second-language-5.43-bits claim, id-binding-as-terminal-unlock claim, weight, or external model."
+}
