@@ -8,9 +8,36 @@
   },
   "computer_use": {
     "external_context": "OSWorld 2.0 (arXiv 2606.29537): best agent 20.6% of 108 workflows, failing by skipping verification and spending under 7% of budget detecting its own errors",
-    "status": "UNMEASURED",
-    "what_would_measure_it": "a state-projection differential over a long-horizon workflow suite, e.g. OSWorld 2.0 checkpoints, with mutated actions",
-    "why": "no receipt exists for check density on a desktop: there is no test corpus there, and the oracle must be manufactured. The law refuses to print a zero it did not measure"
+    "invisible_with_a_name_level_view": 0.2353,
+    "novel": {
+      "density": 0.5,
+      "why": "with nothing recorded, only a crash and a no-op are visible; a wrong result that looks like a result is invisible without a specification"
+    },
+    "observation_sensitivity": {
+      "coarse": 0.9706,
+      "full": 1.0,
+      "listing": 0.7647
+    },
+    "oracle_synthesis": {
+      "cover_size_histogram": {
+        "1": 9
+      },
+      "features_rejected_by_stability": {
+        "mtime": 8
+      },
+      "receipt": "canonical/verification/DISTINGUISHING_PROJECTION_20261116_V1.json",
+      "tasks": 9,
+      "tasks_where_content_alone_suffices": 9,
+      "why": "the oracle is not a predicate to be written but an observation to be chosen, under two tests at once: it must separate the action from the ways it can be wrong, and it must reproduce itself on replay. Separation alone admits a timestamp; stability alone admits a name listing"
+    },
+    "receipt": "canonical/verification/COMPUTER_USE_CHECK_DENSITY_20261116_V1.json",
+    "replay": {
+      "density": 1.0,
+      "why": "the intent is the recorded consequence, so any difference is an error: with a full state observation every wrong action is caught, and a wrong action that leaves the state identical did not miss the goal"
+    },
+    "status": "MEASURED_ON_A_SHELL_ENVIRONMENT",
+    "what_remains_unmeasured": "a GUI whose only observable is pixels or DOM -- a projection, not the state -- and workflows longer than one action, where an error is only visible after composition",
+    "what_was_run": "34 mechanically derived wrong actions over 9 real shell transformations, real programs on a real disk, real reset"
   },
   "incremental_spend_usd": 0,
   "law": "P(correct behaviour | one action) = P(determined) x P(seen); P(seen) = density x strength",
@@ -46,6 +73,10 @@
     "p_correct_value_bearing": 0.1167
   },
   "receipts": {
+    "computer": {
+      "path": "canonical/verification/COMPUTER_USE_CHECK_DENSITY_20261116_V1.json",
+      "sha256": "f4c170c5b98b14f15bc53d0ef0d220fca64d959f6e9cb244091e25b38cf5d107"
+    },
     "determinacy": {
       "path": "canonical/verification/SYSTEMATIC_EDIT_SUPPLY_20261116_V1.json",
       "sha256": "98a8c2f651e7f676f59769aabd269e93be02754b4f570b057f5d8f9bd7e88df1"
@@ -61,6 +92,10 @@
     "permanence": {
       "path": "canonical/verification/ACTION_REPLAY_UNDER_CHANGE_20261116_V1.json",
       "sha256": "1234766ba0bfa1f35c6c289e7deb2ad2f0e3e0a362526fb3b7bdf7704be16931"
+    },
+    "projection": {
+      "path": "canonical/verification/DISTINGUISHING_PROJECTION_20261116_V1.json",
+      "sha256": "feaec76f9531b79d04d0cbc974129c86f6b925d9a1bc1719c149443212f593cb"
     },
     "value": {
       "path": "canonical/verification/SYSTEMATIC_EDIT_DERIVATION_20261116_V1.json",
