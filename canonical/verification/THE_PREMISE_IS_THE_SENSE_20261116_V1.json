@@ -1,0 +1,156 @@
+{
+ "authority": "NONE__PRODUCER_RUN_REAL_GIT_TRANSITIONS",
+ "conclusion": "Which facts are SUFFICIENT for a plan's premise is exactly solvable, and the answer is smaller and cheaper than the hand-listed senses: the minimal fact set is proven minimal by exhaustive enumeration, and verified against an independent brute force. The architect's question stops being 'read everything' and becomes 'read exactly the premise, refuse when it fails' -- which is the difference between silent failure and a refusal.",
+ "environment": {
+  "fact_costs": "tool calls: 1 per git query, 1 per file read",
+  "facts_available": 11,
+  "kind": "real git repository in a throw-away directory",
+  "states": 168,
+  "transitions": 1680
+ },
+ "incremental_spend_usd": 0,
+ "kind": "receipt",
+ "model_calls": 0,
+ "network_calls": 0,
+ "producer_cognition_model_dependency_count": 0,
+ "reused_not_rebuilt": [
+  "canonical/runtime/k6_decision_refinement_compiler_v1.py -- compile_refinement, unchanged",
+  "canonical/swe_kernel/one_demonstration_basin_v1.py -- GitWorld, explore, distances, best_demonstration, run_plan, goals, unchanged",
+  "ONE_TRY_LEARNS_A_DOMAIN_NOT_THE_ENVIRONMENT_20261116_V1.md -- the measurement this answers the next question of"
+ ],
+ "schema": "THE_PREMISE_IS_THE_SENSE_20261116_V1",
+ "tasks": [
+  {
+   "blind_decision_is_wrong_in_states": 56,
+   "cells_the_agent_cannot_decide": 0,
+   "cells_when_blind": 1,
+   "compiler_and_brute_force_agree": true,
+   "cost_of_the_shipped_richest_sense": 11.0,
+   "factor_cheaper_than_that": 11.0,
+   "hand_listed_senses": [
+    {
+     "cells": 64,
+     "cells_the_agent_cannot_decide": 0,
+     "cost": 6.0,
+     "facts": 6,
+     "sense": "status",
+     "states_the_agent_cannot_decide": 0,
+     "sufficient": true
+    },
+    {
+     "cells": 80,
+     "cells_the_agent_cannot_decide": 0,
+     "cost": 7.0,
+     "facts": 7,
+     "sense": "status+content(a.txt)",
+     "states_the_agent_cannot_decide": 0,
+     "sufficient": true
+    },
+    {
+     "cells": 168,
+     "cells_the_agent_cannot_decide": 0,
+     "cost": 10.0,
+     "facts": 10,
+     "sense": "status+content(all)",
+     "states_the_agent_cannot_decide": 0,
+     "sufficient": true
+    },
+    {
+     "cells": 168,
+     "cells_the_agent_cannot_decide": 0,
+     "cost": 11.0,
+     "facts": 11,
+     "sense": "status+content(all)+staged",
+     "states_the_agent_cannot_decide": 0,
+     "sufficient": true
+    }
+   ],
+   "label": "A_COMMITTED_AND_CLEAN",
+   "minimum_cells": 4,
+   "minimum_cost": 1.0,
+   "minimum_facts": [
+    "unstaged"
+   ],
+   "plan_domain": 112,
+   "plan_length": 3,
+   "reading_the_premise_would_have_prevented": 0,
+   "refusal_only_is_degenerate": {
+    "minimum_cost": 1.0,
+    "minimum_facts": [
+     "unstaged"
+    ],
+    "reading": "without a postcondition, 'always refuse' satisfies sufficiency for one fact and solves nothing; the postcondition is what stops the optimiser buying the empty policy"
+   },
+   "states": 168,
+   "states_the_agent_cannot_decide": 0,
+   "states_where_plan_fails": 56,
+   "status": "MEASURED"
+  },
+  {
+   "blind_decision_is_wrong_in_states": 56,
+   "cells_the_agent_cannot_decide": 0,
+   "cells_when_blind": 1,
+   "compiler_and_brute_force_agree": true,
+   "cost_of_the_shipped_richest_sense": 11.0,
+   "factor_cheaper_than_that": 11.0,
+   "hand_listed_senses": [
+    {
+     "cells": 64,
+     "cells_the_agent_cannot_decide": 4,
+     "cost": 6.0,
+     "facts": 6,
+     "sense": "status",
+     "states_the_agent_cannot_decide": 24,
+     "sufficient": false
+    },
+    {
+     "cells": 80,
+     "cells_the_agent_cannot_decide": 4,
+     "cost": 7.0,
+     "facts": 7,
+     "sense": "status+content(a.txt)",
+     "states_the_agent_cannot_decide": 16,
+     "sufficient": false
+    },
+    {
+     "cells": 168,
+     "cells_the_agent_cannot_decide": 0,
+     "cost": 10.0,
+     "facts": 10,
+     "sense": "status+content(all)",
+     "states_the_agent_cannot_decide": 0,
+     "sufficient": true
+    },
+    {
+     "cells": 168,
+     "cells_the_agent_cannot_decide": 0,
+     "cost": 11.0,
+     "facts": 11,
+     "sense": "status+content(all)+staged",
+     "states_the_agent_cannot_decide": 0,
+     "sufficient": true
+    }
+   ],
+   "label": "C_COMMITTED_AND_b_txt_STILL_one",
+   "minimum_cells": 2,
+   "minimum_cost": 1.0,
+   "minimum_facts": [
+    "content:b.txt"
+   ],
+   "plan_domain": 56,
+   "plan_length": 3,
+   "reading_the_premise_would_have_prevented": 56,
+   "refusal_only_is_degenerate": {
+    "minimum_cost": 1.0,
+    "minimum_facts": [
+     "content:b.txt"
+    ],
+    "reading": "without a postcondition, 'always refuse' satisfies sufficiency for one fact and solves nothing; the postcondition is what stops the optimiser buying the empty policy"
+   },
+   "states": 168,
+   "states_the_agent_cannot_decide": 0,
+   "states_where_plan_fails": 112,
+   "status": "MEASURED"
+  }
+ ]
+}
