@@ -1,0 +1,405 @@
+{
+  "actions": [
+    "sort_versus_sort_unique",
+    "sort_unique_versus_sort",
+    "copy_versus_no_clobber",
+    "prefix_length",
+    "reverse_versus_sort",
+    "digest_versus_copy",
+    "nondeterministic_action_looks_identified"
+  ],
+  "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+  "chains": 7,
+  "environment": {
+    "decided_before_spending": "the sufficiency verdict is computed from the survivors, not from a second run",
+    "hypothesis_space": "a stated grammar over the state: identity, copy, sort, sort_unique, reverse, digest, prefix, truncate, delete, append",
+    "kind": "real directory, real programs from PATH, real state variants, independent goal commands",
+    "prefix_lengths": [
+      4,
+      8,
+      16,
+      32
+    ]
+  },
+  "external_state": {
+    "abstention_is_unsolved": "AgentAbstain (arXiv 2607.10059): best of 17 frontier models 59.5% paired accuracy, act accuracy exceeds abstain accuracy by 21 points",
+    "agents_struggle_to_identify_by_query": "arXiv 2606.16576: agents identifying a hidden world model by queries are measured on non-informative query rates",
+    "already_measured_in_this_tree": "IDENTIFICATION_COST_IN_A_REAL_SPACE_20261116_V1: median 1037 surviving programs after one demonstration (max 16480, 10.0 bits), 4 of 23 tasks identified, 7 of 23 insufficient even after every example",
+    "frontier_does_not_hold_a_version_space": "Tycho (arXiv 2607.28287, ARC-AGI-3): the policy records competing hypotheses in notes and picks one, and 'does not maintain an explicit version space'",
+    "why_one_trace_cannot_identify": "arXiv 2607.22430: weakly excited action directions give small on-policy error and large counterfactual error -- one trace from a narrow distribution fits and is still wrong"
+  },
+  "hypothesis_space_sizes": {
+    "copy_versus_no_clobber": 343,
+    "digest_versus_copy": 343,
+    "nondeterministic_action_looks_identified": 343,
+    "prefix_length": 343,
+    "reverse_versus_sort": 343,
+    "sort_unique_versus_sort": 343,
+    "sort_versus_sort_unique": 343
+  },
+  "incremental_spend_usd": 0,
+  "limit": "the hypothesis space is a stated grammar, so a sufficiency verdict is relative to it. That is why the third outcome exists and is measured: when no reading fits, the answer is REFUSE, not a memorised observation. A behaviour outside the grammar cannot be learned from any number of executions -- that is the synthesis wall, and this receipt names it rather than crossing it",
+  "missing_programs": [],
+  "model_calls": 0,
+  "model_dependency_count": 0,
+  "naive_one_shot_wrong_on_the_task": {
+    "copy_versus_no_clobber": [
+      "out_present"
+    ],
+    "nondeterministic_action_looks_identified": [
+      "as_given"
+    ]
+  },
+  "naive_one_shot_wrong_outside_the_task": {
+    "nondeterministic_action_looks_identified": [
+      "out_absent",
+      "out_present",
+      "payload_unique",
+      "src_multiline"
+    ],
+    "sort_unique_versus_sort": [
+      "payload_duplicates"
+    ]
+  },
+  "needed_more_than_one_execution": [
+    "copy_versus_no_clobber",
+    "nondeterministic_action_looks_identified"
+  ],
+  "network_calls": 0,
+  "per_chain": [
+    {
+      "candidate_states": 6,
+      "chain": "sort_versus_sort_unique",
+      "decision_after_one_execution": "ACT__EVERY_SURVIVOR_AGREES_ON_THE_STATES_IN_REACH",
+      "equivalence_classes_in_environment": 2,
+      "equivalence_classes_in_task": 1,
+      "executions_to_settle": 1,
+      "final_decision": "ACT__EVERY_SURVIVOR_AGREES_ON_THE_STATES_IN_REACH",
+      "final_survivor_readings": [
+        "sort:payload.dat>out.dat",
+        "sort_unique:payload.dat>out.dat"
+      ],
+      "final_survivors": 2,
+      "final_verdict": "SAFE_FOR_THIS_TASK_ONLY",
+      "first_execution": {
+        "exit_code": 0,
+        "signature": "decoy.txt=7a34d5705f36;in.txt=aa4f11d482c3;out.dat=cfdb3304f89c;payload.dat=0ca2696efe45;src.dat=c24dcdac7794;sub/keep.txt=2b8425c4d20e"
+      },
+      "first_state": "as_given",
+      "goal": {
+        "invocation": "sort -c out.dat",
+        "passes": false,
+        "symptom": "sort: open failed: out.dat: No such file or directory"
+      },
+      "hypotheses": 343,
+      "invocation": "sort -o out.dat payload.dat",
+      "naive_one_shot_wrong_on": [],
+      "naive_one_shot_wrong_outside_the_task": [],
+      "needed_more_than_one": false,
+      "permanence": "TASK_SCOPED__TRUE_NOW_AND_FALSE_WHEN_THE_WORK_WIDENS",
+      "repeating_the_same_execution_changed_anything": false,
+      "survivors_after_one_execution": 2,
+      "task_states": [
+        "as_given",
+        "payload_unique"
+      ],
+      "verdict_after_one_execution": "SAFE_FOR_THIS_TASK_ONLY",
+      "version_space_asks_on": [],
+      "version_space_wrong_on": []
+    },
+    {
+      "candidate_states": 6,
+      "chain": "sort_unique_versus_sort",
+      "decision_after_one_execution": "ACT__EVERY_SURVIVOR_AGREES_ON_THE_STATES_IN_REACH",
+      "equivalence_classes_in_environment": 2,
+      "equivalence_classes_in_task": 1,
+      "executions_to_settle": 1,
+      "final_decision": "ACT__EVERY_SURVIVOR_AGREES_ON_THE_STATES_IN_REACH",
+      "final_survivor_readings": [
+        "sort:payload.dat>out.dat",
+        "sort_unique:payload.dat>out.dat"
+      ],
+      "final_survivors": 2,
+      "final_verdict": "SAFE_FOR_THIS_TASK_ONLY",
+      "first_execution": {
+        "exit_code": 0,
+        "signature": "decoy.txt=7a34d5705f36;in.txt=aa4f11d482c3;out.dat=cfdb3304f89c;payload.dat=0ca2696efe45;src.dat=c24dcdac7794;sub/keep.txt=2b8425c4d20e"
+      },
+      "first_state": "as_given",
+      "goal": {
+        "invocation": "sort -c out.dat",
+        "passes": false,
+        "symptom": "sort: open failed: out.dat: No such file or directory"
+      },
+      "hypotheses": 343,
+      "invocation": "sort -u -o out.dat payload.dat",
+      "naive_one_shot_wrong_on": [],
+      "naive_one_shot_wrong_outside_the_task": [
+        "payload_duplicates"
+      ],
+      "needed_more_than_one": false,
+      "permanence": "TASK_SCOPED__TRUE_NOW_AND_FALSE_WHEN_THE_WORK_WIDENS",
+      "repeating_the_same_execution_changed_anything": false,
+      "survivors_after_one_execution": 2,
+      "task_states": [
+        "as_given",
+        "payload_unique"
+      ],
+      "verdict_after_one_execution": "SAFE_FOR_THIS_TASK_ONLY",
+      "version_space_asks_on": [],
+      "version_space_wrong_on": []
+    },
+    {
+      "candidate_states": 5,
+      "chain": "copy_versus_no_clobber",
+      "decision_after_one_execution": "LEARN_ONCE_MORE__AT_src_multiline",
+      "equivalence_classes_in_environment": 1,
+      "equivalence_classes_in_task": 1,
+      "executions_to_settle": 3,
+      "final_decision": "ACT__EVERY_SURVIVOR_AGREES_ON_THE_STATES_IN_REACH",
+      "final_survivor_readings": [
+        "copy:src.dat>out.dat"
+      ],
+      "final_survivors": 1,
+      "final_verdict": "IDENTIFIED",
+      "first_execution": {
+        "exit_code": 0,
+        "signature": "decoy.txt=7a34d5705f36;in.txt=aa4f11d482c3;out.dat=c24dcdac7794;payload.dat=0ca2696efe45;src.dat=c24dcdac7794;sub/keep.txt=2b8425c4d20e"
+      },
+      "first_state": "as_given",
+      "goal": {
+        "invocation": "cmp -s src.dat out.dat",
+        "passes": false,
+        "symptom": ""
+      },
+      "hypotheses": 343,
+      "invocation": "cp src.dat out.dat",
+      "naive_one_shot_wrong_on": [
+        "out_present"
+      ],
+      "naive_one_shot_wrong_outside_the_task": [],
+      "needed_more_than_one": true,
+      "permanence": "PERMANENT__NO_READING_SURVIVES_THAT_THE_ENVIRONMENT_CAN_TELL_APART",
+      "repeating_the_same_execution_changed_anything": false,
+      "survivors_after_one_execution": 5,
+      "task_states": [
+        "as_given",
+        "out_present",
+        "out_absent"
+      ],
+      "verdict_after_one_execution": "NEEDS_ONE_MORE_EXECUTION",
+      "version_space_asks_on": [
+        "out_present"
+      ],
+      "version_space_wrong_on": []
+    },
+    {
+      "candidate_states": 6,
+      "chain": "prefix_length",
+      "decision_after_one_execution": "ACT__EVERY_SURVIVOR_AGREES_ON_THE_STATES_IN_REACH",
+      "equivalence_classes_in_environment": 1,
+      "equivalence_classes_in_task": 1,
+      "executions_to_settle": 1,
+      "final_decision": "ACT__EVERY_SURVIVOR_AGREES_ON_THE_STATES_IN_REACH",
+      "final_survivor_readings": [
+        "prefix:payload.dat>out.dat:8"
+      ],
+      "final_survivors": 1,
+      "final_verdict": "IDENTIFIED",
+      "first_execution": {
+        "exit_code": 0,
+        "signature": "decoy.txt=7a34d5705f36;in.txt=aa4f11d482c3;out.dat=405d20896ab2;payload.dat=0ca2696efe45;src.dat=c24dcdac7794;sub/keep.txt=2b8425c4d20e"
+      },
+      "first_state": "as_given",
+      "goal": {
+        "invocation": "cmp -s out.dat payload.dat",
+        "passes": false,
+        "symptom": ""
+      },
+      "hypotheses": 343,
+      "invocation": "head -c 8 payload.dat > out.dat",
+      "naive_one_shot_wrong_on": [],
+      "naive_one_shot_wrong_outside_the_task": [],
+      "needed_more_than_one": false,
+      "permanence": "PERMANENT__NO_READING_SURVIVES_THAT_THE_ENVIRONMENT_CAN_TELL_APART",
+      "repeating_the_same_execution_changed_anything": false,
+      "survivors_after_one_execution": 1,
+      "task_states": [
+        "as_given",
+        "payload_long",
+        "payload_short"
+      ],
+      "verdict_after_one_execution": "IDENTIFIED",
+      "version_space_asks_on": [],
+      "version_space_wrong_on": []
+    },
+    {
+      "candidate_states": 6,
+      "chain": "reverse_versus_sort",
+      "decision_after_one_execution": "ACT__EVERY_SURVIVOR_AGREES_ON_THE_STATES_IN_REACH",
+      "equivalence_classes_in_environment": 1,
+      "equivalence_classes_in_task": 1,
+      "executions_to_settle": 1,
+      "final_decision": "ACT__EVERY_SURVIVOR_AGREES_ON_THE_STATES_IN_REACH",
+      "final_survivor_readings": [
+        "reverse:payload.dat>out.dat"
+      ],
+      "final_survivors": 1,
+      "final_verdict": "IDENTIFIED",
+      "first_execution": {
+        "exit_code": 0,
+        "signature": "decoy.txt=7a34d5705f36;in.txt=aa4f11d482c3;out.dat=846fe2b0fc3b;payload.dat=0ca2696efe45;src.dat=c24dcdac7794;sub/keep.txt=2b8425c4d20e"
+      },
+      "first_state": "as_given",
+      "goal": {
+        "invocation": "tac payload.dat | cmp -s - out.dat",
+        "passes": false,
+        "symptom": "tac: failed to open 'payload.dat' for reading: No such file or directory"
+      },
+      "hypotheses": 343,
+      "invocation": "tac payload.dat > out.dat",
+      "naive_one_shot_wrong_on": [],
+      "naive_one_shot_wrong_outside_the_task": [],
+      "needed_more_than_one": false,
+      "permanence": "PERMANENT__NO_READING_SURVIVES_THAT_THE_ENVIRONMENT_CAN_TELL_APART",
+      "repeating_the_same_execution_changed_anything": false,
+      "survivors_after_one_execution": 1,
+      "task_states": [
+        "as_given",
+        "payload_unique"
+      ],
+      "verdict_after_one_execution": "IDENTIFIED",
+      "version_space_asks_on": [],
+      "version_space_wrong_on": []
+    },
+    {
+      "candidate_states": 5,
+      "chain": "digest_versus_copy",
+      "decision_after_one_execution": "ACT__EVERY_SURVIVOR_AGREES_ON_THE_STATES_IN_REACH",
+      "equivalence_classes_in_environment": 1,
+      "equivalence_classes_in_task": 1,
+      "executions_to_settle": 1,
+      "final_decision": "ACT__EVERY_SURVIVOR_AGREES_ON_THE_STATES_IN_REACH",
+      "final_survivor_readings": [
+        "digest:payload.dat>out.dat"
+      ],
+      "final_survivors": 1,
+      "final_verdict": "IDENTIFIED",
+      "first_execution": {
+        "exit_code": 0,
+        "signature": "decoy.txt=7a34d5705f36;in.txt=aa4f11d482c3;out.dat=54dbc305f9dd;payload.dat=0ca2696efe45;src.dat=c24dcdac7794;sub/keep.txt=2b8425c4d20e"
+      },
+      "first_state": "as_given",
+      "goal": {
+        "invocation": "sha256sum -c out.dat",
+        "passes": false,
+        "symptom": "sha256sum: out.dat: No such file or directory"
+      },
+      "hypotheses": 343,
+      "invocation": "sha256sum payload.dat > out.dat",
+      "naive_one_shot_wrong_on": [],
+      "naive_one_shot_wrong_outside_the_task": [],
+      "needed_more_than_one": false,
+      "permanence": "PERMANENT__NO_READING_SURVIVES_THAT_THE_ENVIRONMENT_CAN_TELL_APART",
+      "repeating_the_same_execution_changed_anything": false,
+      "survivors_after_one_execution": 1,
+      "task_states": [
+        "as_given",
+        "payload_unique"
+      ],
+      "verdict_after_one_execution": "IDENTIFIED",
+      "version_space_asks_on": [],
+      "version_space_wrong_on": []
+    },
+    {
+      "candidate_states": 6,
+      "chain": "nondeterministic_action_looks_identified",
+      "decision_after_one_execution": "LEARN_ONCE_MORE__AT_out_present",
+      "equivalence_classes_in_environment": null,
+      "equivalence_classes_in_task": null,
+      "executions_to_settle": 2,
+      "final_decision": "REFUSE__THE_VOCABULARY_CANNOT_EXPRESS_WHAT_HAPPENED",
+      "final_survivor_readings": [],
+      "final_survivors": null,
+      "final_verdict": "VOCABULARY_INSUFFICIENT",
+      "first_execution": {
+        "exit_code": 0,
+        "signature": "decoy.txt=7a34d5705f36;in.txt=aa4f11d482c3;out.dat=ee132a8d4897;payload.dat=ee132a8d4897;src.dat=c24dcdac7794;sub/keep.txt=2b8425c4d20e"
+      },
+      "first_state": "payload_single",
+      "goal": {
+        "invocation": "sort -c out.dat",
+        "passes": false,
+        "symptom": "sort: open failed: out.dat: No such file or directory"
+      },
+      "hypotheses": 343,
+      "invocation": "sort -R payload.dat -o out.dat",
+      "naive_one_shot_wrong_on": [
+        "as_given"
+      ],
+      "naive_one_shot_wrong_outside_the_task": [
+        "out_absent",
+        "out_present",
+        "payload_unique",
+        "src_multiline"
+      ],
+      "needed_more_than_one": true,
+      "permanence": "REFUSED__NOTHING_IS_KEPT",
+      "repeating_the_same_execution_changed_anything": false,
+      "survivors_after_one_execution": 7,
+      "task_states": [
+        "as_given",
+        "payload_single"
+      ],
+      "verdict_after_one_execution": "NEEDS_ONE_MORE_EXECUTION",
+      "version_space_asks_on": [],
+      "version_space_wrong_on": [
+        "as_given"
+      ]
+    }
+  ],
+  "permanence": {
+    "copy_versus_no_clobber": "PERMANENT__NO_READING_SURVIVES_THAT_THE_ENVIRONMENT_CAN_TELL_APART",
+    "digest_versus_copy": "PERMANENT__NO_READING_SURVIVES_THAT_THE_ENVIRONMENT_CAN_TELL_APART",
+    "nondeterministic_action_looks_identified": "REFUSED__NOTHING_IS_KEPT",
+    "prefix_length": "PERMANENT__NO_READING_SURVIVES_THAT_THE_ENVIRONMENT_CAN_TELL_APART",
+    "reverse_versus_sort": "PERMANENT__NO_READING_SURVIVES_THAT_THE_ENVIRONMENT_CAN_TELL_APART",
+    "sort_unique_versus_sort": "TASK_SCOPED__TRUE_NOW_AND_FALSE_WHEN_THE_WORK_WIDENS",
+    "sort_versus_sort_unique": "TASK_SCOPED__TRUE_NOW_AND_FALSE_WHEN_THE_WORK_WIDENS"
+  },
+  "refusals": [
+    "nondeterministic_action_looks_identified"
+  ],
+  "repeating_the_same_execution_ever_helped": [],
+  "schema": "BRAIN_DEMONSTRATION_SUFFICIENCY_V1",
+  "settled_by_one_execution": [
+    "sort_versus_sort_unique",
+    "sort_unique_versus_sort",
+    "prefix_length",
+    "reverse_versus_sort",
+    "digest_versus_copy"
+  ],
+  "survivor_counts": {
+    "copy_versus_no_clobber": 5,
+    "digest_versus_copy": 1,
+    "nondeterministic_action_looks_identified": 7,
+    "prefix_length": 1,
+    "reverse_versus_sort": 1,
+    "sort_unique_versus_sort": 2,
+    "sort_versus_sort_unique": 2
+  },
+  "task_safe_but_not_environment_safe": [
+    "sort_versus_sort_unique",
+    "sort_unique_versus_sort"
+  ],
+  "verdicts_after_one_execution": {
+    "ACT": 5,
+    "LEARN_ONCE_MORE": 2
+  },
+  "version_space_asks_instead_of_being_wrong": {
+    "copy_versus_no_clobber": [
+      "out_present"
+    ]
+  },
+  "what_this_shows": "7 real actions, 343 readings each in a stated grammar, one real execution first. One execution settled 5 of 7 actions on the states the task reaches; 2 could not be settled by it. In 2 of 7 actions the one execution leaves several readings that agree on every state the task reaches and DISAGREE outside it -- so 'it worked, therefore I know it' is true and 'permanently' is false: the first survivor is wrong on 5 further state(s) across 2 action(s). Keeping the survivors instead answers 'this is undetermined, and here is the execution that settles it' on 1 states across 1 actions. Repeating the same execution changed the verdict on 0 actions. 1 action(s) were refused outright because no reading of the state predicts what happened. So 'experience it once and keep it for ever' is not a law: it is a special case that holds when the survivors agree on every state the work can reach, and that is a question you can answer before spending the second execution."
+}
