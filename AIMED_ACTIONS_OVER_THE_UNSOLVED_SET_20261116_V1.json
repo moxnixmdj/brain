@@ -1,0 +1,519 @@
+{
+ "schema": "PROJECT_BRAIN_AIMED_ACTIONS_RECEIPT_V1",
+ "id": "AIMED_ACTIONS_OVER_THE_UNSOLVED_SET_20261116_V1",
+ "date": "2026-11-16",
+ "claim": "Capability on the classes the instructions and their pages show: 24 derivation operators written from the taxonomy class descriptions and the in-receipt utterances, measured against exactly the unsolved set, with a decoy control of the same offer count and shape. This is NOT a transfer claim.",
+ "measure_set": {
+  "source": "canonical/.../DECLARED_TRIGGER_AND_OPERAND_TAXONOMY_20261116_V1.json taxonomy.rows (46) = the unsolved set",
+  "tasks": 46
+ },
+ "protocol": {
+  "arms": [
+   "A_shipped_hand",
+   "G_aimed_hand",
+   "D_decoy_aimed"
+  ],
+  "budget_acts": 400,
+  "seed": 1060,
+  "time_limit_ms": "EXPLORATION_TIME_LIMIT_MS lift during search (page clock governs scoring replay)",
+  "primary_runs": [
+   "/tmp/aimed_primary.jsonl (G,D)",
+   "/tmp/aimed_primary_A.jsonl (A)"
+  ]
+ },
+ "result": {
+  "A_pass": 0,
+  "G_pass": 13,
+  "D_pass": 0,
+  "of": 46,
+  "G_wins": [
+   {
+    "task": "choose-date",
+    "acts": 72,
+    "rule": "DATE_CELL"
+   },
+   {
+    "task": "choose-date-nodelay",
+    "acts": 72,
+    "rule": "DATE_CELL"
+   },
+   {
+    "task": "click-menu",
+    "acts": 211,
+    "rule": "PATH_SEGMENT"
+   },
+   {
+    "task": "copy-paste",
+    "acts": 3,
+    "rule": "COPY_PASTE_VALUE"
+   },
+   {
+    "task": "copy-paste-2",
+    "acts": 3,
+    "rule": "COPY_PASTE_VALUE"
+   },
+   {
+    "task": "draw-line",
+    "acts": 9,
+    "rule": "GRAB_THE_POINT_TO_DRAW_THROUGH"
+   },
+   {
+    "task": "find-word",
+    "acts": 3,
+    "rule": "NTH_WORD_TYPE"
+   },
+   {
+    "task": "odd-or-even",
+    "acts": 18,
+    "rule": "ODD_EVEN_BY_PARITY"
+   },
+   {
+    "task": "read-table-2",
+    "acts": 3,
+    "rule": "LABELLED_PAIR_TRANSFER"
+   },
+   {
+    "task": "social-media",
+    "acts": 3,
+    "rule": "REVEAL_CONTROL"
+   },
+   {
+    "task": "use-colorwheel",
+    "acts": 5,
+    "rule": "NAMED_COLOUR_HEX"
+   },
+   {
+    "task": "use-colorwheel-2",
+    "acts": 5,
+    "rule": "NAMED_COLOUR_HEX"
+   },
+   {
+    "task": "visual-addition",
+    "acts": 4,
+    "rule": "COUNT_THEN_TYPE"
+   }
+  ]
+ },
+ "operators_count": 24,
+ "sources_opened": [
+  "miniwob/html/miniwob/circle-center.html",
+  "miniwob/html/miniwob/use-slider.html",
+  "miniwob/html/miniwob/right-angle.html",
+  "miniwob/html/miniwob/hot-cold.html",
+  "miniwob/html/miniwob/moving-items.html",
+  "miniwob/html/miniwob/chase-circle.html",
+  "miniwob/html/miniwob/use-colorwheel.html",
+  "miniwob/html/miniwob/use-colorwheel-2.html",
+  "miniwob/html/common/ui_utils.js (colour name->hex map)",
+  "element dumps (observation, not source): 16 pages incl. odd-or-even, copy-paste, read-table-2, find-word, visual-addition, click-menu, social-media*, text-editor, terminal, book-flight, order-food, multi-*, email, daily-calendar, choose-date, number-checkboxes"
+ ],
+ "honesty": [
+  "AimPrices prices only actions in the current observation's aimed list; finalize is (0,1), all other aimed (0,0); everything else delegates to GuidedPrices unchanged.",
+  "Aimed set offered alongside the shipped hand in arm G only; arm D receives randomised same-count same-shape decoys; arm A is the shipped hand alone.",
+  "Partial episode ends (a wrong early submit) are real: the search resets and pays for it.",
+  "The bridge walk passes through small inline-styled swatches inside the instruction region (shown to a person) as inert elements; instruction echoes are never actions.",
+  "Misses classified only as far as evidence reaches: manual-score proofs, non-repeatability, missing primitive, or budget-not-found with emission evidence."
+ ],
+ "misses": [
+  {
+   "task": "bisect-angle",
+   "A_pass": false,
+   "A_acts": 400,
+   "G_pass": false,
+   "G_acts": 400,
+   "D_pass": false,
+   "D_acts": 400,
+   "G_status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+   "class": "OPEN_BUDGET_NOT_FOUND",
+   "evidence": "No goal observed in 400 acts at seed 1060."
+  },
+  {
+   "task": "book-flight",
+   "A_pass": false,
+   "A_acts": 400,
+   "G_pass": false,
+   "G_acts": 22,
+   "D_pass": false,
+   "D_acts": 400,
+   "G_status": "OPEN__ENVIRONMENT_NOT_REPEATABLE_UNDER_THIS_STATE_KEY",
+   "class": "OUT_NO_STATELESS_PATH",
+   "evidence": "NOT_REPEATABLE_UNDER_THIS_STATE_KEY at 22 acts (page state drift under repeats) before any search could start."
+  },
+  {
+   "task": "book-flight-nodelay",
+   "A_pass": false,
+   "A_acts": 400,
+   "G_pass": false,
+   "G_acts": 22,
+   "D_pass": false,
+   "D_acts": 400,
+   "G_status": "OPEN__ENVIRONMENT_NOT_REPEATABLE_UNDER_THIS_STATE_KEY",
+   "class": "OUT_NO_STATELESS_PATH",
+   "evidence": "NOT_REPEATABLE_UNDER_THIS_STATE_KEY at 22 acts."
+  },
+  {
+   "task": "chase-circle",
+   "A_pass": false,
+   "A_acts": 400,
+   "G_pass": false,
+   "G_acts": 400,
+   "D_pass": false,
+   "D_acts": 400,
+   "G_status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+   "class": "OUT_NO_STATELESS_PATH",
+   "evidence": "Verdict needs sustained mouse tracking (missedFrames <= 0.1ms); discrete states cannot hold it."
+  },
+  {
+   "task": "circle-center",
+   "A_pass": false,
+   "A_acts": 400,
+   "G_pass": false,
+   "G_acts": 400,
+   "D_pass": false,
+   "D_acts": 400,
+   "G_status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+   "class": "OUT_SCORE_FRAME_NOT_STATED",
+   "evidence": "SCORE_FRAME_NOT_STATED: manual pressat(61,120)+submit scores raw 0.9426670177416312; (r-d)/r cannot reach 1.0 under integer boxes."
+  },
+  {
+   "task": "click-checkboxes-soft",
+   "A_pass": false,
+   "A_acts": 400,
+   "G_pass": false,
+   "G_acts": 400,
+   "D_pass": false,
+   "D_acts": 400,
+   "G_status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+   "class": "OPEN_BUDGET_NOT_FOUND",
+   "evidence": "No goal observed in 400 acts at seed 1060."
+  },
+  {
+   "task": "click-shades",
+   "A_pass": false,
+   "A_acts": 400,
+   "G_pass": false,
+   "G_acts": 400,
+   "D_pass": false,
+   "D_acts": 400,
+   "G_status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+   "class": "OPEN_BUDGET_NOT_FOUND",
+   "evidence": "No goal observed in 400 acts at seed 1060."
+  },
+  {
+   "task": "daily-calendar",
+   "A_pass": false,
+   "A_acts": 400,
+   "G_pass": false,
+   "G_acts": 400,
+   "D_pass": false,
+   "D_acts": 400,
+   "G_status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+   "class": "OPEN_BUDGET_NOT_FOUND",
+   "evidence": "No goal observed in 400 acts at seed 1060."
+  },
+  {
+   "task": "drag-shapes-2",
+   "A_pass": false,
+   "A_acts": 400,
+   "G_pass": false,
+   "G_acts": 400,
+   "D_pass": false,
+   "D_acts": 400,
+   "G_status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+   "class": "OPEN_BUDGET_NOT_FOUND",
+   "evidence": "emission GRAB_INSTRUCTED_COLOUR; not reached in 400 acts."
+  },
+  {
+   "task": "draw-circle",
+   "A_pass": false,
+   "A_acts": 400,
+   "G_pass": false,
+   "G_acts": 400,
+   "D_pass": false,
+   "D_acts": 400,
+   "G_status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+   "class": "OPEN_BUDGET_NOT_FOUND",
+   "evidence": "No goal observed in 400 acts at seed 1060."
+  },
+  {
+   "task": "email-inbox-forward-nl-turk",
+   "A_pass": false,
+   "A_acts": 400,
+   "G_pass": false,
+   "G_acts": 400,
+   "D_pass": false,
+   "D_acts": 400,
+   "G_status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+   "class": "OPEN_BUDGET_NOT_FOUND",
+   "evidence": "emission CONTROL_IN_MATCHING_RECORD; not reached in 400 acts."
+  },
+  {
+   "task": "find-midpoint",
+   "A_pass": false,
+   "A_acts": 400,
+   "G_pass": false,
+   "G_acts": 400,
+   "D_pass": false,
+   "D_acts": 400,
+   "G_status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+   "class": "OUT_SCORE_FRAME_NOT_STATED",
+   "evidence": "SCORE_FRAME_NOT_STATED: same (r-d)/r frame as circle-center (receipt pass-13 note)."
+  },
+  {
+   "task": "form-sequence",
+   "A_pass": false,
+   "A_acts": 400,
+   "G_pass": false,
+   "G_acts": 400,
+   "D_pass": false,
+   "D_acts": 400,
+   "G_status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+   "class": "OPEN_BUDGET_NOT_FOUND",
+   "evidence": "No goal observed in 400 acts at seed 1060."
+  },
+  {
+   "task": "form-sequence-2",
+   "A_pass": false,
+   "A_acts": 400,
+   "G_pass": false,
+   "G_acts": 400,
+   "D_pass": false,
+   "D_acts": 400,
+   "G_status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+   "class": "OPEN_BUDGET_NOT_FOUND",
+   "evidence": "No goal observed in 400 acts at seed 1060."
+  },
+  {
+   "task": "guess-number",
+   "A_pass": false,
+   "A_acts": 400,
+   "G_pass": false,
+   "G_acts": 400,
+   "D_pass": false,
+   "D_acts": 400,
+   "G_status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+   "class": "OPEN_BUDGET_NOT_FOUND",
+   "evidence": "No goal observed in 400 acts at seed 1060."
+  },
+  {
+   "task": "hot-cold",
+   "A_pass": false,
+   "A_acts": 141,
+   "G_pass": false,
+   "G_acts": 141,
+   "D_pass": false,
+   "D_acts": 141,
+   "G_status": "OPEN__ENVIRONMENT_NOT_REPEATABLE_UNDER_THIS_STATE_KEY",
+   "class": "OUT_NO_STATELESS_PATH",
+   "evidence": "NOT_REPEATABLE_AT_141a plus a <5px hit on a random point (\u2248414-point grid > 400 budget) and pointer position absent from the observation."
+  },
+  {
+   "task": "hover-shape",
+   "A_pass": false,
+   "A_acts": 92,
+   "G_pass": false,
+   "G_acts": 400,
+   "D_pass": false,
+   "D_acts": 122,
+   "G_status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+   "class": "OPEN_BUDGET_NOT_FOUND",
+   "evidence": "No goal observed in 400 acts at seed 1060."
+  },
+  {
+   "task": "moving-items",
+   "A_pass": false,
+   "A_acts": 400,
+   "G_pass": false,
+   "G_acts": 400,
+   "D_pass": false,
+   "D_acts": 400,
+   "G_status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+   "class": "OUT_NO_STATELESS_PATH",
+   "evidence": "Verdict arrives only when the page clock fires at 9900ms; the exploration lift makes states repeatable and hides the clock, running the clock makes states non-repeatable."
+  },
+  {
+   "task": "multi-layouts",
+   "A_pass": false,
+   "A_acts": 400,
+   "G_pass": false,
+   "G_acts": 400,
+   "D_pass": false,
+   "D_acts": 400,
+   "G_status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+   "class": "OPEN_BUDGET_NOT_FOUND",
+   "evidence": "no emission at reset: field-value semantics (genre/director/year) not lexically tied to the instruction."
+  },
+  {
+   "task": "multi-orderings",
+   "A_pass": false,
+   "A_acts": 400,
+   "G_pass": false,
+   "G_acts": 400,
+   "D_pass": false,
+   "D_acts": 400,
+   "G_status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+   "class": "OPEN_BUDGET_NOT_FOUND",
+   "evidence": "emission RECORD_MATCHING_ALL_WORDS; not reached in 400 acts."
+  },
+  {
+   "task": "number-checkboxes",
+   "A_pass": false,
+   "A_acts": 400,
+   "G_pass": false,
+   "G_acts": 400,
+   "D_pass": false,
+   "D_acts": 400,
+   "G_status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+   "class": "OPEN_BUDGET_NOT_FOUND",
+   "evidence": "No goal observed in 400 acts at seed 1060."
+  },
+  {
+   "task": "order-food",
+   "A_pass": false,
+   "A_acts": 400,
+   "G_pass": false,
+   "G_acts": 400,
+   "D_pass": false,
+   "D_acts": 400,
+   "G_status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+   "class": "OPEN_BUDGET_NOT_FOUND",
+   "evidence": "no emission at reset: needs a category word the rows do not state (meat/vegetarian)."
+  },
+  {
+   "task": "resize-textarea",
+   "A_pass": false,
+   "A_acts": 400,
+   "G_pass": false,
+   "G_acts": 400,
+   "D_pass": false,
+   "D_acts": 400,
+   "G_status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+   "class": "OPEN_BUDGET_NOT_FOUND",
+   "evidence": "No goal observed in 400 acts at seed 1060."
+  },
+  {
+   "task": "right-angle",
+   "A_pass": false,
+   "A_acts": 400,
+   "G_pass": false,
+   "G_acts": 400,
+   "D_pass": false,
+   "D_acts": 400,
+   "G_status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+   "class": "OUT_SCORE_FRAME_NOT_STATED",
+   "evidence": "SCORE_FRAME_NOT_STATED: manual correct pressat(28.5,99.5)+submit scores raw 0.9995933 < 1.0-1e-9 (bbox integer rounding gives ~0.036 deg against a 9e-8 tolerance)."
+  },
+  {
+   "task": "sign-agreement",
+   "A_pass": false,
+   "A_acts": 400,
+   "G_pass": false,
+   "G_acts": 400,
+   "D_pass": false,
+   "D_acts": 400,
+   "G_status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+   "class": "OUT_NO_STATELESS_PATH",
+   "evidence": "Textarea-scroll gate; the hand has no scroll primitive (v2: mouse.wheel)."
+  },
+  {
+   "task": "simon-says",
+   "A_pass": false,
+   "A_acts": 400,
+   "G_pass": false,
+   "G_acts": 400,
+   "D_pass": false,
+   "D_acts": 400,
+   "G_status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+   "class": "OUT_NO_STATELESS_PATH",
+   "evidence": "NOT_REPEATABLE: timed flashes move under the same state key."
+  },
+  {
+   "task": "social-media-all",
+   "A_pass": false,
+   "A_acts": 400,
+   "G_pass": false,
+   "G_acts": 400,
+   "D_pass": false,
+   "D_acts": 400,
+   "G_status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+   "class": "OPEN_BUDGET_NOT_FOUND",
+   "evidence": "emission 7x CONTROL_IN_MATCHING_RECORD + FINALIZE at reset; chain not reached in 400 acts."
+  },
+  {
+   "task": "social-media-some",
+   "A_pass": false,
+   "A_acts": 400,
+   "G_pass": false,
+   "G_acts": 400,
+   "D_pass": false,
+   "D_acts": 400,
+   "G_status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+   "class": "OPEN_BUDGET_NOT_FOUND",
+   "evidence": "No goal observed in 400 acts at seed 1060."
+  },
+  {
+   "task": "terminal",
+   "A_pass": false,
+   "A_acts": 400,
+   "G_pass": false,
+   "G_acts": 400,
+   "D_pass": false,
+   "D_acts": 400,
+   "G_status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+   "class": "OPEN_BUDGET_NOT_FOUND",
+   "evidence": "emission TERMINAL_LIST_FIRST (ls); no Enter/submit-key primitive in the hand for the command to run."
+  },
+  {
+   "task": "text-editor",
+   "A_pass": false,
+   "A_acts": 400,
+   "G_pass": false,
+   "G_acts": 400,
+   "D_pass": false,
+   "D_acts": 400,
+   "G_status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+   "class": "OPEN_BUDGET_NOT_FOUND",
+   "evidence": "emission SELECT_NAMED_RUN + STYLE_CONTROL + FINALIZE; not reached in 400 acts."
+  },
+  {
+   "task": "tic-tac-toe",
+   "A_pass": false,
+   "A_acts": 400,
+   "G_pass": false,
+   "G_acts": 400,
+   "D_pass": false,
+   "D_acts": 400,
+   "G_status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+   "class": "OPEN_BUDGET_NOT_FOUND",
+   "evidence": "No goal observed in 400 acts at seed 1060."
+  },
+  {
+   "task": "use-slider",
+   "A_pass": false,
+   "A_acts": 400,
+   "G_pass": false,
+   "G_acts": 400,
+   "D_pass": false,
+   "D_acts": 400,
+   "G_status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+   "class": "OUT_NO_STATELESS_PATH",
+   "evidence": "WIDGET_STATE_NOT_STATED: handle carries no aria/min/max/step; the only d values live in the page source."
+  },
+  {
+   "task": "use-slider-2",
+   "A_pass": false,
+   "A_acts": 400,
+   "G_pass": false,
+   "G_acts": 400,
+   "D_pass": false,
+   "D_acts": 400,
+   "G_status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+   "class": "OUT_NO_STATELESS_PATH",
+   "evidence": "WIDGET_STATE_NOT_STATED: same."
+  }
+ ],
+ "integrity": {
+  "tests": "17/17 aimed; 57 targeted exploration+aimed; 165+27s generalisation; unified model 60 passed + 919 subtests after recompile",
+  "unified_model": "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json regenerated"
+ }
+}
