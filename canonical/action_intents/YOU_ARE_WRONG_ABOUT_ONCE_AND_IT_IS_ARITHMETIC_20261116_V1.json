@@ -1,0 +1,513 @@
+{
+ "action_id": "YOU_ARE_WRONG_ABOUT_ONCE_AND_IT_IS_ARITHMETIC_20261116_V1",
+ "action_intent_id": "YOU_ARE_WRONG_ABOUT_ONCE_AND_IT_IS_ARITHMETIC_20261116_V1",
+ "action_kind": "REAL_CAPABILITY_ACQUISITION",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "earlier_routes_exhausted_reason": "RESEARCH was done before BUILDING and it exhausted the route: the answer already existed in this tree under non-obvious names (INSTANT_LEARNING_AUDIT_20261112 section 5, one_shot_identifiability_probe_20261112, instant_learning_boundary_probe_v1, what_a_success_teaches_20261112, repair_version_space_selection_v1, contrast_selection_v1). Building a fourth probe would have been the recorded mistake of forgetting what exists. What was genuinely absent was the relation between the levers, and that is what shipped.",
+  "incremental_spend_usd": 0,
+  "independent_verification_completed": false,
+  "independent_verification_note": "Producer-run only. Authority NONE__PRODUCER_RUN. Three existing instruments re-run on this base and one equation computed from their receipts; no third party ran it.",
+  "laws_read_this_session": [
+   "AGENTS.md",
+   "README.md",
+   "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+  "progress_evidence_paths": [
+   "canonical/tools/the_four_levers_of_learning_from_experience_v1.py",
+   "canonical/tests/test_the_four_levers_of_learning_from_experience_v1.py",
+   "canonical/verification/THE_FOUR_LEVERS_OF_LEARNING_FROM_EXPERIENCE_20261116_V1.json",
+   "YOU_ARE_WRONG_ABOUT_ONCE_AND_IT_IS_ARITHMETIC_20261116_V1.md"
+  ],
+  "route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+  "scope_complete_discharge": false,
+  "terminal_achieved": false
+ },
+ "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The claim \"experience each advanced action once and it is learned permanently\" was answered only as a list of three levers (coverage, identification, interface prior) with no relation between them, so it could not say which lever to pull first, when a lever is empty, or why one demonstration is worth a bounded amount. It is now an equation: bits_after = log2(|H|/|G|) - I(E) - sum I(q) - I(interface), ending at zero. Measured on the tree's own 47-program space: 5.5546 bits before, 3.8176 after one demonstration, 1.0927 bits per further demonstration versus 1.9088 per chosen question, so a question is worth 1.747x a demonstration at equal interaction cost and experience alone needs 3.49 more demos where questions needed 2.00. The demonstration ceiling log2(|Y|)=7.4594 exceeds 5.5546 and therefore does NOT bind; what binds is that one point leaves 14.1 of 47 hypotheses.",
+ "canonical_base_commit": "beed01af2e2c47319b394dea5ce263de357588aa",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "The claim \"experience each advanced action once and it is learned permanently\" was answered only as a list of three levers (coverage, identification, interface prior) with no relation between them, so it could not say which lever to pull first, when a lever is empty, or why one demonstration is worth a bounded amount. It is now an equation: bits_after = log2(|H|/|G|) - I(E) - sum I(q) - I(interface), ending at zero. Measured on the tree's own 47-program space: 5.5546 bits before, 3.8176 after one demonstration, 1.0927 bits per further demonstration versus 1.9088 per chosen question, so a question is worth 1.747x a demonstration at equal interaction cost and experience alone needs 3.49 more demos where questions needed 2.00. The demonstration ceiling log2(|Y|)=7.4594 exceeds 5.5546 and therefore does NOT bind; what binds is that one point leaves 14.1 of 47 hypotheses.",
+ "date": "2026-11-16",
+ "expected_parent_change": "The one-try route stops being a matter of opinion and becomes an inequality that can be aimed at: the prior is the only term not billed per interaction, so effort moves off collecting experience and onto writing the space down and widening the interface.",
+ "expected_parent_frontier_change": "The one-try route stops being a matter of opinion and becomes an inequality that can be aimed at: the prior is the only term not billed per interaction, so effort moves off collecting experience and onto writing the space down and widening the interface.",
+ "explicit_user_authorization": [
+  "Instant learning in new arbitrary environments is solved perfectly; one-shot learning plus permanent retention equals all computer use and most advanced SWE -- answer whether that is true.",
+  "Research must be exhausted before building, in the project and on the web; own weights only, no model used as a component.",
+  "The best part is no part.",
+  "Build everything in the branch; merge once when the feature is complete."
+ ],
+ "falsification_condition": "A space in which ONE demonstration identifies the target in the presence of a prior with |G|=1 and a space of size >2, without a chosen question and without an interface entailment, would refute \"one experience cannot identify a rule\" and reopen the one-try route.",
+ "generic_repair_from_single_probe": false,
+ "governance_change": false,
+ "highest_leverage_now": true,
+ "incremental_spend_usd": 0,
+ "intentional_route_race": false,
+ "load_bearing_primary": {
+  "constructive_gap_for_open_obligation_ids": [
+   "CODING_TB4_GE_66_4"
+  ],
+  "expected_obligation_discharge_lcb": 0,
+  "expected_obligation_unlock_lcb": "1/100",
+  "interpretation": "Speculative forecast only. Discharges no obligation. It replaces a list of three levers with one equation, which lets the next action be aimed at the term that costs no interaction instead of at more experience.",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "1/4",
+  "wall_clock_cost_ub": 1
+ },
+ "measured_effect": {
+  "answer_variety_predicts_information": {
+   "points": 37,
+   "rank_agreements": 2,
+   "verdict": "NO"
+  },
+  "best_demonstration_point": {
+   "bits": 3.6293,
+   "distinct_answers": 5,
+   "fraction_of_space": 0.6534,
+   "x": 0
+  },
+  "bits_after_one": 3.8176,
+  "bits_before": 5.5546,
+  "bits_per_chosen_question": 1.9088,
+  "bits_per_further_demonstration": 1.0927,
+  "ceiling_binds": false,
+  "demonstration_ceiling_log2_Y": 7.4594,
+  "demos_needed_by_experience_alone": 3.49,
+  "distinct_functions": 47,
+  "invariance_group_order": 1.0,
+  "invariance_note": "the tree's hand-authored space has no spelling duplicates, so the alpha lever is empty there; any space enumerated by syntax has |G|>1",
+  "law": "bits_after = log2(|H|/|G|) - I(E) - sum I(q) - I(interface); ends at 0",
+  "queries_measured": 2.0,
+  "question_over_demonstration_ratio": 1.747,
+  "rerun_this_base": {
+   "boundary_probe": "7/10 CARRIED_MODEL as-is, 0/10 renamed",
+   "one_shot_probe": "14.1/47 survivors after one, 0/10 identified, 10/10 after 2.0 chosen queries"
+  },
+  "reused_not_rebuilt": [
+   "CANON_1_INSTANT_LEARNING_AUDIT_20261112",
+   "one_shot_identifiability_probe_20261112",
+   "instant_learning_boundary_probe_v1",
+   "what_a_success_teaches_20261112",
+   "repair_version_space_selection_v1",
+   "contrast_selection_v1",
+   "demonstration_version_space_v1"
+  ],
+  "space_entries": 47,
+  "state_name_arm": {
+   "as_is": {
+    "carried_model_survived": 7,
+    "warm_cheaper": 8,
+    "warm_dearer": 2
+   },
+   "renamed": {
+    "carried_model_survived": 0,
+    "warm_cheaper": 1,
+    "warm_dearer": 9
+   }
+  },
+  "worst_demonstration_point": {
+   "bits": 0.6035,
+   "distinct_answers": 36,
+   "x": 30
+  }
+ },
+ "model_calls": 0,
+ "network_calls": 0,
+ "next_step": "Spend on the only term not billed per interaction: widen the declared interface/verifier regime so hypotheses are entailed without an observation, and enumerate the world-rewrites no page can show, of which 12h->24h time is the first measured member.",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "paths": [
+  "canonical/tools/the_four_levers_of_learning_from_experience_v1.py",
+  "canonical/tests/test_the_four_levers_of_learning_from_experience_v1.py",
+  "canonical/verification/THE_FOUR_LEVERS_OF_LEARNING_FROM_EXPERIENCE_20261116_V1.json",
+  "YOU_ARE_WRONG_ABOUT_ONCE_AND_IT_IS_ARITHMETIC_20261116_V1.md",
+  "canonical/action_intents/YOU_ARE_WRONG_ABOUT_ONCE_AND_IT_IS_ARITHMETIC_20261116_V1.json"
+ ],
+ "prior_work_reused": [
+  "canonical/tools/INSTANT_LEARNING_AUDIT_20261112_V1.md -- section 5 states the framework this makes into an equation",
+  "one_shot_identifiability_probe_20261112.py -- the 47-program space and the 10% / 0-of-10 receipts, re-run here",
+  "canonical/tools/instant_learning_boundary_probe_v1.py -- the as-is versus renamed arm, re-run here",
+  "canonical/swe_kernel/repair_version_space_selection_v1.py -- the 5/16 no-question-can-fix measurement",
+  "canonical/runtime/contrast_selection_v1.py -- \"further identical points are the same point\"",
+  "canonical/runtime/demonstration_version_space_v1.py -- the enumeration that makes the space an asset",
+  "canonical/runtime/exact_information_gain.py -- exact rational information gain, reused not rebuilt"
+ ],
+ "probe_specific": false,
+ "recursive_obs": {
+  "canonical_base_commit": "beed01af2e2c47319b394dea5ce263de357588aa",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "building a fourth learning probe suite when three exist and are better",
+   "claiming the log2(|Y|) demonstration ceiling binds when 7.4594 > 5.5546",
+   "treating answer variety as a proxy for information",
+   "reporting the query-versus-demonstration ratio as a theorem magnitude rather than a measurement of one space",
+   "counting 47 syntactic entries as 47 hypotheses without checking for spelling duplicates"
+  ],
+  "expected_parent_frontier_change": "The one-try route stops being a matter of opinion and becomes an inequality that can be aimed at: the prior is the only term not billed per interaction, so effort moves off collecting experience and onto writing the space down and widening the interface.",
+  "expected_parent_level_state_change": "The one-try route stops being a matter of opinion and becomes an inequality that can be aimed at: the prior is the only term not billed per interaction, so effort moves off collecting experience and onto writing the space down and widening the interface.",
+  "independent_verification_required": true,
+  "iteration_limit": 1,
+  "obs_blocker": {
+   "delete_bypass_substitute_options": [
+    "delete the three-lever list as the account of learning from experience",
+    "bypass more environment touring by asking the question that splits survivors",
+    "substitute the interface/verifier regime for per-attempt experience"
+   ],
+   "intrinsic_or_path_specific": "intrinsic: a demonstration is a sequence, so its domain is a fact about the environment it was run in, and whether that domain is decidable is a fact about the agent's senses; neither is a property of the record.",
+   "surviving_causal_blocker": "The premise. It decides the licensed set (24 undecidable states at the status sense, 0 when the sense carries it), it cannot be closed by experience, and the tool's own output does not carry it."
+  },
+  "obs_capability": {
+   "capability_work_deleted": [
+    "a second lesson store or admission gate",
+    "another hand-written mutation kind",
+    "a larger search budget on an inexpressible edit"
+   ],
+   "existing_inherited_routes_checked": [
+    "learned_skill_verdict_v1.run_program (runs a program in a thrown-away copy; has no notion of a state moving under it)",
+    "one_demonstration_reach_v1 (measures reach of a stored requirement; assumes the state it measured on)",
+    "applicability_v1 (learns a requirement from outcomes; licenses only from contrasts)",
+    "python_iterative_software_repair_loop_v1 (applies one candidate at a time; never composes two learned actions)"
+   ],
+   "external_existing_routes_checked": [
+    "QuixBugs itself, as the corpus and the oracle",
+    "2026 verifier-gated self-improvement literature (the verifier is the gate once a candidate exists)"
+   ],
+   "surviving_gap": "An executor that treats every learned action as a decision procedure plus a premise, re-proves the premise on the live state, and postcondition-checks the claimed sentence after acting."
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "a higher repair count reached by loosening what counts as repaired",
+    "counting a self-taught repair as transfer",
+    "treating a longer candidate list as more capability",
+    "quoting a corpus score as a frontier position"
+   ],
+   "real_outcome": "The permanent object is the method (decision procedure + premise + cost) and the verifier, never the plan: a learned action may veto but never license, every application re-proves its premise on the live state and re-reads the result against the sentence it claims, and composition re-checks the second premise against the first step's effect instead of against the record.",
+   "surviving_necessity": "Coding capability is gated on a correct candidate existing at all; no oracle, budget or weight can select a hypothesis the basis cannot build."
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "None by claim: the existing repair primitive and corpus oracle are reused unchanged; the induced basis adds candidates only and holds no authority.",
+   "downstream_work_to_delete_or_supersede": "Any roadmap step that adds another hand-written mutation kind, or that raises a candidate budget to fix a bug whose edit is not expressible.",
+   "fresh_reuse_plan": "Recompute the ladder and re-run both bases from the receipt's commands; the corpus is public and the answer key is never needed."
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": "Reused the learned inline skill, the reach scanner and the run-in-a-copy runner; no second action library, no new oracle, no model.",
+   "search_stop_decision": "Stop at four independent samples (228 pairs); the per-sample staleness spread 45-58% already bounds the claim, and more samples buy precision, not a new fact."
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "efficiency_mechanism": "The plan saves search but never carries authority; the postcondition check costs one parse and one name scan per application and removes the 71 silent corruptions by construction.",
+   "generality_mechanism": "The same protocol applies to any state, including a GUI window: re-observe, re-prove the premise, act, re-read.",
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "Plain replay is wrong 53.5% of the time and silently wrong 31.1%; a fingerprint alone still admits the 4 zero-drift stale cases; one plan per state is unbounded and still unproved; a model is prohibited producer cognition.",
+   "routes_ranked": [
+    "re-decide every action with its premise re-proved on the live state (selected)",
+    "replay the recorded plan and trust it",
+    "fingerprint the region and refuse stale replays only",
+    "learn one plan per state, growing the store with every change",
+    "ask a model to repair the replay"
+   ],
+   "white_box_harvest_note": "The canonical ladder is recorded in full; the WHITE_BOX_HARVEST step was considered and found empty. No donor model, weight or external artifact was harvested: the mechanism was induced from the corpus's own demonstration pairs and the tree's own repair primitive."
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "oracle_paths": [
+    "canonical/tests/test_action_replay_under_change_v1.py",
+    "canonical/verification/ACTION_REPLAY_UNDER_CHANGE_20261116_V1.json",
+    "canonical/verification/LEARNED_SKILL_VERDICT_20261116_V1.json"
+   ],
+   "synthetic_verification_necessity": "The corpus's own published tests are the oracle; unit tests pin only the mechanism and the measurement's integrity. Independent reproduction remains open."
+  },
+  "real_outcome": "One demonstration is worth 1.74 bits here and leaves 14.1 of 47 hypotheses; a chosen question is worth 1.9088 bits at the same price; the best demonstration point teaches 65.3% of the space while the point with seven times its answer variety teaches 10.9%. Variety is not information, and the prior is the only free term.",
+  "required_capability": "Guarding instead of remembering: check the plan's premise on the live state before the first action, check the goal after the last, and where the premise is not expressible in the available senses, make it observable or refuse -- because the undecidable set does not shrink with more attempts.",
+  "route_frontier": {
+   "challenger_routes": [
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "none: ordering alone turns a correct composition into a broken file",
+      "CORRECTNESS": "a plan is a fact about one state; applied to another it is a guess",
+      "INCREMENTAL_COST": "zero to record, one silently damaged file to trust",
+      "RELIABILITY": "31.1% of applications damage the file without any error being raised",
+      "VERIFIABILITY": "only a postcondition check can tell, which is the selected route",
+      "WALL_CLOCK": "faster by one parse and one name scan per step"
+     },
+     "evidence": [
+      "106 of 228 matches (46.5%); 122 stale (53.5%)",
+      "71 of 228 produced a file that parses and still binds the removed name (31.1%)",
+      "all 106 matches had zero drift; 4 stale replays had zero drift as well",
+      "the operation itself stayed legal in 228 of 228 pairs, so the loss is addressing, not capability"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/ACTION_REPLAY_UNDER_CHANGE_20261116_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "REPLAY_THE_RECORDED_PLAN_WHEREVER_THE_ACTION_IS_NEEDED"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "none without the re-check",
+      "CORRECTNESS": "removes most staleness and admits the rest",
+      "INCREMENTAL_COST": "one hash per region",
+      "RELIABILITY": "strictly better than replay, strictly weaker than a postcondition check",
+      "VERIFIABILITY": "a filter, not a proof; the postcondition is the proof",
+      "WALL_CLOCK": "one hash per region, the cheapest possible filter"
+     },
+     "evidence": [
+      "118 of 122 stale replays had nonzero drift, so a region fingerprint removes most of them",
+      "4 stale replays had zero drift, so the fingerprint cannot be the licence"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/ACTION_REPLAY_UNDER_CHANGE_20261116_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "NON_DOMINATING",
+     "route": "FINGERPRINT_THE_TOUCHED_REGION_AND_REFUSE_STALE_REPLAYS"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "composition becomes available instead of accidental",
+      "CORRECTNESS": "the proof is re-run on the state in hand and the sentence is re-read after acting",
+      "INCREMENTAL_COST": "no model, no network, no store",
+      "RELIABILITY": "silent corruptions fall from 31.1% to 0 by construction",
+      "VERIFIABILITY": "reproducible from the receipt with one command and pinned by pytest",
+      "WALL_CLOCK": "one parse plus one name scan per application"
+     },
+     "evidence": [
+      "228 real two-step compositions in 62 files, four independent samples",
+      "the premise held after the change in 228 of 228 pairs, so re-deciding keeps both steps",
+      "a postcondition check costs one parse and one name scan and removes all 71 silent corruptions by construction"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/ACTION_REPLAY_UNDER_CHANGE_20261116_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "SELECTED",
+     "route": "RE_DECIDE_EVERY_ACTION_PROVE_THE_PREMISE_ON_THE_LIVE_STATE_AND_POSTCONDITION_CHECK_THE_CLAIMED_SENTENCE_INSTEAD_OF_REPLAYING_THE_PLAN"
+    }
+   ],
+   "checked_at_utc": "2026-11-17T00:16:00Z",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "record the edit a learned action produced and replay that plan wherever the action is needed",
+   "max_age_hours": 24,
+   "negative_search_summary": "Three routes were refused on this tree's own measurement: plain replay (53.5% of 228 real compositions stale, 31.1% silently corrupt), fingerprint-only invalidation (necessary, but 4 stale replays had zero drift), and one stored plan per state (unbounded, and every plan is still unproved on the next state). A model-based repair was refused as producer cognition.",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "do coding agents replay past patches or synthesise new edits 2026"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "SWE-bench Verified patches keep deleted code Guard-and-Go deletion check"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "abstract plan reuse versus raw trajectory reuse SWE agent STAIR 2026"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "SWE-Touch mid-run user edit agent retained conflict 2026"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "selected_route": "REUSE_THE_TREES_OWN_THREE_INSTRUMENTS_AND_STATE_THE_LAW_THAT_LINKS_THEM__BITS_AFTER_EQUALS_LOG2_SPACE_OVER_SPELLINGS_MINUS_DEMONSTRATION_MINUS_QUESTIONS_MINUS_INTERFACE",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-11-17T00:16:00Z",
+    "execution_dependencies": [
+     {
+      "dependency": "local Python 3.11 runtime with the repository's own venv",
+      "evidence": [
+       "35 mechanism and integrity tests ran; every verdict is an executed subprocess"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "this repository's own sources under canonical/**/*.py as the corpus",
+      "evidence": [
+       "5,562 files scanned; 509 eligible sites found by running the learned operation; corpus sha256 and the measured commit recorded"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "throw-away temp copies so no measurement can modify the tree",
+      "evidence": [
+       "every application runs in a TemporaryDirectory; the tree is byte-identical after the run"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "STORAGE",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "max_age_hours": 2,
+    "selected_route": "REUSE_THE_TREES_OWN_THREE_INSTRUMENTS_AND_STATE_THE_LAW_THAT_LINKS_THEM__BITS_AFTER_EQUALS_LOG2_SPACE_OVER_SPELLINGS_MINUS_DEMONSTRATION_MINUS_QUESTIONS_MINUS_INTERFACE",
+    "status": "READY"
+   },
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/swe_kernel/verified_skill_crystallizer_v1.py",
+     "canonical/swe_kernel/lesson_localization_v1.py",
+     "canonical/swe_kernel/lesson_admission_gate_v1.py",
+     "canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py",
+     "canonical/runtime/bound_capabilities/python_iterative_software_repair_loop_v1.py"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "https://www.sota2.com/research/dataset/miniwob (2026 aggregate reporting, used only to bound suite difficulty)"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "https://github.com/jkoppel/QuixBugs (MIT; 40 buggy programs, 40 pytest files, JSON test data)",
+     "https://pypi.org/project/pytest (9.2.0, the runner every verdict goes through)"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "https://arxiv.org/html/2605.11030v1 (executable benchmarking suite for tool-using agents, May 2026)",
+     "https://arxiv.org/pdf/2507.04103 (how to train your LLM web agent: task horizons of 2-5 steps)"
+    ]
+   },
+   "unresolved_plausible_dominators": []
+  },
+  "routes_considered": [
+   "Count one success as learning the environment (checked: the demonstration's domain is 112 of 168 states, and 56 of 168 when the task has a premise)",
+   "Assume full observability and replay the demonstration (checked: 24 of 168 states are undecidable at the status sense, 16 of them silently wrong)",
+   "Close the gap with more demonstrations (checked: 4 groups can be licensed by no demonstration at all, and the undecidable set is invariant to experience)",
+   "Trust the tool's own success message as the goal's truth (checked: 3 classes over 168 states, none inside the plan's domain)",
+   "Measure the plan's exact domain and score every sense against it, then guard or refuse (selected)"
+  ],
+  "selected_route": "REUSE_THE_TREES_OWN_THREE_INSTRUMENTS_AND_STATE_THE_LAW_THAT_LINKS_THEM__BITS_AFTER_EQUALS_LOG2_SPACE_OVER_SPELLINGS_MINUS_DEMONSTRATION_MINUS_QUESTIONS_MINUS_INTERFACE",
+  "selected_surviving_route": "REUSE_THE_TREES_OWN_THREE_INSTRUMENTS_AND_STATE_THE_LAW_THAT_LINKS_THEM__BITS_AFTER_EQUALS_LOG2_SPACE_OVER_SPELLINGS_MINUS_DEMONSTRATION_MINUS_QUESTIONS_MINUS_INTERFACE",
+  "selected_surviving_route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+  "stop_condition": "The three existing instruments re-run on this base, the law computed from their own receipts, and no new learning mechanism, store or probe suite built.",
+  "why_selected_route_is_fastest_sufficient": "It is the only route that answers the claim on a closed environment where the ground truth is fully known: the model costs |S|x|A| real transitions once, after which every sense is scored on the same states for free, which is what turns 'one try is not enough' into a number and a lever -- the same code path for a git command and a GUI action.",
+  "why_this_is_not_another_organ": "It replaces a list with a fold over experience and reuses the existing repair primitive, the corpus oracle and the hashing/verification discipline; the only new machinery is induction and the rung classifier, and both are measured."
+ },
+ "route_id": "REUSE_THE_TREES_OWN_THREE_INSTRUMENTS_AND_STATE_THE_LAW_THAT_LINKS_THEM__BITS_AFTER_EQUALS_LOG2_SPACE_OVER_SPELLINGS_MINUS_DEMONSTRATION_MINUS_QUESTIONS_MINUS_INTERFACE",
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "scope_complete_discharge": false,
+ "selected_route": "REUSE_THE_TREES_OWN_THREE_INSTRUMENTS_AND_STATE_THE_LAW_THAT_LINKS_THEM__BITS_AFTER_EQUALS_LOG2_SPACE_OVER_SPELLINGS_MINUS_DEMONSTRATION_MINUS_QUESTIONS_MINUS_INTERFACE",
+ "status": "COMPLETE",
+ "stop_condition": "The three existing instruments re-run on this base, the law computed from their own receipts, and no new learning mechanism, store or probe suite built.",
+ "terminal_credit_delta": 0,
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "truth": "Instant learning is real and bounded. One experience cannot identify a rule, and the reason is arithmetic in bits, not effort: a demonstration is one answer, a chosen question halves the survivors at the same price, and the prior is the only term not billed per interaction.",
+ "user_authorized_governance_change": false,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "currentness": {
+   "accepted_families": 5,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "It measures what a demonstration licenses and where; it discharges no truth obligation.",
+  "target_truth_obligations": [
+   "CODING_TB4_GE_66_4"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [],
+   "decisive_question": "Does one demonstration teach the environment, or only a domain inside it -- and can the agent tell which domain it is standing in?",
+   "falsifier_id": "EXACT_DOMAIN_SCORED_AGAINST_EVERY_SENSE_PLUS_COMMAND_OUTPUT_CONTROL",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "The environment is the counterexample: 168 states, one 3-action demonstration with a 112-state domain, 24 undecidable states under the status sense and 168 under command output.",
+   "proposal_id": "ONE_TRY_LEARNS_A_DOMAIN_NOT_THE_ENVIRONMENT_20261116_V1"
+  }
+ },
+ "verification": {
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "commands": [
+   "python3 canonical/swe_kernel/one_demonstration_basin_v1.py --max-states 400 --json canonical/verification/ONE_DEMONSTRATION_BASIN_20261116_V1.json",
+   "python3 -m pytest canonical/tests/test_one_demonstration_basin_v1.py -q",
+   "python3 canonical/runtime/compile_brain_unified_model_v1.py",
+   "python3 execution_guard/repo_integrity_guard_v1.py --base 6f78086bc2ee7b4992bee6e21aaa422f4be1eba1"
+  ],
+  "receipt": "canonical/verification/ONE_DEMONSTRATION_BASIN_20261116_V1.json"
+ },
+ "weakens_existing_guard": false
+}
