@@ -31228,7 +31228,7 @@
   "engines": 26,
   "knowledge_documents": 502,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6969,
+  "research_index_records": 6970,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 452,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "a94ef5eae8ce9e48ee01300e7ffe9b86e188879cbbd55ecfc17ce34ce9f5d978"
+  "value": "67421544c41f60188dbb5d6a223fcbdbb69708a1c2f851f21302fde52855e2ac"
  },
  "engines": [
   {
@@ -245237,6 +245237,51 @@
     "v1": 1,
     "wall": 1,
     "within": 1
+   }
+  },
+  {
+   "action_id": "THE_CONTRACT_NOT_THE_SEQUENCE_REFUSES_THE_NOOP_PAIR_20261117_V1",
+   "capability": false,
+   "date": "2026-11-17",
+   "id": "research:canonical/action_intents/THE_CONTRACT_NOT_THE_SEQUENCE_REFUSES_THE_NOOP_PAIR_20261117_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/THE_CONTRACT_NOT_THE_SEQUENCE_REFUSES_THE_NOOP_PAIR_20261117_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "4327e2e29de6bd6e8b79197fb9e503253ca8a163fb0286eda3f168807b2bec4e",
+   "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
+   "terms": {
+    "20261117": 1,
+    "about": 1,
+    "against": 1,
+    "concrete": 1,
+    "condition": 1,
+    "contract": 1,
+    "declare": 1,
+    "demonstration": 1,
+    "each": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "history": 1,
+    "incompatible": 1,
+    "needed": 1,
+    "none": 1,
+    "noop": 1,
+    "not": 1,
+    "only": 1,
+    "own": 1,
+    "pair": 2,
+    "pass": 1,
+    "post-hoc": 1,
+    "proposed__producer_measured__independent_verification_open": 1,
+    "proved_composition": 1,
+    "rank-2": 1,
+    "refuse": 1,
+    "refuses": 1,
+    "rule": 1,
+    "sequence": 1,
+    "sequence_verify": 1,
+    "skills": 1,
+    "state": 1,
+    "static_declared_effect_compatibility_over_five_fields_p_o_a_v_f_with_full_inverse_undo_refusal_and_cross_instrument_fold_against_sequence_and_proved_composition": 1
    }
   },
   {
