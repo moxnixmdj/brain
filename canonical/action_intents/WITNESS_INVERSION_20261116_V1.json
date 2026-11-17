@@ -31,20 +31,17 @@
     "producer_cognition_model_dependency_count": 0,
     "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
     "progress_evidence_paths": [
-      "canonical/swe_kernel/demonstration_sufficiency_v1.py",
-      "canonical/tests/test_demonstration_sufficiency_v1.py",
-      "canonical/verification/DEMONSTRATION_SUFFICIENCY_20261116_V1.json",
-      "canonical/swe_kernel/capability_law_v1.py",
-      "canonical/tests/test_capability_law_v1.py",
-      "canonical/verification/CAPABILITY_LAW_20261116_V1.json",
-      "WHAT_ONE_EXECUTION_IS_WORTH_20261116_V1.md"
+      "canonical/verification/WITNESS_INVERSION_20261116_V1.json",
+      "canonical/swe_kernel/witness_inversion_v1.py",
+      "canonical/tests/test_witness_inversion_v1.py",
+      "WHY_NO_MECHANISM_CAN_BUY_REACH_20261116_V1.md"
     ],
     "route_class": "SYNTHESIZE_NEW_PRIMITIVE",
     "scope_complete_discharge": false,
     "terminal_achieved": false
   },
   "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
-  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Every filter this tree owns is measured and bounded -- verification is exact, search is bounded, memory replays 4.8% exactly, a new environment costs 29 trials and pays back at 25.8 requests -- but no term in the capability law named the thing that sets the ceiling. Without it, the obvious next move was to add hand-written edit families (INSERT/DELETE/RENAME), which buys exactly the defects you name and repeats the 6261-of-19648 mistake. The missing measurement was REACH: the share of real fixes a method can even name",
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_REACH_LAW_NAMED_EXPRESSIBILITY_AS_THE_BINDING_TERM_BUT_NO_ORGAN_EXISTED_THAT_COULD_NAME_AN_EDIT_OUTSIDE_A_FIXED_GRAMMAR_WITHOUT_ENUMERATING_ONE__AND_THE_TREE_HAD_NO_INVERSION_OR_CONCOLIC_OR_WITNESS_ORGAN_AT_ALL",
   "canonical_base_commit": "d771ae2d8bcaedd9607d91914ba5d11c808e6d66",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
@@ -98,18 +95,17 @@
   "prior_work_reused": "EXPERT_FIX_REPETITION_SWEBENCH_VERIFIED (500 real tasks, 2178 real pieces, operator and provenance per piece), HUMANEVALFIX_REPAIR_SOLVER (100 real bugs, per-type outcomes), INSTANT_LEARNING_IN_A_NEW_ENVIRONMENT (4 real machines, adaptation and crossover), and the mutation grammar parsed live from python_test_guided_patch_search_v1. Nothing was re-run for a number; one number was recomputed independently as a cross-check and agreed to 30 pieces",
   "probe_specific": false,
   "recursive_obs": {
-    "canonical_base_commit": "d771ae2d8bcaedd9607d91914ba5d11c808e6d66",
+    "canonical_base_commit": "43734c87ec538cb6b05cf135e41681dd5c177be8",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
-      "adding hand-written INSERT/DELETE/RENAME families (buys exactly the named defects; the 6261/19648 mistake)",
-      "treating a per-request success rate on one benchmark as a statement about 'any computer'",
-      "treating one experience per action as enough because it is enough for the consequence",
-      "reporting a law with an unexplained exception without naming it as one",
-      "citing SWE-bench Verified as a frontier measure after February 2026",
-      "asking whether the system is sentient, which nothing here can measure"
+      "importing the test module and calling the test function by name (real suites are fixture- and class-based; this is the first-run mistake that produced 0 witnesses and REFUSED__NO_REPORT)",
+      "reading the site from the traceback (no library frame survives into the failure; the site must be recorded while the test runs)",
+      "adding INSERT/DELETE/RENAME families to the control arm (buys exactly the named defects)",
+      "treating a refusal as a defect in the corpus rather than as a measurement",
+      "claiming a verified real repair that the receipt does not contain"
     ],
-    "expected_parent_frontier_change": "Five real actions, five distinct outcomes, nothing asserted: `cp payload.dat out.dat` is EXPLAINED and grows nothing (the negative control); `touch keep.dat` is INVISIBLE to the content view and is silently accepted as identity, repaired by the derived predicate `mtime_changed` because the raw timestamp field reported the action in only 5 of 6 unnormalised repeats; `sort -R payload.dat -o out.dat` is not a function of its state and is repaired by a set-valued consequence `PERMUTATION_OF_INPUT(payload.dat)`, the strongest relation every repeat satisfies, stable on a fresh execution, excluding `sort_unique` while admitting identity/copy/sort/reverse (the price, printed); `sort -u -r payload.dat -o out.dat` is outside the flat grammar (0 of 73 readings reproduce it) and is repaired by one composition `sort_unique_then_reverse`; and `mkdir newdir` is BEYOND THIS OBSERVABLE -- the effect is on disk and every one of the five views is empty, so no predicate built from the same readings can reach it and the loop refuses to grow. The frontier's claim that a system can invent the concepts it needs is therefore half true and the false half is now located: predicates, sets and compositions are derivable from within the state; a missing sensor is not, and must be requested from the interface",
-    "expected_parent_level_state_change": "The ceiling is REACH, measured on real material and not argued. 2178 real fix pieces from 500 real SWE-bench Verified tasks: 75.2% are rebuilt by no operator any other task's fixes ever produced, and with every other task as experience coverage is 18.7% -- flat across experience quartiles (0.151 / 0.178 / 0.157 / 0.183), so a quarter of the corpus of experience is worth as much as none. The same wall from the other side on 100 real HumanEvalFix bugs: defect types whose edit shape the grammar can name repair at 74% (0.73 / 0.71 / 0.83), the rest at 32% (0.33 / 0.32 / 0.32) -- perfect separation, 42 points, zero anomalies, with in-grammar read from the mutation search's own source rather than asserted. So one experience per action does not solve computer use: it solves consequence knowledge, and 75.2%% of the real work needs an action with no name yet",
+    "expected_parent_frontier_change": "THE_QUESTION_IS_ANSWERED_BY_A_MECHANISM_INSTEAD_OF_AN_OPINION__WITNESS_INVERSION_IS_BUILT_AND_IT_REFUSES_EVERY_ONE_OF_THE_REAL_DEFECTS_THE_CORPUS_CONTAINS_BECAUSE_THE_REQUIRED_VALUE_IS_NEW_CONTENT_AND_NOT_A_SELECTION_OVER_THE_ARTIFACT_S_OWN_VALUES__WHICH_IS_WHAT_THE_75_2_PERCENT_OUT_OF_VOCABULARY_MEASUREMENT_PREDICTED_AND_WHAT_MAKES_INSTANT_LEARNING_NOT_A_SOLUTION_TO_EVERYTHING",
+    "expected_parent_level_state_change": "THE_QUESTION_IS_ANSWERED_BY_A_MECHANISM_INSTEAD_OF_AN_OPINION__WITNESS_INVERSION_IS_BUILT_AND_IT_REFUSES_EVERY_ONE_OF_THE_REAL_DEFECTS_THE_CORPUS_CONTAINS_BECAUSE_THE_REQUIRED_VALUE_IS_NEW_CONTENT_AND_NOT_A_SELECTION_OVER_THE_ARTIFACT_S_OWN_VALUES__WHICH_IS_WHAT_THE_75_2_PERCENT_OUT_OF_VOCABULARY_MEASUREMENT_PREDICTED_AND_WHAT_MAKES_INSTANT_LEARNING_NOT_A_SOLUTION_TO_EVERYTHING",
     "independent_verification_required": true,
     "iteration_limit": 1,
     "obs_blocker": {
@@ -195,8 +191,8 @@
       ],
       "synthetic_verification_necessity": "No synthetic case decides anything: every observation is a real subprocess on a real copy of a real state, and the refusal is produced by a real `sort -R` contradicting its own first execution."
     },
-    "real_outcome": "The unit of permanent knowledge is the survivor set, not the chosen reading: after an execution the agent keeps every transformation the observation did not rule out and decides with three cases -- act when all survivors agree on the states in reach, spend one execution at the state that splits them, refuse when none fits. Nothing is trained, and the knowledge is regenerated from the state and the grammar.",
-    "required_capability": "Given one real execution of an action on a real state, decide whether that execution identified the action: filter a generated grammar of state transformations, compare the survivors on the states the work can reach, and answer act / ask-once-more-at-this-state / refuse -- before spending the second execution.",
+    "real_outcome": "55 real fix commits were materialised at their parent state with the fix's own tests as the judge; 13 carried a test that really fails there. Of 16 attempts the loop captured a live witness in 0 and verified 0, refusing 16 with a named reason: every real defect in this corpus demanded message content that does not exist in the artifact, so no expression over the frame's own values reproduces it. The closure check put the human's line back on 5 real single-expression fixes and recovered 0 of them, because on this corpus either no test covers the line or the answer needs a name the frame does not have. The mechanism closes where the answer is expressible, which the unit suite proves end to end on a real package and a real failing test.",
+    "required_capability": "an edit-namer that works outside a fixed grammar: localise the site from a real failure, read the required value out of the test's own assertion, and produce an expression at that site that the real test accepts",
     "route_frontier": {
       "challenger_routes": [
         {
@@ -266,10 +262,10 @@
             "DIRECT_PROBE"
           ],
           "resolution": "SELECTED",
-          "route": "RE_DECIDE_EVERY_ACTION_PROVE_THE_PREMISE_ON_THE_LIVE_STATE_AND_POSTCONDITION_CHECK_THE_CLAIMED_SENTENCE_INSTEAD_OF_REPLAYING_THE_PLAN"
+          "route": "REUSE_THE_TREE_S_JUDGE_DISCIPLINE_AND_THE_TREE_S_OWN_MUTATION_FAMILIES_AS_THE_CONTROL_ARM__ADD_A_PYTEST_PLUGIN_THAT_RECORDS_RETURNS_AND_RAISES_INSIDE_THE_FILES_THE_FIX_TOUCHED_AND_READS_THE_REQUIRED_VALUE_FROM_THE_FAILING_ASSERT_OR_FROM_RAISES_MATCH__LOCALISE_BY_INVERTIBILITY_RATHER_THAN_BY_TRACEBACK_DEPTH__PROPOSE_ONLY_EXPRESSIONS_OVER_THE_LIVE_FRAME_S_VALUES_ATTRIBUTES_PURE_BUILTINS_AND_LITERALS__ACCEPT_ONLY_WHAT_THE_REAL_TEST_ACCEPTS_AND_ALWAYS_RESTORE__THEN_MEASURE_ON_REAL_FIX_COMMITS_AND_ON_A_REVERTED_HUMAN_LINE"
         }
       ],
-      "checked_at_utc": "2026-11-17T15:12:45Z",
+      "checked_at_utc": "2026-11-17T22:03:20Z",
       "comparison_dimensions": [
         "CORRECTNESS",
         "CAPABILITY_STRENGTH",
@@ -309,10 +305,10 @@
       "route_preflight": {
         "checked_at_utc": "2026-11-17T20:42:39Z"
       },
-      "selected_route": "KEEP_THE_SURVIVORS_OF_ONE_EXECUTION_AND_DECIDE_ACT_ASK_OR_REFUSE_FROM_WHAT_THEY_LEAVE_UNDETERMINED",
+      "selected_route": "REUSE_THE_TREE_S_JUDGE_DISCIPLINE_AND_THE_TREE_S_OWN_MUTATION_FAMILIES_AS_THE_CONTROL_ARM__ADD_A_PYTEST_PLUGIN_THAT_RECORDS_RETURNS_AND_RAISES_INSIDE_THE_FILES_THE_FIX_TOUCHED_AND_READS_THE_REQUIRED_VALUE_FROM_THE_FAILING_ASSERT_OR_FROM_RAISES_MATCH__LOCALISE_BY_INVERTIBILITY_RATHER_THAN_BY_TRACEBACK_DEPTH__PROPOSE_ONLY_EXPRESSIONS_OVER_THE_LIVE_FRAME_S_VALUES_ATTRIBUTES_PURE_BUILTINS_AND_LITERALS__ACCEPT_ONLY_WHAT_THE_REAL_TEST_ACCEPTS_AND_ALWAYS_RESTORE__THEN_MEASURE_ON_REAL_FIX_COMMITS_AND_ON_A_REVERTED_HUMAN_LINE",
       "selected_route_preflight": {
         "all_required_dependencies_ready": true,
-        "checked_at_utc": "2026-11-17T20:42:45Z",
+        "checked_at_utc": "2026-11-17T22:03:20Z",
         "execution_dependencies": [
           {
             "dependency": "local Python 3.11 runtime; the pinned receipts under canonical/verification and the mutation grammar source",
@@ -333,7 +329,7 @@
         "execution_dependencies_complete": true,
         "failed_dependencies": [],
         "max_age_hours": 2,
-        "selected_route": "KEEP_THE_SURVIVORS_OF_ONE_EXECUTION_AND_DECIDE_ACT_ASK_OR_REFUSE_FROM_WHAT_THEY_LEAVE_UNDETERMINED",
+        "selected_route": "REUSE_THE_TREE_S_JUDGE_DISCIPLINE_AND_THE_TREE_S_OWN_MUTATION_FAMILIES_AS_THE_CONTROL_ARM__ADD_A_PYTEST_PLUGIN_THAT_RECORDS_RETURNS_AND_RAISES_INSIDE_THE_FILES_THE_FIX_TOUCHED_AND_READS_THE_REQUIRED_VALUE_FROM_THE_FAILING_ASSERT_OR_FROM_RAISES_MATCH__LOCALISE_BY_INVERTIBILITY_RATHER_THAN_BY_TRACEBACK_DEPTH__PROPOSE_ONLY_EXPRESSIONS_OVER_THE_LIVE_FRAME_S_VALUES_ATTRIBUTES_PURE_BUILTINS_AND_LITERALS__ACCEPT_ONLY_WHAT_THE_REAL_TEST_ACCEPTS_AND_ALWAYS_RESTORE__THEN_MEASURE_ON_REAL_FIX_COMMITS_AND_ON_A_REVERTED_HUMAN_LINE",
         "status": "READY"
       },
       "source_classes_checked": [
@@ -372,17 +368,24 @@
     },
     "route_race_id": null,
     "routes_considered": [
-      "keep the survivors and decide act / ask once more / refuse (selected)",
-      "keep one hypothesis and act on it",
-      "repeat the same execution to gain confidence",
-      "redo every step from the beginning",
-      "ask a model which reading is right"
+      {
+        "route": "enumerate a bigger mutation grammar",
+        "rejected_because": "75.2% of real fix pieces are out of every vocabulary any other task produced; a bigger list buys the names you give it"
+      },
+      {
+        "route": "sample many programs and filter with the test",
+        "rejected_because": "search stays exponential (GBPR only wins at mutation order >= 4); the test is a filter, not a guide"
+      },
+      {
+        "route": "invert the expression at the localised site against the assertion's required value",
+        "selected": true
+      }
     ],
     "selected_route": "KEEP_THE_SURVIVORS_OF_ONE_EXECUTION_AND_DECIDE_ACT_ASK_OR_REFUSE_FROM_WHAT_THEY_LEAVE_UNDETERMINED",
-    "selected_surviving_route": "KEEP_THE_SURVIVORS_OF_ONE_EXECUTION_AND_DECIDE_ACT_ASK_OR_REFUSE_FROM_WHAT_THEY_LEAVE_UNDETERMINED",
+    "selected_surviving_route": "REUSE_THE_TREE_S_JUDGE_DISCIPLINE_AND_THE_TREE_S_OWN_MUTATION_FAMILIES_AS_THE_CONTROL_ARM__ADD_A_PYTEST_PLUGIN_THAT_RECORDS_RETURNS_AND_RAISES_INSIDE_THE_FILES_THE_FIX_TOUCHED_AND_READS_THE_REQUIRED_VALUE_FROM_THE_FAILING_ASSERT_OR_FROM_RAISES_MATCH__LOCALISE_BY_INVERTIBILITY_RATHER_THAN_BY_TRACEBACK_DEPTH__PROPOSE_ONLY_EXPRESSIONS_OVER_THE_LIVE_FRAME_S_VALUES_ATTRIBUTES_PURE_BUILTINS_AND_LITERALS__ACCEPT_ONLY_WHAT_THE_REAL_TEST_ACCEPTS_AND_ALWAYS_RESTORE__THEN_MEASURE_ON_REAL_FIX_COMMITS_AND_ON_A_REVERTED_HUMAN_LINE",
     "selected_surviving_route_class": "SYNTHESIZE_NEW_PRIMITIVE",
-    "stop_condition": "STOP when reach is the binding term and the growth that would help requires naming a shape no derivation from the failure can justify. The correct next mechanism is witness inversion at a localised site, whose alphabet is read from the repository -- not another hand-written family",
-    "why_selected_route_is_fastest_sufficient": "It needs no model and no store: the kernel that filters, groups and selects the minimax question already exists in this tree, the grammar is arithmetic, and the only cost is the real executions, of which it spends the fewest possible and refuses when none would help.",
+    "stop_condition": "THE_ORGAN_CAPTURES_A_LIVE_WITNESS_AND_CLOSES_ON_A_DEFECT_WHOSE_ANSWER_IS_EXPRESSIBLE_OR_THE_CORPUS_IS_COUNTED_WITH_EVERY_REFUSAL_NAMED__STOP_WHEN_THE_RECORD_REPRODUCES_FROM_THE_COMMITTED_COMMAND",
+    "why_selected_route_is_fastest_sufficient": "because it is the only route that does not enumerate a grammar and does not sample: one recorded frame, one assertion, one evaluation per candidate, and a refusal when the artifact has no expression for the answer -- which is what was measured",
     "why_this_is_not_another_organ": "It imports `finite_identifiability` unchanged and adds a grammar over the state plus a three-way verdict; it deletes the assumption that a demonstration is a point rather than a set."
   },
   "route_id": "KEEP_THE_SURVIVORS_OF_ONE_EXECUTION_AND_DECIDE_ACT_ASK_OR_REFUSE_FROM_WHAT_THEY_LEAVE_UNDETERMINED",
@@ -412,7 +415,7 @@
   "v22_prewrite_admission": {
     "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
     "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
-    "checked_at_utc": "2026-11-17T20:41:24Z",
+    "checked_at_utc": "2026-11-17T22:03:20Z",
     "currentness": {
       "accepted_families": 5,
       "meta_envelope_open_count": 8,
