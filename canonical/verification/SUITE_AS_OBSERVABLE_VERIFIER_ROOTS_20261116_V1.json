@@ -1,0 +1,116 @@
+{
+ "schema": "BRAIN_REPAIR_WHERE_THE_SUITE_IS_THE_OBSERVABLE_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "model_dependency_count": 0,
+ "external_capability_provider_count": 0,
+ "network_calls_at_run_time": 0,
+ "why": "nine of the forty QuixBugs bugs ship no json_testcases, so the examples-based search reported NO_EXAMPLES and never ran; their cases are objects and assertions inside their own test file",
+ "tasks_with_no_json": [
+  "breadth_first_search",
+  "depth_first_search",
+  "detect_cycle",
+  "minimum_spanning_tree",
+  "reverse_linked_list",
+  "shortest_path_length",
+  "shortest_path_lengths",
+  "shortest_paths",
+  "topological_ordering"
+ ],
+ "tasks_measured": 9,
+ "repaired": 3,
+ "repaired_tasks": [
+  "breadth_first_search",
+  "depth_first_search",
+  "detect_cycle"
+ ],
+ "stages": {
+  "NOT_REPAIRED__NO_SURVIVOR_AT_THE_SCREEN": 6,
+  "REPAIRED__CORPUS_TEST_PASSES": 3
+ },
+ "rows": [
+  {
+   "task": "breadth_first_search",
+   "kind": "task",
+   "candidates": 6000,
+   "accepted_at_screen_rank": 4780,
+   "accepted_source_sha256": "01b853d3a2641c9fe36b25b5945348666c57e3e4dbca5b83d51860deb3501705",
+   "corpus_test_returncode": 0,
+   "corpus_test_tail": [
+    ".....                                                                    [100%]",
+    "5 passed in 0.01s"
+   ],
+   "stage": "REPAIRED__CORPUS_TEST_PASSES",
+   "seconds": 23.2
+  },
+  {
+   "task": "depth_first_search",
+   "kind": "task",
+   "candidates": 6000,
+   "accepted_at_screen_rank": 5040,
+   "accepted_source_sha256": "f1f418ee5cec7be56df0c16c8d84c59fd90345c1e80f9ac0d2228befea9c4ce0",
+   "corpus_test_returncode": 0,
+   "corpus_test_tail": [
+    ".....                                                                    [100%]",
+    "5 passed in 0.01s"
+   ],
+   "stage": "REPAIRED__CORPUS_TEST_PASSES",
+   "seconds": 19.6
+  },
+  {
+   "task": "detect_cycle",
+   "kind": "task",
+   "candidates": 4364,
+   "accepted_at_screen_rank": 23,
+   "accepted_source_sha256": "e24efdbd53a062272a9f57a55889e207c264cfd731f58472f856d5211882b562",
+   "corpus_test_returncode": 0,
+   "corpus_test_tail": [
+    "......                                                                   [100%]",
+    "6 passed in 0.01s"
+   ],
+   "stage": "REPAIRED__CORPUS_TEST_PASSES",
+   "seconds": 1.5
+  },
+  {
+   "task": "minimum_spanning_tree",
+   "kind": "task",
+   "candidates": 6000,
+   "stage": "NOT_REPAIRED__NO_SURVIVOR_AT_THE_SCREEN",
+   "seconds": 28.9
+  },
+  {
+   "task": "reverse_linked_list",
+   "kind": "task",
+   "candidates": 2347,
+   "stage": "NOT_REPAIRED__NO_SURVIVOR_AT_THE_SCREEN",
+   "seconds": 10.6
+  },
+  {
+   "task": "shortest_path_length",
+   "kind": "task",
+   "candidates": 6000,
+   "stage": "NOT_REPAIRED__NO_SURVIVOR_AT_THE_SCREEN",
+   "seconds": 58.3
+  },
+  {
+   "task": "shortest_path_lengths",
+   "kind": "task",
+   "candidates": 6000,
+   "stage": "NOT_REPAIRED__NO_SURVIVOR_AT_THE_SCREEN",
+   "seconds": 34.7
+  },
+  {
+   "task": "shortest_paths",
+   "kind": "task",
+   "candidates": 6000,
+   "stage": "NOT_REPAIRED__NO_SURVIVOR_AT_THE_SCREEN",
+   "seconds": 27.3
+  },
+  {
+   "task": "topological_ordering",
+   "kind": "task",
+   "candidates": 6000,
+   "stage": "NOT_REPAIRED__NO_SURVIVOR_AT_THE_SCREEN",
+   "seconds": 26.4
+  }
+ ]
+}
