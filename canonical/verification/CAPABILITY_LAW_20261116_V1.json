@@ -57,12 +57,32 @@
       "why": "a consequence differential only exists after acting and only on a seen binding. A contract acquired from one execution is the prospective form of the same check: the frame -- which paths the action may touch -- carries most of it, a declared or derived relation carries the bytes, and what remains is a located hole in the vocabulary"
     },
     "receipt": "canonical/verification/COMPUTER_USE_CHECK_DENSITY_20261116_V1.json",
+    "repair": {
+      "chains": 3,
+      "dependency_test": "perturb one candidate path, re-run the step, compare its consequence",
+      "goals_restored": {
+        "argv_read_set": 1,
+        "declared_read_set": 3,
+        "intervention_read_set": 3,
+        "of": 3
+      },
+      "missed_by_intervention": 0,
+      "over_declared_by_intervention": 0,
+      "probes": 86,
+      "receipt": "canonical/verification/CAUSAL_DEPENDENCY_REPAIR_20261116_V1.json",
+      "steps": 17,
+      "steps_redone": {
+        "everything": 14,
+        "intervention": 8
+      },
+      "why": "detection is not repair: to repair you must know which steps consumed the fact that went false, and an argv-derived read set is wrong in both directions -- it names a path whose content the step never read, and it cannot see a path that another file names. The discovery rule is one intervention per candidate path: perturb it, re-run the step, compare its consequence. It recovers the declared read set exactly, with no model, no tracing, and no annotation"
+    },
     "replay": {
       "density": 1.0,
       "why": "the intent is the recorded consequence, so any difference is an error: with a full state observation every wrong action is caught, and a wrong action that leaves the state identical did not miss the goal"
     },
     "status": "MEASURED_ON_A_SHELL_ENVIRONMENT",
-    "what_remains_unmeasured": "a GUI whose only observable is pixels or DOM -- a projection, not the state -- and what to do after an invalidation: the ledger proves a fact false and does not repair it, and a fact carried by remote state rather than by a path is outside it",
+    "what_remains_unmeasured": "a GUI whose only observable is pixels or DOM -- a projection, not the state; a fact carried by remote state rather than by a path; and the outer edge of repair itself: the candidate set is the state the step can see, and the probe is a content change, so a dependency on a file outside the sandbox, a lock held by another process, or a file's bare existence is not measured by it",
     "what_was_run": "34 mechanically derived wrong actions over 9 real shell transformations, real programs on a real disk, real reset"
   },
   "incremental_spend_usd": 0,
@@ -130,6 +150,10 @@
     "projection": {
       "path": "canonical/verification/DISTINGUISHING_PROJECTION_20261116_V1.json",
       "sha256": "feaec76f9531b79d04d0cbc974129c86f6b925d9a1bc1719c149443212f593cb"
+    },
+    "repair": {
+      "path": "canonical/verification/CAUSAL_DEPENDENCY_REPAIR_20261116_V1.json",
+      "sha256": "5642dd7ff525dfe7391d10f738fcdff36998bf9c299a479b0e3a6fbcb295a348"
     },
     "value": {
       "path": "canonical/verification/SYSTEMATIC_EDIT_DERIVATION_20261116_V1.json",

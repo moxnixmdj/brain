@@ -61,6 +61,7 @@ RECEIPTS = {
     "projection": "canonical/verification/DISTINGUISHING_PROJECTION_20261116_V1.json",
     "contract": "canonical/verification/PREDICTIVE_CONTRACT_20261116_V1.json",
     "facts": "canonical/verification/STANDING_FACTS_20261116_V1.json",
+    "repair": "canonical/verification/CAUSAL_DEPENDENCY_REPAIR_20261116_V1.json",
 }
 
 # The published ceiling for an inducer with full AST and context machinery on real systematic edits.
@@ -111,6 +112,7 @@ def compose(*, pins: Mapping[str, str] | None = None) -> dict[str, Any]:
     projection, projection_sha = _load("projection", pins=pins)
     contract, contract_sha = _load("contract", pins=pins)
     known, known_sha = _load("facts", pins=pins)
+    repaired, repaired_sha = _load("repair", pins=pins)
 
     determined = float(_field(supply, "by_rung/shape_only/determined_share", "supply"))
     value_determined = (float(_field(value, "by_rung/shape_only/derive_arm/pairs_where_derivation_was_right",
@@ -209,6 +211,7 @@ def compose(*, pins: Mapping[str, str] | None = None) -> dict[str, Any]:
                 ("projection", RECEIPTS["projection"], projection_sha),
                 ("contract", RECEIPTS["contract"], contract_sha),
                 ("facts", RECEIPTS["facts"], known_sha),
+                ("repair", RECEIPTS["repair"], repaired_sha),
             )
         },
         "law": "P(correct behaviour | one action) = P(determined) x P(seen); P(seen) = density x strength",
@@ -307,10 +310,41 @@ def compose(*, pins: Mapping[str, str] | None = None) -> dict[str, Any]:
                         "facts the current step frame can touch costs one hash per fact and localises the "
                         "cause two steps before the symptom"),
             },
+            "repair": {
+                "receipt": RECEIPTS["repair"],
+                "chains": int(_field(repaired, "chains", "repair")),
+                "steps": int(_field(repaired, "steps", "repair")),
+                "probes": int(_field(repaired, "probes", "repair")),
+                "dependency_test": _field(repaired, "environment/dependency_test", "repair"),
+                "goals_restored": {
+                    "declared_read_set": int(_field(repaired, "arms/declared_deps/goals_passing", "repair")),
+                    "argv_read_set": int(_field(repaired, "arms/argv_deps/goals_passing", "repair")),
+                    "intervention_read_set":
+                        int(_field(repaired, "arms/intervention_deps/goals_passing", "repair")),
+                    "of": int(_field(repaired, "arms/declared_deps/of", "repair")),
+                },
+                "steps_redone": {
+                    "intervention": int(_field(repaired, "arms/intervention_deps/steps_redone", "repair")),
+                    "everything": int(_field(repaired, "arms/redo_everything/steps_redone", "repair")),
+                },
+                "missed_by_intervention":
+                    sum(len(names) for names in _field(repaired, "missed_by_intervention", "repair").values()),
+                "over_declared_by_intervention":
+                    sum(len(names) for names in
+                        _field(repaired, "over_declared_by_intervention", "repair").values()),
+                "why": ("detection is not repair: to repair you must know which steps consumed the fact that "
+                        "went false, and an argv-derived read set is wrong in both directions -- it names a path "
+                        "whose content the step never read, and it cannot see a path that another file names. "
+                        "The discovery rule is one intervention per candidate path: perturb it, re-run the step, "
+                        "compare its consequence. It recovers the declared read set exactly, with no model, no "
+                        "tracing, and no annotation"),
+            },
             "what_remains_unmeasured": ("a GUI whose only observable is pixels or DOM -- a projection, not the "
-                                        "state -- and what to do after an invalidation: the ledger proves a "
-                                        "fact false and does not repair it, and a fact carried by remote state "
-                                        "rather than by a path is outside it"),
+                                        "state; a fact carried by remote state rather than by a path; and the "
+                                        "outer edge of repair itself: the candidate set is the state the step "
+                                        "can see, and the probe is a content change, so a dependency on a file "
+                                        "outside the sandbox, a lock held by another process, or a file's bare "
+                                        "existence is not measured by it"),
             "external_context": ("OSWorld 2.0 (arXiv 2606.29537): best agent 20.6% of 108 workflows, "
                                  "failing by skipping verification and spending under 7% of budget "
                                  "detecting its own errors"),
@@ -374,6 +408,13 @@ def summarize(report: Mapping[str, Any]) -> str:
                  % (horizon["every_step_legal_and_passing"], horizon["chains"],
                     horizon["standing_fact_ledger_detected"], horizon["false_invalidations_on_controls"],
                     horizon["lead_in_steps"]))
+    able = use["repair"]
+    lines.append("  after an invalidation: goal restored on declared %s | argv %s | intervention %s of %s chains; "
+                 "intervention redid %s step(s) where rebuilding takes %s, missed %s, over-declared %s"
+                 % (able["goals_restored"]["declared_read_set"], able["goals_restored"]["argv_read_set"],
+                    able["goals_restored"]["intervention_read_set"], able["goals_restored"]["of"],
+                    able["steps_redone"]["intervention"], able["steps_redone"]["everything"],
+                    able["missed_by_intervention"], able["over_declared_by_intervention"]))
     lines.append("  still unmeasured: %s" % use["what_remains_unmeasured"])
     return "\n".join(lines)
 

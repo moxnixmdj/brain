@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 507,
+  "knowledge_documents": 508,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6980,
+  "research_index_records": 6982,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 452,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "fb4bb8cee78bc62ad52ab3ab4c5a70c2bb27169f90363831cbea6c3cfb4059cb"
+  "value": "cb573cbed54e7932b1f80d2ea9216d6b82275f942c6d8876d8de3d34a2fee5df"
  },
  "engines": [
   {
@@ -66869,6 +66869,83 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 10144,
+   "headings": [
+    "The repair gap: a dependency you cannot see is a repair you cannot make",
+    "1. Where the previous answer stopped",
+    "2. Why the obvious answer is wrong",
+    "3. The discovery rule",
+    "4. The measurement",
+    "5. Cost, and the shape of the cost",
+    "6. What this does not show",
+    "7. Where this lands in the answer"
+   ],
+   "kind": "DOCUMENT",
+   "path": "THE_REPAIR_GAP_20261116_V1.md",
+   "sha256": "51ac50e6e5ef10eca55bfd888ca103c4dc4787dc7d8d048d6e228d6010db8b78",
+   "summary": "*2026-11-16. Real programs, real chains, real sabotage, real perturbations. AUTHORITY: NONE — producer-run measurement.*",
+   "terms": {
+    "agent": 4,
+    "answer": 5,
+    "argv": 5,
+    "because": 6,
+    "before": 4,
+    "both": 4,
+    "bundle.digest": 6,
+    "bundle.tar": 8,
+    "candidate": 6,
+    "canonical": 4,
+    "chain": 5,
+    "chains": 5,
+    "changes": 4,
+    "content": 11,
+    "contract": 6,
+    "cp": 4,
+    "decoy.txt": 4,
+    "dependency": 8,
+    "depends": 4,
+    "every": 5,
+    "exactly": 5,
+    "fact": 6,
+    "false": 5,
+    "goal": 6,
+    "here": 5,
+    "intervention": 10,
+    "ledger": 5,
+    "list.txt": 11,
+    "measured": 6,
+    "never": 5,
+    "no": 7,
+    "not": 26,
+    "one": 12,
+    "path": 10,
+    "payload.dat": 17,
+    "probe": 5,
+    "question": 5,
+    "re-run": 5,
+    "read": 9,
+    "real": 8,
+    "repair": 9,
+    "run": 5,
+    "set": 18,
+    "so": 5,
+    "state": 5,
+    "step": 24,
+    "steps": 11,
+    "work": 8
+   },
+   "title": "The repair gap: a dependency you cannot see is a repair you cannot make",
+   "title_terms": [
+    "cannot",
+    "dependency",
+    "gap",
+    "make",
+    "repair",
+    "see"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 6315,
    "headings": [
     "The repoint is verified, and the census did not move",
@@ -84523,10 +84600,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1309,
+  "included_source_count": 1310,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "4af663e02c433807fceae0bce3703710d5051d78e2a1f975eb242737232d86d7"
+  "source_tree_digest": "936f3415c409757a86190c451be270a005976b679b9a1052b7c0087384f42bd6"
  },
  "research_index": [
   {
@@ -157422,7 +157499,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/CAPABILITY_LAW_20261116_V1.json",
    "schema": "BRAIN_CAPABILITY_LAW_V1",
-   "sha256": "df54c36fd7fd7d8d1904b14620ad5b6a772a93c9cafd40cfc9ed2d98c09d3d9a",
+   "sha256": "09eed9ee3fe10a6f7137ca232383bbf80442537cf99d57ebffbf47ce8a2a130c",
    "status": "",
    "terms": {
     "20261116": 1,
@@ -157645,6 +157722,24 @@
     "v1": 1,
     "v2": 1,
     "verification": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/CAUSAL_DEPENDENCY_REPAIR_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/CAUSAL_DEPENDENCY_REPAIR_20261116_V1.json",
+   "schema": "BRAIN_CAUSAL_DEPENDENCY_REPAIR_V1",
+   "sha256": "5642dd7ff525dfe7391d10f738fcdff36998bf9c299a479b0e3a6fbcb295a348",
+   "status": "",
+   "terms": {
+    "20261116": 1,
+    "causal": 1,
+    "dependency": 1,
+    "repair": 1,
+    "v1": 1
    }
   },
   {
@@ -237443,6 +237538,51 @@
     "number": 1,
     "only": 1,
     "self-model": 2
+   }
+  },
+  {
+   "action_id": "CAUSAL_DEPENDENCY_REPAIR_20261116_V1",
+   "capability": false,
+   "date": "2026-11-16",
+   "id": "research:canonical/action_intents/CAUSAL_DEPENDENCY_REPAIR_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/CAUSAL_DEPENDENCY_REPAIR_20261116_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "67105b912018058757c8375f898ad2b1911fcd857e3cc1151fd5af794f02e7d6",
+   "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
+   "terms": {
+    "14": 1,
+    "20261116": 1,
+    "86": 1,
+    "a_repair_needs_the_steps_that_consumed_the_fact_that_went_false_and_an_argv_read_set_is_wrong_in_both_directions_missing_a_path_named_by_a_file_and_naming_a_path_whose_content_was_never_read": 1,
+    "against": 1,
+    "agent": 1,
+    "another": 1,
+    "archive": 1,
+    "argv": 1,
+    "argv-derived": 1,
+    "blames": 1,
+    "bundle.tar": 1,
+    "bytes": 1,
+    "calls": 1,
+    "candidate": 1,
+    "chains": 3,
+    "command": 2,
+    "control": 2,
+    "dependency": 4,
+    "goal": 2,
+    "line": 2,
+    "list.txt": 3,
+    "not": 3,
+    "nothing": 2,
+    "path": 2,
+    "previous": 2,
+    "read": 4,
+    "real": 2,
+    "repair": 4,
+    "set": 7,
+    "so": 2,
+    "step": 2
    }
   },
   {
