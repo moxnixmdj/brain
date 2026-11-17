@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 497,
+  "knowledge_documents": 498,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6958,
+  "research_index_records": 6961,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 452,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "b099bb772b3fc73740beb60c14ef950b6ca84b39ed4d903f2f476c87b0aa678d"
+  "value": "1ad210d923b79394e6c69e6f3a43294d3fba13be58822b497bea70d1b91a8feb"
  },
  "engines": [
   {
@@ -66463,6 +66463,79 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 10475,
+   "headings": [
+    "The single bottleneck",
+    "1. The claim, taken literally",
+    "2. The bottleneck",
+    "3. The fix, and why it is not \"add a verifier\"",
+    "4. What this does not do",
+    "5. The answer",
+    "Reproduce",
+    "Falsifiers"
+   ],
+   "kind": "DOCUMENT",
+   "path": "THE_SINGLE_BOTTLENECK_20261116_V1.md",
+   "sha256": "ecc5a7a4a9c1c100d257eeb1cd146fc511fbcb0db691c01fbec16c96b9e43ca6",
+   "summary": "*2026-11-16. Written against the receipts in this tree, not against intuition. Every number below is reproducible with the commands at the end; none of it costs a model call.*",
+   "terms": {
+    "0.2978": 3,
+    "0.5469": 3,
+    "34": 11,
+    "action": 13,
+    "actions": 6,
+    "against": 4,
+    "agent": 6,
+    "any": 4,
+    "because": 7,
+    "being": 5,
+    "bottleneck": 4,
+    "but": 4,
+    "cannot": 4,
+    "canonical": 9,
+    "consequence": 15,
+    "demonstration": 4,
+    "did": 5,
+    "every": 6,
+    "external": 4,
+    "failure": 5,
+    "keeps": 4,
+    "memory": 4,
+    "model": 6,
+    "must": 5,
+    "no": 9,
+    "not": 33,
+    "observable": 4,
+    "observation": 11,
+    "once": 4,
+    "one": 11,
+    "only": 6,
+    "oracle": 7,
+    "projection": 10,
+    "python3": 4,
+    "real": 12,
+    "recorded": 9,
+    "right": 6,
+    "separates": 5,
+    "so": 4,
+    "space": 4,
+    "tests": 5,
+    "tree": 4,
+    "two": 4,
+    "verification": 5,
+    "visible": 4,
+    "work": 6,
+    "would": 6,
+    "wrong": 14
+   },
+   "title": "The single bottleneck",
+   "title_terms": [
+    "bottleneck",
+    "single"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 7510,
    "headings": [
     "The space is assembled, not listed — and no single vocabulary covers it",
@@ -66790,8 +66863,8 @@
    ],
    "kind": "DOCUMENT",
    "path": "THE_VERIFIED_INDEX_IS_THE_BOTTLENECK_20261116_V2.md",
-   "sha256": "59f29c0213f08f695a7d293256beaccbb8ee7b08cb1af2d44033d5f3859323b9",
-   "summary": "**2026-11-17 UTC · branch `arena/cd864fc9-brain` · live PR base `d2e0aa07937ee1993dcac84cffff8bac5eb2a1e7` · branch origin `68e8d11bcddd87e4dffc38a19093dbd782879919` · authority NONE · producer-run sandbox · $0 · zero external model calls**",
+   "sha256": "e09a0a32c924a1648946ab1f94f8c4806aeb5ba6dd76c03e15e14d952272e388",
+   "summary": "**2026-11-17 UTC · branch `arena/cd864fc9-brain` · live PR base `03e32e8cabc4808a52de2380fdc5978218377f05` · branch origin `68e8d11bcddd87e4dffc38a19093dbd782879919` · authority NONE · producer-run sandbox · $0 · zero external model calls**",
    "terms": {
     "10": 19,
     "16": 10,
@@ -83732,10 +83805,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1299,
+  "included_source_count": 1300,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "ce5f1a6865beb4ae359ef853854ecb0965e072e0fa25240d852240d86a824e1c"
+  "source_tree_digest": "57cfa7426d160fa365a59d4c001b42edac5cddae2c2ad4a4c1428effc118b8b9"
  },
  "research_index": [
   {
@@ -156631,7 +156704,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/CAPABILITY_LAW_20261116_V1.json",
    "schema": "BRAIN_CAPABILITY_LAW_V1",
-   "sha256": "6ae092ea2e72257bf1e65a66b51a46fc45b98b4bba3ecb3ad82b7d98c9997864",
+   "sha256": "693a8801983970ad43bc1cfbdd43be7da1e85c028007362c42e149b26863c5e9",
    "status": "",
    "terms": {
     "20261116": 1,
@@ -159215,6 +159288,25 @@
     "v1": 1,
     "verification": 1,
     "zero": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/COMPUTER_USE_CHECK_DENSITY_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/COMPUTER_USE_CHECK_DENSITY_20261116_V1.json",
+   "schema": "BRAIN_COMPUTER_USE_CHECK_DENSITY_V1",
+   "sha256": "f4c170c5b98b14f15bc53d0ef0d220fca64d959f6e9cb244091e25b38cf5d107",
+   "status": "",
+   "terms": {
+    "20261116": 1,
+    "check": 1,
+    "computer": 1,
+    "density": 1,
+    "use": 1,
+    "v1": 1
    }
   },
   {
@@ -165210,6 +165302,23 @@
     "20261104": 1,
     "discovered": 1,
     "tests": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/DISTINGUISHING_PROJECTION_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/DISTINGUISHING_PROJECTION_20261116_V1.json",
+   "schema": "BRAIN_DISTINGUISHING_PROJECTION_V1",
+   "sha256": "feaec76f9531b79d04d0cbc974129c86f6b925d9a1bc1719c149443212f593cb",
+   "status": "",
+   "terms": {
+    "20261116": 1,
+    "distinguishing": 1,
+    "projection": 1,
     "v1": 1
    }
   },
@@ -236882,6 +236991,51 @@
    }
   },
   {
+   "action_id": "COMPUTER_USE_ORACLE_SYNTHESIS_20261116_V1",
+   "capability": false,
+   "date": "2026-11-16",
+   "id": "research:canonical/action_intents/COMPUTER_USE_ORACLE_SYNTHESIS_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/COMPUTER_USE_ORACLE_SYNTHESIS_20261116_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "311e28c2506edae9f276f06bf7307eddb2f3b3ce59ac52535b6e150f274e7689",
+   "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
+   "terms": {
+    "0.1167": 1,
+    "0.2978": 1,
+    "0.4387": 1,
+    "0.5000": 1,
+    "0.5445": 1,
+    "0.5469": 1,
+    "17": 1,
+    "20261116": 1,
+    "26": 3,
+    "33": 2,
+    "34": 9,
+    "actions": 3,
+    "because": 2,
+    "computer": 2,
+    "consequence": 2,
+    "content": 2,
+    "correct": 2,
+    "full": 2,
+    "names": 2,
+    "now": 2,
+    "observation": 2,
+    "one": 2,
+    "only": 2,
+    "oracle": 2,
+    "real": 2,
+    "remain": 2,
+    "tasks": 2,
+    "than": 2,
+    "timestamp": 2,
+    "under": 3,
+    "use": 2,
+    "wrong": 3
+   }
+  },
+  {
    "action_id": "CONTINUATION_OUTRANKS_VALUE_V1_20261102",
    "capability": false,
    "date": "2026-11-01",
@@ -246565,7 +246719,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/THE_VERIFIED_INDEX_IS_THE_BOTTLENECK_20261116_V2.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "d26caa153563e66f1ef32dff79ddb40cbf3227d6738ac7fa850b5cdc394b2857",
+   "sha256": "dbbe73e5795737a9df1b56fdae69cca53791d037c03a2af1f3fd60d718dd16b2",
    "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
    "terms": {
     "16": 1,
