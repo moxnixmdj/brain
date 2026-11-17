@@ -337,7 +337,7 @@ def type_candidates(observation: Mapping[str, Any], tier: int) -> list[str]:
 HAND_TIER = 3                            # everything the hand can do, not only pressing and typing
 AT_AN_ELEMENT = ("click", "hover", "grab", "drop", "triple")    # written  kind@index
 WITH_A_WORD = ("type", "nudge")                                 # written  kind@index=word
-POINT_AT = ("pressat", "moveat", "dropat")                      # written  kind@x,y -- a place, element or not
+POINT_AT = ("pressat", "moveat", "dropat", "doubleat", "dragat")  # written  kind@x,y -- a place, element or not
 NUDGE_WORDS = ("up", "down", "left", "right")
 MAX_WAIT_SECONDS = 60
 _WHOLE_NUMBER = re.compile(r"(?<![\w.])\d+(?![\w.])")
@@ -403,6 +403,17 @@ def parse_action(action: str) -> dict[str, Any]:
         if kind == "nudge" and word not in NUDGE_WORDS:
             raise ValueError("ACTION_NOT_UNDERSTOOD")
         return {"type": kind, "index": int(index), "text": word}
+    if kind == "dragat":
+        parts = rest.split(",")
+        if len(parts) != 4:
+            raise ValueError("ACTION_NOT_UNDERSTOOD")
+        try:
+            x1, y1, x2, y2 = (float(part) for part in parts)
+        except ValueError:
+            raise ValueError("ACTION_NOT_UNDERSTOOD") from None
+        if not all(math.isfinite(value) for value in (x1, y1, x2, y2)):
+            raise ValueError("ACTION_NOT_UNDERSTOOD")
+        return {"type": "dragat", "x": x1, "y": y1, "x2": x2, "y2": y2}
     if kind in POINT_AT:
         x_text, _, y_text = rest.partition(",")
         try:

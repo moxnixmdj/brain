@@ -58,7 +58,7 @@ const DROP_PAST_MIN_PX = 2;        // and never less than this
 const NUDGES = { up: [0, -1], down: [0, 1], left: [-1, 0], right: [1, 0] };
 const MAX_WAIT_S = 60;
 const AIMED = new Set(['click', 'type', 'hover', 'grab', 'drop', 'nudge', 'triple']);   // actions done AT an element
-const POINTY = new Set(['pressat', 'moveat', 'dropat']);   // actions done AT a place the answer may be, element or not
+const POINTY = new Set(['pressat', 'moveat', 'dropat', 'doubleat', 'dragat']);   // actions done AT a place the answer may be, element or not
 const PAGE_CONFIG = {
   epoch: EPOCH_MS,
   skipIds: ['query', 'reward-display', 'sync-task-cover', 'click-canvas'],
@@ -522,6 +522,25 @@ async function act(action) {
     } else if (kind === 'pressat') {
       lastPoint = { x, y };
       await page.mouse.click(x, y);
+    } else if (kind === 'doubleat') {
+      // two fast presses at a PLACE: the browser's word-select, for a run of text that is not
+      // an element of its own (a paragraph shows many words; the instruction names one)
+      lastPoint = { x, y };
+      await page.mouse.click(x, y, { count: 2 });
+    } else if (kind === 'dragat') {
+      // press AT one place, let go AT another: a selection dragged across a run of text, for
+      // the runs a double press will not take whole (the browser leaves a trailing period out)
+      const x2 = Number(action.x2), y2 = Number(action.y2);
+      if (!(Number.isFinite(x2) && Number.isFinite(y2) && x2 >= 0 && y2 >= 0
+            && x2 <= VIEWPORT.width && y2 <= VIEWPORT.height)) {
+        problem = 'POINT_IS_NOT_IN_THE_WINDOW';
+      } else {
+        lastPoint = { x, y };
+        await page.mouse.move(x, y);
+        await page.mouse.down();
+        await page.mouse.move(x2, y2, { steps: 6 });
+        await page.mouse.up();
+      }
     } else if (kind === 'moveat') {
       lastPoint = { x, y };
       await page.mouse.move(x, y, { steps: 2 });
