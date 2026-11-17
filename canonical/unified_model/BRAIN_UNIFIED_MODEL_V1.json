@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 521,
+  "knowledge_documents": 522,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 7007,
+  "research_index_records": 7009,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 452,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "4d99cef0a0322bd7dfdb82ff679730de4be8eada190803b2da6e6d9f87c0e65b"
+  "value": "4ad6c750f1f74bbc4c87e73adca33b1dec4cc69e87dc75ff072947b830f19264"
  },
  "engines": [
   {
@@ -68039,6 +68039,82 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 9277,
+   "headings": [
+    "The unit of permanence is not the action. It is the action plus its check",
+    "The claim, stated exactly, in four parts",
+    "So what did round 5 build?",
+    "The measurement (same 40 commits, same judge)",
+    "The synthesis — the answer to the question, and the thing to build next",
+    "On the sentient creature",
+    "The single bottleneck, restated after five measurements"
+   ],
+   "kind": "DOCUMENT",
+   "path": "THE_UNIT_OF_PERMANENCE_IS_THE_ACTION_PLUS_ITS_CHECK_20261116_V1.md",
+   "sha256": "e502f38d35acc0572d5a8cc28be0cb66c13df6e0fa74e475b59e1d6a3167a071",
+   "summary": "*Round 5. 2026-11-16. Branch `arena/4c287ab6-brain`, base `6c0d26ca`.*",
+   "terms": {
+    "13": 5,
+    "319": 3,
+    "40": 8,
+    "about": 3,
+    "action": 7,
+    "actions": 7,
+    "all": 6,
+    "cannot": 4,
+    "claim": 5,
+    "commit": 4,
+    "contrast": 7,
+    "demonstration": 5,
+    "each": 6,
+    "environment": 4,
+    "every": 4,
+    "experience": 5,
+    "failure": 4,
+    "false": 8,
+    "five": 5,
+    "four": 4,
+    "intervention": 10,
+    "measured": 4,
+    "missing": 4,
+    "names": 4,
+    "no": 8,
+    "not": 17,
+    "nothing": 4,
+    "once": 5,
+    "one": 19,
+    "only": 5,
+    "own": 4,
+    "proposition": 4,
+    "real": 6,
+    "round": 18,
+    "rounds": 5,
+    "same": 5,
+    "sentence": 4,
+    "shape": 6,
+    "site": 11,
+    "so": 6,
+    "solved": 6,
+    "survivors": 5,
+    "thing": 4,
+    "three": 5,
+    "tree": 4,
+    "true": 5,
+    "value": 11,
+    "zero": 4
+   },
+   "title": "The unit of permanence is not the action. It is the action plus its check",
+   "title_terms": [
+    "action",
+    "check",
+    "not",
+    "permanence",
+    "plus",
+    "unit"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 30253,
    "headings": [
     "The three blockers are one verified index, not one experience",
@@ -85614,10 +85690,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1323,
+  "included_source_count": 1324,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "078f7fd3e9d25219bda05bffd2d1becaf5e9d415fc49097eb47057f36c08ad20"
+  "source_tree_digest": "e539482d4bdffe7c04bdbb60a0aabaf909cb1e696ea6dd9b8b51758ad94f1b92"
  },
  "research_index": [
   {
@@ -203499,6 +203575,23 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "2026-11-16",
+   "id": "research:canonical/verification/SITE_BY_INTERVENTION_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/SITE_BY_INTERVENTION_20261116_V1.json",
+   "schema": "BRAIN_SITE_BY_INTERVENTION_V1",
+   "sha256": "a696d035cdb04f403ff24bfb7e9cc0bd577f70619e36d9c93060907e83e6b57b",
+   "status": "",
+   "terms": {
+    "20261116": 1,
+    "intervention": 1,
+    "site": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-05",
    "id": "research:canonical/verification/SIX_BENCHMARK_PROXY_FAMILY_SCOPE_PARTITION_CONNECTOR_VERIFICATION_20261005_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -245929,6 +246022,29 @@
     "shell_command_run_verified_completing_72_of_72_v1_20261023_v1": 2,
     "source": 2,
     "v1": 2
+   }
+  },
+  {
+   "action_id": "SITE_BY_INTERVENTION_20261116_V1",
+   "capability": false,
+   "date": "2026-11-16",
+   "id": "research:canonical/action_intents/SITE_BY_INTERVENTION_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/SITE_BY_INTERVENTION_20261116_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "cc072a27f0889f20a98a7752d7fa98f41844ee954d9aa6cfab840ffbf7b231bf",
+   "status": "PRODUCED",
+   "terms": {
+    "20261116": 1,
+    "a_claim_without_a_contrast_cannot_be_decided__one_execution_supplies_one_action_and_zero_contrasts_so_what_it_learns_is_the_action_and_not_the_check__the_tree_measured_0_survivors_at_6_9_percent_from_one_observation_against_512_survivors_at_96_24_percent_from_three_contrasts__and_grounding_by_intervention_names_the_site_and_the_shape_that_occurrence_cannot": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "intervention": 1,
+    "keep_round_4_s_compiler_and_judge_unchanged_and_replace_only_the_grounding_rule__ask_which_callable_s_observable_output_moves_when_the_named_value_is_intervened_on_in_stead_of_where_the_value_s_words_occur__then_judge_at_that_site_with_round_4_s_own_verdicts": 1,
+    "produced": 1,
+    "site": 1,
+    "site_by_intervention_20261116_v1": 1,
+    "the_third_manufacturability_route_is_closed_by_measurement_with_a_proven_instrument__40_real_commits_188_confirmed_laws_0_kills_and_174_of_the_laws_are_bare_totality__the_cause_is_named_real_work_extends_a_specification_instead_of_violating_a_property__so_the_next_organ_must_compile_intent_into_the_discriminating_pair_rather_than_derive_it_from_the_artifact": 1,
+    "v1": 1
    }
   },
   {

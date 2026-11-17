@@ -1,0 +1,1176 @@
+{
+ "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+ "clause_for_clause_comparison_with_round_4": {
+  "one_rule_changed": "grounding",
+  "round_4_occurrence": {
+   "compiled": 2,
+   "discriminating": 0,
+   "refused": 38,
+   "vacuous": 0,
+   "wrong_at_fixed": 2
+  },
+  "round_4_reproduced_after_the_two_additive_edits": {
+   "compiled": 2,
+   "discriminating": 0,
+   "refused": 38,
+   "vacuous": 0,
+   "wrong_at_fixed": 2
+  },
+  "round_5_intervention": {
+   "change_did_not_move_it": 2,
+   "discriminating": 1,
+   "refused": 35,
+   "site_named": 5,
+   "wrong_at_fixed": 2
+  },
+  "same_clause_language": true,
+  "same_corpus": true,
+  "same_direction_reader": true,
+  "same_judge": true,
+  "same_value_reader": true
+ },
+ "commits": [
+  {
+   "commit": "7a983f7f0068669ead9d4f7571be24d6c0d83eb9",
+   "direction": null,
+   "instruction": "Bump for release",
+   "modules": [],
+   "repo": "pypa/packaging",
+   "ships_a_test": false,
+   "sources": [
+    "src/packaging/__init__.py"
+   ],
+   "state": "REFUSED__NO_VALUE_IN_THE_INSTRUCTION",
+   "values": []
+  },
+  {
+   "commit": "4d8534061364e3cbfee582192ab81a095ec2db51",
+   "direction": "WIDENING",
+   "instruction": "Add riscv64 as a supported manylinux architecture (#751)",
+   "modules": [
+    {
+     "contrasts": [
+      "Returns glibc version string, or None if not using glibc.",
+      ""
+     ],
+     "module": "packaging._manylinux",
+     "probed_on_fixed": 78,
+     "responding": [
+      "_have_compatible_abi#1#element",
+      "platform_tags#0#element"
+     ],
+     "site": {
+      "fixed": {
+       "outcome": "RETURNED",
+       "type": "bool",
+       "value_repr": "True"
+      },
+      "operator": "ACCEPTS_NAMED",
+      "parent": {
+       "outcome": "RETURNED",
+       "type": "bool",
+       "value_repr": "False"
+      },
+      "separated_by": [
+       "empty_str",
+       "@json:[\"Returns glibc version string, or None if not using glibc.\"]"
+      ],
+      "shape": "element",
+      "site": "_have_compatible_abi#1#element",
+      "value": "riscv64",
+      "verdict": "DISCRIMINATING"
+     },
+     "sites_considered": 13,
+     "state": "SITE_NAMED_AND_DISCRIMINATING"
+    }
+   ],
+   "repo": "pypa/packaging",
+   "ships_a_test": false,
+   "sources": [
+    "src/packaging/_manylinux.py"
+   ],
+   "state": "SITE_NAMED_AND_DISCRIMINATING",
+   "values": [
+    "riscv64",
+    "751"
+   ]
+  },
+  {
+   "commit": "4dce7618f59d623512b21d846da3e072e86aaf2e",
+   "direction": null,
+   "instruction": "Apply some ruff suggestions (#772)",
+   "modules": [],
+   "repo": "pypa/packaging",
+   "ships_a_test": false,
+   "sources": [
+    "src/packaging/_manylinux.py"
+   ],
+   "state": "REFUSED__NO_DIRECTION_IN_THE_INSTRUCTION",
+   "values": [
+    "772"
+   ]
+  },
+  {
+   "commit": "57a6a7ff661930a8b0dde55663947b80cf3c196a",
+   "direction": null,
+   "instruction": "Appply some bugbear suggestions (#761)",
+   "modules": [],
+   "repo": "pypa/packaging",
+   "ships_a_test": true,
+   "sources": [
+    "src/packaging/_manylinux.py"
+   ],
+   "state": "REFUSED__NO_DIRECTION_IN_THE_INSTRUCTION",
+   "values": [
+    "761"
+   ]
+  },
+  {
+   "commit": "7bcd6d8ec33f0a614f9d017d31be4b50ece1549a",
+   "direction": null,
+   "instruction": " Apply some refurb suggestions (#763)",
+   "modules": [],
+   "repo": "pypa/packaging",
+   "ships_a_test": true,
+   "sources": [
+    "src/packaging/_parser.py",
+    "src/packaging/requirements.py",
+    "src/packaging/specifiers.py"
+   ],
+   "state": "REFUSED__NO_DIRECTION_IN_THE_INSTRUCTION",
+   "values": [
+    "763"
+   ]
+  },
+  {
+   "commit": "a2b3e346b03c0446df2ab8e7f9c997d65495dc6d",
+   "direction": null,
+   "instruction": "Rename Py_NOGIL to Py_GIL_DISABLED (#747)",
+   "modules": [],
+   "repo": "pypa/packaging",
+   "ships_a_test": true,
+   "sources": [
+    "src/packaging/tags.py"
+   ],
+   "state": "REFUSED__NO_DIRECTION_IN_THE_INSTRUCTION",
+   "values": [
+    "Py_NOGIL",
+    "Py_GIL_DISABLED",
+    "747"
+   ]
+  },
+  {
+   "commit": "7e4f2588923e647bb7c3d5b350473e39e4b279d4",
+   "direction": "WIDENING",
+   "instruction": "Support --disable-gil builds (PEP 703) in packaging.tags (#728)",
+   "modules": [
+    {
+     "contrasts": [
+      "python",
+      ""
+     ],
+     "module": "packaging.tags",
+     "probed_on_fixed": 96,
+     "responding": [
+      "_abi3_applies#0#scalar",
+      "_cpython_abis#0#scalar",
+      "_mac_arch#0#scalar",
+      "_mac_binary_formats#1#scalar",
+      "_normalize_string#0#scalar",
+      "_py_interpreter_range#0#scalar",
+      "_version_nodot#0#scalar",
+      "compatible_tags#0#scalar",
+      "cpython_tags#0#element",
+      "cpython_tags#0#scalar",
+      "generic_tags#0#scalar",
+      "sys_tags#0#scalar"
+     ],
+     "site": {
+      "fixed": {
+       "outcome": "RAISED",
+       "type": "TypeError",
+       "value_repr": null
+      },
+      "operator": "ACCEPTS_NAMED",
+      "parent": {
+       "outcome": "RAISED",
+       "type": "TypeError",
+       "value_repr": null
+      },
+      "separated_by": [
+       "=",
+       "a"
+      ],
+      "shape": "scalar",
+      "site": "_abi3_applies#0#scalar",
+      "value": "--disable-gil",
+      "verdict": "WRONG_AT_FIXED"
+     },
+     "sites_considered": 23,
+     "state": "SITE_NAMED_BUT_WRONG_AT_THE_FIXED_STATE"
+    }
+   ],
+   "repo": "pypa/packaging",
+   "ships_a_test": true,
+   "sources": [
+    "src/packaging/tags.py"
+   ],
+   "state": "SITE_NAMED_BUT_WRONG_AT_THE_FIXED_STATE",
+   "values": [
+    "--disable-gil",
+    "703",
+    "packaging.tags",
+    "728"
+   ]
+  },
+  {
+   "commit": "080405b1974efff3e7b5a199c3b6592f36ad97e0",
+   "direction": null,
+   "instruction": "Correctly use the ExceptionGroup shim only when needed (#736)",
+   "modules": [],
+   "repo": "pypa/packaging",
+   "ships_a_test": true,
+   "sources": [
+    "src/packaging/metadata.py"
+   ],
+   "state": "REFUSED__NO_DIRECTION_IN_THE_INSTRUCTION",
+   "values": [
+    "736"
+   ]
+  },
+  {
+   "commit": "09f131b326453f18a217fe34f4f7a77603b545db",
+   "direction": null,
+   "instruction": "Default optional metadata values to None (#734)",
+   "modules": [],
+   "repo": "pypa/packaging",
+   "ships_a_test": true,
+   "sources": [
+    "src/packaging/metadata.py"
+   ],
+   "state": "REFUSED__NO_DIRECTION_IN_THE_INSTRUCTION",
+   "values": [
+    "734"
+   ]
+  },
+  {
+   "commit": "f13c298f0a623f3f7e01cc8395956b718d21503a",
+   "direction": null,
+   "instruction": "Clarify version split/join usage (#725)",
+   "modules": [],
+   "repo": "pypa/packaging",
+   "ships_a_test": false,
+   "sources": [
+    "src/packaging/specifiers.py"
+   ],
+   "state": "REFUSED__NO_DIRECTION_IN_THE_INSTRUCTION",
+   "values": [
+    "725"
+   ]
+  },
+  {
+   "commit": "c52d2b30465ace6d11f54c01b6ea30419a94b5ef",
+   "direction": "REPAIR",
+   "instruction": "Fix specifier matching when it is long and has an epoch (#712)",
+   "modules": [
+    {
+     "contrasts": [
+      "UnparsedVersionVar",
+      ""
+     ],
+     "module": "packaging.specifiers",
+     "probed_on_fixed": 36,
+     "responding": [
+      "_coerce_version#0#scalar",
+      "_pad_version#0#element",
+      "_pad_version#0#scalar",
+      "_pad_version#1#element",
+      "_pad_version#1#scalar",
+      "_version_join#0#element",
+      "_version_join#0#scalar",
+      "_version_split#0#scalar"
+     ],
+     "site": {
+      "fixed": {
+       "outcome": "RETURNED",
+       "type": "Version",
+       "value_repr": "<Version('712')>"
+      },
+      "operator": "STILL_RUNS",
+      "parent": {
+       "outcome": "RETURNED",
+       "type": "Version",
+       "value_repr": "<Version('712')>"
+      },
+      "separated_by": [
+       "=UnparsedVersionVar"
+      ],
+      "shape": "scalar",
+      "site": "_coerce_version#0#scalar",
+      "value": "712",
+      "verdict": "PASS"
+     },
+     "sites_considered": 6,
+     "state": "SITE_NAMED_BUT_UNCHECKABLE"
+    }
+   ],
+   "repo": "pypa/packaging",
+   "ships_a_test": true,
+   "sources": [
+    "src/packaging/specifiers.py"
+   ],
+   "state": "REFUSED__NO_SITE_RESPONDS_TO_THE_VALUE",
+   "values": [
+    "712"
+   ]
+  },
+  {
+   "commit": "cc0c65cb43537491ba468da1ba9b9f49c932d9eb",
+   "direction": null,
+   "instruction": "Bump for development",
+   "modules": [],
+   "repo": "pypa/packaging",
+   "ships_a_test": false,
+   "sources": [
+    "src/packaging/__init__.py"
+   ],
+   "state": "REFUSED__NO_VALUE_IN_THE_INSTRUCTION",
+   "values": []
+  },
+  {
+   "commit": "b3a5d7d68991c040615d5345bb55f61de53ba176",
+   "direction": null,
+   "instruction": "Bump for release",
+   "modules": [],
+   "repo": "pypa/packaging",
+   "ships_a_test": false,
+   "sources": [
+    "src/packaging/__init__.py"
+   ],
+   "state": "REFUSED__NO_VALUE_IN_THE_INSTRUCTION",
+   "values": []
+  },
+  {
+   "commit": "524b701c6e30fc4da9355117367273f591c6de72",
+   "direction": null,
+   "instruction": "parse_{sdist,wheel}_filename: don't raise InvalidVersion (#721)",
+   "modules": [],
+   "repo": "pypa/packaging",
+   "ships_a_test": true,
+   "sources": [
+    "src/packaging/utils.py"
+   ],
+   "state": "REFUSED__NO_DIRECTION_IN_THE_INSTRUCTION",
+   "values": [
+    "721"
+   ]
+  },
+  {
+   "commit": "b509bef6a4573595b23a97ecbfe569000918157f",
+   "direction": null,
+   "instruction": "Typing annotations fixed (#723)",
+   "modules": [],
+   "repo": "pypa/packaging",
+   "ships_a_test": false,
+   "sources": [
+    "src/packaging/version.py"
+   ],
+   "state": "REFUSED__NO_DIRECTION_IN_THE_INSTRUCTION",
+   "values": [
+    "723"
+   ]
+  },
+  {
+   "commit": "702353715de375a65e49d1ae4af21c35dce838b8",
+   "direction": "REPAIR",
+   "instruction": "fix: Update copyright date for docs (#713)",
+   "modules": [
+    {
+     "module": "packaging",
+     "sites_considered": 0,
+     "state": "REFUSED__NO_SITE_RESPONDS_TO_THE_VALUE"
+    }
+   ],
+   "repo": "pypa/packaging",
+   "ships_a_test": false,
+   "sources": [
+    "src/packaging/__init__.py"
+   ],
+   "state": "REFUSED__NO_SITE_RESPONDS_TO_THE_VALUE",
+   "values": [
+    "713"
+   ]
+  },
+  {
+   "commit": "c1346dfdafecffc30ca777ac004ed2898e60e34e",
+   "direction": "REPAIR",
+   "instruction": "fix: Detect when a platform is 32-bit more accurately (#711)",
+   "modules": [
+    {
+     "contrasts": [
+      "python",
+      ""
+     ],
+     "module": "packaging.tags",
+     "probed_on_fixed": 96,
+     "responding": [
+      "_abi3_applies#0#scalar",
+      "_cpython_abis#0#scalar",
+      "_mac_arch#0#element",
+      "_mac_arch#0#scalar",
+      "_mac_binary_formats#1#scalar",
+      "_normalize_string#0#scalar",
+      "_py_interpreter_range#0#element",
+      "_py_interpreter_range#0#scalar",
+      "_version_nodot#0#scalar",
+      "compatible_tags#0#element",
+      "compatible_tags#0#scalar",
+      "cpython_tags#0#element",
+      "cpython_tags#0#scalar",
+      "generic_tags#0#element",
+      "generic_tags#0#scalar",
+      "sys_tags#0#scalar"
+     ],
+     "site": {
+      "fixed": {
+       "outcome": "RAISED",
+       "type": "TypeError",
+       "value_repr": null
+      },
+      "operator": "STILL_RUNS",
+      "parent": {
+       "outcome": "RAISED",
+       "type": "TypeError",
+       "value_repr": null
+      },
+      "separated_by": [
+       "="
+      ],
+      "shape": "scalar",
+      "site": "_abi3_applies#0#scalar",
+      "value": "711",
+      "verdict": "PASS"
+     },
+     "sites_considered": 21,
+     "state": "SITE_NAMED_BUT_UNCHECKABLE"
+    }
+   ],
+   "repo": "pypa/packaging",
+   "ships_a_test": true,
+   "sources": [
+    "src/packaging/tags.py"
+   ],
+   "state": "REFUSED__NO_SITE_RESPONDS_TO_THE_VALUE",
+   "values": [
+    "711"
+   ]
+  },
+  {
+   "commit": "61e6efb6b6ee99e445f575bc522b716daeaa37cf",
+   "direction": "WIDENING",
+   "instruction": "Support enriched metadata in `packaging.metadata` (#686)",
+   "modules": [
+    {
+     "contrasts": [
+      "A metadata field contains invalid data.",
+      ""
+     ],
+     "module": "packaging.metadata",
+     "probed_on_fixed": 30,
+     "responding": [
+      "_parse_keywords#0#scalar",
+      "_parse_project_urls#0#element",
+      "_parse_project_urls#0#scalar",
+      "parse_email#0#scalar"
+     ],
+     "site": {
+      "fixed": {
+       "outcome": "RETURNED",
+       "type": "list",
+       "value_repr": "['packaging.metadata']"
+      },
+      "operator": "ACCEPTS_NAMED",
+      "parent": {
+       "outcome": "RETURNED",
+       "type": "list",
+       "value_repr": "['packaging.metadata']"
+      },
+      "separated_by": [
+       "=A metadata field contains invalid data."
+      ],
+      "shape": "scalar",
+      "site": "_parse_keywords#0#scalar",
+      "value": "packaging.metadata",
+      "verdict": "VACUOUS"
+     },
+     "sites_considered": 5,
+     "state": "SITE_NAMED_BUT_THE_CHANGE_DID_NOT_MOVE_IT"
+    },
+    {
+     "contrasts": [
+      "NormalizedName",
+      ""
+     ],
+     "module": "packaging.utils",
+     "probed_on_fixed": 30,
+     "responding": [
+      "canonicalize_name#0#scalar",
+      "canonicalize_version#0#scalar"
+     ],
+     "site": {
+      "fixed": {
+       "outcome": "RETURNED",
+       "type": "str",
+       "value_repr": "'packaging-metadata'"
+      },
+      "operator": "ACCEPTS_NAMED",
+      "parent": {
+       "outcome": "RETURNED",
+       "type": "str",
+       "value_repr": "'packaging-metadata'"
+      },
+      "separated_by": [
+       "=NormalizedName"
+      ],
+      "shape": "scalar",
+      "site": "canonicalize_name#0#scalar",
+      "value": "packaging.metadata",
+      "verdict": "VACUOUS"
+     },
+     "sites_considered": 5,
+     "state": "SITE_NAMED_BUT_THE_CHANGE_DID_NOT_MOVE_IT"
+    }
+   ],
+   "repo": "pypa/packaging",
+   "ships_a_test": true,
+   "sources": [
+    "src/packaging/metadata.py",
+    "src/packaging/utils.py"
+   ],
+   "state": "SITE_NAMED_BUT_THE_CHANGE_DID_NOT_MOVE_IT",
+   "values": [
+    "packaging.metadata",
+    "686"
+   ]
+  },
+  {
+   "commit": "33cc1f75a0b91113ca1feb0751416ec4a165e3f4",
+   "direction": "REPAIR",
+   "instruction": "Fix typos found by codespell (#706)",
+   "modules": [
+    {
+     "contrasts": [
+      "author",
+      ""
+     ],
+     "module": "packaging.metadata",
+     "probed_on_fixed": 30,
+     "responding": [
+      "_parse_keywords#0#scalar",
+      "_parse_project_urls#0#element",
+      "_parse_project_urls#0#scalar",
+      "parse_email#0#scalar"
+     ],
+     "site": {
+      "fixed": {
+       "outcome": "RETURNED",
+       "type": "list",
+       "value_repr": "['706']"
+      },
+      "operator": "STILL_RUNS",
+      "parent": {
+       "outcome": "RETURNED",
+       "type": "list",
+       "value_repr": "['706']"
+      },
+      "separated_by": [
+       "=author"
+      ],
+      "shape": "scalar",
+      "site": "_parse_keywords#0#scalar",
+      "value": "706",
+      "verdict": "PASS"
+     },
+     "sites_considered": 5,
+     "state": "SITE_NAMED_BUT_UNCHECKABLE"
+    }
+   ],
+   "repo": "pypa/packaging",
+   "ships_a_test": false,
+   "sources": [
+    "src/packaging/metadata.py"
+   ],
+   "state": "REFUSED__NO_SITE_RESPONDS_TO_THE_VALUE",
+   "values": [
+    "706"
+   ]
+  },
+  {
+   "commit": "e120b49667e1c769ff60a4181cb1897c78f4f386",
+   "direction": "REPAIR",
+   "instruction": "Fix version regex pattern pre-release labels to be sorted (#705)",
+   "modules": [
+    {
+     "contrasts": [
+      "Version",
+      ""
+     ],
+     "module": "packaging.version",
+     "probed_on_fixed": 24,
+     "responding": [
+      "_parse_letter_version#1#scalar",
+      "_parse_local_version#0#scalar",
+      "parse#0#scalar"
+     ],
+     "site": {
+      "fixed": {
+       "outcome": "RETURNED",
+       "type": "tuple",
+       "value_repr": "('post', 705)"
+      },
+      "operator": "STILL_RUNS",
+      "parent": {
+       "outcome": "RETURNED",
+       "type": "tuple",
+       "value_repr": "('post', 705)"
+      },
+      "separated_by": [
+       "empty_str",
+       "=Version"
+      ],
+      "shape": "scalar",
+      "site": "_parse_letter_version#1#scalar",
+      "value": "705",
+      "verdict": "PASS"
+     },
+     "sites_considered": 4,
+     "state": "SITE_NAMED_BUT_UNCHECKABLE"
+    }
+   ],
+   "repo": "pypa/packaging",
+   "ships_a_test": false,
+   "sources": [
+    "src/packaging/version.py"
+   ],
+   "state": "REFUSED__NO_SITE_RESPONDS_TO_THE_VALUE",
+   "values": [
+    "705"
+   ]
+  },
+  {
+   "commit": "e5a7893a99d64acb18ca8eec8848daa026c1c4de",
+   "direction": null,
+   "instruction": "Update pyupgrade to Python 3.7+ (#580)",
+   "modules": [],
+   "repo": "pypa/packaging",
+   "ships_a_test": true,
+   "sources": [
+    "src/packaging/_musllinux.py",
+    "src/packaging/tags.py"
+   ],
+   "state": "REFUSED__NO_DIRECTION_IN_THE_INSTRUCTION",
+   "values": [
+    "3.7",
+    "580"
+   ]
+  },
+  {
+   "commit": "1277904652c497ec84560a830a2e01d434358818",
+   "direction": null,
+   "instruction": "Ability to install `armv7l manylinux/musllinux` wheels on `armv8l` (#690)",
+   "modules": [],
+   "repo": "pypa/packaging",
+   "ships_a_test": true,
+   "sources": [
+    "src/packaging/_manylinux.py",
+    "src/packaging/_musllinux.py",
+    "src/packaging/tags.py"
+   ],
+   "state": "REFUSED__NO_DIRECTION_IN_THE_INSTRUCTION",
+   "values": [
+    "armv7l manylinux/musllinux",
+    "armv8l",
+    "690"
+   ]
+  },
+  {
+   "commit": "2f80de7fd2a8bc199dadf5cf3f5f302a17084792",
+   "direction": "WIDENING",
+   "instruction": "Add platform tag support for LoongArch (#693)",
+   "modules": [
+    {
+     "contrasts": [
+      "Returns glibc version string, or None if not using glibc.",
+      ""
+     ],
+     "module": "packaging._manylinux",
+     "probed_on_fixed": 84,
+     "sites_considered": 14,
+     "state": "REFUSED__NO_SITE_RESPONDS_TO_THE_VALUE"
+    }
+   ],
+   "repo": "pypa/packaging",
+   "ships_a_test": false,
+   "sources": [
+    "src/packaging/_manylinux.py"
+   ],
+   "state": "REFUSED__NO_SITE_RESPONDS_TO_THE_VALUE",
+   "values": [
+    "693"
+   ]
+  },
+  {
+   "commit": "e8f839f7400253998a07a993420ae308bb4f159d",
+   "direction": null,
+   "instruction": "Canonicalize names for requirements comparison (#696)",
+   "modules": [],
+   "repo": "pypa/packaging",
+   "ships_a_test": true,
+   "sources": [
+    "src/packaging/requirements.py"
+   ],
+   "state": "REFUSED__NO_DIRECTION_IN_THE_INSTRUCTION",
+   "values": [
+    "696"
+   ]
+  },
+  {
+   "commit": "538cd15c7d73d5a7466f8343e256923e77ab7113",
+   "direction": "NARROWING",
+   "instruction": "remove unused argument in `_manylinux._is_compatible` (#700)",
+   "modules": [
+    {
+     "contrasts": [
+      "Returns glibc version string, or None if not using glibc.",
+      ""
+     ],
+     "module": "packaging._manylinux",
+     "probed_on_fixed": 84,
+     "sites_considered": 14,
+     "state": "REFUSED__NO_SITE_RESPONDS_TO_THE_VALUE"
+    }
+   ],
+   "repo": "pypa/packaging",
+   "ships_a_test": true,
+   "sources": [
+    "src/packaging/_manylinux.py"
+   ],
+   "state": "REFUSED__NO_SITE_RESPONDS_TO_THE_VALUE",
+   "values": [
+    "_manylinux._is_compatible",
+    "700"
+   ]
+  },
+  {
+   "commit": "2b389f3a1ae895d050e4afc5152877f2c100564a",
+   "direction": "WIDENING",
+   "instruction": "Add PyPy 3.10 to CI (#699)",
+   "modules": [
+    {
+     "contrasts": [
+      "lint",
+      ""
+     ],
+     "module": "noxfile",
+     "probed_on_fixed": 72,
+     "sites_considered": 12,
+     "state": "REFUSED__NO_SITE_RESPONDS_TO_THE_VALUE"
+    }
+   ],
+   "repo": "pypa/packaging",
+   "ships_a_test": false,
+   "sources": [
+    "noxfile.py"
+   ],
+   "state": "REFUSED__NO_SITE_RESPONDS_TO_THE_VALUE",
+   "values": [
+    "3.10",
+    "699"
+   ]
+  },
+  {
+   "commit": "f8893d4b06a3231896687b6c45625b7ae98c4993",
+   "direction": "WIDENING",
+   "instruction": "Add types for packaging.version._Version (#665)",
+   "modules": [
+    {
+     "contrasts": [
+      "Version",
+      ""
+     ],
+     "module": "packaging.version",
+     "probed_on_fixed": 24,
+     "responding": [
+      "_parse_letter_version#1#scalar",
+      "_parse_local_version#0#scalar"
+     ],
+     "site": {
+      "fixed": {
+       "outcome": "RAISED",
+       "type": "ValueError",
+       "value_repr": null
+      },
+      "operator": "ACCEPTS_NAMED",
+      "parent": {
+       "outcome": "RAISED",
+       "type": "ValueError",
+       "value_repr": null
+      },
+      "separated_by": [
+       "empty_str",
+       "="
+      ],
+      "shape": "scalar",
+      "site": "_parse_letter_version#1#scalar",
+      "value": "packaging.version",
+      "verdict": "WRONG_AT_FIXED"
+     },
+     "sites_considered": 4,
+     "state": "SITE_NAMED_BUT_WRONG_AT_THE_FIXED_STATE"
+    }
+   ],
+   "repo": "pypa/packaging",
+   "ships_a_test": false,
+   "sources": [
+    "src/packaging/version.py"
+   ],
+   "state": "SITE_NAMED_BUT_WRONG_AT_THE_FIXED_STATE",
+   "values": [
+    "packaging.version",
+    "665"
+   ]
+  },
+  {
+   "commit": "fe8f0bb99c41c5e3a8c2395d4e849c1eff72949c",
+   "direction": "NARROWING",
+   "instruction": "Remove URL validation from requirement parsing (#684)",
+   "modules": [
+    {
+     "module": "packaging.requirements",
+     "sites_considered": 0,
+     "state": "REFUSED__NO_SITE_RESPONDS_TO_THE_VALUE"
+    }
+   ],
+   "repo": "pypa/packaging",
+   "ships_a_test": true,
+   "sources": [
+    "src/packaging/requirements.py"
+   ],
+   "state": "REFUSED__NO_SITE_RESPONDS_TO_THE_VALUE",
+   "values": [
+    "684"
+   ]
+  },
+  {
+   "commit": "63f4cfe679fb3d9322e56d8569207ecff4735238",
+   "direction": "WIDENING",
+   "instruction": "Add Python 3.12 to CI (#689)",
+   "modules": [
+    {
+     "contrasts": [
+      "lint",
+      ""
+     ],
+     "module": "noxfile",
+     "probed_on_fixed": 72,
+     "sites_considered": 12,
+     "state": "REFUSED__NO_SITE_RESPONDS_TO_THE_VALUE"
+    }
+   ],
+   "repo": "pypa/packaging",
+   "ships_a_test": false,
+   "sources": [
+    "noxfile.py"
+   ],
+   "state": "REFUSED__NO_SITE_RESPONDS_TO_THE_VALUE",
+   "values": [
+    "3.12",
+    "689"
+   ]
+  },
+  {
+   "commit": "55584fb5ca327ba38b74ca5c668125caaebd9a5d",
+   "direction": null,
+   "instruction": "Ensure that the entire string is consumed with `parse_marker` (#687)",
+   "modules": [],
+   "repo": "pypa/packaging",
+   "ships_a_test": true,
+   "sources": [
+    "src/packaging/_parser.py"
+   ],
+   "state": "REFUSED__NO_DIRECTION_IN_THE_INSTRUCTION",
+   "values": [
+    "parse_marker",
+    "687"
+   ]
+  },
+  {
+   "commit": "30d4a1c5fb5a6c32d6d725f97935330960ce5d15",
+   "direction": null,
+   "instruction": "Bump for development",
+   "modules": [],
+   "repo": "pypa/packaging",
+   "ships_a_test": false,
+   "sources": [
+    "src/packaging/__init__.py"
+   ],
+   "state": "REFUSED__NO_VALUE_IN_THE_INSTRUCTION",
+   "values": []
+  },
+  {
+   "commit": "d563917280d65a6ce2e622bd3d07438e1ee259f3",
+   "direction": null,
+   "instruction": "Bump for release",
+   "modules": [],
+   "repo": "pypa/packaging",
+   "ships_a_test": false,
+   "sources": [
+    "src/packaging/__init__.py"
+   ],
+   "state": "REFUSED__NO_VALUE_IN_THE_INSTRUCTION",
+   "values": []
+  },
+  {
+   "commit": "5b34465682d40ddd42dd6cba88e158e1674de7b9",
+   "direction": null,
+   "instruction": "Import underlying parser functions as an underscored variable (#663)",
+   "modules": [],
+   "repo": "pypa/packaging",
+   "ships_a_test": false,
+   "sources": [
+    "src/packaging/markers.py",
+    "src/packaging/requirements.py"
+   ],
+   "state": "REFUSED__NO_DIRECTION_IN_THE_INSTRUCTION",
+   "values": [
+    "663"
+   ]
+  },
+  {
+   "commit": "7013a6048fe13f5c937de33179763100a57d7658",
+   "direction": null,
+   "instruction": "Replace spaces in platform names with underscores (#620)",
+   "modules": [],
+   "repo": "pypa/packaging",
+   "ships_a_test": true,
+   "sources": [
+    "src/packaging/tags.py"
+   ],
+   "state": "REFUSED__NO_DIRECTION_IN_THE_INSTRUCTION",
+   "values": [
+    "620"
+   ]
+  },
+  {
+   "commit": "28c1a05d571d15a3c54c1dedc2ce0e503d486697",
+   "direction": null,
+   "instruction": "Relax typing of _key on _BaseVersion (#669)",
+   "modules": [],
+   "repo": "pypa/packaging",
+   "ships_a_test": false,
+   "sources": [
+    "src/packaging/version.py"
+   ],
+   "state": "REFUSED__NO_DIRECTION_IN_THE_INSTRUCTION",
+   "values": [
+    "669"
+   ]
+  },
+  {
+   "commit": "a6c9bc4dce968f7bfc05e4a93137f65ce4564be9",
+   "direction": "WIDENING",
+   "instruction": "Handle prefix match with zeros at end of prefix correctly (#674)",
+   "modules": [
+    {
+     "contrasts": [
+      "UnparsedVersionVar",
+      ""
+     ],
+     "module": "packaging.specifiers",
+     "probed_on_fixed": 30,
+     "responding": [
+      "_coerce_version#0#scalar",
+      "_pad_version#0#element",
+      "_pad_version#0#scalar",
+      "_pad_version#1#element",
+      "_pad_version#1#scalar",
+      "_version_split#0#scalar"
+     ],
+     "site": {
+      "fixed": {
+       "outcome": "RETURNED",
+       "type": "Version",
+       "value_repr": "<Version('674')>"
+      },
+      "operator": "ACCEPTS_NAMED",
+      "parent": {
+       "outcome": "RETURNED",
+       "type": "Version",
+       "value_repr": "<Version('674')>"
+      },
+      "separated_by": [
+       "=UnparsedVersionVar"
+      ],
+      "shape": "scalar",
+      "site": "_coerce_version#0#scalar",
+      "value": "674",
+      "verdict": "VACUOUS"
+     },
+     "sites_considered": 5,
+     "state": "SITE_NAMED_BUT_THE_CHANGE_DID_NOT_MOVE_IT"
+    }
+   ],
+   "repo": "pypa/packaging",
+   "ships_a_test": true,
+   "sources": [
+    "src/packaging/specifiers.py"
+   ],
+   "state": "SITE_NAMED_BUT_THE_CHANGE_DID_NOT_MOVE_IT",
+   "values": [
+    "674"
+   ]
+  },
+  {
+   "commit": "7722044f4b0f689eec8cb89afc8d3e4bb8e62908",
+   "direction": null,
+   "instruction": "Parse raw metadata (#671)",
+   "modules": [],
+   "repo": "pypa/packaging",
+   "ships_a_test": true,
+   "sources": [
+    "noxfile.py",
+    "src/packaging/_manylinux.py",
+    "src/packaging/metadata.py"
+   ],
+   "state": "REFUSED__NO_DIRECTION_IN_THE_INSTRUCTION",
+   "values": [
+    "671"
+   ]
+  },
+  {
+   "commit": "96d85be0e3d1d0f7fa42ce0cf41cdcce884fa8e0",
+   "direction": null,
+   "instruction": "Improve error for local version label with unsupported operators (#675)",
+   "modules": [],
+   "repo": "pypa/packaging",
+   "ships_a_test": true,
+   "sources": [
+    "src/packaging/_parser.py",
+    "src/packaging/_tokenizer.py"
+   ],
+   "state": "REFUSED__NO_DIRECTION_IN_THE_INSTRUCTION",
+   "values": [
+    "675"
+   ]
+  },
+  {
+   "commit": "1b9da4420e9e23046dc095a3779f2607ae6e4d62",
+   "direction": null,
+   "instruction": "Upgrade to latest mypy (#664)",
+   "modules": [],
+   "repo": "pypa/packaging",
+   "ships_a_test": false,
+   "sources": [
+    "src/packaging/specifiers.py",
+    "src/packaging/tags.py"
+   ],
+   "state": "REFUSED__NO_DIRECTION_IN_THE_INSTRUCTION",
+   "values": [
+    "664"
+   ]
+  },
+  {
+   "commit": "068a0b5975a95a5cc30262599ca29bb6ceabe4af",
+   "direction": "WIDENING",
+   "instruction": "Add dedicated error for specifiers with incorrect `.*` suffix",
+   "modules": [],
+   "repo": "pypa/packaging",
+   "ships_a_test": true,
+   "sources": [
+    "src/packaging/_parser.py",
+    "src/packaging/_tokenizer.py"
+   ],
+   "state": "REFUSED__NO_VALUE_IN_THE_INSTRUCTION",
+   "values": []
+  }
+ ],
+ "convergent_external_november_2026": {
+  "causal_agent_replay_2606_08275": "attribution by LLM judgment is ~14% at step level; attribution by DO-intervention over the same policy is the reliable mechanism",
+  "polyskill_iclr_2026": "prior skill-induction methods reuse below 18% on unseen websites; over-specialised skills break on new layouts",
+  "skilllens_microsoft_may_2026": "25% of skill deployments produce NEGATIVE transfer; plausible text is a poor predictor of downstream utility (46.4%, ~random)",
+  "skillopt_2605_23904": "one-shot skills are brittle; optimising the artifact over outcomes beats one-shot by +23.5 points on average",
+  "skillshift_bench_2610_33528": "learned skills degrade under environment evolution: ASI 53.65% -> 41.84% -> 15.79%; skill failure rate 9.83% -> 16.70% -> 27.60%; trajectory cost 8.49 -> 11.99 steps",
+  "what_all_of_them_agree_on": "a learned action is only as durable as the check that validates it, and the check is obtained by intervention, not by watching"
+ },
+ "date": "2026-11-16",
+ "incremental_spend_usd": 0,
+ "model_calls": 0,
+ "network_calls": 0,
+ "reproduce": ".venv/bin/python canonical/swe_kernel/site_by_intervention_v1.py --corpus --limit 40 --json canonical/verification/SITE_BY_INTERVENTION_20261116_V1.json",
+ "reused_not_rebuilt": {
+  "compiler": "canonical/swe_kernel/instruction_contract_for_code_v1.py -- named_values, direction_of, judge_contract, FILLERS, MAX_ARGUMENTS, read only",
+  "corpus": "canonical/swe_kernel/structural_check_of_real_changes_v1.py -- commits_touching_sources, module_name_for, read only",
+  "execution": "canonical/swe_kernel/checkability_by_differential_pin_v1.py -- execute.probe, read only",
+  "materialisation": "canonical/swe_kernel/witness_inversion_v1.py -- materialise, fetch, read only",
+  "the_theory": "canonical/swe_kernel/interventional_goal_v1.py and canonical/capabilities/opus55/M5_NONINTERVENTIONAL_ROOT_CAUSE_IDENTIFIABILITY_001.json -- a single observational trace does not identify a cause; a DO-intervention does"
+ },
+ "schema": "BRAIN_SITE_BY_INTERVENTION_V1",
+ "states": {
+  "commits": 40,
+  "refused": 35,
+  "site_named": 5,
+  "site_named_and_discriminating": 1,
+  "site_named_but_change_did_not_move_it": 2,
+  "site_named_but_wrong_at_the_fixed_state": 2,
+  "untested": 19,
+  "with_tests": 21
+ },
+ "the_one_real_win_in_full": {
+  "candidate_callables": 13,
+  "commit": "4d85340613",
+  "direction": "WIDENING",
+  "instruction": "Add riscv64 as a supported manylinux architecture (#751)",
+  "probes": 78,
+  "responding_sites": [
+   "_have_compatible_abi#1#element",
+   "platform_tags#0#element"
+  ],
+  "ships_a_test": false,
+  "site_named": "_have_compatible_abi#1#element (the second parameter, intervened on as a COLLECTION)",
+  "value": "riscv64",
+  "verdict": "DISCRIMINATING -- parent RETURNED False, fixed RETURNED True, judged by round 4's own judge",
+  "what_it_cost": "0 model calls, 0 network calls, 0 learned examples, no test in the commit, one child process per state",
+  "what_round_4_said": "WRONG_AT_FIXED -- it grounded on the same function but passed the value as a SCALAR string, so `for arch in archs` iterated characters and both states returned False",
+  "why_it_responds": "the commit's whole diff is `allowed_archs = {...}` gaining \"riscv64\"; the function's output is `any(arch in allowed_archs for arch in archs)`"
+ },
+ "the_one_rule_that_changed": "grounding: round 4 asked where the sentence's value OCCURS in a callable; round 5 asks whose observable output MOVES when the value is intervened on. Everything else -- the value reader, the direction reader, the clause language, FILLERS, MAX_ARGUMENTS, judge_contract and all four verdicts -- is imported from round 4 unchanged, so the two receipts are clause-for-clause comparable.",
+ "the_reason_the_rest_were_refused": {
+  "NO_DIRECTION_IN_THE_INSTRUCTION": 19,
+  "NO_SITE_RESPONDS_TO_THE_VALUE": 10,
+  "NO_VALUE_IN_THE_INSTRUCTION": 6,
+  "why_it_matters": "the denominator is the corpus, not the organ: 19 of 40 real commit messages state no direction at all and 6 name nothing. A message written after the fact summarises; it does not instruct. The organ's ceiling on this corpus is set by the corpus."
+ },
+ "the_two_bugs_this_round_found_in_itself": [
+  {
+   "bug": "the intervention passed the value in one shape only",
+   "cost_of_the_bug": "it would have published 'no site responds' for the one instruction that has a site",
+   "fix": "intervene in BOTH shapes: the bare value and the value as the sole element of a collection",
+   "symptom": "13 candidate callables, 52 probes, 0 responders on the commit whose site is real"
+  },
+  {
+   "bug": "the judge re-encoded the value as a scalar, discarding the shape the intervention discovered",
+   "cost_of_the_bug": "it converted the round's only win into a failure",
+   "fix": "`shape` is part of the clause, honoured by `_calls_for`; a clause with no shape encodes exactly as round 4 did, which is why round 4 still reproduces byte-identically",
+   "symptom": "a real False->True pair read as WRONG_AT_FIXED"
+  }
+ ],
+ "verdict_census": {
+  "REFUSED__NO_DIRECTION_IN_THE_INSTRUCTION": 19,
+  "REFUSED__NO_SITE_RESPONDS_TO_THE_VALUE": 10,
+  "REFUSED__NO_VALUE_IN_THE_INSTRUCTION": 6,
+  "SITE_NAMED_AND_DISCRIMINATING": 1,
+  "SITE_NAMED_BUT_THE_CHANGE_DID_NOT_MOVE_IT": 2,
+  "SITE_NAMED_BUT_WRONG_AT_THE_FIXED_STATE": 2
+ },
+ "what_this_shows": "A specification is a TRIPLE -- value, site, and the shape/regime in which the value is consumed -- and a sentence supplies the first only. Round 4 grounded by occurrence and got 0 of 40 usable. Round 5 grounds by intervention and gets 1 of 40 usable, with the site and the shape both discovered by execution. The gain is small because the corpus is commit messages; the mechanism is the point: the same three coordinates that a demonstration leaves unidentified are exactly what an intervention names, and the tree's own receipts show one demonstration leaves 0 survivors at 6.9% held-out accuracy while three CONTRASTING outcomes reach 96.24%."
+}
