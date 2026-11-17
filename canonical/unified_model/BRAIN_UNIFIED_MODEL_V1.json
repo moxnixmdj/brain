@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "8f145000830b75ab5224e96e65c7d2186b935b8c0d37b1cd902ca4cea471f32f"
+  "value": "c7e21ddaebb87cdb29da173e11c1fe5875fa2d3717ff43c1474d909b0402a1e1"
  },
  "engines": [
   {
@@ -234904,7 +234904,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/A_PERCEPTUAL_PROPERTY_FIVE_PAGES_20261117_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
-   "sha256": "1fd9c3de90a17d4dd91548de89d82f49ff18cff224c292ff9e11a235b43501d6",
+   "sha256": "5f2b45b89a76e37421390c042665d25fdaeac38d1d1fd88dfe6f5f02f51ecc5f",
    "status": "MEASURED__SANDBOX_RECEIPT__PENDING_MERGE",
    "terms": {
     "20261117": 1,
