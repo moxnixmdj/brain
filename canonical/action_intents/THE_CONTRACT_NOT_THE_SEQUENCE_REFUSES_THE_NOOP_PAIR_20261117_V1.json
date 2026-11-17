@@ -39,7 +39,7 @@
  },
  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_STORE_HAD_NO_CROSS_SKILL_EFFECT_CONTRACT: each rule was verified only against its own demonstration, sequence_verify was post-hoc textual, and proved_composition needed a concrete state and history \u2014 none could refuse an incompatible pair from what the skills DECLARE about themselves, which is the rank-2 pass condition in WHAT_IS_REAL_AND_THE_ONE_CLASS_OF_PAGE_20261117_V1.md \u00a79",
- "canonical_base_commit": "cc49c9f3d2a77e97bd51a42f21a680ce1c961af2",
+ "canonical_base_commit": "d0c0ff0da90cf2256863dc4bb6cba9ad2b4a016e",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -90,7 +90,7 @@
  ],
  "probe_specific": false,
  "recursive_obs": {
-  "canonical_base_commit": "cc49c9f3d2a77e97bd51a42f21a680ce1c961af2",
+  "canonical_base_commit": "d0c0ff0da90cf2256863dc4bb6cba9ad2b4a016e",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "enumerating more hand-written mutation kinds",
