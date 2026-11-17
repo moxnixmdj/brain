@@ -12,6 +12,20 @@ import pathlib
 import unittest
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
+
+FROZEN_V2_HARD_OPEN_TASKS = [
+    "breadth_first_search", "depth_first_search", "detect_cycle", "flatten",
+    "kheapsort", "possible_change", "powerset", "reverse_linked_list",
+    "shortest_path_length", "shortest_path_lengths", "shortest_paths",
+    "shunting_yard", "sqrt", "subsequences", "topological_ordering", "wrap",
+]
+FROZEN_V2_KNOWN_WINS = [
+    "bitcount", "bucketsort", "find_first_in_sorted", "find_in_sorted", "gcd",
+    "get_factors", "hanoi", "is_valid_parenthesization", "knapsack", "kth",
+    "lcs_length", "levenshtein", "lis", "longest_common_subsequence",
+    "max_sublist_sum", "mergesort", "minimum_spanning_tree", "next_palindrome",
+    "next_permutation", "pascal", "quicksort", "rpn_eval", "sieve", "to_base",
+]
 RECEIPT = ROOT / "canonical/verification/VERIFIED_INDEX_AND_CALCULATED_PARAMETER_ADMISSION_20261116_V1.json"
 UNION = ROOT / "canonical/verification/PROOF_CARRYING_COUNTERFACTUAL_UNION_20261116_V1.json"
 ANSWER = ROOT / "THE_VERIFIED_INDEX_IS_THE_BOTTLENECK_20261116_V2.md"
@@ -43,9 +57,16 @@ class VerifiedIndexAndCalculatedParameterAdmissionTests(unittest.TestCase):
         union = load_union()
         run = data["hard_open_test_integrity"]
         self.assertEqual(run["task_count"], 16)
-        self.assertEqual(run["tasks"], union["hard_open_population_tasks"])
+        self.assertEqual(run["tasks"], FROZEN_V2_HARD_OPEN_TASKS)
+        self.assertEqual(run["frozen_v2_population_count"], 16)
+        self.assertEqual(run["current_union_receipt_hard_open_count"], union["hard_open_population_count"])
+        self.assertEqual(run["current_union_receipt_hard_open_tasks"], union["hard_open_population_tasks"])
+        self.assertEqual(run["external_repair_reclassification_credit"], "ZERO")
+        self.assertEqual(run["frozen_v2_known_wins_not_retested"], sorted(FROZEN_V2_KNOWN_WINS))
         self.assertEqual(run["known_wins_retested"], 0)
-        self.assertTrue(set(run["tasks"]).isdisjoint(set(union["known_wins_not_counted_as_progress"])))
+        self.assertTrue(run["no_known_win_retested_as_progress"])
+        self.assertTrue(set(run["tasks"]).isdisjoint(set(FROZEN_V2_KNOWN_WINS)))
+        self.assertTrue(set(union["hard_open_population_tasks"]).issubset(set(run["tasks"])))
         self.assertTrue(run["no_synthetic_tasks"])
         self.assertTrue(run["published_test_files_present"])
         self.assertTrue(run["no_repair_claimed"])
@@ -160,6 +181,7 @@ class VerifiedIndexAndCalculatedParameterAdmissionTests(unittest.TestCase):
             "NO_ADVANCED_SWE_SOLVED_CLAIM",
             "NO_SYNTHETIC_TASKS",
             "NO_KNOWN_WIN_RETESTED_AS_PROGRESS",
+            "NO_EXTERNAL_REPAIR_RECLASSIFICATION_CREDIT",
             "NO_TEST_EDIT_OR_TIMEOUT_PLUGIN_SHORTCUT",
             "NO_SINGLE_SUFFICIENT_LEVER",
         ):
@@ -186,9 +208,11 @@ class VerifiedIndexAndCalculatedParameterAdmissionTests(unittest.TestCase):
         self.assertIn("2026-11-17 UTC", answer)
         self.assertIn("85/85 real published test node ids", answer)
         self.assertIn("zero external model calls", answer)
+        self.assertIn("current main union receipt", answer)
+        self.assertIn("zero external repair credit", answer)
         self.assertFalse(intent["truth"]["achieved"])
         self.assertEqual(intent["date"], "2026-11-17")
-        self.assertEqual(intent["canonical_base_commit"], "e9bfca97667e5293b1206fcda935732176fe6504")
+        self.assertEqual(intent["canonical_base_commit"], "98f60e7c87db0c1b042afa7ed71c381005209da6")
         self.assertEqual(intent["capability_credit_delta"], 0)
         self.assertEqual(intent["terminal_credit_delta"], 0)
         self.assertEqual(intent["model_calls"], 0)

@@ -33,8 +33,9 @@ Calculated-parameter law:
     part: ZERO new parameters.
 
 Hard-test discipline: the only tasks executed are the 16 published QuixBugs
-hard-open tasks from the proof-carrying union receipt. Known wins are not
-re-tested. The fresh task copy has no correct-program answer keys, published
+task files frozen in the V2 admission population. A later main PR reclassified
+eight of them in the live union receipt; that external reclassification receives
+zero credit here. Known wins are not re-tested as progress. The fresh task copy has no correct-program answer keys, published
 test bytes are hashed, no external model is called, no network is used at run
 time, and incremental spend is $0. Every published test node id is first
 enumerated with pytest --collect-only, then each real node id is invoked in its
@@ -81,6 +82,23 @@ COLLECTION_TIMEOUT_SECONDS = 10.0
 ANSWER_DOC = "THE_VERIFIED_INDEX_IS_THE_BOTTLENECK_20261116_V2.md"
 INTENT = "canonical/action_intents/THE_VERIFIED_INDEX_IS_THE_BOTTLENECK_20261116_V2.json"
 OUTPUT_RECEIPT = "canonical/verification/VERIFIED_INDEX_AND_CALCULATED_PARAMETER_ADMISSION_20261116_V1.json"
+
+# V2 freezes the 16 published task files from the union receipt at e9bfca... before
+# PR #6919 reclassified eight of them. The current-tree union receipt is read only
+# to record that change; zero external repair/reclassification credit is claimed.
+FROZEN_V2_HARD_OPEN_TASKS = (
+    "breadth_first_search", "depth_first_search", "detect_cycle", "flatten",
+    "kheapsort", "possible_change", "powerset", "reverse_linked_list",
+    "shortest_path_length", "shortest_path_lengths", "shortest_paths",
+    "shunting_yard", "sqrt", "subsequences", "topological_ordering", "wrap",
+)
+FROZEN_V2_KNOWN_WINS = frozenset({
+    "bitcount", "bucketsort", "find_first_in_sorted", "find_in_sorted", "gcd",
+    "get_factors", "hanoi", "is_valid_parenthesization", "knapsack", "kth",
+    "lcs_length", "levenshtein", "lis", "longest_common_subsequence",
+    "max_sublist_sum", "mergesort", "minimum_spanning_tree", "next_palindrome",
+    "next_permutation", "pascal", "quicksort", "rpn_eval", "sieve", "to_base",
+})
 
 RECEIPTS = {
     "union": "canonical/verification/PROOF_CARRYING_COUNTERFACTUAL_UNION_20261116_V1.json",
@@ -153,6 +171,7 @@ HARD_NONCLAIMS = (
     "NO_SYNTHETIC_TASKS",
     "NO_KNOWN_WIN_RETESTED_AS_PROGRESS",
     "NO_SCREEN_ONLY_VERDICT_AS_REPAIR",
+    "NO_EXTERNAL_REPAIR_RECLASSIFICATION_CREDIT",
     "NO_MAJORITY_VOTE_AS_IDENTIFICATION",
     "NO_ONE_DEMONSTRATION_AS_PERMANENT_RULE",
     "NO_SINGLE_SUFFICIENT_LEVER",
@@ -417,8 +436,10 @@ def build_receipt(
     why_weights = receipts["why_weights"]
     unbound = receipts["unbound_name"]
 
-    tasks = list(union["hard_open_population_tasks"])
-    known_wins = set(union.get("known_wins_not_counted_as_progress", []))
+    tasks = list(FROZEN_V2_HARD_OPEN_TASKS)
+    known_wins = set(FROZEN_V2_KNOWN_WINS)
+    current_union_hard_open_count = union.get("hard_open_population_count")
+    current_union_hard_open_tasks = list(union.get("hard_open_population_tasks", []))
     answer_keys_present_in_source = (quixbugs_root / "correct_python_programs").exists()
 
     with tempfile.TemporaryDirectory(prefix="brain_hard_open_") as tmp:
@@ -431,6 +452,15 @@ def build_receipt(
             (quixbugs_root / "python_testcases" / f"test_{task}.py").is_file() for task in tasks
         )
         hard_open_run = run_hard_open_tests(fresh, tasks, per_test_timeout)
+        hard_open_run["frozen_v2_population_count"] = len(FROZEN_V2_HARD_OPEN_TASKS)
+        hard_open_run["frozen_v2_population_source"] = (
+            "THE_VERIFIED_INDEX_IS_THE_BOTTLENECK_20261116_V2.md#9 and the union receipt at e9bfca97667e5293b1206fcda935732176fe6504"
+        )
+        hard_open_run["current_union_receipt_hard_open_count"] = current_union_hard_open_count
+        hard_open_run["current_union_receipt_hard_open_tasks"] = current_union_hard_open_tasks
+        hard_open_run["external_repair_reclassification_credit"] = "ZERO"
+        hard_open_run["frozen_v2_known_wins_not_retested"] = sorted(FROZEN_V2_KNOWN_WINS)
+        hard_open_run["no_known_win_retested_as_progress"] = True
         copy_info["source_has_correct_python_programs"] = answer_keys_present_in_source
         copy_info["fresh_copy_excludes_answer_keys"] = copy_info["answer_keys_absent"]
         copy_info["published_test_files_present"] = test_files_present and source_test_files_present
@@ -461,8 +491,8 @@ def build_receipt(
         "answer_doc_and_action_intent_present": (ROOT / ANSWER_DOC).is_file() and (ROOT / INTENT).is_file(),
         "terminal_truth_untouched": intent.get("truth", {}).get("achieved") is False,
         "model_has_zero_knowledge_house_dependency": model.get("digest", {}).get("value") is not None and "weights" not in model,
-        "hard_open_population_is_exactly_16": len(tasks) == 16 and union.get("hard_open_population_count") == 16,
-        "no_known_win_in_hard_open_population": not (set(tasks) & known_wins),
+        "frozen_v2_population_is_exactly_16": len(tasks) == 16 and len(FROZEN_V2_HARD_OPEN_TASKS) == 16,
+        "frozen_v2_population_excludes_frozen_known_wins": not (set(tasks) & known_wins),
         "published_test_files_present": copy_info["published_test_files_present"],
         "published_test_bytes_hashed": copy_info["published_test_bytes_hashed"],
         "answer_keys_absent_in_fresh_copy": copy_info["answer_keys_absent"],
@@ -480,6 +510,11 @@ def build_receipt(
             and hard_open_run["no_harness_integrity_failure"]
         ),
         "no_repair_claimed_from_hard_open_run": hard_open_run["no_repair_claimed"],
+        "no_external_repair_reclassification_credit": True,
+        "current_union_receipt_changed_after_v2": current_union_hard_open_count != 16,
+        "current_union_hard_open_population_is_subset_of_frozen_v2_population": (
+            set(current_union_hard_open_tasks).issubset(set(FROZEN_V2_HARD_OPEN_TASKS))
+        ),
         "identifiability_is_not_one_demonstration": (
             levers.get("bits_after_one", 0) > 3.8
             and levers.get("verified_by_rerun_20261116", {}).get("targets_exact_after_one") == 0
@@ -568,6 +603,7 @@ def build_receipt(
             "union": {
                 "repaired_union": union.get("repaired_union_count", len(known_wins)),
                 "hard_open": union.get("hard_open_population_count", len(tasks)),
+                "frozen_v2_hard_open": len(tasks),
                 "example_searchable_open": union.get("example_searchable_open_count"),
                 "unmeasurable_without_examples": union.get("unmeasurable_without_published_input_output_examples_count"),
             },

@@ -1,6 +1,6 @@
 # The three blockers are one verified index, not one experience
 
-**2026-11-17 UTC · branch `arena/cd864fc9-brain` · live PR base `e9bfca97667e5293b1206fcda935732176fe6504` · branch origin `68e8d11bcddd87e4dffc38a19093dbd782879919` · authority NONE · producer-run sandbox · $0 · zero external model calls**
+**2026-11-17 UTC · branch `arena/cd864fc9-brain` · live PR base `98f60e7c87db0c1b042afa7ed71c381005209da6` · branch origin `68e8d11bcddd87e4dffc38a19093dbd782879919` · authority NONE · producer-run sandbox · $0 · zero external model calls**
 
 This is a fresh answer to the owner prompt, not a continuation note. I re-read the whole prompt as new, re-checked the project by **effect and intent** (including non-obvious names), re-checked November 2026 web research as evidence only, and asked **YOU SURE THIS THE SMARTEST APPROACH?** before each implementation decision. The project already owns the constructive, interventional, identification, admission, composition, environment-learning, instant-knowledge, and weight-gate organs under non-obvious names. Building another learner, verifier, planner, weight house, or conventional pretraining stack would duplicate a part. This feature therefore adds no new organ: it adds a falsifiable answer, a hard-open real-test receipt, and a calculated-parameter admission law.
 
@@ -31,7 +31,7 @@ Artifacts: `canonical/action_intents/THE_VERIFIED_INDEX_IS_THE_BOTTLENECK_202611
 | Even if everyone says weights/conventional pretraining, go first principles | Section 7 kills conventional pretraining now because the local weight gate measured self-certifying updates that broke correct predictions and the training fuel is not ready. |
 | Important things already exist under non-obvious names; do not rebuild | Section 3 indexes the existing organs by effect. No new learner/verifier/planner/composer/weight gate was built. |
 | Optimize only for ultimate advanced, not ordinary/incremental | The feature is an admission law and hard-open integrity gate, not a +1 benchmark patch. Incremental gains are explicitly refused. |
-| Hardest open tests, no synthetic, integrity 100% real, only our agent/system runs them | Section 9: only 16 real published QuixBugs hard-open task files run in a fresh offline copy by our own system; all 85 published test node ids are collected and invoked one at a time, answer keys absent, test bytes hashed, no model/network/$0, no known wins re-tested. |
+| Hardest open tests, no synthetic, integrity 100% real, only our agent/system runs them | Section 9: only the 16 real published QuixBugs task files frozen in the V2 admission set run in a fresh offline copy by our own system; all 85 published test node ids are collected and invoked one at a time, answer keys absent, test bytes hashed, no model/network/$0, no known wins re-tested. The current main union receipt reports 8 hard-open tasks after an external reclassification; zero external repair credit is taken here. |
 | Work in branch; merge once when complete and green | One branch, one complete PR, one merge only after the signed referee is green. |
 | Sentient creature / understand everything / not pattern matching | Sections 8 and 11 separate sentience from capability and operationalize understanding as counterfactual competence, not a consciousness claim. |
 
@@ -159,7 +159,7 @@ Frontier 2026 systems did not “solve all of those problems.” They improved b
 
 ## 9. Hardest-open-test integrity and honest report
 
-The new tool `canonical/tools/verified_index_and_calculated_parameter_admission_v1.py` runs **only** the 16 published QuixBugs hard-open task files from `canonical/verification/PROOF_CARRYING_COUNTERFACTUAL_UNION_20261116_V1.json`:
+The new tool `canonical/tools/verified_index_and_calculated_parameter_admission_v1.py` runs **only** the 16 published QuixBugs task files frozen in the V2 admission set. A later `main` PR (#6919) changed the live `PROOF_CARRYING_COUNTERFACTUAL_UNION_20261116_V1.json` receipt to report 8 hard-open tasks; this answer credits **zero external repair/reclassification** and keeps the frozen 16-task published set as the harder admission population. The current main union receipt is read only to record that change:
 
 `breadth_first_search`, `depth_first_search`, `detect_cycle`, `flatten`, `kheapsort`, `possible_change`, `powerset`, `reverse_linked_list`, `shortest_path_length`, `shortest_path_lengths`, `shortest_paths`, `shunting_yard`, `sqrt`, `subsequences`, `topological_ordering`, `wrap`.
 
@@ -175,7 +175,7 @@ Integrity rules enforced by the receipt:
 - per-task and per-node return codes and stdout tails are recorded; a failing or timing-out published test on a buggy program remains hard-open evidence, never a repair or capability;
 - collection errors, missing node ids, uninvoked tests, pytest usage errors, hidden skips, and harness failures are reported and credit zero.
 
-The measured hard-open run collected and invoked **85/85 real published test node ids**: **22 passes**, **63 failures including 6 genuine timeouts on the buggy `sqrt` program**, **0 skipped**, **0 harness/collection errors**, and **16/16 task files still hard-open**. The `sqrt` timeouts are isolated at the individual node id so that one non-terminating buggy test cannot hide the rest of the real test file. This is not a claim that the hard-open population shrank. It is the admission population for any future mechanism. A red hard-open test is an honest boundary; a green known win would be self-congratulation and is not run.
+The measured V2 frozen hard-open run collected and invoked **85/85 real published test node ids**: **22 passes**, **63 failures including 6 genuine timeouts on the buggy `sqrt` program**, **0 skipped**, **0 harness/collection errors**, and **16/16 frozen task files still in the V2 admission population**. The `sqrt` timeouts are isolated at the individual node id so that one non-terminating buggy test cannot hide the rest of the real test file. **Current-tree reconciliation:** the current main union receipt reports 8 hard-open tasks after PR #6919, and those 8 are a subset of the frozen 16; V2 takes **zero external repair credit** and does not claim the current hard-open population shrank because of this feature. It is the admission population for any future mechanism. A red hard-open test is an honest boundary; a green known win would be self-congratulation and is not run.
 
 ---
 
@@ -207,7 +207,7 @@ These sources support the direction — verifier-gated persistence, causal ident
 | one experience identifies a general rule | **false** | `5.5546 → 3.8176` bits, `0/10` exact after one, `10/10` after chosen questions |
 | instant learning in a new arbitrary environment is solved perfectly | **false** | it is an `(atom × state class)` cost law with honest refusals and premise-dependent basins |
 | most advanced actions once produce the best coding agent | **false** | action lists, repetition, and replay cannot supply missing observables, proposals, frames, or verifiers |
-| all computer use / all advanced SWE solved | **false** | 16 real hard-open task files and 85 real published test node ids remain; 22 passes, 63 failures/timeouts, 0 skips; proposal generator and per-step verifier remain open |
+| all computer use / all advanced SWE solved | **false** | 16 frozen V2 task files and 85 real published test node ids measured; current main union receipt reports 8 hard-open tasks but zero external repair credit; 22 passes, 63 failures/timeouts, 0 skips; proposal generator and per-step verifier remain open |
 | conventional pretraining or external-model distillation is the required next step | **false and forbidden here** | no external model; weight gate and weight fuel show the learning signal is thin; zero calculated bits pass |
 | any parameter is acceptable if calculated | **real principle, zero admitted now** | `b = C(s,o,I,V)` law; `0` new parameters; best part is no part |
 | instant knowledge source connected to our own model | **real, bounded** | `BRAIN_UNIFIED_MODEL_V1.json` compiled from the tree; zero external model calls |
@@ -223,7 +223,7 @@ These sources support the direction — verifier-gated persistence, causal ident
 3. **Author the hypothesis space and frame before spending interactions.** Convert intentions into predicates with `F`; choose observations that split survivors.
 4. **Name the missing observable, not a finer grid.** Add executed-function, callee-signature, runtime-traceback, content-field, or relation observables only when a real failure shows the index key is non-injective.
 5. **Generate proposals from live failure and verify by execution.** Use predict–prove–act; compose only steps whose premise and proof survive effects.
-6. **Run only hardest real open tests.** No synthetic tasks, no known wins, no external model, no network at run time, answer keys absent, test bytes hashed, every published node id collected and invoked, timeouts isolated, failures reported.
+6. **Run only hardest real open tests.** No synthetic tasks, no known wins, no external model, no network at run time, answer keys absent, test bytes hashed, every published node id collected and invoked, timeouts isolated, failures reported, zero external repair reclassification credit.
 7. **Admit one calculated bit only after the gate.** If no such bit passes, zero remains optimal.
 8. **Merge once when the complete feature and signed referee are green.** No duplicate PR, no `--admin`, no force-push, no workflow/check-run tampering.
 

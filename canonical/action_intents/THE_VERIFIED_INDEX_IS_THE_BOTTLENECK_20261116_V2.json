@@ -77,13 +77,15 @@
       "canonical/verification/WEIGHT_SPACE_FUEL_20261113_V1.json",
       "canonical/verification/WHY_WEIGHT_SPACE_IS_NOT_THE_MISSING_LAYER_20261112_V1.json",
       "canonical/verification/THE_INDEX_IS_THE_BOTTLENECK_20261116_V1.json",
-      "canonical/verification/COMPOSE_MEASURED_EFFECTS_20261116_V1.json"
+      "canonical/verification/COMPOSE_MEASURED_EFFECTS_20261116_V1.json",
+      "canonical/verification/SUITE_AS_OBSERVABLE_VERIFIER_ROOTS_20261116_V1.json",
+      "canonical/verification/COUNTERFACTUAL_REPAIR_QUIXBUGS_INSERTION_20261116_V1.json"
     ],
     "route_class": "COMPOSE"
   },
   "benchmark_or_family_rank_authority": null,
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::ONE_TRACE_IS_STORAGE_NOT_IDENTIFICATION__THE_INDEX_LACKS_THE_CAUSAL_OBSERVABLE__SYNTHESIS_VERIFICATION_ASYMMETRY_REMAINS__NO_CALCULATED_BIT_HAS_PASSED_THE_LIVE_VERIFIER_GATE",
-  "canonical_base_commit": "e9bfca97667e5293b1206fcda935732176fe6504",
+  "canonical_base_commit": "98f60e7c87db0c1b042afa7ed71c381005209da6",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -103,7 +105,7 @@
     "Work in branch, merge only when complete (fastest)",
     "Merge once, not 10 times."
   ],
-  "falsification_condition": "A known win counted as open progress; a synthetic task in the hard-open population; answer keys present in the fresh task copy; a published test node id not collected or invoked; a test file edited or a timeout plugin used; a real timeout hidden as a harness error; an external model called or its weights/outputs used; a parameter admitted without C(s,o,I,V), independent verification, zero regressions and a fresh proof; a knowledge-house weight claimed as instant knowledge; a screen-only pass, majority vote, web result or benchmark score credited as authority; one demonstration credited as a permanent rule; the verified index credited as a single sufficient lever; sentience, terminal truth, all computer use or advanced SWE claimed solved.",
+  "falsification_condition": "A known win counted as open progress; a synthetic task in the hard-open population; answer keys present in the fresh task copy; a published test node id not collected or invoked; a test file edited or a timeout plugin used; a real timeout hidden as a harness error; an external model called or its weights/outputs used; a parameter admitted without C(s,o,I,V), independent verification, zero regressions and a fresh proof; a knowledge-house weight claimed as instant knowledge; a screen-only pass, majority vote, web result or benchmark score credited as authority; one demonstration credited as a permanent rule; the verified index credited as a single sufficient lever; sentience, terminal truth, all computer use or advanced SWE claimed solved. Crediting an external repair reclassification as our capability, or treating the current main union receipt as authority for V2 capability, is also refused.",
   "generic_repair_from_single_probe": false,
   "governance_change": false,
   "highest_leverage_now": true,
@@ -115,7 +117,7 @@
     ],
     "expected_obligation_discharge_lcb": 0,
     "expected_obligation_unlock_lcb": "1/100",
-    "interpretation": "Speculative forecast only. The verified index is a necessary shared condition, not a single sufficient lever. No coding benchmark floor moves while 16 real hard-open task files and 85 real published test node ids remain, the index lacks the causal observable, no calculated parameter bit has passed the C(s,o,I,V) gate, and no independent verifier has signed the result. No obligation is discharged, no benchmark gain is claimed, and no capability or independent credit is claimed.",
+    "interpretation": "Speculative forecast only. The verified index is a necessary shared condition, not a single sufficient lever. No coding benchmark floor moves while 16 real hard-open task files and 85 real published test node ids remain, the index lacks the causal observable, no calculated parameter bit has passed the C(s,o,I,V) gate, and no independent verifier has signed the result. No obligation is discharged, no benchmark gain is claimed, and no capability or independent credit is claimed. Current main union receipt reports 8 hard-open tasks after PR #6919; zero external repair credit is claimed.",
     "open_obligation_ids": [],
     "scope_complete_discharge": false,
     "success_probability_lcb": "1/4",
@@ -294,9 +296,25 @@
     },
     "hard_open_run": {
       "answer_keys_absent": true,
+      "current_union_receipt_hard_open_count": 8,
+      "current_union_receipt_hard_open_tasks": [
+        "kheapsort",
+        "possible_change",
+        "powerset",
+        "shortest_path_length",
+        "shortest_path_lengths",
+        "shortest_paths",
+        "subsequences",
+        "topological_ordering"
+      ],
+      "external_repair_reclassification_credit": "ZERO",
       "failures_including_timeouts": 63,
+      "frozen_v2_population_count": 16,
+      "frozen_v2_population_source": "THE_VERIFIED_INDEX_IS_THE_BOTTLENECK_20261116_V2.md#9 and the union receipt at e9bfca97667e5293b1206fcda935732176fe6504",
       "harness_or_collection_errors": 0,
       "known_wins_retested": 0,
+      "no_external_repair_credit": true,
+      "no_known_win_retested_as_progress": true,
       "no_repair_or_capability_credit": true,
       "no_test_file_edits": true,
       "passes": 22,
@@ -311,7 +329,7 @@
       "test_bytes_hashed": true,
       "timeout_plugin_dependency": false
     },
-    "headline": "one demonstration is permanent storage, not identification; the three blockers are three projections of a verified index; no single sufficient lever unlocks all computer use; 16 hard-open task files and 85 published test node ids remain, with 22 passes, 63 failures/timeouts, 6 real timeouts, 0 skips and 0 harness errors; zero new parameters are admitted until every bit is calculated from live causal evidence and independently verified; facts stay in instant knowledge; authority NONE and terminal truth untouched",
+    "headline": "one demonstration is permanent storage, not identification; the three blockers are three projections of a verified index; no single sufficient lever unlocks all computer use; 16 frozen V2 task files and 85 published test node ids are measured with 22 passes, 63 failures/timeouts, 6 real timeouts, 0 skips and 0 harness errors; current main union receipt reports 8 hard-open tasks after PR #6919 but zero external repair credit; zero new parameters are admitted until every bit is calculated from live causal evidence and independently verified; facts stay in instant knowledge; authority NONE and terminal truth untouched",
     "identification": {
       "bits_after_one_demonstration_median": 10.018,
       "questions_to_sufficiency_mean": 1.31,
@@ -493,7 +511,9 @@
         "calling the verified index a single sufficient lever or terminal unlock",
         "claiming sentience, perfect understanding, all computer use or advanced SWE solved",
         "classifying a real published-test timeout as a harness-integrity failure",
-        "editing a test file or installing a timeout plugin to hide a non-terminating buggy program"
+        "editing a test file or installing a timeout plugin to hide a non-terminating buggy program",
+        "crediting an external repair reclassification as our capability",
+        "treating the current main union receipt as authority for V2 capability"
       ],
       "open_probe": "0/3",
       "reason": "An all-zero open-task result would be vacuous because the instrument also returned zero on five already-solved calibration tasks."
@@ -736,7 +756,9 @@
       "canonical/verification/VERIFIED_INDEX_AND_CALCULATED_PARAMETER_ADMISSION_20261116_V1.json",
       "canonical/verification/INSUFFICIENCY_CERTIFICATE_20261113_V1.json",
       "canonical/verification/WEIGHT_SPACE_FUEL_20261113_V1.json",
-      "canonical/verification/WHY_WEIGHT_SPACE_IS_NOT_THE_MISSING_LAYER_20261112_V1.json"
+      "canonical/verification/WHY_WEIGHT_SPACE_IS_NOT_THE_MISSING_LAYER_20261112_V1.json",
+      "canonical/verification/SUITE_AS_OBSERVABLE_VERIFIER_ROOTS_20261116_V1.json",
+      "canonical/verification/COUNTERFACTUAL_REPAIR_QUIXBUGS_INSERTION_20261116_V1.json"
     ],
     "screen_integrity": {
       "learned_arm_screen_disagreements": 0,
@@ -919,7 +941,7 @@
   ],
   "probe_specific": false,
   "recursive_obs": {
-    "canonical_base_commit": "e9bfca97667e5293b1206fcda935732176fe6504",
+    "canonical_base_commit": "98f60e7c87db0c1b042afa7ed71c381005209da6",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "conventional pretraining or knowledge-house weights before a calculated bit passes the gate",
@@ -995,7 +1017,7 @@
     "obs_obs": {
       "affected_layers_only_on_revalidation": true,
       "analysis_steps_deleted_or_cached": "Project, prior-work and 2026 web research were exhausted by effect; no new learner, verifier, planner, composer, weight house or external model was built.",
-      "search_stop_decision": "Stop after this fresh prompt re-read, the verified-index answer, the hard-open real-test receipt and the calculated-parameter admission law. Do not build weights, call an external model, retest known wins, or merge until the complete feature and signed referee are green."
+      "search_stop_decision": "Stop after this fresh prompt re-read, the verified-index answer, the hard-open real-test receipt and the calculated-parameter admission law. Do not build weights, call an external model, retest known wins, or merge until the complete feature and signed referee are green. Do not credit an external repair reclassification as V2 capability."
     },
     "obs_solution": {
       "deletion_first_order_applied": [
@@ -1164,7 +1186,7 @@
           "route": "COMPOSE_EXISTING_ORGANS_AND_ADMIT_ONLY_CALCULATED_BITS_AFTER_A_VERIFIED_INDEX_GATE"
         }
       ],
-      "checked_at_utc": "2026-11-17T04:06:35Z",
+      "checked_at_utc": "2026-11-17T04:17:19Z",
       "comparison_dimensions": [
         "CORRECTNESS",
         "CAPABILITY_STRENGTH",
@@ -1204,7 +1226,7 @@
       "selected_route": "COMPOSE_EXISTING_ORGANS_AND_ADMIT_ONLY_CALCULATED_BITS_AFTER_A_VERIFIED_INDEX_GATE",
       "selected_route_preflight": {
         "all_required_dependencies_ready": true,
-        "checked_at_utc": "2026-11-17T04:06:35Z",
+        "checked_at_utc": "2026-11-17T04:17:19Z",
         "execution_dependencies": [
           {
             "dependency": "local Python 3.11 runtime with pytest 9.2.0",
@@ -1354,7 +1376,7 @@
       "decisive_question": "Does one demonstration identify a permanent general rule, or does the verified index require a live causal split, a grounded proposer, a frame and an independent verifier?",
       "falsifier_id": "REAL_PUBLISHED_HARD_OPEN_TESTS_WITH_PER_NODE_TIMEOUT_ISOLATION",
       "known_counterexamples_checked": true,
-      "no_known_counterexample_reason": "The killed hidden CEGIS instrument, the contaminated QuixBugs-shown arm, the weight-gate interference result, the insufficiency certificate, the index sweep, the frame-composition result and the 16-task hard-open union are recorded in receipts rather than counted as counterexample receipts.",
+      "no_known_counterexample_reason": "The killed hidden CEGIS instrument, the contaminated QuixBugs-shown arm, the weight-gate interference result, the insufficiency certificate, the index sweep, the frame-composition result and the 16-task hard-open union are recorded in receipts rather than counted as counterexample receipts. PR #6919 later reclassified eight frozen V2 tasks in the live union receipt; that external change is recorded with zero credit.",
       "proposal_id": "VERIFIED_INDEX_AND_CALCULATED_PARAMETER_ADMISSION_20261116_V1"
     }
   },
@@ -1365,10 +1387,10 @@
       "/tmp/cgr_venv_cd864fc9/bin/python -m pytest -q canonical/tests/test_verified_index_and_calculated_parameter_admission_v1.py",
       "git archive HEAD | tar -x -C /tmp/clean_model && (cd /tmp/clean_model && python3 canonical/runtime/compile_brain_unified_model_v1.py --output canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json) && cp /tmp/clean_model/canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json",
       "python3 canonical/runtime/verify_brain_unified_model_v1.py",
-      "python3 execution_guard/repo_integrity_guard_v1.py --base e9bfca97667e5293b1206fcda935732176fe6504",
+      "python3 execution_guard/repo_integrity_guard_v1.py --base 98f60e7c87db0c1b042afa7ed71c381005209da6",
       "python3 execution_guard/agent_orientation_check_v1.py intent-check canonical/action_intents/THE_VERIFIED_INDEX_IS_THE_BOTTLENECK_20261116_V2.json",
-      "python3 canonical/runtime/enforce_goal_hierarchy.py --base e9bfca97667e5293b1206fcda935732176fe6504 --head HEAD",
-      "python3 execution_guard/enforce_load_bearing_primary_pr.py --base e9bfca97667e5293b1206fcda935732176fe6504 --head HEAD",
+      "python3 canonical/runtime/enforce_goal_hierarchy.py --base 98f60e7c87db0c1b042afa7ed71c381005209da6 --head HEAD",
+      "python3 execution_guard/enforce_load_bearing_primary_pr.py --base 98f60e7c87db0c1b042afa7ed71c381005209da6 --head HEAD",
       "git diff --check"
     ],
     "independent_verification_completed": false,
