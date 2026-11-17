@@ -48,6 +48,7 @@ const STEP_MS = 500;               // virtual time that passes after a reset and
 const EPOCH_MS = 1767225600000;    // 2026-01-01T00:00:00Z: every episode starts its clock here
 const VIEWPORT = { width: 480, height: 360, deviceScaleFactor: 1 };
 const REST_POINT = { x: VIEWPORT.width - 2, y: VIEWPORT.height - 2 };   // where the pointer waits between episodes
+let lastPoint = { x: REST_POINT.x, y: REST_POINT.y };   // where the pointer last WAS: proprioception the page never states
 const KEY_EVENTS_UP_TO = 32;       // longer text is inserted in one piece, except its last character
 const COMMAND_TIMEOUT_MS = 15000;
 const DRAG_STEPS = 12;             // pointer positions the page is told of between the two ends of a drag
@@ -67,7 +68,16 @@ const PAGE_CONFIG = {
   attrs: ['type', 'name', 'for', 'placeholder', 'title', 'alt', 'href', 'role', 'aria-label', 'data-value', 'data-index',
           'min', 'max', 'step', 'aria-valuemin', 'aria-valuemax', 'aria-valuenow'],
   aimGrid: 7,                      // a covered middle: this many points each way across the element are tried
+  // The page's OWN geometry, offered exactly as the element states it. `box` stays rounded --
+  // every measured behaviour of the shipped hand depends on it -- while `box_f` carries the
+  // unrounded layout rectangle and `geom` the geometry attributes (cx/cy/r/points/...). The
+  // score frames of the point pages compare against these exact numbers; Math.round throws
+  // them away, which is why a press at the visually correct point still cannot reach FULL_REWARD.
+  geomAttrs: ['cx', 'cy', 'r', 'rx', 'ry', 'x', 'y', 'x1', 'y1', 'x2', 'y2', 'dx', 'dy',
+              'width', 'height', 'points'],
+  geomNumeric: '^[-+0-9.eE, ]+$',
 };
+
 
 function packageAt(name) {
   const base = path.join(modulesDir, 'node_modules', name);
@@ -210,6 +220,16 @@ function inPage(cfg) {
       if (colour) rec.colour = String(colour).slice(0, 60);
       const r = el.getBoundingClientRect();
       rec.box = [Math.round(r.left), Math.round(r.top), Math.round(r.width), Math.round(r.height)];
+      // additive, never a replacement: the unrounded rectangle and whatever geometry the page
+      // states on the element itself, so a derivation can read the numbers the score compares to
+      rec.box_f = [r.left, r.top, r.width, r.height];
+      const geom = {};
+      const geomNumeric = new RegExp(cfg.geomNumeric);
+      for (const a of cfg.geomAttrs) {
+        const v = el.getAttribute && el.getAttribute(a);
+        if (v && geomNumeric.test(v)) geom[a] = v.slice(0, 120);
+      }
+      if (Object.keys(geom).length) rec.geom = geom;
       out.push(rec);
       current.push(el);
       let own = '', kids = 0;
@@ -500,8 +520,10 @@ async function act(action) {
     if (!(Number.isFinite(x) && Number.isFinite(y)) || x < 0 || y < 0 || x > VIEWPORT.width || y > VIEWPORT.height) {
       problem = 'POINT_IS_NOT_IN_THE_WINDOW';
     } else if (kind === 'pressat') {
+      lastPoint = { x, y };
       await page.mouse.click(x, y);
     } else if (kind === 'moveat') {
+      lastPoint = { x, y };
       await page.mouse.move(x, y, { steps: 2 });
     } else {
       // Letting go AT a place: the hand releases just past the point on the line it came along, the same
@@ -509,6 +531,7 @@ async function act(action) {
       const dx = x - heldAt.x, dy = y - heldAt.y, far = Math.hypot(dx, dy);
       let tx = x, ty = y;
       if (far > 0) { tx += dx / far * DROP_PAST_MIN_PX; ty += dy / far * DROP_PAST_MIN_PX; }
+      lastPoint = { x: tx, y: ty };
       await page.mouse.move(tx, ty, { steps: DRAG_STEPS });
       await page.mouse.up();
       held = false; heldAt = null;
@@ -518,10 +541,11 @@ async function act(action) {
     const aim = await page.evaluate((i, how) => window.__bridge.aim(i, how), action.index, kind);
     if (aim.error) problem = aim.error;
     else if (aim.handled) { /* an option of a drop-down: the page has been told */ }
-    else if (kind === 'click' || typing) await page.mouse.click(aim.x, aim.y);
-    else if (kind === 'triple') await page.mouse.click(aim.x, aim.y, { count: 3 });
-    else if (kind === 'hover') await page.mouse.move(aim.x, aim.y, { steps: 2 });
+    else if (kind === 'click' || typing) { lastPoint = { x: aim.x, y: aim.y }; await page.mouse.click(aim.x, aim.y); }
+    else if (kind === 'triple') { lastPoint = { x: aim.x, y: aim.y }; await page.mouse.click(aim.x, aim.y, { count: 3 }); }
+    else if (kind === 'hover') { lastPoint = { x: aim.x, y: aim.y }; await page.mouse.move(aim.x, aim.y, { steps: 2 }); }
     else if (kind === 'grab') {
+      lastPoint = { x: aim.x, y: aim.y };
       await page.mouse.move(aim.x, aim.y);
       await page.mouse.down();
       held = true; heldAt = { x: aim.x, y: aim.y };
@@ -587,6 +611,9 @@ rl.on('line', (line) => {
       if (msg.cmd === 'close') { process.stdout.write('{"closed":true}\n'); shutdown(0); }
       reply = await handle(msg);
     } catch (e) { reply = { error: 'BRIDGE_EXCEPTION: ' + String((e && e.message) || e).slice(0, 300) }; }
+    if (reply && typeof reply === 'object' && Array.isArray(reply.elements)) {
+      reply.pointer = [lastPoint.x, lastPoint.y];   // the creature's own state, additively
+    }
     process.stdout.write(JSON.stringify(reply) + '\n');
   });
 });

@@ -1,0 +1,3552 @@
+{
+ "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+ "ceiling_probes": [
+  {
+   "best_action": "pressat@59,118",
+   "best_reward": 0.9808890059138772,
+   "kind": "ceiling",
+   "label": "ceiling_window",
+   "probed": 10,
+   "seconds": 0.5,
+   "seed": 1060,
+   "skipped_button": 0,
+   "task": "circle-center"
+  },
+  {
+   "best_action": null,
+   "best_reward": null,
+   "kind": "arm_probe",
+   "label": "arm_A_shipped_hand",
+   "probed": 0,
+   "seconds": 0.0,
+   "seed": 1060,
+   "skipped_button": 0,
+   "task": "circle-center"
+  },
+  {
+   "best_action": "pressat@59,119",
+   "best_reward": 0.9808890059138772,
+   "kind": "arm_probe",
+   "label": "arm_G2_exact_geometry",
+   "probed": 5,
+   "seconds": 0.2,
+   "seed": 1060,
+   "skipped_button": 0,
+   "task": "circle-center"
+  },
+  {
+   "best_action": "pressat@94,119",
+   "best_reward": 0.9833333333333333,
+   "kind": "ceiling",
+   "label": "ceiling_window",
+   "probed": 15,
+   "seconds": 0.7,
+   "seed": 1060,
+   "skipped_button": 0,
+   "task": "find-midpoint"
+  },
+  {
+   "best_action": null,
+   "best_reward": null,
+   "kind": "arm_probe",
+   "label": "arm_A_shipped_hand",
+   "probed": 0,
+   "seconds": 0.0,
+   "seed": 1060,
+   "skipped_button": 0,
+   "task": "find-midpoint"
+  },
+  {
+   "best_action": "pressat@94,119",
+   "best_reward": 0.9833333333333333,
+   "kind": "arm_probe",
+   "label": "arm_G2_exact_geometry",
+   "probed": 4,
+   "seconds": 0.2,
+   "seed": 1060,
+   "skipped_button": 0,
+   "task": "find-midpoint"
+  },
+  {
+   "best_action": "pressat@25,96",
+   "best_reward": 0.9999239675421785,
+   "kind": "ceiling",
+   "label": "ceiling_window",
+   "probed": 72,
+   "seconds": 4.3,
+   "seed": 1060,
+   "skipped_button": 24,
+   "task": "right-angle"
+  },
+  {
+   "best_action": null,
+   "best_reward": null,
+   "kind": "arm_probe",
+   "label": "arm_A_shipped_hand",
+   "probed": 0,
+   "seconds": 0.0,
+   "seed": 1060,
+   "skipped_button": 0,
+   "task": "right-angle"
+  },
+  {
+   "best_action": "pressat@26,97",
+   "best_reward": 0.9999222781382975,
+   "kind": "arm_probe",
+   "label": "arm_G2_exact_geometry",
+   "probed": 16,
+   "seconds": 0.9,
+   "seed": 1060,
+   "skipped_button": 4,
+   "task": "right-angle"
+  }
+ ],
+ "generated_utc": "2026-11-17T15:33:00Z",
+ "incremental_spend_usd": 0,
+ "kind": "receipt",
+ "pages": [
+  {
+   "arms": {
+    "A_shipped_hand": {
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 3.7,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    },
+    "D2_decoy_geometry": {
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 4.3,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    },
+    "G2_exact_geometry": {
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 3.9,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    }
+   },
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 3920,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "kind": "page",
+   "seconds": 12.0,
+   "seed": 1060,
+   "task": "circle-center"
+  },
+  {
+   "arms": {
+    "A_shipped_hand": {
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 4.1,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    },
+    "D2_decoy_geometry": {
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 5.7,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    },
+    "G2_exact_geometry": {
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 4.5,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    }
+   },
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 3920,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "kind": "page",
+   "seconds": 14.4,
+   "seed": 1060,
+   "task": "find-midpoint"
+  },
+  {
+   "arms": {
+    "A_shipped_hand": {
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 3.9,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    },
+    "D2_decoy_geometry": {
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 6.0,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    },
+    "G2_exact_geometry": {
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 5.7,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    }
+   },
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 3920,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "kind": "page",
+   "seconds": 15.6,
+   "seed": 1060,
+   "task": "right-angle"
+  },
+  {
+   "arms": {
+    "A_shipped_hand": {
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 19.0,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    },
+    "D2_decoy_geometry": {
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 19.3,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    },
+    "G2_exact_geometry": {
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 19.9,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    }
+   },
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 3920,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "kind": "page",
+   "seconds": 58.3,
+   "seed": 1060,
+   "task": "draw-circle"
+  },
+  {
+   "arms": {
+    "A_shipped_hand": {
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 4.3,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    },
+    "D2_decoy_geometry": {
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 4.0,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    },
+    "G2_exact_geometry": {
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 4.1,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    }
+   },
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 3920,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "kind": "page",
+   "seconds": 12.5,
+   "seed": 1060,
+   "task": "bisect-angle"
+  },
+  {
+   "arms": {
+    "A_shipped_hand": {
+     "budget_spent": 2,
+     "pass": true,
+     "plan_len": 2,
+     "rule": null,
+     "seconds": 0.1,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    },
+    "D2_decoy_geometry": {
+     "budget_spent": 2,
+     "pass": true,
+     "plan_len": 2,
+     "rule": null,
+     "seconds": 0.2,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    },
+    "G2_exact_geometry": {
+     "budget_spent": 2,
+     "pass": true,
+     "plan_len": 2,
+     "rule": null,
+     "seconds": 0.1,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    }
+   },
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 3920,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "kind": "page",
+   "seconds": 0.5,
+   "seed": 1060,
+   "task": "click-button"
+  },
+  {
+   "arms": {
+    "A_shipped_hand": {
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 7.6,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    },
+    "D2_decoy_geometry": {
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 7.3,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    },
+    "G2_exact_geometry": {
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 7.3,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    }
+   },
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 3920,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "kind": "page",
+   "seconds": 22.3,
+   "seed": 1060,
+   "task": "simple-arithmetic"
+  },
+  {
+   "arms": {
+    "A_shipped_hand": {
+     "budget_spent": 3,
+     "pass": true,
+     "plan_len": 3,
+     "rule": null,
+     "seconds": 0.2,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    },
+    "D2_decoy_geometry": {
+     "budget_spent": 3,
+     "pass": true,
+     "plan_len": 3,
+     "rule": null,
+     "seconds": 0.2,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    },
+    "G2_exact_geometry": {
+     "budget_spent": 7,
+     "pass": true,
+     "plan_len": 3,
+     "rule": null,
+     "seconds": 0.3,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    }
+   },
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 3920,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "kind": "page",
+   "seconds": 0.8,
+   "seed": 1060,
+   "task": "search-engine"
+  },
+  {
+   "arms": {
+    "A_shipped_hand": {
+     "budget_spent": 174,
+     "pass": true,
+     "plan_len": 4,
+     "rule": null,
+     "seconds": 4.8,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    },
+    "D2_decoy_geometry": {
+     "budget_spent": 174,
+     "pass": true,
+     "plan_len": 4,
+     "rule": null,
+     "seconds": 4.7,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    },
+    "G2_exact_geometry": {
+     "budget_spent": 174,
+     "pass": true,
+     "plan_len": 4,
+     "rule": null,
+     "seconds": 4.8,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    }
+   },
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 3920,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "kind": "page",
+   "seconds": 14.4,
+   "seed": 1060,
+   "task": "email-inbox"
+  },
+  {
+   "arms": {
+    "A_shipped_hand": {
+     "budget_spent": 2,
+     "pass": true,
+     "plan_len": 2,
+     "rule": {
+      "rule": "FINALIZE_BUTTON",
+      "witness": {
+       "element": 9
+      }
+     },
+     "seconds": 0.2,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    },
+    "D2_decoy_geometry": {
+     "budget_spent": 2,
+     "pass": true,
+     "plan_len": 2,
+     "rule": {
+      "rule": "FINALIZE_BUTTON",
+      "witness": {
+       "element": 9
+      }
+     },
+     "seconds": 0.1,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    },
+    "G2_exact_geometry": {
+     "budget_spent": 24,
+     "pass": true,
+     "plan_len": 2,
+     "rule": {
+      "rule": "FINALIZE_BUTTON",
+      "witness": {
+       "element": 9
+      }
+     },
+     "seconds": 0.4,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    }
+   },
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 3920,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "kind": "page",
+   "seconds": 0.8,
+   "seed": 1060,
+   "task": "choose-list"
+  },
+  {
+   "arms": {
+    "A_shipped_hand": {
+     "budget_spent": 11,
+     "pass": true,
+     "plan_len": 1,
+     "rule": null,
+     "seconds": 0.4,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    },
+    "D2_decoy_geometry": {
+     "budget_spent": 11,
+     "pass": true,
+     "plan_len": 1,
+     "rule": null,
+     "seconds": 0.3,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    },
+    "G2_exact_geometry": {
+     "budget_spent": 11,
+     "pass": true,
+     "plan_len": 1,
+     "rule": null,
+     "seconds": 0.3,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    }
+   },
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 3920,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "kind": "page",
+   "seconds": 1.1,
+   "seed": 1060,
+   "task": "buy-ticket"
+  },
+  {
+   "arms": {
+    "A_shipped_hand": {
+     "budget_spent": 2,
+     "pass": true,
+     "plan_len": 2,
+     "rule": null,
+     "seconds": 0.1,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    },
+    "D2_decoy_geometry": {
+     "budget_spent": 2,
+     "pass": true,
+     "plan_len": 2,
+     "rule": null,
+     "seconds": 0.1,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    },
+    "G2_exact_geometry": {
+     "budget_spent": 2,
+     "pass": true,
+     "plan_len": 2,
+     "rule": null,
+     "seconds": 0.1,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    }
+   },
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 3920,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "kind": "page",
+   "seconds": 0.5,
+   "seed": 1060,
+   "task": "unicode-test"
+  },
+  {
+   "arms": {
+    "A_shipped_hand": {
+     "budget_spent": 6,
+     "pass": true,
+     "plan_len": 4,
+     "rule": null,
+     "seconds": 0.2,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    },
+    "D2_decoy_geometry": {
+     "budget_spent": 6,
+     "pass": true,
+     "plan_len": 4,
+     "rule": null,
+     "seconds": 0.2,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    },
+    "G2_exact_geometry": {
+     "budget_spent": 6,
+     "pass": true,
+     "plan_len": 4,
+     "rule": null,
+     "seconds": 0.2,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    }
+   },
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 3920,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "kind": "page",
+   "seconds": 0.7,
+   "seed": 1060,
+   "task": "login-user"
+  },
+  {
+   "arms": {
+    "A_shipped_hand": {
+     "budget_spent": 362,
+     "pass": true,
+     "plan_len": 3,
+     "rule": null,
+     "seconds": 11.7,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    },
+    "D2_decoy_geometry": {
+     "budget_spent": 362,
+     "pass": true,
+     "plan_len": 3,
+     "rule": null,
+     "seconds": 11.7,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    },
+    "G2_exact_geometry": {
+     "budget_spent": 362,
+     "pass": true,
+     "plan_len": 3,
+     "rule": null,
+     "seconds": 11.7,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    }
+   },
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 3920,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "kind": "page",
+   "seconds": 35.1,
+   "seed": 1060,
+   "task": "drag-shapes"
+  },
+  {
+   "arms": {
+    "A_shipped_hand": {
+     "budget_spent": 270,
+     "pass": true,
+     "plan_len": 3,
+     "rule": {
+      "rule": "RECORD_MATCHING_ALL_WORDS",
+      "witness": {
+       "element": 18,
+       "words": [
+        "language"
+       ]
+      }
+     },
+     "seconds": 4.8,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    },
+    "D2_decoy_geometry": {
+     "budget_spent": 270,
+     "pass": true,
+     "plan_len": 3,
+     "rule": {
+      "rule": "RECORD_MATCHING_ALL_WORDS",
+      "witness": {
+       "element": 18,
+       "words": [
+        "language"
+       ]
+      }
+     },
+     "seconds": 4.9,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    },
+    "G2_exact_geometry": {
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 7.2,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    }
+   },
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 3920,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "kind": "page",
+   "seconds": 17.0,
+   "seed": 1060,
+   "task": "read-table"
+  },
+  {
+   "arms": {
+    "A_shipped_hand": {
+     "budget_spent": 54,
+     "pass": true,
+     "plan_len": 10,
+     "rule": {
+      "rule": "RECORD_MATCHING_ALL_WORDS",
+      "witness": {
+       "element": 25,
+       "words": [
+        "6ft",
+        "1in"
+       ]
+      }
+     },
+     "seconds": 1.1,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    },
+    "D2_decoy_geometry": {
+     "budget_spent": 54,
+     "pass": true,
+     "plan_len": 10,
+     "rule": {
+      "rule": "RECORD_MATCHING_ALL_WORDS",
+      "witness": {
+       "element": 25,
+       "words": [
+        "6ft",
+        "1in"
+       ]
+      }
+     },
+     "seconds": 1.2,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    },
+    "G2_exact_geometry": {
+     "budget_spent": 54,
+     "pass": true,
+     "plan_len": 10,
+     "rule": {
+      "rule": "RECORD_MATCHING_ALL_WORDS",
+      "witness": {
+       "element": 25,
+       "words": [
+        "6ft",
+        "1in"
+       ]
+      }
+     },
+     "seconds": 1.1,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    }
+   },
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 3920,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "kind": "page",
+   "seconds": 3.5,
+   "seed": 1060,
+   "task": "form-sequence-3"
+  },
+  {
+   "arms": {
+    "A_shipped_hand": {
+     "budget_spent": 151,
+     "pass": true,
+     "plan_len": 5,
+     "rule": null,
+     "seconds": 2.5,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    },
+    "D2_decoy_geometry": {
+     "budget_spent": 151,
+     "pass": true,
+     "plan_len": 5,
+     "rule": null,
+     "seconds": 2.5,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    },
+    "G2_exact_geometry": {
+     "budget_spent": 151,
+     "pass": true,
+     "plan_len": 5,
+     "rule": null,
+     "seconds": 2.4,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    }
+   },
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 3920,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "kind": "page",
+   "seconds": 7.5,
+   "seed": 1060,
+   "task": "phone-book"
+  },
+  {
+   "arms": {
+    "A_shipped_hand": {
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 3.7,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    },
+    "D2_decoy_geometry": {
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 5.5,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    },
+    "G2_exact_geometry": {
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 4.7,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    }
+   },
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 6636,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "kind": "page",
+   "seconds": 14.0,
+   "seed": 1060,
+   "task": "circle-center"
+  },
+  {
+   "arms": {
+    "A_shipped_hand": {
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 6.5,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    },
+    "D2_decoy_geometry": {
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 5.6,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    },
+    "G2_exact_geometry": {
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 5.9,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    }
+   },
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 6636,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "kind": "page",
+   "seconds": 18.1,
+   "seed": 1060,
+   "task": "find-midpoint"
+  },
+  {
+   "arms": {
+    "A_shipped_hand": {
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 3.8,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    },
+    "D2_decoy_geometry": {
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 6.2,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    },
+    "G2_exact_geometry": {
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 6.0,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    }
+   },
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 6636,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "kind": "page",
+   "seconds": 16.1,
+   "seed": 1060,
+   "task": "right-angle"
+  },
+  {
+   "arms": {
+    "A_shipped_hand": {
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 19.3,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    },
+    "D2_decoy_geometry": {
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 19.0,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    },
+    "G2_exact_geometry": {
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 20.1,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    }
+   },
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 6636,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "kind": "page",
+   "seconds": 58.5,
+   "seed": 1060,
+   "task": "draw-circle"
+  },
+  {
+   "arms": {
+    "A_shipped_hand": {
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 3.9,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    },
+    "D2_decoy_geometry": {
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 3.9,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    },
+    "G2_exact_geometry": {
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 4.1,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    }
+   },
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 6636,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "kind": "page",
+   "seconds": 11.9,
+   "seed": 1060,
+   "task": "bisect-angle"
+  },
+  {
+   "arms": {
+    "A_shipped_hand": {
+     "budget_spent": 2,
+     "pass": true,
+     "plan_len": 2,
+     "rule": null,
+     "seconds": 0.1,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    },
+    "D2_decoy_geometry": {
+     "budget_spent": 2,
+     "pass": true,
+     "plan_len": 2,
+     "rule": null,
+     "seconds": 0.2,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    },
+    "G2_exact_geometry": {
+     "budget_spent": 2,
+     "pass": true,
+     "plan_len": 2,
+     "rule": null,
+     "seconds": 0.1,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    }
+   },
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 6636,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "kind": "page",
+   "seconds": 0.5,
+   "seed": 1060,
+   "task": "click-button"
+  },
+  {
+   "arms": {
+    "A_shipped_hand": {
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 7.3,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    },
+    "D2_decoy_geometry": {
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 6.9,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    },
+    "G2_exact_geometry": {
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 7.3,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    }
+   },
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 6636,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "kind": "page",
+   "seconds": 21.6,
+   "seed": 1060,
+   "task": "simple-arithmetic"
+  },
+  {
+   "arms": {
+    "A_shipped_hand": {
+     "budget_spent": 3,
+     "pass": true,
+     "plan_len": 3,
+     "rule": null,
+     "seconds": 0.3,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    },
+    "D2_decoy_geometry": {
+     "budget_spent": 3,
+     "pass": true,
+     "plan_len": 3,
+     "rule": null,
+     "seconds": 0.2,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    },
+    "G2_exact_geometry": {
+     "budget_spent": 3,
+     "pass": true,
+     "plan_len": 3,
+     "rule": null,
+     "seconds": 0.2,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    }
+   },
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 6636,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "kind": "page",
+   "seconds": 0.7,
+   "seed": 1060,
+   "task": "search-engine"
+  },
+  {
+   "arms": {
+    "A_shipped_hand": {
+     "budget_spent": 174,
+     "pass": true,
+     "plan_len": 4,
+     "rule": null,
+     "seconds": 4.2,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    },
+    "D2_decoy_geometry": {
+     "budget_spent": 174,
+     "pass": true,
+     "plan_len": 4,
+     "rule": null,
+     "seconds": 4.2,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    },
+    "G2_exact_geometry": {
+     "budget_spent": 144,
+     "pass": true,
+     "plan_len": 4,
+     "rule": null,
+     "seconds": 3.7,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    }
+   },
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 6636,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "kind": "page",
+   "seconds": 12.2,
+   "seed": 1060,
+   "task": "email-inbox"
+  },
+  {
+   "arms": {
+    "A_shipped_hand": {
+     "budget_spent": 2,
+     "pass": true,
+     "plan_len": 2,
+     "rule": {
+      "rule": "FINALIZE_BUTTON",
+      "witness": {
+       "element": 9
+      }
+     },
+     "seconds": 0.1,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    },
+    "D2_decoy_geometry": {
+     "budget_spent": 2,
+     "pass": true,
+     "plan_len": 2,
+     "rule": {
+      "rule": "FINALIZE_BUTTON",
+      "witness": {
+       "element": 9
+      }
+     },
+     "seconds": 0.1,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    },
+    "G2_exact_geometry": {
+     "budget_spent": 24,
+     "pass": true,
+     "plan_len": 2,
+     "rule": {
+      "rule": "FINALIZE_BUTTON",
+      "witness": {
+       "element": 9
+      }
+     },
+     "seconds": 0.4,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    }
+   },
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 6636,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "kind": "page",
+   "seconds": 0.7,
+   "seed": 1060,
+   "task": "choose-list"
+  },
+  {
+   "arms": {
+    "A_shipped_hand": {
+     "budget_spent": 11,
+     "pass": true,
+     "plan_len": 1,
+     "rule": null,
+     "seconds": 0.4,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    },
+    "D2_decoy_geometry": {
+     "budget_spent": 11,
+     "pass": true,
+     "plan_len": 1,
+     "rule": null,
+     "seconds": 0.3,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    },
+    "G2_exact_geometry": {
+     "budget_spent": 11,
+     "pass": true,
+     "plan_len": 1,
+     "rule": null,
+     "seconds": 0.3,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    }
+   },
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 6636,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "kind": "page",
+   "seconds": 1.1,
+   "seed": 1060,
+   "task": "buy-ticket"
+  },
+  {
+   "arms": {
+    "A_shipped_hand": {
+     "budget_spent": 2,
+     "pass": true,
+     "plan_len": 2,
+     "rule": null,
+     "seconds": 0.1,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    },
+    "D2_decoy_geometry": {
+     "budget_spent": 2,
+     "pass": true,
+     "plan_len": 2,
+     "rule": null,
+     "seconds": 0.2,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    },
+    "G2_exact_geometry": {
+     "budget_spent": 2,
+     "pass": true,
+     "plan_len": 2,
+     "rule": null,
+     "seconds": 0.2,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    }
+   },
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 6636,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "kind": "page",
+   "seconds": 0.5,
+   "seed": 1060,
+   "task": "unicode-test"
+  },
+  {
+   "arms": {
+    "A_shipped_hand": {
+     "budget_spent": 6,
+     "pass": true,
+     "plan_len": 4,
+     "rule": null,
+     "seconds": 0.2,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    },
+    "D2_decoy_geometry": {
+     "budget_spent": 6,
+     "pass": true,
+     "plan_len": 4,
+     "rule": null,
+     "seconds": 0.2,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    },
+    "G2_exact_geometry": {
+     "budget_spent": 6,
+     "pass": true,
+     "plan_len": 4,
+     "rule": null,
+     "seconds": 0.2,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    }
+   },
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 6636,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "kind": "page",
+   "seconds": 0.7,
+   "seed": 1060,
+   "task": "login-user"
+  },
+  {
+   "arms": {
+    "A_shipped_hand": {
+     "budget_spent": 362,
+     "pass": true,
+     "plan_len": 3,
+     "rule": null,
+     "seconds": 11.2,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    },
+    "D2_decoy_geometry": {
+     "budget_spent": 362,
+     "pass": true,
+     "plan_len": 3,
+     "rule": null,
+     "seconds": 11.3,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    },
+    "G2_exact_geometry": {
+     "budget_spent": 362,
+     "pass": true,
+     "plan_len": 3,
+     "rule": null,
+     "seconds": 11.4,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    }
+   },
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 6636,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "kind": "page",
+   "seconds": 34.0,
+   "seed": 1060,
+   "task": "drag-shapes"
+  },
+  {
+   "arms": {
+    "A_shipped_hand": {
+     "budget_spent": 270,
+     "pass": true,
+     "plan_len": 3,
+     "rule": {
+      "rule": "RECORD_MATCHING_ALL_WORDS",
+      "witness": {
+       "element": 18,
+       "words": [
+        "language"
+       ]
+      }
+     },
+     "seconds": 4.6,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    },
+    "D2_decoy_geometry": {
+     "budget_spent": 270,
+     "pass": true,
+     "plan_len": 3,
+     "rule": {
+      "rule": "RECORD_MATCHING_ALL_WORDS",
+      "witness": {
+       "element": 18,
+       "words": [
+        "language"
+       ]
+      }
+     },
+     "seconds": 4.6,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    },
+    "G2_exact_geometry": {
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 7.3,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    }
+   },
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 6636,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "kind": "page",
+   "seconds": 16.5,
+   "seed": 1060,
+   "task": "read-table"
+  },
+  {
+   "arms": {
+    "A_shipped_hand": {
+     "budget_spent": 54,
+     "pass": true,
+     "plan_len": 10,
+     "rule": {
+      "rule": "RECORD_MATCHING_ALL_WORDS",
+      "witness": {
+       "element": 25,
+       "words": [
+        "6ft",
+        "1in"
+       ]
+      }
+     },
+     "seconds": 1.1,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    },
+    "D2_decoy_geometry": {
+     "budget_spent": 54,
+     "pass": true,
+     "plan_len": 10,
+     "rule": {
+      "rule": "RECORD_MATCHING_ALL_WORDS",
+      "witness": {
+       "element": 25,
+       "words": [
+        "6ft",
+        "1in"
+       ]
+      }
+     },
+     "seconds": 1.2,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    },
+    "G2_exact_geometry": {
+     "budget_spent": 57,
+     "pass": true,
+     "plan_len": 15,
+     "rule": null,
+     "seconds": 1.3,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    }
+   },
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 6636,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "kind": "page",
+   "seconds": 3.6,
+   "seed": 1060,
+   "task": "form-sequence-3"
+  },
+  {
+   "arms": {
+    "A_shipped_hand": {
+     "budget_spent": 151,
+     "pass": true,
+     "plan_len": 5,
+     "rule": null,
+     "seconds": 2.5,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    },
+    "D2_decoy_geometry": {
+     "budget_spent": 151,
+     "pass": true,
+     "plan_len": 5,
+     "rule": null,
+     "seconds": 2.5,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    },
+    "G2_exact_geometry": {
+     "budget_spent": 151,
+     "pass": true,
+     "plan_len": 5,
+     "rule": null,
+     "seconds": 2.5,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    }
+   },
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 6636,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "kind": "page",
+   "seconds": 7.5,
+   "seed": 1060,
+   "task": "phone-book"
+  },
+  {
+   "arms": {
+    "A_shipped_hand": {
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 4.1,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    },
+    "D2_decoy_geometry": {
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 4.4,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    },
+    "G2_exact_geometry": {
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 4.0,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    }
+   },
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 9917,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "kind": "page",
+   "seconds": 12.6,
+   "seed": 1060,
+   "task": "circle-center"
+  },
+  {
+   "arms": {
+    "A_shipped_hand": {
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 4.4,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    },
+    "D2_decoy_geometry": {
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 5.6,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    },
+    "G2_exact_geometry": {
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 4.6,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    }
+   },
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 9917,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "kind": "page",
+   "seconds": 14.7,
+   "seed": 1060,
+   "task": "find-midpoint"
+  },
+  {
+   "arms": {
+    "A_shipped_hand": {
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 4.0,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    },
+    "D2_decoy_geometry": {
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 6.1,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    },
+    "G2_exact_geometry": {
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 5.8,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    }
+   },
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 9917,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "kind": "page",
+   "seconds": 15.9,
+   "seed": 1060,
+   "task": "right-angle"
+  },
+  {
+   "arms": {
+    "A_shipped_hand": {
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 19.2,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    },
+    "D2_decoy_geometry": {
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 19.1,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    },
+    "G2_exact_geometry": {
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 19.1,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    }
+   },
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 9917,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "kind": "page",
+   "seconds": 57.5,
+   "seed": 1060,
+   "task": "draw-circle"
+  },
+  {
+   "arms": {
+    "A_shipped_hand": {
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 3.9,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    },
+    "D2_decoy_geometry": {
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 3.9,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    },
+    "G2_exact_geometry": {
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 4.3,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    }
+   },
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 9917,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "kind": "page",
+   "seconds": 12.2,
+   "seed": 1060,
+   "task": "bisect-angle"
+  },
+  {
+   "arms": {
+    "A_shipped_hand": {
+     "budget_spent": 2,
+     "pass": true,
+     "plan_len": 2,
+     "rule": null,
+     "seconds": 0.2,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    },
+    "D2_decoy_geometry": {
+     "budget_spent": 2,
+     "pass": true,
+     "plan_len": 2,
+     "rule": null,
+     "seconds": 0.1,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    },
+    "G2_exact_geometry": {
+     "budget_spent": 2,
+     "pass": true,
+     "plan_len": 2,
+     "rule": null,
+     "seconds": 0.2,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    }
+   },
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 9917,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "kind": "page",
+   "seconds": 0.5,
+   "seed": 1060,
+   "task": "click-button"
+  },
+  {
+   "arms": {
+    "A_shipped_hand": {
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 7.5,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    },
+    "D2_decoy_geometry": {
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 7.4,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    },
+    "G2_exact_geometry": {
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 7.4,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    }
+   },
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 9917,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "kind": "page",
+   "seconds": 22.4,
+   "seed": 1060,
+   "task": "simple-arithmetic"
+  },
+  {
+   "arms": {
+    "A_shipped_hand": {
+     "budget_spent": 3,
+     "pass": true,
+     "plan_len": 3,
+     "rule": null,
+     "seconds": 0.2,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    },
+    "D2_decoy_geometry": {
+     "budget_spent": 3,
+     "pass": true,
+     "plan_len": 3,
+     "rule": null,
+     "seconds": 0.2,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    },
+    "G2_exact_geometry": {
+     "budget_spent": 3,
+     "pass": true,
+     "plan_len": 3,
+     "rule": null,
+     "seconds": 0.2,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    }
+   },
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 9917,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "kind": "page",
+   "seconds": 0.7,
+   "seed": 1060,
+   "task": "search-engine"
+  },
+  {
+   "arms": {
+    "A_shipped_hand": {
+     "budget_spent": 174,
+     "pass": true,
+     "plan_len": 4,
+     "rule": null,
+     "seconds": 4.1,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    },
+    "D2_decoy_geometry": {
+     "budget_spent": 174,
+     "pass": true,
+     "plan_len": 4,
+     "rule": null,
+     "seconds": 4.2,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    },
+    "G2_exact_geometry": {
+     "budget_spent": 144,
+     "pass": true,
+     "plan_len": 4,
+     "rule": null,
+     "seconds": 3.6,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    }
+   },
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 9917,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "kind": "page",
+   "seconds": 12.0,
+   "seed": 1060,
+   "task": "email-inbox"
+  },
+  {
+   "arms": {
+    "A_shipped_hand": {
+     "budget_spent": 2,
+     "pass": true,
+     "plan_len": 2,
+     "rule": {
+      "rule": "FINALIZE_BUTTON",
+      "witness": {
+       "element": 9
+      }
+     },
+     "seconds": 0.2,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    },
+    "D2_decoy_geometry": {
+     "budget_spent": 2,
+     "pass": true,
+     "plan_len": 2,
+     "rule": {
+      "rule": "FINALIZE_BUTTON",
+      "witness": {
+       "element": 9
+      }
+     },
+     "seconds": 0.1,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    },
+    "G2_exact_geometry": {
+     "budget_spent": 2,
+     "pass": true,
+     "plan_len": 2,
+     "rule": {
+      "rule": "FINALIZE_BUTTON",
+      "witness": {
+       "element": 9
+      }
+     },
+     "seconds": 0.1,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    }
+   },
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 9917,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "kind": "page",
+   "seconds": 0.5,
+   "seed": 1060,
+   "task": "choose-list"
+  },
+  {
+   "arms": {
+    "A_shipped_hand": {
+     "budget_spent": 11,
+     "pass": true,
+     "plan_len": 1,
+     "rule": null,
+     "seconds": 0.3,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    },
+    "D2_decoy_geometry": {
+     "budget_spent": 11,
+     "pass": true,
+     "plan_len": 1,
+     "rule": null,
+     "seconds": 0.3,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    },
+    "G2_exact_geometry": {
+     "budget_spent": 11,
+     "pass": true,
+     "plan_len": 1,
+     "rule": null,
+     "seconds": 0.4,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    }
+   },
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 9917,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "kind": "page",
+   "seconds": 1.1,
+   "seed": 1060,
+   "task": "buy-ticket"
+  },
+  {
+   "arms": {
+    "A_shipped_hand": {
+     "budget_spent": 2,
+     "pass": true,
+     "plan_len": 2,
+     "rule": null,
+     "seconds": 0.1,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    },
+    "D2_decoy_geometry": {
+     "budget_spent": 2,
+     "pass": true,
+     "plan_len": 2,
+     "rule": null,
+     "seconds": 0.1,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    },
+    "G2_exact_geometry": {
+     "budget_spent": 2,
+     "pass": true,
+     "plan_len": 2,
+     "rule": null,
+     "seconds": 0.1,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    }
+   },
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 9917,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "kind": "page",
+   "seconds": 0.5,
+   "seed": 1060,
+   "task": "unicode-test"
+  },
+  {
+   "arms": {
+    "A_shipped_hand": {
+     "budget_spent": 6,
+     "pass": true,
+     "plan_len": 4,
+     "rule": null,
+     "seconds": 0.2,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    },
+    "D2_decoy_geometry": {
+     "budget_spent": 6,
+     "pass": true,
+     "plan_len": 4,
+     "rule": null,
+     "seconds": 0.2,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    },
+    "G2_exact_geometry": {
+     "budget_spent": 6,
+     "pass": true,
+     "plan_len": 4,
+     "rule": null,
+     "seconds": 0.2,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    }
+   },
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 9917,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "kind": "page",
+   "seconds": 0.6,
+   "seed": 1060,
+   "task": "login-user"
+  },
+  {
+   "arms": {
+    "A_shipped_hand": {
+     "budget_spent": 362,
+     "pass": true,
+     "plan_len": 3,
+     "rule": null,
+     "seconds": 11.3,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    },
+    "D2_decoy_geometry": {
+     "budget_spent": 362,
+     "pass": true,
+     "plan_len": 3,
+     "rule": null,
+     "seconds": 11.4,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    },
+    "G2_exact_geometry": {
+     "budget_spent": 362,
+     "pass": true,
+     "plan_len": 3,
+     "rule": null,
+     "seconds": 11.3,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    }
+   },
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 9917,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "kind": "page",
+   "seconds": 34.0,
+   "seed": 1060,
+   "task": "drag-shapes"
+  },
+  {
+   "arms": {
+    "A_shipped_hand": {
+     "budget_spent": 270,
+     "pass": true,
+     "plan_len": 3,
+     "rule": {
+      "rule": "RECORD_MATCHING_ALL_WORDS",
+      "witness": {
+       "element": 18,
+       "words": [
+        "language"
+       ]
+      }
+     },
+     "seconds": 4.6,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    },
+    "D2_decoy_geometry": {
+     "budget_spent": 270,
+     "pass": true,
+     "plan_len": 3,
+     "rule": {
+      "rule": "RECORD_MATCHING_ALL_WORDS",
+      "witness": {
+       "element": 18,
+       "words": [
+        "language"
+       ]
+      }
+     },
+     "seconds": 4.7,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    },
+    "G2_exact_geometry": {
+     "budget_spent": 156,
+     "pass": true,
+     "plan_len": 2,
+     "rule": {
+      "rule": "FINALIZE_BUTTON",
+      "witness": {
+       "element": 22
+      }
+     },
+     "seconds": 3.3,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    }
+   },
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 9917,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "kind": "page",
+   "seconds": 12.6,
+   "seed": 1060,
+   "task": "read-table"
+  },
+  {
+   "arms": {
+    "A_shipped_hand": {
+     "budget_spent": 54,
+     "pass": true,
+     "plan_len": 10,
+     "rule": {
+      "rule": "RECORD_MATCHING_ALL_WORDS",
+      "witness": {
+       "element": 25,
+       "words": [
+        "6ft",
+        "1in"
+       ]
+      }
+     },
+     "seconds": 1.1,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    },
+    "D2_decoy_geometry": {
+     "budget_spent": 54,
+     "pass": true,
+     "plan_len": 10,
+     "rule": {
+      "rule": "RECORD_MATCHING_ALL_WORDS",
+      "witness": {
+       "element": 25,
+       "words": [
+        "6ft",
+        "1in"
+       ]
+      }
+     },
+     "seconds": 1.1,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    },
+    "G2_exact_geometry": {
+     "budget_spent": 57,
+     "pass": true,
+     "plan_len": 15,
+     "rule": null,
+     "seconds": 1.2,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    }
+   },
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 9917,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "kind": "page",
+   "seconds": 3.5,
+   "seed": 1060,
+   "task": "form-sequence-3"
+  },
+  {
+   "arms": {
+    "A_shipped_hand": {
+     "budget_spent": 151,
+     "pass": true,
+     "plan_len": 5,
+     "rule": null,
+     "seconds": 2.5,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    },
+    "D2_decoy_geometry": {
+     "budget_spent": 151,
+     "pass": true,
+     "plan_len": 5,
+     "rule": null,
+     "seconds": 2.4,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    },
+    "G2_exact_geometry": {
+     "budget_spent": 151,
+     "pass": true,
+     "plan_len": 5,
+     "rule": null,
+     "seconds": 2.5,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    }
+   },
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 9917,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "kind": "page",
+   "seconds": 7.4,
+   "seed": 1060,
+   "task": "phone-book"
+  }
+ ],
+ "producer_cognition_model_dependency_count": 0,
+ "protocol": {
+  "budget_acts": [
+   400
+  ],
+  "ceiling_tasks": [
+   "circle-center",
+   "right-angle"
+  ],
+  "primary_tasks": [
+   "circle-center",
+   "find-midpoint",
+   "right-angle"
+  ],
+  "regression_tasks": [
+   "click-button",
+   "simple-arithmetic",
+   "search-engine",
+   "email-inbox",
+   "choose-list",
+   "buy-ticket",
+   "unicode-test",
+   "login-user",
+   "drag-shapes",
+   "read-table",
+   "form-sequence-3",
+   "phone-book"
+  ],
+  "secondary_tasks": [
+   "draw-circle",
+   "bisect-angle"
+  ],
+  "seed": 1060
+ },
+ "schema": "BRAIN_EXACT_STATED_GEOMETRY_MEASURE_V1",
+ "summary": {
+  "arms": {
+   "A_shipped_hand": {
+    "actions_spent": 3437,
+    "pass": 11,
+    "pass_tasks": [
+     "buy-ticket",
+     "choose-list",
+     "click-button",
+     "drag-shapes",
+     "email-inbox",
+     "form-sequence-3",
+     "login-user",
+     "phone-book",
+     "read-table",
+     "search-engine",
+     "unicode-test"
+    ],
+    "rules_that_solved": [
+     "FINALIZE_BUTTON",
+     "RECORD_MATCHING_ALL_WORDS"
+    ],
+    "seconds": 67.9,
+    "verified": 33
+   },
+   "D2_decoy_geometry": {
+    "actions_spent": 3437,
+    "pass": 11,
+    "pass_tasks": [
+     "buy-ticket",
+     "choose-list",
+     "click-button",
+     "drag-shapes",
+     "email-inbox",
+     "form-sequence-3",
+     "login-user",
+     "phone-book",
+     "read-table",
+     "search-engine",
+     "unicode-test"
+    ],
+    "rules_that_solved": [
+     "FINALIZE_BUTTON",
+     "RECORD_MATCHING_ALL_WORDS"
+    ],
+    "seconds": 71.3,
+    "verified": 33
+   },
+   "G2_exact_geometry": {
+    "actions_spent": 3296,
+    "pass": 11,
+    "pass_tasks": [
+     "buy-ticket",
+     "choose-list",
+     "click-button",
+     "drag-shapes",
+     "email-inbox",
+     "form-sequence-3",
+     "login-user",
+     "phone-book",
+     "read-table",
+     "search-engine",
+     "unicode-test"
+    ],
+    "rules_that_solved": [
+     "FINALIZE_BUTTON"
+    ],
+    "seconds": 68.3,
+    "verified": 31
+   }
+  },
+  "pages": 51,
+  "prior_kills": [
+   "/tmp/exact_search_run1.jsonl",
+   "/tmp/exact_search_run2.jsonl"
+  ],
+  "runs": [
+   {
+    "file": "/tmp/exact_search_run1.jsonl",
+    "pages": 17,
+    "verdict": {
+     "ceiling_attainment": {
+      "circle-center": {
+       "A_best": null,
+       "G2_best": 0.9808890059138772,
+       "beats_A": true,
+       "reaches_ceiling": true,
+       "window_best": 0.9808890059138772
+      },
+      "right-angle": {
+       "A_best": null,
+       "G2_best": 0.9999222781382975,
+       "beats_A": true,
+       "reaches_ceiling": true,
+       "window_best": 0.9999239675421785
+      }
+     },
+     "declared": {
+      "amendment": "run 1 fired its kill (read-table: A passed, G2 failed) -- cause: the previously derived places were quoted free at a markless page and stole the search; fix A: derived places paid unless exact (offers untouched). Run 2 fired the same kill -- cause: finalize itself had been priced at 3 while a markless page's working hand needs its shipped finalize price; fix B: finalize keeps its shipped price until a mark exists. Both fixes change PRICES only; no offer ever changed. Runs 1 and 2 are preserved in the receipt beside run 3, which is the adjudicating run under this declared protocol; the final verdict is computed on run 3 and the two earlier kills are reported honestly",
+      "kill": "any verdict regression on REGRESSION_TASKS (A passes, G2 fails); a pass_primary page whose ceiling A reaches and G2 does not; or find-midpoint at the even seed passing in A or D2 while G2 fails",
+      "pass_full_reward": "find-midpoint at the pre-declared even-parity seed (the lowest seed >= 1061 at which both coordinate sums of the two marks are even) passes in G2 with an EXACT_* rule while A and D2 fail it -- full reward exactly where the actuator can express the optimum",
+      "pass_primary": "on circle-center and right-angle at seed 1060: G2's candidate set reaches the arithmetic ceiling of the reachable integer lattice within 1e-3 (the optimum lies half-way between lattice points) and beats A's candidate set there; the ceiling window is a measurement instrument derived from the page's stated geometry and the hand never receives it",
+      "report": "spend drift on REGRESSION_TASKS, honestly, whether or not it favors G2"
+     },
+     "kill": {
+      "ceiling_lost_to_A": [],
+      "regressions": [
+       "read-table"
+      ],
+      "supplementary_attribution_broken": false
+     },
+     "kill_fired": true,
+     "pass_full_reward": true,
+     "pass_primary": true,
+     "primary_matrix": {
+      "circle-center": {
+       "A_shipped_hand": {
+        "pass": false,
+        "rule": null,
+        "spend": 400
+       },
+       "D2_decoy_geometry": {
+        "pass": false,
+        "rule": null,
+        "spend": 400
+       },
+       "G2_exact_geometry": {
+        "pass": false,
+        "rule": null,
+        "spend": 400
+       }
+      },
+      "find-midpoint": {
+       "A_shipped_hand": {
+        "pass": false,
+        "rule": null,
+        "spend": 400
+       },
+       "D2_decoy_geometry": {
+        "pass": false,
+        "rule": null,
+        "spend": 400
+       },
+       "G2_exact_geometry": {
+        "pass": false,
+        "rule": null,
+        "spend": 400
+       }
+      },
+      "right-angle": {
+       "A_shipped_hand": {
+        "pass": false,
+        "rule": null,
+        "spend": 400
+       },
+       "D2_decoy_geometry": {
+        "pass": false,
+        "rule": null,
+        "spend": 400
+       },
+       "G2_exact_geometry": {
+        "pass": false,
+        "rule": null,
+        "spend": 400
+       }
+      }
+     },
+     "spend_drift_regression": {
+      "choose-list": {
+       "A": 2,
+       "G2": 24
+      },
+      "read-table": {
+       "A": 270,
+       "G2": 400
+      },
+      "search-engine": {
+       "A": 3,
+       "G2": 7
+      }
+     },
+     "supplementary_find_midpoint": {
+      "pass_by_arm": {
+       "A_shipped_hand": false,
+       "D2_decoy_geometry": false,
+       "G2_exact_geometry": true
+      },
+      "rule": "EXACT_MIDPOINT_OF_TWO_POINTS",
+      "seed": 1062
+     }
+    }
+   },
+   {
+    "file": "/tmp/exact_search_run2.jsonl",
+    "pages": 17,
+    "verdict": {
+     "ceiling_attainment": {
+      "circle-center": {
+       "A_best": null,
+       "G2_best": 0.9808890059138772,
+       "beats_A": true,
+       "reaches_ceiling": true,
+       "window_best": 0.9808890059138772
+      },
+      "right-angle": {
+       "A_best": null,
+       "G2_best": 0.9999222781382975,
+       "beats_A": true,
+       "reaches_ceiling": true,
+       "window_best": 0.9999239675421785
+      }
+     },
+     "declared": {
+      "amendment": "run 1 fired its kill (read-table: A passed, G2 failed) -- cause: the previously derived places were quoted free at a markless page and stole the search; fix A: derived places paid unless exact (offers untouched). Run 2 fired the same kill -- cause: finalize itself had been priced at 3 while a markless page's working hand needs its shipped finalize price; fix B: finalize keeps its shipped price until a mark exists. Both fixes change PRICES only; no offer ever changed. Runs 1 and 2 are preserved in the receipt beside run 3, which is the adjudicating run under this declared protocol; the final verdict is computed on run 3 and the two earlier kills are reported honestly",
+      "kill": "any verdict regression on REGRESSION_TASKS (A passes, G2 fails); a pass_primary page whose ceiling A reaches and G2 does not; or find-midpoint at the even seed passing in A or D2 while G2 fails",
+      "pass_full_reward": "find-midpoint at the pre-declared even-parity seed (the lowest seed >= 1061 at which both coordinate sums of the two marks are even) passes in G2 with an EXACT_* rule while A and D2 fail it -- full reward exactly where the actuator can express the optimum",
+      "pass_primary": "on circle-center and right-angle at seed 1060: G2's candidate set reaches the arithmetic ceiling of the reachable integer lattice within 1e-3 (the optimum lies half-way between lattice points) and beats A's candidate set there; the ceiling window is a measurement instrument derived from the page's stated geometry and the hand never receives it",
+      "report": "spend drift on REGRESSION_TASKS, honestly, whether or not it favors G2"
+     },
+     "kill": {
+      "ceiling_lost_to_A": [],
+      "regressions": [
+       "read-table"
+      ],
+      "supplementary_attribution_broken": false
+     },
+     "kill_fired": true,
+     "pass_full_reward": true,
+     "pass_primary": true,
+     "primary_matrix": {
+      "circle-center": {
+       "A_shipped_hand": {
+        "pass": false,
+        "rule": null,
+        "spend": 400
+       },
+       "D2_decoy_geometry": {
+        "pass": false,
+        "rule": null,
+        "spend": 400
+       },
+       "G2_exact_geometry": {
+        "pass": false,
+        "rule": null,
+        "spend": 400
+       }
+      },
+      "find-midpoint": {
+       "A_shipped_hand": {
+        "pass": false,
+        "rule": null,
+        "spend": 400
+       },
+       "D2_decoy_geometry": {
+        "pass": false,
+        "rule": null,
+        "spend": 400
+       },
+       "G2_exact_geometry": {
+        "pass": false,
+        "rule": null,
+        "spend": 400
+       }
+      },
+      "right-angle": {
+       "A_shipped_hand": {
+        "pass": false,
+        "rule": null,
+        "spend": 400
+       },
+       "D2_decoy_geometry": {
+        "pass": false,
+        "rule": null,
+        "spend": 400
+       },
+       "G2_exact_geometry": {
+        "pass": false,
+        "rule": null,
+        "spend": 400
+       }
+      }
+     },
+     "spend_drift_regression": {
+      "choose-list": {
+       "A": 2,
+       "G2": 24
+      },
+      "email-inbox": {
+       "A": 174,
+       "G2": 144
+      },
+      "form-sequence-3": {
+       "A": 54,
+       "G2": 57
+      },
+      "read-table": {
+       "A": 270,
+       "G2": 400
+      }
+     },
+     "supplementary_find_midpoint": {
+      "pass_by_arm": {
+       "A_shipped_hand": false,
+       "D2_decoy_geometry": false,
+       "G2_exact_geometry": true
+      },
+      "rule": "EXACT_MIDPOINT_OF_TWO_POINTS",
+      "seed": 1062
+     }
+    }
+   },
+   {
+    "file": "/tmp/exact_search_run3.jsonl",
+    "pages": 17,
+    "verdict": {
+     "ceiling_attainment": {
+      "circle-center": {
+       "A_best": null,
+       "G2_best": 0.9808890059138772,
+       "beats_A": true,
+       "reaches_ceiling": true,
+       "window_best": 0.9808890059138772
+      },
+      "right-angle": {
+       "A_best": null,
+       "G2_best": 0.9999222781382975,
+       "beats_A": true,
+       "reaches_ceiling": true,
+       "window_best": 0.9999239675421785
+      }
+     },
+     "declared": {
+      "amendment": "run 1 fired its kill (read-table: A passed, G2 failed) -- cause: the previously derived places were quoted free at a markless page and stole the search; fix A: derived places paid unless exact (offers untouched). Run 2 fired the same kill -- cause: finalize itself had been priced at 3 while a markless page's working hand needs its shipped finalize price; fix B: finalize keeps its shipped price until a mark exists. Both fixes change PRICES only; no offer ever changed. Runs 1 and 2 are preserved in the receipt beside run 3, which is the adjudicating run under this declared protocol; the final verdict is computed on run 3 and the two earlier kills are reported honestly",
+      "kill": "any verdict regression on REGRESSION_TASKS (A passes, G2 fails); a pass_primary page whose ceiling A reaches and G2 does not; or find-midpoint at the even seed passing in A or D2 while G2 fails",
+      "pass_full_reward": "find-midpoint at the pre-declared even-parity seed (the lowest seed >= 1061 at which both coordinate sums of the two marks are even) passes in G2 with an EXACT_* rule while A and D2 fail it -- full reward exactly where the actuator can express the optimum",
+      "pass_primary": "on circle-center and right-angle at seed 1060: G2's candidate set reaches the arithmetic ceiling of the reachable integer lattice within 1e-3 (the optimum lies half-way between lattice points) and beats A's candidate set there; the ceiling window is a measurement instrument derived from the page's stated geometry and the hand never receives it",
+      "report": "spend drift on REGRESSION_TASKS, honestly, whether or not it favors G2"
+     },
+     "kill": {
+      "ceiling_lost_to_A": [],
+      "regressions": [],
+      "supplementary_attribution_broken": false
+     },
+     "kill_fired": false,
+     "pass_full_reward": true,
+     "pass_primary": true,
+     "primary_matrix": {
+      "circle-center": {
+       "A_shipped_hand": {
+        "pass": false,
+        "rule": null,
+        "spend": 400
+       },
+       "D2_decoy_geometry": {
+        "pass": false,
+        "rule": null,
+        "spend": 400
+       },
+       "G2_exact_geometry": {
+        "pass": false,
+        "rule": null,
+        "spend": 400
+       }
+      },
+      "find-midpoint": {
+       "A_shipped_hand": {
+        "pass": false,
+        "rule": null,
+        "spend": 400
+       },
+       "D2_decoy_geometry": {
+        "pass": false,
+        "rule": null,
+        "spend": 400
+       },
+       "G2_exact_geometry": {
+        "pass": false,
+        "rule": null,
+        "spend": 400
+       }
+      },
+      "right-angle": {
+       "A_shipped_hand": {
+        "pass": false,
+        "rule": null,
+        "spend": 400
+       },
+       "D2_decoy_geometry": {
+        "pass": false,
+        "rule": null,
+        "spend": 400
+       },
+       "G2_exact_geometry": {
+        "pass": false,
+        "rule": null,
+        "spend": 400
+       }
+      }
+     },
+     "spend_drift_regression": {
+      "email-inbox": {
+       "A": 174,
+       "G2": 144
+      },
+      "form-sequence-3": {
+       "A": 54,
+       "G2": 57
+      },
+      "read-table": {
+       "A": 270,
+       "G2": 156
+      }
+     },
+     "supplementary_find_midpoint": {
+      "pass_by_arm": {
+       "A_shipped_hand": false,
+       "D2_decoy_geometry": false,
+       "G2_exact_geometry": true
+      },
+      "rule": "EXACT_MIDPOINT_OF_TWO_POINTS",
+      "seed": 1062
+     }
+    }
+   }
+  ],
+  "verdict": {
+   "ceiling_attainment": {
+    "circle-center": {
+     "A_best": null,
+     "G2_best": 0.9808890059138772,
+     "beats_A": true,
+     "reaches_ceiling": true,
+     "window_best": 0.9808890059138772
+    },
+    "right-angle": {
+     "A_best": null,
+     "G2_best": 0.9999222781382975,
+     "beats_A": true,
+     "reaches_ceiling": true,
+     "window_best": 0.9999239675421785
+    }
+   },
+   "declared": {
+    "amendment": "run 1 fired its kill (read-table: A passed, G2 failed) -- cause: the previously derived places were quoted free at a markless page and stole the search; fix A: derived places paid unless exact (offers untouched). Run 2 fired the same kill -- cause: finalize itself had been priced at 3 while a markless page's working hand needs its shipped finalize price; fix B: finalize keeps its shipped price until a mark exists. Both fixes change PRICES only; no offer ever changed. Runs 1 and 2 are preserved in the receipt beside run 3, which is the adjudicating run under this declared protocol; the final verdict is computed on run 3 and the two earlier kills are reported honestly",
+    "kill": "any verdict regression on REGRESSION_TASKS (A passes, G2 fails); a pass_primary page whose ceiling A reaches and G2 does not; or find-midpoint at the even seed passing in A or D2 while G2 fails",
+    "pass_full_reward": "find-midpoint at the pre-declared even-parity seed (the lowest seed >= 1061 at which both coordinate sums of the two marks are even) passes in G2 with an EXACT_* rule while A and D2 fail it -- full reward exactly where the actuator can express the optimum",
+    "pass_primary": "on circle-center and right-angle at seed 1060: G2's candidate set reaches the arithmetic ceiling of the reachable integer lattice within 1e-3 (the optimum lies half-way between lattice points) and beats A's candidate set there; the ceiling window is a measurement instrument derived from the page's stated geometry and the hand never receives it",
+    "report": "spend drift on REGRESSION_TASKS, honestly, whether or not it favors G2"
+   },
+   "kill": {
+    "ceiling_lost_to_A": [],
+    "regressions": [],
+    "supplementary_attribution_broken": false
+   },
+   "kill_fired": false,
+   "pass_full_reward": true,
+   "pass_primary": true,
+   "primary_matrix": {
+    "circle-center": {
+     "A_shipped_hand": {
+      "pass": false,
+      "rule": null,
+      "spend": 400
+     },
+     "D2_decoy_geometry": {
+      "pass": false,
+      "rule": null,
+      "spend": 400
+     },
+     "G2_exact_geometry": {
+      "pass": false,
+      "rule": null,
+      "spend": 400
+     }
+    },
+    "find-midpoint": {
+     "A_shipped_hand": {
+      "pass": false,
+      "rule": null,
+      "spend": 400
+     },
+     "D2_decoy_geometry": {
+      "pass": false,
+      "rule": null,
+      "spend": 400
+     },
+     "G2_exact_geometry": {
+      "pass": false,
+      "rule": null,
+      "spend": 400
+     }
+    },
+    "right-angle": {
+     "A_shipped_hand": {
+      "pass": false,
+      "rule": null,
+      "spend": 400
+     },
+     "D2_decoy_geometry": {
+      "pass": false,
+      "rule": null,
+      "spend": 400
+     },
+     "G2_exact_geometry": {
+      "pass": false,
+      "rule": null,
+      "spend": 400
+     }
+    }
+   },
+   "spend_drift_regression": {
+    "email-inbox": {
+     "A": 174,
+     "G2": 144
+    },
+    "form-sequence-3": {
+     "A": 54,
+     "G2": 57
+    },
+    "read-table": {
+     "A": 270,
+     "G2": 156
+    }
+   },
+   "supplementary_find_midpoint": {
+    "pass_by_arm": {
+     "A_shipped_hand": false,
+     "D2_decoy_geometry": false,
+     "G2_exact_geometry": true
+    },
+    "rule": "EXACT_MIDPOINT_OF_TWO_POINTS",
+    "seed": 1062
+   }
+  }
+ },
+ "supplementary": [
+  {
+   "arms": {
+    "A_shipped_hand": {
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 4.3,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    }
+   },
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 12813,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "kind": "supplementary",
+   "seed": 1062,
+   "task": "find-midpoint"
+  },
+  {
+   "arms": {
+    "G2_exact_geometry": {
+     "budget_spent": 8,
+     "pass": true,
+     "plan_len": 2,
+     "rule": {
+      "rule": "EXACT_MIDPOINT_OF_TWO_POINTS",
+      "witness": {
+       "nudge": [
+        0.0,
+        0.0
+       ],
+       "offset": 50.0,
+       "points": [
+        4,
+        5
+       ]
+      }
+     },
+     "seconds": 0.3,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    }
+   },
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 12813,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "kind": "supplementary",
+   "seed": 1062,
+   "task": "find-midpoint"
+  },
+  {
+   "arms": {
+    "D2_decoy_geometry": {
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 5.2,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    }
+   },
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 12813,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "kind": "supplementary",
+   "seed": 1062,
+   "task": "find-midpoint"
+  }
+ ]
+}

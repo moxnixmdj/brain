@@ -309,6 +309,223 @@ def _right_angle(observation: Mapping[str, Any]) -> list[tuple[str, str, dict[st
     return out[:6]
 
 
+# -- exact stated geometry -----------------------------------------------------------------------------
+# The three pages whose score frame refused every correct press (OUT_SCORE_FRAME_NOT_STATED:
+# circle-center, find-midpoint, right-angle) score against the page's OWN canvas numbers: the
+# click is mapped into canvas space by a y-offset the page prints (`y-QUERY_PADDING`) and
+# compared against the marks' exact geometry, where the ROUNDED box has already thrown the
+# fractions away. These operators read `box_f`/`geom` (additive fields; an old observation
+# produces nothing, so every previously measured hand is unchanged), do the exact math in
+# canvas coordinates, and offer it at each plausible page y-offset -- the one number the DOM
+# does not state. After any press the page SHOWS its own blue mark, and with the bridge's
+# pointer proprioception the offset is measured, not guessed.
+#
+# Presses are INTEGERS on purpose: the DOM exposes pageX/pageY as `long`, so a fractional
+# coordinate is truncated on arrival. A half-pixel optimum (circle-center's, whenever the
+# mark radius and the printed padding differ by a half) is therefore UNREACHABLE by any
+# click -- that is the page's score frame demanding a point the actuator cannot express,
+# and no candidate here pretends otherwise.
+SVG_Y_OFFSETS_ABOUT_TOP = (0, 1, 2)            # plausible printed offsets at or under the svg top
+
+
+def _float_box(element: Mapping[str, Any]) -> list[float] | None:
+    """The unrounded rectangle, when the observation carries one."""
+    box = element.get("box_f")
+    if not (isinstance(box, (list, tuple)) and len(box) == 4):
+        return None
+    try:
+        x, y, w, h = (float(v) for v in box)
+    except (TypeError, ValueError):
+        return None
+    if not (w > 0 and h > 0):
+        return None
+    return [x, y, w, h]
+
+
+def _svg_frame(observation: Mapping[str, Any]) -> tuple[float, float] | None:
+    """The svg element's own unrounded origin, the translation between its canvas and the page."""
+    for element in _elements(observation):
+        if element.get("tag") == "svg":
+            box = _float_box(element)
+            if box is not None:
+                return box[0], box[1]
+    return None
+
+
+def _geom_number(element: Mapping[str, Any], key: str) -> float | None:
+    geom = element.get("geom")
+    if not isinstance(geom, Mapping):
+        return None
+    try:
+        return float(str(geom[key]))
+    except (KeyError, TypeError, ValueError):
+        return None
+
+
+def _svg_local_point(element: Mapping[str, Any], frame: tuple[float, float]) -> tuple[float, float] | None:
+    """The element's centre in the page's OWN canvas: the stated cx/cy when the element states
+    them, else the unrounded rectangle translated out of page coordinates."""
+    cx, cy = _geom_number(element, "cx"), _geom_number(element, "cy")
+    if cx is not None and cy is not None:
+        return cx, cy
+    box = _float_box(element)
+    if box is None:
+        return None
+    return (box[0] + box[2] / 2.0 - frame[0], box[1] + box[3] / 2.0 - frame[1])
+
+
+def _page_y_offsets(observation: Mapping[str, Any]) -> list[float]:
+    """Every plausible page-y-offset: the svg top, and each value a printed constant under it.
+    None of these is stated by the DOM; the list is the honest small set the layout can be in,
+    and the first press makes the page reveal which one it is (see _measured_y_offset)."""
+    frame = _svg_frame(observation)
+    if frame is None:
+        return []
+    top = frame[1]
+    return [top - k for k in SVG_Y_OFFSETS_ABOUT_TOP]
+
+
+def _measured_y_offset(observation: Mapping[str, Any]) -> float | None:
+    """The page's own click-to-canvas offset, MEASURED from evidence the page itself shows:
+    once the hand has pressed anywhere, the blue mark it drew sits at (press - offset) in its
+    canvas, the bridge reports where the pointer last was, and the mark states its radius."""
+    frame = _svg_frame(observation)
+    pointer = observation.get("pointer")
+    if frame is None or not (isinstance(pointer, (list, tuple)) and len(pointer) == 2):
+        return None
+    for element in _elements(observation):
+        ident = f"{element.get('id') or ''} {element.get('classes') or ''}"
+        if not re.search(r"blue", ident):
+            continue
+        box = _float_box(element)
+        if box is None:
+            continue
+        radius = _geom_number(element, "r")
+        if radius is None:
+            radius = box[2] / 2.0
+        try:
+            return frame[1] + float(pointer[1]) - box[1] - radius
+        except (TypeError, ValueError):
+            return None
+    return None
+
+
+def _press(x: float, y: float) -> str:
+    """An integer press: the DOM truncates fractional page coordinates on arrival, so the
+    candidate is the point the hand can actually reach."""
+    cx, cy = _clamp(float(x), float(y))
+    return f"pressat@{int(cx)},{int(cy)}"
+
+
+def _point_marks(observation: Mapping[str, Any]) -> list[Mapping[str, Any]]:
+    """The small point-like marks whose exact canvas position can be taken."""
+    elements = _elements(observation)
+    marks = [e for e in elements if (_float_box(e) is not None or _geom_number(e, "cx") is not None) and (
+        e.get("tag") in SVG_SHAPES
+        or re.search(r"circle|point|dot|ball|shape|target", str(e.get("classes") or "")))]
+    marks = [e for e in marks
+             if (lambda b: b is None or b[2] * b[3] <= 40 * 40 * 8)(_float_box(e))][:10]
+    return marks
+
+
+def _exact_centre(observation: Mapping[str, Any]) -> list[tuple[str, str, dict[str, Any]]]:
+    """"click on the center of the circle": the exact canvas centre at each plausible page
+    offset, and -- when the page has already shown its own blue mark -- at the measured one."""
+    utterance = _lower(observation.get("utterance"))
+    if not re.search(r"\b(center|centre|middle)\b", utterance) or re.search(r"mid-?point|between the two", utterance):
+        return []
+    frame = _svg_frame(observation)
+    offsets = _page_y_offsets(observation)
+    if frame is None or not offsets:
+        return []
+    marks = [e for e in _point_marks(observation) if _svg_local_point(e, frame) is not None]
+    if not marks:
+        return []
+    top = _svg_local_point(marks[0], frame)
+    assert top is not None
+    out: list[tuple[str, str, dict[str, Any]]] = []
+    for k in offsets:
+        out.append((_press(top[0], top[1] + k), "EXACT_CENTER_OF",
+                    {"element": marks[0]["index"], "offset": k, "nudge": [0.0, 0.0]}))
+    measured = _measured_y_offset(observation)
+    if measured is not None:
+        for k in (measured, measured - 1, measured + 1):
+            out.append((_press(top[0], top[1] + k), "EXACT_CENTER_NUDGE",
+                        {"element": marks[0]["index"], "offset": k, "nudge": [0.0, 0.0]}))
+    return out[:16]
+
+
+def _exact_midpoint(observation: Mapping[str, Any]) -> list[tuple[str, str, dict[str, Any]]]:
+    """"the mid-point between the two points": the exact canvas midpoint of the two smallest
+    marks at each plausible page offset, and at the measured one. When the two marks' sum is
+    odd the true midpoint is a half-pixel the actuator cannot press -- the candidate floors
+    to the reachable neighbour and the page's own reward stays honest about the rest."""
+    utterance = _lower(observation.get("utterance"))
+    if not re.search(r"mid-?point|between the two", utterance):
+        return []
+    frame = _svg_frame(observation)
+    offsets = _page_y_offsets(observation)
+    if frame is None or not offsets:
+        return []
+    marks = sorted((e for e in _point_marks(observation) if _svg_local_point(e, frame) is not None),
+                   key=lambda e: ((_float_box(e) or [0] * 4)[2] * (_float_box(e) or [0] * 4)[3]))[:2]
+    if len(marks) < 2:
+        return []
+    a = _svg_local_point(marks[0], frame)
+    b = _svg_local_point(marks[1], frame)
+    if a is None or b is None:
+        return []
+    mid = ((a[0] + b[0]) / 2.0, (a[1] + b[1]) / 2.0)
+    witness0 = {"points": [marks[0]["index"], marks[1]["index"]]}
+    out: list[tuple[str, str, dict[str, Any]]] = []
+    for k in offsets:
+        out.append((_press(mid[0], mid[1] + k), "EXACT_MIDPOINT_OF_TWO_POINTS",
+                    dict(witness0, offset=k, nudge=[0.0, 0.0])))
+    measured = _measured_y_offset(observation)
+    if measured is not None:
+        for k in (measured, measured - 1, measured + 1):
+            out.append((_press(mid[0], mid[1] + k), "EXACT_MIDPOINT_NUDGE",
+                        dict(witness0, offset=k, nudge=[0.0, 0.0])))
+    return out[:16]
+
+
+def _exact_right_angle(observation: Mapping[str, Any]) -> list[tuple[str, str, dict[str, Any]]]:
+    """"create a right angle": the two exact canvas points rotated +-90 degrees -- the law of
+    cosines then lands on 90 degrees to within float noise, well inside the page's 1e-9 full
+    reward -- carried into page coordinates at each plausible offset and the measured one."""
+    if "right angle" not in _lower(observation.get("utterance")):
+        return []
+    frame = _svg_frame(observation)
+    offsets = _page_y_offsets(observation)
+    if frame is None or not offsets:
+        return []
+    marks = sorted((e for e in _point_marks(observation) if _svg_local_point(e, frame) is not None),
+                   key=lambda e: ((_float_box(e) or [0] * 4)[2] * (_float_box(e) or [0] * 4)[3]))[:2]
+    if len(marks) < 2:
+        return []
+    p = _svg_local_point(marks[0], frame)
+    q = _svg_local_point(marks[1], frame)
+    if p is None or q is None:
+        return []
+    witness = {"points": [marks[0]["index"], marks[1]["index"]]}
+    out: list[tuple[str, str, dict[str, Any]]] = []
+    vertices: list[tuple[float, float, dict[str, Any]]] = []
+    for base, other in ((p, q), (q, p)):
+        dx, dy = other[0] - base[0], other[1] - base[1]
+        for sx, sy in ((-dy, dx), (dy, -dx)):
+            vertices.append((base[0] + sx, base[1] + sy, witness))
+    for k in offsets:
+        for vx, vy, w in vertices:
+            out.append((_press(vx, vy + k), "EXACT_RIGHT_ANGLE_VERTEX",
+                        dict(w, offset=k, nudge=[0.0, 0.0])))
+    measured = _measured_y_offset(observation)
+    if measured is not None:
+        for vx, vy, w in vertices:
+            out.append((_press(vx, vy + measured), "EXACT_RIGHT_ANGLE_NUDGE",
+                        dict(w, offset=measured, nudge=[0.0, 0.0])))
+    return out[:16]
+
+
 def _slider_targets(utterance: str) -> list[float]:
     bracket = re.search(r"\[([\d,\s]+)\]", utterance)
     if bracket:
@@ -1321,7 +1538,7 @@ OPERATORS = (
     _nth_word_type, _pair_transfer, _labelled_pair_transfer, _ordinal_widget, _match_all_records,
     _drag_coloured, _colour_wheel_points, _named_colour_type, _copy_value, _field_span_fill,
     _terminal_commands, _drag_through_point, _select_and_style, _hot_extreme, _finalize,
-    _dropat_places,
+    _dropat_places, _exact_centre, _exact_midpoint, _exact_right_angle,
 )
 
 MAX_PER_RULE = 16

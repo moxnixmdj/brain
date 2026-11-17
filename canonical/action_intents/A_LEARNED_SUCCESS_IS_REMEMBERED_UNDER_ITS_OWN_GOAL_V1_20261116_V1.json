@@ -35,7 +35,7 @@
  },
  "benchmark_or_family_rank_authority": false,
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A learned success was not a memory of the goal it succeeded at. computer_env_v1._discover_impl kept every closed goal under the constant gkey=\"goal\", while the fingerprint deliberately excludes the target, so the goal's identity appeared nowhere in the memory key and recall matched across goals. Measured 2026-11-16 on this machine: thirteen unrelated goals left thirteen rows in the transfer store, every one recording reached=True, with plans naming whatever single program happened to touch the target first -- run_iconv for one goal, run_gp-display-src for another, x86_64-linux-gnu-cpp for another, run_unexpand for another, run_bzip2 for one that really did compress. A row for a wrong program was indistinguishable from a row for a right one. Answers were saved only because _verify_plan re-executes a recalled plan against the target actually requested; every other reader of the store -- audits, similarity scoring, episode counts, and the evidence bonus in transfer_learning_v1.recall -- was reading a plan labelled correct that was not.",
- "canonical_base_commit": "e2fff59bbfacc50010661a76c8c87920d8b12567",
+ "canonical_base_commit": "3745ffcb56dd76441db2e1b3cf1d465280db7922",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -58,7 +58,7 @@
   "wall_clock_cost_ub": 1
  },
  "recursive_obs": {
-  "canonical_base_commit": "e2fff59bbfacc50010661a76c8c87920d8b12567",
+  "canonical_base_commit": "3745ffcb56dd76441db2e1b3cf1d465280db7922",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "canonical/runtime/goal_truth_v1.py (written then deleted: duplicated verify_round_trip)",
@@ -436,14 +436,11 @@
     {
      "git_blob_sha": "525a8ab71ed804a177130d51b70044a4382bf269",
      "path": "canonical/tests/test_learned_success_is_remembered_under_its_own_goal_v1.py"
-    },
-    {
-     "git_blob_sha": "26bf4a5b758fb63adafc2bbd4c1215556c268245",
-     "path": "canonical/action_intents/A_LEARNED_SUCCESS_IS_REMEMBERED_UNDER_ITS_OWN_GOAL_V1_20261116_V1.json"
     }
    ],
    "decisive_question": "Does a goal that closed get recalled for a different goal that asks for a different effect?",
    "falsifier_id": "A_LEARNED_SUCCESS_IS_REMEMBERED_UNDER_ITS_OWN_GOAL_V1_20261116_V1_FALSIFIER",
+   "intent_self_receipt_note": "The intent is not listed as its own counterexample receipt. A git blob cannot contain its own SHA, so an intent that pins itself can only pass by being pinned to a stale earlier revision of itself -- which is exactly the failure the resolve_receipt_blobs docstring records (an invented sha sitting in a merged intent). The evidence a reader wants is the two receipts above, both of which are real files whose bytes speak for themselves.",
    "known_counterexamples_checked": true,
    "no_known_counterexample_reason": "Both directions were falsified directly. test_two_unrelated_goals_do_not_share_a_memory_key and test_no_episode_uses_the_shared_constant fail when gkey is reverted to 'goal' (measured: FAILED failures=2, 'two different goals were remembered under one key'). test_repeating_a_goal_reuses_its_key pins that the repair did not defeat recall. test_paraphrase_of_the_same_effect_shares_its_key pins that two sentences asking for the same file and format still hit one memory.",
    "proposal_id": "A_LEARNED_SUCCESS_IS_REMEMBERED_UNDER_ITS_OWN_GOAL_V1_20261116_V1"
