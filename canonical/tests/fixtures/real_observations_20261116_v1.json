@@ -1,0 +1,3592 @@
+{
+ "click-color": {
+  "elements": [
+   {
+    "box": [
+     0,
+     0,
+     480,
+     210
+    ],
+    "can_click": false,
+    "can_type": false,
+    "focused": true,
+    "index": 0,
+    "parent": -1,
+    "tag": "body",
+    "text": ""
+   },
+   {
+    "box": [
+     0,
+     0,
+     160,
+     210
+    ],
+    "can_click": false,
+    "can_type": false,
+    "id": "wrap",
+    "index": 1,
+    "parent": 0,
+    "tag": "div",
+    "text": ""
+   },
+   {
+    "box": [
+     0,
+     70,
+     160,
+     134
+    ],
+    "can_click": false,
+    "can_type": false,
+    "id": "area",
+    "index": 2,
+    "parent": 1,
+    "tag": "div",
+    "text": ""
+   },
+   {
+    "box": [
+     23,
+     77,
+     52,
+     52
+    ],
+    "can_click": true,
+    "can_type": false,
+    "classes": "color",
+    "colour": "pink",
+    "index": 3,
+    "parent": 2,
+    "tag": "div",
+    "text": ""
+   },
+   {
+    "box": [
+     85,
+     77,
+     52,
+     52
+    ],
+    "can_click": true,
+    "can_type": false,
+    "classes": "color",
+    "colour": "black",
+    "index": 4,
+    "parent": 2,
+    "tag": "div",
+    "text": ""
+   },
+   {
+    "box": [
+     23,
+     142,
+     52,
+     52
+    ],
+    "can_click": true,
+    "can_type": false,
+    "classes": "color",
+    "colour": "white",
+    "index": 5,
+    "parent": 2,
+    "tag": "div",
+    "text": ""
+   },
+   {
+    "box": [
+     85,
+     142,
+     52,
+     52
+    ],
+    "can_click": true,
+    "can_type": false,
+    "classes": "color",
+    "colour": "purple",
+    "index": 6,
+    "parent": 2,
+    "tag": "div",
+    "text": ""
+   }
+  ],
+  "utterance": "Click on the black colored box."
+ },
+ "click-shape": {
+  "elements": [
+   {
+    "box": [
+     0,
+     0,
+     480,
+     210
+    ],
+    "can_click": false,
+    "can_type": false,
+    "focused": true,
+    "full_text": "c T 6 u X G O d 5 Y R 1 G 8",
+    "index": 0,
+    "parent": -1,
+    "tag": "body",
+    "text": ""
+   },
+   {
+    "box": [
+     0,
+     0,
+     160,
+     210
+    ],
+    "can_click": false,
+    "can_type": false,
+    "full_text": "c T 6 u X G O d 5 Y R 1 G 8",
+    "id": "wrap",
+    "index": 1,
+    "parent": 0,
+    "tag": "div",
+    "text": ""
+   },
+   {
+    "box": [
+     0,
+     50,
+     160,
+     167
+    ],
+    "can_click": false,
+    "can_type": false,
+    "full_text": "c T 6 u X G O d 5 Y R 1 G 8",
+    "id": "area",
+    "index": 2,
+    "parent": 1,
+    "tag": "div",
+    "text": ""
+   },
+   {
+    "box": [
+     2,
+     52,
+     160,
+     160
+    ],
+    "can_click": false,
+    "can_type": false,
+    "full_text": "c T 6 u X G O d 5 Y R 1 G 8",
+    "id": "area_svg",
+    "index": 3,
+    "parent": 2,
+    "tag": "svg",
+    "text": ""
+   },
+   {
+    "box": [
+     47,
+     117,
+     10,
+     10
+    ],
+    "can_click": true,
+    "can_type": false,
+    "colour": "magenta",
+    "index": 4,
+    "parent": 3,
+    "tag": "polygon",
+    "text": ""
+   },
+   {
+    "box": [
+     82,
+     172,
+     20,
+     20
+    ],
+    "can_click": true,
+    "can_type": false,
+    "colour": "black",
+    "index": 5,
+    "parent": 3,
+    "tag": "rect",
+    "text": ""
+   },
+   {
+    "box": [
+     90,
+     55,
+     5,
+     14
+    ],
+    "can_click": true,
+    "can_type": false,
+    "colour": "black",
+    "index": 6,
+    "parent": 3,
+    "tag": "text",
+    "text": "c"
+   },
+   {
+    "box": [
+     129,
+     175,
+     6,
+     14
+    ],
+    "can_click": true,
+    "can_type": false,
+    "colour": "blue",
+    "index": 7,
+    "parent": 3,
+    "tag": "text",
+    "text": "T"
+   },
+   {
+    "box": [
+     109,
+     175,
+     6,
+     14
+    ],
+    "can_click": true,
+    "can_type": false,
+    "colour": "blue",
+    "index": 8,
+    "parent": 3,
+    "tag": "text",
+    "text": "6"
+   },
+   {
+    "box": [
+     29,
+     55,
+     6,
+     14
+    ],
+    "can_click": true,
+    "can_type": false,
+    "colour": "black",
+    "index": 9,
+    "parent": 3,
+    "tag": "text",
+    "text": "u"
+   },
+   {
+    "box": [
+     109,
+     135,
+     6,
+     14
+    ],
+    "can_click": true,
+    "can_type": false,
+    "colour": "black",
+    "index": 10,
+    "parent": 3,
+    "tag": "text",
+    "text": "X"
+   },
+   {
+    "box": [
+     48,
+     135,
+     7,
+     14
+    ],
+    "can_click": true,
+    "can_type": false,
+    "colour": "black",
+    "index": 11,
+    "parent": 3,
+    "tag": "text",
+    "text": "G"
+   },
+   {
+    "box": [
+     108,
+     75,
+     8,
+     14
+    ],
+    "can_click": true,
+    "can_type": false,
+    "colour": "green",
+    "index": 12,
+    "parent": 3,
+    "tag": "text",
+    "text": "O"
+   },
+   {
+    "box": [
+     66,
+     149,
+     12,
+     27
+    ],
+    "can_click": true,
+    "can_type": false,
+    "colour": "blue",
+    "index": 13,
+    "parent": 3,
+    "tag": "text",
+    "text": "d"
+   },
+   {
+    "box": [
+     89,
+     95,
+     6,
+     14
+    ],
+    "can_click": true,
+    "can_type": false,
+    "colour": "aqua",
+    "index": 14,
+    "parent": 3,
+    "tag": "text",
+    "text": "5"
+   },
+   {
+    "box": [
+     26,
+     169,
+     12,
+     27
+    ],
+    "can_click": true,
+    "can_type": false,
+    "colour": "aqua",
+    "index": 15,
+    "parent": 3,
+    "tag": "text",
+    "text": "Y"
+   },
+   {
+    "box": [
+     129,
+     115,
+     6,
+     14
+    ],
+    "can_click": true,
+    "can_type": false,
+    "colour": "aqua",
+    "index": 16,
+    "parent": 3,
+    "tag": "text",
+    "text": "R"
+   },
+   {
+    "box": [
+     26,
+     69,
+     11,
+     27
+    ],
+    "can_click": true,
+    "can_type": false,
+    "colour": "aqua",
+    "index": 17,
+    "parent": 3,
+    "tag": "text",
+    "text": "1"
+   },
+   {
+    "box": [
+     25,
+     149,
+     15,
+     27
+    ],
+    "can_click": true,
+    "can_type": false,
+    "colour": "blue",
+    "index": 18,
+    "parent": 3,
+    "tag": "text",
+    "text": "G"
+   },
+   {
+    "box": [
+     69,
+     115,
+     6,
+     14
+    ],
+    "can_click": true,
+    "can_type": false,
+    "colour": "yellow",
+    "index": 19,
+    "parent": 3,
+    "tag": "text",
+    "text": "8"
+   },
+   {
+    "box": [
+     122,
+     132,
+     20,
+     20
+    ],
+    "can_click": true,
+    "can_type": false,
+    "colour": "black",
+    "index": 20,
+    "parent": 3,
+    "tag": "rect",
+    "text": ""
+   }
+  ],
+  "utterance": "Click on a triangle"
+ },
+ "click-test": {
+  "elements": [
+   {
+    "box": [
+     0,
+     0,
+     480,
+     210
+    ],
+    "can_click": false,
+    "can_type": false,
+    "focused": true,
+    "full_text": "Click Me!",
+    "index": 0,
+    "parent": -1,
+    "tag": "body",
+    "text": ""
+   },
+   {
+    "box": [
+     0,
+     0,
+     160,
+     210
+    ],
+    "can_click": false,
+    "can_type": false,
+    "full_text": "Click Me!",
+    "id": "wrap",
+    "index": 1,
+    "parent": 0,
+    "tag": "div",
+    "text": ""
+   },
+   {
+    "box": [
+     0,
+     50,
+     160,
+     129
+    ],
+    "can_click": false,
+    "can_type": false,
+    "full_text": "Click Me!",
+    "id": "area",
+    "index": 2,
+    "parent": 1,
+    "tag": "div",
+    "text": ""
+   },
+   {
+    "box": [
+     24,
+     86,
+     91,
+     91
+    ],
+    "can_click": true,
+    "can_type": false,
+    "id": "subbtn",
+    "index": 3,
+    "parent": 2,
+    "tag": "button",
+    "text": "Click Me!"
+   }
+  ],
+  "utterance": "Click the button."
+ },
+ "count-shape": {
+  "elements": [
+   {
+    "box": [
+     0,
+     0,
+     480,
+     210
+    ],
+    "can_click": false,
+    "can_type": false,
+    "focused": true,
+    "full_text": "0 T 6 u X U h 2 6 0 9 4",
+    "index": 0,
+    "parent": -1,
+    "tag": "body",
+    "text": ""
+   },
+   {
+    "box": [
+     0,
+     0,
+     160,
+     210
+    ],
+    "can_click": false,
+    "can_type": false,
+    "full_text": "0 T 6 u X U h 2 6 0 9 4",
+    "id": "wrap",
+    "index": 1,
+    "parent": 0,
+    "tag": "div",
+    "text": ""
+   },
+   {
+    "box": [
+     0,
+     50,
+     158,
+     158
+    ],
+    "can_click": false,
+    "can_type": false,
+    "full_text": "0 T 6 u X U h 2 6 0 9 4",
+    "id": "area",
+    "index": 2,
+    "parent": 1,
+    "tag": "div",
+    "text": ""
+   },
+   {
+    "box": [
+     2,
+     52,
+     154,
+     130
+    ],
+    "can_click": false,
+    "can_type": false,
+    "full_text": "0 T 6 u X U h",
+    "id": "area_svg",
+    "index": 3,
+    "parent": 2,
+    "tag": "svg",
+    "text": ""
+   },
+   {
+    "box": [
+     47,
+     117,
+     10,
+     10
+    ],
+    "can_click": true,
+    "can_type": false,
+    "colour": "magenta",
+    "index": 4,
+    "parent": 3,
+    "tag": "polygon",
+    "text": ""
+   },
+   {
+    "box": [
+     82,
+     152,
+     20,
+     20
+    ],
+    "can_click": true,
+    "can_type": false,
+    "colour": "black",
+    "index": 5,
+    "parent": 3,
+    "tag": "rect",
+    "text": ""
+   },
+   {
+    "box": [
+     46,
+     89,
+     11,
+     27
+    ],
+    "can_click": true,
+    "can_type": false,
+    "colour": "black",
+    "index": 6,
+    "parent": 3,
+    "tag": "text",
+    "text": "0"
+   },
+   {
+    "box": [
+     129,
+     155,
+     6,
+     14
+    ],
+    "can_click": true,
+    "can_type": false,
+    "colour": "blue",
+    "index": 7,
+    "parent": 3,
+    "tag": "text",
+    "text": "T"
+   },
+   {
+    "box": [
+     109,
+     155,
+     6,
+     14
+    ],
+    "can_click": true,
+    "can_type": false,
+    "colour": "blue",
+    "index": 8,
+    "parent": 3,
+    "tag": "text",
+    "text": "6"
+   },
+   {
+    "box": [
+     29,
+     55,
+     6,
+     14
+    ],
+    "can_click": true,
+    "can_type": false,
+    "colour": "black",
+    "index": 9,
+    "parent": 3,
+    "tag": "text",
+    "text": "u"
+   },
+   {
+    "box": [
+     109,
+     115,
+     6,
+     14
+    ],
+    "can_click": true,
+    "can_type": false,
+    "colour": "black",
+    "index": 10,
+    "parent": 3,
+    "tag": "text",
+    "text": "X"
+   },
+   {
+    "box": [
+     45,
+     129,
+     15,
+     27
+    ],
+    "can_click": true,
+    "can_type": false,
+    "colour": "magenta",
+    "index": 11,
+    "parent": 3,
+    "tag": "text",
+    "text": "U"
+   },
+   {
+    "box": [
+     9,
+     115,
+     6,
+     14
+    ],
+    "can_click": true,
+    "can_type": false,
+    "colour": "aqua",
+    "index": 12,
+    "parent": 3,
+    "tag": "text",
+    "text": "h"
+   },
+   {
+    "box": [
+     6,
+     182,
+     145,
+     24
+    ],
+    "can_click": false,
+    "can_type": false,
+    "full_text": "2 6 0 9 4",
+    "id": "count-buttons",
+    "index": 13,
+    "parent": 2,
+    "tag": "div",
+    "text": ""
+   },
+   {
+    "box": [
+     8,
+     182,
+     25,
+     24
+    ],
+    "can_click": true,
+    "can_type": false,
+    "index": 14,
+    "parent": 13,
+    "tag": "button",
+    "text": "2"
+   },
+   {
+    "box": [
+     37,
+     182,
+     25,
+     24
+    ],
+    "can_click": true,
+    "can_type": false,
+    "index": 15,
+    "parent": 13,
+    "tag": "button",
+    "text": "6"
+   },
+   {
+    "box": [
+     66,
+     182,
+     25,
+     24
+    ],
+    "can_click": true,
+    "can_type": false,
+    "index": 16,
+    "parent": 13,
+    "tag": "button",
+    "text": "0"
+   },
+   {
+    "box": [
+     95,
+     182,
+     25,
+     24
+    ],
+    "can_click": true,
+    "can_type": false,
+    "index": 17,
+    "parent": 13,
+    "tag": "button",
+    "text": "9"
+   },
+   {
+    "box": [
+     124,
+     182,
+     25,
+     24
+    ],
+    "can_click": true,
+    "can_type": false,
+    "index": 18,
+    "parent": 13,
+    "tag": "button",
+    "text": "4"
+   }
+  ],
+  "utterance": "How many large blue items are there?"
+ },
+ "drag-box": {
+  "elements": [
+   {
+    "box": [
+     0,
+     0,
+     480,
+     210
+    ],
+    "can_click": false,
+    "can_type": false,
+    "focused": true,
+    "full_text": "s L Submit",
+    "index": 0,
+    "parent": -1,
+    "tag": "body",
+    "text": ""
+   },
+   {
+    "box": [
+     0,
+     0,
+     160,
+     210
+    ],
+    "can_click": false,
+    "can_type": false,
+    "full_text": "s L Submit",
+    "id": "wrap",
+    "index": 1,
+    "parent": 0,
+    "tag": "div",
+    "text": ""
+   },
+   {
+    "box": [
+     0,
+     50,
+     160,
+     143
+    ],
+    "can_click": false,
+    "can_type": false,
+    "full_text": "s L Submit",
+    "id": "area",
+    "index": 2,
+    "parent": 1,
+    "tag": "div",
+    "text": ""
+   },
+   {
+    "box": [
+     2,
+     52,
+     154,
+     100
+    ],
+    "can_click": false,
+    "can_type": false,
+    "full_text": "s L",
+    "id": "draggable",
+    "index": 3,
+    "parent": 2,
+    "tag": "div",
+    "text": ""
+   },
+   {
+    "box": [
+     45,
+     116,
+     28,
+     28
+    ],
+    "can_click": true,
+    "can_type": false,
+    "classes": "ui-draggable ui-draggable-handle",
+    "id": "draggableSmall",
+    "index": 4,
+    "parent": 3,
+    "tag": "div",
+    "text": "s"
+   },
+   {
+    "box": [
+     73,
+     75,
+     58,
+     58
+    ],
+    "can_click": true,
+    "can_type": false,
+    "classes": "ui-draggable ui-draggable-handle",
+    "id": "draggableLarge",
+    "index": 5,
+    "parent": 3,
+    "tag": "div",
+    "text": "L"
+   },
+   {
+    "box": [
+     2,
+     157,
+     98,
+     34
+    ],
+    "can_click": true,
+    "can_type": false,
+    "classes": "secondary-action",
+    "id": "subbtn",
+    "index": 6,
+    "parent": 2,
+    "tag": "button",
+    "text": "Submit"
+   }
+  ],
+  "utterance": "Drag the smaller box so that it is completely inside the larger box."
+ },
+ "drag-circle": {
+  "elements": [
+   {
+    "box": [
+     0,
+     0,
+     480,
+     210
+    ],
+    "can_click": false,
+    "can_type": false,
+    "focused": true,
+    "full_text": "Submit",
+    "index": 0,
+    "parent": -1,
+    "tag": "body",
+    "text": ""
+   },
+   {
+    "box": [
+     0,
+     0,
+     160,
+     210
+    ],
+    "can_click": false,
+    "can_type": false,
+    "full_text": "Submit",
+    "id": "wrap",
+    "index": 1,
+    "parent": 0,
+    "tag": "div",
+    "text": ""
+   },
+   {
+    "box": [
+     0,
+     50,
+     160,
+     171
+    ],
+    "can_click": false,
+    "can_type": false,
+    "full_text": "Submit",
+    "id": "area",
+    "index": 2,
+    "parent": 1,
+    "tag": "div",
+    "text": ""
+   },
+   {
+    "box": [
+     2,
+     52,
+     160,
+     130
+    ],
+    "can_click": false,
+    "can_type": false,
+    "index": 3,
+    "parent": 2,
+    "tag": "svg",
+    "text": ""
+   },
+   {
+    "box": [
+     86,
+     108,
+     30,
+     30
+    ],
+    "can_click": true,
+    "can_type": false,
+    "classes": "black-circle",
+    "colour": "green",
+    "index": 4,
+    "parent": 3,
+    "tag": "circle",
+    "text": ""
+   },
+   {
+    "box": [
+     32,
+     185,
+     98,
+     34
+    ],
+    "can_click": true,
+    "can_type": false,
+    "classes": "secondary-action",
+    "id": "subbtn",
+    "index": 5,
+    "parent": 2,
+    "tag": "button",
+    "text": "Submit"
+   }
+  ],
+  "utterance": "Drag the circle down then press Submit."
+ },
+ "drag-cube": {
+  "elements": [
+   {
+    "box": [
+     0,
+     0,
+     480,
+     210
+    ],
+    "can_click": false,
+    "can_type": false,
+    "focused": true,
+    "full_text": "1 2 3 4 5 6 Submit",
+    "index": 0,
+    "parent": -1,
+    "tag": "body",
+    "text": ""
+   },
+   {
+    "box": [
+     0,
+     0,
+     160,
+     210
+    ],
+    "can_click": false,
+    "can_type": false,
+    "full_text": "1 2 3 4 5 6 Submit",
+    "id": "wrap",
+    "index": 1,
+    "parent": 0,
+    "tag": "div",
+    "text": ""
+   },
+   {
+    "box": [
+     0,
+     50,
+     160,
+     172
+    ],
+    "can_click": false,
+    "can_type": false,
+    "full_text": "1 2 3 4 5 6 Submit",
+    "id": "area",
+    "index": 2,
+    "parent": 1,
+    "tag": "div",
+    "text": ""
+   },
+   {
+    "box": [
+     2,
+     72,
+     156,
+     148
+    ],
+    "can_click": false,
+    "can_type": false,
+    "full_text": "1 2 3 4 5 6 Submit",
+    "id": "wrapper",
+    "index": 3,
+    "parent": 2,
+    "tag": "div",
+    "text": ""
+   },
+   {
+    "box": [
+     18,
+     80,
+     125,
+     64
+    ],
+    "can_click": false,
+    "can_type": false,
+    "classes": "viewport",
+    "full_text": "1 2 3 4 5 6",
+    "index": 4,
+    "parent": 3,
+    "tag": "div",
+    "text": ""
+   },
+   {
+    "box": [
+     56,
+     73,
+     49,
+     76
+    ],
+    "can_click": false,
+    "can_type": false,
+    "classes": "cube",
+    "full_text": "1 2 3 4 5 6",
+    "index": 5,
+    "parent": 4,
+    "tag": "div",
+    "text": ""
+   },
+   {
+    "box": [
+     36,
+     107,
+     87,
+     60
+    ],
+    "can_click": false,
+    "can_type": false,
+    "classes": "side",
+    "full_text": "1",
+    "index": 6,
+    "parent": 5,
+    "tag": "div",
+    "text": ""
+   },
+   {
+    "box": [
+     48,
+     115,
+     64,
+     42
+    ],
+    "can_click": true,
+    "can_type": false,
+    "classes": "cube-image",
+    "index": 7,
+    "parent": 6,
+    "tag": "div",
+    "text": "1"
+   },
+   {
+    "box": [
+     78,
+     59,
+     49,
+     75
+    ],
+    "can_click": false,
+    "can_type": false,
+    "classes": "side",
+    "full_text": "2",
+    "index": 8,
+    "parent": 5,
+    "tag": "div",
+    "text": ""
+   },
+   {
+    "box": [
+     78,
+     59,
+     49,
+     75
+    ],
+    "can_click": true,
+    "can_type": false,
+    "classes": "cube-image",
+    "index": 9,
+    "parent": 8,
+    "tag": "div",
+    "text": "2"
+   },
+   {
+    "box": [
+     82,
+     85,
+     44,
+     81
+    ],
+    "can_click": false,
+    "can_type": false,
+    "classes": "side",
+    "full_text": "3",
+    "index": 10,
+    "parent": 5,
+    "tag": "div",
+    "text": ""
+   },
+   {
+    "box": [
+     82,
+     85,
+     44,
+     81
+    ],
+    "can_click": true,
+    "can_type": false,
+    "classes": "cube-image",
+    "index": 11,
+    "parent": 10,
+    "tag": "div",
+    "text": "3"
+   },
+   {
+    "box": [
+     33,
+     89,
+     50,
+     78
+    ],
+    "can_click": false,
+    "can_type": false,
+    "classes": "side",
+    "full_text": "4",
+    "index": 12,
+    "parent": 5,
+    "tag": "div",
+    "text": ""
+   },
+   {
+    "box": [
+     33,
+     89,
+     50,
+     78
+    ],
+    "can_click": true,
+    "can_type": false,
+    "classes": "cube-image",
+    "index": 13,
+    "parent": 12,
+    "tag": "div",
+    "text": "4"
+   },
+   {
+    "box": [
+     33,
+     59,
+     45,
+     78
+    ],
+    "can_click": false,
+    "can_type": false,
+    "classes": "side",
+    "full_text": "5",
+    "index": 14,
+    "parent": 5,
+    "tag": "div",
+    "text": ""
+   },
+   {
+    "box": [
+     33,
+     59,
+     45,
+     78
+    ],
+    "can_click": true,
+    "can_type": false,
+    "classes": "cube-image",
+    "index": 15,
+    "parent": 14,
+    "tag": "div",
+    "text": "5"
+   },
+   {
+    "box": [
+     33,
+     59,
+     94,
+     59
+    ],
+    "can_click": false,
+    "can_type": false,
+    "classes": "side",
+    "full_text": "6",
+    "index": 16,
+    "parent": 5,
+    "tag": "div",
+    "text": ""
+   },
+   {
+    "box": [
+     46,
+     67,
+     69,
+     42
+    ],
+    "can_click": true,
+    "can_type": false,
+    "classes": "cube-image active",
+    "index": 17,
+    "parent": 16,
+    "tag": "div",
+    "text": "6"
+   },
+   {
+    "box": [
+     32,
+     179,
+     98,
+     34
+    ],
+    "can_click": true,
+    "can_type": false,
+    "classes": "secondary-action",
+    "id": "subbtn",
+    "index": 18,
+    "parent": 3,
+    "tag": "button",
+    "text": "Submit"
+   }
+  ],
+  "utterance": "Move the cube around so that \"6\" is the active side facing the user."
+ },
+ "drag-items": {
+  "elements": [
+   {
+    "box": [
+     0,
+     0,
+     480,
+     210
+    ],
+    "can_click": false,
+    "can_type": false,
+    "focused": true,
+    "full_text": "Zonda Jenilee Milissent Trudie Winna",
+    "index": 0,
+    "parent": -1,
+    "tag": "body",
+    "text": ""
+   },
+   {
+    "box": [
+     0,
+     0,
+     160,
+     210
+    ],
+    "can_click": false,
+    "can_type": false,
+    "full_text": "Zonda Jenilee Milissent Trudie Winna",
+    "id": "wrap",
+    "index": 1,
+    "parent": 0,
+    "tag": "div",
+    "text": ""
+   },
+   {
+    "box": [
+     0,
+     50,
+     160,
+     152
+    ],
+    "can_click": false,
+    "can_type": false,
+    "full_text": "Zonda Jenilee Milissent Trudie Winna",
+    "id": "area",
+    "index": 2,
+    "parent": 1,
+    "tag": "div",
+    "text": ""
+   },
+   {
+    "box": [
+     7,
+     57,
+     140,
+     140
+    ],
+    "can_click": false,
+    "can_type": false,
+    "classes": "ui-sortable",
+    "full_text": "Zonda Jenilee Milissent Trudie Winna",
+    "id": "sortable",
+    "index": 3,
+    "parent": 2,
+    "tag": "ul",
+    "text": ""
+   },
+   {
+    "box": [
+     10,
+     57,
+     134,
+     26
+    ],
+    "can_click": false,
+    "can_type": false,
+    "classes": "ui-state-default ui-sortable-handle",
+    "full_text": "Zonda",
+    "index": 4,
+    "parent": 3,
+    "tag": "li",
+    "text": ""
+   },
+   {
+    "box": [
+     11,
+     60,
+     16,
+     16
+    ],
+    "can_click": true,
+    "can_type": false,
+    "classes": "ui-icon ui-icon-arrowthick-2-n-s",
+    "index": 5,
+    "parent": 4,
+    "tag": "span",
+    "text": ""
+   },
+   {
+    "box": [
+     27,
+     63,
+     112,
+     17
+    ],
+    "can_click": true,
+    "can_type": false,
+    "index": 6,
+    "parent": 4,
+    "tag": "div",
+    "text": "Zonda"
+   },
+   {
+    "box": [
+     10,
+     86,
+     134,
+     26
+    ],
+    "can_click": false,
+    "can_type": false,
+    "classes": "ui-state-default ui-sortable-handle",
+    "full_text": "Jenilee",
+    "index": 7,
+    "parent": 3,
+    "tag": "li",
+    "text": ""
+   },
+   {
+    "box": [
+     11,
+     88,
+     16,
+     16
+    ],
+    "can_click": true,
+    "can_type": false,
+    "classes": "ui-icon ui-icon-arrowthick-2-n-s",
+    "index": 8,
+    "parent": 7,
+    "tag": "span",
+    "text": ""
+   },
+   {
+    "box": [
+     27,
+     91,
+     112,
+     17
+    ],
+    "can_click": true,
+    "can_type": false,
+    "index": 9,
+    "parent": 7,
+    "tag": "div",
+    "text": "Jenilee"
+   },
+   {
+    "box": [
+     10,
+     114,
+     134,
+     26
+    ],
+    "can_click": false,
+    "can_type": false,
+    "classes": "ui-state-default ui-sortable-handle",
+    "full_text": "Milissent",
+    "index": 10,
+    "parent": 3,
+    "tag": "li",
+    "text": ""
+   },
+   {
+    "box": [
+     11,
+     117,
+     16,
+     16
+    ],
+    "can_click": true,
+    "can_type": false,
+    "classes": "ui-icon ui-icon-arrowthick-2-n-s",
+    "index": 11,
+    "parent": 10,
+    "tag": "span",
+    "text": ""
+   },
+   {
+    "box": [
+     27,
+     120,
+     112,
+     17
+    ],
+    "can_click": true,
+    "can_type": false,
+    "index": 12,
+    "parent": 10,
+    "tag": "div",
+    "text": "Milissent"
+   },
+   {
+    "box": [
+     10,
+     143,
+     134,
+     26
+    ],
+    "can_click": false,
+    "can_type": false,
+    "classes": "ui-state-default ui-sortable-handle",
+    "full_text": "Trudie",
+    "index": 13,
+    "parent": 3,
+    "tag": "li",
+    "text": ""
+   },
+   {
+    "box": [
+     11,
+     146,
+     16,
+     16
+    ],
+    "can_click": true,
+    "can_type": false,
+    "classes": "ui-icon ui-icon-arrowthick-2-n-s",
+    "index": 14,
+    "parent": 13,
+    "tag": "span",
+    "text": ""
+   },
+   {
+    "box": [
+     27,
+     149,
+     112,
+     17
+    ],
+    "can_click": true,
+    "can_type": false,
+    "index": 15,
+    "parent": 13,
+    "tag": "div",
+    "text": "Trudie"
+   },
+   {
+    "box": [
+     10,
+     171,
+     134,
+     26
+    ],
+    "can_click": false,
+    "can_type": false,
+    "classes": "ui-state-default ui-sortable-handle",
+    "full_text": "Winna",
+    "index": 16,
+    "parent": 3,
+    "tag": "li",
+    "text": ""
+   },
+   {
+    "box": [
+     11,
+     174,
+     16,
+     16
+    ],
+    "can_click": true,
+    "can_type": false,
+    "classes": "ui-icon ui-icon-arrowthick-2-n-s",
+    "index": 17,
+    "parent": 16,
+    "tag": "span",
+    "text": ""
+   },
+   {
+    "box": [
+     27,
+     177,
+     112,
+     17
+    ],
+    "can_click": true,
+    "can_type": false,
+    "index": 18,
+    "parent": 16,
+    "tag": "div",
+    "text": "Winna"
+   }
+  ],
+  "utterance": "Drag Milissent to the 1st position."
+ },
+ "drag-items-grid": {
+  "elements": [
+   {
+    "box": [
+     0,
+     0,
+     480,
+     210
+    ],
+    "can_click": false,
+    "can_type": false,
+    "focused": true,
+    "full_text": "Zonda Jenilee Milissent Trudie Winna Bendite Brita Buffy Harmonia",
+    "index": 0,
+    "parent": -1,
+    "tag": "body",
+    "text": ""
+   },
+   {
+    "box": [
+     0,
+     0,
+     160,
+     210
+    ],
+    "can_click": false,
+    "can_type": false,
+    "full_text": "Zonda Jenilee Milissent Trudie Winna Bendite Brita Buffy Harmonia",
+    "id": "wrap",
+    "index": 1,
+    "parent": 0,
+    "tag": "div",
+    "text": ""
+   },
+   {
+    "box": [
+     0,
+     50,
+     160,
+     6
+    ],
+    "can_click": true,
+    "can_type": false,
+    "full_text": "Zonda Jenilee Milissent Trudie Winna Bendite Brita Buffy Harmonia",
+    "id": "area",
+    "index": 2,
+    "parent": 1,
+    "tag": "div",
+    "text": ""
+   },
+   {
+    "box": [
+     4,
+     54,
+     140,
+     0
+    ],
+    "can_click": false,
+    "can_type": false,
+    "classes": "ui-sortable",
+    "full_text": "Zonda Jenilee Milissent Trudie Winna Bendite Brita Buffy Harmonia",
+    "id": "sortable",
+    "index": 3,
+    "parent": 2,
+    "tag": "ul",
+    "text": ""
+   },
+   {
+    "box": [
+     7,
+     57,
+     40,
+     40
+    ],
+    "can_click": false,
+    "can_type": false,
+    "classes": "ui-state-default ui-sortable-handle",
+    "full_text": "Zonda",
+    "index": 4,
+    "parent": 3,
+    "tag": "li",
+    "text": ""
+   },
+   {
+    "box": [
+     10,
+     60,
+     34,
+     11
+    ],
+    "can_click": true,
+    "can_type": false,
+    "index": 5,
+    "parent": 4,
+    "tag": "div",
+    "text": "Zonda"
+   },
+   {
+    "box": [
+     53,
+     57,
+     40,
+     40
+    ],
+    "can_click": false,
+    "can_type": false,
+    "classes": "ui-state-default ui-sortable-handle",
+    "full_text": "Jenilee",
+    "index": 6,
+    "parent": 3,
+    "tag": "li",
+    "text": ""
+   },
+   {
+    "box": [
+     56,
+     60,
+     34,
+     11
+    ],
+    "can_click": true,
+    "can_type": false,
+    "index": 7,
+    "parent": 6,
+    "tag": "div",
+    "text": "Jenilee"
+   },
+   {
+    "box": [
+     99,
+     57,
+     40,
+     40
+    ],
+    "can_click": false,
+    "can_type": false,
+    "classes": "ui-state-default ui-sortable-handle",
+    "full_text": "Milissent",
+    "index": 8,
+    "parent": 3,
+    "tag": "li",
+    "text": ""
+   },
+   {
+    "box": [
+     102,
+     60,
+     34,
+     11
+    ],
+    "can_click": true,
+    "can_type": false,
+    "index": 9,
+    "parent": 8,
+    "tag": "div",
+    "text": "Milissent"
+   },
+   {
+    "box": [
+     7,
+     103,
+     40,
+     40
+    ],
+    "can_click": false,
+    "can_type": false,
+    "classes": "ui-state-default ui-sortable-handle",
+    "full_text": "Trudie",
+    "index": 10,
+    "parent": 3,
+    "tag": "li",
+    "text": ""
+   },
+   {
+    "box": [
+     10,
+     106,
+     34,
+     11
+    ],
+    "can_click": true,
+    "can_type": false,
+    "index": 11,
+    "parent": 10,
+    "tag": "div",
+    "text": "Trudie"
+   },
+   {
+    "box": [
+     53,
+     103,
+     40,
+     40
+    ],
+    "can_click": false,
+    "can_type": false,
+    "classes": "ui-state-default ui-sortable-handle",
+    "full_text": "Winna",
+    "index": 12,
+    "parent": 3,
+    "tag": "li",
+    "text": ""
+   },
+   {
+    "box": [
+     56,
+     106,
+     34,
+     11
+    ],
+    "can_click": true,
+    "can_type": false,
+    "index": 13,
+    "parent": 12,
+    "tag": "div",
+    "text": "Winna"
+   },
+   {
+    "box": [
+     99,
+     103,
+     40,
+     40
+    ],
+    "can_click": false,
+    "can_type": false,
+    "classes": "ui-state-default ui-sortable-handle",
+    "full_text": "Bendite",
+    "index": 14,
+    "parent": 3,
+    "tag": "li",
+    "text": ""
+   },
+   {
+    "box": [
+     102,
+     106,
+     34,
+     11
+    ],
+    "can_click": true,
+    "can_type": false,
+    "index": 15,
+    "parent": 14,
+    "tag": "div",
+    "text": "Bendite"
+   },
+   {
+    "box": [
+     7,
+     149,
+     40,
+     40
+    ],
+    "can_click": false,
+    "can_type": false,
+    "classes": "ui-state-default ui-sortable-handle",
+    "full_text": "Brita",
+    "index": 16,
+    "parent": 3,
+    "tag": "li",
+    "text": ""
+   },
+   {
+    "box": [
+     10,
+     152,
+     34,
+     11
+    ],
+    "can_click": true,
+    "can_type": false,
+    "index": 17,
+    "parent": 16,
+    "tag": "div",
+    "text": "Brita"
+   },
+   {
+    "box": [
+     53,
+     149,
+     40,
+     40
+    ],
+    "can_click": false,
+    "can_type": false,
+    "classes": "ui-state-default ui-sortable-handle",
+    "full_text": "Buffy",
+    "index": 18,
+    "parent": 3,
+    "tag": "li",
+    "text": ""
+   },
+   {
+    "box": [
+     56,
+     152,
+     34,
+     11
+    ],
+    "can_click": true,
+    "can_type": false,
+    "index": 19,
+    "parent": 18,
+    "tag": "div",
+    "text": "Buffy"
+   },
+   {
+    "box": [
+     99,
+     149,
+     40,
+     40
+    ],
+    "can_click": false,
+    "can_type": false,
+    "classes": "ui-state-default ui-sortable-handle",
+    "full_text": "Harmonia",
+    "index": 20,
+    "parent": 3,
+    "tag": "li",
+    "text": ""
+   },
+   {
+    "box": [
+     102,
+     152,
+     34,
+     11
+    ],
+    "can_click": true,
+    "can_type": false,
+    "index": 21,
+    "parent": 20,
+    "tag": "div",
+    "text": "Harmonia"
+   }
+  ],
+  "utterance": "Drag Winna to the bottom right."
+ },
+ "drag-shapes": {
+  "elements": [
+   {
+    "box": [
+     0,
+     0,
+     480,
+     210
+    ],
+    "can_click": false,
+    "can_type": false,
+    "focused": true,
+    "full_text": "Submit",
+    "index": 0,
+    "parent": -1,
+    "tag": "body",
+    "text": ""
+   },
+   {
+    "box": [
+     0,
+     0,
+     160,
+     210
+    ],
+    "can_click": false,
+    "can_type": false,
+    "full_text": "Submit",
+    "id": "wrap",
+    "index": 1,
+    "parent": 0,
+    "tag": "div",
+    "text": ""
+   },
+   {
+    "box": [
+     0,
+     50,
+     160,
+     167
+    ],
+    "can_click": false,
+    "can_type": false,
+    "full_text": "Submit",
+    "id": "area",
+    "index": 2,
+    "parent": 1,
+    "tag": "div",
+    "text": ""
+   },
+   {
+    "box": [
+     2,
+     52,
+     160,
+     160
+    ],
+    "can_click": false,
+    "can_type": false,
+    "id": "area_svg",
+    "index": 3,
+    "parent": 2,
+    "tag": "svg",
+    "text": ""
+   },
+   {
+    "box": [
+     4,
+     114,
+     17,
+     17
+    ],
+    "can_click": true,
+    "can_type": false,
+    "colour": "blue",
+    "index": 4,
+    "parent": 3,
+    "tag": "rect",
+    "text": ""
+   },
+   {
+    "box": [
+     4,
+     94,
+     17,
+     17
+    ],
+    "can_click": true,
+    "can_type": false,
+    "colour": "yellow",
+    "index": 5,
+    "parent": 3,
+    "tag": "rect",
+    "text": ""
+   },
+   {
+    "box": [
+     44,
+     114,
+     17,
+     17
+    ],
+    "can_click": true,
+    "can_type": false,
+    "colour": "yellow",
+    "index": 6,
+    "parent": 3,
+    "tag": "circle",
+    "text": ""
+   },
+   {
+    "box": [
+     84,
+     54,
+     17,
+     17
+    ],
+    "can_click": true,
+    "can_type": false,
+    "colour": "yellow",
+    "index": 7,
+    "parent": 3,
+    "tag": "polygon",
+    "text": ""
+   },
+   {
+    "box": [
+     62,
+     83,
+     80,
+     45
+    ],
+    "can_click": true,
+    "can_type": false,
+    "id": "shape-container",
+    "index": 8,
+    "parent": 3,
+    "tag": "rect",
+    "text": ""
+   },
+   {
+    "box": [
+     52,
+     185,
+     98,
+     34
+    ],
+    "can_click": true,
+    "can_type": false,
+    "classes": "secondary-action",
+    "id": "subbtn",
+    "index": 9,
+    "parent": 2,
+    "tag": "button",
+    "text": "Submit"
+   }
+  ],
+  "utterance": "Drag all triangles into the black box."
+ },
+ "drag-shapes-2": {
+  "elements": [
+   {
+    "box": [
+     0,
+     0,
+     480,
+     210
+    ],
+    "can_click": false,
+    "can_type": false,
+    "focused": true,
+    "full_text": "Submit",
+    "index": 0,
+    "parent": -1,
+    "tag": "body",
+    "text": ""
+   },
+   {
+    "box": [
+     0,
+     0,
+     160,
+     210
+    ],
+    "can_click": false,
+    "can_type": false,
+    "full_text": "Submit",
+    "id": "wrap",
+    "index": 1,
+    "parent": 0,
+    "tag": "div",
+    "text": ""
+   },
+   {
+    "box": [
+     0,
+     50,
+     160,
+     167
+    ],
+    "can_click": false,
+    "can_type": false,
+    "full_text": "Submit",
+    "id": "area",
+    "index": 2,
+    "parent": 1,
+    "tag": "div",
+    "text": ""
+   },
+   {
+    "box": [
+     2,
+     52,
+     160,
+     160
+    ],
+    "can_click": false,
+    "can_type": false,
+    "id": "area_svg",
+    "index": 3,
+    "parent": 2,
+    "tag": "svg",
+    "text": ""
+   },
+   {
+    "box": [
+     64,
+     154,
+     17,
+     17
+    ],
+    "can_click": true,
+    "can_type": false,
+    "colour": "magenta",
+    "index": 4,
+    "parent": 3,
+    "tag": "polygon",
+    "text": ""
+   },
+   {
+    "box": [
+     124,
+     134,
+     17,
+     17
+    ],
+    "can_click": true,
+    "can_type": false,
+    "colour": "yellow",
+    "index": 5,
+    "parent": 3,
+    "tag": "rect",
+    "text": ""
+   },
+   {
+    "box": [
+     4,
+     154,
+     17,
+     17
+    ],
+    "can_click": true,
+    "can_type": false,
+    "colour": "blue",
+    "index": 6,
+    "parent": 3,
+    "tag": "rect",
+    "text": ""
+   },
+   {
+    "box": [
+     64,
+     134,
+     17,
+     17
+    ],
+    "can_click": true,
+    "can_type": false,
+    "colour": "red",
+    "index": 7,
+    "parent": 3,
+    "tag": "polygon",
+    "text": ""
+   },
+   {
+    "box": [
+     44,
+     154,
+     17,
+     17
+    ],
+    "can_click": true,
+    "can_type": false,
+    "colour": "yellow",
+    "index": 8,
+    "parent": 3,
+    "tag": "circle",
+    "text": ""
+   },
+   {
+    "box": [
+     4,
+     57,
+     70,
+     50
+    ],
+    "can_click": true,
+    "can_type": false,
+    "id": "shape-container",
+    "index": 9,
+    "parent": 3,
+    "tag": "rect",
+    "text": ""
+   },
+   {
+    "box": [
+     86,
+     57,
+     70,
+     50
+    ],
+    "can_click": true,
+    "can_type": false,
+    "id": "shape-container",
+    "index": 10,
+    "parent": 3,
+    "tag": "rect",
+    "text": ""
+   },
+   {
+    "box": [
+     52,
+     170,
+     98,
+     34
+    ],
+    "can_click": true,
+    "can_type": false,
+    "classes": "secondary-action",
+    "id": "subbtn",
+    "index": 11,
+    "parent": 2,
+    "tag": "button",
+    "text": "Submit"
+   }
+  ],
+  "utterance": "Drag all blue shapes into the left box, and everything else into the right box."
+ },
+ "drag-single-shape": {
+  "elements": [
+   {
+    "box": [
+     0,
+     0,
+     480,
+     210
+    ],
+    "can_click": false,
+    "can_type": false,
+    "focused": true,
+    "full_text": "Submit",
+    "index": 0,
+    "parent": -1,
+    "tag": "body",
+    "text": ""
+   },
+   {
+    "box": [
+     0,
+     0,
+     160,
+     210
+    ],
+    "can_click": false,
+    "can_type": false,
+    "full_text": "Submit",
+    "id": "wrap",
+    "index": 1,
+    "parent": 0,
+    "tag": "div",
+    "text": ""
+   },
+   {
+    "box": [
+     0,
+     50,
+     160,
+     156
+    ],
+    "can_click": false,
+    "can_type": false,
+    "full_text": "Submit",
+    "id": "area",
+    "index": 2,
+    "parent": 1,
+    "tag": "div",
+    "text": ""
+   },
+   {
+    "box": [
+     2,
+     52,
+     160,
+     120
+    ],
+    "can_click": false,
+    "can_type": false,
+    "index": 3,
+    "parent": 2,
+    "tag": "svg",
+    "text": ""
+   },
+   {
+    "box": [
+     71,
+     109,
+     32,
+     32
+    ],
+    "can_click": true,
+    "can_type": false,
+    "classes": "black-shape",
+    "colour": "orange",
+    "index": 4,
+    "parent": 3,
+    "tag": "circle",
+    "text": ""
+   },
+   {
+    "box": [
+     32,
+     170,
+     98,
+     34
+    ],
+    "can_click": true,
+    "can_type": false,
+    "classes": "secondary-action",
+    "id": "subbtn",
+    "index": 5,
+    "parent": 2,
+    "tag": "button",
+    "text": "Submit"
+   }
+  ],
+  "utterance": "Drag the item down then press Submit."
+ },
+ "highlight-text": {
+  "elements": [
+   {
+    "box": [
+     0,
+     0,
+     480,
+     210
+    ],
+    "can_click": false,
+    "can_type": false,
+    "focused": true,
+    "full_text": "Eget ante quam at facilisi Submit",
+    "index": 0,
+    "parent": -1,
+    "tag": "body",
+    "text": ""
+   },
+   {
+    "box": [
+     0,
+     0,
+     160,
+     210
+    ],
+    "can_click": false,
+    "can_type": false,
+    "full_text": "Eget ante quam at facilisi Submit",
+    "id": "wrap",
+    "index": 1,
+    "parent": 0,
+    "tag": "div",
+    "text": ""
+   },
+   {
+    "box": [
+     0,
+     50,
+     160,
+     82
+    ],
+    "can_click": false,
+    "can_type": false,
+    "full_text": "Eget ante quam at facilisi Submit",
+    "id": "area",
+    "index": 2,
+    "parent": 1,
+    "tag": "div",
+    "text": ""
+   },
+   {
+    "box": [
+     12,
+     62,
+     136,
+     14
+    ],
+    "can_click": true,
+    "can_type": false,
+    "id": "randomText",
+    "index": 3,
+    "parent": 2,
+    "tag": "div",
+    "text": "Eget ante quam at facilisi"
+   },
+   {
+    "box": [
+     7,
+     91,
+     98,
+     34
+    ],
+    "can_click": true,
+    "can_type": false,
+    "classes": "secondary-action",
+    "id": "subbtn",
+    "index": 4,
+    "parent": 2,
+    "tag": "button",
+    "text": "Submit"
+   }
+  ],
+  "utterance": "Highlight the text in the paragraph below and click submit."
+ },
+ "hover-shape": {
+  "elements": [
+   {
+    "box": [
+     0,
+     0,
+     480,
+     210
+    ],
+    "can_click": false,
+    "can_type": false,
+    "focused": true,
+    "index": 0,
+    "parent": -1,
+    "tag": "body",
+    "text": ""
+   },
+   {
+    "box": [
+     0,
+     0,
+     160,
+     210
+    ],
+    "can_click": false,
+    "can_type": false,
+    "id": "wrap",
+    "index": 1,
+    "parent": 0,
+    "tag": "div",
+    "text": ""
+   },
+   {
+    "box": [
+     0,
+     50,
+     160,
+     167
+    ],
+    "can_click": false,
+    "can_type": false,
+    "id": "area",
+    "index": 2,
+    "parent": 1,
+    "tag": "div",
+    "text": ""
+   },
+   {
+    "box": [
+     2,
+     52,
+     160,
+     160
+    ],
+    "can_click": false,
+    "can_type": false,
+    "id": "area_svg",
+    "index": 3,
+    "parent": 2,
+    "tag": "svg",
+    "text": ""
+   },
+   {
+    "box": [
+     55,
+     124,
+     23,
+     23
+    ],
+    "can_click": true,
+    "can_type": false,
+    "classes": "rect",
+    "index": 4,
+    "parent": 3,
+    "tag": "rect",
+    "text": ""
+   },
+   {
+    "box": [
+     94,
+     145,
+     23,
+     23
+    ],
+    "can_click": true,
+    "can_type": false,
+    "classes": "rect",
+    "index": 5,
+    "parent": 3,
+    "tag": "rect",
+    "text": ""
+   },
+   {
+    "box": [
+     80,
+     75,
+     23,
+     23
+    ],
+    "can_click": true,
+    "can_type": false,
+    "classes": "rect highlight-blue",
+    "id": "highlight",
+    "index": 6,
+    "parent": 3,
+    "tag": "rect",
+    "text": ""
+   },
+   {
+    "box": [
+     99,
+     113,
+     23,
+     23
+    ],
+    "can_click": true,
+    "can_type": false,
+    "classes": "rect",
+    "index": 7,
+    "parent": 3,
+    "tag": "rect",
+    "text": ""
+   },
+   {
+    "box": [
+     52,
+     168,
+     23,
+     23
+    ],
+    "can_click": true,
+    "can_type": false,
+    "classes": "rect",
+    "index": 8,
+    "parent": 3,
+    "tag": "rect",
+    "text": ""
+   }
+  ],
+  "utterance": "Keep the mouse hovered over the colored square."
+ },
+ "identify-shape": {
+  "elements": [
+   {
+    "box": [
+     0,
+     0,
+     480,
+     210
+    ],
+    "can_click": false,
+    "can_type": false,
+    "focused": true,
+    "full_text": "Rectangle Circle Triangle Letter Number",
+    "index": 0,
+    "parent": -1,
+    "tag": "body",
+    "text": ""
+   },
+   {
+    "box": [
+     0,
+     0,
+     160,
+     210
+    ],
+    "can_click": false,
+    "can_type": false,
+    "full_text": "Rectangle Circle Triangle Letter Number",
+    "id": "wrap",
+    "index": 1,
+    "parent": 0,
+    "tag": "div",
+    "text": ""
+   },
+   {
+    "box": [
+     0,
+     50,
+     160,
+     161
+    ],
+    "can_click": false,
+    "can_type": false,
+    "full_text": "Rectangle Circle Triangle Letter Number",
+    "id": "area",
+    "index": 2,
+    "parent": 1,
+    "tag": "div",
+    "text": ""
+   },
+   {
+    "box": [
+     55,
+     62,
+     50,
+     50
+    ],
+    "can_click": false,
+    "can_type": false,
+    "id": "area_svg",
+    "index": 3,
+    "parent": 2,
+    "tag": "svg",
+    "text": ""
+   },
+   {
+    "box": [
+     62,
+     69,
+     30,
+     30
+    ],
+    "can_click": true,
+    "can_type": false,
+    "colour": "aqua",
+    "index": 4,
+    "parent": 3,
+    "tag": "polygon",
+    "text": ""
+   },
+   {
+    "box": [
+     2,
+     125,
+     156,
+     84
+    ],
+    "can_click": false,
+    "can_type": false,
+    "full_text": "Rectangle Circle Triangle Letter Number",
+    "id": "area-buttons",
+    "index": 5,
+    "parent": 2,
+    "tag": "div",
+    "text": ""
+   },
+   {
+    "box": [
+     13,
+     127,
+     77,
+     24
+    ],
+    "can_click": true,
+    "can_type": false,
+    "index": 6,
+    "parent": 5,
+    "tag": "button",
+    "text": "Rectangle"
+   },
+   {
+    "box": [
+     96,
+     127,
+     50,
+     24
+    ],
+    "can_click": true,
+    "can_type": false,
+    "index": 7,
+    "parent": 5,
+    "tag": "button",
+    "text": "Circle"
+   },
+   {
+    "box": [
+     17,
+     155,
+     66,
+     24
+    ],
+    "can_click": true,
+    "can_type": false,
+    "index": 8,
+    "parent": 5,
+    "tag": "button",
+    "text": "Triangle"
+   },
+   {
+    "box": [
+     90,
+     155,
+     53,
+     24
+    ],
+    "can_click": true,
+    "can_type": false,
+    "index": 9,
+    "parent": 5,
+    "tag": "button",
+    "text": "Letter"
+   },
+   {
+    "box": [
+     46,
+     183,
+     68,
+     24
+    ],
+    "can_click": true,
+    "can_type": false,
+    "index": 10,
+    "parent": 5,
+    "tag": "button",
+    "text": "Number"
+   }
+  ],
+  "utterance": "Click the button that best describes the figure below."
+ },
+ "number-checkboxes": {
+  "elements": [
+   {
+    "box": [
+     0,
+     0,
+     480,
+     210
+    ],
+    "can_click": false,
+    "can_type": false,
+    "focused": true,
+    "full_text": "Submit",
+    "index": 0,
+    "parent": -1,
+    "tag": "body",
+    "text": ""
+   },
+   {
+    "box": [
+     0,
+     0,
+     160,
+     210
+    ],
+    "can_click": false,
+    "can_type": false,
+    "full_text": "Submit",
+    "id": "wrap",
+    "index": 1,
+    "parent": 0,
+    "tag": "div",
+    "text": ""
+   },
+   {
+    "box": [
+     0,
+     50,
+     160,
+     167
+    ],
+    "can_click": false,
+    "can_type": false,
+    "full_text": "Submit",
+    "id": "area",
+    "index": 2,
+    "parent": 1,
+    "tag": "div",
+    "text": ""
+   },
+   {
+    "box": [
+     86,
+     52,
+     72,
+     125
+    ],
+    "can_click": false,
+    "can_type": false,
+    "index": 3,
+    "parent": 2,
+    "tag": "aside",
+    "text": ""
+   },
+   {
+    "box": [
+     86,
+     52,
+     72,
+     123
+    ],
+    "can_click": false,
+    "can_type": false,
+    "id": "o8",
+    "index": 4,
+    "parent": 3,
+    "tag": "div",
+    "text": ""
+   },
+   {
+    "box": [
+     86,
+     57,
+     63,
+     110
+    ],
+    "can_click": true,
+    "can_type": false,
+    "index": 5,
+    "parent": 4,
+    "tag": "img",
+    "text": ""
+   },
+   {
+    "box": [
+     2,
+     52,
+     85,
+     120
+    ],
+    "can_click": false,
+    "can_type": false,
+    "id": "checkboxes",
+    "index": 6,
+    "parent": 2,
+    "tag": "div",
+    "text": ""
+   },
+   {
+    "box": [
+     13,
+     58,
+     73,
+     15
+    ],
+    "can_click": false,
+    "can_type": false,
+    "index": 7,
+    "parent": 6,
+    "tag": "p",
+    "text": ""
+   },
+   {
+    "box": [
+     15,
+     59,
+     13,
+     13
+    ],
+    "can_click": true,
+    "can_type": false,
+    "checked": false,
+    "index": 8,
+    "parent": 7,
+    "tag": "input",
+    "text": "",
+    "type": "checkbox",
+    "value": "on"
+   },
+   {
+    "box": [
+     32,
+     59,
+     13,
+     13
+    ],
+    "can_click": true,
+    "can_type": false,
+    "checked": false,
+    "index": 9,
+    "parent": 7,
+    "tag": "input",
+    "text": "",
+    "type": "checkbox",
+    "value": "on"
+   },
+   {
+    "box": [
+     49,
+     59,
+     13,
+     13
+    ],
+    "can_click": true,
+    "can_type": false,
+    "checked": false,
+    "index": 10,
+    "parent": 7,
+    "tag": "input",
+    "text": "",
+    "type": "checkbox",
+    "value": "on"
+   },
+   {
+    "box": [
+     66,
+     59,
+     13,
+     13
+    ],
+    "can_click": true,
+    "can_type": false,
+    "checked": false,
+    "index": 11,
+    "parent": 7,
+    "tag": "input",
+    "text": "",
+    "type": "checkbox",
+    "value": "on"
+   },
+   {
+    "box": [
+     81,
+     61,
+     0,
+     14
+    ],
+    "can_click": false,
+    "can_type": false,
+    "index": 12,
+    "parent": 7,
+    "tag": "label",
+    "text": ""
+   },
+   {
+    "box": [
+     13,
+     74,
+     73,
+     15
+    ],
+    "can_click": false,
+    "can_type": false,
+    "index": 13,
+    "parent": 6,
+    "tag": "p",
+    "text": ""
+   },
+   {
+    "box": [
+     15,
+     75,
+     13,
+     13
+    ],
+    "can_click": true,
+    "can_type": false,
+    "checked": false,
+    "index": 14,
+    "parent": 13,
+    "tag": "input",
+    "text": "",
+    "type": "checkbox",
+    "value": "on"
+   },
+   {
+    "box": [
+     32,
+     75,
+     13,
+     13
+    ],
+    "can_click": true,
+    "can_type": false,
+    "checked": false,
+    "index": 15,
+    "parent": 13,
+    "tag": "input",
+    "text": "",
+    "type": "checkbox",
+    "value": "on"
+   },
+   {
+    "box": [
+     49,
+     75,
+     13,
+     13
+    ],
+    "can_click": true,
+    "can_type": false,
+    "checked": false,
+    "index": 16,
+    "parent": 13,
+    "tag": "input",
+    "text": "",
+    "type": "checkbox",
+    "value": "on"
+   },
+   {
+    "box": [
+     66,
+     75,
+     13,
+     13
+    ],
+    "can_click": true,
+    "can_type": false,
+    "checked": false,
+    "index": 17,
+    "parent": 13,
+    "tag": "input",
+    "text": "",
+    "type": "checkbox",
+    "value": "on"
+   },
+   {
+    "box": [
+     81,
+     77,
+     0,
+     14
+    ],
+    "can_click": false,
+    "can_type": false,
+    "index": 18,
+    "parent": 13,
+    "tag": "label",
+    "text": ""
+   },
+   {
+    "box": [
+     13,
+     90,
+     73,
+     15
+    ],
+    "can_click": false,
+    "can_type": false,
+    "index": 19,
+    "parent": 6,
+    "tag": "p",
+    "text": ""
+   },
+   {
+    "box": [
+     15,
+     91,
+     13,
+     13
+    ],
+    "can_click": true,
+    "can_type": false,
+    "checked": false,
+    "index": 20,
+    "parent": 19,
+    "tag": "input",
+    "text": "",
+    "type": "checkbox",
+    "value": "on"
+   },
+   {
+    "box": [
+     32,
+     91,
+     13,
+     13
+    ],
+    "can_click": true,
+    "can_type": false,
+    "checked": false,
+    "index": 21,
+    "parent": 19,
+    "tag": "input",
+    "text": "",
+    "type": "checkbox",
+    "value": "on"
+   },
+   {
+    "box": [
+     49,
+     91,
+     13,
+     13
+    ],
+    "can_click": true,
+    "can_type": false,
+    "checked": false,
+    "index": 22,
+    "parent": 19,
+    "tag": "input",
+    "text": "",
+    "type": "checkbox",
+    "value": "on"
+   },
+   {
+    "box": [
+     66,
+     91,
+     13,
+     13
+    ],
+    "can_click": true,
+    "can_type": false,
+    "checked": false,
+    "index": 23,
+    "parent": 19,
+    "tag": "input",
+    "text": "",
+    "type": "checkbox",
+    "value": "on"
+   },
+   {
+    "box": [
+     81,
+     93,
+     0,
+     14
+    ],
+    "can_click": false,
+    "can_type": false,
+    "index": 24,
+    "parent": 19,
+    "tag": "label",
+    "text": ""
+   },
+   {
+    "box": [
+     13,
+     106,
+     73,
+     15
+    ],
+    "can_click": false,
+    "can_type": false,
+    "index": 25,
+    "parent": 6,
+    "tag": "p",
+    "text": ""
+   },
+   {
+    "box": [
+     15,
+     107,
+     13,
+     13
+    ],
+    "can_click": true,
+    "can_type": false,
+    "checked": false,
+    "index": 26,
+    "parent": 25,
+    "tag": "input",
+    "text": "",
+    "type": "checkbox",
+    "value": "on"
+   },
+   {
+    "box": [
+     32,
+     107,
+     13,
+     13
+    ],
+    "can_click": true,
+    "can_type": false,
+    "checked": false,
+    "index": 27,
+    "parent": 25,
+    "tag": "input",
+    "text": "",
+    "type": "checkbox",
+    "value": "on"
+   },
+   {
+    "box": [
+     49,
+     107,
+     13,
+     13
+    ],
+    "can_click": true,
+    "can_type": false,
+    "checked": false,
+    "index": 28,
+    "parent": 25,
+    "tag": "input",
+    "text": "",
+    "type": "checkbox",
+    "value": "on"
+   },
+   {
+    "box": [
+     66,
+     107,
+     13,
+     13
+    ],
+    "can_click": true,
+    "can_type": false,
+    "checked": false,
+    "index": 29,
+    "parent": 25,
+    "tag": "input",
+    "text": "",
+    "type": "checkbox",
+    "value": "on"
+   },
+   {
+    "box": [
+     81,
+     109,
+     0,
+     14
+    ],
+    "can_click": false,
+    "can_type": false,
+    "index": 30,
+    "parent": 25,
+    "tag": "label",
+    "text": ""
+   },
+   {
+    "box": [
+     13,
+     122,
+     73,
+     15
+    ],
+    "can_click": false,
+    "can_type": false,
+    "index": 31,
+    "parent": 6,
+    "tag": "p",
+    "text": ""
+   },
+   {
+    "box": [
+     15,
+     123,
+     13,
+     13
+    ],
+    "can_click": true,
+    "can_type": false,
+    "checked": false,
+    "index": 32,
+    "parent": 31,
+    "tag": "input",
+    "text": "",
+    "type": "checkbox",
+    "value": "on"
+   },
+   {
+    "box": [
+     32,
+     123,
+     13,
+     13
+    ],
+    "can_click": true,
+    "can_type": false,
+    "checked": false,
+    "index": 33,
+    "parent": 31,
+    "tag": "input",
+    "text": "",
+    "type": "checkbox",
+    "value": "on"
+   },
+   {
+    "box": [
+     49,
+     123,
+     13,
+     13
+    ],
+    "can_click": true,
+    "can_type": false,
+    "checked": false,
+    "index": 34,
+    "parent": 31,
+    "tag": "input",
+    "text": "",
+    "type": "checkbox",
+    "value": "on"
+   },
+   {
+    "box": [
+     66,
+     123,
+     13,
+     13
+    ],
+    "can_click": true,
+    "can_type": false,
+    "checked": false,
+    "index": 35,
+    "parent": 31,
+    "tag": "input",
+    "text": "",
+    "type": "checkbox",
+    "value": "on"
+   },
+   {
+    "box": [
+     81,
+     125,
+     0,
+     14
+    ],
+    "can_click": false,
+    "can_type": false,
+    "index": 36,
+    "parent": 31,
+    "tag": "label",
+    "text": ""
+   },
+   {
+    "box": [
+     13,
+     138,
+     73,
+     15
+    ],
+    "can_click": false,
+    "can_type": false,
+    "index": 37,
+    "parent": 6,
+    "tag": "p",
+    "text": ""
+   },
+   {
+    "box": [
+     15,
+     139,
+     13,
+     13
+    ],
+    "can_click": true,
+    "can_type": false,
+    "checked": false,
+    "index": 38,
+    "parent": 37,
+    "tag": "input",
+    "text": "",
+    "type": "checkbox",
+    "value": "on"
+   },
+   {
+    "box": [
+     32,
+     139,
+     13,
+     13
+    ],
+    "can_click": true,
+    "can_type": false,
+    "checked": false,
+    "index": 39,
+    "parent": 37,
+    "tag": "input",
+    "text": "",
+    "type": "checkbox",
+    "value": "on"
+   },
+   {
+    "box": [
+     49,
+     139,
+     13,
+     13
+    ],
+    "can_click": true,
+    "can_type": false,
+    "checked": false,
+    "index": 40,
+    "parent": 37,
+    "tag": "input",
+    "text": "",
+    "type": "checkbox",
+    "value": "on"
+   },
+   {
+    "box": [
+     66,
+     139,
+     13,
+     13
+    ],
+    "can_click": true,
+    "can_type": false,
+    "checked": false,
+    "index": 41,
+    "parent": 37,
+    "tag": "input",
+    "text": "",
+    "type": "checkbox",
+    "value": "on"
+   },
+   {
+    "box": [
+     81,
+     141,
+     0,
+     14
+    ],
+    "can_click": false,
+    "can_type": false,
+    "index": 42,
+    "parent": 37,
+    "tag": "label",
+    "text": ""
+   },
+   {
+    "box": [
+     13,
+     154,
+     73,
+     15
+    ],
+    "can_click": false,
+    "can_type": false,
+    "index": 43,
+    "parent": 6,
+    "tag": "p",
+    "text": ""
+   },
+   {
+    "box": [
+     15,
+     155,
+     13,
+     13
+    ],
+    "can_click": true,
+    "can_type": false,
+    "checked": false,
+    "index": 44,
+    "parent": 43,
+    "tag": "input",
+    "text": "",
+    "type": "checkbox",
+    "value": "on"
+   },
+   {
+    "box": [
+     32,
+     155,
+     13,
+     13
+    ],
+    "can_click": true,
+    "can_type": false,
+    "checked": false,
+    "index": 45,
+    "parent": 43,
+    "tag": "input",
+    "text": "",
+    "type": "checkbox",
+    "value": "on"
+   },
+   {
+    "box": [
+     49,
+     155,
+     13,
+     13
+    ],
+    "can_click": true,
+    "can_type": false,
+    "checked": false,
+    "index": 46,
+    "parent": 43,
+    "tag": "input",
+    "text": "",
+    "type": "checkbox",
+    "value": "on"
+   },
+   {
+    "box": [
+     66,
+     155,
+     13,
+     13
+    ],
+    "can_click": true,
+    "can_type": false,
+    "checked": false,
+    "index": 47,
+    "parent": 43,
+    "tag": "input",
+    "text": "",
+    "type": "checkbox",
+    "value": "on"
+   },
+   {
+    "box": [
+     81,
+     157,
+     0,
+     14
+    ],
+    "can_click": false,
+    "can_type": false,
+    "index": 48,
+    "parent": 43,
+    "tag": "label",
+    "text": ""
+   },
+   {
+    "box": [
+     14,
+     179,
+     98,
+     34
+    ],
+    "can_click": true,
+    "can_type": false,
+    "classes": "secondary-action",
+    "id": "subbtn",
+    "index": 49,
+    "parent": 2,
+    "tag": "button",
+    "text": "Submit"
+   }
+  ],
+  "utterance": "Draw the number \"8\" in the checkboxes using the example on the right and press Submit when finished."
+ }
+}

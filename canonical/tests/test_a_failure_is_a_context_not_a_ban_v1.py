@@ -104,11 +104,30 @@ def test_a_failure_in_the_same_state_as_the_success_explains_nothing():
     assert APP.explains_failure(boundary, NO_SIDECAR) is False
 
 
-def test_the_enumeration_is_bounded_and_says_so():
+def test_a_decidable_case_is_decided_and_the_real_bound_still_says_so():
+    """Past the cap, arithmetic decides; only a genuine compute refusal stays BOUNDED.
+
+    This was `test_the_enumeration_is_bounded_and_says_so`. The cap used to make `learn` refuse
+    a six-fact case it can decide in one inclusion-exclusion term, and the guard it was really
+    protecting -- a BOUNDED boundary must never withhold -- survives unchanged, now pinned
+    against a case that is over BOTH arithmetic budgets (19 failure rows, above IE_MAX_LOG2).
+    """
     facts = frozenset(f"f{i}" for i in range(6))
     boundary = APP.learn([(facts, True), (frozenset(), False)], max_candidate_facts=3)
-    assert boundary.status == APP.BOUNDED
-    assert APP.explains_failure(boundary, frozenset()) is False
+    # Decidable: every non-empty subset of the six facts survives (the failure has none of them).
+    assert boundary.status == APP.AMBIGUOUS
+    assert boundary.survivor_count == 63
+    assert boundary.most_general == ("f0",)
+    # The old refusal is now a sound, licensed one: every survivor requires a fact the empty
+    # state does not have.
+    assert APP.explains_failure(boundary, frozenset()) is True
+
+    # The genuine bound: more failure rows than the inclusion-exclusion budget allows.
+    many = frozenset(f"g{i}" for i in range(13))
+    over_budget = [(many, True)] + [(many - {f"g{i % 13}"}, False) for i in range(19)]
+    stuck = APP.learn(over_budget, max_candidate_facts=12)
+    assert stuck.status == APP.BOUNDED
+    assert APP.explains_failure(stuck, frozenset()) is False
 
 
 def test_order_of_evidence_does_not_change_the_answer():

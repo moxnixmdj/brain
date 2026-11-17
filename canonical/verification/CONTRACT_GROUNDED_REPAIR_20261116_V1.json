@@ -1,0 +1,2180 @@
+{
+  "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+  "generated_at_utc": "2026-11-16T17:27:16Z",
+  "measured": {
+    "answer_keys_present": 0,
+    "assertion_derived_relations_with_teeth": 7,
+    "candidates_that_passed_published_cases_but_were_refused_by_the_contract": 0,
+    "candidates_total": 2850,
+    "certificate_closures": 6,
+    "fresh_verdicts_total": 4,
+    "held_out_tasks": 20,
+    "mean_candidates_to_first_repair": 95.2,
+    "mean_candidates_tried_per_task": 142.5,
+    "permanent_rules_admitted": 0,
+    "regressions": 0,
+    "repaired": 4,
+    "repaired_tasks": [
+      "bitcount",
+      "next_permutation",
+      "pascal",
+      "quicksort"
+    ],
+    "static_vocabulary_insufficient_tasks": 14,
+    "status_counts": {
+      "NOT_REPAIRED__NO_CANDIDATE_PASSED_THE_CORPUS_TEST": 13,
+      "REFUSED__NO_EXECUTION_TRACE": 1,
+      "REPAIRED__CORPUS_TEST_PASSES": 4,
+      "UNMEASURABLE__NO_PUBLISHED_JSON_CASES": 2
+    },
+    "traced_vocabulary_insufficient_tasks": 8,
+    "unverified_repairs": [],
+    "wall_seconds": 39.8
+  },
+  "preregistered": {
+    "fail_condition": "any repaired task without a fresh rc=0; any answer key present; any test-byte change; any gain requiring brute-force enumeration",
+    "pass_condition": "held_out_repairs >= 4 AND regressions == 0 AND every repaired task has fresh pytest rc=0 AND answer_key_absent AND mean_candidates_tried_per_task <= 260",
+    "published_baselines": {
+      "hand_listed_basis": "2/20, 5021 candidates",
+      "induced_basis": "1/20, 224 candidates",
+      "union": "3/20 (successes disjoint)"
+    },
+    "verdict": "PASS"
+  },
+  "protocol": {
+    "answer_key": "correct_python_programs asserted absent before every task",
+    "corpus": "jkoppel/QuixBugs, 40 real published bugs with their own pytest files",
+    "held_out": [
+      "sqrt",
+      "pascal",
+      "is_valid_parenthesization",
+      "minimum_spanning_tree",
+      "next_permutation",
+      "kheapsort",
+      "bitcount",
+      "knapsack",
+      "gcd",
+      "to_base",
+      "lis",
+      "longest_common_subsequence",
+      "quicksort",
+      "shortest_paths",
+      "possible_change",
+      "powerset",
+      "bucketsort",
+      "wrap",
+      "shunting_yard",
+      "hanoi"
+    ],
+    "model_dependency_count": 0,
+    "network_at_run_time": false,
+    "spend_usd": 0,
+    "split": "sha256(name), reused from quixbugs_one_shot_transfer_measure_v1.split",
+    "synthetic_data": "NONE -- all programs, cases and tests are published verbatim",
+    "test_bytes": "hashed; a changed byte is an error, not a repair",
+    "train": [
+      "next_palindrome",
+      "depth_first_search",
+      "rpn_eval",
+      "find_in_sorted",
+      "find_first_in_sorted",
+      "lcs_length",
+      "subsequences",
+      "shortest_path_lengths",
+      "detect_cycle",
+      "shortest_path_length",
+      "flatten",
+      "levenshtein",
+      "kth",
+      "max_sublist_sum",
+      "sieve",
+      "topological_ordering",
+      "breadth_first_search",
+      "get_factors",
+      "mergesort",
+      "reverse_linked_list"
+    ],
+    "train_size": 20,
+    "verdict": "corpus own pytest on a FRESH copy; candidate self-report is only a filter"
+  },
+  "rows": [
+    {
+      "answer_key_absent": true,
+      "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+      "goal": {
+        "cases_passed": 1,
+        "cases_total": 7,
+        "contract_reach": 0,
+        "exceptions": [
+          "_Timeout",
+          "_Timeout",
+          "_Timeout",
+          "_Timeout",
+          "_Timeout",
+          "_Timeout"
+        ],
+        "failing_cases": 6,
+        "grid_size": 12,
+        "relations": [],
+        "signature": "OFF_BY_ONE",
+        "trace_lines": [
+          3,
+          4,
+          5,
+          6
+        ]
+      },
+      "identifiability": {
+        "chosen_contrast": {
+          "discriminating_facts": [],
+          "gain_log_terms": {},
+          "guaranteed_elimination": 0,
+          "reason": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+          "schema": "PROJECT_BRAIN_CONTRAST_SELECTION_V1",
+          "state": null,
+          "status": "NO_REQUIREMENT_SPACE__NOTHING_TO_DISAMBIGUATE",
+          "survivors_before": 0,
+          "worst_case_survivors_after": null
+        },
+        "closure": "STATIC_INSUFFICIENT__EXECUTED_OBSERVABLES_RESTORE_SEPARATION",
+        "learn": {
+          "status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+          "survivors": 0
+        },
+        "learn_refused_by_certificate": false,
+        "permanent_rule_admitted": false,
+        "static_certificate": {
+          "kind": "SAME_OBSERVED_STATE_OPPOSITE_OUTCOMES",
+          "reason": "AN_UNOBSERVED_PRECONDITION_DIFFERS_BETWEEN_THESE_WORLDS",
+          "shared_facts": [
+            "ast.Add",
+            "ast.Assign",
+            "ast.BinOp",
+            "ast.Call",
+            "ast.Compare",
+            "ast.Constant",
+            "ast.Div",
+            "ast.Expr",
+            "ast.FunctionDef",
+            "ast.Gt",
+            "ast.Load",
+            "ast.Module",
+            "ast.Mult",
+            "ast.Name",
+            "ast.Return",
+            "ast.Store",
+            "ast.Sub",
+            "ast.While",
+            "ast.arg",
+            "ast.arguments"
+          ],
+          "unrepairable_by_repetition": true,
+          "what_would_repair_it": "A_NEW_OBSERVABLE__MORE_RUNS_REPORT_THE_SAME_FACT_VECTOR"
+        },
+        "traced_certificate": null
+      },
+      "model_dependency_count": 0,
+      "program_sha256": "e3623a160e6ada452b36ce0bd2370fc031943e2c1ae93aae5f0c82865e083ebf",
+      "reason": "ALL_GROUNDED_CANDIDATES_FAILED_AN_INDEPENDENT_VERDICT",
+      "schema": "BRAIN_CONTRACT_GROUNDED_REPAIR_V1",
+      "seconds": 14.46,
+      "status": "NOT_REPAIRED__NO_CANDIDATE_PASSED_THE_CORPUS_TEST",
+      "synthesis": {
+        "candidates": 152,
+        "fresh_verdicts": [],
+        "passed_published_but_refused_by_contract": 0,
+        "prior": {
+          "note": "EXACT_COUNTS_OF_EXECUTED_VERDICTS__NO_FITTED_PARAMETERS",
+          "signature": "OFF_BY_ONE",
+          "tried": {
+            "BINARY_OP": 55,
+            "COMPARISON_CLASS": 5,
+            "CONSTANT": 30,
+            "NAME_SWAP": 1,
+            "OFFSET": 61
+          },
+          "verified": {}
+        },
+        "screened": 152,
+        "winning_diff": null,
+        "winning_family": null,
+        "winning_index": null
+      },
+      "task": "sqrt",
+      "test_sha256": "a8374bfa1ef4d2900e0c12d83c29bf22d34c3b0495a70262bdede53e77e90631"
+    },
+    {
+      "answer_key_absent": true,
+      "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+      "goal": {
+        "cases_passed": 1,
+        "cases_total": 5,
+        "contract_reach": 0,
+        "exceptions": [
+          "IndexError",
+          "IndexError",
+          "IndexError"
+        ],
+        "failing_cases": 4,
+        "grid_size": 7,
+        "relations": [],
+        "signature": "EXCEPTION",
+        "trace_lines": [
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          12
+        ]
+      },
+      "identifiability": {
+        "chosen_contrast": {
+          "discriminating_facts": [],
+          "gain_log_terms": {},
+          "guaranteed_elimination": 0,
+          "reason": "INCONSISTENT__NO_REQUIREMENT_EXPLAINS_THE_EVIDENCE",
+          "schema": "PROJECT_BRAIN_CONTRAST_SELECTION_V1",
+          "state": null,
+          "status": "NO_REQUIREMENT_SPACE__NOTHING_TO_DISAMBIGUATE",
+          "survivors_before": 0,
+          "worst_case_survivors_after": null
+        },
+        "closure": "SEE_CERTIFICATES",
+        "learn": {
+          "status": "INCONSISTENT__NO_REQUIREMENT_EXPLAINS_THE_EVIDENCE",
+          "survivors": 0
+        },
+        "learn_refused_by_certificate": true,
+        "permanent_rule_admitted": false,
+        "static_certificate": {
+          "kind": "SAME_OBSERVED_STATE_OPPOSITE_OUTCOMES",
+          "reason": "AN_UNOBSERVED_PRECONDITION_DIFFERS_BETWEEN_THESE_WORLDS",
+          "shared_facts": [
+            "ast.Add",
+            "ast.Assign",
+            "ast.Attribute",
+            "ast.BinOp",
+            "ast.Call",
+            "ast.Compare",
+            "ast.Constant",
+            "ast.Expr",
+            "ast.For",
+            "ast.FunctionDef",
+            "ast.Gt",
+            "ast.IfExp",
+            "ast.List",
+            "ast.Load",
+            "ast.Lt",
+            "ast.Module",
+            "ast.Name",
+            "ast.Return",
+            "ast.Store",
+            "ast.Sub",
+            "ast.Subscript",
+            "ast.arg",
+            "ast.arguments"
+          ],
+          "unrepairable_by_repetition": true,
+          "what_would_repair_it": "A_NEW_OBSERVABLE__MORE_RUNS_REPORT_THE_SAME_FACT_VECTOR"
+        },
+        "traced_certificate": {
+          "kind": "SEPARATION_IMPOSSIBLE__EVERY_FACT_ALL_SUCCESSES_SHARE_A_FAILURE_ALSO_HAS",
+          "reason": "THE_FACTS_ALL_SUCCESSES_AGREE_ON_ARE_FACTS_A_FAILURE_ALSO_HAS",
+          "shared_facts": [
+            "arg0.type.int",
+            "argcount.1",
+            "executed.pascal",
+            "expected.type.list",
+            "line.12",
+            "line.3",
+            "line.4",
+            "result.type.list"
+          ],
+          "unrepairable_by_repetition": true,
+          "what_would_repair_it": "A_NEW_OBSERVABLE__MORE_RUNS_REPORT_THE_SAME_FACT_VECTOR"
+        }
+      },
+      "model_dependency_count": 0,
+      "program_sha256": "4445ef075a5f987d005bba5587c58f4697a90675be09171af2ca4009f64824a1",
+      "reason": "FRESH_COPY_VERDICT_IS_THE_ONLY_EVIDENCE",
+      "schema": "BRAIN_CONTRACT_GROUNDED_REPAIR_V1",
+      "seconds": 0.47,
+      "status": "REPAIRED__CORPUS_TEST_PASSES",
+      "synthesis": {
+        "candidates": 250,
+        "fresh_verdicts": [
+          {
+            "description": "OFFSET@args[1]:Name",
+            "family": "OFFSET",
+            "returncode": 0,
+            "seconds": 0.2,
+            "tail": [
+              ".....                                                                    [100%]",
+              "5 passed in 0.01s"
+            ],
+            "timed_out": false
+          }
+        ],
+        "passed_published_but_refused_by_contract": 0,
+        "prior": {
+          "note": "EXACT_COUNTS_OF_EXECUTED_VERDICTS__NO_FITTED_PARAMETERS",
+          "signature": "EXCEPTION",
+          "tried": {
+            "BINARY_OP": 44,
+            "COMPARISON_CLASS": 10,
+            "CONSTANT": 40,
+            "OFFSET": 156
+          },
+          "verified": {
+            "OFFSET": 1
+          }
+        },
+        "screened": 250,
+        "winning_diff": "--- published_buggy\n+++ candidate\n@@ -3,7 +3,7 @@\n     rows = [[1]]\n     for r in range(1, n):\n         row = []\n-        for c in range(0, r):\n+        for c in range(0, r + 1):\n             upleft = rows[r - 1][c - 1] if c > 0 else 0\n             upright = rows[r - 1][c] if c < r else 0\n             row.append(upleft + upright)",
+        "winning_family": "OFFSET",
+        "winning_index": 53
+      },
+      "task": "pascal",
+      "test_sha256": "5f671a8e6b49f24c0d927be9f1d6b1e1ef6a33e04a5bab174278098dc7f7d15d"
+    },
+    {
+      "answer_key_absent": true,
+      "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+      "goal": {
+        "cases_passed": 2,
+        "cases_total": 3,
+        "contract_reach": 0,
+        "exceptions": [],
+        "failing_cases": 1,
+        "grid_size": 3,
+        "relations": [],
+        "signature": "BOUNDARY",
+        "trace_lines": [
+          3,
+          4,
+          5,
+          6,
+          8,
+          9,
+          10,
+          12
+        ]
+      },
+      "identifiability": {
+        "chosen_contrast": {
+          "discriminating_facts": [],
+          "gain_log_terms": {},
+          "guaranteed_elimination": 0,
+          "reason": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+          "schema": "PROJECT_BRAIN_CONTRAST_SELECTION_V1",
+          "state": null,
+          "status": "NO_REQUIREMENT_SPACE__NOTHING_TO_DISAMBIGUATE",
+          "survivors_before": 0,
+          "worst_case_survivors_after": null
+        },
+        "closure": "STATIC_INSUFFICIENT__EXECUTED_OBSERVABLES_RESTORE_SEPARATION",
+        "learn": {
+          "status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+          "survivors": 0
+        },
+        "learn_refused_by_certificate": false,
+        "permanent_rule_admitted": false,
+        "static_certificate": {
+          "kind": "SAME_OBSERVED_STATE_OPPOSITE_OUTCOMES",
+          "reason": "AN_UNOBSERVED_PRECONDITION_DIFFERS_BETWEEN_THESE_WORLDS",
+          "shared_facts": [
+            "ast.Add",
+            "ast.Assign",
+            "ast.AugAssign",
+            "ast.Compare",
+            "ast.Constant",
+            "ast.Eq",
+            "ast.Expr",
+            "ast.For",
+            "ast.FunctionDef",
+            "ast.If",
+            "ast.Load",
+            "ast.Lt",
+            "ast.Module",
+            "ast.Name",
+            "ast.Return",
+            "ast.Store",
+            "ast.Sub",
+            "ast.arg",
+            "ast.arguments"
+          ],
+          "unrepairable_by_repetition": true,
+          "what_would_repair_it": "A_NEW_OBSERVABLE__MORE_RUNS_REPORT_THE_SAME_FACT_VECTOR"
+        },
+        "traced_certificate": null
+      },
+      "model_dependency_count": 0,
+      "program_sha256": "2340cddfce49b055a5a7a70c3341351bf130702512278bafaed5d5b345d0ba60",
+      "reason": "ALL_GROUNDED_CANDIDATES_FAILED_AN_INDEPENDENT_VERDICT",
+      "schema": "BRAIN_CONTRACT_GROUNDED_REPAIR_V1",
+      "seconds": 0.13,
+      "status": "NOT_REPAIRED__NO_CANDIDATE_PASSED_THE_CORPUS_TEST",
+      "synthesis": {
+        "candidates": 112,
+        "fresh_verdicts": [],
+        "passed_published_but_refused_by_contract": 0,
+        "prior": {
+          "note": "EXACT_COUNTS_OF_EXECUTED_VERDICTS__NO_FITTED_PARAMETERS",
+          "signature": "BOUNDARY",
+          "tried": {
+            "AUG_ASSIGN_OP": 22,
+            "COMPARISON_CLASS": 10,
+            "CONSTANT": 29,
+            "GUARD_INSERT": 2,
+            "OFFSET": 49
+          },
+          "verified": {}
+        },
+        "screened": 112,
+        "winning_diff": null,
+        "winning_family": null,
+        "winning_index": null
+      },
+      "task": "is_valid_parenthesization",
+      "test_sha256": "484b2e67707900e6ef0cff1df83ef441d39fcc3f56afdd9180ff1363fc7d1f76"
+    },
+    {
+      "answer_key_absent": true,
+      "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+      "goal": {
+        "cases_passed": 0,
+        "cases_total": 0,
+        "contract_reach": 0,
+        "exceptions": [],
+        "failing_cases": 0,
+        "grid_size": 0,
+        "relations": [],
+        "signature": null,
+        "trace_lines": []
+      },
+      "identifiability": {
+        "chosen_contrast": null,
+        "closure": "SEE_CERTIFICATES",
+        "learn": null,
+        "learn_refused_by_certificate": false,
+        "permanent_rule_admitted": false,
+        "static_certificate": null,
+        "traced_certificate": null
+      },
+      "model_dependency_count": 0,
+      "program_sha256": "116d2b6f60ab516973d6a254e4f0dfd31e9c5e2966eaf9158c336d62dd2da5fc",
+      "reason": "THIS_TASK_HAS_NO_EXECUTABLE_PUBLISHED_CONTRACT_DATA",
+      "schema": "BRAIN_CONTRACT_GROUNDED_REPAIR_V1",
+      "seconds": 0.0,
+      "status": "UNMEASURABLE__NO_PUBLISHED_JSON_CASES",
+      "synthesis": {
+        "candidates": 0,
+        "fresh_verdicts": [],
+        "passed_published_but_refused_by_contract": 0,
+        "prior": null,
+        "screened": 0,
+        "winning_diff": null,
+        "winning_family": null,
+        "winning_index": null
+      },
+      "task": "minimum_spanning_tree",
+      "test_sha256": "45b23edf3513e1f1a6e7ecf5f17eb85d1a32845d70869c7190b16b10cd61d811"
+    },
+    {
+      "answer_key_absent": true,
+      "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+      "goal": {
+        "cases_passed": 0,
+        "cases_total": 8,
+        "contract_reach": 0,
+        "exceptions": [],
+        "failing_cases": 8,
+        "grid_size": 12,
+        "relations": [],
+        "signature": "COLLECTION_SHAPE",
+        "trace_lines": [
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "identifiability": {
+        "chosen_contrast": {
+          "discriminating_facts": [],
+          "gain_log_terms": {},
+          "guaranteed_elimination": 0,
+          "reason": "INCONSISTENT__NO_REQUIREMENT_EXPLAINS_THE_EVIDENCE",
+          "schema": "PROJECT_BRAIN_CONTRAST_SELECTION_V1",
+          "state": null,
+          "status": "NO_REQUIREMENT_SPACE__NOTHING_TO_DISAMBIGUATE",
+          "survivors_before": 0,
+          "worst_case_survivors_after": null
+        },
+        "closure": "SEE_CERTIFICATES",
+        "learn": {
+          "status": "INCONSISTENT__NO_REQUIREMENT_EXPLAINS_THE_EVIDENCE",
+          "survivors": 0
+        },
+        "learn_refused_by_certificate": false,
+        "permanent_rule_admitted": false,
+        "static_certificate": {
+          "kind": "NO_SUCCESS__NOTHING_TO_SCOPE",
+          "reason": "NO_SUCCESS_TO_SCOPE_FROM",
+          "shared_facts": [],
+          "unrepairable_by_repetition": false,
+          "what_would_repair_it": "AN_OBSERVATION_OF_THE_MISSING_KIND__NOT_A_NEW_OBSERVABLE"
+        },
+        "traced_certificate": {
+          "kind": "NO_SUCCESS__NOTHING_TO_SCOPE",
+          "reason": "NO_SUCCESS_TO_SCOPE_FROM",
+          "shared_facts": [],
+          "unrepairable_by_repetition": false,
+          "what_would_repair_it": "AN_OBSERVATION_OF_THE_MISSING_KIND__NOT_A_NEW_OBSERVABLE"
+        }
+      },
+      "model_dependency_count": 0,
+      "program_sha256": "14ffc36c80bf3bba8db91b7e0fa6be14a8011130ddeaccf33ed62638eac1b25b",
+      "reason": "FRESH_COPY_VERDICT_IS_THE_ONLY_EVIDENCE",
+      "schema": "BRAIN_CONTRACT_GROUNDED_REPAIR_V1",
+      "seconds": 0.49,
+      "status": "REPAIRED__CORPUS_TEST_PASSES",
+      "synthesis": {
+        "candidates": 260,
+        "fresh_verdicts": [
+          {
+            "description": "COMPARISON_CLASS@test:Compare",
+            "family": "COMPARISON_CLASS",
+            "returncode": 0,
+            "seconds": 0.2,
+            "tail": [
+              "........                                                                 [100%]",
+              "8 passed in 0.01s"
+            ],
+            "timed_out": false
+          }
+        ],
+        "passed_published_but_refused_by_contract": 0,
+        "prior": {
+          "note": "EXACT_COUNTS_OF_EXECUTED_VERDICTS__NO_FITTED_PARAMETERS",
+          "signature": "COLLECTION_SHAPE",
+          "tried": {
+            "BINARY_OP": 35,
+            "COMPARISON_CLASS": 10,
+            "OFFSET": 215
+          },
+          "verified": {
+            "COMPARISON_CLASS": 2
+          }
+        },
+        "screened": 260,
+        "winning_diff": "--- published_buggy\n+++ candidate\n@@ -3,7 +3,7 @@\n     for i in range(len(perm) - 2, -1, -1):\n         if perm[i] < perm[i + 1]:\n             for j in range(len(perm) - 1, i, -1):\n-                if perm[j] < perm[i]:\n+                if perm[j] > perm[i]:\n                     next_perm = list(perm)\n                     next_perm[i], next_perm[j] = perm[j], perm[i]\n                     next_perm[i + 1:] = reversed(next_perm[i + 1:])",
+        "winning_family": "COMPARISON_CLASS",
+        "winning_index": 221
+      },
+      "task": "next_permutation",
+      "test_sha256": "0103d415e3c74908489ebfd55a8778542b8ff3ad9d17cf725c9e4aa789438dae"
+    },
+    {
+      "answer_key_absent": true,
+      "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+      "goal": {
+        "cases_passed": 0,
+        "cases_total": 4,
+        "contract_reach": 3,
+        "exceptions": [],
+        "failing_cases": 4,
+        "grid_size": 12,
+        "relations": [
+          "PERMUTATION_OF_INPUT",
+          "SORTED_OUTPUT",
+          "TYPE_MATCH"
+        ],
+        "signature": null,
+        "trace_lines": []
+      },
+      "identifiability": {
+        "chosen_contrast": null,
+        "closure": "SEE_CERTIFICATES",
+        "learn": null,
+        "learn_refused_by_certificate": false,
+        "permanent_rule_admitted": false,
+        "static_certificate": {
+          "kind": "NO_SUCCESS__NOTHING_TO_SCOPE",
+          "reason": "NO_SUCCESS_TO_SCOPE_FROM",
+          "shared_facts": [],
+          "unrepairable_by_repetition": false,
+          "what_would_repair_it": "AN_OBSERVATION_OF_THE_MISSING_KIND__NOT_A_NEW_OBSERVABLE"
+        },
+        "traced_certificate": {
+          "kind": "NO_SUCCESS__NOTHING_TO_SCOPE",
+          "reason": "NO_SUCCESS_TO_SCOPE_FROM",
+          "shared_facts": [],
+          "unrepairable_by_repetition": false,
+          "what_would_repair_it": "AN_OBSERVATION_OF_THE_MISSING_KIND__NOT_A_NEW_OBSERVABLE"
+        }
+      },
+      "model_dependency_count": 0,
+      "program_sha256": "0cabf3d462d941ec01f261f2d794d960ab8ba497c42140cedbc3c872f772cea8",
+      "reason": "GOAL_IS_NOT_GROUNDED_IN_AN_EXECUTED_POSITION",
+      "schema": "BRAIN_CONTRACT_GROUNDED_REPAIR_V1",
+      "seconds": 0.04,
+      "status": "REFUSED__NO_EXECUTION_TRACE",
+      "synthesis": {
+        "candidates": 0,
+        "fresh_verdicts": [],
+        "passed_published_but_refused_by_contract": 0,
+        "prior": null,
+        "screened": 0,
+        "winning_diff": null,
+        "winning_family": null,
+        "winning_index": null
+      },
+      "task": "kheapsort",
+      "test_sha256": "7751ea3a7611406695c84ed254eddc2afdc17eb3e5962bb9a494b3a307953d7a"
+    },
+    {
+      "answer_key_absent": true,
+      "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+      "goal": {
+        "cases_passed": 0,
+        "cases_total": 9,
+        "contract_reach": 0,
+        "exceptions": [
+          "_Timeout",
+          "_Timeout",
+          "_Timeout",
+          "_Timeout",
+          "_Timeout",
+          "_Timeout",
+          "_Timeout",
+          "_Timeout"
+        ],
+        "failing_cases": 9,
+        "grid_size": 12,
+        "relations": [],
+        "signature": "WRONG_VALUE",
+        "trace_lines": [
+          3,
+          4,
+          5,
+          6
+        ]
+      },
+      "identifiability": {
+        "chosen_contrast": {
+          "discriminating_facts": [],
+          "gain_log_terms": {},
+          "guaranteed_elimination": 0,
+          "reason": "INCONSISTENT__NO_REQUIREMENT_EXPLAINS_THE_EVIDENCE",
+          "schema": "PROJECT_BRAIN_CONTRAST_SELECTION_V1",
+          "state": null,
+          "status": "NO_REQUIREMENT_SPACE__NOTHING_TO_DISAMBIGUATE",
+          "survivors_before": 0,
+          "worst_case_survivors_after": null
+        },
+        "closure": "SEE_CERTIFICATES",
+        "learn": {
+          "status": "INCONSISTENT__NO_REQUIREMENT_EXPLAINS_THE_EVIDENCE",
+          "survivors": 0
+        },
+        "learn_refused_by_certificate": false,
+        "permanent_rule_admitted": false,
+        "static_certificate": {
+          "kind": "NO_SUCCESS__NOTHING_TO_SCOPE",
+          "reason": "NO_SUCCESS_TO_SCOPE_FROM",
+          "shared_facts": [],
+          "unrepairable_by_repetition": false,
+          "what_would_repair_it": "AN_OBSERVATION_OF_THE_MISSING_KIND__NOT_A_NEW_OBSERVABLE"
+        },
+        "traced_certificate": {
+          "kind": "NO_SUCCESS__NOTHING_TO_SCOPE",
+          "reason": "NO_SUCCESS_TO_SCOPE_FROM",
+          "shared_facts": [],
+          "unrepairable_by_repetition": false,
+          "what_would_repair_it": "AN_OBSERVATION_OF_THE_MISSING_KIND__NOT_A_NEW_OBSERVABLE"
+        }
+      },
+      "model_dependency_count": 0,
+      "program_sha256": "585fc5e7140a87d698574ad74acfd4cf5de4e03e460dea7e87725e2694b60b8c",
+      "reason": "FRESH_COPY_VERDICT_IS_THE_ONLY_EVIDENCE",
+      "schema": "BRAIN_CONTRACT_GROUNDED_REPAIR_V1",
+      "seconds": 16.0,
+      "status": "REPAIRED__CORPUS_TEST_PASSES",
+      "synthesis": {
+        "candidates": 102,
+        "fresh_verdicts": [
+          {
+            "description": "AUG_ASSIGN_OP@body[0]:AugAssign",
+            "family": "AUG_ASSIGN_OP",
+            "returncode": 0,
+            "seconds": 0.2,
+            "tail": [
+              ".........                                                                [100%]",
+              "9 passed in 0.01s"
+            ],
+            "timed_out": false
+          }
+        ],
+        "passed_published_but_refused_by_contract": 0,
+        "prior": {
+          "note": "EXACT_COUNTS_OF_EXECUTED_VERDICTS__NO_FITTED_PARAMETERS",
+          "signature": "WRONG_VALUE",
+          "tried": {
+            "AUG_ASSIGN_OP": 22,
+            "BINARY_OP": 11,
+            "CONSTANT": 40,
+            "OFFSET": 29
+          },
+          "verified": {
+            "AUG_ASSIGN_OP": 1
+          }
+        },
+        "screened": 102,
+        "winning_diff": "--- published_buggy\n+++ candidate\n@@ -2,7 +2,7 @@\n def bitcount(n):\n     count = 0\n     while n:\n-        n ^= n - 1\n+        n &= n - 1\n         count += 1\n     return count\n ",
+        "winning_family": "AUG_ASSIGN_OP",
+        "winning_index": 18
+      },
+      "task": "bitcount",
+      "test_sha256": "24cdf73b1e1f6b9e947493e1714c0f9dbfac868589fb5ea4c7dd9fc5bbd44c95"
+    },
+    {
+      "answer_key_absent": true,
+      "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+      "goal": {
+        "cases_passed": 3,
+        "cases_total": 10,
+        "contract_reach": 0,
+        "exceptions": [
+          "_Timeout"
+        ],
+        "failing_cases": 7,
+        "grid_size": 12,
+        "relations": [],
+        "signature": "WRONG_VALUE",
+        "trace_lines": [
+          3,
+          4,
+          6,
+          7,
+          9,
+          10,
+          12,
+          13,
+          14,
+          15,
+          18
+        ]
+      },
+      "identifiability": {
+        "chosen_contrast": {
+          "discriminating_facts": [],
+          "gain_log_terms": {},
+          "guaranteed_elimination": 0,
+          "reason": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+          "schema": "PROJECT_BRAIN_CONTRAST_SELECTION_V1",
+          "state": null,
+          "status": "NO_REQUIREMENT_SPACE__NOTHING_TO_DISAMBIGUATE",
+          "survivors_before": 0,
+          "worst_case_survivors_after": null
+        },
+        "closure": "STATIC_INSUFFICIENT__EXECUTED_OBSERVABLES_RESTORE_SEPARATION",
+        "learn": {
+          "status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+          "survivors": 0
+        },
+        "learn_refused_by_certificate": false,
+        "permanent_rule_admitted": false,
+        "static_certificate": {
+          "kind": "SAME_OBSERVED_STATE_OPPOSITE_OUTCOMES",
+          "reason": "AN_UNOBSERVED_PRECONDITION_DIFFERS_BETWEEN_THESE_WORLDS",
+          "shared_facts": [
+            "ast.Add",
+            "ast.Assign",
+            "ast.BinOp",
+            "ast.Call",
+            "ast.Compare",
+            "ast.Constant",
+            "ast.Expr",
+            "ast.For",
+            "ast.FunctionDef",
+            "ast.If",
+            "ast.ImportFrom",
+            "ast.Load",
+            "ast.Lt",
+            "ast.Module",
+            "ast.Name",
+            "ast.Return",
+            "ast.Store",
+            "ast.Sub",
+            "ast.Subscript",
+            "ast.Tuple",
+            "ast.alias",
+            "ast.arg",
+            "ast.arguments"
+          ],
+          "unrepairable_by_repetition": true,
+          "what_would_repair_it": "A_NEW_OBSERVABLE__MORE_RUNS_REPORT_THE_SAME_FACT_VECTOR"
+        },
+        "traced_certificate": null
+      },
+      "model_dependency_count": 0,
+      "program_sha256": "ce8ab048641f73e89cf0f196237a0c13d1e78025f6c44f4e92e4fd834f10123b",
+      "reason": "ALL_GROUNDED_CANDIDATES_FAILED_AN_INDEPENDENT_VERDICT",
+      "schema": "BRAIN_CONTRACT_GROUNDED_REPAIR_V1",
+      "seconds": 1.26,
+      "status": "NOT_REPAIRED__NO_CANDIDATE_PASSED_THE_CORPUS_TEST",
+      "synthesis": {
+        "candidates": 260,
+        "fresh_verdicts": [],
+        "passed_published_but_refused_by_contract": 0,
+        "prior": {
+          "note": "EXACT_COUNTS_OF_EXECUTED_VERDICTS__NO_FITTED_PARAMETERS",
+          "signature": "WRONG_VALUE",
+          "tried": {
+            "BINARY_OP": 77,
+            "COMPARISON_CLASS": 5,
+            "CONSTANT": 140,
+            "NAME_SWAP": 3,
+            "OFFSET": 35
+          },
+          "verified": {}
+        },
+        "screened": 260,
+        "winning_diff": null,
+        "winning_family": null,
+        "winning_index": null
+      },
+      "task": "knapsack",
+      "test_sha256": "d29882496c29567a279e61f5f2be28cf074897e774267d629a99a7f221e40ff7"
+    },
+    {
+      "answer_key_absent": true,
+      "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+      "goal": {
+        "cases_passed": 1,
+        "cases_total": 6,
+        "contract_reach": 0,
+        "exceptions": [
+          "RecursionError",
+          "RecursionError",
+          "RecursionError",
+          "RecursionError",
+          "RecursionError"
+        ],
+        "failing_cases": 5,
+        "grid_size": 12,
+        "relations": [],
+        "signature": "EXCEPTION",
+        "trace_lines": [
+          2,
+          3,
+          5
+        ]
+      },
+      "identifiability": {
+        "chosen_contrast": {
+          "discriminating_facts": [],
+          "gain_log_terms": {},
+          "guaranteed_elimination": 0,
+          "reason": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+          "schema": "PROJECT_BRAIN_CONTRAST_SELECTION_V1",
+          "state": null,
+          "status": "NO_REQUIREMENT_SPACE__NOTHING_TO_DISAMBIGUATE",
+          "survivors_before": 0,
+          "worst_case_survivors_after": null
+        },
+        "closure": "STATIC_INSUFFICIENT__EXECUTED_OBSERVABLES_RESTORE_SEPARATION",
+        "learn": {
+          "status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+          "survivors": 0
+        },
+        "learn_refused_by_certificate": false,
+        "permanent_rule_admitted": false,
+        "static_certificate": {
+          "kind": "SAME_OBSERVED_STATE_OPPOSITE_OUTCOMES",
+          "reason": "AN_UNOBSERVED_PRECONDITION_DIFFERS_BETWEEN_THESE_WORLDS",
+          "shared_facts": [
+            "ast.BinOp",
+            "ast.Call",
+            "ast.Compare",
+            "ast.Constant",
+            "ast.Eq",
+            "ast.Expr",
+            "ast.FunctionDef",
+            "ast.If",
+            "ast.Load",
+            "ast.Mod",
+            "ast.Module",
+            "ast.Name",
+            "ast.Return",
+            "ast.arg",
+            "ast.arguments"
+          ],
+          "unrepairable_by_repetition": true,
+          "what_would_repair_it": "A_NEW_OBSERVABLE__MORE_RUNS_REPORT_THE_SAME_FACT_VECTOR"
+        },
+        "traced_certificate": null
+      },
+      "model_dependency_count": 0,
+      "program_sha256": "d68e155c2af40d787f617f03c596005edabee3d9e33626b9185d83650895636f",
+      "reason": "ALL_GROUNDED_CANDIDATES_FAILED_AN_INDEPENDENT_VERDICT",
+      "schema": "BRAIN_CONTRACT_GROUNDED_REPAIR_V1",
+      "seconds": 0.32,
+      "status": "NOT_REPAIRED__NO_CANDIDATE_PASSED_THE_CORPUS_TEST",
+      "synthesis": {
+        "candidates": 60,
+        "fresh_verdicts": [],
+        "passed_published_but_refused_by_contract": 0,
+        "prior": {
+          "note": "EXACT_COUNTS_OF_EXECUTED_VERDICTS__NO_FITTED_PARAMETERS",
+          "signature": "EXCEPTION",
+          "tried": {
+            "BINARY_OP": 11,
+            "COMPARISON_CLASS": 5,
+            "CONSTANT": 12,
+            "OFFSET": 32
+          },
+          "verified": {}
+        },
+        "screened": 60,
+        "winning_diff": null,
+        "winning_family": null,
+        "winning_index": null
+      },
+      "task": "gcd",
+      "test_sha256": "1e0f36211d258a295ec11359495202ff8491736ffe3a9b56336c1a633a1af589"
+    },
+    {
+      "answer_key_absent": true,
+      "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+      "goal": {
+        "cases_passed": 3,
+        "cases_total": 10,
+        "contract_reach": 0,
+        "exceptions": [],
+        "failing_cases": 7,
+        "grid_size": 12,
+        "relations": [],
+        "signature": "COLLECTION_SHAPE",
+        "trace_lines": [
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "identifiability": {
+        "chosen_contrast": {
+          "discriminating_facts": [],
+          "gain_log_terms": {},
+          "guaranteed_elimination": 0,
+          "reason": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+          "schema": "PROJECT_BRAIN_CONTRAST_SELECTION_V1",
+          "state": null,
+          "status": "NO_REQUIREMENT_SPACE__NOTHING_TO_DISAMBIGUATE",
+          "survivors_before": 0,
+          "worst_case_survivors_after": null
+        },
+        "closure": "SEE_CERTIFICATES",
+        "learn": {
+          "status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+          "survivors": 0
+        },
+        "learn_refused_by_certificate": true,
+        "permanent_rule_admitted": false,
+        "static_certificate": {
+          "kind": "SAME_OBSERVED_STATE_OPPOSITE_OUTCOMES",
+          "reason": "AN_UNOBSERVED_PRECONDITION_DIFFERS_BETWEEN_THESE_WORLDS",
+          "shared_facts": [
+            "ast.Add",
+            "ast.Assign",
+            "ast.Attribute",
+            "ast.BinOp",
+            "ast.Compare",
+            "ast.Constant",
+            "ast.Expr",
+            "ast.FloorDiv",
+            "ast.FunctionDef",
+            "ast.Gt",
+            "ast.Import",
+            "ast.Load",
+            "ast.Mod",
+            "ast.Module",
+            "ast.Name",
+            "ast.Return",
+            "ast.Store",
+            "ast.Subscript",
+            "ast.While",
+            "ast.alias",
+            "ast.arg",
+            "ast.arguments"
+          ],
+          "unrepairable_by_repetition": true,
+          "what_would_repair_it": "A_NEW_OBSERVABLE__MORE_RUNS_REPORT_THE_SAME_FACT_VECTOR"
+        },
+        "traced_certificate": {
+          "kind": "SAME_OBSERVED_STATE_OPPOSITE_OUTCOMES",
+          "reason": "AN_UNOBSERVED_PRECONDITION_DIFFERS_BETWEEN_THESE_WORLDS",
+          "shared_facts": [
+            "arg0.type.int",
+            "arg1.type.int",
+            "argcount.2",
+            "executed.to_base",
+            "expected.type.str",
+            "line.10",
+            "line.4",
+            "line.5",
+            "line.6",
+            "line.7",
+            "line.8",
+            "line.9",
+            "result.type.str"
+          ],
+          "unrepairable_by_repetition": true,
+          "what_would_repair_it": "A_NEW_OBSERVABLE__MORE_RUNS_REPORT_THE_SAME_FACT_VECTOR"
+        }
+      },
+      "model_dependency_count": 0,
+      "program_sha256": "e6f2d42474e4e641f08d2e6d5c0e8c8bf8a540e79aaaf1ab903031c163193744",
+      "reason": "ALL_GROUNDED_CANDIDATES_FAILED_AN_INDEPENDENT_VERDICT",
+      "schema": "BRAIN_CONTRACT_GROUNDED_REPAIR_V1",
+      "seconds": 2.29,
+      "status": "NOT_REPAIRED__NO_CANDIDATE_PASSED_THE_CORPUS_TEST",
+      "synthesis": {
+        "candidates": 182,
+        "fresh_verdicts": [],
+        "passed_published_but_refused_by_contract": 0,
+        "prior": {
+          "note": "EXACT_COUNTS_OF_EXECUTED_VERDICTS__NO_FITTED_PARAMETERS",
+          "signature": "COLLECTION_SHAPE",
+          "tried": {
+            "BINARY_OP": 44,
+            "COMPARISON_CLASS": 5,
+            "CONSTANT": 54,
+            "OFFSET": 79
+          },
+          "verified": {}
+        },
+        "screened": 182,
+        "winning_diff": null,
+        "winning_family": null,
+        "winning_index": null
+      },
+      "task": "to_base",
+      "test_sha256": "9c0c9c0c7242ce3cfcfb170be7770c7bfdcc5421fef1bfd4a10e9f63afa17ef8"
+    },
+    {
+      "answer_key_absent": true,
+      "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+      "goal": {
+        "cases_passed": 8,
+        "cases_total": 12,
+        "contract_reach": 0,
+        "exceptions": [],
+        "failing_cases": 4,
+        "grid_size": 12,
+        "relations": [],
+        "signature": "WRONG_VALUE",
+        "trace_lines": [
+          3,
+          4,
+          6,
+          8,
+          10,
+          12,
+          13,
+          14,
+          16
+        ]
+      },
+      "identifiability": {
+        "chosen_contrast": {
+          "discriminating_facts": [],
+          "gain_log_terms": {},
+          "guaranteed_elimination": 0,
+          "reason": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+          "schema": "PROJECT_BRAIN_CONTRAST_SELECTION_V1",
+          "state": null,
+          "status": "NO_REQUIREMENT_SPACE__NOTHING_TO_DISAMBIGUATE",
+          "survivors_before": 0,
+          "worst_case_survivors_after": null
+        },
+        "closure": "STATIC_INSUFFICIENT__EXECUTED_OBSERVABLES_RESTORE_SEPARATION",
+        "learn": {
+          "status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+          "survivors": 0
+        },
+        "learn_refused_by_certificate": false,
+        "permanent_rule_admitted": false,
+        "static_certificate": {
+          "kind": "SAME_OBSERVED_STATE_OPPOSITE_OUTCOMES",
+          "reason": "AN_UNOBSERVED_PRECONDITION_DIFFERS_BETWEEN_THESE_WORLDS",
+          "shared_facts": [
+            "ast.Add",
+            "ast.Assign",
+            "ast.BinOp",
+            "ast.BoolOp",
+            "ast.Call",
+            "ast.Compare",
+            "ast.Constant",
+            "ast.Dict",
+            "ast.Eq",
+            "ast.Expr",
+            "ast.For",
+            "ast.FunctionDef",
+            "ast.If",
+            "ast.IfExp",
+            "ast.ListComp",
+            "ast.Load",
+            "ast.Lt",
+            "ast.Module",
+            "ast.Name",
+            "ast.Or",
+            "ast.Return",
+            "ast.Store",
+            "ast.Subscript",
+            "ast.Tuple",
+            "ast.arg",
+            "ast.arguments",
+            "ast.comprehension"
+          ],
+          "unrepairable_by_repetition": true,
+          "what_would_repair_it": "A_NEW_OBSERVABLE__MORE_RUNS_REPORT_THE_SAME_FACT_VECTOR"
+        },
+        "traced_certificate": null
+      },
+      "model_dependency_count": 0,
+      "program_sha256": "fe9e751f62674299be95f5026c30c778ec331eb449caaa9a13f6b2908e44a016",
+      "reason": "ALL_GROUNDED_CANDIDATES_FAILED_AN_INDEPENDENT_VERDICT",
+      "schema": "BRAIN_CONTRACT_GROUNDED_REPAIR_V1",
+      "seconds": 0.23,
+      "status": "NOT_REPAIRED__NO_CANDIDATE_PASSED_THE_CORPUS_TEST",
+      "synthesis": {
+        "candidates": 260,
+        "fresh_verdicts": [],
+        "passed_published_but_refused_by_contract": 0,
+        "prior": {
+          "note": "EXACT_COUNTS_OF_EXECUTED_VERDICTS__NO_FITTED_PARAMETERS",
+          "signature": "WRONG_VALUE",
+          "tried": {
+            "BINARY_OP": 44,
+            "BOOL_OP": 1,
+            "COMPARISON_CLASS": 15,
+            "CONSTANT": 35,
+            "GUARD_INSERT": 2,
+            "NAME_SWAP": 1,
+            "OFFSET": 162
+          },
+          "verified": {}
+        },
+        "screened": 260,
+        "winning_diff": null,
+        "winning_family": null,
+        "winning_index": null
+      },
+      "task": "lis",
+      "test_sha256": "69763e61b7426521ca6adb5072d2a10527061838534765ab367ea6508bea6ca9"
+    },
+    {
+      "answer_key_absent": true,
+      "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+      "goal": {
+        "cases_passed": 6,
+        "cases_total": 10,
+        "contract_reach": 0,
+        "exceptions": [
+          "_Timeout"
+        ],
+        "failing_cases": 4,
+        "grid_size": 10,
+        "relations": [],
+        "signature": "COLLECTION_SHAPE",
+        "trace_lines": [
+          2,
+          3,
+          5,
+          6,
+          9,
+          10,
+          11,
+          12
+        ]
+      },
+      "identifiability": {
+        "chosen_contrast": {
+          "discriminating_facts": [],
+          "gain_log_terms": {},
+          "guaranteed_elimination": 0,
+          "reason": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+          "schema": "PROJECT_BRAIN_CONTRAST_SELECTION_V1",
+          "state": null,
+          "status": "NO_REQUIREMENT_SPACE__NOTHING_TO_DISAMBIGUATE",
+          "survivors_before": 0,
+          "worst_case_survivors_after": null
+        },
+        "closure": "SEE_CERTIFICATES",
+        "learn": {
+          "status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+          "survivors": 0
+        },
+        "learn_refused_by_certificate": true,
+        "permanent_rule_admitted": false,
+        "static_certificate": {
+          "kind": "SAME_OBSERVED_STATE_OPPOSITE_OUTCOMES",
+          "reason": "AN_UNOBSERVED_PRECONDITION_DIFFERS_BETWEEN_THESE_WORLDS",
+          "shared_facts": [
+            "ast.Add",
+            "ast.BinOp",
+            "ast.BoolOp",
+            "ast.Call",
+            "ast.Compare",
+            "ast.Constant",
+            "ast.Eq",
+            "ast.Expr",
+            "ast.FunctionDef",
+            "ast.If",
+            "ast.Load",
+            "ast.Module",
+            "ast.Name",
+            "ast.Not",
+            "ast.Or",
+            "ast.Return",
+            "ast.Slice",
+            "ast.Subscript",
+            "ast.UnaryOp",
+            "ast.arg",
+            "ast.arguments",
+            "ast.keyword"
+          ],
+          "unrepairable_by_repetition": true,
+          "what_would_repair_it": "A_NEW_OBSERVABLE__MORE_RUNS_REPORT_THE_SAME_FACT_VECTOR"
+        },
+        "traced_certificate": {
+          "kind": "SAME_OBSERVED_STATE_OPPOSITE_OUTCOMES",
+          "reason": "AN_UNOBSERVED_PRECONDITION_DIFFERS_BETWEEN_THESE_WORLDS",
+          "shared_facts": [
+            "arg0.type.str",
+            "arg1.type.str",
+            "argcount.2",
+            "executed.longest_common_subsequence",
+            "expected.type.str",
+            "line.10",
+            "line.11",
+            "line.12",
+            "line.2",
+            "line.3",
+            "line.5",
+            "line.6",
+            "line.9",
+            "result.type.str"
+          ],
+          "unrepairable_by_repetition": true,
+          "what_would_repair_it": "A_NEW_OBSERVABLE__MORE_RUNS_REPORT_THE_SAME_FACT_VECTOR"
+        }
+      },
+      "model_dependency_count": 0,
+      "program_sha256": "93215319e44f895561f14567dd6098e2b8fc04497d4d71f5c21c9267fc2a02da",
+      "reason": "ALL_GROUNDED_CANDIDATES_FAILED_AN_INDEPENDENT_VERDICT",
+      "schema": "BRAIN_CONTRACT_GROUNDED_REPAIR_V1",
+      "seconds": 2.47,
+      "status": "NOT_REPAIRED__NO_CANDIDATE_PASSED_THE_CORPUS_TEST",
+      "synthesis": {
+        "candidates": 260,
+        "fresh_verdicts": [],
+        "passed_published_but_refused_by_contract": 0,
+        "prior": {
+          "note": "EXACT_COUNTS_OF_EXECUTED_VERDICTS__NO_FITTED_PARAMETERS",
+          "signature": "COLLECTION_SHAPE",
+          "tried": {
+            "CONSTANT": 140,
+            "OFFSET": 120
+          },
+          "verified": {}
+        },
+        "screened": 260,
+        "winning_diff": null,
+        "winning_family": null,
+        "winning_index": null
+      },
+      "task": "longest_common_subsequence",
+      "test_sha256": "68776892aaab10564899a4193035455f955eec78df9f11c764cf9920aff95dc8"
+    },
+    {
+      "answer_key_absent": true,
+      "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+      "goal": {
+        "cases_passed": 12,
+        "cases_total": 13,
+        "contract_reach": 2,
+        "exceptions": [],
+        "failing_cases": 1,
+        "grid_size": 12,
+        "relations": [
+          "LEN_MATCHES_INPUT",
+          "PERMUTATION_OF_INPUT"
+        ],
+        "signature": "COLLECTION_SHAPE",
+        "trace_lines": [
+          2,
+          3,
+          5,
+          6,
+          7,
+          8
+        ]
+      },
+      "identifiability": {
+        "chosen_contrast": {
+          "discriminating_facts": [],
+          "gain_log_terms": {},
+          "guaranteed_elimination": 0,
+          "reason": "INCONSISTENT__NO_REQUIREMENT_EXPLAINS_THE_EVIDENCE",
+          "schema": "PROJECT_BRAIN_CONTRAST_SELECTION_V1",
+          "state": null,
+          "status": "NO_REQUIREMENT_SPACE__NOTHING_TO_DISAMBIGUATE",
+          "survivors_before": 0,
+          "worst_case_survivors_after": null
+        },
+        "closure": "SEE_CERTIFICATES",
+        "learn": {
+          "status": "INCONSISTENT__NO_REQUIREMENT_EXPLAINS_THE_EVIDENCE",
+          "survivors": 0
+        },
+        "learn_refused_by_certificate": true,
+        "permanent_rule_admitted": false,
+        "static_certificate": {
+          "kind": "SAME_OBSERVED_STATE_OPPOSITE_OUTCOMES",
+          "reason": "AN_UNOBSERVED_PRECONDITION_DIFFERS_BETWEEN_THESE_WORLDS",
+          "shared_facts": [
+            "ast.Add",
+            "ast.Assign",
+            "ast.BinOp",
+            "ast.Call",
+            "ast.Compare",
+            "ast.Constant",
+            "ast.Expr",
+            "ast.FunctionDef",
+            "ast.Gt",
+            "ast.If",
+            "ast.List",
+            "ast.ListComp",
+            "ast.Load",
+            "ast.Lt",
+            "ast.Module",
+            "ast.Name",
+            "ast.Not",
+            "ast.Return",
+            "ast.Slice",
+            "ast.Store",
+            "ast.Subscript",
+            "ast.UnaryOp",
+            "ast.arg",
+            "ast.arguments",
+            "ast.comprehension"
+          ],
+          "unrepairable_by_repetition": true,
+          "what_would_repair_it": "A_NEW_OBSERVABLE__MORE_RUNS_REPORT_THE_SAME_FACT_VECTOR"
+        },
+        "traced_certificate": {
+          "kind": "SAME_OBSERVED_STATE_OPPOSITE_OUTCOMES",
+          "reason": "AN_UNOBSERVED_PRECONDITION_DIFFERS_BETWEEN_THESE_WORLDS",
+          "shared_facts": [
+            "arg0.type.list",
+            "argcount.1",
+            "executed.quicksort",
+            "expected.type.list",
+            "line.2",
+            "line.3",
+            "line.5",
+            "line.6",
+            "line.7",
+            "line.8",
+            "result.type.list"
+          ],
+          "unrepairable_by_repetition": true,
+          "what_would_repair_it": "A_NEW_OBSERVABLE__MORE_RUNS_REPORT_THE_SAME_FACT_VECTOR"
+        }
+      },
+      "model_dependency_count": 0,
+      "program_sha256": "4bc023d77dcdaeaaf5b284a03eecf0f73765ff216efecadd1d5ed78382ac89a3",
+      "reason": "FRESH_COPY_VERDICT_IS_THE_ONLY_EVIDENCE",
+      "schema": "BRAIN_CONTRACT_GROUNDED_REPAIR_V1",
+      "seconds": 0.36,
+      "status": "REPAIRED__CORPUS_TEST_PASSES",
+      "synthesis": {
+        "candidates": 142,
+        "fresh_verdicts": [
+          {
+            "description": "OFFSET@left:Name",
+            "family": "OFFSET",
+            "returncode": 0,
+            "seconds": 0.2,
+            "tail": [
+              ".............                                                            [100%]",
+              "13 passed in 0.01s"
+            ],
+            "timed_out": false
+          }
+        ],
+        "passed_published_but_refused_by_contract": 0,
+        "prior": {
+          "note": "EXACT_COUNTS_OF_EXECUTED_VERDICTS__NO_FITTED_PARAMETERS",
+          "signature": "COLLECTION_SHAPE",
+          "tried": {
+            "BINARY_OP": 22,
+            "COMPARISON_CLASS": 10,
+            "OFFSET": 110
+          },
+          "verified": {
+            "COMPARISON_CLASS": 2,
+            "OFFSET": 4
+          }
+        },
+        "screened": 142,
+        "winning_diff": "--- published_buggy\n+++ candidate\n@@ -3,7 +3,7 @@\n         return []\n \n     pivot = arr[0]\n-    lesser = quicksort([x for x in arr[1:] if x < pivot])\n+    lesser = quicksort([x for x in arr[1:] if x - 1 < pivot])\n     greater = quicksort([x for x in arr[1:] if x > pivot])\n     return lesser + [pivot] + greater\n ",
+        "winning_family": "OFFSET",
+        "winning_index": 85
+      },
+      "task": "quicksort",
+      "test_sha256": "256fd90b33d35a904b66332d23ce896d64f574c28faf1db24ac2d5de4d1cc2a3"
+    },
+    {
+      "answer_key_absent": true,
+      "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+      "goal": {
+        "cases_passed": 0,
+        "cases_total": 0,
+        "contract_reach": 0,
+        "exceptions": [],
+        "failing_cases": 0,
+        "grid_size": 0,
+        "relations": [],
+        "signature": null,
+        "trace_lines": []
+      },
+      "identifiability": {
+        "chosen_contrast": null,
+        "closure": "SEE_CERTIFICATES",
+        "learn": null,
+        "learn_refused_by_certificate": false,
+        "permanent_rule_admitted": false,
+        "static_certificate": null,
+        "traced_certificate": null
+      },
+      "model_dependency_count": 0,
+      "program_sha256": "e99679a54634bc940a78c1f211e6126f5119a7654a089d1f56f264a1deaa0ce2",
+      "reason": "THIS_TASK_HAS_NO_EXECUTABLE_PUBLISHED_CONTRACT_DATA",
+      "schema": "BRAIN_CONTRACT_GROUNDED_REPAIR_V1",
+      "seconds": 0.0,
+      "status": "UNMEASURABLE__NO_PUBLISHED_JSON_CASES",
+      "synthesis": {
+        "candidates": 0,
+        "fresh_verdicts": [],
+        "passed_published_but_refused_by_contract": 0,
+        "prior": null,
+        "screened": 0,
+        "winning_diff": null,
+        "winning_family": null,
+        "winning_index": null
+      },
+      "task": "shortest_paths",
+      "test_sha256": "8ee521556000dc6bcf4ae71c6db0f91c387f96e055557ec1accdde824928b4f8"
+    },
+    {
+      "answer_key_absent": true,
+      "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+      "goal": {
+        "cases_passed": 1,
+        "cases_total": 10,
+        "contract_reach": 0,
+        "exceptions": [
+          "ValueError",
+          "ValueError",
+          "ValueError",
+          "ValueError",
+          "ValueError",
+          "ValueError",
+          "ValueError",
+          "ValueError"
+        ],
+        "failing_cases": 9,
+        "grid_size": 12,
+        "relations": [],
+        "signature": "EXCEPTION",
+        "trace_lines": [
+          3,
+          4,
+          5,
+          6,
+          8,
+          9
+        ]
+      },
+      "identifiability": {
+        "chosen_contrast": {
+          "discriminating_facts": [],
+          "gain_log_terms": {},
+          "guaranteed_elimination": 0,
+          "reason": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+          "schema": "PROJECT_BRAIN_CONTRAST_SELECTION_V1",
+          "state": null,
+          "status": "NO_REQUIREMENT_SPACE__NOTHING_TO_DISAMBIGUATE",
+          "survivors_before": 0,
+          "worst_case_survivors_after": null
+        },
+        "closure": "STATIC_INSUFFICIENT__EXECUTED_OBSERVABLES_RESTORE_SEPARATION",
+        "learn": {
+          "status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+          "survivors": 0
+        },
+        "learn_refused_by_certificate": false,
+        "permanent_rule_admitted": false,
+        "static_certificate": {
+          "kind": "SAME_OBSERVED_STATE_OPPOSITE_OUTCOMES",
+          "reason": "AN_UNOBSERVED_PRECONDITION_DIFFERS_BETWEEN_THESE_WORLDS",
+          "shared_facts": [
+            "ast.Add",
+            "ast.Assign",
+            "ast.BinOp",
+            "ast.Call",
+            "ast.Compare",
+            "ast.Constant",
+            "ast.Eq",
+            "ast.Expr",
+            "ast.FunctionDef",
+            "ast.If",
+            "ast.Load",
+            "ast.Lt",
+            "ast.Module",
+            "ast.Name",
+            "ast.Return",
+            "ast.Starred",
+            "ast.Store",
+            "ast.Sub",
+            "ast.Tuple",
+            "ast.arg",
+            "ast.arguments"
+          ],
+          "unrepairable_by_repetition": true,
+          "what_would_repair_it": "A_NEW_OBSERVABLE__MORE_RUNS_REPORT_THE_SAME_FACT_VECTOR"
+        },
+        "traced_certificate": null
+      },
+      "model_dependency_count": 0,
+      "program_sha256": "e21854dbb1a8f299bab639e71797a14989ab6bd6b700665a2056c48a70154917",
+      "reason": "ALL_GROUNDED_CANDIDATES_FAILED_AN_INDEPENDENT_VERDICT",
+      "schema": "BRAIN_CONTRACT_GROUNDED_REPAIR_V1",
+      "seconds": 0.17,
+      "status": "NOT_REPAIRED__NO_CANDIDATE_PASSED_THE_CORPUS_TEST",
+      "synthesis": {
+        "candidates": 161,
+        "fresh_verdicts": [],
+        "passed_published_but_refused_by_contract": 0,
+        "prior": {
+          "note": "EXACT_COUNTS_OF_EXECUTED_VERDICTS__NO_FITTED_PARAMETERS",
+          "signature": "EXCEPTION",
+          "tried": {
+            "BINARY_OP": 22,
+            "COMPARISON_CLASS": 10,
+            "CONSTANT": 57,
+            "GUARD_INSERT": 2,
+            "OFFSET": 70
+          },
+          "verified": {}
+        },
+        "screened": 161,
+        "winning_diff": null,
+        "winning_family": null,
+        "winning_index": null
+      },
+      "task": "possible_change",
+      "test_sha256": "655305d59309352913a710d9bdde631191c83c80a76e78df36d58c7c5c0a964b"
+    },
+    {
+      "answer_key_absent": true,
+      "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+      "goal": {
+        "cases_passed": 1,
+        "cases_total": 5,
+        "contract_reach": 0,
+        "exceptions": [],
+        "failing_cases": 4,
+        "grid_size": 6,
+        "relations": [],
+        "signature": "COLLECTION_SHAPE",
+        "trace_lines": [
+          3,
+          4,
+          5,
+          6,
+          8
+        ]
+      },
+      "identifiability": {
+        "chosen_contrast": {
+          "discriminating_facts": [],
+          "gain_log_terms": {},
+          "guaranteed_elimination": 0,
+          "reason": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+          "schema": "PROJECT_BRAIN_CONTRAST_SELECTION_V1",
+          "state": null,
+          "status": "NO_REQUIREMENT_SPACE__NOTHING_TO_DISAMBIGUATE",
+          "survivors_before": 0,
+          "worst_case_survivors_after": null
+        },
+        "closure": "SEE_CERTIFICATES",
+        "learn": {
+          "status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+          "survivors": 0
+        },
+        "learn_refused_by_certificate": true,
+        "permanent_rule_admitted": false,
+        "static_certificate": {
+          "kind": "SAME_OBSERVED_STATE_OPPOSITE_OUTCOMES",
+          "reason": "AN_UNOBSERVED_PRECONDITION_DIFFERS_BETWEEN_THESE_WORLDS",
+          "shared_facts": [
+            "ast.Add",
+            "ast.Assign",
+            "ast.BinOp",
+            "ast.Call",
+            "ast.Constant",
+            "ast.Expr",
+            "ast.FunctionDef",
+            "ast.If",
+            "ast.List",
+            "ast.ListComp",
+            "ast.Load",
+            "ast.Module",
+            "ast.Name",
+            "ast.Return",
+            "ast.Starred",
+            "ast.Store",
+            "ast.Tuple",
+            "ast.arg",
+            "ast.arguments",
+            "ast.comprehension"
+          ],
+          "unrepairable_by_repetition": true,
+          "what_would_repair_it": "A_NEW_OBSERVABLE__MORE_RUNS_REPORT_THE_SAME_FACT_VECTOR"
+        },
+        "traced_certificate": {
+          "kind": "SEPARATION_IMPOSSIBLE__EVERY_FACT_ALL_SUCCESSES_SHARE_A_FAILURE_ALSO_HAS",
+          "reason": "THE_FACTS_ALL_SUCCESSES_AGREE_ON_ARE_FACTS_A_FAILURE_ALSO_HAS",
+          "shared_facts": [
+            "arg0.type.list",
+            "argcount.1",
+            "executed.powerset",
+            "expected.type.list",
+            "line.3",
+            "line.8",
+            "result.type.list"
+          ],
+          "unrepairable_by_repetition": true,
+          "what_would_repair_it": "A_NEW_OBSERVABLE__MORE_RUNS_REPORT_THE_SAME_FACT_VECTOR"
+        }
+      },
+      "model_dependency_count": 0,
+      "program_sha256": "3e3deb045ed61fbe82725cd7e7b0fb4d00f411f87f0f91358109ec0204c61ae9",
+      "reason": "ALL_GROUNDED_CANDIDATES_FAILED_AN_INDEPENDENT_VERDICT",
+      "schema": "BRAIN_CONTRACT_GROUNDED_REPAIR_V1",
+      "seconds": 0.11,
+      "status": "NOT_REPAIRED__NO_CANDIDATE_PASSED_THE_CORPUS_TEST",
+      "synthesis": {
+        "candidates": 60,
+        "fresh_verdicts": [],
+        "passed_published_but_refused_by_contract": 0,
+        "prior": {
+          "note": "EXACT_COUNTS_OF_EXECUTED_VERDICTS__NO_FITTED_PARAMETERS",
+          "signature": "COLLECTION_SHAPE",
+          "tried": {
+            "BINARY_OP": 11,
+            "OFFSET": 49
+          },
+          "verified": {}
+        },
+        "screened": 60,
+        "winning_diff": null,
+        "winning_family": null,
+        "winning_index": null
+      },
+      "task": "powerset",
+      "test_sha256": "9b0b816ba26a0a14fc8387946a2c1f08a85cb7c4e5d0c52c29e9fd640ae89d4e"
+    },
+    {
+      "answer_key_absent": true,
+      "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+      "goal": {
+        "cases_passed": 1,
+        "cases_total": 7,
+        "contract_reach": 2,
+        "exceptions": [],
+        "failing_cases": 6,
+        "grid_size": 12,
+        "relations": [
+          "LEN_MATCHES_INPUT",
+          "PERMUTATION_OF_INPUT"
+        ],
+        "signature": "COLLECTION_SHAPE",
+        "trace_lines": [
+          2,
+          3,
+          4,
+          6,
+          7,
+          8,
+          10
+        ]
+      },
+      "identifiability": {
+        "chosen_contrast": {
+          "discriminating_facts": [],
+          "gain_log_terms": {},
+          "guaranteed_elimination": 0,
+          "reason": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+          "schema": "PROJECT_BRAIN_CONTRAST_SELECTION_V1",
+          "state": null,
+          "status": "NO_REQUIREMENT_SPACE__NOTHING_TO_DISAMBIGUATE",
+          "survivors_before": 0,
+          "worst_case_survivors_after": null
+        },
+        "closure": "SEE_CERTIFICATES",
+        "learn": {
+          "status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+          "survivors": 0
+        },
+        "learn_refused_by_certificate": true,
+        "permanent_rule_admitted": false,
+        "static_certificate": {
+          "kind": "SAME_OBSERVED_STATE_OPPOSITE_OUTCOMES",
+          "reason": "AN_UNOBSERVED_PRECONDITION_DIFFERS_BETWEEN_THESE_WORLDS",
+          "shared_facts": [
+            "ast.Add",
+            "ast.Assign",
+            "ast.Attribute",
+            "ast.AugAssign",
+            "ast.BinOp",
+            "ast.Call",
+            "ast.Constant",
+            "ast.Expr",
+            "ast.For",
+            "ast.FunctionDef",
+            "ast.List",
+            "ast.Load",
+            "ast.Module",
+            "ast.Mult",
+            "ast.Name",
+            "ast.Return",
+            "ast.Store",
+            "ast.Subscript",
+            "ast.Tuple",
+            "ast.arg",
+            "ast.arguments"
+          ],
+          "unrepairable_by_repetition": true,
+          "what_would_repair_it": "A_NEW_OBSERVABLE__MORE_RUNS_REPORT_THE_SAME_FACT_VECTOR"
+        },
+        "traced_certificate": {
+          "kind": "SEPARATION_IMPOSSIBLE__EVERY_FACT_ALL_SUCCESSES_SHARE_A_FAILURE_ALSO_HAS",
+          "reason": "THE_FACTS_ALL_SUCCESSES_AGREE_ON_ARE_FACTS_A_FAILURE_ALSO_HAS",
+          "shared_facts": [
+            "arg0.type.list",
+            "arg1.type.int",
+            "argcount.2",
+            "executed.bucketsort",
+            "expected.type.list",
+            "line.10",
+            "line.2",
+            "line.3",
+            "line.6",
+            "line.7",
+            "result.type.list"
+          ],
+          "unrepairable_by_repetition": true,
+          "what_would_repair_it": "A_NEW_OBSERVABLE__MORE_RUNS_REPORT_THE_SAME_FACT_VECTOR"
+        }
+      },
+      "model_dependency_count": 0,
+      "program_sha256": "1cc4197c2ee524ec8dd3a45c0e943acf31fa429cb8b179195334f51ff939b9fd",
+      "reason": "ALL_GROUNDED_CANDIDATES_FAILED_AN_INDEPENDENT_VERDICT",
+      "schema": "BRAIN_CONTRACT_GROUNDED_REPAIR_V1",
+      "seconds": 0.14,
+      "status": "NOT_REPAIRED__NO_CANDIDATE_PASSED_THE_CORPUS_TEST",
+      "synthesis": {
+        "candidates": 126,
+        "fresh_verdicts": [],
+        "passed_published_but_refused_by_contract": 0,
+        "prior": {
+          "note": "EXACT_COUNTS_OF_EXECUTED_VERDICTS__NO_FITTED_PARAMETERS",
+          "signature": "COLLECTION_SHAPE",
+          "tried": {
+            "AUG_ASSIGN_OP": 11,
+            "BINARY_OP": 22,
+            "CONSTANT": 12,
+            "GUARD_INSERT": 2,
+            "OFFSET": 79
+          },
+          "verified": {}
+        },
+        "screened": 126,
+        "winning_diff": null,
+        "winning_family": null,
+        "winning_index": null
+      },
+      "task": "bucketsort",
+      "test_sha256": "b5f3915b983f869cd87935c4b82246695aedc03400fe44114f7352dc02a6e65e"
+    },
+    {
+      "answer_key_absent": true,
+      "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+      "goal": {
+        "cases_passed": 0,
+        "cases_total": 5,
+        "contract_reach": 0,
+        "exceptions": [],
+        "failing_cases": 5,
+        "grid_size": 12,
+        "relations": [],
+        "signature": "COLLECTION_SHAPE",
+        "trace_lines": [
+          2,
+          3,
+          4,
+          5,
+          7,
+          8,
+          10
+        ]
+      },
+      "identifiability": {
+        "chosen_contrast": {
+          "discriminating_facts": [],
+          "gain_log_terms": {},
+          "guaranteed_elimination": 0,
+          "reason": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+          "schema": "PROJECT_BRAIN_CONTRAST_SELECTION_V1",
+          "state": null,
+          "status": "NO_REQUIREMENT_SPACE__NOTHING_TO_DISAMBIGUATE",
+          "survivors_before": 0,
+          "worst_case_survivors_after": null
+        },
+        "closure": "SEE_CERTIFICATES",
+        "learn": {
+          "status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+          "survivors": 0
+        },
+        "learn_refused_by_certificate": false,
+        "permanent_rule_admitted": false,
+        "static_certificate": {
+          "kind": "NO_SUCCESS__NOTHING_TO_SCOPE",
+          "reason": "NO_SUCCESS_TO_SCOPE_FROM",
+          "shared_facts": [],
+          "unrepairable_by_repetition": false,
+          "what_would_repair_it": "AN_OBSERVATION_OF_THE_MISSING_KIND__NOT_A_NEW_OBSERVABLE"
+        },
+        "traced_certificate": {
+          "kind": "NO_SUCCESS__NOTHING_TO_SCOPE",
+          "reason": "NO_SUCCESS_TO_SCOPE_FROM",
+          "shared_facts": [],
+          "unrepairable_by_repetition": false,
+          "what_would_repair_it": "AN_OBSERVATION_OF_THE_MISSING_KIND__NOT_A_NEW_OBSERVABLE"
+        }
+      },
+      "model_dependency_count": 0,
+      "program_sha256": "eb76433536ae58fa2955fbe053a8f9e45e7deb7d3894048acb7cdab13f1f5282",
+      "reason": "ALL_GROUNDED_CANDIDATES_FAILED_AN_INDEPENDENT_VERDICT",
+      "schema": "BRAIN_CONTRACT_GROUNDED_REPAIR_V1",
+      "seconds": 0.31,
+      "status": "NOT_REPAIRED__NO_CANDIDATE_PASSED_THE_CORPUS_TEST",
+      "synthesis": {
+        "candidates": 144,
+        "fresh_verdicts": [],
+        "passed_published_but_refused_by_contract": 0,
+        "prior": {
+          "note": "EXACT_COUNTS_OF_EXECUTED_VERDICTS__NO_FITTED_PARAMETERS",
+          "signature": "COLLECTION_SHAPE",
+          "tried": {
+            "BINARY_OP": 11,
+            "COMPARISON_CLASS": 10,
+            "CONSTANT": 24,
+            "NAME_SWAP": 1,
+            "OFFSET": 98
+          },
+          "verified": {}
+        },
+        "screened": 144,
+        "winning_diff": null,
+        "winning_family": null,
+        "winning_index": null
+      },
+      "task": "wrap",
+      "test_sha256": "c23a0d457eeec036cedb3296a935231d0d92a5e6334d93172fc8dd79f9abe5e9"
+    },
+    {
+      "answer_key_absent": true,
+      "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+      "goal": {
+        "cases_passed": 2,
+        "cases_total": 6,
+        "contract_reach": 0,
+        "exceptions": [],
+        "failing_cases": 4,
+        "grid_size": 10,
+        "relations": [],
+        "signature": "COLLECTION_SHAPE",
+        "trace_lines": [
+          3,
+          4,
+          5,
+          6,
+          7,
+          10,
+          11,
+          12,
+          13,
+          14,
+          16,
+          19,
+          22
+        ]
+      },
+      "identifiability": {
+        "chosen_contrast": {
+          "discriminating_facts": [],
+          "gain_log_terms": {},
+          "guaranteed_elimination": 0,
+          "reason": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+          "schema": "PROJECT_BRAIN_CONTRAST_SELECTION_V1",
+          "state": null,
+          "status": "NO_REQUIREMENT_SPACE__NOTHING_TO_DISAMBIGUATE",
+          "survivors_before": 0,
+          "worst_case_survivors_after": null
+        },
+        "closure": "SEE_CERTIFICATES",
+        "learn": {
+          "status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+          "survivors": 0
+        },
+        "learn_refused_by_certificate": true,
+        "permanent_rule_admitted": false,
+        "static_certificate": {
+          "kind": "SAME_OBSERVED_STATE_OPPOSITE_OUTCOMES",
+          "reason": "AN_UNOBSERVED_PRECONDITION_DIFFERS_BETWEEN_THESE_WORLDS",
+          "shared_facts": [
+            "ast.And",
+            "ast.Assign",
+            "ast.Attribute",
+            "ast.BoolOp",
+            "ast.Call",
+            "ast.Compare",
+            "ast.Constant",
+            "ast.Dict",
+            "ast.Expr",
+            "ast.For",
+            "ast.FunctionDef",
+            "ast.If",
+            "ast.List",
+            "ast.Load",
+            "ast.LtE",
+            "ast.Module",
+            "ast.Name",
+            "ast.Return",
+            "ast.Store",
+            "ast.Subscript",
+            "ast.USub",
+            "ast.UnaryOp",
+            "ast.While",
+            "ast.arg",
+            "ast.arguments"
+          ],
+          "unrepairable_by_repetition": true,
+          "what_would_repair_it": "A_NEW_OBSERVABLE__MORE_RUNS_REPORT_THE_SAME_FACT_VECTOR"
+        },
+        "traced_certificate": {
+          "kind": "SEPARATION_IMPOSSIBLE__EVERY_FACT_ALL_SUCCESSES_SHARE_A_FAILURE_ALSO_HAS",
+          "reason": "THE_FACTS_ALL_SUCCESSES_AGREE_ON_ARE_FACTS_A_FAILURE_ALSO_HAS",
+          "shared_facts": [
+            "arg0.type.list",
+            "argcount.1",
+            "executed.shunting_yard",
+            "expected.type.list",
+            "line.10",
+            "line.11",
+            "line.12",
+            "line.19",
+            "line.22",
+            "line.3",
+            "line.4",
+            "line.5",
+            "line.6",
+            "line.7",
+            "result.type.list"
+          ],
+          "unrepairable_by_repetition": true,
+          "what_would_repair_it": "A_NEW_OBSERVABLE__MORE_RUNS_REPORT_THE_SAME_FACT_VECTOR"
+        }
+      },
+      "model_dependency_count": 0,
+      "program_sha256": "b010f04bbfc6158888d97498cc8e0adb323b9f8285fbf5b908c7d4c8c48cfb68",
+      "reason": "ALL_GROUNDED_CANDIDATES_FAILED_AN_INDEPENDENT_VERDICT",
+      "schema": "BRAIN_CONTRACT_GROUNDED_REPAIR_V1",
+      "seconds": 0.15,
+      "status": "NOT_REPAIRED__NO_CANDIDATE_PASSED_THE_CORPUS_TEST",
+      "synthesis": {
+        "candidates": 120,
+        "fresh_verdicts": [],
+        "passed_published_but_refused_by_contract": 0,
+        "prior": {
+          "note": "EXACT_COUNTS_OF_EXECUTED_VERDICTS__NO_FITTED_PARAMETERS",
+          "signature": "COLLECTION_SHAPE",
+          "tried": {
+            "BOOL_OP": 1,
+            "COMPARISON_CLASS": 5,
+            "GUARD_INSERT": 2,
+            "OFFSET": 112
+          },
+          "verified": {}
+        },
+        "screened": 120,
+        "winning_diff": null,
+        "winning_family": null,
+        "winning_index": null
+      },
+      "task": "shunting_yard",
+      "test_sha256": "6573899a42a8fa12a7b868b863abad256fda5bddc1c07f147c9818fbf3c6cef1"
+    },
+    {
+      "answer_key_absent": true,
+      "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+      "goal": {
+        "cases_passed": 1,
+        "cases_total": 8,
+        "contract_reach": 0,
+        "exceptions": [],
+        "failing_cases": 7,
+        "grid_size": 12,
+        "relations": [],
+        "signature": "COLLECTION_SHAPE",
+        "trace_lines": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          9
+        ]
+      },
+      "identifiability": {
+        "chosen_contrast": {
+          "discriminating_facts": [],
+          "gain_log_terms": {},
+          "guaranteed_elimination": 0,
+          "reason": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+          "schema": "PROJECT_BRAIN_CONTRAST_SELECTION_V1",
+          "state": null,
+          "status": "NO_REQUIREMENT_SPACE__NOTHING_TO_DISAMBIGUATE",
+          "survivors_before": 0,
+          "worst_case_survivors_after": null
+        },
+        "closure": "SEE_CERTIFICATES",
+        "learn": {
+          "status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+          "survivors": 0
+        },
+        "learn_refused_by_certificate": true,
+        "permanent_rule_admitted": false,
+        "static_certificate": {
+          "kind": "SAME_OBSERVED_STATE_OPPOSITE_OUTCOMES",
+          "reason": "AN_UNOBSERVED_PRECONDITION_DIFFERS_BETWEEN_THESE_WORLDS",
+          "shared_facts": [
+            "ast.Assign",
+            "ast.Attribute",
+            "ast.BinOp",
+            "ast.Call",
+            "ast.Compare",
+            "ast.Constant",
+            "ast.Expr",
+            "ast.FunctionDef",
+            "ast.Gt",
+            "ast.If",
+            "ast.List",
+            "ast.Load",
+            "ast.Module",
+            "ast.Name",
+            "ast.Return",
+            "ast.Set",
+            "ast.Store",
+            "ast.Sub",
+            "ast.Tuple",
+            "ast.arg",
+            "ast.arguments"
+          ],
+          "unrepairable_by_repetition": true,
+          "what_would_repair_it": "A_NEW_OBSERVABLE__MORE_RUNS_REPORT_THE_SAME_FACT_VECTOR"
+        },
+        "traced_certificate": {
+          "kind": "SEPARATION_IMPOSSIBLE__EVERY_FACT_ALL_SUCCESSES_SHARE_A_FAILURE_ALSO_HAS",
+          "reason": "THE_FACTS_ALL_SUCCESSES_AGREE_ON_ARE_FACTS_A_FAILURE_ALSO_HAS",
+          "shared_facts": [
+            "arg0.type.int",
+            "arg1.type.int",
+            "arg2.type.int",
+            "argcount.3",
+            "executed.hanoi",
+            "expected.type.list",
+            "line.2",
+            "line.3",
+            "line.9",
+            "result.type.list"
+          ],
+          "unrepairable_by_repetition": true,
+          "what_would_repair_it": "A_NEW_OBSERVABLE__MORE_RUNS_REPORT_THE_SAME_FACT_VECTOR"
+        }
+      },
+      "model_dependency_count": 0,
+      "program_sha256": "edd1ceeb79b556a6d15e3bc21f625c5776b46c10f94a754531d39a6f7e120f9e",
+      "reason": "ALL_GROUNDED_CANDIDATES_FAILED_AN_INDEPENDENT_VERDICT",
+      "schema": "BRAIN_CONTRACT_GROUNDED_REPAIR_V1",
+      "seconds": 0.22,
+      "status": "NOT_REPAIRED__NO_CANDIDATE_PASSED_THE_CORPUS_TEST",
+      "synthesis": {
+        "candidates": 199,
+        "fresh_verdicts": [],
+        "passed_published_but_refused_by_contract": 0,
+        "prior": {
+          "note": "EXACT_COUNTS_OF_EXECUTED_VERDICTS__NO_FITTED_PARAMETERS",
+          "signature": "COLLECTION_SHAPE",
+          "tried": {
+            "BINARY_OP": 44,
+            "COMPARISON_CLASS": 5,
+            "CONSTANT": 24,
+            "GUARD_INSERT": 2,
+            "OFFSET": 124
+          },
+          "verified": {}
+        },
+        "screened": 199,
+        "winning_diff": null,
+        "winning_family": null,
+        "winning_index": null
+      },
+      "task": "hanoi",
+      "test_sha256": "a93f11847b7cc48409035229316cdfd5ee5ca209fb95d2cb9be3aaf419e2fb98"
+    }
+  ],
+  "schema": "BRAIN_CONTRACT_GROUNDED_REPAIR_MEASURE_V1",
+  "upstream": "https://github.com/jkoppel/QuixBugs",
+  "upstream_head": "4257f44b0ff1181dedaedee6a447e133219fcebf"
+}

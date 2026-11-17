@@ -1,0 +1,144 @@
+{
+ "schema": "PROJECT_BRAIN_INSTRUCTION_POLICY_VERIFICATION_V1",
+ "measured": "2026-11-16",
+ "question": "How far does an agent get on real unseen computer-use pages with ZERO experience, ZERO search, ZERO reward reads and no external model?",
+ "protocol": {
+  "pages": 130,
+  "source": "MiniWoB++ html/ in a real chromium substrate",
+  "seed": 1060,
+  "experience": "none - a fresh ContractArm per page, nothing carried between pages or episodes",
+  "search": "none",
+  "reward": "never read by the agent; scored by the harness after the episode",
+  "external_model": "none, in any role",
+  "budget": "<=30 actions per page"
+ },
+ "result": {
+  "solved": 39,
+  "of_all_pages": 0.3,
+  "acted_pages": 67,
+  "of_acted_pages": 0.582,
+  "refused_with_a_typed_reason": 63,
+  "partial_credit_without_success": 0,
+  "fix_progression": [
+   24,
+   27,
+   32,
+   36,
+   39
+  ],
+  "note": "every increase came from a page-agnostic structural law, never from naming a page"
+ },
+ "laws_measured_this_round": [
+  {
+   "law": "A FROZEN INDEX IS NOT AN ACTION, AND NEITHER IS A FROZEN LABEL",
+   "evidence": "ascending-numbers: pressing the first number replaces every remaining number with a blank rect at that number's own coordinates; the page also renumbers its elements. Text can never resolve again, so identity must be positional - and the ledger must be written positionally too, or the same target is served twice and the next can never be found."
+  },
+  {
+   "law": "WHERE A THING IS COUNTS AS OBSERVED STATE",
+   "evidence": "the repeat guard hashed text/tag/value only, so a page that had become a different arrangement of blank rects read as unchanged and the arm re-pressed the same element forever. Geometry is part of the observable."
+  },
+  {
+   "law": "A SUBMENU HEADER IS HOVERED, NOT CLICKED",
+   "evidence": "click-menu: clicking 'Milissent' ended the episode (done=True) with the trail unpressed; hovering opened the next level. The page says which it is: the header carries a caret icon its leaf siblings do not."
+  },
+  {
+   "law": "A WIDGET'S ORIENTATION IS ITS TRACK'S, NOT ITS HANDLE'S",
+   "evidence": "use-slider: the handle is a 14x14 square and says nothing about the axis; the container holding it is 10x99. Vertical sliders invert - 'up' raised the value 107 to 110."
+  },
+  {
+   "law": "NEVER ACT ON HALF AN INSTRUCTION",
+   "evidence": "circle-center / find-midpoint / resize-textarea were being executed using only their decidable 'press submit' half; the arm now emits no action when any part of the instruction was refused."
+  }
+ ],
+ "acted_but_failed": {
+  "count": 28,
+  "stopped_on_first_action": [
+   {
+    "task": "choose-date",
+    "why": "DATE_WIDGET_NEEDS_A_CALENDAR, NOT TEXT"
+   },
+   {
+    "task": "choose-date-easy",
+    "why": "DATE_WIDGET_NEEDS_A_CALENDAR"
+   },
+   {
+    "task": "choose-date-medium",
+    "why": "DATE_WIDGET_NEEDS_A_CALENDAR"
+   },
+   {
+    "task": "choose-date-nodelay",
+    "why": "DATE_WIDGET_NEEDS_A_CALENDAR"
+   },
+   {
+    "task": "click-shades",
+    "why": "TARGET_IS_A_COLOURED_REGION_WITH_NO_NAME"
+   },
+   {
+    "task": "copy-paste",
+    "why": "NEEDS_A_CLIPBOARD_TRANSFER"
+   },
+   {
+    "task": "copy-paste-2",
+    "why": "NEEDS_A_CLIPBOARD_TRANSFER"
+   },
+   {
+    "task": "find-word",
+    "why": "TARGET_LIVES_IN_PROSE_WITH_NO_ELEMENT"
+   },
+   {
+    "task": "focus-text-2",
+    "why": "TARGET_DERIVED_FROM_PAGE_CONTENT"
+   },
+   {
+    "task": "guess-number",
+    "why": "REQUIRES_THE_ENVIRONMENTS_HIDDEN_FEEDBACK"
+   },
+   {
+    "task": "odd-or-even",
+    "why": "TARGET_DERIVED_FROM_PAGE_CONTENT"
+   },
+   {
+    "task": "resize-textarea",
+    "why": "MUST_SUBMIT_AN_ABSENT_HALF_TO_SEARCH"
+   },
+   {
+    "task": "scroll-text-2",
+    "why": "TARGET_LIVES_IN_PROSE_WITH_NO_ELEMENT"
+   },
+   {
+    "task": "use-autocomplete",
+    "why": "TARGET_IS_A_PREFIX_FAMILY_NOT_A_NAME"
+   },
+   {
+    "task": "use-autocomplete-nodelay",
+    "why": "TARGET_IS_A_PREFIX_FAMILY_NOT_A_NAME"
+   },
+   {
+    "task": "use-slider-2",
+    "why": "SLIDER_PHYSICS_BEYOND_ONE_STEP_NUDGE"
+   }
+  ],
+  "multi_step_misfire": [
+   "button-delay",
+   "click-collapsible-2",
+   "click-collapsible-2-nodelay",
+   "drag-sort-numbers",
+   "form-sequence",
+   "form-sequence-2",
+   "form-sequence-3",
+   "generate-number",
+   "login-user-popup",
+   "read-table-2",
+   "scroll-text",
+   "use-slider"
+  ],
+  "reading": "16 of 28 are not vocabulary gaps: the instruction names something the page never shows as an element (a calendar, a colour region, prose, a prefix family) or needs the environment's hidden state. Only 12 are execution errors on pages the arm did understand."
+ },
+ "what_this_measures_about_the_claim": {
+  "instant_learning": "true only as a version space over a stated language; here the language is the operator set in instruction_contract_v1.py, and the arm solves 58.2% of the pages it can parse having never seen a page before",
+  "learning_versus_coverage": "zero experience reaches 30.0% and the binding constraint is contract coverage and observation content, not experience: 63 pages produced no contract at all while 39 were solved with no experience whatsoever",
+  "arbitrary_environments": "bounded drift only; what breaks this arm is a page whose target has no name in the DOM - no amount of experience supplies a name that is not there",
+  "computer_use_and_swe": "frontier numbers on OSWorld 2.0 (20.6-31.4%) sit in the same band as this arm's 30.0% on a far easier benchmark; that is the honest scale of what remains",
+  "bottleneck": "the causal observable / verifier - what the agent cannot do is see enough of the world to check itself"
+ }
+}

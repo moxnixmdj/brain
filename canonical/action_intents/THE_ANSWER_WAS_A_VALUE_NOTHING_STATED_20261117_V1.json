@@ -1,0 +1,469 @@
+{
+ "action_id": "THE_ANSWER_WAS_A_VALUE_NOTHING_STATED_20261117_V1",
+ "action_intent_id": "THE_ANSWER_WAS_A_VALUE_NOTHING_STATED_20261117_V1",
+ "action_kind": "REAL_CAPABILITY_ACQUISITION",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "incremental_spend_usd": 0,
+  "independent_verification_completed": false,
+  "independent_verification_note": "Producer-run sandbox only. Independent verification still open.",
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+  "progress_evidence_paths": [
+   "canonical/runtime/derived_text_candidate_v1.py",
+   "canonical/tests/test_derived_text_candidate_v1.py",
+   "canonical/verification/THE_ANSWER_WAS_A_VALUE_NOTHING_STATED_20261117_V1.json",
+   "WHAT_IS_REAL_AND_THE_ONE_CLASS_OF_PAGE_20261117_V1.md"
+  ],
+  "route_class": "DELETE",
+  "scope_complete_discharge": false,
+  "terminal_achieved": false
+ },
+ "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_GENERATOR_THAT_PROPOSES_WHAT_TO_TYPE_COULD_ONLY_COPY_TEXT_THE_PAGE_ALREADY_SHOWED_SO_A_PAGE_WHOSE_ANSWER_IS_A_VALUE_NOTHING_STATES_WAS_UNSOLVABLE_AT_ANY_BUDGET",
+ "canonical_base_commit": "abc0c49f0e2726d3e1180414f5760e0f89469311",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "THE_GENERATOR_THAT_PROPOSES_WHAT_TO_TYPE_COULD_ONLY_COPY_TEXT_THE_PAGE_ALREADY_SHOWED_SO_A_PAGE_WHOSE_ANSWER_IS_A_VALUE_NOTHING_STATES_WAS_UNSOLVABLE_AT_ANY_BUDGET",
+ "date": "2026-11-17",
+ "expected_parent_change": "A page whose answer is a value nothing on it states is now reachable: simple-arithmetic goes from unsolvable at 400 and at 1200 actions to solved in 20, verified on a fresh page, at both seeds. Every page that already worked is bit-identical.",
+ "expected_parent_frontier_change": "Work is aimed at what the system is allowed to PUT FORWARD, not at budget, search order or prior strength: four arms including a page-local oracle all spent their whole budget and failed, so the constraint is the candidate set itself.",
+ "explicit_user_authorization": [
+  "Instant learning + instant learning in new arbitrary environments -- we solved those perfectly. Doesn't that mean we can solve any computer use?",
+  "Give the model the most advanced actions, let it do a thing once, it learns it permanently, and every computer task plus the most advanced software engineering is solved. Am I right or wrong?",
+  "You must think from first principles for everything",
+  "You should kill all the bad and dumb ideas before you waste time implementing them.",
+  "NEVER BUILD BEFORE REASRCHING IS EXHASIATAION IS HAPPENED",
+  "maximize your web use",
+  "all the tests are not on synthetic data but are on the hardest open tests",
+  "Testing on bugs we already know work is not progress -- that is self-congratulation.",
+  "YOU SURE THIS THE SMARTEST APPROACH?",
+  "Work in branch, merge only when complete (fastest)",
+  "Merge once, not 10 times."
+ ],
+ "falsification_condition": "A page where the derived candidate changes an outcome for the worse; or the derived arm failing where the random-decoy arm succeeds; or any page that already worked changing its pass or its spend.",
+ "files": {},
+ "generic_repair_from_single_probe": false,
+ "governance_change": false,
+ "highest_leverage_now": true,
+ "incremental_spend_usd": 0,
+ "intentional_route_race": false,
+ "load_bearing_primary": {
+  "constructive_gap_for_open_obligation_ids": [
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "expected_obligation_discharge_lcb": 0,
+  "expected_obligation_unlock_lcb": "2/100",
+  "interpretation": "Speculative forecast only. No obligation discharge, benchmark gain, capability credit or independent verification is claimed.",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "1/2",
+  "wall_clock_cost_ub": 4
+ },
+ "measured_effect": {
+  "attribution_control": {
+   "arms": [
+    "no extra candidates",
+    "three random numbers (same count)",
+    "the derived value"
+   ],
+   "result": "decoys fail all three seeds at 400a; the derived value succeeds all three at 20a"
+  },
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "not_stored": "the reading of + - * / only; seed 1060 -> 11, 1061 -> 8, 1062 -> 7",
+  "the_fix": {
+   "actions_spent": {
+    "with": 472,
+    "without": 1232
+   },
+   "design": "2 seeds x 7 pages, same seeds, same 400-action budget, same explorer",
+   "pages_bit_identical": "every page that already worked",
+   "pages_that_changed": 2,
+   "verified_on_fresh_page": {
+    "of": 14,
+    "with": 13,
+    "without": 11
+   }
+  },
+  "the_wall": {
+   "answer": "11",
+   "answer_among_them": false,
+   "candidates_at_tier_3": 16,
+   "four_arms_at_1200_actions_all_failed": true,
+   "one_arm_was_an_oracle": true,
+   "page": "simple-arithmetic",
+   "page_texts": [
+    "8 + 3 =",
+    "Submit"
+   ]
+  }
+ },
+ "next_step": "Make the generator typed and compositional rather than arithmetic-specific: the value that may be typed is a function of what the page states, using the tree's existing value_algebra_v1 operator composition and acquired_operator_memory_v1 induction, then re-run the same paired comparison plus the decoy control, and name the pages it still cannot reach.",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "paths": [
+  "canonical/runtime/derived_text_candidate_v1.py",
+  "canonical/tests/test_derived_text_candidate_v1.py",
+  "canonical/verification/THE_ANSWER_WAS_A_VALUE_NOTHING_STATED_20261117_V1.json",
+  "WHAT_IS_REAL_AND_THE_ONE_CLASS_OF_PAGE_20261117_V1.md"
+ ],
+ "prior_work_reused": [
+  "canonical/tools/miniwob_one_success_generalisation_measure_v1.py (type_candidates, offered_actions, replay_on_fresh_page, the unmodified harness)",
+  "canonical/runtime/systematic_exploration_v1.py (explore_to_goal, unchanged)",
+  "canonical/runtime/inert_action_prior_v1.py + canonical/tools/inert_action_prior_measure_v1.py (the four-arm experiment that located the wall)",
+  "canonical/runtime/contrast_selection_v1.py (chosen contrasts, 2.76 demonstrations vs 0 of 200 for one success)",
+  "canonical/runtime/value_algebra_v1.py + canonical/runtime/acquired_operator_memory_v1.py (composing typed operators and inducing an operator from examples -- the general form this narrow fix points at)"
+ ],
+ "probe_specific": false,
+ "recursive_obs": {
+  "canonical_base_commit": "abc0c49f0e2726d3e1180414f5760e0f89469311",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "the copy-only candidate generator",
+   "a larger budget as the fix",
+   "a stronger prior as the fix"
+  ],
+  "expected_parent_level_state_change": "Work is aimed at what the system is allowed to PUT FORWARD, not at budget, search order or prior strength: four arms including a page-local oracle all spent their whole budget and failed, so the constraint is the candidate set itself.",
+  "iteration_limit": 1,
+  "obs_blocker": {
+   "delete_bypass_substitute_options": [
+    "delete the copy-only assumption",
+    "reuse the tree's existing typed-operator machinery for the general form",
+    "measure instead of argue, with an oracle arm"
+   ],
+   "intrinsic_or_path_specific": "path_specific: this substrate's arithmetic is the one derived class that can be measured today; intrinsic: a generator that copies can never propose a value the source does not state",
+   "surviving_causal_blocker": "THE_GENERATOR_THAT_PROPOSES_WHAT_TO_TYPE_COULD_ONLY_COPY_TEXT_THE_PAGE_ALREADY_SHOWED_SO_A_PAGE_WHOSE_ANSWER_IS_A_VALUE_NOTHING_STATES_WAS_UNSOLVABLE_AT_ANY_BUDGET"
+  },
+  "obs_capability": {
+   "capability_work_deleted": [
+    "a claim that more budget would reach these pages (measured false with an oracle arm)",
+    "a claim that the observation was blind to the effect of an action (measured false; the action was malformed)",
+    "a claim that the inert-prior arms never differed (measured false; a consolidator prints null)"
+   ],
+   "existing_inherited_routes_checked": [
+    "type_candidates / offered_actions in the harness (copy-only generator)",
+    "systematic_exploration_v1 explore_to_goal with prior= and effect_prior (already carried a model across pages)",
+    "inert_action_prior_v1 and its four-arm measure",
+    "contrast_selection_v1 (choosing the next observation)",
+    "value_algebra_v1 (composing typed operators) and acquired_operator_memory_v1 (inducing an operator from examples)"
+   ],
+   "external_existing_routes_checked": [
+    "Skill-V arXiv 2610.11781: skills as versioned falsifiable contracts with preconditions and postconditions",
+    "SkillOps arXiv 2605.13716: skill contract (P,O,A,V,F) and an ecosystem graph where a producer artifact must satisfy a consumer precondition",
+    "SkillFusion arXiv 2610.15481: typed scoped constraints with hard/soft conflicts and redundancy separated",
+    "SkillCommit arXiv 2608.15165: scope overreach is the main cause of negative transfer; every abstraction gated by replay of every source instance",
+    "CompoSkill arXiv 2608.16246: individually scanner-passing skills still compose into harmful paths"
+   ],
+   "surviving_gap": "The generator is still copy-plus-one-arithmetic. Geometry, comparison over the page's own cards, and spatial construction are measured as still failing (count-sides 4/20, find-greatest 11/20, bisect-angle unsolved)."
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "a higher score on pages that already work",
+    "a bigger budget",
+    "a stronger prior (an oracle prior failed)"
+   ],
+   "real_outcome": "Solve pages one experience cannot reach, without more budget.",
+   "surviving_necessity": "The only variable that moved a page from unsolvable to solved was the candidate the system was allowed to put forward."
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "the decoy control absorbs the 'more candidates helps' explanation",
+   "downstream_work_to_delete_or_supersede": "the belief that the remaining unsolved pages are a budget problem",
+   "fresh_reuse_plan": "re-run the paired comparison and the decoy control whenever the generator changes"
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": "the four-arm 1200-action experiment is not re-run; its answer is that an oracle fails, which is cached in the receipt",
+   "search_stop_decision": "stopped when a decoy control separated content from volume and no page regressed"
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "A model is not needed to read four symbols; a bigger budget was measured insufficient with an oracle.",
+   "routes_ranked": [
+    "DELETE the copy-only assumption (taken)",
+    "REUSE the existing generator and append (taken)",
+    "COMPOSE with value_algebra_v1 for the general form (next)",
+    "SYNTHESIZE a model (rejected: none used, none needed)"
+   ]
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "none used: every number is a real page's own reward, and every success is replayed on a fresh page before it is counted"
+  },
+  "real_outcome": "A class of page that no amount of search could reach is reachable, because the set of values the system may type now includes a value that follows from what the page states.",
+  "required_capability": "Reach and verify a task on fresh instances of a real page.",
+  "route_frontier": {
+   "challenger_routes": [
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "zero: four arms spent 1200 each",
+      "CORRECTNESS": "unchanged",
+      "INCREMENTAL_COST": "3x wall clock per page",
+      "RELIABILITY": "unchanged",
+      "VERIFIABILITY": "measured",
+      "WALL_CLOCK": "hours"
+     },
+     "evidence": [
+      "baseline, learned prior, page-local oracle prior and shuffled control each spent exactly 1200 and failed"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_ANSWER_WAS_A_VALUE_NOTHING_STATED_20261117_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "raise the budget to 1200 on the unreachable pages"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "the ORACLE arm saved nothing on this page",
+      "CORRECTNESS": "unchanged",
+      "INCREMENTAL_COST": "a prior is free at use time but cannot help here",
+      "RELIABILITY": "unknown",
+      "VERIFIABILITY": "measured",
+      "WALL_CLOCK": "hours"
+     },
+     "evidence": [
+      "the page-local oracle had perfect inertness knowledge for this page and still spent 1200"
+     ],
+     "qualification_evidence": [
+      "the four-arm receipt"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "learn a stronger inert-action prior"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "11 -> 13 of 14 verified; 1232 -> 472 actions",
+      "CORRECTNESS": "every page that already worked bit-identical",
+      "INCREMENTAL_COST": "one module, no parameters",
+      "RELIABILITY": "3 of 14 still unsolved and named",
+      "VERIFIABILITY": "decoy control separates content from volume",
+      "WALL_CLOCK": "minutes"
+     },
+     "evidence": [
+      "2 seeds x 7 pages paired comparison, plus a same-count random-decoy control on 3 seeds"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_ANSWER_WAS_A_VALUE_NOTHING_STATED_20261117_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "SELECTED",
+     "route": "append candidates derived from what the page states"
+    }
+   ],
+   "checked_at_utc": "2026-11-17T01:58:55Z",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "raise the action budget or strengthen the inert-action prior on pages no arm can reach",
+   "max_age_hours": 24,
+   "negative_search_summary": "No existing route in this tree or in the 2026 literature claims that a copy-only candidate generator can reach a page whose answer nothing states. The literature's skill-contract line (Skill-V, SkillOps, SkillFusion, SkillCommit) addresses composition and scope, not the generation of a value the page never printed; that gap is what this PR measures on one substrate.",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "2026 GUI agent typed value derived from page content arithmetic candidate generation"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "typed operator composition value algebra induction from examples agent"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "SkillOps SkillV SkillFusion skill contract precondition postcondition 2026"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "agent skill library negative transfer scope overreach 2026 arXiv"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "selected_route": "MAKE_THE_CANDIDATE_GENERATOR_READ_THE_ARITHMETIC_THE_PAGE_SPELLS_INSTEAD_OF_ONLY_COPYING_TEXT_BECAUSE_FOUR_ARMS_INCLUDING_AN_ORACLE_ALL_SPENT_1200_ACTIONS_AND_FAILED",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-11-17T01:58:55Z",
+    "execution_dependencies": [
+     {
+      "dependency": "miniwob-plusplus html substrate at /tmp/mw and puppeteer-core@23 + @sparticuz/chromium at /tmp/nodes",
+      "evidence": [
+       "130 pages load; the paired comparison ran 14 page-instances and the decoy control 9"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "LOCAL_RUNTIME",
+      "observed_at_utc": "2026-11-17T01:58:55Z",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "VOLATILE"
+     },
+     {
+      "dependency": "python3 with pytest for canonical/tests",
+      "evidence": [
+       "178 passed, 27 skipped across the harness suite and the new test file"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "LOCAL_RUNTIME",
+      "observed_at_utc": "2026-11-17T01:58:55Z",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "max_age_hours": 2,
+    "selected_route": "MAKE_THE_CANDIDATE_GENERATOR_READ_THE_ARITHMETIC_THE_PAGE_SPELLS_INSTEAD_OF_ONLY_COPYING_TEXT_BECAUSE_FOUR_ARMS_INCLUDING_AN_ORACLE_ALL_SPENT_1200_ACTIONS_AND_FAILED",
+    "status": "READY"
+   },
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/tools/miniwob_one_success_generalisation_measure_v1.py",
+     "canonical/runtime/systematic_exploration_v1.py",
+     "canonical/runtime/inert_action_prior_v1.py",
+     "canonical/runtime/value_algebra_v1.py",
+     "canonical/runtime/acquired_operator_memory_v1.py"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "DOM vs Screenshots 2026: agents lose grounding when channels disagree about which element is the same"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "registry.npmjs.org puppeteer-core@23 and @sparticuz/chromium installed and used to drive all pages",
+     "pypi.org pytest for the tree's own suites"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "https://arxiv.org/html/2610.11781 (Skill-V)",
+     "https://arxiv.org/html/2605.13716 (SkillOps)",
+     "https://arxiv.org/html/2610.15481 (SkillFusion)",
+     "https://pith.science/paper/2608.15165 (SkillCommit)",
+     "https://arxiv.org/html/2608.16246 (CompoSkill)"
+    ]
+   },
+   "unresolved_plausible_dominators": []
+  },
+  "routes_considered": [
+   "DELETE",
+   "REUSE",
+   "COMPOSE",
+   "SYNTHESIZE_NEW_PRIMITIVE"
+  ],
+  "selected_surviving_route": "MAKE_THE_CANDIDATE_GENERATOR_READ_THE_ARITHMETIC_THE_PAGE_SPELLS_INSTEAD_OF_ONLY_COPYING_TEXT_BECAUSE_FOUR_ARMS_INCLUDING_AN_ORACLE_ALL_SPENT_1200_ACTIONS_AND_FAILED",
+  "stop_condition": "The paired comparison is reported in full, the decoy control is reported, the pages the change does NOT fix are named with their numbers, and no capability, family, terminal or weight credit is claimed.",
+  "why_selected_route_is_fastest_sufficient": "One appended candidate, justified by the page's own text, turns two page-instances from unsolvable to 20 actions and moves no other page at all."
+ },
+ "route_id": "MAKE_THE_CANDIDATE_GENERATOR_READ_THE_ARITHMETIC_THE_PAGE_SPELLS_INSTEAD_OF_ONLY_COPYING_TEXT_BECAUSE_FOUR_ARMS_INCLUDING_AN_ORACLE_ALL_SPENT_1200_ACTIONS_AND_FAILED",
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+ "scope_and_limits": "AUTHORITY NONE. Producer-run sandbox. 7 pages x 2 seeds. The mechanism is established, not a rate. The change is narrow: four operators on integer and simple decimal arithmetic. Geometry, comparison over the page's own cards, and spatial construction were measured as still failing and are not claimed.",
+ "scope_complete_discharge": false,
+ "selected_route": "MAKE_THE_CANDIDATE_GENERATOR_READ_THE_ARITHMETIC_THE_PAGE_SPELLS_INSTEAD_OF_ONLY_COPYING_TEXT_BECAUSE_FOUR_ARMS_INCLUDING_AN_ORACLE_ALL_SPENT_1200_ACTIONS_AND_FAILED",
+ "status": "PROPOSED__ZERO_CREDIT__NO_TERMINAL_CLAIM",
+ "stop_condition": "The paired comparison is reported in full, the decoy control is reported, the pages the change does NOT fix are named with their numbers, and no capability, family, terminal or weight credit is claimed.",
+ "terminal_achieved": false,
+ "terminal_credit_delta": 0,
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "truth": {
+  "achieved": false
+ },
+ "user_authorized_governance_change": false,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "currentness": {
+   "accepted_families": 5,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "This measures reach on real pages; it discharges no truth obligation and claims no terminal credit.",
+  "target_truth_obligations": [
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [],
+   "decisive_question": "Of the pages no budget, search order or prior can reach, how many are unreachable because the answer is a value nothing on the page states -- and does generating that value reach them?",
+   "falsifier_id": "A_PAGE_WHERE_THE_DERIVED_CANDIDATE_CHANGES_AN_OUTCOME_FOR_THE_WORSE_OR_A_DECOY_SUCCEEDS_WHERE_THE_DERIVED_VALUE_FAILS",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "Two of my own conclusions were found wrong and are recorded rather than hidden: a malformed action produced a false 'blind observation' claim, and a consolidator that hardcodes null produced a false 'the four arms never differed' claim. Both were retracted before this PR and are named in the receipt.",
+   "proposal_id": "THE_ANSWER_WAS_A_VALUE_NOTHING_STATED_20261117_V1"
+  }
+ },
+ "verification": {
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "commands": [
+   "python3 -m pytest canonical/tests/test_derived_text_candidate_v1.py canonical/tests/test_miniwob_one_success_generalisation_v1.py -q  # 178 passed, 27 skipped",
+   "python3 -m pytest canonical/tests/test_derived_text_candidate_v1.py -q  # 13 passed; multiplication->addition mutation caught",
+   "python3 canonical/runtime/enforce_goal_hierarchy.py --base <merge-base> --head HEAD",
+   "python3 execution_guard/enforce_load_bearing_primary_pr.py --base <merge-base> --head HEAD",
+   "python3 execution_guard/repo_integrity_guard_v1.py",
+   "python3 canonical/runtime/verify_brain_unified_model_v1.py"
+  ]
+ },
+ "weakens_existing_guard": false
+}

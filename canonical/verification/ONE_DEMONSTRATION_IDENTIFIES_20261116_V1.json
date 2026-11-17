@@ -1,0 +1,328 @@
+{
+  "applicable_sites": 29,
+  "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+  "chosen_contrasts": {
+    "choose": "chosen",
+    "evidence_size": 3,
+    "held_out": {
+      "accuracy": 0.9624,
+      "dangerous_error_rate": 0.0,
+      "false_negative": 12,
+      "false_positive": 0,
+      "precision": 1.0,
+      "recall": 0.4545,
+      "sites": 319,
+      "true_negative": 297,
+      "true_positive": 10
+    },
+    "insufficiency": null,
+    "observations": 2,
+    "requirement": [
+      "use.first_computed",
+      "use.read_once"
+    ],
+    "seed": 0,
+    "status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+    "survivors": 512
+  },
+  "damaged_sites": 0,
+  "files": 5532,
+  "held_out_sites": 319,
+  "inapplicable_sites": 450,
+  "incremental_spend_usd": 0,
+  "model_calls": 0,
+  "network_calls": 0,
+  "one_demonstration": {
+    "candidate_facts": [],
+    "candidate_request_count": 1,
+    "held_out": {
+      "accuracy": 0.069,
+      "dangerous_error_rate": 0.931,
+      "false_negative": 0,
+      "false_positive": 297,
+      "precision": 0.069,
+      "recall": 1.0,
+      "sites": 319,
+      "true_negative": 0,
+      "true_positive": 22
+    },
+    "reason": "NO_FAILURE__NECESSITY_IS_ONLY_REFUTED_BY_FAILURE",
+    "requirement": [],
+    "status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+    "survivors": 0,
+    "true_held_out_precision_at_that_requirement": null
+  },
+  "oracle_seconds": 30.33,
+  "pattern": "canonical/**/*.py",
+  "random_contrasts": {
+    "accuracy_when_identified": [],
+    "identified_at_all": 0,
+    "mean_observations_when_identified": null,
+    "observations_when_identified": [],
+    "seeds": 12
+  },
+  "random_rows": [
+    {
+      "accuracy": 0.069,
+      "dangerous_errors": 297,
+      "observations": 318,
+      "seed": 0,
+      "status": "INCONSISTENT__NO_REQUIREMENT_EXPLAINS_THE_EVIDENCE"
+    },
+    {
+      "accuracy": 0.069,
+      "dangerous_errors": 297,
+      "observations": 318,
+      "seed": 1,
+      "status": "INCONSISTENT__NO_REQUIREMENT_EXPLAINS_THE_EVIDENCE"
+    },
+    {
+      "accuracy": 0.069,
+      "dangerous_errors": 297,
+      "observations": 318,
+      "seed": 2,
+      "status": "INCONSISTENT__NO_REQUIREMENT_EXPLAINS_THE_EVIDENCE"
+    },
+    {
+      "accuracy": 0.069,
+      "dangerous_errors": 297,
+      "observations": 318,
+      "seed": 3,
+      "status": "INCONSISTENT__NO_REQUIREMENT_EXPLAINS_THE_EVIDENCE"
+    },
+    {
+      "accuracy": 0.069,
+      "dangerous_errors": 297,
+      "observations": 318,
+      "seed": 4,
+      "status": "INCONSISTENT__NO_REQUIREMENT_EXPLAINS_THE_EVIDENCE"
+    },
+    {
+      "accuracy": 0.069,
+      "dangerous_errors": 297,
+      "observations": 318,
+      "seed": 5,
+      "status": "INCONSISTENT__NO_REQUIREMENT_EXPLAINS_THE_EVIDENCE"
+    },
+    {
+      "accuracy": 0.069,
+      "dangerous_errors": 297,
+      "observations": 318,
+      "seed": 6,
+      "status": "INCONSISTENT__NO_REQUIREMENT_EXPLAINS_THE_EVIDENCE"
+    },
+    {
+      "accuracy": 0.069,
+      "dangerous_errors": 297,
+      "observations": 318,
+      "seed": 7,
+      "status": "INCONSISTENT__NO_REQUIREMENT_EXPLAINS_THE_EVIDENCE"
+    },
+    {
+      "accuracy": 0.069,
+      "dangerous_errors": 297,
+      "observations": 318,
+      "seed": 8,
+      "status": "INCONSISTENT__NO_REQUIREMENT_EXPLAINS_THE_EVIDENCE"
+    },
+    {
+      "accuracy": 0.069,
+      "dangerous_errors": 297,
+      "observations": 318,
+      "seed": 9,
+      "status": "INCONSISTENT__NO_REQUIREMENT_EXPLAINS_THE_EVIDENCE"
+    },
+    {
+      "accuracy": 0.069,
+      "dangerous_errors": 297,
+      "observations": 318,
+      "seed": 10,
+      "status": "INCONSISTENT__NO_REQUIREMENT_EXPLAINS_THE_EVIDENCE"
+    },
+    {
+      "accuracy": 0.069,
+      "dangerous_errors": 297,
+      "observations": 318,
+      "seed": 11,
+      "status": "INCONSISTENT__NO_REQUIREMENT_EXPLAINS_THE_EVIDENCE"
+    }
+  ],
+  "schema": "one_demonstration_identifies_v1",
+  "separation": {
+    "blocking_inapplicable_sites": 18,
+    "blocking_reasons": {
+      "_out_v is not the first thing the next statement computes, exactly once": 1,
+      "cand is not the first thing the next statement computes, exactly once": 1,
+      "compiled is not the first thing the next statement computes, exactly once": 1,
+      "digest is not the first thing the next statement computes, exactly once": 1,
+      "label is not the first thing the next statement computes, exactly once": 1,
+      "left is not the first thing the next statement computes, exactly once": 1,
+      "lock_body is not the first thing the next statement computes, exactly once": 1,
+      "masked is not the first thing the next statement computes, exactly once": 1,
+      "mb is not the first thing the next statement computes, exactly once": 2,
+      "not_held is not the first thing the next statement computes, exactly once": 1,
+      "r is not the first thing the next statement computes, exactly once": 1,
+      "row is not the first thing the next statement computes, exactly once": 1,
+      "runner_code is not the first thing the next statement computes, exactly once": 1,
+      "selected is not the first thing the next statement computes, exactly once": 1,
+      "templates is not the first thing the next statement computes, exactly once": 1,
+      "text is not the first thing the next statement computes, exactly once": 1,
+      "tree is not the first thing the next statement computes, exactly once": 1
+    },
+    "blocking_sites": [
+      {
+        "reason": "mb is not the first thing the next statement computes, exactly once",
+        "site": {
+          "adjacent": true,
+          "direct": true,
+          "function": "manifest",
+          "loads": 1,
+          "path": "canonical/research/bytes/tools/canonical_ast_serialize_v13.py",
+          "stores": 1,
+          "variable": "mb"
+        }
+      },
+      {
+        "reason": "mb is not the first thing the next statement computes, exactly once",
+        "site": {
+          "adjacent": true,
+          "direct": true,
+          "function": "apply",
+          "loads": 1,
+          "path": "canonical/research/bytes/tools/conservative_profile_prune_v27.py",
+          "stores": 1,
+          "variable": "mb"
+        }
+      },
+      {
+        "reason": "left is not the first thing the next statement computes, exactly once",
+        "site": {
+          "adjacent": true,
+          "direct": true,
+          "function": "work",
+          "loads": 1,
+          "path": "canonical/runtime/creature_stakes_and_initiative_v1.py",
+          "stores": 1,
+          "variable": "left"
+        }
+      },
+      {
+        "reason": "row is not the first thing the next statement computes, exactly once",
+        "site": {
+          "adjacent": false,
+          "direct": false,
+          "function": "compute",
+          "loads": 1,
+          "path": "canonical/runtime/finance_coreference_ambiguity_control_v1.py",
+          "stores": 1,
+          "variable": "row"
+        }
+      },
+      {
+        "reason": "text is not the first thing the next statement computes, exactly once",
+        "site": {
+          "adjacent": true,
+          "direct": true,
+          "function": "_compile_learned_value_record",
+          "loads": 1,
+          "path": "canonical/runtime/goal_compiler.py",
+          "stores": 1,
+          "variable": "text"
+        }
+      },
+      {
+        "reason": "digest is not the first thing the next statement computes, exactly once",
+        "site": {
+          "adjacent": false,
+          "direct": false,
+          "function": "scan_input_dir",
+          "loads": 1,
+          "path": "canonical/runtime/honesty_closed_world_input_manifest_v1.py",
+          "stores": 1,
+          "variable": "digest"
+        }
+      },
+      {
+        "reason": "templates is not the first thing the next statement computes, exactly once",
+        "site": {
+          "adjacent": false,
+          "direct": false,
+          "function": "assess",
+          "loads": 1,
+          "path": "canonical/runtime/independent_acceptance_model.py",
+          "stores": 1,
+          "variable": "templates"
+        }
+      },
+      {
+        "reason": "_out_v is not the first thing the next statement computes, exactly once",
+        "site": {
+          "adjacent": false,
+          "direct": false,
+          "function": "compile_against_live_registry",
+          "loads": 1,
+          "path": "canonical/runtime/live_integrated_brain_v1.py",
+          "stores": 1,
+          "variable": "_out_v"
+        }
+      }
+    ],
+    "reading": "every observable the applicable sites agree on is also true of these sites, so no conjunction of this vocabulary can admit one and refuse the other",
+    "shared_facts_of_applicable_sites": [
+      "bind.plain_assignment",
+      "bind.set_once",
+      "body.no_dynamic_names",
+      "scope.no_nested_rebinding",
+      "scope.not_parameter",
+      "text.assignment_alone",
+      "text.no_comment_on_assignment",
+      "use.next_statement_in_same_block",
+      "use.read_once"
+    ],
+    "status": "SEPARATION_IMPOSSIBLE"
+  },
+  "sites_queried": 479,
+  "skill_id": "workflow.038c0a66235d2a96",
+  "train_sites": 319,
+  "universe": 140816,
+  "unmeasured_sites": 1,
+  "vocabulary_sufficiency_on_all_evidence": {
+    "facts": [
+      "bind.plain_assignment",
+      "bind.set_once",
+      "blocks.not_in_a_loop",
+      "body.no_dynamic_names",
+      "scope.no_nested_rebinding",
+      "scope.not_parameter",
+      "text.assignment_alone",
+      "text.no_comment_on_assignment",
+      "use.next_statement_in_same_block",
+      "use.read_once"
+    ],
+    "failures": 450,
+    "kind": "SAME_OBSERVED_STATE_OPPOSITE_OUTCOMES",
+    "reason": "AN_UNOBSERVED_PRECONDITION_DIFFERS_BETWEEN_THESE_WORLDS",
+    "schema": "PROJECT_BRAIN_APPLICABILITY_V1",
+    "shared_facts": [
+      "bind.plain_assignment",
+      "bind.set_once",
+      "body.no_dynamic_names",
+      "scope.no_nested_rebinding",
+      "scope.not_parameter",
+      "text.assignment_alone",
+      "text.no_comment_on_assignment",
+      "use.next_statement_in_same_block",
+      "use.read_once"
+    ],
+    "successes": 29,
+    "unrepairable_by_repetition": true,
+    "what_would_repair_it": "A_NEW_OBSERVABLE__MORE_RUNS_REPORT_THE_SAME_FACT_VECTOR",
+    "witness_failure_indices": [
+      178,
+      208,
+      258,
+      266
+    ]
+  },
+  "what_one_demonstration_buys": "one applicable site leaves 1 candidate requirements and 0 survivor(s); the most general one predicts the held-out set at accuracy 0.069 with 297 dangerous errors"
+}

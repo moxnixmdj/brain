@@ -1,0 +1,151 @@
+{
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "benchmark_or_family_rank_authority": null,
+ "canonical_base_commit": "68e8d11bcddd87e4dffc38a19093dbd782879919",
+ "capability_credit_delta": 0,
+ "causal_blocker": "THE_GENERATOR_THAT_PROPOSES_WHAT_TO_TYPE_COULD_ONLY_COPY_TEXT_THE_PAGE_ALREADY_SHOWED_SO_A_PAGE_WHOSE_ANSWER_IS_A_VALUE_NOTHING_STATES_WAS_UNSOLVABLE_AT_ANY_BUDGET",
+ "claim_under_test": "'Instant learning is solved perfectly, so give the agent the smartest actions, let it act once, and every computer task is solved.' This round asked which pages one experience cannot reach even when the search is given four times the budget it needed everywhere else, and why.",
+ "corrections_to_my_own_earlier_work_this_round": [
+  "I first concluded 'the observation is blind to the effect' from a click that changed nothing. The click was malformed: the bridge takes {'type':..., 'index':...}, not {'kind':..., 'element':...}. Retracted; the observation carries `checked` and 6 of 10 pages show different visible effects for different clicks.",
+  "I then read the tree's recorded INERT_ACTION_PRIOR receipt and reported its four arms 'never differed'. They differed in order; what they had in common is that on unsolved pages all four spend the whole budget, which makes them identical by construction, not by a wiring bug. The receipt also printed learn_prior.classes = null because its consolidator hardcodes null, not because the prior was empty: rebuilding it from the 696 learn rows gives 99 classes and 6 deferred.",
+  "The inert-action prior itself was then measured properly on 5 pages where it could act: the page-local ORACLE arm saved 4->3 actions on count-sides, and the transferable arm saved ZERO. That is a real negative result about affordance-key transfer and is kept in the record."
+ ],
+ "date": "2026-11-17",
+ "decision": "MEASURED__ONE_CLASS_OF_PAGE_IS_UNREACHABLE_AT_ANY_BUDGET_BECAUSE_THE_CANDIDATE_SET_CAN_ONLY_COPY",
+ "external_confirmation_fetched_2026_11_17": {
+  "CompoSkill (arXiv 2608.16246)": "individually scanner-passing skills still compose into harmful paths -- per-item verification is not composition verification",
+  "Skill-V (arXiv 2610.11781)": "skills as versioned falsifiable contracts with preconditions/postconditions and an applicability filter -- confirms the field converges on checkable contracts, and that a library must be maintained rather than grown",
+  "SkillCommit (arXiv 2608.15165)": "names scope overreach as the main cause of negative transfer and gates every abstraction by replay of every source instance",
+  "SkillFusion (arXiv 2610.15481)": "typed, scoped constraints with hard/soft conflicts and redundancy as separate targets for reconciliation",
+  "SkillOps (arXiv 2605.13716)": "skill contract (P,O,A,V,F) and an ecosystem graph where a producer's artifact must satisfy a consumer's precondition -- the composition data structure the tree still lacks"
+ },
+ "files": {
+  "canonical/runtime/derived_text_candidate_v1.py": "c4912eee064659824bea88c607a8360b20886c76582534375b41fcb351e7bff9",
+  "canonical/tests/test_derived_text_candidate_v1.py": "4cf5474fafc22c03e9cb9322b7b3bf3172cb6e9a203c3a7bc736737a79072cd1"
+ },
+ "generated_utc": "2026-11-17T01:58:07Z",
+ "honest_limits": [
+  "AUTHORITY NONE -- one producer run in one sandbox, one substrate (chromium, 480x360, real layout and hit-testing).",
+  "The measured population is 7 pages x 2 seeds. That is enough to establish a MECHANISM, not a rate.",
+  "The module handles integer and simple decimal arithmetic with four operators because that is what this substrate contains. It does not claim to solve `count-sides` (answer is the shape's geometry), `find-greatest` (a comparison over the page's own cards, not an arithmetic expression), or `bisect-angle` (a spatial construction). Those are the next classes and they are NOT solved here.",
+  "3 of the 14 page-instances were still unsolved AFTER the change (search-engine seed 1061 both arms, plus the two pages that never had the defect). The change is not a general solver.",
+  "Nothing is credited: no capability, weight, terminal or family-rank claim."
+ ],
+ "laws": [
+  "A generator that can only COPY can never produce a value the source did not already spell out, whatever the budget.",
+  "When four arms including an oracle all spend their whole budget and fail, the budget is not the variable. Find what they were allowed to try.",
+  "A candidate added to a search must be justified by what the page states, not by what the answer usually is.",
+  "A test whose expected value is produced by more than one candidate reading does not pin the reading. Choose cases where every other reading gives a different value.",
+  "More candidates and the right candidate are different claims; a control with the same count and none of the content separates them.",
+  "Nothing here decides. The page's own reward remains the only verdict, and the derived value is a candidate like any other."
+ ],
+ "measured_effect": {
+  "attribution_control": {
+   "arms": [
+    "none",
+    "three random numbers (same count, unrelated)",
+    "the derived value"
+   ],
+   "question": "is the gain from ARITHMETIC, or merely from offering more strings?",
+   "result": {
+    "decoys": "False/400a on all three",
+    "derived": "True/20a on all three",
+    "none": "False/400a on all three"
+   },
+   "seeds": [
+    1060,
+    1061,
+    1062
+   ],
+   "verdict": "the value must be the derived one; volume alone changes nothing"
+  },
+  "four_arms_at_1200_actions": {
+   "all_failed": true,
+   "baseline": 1200,
+   "learned_prior": 1200,
+   "note": "the oracle arm had the SAME information the learner would want and it still spent 1200, which is why the prior is not the explanation",
+   "page_local_oracle_prior": 1200,
+   "shuffled_control": 1200
+  },
+  "the_answer_is_not_stored": {
+   "seed_1060": [
+    "8 + 3 =",
+    "11"
+   ],
+   "seed_1061": [
+    "1 + 7 =",
+    "8"
+   ],
+   "seed_1062": [
+    "7 x 1 =",
+    "7"
+   ],
+   "what_is_stored": "the reading of + - * / (and x, \u00d7, \u00f7), nothing else"
+  },
+  "the_fix_wired_into_the_same_explorer": {
+   "actions_spent": {
+    "with": 472,
+    "without": 1232
+   },
+   "design": "2 seeds x 7 real pages, same seeds, same 400-action budget, same GuidedPrices, same explorer",
+   "pages_bit_identical": "every page that already worked: same pass, same spend (enter-text, click-checkboxes, search-engine, click-option, count-sides, click-dialog-2)",
+   "pages_that_changed": [
+    "simple-arithmetic seed 1060: False/400a -> True/20a",
+    "simple-arithmetic seed 1061: False/400a -> True/20a"
+   ],
+   "verified_on_a_fresh_page": {
+    "of": 14,
+    "with": 13,
+    "without": 11
+   }
+  },
+  "the_page": {
+   "answer_at_seed_1060": "11",
+   "candidates_offered_by_the_existing_generator": {
+    "is_11_among_them_at_any_tier": false,
+    "tier_0": 0,
+    "tier_1": 14,
+    "tier_2": 16,
+    "tier_3": 16
+   },
+   "hand_call": {
+    "click@6": "done=True reward=1",
+    "type@5=11": "field value became 11"
+   },
+   "instruction": "Solve the math problem and type your answer into the textbox. Press submit when done.",
+   "page": "simple-arithmetic",
+   "page_texts": [
+    "8 + 3 =",
+    "Submit"
+   ]
+  }
+ },
+ "receipt_id": "THE_ANSWER_WAS_A_VALUE_NOTHING_STATED_20261117_V1",
+ "schema": "PROJECT_BRAIN_VERIFICATION_RECEIPT_V1",
+ "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
+ "terminal_credit_delta": 0,
+ "tests": {
+  "count": 13,
+  "files": [
+   "canonical/runtime/derived_text_candidate_v1.py",
+   "canonical/tests/test_derived_text_candidate_v1.py"
+  ],
+  "mutation_checks": {
+   "dropping_the_trailing_'='_requirement": "2 tests fail (as required)",
+   "replacing_multiplication_with_addition": "1 test fails (as required after the test was tightened; the first version did NOT catch it)"
+  },
+  "result": "13 passed"
+ },
+ "the_wall_in_one_sentence": "`type_candidates` offers quoted spans, words of the instruction, and text already on the page. `simple-arithmetic` prints `8 + 3 =` and its answer is `11`, a value that appears nowhere on the page and cannot appear in any list of what the page stated.",
+ "the_wrong_answer_this_replaces": "'These pages need more budget / a better action prior.' Four arms were given 1200 actions each on simple-arithmetic -- baseline, a learned inert-action prior, a page-local ORACLE prior, and a shuffled control -- and all four spent exactly 1200 and failed. More budget and better priors are not the lever; the set of strings the agent may type never contained the answer.",
+ "verification": {
+  "how_reproduced": [
+   "python3 -m pytest canonical/tests/test_derived_text_candidate_v1.py canonical/tests/test_miniwob_one_success_generalisation_v1.py -q  # 178 passed, 27 skipped",
+   "python3 canonical/tools/inert_action_prior_measure_v1.py --html-dir ... --tasks simple-arithmetic click-option click-checkboxes count-sides click-dialog-2 --learn-tasks scroll-text text-editor order-food guess-number search-engine --budget 1200"
+  ]
+ },
+ "what_was_built": [
+  "canonical/runtime/derived_text_candidate_v1.py -- reads the arithmetic the page itself spells and answers it with the operator the page printed; never types, never decides, never claims correctness",
+  "canonical/tests/test_derived_text_candidate_v1.py -- 13 tests, each chosen so its expected value is produced by exactly one candidate reading"
+ ]
+}

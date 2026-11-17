@@ -1,0 +1,449 @@
+{
+ "action_id": "AN_UNBOUND_NAME_WAS_THE_MISSING_LINK_20261116_V1",
+ "action_intent_id": "AN_UNBOUND_NAME_WAS_THE_MISSING_LINK_20261116_V1",
+ "action_kind": "REAL_CAPABILITY_ACQUISITION",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "incremental_spend_usd": 0,
+  "independent_verification_completed": false,
+  "independent_verification_note": "Producer-run sandbox only. Independent verification still open.",
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+  "progress_evidence_paths": [
+   "canonical/runtime/demonstration_version_space_v1.py",
+   "canonical/runtime/what_one_experience_buys_v1.py",
+   "canonical/tests/test_what_one_experience_buys_v1.py",
+   "canonical/verification/THE_TREE_ALREADY_SPOKE_ONE_LANGUAGE_20261116_V1.json"
+  ],
+  "route_class": "DELETE",
+  "scope_complete_discharge": false,
+  "terminal_achieved": false
+ },
+ "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_LEARNER_COULD_NOT_BIND_AN_ELEMENT_ID_THE_INSTRUCTION_NAMES_SO_A_PAGE_WHOSE_ONLY_DISTINGUISHING_PROPERTY_IS_THAT_ID_WAS_UNLEARNABLE",
+ "canonical_base_commit": "e3aa447f4474a701a13a6e5b70bf4088bc84bbb1",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "THE_LEARNER_COULD_NOT_BIND_AN_ELEMENT_ID_THE_INSTRUCTION_NAMES_SO_A_PAGE_WHOSE_ONLY_DISTINGUISHING_PROPERTY_IS_THAT_ID_WAS_UNLEARNABLE",
+ "date": "2026-11-16",
+ "expected_parent_change": "An element whose only distinguishing property is an id, title, name, class or for-value that the instruction quotes can now be named, so grid-coordinate goes from 0.05 to 1.00 over 20 fresh instances.",
+ "expected_parent_frontier_change": "Work goes to the binding between what an instruction names and what an element carries, rather than to inventing vocabularies; the second language written this round is deleted as a rebuild.",
+ "explicit_user_authorization": [
+  "Instant learning + instant learning in new arbitrary environments -- we solved those perfectly. Doesn't that mean we can solve any computer use?",
+  "Give the model the most advanced actions, let it do a thing once, it learns it permanently, and every computer task plus the most advanced software engineering is solved. Am I right or wrong?",
+  "You must think from first principles for everything",
+  "You should kill all the bad and dumb ideas before you waste time implementing them.",
+  "NEVER BUILD BEFORE REASRCHING IS EXHASIATAION IS HAPPENED",
+  "maximize your web use",
+  "all the tests are not on synthetic data but are on the hardest open tests",
+  "Testing on bugs we already know work is not progress -- that is self-congratulation.",
+  "YOU SURE THIS THE SMARTEST APPROACH?",
+  "Work in branch, merge only when complete (fastest)",
+  "Merge once, not 10 times."
+ ],
+ "falsification_condition": "A page where binding a structure field to a slot makes an outcome worse, or grid-coordinate failing to reach 1.00 on the same seeds.",
+ "files": {},
+ "generic_repair_from_single_probe": false,
+ "governance_change": false,
+ "highest_leverage_now": true,
+ "incremental_spend_usd": 0,
+ "intentional_route_race": false,
+ "load_bearing_primary": {
+  "constructive_gap_for_open_obligation_ids": [
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "expected_obligation_discharge_lcb": 0,
+  "expected_obligation_unlock_lcb": "1/100",
+  "interpretation": "Speculative forecast only. No obligation discharge, benchmark gain, capability credit or independent verification is claimed.",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "1/2",
+  "wall_clock_cost_ub": 4
+ },
+ "measured_effect": {
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "disclosed_not_clean": "a wider 130-page rerun scored 68 of 78 tasks and its apparent click-pie -0.95 was proved to be run variance by a paired A/B returning 0.05 on both sides",
+  "harness": "canonical/tools/miniwob_one_success_generalisation_measure_v1.py --substrate chromium --arms version_space --test-episodes 20",
+  "id_binding_ab": {
+   "after": 0.29,
+   "before": 0.2233,
+   "better": 2,
+   "delta": 0.0667,
+   "headline": "grid-coordinate 0.05 -> 1.00",
+   "tasks": 15,
+   "unchanged": 13,
+   "worse": 0
+  },
+  "structure_field_ab": {
+   "after": 0.4,
+   "before": 0.3978,
+   "better": 1,
+   "delta": 0.0022,
+   "tasks": 23,
+   "the_one_gain": "phone-book 0.15 -> 0.20",
+   "worse": 0
+  }
+ },
+ "next_step": "Ask the same census question for CONTENT_FIELDS and RELATIONS: which ones does an instruction quote that no test binds, and does binding them move any task.",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "paths": [
+  "canonical/runtime/demonstration_version_space_v1.py",
+  "canonical/runtime/what_one_experience_buys_v1.py",
+  "canonical/tests/test_what_one_experience_buys_v1.py",
+  "canonical/verification/THE_TREE_ALREADY_SPOKE_ONE_LANGUAGE_20261116_V1.json"
+ ],
+ "prior_work_reused": [
+  "canonical/runtime/demonstration_version_space_v1.py (nth, nth_from_end, nth_slot, nearest, matches, pick, _same_element -- all pre-existing)",
+  "canonical/tools/miniwob_one_success_generalisation_measure_v1.py (the harness, unchanged)",
+  "canonical/verification/MINIWOB_ONE_SUCCESS_GENERALISATION_20261111_V5.json (the recorded run)"
+ ],
+ "probe_specific": false,
+ "recursive_obs": {
+  "canonical_base_commit": "e3aa447f4474a701a13a6e5b70bf4088bc84bbb1",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "one_description_language_v1.py",
+   "a hand-written four-field tuple",
+   "the claim that the 5.43 bits were a second grammar"
+  ],
+  "expected_parent_level_state_change": "Work goes to the binding between what an instruction names and what an element carries, rather than to inventing vocabularies; the second language written this round is deleted as a rebuild.",
+  "iteration_limit": 1,
+  "live_challenger_frontier_discovery_required": true,
+  "obs_blocker": {
+   "delete_bypass_substitute_options": [
+    "delete the rebuild",
+    "read the existing module before writing one",
+    "measure with a paired same-seed A/B instead of a full rerun"
+   ],
+   "intrinsic_or_path_specific": "path_specific: one tuple omitted four fields and this round's own 5.43-bit reading was wrong; intrinsic: nothing yet binds a property the instruction names only by position in a sentence.",
+   "surviving_causal_blocker": "THE_LEARNER_COULD_NOT_BIND_AN_ELEMENT_ID_THE_INSTRUCTION_NAMES"
+  },
+  "obs_capability": {
+   "capability_work_deleted": [
+    "one_description_language_v1.py and its 11 tests -- a rebuild",
+    "preferring a description that names only the target -- +2.7 points on 151 samples, too small to justify changing the order"
+   ],
+   "existing_inherited_routes_checked": [
+    "demonstration_version_space_v1 (nth, nth_from_end, nth_slot, nearest, matches, pick, _same_element)",
+    "instruction_policy_v1 + instruction_contract_v1 + anchored_frame_v1",
+    "miniwob_one_success_generalisation_measure_v1 harness"
+   ],
+   "external_existing_routes_checked": [
+    "BEPA arXiv 2601.05787: expert traces operate in tool-level action spaces a policy cannot imitate -- structural mismatch is real but was not this defect",
+    "DOM vs Screenshots 2026: hybrids lose grounding when channels disagree about which element is 'the same'; accessibility-tree agents lose grounding when indices reshuffle",
+    "GUI-Primitives EMNLP 2026: list ordinal understood at 0.82-0.90 conditional on a correct candidate"
+   ],
+   "surviving_gap": "The binding is now general over STRUCTURE_FIELDS, but CONTENT_FIELDS are bound only for exact and fold matches, and relations are fixed at five."
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "a larger module that duplicates shipped code",
+    "a bit count whose definition was not read"
+   ],
+   "real_outcome": "Learn a page once and act on fresh instances of it.",
+   "surviving_necessity": "The only thing that changed behaviour is the binding between an instruction's quoted property and the element property that carries it."
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "names_only_it shipped documented-but-unused rather than wired in",
+   "downstream_work_to_delete_or_supersede": "the receipt claiming two languages is superseded and deleted",
+   "fresh_reuse_plan": "re-run the paired A/B whenever STRUCTURE_FIELDS changes"
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": "the 5.43-bit computation is kept as a redundancy measure, not recomputed as an ambiguity measure",
+   "search_stop_decision": "stopped when a same-seed A/B showed no task worse"
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "A second language was measured to be unnecessary; the tree already named every element.",
+   "routes_ranked": [
+    "DELETE the rebuild (taken)",
+    "DELETE the hand-written field tuple (taken)",
+    "REUSE the existing language (taken)",
+    "SYNTHESIZE a second language (rejected: it already existed)"
+   ]
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "none used"
+  },
+  "real_outcome": "A demonstrated task now names an element by any single property its instruction quotes, not by four hand-picked ones, and the 5.43 bits once read as a second grammar are recorded as redundancy.",
+  "required_capability": "Replay a demonstrated task on fresh instances.",
+  "route_frontier": {
+   "DELETE": [
+    "the rebuild",
+    "the four-field tuple"
+   ],
+   "REUSE": [
+    "the existing language"
+   ],
+   "SYNTHESIZE": [
+    "rejected"
+   ],
+   "challenger_routes": [
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "zero: the existing language already named 1415 of 1415 elements",
+      "CORRECTNESS": "unchanged",
+      "INCREMENTAL_COST": "a whole module and 11 tests of permanent complexity",
+      "RELIABILITY": "unchanged",
+      "VERIFIABILITY": "already measured",
+      "WALL_CLOCK": "a day, wasted"
+     },
+     "evidence": [
+      "demonstration_version_space_v1 already had nth, nth_from_end, nth_slot, nearest, matches, pick and _same_element; the module written this round was deleted"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_TREE_ALREADY_SPOKE_ONE_LANGUAGE_20261116_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "write a second description language for the learning half"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "120/151 vs 116/151 on fresh instances",
+      "CORRECTNESS": "+2.7 points, within noise on 151 samples",
+      "INCREMENTAL_COST": "changes the preference order for every task",
+      "RELIABILITY": "unknown",
+      "VERIFIABILITY": "measured",
+      "WALL_CLOCK": "hours"
+     },
+     "evidence": [
+      "names_only_it shipped documented-but-unused because the gain did not justify the change"
+     ],
+     "qualification_evidence": [
+      "the replay measurement in canonical/verification/THE_TREE_ALREADY_SPOKE_ONE_LANGUAGE_20261116_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "prefer the description that names only the target"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "grid-coordinate 0.05 -> 1.00; +0.0667 on the 15 affected tasks",
+      "CORRECTNESS": "13 of 15 tasks bit-identical, none worse",
+      "INCREMENTAL_COST": "negative: a literal tuple is replaced by the one the adjacent loop already reads",
+      "RELIABILITY": "unchanged elsewhere",
+      "VERIFIABILITY": "paired same-seed A/B",
+      "WALL_CLOCK": "minutes"
+     },
+     "evidence": [
+      "paired same-seed A/B on 15 then 23 tasks, every arm reported"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_TREE_ALREADY_SPOKE_ONE_LANGUAGE_20261116_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "SELECTED",
+     "route": "bind every structure field an instruction quotes"
+    }
+   ],
+   "checked_at_utc": "2026-11-17T00:40:57Z",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "write another description language for learning, believing the 5.43 bits were a mismatch between two grammars",
+   "max_age_hours": 24,
+   "negative_search_summary": "No existing route in this tree needed a new language: the learner's own grammar already bound position (nth, nth_from_end, nth_slot, nearest) and the acting half already resolves an element by exactly that grammar. The literature's structural-mismatch finding (BEPA 2601.05787) is real but is not this defect, and the DOM-vs-pixels finding about channels disagreeing over element identity describes the ordinal instability measured here, not a missing vocabulary.",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "GUI agent learned skill unreachable mismatch between policy action space and grounded element representation schema"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "computer use agent element grounding representation stability ordinal position re-identification across page instances"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "2026 GUI agent expert trace structural mismatch end-to-end policy cannot imitate"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "browser automation element identity across rerenders accessibility tree index reshuffle 2026"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "selected_route": "BIND_THE_PROPERTY_THE_INSTRUCTION_QUOTES_INSTEAD_OF_LISTING_FOUR_FIELDS_BY_HAND_AND_DELETE_THE_SECOND_LANGUAGE_THIS_ROUND_WROTE_BEFORE_READING_THE_ONE_THAT_ALREADY_EXISTED",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-11-17T00:41:05Z",
+    "execution_dependencies": [
+     {
+      "dependency": "miniwob-plusplus html substrate at /tmp/mw and puppeteer-core + @sparticuz/chromium at /tmp/nodes",
+      "evidence": [
+       "130 pages loaded and reset at seed 1060 during this session; the harness ran 15- and 23-task A/Bs"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "LOCAL_RUNTIME",
+      "observed_at_utc": "2026-11-17T00:41:11Z",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "VOLATILE"
+     },
+     {
+      "dependency": "python3 with pytest for canonical/tests",
+      "evidence": [
+       "165 passed, 27 skipped in test_miniwob_one_success_generalisation_v1.py"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "LOCAL_RUNTIME",
+      "observed_at_utc": "2026-11-17T00:41:11Z",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "max_age_hours": 2,
+    "selected_route": "BIND_THE_PROPERTY_THE_INSTRUCTION_QUOTES_INSTEAD_OF_LISTING_FOUR_FIELDS_BY_HAND_AND_DELETE_THE_SECOND_LANGUAGE_THIS_ROUND_WROTE_BEFORE_READING_THE_ONE_THAT_ALREADY_EXISTED",
+    "status": "READY"
+   },
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/runtime/demonstration_version_space_v1.py",
+     "canonical/runtime/instruction_policy_v1.py",
+     "canonical/verification/MINIWOB_ONE_SUCCESS_GENERALISATION_20261111_V5.json"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "DOM vs Screenshots 2026: hybrid agents lose grounding when their two channels disagree about which element is the same"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "registry.npmjs.org: puppeteer-core@23 and @sparticuz/chromium installed this session (85 package directories) and used to drive all 130 pages",
+     "pypi.org: pytest installed for the tree's own suites"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "https://arxiv.org/html/2601.05787 (BEPA: expert traces operate in tool-level action spaces a policy cannot directly imitate)"
+    ]
+   },
+   "unresolved_plausible_dominators": []
+  },
+  "routes_considered": [
+   "DELETE",
+   "REUSE",
+   "SYNTHESIZE_NEW_PRIMITIVE"
+  ],
+  "selected_surviving_route": "BIND_THE_PROPERTY_THE_INSTRUCTION_QUOTES_INSTEAD_OF_LISTING_FOUR_FIELDS_BY_HAND_AND_DELETE_THE_SECOND_LANGUAGE_THIS_ROUND_WROTE_BEFORE_READING_THE_ONE_THAT_ALREADY_EXISTED",
+  "stop_condition": "The paired same-seed A/B is reported in full, the wider non-clean run is disclosed, the rebuilt module is deleted, and no capability, family, terminal or weight credit is claimed.",
+  "why_selected_route_is_fastest_sufficient": "One word in one tuple turns an unlearnable page into a solved one; a new module was measured to add nothing."
+ },
+ "route_id": "BIND_THE_PROPERTY_THE_INSTRUCTION_QUOTES_INSTEAD_OF_LISTING_FOUR_FIELDS_BY_HAND_AND_DELETE_THE_SECOND_LANGUAGE_THIS_ROUND_WROTE_BEFORE_READING_THE_ONE_THAT_ALREADY_EXISTED",
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+ "scope_complete_discharge": false,
+ "selected_route": "BIND_THE_PROPERTY_THE_INSTRUCTION_QUOTES_INSTEAD_OF_LISTING_FOUR_FIELDS_BY_HAND_AND_DELETE_THE_SECOND_LANGUAGE_THIS_ROUND_WROTE_BEFORE_READING_THE_ONE_THAT_ALREADY_EXISTED",
+ "status": "PROPOSED__ZERO_CREDIT__NO_TERMINAL_CLAIM",
+ "stop_condition": "The paired same-seed A/B is reported in full, the wider non-clean run is disclosed, the rebuilt module is deleted, and no capability, family, terminal or weight credit is claimed.",
+ "terminal_achieved": false,
+ "terminal_credit_delta": 0,
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "truth": {
+  "achieved": false
+ },
+ "user_authorized_governance_change": false,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "currentness": {
+   "accepted_families": 5,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "This measures learning reach on real pages; it discharges no truth obligation and claims no terminal credit.",
+  "target_truth_obligations": [
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [],
+   "decisive_question": "Of the properties an instruction quotes, which ones has no test ever bound -- and does binding them move any task on fresh instances?",
+   "falsifier_id": "A_PAGE_WHERE_BINDING_A_STRUCTURE_FIELD_TO_A_SLOT_MAKES_AN_OUTCOME_WORSE",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "The one counterexample found is internal and is recorded in the receipt: the wider 130-page rerun looked like a -0.95 regression on click-pie and a paired same-seed A/B returned 0.05 on both sides, so the apparent counterexample was run variance. No external receipt is added by this PR.",
+   "proposal_id": "AN_UNBOUND_NAME_WAS_THE_MISSING_LINK_20261116_V1"
+  }
+ },
+ "verification": {
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "commands": [
+   "python3 -m pytest canonical/tests/test_miniwob_one_success_generalisation_v1.py -q  # 165 passed, 27 skipped",
+   "python3 canonical/tools/miniwob_one_success_generalisation_measure_v1.py --html-dir /tmp/mw/miniwob/html --node-modules-dir /tmp/nodes --substrate chromium --arms version_space --test-episodes 20 --tasks grid-coordinate ...",
+   "python3 canonical/runtime/verify_brain_unified_model_v1.py  # 33/33 PASS",
+   "python3 execution_guard/enforce_load_bearing_primary_pr.py --base origin/main --head HEAD",
+   "python3 canonical/runtime/enforce_goal_hierarchy.py --base origin/main --head HEAD"
+  ]
+ },
+ "weakens_existing_guard": false
+}

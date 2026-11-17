@@ -1,0 +1,1759 @@
+{
+ "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+ "generated_utc": "2026-11-16T17:32:34Z",
+ "incremental_spend_usd": 0,
+ "kind": "receipt",
+ "pages": [
+  {
+   "attempts": [
+    {
+     "arm": "A_correct_plan",
+     "changed": false,
+     "clause_results": [
+      {
+       "operator": "CLICK_NAMED",
+       "verdict": "PASS"
+      }
+     ],
+     "clauses": [
+      {
+       "kind": "button",
+       "name": "No",
+       "operator": "CLICK_NAMED"
+      }
+     ],
+     "contract_reason": null,
+     "contract_verdict": "PASS",
+     "plan": [
+      "type@7=No",
+      "click@5"
+     ],
+     "refusal": null,
+     "reward_verdict": true
+    },
+    {
+     "arm": "B_decoy_plan",
+     "changed": true,
+     "clause_results": [
+      {
+       "operator": "CLICK_NAMED",
+       "reason": "NEVER_PRESSED:No",
+       "verdict": "FAIL"
+      }
+     ],
+     "clauses": [
+      {
+       "kind": "button",
+       "name": "No",
+       "operator": "CLICK_NAMED"
+      }
+     ],
+     "contract_reason": null,
+     "contract_verdict": "FAIL",
+     "plan": [
+      "triple@4",
+      "click@5"
+     ],
+     "refusal": null,
+     "reward_verdict": false
+    }
+   ],
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 29829,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "found": true,
+   "kind": "page",
+   "plan_len": 2,
+   "search_budget_spent": 2,
+   "seconds": 0.3,
+   "seed": 1060,
+   "task": "click-button"
+  },
+  {
+   "attempts": [
+    {
+     "arm": "A_correct_plan",
+     "changed": false,
+     "clause_results": [],
+     "clauses": [],
+     "contract_reason": "REFUSED__NO_CLAUSE_UNDERSTOOD",
+     "contract_verdict": "UNCHECKABLE",
+     "plan": [
+      "click@3"
+     ],
+     "refusal": "REFUSED__NO_CLAUSE_UNDERSTOOD",
+     "reward_verdict": true
+    },
+    {
+     "arm": "B_decoy_plan",
+     "changed": true,
+     "clause_results": [],
+     "clauses": [],
+     "contract_reason": "REFUSED__NO_CLAUSE_UNDERSTOOD",
+     "contract_verdict": "UNCHECKABLE",
+     "plan": [
+      "triple@3"
+     ],
+     "refusal": "REFUSED__NO_CLAUSE_UNDERSTOOD",
+     "reward_verdict": true
+    }
+   ],
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 29829,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "found": true,
+   "kind": "page",
+   "plan_len": 1,
+   "search_budget_spent": 1,
+   "seconds": 0.2,
+   "seed": 1060,
+   "task": "click-test"
+  },
+  {
+   "attempts": [
+    {
+     "arm": "A_correct_plan",
+     "changed": false,
+     "clause_results": [
+      {
+       "operator": "CLICK_LABELLED",
+       "verdict": "PASS"
+      }
+     ],
+     "clauses": [
+      {
+       "operator": "CLICK_LABELLED"
+      }
+     ],
+     "contract_reason": null,
+     "contract_verdict": "PASS",
+     "plan": [
+      "click@3"
+     ],
+     "refusal": null,
+     "reward_verdict": true
+    },
+    {
+     "arm": "B_decoy_plan",
+     "changed": true,
+     "clause_results": [
+      {
+       "operator": "CLICK_LABELLED",
+       "reason": "NEVER_PRESSED_ANY_OF:['ONE']",
+       "verdict": "FAIL"
+      }
+     ],
+     "clauses": [
+      {
+       "operator": "CLICK_LABELLED"
+      }
+     ],
+     "contract_reason": null,
+     "contract_verdict": "FAIL",
+     "plan": [
+      "grab@3"
+     ],
+     "refusal": null,
+     "reward_verdict": false
+    }
+   ],
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 29829,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "found": true,
+   "kind": "page",
+   "plan_len": 1,
+   "search_budget_spent": 1,
+   "seconds": 0.3,
+   "seed": 1060,
+   "task": "click-test-2"
+  },
+  {
+   "attempts": [
+    {
+     "arm": "A_correct_plan",
+     "changed": false,
+     "clause_results": [
+      {
+       "operator": "CLICK_LABELLED",
+       "verdict": "PASS"
+      },
+      {
+       "operator": "CLICK_LABELLED",
+       "verdict": "PASS"
+      }
+     ],
+     "clauses": [
+      {
+       "operator": "CLICK_LABELLED"
+      },
+      {
+       "operator": "CLICK_LABELLED"
+      }
+     ],
+     "contract_reason": null,
+     "contract_verdict": "PASS",
+     "plan": [
+      "click@5"
+     ],
+     "refusal": null,
+     "reward_verdict": true
+    },
+    {
+     "arm": "B_decoy_plan",
+     "changed": true,
+     "clause_results": [
+      {
+       "operator": "CLICK_LABELLED",
+       "reason": "NEVER_PRESSED_ANY_OF:['ut']",
+       "verdict": "FAIL"
+      },
+      {
+       "operator": "CLICK_LABELLED",
+       "reason": "NEVER_PRESSED_ANY_OF:['ut']",
+       "verdict": "FAIL"
+      }
+     ],
+     "clauses": [
+      {
+       "operator": "CLICK_LABELLED"
+      },
+      {
+       "operator": "CLICK_LABELLED"
+      }
+     ],
+     "contract_reason": null,
+     "contract_verdict": "FAIL",
+     "plan": [
+      "hover@3"
+     ],
+     "refusal": null,
+     "reward_verdict": false
+    }
+   ],
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 29829,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "found": true,
+   "kind": "page",
+   "plan_len": 1,
+   "search_budget_spent": 1,
+   "seconds": 0.3,
+   "seed": 1060,
+   "task": "click-link"
+  },
+  {
+   "attempts": [
+    {
+     "arm": "A_correct_plan",
+     "changed": false,
+     "clause_results": [],
+     "clauses": [],
+     "contract_reason": "REFUSED__LABEL_NOT_ON_THE_PAGE",
+     "contract_verdict": "UNCHECKABLE",
+     "plan": [
+      "click@6"
+     ],
+     "refusal": "REFUSED__LABEL_NOT_ON_THE_PAGE",
+     "reward_verdict": true
+    },
+    {
+     "arm": "B_decoy_plan",
+     "changed": true,
+     "clause_results": [],
+     "clauses": [],
+     "contract_reason": "REFUSED__LABEL_NOT_ON_THE_PAGE",
+     "contract_verdict": "UNCHECKABLE",
+     "plan": [
+      "nudge@5=right"
+     ],
+     "refusal": "REFUSED__LABEL_NOT_ON_THE_PAGE",
+     "reward_verdict": false
+    }
+   ],
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 29829,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "found": true,
+   "kind": "page",
+   "plan_len": 1,
+   "search_budget_spent": 1,
+   "seconds": 0.5,
+   "seed": 1060,
+   "task": "click-dialog"
+  },
+  {
+   "attempts": [
+    {
+     "arm": "A_correct_plan",
+     "changed": false,
+     "clause_results": [
+      {
+       "operator": "SELECT_SET",
+       "verdict": "PASS"
+      },
+      {
+       "operator": "CLICK_NAMED",
+       "verdict": "PASS"
+      }
+     ],
+     "clauses": [
+      {
+       "names": [
+        "3PwCm",
+        "AwK7",
+        "95l8",
+        "eKV"
+       ],
+       "operator": "SELECT_SET"
+      },
+      {
+       "kind": "button",
+       "name": "submit",
+       "operator": "CLICK_NAMED"
+      }
+     ],
+     "contract_reason": null,
+     "contract_verdict": "PASS",
+     "plan": [
+      "click@6",
+      "click@8",
+      "click@10",
+      "click@14",
+      "click@16"
+     ],
+     "refusal": null,
+     "reward_verdict": true
+    },
+    {
+     "arm": "B_decoy_plan",
+     "changed": true,
+     "clause_results": [
+      {
+       "operator": "SELECT_SET",
+       "reason": "NOT_SELECTED:awk7",
+       "verdict": "FAIL"
+      },
+      {
+       "operator": "CLICK_NAMED",
+       "reason": "PRESSED_SUBMIT_WITHOUT_WHAT_THE_INSTRUCTION_REQUIRED_FIRST",
+       "verdict": "FAIL"
+      }
+     ],
+     "clauses": [
+      {
+       "names": [
+        "3PwCm",
+        "AwK7",
+        "95l8",
+        "eKV"
+       ],
+       "operator": "SELECT_SET"
+      },
+      {
+       "kind": "button",
+       "name": "submit",
+       "operator": "CLICK_NAMED"
+      }
+     ],
+     "contract_reason": null,
+     "contract_verdict": "FAIL",
+     "plan": [
+      "click@6",
+      "nudge@5=right",
+      "click@10",
+      "click@14",
+      "click@16"
+     ],
+     "refusal": null,
+     "reward_verdict": false
+    }
+   ],
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 29829,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "found": true,
+   "kind": "page",
+   "plan_len": 5,
+   "search_budget_spent": 5,
+   "seconds": 0.6,
+   "seed": 1060,
+   "task": "click-checkboxes"
+  },
+  {
+   "attempts": [
+    {
+     "arm": "A_correct_plan",
+     "changed": false,
+     "clause_results": [
+      {
+       "operator": "SELECT_SET",
+       "verdict": "PASS"
+      },
+      {
+       "operator": "CLICK_NAMED",
+       "verdict": "PASS"
+      }
+     ],
+     "clauses": [
+      {
+       "names": [
+        "ULZC"
+       ],
+       "operator": "SELECT_SET"
+      },
+      {
+       "kind": "button",
+       "name": "submit",
+       "operator": "CLICK_NAMED"
+      }
+     ],
+     "contract_reason": null,
+     "contract_verdict": "PASS",
+     "plan": [
+      "click@4",
+      "click@16"
+     ],
+     "refusal": null,
+     "reward_verdict": true
+    },
+    {
+     "arm": "B_decoy_plan",
+     "changed": true,
+     "clause_results": [
+      {
+       "operator": "SELECT_SET",
+       "verdict": "PASS"
+      },
+      {
+       "operator": "CLICK_NAMED",
+       "verdict": "PASS"
+      }
+     ],
+     "clauses": [
+      {
+       "names": [
+        "ULZC"
+       ],
+       "operator": "SELECT_SET"
+      },
+      {
+       "kind": "button",
+       "name": "submit",
+       "operator": "CLICK_NAMED"
+      }
+     ],
+     "contract_reason": null,
+     "contract_verdict": "PASS",
+     "plan": [
+      "nudge@5=right",
+      "click@16"
+     ],
+     "refusal": null,
+     "reward_verdict": true
+    }
+   ],
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 29829,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "found": true,
+   "kind": "page",
+   "plan_len": 2,
+   "search_budget_spent": 2,
+   "seconds": 0.5,
+   "seed": 1060,
+   "task": "click-option"
+  },
+  {
+   "attempts": [
+    {
+     "arm": "A_correct_plan",
+     "changed": false,
+     "clause_results": [
+      {
+       "operator": "TYPE_VALUE",
+       "verdict": "PASS"
+      },
+      {
+       "operator": "CLICK_NAMED",
+       "verdict": "PASS"
+      }
+     ],
+     "clauses": [
+      {
+       "index": 4,
+       "operator": "TYPE_VALUE",
+       "value": "Donovan"
+      },
+      {
+       "kind": "button",
+       "name": "submit",
+       "operator": "CLICK_NAMED"
+      }
+     ],
+     "contract_reason": null,
+     "contract_verdict": "PASS",
+     "plan": [
+      "type@4=Donovan",
+      "click@5"
+     ],
+     "refusal": null,
+     "reward_verdict": true
+    },
+    {
+     "arm": "B_decoy_plan",
+     "changed": true,
+     "clause_results": [
+      {
+       "operator": "TYPE_VALUE",
+       "reason": "NEVER_TYPED:'Donovan'",
+       "verdict": "FAIL"
+      },
+      {
+       "operator": "CLICK_NAMED",
+       "reason": "PRESSED_SUBMIT_WITHOUT_WHAT_THE_INSTRUCTION_REQUIRED_FIRST",
+       "verdict": "FAIL"
+      }
+     ],
+     "clauses": [
+      {
+       "index": 4,
+       "operator": "TYPE_VALUE",
+       "value": "Donovan"
+      },
+      {
+       "kind": "button",
+       "name": "submit",
+       "operator": "CLICK_NAMED"
+      }
+     ],
+     "contract_reason": null,
+     "contract_verdict": "FAIL",
+     "plan": [
+      "type@4=the",
+      "click@5"
+     ],
+     "refusal": null,
+     "reward_verdict": false
+    }
+   ],
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 29829,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "found": true,
+   "kind": "page",
+   "plan_len": 2,
+   "search_budget_spent": 2,
+   "seconds": 0.3,
+   "seed": 1060,
+   "task": "enter-text"
+  },
+  {
+   "attempts": [
+    {
+     "arm": "A_correct_plan",
+     "changed": false,
+     "clause_results": [
+      {
+       "operator": "TYPE_VALUE",
+       "verdict": "PASS"
+      },
+      {
+       "operator": "CLICK_NAMED",
+       "verdict": "PASS"
+      }
+     ],
+     "clauses": [
+      {
+       "index": 4,
+       "operator": "TYPE_VALUE",
+       "value": "DONOVAN"
+      },
+      {
+       "kind": "button",
+       "name": "submit",
+       "operator": "CLICK_NAMED"
+      }
+     ],
+     "contract_reason": null,
+     "contract_verdict": "PASS",
+     "plan": [
+      "type@4=DONOVAN",
+      "click@5"
+     ],
+     "refusal": null,
+     "reward_verdict": true
+    },
+    {
+     "arm": "B_decoy_plan",
+     "changed": true,
+     "clause_results": [
+      {
+       "operator": "TYPE_VALUE",
+       "reason": "NEVER_TYPED:'DONOVAN'",
+       "verdict": "FAIL"
+      },
+      {
+       "operator": "CLICK_NAMED",
+       "reason": "PRESSED_SUBMIT_WITHOUT_WHAT_THE_INSTRUCTION_REQUIRED_FIRST",
+       "verdict": "FAIL"
+      }
+     ],
+     "clauses": [
+      {
+       "index": 4,
+       "operator": "TYPE_VALUE",
+       "value": "DONOVAN"
+      },
+      {
+       "kind": "button",
+       "name": "submit",
+       "operator": "CLICK_NAMED"
+      }
+     ],
+     "contract_reason": null,
+     "contract_verdict": "FAIL",
+     "plan": [
+      "type@4=upper",
+      "click@5"
+     ],
+     "refusal": null,
+     "reward_verdict": false
+    }
+   ],
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 29829,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "found": true,
+   "kind": "page",
+   "plan_len": 2,
+   "search_budget_spent": 10,
+   "seconds": 0.5,
+   "seed": 1060,
+   "task": "enter-text-2"
+  },
+  {
+   "attempts": [
+    {
+     "arm": "A_correct_plan",
+     "changed": false,
+     "clause_results": [
+      {
+       "operator": "TYPE_VALUE",
+       "verdict": "PASS"
+      },
+      {
+       "operator": "TYPE_VALUE",
+       "verdict": "PASS"
+      },
+      {
+       "operator": "CLICK_NAMED",
+       "verdict": "PASS"
+      }
+     ],
+     "clauses": [
+      {
+       "index": 6,
+       "operator": "TYPE_VALUE",
+       "value": "xULZC"
+      },
+      {
+       "index": 9,
+       "operator": "TYPE_VALUE",
+       "value": "xULZC"
+      },
+      {
+       "kind": "button",
+       "name": "submit",
+       "operator": "CLICK_NAMED"
+      }
+     ],
+     "contract_reason": null,
+     "contract_verdict": "PASS",
+     "plan": [
+      "type@6=xULZC",
+      "type@9=xULZC",
+      "click@5",
+      "click@10"
+     ],
+     "refusal": null,
+     "reward_verdict": true
+    },
+    {
+     "arm": "B_decoy_plan",
+     "changed": true,
+     "clause_results": [
+      {
+       "operator": "TYPE_VALUE",
+       "verdict": "PASS"
+      },
+      {
+       "operator": "TYPE_VALUE",
+       "reason": "NEVER_TYPED:'xULZC'",
+       "verdict": "FAIL"
+      },
+      {
+       "operator": "CLICK_NAMED",
+       "reason": "PRESSED_SUBMIT_WITHOUT_WHAT_THE_INSTRUCTION_REQUIRED_FIRST",
+       "verdict": "FAIL"
+      }
+     ],
+     "clauses": [
+      {
+       "index": 6,
+       "operator": "TYPE_VALUE",
+       "value": "xULZC"
+      },
+      {
+       "index": 9,
+       "operator": "TYPE_VALUE",
+       "value": "xULZC"
+      },
+      {
+       "kind": "button",
+       "name": "submit",
+       "operator": "CLICK_NAMED"
+      }
+     ],
+     "contract_reason": null,
+     "contract_verdict": "FAIL",
+     "plan": [
+      "type@6=xULZC",
+      "type@9=password",
+      "click@5",
+      "click@10"
+     ],
+     "refusal": null,
+     "reward_verdict": false
+    }
+   ],
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 29829,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "found": true,
+   "kind": "page",
+   "plan_len": 4,
+   "search_budget_spent": 112,
+   "seconds": 2.4,
+   "seed": 1060,
+   "task": "enter-password"
+  },
+  {
+   "attempts": [],
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 29829,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "found": false,
+   "kind": "page",
+   "plan_len": 0,
+   "search_budget_spent": 400,
+   "seconds": 13.0,
+   "seed": 1060,
+   "task": "enter-time"
+  },
+  {
+   "attempts": [
+    {
+     "arm": "A_correct_plan",
+     "changed": false,
+     "clause_results": [
+      {
+       "operator": "TYPE_VALUE",
+       "verdict": "PASS"
+      },
+      {
+       "operator": "CLICK_NAMED",
+       "verdict": "PASS"
+      }
+     ],
+     "clauses": [
+      {
+       "index": 4,
+       "operator": "TYPE_VALUE",
+       "value": "08/13/2018"
+      },
+      {
+       "kind": "button",
+       "name": "submit",
+       "operator": "CLICK_NAMED"
+      }
+     ],
+     "contract_reason": null,
+     "contract_verdict": "PASS",
+     "plan": [
+      "type@4=08/13/2018",
+      "click@5"
+     ],
+     "refusal": null,
+     "reward_verdict": true
+    },
+    {
+     "arm": "B_decoy_plan",
+     "changed": true,
+     "clause_results": [
+      {
+       "operator": "TYPE_VALUE",
+       "reason": "NEVER_TYPED:'08/13/2018'",
+       "verdict": "FAIL"
+      },
+      {
+       "operator": "CLICK_NAMED",
+       "reason": "PRESSED_SUBMIT_WITHOUT_WHAT_THE_INSTRUCTION_REQUIRED_FIRST",
+       "verdict": "FAIL"
+      }
+     ],
+     "clauses": [
+      {
+       "index": 4,
+       "operator": "TYPE_VALUE",
+       "value": "08/13/2018"
+      },
+      {
+       "kind": "button",
+       "name": "submit",
+       "operator": "CLICK_NAMED"
+      }
+     ],
+     "contract_reason": null,
+     "contract_verdict": "FAIL",
+     "plan": [
+      "type@4=and",
+      "click@5"
+     ],
+     "refusal": null,
+     "reward_verdict": false
+    }
+   ],
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 29829,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "found": true,
+   "kind": "page",
+   "plan_len": 2,
+   "search_budget_spent": 2,
+   "seconds": 0.4,
+   "seed": 1060,
+   "task": "enter-date"
+  },
+  {
+   "attempts": [
+    {
+     "arm": "A_correct_plan",
+     "changed": false,
+     "clause_results": [
+      {
+       "operator": "TYPE_VALUE",
+       "verdict": "PASS"
+      },
+      {
+       "operator": "CLICK_NAMED",
+       "verdict": "PASS"
+      },
+      {
+       "operator": "ORDINAL_PRESS",
+       "verdict": "PASS"
+      }
+     ],
+     "clauses": [
+      {
+       "index": 4,
+       "operator": "TYPE_VALUE",
+       "value": "Nathalie"
+      },
+      {
+       "kind": "button",
+       "name": "Search",
+       "operator": "CLICK_NAMED"
+      },
+      {
+       "operator": "ORDINAL_PRESS",
+       "ordinal": 3
+      }
+     ],
+     "contract_reason": null,
+     "contract_verdict": "PASS",
+     "plan": [
+      "type@4=Nathalie",
+      "click@5",
+      "click@16"
+     ],
+     "refusal": null,
+     "reward_verdict": true
+    },
+    {
+     "arm": "B_decoy_plan",
+     "changed": true,
+     "clause_results": [
+      {
+       "operator": "TYPE_VALUE",
+       "reason": "NEVER_TYPED:'Nathalie'",
+       "verdict": "FAIL"
+      },
+      {
+       "operator": "CLICK_NAMED",
+       "reason": "PRESSED_SEARCH_WITHOUT_WHAT_THE_INSTRUCTION_REQUIRED_FIRST",
+       "verdict": "FAIL"
+      },
+      {
+       "operator": "ORDINAL_PRESS",
+       "verdict": "PASS"
+      }
+     ],
+     "clauses": [
+      {
+       "index": 4,
+       "operator": "TYPE_VALUE",
+       "value": "Nathalie"
+      },
+      {
+       "kind": "button",
+       "name": "Search",
+       "operator": "CLICK_NAMED"
+      },
+      {
+       "operator": "ORDINAL_PRESS",
+       "ordinal": 3
+      }
+     ],
+     "contract_reason": null,
+     "contract_verdict": "FAIL",
+     "plan": [
+      "type@4=and",
+      "click@5",
+      "click@16"
+     ],
+     "refusal": null,
+     "reward_verdict": false
+    }
+   ],
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 29829,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "found": true,
+   "kind": "page",
+   "plan_len": 3,
+   "search_budget_spent": 3,
+   "seconds": 0.4,
+   "seed": 1060,
+   "task": "search-engine"
+  },
+  {
+   "attempts": [],
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 29829,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "found": false,
+   "kind": "page",
+   "plan_len": 0,
+   "search_budget_spent": 400,
+   "seconds": 7.6,
+   "seed": 1060,
+   "task": "simple-arithmetic"
+  },
+  {
+   "attempts": [],
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 29829,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "found": false,
+   "kind": "page",
+   "plan_len": 0,
+   "search_budget_spent": 400,
+   "seconds": 6.7,
+   "seed": 1060,
+   "task": "simple-algebra"
+  },
+  {
+   "attempts": [],
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 29829,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "found": false,
+   "kind": "page",
+   "plan_len": 0,
+   "search_budget_spent": 400,
+   "seconds": 6.3,
+   "seed": 1060,
+   "task": "text-transform"
+  },
+  {
+   "attempts": [],
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 29829,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "found": false,
+   "kind": "page",
+   "plan_len": 0,
+   "search_budget_spent": 400,
+   "seconds": 7.9,
+   "seed": 1060,
+   "task": "scroll-text"
+  },
+  {
+   "attempts": [],
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 29829,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "found": false,
+   "kind": "page",
+   "plan_len": 0,
+   "search_budget_spent": 400,
+   "seconds": 6.2,
+   "seed": 1060,
+   "task": "find-word"
+  },
+  {
+   "attempts": [
+    {
+     "arm": "A_correct_plan",
+     "changed": false,
+     "clause_results": [
+      {
+       "operator": "CLICK_LABELLED",
+       "verdict": "PASS"
+      }
+     ],
+     "clauses": [
+      {
+       "operator": "CLICK_LABELLED"
+      }
+     ],
+     "contract_reason": null,
+     "contract_verdict": "PASS",
+     "plan": [
+      "click@5"
+     ],
+     "refusal": null,
+     "reward_verdict": true
+    },
+    {
+     "arm": "B_decoy_plan",
+     "changed": true,
+     "clause_results": [
+      {
+       "operator": "CLICK_LABELLED",
+       "reason": "NEVER_PRESSED_ANY_OF:['tab #1']",
+       "verdict": "FAIL"
+      }
+     ],
+     "clauses": [
+      {
+       "operator": "CLICK_LABELLED"
+      }
+     ],
+     "contract_reason": null,
+     "contract_verdict": "FAIL",
+     "plan": [
+      "nudge@5=up"
+     ],
+     "refusal": null,
+     "reward_verdict": false
+    }
+   ],
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 29829,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "found": true,
+   "kind": "page",
+   "plan_len": 1,
+   "search_budget_spent": 1,
+   "seconds": 0.4,
+   "seed": 1060,
+   "task": "click-tab"
+  },
+  {
+   "attempts": [
+    {
+     "arm": "A_correct_plan",
+     "changed": false,
+     "clause_results": [
+      {
+       "operator": "SELECT_SET",
+       "verdict": "PASS"
+      },
+      {
+       "operator": "CLICK_NAMED",
+       "verdict": "PASS"
+      }
+     ],
+     "clauses": [
+      {
+       "names": [
+        "Martinique"
+       ],
+       "operator": "SELECT_SET"
+      },
+      {
+       "kind": "button",
+       "name": "submit",
+       "operator": "CLICK_NAMED"
+      }
+     ],
+     "contract_reason": null,
+     "contract_verdict": "PASS",
+     "plan": [
+      "click@7",
+      "click@9"
+     ],
+     "refusal": null,
+     "reward_verdict": true
+    },
+    {
+     "arm": "B_decoy_plan",
+     "changed": true,
+     "clause_results": [
+      {
+       "operator": "SELECT_SET",
+       "reason": "NOT_SELECTED:martinique",
+       "verdict": "FAIL"
+      },
+      {
+       "operator": "CLICK_NAMED",
+       "reason": "PRESSED_SUBMIT_WITHOUT_WHAT_THE_INSTRUCTION_REQUIRED_FIRST",
+       "verdict": "FAIL"
+      }
+     ],
+     "clauses": [
+      {
+       "names": [
+        "Martinique"
+       ],
+       "operator": "SELECT_SET"
+      },
+      {
+       "kind": "button",
+       "name": "submit",
+       "operator": "CLICK_NAMED"
+      }
+     ],
+     "contract_reason": null,
+     "contract_verdict": "FAIL",
+     "plan": [
+      "click@8",
+      "click@9"
+     ],
+     "refusal": null,
+     "reward_verdict": false
+    }
+   ],
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 29829,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "found": true,
+   "kind": "page",
+   "plan_len": 2,
+   "search_budget_spent": 2,
+   "seconds": 0.2,
+   "seed": 1060,
+   "task": "choose-list"
+  },
+  {
+   "attempts": [
+    {
+     "arm": "A_correct_plan",
+     "changed": false,
+     "clause_results": [
+      {
+       "operator": "CLICK_NAMED",
+       "verdict": "PASS"
+      }
+     ],
+     "clauses": [
+      {
+       "kind": "button",
+       "name": "submit",
+       "operator": "CLICK_NAMED"
+      }
+     ],
+     "contract_reason": null,
+     "contract_verdict": "PASS",
+     "plan": [
+      "click@3",
+      "click@8"
+     ],
+     "refusal": null,
+     "reward_verdict": true
+    },
+    {
+     "arm": "B_decoy_plan",
+     "changed": true,
+     "clause_results": [
+      {
+       "operator": "CLICK_NAMED",
+       "reason": "NEVER_PRESSED:submit",
+       "verdict": "FAIL"
+      }
+     ],
+     "clauses": [
+      {
+       "kind": "button",
+       "name": "submit",
+       "operator": "CLICK_NAMED"
+      }
+     ],
+     "contract_reason": null,
+     "contract_verdict": "FAIL",
+     "plan": [
+      "grab@3",
+      "click@8"
+     ],
+     "refusal": null,
+     "reward_verdict": false
+    }
+   ],
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 29829,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "found": true,
+   "kind": "page",
+   "plan_len": 2,
+   "search_budget_spent": 4,
+   "seconds": 0.4,
+   "seed": 1060,
+   "task": "click-collapsible"
+  },
+  {
+   "attempts": [
+    {
+     "arm": "A_correct_plan",
+     "changed": false,
+     "clause_results": [
+      {
+       "operator": "FOCUS",
+       "verdict": "PASS"
+      }
+     ],
+     "clauses": [
+      {
+       "operator": "FOCUS"
+      }
+     ],
+     "contract_reason": null,
+     "contract_verdict": "PASS",
+     "plan": [
+      "click@3"
+     ],
+     "refusal": null,
+     "reward_verdict": true
+    },
+    {
+     "arm": "B_decoy_plan",
+     "changed": true,
+     "clause_results": [
+      {
+       "operator": "FOCUS",
+       "verdict": "PASS"
+      }
+     ],
+     "clauses": [
+      {
+       "operator": "FOCUS"
+      }
+     ],
+     "contract_reason": null,
+     "contract_verdict": "PASS",
+     "plan": [
+      "type@3=textbox"
+     ],
+     "refusal": null,
+     "reward_verdict": true
+    }
+   ],
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 29829,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "found": true,
+   "kind": "page",
+   "plan_len": 1,
+   "search_budget_spent": 1,
+   "seconds": 0.2,
+   "seed": 1060,
+   "task": "focus-text"
+  },
+  {
+   "attempts": [
+    {
+     "arm": "A_correct_plan",
+     "changed": false,
+     "clause_results": [
+      {
+       "operator": "CLICK_NAMED",
+       "verdict": "PASS"
+      }
+     ],
+     "clauses": [
+      {
+       "kind": "button",
+       "name": "\u786e\u5b9a",
+       "operator": "CLICK_NAMED"
+      }
+     ],
+     "contract_reason": null,
+     "contract_verdict": "PASS",
+     "plan": [
+      "type@7=\u786e\u5b9a",
+      "click@5"
+     ],
+     "refusal": null,
+     "reward_verdict": true
+    },
+    {
+     "arm": "B_decoy_plan",
+     "changed": true,
+     "clause_results": [
+      {
+       "operator": "CLICK_NAMED",
+       "verdict": "PASS"
+      }
+     ],
+     "clauses": [
+      {
+       "kind": "button",
+       "name": "\u786e\u5b9a",
+       "operator": "CLICK_NAMED"
+      }
+     ],
+     "contract_reason": null,
+     "contract_verdict": "PASS",
+     "plan": [
+      "nudge@4=up",
+      "click@5"
+     ],
+     "refusal": null,
+     "reward_verdict": true
+    }
+   ],
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 29829,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "found": true,
+   "kind": "page",
+   "plan_len": 2,
+   "search_budget_spent": 2,
+   "seconds": 0.5,
+   "seed": 1060,
+   "task": "unicode-test"
+  },
+  {
+   "attempts": [
+    {
+     "arm": "A_correct_plan",
+     "changed": false,
+     "clause_results": [
+      {
+       "operator": "PRESS_SEQUENCE",
+       "verdict": "PASS"
+      }
+     ],
+     "clauses": [
+      {
+       "operator": "PRESS_SEQUENCE"
+      }
+     ],
+     "contract_reason": null,
+     "contract_verdict": "PASS",
+     "plan": [
+      "click@3",
+      "click@4"
+     ],
+     "refusal": null,
+     "reward_verdict": true
+    },
+    {
+     "arm": "B_decoy_plan",
+     "changed": true,
+     "clause_results": [
+      {
+       "operator": "PRESS_SEQUENCE",
+       "reason": "OUT_OF_ORDER:['two']",
+       "verdict": "FAIL"
+      }
+     ],
+     "clauses": [
+      {
+       "operator": "PRESS_SEQUENCE"
+      }
+     ],
+     "contract_reason": null,
+     "contract_verdict": "FAIL",
+     "plan": [
+      "grab@3",
+      "click@4"
+     ],
+     "refusal": null,
+     "reward_verdict": false
+    }
+   ],
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 29829,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "found": true,
+   "kind": "page",
+   "plan_len": 2,
+   "search_budget_spent": 5,
+   "seconds": 0.2,
+   "seed": 1060,
+   "task": "click-button-sequence"
+  }
+ ],
+ "producer_cognition_model_dependency_count": 0,
+ "schema": "BRAIN_INSTRUCTION_CONTRACT_MEASURE_V1",
+ "summary": {
+  "agreement": 1.0,
+  "attempts": 32,
+  "cells": {
+   "agree_fail": 13,
+   "agree_pass": 19,
+   "false_accept": 0,
+   "false_reject": 0,
+   "skipped": 0,
+   "uncheckable": 4
+  },
+  "false_accept_rate": 0.0,
+  "false_reject_rate": 0.0,
+  "judged": 32,
+  "pages": 24,
+  "pages_with_a_plan": 18,
+  "per_operator": {
+   "CLICK_LABELLED": {
+    "agree_fail": 4,
+    "agree_pass": 4
+   },
+   "CLICK_NAMED": {
+    "agree_fail": 9,
+    "agree_pass": 13
+   },
+   "FOCUS": {
+    "agree_pass": 2
+   },
+   "ORDINAL_PRESS": {
+    "agree_fail": 1,
+    "agree_pass": 1
+   },
+   "PRESS_SEQUENCE": {
+    "agree_fail": 1,
+    "agree_pass": 1
+   },
+   "SELECT_SET": {
+    "agree_fail": 2,
+    "agree_pass": 4
+   },
+   "TYPE_VALUE": {
+    "agree_fail": 6,
+    "agree_pass": 6
+   }
+  }
+ }
+}

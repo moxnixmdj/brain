@@ -1,0 +1,2356 @@
+{
+  "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+  "falsifiers": {
+    "F1_known_false_win": {
+      "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+      "counted_as_progress": false,
+      "kind": "KNOWN_FALSE_WIN_FALSIFIER",
+      "model_dependency_count": 0,
+      "non_control_violations": 36,
+      "per_intervention": {
+        "DUPLICATE_FIRST_ELEMENT": {
+          "checked": 13,
+          "exceptions": 0,
+          "violations": 0
+        },
+        "IDENTITY": {
+          "checked": 13,
+          "exceptions": 0,
+          "violations": 0
+        },
+        "NEGATE": {
+          "checked": 13,
+          "exceptions": 0,
+          "violations": 0
+        },
+        "REORDER_FIRST_SEQUENCE": {
+          "checked": 13,
+          "exceptions": 0,
+          "violations": 0
+        },
+        "SHIFT_HALF": {
+          "checked": 13,
+          "exceptions": 0,
+          "violations": 0
+        },
+        "SUBUNIT_SCALE": {
+          "checked": 13,
+          "exceptions": 0,
+          "violations": 36
+        },
+        "TYPE_LIFT_INT_TO_FLOAT": {
+          "checked": 13,
+          "exceptions": 0,
+          "violations": 0
+        }
+      },
+      "prior_diff": "--- published_buggy\n+++ candidate\n@@ -3,7 +3,7 @@\n         return []\n \n     pivot = arr[0]\n-    lesser = quicksort([x for x in arr[1:] if x < pivot])\n+    lesser = quicksort([x for x in arr[1:] if x - 1 < pivot])\n     greater = quicksort([x for x in arr[1:] if x > pivot])\n     return lesser + [pivot] + greater\n ",
+      "prior_status": "REPAIRED__CORPUS_TEST_PASSES",
+      "published_ok": true,
+      "published_passed": 13,
+      "refused": true,
+      "schema": "BRAIN_INTERVENTIONAL_GOAL_V1",
+      "task": "quicksort"
+    },
+    "F2_observational_body": {
+      "admitted_relations": [
+        "BOOLEAN",
+        "TYPE_MATCH"
+      ],
+      "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+      "body": "return (max(parens) > parens)",
+      "counted_as_progress": false,
+      "induced_relations": [
+        "BOOLEAN",
+        "TYPE_MATCH"
+      ],
+      "interpretation": "NO_FALSIFIABLE_RELATION_OVER_THE_ENVIRONMENT",
+      "kind": "OBSERVATIONAL_BODY_UNDER_INTERVENTION",
+      "model_dependency_count": 0,
+      "non_control_violations": 0,
+      "per_intervention": {
+        "IDENTITY": {
+          "checked": 3,
+          "exceptions": 0,
+          "violations": 0
+        },
+        "NEGATE": {
+          "checked": 3,
+          "exceptions": 0,
+          "violations": 0
+        },
+        "SHIFT_HALF": {
+          "checked": 3,
+          "exceptions": 0,
+          "violations": 0
+        },
+        "SUBUNIT_SCALE": {
+          "checked": 3,
+          "exceptions": 0,
+          "violations": 0
+        },
+        "TYPE_LIFT_INT_TO_FLOAT": {
+          "checked": 3,
+          "exceptions": 0,
+          "violations": 0
+        }
+      },
+      "published_cases": 3,
+      "published_ok": true,
+      "published_passed": 3,
+      "refused": false,
+      "schema": "BRAIN_INTERVENTIONAL_GOAL_V1",
+      "task": "is_valid_parenthesization"
+    }
+  },
+  "generated_at_utc": "2026-11-16T19:12:39Z",
+  "measured": {
+    "answer_keys_present": 0,
+    "candidates_total": 2096,
+    "constructive_inversion_open": true,
+    "f1_discriminating_interventions": [
+      "SUBUNIT_SCALE"
+    ],
+    "f1_non_control_violations": 36,
+    "f1_refused": true,
+    "f2_interpretation": "NO_FALSIFIABLE_RELATION_OVER_THE_ENVIRONMENT",
+    "f2_refused": false,
+    "goal_underdetermined_tasks": [
+      "is_valid_parenthesization",
+      "kheapsort",
+      "to_base",
+      "longest_common_subsequence",
+      "powerset",
+      "wrap",
+      "shunting_yard",
+      "hanoi"
+    ],
+    "hidden_skips": 0,
+    "intervention_reach_total_non_control": 0,
+    "known_wins_not_recounted": 4,
+    "mean_candidates_tried_per_task": 131.0,
+    "permanent_rules_admitted": 0,
+    "previously_unsolved_remaining": 15,
+    "previously_unsolved_repaired": 1,
+    "previously_unsolved_repaired_tasks": [
+      "longest_common_subsequence"
+    ],
+    "previously_unsolved_tasks": 16,
+    "regressions": 0,
+    "status_counts": {
+      "NOT_REPAIRED__NO_CANDIDATE_PASSED_THE_CORPUS_TEST": 12,
+      "REFUSED__NO_GROUNDED_CANDIDATES": 1,
+      "REPAIRED__CORPUS_TEST_PASSES": 1,
+      "UNMEASURABLE__NO_PUBLISHED_JSON_CASES": 2
+    },
+    "tasks_with_callee_signature_vocabulary": 13,
+    "tasks_with_discriminating_intervention": {
+      "bucketsort": [],
+      "gcd": [],
+      "hanoi": [],
+      "is_valid_parenthesization": [],
+      "kheapsort": [],
+      "knapsack": [],
+      "lis": [],
+      "longest_common_subsequence": [],
+      "minimum_spanning_tree": [],
+      "possible_change": [],
+      "powerset": [],
+      "shortest_paths": [],
+      "shunting_yard": [],
+      "sqrt": [],
+      "to_base": [],
+      "wrap": []
+    },
+    "unmeasurable_tasks": [
+      "minimum_spanning_tree",
+      "shortest_paths"
+    ],
+    "unverified_repairs": [],
+    "verified_doing_not_admitted_learning": true,
+    "wall_seconds": 31.1
+  },
+  "preregistered": {
+    "fail_condition": "any answer key; any hidden skip; F1 accepted; any unverified repair",
+    "not_a_pass_condition": "previously_unsolved repairs -- reported as a limiting-factor measurement, explicitly not a repair contest",
+    "pass_condition": "F1_refused_by_a_non_control_DO_intervention AND zero answer keys AND zero hidden skips AND zero permanent rules without identification AND zero unverified repairs AND <=260 candidates/task",
+    "verdict": "PASS"
+  },
+  "protocol": {
+    "answer_key": "correct_python_programs asserted absent before every task",
+    "corpus": "jkoppel/QuixBugs, real published bugs with their own pytest files",
+    "interventions": [
+      "IDENTITY",
+      "REORDER_FIRST_SEQUENCE",
+      "DUPLICATE_FIRST_ELEMENT",
+      "TYPE_LIFT_INT_TO_FLOAT",
+      "SUBUNIT_SCALE",
+      "SHIFT_HALF",
+      "NEGATE"
+    ],
+    "known_wins_not_counted_as_progress": [
+      "bitcount",
+      "next_permutation",
+      "pascal",
+      "quicksort"
+    ],
+    "model_dependency_count": 0,
+    "network_at_run_time": false,
+    "pinned_commit": "4257f44b0ff1181dedaedee6a447e133219fcebf",
+    "population": "EXACTLY the tasks NOT repaired in CONTRACT_GROUNDED_REPAIR_20261116_V1.json",
+    "spend_usd": 0,
+    "synthetic_data": "NONE -- programs, cases and tests published verbatim; interventions are DO-maps on real inputs",
+    "test_bytes": "hashed by the existing harness; a changed byte is an error",
+    "verdict": "corpus own pytest on a FRESH copy; candidate self-report is only a filter"
+  },
+  "rows": [
+    {
+      "answer_key_absent": true,
+      "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+      "goal": {
+        "callee_signatures": [
+          "sqrt/2"
+        ],
+        "cases_passed": 1,
+        "cases_total": 7,
+        "executed_lines": [
+          3,
+          4,
+          5,
+          6
+        ],
+        "failing_cases": 6,
+        "intervention_diagnostics": {
+          "inapplicable": {
+            "DUPLICATE_FIRST_ELEMENT": "STRUCTURAL_NOT_APPLICABLE",
+            "REORDER_FIRST_SEQUENCE": "STRUCTURAL_NOT_APPLICABLE"
+          },
+          "induced_relations": [
+            "NONNEGATIVE",
+            "TYPE_MATCH"
+          ],
+          "invariant_refuted": {
+            "NEGATE": [
+              "NONNEGATIVE"
+            ]
+          }
+        },
+        "intervention_reach": {
+          "IDENTITY": 0,
+          "NEGATE": 0,
+          "SHIFT_HALF": 0,
+          "SUBUNIT_SCALE": 0,
+          "TYPE_LIFT_INT_TO_FLOAT": 0
+        },
+        "intervention_teeth": {
+          "IDENTITY": 6,
+          "NEGATE": 7,
+          "SHIFT_HALF": 6,
+          "SUBUNIT_SCALE": 4,
+          "TYPE_LIFT_INT_TO_FLOAT": 6
+        },
+        "interventional_relations": [
+          "NONNEGATIVE",
+          "TYPE_MATCH"
+        ],
+        "observational_relations": [],
+        "signature": "OFF_BY_ONE"
+      },
+      "identifiability": {
+        "chosen_contrast": {
+          "discriminating_facts": [],
+          "gain_log_terms": {},
+          "guaranteed_elimination": 0,
+          "reason": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+          "schema": "PROJECT_BRAIN_CONTRAST_SELECTION_V1",
+          "state": null,
+          "status": "NO_REQUIREMENT_SPACE__NOTHING_TO_DISAMBIGUATE",
+          "survivors_before": 0,
+          "worst_case_survivors_after": null
+        },
+        "interventional_certificate": {
+          "kind": "NO_SUCCESS__NOTHING_TO_SCOPE",
+          "reason": "NO_SUCCESS_TO_SCOPE_FROM",
+          "shared_facts": [],
+          "unrepairable_by_repetition": false,
+          "what_would_repair_it": "AN_OBSERVATION_OF_THE_MISSING_KIND__NOT_A_NEW_OBSERVABLE"
+        },
+        "learn": {
+          "status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+          "survivors": 0
+        },
+        "observational_static_certificate": {
+          "kind": "SAME_OBSERVED_STATE_OPPOSITE_OUTCOMES",
+          "reason": "AN_UNOBSERVED_PRECONDITION_DIFFERS_BETWEEN_THESE_WORLDS",
+          "shared_facts": [
+            "ast.Add",
+            "ast.Assign",
+            "ast.BinOp",
+            "ast.Call",
+            "ast.Compare",
+            "ast.Constant",
+            "ast.Div",
+            "ast.Expr",
+            "ast.FunctionDef",
+            "ast.Gt",
+            "ast.Load",
+            "ast.Module",
+            "ast.Mult",
+            "ast.Name",
+            "ast.Return",
+            "ast.Store",
+            "ast.Sub",
+            "ast.While",
+            "ast.arg",
+            "ast.arguments"
+          ],
+          "unrepairable_by_repetition": true,
+          "what_would_repair_it": "A_NEW_OBSERVABLE__MORE_RUNS_REPORT_THE_SAME_FACT_VECTOR"
+        },
+        "observational_traced_certificate": null,
+        "permanent_rule_admitted": false
+      },
+      "model_dependency_count": 0,
+      "program_sha256": "e3623a160e6ada452b36ce0bd2370fc031943e2c1ae93aae5f0c82865e083ebf",
+      "reason": "ALL_INTERVENTIONALLY_VERIFIED_CANDIDATES_FAILED_AN_INDEPENDENT_VERDICT",
+      "schema": "BRAIN_INTERVENTIONAL_GOAL_V1",
+      "seconds": 19.67,
+      "status": "NOT_REPAIRED__NO_CANDIDATE_PASSED_THE_CORPUS_TEST",
+      "synthesis": {
+        "calculated_weights": {
+          "interventional_fail": {},
+          "interventional_pass": {},
+          "note": "EXACT_INTEGER_COUNTS_OF_EXECUTED_VERDICTS__NO_GRADIENT__NO_FITTED_PARAMETER__ZERO_BY_DEFAULT",
+          "published_only": {
+            "BINARY_OP": 55,
+            "COMPARISON_CLASS": 5,
+            "CONSTANT": 30,
+            "NAME_SWAP": 1,
+            "OFFSET": 61
+          },
+          "weights": {}
+        },
+        "candidates": 152,
+        "fresh_verdicts": [],
+        "observational_prior": {
+          "note": "EXACT_COUNTS_OF_EXECUTED_VERDICTS__NO_FITTED_PARAMETERS",
+          "signature": "OFF_BY_ONE",
+          "tried": {},
+          "verified": {}
+        },
+        "passed_published_but_refused_by_intervention": 0,
+        "screened": 152,
+        "winning_diff": null,
+        "winning_family": null,
+        "winning_index": null
+      },
+      "task": "sqrt",
+      "test_sha256": "a8374bfa1ef4d2900e0c12d83c29bf22d34c3b0495a70262bdede53e77e90631"
+    },
+    {
+      "answer_key_absent": true,
+      "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+      "goal": {
+        "callee_signatures": [
+          "is_valid_parenthesization/1"
+        ],
+        "cases_passed": 2,
+        "cases_total": 3,
+        "executed_lines": [
+          3,
+          4,
+          5,
+          6,
+          8,
+          9,
+          10,
+          12
+        ],
+        "failing_cases": 1,
+        "intervention_diagnostics": {
+          "inapplicable": {
+            "DUPLICATE_FIRST_ELEMENT": "STRUCTURAL_NOT_APPLICABLE",
+            "REORDER_FIRST_SEQUENCE": "STRUCTURAL_NOT_APPLICABLE"
+          },
+          "induced_relations": [
+            "BOOLEAN",
+            "TYPE_MATCH"
+          ],
+          "invariant_refuted": {}
+        },
+        "intervention_reach": {
+          "IDENTITY": 0,
+          "NEGATE": 0,
+          "SHIFT_HALF": 0,
+          "SUBUNIT_SCALE": 0,
+          "TYPE_LIFT_INT_TO_FLOAT": 0
+        },
+        "intervention_teeth": {
+          "IDENTITY": 0,
+          "NEGATE": 0,
+          "SHIFT_HALF": 0,
+          "SUBUNIT_SCALE": 0,
+          "TYPE_LIFT_INT_TO_FLOAT": 0
+        },
+        "interventional_relations": [
+          "BOOLEAN",
+          "TYPE_MATCH"
+        ],
+        "observational_relations": [],
+        "signature": "BOUNDARY"
+      },
+      "identifiability": {
+        "chosen_contrast": {
+          "discriminating_facts": [],
+          "gain_log_terms": {},
+          "guaranteed_elimination": 0,
+          "reason": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+          "schema": "PROJECT_BRAIN_CONTRAST_SELECTION_V1",
+          "state": null,
+          "status": "NO_REQUIREMENT_SPACE__NOTHING_TO_DISAMBIGUATE",
+          "survivors_before": 0,
+          "worst_case_survivors_after": null
+        },
+        "interventional_certificate": {
+          "kind": "NO_SUCCESS__NOTHING_TO_SCOPE",
+          "reason": "NO_SUCCESS_TO_SCOPE_FROM",
+          "shared_facts": [],
+          "unrepairable_by_repetition": false,
+          "what_would_repair_it": "AN_OBSERVATION_OF_THE_MISSING_KIND__NOT_A_NEW_OBSERVABLE"
+        },
+        "learn": {
+          "status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+          "survivors": 0
+        },
+        "observational_static_certificate": {
+          "kind": "SAME_OBSERVED_STATE_OPPOSITE_OUTCOMES",
+          "reason": "AN_UNOBSERVED_PRECONDITION_DIFFERS_BETWEEN_THESE_WORLDS",
+          "shared_facts": [
+            "ast.Add",
+            "ast.Assign",
+            "ast.AugAssign",
+            "ast.Compare",
+            "ast.Constant",
+            "ast.Eq",
+            "ast.Expr",
+            "ast.For",
+            "ast.FunctionDef",
+            "ast.If",
+            "ast.Load",
+            "ast.Lt",
+            "ast.Module",
+            "ast.Name",
+            "ast.Return",
+            "ast.Store",
+            "ast.Sub",
+            "ast.arg",
+            "ast.arguments"
+          ],
+          "unrepairable_by_repetition": true,
+          "what_would_repair_it": "A_NEW_OBSERVABLE__MORE_RUNS_REPORT_THE_SAME_FACT_VECTOR"
+        },
+        "observational_traced_certificate": null,
+        "permanent_rule_admitted": false
+      },
+      "model_dependency_count": 0,
+      "program_sha256": "2340cddfce49b055a5a7a70c3341351bf130702512278bafaed5d5b345d0ba60",
+      "reason": "ALL_INTERVENTIONALLY_VERIFIED_CANDIDATES_FAILED_AN_INDEPENDENT_VERDICT",
+      "schema": "BRAIN_INTERVENTIONAL_GOAL_V1",
+      "seconds": 0.18,
+      "status": "NOT_REPAIRED__NO_CANDIDATE_PASSED_THE_CORPUS_TEST",
+      "synthesis": {
+        "calculated_weights": {
+          "interventional_fail": {},
+          "interventional_pass": {},
+          "note": "EXACT_INTEGER_COUNTS_OF_EXECUTED_VERDICTS__NO_GRADIENT__NO_FITTED_PARAMETER__ZERO_BY_DEFAULT",
+          "published_only": {
+            "AUG_ASSIGN_OP": 22,
+            "COMPARISON_CLASS": 10,
+            "CONSTANT": 29,
+            "GUARD_INSERT": 2,
+            "OFFSET": 49
+          },
+          "weights": {}
+        },
+        "candidates": 112,
+        "fresh_verdicts": [],
+        "observational_prior": {
+          "note": "EXACT_COUNTS_OF_EXECUTED_VERDICTS__NO_FITTED_PARAMETERS",
+          "signature": "BOUNDARY",
+          "tried": {},
+          "verified": {}
+        },
+        "passed_published_but_refused_by_intervention": 0,
+        "screened": 112,
+        "winning_diff": null,
+        "winning_family": null,
+        "winning_index": null
+      },
+      "task": "is_valid_parenthesization",
+      "test_sha256": "484b2e67707900e6ef0cff1df83ef441d39fcc3f56afdd9180ff1363fc7d1f76"
+    },
+    {
+      "answer_key_absent": true,
+      "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+      "goal": {
+        "callee_signatures": [],
+        "cases_passed": 0,
+        "cases_total": 0,
+        "executed_lines": [],
+        "failing_cases": 0,
+        "intervention_diagnostics": {},
+        "intervention_reach": {},
+        "intervention_teeth": {},
+        "interventional_relations": [],
+        "observational_relations": [],
+        "signature": null
+      },
+      "identifiability": {
+        "chosen_contrast": null,
+        "interventional_certificate": null,
+        "learn": null,
+        "observational_static_certificate": null,
+        "observational_traced_certificate": null,
+        "permanent_rule_admitted": false
+      },
+      "model_dependency_count": 0,
+      "program_sha256": "116d2b6f60ab516973d6a254e4f0dfd31e9c5e2966eaf9158c336d62dd2da5fc",
+      "reason": "THIS_TASK_HAS_NO_EXECUTABLE_PUBLISHED_CONTRACT_DATA",
+      "schema": "BRAIN_INTERVENTIONAL_GOAL_V1",
+      "seconds": 0.0,
+      "status": "UNMEASURABLE__NO_PUBLISHED_JSON_CASES",
+      "synthesis": {
+        "calculated_weights": null,
+        "candidates": 0,
+        "fresh_verdicts": [],
+        "observational_prior": null,
+        "passed_published_but_refused_by_intervention": 0,
+        "screened": 0,
+        "winning_diff": null,
+        "winning_family": null,
+        "winning_index": null
+      },
+      "task": "minimum_spanning_tree",
+      "test_sha256": "45b23edf3513e1f1a6e7ecf5f17eb85d1a32845d70869c7190b16b10cd61d811"
+    },
+    {
+      "answer_key_absent": true,
+      "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+      "goal": {
+        "callee_signatures": [],
+        "cases_passed": 0,
+        "cases_total": 4,
+        "executed_lines": [],
+        "failing_cases": 4,
+        "intervention_diagnostics": {},
+        "intervention_reach": {},
+        "intervention_teeth": {},
+        "interventional_relations": [],
+        "observational_relations": [
+          "PERMUTATION_OF_INPUT",
+          "SORTED_OUTPUT",
+          "TYPE_MATCH"
+        ],
+        "signature": null
+      },
+      "identifiability": {
+        "chosen_contrast": null,
+        "interventional_certificate": null,
+        "learn": null,
+        "observational_static_certificate": {
+          "kind": "NO_SUCCESS__NOTHING_TO_SCOPE",
+          "reason": "NO_SUCCESS_TO_SCOPE_FROM",
+          "shared_facts": [],
+          "unrepairable_by_repetition": false,
+          "what_would_repair_it": "AN_OBSERVATION_OF_THE_MISSING_KIND__NOT_A_NEW_OBSERVABLE"
+        },
+        "observational_traced_certificate": {
+          "kind": "NO_SUCCESS__NOTHING_TO_SCOPE",
+          "reason": "NO_SUCCESS_TO_SCOPE_FROM",
+          "shared_facts": [],
+          "unrepairable_by_repetition": false,
+          "what_would_repair_it": "AN_OBSERVATION_OF_THE_MISSING_KIND__NOT_A_NEW_OBSERVABLE"
+        },
+        "permanent_rule_admitted": false
+      },
+      "model_dependency_count": 0,
+      "program_sha256": "0cabf3d462d941ec01f261f2d794d960ab8ba497c42140cedbc3c872f772cea8",
+      "reason": "HYPOTHESIS_SPACE_EMPTY_ON_THE_EXECUTED_PATH",
+      "schema": "BRAIN_INTERVENTIONAL_GOAL_V1",
+      "seconds": 0.08,
+      "status": "REFUSED__NO_GROUNDED_CANDIDATES",
+      "synthesis": {
+        "calculated_weights": null,
+        "candidates": 0,
+        "fresh_verdicts": [],
+        "observational_prior": null,
+        "passed_published_but_refused_by_intervention": 0,
+        "screened": 0,
+        "winning_diff": null,
+        "winning_family": null,
+        "winning_index": null
+      },
+      "task": "kheapsort",
+      "test_sha256": "7751ea3a7611406695c84ed254eddc2afdc17eb3e5962bb9a494b3a307953d7a"
+    },
+    {
+      "answer_key_absent": true,
+      "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+      "goal": {
+        "callee_signatures": [
+          "knapsack/2"
+        ],
+        "cases_passed": 3,
+        "cases_total": 10,
+        "executed_lines": [
+          3,
+          4,
+          6,
+          7,
+          9,
+          10,
+          12,
+          13,
+          14,
+          15,
+          18
+        ],
+        "failing_cases": 7,
+        "intervention_diagnostics": {
+          "inapplicable": {},
+          "induced_relations": [
+            "NONNEGATIVE",
+            "TYPE_MATCH"
+          ],
+          "invariant_refuted": {
+            "NEGATE": [
+              "NONNEGATIVE"
+            ]
+          }
+        },
+        "intervention_reach": {
+          "DUPLICATE_FIRST_ELEMENT": 0,
+          "IDENTITY": 0,
+          "NEGATE": 0,
+          "REORDER_FIRST_SEQUENCE": 0,
+          "SHIFT_HALF": 0,
+          "SUBUNIT_SCALE": 0,
+          "TYPE_LIFT_INT_TO_FLOAT": 0
+        },
+        "intervention_teeth": {
+          "DUPLICATE_FIRST_ELEMENT": 1,
+          "IDENTITY": 1,
+          "NEGATE": 10,
+          "REORDER_FIRST_SEQUENCE": 1,
+          "SHIFT_HALF": 10,
+          "SUBUNIT_SCALE": 10,
+          "TYPE_LIFT_INT_TO_FLOAT": 10
+        },
+        "interventional_relations": [
+          "NONNEGATIVE",
+          "TYPE_MATCH"
+        ],
+        "observational_relations": [],
+        "signature": "WRONG_VALUE"
+      },
+      "identifiability": {
+        "chosen_contrast": {
+          "discriminating_facts": [],
+          "gain_log_terms": {},
+          "guaranteed_elimination": 0,
+          "reason": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+          "schema": "PROJECT_BRAIN_CONTRAST_SELECTION_V1",
+          "state": null,
+          "status": "NO_REQUIREMENT_SPACE__NOTHING_TO_DISAMBIGUATE",
+          "survivors_before": 0,
+          "worst_case_survivors_after": null
+        },
+        "interventional_certificate": {
+          "kind": "NO_SUCCESS__NOTHING_TO_SCOPE",
+          "reason": "NO_SUCCESS_TO_SCOPE_FROM",
+          "shared_facts": [],
+          "unrepairable_by_repetition": false,
+          "what_would_repair_it": "AN_OBSERVATION_OF_THE_MISSING_KIND__NOT_A_NEW_OBSERVABLE"
+        },
+        "learn": {
+          "status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+          "survivors": 0
+        },
+        "observational_static_certificate": {
+          "kind": "SAME_OBSERVED_STATE_OPPOSITE_OUTCOMES",
+          "reason": "AN_UNOBSERVED_PRECONDITION_DIFFERS_BETWEEN_THESE_WORLDS",
+          "shared_facts": [
+            "ast.Add",
+            "ast.Assign",
+            "ast.BinOp",
+            "ast.Call",
+            "ast.Compare",
+            "ast.Constant",
+            "ast.Expr",
+            "ast.For",
+            "ast.FunctionDef",
+            "ast.If",
+            "ast.ImportFrom",
+            "ast.Load",
+            "ast.Lt",
+            "ast.Module",
+            "ast.Name",
+            "ast.Return",
+            "ast.Store",
+            "ast.Sub",
+            "ast.Subscript",
+            "ast.Tuple",
+            "ast.alias",
+            "ast.arg",
+            "ast.arguments"
+          ],
+          "unrepairable_by_repetition": true,
+          "what_would_repair_it": "A_NEW_OBSERVABLE__MORE_RUNS_REPORT_THE_SAME_FACT_VECTOR"
+        },
+        "observational_traced_certificate": null,
+        "permanent_rule_admitted": false
+      },
+      "model_dependency_count": 0,
+      "program_sha256": "ce8ab048641f73e89cf0f196237a0c13d1e78025f6c44f4e92e4fd834f10123b",
+      "reason": "ALL_INTERVENTIONALLY_VERIFIED_CANDIDATES_FAILED_AN_INDEPENDENT_VERDICT",
+      "schema": "BRAIN_INTERVENTIONAL_GOAL_V1",
+      "seconds": 2.42,
+      "status": "NOT_REPAIRED__NO_CANDIDATE_PASSED_THE_CORPUS_TEST",
+      "synthesis": {
+        "calculated_weights": {
+          "interventional_fail": {},
+          "interventional_pass": {},
+          "note": "EXACT_INTEGER_COUNTS_OF_EXECUTED_VERDICTS__NO_GRADIENT__NO_FITTED_PARAMETER__ZERO_BY_DEFAULT",
+          "published_only": {
+            "BINARY_OP": 77,
+            "COMPARISON_CLASS": 5,
+            "CONSTANT": 140,
+            "NAME_SWAP": 3,
+            "OFFSET": 35
+          },
+          "weights": {}
+        },
+        "candidates": 260,
+        "fresh_verdicts": [],
+        "observational_prior": {
+          "note": "EXACT_COUNTS_OF_EXECUTED_VERDICTS__NO_FITTED_PARAMETERS",
+          "signature": "WRONG_VALUE",
+          "tried": {},
+          "verified": {}
+        },
+        "passed_published_but_refused_by_intervention": 0,
+        "screened": 260,
+        "winning_diff": null,
+        "winning_family": null,
+        "winning_index": null
+      },
+      "task": "knapsack",
+      "test_sha256": "d29882496c29567a279e61f5f2be28cf074897e774267d629a99a7f221e40ff7"
+    },
+    {
+      "answer_key_absent": true,
+      "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+      "goal": {
+        "callee_signatures": [
+          "gcd/2"
+        ],
+        "cases_passed": 1,
+        "cases_total": 6,
+        "executed_lines": [
+          2,
+          3,
+          5
+        ],
+        "failing_cases": 5,
+        "intervention_diagnostics": {
+          "inapplicable": {
+            "DUPLICATE_FIRST_ELEMENT": "STRUCTURAL_NOT_APPLICABLE",
+            "REORDER_FIRST_SEQUENCE": "STRUCTURAL_NOT_APPLICABLE"
+          },
+          "induced_relations": [
+            "NONNEGATIVE",
+            "TYPE_MATCH"
+          ],
+          "invariant_refuted": {
+            "NEGATE": [
+              "NONNEGATIVE"
+            ]
+          }
+        },
+        "intervention_reach": {
+          "IDENTITY": 0,
+          "NEGATE": 0,
+          "SHIFT_HALF": 0,
+          "SUBUNIT_SCALE": 0,
+          "TYPE_LIFT_INT_TO_FLOAT": 0
+        },
+        "intervention_teeth": {
+          "IDENTITY": 5,
+          "NEGATE": 5,
+          "SHIFT_HALF": 6,
+          "SUBUNIT_SCALE": 6,
+          "TYPE_LIFT_INT_TO_FLOAT": 5
+        },
+        "interventional_relations": [
+          "NONNEGATIVE",
+          "TYPE_MATCH"
+        ],
+        "observational_relations": [],
+        "signature": "EXCEPTION"
+      },
+      "identifiability": {
+        "chosen_contrast": {
+          "discriminating_facts": [],
+          "gain_log_terms": {},
+          "guaranteed_elimination": 0,
+          "reason": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+          "schema": "PROJECT_BRAIN_CONTRAST_SELECTION_V1",
+          "state": null,
+          "status": "NO_REQUIREMENT_SPACE__NOTHING_TO_DISAMBIGUATE",
+          "survivors_before": 0,
+          "worst_case_survivors_after": null
+        },
+        "interventional_certificate": {
+          "kind": "NO_SUCCESS__NOTHING_TO_SCOPE",
+          "reason": "NO_SUCCESS_TO_SCOPE_FROM",
+          "shared_facts": [],
+          "unrepairable_by_repetition": false,
+          "what_would_repair_it": "AN_OBSERVATION_OF_THE_MISSING_KIND__NOT_A_NEW_OBSERVABLE"
+        },
+        "learn": {
+          "status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+          "survivors": 0
+        },
+        "observational_static_certificate": {
+          "kind": "SAME_OBSERVED_STATE_OPPOSITE_OUTCOMES",
+          "reason": "AN_UNOBSERVED_PRECONDITION_DIFFERS_BETWEEN_THESE_WORLDS",
+          "shared_facts": [
+            "ast.BinOp",
+            "ast.Call",
+            "ast.Compare",
+            "ast.Constant",
+            "ast.Eq",
+            "ast.Expr",
+            "ast.FunctionDef",
+            "ast.If",
+            "ast.Load",
+            "ast.Mod",
+            "ast.Module",
+            "ast.Name",
+            "ast.Return",
+            "ast.arg",
+            "ast.arguments"
+          ],
+          "unrepairable_by_repetition": true,
+          "what_would_repair_it": "A_NEW_OBSERVABLE__MORE_RUNS_REPORT_THE_SAME_FACT_VECTOR"
+        },
+        "observational_traced_certificate": null,
+        "permanent_rule_admitted": false
+      },
+      "model_dependency_count": 0,
+      "program_sha256": "d68e155c2af40d787f617f03c596005edabee3d9e33626b9185d83650895636f",
+      "reason": "ALL_INTERVENTIONALLY_VERIFIED_CANDIDATES_FAILED_AN_INDEPENDENT_VERDICT",
+      "schema": "BRAIN_INTERVENTIONAL_GOAL_V1",
+      "seconds": 0.34,
+      "status": "NOT_REPAIRED__NO_CANDIDATE_PASSED_THE_CORPUS_TEST",
+      "synthesis": {
+        "calculated_weights": {
+          "interventional_fail": {},
+          "interventional_pass": {},
+          "note": "EXACT_INTEGER_COUNTS_OF_EXECUTED_VERDICTS__NO_GRADIENT__NO_FITTED_PARAMETER__ZERO_BY_DEFAULT",
+          "published_only": {
+            "BINARY_OP": 11,
+            "COMPARISON_CLASS": 5,
+            "CONSTANT": 12,
+            "OFFSET": 32
+          },
+          "weights": {}
+        },
+        "candidates": 60,
+        "fresh_verdicts": [],
+        "observational_prior": {
+          "note": "EXACT_COUNTS_OF_EXECUTED_VERDICTS__NO_FITTED_PARAMETERS",
+          "signature": "EXCEPTION",
+          "tried": {},
+          "verified": {}
+        },
+        "passed_published_but_refused_by_intervention": 0,
+        "screened": 60,
+        "winning_diff": null,
+        "winning_family": null,
+        "winning_index": null
+      },
+      "task": "gcd",
+      "test_sha256": "1e0f36211d258a295ec11359495202ff8491736ffe3a9b56336c1a633a1af589"
+    },
+    {
+      "answer_key_absent": true,
+      "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+      "goal": {
+        "callee_signatures": [
+          "to_base/2"
+        ],
+        "cases_passed": 3,
+        "cases_total": 10,
+        "executed_lines": [
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "failing_cases": 7,
+        "intervention_diagnostics": {
+          "inapplicable": {
+            "DUPLICATE_FIRST_ELEMENT": "STRUCTURAL_NOT_APPLICABLE",
+            "REORDER_FIRST_SEQUENCE": "STRUCTURAL_NOT_APPLICABLE"
+          },
+          "induced_relations": [
+            "TYPE_MATCH"
+          ],
+          "invariant_refuted": {}
+        },
+        "intervention_reach": {
+          "IDENTITY": 0,
+          "NEGATE": 0,
+          "SHIFT_HALF": 0,
+          "SUBUNIT_SCALE": 0,
+          "TYPE_LIFT_INT_TO_FLOAT": 0
+        },
+        "intervention_teeth": {
+          "IDENTITY": 0,
+          "NEGATE": 0,
+          "SHIFT_HALF": 10,
+          "SUBUNIT_SCALE": 10,
+          "TYPE_LIFT_INT_TO_FLOAT": 10
+        },
+        "interventional_relations": [
+          "TYPE_MATCH"
+        ],
+        "observational_relations": [],
+        "signature": "COLLECTION_SHAPE"
+      },
+      "identifiability": {
+        "chosen_contrast": {
+          "discriminating_facts": [],
+          "gain_log_terms": {},
+          "guaranteed_elimination": 0,
+          "reason": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+          "schema": "PROJECT_BRAIN_CONTRAST_SELECTION_V1",
+          "state": null,
+          "status": "NO_REQUIREMENT_SPACE__NOTHING_TO_DISAMBIGUATE",
+          "survivors_before": 0,
+          "worst_case_survivors_after": null
+        },
+        "interventional_certificate": {
+          "kind": "NO_SUCCESS__NOTHING_TO_SCOPE",
+          "reason": "NO_SUCCESS_TO_SCOPE_FROM",
+          "shared_facts": [],
+          "unrepairable_by_repetition": false,
+          "what_would_repair_it": "AN_OBSERVATION_OF_THE_MISSING_KIND__NOT_A_NEW_OBSERVABLE"
+        },
+        "learn": {
+          "status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+          "survivors": 0
+        },
+        "observational_static_certificate": {
+          "kind": "SAME_OBSERVED_STATE_OPPOSITE_OUTCOMES",
+          "reason": "AN_UNOBSERVED_PRECONDITION_DIFFERS_BETWEEN_THESE_WORLDS",
+          "shared_facts": [
+            "ast.Add",
+            "ast.Assign",
+            "ast.Attribute",
+            "ast.BinOp",
+            "ast.Compare",
+            "ast.Constant",
+            "ast.Expr",
+            "ast.FloorDiv",
+            "ast.FunctionDef",
+            "ast.Gt",
+            "ast.Import",
+            "ast.Load",
+            "ast.Mod",
+            "ast.Module",
+            "ast.Name",
+            "ast.Return",
+            "ast.Store",
+            "ast.Subscript",
+            "ast.While",
+            "ast.alias",
+            "ast.arg",
+            "ast.arguments"
+          ],
+          "unrepairable_by_repetition": true,
+          "what_would_repair_it": "A_NEW_OBSERVABLE__MORE_RUNS_REPORT_THE_SAME_FACT_VECTOR"
+        },
+        "observational_traced_certificate": {
+          "kind": "SAME_OBSERVED_STATE_OPPOSITE_OUTCOMES",
+          "reason": "AN_UNOBSERVED_PRECONDITION_DIFFERS_BETWEEN_THESE_WORLDS",
+          "shared_facts": [
+            "arg0.type.int",
+            "arg1.type.int",
+            "argcount.2",
+            "executed.to_base",
+            "expected.type.str",
+            "line.10",
+            "line.4",
+            "line.5",
+            "line.6",
+            "line.7",
+            "line.8",
+            "line.9",
+            "result.type.str"
+          ],
+          "unrepairable_by_repetition": true,
+          "what_would_repair_it": "A_NEW_OBSERVABLE__MORE_RUNS_REPORT_THE_SAME_FACT_VECTOR"
+        },
+        "permanent_rule_admitted": false
+      },
+      "model_dependency_count": 0,
+      "program_sha256": "e6f2d42474e4e641f08d2e6d5c0e8c8bf8a540e79aaaf1ab903031c163193744",
+      "reason": "ALL_INTERVENTIONALLY_VERIFIED_CANDIDATES_FAILED_AN_INDEPENDENT_VERDICT",
+      "schema": "BRAIN_INTERVENTIONAL_GOAL_V1",
+      "seconds": 2.35,
+      "status": "NOT_REPAIRED__NO_CANDIDATE_PASSED_THE_CORPUS_TEST",
+      "synthesis": {
+        "calculated_weights": {
+          "interventional_fail": {},
+          "interventional_pass": {},
+          "note": "EXACT_INTEGER_COUNTS_OF_EXECUTED_VERDICTS__NO_GRADIENT__NO_FITTED_PARAMETER__ZERO_BY_DEFAULT",
+          "published_only": {
+            "BINARY_OP": 44,
+            "COMPARISON_CLASS": 5,
+            "CONSTANT": 54,
+            "OFFSET": 79
+          },
+          "weights": {}
+        },
+        "candidates": 182,
+        "fresh_verdicts": [],
+        "observational_prior": {
+          "note": "EXACT_COUNTS_OF_EXECUTED_VERDICTS__NO_FITTED_PARAMETERS",
+          "signature": "COLLECTION_SHAPE",
+          "tried": {},
+          "verified": {}
+        },
+        "passed_published_but_refused_by_intervention": 0,
+        "screened": 182,
+        "winning_diff": null,
+        "winning_family": null,
+        "winning_index": null
+      },
+      "task": "to_base",
+      "test_sha256": "9c0c9c0c7242ce3cfcfb170be7770c7bfdcc5421fef1bfd4a10e9f63afa17ef8"
+    },
+    {
+      "answer_key_absent": true,
+      "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+      "goal": {
+        "callee_signatures": [
+          "<listcomp>/1",
+          "lis/1"
+        ],
+        "cases_passed": 8,
+        "cases_total": 12,
+        "executed_lines": [
+          3,
+          4,
+          6,
+          8,
+          10,
+          12,
+          13,
+          14,
+          16
+        ],
+        "failing_cases": 4,
+        "intervention_diagnostics": {
+          "inapplicable": {
+            "DUPLICATE_FIRST_ELEMENT": "STRUCTURAL_NOT_APPLICABLE",
+            "REORDER_FIRST_SEQUENCE": "STRUCTURAL_NOT_APPLICABLE"
+          },
+          "induced_relations": [
+            "NONNEGATIVE",
+            "TYPE_MATCH"
+          ],
+          "invariant_refuted": {
+            "NEGATE": [
+              "NONNEGATIVE"
+            ]
+          }
+        },
+        "intervention_reach": {
+          "IDENTITY": 0,
+          "NEGATE": 0,
+          "SHIFT_HALF": 0,
+          "SUBUNIT_SCALE": 0,
+          "TYPE_LIFT_INT_TO_FLOAT": 0
+        },
+        "intervention_teeth": {
+          "IDENTITY": 0,
+          "NEGATE": 0,
+          "SHIFT_HALF": 0,
+          "SUBUNIT_SCALE": 0,
+          "TYPE_LIFT_INT_TO_FLOAT": 0
+        },
+        "interventional_relations": [
+          "NONNEGATIVE",
+          "TYPE_MATCH"
+        ],
+        "observational_relations": [],
+        "signature": "WRONG_VALUE"
+      },
+      "identifiability": {
+        "chosen_contrast": {
+          "discriminating_facts": [],
+          "gain_log_terms": {},
+          "guaranteed_elimination": 0,
+          "reason": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+          "schema": "PROJECT_BRAIN_CONTRAST_SELECTION_V1",
+          "state": null,
+          "status": "NO_REQUIREMENT_SPACE__NOTHING_TO_DISAMBIGUATE",
+          "survivors_before": 0,
+          "worst_case_survivors_after": null
+        },
+        "interventional_certificate": {
+          "kind": "NO_SUCCESS__NOTHING_TO_SCOPE",
+          "reason": "NO_SUCCESS_TO_SCOPE_FROM",
+          "shared_facts": [],
+          "unrepairable_by_repetition": false,
+          "what_would_repair_it": "AN_OBSERVATION_OF_THE_MISSING_KIND__NOT_A_NEW_OBSERVABLE"
+        },
+        "learn": {
+          "status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+          "survivors": 0
+        },
+        "observational_static_certificate": {
+          "kind": "SAME_OBSERVED_STATE_OPPOSITE_OUTCOMES",
+          "reason": "AN_UNOBSERVED_PRECONDITION_DIFFERS_BETWEEN_THESE_WORLDS",
+          "shared_facts": [
+            "ast.Add",
+            "ast.Assign",
+            "ast.BinOp",
+            "ast.BoolOp",
+            "ast.Call",
+            "ast.Compare",
+            "ast.Constant",
+            "ast.Dict",
+            "ast.Eq",
+            "ast.Expr",
+            "ast.For",
+            "ast.FunctionDef",
+            "ast.If",
+            "ast.IfExp",
+            "ast.ListComp",
+            "ast.Load",
+            "ast.Lt",
+            "ast.Module",
+            "ast.Name",
+            "ast.Or",
+            "ast.Return",
+            "ast.Store",
+            "ast.Subscript",
+            "ast.Tuple",
+            "ast.arg",
+            "ast.arguments",
+            "ast.comprehension"
+          ],
+          "unrepairable_by_repetition": true,
+          "what_would_repair_it": "A_NEW_OBSERVABLE__MORE_RUNS_REPORT_THE_SAME_FACT_VECTOR"
+        },
+        "observational_traced_certificate": null,
+        "permanent_rule_admitted": false
+      },
+      "model_dependency_count": 0,
+      "program_sha256": "fe9e751f62674299be95f5026c30c778ec331eb449caaa9a13f6b2908e44a016",
+      "reason": "ALL_INTERVENTIONALLY_VERIFIED_CANDIDATES_FAILED_AN_INDEPENDENT_VERDICT",
+      "schema": "BRAIN_INTERVENTIONAL_GOAL_V1",
+      "seconds": 0.28,
+      "status": "NOT_REPAIRED__NO_CANDIDATE_PASSED_THE_CORPUS_TEST",
+      "synthesis": {
+        "calculated_weights": {
+          "interventional_fail": {},
+          "interventional_pass": {},
+          "note": "EXACT_INTEGER_COUNTS_OF_EXECUTED_VERDICTS__NO_GRADIENT__NO_FITTED_PARAMETER__ZERO_BY_DEFAULT",
+          "published_only": {
+            "BINARY_OP": 44,
+            "BOOL_OP": 1,
+            "COMPARISON_CLASS": 15,
+            "CONSTANT": 35,
+            "GUARD_INSERT": 2,
+            "NAME_SWAP": 1,
+            "OFFSET": 162
+          },
+          "weights": {}
+        },
+        "candidates": 260,
+        "fresh_verdicts": [],
+        "observational_prior": {
+          "note": "EXACT_COUNTS_OF_EXECUTED_VERDICTS__NO_FITTED_PARAMETERS",
+          "signature": "WRONG_VALUE",
+          "tried": {},
+          "verified": {}
+        },
+        "passed_published_but_refused_by_intervention": 0,
+        "screened": 260,
+        "winning_diff": null,
+        "winning_family": null,
+        "winning_index": null
+      },
+      "task": "lis",
+      "test_sha256": "69763e61b7426521ca6adb5072d2a10527061838534765ab367ea6508bea6ca9"
+    },
+    {
+      "answer_key_absent": true,
+      "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+      "goal": {
+        "callee_signatures": [
+          "longest_common_subsequence/2"
+        ],
+        "cases_passed": 6,
+        "cases_total": 10,
+        "executed_lines": [
+          2,
+          3,
+          5,
+          6,
+          9,
+          10,
+          11,
+          12
+        ],
+        "failing_cases": 4,
+        "intervention_diagnostics": {
+          "inapplicable": {
+            "DUPLICATE_FIRST_ELEMENT": "STRUCTURAL_NOT_APPLICABLE",
+            "REORDER_FIRST_SEQUENCE": "STRUCTURAL_NOT_APPLICABLE"
+          },
+          "induced_relations": [
+            "TYPE_MATCH"
+          ],
+          "invariant_refuted": {}
+        },
+        "intervention_reach": {
+          "IDENTITY": 0,
+          "NEGATE": 0,
+          "SHIFT_HALF": 0,
+          "SUBUNIT_SCALE": 0,
+          "TYPE_LIFT_INT_TO_FLOAT": 0
+        },
+        "intervention_teeth": {
+          "IDENTITY": 1,
+          "NEGATE": 1,
+          "SHIFT_HALF": 1,
+          "SUBUNIT_SCALE": 1,
+          "TYPE_LIFT_INT_TO_FLOAT": 1
+        },
+        "interventional_relations": [
+          "TYPE_MATCH"
+        ],
+        "observational_relations": [],
+        "signature": "COLLECTION_SHAPE"
+      },
+      "identifiability": {
+        "chosen_contrast": {
+          "discriminating_facts": [],
+          "gain_log_terms": {},
+          "guaranteed_elimination": 0,
+          "reason": "INCONSISTENT__NO_REQUIREMENT_EXPLAINS_THE_EVIDENCE",
+          "schema": "PROJECT_BRAIN_CONTRAST_SELECTION_V1",
+          "state": null,
+          "status": "NO_REQUIREMENT_SPACE__NOTHING_TO_DISAMBIGUATE",
+          "survivors_before": 0,
+          "worst_case_survivors_after": null
+        },
+        "interventional_certificate": {
+          "kind": "SAME_OBSERVED_STATE_OPPOSITE_OUTCOMES",
+          "reason": "AN_UNOBSERVED_PRECONDITION_DIFFERS_BETWEEN_THESE_WORLDS",
+          "shared_facts": [
+            "callee.longest_common_subsequence/2",
+            "executed.longest_common_subsequence",
+            "family.OFFSET",
+            "goal.COLLECTION_SHAPE",
+            "position.6"
+          ],
+          "unrepairable_by_repetition": true,
+          "what_would_repair_it": "A_NEW_OBSERVABLE__MORE_RUNS_REPORT_THE_SAME_FACT_VECTOR"
+        },
+        "learn": {
+          "status": "INCONSISTENT__NO_REQUIREMENT_EXPLAINS_THE_EVIDENCE",
+          "survivors": 0
+        },
+        "observational_static_certificate": {
+          "kind": "SAME_OBSERVED_STATE_OPPOSITE_OUTCOMES",
+          "reason": "AN_UNOBSERVED_PRECONDITION_DIFFERS_BETWEEN_THESE_WORLDS",
+          "shared_facts": [
+            "ast.Add",
+            "ast.BinOp",
+            "ast.BoolOp",
+            "ast.Call",
+            "ast.Compare",
+            "ast.Constant",
+            "ast.Eq",
+            "ast.Expr",
+            "ast.FunctionDef",
+            "ast.If",
+            "ast.Load",
+            "ast.Module",
+            "ast.Name",
+            "ast.Not",
+            "ast.Or",
+            "ast.Return",
+            "ast.Slice",
+            "ast.Subscript",
+            "ast.UnaryOp",
+            "ast.arg",
+            "ast.arguments",
+            "ast.keyword"
+          ],
+          "unrepairable_by_repetition": true,
+          "what_would_repair_it": "A_NEW_OBSERVABLE__MORE_RUNS_REPORT_THE_SAME_FACT_VECTOR"
+        },
+        "observational_traced_certificate": {
+          "kind": "SAME_OBSERVED_STATE_OPPOSITE_OUTCOMES",
+          "reason": "AN_UNOBSERVED_PRECONDITION_DIFFERS_BETWEEN_THESE_WORLDS",
+          "shared_facts": [
+            "arg0.type.str",
+            "arg1.type.str",
+            "argcount.2",
+            "executed.longest_common_subsequence",
+            "expected.type.str",
+            "line.10",
+            "line.11",
+            "line.12",
+            "line.2",
+            "line.3",
+            "line.5",
+            "line.6",
+            "line.9",
+            "result.type.str"
+          ],
+          "unrepairable_by_repetition": true,
+          "what_would_repair_it": "A_NEW_OBSERVABLE__MORE_RUNS_REPORT_THE_SAME_FACT_VECTOR"
+        },
+        "permanent_rule_admitted": false
+      },
+      "model_dependency_count": 0,
+      "program_sha256": "93215319e44f895561f14567dd6098e2b8fc04497d4d71f5c21c9267fc2a02da",
+      "reason": "FRESH_COPY_VERDICT_IS_THE_ONLY_EVIDENCE",
+      "schema": "BRAIN_INTERVENTIONAL_GOAL_V1",
+      "seconds": 4.14,
+      "status": "REPAIRED__CORPUS_TEST_PASSES",
+      "synthesis": {
+        "calculated_weights": {
+          "interventional_fail": {},
+          "interventional_pass": {
+            "OFFSET": 1
+          },
+          "note": "EXACT_INTEGER_COUNTS_OF_EXECUTED_VERDICTS__NO_GRADIENT__NO_FITTED_PARAMETER__ZERO_BY_DEFAULT",
+          "published_only": {
+            "CONSTANT": 140,
+            "OFFSET": 119
+          },
+          "weights": {
+            "OFFSET": 1
+          }
+        },
+        "candidates": 260,
+        "fresh_verdicts": [
+          {
+            "description": "OFFSET@args[1]:Name",
+            "family": "OFFSET",
+            "returncode": 0,
+            "seconds": 0.3,
+            "tail": [
+              "..........                                                               [100%]",
+              "10 passed in 0.12s"
+            ],
+            "timed_out": false
+          }
+        ],
+        "observational_prior": {
+          "note": "EXACT_COUNTS_OF_EXECUTED_VERDICTS__NO_FITTED_PARAMETERS",
+          "signature": "COLLECTION_SHAPE",
+          "tried": {},
+          "verified": {}
+        },
+        "passed_published_but_refused_by_intervention": 0,
+        "screened": 260,
+        "winning_diff": "--- published_buggy\n+++ candidate\n@@ -3,7 +3,7 @@\n         return ''\n \n     elif a[0] == b[0]:\n-        return a[0] + longest_common_subsequence(a[1:], b)\n+        return a[0] + longest_common_subsequence(a[1:], b[1:])\n \n     else:\n         return max(",
+        "winning_family": "OFFSET",
+        "winning_index": 72
+      },
+      "task": "longest_common_subsequence",
+      "test_sha256": "68776892aaab10564899a4193035455f955eec78df9f11c764cf9920aff95dc8"
+    },
+    {
+      "answer_key_absent": true,
+      "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+      "goal": {
+        "callee_signatures": [],
+        "cases_passed": 0,
+        "cases_total": 0,
+        "executed_lines": [],
+        "failing_cases": 0,
+        "intervention_diagnostics": {},
+        "intervention_reach": {},
+        "intervention_teeth": {},
+        "interventional_relations": [],
+        "observational_relations": [],
+        "signature": null
+      },
+      "identifiability": {
+        "chosen_contrast": null,
+        "interventional_certificate": null,
+        "learn": null,
+        "observational_static_certificate": null,
+        "observational_traced_certificate": null,
+        "permanent_rule_admitted": false
+      },
+      "model_dependency_count": 0,
+      "program_sha256": "e99679a54634bc940a78c1f211e6126f5119a7654a089d1f56f264a1deaa0ce2",
+      "reason": "THIS_TASK_HAS_NO_EXECUTABLE_PUBLISHED_CONTRACT_DATA",
+      "schema": "BRAIN_INTERVENTIONAL_GOAL_V1",
+      "seconds": 0.0,
+      "status": "UNMEASURABLE__NO_PUBLISHED_JSON_CASES",
+      "synthesis": {
+        "calculated_weights": null,
+        "candidates": 0,
+        "fresh_verdicts": [],
+        "observational_prior": null,
+        "passed_published_but_refused_by_intervention": 0,
+        "screened": 0,
+        "winning_diff": null,
+        "winning_family": null,
+        "winning_index": null
+      },
+      "task": "shortest_paths",
+      "test_sha256": "8ee521556000dc6bcf4ae71c6db0f91c387f96e055557ec1accdde824928b4f8"
+    },
+    {
+      "answer_key_absent": true,
+      "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+      "goal": {
+        "callee_signatures": [
+          "possible_change/2"
+        ],
+        "cases_passed": 1,
+        "cases_total": 10,
+        "executed_lines": [
+          3,
+          4,
+          5,
+          6,
+          8,
+          9
+        ],
+        "failing_cases": 9,
+        "intervention_diagnostics": {
+          "inapplicable": {},
+          "induced_relations": [
+            "NONNEGATIVE",
+            "TYPE_MATCH"
+          ],
+          "invariant_refuted": {
+            "NEGATE": [
+              "NONNEGATIVE"
+            ]
+          }
+        },
+        "intervention_reach": {
+          "DUPLICATE_FIRST_ELEMENT": 0,
+          "IDENTITY": 0,
+          "NEGATE": 0,
+          "REORDER_FIRST_SEQUENCE": 0,
+          "SHIFT_HALF": 0,
+          "SUBUNIT_SCALE": 0,
+          "TYPE_LIFT_INT_TO_FLOAT": 0
+        },
+        "intervention_teeth": {
+          "DUPLICATE_FIRST_ELEMENT": 9,
+          "IDENTITY": 9,
+          "NEGATE": 1,
+          "REORDER_FIRST_SEQUENCE": 9,
+          "SHIFT_HALF": 9,
+          "SUBUNIT_SCALE": 9,
+          "TYPE_LIFT_INT_TO_FLOAT": 9
+        },
+        "interventional_relations": [
+          "NONNEGATIVE",
+          "TYPE_MATCH"
+        ],
+        "observational_relations": [],
+        "signature": "EXCEPTION"
+      },
+      "identifiability": {
+        "chosen_contrast": {
+          "discriminating_facts": [],
+          "gain_log_terms": {},
+          "guaranteed_elimination": 0,
+          "reason": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+          "schema": "PROJECT_BRAIN_CONTRAST_SELECTION_V1",
+          "state": null,
+          "status": "NO_REQUIREMENT_SPACE__NOTHING_TO_DISAMBIGUATE",
+          "survivors_before": 0,
+          "worst_case_survivors_after": null
+        },
+        "interventional_certificate": {
+          "kind": "NO_SUCCESS__NOTHING_TO_SCOPE",
+          "reason": "NO_SUCCESS_TO_SCOPE_FROM",
+          "shared_facts": [],
+          "unrepairable_by_repetition": false,
+          "what_would_repair_it": "AN_OBSERVATION_OF_THE_MISSING_KIND__NOT_A_NEW_OBSERVABLE"
+        },
+        "learn": {
+          "status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+          "survivors": 0
+        },
+        "observational_static_certificate": {
+          "kind": "SAME_OBSERVED_STATE_OPPOSITE_OUTCOMES",
+          "reason": "AN_UNOBSERVED_PRECONDITION_DIFFERS_BETWEEN_THESE_WORLDS",
+          "shared_facts": [
+            "ast.Add",
+            "ast.Assign",
+            "ast.BinOp",
+            "ast.Call",
+            "ast.Compare",
+            "ast.Constant",
+            "ast.Eq",
+            "ast.Expr",
+            "ast.FunctionDef",
+            "ast.If",
+            "ast.Load",
+            "ast.Lt",
+            "ast.Module",
+            "ast.Name",
+            "ast.Return",
+            "ast.Starred",
+            "ast.Store",
+            "ast.Sub",
+            "ast.Tuple",
+            "ast.arg",
+            "ast.arguments"
+          ],
+          "unrepairable_by_repetition": true,
+          "what_would_repair_it": "A_NEW_OBSERVABLE__MORE_RUNS_REPORT_THE_SAME_FACT_VECTOR"
+        },
+        "observational_traced_certificate": null,
+        "permanent_rule_admitted": false
+      },
+      "model_dependency_count": 0,
+      "program_sha256": "e21854dbb1a8f299bab639e71797a14989ab6bd6b700665a2056c48a70154917",
+      "reason": "ALL_INTERVENTIONALLY_VERIFIED_CANDIDATES_FAILED_AN_INDEPENDENT_VERDICT",
+      "schema": "BRAIN_INTERVENTIONAL_GOAL_V1",
+      "seconds": 0.24,
+      "status": "NOT_REPAIRED__NO_CANDIDATE_PASSED_THE_CORPUS_TEST",
+      "synthesis": {
+        "calculated_weights": {
+          "interventional_fail": {},
+          "interventional_pass": {},
+          "note": "EXACT_INTEGER_COUNTS_OF_EXECUTED_VERDICTS__NO_GRADIENT__NO_FITTED_PARAMETER__ZERO_BY_DEFAULT",
+          "published_only": {
+            "BINARY_OP": 22,
+            "COMPARISON_CLASS": 10,
+            "CONSTANT": 57,
+            "GUARD_INSERT": 2,
+            "OFFSET": 70
+          },
+          "weights": {}
+        },
+        "candidates": 161,
+        "fresh_verdicts": [],
+        "observational_prior": {
+          "note": "EXACT_COUNTS_OF_EXECUTED_VERDICTS__NO_FITTED_PARAMETERS",
+          "signature": "EXCEPTION",
+          "tried": {},
+          "verified": {}
+        },
+        "passed_published_but_refused_by_intervention": 0,
+        "screened": 161,
+        "winning_diff": null,
+        "winning_family": null,
+        "winning_index": null
+      },
+      "task": "possible_change",
+      "test_sha256": "655305d59309352913a710d9bdde631191c83c80a76e78df36d58c7c5c0a964b"
+    },
+    {
+      "answer_key_absent": true,
+      "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+      "goal": {
+        "callee_signatures": [
+          "<listcomp>/1",
+          "powerset/1"
+        ],
+        "cases_passed": 1,
+        "cases_total": 5,
+        "executed_lines": [
+          3,
+          4,
+          5,
+          6,
+          8
+        ],
+        "failing_cases": 4,
+        "intervention_diagnostics": {
+          "inapplicable": {
+            "DUPLICATE_FIRST_ELEMENT": "STRUCTURAL_NOT_APPLICABLE",
+            "REORDER_FIRST_SEQUENCE": "STRUCTURAL_NOT_APPLICABLE"
+          },
+          "induced_relations": [
+            "TYPE_MATCH"
+          ],
+          "invariant_refuted": {}
+        },
+        "intervention_reach": {
+          "IDENTITY": 0,
+          "NEGATE": 0,
+          "SHIFT_HALF": 0,
+          "SUBUNIT_SCALE": 0,
+          "TYPE_LIFT_INT_TO_FLOAT": 0
+        },
+        "intervention_teeth": {
+          "IDENTITY": 0,
+          "NEGATE": 0,
+          "SHIFT_HALF": 0,
+          "SUBUNIT_SCALE": 0,
+          "TYPE_LIFT_INT_TO_FLOAT": 0
+        },
+        "interventional_relations": [
+          "TYPE_MATCH"
+        ],
+        "observational_relations": [],
+        "signature": "COLLECTION_SHAPE"
+      },
+      "identifiability": {
+        "chosen_contrast": {
+          "discriminating_facts": [],
+          "gain_log_terms": {},
+          "guaranteed_elimination": 0,
+          "reason": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+          "schema": "PROJECT_BRAIN_CONTRAST_SELECTION_V1",
+          "state": null,
+          "status": "NO_REQUIREMENT_SPACE__NOTHING_TO_DISAMBIGUATE",
+          "survivors_before": 0,
+          "worst_case_survivors_after": null
+        },
+        "interventional_certificate": {
+          "kind": "NO_SUCCESS__NOTHING_TO_SCOPE",
+          "reason": "NO_SUCCESS_TO_SCOPE_FROM",
+          "shared_facts": [],
+          "unrepairable_by_repetition": false,
+          "what_would_repair_it": "AN_OBSERVATION_OF_THE_MISSING_KIND__NOT_A_NEW_OBSERVABLE"
+        },
+        "learn": {
+          "status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+          "survivors": 0
+        },
+        "observational_static_certificate": {
+          "kind": "SAME_OBSERVED_STATE_OPPOSITE_OUTCOMES",
+          "reason": "AN_UNOBSERVED_PRECONDITION_DIFFERS_BETWEEN_THESE_WORLDS",
+          "shared_facts": [
+            "ast.Add",
+            "ast.Assign",
+            "ast.BinOp",
+            "ast.Call",
+            "ast.Constant",
+            "ast.Expr",
+            "ast.FunctionDef",
+            "ast.If",
+            "ast.List",
+            "ast.ListComp",
+            "ast.Load",
+            "ast.Module",
+            "ast.Name",
+            "ast.Return",
+            "ast.Starred",
+            "ast.Store",
+            "ast.Tuple",
+            "ast.arg",
+            "ast.arguments",
+            "ast.comprehension"
+          ],
+          "unrepairable_by_repetition": true,
+          "what_would_repair_it": "A_NEW_OBSERVABLE__MORE_RUNS_REPORT_THE_SAME_FACT_VECTOR"
+        },
+        "observational_traced_certificate": {
+          "kind": "SEPARATION_IMPOSSIBLE__EVERY_FACT_ALL_SUCCESSES_SHARE_A_FAILURE_ALSO_HAS",
+          "reason": "THE_FACTS_ALL_SUCCESSES_AGREE_ON_ARE_FACTS_A_FAILURE_ALSO_HAS",
+          "shared_facts": [
+            "arg0.type.list",
+            "argcount.1",
+            "executed.powerset",
+            "expected.type.list",
+            "line.3",
+            "line.8",
+            "result.type.list"
+          ],
+          "unrepairable_by_repetition": true,
+          "what_would_repair_it": "A_NEW_OBSERVABLE__MORE_RUNS_REPORT_THE_SAME_FACT_VECTOR"
+        },
+        "permanent_rule_admitted": false
+      },
+      "model_dependency_count": 0,
+      "program_sha256": "3e3deb045ed61fbe82725cd7e7b0fb4d00f411f87f0f91358109ec0204c61ae9",
+      "reason": "ALL_INTERVENTIONALLY_VERIFIED_CANDIDATES_FAILED_AN_INDEPENDENT_VERDICT",
+      "schema": "BRAIN_INTERVENTIONAL_GOAL_V1",
+      "seconds": 0.16,
+      "status": "NOT_REPAIRED__NO_CANDIDATE_PASSED_THE_CORPUS_TEST",
+      "synthesis": {
+        "calculated_weights": {
+          "interventional_fail": {},
+          "interventional_pass": {},
+          "note": "EXACT_INTEGER_COUNTS_OF_EXECUTED_VERDICTS__NO_GRADIENT__NO_FITTED_PARAMETER__ZERO_BY_DEFAULT",
+          "published_only": {
+            "BINARY_OP": 11,
+            "OFFSET": 49
+          },
+          "weights": {}
+        },
+        "candidates": 60,
+        "fresh_verdicts": [],
+        "observational_prior": {
+          "note": "EXACT_COUNTS_OF_EXECUTED_VERDICTS__NO_FITTED_PARAMETERS",
+          "signature": "COLLECTION_SHAPE",
+          "tried": {},
+          "verified": {}
+        },
+        "passed_published_but_refused_by_intervention": 0,
+        "screened": 60,
+        "winning_diff": null,
+        "winning_family": null,
+        "winning_index": null
+      },
+      "task": "powerset",
+      "test_sha256": "9b0b816ba26a0a14fc8387946a2c1f08a85cb7c4e5d0c52c29e9fd640ae89d4e"
+    },
+    {
+      "answer_key_absent": true,
+      "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+      "goal": {
+        "callee_signatures": [
+          "bucketsort/2"
+        ],
+        "cases_passed": 1,
+        "cases_total": 7,
+        "executed_lines": [
+          2,
+          3,
+          4,
+          6,
+          7,
+          8,
+          10
+        ],
+        "failing_cases": 6,
+        "intervention_diagnostics": {
+          "inapplicable": {
+            "DUPLICATE_FIRST_ELEMENT": "STRUCTURAL_NOT_APPLICABLE",
+            "REORDER_FIRST_SEQUENCE": "STRUCTURAL_NOT_APPLICABLE"
+          },
+          "induced_relations": [
+            "LEN_MATCHES_INPUT",
+            "PERMUTATION_OF_INPUT",
+            "SORTED_OUTPUT",
+            "TYPE_MATCH"
+          ],
+          "invariant_refuted": {}
+        },
+        "intervention_reach": {
+          "IDENTITY": 0,
+          "NEGATE": 0,
+          "SHIFT_HALF": 0,
+          "SUBUNIT_SCALE": 0,
+          "TYPE_LIFT_INT_TO_FLOAT": 0
+        },
+        "intervention_teeth": {
+          "IDENTITY": 12,
+          "NEGATE": 7,
+          "SHIFT_HALF": 7,
+          "SUBUNIT_SCALE": 7,
+          "TYPE_LIFT_INT_TO_FLOAT": 7
+        },
+        "interventional_relations": [
+          "LEN_MATCHES_INPUT",
+          "PERMUTATION_OF_INPUT",
+          "SORTED_OUTPUT",
+          "TYPE_MATCH"
+        ],
+        "observational_relations": [
+          "LEN_MATCHES_INPUT",
+          "PERMUTATION_OF_INPUT"
+        ],
+        "signature": "COLLECTION_SHAPE"
+      },
+      "identifiability": {
+        "chosen_contrast": {
+          "discriminating_facts": [],
+          "gain_log_terms": {},
+          "guaranteed_elimination": 0,
+          "reason": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+          "schema": "PROJECT_BRAIN_CONTRAST_SELECTION_V1",
+          "state": null,
+          "status": "NO_REQUIREMENT_SPACE__NOTHING_TO_DISAMBIGUATE",
+          "survivors_before": 0,
+          "worst_case_survivors_after": null
+        },
+        "interventional_certificate": {
+          "kind": "NO_SUCCESS__NOTHING_TO_SCOPE",
+          "reason": "NO_SUCCESS_TO_SCOPE_FROM",
+          "shared_facts": [],
+          "unrepairable_by_repetition": false,
+          "what_would_repair_it": "AN_OBSERVATION_OF_THE_MISSING_KIND__NOT_A_NEW_OBSERVABLE"
+        },
+        "learn": {
+          "status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+          "survivors": 0
+        },
+        "observational_static_certificate": {
+          "kind": "SAME_OBSERVED_STATE_OPPOSITE_OUTCOMES",
+          "reason": "AN_UNOBSERVED_PRECONDITION_DIFFERS_BETWEEN_THESE_WORLDS",
+          "shared_facts": [
+            "ast.Add",
+            "ast.Assign",
+            "ast.Attribute",
+            "ast.AugAssign",
+            "ast.BinOp",
+            "ast.Call",
+            "ast.Constant",
+            "ast.Expr",
+            "ast.For",
+            "ast.FunctionDef",
+            "ast.List",
+            "ast.Load",
+            "ast.Module",
+            "ast.Mult",
+            "ast.Name",
+            "ast.Return",
+            "ast.Store",
+            "ast.Subscript",
+            "ast.Tuple",
+            "ast.arg",
+            "ast.arguments"
+          ],
+          "unrepairable_by_repetition": true,
+          "what_would_repair_it": "A_NEW_OBSERVABLE__MORE_RUNS_REPORT_THE_SAME_FACT_VECTOR"
+        },
+        "observational_traced_certificate": {
+          "kind": "SEPARATION_IMPOSSIBLE__EVERY_FACT_ALL_SUCCESSES_SHARE_A_FAILURE_ALSO_HAS",
+          "reason": "THE_FACTS_ALL_SUCCESSES_AGREE_ON_ARE_FACTS_A_FAILURE_ALSO_HAS",
+          "shared_facts": [
+            "arg0.type.list",
+            "arg1.type.int",
+            "argcount.2",
+            "executed.bucketsort",
+            "expected.type.list",
+            "line.10",
+            "line.2",
+            "line.3",
+            "line.6",
+            "line.7",
+            "result.type.list"
+          ],
+          "unrepairable_by_repetition": true,
+          "what_would_repair_it": "A_NEW_OBSERVABLE__MORE_RUNS_REPORT_THE_SAME_FACT_VECTOR"
+        },
+        "permanent_rule_admitted": false
+      },
+      "model_dependency_count": 0,
+      "program_sha256": "1cc4197c2ee524ec8dd3a45c0e943acf31fa429cb8b179195334f51ff939b9fd",
+      "reason": "ALL_INTERVENTIONALLY_VERIFIED_CANDIDATES_FAILED_AN_INDEPENDENT_VERDICT",
+      "schema": "BRAIN_INTERVENTIONAL_GOAL_V1",
+      "seconds": 0.2,
+      "status": "NOT_REPAIRED__NO_CANDIDATE_PASSED_THE_CORPUS_TEST",
+      "synthesis": {
+        "calculated_weights": {
+          "interventional_fail": {},
+          "interventional_pass": {},
+          "note": "EXACT_INTEGER_COUNTS_OF_EXECUTED_VERDICTS__NO_GRADIENT__NO_FITTED_PARAMETER__ZERO_BY_DEFAULT",
+          "published_only": {
+            "AUG_ASSIGN_OP": 11,
+            "BINARY_OP": 22,
+            "CONSTANT": 12,
+            "GUARD_INSERT": 2,
+            "OFFSET": 79
+          },
+          "weights": {}
+        },
+        "candidates": 126,
+        "fresh_verdicts": [],
+        "observational_prior": {
+          "note": "EXACT_COUNTS_OF_EXECUTED_VERDICTS__NO_FITTED_PARAMETERS",
+          "signature": "COLLECTION_SHAPE",
+          "tried": {},
+          "verified": {}
+        },
+        "passed_published_but_refused_by_intervention": 0,
+        "screened": 126,
+        "winning_diff": null,
+        "winning_family": null,
+        "winning_index": null
+      },
+      "task": "bucketsort",
+      "test_sha256": "b5f3915b983f869cd87935c4b82246695aedc03400fe44114f7352dc02a6e65e"
+    },
+    {
+      "answer_key_absent": true,
+      "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+      "goal": {
+        "callee_signatures": [
+          "wrap/2"
+        ],
+        "cases_passed": 0,
+        "cases_total": 5,
+        "executed_lines": [
+          2,
+          3,
+          4,
+          5,
+          7,
+          8,
+          10
+        ],
+        "failing_cases": 5,
+        "intervention_diagnostics": {
+          "inapplicable": {
+            "DUPLICATE_FIRST_ELEMENT": "STRUCTURAL_NOT_APPLICABLE",
+            "REORDER_FIRST_SEQUENCE": "STRUCTURAL_NOT_APPLICABLE"
+          },
+          "induced_relations": [
+            "TYPE_MATCH"
+          ],
+          "invariant_refuted": {}
+        },
+        "intervention_reach": {
+          "IDENTITY": 0,
+          "NEGATE": 0,
+          "SHIFT_HALF": 0,
+          "SUBUNIT_SCALE": 0,
+          "TYPE_LIFT_INT_TO_FLOAT": 0
+        },
+        "intervention_teeth": {
+          "IDENTITY": 0,
+          "NEGATE": 5,
+          "SHIFT_HALF": 5,
+          "SUBUNIT_SCALE": 5,
+          "TYPE_LIFT_INT_TO_FLOAT": 5
+        },
+        "interventional_relations": [
+          "TYPE_MATCH"
+        ],
+        "observational_relations": [],
+        "signature": "COLLECTION_SHAPE"
+      },
+      "identifiability": {
+        "chosen_contrast": {
+          "discriminating_facts": [],
+          "gain_log_terms": {},
+          "guaranteed_elimination": 0,
+          "reason": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+          "schema": "PROJECT_BRAIN_CONTRAST_SELECTION_V1",
+          "state": null,
+          "status": "NO_REQUIREMENT_SPACE__NOTHING_TO_DISAMBIGUATE",
+          "survivors_before": 0,
+          "worst_case_survivors_after": null
+        },
+        "interventional_certificate": {
+          "kind": "NO_SUCCESS__NOTHING_TO_SCOPE",
+          "reason": "NO_SUCCESS_TO_SCOPE_FROM",
+          "shared_facts": [],
+          "unrepairable_by_repetition": false,
+          "what_would_repair_it": "AN_OBSERVATION_OF_THE_MISSING_KIND__NOT_A_NEW_OBSERVABLE"
+        },
+        "learn": {
+          "status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+          "survivors": 0
+        },
+        "observational_static_certificate": {
+          "kind": "NO_SUCCESS__NOTHING_TO_SCOPE",
+          "reason": "NO_SUCCESS_TO_SCOPE_FROM",
+          "shared_facts": [],
+          "unrepairable_by_repetition": false,
+          "what_would_repair_it": "AN_OBSERVATION_OF_THE_MISSING_KIND__NOT_A_NEW_OBSERVABLE"
+        },
+        "observational_traced_certificate": {
+          "kind": "NO_SUCCESS__NOTHING_TO_SCOPE",
+          "reason": "NO_SUCCESS_TO_SCOPE_FROM",
+          "shared_facts": [],
+          "unrepairable_by_repetition": false,
+          "what_would_repair_it": "AN_OBSERVATION_OF_THE_MISSING_KIND__NOT_A_NEW_OBSERVABLE"
+        },
+        "permanent_rule_admitted": false
+      },
+      "model_dependency_count": 0,
+      "program_sha256": "eb76433536ae58fa2955fbe053a8f9e45e7deb7d3894048acb7cdab13f1f5282",
+      "reason": "ALL_INTERVENTIONALLY_VERIFIED_CANDIDATES_FAILED_AN_INDEPENDENT_VERDICT",
+      "schema": "BRAIN_INTERVENTIONAL_GOAL_V1",
+      "seconds": 0.36,
+      "status": "NOT_REPAIRED__NO_CANDIDATE_PASSED_THE_CORPUS_TEST",
+      "synthesis": {
+        "calculated_weights": {
+          "interventional_fail": {},
+          "interventional_pass": {},
+          "note": "EXACT_INTEGER_COUNTS_OF_EXECUTED_VERDICTS__NO_GRADIENT__NO_FITTED_PARAMETER__ZERO_BY_DEFAULT",
+          "published_only": {
+            "BINARY_OP": 11,
+            "COMPARISON_CLASS": 10,
+            "CONSTANT": 24,
+            "NAME_SWAP": 1,
+            "OFFSET": 98
+          },
+          "weights": {}
+        },
+        "candidates": 144,
+        "fresh_verdicts": [],
+        "observational_prior": {
+          "note": "EXACT_COUNTS_OF_EXECUTED_VERDICTS__NO_FITTED_PARAMETERS",
+          "signature": "COLLECTION_SHAPE",
+          "tried": {},
+          "verified": {}
+        },
+        "passed_published_but_refused_by_intervention": 0,
+        "screened": 144,
+        "winning_diff": null,
+        "winning_family": null,
+        "winning_index": null
+      },
+      "task": "wrap",
+      "test_sha256": "c23a0d457eeec036cedb3296a935231d0d92a5e6334d93172fc8dd79f9abe5e9"
+    },
+    {
+      "answer_key_absent": true,
+      "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+      "goal": {
+        "callee_signatures": [
+          "shunting_yard/1"
+        ],
+        "cases_passed": 2,
+        "cases_total": 6,
+        "executed_lines": [
+          3,
+          4,
+          5,
+          6,
+          7,
+          10,
+          11,
+          12,
+          13,
+          14,
+          16,
+          19,
+          22
+        ],
+        "failing_cases": 4,
+        "intervention_diagnostics": {
+          "inapplicable": {
+            "DUPLICATE_FIRST_ELEMENT": "STRUCTURAL_NOT_APPLICABLE",
+            "REORDER_FIRST_SEQUENCE": "STRUCTURAL_NOT_APPLICABLE"
+          },
+          "induced_relations": [
+            "TYPE_MATCH"
+          ],
+          "invariant_refuted": {}
+        },
+        "intervention_reach": {
+          "IDENTITY": 0,
+          "NEGATE": 0,
+          "SHIFT_HALF": 0,
+          "SUBUNIT_SCALE": 0,
+          "TYPE_LIFT_INT_TO_FLOAT": 0
+        },
+        "intervention_teeth": {
+          "IDENTITY": 0,
+          "NEGATE": 0,
+          "SHIFT_HALF": 0,
+          "SUBUNIT_SCALE": 0,
+          "TYPE_LIFT_INT_TO_FLOAT": 0
+        },
+        "interventional_relations": [
+          "TYPE_MATCH"
+        ],
+        "observational_relations": [],
+        "signature": "COLLECTION_SHAPE"
+      },
+      "identifiability": {
+        "chosen_contrast": {
+          "discriminating_facts": [],
+          "gain_log_terms": {},
+          "guaranteed_elimination": 0,
+          "reason": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+          "schema": "PROJECT_BRAIN_CONTRAST_SELECTION_V1",
+          "state": null,
+          "status": "NO_REQUIREMENT_SPACE__NOTHING_TO_DISAMBIGUATE",
+          "survivors_before": 0,
+          "worst_case_survivors_after": null
+        },
+        "interventional_certificate": {
+          "kind": "NO_SUCCESS__NOTHING_TO_SCOPE",
+          "reason": "NO_SUCCESS_TO_SCOPE_FROM",
+          "shared_facts": [],
+          "unrepairable_by_repetition": false,
+          "what_would_repair_it": "AN_OBSERVATION_OF_THE_MISSING_KIND__NOT_A_NEW_OBSERVABLE"
+        },
+        "learn": {
+          "status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+          "survivors": 0
+        },
+        "observational_static_certificate": {
+          "kind": "SAME_OBSERVED_STATE_OPPOSITE_OUTCOMES",
+          "reason": "AN_UNOBSERVED_PRECONDITION_DIFFERS_BETWEEN_THESE_WORLDS",
+          "shared_facts": [
+            "ast.And",
+            "ast.Assign",
+            "ast.Attribute",
+            "ast.BoolOp",
+            "ast.Call",
+            "ast.Compare",
+            "ast.Constant",
+            "ast.Dict",
+            "ast.Expr",
+            "ast.For",
+            "ast.FunctionDef",
+            "ast.If",
+            "ast.List",
+            "ast.Load",
+            "ast.LtE",
+            "ast.Module",
+            "ast.Name",
+            "ast.Return",
+            "ast.Store",
+            "ast.Subscript",
+            "ast.USub",
+            "ast.UnaryOp",
+            "ast.While",
+            "ast.arg",
+            "ast.arguments"
+          ],
+          "unrepairable_by_repetition": true,
+          "what_would_repair_it": "A_NEW_OBSERVABLE__MORE_RUNS_REPORT_THE_SAME_FACT_VECTOR"
+        },
+        "observational_traced_certificate": {
+          "kind": "SEPARATION_IMPOSSIBLE__EVERY_FACT_ALL_SUCCESSES_SHARE_A_FAILURE_ALSO_HAS",
+          "reason": "THE_FACTS_ALL_SUCCESSES_AGREE_ON_ARE_FACTS_A_FAILURE_ALSO_HAS",
+          "shared_facts": [
+            "arg0.type.list",
+            "argcount.1",
+            "executed.shunting_yard",
+            "expected.type.list",
+            "line.10",
+            "line.11",
+            "line.12",
+            "line.19",
+            "line.22",
+            "line.3",
+            "line.4",
+            "line.5",
+            "line.6",
+            "line.7",
+            "result.type.list"
+          ],
+          "unrepairable_by_repetition": true,
+          "what_would_repair_it": "A_NEW_OBSERVABLE__MORE_RUNS_REPORT_THE_SAME_FACT_VECTOR"
+        },
+        "permanent_rule_admitted": false
+      },
+      "model_dependency_count": 0,
+      "program_sha256": "b010f04bbfc6158888d97498cc8e0adb323b9f8285fbf5b908c7d4c8c48cfb68",
+      "reason": "ALL_INTERVENTIONALLY_VERIFIED_CANDIDATES_FAILED_AN_INDEPENDENT_VERDICT",
+      "schema": "BRAIN_INTERVENTIONAL_GOAL_V1",
+      "seconds": 0.2,
+      "status": "NOT_REPAIRED__NO_CANDIDATE_PASSED_THE_CORPUS_TEST",
+      "synthesis": {
+        "calculated_weights": {
+          "interventional_fail": {},
+          "interventional_pass": {},
+          "note": "EXACT_INTEGER_COUNTS_OF_EXECUTED_VERDICTS__NO_GRADIENT__NO_FITTED_PARAMETER__ZERO_BY_DEFAULT",
+          "published_only": {
+            "BOOL_OP": 1,
+            "COMPARISON_CLASS": 5,
+            "GUARD_INSERT": 2,
+            "OFFSET": 112
+          },
+          "weights": {}
+        },
+        "candidates": 120,
+        "fresh_verdicts": [],
+        "observational_prior": {
+          "note": "EXACT_COUNTS_OF_EXECUTED_VERDICTS__NO_FITTED_PARAMETERS",
+          "signature": "COLLECTION_SHAPE",
+          "tried": {},
+          "verified": {}
+        },
+        "passed_published_but_refused_by_intervention": 0,
+        "screened": 120,
+        "winning_diff": null,
+        "winning_family": null,
+        "winning_index": null
+      },
+      "task": "shunting_yard",
+      "test_sha256": "6573899a42a8fa12a7b868b863abad256fda5bddc1c07f147c9818fbf3c6cef1"
+    },
+    {
+      "answer_key_absent": true,
+      "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+      "goal": {
+        "callee_signatures": [
+          "hanoi/3"
+        ],
+        "cases_passed": 1,
+        "cases_total": 8,
+        "executed_lines": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          9
+        ],
+        "failing_cases": 7,
+        "intervention_diagnostics": {
+          "inapplicable": {
+            "DUPLICATE_FIRST_ELEMENT": "STRUCTURAL_NOT_APPLICABLE",
+            "REORDER_FIRST_SEQUENCE": "STRUCTURAL_NOT_APPLICABLE"
+          },
+          "induced_relations": [
+            "TYPE_MATCH"
+          ],
+          "invariant_refuted": {}
+        },
+        "intervention_reach": {
+          "IDENTITY": 0,
+          "NEGATE": 0,
+          "SHIFT_HALF": 0,
+          "SUBUNIT_SCALE": 0,
+          "TYPE_LIFT_INT_TO_FLOAT": 0
+        },
+        "intervention_teeth": {
+          "IDENTITY": 0,
+          "NEGATE": 0,
+          "SHIFT_HALF": 0,
+          "SUBUNIT_SCALE": 0,
+          "TYPE_LIFT_INT_TO_FLOAT": 0
+        },
+        "interventional_relations": [
+          "TYPE_MATCH"
+        ],
+        "observational_relations": [],
+        "signature": "COLLECTION_SHAPE"
+      },
+      "identifiability": {
+        "chosen_contrast": {
+          "discriminating_facts": [],
+          "gain_log_terms": {},
+          "guaranteed_elimination": 0,
+          "reason": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+          "schema": "PROJECT_BRAIN_CONTRAST_SELECTION_V1",
+          "state": null,
+          "status": "NO_REQUIREMENT_SPACE__NOTHING_TO_DISAMBIGUATE",
+          "survivors_before": 0,
+          "worst_case_survivors_after": null
+        },
+        "interventional_certificate": {
+          "kind": "NO_SUCCESS__NOTHING_TO_SCOPE",
+          "reason": "NO_SUCCESS_TO_SCOPE_FROM",
+          "shared_facts": [],
+          "unrepairable_by_repetition": false,
+          "what_would_repair_it": "AN_OBSERVATION_OF_THE_MISSING_KIND__NOT_A_NEW_OBSERVABLE"
+        },
+        "learn": {
+          "status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+          "survivors": 0
+        },
+        "observational_static_certificate": {
+          "kind": "SAME_OBSERVED_STATE_OPPOSITE_OUTCOMES",
+          "reason": "AN_UNOBSERVED_PRECONDITION_DIFFERS_BETWEEN_THESE_WORLDS",
+          "shared_facts": [
+            "ast.Assign",
+            "ast.Attribute",
+            "ast.BinOp",
+            "ast.Call",
+            "ast.Compare",
+            "ast.Constant",
+            "ast.Expr",
+            "ast.FunctionDef",
+            "ast.Gt",
+            "ast.If",
+            "ast.List",
+            "ast.Load",
+            "ast.Module",
+            "ast.Name",
+            "ast.Return",
+            "ast.Set",
+            "ast.Store",
+            "ast.Sub",
+            "ast.Tuple",
+            "ast.arg",
+            "ast.arguments"
+          ],
+          "unrepairable_by_repetition": true,
+          "what_would_repair_it": "A_NEW_OBSERVABLE__MORE_RUNS_REPORT_THE_SAME_FACT_VECTOR"
+        },
+        "observational_traced_certificate": {
+          "kind": "SEPARATION_IMPOSSIBLE__EVERY_FACT_ALL_SUCCESSES_SHARE_A_FAILURE_ALSO_HAS",
+          "reason": "THE_FACTS_ALL_SUCCESSES_AGREE_ON_ARE_FACTS_A_FAILURE_ALSO_HAS",
+          "shared_facts": [
+            "arg0.type.int",
+            "arg1.type.int",
+            "arg2.type.int",
+            "argcount.3",
+            "executed.hanoi",
+            "expected.type.list",
+            "line.2",
+            "line.3",
+            "line.9",
+            "result.type.list"
+          ],
+          "unrepairable_by_repetition": true,
+          "what_would_repair_it": "A_NEW_OBSERVABLE__MORE_RUNS_REPORT_THE_SAME_FACT_VECTOR"
+        },
+        "permanent_rule_admitted": false
+      },
+      "model_dependency_count": 0,
+      "program_sha256": "edd1ceeb79b556a6d15e3bc21f625c5776b46c10f94a754531d39a6f7e120f9e",
+      "reason": "ALL_INTERVENTIONALLY_VERIFIED_CANDIDATES_FAILED_AN_INDEPENDENT_VERDICT",
+      "schema": "BRAIN_INTERVENTIONAL_GOAL_V1",
+      "seconds": 0.27,
+      "status": "NOT_REPAIRED__NO_CANDIDATE_PASSED_THE_CORPUS_TEST",
+      "synthesis": {
+        "calculated_weights": {
+          "interventional_fail": {},
+          "interventional_pass": {},
+          "note": "EXACT_INTEGER_COUNTS_OF_EXECUTED_VERDICTS__NO_GRADIENT__NO_FITTED_PARAMETER__ZERO_BY_DEFAULT",
+          "published_only": {
+            "BINARY_OP": 44,
+            "COMPARISON_CLASS": 5,
+            "CONSTANT": 24,
+            "GUARD_INSERT": 2,
+            "OFFSET": 124
+          },
+          "weights": {}
+        },
+        "candidates": 199,
+        "fresh_verdicts": [],
+        "observational_prior": {
+          "note": "EXACT_COUNTS_OF_EXECUTED_VERDICTS__NO_FITTED_PARAMETERS",
+          "signature": "COLLECTION_SHAPE",
+          "tried": {},
+          "verified": {}
+        },
+        "passed_published_but_refused_by_intervention": 0,
+        "screened": 199,
+        "winning_diff": null,
+        "winning_family": null,
+        "winning_index": null
+      },
+      "task": "hanoi",
+      "test_sha256": "a93f11847b7cc48409035229316cdfd5ee5ca209fb95d2cb9be3aaf419e2fb98"
+    }
+  ],
+  "schema": "BRAIN_INTERVENTIONAL_GOAL_MEASURE_V1",
+  "upstream": "https://github.com/jkoppel/QuixBugs",
+  "upstream_head": "4257f44b0ff1181dedaedee6a447e133219fcebf"
+}

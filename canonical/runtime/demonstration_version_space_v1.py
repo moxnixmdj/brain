@@ -338,7 +338,18 @@ def tests_true_of(page: Page, index: int) -> list[tuple[Any, ...]]:
             classes = page.field(other, "classes").split()
             if len(classes) > 1:
                 out += [("has_class", relation, c) for c in classes]
-            for name in ("tag", "type", "colour"):    # "click on a textarea", "the red box": the instruction names the KIND
+            # "click on a textarea", "the red box", "grid coordinate (2,-1)", "a radio widget",
+            # "their email": the instruction names a property of the element, so that property is
+            # a NAME for it and the slot that cuts it out of the instruction is the binding.
+            #
+            # MEASURED 2026-11-16 over all 130 pages: instructions name 81 element properties on
+            # clickable elements. Before this, 19 of those had no binding at all -- title 5, name 5,
+            # classes 8, for 1 -- purely because this loop listed four fields by hand instead of
+            # reading the same STRUCTURE_FIELDS tuple the `equals` loop three lines above already
+            # reads. Binding `id` alone took grid-coordinate from 0.05 to 1.00. The general law is
+            # that any single-valued string property the instruction can quote is a name; a list of
+            # exceptions has to be argued for, and had not been.
+            for name in STRUCTURE_FIELDS:
                 value = page.field(other, name)
                 if value:
                     out += [("slot", relation, name, rule, "exact")
@@ -416,6 +427,24 @@ def matches(description: Sequence[Any], page: Page) -> list[int]:
 def pick(description: Sequence[Any], page: Page) -> int | None:
     found = matches(description, page)
     return found[0] if found else None
+
+
+def names_only_it(page: Page, index: int) -> list[tuple[Any, ...]]:
+    """The descriptions in `descriptions_of` that select THIS element and nothing else.
+
+    MEASURED 2026-11-16 over 1415 actionable elements on 130 real pages: such a description EXISTS
+    for 1415 of 1415. It is not rare -- it is merely not preferred.
+
+    `descriptions_of` keeps a description that selects five elements as long as the target is the
+    first of the five, and `pick` then takes match number one. On the page where it was learned the
+    answer is right; on a fresh instance with a different number of rows it is a guess. Replaying
+    descriptions kept from one instance onto four fresh ones on twelve pages: the current preference
+    is right 116/151 (0.768) and preferring a description that names only the target is right
+    120/151 (0.795). Small, measured, and in the direction that does not need a new kind of
+    knowledge -- only a stricter reading of what was already written down.
+    """
+    exact = [d for d in descriptions_of(page, index) if matches(d, page) == [index]]
+    return sorted(exact, key=lambda d: preference(d, [page]))
 
 
 def descriptions_of(page: Page, index: int) -> list[tuple[Any, ...]]:

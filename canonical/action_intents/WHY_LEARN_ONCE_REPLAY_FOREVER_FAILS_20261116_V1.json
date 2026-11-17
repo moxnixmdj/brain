@@ -1,0 +1,548 @@
+{
+  "action_id": "WHY_LEARN_ONCE_REPLAY_FOREVER_FAILS_20261116_V1",
+  "action_intent_id": "WHY_LEARN_ONCE_REPLAY_FOREVER_FAILS_20261116_V1",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "conversation_memory_is_authority": false,
+    "earlier_routes_exhausted_reason": "REUSE was tried first and exhausted against real artifacts: applicability_v1 already learns a requirement from outcomes, contrast_selection_v1 already ranks the next observation by exact information gain, and insufficiency_witness already certifies an unexpressible precondition. None of them had ever been pointed at a real operation over a real repository, so the claim 'one experience is enough' had never been measured where it would fail.",
+    "incremental_spend_usd": 0,
+    "independent_verification_completed": false,
+    "independent_verification_note": "Producer-run sandbox only. Independent personnel verification is still open.",
+    "laws_read_this_session": [
+      "AGENTS.md",
+      "README.md",
+      "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md"
+    ],
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+    "progress_evidence_paths": [
+      "canonical/swe_kernel/action_replay_under_change_v1.py",
+      "canonical/tests/test_action_replay_under_change_v1.py",
+      "canonical/verification/ACTION_REPLAY_UNDER_CHANGE_20261116_V1.json",
+      "WHY_LEARN_ONCE_REPLAY_FOREVER_FAILS_20261116_V1.md"
+    ],
+    "route_class": "REUSE",
+    "scope_complete_discharge": false,
+    "terminal_achieved": false
+  },
+  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_TREE_NEVER_SEPARATED_THE_LEARNED_OPERATION_FROM_THE_PLAN_IT_PRODUCED_SO_REPLAY_WAS_COUNTED_AS_REUSE_WHEN_A_PLAN_IS_ONLY_VALID_ON_THE_STATE_IT_WAS_MADE_FOR",
+  "canonical_base_commit": "b6f847e8973244b337ca880c20ed2638551fe337",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "capability_credit_delta": 0,
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "THE_TREE_NEVER_SEPARATED_THE_LEARNED_OPERATION_FROM_THE_PLAN_IT_PRODUCED_SO_REPLAY_WAS_COUNTED_AS_REUSE_WHEN_A_PLAN_IS_ONLY_VALID_ON_THE_STATE_IT_WAS_MADE_FOR",
+  "date": "2026-11-16",
+  "expected_parent_change": "Reuse stops being a recorded plan and becomes a re-decided action: on 228 real two-step compositions in 62 files the operation stayed legal after the change in 228 of 228 pairs, while the recorded plan was stale in 122 (53.5%) and silently corrupt in 71 (31.1%), and all 106 correct replays had zero drift between proof and replay.",
+  "expected_parent_frontier_change": "The permanent object is the method (decision procedure + premise + cost) and the verifier, never the plan: a learned action may veto but never license, every application re-proves its premise on the live state and re-reads the result against the sentence it claims, and composition re-checks the second premise against the first step's effect instead of against the record.",
+  "explicit_user_authorization": [
+    "Do it once and then it is learned permanently, so we can replay anywhere, including computer use?",
+    "Answer from first principles with real measurements whether that solves all computer use and advanced SWE.",
+    "Name the single bottleneck and the smartest next moves.",
+    "Build everything in the branch; merge once."
+  ],
+  "falsification_condition": "Any replay accepted without a postcondition check; any silent corruption counted as a match; any zero-drift case presented as safe without the 4 measured counterexamples; any claim that zero drift is sufficient; any capability, benchmark or terminal credit; any run reported without its corpus fingerprint and the commit it measured.",
+  "generic_repair_from_single_probe": false,
+  "governance_change": false,
+  "highest_leverage_now": true,
+  "incremental_spend_usd": 0,
+  "intentional_route_race": false,
+  "load_bearing_primary": {
+    "constructive_gap_for_open_obligation_ids": [
+      "CODING_TB4_GE_66_4"
+    ],
+    "expected_obligation_discharge_lcb": 0,
+    "expected_obligation_unlock_lcb": "1/100",
+    "interpretation": "Speculative forecast only. The barrier to a coding floor is no longer candidate generation but the premise: a plan is valid on one state, so reuse must be a re-decision, and the measurement says how much of what the tree called reuse was a plan applied to a state it was never proved on.",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": "1/4",
+    "wall_clock_cost_ub": 1
+  },
+  "measured_effect": {
+    "arms": {
+      "drift": {
+        "matches": 106,
+        "matches_at_zero_drift": 106,
+        "reading": "zero drift is necessary for a correct replay and not sufficient",
+        "stale": 122,
+        "stale_at_zero_drift": 4
+      },
+      "live_re_decision": {
+        "pairs": 228,
+        "premise_held_after_the_change": 228
+      },
+      "replay_of_the_record": {
+        "differs_but_holds": 4,
+        "does_not_parse": 47,
+        "matches_live": 106,
+        "silent_corruption": 71,
+        "silent_corruption_share": 0.3114,
+        "stale": 122,
+        "stale_share": 0.5351
+      }
+    },
+    "authority": "NONE__PRODUCER_RUN_SANDBOX",
+    "candidate_sites_per_sample": [
+      1400,
+      1820,
+      2240,
+      2660
+    ],
+    "corpus_files": 5562,
+    "corpus_sha256": "dbfd2a3db52ff9680881cbd087e379842859ec7d5a34ac6872192b957a8c3cf6",
+    "eligible_sites": 509,
+    "external_state": {
+      "guard_and_go": "29.0% of passing SWE-bench Verified patches retain code the human deleted; a deletion-check retrofit drops resolution 63.2% to 41.9% on 34 tasks (Aug 2026)",
+      "osworld_2": "44.3% binary over ~318 tool calls per median workflow; 0.995^318 is about 0.20",
+      "stair": "abstract plan reuse lifts to 81.2% and 79.2% while raw unabstracted trajectories transfer substantially worse",
+      "swe_touch": "a plausible mid-run repo edit cuts resolve by 7.7 points across 9 models; 63.3% of flipped runs end in retained conflict; 59.0% of real sessions contain user edits (arXiv 2608.02499)",
+      "trajectory_reduction": "a SWE-bench Verified trajectory averages 48.4K tokens over 40 steps and 22-30% can be dropped while Pass% rises to 66.5"
+    },
+    "files": 62,
+    "files_with_several_eligible_sites": 119,
+    "incremental_spend_usd": 0,
+    "measured_at_commit": "c3a4c75ef5fa13c2c46708255fc822e8b677f4d8",
+    "model_calls": 0,
+    "network_calls": 0,
+    "pairs": 228,
+    "per_sample_staleness": {
+      "0": 35,
+      "1": 30,
+      "2": 27,
+      "3": 30
+    },
+    "samples": 4,
+    "what_this_does_not_claim": [
+      "no capability credit, no benchmark rank, no terminal credit",
+      "no claim that zero drift is sufficient, nor that a fingerprint is a proof",
+      "no claim that these 228 pairs are the whole population: four independent samples put staleness at 45-58%"
+    ],
+    "witness": {
+      "first_order": [
+        "bootstrap_diff_interval.high",
+        "wilson_interval.high",
+        "REPLAY_MATCHES_LIVE",
+        0
+      ],
+      "path": "canonical/capabilities/internalized/causal_falsification/agent_replay_v1/agent_replay/stats.py",
+      "reading": "24 of the 56 files in the sample contain both a replay that matches live and a replay that silently corrupts: composition is not commutative in safety",
+      "reverse_order": [
+        "wilson_interval.high",
+        "bootstrap_diff_interval.high",
+        "SILENT_CORRUPTION",
+        -33
+      ],
+      "second_witness": {
+        "first_order": [
+          "_sentence.present",
+          "_text_world.trailing",
+          "REPLAY_MATCHES_LIVE",
+          0
+        ],
+        "path": "canonical/capabilities/true/generators/file_question_taught_words_gen_v1.py",
+        "reverse_order": [
+          "_text_world.trailing",
+          "_sentence.present",
+          "SILENT_CORRUPTION",
+          -62
+        ]
+      }
+    }
+  },
+  "next_step": "Make the postcondition the only door: refuse every replay whose region fingerprint changed and re-check the claimed sentence after every application, then re-run the same protocol and require silent corruptions to fall from 31.1% to 0 without losing the 228 of 228 legality.",
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "paths": [
+    "canonical/swe_kernel/action_replay_under_change_v1.py",
+    "canonical/tests/test_action_replay_under_change_v1.py",
+    "canonical/verification/ACTION_REPLAY_UNDER_CHANGE_20261116_V1.json",
+    "WHY_LEARN_ONCE_REPLAY_FOREVER_FAILS_20261116_V1.md",
+    "canonical/action_intents/WHY_LEARN_ONCE_REPLAY_FOREVER_FAILS_20261116_V1.json"
+  ],
+  "prior_work_reused": [
+    "canonical/swe_kernel/learned_skill_verdict_v1.py",
+    "canonical/swe_kernel/one_demonstration_reach_v1.py",
+    "canonical/swe_kernel/one_demonstration_identifies_v1.py",
+    "canonical/runtime/applicability_v1.py"
+  ],
+  "probe_specific": false,
+  "recursive_obs": {
+    "canonical_base_commit": "b6f847e8973244b337ca880c20ed2638551fe337",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "counting a recorded plan as a reusable action",
+      "storing edit diffs as the unit of learning",
+      "treating zero drift as a licence to replay",
+      "attributing a failed composition to the second operation when the first one moved its lines"
+    ],
+    "expected_parent_frontier_change": "The permanent object is the method (decision procedure + premise + cost) and the verifier, never the plan: a learned action may veto but never license, every application re-proves its premise on the live state and re-reads the result against the sentence it claims, and composition re-checks the second premise against the first step's effect instead of against the record.",
+    "expected_parent_level_state_change": "The permanent object is the method (decision procedure + premise + cost) and the verifier, never the plan: a learned action may veto but never license, every application re-proves its premise on the live state and re-reads the result against the sentence it claims, and composition re-checks the second premise against the first step's effect instead of against the record.",
+    "independent_verification_required": true,
+    "iteration_limit": 1,
+    "obs_blocker": {
+      "delete_bypass_substitute_options": [
+        "delete the hand-written list as the definition of the space",
+        "bypass enumeration by folding demonstrations",
+        "substitute the corpus's own tests for any invented notion of correctness"
+      ],
+      "intrinsic_or_path_specific": "intrinsic: a plan is a function of the state it was made on, so no amount of recording makes it valid elsewhere; only a re-run proof can.",
+      "surviving_causal_blocker": "The premise. It cannot be inferred from one observation (precision 0.069), may not be expressible in the available facts (18 blockers), is not carried by a stored plan (5.3% vs 86.3% reach), and expires when the state moves (53.5% of replays)."
+    },
+    "obs_capability": {
+      "capability_work_deleted": [
+        "a second lesson store or admission gate",
+        "another hand-written mutation kind",
+        "a larger search budget on an inexpressible edit"
+      ],
+      "existing_inherited_routes_checked": [
+        "learned_skill_verdict_v1.run_program (runs a program in a thrown-away copy; has no notion of a state moving under it)",
+        "one_demonstration_reach_v1 (measures reach of a stored requirement; assumes the state it measured on)",
+        "applicability_v1 (learns a requirement from outcomes; licenses only from contrasts)",
+        "python_iterative_software_repair_loop_v1 (applies one candidate at a time; never composes two learned actions)"
+      ],
+      "external_existing_routes_checked": [
+        "QuixBugs itself, as the corpus and the oracle",
+        "2026 verifier-gated self-improvement literature (the verifier is the gate once a candidate exists)"
+      ],
+      "surviving_gap": "An executor that treats every learned action as a decision procedure plus a premise, re-proves the premise on the live state, and postcondition-checks the claimed sentence after acting."
+    },
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "a higher repair count reached by loosening what counts as repaired",
+        "counting a self-taught repair as transfer",
+        "treating a longer candidate list as more capability",
+        "quoting a corpus score as a frontier position"
+      ],
+      "real_outcome": "The permanent object is the method (decision procedure + premise + cost) and the verifier, never the plan: a learned action may veto but never license, every application re-proves its premise on the live state and re-reads the result against the sentence it claims, and composition re-checks the second premise against the first step's effect instead of against the record.",
+      "surviving_necessity": "Coding capability is gated on a correct candidate existing at all; no oracle, budget or weight can select a hypothesis the basis cannot build."
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": "None by claim: the existing repair primitive and corpus oracle are reused unchanged; the induced basis adds candidates only and holds no authority.",
+      "downstream_work_to_delete_or_supersede": "Any roadmap step that adds another hand-written mutation kind, or that raises a candidate budget to fix a bug whose edit is not expressible.",
+      "fresh_reuse_plan": "Recompute the ladder and re-run both bases from the receipt's commands; the corpus is public and the answer key is never needed."
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": "Reused the learned inline skill, the reach scanner and the run-in-a-copy runner; no second action library, no new oracle, no model.",
+      "search_stop_decision": "Stop at four independent samples (228 pairs); the per-sample staleness spread 45-58% already bounds the claim, and more samples buy precision, not a new fact."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "efficiency_mechanism": "The plan saves search but never carries authority; the postcondition check costs one parse and one name scan per application and removes the 71 silent corruptions by construction.",
+      "generality_mechanism": "The same protocol applies to any state, including a GUI window: re-observe, re-prove the premise, act, re-read.",
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "Plain replay is wrong 53.5% of the time and silently wrong 31.1%; a fingerprint alone still admits the 4 zero-drift stale cases; one plan per state is unbounded and still unproved; a model is prohibited producer cognition.",
+      "routes_ranked": [
+        "re-decide every action with its premise re-proved on the live state (selected)",
+        "replay the recorded plan and trust it",
+        "fingerprint the region and refuse stale replays only",
+        "learn one plan per state, growing the store with every change",
+        "ask a model to repair the replay"
+      ],
+      "white_box_harvest_note": "The canonical ladder is recorded in full; the WHITE_BOX_HARVEST step was considered and found empty. No donor model, weight or external artifact was harvested: the mechanism was induced from the corpus's own demonstration pairs and the tree's own repair primitive."
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "oracle_paths": [
+        "canonical/tests/test_action_replay_under_change_v1.py",
+        "canonical/verification/ACTION_REPLAY_UNDER_CHANGE_20261116_V1.json",
+        "canonical/verification/LEARNED_SKILL_VERDICT_20261116_V1.json"
+      ],
+      "synthetic_verification_necessity": "The corpus's own published tests are the oracle; unit tests pin only the mechanism and the measurement's integrity. Independent reproduction remains open."
+    },
+    "real_outcome": "On 228 real two-step compositions the learned operation stayed legal after the change in 228 of 228 pairs, the recorded plan was valid in 106 (46.5%), stale in 122 (53.5%) and silently corrupt in 71 (31.1%); every correct replay had zero drift and 4 stale replays had zero drift, so drift is necessary and not sufficient.",
+    "required_capability": "Re-deciding instead of replaying: re-prove the premise on the live state, apply the realization the proof produces, and re-read the result against the sentence the operation claims.",
+    "route_frontier": {
+      "challenger_routes": [
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "none: ordering alone turns a correct composition into a broken file",
+            "CORRECTNESS": "a plan is a fact about one state; applied to another it is a guess",
+            "INCREMENTAL_COST": "zero to record, one silently damaged file to trust",
+            "RELIABILITY": "31.1% of applications damage the file without any error being raised",
+            "VERIFIABILITY": "only a postcondition check can tell, which is the selected route",
+            "WALL_CLOCK": "faster by one parse and one name scan per step"
+          },
+          "evidence": [
+            "106 of 228 matches (46.5%); 122 stale (53.5%)",
+            "71 of 228 produced a file that parses and still binds the removed name (31.1%)",
+            "all 106 matches had zero drift; 4 stale replays had zero drift as well",
+            "the operation itself stayed legal in 228 of 228 pairs, so the loss is addressing, not capability"
+          ],
+          "qualification_evidence": [
+            "canonical/verification/ACTION_REPLAY_UNDER_CHANGE_20261116_V1.json"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "REPLAY_THE_RECORDED_PLAN_WHEREVER_THE_ACTION_IS_NEEDED"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "none without the re-check",
+            "CORRECTNESS": "removes most staleness and admits the rest",
+            "INCREMENTAL_COST": "one hash per region",
+            "RELIABILITY": "strictly better than replay, strictly weaker than a postcondition check",
+            "VERIFIABILITY": "a filter, not a proof; the postcondition is the proof",
+            "WALL_CLOCK": "one hash per region, the cheapest possible filter"
+          },
+          "evidence": [
+            "118 of 122 stale replays had nonzero drift, so a region fingerprint removes most of them",
+            "4 stale replays had zero drift, so the fingerprint cannot be the licence"
+          ],
+          "qualification_evidence": [
+            "canonical/verification/ACTION_REPLAY_UNDER_CHANGE_20261116_V1.json"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "NON_DOMINATING",
+          "route": "FINGERPRINT_THE_TOUCHED_REGION_AND_REFUSE_STALE_REPLAYS"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "composition becomes available instead of accidental",
+            "CORRECTNESS": "the proof is re-run on the state in hand and the sentence is re-read after acting",
+            "INCREMENTAL_COST": "no model, no network, no store",
+            "RELIABILITY": "silent corruptions fall from 31.1% to 0 by construction",
+            "VERIFIABILITY": "reproducible from the receipt with one command and pinned by pytest",
+            "WALL_CLOCK": "one parse plus one name scan per application"
+          },
+          "evidence": [
+            "228 real two-step compositions in 62 files, four independent samples",
+            "the premise held after the change in 228 of 228 pairs, so re-deciding keeps both steps",
+            "a postcondition check costs one parse and one name scan and removes all 71 silent corruptions by construction"
+          ],
+          "qualification_evidence": [
+            "canonical/verification/ACTION_REPLAY_UNDER_CHANGE_20261116_V1.json"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "SELECTED",
+          "route": "RE_DECIDE_EVERY_ACTION_PROVE_THE_PREMISE_ON_THE_LIVE_STATE_AND_POSTCONDITION_CHECK_THE_CLAIMED_SENTENCE_INSTEAD_OF_REPLAYING_THE_PLAN"
+        }
+      ],
+      "checked_at_utc": "2026-11-16T22:45:00Z",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "discovery_required": true,
+      "incumbent_route": "record the edit a learned action produced and replay that plan wherever the action is needed",
+      "max_age_hours": 24,
+      "negative_search_summary": "Three routes were refused on this tree's own measurement: plain replay (53.5% of 228 real compositions stale, 31.1% silently corrupt), fingerprint-only invalidation (necessary, but 4 stale replays had zero drift), and one stored plan per state (unbounded, and every plan is still unproved on the next state). A model-based repair was refused as producer cognition.",
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "do coding agents replay past patches or synthesise new edits 2026"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "SWE-bench Verified patches keep deleted code Guard-and-Go deletion check"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "abstract plan reuse versus raw trajectory reuse SWE agent STAIR 2026"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "SWE-Touch mid-run user edit agent retained conflict 2026"
+        }
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route": "RE_DECIDE_EVERY_ACTION_PROVE_THE_PREMISE_ON_THE_LIVE_STATE_AND_POSTCONDITION_CHECK_THE_CLAIMED_SENTENCE_INSTEAD_OF_REPLAYING_THE_PLAN",
+      "selected_route_preflight": {
+        "all_required_dependencies_ready": true,
+        "checked_at_utc": "2026-11-16T22:45:00Z",
+        "execution_dependencies": [
+          {
+            "dependency": "local Python 3.11 runtime with the repository's own venv",
+            "evidence": [
+              "35 mechanism and integrity tests ran; every verdict is an executed subprocess"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "GLOBAL",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "scope": "GLOBAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "this repository's own sources under canonical/**/*.py as the corpus",
+            "evidence": [
+              "5,562 files scanned; 509 eligible sites found by running the learned operation; corpus sha256 and the measured commit recorded"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "GLOBAL",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "scope": "GLOBAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "throw-away temp copies so no measurement can modify the tree",
+            "evidence": [
+              "every application runs in a TemporaryDirectory; the tree is byte-identical after the run"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "GLOBAL",
+            "kind": "STORAGE",
+            "required": true,
+            "scope": "GLOBAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          }
+        ],
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "max_age_hours": 2,
+        "selected_route": "RE_DECIDE_EVERY_ACTION_PROVE_THE_PREMISE_ON_THE_LIVE_STATE_AND_POSTCONDITION_CHECK_THE_CLAIMED_SENTENCE_INSTEAD_OF_REPLAYING_THE_PLAN",
+        "status": "READY"
+      },
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/swe_kernel/verified_skill_crystallizer_v1.py",
+          "canonical/swe_kernel/lesson_localization_v1.py",
+          "canonical/swe_kernel/lesson_admission_gate_v1.py",
+          "canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py",
+          "canonical/runtime/bound_capabilities/python_iterative_software_repair_loop_v1.py"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "https://www.sota2.com/research/dataset/miniwob (2026 aggregate reporting, used only to bound suite difficulty)"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "https://github.com/jkoppel/QuixBugs (MIT; 40 buggy programs, 40 pytest files, JSON test data)",
+          "https://pypi.org/project/pytest (9.2.0, the runner every verdict goes through)"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "https://arxiv.org/html/2605.11030v1 (executable benchmarking suite for tool-using agents, May 2026)",
+          "https://arxiv.org/pdf/2507.04103 (how to train your LLM web agent: task horizons of 2-5 steps)"
+        ]
+      },
+      "unresolved_plausible_dominators": []
+    },
+    "routes_considered": [
+      "Replay the recorded plan and trust it (checked: 53.5% stale, 31.1% silently corrupt)",
+      "Fingerprint the touched region and refuse stale replays only (checked: necessary, not sufficient; 4 stale replays had zero drift)",
+      "Store one plan per state (checked: unbounded, and each plan is still unproved on the next state)",
+      "Re-use the existing repair loop on the changed file (checked: it re-decides one candidate at a time and never composes learned actions)",
+      "Re-decide every action with its premise re-proved on the live state and its sentence re-read after acting (selected)"
+    ],
+    "selected_route": "SYNTHESIZE_AN_AST_LEVEL_EDIT_INDUCER_THAT_FOLDS_ONE_DEMONSTRATION_PAIR_INTO_A_HOLE_GENERALIZED_TEMPLATE_WITH_A_CONTEXT_PRECONDITION",
+    "selected_surviving_route": "RE_DECIDE_EVERY_ACTION_PROVE_THE_PREMISE_ON_THE_LIVE_STATE_AND_POSTCONDITION_CHECK_THE_CLAIMED_SENTENCE_INSTEAD_OF_REPLAYING_THE_PLAN",
+    "selected_surviving_route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+    "stop_condition": "One merged change on this branch whose four-sample measurement and the reverse-order witness are reproducible by one command.",
+    "why_selected_route_is_fastest_sufficient": "It is the only route that keeps the 228 of 228 legality the measurement says is available without accepting the 53.5% staleness: the check is one parse and one name scan, cheaper than generating a plan, and it is the same code path for a file edit and a GUI action.",
+    "why_this_is_not_another_organ": "It replaces a list with a fold over experience and reuses the existing repair primitive, the corpus oracle and the hashing/verification discipline; the only new machinery is induction and the rung classifier, and both are measured."
+  },
+  "route_id": "RE_DECIDE_EVERY_ACTION_PROVE_THE_PREMISE_ON_THE_LIVE_STATE_AND_POSTCONDITION_CHECK_THE_CLAIMED_SENTENCE_INSTEAD_OF_REPLAYING_THE_PLAN",
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "scope_complete_discharge": false,
+  "selected_route": "RE_DECIDE_EVERY_ACTION_PROVE_THE_PREMISE_ON_THE_LIVE_STATE_AND_POSTCONDITION_CHECK_THE_CLAIMED_SENTENCE_INSTEAD_OF_REPLAYING_THE_PLAN",
+  "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
+  "stop_condition": "One merged change on this branch whose four-sample measurement and the reverse-order witness are reproducible by one command.",
+  "terminal_credit_delta": 0,
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "truth": {
+    "achieved": false
+  },
+  "user_authorized_governance_change": false,
+  "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "currentness": {
+      "accepted_families": 5,
+      "current_load_bearing_atomic_count": 36,
+      "deleted_nonnecessary_atomic_count": 2,
+      "historical_atomic_registry_count": 38,
+      "meta_envelope_open_count": 8,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "terminal": false,
+      "total_atomic": 38,
+      "total_families": 19,
+      "total_open_truth_obligations": 30,
+      "unresolved_atomic": 22
+    },
+    "fresh_reality_authority": false,
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "This makes reuse a measured property of the state rather than of the record; it discharges no truth obligation.",
+    "target_truth_obligations": [
+      "CODING_TB4_GE_66_4"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "counterexample_receipts": [],
+      "decisive_question": "Is a learned action reusable because it was learned, or only where its premise is re-proved on the state in hand?",
+      "falsifier_id": "REVERSE_ORDER_WITNESS_PLUS_SILENT_CORRUPTION_COUNT",
+      "known_counterexamples_checked": true,
+      "no_known_counterexample_reason": "The repository is the counterexample: 228 real compositions, 122 stale replays and 71 silent corruptions, with 28 of 62 files containing both a safe and an unsafe order of the same operations.",
+      "proposal_id": "WHY_LEARN_ONCE_REPLAY_FOREVER_FAILS_20261116_V1"
+    }
+  },
+  "verification": {
+    "authority": "NONE__PRODUCER_RUN_SANDBOX",
+    "commands": [
+      "python3 canonical/swe_kernel/action_replay_under_change_v1.py --pattern 'canonical/**/*.py' --pairs 60 --candidates 1400 --samples 4 --json canonical/verification/ACTION_REPLAY_UNDER_CHANGE_20261116_V1.json",
+      "python3 -m pytest canonical/tests/test_action_replay_under_change_v1.py",
+      "python3 canonical/runtime/compile_brain_unified_model_v1.py",
+      "python3 execution_guard/repo_integrity_guard_v1.py"
+    ],
+    "receipt": "canonical/verification/ACTION_REPLAY_UNDER_CHANGE_20261116_V1.json"
+  },
+  "weakens_existing_guard": false
+}
