@@ -62,6 +62,7 @@ RECEIPTS = {
     "contract": "canonical/verification/PREDICTIVE_CONTRACT_20261116_V1.json",
     "facts": "canonical/verification/STANDING_FACTS_20261116_V1.json",
     "repair": "canonical/verification/CAUSAL_DEPENDENCY_REPAIR_20261116_V1.json",
+    "demonstration": "canonical/verification/DEMONSTRATION_SUFFICIENCY_20261116_V1.json",
 }
 
 # The published ceiling for an inducer with full AST and context machinery on real systematic edits.
@@ -113,6 +114,7 @@ def compose(*, pins: Mapping[str, str] | None = None) -> dict[str, Any]:
     contract, contract_sha = _load("contract", pins=pins)
     known, known_sha = _load("facts", pins=pins)
     repaired, repaired_sha = _load("repair", pins=pins)
+    sufficed, sufficed_sha = _load("demonstration", pins=pins)
 
     determined = float(_field(supply, "by_rung/shape_only/determined_share", "supply"))
     value_determined = (float(_field(value, "by_rung/shape_only/derive_arm/pairs_where_derivation_was_right",
@@ -212,6 +214,7 @@ def compose(*, pins: Mapping[str, str] | None = None) -> dict[str, Any]:
                 ("contract", RECEIPTS["contract"], contract_sha),
                 ("facts", RECEIPTS["facts"], known_sha),
                 ("repair", RECEIPTS["repair"], repaired_sha),
+                ("demonstration", RECEIPTS["demonstration"], sufficed_sha),
             )
         },
         "law": "P(correct behaviour | one action) = P(determined) x P(seen); P(seen) = density x strength",
@@ -339,12 +342,36 @@ def compose(*, pins: Mapping[str, str] | None = None) -> dict[str, Any]:
                         "compare its consequence. It recovers the declared read set exactly, with no model, no "
                         "tracing, and no annotation"),
             },
+            "demonstration": {
+                "receipt": RECEIPTS["demonstration"],
+                "actions": int(_field(sufficed, "chains", "demonstration")),
+                "readings_per_action": max(int(v) for v in
+                                           _field(sufficed, "hypothesis_space_sizes", "demonstration").values()),
+                "decided_by_one_execution": _field(sufficed, "verdicts_after_one_execution", "demonstration"),
+                "permanence": _field(sufficed, "permanence", "demonstration"),
+                "task_scoped_not_permanent": _field(sufficed, "task_safe_but_not_environment_safe",
+                                                    "demonstration"),
+                "one_shot_pick_wrong_outside_the_task":
+                    sum(len(v) for v in _field(sufficed, "naive_one_shot_wrong_outside_the_task",
+                                               "demonstration").values()),
+                "repeating_the_same_execution_ever_helped":
+                    len(_field(sufficed, "repeating_the_same_execution_ever_helped", "demonstration")),
+                "why": ("one execution is not knowledge of an action, it is the elimination of every reading that "
+                        "contradicts it -- and the survivors are a set. `sort` and `sort -u` are the same action "
+                        "on a duplicate-free list; the one-shot learner that keeps the first survivor is right "
+                        "on the task and wrong the first time a duplicate appears. Keeping the survivors makes "
+                        "the question decidable before the second execution: act, ask once more at the state "
+                        "that splits them, or refuse because no reading fits"),
+            },
             "what_remains_unmeasured": ("a GUI whose only observable is pixels or DOM -- a projection, not the "
-                                        "state; a fact carried by remote state rather than by a path; and the "
-                                        "outer edge of repair itself: the candidate set is the state the step "
-                                        "can see, and the probe is a content change, so a dependency on a file "
-                                        "outside the sandbox, a lock held by another process, or a file's bare "
-                                        "existence is not measured by it"),
+                                        "state; a fact carried by remote state rather than by a path; the outer "
+                                        "edge of repair (the candidate set is the state the step can see, and "
+                                        "the probe is a content change, so a dependency on a file outside the "
+                                        "sandbox, a lock, or a bare existence is not measured by it); and the "
+                                        "outer edge of sufficiency itself -- a verdict is relative to a stated "
+                                        "grammar and to the candidate states generated for it, so a behaviour "
+                                        "outside the grammar is refused rather than learned, and two readings "
+                                        "that differ only on a state nobody generated remain conflated"),
             "external_context": ("OSWorld 2.0 (arXiv 2606.29537): best agent 20.6% of 108 workflows, "
                                  "failing by skipping verification and spending under 7% of budget "
                                  "detecting its own errors"),
@@ -415,6 +442,15 @@ def summarize(report: Mapping[str, Any]) -> str:
                     able["goals_restored"]["intervention_read_set"], able["goals_restored"]["of"],
                     able["steps_redone"]["intervention"], able["steps_redone"]["everything"],
                     able["missed_by_intervention"], able["over_declared_by_intervention"]))
+    able = use["demonstration"]
+    lines.append("  one execution: %d readings per action; decisions %s; permanence permanent %d, task-scoped "
+                 "%d, refused %d; the one-shot pick is wrong off-task on %d states; repeating it helped %d times"
+                 % (able["readings_per_action"], able["decided_by_one_execution"],
+                    sum(1 for v in able["permanence"].values() if v.startswith("PERMANENT")),
+                    len(able["task_scoped_not_permanent"]),
+                    sum(1 for v in able["permanence"].values() if v.startswith("REFUSED")),
+                    able["one_shot_pick_wrong_outside_the_task"],
+                    able["repeating_the_same_execution_ever_helped"]))
     lines.append("  still unmeasured: %s" % use["what_remains_unmeasured"])
     return "\n".join(lines)
 
