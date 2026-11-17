@@ -1,6 +1,6 @@
 # The three blockers are one verified index, not one experience
 
-**2026-11-17 UTC · branch `arena/cd864fc9-brain` · live PR base `145bd9c899f706069c96a52239266189df54ba43` · branch origin `68e8d11bcddd87e4dffc38a19093dbd782879919` · authority NONE · producer-run sandbox · $0 · zero external model calls**
+**2026-11-17 UTC · branch `arena/cd864fc9-brain` · live PR base `d2e0aa07937ee1993dcac84cffff8bac5eb2a1e7` · branch origin `68e8d11bcddd87e4dffc38a19093dbd782879919` · authority NONE · producer-run sandbox · $0 · zero external model calls**
 
 This is a fresh answer to the owner prompt, not a continuation note. I re-read the whole prompt as new, re-checked the project by **effect and intent** (including non-obvious names), re-checked November 2026 web research as evidence only, and asked **YOU SURE THIS THE SMARTEST APPROACH?** before each implementation decision. The project already owns the constructive, interventional, identification, admission, composition, environment-learning, instant-knowledge, and weight-gate organs under non-obvious names. Building another learner, verifier, planner, weight house, or conventional pretraining stack would duplicate a part. This feature therefore adds no new organ: it adds a falsifiable answer, a hard-open real-test receipt, and a calculated-parameter admission law.
 

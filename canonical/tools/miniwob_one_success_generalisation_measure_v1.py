@@ -84,6 +84,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import math
 import os
 import pathlib
 import pickle
@@ -336,6 +337,7 @@ def type_candidates(observation: Mapping[str, Any], tier: int) -> list[str]:
 HAND_TIER = 3                            # everything the hand can do, not only pressing and typing
 AT_AN_ELEMENT = ("click", "hover", "grab", "drop", "triple")    # written  kind@index
 WITH_A_WORD = ("type", "nudge")                                 # written  kind@index=word
+POINT_AT = ("pressat", "moveat", "dropat")                      # written  kind@x,y -- a place, element or not
 NUDGE_WORDS = ("up", "down", "left", "right")
 MAX_WAIT_SECONDS = 60
 _WHOLE_NUMBER = re.compile(r"(?<![\w.])\d+(?![\w.])")
@@ -401,16 +403,27 @@ def parse_action(action: str) -> dict[str, Any]:
         if kind == "nudge" and word not in NUDGE_WORDS:
             raise ValueError("ACTION_NOT_UNDERSTOOD")
         return {"type": kind, "index": int(index), "text": word}
+    if kind in POINT_AT:
+        x_text, _, y_text = rest.partition(",")
+        try:
+            x, y = float(x_text), float(y_text)
+        except ValueError:
+            raise ValueError("ACTION_NOT_UNDERSTOOD") from None
+        if not (math.isfinite(x) and math.isfinite(y)):
+            raise ValueError("ACTION_NOT_UNDERSTOOD")
+        return {"type": kind, "x": x, "y": y}
     raise ValueError("ACTION_NOT_UNDERSTOOD")
 
 
 def cannot_be_done(observation: Mapping[str, Any], wanted: Mapping[str, Any]) -> str | None:
     """Why this action cannot be taken on the page as it now is, or None when it can."""
     holding = observation.get("holding") is not None
-    if holding != (wanted["type"] == "drop"):
+    if holding != (wanted["type"] in ("drop", "dropat")):
         return "PLAN_ASKS_THE_HAND_FOR_WHAT_IT_CANNOT_DO_NOW"       # hold and press at once; let go of nothing
     if wanted["type"] == "wait":
         return None
+    if wanted["type"] in POINT_AT:
+        return None                                                   # a point needs no element to exist
     elements = observation.get("elements") or []
     if not 0 <= wanted["index"] < len(elements):
         return "PLAN_NAMES_AN_ELEMENT_THAT_IS_NOT_ON_THE_PAGE"
@@ -590,6 +603,11 @@ class GuidedPrices:
         wanted = parse_action(action)
         if wanted["type"] == "wait":
             return HAND_PRICE, 1
+        if wanted["type"] in POINT_AT:
+            # A place, priced like what pressing there means: a point the hand goes to commits like a press
+            # (0-1 band), moving the pointer there is worth a little more than nothing, both far below the
+            # dear tiers, so the search tries the derived places before it spends itself on typing.
+            return (0 if wanted["type"] != "moveat" else 1), 2
         element = observation["elements"][wanted["index"]]
         if wanted["type"] == "type":
             text, own = wanted["text"], str(element.get("value") or "")
