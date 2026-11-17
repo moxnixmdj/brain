@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "061555d4f7fabf43fc7556e2ef1b36181aa970b1a204a320130fdac2683dde29"
+  "value": "ddae12a63ce65744d664174f759126cc3e9df8b62822f406744028f65f860419"
  },
  "engines": [
   {
@@ -244537,7 +244537,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/SOLVE_WITH_A_CALIBRATED_JUDGE_20261117_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "a262554f1c20cc0a3b75192eb8c80d8e111ba7702e72b549ecf66a46763a3874",
+   "sha256": "e74ca6e7f4ec9df6fb1805bef7b0d7f4aa5e0f09e96015ff977902a1cc218a95",
    "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
    "terms": {
     "20261117": 1,
