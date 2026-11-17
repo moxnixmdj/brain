@@ -1,0 +1,148 @@
+{
+  "authority": "NONE__PRODUCER_RUN_SANDBOX_COMPOSITION_OF_PUBLISHED_RECEIPTS",
+  "ceiling": {
+    "determinacy_ceiling": 0.7,
+    "determinacy_ceiling_source": "Meng et al., SyDIT, PLDI 2011: 39 of 56 (70%) of real systematic edits mimicked by a full inducer",
+    "note": "even with every consequence observable, one demonstration caps correctness at its determinacy; observability is the multiplier, not the base",
+    "p_correct_at_full_observability": 0.5469
+  },
+  "computer_use": {
+    "external_context": "OSWorld 2.0 (arXiv 2606.29537): best agent 20.6% of 108 workflows, failing by skipping verification and spending under 7% of budget detecting its own errors",
+    "status": "UNMEASURED",
+    "what_would_measure_it": "a state-projection differential over a long-horizon workflow suite, e.g. OSWorld 2.0 checkpoints, with mutated actions",
+    "why": "no receipt exists for check density on a desktop: there is no test corpus there, and the oracle must be manufactured. The law refuses to print a zero it did not measure"
+  },
+  "incremental_spend_usd": 0,
+  "law": "P(correct behaviour | one action) = P(determined) x P(seen); P(seen) = density x strength",
+  "leverage": {
+    "check_density": {
+      "controllable": true,
+      "leverage": 0.5469,
+      "reason": "a property of the environment: manufactured checks (recorded-outcome differential, idempotence/reversibility invariants, state-projection diffs) can raise it from 0.6788 toward 1.0, and each manufactured check is falsifiable by mutation before use",
+      "slope": 0.5469
+    },
+    "check_strength": {
+      "controllable": true,
+      "leverage": 0.3712,
+      "reason": "assertion quality: strong-oracle patches merge 28% more often (arXiv 2606.18168), and a check that a mutation does not kill is not a check",
+      "slope": 0.3712
+    },
+    "determined": {
+      "controllable": false,
+      "leverage": 0.0,
+      "reason": "a property of the trace, not of the learner: one demonstration is one point, and the published ceiling for a full inducer is 0.70 on real systematic edits",
+      "slope": 0.5445
+    }
+  },
+  "model_calls": 0,
+  "network_calls": 0,
+  "operating_point": {
+    "memory_route": {
+      "coverage": 0.1584,
+      "exact": 0.0481,
+      "silent_corruption": 0.3114
+    },
+    "p_correct": 0.2978,
+    "p_correct_value_bearing": 0.1167
+  },
+  "receipts": {
+    "determinacy": {
+      "path": "canonical/verification/SYSTEMATIC_EDIT_SUPPLY_20261116_V1.json",
+      "sha256": "98a8c2f651e7f676f59769aabd269e93be02754b4f570b057f5d8f9bd7e88df1"
+    },
+    "memory": {
+      "path": "canonical/verification/SKILL_RECURRENCE_20261116_V1.json",
+      "sha256": "a117a7497eb2d1b74ff74c43461e6a506d63540206cc4812912054f397c628b0"
+    },
+    "observation": {
+      "path": "canonical/verification/ORACLE_DENSITY_20261116_V1.json",
+      "sha256": "5140b35a763f13714d51b947c74ca0064a95a9e7a29a5666861991fe2d9613dc"
+    },
+    "permanence": {
+      "path": "canonical/verification/ACTION_REPLAY_UNDER_CHANGE_20261116_V1.json",
+      "sha256": "1234766ba0bfa1f35c6c289e7deb2ad2f0e3e0a362526fb3b7bdf7704be16931"
+    },
+    "value": {
+      "path": "canonical/verification/SYSTEMATIC_EDIT_DERIVATION_20261116_V1.json",
+      "sha256": "a7445aad53cb9ff2b3a2daf20aa09e623fa68716a43e88cacdbb43faad92b738"
+    }
+  },
+  "scenarios": [
+    {
+      "check_density": 0.6788,
+      "p_correct": 0.2978,
+      "p_correct_value_bearing": 0.1167,
+      "seen": 0.5445
+    },
+    {
+      "check_density": 0.8,
+      "p_correct": 0.3509,
+      "p_correct_value_bearing": 0.1375,
+      "seen": 0.6417
+    },
+    {
+      "check_density": 0.9,
+      "p_correct": 0.3948,
+      "p_correct_value_bearing": 0.1547,
+      "seen": 0.7219
+    },
+    {
+      "check_density": 1.0,
+      "p_correct": 0.4387,
+      "p_correct_value_bearing": 0.1719,
+      "seen": 0.8021
+    }
+  ],
+  "schema": "BRAIN_CAPABILITY_LAW_V1",
+  "terms": {
+    "check_density": {
+      "meaning": "real python edits any existing test even names",
+      "pointer": "oracle_density/python_only/names_a_token",
+      "receipt": "canonical/verification/ORACLE_DENSITY_20261116_V1.json",
+      "value": 0.6788
+    },
+    "check_strength": {
+      "meaning": "a behavioural mutant is rejected where the check can see it",
+      "pointer": "loop/suite_strength_when_checked",
+      "receipt": "canonical/verification/ORACLE_DENSITY_20261116_V1.json",
+      "value": 0.8021
+    },
+    "determined": {
+      "meaning": "a demonstration determines the sibling edit",
+      "pointer": "by_rung/shape_only/determined_share",
+      "receipt": "canonical/verification/SYSTEMATIC_EDIT_SUPPLY_20261116_V1.json",
+      "value": 0.5469
+    },
+    "determined_value": {
+      "meaning": "an inferred literal is the literal that was needed",
+      "pointer": "by_rung/shape_only/derive_arm/pairs_where_derivation_was_right over ..._fired",
+      "receipt": "canonical/verification/SYSTEMATIC_EDIT_DERIVATION_20261116_V1.json",
+      "value": 0.2143
+    },
+    "memory_coverage": {
+      "meaning": "what recurs later at all",
+      "pointer": "by_rung/context_both/recurrence_share",
+      "receipt": "canonical/verification/SKILL_RECURRENCE_20261116_V1.json",
+      "value": 0.1584
+    },
+    "memory_exact": {
+      "meaning": "of all real sites, the share a permanent memory serves exactly",
+      "pointer": "by_rung/context_both/replay/all/outcomes/exact over .../sites",
+      "receipt": "canonical/verification/SKILL_RECURRENCE_20261116_V1.json",
+      "value": 0.0481
+    },
+    "seen": {
+      "meaning": "density x strength: a wrong edit is visible",
+      "pointer": "loop/expected_error_seen",
+      "receipt": "canonical/verification/ORACLE_DENSITY_20261116_V1.json",
+      "value": 0.5445
+    },
+    "silent_corruption": {
+      "meaning": "a replay that holds the parse and changes the behaviour",
+      "pointer": "counts/SILENT_CORRUPTION over pairs_measured",
+      "receipt": "canonical/verification/ACTION_REPLAY_UNDER_CHANGE_20261116_V1.json",
+      "value": 0.3114
+    }
+  },
+  "what_this_shows": "P(correct) = determined x seen = 0.5469 x 0.5445 = 0.2978 on real python work, and 0.1167 when the action turns on a value. Leverage is not slope: the two slopes are 0.5445 and 0.5469, but only the observation is engineerable (leverage 0.5469 against 0.0), because determinacy is a property of the trace with a published ceiling of 0.7. At full observability the same determinacy still caps correctness at 0.5469. Memory serves 0.1584 of work at all and replays 0.0481 exactly, with 0.3114 silent corruption."
+}

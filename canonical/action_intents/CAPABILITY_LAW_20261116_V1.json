@@ -1,0 +1,485 @@
+{
+  "action_id": "CAPABILITY_LAW_20261116_V1",
+  "action_intent_id": "CAPABILITY_LAW_20261116_V1",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "conversation_memory_is_authority": false,
+    "earlier_routes_exhausted_reason": "REUSE was tried first: every term already exists as a published receipt (supply, derivation, recurrence, oracle density, replay under change) and no new measurement was needed. What did not exist was the composition -- and the composition is what changes the decision, because the two slopes are equal within 0.003 while only one of the terms can move.",
+    "incremental_spend_usd": 0,
+    "independent_verification_completed": false,
+    "independent_verification_note": "Producer-run sandbox only. Independent personnel verification is still open.",
+    "laws_read_this_session": [
+      "AGENTS.md",
+      "README.md",
+      "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md"
+    ],
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+    "progress_evidence_paths": [
+      "canonical/swe_kernel/capability_law_v1.py",
+      "canonical/tests/test_capability_law_v1.py",
+      "canonical/verification/CAPABILITY_LAW_20261116_V1.json",
+      "THE_LAW_AND_WHERE_THE_LEVERAGE_IS_20261116_V1.md"
+    ],
+    "route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+    "scope_complete_discharge": false,
+    "terminal_achieved": false
+  },
+  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_FIVE_MEASURED_TERMS_HAD_NEVER_BEEN_COMPOSED_SO_LEVERAGE_WAS_READ_OFF_SLOPE_AND_SLOPE_SAYS_SPEND_ANYWHERE",
+  "canonical_base_commit": "cae454c9963b68dc530e6ddad0675cffda3ba921",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "capability_credit_delta": 0,
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "THE_FIVE_MEASURED_TERMS_HAD_NEVER_BEEN_COMPOSED_SO_LEVERAGE_WAS_READ_OFF_SLOPE_AND_SLOPE_SAYS_SPEND_ANYWHERE",
+  "date": "2026-11-16",
+  "expected_parent_change": "P(correct) = determined x seen = 0.5469 x 0.5445 = 0.2978 on real python work, 0.1167 when the action turns on a value, and 0.4387 at full observability. The two slopes at the operating point are 0.5445 (determinacy) and 0.5469 (observability), within 0.003 of each other, so slope alone says spend anywhere; but determinacy is trace-bounded with a published ceiling of 0.70 and observability is engineerable from 0.6788 toward 1.0, so leverage is 0.5469 against 0.0. Memory covers 0.1584 of work, replays 0.0481 exactly and is silently corrupt 0.3114 of the time it holds.",
+  "expected_parent_frontier_change": "P(correct) = determined x seen = 0.5469 x 0.5445 = 0.2978 on real python work, 0.1167 when the action turns on a value, and 0.4387 at full observability. The two slopes at the operating point are 0.5445 (determinacy) and 0.5469 (observability), within 0.003 of each other, so slope alone says spend anywhere; but determinacy is trace-bounded with a published ceiling of 0.70 and observability is engineerable from 0.6788 toward 1.0, so leverage is 0.5469 against 0.0. Memory covers 0.1584 of work, replays 0.0481 exactly and is silently corrupt 0.3114 of the time it holds.",
+  "explicit_user_authorization": [
+    "Instant learning plus instant learning in new arbitrary environments is already solved perfectly, so one try per environment or per action solves all computer use and advanced coding -- say what is real and what is not.",
+    "Research must be exhausted before building, in the project and on the web; treat no web solution as holy; own weights only, every parameter calculated.",
+    "The best part is no part.",
+    "Tests must be the hardest open ones, integrity 100% real, and no self-congratulation.",
+    "Build everything in the branch; merge once when the feature is complete."
+  ],
+  "falsification_condition": "Any term quoted without its receipt hash; any capability number computed with a defaulted term; treating the product's independence as measured rather than assumed; claiming computer-use density without a measurement of it; any capability, benchmark or terminal credit.",
+  "generic_repair_from_single_probe": false,
+  "governance_change": false,
+  "highest_leverage_now": true,
+  "incremental_spend_usd": 0,
+  "intentional_route_race": false,
+  "load_bearing_primary": {
+    "constructive_gap_for_open_obligation_ids": [
+      "CODING_TB4_GE_66_4"
+    ],
+    "expected_obligation_discharge_lcb": 0,
+    "expected_obligation_unlock_lcb": "1/100",
+    "interpretation": "Speculative forecast only. The coding barrier is not candidate generation and not memory: it is that most real work has no sibling, so the capability has to be synthesis plus verification per instance, and memory is worth exactly the measured repeated minority.",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": "1/4",
+    "wall_clock_cost_ub": 1
+  },
+  "measured_effect": {
+    "arms": {
+      "computer_use": {
+        "reason": "no check-density receipt exists for a desktop",
+        "status": "UNMEASURED"
+      },
+      "leverage": {
+        "check_density": 0.5469,
+        "check_strength": 0.3712,
+        "determined": 0.0,
+        "why": "slopes are equal within 0.003; only observability can actually be moved"
+      },
+      "operating_point": {
+        "p_correct": 0.2978,
+        "p_correct_at_full_observability": 0.4387,
+        "p_correct_at_full_observability_and_ceiling_determinacy": 0.5469,
+        "p_correct_value_bearing": 0.1167
+      },
+      "reading": "the term to spend on is the one that multiplies, and it is the only one that is ours",
+      "terms": {
+        "check_density": 0.6788,
+        "check_strength": 0.8021,
+        "determined": 0.5469,
+        "determined_value": 0.2143,
+        "memory_coverage": 0.1584,
+        "memory_exact_share_of_all": 0.0481,
+        "seen": 0.5445,
+        "silent_corruption": 0.3114
+      }
+    },
+    "authority": "NONE__PRODUCER_RUN_SANDBOX",
+    "corpus": {
+      "path": "canonical/tests/fixtures/systematic_edit_corpus_v1.jsonl",
+      "records": 393,
+      "repos": [
+        "pallets/click",
+        "pallets/itsdangerous",
+        "pallets/markupsafe",
+        "pypa/packaging",
+        "pypa/pyproject-hooks"
+      ],
+      "schema": "systematic_edit_corpus_v1",
+      "sha256": "b47d9c9c23e641a8865a79d9dce3059a306257813d28114ed6029a9606cbde5a"
+    },
+    "external_state": {
+      "agentic_refactoring": "arXiv 2511.04824: 26.1% of agentic commits carry explicit refactoring intent; the two most frequent operations are rename and type change",
+      "our_own_replay_measurement": "action_replay_under_change_v1: 228 real compositions, 53.5% stale, 31.1% silently corrupt, legality held in 228 of 228",
+      "refactoring_share_2026": "GitClear 2026 (623M changes): refactoring fell from 21% of changed lines in 2022 to 3.8% in 2026 while within-commit copy/paste rose to 15.7%",
+      "repetitiveness_of_code_changes": "Nguyen et al., ASE 2013: 2,841 Java projects, 1.8M revisions; repetitiveness 70-100% at size 1 and decaying exponentially with size",
+      "structural_changes_are_systematic": "Kim et al.: about 75% of structural changes to mature software are systematic, but not identical in context",
+      "systematic_editing_from_one_example": "SyDIT, PLDI 2011: from edit pairs in five large projects, mimics the human correctly on 70% (39/56) of systematic edits"
+    },
+    "incremental_spend_usd": 0,
+    "measured_at_commit": "cae454c9963b68dc530e6ddad0675cffda3ba921",
+    "model_calls": 0,
+    "network_calls": 0,
+    "what_this_does_not_claim": "The product assumes independence, which is a modelling choice: the terms come from different populations (245 within-commit pairs, 691 sites, 228 replay pairs). The 0.70 determinacy ceiling is the best published system, not an impossibility proof."
+  },
+  "model_calls": 0,
+  "network_calls": 0,
+  "next_step": "Build the check ladder against density, not pass rate: recorded-outcome differential, then idempotence/reversibility invariants, then existing suites, then state-projection diffs; falsify each manufactured check by mutation; and measure the density it reaches, because that is the only term in the product that is ours.",
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "paths": [
+    "canonical/swe_kernel/capability_law_v1.py",
+    "canonical/tests/test_capability_law_v1.py",
+    "canonical/verification/CAPABILITY_LAW_20261116_V1.json",
+    "THE_LAW_AND_WHERE_THE_LEVERAGE_IS_20261116_V1.md",
+    "canonical/action_intents/CAPABILITY_LAW_20261116_V1.json"
+  ],
+  "prior_work_reused": [
+    "canonical/swe_kernel/learned_skill_verdict_v1.py",
+    "canonical/swe_kernel/one_demonstration_reach_v1.py",
+    "canonical/swe_kernel/one_demonstration_identifies_v1.py",
+    "canonical/runtime/applicability_v1.py"
+  ],
+  "probe_specific": false,
+  "recursive_obs": {
+    "canonical_base_commit": "cae454c9963b68dc530e6ddad0675cffda3ba921",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "reading leverage off a partial derivative without asking whether the term can move",
+      "quoting a capability number whose receipt is absent or has changed",
+      "printing a zero for computer-use density that was never measured",
+      "spending on induction against a ceiling the trace sets"
+    ],
+    "expected_parent_frontier_change": "P(correct) = determined x seen = 0.5469 x 0.5445 = 0.2978 on real python work, 0.1167 when the action turns on a value, and 0.4387 at full observability. The two slopes at the operating point are 0.5445 (determinacy) and 0.5469 (observability), within 0.003 of each other, so slope alone says spend anywhere; but determinacy is trace-bounded with a published ceiling of 0.70 and observability is engineerable from 0.6788 toward 1.0, so leverage is 0.5469 against 0.0. Memory covers 0.1584 of work, replays 0.0481 exactly and is silently corrupt 0.3114 of the time it holds.",
+    "expected_parent_level_state_change": "P(correct) = determined x seen = 0.5469 x 0.5445 = 0.2978 on real python work, 0.1167 when the action turns on a value, and 0.4387 at full observability. The two slopes at the operating point are 0.5445 (determinacy) and 0.5469 (observability), within 0.003 of each other, so slope alone says spend anywhere; but determinacy is trace-bounded with a published ceiling of 0.70 and observability is engineerable from 0.6788 toward 1.0, so leverage is 0.5469 against 0.0. Memory covers 0.1584 of work, replays 0.0481 exactly and is silently corrupt 0.3114 of the time it holds.",
+    "independent_verification_required": true,
+    "iteration_limit": 1,
+    "obs_blocker": {
+      "delete_bypass_substitute_options": [
+        "delete the success count as the measure of learning",
+        "bypass the supply question by assuming repetition is universal",
+        "substitute the repository's own committed text for any invented notion of correctness"
+      ],
+      "intrinsic_or_path_specific": "intrinsic: whether a demonstration generalises is a fact about the work, not about the learner -- either a sibling exists and the target determines the values, or it does not.",
+      "surviving_causal_blocker": "Supply and determinacy. 84-88% of commits have no sibling, and of the pairs that do, 42% of the wins are verbatim and 45% of the induction pairs are wrong."
+    },
+    "obs_capability": {
+      "capability_work_deleted": [
+        "a second lesson store or admission gate",
+        "another hand-written mutation kind",
+        "a larger search budget on an inexpressible edit"
+      ],
+      "existing_inherited_routes_checked": [
+        "learned_skill_verdict_v1.run_program (runs a program in a thrown-away copy; has no notion of a state moving under it)",
+        "one_demonstration_reach_v1 (measures reach of a stored requirement; assumes the state it measured on)",
+        "applicability_v1 (learns a requirement from outcomes; licenses only from contrasts)",
+        "python_iterative_software_repair_loop_v1 (applies one candidate at a time; never composes two learned actions)"
+      ],
+      "external_existing_routes_checked": [
+        "QuixBugs itself, as the corpus and the oracle",
+        "2026 verifier-gated self-improvement literature (the verifier is the gate once a candidate exists)"
+      ],
+      "surviving_gap": "An executor that treats every learned action as a decision procedure plus a premise, re-proves the premise on the live state, and postcondition-checks the claimed sentence after acting."
+    },
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "a higher repair count reached by loosening what counts as repaired",
+        "counting a self-taught repair as transfer",
+        "treating a longer candidate list as more capability",
+        "quoting a corpus score as a frontier position"
+      ],
+      "real_outcome": "The permanent object is the method (decision procedure + premise + cost) and the verifier, never the plan: a learned action may veto but never license, every application re-proves its premise on the live state and re-reads the result against the sentence it claims, and composition re-checks the second premise against the first step's effect instead of against the record.",
+      "surviving_necessity": "Coding capability is gated on a correct candidate existing at all; no oracle, budget or weight can select a hypothesis the basis cannot build."
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": "None by claim: the existing repair primitive and corpus oracle are reused unchanged; the induced basis adds candidates only and holds no authority.",
+      "downstream_work_to_delete_or_supersede": "Any roadmap step that adds another hand-written mutation kind, or that raises a candidate budget to fix a bug whose edit is not expressible.",
+      "fresh_reuse_plan": "Recompute the ladder and re-run both bases from the receipt's commands; the corpus is public and the answer key is never needed."
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": "Reused the learned inline skill, the reach scanner and the run-in-a-copy runner; no second action library, no new oracle, no model.",
+      "search_stop_decision": "Stop at four independent samples (228 pairs); the per-sample staleness spread 45-58% already bounds the claim, and more samples buy precision, not a new fact."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "efficiency_mechanism": "The plan saves search but never carries authority; the postcondition check costs one parse and one name scan per application and removes the 71 silent corruptions by construction.",
+      "generality_mechanism": "The same protocol applies to any state, including a GUI window: re-observe, re-prove the premise, act, re-read.",
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "Plain replay is wrong 53.5% of the time and silently wrong 31.1%; a fingerprint alone still admits the 4 zero-drift stale cases; one plan per state is unbounded and still unproved; a model is prohibited producer cognition.",
+      "routes_ranked": [
+        "re-decide every action with its premise re-proved on the live state (selected)",
+        "replay the recorded plan and trust it",
+        "fingerprint the region and refuse stale replays only",
+        "learn one plan per state, growing the store with every change",
+        "ask a model to repair the replay"
+      ],
+      "white_box_harvest_note": "The canonical ladder is recorded in full; the WHITE_BOX_HARVEST step was considered and found empty. No donor model, weight or external artifact was harvested: the mechanism was induced from the corpus's own demonstration pairs and the tree's own repair primitive."
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "oracle_paths": [
+        "canonical/tests/test_action_replay_under_change_v1.py",
+        "canonical/verification/ACTION_REPLAY_UNDER_CHANGE_20261116_V1.json",
+        "canonical/verification/LEARNED_SKILL_VERDICT_20261116_V1.json"
+      ],
+      "synthetic_verification_necessity": "The corpus's own published tests are the oracle; unit tests pin only the mechanism and the measurement's integrity. Independent reproduction remains open."
+    },
+    "real_outcome": "On 268 real commits from five public repositories, 16.0 percent contain a sibling site at the loosest rung and 11.6 percent when the neighbourhood must match on both sides. Across 245 sibling pairs the demonstrated edit reproduced the developer's edit 181 times, but 103 of those were verbatim repeats; on the 142 pairs needing induction it was right 78 times (0.5493) and wrong 64. Determinacy fell from 53 percent at one changed line to 21 percent at five.",
+    "required_capability": "Routing instead of promising: decide from the target's own context whether memory applies (verbatim or clean binding), whether the edit invents a value the target does not determine, or whether there is no sibling at all -- and only let memory run in the first case, with the postcondition checked because a forced prediction cannot be told from a lucky one at run time.",
+    "route_frontier": {
+      "challenger_routes": [
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "none: ordering alone turns a correct composition into a broken file",
+            "CORRECTNESS": "a plan is a fact about one state; applied to another it is a guess",
+            "INCREMENTAL_COST": "zero to record, one silently damaged file to trust",
+            "RELIABILITY": "31.1% of applications damage the file without any error being raised",
+            "VERIFIABILITY": "only a postcondition check can tell, which is the selected route",
+            "WALL_CLOCK": "faster by one parse and one name scan per step"
+          },
+          "evidence": [
+            "106 of 228 matches (46.5%); 122 stale (53.5%)",
+            "71 of 228 produced a file that parses and still binds the removed name (31.1%)",
+            "all 106 matches had zero drift; 4 stale replays had zero drift as well",
+            "the operation itself stayed legal in 228 of 228 pairs, so the loss is addressing, not capability"
+          ],
+          "qualification_evidence": [
+            "canonical/verification/ACTION_REPLAY_UNDER_CHANGE_20261116_V1.json"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "REPLAY_THE_RECORDED_PLAN_WHEREVER_THE_ACTION_IS_NEEDED"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "none without the re-check",
+            "CORRECTNESS": "removes most staleness and admits the rest",
+            "INCREMENTAL_COST": "one hash per region",
+            "RELIABILITY": "strictly better than replay, strictly weaker than a postcondition check",
+            "VERIFIABILITY": "a filter, not a proof; the postcondition is the proof",
+            "WALL_CLOCK": "one hash per region, the cheapest possible filter"
+          },
+          "evidence": [
+            "118 of 122 stale replays had nonzero drift, so a region fingerprint removes most of them",
+            "4 stale replays had zero drift, so the fingerprint cannot be the licence"
+          ],
+          "qualification_evidence": [
+            "canonical/verification/ACTION_REPLAY_UNDER_CHANGE_20261116_V1.json"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "NON_DOMINATING",
+          "route": "FINGERPRINT_THE_TOUCHED_REGION_AND_REFUSE_STALE_REPLAYS"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "composition becomes available instead of accidental",
+            "CORRECTNESS": "the proof is re-run on the state in hand and the sentence is re-read after acting",
+            "INCREMENTAL_COST": "no model, no network, no store",
+            "RELIABILITY": "silent corruptions fall from 31.1% to 0 by construction",
+            "VERIFIABILITY": "reproducible from the receipt with one command and pinned by pytest",
+            "WALL_CLOCK": "one parse plus one name scan per application"
+          },
+          "evidence": [
+            "228 real two-step compositions in 62 files, four independent samples",
+            "the premise held after the change in 228 of 228 pairs, so re-deciding keeps both steps",
+            "a postcondition check costs one parse and one name scan and removes all 71 silent corruptions by construction"
+          ],
+          "qualification_evidence": [
+            "canonical/verification/ACTION_REPLAY_UNDER_CHANGE_20261116_V1.json"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "SELECTED",
+          "route": "RE_DECIDE_EVERY_ACTION_PROVE_THE_PREMISE_ON_THE_LIVE_STATE_AND_POSTCONDITION_CHECK_THE_CLAIMED_SENTENCE_INSTEAD_OF_REPLAYING_THE_PLAN"
+        }
+      ],
+      "checked_at_utc": "2026-11-17T00:15:03Z",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "discovery_required": true,
+      "incumbent_route": "record the edit a learned action produced and replay that plan wherever the action is needed",
+      "max_age_hours": 24,
+      "negative_search_summary": "Three routes were refused on this tree's own measurement: plain replay (53.5% of 228 real compositions stale, 31.1% silently corrupt), fingerprint-only invalidation (necessary, but 4 stale replays had zero drift), and one stored plan per state (unbounded, and every plan is still unproved on the next state). A model-based repair was refused as producer cognition.",
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "do coding agents replay past patches or synthesise new edits 2026"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "SWE-bench Verified patches keep deleted code Guard-and-Go deletion check"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "abstract plan reuse versus raw trajectory reuse SWE agent STAIR 2026"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "SWE-Touch mid-run user edit agent retained conflict 2026"
+        }
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route": "MEASURE_THE_SUPPLY_AND_DETERMINACY_OF_ONE_DEMONSTRATION_ON_REAL_COMMIT_HISTORY",
+      "selected_route_preflight": {
+        "all_required_dependencies_ready": true,
+        "checked_at_utc": "2026-11-17T03:13:02Z",
+        "execution_dependencies": [
+          {
+            "dependency": "local Python 3.11 runtime with pytest",
+            "evidence": [
+              "six tests ran; the live re-derivation reproduced the receipt from the existing clones"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "GLOBAL",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "scope": "GLOBAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          }
+        ],
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "max_age_hours": 2,
+        "selected_route": "MEASURE_THE_SUPPLY_AND_DETERMINACY_OF_ONE_DEMONSTRATION_ON_REAL_COMMIT_HISTORY",
+        "status": "READY"
+      },
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/swe_kernel/verified_skill_crystallizer_v1.py",
+          "canonical/swe_kernel/lesson_localization_v1.py",
+          "canonical/swe_kernel/lesson_admission_gate_v1.py",
+          "canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py",
+          "canonical/runtime/bound_capabilities/python_iterative_software_repair_loop_v1.py"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "https://www.sota2.com/research/dataset/miniwob (2026 aggregate reporting, used only to bound suite difficulty)"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "https://github.com/jkoppel/QuixBugs (MIT; 40 buggy programs, 40 pytest files, JSON test data)",
+          "https://pypi.org/project/pytest (9.2.0, the runner every verdict goes through)"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "https://arxiv.org/html/2605.11030v1 (executable benchmarking suite for tool-using agents, May 2026)",
+          "https://arxiv.org/pdf/2507.04103 (how to train your LLM web agent: task horizons of 2-5 steps)"
+        ]
+      },
+      "unresolved_plausible_dominators": []
+    },
+    "routes_considered": [
+      "Count one success as having learned the action (checked: only 16.0% of commits even have a sibling)",
+      "Assume a demonstration determines the sibling edit (checked: on 142 induction pairs it matched 78 and was wrong 64)",
+      "Credit verbatim repeats as learning (checked: 103 of 181 matches are copy-paste)",
+      "Rely on a shape match without context (checked: supply falls from 16.0% to 11.6% and precision rises to 73.3% when the neighbourhood must match)",
+      "Route on the measured classes: verbatim/clean-binding from memory, value-inventing by synthesis, no-sibling by synthesis with verification (selected)"
+    ],
+    "selected_route": "MEASURE_THE_SUPPLY_AND_DETERMINACY_OF_ONE_DEMONSTRATION_ON_REAL_COMMIT_HISTORY",
+    "selected_surviving_route": "MEASURE_THE_SUPPLY_AND_DETERMINACY_OF_ONE_DEMONSTRATION_ON_REAL_COMMIT_HISTORY",
+    "selected_surviving_route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+    "stop_condition": "One merged change on this branch in which the composed law is reproducible by one command, refuses to compute without its receipts, and separates slope from controllability.",
+    "why_selected_route_is_fastest_sufficient": "It is the only route that measures the term the claim assumes: supply. The model is 0.2 seconds over a pinned 393-commit corpus with real ground truth, so the routing rule can be applied immediately and re-applied after any change, instead of arguing about whether one demonstration is enough.",
+    "why_this_is_not_another_organ": "It replaces a list with a fold over experience and reuses the existing repair primitive, the corpus oracle and the hashing/verification discipline; the only new machinery is induction and the rung classifier, and both are measured."
+  },
+  "route_id": "COMPOSE_THE_PUBLISHED_RECEIPTS_INTO_ONE_FAIL_CLOSED_LAW_AND_SEPARATE_SLOPE_FROM_CONTROLLABILITY",
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "scope_complete_discharge": false,
+  "selected_route": "COMPOSE_THE_PUBLISHED_RECEIPTS_INTO_ONE_FAIL_CLOSED_LAW_AND_SEPARATE_SLOPE_FROM_CONTROLLABILITY",
+  "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
+  "stop_condition": "One merged change on this branch in which the composed law is reproducible by one command, refuses to compute without its receipts, and separates slope from controllability.",
+  "terminal_credit_delta": 0,
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "truth": {
+    "achieved": false
+  },
+  "user_authorized_governance_change": false,
+  "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "currentness": {
+      "accepted_families": 5,
+      "meta_envelope_open_count": 8,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "terminal": false,
+      "total_open_truth_obligations": 30,
+      "unresolved_atomic": 22
+    },
+    "fresh_reality_authority": false,
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "It measures supply and determinacy; it discharges no truth obligation.",
+    "target_truth_obligations": [
+      "CODING_TB4_GE_66_4"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "counterexample_receipts": [],
+      "decisive_question": "Which term of the measured capability product can actually be moved, and does the slope say the same thing as the leverage?",
+      "falsifier_id": "COMPOSED_LAW_WITH_PINNED_RECEIPTS_AND_CONTROLLABILITY_SPLIT",
+      "known_counterexamples_checked": true,
+      "no_known_counterexample_reason": "Determinacy is pinned at 0.5469 with a published ceiling of 0.70; density is 0.6788 and its strength 0.8021 is measured. No arm raises determinacy without a check.",
+      "proposal_id": "CAPABILITY_LAW_20261116_V1"
+    }
+  },
+  "verification": {
+    "authority": "NONE__PRODUCER_RUN_SANDBOX",
+    "commands": [
+      "python3 canonical/swe_kernel/capability_law_v1.py --json canonical/verification/CAPABILITY_LAW_20261116_V1.json",
+      "python3 -m pytest canonical/tests/test_capability_law_v1.py -q",
+      "python3 canonical/swe_kernel/capability_law_v1.py --pinned",
+      "python3 canonical/runtime/compile_brain_unified_model_v1.py",
+      "python3 execution_guard/repo_integrity_guard_v1.py --base cae454c9963b68dc530e6ddad0675cffda3ba921",
+      "python3 canonical/runtime/enforce_goal_hierarchy.py --base cae454c9963b68dc530e6ddad0675cffda3ba921 --head HEAD"
+    ],
+    "receipt": "canonical/verification/CAPABILITY_LAW_20261116_V1.json"
+  },
+  "weakens_existing_guard": false
+}

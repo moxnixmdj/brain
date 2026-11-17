@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 492,
+  "knowledge_documents": 493,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6950,
+  "research_index_records": 6952,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 452,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "21d52aea1d29812017390b61559df4c9c9b3aa612f6fe689be138d46253438a0"
+  "value": "bda6d1ffa77e0709a8e9c997dbc43c0af153fa2610f6d4d26b587a87d9ac77c6"
  },
  "engines": [
   {
@@ -64637,6 +64637,82 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 7261,
+   "headings": [
+    "The law, and why leverage is not slope",
+    "The law",
+    "Why this is a decision and not a table",
+    "What the ladder buys",
+    "What this means concretely",
+    "Computer use is `UNMEASURED`, and the law says so",
+    "What would falsify the law",
+    "Reproduce",
+    "What this does not claim"
+   ],
+   "kind": "DOCUMENT",
+   "path": "THE_LAW_AND_WHERE_THE_LEVERAGE_IS_20261116_V1.md",
+   "sha256": "3cc50b2708f6fae8b635d7a8fc93f0f9f0d892f1befc8bfb8e9b9ea73aa3b09c",
+   "summary": "*Composed 2026-11-16 from five published receipts, each pinned by path and sha256. Instrument: `canonical/swe_kernel/capability_law_v1.py`. Receipt: `canonical/verification/CAPABILITY_LAW_20261116_V1.json`. No model, no network, no spend.*",
+   "terms": {
+    "0.5445": 4,
+    "0.5469": 5,
+    "0.6788": 3,
+    "0.70": 5,
+    "action": 3,
+    "before": 3,
+    "best": 3,
+    "both": 3,
+    "canonical": 8,
+    "capability_law_v1.py": 3,
+    "ceiling": 4,
+    "check": 13,
+    "computer": 3,
+    "correct": 5,
+    "demonstration": 4,
+    "density": 10,
+    "determined": 5,
+    "edits": 4,
+    "even": 3,
+    "every": 5,
+    "exactly": 3,
+    "inducer": 3,
+    "ladder": 5,
+    "law": 8,
+    "leverage": 5,
+    "manufactured": 5,
+    "measure": 3,
+    "no": 11,
+    "not": 11,
+    "number": 4,
+    "one": 7,
+    "only": 5,
+    "product": 7,
+    "published": 4,
+    "python": 4,
+    "real": 6,
+    "receipt": 10,
+    "seen": 6,
+    "slope": 4,
+    "so": 6,
+    "spent": 4,
+    "strength": 6,
+    "term": 5,
+    "tests": 4,
+    "trace": 5,
+    "use": 4,
+    "value": 4,
+    "verification": 4
+   },
+   "title": "The law, and why leverage is not slope",
+   "title_terms": [
+    "law",
+    "leverage",
+    "not",
+    "slope"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 11153,
    "headings": [
     "The layer you named is the right layer, and it is not the bottleneck",
@@ -83374,10 +83450,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1294,
+  "included_source_count": 1295,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "a88aee50bde73a92f548cb7c5145a2998c16debd830d9b998ec2087612b11fed"
+  "source_tree_digest": "6c06258b1acd1fda6010a1b439e92bda74e254a31a670267acad82b340a41f85"
  },
  "research_index": [
   {
@@ -156243,6 +156319,23 @@
     "tb": 1,
     "v1": 1,
     "verify": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/CAPABILITY_LAW_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/CAPABILITY_LAW_20261116_V1.json",
+   "schema": "BRAIN_CAPABILITY_LAW_V1",
+   "sha256": "6ae092ea2e72257bf1e65a66b51a46fc45b98b4bba3ecb3ad82b7d98c9997864",
+   "status": "",
+   "terms": {
+    "20261116": 1,
+    "capability": 1,
+    "law": 1,
+    "v1": 1
    }
   },
   {
@@ -235842,6 +235935,51 @@
     "sys": 1,
     "the_browser_surface_resolves_its_driver_however_browser_v1_is_loaded__measured_against_a_live_chromium_launched_by_canonical_runtime_browser_launch_v1_sh__available_returned_true_browser_present__navigation_to_pypi_dot_org_and_github_dot_com_over_cdp_returned_titles_and_55_to_240_interactive_elements__benchmark_compiled_19_of_23_unchanged_correct_selection_17_of_23_unchanged_wrong_capability_2_of_23_unchanged__tests_162_to_165": 1,
     "v1": 2
+   }
+  },
+  {
+   "action_id": "CAPABILITY_LAW_20261116_V1",
+   "capability": false,
+   "date": "2026-11-16",
+   "id": "research:canonical/action_intents/CAPABILITY_LAW_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/CAPABILITY_LAW_20261116_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "c05192b1e0105381c91788585fc5691730cd546e8c11daec6876b63c4bba09f8",
+   "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
+   "terms": {
+    "0.0": 1,
+    "0.003": 1,
+    "0.0481": 1,
+    "0.1167": 1,
+    "0.1584": 1,
+    "0.2978": 1,
+    "0.3114": 1,
+    "0.4387": 1,
+    "0.5445": 2,
+    "0.5469": 3,
+    "0.6788": 1,
+    "0.70": 1,
+    "1.0": 1,
+    "20261116": 1,
+    "action": 1,
+    "against": 1,
+    "alone": 1,
+    "anywhere": 1,
+    "but": 1,
+    "capability": 1,
+    "capability_law_20261116_v1": 1,
+    "ceiling": 1,
+    "compose_the_published_receipts_into_one_fail_closed_law_and_separate_slope_from_controllability": 1,
+    "correct": 1,
+    "corrupt": 1,
+    "covers": 1,
+    "determinacy": 2,
+    "determined": 1,
+    "each": 1,
+    "observability": 3,
+    "so": 2,
+    "work": 2
    }
   },
   {
