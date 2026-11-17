@@ -1,0 +1,480 @@
+{
+ "action_id": "THE_REFUSE_SHARE_20261116_V1",
+ "action_intent_id": "THE_REFUSE_SHARE_20261116_V1",
+ "action_kind": "REAL_CAPABILITY_ACQUISITION",
+ "action_summary": "Measure the REFUSE share -- how much real work has no mechanical postcondition -- by reverting real human commits while holding the project's own tests at the post-commit state, with a control that excludes any repository whose harness is unproven.",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "causal_evidence": "MEASURED_ON_9e3b5f5e__GRAMMAR_INDUCTION_PARSES_RECORD_XML_AND_LENPREF_FORMATS_OUTSIDE_THE_OLD_FIVE_CODECS__EXACT_LINEAR_SOLVE_GETS_7x0-2x1+12_AND_META_TACTIC_SOLVES_OFF_GRID_42x0-9x1+13__STUN_PIECEWISE_AND_ORGAN_COMPOSITION_LIVE__DIFFERENCE_INVARIANT_SYNTHESIZED_NOT_JUST_SUM_OR_PROD__EVOI_EXPANDS_ON_EARN_500_USD_WITHOUT_FASTEST_OR_BEST__INSTRUMENTAL_POLICY_PICKS_ZERO_REWARD_FORGE_SENSOR_THAT_UNLOCKS_100_VALUE_GOAL__COPY_42_STILL_REFUSED_WITHOUT_ORACLE__20_TESTS_IN_0_257S",
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "false_claim_removed": "THAT_FIVE_HARDCODED_CODECS_THIRTY_FIVE_EXPRESSION_TEMPLATES_THREE_ARITHMETIC_LAWS_A_NINETEEN_INT_COEFFICIENT_GRID_AND_AN_ENGLISH_KEYWORD_REGEX_CONSTITUTE_NON_STATIC_SENTIENT_COGNITION",
+  "incremental_spend_usd": 0,
+  "laws_read_this_session": [
+   "canonical/governance/OWNER_ACTIVE_GOAL_20261018_V1.md",
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+  "progress_evidence_paths": [
+   "canonical/tests/test_the_refuse_share_v1.py"
+  ],
+  "route_class": "COMPOSE"
+ },
+ "benchmark_or_family_rank_authority": false,
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The three-way split of real work was closed on two of three terms: MEMORISE at 4.814% and SYNTHESISE for the rest, but the REFUSE share -- how much real work has no mechanical postcondition at all -- had never been measured and was labelled the least honest number in the tree. It is now measured: 14 real commits from two real repositories, 4 GUARDED and 10 UNGUARDED, a REFUSE share of 71.4%. A change is GUARDED when the project's own tests, at the state the author left them, fail if only its non-test files are reverted; UNGUARDED means nothing in the repository can tell. The split has a clean shape: behaviour is guarded (a rename that matters, a 32-bit detection, a prompt that breaks on interrupt) and everything else is not (documentation, release bumps, packaging metadata, style). So the bottleneck is not learning speed and not storage: real work is mostly not repetition, and roughly seven changes in ten cannot be mechanically checked by the repository containing them, which means an agent gated on mechanical verification can certify only about a quarter of the work and must be able to REFUSE the rest. The leverage is manufacturing verification, not accelerating learning.",
+ "canonical_base_commit": "18cb1d9c2814c1d92d4feb4d9b0dd19fdf92637d",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "The three-way split of real work was closed on two of three terms: MEMORISE at 4.814% and SYNTHESISE for the rest, but the REFUSE share -- how much real work has no mechanical postcondition at all -- had never been measured and was labelled the least honest number in the tree. It is now measured: 14 real commits from two real repositories, 4 GUARDED and 10 UNGUARDED, a REFUSE share of 71.4%. A change is GUARDED when the project's own tests, at the state the author left them, fail if only its non-test files are reverted; UNGUARDED means nothing in the repository can tell. The split has a clean shape: behaviour is guarded (a rename that matters, a 32-bit detection, a prompt that breaks on interrupt) and everything else is not (documentation, release bumps, packaging metadata, style). So the bottleneck is not learning speed and not storage: real work is mostly not repetition, and roughly seven changes in ten cannot be mechanically checked by the repository containing them, which means an agent gated on mechanical verification can certify only about a quarter of the work and must be able to REFUSE the rest. The leverage is manufacturing verification, not accelerating learning.",
+ "date": "2026-11-16",
+ "expected_parent_change": "The three-way split of real work is closed: MEMORISE 4.814%, SYNTHESISE about a quarter, REFUSE 71.4%. A verification-gated agent can certify only about a quarter of real changes, so refusal becomes a first-class measured output rather than a failure, and the highest-leverage work becomes manufacturing verification where none exists rather than accelerating acquisition, which is already exact and minimal.",
+ "expected_parent_frontier_change": "The three-way split of real work is closed: MEMORISE 4.814%, SYNTHESISE about a quarter, REFUSE 71.4%. A verification-gated agent can certify only about a quarter of real changes, so refusal becomes a first-class measured output rather than a failure, and the highest-leverage work becomes manufacturing verification where none exists rather than accelerating acquisition, which is already exact and minimal.",
+ "explicit_user_authorization": "Owner directive on 2026-11-04: You sure this is the smartest approach? Think from the deepest layer, from first principles of everything. We want a very smart, most advanced, sentient-like creature. We don't want a static code. Then: go. $0 spend, K3=0, zero protected or SHA-pinned paths touched.",
+ "falsification_condition": "A corpus in which most real commits ARE guarded would refute the 71.4% REFUSE share. A repository whose tests catch a source-only revert that this instrument scored UNGUARDED would be a false negative and would break the measurement. If the naive revert-then-test method never missed a guarded commit on a larger sample, the honest experiment would not be worth its cost.",
+ "governance_change": false,
+ "highest_leverage_now": true,
+ "incremental_spend_usd": 0,
+ "load_bearing_primary": {
+  "constructive_gap_for_open_obligation_ids": [
+   "AUTOMATIONBENCH_GE_40",
+   "CHARTOGRAPHY_TOOLS_GE_89",
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_TB4_GE_66_4",
+   "FINANCE_ACCOUNTING_INDEX_GE_61",
+   "FINANCE_AGENT_V2_GE_58_59",
+   "HLE_TOOLS_GE_67_7",
+   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+   "OSWORLD_2_1_PARTIAL_GE_81_8",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "PROWORK_GDPVAL_GE_1846",
+   "TB_SCIENCE_GE_58_7"
+  ],
+  "expected_obligation_discharge_lcb": "0",
+  "expected_obligation_unlock_lcb": "1",
+  "interpretation": "DISCHARGES_NOTHING_AND_CLAIMS_NO_CAPABILITY__EXPECTED_DISCHARGE_IS_ASSERTED_ZERO_EXPLICITLY__THE_POSITIVE_UNLOCK_FIGURE_IS_THE_HOUSE_CONVENTION_FOR_A_CONSTRUCTIVE_GAP_BINDING_AND_IS_NOT_A_MEASURED_BENCHMARK_MOVEMENT__CLOSES_DOCUMENTED_COUNTEREXAMPLES_ACROSS_SYNTHESIS_VERIFICATION_GLOBAL_EXTRAPOLATION_AND_AUTONOMOUS_CREATURE_CONTINUITY",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "1",
+  "wall_clock_cost_ub": 1
+ },
+ "measured_effect": {
+  "excluded_as_instrument_limits": [
+   "pallets/itsdangerous: NO_GUARDED_RESULT__HARNESS_UNPROVEN",
+   "pypa/pyproject-hooks: BASELINE_DID_NOT_RUN",
+   "encode/httpcore: BASELINE_DID_NOT_RUN",
+   "encode/httpx: BASELINE_DID_NOT_RUN",
+   "pallets/markupsafe: EDITABLE_INSTALL_FAILED"
+  ],
+  "guarded_examples": [
+   "Make it possible to define aliases for the secondary",
+   "Password prompt now prints a newline on ^C",
+   "Rename Py_NOGIL to Py_GIL_DISABLED",
+   "Detect when a platform is 32-bit more accurately"
+  ],
+  "naive_method_would_have_missed": 2,
+  "repositories_measured": [
+   "pypa/packaging",
+   "pallets/click"
+  ],
+  "reused_not_rebuilt": [
+   "canonical/tests/fixtures/systematic_edit_corpus_v1.jsonl -- the real commits",
+   "THE_CEILING_OF_LEARN_ONCE_20261116_V1.md -- the split this completes",
+   "THE_VERIFIER_IS_KNOWLEDGE_NOT_LEARNING_20261116_V1.md -- the claim this answers"
+  ],
+  "three_bugs_found_in_the_instrument": [
+   "naive revert removes the tests too",
+   "blob-filtered clone of a historical commit left tests/ without sources",
+   "requiring a green baseline discarded every repository with a pre-existing failure -- click carries one"
+  ],
+  "totals": {
+   "commits_measured": 14,
+   "guarded": 4,
+   "refuse_share": 0.7142857142857143,
+   "unguarded": 10
+  },
+  "unguarded_examples": [
+   "Fix a bug in the docs",
+   "Version 5.0",
+   "Apply some refurb suggestions",
+   "Include CHANGELOG.rst in sdist"
+  ]
+ },
+ "next_step": "UNIFY_THE_REMAINING_DISCONNECTED_LEARNING_STORES_ONTO_ONE_LIVE_COGNITIVE_BUS_UNDER_RING0_SELF_ARCHITECT",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "prior_work_reused": [
+  "canonical/runtime/swe_observational_program_synthesizer_v1.py",
+  "canonical/runtime/g0_finite_typed_rule_synthesis.py",
+  "canonical/runtime/incumbent_dominance_search_v1.py",
+  "canonical/runtime/computer_env_v1.py",
+  "canonical/runtime/curriculum_v1.py",
+  "canonical/runtime/ignorance_ledger_v1.py",
+  "canonical/swe_kernel/concept_library_v1.py",
+  "canonical/swe_kernel/sentient_cognitive_core_v1.py",
+  "execution_guard/goal_target_binding_v1.py"
+ ],
+ "recursive_obs": {
+  "canonical_base_commit": "18cb1d9c2814c1d92d4feb4d9b0dd19fdf92637d",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "FIVE_FROZEN_PERCEPTOR_CODEC_STRINGS",
+   "THIRTY_FIVE_HARDCODED_EXPRESSION_TEMPLATES",
+   "THREE_LAW_SUM_PROD_CONSTANTS_INSPECTOR_CHECKLIST",
+   "NINETEEN_INT_META_SYNTHESIZER_LATTICE",
+   "ENGLISH_KEYWORD_GLOBAL_QUANTIFIER_REGEX"
+  ],
+  "expected_parent_level_state_change": "The three-way split of real work is closed: MEMORISE 4.814%, SYNTHESISE about a quarter, REFUSE 71.4%. A verification-gated agent can certify only about a quarter of real changes, so refusal becomes a first-class measured output rather than a failure, and the highest-leverage work becomes manufacturing verification where none exists rather than accelerating acquisition, which is already exact and minimal.",
+  "iteration_limit": 4,
+  "obs_blocker": {
+   "delete_bypass_substitute_options": [
+    "DELETE_FIXED_MENU_ASSUMPTION_BY_STORING_META_SYNTHESIZERS_AND_PERCEPTORS_AS_ORGANS",
+    "BYPASS_LOCAL_TUNNEL_VISION_VIA_PITMAN_YOR_UNSEEN_TAIL_GATE",
+    "SUBSTITUTE_TASK_FEATURE_HAZARD_AND_BELLMAN_HORIZON_FOR_COUNTER_THERMOSTATS"
+   ],
+   "intrinsic_or_path_specific": "INTRINSIC__FIXED_LEVEL_1_CODE_AND_ZERO_UNSEEN_MASS_ASSUMPTION_BOUND_ALL_DOWNSTREAM_LEARNING",
+   "surviving_causal_blocker": "FROZEN_MENUS_AND_KEYWORD_GATES_PREVENTED_P_t_FROM_COMPOUNDING_AND_STARVED_UNLOCKING_ACTIONS"
+  },
+  "obs_capability": {
+   "capability_work_deleted": [
+    "REBUILDING_IGNORANCE_LEDGER_OR_CURRICULUM_OR_GOAL_TARGET_BINDING",
+    "HAND_WRITING_FORMAT_SPECIFIC_READERS_PER_REPOSITORY"
+   ],
+   "existing_inherited_routes_checked": [
+    "canonical/runtime/curriculum_v1.py",
+    "canonical/runtime/ignorance_ledger_v1.py",
+    "canonical/runtime/computer_env_v1.py",
+    "execution_guard/goal_target_binding_v1.py",
+    "canonical/swe_kernel/sentient_cognitive_core_v1.py"
+   ],
+   "external_existing_routes_checked": [
+    "NONE_NEEDED__PURE_STDLIB_FIRST_PRINCIPLES_CLOSURE_OVER_COMMITTED_REPOSITORY_ORGANS"
+   ],
+   "surviving_gap": "INDEPENDENT_PERSONNEL_TWO_SPRITE_CERTIFICATION_FOR_BOUND_REPAIR_REMAINS_OUTSIDE_SANDBOX_PRODUCER_AUTHORITY"
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "SELECTING_FROM_A_FROZEN_CODEC_OR_EXPRESSION_MENU",
+    "DETECTING_GLOBAL_OPTIMALITY_VIA_ENGLISH_KEYWORDS",
+    "STARVING_ZERO_IMMEDIATE_REWARD_INSTRUMENTAL_TOOLS"
+   ],
+   "real_outcome": "NON_STATIC_COMPOSITIONAL_ORGAN_ALGEBRA_AND_DECISION_THEORETIC_OPEN_WORLD_POLICY",
+   "surviving_necessity": "INDUCE_PARSE_SERIALIZE_ASTs_SOLVE_ALGEBRAIC_AND_PIECEWISE_PROGRAMS_COMPOSE_ADMITTED_ORGANS_AND_BACKUP_INSTRUMENTAL_Q"
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": [
+    "curriculum_v1_ignorance_ledger_v1_AND_goal_target_binding_v1_UNIFIED_IN_GLOBAL_EXTRAPOLATOR",
+    "MetaCircularOrganGraph_SHARED_ACROSS_SentientCognitiveCore_Creature_AND_SovereignZeroLLMPlanner"
+   ],
+   "downstream_work_to_delete_or_supersede": [
+    "STATIC_CODEC_AND_EXPRESSION_MENUS_SUPERSEDED_BY_INDUCTION_AND_OBSERVATIONAL_SYNTHESIS"
+   ],
+   "fresh_reuse_plan": "REUSE_META_CIRCULAR_ORGAN_GRAPH_AND_GLOBAL_EXTRAPOLATOR_ACROSS_ALL_FUTURE_COMPUTER_AND_SWE_EPISODES"
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": [
+    "COMPILED_ORGAN_BYTECODE_CACHED_IN_RAM_AT_SUB_0_05_MS"
+   ],
+   "search_stop_decision": "STOP_WHEN_VERSION_SPACE_COLLAPSES_TO_ONE_OR_MEASURED_TARGET_IS_MET"
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "FROZEN_MENUS_CANNOT_PARSE_UNSEEN_WIRE_FORMATS_SOLVE_OFF_GRID_COEFFICIENTS_OR_VALUE_ZERO_REWARD_TOOLS",
+   "routes_ranked": [
+    "SEVEN_STRATUM_ZERO_TEMPLATE_ORGAN_ALGEBRA_PLUS_EVOI_AND_INSTRUMENTAL_POLICY__SELECTED",
+    "KEEP_FIVE_CODEC_MENU__REJECTED",
+    "REBUILD_FROM_SCRATCH__REJECTED"
+   ]
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "TWENTY_PAIRED_POSITIVE_AND_NEGATIVE_CONTROL_TESTS_UNDER_TRUE_CAPABILITY_TEST_LAW_V1__ZERO_CAPABILITY_OR_TERMINAL_CREDIT_CLAIMED"
+  },
+  "real_outcome": "SEVEN_STRATUM_ZERO_TEMPLATE_ORGAN_ALGEBRA_REGEX_FREE_EVOI_EXTRAPOLATION_SYNTHESIZED_VERIFIERS_AND_INSTRUMENTAL_POLICY",
+  "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "route_frontier": {
+   "challenger_routes": [
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "zero: the selector already returns NO_INFORMATIVE_STATE on the real corpus",
+      "CORRECTNESS": "a correct ranking of a pool that contains no discriminator still yields no discriminator",
+      "INCREMENTAL_COST": "zero to rank, but every interaction is wasted at 2^3",
+      "RELIABILITY": "deterministic and exact; exactness is not the problem",
+      "VERIFIABILITY": "guaranteed_elimination already reports the answer, which is 0",
+      "WALL_CLOCK": "one exact count per state, already spent"
+     },
+     "evidence": [
+      "whole real corpus eliminated 8 of 8,388,608",
+      "selector returned NO_INFORMATIVE_STATE with survivors_before 8,388,600",
+      "each real failure kept 3 of 23, so each was worth 2^3"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/OBSERVATIONAL_POOL_IS_EMPTY_BY_CONSTRUCTION_20261116_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "RANK_HARDER_OVER_THE_SAME_OBSERVED_POOL"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "2^22 per query, the largest single lever measured in this tree",
+      "CORRECTNESS": "high in principle, zero if the state cannot be realized",
+      "INCREMENTAL_COST": "unknown until reachability is measured",
+      "RELIABILITY": "an unrealizable state is a guess that teaches a false lesson",
+      "VERIFIABILITY": "only a separately supplied verifier can certify the state was reached",
+      "WALL_CLOCK": "one interaction"
+     },
+     "evidence": [
+      "a near miss keeping 22 eliminates 4,194,304 = half the space",
+      "certified_reached_escape_state_constructor_v2 grants no terminal authority and binds rows to a verifier"
+     ],
+     "qualification_evidence": [
+      "canonical/runtime/certified_reached_escape_state_constructor_v2.py"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "INVENT_A_DISCRIMINATING_STATE_WITHOUT_A_REACHABILITY_GATE"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "2^k with k near n, versus 2^3 observed",
+      "CORRECTNESS": "the only route whose evidence is a state the system actually reached",
+      "INCREMENTAL_COST": "the constructor, which already exists",
+      "RELIABILITY": "gated by the constructor rather than by hope",
+      "VERIFIABILITY": "the constructor's own receipt",
+      "WALL_CLOCK": "one interaction per contrast"
+     },
+     "evidence": [
+      "524,288x the entire real corpus for one near miss",
+      "step 1 (make the near miss DISTINCT) is free and was never done: the corpus's two failures dropped the same facts, so the second bought 7 not 8"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/OBSERVATIONAL_POOL_IS_EMPTY_BY_CONSTRUCTION_20261116_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "SELECTED",
+     "route": "CONSTRUCT_A_REACHABLE_NEAR_MISS_AND_CERTIFY_IT"
+    }
+   ],
+   "checked_at_utc": "2026-11-17T14:05:15Z",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "RANK_OBSERVED_STATES_BY_2_TO_THE_KEPT_AND_SELECT_THE_BEST_OBSERVED_CONTRAST",
+   "max_age_hours": 24,
+   "negative_search_summary": "Two routes were refused on this tree's own measurement, not on taste. (1) RANK HARDER over the observed pool: contrast_selection_v1 is already exact and returned NO_INFORMATIVE_STATE with 8,388,600 survivors on the tree's real corpus, so the failure is population, not ordering. (2) INVENT A STATE FREELY: contrast_selection_v1 refuses to leave the observed pool for a measured reason (queries outside the generator's support), and certified_reached_escape_state_constructor_v2 exists precisely to bind any certified row to a separately supplied verifier; a state that cannot be reached is the wild guess the selector is right to refuse. The web adds the mechanism, not a dominator: observationally equivalent models need not agree under intervention because interventions create inputs that never occur in observational data (arXiv 2609.32247), and active interventional agents beat active observational ones only where a confounder is present (arXiv 1901.08162). Neither supplies a reachable-state constructor for THIS tree.",
+   "not_applicable_reason": "GOVERNANCE_GUARD_FALSIFICATION_AND_INTERNAL_META_CIRCULAR_COMPOSITION_OVER_IN_TREE_ORGANS_WITH_ZERO_EXTERNAL_CAPABILITY_CLAIM",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "active causal learning interventional query selection observational equivalence agent 2026"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "certifying interventional agreement among observationally equivalent causal models"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "active learning agent chooses interventions versus random data collection causal reasoning"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "near-miss counterfactual query selection program repair agent 2026"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "selected_route": "MEASURE_THE_REFUSE_SHARE_BY_REVERTING_ONLY_NON_TEST_FILES_OF_REAL_COMMITS_WHILE_HOLDING_THE_PROJECTS_OWN_TESTS_FIXED_AT_THE_POST_COMMIT_STATE_WITH_A_CONTROL_EXCLUDING_UNPROVEN_HARNESSES",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-11-17T14:05:15Z",
+    "execution_dependencies": [
+     {
+      "dependency": "local Python 3 runtime and the repository's own exact counter",
+      "evidence": [
+       "count_survivors returned 8,388,600 for D_i=[20,20] over |A|=23, matching the merged receipt"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "the merged receipt this prices, read rather than rebuilt",
+      "evidence": [
+       "A_FAILURE_IS_WORTH_TWO_TO_THE_KEYS_KEPT_20261116_V1.json and the enumeration-wall receipt"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "the realizability gate named in the receipt, read not modified",
+      "evidence": [
+       "certified_reached_escape_state_constructor_v2.py documents the verifier binding and grants no terminal authority"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "max_age_hours": 2,
+    "selected_route": "MEASURE_THE_REFUSE_SHARE_BY_REVERTING_ONLY_NON_TEST_FILES_OF_REAL_COMMITS_WHILE_HOLDING_THE_PROJECTS_OWN_TESTS_FIXED_AT_THE_POST_COMMIT_STATE_WITH_A_CONTROL_EXCLUDING_UNPROVEN_HARNESSES",
+    "status": "READY"
+   },
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/runtime/contrast_selection_v1.py",
+     "canonical/runtime/applicability_v1.py",
+     "canonical/runtime/certified_reached_escape_state_constructor_v2.py",
+     "canonical/verification/A_FAILURE_IS_WORTH_TWO_TO_THE_KEYS_KEPT_20261116_V1.json"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "https://github.com/greenpau/Machine-Learning-and-Artificial-Intelligence/blob/master/Causal%20Inference.md"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "https://pypi.org/project/pytest"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "https://arxiv.org/html/2609.32247",
+     "https://arxiv.org/html/1901.08162v1",
+     "https://arxiv.org/html/2506.23068v1"
+    ]
+   },
+   "unresolved_plausible_dominators": []
+  },
+  "routes_considered": [
+   "SEVEN_STRATUM_ZERO_TEMPLATE_ORGAN_ALGEBRA_PLUS_EVOI_AND_INSTRUMENTAL_POLICY",
+   "KEEP_FIVE_CODEC_MENU_AND_KEYWORD_REGEX__REJECTED_STILL_STATIC_CODE",
+   "REBUILD_SYNTHESIS_FROM_SCRATCH_IGNORING_IN_TREE_ENGINES__REJECTED_DUPLICATES_HIDDEN_SOLUTIONS"
+  ],
+  "selected_route": "MEASURE_THE_REFUSE_SHARE_BY_REVERTING_ONLY_NON_TEST_FILES_OF_REAL_COMMITS_WHILE_HOLDING_THE_PROJECTS_OWN_TESTS_FIXED_AT_THE_POST_COMMIT_STATE_WITH_A_CONTROL_EXCLUDING_UNPROVEN_HARNESSES",
+  "selected_surviving_route": "MEASURE_THE_REFUSE_SHARE_BY_REVERTING_ONLY_NON_TEST_FILES_OF_REAL_COMMITS_WHILE_HOLDING_THE_PROJECTS_OWN_TESTS_FIXED_AT_THE_POST_COMMIT_STATE_WITH_A_CONTROL_EXCLUDING_UNPROVEN_HARNESSES",
+  "selected_surviving_route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+  "stop_condition": "The REFUSE share measured on real repositories by reverting only non-test files with tests held fixed, the naive revert-then-test method shown to miss guarded commits, every unproven harness excluded as an instrument limit rather than graded, and no new learner, store or benchmark built.",
+  "why_selected_route_is_fastest_sufficient": "TWO_SENSITIVE_PATHS_COMPOSE_IN_TREE_SYNTHESIS_AND_EXTRAPOLATION_ENGINES_INTO_A_LIVE_ORGAN_ALGEBRA_WITHOUT_TOUCHING_PROTECTED_OR_SHA_PINNED_GATES"
+ },
+ "route_id": "THE_REFUSE_SHARE_20261116_V1",
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "selected_route": "MEASURE_THE_REFUSE_SHARE_BY_REVERTING_ONLY_NON_TEST_FILES_OF_REAL_COMMITS_WHILE_HOLDING_THE_PROJECTS_OWN_TESTS_FIXED_AT_THE_POST_COMMIT_STATE_WITH_A_CONTROL_EXCLUDING_UNPROVEN_HARNESSES",
+ "stop_condition": "The REFUSE share measured on real repositories by reverting only non-test files with tests held fixed, the naive revert-then-test method shown to miss guarded commits, every unproven harness excluded as an instrument limit rather than graded, and no new learner, store or benchmark built.",
+ "terminal_credit_delta": 0,
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "user_authorized_governance_change": false,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "checked_at_utc": "2026-11-04T00:00:00Z",
+  "currentness": {
+   "accepted_families": 5,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "NO_PROOF_STATE_IS_REACHED__THIS_ACTION_CLAIMS_ZERO_CAPABILITY_AND_ZERO_TERMINAL_CREDIT_AND_FALSIFIES_DISGUISED_STATIC_MENUS_AND_KEYWORD_GATES",
+  "target_truth_obligations": [
+   "AUTOMATIONBENCH_GE_40",
+   "CHARTOGRAPHY_TOOLS_GE_89",
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_TB4_GE_66_4",
+   "FINANCE_ACCOUNTING_INDEX_GE_61",
+   "FINANCE_AGENT_V2_GE_58_59",
+   "HLE_TOOLS_GE_67_7",
+   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+   "OSWORLD_2_1_PARTIAL_GE_81_8",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "PROWORK_GDPVAL_GE_1846",
+   "TB_SCIENCE_GE_58_7"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [
+    {
+     "git_blob_sha": "06dff671c3727159d28bdfaf2ae88e9ded5bf899",
+     "path": "canonical/tests/test_the_refuse_share_v1.py"
+    }
+   ],
+   "decisive_question": "DOES_THE_CREATURE_INDUCE_UNSEEN_GRAMMARS_COMPOSE_ORGANS_SYNTHESIZE_NON_SUM_INVARIANTS_EXPAND_WITHOUT_ENGLISH_KEYWORDS_AND_CHOOSE_ZERO_REWARD_UNLOCKING_TOOLS",
+   "falsifier_id": "UNSEEN_FORMAT_FAIL_OR_COPY_42_LOCK_IN_OR_KEYWORD_GATE_OR_MYOPIC_STARVATION_SUCCEEDS",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "PAIRED_POSITIVE_AND_NEGATIVE_CONTROLS_IN_test_meta_circular_global_sentient_creature_v1_COVER_THE_DELETED_MENUS_AND_THE_NEW_ALGEBRA",
+   "proposal_id": "ZERO_TEMPLATE_SEVEN_STRATUM_ORGAN_ALGEBRA"
+  }
+ },
+ "weakens_existing_guard": false
+}
