@@ -107,7 +107,32 @@
       "why": "the intent is the recorded consequence, so any difference is an error: with a full state observation every wrong action is caught, and a wrong action that leaves the state identical did not miss the goal"
     },
     "status": "MEASURED_ON_A_SHELL_ENVIRONMENT",
-    "what_remains_unmeasured": "a GUI whose only observable is pixels or DOM -- a projection, not the state; a fact carried by remote state rather than by a path; the outer edge of repair (the candidate set is the state the step can see, and the probe is a content change, so a dependency on a file outside the sandbox, a lock, or a bare existence is not measured by it); and the outer edge of sufficiency itself -- a verdict is relative to a stated grammar and to the candidate states generated for it, so a behaviour outside the grammar is refused rather than learned, and two readings that differ only on a state nobody generated remain conflated",
+    "vocabulary_growth": {
+      "actions": 5,
+      "diagnoses_correct": 5,
+      "growths": {
+        "already_explained_copy": null,
+        "composition_not_in_the_flat_grammar": "sort_unique_then_reverse",
+        "invisible_action_touch": "DERIVED_PREDICATE(mtime_changed)",
+        "nondeterministic_permutation": "PERMUTATION_OF_INPUT(payload.dat)",
+        "unrepresentable_action_mkdir": null
+      },
+      "outcomes_realised": [
+        "BEYOND_THIS_OBSERVABLE",
+        "EXPLAINED",
+        "INVISIBLE_IN_THE_CURRENT_VIEW",
+        "NOT_A_FUNCTION_OF_THE_STATE",
+        "OUTSIDE_THE_FLAT_GRAMMAR"
+      ],
+      "raw_mtime_field_fires_of": [
+        5,
+        6
+      ],
+      "receipt": "canonical/verification/VOCABULARY_GROWTH_20261116_V1.json",
+      "transfer_holds": 5,
+      "why": "a refusal is not an answer, it is the only place a vocabulary can be grown honestly: the failure says which of five things is missing, and the growth is kept only if it is necessary (the flat grammar cannot do it), stable (a repeat reproduces it), transferable (a second action of the same kind is identified by it) and narrow (the distinctions it collapses are printed). The boundary is a missing sensor, not a missing word: `mkdir` has a real effect on disk that every view in the family is blind to, and no amount of experience reaches it"
+    },
+    "what_remains_unmeasured": "a GUI whose only observable is pixels or DOM -- a projection, not the state; a fact carried by remote state rather than by a path; the outer edge of repair (the candidate set is the state the step can see, and the probe is a content change, so a dependency on a file outside the sandbox, a lock, or a bare existence is not measured by it); and the outer edge of sufficiency itself -- a verdict is relative to a stated grammar and to the candidate states generated for it, so a behaviour outside the grammar is refused rather than learned, and two readings that differ only on a state nobody generated remain conflated); and the outer edge of growth -- the vocabulary is searched inside a stated family of derived views, relations and one-step compositions, so a primitive that needs a sensor the agent does not have is refused rather than invented, and a two-step composition is not reached",
     "what_was_run": "34 mechanically derived wrong actions over 9 real shell transformations, real programs on a real disk, real reset"
   },
   "incremental_spend_usd": 0,
@@ -187,6 +212,10 @@
     "value": {
       "path": "canonical/verification/SYSTEMATIC_EDIT_DERIVATION_20261116_V1.json",
       "sha256": "a7445aad53cb9ff2b3a2daf20aa09e623fa68716a43e88cacdbb43faad92b738"
+    },
+    "vocabulary": {
+      "path": "canonical/verification/VOCABULARY_GROWTH_20261116_V1.json",
+      "sha256": "bff50dc1b11800e3df950959fcd68d238282fb9e683439bcaf0cee3cb684c417"
     }
   },
   "scenarios": [
