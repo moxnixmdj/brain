@@ -1,0 +1,77 @@
+{
+ "authority": "NONE__PRODUCER_RUN_COMPUTATION_OVER_EXISTING_COUNTER",
+ "candidates": 23,
+ "conclusion": "The observational pool is not badly RANKED, it is badly POPULATED. The tree's real failures dropped 20 of 23 and kept 3, so each was worth 2^3 = 8 hypotheses; two of them were worth 8 in total. ONE near miss that keeps 22 is worth 2^22 = 4,194,304 -- half the space, and 524,288x the entire real corpus. Selecting optimally inside a pool of dramatic failures is worthless no matter how good the ranking, because the pool contains nothing that discriminates. The lever is to make a NEAR MISS REACHABLE: take a success and remove one fact it required. Whether that intervention is admissible is a separate question, answered by the realizability gate, not by this arithmetic.",
+ "incremental_spend_usd": 0,
+ "interventional": {
+  "best_eliminates": 4194304,
+  "best_kept": 22,
+  "candidates": 23,
+  "hypotheses_before": 8388608,
+  "median_eliminates": 4194304,
+  "pool": "interventional__near_misses",
+  "rows": [
+   {
+    "dropped": 1,
+    "eliminates": 4194304,
+    "kept": 22,
+    "law_check_2_to_the_kept": 4194304
+   },
+   {
+    "dropped": 1,
+    "eliminates": 4194304,
+    "kept": 22,
+    "law_check_2_to_the_kept": 4194304
+   },
+   {
+    "dropped": 1,
+    "eliminates": 4194304,
+    "kept": 22,
+    "law_check_2_to_the_kept": 4194304
+   }
+  ],
+  "states": 3,
+  "total_dropped_across_states": 3
+ },
+ "kind": "receipt",
+ "observational": {
+  "best_eliminates": 8,
+  "best_kept": 3,
+  "candidates": 23,
+  "hypotheses_before": 8388608,
+  "median_eliminates": 8,
+  "pool": "observational__the_real_corpus_failures",
+  "rows": [
+   {
+    "dropped": 20,
+    "eliminates": 8,
+    "kept": 3,
+    "law_check_2_to_the_kept": 8
+   },
+   {
+    "dropped": 20,
+    "eliminates": 8,
+    "kept": 3,
+    "law_check_2_to_the_kept": 8
+   }
+  ],
+  "states": 2,
+  "total_dropped_across_states": 40
+ },
+ "price_of_not_intervening": {
+  "best_single_interventional": 4194304,
+  "best_single_observational": 8,
+  "one_near_miss_eliminated": 4194304,
+  "ratio_per_query": 524288.0,
+  "reading": "with the pool restricted to states already observed, the best available contrast is worth 2^kept where kept is 3 in this corpus, i.e. 8. A reachable near miss keeping 22 is worth 2^22. The ratio is the price of never inventing a world, per corpus.",
+  "whole_observed_pool_eliminated": 8,
+  "whole_pool_vs_one_near_miss": 524288.0
+ },
+ "producer_cognition_model_dependency_count": 0,
+ "realizability_gate": {
+  "component": "canonical/runtime/certified_reached_escape_state_constructor_v2.py",
+  "status": "NOT_MEASURED_HERE",
+  "why_it_matters": "an interventional state is only admissible if the machinery can reach it and certify it; otherwise it is the wild guess contrast_selection_v1 is right to refuse"
+ },
+ "schema": "OBSERVATIONAL_POOL_IS_EMPTY_BY_CONSTRUCTION_V1"
+}

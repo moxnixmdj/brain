@@ -340,7 +340,7 @@
           "route": "SYNTHESIZE_AN_AST_LEVEL_EDIT_INDUCER_THAT_FOLDS_ONE_DEMONSTRATION_PAIR_INTO_A_HOLE_GENERALIZED_TEMPLATE_WITH_A_CONTEXT_PRECONDITION_AND_MEASURES_IT_END_TO_END_ON_A_PUBLIC_BUG_CORPUS"
         }
       ],
-      "checked_at_utc": "2026-11-17T02:59:21Z",
+      "checked_at_utc": "2026-11-17T03:00:02Z",
       "comparison_dimensions": [
         "CORRECTNESS",
         "CAPABILITY_STRENGTH",
@@ -380,7 +380,7 @@
       "selected_route": "SYNTHESIZE_AN_EXACT_INSTRUMENT_AUDIT_OVER_THE_COMPLETE_FINITE_REPAIR_SPACE_THAT_ASKS_WHICH_CASE_THE_SCREEN_CHOOSES_AND_COUNTS_BOTH_ERROR_DIRECTIONS_AGAINST_THE_CORPUS_OWN_JUDGE",
       "selected_route_preflight": {
         "all_required_dependencies_ready": true,
-        "checked_at_utc": "2026-11-17T02:59:21Z",
+        "checked_at_utc": "2026-11-17T03:00:02Z",
         "execution_dependencies": [
           {
             "dependency": "local Python 3.11 runtime with pytest",

@@ -1,0 +1,122 @@
+{
+  "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+  "code_sha256": {
+    "engine": "7816eb07d3120c321037cdd3bfe30605079f1083e830303ac6963de06f2a4efd",
+    "measure": "834364fa49715f52fe289657f81348a6c015b8edcf2cf9be0d2430402e58a2f0",
+    "tests": "cb2ac70c970fb069c2be9c8624dfc7b19defa5ec94340de3d87877e26c5a84f8"
+  },
+  "engine_changes": [
+    "hole ranking: before-return > block-end > assign-in-loop > site-distance (AST tiers)",
+    "stmt generation: params/for-vars first, round-robin list receivers (opstack.append(token) in top-4)",
+    "two-phase wall share: insertion gets min(40s, 50% wall) first, force gets the rest, insertion retries with remainder",
+    "insert probes capped at 3s (wrong inserts can self-loop; timeout_s=20 burned the golden hole)",
+    "_finish handles mode=insert / site=None"
+  ],
+  "generated_utc": "2026-11-17T02:21:08Z",
+  "integrity": {
+    "answer_key_present_at_source": true,
+    "incremental_spend_usd": 0,
+    "network_calls_during_measurement": 0,
+    "producer_cognition_model_dependency_count": 0,
+    "python": "3.11.2",
+    "timeout_s": 20,
+    "unit_tests": "canonical/tests/test_counterfactual_spec_repair_v1.py 10/10 OK",
+    "wall_budget_s": 70.0
+  },
+  "limits": [
+    "9 NEITHER bugs remain OPEN (detect_cycle, kheapsort, kth, possible_change, powerset, shortest_path_length, shortest_paths, subsequences, topological_ordering) -- not pure single-line omission of the golden form",
+    "wall_budget_s=70 per task; higher budgets may convert some OPEN",
+    "not a proof of general omission completeness; three golden classes only"
+  ],
+  "not_done": [
+    "full 40-bug sweep under insertion (NEITHER_19 headline only this receipt)",
+    "merge of arena/220c3ed0-brain pending this receipt + feature files"
+  ],
+  "prior_arms": {
+    "counterfactual_neither_after_insertion": 10,
+    "counterfactual_neither_before_insertion": 7,
+    "edit_kind_transfer_neither": 19,
+    "solver_only": 5
+  },
+  "raw_result_path": "/tmp/cf_neither19_final.jsonl",
+  "read_this_first": "Statement-insertion composition added to the counterfactual repair engine. The three golden omission bugs (wrap, reverse_linked_list, shunting_yard) now repair end-to-end with sabotage discrimination under the corpus's own pytest. NEITHER_19 overlap rises from 7 to 10. Zero model calls; $0 spend; answer key never reached the solver; independent fresh-copy verification.",
+  "schema": "BRAIN_COUNTERFACTUAL_REPAIR_QUIXBUGS_INSERTION_RECEIPT_V1",
+  "summary": {
+    "force_or_aug_winners": [
+      "bitcount",
+      "breadth_first_search",
+      "flatten",
+      "lis",
+      "max_sublist_sum",
+      "mergesort",
+      "sqrt"
+    ],
+    "insertion_winners": [
+      {
+        "mode": "insert",
+        "sabotage_discriminates": true,
+        "seconds": 13.9,
+        "site": "insert",
+        "task": "reverse_linked_list",
+        "term": "prevnode = node",
+        "tested_candidate_count": 38
+      },
+      {
+        "mode": "insert",
+        "sabotage_discriminates": true,
+        "seconds": 11.3,
+        "site": "insert",
+        "task": "shunting_yard",
+        "term": "opstack.append(token)",
+        "tested_candidate_count": 57
+      },
+      {
+        "mode": "insert",
+        "sabotage_discriminates": true,
+        "seconds": 3.3,
+        "site": "insert",
+        "task": "wrap",
+        "term": "lines.append(text)",
+        "tested_candidate_count": 14
+      }
+    ],
+    "neither_19_open": [
+      "detect_cycle",
+      "kheapsort",
+      "kth",
+      "possible_change",
+      "powerset",
+      "shortest_path_length",
+      "shortest_paths",
+      "subsequences",
+      "topological_ordering"
+    ],
+    "neither_19_repaired": [
+      "bitcount",
+      "breadth_first_search",
+      "flatten",
+      "lis",
+      "max_sublist_sum",
+      "mergesort",
+      "reverse_linked_list",
+      "shunting_yard",
+      "sqrt",
+      "wrap"
+    ],
+    "neither_19_repaired_count": 10,
+    "repaired": 10,
+    "repaired_tasks": [
+      "bitcount",
+      "breadth_first_search",
+      "flatten",
+      "lis",
+      "max_sublist_sum",
+      "mergesort",
+      "reverse_linked_list",
+      "shunting_yard",
+      "sqrt",
+      "wrap"
+    ],
+    "tasks": 19
+  }
+}
