@@ -205,12 +205,20 @@ def test_the_transfer_half_is_a_second_action_of_the_same_kind(report):
     assert report["transfer"]["invisible_action_touch"]["growth"] == "delta_mtime"
 
 
+def test_every_diagnosis_reproduced_on_an_independent_second_draw(report):
+    """A verdict drawn once is a sample. The receipt must say it drew twice and got the same answer."""
+    assert report["diagnoses_reproduced_on_a_second_draw"] == report["chains"]
+    for chain in report["per_chain"]:
+        assert chain["diagnosis_reproduced_on_a_second_draw"] is True, chain["chain"]
+
+
 def test_the_measurement_reproduces(report):
     again = V.measure()
     assert again["outcomes"] == report["outcomes"]
     assert again["growths"] == report["growths"]
     assert again["diagnoses_correct"] == report["diagnoses_correct"]
     assert again["transfer_holds"] == report["transfer_holds"]
+    assert again["diagnoses_reproduced_on_a_second_draw"] == report["diagnoses_reproduced_on_a_second_draw"]
 
 
 def test_the_receipt_refuses_to_call_a_model_a_verifier(report):

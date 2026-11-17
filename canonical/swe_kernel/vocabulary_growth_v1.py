@@ -432,6 +432,9 @@ def _chain(work: pathlib.Path, name: str, invocation: str, states: Mapping[str, 
     contrast_record = {state_id: evidence(contrast, {state_id: state}, work, repetitions=2)[state_id]
                        for state_id, state in states.items()}
     diagnosis = diagnose(record, states)
+    # a diagnosis drawn from one round of evidence is a sample. Draw it again, independently, and say whether
+    # it reproduced -- so a flaky environment is reported as one instead of silently changing the receipt.
+    confirmation = diagnose(evidence(invocation, states, work, repetitions=repetitions), states)
 
     if diagnosis["growth"] == "OBSERVABLE":
         growth = grow_observable(record, contrast_record)
@@ -476,6 +479,7 @@ def _chain(work: pathlib.Path, name: str, invocation: str, states: Mapping[str, 
         "transfer_same_kind": transfer_same,
         "transfer_growth": transfer_growth,
         "diagnosis_was_right": diagnosis["outcome"] == expectation,
+        "diagnosis_reproduced_on_a_second_draw": confirmation["outcome"] == diagnosis["outcome"],
     }
 
 
@@ -547,6 +551,8 @@ def measure() -> dict[str, Any]:
         "actions": [chain["chain"] for chain in chains],
         "outcomes": {chain["chain"]: chain["outcome"] for chain in chains},
         "diagnoses_correct": sum(1 for chain in chains if chain["diagnosis_was_right"]),
+        "diagnoses_reproduced_on_a_second_draw": sum(
+            1 for chain in chains if chain["diagnosis_reproduced_on_a_second_draw"]),
         "growths": {chain["chain"]: chain["growth_bought"] for chain in chains},
         "transfer": {chain["chain"]: {"invocation": chain["transfer_invocation"],
                                       "outcome": chain["transfer_outcome"],

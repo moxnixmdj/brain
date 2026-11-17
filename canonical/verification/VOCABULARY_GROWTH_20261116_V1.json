@@ -9,6 +9,7 @@
   "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
   "chains": 5,
   "diagnoses_correct": 5,
+  "diagnoses_reproduced_on_a_second_draw": 5,
   "environment": {
     "composition_ops": [
       "sort",
@@ -103,6 +104,7 @@
           ]
         }
       },
+      "diagnosis_reproduced_on_a_second_draw": true,
       "diagnosis_was_right": true,
       "expected_outcome": "EXPLAINED",
       "growth": "NONE",
@@ -138,6 +140,7 @@
           "b"
         ]
       },
+      "diagnosis_reproduced_on_a_second_draw": true,
       "diagnosis_was_right": true,
       "expected_outcome": "NOT_A_FUNCTION_OF_THE_STATE",
       "growth": "SET_VALUED_CONSEQUENCE",
@@ -152,7 +155,7 @@
         "buys": "a consequence that reproduces where no exact consequence ever did, and the one property a caller actually needs before running a shuffling transform on a data file: nothing is lost",
         "chosen": "permutation_of_input",
         "cost": "order carries no information at this resolution -- the action cannot be told apart from any other transform that preserves the multiset, and the set is wider than one output",
-        "distinct_consequences_observed": 5,
+        "distinct_consequences_observed": 6,
         "fresh_execution_still_inside_the_set": true,
         "growth": "SET_VALUED_CONSEQUENCE",
         "is_genuinely_a_set": true,
@@ -185,6 +188,7 @@
         "growth": "COMPOSE",
         "outcome": "OUTSIDE_THE_FLAT_GRAMMAR"
       },
+      "diagnosis_reproduced_on_a_second_draw": true,
       "diagnosis_was_right": true,
       "expected_outcome": "OUTSIDE_THE_FLAT_GRAMMAR",
       "growth": "COMPOSE",
@@ -227,6 +231,7 @@
           "delta_name"
         ]
       },
+      "diagnosis_reproduced_on_a_second_draw": true,
       "diagnosis_was_right": true,
       "expected_outcome": "INVISIBLE_IN_THE_CURRENT_VIEW",
       "growth": "OBSERVABLE",
@@ -267,6 +272,7 @@
           "delta_name"
         ]
       },
+      "diagnosis_reproduced_on_a_second_draw": true,
       "diagnosis_was_right": true,
       "expected_outcome": "BEYOND_THIS_OBSERVABLE",
       "growth": "STOP",

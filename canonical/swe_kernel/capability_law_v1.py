@@ -64,6 +64,7 @@ RECEIPTS = {
     "repair": "canonical/verification/CAUSAL_DEPENDENCY_REPAIR_20261116_V1.json",
     "demonstration": "canonical/verification/DEMONSTRATION_SUFFICIENCY_20261116_V1.json",
     "vocabulary": "canonical/verification/VOCABULARY_GROWTH_20261116_V1.json",
+    "reach": "canonical/verification/REACH_OF_THE_GRAMMAR_20261116_V1.json",
 }
 
 # The published ceiling for an inducer with full AST and context machinery on real systematic edits.
@@ -117,6 +118,7 @@ def compose(*, pins: Mapping[str, str] | None = None) -> dict[str, Any]:
     repaired, repaired_sha = _load("repair", pins=pins)
     sufficed, sufficed_sha = _load("demonstration", pins=pins)
     grew, grew_sha = _load("vocabulary", pins=pins)
+    reached, reached_sha = _load("reach", pins=pins)
 
     determined = float(_field(supply, "by_rung/shape_only/determined_share", "supply"))
     value_determined = (float(_field(value, "by_rung/shape_only/derive_arm/pairs_where_derivation_was_right",
@@ -218,6 +220,7 @@ def compose(*, pins: Mapping[str, str] | None = None) -> dict[str, Any]:
                 ("repair", RECEIPTS["repair"], repaired_sha),
                 ("demonstration", RECEIPTS["demonstration"], sufficed_sha),
                 ("vocabulary", RECEIPTS["vocabulary"], grew_sha),
+                ("reach", RECEIPTS["reach"], reached_sha),
             )
         },
         "law": "P(correct behaviour | one action) = P(determined) x P(seen); P(seen) = density x strength",
@@ -382,6 +385,29 @@ def compose(*, pins: Mapping[str, str] | None = None) -> dict[str, Any]:
                         "distinctions it collapses are printed). The boundary is a missing sensor, not a missing "
                         "word: `mkdir` has a real effect on disk that every view in the family is blind to, and "
                         "no amount of experience reaches it"),
+            },
+            "reach": {
+                "receipt": RECEIPTS["reach"],
+                "law": "P(correct action) = REACH x SEARCH x VERIFICATION",
+                "real_tasks": int(_field(reached, "reach/tasks", "reach")),
+                "real_fix_pieces": int(_field(reached, "reach/pieces", "reach")),
+                "coverage_with_every_other_task_as_experience":
+                    float(_field(reached, "reach/coverage_with_all_other_tasks_seen", "reach")),
+                "coverage_while_streaming": float(_field(reached, "reach/coverage_while_streaming", "reach")),
+                "never_rebuilt_by_any_other_task": float(_field(reached, "real_fixes/never_seen_share", "reach")),
+                "repair_in_grammar": float(_field(reached,
+                                                  "grammar_membership_predicts_repair/in_grammar/repair_rate",
+                                                  "reach")),
+                "repair_out_of_grammar": float(_field(
+                    reached, "grammar_membership_predicts_repair/out_of_grammar/repair_rate", "reach")),
+                "grammar_can_insert_a_node": _field(reached, "grammar/can_insert_a_node", "reach"),
+                "grammar_can_delete_a_node": _field(reached, "grammar/can_delete_a_node", "reach"),
+                "why": ("the ceiling is REACH, not experience and not search. 75.2% of 2178 real fix pieces are "
+                        "rebuilt by no operator any other task's fixes ever produced, and with every other task "
+                        "as experience the coverage is 18.7% -- flat across experience quartiles. On 100 real "
+                        "HumanEvalFix bugs the same split appears from the other side: defect types whose edit "
+                        "shape the grammar can name repair at 74%, the rest at 32%. So one experience per action "
+                        "does not solve computer use; it changes the currency from requests to environments"),
             },
             "what_remains_unmeasured": ("a GUI whose only observable is pixels or DOM -- a projection, not the "
                                         "state; a fact carried by remote state rather than by a path; the outer "
