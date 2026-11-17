@@ -43,7 +43,7 @@
   },
   "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::WHETHER_THE_VALUE_A_SIBLING_EDIT_NEEDS_IS_INFERABLE_AT_ALL_FROM_ONE_DEMONSTRATION_WAS_NEVER_MEASURED_IT_WAS_ASSUMED_BECAUSE_THE_SHAPE_TRANSFERRED",
-  "canonical_base_commit": "078f34433bf3e98f9d589482a305034b9c6c366b",
+  "canonical_base_commit": "e9955d59c68e5e953c6f83720599827ba7c12f62",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -140,7 +140,7 @@
       "systematic_editing_from_one_example": "SyDIT, PLDI 2011: from edit pairs in five large projects, mimics the human correctly on 70% (39/56) of systematic edits"
     },
     "incremental_spend_usd": 0,
-    "measured_at_commit": "078f34433bf3e98f9d589482a305034b9c6c366b",
+    "measured_at_commit": "e9955d59c68e5e953c6f83720599827ba7c12f62",
     "model_calls": 0,
     "network_calls": 0,
     "what_this_does_not_claim": "No new capability. Derivation pairs holes by position, shifts one dotted component and matches context by slot index; the contrast arm can only fire on commits with three sibling sites, so its coverage is bounded by the same supply that limits everything else."
@@ -166,7 +166,7 @@
   ],
   "probe_specific": false,
   "recursive_obs": {
-    "canonical_base_commit": "078f34433bf3e98f9d589482a305034b9c6c366b",
+    "canonical_base_commit": "e9955d59c68e5e953c6f83720599827ba7c12f62",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "storing an inferred value as knowledge",
@@ -519,8 +519,8 @@
       "python3 canonical/swe_kernel/systematic_edit_supply_v1.py --json canonical/verification/SYSTEMATIC_EDIT_DERIVATION_20261116_V1.json",
       "python3 -m pytest canonical/tests/test_systematic_edit_supply_v1.py -q",
       "python3 canonical/runtime/compile_brain_unified_model_v1.py",
-      "python3 execution_guard/repo_integrity_guard_v1.py --base 078f34433bf3e98f9d589482a305034b9c6c366b",
-      "python3 canonical/runtime/enforce_goal_hierarchy.py --base 078f34433bf3e98f9d589482a305034b9c6c366b --head HEAD"
+      "python3 execution_guard/repo_integrity_guard_v1.py --base e9955d59c68e5e953c6f83720599827ba7c12f62",
+      "python3 canonical/runtime/enforce_goal_hierarchy.py --base e9955d59c68e5e953c6f83720599827ba7c12f62 --head HEAD"
     ],
     "receipt": "canonical/verification/SYSTEMATIC_EDIT_DERIVATION_20261116_V1.json"
   },
