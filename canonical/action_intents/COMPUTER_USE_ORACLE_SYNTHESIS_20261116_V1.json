@@ -46,7 +46,7 @@
     "terminal_achieved": false
   },
   "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
-  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_ORACLE_WAS_TREATED_AS_A_PREDICATE_TO_WRITE_WHEN_IT_IS_AN_OBSERVATION_TO_CHOOSE",
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_CONSEQUENCE_OF_AN_ACTION_WAS_ABSENT_FROM_THE_OBSERVATION_SO_A_WRONG_RESULT_LOOKED_LIKE_A_RESULT_AND_WAS_KEPT",
   "canonical_base_commit": "d2e0aa07937ee1993dcac84cffff8bac5eb2a1e7",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
@@ -333,7 +333,7 @@
           "route": "RE_DECIDE_EVERY_ACTION_PROVE_THE_PREMISE_ON_THE_LIVE_STATE_AND_POSTCONDITION_CHECK_THE_CLAIMED_SENTENCE_INSTEAD_OF_REPLAYING_THE_PLAN"
         }
       ],
-      "checked_at_utc": "2026-11-17T00:15:03Z",
+      "checked_at_utc": "2026-11-17T03:47:35Z",
       "comparison_dimensions": [
         "CORRECTNESS",
         "CAPABILITY_STRENGTH",
@@ -370,15 +370,15 @@
         "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
         "BEFORE_SCARCE_GATE_SPEND"
       ],
-      "selected_route": "MEASURE_THE_SUPPLY_AND_DETERMINACY_OF_ONE_DEMONSTRATION_ON_REAL_COMMIT_HISTORY",
+      "selected_route": "MEASURE_WHAT_A_CONSEQUENCE_DIFFERENTIAL_CAN_SEE_THEN_SYNTHESISE_THE_MINIMAL_OBSERVATION_THAT_IDENTIFIES_THE_ACTION",
       "selected_route_preflight": {
         "all_required_dependencies_ready": true,
-        "checked_at_utc": "2026-11-17T03:13:02Z",
+        "checked_at_utc": "2026-11-17T03:47:35Z",
         "execution_dependencies": [
           {
-            "dependency": "local Python 3.11 runtime with pytest",
+            "dependency": "local Python 3.11 runtime with pytest; gzip, sort, base64, tr, sed, sha256sum, cp, split, tar on PATH",
             "evidence": [
-              "six tests ran; the live re-derivation reproduced the receipt from the existing clones"
+              "34 real wrong actions executed in a temporary directory; 21 tests ran; the receipt reproduced"
             ],
             "evidence_classes": [
               "DIRECT_PROBE"
@@ -394,7 +394,7 @@
         "execution_dependencies_complete": true,
         "failed_dependencies": [],
         "max_age_hours": 2,
-        "selected_route": "MEASURE_THE_SUPPLY_AND_DETERMINACY_OF_ONE_DEMONSTRATION_ON_REAL_COMMIT_HISTORY",
+        "selected_route": "MEASURE_WHAT_A_CONSEQUENCE_DIFFERENTIAL_CAN_SEE_THEN_SYNTHESISE_THE_MINIMAL_OBSERVATION_THAT_IDENTIFIES_THE_ACTION",
         "status": "READY"
       },
       "source_classes_checked": [
