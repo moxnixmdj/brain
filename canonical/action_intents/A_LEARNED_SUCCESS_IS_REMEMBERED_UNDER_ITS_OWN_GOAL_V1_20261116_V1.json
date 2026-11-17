@@ -438,7 +438,7 @@
      "path": "canonical/tests/test_learned_success_is_remembered_under_its_own_goal_v1.py"
     },
     {
-     "git_blob_sha": "55e0e70d8aeb2e90a4ed3c53c98e1aeb76602ea8",
+     "git_blob_sha": "26bf4a5b758fb63adafc2bbd4c1215556c268245",
      "path": "canonical/action_intents/A_LEARNED_SUCCESS_IS_REMEMBERED_UNDER_ITS_OWN_GOAL_V1_20261116_V1.json"
     }
    ],
