@@ -41,7 +41,7 @@
   },
   "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::EVERY_REMAINING_REFUSAL_IN_THE_NEW_ENVIRONMENT_MEASUREMENT_WAS_A_COMPOSITION_OR_AN_EXPRESSIVITY_GAP_AND_NEITHER_HAD_BEEN_SEPARATED_FROM_A_SEARCH_BUDGET_SO_THE_NEXT_BOTTLENECK_COULD_NOT_BE_NAMED",
-  "canonical_base_commit": "8ff59e0d489d84bb477c58fc278f97205d8b79f8",
+  "canonical_base_commit": "a2c3480a06f457c225a431e384ff311154882c52",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -118,7 +118,7 @@
   ],
   "probe_specific": false,
   "recursive_obs": {
-    "canonical_base_commit": "8ff59e0d489d84bb477c58fc278f97205d8b79f8",
+    "canonical_base_commit": "a2c3480a06f457c225a431e384ff311154882c52",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "treating a search budget as a proof of impossibility",
@@ -321,7 +321,7 @@
           "route": "SYNTHESIZE_AN_AST_LEVEL_EDIT_INDUCER_THAT_FOLDS_ONE_DEMONSTRATION_PAIR_INTO_A_HOLE_GENERALIZED_TEMPLATE_WITH_A_CONTEXT_PRECONDITION_AND_MEASURES_IT_END_TO_END_ON_A_PUBLIC_BUG_CORPUS"
         }
       ],
-      "checked_at_utc": "2026-11-17T00:06:54Z",
+      "checked_at_utc": "2026-11-17T00:17:44Z",
       "comparison_dimensions": [
         "CORRECTNESS",
         "CAPABILITY_STRENGTH",
@@ -361,7 +361,7 @@
       "selected_route": "SYNTHESIZE_AN_OFFLINE_COMPOSER_OVER_THE_MEASURED_OPERATOR_TABLE_WITH_A_FRAME_CONDITION_AND_A_PER_STEP_PREDICTION_AUDIT_AND_EXHAUSTIVE_UNREACHABILITY_PROOFS",
       "selected_route_preflight": {
         "all_required_dependencies_ready": true,
-        "checked_at_utc": "2026-11-17T00:06:54Z",
+        "checked_at_utc": "2026-11-17T00:17:44Z",
         "execution_dependencies": [
           {
             "dependency": "local Python 3.11 runtime with pytest",

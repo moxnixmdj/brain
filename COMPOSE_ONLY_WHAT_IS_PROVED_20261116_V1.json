@@ -1,0 +1,149 @@
+{
+  "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+  "boxes": {
+    "A_NOT_PROVED": 15,
+    "B_REFUSED": 27,
+    "COMPOSED_VERIFIED": 31,
+    "NO_SECOND_CANDIDATE": 34,
+    "PREMISE_DIED": 22
+  },
+  "boxes_by_direction": {
+    "inline_then": {
+      "A_NOT_PROVED": 14,
+      "COMPOSED_VERIFIED": 12,
+      "NO_SECOND_CANDIDATE": 10,
+      "PREMISE_DIED": 22
+    },
+    "rename_then": {
+      "A_NOT_PROVED": 1,
+      "B_REFUSED": 27,
+      "COMPOSED_VERIFIED": 19,
+      "NO_SECOND_CANDIDATE": 24
+    }
+  },
+  "claim_on_trial": "compose only what is proved: two learned operations, premise re-read after every effect, per-step proof, prior-proof survival",
+  "composed_verified": 31,
+  "damaged": 0,
+  "damaged_rows": [],
+  "date": "2026-11-16",
+  "examples": {
+    "A_NOT_PROVED": [
+      {
+        "dead": null,
+        "function": "render",
+        "path": "canonical/astra_runtime/chain_bed/src/calc.py",
+        "variable": "parts"
+      },
+      {
+        "dead": null,
+        "function": "_list_survivors",
+        "path": "canonical/runtime/applicability_v1.py",
+        "variable": "visit_cap"
+      },
+      {
+        "dead": null,
+        "function": "_filing_url",
+        "path": "canonical/runtime/bound_capabilities/sec_inline_xbrl_fact_anchor_v1.py",
+        "variable": "text"
+      }
+    ],
+    "B_REFUSED": [
+      {
+        "function": "apply",
+        "path": "canonical/research/bytes/tools/conservative_mpc_pow_int_n1_n2_prune_v51.py",
+        "target": "tree_brain_renamed",
+        "why": "STEP_DID_NOTHING:step2"
+      },
+      {
+        "function": "run",
+        "path": "canonical/runtime/bound_capabilities/python_pr_land_composer_v1.py",
+        "target": "producers_brain_renamed",
+        "why": "STEP_DID_NOTHING:step2"
+      },
+      {
+        "function": "run",
+        "path": "canonical/runtime/bound_capabilities/python_pr_land_composer_v1.py",
+        "target": "artifact",
+        "why": "STEP_DID_NOTHING:step2"
+      }
+    ],
+    "COMPOSED_VERIFIED": [
+      {
+        "function": "compile_salesforce_mark_won",
+        "path": "canonical/runtime/automationbench_mutation_compiler_v1.py",
+        "steps": 2,
+        "target": "candidates_brain_renamed"
+      },
+      {
+        "function": "compile_salesforce_mark_won",
+        "path": "canonical/runtime/automationbench_mutation_compiler_v1.py",
+        "steps": 2,
+        "target": "terms"
+      },
+      {
+        "function": "_rename_without_replacing",
+        "path": "canonical/runtime/bound_capabilities/file_ops.py",
+        "steps": 2,
+        "target": "library"
+      }
+    ],
+    "NO_SECOND_CANDIDATE": [
+      {
+        "function": "apply",
+        "path": "canonical/research/bytes/tools/conservative_mpc_pow_int_n1_n2_prune_v51.py"
+      },
+      {
+        "function": "rebuild_valid_prefix",
+        "path": "canonical/runtime/composition_state_capsule_guard_v2.py"
+      },
+      {
+        "function": "_recompute",
+        "path": "canonical/runtime/cross_document_effect_semantic_lattice_verify_v5.py"
+      }
+    ],
+    "PREMISE_DIED": [
+      {
+        "dead": "TARGET_NOT_BOUND_ANYMORE:_rename_without_replacing.result",
+        "function": "_rename_without_replacing",
+        "path": "canonical/runtime/bound_capabilities/file_ops.py",
+        "target": "result"
+      },
+      {
+        "dead": "TARGET_NOT_BOUND_ANYMORE:validate.exact",
+        "function": "validate",
+        "path": "canonical/runtime/cad_t0_post_refreeze_binding_v4_validator.py",
+        "target": "exact"
+      },
+      {
+        "dead": "TARGET_NOT_BOUND_ANYMORE:rebuild_valid_prefix.max_capability_records",
+        "function": "rebuild_valid_prefix",
+        "path": "canonical/runtime/composition_state_capsule_guard_v2.py",
+        "target": "max_capability_records"
+      }
+    ]
+  },
+  "pair_step1_refused": 0,
+  "premises_held_attempts": 58,
+  "reach_compose": 0.3875,
+  "reach_where_premises_held": 0.5345,
+  "sampled_sites": 72,
+  "scan": {
+    "files": 5563,
+    "files_with_sites": 4228,
+    "premise_holding_sites": 9290,
+    "scan_seconds": 49.97
+  },
+  "schema": "PROJECT_BRAIN_PROVED_COMPOSITION_MEASURE_V1",
+  "second_step_attempts": 80,
+  "seconds": 73.52,
+  "step_one": {
+    "inline": {
+      "attempted": 36,
+      "proved": 22
+    },
+    "rename": {
+      "attempted": 36,
+      "proved": 35
+    }
+  }
+}
