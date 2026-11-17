@@ -1,0 +1,535 @@
+{
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+ "action_id": "THE_CONSEQUENCE_MODEL_IS_A_TABLE_20261116_V1",
+ "action_intent_id": "THE_CONSEQUENCE_MODEL_IS_A_TABLE_20261116_V1",
+ "action_kind": "REAL_CAPABILITY_ACQUISITION",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "incremental_spend_usd": 0,
+  "independent_verification_completed": false,
+  "independent_verification_note": "Producer-run sandbox only. Independent verification still open.",
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+  "progress_evidence_paths": [
+   "canonical/runtime/consequence_table_v1.py",
+   "canonical/tests/test_consequence_table_v1.py",
+   "canonical/verification/THE_CONSEQUENCE_MODEL_IS_A_TABLE_20261116_V1.json",
+   "THE_CONSEQUENCE_MODEL_IS_A_TABLE_20261116_V1.md"
+  ],
+  "route_class": "DELETE",
+  "scope_complete_discharge": false,
+  "terminal_achieved": false
+ },
+ "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A_PAID_FOR_CONSEQUENCE_MODEL_TRANSFERS_TO_A_NEW_INSTANCE_33_OF_33_AND_TO_A_NEW_ENVIRONMENT_0_OF_48_BECAUSE_ZERO_FOREIGN_TRANSITIONS_ARE_EVER_CONSULTED",
+ "canonical_base_commit": "d2e0aa07937ee1993dcac84cffff8bac5eb2a1e7",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "A_PAID_FOR_CONSEQUENCE_MODEL_TRANSFERS_TO_A_NEW_INSTANCE_33_OF_33_AND_TO_A_NEW_ENVIRONMENT_0_OF_48_BECAUSE_ZERO_FOREIGN_TRANSITIONS_ARE_EVER_CONSULTED",
+ "date": "2026-11-16",
+ "expected_parent_change": "Planning happens inside an executed-transition table instead of against the live environment: 39879 -> 10656 act_calls on 52/52 satisfiable instances, and a paid-for table carries to a new instance 33/33 at 4.1x.",
+ "expected_parent_frontier_change": "The wall moves from 'there is no consequence model' to 'a paid-for model does not cross into a new environment': 33/33 within an environment, 0/48 across one.",
+ "explicit_user_authorization": [
+  "Instant learning + instant learning in new arbitrary environments -- we solved those perfectly. Doesn't that mean we can solve any computer use?",
+  "Give the model the most advanced actions, let it do a thing once, it learns it permanently, and every computer task plus the most advanced software engineering is solved. Am I right or wrong?",
+  "You must think from first principles for everything",
+  "You should kill all the bad and dumb ideas before you waste time implementing them.",
+  "NEVER BUILD BEFORE REASRCHING IS EXHASIATAION IS HAPPENED",
+  "maximize your web use",
+  "all the tests are not on synthetic data but are on the hardest open tests",
+  "Testing on bugs we already know work is not progress -- that is self-congratulation.",
+  "YOU SURE THIS THE SMARTEST APPROACH?",
+  "Work in branch, merge only when complete (fastest)",
+  "Merge once, not 10 times."
+ ],
+ "falsification_condition": "A transfer of even one foreign transition into a new environment; or the table failing an instance the re-executing search solves; or any silently wrong successor from the table.",
+ "files": {
+  "canonical/runtime/consequence_table_v1.py": "a0a3d3cedff58cde1f206f1195339e49b85a8a0af54eb5c9e2affd8d1b55d438",
+  "canonical/tests/test_consequence_table_v1.py": "f9eeb4401b565813257a0f5b048735fc8751464831445b359f12220f637c0df1",
+  "canonical/verification/THE_CONSEQUENCE_MODEL_IS_A_TABLE_20261116_V1.json": "b619d6360c50f56d28657442ea1ed059a3ae09e4fc2c8babe68d7cd20cfa82f1",
+  "THE_CONSEQUENCE_MODEL_IS_A_TABLE_20261116_V1.md": "de8e10cd3ab19a9ef7b49f5b73cca505408bfc7177b036722cad8a93dc5ffa66"
+ },
+ "generic_repair_from_single_probe": false,
+ "governance_change": false,
+ "highest_leverage_now": true,
+ "incremental_spend_usd": 0,
+ "intentional_route_race": false,
+ "load_bearing_primary": {
+  "open_obligation_ids": [
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "constructive_gap_for_open_obligation_ids": [
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "expected_obligation_discharge_lcb": 0,
+  "expected_obligation_unlock_lcb": "3/100",
+  "success_probability_lcb": "4/5",
+  "wall_clock_cost_ub": 3600,
+  "interpretation": "Speculative forecast only. No obligation discharged, no benchmark gain, no capability credit and no independent verification is claimed. The claim is a measured ratio and a measured zero."
+ },
+ "measured_effect": {
+  "instrument": "canonical/runtime/consequence_table_v1.py against canonical/runtime/learn_to_learn_v1.search on the tree's own 20 kinds x 3 instances",
+  "new_modules": [
+   "canonical/runtime/consequence_table_v1.py (176 lines, no effect classes, no parameters, no weights)"
+  ],
+  "paired_ab_cold": {
+   "satisfiable_instances": 52,
+   "success": {
+    "table": "52/52",
+    "baseline_search": "52/52"
+   },
+   "act_calls": {
+    "table": 10656,
+    "baseline_best_of_5_policies": 39879,
+    "ratio": "3.74x"
+   },
+   "worst_single_instance": {
+    "kind": "binary_odometer",
+    "instance": 0,
+    "baseline": 15860,
+    "table": 197,
+    "ratio": "80.5x"
+   },
+   "regression_note": "the table is WORSE on 23 of 52 instances, all of them instances the baseline already solves in a handful of actions (2-70). The win is concentrated where search is expensive: 80.5x, 9.0x, 6.2x, 5.1x, 4.7x, 3.6x on the six most expensive instances."
+  },
+  "carry_to_a_new_instance_of_the_same_environment": {
+   "rows": 33,
+   "success": "33/33",
+   "act_calls": 897,
+   "cold_on_the_same_rows": 3675,
+   "saving": "4.1x",
+   "example": {
+    "kind": "tri_lock",
+    "instance": 1,
+    "baseline_search": 7116,
+    "cold_table": 790,
+    "carried_table": 9
+   },
+   "why": "Transitions are permanent, paths are per-episode. A path paid for on instance 0 is not a path in instance 1; sharing the path map was a real defect that made this measurement read 16/33 before it was fixed."
+  },
+  "carry_to_a_genuinely_new_environment": {
+   "design": "pay a table on kind A, copy ONLY its transitions into a fresh table, solve kind B",
+   "sources": [
+    "grid_walk",
+    "last_wins",
+    "tri_lock"
+   ],
+   "rows": 48,
+   "carried_success": "48/48",
+   "cold_success": "48/48",
+   "FOREIGN_MODEL_HITS": 0,
+   "verdict": "NOTHING TRANSFERS. Zero (state, action) keys of a foreign environment are ever consulted, so a paid-for model is INERT on a new environment. An earlier run of this test reported 'saved 561 act_calls' -- that was a harness bug (the table accumulated across destinations); with a clean per-destination copy the saving is 0. The buggy number is recorded here so it is not rediscovered as a win."
+  },
+  "the_one_experience_claim": {
+   "sweep": "transition allowance vs success over the same 52 satisfiable instances",
+   "rows": [
+    {
+     "allowance": 0,
+     "solved": 0
+    },
+    {
+     "allowance": 1,
+     "solved": 1
+    },
+    {
+     "allowance": 2,
+     "solved": 5
+    },
+    {
+     "allowance": 4,
+     "solved": 8
+    },
+    {
+     "allowance": 8,
+     "solved": 21
+    },
+    {
+     "allowance": 16,
+     "solved": 28
+    },
+    {
+     "allowance": 32,
+     "solved": 36
+    },
+    {
+     "allowance": 64,
+     "solved": 46
+    },
+    {
+     "allowance": "unbounded",
+     "solved": 52
+    }
+   ],
+   "verdict": "ZERO prior experience solves NOTHING. One experience solves one instance in 52. The model has to be paid for transition by transition, and what is permanent once paid is the TABLE, not the lesson."
+  },
+  "safety": {
+   "property": "the table answers ONLY what it executed, so a wrong answer is structurally impossible",
+   "how_tested": "the law-based version's 6,261 wrong successors were the failure this design removes; three mutants were run against the tests and all three are killed",
+   "mutants_killed": [
+    {
+     "mutation": "lookup returns the input state instead of None for an unobserved transition",
+     "result": "KILLED (2 tests fail)",
+     "significance": "this is the exact model-bias bug that produced the wrong successors"
+    },
+    {
+     "mutation": "record counts every call as a new probe",
+     "result": "KILLED (after the test was tightened; the first version of the test did not pin it)",
+     "significance": "the at-most-once property is the saving"
+    },
+    {
+     "mutation": "paths persist across episodes",
+     "result": "KILLED (7 errors)",
+     "significance": "this was the real carry defect"
+    }
+   ]
+  }
+ },
+ "next_step": "Answer the measured zero: what makes a table paid for in one environment reach a new one, without reintroducing a law vocabulary that was wrong on 6261 of 19648 transitions? Candidate: a table keyed on a state representation the two environments agree on, scored by foreign-transition hits, which is 0 today.",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "paths": [
+  "canonical/runtime/consequence_table_v1.py",
+  "canonical/tests/test_consequence_table_v1.py",
+  "canonical/verification/THE_CONSEQUENCE_MODEL_IS_A_TABLE_20261116_V1.json",
+  "THE_CONSEQUENCE_MODEL_IS_A_TABLE_20261116_V1.md"
+ ],
+ "prior_work_reused": [
+  "canonical/runtime/m3_structured_effect_induction.py -- READ, and its exact induce_effect_model is the reason the first claim of 'no transition learner exists' was false; its refusal rule is inherited",
+  "canonical/runtime/model_v1.py -- the socket this fills",
+  "canonical/runtime/learn_to_learn_v1.py search -- the baseline, unmodified",
+  "canonical/tools/cross_kind_learning_to_learn_benchmark_v1.py and cross_kind_compounding_benchmark_v1.py -- unmodified"
+ ],
+ "probe_specific": false,
+ "recursive_obs": {
+  "canonical_base_commit": "d2e0aa07937ee1993dcac84cffff8bac5eb2a1e7",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "the law-based consequence model (SET/ADD/MOD/TABLE classes)",
+   "a closed vocabulary of effect classes",
+   "assuming an unobserved field does not change",
+   "more search budget as the fix",
+   "the index as the single bottleneck"
+  ],
+  "expected_parent_level_state_change": "The wall moves from 'there is no consequence model' to 'a paid-for model does not cross into a new environment': 33/33 within an environment, 0/48 across one.",
+  "iteration_limit": 1,
+  "obs_blocker": {
+   "delete_bypass_substitute_options": [
+    "delete the law vocabulary entirely",
+    "reuse the tree's own benchmark and search as the instrument",
+    "measure on every reachable transition"
+   ],
+   "intrinsic_or_path_specific": "intrinsic: a law that generalises past its support is silently wrong; path_specific: on this substrate a table is exact and 3.74x cheaper",
+   "surviving_causal_blocker": "A_PAID_FOR_CONSEQUENCE_MODEL_TRANSFERS_TO_A_NEW_INSTANCE_33_OF_33_AND_TO_A_NEW_ENVIRONMENT_0_OF_48_BECAUSE_ZERO_FOREIGN_TRANSITIONS_ARE_EVER_CONSULTED"
+  },
+  "obs_capability": {
+   "capability_work_deleted": [
+    "a claim that no consequence model exists in the tree (FALSE: m3_structured_effect_induction.py)",
+    "a law-based model that was wrong on 6261 of 19648 transitions",
+    "a cross-environment saving of 561 act_calls (harness bug; true value 0)"
+   ],
+   "existing_inherited_routes_checked": [
+    "m3_structured_effect_induction.induce_effect_model",
+    "model_v1.py socket",
+    "learn_to_learn_v1.search and POLICIES",
+    "applicability_v1",
+    "precondition_discovery_v1",
+    "the_index_is_the_bottleneck_v1"
+   ],
+   "external_existing_routes_checked": [
+    "World Models survey 2026 (arXiv, Aug 2026): model-based agents, PlaNet ~200x fewer episodes",
+    "WEVA EMNLP 2026: quasi-symbolic world model; predicted-vs-realised agreement as a model-trust signal that decides between lookahead and further interaction",
+    "World Action Planner 2026: model-based planning vs imitation separation",
+    "WMLLM 2026: predict-then-act improves sample efficiency"
+   ],
+   "surviving_gap": "A paid-for table does not reach a new environment: FOREIGN_MODEL_HITS = 0 across 48 rows."
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "a better plan",
+    "a smarter search policy",
+    "a richer effect vocabulary"
+   ],
+   "real_outcome": "Spend each distinct action once and plan in what was learned.",
+   "surviving_necessity": "Every remaining action cost is either progress or a transition that is kept."
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "the constant-policy control absorbs the 'smarter feature helps' explanation",
+   "downstream_work_to_delete_or_supersede": "the belief that the index is the single bottleneck; the index is now a cost instrument",
+   "fresh_reuse_plan": "re-run the budget sweep and the price measurement whenever POLICIES, NODE_BUDGET or the kind set changes"
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": "the exhaustive state-space enumeration is cached in the receipt for the 6 complete rows; it is not re-run",
+   "search_stop_decision": "stopped when the price of the index, its control, and the status of every unsolvable row were all measured and my own best-looking result had been killed by its control"
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "The law vocabulary needed a new class per kind and was wrong on 6261 transitions; the table needs no vocabulary and cannot be silently wrong.",
+   "routes_ranked": [
+    "DELETE the law vocabulary (taken)",
+    "REUSE the tree's benchmark and search as the baseline (taken)",
+    "COMPOSE m3's induction with a planner (attempted, measured wrong, deleted)",
+    "SYNTHESIZE a keyed state representation for cross-environment transfer (next)"
+   ]
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "none beyond the tree's own synthetic kinds, named as such in every limit"
+  },
+  "real_outcome": "Planning happens inside an executed-transition table instead of against the live environment: 39879 -> 10656 act_calls on 52/52 satisfiable instances, and a paid-for table carries to a new instance 33/33 at 4.1x.",
+  "required_capability": "Spend each distinct action once and plan in the learned consequence.",
+  "route_frontier": {
+   "challenger_routes": [
+    {
+     "route": "induce an effect law (SET/ADD/MOD/TABLE) and plan on it",
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "WRONG on 6261 of 19648 transitions",
+      "CAPABILITY_STRENGTH": "4/52 at best",
+      "WALL_CLOCK": "hours",
+      "INCREMENTAL_COST": "a new class per kind",
+      "RELIABILITY": "unknown",
+      "VERIFIABILITY": "measured"
+     },
+     "evidence": [
+      "double_dial wrong on 80/80 transitions",
+      "every kind needed a new law"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_CONSEQUENCE_MODEL_IS_A_TABLE_20261116_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ]
+    },
+    {
+     "route": "a table of executed transitions, no vocabulary",
+     "resolution": "SELECTED",
+     "comparison": {
+      "CORRECTNESS": "52/52; cannot be silently wrong by construction",
+      "CAPABILITY_STRENGTH": "3.74x fewer act_calls; 33/33 carry",
+      "WALL_CLOCK": "minutes",
+      "INCREMENTAL_COST": "one 176-line module, no parameters",
+      "RELIABILITY": "worse than baseline on 23 of 52 cheap instances",
+      "VERIFIABILITY": "10 tests, 3 mutants killed"
+     },
+     "evidence": [
+      "39879 -> 10656 act_calls",
+      "carry 33/33 at 897 vs 3675",
+      "FOREIGN_MODEL_HITS 0"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_CONSEQUENCE_MODEL_IS_A_TABLE_20261116_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ]
+    }
+   ],
+   "checked_at_utc": "2026-11-17T04:08:58Z",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "a law-based effect model over SET/ADD/MOD/TABLE classes",
+   "max_age_hours": 24,
+   "negative_search_summary": "The 2026 world-model literature agrees on the mechanism (plan in a learned model, gate lookahead on predicted-vs-realised agreement) and none of it claims a paid-for model transfers across environments. WEVA's model-trust signal is the closest and is not a transfer mechanism.",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "2026 agent transition model state action next state model-based planning vs model-free"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "learned forward model deterministic environment action effect induction tabular"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "skill applicability index scope precondition 2026 arXiv agent"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "model-based agent explicit world model computer use 2026"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "selected_route": "BUILD_A_CONSEQUENCE_TABLE_WITH_NO_LAW_VOCABULARY_BECAUSE_A_LAW_BASED_MODEL_WAS_WRONG_ON_6261_OF_19648_TRANSITIONS_AND_A_TABLE_SOLVES_52_OF_52_AT_3.74X",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-11-17T04:08:58Z",
+    "execution_dependencies": [
+     {
+      "dependency": "python3 running the tree's own benchmark modules",
+      "evidence": [
+       "the budget sweep, price measurement and state-space enumerations all ran"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "LOCAL_RUNTIME",
+      "observed_at_utc": "2026-11-17T02:48:38Z",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "canonical/runtime/model_v1.py socket present as the next build target",
+      "evidence": [
+       "read this round; it states it contains no model"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "STORAGE",
+      "observed_at_utc": "2026-11-17T02:48:38Z",
+      "required": false,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "max_age_hours": 2,
+    "selected_route": "BUILD_A_CONSEQUENCE_TABLE_WITH_NO_LAW_VOCABULARY_BECAUSE_A_LAW_BASED_MODEL_WAS_WRONG_ON_6261_OF_19648_TRANSITIONS_AND_A_TABLE_SOLVES_52_OF_52_AT_3.74X",
+    "status": "READY"
+   },
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/tools/cross_kind_learning_to_learn_benchmark_v1.py",
+     "canonical/tools/cross_kind_compounding_benchmark_v1.py",
+     "canonical/runtime/learn_to_learn_v1.py",
+     "canonical/runtime/model_v1.py",
+     "canonical/runtime/applicability_v1.py",
+     "canonical/runtime/precondition_discovery_v1.py",
+     "canonical/runtime/contrast_selection_v1.py"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "https://arxiv.org/html/2610.11781 (Skill-V)",
+     "https://arxiv.org/html/2605.13716 (SkillOps)",
+     "https://arxiv.org/html/2610.15481 (SkillFusion)",
+     "https://pith.science/paper/2608.15165 (SkillCommit)",
+     "https://arxiv.org/html/2608.16246 (CompoSkill)"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "stdlib only this round; no package installed or used in the result-bearing path"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "The 2026 skill-contract literature addresses applicability scope, not consequence prediction"
+    ]
+   },
+   "unresolved_plausible_dominators": []
+  },
+  "routes_considered": [
+   "DELETE",
+   "REUSE",
+   "COMPOSE",
+   "SYNTHESIZE_NEW_PRIMITIVE"
+  ],
+  "selected_surviving_route": "BUILD_A_CONSEQUENCE_TABLE_WITH_NO_LAW_VOCABULARY_BECAUSE_A_LAW_BASED_MODEL_WAS_WRONG_ON_6261_OF_19648_TRANSITIONS_AND_A_TABLE_SOLVES_52_OF_52_AT_3.74X",
+  "stop_condition": "Cold ratio and carry ratio are both reported with the harness bugs that inflated them, the one-experience sweep is reported, the killed mutants are reported, and no capability, family, terminal or weight credit is claimed.",
+  "why_selected_route_is_fastest_sufficient": "One property removes the whole class of failure: a model that answers only what it executed cannot be silently wrong, and it is 3.74x cheaper than re-executing the world."
+ },
+ "route_id": "BUILD_A_CONSEQUENCE_TABLE_WITH_NO_LAW_VOCABULARY_BECAUSE_A_LAW_BASED_MODEL_WAS_WRONG_ON_6261_OF_19648_TRANSITIONS_AND_A_TABLE_SOLVES_52_OF_52_AT_3.74X",
+ "scope_and_limits": "AUTHORITY NONE. 20 hand-written synthetic kinds x 3 instances. 3.74x is against this baseline on this substrate. The table is WORSE on 23 of 52 instances. Cross-environment transfer was tested by key aliasing only. No weights, no model, no network, $0.",
+ "scope_complete_discharge": false,
+ "selected_route": "BUILD_A_CONSEQUENCE_TABLE_WITH_NO_LAW_VOCABULARY_BECAUSE_A_LAW_BASED_MODEL_WAS_WRONG_ON_6261_OF_19648_TRANSITIONS_AND_A_TABLE_SOLVES_52_OF_52_AT_3.74X",
+ "status": "PROPOSED__ZERO_CREDIT__NO_TERMINAL_CLAIM",
+ "stop_condition": "Cold ratio and carry ratio are both reported with the harness bugs that inflated them, the one-experience sweep is reported, the killed mutants are reported, and no capability, family, terminal or weight credit is claimed.",
+ "terminal_achieved": false,
+ "terminal_credit_delta": 0,
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "truth": {
+  "achieved": false
+ },
+ "user_authorized_governance_change": false,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "currentness": {
+   "accepted_families": 5,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "This measures reach on real pages; it discharges no truth obligation and claims no terminal credit.",
+  "target_truth_obligations": [
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [],
+   "decisive_question": "Of the pages no budget, search order or prior can reach, how many are unreachable because the answer is a value nothing on the page states -- and does generating that value reach them?",
+   "falsifier_id": "A_PAGE_WHERE_THE_DERIVED_CANDIDATE_CHANGES_AN_OUTCOME_FOR_THE_WORSE_OR_A_DECOY_SUCCEEDS_WHERE_THE_DERIVED_VALUE_FAILS",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "Two of my own conclusions were found wrong and are recorded rather than hidden: a malformed action produced a false 'blind observation' claim, and a consolidator that hardcodes null produced a false 'the four arms never differed' claim. Both were retracted before this PR and are named in the receipt.",
+   "proposal_id": "THE_ANSWER_WAS_A_VALUE_NOTHING_STATED_20261117_V1"
+  }
+ },
+ "verification": {
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "commands": [
+   "python3 -m unittest canonical.tests.test_consequence_table_v1  # 10 pass; 3 mutants killed",
+   "python3 /tmp/final_ab.py  # cold 52/52 10656 vs 39879; carry 33/33 897 vs 3675",
+   "python3 /tmp/cross3.py   # FOREIGN_MODEL_HITS = 0 over 48 rows"
+  ]
+ },
+ "weakens_existing_guard": false
+}

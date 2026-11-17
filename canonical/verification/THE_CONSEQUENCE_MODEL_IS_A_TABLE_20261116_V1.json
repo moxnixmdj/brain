@@ -1,0 +1,166 @@
+{
+ "schema": "PROJECT_BRAIN_THE_CONSEQUENCE_MODEL_IS_A_TABLE_V1",
+ "receipt_id": "THE_CONSEQUENCE_MODEL_IS_A_TABLE_20261116_V1",
+ "date": "2026-11-16",
+ "generated_utc": "2026-11-17T04:08:25.562046Z",
+ "canonical_base_commit": "d2e0aa07937ee1993dcac84cffff8bac5eb2a1e7",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "benchmark_or_family_rank_authority": null,
+ "capability_credit_delta": 0,
+ "terminal_credit_delta": 0,
+ "claim_under_test": "'Instant learning is solved perfectly, so give the model the smartest actions, let it act once, and every computer task is solved permanently -- including in new arbitrary environments.' This round built the object the previous round priced (a consequence model), measured it against the tree's own search, and measured the crossing for a paid-for model carried into a new environment.",
+ "decision": "MEASURED__A_TABLE_OF_EXECUTED_TRANSITIONS_SOLVES_52_OF_52_AT_3.74X_FEWER_ACTIONS_AND_CARRIES_ACROSS_INSTANCES_BUT_NOT_ACROSS_ENVIRONMENTS",
+ "the_answer_in_one_sentence": "The model of consequence must be a TABLE of executed (state, action) -> next state with no law vocabulary: it then cannot be silently wrong, it solves all 52 satisfiable instances at 3.74x fewer actions, and it carries to a new instance of the same environment 33/33 -- but it carries to a genuinely new environment 0 times, because zero foreign transitions are ever consulted.",
+ "what_was_deleted": {
+  "modules_deleted": [
+   "canonical/runtime/consequence_model_v1.py"
+  ],
+  "why": "It induced an ACTION LAW over the classes SET / STORE_CONSTANT / ADD / MOD / TABLE and planned on it. Measured against the world on every reachable transition it was wrong on 6,261 of 19,648. A law vocabulary that must happen to contain the right distinction is the SAME DEFECT AS THE INDEX, rebuilt inside the model.",
+  "law_applied": "THE BEST PART IS NO PART -- three of the four laws it needed were added while measuring, which is the signal that the representation was wrong and not the tuning"
+ },
+ "measured_effect": {
+  "instrument": "canonical/runtime/consequence_table_v1.py against canonical/runtime/learn_to_learn_v1.search on the tree's own 20 kinds x 3 instances",
+  "new_modules": [
+   "canonical/runtime/consequence_table_v1.py (176 lines, no effect classes, no parameters, no weights)"
+  ],
+  "paired_ab_cold": {
+   "satisfiable_instances": 52,
+   "success": {
+    "table": "52/52",
+    "baseline_search": "52/52"
+   },
+   "act_calls": {
+    "table": 10656,
+    "baseline_best_of_5_policies": 39879,
+    "ratio": "3.74x"
+   },
+   "worst_single_instance": {
+    "kind": "binary_odometer",
+    "instance": 0,
+    "baseline": 15860,
+    "table": 197,
+    "ratio": "80.5x"
+   },
+   "regression_note": "the table is WORSE on 23 of 52 instances, all of them instances the baseline already solves in a handful of actions (2-70). The win is concentrated where search is expensive: 80.5x, 9.0x, 6.2x, 5.1x, 4.7x, 3.6x on the six most expensive instances."
+  },
+  "carry_to_a_new_instance_of_the_same_environment": {
+   "rows": 33,
+   "success": "33/33",
+   "act_calls": 897,
+   "cold_on_the_same_rows": 3675,
+   "saving": "4.1x",
+   "example": {
+    "kind": "tri_lock",
+    "instance": 1,
+    "baseline_search": 7116,
+    "cold_table": 790,
+    "carried_table": 9
+   },
+   "why": "Transitions are permanent, paths are per-episode. A path paid for on instance 0 is not a path in instance 1; sharing the path map was a real defect that made this measurement read 16/33 before it was fixed."
+  },
+  "carry_to_a_genuinely_new_environment": {
+   "design": "pay a table on kind A, copy ONLY its transitions into a fresh table, solve kind B",
+   "sources": [
+    "grid_walk",
+    "last_wins",
+    "tri_lock"
+   ],
+   "rows": 48,
+   "carried_success": "48/48",
+   "cold_success": "48/48",
+   "FOREIGN_MODEL_HITS": 0,
+   "verdict": "NOTHING TRANSFERS. Zero (state, action) keys of a foreign environment are ever consulted, so a paid-for model is INERT on a new environment. An earlier run of this test reported 'saved 561 act_calls' -- that was a harness bug (the table accumulated across destinations); with a clean per-destination copy the saving is 0. The buggy number is recorded here so it is not rediscovered as a win."
+  },
+  "the_one_experience_claim": {
+   "sweep": "transition allowance vs success over the same 52 satisfiable instances",
+   "rows": [
+    {
+     "allowance": 0,
+     "solved": 0
+    },
+    {
+     "allowance": 1,
+     "solved": 1
+    },
+    {
+     "allowance": 2,
+     "solved": 5
+    },
+    {
+     "allowance": 4,
+     "solved": 8
+    },
+    {
+     "allowance": 8,
+     "solved": 21
+    },
+    {
+     "allowance": 16,
+     "solved": 28
+    },
+    {
+     "allowance": 32,
+     "solved": 36
+    },
+    {
+     "allowance": 64,
+     "solved": 46
+    },
+    {
+     "allowance": "unbounded",
+     "solved": 52
+    }
+   ],
+   "verdict": "ZERO prior experience solves NOTHING. One experience solves one instance in 52. The model has to be paid for transition by transition, and what is permanent once paid is the TABLE, not the lesson."
+  },
+  "safety": {
+   "property": "the table answers ONLY what it executed, so a wrong answer is structurally impossible",
+   "how_tested": "the law-based version's 6,261 wrong successors were the failure this design removes; three mutants were run against the tests and all three are killed",
+   "mutants_killed": [
+    {
+     "mutation": "lookup returns the input state instead of None for an unobserved transition",
+     "result": "KILLED (2 tests fail)",
+     "significance": "this is the exact model-bias bug that produced the wrong successors"
+    },
+    {
+     "mutation": "record counts every call as a new probe",
+     "result": "KILLED (after the test was tightened; the first version of the test did not pin it)",
+     "significance": "the at-most-once property is the saving"
+    },
+    {
+     "mutation": "paths persist across episodes",
+     "result": "KILLED (7 errors)",
+     "significance": "this was the real carry defect"
+    }
+   ]
+  }
+ },
+ "what_is_now_false": [
+  "That the tree contains no consequence model: `canonical/runtime/m3_structured_effect_induction.py` already induced exact effect classes, and this round's first claim that 'no transition learner exists in canonical/runtime/' was WRONG. What was missing was the JOIN -- a planner that expands in a model -- and that is what this round built.",
+  "That a learned model over an effect vocabulary is the answer: measured wrong on 6,261 of 19,648 transitions before the vocabulary was deleted."
+ ],
+ "what_is_now_true_and_was_not_measured_before": [
+  "A table with no vocabulary solves 52/52 at 3.74x fewer actions than a correct search that re-executes every node's prefix.",
+  "A paid-for table carries to a new instance of the same environment 33/33 at 4.1x.",
+  "A paid-for table carries to a different environment ZERO times, with zero foreign transitions consulted.",
+  "The one-experience premise is false by measurement: 0 solved at 0 experience, 1 at 1, 52 only at ~200."
+ ],
+ "the_bottleneck_after_this_round": {
+  "before": "the tree named the index; the previous round priced a consequence model at up to 99.58% of action spend",
+  "now": "the consequence model exists and is 3.74x. The remaining wall is that a table is LOCAL: it must be paid for in every environment, and NOTHING transfers between environments. The next bottleneck is therefore not the model and not the index -- it is the absence of any mechanism that makes a paid-for table reach a new environment, which is the user's 'arbitrary new environments' premise stated as a measured 0.",
+  "evidence": "FOREIGN_MODEL_HITS = 0 across 48 cross-environment rows"
+ },
+ "honest_limits": [
+  "Authority NONE. Sandbox measurement on 20 hand-written synthetic kinds x 3 instances, 5 search strategies. Not independent verification.",
+  "The 3.74x is against THIS baseline (a correct search with no transition memory) on THIS substrate. It is not a claim about computer use in general.",
+  "The table is worse than the baseline on 23 of 52 instances. The mean is carried by the expensive instances.",
+  "Reaching a state to probe it still costs its path length, because the environment API has no set_state. That cost is included in every number.",
+  "Cross-environment transfer was tested by key aliasing only (repr(state), action). A richer state representation might alias fewer or more keys; that is not measured here.",
+  "No weights, no model, no network, $0. The module stores only executed transitions."
+ ],
+ "verification": {
+  "tests": "canonical/tests/test_consequence_table_v1.py, 10 tests, all pass; 3 mutants applied and killed",
+  "independent_fresh_verdict": null,
+  "reproduction": "scripts in /tmp (final_ab.py, cross3.py, oneexp.py) call the tree's own benchmark and the new module directly; each is under 60 lines"
+ }
+}
