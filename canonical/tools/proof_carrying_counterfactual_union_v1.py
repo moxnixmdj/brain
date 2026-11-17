@@ -202,6 +202,12 @@ MECHANISM_GROUPS: dict[str, tuple[str, ...]] = {
         "canonical/runtime/contrast_selection_v1.py",
         "canonical/runtime/applicability_v1.py",
     ),
+    "unbound_name_binding_and_retraction": (
+        "canonical/runtime/what_one_experience_buys_v1.py",
+        "canonical/runtime/demonstration_version_space_v1.py",
+        "canonical/tools/miniwob_one_success_generalisation_measure_v1.py",
+        "canonical/tests/test_what_one_experience_buys_v1.py",
+    ),
 }
 
 SUPERSEDES = (
@@ -309,6 +315,14 @@ EVIDENCE_READ = (
     "canonical/tools/the_index_is_the_bottleneck_v1.py",
     "canonical/tests/test_compose_measured_effects_v1.py",
     "canonical/tests/test_the_index_is_the_bottleneck_v1.py",
+    # Final base move: retract the "second language" diagnosis; the missing
+    # link was one unbound name, measured by a paired same-seed A/B.
+    "canonical/action_intents/AN_UNBOUND_NAME_WAS_THE_MISSING_LINK_20261116_V1.json",
+    "canonical/runtime/what_one_experience_buys_v1.py",
+    "canonical/runtime/demonstration_version_space_v1.py",
+    "canonical/tests/test_what_one_experience_buys_v1.py",
+    "canonical/tests/test_miniwob_one_success_generalisation_v1.py",
+    "canonical/verification/THE_TREE_ALREADY_SPOKE_ONE_LANGUAGE_20261116_V1.json",
 )
 
 
@@ -458,6 +472,8 @@ def audit(quixbugs_root: pathlib.Path, root: pathlib.Path = ROOT) -> dict[str, A
     compose_intent = read_json(A / "COMPOSITION_CLOSES_ONE_AND_PROVES_TWO_20261116_V1.json") if (A / "COMPOSITION_CLOSES_ONE_AND_PROVES_TWO_20261116_V1.json").is_file() else None
     index_intent = read_json(A / "THE_BOTTLENECK_IS_THE_INDEX_NOT_THE_LEARNING_20261116_V1.json") if (A / "THE_BOTTLENECK_IS_THE_INDEX_NOT_THE_LEARNING_20261116_V1.json").is_file() else None
     value_intent = read_json(A / "SYSTEMATIC_EDIT_VALUE_LAYER_DERIVATION_20261116_V1.json") if (A / "SYSTEMATIC_EDIT_VALUE_LAYER_DERIVATION_20261116_V1.json").is_file() else None
+    binding_receipt = read_json(V / "THE_TREE_ALREADY_SPOKE_ONE_LANGUAGE_20261116_V1.json") if (V / "THE_TREE_ALREADY_SPOKE_ONE_LANGUAGE_20261116_V1.json").is_file() else None
+    binding_intent = read_json(A / "AN_UNBOUND_NAME_WAS_THE_MISSING_LINK_20261116_V1.json") if (A / "AN_UNBOUND_NAME_WAS_THE_MISSING_LINK_20261116_V1.json").is_file() else None
     answer_key_counts = [
         row["answer_keys_present"] for row in census["rows"]
         if isinstance(row.get("answer_keys_present"), int)
@@ -697,6 +713,20 @@ def audit(quixbugs_root: pathlib.Path, root: pathlib.Path = ROOT) -> dict[str, A
             and value_intent.get("measured_effect", {}).get("arms", {}).get("value_layer", {}).get("derive", {}).get("derivation_fired") == 42
             and derivation_receipt.get("commits_in_corpus") == 393
         ),
+        "unbound_name_binding_is_local_and_retracts_second_language_claim": bool(
+            binding_receipt
+            and binding_intent
+            and binding_receipt.get("decision") == "THE_DESCRIPTION_WAS_NEVER_THE_PROBLEM__THE_BINDING_WAS"
+            and len(binding_receipt.get("retraction", {}).get("how_it_was_refuted", [])) == 4
+            and binding_receipt.get("measured_effect_kept", {}).get("bits_per_step_still_reported") == 5.428
+            and binding_receipt.get("measured_effect_kept", {}).get("the_price_of_the_preferred_description") == 0.102
+            and binding_receipt.get("measured_effect_kept", {}).get("elements_where_the_preferred_description_is_ambiguous", {}).get("count") == 67
+            and binding_receipt.get("what_was_actually_missing", {}).get("the_effect", {}).get("controlled_ab", {}).get("after_mean") == 0.29
+            and binding_receipt.get("what_was_actually_missing", {}).get("the_effect", {}).get("controlled_ab", {}).get("before_mean") == 0.2233
+            and binding_intent.get("measured_effect", {}).get("id_binding_ab", {}).get("delta") == 0.0667
+            and binding_intent.get("measured_effect", {}).get("structure_field_ab", {}).get("delta") == 0.0022
+            and "run variance" in " ".join(binding_receipt.get("honest_limits", [])).lower()
+        ),
     }
     audit_pass = all(invariants.values())
     return {
@@ -838,6 +868,17 @@ def audit(quixbugs_root: pathlib.Path, root: pathlib.Path = ROOT) -> dict[str, A
             },
             "status": "INDEX_AND_FRAME_ARE_NECESSARY_SHARED_DEFECTS_NOT_A_SINGLE_SUFFICIENT_LEVER",
         },
+        "unbound_name_binding_and_retraction": {
+            "receipt": "canonical/verification/THE_TREE_ALREADY_SPOKE_ONE_LANGUAGE_20261116_V1.json",
+            "decision": (binding_receipt or {}).get("decision", ""),
+            "retraction": (binding_receipt or {}).get("retraction", {}),
+            "measured_effect_kept": (binding_receipt or {}).get("measured_effect_kept", {}),
+            "what_was_actually_missing": (binding_receipt or {}).get("what_was_actually_missing", {}),
+            "second_fix": (binding_receipt or {}).get("second_fix", {}),
+            "honest_limits": (binding_receipt or {}).get("honest_limits", []),
+            "measured_effect": (binding_intent or {}).get("measured_effect", {}),
+            "status": "ONE_UNBOUND_NAME_IS_A_LOCAL_BINDING_FIX_NOT_A_SECOND_LANGUAGE_OR_SINGLE_LEVER",
+        },
         "verified_repair_rerun": {
             "receipt": "canonical/verification/RERUN_THE_LEARNED_ARMS_REPAIRS_20261116_V1.json",
             "claimed_repaired": (rerun or {}).get("claimed_repaired"),
@@ -930,6 +971,9 @@ def audit(quixbugs_root: pathlib.Path, root: pathlib.Path = ROOT) -> dict[str, A
             "NO_COMPOSITION_CLOSES_COMPUTER_USE",
             "NO_INFERRED_VALUE_AS_AN_ESTABLISHED_FACT",
             "NO_INDEX_OR_SPECIFICATION_FIX_AS_TERMINAL_UNLOCK",
+            "NO_SECOND_LANGUAGE_5_43_BITS_CLAIM",
+            "NO_ID_BINDING_AS_SINGLE_LEVER",
+            "NO_UNPAIRED_RUN_VARIANCE_CLAIM",
             "PRODUCER_RUN_NOT_INDEPENDENT_VERIFICATION",
             "TERMINAL_TRUTH_UNTOUCHED",
         ],

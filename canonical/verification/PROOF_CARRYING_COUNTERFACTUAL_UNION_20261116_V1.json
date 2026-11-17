@@ -245,7 +245,13 @@
     "canonical/tools/compose_measured_effects_v1.py",
     "canonical/tools/the_index_is_the_bottleneck_v1.py",
     "canonical/tests/test_compose_measured_effects_v1.py",
-    "canonical/tests/test_the_index_is_the_bottleneck_v1.py"
+    "canonical/tests/test_the_index_is_the_bottleneck_v1.py",
+    "canonical/action_intents/AN_UNBOUND_NAME_WAS_THE_MISSING_LINK_20261116_V1.json",
+    "canonical/runtime/what_one_experience_buys_v1.py",
+    "canonical/runtime/demonstration_version_space_v1.py",
+    "canonical/tests/test_what_one_experience_buys_v1.py",
+    "canonical/tests/test_miniwob_one_success_generalisation_v1.py",
+    "canonical/verification/THE_TREE_ALREADY_SPOKE_ONE_LANGUAGE_20261116_V1.json"
   ],
   "exact_decision_past_enumeration_wall": {
     "measured_effect": {
@@ -477,7 +483,7 @@
       ]
     }
   },
-  "generated_at_utc": "2026-11-17T00:59:12.185067+00:00",
+  "generated_at_utc": "2026-11-17T01:15:59.053941+00:00",
   "gui_invariance_and_operand_boundary": {
     "identity_invariance": {
       "identity_arms": 15,
@@ -2740,6 +2746,9 @@
     "NO_COMPOSITION_CLOSES_COMPUTER_USE",
     "NO_INFERRED_VALUE_AS_AN_ESTABLISHED_FACT",
     "NO_INDEX_OR_SPECIFICATION_FIX_AS_TERMINAL_UNLOCK",
+    "NO_SECOND_LANGUAGE_5_43_BITS_CLAIM",
+    "NO_ID_BINDING_AS_SINGLE_LEVER",
+    "NO_UNPAIRED_RUN_VARIANCE_CLAIM",
     "PRODUCER_RUN_NOT_INDEPENDENT_VERIFICATION",
     "TERMINAL_TRUTH_UNTOUCHED"
   ],
@@ -3315,6 +3324,7 @@
     "replay_forever_is_falsified_by_state_drift": true,
     "selection_measurement_read": true,
     "the_unsolved_remainder_is_a_long_tail_not_one_bottleneck": true,
+    "unbound_name_binding_is_local_and_retracts_second_language_claim": true,
     "verified_union_is_24_not_the_projected_26": true
   },
   "killed_instruments": [
@@ -4352,6 +4362,16 @@
         "canonical/tools/derived_value_full_suite_receipt_v1.py",
         "canonical/tools/learn_or_read_board_v1.py"
       ]
+    },
+    "unbound_name_binding_and_retraction": {
+      "count": 4,
+      "missing": [],
+      "present": [
+        "canonical/runtime/what_one_experience_buys_v1.py",
+        "canonical/runtime/demonstration_version_space_v1.py",
+        "canonical/tools/miniwob_one_success_generalisation_measure_v1.py",
+        "canonical/tests/test_what_one_experience_buys_v1.py"
+      ]
     }
   },
   "model_dependency_count": 0,
@@ -4864,6 +4884,122 @@
     "THE_GOAL_IS_THE_BOTTLENECK_20261116_V1.md",
     "WHAT_IS_REAL_AND_THE_ONE_BOTTLENECK_20261116_V1.md"
   ],
+  "unbound_name_binding_and_retraction": {
+    "decision": "THE_DESCRIPTION_WAS_NEVER_THE_PROBLEM__THE_BINDING_WAS",
+    "honest_limits": [
+      "AUTHORITY NONE -- one producer run in one sandbox.",
+      "The controlled A/B covers 15 tasks chosen BECAUSE the id rule could reach them, so +0.0667 is not the population effect; it is the effect on the tasks where the change can act.",
+      "The wider 130-page rerun was NOT clean: 68 of 78 tasks scored, and an apparent click-pie -0.95 was run-to-run variance, proved by the controlled A/B returning click-pie 0.05 both before and after. Run variance on this harness is large enough to fake a large per-task regression, so only paired same-seed A/Bs are admissible.",
+      "id-binding cannot help a page whose ids are unrelated to its instruction (click-pie: 0 id-bound tests, unaffected either way).",
+      "Nothing is credited: no capability, weight, terminal or family-rank claim."
+    ],
+    "measured_effect": {
+      "authority": "NONE__PRODUCER_RUN_SANDBOX",
+      "disclosed_not_clean": "a wider 130-page rerun scored 68 of 78 tasks and its apparent click-pie -0.95 was proved to be run variance by a paired A/B returning 0.05 on both sides",
+      "harness": "canonical/tools/miniwob_one_success_generalisation_measure_v1.py --substrate chromium --arms version_space --test-episodes 20",
+      "id_binding_ab": {
+        "after": 0.29,
+        "before": 0.2233,
+        "better": 2,
+        "delta": 0.0667,
+        "headline": "grid-coordinate 0.05 -> 1.00",
+        "tasks": 15,
+        "unchanged": 13,
+        "worse": 0
+      },
+      "structure_field_ab": {
+        "after": 0.4,
+        "before": 0.3978,
+        "better": 1,
+        "delta": 0.0022,
+        "tasks": 23,
+        "the_one_gain": "phone-book 0.15 -> 0.20",
+        "worse": 0
+      }
+    },
+    "measured_effect_kept": {
+      "bits_per_step_still_reported": 5.428,
+      "elements_where_the_preferred_description_is_ambiguous": {
+        "count": 67,
+        "of": 1415,
+        "share": 0.047
+      },
+      "from": [
+        "what_one_experience_buys_v1.py",
+        "canonical/verification/MINIWOB_ONE_SUCCESS_GENERALISATION_20261111_V5.json"
+      ],
+      "new_descriptions_per_task": 1.231,
+      "steps_recorded": 175,
+      "the_price_of_the_preferred_description": 0.102,
+      "vocabulary_saturates": false,
+      "what_that_number_now_means": "the number of descriptions still alive after one demonstration -- a measure of REDUNDANCY in the language, not of ambiguity and not of a second grammar. It must no longer be quoted as the cost of identifying a step."
+    },
+    "receipt": "canonical/verification/THE_TREE_ALREADY_SPOKE_ONE_LANGUAGE_20261116_V1.json",
+    "retraction": {
+      "how_it_was_refuted": [
+        "I wrote the 'shared language' module, then checked the existing one instead of trusting my own. demonstration_version_space_v1 ALREADY had nth, nth_from_end, nth_slot, nearest, matches(), pick() and _same_element(). My module re-implemented shipped code.",
+        "The tree already names 1415 of 1415 actionable elements: a description that selects exactly one element exists for every single one.",
+        "The 5.43 bits came from descriptions_left, which is hypotheses still ALIVE after a demonstration. Recomputed from the learner's own descriptions_of: median 42 descriptions name one element, log2 = 5.23. It is REDUNDANCY -- 42 ways to say the same thing -- not ambiguity, and not a second grammar.",
+        "Measured on the actual preference: the description the learner prefers carries 0.102 bits and selects more than one element for only 67 of 1415 (4.7%)."
+      ],
+      "what_i_claimed": "That acting and learning spoke two different languages, costing 5.43 bits/step in a private grammar versus 0.93 bits for a shared description, and that deleting the second language was the cheapest lever in the tree.",
+      "what_was_deleted": "canonical/runtime/one_description_language_v1.py and its 11 tests. It added nothing the tree did not have. Rebuilding a shipped capability is the failure mode this project forbids."
+    },
+    "second_fix": {
+      "examples": [
+        "click-widget 'a \"radio\" widget' -> name=radio",
+        "navigate-tree 'the folder or file named ...' -> classes=file",
+        "order-food 'items that are meat' -> title=meat",
+        "use-spinner 'select 7 with the spinner' -> for=spinner"
+      ],
+      "measured_census_over_130_pages": {
+        "by_field": {
+          "classes": 8,
+          "for": 1,
+          "name": 5,
+          "title": 5
+        },
+        "properties_named_by_their_instructions": 81,
+        "properties_with_no_binding_before": 19
+      },
+      "paired_same_seed_ab": {
+        "after": 0.4,
+        "before": 0.3978,
+        "better": 1,
+        "delta": 0.0022,
+        "tasks": 23,
+        "the_one_gain": "phone-book 0.15 -> 0.20",
+        "worse": 0
+      },
+      "tests": "165 passed, 27 skipped",
+      "what": "the same hand-written tuple that had omitted id also omitted title, name, for and classes from the slot-binding loop, while the equals loop already read STRUCTURE_FIELDS",
+      "why_kept_despite_being_small": "it DELETES a special case rather than adding one: the loop now reads the tuple the adjacent loop already reads. A law justified it (a single-valued string property an instruction quotes is a name), not a tuned number."
+    },
+    "status": "ONE_UNBOUND_NAME_IS_A_LOCAL_BINDING_FIX_NOT_A_SECOND_LANGUAGE_OR_SINGLE_LEVER",
+    "what_was_actually_missing": {
+      "the_defect": "tests_true_of offered a slot-binding test -- 'this property IS what the instruction names' -- for tag, type, colour, text, full_text and value, and NEVER for id. slots_returning already knew how to cut a coordinate out of the instruction; nothing bound it to the element's id.",
+      "the_effect": {
+        "controlled_ab": {
+          "after_mean": 0.29,
+          "before_mean": 0.2233,
+          "budget": "identical",
+          "delta": 0.0667,
+          "only_difference": "id-binding",
+          "seeds": "identical",
+          "tasks": 15,
+          "tasks_better": [
+            "grid-coordinate +0.95",
+            "social-media +0.05"
+          ],
+          "tasks_unchanged": 13,
+          "tasks_worse": []
+        },
+        "grid-coordinate": "0.05 -> 1.00 successes over 20 fresh instances"
+      },
+      "the_fix": "one word added to one tuple: (\"tag\", \"type\", \"colour\", \"id\")",
+      "the_page_it_cost": "grid-coordinate: 100 identical empty plot-points, every one tag=circle, classes=plot-point, text=''. The only distinguishing property is id='(2,-1)'. The instruction says 'Click on the grid coordinate (2,-1).' The language could see both sides and join neither."
+    }
+  },
   "union_projection_status": {
     "reason": "PR #6887 re-ran the claimed learned-arm repairs from their own record: 16 confirmed, 4 not reconstructible, 0 screen disagreements in that record. The projected 26/40 is superseded by the verified 24/40; main #6892 then ran the three vocabularies together in one command under the corpus's own pytest and measured the same 24/40 in 387.8 s. The earlier union is no longer an arithmetic projection, but capability is unchanged: 16 tasks remain hard-open.",
     "status": "ONE_COMPOSED_RUN_UNDER_THE_CORPUS_PYTEST_MEASURED_24_OF_40"

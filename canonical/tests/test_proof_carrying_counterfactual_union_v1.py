@@ -342,6 +342,30 @@ class HardOpenPopulationAuditTests(unittest.TestCase):
         self.assertIn("canonical/tools/the_index_is_the_bottleneck_v1.py", mod.MECHANISM_GROUPS["index_specification_and_value_layer"])
         self.assertIn("canonical/tools/compose_measured_effects_v1.py", mod.MECHANISM_GROUPS["index_specification_and_value_layer"])
 
+    def test_final_unbound_name_retraction_is_read_without_credit(self) -> None:
+        path = ROOT / "canonical" / "verification" / "PROOF_CARRYING_COUNTERFACTUAL_UNION_20261116_V1.json"
+        data = json.loads(path.read_text(encoding="utf-8"))
+        section = data["unbound_name_binding_and_retraction"]
+        self.assertEqual(
+            section["status"],
+            "ONE_UNBOUND_NAME_IS_A_LOCAL_BINDING_FIX_NOT_A_SECOND_LANGUAGE_OR_SINGLE_LEVER",
+        )
+        self.assertEqual(section["decision"], "THE_DESCRIPTION_WAS_NEVER_THE_PROBLEM__THE_BINDING_WAS")
+        self.assertEqual(len(section["retraction"]["how_it_was_refuted"]), 4)
+        self.assertEqual(section["measured_effect_kept"]["bits_per_step_still_reported"], 5.428)
+        self.assertEqual(section["measured_effect_kept"]["the_price_of_the_preferred_description"], 0.102)
+        self.assertEqual(section["what_was_actually_missing"]["the_effect"]["controlled_ab"]["after_mean"], 0.29)
+        self.assertEqual(section["measured_effect"]["id_binding_ab"]["delta"], 0.0667)
+        self.assertEqual(section["measured_effect"]["structure_field_ab"]["delta"], 0.0022)
+        self.assertTrue(data["invariants"]["unbound_name_binding_is_local_and_retracts_second_language_claim"])
+        for claim in (
+            "NO_SECOND_LANGUAGE_5_43_BITS_CLAIM",
+            "NO_ID_BINDING_AS_SINGLE_LEVER",
+            "NO_UNPAIRED_RUN_VARIANCE_CLAIM",
+        ):
+            self.assertIn(claim, data["hard_nonclaims"])
+        self.assertIn("canonical/runtime/what_one_experience_buys_v1.py", mod.MECHANISM_GROUPS["unbound_name_binding_and_retraction"])
+
     def test_final_proved_composition_is_read_without_credit(self) -> None:
         path = ROOT / "canonical" / "verification" / "PROOF_CARRYING_COUNTERFACTUAL_UNION_20261116_V1.json"
         data = json.loads(path.read_text(encoding="utf-8"))
