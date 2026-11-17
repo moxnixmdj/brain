@@ -41,7 +41,7 @@
   },
   "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_INSTRUMENT_THAT_DECIDES_EVERY_REPAIR_WAS_NEVER_CALIBRATED_AND_IT_REJECTS_THE_CORPUS_OWN_CORRECT_PROGRAM_ON_SEVEN_OF_THIRTY_ONE_PUBLISHED_BUGS_SO_EVERY_COUNT_COMPUTED_THROUGH_IT_WAS_A_STATEMENT_ABOUT_THE_JUDGE",
-  "canonical_base_commit": "cc49c9f3d2a77e97bd51a42f21a680ce1c961af2",
+  "canonical_base_commit": "d0c0ff0da90cf2256863dc4bb6cba9ad2b4a016e",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -131,7 +131,7 @@
   ],
   "probe_specific": false,
   "recursive_obs": {
-    "canonical_base_commit": "cc49c9f3d2a77e97bd51a42f21a680ce1c961af2",
+    "canonical_base_commit": "d0c0ff0da90cf2256863dc4bb6cba9ad2b4a016e",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "counting a verdict from a judge that rejects the corpus's own answer",
@@ -334,7 +334,7 @@
           "route": "SYNTHESIZE_AN_AST_LEVEL_EDIT_INDUCER_THAT_FOLDS_ONE_DEMONSTRATION_PAIR_INTO_A_HOLE_GENERALIZED_TEMPLATE_WITH_A_CONTEXT_PRECONDITION_AND_MEASURES_IT_END_TO_END_ON_A_PUBLIC_BUG_CORPUS"
         }
       ],
-      "checked_at_utc": "2026-11-17T13:56:40Z",
+      "checked_at_utc": "2026-11-17T14:02:48Z",
       "comparison_dimensions": [
         "CORRECTNESS",
         "CAPABILITY_STRENGTH",
@@ -374,7 +374,7 @@
       "selected_route": "SYNTHESIZE_A_JUDGE_ADMISSIBILITY_AUDIT_THAT_PASSES_THE_CORPUS_OWN_ANSWER_AND_FAILS_ITS_OWN_BUG_ON_EVERY_TASK_BEFORE_ANY_VERDICT_IS_COUNTED",
       "selected_route_preflight": {
         "all_required_dependencies_ready": true,
-        "checked_at_utc": "2026-11-17T13:56:40Z",
+        "checked_at_utc": "2026-11-17T14:02:48Z",
         "execution_dependencies": [
           {
             "dependency": "local Python 3.11 runtime with pytest",

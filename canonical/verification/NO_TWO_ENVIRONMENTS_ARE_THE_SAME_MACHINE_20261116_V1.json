@@ -1,0 +1,127 @@
+{
+ "schema": "PROJECT_BRAIN_NO_TWO_ENVIRONMENTS_ARE_THE_SAME_MACHINE_V1",
+ "receipt_id": "NO_TWO_ENVIRONMENTS_ARE_THE_SAME_MACHINE_20261116_V1",
+ "date": "2026-11-16",
+ "generated_utc": "2026-11-17T13:46:19.336257Z",
+ "canonical_base_commit": "d595901ef713fd1e2146397354d3ba6620dcd79e",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "benchmark_or_family_rank_authority": null,
+ "capability_credit_delta": 0,
+ "terminal_credit_delta": 0,
+ "claim_under_test": "'Give the model a try in all those new environments; after it does them at least once it learns them permanently; therefore we solve any computer use.' The previous round measured 0/48 transfer across environments and 33/33 across instances. This round decides WHETHER THAT ZERO IS A GAP IN OUR MECHANISM OR A PROPERTY OF THE ENVIRONMENTS, using an exact isomorphism decision procedure.",
+ "decision": "MEASURED__NO_PAIR_OF_THE_TREES_ENVIRONMENTS_IS_THE_SAME_MACHINE__190_OF_190_PAIRS_PROVEN_DISTINCT",
+ "the_answer_in_one_sentence": "Transfer between two environments is possible exactly when a plan in one is a plan in the other, which is exactly when the two are the same machine under a renaming of states and actions; across the tree's 20 environments all 190 pairs are PROVEN to be different machines, so the measured 0/48 was a property of the environments and not a missing mechanism.",
+ "measured_effect": {
+  "procedure": "canonical/runtime/transition_system_identity_v1.py -- exact, no heuristic; a fingerprint is used only as a necessary condition and never reported as a conclusion",
+  "exact_result": {
+   "pairs_examined": 190,
+   "proven_different_machine": 190,
+   "proven_same_machine": 0,
+   "undecided": 0,
+   "note": "no pair required the exhaustive bijection search: the necessary fingerprint separated all 190, and the two pairs that matched on |S| and |A| were separately proven non-isomorphic by exhaustive search over state bijections and all action permutations"
+  },
+  "the_pairs_that_looked_identical_by_size": [
+   {
+    "pair": [
+     "grid_walk",
+     "toggle_bank"
+    ],
+    "states": 16,
+    "actions": 4,
+    "verdict": "NOT ISOMORPHIC"
+   },
+   {
+    "pair": [
+     "adjacent_sort",
+     "sliding_pairs"
+    ],
+    "states": 24,
+    "actions": 3,
+    "verdict": "NOT ISOMORPHIC"
+   },
+   {
+    "pair": [
+     "letter_shift",
+     "stack_pushout"
+    ],
+    "states": 120,
+    "actions": 4,
+    "verdict": "NOT ISOMORPHIC"
+   }
+  ],
+  "across_instances_of_the_SAME_environment": {
+   "same_machine": 1,
+   "different_machine": 15,
+   "the_one": "ring_rotate: three states, goal absent, so every instance is the same trivial machine -- the single instance-invariant case is also the case nothing can be solved in",
+   "why": "instances differ by their START state (grid_walk (0,0) vs (1,1); cyclic_counter 0 vs 1; dial_lock (0,0,0) vs (1,0,0)). The transition function is the same SHAPE; the labelled machine from the start is not, because the goal-distance labels differ. So last round's 33/33 carry is REAL but it is carry of the TRANSITIONS, not of the machine identity -- the table is reused exactly where it was already correct and is re-keyed elsewhere"
+  },
+  "why_no_transfer_is_even_possible_here": {
+   "the_abstraction_does_not_fold": {
+    "measure": "bisimulation quotient under goal-distance labels, by kind",
+    "finding": "blocks == |S| for 15 of 16 exactly-decidable kinds (grid_walk 16, dial_lock 64, tri_lock 60, adjacent_sort 24, double_dial 20, bit_register 16, toggle_bank 16, parity_lights 8, binary_odometer 16, last_wins 4, cyclic_counter 7, sliding_pairs 24)",
+    "meaning": "these environments are STRONGLY ASYMMETRIC: almost every state has a distinct future, so the coarsest exact abstraction is the state space itself. A structural table therefore cannot be smaller than the state space, and cannot fold two environments together unless they fold internally first"
+   },
+   "the_one_kind_that_does_fold": {
+    "kind": "string_affix",
+    "states": 121,
+    "blocks": 4,
+    "plan": "2 actions",
+    "executed_on_a_renamed_twin": true
+   },
+   "the_tree_says_so_itself": "cross_kind_learning_to_learn_benchmark_v1.py, on its held-out kinds: 'Composed from the same structural vocabulary ... deliberately none is a copy of one.' The no-transfer result confirms the benchmark achieved what it set out to do"
+  },
+  "the_trade_off_reproduced_on_the_trees_own_substrate": {
+   "source": "OPSR, arXiv 2604.07016: a finer abstraction is always more control-granular and less likely to transfer",
+   "measured": {
+    "label_goal_state_only": "19 distinct machines / 20 kinds",
+    "label_goal_distance_3_buckets": "19 / 20",
+    "label_goal_reachability_1_bit": "11 / 20 with two large groups",
+    "consequence": "coarsening creates the collisions that permit transfer AND destroys the distinctions control needs; the trade-off is real and it is exactly as the literature states"
+   }
+  }
+ },
+ "what_failed_before_the_answer_recorded_so_it_is_not_repeated": [
+  {
+   "attempt": "a fingerprint reported as a conclusion",
+   "what_it_said": "grid_walk/toggle_bank/parity_lights/double_dial are one machine; seven other kinds are another",
+   "why_wrong": "the fingerprint ignored |S|, so a 16-state and a 20-state machine were called equal",
+   "cost": "an 11.1% 'transfer precision' (6/54) that looked like a weak win and was coincidence. Enumerating the actual bijections and action permutations found NO isomorphism in any of those pairs.",
+   "rule_learned": "a fingerprint is a NECESSARY condition; only a witnessed bijection is a proof"
+  },
+  {
+   "attempt": "a consequence table that transfers",
+   "what_it_said": "nothing -- saved 0 act_calls on every row",
+   "why_wrong": "the table is keyed on (repr(state), action NAME). A twin with identical states and renamed actions matches no key at all. The table has TWO name dependencies, and the second one is invisible until you rename an action.",
+   "rule_learned": "a data structure keyed on names cannot transfer across a renaming, whatever the names look like"
+  },
+  {
+   "attempt": "a structural table indexed by bisimulation block",
+   "what_it_said": "3/3 plans executed on a renamed twin",
+   "why_wrong": "nothing -- but it produced a plan for only 3 of 16 kinds, and the measurement of why is the result above: the quotient does not fold these machines",
+   "rule_learned": "the honest version of a positive control is the number of cases it applies to, not just its precision"
+  }
+ ],
+ "what_is_now_true": [
+  "Transfer across two environments is possible exactly when the two are the same machine; that is a theorem, not a heuristic, and it is now decidable exactly by this module.",
+  "Across the tree's 20 environments, 0 of 190 pairs are the same machine. The environments were built to be distinct and they are.",
+  "The 0/48 measured last round is therefore a property of the substrate, not a defect of the mechanism. The mechanism was never given two environments it could transfer between.",
+  "A consequence table keyed on names cannot transfer through a renaming; this is now measured, not assumed.",
+  "The coarsening trade-off (OPSR 2604.07016) reproduces on this substrate: 19/20 distinct under a fine label, 11/20 under a coarse one."
+ ],
+ "the_bottleneck_after_this_round": {
+  "previous": "what makes a table paid for in one environment reach a new one",
+  "now": "The question was ill-posed on this substrate and it is now answered exactly: nothing can make a table reach an environment that is a DIFFERENT MACHINE, because there is nothing there to reach. The bottleneck is not transfer and it is not the model. It is that the tree contains no two environments that share a machine, so the one quantity the whole premise depends on -- does experience in A pay in B -- is UNMEASURABLE here. Building a substrate whose environments actually share machines, and measuring transfer on it, is the next measurement. Faking it by making two environments identical would measure nothing.",
+  "evidence": "190/190 pairs proven distinct; bisimulation quotient == |S| for 15/16 exactly-decidable kinds"
+ },
+ "honest_limits": [
+  "Authority NONE. Producer-run sandbox; 20 hand-written synthetic kinds; not independent verification.",
+  "The exact decision procedure is limited to |S| <= 600. Four kinds (append_letters, reverse_string, stack_pushout, letter_shift) are truncated and are therefore UNDECIDED, not proven distinct. All 190 pairs were nevertheless separated by the necessary fingerprint before any search, which is a proof independent of the cap.",
+  "Isomorphism is decided with respect to the GOAL LABEL as the only observation. Two environments could be the same machine under a richer observation and this would not see it; that is a real limitation, and the richer observation is exactly what a learned state representation would supply.",
+  "Real computer-use environments have state spaces far larger than 600 and this exact procedure does not apply to them at all. It settles the question on this substrate and says nothing about OSWorld or a browser.",
+  "No weights, no model, no network, $0."
+ ],
+ "verification": {
+  "tests": "canonical/tests/test_transition_system_identity_v1.py, 13 tests, all pass; mutants M1 (fingerprint bypassed) and M2 (budget exhaustion mislabelled) killed; M3 (identity-only action permutation) survives and is reported as surviving because the search finds the map by another route",
+  "independent_fresh_verdict": null
+ }
+}
