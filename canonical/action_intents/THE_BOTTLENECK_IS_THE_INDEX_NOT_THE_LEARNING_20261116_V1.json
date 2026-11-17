@@ -42,7 +42,7 @@
  },
  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The tree concluded \"the features do not generalise\" from ONE bucketing and ONE instance of each kind. Swept from coarser than its own key to one-key-per-kind, the conclusion is sharper and different: no granularity of these features is injective on the distinction the policy depends on. Coarsening makes collisions worse (2 -> 3), refining reduces them but the only family reaching zero collisions is one key per kind (20 keys for 20 kinds), which transfers nothing; usable_key_families is empty. Sweeping instances also shows 5 of 20 kinds CHANGE their required policy set between instances of the same kind, so even a perfect kind-level key would be wrong. The features do not CONTAIN the observable, so the repair is a new observable rather than a finer grid.",
- "canonical_base_commit": "078f34433b",
+ "canonical_base_commit": "078f34433bf3e98f9d589482a305034b9c6c366b",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -186,7 +186,7 @@
  ],
  "probe_specific": false,
  "recursive_obs": {
-  "canonical_base_commit": "078f34433b",
+  "canonical_base_commit": "078f34433bf3e98f9d589482a305034b9c6c366b",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "concluding from one bucketing of one feature vector",
