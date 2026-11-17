@@ -39,7 +39,7 @@
  },
  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_LEARNER_COULD_NOT_BIND_AN_ELEMENT_ID_THE_INSTRUCTION_NAMES_SO_A_PAGE_WHOSE_ONLY_DISTINGUISHING_PROPERTY_IS_THAT_ID_WAS_UNLEARNABLE",
- "canonical_base_commit": "8408c78c97d45008c9ec2f0c2d8b72f862ee97c2",
+ "canonical_base_commit": "078f34433bf3e98f9d589482a305034b9c6c366b",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -118,7 +118,7 @@
  ],
  "probe_specific": false,
  "recursive_obs": {
-  "canonical_base_commit": "8408c78c97d45008c9ec2f0c2d8b72f862ee97c2",
+  "canonical_base_commit": "078f34433bf3e98f9d589482a305034b9c6c366b",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "one_description_language_v1.py",
