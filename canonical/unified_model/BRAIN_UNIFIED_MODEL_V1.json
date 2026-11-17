@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 479,
+  "knowledge_documents": 480,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6922,
+  "research_index_records": 6924,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 451,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "a8548fcfe3fdc99fe7a6b0a398e97344869cb66e58f2de04594f03d3acce2fe3"
+  "value": "39e8332bda103ee6a0a3546fc477cf0a7732eb438bee750b1b738065143d87a5"
  },
  "engines": [
   {
@@ -47287,6 +47287,83 @@
     "november",
     "only",
     "proved"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 9269,
+   "headings": [
+    "Composition closes one and proves two",
+    "1. What changed, against the same four machines",
+    "2. The part I did not expect to matter, and it mattered most",
+    "3. Why the planning is sound and free",
+    "4. What is still not solved — and it is no longer planning",
+    "5. So: right or wrong?",
+    "6. The single bottleneck, third time, sharpened each time",
+    "7. Non-claims",
+    "8. Reproduce"
+   ],
+   "kind": "DOCUMENT",
+   "path": "COMPOSITION_CLOSES_ONE_AND_PROVES_TWO_20261116_V1.md",
+   "sha256": "475cae30819102ce9b65a93438f3646067e24d2521beaf524813767ab2135986",
+   "summary": "**Last turn's three refusals were all one shape of failure: the agent had the right effect in its measured table and still could not reach the goal, because reaching it took two steps or because the machine has no atom for it. Composing the measured effects fixes the first, and turns the other two from failures into proofs — 14 of 16 solved, 2 PROVEN impossible, 0 prediction errors, and 15 plans t",
+   "terms": {
+    "14": 4,
+    "15": 6,
+    "16": 8,
+    "about": 7,
+    "agent": 4,
+    "all": 4,
+    "atom": 7,
+    "atoms": 5,
+    "because": 5,
+    "cannot": 8,
+    "class": 5,
+    "composition": 5,
+    "each": 4,
+    "effect": 8,
+    "effects": 4,
+    "every": 6,
+    "four": 6,
+    "frame": 11,
+    "goal": 7,
+    "last": 4,
+    "machine": 12,
+    "machines": 6,
+    "measured": 12,
+    "model": 4,
+    "no": 8,
+    "not": 27,
+    "one": 9,
+    "over": 5,
+    "per": 5,
+    "plan": 6,
+    "plans": 5,
+    "predicate": 7,
+    "remove": 4,
+    "replace": 6,
+    "request": 5,
+    "requests": 6,
+    "same": 6,
+    "search": 4,
+    "so": 6,
+    "solved": 8,
+    "something": 4,
+    "state": 8,
+    "stated": 5,
+    "table": 6,
+    "trials": 7,
+    "turn": 8,
+    "vocabulary": 9,
+    "zero": 6
+   },
+   "title": "Composition closes one and proves two",
+   "title_terms": [
+    "closes",
+    "composition",
+    "one",
+    "proves",
+    "two"
    ]
   },
   {
@@ -82303,10 +82380,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1281,
+  "included_source_count": 1282,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "1f06ecef0be56c8e6999c7acf66934a701cd68203133c2e89097d8959c5ef140"
+  "source_tree_digest": "3d5b7fae3cabf0c44c00940c223c49d09f92c91e4e55824564908b7e10cc98d7"
  },
  "research_index": [
   {
@@ -156951,6 +157028,24 @@
     "one": 1,
     "repair": 1,
     "run": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/COMPOSE_MEASURED_EFFECTS_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/COMPOSE_MEASURED_EFFECTS_20261116_V1.json",
+   "schema": "BRAIN_COMPOSE_MEASURED_EFFECTS_V1",
+   "sha256": "553bbcebf14f13dc33746be26216f9f0f406d9a0e12d1f747546ceaa270b55ca",
+   "status": "",
+   "terms": {
+    "20261116": 1,
+    "compose": 1,
+    "effects": 1,
+    "measured": 1,
     "v1": 1
    }
   },
@@ -234727,6 +234822,51 @@
     "json": 1,
     "source": 2,
     "v1": 2
+   }
+  },
+  {
+   "action_id": "COMPOSITION_CLOSES_ONE_AND_PROVES_TWO_20261116_V1",
+   "capability": false,
+   "date": "2026-11-16",
+   "id": "research:canonical/action_intents/COMPOSITION_CLOSES_ONE_AND_PROVES_TWO_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/COMPOSITION_CLOSES_ONE_AND_PROVES_TWO_20261116_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "da5835a019967daee05713d60b9d2cd8ca01da0ae315333ff89f79666361f155",
+   "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
+   "terms": {
+    "20261116": 1,
+    "40": 1,
+    "agent": 1,
+    "binding": 2,
+    "closes": 1,
+    "composition": 2,
+    "composition_closes_one_and_proves_two_20261116_v1": 1,
+    "constraint": 2,
+    "costs": 1,
+    "destroy": 1,
+    "every_remaining_refusal_in_the_new_environment_measurement_was_a_composition_or_an_expressivity_gap_and_neither_had_been_separated_from_a_search_budget_so_the_next_bottleneck_could_not_be_named": 1,
+    "frame": 2,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "incomplete": 1,
+    "intention": 1,
+    "lets": 1,
+    "lines": 1,
+    "machine": 1,
+    "not": 1,
+    "one": 1,
+    "predicate": 1,
+    "proposed__producer_measured__independent_verification_open": 1,
+    "proves": 1,
+    "result": 1,
+    "satisfying": 1,
+    "shows": 1,
+    "specification": 2,
+    "synthesize_an_offline_composer_over_the_measured_operator_table_with_a_frame_condition_and_a_per_step_prediction_audit_and_exhaustive_unreachability_proofs": 1,
+    "trials": 1,
+    "turning": 1,
+    "two": 1,
+    "v1": 1
    }
   },
   {
