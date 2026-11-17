@@ -31226,18 +31226,18 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 499,
+  "knowledge_documents": 500,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6963,
+  "research_index_records": 6965,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 452,
-  "source_index_modules": 1993
+  "source_index_modules": 1994
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "8062fe7064af16d6f5a47e9937938734fc23e95eeec4acdca308b8bb06aba1ee"
+  "value": "1852be47a29e16346091d966d012205b8d4af7dd2a9a100591c939fa8fe71aa9"
  },
  "engines": [
   {
@@ -62749,6 +62749,85 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 10125,
+   "headings": [
+    "The consequence model is a table — and a table does not cross into a new environment",
+    "0. First, a correction to my own last answer",
+    "1. You asked why we can't give the model the smartest actions once and have it learn forever",
+    "2. The two wrong builds, and why they were wrong",
+    "3. What it bought",
+    "4. Your premise, measured at its strongest point",
+    "5. So is this the revolutionary lever? Yes — and it is one of three",
+    "6. The single bottleneck, updated",
+    "7. What I did and did not do"
+   ],
+   "kind": "DOCUMENT",
+   "path": "THE_CONSEQUENCE_MODEL_IS_A_TABLE_20261116_V1.md",
+   "sha256": "de8e10cd3ab19a9ef7b49f5b73cca505408bfc7177b036722cad8a93dc5ffa66",
+   "summary": "**Date:** 2026-11-16 · **Branch:** `arena/1698ccde-brain` · **Authority: NONE — sandbox measurement, not independent verification.** **Receipt:** `canonical/verification/THE_CONSEQUENCE_MODEL_IS_A_TABLE_20261116_V1.json`",
+   "terms": {
+    "3.74": 4,
+    "33": 5,
+    "52": 10,
+    "action": 10,
+    "actions": 5,
+    "all": 4,
+    "answer": 4,
+    "because": 6,
+    "canonical": 5,
+    "carried": 4,
+    "consequence": 6,
+    "effect": 4,
+    "environment": 13,
+    "every": 6,
+    "exact": 5,
+    "field": 4,
+    "instance": 7,
+    "instances": 5,
+    "last": 4,
+    "law": 8,
+    "laws": 4,
+    "learn": 5,
+    "measured": 5,
+    "measurement": 4,
+    "model": 19,
+    "my": 4,
+    "new": 11,
+    "no": 21,
+    "not": 27,
+    "nothing": 10,
+    "now": 4,
+    "once": 5,
+    "one": 15,
+    "own": 6,
+    "paid": 6,
+    "path": 5,
+    "real": 5,
+    "right": 4,
+    "runtime": 4,
+    "same": 5,
+    "so": 6,
+    "state": 9,
+    "table": 16,
+    "transition": 9,
+    "tree": 5,
+    "two": 5,
+    "vocabulary": 9,
+    "wrong": 10
+   },
+   "title": "The consequence model is a table — and a table does not cross into a new environment",
+   "title_terms": [
+    "consequence",
+    "cross",
+    "environment",
+    "model",
+    "new",
+    "not",
+    "table"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 4714,
    "headings": [
     "The corpus can only come from real work",
@@ -83880,10 +83959,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1301,
+  "included_source_count": 1302,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "4c498607e0eb081a23c2f4bd71eca158c022be24c37dc82490c867adb90a396f"
+  "source_tree_digest": "e799c4abdbb20e519b8bb544adc5fdc6e32e688d6399923a8a0e733184220354"
  },
  "research_index": [
   {
@@ -211592,6 +211671,24 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "2026-11-16",
+   "id": "research:canonical/verification/THE_CONSEQUENCE_MODEL_IS_A_TABLE_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/THE_CONSEQUENCE_MODEL_IS_A_TABLE_20261116_V1.json",
+   "schema": "PROJECT_BRAIN_THE_CONSEQUENCE_MODEL_IS_A_TABLE_V1",
+   "sha256": "b619d6360c50f56d28657442ea1ed059a3ae09e4fc2c8babe68d7cd20cfa82f1",
+   "status": "",
+   "terms": {
+    "20261116": 1,
+    "consequence": 1,
+    "model": 1,
+    "table": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "",
    "id": "research:canonical/verification/THE_EDIT_SPACE_IS_THE_PROGRAM_NOT_A_LIST_20261116_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -244860,6 +244957,42 @@
    }
   },
   {
+   "action_id": "THE_CONSEQUENCE_MODEL_IS_A_TABLE_20261116_V1",
+   "capability": false,
+   "date": "2026-11-16",
+   "id": "research:canonical/action_intents/THE_CONSEQUENCE_MODEL_IS_A_TABLE_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/THE_CONSEQUENCE_MODEL_IS_A_TABLE_20261116_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+   "sha256": "8fd72625f6b1c804e75a5fc2c031d79451ed74dd2512558da27ade4ea4952431",
+   "status": "PROPOSED__ZERO_CREDIT__NO_TERMINAL_CLAIM",
+   "terms": {
+    "20261116": 1,
+    "33": 2,
+    "48": 1,
+    "a_paid_for_consequence_model_transfers_to_a_new_instance_33_of_33_and_to_a_new_environment_0_of_48_because_zero_foreign_transitions_are_ever_consulted": 1,
+    "across": 1,
+    "build_a_consequence_table_with_no_law_vocabulary_because_a_law_based_model_was_wrong_on_6261_of_19648_transitions_and_a_table_solves_52_of_52_at_3.74x": 1,
+    "consequence": 2,
+    "cross": 1,
+    "environment": 2,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "model": 3,
+    "moves": 1,
+    "new": 1,
+    "no": 1,
+    "not": 1,
+    "one": 1,
+    "paid-for": 1,
+    "proposed__zero_credit__no_terminal_claim": 1,
+    "table": 1,
+    "the_consequence_model_is_a_table_20261116_v1": 1,
+    "v1": 1,
+    "wall": 1,
+    "within": 1
+   }
+  },
+  {
    "action_id": "THE_CONTROLLER_PATH_ASKS_THE_ACCEPTANCE_VERIFIER_TOO_V1_20261024_V1",
    "capability": false,
    "date": "2026-10-24",
@@ -266707,6 +266840,36 @@
     "observedelement": 1,
     "ocr": 1,
     "valid_map": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/consequence_table_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/consequence_table_v1.py",
+   "sha256": "a0a3d3cedff58cde1f206f1195339e49b85a8a0af54eb5c9e2affd8d1b55d438",
+   "summary": "The model is a table of executed transitions. That is the whole part.",
+   "symbol_count": 3,
+   "symbols": [
+    "ConsequenceTable",
+    "_out",
+    "learn_and_solve"
+   ],
+   "terms": {
+    "consequence": 1,
+    "consequencetable": 1,
+    "executed": 1,
+    "learn_and_solve": 1,
+    "model": 1,
+    "out": 1,
+    "part": 1,
+    "table": 2,
+    "transitions": 1,
+    "v1": 1,
+    "whole": 1
    }
   },
   {
