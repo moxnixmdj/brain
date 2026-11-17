@@ -1,0 +1,500 @@
+{
+  "schema": "BRAIN_AIMED_EDITS_FROM_THE_PROGRAM_AND_THE_FAILURE_V1",
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "upstream": "https://github.com/jkoppel/QuixBugs",
+  "generated_at_utc": "2026-11-17T18:55:23Z",
+  "corpus_commit": "4257f44b0ff1181dedaedee6a447e133219fcebf",
+  "tool": "canonical/tools/aimed_edits_from_the_program_and_the_failure_v1.py",
+  "tests": "canonical/tests/test_aimed_edits_from_the_program_and_the_failure_v1.py",
+  "space": "base enumeration plus the program's own forms over its own atoms",
+  "parameters": {
+    "candidate_cap": 60000,
+    "wall_budget_seconds": 900.0,
+    "verify_timeout_seconds": 240,
+    "chunk": 50,
+    "max_atoms": 10
+  },
+  "model_dependency_count": 0,
+  "external_capability_provider_count": 0,
+  "network_calls_at_run_time": 0,
+  "summary": {
+    "tasks_attempted": 8,
+    "solved": [
+      "flatten",
+      "hanoi",
+      "kheapsort",
+      "powerset",
+      "shunting_yard",
+      "sqrt",
+      "subsequences",
+      "to_base"
+    ],
+    "solved_count": 8,
+    "not_solved": [],
+    "budget_exhausted": [],
+    "space_exhausted": [],
+    "judge_not_calibrated": [],
+    "normalisation_taken_from_the_test_file": [
+      "hanoi",
+      "sqrt"
+    ],
+    "candidates_evaluated_total": 70050,
+    "candidates_hung_or_crashed_total": 0,
+    "seconds_total": 248.2
+  },
+  "rows": [
+    {
+      "task": "kheapsort",
+      "kind": "task",
+      "cases": 4,
+      "program_sha256": "0cabf3d462d941ec01f261f2d794d960ab8ba497c42140cedbc3c872f772cea8",
+      "function": "kheapsort",
+      "normalisation_from_the_test_file": null,
+      "clock_seconds": 0.05,
+      "clock_seconds_per_case": [
+        0.05,
+        0.05,
+        0.05,
+        0.05
+      ],
+      "calibration": {
+        "status": "CALIBRATED",
+        "corrected_passes": true,
+        "defective_is_rejected": true
+      },
+      "space_size": 14236,
+      "warm_lines": [],
+      "stage": "CANDIDATE_FOUND",
+      "candidates_evaluated": 4950,
+      "candidates_hung_or_crashed": 0,
+      "seconds_per_candidate": 0.001268,
+      "seconds_searching": 6.0,
+      "survivors": 1,
+      "verdicts": [
+        {
+          "corpus_test_passes": true,
+          "returncode": 0,
+          "edit_kind": "REPLACE",
+          "replacement": "arr[k:]",
+          "lineno": 7
+        }
+      ],
+      "solved": true,
+      "space": "aimed_forms",
+      "forms_in_the_program": [
+        "Subscript",
+        "Attribute",
+        "Call"
+      ]
+    },
+    {
+      "task": "powerset",
+      "kind": "task",
+      "cases": 5,
+      "program_sha256": "3e3deb045ed61fbe82725cd7e7b0fb4d00f411f87f0f91358109ec0204c61ae9",
+      "function": "powerset",
+      "normalisation_from_the_test_file": null,
+      "clock_seconds": 0.05,
+      "clock_seconds_per_case": [
+        0.05,
+        0.05,
+        0.05,
+        0.05,
+        0.05
+      ],
+      "calibration": {
+        "status": "CALIBRATED",
+        "corrected_passes": true,
+        "defective_is_rejected": true
+      },
+      "space_size": 5759,
+      "warm_lines": [
+        3,
+        4,
+        5,
+        6,
+        8
+      ],
+      "space_reordered_by_the_failure": true,
+      "stage": "CANDIDATE_FOUND",
+      "candidates_evaluated": 2100,
+      "candidates_hung_or_crashed": 0,
+      "seconds_per_candidate": 0.001204,
+      "seconds_searching": 4.3,
+      "survivors": 1,
+      "verdicts": [
+        {
+          "corpus_test_passes": true,
+          "returncode": 0,
+          "edit_kind": "REPLACE",
+          "replacement": "rest_subsets + ([[first] + subset for subset in rest_subsets])",
+          "lineno": 6
+        }
+      ],
+      "solved": true,
+      "space": "aimed_forms",
+      "forms_in_the_program": [
+        "Call",
+        "ListComp",
+        "BinOp",
+        "List",
+        "Tuple"
+      ]
+    },
+    {
+      "task": "subsequences",
+      "kind": "task",
+      "cases": 12,
+      "program_sha256": "0566273a521b768c0f9d8ba33d95bc7a10447b654327ad0d3460500245bef7c3",
+      "function": "subsequences",
+      "normalisation_from_the_test_file": null,
+      "clock_seconds": 0.05,
+      "clock_seconds_per_case": [
+        0.05,
+        0.05,
+        0.05,
+        0.05,
+        0.05,
+        0.05,
+        0.05,
+        0.05,
+        0.05,
+        0.05,
+        0.05,
+        0.05
+      ],
+      "calibration": {
+        "status": "CALIBRATED",
+        "corrected_passes": true,
+        "defective_is_rejected": true
+      },
+      "space_size": 14775,
+      "warm_lines": [
+        2,
+        3,
+        5,
+        6,
+        7,
+        8,
+        11
+      ],
+      "space_reordered_by_the_failure": true,
+      "stage": "CANDIDATE_FOUND",
+      "candidates_evaluated": 1550,
+      "candidates_hung_or_crashed": 0,
+      "seconds_per_candidate": 0.001209,
+      "seconds_searching": 2.1,
+      "survivors": 1,
+      "verdicts": [
+        {
+          "corpus_test_passes": true,
+          "returncode": 0,
+          "edit_kind": "REPLACE",
+          "replacement": "[[]]",
+          "lineno": 3
+        }
+      ],
+      "solved": true,
+      "space": "aimed_forms",
+      "forms_in_the_program": [
+        "Attribute",
+        "Call",
+        "GeneratorExp",
+        "Compare",
+        "BinOp",
+        "List"
+      ]
+    },
+    {
+      "task": "to_base",
+      "kind": "task",
+      "cases": 10,
+      "program_sha256": "e6f2d42474e4e641f08d2e6d5c0e8c8bf8a540e79aaaf1ab903031c163193744",
+      "function": "to_base",
+      "normalisation_from_the_test_file": null,
+      "clock_seconds": 0.05,
+      "clock_seconds_per_case": [
+        0.05,
+        0.05,
+        0.05,
+        0.05,
+        0.05,
+        0.05,
+        0.05,
+        0.05,
+        0.05,
+        0.05
+      ],
+      "calibration": {
+        "status": "CALIBRATED",
+        "corrected_passes": true,
+        "defective_is_rejected": true
+      },
+      "space_size": 15710,
+      "warm_lines": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "space_reordered_by_the_failure": true,
+      "stage": "CANDIDATE_FOUND",
+      "candidates_evaluated": 14300,
+      "candidates_hung_or_crashed": 0,
+      "seconds_per_candidate": 0.001188,
+      "seconds_searching": 69.5,
+      "survivors": 1,
+      "verdicts": [
+        {
+          "corpus_test_passes": true,
+          "returncode": 0,
+          "edit_kind": "COMMUTE",
+          "replacement": "alphabet[i] Add result",
+          "lineno": 9
+        }
+      ],
+      "solved": true,
+      "space": "aimed_forms",
+      "forms_in_the_program": [
+        "Subscript",
+        "Attribute",
+        "Compare",
+        "BinOp"
+      ]
+    },
+    {
+      "task": "shunting_yard",
+      "kind": "task",
+      "cases": 6,
+      "program_sha256": "b010f04bbfc6158888d97498cc8e0adb323b9f8285fbf5b908c7d4c8c48cfb68",
+      "function": "shunting_yard",
+      "normalisation_from_the_test_file": null,
+      "clock_seconds": 0.05,
+      "clock_seconds_per_case": [
+        0.05,
+        0.05,
+        0.05,
+        0.05,
+        0.05,
+        0.05
+      ],
+      "calibration": {
+        "status": "CALIBRATED",
+        "corrected_passes": true,
+        "defective_is_rejected": true
+      },
+      "space_size": 37004,
+      "warm_lines": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        10,
+        11,
+        12,
+        13,
+        14,
+        16,
+        19,
+        22
+      ],
+      "space_reordered_by_the_failure": true,
+      "stage": "CANDIDATE_FOUND",
+      "candidates_evaluated": 26200,
+      "candidates_hung_or_crashed": 0,
+      "seconds_per_candidate": 0.001157,
+      "seconds_searching": 37.2,
+      "survivors": 1,
+      "verdicts": [
+        {
+          "corpus_test_passes": true,
+          "returncode": 0,
+          "edit_kind": "INSERT_STATEMENT",
+          "replacement": "opstack.append(token)",
+          "lineno": 13
+        }
+      ],
+      "solved": true,
+      "space": "aimed_forms",
+      "forms_in_the_program": [
+        "Subscript",
+        "Attribute",
+        "Call",
+        "BoolOp",
+        "Compare",
+        "UnaryOp",
+        "List",
+        "Dict"
+      ]
+    },
+    {
+      "task": "flatten",
+      "kind": "task",
+      "cases": 7,
+      "program_sha256": "5023275fe603f1ebade0027073c3d116274d405069ea350076f220f10ff451e2",
+      "function": "flatten",
+      "normalisation_from_the_test_file": null,
+      "clock_seconds": 0.05,
+      "clock_seconds_per_case": [
+        0.05,
+        0.05,
+        0.05,
+        0.05,
+        0.05,
+        0.05,
+        0.05
+      ],
+      "calibration": {
+        "status": "CALIBRATED",
+        "corrected_passes": true,
+        "defective_is_rejected": true
+      },
+      "space_size": 6223,
+      "warm_lines": [],
+      "stage": "CANDIDATE_FOUND",
+      "candidates_evaluated": 4500,
+      "candidates_hung_or_crashed": 0,
+      "seconds_per_candidate": 0.001441,
+      "seconds_searching": 5.8,
+      "survivors": 1,
+      "verdicts": [
+        {
+          "corpus_test_passes": true,
+          "returncode": 0,
+          "edit_kind": "REPLACE",
+          "replacement": "x",
+          "lineno": 7
+        }
+      ],
+      "solved": true,
+      "space": "aimed_forms",
+      "forms_in_the_program": [
+        "Call"
+      ]
+    },
+    {
+      "task": "hanoi",
+      "kind": "task",
+      "cases": 8,
+      "program_sha256": "edd1ceeb79b556a6d15e3bc21f625c5776b46c10f94a754531d39a6f7e120f9e",
+      "function": "hanoi",
+      "normalisation_from_the_test_file": "nested_lists_to_tuples",
+      "clock_seconds": 0.05,
+      "clock_seconds_per_case": [
+        0.05,
+        0.05,
+        0.05,
+        0.05,
+        0.05,
+        0.05,
+        0.05,
+        0.05
+      ],
+      "calibration": {
+        "status": "CALIBRATED",
+        "corrected_passes": true,
+        "defective_is_rejected": true
+      },
+      "space_size": 20762,
+      "warm_lines": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        9
+      ],
+      "space_reordered_by_the_failure": true,
+      "stage": "CANDIDATE_FOUND",
+      "candidates_evaluated": 13350,
+      "candidates_hung_or_crashed": 0,
+      "seconds_per_candidate": 0.00126,
+      "seconds_searching": 16.5,
+      "survivors": 2,
+      "verdicts": [
+        {
+          "corpus_test_passes": true,
+          "returncode": 0,
+          "edit_kind": "REPLACE",
+          "replacement": "end",
+          "lineno": 6
+        },
+        {
+          "corpus_test_passes": true,
+          "returncode": 0,
+          "edit_kind": "REPLACE",
+          "replacement": "0 + end",
+          "lineno": 6
+        }
+      ],
+      "solved": true,
+      "space": "aimed_forms",
+      "forms_in_the_program": [
+        "Attribute",
+        "Call",
+        "Compare",
+        "BinOp",
+        "List",
+        "Tuple",
+        "Set"
+      ]
+    },
+    {
+      "task": "sqrt",
+      "kind": "task",
+      "cases": 7,
+      "program_sha256": "e3623a160e6ada452b36ce0bd2370fc031943e2c1ae93aae5f0c82865e083ebf",
+      "function": "sqrt",
+      "normalisation_from_the_test_file": "approx_last_argument",
+      "clock_seconds": 0.05,
+      "clock_seconds_per_case": [
+        0.05,
+        0.05,
+        0.05,
+        0.05,
+        0.05,
+        0.05,
+        0.05
+      ],
+      "calibration": {
+        "status": "CALIBRATED",
+        "corrected_passes": true,
+        "defective_is_rejected": true
+      },
+      "space_size": 7957,
+      "warm_lines": [
+        3,
+        4,
+        5
+      ],
+      "space_reordered_by_the_failure": true,
+      "stage": "CANDIDATE_FOUND",
+      "candidates_evaluated": 3100,
+      "candidates_hung_or_crashed": 0,
+      "seconds_per_candidate": 0.004241,
+      "seconds_searching": 106.8,
+      "survivors": 1,
+      "verdicts": [
+        {
+          "corpus_test_passes": true,
+          "returncode": 0,
+          "edit_kind": "REPLACE",
+          "replacement": "(x) / approx",
+          "lineno": 4
+        }
+      ],
+      "solved": true,
+      "space": "aimed_forms",
+      "forms_in_the_program": [
+        "Call",
+        "Compare",
+        "BinOp"
+      ]
+    }
+  ]
+}

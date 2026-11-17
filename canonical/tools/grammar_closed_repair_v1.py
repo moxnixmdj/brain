@@ -495,7 +495,26 @@ def _set_operator(patched: ast.AST, path: tuple[tuple[str, int | None], ...], sw
     return tree
 
 
-def _enumerate(tree: ast.AST, atoms: Sequence[str]) -> list[dict[str, Any]]:
+def _compiles_quietly(source: str) -> bool:
+    """Does this text compile? A warning is not a reason to print a line per candidate.
+
+    Building a space means trying text that cannot run -- `0[1:]`, `x()` on an int -- and the
+    compiler's `SyntaxWarning` for those is expected. It was printing thousands of lines per task,
+    which buries the numbers the run exists to report.
+    """
+    import warnings
+
+    try:
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore")
+            compile(source, "<candidate>", "exec")
+        return True
+    except Exception:  # noqa: BLE001
+        return False
+
+
+def _enumerate(tree: ast.AST, atoms: Sequence[str],
+               extra_texts: "Callable[[str], Sequence[str]] | None" = None) -> list[dict[str, Any]]:
     """The whole hypothesis space, materialised and labelled.
 
     Two families, both generated from the program rather than from a list of known fixes:
@@ -513,7 +532,12 @@ def _enumerate(tree: ast.AST, atoms: Sequence[str]) -> list[dict[str, Any]]:
         if isinstance(node, ast.expr) and not store_target:
             node_src = ast.unparse(node)
             attempts: list[tuple[str, ast.AST]] = []
-            for text in candidate_texts(node_src, atoms):
+            texts = list(candidate_texts(node_src, atoms))
+            if extra_texts is not None:
+                # The closure rule is supplied, not built in: the caller says what else this
+                # program can build (its own forms over its own atoms), and nothing else changes.
+                texts = list(extra_texts(node_src)) + texts
+            for text in texts:
                 try:
                     attempts.append((text, ast.parse(text, mode="eval").body))
                 except SyntaxError:
@@ -529,7 +553,8 @@ def _enumerate(tree: ast.AST, atoms: Sequence[str]) -> list[dict[str, Any]]:
                     # A candidate is only a hypothesis if it is a program. Unparse can emit text
                     # that does not compile (a rewrapped augmented-assignment target, for one);
                     # such a candidate is dropped here rather than wasting an execution later.
-                    compile(source, "<candidate>", "exec")
+                    if not _compiles_quietly(source):
+                        raise ValueError("does not compile")
                 except Exception:  # noqa: BLE001
                     continue
                 if source in seen:
@@ -540,7 +565,8 @@ def _enumerate(tree: ast.AST, atoms: Sequence[str]) -> list[dict[str, Any]]:
         for swap in _operators_of(node):
             try:
                 source = ast.unparse(_set_operator(tree, path, swap))
-                compile(source, "<candidate>", "exec")
+                if not _compiles_quietly(source):
+                    raise ValueError("does not compile")
             except Exception:  # noqa: BLE001
                 continue
             if source in seen:
