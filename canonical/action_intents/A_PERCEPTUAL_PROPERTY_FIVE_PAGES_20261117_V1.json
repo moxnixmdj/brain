@@ -38,7 +38,7 @@
   "terminal_achieved": false
  },
  "benchmark_or_family_rank_authority": "NONE__MEASURED_COVERAGE_CLASS_ONLY",
- "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::RANK3_COVERAGE_CLASS_A_PERCEPTUAL_PROPERTY_FIVE_PAGES_SOLVE_OR_TERMINAL_ACCOUNT",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::RANK3_A_PERCEPTUAL_PROPERTY_REQUIRES_PERCEPTION_SHAPED_WORDING_TO_BECOME_A_MEASURED_OPERATOR_OR_A_TERMINAL_ACCOUNT",
  "canonical_base_commit": "43734c87ec538cb6b05cf135e41681dd5c177be8",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
@@ -137,8 +137,8 @@
    "reading page source to hard-wire the shade swatch or the editor period",
    "a fifth bottleneck note in place of this class's terminal accounts"
   ],
-  "expected_parent_frontier_change": "A_PERCEPTUAL_PROPERTY: three pages solved with gain over both control arms, two terminal-accounted, unsolved 30 -> 28",
-  "expected_parent_level_state_change": "A_PERCEPTUAL_PROPERTY: three pages solved with gain over both control arms, two terminal-accounted, unsolved 30 -> 28",
+  "expected_parent_frontier_change": "A_PERCEPTUAL_PROPERTY: three pages solved with gain over both control arms (click-shades 775a, drag-shapes-2 30a, text-editor 49a), two pages terminal-accounted (hover-shape predicate-unreachable, click-checkboxes-soft measured meaning-model refusal), unsolved frontier 30 -> 28",
+  "expected_parent_level_state_change": "A_PERCEPTUAL_PROPERTY: three pages solved with gain over both control arms (click-shades 775a, drag-shapes-2 30a, text-editor 49a), two pages terminal-accounted (hover-shape predicate-unreachable, click-checkboxes-soft measured meaning-model refusal), unsolved frontier 30 -> 28",
   "independent_verification_required": true,
   "iteration_limit": 1,
   "obs_blocker": {
@@ -191,9 +191,11 @@
     "DELETE",
     "BYPASS",
     "REUSE",
-    "COMPOSE",
+    "SUBSTITUTE",
     "WHITE_BOX_HARVEST",
-    "CONFIGURE"
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
    ],
    "efficiency_mechanism": "One operator family per failure mode, priced so the free run ends at the named run or the held shape.",
    "generality_mechanism": "The three new rules key on declared structure (swatch rows, named text runs, box partition), not on this instance's coordinates.",
@@ -266,7 +268,7 @@
      "route": "ship a fuzzy checkbox matcher"
     }
    ],
-   "checked_at_utc": "2026-11-17T23:35:00Z",
+   "checked_at_utc": "2026-11-17T23:55:00Z",
    "comparison_dimensions": [
     "CORRECTNESS",
     "CAPABILITY_STRENGTH",
@@ -275,7 +277,7 @@
     "RELIABILITY",
     "VERIFIABILITY"
    ],
-   "discovery_required": false,
+   "discovery_required": true,
    "incumbent_route": "treat every coverage-class page as solvable by the same lever",
    "max_age_hours": 24,
    "negative_search_summary": "Two free lexical sources measured below the reward predicate; the hover page has no end path in its own source; no further search changes either fact.",
@@ -287,6 +289,14 @@
     {
      "intent": "IMPLEMENTATION_FORM",
      "query": "wordnet co-synset vs thesaurus section granularity"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "roget thesaurus csv github dataset"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "miniwob click-checkboxes-soft reward predicate"
     }
    ],
    "refresh_triggers": [
@@ -323,24 +333,29 @@
    },
    "source_classes_checked": [
     "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
     "CODE_OR_PACKAGE_REGISTRY",
-    "OFFICIAL_PRIMARY"
+    "BROAD_WEB_OR_COMMUNITY"
    ],
    "source_evidence": {
     "BRAIN_INHERITED": [
      "EXACT_STATED_GEOMETRY_AND_THE_UNREACHABLE_FRAME_20261117_V1.md",
-     "ONE_LOOP_ONE_TAIL_VERDICT_20261117_V1.md",
-     "DECLARED_TRIGGER_AND_OPERAND_TAXONOMY receipt (46/16/6, largest class 6)"
-    ],
-    "BROAD_WEB_OR_COMMUNITY": [],
-    "CODE_OR_PACKAGE_REGISTRY": [
-     "wordnet-db dict data files",
-     "eleftheriouk/rogets-thesaurus words.csv"
+     "ONE_LOOP_ONE_TAIL_VERDICT_20261117_V1.md (20 pinned sources)",
+     "DECLARED_TRIGGER_AND_OPERAND_TAXONOMY receipt: 46/16/6, largest class 6"
     ],
     "OFFICIAL_PRIMARY": [
-     "miniwob/html/hover-shape.html",
-     "miniwob/html/click-checkboxes-soft.html",
-     "miniwob/core/core.js"
+     "miniwob/html/hover-shape.html (endEpisode(0,false) only from startStep)",
+     "miniwob/core/core.js (timeout pays endEpisode(-1,false))",
+     "miniwob/html/click-checkboxes-soft.html (FULL_REWARD=1.0, 34 chgroups)"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "wordnet-db dict data.{noun,verb,adj,adv}: 158/492 within-group pairs",
+     "eleftheriouk/rogets-thesaurus words.csv: 312/492 within, 2644 cross false pairs"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "github.com/eleftheriouk/rogets-thesaurus (fetched 2026-11-17, Roget section granularity)",
+     "mosermichael.github.io/cstuff Roget parser (SenseGroup structure, fetched 2026-11-17)",
+     "ONE_LOOP_ONE_TAIL_VERDICT_20261117_V1.json pins 20 Nov-2026 sources"
     ]
    },
    "unresolved_plausible_dominators": []
@@ -388,5 +403,37 @@
   ]
  },
  "weakens_existing_guard": false,
- "why_selected_route_is_fastest_sufficient": "Each solvable page was missing exactly one declared gesture and passed on a fresh page once it existed; each bind page was settled by its own source and its own reward predicate, so the class closes with three measured passes and two evidenced terminals instead of an open-ended aim search."
+ "why_selected_route_is_fastest_sufficient": "Each solvable page was missing exactly one declared gesture and passed on a fresh page once it existed; each bind page was settled by its own source and its own reward predicate, so the class closes with three measured passes and two evidenced terminals instead of an open-ended aim search.",
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "currentness": {
+   "accepted_families": 5,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "unresolved_atomic": 22,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "meta_envelope_open_count": 8,
+   "total_open_truth_obligations": 30,
+   "terminal": false
+  },
+  "fresh_reality_authority": false,
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "This pass completes one coverage class of the ranked plan under the unchanged predicate; it discharges no truth obligation and claims no terminal credit.",
+  "target_truth_obligations": [
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [],
+   "decisive_question": "Can a perception-shaped instruction be turned into a pointer gesture the page accepts, or do the page's own end condition and the reward's perfection bind first?",
+   "falsifier_id": "RANK3_CLASS_CLOSES_WITHOUT_ONE_TERMINAL_ACCOUNT",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "Every page of the class has a terminal: three fresh-page-verified passes, one predicate-unreachable proof from the page's own code, one measured refusal.",
+   "proposal_id": "A_PERCEPTUAL_PROPERTY_FIVE_PAGES_20261117_V1"
+  }
+ }
 }
