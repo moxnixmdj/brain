@@ -31226,18 +31226,18 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 502,
+  "knowledge_documents": 503,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6969,
+  "research_index_records": 6971,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 452,
-  "source_index_modules": 1994
+  "source_index_modules": 1995
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "a94ef5eae8ce9e48ee01300e7ffe9b86e188879cbbd55ecfc17ce34ce9f5d978"
+  "value": "08d92f2e577632803e4ce775e408eb7de4b6e453548dbaefc6c92259ba55752d"
  },
  "engines": [
   {
@@ -54263,6 +54263,89 @@
     "being",
     "noticing",
     "told"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 8819,
+   "headings": [
+    "No two environments are the same machine — so the transfer question was unmeasurable, not unanswered",
+    "0. The question, made exact",
+    "1. The answer",
+    "2. Why nothing folds — the deeper reason",
+    "3. The trade-off, reproduced",
+    "4. Three things I got wrong, and the rule each taught",
+    "5. What this means for your premise",
+    "6. The bottleneck, updated and honest",
+    "7. What I built"
+   ],
+   "kind": "DOCUMENT",
+   "path": "NO_TWO_ENVIRONMENTS_ARE_THE_SAME_MACHINE_20261116_V1.md",
+   "sha256": "42b01c159cb06b60d28c85216b8588f7df812f7ce1c603ed62165de627d0ae76",
+   "summary": "**Date:** 2026-11-16 · **Branch:** `arena/36938aaa-brain` · **Authority: NONE — sandbox measurement, not independent verification.** **Receipt:** `canonical/verification/NO_TWO_ENVIRONMENTS_ARE_THE_SAME_MACHINE_20261116_V1.json`",
+   "terms": {
+    "16": 7,
+    "20": 3,
+    "24": 3,
+    "33": 4,
+    "abstraction": 4,
+    "across": 5,
+    "action": 6,
+    "actions": 4,
+    "attempt": 4,
+    "cannot": 4,
+    "count": 5,
+    "different": 8,
+    "environment": 7,
+    "environments": 15,
+    "every": 5,
+    "exact": 6,
+    "fingerprint": 6,
+    "here": 5,
+    "isomorphic": 5,
+    "kinds": 4,
+    "machine": 11,
+    "machines": 7,
+    "measured": 4,
+    "mechanism": 4,
+    "must": 4,
+    "no": 9,
+    "no_witness": 4,
+    "not": 16,
+    "nothing": 7,
+    "one": 7,
+    "only": 6,
+    "plan": 5,
+    "question": 5,
+    "real": 4,
+    "renamed": 6,
+    "round": 5,
+    "same": 7,
+    "so": 9,
+    "state": 10,
+    "states": 5,
+    "substrate": 6,
+    "table": 8,
+    "than": 4,
+    "they": 5,
+    "transfer": 11,
+    "two": 10,
+    "unknown": 5,
+    "were": 5
+   },
+   "title": "No two environments are the same machine — so the transfer question was unmeasurable, not unanswered",
+   "title_terms": [
+    "environments",
+    "machine",
+    "no",
+    "not",
+    "question",
+    "same",
+    "so",
+    "transfer",
+    "two",
+    "unanswered",
+    "unmeasurable"
    ]
   },
   {
@@ -84121,10 +84204,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1304,
+  "included_source_count": 1305,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "0b2a63a2905ff383d75c2fefa400ca628d4c3790ad709bb0bbecb54cb6dbb1e0"
+  "source_tree_digest": "c37fd0ff742de906ccbce6a5f8967a5bc17611fe57cac2fc3c8875826b528a9e"
  },
  "research_index": [
   {
@@ -177377,6 +177460,26 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "2026-11-16",
+   "id": "research:canonical/verification/NO_TWO_ENVIRONMENTS_ARE_THE_SAME_MACHINE_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/NO_TWO_ENVIRONMENTS_ARE_THE_SAME_MACHINE_20261116_V1.json",
+   "schema": "PROJECT_BRAIN_NO_TWO_ENVIRONMENTS_ARE_THE_SAME_MACHINE_V1",
+   "sha256": "395ae7dccff34e4b0886d4526c8d05888ade4e0919744e86d1a9f4a5985d6e43",
+   "status": "",
+   "terms": {
+    "20261116": 1,
+    "environments": 1,
+    "machine": 1,
+    "no": 1,
+    "same": 1,
+    "two": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "",
    "id": "research:canonical/verification/NYFED_LOSS_CUSHION_CCOB_SOURCE_IDENTITY_VERIFY_20261009_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -240932,6 +241035,48 @@
     "nine_precondition_facts_were_blind__no_capability_produced_them_and_no_sensor_read_them__so_applicability_could_not_be_asked_and_the_front_door_auto_refused_with_no_evidence": 1,
     "now": 1,
     "v1": 1
+   }
+  },
+  {
+   "action_id": "NO_TWO_ENVIRONMENTS_ARE_THE_SAME_MACHINE_20261116_V1",
+   "capability": false,
+   "date": "2026-11-16",
+   "id": "research:canonical/action_intents/NO_TWO_ENVIRONMENTS_ARE_THE_SAME_MACHINE_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/NO_TWO_ENVIRONMENTS_ARE_THE_SAME_MACHINE_20261116_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+   "sha256": "9e6001b0abd3a3603bc3f0ef562315155505a773eebbfad7dc290a0f0450b6b5",
+   "status": "PROPOSED__ZERO_CREDIT__NO_TERMINAL_CLAIM",
+   "terms": {
+    "20261116": 1,
+    "contains": 1,
+    "decide_environment_identity_exactly_because_transfer_is_possible_iff_two_environments_are_the_same_machine_and_all_190_pairs_of_the_trees_environments_are_proven_distinct": 1,
+    "defined": 1,
+    "entirely": 1,
+    "environments": 2,
+    "experience": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "key": 1,
+    "machine": 2,
+    "measurement": 1,
+    "moves": 1,
+    "next": 1,
+    "no": 2,
+    "no_pair_of_the_trees_20_environments_is_the_same_machine_under_a_renaming_190_of_190_pairs_proven_distinct_so_the_measured_0_of_48_transfer_was_a_property_of_the_substrate_not_a_missing_mechanism": 1,
+    "no_two_environments_are_the_same_machine_20261116_v1": 1,
+    "off": 1,
+    "pay": 1,
+    "premise": 1,
+    "proposed__zero_credit__no_terminal_claim": 1,
+    "quantity": 2,
+    "same": 1,
+    "sharing": 1,
+    "substrate": 2,
+    "transfer": 1,
+    "two": 2,
+    "unmeasurable": 1,
+    "v1": 1,
+    "wall": 1
    }
   },
   {
@@ -322458,6 +322603,45 @@
     "transfer": 1,
     "v1": 1,
     "walk_carried_model": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/transition_system_identity_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/transition_system_identity_v1.py",
+   "sha256": "ba7747bdae4cbfac8cb900ad97844234f63ab21e80585b0844ee234cdf5f6a23",
+   "summary": "Are two environments the same machine? An exact decision procedure, plus the transfer it permits.",
+   "symbol_count": 5,
+   "symbols": [
+    "_signatures",
+    "canonical",
+    "induce",
+    "isomorphic",
+    "transfer"
+   ],
+   "terms": {
+    "canonical": 1,
+    "decision": 1,
+    "environments": 1,
+    "exact": 1,
+    "identity": 1,
+    "induce": 1,
+    "isomorphic": 1,
+    "machine": 1,
+    "permits": 1,
+    "plus": 1,
+    "procedure": 1,
+    "same": 1,
+    "signatures": 1,
+    "system": 1,
+    "transfer": 2,
+    "transition": 1,
+    "two": 1,
+    "v1": 1
    }
   },
   {
