@@ -1,0 +1,220 @@
+{
+  "schema": "BRAIN_SOLVE_WITH_A_CALIBRATED_JUDGE_V1",
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "upstream": "https://github.com/jkoppel/QuixBugs",
+  "generated_at_utc": "2026-11-17T17:33:42Z",
+  "corpus_commit": "4257f44b0ff1181dedaedee6a447e133219fcebf",
+  "tool": "canonical/tools/solve_with_a_calibrated_judge_v1.py",
+  "tests": "canonical/tests/test_solve_with_a_calibrated_judge_v1.py",
+  "parameters": {
+    "candidate_cap": 20000,
+    "wall_budget_seconds": 900.0,
+    "verify_timeout_seconds": 240,
+    "chunk": 50,
+    "child_memory_cap_bytes": 256000000
+  },
+  "model_dependency_count": 0,
+  "external_capability_provider_count": 0,
+  "network_calls_at_run_time": 0,
+  "summary": {
+    "tasks_attempted": 4,
+    "solved": [
+      "flatten",
+      "hanoi",
+      "sqrt"
+    ],
+    "solved_count": 3,
+    "not_solved": [
+      "kheapsort"
+    ],
+    "budget_exhausted": [],
+    "space_exhausted": [
+      "kheapsort"
+    ],
+    "judge_not_calibrated": [],
+    "normalisation_taken_from_the_test_file": [
+      "hanoi",
+      "sqrt"
+    ],
+    "candidates_evaluated_total": 27510,
+    "candidates_hung_or_crashed_total": 488,
+    "seconds_total": 306.6
+  },
+  "rows": [
+    {
+      "task": "flatten",
+      "kind": "task",
+      "cases": 7,
+      "program_sha256": "5023275fe603f1ebade0027073c3d116274d405069ea350076f220f10ff451e2",
+      "function": "flatten",
+      "normalisation_from_the_test_file": null,
+      "clock_seconds": 0.05,
+      "clock_seconds_per_case": [
+        0.05,
+        0.05,
+        0.05,
+        0.05,
+        0.05,
+        0.05,
+        0.05
+      ],
+      "calibration": {
+        "status": "CALIBRATED",
+        "corrected_passes": true,
+        "defective_is_rejected": true
+      },
+      "space_size": 5697,
+      "warm_lines": [],
+      "stage": "CANDIDATE_FOUND",
+      "candidates_evaluated": 4250,
+      "candidates_hung_or_crashed": 0,
+      "seconds_per_candidate": 0.001014,
+      "seconds_searching": 5.1,
+      "survivors": 1,
+      "verdicts": [
+        {
+          "corpus_test_passes": true,
+          "returncode": 0,
+          "edit_kind": "REPLACE",
+          "replacement": "x",
+          "lineno": 7
+        }
+      ],
+      "solved": true
+    },
+    {
+      "task": "hanoi",
+      "kind": "task",
+      "cases": 8,
+      "program_sha256": "edd1ceeb79b556a6d15e3bc21f625c5776b46c10f94a754531d39a6f7e120f9e",
+      "function": "hanoi",
+      "normalisation_from_the_test_file": "nested_lists_to_tuples",
+      "clock_seconds": 0.05,
+      "clock_seconds_per_case": [
+        0.05,
+        0.05,
+        0.05,
+        0.05,
+        0.05,
+        0.05,
+        0.05,
+        0.05
+      ],
+      "calibration": {
+        "status": "CALIBRATED",
+        "corrected_passes": true,
+        "defective_is_rejected": true
+      },
+      "space_size": 17395,
+      "warm_lines": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        9
+      ],
+      "space_reordered_by_the_failure": true,
+      "stage": "CANDIDATE_FOUND",
+      "candidates_evaluated": 11850,
+      "candidates_hung_or_crashed": 0,
+      "seconds_per_candidate": 0.00114,
+      "seconds_searching": 12.2,
+      "survivors": 2,
+      "verdicts": [
+        {
+          "corpus_test_passes": true,
+          "returncode": 0,
+          "edit_kind": "REPLACE",
+          "replacement": "end",
+          "lineno": 6
+        },
+        {
+          "corpus_test_passes": true,
+          "returncode": 0,
+          "edit_kind": "REPLACE",
+          "replacement": "0 + end",
+          "lineno": 6
+        }
+      ],
+      "solved": true
+    },
+    {
+      "task": "sqrt",
+      "kind": "task",
+      "cases": 7,
+      "program_sha256": "e3623a160e6ada452b36ce0bd2370fc031943e2c1ae93aae5f0c82865e083ebf",
+      "function": "sqrt",
+      "normalisation_from_the_test_file": "approx_last_argument",
+      "clock_seconds": 0.05,
+      "clock_seconds_per_case": [
+        0.05,
+        0.05,
+        0.05,
+        0.05,
+        0.05,
+        0.05,
+        0.05
+      ],
+      "calibration": {
+        "status": "CALIBRATED",
+        "corrected_passes": true,
+        "defective_is_rejected": true
+      },
+      "space_size": 7164,
+      "warm_lines": [
+        3,
+        4,
+        5
+      ],
+      "space_reordered_by_the_failure": true,
+      "stage": "CANDIDATE_FOUND",
+      "candidates_evaluated": 3100,
+      "candidates_hung_or_crashed": 0,
+      "seconds_per_candidate": 0.005607,
+      "seconds_searching": 95.7,
+      "survivors": 1,
+      "verdicts": [
+        {
+          "corpus_test_passes": true,
+          "returncode": 0,
+          "edit_kind": "REPLACE",
+          "replacement": "(approx) ** 2",
+          "lineno": 4
+        }
+      ],
+      "solved": true
+    },
+    {
+      "task": "kheapsort",
+      "kind": "task",
+      "cases": 4,
+      "program_sha256": "0cabf3d462d941ec01f261f2d794d960ab8ba497c42140cedbc3c872f772cea8",
+      "function": "kheapsort",
+      "normalisation_from_the_test_file": null,
+      "clock_seconds": 0.05,
+      "clock_seconds_per_case": [
+        0.05,
+        0.05,
+        0.05,
+        0.05
+      ],
+      "calibration": {
+        "status": "CALIBRATED",
+        "corrected_passes": true,
+        "defective_is_rejected": true
+      },
+      "space_size": 8310,
+      "warm_lines": [],
+      "stage": "SPACE_EXHAUSTED",
+      "candidates_evaluated": 8310,
+      "candidates_hung_or_crashed": 488,
+      "seconds_per_candidate": 0.002599,
+      "seconds_searching": 193.6,
+      "survivors": 0,
+      "verdicts": [],
+      "solved": false
+    }
+  ]
+}
