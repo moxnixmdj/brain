@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "d8d2138733359dc6c3dc40e54bfa3e3e39cf9fa2bcdb12c79d22827e01889ca1"
+  "value": "894823623597dcadb235a5aecbe957ab4147873dc4e8f16ce999509941cc530e"
  },
  "engines": [
   {
@@ -245303,7 +245303,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/THE_PREMISE_IS_THE_SENSE_20261116_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "84ec9f48ac3679f3c26cb410c22bdc1cc01d80042210856b9416d07d07ccfa81",
+   "sha256": "f2f8afcaebf964bf6ac5973067b9cbf9d2c98b43c2132bfd88eb51d0296610ca",
    "status": "",
    "terms": {
     "11": 1,

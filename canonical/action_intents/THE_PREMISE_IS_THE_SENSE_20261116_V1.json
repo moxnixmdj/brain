@@ -36,7 +36,7 @@
  },
  "benchmark_or_family_rank_authority": false,
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The tree named the bottleneck correctly -- whether the fact a plan depends on is observable at the moment of acting -- and then hand-listed four sense vocabularies to test it. That answers 'is a rich sense better than a poor one' (always yes) but not 'which facts are minimally sufficient, and what do they cost'. The question is exactly solvable: a plan is one choice (RUN+CONFIRM where it reaches the goal, REFUSE where it does not), two states may share a perception only if they agree on that choice, so the minimal sufficient sense is the minimum-cost fact set making every cell decision-consistent. Measured on the tree's real git world: task A needs the single fact 'unstaged' (cost 1) and task C needs the single fact 'content:b.txt' (cost 1), both making 0 states undecidable, while the richest hand-listed sense reads 11 facts for the same answer and the six-fact status sense is NOT sufficient for task C at all (24 undecidable states). More sensing was never the answer; the right sensing was. This is the exchange the architecture needs and did not have: read exactly the premise, refuse when it fails.",
- "canonical_base_commit": "cae454c9963b68dc530e6ddad0675cffda3ba921",
+ "canonical_base_commit": "45f8c4b565dd600ffcb69b7388a0c9814b4dce37",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -129,7 +129,7 @@
   "execution_guard/goal_target_binding_v1.py"
  ],
  "recursive_obs": {
-  "canonical_base_commit": "cae454c9963b68dc530e6ddad0675cffda3ba921",
+  "canonical_base_commit": "45f8c4b565dd600ffcb69b7388a0c9814b4dce37",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "FIVE_FROZEN_PERCEPTOR_CODEC_STRINGS",
