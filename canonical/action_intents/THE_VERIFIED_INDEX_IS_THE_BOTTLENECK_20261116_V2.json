@@ -1,0 +1,1402 @@
+{
+  "action_id": "THE_VERIFIED_INDEX_IS_THE_BOTTLENECK_20261116_V2",
+  "action_intent_id": "THE_VERIFIED_INDEX_IS_THE_BOTTLENECK_20261116_V2",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "action_summary": "Freshly re-read the repeated owner prompt and answer from first principles why one demonstrated advanced action is permanent storage but not permanent identification; bind identifiability, vocabulary insufficiency and synthesis-verification asymmetry to one verified-index/specification necessary condition; reuse existing calculated-parameter and instant-knowledge organs; collect and invoke all 85 real published test node ids from the 16 hard-open QuixBugs tasks; admit zero new parameters until every bit is calculated from a live causal observation and independently verified; keep authority NONE with no terminal, sentience, capability, benchmark, family-rank or external-model claim.",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "conversation_memory_is_authority": false,
+    "earlier_routes_exhausted_reason": "REUSE was tried first: constructive, interventional, admission, identification, invariance, exact-decision, planning/composition, environment-learning, instant-knowledge, zero-weight model, weight-update admission, insufficiency certificate, index sweep, frame composition and hard-open union organs were read by effect before anything was built. A new learner, verifier, planner, composer, conventional pretraining stack, external-model distillation, weight house, more-demos arm, one-lever hunt, known-win retest, or synthetic test would duplicate a part or claim an ordinary incremental gain. The selected route composes their measured evidence into one falsifiable answer, a real hard-open receipt and a calculated-parameter admission law.",
+    "incremental_spend_usd": 0,
+    "independent_verification_completed": false,
+    "independent_verification_note": "Producer-run sandbox only. Independent reproduction is still open.",
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ],
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+    "progress_evidence_paths": [
+      "SEPARATION_IS_THE_BOTTLENECK_20261116_V1.md",
+      "canonical/action_intents/SEPARATION_IS_THE_BOTTLENECK_20261116_V1.json",
+      "canonical/tools/proof_carrying_counterfactual_union_v1.py",
+      "canonical/tests/test_proof_carrying_counterfactual_union_v1.py",
+      "canonical/verification/PROOF_CARRYING_COUNTERFACTUAL_UNION_20261116_V1.json",
+      "ONE_RUN_THREE_VOCABULARIES_ONE_JUDGE_20261116_V1.md",
+      "THE_INVARIANCE_IS_THE_REACH_20261116_V1.md",
+      "THE_LEARNER_DECIDES_PAST_THE_ENUMERATION_WALL_20261116_V1.md",
+      "THE_PRICE_OF_A_NEW_ENVIRONMENT_20261116_V1.md",
+      "WHERE_THE_SOLUTIONS_LIVE_20261101_V1.md",
+      "canonical/verification/COMPOSED_REPAIR_ONE_RUN_20261116_V1.json",
+      "canonical/verification/ARM_LEARNED_IN_ONE_RUN_20261116_V1.json",
+      "canonical/verification/WHAT_ONE_VERIFIED_REPAIR_TRAVELS_20261116_V1.json",
+      "canonical/verification/THE_SENTENCE_DID_NOT_HAVE_TO_SAY_SUBMIT_20261116_V1.json",
+      "canonical/verification/INSTANT_LEARNING_IN_A_NEW_ENVIRONMENT_20261116_V1.json",
+      "canonical/verification/INSTANT_LEARNING_SHUFFLED_CONTROL_20261116_V1.json",
+      "THE_MISSING_PART_IS_THE_OPERAND_NOT_THE_EXPERIENCE_20261116_V1.md",
+      "WHY_LEARN_ONCE_REPLAY_FOREVER_FAILS_20261116_V1.md",
+      "canonical/action_intents/READ_FIRST_AND_LEARN_ONLY_FOR_A_NAMED_GAP_20261116_V1.json",
+      "canonical/action_intents/THE_MISSING_PART_IS_THE_OPERAND_20261116_V1.json",
+      "canonical/action_intents/WHY_LEARN_ONCE_REPLAY_FOREVER_FAILS_20261116_V1.json",
+      "canonical/verification/ACTION_REPLAY_UNDER_CHANGE_20261116_V1.json",
+      "canonical/verification/DERIVED_VALUE_FULL_SUITE_20261116_V1.json",
+      "canonical/verification/LEARN_OR_READ_BOARD_20261116_V1.json",
+      "canonical/verification/READ_FIRST_AND_LEARN_ONLY_FOR_A_NAMED_GAP_20261116_V1.json",
+      "THERE_IS_NO_SINGLE_BOTTLENECK_AND_THE_TRIGGER_WAS_THE_REASON_20261116_V1.md",
+      "ONE_TRY_LEARNS_A_DOMAIN_NOT_THE_ENVIRONMENT_20261116_V1.md",
+      "canonical/action_intents/THE_REMAINDER_IS_A_LONG_TAIL_20261116_V1.json",
+      "canonical/action_intents/ONE_TRY_LEARNS_A_DOMAIN_NOT_THE_ENVIRONMENT_20261116_V1.json",
+      "canonical/verification/DECLARED_TRIGGER_AND_OPERAND_TAXONOMY_20261116_V1.json",
+      "canonical/verification/ONE_DEMONSTRATION_BASIN_20261116_V1.json",
+      "THE_GUI_HAS_NO_INVARIANCE_TO_FIND_20261116_V1.md",
+      "canonical/action_intents/THE_GUI_HAS_NO_INVARIANCE_TO_FIND_20261116_V1.json",
+      "canonical/verification/GUI_INVARIANCE_IS_VACUOUS_OR_ABSENT_20261116_V1.json",
+      "COMPOSE_ONLY_WHAT_IS_PROVED_20261116_V1.md",
+      "COMPOSE_ONLY_WHAT_IS_PROVED_20261116_V1.json",
+      "THE_VERIFIED_INDEX_IS_THE_BOTTLENECK_20261116_V2.md",
+      "canonical/action_intents/THE_VERIFIED_INDEX_IS_THE_BOTTLENECK_20261116_V2.json",
+      "canonical/tools/verified_index_and_calculated_parameter_admission_v1.py",
+      "canonical/tests/test_verified_index_and_calculated_parameter_admission_v1.py",
+      "canonical/verification/VERIFIED_INDEX_AND_CALCULATED_PARAMETER_ADMISSION_20261116_V1.json",
+      "canonical/verification/INSUFFICIENCY_CERTIFICATE_20261113_V1.json",
+      "THE_WEIGHT_LAYER_NEEDS_A_GATE_TOO_20261113_V1.md",
+      "WHY_WEIGHT_SPACE_IS_NOT_THE_MISSING_LAYER_20261112_V1.md",
+      "canonical/verification/WEIGHT_SPACE_FUEL_20261113_V1.json",
+      "canonical/verification/WHY_WEIGHT_SPACE_IS_NOT_THE_MISSING_LAYER_20261112_V1.json",
+      "canonical/verification/THE_INDEX_IS_THE_BOTTLENECK_20261116_V1.json",
+      "canonical/verification/COMPOSE_MEASURED_EFFECTS_20261116_V1.json",
+      "canonical/verification/SUITE_AS_OBSERVABLE_VERIFIER_ROOTS_20261116_V1.json",
+      "canonical/verification/COUNTERFACTUAL_REPAIR_QUIXBUGS_INSERTION_20261116_V1.json"
+    ],
+    "route_class": "COMPOSE"
+  },
+  "benchmark_or_family_rank_authority": null,
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::ONE_TRACE_IS_STORAGE_NOT_IDENTIFICATION__THE_INDEX_LACKS_THE_CAUSAL_OBSERVABLE__SYNTHESIS_VERIFICATION_ASYMMETRY_REMAINS__NO_CALCULATED_BIT_HAS_PASSED_THE_LIVE_VERIFIER_GATE",
+  "canonical_base_commit": "7a2c31f6c5000f22e787c1e028fe7e703c615126",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "capability_credit_delta": 0,
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "ONE_TRACE_IS_STORAGE_NOT_IDENTIFICATION__THE_INDEX_LACKS_THE_CAUSAL_OBSERVABLE__SYNTHESIS_VERIFICATION_ASYMMETRY_REMAINS__NO_CALCULATED_BIT_HAS_PASSED_THE_LIVE_VERIFIER_GATE",
+  "date": "2026-11-17",
+  "expected_parent_change": "The owner prompt is re-answered as new: one experience gives permanent storage, not permanent identification or all capability; no single sufficient lever unlocks computer use or advanced SWE; the highest-leverage shared necessary condition is the verified index/specification with a frame and an independent verifier; facts stay in instant knowledge and zero new parameters are admitted. The 16 real hard-open task files and 85 real published test node ids remain hard-open, with 22 passes, 63 failures including 6 real timeouts, 0 skips and 0 harness errors.",
+  "expected_parent_frontier_change": "The owner prompt is re-answered as new: one experience gives permanent storage, not permanent identification or all capability; no single sufficient lever unlocks computer use or advanced SWE; the highest-leverage shared necessary condition is the verified index/specification with a frame and an independent verifier; facts stay in instant knowledge and zero new parameters are admitted. The 16 real hard-open task files and 85 real published test node ids remain hard-open, with 22 passes, 63 failures including 6 real timeouts, 0 skips and 0 harness errors.",
+  "explicit_user_authorization": [
+    "Why can't we just give our model the most advanced coding actions, let it experience them once, and have it learn them? Can't we do this now?",
+    "you must think from first principles for everything",
+    "You should kill all the bad and dumb ideas before you waste time implementing them.",
+    "NEVER BUILD BEFORE REASRCHING EXHASIATION IS HAPPENED",
+    "maximize your web use",
+    "What is the single bottleneck that, if fixed, would unlock the most capability?",
+    "all the tests are not on synthetic data but are on the hardest open tests",
+    "only our agent/system may run them; integrity 100% real",
+    "Work in branch, merge only when complete (fastest)",
+    "Merge once, not 10 times."
+  ],
+  "falsification_condition": "A known win counted as open progress; a synthetic task in the hard-open population; answer keys present in the fresh task copy; a published test node id not collected or invoked; a test file edited or a timeout plugin used; a real timeout hidden as a harness error; an external model called or its weights/outputs used; a parameter admitted without C(s,o,I,V), independent verification, zero regressions and a fresh proof; a knowledge-house weight claimed as instant knowledge; a screen-only pass, majority vote, web result or benchmark score credited as authority; one demonstration credited as a permanent rule; the verified index credited as a single sufficient lever; sentience, terminal truth, all computer use or advanced SWE claimed solved. Crediting an external repair reclassification as our capability, or treating the current main union receipt as authority for V2 capability, is also refused.",
+  "generic_repair_from_single_probe": false,
+  "governance_change": false,
+  "highest_leverage_now": true,
+  "incremental_spend_usd": 0,
+  "intentional_route_race": false,
+  "load_bearing_primary": {
+    "constructive_gap_for_open_obligation_ids": [
+      "CODING_TB4_GE_66_4"
+    ],
+    "expected_obligation_discharge_lcb": 0,
+    "expected_obligation_unlock_lcb": "1/100",
+    "interpretation": "Speculative forecast only. The verified index is a necessary shared condition, not a single sufficient lever. No coding benchmark floor moves while 16 real hard-open task files and 85 real published test node ids remain, the index lacks the causal observable, no calculated parameter bit has passed the C(s,o,I,V) gate, and no independent verifier has signed the result. No obligation is discharged, no benchmark gain is claimed, and no capability or independent credit is claimed. Current main union receipt reports 8 hard-open tasks after PR #6919; zero external repair credit is claimed.",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": "1/4",
+    "wall_clock_cost_ub": 1
+  },
+  "measured_effect": {
+    "authority": "NONE__PRODUCER_RUN_SANDBOX",
+    "browser_census": {
+      "executed_and_lost": 27,
+      "of": 130,
+      "receipt": "canonical/verification/THE_SENTENCE_DID_NOT_HAVE_TO_SAY_SUBMIT_20261116_V1.json",
+      "refused": 24,
+      "regressions": 0,
+      "replication": {
+        "seed_1061": [
+          47,
+          56
+        ],
+        "seed_1062": [
+          49,
+          57
+        ]
+      },
+      "zero_experience_solved": 66
+    },
+    "clean_receipt_union": {
+      "by_arm": {
+        "RECORDED_LEARNED_REPAIR": 6,
+        "REWRITE_FAMILIES": 15,
+        "SYNTHESIZED_FROM_THE_FAILURE": 3
+      },
+      "capability_delta_against_pytest_rejudged_union": 0,
+      "of": 40,
+      "only_hand_written": 8,
+      "only_learned": 6,
+      "repaired": 24,
+      "seconds": 387.8,
+      "status": "ONE_COMPOSED_RUN_WITH_THREE_VOCABULARIES_UNDER_THE_CORPUS_PYTEST_MEASURED_24_OF_40"
+    },
+    "corpus": "jkoppel/QuixBugs (MIT), 40 published bugs, the corpus own pytest as the only judge",
+    "exact_decision_past_enumeration_wall": {
+      "benchmark_credit_claimed": false,
+      "brute_force_seconds": 1.37,
+      "capability_credit_claimed": false,
+      "exhaustive_ie_families": 5058,
+      "inclusion_extraction_seconds": 0.0,
+      "raw_survivors": 8388600,
+      "seeded_learn_trials": 120,
+      "selector_equivalence_cases": 120
+    },
+    "four_levers_and_edit_supply": {
+      "authority": "NONE__PRODUCER_RUN_SANDBOX",
+      "capability_credit": 0,
+      "edit_supply": {
+        "commits_scanned": 268,
+        "commits_with_no_sibling": 225,
+        "corpus": "canonical/tests/fixtures/systematic_edit_corpus_v1.jsonl",
+        "corpus_sha256": "b47d9c9c23e641a8865a79d9dce3059a306257813d28114ed6029a9606cbde5a",
+        "forced_by_the_demonstration": 31,
+        "generalising_pairs": 142,
+        "induced_right": 78,
+        "induced_right_share": 0.5493,
+        "lucky": 47,
+        "pairs": 245,
+        "permanence": "action_replay_under_change_v1 measured 122/228 stale plans and 71/228 silent corruptions despite 228/228 legal operations",
+        "records": 393,
+        "repos": [
+          "pypa/packaging",
+          "pypa/pyproject-hooks",
+          "pallets/click",
+          "pallets/itsdangerous",
+          "pallets/markupsafe"
+        ],
+        "siblings_context_any": 42,
+        "siblings_context_both": 31,
+        "siblings_shape_only": 43,
+        "verbatim_repeats": 103,
+        "wrong": 64,
+        "wrong_diagnosis": {
+          "constant_differs": 31,
+          "mismatch": 13,
+          "rebound_wrong": 20
+        }
+      },
+      "incremental_spend_usd": 0,
+      "law": "bits_after = log2(|H|/|G|) - I(E) - sum I(q) - I(interface); learning ends at 0. The authored prior is the only term not billed per interaction.",
+      "levers": {
+        "answer_variety_points": 37,
+        "answer_variety_rank_agreements": 2,
+        "best_demonstration_point": {
+          "bits": 3.6293,
+          "distinct_answers": 5,
+          "x": 0
+        },
+        "bits_after_one": 3.8176,
+        "bits_before": 5.5546,
+        "bits_per_chosen_question": 1.9088,
+        "bits_per_further_demonstration": 1.0927,
+        "ceiling_binds": false,
+        "invariance_group_order": 1.0,
+        "queries_to_settle_after_one": 2.0,
+        "question_over_demonstration_ratio": 1.747,
+        "space_entries": 47,
+        "state_name_arm": {
+          "as_is": {
+            "carried_model_survived": 7,
+            "warm_cheaper": 8,
+            "warm_dearer": 2
+          },
+          "renamed": {
+            "carried_model_survived": 0,
+            "warm_cheaper": 1,
+            "warm_dearer": 9
+          }
+        },
+        "survivors_after_one": 14.1,
+        "targets_exact_after_one": 0,
+        "targets_settled_after_one_then_ask": 10,
+        "worst_demonstration_point": {
+          "bits": 0.6035,
+          "distinct_answers": 36,
+          "x": 30
+        }
+      },
+      "status": "ONCE_IS_ARITHMETIC_AND_REAL_WORK_SUPPLY_IS_ABOUT_ONE_SIXTH"
+    },
+    "fresh_prompt_read": {
+      "date_interpretation": "Owner 10/11/2026 and November 2026 are read against the sandbox clock 2026-11-17 UTC; either day/month reading is evidence, not authority, and no future or solved-everything claim is assumed.",
+      "prompt_adherence_matrix": "THE_VERIFIED_INDEX_IS_THE_BOTTLENECK_20261116_V2.md#1-prompt-adherence-matrix",
+      "status": "READ_AS_NEW__NOT_A_CONTINUATION_NOTE",
+      "you_sure_check": "THE_VERIFIED_INDEX_IS_THE_BOTTLENECK_20261116_V2.md#6-you-sure-this-the-smartest-approach-kill-table-before-building"
+    },
+    "gui_invariance_and_operand_boundary": {
+      "enter_time_world_rewrite": {
+        "0113PM": -1,
+        "01:13 PM": -1,
+        "13:13": 1,
+        "13:13:00": -1,
+        "1:13 PM": -1,
+        "1:13PM": -1
+      },
+      "identity_arms": 15,
+      "identity_invariant_by_construction": 13,
+      "identity_undecided_page_not_perturbed": 2,
+      "judge_pages": 5,
+      "judge_pages_with_quotient_zero": 4,
+      "only_nontrivial_quotient": "scroll-text trailing dot stripped by the page itself",
+      "phrase_blind_design_set": {
+        "blind_actions": 126,
+        "blind_solved": 4,
+        "gated_actions": 23,
+        "gated_solved": 5
+      },
+      "phrase_blind_full_surface": {
+        "blind_actions": 2611,
+        "blind_only": [],
+        "blind_solved": 5,
+        "gated_actions": 566,
+        "gated_solved": 9,
+        "pages": 123
+      },
+      "receipt": "canonical/verification/GUI_INVARIANCE_IS_VACUOUS_OR_ABSENT_20261116_V1.json",
+      "status": "NO_GUI_INVARIANCE_LEVER_OPERAND_VOCABULARY_IS_THE_SURVIVING_BOUNDARY",
+      "text_transform_reorder_is_truth": {
+        "F5CZ": -1,
+        "ZC5F": 1
+      }
+    },
+    "hard_open_population": {
+      "contaminated_arm_ignored": true,
+      "example_searchable": 8,
+      "no_json_tasks_no_longer_unmeasurable": true,
+      "superseded_claimed_arm_ignored": true,
+      "tasks": 16,
+      "unmeasurable": 8
+    },
+    "hard_open_run": {
+      "answer_keys_absent": true,
+      "current_union_receipt_hard_open_count": 8,
+      "current_union_receipt_hard_open_tasks": [
+        "kheapsort",
+        "possible_change",
+        "powerset",
+        "shortest_path_length",
+        "shortest_path_lengths",
+        "shortest_paths",
+        "subsequences",
+        "topological_ordering"
+      ],
+      "external_repair_reclassification_credit": "ZERO",
+      "failures_including_timeouts": 63,
+      "frozen_v2_population_count": 16,
+      "frozen_v2_population_source": "THE_VERIFIED_INDEX_IS_THE_BOTTLENECK_20261116_V2.md#9 and the union receipt at e9bfca97667e5293b1206fcda935732176fe6504",
+      "harness_or_collection_errors": 0,
+      "known_wins_retested": 0,
+      "no_external_repair_credit": true,
+      "no_known_win_retested_as_progress": true,
+      "no_repair_or_capability_credit": true,
+      "no_test_file_edits": true,
+      "passes": 22,
+      "per_test_timeout_seconds": 2.0,
+      "published_test_node_ids_collected": 85,
+      "published_test_node_ids_invoked": 85,
+      "pytest_plugin_autoload_disabled": true,
+      "real_timeouts": 6,
+      "skips": 0,
+      "status": "REAL_HARD_OPEN_TESTS_COLLECTED_AND_INVOKED",
+      "task_files": 16,
+      "test_bytes_hashed": true,
+      "timeout_plugin_dependency": false
+    },
+    "headline": "one demonstration is permanent storage, not identification; the three blockers are three projections of a verified index; no single sufficient lever unlocks all computer use; 16 frozen V2 task files and 85 published test node ids are measured with 22 passes, 63 failures/timeouts, 6 real timeouts, 0 skips and 0 harness errors; current main union receipt reports 8 hard-open tasks after PR #6919 but zero external repair credit; zero new parameters are admitted until every bit is calculated from live causal evidence and independently verified; facts stay in instant knowledge; authority NONE and terminal truth untouched",
+    "identification": {
+      "bits_after_one_demonstration_median": 10.018,
+      "questions_to_sufficiency_mean": 1.31,
+      "survivors_after_one_demonstration_median": 1037,
+      "tasks_where_no_repair_was_in_the_space": 7
+    },
+    "index_specification_and_value_layer": {
+      "authority": "NONE__PRODUCER_RUN_SANDBOX",
+      "capability_credit": 0,
+      "composition": {
+        "abstract_states_exhausted": 4,
+        "adaptation_trials": 29,
+        "executions": 15,
+        "measured_cells": 29,
+        "of": 16,
+        "prediction_mismatches": 0,
+        "proven_unreachable": 2,
+        "relaxed_plans_breaking_frame_rejected": 15,
+        "remaining_open": [
+          "naming new effects",
+          "turning intention into a predicate with a frame",
+          "scaling the atom x state table"
+        ],
+        "solved_after": 14,
+        "solved_before": 13,
+        "trials_total": 44,
+        "two_step_plans": 1,
+        "unrequested_side_effects": 0,
+        "usable_operators": 14
+      },
+      "incremental_spend_usd": 0,
+      "index": {
+        "cross_kind_compounding": "0 saved across 10 kinds",
+        "cross_language": {
+          "store_offered_any_non_python": false,
+          "transferred_and_narrow": [
+            "python",
+            "javascript",
+            "c",
+            "cpp"
+          ]
+        },
+        "instance_sensitive_kinds": 5,
+        "insufficiency_certificate": {
+          "closed_vocabulary_size": 31,
+          "hypotheses_needing_enumeration": 8388608,
+          "learner_enumeration_cap": 12
+        },
+        "key_sweep": [
+          {
+            "answerable": "5/8",
+            "collisions": 2,
+            "family": "tree_coarse",
+            "keys": 8
+          },
+          {
+            "answerable": "4/7",
+            "collisions": 3,
+            "family": "coarser_still",
+            "keys": 7
+          },
+          {
+            "answerable": "11/14",
+            "collisions": 2,
+            "family": "finer_mid",
+            "keys": 14
+          },
+          {
+            "answerable": "13/16",
+            "collisions": 2,
+            "family": "finest_exact_features",
+            "keys": 16
+          },
+          {
+            "answerable": "19/20",
+            "collisions": 0,
+            "family": "one_key_per_kind",
+            "keys": 20,
+            "reading": "degenerate; transfers nothing"
+          }
+        ],
+        "retrieval_ceiling": {
+          "files": 76,
+          "kinds_with_a_matching_pr": 1,
+          "kinds_with_zero_matches": 7,
+          "pull_requests": 13,
+          "seconds": 350.6
+        },
+        "usable_key_families": [],
+        "verdict": "NO_GRANULARITY_OF_THESE_FEATURES_SEPARATES_WHAT_THE_POLICY_DEPENDS_ON",
+        "within_family_compression": "59 -> 35 oracle questions, 41% fewer, on a never-seen period-12"
+      },
+      "status": "INDEX_AND_FRAME_ARE_NECESSARY_SHARED_DEFECTS_NOT_A_SINGLE_SUFFICIENT_LEVER",
+      "value_inference": {
+        "copy_arm": {
+          "determined": 134,
+          "pairs": 245,
+          "verbatim": 103,
+          "wrong": 64
+        },
+        "derive": {
+          "derivation_fired": 42,
+          "derivation_right": 9,
+          "precision_when_fired": 0.2143,
+          "wrong": 58
+        },
+        "derive_contrast": {
+          "derivation_fired": 15,
+          "derivation_right": 6,
+          "precision_when_fired": 0.4,
+          "wrong": 60
+        },
+        "reading": "a stored value is a stored guess; only execution closes it"
+      }
+    },
+    "invariance_is_reach": {
+      "alpha_canonical": {
+        "candidates": 384,
+        "repaired": 4,
+        "survived_examples": 4,
+        "tasks_fired": 28
+      },
+      "capability_gain_over_three_arm_composition": 0,
+      "literal": {
+        "candidates": 304,
+        "repaired": 0,
+        "survived_examples": 0,
+        "tasks_fired": 23
+      },
+      "receipts": [
+        "canonical/verification/ARM_LEARNED_IN_ONE_RUN_20261116_V1.json",
+        "canonical/verification/WHAT_ONE_VERIFIED_REPAIR_TRAVELS_20261116_V1.json"
+      ],
+      "rung_1_same_bug": "15/24",
+      "rung_2_same_bug_renamed": "15/24",
+      "rung_3_distinct_bugs_repaired": 5,
+      "status": "DEMONSTRATION_IS_CONTENT_INVARIANCE_IS_REACH"
+    },
+    "killed_instruments": {
+      "hidden_cegis_calibration": "0/5",
+      "new_kill_list": [
+        "a fourth hand-written vocabulary",
+        "a new learner or verifier beside the existing decision/composition organs",
+        "weights now under the zero-model and $0 standing constraint",
+        "wiring a composer to win the one measured composition refusal as an incremental +1/16",
+        "more demonstrations, more environments, larger action lists, or more search budget as coverage",
+        "replaying a recorded plan as a permanent macro after state drift",
+        "treating a local operand addition as transfer to held-out pages",
+        "hunting for one lever behind a 16-class long tail",
+        "adding more attempts to close an unobservable premise",
+        "building a declared-format prior for 6 of 123 pages",
+        "building GUI invariance machinery where the page judge has no quotient",
+        "treating a phrase-blind basis as full-surface capability",
+        "calling proved composition the final unlock",
+        "treating 31 composed two-step attempts as coverage of the proposal generator or long-horizon verifier",
+        "choosing demonstrations by output variety (2 of 37 rank agreements)",
+        "assuming one demonstration has a sibling in real work (225 of 268 commits have none)",
+        "calling the 1.747x question/demonstration ratio a universal constant or new capability",
+        "treating the authored prior or hypothesis space as learned from one trace",
+        "claiming one experience identifies a rule or amortises most real software work",
+        "a finer grid over features that do not contain the policy observable (0 usable key families)",
+        "treating the index or specification fix as a terminal unlock",
+        "composition without a frame predicate (15 goal-satisfying plans broke the machine)",
+        "storing an inferred edit value as an established fact (precision 0.2143)",
+        "claiming the 14/16 composed machine result closes computer use",
+        "a second description language costing 5.43 bits/step (retracted; 1415/1415 elements already named)",
+        "an unpaired 130-page rerun or its apparent -0.95 regression (paired A/B returned 0.05 / 0.05)",
+        "one id-binding fix as a single sufficient lever or terminal capability claim",
+        "counting the +0.0667 on 15 chosen tasks as a population effect",
+        "counting +0.0022 on 23 structure-field tasks as more than +0.0022",
+        "conventional pretraining or external-model distillation now",
+        "new weights before a calculated bit passes the C(s,o,I,V) gate",
+        "knowledge-house parameters instead of instant knowledge",
+        "new learner, verifier, planner or composer duplicating existing organs",
+        "more demonstrations, environments, action lists or search as coverage",
+        "replaying recorded plans as permanent macros",
+        "re-testing known wins or synthetic tasks",
+        "treating a web result, benchmark score or fast screen as authority",
+        "calling the verified index a single sufficient lever or terminal unlock",
+        "claiming sentience, perfect understanding, all computer use or advanced SWE solved",
+        "classifying a real published-test timeout as a harness-integrity failure",
+        "editing a test file or installing a timeout plugin to hide a non-terminating buggy program",
+        "crediting an external repair reclassification as our capability",
+        "treating the current main union receipt as authority for V2 capability"
+      ],
+      "open_probe": "0/3",
+      "reason": "An all-zero open-task result would be vacuous because the instrument also returned zero on five already-solved calibration tasks."
+    },
+    "long_tail_trigger_and_basin": {
+      "declared_surface": {
+        "input_type_counts": {
+          "(none)": 14,
+          "date": 1,
+          "number": 1,
+          "password": 4,
+          "text": 37,
+          "time": 1
+        },
+        "pages_declaring_a_format": 6,
+        "pages_usable": 123,
+        "pages_with_a_typeable_field": 39,
+        "pages_with_no_typeable_field": 84
+      },
+      "one_demonstration_basin": {
+        "actions": 10,
+        "demonstrations_for_status_level_goal": 4,
+        "executed_transitions": 1680,
+        "groups_no_demonstration_can_license": 4,
+        "licensed_premise_task_all_content": 56,
+        "premise_task_plan_domain": 56,
+        "states": 168,
+        "status_level_goal_plan_domain": 112,
+        "truncated": false,
+        "undecidable_by_sense": {
+          "all_content": 0,
+          "command_output_only": 168,
+          "status": 24,
+          "status_and_one_file": 16
+        }
+      },
+      "receipts": [
+        "canonical/verification/DECLARED_TRIGGER_AND_OPERAND_TAXONOMY_20261116_V1.json",
+        "canonical/verification/ONE_DEMONSTRATION_BASIN_20261116_V1.json"
+      ],
+      "status": "NO_SINGLE_LEVER_LONG_TAIL_AND_OBSERVABLE_PREMISE",
+      "taxonomy": {
+        "classes": 16,
+        "largest_class": 6,
+        "median_class": 2.5,
+        "pages_unsolved": 46
+      },
+      "trigger_is_the_phrase": {
+        "cause": "every derived-value rule is gated on a hand-written English phrase",
+        "scroll_text_reworded": "LAST_WORD fires zero times on the same page",
+        "text_transform_reworded": "JOIN_SHOWN is replaced by PAGE_LITERAL"
+      }
+    },
+    "new_environment_cost_law": {
+      "adaptation_trials_active": 29,
+      "atoms": 18,
+      "break_even_requests_per_machine": 6.44,
+      "break_even_requests_total": 25.78,
+      "cells": 36,
+      "context_sensitive_atoms": "5/18",
+      "inert_cells": "17/36 (47.2%)",
+      "machines": 4,
+      "remaining_refusal_classes": [
+        "surface cannot express the effect",
+        "effect needs composition"
+      ],
+      "requests": 16,
+      "requests_solved_by_demonstration": 11,
+      "requests_solved_by_measurement": 13,
+      "shuffled_control_solved_by_demonstration": 12,
+      "shuffled_control_solved_by_measurement": 13,
+      "status": "COST_LAW_NOT_A_SOLUTION_TO_ARBITRARY_COMPUTER_USE",
+      "trials_per_request_after_adaptation": 1.0,
+      "trials_per_request_by_demonstration": 2.125
+    },
+    "one_demonstration_identifies": {
+      "one_demonstration": {
+        "dangerous_errors": 297,
+        "held_out_precision": 0.069,
+        "held_out_sites": 319,
+        "licensed_requirements": 0
+      },
+      "random_sequences_identified": 0,
+      "real_code_sites": 479,
+      "static_vocabulary_sufficiency": {
+        "blocking_sites": 18,
+        "missing_observable": "operation proof",
+        "proof_cost_ms": 55
+      },
+      "status": "MEASURED_ON_THIS_REPOSITORY_NOT_ON_QUIXBUGS_REPAIR_TASKS",
+      "two_chosen_observations": {
+        "dangerous_errors": 0,
+        "held_out_precision": 1.0,
+        "recall": 0.4545,
+        "requirement": [
+          "use.first_computed",
+          "use.read_once"
+        ]
+      }
+    },
+    "one_run_composition": {
+      "bugs": 40,
+      "judge": "the corpus's own pytest on a fresh copy with the answer key absent",
+      "receipt": "canonical/verification/COMPOSED_REPAIR_ONE_RUN_20261116_V1.json",
+      "repaired": 24,
+      "seconds": 387.8,
+      "status": "PROJECTION_NOW_A_MEASURED_RUN_NOT_NEW_CAPABILITY",
+      "tasks": 41
+    },
+    "proved_composition": {
+      "boxes": {
+        "A_NOT_PROVED": 15,
+        "B_REFUSED": 27,
+        "COMPOSED_VERIFIED": 31,
+        "NO_SECOND_CANDIDATE": 34,
+        "PREMISE_DIED": 22
+      },
+      "composed_verified": 31,
+      "damaged": 0,
+      "premises_held_attempts": 58,
+      "reach_compose": 0.3875,
+      "reach_where_premises_held": 0.5345,
+      "receipt": "COMPOSE_ONLY_WHAT_IS_PROVED_20261116_V1.json",
+      "sampled_sites": 72,
+      "scan": {
+        "files": 5563,
+        "files_with_sites": 4228,
+        "premise_holding_sites": 9290,
+        "scan_seconds": 49.97
+      },
+      "second_step_attempts": 80,
+      "status": "AFFIRMATIVE_ORGAN_IS_MEASURED_BOUNDED_AND_NOT_A_SINGLE_LEVER",
+      "step_one": {
+        "inline": {
+          "attempted": 36,
+          "proved": 22
+        },
+        "rename": {
+          "attempted": 36,
+          "proved": 35
+        }
+      }
+    },
+    "read_first_operand_and_replay_drift": {
+      "operand_addition": {
+        "chromium_seed_1060": {
+          "actions_saved": 1917,
+          "gains": 5,
+          "losses": 0,
+          "shipped": 78,
+          "union": 83
+        },
+        "chromium_seed_771": {
+          "gains": 4,
+          "losses": 0,
+          "shipped": 77,
+          "union": 81
+        },
+        "compute_control": "0 of 5 solved at 1600 actions before the part; 5 of 5 in 12-33 actions after",
+        "decoy_net": {
+          "chromium_seed_1060": -12,
+          "chromium_seed_771": -11
+        },
+        "held_out_pages": 121,
+        "held_out_shipped_solves": 77,
+        "held_out_union_solves": 77,
+        "status": "LOCAL_OPERAND_ADDITION_NOT_TRANSFER"
+      },
+      "read_first": {
+        "LEARN_pages": 41,
+        "READ_pages": 89,
+        "cells": {
+          "demonstrable_but_reading_lost": 21,
+          "out_of_reach_of_both": 43,
+          "reading_wins_and_demonstrable": 57,
+          "reading_wins_where_nothing_was_demonstrable": 9
+        },
+        "demonstrated_by_reward_visible_search": 78,
+        "false_negatives": 0,
+        "pages": 130,
+        "reading_arm_won": 66
+      },
+      "receipts": [
+        "canonical/verification/READ_FIRST_AND_LEARN_ONLY_FOR_A_NAMED_GAP_20261116_V1.json",
+        "canonical/verification/DERIVED_VALUE_FULL_SUITE_20261116_V1.json",
+        "canonical/verification/ACTION_REPLAY_UNDER_CHANGE_20261116_V1.json"
+      ],
+      "replay_under_change": {
+        "corpus_files": 5562,
+        "differs_but_holds": 4,
+        "does_not_parse": 47,
+        "eligible_sites": 509,
+        "files": 62,
+        "matches_live": 106,
+        "operation_legal_after_change": 228,
+        "pairs": 228,
+        "silent_corruption": 71,
+        "stale": 122,
+        "status": "DECISION_PROCEDURE_PLUS_PREMISE_NOT_A_PERMANENT_MACRO",
+        "zero_drift_necessary_not_sufficient": true
+      }
+    },
+    "receipts": [
+      "canonical/verification/PROOF_CARRYING_COUNTERFACTUAL_UNION_20261116_V1.json",
+      "canonical/verification/IDENTIFICATION_COST_IN_A_REAL_SPACE_20261116_V1.json",
+      "canonical/verification/QUIXBUGS_EDIT_KIND_TRANSFER_20261112_V1.json",
+      "canonical/verification/SYNTHESIS_FROM_THE_FAILURE_20261116_V1.json",
+      "canonical/verification/ONE_DEMONSTRATION_IDENTIFIES_20261116_V1.json",
+      "canonical/verification/WHERE_THE_OBSERVABLE_WAS_MISSING_20261116_V1.json",
+      "canonical/verification/ONE_DEMONSTRATION_IS_NOT_IDENTIFICATION_MEASURE_20261116_V1.json",
+      "canonical/verification/RERUN_THE_LEARNED_ARMS_REPAIRS_20261116_V1.json",
+      "canonical/verification/THE_ROW_WAS_ALWAYS_THERE_20261116_V1.json",
+      "canonical/verification/READ_FIRST_AND_LEARN_ONLY_FOR_A_NAMED_GAP_20261116_V1.json",
+      "canonical/verification/DERIVED_VALUE_FULL_SUITE_20261116_V1.json",
+      "canonical/verification/ACTION_REPLAY_UNDER_CHANGE_20261116_V1.json",
+      "canonical/verification/DECLARED_TRIGGER_AND_OPERAND_TAXONOMY_20261116_V1.json",
+      "canonical/verification/ONE_DEMONSTRATION_BASIN_20261116_V1.json",
+      "canonical/verification/GUI_INVARIANCE_IS_VACUOUS_OR_ABSENT_20261116_V1.json",
+      "COMPOSE_ONLY_WHAT_IS_PROVED_20261116_V1.json",
+      "canonical/verification/THE_FOUR_LEVERS_OF_LEARNING_FROM_EXPERIENCE_20261116_V1.json",
+      "canonical/verification/SYSTEMATIC_EDIT_SUPPLY_20261116_V1.json",
+      "YOU_ARE_WRONG_ABOUT_ONCE_AND_IT_IS_ARITHMETIC_20261116_V1.md",
+      "ONE_DEMONSTRATION_AMORTISES_A_SIXTH_OF_REAL_WORK_20261116_V1.md",
+      "canonical/action_intents/YOU_ARE_WRONG_ABOUT_ONCE_AND_IT_IS_ARITHMETIC_20261116_V1.json",
+      "canonical/action_intents/ONE_DEMONSTRATION_AMORTISES_A_SIXTH_OF_REAL_WORK_20261116_V1.json",
+      "THE_BOTTLENECK_IS_THE_INDEX_NOT_THE_LEARNING_20261116_V1.md",
+      "COMPOSITION_CLOSES_ONE_AND_PROVES_TWO_20261116_V1.md",
+      "canonical/action_intents/THE_BOTTLENECK_IS_THE_INDEX_NOT_THE_LEARNING_20261116_V1.json",
+      "canonical/action_intents/COMPOSITION_CLOSES_ONE_AND_PROVES_TWO_20261116_V1.json",
+      "canonical/action_intents/SYSTEMATIC_EDIT_VALUE_LAYER_DERIVATION_20261116_V1.json",
+      "canonical/verification/THE_INDEX_IS_THE_BOTTLENECK_20261116_V1.json",
+      "canonical/verification/COMPOSE_MEASURED_EFFECTS_20261116_V1.json",
+      "canonical/verification/SYSTEMATIC_EDIT_DERIVATION_20261116_V1.json",
+      "canonical/action_intents/AN_UNBOUND_NAME_WAS_THE_MISSING_LINK_20261116_V1.json",
+      "canonical/runtime/what_one_experience_buys_v1.py",
+      "canonical/runtime/demonstration_version_space_v1.py",
+      "canonical/tests/test_what_one_experience_buys_v1.py",
+      "canonical/tests/test_miniwob_one_success_generalisation_v1.py",
+      "canonical/verification/THE_TREE_ALREADY_SPOKE_ONE_LANGUAGE_20261116_V1.json",
+      "canonical/verification/VERIFIED_INDEX_AND_CALCULATED_PARAMETER_ADMISSION_20261116_V1.json",
+      "canonical/verification/INSUFFICIENCY_CERTIFICATE_20261113_V1.json",
+      "canonical/verification/WEIGHT_SPACE_FUEL_20261113_V1.json",
+      "canonical/verification/WHY_WEIGHT_SPACE_IS_NOT_THE_MISSING_LAYER_20261112_V1.json",
+      "canonical/verification/SUITE_AS_OBSERVABLE_VERIFIER_ROOTS_20261116_V1.json",
+      "canonical/verification/COUNTERFACTUAL_REPAIR_QUIXBUGS_INSERTION_20261116_V1.json"
+    ],
+    "screen_integrity": {
+      "learned_arm_screen_disagreements": 0,
+      "no_json_probe_over_acceptances": 3,
+      "no_json_tasks_made_searchable": 9,
+      "no_survivor_at_screen": 6,
+      "receipt": "canonical/verification/WHERE_THE_OBSERVABLE_WAS_MISSING_20261116_V1.json",
+      "repaired": 0,
+      "rule": "The screen may order candidates; the published pytest is the only judge. The projected 26/40 union is superseded by the verified 24/40 union.",
+      "screen_accepted_but_corpus_pytest_failed": 3
+    },
+    "selection_among_test_passing_candidates": {
+      "corpus": "100 held-out HumanEvalFix bugs; scored bug own fix never a lesson",
+      "correct_before_selection": 47,
+      "majority_vote_wrong_in_disagreements": "3/5",
+      "no_candidate_passed": 46,
+      "oracle_questions": 9,
+      "reference_behaviour_in_candidate_set": 48,
+      "regressions": 0,
+      "settled_correctly": 8,
+      "status": "SELECTION_MEASUREMENT_NOT_A_QUIXBUGS_REPAIR_RECEIPT",
+      "test_passing_candidates": 51,
+      "unseparated": 43
+    },
+    "unbound_name_binding_and_retraction": {
+      "authority": "NONE__PRODUCER_RUN_SANDBOX",
+      "capability_credit": 0,
+      "controlled_id_binding_ab": {
+        "after_mean": 0.29,
+        "before_mean": 0.2233,
+        "delta": 0.0667,
+        "fix": "one word added to one tuple: (\"tag\", \"type\", \"colour\", \"id\")",
+        "grid_coordinate": "0.05 -> 1.00 successes over 20 fresh instances",
+        "tasks": 15,
+        "tasks_better": [
+          "grid-coordinate +0.95",
+          "social-media +0.05"
+        ],
+        "tasks_unchanged": 13,
+        "tasks_worse": []
+      },
+      "decision": "THE_DESCRIPTION_WAS_NEVER_THE_PROBLEM__THE_BINDING_WAS",
+      "honest_limits": [
+        "controlled A/B covers 15 tasks chosen because the id rule could reach them; +0.0667 is not the population effect",
+        "wider 130-page rerun was not clean: 68 of 78 tasks scored",
+        "apparent click-pie -0.95 was run variance; paired A/B returned 0.05 on both sides",
+        "id-binding cannot help a page whose ids are unrelated to its instruction",
+        "no capability, weight, terminal or family-rank claim"
+      ],
+      "incremental_spend_usd": 0,
+      "retraction": {
+        "bits_per_step_still_reported": 5.428,
+        "deleted": "canonical/runtime/one_description_language_v1.py and its 11 tests",
+        "elements_with_unique_description": "1415/1415",
+        "meaning": "descriptions still alive after one demonstration: redundancy, not ambiguity or a second grammar",
+        "preferred_description_ambiguous": "67/1415",
+        "preferred_description_bits": 0.102,
+        "refuted_by": "demonstration_version_space_v1 already named every actionable element and shipped nth/nth_from_end/nth_slot/nearest/matches/pick/_same_element",
+        "what_was_claimed": "acting and learning spoke two languages costing 5.43 bits/step and deleting the second language was the cheapest lever"
+      },
+      "status": "ONE_UNBOUND_NAME_IS_A_LOCAL_BINDING_FIX_NOT_A_SECOND_LANGUAGE_OR_SINGLE_LEVER",
+      "structure_field_ab": {
+        "after": 0.4,
+        "before": 0.3978,
+        "better": 1,
+        "delta": 0.0022,
+        "one_gain": "phone-book 0.15 -> 0.20",
+        "tasks": 23,
+        "worse": 0
+      }
+    },
+    "verified_index_and_calculated_parameter_admission": {
+      "calculated_bit_law": "b = C(s,o,I,V); admit only if deterministic, invariant-closed, verifier-readable, falsifiable, regression-zero and not a knowledge house; else b=0",
+      "capability_credit": 0,
+      "equation": "truth in H(I, failure_evidence) AND key(s,o) injective on the policy distinction AND V reads the split AND P/F grounded AND proof fresh on state in hand",
+      "external_model_calls": 0,
+      "external_model_weights_or_outputs_used": 0,
+      "identifiability": {
+        "bits_after_one": 3.817623257511431,
+        "bits_before": 5.5546,
+        "targets_exact_after_one": 0,
+        "targets_settled_after_one_then_ask": 10
+      },
+      "incremental_spend_usd": 0,
+      "instant_knowledge": "content-addressed zero-weight compiled model; facts remain inspectable and deletable",
+      "knowledge_house": false,
+      "network_calls_at_run_time": 0,
+      "parameters_added": 0,
+      "single_bottleneck_answer": "NO_SINGLE_SUFFICIENT_LEVER__HIGHEST_LEVERAGE_NECESSARY_CONDITION_IS_THE_VERIFIED_INDEX",
+      "status": "THREE_BLOCKERS_ARE_ONE_NECESSARY_CONDITION_NOT_A_SINGLE_SUFFICIENT_LEVER",
+      "synthesis_verification_asymmetry": {
+        "composition_with_frame": "13/16 -> 14/16; 2 proven unreachable; 15 frame-breaking plans rejected; 0 prediction mismatches",
+        "remaining_open": [
+          "proposal generator for unpassed bugs",
+          "per-step long-horizon verifier",
+          "new effect names",
+          "intention-to-predicate-with-frame specification"
+        ],
+        "systematic_edit_supply": "43/268 sibling commits; 225/268 no sibling; 103/245 verbatim; 31/245 forced"
+      },
+      "terminal_credit": 0,
+      "vocabulary_insufficiency": {
+        "certificate": "SEPARATION_IMPOSSIBLE__EVERY_FACT_ALL_SUCCESSES_SHARE_A_FAILURE_ALSO_HAS",
+        "closed_vocabulary_size": 31,
+        "hypotheses_that_would_need_enumerating": 8388608,
+        "learner_enumeration_cap": 12,
+        "unrepairable_by_repetition": true,
+        "what_would_repair_it": "A_NEW_OBSERVABLE__MORE_RUNS_REPORT_THE_SAME_FACT_VECTOR"
+      },
+      "weights_touched": 0
+    },
+    "verified_repair_rerun": {
+      "claimed": 20,
+      "confirmed": 16,
+      "not_confirmed": 0,
+      "not_reconstructible": 4,
+      "receipt": "canonical/verification/RERUN_THE_LEARNED_ARMS_REPAIRS_20261116_V1.json",
+      "screen_disagreements_in_that_record": 0
+    }
+  },
+  "model_calls": 0,
+  "network_calls": 0,
+  "next_step": "Start all future hard-open work from the 16 audited unrepaired tasks; author H and the frame before spending an interaction; name the missing observable that makes the index key injective on the policy distinction; generate grounded candidates from live failure; verify each step with an independent execution witness; admit a calculated parameter bit only after transfer, falsification, regression-zero and fresh-state proof gates; keep facts in instant knowledge and zero knowledge-house weights; never count storage, replay, a screen pass, one index repair, a web result or a known-win retest as capability.",
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "prior_work_reused": [
+    "canonical/tools/grammar_closed_repair_v1.py",
+    "canonical/runtime/derived_value_v1.py",
+    "canonical/swe_kernel/interventional_goal_v1.py",
+    "canonical/runtime/finite_identifiability.py",
+    "canonical/tools/identification_cost_in_a_real_space_v1.py",
+    "canonical/runtime/unified_cognitive_fabric_v1.py",
+    "canonical/swe_kernel/one_demonstration_identifies_v1.py",
+    "canonical/tools/repair_where_the_suite_is_the_observable_v1.py",
+    "canonical/swe_kernel/repair_version_space_selection_v1.py",
+    "canonical/swe_kernel/closed_loop_trace_abduction_repair_v1.py",
+    "canonical/tools/version_space_selection_measure_v1.py",
+    "canonical/tools/closed_loop_trace_abduction_measure_v1.py",
+    "canonical/tools/rerun_the_learned_arms_repairs_v1.py",
+    "canonical/runtime/anchored_frame_v1.py",
+    "canonical/tools/miniwob_contract_arm_arm_v1.py",
+    "canonical/tools/composed_repair_one_run_v1.py",
+    "canonical/tools/arm_learned_from_its_own_verified_repairs_v1.py",
+    "canonical/tools/what_one_verified_repair_travels_v1.py",
+    "canonical/tools/instant_learning_in_a_new_environment_v1.py",
+    "canonical/runtime/capability_planner.py",
+    "canonical/runtime/generic_goal_tool_effect_planner_v1.py",
+    "canonical/runtime/capability_composer_v1.py",
+    "canonical/runtime/verified_skill_macro_planner_v1.py",
+    "canonical/runtime/explicit_recovery_planner.py",
+    "canonical/runtime/environment_learning_v1.py",
+    "canonical/swe_kernel/predicate_world_abstraction_v1.py",
+    "canonical/swe_kernel/operator_semantics_v1.py",
+    "canonical/swe_kernel/hierarchical_skill_library_v1.py",
+    "canonical/runtime/learn_or_read_v1.py",
+    "canonical/swe_kernel/action_replay_under_change_v1.py",
+    "canonical/tools/derived_value_full_suite_receipt_v1.py",
+    "canonical/tools/learn_or_read_board_v1.py",
+    "canonical/runtime/declared_trigger_census_v1.py",
+    "canonical/swe_kernel/one_demonstration_basin_v1.py",
+    "canonical/tools/gui_invariance_census_v1.py",
+    "canonical/tools/gui_phrase_blind_basis_arm_v1.py",
+    "canonical/swe_kernel/proved_composition_v1.py",
+    "canonical/tools/the_four_levers_of_learning_from_experience_v1.py",
+    "canonical/swe_kernel/systematic_edit_supply_v1.py",
+    "canonical/tests/test_the_four_levers_of_learning_from_experience_v1.py",
+    "canonical/tests/test_systematic_edit_supply_v1.py",
+    "canonical/runtime/demonstration_version_space_v1.py",
+    "canonical/tools/the_index_is_the_bottleneck_v1.py",
+    "canonical/tools/compose_measured_effects_v1.py",
+    "canonical/tests/test_the_index_is_the_bottleneck_v1.py",
+    "canonical/tests/test_compose_measured_effects_v1.py",
+    "canonical/runtime/what_one_experience_buys_v1.py",
+    "canonical/tests/test_what_one_experience_buys_v1.py",
+    "canonical/tests/test_miniwob_one_success_generalisation_v1.py",
+    "canonical/tools/verified_index_and_calculated_parameter_admission_v1.py",
+    "canonical/runtime/compile_brain_unified_model_v1.py",
+    "canonical/runtime/verify_brain_unified_model_v1.py",
+    "canonical/swe_kernel/weight_update_admission_v1.py",
+    "canonical/swe_kernel/lesson_admission_gate_v1.py"
+  ],
+  "probe_specific": false,
+  "recursive_obs": {
+    "canonical_base_commit": "7a2c31f6c5000f22e787c1e028fe7e703c615126",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "conventional pretraining or knowledge-house weights before a calculated bit passes the gate",
+      "external-model calls, distillation, teacher fallback, or model-as-producer/verifier/planner",
+      "a new learner, verifier, planner or composer duplicating existing organs",
+      "more demonstrations, environments, action lists or search as coverage",
+      "replaying recorded plans as permanent macros",
+      "re-testing known wins or synthetic tasks",
+      "treating a web result, benchmark score or fast screen as authority",
+      "calling the verified index a single sufficient lever or terminal unlock",
+      "claiming sentience, perfect understanding, all computer use or advanced SWE solved"
+    ],
+    "expected_parent_frontier_change": "The owner prompt is re-answered as new: one experience gives permanent storage, not permanent identification or all capability; no single sufficient lever unlocks computer use or advanced SWE; the highest-leverage shared necessary condition is the verified index/specification with a frame and an independent verifier; facts stay in instant knowledge and zero new parameters are admitted. The 16 real hard-open task files and 85 real published test node ids remain hard-open, with 22 passes, 63 failures including 6 real timeouts, 0 skips and 0 harness errors.",
+    "expected_parent_level_state_change": "The owner prompt is re-answered as new: one experience gives permanent storage, not permanent identification or all capability; no single sufficient lever unlocks computer use or advanced SWE; the highest-leverage shared necessary condition is the verified index/specification with a frame and an independent verifier; facts stay in instant knowledge and zero new parameters are admitted. The 16 real hard-open task files and 85 real published test node ids remain hard-open, with 22 passes, 63 failures including 6 real timeouts, 0 skips and 0 harness errors.",
+    "independent_verification_required": true,
+    "iteration_limit": 1,
+    "obs_blocker": {
+      "delete_bypass_substitute_options": [
+        "delete premature weights and the one-lever hunt",
+        "bypass identification with more demonstrations or breadth of environments",
+        "substitute a benchmark score, web result or majority vote for the missing causal split"
+      ],
+      "intrinsic_or_path_specific": "necessary and shared, but not sufficient: truth must be representable, the index must contain the policy-relevant observable, a grounded proposer must generate a candidate, an independent verifier must read the split, and a fresh proof must hold on the state in hand.",
+      "surviving_causal_blocker": "The verified index/specification with a frame is the highest-leverage shared necessary condition; proposal generation, per-step long-horizon verification, new effect names and intention-to-predicate specification remain open."
+    },
+    "obs_capability": {
+      "capability_work_deleted": [
+        "a new learner",
+        "a new verifier",
+        "a new planner",
+        "a new composer",
+        "a knowledge-house weight system",
+        "a conventional pretraining stack"
+      ],
+      "existing_inherited_routes_checked": [
+        "canonical/runtime/applicability_v1.py",
+        "canonical/runtime/contrast_selection_v1.py",
+        "canonical/runtime/observable_descriptor_v1.py",
+        "canonical/tools/insufficiency_certificate_probe_v1.py",
+        "canonical/tools/the_index_is_the_bottleneck_v1.py",
+        "canonical/swe_kernel/weight_update_admission_v1.py",
+        "canonical/swe_kernel/lesson_admission_gate_v1.py",
+        "canonical/swe_kernel/contract_grounded_repair_v1.py",
+        "canonical/swe_kernel/interventional_goal_v1.py",
+        "canonical/swe_kernel/proved_composition_v1.py",
+        "canonical/tools/compose_measured_effects_v1.py",
+        "canonical/runtime/compile_brain_unified_model_v1.py"
+      ],
+      "external_existing_routes_checked": [
+        "2026 verifier-gated memory admission and falsification research",
+        "2026 controlled world model identifiability and action-excitation research",
+        "2026 APR patch correctness evidence profiles",
+        "2026 DeepSWE and OSWorld 2.0 long-horizon benchmark audits",
+        "2026 CHASE protocol-shortcut falsification research"
+      ],
+      "surviving_gap": "No calculated parameter bit has passed C(s,o,I,V) with a live causal split, falsifiability, invariant closure, archive-regression-zero, independent verification and a fresh-state proof."
+    },
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "a higher leaderboard or repair count reached by loosening what counts as repaired",
+        "counting storage, replay, a screen pass or a known-win retest as capability",
+        "treating one demonstration as permanent identification",
+        "treating a one-lever verdict as terminal truth"
+      ],
+      "real_outcome": "A fresh, falsifiable answer to the owner prompt with a hard-open real-test receipt and a calculated-parameter admission law; no claim that all computer use, advanced SWE or sentience is solved.",
+      "surviving_necessity": "The system must still name the missing observable, generate grounded candidates from live failure, verify by execution with a frame, and admit zero parameters until a bit is calculated."
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": "None by claim: the existing identification, vocabulary, admission, composition, instant-knowledge and weight-gate organs are reused unchanged by effect.",
+      "downstream_work_to_delete_or_supersede": "Any roadmap step that adds another learner, weight house, external-model call, replay macro, known-win retest, synthetic task or single-sufficient-lever claim.",
+      "fresh_reuse_plan": "Re-run canonical/tools/verified_index_and_calculated_parameter_admission_v1.py against a fresh pinned QuixBugs copy with --per-test-timeout 2.0, then re-run the audit tests and model/guard gates from a clean checkout."
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": "Project, prior-work and 2026 web research were exhausted by effect; no new learner, verifier, planner, composer, weight house or external model was built.",
+      "search_stop_decision": "Stop after this fresh prompt re-read, the verified-index answer, the hard-open real-test receipt and the calculated-parameter admission law. Do not build weights, call an external model, retest known wins, or merge until the complete feature and signed referee are green. Do not credit an external repair reclassification as V2 capability."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "Weights lack a calculated bit; external models are forbidden; new organs duplicate shipped effects; repetition cannot split indistinguishable states; replay goes stale; benchmark scores are not our proof.",
+      "routes_ranked": [
+        "COMPOSE_EXISTING_ORGANS_AND_ADMIT_ONLY_CALCULATED_BITS_AFTER_A_VERIFIED_INDEX_GATE",
+        "more demonstrations, environments, action lists or search budget",
+        "replay recorded plans as permanent macros",
+        "conventional pretraining or knowledge-house weights",
+        "external-model distillation or model-as-producer"
+      ]
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "oracle_paths": [
+        "canonical/verification/PROOF_CARRYING_COUNTERFACTUAL_UNION_20261116_V1.json",
+        "canonical/verification/VERIFIED_INDEX_AND_CALCULATED_PARAMETER_ADMISSION_20261116_V1.json",
+        "canonical/tools/verified_index_and_calculated_parameter_admission_v1.py",
+        "canonical/tests/test_verified_index_and_calculated_parameter_admission_v1.py"
+      ],
+      "synthetic_verification_necessity": "The corpus published tests are the oracle; unit tests pin only the receipt and integrity invariants. Independent reproduction remains open and receives zero producer credit."
+    },
+    "real_outcome": "A fresh answer from first principles: No. One demonstrated advanced action is permanent storage, not permanent identification of a general rule; one demonstration in a new arbitrary environment is a cost law, not a proof of the environment; the three blockers are projections of one verified-index necessary condition; 16 hard-open task files and 85 real published test node ids remain; zero new parameters are admitted; authority NONE.",
+    "required_capability": "A representable hypothesis space, an index key injective on the policy distinction, a computable causal observation that splits survivors, a grounded proposer, a frame saying what must not change, an independent verifier, and a fresh proof on the state in hand. No new learner, verifier, planner, weight house, external model or benchmark score supplies these from one trace.",
+    "route_frontier": {
+      "challenger_routes": [
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "no calculated bit supplies new capability",
+            "CORRECTNESS": "would industrialize an unmeasured update",
+            "INCREMENTAL_COST": "high",
+            "RELIABILITY": "breaks 3 correct predictions in the ungated measurement",
+            "VERIFIABILITY": "measured only",
+            "WALL_CLOCK": "years of wasted compute"
+          },
+          "evidence": [
+            "WEIGHT_SPACE_FUEL ready_to_train=false, 64 verified units vs 5000 minimum; weight gate refused 31 of 32 self-certified updates"
+          ],
+          "qualification_evidence": [
+            "canonical/verification/WEIGHT_SPACE_FUEL_20261113_V1.json",
+            "THE_WEIGHT_LAYER_NEEDS_A_GATE_TOO_20261113_V1.md"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "build conventional pretraining or knowledge-house weights now"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "none",
+            "CORRECTNESS": "forbidden by the owner law",
+            "INCREMENTAL_COST": "spend",
+            "RELIABILITY": "fails closed",
+            "VERIFIABILITY": "zero credit by law",
+            "WALL_CLOCK": "fast"
+          },
+          "evidence": [
+            "producer cognition from another model is prohibited and receives zero credit"
+          ],
+          "qualification_evidence": [
+            "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "call or distill an external model as producer, teacher or component"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "duplicates shipped organs",
+            "CORRECTNESS": "adds a part where a computed distinction is missing",
+            "INCREMENTAL_COST": "low",
+            "RELIABILITY": "best part is no part",
+            "VERIFIABILITY": "read, not run",
+            "WALL_CLOCK": "no run needed"
+          },
+          "evidence": [
+            "the same effects already exist under non-obvious names and were indexed by effect before building"
+          ],
+          "qualification_evidence": [
+            "THE_VERIFIED_INDEX_IS_THE_BOTTLENECK_20261116_V2.md#3-research-exhaustion-first"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "add a new learner, verifier, planner or composer"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "cannot split indistinguishable states",
+            "CORRECTNESS": "one trace leaves many hypotheses",
+            "INCREMENTAL_COST": "high",
+            "RELIABILITY": "no new observable",
+            "VERIFIABILITY": "measured",
+            "WALL_CLOCK": "wasted interactions"
+          },
+          "evidence": [
+            "5.5546 to 3.8176 bits after one demo, 0/10 exact, 10/10 after chosen questions; insufficiency certificate says repetition reports the same fact vector"
+          ],
+          "qualification_evidence": [
+            "canonical/verification/THE_FOUR_LEVERS_OF_LEARNING_FROM_EXPERIENCE_20261116_V1.json",
+            "canonical/verification/INSUFFICIENCY_CERTIFICATE_20261113_V1.json"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "more demonstrations, environments, action lists or search budget"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "state drift destroys the premise",
+            "CORRECTNESS": "recorded plan is not a fresh proof",
+            "INCREMENTAL_COST": "low",
+            "RELIABILITY": "measured stale",
+            "VERIFIABILITY": "measured",
+            "WALL_CLOCK": "fast"
+          },
+          "evidence": [
+            "122/228 stale, 71/228 silent corruptions despite 228/228 legal operations"
+          ],
+          "qualification_evidence": [
+            "canonical/verification/ACTION_REPLAY_UNDER_CHANGE_20261116_V1.json",
+            "WHY_LEARN_ONCE_REPLAY_FOREVER_FAILS_20261116_V1.md"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "replay recorded plans as permanent macros"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "binds three blockers to one necessary condition",
+            "CORRECTNESS": "published pytest on a fresh answer-key-free copy",
+            "INCREMENTAL_COST": "zero",
+            "RELIABILITY": "no test edits or plugin shortcuts",
+            "VERIFIABILITY": "producer-run, independent reproduction open",
+            "WALL_CLOCK": "27.5 s for the full hard-open run"
+          },
+          "evidence": [
+            "85/85 real published test node ids collected and invoked; 22 passes, 63 failures including 6 timeouts, 0 skips, 0 harness errors; zero new parameters admitted"
+          ],
+          "qualification_evidence": [
+            "canonical/verification/VERIFIED_INDEX_AND_CALCULATED_PARAMETER_ADMISSION_20261116_V1.json",
+            "canonical/tests/test_verified_index_and_calculated_parameter_admission_v1.py"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "SELECTED",
+          "route": "COMPOSE_EXISTING_ORGANS_AND_ADMIT_ONLY_CALCULATED_BITS_AFTER_A_VERIFIED_INDEX_GATE"
+        }
+      ],
+      "checked_at_utc": "2026-11-17T04:20:39Z",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "discovery_required": true,
+      "incumbent_route": "conventional weights/pretraining or a one-lever hunt for the single bottleneck",
+      "max_age_hours": 24,
+      "negative_search_summary": "Six routes were searched and five refused with evidence: premature weights, external-model distillation, a duplicated organ, more demonstrations/environments/actions, and replay macros. The surviving route composes existing organs into a verified-index admission law.",
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "November 2026 verifier gated memory admission falsification regression agents"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "2026 controlled world model identifiability conditional action excitation"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "2026 automated program repair patch correctness evidence profile execution verifier"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "November 2026 OSWorld 2.0 DeepSWE benchmark contamination long horizon"
+        }
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route": "COMPOSE_EXISTING_ORGANS_AND_ADMIT_ONLY_CALCULATED_BITS_AFTER_A_VERIFIED_INDEX_GATE",
+      "selected_route_preflight": {
+        "all_required_dependencies_ready": true,
+        "checked_at_utc": "2026-11-17T04:20:39Z",
+        "execution_dependencies": [
+          {
+            "dependency": "local Python 3.11 runtime with pytest 9.2.0",
+            "evidence": [
+              "85 published test node ids collected and invoked with no hidden skips; 6 real timeouts isolated"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "GLOBAL",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "scope": "GLOBAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "jkoppel/QuixBugs checkout pinned at 4257f44b0ff1181dedaedee6a447e133219fcebf",
+            "evidence": [
+              "fresh copy excludes correct_python_programs and correct_java_programs; 16 hard-open task files; test bytes SHA-256 hashed"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "GLOBAL",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "scope": "GLOBAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "local filesystem tempdir for one-real-node-id-per-subprocess isolation",
+            "evidence": [
+              "85/85 node ids invoked; 0 harness/collection errors; no test file edits; no timeout plugin"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "GLOBAL",
+            "kind": "STORAGE",
+            "required": true,
+            "scope": "GLOBAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          }
+        ],
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "max_age_hours": 2,
+        "selected_route": "COMPOSE_EXISTING_ORGANS_AND_ADMIT_ONLY_CALCULATED_BITS_AFTER_A_VERIFIED_INDEX_GATE",
+        "status": "READY"
+      },
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/swe_kernel/weight_update_admission_v1.py",
+          "canonical/swe_kernel/lesson_admission_gate_v1.py",
+          "canonical/tools/the_index_is_the_bottleneck_v1.py",
+          "canonical/tools/compose_measured_effects_v1.py",
+          "canonical/tools/proof_carrying_counterfactual_union_v1.py",
+          "canonical/runtime/compile_brain_unified_model_v1.py",
+          "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json",
+          "canonical/verification/VERIFIED_INDEX_AND_CALCULATED_PARAMETER_ADMISSION_20261116_V1.json"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "https://github.com/Exgentic/eval-containers/issues/733 (Nov 2026 source audit)",
+          "https://decodethefuture.org/en/ai-agent-benchmarks-2026/ (2026 benchmark context only)"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "https://github.com/jkoppel/QuixBugs (pinned at 4257f44b0ff1181dedaedee6a447e133219fcebf)",
+          "https://pypi.org/project/pytest (9.2.0, the runner every verdict goes through)"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "https://arxiv.org/html/2611.14326 (FGSE, 10 Nov 2026)",
+          "https://arxiv.org/html/2607.22430v2 (controlled world model identifiability, 2026)",
+          "https://arxiv.org/html/2611.10837 (patch correctness, 7 Nov 2026)",
+          "https://arxiv.org/pdf/2607.07946 (DeepSWE, 2026)",
+          "https://arxiv.org/html/2609.18366 (CHASE, 2026)"
+        ]
+      },
+      "unresolved_plausible_dominators": []
+    },
+    "routes_considered": [
+      "REUSE/COMPOSE existing identification, observable, admission, composition and instant-knowledge organs",
+      "DELETE premature weights, external-model calls and one-lever hunts",
+      "BYPASS more demonstrations, environments and action lists as coverage",
+      "SUBSTITUTE the published pytest for benchmark scores, screen passes or majority votes",
+      "CONFIGURE per-node subprocess timeouts so real non-terminating tests are visible",
+      "INTEGRATE the answer, intent, hard-open receipt, audit test and zero-parameter law"
+    ],
+    "selected_route": "COMPOSE_EXISTING_ORGANS_AND_ADMIT_ONLY_CALCULATED_BITS_AFTER_A_VERIFIED_INDEX_GATE",
+    "selected_surviving_route": "COMPOSE_EXISTING_ORGANS_AND_ADMIT_ONLY_CALCULATED_BITS_AFTER_A_VERIFIED_INDEX_GATE",
+    "selected_surviving_route_class": "COMPOSE",
+    "stop_condition": "One merge on this branch after the complete feature and signed referee are green; no duplicate PR.",
+    "why_selected_route_is_fastest_sufficient": "Every ordinary route was killed before implementation: new weights require a calculated bit that no receipt supplies; conventional pretraining is forbidden and would industrialize a thin signal; more demonstrations cannot split indistinguishable states; a finer grid over features that lack the observable is measured useless; a new learner/verifier/planner duplicates shipped organs; known-win retesting is self-congratulation. Reusing the existing organs and binding them to one hard-open, verifier-gated calculated-parameter law is the only complete move that adds no unnecessary part.",
+    "why_this_is_not_another_organ": "It composes existing measurements and organs by effect, binds the answer to real hard-open published tests, reuses the shipped weight and lesson gates, recompiles the content-addressed model, and admits zero new parameters. It does not add a learner, verifier, planner, composer, weight house, external model, conventional pretraining stack, replay macro or terminal claim."
+  },
+  "route_id": "VERIFIED_INDEX_AND_CALCULATED_PARAMETER_ADMISSION_20261116_V1",
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "scope_complete_discharge": false,
+  "selected_route": "COMPOSE_EXISTING_ORGANS_AND_ADMIT_ONLY_CALCULATED_BITS_AFTER_A_VERIFIED_INDEX_GATE",
+  "selected_surviving_route": "COMPOSE_EXISTING_ORGANS_AND_ADMIT_ONLY_CALCULATED_BITS_AFTER_A_VERIFIED_INDEX_GATE",
+  "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
+  "stop_condition": "One merge on this branch after the complete feature and signed referee are green; no duplicate PR.",
+  "terminal_credit_delta": 0,
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "truth": {
+    "achieved": false
+  },
+  "user_authorized_governance_change": false,
+  "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "currentness": {
+      "accepted_families": 5,
+      "current_load_bearing_atomic_count": 36,
+      "deleted_nonnecessary_atomic_count": 2,
+      "historical_atomic_registry_count": 38,
+      "meta_envelope_open_count": 8,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "terminal": false,
+      "total_atomic": 38,
+      "total_families": 19,
+      "total_open_truth_obligations": 30,
+      "unresolved_atomic": 22
+    },
+    "fresh_reality_authority": false,
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "This makes the 16 hard-open task files and 85 real published test node ids auditable with per-node timeouts; it discharges no truth obligation and shrinks no hard-open population.",
+    "target_truth_obligations": [
+      "CODING_TB4_GE_66_4"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "counterexample_receipts": [],
+      "decisive_question": "Does one demonstration identify a permanent general rule, or does the verified index require a live causal split, a grounded proposer, a frame and an independent verifier?",
+      "falsifier_id": "REAL_PUBLISHED_HARD_OPEN_TESTS_WITH_PER_NODE_TIMEOUT_ISOLATION",
+      "known_counterexamples_checked": true,
+      "no_known_counterexample_reason": "The killed hidden CEGIS instrument, the contaminated QuixBugs-shown arm, the weight-gate interference result, the insufficiency certificate, the index sweep, the frame-composition result and the 16-task hard-open union are recorded in receipts rather than counted as counterexample receipts. PR #6919 later reclassified eight frozen V2 tasks in the live union receipt; that external change is recorded with zero credit.",
+      "proposal_id": "VERIFIED_INDEX_AND_CALCULATED_PARAMETER_ADMISSION_20261116_V1"
+    }
+  },
+  "verification": {
+    "authority": "NONE__PRODUCER_RUN_SANDBOX",
+    "commands": [
+      "/tmp/cgr_venv_cd864fc9/bin/python canonical/tools/verified_index_and_calculated_parameter_admission_v1.py --quixbugs /tmp/quixbugs_cd864fc9 --out canonical/verification/VERIFIED_INDEX_AND_CALCULATED_PARAMETER_ADMISSION_20261116_V1.json --per-test-timeout 2.0",
+      "/tmp/cgr_venv_cd864fc9/bin/python -m pytest -q canonical/tests/test_verified_index_and_calculated_parameter_admission_v1.py",
+      "git archive HEAD | tar -x -C /tmp/clean_model && (cd /tmp/clean_model && python3 canonical/runtime/compile_brain_unified_model_v1.py --output canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json) && cp /tmp/clean_model/canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json",
+      "python3 canonical/runtime/verify_brain_unified_model_v1.py",
+      "python3 execution_guard/repo_integrity_guard_v1.py --base 7a2c31f6c5000f22e787c1e028fe7e703c615126",
+      "python3 execution_guard/agent_orientation_check_v1.py intent-check canonical/action_intents/THE_VERIFIED_INDEX_IS_THE_BOTTLENECK_20261116_V2.json",
+      "python3 canonical/runtime/enforce_goal_hierarchy.py --base 7a2c31f6c5000f22e787c1e028fe7e703c615126 --head HEAD",
+      "python3 execution_guard/enforce_load_bearing_primary_pr.py --base 7a2c31f6c5000f22e787c1e028fe7e703c615126 --head HEAD",
+      "git diff --check"
+    ],
+    "independent_verification_completed": false,
+    "result": "PENDING_LOCAL_GATES_AND_SIGNED_REFEREE"
+  },
+  "weakens_existing_guard": false,
+  "why_selected_route_is_fastest_sufficient": "Every ordinary route was killed before implementation: new weights require a calculated bit that no receipt supplies; conventional pretraining is forbidden and would industrialize a thin signal; more demonstrations cannot split indistinguishable states; a finer grid over features that lack the observable is measured useless; a new learner/verifier/planner duplicates shipped organs; known-win retesting is self-congratulation. Reusing the existing organs and binding them to one hard-open, verifier-gated calculated-parameter law is the only complete move that adds no unnecessary part.",
+  "why_this_is_not_another_organ": "It composes existing measurements and organs by effect, binds the answer to real hard-open published tests, reuses the shipped weight and lesson gates, recompiles the content-addressed model, and admits zero new parameters. It does not add a learner, verifier, planner, composer, weight house, external model, conventional pretraining stack, replay macro or terminal claim."
+}
