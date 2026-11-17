@@ -1,7 +1,7 @@
 {
  "action_id": "AN_UNBOUND_NAME_WAS_THE_MISSING_LINK_20261116_V1",
  "action_intent_id": "AN_UNBOUND_NAME_WAS_THE_MISSING_LINK_20261116_V1",
- "action_kind": "CAPABILITY_MEASUREMENT",
+ "action_kind": "REAL_CAPABILITY_ACQUISITION",
  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
  "agent_orientation": {
   "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
@@ -26,7 +26,7 @@
   ],
   "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
   "producer_cognition_model_dependency_count": 0,
-  "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+  "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
   "progress_evidence_paths": [
    "canonical/runtime/demonstration_version_space_v1.py",
    "canonical/runtime/what_one_experience_buys_v1.py",
@@ -38,8 +38,8 @@
   "terminal_achieved": false
  },
  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
- "blocker_lease_key": "2026-11-16-id-binding::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_LEARNER_COULD_NOT_BIND_AN_ELEMENT_ID_THE_INSTRUCTION_NAMES",
- "canonical_base_commit": "078f34433bf3e98f9d589482a305034b9c6c366b",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_LEARNER_COULD_NOT_BIND_AN_ELEMENT_ID_THE_INSTRUCTION_NAMES_SO_A_PAGE_WHOSE_ONLY_DISTINGUISHING_PROPERTY_IS_THAT_ID_WAS_UNLEARNABLE",
+ "canonical_base_commit": "8408c78c97d45008c9ec2f0c2d8b72f862ee97c2",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -116,17 +116,18 @@
   "canonical/tools/miniwob_one_success_generalisation_measure_v1.py (the harness, unchanged)",
   "canonical/verification/MINIWOB_ONE_SUCCESS_GENERALISATION_20261111_V5.json (the recorded run)"
  ],
- "probe_specific": true,
+ "probe_specific": false,
  "recursive_obs": {
-  "canonical_base_commit": "078f34433bf3e98f9d589482a305034b9c6c366b",
+  "canonical_base_commit": "8408c78c97d45008c9ec2f0c2d8b72f862ee97c2",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "one_description_language_v1.py",
    "a hand-written four-field tuple",
    "the claim that the 5.43 bits were a second grammar"
   ],
-  "expected_parent_level_state_change": "Learning reach is bounded by which instruction-quoted properties are bound, not by vocabulary size.",
+  "expected_parent_level_state_change": "Work goes to the binding between what an instruction names and what an element carries, rather than to inventing vocabularies; the second language written this round is deleted as a rebuild.",
   "iteration_limit": 1,
+  "live_challenger_frontier_discovery_required": true,
   "obs_blocker": {
    "delete_bypass_substitute_options": [
     "delete the rebuild",
@@ -167,13 +168,22 @@
    "fresh_reuse_plan": "re-run the paired A/B whenever STRUCTURE_FIELDS changes"
   },
   "obs_obs": {
-   "affected_layers_only_on_revalidation": "only demonstration_version_space_v1 and the compiled model artifact needed rebuilding",
+   "affected_layers_only_on_revalidation": true,
    "analysis_steps_deleted_or_cached": "the 5.43-bit computation is kept as a redundancy measure, not recomputed as an ambiguity measure",
    "search_stop_decision": "stopped when a same-seed A/B showed no task worse"
   },
   "obs_solution": {
-   "deletion_first_order_applied": true,
-   "implementation_still_necessary": "One loop now reads STRUCTURE_FIELDS instead of a literal.",
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "implementation_still_necessary": true,
    "losing_routes_reason": "A second language was measured to be unnecessary; the tree already named every element.",
    "routes_ranked": [
     "DELETE the rebuild (taken)",
@@ -184,7 +194,7 @@
   },
   "obs_verification": {
    "direct_real_effect_verification_considered": true,
-   "existing_oracle_considered": "the miniwob reward signal on 20 fresh instances per task",
+   "existing_oracle_considered": true,
    "synthetic_verification_necessity": "none used"
   },
   "real_outcome": "A demonstrated task now names an element by any single property its instruction quotes, not by four hand-picked ones, and the 5.43 bits once read as a second grammar are recorded as redundancy.",
@@ -199,7 +209,177 @@
    ],
    "SYNTHESIZE": [
     "rejected"
-   ]
+   ],
+   "challenger_routes": [
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "zero: the existing language already named 1415 of 1415 elements",
+      "CORRECTNESS": "unchanged",
+      "INCREMENTAL_COST": "a whole module and 11 tests of permanent complexity",
+      "RELIABILITY": "unchanged",
+      "VERIFIABILITY": "already measured",
+      "WALL_CLOCK": "a day, wasted"
+     },
+     "evidence": [
+      "demonstration_version_space_v1 already had nth, nth_from_end, nth_slot, nearest, matches, pick and _same_element; the module written this round was deleted"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_TREE_ALREADY_SPOKE_ONE_LANGUAGE_20261116_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "write a second description language for the learning half"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "120/151 vs 116/151 on fresh instances",
+      "CORRECTNESS": "+2.7 points, within noise on 151 samples",
+      "INCREMENTAL_COST": "changes the preference order for every task",
+      "RELIABILITY": "unknown",
+      "VERIFIABILITY": "measured",
+      "WALL_CLOCK": "hours"
+     },
+     "evidence": [
+      "names_only_it shipped documented-but-unused because the gain did not justify the change"
+     ],
+     "qualification_evidence": [
+      "the replay measurement in canonical/verification/THE_TREE_ALREADY_SPOKE_ONE_LANGUAGE_20261116_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "prefer the description that names only the target"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "grid-coordinate 0.05 -> 1.00; +0.0667 on the 15 affected tasks",
+      "CORRECTNESS": "13 of 15 tasks bit-identical, none worse",
+      "INCREMENTAL_COST": "negative: a literal tuple is replaced by the one the adjacent loop already reads",
+      "RELIABILITY": "unchanged elsewhere",
+      "VERIFIABILITY": "paired same-seed A/B",
+      "WALL_CLOCK": "minutes"
+     },
+     "evidence": [
+      "paired same-seed A/B on 15 then 23 tasks, every arm reported"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_TREE_ALREADY_SPOKE_ONE_LANGUAGE_20261116_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "SELECTED",
+     "route": "bind every structure field an instruction quotes"
+    }
+   ],
+   "checked_at_utc": "2026-11-17T00:40:57Z",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "write another description language for learning, believing the 5.43 bits were a mismatch between two grammars",
+   "max_age_hours": 24,
+   "negative_search_summary": "No existing route in this tree needed a new language: the learner's own grammar already bound position (nth, nth_from_end, nth_slot, nearest) and the acting half already resolves an element by exactly that grammar. The literature's structural-mismatch finding (BEPA 2601.05787) is real but is not this defect, and the DOM-vs-pixels finding about channels disagreeing over element identity describes the ordinal instability measured here, not a missing vocabulary.",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "GUI agent learned skill unreachable mismatch between policy action space and grounded element representation schema"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "computer use agent element grounding representation stability ordinal position re-identification across page instances"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "2026 GUI agent expert trace structural mismatch end-to-end policy cannot imitate"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "browser automation element identity across rerenders accessibility tree index reshuffle 2026"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "selected_route": "BIND_THE_PROPERTY_THE_INSTRUCTION_QUOTES_INSTEAD_OF_LISTING_FOUR_FIELDS_BY_HAND_AND_DELETE_THE_SECOND_LANGUAGE_THIS_ROUND_WROTE_BEFORE_READING_THE_ONE_THAT_ALREADY_EXISTED",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-11-17T00:41:05Z",
+    "execution_dependencies": [
+     {
+      "dependency": "miniwob-plusplus html substrate at /tmp/mw and puppeteer-core + @sparticuz/chromium at /tmp/nodes",
+      "evidence": [
+       "130 pages loaded and reset at seed 1060 during this session; the harness ran 15- and 23-task A/Bs"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "LOCAL_RUNTIME",
+      "observed_at_utc": "2026-11-17T00:41:11Z",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "VOLATILE"
+     },
+     {
+      "dependency": "python3 with pytest for canonical/tests",
+      "evidence": [
+       "165 passed, 27 skipped in test_miniwob_one_success_generalisation_v1.py"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "LOCAL_RUNTIME",
+      "observed_at_utc": "2026-11-17T00:41:11Z",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "max_age_hours": 2,
+    "selected_route": "BIND_THE_PROPERTY_THE_INSTRUCTION_QUOTES_INSTEAD_OF_LISTING_FOUR_FIELDS_BY_HAND_AND_DELETE_THE_SECOND_LANGUAGE_THIS_ROUND_WROTE_BEFORE_READING_THE_ONE_THAT_ALREADY_EXISTED",
+    "status": "READY"
+   },
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/runtime/demonstration_version_space_v1.py",
+     "canonical/runtime/instruction_policy_v1.py",
+     "canonical/verification/MINIWOB_ONE_SUCCESS_GENERALISATION_20261111_V5.json"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "DOM vs Screenshots 2026: hybrid agents lose grounding when their two channels disagree about which element is the same"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "registry.npmjs.org: puppeteer-core@23 and @sparticuz/chromium installed this session (85 package directories) and used to drive all 130 pages",
+     "pypi.org: pytest installed for the tree's own suites"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "https://arxiv.org/html/2601.05787 (BEPA: expert traces operate in tool-level action spaces a policy cannot directly imitate)"
+    ]
+   },
+   "unresolved_plausible_dominators": []
   },
   "routes_considered": [
    "DELETE",
@@ -207,7 +387,7 @@
    "SYNTHESIZE_NEW_PRIMITIVE"
   ],
   "selected_surviving_route": "BIND_THE_PROPERTY_THE_INSTRUCTION_QUOTES_INSTEAD_OF_LISTING_FOUR_FIELDS_BY_HAND_AND_DELETE_THE_SECOND_LANGUAGE_THIS_ROUND_WROTE_BEFORE_READING_THE_ONE_THAT_ALREADY_EXISTED",
-  "stop_condition": "Paired A/B reported in full, non-clean rerun disclosed, rebuild deleted, zero credit claimed.",
+  "stop_condition": "The paired same-seed A/B is reported in full, the wider non-clean run is disclosed, the rebuilt module is deleted, and no capability, family, terminal or weight credit is claimed.",
   "why_selected_route_is_fastest_sufficient": "One word in one tuple turns an unlearnable page into a solved one; a new module was measured to add nothing."
  },
  "route_id": "BIND_THE_PROPERTY_THE_INSTRUCTION_QUOTES_INSTEAD_OF_LISTING_FOUR_FIELDS_BY_HAND_AND_DELETE_THE_SECOND_LANGUAGE_THIS_ROUND_WROTE_BEFORE_READING_THE_ONE_THAT_ALREADY_EXISTED",
@@ -218,7 +398,7 @@
  "stop_condition": "The paired same-seed A/B is reported in full, the wider non-clean run is disclosed, the rebuilt module is deleted, and no capability, family, terminal or weight credit is claimed.",
  "terminal_achieved": false,
  "terminal_credit_delta": 0,
- "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_CAPABILITIES",
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
  "truth": {
   "achieved": false
  },
@@ -245,7 +425,15 @@
   "target_truth_obligations": [
    "OSWORLD_2_1_PARTIAL_GE_81_8"
   ],
-  "terminal_credit_delta": 0
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [],
+   "decisive_question": "Of the properties an instruction quotes, which ones has no test ever bound -- and does binding them move any task on fresh instances?",
+   "falsifier_id": "A_PAGE_WHERE_BINDING_A_STRUCTURE_FIELD_TO_A_SLOT_MAKES_AN_OUTCOME_WORSE",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "The one counterexample found is internal and is recorded in the receipt: the wider 130-page rerun looked like a -0.95 regression on click-pie and a paired same-seed A/B returned 0.05 on both sides, so the apparent counterexample was run variance. No external receipt is added by this PR.",
+   "proposal_id": "AN_UNBOUND_NAME_WAS_THE_MISSING_LINK_20261116_V1"
+  }
  },
  "verification": {
   "authority": "NONE__PRODUCER_RUN_SANDBOX",
