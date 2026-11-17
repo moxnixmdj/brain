@@ -187,6 +187,8 @@
     "canonical/verification/SYNTHESIS_FROM_THE_FAILURE_20261116_V1.json",
     "canonical/verification/WHERE_THE_OBSERVABLE_WAS_MISSING_20261116_V1.json",
     "canonical/verification/QUIXBUGS_EDIT_KIND_TRANSFER_20261112_V1.json",
+    "canonical/verification/SUITE_AS_OBSERVABLE_VERIFIER_ROOTS_20261116_V1.json",
+    "canonical/tools/grammar_closed_repair_v1.py",
     "canonical/verification/COMPARISONS_CLOSE_THE_LAST_MILE_20261116_V1.json",
     "ONE_RUN_THREE_VOCABULARIES_ONE_JUDGE_20261116_V1.md",
     "THE_INVARIANCE_IS_THE_REACH_20261116_V1.md",
@@ -251,7 +253,9 @@
     "canonical/runtime/demonstration_version_space_v1.py",
     "canonical/tests/test_what_one_experience_buys_v1.py",
     "canonical/tests/test_miniwob_one_success_generalisation_v1.py",
-    "canonical/verification/THE_TREE_ALREADY_SPOKE_ONE_LANGUAGE_20261116_V1.json"
+    "canonical/verification/THE_TREE_ALREADY_SPOKE_ONE_LANGUAGE_20261116_V1.json",
+    "canonical/verification/SUITE_AS_OBSERVABLE_VERIFIER_ROOTS_20261116_V1.json",
+    "canonical/verification/COUNTERFACTUAL_REPAIR_QUIXBUGS_INSERTION_20261116_V1.json"
   ],
   "exact_decision_past_enumeration_wall": {
     "measured_effect": {
@@ -272,16 +276,12 @@
     "receipt": "canonical/action_intents/DECIDE_PAST_THE_ENUMERATION_WALL_20261116_V1.json",
     "status": "EXACT_INCLUSION_EXTRACTION_NOT_A_NEW_CAPABILITY"
   },
-  "example_searchable_open_count": 8,
+  "example_searchable_open_count": 4,
   "example_searchable_open_tasks": [
-    "flatten",
     "kheapsort",
     "possible_change",
     "powerset",
-    "shunting_yard",
-    "sqrt",
-    "subsequences",
-    "wrap"
+    "subsequences"
   ],
   "four_levers_and_edit_supply": {
     "arithmetic": {
@@ -483,7 +483,7 @@
       ]
     }
   },
-  "generated_at_utc": "2026-11-17T01:15:59.053941+00:00",
+  "generated_at_utc": "2026-11-17T03:33:45.392327+00:00",
   "gui_invariance_and_operand_boundary": {
     "identity_invariance": {
       "identity_arms": 15,
@@ -2752,24 +2752,16 @@
     "PRODUCER_RUN_NOT_INDEPENDENT_VERIFICATION",
     "TERMINAL_TRUTH_UNTOUCHED"
   ],
-  "hard_open_population_count": 16,
+  "hard_open_population_count": 8,
   "hard_open_population_tasks": [
-    "breadth_first_search",
-    "depth_first_search",
-    "detect_cycle",
-    "flatten",
     "kheapsort",
     "possible_change",
     "powerset",
-    "reverse_linked_list",
     "shortest_path_length",
     "shortest_path_lengths",
     "shortest_paths",
-    "shunting_yard",
-    "sqrt",
     "subsequences",
-    "topological_ordering",
-    "wrap"
+    "topological_ordering"
   ],
   "incremental_spend_usd": 0,
   "index_specification_and_value_layer": {
@@ -3325,7 +3317,7 @@
     "selection_measurement_read": true,
     "the_unsolved_remainder_is_a_long_tail_not_one_bottleneck": true,
     "unbound_name_binding_is_local_and_retracts_second_language_claim": true,
-    "verified_union_is_24_not_the_projected_26": true
+    "verified_union_is_32_after_insert_and_verifier_roots": true
   },
   "killed_instruments": [
     {
@@ -3348,9 +3340,13 @@
   ],
   "known_wins_not_counted_as_progress": [
     "bitcount",
+    "breadth_first_search",
     "bucketsort",
+    "depth_first_search",
+    "detect_cycle",
     "find_first_in_sorted",
     "find_in_sorted",
+    "flatten",
     "gcd",
     "get_factors",
     "hanoi",
@@ -3368,9 +3364,13 @@
     "next_permutation",
     "pascal",
     "quicksort",
+    "reverse_linked_list",
     "rpn_eval",
+    "shunting_yard",
     "sieve",
-    "to_base"
+    "sqrt",
+    "to_base",
+    "wrap"
   ],
   "long_tail_trigger_and_basin": {
     "basin": {
@@ -4187,6 +4187,37 @@
       ],
       "sha256": "085fc5b7374d464c83cf06a2553361ac5657738e0a587eb5cd5a297315d13e6c",
       "status": "READ"
+    },
+    {
+      "answer_keys_present": null,
+      "receipt": "COUNTERFACTUAL_REPAIR_QUIXBUGS_INSERTION_20261116_V1.json",
+      "repaired_count": null,
+      "repaired_tasks": [
+        "bitcount",
+        "breadth_first_search",
+        "flatten",
+        "lis",
+        "max_sublist_sum",
+        "mergesort",
+        "reverse_linked_list",
+        "shunting_yard",
+        "sqrt",
+        "wrap"
+      ],
+      "sha256": "bcc29dcea5d4edb895be8ec5fc3fa1924107f3fdf9ea32840e0091c777574746",
+      "status": "READ"
+    },
+    {
+      "answer_keys_present": null,
+      "receipt": "SUITE_AS_OBSERVABLE_VERIFIER_ROOTS_20261116_V1.json",
+      "repaired_count": 3,
+      "repaired_tasks": [
+        "breadth_first_search",
+        "depth_first_search",
+        "detect_cycle"
+      ],
+      "sha256": "cdf5343af2181bd8a1cc08dc9634ebb9a4f27d6434fdb799cc5a16c91a6ca2e8",
+      "status": "READ"
     }
   ],
   "mechanism_census_by_effect": {
@@ -4809,12 +4840,16 @@
       "receipt": "QUIXBUGS_EDIT_KIND_TRANSFER_20261112_V1.json"
     }
   ],
-  "repaired_union_count": 24,
+  "repaired_union_count": 32,
   "repaired_union_tasks": [
     "bitcount",
+    "breadth_first_search",
     "bucketsort",
+    "depth_first_search",
+    "detect_cycle",
     "find_first_in_sorted",
     "find_in_sorted",
+    "flatten",
     "gcd",
     "get_factors",
     "hanoi",
@@ -4832,9 +4867,13 @@
     "next_permutation",
     "pascal",
     "quicksort",
+    "reverse_linked_list",
     "rpn_eval",
+    "shunting_yard",
     "sieve",
-    "to_base"
+    "sqrt",
+    "to_base",
+    "wrap"
   ],
   "schema": "BRAIN_PROOF_CARRYING_COUNTERFACTUAL_UNION_AUDIT_V1",
   "selection_measurement": {
@@ -5006,16 +5045,12 @@
   },
   "unknown_receipt_tasks_outside_real_corpus": [],
   "unmeasurable_without_published_input_output_examples": [
-    "breadth_first_search",
-    "depth_first_search",
-    "detect_cycle",
-    "reverse_linked_list",
     "shortest_path_length",
     "shortest_path_lengths",
     "shortest_paths",
     "topological_ordering"
   ],
-  "unmeasurable_without_published_input_output_examples_count": 8,
+  "unmeasurable_without_published_input_output_examples_count": 4,
   "upstream": "https://github.com/jkoppel/QuixBugs",
   "upstream_head": "4257f44b0ff1181dedaedee6a447e133219fcebf",
   "verified_repair_rerun": {

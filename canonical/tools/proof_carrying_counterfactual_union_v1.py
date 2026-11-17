@@ -65,6 +65,11 @@ REPAIR_RECEIPTS = (
     # the pass. They report the same 24 tasks; neither adds a new repair.
     "COMPOSED_REPAIR_ONE_RUN_20261116_V1.json",
     "ARM_LEARNED_IN_ONE_RUN_20261116_V1.json",
+    # Insert composition (force/aug + insert) closed 6 further hard-open tasks
+    # under the corpus pytest; the suite-as-observable verifier-root fix closed
+    # 2 more that had been misreported as collection failures (rc 2).
+    "COUNTERFACTUAL_REPAIR_QUIXBUGS_INSERTION_20261116_V1.json",
+    "SUITE_AS_OBSERVABLE_VERIFIER_ROOTS_20261116_V1.json",
 )
 
 #: The cross-corpus transfer receipt has a second arm shown 39 other QuixBugs
@@ -242,6 +247,11 @@ EVIDENCE_READ = (
     "canonical/verification/SYNTHESIS_FROM_THE_FAILURE_20261116_V1.json",
     "canonical/verification/WHERE_THE_OBSERVABLE_WAS_MISSING_20261116_V1.json",
     "canonical/verification/QUIXBUGS_EDIT_KIND_TRANSFER_20261112_V1.json",
+    # Verifier-root fix: the suite-as-observable path's corpus pytest was dying
+    # at collection (rc 2) because PYTHONPATH lacked python_programs/ and
+    # python_testcases/. Fixed; re-run closed depth_first_search and detect_cycle.
+    "canonical/verification/SUITE_AS_OBSERVABLE_VERIFIER_ROOTS_20261116_V1.json",
+    "canonical/tools/grammar_closed_repair_v1.py",
     "canonical/verification/COMPARISONS_CLOSE_THE_LAST_MILE_20261116_V1.json",
     # One-run, invariance, exact-decision, browser and new-environment evidence
     # merged to main after the previous answer was written.
@@ -323,6 +333,10 @@ EVIDENCE_READ = (
     "canonical/tests/test_what_one_experience_buys_v1.py",
     "canonical/tests/test_miniwob_one_success_generalisation_v1.py",
     "canonical/verification/THE_TREE_ALREADY_SPOKE_ONE_LANGUAGE_20261116_V1.json",
+    # Verifier-root fix on the suite-as-observable path (collection rc 2 was
+    # a PYTHONPATH defect, not an information barrier) and its re-run receipt.
+    "canonical/verification/SUITE_AS_OBSERVABLE_VERIFIER_ROOTS_20261116_V1.json",
+    "canonical/verification/COUNTERFACTUAL_REPAIR_QUIXBUGS_INSERTION_20261116_V1.json",
 )
 
 
@@ -351,6 +365,10 @@ def repaired_from_receipt(data: dict[str, Any]) -> set[str]:
         which = clean_arm.get("which")
         if isinstance(which, list):
             names.update(str(x) for x in which if isinstance(x, str) and x)
+    # Insert-composition receipt nests its list under summary.repaired_tasks.
+    summary_list = data.get("summary", {}).get("repaired_tasks")
+    if isinstance(summary_list, list):
+        names.update(str(x) for x in summary_list if isinstance(x, str) and x)
     for task, row in (data.get("per_bug") or {}).items():
         if isinstance(row, dict) and row.get("another_benchmark", {}).get("repaired") is True:
             if isinstance(task, str) and task:
@@ -510,7 +528,10 @@ def audit(quixbugs_root: pathlib.Path, root: pathlib.Path = ROOT) -> dict[str, A
             and len(rerun.get("inapplicable", [])) == 4
             and rerun.get("screen_said_pass_runner_said_no_in_the_record") == 0
         ),
-        "verified_union_is_24_not_the_projected_26": len(repaired) == 24,
+        # After insert composition + the suite-as-observable PYTHONPATH fix the
+        # measured union is 32 of 40. The composed-run receipt still reports
+        # its own 24 independently below.
+        "verified_union_is_32_after_insert_and_verifier_roots": len(repaired) == 32,
         "composed_run_is_one_run_one_judge_24_of_40": bool(
             composed
             and composed.get("tasks") == 41

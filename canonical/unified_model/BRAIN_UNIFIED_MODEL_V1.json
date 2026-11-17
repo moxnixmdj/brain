@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 498,
+  "knowledge_documents": 499,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6961,
+  "research_index_records": 6963,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 452,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "883c6288f1530905e5cb5b5f9fcec511caa93f241af7d29b8d14a2630a9373a0"
+  "value": "8062fe7064af16d6f5a47e9937938734fc23e95eeec4acdca308b8bb06aba1ee"
  },
  "engines": [
   {
@@ -67641,6 +67641,89 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 12212,
+   "headings": [
+    "Three barriers, one bottleneck, and what a verifier root actually bought",
+    "1. Verdict on the claim",
+    "2. Why one demonstration fails — three barriers, all measured",
+    "Barrier 1 — Identifiability",
+    "Barrier 2 — Vocabulary insufficiency",
+    "Barrier 3 — Synthesis–verification asymmetry",
+    "3. THE single bottleneck (reconciling nine competing names)",
+    "4. What this branch actually did (held-out open benchmarks only)",
+    "5. Connect to instant knowledge",
+    "6. YOU SURE THIS THE SMARTEST APPROACH? — kill list",
+    "7. Ranked path (unchanged, now with a green `V` on the no-JSON class)",
+    "8. Sources (evidence, not authority)"
+   ],
+   "kind": "DOCUMENT",
+   "path": "THREE_BARRIERS_THE_SINGLE_BOTTLENECK_20261116_V1.md",
+   "sha256": "70c6c447e55d0e35a1ccf160029c726034acd9b95577dd3e301f55afe96f97fd",
+   "summary": "**Date:** 2026-11-16 **Authority:** `NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT` **Question:** Is \"instant learning + instant learning in new arbitrary environments + one demonstration ⇒ permanent mastery of all coding and computer use\" true? What is real, what is not, why one demo fails, and what is THE single bottleneck — and can the three barriers (Identifiability, Vocabulary insufficiency, Synthes",
+   "terms": {
+    "32": 6,
+    "40": 8,
+    "admission": 4,
+    "after": 4,
+    "all": 8,
+    "arxiv": 7,
+    "barrier": 4,
+    "bits": 4,
+    "bottleneck": 7,
+    "candidates": 4,
+    "chosen": 4,
+    "claim": 4,
+    "composition": 4,
+    "demo": 5,
+    "every": 4,
+    "false": 8,
+    "fix": 5,
+    "hard-open": 5,
+    "held-out": 10,
+    "identification": 4,
+    "independent": 5,
+    "instant": 8,
+    "insufficiency": 4,
+    "judge": 4,
+    "knowledge": 5,
+    "learning": 7,
+    "mastery": 4,
+    "measured": 13,
+    "never": 5,
+    "new": 10,
+    "no": 13,
+    "no-json": 5,
+    "not": 20,
+    "one": 15,
+    "only": 7,
+    "open": 6,
+    "permanent": 6,
+    "prior": 5,
+    "real": 9,
+    "run": 5,
+    "single": 6,
+    "tasks": 6,
+    "tests": 5,
+    "union": 5,
+    "verdict": 7,
+    "verification": 6,
+    "verifier": 8,
+    "weak": 5
+   },
+   "title": "Three barriers, one bottleneck, and what a verifier root actually bought",
+   "title_terms": [
+    "actually",
+    "barriers",
+    "bottleneck",
+    "bought",
+    "one",
+    "root",
+    "three",
+    "verifier"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 3348,
    "headings": [
     "Transfer-driver experience-off control — draft, 2026-11-02",
@@ -83797,10 +83880,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1300,
+  "included_source_count": 1301,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "02df1fc25b6752a5b7ac6c688160b87636f5c1aebf49c80cd6d265d04d1c6fe4"
+  "source_tree_digest": "4c498607e0eb081a23c2f4bd71eca158c022be24c37dc82490c867adb90a396f"
  },
  "research_index": [
   {
@@ -188099,7 +188182,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/PROOF_CARRYING_COUNTERFACTUAL_UNION_20261116_V1.json",
    "schema": "BRAIN_PROOF_CARRYING_COUNTERFACTUAL_UNION_AUDIT_V1",
-   "sha256": "c83abb52f79742d9b92aa67f631f750c2a1731fab6582631a2c37e7f766f1cc9",
+   "sha256": "fca3ed1aa539bb47920ad33be8f3b7a90c4c45029bdaf33c0ec463d2c438256b",
    "status": "",
    "terms": {
     "20261116": 1,
@@ -202385,6 +202468,25 @@
     "sub100mb": 1,
     "v1": 1,
     "verification": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/SUITE_AS_OBSERVABLE_VERIFIER_ROOTS_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/SUITE_AS_OBSERVABLE_VERIFIER_ROOTS_20261116_V1.json",
+   "schema": "BRAIN_REPAIR_WHERE_THE_SUITE_IS_THE_OBSERVABLE_V1",
+   "sha256": "cdf5343af2181bd8a1cc08dc9634ebb9a4f27d6434fdb799cc5a16c91a6ca2e8",
+   "status": "",
+   "terms": {
+    "20261116": 1,
+    "observable": 1,
+    "roots": 1,
+    "suite": 1,
+    "v1": 1,
+    "verifier": 1
    }
   },
   {
@@ -246744,6 +246846,37 @@
     "sentence": 2,
     "swe": 2,
     "v1": 2
+   }
+  },
+  {
+   "action_id": "THE_VERIFIER_ROOT_WAS_THE_BARRIER_NOT_THE_INFORMATION_20261116_V1",
+   "capability": false,
+   "date": "2026-11-16",
+   "id": "research:canonical/action_intents/THE_VERIFIER_ROOT_WAS_THE_BARRIER_NOT_THE_INFORMATION_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/THE_VERIFIER_ROOT_WAS_THE_BARRIER_NOT_THE_INFORMATION_20261116_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "d2b5b6ec3bffc62ba6664ff7db9d95dd8ebcacaa937d4dd476348eada606f029",
+   "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
+   "terms": {
+    "20261116": 1,
+    "and_measured_union_moves_from_24_to_32_of_40": 1,
+    "barrier": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "information": 1,
+    "not": 1,
+    "on_nine_no_json_held_out_tasks": 1,
+    "proposed__producer_measured__independent_verification_open": 1,
+    "put_python_programs_and_python_testcases_on_pythonpath_in_the_shared_verifier_and_rerun_the_suite_as_observable_measurement_then_recount_the_union_from_measured_receipts_only": 1,
+    "root": 1,
+    "suite_as_observable_no_json_moves_from_0_of_9_to_3_of_9_with_depth_first_search_and_detect_cycle_newly_closed": 1,
+    "the_shared_verifier_verify_with_corpus_test_set_pythonpath_to_only_the_task_root_so_quixbugs_tests_died_at_collection_rc2_and_correct_patches_were_misreported_as_failed": 1,
+    "the_verifier_root_was_the_barrier_not_the_information_20261116_v1": 1,
+    "under_fresh_corpus_pytest": 1,
+    "v1": 1,
+    "verifier": 1,
+    "with_hard_open_from_16_to_8": 1,
+    "zero_capability_credit__zero_terminal_credit": 1
    }
   },
   {
