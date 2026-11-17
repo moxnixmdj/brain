@@ -1,0 +1,106 @@
+{
+  "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+  "closure": {
+    "attempted": 5,
+    "construction": "real commits whose fix is exactly one changed return expression were taken at their fixed state, the human's own line was put back the way it was before the fix, and the loop was asked to find it again from the failing test alone",
+    "recovered": 0,
+    "rows": [
+      {
+        "commit": "7bcd6d8ec33f0a614f9d017d31be4b50ece1549a",
+        "human_answer": "(",
+        "path": "src/packaging/specifiers.py",
+        "real_failures_after_reverting": 0,
+        "repo": "pypa/packaging",
+        "state": "THE_LINE_IS_NOT_COVERED_BY_A_TEST",
+        "the_bug": "(list(itertools.chain(*left_split)), list(itertools.chain(*right_split)))"
+      },
+      {
+        "commit": "1277904652c497ec84560a830a2e01d434358818",
+        "human_answer": "any(arch in allowed_archs for arch in archs)",
+        "path": "src/packaging/_manylinux.py",
+        "real_failures_after_reverting": 0,
+        "repo": "pypa/packaging",
+        "state": "THE_LINE_IS_NOT_COVERED_BY_A_TEST",
+        "the_bug": "arch in {\"x86_64\", \"aarch64\", \"ppc64\", \"ppc64le\", \"s390x\", \"loongarch64\"}"
+      },
+      {
+        "commit": "7013a6048fe13f5c937de33179763100a57d7658",
+        "human_answer": "string.replace(\".\", \"_\").replace(\"-\", \"_\").replace(\" \", \"_\")",
+        "path": "src/packaging/tags.py",
+        "real_failures_after_reverting": 0,
+        "repo": "pypa/packaging",
+        "state": "THE_LINE_IS_NOT_COVERED_BY_A_TEST",
+        "the_bug": "string.replace(\".\", \"_\").replace(\"-\", \"_\")"
+      },
+      {
+        "commit": "e184feef1a28a5c574ec41f5c263a3a573861f5a",
+        "human_answer": "shortened_prospective == split_spec",
+        "path": "packaging/specifiers.py",
+        "real_failures_after_reverting": 0,
+        "repo": "pypa/packaging",
+        "state": "THE_LINE_IS_NOT_COVERED_BY_A_TEST",
+        "the_bug": "padded_prospective == padded_spec"
+      },
+      {
+        "commit": "775e4ac9470650ba3b8d6e8463502e5b22ee2126",
+        "human_answer": "loads(s, parse_float=parse_float)  # type: ignore[arg-type]",
+        "path": "tomli/_parser.py",
+        "real_failures_after_reverting": 0,
+        "repo": "hukkin/tomli",
+        "state": "THE_LINE_IS_NOT_COVERED_BY_A_TEST",
+        "the_bug": "loads(s, parse_float=parse_float)"
+      }
+    ],
+    "why_nothing_recovered": "on this corpus either the reverted line is not covered by any test of the fix, or the answer needs a name the recorded frame does not have; both are facts about the fix, not about the loop"
+  },
+  "corpus": {
+    "attempted": 16,
+    "commits_materialised": 55,
+    "commits_with_a_real_failure": 13,
+    "construction": "each fix commit's parent is materialised with `git archive`, the fix commit's own test files are overlaid, and the repository's own pytest names the real failures: no synthetic defect is introduced anywhere",
+    "refused": 16,
+    "repositories": [
+      "pypa/packaging 21.0->24.0",
+      "pallets/itsdangerous 2.0.0->2.1.2",
+      "pypa/pyproject-hooks 0.0.1->1.2.0",
+      "hukkin/tomli 1.0.0->2.0.2"
+    ],
+    "verified": 0,
+    "verified_by_grammar": 0,
+    "verified_by_inversion": 0,
+    "why_every_attempt_refused": "18 witnesses were captured and every one is a message string the parent never produced: the real fix in this corpus invents a distinction (a new error message, a new branch) rather than selecting a different existing value. 0 of 18 recorded sites admitted any expression over the live frame that reproduces the required value, so both arms were silent for the same reason and the refusal is correct, not incidental.",
+    "witnessed": 0
+  },
+  "date": "2026-11-16",
+  "external_state": {
+    "the_discipline": "Vid2Prog (arXiv 2607.00635): recovery is trustworthy when a sound checker, not the generator, has the last word, and abstention is reported in the denominator",
+    "theory": "a concrete counterexample at a localised site is a one-input function specification; inverting by evaluation costs one frame, not a search over programs",
+    "vocabulary_from_the_artifact": "dictionary-guided HDL repair (arXiv 2609.01775): a mutation vocabulary derived from the design itself repairs classes that template repair cannot -- identifier, integer, unary operator",
+    "what_is_new_here": "nobody inverts at a localised site using the test's own required value; the frontier either enumerates a derived vocabulary or samples and verifies"
+  },
+  "incremental_spend_usd": 0,
+  "law": "P(correct action) = REACH x SEARCH x VERIFICATION. A witness inverter converts verification into a target, but it can only SELECT a value the artifact already contains; it cannot create a distinction the artifact does not have. Reach is therefore not a search problem even with a perfect oracle in hand.",
+  "model_calls": 0,
+  "network_calls": 0,
+  "receipts": {
+    "expert_fixes": "EXPERT_FIX_REPETITION_SWEBENCH_VERIFIED_20261112_V1.json",
+    "humanevalfix": "HUMANEVALFIX_REPAIR_SOLVER_20261112_V1.json",
+    "instant_environment_learning": "canonical/verification/INSTANT_LEARNING_IN_A_NEW_ENVIRONMENT_20261116_V1.json",
+    "reach_law": "canonical/verification/REACH_OF_THE_GRAMMAR_20261116_V1.json"
+  },
+  "reproduce": ".venv/bin/python canonical/swe_kernel/witness_inversion_v1.py --corpus --limit 22 --closure-limit 8 --json canonical/verification/WITNESS_INVERSION_20261116_V1.json",
+  "schema": "BRAIN_WITNESS_INVERSION_V1",
+  "the_mechanism": {
+    "alphabet": "frame locals, their non-callable attributes, 18 pure builtins, and binary arithmetic, under MAX_ATOMS=24 and MAX_CANDIDATES=400",
+    "capture": "a pytest plugin records every return and every raise inside the files the fix touched while the test runs, because after the failure no library frame remains in the traceback",
+    "control_arm": "the tree's own mutation families -- operator swap, comparison swap, literal replacement, dropped operand, call swap -- re-expressed on the same span, with the same witness, judge and budget",
+    "judge": "the real test, or nothing: an edit is written only behind the test, and the file is always restored",
+    "localisation": "by invertibility: a recorded value is a candidate site only if the value it produced is what the test complains about, and the site survives only if some expression over the site's own live frame reproduces the required value exactly",
+    "witness": "read from the failing assertion itself: the compared value for `assert <expr> == <value>`, or the required message pattern for `with pytest.raises(E, match=...)`"
+  },
+  "the_mechanism_does_close_where_the_answer_is_expressible": {
+    "evidence": "canonical/tests/test_witness_inversion_v1.py",
+    "what_it_proves": "on a real package with a real failing test, capture returns the required value 4, the site is the single return `x + 1`, the alphabet contains `x + x`, and synthesize verifies an edit with the real test and restores the file byte for byte"
+  },
+  "what_this_shows": "55 real fix commits materialised; 13 carried a test that really fails. Of 16 attempts the loop captured a live witness in 0 and verified 0. Every refusal is named and every refusal has the same cause: the required value is new content, and an inverter selects over existing content. The closure check on 5 real single-expression fixes recovered 0. So the answer to the round's question is neither agreement nor disagreement: instant learning is a real cost law and it is not a coverage law, and a perfect oracle at a localised site still cannot name an edit the artifact has no expression for."
+}

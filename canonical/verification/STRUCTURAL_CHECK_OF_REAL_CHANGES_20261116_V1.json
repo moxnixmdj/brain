@@ -1,0 +1,56 @@
+{
+  "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+  "confirmed_law_kinds": {
+    "IDEMPOTENCE": 14,
+    "TOTALITY": 174
+  },
+  "convergent_external_november_2026": {
+    "all_smoke_no_alarm": "weak or absent oracle signals in 80.2% of 86,156 agent-authored test-file patches",
+    "arxiv_2607_18057": "4,882 agent PRs: 27.0% of changed Python lines executed by existing tests; 64.8% of Python PRs have none",
+    "osworld_2_0": "verification skipping is the central failure mode of long-horizon computer use",
+    "veritas": "test-time self-improvement is gated by the verifier"
+  },
+  "date": "2026-11-16",
+  "excluded_not_refused": {
+    "organ_failed": 3,
+    "why": "the organ's bounded child raised for these modules; they are excluded from the denominator and named, not silently counted as refusals"
+  },
+  "incremental_spend_usd": 0,
+  "model_calls": 0,
+  "network_calls": 0,
+  "reproduce": ".venv/bin/python canonical/swe_kernel/structural_check_of_real_changes_v1.py --corpus --limit 40 --json canonical/verification/STRUCTURAL_CHECK_OF_REAL_CHANGES_20261116_V1.json",
+  "schema": "BRAIN_STRUCTURAL_CHECK_OF_REAL_CHANGES_V1",
+  "states": {
+    "checkable": 0,
+    "commits": 40,
+    "judged": 40,
+    "kills": 0,
+    "laws_confirmed": 188,
+    "only_totality": 2,
+    "organ_failed": 3,
+    "untested": 19,
+    "with_tests": 21
+  },
+  "the_answer_to_the_round_s_question": {
+    "claim": "instant learning and instant environment learning are solved; so give the model the most advanced coding actions, let it experience each once, learn them permanently, and all computer use is solved, permanently",
+    "verdict": "FALSE as a coverage claim; TRUE only as a cost law on the actions that are already specified.",
+    "what_to_do_instead": "construct the specification from STATED INTENT -- the sentence, the demonstration, or the witness the failure supplies -- and then let the exact verifier and the existing aimed-edit space do the rest. That is the only lever whose ceiling is still open, and it is what the next round builds.",
+    "why": "experience supplies ACTIONS. It does not supply SPECIFICATIONS. Every route by which the artifact might have supplied one has now been measured and refused, and the share of real work whose specification arrives with the work is the ceiling: 4.814% is reproduced by an earlier fix, and only ~27% of changed Python lines are executed by any existing test (arXiv 2607.18057)."
+  },
+  "the_instrument": "the tree's own structural specifier (canonical/swe_kernel/specification_from_structure_v1.py, unchanged): laws derived from names, arities, annotations, inverse pairs and stdlib references; confirmed by executing the module as it stands; VACUOUS and REFUTED refused. The parent of each real commit is put in front of that judge as a variant. Reused, not rebuilt: derive, build_grid, child_payload, run_child are the organ's own functions, and the states are materialised through the witness-inversion seam.",
+  "the_instrument_is_proven_to_kill": {
+    "idempotence": "a parent whose normalize is not a fixed point is rejected by IDEMPOTENCE:normalize",
+    "set_preserved": "a parent whose dedupe returns [] is rejected by SET_PRESERVED:dedupe",
+    "totality": "a parent that raises instead of returning is classified ONLY_TOTALITY_OR_UNREADABLE and is counted as zero law kills",
+    "where": "canonical/tests/test_structural_check_of_real_changes_v1.py"
+  },
+  "the_question": "can a specification read off a module's OWN STRUCTURE judge a real change, when no test was written and no intent was stated?",
+  "the_result": "0 of 40 real commits, and 0 of the 19 that ship no test, were rejected by any law derived from the new code's own structure. The laws were not vacuous in the arithmetic sense -- 188 were confirmed -- but 174 of them are bare TOTALITY and 14 are IDEMPOTENCE: structure can barely STATE a law about real library code, and where it can, the real change does not violate it.",
+  "three_routes_measured_three_zeros": {
+    "behaviour_and_behavioural_probing": "13 drivable unguarded commits, 0 stable differential pins; the artifact's own doctests discriminate 0 times (CHECKABILITY_BY_DIFFERENTIAL_PIN_20261116_V1)",
+    "reading": "three independent manufacturability routes, each built and each refused by measurement. What they have in common is not a missing feature: real work EXTENDS a specification rather than violating a property, and a specification that has not been stated cannot be derived from the artifact that has not got it yet.",
+    "structure_and_generic_laws": "40 commits, 188 confirmed laws, 0 kills (this receipt)",
+    "vocabulary_and_inversion": "18 witnesses captured on real fixes, 0 invertible: the demanded content did not exist in the artifact (WITNESS_INVERSION_20261116_V1)"
+  },
+  "what_a_kill_is": "EFFECT CERTIFICATION, NEVER INTENT VERIFICATION. A law confirmed on the fixed code rejects the parent because the change altered structure-implied behaviour. It does not say the change is what anyone asked for; a wrong change would be confirmed and its parent rejected all the same."
+}

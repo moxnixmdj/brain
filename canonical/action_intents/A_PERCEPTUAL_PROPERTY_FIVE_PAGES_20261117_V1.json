@@ -129,7 +129,7 @@
  },
  "next_step": "Merge once. Then rank-3 continues with the next coverage classes in size order (FIND_BY_CONTENT 4, WORLD_KNOWLEDGE 3, CONTINUOUS_TO_POSITION 3), each with the same pass-or-terminal-account rule; the send-6 thesis answer cites the merged verdict receipt and is not re-derived.",
  "recursive_obs": {
-  "canonical_base_commit": "c773c9caa07ef00dd07941535c1e28f8549d91b3",
+  "canonical_base_commit": "6c0d26ca731e78fbc57207d313e45e4b34f68039",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "re-testing the two solved pages as if their plans were open",
