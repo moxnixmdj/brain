@@ -32,6 +32,10 @@ def _report() -> dict:
     return json.loads(RECEIPT.read_text(encoding="utf-8"))
 
 
+def _live() -> dict:
+    return supply.measure()
+
+
 def test_the_corpus_is_real_history_and_pinned() -> None:
     report = _report()
     assert report["corpus"]["records"] == 393
@@ -106,3 +110,63 @@ def test_induce_reports_a_value_the_demonstration_cannot_supply() -> None:
     result = supply.induce(demo, target)
     assert result["verdict"] == "constant_differs"
     assert result["lines"] == ['version = "1.1"']
+
+
+def test_derivation_carries_the_demonstrations_own_arithmetic_onto_the_target() -> None:
+    """1.0 -> 1.1 taught at 2.0 must give 2.1, and the value must count as derived, not copied."""
+    demo = supply.Site("a.py", ['version = "1.0"'], ['version = "1.1"'])
+    target = supply.Site("b.py", ['version = "2.0"'], ['version = "2.1"'])
+    copied = supply.induce(demo, target)
+    derived = supply.induce(demo, target, derive=True)
+    assert copied["verdict"] == "constant_differs" and copied["derived"] == 0
+    assert derived["verdict"] == "exact"
+    assert derived["lines"] == ['version = "2.1"']
+    assert derived["derived"] == 1
+    assert not any(any(flags) for flags in derived["copied"])
+
+
+def test_a_contrast_only_licenses_the_shift_it_can_reproduce() -> None:
+    demo = supply.Site("a.py", ['version = "1.0"'], ['version = "1.1"'])
+    agreeing = supply.Site("c.py", ['version = "2.0"'], ['version = "2.1"'])
+    disagreeing = supply.Site("c.py", ['version = "2.0"'], ['version = "2.9"'])
+    numeric = next(i for i, (_kind, text) in enumerate(demo.holes_removed)
+                   if supply._numeric(text))
+    demo_base, demo_value = demo.holes_removed[numeric][1], demo.holes_added[numeric][1]
+    assert supply._contrast_agrees(agreeing, demo_base, demo_value)
+    assert not supply._contrast_agrees(disagreeing, demo_base, demo_value)
+
+
+def test_derived_values_are_right_only_a_fifth_of_the_time_on_real_history() -> None:
+    """The value layer is the hole: firing on 42 of 142 inductive pairs, right on 9 of them."""
+    loose = _live()["by_rung"]["shape_only"]
+    assert loose["derive_arm"]["pairs_where_derivation_fired"] == 42
+    assert loose["derive_arm"]["pairs_where_derivation_was_right"] == 9
+    assert loose["contrast_arm"]["pairs_where_derivation_fired"] == 15
+    assert loose["contrast_arm"]["pairs_where_derivation_was_right"] == 6
+    # Derivation barely moves the aggregate: the whole gain is a handful of pairs, and it creates
+    # new wrong values (rebound_wrong 20 -> 33) where copying happened to be right.
+    assert loose["outcomes"]["constant_differs"] == 31
+    assert loose["derive_arm"]["outcomes"]["constant_differs"] == 12
+    assert loose["derive_arm"]["outcomes"]["rebound_wrong"] > loose["outcomes"]["rebound_wrong"]
+    # A second demonstration doubles the precision of a derived value and makes the system abstain
+    # more: the contrast is the acquisition unit, and even it leaves the value unidentifiable.
+    assert loose["contrast_arm"]["pairs_where_derivation_fired"] < \
+        loose["derive_arm"]["pairs_where_derivation_fired"]
+    assert (loose["contrast_arm"]["pairs_where_derivation_was_right"]
+            / loose["contrast_arm"]["pairs_where_derivation_fired"]) > 1.5 * (
+        loose["derive_arm"]["pairs_where_derivation_was_right"]
+        / loose["derive_arm"]["pairs_where_derivation_fired"])
+
+
+def test_the_derivation_receipt_is_the_run_it_claims_to_be() -> None:
+    root = pathlib.Path(__file__).resolve().parents[2]
+    receipt = root / "canonical/verification/SYSTEMATIC_EDIT_DERIVATION_20261116_V1.json"
+    payload = json.loads(receipt.read_text(encoding="utf-8"))
+    assert payload["corpus"]["sha256"].startswith("b47d9c9c23e641a8")
+    live = _live()
+    for arm in ("derive_arm", "contrast_arm"):
+        assert payload["by_rung"]["shape_only"][arm]["pairs_where_derivation_fired"] == \
+            live["by_rung"]["shape_only"][arm]["pairs_where_derivation_fired"]
+        assert payload["by_rung"]["shape_only"][arm]["pairs_where_derivation_was_right"] == \
+            live["by_rung"]["shape_only"][arm]["pairs_where_derivation_was_right"]
+    assert payload["by_rung"]["shape_only"]["outcomes"]["verbatim"] == 103

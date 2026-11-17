@@ -1,0 +1,1525 @@
+{
+  "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+  "by_rung": {
+    "context_any": {
+      "by_demonstration_size": {
+        "2": {
+          "determined": 93,
+          "lucky": 16,
+          "pairs": 138,
+          "wrong": 29
+        },
+        "3": {
+          "determined": 8,
+          "lucky": 0,
+          "pairs": 10,
+          "wrong": 2
+        },
+        "4": {
+          "determined": 9,
+          "lucky": 0,
+          "pairs": 12,
+          "wrong": 3
+        },
+        "5": {
+          "determined": 3,
+          "lucky": 0,
+          "pairs": 14,
+          "wrong": 11
+        },
+        "6": {
+          "determined": 1,
+          "lucky": 0,
+          "pairs": 3,
+          "wrong": 2
+        }
+      },
+      "by_repo": {
+        "pallets/click": {
+          "commits": 49,
+          "with_siblings": 4
+        },
+        "pallets/itsdangerous": {
+          "commits": 55,
+          "with_siblings": 12
+        },
+        "pallets/markupsafe": {
+          "commits": 69,
+          "with_siblings": 13
+        },
+        "pypa/packaging": {
+          "commits": 66,
+          "with_siblings": 9
+        },
+        "pypa/pyproject-hooks": {
+          "commits": 29,
+          "with_siblings": 4
+        }
+      },
+      "commits_scanned": 268,
+      "commits_where_the_demonstration_forced_the_edit": 4,
+      "commits_with_sibling_sites": 42,
+      "context_both_sides": false,
+      "context_lines": 1,
+      "contrast_arm": {
+        "by_demonstration_size": {
+          "2": {
+            "determined": 99,
+            "lucky": 14,
+            "pairs": 138,
+            "wrong": 25
+          },
+          "3": {
+            "determined": 8,
+            "lucky": 0,
+            "pairs": 10,
+            "wrong": 2
+          },
+          "4": {
+            "determined": 9,
+            "lucky": 0,
+            "pairs": 12,
+            "wrong": 3
+          },
+          "5": {
+            "determined": 3,
+            "lucky": 0,
+            "pairs": 14,
+            "wrong": 11
+          },
+          "6": {
+            "determined": 1,
+            "lucky": 0,
+            "pairs": 3,
+            "wrong": 2
+          }
+        },
+        "determined": 120,
+        "determined_share": 0.678,
+        "examples": [
+          {
+            "demo": "tests/test_specifiers.py",
+            "demo_added": [
+              "        assert repr(spec) == f\"<Specifier({expected!r})>\""
+            ],
+            "demo_lines": [
+              "        assert repr(spec) == \"<Specifier({!r})>\".format(expected)"
+            ],
+            "predicted": [
+              "        assert repr(spec) == f\"<Specifier({expected!r})>\""
+            ],
+            "target": "tests/test_specifiers.py",
+            "target_added": [
+              "        assert repr(spec) == f\"<SpecifierSet({expected!r})>\""
+            ],
+            "target_lines": [
+              "        assert repr(spec) == \"<SpecifierSet({!r})>\".format(expected)"
+            ],
+            "verdict": "constant_differs"
+          },
+          {
+            "demo": "packaging/_parser.py",
+            "demo_added": [
+              "            \"<=, <, !=, ==, >=, >, ~=, ===, in, not in\""
+            ],
+            "demo_lines": [
+              "            \"<=, <, !=, ==, >=, >, ~=, ===, not, not in\""
+            ],
+            "predicted": [
+              "            \"<=, <, !=, ==, >=, >, ~=, ===, in, not in\""
+            ],
+            "target": "tests/test_requirements.py",
+            "target_added": [
+              "            \"in, not in\\n\""
+            ],
+            "target_lines": [
+              "            \"not, not in\\n\""
+            ],
+            "verdict": "constant_differs"
+          },
+          {
+            "demo": "packaging/_parser.py",
+            "demo_added": [
+              "            \"<=, <, !=, ==, >=, >, ~=, ===, in, not in\""
+            ],
+            "demo_lines": [
+              "            \"<=, <, !=, ==, >=, >, ~=, ===, not, not in\""
+            ],
+            "predicted": [
+              "            \"<=, <, !=, ==, >=, >, ~=, ===, in, not in\""
+            ],
+            "target": "tests/test_requirements.py",
+            "target_added": [
+              "            \"in, not in\\n\""
+            ],
+            "target_lines": [
+              "            \"not, not in\\n\""
+            ],
+            "verdict": "constant_differs"
+          },
+          {
+            "demo": "packaging/_parser.py",
+            "demo_added": [
+              "            \"<=, <, !=, ==, >=, >, ~=, ===, in, not in\""
+            ],
+            "demo_lines": [
+              "            \"<=, <, !=, ==, >=, >, ~=, ===, not, not in\""
+            ],
+            "predicted": [
+              "            \"<=, <, !=, ==, >=, >, ~=, ===, in, not in\""
+            ],
+            "target": "tests/test_requirements.py",
+            "target_added": [
+              "            \"in, not in\\n\""
+            ],
+            "target_lines": [
+              "            \"not, not in\\n\""
+            ],
+            "verdict": "constant_differs"
+          },
+          {
+            "demo": "tests/test_requirements.py",
+            "demo_added": [
+              "            \"Expected matching RIGHT_PARENTHESIS for LEFT_PARENTHESIS, \"",
+              "            \"after version specifier\\n\""
+            ],
+            "demo_lines": [
+              "            \"Expected closing RIGHT_PARENTHESIS\\n\""
+            ],
+            "predicted": [
+              "            \"Expected matching RIGHT_PARENTHESIS for LEFT_PARENTHESIS, \"",
+              "            \"Expected matching RIGHT_PARENTHESIS for LEFT_PARENTHESIS, \""
+            ],
+            "target": "tests/test_requirements.py",
+            "target_added": [
+              "            \"Expected matching RIGHT_BRACKET for LEFT_BRACKET, \"",
+              "            \"after extras\\n\""
+            ],
+            "target_lines": [
+              "            \"Expected closing RIGHT_BRACKET\\n\""
+            ],
+            "verdict": "constant_differs"
+          }
+        ],
+        "lucky": 14,
+        "lucky_share": 0.0791,
+        "outcomes": {
+          "conflict": 0,
+          "constant_differs": 14,
+          "exact": 51,
+          "mismatch": 13,
+          "rebound_wrong": 16,
+          "verbatim": 83
+        },
+        "pairs": 177,
+        "pairs_where_derivation_fired": 13,
+        "pairs_where_derivation_was_right": 6,
+        "wrong": 43,
+        "wrong_share": 0.2429
+      },
+      "derive_arm": {
+        "by_demonstration_size": {
+          "2": {
+            "determined": 101,
+            "lucky": 13,
+            "pairs": 138,
+            "wrong": 24
+          },
+          "3": {
+            "determined": 8,
+            "lucky": 0,
+            "pairs": 10,
+            "wrong": 2
+          },
+          "4": {
+            "determined": 9,
+            "lucky": 0,
+            "pairs": 12,
+            "wrong": 3
+          },
+          "5": {
+            "determined": 3,
+            "lucky": 0,
+            "pairs": 14,
+            "wrong": 11
+          },
+          "6": {
+            "determined": 1,
+            "lucky": 0,
+            "pairs": 3,
+            "wrong": 2
+          }
+        },
+        "determined": 122,
+        "determined_share": 0.6893,
+        "examples": [
+          {
+            "demo": "tests/test_specifiers.py",
+            "demo_added": [
+              "        assert repr(spec) == f\"<Specifier({expected!r})>\""
+            ],
+            "demo_lines": [
+              "        assert repr(spec) == \"<Specifier({!r})>\".format(expected)"
+            ],
+            "predicted": [
+              "        assert repr(spec) == f\"<Specifier({expected!r})>\""
+            ],
+            "target": "tests/test_specifiers.py",
+            "target_added": [
+              "        assert repr(spec) == f\"<SpecifierSet({expected!r})>\""
+            ],
+            "target_lines": [
+              "        assert repr(spec) == \"<SpecifierSet({!r})>\".format(expected)"
+            ],
+            "verdict": "constant_differs"
+          },
+          {
+            "demo": "packaging/_parser.py",
+            "demo_added": [
+              "            \"<=, <, !=, ==, >=, >, ~=, ===, in, not in\""
+            ],
+            "demo_lines": [
+              "            \"<=, <, !=, ==, >=, >, ~=, ===, not, not in\""
+            ],
+            "predicted": [
+              "            \"<=, <, !=, ==, >=, >, ~=, ===, in, not in\""
+            ],
+            "target": "tests/test_requirements.py",
+            "target_added": [
+              "            \"in, not in\\n\""
+            ],
+            "target_lines": [
+              "            \"not, not in\\n\""
+            ],
+            "verdict": "constant_differs"
+          },
+          {
+            "demo": "packaging/_parser.py",
+            "demo_added": [
+              "            \"<=, <, !=, ==, >=, >, ~=, ===, in, not in\""
+            ],
+            "demo_lines": [
+              "            \"<=, <, !=, ==, >=, >, ~=, ===, not, not in\""
+            ],
+            "predicted": [
+              "            \"<=, <, !=, ==, >=, >, ~=, ===, in, not in\""
+            ],
+            "target": "tests/test_requirements.py",
+            "target_added": [
+              "            \"in, not in\\n\""
+            ],
+            "target_lines": [
+              "            \"not, not in\\n\""
+            ],
+            "verdict": "constant_differs"
+          },
+          {
+            "demo": "packaging/_parser.py",
+            "demo_added": [
+              "            \"<=, <, !=, ==, >=, >, ~=, ===, in, not in\""
+            ],
+            "demo_lines": [
+              "            \"<=, <, !=, ==, >=, >, ~=, ===, not, not in\""
+            ],
+            "predicted": [
+              "            \"<=, <, !=, ==, >=, >, ~=, ===, in, not in\""
+            ],
+            "target": "tests/test_requirements.py",
+            "target_added": [
+              "            \"in, not in\\n\""
+            ],
+            "target_lines": [
+              "            \"not, not in\\n\""
+            ],
+            "verdict": "constant_differs"
+          },
+          {
+            "demo": "tests/test_requirements.py",
+            "demo_added": [
+              "            \"Expected matching RIGHT_PARENTHESIS for LEFT_PARENTHESIS, \"",
+              "            \"after version specifier\\n\""
+            ],
+            "demo_lines": [
+              "            \"Expected closing RIGHT_PARENTHESIS\\n\""
+            ],
+            "predicted": [
+              "            \"Expected matching RIGHT_PARENTHESIS for LEFT_PARENTHESIS, \"",
+              "            \"Expected matching RIGHT_PARENTHESIS for LEFT_PARENTHESIS, \""
+            ],
+            "target": "tests/test_requirements.py",
+            "target_added": [
+              "            \"Expected matching RIGHT_BRACKET for LEFT_BRACKET, \"",
+              "            \"after extras\\n\""
+            ],
+            "target_lines": [
+              "            \"Expected closing RIGHT_BRACKET\\n\""
+            ],
+            "verdict": "constant_differs"
+          }
+        ],
+        "lucky": 13,
+        "lucky_share": 0.0734,
+        "outcomes": {
+          "conflict": 0,
+          "constant_differs": 9,
+          "exact": 52,
+          "mismatch": 13,
+          "rebound_wrong": 20,
+          "verbatim": 83
+        },
+        "pairs": 177,
+        "pairs_where_derivation_fired": 28,
+        "pairs_where_derivation_was_right": 8,
+        "wrong": 42,
+        "wrong_share": 0.2373
+      },
+      "determined": 114,
+      "determined_commit_share": 0.0952,
+      "determined_share": 0.6441,
+      "examples": [
+        {
+          "demo": "tests/test_specifiers.py",
+          "demo_added": [
+            "        assert repr(spec) == f\"<Specifier({expected!r})>\""
+          ],
+          "demo_lines": [
+            "        assert repr(spec) == \"<Specifier({!r})>\".format(expected)"
+          ],
+          "predicted": [
+            "        assert repr(spec) == f\"<Specifier({expected!r})>\""
+          ],
+          "target": "tests/test_specifiers.py",
+          "target_added": [
+            "        assert repr(spec) == f\"<SpecifierSet({expected!r})>\""
+          ],
+          "target_lines": [
+            "        assert repr(spec) == \"<SpecifierSet({!r})>\".format(expected)"
+          ],
+          "verdict": "constant_differs"
+        },
+        {
+          "demo": "packaging/_parser.py",
+          "demo_added": [
+            "            \"<=, <, !=, ==, >=, >, ~=, ===, in, not in\""
+          ],
+          "demo_lines": [
+            "            \"<=, <, !=, ==, >=, >, ~=, ===, not, not in\""
+          ],
+          "predicted": [
+            "            \"<=, <, !=, ==, >=, >, ~=, ===, in, not in\""
+          ],
+          "target": "tests/test_requirements.py",
+          "target_added": [
+            "            \"in, not in\\n\""
+          ],
+          "target_lines": [
+            "            \"not, not in\\n\""
+          ],
+          "verdict": "constant_differs"
+        },
+        {
+          "demo": "packaging/_parser.py",
+          "demo_added": [
+            "            \"<=, <, !=, ==, >=, >, ~=, ===, in, not in\""
+          ],
+          "demo_lines": [
+            "            \"<=, <, !=, ==, >=, >, ~=, ===, not, not in\""
+          ],
+          "predicted": [
+            "            \"<=, <, !=, ==, >=, >, ~=, ===, in, not in\""
+          ],
+          "target": "tests/test_requirements.py",
+          "target_added": [
+            "            \"in, not in\\n\""
+          ],
+          "target_lines": [
+            "            \"not, not in\\n\""
+          ],
+          "verdict": "constant_differs"
+        },
+        {
+          "demo": "packaging/_parser.py",
+          "demo_added": [
+            "            \"<=, <, !=, ==, >=, >, ~=, ===, in, not in\""
+          ],
+          "demo_lines": [
+            "            \"<=, <, !=, ==, >=, >, ~=, ===, not, not in\""
+          ],
+          "predicted": [
+            "            \"<=, <, !=, ==, >=, >, ~=, ===, in, not in\""
+          ],
+          "target": "tests/test_requirements.py",
+          "target_added": [
+            "            \"in, not in\\n\""
+          ],
+          "target_lines": [
+            "            \"not, not in\\n\""
+          ],
+          "verdict": "constant_differs"
+        },
+        {
+          "demo": "tests/test_requirements.py",
+          "demo_added": [
+            "            \"Expected matching RIGHT_PARENTHESIS for LEFT_PARENTHESIS, \"",
+            "            \"after version specifier\\n\""
+          ],
+          "demo_lines": [
+            "            \"Expected closing RIGHT_PARENTHESIS\\n\""
+          ],
+          "predicted": [
+            "            \"Expected matching RIGHT_PARENTHESIS for LEFT_PARENTHESIS, \"",
+            "            \"Expected matching RIGHT_PARENTHESIS for LEFT_PARENTHESIS, \""
+          ],
+          "target": "tests/test_requirements.py",
+          "target_added": [
+            "            \"Expected matching RIGHT_BRACKET for LEFT_BRACKET, \"",
+            "            \"after extras\\n\""
+          ],
+          "target_lines": [
+            "            \"Expected closing RIGHT_BRACKET\\n\""
+          ],
+          "verdict": "constant_differs"
+        }
+      ],
+      "lucky": 16,
+      "lucky_share": 0.0904,
+      "outcomes": {
+        "conflict": 0,
+        "constant_differs": 20,
+        "exact": 47,
+        "mismatch": 13,
+        "rebound_wrong": 14,
+        "verbatim": 83
+      },
+      "pairs": 177,
+      "pairs_where_derivation_fired": 0,
+      "pairs_where_derivation_was_right": 0,
+      "supply_share": 0.1567,
+      "wrong": 47,
+      "wrong_share": 0.2655
+    },
+    "context_both": {
+      "by_demonstration_size": {
+        "2": {
+          "determined": 28,
+          "lucky": 4,
+          "pairs": 37,
+          "wrong": 5
+        },
+        "3": {
+          "determined": 8,
+          "lucky": 0,
+          "pairs": 10,
+          "wrong": 2
+        },
+        "4": {
+          "determined": 6,
+          "lucky": 0,
+          "pairs": 6,
+          "wrong": 0
+        },
+        "5": {
+          "determined": 1,
+          "lucky": 0,
+          "pairs": 6,
+          "wrong": 5
+        },
+        "6": {
+          "determined": 1,
+          "lucky": 0,
+          "pairs": 1,
+          "wrong": 0
+        }
+      },
+      "by_repo": {
+        "pallets/click": {
+          "commits": 49,
+          "with_siblings": 2
+        },
+        "pallets/itsdangerous": {
+          "commits": 55,
+          "with_siblings": 11
+        },
+        "pallets/markupsafe": {
+          "commits": 69,
+          "with_siblings": 5
+        },
+        "pypa/packaging": {
+          "commits": 66,
+          "with_siblings": 9
+        },
+        "pypa/pyproject-hooks": {
+          "commits": 29,
+          "with_siblings": 4
+        }
+      },
+      "commits_scanned": 268,
+      "commits_where_the_demonstration_forced_the_edit": 3,
+      "commits_with_sibling_sites": 31,
+      "context_both_sides": true,
+      "context_lines": 1,
+      "contrast_arm": {
+        "by_demonstration_size": {
+          "2": {
+            "determined": 31,
+            "lucky": 2,
+            "pairs": 37,
+            "wrong": 4
+          },
+          "3": {
+            "determined": 8,
+            "lucky": 0,
+            "pairs": 10,
+            "wrong": 2
+          },
+          "4": {
+            "determined": 6,
+            "lucky": 0,
+            "pairs": 6,
+            "wrong": 0
+          },
+          "5": {
+            "determined": 1,
+            "lucky": 0,
+            "pairs": 6,
+            "wrong": 5
+          },
+          "6": {
+            "determined": 1,
+            "lucky": 0,
+            "pairs": 1,
+            "wrong": 0
+          }
+        },
+        "determined": 47,
+        "determined_share": 0.7833,
+        "examples": [
+          {
+            "demo": "tests/test_specifiers.py",
+            "demo_added": [
+              "        assert repr(spec) == f\"<Specifier({expected!r})>\""
+            ],
+            "demo_lines": [
+              "        assert repr(spec) == \"<Specifier({!r})>\".format(expected)"
+            ],
+            "predicted": [
+              "        assert repr(spec) == f\"<Specifier({expected!r})>\""
+            ],
+            "target": "tests/test_specifiers.py",
+            "target_added": [
+              "        assert repr(spec) == f\"<SpecifierSet({expected!r})>\""
+            ],
+            "target_lines": [
+              "        assert repr(spec) == \"<SpecifierSet({!r})>\".format(expected)"
+            ],
+            "verdict": "constant_differs"
+          },
+          {
+            "demo": "tests/test_requirements.py",
+            "demo_added": [
+              "            \"Expected matching RIGHT_PARENTHESIS for LEFT_PARENTHESIS, \"",
+              "            \"after version specifier\\n\""
+            ],
+            "demo_lines": [
+              "            \"Expected closing RIGHT_PARENTHESIS\\n\""
+            ],
+            "predicted": [
+              "            \"Expected matching RIGHT_PARENTHESIS for LEFT_PARENTHESIS, \"",
+              "            \"Expected matching RIGHT_PARENTHESIS for LEFT_PARENTHESIS, \""
+            ],
+            "target": "tests/test_requirements.py",
+            "target_added": [
+              "            \"Expected matching RIGHT_BRACKET for LEFT_BRACKET, \"",
+              "            \"after extras\\n\""
+            ],
+            "target_lines": [
+              "            \"Expected closing RIGHT_BRACKET\\n\""
+            ],
+            "verdict": "constant_differs"
+          },
+          {
+            "demo": "tests/test_requirements.py",
+            "demo_added": [
+              "            \"Expected matching RIGHT_PARENTHESIS for LEFT_PARENTHESIS, \"",
+              "            \"after version specifier\\n\""
+            ],
+            "demo_lines": [
+              "            \"Expected closing RIGHT_PARENTHESIS\\n\""
+            ],
+            "predicted": [
+              "            \"Expected matching RIGHT_PARENTHESIS for LEFT_PARENTHESIS, \"",
+              "            \"Expected matching RIGHT_PARENTHESIS for LEFT_PARENTHESIS, \""
+            ],
+            "target": "tests/test_requirements.py",
+            "target_added": [
+              "            \"Expected matching RIGHT_BRACKET for LEFT_BRACKET, \"",
+              "            \"after extras\\n\""
+            ],
+            "target_lines": [
+              "            \"Expected closing RIGHT_BRACKET\\n\""
+            ],
+            "verdict": "constant_differs"
+          },
+          {
+            "demo": "requirements/dev.txt",
+            "demo_added": [
+              "attrs==20.3.0"
+            ],
+            "demo_lines": [
+              "attrs==19.3.0"
+            ],
+            "predicted": [
+              "urllib3==2.25.9"
+            ],
+            "target": "requirements/docs.txt",
+            "target_added": [
+              "urllib3==1.26.3"
+            ],
+            "target_lines": [
+              "urllib3==1.25.9"
+            ],
+            "verdict": "rebound_wrong"
+          },
+          {
+            "demo": "requirements/dev.txt",
+            "demo_added": [
+              "pyright==1.1.386"
+            ],
+            "demo_lines": [
+              "pyright==1.1.385"
+            ],
+            "predicted": [
+              "mypy==1.12.1"
+            ],
+            "target": "requirements/typing.txt",
+            "target_added": [
+              "mypy==1.13.0"
+            ],
+            "target_lines": [
+              "mypy==1.12.0"
+            ],
+            "verdict": "rebound_wrong"
+          }
+        ],
+        "lucky": 2,
+        "lucky_share": 0.0333,
+        "outcomes": {
+          "conflict": 0,
+          "constant_differs": 3,
+          "exact": 8,
+          "mismatch": 5,
+          "rebound_wrong": 3,
+          "verbatim": 41
+        },
+        "pairs": 60,
+        "pairs_where_derivation_fired": 5,
+        "pairs_where_derivation_was_right": 3,
+        "wrong": 11,
+        "wrong_share": 0.1833
+      },
+      "derive_arm": {
+        "by_demonstration_size": {
+          "2": {
+            "determined": 31,
+            "lucky": 2,
+            "pairs": 37,
+            "wrong": 4
+          },
+          "3": {
+            "determined": 8,
+            "lucky": 0,
+            "pairs": 10,
+            "wrong": 2
+          },
+          "4": {
+            "determined": 6,
+            "lucky": 0,
+            "pairs": 6,
+            "wrong": 0
+          },
+          "5": {
+            "determined": 1,
+            "lucky": 0,
+            "pairs": 6,
+            "wrong": 5
+          },
+          "6": {
+            "determined": 1,
+            "lucky": 0,
+            "pairs": 1,
+            "wrong": 0
+          }
+        },
+        "determined": 47,
+        "determined_share": 0.7833,
+        "examples": [
+          {
+            "demo": "tests/test_specifiers.py",
+            "demo_added": [
+              "        assert repr(spec) == f\"<Specifier({expected!r})>\""
+            ],
+            "demo_lines": [
+              "        assert repr(spec) == \"<Specifier({!r})>\".format(expected)"
+            ],
+            "predicted": [
+              "        assert repr(spec) == f\"<Specifier({expected!r})>\""
+            ],
+            "target": "tests/test_specifiers.py",
+            "target_added": [
+              "        assert repr(spec) == f\"<SpecifierSet({expected!r})>\""
+            ],
+            "target_lines": [
+              "        assert repr(spec) == \"<SpecifierSet({!r})>\".format(expected)"
+            ],
+            "verdict": "constant_differs"
+          },
+          {
+            "demo": "tests/test_requirements.py",
+            "demo_added": [
+              "            \"Expected matching RIGHT_PARENTHESIS for LEFT_PARENTHESIS, \"",
+              "            \"after version specifier\\n\""
+            ],
+            "demo_lines": [
+              "            \"Expected closing RIGHT_PARENTHESIS\\n\""
+            ],
+            "predicted": [
+              "            \"Expected matching RIGHT_PARENTHESIS for LEFT_PARENTHESIS, \"",
+              "            \"Expected matching RIGHT_PARENTHESIS for LEFT_PARENTHESIS, \""
+            ],
+            "target": "tests/test_requirements.py",
+            "target_added": [
+              "            \"Expected matching RIGHT_BRACKET for LEFT_BRACKET, \"",
+              "            \"after extras\\n\""
+            ],
+            "target_lines": [
+              "            \"Expected closing RIGHT_BRACKET\\n\""
+            ],
+            "verdict": "constant_differs"
+          },
+          {
+            "demo": "tests/test_requirements.py",
+            "demo_added": [
+              "            \"Expected matching RIGHT_PARENTHESIS for LEFT_PARENTHESIS, \"",
+              "            \"after version specifier\\n\""
+            ],
+            "demo_lines": [
+              "            \"Expected closing RIGHT_PARENTHESIS\\n\""
+            ],
+            "predicted": [
+              "            \"Expected matching RIGHT_PARENTHESIS for LEFT_PARENTHESIS, \"",
+              "            \"Expected matching RIGHT_PARENTHESIS for LEFT_PARENTHESIS, \""
+            ],
+            "target": "tests/test_requirements.py",
+            "target_added": [
+              "            \"Expected matching RIGHT_BRACKET for LEFT_BRACKET, \"",
+              "            \"after extras\\n\""
+            ],
+            "target_lines": [
+              "            \"Expected closing RIGHT_BRACKET\\n\""
+            ],
+            "verdict": "constant_differs"
+          },
+          {
+            "demo": "requirements/dev.txt",
+            "demo_added": [
+              "attrs==20.3.0"
+            ],
+            "demo_lines": [
+              "attrs==19.3.0"
+            ],
+            "predicted": [
+              "urllib3==2.25.9"
+            ],
+            "target": "requirements/docs.txt",
+            "target_added": [
+              "urllib3==1.26.3"
+            ],
+            "target_lines": [
+              "urllib3==1.25.9"
+            ],
+            "verdict": "rebound_wrong"
+          },
+          {
+            "demo": "requirements/dev.txt",
+            "demo_added": [
+              "pyright==1.1.386"
+            ],
+            "demo_lines": [
+              "pyright==1.1.385"
+            ],
+            "predicted": [
+              "mypy==1.12.1"
+            ],
+            "target": "requirements/typing.txt",
+            "target_added": [
+              "mypy==1.13.0"
+            ],
+            "target_lines": [
+              "mypy==1.12.0"
+            ],
+            "verdict": "rebound_wrong"
+          }
+        ],
+        "lucky": 2,
+        "lucky_share": 0.0333,
+        "outcomes": {
+          "conflict": 0,
+          "constant_differs": 3,
+          "exact": 8,
+          "mismatch": 5,
+          "rebound_wrong": 3,
+          "verbatim": 41
+        },
+        "pairs": 60,
+        "pairs_where_derivation_fired": 6,
+        "pairs_where_derivation_was_right": 3,
+        "wrong": 11,
+        "wrong_share": 0.1833
+      },
+      "determined": 44,
+      "determined_commit_share": 0.0968,
+      "determined_share": 0.7333,
+      "examples": [
+        {
+          "demo": "tests/test_specifiers.py",
+          "demo_added": [
+            "        assert repr(spec) == f\"<Specifier({expected!r})>\""
+          ],
+          "demo_lines": [
+            "        assert repr(spec) == \"<Specifier({!r})>\".format(expected)"
+          ],
+          "predicted": [
+            "        assert repr(spec) == f\"<Specifier({expected!r})>\""
+          ],
+          "target": "tests/test_specifiers.py",
+          "target_added": [
+            "        assert repr(spec) == f\"<SpecifierSet({expected!r})>\""
+          ],
+          "target_lines": [
+            "        assert repr(spec) == \"<SpecifierSet({!r})>\".format(expected)"
+          ],
+          "verdict": "constant_differs"
+        },
+        {
+          "demo": "tests/test_requirements.py",
+          "demo_added": [
+            "            \"Expected matching RIGHT_PARENTHESIS for LEFT_PARENTHESIS, \"",
+            "            \"after version specifier\\n\""
+          ],
+          "demo_lines": [
+            "            \"Expected closing RIGHT_PARENTHESIS\\n\""
+          ],
+          "predicted": [
+            "            \"Expected matching RIGHT_PARENTHESIS for LEFT_PARENTHESIS, \"",
+            "            \"Expected matching RIGHT_PARENTHESIS for LEFT_PARENTHESIS, \""
+          ],
+          "target": "tests/test_requirements.py",
+          "target_added": [
+            "            \"Expected matching RIGHT_BRACKET for LEFT_BRACKET, \"",
+            "            \"after extras\\n\""
+          ],
+          "target_lines": [
+            "            \"Expected closing RIGHT_BRACKET\\n\""
+          ],
+          "verdict": "constant_differs"
+        },
+        {
+          "demo": "tests/test_requirements.py",
+          "demo_added": [
+            "            \"Expected matching RIGHT_PARENTHESIS for LEFT_PARENTHESIS, \"",
+            "            \"after version specifier\\n\""
+          ],
+          "demo_lines": [
+            "            \"Expected closing RIGHT_PARENTHESIS\\n\""
+          ],
+          "predicted": [
+            "            \"Expected matching RIGHT_PARENTHESIS for LEFT_PARENTHESIS, \"",
+            "            \"Expected matching RIGHT_PARENTHESIS for LEFT_PARENTHESIS, \""
+          ],
+          "target": "tests/test_requirements.py",
+          "target_added": [
+            "            \"Expected matching RIGHT_BRACKET for LEFT_BRACKET, \"",
+            "            \"after extras\\n\""
+          ],
+          "target_lines": [
+            "            \"Expected closing RIGHT_BRACKET\\n\""
+          ],
+          "verdict": "constant_differs"
+        },
+        {
+          "demo": "requirements/tests.txt",
+          "demo_added": [
+            "pytest==8.2.2"
+          ],
+          "demo_lines": [
+            "pytest==8.2.1"
+          ],
+          "predicted": [
+            "mypy==1.10.2"
+          ],
+          "target": "requirements/typing.txt",
+          "target_added": [
+            "mypy==1.10.1"
+          ],
+          "target_lines": [
+            "mypy==1.10.0"
+          ],
+          "verdict": "constant_differs"
+        },
+        {
+          "demo": "requirements/dev.txt",
+          "demo_added": [
+            "attrs==20.3.0"
+          ],
+          "demo_lines": [
+            "attrs==19.3.0"
+          ],
+          "predicted": [
+            "urllib3==20.3.9"
+          ],
+          "target": "requirements/docs.txt",
+          "target_added": [
+            "urllib3==1.26.3"
+          ],
+          "target_lines": [
+            "urllib3==1.25.9"
+          ],
+          "verdict": "rebound_wrong"
+        }
+      ],
+      "lucky": 4,
+      "lucky_share": 0.0667,
+      "outcomes": {
+        "conflict": 0,
+        "constant_differs": 4,
+        "exact": 7,
+        "mismatch": 5,
+        "rebound_wrong": 3,
+        "verbatim": 41
+      },
+      "pairs": 60,
+      "pairs_where_derivation_fired": 0,
+      "pairs_where_derivation_was_right": 0,
+      "supply_share": 0.1157,
+      "wrong": 12,
+      "wrong_share": 0.2
+    },
+    "shape_only": {
+      "by_demonstration_size": {
+        "2": {
+          "determined": 105,
+          "lucky": 47,
+          "pairs": 197,
+          "wrong": 45
+        },
+        "3": {
+          "determined": 16,
+          "lucky": 0,
+          "pairs": 18,
+          "wrong": 2
+        },
+        "4": {
+          "determined": 9,
+          "lucky": 0,
+          "pairs": 13,
+          "wrong": 4
+        },
+        "5": {
+          "determined": 3,
+          "lucky": 0,
+          "pairs": 14,
+          "wrong": 11
+        },
+        "6": {
+          "determined": 1,
+          "lucky": 0,
+          "pairs": 3,
+          "wrong": 2
+        }
+      },
+      "by_repo": {
+        "pallets/click": {
+          "commits": 49,
+          "with_siblings": 4
+        },
+        "pallets/itsdangerous": {
+          "commits": 55,
+          "with_siblings": 12
+        },
+        "pallets/markupsafe": {
+          "commits": 69,
+          "with_siblings": 13
+        },
+        "pypa/packaging": {
+          "commits": 66,
+          "with_siblings": 10
+        },
+        "pypa/pyproject-hooks": {
+          "commits": 29,
+          "with_siblings": 4
+        }
+      },
+      "commits_scanned": 268,
+      "commits_where_the_demonstration_forced_the_edit": 4,
+      "commits_with_sibling_sites": 43,
+      "context_both_sides": false,
+      "context_lines": 0,
+      "contrast_arm": {
+        "by_demonstration_size": {
+          "2": {
+            "determined": 111,
+            "lucky": 45,
+            "pairs": 197,
+            "wrong": 41
+          },
+          "3": {
+            "determined": 16,
+            "lucky": 0,
+            "pairs": 18,
+            "wrong": 2
+          },
+          "4": {
+            "determined": 9,
+            "lucky": 0,
+            "pairs": 13,
+            "wrong": 4
+          },
+          "5": {
+            "determined": 3,
+            "lucky": 0,
+            "pairs": 14,
+            "wrong": 11
+          },
+          "6": {
+            "determined": 1,
+            "lucky": 0,
+            "pairs": 3,
+            "wrong": 2
+          }
+        },
+        "determined": 140,
+        "determined_share": 0.5714,
+        "examples": [
+          {
+            "demo": "tests/test_specifiers.py",
+            "demo_added": [
+              "        assert repr(spec) == f\"<Specifier({expected!r})>\""
+            ],
+            "demo_lines": [
+              "        assert repr(spec) == \"<Specifier({!r})>\".format(expected)"
+            ],
+            "predicted": [
+              "        assert repr(spec) == f\"<Specifier({expected!r})>\""
+            ],
+            "target": "tests/test_specifiers.py",
+            "target_added": [
+              "        assert repr(spec) == f\"<SpecifierSet({expected!r})>\""
+            ],
+            "target_lines": [
+              "        assert repr(spec) == \"<SpecifierSet({!r})>\".format(expected)"
+            ],
+            "verdict": "constant_differs"
+          },
+          {
+            "demo": "packaging/_parser.py",
+            "demo_added": [
+              "            \"<=, <, !=, ==, >=, >, ~=, ===, in, not in\""
+            ],
+            "demo_lines": [
+              "            \"<=, <, !=, ==, >=, >, ~=, ===, not, not in\""
+            ],
+            "predicted": [
+              "            \"<=, <, !=, ==, >=, >, ~=, ===, in, not in\""
+            ],
+            "target": "tests/test_requirements.py",
+            "target_added": [
+              "            \"in, not in\\n\""
+            ],
+            "target_lines": [
+              "            \"not, not in\\n\""
+            ],
+            "verdict": "constant_differs"
+          },
+          {
+            "demo": "packaging/_parser.py",
+            "demo_added": [
+              "            \"<=, <, !=, ==, >=, >, ~=, ===, in, not in\""
+            ],
+            "demo_lines": [
+              "            \"<=, <, !=, ==, >=, >, ~=, ===, not, not in\""
+            ],
+            "predicted": [
+              "            \"<=, <, !=, ==, >=, >, ~=, ===, in, not in\""
+            ],
+            "target": "tests/test_requirements.py",
+            "target_added": [
+              "            \"in, not in\\n\""
+            ],
+            "target_lines": [
+              "            \"not, not in\\n\""
+            ],
+            "verdict": "constant_differs"
+          },
+          {
+            "demo": "packaging/_parser.py",
+            "demo_added": [
+              "            \"<=, <, !=, ==, >=, >, ~=, ===, in, not in\""
+            ],
+            "demo_lines": [
+              "            \"<=, <, !=, ==, >=, >, ~=, ===, not, not in\""
+            ],
+            "predicted": [
+              "            \"<=, <, !=, ==, >=, >, ~=, ===, in, not in\""
+            ],
+            "target": "tests/test_requirements.py",
+            "target_added": [
+              "            \"in, not in\\n\""
+            ],
+            "target_lines": [
+              "            \"not, not in\\n\""
+            ],
+            "verdict": "constant_differs"
+          },
+          {
+            "demo": "tests/test_requirements.py",
+            "demo_added": [
+              "            \"Expected matching RIGHT_PARENTHESIS for LEFT_PARENTHESIS, \"",
+              "            \"after version specifier\\n\""
+            ],
+            "demo_lines": [
+              "            \"Expected closing RIGHT_PARENTHESIS\\n\""
+            ],
+            "predicted": [
+              "            \"Expected matching RIGHT_PARENTHESIS for LEFT_PARENTHESIS, \"",
+              "            \"Expected matching RIGHT_PARENTHESIS for LEFT_PARENTHESIS, \""
+            ],
+            "target": "tests/test_requirements.py",
+            "target_added": [
+              "            \"Expected matching RIGHT_BRACKET for LEFT_BRACKET, \"",
+              "            \"after extras\\n\""
+            ],
+            "target_lines": [
+              "            \"Expected closing RIGHT_BRACKET\\n\""
+            ],
+            "verdict": "constant_differs"
+          }
+        ],
+        "lucky": 45,
+        "lucky_share": 0.1837,
+        "outcomes": {
+          "conflict": 0,
+          "constant_differs": 23,
+          "exact": 82,
+          "mismatch": 13,
+          "rebound_wrong": 24,
+          "verbatim": 103
+        },
+        "pairs": 245,
+        "pairs_where_derivation_fired": 15,
+        "pairs_where_derivation_was_right": 6,
+        "wrong": 60,
+        "wrong_share": 0.2449
+      },
+      "derive_arm": {
+        "by_demonstration_size": {
+          "2": {
+            "determined": 113,
+            "lucky": 45,
+            "pairs": 197,
+            "wrong": 39
+          },
+          "3": {
+            "determined": 16,
+            "lucky": 0,
+            "pairs": 18,
+            "wrong": 2
+          },
+          "4": {
+            "determined": 9,
+            "lucky": 0,
+            "pairs": 13,
+            "wrong": 4
+          },
+          "5": {
+            "determined": 3,
+            "lucky": 0,
+            "pairs": 14,
+            "wrong": 11
+          },
+          "6": {
+            "determined": 1,
+            "lucky": 0,
+            "pairs": 3,
+            "wrong": 2
+          }
+        },
+        "determined": 142,
+        "determined_share": 0.5796,
+        "examples": [
+          {
+            "demo": "tests/test_specifiers.py",
+            "demo_added": [
+              "        assert repr(spec) == f\"<Specifier({expected!r})>\""
+            ],
+            "demo_lines": [
+              "        assert repr(spec) == \"<Specifier({!r})>\".format(expected)"
+            ],
+            "predicted": [
+              "        assert repr(spec) == f\"<Specifier({expected!r})>\""
+            ],
+            "target": "tests/test_specifiers.py",
+            "target_added": [
+              "        assert repr(spec) == f\"<SpecifierSet({expected!r})>\""
+            ],
+            "target_lines": [
+              "        assert repr(spec) == \"<SpecifierSet({!r})>\".format(expected)"
+            ],
+            "verdict": "constant_differs"
+          },
+          {
+            "demo": "packaging/_parser.py",
+            "demo_added": [
+              "            \"<=, <, !=, ==, >=, >, ~=, ===, in, not in\""
+            ],
+            "demo_lines": [
+              "            \"<=, <, !=, ==, >=, >, ~=, ===, not, not in\""
+            ],
+            "predicted": [
+              "            \"<=, <, !=, ==, >=, >, ~=, ===, in, not in\""
+            ],
+            "target": "tests/test_requirements.py",
+            "target_added": [
+              "            \"in, not in\\n\""
+            ],
+            "target_lines": [
+              "            \"not, not in\\n\""
+            ],
+            "verdict": "constant_differs"
+          },
+          {
+            "demo": "packaging/_parser.py",
+            "demo_added": [
+              "            \"<=, <, !=, ==, >=, >, ~=, ===, in, not in\""
+            ],
+            "demo_lines": [
+              "            \"<=, <, !=, ==, >=, >, ~=, ===, not, not in\""
+            ],
+            "predicted": [
+              "            \"<=, <, !=, ==, >=, >, ~=, ===, in, not in\""
+            ],
+            "target": "tests/test_requirements.py",
+            "target_added": [
+              "            \"in, not in\\n\""
+            ],
+            "target_lines": [
+              "            \"not, not in\\n\""
+            ],
+            "verdict": "constant_differs"
+          },
+          {
+            "demo": "packaging/_parser.py",
+            "demo_added": [
+              "            \"<=, <, !=, ==, >=, >, ~=, ===, in, not in\""
+            ],
+            "demo_lines": [
+              "            \"<=, <, !=, ==, >=, >, ~=, ===, not, not in\""
+            ],
+            "predicted": [
+              "            \"<=, <, !=, ==, >=, >, ~=, ===, in, not in\""
+            ],
+            "target": "tests/test_requirements.py",
+            "target_added": [
+              "            \"in, not in\\n\""
+            ],
+            "target_lines": [
+              "            \"not, not in\\n\""
+            ],
+            "verdict": "constant_differs"
+          },
+          {
+            "demo": "tests/test_requirements.py",
+            "demo_added": [
+              "            \"Expected matching RIGHT_PARENTHESIS for LEFT_PARENTHESIS, \"",
+              "            \"after version specifier\\n\""
+            ],
+            "demo_lines": [
+              "            \"Expected closing RIGHT_PARENTHESIS\\n\""
+            ],
+            "predicted": [
+              "            \"Expected matching RIGHT_PARENTHESIS for LEFT_PARENTHESIS, \"",
+              "            \"Expected matching RIGHT_PARENTHESIS for LEFT_PARENTHESIS, \""
+            ],
+            "target": "tests/test_requirements.py",
+            "target_added": [
+              "            \"Expected matching RIGHT_BRACKET for LEFT_BRACKET, \"",
+              "            \"after extras\\n\""
+            ],
+            "target_lines": [
+              "            \"Expected closing RIGHT_BRACKET\\n\""
+            ],
+            "verdict": "constant_differs"
+          }
+        ],
+        "lucky": 45,
+        "lucky_share": 0.1837,
+        "outcomes": {
+          "conflict": 0,
+          "constant_differs": 12,
+          "exact": 84,
+          "mismatch": 13,
+          "rebound_wrong": 33,
+          "verbatim": 103
+        },
+        "pairs": 245,
+        "pairs_where_derivation_fired": 42,
+        "pairs_where_derivation_was_right": 9,
+        "wrong": 58,
+        "wrong_share": 0.2367
+      },
+      "determined": 134,
+      "determined_commit_share": 0.093,
+      "determined_share": 0.5469,
+      "examples": [
+        {
+          "demo": "tests/test_specifiers.py",
+          "demo_added": [
+            "        assert repr(spec) == f\"<Specifier({expected!r})>\""
+          ],
+          "demo_lines": [
+            "        assert repr(spec) == \"<Specifier({!r})>\".format(expected)"
+          ],
+          "predicted": [
+            "        assert repr(spec) == f\"<Specifier({expected!r})>\""
+          ],
+          "target": "tests/test_specifiers.py",
+          "target_added": [
+            "        assert repr(spec) == f\"<SpecifierSet({expected!r})>\""
+          ],
+          "target_lines": [
+            "        assert repr(spec) == \"<SpecifierSet({!r})>\".format(expected)"
+          ],
+          "verdict": "constant_differs"
+        },
+        {
+          "demo": "packaging/_parser.py",
+          "demo_added": [
+            "            \"<=, <, !=, ==, >=, >, ~=, ===, in, not in\""
+          ],
+          "demo_lines": [
+            "            \"<=, <, !=, ==, >=, >, ~=, ===, not, not in\""
+          ],
+          "predicted": [
+            "            \"<=, <, !=, ==, >=, >, ~=, ===, in, not in\""
+          ],
+          "target": "tests/test_requirements.py",
+          "target_added": [
+            "            \"in, not in\\n\""
+          ],
+          "target_lines": [
+            "            \"not, not in\\n\""
+          ],
+          "verdict": "constant_differs"
+        },
+        {
+          "demo": "packaging/_parser.py",
+          "demo_added": [
+            "            \"<=, <, !=, ==, >=, >, ~=, ===, in, not in\""
+          ],
+          "demo_lines": [
+            "            \"<=, <, !=, ==, >=, >, ~=, ===, not, not in\""
+          ],
+          "predicted": [
+            "            \"<=, <, !=, ==, >=, >, ~=, ===, in, not in\""
+          ],
+          "target": "tests/test_requirements.py",
+          "target_added": [
+            "            \"in, not in\\n\""
+          ],
+          "target_lines": [
+            "            \"not, not in\\n\""
+          ],
+          "verdict": "constant_differs"
+        },
+        {
+          "demo": "packaging/_parser.py",
+          "demo_added": [
+            "            \"<=, <, !=, ==, >=, >, ~=, ===, in, not in\""
+          ],
+          "demo_lines": [
+            "            \"<=, <, !=, ==, >=, >, ~=, ===, not, not in\""
+          ],
+          "predicted": [
+            "            \"<=, <, !=, ==, >=, >, ~=, ===, in, not in\""
+          ],
+          "target": "tests/test_requirements.py",
+          "target_added": [
+            "            \"in, not in\\n\""
+          ],
+          "target_lines": [
+            "            \"not, not in\\n\""
+          ],
+          "verdict": "constant_differs"
+        },
+        {
+          "demo": "tests/test_requirements.py",
+          "demo_added": [
+            "            \"Expected matching RIGHT_PARENTHESIS for LEFT_PARENTHESIS, \"",
+            "            \"after version specifier\\n\""
+          ],
+          "demo_lines": [
+            "            \"Expected closing RIGHT_PARENTHESIS\\n\""
+          ],
+          "predicted": [
+            "            \"Expected matching RIGHT_PARENTHESIS for LEFT_PARENTHESIS, \"",
+            "            \"Expected matching RIGHT_PARENTHESIS for LEFT_PARENTHESIS, \""
+          ],
+          "target": "tests/test_requirements.py",
+          "target_added": [
+            "            \"Expected matching RIGHT_BRACKET for LEFT_BRACKET, \"",
+            "            \"after extras\\n\""
+          ],
+          "target_lines": [
+            "            \"Expected closing RIGHT_BRACKET\\n\""
+          ],
+          "verdict": "constant_differs"
+        }
+      ],
+      "lucky": 47,
+      "lucky_share": 0.1918,
+      "outcomes": {
+        "conflict": 0,
+        "constant_differs": 31,
+        "exact": 78,
+        "mismatch": 13,
+        "rebound_wrong": 20,
+        "verbatim": 103
+      },
+      "pairs": 245,
+      "pairs_where_derivation_fired": 0,
+      "pairs_where_derivation_was_right": 0,
+      "supply_share": 0.1604,
+      "wrong": 64,
+      "wrong_share": 0.2612
+    }
+  },
+  "commits_in_corpus": 393,
+  "corpus": {
+    "path": "canonical/tests/fixtures/systematic_edit_corpus_v1.jsonl",
+    "records": 393,
+    "repos": [
+      "pallets/click",
+      "pallets/itsdangerous",
+      "pallets/markupsafe",
+      "pypa/packaging",
+      "pypa/pyproject-hooks"
+    ],
+    "schema": "systematic_edit_corpus_v1",
+    "sha256": "b47d9c9c23e641a8865a79d9dce3059a306257813d28114ed6029a9606cbde5a"
+  },
+  "incremental_spend_usd": 0,
+  "model_calls": 0,
+  "network_calls": 0,
+  "scanned": 268,
+  "schema": "systematic_edit_supply_v1",
+  "what_this_shows": "Of 268 real commits from pallets/click, pallets/itsdangerous, pallets/markupsafe, pypa/packaging, pypa/pyproject-hooks, 43 (0.1604) contain sibling sites at one shared line of context; across 245 sibling pairs the demonstrated edit was DETERMINED by the demonstration in 134 (0.5469), matched only by luck in 47 (0.1918), and failed in 64 (0.2612). 4 of the 43 multi-site commits (0.093) had a sibling the demonstration forced. Requiring a shared context line on either side leaves 42 commits and 177 pairs, and on both sides 31 commits and 60 pairs. The 225 commits with no sibling at all have nothing for a demonstration to amortise: 'do it once' is one acquisition per instance for them."
+}

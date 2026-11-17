@@ -96,8 +96,9 @@ here argues for a new mechanism.
 measured reasons, and they compound:
 
 * **supply** — only ~1 in 6 commits has a sibling, so at least 84% of work is untouched by memory;
-* **determinacy** — inside that sixth, 45% of the pairs that need induction come out wrong, and the
-  learner cannot tell a forced prediction from a lucky one without checking;
+* **determinacy** — inside that sixth, 45% of the pairs that need induction come out wrong, the
+  learner cannot tell a forced prediction from a lucky one without checking, and the part of the
+  induction that decides the *value* is right only 21% of the time (§7);
 * **permanence** — of what is induced, 53.5% is stale and 31.1% silently corrupt once the file moves.
 
 Multiplying them: a "learn each once" strategy reaches, at best, a minority of the work, errs on
@@ -113,8 +114,9 @@ The numbers give a rule that needs no new machinery, only the decision:
    further slice binds cleanly. Cost: one lookup. Check the postcondition anyway, because §4 cannot
    tell forced from lucky at run time.
 2. **Sibling present but the edit introduces values the target does not determine
-   (`constant_differs`) → synthesise, don't substitute.** This is the single largest wrongness class
-   after size; the demonstration contains the *shape* but not the *value*.
+   (`constant_differs`) → synthesise, don't substitute.** This is the largest wrongness class; the
+   demonstration contains the *shape* but not the *value*, and §7 measures the attempt to infer one
+   at 21% precision.')
 3. **No sibling (84–88% of commits) → there is nothing to learn from, by definition.** The work is
    synthesis plus verification against execution; spending on memory here buys nothing at all.
 
@@ -123,7 +125,45 @@ repetition, and repetition is a measured minority of real engineering.** The rev
 it applies, and the measurement tells you exactly where that is — which is more than the claim
 itself does.
 
-## 7. Reproduce
+## 7. The value layer: one demonstration cannot supply a value; a contrast can test one
+
+The largest single wrongness class was `constant_differs` — 31 of the 64 wrong predictions — where the
+demonstration has the edit's *shape* but the target needs a *different* value (`"1.0" -> "1.1"` taught
+at `"2.0"` needs `"2.1"`; copying yields `"1.1"`). Two closures were implemented and measured on the
+same 245 sibling pairs, same corpus, same rungs.
+
+**Derivation** (`_derive`): carry the demonstration's own arithmetic — the one moved component and its
+delta — onto the target's number; or read the value from the same slot of the target's context, which
+is SyDIT's constant-replacement move. **Contrast**: accept a derived value only when a second
+demonstration's own rule, replayed on the first demonstration's base, reproduces the first
+demonstration's value.
+
+| arm (shape_only, 245 pairs) | matched of 142 inductive | wrong | derived-value precision |
+|---|---|---|---|
+| copy | 78 (54.9%) | 64 | — |
+| derive | 84 (59.2%) | 58 | **9/42 = 21.4%** |
+| derive + contrast | 82 (57.7%) | 60 | **6/15 = 40.0%** |
+
+Three readings, in order of importance:
+
+1. **Derivation halves the value-class failure and creates new ones.** `constant_differs` falls
+   31 -> 12 while `rebound_wrong` rises 20 -> 33: the arithmetic that repairs `"2.1"` also overwrites
+   values copying had right. Aggregately it buys about four points — a real effect, not a solution.
+2. **When derivation fires it is right one time in five (21.4%); the pairs where it does not fire are
+   right 75% (75/100).** The value is not merely noisy, it is the *least* reliable part of the
+   induction — and precisely the part a "learn it once" system would store forever.
+3. **A second demonstration doubles that precision and makes the system abstain.** Requiring the
+   contrast to reproduce the demonstration's value lifts derived-value precision 21.4% -> 40.0% and
+   cuts firing from 42 pairs to 15. Agreement between two demonstrations is a usable **veto**, never a
+   licence: even two agreeing demonstrations leave the value wrong 60% of the time.
+
+This states the acquisition unit as a measurement. A demonstration identifies a *parameterised
+operation*; only a contrast distinguishes which parameter it is tuned by; and even a contrast does not
+establish the value. So the value must be closed by execution, and what transfers between environments
+is the **policy plus the verifier**, never the stored value. A memory that stores the value stores a
+guess — which is exactly the 31.1% silent corruption measured on replay.
+
+## 8. Reproduce
 
 ```
 python3 canonical/swe_kernel/systematic_edit_supply_v1.py \
@@ -138,7 +178,15 @@ python3 canonical/swe_kernel/systematic_edit_supply_v1.py \
   --extract "pypa/packaging=<path>,pallets/click=<path>" --stride 6 --keep 90
 ```
 
-## 8. What this does not claim
+The value-layer run writes its own receipt and prints all three arms; the copy arm reproduces the
+published numbers exactly, which is what makes the derivation delta attributable:
+
+```
+python3 canonical/swe_kernel/systematic_edit_supply_v1.py \
+  --json canonical/verification/SYSTEMATIC_EDIT_DERIVATION_20261116_V1.json
+```
+
+## 9. What this does not claim
 
 No capability credit, no benchmark rank, no terminal credit, no independent verification. The
 abstraction is lexical — identifiers, numbers and literals become holes — so "exact" means
