@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 484,
+  "knowledge_documents": 485,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6934,
+  "research_index_records": 6936,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 451,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "41ea8e8caadf761acb3635ff4e640c86af936ac716fa38c8cdc67866b1bd1cce"
+  "value": "0c081838ce5703c09d29aa196c64ecd52f62b42814f44c942e0047b7947657b8"
  },
  "engines": [
   {
@@ -45597,6 +45597,80 @@
     "constant",
     "demonstration",
     "no"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 6454,
+   "headings": [
+    "A failure is worth 2^k, where k is what it kept",
+    "0. The honest part first",
+    "1. The arithmetic the receipt contains",
+    "2. The law, and why it inverts the instinct",
+    "3. What this says about your three blockers, in order",
+    "4. Why \"the best part is no part\" applies here, concretely",
+    "5. Non-claims",
+    "6. Reproduce"
+   ],
+   "kind": "DOCUMENT",
+   "path": "A_FAILURE_IS_WORTH_TWO_TO_THE_KEYS_KEPT_20261116_V1.md",
+   "sha256": "54e3162212e76063e9ad1f57d5104dd430b599f9debc7f92f11e3dc5075c0341",
+   "summary": "**Date:** 2026-11-16 · **Branch:** `arena/f68feb16-brain` · **Base:** `68e8d11b` **Authority:** `NONE__PRODUCER_RUN`. Producer-run, this machine, $0, zero model dependency.",
+   "terms": {
+    "20": 5,
+    "23": 11,
+    "388": 3,
+    "already": 3,
+    "arithmetic": 4,
+    "bit": 3,
+    "both": 4,
+    "candidate": 3,
+    "candidates": 4,
+    "canonical": 3,
+    "closed": 4,
+    "contrast": 4,
+    "contrast_selection_v1": 3,
+    "corpus": 4,
+    "d_i": 3,
+    "document": 3,
+    "drops": 4,
+    "enumeration": 3,
+    "exact": 3,
+    "exactly": 3,
+    "f_i": 3,
+    "fact": 3,
+    "facts": 5,
+    "failing": 3,
+    "failure": 17,
+    "failures": 10,
+    "half": 3,
+    "hypotheses": 6,
+    "instead": 3,
+    "kept": 4,
+    "kills": 4,
+    "law": 4,
+    "miss": 4,
+    "more": 5,
+    "not": 17,
+    "nothing": 5,
+    "now": 4,
+    "one": 13,
+    "own": 4,
+    "part": 6,
+    "receipt": 6,
+    "so": 4,
+    "space": 5,
+    "survivors": 4,
+    "two": 9,
+    "vocabulary": 5,
+    "wall": 4,
+    "worth": 6
+   },
+   "title": "A failure is worth 2^k, where k is what it kept",
+   "title_terms": [
+    "failure",
+    "kept",
+    "worth"
    ]
   },
   {
@@ -82710,10 +82784,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1286,
+  "included_source_count": 1287,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "c1232182bafdacda318d59cab20a03ef43172d808b1f80949fa200c28b33dd16"
+  "source_tree_digest": "6ca5087c6aea1b774000d2fb238a115ba6ddbdf2d0c04359599cd460206680b5"
  },
  "research_index": [
   {
@@ -152999,6 +153073,26 @@
     "public": 1,
     "route": 1,
     "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/A_FAILURE_IS_WORTH_TWO_TO_THE_KEYS_KEPT_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/A_FAILURE_IS_WORTH_TWO_TO_THE_KEYS_KEPT_20261116_V1.json",
+   "schema": "A_FAILURE_IS_WORTH_TWO_TO_THE_KEYS_KEPT_V1",
+   "sha256": "80861dc1cabe558df37223b944ea3c05670a1414061d71d8dcd9ca87a19556d5",
+   "status": "",
+   "terms": {
+    "20261116": 1,
+    "failure": 1,
+    "kept": 1,
+    "keys": 1,
+    "two": 1,
+    "v1": 1,
+    "worth": 1
    }
   },
   {
@@ -230415,6 +230509,51 @@
     "scope_a_remembered_plan_by_the_states_its_outcomes_happened_in": 1,
     "the_macro_store_retained_outcomes_without_the_state_they_happened_in_so_it_could_only_keep_or_ban_a_plan_globally_and_never_learn_where_it_applies_which_is_the_quantity_the_owner_claims_one_exposure_teaches": 1,
     "v1": 1
+   }
+  },
+  {
+   "action_id": "A_FAILURE_IS_WORTH_TWO_TO_THE_KEYS_KEPT_20261116_V1",
+   "capability": false,
+   "date": "2026-11-16",
+   "id": "research:canonical/action_intents/A_FAILURE_IS_WORTH_TWO_TO_THE_KEYS_KEPT_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_FAILURE_IS_WORTH_TWO_TO_THE_KEYS_KEPT_20261116_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "d9b2bdf5680a4f727d860536970405434fa55697d388318f2d13b961eb5f071f",
+   "status": "COMPLETE",
+   "terms": {
+    "0.000s": 1,
+    "048": 1,
+    "20": 1,
+    "20261116": 1,
+    "23": 3,
+    "23-8": 1,
+    "388": 1,
+    "576": 1,
+    "608": 1,
+    "a_failure_is_worth_two_to_the_keys_kept_20261116_v1": 1,
+    "both": 3,
+    "closed": 3,
+    "compute": 2,
+    "contrast": 2,
+    "enumeration": 2,
+    "exactly": 2,
+    "failure": 7,
+    "failures": 3,
+    "hypotheses": 4,
+    "keeps": 2,
+    "kills": 2,
+    "learning": 2,
+    "not": 3,
+    "one": 4,
+    "recorded": 4,
+    "so": 3,
+    "stops": 2,
+    "two": 4,
+    "vocabulary": 4,
+    "wall": 2,
+    "walls": 2,
+    "worth": 5
    }
   },
   {
