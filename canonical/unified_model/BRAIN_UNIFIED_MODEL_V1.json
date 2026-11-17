@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "b667f0515a0478275ba29e70077bbafdabee47dd811b701f2dd116986949f8b7"
+  "value": "850bff99c22eb933b10f08d3bdb7bac52ccf4da761e2da85f4a62069a92fd034"
  },
  "engines": [
   {
@@ -244402,7 +244402,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/THE_CEILING_OF_LEARN_ONCE_20261116_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "ac26a487a29f5e6b29e3b58b342b45dbb9d91a0ccaa2a96de743c8415ea1c8e2",
+   "sha256": "730534b4f59592fa3d54b78924fb3429c1730b0729deb2a1320066acb53fd850",
    "status": "",
    "terms": {
     "14": 2,

@@ -36,7 +36,7 @@
  },
  "benchmark_or_family_rank_authority": false,
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The claim has been answered term by term for nine sessions and never as a product, which is the only form that answers a question about a fraction of work. The measured terms are: end-to-end memory service 31/644 strict sites (4.814%, one in 20.8), multi-line advanced edits 0 of 14, cross-repository multi-line 2.1%, induction determinacy 78/142. Acquisition is not the wall: the shipped counts (4 demonstrations for the git task, 1 for the premise task) came from a greedy cover, and the tree's exact cover solver plus an independent exhaustive search confirm NO smaller cover exists, so the number of experiences needed has an exact small answer. Composition is a separate wall: two rules each crystallised True on their own demonstration, applied in order, return the text unchanged with every local check passing. Therefore making learning infinitely fast leaves the yield unchanged at 4.81%, because the fraction is a property of the work and not of the learner, and the single bottleneck is not learning rate but that real work is mostly not repetition and that sequence correctness is not implied by step correctness.",
- "canonical_base_commit": "d2e0aa07937ee1993dcac84cffff8bac5eb2a1e7",
+ "canonical_base_commit": "03e32e8cabc4808a52de2380fdc5978218377f05",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -124,7 +124,7 @@
   "execution_guard/goal_target_binding_v1.py"
  ],
  "recursive_obs": {
-  "canonical_base_commit": "d2e0aa07937ee1993dcac84cffff8bac5eb2a1e7",
+  "canonical_base_commit": "03e32e8cabc4808a52de2380fdc5978218377f05",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "FIVE_FROZEN_PERCEPTOR_CODEC_STRINGS",
