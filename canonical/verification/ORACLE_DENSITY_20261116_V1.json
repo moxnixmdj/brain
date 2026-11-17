@@ -1,0 +1,99 @@
+{
+  "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+  "by_extension": {
+    ".json": 0,
+    ".md": 0,
+    ".py": 432,
+    ".sh": 0,
+    ".toml": 10,
+    ".txt": 117,
+    ".yaml": 104,
+    ".yml": 28
+  },
+  "by_repo": {
+    "pallets/click": {
+      "has_module_test": 0.0947,
+      "mean_test_files_in_tree": 8.5,
+      "names_a_token": 0.5158,
+      "sites": 95
+    },
+    "pallets/itsdangerous": {
+      "has_module_test": 0.1111,
+      "mean_test_files_in_tree": 5.7,
+      "names_a_token": 0.3852,
+      "sites": 135
+    },
+    "pallets/markupsafe": {
+      "has_module_test": 0.1311,
+      "mean_test_files_in_tree": 5.1,
+      "names_a_token": 0.3443,
+      "sites": 183
+    },
+    "pypa/packaging": {
+      "has_module_test": 0.4918,
+      "mean_test_files_in_tree": 8.5,
+      "names_a_token": 0.7295,
+      "sites": 122
+    },
+    "pypa/pyproject-hooks": {
+      "has_module_test": 0.037,
+      "mean_test_files_in_tree": 13.7,
+      "names_a_token": 0.8148,
+      "sites": 54
+    }
+  },
+  "corpus": {
+    "path": "canonical/tests/fixtures/systematic_edit_corpus_v1.jsonl",
+    "records": 393,
+    "repos": [
+      "pallets/click",
+      "pallets/itsdangerous",
+      "pallets/markupsafe",
+      "pypa/packaging",
+      "pypa/pyproject-hooks"
+    ],
+    "repos_unavailable": [],
+    "sha256": "b47d9c9c23e641a8865a79d9dce3059a306257813d28114ed6029a9606cbde5a"
+  },
+  "examples": {
+    "checked": {
+      "file": "packaging/version.py",
+      "repo": "pypa/packaging"
+    },
+    "invisible": {
+      "file": "packaging/version.py",
+      "repo": "pypa/packaging"
+    }
+  },
+  "incremental_spend_usd": 0,
+  "loop": {
+    "all_suffix_expected_error_invisible": 0.5956,
+    "computed_on": "python_only",
+    "expected_error_invisible": 0.4555,
+    "expected_error_seen": 0.5445,
+    "reading": "On real python edits a wrong change is visible to the repository's own tests 0.5445 of the time and invisible 0.4555 of the time; for multi-line edits it is 0.342. The advanced edits are not where the blindness lives -- they are the best named (82.0%) -- it lives in the third of code no test names at all, plus the fifth that naming does not save.",
+    "structured_expected_error_invisible": 0.342,
+    "suite_strength_source": "canonical/verification/PATCH_VERDICT_AMPLIFICATION_20261116_V1.json",
+    "suite_strength_when_checked": 0.8021
+  },
+  "model_calls": 0,
+  "oracle_density": {
+    "definition": "has_module_test: the changed module has a test file of its own name. names_a_token: the repository's whole test corpus at that commit contains an identifier taken from the lines the commit changed. Both are ceilings; naming is not asserting.",
+    "has_module_test": 0.1868,
+    "names_a_token": 0.5042,
+    "python_only": {
+      "names_a_token": 0.6788,
+      "sites": 330,
+      "structured_names_a_token": 0.8203,
+      "structured_sites": 128,
+      "why": "the strength constant (0.8021) was measured on code mutants, so the loop is computed on the python subset; the all-suffix number also counts documentation and CI configuration, which no test names"
+    },
+    "structured_names_a_token": 0.6167,
+    "structured_sites": 240
+  },
+  "schema": "BRAIN_ORACLE_DENSITY_V1",
+  "sites": 691,
+  "sites_in_source_files": 589,
+  "sites_in_test_files": 102,
+  "what_this_shows": "Of 691 real changed sites across pallets/click, pallets/itsdangerous, pallets/markupsafe, pypa/packaging, pypa/pyproject-hooks, 0.1868 sit in a module that has a test file of its own name and 0.5042 are named somewhere in the repository's test corpus at that commit -- so the repository's own oracle can see at most that share of real work. For edits spanning two lines it is 0.6167. Multiplying by the measured strength of a passing suite (0.8021), a wrong edit is visible 0.5445 of the time and invisible 0.4555 of the time, and 0.342 for multi-line edits. This is the ceiling on the only engineerable term in P(correct) = P(determined) x P(executed) x P(seen)."
+}
