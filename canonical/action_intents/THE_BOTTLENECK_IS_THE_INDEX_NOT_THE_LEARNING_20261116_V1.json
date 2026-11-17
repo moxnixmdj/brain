@@ -1,0 +1,546 @@
+{
+ "action_id": "THE_BOTTLENECK_IS_THE_INDEX_NOT_THE_LEARNING_20261116_V1",
+ "action_intent_id": "THE_BOTTLENECK_IS_THE_INDEX_NOT_THE_LEARNING_20261116_V1",
+ "action_kind": "REAL_CAPABILITY_ACQUISITION",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "earlier_routes_exhausted_reason": "RESEARCH was done before BUILDING and it changed the plan three times: hold_out_the_precision_curve already measured the retrieval ceiling on real PRs, cross_language_lesson_transfer already separated the store from the proposer and answered it, and cross_kind_learning_to_learn already failed with its docstring naming the coarse/fine tension. What was absent was the SWEEP, because the existing run concluded from one bucketing and one instance. The sweep is what shipped.",
+  "incremental_spend_usd": 0,
+  "independent_verification_completed": false,
+  "independent_verification_note": "Producer-run only. Authority NONE__PRODUCER_RUN. Five existing instruments re-run on this base plus one sweep computed over their own kinds and policies; no third party ran it.",
+  "laws_read_this_session": [
+   "AGENTS.md",
+   "README.md",
+   "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+  "progress_evidence_paths": [
+   "canonical/tools/the_index_is_the_bottleneck_v1.py",
+   "canonical/tests/test_the_index_is_the_bottleneck_v1.py",
+   "canonical/verification/THE_INDEX_IS_THE_BOTTLENECK_20261116_V1.json",
+   "THE_BOTTLENECK_IS_THE_INDEX_NOT_THE_LEARNING_20261116_V1.md"
+  ],
+  "route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+  "scope_complete_discharge": false,
+  "terminal_achieved": false
+ },
+ "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The tree concluded \"the features do not generalise\" from ONE bucketing and ONE instance of each kind. Swept from coarser than its own key to one-key-per-kind, the conclusion is sharper and different: no granularity of these features is injective on the distinction the policy depends on. Coarsening makes collisions worse (2 -> 3), refining reduces them but the only family reaching zero collisions is one key per kind (20 keys for 20 kinds), which transfers nothing; usable_key_families is empty. Sweeping instances also shows 5 of 20 kinds CHANGE their required policy set between instances of the same kind, so even a perfect kind-level key would be wrong. The features do not CONTAIN the observable, so the repair is a new observable rather than a finer grid.",
+ "canonical_base_commit": "078f34433bf3e98f9d589482a305034b9c6c366b",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "The tree concluded \"the features do not generalise\" from ONE bucketing and ONE instance of each kind. Swept from coarser than its own key to one-key-per-kind, the conclusion is sharper and different: no granularity of these features is injective on the distinction the policy depends on. Coarsening makes collisions worse (2 -> 3), refining reduces them but the only family reaching zero collisions is one key per kind (20 keys for 20 kinds), which transfers nothing; usable_key_families is empty. Sweeping instances also shows 5 of 20 kinds CHANGE their required policy set between instances of the same kind, so even a perfect kind-level key would be wrong. The features do not CONTAIN the observable, so the repair is a new observable rather than a finer grid.",
+ "date": "2026-11-16",
+ "expected_parent_change": "The index stops being an unnoticed constant and becomes the named bottleneck: every mechanism the tree owns decides applicability with a key that lacks the observable, so reach is now aimed at one shared defect instead of at more experience or a finer grid.",
+ "expected_parent_frontier_change": "The index stops being an unnoticed constant and becomes the named bottleneck: every mechanism the tree owns decides applicability with a key that lacks the observable, so reach is now aimed at one shared defect instead of at more experience or a finer grid.",
+ "explicit_user_authorization": [
+  "Instant learning in new arbitrary environments is solved perfectly; one-shot learning plus permanent retention equals all computer use and most advanced SWE -- answer whether that is true.",
+  "Research must be exhausted before building, in the project and on the web; own weights only, no model used as a component.",
+  "The best part is no part.",
+  "Build everything in the branch; merge once when the feature is complete."
+ ],
+ "falsification_condition": "A key family over these same features with collisions 0 AND keys well below the number of kinds would refute \"no granularity of these features works\". A kind whose required policy set is invariant across instances at every granularity would weaken the instance-sensitivity finding.",
+ "generic_repair_from_single_probe": false,
+ "governance_change": false,
+ "highest_leverage_now": true,
+ "incremental_spend_usd": 0,
+ "intentional_route_race": false,
+ "load_bearing_primary": {
+  "constructive_gap_for_open_obligation_ids": [
+   "CODING_TB4_GE_66_4"
+  ],
+  "expected_obligation_discharge_lcb": 0,
+  "expected_obligation_unlock_lcb": "1/100",
+  "interpretation": "Speculative forecast only. Discharges no obligation. It locates the shared defect in every mechanism the tree owns (skill store, lesson ledger, cross-language proposer, GUI phrase gate, repair template): all of them decide applicability with a key that lacks the observable, so fixing it once fixes reach in all of them.",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "1/4",
+  "wall_clock_cost_ub": 1
+ },
+ "measured_effect": {
+  "contradiction_resolved": {
+   "compression_within_family": "59 -> 35 oracle questions, 41% fewer, on a never-seen period-12",
+   "cross_kind_compounding": "0 saved across 10 kinds (no abstraction mechanism at all)"
+  },
+  "cross_kind_learning_to_learn": {
+   "beat_default": "1/10",
+   "beat_random_mean": "3/10",
+   "verdict": "NO_COMPOUNDING"
+  },
+  "cross_language": {
+   "store_offered_any_non_python": false,
+   "transferred_and_narrow": [
+    "python",
+    "javascript",
+    "c",
+    "cpp"
+   ],
+   "wall": "THE_PROPOSER"
+  },
+  "instance_sensitivity": {
+   "example": {
+    "grid_walk": {
+     "0": "dfs_reversed only",
+     "1": "five policies",
+     "2": "NONE"
+    }
+   },
+   "kinds_unsolvable_on_every_instance": [
+    "ring_rotate"
+   ],
+   "kinds_whose_policy_set_changes_with_instance": 5
+  },
+  "instrument_correction": "first draft reported four kinds unsolvable by any policy; that was instance 1 of 3. Only ring_rotate is unsolvable everywhere; the other three are solvable at instance 2.",
+  "insufficiency_certificate": {
+   "closed_vocabulary_size": 31,
+   "hypotheses_needing_enumeration": 8388608,
+   "learner_enumeration_cap": 12,
+   "reading": "obstacle moves from representation to combinatorics"
+  },
+  "key_sweep": [
+   {
+    "answerable": "5/8",
+    "collisions": 2,
+    "family": "tree_coarse",
+    "keys": 8
+   },
+   {
+    "answerable": "4/7",
+    "collisions": 3,
+    "family": "coarser_still",
+    "keys": 7
+   },
+   {
+    "answerable": "11/14",
+    "collisions": 2,
+    "family": "finer_mid",
+    "keys": 14
+   },
+   {
+    "answerable": "13/16",
+    "collisions": 2,
+    "family": "finest_exact_features",
+    "keys": 16
+   },
+   {
+    "answerable": "19/20",
+    "collisions": 0,
+    "family": "one_key_per_kind",
+    "keys": 20
+   }
+  ],
+  "retrieval_ceiling_on_real_prs": {
+   "files": 76,
+   "kinds_with_a_matching_pr": 1,
+   "kinds_with_zero_matches": 7,
+   "pull_requests": 13,
+   "seconds": 350.6
+  },
+  "reused_not_rebuilt": [
+   "cross_kind_compounding_benchmark_v1",
+   "cross_kind_learning_to_learn_benchmark_v1",
+   "cross_language_lesson_transfer_probe_v1",
+   "hold_out_the_precision_curve_20261112_v1",
+   "COMPRESSION_MAKES_EXPERIENCE_COMPOUND_20261112_V1",
+   "INSUFFICIENCY_CERTIFICATE_20261113_V1"
+  ],
+  "usable_key_families": [],
+  "verdict": "NO_GRANULARITY_OF_THESE_FEATURES_SEPARATES_WHAT_THE_POLICY_DEPENDS_ON"
+ },
+ "model_calls": 0,
+ "network_calls": 0,
+ "next_step": "Name the observable the policy depends on and that the current features lack, then admit it as a new fact in the vocabulary rather than widening the grid over the existing five.",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "paths": [
+  "canonical/tools/the_index_is_the_bottleneck_v1.py",
+  "canonical/tests/test_the_index_is_the_bottleneck_v1.py",
+  "canonical/verification/THE_INDEX_IS_THE_BOTTLENECK_20261116_V1.json",
+  "THE_BOTTLENECK_IS_THE_INDEX_NOT_THE_LEARNING_20261116_V1.md",
+  "canonical/action_intents/THE_BOTTLENECK_IS_THE_INDEX_NOT_THE_LEARNING_20261116_V1.json"
+ ],
+ "prior_work_reused": [
+  "INSUFFICIENCY_CERTIFICATE_20261113_V1.json -- the combinatorics wall the vocabulary repair exposes",
+  "cross_kind_compounding_benchmark_v1.py -- zero saving across ten kinds, re-run here",
+  "cross_kind_learning_to_learn_benchmark_v1.py -- the procedure-credit mechanism whose docstring names the coarse/fine tension",
+  "cross_language_lesson_transfer_probe_v1.py -- already separates THE STORE from THE PROPOSER and answers it",
+  "hold_out_the_precision_curve_20261112_v1.py -- the real-PR retrieval ceiling",
+  "COMPRESSION_MAKES_EXPERIENCE_COMPOUND_20261112_V1.md -- 59 to 35 questions within a family",
+  "canonical/runtime/learn_to_learn_v1.py -- features() and feature_key(), unchanged"
+ ],
+ "probe_specific": false,
+ "recursive_obs": {
+  "canonical_base_commit": "078f34433bf3e98f9d589482a305034b9c6c366b",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "concluding from one bucketing of one feature vector",
+   "reading one instance of a kind as the kind",
+   "reporting an instrument artifact (instance 1 is the hardest) as a capability finding",
+   "building a new store when the store is measured not to be the wall",
+   "treating coarse versus fine as the parameter when both ends fail"
+  ],
+  "expected_parent_frontier_change": "The index stops being an unnoticed constant and becomes the named bottleneck: every mechanism the tree owns decides applicability with a key that lacks the observable, so reach is now aimed at one shared defect instead of at more experience or a finer grid.",
+  "expected_parent_level_state_change": "The index stops being an unnoticed constant and becomes the named bottleneck: every mechanism the tree owns decides applicability with a key that lacks the observable, so reach is now aimed at one shared defect instead of at more experience or a finer grid.",
+  "independent_verification_required": true,
+  "iteration_limit": 1,
+  "obs_blocker": {
+   "delete_bypass_substitute_options": [
+    "delete the coarse-or-fine framing as the account of transfer failure",
+    "bypass the index by obtaining the observable instead of re-bucketing its absence",
+    "substitute a computed index for a filed one"
+   ],
+   "intrinsic_or_path_specific": "intrinsic: a demonstration is a sequence, so its domain is a fact about the environment it was run in, and whether that domain is decidable is a fact about the agent's senses; neither is a property of the record.",
+   "surviving_causal_blocker": "The premise. It decides the licensed set (24 undecidable states at the status sense, 0 when the sense carries it), it cannot be closed by experience, and the tool's own output does not carry it."
+  },
+  "obs_capability": {
+   "capability_work_deleted": [
+    "a second lesson store or admission gate",
+    "another hand-written mutation kind",
+    "a larger search budget on an inexpressible edit"
+   ],
+   "existing_inherited_routes_checked": [
+    "learned_skill_verdict_v1.run_program (runs a program in a thrown-away copy; has no notion of a state moving under it)",
+    "one_demonstration_reach_v1 (measures reach of a stored requirement; assumes the state it measured on)",
+    "applicability_v1 (learns a requirement from outcomes; licenses only from contrasts)",
+    "python_iterative_software_repair_loop_v1 (applies one candidate at a time; never composes two learned actions)"
+   ],
+   "external_existing_routes_checked": [
+    "QuixBugs itself, as the corpus and the oracle",
+    "2026 verifier-gated self-improvement literature (the verifier is the gate once a candidate exists)"
+   ],
+   "surviving_gap": "An executor that treats every learned action as a decision procedure plus a premise, re-proves the premise on the live state, and postcondition-checks the claimed sentence after acting."
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "a higher repair count reached by loosening what counts as repaired",
+    "counting a self-taught repair as transfer",
+    "treating a longer candidate list as more capability",
+    "quoting a corpus score as a frontier position"
+   ],
+   "real_outcome": "The permanent object is the method (decision procedure + premise + cost) and the verifier, never the plan: a learned action may veto but never license, every application re-proves its premise on the live state and re-reads the result against the sentence it claims, and composition re-checks the second premise against the first step's effect instead of against the record.",
+   "surviving_necessity": "Coding capability is gated on a correct candidate existing at all; no oracle, budget or weight can select a hypothesis the basis cannot build."
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "None by claim: the existing repair primitive and corpus oracle are reused unchanged; the induced basis adds candidates only and holds no authority.",
+   "downstream_work_to_delete_or_supersede": "Any roadmap step that adds another hand-written mutation kind, or that raises a candidate budget to fix a bug whose edit is not expressible.",
+   "fresh_reuse_plan": "Recompute the ladder and re-run both bases from the receipt's commands; the corpus is public and the answer key is never needed."
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": "Reused the learned inline skill, the reach scanner and the run-in-a-copy runner; no second action library, no new oracle, no model.",
+   "search_stop_decision": "Stop at four independent samples (228 pairs); the per-sample staleness spread 45-58% already bounds the claim, and more samples buy precision, not a new fact."
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "efficiency_mechanism": "The plan saves search but never carries authority; the postcondition check costs one parse and one name scan per application and removes the 71 silent corruptions by construction.",
+   "generality_mechanism": "The same protocol applies to any state, including a GUI window: re-observe, re-prove the premise, act, re-read.",
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "Plain replay is wrong 53.5% of the time and silently wrong 31.1%; a fingerprint alone still admits the 4 zero-drift stale cases; one plan per state is unbounded and still unproved; a model is prohibited producer cognition.",
+   "routes_ranked": [
+    "re-decide every action with its premise re-proved on the live state (selected)",
+    "replay the recorded plan and trust it",
+    "fingerprint the region and refuse stale replays only",
+    "learn one plan per state, growing the store with every change",
+    "ask a model to repair the replay"
+   ],
+   "white_box_harvest_note": "The canonical ladder is recorded in full; the WHITE_BOX_HARVEST step was considered and found empty. No donor model, weight or external artifact was harvested: the mechanism was induced from the corpus's own demonstration pairs and the tree's own repair primitive."
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "oracle_paths": [
+    "canonical/tests/test_action_replay_under_change_v1.py",
+    "canonical/verification/ACTION_REPLAY_UNDER_CHANGE_20261116_V1.json",
+    "canonical/verification/LEARNED_SKILL_VERDICT_20261116_V1.json"
+   ],
+   "synthetic_verification_necessity": "The corpus's own published tests are the oracle; unit tests pin only the mechanism and the measurement's integrity. Independent reproduction remains open."
+  },
+  "real_outcome": "The filing key, not the learning or the edit space, is the bottleneck: coarsening worsens collisions (2->3), refining only reaches zero collisions at one key per kind (20 keys/20 kinds), and 5 of 20 kinds change their required policy between instances so no kind-level key can be right. The store is not the wall for cross-language transfer; the proposer is.",
+  "required_capability": "Guarding instead of remembering: check the plan's premise on the live state before the first action, check the goal after the last, and where the premise is not expressible in the available senses, make it observable or refuse -- because the undecidable set does not shrink with more attempts.",
+  "route_frontier": {
+   "challenger_routes": [
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "none: ordering alone turns a correct composition into a broken file",
+      "CORRECTNESS": "a plan is a fact about one state; applied to another it is a guess",
+      "INCREMENTAL_COST": "zero to record, one silently damaged file to trust",
+      "RELIABILITY": "31.1% of applications damage the file without any error being raised",
+      "VERIFIABILITY": "only a postcondition check can tell, which is the selected route",
+      "WALL_CLOCK": "faster by one parse and one name scan per step"
+     },
+     "evidence": [
+      "106 of 228 matches (46.5%); 122 stale (53.5%)",
+      "71 of 228 produced a file that parses and still binds the removed name (31.1%)",
+      "all 106 matches had zero drift; 4 stale replays had zero drift as well",
+      "the operation itself stayed legal in 228 of 228 pairs, so the loss is addressing, not capability"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/ACTION_REPLAY_UNDER_CHANGE_20261116_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "REPLAY_THE_RECORDED_PLAN_WHEREVER_THE_ACTION_IS_NEEDED"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "none without the re-check",
+      "CORRECTNESS": "removes most staleness and admits the rest",
+      "INCREMENTAL_COST": "one hash per region",
+      "RELIABILITY": "strictly better than replay, strictly weaker than a postcondition check",
+      "VERIFIABILITY": "a filter, not a proof; the postcondition is the proof",
+      "WALL_CLOCK": "one hash per region, the cheapest possible filter"
+     },
+     "evidence": [
+      "118 of 122 stale replays had nonzero drift, so a region fingerprint removes most of them",
+      "4 stale replays had zero drift, so the fingerprint cannot be the licence"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/ACTION_REPLAY_UNDER_CHANGE_20261116_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "NON_DOMINATING",
+     "route": "FINGERPRINT_THE_TOUCHED_REGION_AND_REFUSE_STALE_REPLAYS"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "composition becomes available instead of accidental",
+      "CORRECTNESS": "the proof is re-run on the state in hand and the sentence is re-read after acting",
+      "INCREMENTAL_COST": "no model, no network, no store",
+      "RELIABILITY": "silent corruptions fall from 31.1% to 0 by construction",
+      "VERIFIABILITY": "reproducible from the receipt with one command and pinned by pytest",
+      "WALL_CLOCK": "one parse plus one name scan per application"
+     },
+     "evidence": [
+      "228 real two-step compositions in 62 files, four independent samples",
+      "the premise held after the change in 228 of 228 pairs, so re-deciding keeps both steps",
+      "a postcondition check costs one parse and one name scan and removes all 71 silent corruptions by construction"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/ACTION_REPLAY_UNDER_CHANGE_20261116_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "SELECTED",
+     "route": "RE_DECIDE_EVERY_ACTION_PROVE_THE_PREMISE_ON_THE_LIVE_STATE_AND_POSTCONDITION_CHECK_THE_CLAIMED_SENTENCE_INSTEAD_OF_REPLAYING_THE_PLAN"
+    }
+   ],
+   "checked_at_utc": "2026-11-17T00:43:03Z",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "record the edit a learned action produced and replay that plan wherever the action is needed",
+   "max_age_hours": 24,
+   "negative_search_summary": "Three routes were refused on this tree's own measurement: plain replay (53.5% of 228 real compositions stale, 31.1% silently corrupt), fingerprint-only invalidation (necessary, but 4 stale replays had zero drift), and one stored plan per state (unbounded, and every plan is still unproved on the next state). A model-based repair was refused as producer cognition.",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "do coding agents replay past patches or synthesise new edits 2026"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "SWE-bench Verified patches keep deleted code Guard-and-Go deletion check"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "abstract plan reuse versus raw trajectory reuse SWE agent STAIR 2026"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "SWE-Touch mid-run user edit agent retained conflict 2026"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "selected_route": "SWEEP_THE_FILING_KEY_FROM_COARSER_THAN_THE_TREES_OWN_TO_ONE_KEY_PER_KIND_AND_SWEEP_INSTANCES__TO_DECIDE_WHETHER_ANY_GRANULARITY_OF_THE_EXISTING_FEATURES_IS_INJECTIVE_ON_WHAT_THE_POLICY_DEPENDS_ON",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-11-17T00:43:03Z",
+    "execution_dependencies": [
+     {
+      "dependency": "local Python 3.11 runtime with the repository's own venv",
+      "evidence": [
+       "35 mechanism and integrity tests ran; every verdict is an executed subprocess"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "this repository's own sources under canonical/**/*.py as the corpus",
+      "evidence": [
+       "5,562 files scanned; 509 eligible sites found by running the learned operation; corpus sha256 and the measured commit recorded"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "throw-away temp copies so no measurement can modify the tree",
+      "evidence": [
+       "every application runs in a TemporaryDirectory; the tree is byte-identical after the run"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "STORAGE",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "max_age_hours": 2,
+    "selected_route": "SWEEP_THE_FILING_KEY_FROM_COARSER_THAN_THE_TREES_OWN_TO_ONE_KEY_PER_KIND_AND_SWEEP_INSTANCES__TO_DECIDE_WHETHER_ANY_GRANULARITY_OF_THE_EXISTING_FEATURES_IS_INJECTIVE_ON_WHAT_THE_POLICY_DEPENDS_ON",
+    "status": "READY"
+   },
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/swe_kernel/verified_skill_crystallizer_v1.py",
+     "canonical/swe_kernel/lesson_localization_v1.py",
+     "canonical/swe_kernel/lesson_admission_gate_v1.py",
+     "canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py",
+     "canonical/runtime/bound_capabilities/python_iterative_software_repair_loop_v1.py"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "https://www.sota2.com/research/dataset/miniwob (2026 aggregate reporting, used only to bound suite difficulty)"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "https://github.com/jkoppel/QuixBugs (MIT; 40 buggy programs, 40 pytest files, JSON test data)",
+     "https://pypi.org/project/pytest (9.2.0, the runner every verdict goes through)"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "https://arxiv.org/html/2605.11030v1 (executable benchmarking suite for tool-using agents, May 2026)",
+     "https://arxiv.org/pdf/2507.04103 (how to train your LLM web agent: task horizons of 2-5 steps)"
+    ]
+   },
+   "unresolved_plausible_dominators": []
+  },
+  "routes_considered": [
+   "Count one success as learning the environment (checked: the demonstration's domain is 112 of 168 states, and 56 of 168 when the task has a premise)",
+   "Assume full observability and replay the demonstration (checked: 24 of 168 states are undecidable at the status sense, 16 of them silently wrong)",
+   "Close the gap with more demonstrations (checked: 4 groups can be licensed by no demonstration at all, and the undecidable set is invariant to experience)",
+   "Trust the tool's own success message as the goal's truth (checked: 3 classes over 168 states, none inside the plan's domain)",
+   "Measure the plan's exact domain and score every sense against it, then guard or refuse (selected)"
+  ],
+  "selected_route": "SWEEP_THE_FILING_KEY_FROM_COARSER_THAN_THE_TREES_OWN_TO_ONE_KEY_PER_KIND_AND_SWEEP_INSTANCES__TO_DECIDE_WHETHER_ANY_GRANULARITY_OF_THE_EXISTING_FEATURES_IS_INJECTIVE_ON_WHAT_THE_POLICY_DEPENDS_ON",
+  "selected_surviving_route": "SWEEP_THE_FILING_KEY_FROM_COARSER_THAN_THE_TREES_OWN_TO_ONE_KEY_PER_KIND_AND_SWEEP_INSTANCES__TO_DECIDE_WHETHER_ANY_GRANULARITY_OF_THE_EXISTING_FEATURES_IS_INJECTIVE_ON_WHAT_THE_POLICY_DEPENDS_ON",
+  "selected_surviving_route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+  "stop_condition": "All five existing instruments re-run on this base, the key swept from coarser to one-per-kind, instances swept, and no new index, store or learning mechanism built.",
+  "why_selected_route_is_fastest_sufficient": "It is the only route that answers the claim on a closed environment where the ground truth is fully known: the model costs |S|x|A| real transitions once, after which every sense is scored on the same states for free, which is what turns 'one try is not enough' into a number and a lever -- the same code path for a git command and a GUI action.",
+  "why_this_is_not_another_organ": "It replaces a list with a fold over experience and reuses the existing repair primitive, the corpus oracle and the hashing/verification discipline; the only new machinery is induction and the rung classifier, and both are measured."
+ },
+ "route_id": "SWEEP_THE_FILING_KEY_FROM_COARSER_THAN_THE_TREES_OWN_TO_ONE_KEY_PER_KIND_AND_SWEEP_INSTANCES__TO_DECIDE_WHETHER_ANY_GRANULARITY_OF_THE_EXISTING_FEATURES_IS_INJECTIVE_ON_WHAT_THE_POLICY_DEPENDS_ON",
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "scope_complete_discharge": false,
+ "selected_route": "SWEEP_THE_FILING_KEY_FROM_COARSER_THAN_THE_TREES_OWN_TO_ONE_KEY_PER_KIND_AND_SWEEP_INSTANCES__TO_DECIDE_WHETHER_ANY_GRANULARITY_OF_THE_EXISTING_FEATURES_IS_INJECTIVE_ON_WHAT_THE_POLICY_DEPENDS_ON",
+ "status": "COMPLETE",
+ "stop_condition": "All five existing instruments re-run on this base, the key swept from coarser to one-per-kind, instances swept, and no new index, store or learning mechanism built.",
+ "terminal_credit_delta": 0,
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "truth": "The wall is the filing key, not the edit space and not the amount of experience. The function that decides which lesson applies to a situation does not contain the observable the lesson depends on, and no coarsening or refining of it can supply what is missing.",
+ "user_authorized_governance_change": false,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "currentness": {
+   "accepted_families": 5,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "It measures what a demonstration licenses and where; it discharges no truth obligation.",
+  "target_truth_obligations": [
+   "CODING_TB4_GE_66_4"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [],
+   "decisive_question": "Does one demonstration teach the environment, or only a domain inside it -- and can the agent tell which domain it is standing in?",
+   "falsifier_id": "EXACT_DOMAIN_SCORED_AGAINST_EVERY_SENSE_PLUS_COMMAND_OUTPUT_CONTROL",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "The environment is the counterexample: 168 states, one 3-action demonstration with a 112-state domain, 24 undecidable states under the status sense and 168 under command output.",
+   "proposal_id": "ONE_TRY_LEARNS_A_DOMAIN_NOT_THE_ENVIRONMENT_20261116_V1"
+  }
+ },
+ "verification": {
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "commands": [
+   "python3 canonical/swe_kernel/one_demonstration_basin_v1.py --max-states 400 --json canonical/verification/ONE_DEMONSTRATION_BASIN_20261116_V1.json",
+   "python3 -m pytest canonical/tests/test_one_demonstration_basin_v1.py -q",
+   "python3 canonical/runtime/compile_brain_unified_model_v1.py",
+   "python3 execution_guard/repo_integrity_guard_v1.py --base 6f78086bc2ee7b4992bee6e21aaa422f4be1eba1"
+  ],
+  "receipt": "canonical/verification/ONE_DEMONSTRATION_BASIN_20261116_V1.json"
+ },
+ "weakens_existing_guard": false
+}

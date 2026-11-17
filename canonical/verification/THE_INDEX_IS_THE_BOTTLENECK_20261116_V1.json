@@ -1,0 +1,645 @@
+{
+ "authority": "NONE__PRODUCER_RUN_COUNTING_OVER_EXISTING_BENCHMARK",
+ "incremental_spend_usd": 0,
+ "instance_sensitivity": {
+  "kinds_unsolvable_on_every_instance": [
+   "ring_rotate"
+  ],
+  "kinds_whose_policy_set_changes_with_instance": [
+   "adjacent_sort",
+   "binary_odometer",
+   "grid_walk",
+   "sliding_pairs",
+   "string_affix"
+  ],
+  "per_kind": {
+   "adjacent_sort": {
+    "0": [
+     "bfs_lex",
+     "dfs_reversed",
+     "repeat_last",
+     "never_last",
+     "rarest"
+    ],
+    "1": [
+     "dfs_reversed"
+    ],
+    "2": [
+     "bfs_lex",
+     "repeat_last",
+     "never_last",
+     "rarest"
+    ]
+   },
+   "append_letters": {
+    "0": [],
+    "1": [
+     "bfs_lex",
+     "repeat_last",
+     "never_last",
+     "rarest"
+    ],
+    "2": [
+     "bfs_lex",
+     "repeat_last",
+     "never_last",
+     "rarest"
+    ]
+   },
+   "binary_odometer": {
+    "0": [],
+    "1": [
+     "bfs_lex",
+     "repeat_last",
+     "never_last",
+     "rarest"
+    ],
+    "2": [
+     "dfs_reversed"
+    ]
+   },
+   "bit_register": {
+    "0": [
+     "bfs_lex",
+     "dfs_reversed",
+     "repeat_last",
+     "never_last",
+     "rarest"
+    ],
+    "1": [
+     "bfs_lex",
+     "dfs_reversed",
+     "repeat_last",
+     "never_last",
+     "rarest"
+    ],
+    "2": [
+     "bfs_lex",
+     "dfs_reversed",
+     "repeat_last",
+     "never_last",
+     "rarest"
+    ]
+   },
+   "cyclic_counter": {
+    "0": [
+     "bfs_lex",
+     "dfs_reversed",
+     "repeat_last",
+     "never_last",
+     "rarest"
+    ],
+    "1": [
+     "bfs_lex",
+     "dfs_reversed",
+     "repeat_last",
+     "never_last",
+     "rarest"
+    ],
+    "2": [
+     "bfs_lex",
+     "dfs_reversed",
+     "repeat_last",
+     "never_last",
+     "rarest"
+    ]
+   },
+   "dial_lock": {
+    "0": [
+     "bfs_lex",
+     "dfs_reversed",
+     "repeat_last",
+     "never_last",
+     "rarest"
+    ],
+    "1": [
+     "bfs_lex",
+     "dfs_reversed",
+     "repeat_last",
+     "never_last",
+     "rarest"
+    ],
+    "2": []
+   },
+   "double_dial": {
+    "0": [
+     "bfs_lex",
+     "dfs_reversed",
+     "repeat_last",
+     "never_last",
+     "rarest"
+    ],
+    "1": [
+     "bfs_lex",
+     "dfs_reversed",
+     "repeat_last",
+     "never_last",
+     "rarest"
+    ],
+    "2": [
+     "bfs_lex",
+     "dfs_reversed",
+     "repeat_last",
+     "never_last",
+     "rarest"
+    ]
+   },
+   "grid_walk": {
+    "0": [
+     "dfs_reversed"
+    ],
+    "1": [
+     "bfs_lex",
+     "dfs_reversed",
+     "repeat_last",
+     "never_last",
+     "rarest"
+    ],
+    "2": []
+   },
+   "last_wins": {
+    "0": [
+     "bfs_lex",
+     "dfs_reversed",
+     "repeat_last",
+     "never_last",
+     "rarest"
+    ],
+    "1": [
+     "bfs_lex",
+     "dfs_reversed",
+     "repeat_last",
+     "never_last",
+     "rarest"
+    ],
+    "2": [
+     "bfs_lex",
+     "dfs_reversed",
+     "repeat_last",
+     "never_last",
+     "rarest"
+    ]
+   },
+   "letter_shift": {
+    "0": [],
+    "1": [],
+    "2": [
+     "bfs_lex",
+     "repeat_last",
+     "never_last"
+    ]
+   },
+   "parity_lights": {
+    "0": [
+     "bfs_lex",
+     "dfs_reversed",
+     "repeat_last",
+     "never_last",
+     "rarest"
+    ],
+    "1": [
+     "bfs_lex",
+     "dfs_reversed",
+     "repeat_last",
+     "never_last",
+     "rarest"
+    ],
+    "2": [
+     "bfs_lex",
+     "dfs_reversed",
+     "repeat_last",
+     "never_last",
+     "rarest"
+    ]
+   },
+   "queue_rotate": {
+    "0": [
+     "bfs_lex",
+     "dfs_reversed",
+     "repeat_last",
+     "never_last",
+     "rarest"
+    ],
+    "1": [
+     "bfs_lex",
+     "dfs_reversed",
+     "repeat_last",
+     "never_last",
+     "rarest"
+    ],
+    "2": []
+   },
+   "reverse_string": {
+    "0": [
+     "bfs_lex",
+     "repeat_last",
+     "never_last",
+     "rarest"
+    ],
+    "1": [
+     "bfs_lex",
+     "repeat_last",
+     "never_last",
+     "rarest"
+    ],
+    "2": [
+     "bfs_lex",
+     "repeat_last",
+     "never_last",
+     "rarest"
+    ]
+   },
+   "ring_rotate": {
+    "0": [],
+    "1": [],
+    "2": []
+   },
+   "sliding_pairs": {
+    "0": [
+     "bfs_lex",
+     "dfs_reversed",
+     "repeat_last",
+     "never_last",
+     "rarest"
+    ],
+    "1": [
+     "dfs_reversed"
+    ],
+    "2": [
+     "bfs_lex",
+     "dfs_reversed",
+     "repeat_last",
+     "never_last",
+     "rarest"
+    ]
+   },
+   "stack_pushout": {
+    "0": [],
+    "1": [],
+    "2": [
+     "bfs_lex",
+     "dfs_reversed",
+     "repeat_last",
+     "never_last",
+     "rarest"
+    ]
+   },
+   "string_affix": {
+    "0": [
+     "bfs_lex",
+     "repeat_last",
+     "never_last",
+     "rarest"
+    ],
+    "1": [
+     "bfs_lex",
+     "dfs_reversed",
+     "repeat_last",
+     "never_last",
+     "rarest"
+    ],
+    "2": [
+     "bfs_lex",
+     "dfs_reversed",
+     "repeat_last",
+     "never_last",
+     "rarest"
+    ]
+   },
+   "toggle_bank": {
+    "0": [
+     "bfs_lex",
+     "dfs_reversed",
+     "repeat_last",
+     "never_last",
+     "rarest"
+    ],
+    "1": [
+     "bfs_lex",
+     "dfs_reversed",
+     "repeat_last",
+     "never_last",
+     "rarest"
+    ],
+    "2": [
+     "bfs_lex",
+     "dfs_reversed",
+     "repeat_last",
+     "never_last",
+     "rarest"
+    ]
+   },
+   "tri_lock": {
+    "0": [],
+    "1": [],
+    "2": [
+     "bfs_lex",
+     "repeat_last",
+     "never_last",
+     "rarest"
+    ]
+   },
+   "two_jug_pour": {
+    "0": [],
+    "1": [
+     "bfs_lex",
+     "dfs_reversed",
+     "repeat_last",
+     "never_last",
+     "rarest"
+    ],
+    "2": [
+     "bfs_lex",
+     "dfs_reversed",
+     "repeat_last",
+     "never_last",
+     "rarest"
+    ]
+   }
+  },
+  "reading": "A kind whose required policy set changes between instances cannot be indexed by kind-level features at all: the key would have to name the instance."
+ },
+ "kind": "receipt",
+ "kinds": 20,
+ "producer_cognition_model_dependency_count": 0,
+ "reading": "A key has to be injective on the distinction the policy depends on. If every family either collides kinds that need different policies or degenerates to one key per kind, the features do not CONTAIN that distinction and no bucketing of them can supply it. The repair is a new observable, not a finer grid.",
+ "schema": "THE_INDEX_IS_THE_BOTTLENECK_V1",
+ "sweep": [
+  {
+   "answerable": 5,
+   "answerable_fraction": 0.625,
+   "collision_detail": [
+    {
+     "distinct_winner_sets": 3,
+     "key": "b1_m2_r1_d0_g0",
+     "kinds": [
+      "grid_walk",
+      "dial_lock",
+      "toggle_bank",
+      "adjacent_sort",
+      "sliding_pairs",
+      "stack_pushout",
+      "letter_shift",
+      "double_dial",
+      "tri_lock"
+     ]
+    },
+    {
+     "distinct_winner_sets": 2,
+     "key": "b1_m1_r0_d0_g0",
+     "kinds": [
+      "reverse_string",
+      "last_wins"
+     ]
+    }
+   ],
+   "collisions": 2,
+   "keys": 8,
+   "kinds": 20,
+   "name": "tree_coarse__b(2,4,6)_m(.45,.8)_r(1.5,3)_d(0,3,10)"
+  },
+  {
+   "answerable": 4,
+   "answerable_fraction": 0.5714,
+   "collision_detail": [
+    {
+     "distinct_winner_sets": 2,
+     "key": "b1_m1_r0_d0_g0",
+     "kinds": [
+      "grid_walk",
+      "toggle_bank",
+      "bit_register",
+      "parity_lights",
+      "stack_pushout",
+      "letter_shift",
+      "double_dial"
+     ]
+    },
+    {
+     "distinct_winner_sets": 2,
+     "key": "b0_m1_r0_d0_g0",
+     "kinds": [
+      "cyclic_counter",
+      "dial_lock",
+      "adjacent_sort",
+      "queue_rotate",
+      "sliding_pairs",
+      "ring_rotate",
+      "tri_lock"
+     ]
+    },
+    {
+     "distinct_winner_sets": 2,
+     "key": "b1_m0_r0_d0_g0",
+     "kinds": [
+      "two_jug_pour",
+      "reverse_string"
+     ]
+    }
+   ],
+   "collisions": 3,
+   "keys": 7,
+   "kinds": 20,
+   "name": "coarser_still"
+  },
+  {
+   "answerable": 11,
+   "answerable_fraction": 0.7857,
+   "collision_detail": [
+    {
+     "distinct_winner_sets": 2,
+     "key": "b3_m4_r2_d1_g0",
+     "kinds": [
+      "grid_walk",
+      "stack_pushout",
+      "letter_shift"
+     ]
+    },
+    {
+     "distinct_winner_sets": 2,
+     "key": "b2_m4_r1_d1_g0",
+     "kinds": [
+      "dial_lock",
+      "adjacent_sort",
+      "sliding_pairs",
+      "tri_lock"
+     ]
+    }
+   ],
+   "collisions": 2,
+   "keys": 14,
+   "kinds": 20,
+   "name": "finer_mid"
+  },
+  {
+   "answerable": 13,
+   "answerable_fraction": 0.8125,
+   "collision_detail": [
+    {
+     "distinct_winner_sets": 2,
+     "key": "{\"branching\": 4, \"moved_fraction\": 1.0, \"reachable_growth\": 2.25, \"single_action_goal_depth\": 0, \"start_reaches_goal_already\": false}",
+     "kinds": [
+      "grid_walk",
+      "letter_shift"
+     ]
+    },
+    {
+     "distinct_winner_sets": 2,
+     "key": "{\"branching\": 3, \"moved_fraction\": 1.0, \"reachable_growth\": 2.0, \"single_action_goal_depth\": 0, \"start_reaches_goal_already\": false}",
+     "kinds": [
+      "dial_lock",
+      "adjacent_sort",
+      "sliding_pairs",
+      "tri_lock"
+     ]
+    }
+   ],
+   "collisions": 2,
+   "keys": 16,
+   "kinds": 20,
+   "name": "finest_exact_features"
+  },
+  {
+   "answerable": 19,
+   "answerable_fraction": 0.95,
+   "collision_detail": [],
+   "collisions": 0,
+   "keys": 20,
+   "kinds": 20,
+   "name": "trivial_one_key_per_kind"
+  }
+ ],
+ "usable_key_families": [],
+ "verdict": "NO_GRANULARITY_OF_THESE_FEATURES_SEPARATES_WHAT_THE_POLICY_DEPENDS_ON",
+ "winner_sets": {
+  "adjacent_sort": [
+   "bfs_lex",
+   "dfs_reversed",
+   "never_last",
+   "rarest",
+   "repeat_last"
+  ],
+  "append_letters": [
+   "bfs_lex",
+   "never_last",
+   "rarest",
+   "repeat_last"
+  ],
+  "binary_odometer": [
+   "bfs_lex",
+   "dfs_reversed",
+   "never_last",
+   "rarest",
+   "repeat_last"
+  ],
+  "bit_register": [
+   "bfs_lex",
+   "dfs_reversed",
+   "never_last",
+   "rarest",
+   "repeat_last"
+  ],
+  "cyclic_counter": [
+   "bfs_lex",
+   "dfs_reversed",
+   "never_last",
+   "rarest",
+   "repeat_last"
+  ],
+  "dial_lock": [
+   "bfs_lex",
+   "dfs_reversed",
+   "never_last",
+   "rarest",
+   "repeat_last"
+  ],
+  "double_dial": [
+   "bfs_lex",
+   "dfs_reversed",
+   "never_last",
+   "rarest",
+   "repeat_last"
+  ],
+  "grid_walk": [
+   "bfs_lex",
+   "dfs_reversed",
+   "never_last",
+   "rarest",
+   "repeat_last"
+  ],
+  "last_wins": [
+   "bfs_lex",
+   "dfs_reversed",
+   "never_last",
+   "rarest",
+   "repeat_last"
+  ],
+  "letter_shift": [
+   "bfs_lex",
+   "never_last",
+   "repeat_last"
+  ],
+  "parity_lights": [
+   "bfs_lex",
+   "dfs_reversed",
+   "never_last",
+   "rarest",
+   "repeat_last"
+  ],
+  "queue_rotate": [
+   "bfs_lex",
+   "dfs_reversed",
+   "never_last",
+   "rarest",
+   "repeat_last"
+  ],
+  "reverse_string": [
+   "bfs_lex",
+   "never_last",
+   "rarest",
+   "repeat_last"
+  ],
+  "ring_rotate": [],
+  "sliding_pairs": [
+   "bfs_lex",
+   "dfs_reversed",
+   "never_last",
+   "rarest",
+   "repeat_last"
+  ],
+  "stack_pushout": [
+   "bfs_lex",
+   "dfs_reversed",
+   "never_last",
+   "rarest",
+   "repeat_last"
+  ],
+  "string_affix": [
+   "bfs_lex",
+   "dfs_reversed",
+   "never_last",
+   "rarest",
+   "repeat_last"
+  ],
+  "toggle_bank": [
+   "bfs_lex",
+   "dfs_reversed",
+   "never_last",
+   "rarest",
+   "repeat_last"
+  ],
+  "tri_lock": [
+   "bfs_lex",
+   "never_last",
+   "rarest",
+   "repeat_last"
+  ],
+  "two_jug_pour": [
+   "bfs_lex",
+   "dfs_reversed",
+   "never_last",
+   "rarest",
+   "repeat_last"
+  ]
+ }
+}
