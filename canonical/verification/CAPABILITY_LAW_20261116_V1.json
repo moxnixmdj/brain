@@ -30,6 +30,23 @@
       "tasks_where_content_alone_suffices": 9,
       "why": "the oracle is not a predicate to be written but an observation to be chosen, under two tests at once: it must separate the action from the ways it can be wrong, and it must reproduce itself on replay. Separation alone admits a timestamp; stability alone admits a name listing"
     },
+    "prospective": {
+      "acquired_from": "one real execution per action",
+      "arms": {
+        "frame_only": 0.9706,
+        "frame_plus_intervention": 0.9706,
+        "full": 1.0,
+        "no_recorded_consequence": 0.5
+      },
+      "content_only_errors": {
+        "frame_only": 0.4,
+        "full": 0.8
+      },
+      "evaluated_on": "a binding never executed during acquisition",
+      "false_alarms_on_correct_novel_actions": 0,
+      "receipt": "canonical/verification/PREDICTIVE_CONTRACT_20261116_V1.json",
+      "why": "a consequence differential only exists after acting and only on a seen binding. A contract acquired from one execution is the prospective form of the same check: the frame -- which paths the action may touch -- carries most of it, a declared or derived relation carries the bytes, and what remains is a located hole in the vocabulary"
+    },
     "receipt": "canonical/verification/COMPUTER_USE_CHECK_DENSITY_20261116_V1.json",
     "replay": {
       "density": 1.0,
@@ -76,6 +93,10 @@
     "computer": {
       "path": "canonical/verification/COMPUTER_USE_CHECK_DENSITY_20261116_V1.json",
       "sha256": "f4c170c5b98b14f15bc53d0ef0d220fca64d959f6e9cb244091e25b38cf5d107"
+    },
+    "contract": {
+      "path": "canonical/verification/PREDICTIVE_CONTRACT_20261116_V1.json",
+      "sha256": "7f20ade5139098a74aa614a51ddc2127ff4a3c3671972c79415765334228cdfd"
     },
     "determinacy": {
       "path": "canonical/verification/SYSTEMATIC_EDIT_SUPPLY_20261116_V1.json",

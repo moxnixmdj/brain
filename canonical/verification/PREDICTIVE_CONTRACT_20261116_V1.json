@@ -1,0 +1,837 @@
+{
+  "acquisition_binding": {
+    "dst": "out.dat",
+    "src": "in.txt"
+  },
+  "arms": {
+    "frame_only": {
+      "caught": 33,
+      "density": 0.9706,
+      "note": "the contract with its content vocabulary withheld: what vocabulary insufficiency costs",
+      "unknown_share": 0.0294
+    },
+    "frame_plus_intervention": {
+      "caught": 33,
+      "density": 0.9706,
+      "note": "the counterfactual recovers part of it with no vocabulary",
+      "unknown_share": 0.0294
+    },
+    "full": {
+      "caught": 34,
+      "density": 1.0,
+      "note": "frame + content clause + intervention where input sensitivity was acquired",
+      "unknown_share": 0.0
+    },
+    "no_recorded_consequence": {
+      "density": 0.5,
+      "note": "crashes and no-ops only, the regime this feature has to beat",
+      "source": "COMPUTER_USE_CHECK_DENSITY_20261116_V1 density_by_regime/full/novel_density"
+    }
+  },
+  "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+  "binding_is_novel": "payload.txt / sub/result.dat were never executed during acquisition and carry different bytes; the contract is parameterised over roles, so this measures transfer, not replay",
+  "content_clause_available_for": [
+    "gzip",
+    "sort",
+    "base64",
+    "tr",
+    "sed",
+    "sha256sum",
+    "cp",
+    "split",
+    "tar"
+  ],
+  "content_clause_derived_for": [
+    "tr",
+    "sed"
+  ],
+  "content_clause_missing_for": [],
+  "content_only_arm": {
+    "equivalent_and_not_counted": 0,
+    "frame_only": {
+      "caught": 2,
+      "density": 0.4,
+      "total": 5
+    },
+    "frame_plus_intervention": {
+      "caught": 2,
+      "density": 0.4,
+      "total": 5
+    },
+    "full": {
+      "caught": 4,
+      "density": 0.8,
+      "total": 5
+    },
+    "why": "wrong actions that keep every path identical and change only the bytes -- the side of the space the inherited mutant family under-samples"
+  },
+  "detection_by_mechanism": {
+    "content_relation": 15,
+    "frame_or_exit": 19
+  },
+  "detection_by_mutant_class": {
+    "drop_first_flag": {
+      "frame_only": 4,
+      "full": 4,
+      "none": 3
+    },
+    "drop_target": {
+      "frame_only": 7,
+      "full": 7,
+      "none": 3
+    },
+    "swap_source_target": {
+      "frame_only": 7,
+      "full": 7,
+      "none": 7
+    },
+    "wrong_source": {
+      "frame_only": 8,
+      "full": 9,
+      "none": 0
+    },
+    "wrong_target": {
+      "frame_only": 7,
+      "full": 7,
+      "none": 0
+    }
+  },
+  "evaluation_binding": {
+    "dst": "sub/result.dat",
+    "src": "payload.txt"
+  },
+  "false_alarms_on_correct_novel_actions": {
+    "frame_only": {
+      "count": 0,
+      "tasks": []
+    },
+    "full": {
+      "count": 0,
+      "tasks": []
+    },
+    "rate_full": 0.0
+  },
+  "incremental_spend_usd": 0,
+  "input_sensitive_tasks": [
+    "gzip",
+    "sort",
+    "base64",
+    "tr",
+    "sed",
+    "sha256sum",
+    "cp",
+    "split",
+    "tar"
+  ],
+  "limit": "the content clause is a relation drawn from a declared class or derived from the single execution and validated against a perturbation; an effect outside both gets a frame-only contract and abstains. Transfer across a change of program -- not just of binding -- is not attempted here, and whether a correct contract can be acquired from a wrong demonstration is not tested: that is the fidelity-versus-correctness boundary",
+  "model_calls": 0,
+  "mutants": 34,
+  "network_calls": 0,
+  "per_task": [
+    {
+      "content_clause": {
+        "name": "gzip_roundtrip_any",
+        "params": {}
+      },
+      "content_clause_origin": "declared",
+      "content_only_mutants": [],
+      "correct_novel": {
+        "frame_only": "UNKNOWN",
+        "full": "HOLDS",
+        "intervention_fired": false
+      },
+      "frame_creates": [
+        "{src}.gz"
+      ],
+      "frame_removes": [],
+      "input_sensitive": true,
+      "mutants": [
+        {
+          "command": "gzip -k -f decoy.txt",
+          "mechanism": "content_relation",
+          "mutant": "wrong_source",
+          "reasons": [
+            "predicted_creation_missing:payload.txt.gz",
+            "unlicensed_creation:decoy.txt.gz"
+          ],
+          "verdict_frame_only": "VIOLATED",
+          "verdict_frame_plus_intervention": "VIOLATED",
+          "verdict_full": "VIOLATED",
+          "verdict_no_contract": "HOLDS"
+        },
+        {
+          "command": "gzip -f in.txt",
+          "mechanism": "content_relation",
+          "mutant": "drop_first_flag",
+          "reasons": [
+            "predicted_creation_missing:payload.txt.gz",
+            "unlicensed_creation:in.txt.gz"
+          ],
+          "verdict_frame_only": "VIOLATED",
+          "verdict_frame_plus_intervention": "VIOLATED",
+          "verdict_full": "VIOLATED",
+          "verdict_no_contract": "HOLDS"
+        }
+      ],
+      "task": "gzip"
+    },
+    {
+      "content_clause": {
+        "name": "line_permutation",
+        "params": {}
+      },
+      "content_clause_origin": "declared",
+      "content_only_mutants": [],
+      "correct_novel": {
+        "frame_only": "UNKNOWN",
+        "full": "HOLDS",
+        "intervention_fired": false
+      },
+      "frame_creates": [
+        "{dst}"
+      ],
+      "frame_removes": [],
+      "input_sensitive": true,
+      "mutants": [
+        {
+          "command": "sort decoy.txt -o out.dat",
+          "mechanism": "content_relation",
+          "mutant": "wrong_source",
+          "reasons": [
+            "predicted_creation_missing:sub/result.dat",
+            "unlicensed_creation:out.dat"
+          ],
+          "verdict_frame_only": "VIOLATED",
+          "verdict_frame_plus_intervention": "VIOLATED",
+          "verdict_full": "VIOLATED",
+          "verdict_no_contract": "HOLDS"
+        },
+        {
+          "command": "sort in.txt -o sub/out.dat",
+          "mechanism": "content_relation",
+          "mutant": "wrong_target",
+          "reasons": [
+            "predicted_creation_missing:sub/result.dat",
+            "unlicensed_creation:sub/out.dat"
+          ],
+          "verdict_frame_only": "VIOLATED",
+          "verdict_frame_plus_intervention": "VIOLATED",
+          "verdict_full": "VIOLATED",
+          "verdict_no_contract": "HOLDS"
+        },
+        {
+          "command": "sort in.txt -o",
+          "mechanism": "frame_or_exit",
+          "mutant": "drop_target",
+          "reasons": [
+            "nonzero_exit:2"
+          ],
+          "verdict_frame_only": "VIOLATED",
+          "verdict_frame_plus_intervention": "VIOLATED",
+          "verdict_full": "VIOLATED",
+          "verdict_no_contract": "VIOLATED"
+        },
+        {
+          "command": "sort out.dat -o in.txt",
+          "mechanism": "frame_or_exit",
+          "mutant": "swap_source_target",
+          "reasons": [
+            "nonzero_exit:2"
+          ],
+          "verdict_frame_only": "VIOLATED",
+          "verdict_frame_plus_intervention": "VIOLATED",
+          "verdict_full": "VIOLATED",
+          "verdict_no_contract": "VIOLATED"
+        },
+        {
+          "command": "sort in.txt out.dat",
+          "mechanism": "frame_or_exit",
+          "mutant": "drop_first_flag",
+          "reasons": [
+            "nonzero_exit:2"
+          ],
+          "verdict_frame_only": "VIOLATED",
+          "verdict_frame_plus_intervention": "VIOLATED",
+          "verdict_full": "VIOLATED",
+          "verdict_no_contract": "VIOLATED"
+        }
+      ],
+      "task": "sort"
+    },
+    {
+      "content_clause": {
+        "name": "base64_roundtrip",
+        "params": {}
+      },
+      "content_clause_origin": "declared",
+      "content_only_mutants": [],
+      "correct_novel": {
+        "frame_only": "UNKNOWN",
+        "full": "HOLDS",
+        "intervention_fired": false
+      },
+      "frame_creates": [
+        "{dst}"
+      ],
+      "frame_removes": [],
+      "input_sensitive": true,
+      "mutants": [
+        {
+          "command": "base64 decoy.txt > out.dat",
+          "mechanism": "content_relation",
+          "mutant": "wrong_source",
+          "reasons": [
+            "predicted_creation_missing:sub/result.dat",
+            "unlicensed_creation:out.dat"
+          ],
+          "verdict_frame_only": "VIOLATED",
+          "verdict_frame_plus_intervention": "VIOLATED",
+          "verdict_full": "VIOLATED",
+          "verdict_no_contract": "HOLDS"
+        },
+        {
+          "command": "base64 in.txt > sub/out.dat",
+          "mechanism": "content_relation",
+          "mutant": "wrong_target",
+          "reasons": [
+            "predicted_creation_missing:sub/result.dat",
+            "unlicensed_creation:sub/out.dat"
+          ],
+          "verdict_frame_only": "VIOLATED",
+          "verdict_frame_plus_intervention": "VIOLATED",
+          "verdict_full": "VIOLATED",
+          "verdict_no_contract": "HOLDS"
+        },
+        {
+          "command": "base64 in.txt ",
+          "mechanism": "content_relation",
+          "mutant": "drop_target",
+          "reasons": [
+            "predicted_creation_missing:sub/result.dat",
+            "content_clause_broken:base64_roundtrip"
+          ],
+          "verdict_frame_only": "VIOLATED",
+          "verdict_frame_plus_intervention": "VIOLATED",
+          "verdict_full": "VIOLATED",
+          "verdict_no_contract": "HOLDS"
+        },
+        {
+          "command": "base64 out.dat > in.txt",
+          "mechanism": "frame_or_exit",
+          "mutant": "swap_source_target",
+          "reasons": [
+            "nonzero_exit:1"
+          ],
+          "verdict_frame_only": "VIOLATED",
+          "verdict_frame_plus_intervention": "VIOLATED",
+          "verdict_full": "VIOLATED",
+          "verdict_no_contract": "VIOLATED"
+        }
+      ],
+      "task": "base64"
+    },
+    {
+      "content_clause": {
+        "name": "derived_byte_map",
+        "params": {
+          "map": {
+            "10": 10,
+            "100": 68,
+            "101": 69,
+            "103": 71,
+            "104": 72,
+            "105": 73,
+            "107": 75,
+            "108": 76,
+            "109": 77,
+            "110": 78,
+            "111": 79,
+            "112": 80,
+            "115": 83,
+            "116": 84,
+            "122": 90,
+            "32": 32,
+            "97": 65,
+            "98": 66
+          }
+        }
+      },
+      "content_clause_origin": "derived_and_perturbation_validated",
+      "content_only_mutants": [
+        {
+          "command": "tr a-A A-Z < {src} > {dst}",
+          "equivalent": false,
+          "mutant": "content_only:a-z",
+          "reasons": [
+            "nonzero_exit:1"
+          ],
+          "verdict_frame_only": "VIOLATED",
+          "verdict_frame_plus_intervention": "VIOLATED",
+          "verdict_full": "VIOLATED"
+        },
+        {
+          "command": "tr a-z A-A < {src} > {dst}",
+          "equivalent": false,
+          "mutant": "content_only:A-Z",
+          "reasons": [
+            "content_clause_broken:derived_byte_map"
+          ],
+          "verdict_frame_only": "UNKNOWN",
+          "verdict_frame_plus_intervention": "UNKNOWN",
+          "verdict_full": "VIOLATED"
+        }
+      ],
+      "correct_novel": {
+        "frame_only": "UNKNOWN",
+        "full": "HOLDS",
+        "intervention_fired": false
+      },
+      "frame_creates": [
+        "{dst}"
+      ],
+      "frame_removes": [],
+      "input_sensitive": true,
+      "mutants": [
+        {
+          "command": "tr a-z A-Z < decoy.txt > out.dat",
+          "mechanism": "frame_or_exit",
+          "mutant": "wrong_source",
+          "reasons": [
+            "predicted_creation_missing:sub/result.dat",
+            "unlicensed_creation:out.dat"
+          ],
+          "verdict_frame_only": "VIOLATED",
+          "verdict_frame_plus_intervention": "VIOLATED",
+          "verdict_full": "VIOLATED",
+          "verdict_no_contract": "HOLDS"
+        },
+        {
+          "command": "tr a-z A-Z < in.txt > sub/out.dat",
+          "mechanism": "frame_or_exit",
+          "mutant": "wrong_target",
+          "reasons": [
+            "predicted_creation_missing:sub/result.dat",
+            "unlicensed_creation:sub/out.dat"
+          ],
+          "verdict_frame_only": "VIOLATED",
+          "verdict_frame_plus_intervention": "VIOLATED",
+          "verdict_full": "VIOLATED",
+          "verdict_no_contract": "HOLDS"
+        },
+        {
+          "command": "tr a-z A-Z < in.txt ",
+          "mechanism": "frame_or_exit",
+          "mutant": "drop_target",
+          "reasons": [
+            "predicted_creation_missing:sub/result.dat"
+          ],
+          "verdict_frame_only": "VIOLATED",
+          "verdict_frame_plus_intervention": "VIOLATED",
+          "verdict_full": "VIOLATED",
+          "verdict_no_contract": "HOLDS"
+        },
+        {
+          "command": "tr a-z A-Z < out.dat > in.txt",
+          "mechanism": "frame_or_exit",
+          "mutant": "swap_source_target",
+          "reasons": [
+            "nonzero_exit:2"
+          ],
+          "verdict_frame_only": "VIOLATED",
+          "verdict_frame_plus_intervention": "VIOLATED",
+          "verdict_full": "VIOLATED",
+          "verdict_no_contract": "VIOLATED"
+        }
+      ],
+      "task": "tr"
+    },
+    {
+      "content_clause": {
+        "name": "derived_literal_substitution",
+        "params": {
+          "needle": "alpha",
+          "replacement": "ALPHA"
+        }
+      },
+      "content_clause_origin": "derived_and_perturbation_validated",
+      "content_only_mutants": [
+        {
+          "command": "sed s/alpha/ALPHB/ {src} > {dst}",
+          "equivalent": false,
+          "mutant": "content_only:s/alpha/ALPHA/",
+          "reasons": [
+            "content_clause_broken:derived_literal_substitution"
+          ],
+          "verdict_frame_only": "UNKNOWN",
+          "verdict_frame_plus_intervention": "UNKNOWN",
+          "verdict_full": "VIOLATED"
+        }
+      ],
+      "correct_novel": {
+        "frame_only": "UNKNOWN",
+        "full": "HOLDS",
+        "intervention_fired": false
+      },
+      "frame_creates": [
+        "{dst}"
+      ],
+      "frame_removes": [],
+      "input_sensitive": true,
+      "mutants": [
+        {
+          "command": "sed s/alpha/ALPHA/ decoy.txt > out.dat",
+          "mechanism": "frame_or_exit",
+          "mutant": "wrong_source",
+          "reasons": [
+            "predicted_creation_missing:sub/result.dat",
+            "unlicensed_creation:out.dat"
+          ],
+          "verdict_frame_only": "VIOLATED",
+          "verdict_frame_plus_intervention": "VIOLATED",
+          "verdict_full": "VIOLATED",
+          "verdict_no_contract": "HOLDS"
+        },
+        {
+          "command": "sed s/alpha/ALPHA/ in.txt > sub/out.dat",
+          "mechanism": "frame_or_exit",
+          "mutant": "wrong_target",
+          "reasons": [
+            "predicted_creation_missing:sub/result.dat",
+            "unlicensed_creation:sub/out.dat"
+          ],
+          "verdict_frame_only": "VIOLATED",
+          "verdict_frame_plus_intervention": "VIOLATED",
+          "verdict_full": "VIOLATED",
+          "verdict_no_contract": "HOLDS"
+        },
+        {
+          "command": "sed s/alpha/ALPHA/ in.txt ",
+          "mechanism": "frame_or_exit",
+          "mutant": "drop_target",
+          "reasons": [
+            "predicted_creation_missing:sub/result.dat"
+          ],
+          "verdict_frame_only": "VIOLATED",
+          "verdict_frame_plus_intervention": "VIOLATED",
+          "verdict_full": "VIOLATED",
+          "verdict_no_contract": "HOLDS"
+        },
+        {
+          "command": "sed s/alpha/ALPHA/ out.dat > in.txt",
+          "mechanism": "frame_or_exit",
+          "mutant": "swap_source_target",
+          "reasons": [
+            "nonzero_exit:2"
+          ],
+          "verdict_frame_only": "VIOLATED",
+          "verdict_frame_plus_intervention": "VIOLATED",
+          "verdict_full": "VIOLATED",
+          "verdict_no_contract": "VIOLATED"
+        }
+      ],
+      "task": "sed"
+    },
+    {
+      "content_clause": {
+        "name": "contains_sha256_of_input",
+        "params": {}
+      },
+      "content_clause_origin": "declared",
+      "content_only_mutants": [],
+      "correct_novel": {
+        "frame_only": "UNKNOWN",
+        "full": "HOLDS",
+        "intervention_fired": false
+      },
+      "frame_creates": [
+        "{dst}"
+      ],
+      "frame_removes": [],
+      "input_sensitive": true,
+      "mutants": [
+        {
+          "command": "sha256sum decoy.txt > out.dat",
+          "mechanism": "content_relation",
+          "mutant": "wrong_source",
+          "reasons": [
+            "predicted_creation_missing:sub/result.dat",
+            "unlicensed_creation:out.dat"
+          ],
+          "verdict_frame_only": "VIOLATED",
+          "verdict_frame_plus_intervention": "VIOLATED",
+          "verdict_full": "VIOLATED",
+          "verdict_no_contract": "HOLDS"
+        },
+        {
+          "command": "sha256sum in.txt > sub/out.dat",
+          "mechanism": "content_relation",
+          "mutant": "wrong_target",
+          "reasons": [
+            "predicted_creation_missing:sub/result.dat",
+            "unlicensed_creation:sub/out.dat"
+          ],
+          "verdict_frame_only": "VIOLATED",
+          "verdict_frame_plus_intervention": "VIOLATED",
+          "verdict_full": "VIOLATED",
+          "verdict_no_contract": "HOLDS"
+        },
+        {
+          "command": "sha256sum in.txt ",
+          "mechanism": "content_relation",
+          "mutant": "drop_target",
+          "reasons": [
+            "predicted_creation_missing:sub/result.dat",
+            "content_clause_broken:contains_sha256_of_input"
+          ],
+          "verdict_frame_only": "VIOLATED",
+          "verdict_frame_plus_intervention": "VIOLATED",
+          "verdict_full": "VIOLATED",
+          "verdict_no_contract": "HOLDS"
+        },
+        {
+          "command": "sha256sum out.dat > in.txt",
+          "mechanism": "frame_or_exit",
+          "mutant": "swap_source_target",
+          "reasons": [
+            "nonzero_exit:1"
+          ],
+          "verdict_frame_only": "VIOLATED",
+          "verdict_frame_plus_intervention": "VIOLATED",
+          "verdict_full": "VIOLATED",
+          "verdict_no_contract": "VIOLATED"
+        }
+      ],
+      "task": "sha256sum"
+    },
+    {
+      "content_clause": {
+        "name": "identity",
+        "params": {}
+      },
+      "content_clause_origin": "declared",
+      "content_only_mutants": [],
+      "correct_novel": {
+        "frame_only": "UNKNOWN",
+        "full": "HOLDS",
+        "intervention_fired": false
+      },
+      "frame_creates": [
+        "{dst}"
+      ],
+      "frame_removes": [],
+      "input_sensitive": true,
+      "mutants": [
+        {
+          "command": "cp decoy.txt out.dat",
+          "mechanism": "content_relation",
+          "mutant": "wrong_source",
+          "reasons": [
+            "predicted_creation_missing:sub/result.dat",
+            "unlicensed_creation:out.dat"
+          ],
+          "verdict_frame_only": "VIOLATED",
+          "verdict_frame_plus_intervention": "VIOLATED",
+          "verdict_full": "VIOLATED",
+          "verdict_no_contract": "HOLDS"
+        },
+        {
+          "command": "cp in.txt sub/out.dat",
+          "mechanism": "content_relation",
+          "mutant": "wrong_target",
+          "reasons": [
+            "predicted_creation_missing:sub/result.dat",
+            "unlicensed_creation:sub/out.dat"
+          ],
+          "verdict_frame_only": "VIOLATED",
+          "verdict_frame_plus_intervention": "VIOLATED",
+          "verdict_full": "VIOLATED",
+          "verdict_no_contract": "HOLDS"
+        },
+        {
+          "command": "cp in.txt",
+          "mechanism": "frame_or_exit",
+          "mutant": "drop_target",
+          "reasons": [
+            "nonzero_exit:1"
+          ],
+          "verdict_frame_only": "VIOLATED",
+          "verdict_frame_plus_intervention": "VIOLATED",
+          "verdict_full": "VIOLATED",
+          "verdict_no_contract": "VIOLATED"
+        },
+        {
+          "command": "cp out.dat in.txt",
+          "mechanism": "frame_or_exit",
+          "mutant": "swap_source_target",
+          "reasons": [
+            "nonzero_exit:1"
+          ],
+          "verdict_frame_only": "VIOLATED",
+          "verdict_frame_plus_intervention": "VIOLATED",
+          "verdict_full": "VIOLATED",
+          "verdict_no_contract": "VIOLATED"
+        }
+      ],
+      "task": "cp"
+    },
+    {
+      "content_clause": {
+        "name": "partition_concat",
+        "params": {}
+      },
+      "content_clause_origin": "declared",
+      "content_only_mutants": [
+        {
+          "command": "split -l 3 {src} chunk_",
+          "equivalent": false,
+          "mutant": "content_only:2",
+          "reasons": [],
+          "verdict_frame_only": "UNKNOWN",
+          "verdict_frame_plus_intervention": "UNKNOWN",
+          "verdict_full": "HOLDS"
+        },
+        {
+          "command": "split -l 2 {src} chunA_",
+          "equivalent": false,
+          "mutant": "content_only:chunk_",
+          "reasons": [
+            "predicted_creation_missing:chunk*",
+            "unlicensed_creation:chunA_aa"
+          ],
+          "verdict_frame_only": "VIOLATED",
+          "verdict_frame_plus_intervention": "VIOLATED",
+          "verdict_full": "VIOLATED"
+        }
+      ],
+      "correct_novel": {
+        "frame_only": "UNKNOWN",
+        "full": "HOLDS",
+        "intervention_fired": false
+      },
+      "frame_creates": [
+        "chunk*"
+      ],
+      "frame_removes": [],
+      "input_sensitive": true,
+      "mutants": [
+        {
+          "command": "split -l 2 decoy.txt chunk_",
+          "mechanism": "content_relation",
+          "mutant": "wrong_source",
+          "reasons": [
+            "content_clause_broken:partition_concat"
+          ],
+          "verdict_frame_only": "UNKNOWN",
+          "verdict_frame_plus_intervention": "UNKNOWN",
+          "verdict_full": "VIOLATED",
+          "verdict_no_contract": "HOLDS"
+        },
+        {
+          "command": "split 2 in.txt chunk_",
+          "mechanism": "frame_or_exit",
+          "mutant": "drop_first_flag",
+          "reasons": [
+            "nonzero_exit:1"
+          ],
+          "verdict_frame_only": "VIOLATED",
+          "verdict_frame_plus_intervention": "VIOLATED",
+          "verdict_full": "VIOLATED",
+          "verdict_no_contract": "VIOLATED"
+        }
+      ],
+      "task": "split"
+    },
+    {
+      "content_clause": {
+        "name": "tar_roundtrip",
+        "params": {}
+      },
+      "content_clause_origin": "declared",
+      "content_only_mutants": [],
+      "correct_novel": {
+        "frame_only": "UNKNOWN",
+        "full": "HOLDS",
+        "intervention_fired": false
+      },
+      "frame_creates": [
+        "{dst}"
+      ],
+      "frame_removes": [],
+      "input_sensitive": true,
+      "mutants": [
+        {
+          "command": "tar -cf out.dat decoy.txt",
+          "mechanism": "content_relation",
+          "mutant": "wrong_source",
+          "reasons": [
+            "predicted_creation_missing:sub/result.dat",
+            "unlicensed_creation:out.dat"
+          ],
+          "verdict_frame_only": "VIOLATED",
+          "verdict_frame_plus_intervention": "VIOLATED",
+          "verdict_full": "VIOLATED",
+          "verdict_no_contract": "HOLDS"
+        },
+        {
+          "command": "tar -cf sub/out.dat in.txt",
+          "mechanism": "content_relation",
+          "mutant": "wrong_target",
+          "reasons": [
+            "predicted_creation_missing:sub/result.dat",
+            "unlicensed_creation:sub/out.dat"
+          ],
+          "verdict_frame_only": "VIOLATED",
+          "verdict_frame_plus_intervention": "VIOLATED",
+          "verdict_full": "VIOLATED",
+          "verdict_no_contract": "HOLDS"
+        },
+        {
+          "command": "tar -cf in.txt",
+          "mechanism": "frame_or_exit",
+          "mutant": "drop_target",
+          "reasons": [
+            "nonzero_exit:2"
+          ],
+          "verdict_frame_only": "VIOLATED",
+          "verdict_frame_plus_intervention": "VIOLATED",
+          "verdict_full": "VIOLATED",
+          "verdict_no_contract": "VIOLATED"
+        },
+        {
+          "command": "tar -cf in.txt out.dat",
+          "mechanism": "frame_or_exit",
+          "mutant": "swap_source_target",
+          "reasons": [
+            "nonzero_exit:2"
+          ],
+          "verdict_frame_only": "VIOLATED",
+          "verdict_frame_plus_intervention": "VIOLATED",
+          "verdict_full": "VIOLATED",
+          "verdict_no_contract": "VIOLATED"
+        },
+        {
+          "command": "tar out.dat in.txt",
+          "mechanism": "frame_or_exit",
+          "mutant": "drop_first_flag",
+          "reasons": [
+            "nonzero_exit:2"
+          ],
+          "verdict_frame_only": "VIOLATED",
+          "verdict_frame_plus_intervention": "VIOLATED",
+          "verdict_full": "VIOLATED",
+          "verdict_no_contract": "VIOLATED"
+        }
+      ],
+      "task": "tar"
+    }
+  ],
+  "schema": "BRAIN_PREDICTIVE_CONTRACT_V1",
+  "tasks": 9,
+  "tasks_skipped": [
+    {
+      "reason": "the declared action created nothing on the acquisition binding",
+      "task": "gunzip"
+    }
+  ],
+  "what_this_shows": "One trial transfers as a contract, not as a trajectory. Acquired from a single real execution of each of 9 actions and then applied to a binding it had never seen, the contract catches 34 of 34 wrong actions (1.0000) against 0.5000 with no contract, and condemns 0 correct novel actions. The ablation says where the capability comes from: withholding the entire content vocabulary drops it to 0.9706 (frame alone), the acquired input-sensitivity counterfactual lifts that to 0.9706 with no vocabulary at all, and the clause -- declared for 7 tasks, derived from the execution and perturbation-validated for 2 -- lifts it to 1.0000. Vocabulary insufficiency is therefore not a wall: it costs -0.4706, a counterfactual recovers part of it, and the rest is recovered by deriving the missing relation from the one trial that was actually run."
+}
