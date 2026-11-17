@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 502,
+  "knowledge_documents": 503,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6969,
+  "research_index_records": 6971,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 452,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "a94ef5eae8ce9e48ee01300e7ffe9b86e188879cbbd55ecfc17ce34ce9f5d978"
+  "value": "c92f6bd4606a2743b726985b1a4295893715357ed27ed923319237468b904c8a"
  },
  "engines": [
   {
@@ -65766,6 +65766,82 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 10994,
+   "headings": [
+    "One trial, and what one trial actually transfers",
+    "1. The claim, as stated",
+    "2. What has to be true, and what is",
+    "3. The measurement",
+    "4. The single bottleneck, now",
+    "5. Is this revolutionary, or is it what everyone already does?",
+    "6. Sentience",
+    "7. What is still wrong, and what would falsify this",
+    "8. Reproduce"
+   ],
+   "kind": "DOCUMENT",
+   "path": "THE_ONE_TRIAL_AND_WHAT_IT_TRANSFERS_20261116_V1.md",
+   "sha256": "2b8340e3045301631774ff02dfb1217ba4edc1ea3cdc1d8f5269e9c6ca430bdb",
+   "summary": "*2026-11-16. Numbers below are produced by this tree, on real programs on a real disk, not asserted. AUTHORITY: NONE — producer-run measurement, not independent verification.*",
+   "terms": {
+    "2026": 8,
+    "34": 10,
+    "across": 4,
+    "action": 10,
+    "actions": 8,
+    "agent": 5,
+    "already": 5,
+    "because": 4,
+    "binding": 4,
+    "canonical": 5,
+    "check": 5,
+    "claim": 8,
+    "class": 5,
+    "consequence": 4,
+    "contract": 13,
+    "contracts": 4,
+    "derived": 4,
+    "different": 6,
+    "exactly": 6,
+    "execution": 4,
+    "frame": 9,
+    "full": 6,
+    "here": 6,
+    "measured": 4,
+    "measurement": 4,
+    "model": 11,
+    "most": 4,
+    "must": 6,
+    "new": 4,
+    "no": 14,
+    "not": 32,
+    "nothing": 4,
+    "observation": 7,
+    "one": 22,
+    "only": 10,
+    "paths": 4,
+    "real": 7,
+    "receipt": 7,
+    "relation": 9,
+    "same": 5,
+    "so": 6,
+    "state": 4,
+    "than": 6,
+    "trial": 8,
+    "were": 5,
+    "work": 7,
+    "world": 6,
+    "wrong": 8
+   },
+   "title": "One trial, and what one trial actually transfers",
+   "title_terms": [
+    "actually",
+    "one",
+    "transfers",
+    "trial"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 16478,
    "headings": [
     "THE ONLY CHECKED PREDICATES WERE COUNTED TWICE",
@@ -84121,10 +84197,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1304,
+  "included_source_count": 1305,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "0b2a63a2905ff383d75c2fefa400ca628d4c3790ad709bb0bbecb54cb6dbb1e0"
+  "source_tree_digest": "3ea792e10071b7bfc143b58f1b9974700342e8929dd5c16c506e7e7158003abd"
  },
  "research_index": [
   {
@@ -157020,7 +157096,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/CAPABILITY_LAW_20261116_V1.json",
    "schema": "BRAIN_CAPABILITY_LAW_V1",
-   "sha256": "693a8801983970ad43bc1cfbdd43be7da1e85c028007362c42e149b26863c5e9",
+   "sha256": "d1eec3f8767f5c2ca7215a8dc1c30fd02db4805af840c966c6e02d05b31b7f60",
    "status": "",
    "terms": {
     "20261116": 1,
@@ -183559,6 +183635,23 @@
     "router": 1,
     "v2": 1,
     "verify": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/PREDICTIVE_CONTRACT_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/PREDICTIVE_CONTRACT_20261116_V1.json",
+   "schema": "BRAIN_PREDICTIVE_CONTRACT_V1",
+   "sha256": "f16530f1255d85ac851af9fdc12b5cf6f43efecd4898eb3a8a64f794f205213e",
+   "status": "",
+   "terms": {
+    "20261116": 1,
+    "contract": 1,
+    "predictive": 1,
+    "v1": 1
    }
   },
   {
@@ -242137,6 +242230,51 @@
     "plural_role_word_binds_a_list_of_paths_v1_20261023_v1": 2,
     "source": 2,
     "v1": 2
+   }
+  },
+  {
+   "action_id": "PREDICTIVE_CONTRACT_20261116_V1",
+   "capability": false,
+   "date": "2026-11-16",
+   "id": "research:canonical/action_intents/PREDICTIVE_CONTRACT_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/PREDICTIVE_CONTRACT_20261116_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "7f92a7f820eb964321fa9f4be016593353741fbb6d6f642d637463d840798fd6",
+   "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
+   "terms": {
+    "0.2978": 1,
+    "0.4": 1,
+    "0.5000": 1,
+    "0.5445": 1,
+    "0.5469": 1,
+    "0.8": 1,
+    "0.9706": 1,
+    "1.0000": 1,
+    "17": 1,
+    "20261116": 1,
+    "34": 4,
+    "ablation": 1,
+    "acquire_a_parameterised_contract_from_one_execution_and_check_prospectively_on_an_unseen_binding": 1,
+    "acquired": 2,
+    "acquisition": 1,
+    "action": 1,
+    "actions": 3,
+    "adds": 1,
+    "against": 1,
+    "alone": 1,
+    "because": 1,
+    "class": 2,
+    "contract": 3,
+    "correct": 2,
+    "declared": 2,
+    "derived": 2,
+    "execution": 2,
+    "family": 2,
+    "frame": 2,
+    "one": 2,
+    "relation": 3,
+    "single": 2
    }
   },
   {

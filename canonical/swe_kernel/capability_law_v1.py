@@ -59,6 +59,7 @@ RECEIPTS = {
     "permanence": "canonical/verification/ACTION_REPLAY_UNDER_CHANGE_20261116_V1.json",
     "computer": "canonical/verification/COMPUTER_USE_CHECK_DENSITY_20261116_V1.json",
     "projection": "canonical/verification/DISTINGUISHING_PROJECTION_20261116_V1.json",
+    "contract": "canonical/verification/PREDICTIVE_CONTRACT_20261116_V1.json",
 }
 
 # The published ceiling for an inducer with full AST and context machinery on real systematic edits.
@@ -107,6 +108,7 @@ def compose(*, pins: Mapping[str, str] | None = None) -> dict[str, Any]:
     permanence, permanence_sha = _load("permanence", pins=pins)
     computer, computer_sha = _load("computer", pins=pins)
     projection, projection_sha = _load("projection", pins=pins)
+    contract, contract_sha = _load("contract", pins=pins)
 
     determined = float(_field(supply, "by_rung/shape_only/determined_share", "supply"))
     value_determined = (float(_field(value, "by_rung/shape_only/derive_arm/pairs_where_derivation_was_right",
@@ -203,6 +205,7 @@ def compose(*, pins: Mapping[str, str] | None = None) -> dict[str, Any]:
                 ("permanence", RECEIPTS["permanence"], permanence_sha),
                 ("computer", RECEIPTS["computer"], computer_sha),
                 ("projection", RECEIPTS["projection"], projection_sha),
+                ("contract", RECEIPTS["contract"], contract_sha),
             )
         },
         "law": "P(correct behaviour | one action) = P(determined) x P(seen); P(seen) = density x strength",
@@ -263,6 +266,29 @@ def compose(*, pins: Mapping[str, str] | None = None) -> dict[str, Any]:
                         "it must reproduce itself on replay. Separation alone admits a timestamp; stability "
                         "alone admits a name listing"),
             },
+            "prospective": {
+                "receipt": RECEIPTS["contract"],
+                "acquired_from": "one real execution per action",
+                "evaluated_on": "a binding never executed during acquisition",
+                "arms": {
+                    "no_recorded_consequence":
+                        _field(contract, "arms/no_recorded_consequence/density", "contract"),
+                    "frame_only": _field(contract, "arms/frame_only/density", "contract"),
+                    "frame_plus_intervention":
+                        _field(contract, "arms/frame_plus_intervention/density", "contract"),
+                    "full": _field(contract, "arms/full/density", "contract"),
+                },
+                "false_alarms_on_correct_novel_actions":
+                    _field(contract, "false_alarms_on_correct_novel_actions/full/count", "contract"),
+                "content_only_errors": {
+                    "frame_only": _field(contract, "content_only_arm/frame_only/density", "contract"),
+                    "full": _field(contract, "content_only_arm/full/density", "contract"),
+                },
+                "why": ("a consequence differential only exists after acting and only on a seen binding. A "
+                        "contract acquired from one execution is the prospective form of the same check: the "
+                        "frame -- which paths the action may touch -- carries most of it, a declared or derived "
+                        "relation carries the bytes, and what remains is a located hole in the vocabulary"),
+            },
             "what_remains_unmeasured": ("a GUI whose only observable is pixels or DOM -- a projection, not "
                                          "the state -- and workflows longer than one action, where an error "
                                          "is only visible after composition"),
@@ -314,6 +340,15 @@ def summarize(report: Mapping[str, Any]) -> str:
     lines.append("  replay %-6s | novel %-6s  (invisible with a name-level view: %s)"
                  % (use["replay"]["density"], use["novel"]["density"],
                     use["invisible_with_a_name_level_view"]))
+    prospective = use["prospective"]
+    lines.append("  prospectively, from one execution, on an unseen binding: none %s | frame %s | "
+                 "frame+intervention %s | full %s (false alarms %s)"
+                 % (prospective["arms"]["no_recorded_consequence"], prospective["arms"]["frame_only"],
+                    prospective["arms"]["frame_plus_intervention"], prospective["arms"]["full"],
+                    prospective["false_alarms_on_correct_novel_actions"]))
+    lines.append("  content-only errors: frame %s | full %s"
+                 % (prospective["content_only_errors"]["frame_only"],
+                    prospective["content_only_errors"]["full"]))
     lines.append("  still unmeasured: %s" % use["what_remains_unmeasured"])
     return "\n".join(lines)
 
