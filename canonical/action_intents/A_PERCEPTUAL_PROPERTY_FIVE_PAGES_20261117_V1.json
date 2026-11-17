@@ -1,0 +1,392 @@
+{
+ "action_id": "A_PERCEPTUAL_PROPERTY_FIVE_PAGES_20261117_V1",
+ "action_intent_id": "A_PERCEPTUAL_PROPERTY_FIVE_PAGES_20261117_V1",
+ "action_kind": "REAL_CAPABILITY_ACQUISITION",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "incremental_spend_usd": 0,
+  "independent_verification_completed": false,
+  "independent_verification_note": "Producer-run sandbox only: the account receipt re-reads the measure, the regression run re-reads REGRESSION_TASKS, and every pass was verified on a fresh page by the harness. Independent re-execution still open.",
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "VERIFIED_REUSABLE_CAPABILITY_GAIN",
+  "progress_evidence_paths": [
+   "canonical/verification/A_PERCEPTUAL_PROPERTY_FIVE_PAGES_20261117_V1.json",
+   "canonical/verification/PERCEPTUAL_PROPERTY_CLASS_MEASURE_20261117_V1.jsonl",
+   "canonical/verification/PERCEPTUAL_PROPERTY_CLASS_RECEIPT_20261117_V1.json",
+   "A_PERCEPTUAL_PROPERTY_FIVE_PAGES_20261117_V1.md"
+  ],
+  "route_class": "COMPOSE",
+  "scope_complete_discharge": false,
+  "terminal_achieved": false
+ },
+ "benchmark_or_family_rank_authority": "NONE__MEASURED_COVERAGE_CLASS_ONLY",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::RANK3_COVERAGE_CLASS_A_PERCEPTUAL_PROPERTY_FIVE_PAGES_SOLVE_OR_TERMINAL_ACCOUNT",
+ "canonical_base_commit": "43734c87ec538cb6b05cf135e41681dd5c177be8",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "RANK3_A_PERCEPTUAL_PROPERTY_REQUIRES_PERCEPTION_SHAPED_WORDING_TO_BECOME_A_MEASURED_OPERATOR_OR_A_TERMINAL_ACCOUNT",
+ "date": "2026-11-17",
+ "expected_parent_change": "PASS_18_RANK3_A_PERCEPTUAL_PROPERTY",
+ "expected_parent_frontier_change": "A_PERCEPTUAL_PROPERTY: three pages solved with gain over both control arms (click-shades 775a, drag-shapes-2 30a, text-editor 49a), two pages terminal-accounted (hover-shape predicate-unreachable, click-checkboxes-soft measured meaning-model refusal), unsolved frontier 30 -> 28",
+ "explicit_user_authorization": [
+  "Instant learning + instant learning in new arbitrary environments, solved perfectly. Doesn't that mean we can solve any computer use?",
+  "Give the model the most advanced actions, let it do a thing once, it learns it permanently, and every computer task plus the most advanced software engineering is solved. Am I right or wrong?",
+  "You must think from first principles for everything",
+  "You should kill all the bad and dumb ideas before you waste time implementing them.",
+  "NEVER BUILD BEFORE RESEARCHING EXHAUSTION HAS HAPPENED",
+  "maximize your web use",
+  "all the tests are not on synthetic data but are on the hardest open tests",
+  "Testing on bugs we already know work is not progress -- that is self-congratulation.",
+  "YOU SURE THIS THE SMARTEST APPROACH?",
+  "Work in branch, merge only when complete (fastest)",
+  "Merge once, not 10 times."
+ ],
+ "falsification_condition": "Any G-pass on the class pages not reproducing on a fresh page; any A-pass or D-pass appearing where the account records none; any REGRESSION_TASKS page that passed at budget 400 in the pass-16 baseline failing this run for a reason other than simple-arithmetic; any required evidence path missing from the head tree; or the hover-shape terminal resting on anything but the page's own endEpisode/timeout code.",
+ "files": {
+  "A_PERCEPTUAL_PROPERTY_FIVE_PAGES_20261117_V1.md": "e725ea9551854a7c561889bf6fe68367532b019fd33a46d1020c23ad657492c1",
+  "canonical/verification/A_PERCEPTUAL_PROPERTY_FIVE_PAGES_20261117_V1.json": "619d33f21ba8abf75720eee811ea5116a17a1bf619010859e5bc52550f71ec4b",
+  "canonical/verification/PERCEPTUAL_PROPERTY_CLASS_MEASURE_20261117_V1.jsonl": "aa9346a54977854e082bf9b351e183fc90f2045a714a5bbd3ab9b5a156de46e2",
+  "canonical/verification/PERCEPTUAL_PROPERTY_CLASS_RECEIPT_20261117_V1.json": "51d0bda454262b1ada42d77eb1f52043517e39f0b20e8bbf6f15dc67d5a66e79"
+ },
+ "generic_repair_from_single_probe": false,
+ "governance_change": false,
+ "highest_leverage_now": true,
+ "incremental_spend_usd": 0,
+ "intentional_route_race": false,
+ "load_bearing_primary": {
+  "constructive_gap_for_open_obligation_ids": [
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "expected_obligation_discharge_lcb": "0",
+  "expected_obligation_unlock_lcb": "1/100",
+  "interpretation": "Speculative forecast only. This pass discharges no obligation and claims no benchmark or terminal credit: it completes one coverage class of the ranked plan -- three pages solved under measurement, two pages given terminal accounts -- and the named gap remains the computer-use obligation the plan targets.",
+  "open_obligation_ids": [],
+  "success_probability_lcb": "1/4",
+  "wall_clock_cost_ub": 3600
+ },
+ "measured_effect": {
+  "benchmarks_claimed": 0,
+  "changed_modules": [
+   "canonical/runtime/aimed_action_v1.py",
+   "canonical/tools/aimed_action_measure_v1.py",
+   "canonical/tools/miniwob_chromium_bridge_v1.mjs",
+   "canonical/tools/miniwob_one_success_generalisation_measure_v1.py"
+  ],
+  "compile_verify": "33/33 PASS",
+  "families_claimed": 0,
+  "frontier_delta": {
+   "click-checkboxes-soft": "TERMINAL_REFUSED_MEANING_MODEL_MEASURED (WordNet 0.321 within / Roget 0.634 within with 2644 cross collisions; both miss unhappy~sad)",
+   "click-shades": "SOLVED 775a [CLICK_INSTRUCTED_SHADE]",
+   "drag-shapes-2": "SOLVED 30a [GRAB_FOR_BOX_PARTITION]",
+   "hover-shape": "PREDICATE_UNREACHABLE (0 endEpisode successes; timeout pays -1)",
+   "text-editor": "SOLVED 49a [DOUBLE_AT_THE_NAMED_RUN]",
+   "unsolved_30_to": 28
+  },
+  "full_reward": {
+   "A": false,
+   "D": false,
+   "arm": "G_aimed_hand",
+   "rule": "DOUBLE_AT_THE_NAMED_RUN",
+   "seed": 1060,
+   "spend": 49,
+   "task": "text-editor"
+  },
+  "instrument": "canonical/tools/aimed_action_measure_v1.py, budget 900, seed 1060, arms A/G/D, adjudicating run; regression at budget 400 on REGRESSION_TASKS",
+  "kill_fired": false,
+  "new_modules": [],
+  "pass_full_reward": true,
+  "pass_primary": true,
+  "prior_kills_preserved": [
+   "period-merge choreography: Quill styling a period-only selection is a no-op, word and period must share one selection",
+   "drag does not replace an existing selection; blank press collapses it (CLEAR_A_WRONG_SELECTION)",
+   "WordNet co-synset and Roget section membership both measured insufficient for the checkbox groups"
+  ],
+  "receipt": "canonical/verification/A_PERCEPTUAL_PROPERTY_FIVE_PAGES_20261117_V1.json",
+  "regressions": [],
+  "spend_drift": {},
+  "suits_claimed": 0,
+  "tests": "55 passed, 1 skipped across the four pinned test files (4 new operator pins)",
+  "tests_instrumented": 0
+ },
+ "next_step": "Merge once. Then rank-3 continues with the next coverage classes in size order (FIND_BY_CONTENT 4, WORLD_KNOWLEDGE 3, CONTINUOUS_TO_POSITION 3), each with the same pass-or-terminal-account rule; the send-6 thesis answer cites the merged verdict receipt and is not re-derived.",
+ "recursive_obs": {
+  "canonical_base_commit": "43734c87ec538cb6b05cf135e41681dd5c177be8",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "re-testing the two solved pages as if their plans were open",
+   "shipping a below-perfection checkbox matcher and calling it solved",
+   "reading page source to hard-wire the shade swatch or the editor period",
+   "a fifth bottleneck note in place of this class's terminal accounts"
+  ],
+  "expected_parent_frontier_change": "A_PERCEPTUAL_PROPERTY: three pages solved with gain over both control arms, two terminal-accounted, unsolved 30 -> 28",
+  "expected_parent_level_state_change": "A_PERCEPTUAL_PROPERTY: three pages solved with gain over both control arms, two terminal-accounted, unsolved 30 -> 28",
+  "independent_verification_required": true,
+  "iteration_limit": 1,
+  "obs_blocker": {
+   "delete_bypass_substitute_options": [
+    "delete the habit of treating a perception-shaped failure as an action failure",
+    "bypass the checkbox semantics with a fuzzy matcher that fails the reward predicate anyway",
+    "substitute a second general lexical source for the two already measured"
+   ],
+   "intrinsic_or_path_specific": "intrinsic: the class's remaining pages bind on things the observation does not carry (a hover the page never ends) or on meaning the module refuses to fake (synonym groups at FULL_REWARD perfection).",
+   "surviving_causal_blocker": "For hover-shape no actuator exists (page cannot end); for click-checkboxes-soft no tested lexical source reproduces the groups at perfection -- both are now terminal accounts, not open work."
+  },
+  "obs_capability": {
+   "capability_work_deleted": [
+    "a fuzzy checkbox matcher below FULL_REWARD",
+    "any hover aim rule over a page with no end path",
+    "re-derivation of the two solved plans"
+   ],
+   "existing_inherited_routes_checked": [
+    "placed() skip for re-grabs (free deepest-first constraint)",
+    "selection-gated style before spending the underline button",
+    "REGRESSION_TASKS + fresh-page verification as the pass bar"
+   ],
+   "external_existing_routes_checked": [
+    "WordNet 3.0 data files (wordnet-db)",
+    "Roget section membership (eleftheriouk/rogets-thesaurus words.csv)"
+   ],
+   "surviving_gap": "One part per remaining coverage class in size order, each with its own pass or terminal account."
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "calling the class complete while a page is merely unattempted",
+    "counting a within-budget near-miss as a pass",
+    "claiming the refusal as a solution"
+   ],
+   "real_outcome": "Three measured passes with gain over both controls, two terminal accounts with evidence, unsolved 30 -> 28.",
+   "surviving_necessity": "Coverage moves one class at a time under the unchanged FULL_REWARD predicate; terminals are accounts, not victories."
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "The aim arm, the bridge dispatch layer and the exact-geometry regression list are reused unchanged; this pass adds operators and prices only.",
+   "downstream_work_to_delete_or_supersede": "Any roadmap line that still lists click-shades, drag-shapes-2 or text-editor as open, or that expects hover-shape to be solvable by aiming.",
+   "fresh_reuse_plan": "The account receipt re-reads the measure; the regression run re-reads REGRESSION_TASKS; both can fail."
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": "No new literature round: the refusal measurements and the page's own endEpisode code are the evidence.",
+   "search_stop_decision": "Stop at two measured lexical sources and the page source: a third source without a perfection guarantee would not change the reward predicate."
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "COMPOSE",
+    "WHITE_BOX_HARVEST",
+    "CONFIGURE"
+   ],
+   "efficiency_mechanism": "One operator family per failure mode, priced so the free run ends at the named run or the held shape.",
+   "generality_mechanism": "The three new rules key on declared structure (swatch rows, named text runs, box partition), not on this instance's coordinates.",
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "A fuzzy matcher fails r=elems anyway; a hover aim rule has no page event to aim at; re-testing solved pages is self-congratulation.",
+   "routes_ranked": [
+    "measure-shaped operators plus terminal accounts for the two bind pages (selected)",
+    "ship a below-perfection checkbox matcher",
+    "generalise the shade rule into a universal perception part",
+    "re-run the solved pages for confidence"
+   ],
+   "white_box_harvest_note": "No donor model, weight or external artifact was harvested; WordNet and Roget were parsed as text and measured, never run as a model; no external model was called."
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "oracle_paths": [
+    "canonical/verification/PERCEPTUAL_PROPERTY_CLASS_MEASURE_20261117_V1.jsonl",
+    "canonical/verification/PERCEPTUAL_PROPERTY_CLASS_RECEIPT_20261117_V1.json",
+    "canonical/verification/A_PERCEPTUAL_PROPERTY_FIVE_PAGES_20261117_V1.json"
+   ],
+   "synthetic_verification_necessity": "The measure on the real pages is the test; unit pins only hold the operator contracts can-fail."
+  },
+  "real_outcome": "MEASURED: pass_primary true (three pages, gain over A and D, fresh-page verified), pass_full_reward true (text-editor 49a adjudicates the class), kill_fired false with the three pre-arms kills preserved; two pages terminal-accounted with evidence.",
+  "required_capability": "Turn perception-shaped instructions into pointer gestures the page itself accepts -- the exact swatch row, the exact named run including its punctuation -- and refuse, with measurements, the pages whose predicate no actuator or no lexical source can reach.",
+  "route_frontier": {
+   "challenger_routes": [
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "three measured passes plus two evidence-backed terminals",
+      "CORRECTNESS": "every pass verified on a fresh page; both terminals rest on page code and measured source coverage",
+      "INCREMENTAL_COST": "one operator family, four changed modules, one account receipt",
+      "RELIABILITY": "11/12 regression pages pass all arms, baseline-identical",
+      "VERIFIABILITY": "measure jsonl is CI-readable",
+      "WALL_CLOCK": "one adjudicating run"
+     },
+     "evidence": [
+      "G 3/5 vs A 0/5 and D 0/5 at budget 900",
+      "WordNet 0.321 / Roget 0.634 within-group at FULL_REWARD=1.0"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/A_PERCEPTUAL_PROPERTY_FIVE_PAGES_20261117_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "SELECTED",
+     "route": "measurement-first operators for the solvable pages and measured terminal accounts for the bind pages"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "a page might tick enough boxes by luck",
+      "CORRECTNESS": "falsified: r/elems needs r = elems, and both lexical sources miss the instance's required pair",
+      "INCREMENTAL_COST": "n/a",
+      "RELIABILITY": "none",
+      "VERIFIABILITY": "measured",
+      "WALL_CLOCK": "n/a"
+     },
+     "evidence": [
+      "FULL_REWARD = 1.0",
+      "unhappy~sad missed by WordNet and Roget alike"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/A_PERCEPTUAL_PROPERTY_FIVE_PAGES_20261117_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "ship a fuzzy checkbox matcher"
+    }
+   ],
+   "checked_at_utc": "2026-11-17T23:35:00Z",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": false,
+   "incumbent_route": "treat every coverage-class page as solvable by the same lever",
+   "max_age_hours": 24,
+   "negative_search_summary": "Two free lexical sources measured below the reward predicate; the hover page has no end path in its own source; no further search changes either fact.",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "thesaurus synonym resource machine readable coverage"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "wordnet co-synset vs thesaurus section granularity"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE"
+   ],
+   "selected_route": "MEASUREMENT_FIRST_OPERATORS_FOR_SOLVABLE_PAGES_AND_MEASURED_TERMINAL_ACCOUNTS_FOR_BIND_PAGES",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-11-17T23:35:00Z",
+    "execution_dependencies": [
+     {
+      "dependency": "chromium bridge + aimed measure at budget 900",
+      "evidence": [
+       "adjudicating run completed with three fresh-page-verified passes"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "LOCAL_RUNTIME",
+      "observed_at_utc": "2026-11-17T23:24:00Z",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "max_age_hours": 2,
+    "selected_route": "MEASUREMENT_FIRST_OPERATORS_FOR_SOLVABLE_PAGES_AND_MEASURED_TERMINAL_ACCOUNTS_FOR_BIND_PAGES",
+    "status": "READY"
+   },
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "OFFICIAL_PRIMARY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "EXACT_STATED_GEOMETRY_AND_THE_UNREACHABLE_FRAME_20261117_V1.md",
+     "ONE_LOOP_ONE_TAIL_VERDICT_20261117_V1.md",
+     "DECLARED_TRIGGER_AND_OPERAND_TAXONOMY receipt (46/16/6, largest class 6)"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "wordnet-db dict data files",
+     "eleftheriouk/rogets-thesaurus words.csv"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "miniwob/html/hover-shape.html",
+     "miniwob/html/click-checkboxes-soft.html",
+     "miniwob/core/core.js"
+    ]
+   },
+   "unresolved_plausible_dominators": []
+  },
+  "routes_considered": [
+   "DELETE",
+   "BYPASS",
+   "REUSE",
+   "COMPOSE",
+   "CONFIGURE",
+   "WHITE_BOX_HARVEST"
+  ],
+  "selected_route": "MEASUREMENT_FIRST_OPERATORS_FOR_SOLVABLE_PAGES_AND_MEASURED_TERMINAL_ACCOUNTS_FOR_BIND_PAGES",
+  "selected_surviving_route": "MEASUREMENT_FIRST_OPERATORS_FOR_SOLVABLE_PAGES_AND_MEASURED_TERMINAL_ACCOUNTS_FOR_BIND_PAGES",
+  "stop_condition": "The account, note, measure and consolidated receipt are merged once; every pass is fresh-page verified; both terminals rest on cited evidence; no benchmark, capability-family, terminal or weight credit is claimed.",
+  "why_selected_route_is_fastest_sufficient": "The class's three solvable pages each failed on one missing gesture (row-centre click, free re-grab, period-inclusive selection) and each was measured to pass once that gesture existed; the two bind pages were measured against their own reward predicate and their own source, so no further attempt changes the outcome."
+ },
+ "route_id": "RANK3_A_PERCEPTUAL_PROPERTY_FIVE_PAGES_SOLVE_OR_TERMINAL_ACCOUNT",
+ "routes_considered": [
+  "CLICK/Drag/DOUBLE+DRAG operators from declared structure, priced free where the hand has already derived the place -- selected, measured 3 passes",
+  "SHIP A FUZZY CHECKBOX MATCHER -- rejected: r/elems needs every box right and both lexical sources miss the required pair",
+  "AIM AT THE HOVER SHAPE -- rejected: the page has no end path; waiting always pays -1",
+  "READ PAGE SOURCE TO HARD-WIRE THE SWATCH OR THE PERIOD -- rejected: pass-14 DISQUALIFIED source-derived page constants"
+ ],
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+ "scope_and_limits": "Rank-3 coverage class A_PERCEPTUAL_PROPERTY only: four runtime/tool modules changed for operators and prices, one measure, one consolidated receipt, one account, one note. No predicate change, no perception subsystem, no weight change, no second intent.",
+ "scope_complete_discharge": false,
+ "selected_route": "MEASUREMENT_FIRST_OPERATORS_FOR_SOLVABLE_PAGES_AND_MEASURED_TERMINAL_ACCOUNTS_FOR_BIND_PAGES",
+ "selected_surviving_route": "MEASUREMENT_FIRST_OPERATORS_FOR_SOLVABLE_PAGES_AND_MEASURED_TERMINAL_ACCOUNTS_FOR_BIND_PAGES",
+ "status": "MEASURED__SANDBOX_RECEIPT__PENDING_MERGE",
+ "stop_condition": "The account, note, measure and consolidated receipt are merged once; every pass is fresh-page verified; both terminals rest on cited evidence; no benchmark, capability-family, terminal or weight credit is claimed.",
+ "terminal_achieved": false,
+ "terminal_credit_delta": 0,
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "truth": {
+  "achieved": false
+ },
+ "user_authorized_governance_change": false,
+ "verification": {
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "commands": [
+   "python -m pytest -q canonical/tests/test_aimed_action_v1.py canonical/tests/test_observable_descriptor_v1.py canonical/tests/test_declared_trigger_census_v1.py canonical/tests/test_exact_stated_geometry_v1.py",
+   "python canonical/runtime/verify_brain_unified_model_v1.py",
+   "python execution_guard/enforce_load_bearing_primary_pr.py --base 43734c87ec538cb6b05cf135e41681dd5c177be8 --head HEAD"
+  ]
+ },
+ "weakens_existing_guard": false,
+ "why_selected_route_is_fastest_sufficient": "Each solvable page was missing exactly one declared gesture and passed on a fresh page once it existed; each bind page was settled by its own source and its own reward predicate, so the class closes with three measured passes and two evidenced terminals instead of an open-ended aim search."
+}

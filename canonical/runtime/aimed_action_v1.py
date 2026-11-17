@@ -64,6 +64,7 @@ import zlib
 from typing import Any, Mapping, Sequence
 
 from canonical.runtime import derived_value_v1 as dv  # words_of / visible_texts: the shared reading
+from canonical.runtime import observable_descriptor_v1 as descriptor  # "left box" by the word
 
 # --------------------------------------------------------------------------- reading the page
 
@@ -191,6 +192,25 @@ def _colour_hue(text: Any) -> float | None:
         else:
             hue = (r - g) / (high - low) + 4
         return (hue * 60) % 360
+    # Chrome serializes an inline colour to rgb() on read even when the page wrote hsl() --
+    # the shade spans paint themselves that way, and hue is the whole of what the
+    # instruction's colour word can be about
+    rgb = re.search(r"rgba?\(\s*(\d{1,3})\D+(\d{1,3})\D+(\d{1,3})", value)
+    if rgb:
+        r, g, b = (int(rgb.group(i)) / 255 for i in (1, 2, 3))
+        high, low = max(r, g, b), min(r, g, b)
+        if high == low:
+            return 0.0
+        if high == r:
+            hue = ((g - b) / (high - low)) % 6
+        elif high == g:
+            hue = (b - r) / (high - low) + 2
+        else:
+            hue = (r - g) / (high - low) + 4
+        return (hue * 60) % 360
+    hsl = re.search(r"hsla?\(\s*([-+0-9.eE]+)", value)
+    if hsl:
+        return float(hsl.group(1)) % 360.0
     for name, hue in NAMED_COLOURS.items():
         if name in value.split() or value == name:
             return float(hue)
@@ -1204,17 +1224,49 @@ def _drag_through_point(observation: Mapping[str, Any]) -> list[tuple[str, str, 
 
 
 def _dropat_places(observation: Mapping[str, Any]) -> list[tuple[str, str, dict[str, Any]]]:
-    """While the hand HOLDS something: the places a release through the held point means --
-    the vertical through a dot, both ways, keeps the drag on the line the instruction names."""
+    """While the hand HOLDS something: the places a release means -- the vertical through a
+    dot, both ways, or, when the instruction partitions shapes into named boxes, the side of
+    the partition the HELD shape belongs on (the word decides the side, the held element the
+    membership)."""
     utterance = _lower(observation.get("utterance"))
     if observation.get("holding") is None:
         return []
-    if not re.search(r"vertical line|through the (dot|point)", utterance):
-        return []
-    held = _elements(observation)
+    elements = _elements(observation)
     holding_index = observation.get("holding")
-    target = next((e for e in held if int(e.get("index", -1)) == int(holding_index)), None)
+    target = next((e for e in elements if int(e.get("index", -1)) == int(holding_index)), None)
     if target is None or not _box(target):
+        return []
+    if "drag" in utterance and re.search(r"into the left box", utterance):
+        boxes = [e for e in elements
+                 if _box(e) and _lower(e.get("id")) == "shape-container"]
+        if len(boxes) >= 2:
+            pool = [int(e["index"]) for e in boxes]
+            by_index = {int(e["index"]): e for e in boxes}
+            # what the instruction partitions on: a colour, or a shape kind
+            where = (_lower(target.get("classes")) + " " + _lower(target.get("id"))
+                     + " " + _lower(target.get("tag")))
+            side: str | None = None
+            colour = next((name for name in NAMED_COLOURS
+                           if re.search(rf"\b{name}s?\b", utterance)), None)
+            if colour is not None:
+                hue = _colour_hue(target.get("colour"))
+                named = re.search(rf"\b{re.escape(colour)}s?\b", where) is not None
+                side = ("left" if named or (hue is not None and _hue_near(hue, NAMED_COLOURS[colour]))
+                        else "right")
+            else:
+                kind = next((k for k in ("rectangle", "circle", "triangle")
+                             if re.search(rf"\b{k}s?\b", utterance)), None)
+                if kind is not None:
+                    want = {"rectangle": "rect", "circle": "circle", "triangle": "polygon"}[kind]
+                    side = "left" if target.get("tag") == want else "right"
+            resolved = descriptor.describe(side or "left", observation, pool=pool)
+            subject = resolved.subject
+            if side is None or subject is None or int(subject) not in by_index:
+                return []                     # the word did not separate the boxes: no release
+            x, y = _centre(_box(by_index[int(subject)]) or [0] * 4)
+            return [(_drop_action(x, y), "RELEASE_IN_INSTRUCTED_BOX",
+                     {"element": target["index"], "box": int(subject), "side": side})]
+    if not re.search(r"vertical line|through the (dot|point)", utterance):
         return []
     x, y = _centre(_box(target) or [0] * 4)
     return [(_drop_action(x, y - 70), "RELEASE_ABOVE_THE_POINT", {"point": target["index"]}),
@@ -1400,9 +1452,81 @@ def _named_colour_type(observation: Mapping[str, Any]) -> list[tuple[str, str, d
     ]
 
 
+_RUN_PUNCT = ".,;:!?\"'"
+
+
+def _selection_is(selection: str, stem: str) -> bool:
+    """The shown selection IS the named run: same word once punctuation and case are ignored
+    (the browser may or may not take a trailing period with the word)."""
+    if not selection:
+        return False
+    return selection.strip(_RUN_PUNCT).lower() == stem.strip(_RUN_PUNCT).lower()
+
+
+def _named_run_presses(element: Mapping[str, Any], stem: str) -> list[tuple[float, float]]:
+    """Where in its own line the named run sits: the word's span of the line, as a fraction of
+    the text the line shows, applied to the line's own box -- with a jitter either side (the
+    font is proportional, so the fraction is an estimate) and one height guess per line the
+    box could hold. The selection the next look shows decides which point was right."""
+    box = _box(element)
+    text = str(element.get("text") or "") or str(element.get("full_text") or "")
+    if not box or not text.strip():
+        return []
+    found = None
+    for m in re.finditer(r"\S+", text):
+        if m.group(0).strip(_RUN_PUNCT).lower() == stem.strip(_RUN_PUNCT).lower():
+            found = m
+            break
+    if found is None:
+        return []
+    total = len(text)
+    frac = (found.start() + (found.end() - found.start()) / 2) / total
+    span = max((found.end() - found.start()) / total, 0.05)
+    x = box[0] + frac * box[2]
+    dx = span * box[2] * 0.75
+    heights = (0.5,) if box[3] < 26 else (0.3, 0.7)
+    return [(round(x + ox, 1), round(box[1] + box[3] * fy, 1))
+            for fy in heights for ox in (0.0, -dx, dx)]
+
+
+def _named_run_drags(element: Mapping[str, Any], stem: str) -> list[tuple[float, float, float, float]]:
+    """Where a drag across the run would start and end: the whole line the run may head (a
+    wrapped line runs from its left edge to past its right -- a run at a line's start IS the
+    line), and the run's own estimated span jittered either side (the font is proportional and
+    the line may wrap, so the fraction is an estimate). The selection the next look shows
+    decides which span was right; a wrong span shows a selection the instruction did not
+    name, and the style control stays unoffered until the right one does."""
+    box = _box(element)
+    text = str(element.get("text") or "") or str(element.get("full_text") or "")
+    if not box or not text.strip():
+        return []
+    left, top, width, height = box
+    right = left + width
+    heights = (0.5,) if height < 26 else (0.3, 0.7)
+    found = None
+    for m in re.finditer(r"\S+", text):
+        if m.group(0).strip(_RUN_PUNCT).lower() == stem.strip(_RUN_PUNCT).lower():
+            found = m
+            break
+    spans: list[tuple[float, float, float, float]] = []
+    for fy in heights:
+        y = round(top + height * fy, 1)
+        spans.append((round(left - 4, 1), y, round(right + 8, 1), y))
+        if found is not None:
+            total = len(text)
+            start = found.start() / total
+            end = found.end() / total
+            for jitter in (-8.0, 0.0, 8.0):
+                spans.append((round(left + start * width + jitter - 6, 1), y,
+                              round(left + end * width + jitter + 8, 1), y))
+    return spans
+
+
 def _select_and_style(observation: Mapping[str, Any]) -> list[tuple[str, str, dict[str, Any]]]:
-    """"give the text viverra. the style underlined": select the named run of text (three
-    fast presses on whatever shows it) and press the control the style word names."""
+    """"give the text viverra. the style underlined": put the selection on the named run --
+    two fast presses AT its own place in the line, because three take the whole paragraph and
+    the single-run check refuses that -- then press the control the style word names, and only
+    once the selection showing IS the run the instruction named."""
     utterance = _lower(observation.get("utterance"))
     style = next((w for w in ("underline", "bold", "italic", "strike", "strikethrough",
                               "overline", "align-left", "align-center", "align-right")
@@ -1418,11 +1542,26 @@ def _select_and_style(observation: Mapping[str, Any]) -> list[tuple[str, str, di
     if not target:
         quoted = re.search(r"\"([\w.]{2,30})\"", utterance)
         target = quoted.group(1) if quoted else None
+    everything = bool(re.search(r"give everything the style", utterance))
+    selected = str(observation.get("selection") or "").strip()
     out: list[tuple[str, str, dict[str, Any]]] = []
     elements = _elements(observation)
     index = _by_index(observation)
+    if not target and everything and not selected:
+        # the whole run IS the paragraph: three fast presses on the line that shows it, then
+        # the control the style word names (single-run selection is not offered here -- a
+        # triple press on the paragraph styles everything, which the single-run check refuses)
+        line = next((e for e in elements
+                     if e.get("tag") == "p" and _box(e) and str(e.get("text") or "").strip()), None)
+        if line is None:
+            line = next((e for e in elements
+                         if _box(e) and _lower(e.get("id")) in {"editor", "ql-editor"}
+                         and e.get("can_click")), None)
+        if line is not None:
+            out.append((f"triple@{line['index']}", "SELECT_THE_WHOLE_RUN",
+                        {"element": line["index"]}))
     if target:
-        stem = target.strip(".,;:!")
+        stem = target.strip(_RUN_PUNCT)
         matches = []
         for element in elements:
             if not _box(element):
@@ -1432,27 +1571,47 @@ def _select_and_style(observation: Mapping[str, Any]) -> list[tuple[str, str, di
             shown = str(element.get("text") or "") + " " + str(element.get("full_text") or "")
             if stem in shown and element.get("tag") in {"textarea", "div", "span", "p", "input"}:
                 matches.append(element)
-        if matches:
+        if matches and not _selection_is(selected, stem):
             # the most specific place the run shows: a typing field first, else the element
             # whose shown text is SHORTEST -- a page's wrapper also 'contains' the word.
             chosen = min(matches, key=lambda e: (
                 0 if (e.get("can_type") or e.get("tag") == "textarea") else 1,
                 len(str(e.get("text") or "")) or len(str(e.get("full_text") or "")) + 10_000))
-            out.append((f"triple@{chosen['index']}", "SELECT_NAMED_RUN",
-                        {"element": chosen["index"], "run": stem}))
-    stems = {style, style.rstrip("d"), style.rstrip("ed"), style + "d", style + "ed"}
-    for element in elements:
-        if not element.get("can_click") or not _box(element):
-            continue
-        if _in_instruction_region(element, index):
-            continue
-        where = _lower(element.get("text")) + " " + _lower(element.get("classes")) \
-            + " " + _lower(element.get("title")) + " " + _lower(element.get("aria-label"))
-        if any(s and s in where for s in stems):
-            out.append((f"click@{element['index']}", "STYLE_CONTROL",
-                        {"element": element["index"], "style": style}))
-            break
-    return out[:3]
+            if selected:
+                # A drag does not take while something already shows selected (the browser
+                # keeps the selection it has); a press on the page's own blank collapses it,
+                # and the next look starts clean. Declared first, so it is tried first.
+                out.append(("pressat@470.0,350.0", "CLEAR_A_WRONG_SELECTION",
+                            {"element": chosen["index"], "selection": selected[:60]}))
+            for x, y in _named_run_presses(chosen, stem):
+                out.append((f"doubleat@{x},{y}", "DOUBLE_AT_THE_NAMED_RUN",
+                            {"element": chosen["index"], "run": stem, "point": [x, y]}))
+            for x1, y1, x2, y2 in _named_run_drags(chosen, stem):
+                out.append((f"dragat@{x1},{y1},{x2},{y2}", "DRAG_OVER_THE_NAMED_RUN",
+                            {"element": chosen["index"], "run": stem, "span": [x1, y1, x2, y2]}))
+    # the style control only while the selection showing is the run the instruction named:
+    # a style pressed on the wrong selection (or none) writes the wrong run and the page
+    # refuses it; the selection is on the page, so this costs nothing to check.
+    if everything:
+        allow_style = bool(selected)
+    elif target:
+        allow_style = _selection_is(selected, target)
+    else:
+        allow_style = True
+    if allow_style:
+        stems = {style, style.rstrip("d"), style.rstrip("ed"), style + "d", style + "ed"}
+        for element in elements:
+            if not element.get("can_click") or not _box(element):
+                continue
+            if _in_instruction_region(element, index):
+                continue
+            where = _lower(element.get("text")) + " " + _lower(element.get("classes")) \
+                + " " + _lower(element.get("title")) + " " + _lower(element.get("aria-label"))
+            if any(s and s in where for s in stems):
+                out.append((f"click@{element['index']}", "STYLE_CONTROL",
+                            {"element": element["index"], "style": style}))
+                break
+    return out[:16]
 
 
 _CHROME_WORDS = {"terminal", "file", "files", "commands", "command", "help", "ls", "dir", "welcome",
@@ -1497,7 +1656,10 @@ def _finalize(observation: Mapping[str, Any]) -> list[tuple[str, str, dict[str, 
     every other turn-2 button for the search's attention. The instruction region, which also
     SAYS submit, is never it."""
     utterance = _lower(observation.get("utterance"))
-    if not re.search(r"\b(submit|press ok|then press|hit)\b", utterance):
+    # The box-partition instruction ends by SORTING, never by saying submit -- the page's own
+    # submit control still closes the episode, and it is the terminal control either way.
+    if not re.search(r"\b(submit|press ok|then press|hit)\b", utterance) \
+            and not re.search(r"into the (left|right) box", utterance):
         return []
     index = _by_index(observation)
     candidates = [e for e in _elements(observation)
@@ -1532,12 +1694,112 @@ def _hot_extreme(observation: Mapping[str, Any]) -> list[tuple[str, str, dict[st
              {"element": best[1]["index"], "heat": round(best[0], 3)})]
 
 
+def _click_instructed_shades(observation: Mapping[str, Any]) -> list[tuple[str, str, dict[str, Any]]]:
+    """"Select all the shades of blue and press Submit": a shade is a span that paints itself
+    the hue the instruction's colour word names -- every such span is a press, and the page's
+    own submit button (FINALIZE) closes the episode after them."""
+    utterance = _lower(observation.get("utterance"))
+    match = re.search(r"shades of ([a-z ]+?)(?:\s+(?:and|then|press|\.|,)|\.\s|$)", utterance)
+    if not match:
+        return []
+    colour = match.group(1).strip()
+    target = next((hue for name, hue in NAMED_COLOURS.items() if re.search(rf"\b{name}s?\b", colour)),
+                  None)
+    if target is None:
+        return []
+    index = _by_index(observation)
+    out: list[tuple[str, str, dict[str, Any]]] = []
+    for element in _elements(observation):
+        if not element.get("can_click") or not _box(element):
+            continue
+        if _in_instruction_region(element, index):   # the instruction's own swatches are not picks
+            continue
+        hue = _colour_hue(element.get("colour"))
+        if hue is None or not _hue_near(hue, target):
+            continue
+        out.append((f"click@{element['index']}", "CLICK_INSTRUCTED_SHADE",
+                    {"element": element["index"], "colour": colour, "hue": round(hue, 1)}))
+        if len(out) >= 14:
+            break
+    return out
+
+
+def _drag_instructed_to_boxes(observation: Mapping[str, Any]) -> list[tuple[str, str, dict[str, Any]]]:
+    """"Drag all rectangles into the left box, and everything else into the right box": the
+    instruction partitions the shapes -- by a KIND, or by a colour (whose matches
+    GRAB_INSTRUCTED_COLOUR already names; this rule adds the REST, because "everything else"
+    is part of the instruction too and a shipped-priced grab of it is a price no search should
+    have to pay for doing what the instruction says). Which side each shape belongs on is
+    decided at release from the held element itself (_dropat_places)."""
+    utterance = _lower(observation.get("utterance"))
+    if "drag" not in utterance or not re.search(r"into the left box", utterance):
+        return []
+    if observation.get("holding") is not None:
+        return []                            # releases are _dropat_places' job
+    partitioned = (any(re.search(rf"\b{k}s?\b", utterance)
+                       for k in ("rectangle", "circle", "triangle"))
+                   or any(re.search(rf"\b{name}s?\b", utterance) for name in NAMED_COLOURS))
+    if not partitioned:
+        return []
+    elements = _elements(observation)
+    boxes = [e for e in elements if _box(e) and _lower(e.get("id")) == "shape-container"]
+    sides: dict[str, Any] = {}
+    if len(boxes) >= 2:
+        pool = [int(e["index"]) for e in boxes]
+        sides["left"] = descriptor.describe("left", observation, pool=pool).subject
+        sides["right"] = descriptor.describe("right", observation, pool=pool).subject
+    by_index = {int(e["index"]): e for e in boxes}
+    colour = next((name for name in NAMED_COLOURS if re.search(rf"\b{name}s?\b", utterance)), None)
+    kind = next((k for k in ("rectangle", "circle", "triangle")
+                 if re.search(rf"\b{k}s?\b", utterance)), None)
+    want_tag = {"rectangle": "rect", "circle": "circle", "triangle": "polygon"}.get(kind or "")
+
+    def placed(element: Mapping[str, Any]) -> bool:
+        """Already inside the box its side of the partition names. A shape that is DONE is not
+        re-offered: re-grabbing it would move it again (the press rounds to integers, so every
+        cycle drifts it somewhere new) and the free run would never end."""
+        box = _box(element)
+        if box is None or not sides or not sides.get("left") or not sides.get("right"):
+            return False
+        where = (_lower(element.get("classes")) + " " + _lower(element.get("id"))
+                 + " " + _lower(element.get("tag")))
+        if colour is not None:
+            hue = _colour_hue(element.get("colour"))
+            named = re.search(rf"\b{re.escape(colour)}s?\b", where) is not None
+            matches = named or (hue is not None and _hue_near(hue, NAMED_COLOURS[colour]))
+        elif want_tag:
+            matches = element.get("tag") == want_tag
+        else:
+            return False
+        side = by_index.get(int(sides["left" if matches else "right"]))
+        side_box = _box(side) if side is not None else None
+        if side_box is None:
+            return False
+        x, y = _centre(box)
+        return side_box[0] <= x <= side_box[0] + side_box[2] and side_box[1] <= y <= side_box[1] + side_box[3]
+
+    out: list[tuple[str, str, dict[str, Any]]] = []
+    for element in elements:
+        if element.get("tag") not in SVG_SHAPES or not _box(element) or not element.get("can_click"):
+            continue
+        if _lower(element.get("id")) == "shape-container":
+            continue                          # the box is not one of the shapes to move
+        if placed(element):
+            continue
+        out.append((f"grab@{element['index']}", "GRAB_FOR_BOX_PARTITION",
+                    {"element": element["index"], "tag": element.get("tag")}))
+        if len(out) >= 8:
+            break
+    return out
+
+
 OPERATORS = (
     _centre_of, _right_angle, _slider_to_value, _move_on_target, _click_moving_shapes,
     _date_cell, _path_segments, _superlative_records, _odd_even_marks, _count_noun,
     _nth_word_type, _pair_transfer, _labelled_pair_transfer, _ordinal_widget, _match_all_records,
     _drag_coloured, _colour_wheel_points, _named_colour_type, _copy_value, _field_span_fill,
     _terminal_commands, _drag_through_point, _select_and_style, _hot_extreme, _finalize,
+    _click_instructed_shades, _drag_instructed_to_boxes,
     _dropat_places, _exact_centre, _exact_midpoint, _exact_right_angle,
 )
 
@@ -1598,8 +1860,13 @@ def decoy_actions(observation: Mapping[str, Any], *, seed: int = 20261116) -> li
     out: list[str] = []
     for real_action in real:
         kind = real_action.partition("@")[0]
-        if kind in {"pressat", "moveat", "dropat"}:
+        if kind in {"pressat", "moveat", "dropat", "doubleat"}:
             out.append(f"{kind}@{rng.uniform(1, 479):.1f},{rng.uniform(1, 359):.1f}")
+        elif kind == "dragat":
+            x1, y1 = rng.uniform(1, 400), rng.uniform(20, 340)
+            out.append(f"dragat@{x1:.1f},{y1:.1f},"
+                       f"{min(479.0, x1 + rng.uniform(5, 60)):.1f},"
+                       f"{min(359.0, max(1.0, y1 + rng.uniform(-20, 20))):.1f}")
         elif kind == "click" and reachable:
             out.append(f"click@{rng.choice(reachable)}")
         elif kind == "type" and fields:
