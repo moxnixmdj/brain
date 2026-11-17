@@ -179,6 +179,11 @@ MECHANISM_GROUPS: dict[str, tuple[str, ...]] = {
         "canonical/runtime/contrast_selection_v1.py",
         "canonical/swe_kernel/one_demonstration_basin_v1.py",
     ),
+    "gui_invariance_and_operand_boundary": (
+        "canonical/tools/gui_invariance_census_v1.py",
+        "canonical/tools/gui_phrase_blind_basis_arm_v1.py",
+        "canonical/runtime/derived_value_v1.py",
+    ),
 }
 
 SUPERSEDES = (
@@ -250,6 +255,11 @@ EVIDENCE_READ = (
     "canonical/action_intents/ONE_TRY_LEARNS_A_DOMAIN_NOT_THE_ENVIRONMENT_20261116_V1.json",
     "canonical/verification/DECLARED_TRIGGER_AND_OPERAND_TAXONOMY_20261116_V1.json",
     "canonical/verification/ONE_DEMONSTRATION_BASIN_20261116_V1.json",
+    # Final GUI measurement: no non-trivial judge quotient, so the code-side
+    # invariance lever has no job here; the operand boundary remains.
+    "THE_GUI_HAS_NO_INVARIANCE_TO_FIND_20261116_V1.md",
+    "canonical/action_intents/THE_GUI_HAS_NO_INVARIANCE_TO_FIND_20261116_V1.json",
+    "canonical/verification/GUI_INVARIANCE_IS_VACUOUS_OR_ABSENT_20261116_V1.json",
 )
 
 
@@ -386,6 +396,8 @@ def audit(quixbugs_root: pathlib.Path, root: pathlib.Path = ROOT) -> dict[str, A
     basin = read_json(V / "ONE_DEMONSTRATION_BASIN_20261116_V1.json") if (V / "ONE_DEMONSTRATION_BASIN_20261116_V1.json").is_file() else None
     long_tail_intent = read_json(A / "THE_REMAINDER_IS_A_LONG_TAIL_20261116_V1.json") if (A / "THE_REMAINDER_IS_A_LONG_TAIL_20261116_V1.json").is_file() else None
     basin_intent = read_json(A / "ONE_TRY_LEARNS_A_DOMAIN_NOT_THE_ENVIRONMENT_20261116_V1.json") if (A / "ONE_TRY_LEARNS_A_DOMAIN_NOT_THE_ENVIRONMENT_20261116_V1.json").is_file() else None
+    gui_census = read_json(V / "GUI_INVARIANCE_IS_VACUOUS_OR_ABSENT_20261116_V1.json") if (V / "GUI_INVARIANCE_IS_VACUOUS_OR_ABSENT_20261116_V1.json").is_file() else None
+    gui_intent = read_json(A / "THE_GUI_HAS_NO_INVARIANCE_TO_FIND_20261116_V1.json") if (A / "THE_GUI_HAS_NO_INVARIANCE_TO_FIND_20261116_V1.json").is_file() else None
     answer_key_counts = [
         row["answer_keys_present"] for row in census["rows"]
         if isinstance(row.get("answer_keys_present"), int)
@@ -534,6 +546,30 @@ def audit(quixbugs_root: pathlib.Path, root: pathlib.Path = ROOT) -> dict[str, A
             and basin_intent.get("measured_effect", {}).get("arms", {}).get("premise_task_under_all_content", {}).get("undecidable") == 0
             and basin_intent.get("measured_effect", {}).get("arms", {}).get("command_output_control", {}).get("undecidable") == 168
         ),
+        "gui_identity_invariance_is_vacuous_by_construction": bool(
+            gui_census
+            and gui_census.get("part_a_invariance_census", {}).get("identity_arms") == 15
+            and gui_census.get("part_a_invariance_census", {}).get("identity_verdicts", {}).get("INVARIANT") == 13
+            and gui_census.get("part_a_identity_use_by_the_rules", "").startswith("derived_value_v1:397")
+        ),
+        "gui_judge_has_no_task_equivalence_to_quotient": bool(
+            gui_census
+            and gui_intent
+            and gui_census.get("part_a_invariance_census", {}).get("judge_pages") == 5
+            and gui_intent.get("measured_effect", {}).get("judge_pages_with_quotient_zero") == 4
+            and gui_census.get("part_a_invariance_census", {}).get("pages_with_a_nontrivial_quotient") == ["scroll-text"]
+            and gui_census.get("part_a_invariance_census", {}).get("quotient_is_real", {}).get("scroll-text", "").startswith("SEMANTIC")
+        ),
+        "phrase_blind_basis_adds_no_full_surface_capability": bool(
+            gui_census
+            and gui_intent
+            and gui_census.get("part_b_phrase_blind_arm", {}).get("pages") == 123
+            and gui_census.get("part_b_phrase_blind_arm", {}).get("gated_solved") == 9
+            and gui_census.get("part_b_phrase_blind_arm", {}).get("blind_solved") == 5
+            and gui_census.get("part_b_phrase_blind_arm", {}).get("blind_only") == []
+            and gui_intent.get("measured_effect", {}).get("phrase_blind_arm_design_set", {}).get("blind_solved") == 4
+            and gui_intent.get("measured_effect", {}).get("phrase_blind_arm_design_set", {}).get("gated_solved") == 5
+        ),
     }
     audit_pass = all(invariants.values())
     return {
@@ -620,6 +656,14 @@ def audit(quixbugs_root: pathlib.Path, root: pathlib.Path = ROOT) -> dict[str, A
             "basin": (basin_intent or {}).get("measured_effect", {}),
             "status": "NO_SINGLE_LEVER_THE_REMAINDER_IS_A_LONG_TAIL_AND_THE_PREMISE_MUST_BE_OBSERVABLE",
         },
+        "gui_invariance_and_operand_boundary": {
+            "receipt": "canonical/verification/GUI_INVARIANCE_IS_VACUOUS_OR_ABSENT_20261116_V1.json",
+            "identity_invariance": (gui_census or {}).get("part_a_invariance_census", {}),
+            "judges": (gui_census or {}).get("part_a_judges", []),
+            "phrase_blind_arm": (gui_census or {}).get("part_b_phrase_blind_arm", {}),
+            "measured_effect": (gui_intent or {}).get("measured_effect", {}),
+            "status": "NO_GUI_INVARIANCE_LEVER_THE_REMAINING_BOUNDARY_IS_AN_OPERAND_NOT_ON_THE_PAGE",
+        },
         "verified_repair_rerun": {
             "receipt": "canonical/verification/RERUN_THE_LEARNED_ARMS_REPAIRS_20261116_V1.json",
             "claimed_repaired": (rerun or {}).get("claimed_repaired"),
@@ -677,8 +721,8 @@ def audit(quixbugs_root: pathlib.Path, root: pathlib.Path = ROOT) -> dict[str, A
             "clean held-out arms, plus an effect-based census of mechanisms already in the tree. "
             "The 24/40 union is now also one composed run under the corpus pytest, and the audit "
             "reads the later invariance, exact-decision, browser, new-environment, read-first, "
-            "operand, replay-drift, trigger, long-tail and one-demonstration-basin measurements "
-            "without crediting any of them as new capability. It also indexes the separate selection "
+            "operand, replay-drift, trigger, long-tail, one-demonstration-basin and GUI-invariance "
+            "measurements without crediting any of them as new capability. It also indexes the separate selection "
             "measurement among test-passing HumanEvalFix candidates; that measurement is not a "
             "QuixBugs repair receipt. It is not a solver."
         ),
@@ -704,6 +748,7 @@ def audit(quixbugs_root: pathlib.Path, root: pathlib.Path = ROOT) -> dict[str, A
             "NO_REPLAY_FOREVER_ANYWHERE_CLAIM",
             "NO_SINGLE_LEVER_CLAIM",
             "NO_ONE_DEMONSTRATION_PER_ENVIRONMENT_CLAIM",
+            "NO_GUI_INVARIANCE_LEVER",
             "PRODUCER_RUN_NOT_INDEPENDENT_VERIFICATION",
             "TERMINAL_TRUTH_UNTOUCHED",
         ],
