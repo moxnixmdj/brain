@@ -42,7 +42,7 @@
  },
  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE LIMITING FACTOR IS NOT THE NUMBER OF DEMONSTRATIONS: IT IS WHETHER THE ACTION THE FIX NEEDS CAN BE EXPRESSED BY WHAT THE ARTIFACT ALREADY CONTAINS. 18 of 40 published fixes need no lesson at all because the program supplies the vocabulary; 13 need one edit whose expression the vocabulary cannot build; 5 of the 8 lesson-reached fixes are reached only by the program the class was read from.",
- "canonical_base_commit": "43734c87ec538cb6b05cf135e41681dd5c177be8",
+ "canonical_base_commit": "1a10378379a7c44995c6c4d91ead01ada10e23d6",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -176,7 +176,7 @@
  ],
  "probe_specific": false,
  "recursive_obs": {
-  "canonical_base_commit": "43734c87ec538cb6b05cf135e41681dd5c177be8",
+  "canonical_base_commit": "1a10378379a7c44995c6c4d91ead01ada10e23d6",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "re-implementing the space in order to measure it",
