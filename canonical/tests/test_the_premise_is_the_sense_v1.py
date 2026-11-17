@@ -27,6 +27,19 @@ def report():
     return M.measure()
 
 
+@pytest.fixture(scope="module")
+def world_model():
+    """The real git world, explored once, shared by the structural tests."""
+    import pathlib, shutil, tempfile
+    from canonical.swe_kernel import one_demonstration_basin_v1 as basin
+    scratch = pathlib.Path(tempfile.mkdtemp(prefix="brain_sense_test_"))
+    try:
+        w = basin.GitWorld(scratch / "repo")
+        return basin.explore(w, basin.actions(), max_states=700)
+    finally:
+        shutil.rmtree(scratch, ignore_errors=True)
+
+
 def _task(report, label):
     return next(t for t in report["tasks"] if t["label"] == label)
 
@@ -50,12 +63,19 @@ def test_a_cell_is_consistent_only_if_every_member_shares_an_action():
     assert M.decision_consistent([], actions) is False
 
 
-def test_reading_is_never_worse_than_writing_equal_cost_refusal_only():
-    """Adding a fact can only split cells, so undecidable states cannot increase."""
-    probe = {"branch": "main", "staged": (), "unstaged": (), "untracked": (), "tracked": (),
-             "head": "seed", "staged_rows": (), "contents": (("a.txt", "one"),)}
-    assert M.observations(probe, ["branch"]) == M.observations(probe, ["branch"])
-    assert M.observations(probe, ["branch", "head"]) != M.observations(probe, ["branch"]) or True
+def test_adding_a_fact_can_only_split_cells_never_merge_them(world_model):
+    """Monotonicity: a superset of facts partitions the states at least as finely.
+
+    This is why the finding is not "reading more is bad" -- reading more is never worse. It is that
+    reading more is not free, and the six-fact status sense is still insufficient for task C because
+    it does not contain the decisive fact at all.
+    """
+    assert len(M.cells(world_model, ["unstaged"])) <= len(M.cells(world_model, ["unstaged", "head"]))
+    assert len(M.cells(world_model, ["content:b.txt"])) <= len(
+        M.cells(world_model, ["content:b.txt", "branch"]))
+    # the decisive fact is absent from the status sense, so no amount of status reading finds it
+    status = M.BASIN_SENSES["status"]
+    assert "content:b.txt" not in status
 
 
 # -- 2. the measurement ------------------------------------------------------- #
