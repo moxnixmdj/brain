@@ -126,8 +126,8 @@
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "real_outcome": "SEVEN_STRATUM_ZERO_TEMPLATE_ORGAN_ALGEBRA_REGEX_FREE_EVOI_EXTRAPOLATION_SYNTHESIZED_VERIFIERS_AND_INSTRUMENTAL_POLICY",
-  "selected_route": "COMPOSE_SEVEN_STRATUM_ZERO_TEMPLATE_ORGAN_ALGEBRA_WITH_EVOI_GLOBAL_AND_INSTRUMENTAL_POLICY",
-  "selected_surviving_route": "INDUCE_GRAMMARS_SOLVE_COEFFICIENTS_COMPOSE_ORGANS_AND_PRICE_UNLOCKING_VALUE_INSTEAD_OF_FROZEN_MENUS_AND_KEYWORD_GATES",
+  "selected_route": "PRICE_THE_OBSERVATIONAL_POOL_AGAINST_THE_REAL_CORPUS_AND_SEPARATE_RANKING_FROM_POPULATION__TO_SHOW_THAT_SELECTION_IS_SATURATED_AND_CONSTRUCTION_IS_THE_OPEN_CAPABILITY",
+  "selected_surviving_route": "PRICE_THE_OBSERVATIONAL_POOL_AGAINST_THE_REAL_CORPUS_AND_SEPARATE_RANKING_FROM_POPULATION__TO_SHOW_THAT_SELECTION_IS_SATURATED_AND_CONSTRUCTION_IS_THE_OPEN_CAPABILITY",
   "deleted_or_bypassed_paths": [
    "FIVE_FROZEN_PERCEPTOR_CODEC_STRINGS",
    "THIRTY_FIVE_HARDCODED_EXPRESSION_TEMPLATES",
@@ -195,7 +195,7 @@
     },
     {
      "route": "CONSTRUCT_A_REACHABLE_NEAR_MISS_AND_CERTIFY_IT",
-     "resolution": "SELECTED_FOR_NEXT_ACTION",
+     "resolution": "SELECTED",
      "comparison": {
       "CORRECTNESS": "the only route whose evidence is a state the system actually reached",
       "CAPABILITY_STRENGTH": "2^k with k near n, versus 2^3 observed",
@@ -216,7 +216,7 @@
      ]
     }
    ],
-   "checked_at_utc": "2026-11-16T00:00:00Z",
+   "checked_at_utc": "2026-11-17T02:27:42Z",
    "max_age_hours": 24,
    "comparison_dimensions": [
     "CORRECTNESS",
@@ -282,7 +282,7 @@
    "selected_route_preflight": {
     "selected_route": "PRICE_THE_OBSERVATIONAL_POOL_AGAINST_THE_REAL_CORPUS_AND_SEPARATE_RANKING_FROM_POPULATION__TO_SHOW_THAT_SELECTION_IS_SATURATED_AND_CONSTRUCTION_IS_THE_OPEN_CAPABILITY",
     "status": "READY",
-    "checked_at_utc": "2026-11-16T00:00:00Z",
+    "checked_at_utc": "2026-11-17T02:27:42Z",
     "max_age_hours": 2,
     "all_required_dependencies_ready": true,
     "execution_dependencies_complete": true,
@@ -411,7 +411,8 @@
    "direct_real_effect_verification_considered": true,
    "existing_oracle_considered": true,
    "synthetic_verification_necessity": "TWENTY_PAIRED_POSITIVE_AND_NEGATIVE_CONTROL_TESTS_UNDER_TRUE_CAPABILITY_TEST_LAW_V1__ZERO_CAPABILITY_OR_TERMINAL_CREDIT_CLAIMED"
-  }
+  },
+  "selected_surviving_route_class": "SYNTHESIZE_NEW_PRIMITIVE"
  },
  "v22_prewrite_admission": {
   "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
