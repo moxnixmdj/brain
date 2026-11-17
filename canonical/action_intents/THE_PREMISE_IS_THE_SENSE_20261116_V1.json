@@ -36,7 +36,7 @@
  },
  "benchmark_or_family_rank_authority": false,
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The tree named the bottleneck correctly -- whether the fact a plan depends on is observable at the moment of acting -- and then hand-listed four sense vocabularies to test it. That answers 'is a rich sense better than a poor one' (always yes) but not 'which facts are minimally sufficient, and what do they cost'. The question is exactly solvable: a plan is one choice (RUN+CONFIRM where it reaches the goal, REFUSE where it does not), two states may share a perception only if they agree on that choice, so the minimal sufficient sense is the minimum-cost fact set making every cell decision-consistent. Measured on the tree's real git world: task A needs the single fact 'unstaged' (cost 1) and task C needs the single fact 'content:b.txt' (cost 1), both making 0 states undecidable, while the richest hand-listed sense reads 11 facts for the same answer and the six-fact status sense is NOT sufficient for task C at all (24 undecidable states). More sensing was never the answer; the right sensing was. This is the exchange the architecture needs and did not have: read exactly the premise, refuse when it fails.",
- "canonical_base_commit": "cae454c9963b68dc530e6ddad0675cffda3ba921",
+ "canonical_base_commit": "bcb32d3e6c3819dc23a3af34739140aa28e0407c",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -73,47 +73,47 @@
   "wall_clock_cost_ub": 1
  },
  "measured_effect": {
+  "world": {
+   "kind": "real git repository in a throw-away directory",
+   "states": 168,
+   "transitions": 1680
+  },
+  "task_A": {
+   "minimal_facts": [
+    "unstaged"
+   ],
+   "cost": 1.0,
+   "cells": 4,
+   "undecidable_states": 0,
+   "richest_hand_listed_cost": 11.0
+  },
+  "task_C": {
+   "minimal_facts": [
+    "content:b.txt"
+   ],
+   "cost": 1.0,
+   "cells": 2,
+   "undecidable_states": 0,
+   "richest_hand_listed_cost": 11.0
+  },
+  "status_sense_is_not_sufficient_for_task_C": {
+   "cost": 6.0,
+   "undecidable_states": 24
+  },
+  "status_plus_a_txt_not_sufficient": {
+   "cost": 7.0,
+   "undecidable_states": 16
+  },
   "compiler_and_brute_force_agree": true,
   "cross_check": "undecidable counts 24 / 16 / 0 and plan domains 112 / 56 reproduce ONE_TRY_LEARNS_A_DOMAIN_NOT_THE_ENVIRONMENT_20261116_V1.md's published table by a different instrument",
   "degeneracy_found_by_running_it": "without a postcondition, an always-refuse policy satisfies sufficiency with one fact and solves nothing; the formulation now includes CONFIRM so the empty policy cannot win",
-  "external_confirmation": "46-64% of plans for solvable tasks contain an inapplicable action and those account for 89% of failed episodes; precondition violations terminate 66-68% of solvable episodes under every architecture (Testing the Planning Claims of LLM-Based Agents against Formal Semantics, Oct 2026)",
   "reused_not_rebuilt": [
    "canonical/runtime/k6_decision_refinement_compiler_v1.py -- compile_refinement, unchanged",
    "canonical/swe_kernel/one_demonstration_basin_v1.py -- GitWorld, explore, distances, best_demonstration, run_plan, goals, unchanged",
    "ONE_TRY_LEARNS_A_DOMAIN_NOT_THE_ENVIRONMENT_20261116_V1.md -- the measurement this answers the next question of",
    "A_FAILURE_IS_WORTH_TWO_TO_THE_KEYS_KEPT_20261116_V1.md and THE_POOL_IS_BADLY_POPULATED_NOT_BADLY_RANKED_20261116_V1.md -- the evidence pricing this is the capstone of"
   ],
-  "status_plus_a_txt_not_sufficient": {
-   "cost": 7.0,
-   "undecidable_states": 16
-  },
-  "status_sense_is_not_sufficient_for_task_C": {
-   "cost": 6.0,
-   "undecidable_states": 24
-  },
-  "task_A": {
-   "cells": 4,
-   "cost": 1.0,
-   "minimal_facts": [
-    "unstaged"
-   ],
-   "richest_hand_listed_cost": 11.0,
-   "undecidable_states": 0
-  },
-  "task_C": {
-   "cells": 2,
-   "cost": 1.0,
-   "minimal_facts": [
-    "content:b.txt"
-   ],
-   "richest_hand_listed_cost": 11.0,
-   "undecidable_states": 0
-  },
-  "world": {
-   "kind": "real git repository in a throw-away directory",
-   "states": 168,
-   "transitions": 1680
-  }
+  "external_confirmation": "46-64% of plans for solvable tasks contain an inapplicable action and those account for 89% of failed episodes; precondition violations terminate 66-68% of solvable episodes under every architecture (Testing the Planning Claims of LLM-Based Agents against Formal Semantics, Oct 2026)"
  },
  "next_step": "UNIFY_THE_REMAINING_DISCONNECTED_LEARNING_STORES_ONTO_ONE_LIVE_COGNITIVE_BUS_UNDER_RING0_SELF_ARCHITECT",
  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -129,7 +129,7 @@
   "execution_guard/goal_target_binding_v1.py"
  ],
  "recursive_obs": {
-  "canonical_base_commit": "cae454c9963b68dc530e6ddad0675cffda3ba921",
+  "canonical_base_commit": "bcb32d3e6c3819dc23a3af34739140aa28e0407c",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "FIVE_FROZEN_PERCEPTOR_CODEC_STRINGS",
@@ -288,7 +288,7 @@
      "route": "CONSTRUCT_A_REACHABLE_NEAR_MISS_AND_CERTIFY_IT"
     }
    ],
-   "checked_at_utc": "2026-11-17T03:08:36Z",
+   "checked_at_utc": "2026-11-17T03:14:38Z",
    "comparison_dimensions": [
     "CORRECTNESS",
     "CAPABILITY_STRENGTH",
@@ -329,7 +329,7 @@
    "selected_route": "DERIVE_THE_MINIMAL_SUFFICIENT_SENSE_FROM_THE_PLANS_POSTCONDITION_WITH_THE_EXISTING_EXACT_COMPILER_AND_VERIFY_IT_AGAINST_AN_INDEPENDENT_BRUTE_FORCE",
    "selected_route_preflight": {
     "all_required_dependencies_ready": true,
-    "checked_at_utc": "2026-11-17T03:08:36Z",
+    "checked_at_utc": "2026-11-17T03:14:38Z",
     "execution_dependencies": [
      {
       "dependency": "local Python 3 runtime and the repository's own exact counter",
@@ -466,8 +466,8 @@
   "tournament": {
    "counterexample_receipts": [
     {
-     "git_blob_sha": "7ca770ef9431fb7d1cc95acb8ea468b1c8831567",
-     "path": "canonical/tests/test_the_premise_is_the_sense_v1.py"
+     "path": "canonical/tests/test_the_premise_is_the_sense_v1.py",
+     "git_blob_sha": "537a9f25953bf39ca6bba26dfd2c47ba5215531a"
     }
    ],
    "decisive_question": "DOES_THE_CREATURE_INDUCE_UNSEEN_GRAMMARS_COMPOSE_ORGANS_SYNTHESIZE_NON_SUM_INVARIANTS_EXPAND_WITHOUT_ENGLISH_KEYWORDS_AND_CHOOSE_ZERO_REWARD_UNLOCKING_TOOLS",
