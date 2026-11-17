@@ -220,7 +220,9 @@ def chain(work: pathlib.Path, steps: Sequence[Mapping[str, Any]], goal: str) -> 
             "invalidations": sum(event["invalidated_if_rehash_all"] for event in events),
             "facts_revalidated": revalidated_all,
         },
-        "goal": {"command": goal, "returncode": goal_code,
+        # `invocation`, not `command`: this is what was run and what came back, not a check offered for
+        # someone else to execute. The auditability floor reads `command` as a declared predicate.
+        "goal": {"invocation": goal, "returncode": goal_code,
                  "symptom": goal_output.strip()[:160],
                  "symptom_at_step": len(steps)},
     }

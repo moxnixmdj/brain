@@ -113,7 +113,7 @@
     },
     "facts": {
       "path": "canonical/verification/STANDING_FACTS_20261116_V1.json",
-      "sha256": "54d5a368584db8be8bb9543cb9b9669db5f1a26b142169c8b9dbc8a1cb52932f"
+      "sha256": "45d9ada0a4c268f77560797de23b96e296be1e91f61252d362c895154724559d"
     },
     "memory": {
       "path": "canonical/verification/SKILL_RECURRENCE_20261116_V1.json",

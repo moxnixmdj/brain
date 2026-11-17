@@ -72,6 +72,12 @@ def test_the_ledger_costs_less_than_rehashing_everything(report: dict) -> None:
     assert report["cost"]["facts_revalidated_frame_scoped"] < report["rehash_all"]["facts_revalidated"]
 
 
+def test_the_receipt_is_history_not_a_declaration(report: dict) -> None:
+    blob = json.dumps(report)
+    assert '"command"' not in blob
+    assert '"invocation"' in blob
+
+
 def test_the_limit_is_named(report: dict) -> None:
     assert "remote service" in report["limit"]
     assert "Repair" in report["limit"]

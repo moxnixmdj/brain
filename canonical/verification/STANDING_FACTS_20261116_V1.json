@@ -55,7 +55,7 @@
           "invalidations": []
         },
         "goal": {
-          "command": "gunzip -c work.dat.gz | cmp - work.dat",
+          "invocation": "gunzip -c work.dat.gz | cmp - work.dat",
           "returncode": 0,
           "symptom": "",
           "symptom_at_step": 4
@@ -151,7 +151,7 @@
           ]
         },
         "goal": {
-          "command": "gunzip -c work.dat.gz | cmp - work.dat",
+          "invocation": "gunzip -c work.dat.gz | cmp - work.dat",
           "returncode": 1,
           "symptom": "- work.dat differ: char 1, line 1",
           "symptom_at_step": 5
@@ -266,7 +266,7 @@
           "invalidations": []
         },
         "goal": {
-          "command": "sha256sum -c manifest.txt",
+          "invocation": "sha256sum -c manifest.txt",
           "returncode": 0,
           "symptom": "sorted.txt: OK",
           "symptom_at_step": 4
@@ -362,7 +362,7 @@
           ]
         },
         "goal": {
-          "command": "sha256sum -c manifest.txt",
+          "invocation": "sha256sum -c manifest.txt",
           "returncode": 1,
           "symptom": "sorted.txt: FAILED\nsha256sum: WARNING: 1 computed checksum did NOT match",
           "symptom_at_step": 5
@@ -477,7 +477,7 @@
           "invalidations": []
         },
         "goal": {
-          "command": "tar -xzOf bundle.tar copy.dat | cmp - copy.dat",
+          "invocation": "tar -xzOf bundle.tar copy.dat | cmp - copy.dat",
           "returncode": 1,
           "symptom": "gzip: stdin: not in gzip format\ntar: Child returned status 1\ntar: Error is not recoverable: exiting now\ncmp: EOF on - which is empty",
           "symptom_at_step": 4
@@ -573,7 +573,7 @@
           ]
         },
         "goal": {
-          "command": "tar -xzOf bundle.tar copy.dat | cmp - copy.dat",
+          "invocation": "tar -xzOf bundle.tar copy.dat | cmp - copy.dat",
           "returncode": 1,
           "symptom": "gzip: stdin: not in gzip format\ntar: Child returned status 1\ntar: Error is not recoverable: exiting now\ncmp: EOF on - which is empty",
           "symptom_at_step": 5
