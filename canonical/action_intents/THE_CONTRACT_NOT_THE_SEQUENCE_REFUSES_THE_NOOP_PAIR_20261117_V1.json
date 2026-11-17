@@ -39,7 +39,7 @@
  },
  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_STORE_HAD_NO_CROSS_SKILL_EFFECT_CONTRACT: each rule was verified only against its own demonstration, sequence_verify was post-hoc textual, and proved_composition needed a concrete state and history \u2014 none could refuse an incompatible pair from what the skills DECLARE about themselves, which is the rank-2 pass condition in WHAT_IS_REAL_AND_THE_ONE_CLASS_OF_PAGE_20261117_V1.md \u00a79",
- "canonical_base_commit": "d595901ef713fd1e2146397354d3ba6620dcd79e",
+ "canonical_base_commit": "cc49c9f3d2a77e97bd51a42f21a680ce1c961af2",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -90,7 +90,7 @@
  ],
  "probe_specific": false,
  "recursive_obs": {
-  "canonical_base_commit": "d595901ef713fd1e2146397354d3ba6620dcd79e",
+  "canonical_base_commit": "cc49c9f3d2a77e97bd51a42f21a680ce1c961af2",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "enumerating more hand-written mutation kinds",
@@ -293,7 +293,7 @@
      "route": "SYNTHESIZE_AN_AST_LEVEL_EDIT_INDUCER_THAT_FOLDS_ONE_DEMONSTRATION_PAIR_INTO_A_HOLE_GENERALIZED_TEMPLATE_WITH_A_CONTEXT_PRECONDITION_AND_MEASURES_IT_END_TO_END_ON_A_PUBLIC_BUG_CORPUS"
     }
    ],
-   "checked_at_utc": "2026-11-17T02:45:03Z",
+   "checked_at_utc": "2026-11-17T13:53:02Z",
    "comparison_dimensions": [
     "CORRECTNESS",
     "CAPABILITY_STRENGTH",
@@ -333,7 +333,7 @@
    "selected_route": "COMPOSE_MISSING_STATEMENTS_AT_AST_RANKED_INSERT_HOLES_WITH_PARAM_FIRST_STMT_SYNTHESIS AND_TWO_PHASE_WALL_SHARE_BETWEEN_INSERTION_AND_FORCE",
    "selected_route_preflight": {
     "all_required_dependencies_ready": true,
-    "checked_at_utc": "2026-11-17T02:45:03Z",
+    "checked_at_utc": "2026-11-17T13:53:02Z",
     "execution_dependencies": [
      {
       "dependency": "local Python 3.11 runtime with pytest 9.2.0",
@@ -472,8 +472,8 @@
   "tournament": {
    "counterexample_receipts": [
     {
-     "path": "canonical/tests/test_effect_contract_composition_v1.py",
-     "git_blob_sha": "27bfff5092c36ae61a1420cf1f558676f81a32d0"
+     "git_blob_sha": "27bfff5092c36ae61a1420cf1f558676f81a32d0",
+     "path": "canonical/tests/test_effect_contract_composition_v1.py"
     }
    ],
    "decisive_question": "Does one demonstrated fix reach an undemonstrated bug, and what about the basis decides it?",
