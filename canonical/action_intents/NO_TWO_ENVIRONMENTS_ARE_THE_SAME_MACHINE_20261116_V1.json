@@ -1,0 +1,483 @@
+{
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+ "action_id": "NO_TWO_ENVIRONMENTS_ARE_THE_SAME_MACHINE_20261116_V1",
+ "action_intent_id": "NO_TWO_ENVIRONMENTS_ARE_THE_SAME_MACHINE_20261116_V1",
+ "action_kind": "REAL_CAPABILITY_ACQUISITION",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "incremental_spend_usd": 0,
+  "independent_verification_completed": false,
+  "independent_verification_note": "Producer-run sandbox only. Independent verification still open.",
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+  "progress_evidence_paths": [
+   "canonical/runtime/transition_system_identity_v1.py",
+   "canonical/tests/test_transition_system_identity_v1.py",
+   "canonical/verification/NO_TWO_ENVIRONMENTS_ARE_THE_SAME_MACHINE_20261116_V1.json",
+   "NO_TWO_ENVIRONMENTS_ARE_THE_SAME_MACHINE_20261116_V1.md"
+  ],
+  "route_class": "DELETE",
+  "scope_complete_discharge": false,
+  "terminal_achieved": false
+ },
+ "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::NO_PAIR_OF_THE_TREES_20_ENVIRONMENTS_IS_THE_SAME_MACHINE_UNDER_A_RENAMING_190_OF_190_PAIRS_PROVEN_DISTINCT_SO_THE_MEASURED_0_OF_48_TRANSFER_WAS_A_PROPERTY_OF_THE_SUBSTRATE_NOT_A_MISSING_MECHANISM",
+ "canonical_base_commit": "cc49c9f3d2a77e97bd51a42f21a680ce1c961af2",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "NO_PAIR_OF_THE_TREES_20_ENVIRONMENTS_IS_THE_SAME_MACHINE_UNDER_A_RENAMING_190_OF_190_PAIRS_PROVEN_DISTINCT_SO_THE_MEASURED_0_OF_48_TRANSFER_WAS_A_PROPERTY_OF_THE_SUBSTRATE_NOT_A_MISSING_MECHANISM",
+ "date": "2026-11-16",
+ "expected_parent_change": "The transfer question is decided exactly rather than approximated: an environment pair admits transfer iff the two are the same machine, and all 190 pairs of the tree's environments are proven to be different machines.",
+ "expected_parent_frontier_change": "The wall moves off transfer entirely: the premise's key quantity -- does experience in A pay in B -- is UNMEASURABLE on a substrate that contains no two environments sharing a machine. The next measurement is a substrate where the quantity is defined.",
+ "explicit_user_authorization": [
+  "Instant learning + instant learning in new arbitrary environments -- we solved those perfectly. Doesn't that mean we can solve any computer use?",
+  "Give the model the most advanced actions, let it do a thing once, it learns it permanently, and every computer task plus the most advanced software engineering is solved. Am I right or wrong?",
+  "You must think from first principles for everything",
+  "You should kill all the bad and dumb ideas before you waste time implementing them.",
+  "NEVER BUILD BEFORE REASRCHING IS EXHASIATAION IS HAPPENED",
+  "maximize your web use",
+  "all the tests are not on synthetic data but are on the hardest open tests",
+  "Testing on bugs we already know work is not progress -- that is self-congratulation.",
+  "YOU SURE THIS THE SMARTEST APPROACH?",
+  "Work in branch, merge only when complete (fastest)",
+  "Merge once, not 10 times."
+ ],
+ "falsification_condition": "One pair of environments found isomorphic that behaves differently under a plan mapped through the witness; or an UNKNOWN reported as NO_WITNESS; or a fingerprint reported as a proof.",
+ "files": {
+  "canonical/runtime/transition_system_identity_v1.py": "ba7747bdae4cbfac8cb900ad97844234f63ab21e80585b0844ee234cdf5f6a23",
+  "canonical/tests/test_transition_system_identity_v1.py": "aa7777f8932449b3b5b0e925ab15203b00cfc6c5bd5ad12d9a69cdebcbf07485",
+  "canonical/verification/NO_TWO_ENVIRONMENTS_ARE_THE_SAME_MACHINE_20261116_V1.json": "395ae7dccff34e4b0886d4526c8d05888ade4e0919744e86d1a9f4a5985d6e43",
+  "NO_TWO_ENVIRONMENTS_ARE_THE_SAME_MACHINE_20261116_V1.md": "42b01c159cb06b60d28c85216b8588f7df812f7ce1c603ed62165de627d0ae76"
+ },
+ "generic_repair_from_single_probe": false,
+ "governance_change": false,
+ "highest_leverage_now": true,
+ "incremental_spend_usd": 0,
+ "intentional_route_race": false,
+ "load_bearing_primary": {
+  "open_obligation_ids": [
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "constructive_gap_for_open_obligation_ids": [
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "expected_obligation_discharge_lcb": 0,
+  "expected_obligation_unlock_lcb": "2/100",
+  "success_probability_lcb": "4/5",
+  "wall_clock_cost_ub": 3600,
+  "interpretation": "Speculative forecast only. No obligation discharged, no benchmark gain, no capability credit, no independent verification. The claim is a decision procedure and a count: 190/190 pairs distinct."
+ },
+ "measured_effect": {
+  "procedure": "canonical/runtime/transition_system_identity_v1.py -- exact, no heuristic; a fingerprint is used only as a necessary condition and never reported as a conclusion",
+  "exact_result": {
+   "pairs_examined": 190,
+   "proven_different_machine": 190,
+   "proven_same_machine": 0,
+   "undecided": 0,
+   "note": "no pair required the exhaustive bijection search: the necessary fingerprint separated all 190, and the two pairs that matched on |S| and |A| were separately proven non-isomorphic by exhaustive search over state bijections and all action permutations"
+  },
+  "the_pairs_that_looked_identical_by_size": [
+   {
+    "pair": [
+     "grid_walk",
+     "toggle_bank"
+    ],
+    "states": 16,
+    "actions": 4,
+    "verdict": "NOT ISOMORPHIC"
+   },
+   {
+    "pair": [
+     "adjacent_sort",
+     "sliding_pairs"
+    ],
+    "states": 24,
+    "actions": 3,
+    "verdict": "NOT ISOMORPHIC"
+   },
+   {
+    "pair": [
+     "letter_shift",
+     "stack_pushout"
+    ],
+    "states": 120,
+    "actions": 4,
+    "verdict": "NOT ISOMORPHIC"
+   }
+  ],
+  "across_instances_of_the_SAME_environment": {
+   "same_machine": 1,
+   "different_machine": 15,
+   "the_one": "ring_rotate: three states, goal absent, so every instance is the same trivial machine -- the single instance-invariant case is also the case nothing can be solved in",
+   "why": "instances differ by their START state (grid_walk (0,0) vs (1,1); cyclic_counter 0 vs 1; dial_lock (0,0,0) vs (1,0,0)). The transition function is the same SHAPE; the labelled machine from the start is not, because the goal-distance labels differ. So last round's 33/33 carry is REAL but it is carry of the TRANSITIONS, not of the machine identity -- the table is reused exactly where it was already correct and is re-keyed elsewhere"
+  },
+  "why_no_transfer_is_even_possible_here": {
+   "the_abstraction_does_not_fold": {
+    "measure": "bisimulation quotient under goal-distance labels, by kind",
+    "finding": "blocks == |S| for 15 of 16 exactly-decidable kinds (grid_walk 16, dial_lock 64, tri_lock 60, adjacent_sort 24, double_dial 20, bit_register 16, toggle_bank 16, parity_lights 8, binary_odometer 16, last_wins 4, cyclic_counter 7, sliding_pairs 24)",
+    "meaning": "these environments are STRONGLY ASYMMETRIC: almost every state has a distinct future, so the coarsest exact abstraction is the state space itself. A structural table therefore cannot be smaller than the state space, and cannot fold two environments together unless they fold internally first"
+   },
+   "the_one_kind_that_does_fold": {
+    "kind": "string_affix",
+    "states": 121,
+    "blocks": 4,
+    "plan": "2 actions",
+    "executed_on_a_renamed_twin": true
+   },
+   "the_tree_says_so_itself": "cross_kind_learning_to_learn_benchmark_v1.py, on its held-out kinds: 'Composed from the same structural vocabulary ... deliberately none is a copy of one.' The no-transfer result confirms the benchmark achieved what it set out to do"
+  },
+  "the_trade_off_reproduced_on_the_trees_own_substrate": {
+   "source": "OPSR, arXiv 2604.07016: a finer abstraction is always more control-granular and less likely to transfer",
+   "measured": {
+    "label_goal_state_only": "19 distinct machines / 20 kinds",
+    "label_goal_distance_3_buckets": "19 / 20",
+    "label_goal_reachability_1_bit": "11 / 20 with two large groups",
+    "consequence": "coarsening creates the collisions that permit transfer AND destroys the distinctions control needs; the trade-off is real and it is exactly as the literature states"
+   }
+  }
+ },
+ "next_step": "Build a substrate whose environments genuinely share machines -- same dynamics under renamed actions, different start states, different goal labels -- and measure executed transfer on it, with the correspondence found and not supplied. Two environments made identical would measure nothing and must be avoided.",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "paths": [
+  "canonical/runtime/transition_system_identity_v1.py",
+  "canonical/tests/test_transition_system_identity_v1.py",
+  "canonical/verification/NO_TWO_ENVIRONMENTS_ARE_THE_SAME_MACHINE_20261116_V1.json",
+  "NO_TWO_ENVIRONMENTS_ARE_THE_SAME_MACHINE_20261116_V1.md"
+ ],
+ "prior_work_reused": [
+  "canonical/runtime/structural_transfer_v3.py -- READ: a GATE that admits a mapping only against an independent receipt; it has no inducer, which is why the tree had a transfer gate and no transfer",
+  "canonical/runtime/recursive_abstraction_v5.py and universal_learning_recursive_abstraction_router_v5.py -- READ: abstraction routing over declared mappings, not over induced ones",
+  "canonical/runtime/consequence_table_v1.py -- the paid-for table whose 0/48 this round explains",
+  "canonical/tools/cross_kind_*_benchmark_v1.py -- the substrate, unmodified"
+ ],
+ "probe_specific": false,
+ "recursive_obs": {
+  "canonical_base_commit": "cc49c9f3d2a77e97bd51a42f21a680ce1c961af2",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "the transfer question as a mechanism gap",
+   "a fingerprint treated as a conclusion",
+   "a name-keyed consequence table as a transferable structure",
+   "two environments made identical to 'show' transfer"
+  ],
+  "expected_parent_level_state_change": "The wall moves off transfer entirely: the premise's key quantity -- does experience in A pay in B -- is UNMEASURABLE on a substrate that contains no two environments sharing a machine. The next measurement is a substrate where the quantity is defined.",
+  "iteration_limit": 1,
+  "obs_blocker": {
+   "delete_bypass_substitute_options": [
+    "delete the assumption that 0/48 was our defect",
+    "reuse the tree's own environments as the substrate",
+    "decide the question exactly instead of approximately"
+   ],
+   "intrinsic_or_path_specific": "intrinsic: transfer is possible iff two environments are the same machine; path_specific: on this substrate 0 of 190 pairs are",
+   "surviving_causal_blocker": "NO_PAIR_OF_THE_TREES_20_ENVIRONMENTS_IS_THE_SAME_MACHINE_UNDER_A_RENAMING_190_OF_190_PAIRS_PROVEN_DISTINCT_SO_THE_MEASURED_0_OF_48_TRANSFER_WAS_A_PROPERTY_OF_THE_SUBSTRATE_NOT_A_MISSING_MECHANISM"
+  },
+  "obs_capability": {
+   "capability_work_deleted": [
+    "a fingerprint-based claim that four kinds are one machine (it ignored |S|; 6/54 coincidence)",
+    "a name-keyed table presented as transferable (0 act_calls saved)",
+    "3/3 renamed-twin transfer stated without its coverage (3 of 16 kinds)"
+   ],
+   "existing_inherited_routes_checked": [
+    "structural_transfer_v3 (a gate with no inducer)",
+    "recursive_abstraction_v5",
+    "universal_active_transfer_learner_v2",
+    "universal_learning_recursive_abstraction_router_v5",
+    "finite_abstraction_cover_lift_v1",
+    "consequence_table_v1"
+   ],
+   "external_existing_routes_checked": [
+    "OPSR arXiv 2604.07016 (Apr 2026): transfer cover, finer abstraction = more control and less transfer, coarsening causes aliasing",
+    "Bisimulation-based state abstraction for model-based RL (CMU thesis 2026): states equivalent iff same future abstract states",
+    "World-model surveys 2026: planning in a learned model, model-trust gating",
+    "GUI-agent systems surveys 2026: DynaWeb sim-to-real gap; PolySkill separating abstract goal from site-specific implementation"
+   ],
+   "surviving_gap": "No substrate exists whose environments share a machine, so cross-environment transfer is undefined rather than unmeasured."
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "a better abstraction feature",
+    "a coarser key",
+    "a bigger state representation"
+   ],
+   "real_outcome": "Decide whether experience in one environment can pay in another, exactly.",
+   "surviving_necessity": "The premise's whole claim reduces to this one decidable question."
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "the constant-policy control absorbs the 'smarter feature helps' explanation",
+   "downstream_work_to_delete_or_supersede": "the belief that the index is the single bottleneck; the index is now a cost instrument",
+   "fresh_reuse_plan": "re-run the budget sweep and the price measurement whenever POLICIES, NODE_BUDGET or the kind set changes"
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": "the exhaustive state-space enumeration is cached in the receipt for the 6 complete rows; it is not re-run",
+   "search_stop_decision": "stopped when the price of the index, its control, and the status of every unsolvable row were all measured and my own best-looking result had been killed by its control"
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "A fingerprint is not a proof and a name-keyed structure cannot transfer; only a witnessed bijection decides the question.",
+   "routes_ranked": [
+    "DELETE the assumption that the zero was our defect (taken)",
+    "REUSE the tree's environments (taken)",
+    "COMPOSE a bisimulation quotient with the consequence table (attempted; applies to 3/16 kinds and the reason is the result)",
+    "SYNTHESIZE a substrate whose environments share machines (next)"
+   ]
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "none beyond the tree's own synthetic kinds, named in every limit"
+  },
+  "real_outcome": "The transfer question is decided exactly rather than approximated: an environment pair admits transfer iff the two are the same machine, and all 190 pairs of the tree's environments are proven to be different machines.",
+  "required_capability": "Decide environment identity exactly, and use it to permit or forbid transfer.",
+  "route_frontier": {
+   "challenger_routes": [
+    {
+     "route": "a fingerprint that says two environments are the same",
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "WRONG: called a 16-state and a 20-state machine equal",
+      "CAPABILITY_STRENGTH": "6/54 coincidence",
+      "WALL_CLOCK": "minutes",
+      "INCREMENTAL_COST": "none",
+      "RELIABILITY": "none",
+      "VERIFIABILITY": "measured by enumerating bijections"
+     },
+     "evidence": [
+      "no isomorphism exists in any pair the fingerprint merged"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/NO_TWO_ENVIRONMENTS_ARE_THE_SAME_MACHINE_20261116_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ]
+    },
+    {
+     "route": "an exact isomorphism decision, with UNKNOWN reported as UNKNOWN",
+     "resolution": "SELECTED",
+     "comparison": {
+      "CORRECTNESS": "exact; WITNESS or exhaustively-proven NO_WITNESS",
+      "CAPABILITY_STRENGTH": "settles the premise (0/190 same)",
+      "WALL_CLOCK": "minutes",
+      "INCREMENTAL_COST": "one module, no parameters",
+      "RELIABILITY": "bounded to |S|<=600, cap stated",
+      "VERIFIABILITY": "13 tests, 2 mutants killed, 1 reported surviving"
+     },
+     "evidence": [
+      "190/190 proven distinct",
+      "blocks==|S| for 15/16 decidable kinds"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/NO_TWO_ENVIRONMENTS_ARE_THE_SAME_MACHINE_20261116_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ]
+    }
+   ],
+   "checked_at_utc": "2026-11-17T13:46:55Z",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "a coarser feature key or a better abstraction",
+   "max_age_hours": 24,
+   "negative_search_summary": "The 2026 literature gives the theory (transfer cover; abstraction trade-off) and no result claiming transfer between two environments that are genuinely different machines. The tree has a transfer GATE (structural_transfer_v3) requiring an independent receipt and no inducer of the mapping.",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "2026 agent transition model state action next state model-based planning vs model-free"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "learned forward model deterministic environment action effect induction tabular"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "skill applicability index scope precondition 2026 arXiv agent"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "model-based agent explicit world model computer use 2026"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "selected_route": "DECIDE_ENVIRONMENT_IDENTITY_EXACTLY_BECAUSE_TRANSFER_IS_POSSIBLE_IFF_TWO_ENVIRONMENTS_ARE_THE_SAME_MACHINE_AND_ALL_190_PAIRS_OF_THE_TREES_ENVIRONMENTS_ARE_PROVEN_DISTINCT",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-11-17T13:46:55Z",
+    "execution_dependencies": [
+     {
+      "dependency": "python3 running the tree's own benchmark modules",
+      "evidence": [
+       "the budget sweep, price measurement and state-space enumerations all ran"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "LOCAL_RUNTIME",
+      "observed_at_utc": "2026-11-17T02:48:38Z",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "canonical/runtime/model_v1.py socket present as the next build target",
+      "evidence": [
+       "read this round; it states it contains no model"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "STORAGE",
+      "observed_at_utc": "2026-11-17T02:48:38Z",
+      "required": false,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "max_age_hours": 2,
+    "selected_route": "DECIDE_ENVIRONMENT_IDENTITY_EXACTLY_BECAUSE_TRANSFER_IS_POSSIBLE_IFF_TWO_ENVIRONMENTS_ARE_THE_SAME_MACHINE_AND_ALL_190_PAIRS_OF_THE_TREES_ENVIRONMENTS_ARE_PROVEN_DISTINCT",
+    "status": "READY"
+   },
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/tools/cross_kind_learning_to_learn_benchmark_v1.py",
+     "canonical/tools/cross_kind_compounding_benchmark_v1.py",
+     "canonical/runtime/learn_to_learn_v1.py",
+     "canonical/runtime/model_v1.py",
+     "canonical/runtime/applicability_v1.py",
+     "canonical/runtime/precondition_discovery_v1.py",
+     "canonical/runtime/contrast_selection_v1.py"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "https://arxiv.org/html/2610.11781 (Skill-V)",
+     "https://arxiv.org/html/2605.13716 (SkillOps)",
+     "https://arxiv.org/html/2610.15481 (SkillFusion)",
+     "https://pith.science/paper/2608.15165 (SkillCommit)",
+     "https://arxiv.org/html/2608.16246 (CompoSkill)"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "stdlib only this round; no package installed or used in the result-bearing path"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "The 2026 skill-contract literature addresses applicability scope, not consequence prediction"
+    ]
+   },
+   "unresolved_plausible_dominators": []
+  },
+  "routes_considered": [
+   "DELETE",
+   "REUSE",
+   "COMPOSE",
+   "SYNTHESIZE_NEW_PRIMITIVE"
+  ],
+  "selected_surviving_route": "DECIDE_ENVIRONMENT_IDENTITY_EXACTLY_BECAUSE_TRANSFER_IS_POSSIBLE_IFF_TWO_ENVIRONMENTS_ARE_THE_SAME_MACHINE_AND_ALL_190_PAIRS_OF_THE_TREES_ENVIRONMENTS_ARE_PROVEN_DISTINCT",
+  "stop_condition": "The 190/190 count is reported with the pairs that matched on size, the three failed attempts and the rule each taught are reported, M3 is reported as a surviving mutant, and no capability, family, terminal or weight credit is claimed.",
+  "why_selected_route_is_fastest_sufficient": "It converts the premise from an argument into a count, and the count is 190/190, so the remaining work is redirected before any of it is built."
+ },
+ "route_id": "DECIDE_ENVIRONMENT_IDENTITY_EXACTLY_BECAUSE_TRANSFER_IS_POSSIBLE_IFF_TWO_ENVIRONMENTS_ARE_THE_SAME_MACHINE_AND_ALL_190_PAIRS_OF_THE_TREES_ENVIRONMENTS_ARE_PROVEN_DISTINCT",
+ "scope_and_limits": "AUTHORITY NONE. 20 synthetic kinds; exact decision limited to |S| <= 600 so four kinds are UNDECIDED not proven distinct (all 190 pairs were separated by the necessary fingerprint first, which is a proof independent of the cap). Isomorphism is with respect to the goal label as the only observation. Real computer-use state spaces exceed the cap and this says nothing about them. No weights, no model, $0.",
+ "scope_complete_discharge": false,
+ "selected_route": "DECIDE_ENVIRONMENT_IDENTITY_EXACTLY_BECAUSE_TRANSFER_IS_POSSIBLE_IFF_TWO_ENVIRONMENTS_ARE_THE_SAME_MACHINE_AND_ALL_190_PAIRS_OF_THE_TREES_ENVIRONMENTS_ARE_PROVEN_DISTINCT",
+ "status": "PROPOSED__ZERO_CREDIT__NO_TERMINAL_CLAIM",
+ "stop_condition": "The 190/190 count is reported with the pairs that matched on size, the three failed attempts and the rule each taught are reported, M3 is reported as a surviving mutant, and no capability, family, terminal or weight credit is claimed.",
+ "terminal_achieved": false,
+ "terminal_credit_delta": 0,
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "truth": {
+  "achieved": false
+ },
+ "user_authorized_governance_change": false,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "currentness": {
+   "accepted_families": 5,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "This measures reach on real pages; it discharges no truth obligation and claims no terminal credit.",
+  "target_truth_obligations": [
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [],
+   "decisive_question": "Of the pages no budget, search order or prior can reach, how many are unreachable because the answer is a value nothing on the page states -- and does generating that value reach them?",
+   "falsifier_id": "A_PAGE_WHERE_THE_DERIVED_CANDIDATE_CHANGES_AN_OUTCOME_FOR_THE_WORSE_OR_A_DECOY_SUCCEEDS_WHERE_THE_DERIVED_VALUE_FAILS",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "Two of my own conclusions were found wrong and are recorded rather than hidden: a malformed action produced a false 'blind observation' claim, and a consolidator that hardcodes null produced a false 'the four arms never differed' claim. Both were retracted before this PR and are named in the receipt.",
+   "proposal_id": "THE_ANSWER_WAS_A_VALUE_NOTHING_STATED_20261117_V1"
+  }
+ },
+ "verification": {
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "commands": [
+   "python3 -m unittest canonical.tests.test_transition_system_identity_v1  # 13 pass",
+   "python3 /tmp/premise.py  # 190/190 proven distinct, 0 same, 0 undecided"
+  ]
+ },
+ "weakens_existing_guard": false
+}

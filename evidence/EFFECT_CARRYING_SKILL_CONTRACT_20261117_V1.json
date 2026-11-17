@@ -1,0 +1,125 @@
+{
+ "schema": "PROJECT_BRAIN_EFFECT_CONTRACT_COMPOSITION_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+ "model_dependency_count": 0,
+ "network_calls_at_run_time": 0,
+ "incremental_spend_usd": 0,
+ "measured": {
+  "no_op_pair": {
+   "schema": "PROJECT_BRAIN_EFFECT_CONTRACT_COMPOSITION_V1",
+   "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+   "a": "A_TIGHTEN_LE_TO_LT",
+   "b": "B_LOOSEN_LT_TO_LE",
+   "a_sha256": "a4c515a189a814394dd6be244a17541d344e16ed69dabf1f80aa15cc493f9e9b",
+   "b_sha256": "72d04d97bc60152748cc4afdd5e005d075f69ea944ffab223db0033bd5bbe1d2",
+   "checks": {
+    "complete_a": "PASS",
+    "complete_b": "PASS",
+    "coverage": "PASS",
+    "undo": "EFFECT_UNDO"
+   },
+   "model_dependency_count": 0,
+   "network_calls_at_run_time": 0,
+   "verdict": "EFFECT_UNDO",
+   "reason": "B_LOOSEN_LT_TO_LE:EFFECT_UNDO_OF_A_TIGHTEN_LE_TO_LT",
+   "seconds": 0.0001
+  },
+  "advance_pair": {
+   "schema": "PROJECT_BRAIN_EFFECT_CONTRACT_COMPOSITION_V1",
+   "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+   "a": "A_TIGHTEN_LE_TO_LT",
+   "b": "C_ADVANCE_LT_TO_LT11",
+   "a_sha256": "a4c515a189a814394dd6be244a17541d344e16ed69dabf1f80aa15cc493f9e9b",
+   "b_sha256": "9b76d1ab5000ddaaaf846ff50fb56e55ed1db0bf5de424fe443b8c254b53971d",
+   "checks": {
+    "complete_a": "PASS",
+    "complete_b": "PASS",
+    "coverage": "PASS",
+    "undo": "PASS"
+   },
+   "model_dependency_count": 0,
+   "network_calls_at_run_time": 0,
+   "verdict": "CONTRACT_COMPATIBLE",
+   "reason": "EFFECTS_COMPATIBLE",
+   "seconds": 0.0001
+  },
+  "weak_verdict": {
+   "schema": "PROJECT_BRAIN_EFFECT_CONTRACT_COMPOSITION_V1",
+   "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+   "a": "A_TIGHTEN_LE_TO_LT",
+   "b": "WEAK_NO_VERDICT",
+   "a_sha256": "a4c515a189a814394dd6be244a17541d344e16ed69dabf1f80aa15cc493f9e9b",
+   "b_sha256": "42485c76775384d2d709ad2cacfa9fcb5ba2371fb15015821136587391df6297",
+   "checks": {
+    "complete_a": "PASS",
+    "complete_b": "NO_SEPARATING_VERDICT"
+   },
+   "model_dependency_count": 0,
+   "network_calls_at_run_time": 0,
+   "verdict": "NO_SEPARATING_VERDICT",
+   "reason": "WEAK_NO_VERDICT:VERDICT_NOT_SEPARATING:self",
+   "seconds": 0.0
+  },
+  "missing_observables": {
+   "schema": "PROJECT_BRAIN_EFFECT_CONTRACT_COMPOSITION_V1",
+   "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+   "a": "WEAK_NO_OBSERVABLES",
+   "b": "A_TIGHTEN_LE_TO_LT",
+   "a_sha256": "b0fca806b7137f39fb4c0f29fb5a9426fd64f4ca81989f4e7eb126868ade9ee5",
+   "b_sha256": "a4c515a189a814394dd6be244a17541d344e16ed69dabf1f80aa15cc493f9e9b",
+   "checks": {
+    "complete_a": "INSUFFICIENT_OBSERVABLES"
+   },
+   "model_dependency_count": 0,
+   "network_calls_at_run_time": 0,
+   "verdict": "INSUFFICIENT_OBSERVABLES",
+   "reason": "WEAK_NO_OBSERVABLES:NO_OBSERVABLES",
+   "seconds": 0.0
+  }
+ },
+ "cross_instrument": {
+  "no_op": {
+   "sequence": {
+    "verdict": "FAIL",
+    "reason": "STEP_REVERTED_EARLIER_STATE:step2"
+   },
+   "proved_composition": {
+    "verdict": "STEP_REVERTED_EARLIER_STATE",
+    "reason": "STEP_REVERTED_EARLIER_STATE:step2"
+   },
+   "contract": {
+    "verdict": "EFFECT_UNDO",
+    "reason": "B_LOOSEN_LT_TO_LE:EFFECT_UNDO_OF_A_TIGHTEN_LE_TO_LT"
+   }
+  },
+  "advance": {
+   "sequence": {
+    "verdict": "PASS",
+    "reason": null
+   },
+   "proved_composition": {
+    "verdict": "PASS",
+    "reason": null
+   },
+   "contract": {
+    "verdict": "CONTRACT_COMPATIBLE",
+    "reason": "EFFECTS_COMPATIBLE"
+   }
+  },
+  "all_three_refuse_no_op": true,
+  "all_three_pass_advance": true,
+  "model_dependency_count": 0,
+  "network_calls_at_run_time": 0
+ },
+ "summary": {
+  "no_op_pair_refused_by_contract": true,
+  "advance_pair_compatible": true,
+  "weak_verdict_refused": true,
+  "missing_observables_refused": true,
+  "contract_layer_did_not_run_sequence_or_history": true,
+  "all_three_instruments_refuse_no_op": true,
+  "all_three_instruments_pass_advance": true
+ },
+ "generated_at": "2026-11-17T13:48:26Z",
+ "audit_pass": true
+}
