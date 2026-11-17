@@ -175,7 +175,7 @@
       "spending on value inference where execution can settle it"
     ],
     "expected_parent_frontier_change": "The value layer stops being the unmeasured part of 'do it once': the tree now knows that an inferred value is a hypothesis at 21 percent precision, that a contrast doubles it and vetoes more, and that neither closes it -- so values route to execution and memory stores operations plus premises, never values.",
-    "expected_parent_level_state_change": "The value layer stops being the unmeasured part of 'do it once': the tree now knows that an inferred value is a hypothesis at 21 percent precision, that a contrast doubles it and vetoes more, and that neither closes it -- so values route to execution and memory stores operations plus premises, never values.",
+    "expected_parent_level_state_change": "Instant learning stops being a claim about all work and becomes a routed fast path: use memory only where the site is a verbatim or clean-binding sibling, synthesise where the edit introduces values the target does not determine, and never treat the no-sibling majority as learnable at all -- because the demonstration has nothing there to generalise to, no matter how many times it is replayed.",
     "independent_verification_required": true,
     "iteration_limit": 1,
     "obs_blocker": {
@@ -465,7 +465,7 @@
     "selected_route": "MEASURE_THE_SUPPLY_AND_DETERMINACY_OF_ONE_DEMONSTRATION_ON_REAL_COMMIT_HISTORY",
     "selected_surviving_route": "MEASURE_THE_SUPPLY_AND_DETERMINACY_OF_ONE_DEMONSTRATION_ON_REAL_COMMIT_HISTORY",
     "selected_surviving_route_class": "SYNTHESIZE_NEW_PRIMITIVE",
-    "stop_condition": "One merged change on this branch whose 393-commit corpus, three supply rungs and nine pinned laws are reproducible by two commands.",
+    "stop_condition": "One merged change on this branch in which the copy, derive and derive-plus-contrast arms are reproducible by one command on the pinned 393-record corpus with the same sha256.",
     "why_selected_route_is_fastest_sufficient": "It is the only route that measures the term the claim assumes: supply. The model is 0.2 seconds over a pinned 393-commit corpus with real ground truth, so the routing rule can be applied immediately and re-applied after any change, instead of arguing about whether one demonstration is enough.",
     "why_this_is_not_another_organ": "It replaces a list with a fold over experience and reuses the existing repair primitive, the corpus oracle and the hashing/verification discipline; the only new machinery is induction and the rung classifier, and both are measured."
   },
