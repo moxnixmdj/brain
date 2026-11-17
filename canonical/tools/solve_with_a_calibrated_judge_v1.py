@@ -359,7 +359,9 @@ def exhaustion_stage(evaluated: int, space_size: int, candidate_cap: int) -> str
 
 
 def solve_task(root: pathlib.Path, name: str, *, candidate_cap: int, wall_budget: float,
-               verify_timeout: int, workdir: pathlib.Path) -> dict[str, Any]:
+               verify_timeout: int, workdir: pathlib.Path,
+               space_builder: "Callable[[ast.AST, Sequence[str]], list[dict[str, Any]]] | None" = None,
+               ) -> dict[str, Any]:
     row: dict[str, Any] = {"task": name, "kind": "task"}
     cases = gen.examples_of(root, name)
     row["cases"] = len(cases)
@@ -386,7 +388,12 @@ def solve_task(root: pathlib.Path, name: str, *, candidate_cap: int, wall_budget
         row["stage"] = "JUDGE_NOT_CALIBRATED"
         return row
 
-    space = gen._enumerate(tree, gen.atoms_of(function))  # noqa: SLF001
+    atoms = gen.atoms_of(function)
+    if space_builder is None:
+        space = gen._enumerate(tree, atoms)  # noqa: SLF001
+    else:
+        # The space is supplied; the judge, the certification and the verdict are not.
+        space = space_builder(tree, atoms)
     row["space_size"] = len(space)
     # Order by the lines the failure actually executes. Knowledge-free: it reads the defective
     # program's own behaviour on a case it fails, never the answer.
