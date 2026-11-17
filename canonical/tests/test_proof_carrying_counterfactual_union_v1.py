@@ -123,6 +123,8 @@ class HardOpenPopulationAuditTests(unittest.TestCase):
             "THE_GUI_HAS_NO_INVARIANCE_TO_FIND_20261116_V1.md",
             "canonical/action_intents/THE_GUI_HAS_NO_INVARIANCE_TO_FIND_20261116_V1.json",
             "canonical/verification/GUI_INVARIANCE_IS_VACUOUS_OR_ABSENT_20261116_V1.json",
+            "COMPOSE_ONLY_WHAT_IS_PROVED_20261116_V1.md",
+            "COMPOSE_ONLY_WHAT_IS_PROVED_20261116_V1.json",
         ):
             self.assertIn(path, mod.EVIDENCE_READ)
 
@@ -164,6 +166,7 @@ class HardOpenPopulationAuditTests(unittest.TestCase):
             "read_first_operand_and_replay_drift",
             "long_tail_trigger_and_basin",
             "gui_invariance_and_operand_boundary",
+            "proved_composition",
         ):
             self.assertIn(group, census["groups"])
             self.assertEqual(census["groups"][group]["missing"], [])
@@ -278,6 +281,22 @@ class HardOpenPopulationAuditTests(unittest.TestCase):
         self.assertEqual(section["phrase_blind_arm"]["blind_only"], [])
         self.assertEqual(section["measured_effect"]["phrase_blind_arm_design_set"]["blind_solved"], 4)
         self.assertIn("NO_GUI_INVARIANCE_LEVER", data["hard_nonclaims"])
+
+    def test_final_proved_composition_is_read_without_credit(self) -> None:
+        path = ROOT / "canonical" / "verification" / "PROOF_CARRYING_COUNTERFACTUAL_UNION_20261116_V1.json"
+        data = json.loads(path.read_text(encoding="utf-8"))
+        self.assertTrue(data["invariants"]["proved_composition_is_bounded_not_a_single_lever"])
+        section = data["proved_composition"]
+        self.assertEqual(
+            section["status"],
+            "COMPOSE_ONLY_WHAT_IS_PROVED_AFFIRMATIVE_ORGAN_IS_BOUNDED_NOT_A_SINGLE_LEVER",
+        )
+        self.assertEqual(section["boxes"]["COMPOSED_VERIFIED"], 31)
+        self.assertEqual(section["boxes"]["PREMISE_DIED"], 22)
+        self.assertEqual(section["boxes"]["B_REFUSED"], 27)
+        self.assertEqual(section["boxes"]["NO_SECOND_CANDIDATE"], 34)
+        self.assertEqual(section["reach"], {"compose": 0.3875, "where_premises_held": 0.5345})
+        self.assertIn("NO_PROOF_COMPOSITION_AS_SINGLE_LEVER", data["hard_nonclaims"])
 
     def test_selection_measurement_is_read_but_not_counted_as_a_quixbugs_repair(self) -> None:
         path = ROOT / "canonical" / "verification" / "ONE_DEMONSTRATION_IS_NOT_IDENTIFICATION_MEASURE_20261116_V1.json"

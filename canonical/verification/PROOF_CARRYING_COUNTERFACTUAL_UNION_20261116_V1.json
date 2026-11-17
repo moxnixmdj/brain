@@ -220,7 +220,9 @@
     "canonical/verification/ONE_DEMONSTRATION_BASIN_20261116_V1.json",
     "THE_GUI_HAS_NO_INVARIANCE_TO_FIND_20261116_V1.md",
     "canonical/action_intents/THE_GUI_HAS_NO_INVARIANCE_TO_FIND_20261116_V1.json",
-    "canonical/verification/GUI_INVARIANCE_IS_VACUOUS_OR_ABSENT_20261116_V1.json"
+    "canonical/verification/GUI_INVARIANCE_IS_VACUOUS_OR_ABSENT_20261116_V1.json",
+    "COMPOSE_ONLY_WHAT_IS_PROVED_20261116_V1.md",
+    "COMPOSE_ONLY_WHAT_IS_PROVED_20261116_V1.json"
   ],
   "exact_decision_past_enumeration_wall": {
     "measured_effect": {
@@ -252,7 +254,7 @@
     "subsequences",
     "wrap"
   ],
-  "generated_at_utc": "2026-11-17T00:05:29.029806+00:00",
+  "generated_at_utc": "2026-11-17T00:19:43.219245+00:00",
   "gui_invariance_and_operand_boundary": {
     "identity_invariance": {
       "identity_arms": 15,
@@ -2508,6 +2510,7 @@
     "NO_SINGLE_LEVER_CLAIM",
     "NO_ONE_DEMONSTRATION_PER_ENVIRONMENT_CLAIM",
     "NO_GUI_INVARIANCE_LEVER",
+    "NO_PROOF_COMPOSITION_AS_SINGLE_LEVER",
     "PRODUCER_RUN_NOT_INDEPENDENT_VERIFICATION",
     "TERMINAL_TRUTH_UNTOUCHED"
   ],
@@ -2666,6 +2669,7 @@
     "one_demonstration_learns_a_domain_not_the_environment": true,
     "operand_addition_is_bounded_to_its_design_set": true,
     "phrase_blind_basis_adds_no_full_surface_capability": true,
+    "proved_composition_is_bounded_not_a_single_lever": true,
     "read_first_policy_is_measured_and_does_not_forbid_learning": true,
     "repaired_and_open_partition_corpus": true,
     "replay_forever_is_falsified_by_state_drift": true,
@@ -3668,6 +3672,15 @@
         "canonical/swe_kernel/one_demonstration_basin_v1.py"
       ]
     },
+    "proved_composition": {
+      "count": 3,
+      "missing": [],
+      "present": [
+        "canonical/swe_kernel/proved_composition_v1.py",
+        "canonical/runtime/verified_skill_macro_planner_v1.py",
+        "canonical/runtime/capability_composer_v1.py"
+      ]
+    },
     "read_first_operand_and_replay_drift": {
       "count": 5,
       "missing": [],
@@ -3869,6 +3882,37 @@
       "shortest_paths",
       "topological_ordering"
     ]
+  },
+  "proved_composition": {
+    "boxes": {
+      "A_NOT_PROVED": 15,
+      "B_REFUSED": 27,
+      "COMPOSED_VERIFIED": 31,
+      "NO_SECOND_CANDIDATE": 34,
+      "PREMISE_DIED": 22
+    },
+    "reach": {
+      "compose": 0.3875,
+      "where_premises_held": 0.5345
+    },
+    "receipt": "COMPOSE_ONLY_WHAT_IS_PROVED_20261116_V1.json",
+    "scan": {
+      "files": 5563,
+      "files_with_sites": 4228,
+      "premise_holding_sites": 9290,
+      "scan_seconds": 49.97
+    },
+    "status": "COMPOSE_ONLY_WHAT_IS_PROVED_AFFIRMATIVE_ORGAN_IS_BOUNDED_NOT_A_SINGLE_LEVER",
+    "step_one": {
+      "inline": {
+        "attempted": 36,
+        "proved": 22
+      },
+      "rename": {
+        "attempted": 36,
+        "proved": 35
+      }
+    }
   },
   "read_first_operand_and_replay_drift": {
     "operand": {

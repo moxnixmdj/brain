@@ -184,6 +184,11 @@ MECHANISM_GROUPS: dict[str, tuple[str, ...]] = {
         "canonical/tools/gui_phrase_blind_basis_arm_v1.py",
         "canonical/runtime/derived_value_v1.py",
     ),
+    "proved_composition": (
+        "canonical/swe_kernel/proved_composition_v1.py",
+        "canonical/runtime/verified_skill_macro_planner_v1.py",
+        "canonical/runtime/capability_composer_v1.py",
+    ),
 }
 
 SUPERSEDES = (
@@ -260,6 +265,10 @@ EVIDENCE_READ = (
     "THE_GUI_HAS_NO_INVARIANCE_TO_FIND_20261116_V1.md",
     "canonical/action_intents/THE_GUI_HAS_NO_INVARIANCE_TO_FIND_20261116_V1.json",
     "canonical/verification/GUI_INVARIANCE_IS_VACUOUS_OR_ABSENT_20261116_V1.json",
+    # Final main measurement: compose only what is proved; the affirmative
+    # organ is measured, not a new single lever.
+    "COMPOSE_ONLY_WHAT_IS_PROVED_20261116_V1.md",
+    "COMPOSE_ONLY_WHAT_IS_PROVED_20261116_V1.json",
 )
 
 
@@ -398,6 +407,7 @@ def audit(quixbugs_root: pathlib.Path, root: pathlib.Path = ROOT) -> dict[str, A
     basin_intent = read_json(A / "ONE_TRY_LEARNS_A_DOMAIN_NOT_THE_ENVIRONMENT_20261116_V1.json") if (A / "ONE_TRY_LEARNS_A_DOMAIN_NOT_THE_ENVIRONMENT_20261116_V1.json").is_file() else None
     gui_census = read_json(V / "GUI_INVARIANCE_IS_VACUOUS_OR_ABSENT_20261116_V1.json") if (V / "GUI_INVARIANCE_IS_VACUOUS_OR_ABSENT_20261116_V1.json").is_file() else None
     gui_intent = read_json(A / "THE_GUI_HAS_NO_INVARIANCE_TO_FIND_20261116_V1.json") if (A / "THE_GUI_HAS_NO_INVARIANCE_TO_FIND_20261116_V1.json").is_file() else None
+    proved = read_json(ROOT / "COMPOSE_ONLY_WHAT_IS_PROVED_20261116_V1.json") if (ROOT / "COMPOSE_ONLY_WHAT_IS_PROVED_20261116_V1.json").is_file() else None
     answer_key_counts = [
         row["answer_keys_present"] for row in census["rows"]
         if isinstance(row.get("answer_keys_present"), int)
@@ -570,6 +580,18 @@ def audit(quixbugs_root: pathlib.Path, root: pathlib.Path = ROOT) -> dict[str, A
             and gui_intent.get("measured_effect", {}).get("phrase_blind_arm_design_set", {}).get("blind_solved") == 4
             and gui_intent.get("measured_effect", {}).get("phrase_blind_arm_design_set", {}).get("gated_solved") == 5
         ),
+        "proved_composition_is_bounded_not_a_single_lever": bool(
+            proved
+            and proved.get("second_step_attempts") == 80
+            and proved.get("premises_held_attempts") == 58
+            and proved.get("composed_verified") == 31
+            and proved.get("damaged") == 0
+            and proved.get("reach_compose") == 0.3875
+            and proved.get("reach_where_premises_held") == 0.5345
+            and proved.get("boxes", {}).get("PREMISE_DIED") == 22
+            and proved.get("boxes", {}).get("B_REFUSED") == 27
+            and proved.get("boxes", {}).get("NO_SECOND_CANDIDATE") == 34
+        ),
     }
     audit_pass = all(invariants.values())
     return {
@@ -664,6 +686,17 @@ def audit(quixbugs_root: pathlib.Path, root: pathlib.Path = ROOT) -> dict[str, A
             "measured_effect": (gui_intent or {}).get("measured_effect", {}),
             "status": "NO_GUI_INVARIANCE_LEVER_THE_REMAINING_BOUNDARY_IS_AN_OPERAND_NOT_ON_THE_PAGE",
         },
+        "proved_composition": {
+            "receipt": "COMPOSE_ONLY_WHAT_IS_PROVED_20261116_V1.json",
+            "scan": (proved or {}).get("scan", {}),
+            "step_one": (proved or {}).get("step_one", {}),
+            "boxes": (proved or {}).get("boxes", {}),
+            "reach": {
+                "compose": (proved or {}).get("reach_compose"),
+                "where_premises_held": (proved or {}).get("reach_where_premises_held"),
+            },
+            "status": "COMPOSE_ONLY_WHAT_IS_PROVED_AFFIRMATIVE_ORGAN_IS_BOUNDED_NOT_A_SINGLE_LEVER",
+        },
         "verified_repair_rerun": {
             "receipt": "canonical/verification/RERUN_THE_LEARNED_ARMS_REPAIRS_20261116_V1.json",
             "claimed_repaired": (rerun or {}).get("claimed_repaired"),
@@ -749,6 +782,7 @@ def audit(quixbugs_root: pathlib.Path, root: pathlib.Path = ROOT) -> dict[str, A
             "NO_SINGLE_LEVER_CLAIM",
             "NO_ONE_DEMONSTRATION_PER_ENVIRONMENT_CLAIM",
             "NO_GUI_INVARIANCE_LEVER",
+            "NO_PROOF_COMPOSITION_AS_SINGLE_LEVER",
             "PRODUCER_RUN_NOT_INDEPENDENT_VERIFICATION",
             "TERMINAL_TRUTH_UNTOUCHED",
         ],
