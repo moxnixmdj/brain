@@ -268,7 +268,7 @@
      "route": "ship a fuzzy checkbox matcher"
     }
    ],
-   "checked_at_utc": "2026-11-17T23:55:00Z",
+   "checked_at_utc": "2026-11-17T23:30:00Z",
    "comparison_dimensions": [
     "CORRECTNESS",
     "CAPABILITY_STRENGTH",
@@ -301,7 +301,9 @@
    ],
    "refresh_triggers": [
     "BEFORE_EXPENSIVE_EXECUTION",
-    "AFTER_MATERIAL_ROUTE_FAILURE"
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
    ],
    "selected_route": "MEASUREMENT_FIRST_OPERATORS_FOR_SOLVABLE_PAGES_AND_MEASURED_TERMINAL_ACCOUNTS_FOR_BIND_PAGES",
    "selected_route_preflight": {
