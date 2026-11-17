@@ -41,8 +41,8 @@
   "terminal_achieved": false
  },
  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
- "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::EVERY_REFUSAL_THIS_TREE_ATTRIBUTED_TO_A_TASK_OR_A_SEARCH_WAS_A_SPACE_THAT_COULD_NOT_EXPRESS_THE_FIX_A_FORM_THE_OPERATOR_ORDER_THE_ITERATION_OR_THE_MISSING_STATEMENT_SO_THE_SPACE_IS_NOW_A_CLOSURE_OVER_THE_PROGRAM_ITSELF_CERTIFIED_BY_ITS_OWN_TESTS",
- "canonical_base_commit": "9378505f76c8b4217909db9d46dca81108f3917b",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE LIMITING FACTOR IS NOT THE NUMBER OF DEMONSTRATIONS: IT IS WHETHER THE ACTION THE FIX NEEDS CAN BE EXPRESSED BY WHAT THE ARTIFACT ALREADY CONTAINS. 18 of 40 published fixes need no lesson at all because the program supplies the vocabulary; 13 need one edit whose expression the vocabulary cannot build; 5 of the 8 lesson-reached fixes are reached only by the program the class was read from.",
+ "canonical_base_commit": "43734c87ec538cb6b05cf135e41681dd5c177be8",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -176,7 +176,7 @@
  ],
  "probe_specific": false,
  "recursive_obs": {
-  "canonical_base_commit": "9378505f76c8b4217909db9d46dca81108f3917b",
+  "canonical_base_commit": "43734c87ec538cb6b05cf135e41681dd5c177be8",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "re-implementing the space in order to measure it",
@@ -276,69 +276,69 @@
    "challenger_routes": [
     {
      "comparison": {
-      "CAPABILITY_STRENGTH": "one bug of forty",
-      "CORRECTNESS": "no verdict until the family is guessed right",
+      "CAPABILITY_STRENGTH": "8 of 40 published fixes, 3 of them on a program that is not the donor",
+      "CORRECTNESS": "no verdict: a lesson is only as good as the program it was read from",
+      "INCREMENTAL_COST": "low per lesson, but it buys one program",
+      "RELIABILITY": "leaves every shape not taught unseen",
+      "VERIFIABILITY": "measured exactly (this receipt)",
+      "WALL_CLOCK": "one lesson per shape, unbounded as the corpus grows"
+     },
+     "evidence": [
+      "a taught class reaches 8 of 40 published fixes, 5 of them only on the program it was read from; 18 of 40 need no lesson at all, and 13 need an expression no class can build"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/WHAT_IS_LEFT_FOR_A_LESSON_TO_BUY_20261117_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "teach one more edit class per failing task"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "22 shapes; the 13 escapes are exactly the shapes it does not have",
+      "CORRECTNESS": "no verdict until the list is guessed right",
+      "INCREMENTAL_COST": "one list entry per bug",
+      "RELIABILITY": "fails silently: an unlisted shape reads as 'no answer in the space'",
+      "VERIFIABILITY": "measured exactly (this receipt)",
+      "WALL_CLOCK": "years of guessing per missing shape"
+     },
+     "evidence": [
+      "the 13 escapes are not a longer list of shapes, they are the language grammar over the statement the site sits in; the list is what stopped at 22 shapes"
+     ],
+     "qualification_evidence": [
+      "canonical/tools/grammar_closed_repair_v1.py"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "add the missing hand-written shapes to HOLE_SHAPES"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "9 of the 14 escapes at one N, fewer at another",
+      "CORRECTNESS": "unstable: what it reaches changes with N",
       "INCREMENTAL_COST": "low",
-      "RELIABILITY": "leaves the class unseen",
-      "VERIFIABILITY": "measured",
-      "WALL_CLOCK": "under a minute per family"
+      "RELIABILITY": "depends on an index into a list, which is not a property of the answer",
+      "VERIFIABILITY": "measured, and the instability was measured",
+      "WALL_CLOCK": "cheap"
      },
      "evidence": [
-      "an extra mutation kind lifts one bug of forty; four refusals needed four different classes"
+      "which fixes the rung reached changed with N: len(arr) fell off the list and len(arr) <= 1 became unreachable while perm[i] < perm[j] came into reach"
      ],
      "qualification_evidence": [
-      "canonical/verification/AIMED_EDITS_FROM_THE_PROGRAM_AND_THE_FAILURE_20261117_V1.json"
+      "canonical/tools/aimed_edits_from_the_program_and_the_failure_v1.py"
      ],
      "qualification_evidence_classes": [
       "DIRECT_PROBE"
      ],
      "resolution": "DISQUALIFIED",
-     "route": "add the missing hand-written rewrite family for each failing task"
-    },
-    {
-     "comparison": {
-      "CAPABILITY_STRENGTH": "none",
-      "CORRECTNESS": "the fix is not in the space at any cap",
-      "INCREMENTAL_COST": "high",
-      "RELIABILITY": "zero",
-      "VERIFIABILITY": "measured",
-      "WALL_CLOCK": "192.7 s to exhaust"
-     },
-     "evidence": [
-      "kheapsort: 8,310 of 8,310 judged, none passed a certified judge"
-     ],
-     "qualification_evidence": [
-      "canonical/verification/SOLVE_WITH_A_CALIBRATED_JUDGE_20261117_V1.json"
-     ],
-     "qualification_evidence_classes": [
-      "DIRECT_PROBE"
-     ],
-     "resolution": "DISQUALIFIED",
-     "route": "raise the candidate cap on the natural space"
-    },
-    {
-     "comparison": {
-      "CAPABILITY_STRENGTH": "8 of 8 solved",
-      "CORRECTNESS": "the corpus's pytest decides on a fresh copy",
-      "INCREMENTAL_COST": "zero model, zero network",
-      "RELIABILITY": "each class read from a refusal",
-      "VERIFIABILITY": "receipt per task",
-      "WALL_CLOCK": "248.2 s"
-     },
-     "evidence": [
-      "kheapsort 4,950; powerset 2,100; subsequences 1,550; to_base 14,300; shunting_yard 26,200"
-     ],
-     "qualification_evidence": [
-      "canonical/verification/AIMED_EDITS_FROM_THE_PROGRAM_AND_THE_FAILURE_20261117_V1.json"
-     ],
-     "qualification_evidence_classes": [
-      "DIRECT_PROBE"
-     ],
-     "resolution": "SELECTED",
-     "route": "close the space over the program's own material under the program's own forms, certified by its own tests"
+     "route": "bound the generator by keeping the N most promising neighbours of the site"
     }
    ],
-   "checked_at_utc": "2026-11-17T19:03:35Z",
+   "checked_at_utc": "2026-11-17T22:05:07Z",
    "comparison_dimensions": [
     "CORRECTNESS",
     "CAPABILITY_STRENGTH",
@@ -348,13 +348,13 @@
     "VERIFIABILITY"
    ],
    "discovery_required": true,
-   "incumbent_route": "add one more hand-written rewrite family when a bug does not close",
+   "incumbent_route": "teach one more edit class whenever a bug does not close",
    "max_age_hours": 2,
-   "negative_search_summary": "Measured and refused this session: more budget, more rewrite families, action lists, stricter judges, and treating a missing observable as the whole story (0 of 9 after it was fixed).",
+   "negative_search_summary": "Measured and refused this session: teaching more classes (8 published fixes reached, 5 of them on the program the class was read from, 18 reached with no lesson at all), re-implementing the space in order to measure it (it contradicted the solve receipt on sqrt and powerset), and bounding a generator by \"keep the N most promising neighbours\" (which fixes it reached changed with N).",
    "query_families": [
     {
      "intent": "CAPABILITY_VECTOR",
-     "query": "fault localization guided search order for automated program repair candidate ranking 2026"
+     "query": "enumerative program repair expression size budget type-directed synthesis local typing context 2026"
     },
     {
      "intent": "SUPPLIER_OR_PRODUCT",
@@ -362,11 +362,11 @@
     },
     {
      "intent": "IMPLEMENTATION_FORM",
-     "query": "program space as closure over syntax forms operation commutativity statement insertion repair"
+     "query": "expression-size-wise enumeration starting at the size of the buggy expression S3 syntactic search space"
     },
     {
      "intent": "RECENCY_OR_NEW_RELEASE",
-     "query": "2026 one demonstration plus rehearsal beats trained policy World In-Context Learning"
+     "query": "2026 bounded typed program synthesis with counterexample-guided refinement depth size fuel bounds"
     }
    ],
    "refresh_triggers": [
@@ -375,15 +375,15 @@
     "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
     "BEFORE_SCARCE_GATE_SPEND"
    ],
-   "selected_route": "SYNTHESIZE_A_SPACE_THAT_IS_THE_CLOSURE_OF_THE_PROGRAMS_OWN_MATERIAL_UNDER_ITS_OWN_FORMS_INSTEAD_OF_A_HAND_WRITTEN_LIST_OF_KNOWN_FIXES",
+   "selected_route": "MEASURE_WHAT_A_LESSON_BUYS_ONCE_THE_SPACE_IS_DERIVED_FROM_THE_ARTIFACT",
    "selected_route_preflight": {
     "all_required_dependencies_ready": true,
-    "checked_at_utc": "2026-11-17T19:03:35Z",
+    "checked_at_utc": "2026-11-17T22:05:07Z",
     "execution_dependencies": [
      {
       "dependency": "local Python 3.11 runtime with pytest",
       "evidence": [
-       "Python 3.11 + pytest 9.2.0; 34 tests pass across the three instruments at 2026-11-17T19:03:35Z"
+       "Python 3.11 + pytest 9.2.0; 66 tests pass across four instruments at 2026-11-17T22:05:07Z"
       ],
       "evidence_classes": [
        "DIRECT_PROBE"
@@ -398,7 +398,7 @@
      {
       "dependency": "QuixBugs checkout at 4257f44b including correct_python_programs for the audit",
       "evidence": [
-       "github.com/jkoppel/QuixBugs at 4257f44b; 8 tasks enumerated, spaces 5,759 to 37,004 candidates, at 2026-11-17T19:03:35Z"
+       "github.com/jkoppel/QuixBugs at 4257f44b; 40 bugs enumerated, spaces 2,497 to 73,853 candidates, 848.5 s, at 2026-11-17T22:05:07Z"
       ],
       "evidence_classes": [
        "DIRECT_PROBE"
@@ -413,7 +413,7 @@
      {
       "dependency": "local tempdir for fresh per-verdict task copies",
       "evidence": [
-       "one fresh copy per real-judge verdict, answer key absent from the copy the search runs in; 8 corpus verdicts at 2026-11-17T19:03:35Z"
+       "one fresh copy per real-judge verdict, answer key absent from the copy the search runs in; 0 corpus verdicts: reachability only, no execution at 2026-11-17T22:05:07Z"
       ],
       "evidence_classes": [
        "DIRECT_PROBE"
@@ -429,7 +429,7 @@
     "execution_dependencies_complete": true,
     "failed_dependencies": [],
     "max_age_hours": 2,
-    "selected_route": "SYNTHESIZE_A_SPACE_THAT_IS_THE_CLOSURE_OF_THE_PROGRAMS_OWN_MATERIAL_UNDER_ITS_OWN_FORMS_INSTEAD_OF_A_HAND_WRITTEN_LIST_OF_KNOWN_FIXES",
+    "selected_route": "MEASURE_WHAT_A_LESSON_BUYS_ONCE_THE_SPACE_IS_DERIVED_FROM_THE_ARTIFACT",
     "status": "READY"
    },
    "source_classes_checked": [
@@ -466,10 +466,10 @@
    "Hand it the most advanced action list (measured: 0 of 20)",
    "Close the space over the program's own material under its own forms, certified by its own tests"
   ],
-  "selected_route": "SYNTHESIZE_A_SPACE_THAT_IS_THE_CLOSURE_OF_THE_PROGRAMS_OWN_MATERIAL_UNDER_ITS_OWN_FORMS_INSTEAD_OF_A_HAND_WRITTEN_LIST_OF_KNOWN_FIXES",
-  "selected_surviving_route": "SYNTHESIZE_A_SPACE_THAT_IS_THE_CLOSURE_OF_THE_PROGRAMS_OWN_MATERIAL_UNDER_ITS_OWN_FORMS_INSTEAD_OF_A_HAND_WRITTEN_LIST_OF_KNOWN_FIXES",
+  "selected_route": "MEASURE_WHAT_A_LESSON_BUYS_ONCE_THE_SPACE_IS_DERIVED_FROM_THE_ARTIFACT",
+  "selected_surviving_route": "MEASURE_WHAT_A_LESSON_BUYS_ONCE_THE_SPACE_IS_DERIVED_FROM_THE_ARTIFACT",
   "selected_surviving_route_class": "SYNTHESIZE_NEW_PRIMITIVE",
-  "stop_condition": "Eight published bugs solved by the corpus's own pytest with one derivation rule, and every refusal typed as space, budget, instrument or solve.",
+  "stop_condition": "Every one of the 40 published fixes typed as: in the old space, reached by a named class, blocked by a named missing expression, or needing composition -- with the reachability instrument reconciled against the solve instrument on every task both cover.",
   "why_selected_route_is_fastest_sufficient": "Every cheaper route was measured and refused: more budget solved one of five tasks, an action list 0 of 20, a stricter judge rejected the corpus's own answer, and adding a hand-written family is refused by the tree's own law. One derivation rule replaced five imagined families and moved four impossible tasks to solved in 248 s.",
   "why_this_is_not_another_organ": "It adds no knowledge, no model and no family list: grammar_closed_repair_v1 now takes the closure rule as a parameter instead of hardcoding a second list, and the judge tool takes the space builder as a parameter, so the only new code is the rule itself and the three containers that instantiate it."
  },

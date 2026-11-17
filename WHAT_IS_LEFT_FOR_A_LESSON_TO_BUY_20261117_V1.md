@@ -131,6 +131,12 @@ names (a substitution test, *not* a walk of the widened space): **9 of 14 become
 already reachable plus those 9 is **35 of 40** published fixes. What remains is 3 statement-granularity insertions, 1 that
 needs two levels of recombination, and 1 true composition.
 
+This is the established shape of expression-level repair, not an invention here: S3 enumerates
+expressions *starting at the size of the buggy expression* under a cost bound, and deductive repair
+builds a grammar of *variations of the expression at the localised fault*. The difference is that
+this tree has no solver and no types — one candidate is ~1 ms — so the budget can be spent on
+candidates rather than on the symbolic machinery.
+
 It is not in `RULES` yet, and that is on purpose: turning it on changes the space, and every shipped
 solve receipt describes the space it was produced from. It gets its own solve run, not a quiet edit.
 
