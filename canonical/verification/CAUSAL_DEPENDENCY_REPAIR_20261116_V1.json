@@ -1,0 +1,704 @@
+{
+  "arms": {
+    "argv_deps": {
+      "chains": [
+        "control_the_dependency_is_syntactic"
+      ],
+      "goals_passing": 1,
+      "of": 3,
+      "steps_redone": 5
+    },
+    "declared_deps": {
+      "chains": [
+        "tar_reads_a_name_from_a_list",
+        "xargs_reads_a_name_from_stdin",
+        "control_the_dependency_is_syntactic"
+      ],
+      "goals_passing": 3,
+      "of": 3,
+      "steps_redone": 8
+    },
+    "intervention_deps": {
+      "chains": [
+        "tar_reads_a_name_from_a_list",
+        "xargs_reads_a_name_from_stdin",
+        "control_the_dependency_is_syntactic"
+      ],
+      "goals_passing": 3,
+      "of": 3,
+      "steps_redone": 8
+    },
+    "redo_everything": {
+      "chains": [
+        "tar_reads_a_name_from_a_list",
+        "xargs_reads_a_name_from_stdin",
+        "control_the_dependency_is_syntactic"
+      ],
+      "goals_passing": 3,
+      "of": 3,
+      "steps_redone": 14
+    }
+  },
+  "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+  "blamed_by": {
+    "control_the_dependency_is_syntactic": {
+      "argv_reads": [
+        "sort_it"
+      ],
+      "declared": [
+        "sort_it"
+      ],
+      "intervention": [
+        "sort_it"
+      ]
+    },
+    "tar_reads_a_name_from_a_list": {
+      "argv_reads": [
+        "list_it"
+      ],
+      "declared": [
+        "bundle_by_list"
+      ],
+      "intervention": [
+        "bundle_by_list"
+      ]
+    },
+    "xargs_reads_a_name_from_stdin": {
+      "argv_reads": [
+        "list_it"
+      ],
+      "declared": [
+        "digest_by_xargs"
+      ],
+      "intervention": [
+        "digest_by_xargs"
+      ]
+    }
+  },
+  "chains": 3,
+  "chains_where_syntax_misses_a_real_dependency": [
+    "tar_reads_a_name_from_a_list",
+    "xargs_reads_a_name_from_stdin"
+  ],
+  "environment": {
+    "candidate_set": "every file present in the state before the step; anything outside it is not probed",
+    "dependency_test": "perturb one candidate path, re-run the step, compare its consequence",
+    "kind": "real directory, real programs from PATH, real sabotage, independent goal commands"
+  },
+  "incremental_spend_usd": 0,
+  "intervention_matches_declared": {
+    "control_the_dependency_is_syntactic": true,
+    "tar_reads_a_name_from_a_list": true,
+    "xargs_reads_a_name_from_stdin": true
+  },
+  "limit": "the read set is discovered inside a declared candidate set -- the files in the state, and the probe is a content change, which matches the kind of fact the ledger records. A dependency on a config file outside the sandbox, a lock held by another process, or a remote resource is not measured; nor is a dependency on a file's *existence* rather than its content, which would need the matching existence-perturbation",
+  "missed_by_argv": {
+    "control_the_dependency_is_syntactic": [],
+    "tar_reads_a_name_from_a_list": [
+      "bundle_by_list",
+      "digest_the_bundle",
+      "keep_the_digest"
+    ],
+    "xargs_reads_a_name_from_stdin": [
+      "digest_by_xargs",
+      "digest_the_checks"
+    ]
+  },
+  "missed_by_intervention": {
+    "control_the_dependency_is_syntactic": [],
+    "tar_reads_a_name_from_a_list": [],
+    "xargs_reads_a_name_from_stdin": []
+  },
+  "missing_programs": [],
+  "model_calls": 0,
+  "network_calls": 0,
+  "over_declared_by_argv": {
+    "control_the_dependency_is_syntactic": [],
+    "tar_reads_a_name_from_a_list": [
+      "list_it"
+    ],
+    "xargs_reads_a_name_from_stdin": [
+      "list_it"
+    ]
+  },
+  "over_declared_by_intervention": {
+    "control_the_dependency_is_syntactic": [],
+    "tar_reads_a_name_from_a_list": [],
+    "xargs_reads_a_name_from_stdin": []
+  },
+  "per_chain": [
+    {
+      "blamed_by": {
+        "argv_reads": [
+          "list_it"
+        ],
+        "declared": [
+          "bundle_by_list"
+        ],
+        "intervention": [
+          "bundle_by_list"
+        ]
+      },
+      "chain": "tar_reads_a_name_from_a_list",
+      "goal": {
+        "invocation": "tar -xOf bundle.tar payload.dat | cmp - payload.dat && sha256sum -c bundle.digest"
+      },
+      "intervention_matches_declared": true,
+      "invalidated": [
+        "payload.dat"
+      ],
+      "missed_by_argv": [
+        "bundle_by_list",
+        "digest_the_bundle",
+        "keep_the_digest"
+      ],
+      "missed_by_intervention": [],
+      "over_declared_by_argv": [
+        "list_it"
+      ],
+      "over_declared_by_intervention": [],
+      "probes": 31,
+      "redone_counts": {
+        "argv_deps": 1,
+        "declared_deps": 3,
+        "intervention_deps": 3,
+        "redo_everything": 5
+      },
+      "repair": {
+        "argv_deps": {
+          "goal_passes": false,
+          "moved_by": {
+            "list_it": []
+          },
+          "redone": [
+            "list_it"
+          ],
+          "symptom": "- payload.dat differ: char 1, line 1"
+        },
+        "declared_deps": {
+          "goal_passes": true,
+          "moved_by": {
+            "bundle_by_list": [
+              "bundle.tar"
+            ],
+            "digest_the_bundle": [
+              "bundle.digest"
+            ],
+            "keep_the_digest": [
+              "bundle.digest.bak"
+            ]
+          },
+          "redone": [
+            "bundle_by_list",
+            "digest_the_bundle",
+            "keep_the_digest"
+          ],
+          "symptom": "bundle.tar: OK"
+        },
+        "intervention_deps": {
+          "goal_passes": true,
+          "moved_by": {
+            "bundle_by_list": [
+              "bundle.tar"
+            ],
+            "digest_the_bundle": [
+              "bundle.digest"
+            ],
+            "keep_the_digest": [
+              "bundle.digest.bak"
+            ]
+          },
+          "redone": [
+            "bundle_by_list",
+            "digest_the_bundle",
+            "keep_the_digest"
+          ],
+          "symptom": "bundle.tar: OK"
+        },
+        "redo_everything": {
+          "goal_passes": true,
+          "moved_by": {
+            "bundle_by_list": [],
+            "copy_in": [
+              "payload.dat"
+            ],
+            "digest_the_bundle": [],
+            "keep_the_digest": [],
+            "list_it": []
+          },
+          "redone": [
+            "copy_in",
+            "list_it",
+            "bundle_by_list",
+            "digest_the_bundle",
+            "keep_the_digest"
+          ],
+          "symptom": "bundle.tar: OK"
+        }
+      },
+      "sabotage_step": 3,
+      "steps": [
+        {
+          "argv_reads": [
+            "in.txt"
+          ],
+          "declared_reads": [
+            "in.txt"
+          ],
+          "intervention_reads": [
+            "in.txt"
+          ],
+          "invocation": "cp in.txt payload.dat",
+          "name": "copy_in",
+          "sabotage": false
+        },
+        {
+          "argv_reads": [
+            "payload.dat"
+          ],
+          "declared_reads": [],
+          "intervention_reads": [],
+          "invocation": "ls payload.dat > list.txt",
+          "name": "list_it",
+          "sabotage": false
+        },
+        {
+          "argv_reads": [
+            "list.txt"
+          ],
+          "declared_reads": [
+            "list.txt",
+            "payload.dat"
+          ],
+          "intervention_reads": [
+            "list.txt",
+            "payload.dat"
+          ],
+          "invocation": "tar -cf bundle.tar -T list.txt",
+          "name": "bundle_by_list",
+          "sabotage": false
+        },
+        {
+          "argv_reads": [
+            "decoy.txt",
+            "payload.dat"
+          ],
+          "declared_reads": [
+            "decoy.txt"
+          ],
+          "intervention_reads": [
+            "decoy.txt"
+          ],
+          "invocation": "cp decoy.txt payload.dat",
+          "name": "overwrite_payload",
+          "sabotage": true
+        },
+        {
+          "argv_reads": [
+            "bundle.tar"
+          ],
+          "declared_reads": [
+            "bundle.tar"
+          ],
+          "intervention_reads": [
+            "bundle.tar"
+          ],
+          "invocation": "sha256sum bundle.tar > bundle.digest",
+          "name": "digest_the_bundle",
+          "sabotage": false
+        },
+        {
+          "argv_reads": [
+            "bundle.digest"
+          ],
+          "declared_reads": [
+            "bundle.digest"
+          ],
+          "intervention_reads": [
+            "bundle.digest"
+          ],
+          "invocation": "cp bundle.digest bundle.digest.bak",
+          "name": "keep_the_digest",
+          "sabotage": false
+        }
+      ]
+    },
+    {
+      "blamed_by": {
+        "argv_reads": [
+          "list_it"
+        ],
+        "declared": [
+          "digest_by_xargs"
+        ],
+        "intervention": [
+          "digest_by_xargs"
+        ]
+      },
+      "chain": "xargs_reads_a_name_from_stdin",
+      "goal": {
+        "invocation": "sha256sum -c checks.txt && sha256sum -c checks.digest"
+      },
+      "intervention_matches_declared": true,
+      "invalidated": [
+        "payload.dat"
+      ],
+      "missed_by_argv": [
+        "digest_by_xargs",
+        "digest_the_checks"
+      ],
+      "missed_by_intervention": [],
+      "over_declared_by_argv": [
+        "list_it"
+      ],
+      "over_declared_by_intervention": [],
+      "probes": 31,
+      "redone_counts": {
+        "argv_deps": 1,
+        "declared_deps": 2,
+        "intervention_deps": 2,
+        "redo_everything": 5
+      },
+      "repair": {
+        "argv_deps": {
+          "goal_passes": false,
+          "moved_by": {
+            "list_it": []
+          },
+          "redone": [
+            "list_it"
+          ],
+          "symptom": "payload.dat: FAILED\nsha256sum: WARNING: 1 computed checksum did NOT match"
+        },
+        "declared_deps": {
+          "goal_passes": true,
+          "moved_by": {
+            "digest_by_xargs": [
+              "checks.txt"
+            ],
+            "digest_the_checks": [
+              "checks.digest"
+            ]
+          },
+          "redone": [
+            "digest_by_xargs",
+            "digest_the_checks"
+          ],
+          "symptom": "payload.dat: OK\nchecks.txt: OK"
+        },
+        "intervention_deps": {
+          "goal_passes": true,
+          "moved_by": {
+            "digest_by_xargs": [
+              "checks.txt"
+            ],
+            "digest_the_checks": [
+              "checks.digest"
+            ]
+          },
+          "redone": [
+            "digest_by_xargs",
+            "digest_the_checks"
+          ],
+          "symptom": "payload.dat: OK\nchecks.txt: OK"
+        },
+        "redo_everything": {
+          "goal_passes": true,
+          "moved_by": {
+            "copy_in": [
+              "payload.dat"
+            ],
+            "digest_by_xargs": [],
+            "digest_the_checks": [],
+            "keep_the_list": [],
+            "list_it": []
+          },
+          "redone": [
+            "copy_in",
+            "list_it",
+            "digest_by_xargs",
+            "digest_the_checks",
+            "keep_the_list"
+          ],
+          "symptom": "payload.dat: OK\nchecks.txt: OK"
+        }
+      },
+      "sabotage_step": 3,
+      "steps": [
+        {
+          "argv_reads": [
+            "in.txt"
+          ],
+          "declared_reads": [
+            "in.txt"
+          ],
+          "intervention_reads": [
+            "in.txt"
+          ],
+          "invocation": "cp in.txt payload.dat",
+          "name": "copy_in",
+          "sabotage": false
+        },
+        {
+          "argv_reads": [
+            "payload.dat"
+          ],
+          "declared_reads": [],
+          "intervention_reads": [],
+          "invocation": "ls payload.dat > list.txt",
+          "name": "list_it",
+          "sabotage": false
+        },
+        {
+          "argv_reads": [
+            "list.txt"
+          ],
+          "declared_reads": [
+            "list.txt",
+            "payload.dat"
+          ],
+          "intervention_reads": [
+            "list.txt",
+            "payload.dat"
+          ],
+          "invocation": "xargs sha256sum < list.txt > checks.txt",
+          "name": "digest_by_xargs",
+          "sabotage": false
+        },
+        {
+          "argv_reads": [
+            "decoy.txt",
+            "payload.dat"
+          ],
+          "declared_reads": [
+            "decoy.txt"
+          ],
+          "intervention_reads": [
+            "decoy.txt"
+          ],
+          "invocation": "cp decoy.txt payload.dat",
+          "name": "overwrite_payload",
+          "sabotage": true
+        },
+        {
+          "argv_reads": [
+            "checks.txt"
+          ],
+          "declared_reads": [
+            "checks.txt"
+          ],
+          "intervention_reads": [
+            "checks.txt"
+          ],
+          "invocation": "sha256sum checks.txt > checks.digest",
+          "name": "digest_the_checks",
+          "sabotage": false
+        },
+        {
+          "argv_reads": [
+            "list.txt"
+          ],
+          "declared_reads": [
+            "list.txt"
+          ],
+          "intervention_reads": [
+            "list.txt"
+          ],
+          "invocation": "cp list.txt list.bak",
+          "name": "keep_the_list",
+          "sabotage": false
+        }
+      ]
+    },
+    {
+      "blamed_by": {
+        "argv_reads": [
+          "sort_it"
+        ],
+        "declared": [
+          "sort_it"
+        ],
+        "intervention": [
+          "sort_it"
+        ]
+      },
+      "chain": "control_the_dependency_is_syntactic",
+      "goal": {
+        "invocation": "sha256sum -c s.digest"
+      },
+      "intervention_matches_declared": true,
+      "invalidated": [
+        "a.dat"
+      ],
+      "missed_by_argv": [],
+      "missed_by_intervention": [],
+      "over_declared_by_argv": [],
+      "over_declared_by_intervention": [],
+      "probes": 24,
+      "redone_counts": {
+        "argv_deps": 3,
+        "declared_deps": 3,
+        "intervention_deps": 3,
+        "redo_everything": 4
+      },
+      "repair": {
+        "argv_deps": {
+          "goal_passes": true,
+          "moved_by": {
+            "digest_it": [
+              "s.digest"
+            ],
+            "keep_it": [
+              "s.digest.bak"
+            ],
+            "sort_it": [
+              "s.dat"
+            ]
+          },
+          "redone": [
+            "sort_it",
+            "digest_it",
+            "keep_it"
+          ],
+          "symptom": "s.dat: OK"
+        },
+        "declared_deps": {
+          "goal_passes": true,
+          "moved_by": {
+            "digest_it": [
+              "s.digest"
+            ],
+            "keep_it": [
+              "s.digest.bak"
+            ],
+            "sort_it": [
+              "s.dat"
+            ]
+          },
+          "redone": [
+            "sort_it",
+            "digest_it",
+            "keep_it"
+          ],
+          "symptom": "s.dat: OK"
+        },
+        "intervention_deps": {
+          "goal_passes": true,
+          "moved_by": {
+            "digest_it": [
+              "s.digest"
+            ],
+            "keep_it": [
+              "s.digest.bak"
+            ],
+            "sort_it": [
+              "s.dat"
+            ]
+          },
+          "redone": [
+            "sort_it",
+            "digest_it",
+            "keep_it"
+          ],
+          "symptom": "s.dat: OK"
+        },
+        "redo_everything": {
+          "goal_passes": true,
+          "moved_by": {
+            "copy_in": [
+              "a.dat"
+            ],
+            "digest_it": [],
+            "keep_it": [],
+            "sort_it": []
+          },
+          "redone": [
+            "copy_in",
+            "sort_it",
+            "digest_it",
+            "keep_it"
+          ],
+          "symptom": "s.dat: OK"
+        }
+      },
+      "sabotage_step": 3,
+      "steps": [
+        {
+          "argv_reads": [
+            "in.txt"
+          ],
+          "declared_reads": [
+            "in.txt"
+          ],
+          "intervention_reads": [
+            "in.txt"
+          ],
+          "invocation": "cp in.txt a.dat",
+          "name": "copy_in",
+          "sabotage": false
+        },
+        {
+          "argv_reads": [
+            "a.dat"
+          ],
+          "declared_reads": [
+            "a.dat"
+          ],
+          "intervention_reads": [
+            "a.dat"
+          ],
+          "invocation": "sort a.dat -o s.dat",
+          "name": "sort_it",
+          "sabotage": false
+        },
+        {
+          "argv_reads": [
+            "s.dat"
+          ],
+          "declared_reads": [
+            "s.dat"
+          ],
+          "intervention_reads": [
+            "s.dat"
+          ],
+          "invocation": "sha256sum s.dat > s.digest",
+          "name": "digest_it",
+          "sabotage": false
+        },
+        {
+          "argv_reads": [
+            "a.dat",
+            "decoy.txt"
+          ],
+          "declared_reads": [
+            "decoy.txt"
+          ],
+          "intervention_reads": [
+            "decoy.txt"
+          ],
+          "invocation": "cp decoy.txt a.dat",
+          "name": "overwrite_a",
+          "sabotage": true
+        },
+        {
+          "argv_reads": [
+            "s.digest"
+          ],
+          "declared_reads": [
+            "s.digest"
+          ],
+          "intervention_reads": [
+            "s.digest"
+          ],
+          "invocation": "cp s.digest s.digest.bak",
+          "name": "keep_it",
+          "sabotage": false
+        }
+      ]
+    }
+  ],
+  "probes": 86,
+  "schema": "BRAIN_CAUSAL_DEPENDENCY_REPAIR_V1",
+  "steps": 17,
+  "what_this_shows": "3 real chains, 17 steps, one legal sabotage each, 86 intervention probes. Given the true read set, repair restores the independent goal on 3 of 3 chains by re-running 8 steps; re-running everything takes 14. The argv read set restores 1 of 3 -- in 2 of 3 chains a path is named by another file rather than by an argument (a tar list, an xargs stdin), so the syntactic set misses a step the goal depends on and blames one it does not. The intervention read set restores 3 of 3 with 8 steps redone, 0 missed and 0 over-declared: recovering the declared set exactly, without being told it. Dependency links narrow hypotheses; only a counterfactual establishes the link."
+}

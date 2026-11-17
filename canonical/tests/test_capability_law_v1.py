@@ -34,7 +34,7 @@ def test_the_law_is_reproducible_and_pins_its_receipts(report: dict) -> None:
     assert live["operating_point"] == report["operating_point"]
     assert live["leverage"] == report["leverage"]
     assert set(report["receipts"]) == {"determinacy", "value", "memory", "observation", "permanence",
-                                       "computer", "projection", "contract"}
+                                       "computer", "projection", "contract", "facts", "repair"}
 
 
 def test_the_terms_are_the_published_numbers(report: dict) -> None:
@@ -96,7 +96,23 @@ def test_computer_use_carries_a_receipt_instead_of_an_assumption(report: dict) -
                                    "frame_plus_intervention": 0.9706, "full": 1.0}
     assert prospective["false_alarms_on_correct_novel_actions"] == 0
     assert prospective["content_only_errors"]["frame_only"] < prospective["content_only_errors"]["full"]
+    horizon = cell["horizon"]
+    assert horizon["chains"] == 3
+    assert horizon["every_step_legal_and_passing"] == 3
+    assert horizon["standing_fact_ledger_detected"] == 3
+    assert horizon["false_invalidations_on_controls"] == 0
+    assert horizon["lead_in_steps"] == 2
     assert "OSWorld" in cell["external_context"]
+    able = cell["repair"]
+    assert able["chains"] == 3 and able["steps"] == 17
+    assert able["goals_restored"] == {"declared_read_set": 3, "argv_read_set": 1,
+                                      "intervention_read_set": 3, "of": 3}
+    assert able["steps_redone"] == {"intervention": 8, "everything": 14}
+    assert able["missed_by_intervention"] == 0 and able["over_declared_by_intervention"] == 0
+    assert "perturb" in able["dependency_test"]
+    # the gap the previous receipt named is closed, and the new limit is stated where the old one was
+    assert "does not repair it" not in cell["what_remains_unmeasured"]
+    assert "candidate set" in cell["what_remains_unmeasured"]
 
 
 def test_a_missing_receipt_raises_instead_of_defaulting(tmp_path, monkeypatch) -> None:
