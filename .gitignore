@@ -47,3 +47,6 @@ canonical/tmp_*.json
 # a cache of what this machine's programs do: keyed on their bytes, so it is
 # machine-local by construction and must never be committed
 *.fingerprints.json
+
+# Third-party benchmark clones (QuixBugs etc.). Never part of the project.
+.benchmarks/

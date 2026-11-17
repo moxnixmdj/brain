@@ -26,9 +26,11 @@ WHAT MAKES IT A LAW RATHER THAN A TABLE
    of the observation and has a published ceiling (SyDIT 70% on real systematic edits), while `P(seen)`
    is a property of the environment and is engineerable from 0.6788 toward 1.0. The law reports both and
    multiplies the slope by whether the term can actually be moved.
-3. **No number without its own receipt.** There is no measured check density for computer use, so the law
-   reports computer use as `UNMEASURED` and refuses to invent the zero. The zero is *expected*, and the
-   reason is stated, but it is not a measurement and is not printed as one.
+3. **No number without its own receipt.** Computer use used to be reported as `UNMEASURED`. It no longer
+   is: `COMPUTER_USE_CHECK_DENSITY_20261116_V1` runs mechanically derived wrong actions against real
+   programs on a real disk and reports what a consequence differential can see. What remains unmeasured
+   stays unmeasured and is named -- a GUI whose only observable is pixels, and workflows longer than one
+   action.
 
 Model dependency: 0. Network: 0. This is arithmetic over files already in the tree.
 """
@@ -55,6 +57,9 @@ RECEIPTS = {
     "memory": "canonical/verification/SKILL_RECURRENCE_20261116_V1.json",
     "observation": "canonical/verification/ORACLE_DENSITY_20261116_V1.json",
     "permanence": "canonical/verification/ACTION_REPLAY_UNDER_CHANGE_20261116_V1.json",
+    "computer": "canonical/verification/COMPUTER_USE_CHECK_DENSITY_20261116_V1.json",
+    "projection": "canonical/verification/DISTINGUISHING_PROJECTION_20261116_V1.json",
+    "contract": "canonical/verification/PREDICTIVE_CONTRACT_20261116_V1.json",
 }
 
 # The published ceiling for an inducer with full AST and context machinery on real systematic edits.
@@ -101,6 +106,9 @@ def compose(*, pins: Mapping[str, str] | None = None) -> dict[str, Any]:
     memory, memory_sha = _load("memory", pins=pins)
     observation, observation_sha = _load("observation", pins=pins)
     permanence, permanence_sha = _load("permanence", pins=pins)
+    computer, computer_sha = _load("computer", pins=pins)
+    projection, projection_sha = _load("projection", pins=pins)
+    contract, contract_sha = _load("contract", pins=pins)
 
     determined = float(_field(supply, "by_rung/shape_only/determined_share", "supply"))
     value_determined = (float(_field(value, "by_rung/shape_only/derive_arm/pairs_where_derivation_was_right",
@@ -195,6 +203,9 @@ def compose(*, pins: Mapping[str, str] | None = None) -> dict[str, Any]:
                 ("memory", RECEIPTS["memory"], memory_sha),
                 ("observation", RECEIPTS["observation"], observation_sha),
                 ("permanence", RECEIPTS["permanence"], permanence_sha),
+                ("computer", RECEIPTS["computer"], computer_sha),
+                ("projection", RECEIPTS["projection"], projection_sha),
+                ("contract", RECEIPTS["contract"], contract_sha),
             )
         },
         "law": "P(correct behaviour | one action) = P(determined) x P(seen); P(seen) = density x strength",
@@ -217,11 +228,70 @@ def compose(*, pins: Mapping[str, str] | None = None) -> dict[str, Any]:
                      "determinacy; observability is the multiplier, not the base"),
         },
         "computer_use": {
-            "status": "UNMEASURED",
-            "why": ("no receipt exists for check density on a desktop: there is no test corpus there, and "
-                    "the oracle must be manufactured. The law refuses to print a zero it did not measure"),
-            "what_would_measure_it": ("a state-projection differential over a long-horizon workflow "
-                                      "suite, e.g. OSWorld 2.0 checkpoints, with mutated actions"),
+            "status": "MEASURED_ON_A_SHELL_ENVIRONMENT",
+            "receipt": RECEIPTS["computer"],
+            "what_was_run": ("%d mechanically derived wrong actions over %d real shell transformations, "
+                             "real programs on a real disk, real reset"
+                             % (int(_field(computer, "mutants", "computer")),
+                                int(_field(computer, "tasks_run", "computer")))),
+            "replay": {
+                "density": float(_field(computer, "density_by_regime/full/replay_density", "computer")),
+                "why": ("the intent is the recorded consequence, so any difference is an error: with a full "
+                        "state observation every wrong action is caught, and a wrong action that leaves the "
+                        "state identical did not miss the goal"),
+            },
+            "novel": {
+                "density": float(_field(computer, "density_by_regime/full/novel_density", "computer")),
+                "why": ("with nothing recorded, only a crash and a no-op are visible; a wrong result that "
+                        "looks like a result is invisible without a specification"),
+            },
+            "observation_sensitivity": {
+                model: float(_field(computer, "density_by_observation/%s/density" % model, "computer"))
+                for model in ("full", "coarse", "listing")
+            },
+            "invisible_with_a_name_level_view":
+                float(_field(computer, "density_by_observation/listing/indistinguishable_share",
+                             "computer")),
+            "oracle_synthesis": {
+                "receipt": RECEIPTS["projection"],
+                "cover_size_histogram":
+                    _field(projection, "cover_size_histogram", "projection"),
+                "tasks_where_content_alone_suffices":
+                    len(_field(projection, "content_alone_suffices_for", "projection")),
+                "tasks": int(_field(projection, "tasks", "projection")),
+                "features_rejected_by_stability":
+                    _field(projection, "features_rejected_by_stability", "projection"),
+                "why": ("the oracle is not a predicate to be written but an observation to be chosen, under "
+                        "two tests at once: it must separate the action from the ways it can be wrong, and "
+                        "it must reproduce itself on replay. Separation alone admits a timestamp; stability "
+                        "alone admits a name listing"),
+            },
+            "prospective": {
+                "receipt": RECEIPTS["contract"],
+                "acquired_from": "one real execution per action",
+                "evaluated_on": "a binding never executed during acquisition",
+                "arms": {
+                    "no_recorded_consequence":
+                        _field(contract, "arms/no_recorded_consequence/density", "contract"),
+                    "frame_only": _field(contract, "arms/frame_only/density", "contract"),
+                    "frame_plus_intervention":
+                        _field(contract, "arms/frame_plus_intervention/density", "contract"),
+                    "full": _field(contract, "arms/full/density", "contract"),
+                },
+                "false_alarms_on_correct_novel_actions":
+                    _field(contract, "false_alarms_on_correct_novel_actions/full/count", "contract"),
+                "content_only_errors": {
+                    "frame_only": _field(contract, "content_only_arm/frame_only/density", "contract"),
+                    "full": _field(contract, "content_only_arm/full/density", "contract"),
+                },
+                "why": ("a consequence differential only exists after acting and only on a seen binding. A "
+                        "contract acquired from one execution is the prospective form of the same check: the "
+                        "frame -- which paths the action may touch -- carries most of it, a declared or derived "
+                        "relation carries the bytes, and what remains is a located hole in the vocabulary"),
+            },
+            "what_remains_unmeasured": ("a GUI whose only observable is pixels or DOM -- a projection, not "
+                                         "the state -- and workflows longer than one action, where an error "
+                                         "is only visible after composition"),
             "external_context": ("OSWorld 2.0 (arXiv 2606.29537): best agent 20.6% of 108 workflows, "
                                  "failing by skipping verification and spending under 7% of budget "
                                  "detecting its own errors"),
@@ -264,8 +334,22 @@ def summarize(report: Mapping[str, Any]) -> str:
         lines.append("  density %-6s seen %-6s p_correct %-6s p_correct_value %s"
                      % (cell["check_density"], cell["seen"], cell["p_correct"],
                         cell["p_correct_value_bearing"]))
-    lines.append("computer use: %s -- %s" % (report["computer_use"]["status"],
-                                             report["computer_use"]["why"]))
+    use = report["computer_use"]
+    lines.append("computer use: %s (%s)" % (use["status"], use["what_was_run"]))
+    lines.append("  observation  %s" % use["observation_sensitivity"])
+    lines.append("  replay %-6s | novel %-6s  (invisible with a name-level view: %s)"
+                 % (use["replay"]["density"], use["novel"]["density"],
+                    use["invisible_with_a_name_level_view"]))
+    prospective = use["prospective"]
+    lines.append("  prospectively, from one execution, on an unseen binding: none %s | frame %s | "
+                 "frame+intervention %s | full %s (false alarms %s)"
+                 % (prospective["arms"]["no_recorded_consequence"], prospective["arms"]["frame_only"],
+                    prospective["arms"]["frame_plus_intervention"], prospective["arms"]["full"],
+                    prospective["false_alarms_on_correct_novel_actions"]))
+    lines.append("  content-only errors: frame %s | full %s"
+                 % (prospective["content_only_errors"]["frame_only"],
+                    prospective["content_only_errors"]["full"]))
+    lines.append("  still unmeasured: %s" % use["what_remains_unmeasured"])
     return "\n".join(lines)
 
 

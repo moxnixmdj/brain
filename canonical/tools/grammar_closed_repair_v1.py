@@ -553,9 +553,18 @@ def _enumerate(tree: ast.AST, atoms: Sequence[str]) -> list[dict[str, Any]]:
 
 
 def verify_with_corpus_test(where: pathlib.Path, test_path: str, timeout: int) -> dict[str, Any]:
-    """The only verdict that counts: the corpus's own pytest file, on a fresh copy."""
+    """The only verdict that counts: the corpus's own pytest file, on a fresh copy.
+
+    QuixBugs tests do ``from node import Node`` / ``from load_testdata import ...``;
+    those modules live under ``python_programs/`` and ``python_testcases/``. Without
+    those roots on PYTHONPATH the suite dies at collection (rc 2) and a correct
+    patch is misreported as failed. Same three roots as
+    ``counterfactual_repair_quixbugs_measure_v1.corpus_pytest``.
+    """
     env = dict(os.environ)
-    env["PYTHONPATH"] = str(where)
+    roots = [str(where), str(where / "python_programs"), str(where / "python_testcases")]
+    prior = env.get("PYTHONPATH", "")
+    env["PYTHONPATH"] = os.pathsep.join(roots + ([prior] if prior else []))
     env["PYTHONDONTWRITEBYTECODE"] = "1"
     started = time.time()
     try:
