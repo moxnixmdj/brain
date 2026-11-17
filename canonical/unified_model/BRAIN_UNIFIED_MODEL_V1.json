@@ -31228,16 +31228,16 @@
   "engines": 26,
   "knowledge_documents": 481,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6928,
+  "research_index_records": 6930,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 451,
-  "source_index_modules": 1989
+  "source_index_modules": 1990
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "d72229e6dfc24824a538fdf62906b5b2c923d9ae5036cdf02490b8993921612c"
+  "value": "cecdbcb38805941c12e4e5ca0b98d555472d823199d6c67dfa25035c9d393c23"
  },
  "engines": [
   {
@@ -209970,6 +209970,28 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "2026-11-16",
+   "id": "research:canonical/verification/THE_TREE_ALREADY_SPOKE_ONE_LANGUAGE_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/THE_TREE_ALREADY_SPOKE_ONE_LANGUAGE_20261116_V1.json",
+   "schema": "PROJECT_BRAIN_VERIFICATION_RECEIPT_V1",
+   "sha256": "b675d1785bdde3fe8d0ebb28a63306aa0d8120a85eca36369ae3062af145efcd",
+   "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
+   "terms": {
+    "20261116": 1,
+    "already": 1,
+    "language": 1,
+    "one": 1,
+    "proposed__producer_measured__independent_verification_open": 1,
+    "spoke": 1,
+    "the_learner_could_not_bind_an_element_id_the_instruction_names_so_a_page_whose_only_distinguishing_property_is_that_id_was_unlearnable__and_the_5_43_bits_were_never_a_second_language": 1,
+    "tree": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-10",
    "id": "research:canonical/verification/TLAC_MREL_IDENTITY_DISCRIMINATOR_VERIFY_20261010_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -228073,6 +228095,48 @@
     "set_aside_the_owned_attribute_rename_by_ownership_store_context__mirroring_the_variable_form__declare_four_predictions_and_push_before_measuring__measure_once__kill_the_support_counting_candidate_pre_implementation": 1,
     "the_second_showings_injection_side__an_owned_attribute_rename_in_one_teachers_commit_entered_the_lesson_because_no_example_had_code_of_its_form_to_dissent_and_support_counting_cannot_see_a_tangle_that_coincides_with_honest_text": 1,
     "v1": 1
+   }
+  },
+  {
+   "action_id": "AN_UNBOUND_NAME_WAS_THE_MISSING_LINK_20261116_V1",
+   "capability": false,
+   "date": "2026-11-16",
+   "id": "research:canonical/action_intents/AN_UNBOUND_NAME_WAS_THE_MISSING_LINK_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/AN_UNBOUND_NAME_WAS_THE_MISSING_LINK_20261116_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+   "sha256": "af99acc99ea0551633d5e0a9ab831dca3066db08532f5d896dc853704e65057e",
+   "status": "PROPOSED__ZERO_CREDIT__NO_TERMINAL_CLAIM",
+   "terms": {
+    "20261116": 1,
+    "an_unbound_name_was_the_missing_link_20261116_v1": 1,
+    "between": 1,
+    "bind_the_property_the_instruction_quotes_instead_of_listing_four_fields_by_hand_and_delete_the_second_language_this_round_wrote_before_reading_the_one_that_already_existed": 1,
+    "binding": 1,
+    "carries": 1,
+    "deleted": 1,
+    "element": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "goes": 1,
+    "instruction": 1,
+    "inventing": 1,
+    "language": 1,
+    "link": 1,
+    "missing": 1,
+    "name": 1,
+    "names": 1,
+    "proposed__zero_credit__no_terminal_claim": 1,
+    "rather": 1,
+    "rebuild": 1,
+    "round": 1,
+    "second": 1,
+    "than": 1,
+    "the_learner_could_not_bind_an_element_id_the_instruction_names_so_a_page_whose_only_distinguishing_property_is_that_id_was_unlearnable": 1,
+    "unbound": 1,
+    "v1": 1,
+    "vocabularies": 1,
+    "work": 1,
+    "written": 1
    }
   },
   {
@@ -268209,9 +268273,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/demonstration_version_space_v1.py",
-   "sha256": "f1f7dca46304a7b58609811e018b604f3b02f543f18ff6b5b52562ecdf8cc7ef",
+   "sha256": "73c9fb32d0d73ecdd2c517f740f0f5d0ae27e21432f05747f3fa63e2dbb840a2",
    "summary": "One success is a single point. A skill is whatever still fits every success seen so far.",
-   "symbol_count": 36,
+   "symbol_count": 37,
    "symbols": [
     "Execution",
     "LibraryArm",
@@ -268246,13 +268310,13 @@
     "expression_preference": 1,
     "expressions_for": 1,
     "extract": 1,
-    "family_of": 1,
     "far": 1,
     "fits": 1,
     "is_bound": 1,
     "is_content_constant": 1,
     "matches": 1,
     "mentioned_in": 1,
+    "names_only_it": 1,
     "numbers": 1,
     "one": 1,
     "page": 1,
@@ -323135,6 +323199,40 @@
     "v1": 1,
     "verify": 1,
     "vocabulary": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/what_one_experience_buys_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/what_one_experience_buys_v1.py",
+   "sha256": "0daf4515536b2a6b506782e10ef156dc867676abc1450e420ce650a87c2ab050",
+   "summary": "ONE EXPERIENCE BUYS ONE BIT OF IDENTIFICATION. THE PRICE OF A TASK DOES NOT FALL.",
+   "symbol_count": 5,
+   "symbols": [
+    "Price",
+    "_programs",
+    "compounding",
+    "price",
+    "verdict"
+   ],
+   "terms": {
+    "bit": 1,
+    "buys": 2,
+    "compounding": 1,
+    "experience": 2,
+    "fall": 1,
+    "identification": 1,
+    "not": 1,
+    "one": 3,
+    "price": 3,
+    "programs": 1,
+    "task": 1,
+    "v1": 1,
+    "verdict": 1
    }
   },
   {
