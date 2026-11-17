@@ -1,0 +1,320 @@
+{
+  "admissible_features_by_task": {
+    "base64": [
+      "content",
+      "name",
+      "size",
+      "mode"
+    ],
+    "cp": [
+      "content",
+      "name",
+      "size",
+      "mode"
+    ],
+    "gzip": [
+      "content",
+      "name",
+      "size",
+      "mode",
+      "mtime"
+    ],
+    "sed": [
+      "content",
+      "name",
+      "size",
+      "mode"
+    ],
+    "sha256sum": [
+      "content",
+      "name",
+      "size",
+      "mode"
+    ],
+    "sort": [
+      "content",
+      "name",
+      "size",
+      "mode"
+    ],
+    "split": [
+      "content",
+      "name",
+      "size",
+      "mode"
+    ],
+    "tar": [
+      "content",
+      "name",
+      "size",
+      "mode"
+    ],
+    "tr": [
+      "content",
+      "name",
+      "size",
+      "mode"
+    ]
+  },
+  "authority": "NONE__PRODUCER_RUN_SANDBOX_SYNTHESIS",
+  "content_alone_suffices_for": [
+    "gzip",
+    "sort",
+    "base64",
+    "tr",
+    "sed",
+    "sha256sum",
+    "cp",
+    "split",
+    "tar"
+  ],
+  "cover_size_histogram": {
+    "1": 9
+  },
+  "features": [
+    "content",
+    "name",
+    "size",
+    "mode",
+    "mtime"
+  ],
+  "features_rejected_by_stability": {
+    "mtime": 8
+  },
+  "incremental_spend_usd": 0,
+  "limit": "the projection is synthesised against a declared hypothesis space; it identifies every error inside that space and makes no claim about an error outside it, which is what identifiability means",
+  "model_calls": 0,
+  "mutants": 34,
+  "network_calls": 0,
+  "per_task": [
+    {
+      "every_mutant_separable": true,
+      "inseparable_mutants": [],
+      "minimal_cover": [
+        "content"
+      ],
+      "mutants": 2,
+      "separated_by_single_feature": {
+        "content": 2,
+        "mode": 2,
+        "mtime": 2,
+        "name": 2,
+        "size": 2
+      },
+      "stable_features": [
+        "content",
+        "name",
+        "size",
+        "mode",
+        "mtime"
+      ],
+      "task": "gzip",
+      "unstable_features": []
+    },
+    {
+      "every_mutant_separable": true,
+      "inseparable_mutants": [],
+      "minimal_cover": [
+        "content"
+      ],
+      "mutants": 5,
+      "separated_by_single_feature": {
+        "content": 5,
+        "mode": 4,
+        "name": 4,
+        "size": 5
+      },
+      "stable_features": [
+        "content",
+        "name",
+        "size",
+        "mode"
+      ],
+      "task": "sort",
+      "unstable_features": [
+        "mtime"
+      ]
+    },
+    {
+      "every_mutant_separable": true,
+      "inseparable_mutants": [],
+      "minimal_cover": [
+        "content"
+      ],
+      "mutants": 4,
+      "separated_by_single_feature": {
+        "content": 4,
+        "mode": 3,
+        "name": 3,
+        "size": 4
+      },
+      "stable_features": [
+        "content",
+        "name",
+        "size",
+        "mode"
+      ],
+      "task": "base64",
+      "unstable_features": [
+        "mtime"
+      ]
+    },
+    {
+      "every_mutant_separable": true,
+      "inseparable_mutants": [],
+      "minimal_cover": [
+        "content"
+      ],
+      "mutants": 4,
+      "separated_by_single_feature": {
+        "content": 4,
+        "mode": 3,
+        "name": 3,
+        "size": 4
+      },
+      "stable_features": [
+        "content",
+        "name",
+        "size",
+        "mode"
+      ],
+      "task": "tr",
+      "unstable_features": [
+        "mtime"
+      ]
+    },
+    {
+      "every_mutant_separable": true,
+      "inseparable_mutants": [],
+      "minimal_cover": [
+        "content"
+      ],
+      "mutants": 4,
+      "separated_by_single_feature": {
+        "content": 4,
+        "mode": 3,
+        "name": 3,
+        "size": 4
+      },
+      "stable_features": [
+        "content",
+        "name",
+        "size",
+        "mode"
+      ],
+      "task": "sed",
+      "unstable_features": [
+        "mtime"
+      ]
+    },
+    {
+      "every_mutant_separable": true,
+      "inseparable_mutants": [],
+      "minimal_cover": [
+        "content"
+      ],
+      "mutants": 4,
+      "separated_by_single_feature": {
+        "content": 4,
+        "mode": 3,
+        "name": 3,
+        "size": 4
+      },
+      "stable_features": [
+        "content",
+        "name",
+        "size",
+        "mode"
+      ],
+      "task": "sha256sum",
+      "unstable_features": [
+        "mtime"
+      ]
+    },
+    {
+      "every_mutant_separable": true,
+      "inseparable_mutants": [],
+      "minimal_cover": [
+        "content"
+      ],
+      "mutants": 4,
+      "separated_by_single_feature": {
+        "content": 4,
+        "mode": 3,
+        "name": 3,
+        "size": 4
+      },
+      "stable_features": [
+        "content",
+        "name",
+        "size",
+        "mode"
+      ],
+      "task": "cp",
+      "unstable_features": [
+        "mtime"
+      ]
+    },
+    {
+      "every_mutant_separable": true,
+      "inseparable_mutants": [],
+      "minimal_cover": [
+        "content"
+      ],
+      "mutants": 2,
+      "separated_by_single_feature": {
+        "content": 2,
+        "mode": 1,
+        "name": 1,
+        "size": 2
+      },
+      "stable_features": [
+        "content",
+        "name",
+        "size",
+        "mode"
+      ],
+      "task": "split",
+      "unstable_features": [
+        "mtime"
+      ]
+    },
+    {
+      "every_mutant_separable": true,
+      "inseparable_mutants": [],
+      "minimal_cover": [
+        "content"
+      ],
+      "mutants": 5,
+      "separated_by_single_feature": {
+        "content": 5,
+        "mode": 4,
+        "name": 4,
+        "size": 4
+      },
+      "stable_features": [
+        "content",
+        "name",
+        "size",
+        "mode"
+      ],
+      "task": "tar",
+      "unstable_features": [
+        "mtime"
+      ]
+    }
+  ],
+  "schema": "BRAIN_DISTINGUISHING_PROJECTION_V1",
+  "soundness_tests": {
+    "separation": "the wrong action's projection differs from the right action's",
+    "stability": "the right action re-run after 0.05 s reproduces its projection -- a replay is never instantaneous, and a clock tick is not a consequence"
+  },
+  "tasks": 9,
+  "tasks_skipped": [
+    {
+      "reason": "declared correct command did not change state",
+      "task": "gunzip"
+    }
+  ],
+  "what_this_shows": "Across 9 real shell transformations and 34 mechanically derived wrong actions the oracle was synthesised, not assumed. Separation alone would admit a timestamp, and stability rejects it in 8 of 9 tasks -- the exception keeps it only because the program copies the source timestamp into its output, and content still wins the minimum there. The smallest sound observation is one feature everywhere: content separates 34 of 34 wrong actions and reproduces the right one exactly on replay, against 26 for names, 26 for modes and 33 for sizes. The oracle is therefore an observation chosen under a two-sided test -- separation against the hypothesis space, stability against repetition -- and not a predicate somebody wrote and hoped was a proxy for intent."
+}
