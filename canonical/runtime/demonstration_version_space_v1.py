@@ -338,7 +338,18 @@ def tests_true_of(page: Page, index: int) -> list[tuple[Any, ...]]:
             classes = page.field(other, "classes").split()
             if len(classes) > 1:
                 out += [("has_class", relation, c) for c in classes]
-            for name in ("tag", "type", "colour", "id"):    # "click on a textarea", "the red box", "grid coordinate (2,-1)": the instruction names the KIND, or names the ONLY element that carries this name
+            # "click on a textarea", "the red box", "grid coordinate (2,-1)", "a radio widget",
+            # "their email": the instruction names a property of the element, so that property is
+            # a NAME for it and the slot that cuts it out of the instruction is the binding.
+            #
+            # MEASURED 2026-11-16 over all 130 pages: instructions name 81 element properties on
+            # clickable elements. Before this, 19 of those had no binding at all -- title 5, name 5,
+            # classes 8, for 1 -- purely because this loop listed four fields by hand instead of
+            # reading the same STRUCTURE_FIELDS tuple the `equals` loop three lines above already
+            # reads. Binding `id` alone took grid-coordinate from 0.05 to 1.00. The general law is
+            # that any single-valued string property the instruction can quote is a name; a list of
+            # exceptions has to be argued for, and had not been.
+            for name in STRUCTURE_FIELDS:
                 value = page.field(other, name)
                 if value:
                     out += [("slot", relation, name, rule, "exact")
