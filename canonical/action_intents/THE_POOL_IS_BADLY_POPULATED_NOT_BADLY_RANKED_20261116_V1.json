@@ -145,9 +145,196 @@
    "REBUILD_SYNTHESIS_FROM_SCRATCH_IGNORING_IN_TREE_ENGINES__REJECTED_DUPLICATES_HIDDEN_SOLUTIONS"
   ],
   "route_frontier": {
-   "discovery_required": false,
+   "discovery_required": true,
    "not_applicable_reason": "GOVERNANCE_GUARD_FALSIFICATION_AND_INTERNAL_META_CIRCULAR_COMPOSITION_OVER_IN_TREE_ORGANS_WITH_ZERO_EXTERNAL_CAPABILITY_CLAIM",
-   "challenger_routes": []
+   "challenger_routes": [
+    {
+     "route": "RANK_HARDER_OVER_THE_SAME_OBSERVED_POOL",
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "a correct ranking of a pool that contains no discriminator still yields no discriminator",
+      "CAPABILITY_STRENGTH": "zero: the selector already returns NO_INFORMATIVE_STATE on the real corpus",
+      "WALL_CLOCK": "one exact count per state, already spent",
+      "INCREMENTAL_COST": "zero to rank, but every interaction is wasted at 2^3",
+      "RELIABILITY": "deterministic and exact; exactness is not the problem",
+      "VERIFIABILITY": "guaranteed_elimination already reports the answer, which is 0"
+     },
+     "evidence": [
+      "whole real corpus eliminated 8 of 8,388,608",
+      "selector returned NO_INFORMATIVE_STATE with survivors_before 8,388,600",
+      "each real failure kept 3 of 23, so each was worth 2^3"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/OBSERVATIONAL_POOL_IS_EMPTY_BY_CONSTRUCTION_20261116_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ]
+    },
+    {
+     "route": "INVENT_A_DISCRIMINATING_STATE_WITHOUT_A_REACHABILITY_GATE",
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "high in principle, zero if the state cannot be realized",
+      "CAPABILITY_STRENGTH": "2^22 per query, the largest single lever measured in this tree",
+      "WALL_CLOCK": "one interaction",
+      "INCREMENTAL_COST": "unknown until reachability is measured",
+      "RELIABILITY": "an unrealizable state is a guess that teaches a false lesson",
+      "VERIFIABILITY": "only a separately supplied verifier can certify the state was reached"
+     },
+     "evidence": [
+      "a near miss keeping 22 eliminates 4,194,304 = half the space",
+      "certified_reached_escape_state_constructor_v2 grants no terminal authority and binds rows to a verifier"
+     ],
+     "qualification_evidence": [
+      "canonical/runtime/certified_reached_escape_state_constructor_v2.py"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ]
+    },
+    {
+     "route": "CONSTRUCT_A_REACHABLE_NEAR_MISS_AND_CERTIFY_IT",
+     "resolution": "SELECTED_FOR_NEXT_ACTION",
+     "comparison": {
+      "CORRECTNESS": "the only route whose evidence is a state the system actually reached",
+      "CAPABILITY_STRENGTH": "2^k with k near n, versus 2^3 observed",
+      "WALL_CLOCK": "one interaction per contrast",
+      "INCREMENTAL_COST": "the constructor, which already exists",
+      "RELIABILITY": "gated by the constructor rather than by hope",
+      "VERIFIABILITY": "the constructor's own receipt"
+     },
+     "evidence": [
+      "524,288x the entire real corpus for one near miss",
+      "step 1 (make the near miss DISTINCT) is free and was never done: the corpus's two failures dropped the same facts, so the second bought 7 not 8"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/OBSERVATIONAL_POOL_IS_EMPTY_BY_CONSTRUCTION_20261116_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ]
+    }
+   ],
+   "checked_at_utc": "2026-11-16T00:00:00Z",
+   "max_age_hours": 24,
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "active causal learning interventional query selection observational equivalence agent 2026"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "certifying interventional agreement among observationally equivalent causal models"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "active learning agent chooses interventions versus random data collection causal reasoning"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "near-miss counterfactual query selection program repair agent 2026"
+    }
+   ],
+   "negative_search_summary": "Two routes were refused on this tree's own measurement, not on taste. (1) RANK HARDER over the observed pool: contrast_selection_v1 is already exact and returned NO_INFORMATIVE_STATE with 8,388,600 survivors on the tree's real corpus, so the failure is population, not ordering. (2) INVENT A STATE FREELY: contrast_selection_v1 refuses to leave the observed pool for a measured reason (queries outside the generator's support), and certified_reached_escape_state_constructor_v2 exists precisely to bind any certified row to a separately supplied verifier; a state that cannot be reached is the wild guess the selector is right to refuse. The web adds the mechanism, not a dominator: observationally equivalent models need not agree under intervention because interventions create inputs that never occur in observational data (arXiv 2609.32247), and active interventional agents beat active observational ones only where a confounder is present (arXiv 1901.08162). Neither supplies a reachable-state constructor for THIS tree.",
+   "incumbent_route": "RANK_OBSERVED_STATES_BY_2_TO_THE_KEPT_AND_SELECT_THE_BEST_OBSERVED_CONTRAST",
+   "selected_route": "PRICE_THE_OBSERVATIONAL_POOL_AGAINST_THE_REAL_CORPUS_AND_SEPARATE_RANKING_FROM_POPULATION__TO_SHOW_THAT_SELECTION_IS_SATURATED_AND_CONSTRUCTION_IS_THE_OPEN_CAPABILITY",
+   "unresolved_plausible_dominators": [],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/runtime/contrast_selection_v1.py",
+     "canonical/runtime/applicability_v1.py",
+     "canonical/runtime/certified_reached_escape_state_constructor_v2.py",
+     "canonical/verification/A_FAILURE_IS_WORTH_TWO_TO_THE_KEYS_KEPT_20261116_V1.json"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "https://arxiv.org/html/2609.32247",
+     "https://arxiv.org/html/1901.08162v1",
+     "https://arxiv.org/html/2506.23068v1"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "https://pypi.org/project/pytest"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "https://github.com/greenpau/Machine-Learning-and-Artificial-Intelligence/blob/master/Causal%20Inference.md"
+    ]
+   },
+   "selected_route_preflight": {
+    "selected_route": "PRICE_THE_OBSERVATIONAL_POOL_AGAINST_THE_REAL_CORPUS_AND_SEPARATE_RANKING_FROM_POPULATION__TO_SHOW_THAT_SELECTION_IS_SATURATED_AND_CONSTRUCTION_IS_THE_OPEN_CAPABILITY",
+    "status": "READY",
+    "checked_at_utc": "2026-11-16T00:00:00Z",
+    "max_age_hours": 2,
+    "all_required_dependencies_ready": true,
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "execution_dependencies": [
+     {
+      "dependency": "local Python 3 runtime and the repository's own exact counter",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "GLOBAL",
+      "volatility": "STATIC",
+      "status": "READY",
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "evidence": [
+       "count_survivors returned 8,388,600 for D_i=[20,20] over |A|=23, matching the merged receipt"
+      ]
+     },
+     {
+      "dependency": "the merged receipt this prices, read rather than rebuilt",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "scope": "GLOBAL",
+      "volatility": "STATIC",
+      "status": "READY",
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "evidence": [
+       "A_FAILURE_IS_WORTH_TWO_TO_THE_KEYS_KEPT_20261116_V1.json and the enumeration-wall receipt"
+      ]
+     },
+     {
+      "dependency": "the realizability gate named in the receipt, read not modified",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "scope": "GLOBAL",
+      "volatility": "STATIC",
+      "status": "READY",
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "evidence": [
+       "certified_reached_escape_state_constructor_v2.py documents the verifier binding and grants no terminal authority"
+      ]
+     }
+    ]
+   }
   },
   "obs_goal": {
    "real_outcome": "NON_STATIC_COMPOSITIONAL_ORGAN_ALGEBRA_AND_DECISION_THEORETIC_OPEN_WORLD_POLICY",
