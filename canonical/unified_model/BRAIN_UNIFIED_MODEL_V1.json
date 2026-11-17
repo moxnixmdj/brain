@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 520,
+  "knowledge_documents": 521,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 7005,
+  "research_index_records": 7007,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 452,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "209489462026fdd19d8b39d7a3531f4e7c34eaebb37e84602eb4a23d33ebf3da"
+  "value": "4d99cef0a0322bd7dfdb82ff679730de4be8eada190803b2da6e6d9f87c0e65b"
  },
  "engines": [
   {
@@ -67653,6 +67653,82 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 8446,
+   "headings": [
+    "The specification has two halves, and history supplies neither",
+    "What round 3 left on the table",
+    "The organ already existed — for the other domain",
+    "The language",
+    "The measurement, and the three bugs that stood between me and it",
+    "Why both compiled rows are wrong",
+    "The answer"
+   ],
+   "kind": "DOCUMENT",
+   "path": "THE_SPECIFICATION_HAS_TWO_HALVES_AND_HISTORY_SUPPLIES_NEITHER_20261116_V1.md",
+   "sha256": "150c684df2912b005ff47342797d1fc41c5fecfb5310e94e1ffbeb5fc6bfc9d2",
+   "summary": "*Round 4. 2026-11-16. Branch `arena/adb89925-brain`, base `fd43dc31`.*",
+   "terms": {
+    "40": 4,
+    "already": 4,
+    "because": 6,
+    "becomes": 3,
+    "both": 6,
+    "builds": 5,
+    "callable": 5,
+    "cannot": 4,
+    "canonical": 3,
+    "change": 3,
+    "commit": 4,
+    "commits": 5,
+    "compiled": 6,
+    "contains": 4,
+    "contract": 4,
+    "direction": 5,
+    "discriminating": 5,
+    "environment": 4,
+    "false": 6,
+    "instruction": 7,
+    "message": 4,
+    "module": 4,
+    "name": 4,
+    "named": 5,
+    "names": 4,
+    "no": 11,
+    "not": 15,
+    "one": 10,
+    "only": 5,
+    "own": 4,
+    "read": 5,
+    "real": 6,
+    "refusals": 4,
+    "riscv64": 4,
+    "round": 7,
+    "same": 6,
+    "sentence": 6,
+    "site": 10,
+    "so": 4,
+    "specification": 6,
+    "states": 4,
+    "supplies": 6,
+    "support": 4,
+    "test": 4,
+    "three": 5,
+    "two": 4,
+    "value": 15,
+    "wrong": 4
+   },
+   "title": "The specification has two halves, and history supplies neither",
+   "title_terms": [
+    "halves",
+    "history",
+    "neither",
+    "specification",
+    "supplies",
+    "two"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 4043,
    "headings": [
     "The System Already Works — 2026-11-12",
@@ -85538,10 +85614,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1322,
+  "included_source_count": 1323,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "b070f883526a3d1d6d6e54d23a8027923fb6140fd5878a7ce1c09d0f8b859075"
+  "source_tree_digest": "078f7fd3e9d25219bda05bffd2d1becaf5e9d415fc49097eb47057f36c08ad20"
  },
  "research_index": [
   {
@@ -175238,6 +175314,24 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "2026-11-16",
+   "id": "research:canonical/verification/INSTRUCTION_CONTRACT_FOR_CODE_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/INSTRUCTION_CONTRACT_FOR_CODE_20261116_V1.json",
+   "schema": "BRAIN_INSTRUCTION_CONTRACT_FOR_CODE_V1",
+   "sha256": "42cc1e8bd4ae817392dc775f6ff7788d77c9b188c85074f1859d42fda1d444de",
+   "status": "",
+   "terms": {
+    "20261116": 1,
+    "code": 1,
+    "contract": 1,
+    "instruction": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-07",
    "id": "research:canonical/verification/INSTRUCTION_FOLLOWING_COMPOSITE_ROUTE_OWNERSHIP_PROMOTION_20261007_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -241834,6 +241928,30 @@
     "sentence": 2,
     "source": 2,
     "v1": 2
+   }
+  },
+  {
+   "action_id": "INSTRUCTION_CONTRACT_FOR_CODE_20261116_V1",
+   "capability": false,
+   "date": "2026-11-16",
+   "id": "research:canonical/action_intents/INSTRUCTION_CONTRACT_FOR_CODE_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/INSTRUCTION_CONTRACT_FOR_CODE_20261116_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "a674fad3ebd32e26f7f4d3792b7064b4fe794c1d486420fe2dc1abe622d21069",
+   "status": "PRODUCED",
+   "terms": {
+    "20261116": 1,
+    "code": 1,
+    "contract": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "instruction": 1,
+    "instruction_contract_for_code_20261116_v1": 1,
+    "produced": 1,
+    "reuse_the_tree_s_own_computer_use_instruction_compiler_as_the_pattern__a_closed_clause_language_with_refusals_named_one_by_one__and_build_the_missing_coding_domain_over_it__value_x_direction_x_grounding_in_one_of_the_module_s_own_callables__judged_in_both_directions": 1,
+    "the_artifact_supplies_neither_half_of_a_specification__95_percent_of_real_commit_messages_state_no_value_or_no_direction_and_the_5_percent_that_do_name_a_value_ground_it_in_a_callable_that_does_not_decide_it__2_of_2_compiled_contracts_were_wrong_at_the_fixed_state_so_the_missing_half_is_the_site_and_a_site_is_named_only_by_intervention": 1,
+    "the_third_manufacturability_route_is_closed_by_measurement_with_a_proven_instrument__40_real_commits_188_confirmed_laws_0_kills_and_174_of_the_laws_are_bare_totality__the_cause_is_named_real_work_extends_a_specification_instead_of_violating_a_property__so_the_next_organ_must_compile_intent_into_the_discriminating_pair_rather_than_derive_it_from_the_artifact": 1,
+    "v1": 1
    }
   },
   {
