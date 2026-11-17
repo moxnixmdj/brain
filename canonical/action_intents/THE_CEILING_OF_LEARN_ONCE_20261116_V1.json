@@ -36,7 +36,7 @@
  },
  "benchmark_or_family_rank_authority": false,
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The claim has been answered term by term for nine sessions and never as a product, which is the only form that answers a question about a fraction of work. The measured terms are: end-to-end memory service 31/644 strict sites (4.814%, one in 20.8), multi-line advanced edits 0 of 14, cross-repository multi-line 2.1%, induction determinacy 78/142. Acquisition is not the wall: the shipped counts (4 demonstrations for the git task, 1 for the premise task) came from a greedy cover, and the tree's exact cover solver plus an independent exhaustive search confirm NO smaller cover exists, so the number of experiences needed has an exact small answer. Composition is a separate wall: two rules each crystallised True on their own demonstration, applied in order, return the text unchanged with every local check passing. Therefore making learning infinitely fast leaves the yield unchanged at 4.81%, because the fraction is a property of the work and not of the learner, and the single bottleneck is not learning rate but that real work is mostly not repetition and that sequence correctness is not implied by step correctness.",
- "canonical_base_commit": "145bd9c899f706069c96a52239266189df54ba43",
+ "canonical_base_commit": "d2e0aa07937ee1993dcac84cffff8bac5eb2a1e7",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -73,33 +73,25 @@
   "wall_clock_cost_ub": 1
  },
  "measured_effect": {
-  "the_ceiling": {
-   "end_to_end": "31/644",
-   "percent": 4.814,
-   "one_in": 20.8,
-   "multi_line": "0/14",
-   "cross_repo_multi_line": 0.021
-  },
-  "exact_acquisition": {
-   "task_A_greedy": 4,
-   "task_A_exact": 4,
-   "task_C_greedy": 1,
-   "task_C_exact": 1,
-   "smaller_cover_exists": false,
-   "uncoverable_task_C": 28
-  },
+  "answer_to_the_bottleneck_question": "NO -- learning rate is not the bottleneck; it multiplies a term that is already small, and the yield is a property of the work",
   "composition_reproduced_live": {
    "both_crystallised": true,
-   "sequence_verdict": "FAIL",
-   "reason": "STEP_REVERTED_EARLIER_STATE:step2",
    "net_change_nothing": true,
+   "reason": "STEP_REVERTED_EARLIER_STATE:step2",
+   "sequence_verdict": "FAIL",
    "steps": [
     "CHANGED",
     "REVERTED"
    ]
   },
-  "answer_to_the_bottleneck_question": "NO -- learning rate is not the bottleneck; it multiplies a term that is already small, and the yield is a property of the work",
-  "unmeasured_and_labelled": "the REFUSE share -- how much real work has no mechanical postcondition -- is the least honest number in this tree and is not folded into any other term",
+  "exact_acquisition": {
+   "smaller_cover_exists": false,
+   "task_A_exact": 4,
+   "task_A_greedy": 4,
+   "task_C_exact": 1,
+   "task_C_greedy": 1,
+   "uncoverable_task_C": 28
+  },
   "reused_not_rebuilt": [
    "LEARN_ONCE_KEEP_FOREVER_SERVES_A_TWENTIETH_OF_REAL_EDITS_20261116_V1.md",
    "ONE_DEMONSTRATION_AMORTISES_A_SIXTH_OF_REAL_WORK_20261116_V1.md",
@@ -108,7 +100,15 @@
    "canonical/swe_kernel/skill_sequence_verify_v1.py -- verify_sequence, unchanged",
    "canonical/swe_kernel/verified_skill_crystallizer_v1.py -- VerifiedSkillStore, unchanged",
    "canonical/runtime/k6_minimum_adequate_policy_cover_v1.py -- exact cover, unchanged"
-  ]
+  ],
+  "the_ceiling": {
+   "cross_repo_multi_line": 0.021,
+   "end_to_end": "31/644",
+   "multi_line": "0/14",
+   "one_in": 20.8,
+   "percent": 4.814
+  },
+  "unmeasured_and_labelled": "the REFUSE share -- how much real work has no mechanical postcondition -- is the least honest number in this tree and is not folded into any other term"
  },
  "next_step": "UNIFY_THE_REMAINING_DISCONNECTED_LEARNING_STORES_ONTO_ONE_LIVE_COGNITIVE_BUS_UNDER_RING0_SELF_ARCHITECT",
  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -124,7 +124,7 @@
   "execution_guard/goal_target_binding_v1.py"
  ],
  "recursive_obs": {
-  "canonical_base_commit": "145bd9c899f706069c96a52239266189df54ba43",
+  "canonical_base_commit": "d2e0aa07937ee1993dcac84cffff8bac5eb2a1e7",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "FIVE_FROZEN_PERCEPTOR_CODEC_STRINGS",
@@ -461,8 +461,8 @@
   "tournament": {
    "counterexample_receipts": [
     {
-     "path": "canonical/tests/test_the_ceiling_of_learn_once_v1.py",
-     "git_blob_sha": "4e773d3de392d09bf5f6f7868569dd0e9e799df6"
+     "git_blob_sha": "4e773d3de392d09bf5f6f7868569dd0e9e799df6",
+     "path": "canonical/tests/test_the_ceiling_of_learn_once_v1.py"
     }
    ],
    "decisive_question": "DOES_THE_CREATURE_INDUCE_UNSEEN_GRAMMARS_COMPOSE_ORGANS_SYNTHESIZE_NON_SUM_INVARIANTS_EXPAND_WITHOUT_ENGLISH_KEYWORDS_AND_CHOOSE_ZERO_REWARD_UNLOCKING_TOOLS",
