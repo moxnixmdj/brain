@@ -42,7 +42,7 @@
   },
   "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_RETURNS_TO_EXPERIENCE_OF_LEARN_ONCE_KEEP_FOREVER_WERE_NEVER_MEASURED_ACROSS_TIME_ONLY_INSIDE_THE_COMMIT_THAT_TAUGHT_IT",
-  "canonical_base_commit": "68e8d11bcddd87e4dffc38a19093dbd782879919",
+  "canonical_base_commit": "0cfb22d27ba4e29b8ec7e8b3f7b0720585e75c32",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -144,7 +144,7 @@
       "systematic_editing_from_one_example": "SyDIT, PLDI 2011: from edit pairs in five large projects, mimics the human correctly on 70% (39/56) of systematic edits"
     },
     "incremental_spend_usd": 0,
-    "measured_at_commit": "68e8d11bcddd87e4dffc38a19093dbd782879919",
+    "measured_at_commit": "0cfb22d27ba4e29b8ec7e8b3f7b0720585e75c32",
     "model_calls": 0,
     "network_calls": 0,
     "what_this_does_not_claim": "No capability. The signature is lexical; a semantic learner would recur more and how much more is unmeasured. The corpus is every sixth commit, so recurrence is a lower bound. The multi-line denominator is 14 pairs, so 0 of 14 is a ceiling on a thin sample."
@@ -169,7 +169,7 @@
   ],
   "probe_specific": false,
   "recursive_obs": {
-    "canonical_base_commit": "68e8d11bcddd87e4dffc38a19093dbd782879919",
+    "canonical_base_commit": "0cfb22d27ba4e29b8ec7e8b3f7b0720585e75c32",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "measuring learning inside the batch that taught it and calling that permanence",
@@ -522,8 +522,8 @@
       "python3 canonical/swe_kernel/skill_recurrence_curve_v1.py --json canonical/verification/SKILL_RECURRENCE_20261116_V1.json",
       "python3 -m pytest canonical/tests/test_skill_recurrence_curve_v1.py -q",
       "python3 canonical/runtime/compile_brain_unified_model_v1.py",
-      "python3 execution_guard/repo_integrity_guard_v1.py --base 68e8d11bcddd87e4dffc38a19093dbd782879919",
-      "python3 canonical/runtime/enforce_goal_hierarchy.py --base 68e8d11bcddd87e4dffc38a19093dbd782879919 --head HEAD"
+      "python3 execution_guard/repo_integrity_guard_v1.py --base 0cfb22d27ba4e29b8ec7e8b3f7b0720585e75c32",
+      "python3 canonical/runtime/enforce_goal_hierarchy.py --base 0cfb22d27ba4e29b8ec7e8b3f7b0720585e75c32 --head HEAD"
     ],
     "receipt": "canonical/verification/SKILL_RECURRENCE_20261116_V1.json"
   },
