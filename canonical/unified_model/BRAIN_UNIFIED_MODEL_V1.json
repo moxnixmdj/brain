@@ -31228,16 +31228,16 @@
   "engines": 26,
   "knowledge_documents": 479,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6922,
+  "research_index_records": 6926,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 451,
-  "source_index_modules": 1989
+  "source_index_modules": 1990
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "a8548fcfe3fdc99fe7a6b0a398e97344869cb66e58f2de04594f03d3acce2fe3"
+  "value": "18fa5b7ee303bb05e6f3256a05ebbf5f661624349ad9f7ecd66a514dab5dce1f"
  },
  "engines": [
   {
@@ -209760,6 +209760,28 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "2026-11-16",
+   "id": "research:canonical/verification/THE_TREE_ALREADY_SPOKE_ONE_LANGUAGE_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/THE_TREE_ALREADY_SPOKE_ONE_LANGUAGE_20261116_V1.json",
+   "schema": "PROJECT_BRAIN_VERIFICATION_RECEIPT_V1",
+   "sha256": "b675d1785bdde3fe8d0ebb28a63306aa0d8120a85eca36369ae3062af145efcd",
+   "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
+   "terms": {
+    "20261116": 1,
+    "already": 1,
+    "language": 1,
+    "one": 1,
+    "proposed__producer_measured__independent_verification_open": 1,
+    "spoke": 1,
+    "the_learner_could_not_bind_an_element_id_the_instruction_names_so_a_page_whose_only_distinguishing_property_is_that_id_was_unlearnable__and_the_5_43_bits_were_never_a_second_language": 1,
+    "tree": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-10",
    "id": "research:canonical/verification/TLAC_MREL_IDENTITY_DISCRIMINATOR_VERIFY_20261010_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -213348,6 +213370,47 @@
     "v1": 1,
     "white": 1,
     "zero": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/__pycache__/test_finite_verifier_search.cpython-311-pytest-9.2.0.pyc",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/__pycache__/test_finite_verifier_search.cpython-311-pytest-9.2.0.pyc",
+   "schema": "",
+   "sha256": "84c982419be34eac3b691da1a553bbf5a3822f9d04bf41d2d48cc244446483c7",
+   "status": "",
+   "terms": {
+    "311": 1,
+    "9.2.0": 1,
+    "finite": 1,
+    "pytest": 1,
+    "search.cpython": 1,
+    "test": 1,
+    "verifier": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/__pycache__/test_owned_causal_falsification_v1.cpython-311-pytest-9.2.0.pyc",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/__pycache__/test_owned_causal_falsification_v1.cpython-311-pytest-9.2.0.pyc",
+   "schema": "",
+   "sha256": "34350ba7b0b496fcfa22a7b144587c838fac47f2fcf7ce12d60eb0010fa734e7",
+   "status": "",
+   "terms": {
+    "311": 1,
+    "9.2.0": 1,
+    "causal": 1,
+    "falsification": 1,
+    "owned": 1,
+    "pytest": 1,
+    "test": 1,
+    "v1.cpython": 1
    }
   },
   {
@@ -244698,6 +244761,51 @@
    }
   },
   {
+   "action_id": "TWO_HALVES_TALKED_DIFFERENTLY_WAS_WRONG__THE_ID_WAS_UNBOUND_20261116_V1",
+   "capability": false,
+   "date": "2026-11-16",
+   "id": "research:canonical/action_intents/TWO_HALVES_TALKED_DIFFERENTLY_WAS_WRONG__THE_ID_WAS_UNBOUND_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/TWO_HALVES_TALKED_DIFFERENTLY_WAS_WRONG__THE_ID_WAS_UNBOUND_20261116_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+   "sha256": "c7e1ec8741bc75ab66aee8cac03cde7792172708b4e5a39b6e054cf4ecf4efd7",
+   "status": "PROPOSED__ZERO_CREDIT__NO_TERMINAL_CLAIM",
+   "terms": {
+    "20261116": 1,
+    "between": 1,
+    "binding": 1,
+    "carries": 1,
+    "cost": 1,
+    "differently": 1,
+    "element": 1,
+    "general": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "goes": 1,
+    "halves": 1,
+    "id": 1,
+    "instruction": 1,
+    "inventing": 1,
+    "named": 1,
+    "names": 1,
+    "not": 1,
+    "omission": 1,
+    "one-word": 1,
+    "other": 1,
+    "page": 1,
+    "properties": 1,
+    "proposed__zero_credit__no_terminal_claim": 1,
+    "question": 1,
+    "still": 1,
+    "talked": 1,
+    "the_learner_could_not_bind_an_element_id_the_instruction_names_so_a_page_whose_only_distinguishing_property_is_that_id_was_unlearnable": 1,
+    "two": 1,
+    "two_halves_talked_differently_was_wrong__the_id_was_unbound_20261116_v1": 1,
+    "unbound": 2,
+    "v1": 1,
+    "vocabularies": 1
+   }
+  },
+  {
    "action_id": "TWO_REPLAYABLE_EXERCISES_ARE_NOT_A_VERIFIED_CORPUS_20261112_V1",
    "capability": false,
    "date": "2026-11-12",
@@ -267864,9 +267972,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/demonstration_version_space_v1.py",
-   "sha256": "f1f7dca46304a7b58609811e018b604f3b02f543f18ff6b5b52562ecdf8cc7ef",
+   "sha256": "73c9fb32d0d73ecdd2c517f740f0f5d0ae27e21432f05747f3fa63e2dbb840a2",
    "summary": "One success is a single point. A skill is whatever still fits every success seen so far.",
-   "symbol_count": 36,
+   "symbol_count": 37,
    "symbols": [
     "Execution",
     "LibraryArm",
@@ -267901,13 +268009,13 @@
     "expression_preference": 1,
     "expressions_for": 1,
     "extract": 1,
-    "family_of": 1,
     "far": 1,
     "fits": 1,
     "is_bound": 1,
     "is_content_constant": 1,
     "matches": 1,
     "mentioned_in": 1,
+    "names_only_it": 1,
     "numbers": 1,
     "one": 1,
     "page": 1,
@@ -322790,6 +322898,40 @@
     "v1": 1,
     "verify": 1,
     "vocabulary": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/what_one_experience_buys_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/what_one_experience_buys_v1.py",
+   "sha256": "0daf4515536b2a6b506782e10ef156dc867676abc1450e420ce650a87c2ab050",
+   "summary": "ONE EXPERIENCE BUYS ONE BIT OF IDENTIFICATION. THE PRICE OF A TASK DOES NOT FALL.",
+   "symbol_count": 5,
+   "symbols": [
+    "Price",
+    "_programs",
+    "compounding",
+    "price",
+    "verdict"
+   ],
+   "terms": {
+    "bit": 1,
+    "buys": 2,
+    "compounding": 1,
+    "experience": 2,
+    "fall": 1,
+    "identification": 1,
+    "not": 1,
+    "one": 3,
+    "price": 3,
+    "programs": 1,
+    "task": 1,
+    "v1": 1,
+    "verdict": 1
    }
   },
   {
