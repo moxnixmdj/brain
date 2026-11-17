@@ -47,7 +47,7 @@
   },
   "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_ORACLE_WAS_TREATED_AS_A_PREDICATE_TO_WRITE_WHEN_IT_IS_AN_OBSERVATION_TO_CHOOSE",
-  "canonical_base_commit": "45f8c4b565dd600ffcb69b7388a0c9814b4dce37",
+  "canonical_base_commit": "d2e0aa07937ee1993dcac84cffff8bac5eb2a1e7",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -123,7 +123,7 @@
       "weak_oracles_in_the_wild": "All Smoke No Alarm (pith 2606.18168): 80.2% of 86,156 agent test patches carry weak or no oracle signal"
     },
     "incremental_spend_usd": 0,
-    "measured_at_commit": "45f8c4b565dd600ffcb69b7388a0c9814b4dce37",
+    "measured_at_commit": "d2e0aa07937ee1993dcac84cffff8bac5eb2a1e7",
     "model_calls": 0,
     "network_calls": 0,
     "verification": {
@@ -134,8 +134,8 @@
         "python3 canonical/swe_kernel/capability_law_v1.py --json canonical/verification/CAPABILITY_LAW_20261116_V1.json --pinned",
         "python3 -m pytest canonical/tests/test_computer_use_check_density_v1.py canonical/tests/test_distinguishing_projection_v1.py canonical/tests/test_capability_law_v1.py -q",
         "python3 canonical/runtime/compile_brain_unified_model_v1.py",
-        "python3 execution_guard/repo_integrity_guard_v1.py --base 45f8c4b565dd600ffcb69b7388a0c9814b4dce37",
-        "python3 canonical/runtime/enforce_goal_hierarchy.py --base 45f8c4b565dd600ffcb69b7388a0c9814b4dce37 --head HEAD"
+        "python3 execution_guard/repo_integrity_guard_v1.py --base d2e0aa07937ee1993dcac84cffff8bac5eb2a1e7",
+        "python3 canonical/runtime/enforce_goal_hierarchy.py --base d2e0aa07937ee1993dcac84cffff8bac5eb2a1e7 --head HEAD"
       ],
       "receipt": "canonical/verification/DISTINGUISHING_PROJECTION_20261116_V1.json"
     }
@@ -166,7 +166,7 @@
   ],
   "probe_specific": false,
   "recursive_obs": {
-    "canonical_base_commit": "45f8c4b565dd600ffcb69b7388a0c9814b4dce37",
+    "canonical_base_commit": "d2e0aa07937ee1993dcac84cffff8bac5eb2a1e7",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "printing computer-use density as UNMEASURED while a real action environment sat in the tree",
