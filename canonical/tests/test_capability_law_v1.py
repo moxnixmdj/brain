@@ -34,7 +34,8 @@ def test_the_law_is_reproducible_and_pins_its_receipts(report: dict) -> None:
     assert live["operating_point"] == report["operating_point"]
     assert live["leverage"] == report["leverage"]
     assert set(report["receipts"]) == {"determinacy", "value", "memory", "observation", "permanence",
-                                       "computer", "projection", "contract", "facts", "repair"}
+                                       "computer", "projection", "contract", "facts", "repair",
+                                       "demonstration"}
 
 
 def test_the_terms_are_the_published_numbers(report: dict) -> None:
@@ -110,9 +111,16 @@ def test_computer_use_carries_a_receipt_instead_of_an_assumption(report: dict) -
     assert able["steps_redone"] == {"intervention": 8, "everything": 14}
     assert able["missed_by_intervention"] == 0 and able["over_declared_by_intervention"] == 0
     assert "perturb" in able["dependency_test"]
+    shown = cell["demonstration"]
+    assert shown["actions"] == 7 and shown["readings_per_action"] == 343
+    assert shown["decided_by_one_execution"] == {"ACT": 5, "LEARN_ONCE_MORE": 2}
+    assert shown["task_scoped_not_permanent"] == ["sort_versus_sort_unique", "sort_unique_versus_sort"]
+    assert shown["one_shot_pick_wrong_outside_the_task"] == 5
+    assert shown["repeating_the_same_execution_ever_helped"] == 0
     # the gap the previous receipt named is closed, and the new limit is stated where the old one was
     assert "does not repair it" not in cell["what_remains_unmeasured"]
     assert "candidate set" in cell["what_remains_unmeasured"]
+    assert "relative to a stated grammar" in cell["what_remains_unmeasured"]
 
 
 def test_a_missing_receipt_raises_instead_of_defaulting(tmp_path, monkeypatch) -> None:

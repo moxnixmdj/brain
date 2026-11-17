@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 511,
+  "knowledge_documents": 512,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6987,
+  "research_index_records": 6989,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 452,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "82038e50cbf3b98dcee38eb03810f183ab7a353ab40cb91e3b3322b509f2262c"
+  "value": "cc2d8b7d8395bcc88573584224bb6580ff1bd22fc4f5010a4cf130357cc6f227"
  },
  "engines": [
   {
@@ -70738,6 +70738,78 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 9415,
+   "headings": [
+    "What one execution is worth",
+    "1. The claim, split so it can be tested",
+    "2. What was missing, and is now measured",
+    "3. Why this is better than the way agents learn now — precisely",
+    "4. So are we done? No — and here is exactly what is left",
+    "5. Sentience"
+   ],
+   "kind": "DOCUMENT",
+   "path": "WHAT_ONE_EXECUTION_IS_WORTH_20261116_V1.md",
+   "sha256": "c99e70834efd40a4c174708783a6347783f34cce5e8410177dcfcd168441326e",
+   "summary": "*2026-11-16. Seven real actions, real programs, real state variants. AUTHORITY: NONE — producer-run measurement.*",
+   "terms": {
+    "23": 3,
+    "about": 4,
+    "accuracy": 3,
+    "act": 3,
+    "action": 5,
+    "actions": 7,
+    "after": 3,
+    "agent": 6,
+    "all": 5,
+    "answer": 5,
+    "any": 4,
+    "every": 6,
+    "execution": 14,
+    "grammar": 5,
+    "here": 7,
+    "identified": 6,
+    "keeps": 4,
+    "learning": 5,
+    "measured": 5,
+    "measurement": 6,
+    "more": 4,
+    "no": 10,
+    "not": 23,
+    "now": 6,
+    "observation": 4,
+    "once": 4,
+    "one": 20,
+    "only": 9,
+    "out.dat": 10,
+    "payload.dat": 8,
+    "permanent": 4,
+    "readings": 5,
+    "real": 10,
+    "refuse": 5,
+    "right": 7,
+    "same": 5,
+    "second": 4,
+    "set": 4,
+    "so": 6,
+    "sort": 11,
+    "space": 5,
+    "state": 12,
+    "states": 5,
+    "survivor": 5,
+    "survivors": 5,
+    "two": 4,
+    "verdict": 5,
+    "wrong": 5
+   },
+   "title": "What one execution is worth",
+   "title_terms": [
+    "execution",
+    "one",
+    "worth"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 20131,
    "headings": [
     "What one success can and cannot teach — 14 November 2026",
@@ -84847,10 +84919,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1313,
+  "included_source_count": 1314,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "a73becf93aa9ab05647dd1829c87d40e4069ae22d8f696001d3c82701039a742"
+  "source_tree_digest": "9bf804c9b7c3577aae2e48ec6f34820862dc0222f470f4f9398f9d7522211ac6"
  },
  "research_index": [
   {
@@ -157746,7 +157818,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/CAPABILITY_LAW_20261116_V1.json",
    "schema": "BRAIN_CAPABILITY_LAW_V1",
-   "sha256": "09eed9ee3fe10a6f7137ca232383bbf80442537cf99d57ebffbf47ce8a2a130c",
+   "sha256": "ebcaae63acf8f7b18b122138a6cfcb5b5f7b9977f1608e9f4f201514a72aa531",
    "status": "",
    "terms": {
     "20261116": 1,
@@ -166135,6 +166207,23 @@
     "choice": 1,
     "demonstration": 1,
     "strict": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/DEMONSTRATION_SUFFICIENCY_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/DEMONSTRATION_SUFFICIENCY_20261116_V1.json",
+   "schema": "BRAIN_DEMONSTRATION_SUFFICIENCY_V1",
+   "sha256": "a23cc317de585f24cb7a2e3054e13656db603f97445bf9f88c74f51206cea0b6",
+   "status": "",
+   "terms": {
+    "20261116": 1,
+    "demonstration": 1,
+    "sufficiency": 1,
     "v1": 1
    }
   },
@@ -238828,6 +238917,51 @@
     "uncompilable": 1,
     "unlocks": 1,
     "v1": 2
+   }
+  },
+  {
+   "action_id": "DEMONSTRATION_SUFFICIENCY_20261116_V1",
+   "capability": false,
+   "date": "2026-11-16",
+   "id": "research:canonical/action_intents/DEMONSTRATION_SUFFICIENCY_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/DEMONSTRATION_SUFFICIENCY_20261116_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "91d52457ac6786a10cd3bcd3636bebc01e0ece8bd8d0f3f389b8e302c6e06476",
+   "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
+   "terms": {
+    "1037": 1,
+    "16480": 1,
+    "20261116": 1,
+    "23": 2,
+    "343": 1,
+    "across": 1,
+    "act": 1,
+    "action": 3,
+    "actions": 3,
+    "after": 3,
+    "agree": 1,
+    "agrees": 1,
+    "answer": 1,
+    "appears": 1,
+    "demonstration": 2,
+    "doing": 2,
+    "every": 4,
+    "execution": 6,
+    "not": 2,
+    "one": 6,
+    "reaches": 2,
+    "reading": 2,
+    "real": 2,
+    "refuse": 2,
+    "same": 3,
+    "second": 2,
+    "sort": 3,
+    "state": 2,
+    "states": 2,
+    "survivor": 2,
+    "survivors": 3,
+    "task": 3
    }
   },
   {
