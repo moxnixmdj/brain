@@ -43,7 +43,7 @@
   },
   "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_CLAIM_THAT_ONE_DEMONSTRATION_PER_ACTION_OR_ENVIRONMENT_SOLVES_THE_WORK_WAS_NEVER_CHECKED_AGAINST_HOW_OFTEN_REAL_WORK_HAS_A_SIBLING_SITE_OR_WAS_IT_EVER_MEASURED_WHETHER_THE_DEMONSTRATION_DETERMINES_THE_SIBLING_EDIT_RATHER_THAN_MERELY_RESEMBLING_IT",
-  "canonical_base_commit": "d57dcd71894b3dfb8c6138c8500718de6ef8bf45",
+  "canonical_base_commit": "8ff59e0d489d84bb477c58fc278f97205d8b79f8",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -160,7 +160,7 @@
       "systematic_editing_from_one_example": "SyDIT, PLDI 2011: from edit pairs in five large projects, mimics the human correctly on 70% (39/56) of systematic edits"
     },
     "incremental_spend_usd": 0,
-    "measured_at_commit": "8140df70cb30dd683e99bced2eeb9d23e557daf4",
+    "measured_at_commit": "146884b628ccfac561829805dc4c9c3742f4cd80",
     "model_calls": 0,
     "network_calls": 0,
     "what_this_does_not_claim": [
@@ -190,7 +190,7 @@
   ],
   "probe_specific": false,
   "recursive_obs": {
-    "canonical_base_commit": "d57dcd71894b3dfb8c6138c8500718de6ef8bf45",
+    "canonical_base_commit": "8ff59e0d489d84bb477c58fc278f97205d8b79f8",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "counting a success count as evidence that an action was learned",
@@ -357,7 +357,7 @@
           "route": "RE_DECIDE_EVERY_ACTION_PROVE_THE_PREMISE_ON_THE_LIVE_STATE_AND_POSTCONDITION_CHECK_THE_CLAIMED_SENTENCE_INSTEAD_OF_REPLAYING_THE_PLAN"
         }
       ],
-      "checked_at_utc": "2026-11-16T23:51:58Z",
+      "checked_at_utc": "2026-11-17T00:07:24Z",
       "comparison_dimensions": [
         "CORRECTNESS",
         "CAPABILITY_STRENGTH",
@@ -397,7 +397,7 @@
       "selected_route": "MEASURE_THE_SUPPLY_AND_DETERMINACY_OF_ONE_DEMONSTRATION_ON_REAL_COMMIT_HISTORY",
       "selected_route_preflight": {
         "all_required_dependencies_ready": true,
-        "checked_at_utc": "2026-11-16T23:51:58Z",
+        "checked_at_utc": "2026-11-17T00:07:24Z",
         "execution_dependencies": [
           {
             "dependency": "local Python 3.11 runtime with the repository's own venv",

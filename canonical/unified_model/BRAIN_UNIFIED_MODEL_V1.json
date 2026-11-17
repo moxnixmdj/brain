@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "6b2ee5a5f6b4b1a99659adc3096b3ba916e38b32288df83f96cc1b0164104e6d"
+  "value": "da724a54ac7da281ade0523ec853c5f08be473f20a87887d47481e20bba9acde"
  },
  "engines": [
   {
@@ -238418,7 +238418,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/ONE_DEMONSTRATION_AMORTISES_A_SIXTH_OF_REAL_WORK_20261116_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "9cdb4e544d7b9b365877fcd4a266b76197a9cccc2d56f4bc1de29045c0131a53",
+   "sha256": "0b8748e6af1121fa3a2e449133dde2a3285a81b1042b913716cd9edf00759f9f",
    "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
    "terms": {
     "20261116": 1,
