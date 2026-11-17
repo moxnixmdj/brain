@@ -166,6 +166,51 @@ irreducible information from a user; an excellent verifier alone cannot invent t
   self-report, and memory do not establish subjective experience. Sentience is not measured
   by the experiments in this branch.
 
+## Additional audit: 17 November 2026
+
+- `canonical/runtime/settlement_v1.py` is an existing zero-model hypothesis-settlement
+  mechanism. It can select informative questions from a supplied hypothesis space and refuses
+  when it cannot discriminate within its instrument. It is not a general-purpose oracle or a
+  guarantee that its prior includes reality. Source inspection reveals a specific limitation:
+  `derive_probe_space` fills every argument position with the same integer or half-integer.
+  For a two-input problem, hypotheses that differ only on `x != y` therefore agree on all of
+  those automatically generated probes. An independently supplied domain or probe can differ;
+  this is not a claim that every settlement call is blind. This is a source finding, not a
+  fresh capability test. Do not fix it by blindly taking a Cartesian product: candidate spaces,
+  permissible inputs, intervention risk, oracle availability and resource bounds also matter.
+- The 12 November audit initially says nine registered acceptance predicates confused a written
+  result with a successful result. Its later follow-up documents that eight were repointed.
+  `A_REFUSED_RECEIPT_IS_STILL_MARKED_VERIFIED_20261112_V1.md` reports the ninth was subsequently
+  repointed too, on rejection-path evidence. That ninth case had not demonstrated a successful
+  positive acceptance. Do not repeat the older instruction to repoint all nine; do not infer that
+  every other acceptance gate is sound. This is a historical report, not a fresh execution.
+- The `brain_unified_model_v1.py` `recall` implementation ranks its knowledge index with
+  BM25-like term scoring and authority/version adjustments. That is a useful retrieval
+  mechanism, not a guarantee that the right source is present, current, or actually usable by
+  a solver. `verified_skill_crystallizer_v1.py` stores scoped repair hypotheses in SQLite and
+  distinguishes verification levels; its source explicitly disclaims universal correctness
+  and indefinite retention. These are existing components to connect and evaluate, not a
+  justification for asserting that the complete loop already works.
+- [Learning on the Job](https://arxiv.org/html/2607.22157v1) reports frozen-weight external
+  memory helping in a banking benchmark compared with static retrieval. Its key trials revisit
+  tasks and include a condition given verified corrections; the agents are external models. It
+  supports the plausibility of experience memory, not a result for Brain or one-shot transfer to
+  arbitrary tasks. [AgentCL](https://arxiv.org/html/2606.02461v1) finds memory-dependent gains
+  can coincide with negative held-out transfer. Both findings argue for measuring reuse and
+  interference rather than assuming memory is always helpful.
+- [Qwen3-Coder-Next](https://arxiv.org/html/2603.00729v1) describes a pretrained base followed
+  by continued training, supervised examples, specialized reinforcement-learning experts and
+  distillation, with environment-verifiable feedback and anti-hacking work. This is evidence of
+  what that team reports doing, not a perfect solution, an instruction to use their weights, or
+  proof that conventional pretraining is unavoidable. [Kimi K3](https://arxiv.org/pdf/2607.24653)
+  also reports pretraining and long-horizon reinforcement learning. Fully worked training
+  recipes are not public for every frontier model; do not claim we know all proprietary details.
+- [ExpertCrowd-SWE](https://arxiv.org/html/2611.13246), published 9 November, describes hard,
+  expert-authored changes to real repositories, 24 released tasks and 76 held out, with graders
+  calibrated against reference/no-op controls. Some grading uses model judges and the paper
+  describes a hosted container platform. Its accessibility, policy compatibility, task secrecy,
+  and ability to run only Brain have not been validated here; do not report an evaluation result.
+
 ## Next feature: prerequisites and kill criteria
 
 **Do not merge the existing synthesis experiment as a universal or independently verified
