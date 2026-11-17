@@ -1,0 +1,452 @@
+{
+  "action_id": "CHECKABILITY_BY_DIFFERENTIAL_PIN_20261116_V1",
+  "action_intent_id": "CHECKABILITY_BY_DIFFERENTIAL_PIN_20261116_V1",
+  "action_kind": "FRESH_REUSE",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "conversation_memory_is_authority": false,
+    "earlier_routes_exhausted_reason": "REUSE succeeded almost entirely, and research exhaustion came first this time because the tree already had the theory under non-obvious names: `canonical/runtime/finite_identifiability.py` (version-space filtering, equivalence classes, minimax discriminator, explicit non-identifiability), `epistemic_closure_kernel_v1.py` (decide only when all survivors agree), `demonstration_version_space_v1.py` (GUI readings), `identification_cost_in_a_real_space_v1.py` (median 1037 survivors on real bugs), `repair_version_space_selection_v1.py` (selection versus synthesis). What was missing was the bridge from a real action in a real environment to that kernel, and the decision it enables. The kernel is imported unchanged; the new object is the grammar over the state and the three-way verdict.",
+    "incremental_spend_usd": 0,
+    "independent_verification_completed": false,
+    "independent_verification_note": "Producer-run sandbox only. Independent personnel verification is still open.",
+    "laws_read_this_session": [
+      "AGENTS.md",
+      "README.md",
+      "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md"
+    ],
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+    "progress_evidence_paths": [
+      "canonical/swe_kernel/checkability_by_differential_pin_v1.py",
+      "canonical/tests/test_checkability_by_differential_pin_v1.py",
+      "canonical/verification/CHECKABILITY_BY_DIFFERENTIAL_PIN_20261116_V1.json",
+      "THE_TERM_THAT_LEARNING_MULTIPLIES_20261116_V1.md"
+    ],
+    "route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+    "scope_complete_discharge": false,
+    "terminal_achieved": false
+  },
+  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_LEARNING_RATE_IS_NOT_THE_BOTTLENECK__LEARNING_MULTIPLIES_CHECKABILITY_AND_CHECKABILITY_IS_KNOWLEDGE__THE_DISCRIMINATING_INPUT_PAIR_IS_NOT_DERIVABLE_FROM_THE_ARTIFACT_FROM_REPETITION_OR_FROM_ANY_AMOUNT_OF_EXPERIENCE__AND_THIS_HAD_NEVER_BEEN_MEASURED_BY_CONSTRUCTION_ONLY_ARGUED",
+  "canonical_base_commit": "d771ae2d8bcaedd9607d91914ba5d11c808e6d66",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "capability_credit_delta": 0,
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "THE_LEARNING_RATE_IS_NOT_THE_BOTTLENECK__LEARNING_MULTIPLIES_CHECKABILITY_AND_CHECKABILITY_IS_KNOWLEDGE__THE_DISCRIMINATING_INPUT_PAIR_IS_NOT_DERIVABLE_FROM_THE_ARTIFACT_FROM_REPETITION_OR_FROM_ANY_AMOUNT_OF_EXPERIENCE__AND_THIS_HAD_NEVER_BEEN_MEASURED_BY_CONSTRUCTION_ONLY_ARGUED",
+  "date": "2026-11-16",
+  "deleted_or_bypassed_paths": [
+    "keeping the first surviving reading (the frontier's notes-and-pick), which is right on the task and wrong off it",
+    "repeating the same execution as evidence, which changed the verdict on 0 of 7 actions",
+    "abstaining without a computation, which is what the frontier does at 59.5% paired accuracy",
+    "memorising an observation that no reading predicts instead of refusing it",
+    "counting a sufficiency verdict as independent of the stated grammar and the generated states"
+  ],
+  "expected_parent_change": "canonical/swe_kernel/checkability_by_differential_pin_v1.py, canonical/tests/test_checkability_by_differential_pin_v1.py, canonical/verification/CHECKABILITY_BY_DIFFERENTIAL_PIN_20261116_V1.json, THE_TERM_THAT_LEARNING_MULTIPLIES_20261116_V1.md",
+  "expected_parent_frontier_change": "THE_BOTTLENECK_HAS_A_MECHANISM_AND_A_NUMBER_INSTEAD_OF_A_SLOGAN__OF_19_REAL_COMMITS_THAT_SHIP_NO_TEST_13_CAN_BE_DRIVEN_THROUGH_THEIR_OWN_PUBLIC_SURFACE_AND_0_YIELD_A_STABLE_DIFFERENTIAL_PIN__THE_ARTIFACT_S_OWN_DOCTESTS_DISCRIMINATE_0_TIMES_BECAUSE_THEY_MOVE_WITH_THE_CODE__AND_A_FIRST_RUN_THAT_REPORTED_21_1_PERCENT_WAS_REFUTED_AS_A_MEMORY_ADDRESS_ARTEFACT_BEFORE_IT_REACHED_A_RECEIPT",
+  "explicit_user_authorization": [
+    "Is instant learning a complete solution for all computer use and the most advanced software engineering? What is real and what is not?",
+    "What is the single bottleneck that, if fixed, unlocks the most capability?",
+    "Own weights from scratch, every parameter calculated, an instant knowledge source, and the best part is no part.",
+    "Hardest real tests only, never synthetic; integrity real; no self-congratulation; merge once when complete."
+  ],
+  "falsification_condition": "FALSIFIED if any of the 14 tests fails, if a pin is counted without stability measured inside one interpreter, if object identity is part of any comparison, if an artefact number is reported as a result, if a doctest is claimed to discriminate when it passes at both states, or if the receipt's numbers differ from the committed --corpus command",
+  "generic_repair_from_single_probe": true,
+  "governance_change": false,
+  "highest_leverage_now": true,
+  "incremental_spend_usd": 0,
+  "intentional_route_race": false,
+  "load_bearing_primary": {
+    "constructive_gap_for_open_obligation_ids": [
+      "CODING_TB4_GE_66_4"
+    ],
+    "expected_obligation_discharge_lcb": 0,
+    "expected_obligation_unlock_lcb": "1/100",
+    "interpretation": "Speculative forecast only. The measured ceiling is reach: 18.7% with unlimited experience, 74% inside the grammar against 32% outside it. Growing reach by hand-written families buys exactly the named defect types and nothing else, so the forecast stays at 1/100 until witness inversion is measured against real bugs",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": "1/4",
+    "wall_clock_cost_ub": 1
+  },
+  "measured_effect": "40 real commits at both states; 21 shipped their own tests and 19 shipped none; 13 of the 19 could be driven through the module's own public surface and 0 yielded a stable differential pin (NO_DIFFERENCE_VISIBLE 13, NOTHING_PROBEABLE 6); the artifact's own doctests discriminate 0 times. The first run claimed 21.1% (4 of 19) and every one of those pins differed only by a generator's memory address -- refuted, and recorded as refuted. Convergent with 18/18 witness-inversion refusals, the 4.814% memorisable share, the 71.4% refuse share, arXiv 2607.18057's 27.0% changed-line coverage, and the 9.6% useful-test audit.",
+  "model_calls": 0,
+  "network_calls": 0,
+  "next_step": "CONSTRUCT_THE_DISCRIMINATING_INPUT_FROM_STATED_INTENT__THE_USER_S_SENTENCE_A_DEMONSTRATION_OR_THE_WITNESS_THE_FAILURE_SUPPLIES__THEN_LET_THE_EXISTING_EXACT_VERIFIER_AND_SEARCH_DO_THE_REST__IT_IS_THE_ONLY_LEVER_WHOSE_CEILING_HAS_NOT_ALREADY_BEEN_MEASURED",
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "paths": [
+    "canonical/swe_kernel/checkability_by_differential_pin_v1.py",
+    "canonical/tests/test_checkability_by_differential_pin_v1.py",
+    "canonical/verification/CHECKABILITY_BY_DIFFERENTIAL_PIN_20261116_V1.json",
+    "THE_TERM_THAT_LEARNING_MULTIPLIES_20261116_V1.md"
+  ],
+  "prior_work_reused": "EXPERT_FIX_REPETITION_SWEBENCH_VERIFIED (500 real tasks, 2178 real pieces, operator and provenance per piece), HUMANEVALFIX_REPAIR_SOLVER (100 real bugs, per-type outcomes), INSTANT_LEARNING_IN_A_NEW_ENVIRONMENT (4 real machines, adaptation and crossover), and the mutation grammar parsed live from python_test_guided_patch_search_v1. Nothing was re-run for a number; one number was recomputed independently as a cross-check and agreed to 30 pieces",
+  "probe_specific": false,
+  "recursive_obs": {
+    "canonical_base_commit": "6c942c524463b404cdb1b48dd6351c53fb0f184d",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "building another learner or another grammar (learning multiplies the smallest term)",
+      "unifying the disconnected learning stores (the tree's own named next step, whose ceiling is 4.814%)",
+      "probing with domain-aware inputs (that is the answer smuggled in through the back door)",
+      "comparing reprs without removing object identity (produced 4 false pins out of 4)",
+      "comparing across two processes and calling whatever differed 'unstable'",
+      "treating an agent's own doctests or its own written tests as independent verification"
+    ],
+    "expected_parent_frontier_change": "THE_BOTTLENECK_HAS_A_MECHANISM_AND_A_NUMBER_INSTEAD_OF_A_SLOGAN__OF_19_REAL_COMMITS_THAT_SHIP_NO_TEST_13_CAN_BE_DRIVEN_THROUGH_THEIR_OWN_PUBLIC_SURFACE_AND_0_YIELD_A_STABLE_DIFFERENTIAL_PIN__THE_ARTIFACT_S_OWN_DOCTESTS_DISCRIMINATE_0_TIMES_BECAUSE_THEY_MOVE_WITH_THE_CODE__AND_A_FIRST_RUN_THAT_REPORTED_21_1_PERCENT_WAS_REFUTED_AS_A_MEMORY_ADDRESS_ARTEFACT_BEFORE_IT_REACHED_A_RECEIPT",
+    "expected_parent_level_state_change": "THE_BOTTLENECK_HAS_A_MECHANISM_AND_A_NUMBER_INSTEAD_OF_A_SLOGAN__OF_19_REAL_COMMITS_THAT_SHIP_NO_TEST_13_CAN_BE_DRIVEN_THROUGH_THEIR_OWN_PUBLIC_SURFACE_AND_0_YIELD_A_STABLE_DIFFERENTIAL_PIN__THE_ARTIFACT_S_OWN_DOCTESTS_DISCRIMINATE_0_TIMES_BECAUSE_THEY_MOVE_WITH_THE_CODE__AND_A_FIRST_RUN_THAT_REPORTED_21_1_PERCENT_WAS_REFUTED_AS_A_MEMORY_ADDRESS_ARTEFACT_BEFORE_IT_REACHED_A_RECEIPT",
+    "independent_verification_required": true,
+    "iteration_limit": 1,
+    "obs_blocker": {
+      "delete_bypass_substitute_options": [
+        "delete the first-survivor rule as the unit of knowledge",
+        "bypass more search with a computed decision about whether more evidence exists",
+        "substitute the survivor set for a stored trajectory, and a refusal for a guess"
+      ],
+      "intrinsic_or_path_specific": "intrinsic: what a set of observations determines is a fact about the action and the observations, not about the learner. Either the survivors agree on the states in reach or they do not.",
+      "surviving_causal_blocker": "One execution leaves a set of readings that agree on the observed state. For real actions that set is larger than one (343 readings in the grammar here, median 1037 candidate programs in the tree's coding measurement), and the readings part company only on states the observation never touched -- which is why the failure is invisible exactly where it happens."
+    },
+    "obs_capability": {
+      "capability_work_deleted": [
+        "a second identifiability kernel",
+        "a confidence heuristic in place of a computed survivor set",
+        "a model to choose which reading is right"
+      ],
+      "existing_inherited_routes_checked": [
+        "canonical/runtime/finite_identifiability.py (version space, equivalence classes, minimax discriminator, explicit non-identifiability) -- imported unchanged",
+        "canonical/runtime/epistemic_closure_kernel_v1.py (decide only when all surviving worlds agree)",
+        "canonical/runtime/demonstration_version_space_v1.py (GUI readings; 13.05 of 32 survive one demonstration)",
+        "canonical/tools/identification_cost_in_a_real_space_v1.py (median 1037 survivors, 4 of 23 identified, 7 of 23 insufficient)",
+        "canonical/swe_kernel/repair_version_space_selection_v1.py (selection versus synthesis; majority vote wrong 3 of 5)"
+      ],
+      "external_existing_routes_checked": [
+        "Tycho (arXiv 2607.28287): does not maintain a version space; notes plus a pick",
+        "AgentAbstain (arXiv 2607.10059): abstention unsolved, best 59.5% paired",
+        "arXiv 2607.22430: excitation, on-policy accuracy versus counterfactual error",
+        "arXiv 2606.16576: agents identifying a hidden world model by queries, non-informative query rates"
+      ],
+      "surviving_gap": "A bridge from a real action in a real environment to the tree's own identifiability kernel, and the verdict it enables: act, ask once more at the named state, or refuse."
+    },
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "counting an execution as learning it",
+        "counting a refusal as a failure rather than as the correct answer off the vocabulary",
+        "quoting a survivor count as capability"
+      ],
+      "real_outcome": "The permanent object is the survivor set and the three-way rule; an execution is evidence, not knowledge, and the agent can say which of the three cases it is in before spending the next execution.",
+      "surviving_necessity": "Every capability question in this chain -- what the action does, which step consumed a fact, what the new step should be -- is hypothesis elimination by execution, and its limit is the vocabulary and the states generated, not the number of executions."
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": "The identifiability kernel, its equivalence classes and its minimax discriminator are reused unchanged; the grammar and the verdict add no authority.",
+      "downstream_work_to_delete_or_supersede": "Any roadmap step that proposes to store one description per demonstration, or to raise the number of repeats as a way of raising confidence.",
+      "fresh_reuse_plan": "Re-run the receipt's commands: real programs on PATH, a temporary directory, no corpus and no answer key."
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": "Reused the learned inline skill, the reach scanner and the run-in-a-copy runner; no second action library, no new oracle, no model.",
+      "search_stop_decision": "Stop at four independent samples (228 pairs); the per-sample staleness spread 45-58% already bounds the claim, and more samples buy precision, not a new fact."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "efficiency_mechanism": "Discovery costs one subprocess per (step, candidate path) and buys the difference between redoing 8 steps and redoing 14, or worse, redoing 1 wrong step and declaring the work repaired.",
+      "generality_mechanism": "The rule is not about tar: any step is a function of the state it can see, so perturbing a candidate and comparing the consequence yields its read set on a GUI, a database or a network service with the matching probe.",
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "Reading the read set off argv is wrong in both directions and fails 2 of 3 real chains; tracing requires infrastructure that does not exist here and annotates what must be discovered; asking a model is prohibited producer cognition; redoing everything works and costs 75% more, and does not tell the agent what to redo when the state is too large to rebuild.",
+      "routes_ranked": [
+        "discover the read set by one intervention per candidate path and replay only what moved (selected)",
+        "read the read set off the command line",
+        "instrument every program to emit a trace",
+        "redo every step from the beginning",
+        "ask a model which steps to redo"
+      ],
+      "white_box_harvest_note": "The canonical ladder was applied in order; WHITE_BOX_HARVEST was considered and found empty. No donor model, weight or external artifact was used: the rule is a counterfactual on the tree's own action environment."
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "oracle_paths": [
+        "canonical/verification/DEMONSTRATION_SUFFICIENCY_20261116_V1.json",
+        "canonical/tests/test_demonstration_sufficiency_v1.py",
+        "canonical/verification/CAPABILITY_LAW_20261116_V1.json"
+      ],
+      "synthetic_verification_necessity": "No synthetic case decides anything: every observation is a real subprocess on a real copy of a real state, and the refusal is produced by a real `sort -R` contradicting its own first execution."
+    },
+    "real_outcome": "40 real commits at both states; 21 shipped their own tests and 19 shipped none; 13 of the 19 could be driven through the module's own public surface and 0 yielded a stable differential pin (NO_DIFFERENCE_VISIBLE 13, NOTHING_PROBEABLE 6); the artifact's own doctests discriminate 0 times. The first run claimed 21.1% (4 of 19) and every one of those pins differed only by a generator's memory address -- refuted, and recorded as refuted. Convergent with 18/18 witness-inversion refusals, the 4.814% memorisable share, the 71.4% refuse share, arXiv 2607.18057's 27.0% changed-line coverage, and the 9.6% useful-test audit.",
+    "required_capability": "deciding, for real work, whether an independent mechanical postcondition exists at all -- and constructing one when the artifact already contains the discriminating input",
+    "route_frontier": {
+      "challenger_routes": [
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "none: ordering alone turns a correct composition into a broken file",
+            "CORRECTNESS": "a plan is a fact about one state; applied to another it is a guess",
+            "INCREMENTAL_COST": "zero to record, one silently damaged file to trust",
+            "RELIABILITY": "31.1% of applications damage the file without any error being raised",
+            "VERIFIABILITY": "only a postcondition check can tell, which is the selected route",
+            "WALL_CLOCK": "faster by one parse and one name scan per step"
+          },
+          "evidence": [
+            "106 of 228 matches (46.5%); 122 stale (53.5%)",
+            "71 of 228 produced a file that parses and still binds the removed name (31.1%)",
+            "all 106 matches had zero drift; 4 stale replays had zero drift as well",
+            "the operation itself stayed legal in 228 of 228 pairs, so the loss is addressing, not capability"
+          ],
+          "qualification_evidence": [
+            "canonical/verification/ACTION_REPLAY_UNDER_CHANGE_20261116_V1.json"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "REPLAY_THE_RECORDED_PLAN_WHEREVER_THE_ACTION_IS_NEEDED"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "none without the re-check",
+            "CORRECTNESS": "removes most staleness and admits the rest",
+            "INCREMENTAL_COST": "one hash per region",
+            "RELIABILITY": "strictly better than replay, strictly weaker than a postcondition check",
+            "VERIFIABILITY": "a filter, not a proof; the postcondition is the proof",
+            "WALL_CLOCK": "one hash per region, the cheapest possible filter"
+          },
+          "evidence": [
+            "118 of 122 stale replays had nonzero drift, so a region fingerprint removes most of them",
+            "4 stale replays had zero drift, so the fingerprint cannot be the licence"
+          ],
+          "qualification_evidence": [
+            "canonical/verification/ACTION_REPLAY_UNDER_CHANGE_20261116_V1.json"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "NON_DOMINATING",
+          "route": "FINGERPRINT_THE_TOUCHED_REGION_AND_REFUSE_STALE_REPLAYS"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "composition becomes available instead of accidental",
+            "CORRECTNESS": "the proof is re-run on the state in hand and the sentence is re-read after acting",
+            "INCREMENTAL_COST": "no model, no network, no store",
+            "RELIABILITY": "silent corruptions fall from 31.1% to 0 by construction",
+            "VERIFIABILITY": "reproducible from the receipt with one command and pinned by pytest",
+            "WALL_CLOCK": "one parse plus one name scan per application"
+          },
+          "evidence": [
+            "228 real two-step compositions in 62 files, four independent samples",
+            "the premise held after the change in 228 of 228 pairs, so re-deciding keeps both steps",
+            "a postcondition check costs one parse and one name scan and removes all 71 silent corruptions by construction"
+          ],
+          "qualification_evidence": [
+            "canonical/verification/ACTION_REPLAY_UNDER_CHANGE_20261116_V1.json"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "SELECTED",
+          "route": "MEASURE_THE_TERM_THAT_LEARNING_MULTIPLIES_BY_BUILDING_A_CONSTRUCTOR_THAT_ASKS_HOW_MUCH_UNGUARDED_REAL_WORK_ALREADY_HAS_A_POSTCONDITION_BUILDABLE_WITHOUT_THE_AUTHOR_S_TESTS_INTENT_OR_ANY_MODEL__DRIVE_THE_MODULES_OWN_PUBLIC_CALLABLES_AT_BOTH_STATES_THROUGH_AN_ALPHABET_OF_EMPTY_VALUES_PLUS_THE_MODULE_S_OWN_LITERALS__KEEP_ONLY_DIFFERENCES_STABLE_INSIDE_ONE_INTERPRETER_WITH_IDENTITY_REMOVED__AND_TEST_THE_ARTIFACT_S_OWN_DOCTESTS_AS_THE_SECOND_SPECIFICATION_SOURCE"
+        }
+      ],
+      "checked_at_utc": "2026-11-17T22:27:14Z",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "discovery_required": true,
+      "incumbent_route": "keep one description of what happened and act on it; abstain when unsure, with no computation of whether more evidence exists",
+      "max_age_hours": 24,
+      "negative_search_summary": "Four routes were refused on measurement: one-hypothesis learning (right on the task and wrong on 5 further states across 2 of 7 actions), repetition (0 of 7 verdicts changed), blind abstention (the frontier's 59.5% paired accuracy with act exceeding abstain by 21 points), and model-proposed repair (prohibited producer cognition). A second identifiability kernel was refused because `finite_identifiability` already implements filtering, equivalence classes and the minimax discriminator over an explicit table.",
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "do LLM agents know when not to act abstention benchmark 2026"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "explicit version space agent world model identification 2026"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "identifiability controlled world models action excitation counterfactual error"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "active automata learning LLM agents world model queries 2026"
+        }
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "route_preflight": {
+        "checked_at_utc": "2026-11-17T20:42:39Z"
+      },
+      "selected_route": "MEASURE_THE_TERM_THAT_LEARNING_MULTIPLIES_BY_BUILDING_A_CONSTRUCTOR_THAT_ASKS_HOW_MUCH_UNGUARDED_REAL_WORK_ALREADY_HAS_A_POSTCONDITION_BUILDABLE_WITHOUT_THE_AUTHOR_S_TESTS_INTENT_OR_ANY_MODEL__DRIVE_THE_MODULES_OWN_PUBLIC_CALLABLES_AT_BOTH_STATES_THROUGH_AN_ALPHABET_OF_EMPTY_VALUES_PLUS_THE_MODULE_S_OWN_LITERALS__KEEP_ONLY_DIFFERENCES_STABLE_INSIDE_ONE_INTERPRETER_WITH_IDENTITY_REMOVED__AND_TEST_THE_ARTIFACT_S_OWN_DOCTESTS_AS_THE_SECOND_SPECIFICATION_SOURCE",
+      "selected_route_preflight": {
+        "all_required_dependencies_ready": true,
+        "checked_at_utc": "2026-11-17T22:27:14Z",
+        "execution_dependencies": [
+          {
+            "dependency": "local Python 3.11 runtime; the pinned receipts under canonical/verification and the mutation grammar source",
+            "evidence": [
+              "the receipt recomputes from three pinned receipts plus the grammar parsed from python_test_guided_patch_search_v1; 11 tests ran; model calls 0, network calls 0"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "GLOBAL",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "scope": "GLOBAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          }
+        ],
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "max_age_hours": 2,
+        "selected_route": "MEASURE_THE_TERM_THAT_LEARNING_MULTIPLIES_BY_BUILDING_A_CONSTRUCTOR_THAT_ASKS_HOW_MUCH_UNGUARDED_REAL_WORK_ALREADY_HAS_A_POSTCONDITION_BUILDABLE_WITHOUT_THE_AUTHOR_S_TESTS_INTENT_OR_ANY_MODEL__DRIVE_THE_MODULES_OWN_PUBLIC_CALLABLES_AT_BOTH_STATES_THROUGH_AN_ALPHABET_OF_EMPTY_VALUES_PLUS_THE_MODULE_S_OWN_LITERALS__KEEP_ONLY_DIFFERENCES_STABLE_INSIDE_ONE_INTERPRETER_WITH_IDENTITY_REMOVED__AND_TEST_THE_ARTIFACT_S_OWN_DOCTESTS_AS_THE_SECOND_SPECIFICATION_SOURCE",
+        "status": "READY"
+      },
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/runtime/finite_identifiability.py",
+          "canonical/runtime/epistemic_closure_kernel_v1.py",
+          "canonical/runtime/demonstration_version_space_v1.py",
+          "canonical/tools/identification_cost_in_a_real_space_v1.py",
+          "canonical/swe_kernel/repair_version_space_selection_v1.py"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "https://arxiv.org/html/2606.31422 (EnvProbe: probing beliefs, not contracts)",
+          "https://arxiv.org/html/2609.26863v1 (SkillApt: load/abstain from counterfactual evidence)"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "https://github.com/jkoppel/QuixBugs (MIT; 40 buggy programs, 40 pytest files, JSON test data)",
+          "https://pypi.org/project/pytest (9.2.0, the runner every verdict goes through)"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "https://arxiv.org/html/2607.28287v1 (Tycho: active abstraction; does not maintain a version space)",
+          "https://arxiv.org/html/2607.10059 (AgentAbstain: 59.5% paired, act exceeds abstain by 21 points)",
+          "https://arxiv.org/html/2607.22430 (identifiability of controlled world models: excitation and counterfactual error)",
+          "https://arxiv.org/pdf/2606.16576v1 (agentic automata learning: non-informative query rates)"
+        ]
+      },
+      "stop_condition": "One merged change on this branch in which the sufficiency of a single execution is decided before the second execution -- act, ask once more at the state that splits the survivors, or refuse -- with the costs and the harm of not doing it measured on real actions, and with the frontier's alternative (keep one hypothesis, abstain without a computation) measured against it.",
+      "unresolved_plausible_dominators": [],
+      "why_selected_route_is_fastest_sufficient": "The kernel already exists; the missing piece is the grammar over a real state and the verdict, which costs no model and spends the fewest real executions.",
+      "why_this_is_not_another_organ": "One import, one grammar, one verdict. It deletes the first-survivor rule rather than adding a store beside it."
+    },
+    "route_race_id": null,
+    "routes_considered": [
+      {
+        "route": "another mutation grammar or a bigger edit vocabulary",
+        "rejected_because": "75.2% of real fix pieces are named by no vocabulary any other task produced; a bigger list buys the names you give it"
+      },
+      {
+        "route": "raise the memorisation rate (more experience, better store)",
+        "rejected_because": "memorisable is 4.814% of real fixes: it is the smallest factor in the product"
+      },
+      {
+        "route": "construct checkability from the artifact's own surface and literals",
+        "selected": true
+      }
+    ],
+    "selected_route": "KEEP_THE_SURVIVORS_OF_ONE_EXECUTION_AND_DECIDE_ACT_ASK_OR_REFUSE_FROM_WHAT_THEY_LEAVE_UNDETERMINED",
+    "selected_surviving_route": "MEASURE_THE_TERM_THAT_LEARNING_MULTIPLIES_BY_BUILDING_A_CONSTRUCTOR_THAT_ASKS_HOW_MUCH_UNGUARDED_REAL_WORK_ALREADY_HAS_A_POSTCONDITION_BUILDABLE_WITHOUT_THE_AUTHOR_S_TESTS_INTENT_OR_ANY_MODEL__DRIVE_THE_MODULES_OWN_PUBLIC_CALLABLES_AT_BOTH_STATES_THROUGH_AN_ALPHABET_OF_EMPTY_VALUES_PLUS_THE_MODULE_S_OWN_LITERALS__KEEP_ONLY_DIFFERENCES_STABLE_INSIDE_ONE_INTERPRETER_WITH_IDENTITY_REMOVED__AND_TEST_THE_ARTIFACT_S_OWN_DOCTESTS_AS_THE_SECOND_SPECIFICATION_SOURCE",
+    "selected_surviving_route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+    "stop_condition": "THE_CONSTRUCTOR_IS_BUILT_AND_PROVEN_ON_A_REAL_GIT_HISTORY_AND_THE_CORPUS_IS_COUNTED_WITH_EVERY_STATE_NAMED__STOP_WHEN_THE_RECORD_REPRODUCES_FROM_THE_COMMITTED_COMMAND",
+    "why_selected_route_is_fastest_sufficient": "because it is the only route that decides the multiplier empirically instead of asserting it, it reuses the tree's materialisation and environment seams unchanged, and it required no model, no parameters and no network at measurement time",
+    "why_this_is_not_another_organ": "It imports `finite_identifiability` unchanged and adds a grammar over the state plus a three-way verdict; it deletes the assumption that a demonstration is a point rather than a set."
+  },
+  "route_id": "KEEP_THE_SURVIVORS_OF_ONE_EXECUTION_AND_DECIDE_ACT_ASK_OR_REFUSE_FROM_WHAT_THEY_LEAVE_UNDETERMINED",
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "scope_complete_discharge": false,
+  "selected_route": "MEASURE_THE_TERM_THAT_LEARNING_MULTIPLIES_BY_BUILDING_A_CONSTRUCTOR_THAT_ASKS_HOW_MUCH_UNGUARDED_REAL_WORK_ALREADY_HAS_A_POSTCONDITION_BUILDABLE_WITHOUT_THE_AUTHOR_S_TESTS_INTENT_OR_ANY_MODEL__DRIVE_THE_MODULES_OWN_PUBLIC_CALLABLES_AT_BOTH_STATES_THROUGH_AN_ALPHABET_OF_EMPTY_VALUES_PLUS_THE_MODULE_S_OWN_LITERALS__KEEP_ONLY_DIFFERENCES_STABLE_INSIDE_ONE_INTERPRETER_WITH_IDENTITY_REMOVED__AND_TEST_THE_ARTIFACT_S_OWN_DOCTESTS_AS_THE_SECOND_SPECIFICATION_SOURCE",
+  "status": "PRODUCED",
+  "stop_condition": "THE_CONSTRUCTOR_IS_BUILT_AND_PROVEN_ON_A_REAL_GIT_HISTORY_AND_THE_CORPUS_IS_COUNTED_WITH_EVERY_STATE_NAMED__STOP_WHEN_THE_RECORD_REPRODUCES_FROM_THE_COMMITTED_COMMAND",
+  "terminal_credit_delta": 0,
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "truth": {
+    "false": [
+      "experience is the limiting term",
+      "one experience per action solves computer use",
+      "a new environment changes the ceiling",
+      "a retired benchmark measures the frontier"
+    ],
+    "p_correct": 0.2978,
+    "true": [
+      "consequence knowledge is solved and cheap",
+      "environment adaptation is a measured cost law",
+      "verification by execution is exact",
+      "search is effective exactly inside its grammar"
+    ]
+  },
+  "user_authorized_governance_change": false,
+  "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "checked_at_utc": "2026-11-17T22:27:14Z",
+    "currentness": {
+      "accepted_families": 5,
+      "meta_envelope_open_count": 8,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "terminal": false,
+      "total_open_truth_obligations": 30,
+      "unresolved_atomic": 22
+    },
+    "fresh_reality_authority": false,
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "It measures whether one execution identifies an action and what to do when it does not; it discharges no truth obligation.",
+    "target_truth_obligations": [
+      "CODING_TB4_GE_66_4"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "counterexample_receipts": [],
+      "decisive_question": "After one real execution, does the agent know the action -- and can it tell, before spending the second execution, that it does not?",
+      "falsifier_id": "ONE_EXECUTION_LEAVES_SURVIVORS_THAT_DIFFER_ONLY_OFF_THE_TASK_AND_REPETITION_DOES_NOT_SHRINK_THEM",
+      "known_counterexamples_checked": true,
+      "no_known_counterexample_reason": "sort and sort -u both survive a duplicate-free list and part company on the first duplicate (5 further states across 2 actions); repeating the same execution changed 0 of 7 verdicts; sort -R looked identified (7 survivors) and was contradicted by the second execution.",
+      "proposal_id": "DEMONSTRATION_SUFFICIENCY_20261116_V1"
+    }
+  },
+  "verification": ".venv/bin/python -m pytest canonical/tests/test_checkability_by_differential_pin_v1.py -q; .venv/bin/python canonical/swe_kernel/checkability_by_differential_pin_v1.py --corpus --limit 40 --json canonical/verification/CHECKABILITY_BY_DIFFERENTIAL_PIN_20261116_V1.json",
+  "weakens_existing_guard": false,
+  "action_summary": "Measures the term that instant learning multiplies: checkability, the share of real work for which an independent mechanical postcondition exists at all. Builds a constructor that drives every public callable of a real commit's touched modules at both the parent and the fixed state through an alphabet of empty values plus the module's own literals, keeps only differences stable inside one interpreter with identity removed, and tests the artifact's own doctests as a second specification source. 40 real commits: 21 arrive with a specification, 19 do not, 13 are drivable, 0 convert, and doctests discriminate 0 times."
+}
