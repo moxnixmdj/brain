@@ -82,6 +82,14 @@ irreducible information from a user; an excellent verifier alone cannot invent t
   in a page. The related MiniWoB measurement is bounded, not evidence of universal page
   understanding. `canonical/swe_kernel/weight_update_admission_v1.py` already supplies an
   admission gate for any future weight experiment; no update is justified by storage alone.
+- `canonical/runtime/harbor_brain_agent.py` is an existing Harbor adapter, but its planner
+  calls `astra_runtime._planner_post` and explicitly reports one model dependency: it is not
+  an acceptable zero-external-model agent for the owner's requirement. A different existing
+  adapter, `harbor_science_zero_model_agent_v1.py`, calls a bounded deterministic science
+  kernel and requires task/attempt bindings; its scope is not arbitrary software repair.
+  Its command string policy is not an OS security boundary. `brain_unified_model_v1.py`
+  exposes `recall` over the compiled index, but the code itself says it has no trained neural
+  weights; neither an index nor an adapter alone demonstrates broad reasoning capability.
 
 ## Corrections on three specific claims
 
@@ -92,11 +100,20 @@ irreducible information from a user; an excellent verifier alone cannot invent t
   or every kind of repeated experiment is incapable of learning. Its real-repair witness
   contains two successes and two failures; its separate filename-sensor case illustrates
   an actual missing distinction. The certificate's own probe has the precise theorem.
-- **~2.2% replay:** some tree reports present this as a measured SWE-bench Verified
-  result, but `THE_VERIFIED_INDEX_IS_THE_BOTTLENECK_20261116_V2.md` identifies it as an
-  owner-supplied premise. This review did not find an underlying reproducible experiment
-  establishing the figure. Do not use it as a measured capability or universal replay
-  ceiling. The qualitative distinction between replay and synthesis does not depend on it.
+- **~2.2% replay — correction to this report and my earlier response:** a further search
+  found `canonical/verification/EXPERT_FIX_REPETITION_SWEBENCH_VERIFIED_20261112_V1.json`
+  and its producer `canonical/tools/expert_fix_repetition_measure_v1.py`. The receipt reports
+  **11/500 = 2.2%** of tasks where the particular `edit_kind_learning_v1` learner could
+  generate every counted Python piece of the expert fix using operators learned from the
+  *other 499* fixes. This is a producer-run historical analysis, not independently rerun.
+  It supplied the target location, treated other edit pieces as already made, allowed lessons
+  from later PRs, counted an expert edit among as many as 300 candidates, and omitted non-Python
+  changes in 241 tasks. No task was solved and no task test was run. Different correct edits
+  and richer memories were not measured; it is **not** a 2.2% repair rate or a universal
+  upper bound on replay. My earlier statement that I had not found underlying evidence was
+  incorrect; `THE_VERIFIED_INDEX_IS_THE_BOTTLENECK_20261116_V2.md` also treated the figure as
+  an owner-supplied premise. The distinction between replay and synthesis remains valid, but
+  the numerical finding must carry this narrower interpretation.
 - **Missing object-suite observables:** `repair_where_the_suite_is_the_observable_v1.py`
   already tries the corpus's test file as an observable for the nine non-JSON tasks; its
   receipt reports zero repairs, six with no screen survivor and three with collection
@@ -134,6 +151,13 @@ irreducible information from a user; an excellent verifier alone cannot invent t
   [harness](https://github.com/TokenWave-AI/swe-cowork-bench) describes container images,
   an eight-hour budget per task, and LLM-simulated colleagues; compatibility with the user's
   policy and a local independent evaluation is not established.
+- [SWE-Marathon](https://arxiv.org/html/2606.07682v1) is a candidate harder evaluation: its
+  20 project-scale tasks use Harbor, task-specific Docker environments and multi-layer
+  verification. The paper's reported setup uses Modal, and some tasks use a model-based judge;
+  the [project's setup](https://github.com/abundant-ai/swe-marathon) names an API key and Modal
+  account. Those instructions do not prove an own-agent, model-free, independently separated
+  run is impossible, but that configuration is not available or validated here. Selecting a
+  task whose mandatory adjudication violates the owner's constraints would be invalid.
 - [METR's maintainer study](https://metr.org/notes/2026-03-10-many-swe-bench-passing-prs-would-not-be-merged-into-main/)
   reports that roughly half of sampled test-passing patches from agents studied would not
   be merged, subject to its sample and review assumptions; agents did not get to iterate.
