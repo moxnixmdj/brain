@@ -31228,7 +31228,7 @@
   "engines": 26,
   "knowledge_documents": 488,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6941,
+  "research_index_records": 6942,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 451,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "cbe66f770e8d56b8dc2b67c135914d1e1f6755e71607f3d0184799980705f778"
+  "value": "8aebf45618106cda9bd1ca7ceb3a19d1a5c754cee89a5c88bdbc0ad6f14b979f"
  },
  "engines": [
   {
@@ -244076,6 +244076,51 @@
     "quotient": 2,
     "read": 2,
     "side": 2
+   }
+  },
+  {
+   "action_id": "THE_INDEX_BUYS_COST_NOT_FEASIBILITY_20261116_V1",
+   "capability": false,
+   "date": "2026-11-16",
+   "id": "research:canonical/action_intents/THE_INDEX_BUYS_COST_NOT_FEASIBILITY_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/THE_INDEX_BUYS_COST_NOT_FEASIBILITY_20261116_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+   "sha256": "f1159ee9dbfb2acc66a7d013f8ce246ad7fefb32e6a41cc642e5886a4d3d6452",
+   "status": "PROPOSED__ZERO_CREDIT__NO_TERMINAL_CLAIM",
+   "terms": {
+    "20261116": 1,
+    "action": 1,
+    "admits": 1,
+    "aimed": 1,
+    "all": 1,
+    "already": 1,
+    "buys": 1,
+    "contain": 1,
+    "cost": 1,
+    "demote_the_index_from_single_bottleneck_because_at_an_adequate_search_budget_every_satisfiable_instance_is_solved_by_at_least_four_of_five_strategies_and_a_perfect_index_buys_cost_not_feasibility": 1,
+    "feasibility": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "goal": 1,
+    "index": 2,
+    "learned": 1,
+    "model_v1.py": 1,
+    "names": 1,
+    "next": 1,
+    "not": 2,
+    "object": 1,
+    "over": 1,
+    "own": 1,
+    "proposed__zero_credit__no_terminal_claim": 1,
+    "rather": 1,
+    "state": 2,
+    "strategies": 1,
+    "than": 1,
+    "the_index_buys_cost_not_feasibility_20261116_v1": 1,
+    "the_tree_named_the_index_as_the_single_bottleneck_but_a_perfect_index_is_worth_17.4_percent_of_act_calls_and_zero_of_feasibility_while_29879_of_39879_act_calls_are_spent_finding_a_plan_of_mean_length_3.2": 1,
+    "tree": 1,
+    "v1": 1,
+    "work": 2
    }
   },
   {
