@@ -535,7 +535,7 @@
        "DIRECT_PROBE"
       ],
       "evidence_scope": "GLOBAL",
-      "kind": "REPOSITORY_ARTIFACT",
+      "kind": "STORAGE",
       "observed_at_utc": "2026-11-17T02:48:38Z",
       "required": false,
       "scope": "GLOBAL",
