@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 525,
+  "knowledge_documents": 526,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 7023,
+  "research_index_records": 7025,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 452,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "46cc6dcfc7e40ac07777acf8ccd985ccc2ae53f2de384eee342e30fd41ba0229"
+  "value": "2fe718b6e976f52c1222ccaf01469d57e90000a051f906e378968fbedaa873a4"
  },
  "engines": [
   {
@@ -64167,6 +64167,82 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 8567,
+   "headings": [
+    "The environment is the answer to its own question",
+    "The question you are asking, stated as a testable claim",
+    "What was built",
+    "The measurement, on round 6's denominator",
+    "Why this is not a metric artifact — three checks",
+    "What is still refused, by name",
+    "The honest answer to \"so is everything solved?\"",
+    "What is real, what is not, and the smartest next thing",
+    "Where the series stands"
+   ],
+   "kind": "DOCUMENT",
+   "path": "THE_ENVIRONMENT_IS_THE_ANSWER_TO_ITS_OWN_QUESTION_20261116_V1.md",
+   "sha256": "baabb333d637cb220778c235a1298390d47a307ab58ad7dab3245a9ce99cfd1a",
+   "summary": "*Round 8. 2026-11-16. Branch `arena/006395f8-brain`, base `f79f9566`.*",
+   "terms": {
+    "11": 3,
+    "13": 3,
+    "2.4": 3,
+    "2026": 3,
+    "22": 4,
+    "28": 5,
+    "38": 4,
+    "47": 3,
+    "73.7": 4,
+    "78.6": 4,
+    "82": 4,
+    "about": 3,
+    "action": 6,
+    "actions": 12,
+    "all": 4,
+    "arguments": 3,
+    "arity": 5,
+    "because": 5,
+    "both": 5,
+    "call": 5,
+    "claim": 4,
+    "class": 3,
+    "computer": 3,
+    "environment": 14,
+    "every": 3,
+    "evidence": 4,
+    "exact": 3,
+    "exactly": 3,
+    "execution": 5,
+    "exposure": 5,
+    "model": 8,
+    "move": 6,
+    "never": 8,
+    "no": 10,
+    "not": 15,
+    "object": 4,
+    "one": 4,
+    "only": 4,
+    "own": 10,
+    "previously": 4,
+    "reached": 4,
+    "real": 11,
+    "release": 8,
+    "round": 20,
+    "same": 8,
+    "still": 4,
+    "tests": 4,
+    "wall": 4
+   },
+   "title": "The environment is the answer to its own question",
+   "title_terms": [
+    "answer",
+    "environment",
+    "own",
+    "question"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 9623,
    "headings": [
     "The first advanced action to build is the judge — measured on this tree's own test generator",
@@ -85921,10 +85997,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1327,
+  "included_source_count": 1328,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "69643ed5921172ca288b3b8b6b7df8ca7f7de05ef6f418a6c4b48e4ab608bfac"
+  "source_tree_digest": "7d1da14f62b92c64ba53503d5191ef66ec8b377bb4ef2935f36f19cfc8430c96"
  },
  "research_index": [
   {
@@ -202810,6 +202886,23 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "2026-11-16",
+   "id": "research:canonical/verification/SCENARIO_OBSERVATION_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/SCENARIO_OBSERVATION_20261116_V1.json",
+   "schema": "BRAIN_SCENARIO_OBSERVATION_V1",
+   "sha256": "2ed5e25a9cd3845b955c0911d7949feb9d420e44549fccf3b6b510e6c59204a9",
+   "status": "",
+   "terms": {
+    "20261116": 1,
+    "observation": 1,
+    "scenario": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-09",
    "id": "research:canonical/verification/SCIENCE_CANDIDATE_LOCAL_REJECTION_VERIFY_20261009_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -246084,6 +246177,29 @@
     "tree": 3,
     "unittest": 3,
     "v1": 2
+   }
+  },
+  {
+   "action_id": "SCENARIO_OBSERVATION_20261116_V1",
+   "capability": false,
+   "date": "2026-11-16",
+   "id": "research:canonical/action_intents/SCENARIO_OBSERVATION_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/SCENARIO_OBSERVATION_20261116_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "16d83b4d948a5e9044476aa879ab90db6085d4bd4414b33c7aba4fc88f0c4c90",
+   "status": "PRODUCED",
+   "terms": {
+    "20261116": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "observation": 1,
+    "produced": 1,
+    "round_7_proved_the_environment_s_text_cannot_construct_its_own_arguments__1_of_41__because_a_call_site_passes_objects_and_text_only_proves_expressions__so_the_only_construction_that_is_guaranteed_real_is_the_environment_s_own_execution_and_the_missing_organ_was_observation_by_running_the_environment_s_own_scenarios_not_by_inventing_arguments": 1,
+    "run_the_environment_s_own_test_suite_under_a_recording_tracer_and_observe_every_call_into_the_package_as_returned_with_a_normalised_digest_or_raised_with_the_exception_name__requireing_two_agreeing_runs_at_the_old_revision_and_recording_both_sides_of_every_move_at_the_new_one": 1,
+    "scenario": 1,
+    "scenario_observation_20261116_v1": 1,
+    "the_third_manufacturability_route_is_closed_by_measurement_with_a_proven_instrument__40_real_commits_188_confirmed_laws_0_kills_and_174_of_the_laws_are_bare_totality__the_cause_is_named_real_work_extends_a_specification_instead_of_violating_a_property__so_the_next_organ_must_compile_intent_into_the_discriminating_pair_rather_than_derive_it_from_the_artifact": 1,
+    "v1": 1
    }
   },
   {
