@@ -214,3 +214,46 @@ def test_the_witness_is_not_the_demand():
     assert demand.assert_form("assert f(2) == 3\n", 1) == ("compare", None)
     assert demand.assert_form("assert flag\n", 1) == ("truthy", None)
     assert demand.assert_form("x = 1\n", 1) == ("unknown", None)
+
+
+def test_the_live_set_is_counted_at_every_contrast_depth():
+    """|S_k| counts the candidates that satisfy the first k contrasts; |S_0| is one trace's live set.
+
+    The real rows measured 6,924 and 21,051 candidates admitting the single demanded value, and 154,157
+    offered. The arithmetic of the count is what must not be wrong, so it is pinned here directly.
+    """
+    masks = {0b000: 5, 0b001: 3, 0b011: 2, 0b111: 1}
+    assert demand.survivors_at(masks, 0) == 11
+    assert demand.survivors_at(masks, 1) == 6
+    assert demand.survivors_at(masks, 2) == 3
+    assert demand.survivors_at(masks, 3) == 1
+    assert demand.survivors_at(masks, 4) == 0  # no candidate survives a contrast it never met
+
+
+def test_the_identify_curve_never_increases():
+    """More observation can only remove candidates; a curve that rises is a counting defect."""
+    depths = {0: 900, 1: 60, 2: 7, 5: 1}
+    curve = demand.contraction(depths, 5)
+    assert curve[0] == 968
+    assert curve[1] == 68
+    assert curve[2] == 8
+    assert curve[3] == 1
+    assert curve[5] == 1
+    assert [curve[k] for k in range(6)] == sorted((curve[k] for k in range(6)), reverse=True)
+
+
+def test_explore_reports_the_ambiguity_of_the_gate(tmp_path):
+    """The receipt must carry how many DISTINCT rules the suite accepts, or the ambiguity is invisible."""
+    repo, sha = _repo(tmp_path, "def twice(x):\n    return x + 1\n", TWO_DEMANDS)
+    entry = {"repo": "fixture", "commit": sha, "sources": ["src/m.py"], "test": "tests/test_m.py",
+             "repo_path": str(repo)}
+    result = demand.explore(repo, entry, cap=20_000, survivors_cap=8, verifications=6, seconds=120,
+                            count_contrasts=True, identify_curve=True)
+    assert isinstance(result.get("greens"), list)
+    assert result.get("green_count") == len(result["greens"])
+    contrast = result.get("contrast") or {}
+    assert sum((contrast.get("masks") or {}).values()) == contrast.get("admissible", 0)
+    curve = result.get("identify_curve") or {}
+    if curve:
+        values = [curve["curve"][str(k)] for k in range(curve["observations"] + 1)]
+        assert values == sorted(values, reverse=True)
