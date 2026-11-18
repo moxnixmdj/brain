@@ -69,6 +69,7 @@ HOOK = "__brain_force__"
 TICK = "__brain_tick__"
 MAX_LOOP_TURNS = 200_000   # a loop that will not end is not a wrong answer, and must not become a hang
 SECONDS = 0.5   # kept for callers that still pass a per-run budget
+BUDGET_PER_SITE = 4000  # candidates offered per site; generation stops earlier if the deadline hits
 
 
 class _Timeout(Exception):
@@ -265,13 +266,22 @@ def context_at(source: str, function_name: str, args: Sequence[Any], line: int,
 
 
 def expressions_at(site_text: str, context: dict[str, Any], source: str, function_name: str,
-                   budget: int = 400, deadline: float | None = None) -> list[tuple[str, Any]]:
+                   budget: int = 900, deadline: float | None = None) -> list[tuple[str, Any]]:
     """Expressions the site could be, smallest first, each with the value it would produce here.
 
-    The grammar is Python's; the material is what is already in scope at the site. Candidates are
-    deduplicated by *text only*: two expressions that agree on this single state can disagree on the
-    next iteration or the next case, and dropping the larger one hides exactly the fixes that a state
-    cannot tell apart. Asking is cheap (~50 us a run), so the budget is spent on asking, not guessing.
+    The material is the site's own operands and the names in scope; the grammar is Python's. Two rules
+    decide whether a fix is reachable at all, and both were once wrong:
+
+    1. MATERIAL IS ATOMS, NOT SHORT STRINGS. `length`, `longest`, `coins` are atoms. An earlier version
+       admitted only terms whose *text* was <= 3 characters, so every local with a longer name could be
+       tested alone and never combined: `max(longest, length + 1)` was unreachable while all three of
+       its pieces were present at the site.
+    2. THE POOL IS CUMULATIVE. `max(longest, X)` combines an atom with a composite, so the atoms have to
+       still be there at the level the composite appears. An earlier version replaced the pool with each
+       level's output, which made that combination impossible by construction.
+
+    `budget` bounds how many candidates are offered; `deadline` bounds the generation itself, so one
+    site cannot eat a task's whole allowance enumerating a space nobody asked about.
     """
     contexts = [{"locals": context["locals"], "globals": context.get("globals") or {},
                  "observed": None, "case": 0}]
@@ -288,35 +298,53 @@ def expressions_at(site_text: str, context: dict[str, Any], source: str, functio
     seen: set[str] = set()
 
     def offer(text: str) -> bool:
-        if function_name + "(" in text:
+        """Record a candidate. True means the budget is full and generation should stop."""
+        if text in seen or function_name + "(" in text:
             return False
-        if text in seen:
-            return False
+        seen.add(text)
         values = _evaluate_all(text, contexts, namespace)
         if values is None:
             return False
-        seen.add(text)
         asked.append((text, values[0]))
         return len(asked) >= budget
 
-    frontier: list[str] = []
-    for text in base_terms(source, function_name, site_text, contexts):
-        if offer(text) and len(asked) >= budget:
+    terms = base_terms(source, function_name, site_text, contexts)
+    for text in terms:
+        if offer(text):
             return asked
-        if len(text) <= 3:
-            frontier.append(text)
-    while frontier and len(asked) < budget:
-        candidates = frontier[:60]
+    # THE MATERIAL OF A REPAIR IS THE SITE ITSELF. A fix is nearly always a modification of what is
+    # there -- a guard around it (`max(longest, length + 1)`), a rename of its parts (`perm[i] < perm[j]`),
+    # a conjunct added to it (`total < 0 or not coins`). So the site's own sub-expressions are material
+    # first, smallest first, and the names and constants in scope come after them.
+    site_parts: list[str] = []
+    try:
+        for node in ast.walk(ast.parse(site_text, mode="eval").body):
+            if isinstance(node, ast.expr):
+                text = ast.unparse(node)
+                # The site itself is material too: `max(longest, length + 1)` is an ATOM WRAPPED AROUND
+                # THE SITE, and excluding the site from its own pool makes that unwritable. It is never
+                # offered as its own answer (the caller skips it); it is offered as an operand.
+                if _size(text) > 1 and text in terms and text not in site_parts:
+                    site_parts.append(text)
+    except SyntaxError:
+        site_parts = []
+    site_parts.sort(key=_size)
+    atoms = [text for text in terms if _size(text) == 1]
+    pool: list[str] = list(dict.fromkeys(site_parts + atoms))
+    if not pool:
+        return asked
+    generation_cap = max(budget * 3, 1200)
+    while pool and len(asked) < generation_cap:
         produced: list[str] = []
         stop = False
-        for left in candidates:
-            for right in candidates:
+        for left in pool[:64]:
+            for right in pool[:64]:
                 if deadline is not None and time.time() > deadline:
                     return asked
                 for text in _combinations(left, right, function_name):
                     if _size(text) > MAX_NODES:
                         continue
-                    if offer(text) and len(asked) >= budget:
+                    if offer(text):
                         stop = True
                         break
                     produced.append(text)
@@ -324,10 +352,9 @@ def expressions_at(site_text: str, context: dict[str, Any], source: str, functio
                     break
             if stop:
                 break
-        if not produced:
+        if stop or not produced:
             break
-        produced.sort(key=_size)
-        frontier = produced[:80]
+        pool = sorted(dict.fromkeys(pool + produced), key=_size)[:160]
     return asked
 
 
@@ -410,8 +437,11 @@ def solve_task(root: pathlib.Path, name: str, *, verify_timeout: int = 180,
             current = None
         ordered = expressions_at(site["text"], state, source, function_name,
                                  deadline=started + deadline_seconds)
-        ordered.sort(key=lambda item: (_same(item[1], current), _size(item[0])))
-        for expression, value in ordered:
+        # Smallest first: the smallest expression that makes the case pass is the edit a person would
+        # write. 'Differs from the value already there' is only a tie-break, because a state cannot tell
+        # a fix from an accident (the fix for lis agrees with the buggy value on the first iteration).
+        ordered.sort(key=lambda item: (_size(item[0]), _same(item[1], current)))
+        for expression, value in ordered[:BUDGET_PER_SITE]:
             if time.time() - started > deadline_seconds:
                 timed_out = True
                 break
@@ -419,7 +449,9 @@ def solve_task(root: pathlib.Path, name: str, *, verify_timeout: int = 180,
                 continue
             questions += 1
             fits_every_case = True
-            for other_args, other_expected in cases:
+            # The failing case first: it rejects almost every candidate, and it is the one that is wrong.
+            for other_args, other_expected in [cases[index]] + [c for i, c in enumerate(cases)
+                                                                if i != index]:
                 ran, got = run_case(instrumented, function_name, other_args,
                                     forced={site["index"]: expression})
                 if not ran or not case_passes(got, other_expected, normalisation, other_args):
