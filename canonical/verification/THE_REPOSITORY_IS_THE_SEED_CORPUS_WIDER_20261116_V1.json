@@ -1,0 +1,484 @@
+{
+ "authority": "NONE -- sandbox measurement, not independent verification",
+ "model_calls": 0,
+ "network_calls": 0,
+ "rows": [
+  {
+   "documents": 33,
+   "lines_the_suite_executes": 98,
+   "parts": [
+    {
+     "corpus": {},
+     "documents": 33,
+     "part_head": "default_digest_method: t.Any = staticmethod(_lazy_sha1)",
+     "seeded": {
+      "by_mutation": null,
+      "by_operand": null,
+      "state": "REFUSED__NO_SEED"
+     },
+     "seeded_wide": {
+      "by_mutation": null,
+      "by_operand": null,
+      "state": "REFUSED__NO_SEED"
+     },
+     "seeds": 0,
+     "the_suite_executes_the_change": true,
+     "tiny": {
+      "assertion": null,
+      "by_mutation": "REFUSED__NO_SEED",
+      "by_operand": "REFUSED__NO_SEED",
+      "state": "REFUSED__NO_SEED"
+     }
+    }
+   ],
+   "pinned_same_budget": 0,
+   "pinned_tiny": 0,
+   "pinned_wide_budget": 0,
+   "repo": "pallets/itsdangerous",
+   "sha": "7f4dcf83a07bb3d53f4e0e65ef1b43327b4cca90",
+   "source": "src/itsdangerous/signer.py",
+   "state": "NOT_REACHED",
+   "tiny_seeds": 0,
+   "unpinned_parts": 1
+  },
+  {
+   "documents": 400,
+   "lines_the_suite_executes": 532,
+   "parts": [],
+   "pinned_same_budget": 0,
+   "pinned_tiny": 0,
+   "pinned_wide_budget": 0,
+   "repo": "pypa/packaging",
+   "sha": "022ae6c6fe5c2ef9615875d0ecfab1ae4024720f",
+   "source": "src/packaging/metadata.py",
+   "state": "FULLY_PINNED",
+   "tiny_seeds": 12,
+   "unpinned_parts": 0
+  },
+  {
+   "documents": 400,
+   "lines_the_suite_executes": 86,
+   "parts": [],
+   "pinned_same_budget": 0,
+   "pinned_tiny": 0,
+   "pinned_wide_budget": 0,
+   "repo": "pypa/packaging",
+   "sha": "258202ed7f796bdb8a65252a66c3fbd3e69e97f6",
+   "source": "src/packaging/utils.py",
+   "state": "FULLY_PINNED",
+   "tiny_seeds": 3,
+   "unpinned_parts": 0
+  },
+  {
+   "documents": 400,
+   "lines_the_suite_executes": 133,
+   "parts": [],
+   "pinned_same_budget": 0,
+   "pinned_tiny": 0,
+   "pinned_wide_budget": 0,
+   "repo": "pypa/packaging",
+   "sha": "349abfad0688f42eb835ed8a10380d6cbf6940e7",
+   "source": "src/packaging/dependency_groups.py",
+   "state": "FULLY_PINNED",
+   "tiny_seeds": 1,
+   "unpinned_parts": 0
+  },
+  {
+   "documents": 400,
+   "lines_the_suite_executes": 503,
+   "parts": [],
+   "pinned_same_budget": 0,
+   "pinned_tiny": 0,
+   "pinned_wide_budget": 0,
+   "repo": "pypa/packaging",
+   "sha": "553582d9162c761e4ab97ccc6cea43ac14ff2a8b",
+   "source": "src/packaging/metadata.py",
+   "state": "FULLY_PINNED",
+   "tiny_seeds": 12,
+   "unpinned_parts": 0
+  },
+  {
+   "documents": 400,
+   "lines_the_suite_executes": 103,
+   "parts": [],
+   "pinned_same_budget": 0,
+   "pinned_tiny": 0,
+   "pinned_wide_budget": 0,
+   "repo": "pypa/packaging",
+   "sha": "84833cc16be84bc7f1d9f64e2818afe0dd48aade",
+   "source": "src/packaging/utils.py",
+   "state": "FULLY_PINNED",
+   "tiny_seeds": 6,
+   "unpinned_parts": 0
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "9f5249fba27e63745cc9a6bc3f2a7b8f47220a8f",
+   "source": "src/packaging/metadata.py",
+   "state": "REFUSED__CONTROL_BROKEN"
+  },
+  {
+   "documents": 400,
+   "lines_the_suite_executes": 473,
+   "parts": [],
+   "pinned_same_budget": 0,
+   "pinned_tiny": 0,
+   "pinned_wide_budget": 0,
+   "repo": "pypa/packaging",
+   "sha": "b80e6eb0a6c0f61dcaa9b1587f3aab370263dc65",
+   "source": "src/packaging/pylock.py",
+   "state": "FULLY_PINNED",
+   "tiny_seeds": 12,
+   "unpinned_parts": 0
+  },
+  {
+   "documents": 400,
+   "lines_the_suite_executes": 93,
+   "parts": [
+    {
+     "corpus": {
+      "candidates": 400,
+      "executions": 400,
+      "kept": 2,
+      "lines_covered": 23
+     },
+     "documents": 400,
+     "part_head": "elif isinstance(state, dict) and state.keys() >= set(self.__slots__):",
+     "seeded": {
+      "assertion": null,
+      "by_mutation": "NOT_REACHED",
+      "by_operand": "REFUSED__NO_EXECUTED_COMPARISON_TO_READ",
+      "state": "NOT_REACHED"
+     },
+     "seeded_wide": {
+      "assertion": null,
+      "by_mutation": "NOT_REACHED",
+      "by_operand": "REFUSED__NO_EXECUTED_COMPARISON_TO_READ",
+      "state": "NOT_REACHED"
+     },
+     "seeds": 7,
+     "the_suite_executes_the_change": true,
+     "tiny": {
+      "assertion": null,
+      "by_mutation": "NOT_REACHED",
+      "by_operand": "REFUSED__NO_EXECUTED_COMPARISON_TO_READ",
+      "state": "NOT_REACHED"
+     }
+    }
+   ],
+   "pinned_same_budget": 0,
+   "pinned_tiny": 0,
+   "pinned_wide_budget": 0,
+   "repo": "pypa/packaging",
+   "sha": "d5fedc90bba333ed0962ba5dfb7072d38f2c1d84",
+   "source": "src/packaging/requirements.py",
+   "state": "NOT_REACHED",
+   "tiny_seeds": 5,
+   "unpinned_parts": 1
+  },
+  {
+   "documents": 400,
+   "lines_the_suite_executes": 500,
+   "parts": [],
+   "pinned_same_budget": 0,
+   "pinned_tiny": 0,
+   "pinned_wide_budget": 0,
+   "repo": "hukkin/tomli",
+   "sha": "12314bde5b89a8bdc32de7403a2a4cf786187bbc",
+   "source": "src/tomli/_parser.py",
+   "state": "FULLY_PINNED",
+   "tiny_seeds": 0,
+   "unpinned_parts": 0
+  },
+  {
+   "documents": 400,
+   "lines_the_suite_executes": 279,
+   "parts": [],
+   "pinned_same_budget": 0,
+   "pinned_tiny": 0,
+   "pinned_wide_budget": 0,
+   "repo": "hukkin/tomli",
+   "sha": "1e6e869aa9dbbddc492608944e82d9ad5397280f",
+   "source": "src/tomli/_parser.py",
+   "state": "FULLY_PINNED",
+   "tiny_seeds": 6,
+   "unpinned_parts": 0
+  },
+  {
+   "documents": 400,
+   "lines_the_suite_executes": 498,
+   "parts": [],
+   "pinned_same_budget": 0,
+   "pinned_tiny": 0,
+   "pinned_wide_budget": 0,
+   "repo": "hukkin/tomli",
+   "sha": "2a2aa62f1bc71b89b74d41dd2ab67b5dd24bc129",
+   "source": "src/tomli/_parser.py",
+   "state": "FULLY_PINNED",
+   "tiny_seeds": 0,
+   "unpinned_parts": 0
+  },
+  {
+   "documents": 400,
+   "lines_the_suite_executes": 174,
+   "parts": [
+    {
+     "corpus": {
+      "candidates": 400,
+      "executions": 400,
+      "kept": 40,
+      "lines_covered": 377
+     },
+     "documents": 400,
+     "part_head": "raise suffixed_err(src, new_pos, f\"Expected {expect!r}\") from None",
+     "seeded": {
+      "assertion": null,
+      "by_mutation": "NOT_REACHED",
+      "by_operand": "REFUSED__NO_EXECUTED_COMPARISON_TO_READ",
+      "state": "NOT_REACHED"
+     },
+     "seeded_wide": {
+      "assertion": null,
+      "by_mutation": "NOT_REACHED",
+      "by_operand": "REFUSED__NO_EXECUTED_COMPARISON_TO_READ",
+      "state": "NOT_REACHED"
+     },
+     "seeds": 46,
+     "the_suite_executes_the_change": false,
+     "tiny": {
+      "assertion": "with pytest.raises(_exc('TOMLDecodeError'), match=re.escape('Expected \"\\'\" (at end of document)')):\n        _m.loads(\"\\n'\")",
+      "by_mutation": "PINNED__THE_INPUT_WAS_GENERATED_AND_THE_ASSERTION_VERIFIED",
+      "by_operand": "REFUSED__NO_EXECUTED_COMPARISON_TO_READ",
+      "state": "PINNED__THE_INPUT_WAS_GENERATED_AND_THE_ASSERTION_VERIFIED"
+     }
+    },
+    {
+     "corpus": {},
+     "documents": 400,
+     "part_head": "raise suffixed_err(src, pos, f\"Illegal character {char!r}\")",
+     "seeded": {
+      "assertion": "with pytest.raises(_exc('TOMLDecodeError'), match=re.escape(\"Illegal character '\\\\n' (at line 1, column 42)\")):\n        _m.loads('no-ending-quote = \"One time, at band camp\\nG')",
+      "by_mutation": "NOT_REACHED",
+      "by_operand": "PINNED__THE_INPUT_WAS_GENERATED_AND_THE_ASSERTION_VERIFIED",
+      "state": "PINNED__THE_INPUT_WAS_GENERATED_AND_THE_ASSERTION_VERIFIED"
+     },
+     "seeded_wide": {
+      "assertion": "with pytest.raises(_exc('TOMLDecodeError'), match=re.escape(\"Illegal character '\\\\n' (at line 1, column 42)\")):\n        _m.loads('no-ending-quote = \"One time, at band camp\\nG')",
+      "by_mutation": "PINNED__THE_INPUT_WAS_GENERATED_AND_THE_ASSERTION_VERIFIED",
+      "by_operand": "PINNED__THE_INPUT_WAS_GENERATED_AND_THE_ASSERTION_VERIFIED",
+      "state": "PINNED__THE_INPUT_WAS_GENERATED_AND_THE_ASSERTION_VERIFIED"
+     },
+     "seeds": 46,
+     "the_suite_executes_the_change": false,
+     "tiny": {
+      "assertion": "with pytest.raises(_exc('TOMLDecodeError'), match=re.escape(\"Illegal character '\\\\n' (at line 2, column 3)\")):\n        _m.loads('\\n\"#\\n\"#')",
+      "by_mutation": "PINNED__THE_INPUT_WAS_GENERATED_AND_THE_ASSERTION_VERIFIED",
+      "by_operand": "REFUSED__NO_EXECUTED_COMPARISON_TO_READ",
+      "state": "PINNED__THE_INPUT_WAS_GENERATED_AND_THE_ASSERTION_VERIFIED"
+     }
+    }
+   ],
+   "pinned_same_budget": 1,
+   "pinned_tiny": 2,
+   "pinned_wide_budget": 1,
+   "repo": "hukkin/tomli",
+   "sha": "31c85a18468adbb5f2e892aa96cf0930ac04f93c",
+   "source": "tomli/_parser.py",
+   "state": "PINNED__THE_INPUT_WAS_GENERATED_AND_THE_ASSERTION_VERIFIED",
+   "tiny_seeds": 6,
+   "unpinned_parts": 2
+  },
+  {
+   "documents": 400,
+   "lines_the_suite_executes": 175,
+   "parts": [],
+   "pinned_same_budget": 0,
+   "pinned_tiny": 0,
+   "pinned_wide_budget": 0,
+   "repo": "hukkin/tomli",
+   "sha": "4e245a4bbbefed99e550e196095ea65c851cf31d",
+   "source": "src/tomli/_parser.py",
+   "state": "FULLY_PINNED",
+   "tiny_seeds": 0,
+   "unpinned_parts": 0
+  },
+  {
+   "documents": 342,
+   "lines_the_suite_executes": 224,
+   "parts": [
+    {
+     "corpus": {
+      "candidates": 342,
+      "executions": 342,
+      "kept": 0,
+      "lines_covered": 0
+     },
+     "documents": 342,
+     "part_head": "(removal)",
+     "seeded": {
+      "assertion": null,
+      "by_mutation": "REFUSED__PART_REMOVES_CODE",
+      "by_operand": "REFUSED__PART_REMOVES_CODE",
+      "state": "REFUSED__PART_REMOVES_CODE"
+     },
+     "seeded_wide": {
+      "assertion": null,
+      "by_mutation": "REFUSED__PART_REMOVES_CODE",
+      "by_operand": "REFUSED__PART_REMOVES_CODE",
+      "state": "REFUSED__PART_REMOVES_CODE"
+     },
+     "seeds": 5,
+     "the_suite_executes_the_change": true,
+     "tiny": {
+      "assertion": null,
+      "by_mutation": "REFUSED__PART_REMOVES_CODE",
+      "by_operand": "REFUSED__PART_REMOVES_CODE",
+      "state": "REFUSED__PART_REMOVES_CODE"
+     }
+    }
+   ],
+   "pinned_same_budget": 0,
+   "pinned_tiny": 0,
+   "pinned_wide_budget": 0,
+   "repo": "hukkin/tomli",
+   "sha": "5ab9ec926d9dc1ef79e66215edd51285371fe8a0",
+   "source": "tomli/_parser.py",
+   "state": "NOT_REACHED",
+   "tiny_seeds": 5,
+   "unpinned_parts": 1
+  },
+  {
+   "documents": 374,
+   "lines_the_suite_executes": 149,
+   "parts": [
+    {
+     "corpus": {
+      "candidates": 374,
+      "executions": 240,
+      "kept": 40,
+      "lines_covered": 377
+     },
+     "documents": 374,
+     "part_head": "suffix_location(\n                    state, \"End of line or end of document not found after a statement\"\n               ",
+     "seeded": {
+      "assertion": null,
+      "by_mutation": "NOT_REACHED",
+      "by_operand": "NOT_REACHED",
+      "state": "NOT_REACHED"
+     },
+     "seeded_wide": {
+      "assertion": null,
+      "by_mutation": "NOT_REACHED",
+      "by_operand": "NOT_REACHED",
+      "state": "NOT_REACHED"
+     },
+     "seeds": 45,
+     "the_suite_executes_the_change": false,
+     "tiny": {
+      "assertion": null,
+      "by_mutation": "NOT_REACHED",
+      "by_operand": "NOT_REACHED",
+      "state": "NOT_REACHED"
+     }
+    },
+    {
+     "corpus": {},
+     "documents": 374,
+     "part_head": "raise TOMLDecodeError(\n                suffix_location(state, f'Expected but did not find \"{expect_char!r}\"')\n          ",
+     "seeded": {
+      "assertion": null,
+      "by_mutation": "NOT_REACHED",
+      "by_operand": "NOT_REACHED",
+      "state": "NOT_REACHED"
+     },
+     "seeded_wide": {
+      "assertion": null,
+      "by_mutation": "NOT_REACHED",
+      "by_operand": "NOT_REACHED",
+      "state": "NOT_REACHED"
+     },
+     "seeds": 45,
+     "the_suite_executes_the_change": false,
+     "tiny": {
+      "assertion": null,
+      "by_mutation": "NOT_REACHED",
+      "by_operand": "REFUSED__NO_EXECUTED_COMPARISON_TO_READ",
+      "state": "NOT_REACHED"
+     }
+    },
+    {
+     "corpus": {},
+     "documents": 374,
+     "part_head": "raise TOMLDecodeError(\n                suffix_location(state, f'Invalid character \"{char!r}\" found')\n            )",
+     "seeded": {
+      "assertion": null,
+      "by_mutation": "NOT_REACHED",
+      "by_operand": "NOT_REACHED",
+      "state": "NOT_REACHED"
+     },
+     "seeded_wide": {
+      "assertion": null,
+      "by_mutation": "NOT_REACHED",
+      "by_operand": "NOT_REACHED",
+      "state": "NOT_REACHED"
+     },
+     "seeds": 45,
+     "the_suite_executes_the_change": false,
+     "tiny": {
+      "assertion": null,
+      "by_mutation": "NOT_REACHED",
+      "by_operand": "REFUSED__NO_EXECUTED_COMPARISON_TO_READ",
+      "state": "NOT_REACHED"
+     }
+    }
+   ],
+   "pinned_same_budget": 0,
+   "pinned_tiny": 0,
+   "pinned_wide_budget": 0,
+   "repo": "hukkin/tomli",
+   "sha": "67ec7d10528bd7b00ff1fc62da9a8a1e06406179",
+   "source": "tomli/_parser.py",
+   "state": "NOT_REACHED",
+   "tiny_seeds": 5,
+   "unpinned_parts": 3
+  },
+  {
+   "documents": 400,
+   "lines_the_suite_executes": 170,
+   "parts": [],
+   "pinned_same_budget": 0,
+   "pinned_tiny": 0,
+   "pinned_wide_budget": 0,
+   "repo": "hukkin/tomli",
+   "sha": "794c8e50d676f1e8e081914eb77e4a48a4f6a20b",
+   "source": "src/tomli/_parser.py",
+   "state": "FULLY_PINNED",
+   "tiny_seeds": 0,
+   "unpinned_parts": 0
+  }
+ ],
+ "schema": "BRAIN_THE_REPOSITORY_IS_THE_SEED_CORPUS_V1",
+ "totals": {
+  "certified_share_after": 0.762,
+  "certified_share_before": 0.762,
+  "documents_harvested": 5949,
+  "gained_by_seeds": 0,
+  "lines_covered_by_the_corpus": 777,
+  "parts_audited": 8,
+  "parts_the_suite_never_executes": 5,
+  "pinned_with_the_corpus_same_budget": 1,
+  "pinned_with_the_corpus_wide_budget": 1,
+  "pinned_with_tiny_seeds": 2,
+  "reached_by_the_corpus": 0,
+  "seeds_kept": 82,
+  "seeds_per_part": 239,
+  "states": {
+   "FULLY_PINNED": 11,
+   "NOT_REACHED": 4,
+   "PINNED__THE_INPUT_WAS_GENERATED_AND_THE_ASSERTION_VERIFIED": 1,
+   "REFUSED__CONTROL_BROKEN": 1
+  },
+  "tasks": 17,
+  "unpinned_because_the_suite_never_executes": 3
+ }
+}
