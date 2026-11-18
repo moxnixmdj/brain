@@ -20,6 +20,7 @@ break: a green suite alone is what a lie looks like.
 """
 
 import ast
+import json
 import pathlib
 import subprocess
 import sys
@@ -178,8 +179,13 @@ def test_two_demands_and_a_passing_test_constrain_the_candidate(tmp_path):
     if result["stage"] == "DEMAND_MET":
         assert result["found"]["tests_green"] >= 2
         assert result["parameters_stored"] == 0
+        # The site here is the literal `1` inside `return x + 1`, so the replacement is `x` -- the
+        # enclosing `x + x` is the human's fix, produced by substituting at the site, not by rewriting it.
         found = result["found"]["expression"]
-        assert eval(found, {}, {"x": 2}) == 4 and eval(found, {}, {"x": 3}) == 6, found  # noqa: S307
+        assert found != "1", found
+        # substituting at the site: `x + 1` becomes `x + (<found>)`
+        assert eval(f"x + ({found})", {}, {"x": 2}) == 4, found  # noqa: S307
+        assert eval(f"x + ({found})", {}, {"x": 3}) == 6, found  # noqa: S307
 
 
 def test_a_constant_that_greens_one_test_and_breaks_another_is_refused(tmp_path):
@@ -325,3 +331,60 @@ def test_a_paired_demand_may_differ_from_what_the_site_produced():
     # without that evidence the same demand is not bound to that site at all
     assert demand.site_demand(2, [3]) is None
     assert demand.site_demand("the message, corrected", ["the message"]) is None
+
+
+def test_the_specification_is_the_failing_test_and_not_the_whole_file():
+    """A test states what it expects; the other tests in the file state something else.
+
+    Reading the file's literals would put another test's expected value into this site's demand -- and the
+    site would then be asked to produce a value its own failing test never mentions.
+    """
+    import textwrap
+    source = textwrap.dedent('''
+        def test_one():
+            assert render("x") == "for x."
+
+        def test_two():
+            assert render("y") == "a completely different message"
+            assert 7 == 7
+    ''')
+    one = demand.test_literals(source, "tests/test_m.py::test_one")
+    two = demand.test_literals(source, "tests/test_m.py::test_two")
+    assert sorted(one) == sorted(["x", "for x."])
+    assert "a completely different message" in two and "for x." not in two
+    # a boolean is a predicate, never a demanded value
+    assert True not in one and True not in two
+    assert demand.test_literals(source, "tests/test_m.py::test_missing") == []
+
+
+def test_a_specification_demand_never_wears_the_bound_demand_s_verdict():
+    """A demand read from the test's own text is weaker evidence than a demand bound at runtime.
+
+    Reporting the weaker one as `NO_VALUE_MATCHES` would claim the instrument proved no expression can
+    produce the demand, when all it proved is that the closure was searched against a literal.
+    """
+    tool = (pathlib.Path(__file__).resolve().parents[1] / "tools" /
+            "the_assertion_is_the_demand_v1.py").read_text(encoding="utf-8")
+    assert '"SPEC_DEMAND_FOUND_NOTHING"' in tool
+    assert 'demand_provenance' in tool
+    # the fallback fires only when nothing bound at runtime
+    assert 'if not targets:' in tool and 'SPEC_LITERALS' in tool
+
+
+def test_test_literals_cross_the_process_boundary_as_source_text():
+    """The config is JSON: a bytes literal in it killed two whole rows before this was fixed."""
+    import textwrap
+    source = textwrap.dedent('''
+        def test_bytes():
+            assert b"#compdef cli" in out
+    ''')
+    values = demand.test_literals(source, "tests/test_t.py::test_bytes")
+    assert any(isinstance(value, bytes) for value in values)
+    encoded = json.dumps([demand.live_repr(value) for value in values])
+    assert json.loads(encoded)
+
+
+# The candidate-side gate for specification demands is measured on REAL material rather than reproduced
+# in a fixture: click 91de59c6c8, where the ungated instrument accepted `flag_value` (533 tests green,
+# 0 of 12 recorded passing values preserved, human fix 12 of 12). A fixture that reproduces it would
+# prove only that the fixture fails the same way.
