@@ -42,7 +42,7 @@
  },
  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The FORM of an edit, not the vocabulary of the site. Of 241 real single-line edits in four real projects, 48.6% need only names already in scope and exactly 0.4% need a name the site does not have; 49.0% are not a single expression replacement at all and 2.1% exceed the node budget. Every plan to grow vocabulary targets 0.4%. Every plan to repair statement structure targets 51.4%.",
- "canonical_base_commit": "c001c61528528a81c35742c80714d31e63c10c68",
+ "canonical_base_commit": "e425aaa0d1fa81d16e9fb4b4ecc91e4acec6ba9e",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -116,7 +116,7 @@
   "canonical/action_intents/WHAT_A_REAL_FIX_NEEDS_FROM_THE_SITE_20261118_V1.json"
  ],
  "recursive_obs": {
-  "canonical_base_commit": "c001c61528528a81c35742c80714d31e63c10c68",
+  "canonical_base_commit": "e425aaa0d1fa81d16e9fb4b4ecc91e4acec6ba9e",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "storing the text that was edited (a spelling destroyed by a rename)",
