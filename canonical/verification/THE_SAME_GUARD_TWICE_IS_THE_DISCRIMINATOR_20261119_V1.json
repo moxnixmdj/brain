@@ -1,0 +1,667 @@
+{
+ "schema": "BRAIN_THE_SAME_GUARD_TWICE_IS_THE_DISCRIMINATOR_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "date": "2026-11-19",
+ "title": "The run already contains the intervention, and the intervention is not the bottleneck",
+ "the_answer": "Retention is solved and identification is not. The counterfactual that identification needs can be manufactured for free from a single failing run -- flipping one firing of one guard costs one bit and about half a second -- and executing it on a fresh blind corpus of 15 real commits reaches the human's changed line 3 times, the human's expression 0 times. Five single-firing flips turned the failing test green; all five broke other tests in the same file and none admitted an exact-fit refinement, so a version of this round without those two gates would have claimed five repairs it cannot defend. The single bottleneck is therefore not the observation, not the parameters (zero) and not the index: it is the replacement expression -- the content of the fix, which the failing run never produces.",
+ "corpus": {
+  "constructed_before_either_arm_was_measured": true,
+  "rule": "git log --no-merges over the newest 600 commits of click, httpx, jinja2, attrs; keep a commit that touches a tests/*.py and a non-test .py; primary source = most changed non-test file, primary test = most changed test file; sample every 7th candidate (every 3rd in a second pass); admit only if, at the parent with the post-fix test file written in, the file runs and at least one test genuinely fails (a SKIPPED test is not a failure); pre-registered quality rule: failing share < 10% of the file.",
+  "mined_candidates_kept_by_the_miner": 24,
+  "admitted": 15,
+  "admitted_by_repo": {
+   "click": 6,
+   "jinja": 5,
+   "attrs": 4
+  },
+  "dropped_no_oracle_after_the_skip_fix": [
+   {
+    "repo": "attrs",
+    "commit": "f53fc5440d7f"
+   },
+   {
+    "repo": "attrs",
+    "commit": "c44b8b0052ca"
+   }
+  ],
+  "httpx_rows": 0,
+  "httpx_note": "every sampled httpx commit died in collection at the parent; not one produced a verdict",
+  "population": [
+   {
+    "repo": "click",
+    "commit": "9f0bcdf0d868",
+    "source": "src/click/core.py",
+    "test": "tests/test_deprecations.py",
+    "failing_at_parent": 5,
+    "tests_in_file": 66
+   },
+   {
+    "repo": "click",
+    "commit": "f25f697a439a",
+    "source": "src/click/core.py",
+    "test": "tests/test_arguments.py",
+    "failing_at_parent": 3,
+    "tests_in_file": 81
+   },
+   {
+    "repo": "jinja",
+    "commit": "227edfd372f1",
+    "source": "src/jinja2/loaders.py",
+    "test": "tests/test_loader.py",
+    "failing_at_parent": 1,
+    "tests_in_file": 42
+   },
+   {
+    "repo": "jinja",
+    "commit": "d65503077008",
+    "source": "src/jinja2/filters.py",
+    "test": "tests/test_filters.py",
+    "failing_at_parent": 7,
+    "tests_in_file": 114
+   },
+   {
+    "repo": "attrs",
+    "commit": "0f758fe54a87",
+    "source": "src/attr/_make.py",
+    "test": "tests/test_make.py",
+    "failing_at_parent": 5,
+    "tests_in_file": 281
+   },
+   {
+    "repo": "attrs",
+    "commit": "cbaef3f8f5ec",
+    "source": "src/attr/validators.py",
+    "test": "tests/test_validators.py",
+    "failing_at_parent": 4,
+    "tests_in_file": 158
+   },
+   {
+    "repo": "click",
+    "commit": "271effb3d96d",
+    "source": "src/click/core.py",
+    "test": "tests/test_options.py",
+    "failing_at_parent": 8,
+    "tests_in_file": 580
+   },
+   {
+    "repo": "click",
+    "commit": "a1d87858abd7",
+    "source": "src/click/termui.py",
+    "test": "tests/test_termui.py",
+    "failing_at_parent": 1,
+    "tests_in_file": 211
+   },
+   {
+    "repo": "click",
+    "commit": "1f9cd54f686e",
+    "source": "src/click/_termui_impl.py",
+    "test": "tests/test_termui.py",
+    "failing_at_parent": 1,
+    "tests_in_file": 204
+   },
+   {
+    "repo": "click",
+    "commit": "047adef258fc",
+    "source": "src/click/core.py",
+    "test": "tests/test_commands.py",
+    "failing_at_parent": 5,
+    "tests_in_file": 88
+   },
+   {
+    "repo": "jinja",
+    "commit": "065334d1ee5b",
+    "source": "src/jinja2/filters.py",
+    "test": "tests/test_security.py",
+    "failing_at_parent": 1,
+    "tests_in_file": 17
+   },
+   {
+    "repo": "jinja",
+    "commit": "d05bd3858c3f",
+    "source": "src/jinja2/filters.py",
+    "test": "tests/test_regression.py",
+    "failing_at_parent": 1,
+    "tests_in_file": 53
+   },
+   {
+    "repo": "jinja",
+    "commit": "91a972f58089",
+    "source": "src/jinja2/sandbox.py",
+    "test": "tests/test_security.py",
+    "failing_at_parent": 1,
+    "tests_in_file": 16
+   },
+   {
+    "repo": "attrs",
+    "commit": "af9c510912ce",
+    "source": "src/attr/validators.py",
+    "test": "tests/test_validators.py",
+    "failing_at_parent": 1,
+    "tests_in_file": 163
+   },
+   {
+    "repo": "attrs",
+    "commit": "5bab46deb916",
+    "source": "src/attr/validators.py",
+    "test": "tests/test_validators.py",
+    "failing_at_parent": 4,
+    "tests_in_file": 162
+   }
+  ]
+ },
+ "in_sample__click_1b0e19f505": {
+  "label": "IN_SAMPLE (the tool was built on this commit); the only verified repair this round produced",
+  "stage": "VERIFIED",
+  "interventions": 90,
+  "refinement": "(self.show_envvar) and (self.envvar is not None)",
+  "human_fix": "self.show_envvar and self.envvar is not None",
+  "human_fix_found": true,
+  "verification": {
+   "stage": "VERIFIED",
+   "tests": 144,
+   "broken": [],
+   "output_tail": ""
+  },
+  "parameters_stored": 0,
+  "seconds": 53.74
+ },
+ "head_to_head": {
+  "same_15_commits_same_oracles_same_sandbox": true,
+  "arm_a": {
+   "name": "the failure text (canonical/tools/the_failing_run_names_the_expression_v1.py)",
+   "stages": {
+    "MEASURED": 5,
+    "NO_GUARD_ABOVE_THE_BLAMED_VALUE": 4,
+    "NO_BLAME__THE_FAILURE_CARRIES_NO_VALUE_THE_RUN_PRODUCED": 6
+   },
+   "seconds": 56.8,
+   "proposed_a_site_at_the_human_line": 1,
+   "produced_the_human_expression": 0
+  },
+  "arm_b": {
+   "name": "the flipped firing (canonical/tools/the_same_guard_twice_is_the_discriminator_v1.py)",
+   "stages": {
+    "NO_SWITCH__NO_SINGLE_OCCURRENCE_FLIP_PASSES": 10,
+    "FLIP_PASSED_THE_TEST__BROKE_THE_SUITE__NO_FIT": 5
+   },
+   "seconds": 251.1,
+   "interventions_bits_from_the_oracle": 409,
+   "sites_executed": 421,
+   "occurrences_logged": 18598,
+   "proposed_a_site_at_the_human_line": 3,
+   "produced_the_human_expression": 0,
+   "flips_that_made_the_failing_test_green": 7,
+   "of_those_suite_still_green": 0,
+   "of_those_exact_fit_available": 0,
+   "would_have_been_claimed_without_the_two_gates": 7
+  },
+  "parameters_stored_by_either_arm": 0,
+  "rows": [
+   {
+    "repo": "click",
+    "commit": "9f0bcdf0d868",
+    "source": "src/click/core.py",
+    "test": "tests/test_deprecations.py",
+    "human_fix": null,
+    "arm_a": {
+     "stage": "MEASURED",
+     "blamed": {
+      "line": 3370,
+      "expr": "decl",
+      "value": "'--times'",
+      "type": "str"
+     },
+     "guard": "decl.isidentifier()",
+     "human_fix_rank": null,
+     "site_bucket": "FAR"
+    },
+    "arm_b": {
+     "stage": "NO_SWITCH__NO_SINGLE_OCCURRENCE_FLIP_PASSES",
+     "interventions": 54,
+     "sites_executed": 39,
+     "occurrences_logged": 90,
+     "survivors": 0,
+     "refinement": null,
+     "human_fix_found": false,
+     "site_bucket": null,
+     "seconds": 31.37
+    },
+    "expression_found_either_arm": false
+   },
+   {
+    "repo": "click",
+    "commit": "f25f697a439a",
+    "source": "src/click/core.py",
+    "test": "tests/test_arguments.py",
+    "human_fix": null,
+    "arm_a": {
+     "stage": "MEASURED",
+     "blamed": {
+      "line": 3775,
+      "expr": "var",
+      "value": "'EXTRA'",
+      "type": "str"
+     },
+     "guard": "not self.required and (not already_bracketed)",
+     "human_fix_rank": null,
+     "site_bucket": "FAR"
+    },
+    "arm_b": {
+     "stage": "NO_SWITCH__NO_SINGLE_OCCURRENCE_FLIP_PASSES",
+     "interventions": 84,
+     "sites_executed": 121,
+     "occurrences_logged": 243,
+     "survivors": 0,
+     "refinement": null,
+     "human_fix_found": false,
+     "site_bucket": null,
+     "seconds": 49.07
+    },
+    "expression_found_either_arm": false
+   },
+   {
+    "repo": "jinja",
+    "commit": "227edfd372f1",
+    "source": "src/jinja2/loaders.py",
+    "test": "tests/test_loader.py",
+    "human_fix": null,
+    "arm_a": {
+     "stage": "NO_GUARD_ABOVE_THE_BLAMED_VALUE",
+     "blamed": "template",
+     "guard": null,
+     "human_fix_rank": null,
+     "site_bucket": null
+    },
+    "arm_b": {
+     "stage": "NO_SWITCH__NO_SINGLE_OCCURRENCE_FLIP_PASSES",
+     "interventions": 6,
+     "sites_executed": 6,
+     "occurrences_logged": 6,
+     "survivors": 0,
+     "refinement": null,
+     "human_fix_found": false,
+     "site_bucket": null,
+     "seconds": 4.1
+    },
+    "expression_found_either_arm": false
+   },
+   {
+    "repo": "jinja",
+    "commit": "d65503077008",
+    "source": "src/jinja2/filters.py",
+    "test": "tests/test_filters.py",
+    "human_fix": null,
+    "arm_a": {
+     "stage": "MEASURED",
+     "blamed": {
+      "line": 293,
+      "expr": "key",
+      "value": "'class\\tonclick=alert(1)'",
+      "type": "str"
+     },
+     "guard": "_space_re.search(key) is not None",
+     "human_fix_rank": null,
+     "site_bucket": "SAME_LINE"
+    },
+    "arm_b": {
+     "stage": "NO_SWITCH__NO_SINGLE_OCCURRENCE_FLIP_PASSES",
+     "interventions": 3,
+     "sites_executed": 3,
+     "occurrences_logged": 3,
+     "survivors": 0,
+     "refinement": null,
+     "human_fix_found": false,
+     "site_bucket": null,
+     "seconds": 2.68
+    },
+    "expression_found_either_arm": false
+   },
+   {
+    "repo": "attrs",
+    "commit": "0f758fe54a87",
+    "source": "src/attr/_make.py",
+    "test": "tests/test_make.py",
+    "human_fix": "ca._converter",
+    "arm_a": {
+     "stage": "MEASURED",
+     "blamed": {
+      "line": 2569,
+      "expr": "ca.type",
+      "value": "None",
+      "type": "NoneType"
+     },
+     "guard": "type is None",
+     "human_fix_rank": null,
+     "site_bucket": "FAR"
+    },
+    "arm_b": {
+     "stage": "NO_SWITCH__NO_SINGLE_OCCURRENCE_FLIP_PASSES",
+     "interventions": 90,
+     "sites_executed": 136,
+     "occurrences_logged": 18014,
+     "survivors": 0,
+     "refinement": null,
+     "human_fix_found": false,
+     "site_bucket": null,
+     "seconds": 58.05
+    },
+    "expression_found_either_arm": false
+   },
+   {
+    "repo": "attrs",
+    "commit": "cbaef3f8f5ec",
+    "source": "src/attr/validators.py",
+    "test": "tests/test_validators.py",
+    "human_fix": "optional",
+    "arm_a": {
+     "stage": "MEASURED",
+     "blamed": {
+      "line": 305,
+      "expr": "value.__class__",
+      "value": "<class 'NoneType'>",
+      "type": "type"
+     },
+     "guard": "not callable(value)",
+     "human_fix_rank": null,
+     "site_bucket": "FAR"
+    },
+    "arm_b": {
+     "stage": "FLIP_PASSED_THE_TEST__BROKE_THE_SUITE__NO_FIT",
+     "interventions": 7,
+     "sites_executed": 4,
+     "occurrences_logged": 7,
+     "survivors": 0,
+     "refinement": null,
+     "human_fix_found": false,
+     "site_bucket": "FAR",
+     "seconds": 4.63
+    },
+    "expression_found_either_arm": false
+   },
+   {
+    "repo": "click",
+    "commit": "271effb3d96d",
+    "source": "src/click/core.py",
+    "test": "tests/test_options.py",
+    "human_fix": null,
+    "arm_a": {
+     "stage": "NO_BLAME__THE_FAILURE_CARRIES_NO_VALUE_THE_RUN_PRODUCED",
+     "blamed": null,
+     "guard": null,
+     "human_fix_rank": null,
+     "site_bucket": null
+    },
+    "arm_b": {
+     "stage": "NO_SWITCH__NO_SINGLE_OCCURRENCE_FLIP_PASSES",
+     "interventions": 41,
+     "sites_executed": 45,
+     "occurrences_logged": 73,
+     "survivors": 0,
+     "refinement": null,
+     "human_fix_found": false,
+     "site_bucket": null,
+     "seconds": 27.11
+    },
+    "expression_found_either_arm": false
+   },
+   {
+    "repo": "click",
+    "commit": "a1d87858abd7",
+    "source": "src/click/termui.py",
+    "test": "tests/test_termui.py",
+    "human_fix": null,
+    "arm_a": {
+     "stage": "NO_BLAME__THE_FAILURE_CARRIES_NO_VALUE_THE_RUN_PRODUCED",
+     "blamed": null,
+     "guard": null,
+     "human_fix_rank": null,
+     "site_bucket": null
+    },
+    "arm_b": {
+     "stage": "FLIP_PASSED_THE_TEST__BROKE_THE_SUITE__NO_FIT",
+     "interventions": 42,
+     "sites_executed": 16,
+     "occurrences_logged": 55,
+     "survivors": 0,
+     "refinement": null,
+     "human_fix_found": false,
+     "site_bucket": "SAME_LINE",
+     "seconds": 23.04
+    },
+    "expression_found_either_arm": false
+   },
+   {
+    "repo": "click",
+    "commit": "1f9cd54f686e",
+    "source": "src/click/_termui_impl.py",
+    "test": "tests/test_termui.py",
+    "human_fix": null,
+    "arm_a": {
+     "stage": "NO_GUARD_ABOVE_THE_BLAMED_VALUE",
+     "blamed": "False",
+     "guard": null,
+     "human_fix_rank": null,
+     "site_bucket": null
+    },
+    "arm_b": {
+     "stage": "NO_SWITCH__NO_SINGLE_OCCURRENCE_FLIP_PASSES",
+     "interventions": 11,
+     "sites_executed": 11,
+     "occurrences_logged": 11,
+     "survivors": 0,
+     "refinement": null,
+     "human_fix_found": false,
+     "site_bucket": null,
+     "seconds": 7.17
+    },
+    "expression_found_either_arm": false
+   },
+   {
+    "repo": "click",
+    "commit": "047adef258fc",
+    "source": "src/click/core.py",
+    "test": "tests/test_commands.py",
+    "human_fix": null,
+    "arm_a": {
+     "stage": "NO_BLAME__THE_FAILURE_CARRIES_NO_VALUE_THE_RUN_PRODUCED",
+     "blamed": null,
+     "guard": null,
+     "human_fix_rank": null,
+     "site_bucket": null
+    },
+    "arm_b": {
+     "stage": "FLIP_PASSED_THE_TEST__BROKE_THE_SUITE__NO_FIT",
+     "interventions": 20,
+     "sites_executed": 16,
+     "occurrences_logged": 42,
+     "survivors": 0,
+     "refinement": null,
+     "human_fix_found": false,
+     "site_bucket": "FAR",
+     "seconds": 13.42
+    },
+    "expression_found_either_arm": false
+   },
+   {
+    "repo": "jinja",
+    "commit": "065334d1ee5b",
+    "source": "src/jinja2/filters.py",
+    "test": "tests/test_security.py",
+    "human_fix": null,
+    "arm_a": {
+     "stage": "NO_BLAME__THE_FAILURE_CARRIES_NO_VALUE_THE_RUN_PRODUCED",
+     "blamed": null,
+     "guard": null,
+     "human_fix_rank": null,
+     "site_bucket": null
+    },
+    "arm_b": {
+     "stage": "FLIP_PASSED_THE_TEST__BROKE_THE_SUITE__NO_FIT",
+     "interventions": 7,
+     "sites_executed": 3,
+     "occurrences_logged": 7,
+     "survivors": 0,
+     "refinement": null,
+     "human_fix_found": false,
+     "site_bucket": "SAME_LINE",
+     "seconds": 4.71
+    },
+    "expression_found_either_arm": false
+   },
+   {
+    "repo": "jinja",
+    "commit": "d05bd3858c3f",
+    "source": "src/jinja2/filters.py",
+    "test": "tests/test_regression.py",
+    "human_fix": null,
+    "arm_a": {
+     "stage": "NO_BLAME__THE_FAILURE_CARRIES_NO_VALUE_THE_RUN_PRODUCED",
+     "blamed": null,
+     "guard": null,
+     "human_fix_rank": null,
+     "site_bucket": null
+    },
+    "arm_b": {
+     "stage": "NO_SWITCH__NO_SINGLE_OCCURRENCE_FLIP_PASSES",
+     "interventions": 3,
+     "sites_executed": 3,
+     "occurrences_logged": 3,
+     "survivors": 0,
+     "refinement": null,
+     "human_fix_found": false,
+     "site_bucket": null,
+     "seconds": 2.48
+    },
+    "expression_found_either_arm": false
+   },
+   {
+    "repo": "jinja",
+    "commit": "91a972f58089",
+    "source": "src/jinja2/sandbox.py",
+    "test": "tests/test_security.py",
+    "human_fix": null,
+    "arm_a": {
+     "stage": "NO_BLAME__THE_FAILURE_CARRIES_NO_VALUE_THE_RUN_PRODUCED",
+     "blamed": null,
+     "guard": null,
+     "human_fix_rank": null,
+     "site_bucket": null
+    },
+    "arm_b": {
+     "stage": "FLIP_PASSED_THE_TEST__BROKE_THE_SUITE__NO_FIT",
+     "interventions": 23,
+     "sites_executed": 9,
+     "occurrences_logged": 23,
+     "survivors": 0,
+     "refinement": null,
+     "human_fix_found": false,
+     "site_bucket": "WITHIN_2_LINES",
+     "seconds": 13.2
+    },
+    "expression_found_either_arm": false
+   },
+   {
+    "repo": "attrs",
+    "commit": "af9c510912ce",
+    "source": "src/attr/validators.py",
+    "test": "tests/test_validators.py",
+    "human_fix": null,
+    "arm_a": {
+     "stage": "NO_GUARD_ABOVE_THE_BLAMED_VALUE",
+     "blamed": "False",
+     "guard": null,
+     "human_fix_rank": null,
+     "site_bucket": null
+    },
+    "arm_b": {
+     "stage": "NO_SWITCH__NO_SINGLE_OCCURRENCE_FLIP_PASSES",
+     "interventions": 8,
+     "sites_executed": 5,
+     "occurrences_logged": 9,
+     "survivors": 0,
+     "refinement": null,
+     "human_fix_found": false,
+     "site_bucket": null,
+     "seconds": 4.41
+    },
+    "expression_found_either_arm": false
+   },
+   {
+    "repo": "attrs",
+    "commit": "5bab46deb916",
+    "source": "src/attr/validators.py",
+    "test": "tests/test_validators.py",
+    "human_fix": null,
+    "arm_a": {
+     "stage": "NO_GUARD_ABOVE_THE_BLAMED_VALUE",
+     "blamed": "self.type",
+     "guard": null,
+     "human_fix_rank": null,
+     "site_bucket": null
+    },
+    "arm_b": {
+     "stage": "NO_SWITCH__NO_SINGLE_OCCURRENCE_FLIP_PASSES",
+     "interventions": 10,
+     "sites_executed": 4,
+     "occurrences_logged": 12,
+     "survivors": 0,
+     "refinement": null,
+     "human_fix_found": false,
+     "site_bucket": null,
+     "seconds": 5.53
+    },
+    "expression_found_either_arm": false
+   }
+  ]
+ },
+ "instrument_defects_found_and_fixed_this_round": [
+  {
+   "defect": "a SKIPPED test was read as a failing test",
+   "symptom": "four attrs rows and several jinja rows looked like oracles; the 'failing test' then ran green, which surfaced as INSTRUMENTATION_CHANGED_THE_VERDICT",
+   "fix": "identify.failing_tests(): only FAILED and ERROR are failures",
+   "affected_rows": [
+    "attrs f53fc5440d",
+    "attrs c44b8b0052"
+   ],
+   "status": "FIXED_AND_RETESTED"
+  },
+  {
+   "defect": "test ids containing a space were truncated by `(\\S+::\\S+)`",
+   "symptom": "click 271effb3d9's node id was cut at '--color / --no-color'; the truncated id ran nothing and pytest's exit code 5 was reported as a changed verdict",
+   "fix": "anchor the status at end of line and let the id be everything in front of it",
+   "affected_rows": [
+    "click 271effb3d9",
+    "every parametrized row in both arms' first pass"
+   ],
+   "status": "FIXED_AND_RETESTED"
+  },
+  {
+   "defect": "`if template[:2] == './'` yielded the operands `:2` and `2`",
+   "symptom": "`lambda: (:2)` spliced into jinja2/loaders.py made the module unimportable; the whole test file produced no verdicts and three rows were unmeasurable",
+   "fix": "constants and slices are not operands; every operand must parse as an expression and the whole instrumented copy must compile or the site is skipped",
+   "affected_rows": [
+    "jinja 227edfd372",
+    "attrs f53fc5440d",
+    "click bc32a92cd2"
+   ],
+   "status": "FIXED_AND_RETESTED"
+  }
+ ],
+ "erratum_on_the_previous_round": "The previous round's 29-commit population was hand-built from four libraries and partly studied while the tool was built; click@1b0e19f505 is the commit the blame chain was derived on and is reported here as IN_SAMPLE, not as generalization. This round changes the population first and measures both arms on it, and the difference is the whole result: 1 verified repair in-sample, 0 out of 15 fresh commits for either arm.",
+ "the_single_bottleneck": "The replacement expression. The run names the place and the discrepancy (the flip reached the human's changed line 3 of 15 times at one bit per candidate), and it does not name the value that should have been there: 12 of the 15 fixes are a value the failing run never produced (an attribute name, a regex, an argument, a call's routing) and 3 are behaviour that did not exist, which INSUFFICIENCY_CERTIFICATE_20261113_V1 proves no trace can supply.",
+ "falsifier": "This round's claim dies if a mechanism that forces the VALUE at a flip-identified firing and synthesizes the replacement expression from the artifact's own vocabulary does not beat 0/15 on a fresh corpus of this construction, or beats it only by reading the commit's diff. The user's claim dies if any of the fifteen is repaired by supplying the right action once and repeating it.",
+ "limits": [
+  "15 commits, three libraries, one sandbox, producer-run: a causal probe with a stated population rule, not a benchmark.",
+  "Localization is given to both arms (the changed source file); a system that must find the file is strictly worse than these numbers.",
+  "The logged vocabulary is the enclosing function's locals plus the enclosing class's __dict__ attributes, nearest-first. The exact-fit gate fails closed when the discriminator is outside it, so the receipt does not distinguish a spurious flip from a discriminating value it could not name.",
+  "Reading self.__dict__ avoids firing properties, so the instrument cannot perturb the object it observes, at the cost of not seeing class-level defaults.",
+  "One verified repair exists and it is in-sample."
+ ],
+ "commands": [
+  "python3 canonical/tools/the_same_guard_twice_is_the_discriminator_v1.py --commits /tmp/corpus/all15.json --receipt /tmp/corpus/arm_b_final.json --seconds 120 --cap-sites 40 --cap-occurrences 3 --cap-interventions 90",
+  "python3 canonical/tools/the_failing_run_names_the_expression_v1.py --sweep /tmp/corpus/all15.json --receipt /tmp/corpus/arm_a_v3.json --test-seconds 120",
+  "python3 canonical/tools/the_same_guard_twice_is_the_discriminator_v1.py --commits /tmp/corpus/smoke.json --receipt /tmp/smoke_final.json --seconds 120",
+  "python3 -m pytest canonical/tests/test_the_same_guard_twice_is_the_discriminator_v1.py canonical/tests/test_identify_a_real_bugs_fix_v1.py canonical/tests/test_the_failing_run_names_the_expression_v1.py -q"
+ ],
+ "git_head_when_written": "08b803c"
+}

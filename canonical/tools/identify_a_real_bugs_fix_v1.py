@@ -43,7 +43,18 @@ SCHEMA = "BRAIN_IDENTIFY_A_REAL_BUGS_FIX_V1"
 AUTHORITY = "NONE__PRODUCER_RUN_SANDBOX"
 
 # pytest -v prints `path::test VERDICT [ pct]`; its summary prints `VERDICT path::test - reason`. Both.
-VERDICT_AFTER = re.compile(r"^(\S+::\S+)\s+(PASSED|FAILED|ERROR|SKIPPED|XFAIL|XPASS)")
+# A test that did not run is not a test that failed. `SKIPPED` is what pytest prints for a test that
+# declined to execute, and reading it as a failure made four attrs rows and several jinja rows look like
+# they had an oracle when the "failing" test was one that had skipped itself.
+NOT_A_FAILURE = frozenset({"PASSED", "SKIPPED", "XFAIL", "XPASS"})
+FAILURE_VERDICTS = frozenset({"FAILED", "ERROR"})
+
+# `\S+` for a node id is wrong: pytest ids are arbitrary and routinely contain spaces, e.g.
+# `test_help_spec[True-param_decls2-kwargs2---color / --no-color]`. Truncating at the space produced a
+# node id that ran nothing, which read as "the run changed" rather than "the id was wrong". Anchor the
+# status at the end of the line instead and let the id be whatever is in front of it.
+VERDICT_AFTER = re.compile(r"^(\S.*?::.+?)\s+(PASSED|FAILED|ERROR|SKIPPED|XFAIL|XPASS)"
+                           r"(?:\s+\[\s*\d+%\])?\s*$")
 VERDICT_BEFORE = re.compile(r"^(FAILED|PASSED|ERROR)\s+(\S+)")
 
 
@@ -65,6 +76,11 @@ def test_command(worktree: pathlib.Path, test_file: str) -> list[str]:
     # INTERNALERROR, so the suite cannot run at all and every tqdm row reads as "no oracle".
     return [sys.executable, "-m", "pytest", test_file, "-v", "--tb=no", "-p", "no:cacheprovider",
             "-o", "asyncio_default_fixture_loop_scope=function"]
+
+
+def failing_tests(verdicts: dict[str, str]) -> list[str]:
+    """The tests that actually failed, in file order. Skips and timeouts are not failures."""
+    return [name for name, verdict in verdicts.items() if verdict in FAILURE_VERDICTS]
 
 
 def run_tests_full(worktree: pathlib.Path, test_file: str, seconds: int = 60) -> tuple[dict[str, str], str]:

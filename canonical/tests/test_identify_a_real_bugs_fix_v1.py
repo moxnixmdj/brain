@@ -125,3 +125,21 @@ def test_a_statement_change_is_not_given_an_expression_verdict():
     new = ast.parse("if x:\n    return 1\n")
     verdict = needs._verdict_from_changes(needs.change_points(old, new), "def f(x):\n    pass\n", "pass")
     assert verdict["kind"] == needs.STATEMENT_FORM, verdict
+
+
+def test_a_test_id_with_a_space_is_not_truncated():
+    """pytest ids are arbitrary; `\\S+::\\S+` cut `test_help_spec[True-...---color / --no-color]` at the
+    space, and the truncated id ran nothing -- which the sweep reported as a changed verdict rather than
+    as a broken id."""
+    line = ("tests/test_options.py::test_help_spec[True-param_decls2-kwargs2---color / --no-color] "
+            "FAILED [ 12%]")
+    after = identify.VERDICT_AFTER.match(line)
+    assert after is not None
+    assert after.group(1).endswith("--color / --no-color]")
+    assert after.group(2) == "FAILED"
+    assert identify.failing_tests({after.group(1): after.group(2)}) == [after.group(1)]
+
+
+def test_a_skip_is_not_a_failure():
+    verdicts = {"t::a": "PASSED", "t::b": "SKIPPED", "t::c": "XFAIL", "t::d": "FAILED", "t::e": "ERROR"}
+    assert identify.failing_tests(verdicts) == ["t::d", "t::e"]
