@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "557d22508cc696df210e6cdc5d77df778a8461537cc27402babd0a4cc97c1257"
+  "value": "92e9e9c94fea6e1c72e5a92fa592db3fdb6f094e3bd30de676342525e70e71d5"
  },
  "engines": [
   {
@@ -251127,7 +251127,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/THE_MISSING_INPUT_CAN_BE_MANUFACTURED_AND_ONLY_WHERE_A_QUANTITY_GUIDES_IT_20261116_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "ab44b815f59555e7b2747846c59ae81407276eb18b017bc08ff310c6870ccc8b",
+   "sha256": "a1d30c1de42efc4b758213efb400ff3d06cc5156bea1d4ee8fd645a7642b03e8",
    "status": "PRODUCED",
    "terms": {
     "20261116": 1,
