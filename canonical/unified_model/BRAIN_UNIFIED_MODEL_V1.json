@@ -31228,7 +31228,7 @@
   "engines": 26,
   "knowledge_documents": 518,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 7003,
+  "research_index_records": 7004,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 452,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "047c0240f79dd9b707df10964290957b658764155fad98329b2f461749a2b1a9"
+  "value": "d4203c5e1fd868bbf8e0147ce88edc1ebf29438a21112add914d6f1a9d4ffa39"
  },
  "engines": [
   {
@@ -247639,6 +247639,51 @@
     "row": 3,
     "rows": 2,
     "v1": 2
+   }
+  },
+  {
+   "action_id": "THE_FAILURE_ALREADY_SAYS_WHAT_TO_WRITE_20261118_V1",
+   "capability": false,
+   "date": "2026-11-18",
+   "id": "research:canonical/action_intents/THE_FAILURE_ALREADY_SAYS_WHAT_TO_WRITE_20261118_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/THE_FAILURE_ALREADY_SAYS_WHAT_TO_WRITE_20261118_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "5950f5cd5fb8793b27751a871dc0cb6de5ad35103e1abae3cbbfe1850a226ea4",
+   "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
+   "terms": {
+    "121.2": 1,
+    "14": 2,
+    "15": 1,
+    "20261118": 1,
+    "7.7": 1,
+    "759": 1,
+    "already": 1,
+    "answer": 1,
+    "ask_the_failing_case_which_expression_it_wanted": 1,
+    "budget": 1,
+    "bugs": 2,
+    "build": 1,
+    "but": 1,
+    "calibrated": 1,
+    "cases": 1,
+    "closed": 1,
+    "cost": 1,
+    "exhausts": 1,
+    "express": 1,
+    "expressibility": 1,
+    "expression": 3,
+    "factor": 1,
+    "failure": 3,
+    "fix": 1,
+    "fixed": 2,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "no": 3,
+    "not": 2,
+    "one": 4,
+    "published": 4,
+    "site": 5,
+    "write": 2
    }
   },
   {
