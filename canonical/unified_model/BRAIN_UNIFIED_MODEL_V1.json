@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 541,
+  "knowledge_documents": 542,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 7089,
+  "research_index_records": 7092,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 452,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "6c6730db04a2c406ef0873dadad35d52a8be3ed111d1b0018ad378d3fdcda1fc"
+  "value": "61f7f50f1cfb46a18d351f82af374675ba35c9491d370abdc77eb5cac60aa528"
  },
  "engines": [
   {
@@ -46711,6 +46711,84 @@
     "showing",
     "teacher",
     "untangles"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 7332,
+   "headings": [
+    "A single trace does not pin the rule — measured, not argued",
+    "The claim under test",
+    "What the counters say on 30 real commits",
+    "The law this gives",
+    "So what is the single bottleneck",
+    "What that means for the plan",
+    "What is *not* claimed here",
+    "Reproduction"
+   ],
+   "kind": "DOCUMENT",
+   "path": "A_SINGLE_TRACE_DOES_NOT_PIN_THE_RULE_20261120_V1.md",
+   "sha256": "a877aae572e8b74035a019b3ae8c555a49f024adceaba83ee01b8b2c5d9d1cd0",
+   "summary": "*`canonical/tools/the_assertion_is_the_demand_v1.py` extended with the live-set and ambiguity counters · 15 tests · receipt `canonical/verification/A_SINGLE_TRACE_DOES_NOT_PIN_THE_RULE_20261120_V1.json` · 30 real commits · zero parameters, zero model calls*",
+   "terms": {
+    "13": 3,
+    "15": 5,
+    "2026": 3,
+    "228": 4,
+    "30": 3,
+    "action": 4,
+    "already": 3,
+    "arxiv.org": 3,
+    "both": 5,
+    "calls": 4,
+    "cannot": 4,
+    "canonical": 5,
+    "changed": 3,
+    "closure": 5,
+    "commits": 3,
+    "corpus": 3,
+    "counters": 3,
+    "demanded": 3,
+    "different": 3,
+    "environment": 3,
+    "exactly": 4,
+    "execution": 3,
+    "failing": 5,
+    "failure": 3,
+    "feature": 3,
+    "file": 3,
+    "fix": 3,
+    "gives": 3,
+    "green": 3,
+    "https": 6,
+    "instrument": 5,
+    "name": 6,
+    "never": 4,
+    "not": 23,
+    "one": 20,
+    "only": 6,
+    "row": 5,
+    "rule": 6,
+    "same": 9,
+    "single": 5,
+    "site": 5,
+    "suite": 4,
+    "they": 5,
+    "trace": 7,
+    "transfer": 4,
+    "type": 4,
+    "value": 7,
+    "whole": 4
+   },
+   "title": "A single trace does not pin the rule — measured, not argued",
+   "title_terms": [
+    "argued",
+    "measured",
+    "not",
+    "pin",
+    "rule",
+    "single",
+    "trace"
    ]
   },
   {
@@ -87169,10 +87247,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1343,
+  "included_source_count": 1344,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "f97a11537bdc90476e6e3ad43b3192ee646abeefd82af1b538134c8163b32bf0"
+  "source_tree_digest": "3da9ba914da877fd696d9bc70f03711e77fbebce9cf4a1d85d2b469f2a8f908d"
  },
  "research_index": [
   {
@@ -157552,6 +157630,26 @@
     "pages": 1,
     "perceptual": 1,
     "property": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "2026-11-19",
+   "id": "research:canonical/verification/A_SINGLE_TRACE_DOES_NOT_PIN_THE_RULE_20261120_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/A_SINGLE_TRACE_DOES_NOT_PIN_THE_RULE_20261120_V1.json",
+   "schema": "BRAIN_THE_ASSERTION_IS_THE_DEMAND_V1",
+   "sha256": "59388f6cd437a3e03d016a14cbb097e7637852501416eb954e4d59640cfd0c93",
+   "status": "",
+   "terms": {
+    "20261120": 1,
+    "not": 1,
+    "pin": 1,
+    "rule": 1,
+    "single": 1,
+    "trace": 1,
     "v1": 1
    }
   },
@@ -239872,6 +239970,71 @@
     "value": 3,
     "were": 4,
     "wrong": 3
+   }
+  },
+  {
+   "action_id": "A_SINGLE_TRACE_DOES_NOT_PIN_THE_RULE_20261120_V1",
+   "capability": false,
+   "date": "2026-11-20",
+   "id": "research:canonical/action_intents/A_SINGLE_TRACE_DOES_NOT_PIN_THE_RULE_20261120_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_SINGLE_TRACE_DOES_NOT_PIN_THE_RULE_20261120_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "cd2cd83d783c5847793ece9d3dff463dbcbd8b01c0eea962714dad006c93a0b1",
+   "status": "PROPOSED__PRODUCER_MEASURED__NEGATIVE_RESULT_RECORDED__INDEPENDENT_VERIFICATION_",
+   "terms": {
+    "10": 1,
+    "109": 1,
+    "14": 2,
+    "20261120": 1,
+    "30": 1,
+    "a_single_trace_does_not_pin_the_rule_20261120_v1": 1,
+    "adds": 1,
+    "admissible": 1,
+    "already": 1,
+    "become": 1,
+    "binding": 1,
+    "cannot": 1,
+    "cheap": 1,
+    "contrast": 1,
+    "create": 1,
+    "demand": 2,
+    "effort": 1,
+    "enumerable": 1,
+    "exactly": 1,
+    "executions": 1,
+    "falsifiers": 1,
+    "feature": 1,
+    "least": 2,
+    "must": 2,
+    "not": 2,
+    "now": 3,
+    "one": 4,
+    "predicate": 2,
+    "round": 2,
+    "rule": 2,
+    "teaches": 2,
+    "trace": 2
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/action_intents/A_SINGLE_TRACE_DOES_NOT_PIN_THE_RULE_20261120_V1.md",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_SINGLE_TRACE_DOES_NOT_PIN_THE_RULE_20261120_V1.md",
+   "schema": "",
+   "sha256": "6dce702cb0954c60a96437d33c49e2d666e38d50319a2417c504059a450da0d2",
+   "status": "",
+   "terms": {
+    "20261120": 1,
+    "not": 1,
+    "pin": 1,
+    "rule": 1,
+    "single": 1,
+    "trace": 1,
+    "v1": 1
    }
   },
   {
