@@ -31228,7 +31228,7 @@
   "engines": 26,
   "knowledge_documents": 542,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 7095,
+  "research_index_records": 7098,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 452,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "8e9bb3913c1269acfde6e5941ea67fa01771990fc59eff32ccf943e53b973c97"
+  "value": "ff92a765d573d82536ce3be2d334ba87e3d35d7ae250e758b0072a9eeb9c8e09"
  },
  "engines": [
   {
@@ -216130,6 +216130,45 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/THE_SMALLEST_QUESTION_THAT_MAKES_THIS_CHECKABLE_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/THE_SMALLEST_QUESTION_THAT_MAKES_THIS_CHECKABLE_20261116_V1.json",
+   "schema": "BRAIN_THE_SMALLEST_QUESTION_THAT_MAKES_THIS_CHECKABLE_V1",
+   "sha256": "bba9d0dff6fdb21b7b48d4bb82f51dbd4e78195be80ca4506965a5e54603a67d",
+   "status": "",
+   "terms": {
+    "20261116": 1,
+    "checkable": 1,
+    "makes": 1,
+    "question": 1,
+    "smallest": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/THE_SMALLEST_QUESTION_THAT_MAKES_THIS_CHECKABLE_WIDER_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/THE_SMALLEST_QUESTION_THAT_MAKES_THIS_CHECKABLE_WIDER_20261116_V1.json",
+   "schema": "BRAIN_THE_SMALLEST_QUESTION_THAT_MAKES_THIS_CHECKABLE_V1",
+   "sha256": "551d431221947142be9408d96607c1b3639a798376a29208214b4cf197dadc93",
+   "status": "",
+   "terms": {
+    "20261116": 1,
+    "checkable": 1,
+    "makes": 1,
+    "question": 1,
+    "smallest": 1,
+    "v1": 1,
+    "wider": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-11-19",
    "id": "research:canonical/verification/THE_SPACE_IS_THE_ARTIFACT_20261119_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -253028,6 +253067,50 @@
     "the_stated_effect_must_land_where_the_sentence_put_it_v1_20261031_v1": 1,
     "three_gates_decided_on_the_wrong_evidence__a_40_verb_word_list_gated_whether_a_swe_row_could_bind_its_own_tree__a_named_binding_refusal_was_reported_as_r3_weak_evidence__and_a_run_that_edited_something_else_was_certified_as_having_performed_the_stated_effect__measured_2026_10_31_on_96e97b0": 1,
     "v1": 2
+   }
+  },
+  {
+   "action_id": "THE_STATEMENT_NAMES_THE_CHANGE_AND_NEVER_SPECIFIES_IT_20261116_V1",
+   "capability": false,
+   "date": "2026-11-16",
+   "id": "research:canonical/action_intents/THE_STATEMENT_NAMES_THE_CHANGE_AND_NEVER_SPECIFIES_IT_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/THE_STATEMENT_NAMES_THE_CHANGE_AND_NEVER_SPECIFIES_IT_20261116_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "5cbd9230d2ed67e709485c8d6f6dfe8162428d994dc94b5b84103478f52fd67f",
+   "status": "PRODUCED",
+   "terms": {
+    "20261116": 1,
+    "absent": 1,
+    "alike": 1,
+    "artifact": 1,
+    "author": 1,
+    "authored": 1,
+    "change": 1,
+    "corpus": 1,
+    "derived": 1,
+    "discriminating": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "input": 1,
+    "inside": 1,
+    "knowledge": 1,
+    "loop": 1,
+    "manufacture": 1,
+    "names": 1,
+    "never": 1,
+    "no": 1,
+    "not": 1,
+    "operations": 1,
+    "produced": 1,
+    "protocol": 1,
+    "read_the_value_a_changed_condition_compares_against_out_of_the_program_and_deliver_it_at_the_type_that_can_carry_it": 1,
+    "search": 1,
+    "so": 1,
+    "specifies": 1,
+    "statement": 2,
+    "the_statement_names_the_change_and_never_specifies_it_20261116_v1": 1,
+    "the_statement_names_the_change_and_never_specifies_it__the_authors_own_commit_message_names_the_changed_hunk_on_six_of_eleven_and_four_of_eight_parts_but_specifies_an_expected_outcome_on_zero_of_nineteen_with_zero_candidates_walked__the_three_statements_that_do_quote_something_sit_on_fixes_whose_suites_already_pin_everything__six_dimensions_now_measured_tests_shape_wanted_value_corpus_operations_and_the_authors_words_with_no_new_pin_beyond_the_changes_own_test__what_remains_is_an_acquisition_contract_not_a_search": 1,
+    "v1": 1
    }
   },
   {
