@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 523,
+  "knowledge_documents": 524,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 7019,
+  "research_index_records": 7021,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 452,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "299a64b8bc3b12937924367f13117e3c1dcd48f23256556bdbc34a78d335e1e5"
+  "value": "4347ed94ebf825f5dbeb3361e90309195d5ce59883cbf1b5d3170e7335594696"
  },
  "engines": [
   {
@@ -57482,6 +57482,84 @@
     "execution",
     "perfect",
     "utc"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 8027,
+   "headings": [
+    "Permanence fails loudly where it is learnable, and cannot be learned where it is not",
+    "The question this round had to answer",
+    "The design, and why it cannot fool itself",
+    "The measurement",
+    "Four corrections I had to make to my own instrument before any of those numbers meant anything",
+    "What is real, what is not, and why the honest answer is the opposite of the alarm",
+    "The answer to the standing claim",
+    "What the next round must attack"
+   ],
+   "kind": "DOCUMENT",
+   "path": "PERMANENCE_FAILS_LOUDLY_WHERE_IT_IS_LEARNABLE_AND_CANNOT_BE_LEARNED_WHERE_IT_IS_NOT_20261116_V1.md",
+   "sha256": "f9d7bacf5c85d0f45b5f1c80eca843b40d510201427b6abe68ef82b2e5c06d6b",
+   "summary": "*Round 6. 2026-11-16. Branch `arena/331bd3ac-brain`, base `78125a64`.*",
+   "terms": {
+    "13": 7,
+    "21.0": 3,
+    "24.0": 4,
+    "39": 4,
+    "40": 3,
+    "action": 9,
+    "actions": 9,
+    "all": 7,
+    "answer": 4,
+    "blind": 6,
+    "bump": 4,
+    "callable": 4,
+    "cannot": 4,
+    "check": 7,
+    "environment": 7,
+    "every": 7,
+    "false": 5,
+    "had": 4,
+    "learnable": 4,
+    "learned": 16,
+    "measured": 5,
+    "minor": 4,
+    "module": 10,
+    "moved": 12,
+    "moves": 4,
+    "never": 9,
+    "no": 6,
+    "not": 20,
+    "nothing": 5,
+    "observable": 8,
+    "old": 6,
+    "once": 5,
+    "one": 12,
+    "only": 4,
+    "own": 5,
+    "packaging": 6,
+    "permanence": 5,
+    "real": 15,
+    "reported": 4,
+    "revision": 4,
+    "risk": 4,
+    "round": 10,
+    "same": 4,
+    "so": 6,
+    "they": 4,
+    "tree": 4,
+    "witness": 13,
+    "wrong": 4
+   },
+   "title": "Permanence fails loudly where it is learnable, and cannot be learned where it is not",
+   "title_terms": [
+    "cannot",
+    "fails",
+    "learnable",
+    "learned",
+    "loudly",
+    "not",
+    "permanence"
    ]
   },
   {
@@ -85768,10 +85846,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1325,
+  "included_source_count": 1326,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "e0b33c149f9fed2d75bc9fc20faea533cabb56a24af332d2c455260e5ea08619"
+  "source_tree_digest": "46bf49075786463bb6cd134a50e7e39ca0c11098de106403db19feea8b45c652"
  },
  "research_index": [
   {
@@ -198217,6 +198295,23 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "2026-11-16",
+   "id": "research:canonical/verification/RENEWABLE_ACTION_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/RENEWABLE_ACTION_20261116_V1.json",
+   "schema": "BRAIN_RENEWABLE_ACTION_V1",
+   "sha256": "572897317fae3b230056615c9d2bba0a96ecb0deb8d55ac1afb9374c60492638",
+   "status": "",
+   "terms": {
+    "20261116": 1,
+    "action": 1,
+    "renewable": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-11-01",
    "id": "research:canonical/verification/REPAIR_ADMISSION_KNOWN_COUNTEREXAMPLE_20261101_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -245427,6 +245522,29 @@
     "v1": 2,
     "verb": 2,
     "were": 2
+   }
+  },
+  {
+   "action_id": "RENEWABLE_ACTION_20261116_V1",
+   "capability": false,
+   "date": "2026-11-16",
+   "id": "research:canonical/action_intents/RENEWABLE_ACTION_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/RENEWABLE_ACTION_20261116_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "e57187d8606aa781c347032efd5e5542f1ace3b1dd8a5d933d5298a0eee11605",
+   "status": "PRODUCED",
+   "terms": {
+    "20261116": 1,
+    "action": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "learn_an_action_as_a_recorded_observable_at_one_real_revision__split_witnesses_into_learned_and_held_out_by_a_fixed_rule__control_for_nondeterminism_by_running_the_old_revision_twice__then_move_the_environment_to_a_real_later_release_and_count_moved_caught_blind_and_never_observable": 1,
+    "produced": 1,
+    "renewable": 1,
+    "renewable_action_20261116_v1": 1,
+    "the_ceiling_on_permanence_is_binding_not_drift__on_real_releases_31_percent_of_observable_learned_actions_were_invalidated_but_every_one_of_them_failed_loudly_at_every_single_learned_witness_while_39_percent_of_actions_could_not_be_exercised_at_all_because_the_arguments_that_would_make_them_run_are_not_in_the_environment_s_vocabulary__so_the_missing_organ_is_argument_construction_not_another_check": 1,
+    "the_third_manufacturability_route_is_closed_by_measurement_with_a_proven_instrument__40_real_commits_188_confirmed_laws_0_kills_and_174_of_the_laws_are_bare_totality__the_cause_is_named_real_work_extends_a_specification_instead_of_violating_a_property__so_the_next_organ_must_compile_intent_into_the_discriminating_pair_rather_than_derive_it_from_the_artifact": 1,
+    "v1": 1
    }
   },
   {
