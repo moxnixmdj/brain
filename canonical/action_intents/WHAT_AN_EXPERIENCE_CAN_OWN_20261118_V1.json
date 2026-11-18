@@ -41,7 +41,7 @@
  },
  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE LIMITING FACTOR IS NOT HOW MUCH IS REMEMBERED BUT WHETHER WHAT IS REMEMBERED IS INVARIANT ENOUGH TO RECUR AND INFORMATIVE ENOUGH TO BE RIGHT. Storing repairs in the most invariant form measured: 3 pairs, controls 3/3, 2 unseen programs fixed (longest_common_subsequence, next_palindrome, both the published fix), 104 matches at 1.92% precision for the only pair that transfers and 0-1 matches for the pairs that carry the fix; addressability of unseen sites saturates 34.4% -> 59.7% over 24 experiences. Memory's ceiling is 0.597 x 0.0192 ~ 1.1% of unseen decisions, while one asked question is exact at 7.69 ms.",
- "canonical_base_commit": "78125a64de07df312803afc383cfa14ffdf04132",
+ "canonical_base_commit": "c001c61528528a81c35742c80714d31e63c10c68",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -81,43 +81,43 @@
  },
  "measured_effect": {
   "authority": "NONE__PRODUCER_RUN_SANDBOX",
-  "corpus": "QuixBugs @ 4257f44b, 31 programs with published cases, 367 decision sites, 164 distinct shapes, zero model calls, zero network calls at run time, answer key absent from every task directory",
   "buckets": {
-   "programs": 31,
-   "sites": 367,
-   "distinct_shapes": 164,
-   "pairs_stored": 3,
-   "controls_passed": 3,
-   "attempts_in_unseen_programs": 105,
-   "unseen_programs_fixed": 2,
-   "precision_of_the_pair_that_transfers": 0.0192,
    "addressability": {
     "1": 0.3437,
-    "2": 0.3608,
-    "4": 0.4161,
-    "8": 0.4791,
     "16": 0.5575,
-    "24": 0.5968
+    "2": 0.3608,
+    "24": 0.5968,
+    "4": 0.4161,
+    "8": 0.4791
    },
-   "memory_ceiling_share_of_unseen_decisions": 0.0115
+   "attempts_in_unseen_programs": 105,
+   "controls_passed": 3,
+   "distinct_shapes": 164,
+   "memory_ceiling_share_of_unseen_decisions": 0.0115,
+   "pairs_stored": 3,
+   "precision_of_the_pair_that_transfers": 0.0192,
+   "programs": 31,
+   "sites": 367,
+   "unseen_programs_fixed": 2
   },
-  "solved": {
-   "longest_common_subsequence": "template (__S0__)[(1):] at the argument b -> the published fix verbatim",
-   "next_palindrome": "same template at digit_list -> len(digit_list[1:]) = published len(digit_list) - 1"
-  },
+  "corpus": "QuixBugs @ 4257f44b, 31 programs with published cases, 367 decision sites, 164 distinct shapes, zero model calls, zero network calls at run time, answer key absent from every task directory",
   "cost": {
-   "microseconds_per_lookup": 40.6,
    "measured_cost_of_one_question_ms": 7.69,
+   "microseconds_per_lookup": 40.6,
    "questions_the_search_needed_to_learn_these_pairs": 1674
   },
   "external_corroboration": {
-   "Learning on the Job (tau-bench banking, frozen weights, 2026)": "of 84 tasks the baseline never solved, experience converted 5 and instruction 22",
-   "Evo-Memory": "gain tracks task similarity, Pearson 0.717; fragile in stability and procedural reuse",
-   "PATH-Bench (2026)": "external experience does not universally improve lifelong performance; transfer does not ensure retention",
    "ACE / A-Mem (2026)": "+2.28% per-benchmark, -1.26% interleaved; A-Mem 577% of baseline inference cost",
+   "Evo-Memory": "gain tracks task similarity, Pearson 0.717; fragile in stability and procedural reuse",
+   "Learning on the Job (tau-bench banking, frozen weights, 2026)": "of 84 tasks the baseline never solved, experience converted 5 and instruction 22",
+   "PATH-Bench (2026)": "external experience does not universally improve lifelong performance; transfer does not ensure retention",
    "SWE-bench Verified / ProMax (2026)": "~87.6% vs 41.2%; all state-of-the-art agents below 20% on long-horizon tasks"
   },
-  "headline": "generality and information are one axis; memory's ceiling is 1.1% of unseen decisions and an asked question is exact -- so store the question, not the answer"
+  "headline": "generality and information are one axis; memory's ceiling is 1.1% of unseen decisions and an asked question is exact -- so store the question, not the answer",
+  "solved": {
+   "longest_common_subsequence": "template (__S0__)[(1):] at the argument b -> the published fix verbatim",
+   "next_palindrome": "same template at digit_list -> len(digit_list[1:]) = published len(digit_list) - 1"
+  }
  },
  "next_step": "Fill the question table -- shape -> which value the failing case demands -- over the corpus and measure questions-to-fix against the measured baseline (75, 679, 920 questions per bug), then run the same instrument on a real repository where the interface is a compiler and a test suite.",
  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -135,7 +135,7 @@
   "canonical/action_intents/WHAT_AN_EXPERIENCE_CAN_OWN_20261118_V1.md"
  ],
  "recursive_obs": {
-  "canonical_base_commit": "78125a64de07df312803afc383cfa14ffdf04132",
+  "canonical_base_commit": "c001c61528528a81c35742c80714d31e63c10c68",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "storing the text that was edited (a spelling destroyed by a rename)",
@@ -234,8 +234,6 @@
   "route_frontier": {
    "challenger_routes": [
     {
-     "route": "teach one more edit class per failing task",
-     "resolution": "DISQUALIFIED",
      "comparison": {
       "CAPABILITY_STRENGTH": "3 of 40 programs",
       "CORRECTNESS": "a class is only as good as its donor",
@@ -252,11 +250,11 @@
      ],
      "qualification_evidence_classes": [
       "DIRECT_PROBE"
-     ]
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "teach one more edit class per failing task"
     },
     {
-     "route": "store every verified repair and retrieve it by similarity",
-     "resolution": "NON_DOMINATING",
      "comparison": {
       "CAPABILITY_STRENGTH": "2 of 30 unseen programs from 3 pairs, at 1.92% precision on the pair that fires",
       "CORRECTNESS": "the corpus's own pytest decides, as here",
@@ -273,11 +271,11 @@
      ],
      "qualification_evidence_classes": [
       "DIRECT_PROBE"
-     ]
+     ],
+     "resolution": "NON_DOMINATING",
+     "route": "store every verified repair and retrieve it by similarity"
     },
     {
-     "route": "store the question instead of the answer, and answer it at the site",
-     "resolution": "SELECTED",
      "comparison": {
       "CAPABILITY_STRENGTH": "3 of 14 never-repaired bugs closed by asking (measured last round), exact",
       "CORRECTNESS": "the artifact answers, so a question is either answered or refused -- never wrong",
@@ -295,7 +293,9 @@
      ],
      "qualification_evidence_classes": [
       "DIRECT_PROBE"
-     ]
+     ],
+     "resolution": "SELECTED",
+     "route": "store the question instead of the answer, and answer it at the site"
     }
    ],
    "checked_at_utc": "2026-11-18T01:19:21Z",
