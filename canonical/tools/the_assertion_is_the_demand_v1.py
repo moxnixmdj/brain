@@ -1148,7 +1148,7 @@ def explore(repo: pathlib.Path, entry: dict[str, Any], *, cap: int = 400_000, su
         try:
             (worktree / test_path).write_text(identify.show(repo, sha, test_path), encoding="utf-8")
             source_path, site = None, None
-            original = None
+            original, site_finder, why = None, None, None
             for candidate_source in entry["sources"]:
                 text = identify.show(repo, parent, candidate_source)
                 if not text:
@@ -1156,7 +1156,30 @@ def explore(repo: pathlib.Path, entry: dict[str, Any], *, cap: int = 400_000, su
                 found, why = space_tool.site_or_reason(repo, sha, candidate_source, text)
                 if found is not None:
                     source_path, site, original = candidate_source, found, text
+                    site_finder = "diff_hunk"
                     break
+            if site is None:
+                # FORMATTING IS NOT A FACT ABOUT THE FIX. The hunk finder needs one removed and one added
+                # line, so it excludes a one-expression change that the formatter wrapped, and it excludes a
+                # line that was merely moved. The two revisions as ASTs are the same fix with the formatting
+                # deleted; 4 of the 15 excluded rows are one statement there.
+                semantic_reasons = []
+                for candidate_source in entry["sources"]:
+                    text = identify.show(repo, parent, candidate_source)
+                    if not text:
+                        continue
+                    child_text = identify.show(repo, sha, candidate_source)
+                    found, semantic_why = space_tool.semantic_site(text, child_text)
+                    semantic_reasons.append(f"{candidate_source}:{semantic_why}")
+                    if found is not None:
+                        source_path, site, original = candidate_source, found, text
+                        site_finder = "semantic_ast"
+                        break
+                # BOTH FINDERS REPORT. The hunk reason alone ("MULTI_LINE_EDIT") is a fact about a diff;
+                # the AST reason is a fact about the fix, and the receipt must carry the second or the
+                # exclusion cannot be argued with.
+                ast_reason = "|".join(semantic_reasons) if semantic_reasons else "NO_SOURCE_FILE_IN_THE_COMMIT"
+                why = f"{why or 'HUNK_FINDER_FOUND_NOTHING'}|AST:{ast_reason}"
             if site is None:
                 # "Not a single expression" is a bucket, not a reason. The population's own words are
                 # already computed by `site_or_reason`; discarding them made 15 different facts look like
@@ -1164,9 +1187,14 @@ def explore(repo: pathlib.Path, entry: dict[str, Any], *, cap: int = 400_000, su
                 return {"stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT",
                         "why": why or "NO_SOURCE_FILE_IN_THE_COMMIT"}
 
-            verdicts, _output = identify.run_tests_full(worktree, test_path, seconds)
+            verdicts, output = identify.run_tests_full(worktree, test_path, seconds)
             failing = identify.failing_tests(verdicts)
             if not failing:
+                # A HARNESS FAILURE MUST NOT WEAR A FACT'S NAME. Measured: a missing pytest plugin aborted
+                # collection in 15 of 30 rows and this line reported "no failing test" -- a claim about the
+                # commit, manufactured by my own environment. Nothing ran; that is what it now says.
+                if not verdicts:
+                    return {"stage": "TESTS_DID_NOT_RUN", "pytest_tail": (output or "")[-400:]}
                 return {"stage": "NO_FAILING_TEST"}
             node_id = failing[0]
             node = node_id if "::" in node_id else f"{test_path}::{node_id}"
@@ -1219,10 +1247,12 @@ def explore(repo: pathlib.Path, entry: dict[str, Any], *, cap: int = 400_000, su
                 return {"stage": "DRIVER_ERROR", "error": driven["driver_error"]}
             if not driven.get("frames"):
                 return {"stage": "THE_SITE_NEVER_RAN_IN_THE_FAILING_TEST", "failing_test": node_id,
-                        "site_line": site["line"], "seconds": round(time.time() - started, 2)}
+                        "site_line": site["line"], "site_finder": site_finder,
+                        "seconds": round(time.time() - started, 2)}
             if driven.get("relation") == "NONE":
                 return {"stage": "NO_RELATION_BETWEEN_THE_DEMAND_AND_THE_SITE",
                         "failing_test": node_id, "site_line": site["line"],
+                        "site_finder": site_finder,
                         "site_expression": site["old_expression"],
                         "table": driven.get("table"), "audit": driven.get("audit"),
                         "prose_refused": driven.get("prose_refused", 0),
@@ -1234,7 +1264,8 @@ def explore(repo: pathlib.Path, entry: dict[str, Any], *, cap: int = 400_000, su
                         "seconds": round(time.time() - started, 2)}
             if not driven.get("assertions"):
                 return {"stage": "NO_ASSERTION_DEMAND", "failing_test": node_id,
-                        "site_line": site["line"], "site_expression": site["old_expression"],
+                        "site_line": site["line"], "site_finder": site_finder,
+                        "site_expression": site["old_expression"],
                         "frames": driven.get("frames", 0), "pytest_code": driven.get("pytest_code"),
                         "seconds": round(time.time() - started, 2)}
 
@@ -1302,7 +1333,7 @@ def explore(repo: pathlib.Path, entry: dict[str, Any], *, cap: int = 400_000, su
                           ("SPEC_DEMAND_FOUND_NOTHING" if driven.get("demand_provenance") == "SPEC_LITERALS"
                            else "NO_VALUE_MATCHES")),
                 "demand_provenance": driven.get("demand_provenance"),
-                "failing_test": node_id, "site_line": site["line"],
+                "failing_test": node_id, "site_line": site["line"], "site_finder": site_finder,
                 "site_expression": site["old_expression"],
                 "human_expression": site["human_expression"],
                 "count_contrasts": bool(count_contrasts),
