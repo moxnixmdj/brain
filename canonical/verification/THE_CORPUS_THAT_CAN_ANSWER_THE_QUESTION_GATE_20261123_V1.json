@@ -1,0 +1,53 @@
+{
+ "schema": "BRAIN_THE_CORPUS_THAT_CAN_ANSWER_THE_QUESTION_V1__RECEIPT",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "date": "2026-11-23",
+ "mode": "MINE_REAL_HISTORY",
+ "repos": [
+  "more-itertools",
+  "pluggy",
+  "markupsafe",
+  "werkzeug",
+  "itsdangerous"
+ ],
+ "totals": {
+  "gated": 181,
+  "admitted": 45,
+  "gate_stages": {
+   "ADMITTED": 45,
+   "PARENT_NO_VERDICTS: E   DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.Bloc": 25,
+   "PARENT_PASSES": 24,
+   "COMMIT_DOES_NOT_REPAIR=1+0": 23,
+   "PARENT_NO_VERDICTS: E   ImportError: cannot import name 'soft_unicode' from 'markupsafe' (/home/user/brain/.venv/lib/pyt": 9,
+   "PARENT_NO_VERDICTS: E   ImportError: cannot import name 'SNIMissingWarning' from 'urllib3.exceptions' (/home/user/brain/": 6,
+   "PARENT_NO_VERDICTS: E   ModuleNotFoundError: No module named 'hstspreload'": 5,
+   "PARENT_NO_VERDICTS: pytest.PytestConfigWarning: Failed to import filter module 'urllib3._version': default:No IPv6 suppo": 4,
+   "PARENT_NO_VERDICTS: pytest-xprocess reminder::Be sure to terminate the started process by running 'pytest --xkill' if yo": 3,
+   "PARENT_NO_VERDICTS: E   ModuleNotFoundError: No module named 'httpx2'": 3,
+   "COMMIT_DOES_NOT_REPAIR=2+0": 3,
+   "PARENT_NO_VERDICTS: Failed: [pytest] section in setup.cfg files is no longer supported, change to [tool:pytest] instead.": 3,
+   "PARENT_NO_VERDICTS: E   TypeError: field() got an unexpected keyword argument 'alias'": 3,
+   "PARENT_NO_VERDICTS: E   ModuleNotFoundError: No module named 'dateutil'": 3,
+   "PARENT_NO_VERDICTS: Argument(s) {'path'} are declared in the hookimpl but can not be found in the hookspec": 2,
+   "PARENT_NO_VERDICTS: E   ModuleNotFoundError: No module named 'rfc3986'": 2,
+   "PARENT_NO_VERDICTS: E   AttributeError: module 'httpcore' has no attribute 'CloseError'": 2,
+   "PARENT_NO_VERDICTS: E   ModuleNotFoundError: No module named 'chardet'": 2,
+   "COMMIT_DOES_NOT_REPAIR=5+0": 2,
+   "PARENT_NO_VERDICTS: ModuleNotFoundError: No module named 'pluggy._version'": 1,
+   "PARENT_NO_VERDICTS: ImportError: cannot import name 'HookimplOpts' from 'pluggy' (/tmp/tmp791iao9x/wt/src/pluggy/__init_": 1,
+   "PARENT_NO_VERDICTS: ImportError: cannot import name 'HookimplOpts' from 'pluggy' (/tmp/tmp1ol_vq17/wt/pluggy/__init__.py": 1,
+   "COMMIT_DOES_NOT_REPAIR=28+0": 1,
+   "PARENT_NO_VERDICTS: E   DeprecationWarning: 'utils.HTMLBuilder' is deprecated and will be removed in 2.1.": 1,
+   "PARENT_NO_VERDICTS: E   ModuleNotFoundError: No module named 'blockbuster'": 1,
+   "PARENT_NO_VERDICTS:   rootdir: /tmp/tmpiuv_wjd4/wt": 1,
+   "PARENT_NO_VERDICTS:   rootdir: /tmp/tmpw41jicv1/wt": 1,
+   "PARENT_NO_VERDICTS: E   ImportError: cannot import name 'AttrsInstance' from 'attr' (/tmp/tmpwo1pfki4/wt/src/attr/__init": 1,
+   "COMMIT_DOES_NOT_REPAIR=188+0": 1,
+   "COMMIT_DOES_NOT_REPAIR=196+0": 1,
+   "PARENT_NO_VERDICTS: E   ModuleNotFoundError: No module named 'quart'": 1
+  },
+  "expression_pairs": 5,
+  "commits_scanned_per_task": null
+ },
+ "seconds": 352.5
+}

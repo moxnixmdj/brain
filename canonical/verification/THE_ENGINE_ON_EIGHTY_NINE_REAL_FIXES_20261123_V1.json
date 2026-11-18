@@ -1,0 +1,2098 @@
+{
+ "schema": "BRAIN_THE_ASSERTION_IS_THE_DEMAND_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "date": "2026-11-19",
+ "mode": "SWEEP_REAL_HISTORY",
+ "rows": [
+  {
+   "repo": "packaging",
+   "commit": "46167dcdb1c8ae42c2dd72d3fdb91564be65a0db",
+   "test": "tests/test_ranges.py",
+   "stage": "NO_VALUE_MATCHES",
+   "failing_test": "tests/test_ranges.py::test_copy_and_pickle_preserve_state[False--None-copy]",
+   "site_line": 22,
+   "site_expression": "f'{__spec__.parent}._ranges'",
+   "human_expression": "'copyreg'",
+   "count_contrasts": false,
+   "identify_curve": null,
+   "audit": null,
+   "table": [],
+   "human_admissible": null,
+   "contrast": null,
+   "frames": 1,
+   "table_rows": 0,
+   "space_offered_before_survivors": 0,
+   "survivors": 0,
+   "survivor_sources": [],
+   "human_expression_rank": null,
+   "verifications": 0,
+   "found": null,
+   "greens": [],
+   "green_count": 0,
+   "found_is_the_human_fix": false,
+   "parameters_stored": 0,
+   "seconds": 34.96
+  },
+  {
+   "repo": "packaging",
+   "commit": "5a7d3386d2777180a381eb947f21293124ce8df5",
+   "test": "tests/test_requirements.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "packaging",
+   "commit": "8efde605cc2666f4ab75e028b578b395ba288401",
+   "test": "tests/test_dependency_groups.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "packaging",
+   "commit": "7d0611d420c80d4da99eb5c254e7c4acdbabbe30",
+   "test": "tests/test_markers.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "packaging",
+   "commit": "491af5d517cdf6d72c2cf754f6eafd247ab8f559",
+   "test": "tests/test_markers.py",
+   "stage": "NO_RELATION_BETWEEN_THE_DEMAND_AND_THE_SITE",
+   "failing_test": "tests/test_markers.py::test_chaining_associativity_and_str",
+   "site_line": 569,
+   "site_expression": "[self._markers, 'and', other._markers]",
+   "table": [],
+   "audit": null,
+   "prose_refused": 0,
+   "refusals": [
+    {
+     "node": "tests/test_markers.py::test_chaining_associativity_and_str",
+     "side": "right",
+     "demanded": "<Marker('(python_version >= \"3.6\" and os_name == \"posix\") and platform_system == \"Linux\"')>",
+     "produced": [
+      "[[(<Variable('python_version')>, <Op('>=')>, <Value('3.6')>)], 'and', [(<Variable('os_name')>, <Op('==')>, <Value('po...",
+      "[[[(<Variable('python_version')>, <Op('>=')>, <Value('3.6')>)], 'and', [(<Variable('os_name')>, <Op('==')>, <Value('p..."
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_markers.py::test_chaining_associativity_and_str",
+     "side": "left",
+     "demanded": "<Marker('python_version >= \"3.6\" and os_name == \"posix\" and platform_system == \"Linux\"')>",
+     "produced": [
+      "[[(<Variable('python_version')>, <Op('>=')>, <Value('3.6')>)], 'and', [(<Variable('os_name')>, <Op('==')>, <Value('po...",
+      "[[[(<Variable('python_version')>, <Op('>=')>, <Value('3.6')>)], 'and', [(<Variable('os_name')>, <Op('==')>, <Value('p..."
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_markers.py::test_chaining_associativity_and_str",
+     "side": "right",
+     "demanded": "('assert <Marker(\\'python_version >= \"3.6\" and os_name == \"posix\" and platform_system == \"Linux\"\\')> == <Marker(\\'(py...",
+     "produced": [
+      "[[(<Variable('python_version')>, <Op('>=')>, <Value('3.6')>)], 'and', [(<Variable('os_name')>, <Op('==')>, <Value('po...",
+      "[[[(<Variable('python_version')>, <Op('>=')>, <Value('3.6')>)], 'and', [(<Variable('os_name')>, <Op('==')>, <Value('p..."
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_markers.py::test_chaining_associativity_and_str",
+     "side": "left",
+     "demanded": "AssertionError('assert <Marker(\\'python_version >= \"3.6\" and os_name == \"posix\" and platform_system == \"Linux\"\\')> ==...",
+     "produced": [
+      "[[(<Variable('python_version')>, <Op('>=')>, <Value('3.6')>)], 'and', [(<Variable('os_name')>, <Op('==')>, <Value('po...",
+      "[[[(<Variable('python_version')>, <Op('>=')>, <Value('3.6')>)], 'and', [(<Variable('os_name')>, <Op('==')>, <Value('p..."
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_markers.py::test_long_chain_round_trips[and_]",
+     "side": "right",
+     "demanded": "('maximum recursion depth exceeded',)",
+     "produced": [
+      "[[(<Variable('os_name')>, <Op('==')>, <Value('0')>)], 'and', [(<Variable('os_name')>, <Op('==')>, <Value('1')>)]]",
+      "[[[(<Variable('os_name')>, <Op('==')>, <Value('0')>)], 'and', [(<Variable('os_name')>, <Op('==')>, <Value('1')>)]], '...",
+      "[[[[(<Variable('os_name')>, <Op('==')>, <Value('0')>)], 'and', [(<Variable('os_name')>, <Op('==')>, <Value('1')>)]], ...",
+      "[[[[[(<Variable('os_name')>, <Op('==')>, <Value('0')>)], 'and', [(<Variable('os_name')>, <Op('==')>, <Value('1')>)]],..."
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_markers.py::test_long_chain_round_trips[and_]",
+     "side": "left",
+     "demanded": "RecursionError('maximum recursion depth exceeded')",
+     "produced": [
+      "[[(<Variable('os_name')>, <Op('==')>, <Value('0')>)], 'and', [(<Variable('os_name')>, <Op('==')>, <Value('1')>)]]",
+      "[[[(<Variable('os_name')>, <Op('==')>, <Value('0')>)], 'and', [(<Variable('os_name')>, <Op('==')>, <Value('1')>)]], '...",
+      "[[[[(<Variable('os_name')>, <Op('==')>, <Value('0')>)], 'and', [(<Variable('os_name')>, <Op('==')>, <Value('1')>)]], ...",
+      "[[[[[(<Variable('os_name')>, <Op('==')>, <Value('0')>)], 'and', [(<Variable('os_name')>, <Op('==')>, <Value('1')>)]],..."
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_markers.py::test_long_chain_round_trips[or_]",
+     "side": "right",
+     "demanded": "('maximum recursion depth exceeded',)",
+     "produced": [],
+     "reason": "THE_SITE_PRODUCED_NO_VALUE"
+    },
+    {
+     "node": "tests/test_markers.py::test_long_chain_round_trips[or_]",
+     "side": "left",
+     "demanded": "RecursionError('maximum recursion depth exceeded')",
+     "produced": [],
+     "reason": "THE_SITE_PRODUCED_NO_VALUE"
+    }
+   ],
+   "greens": [],
+   "green_count": 0,
+   "survivors": 0,
+   "parameters_stored": 0,
+   "seconds": 10.38
+  },
+  {
+   "repo": "packaging",
+   "commit": "a03bde12d560b16b175c336c373040347773ce03",
+   "test": "tests/test_requirements.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "packaging",
+   "commit": "cd91074b050056e2013c08611370abb4138165e7",
+   "test": "tests/test_ranges.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "packaging",
+   "commit": "8c37b0476f9406aa4578b853bbbcf7af1967d703",
+   "test": "tests/test_licenses.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "packaging",
+   "commit": "b1c439b0f1fb1a8c541a5f0770946983c5d38b8c",
+   "test": "tests/test_metadata.py",
+   "stage": "NO_VALUE_MATCHES",
+   "failing_test": "tests/test_metadata.py::TestMetadata::test_subclass_round_trip[False-False]",
+   "site_line": 856,
+   "site_expression": "cls",
+   "human_expression": "Metadata",
+   "count_contrasts": false,
+   "identify_curve": null,
+   "audit": null,
+   "table": [],
+   "human_admissible": false,
+   "contrast": {
+    "rows": 12,
+    "admissible": 24,
+    "masks": {
+     "0": 24
+    },
+    "human_mask": 12,
+    "human_mask_bits": "0b111111111111"
+   },
+   "frames": 142,
+   "table_rows": 0,
+   "space_offered_before_survivors": 2839,
+   "survivors": 24,
+   "survivor_sources": [
+    "closure",
+    "closure",
+    "closure",
+    "closure",
+    "closure",
+    "closure",
+    "closure",
+    "closure",
+    "closure",
+    "closure",
+    "closure",
+    "closure"
+   ],
+   "human_expression_rank": null,
+   "verifications": 10,
+   "found": null,
+   "greens": [],
+   "green_count": 0,
+   "found_is_the_human_fix": false,
+   "parameters_stored": 0,
+   "seconds": 13.58
+  },
+  {
+   "repo": "packaging",
+   "commit": "31b2d0131910196c9ef494a6ce2d0b12354efad6",
+   "test": "tests/test_dependency_groups.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "packaging",
+   "commit": "bddb69038b25b974bdf27d06d500dc05b1f8f97e",
+   "test": "tests/test_markers.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "packaging",
+   "commit": "2d57ce2b15a85be2c2b07ad5831ed4921429edcb",
+   "test": "tests/test_dependency_groups.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "packaging",
+   "commit": "4b243af94ff6885c89b8acd7a22fc5714b18cb96",
+   "test": "tests/test_requirements.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "packaging",
+   "commit": "2c87a33f665828b7aa0f650b1b50243b3ab95695",
+   "test": "tests/test_licenses.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "packaging",
+   "commit": "0625596e502163179b9a82796aee82c178efc16d",
+   "test": "tests/test_utils.py",
+   "stage": "NO_ASSERTION_DEMAND",
+   "failing_test": "tests/test_utils.py::test_parse_wheel_invalid_filename[foo-1.0-1\\n-py3-none-any.whl]",
+   "site_line": 76,
+   "site_expression": "'(\\\\d+)(.*)'",
+   "frames": 1,
+   "pytest_code": 1,
+   "seconds": 1.17
+  },
+  {
+   "repo": "packaging",
+   "commit": "959bb79c06cb883bf1ecd1ddc94a079294907e0f",
+   "test": "tests/test_dependency_groups.py",
+   "stage": "NO_RELATION_BETWEEN_THE_DEMAND_AND_THE_SITE",
+   "failing_test": "tests/test_dependency_groups.py::test_expand_contract_model_only_does_inner_lookup_once",
+   "site_line": 158,
+   "site_expression": "self._resolve(group, group, errors)",
+   "table": [],
+   "audit": null,
+   "prose_refused": 0,
+   "refusals": [
+    {
+     "node": "tests/test_dependency_groups.py::test_expand_contract_model_only_does_inner_lookup_once",
+     "side": "right",
+     "demanded": "(\"_resolve('leaf', 'root', <ANY>, <ANY>) call not found\",)",
+     "produced": [
+      "(<Requirement('attrs')>, <Requirement('attrs')>, <Requirement('attrs')>, <Requirement('attrs')>)"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_dependency_groups.py::test_expand_contract_model_only_does_inner_lookup_once",
+     "side": "left",
+     "demanded": "AssertionError(\"_resolve('leaf', 'root', <ANY>, <ANY>) call not found\")",
+     "produced": [
+      "(<Requirement('attrs')>, <Requirement('attrs')>, <Requirement('attrs')>, <Requirement('attrs')>)"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_dependency_groups.py::test_error_in_later_sibling_include_is_collected",
+     "side": "right",
+     "demanded": "2",
+     "produced": [
+      "()"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_dependency_groups.py::test_error_in_later_sibling_include_is_collected",
+     "side": "left",
+     "demanded": "1",
+     "produced": [
+      "()"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_dependency_groups.py::test_error_in_later_sibling_include_is_collected",
+     "side": "right",
+     "demanded": "(\"assert 1 == 2\\n +  where 1 = len(['Expected package name at the start of dependency specifier\\\\n    !!! bad invalid...",
+     "produced": [
+      "()"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_dependency_groups.py::test_error_in_later_sibling_include_is_collected",
+     "side": "left",
+     "demanded": "AssertionError(\"assert 1 == 2\\n +  where 1 = len(['Expected package name at the start of dependency specifier\\\\n    !...",
+     "produced": [
+      "()"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    }
+   ],
+   "greens": [],
+   "green_count": 0,
+   "survivors": 0,
+   "parameters_stored": 0,
+   "seconds": 1.25
+  },
+  {
+   "repo": "packaging",
+   "commit": "d17cfaf0b77a5690f03087359e7c8d665a3c728d",
+   "test": "tests/test_markers.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "packaging",
+   "commit": "022ae6c6fe5c2ef9615875d0ecfab1ae4024720f",
+   "test": "tests/test_metadata.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "packaging",
+   "commit": "2602dd07d8bd5d6c54a3ce0e212f52eb2e127f3e",
+   "test": "tests/test_requirements.py",
+   "stage": "NO_ASSERTION_DEMAND",
+   "failing_test": "tests/test_requirements.py::TestRequirementParsing::test_error_when_suffixed_with_line_break[name @ https://example.com/name.whl-\\n]",
+   "site_line": 85,
+   "site_expression": "'[^ \\\\t]+'",
+   "frames": 1,
+   "pytest_code": 1,
+   "seconds": 13.93
+  },
+  {
+   "repo": "packaging",
+   "commit": "23669b1b69fb5fffbc773a68fc099166fc847356",
+   "test": "tests/test_pylock_select.py",
+   "stage": "NO_RELATION_BETWEEN_THE_DEMAND_AND_THE_SITE",
+   "failing_test": "tests/test_pylock_select.py::test_unknown_extras",
+   "site_line": 665,
+   "site_expression": "extras or []",
+   "table": [],
+   "audit": null,
+   "prose_refused": 0,
+   "refusals": [],
+   "greens": [],
+   "green_count": 0,
+   "survivors": 0,
+   "parameters_stored": 0,
+   "seconds": 1.23
+  },
+  {
+   "repo": "packaging",
+   "commit": "55cbf1b9426f44455fa1a9e0836f1fc082cc8452",
+   "test": "tests/test_ranges.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "packaging",
+   "commit": "b80e6eb0a6c0f61dcaa9b1587f3aab370263dc65",
+   "test": "tests/test_pylock_select.py",
+   "stage": "NO_RELATION_BETWEEN_THE_DEMAND_AND_THE_SITE",
+   "failing_test": "tests/test_pylock_select.py::test_lock_no_matching_env[environments0]",
+   "site_line": 839,
+   "site_expression": "self.environments",
+   "table": [],
+   "audit": null,
+   "prose_refused": 0,
+   "refusals": [],
+   "greens": [],
+   "green_count": 0,
+   "survivors": 0,
+   "parameters_stored": 0,
+   "seconds": 1.33
+  },
+  {
+   "repo": "packaging",
+   "commit": "2d873eb6002021a8c007c933fbdab58b37a5079b",
+   "test": "tests/test_metadata.py",
+   "stage": "NO_RELATION_BETWEEN_THE_DEMAND_AND_THE_SITE",
+   "failing_test": "tests/test_metadata.py::TestMetadata::test_invalid_summary[Hello\\rAgain]",
+   "site_line": 325,
+   "site_expression": "value.replace('\\n', '\\n' + ' ' * size)",
+   "table": [],
+   "audit": null,
+   "prose_refused": 0,
+   "refusals": [
+    {
+     "node": "tests/test_metadata.py::TestMetadataWriting::test_write_metadata_with_carriage_return",
+     "side": "right",
+     "demanded": "(\"folded header contains newline: 'author: Hello\\\\nWorld\\\\n'\",)",
+     "produced": [
+      "'2.3'",
+      "'packaging'",
+      "'1.2.3'",
+      "'Hello\\rWorld'"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_metadata.py::TestMetadataWriting::test_write_metadata_with_carriage_return",
+     "side": "left",
+     "demanded": "HeaderWriteError(\"folded header contains newline: 'author: Hello\\\\nWorld\\\\n'\")",
+     "produced": [
+      "'2.3'",
+      "'packaging'",
+      "'1.2.3'",
+      "'Hello\\rWorld'"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_metadata.py::TestMetadataWriting::test_headers_fold_every_line_boundary[\\r]",
+     "side": "right",
+     "demanded": "(\"folded header contains newline: 'ItemA: ValueA\\\\nRequires-Dist: injected\\\\n'\",)",
+     "produced": [
+      "'ValueA\\rRequires-Dist: injected'"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_metadata.py::TestMetadataWriting::test_headers_fold_every_line_boundary[\\r]",
+     "side": "left",
+     "demanded": "HeaderWriteError(\"folded header contains newline: 'ItemA: ValueA\\\\nRequires-Dist: injected\\\\n'\")",
+     "produced": [
+      "'ValueA\\rRequires-Dist: injected'"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_metadata.py::TestMetadataWriting::test_headers_fold_every_line_boundary[\\x0b]",
+     "side": "right",
+     "demanded": "(\"folded header contains newline: 'ItemA: ValueA\\\\nRequires-Dist: injected\\\\n'\",)",
+     "produced": [
+      "'ValueA\\x0bRequires-Dist: injected'"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_metadata.py::TestMetadataWriting::test_headers_fold_every_line_boundary[\\x0b]",
+     "side": "left",
+     "demanded": "HeaderWriteError(\"folded header contains newline: 'ItemA: ValueA\\\\nRequires-Dist: injected\\\\n'\")",
+     "produced": [
+      "'ValueA\\x0bRequires-Dist: injected'"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_metadata.py::TestMetadataWriting::test_headers_fold_every_line_boundary[\\x0c]",
+     "side": "right",
+     "demanded": "(\"folded header contains newline: 'ItemA: ValueA\\\\nRequires-Dist: injected\\\\n'\",)",
+     "produced": [
+      "'ValueA\\x0cRequires-Dist: injected'"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_metadata.py::TestMetadataWriting::test_headers_fold_every_line_boundary[\\x0c]",
+     "side": "left",
+     "demanded": "HeaderWriteError(\"folded header contains newline: 'ItemA: ValueA\\\\nRequires-Dist: injected\\\\n'\")",
+     "produced": [
+      "'ValueA\\x0cRequires-Dist: injected'"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    }
+   ],
+   "greens": [],
+   "green_count": 0,
+   "survivors": 0,
+   "parameters_stored": 0,
+   "seconds": 2.69
+  },
+  {
+   "repo": "packaging",
+   "commit": "826426fc88773515fab149a5f6bde85761e57fbb",
+   "test": "tests/test_pylock_select.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "packaging",
+   "commit": "fe18f139c5b3d73cd9fdd9b25f1eda1b6fd7ba15",
+   "test": "tests/test_requirements.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "packaging",
+   "commit": "9c652e4b4ced3c94f133a1b91c726023f0950b4f",
+   "test": "tests/test_pylock_select.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "packaging",
+   "commit": "8af75907bf1140071a6a706874fcf1d73cc39c71",
+   "test": "tests/test_utils.py",
+   "stage": "NO_ASSERTION_DEMAND",
+   "failing_test": "tests/test_utils.py::test_parse_wheel_invalid_filename[foo\\n-1.0-py3-none-any.whl]",
+   "site_line": 69,
+   "site_expression": "'^[\\\\w._]+$'",
+   "frames": 1,
+   "pytest_code": 1,
+   "seconds": 1.34
+  },
+  {
+   "repo": "packaging",
+   "commit": "206834025040aca6f8a2fdfc4039dbfa2a9861a6",
+   "test": "tests/test_metadata.py",
+   "stage": "NO_RELATION_BETWEEN_THE_DEMAND_AND_THE_SITE",
+   "failing_test": "tests/test_metadata.py::TestMetadata::test_from_email_unparsed",
+   "site_line": 871,
+   "site_expression": "'unparsed'",
+   "table": [],
+   "audit": null,
+   "prose_refused": 0,
+   "refusals": [
+    {
+     "node": "tests/test_metadata.py::TestMetadata::test_from_email_unparsed",
+     "side": "right",
+     "demanded": "4",
+     "produced": [
+      "'unparsed'"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_metadata.py::TestMetadata::test_from_email_unparsed",
+     "side": "left",
+     "demanded": "1",
+     "produced": [
+      "'unparsed'"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_metadata.py::TestMetadata::test_from_email_unparsed",
+     "side": "right",
+     "demanded": "('assert 1 == 4\\n +  where 1 = len((InvalidMetadata(\"unrecognized field: \\'hello\\'\"),))',)",
+     "produced": [
+      "'unparsed'"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_metadata.py::TestMetadata::test_from_email_unparsed",
+     "side": "left",
+     "demanded": "AssertionError('assert 1 == 4\\n +  where 1 = len((InvalidMetadata(\"unrecognized field: \\'hello\\'\"),))')",
+     "produced": [
+      "'unparsed'"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_metadata.py::TestMetadata::test_from_email_collects_unparsed_and_invalid_fields",
+     "side": "right",
+     "demanded": "2",
+     "produced": [
+      "'unparsed'"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_metadata.py::TestMetadata::test_from_email_collects_unparsed_and_invalid_fields",
+     "side": "left",
+     "demanded": "1",
+     "produced": [
+      "'unparsed'"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_metadata.py::TestMetadata::test_from_email_collects_unparsed_and_invalid_fields",
+     "side": "right",
+     "demanded": "('assert 1 == 2\\n +  where 1 = len((InvalidMetadata(\"\\'name\\' has invalid data\"),))',)",
+     "produced": [
+      "'unparsed'"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_metadata.py::TestMetadata::test_from_email_collects_unparsed_and_invalid_fields",
+     "side": "left",
+     "demanded": "AssertionError('assert 1 == 2\\n +  where 1 = len((InvalidMetadata(\"\\'name\\' has invalid data\"),))')",
+     "produced": [
+      "'unparsed'"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    }
+   ],
+   "greens": [],
+   "green_count": 0,
+   "survivors": 0,
+   "parameters_stored": 0,
+   "seconds": 2.18
+  },
+  {
+   "repo": "packaging",
+   "commit": "abf000549c2ec5b31357046498d6e4f0f9d7d743",
+   "test": "tests/test_metadata.py",
+   "stage": "NO_RELATION_BETWEEN_THE_DEMAND_AND_THE_SITE",
+   "failing_test": "tests/test_metadata.py::TestMetadata::test_from_email_description_content_type_lowercase_charset",
+   "site_line": 671,
+   "site_expression": "charset != 'UTF-8'",
+   "table": [],
+   "audit": null,
+   "prose_refused": 0,
+   "refusals": [
+    {
+     "node": "tests/test_metadata.py::TestMetadata::test_from_email_description_content_type_lowercase_charset",
+     "side": "right",
+     "demanded": "('invalid or unparsed metadata', (InvalidMetadata(\"'description-content-type' can only specify the UTF-8 charset, not...",
+     "produced": [
+      "True"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_metadata.py::TestMetadata::test_from_email_description_content_type_lowercase_charset",
+     "side": "left",
+     "demanded": "ExceptionGroup('invalid or unparsed metadata', (InvalidMetadata(\"'description-content-type' can only specify the UTF-...",
+     "produced": [
+      "True"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_metadata.py::TestMetadata::test_valid_description_content_type[text/plain; charset=utf-8]",
+     "side": "right",
+     "demanded": "(\"'description-content-type' can only specify the UTF-8 charset, not 'utf-8'\",)",
+     "produced": [
+      "True"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_metadata.py::TestMetadata::test_valid_description_content_type[text/plain; charset=utf-8]",
+     "side": "left",
+     "demanded": "InvalidMetadata(\"'description-content-type' can only specify the UTF-8 charset, not 'utf-8'\")",
+     "produced": [
+      "True"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_metadata.py::TestMetadata::test_valid_description_content_type[text/plain; charset=Utf-8]",
+     "side": "right",
+     "demanded": "(\"'description-content-type' can only specify the UTF-8 charset, not 'Utf-8'\",)",
+     "produced": [
+      "True"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_metadata.py::TestMetadata::test_valid_description_content_type[text/plain; charset=Utf-8]",
+     "side": "left",
+     "demanded": "InvalidMetadata(\"'description-content-type' can only specify the UTF-8 charset, not 'Utf-8'\")",
+     "produced": [
+      "True"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    }
+   ],
+   "greens": [],
+   "green_count": 0,
+   "survivors": 0,
+   "parameters_stored": 0,
+   "seconds": 2.04
+  },
+  {
+   "repo": "packaging",
+   "commit": "9d0ec47b36a1bcdf705b397b84cd89272410a00d",
+   "test": "tests/test_metadata.py",
+   "stage": "NO_RELATION_BETWEEN_THE_DEMAND_AND_THE_SITE",
+   "failing_test": "tests/test_metadata.py::TestMetadata::test_from_email_wraps_description_content_type_parse_errors[text/plain\\n folded]",
+   "site_line": 647,
+   "site_expression": "message['content-type']",
+   "table": [],
+   "audit": null,
+   "prose_refused": 0,
+   "refusals": [
+    {
+     "node": "tests/test_metadata.py::TestMetadata::test_from_email_wraps_description_content_type_parse_errors[text/plain\\n folded]",
+     "side": "right",
+     "demanded": "('Header values may not contain linefeed or carriage return characters',)",
+     "produced": [],
+     "reason": "THE_SITE_PRODUCED_NO_VALUE"
+    },
+    {
+     "node": "tests/test_metadata.py::TestMetadata::test_from_email_wraps_description_content_type_parse_errors[text/plain\\n folded]",
+     "side": "left",
+     "demanded": "ValueError('Header values may not contain linefeed or carriage return characters')",
+     "produced": [],
+     "reason": "THE_SITE_PRODUCED_NO_VALUE"
+    },
+    {
+     "node": "tests/test_metadata.py::TestMetadata::test_from_email_wraps_description_content_type_parse_errors[text/plain; charset=\"unterminated]",
+     "side": "right",
+     "demanded": "\"'description-content-type' can only specify the UTF-8 charset, not 'unterminated'\"",
+     "produced": [
+      "'text/plain; charset=\"unterminated\"'"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_metadata.py::TestMetadata::test_from_email_wraps_description_content_type_parse_errors[text/plain; charset=\"unterminated]",
+     "side": "left",
+     "demanded": "'\\'text/plain; charset=\"unterminated\\''",
+     "produced": [
+      "'text/plain; charset=\"unterminated\"'"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_metadata.py::TestMetadata::test_from_email_wraps_description_content_type_parse_errors[text/plain; charset=\"unterminated]",
+     "side": "right",
+     "demanded": "('assert \\'\\\\\\'text/plain; charset=\"unterminated\\\\\\'\\' in \"\\'description-content-type\\' can only specify the UTF-8 ch...",
+     "produced": [
+      "'text/plain; charset=\"unterminated\"'"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_metadata.py::TestMetadata::test_from_email_wraps_description_content_type_parse_errors[text/plain; charset=\"unterminated]",
+     "side": "left",
+     "demanded": "AssertionError('assert \\'\\\\\\'text/plain; charset=\"unterminated\\\\\\'\\' in \"\\'description-content-type\\' can only specif...",
+     "produced": [
+      "'text/plain; charset=\"unterminated\"'"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_metadata.py::TestMetadata::test_from_email_wraps_description_content_type_parse_errors[text/plain; x*]",
+     "side": "right",
+     "demanded": "('string index out of range',)",
+     "produced": [],
+     "reason": "THE_SITE_PRODUCED_NO_VALUE"
+    },
+    {
+     "node": "tests/test_metadata.py::TestMetadata::test_from_email_wraps_description_content_type_parse_errors[text/plain; x*]",
+     "side": "left",
+     "demanded": "IndexError('string index out of range')",
+     "produced": [],
+     "reason": "THE_SITE_PRODUCED_NO_VALUE"
+    }
+   ],
+   "greens": [],
+   "green_count": 0,
+   "survivors": 0,
+   "parameters_stored": 0,
+   "seconds": 2.31
+  },
+  {
+   "repo": "packaging",
+   "commit": "458b0ae53e5a4261df851657d147e590b4546eb2",
+   "test": "tests/test_metadata.py",
+   "stage": "NO_RELATION_BETWEEN_THE_DEMAND_AND_THE_SITE",
+   "failing_test": "tests/test_metadata.py::TestMetadata::test_invalid_version_with_placeholder_text",
+   "site_line": 610,
+   "site_expression": "'{field} is a required field'",
+   "table": [],
+   "audit": null,
+   "prose_refused": 0,
+   "refusals": [
+    {
+     "node": "tests/test_metadata.py::TestMetadata::test_invalid_version_with_placeholder_text",
+     "side": "right",
+     "demanded": "\"'{field}' is invalid for 'version'\"",
+     "produced": [],
+     "reason": "THE_SITE_PRODUCED_NO_VALUE"
+    },
+    {
+     "node": "tests/test_metadata.py::TestMetadata::test_invalid_version_with_placeholder_text",
+     "side": "left",
+     "demanded": "\"''version'' is invalid for 'version'\"",
+     "produced": [],
+     "reason": "THE_SITE_PRODUCED_NO_VALUE"
+    },
+    {
+     "node": "tests/test_metadata.py::TestMetadata::test_invalid_version_with_placeholder_text",
+     "side": "right",
+     "demanded": "('assert \"\\'\\'version\\'\\' ...for \\'version\\'\" == \"\\'{field}\\' is...for \\'version\\'\"\\n  \\n  - \\'{field}\\' is invalid f...",
+     "produced": [],
+     "reason": "THE_SITE_PRODUCED_NO_VALUE"
+    },
+    {
+     "node": "tests/test_metadata.py::TestMetadata::test_invalid_version_with_placeholder_text",
+     "side": "left",
+     "demanded": "AssertionError('assert \"\\'\\'version\\'\\' ...for \\'version\\'\" == \"\\'{field}\\' is...for \\'version\\'\"\\n  \\n  - \\'{field}\\...",
+     "produced": [],
+     "reason": "THE_SITE_PRODUCED_NO_VALUE"
+    }
+   ],
+   "greens": [],
+   "green_count": 0,
+   "survivors": 0,
+   "parameters_stored": 0,
+   "seconds": 1.88
+  },
+  {
+   "repo": "packaging",
+   "commit": "30824d9e3b33372a81af5e7a1d7e2ceb95e348c6",
+   "test": "tests/test_dependency_groups.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "packaging",
+   "commit": "4c663c9ef5e1ec4f64b01ea9a61c981890a56407",
+   "test": "tests/test_markers.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "packaging",
+   "commit": "d5fedc90bba333ed0962ba5dfb7072d38f2c1d84",
+   "test": "tests/test_requirements.py",
+   "stage": "NO_RELATION_BETWEEN_THE_DEMAND_AND_THE_SITE",
+   "failing_test": "tests/test_requirements.py::test_requirement_slots",
+   "site_line": 127,
+   "site_expression": "isinstance(state, dict)",
+   "table": [],
+   "audit": null,
+   "prose_refused": 0,
+   "refusals": [
+    {
+     "node": "tests/test_requirements.py::test_requirement_slots",
+     "side": "right",
+     "demanded": "(\"assert not True\\n +  where True = hasattr(<Requirement('requests>=2.0')>, '__dict__')\",)",
+     "produced": [],
+     "reason": "THE_SITE_PRODUCED_NO_VALUE"
+    },
+    {
+     "node": "tests/test_requirements.py::test_requirement_slots",
+     "side": "left",
+     "demanded": "AssertionError(\"assert not True\\n +  where True = hasattr(<Requirement('requests>=2.0')>, '__dict__')\")",
+     "produced": [],
+     "reason": "THE_SITE_PRODUCED_NO_VALUE"
+    }
+   ],
+   "greens": [],
+   "green_count": 0,
+   "survivors": 0,
+   "parameters_stored": 0,
+   "seconds": 90.44
+  },
+  {
+   "repo": "packaging",
+   "commit": "a0661b5f5c8838af81c5098b2a564e62852decb4",
+   "test": "tests/test_direct_url.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "packaging",
+   "commit": "2c688aa15f65da80defa27e8c91d3bb82a4b5dd6",
+   "test": "tests/test_markers.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "packaging",
+   "commit": "1b00eeffc6bec070c10e7e6ecf03c03f9789eed2",
+   "test": "tests/test_metadata.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "packaging",
+   "commit": "0a85b41e24c9b55b83f05ae696d73e8294a5b094",
+   "test": "tests/test_markers.py",
+   "stage": "NO_RELATION_BETWEEN_THE_DEMAND_AND_THE_SITE",
+   "failing_test": "tests/test_markers.py::test_str_preserves_nested_group_precedence",
+   "site_line": 200,
+   "site_expression": "_format_marker(marker[0])",
+   "table": [],
+   "audit": null,
+   "prose_refused": 1,
+   "refusals": [
+    {
+     "node": "tests/test_markers.py::test_str_preserves_nested_group_precedence",
+     "side": "right",
+     "demanded": "False",
+     "produced": [
+      "'sys_platform == \"linux\" or sys_platform == \"darwin\"'",
+      "'sys_platform == \"linux\" or sys_platform == \"darwin\"'",
+      "'sys_platform == \"linux\" or sys_platform == \"darwin\"'"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_markers.py::test_str_preserves_nested_group_precedence",
+     "side": "left",
+     "demanded": "True",
+     "produced": [
+      "'sys_platform == \"linux\" or sys_platform == \"darwin\"'",
+      "'sys_platform == \"linux\" or sys_platform == \"darwin\"'",
+      "'sys_platform == \"linux\" or sys_platform == \"darwin\"'"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_markers.py::test_str_preserves_nested_group_precedence",
+     "side": "right",
+     "demanded": "('assert True == False\\n +  where True = evaluate({\\'python_version\\': \\'3.12\\', \\'sys_platform\\': \\'darwin\\'})\\n +  ...",
+     "produced": [
+      "'sys_platform == \"linux\" or sys_platform == \"darwin\"'",
+      "'sys_platform == \"linux\" or sys_platform == \"darwin\"'",
+      "'sys_platform == \"linux\" or sys_platform == \"darwin\"'"
+     ],
+     "reason": "PROSE_IS_NOT_AN_EXPRESSION"
+    },
+    {
+     "node": "tests/test_markers.py::test_str_preserves_nested_group_precedence",
+     "side": "left",
+     "demanded": "AssertionError('assert True == False\\n +  where True = evaluate({\\'python_version\\': \\'3.12\\', \\'sys_platform\\': \\'da...",
+     "produced": [
+      "'sys_platform == \"linux\" or sys_platform == \"darwin\"'",
+      "'sys_platform == \"linux\" or sys_platform == \"darwin\"'",
+      "'sys_platform == \"linux\" or sys_platform == \"darwin\"'"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    }
+   ],
+   "greens": [],
+   "green_count": 0,
+   "survivors": 0,
+   "parameters_stored": 0,
+   "seconds": 45.39
+  },
+  {
+   "repo": "packaging",
+   "commit": "c4fb81ff6eba16fdd24d50e9d9d002fdbece6dd4",
+   "test": "tests/test_ranges.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "packaging",
+   "commit": "84833cc16be84bc7f1d9f64e2818afe0dd48aade",
+   "test": "tests/test_utils.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "packaging",
+   "commit": "fbea07c1f23f182141ca4e2aacf5f82d1c6c9f45",
+   "test": "tests/test_requirements.py",
+   "stage": "NO_RELATION_BETWEEN_THE_DEMAND_AND_THE_SITE",
+   "failing_test": "tests/test_requirements.py::TestRequirementParsing::test_error_when_prefix_match_uses_post_release[==]",
+   "site_line": 271,
+   "site_expression": "'.* suffix can only be used with `==` or `!=` operators'",
+   "table": [],
+   "audit": null,
+   "prose_refused": 0,
+   "refusals": [
+    {
+     "node": "tests/test_requirements.py::TestRequirementParsing::test_error_when_prefix_match_uses_post_release[==]",
+     "side": "right",
+     "demanded": "'packaging.requirements.InvalidRequirement: .* suffix cannot be used with pre-release, post-release, dev or local ver...",
+     "produced": [
+      "'.* suffix can only be used with `==` or `!=` operators'"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_requirements.py::TestRequirementParsing::test_error_when_prefix_match_uses_post_release[==]",
+     "side": "left",
+     "demanded": "'packaging.requirements.InvalidRequirement: .* suffix can only be used with `==` or `!=` operators\\n    name == 1.2.3...",
+     "produced": [
+      "'.* suffix can only be used with `==` or `!=` operators'"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_requirements.py::TestRequirementParsing::test_error_when_prefix_match_uses_post_release[==]",
+     "side": "right",
+     "demanded": "(\"assert 'packaging.re...~~~~~~~~~~~~^' == 'packaging.re...~~~~~~~~~~~~^'\\n  \\n  Skipping 46 identical leading charac...",
+     "produced": [
+      "'.* suffix can only be used with `==` or `!=` operators'"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_requirements.py::TestRequirementParsing::test_error_when_prefix_match_uses_post_release[==]",
+     "side": "left",
+     "demanded": "AssertionError(\"assert 'packaging.re...~~~~~~~~~~~~^' == 'packaging.re...~~~~~~~~~~~~^'\\n  \\n  Skipping 46 identical ...",
+     "produced": [
+      "'.* suffix can only be used with `==` or `!=` operators'"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_requirements.py::TestRequirementParsing::test_error_when_prefix_match_uses_post_release[!=]",
+     "side": "right",
+     "demanded": "'packaging.requirements.InvalidRequirement: .* suffix cannot be used with pre-release, post-release, dev or local ver...",
+     "produced": [
+      "'.* suffix can only be used with `==` or `!=` operators'"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_requirements.py::TestRequirementParsing::test_error_when_prefix_match_uses_post_release[!=]",
+     "side": "left",
+     "demanded": "'packaging.requirements.InvalidRequirement: .* suffix can only be used with `==` or `!=` operators\\n    name != 1.2.3...",
+     "produced": [
+      "'.* suffix can only be used with `==` or `!=` operators'"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_requirements.py::TestRequirementParsing::test_error_when_prefix_match_uses_post_release[!=]",
+     "side": "right",
+     "demanded": "(\"assert 'packaging.re...~~~~~~~~~~~~^' == 'packaging.re...~~~~~~~~~~~~^'\\n  \\n  Skipping 46 identical leading charac...",
+     "produced": [
+      "'.* suffix can only be used with `==` or `!=` operators'"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_requirements.py::TestRequirementParsing::test_error_when_prefix_match_uses_post_release[!=]",
+     "side": "left",
+     "demanded": "AssertionError(\"assert 'packaging.re...~~~~~~~~~~~~^' == 'packaging.re...~~~~~~~~~~~~^'\\n  \\n  Skipping 46 identical ...",
+     "produced": [
+      "'.* suffix can only be used with `==` or `!=` operators'"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    }
+   ],
+   "greens": [],
+   "green_count": 0,
+   "survivors": 0,
+   "parameters_stored": 0,
+   "seconds": 137.64
+  },
+  {
+   "repo": "packaging",
+   "commit": "d2fa92384821919d48eab89bae087b950637d52a",
+   "test": "tests/test_ranges.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "packaging",
+   "commit": "fbd0d4b4b83ba492ec9d5dd4eaa8e8df33288b1f",
+   "test": "tests/test_requirements.py",
+   "stage": "NO_RELATION_BETWEEN_THE_DEMAND_AND_THE_SITE",
+   "failing_test": "tests/test_requirements.py::TestRequirementBehaviour::test_equivalent_reqs_equal_hashes_unequal_strings[urllib3[secure]-urllib3[SECURE]]",
+   "site_line": 148,
+   "site_expression": "self.extras",
+   "table": [],
+   "audit": null,
+   "prose_refused": 0,
+   "refusals": [
+    {
+     "node": "tests/test_requirements.py::TestRequirementBehaviour::test_equivalent_reqs_equal_hashes_unequal_strings[urllib3[secure]-urllib3[SECURE]]",
+     "side": "right",
+     "demanded": "<Requirement('urllib3[SECURE]')>",
+     "produced": [],
+     "reason": "THE_SITE_PRODUCED_NO_VALUE"
+    },
+    {
+     "node": "tests/test_requirements.py::TestRequirementBehaviour::test_equivalent_reqs_equal_hashes_unequal_strings[urllib3[secure]-urllib3[SECURE]]",
+     "side": "left",
+     "demanded": "<Requirement('urllib3[secure]')>",
+     "produced": [],
+     "reason": "THE_SITE_PRODUCED_NO_VALUE"
+    },
+    {
+     "node": "tests/test_requirements.py::TestRequirementBehaviour::test_equivalent_reqs_equal_hashes_unequal_strings[urllib3[secure]-urllib3[SECURE]]",
+     "side": "right",
+     "demanded": "(\"assert <Requirement('urllib3[secure]')> == <Requirement('urllib3[SECURE]')>\",)",
+     "produced": [],
+     "reason": "THE_SITE_PRODUCED_NO_VALUE"
+    },
+    {
+     "node": "tests/test_requirements.py::TestRequirementBehaviour::test_equivalent_reqs_equal_hashes_unequal_strings[urllib3[secure]-urllib3[SECURE]]",
+     "side": "left",
+     "demanded": "AssertionError(\"assert <Requirement('urllib3[secure]')> == <Requirement('urllib3[SECURE]')>\")",
+     "produced": [],
+     "reason": "THE_SITE_PRODUCED_NO_VALUE"
+    },
+    {
+     "node": "tests/test_requirements.py::TestRequirementBehaviour::test_equivalent_reqs_equal_hashes_unequal_strings[fishtank[all-blue]-fishtank[all_blue]]",
+     "side": "right",
+     "demanded": "<Requirement('fishtank[all_blue]')>",
+     "produced": [],
+     "reason": "THE_SITE_PRODUCED_NO_VALUE"
+    },
+    {
+     "node": "tests/test_requirements.py::TestRequirementBehaviour::test_equivalent_reqs_equal_hashes_unequal_strings[fishtank[all-blue]-fishtank[all_blue]]",
+     "side": "left",
+     "demanded": "<Requirement('fishtank[all-blue]')>",
+     "produced": [],
+     "reason": "THE_SITE_PRODUCED_NO_VALUE"
+    },
+    {
+     "node": "tests/test_requirements.py::TestRequirementBehaviour::test_equivalent_reqs_equal_hashes_unequal_strings[fishtank[all-blue]-fishtank[all_blue]]",
+     "side": "right",
+     "demanded": "(\"assert <Requirement('fishtank[all-blue]')> == <Requirement('fishtank[all_blue]')>\",)",
+     "produced": [],
+     "reason": "THE_SITE_PRODUCED_NO_VALUE"
+    },
+    {
+     "node": "tests/test_requirements.py::TestRequirementBehaviour::test_equivalent_reqs_equal_hashes_unequal_strings[fishtank[all-blue]-fishtank[all_blue]]",
+     "side": "left",
+     "demanded": "AssertionError(\"assert <Requirement('fishtank[all-blue]')> == <Requirement('fishtank[all_blue]')>\")",
+     "produced": [],
+     "reason": "THE_SITE_PRODUCED_NO_VALUE"
+    }
+   ],
+   "greens": [],
+   "green_count": 0,
+   "survivors": 0,
+   "parameters_stored": 0,
+   "seconds": 29.82
+  },
+  {
+   "repo": "packaging",
+   "commit": "e80f70f8b164ee4b0ef7634aafe8c6cc4ce00ca3",
+   "test": "tests/test_direct_url.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "packaging",
+   "commit": "b19df947aa03658c776e44c3005b9c860d5b5c8d",
+   "test": "tests/test_markers.py",
+   "stage": "NO_RELATION_BETWEEN_THE_DEMAND_AND_THE_SITE",
+   "failing_test": "tests/test_markers.py::TestMarker::test_missing_environment_key_raises_undefined_environment_name",
+   "site_line": 273,
+   "site_expression": "environment[environment_key]",
+   "table": [],
+   "audit": null,
+   "prose_refused": 0,
+   "refusals": [
+    {
+     "node": "tests/test_markers.py::TestMarker::test_missing_environment_key_raises_undefined_environment_name",
+     "side": "right",
+     "demanded": "('extras',)",
+     "produced": [],
+     "reason": "THE_SITE_PRODUCED_NO_VALUE"
+    },
+    {
+     "node": "tests/test_markers.py::TestMarker::test_missing_environment_key_raises_undefined_environment_name",
+     "side": "left",
+     "demanded": "KeyError('extras')",
+     "produced": [],
+     "reason": "THE_SITE_PRODUCED_NO_VALUE"
+    }
+   ],
+   "greens": [],
+   "green_count": 0,
+   "survivors": 0,
+   "parameters_stored": 0,
+   "seconds": 6.01
+  },
+  {
+   "repo": "packaging",
+   "commit": "07265129295b4b95b9143b50e3ce4709f31a8c49",
+   "test": "tests/test_markers.py",
+   "stage": "NO_RELATION_BETWEEN_THE_DEMAND_AND_THE_SITE",
+   "failing_test": "tests/test_markers.py::TestMarker::test_extra_compared_to_variable_not_normalized",
+   "site_line": 163,
+   "site_expression": "isinstance(lhs, Variable) and lhs.value == 'extra'",
+   "table": [],
+   "audit": null,
+   "prose_refused": 0,
+   "refusals": [
+    {
+     "node": "tests/test_markers.py::TestMarker::test_extra_compared_to_variable_not_normalized",
+     "side": "right",
+     "demanded": "'extra == os_name'",
+     "produced": [
+      "True"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_markers.py::TestMarker::test_extra_compared_to_variable_not_normalized",
+     "side": "left",
+     "demanded": "'extra == \"os-name\"'",
+     "produced": [
+      "True"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_markers.py::TestMarker::test_extra_compared_to_variable_not_normalized",
+     "side": "right",
+     "demanded": "('assert \\'extra == \"os-name\"\\' == \\'extra == os_name\\'\\n  \\n  - extra == os_name\\n  ?            ^\\n  + extra == \"os...",
+     "produced": [
+      "True"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_markers.py::TestMarker::test_extra_compared_to_variable_not_normalized",
+     "side": "left",
+     "demanded": "AssertionError('assert \\'extra == \"os-name\"\\' == \\'extra == os_name\\'\\n  \\n  - extra == os_name\\n  ?            ^\\n  ...",
+     "produced": [
+      "True"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_markers.py::TestMarker::test_nested_extra_str_normalization",
+     "side": "right",
+     "demanded": "'(extra == \"foo-bar\" or extra == \"baz\") and python_version >= \"3\"'",
+     "produced": [
+      "False"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_markers.py::TestMarker::test_nested_extra_str_normalization",
+     "side": "left",
+     "demanded": "'(extra == \"Foo_Bar\" or extra == \"Baz\") and python_version >= \"3\"'",
+     "produced": [
+      "False"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_markers.py::TestMarker::test_nested_extra_str_normalization",
+     "side": "right",
+     "demanded": "('assert \\'(extra == \"F...ersion >= \"3\"\\' == \\'(extra == \"f...ersion >= \"3\"\\'\\n  \\n  - (extra == \"foo-bar\" or extra =...",
+     "produced": [
+      "False"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_markers.py::TestMarker::test_nested_extra_str_normalization",
+     "side": "left",
+     "demanded": "AssertionError('assert \\'(extra == \"F...ersion >= \"3\"\\' == \\'(extra == \"f...ersion >= \"3\"\\'\\n  \\n  - (extra == \"foo-b...",
+     "produced": [
+      "False"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    }
+   ],
+   "greens": [],
+   "green_count": 0,
+   "survivors": 0,
+   "parameters_stored": 0,
+   "seconds": 6.44
+  },
+  {
+   "repo": "packaging",
+   "commit": "349abfad0688f42eb835ed8a10380d6cbf6940e7",
+   "test": "tests/test_dependency_groups.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "packaging",
+   "commit": "d8e08df11bfa50e987375546eda1f0ee3f27bd41",
+   "test": "tests/test_requirements.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "packaging",
+   "commit": "ba17fcea2367a70cba21d6bfb0931ae476ee8583",
+   "test": "tests/test_utils.py",
+   "stage": "NO_VALUE_MATCHES",
+   "failing_test": "tests/test_utils.py::test_is_normalized_name[a--b-a-b]",
+   "site_line": 61,
+   "site_expression": "'[a-z0-9]|[a-z0-9]([a-z0-9-](?!--))*[a-z0-9]'",
+   "human_expression": "'[a-z0-9]+(?:-[a-z0-9]+)*'",
+   "count_contrasts": false,
+   "identify_curve": null,
+   "audit": null,
+   "table": [],
+   "human_admissible": null,
+   "contrast": null,
+   "frames": 1,
+   "table_rows": 0,
+   "space_offered_before_survivors": 0,
+   "survivors": 0,
+   "survivor_sources": [],
+   "human_expression_rank": null,
+   "verifications": 0,
+   "found": null,
+   "greens": [],
+   "green_count": 0,
+   "found_is_the_human_fix": false,
+   "parameters_stored": 0,
+   "seconds": 1.7
+  },
+  {
+   "repo": "packaging",
+   "commit": "08bb047794f4e70b157dacef4538b3a6e3492743",
+   "test": "tests/test_direct_url.py",
+   "stage": "NO_RELATION_BETWEEN_THE_DEMAND_AND_THE_SITE",
+   "failing_test": "tests/test_direct_url.py::test_strip_url[https://user:pa@ss@g.c/user/repo.git-safe_user_passwords2-https://g.c/user/repo.git]",
+   "site_line": 86,
+   "site_expression": "netloc.split",
+   "table": [],
+   "audit": null,
+   "prose_refused": 0,
+   "refusals": [
+    {
+     "node": "tests/test_direct_url.py::test_strip_url[https://user:pa@ss@g.c/user/repo.git-safe_user_passwords2-https://g.c/user/repo.git]",
+     "side": "right",
+     "demanded": "'https://g.c/user/repo.git'",
+     "produced": [
+      "<built-in method split of str object at 0x7fca320bab70>"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_direct_url.py::test_strip_url[https://user:pa@ss@g.c/user/repo.git-safe_user_passwords2-https://g.c/user/repo.git]",
+     "side": "left",
+     "demanded": "'https://ss@g.c/user/repo.git'",
+     "produced": [
+      "<built-in method split of str object at 0x7fca320bab70>"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_direct_url.py::test_strip_url[https://user:pa@ss@g.c/user/repo.git-safe_user_passwords2-https://g.c/user/repo.git]",
+     "side": "right",
+     "demanded": "(\"assert 'https://ss@g.c/user/repo.git' == 'https://g.c/user/repo.git'\\n  \\n  - https://g.c/user/repo.git\\n  + https:...",
+     "produced": [
+      "<built-in method split of str object at 0x7fca320bab70>"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_direct_url.py::test_strip_url[https://user:pa@ss@g.c/user/repo.git-safe_user_passwords2-https://g.c/user/repo.git]",
+     "side": "left",
+     "demanded": "AssertionError(\"assert 'https://ss@g.c/user/repo.git' == 'https://g.c/user/repo.git'\\n  \\n  - https://g.c/user/repo.g...",
+     "produced": [
+      "<built-in method split of str object at 0x7fca320bab70>"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_direct_url.py::test_to_dict_strip_url_with_at_in_password",
+     "side": "right",
+     "demanded": "'https://g.c/user/repo.git'",
+     "produced": [
+      "<built-in method split of str object at 0x7fca320bab70>"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_direct_url.py::test_to_dict_strip_url_with_at_in_password",
+     "side": "left",
+     "demanded": "'https://ss@g.c/user/repo.git'",
+     "produced": [
+      "<built-in method split of str object at 0x7fca320bab70>"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_direct_url.py::test_to_dict_strip_url_with_at_in_password",
+     "side": "right",
+     "demanded": "(\"assert 'https://ss@g.c/user/repo.git' == 'https://g.c/user/repo.git'\\n  \\n  - https://g.c/user/repo.git\\n  + https:...",
+     "produced": [
+      "<built-in method split of str object at 0x7fca320bab70>"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_direct_url.py::test_to_dict_strip_url_with_at_in_password",
+     "side": "left",
+     "demanded": "AssertionError(\"assert 'https://ss@g.c/user/repo.git' == 'https://g.c/user/repo.git'\\n  \\n  - https://g.c/user/repo.g...",
+     "produced": [
+      "<built-in method split of str object at 0x7fca320bab70>"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    }
+   ],
+   "greens": [],
+   "green_count": 0,
+   "survivors": 0,
+   "parameters_stored": 0,
+   "seconds": 1.77
+  },
+  {
+   "repo": "packaging",
+   "commit": "5c163f5382fb6cba408b7c42efb8a03ffa041f4b",
+   "test": "tests/test_requirements.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "packaging",
+   "commit": "9f5249fba27e63745cc9a6bc3f2a7b8f47220a8f",
+   "test": "tests/test_metadata.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "packaging",
+   "commit": "668da8662a112036e4850b68980790cb2d10dae9",
+   "test": "tests/test_markers.py",
+   "stage": "THE_SITE_NEVER_RAN_IN_THE_FAILING_TEST",
+   "failing_test": "tests/test_markers.py",
+   "site_line": 300,
+   "seconds": 2.0
+  },
+  {
+   "repo": "packaging",
+   "commit": "98b4bfb6828baaf01081aa3a123302fe3020b63a",
+   "test": "tests/test_markers.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "packaging",
+   "commit": "a3b6a1f6c34182414558ad3628814cce1f039004",
+   "test": "tests/test_dependency_groups.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "packaging",
+   "commit": "c4d2b3a440873410e92bbb3d247606f978cd3f69",
+   "test": "tests/test_direct_url.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "packaging",
+   "commit": "553582d9162c761e4ab97ccc6cea43ac14ff2a8b",
+   "test": "tests/test_metadata.py",
+   "stage": "NO_RELATION_BETWEEN_THE_DEMAND_AND_THE_SITE",
+   "failing_test": "tests/test_metadata.py::TestMetadata::test_invalid_charset_error_message",
+   "site_line": 635,
+   "site_expression": "list(charset)",
+   "table": [],
+   "audit": null,
+   "prose_refused": 0,
+   "refusals": [
+    {
+     "node": "tests/test_metadata.py::TestMetadata::test_invalid_charset_error_message",
+     "side": "right",
+     "demanded": "('Regex pattern did not match.\\n  Expected regex: \\'iso-8859-1\\'\\n  Actual message: \"\\'description-content-type\\' can...",
+     "produced": [
+      "['i', 's', 'o', '-', '8', '8', '5', '9', '-', '1']"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_metadata.py::TestMetadata::test_invalid_charset_error_message",
+     "side": "left",
+     "demanded": "AssertionError('Regex pattern did not match.\\n  Expected regex: \\'iso-8859-1\\'\\n  Actual message: \"\\'description-cont...",
+     "produced": [
+      "['i', 's', 'o', '-', '8', '8', '5', '9', '-', '1']"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    }
+   ],
+   "greens": [],
+   "green_count": 0,
+   "survivors": 0,
+   "parameters_stored": 0,
+   "seconds": 2.93
+  },
+  {
+   "repo": "packaging",
+   "commit": "f8f16338e10d5d509ea2a29e0f0cf56baf4be565",
+   "test": "tests/test_structures.py",
+   "stage": "NO_VALUE_MATCHES",
+   "failing_test": "tests/test_structures.py::test_infinity_self_comparison",
+   "site_line": 22,
+   "site_expression": "False",
+   "human_expression": "other is self",
+   "count_contrasts": false,
+   "identify_curve": null,
+   "audit": null,
+   "table": [],
+   "human_admissible": false,
+   "contrast": {
+    "rows": 3,
+    "admissible": 0,
+    "masks": {},
+    "human_mask": 3,
+    "human_mask_bits": "0b111"
+   },
+   "frames": 4,
+   "table_rows": 0,
+   "space_offered_before_survivors": 139113,
+   "survivors": 0,
+   "survivor_sources": [],
+   "human_expression_rank": null,
+   "verifications": 0,
+   "found": null,
+   "greens": [],
+   "green_count": 0,
+   "found_is_the_human_fix": false,
+   "parameters_stored": 0,
+   "seconds": 7.53
+  },
+  {
+   "repo": "packaging",
+   "commit": "6da1c50d1354284da3b1cfe3ba6cf495162421ee",
+   "test": "tests/test_requirements.py",
+   "stage": "NO_RELATION_BETWEEN_THE_DEMAND_AND_THE_SITE",
+   "failing_test": "tests/test_requirements.py::TestRequirementBehaviour::test_str_and_repr[-- @ https://url ]",
+   "site_line": 60,
+   "site_expression": "'@ '",
+   "table": [],
+   "audit": null,
+   "prose_refused": 12,
+   "refusals": [
+    {
+     "node": "tests/test_requirements.py::TestRequirementBehaviour::test_str_and_repr[-- @ https://url ]",
+     "side": "right",
+     "demanded": "'name @ https://url'",
+     "produced": [
+      "'@ https://url'",
+      "'@ https://url'",
+      "'@ https://url'"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_requirements.py::TestRequirementBehaviour::test_str_and_repr[-- @ https://url ]",
+     "side": "left",
+     "demanded": "'name@ https://url'",
+     "produced": [
+      "'@ https://url'",
+      "'@ https://url'",
+      "'@ https://url'"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_requirements.py::TestRequirementBehaviour::test_str_and_repr[-- @ https://url ]",
+     "side": "right",
+     "demanded": "(\"assert 'name@ https://url' == 'name @ https://url'\\n  \\n  - name @ https://url\\n  ?     -\\n  + name@ https://url\",)",
+     "produced": [
+      "'@ https://url'",
+      "'@ https://url'",
+      "'@ https://url'"
+     ],
+     "reason": "PROSE_IS_NOT_AN_EXPRESSION"
+    },
+    {
+     "node": "tests/test_requirements.py::TestRequirementBehaviour::test_str_and_repr[-- @ https://url ]",
+     "side": "left",
+     "demanded": "AssertionError(\"assert 'name@ https://url' == 'name @ https://url'\\n  \\n  - name @ https://url\\n  ?     -\\n  + name@ ...",
+     "produced": [
+      "'@ https://url'",
+      "'@ https://url'",
+      "'@ https://url'"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_requirements.py::TestRequirementBehaviour::test_str_and_repr[-[a]- @ https://url ]",
+     "side": "right",
+     "demanded": "'name[a] @ https://url'",
+     "produced": [
+      "'@ https://url'",
+      "'@ https://url'",
+      "'@ https://url'"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_requirements.py::TestRequirementBehaviour::test_str_and_repr[-[a]- @ https://url ]",
+     "side": "left",
+     "demanded": "'name[a]@ https://url'",
+     "produced": [
+      "'@ https://url'",
+      "'@ https://url'",
+      "'@ https://url'"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_requirements.py::TestRequirementBehaviour::test_str_and_repr[-[a]- @ https://url ]",
+     "side": "right",
+     "demanded": "(\"assert 'name[a]@ https://url' == 'name[a] @ https://url'\\n  \\n  - name[a] @ https://url\\n  ?        -\\n  + name[a]@...",
+     "produced": [
+      "'@ https://url'",
+      "'@ https://url'",
+      "'@ https://url'"
+     ],
+     "reason": "PROSE_IS_NOT_AN_EXPRESSION"
+    },
+    {
+     "node": "tests/test_requirements.py::TestRequirementBehaviour::test_str_and_repr[-[a]- @ https://url ]",
+     "side": "left",
+     "demanded": "AssertionError(\"assert 'name[a]@ https://url' == 'name[a] @ https://url'\\n  \\n  - name[a] @ https://url\\n  ?        -...",
+     "produced": [
+      "'@ https://url'",
+      "'@ https://url'",
+      "'@ https://url'"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    }
+   ],
+   "greens": [],
+   "green_count": 0,
+   "survivors": 0,
+   "parameters_stored": 0,
+   "seconds": 26.95
+  },
+  {
+   "repo": "packaging",
+   "commit": "a1f705642e50b79da6be83fb0f6149daa32fc7cc",
+   "test": "tests/test_metadata.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "packaging",
+   "commit": "e83801f455b056b5bafd6b69a9db1aacdc807bb6",
+   "test": "tests/test_metadata.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "packaging",
+   "commit": "3b20e0fd026f90c0f7094e083d09a70bef86d051",
+   "test": "tests/test_metadata.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "packaging",
+   "commit": "888eb1452625196985701e2727c5416b70e969fd",
+   "test": "tests/test_requirements.py",
+   "stage": "NO_RELATION_BETWEEN_THE_DEMAND_AND_THE_SITE",
+   "failing_test": "tests/test_requirements.py::TestRequirementParsing::test_error_no_space_after_url",
+   "site_line": 146,
+   "site_expression": "f'Expected end or semicolon (after {after})'",
+   "table": [],
+   "audit": null,
+   "prose_refused": 6,
+   "refusals": [
+    {
+     "node": "tests/test_requirements.py::TestRequirementParsing::test_error_no_space_after_url",
+     "side": "right",
+     "demanded": "\"packaging.requirements.InvalidRequirement: Expected semicolon (after URL and whitespace) or end\\n    name @ https://...",
+     "produced": [
+      "'Expected end or semicolon (after URL and whitespace)'"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_requirements.py::TestRequirementParsing::test_error_no_space_after_url",
+     "side": "left",
+     "demanded": "\"packaging.requirements.InvalidRequirement: Expected end or semicolon (after URL and whitespace)\\n    name @ https://...",
+     "produced": [
+      "'Expected end or semicolon (after URL and whitespace)'"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_requirements.py::TestRequirementParsing::test_error_no_space_after_url",
+     "side": "right",
+     "demanded": "(\"assert 'packaging.re...~~~~~~~~~~~~^' == 'packaging.re...~~~~~~~~~~~~^'\\n  \\n  Skipping 42 identical leading charac...",
+     "produced": [
+      "'Expected end or semicolon (after URL and whitespace)'"
+     ],
+     "reason": "PROSE_IS_NOT_AN_EXPRESSION"
+    },
+    {
+     "node": "tests/test_requirements.py::TestRequirementParsing::test_error_no_space_after_url",
+     "side": "left",
+     "demanded": "AssertionError(\"assert 'packaging.re...~~~~~~~~~~~~^' == 'packaging.re...~~~~~~~~~~~~^'\\n  \\n  Skipping 42 identical ...",
+     "produced": [
+      "'Expected end or semicolon (after URL and whitespace)'"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_requirements.py::TestRequirementParsing::test_error_on_legacy_version_outside_triple_equals",
+     "side": "right",
+     "demanded": "'packaging.requirements.InvalidRequirement: Expected comma (within version specifier), semicolon (after version speci...",
+     "produced": [
+      "'Expected end or semicolon (after version specifier)'"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_requirements.py::TestRequirementParsing::test_error_on_legacy_version_outside_triple_equals",
+     "side": "left",
+     "demanded": "'packaging.requirements.InvalidRequirement: Expected end or semicolon (after version specifier)\\n    name==1.0.org1\\n...",
+     "produced": [
+      "'Expected end or semicolon (after version specifier)'"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_requirements.py::TestRequirementParsing::test_error_on_legacy_version_outside_triple_equals",
+     "side": "right",
+     "demanded": "(\"assert 'packaging.re...       ~~~~~^' == 'packaging.re...       ~~~~~^'\\n  \\n  Skipping 42 identical leading charac...",
+     "produced": [
+      "'Expected end or semicolon (after version specifier)'"
+     ],
+     "reason": "PROSE_IS_NOT_AN_EXPRESSION"
+    },
+    {
+     "node": "tests/test_requirements.py::TestRequirementParsing::test_error_on_legacy_version_outside_triple_equals",
+     "side": "left",
+     "demanded": "AssertionError(\"assert 'packaging.re...       ~~~~~^' == 'packaging.re...       ~~~~~^'\\n  \\n  Skipping 42 identical ...",
+     "produced": [
+      "'Expected end or semicolon (after version specifier)'"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    }
+   ],
+   "greens": [],
+   "green_count": 0,
+   "survivors": 0,
+   "parameters_stored": 0,
+   "seconds": 23.15
+  },
+  {
+   "repo": "packaging",
+   "commit": "258202ed7f796bdb8a65252a66c3fbd3e69e97f6",
+   "test": "tests/test_utils.py",
+   "stage": "NO_ASSERTION_DEMAND",
+   "failing_test": "tests/test_utils.py::test_canonicalize_name_invalid[hi\\n-hi\\n]",
+   "site_line": 38,
+   "site_expression": "'^([A-Z0-9]|[A-Z0-9][A-Z0-9._-]*[A-Z0-9])$'",
+   "frames": 1,
+   "pytest_code": 1,
+   "seconds": 1.22
+  },
+  {
+   "repo": "packaging",
+   "commit": "2680259b4fa88885962e1b6f1cca9d92a3e605ca",
+   "test": "tests/test_metadata.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "packaging",
+   "commit": "a716c52b5f3ca9b4a512f538b80ced8ee01b2775",
+   "test": "tests/test_metadata.py",
+   "stage": "NO_RELATION_BETWEEN_THE_DEMAND_AND_THE_SITE",
+   "failing_test": "tests/test_metadata.py::TestMetadata::test_disallowed_dynamic[name]",
+   "site_line": 592,
+   "site_expression": "value",
+   "table": [],
+   "audit": null,
+   "prose_refused": 0,
+   "refusals": [
+    {
+     "node": "tests/test_metadata.py::TestMetadata::test_disallowed_dynamic[name]",
+     "side": "right",
+     "demanded": "('Regex pattern did not match.\\n  Expected regex: \"\\'name\\' is not allowed\"\\n  Actual message: \"[\\'name\\'] is not all...",
+     "produced": [
+      "['name']"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_metadata.py::TestMetadata::test_disallowed_dynamic[name]",
+     "side": "left",
+     "demanded": "AssertionError('Regex pattern did not match.\\n  Expected regex: \"\\'name\\' is not allowed\"\\n  Actual message: \"[\\'name...",
+     "produced": [
+      "['name']"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_metadata.py::TestMetadata::test_disallowed_dynamic[version]",
+     "side": "right",
+     "demanded": "('Regex pattern did not match.\\n  Expected regex: \"\\'version\\' is not allowed\"\\n  Actual message: \"[\\'version\\'] is n...",
+     "produced": [
+      "['version']"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_metadata.py::TestMetadata::test_disallowed_dynamic[version]",
+     "side": "left",
+     "demanded": "AssertionError('Regex pattern did not match.\\n  Expected regex: \"\\'version\\' is not allowed\"\\n  Actual message: \"[\\'v...",
+     "produced": [
+      "['version']"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_metadata.py::TestMetadata::test_disallowed_dynamic[metadata-version]",
+     "side": "right",
+     "demanded": "('Regex pattern did not match.\\n  Expected regex: \"\\'metadata-version\\' is not allowed\"\\n  Actual message: \"[\\'metada...",
+     "produced": [
+      "['metadata-version']"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_metadata.py::TestMetadata::test_disallowed_dynamic[metadata-version]",
+     "side": "left",
+     "demanded": "AssertionError('Regex pattern did not match.\\n  Expected regex: \"\\'metadata-version\\' is not allowed\"\\n  Actual messa...",
+     "produced": [
+      "['metadata-version']"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    }
+   ],
+   "greens": [],
+   "green_count": 0,
+   "survivors": 0,
+   "parameters_stored": 0,
+   "seconds": 1.67
+  },
+  {
+   "repo": "packaging",
+   "commit": "c385b58c4d0e4d66f5c8273ebb155801c92aadf3",
+   "test": "tests/test_markers.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "packaging",
+   "commit": "3e67fc775e93166600c84a5183ab6a86afff84b5",
+   "test": "tests/test_markers.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "packaging",
+   "commit": "09f131b326453f18a217fe34f4f7a77603b545db",
+   "test": "tests/test_metadata.py",
+   "stage": "NO_VALUE_MATCHES",
+   "failing_test": "tests/test_metadata.py::TestMetadata::test_optional_defaults_to_none[author]",
+   "site_line": 769,
+   "site_expression": "List[str]",
+   "human_expression": "Optional[List[str]]",
+   "count_contrasts": false,
+   "identify_curve": null,
+   "audit": null,
+   "table": [],
+   "human_admissible": null,
+   "contrast": null,
+   "frames": 1,
+   "table_rows": 0,
+   "space_offered_before_survivors": 0,
+   "survivors": 0,
+   "survivor_sources": [],
+   "human_expression_rank": null,
+   "verifications": 0,
+   "found": null,
+   "greens": [],
+   "green_count": 0,
+   "found_is_the_human_fix": false,
+   "parameters_stored": 0,
+   "seconds": 2.06
+  },
+  {
+   "repo": "packaging",
+   "commit": "524b701c6e30fc4da9355117367273f591c6de72",
+   "test": "tests/test_utils.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "packaging",
+   "commit": "e8f839f7400253998a07a993420ae308bb4f159d",
+   "test": "tests/test_requirements.py",
+   "stage": "NO_RELATION_BETWEEN_THE_DEMAND_AND_THE_SITE",
+   "failing_test": "tests/test_requirements.py::TestRequirementBehaviour::test_equivalent_reqs_equal_hashes_unequal_strings[scikit-learn==1.0.1-scikit_learn==1.0.1]",
+   "site_line": 52,
+   "site_expression": "parts.append(f'[{formatted_extras}]')",
+   "table": [],
+   "audit": null,
+   "prose_refused": 0,
+   "refusals": [
+    {
+     "node": "tests/test_requirements.py::TestRequirementBehaviour::test_equivalent_reqs_equal_hashes_unequal_strings[scikit-learn==1.0.1-scikit_learn==1.0.1]",
+     "side": "right",
+     "demanded": "<Requirement('scikit_learn==1.0.1')>",
+     "produced": [],
+     "reason": "THE_SITE_PRODUCED_NO_VALUE"
+    },
+    {
+     "node": "tests/test_requirements.py::TestRequirementBehaviour::test_equivalent_reqs_equal_hashes_unequal_strings[scikit-learn==1.0.1-scikit_learn==1.0.1]",
+     "side": "left",
+     "demanded": "<Requirement('scikit-learn==1.0.1')>",
+     "produced": [],
+     "reason": "THE_SITE_PRODUCED_NO_VALUE"
+    },
+    {
+     "node": "tests/test_requirements.py::TestRequirementBehaviour::test_equivalent_reqs_equal_hashes_unequal_strings[scikit-learn==1.0.1-scikit_learn==1.0.1]",
+     "side": "right",
+     "demanded": "(\"assert <Requirement('scikit-learn==1.0.1')> == <Requirement('scikit_learn==1.0.1')>\",)",
+     "produced": [],
+     "reason": "THE_SITE_PRODUCED_NO_VALUE"
+    },
+    {
+     "node": "tests/test_requirements.py::TestRequirementBehaviour::test_equivalent_reqs_equal_hashes_unequal_strings[scikit-learn==1.0.1-scikit_learn==1.0.1]",
+     "side": "left",
+     "demanded": "AssertionError(\"assert <Requirement('scikit-learn==1.0.1')> == <Requirement('scikit_learn==1.0.1')>\")",
+     "produced": [],
+     "reason": "THE_SITE_PRODUCED_NO_VALUE"
+    }
+   ],
+   "greens": [],
+   "green_count": 0,
+   "survivors": 0,
+   "parameters_stored": 0,
+   "seconds": 21.62
+  },
+  {
+   "repo": "packaging",
+   "commit": "fe8f0bb99c41c5e3a8c2395d4e849c1eff72949c",
+   "test": "tests/test_requirements.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "packaging",
+   "commit": "55584fb5ca327ba38b74ca5c668125caaebd9a5d",
+   "test": "tests/test_markers.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "itsdangerous",
+   "commit": "7f4dcf83a07bb3d53f4e0e65ef1b43327b4cca90",
+   "test": "tests/test_itsdangerous/test_serializer.py",
+   "stage": "NO_ASSERTION_DEMAND",
+   "failing_test": "tests/test_itsdangerous/test_serializer.py",
+   "site_line": 46,
+   "site_expression": "hashlib.sha1",
+   "frames": 1,
+   "pytest_code": 2,
+   "seconds": 1.58
+  },
+  {
+   "repo": "tomli",
+   "commit": "1e6e869aa9dbbddc492608944e82d9ad5397280f",
+   "test": "tests/test_misc.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "tomli",
+   "commit": "e1fdb94bc998377f1c2545c7cd4f70ff2a3fb4e4",
+   "test": "tests/test_misc.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "tomli",
+   "commit": "9eb2125ef49071e673d42e383b5221a268665193",
+   "test": "tests/test_data.py",
+   "stage": "NO_FAILING_TEST"
+  },
+  {
+   "repo": "tomli",
+   "commit": "12314bde5b89a8bdc32de7403a2a4cf786187bbc",
+   "test": "tests/test_data.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "tomli",
+   "commit": "2a2aa62f1bc71b89b74d41dd2ab67b5dd24bc129",
+   "test": "tests/test_data.py",
+   "stage": "NO_FAILING_TEST"
+  },
+  {
+   "repo": "tomli",
+   "commit": "d1d6a8571b06b18005af8bf9078c1d37de5353e1",
+   "test": "tests/test_error.py",
+   "stage": "NO_RELATION_BETWEEN_THE_DEMAND_AND_THE_SITE",
+   "failing_test": "tests/test_error.py::TestError::test_deprecated_tomldecodeerror",
+   "site_line": 121,
+   "site_expression": "suffixed_err(src, pos, 'Invalid statement')",
+   "table": [],
+   "audit": null,
+   "prose_refused": 0,
+   "refusals": [
+    {
+     "node": "tests/test_error.py::TestError::test_deprecated_tomldecodeerror",
+     "side": "right",
+     "demanded": "('DeprecationWarning not triggered',)",
+     "produced": [],
+     "reason": "THE_SITE_PRODUCED_NO_VALUE"
+    },
+    {
+     "node": "tests/test_error.py::TestError::test_deprecated_tomldecodeerror",
+     "side": "left",
+     "demanded": "AssertionError('DeprecationWarning not triggered')",
+     "produced": [],
+     "reason": "THE_SITE_PRODUCED_NO_VALUE"
+    },
+    {
+     "node": "tests/test_error.py::TestError::test_tomldecodeerror",
+     "side": "right",
+     "demanded": "('Tuples differ: (\\'error parsing\\', \"v=1\\\\n[table]\\\\nv=\\'val\\'\", 13) != (\\'error parsing (at line 3, column 2)\\',)\\n...",
+     "produced": [],
+     "reason": "THE_SITE_PRODUCED_NO_VALUE"
+    },
+    {
+     "node": "tests/test_error.py::TestError::test_tomldecodeerror",
+     "side": "left",
+     "demanded": "AssertionError('Tuples differ: (\\'error parsing\\', \"v=1\\\\n[table]\\\\nv=\\'val\\'\", 13) != (\\'error parsing (at line 3, c...",
+     "produced": [],
+     "reason": "THE_SITE_PRODUCED_NO_VALUE"
+    }
+   ],
+   "greens": [],
+   "green_count": 0,
+   "survivors": 0,
+   "parameters_stored": 0,
+   "seconds": 1.51
+  },
+  {
+   "repo": "tomli",
+   "commit": "4e245a4bbbefed99e550e196095ea65c851cf31d",
+   "test": "tests/test_error.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "tomli",
+   "commit": "794c8e50d676f1e8e081914eb77e4a48a4f6a20b",
+   "test": "tests/test_error.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "tomli",
+   "commit": "8b962e13490a569d4aab90076451def23ed6c6d8",
+   "test": "tests/test_misc.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "tomli",
+   "commit": "96dfe2cef79eb4c2a441d5b1b36c3ef357372c9f",
+   "test": "tests/test_error.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "tomli",
+   "commit": "31c85a18468adbb5f2e892aa96cf0930ac04f93c",
+   "test": "tests/test_error.py",
+   "stage": "THE_SITE_NEVER_RAN_IN_THE_FAILING_TEST",
+   "failing_test": "tests/test_error.py::test_invalid_char_quotes",
+   "site_line": 269,
+   "seconds": 1.51
+  },
+  {
+   "repo": "tomli",
+   "commit": "9af551b578d0bfa9823e986572735a7429ffdf79",
+   "test": "tests/test_misc.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "tomli",
+   "commit": "9655d330043253c2d10e10865af9f1e56b32feb6",
+   "test": "tests/test_flags.py",
+   "stage": "THE_SITE_NEVER_RAN_IN_THE_FAILING_TEST",
+   "failing_test": "tests/test_flags.py",
+   "site_line": 189,
+   "seconds": 1.64
+  },
+  {
+   "repo": "tomli",
+   "commit": "67ec7d10528bd7b00ff1fc62da9a8a1e06406179",
+   "test": "tests/test_error.py",
+   "stage": "THE_SITE_NEVER_RAN_IN_THE_FAILING_TEST",
+   "failing_test": "tests/test_error.py::test_line_and_col",
+   "site_line": 93,
+   "seconds": 1.4
+  },
+  {
+   "repo": "tomli",
+   "commit": "5ab9ec926d9dc1ef79e66215edd51285371fe8a0",
+   "test": "tests/test_misc.py",
+   "stage": "NO_RELATION_BETWEEN_THE_DEMAND_AND_THE_SITE",
+   "failing_test": "tests/test_misc.py::test_parse_float",
+   "site_line": 53,
+   "site_expression": "ParseState(s)",
+   "table": [],
+   "audit": null,
+   "prose_refused": 0,
+   "refusals": [
+    {
+     "node": "tests/test_misc.py::test_parse_float",
+     "side": "right",
+     "demanded": "(\"loads() got an unexpected keyword argument 'parse_float'\",)",
+     "produced": [],
+     "reason": "THE_SITE_PRODUCED_NO_VALUE"
+    },
+    {
+     "node": "tests/test_misc.py::test_parse_float",
+     "side": "left",
+     "demanded": "TypeError(\"loads() got an unexpected keyword argument 'parse_float'\")",
+     "produced": [],
+     "reason": "THE_SITE_PRODUCED_NO_VALUE"
+    }
+   ],
+   "greens": [],
+   "green_count": 0,
+   "survivors": 0,
+   "parameters_stored": 0,
+   "seconds": 1.34
+  }
+ ],
+ "seconds": 512.8
+}
