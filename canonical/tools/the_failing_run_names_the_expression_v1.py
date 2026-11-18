@@ -342,9 +342,9 @@ def first_failing_test(worktree: pathlib.Path, test_file: str,
                        seconds: int) -> tuple[str | None, dict[str, str], str]:
     """ONE failing test, and never an empty map pretending to be a passing suite."""
     baseline, output = identify.run_tests_full(worktree, test_file, seconds)
-    for name, verdict in baseline.items():
-        if verdict != "PASSED":
-            return name, baseline, output
+    failing = identify.failing_tests(baseline)
+    if failing:
+        return failing[0], baseline, output
     return None, baseline, output
 
 
