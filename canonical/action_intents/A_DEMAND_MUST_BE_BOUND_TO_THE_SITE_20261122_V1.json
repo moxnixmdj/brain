@@ -41,7 +41,7 @@
  },
  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Recognition, not search. A demand that is not bound to an assertion is not a demand: every 'no candidate' it produces is a verdict about the reader, not about the site.",
- "canonical_base_commit": "1750783cf4944d4bdb8c20e28211f31f15347179",
+ "canonical_base_commit": "1d64735a1132b795e4cc0463c4791ddaebf38b0d",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -153,7 +153,7 @@
  ],
  "real_outcome": "That refusals are losses; that the 2 name-introducing rows are classified as finely as before (they now stop at pairing, named less precisely); that 1 verified row is capability; that the pairing is sound when a site feeds a helper the assertion then tests.",
  "recursive_obs": {
-  "canonical_base_commit": "1750783cf4944d4bdb8c20e28211f31f15347179",
+  "canonical_base_commit": "1d64735a1132b795e4cc0463c4791ddaebf38b0d",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "requiring the demanded value to equal what the site produced (that difference is the repair)",

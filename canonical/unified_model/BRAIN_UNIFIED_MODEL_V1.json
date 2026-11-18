@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 543,
+  "knowledge_documents": 544,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 7101,
+  "research_index_records": 7104,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 452,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "b8f98b6cb70a6902020c9e61483660cbbc3b3e5033323a5c2bbcbf51acbd534a"
+  "value": "3851c23086c3d79616c3041d91eea17b79b0d82e3a8a6268704deda97e98b1c3"
  },
  "engines": [
   {
@@ -45647,6 +45647,86 @@
     "import",
     "removed",
     "taken"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 6798,
+   "headings": [
+    "Same slot, not same value: a demand is bound to an assertion or it is refused",
+    "The number I declared, and the number that is true",
+    "The two ways to get binding wrong",
+    "The law",
+    "The four rows that were accused, before and after",
+    "After, on all 30",
+    "A refusal now shows its operands",
+    "What this does not claim",
+    "Next step"
+   ],
+   "kind": "DOCUMENT",
+   "path": "A_DEMAND_MUST_BE_BOUND_TO_THE_SITE_20261122_V1.md",
+   "sha256": "03b17fb75238e300005fa194d5fd919dc5b6781aaa1f946dd2edac5b8d14442a",
+   "summary": "*`canonical/tools/the_assertion_is_the_demand_v1.py` · paired binder · 19 tests · receipt `canonical/verification/A_DEMAND_MUST_BE_BOUND_TO_THE_SITE_20261122_V1.json` · 30 real commits · 31.7 s · 0 parameters*",
+   "terms": {
+    "13": 3,
+    "15": 4,
+    "30": 5,
+    "about": 5,
+    "acceptance": 3,
+    "accusations": 3,
+    "admissible": 4,
+    "after": 3,
+    "against": 6,
+    "all": 3,
+    "already": 3,
+    "assertion": 11,
+    "before": 3,
+    "both": 5,
+    "bound": 5,
+    "ceiling": 3,
+    "claim": 4,
+    "corpus": 4,
+    "demand": 16,
+    "demanded": 4,
+    "demands": 3,
+    "driver": 3,
+    "exactly": 3,
+    "false": 4,
+    "fix": 4,
+    "human": 5,
+    "instrument": 4,
+    "message": 3,
+    "no": 6,
+    "no_relation_between_the_demand_and_the_site": 3,
+    "not": 18,
+    "nothing": 5,
+    "now": 3,
+    "one": 5,
+    "operand": 7,
+    "produced": 11,
+    "reason": 4,
+    "refused": 4,
+    "round": 6,
+    "row": 5,
+    "rows": 8,
+    "rule": 4,
+    "site": 25,
+    "test": 4,
+    "two": 4,
+    "value": 10,
+    "verified": 4,
+    "wrong": 5
+   },
+   "title": "Same slot, not same value: a demand is bound to an assertion or it is refused",
+   "title_terms": [
+    "assertion",
+    "bound",
+    "demand",
+    "not",
+    "refused",
+    "same",
+    "slot",
+    "value"
    ]
   },
   {
@@ -87323,10 +87403,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1345,
+  "included_source_count": 1346,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "47d238970eb1c9482202eb3cecd8815127bdb8a99f03e2ec700efbd4a0ae3c22"
+  "source_tree_digest": "5a915a21d865a97264e6ce42bd33cf0b3e78ee84f79ce8f9ab650bfc8410a354"
  },
  "research_index": [
   {
@@ -157667,6 +157747,25 @@
     "preflight": 1,
     "public": 1,
     "route": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "2026-11-19",
+   "id": "research:canonical/verification/A_DEMAND_MUST_BE_BOUND_TO_THE_SITE_20261122_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/A_DEMAND_MUST_BE_BOUND_TO_THE_SITE_20261122_V1.json",
+   "schema": "BRAIN_THE_ASSERTION_IS_THE_DEMAND_V1",
+   "sha256": "ef9bf9e2bc1ac01a504be47f47f3fbeee5980ea37f40bd62275e3b9f5a809417",
+   "status": "",
+   "terms": {
+    "20261122": 1,
+    "bound": 1,
+    "demand": 1,
+    "must": 1,
+    "site": 1,
     "v1": 1
    }
   },
@@ -236417,6 +236516,70 @@
     "tell": 1,
     "thing": 1,
     "v1": 2
+   }
+  },
+  {
+   "action_id": "A_DEMAND_MUST_BE_BOUND_TO_THE_SITE_20261122_V1",
+   "capability": false,
+   "date": "2026-11-22",
+   "id": "research:canonical/action_intents/A_DEMAND_MUST_BE_BOUND_TO_THE_SITE_20261122_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_DEMAND_MUST_BE_BOUND_TO_THE_SITE_20261122_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "f8f0d1ae2bb23f67ac85a5977122e3870b6edf824e72f40ea34aaedb19e25ef1",
+   "status": "PROPOSED__PRODUCER_MEASURED__NEGATIVE_RESULT_RECORDED__INDEPENDENT_VERIFICATION_",
+   "terms": {
+    "20261122": 1,
+    "30": 1,
+    "31.7": 1,
+    "a_demand_must_be_bound_to_the_site_20261122_v1": 1,
+    "about": 2,
+    "accusation": 1,
+    "act": 1,
+    "already": 1,
+    "assertion": 2,
+    "because": 1,
+    "bind_the_demand_to_the_assertion_that_speaks_about_the_site": 1,
+    "binding": 1,
+    "bound": 2,
+    "candidate": 1,
+    "commits": 1,
+    "compared": 1,
+    "demand": 5,
+    "difference": 1,
+    "every": 1,
+    "evidence": 1,
+    "fall": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "holds": 1,
+    "identified": 1,
+    "must": 1,
+    "never": 1,
+    "no": 1,
+    "not": 4,
+    "now": 1,
+    "operand": 2,
+    "repair": 2,
+    "site": 5
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/action_intents/A_DEMAND_MUST_BE_BOUND_TO_THE_SITE_20261122_V1.md",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_DEMAND_MUST_BE_BOUND_TO_THE_SITE_20261122_V1.md",
+   "schema": "",
+   "sha256": "03b17fb75238e300005fa194d5fd919dc5b6781aaa1f946dd2edac5b8d14442a",
+   "status": "",
+   "terms": {
+    "20261122": 1,
+    "bound": 1,
+    "demand": 1,
+    "must": 1,
+    "site": 1,
+    "v1": 1
    }
   },
   {
