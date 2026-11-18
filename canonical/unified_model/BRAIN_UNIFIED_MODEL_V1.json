@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 524,
+  "knowledge_documents": 525,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 7021,
+  "research_index_records": 7023,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 452,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "4347ed94ebf825f5dbeb3361e90309195d5ce59883cbf1b5d3170e7335594696"
+  "value": "46cc6dcfc7e40ac07777acf8ccd985ccc2ae53f2de384eee342e30fd41ba0229"
  },
  "engines": [
   {
@@ -47091,6 +47091,81 @@
    "title_terms": [
     "grows",
     "vocabulary"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 6789,
+   "headings": [
+    "Binding is not a lookup. It is evaluation",
+    "What round 6 left, and why this round exists",
+    "What was built",
+    "The measurement, on round 6's exact denominator",
+    "What the census says — and it is the finding",
+    "Two defects I found in this instrument before any number was believed",
+    "Where the whole series now stands",
+    "The next organ, named"
+   ],
+   "kind": "DOCUMENT",
+   "path": "BINDING_IS_NOT_A_LOOKUP_IT_IS_EVALUATION_20261116_V1.md",
+   "sha256": "64ca0a4977a7ed78f3de164c46e947b800752b68a712dc432289df40599b6b95",
+   "summary": "*Round 7. 2026-11-16. Branch `arena/d68bba94-brain`, base `90e2e795`.*",
+   "terms": {
+    "13": 2,
+    "2.4": 3,
+    "39": 3,
+    "40": 5,
+    "41": 2,
+    "83": 2,
+    "about": 2,
+    "action": 5,
+    "actions": 8,
+    "against": 3,
+    "all": 4,
+    "argument": 6,
+    "arguments": 6,
+    "because": 3,
+    "call": 9,
+    "cannot": 4,
+    "each": 3,
+    "environment": 11,
+    "evaluation": 3,
+    "every": 4,
+    "expressions": 5,
+    "lookup": 3,
+    "mined": 3,
+    "model": 4,
+    "moved": 3,
+    "name": 3,
+    "never": 3,
+    "next": 3,
+    "not": 14,
+    "now": 5,
+    "observable": 4,
+    "one": 4,
+    "only": 10,
+    "organ": 4,
+    "own": 5,
+    "proofs": 4,
+    "real": 8,
+    "release": 3,
+    "returns": 6,
+    "round": 16,
+    "run": 6,
+    "same": 5,
+    "scalar": 4,
+    "site": 9,
+    "so": 4,
+    "test": 3,
+    "tests": 6,
+    "those": 3
+   },
+   "title": "Binding is not a lookup. It is evaluation",
+   "title_terms": [
+    "binding",
+    "evaluation",
+    "lookup",
+    "not"
    ]
   },
   {
@@ -85846,10 +85921,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1326,
+  "included_source_count": 1327,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "46bf49075786463bb6cd134a50e7e39ca0c11098de106403db19feea8b45c652"
+  "source_tree_digest": "69643ed5921172ca288b3b8b6b7df8ca7f7de05ef6f418a6c4b48e4ab608bfac"
  },
  "research_index": [
   {
@@ -155785,6 +155860,23 @@
     "truth": 1,
     "v1": 1,
     "verification": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "2026-11-16",
+   "id": "research:canonical/verification/ARGUMENT_CONSTRUCTION_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/ARGUMENT_CONSTRUCTION_20261116_V1.json",
+   "schema": "BRAIN_ARGUMENT_CONSTRUCTION_V1",
+   "sha256": "5acfdc9a363df4d9cffef3467f086f918444fdd9469dc0fb5fb4a9e1e426dec1",
+   "status": "",
+   "terms": {
+    "20261116": 1,
+    "argument": 1,
+    "construction": 1,
+    "v1": 1
    }
   },
   {
@@ -232618,6 +232710,29 @@
     "shape": 4,
     "v1": 2,
     "verified": 2
+   }
+  },
+  {
+   "action_id": "ARGUMENT_CONSTRUCTION_20261116_V1",
+   "capability": false,
+   "date": "2026-11-16",
+   "id": "research:canonical/action_intents/ARGUMENT_CONSTRUCTION_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/ARGUMENT_CONSTRUCTION_20261116_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "2487f9fc8cdaba24a5e3b7a9db5922cc04f04e954bbd42cb5d6ea4eabddadf98",
+   "status": "PRODUCED",
+   "terms": {
+    "20261116": 1,
+    "argument": 1,
+    "argument_construction_20261116_v1": 1,
+    "binding_is_not_a_lookup_it_is_evaluation__of_the_41_real_actions_round_6_could_not_exercise_only_one_becomes_executable_from_the_environment_s_own_literal_call_sites_and_34_are_refused_because_those_call_sites_pass_constructed_objects__so_the_environment_proves_expressions_and_never_values_and_the_missing_organ_is_a_constructor_closure_that_evaluates_them": 1,
+    "construction": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "mine_the_environment_s_own_call_sites_and_encode_each_argument_vector_as_prober_tokens__resolving_names_only_from_local_literals_module_constants_and_builtin_types__then_accept_an_action_as_executable_only_if_the_mined_call_returns_twice_and_check_it_against_the_later_release": 1,
+    "produced": 1,
+    "the_third_manufacturability_route_is_closed_by_measurement_with_a_proven_instrument__40_real_commits_188_confirmed_laws_0_kills_and_174_of_the_laws_are_bare_totality__the_cause_is_named_real_work_extends_a_specification_instead_of_violating_a_property__so_the_next_organ_must_compile_intent_into_the_discriminating_pair_rather_than_derive_it_from_the_artifact": 1,
+    "v1": 1
    }
   },
   {
