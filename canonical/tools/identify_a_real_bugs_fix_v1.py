@@ -83,6 +83,26 @@ def failing_tests(verdicts: dict[str, str]) -> list[str]:
     return [name for name, verdict in verdicts.items() if verdict in FAILURE_VERDICTS]
 
 
+def fresh_bytecode(worktree: pathlib.Path) -> dict[str, str]:
+    """No bytecode, in either direction, for any run of the oracle.
+
+    CPython validates a cached `.pyc` against the source's mtime **and** size, and the mtime is stored as
+    whole seconds. A repair that swaps a value for a name of the same length, written inside the same
+    second as the previous candidate, is therefore invisible to the import system: python loads the
+    bytecode of the *previous* file and the candidate is scored on a run it never had. Measured on a
+    one-line fixture: 4 of 8 explorations reported FAILED for an expression that passes, with the
+    corrected file on disk and `assert 3 == 4` in the traceback -- `x + x` had been scored as `x + 1`.
+
+    An oracle that can lie in either direction is not an oracle: the same mask turns a failing
+    candidate into a verified one whenever a passing candidate of the same size ran first. So every run
+    deletes the caches and writes none.
+    """
+    for cache in worktree.rglob("__pycache__"):
+        shutil.rmtree(cache, ignore_errors=True)
+    return {"PYTHONPATH": "src:.", "PYTHONDONTWRITEBYTECODE": "1",
+            "PYTHONPYCACHEPREFIX": str(worktree / ".brain_pycache")}
+
+
 def run_tests_full(worktree: pathlib.Path, test_file: str, seconds: int = 60) -> tuple[dict[str, str], str]:
     """The verdicts AND what pytest said, because an empty verdict map is not a passing suite.
 
@@ -95,7 +115,7 @@ def run_tests_full(worktree: pathlib.Path, test_file: str, seconds: int = 60) ->
         done = subprocess.run(test_command(worktree, test_file), cwd=worktree, capture_output=True,
                               text=True, encoding="utf-8", errors="replace", timeout=seconds,
                               stdin=subprocess.DEVNULL,
-                              env={**__import__("os").environ, "PYTHONPATH": "src:."})
+                              env={**__import__("os").environ, **fresh_bytecode(worktree)})
     except subprocess.TimeoutExpired:
         return {"<timed out>": "TIMEOUT"}, "TIMEOUT"
     outcomes: dict[str, str] = {}

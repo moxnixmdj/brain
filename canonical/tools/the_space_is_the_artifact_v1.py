@@ -323,6 +323,60 @@ def semantic_site(parent_source: str, child_source: str) -> tuple[dict[str, Any]
             "SINGLE_STATEMENT_" + kind)
 
 
+STATEMENT_EXPRESSIONS = ((ast.Return, "value"), (ast.Expr, "value"), (ast.Assign, "value"),
+                         (ast.If, "test"), (ast.While, "test"), (ast.For, "iter"))
+
+
+def sites_in_function(source: str, line: int, limit: int = 8,
+                      exclude: int | None = None) -> list[dict[str, Any]]:
+    """Every statement-level expression in the function the change lives in.
+
+    A demand is a value; the site that produces it does not have to be the site the human touched. Asking
+    the same demand at the other productions in the same function is the composition the grammar was
+    missing -- and it costs no combinatorics, because the value is fixed and only its producer moves.
+
+    The human's line is never offered, by construction: it is the answer key, and a run that reads it is
+    not a run. Measured on 30 real commits, 27 such shifts verified 0 repairs: another site is not
+    another production, and that is a fact about the population, not a bug in this function.
+    """
+    try:
+        tree = ast.parse(source)
+    except SyntaxError:
+        return []
+    function = None
+    for node in ast.walk(tree):
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) \
+                and node.lineno <= line <= (getattr(node, "end_lineno", None) or node.lineno):
+            if function is None or node.lineno >= function.lineno:
+                function = node
+    if function is None:
+        return []
+    skip = {line} | ({exclude} if exclude is not None else set())
+    found: list[dict[str, Any]] = []
+    for node in ast.walk(function):
+        for kind, field in STATEMENT_EXPRESSIONS:
+            if not isinstance(node, kind):
+                continue
+            expression = getattr(node, field, None)
+            if not isinstance(expression, ast.expr):
+                continue
+            where = getattr(expression, "lineno", None)
+            if where is None or where in skip:
+                continue
+            if getattr(expression, "end_lineno", where) != where:
+                continue  # the patcher replaces one line's columns; a spanning site is named elsewhere
+            span = identify.span_of(source, where, expression)
+            if span is None:
+                continue
+            text = ast.unparse(expression)
+            if any(item["line"] == where and item["old_expression"] == text for item in found):
+                continue
+            found.append({"line": where, "old_expression": text, "human_expression": text,
+                          "span": span})
+    found.sort(key=lambda item: abs(item["line"] - line))
+    return found[:limit]
+
+
 def census(entries: Sequence[dict[str, Any]], repos_root: pathlib.Path) -> list[dict[str, Any]]:
     """The population's shape, with no oracle calls: what kind of edit each fresh commit is."""
     rows: list[dict[str, Any]] = []
@@ -645,7 +699,7 @@ def run_one(worktree: pathlib.Path, test_path: str, node: str, seconds: int) -> 
     try:
         done = subprocess.run(argv, cwd=worktree, capture_output=True, text=True, errors="replace",
                               timeout=seconds, stdin=subprocess.DEVNULL,
-                              env={**os.environ, "PYTHONPATH": "src:.", "PYTHONDONTWRITEBYTECODE": "1"})
+                              env={**os.environ, **identify.fresh_bytecode(worktree)})
     except subprocess.TimeoutExpired:
         return "TIMEOUT"
     text = (done.stdout or "") + (done.stderr or "")
@@ -693,6 +747,7 @@ def explore(repo: pathlib.Path, entry: dict[str, Any], *, budget: int = 48, cap:
             human_rank: int | None = None
             visited = 0
             verdicts = 0
+            verdict_log: list[dict[str, Any]] = []
             found_at: dict[str, Any] | None = None
             for rank, expression, ring in space(original, line, site["old_expression"], cap=cap,
                                                 grammar=grammar):
@@ -710,6 +765,10 @@ def explore(repo: pathlib.Path, entry: dict[str, Any], *, budget: int = 48, cap:
                 (worktree / source_path).write_text(patched, encoding="utf-8")
                 verdict = run_one(worktree, test_path, node, seconds)
                 verdicts += 1
+                if len(verdict_log) < 12:
+                    # a candidate that "failed" says nothing until the machine says what it saw; the log
+                    # exists because a test that flips under load must be able to explain itself
+                    verdict_log.append({"rank": rank, "expression": expression[:60], "verdict": verdict})
                 if verdict == "PASSED":
                     whole = identify.run_tests(worktree, test_path, seconds)
                     if whole and all(value == "PASSED" for value in whole.values()):
@@ -717,6 +776,7 @@ def explore(repo: pathlib.Path, entry: dict[str, Any], *, budget: int = 48, cap:
                                     "tests_green": len(whole)}
             (worktree / source_path).write_text(original, encoding="utf-8")
             offered = visited
+            log = verdict_log
             crossed = human_rank is not None
             if not crossed:
                 # was it reachable by the merged construction, i.e. without crossing names with the
@@ -746,6 +806,7 @@ def explore(repo: pathlib.Path, entry: dict[str, Any], *, budget: int = 48, cap:
                 "human_expression_site_only_rank": (site_only or {}).get("rank"),
                 "miss_reasons": miss_reasons,
                 "oracle_calls": verdicts, "oracle_budget": budget,
+                "verdict_log": log,
                 "found": found_at,
                 "found_is_the_human_fix": bool(
                     found_at and ast.dump(ast.parse(found_at["expression"], mode="eval").body) == human_dump),

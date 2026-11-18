@@ -18,6 +18,7 @@ green suite has measured nothing.
 """
 
 import ast
+import json
 import pathlib
 import subprocess
 import sys
@@ -28,6 +29,7 @@ ROOT = pathlib.Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "canonical" / "tools"))
 sys.path.insert(0, str(ROOT))
 
+import the_assertion_is_the_demand_v1 as a  # noqa: E402
 import the_space_is_the_artifact_v1 as sp  # noqa: E402
 
 FIXTURE = '''
@@ -170,7 +172,7 @@ def test_a_real_patch_greens_a_real_failing_test(tmp_path):
     entry = {"repo": "fixture", "commit": sha, "sources": ["src/m.py"], "tests": ["tests/test_m.py"],
              "test": "tests/test_m.py", "repo_path": str(repo)}
     result = sp.explore(repo, entry, budget=64, cap=20_000, seconds=120, grammar="wide")
-    assert result["stage"] == "VERIFIED", result
+    assert result["stage"] == "VERIFIED", json.dumps(result, default=str)[:2000]
     assert 0 < result["oracle_calls"] <= 64
     assert result["parameters_stored"] == 0
     # one change point (`1` -> `x`) means the site is that sub-expression, not the whole line
@@ -202,3 +204,72 @@ def test_a_rewrite_that_changes_two_nodes_is_one_site_not_an_exclusion(tmp_path)
     assert site is not None
     assert site["old_expression"] == "x + 1"
     assert site["human_expression"] == "x * 2"
+
+
+def test_the_other_productions_in_the_function_are_named_and_the_human_line_is_skipped():
+    """A demand does not have to be answered where the human answered it: the same value can come
+    from another statement in the same function. The list is nearest-first, single-line only, and
+    never contains the line the human touched -- that line is the answer key, not an input."""
+    source = ("def f(stream, color=None):\n"
+              "    if color is None:\n"
+              "        return get_best_encoding(stream)\n"
+              "    return False\n")
+    sites = sp.sites_in_function(source, 2, limit=8)
+    assert [site["line"] for site in sites] == [3, 4]  # line 2 is the human's line: never offered
+    assert [site["old_expression"] for site in sites] == ["get_best_encoding(stream)", "False"]
+    assert all(site["span"] and len(site["span"]) == 2 for site in sites)
+    assert 3 not in [site["line"] for site in sp.sites_in_function(source, 3)]
+
+
+def test_a_site_override_is_labelled_as_a_shift_and_says_where_it_shifted_from(tmp_path):
+    """The composition must not wear the name of the diff finder: a row that asked the demand at a
+    production of its own choosing is a different claim from a row that read the human's line."""
+    repo = tmp_path / "r"
+    (repo / "src").mkdir(parents=True)
+    (repo / "tests").mkdir()
+    (repo / "src" / "m.py").write_text("def twice(x):\n    y = x\n    return x + 1\n", encoding="utf-8")
+    (repo / "tests" / "test_m.py").write_text(
+        "import os, sys\nsys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'src'))\n"
+        "from m import twice\n\n\ndef test_twice():\n    assert twice(2) == 4\n", encoding="utf-8")
+    for args in (["git", "init", "-q"], ["git", "add", "-A"],
+                 ["git", "-c", "user.email=a@b", "-c", "user.name=a", "commit", "-qm", "one"]):
+        subprocess.run(args, cwd=repo, check=True, capture_output=True)
+    (repo / "src" / "m.py").write_text("def twice(x):\n    y = x\n    return x + x\n", encoding="utf-8")
+    for args in (["git", "add", "-A"],
+                 ["git", "-c", "user.email=a@b", "-c", "user.name=a", "commit", "-qm", "two"]):
+        subprocess.run(args, cwd=repo, check=True, capture_output=True)
+    sha = subprocess.run(["git", "rev-parse", "HEAD"], cwd=repo, check=True,
+                         capture_output=True, text=True).stdout.strip()
+    parent = subprocess.run(["git", "show", f"{sha}^:src/m.py"], cwd=repo, check=True,
+                            capture_output=True, text=True).stdout
+    sites = sp.sites_in_function(parent, 3)
+    assert sites and sites[0]["line"] == 2, sites
+    entry = {"repo": "fixture", "commit": sha, "sources": ["src/m.py"], "tests": ["tests/test_m.py"],
+             "test": "tests/test_m.py", "repo_path": str(repo)}
+    demand = a.explore(repo, entry, cap=20_000, seconds=120, site_override=sites[0], shifted_from=3)
+    assert demand["site_finder"] == "site_shift", demand
+    assert demand["shifted_from_line"] == 3
+    assert demand["site_line"] == 2
+
+
+def test_a_same_size_edit_in_the_same_second_is_not_masked_by_stale_bytecode(tmp_path):
+    """The oracle must score the file that is on disk, not the one that was there a moment ago.
+
+    CPython validates a `.pyc` by mtime (whole seconds) and size, so replacing `1` with `x` inside one
+    second leaves the *previous* bytecode in force. Measured before the fix: 4 of 8 explorations of this
+    exact one-line fixture reported FAILED for `x`, with `return x + x` on disk and `assert 3 == 4` in
+    the traceback. In an oracle that can also point the other way, that mask is a false verification.
+    """
+    repo = tmp_path / "r"
+    (repo / "src").mkdir(parents=True)
+    (repo / "tests").mkdir()
+    source = repo / "src" / "m.py"
+    (repo / "tests" / "test_m.py").write_text(
+        "import os, sys\nsys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'src'))\n"
+        "from m import twice\n\n\ndef test_twice():\n    assert twice(2) == 4\n", encoding="utf-8")
+    source.write_text("def twice(x):\n    return x + 1\n", encoding="utf-8")
+    before = a.identify.run_tests(repo, "tests/test_m.py", 60)
+    assert before and all(verdict != "PASSED" for verdict in before.values()), before
+    source.write_text("def twice(x):\n    return x + x\n", encoding="utf-8")  # same size, same second
+    after = a.identify.run_tests(repo, "tests/test_m.py", 60)
+    assert after and all(verdict == "PASSED" for verdict in after.values()), after
