@@ -1,0 +1,167 @@
+{
+ "authority": "NONE -- sandbox measurement, not independent verification",
+ "model_calls": 0,
+ "network_calls": 0,
+ "rows": [
+  {
+   "narrow_terms": 0,
+   "repo": "pallets/itsdangerous",
+   "sha": "7f4dcf83a07bb3d53f4e0e65ef1b43327b4cca90",
+   "solved": false,
+   "source": "src/itsdangerous/signer.py",
+   "state": "REFUSED__NO_PARTITION"
+  },
+  {
+   "at_line": 766,
+   "basis_terms": [
+    "pathlib.PureWindowsPath(x).drive"
+   ],
+   "condition": "'..' in path",
+   "considered": 112,
+   "evaluations": 147,
+   "narrow_terms": 1,
+   "operator": "or",
+   "repo": "pypa/packaging",
+   "sha": "022ae6c6fe5c2ef9615875d0ecfab1ae4024720f",
+   "solved": true,
+   "source": "src/packaging/metadata.py",
+   "state": "SOLVED__THE_ENVIRONMENT_SUPPLIED_THE_TERM",
+   "term": "pathlib.PureWindowsPath(path).drive",
+   "trials": 1
+  },
+  {
+   "narrow_terms": 0,
+   "repo": "pypa/packaging",
+   "sha": "258202ed7f796bdb8a65252a66c3fbd3e69e97f6",
+   "solved": false,
+   "source": "src/packaging/utils.py",
+   "state": "REFUSED__NO_PARTITION"
+  },
+  {
+   "narrow_terms": 0,
+   "repo": "pypa/packaging",
+   "sha": "349abfad0688f42eb835ed8a10380d6cbf6940e7",
+   "solved": false,
+   "source": "src/packaging/dependency_groups.py",
+   "state": "REFUSED__NO_PARTITION"
+  },
+  {
+   "narrow_terms": 0,
+   "repo": "pypa/packaging",
+   "sha": "553582d9162c761e4ab97ccc6cea43ac14ff2a8b",
+   "solved": false,
+   "source": "src/packaging/metadata.py",
+   "state": "REFUSED__NO_PARTITION"
+  },
+  {
+   "narrow_terms": 0,
+   "repo": "pypa/packaging",
+   "sha": "84833cc16be84bc7f1d9f64e2818afe0dd48aade",
+   "solved": false,
+   "source": "src/packaging/utils.py",
+   "state": "REFUSED__NO_PARTITION"
+  },
+  {
+   "narrow_terms": 0,
+   "repo": "pypa/packaging",
+   "sha": "9f5249fba27e63745cc9a6bc3f2a7b8f47220a8f",
+   "solved": false,
+   "source": "src/packaging/metadata.py",
+   "state": "REFUSED__NO_PARTITION"
+  },
+  {
+   "narrow_terms": 0,
+   "repo": "pypa/packaging",
+   "sha": "b80e6eb0a6c0f61dcaa9b1587f3aab370263dc65",
+   "solved": false,
+   "source": "src/packaging/pylock.py",
+   "state": "REFUSED__NO_PARTITION"
+  },
+  {
+   "narrow_terms": 0,
+   "repo": "pypa/packaging",
+   "sha": "d5fedc90bba333ed0962ba5dfb7072d38f2c1d84",
+   "solved": false,
+   "source": "src/packaging/requirements.py",
+   "state": "REFUSED__NO_PARTITION"
+  },
+  {
+   "narrow_terms": 0,
+   "repo": "hukkin/tomli",
+   "sha": "12314bde5b89a8bdc32de7403a2a4cf786187bbc",
+   "solved": false,
+   "source": "src/tomli/_parser.py",
+   "state": "REFUSED__NO_PARTITION"
+  },
+  {
+   "narrow_terms": 0,
+   "repo": "hukkin/tomli",
+   "sha": "1e6e869aa9dbbddc492608944e82d9ad5397280f",
+   "solved": false,
+   "source": "src/tomli/_parser.py",
+   "state": "REFUSED__NO_PARTITION"
+  },
+  {
+   "narrow_terms": 0,
+   "repo": "hukkin/tomli",
+   "sha": "2a2aa62f1bc71b89b74d41dd2ab67b5dd24bc129",
+   "solved": false,
+   "source": "src/tomli/_parser.py",
+   "state": "REFUSED__NO_PARTITION"
+  },
+  {
+   "narrow_terms": 0,
+   "repo": "hukkin/tomli",
+   "sha": "31c85a18468adbb5f2e892aa96cf0930ac04f93c",
+   "solved": false,
+   "source": "tomli/_parser.py",
+   "state": "REFUSED__NO_PARTITION"
+  },
+  {
+   "narrow_terms": 0,
+   "repo": "hukkin/tomli",
+   "sha": "4e245a4bbbefed99e550e196095ea65c851cf31d",
+   "solved": false,
+   "source": "src/tomli/_parser.py",
+   "state": "REFUSED__NO_PARTITION"
+  },
+  {
+   "narrow_terms": 0,
+   "repo": "hukkin/tomli",
+   "sha": "5ab9ec926d9dc1ef79e66215edd51285371fe8a0",
+   "solved": false,
+   "source": "tomli/_parser.py",
+   "state": "REFUSED__NO_PARTITION"
+  },
+  {
+   "narrow_terms": 0,
+   "repo": "hukkin/tomli",
+   "sha": "67ec7d10528bd7b00ff1fc62da9a8a1e06406179",
+   "solved": false,
+   "source": "tomli/_parser.py",
+   "state": "REFUSED__NO_PARTITION"
+  },
+  {
+   "narrow_terms": 0,
+   "repo": "hukkin/tomli",
+   "sha": "794c8e50d676f1e8e081914eb77e4a48a4f6a20b",
+   "solved": false,
+   "source": "src/tomli/_parser.py",
+   "state": "REFUSED__NO_PARTITION"
+  }
+ ],
+ "schema": "BRAIN_ENVIRONMENT_BASIS_V1",
+ "totals": {
+  "basis_terms_total": 1,
+  "evaluations": 147,
+  "narrow_terms_total": 1,
+  "solved": 1,
+  "states": {
+   "REFUSED__NO_PARTITION": 16,
+   "SOLVED__THE_ENVIRONMENT_SUPPLIED_THE_TERM": 1
+  },
+  "tasks": 17,
+  "templates_considered": 112,
+  "test_executions": 1
+ }
+}

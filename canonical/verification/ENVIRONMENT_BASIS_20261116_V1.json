@@ -1,0 +1,87 @@
+{
+ "authority": "NONE -- sandbox measurement, not independent verification",
+ "model_calls": 0,
+ "network_calls": 0,
+ "rows": [
+  {
+   "narrow_terms": 0,
+   "repo": "pallets/itsdangerous",
+   "sha": "7f4dcf83a07bb3d53f4e0e65ef1b43327b4cca90",
+   "solved": false,
+   "source": "src/itsdangerous/signer.py",
+   "state": "REFUSED__NO_PARTITION"
+  },
+  {
+   "at_line": 766,
+   "basis_terms": [
+    "pathlib.PureWindowsPath(x).drive"
+   ],
+   "condition": "'..' in path",
+   "considered": 112,
+   "evaluations": 147,
+   "narrow_terms": 1,
+   "operator": "or",
+   "repo": "pypa/packaging",
+   "sha": "022ae6c6fe5c2ef9615875d0ecfab1ae4024720f",
+   "solved": true,
+   "source": "src/packaging/metadata.py",
+   "state": "SOLVED__THE_ENVIRONMENT_SUPPLIED_THE_TERM",
+   "term": "pathlib.PureWindowsPath(path).drive",
+   "trials": 1
+  },
+  {
+   "narrow_terms": 0,
+   "repo": "pypa/packaging",
+   "sha": "4b243af94ff6885c89b8acd7a22fc5714b18cb96",
+   "solved": false,
+   "source": "src/packaging/requirements.py",
+   "state": "REFUSED__NO_PARTITION"
+  },
+  {
+   "narrow_terms": 0,
+   "repo": "pypa/packaging",
+   "sha": "a1f705642e50b79da6be83fb0f6149daa32fc7cc",
+   "solved": false,
+   "source": "src/packaging/licenses/__init__.py",
+   "state": "REFUSED__NO_PARTITION"
+  },
+  {
+   "narrow_terms": 0,
+   "repo": "hukkin/tomli",
+   "sha": "12314bde5b89a8bdc32de7403a2a4cf786187bbc",
+   "solved": false,
+   "source": "src/tomli/_parser.py",
+   "state": "REFUSED__NO_PARTITION"
+  },
+  {
+   "narrow_terms": 0,
+   "repo": "hukkin/tomli",
+   "sha": "5ab9ec926d9dc1ef79e66215edd51285371fe8a0",
+   "solved": false,
+   "source": "tomli/_parser.py",
+   "state": "REFUSED__NO_PARTITION"
+  },
+  {
+   "narrow_terms": 0,
+   "repo": "hukkin/tomli",
+   "sha": "96dfe2cef79eb4c2a441d5b1b36c3ef357372c9f",
+   "solved": false,
+   "source": "tomli/__init__.py",
+   "state": "REFUSED__NO_PARTITION"
+  }
+ ],
+ "schema": "BRAIN_ENVIRONMENT_BASIS_V1",
+ "totals": {
+  "basis_terms_total": 1,
+  "evaluations": 147,
+  "narrow_terms_total": 1,
+  "solved": 1,
+  "states": {
+   "REFUSED__NO_PARTITION": 6,
+   "SOLVED__THE_ENVIRONMENT_SUPPLIED_THE_TERM": 1
+  },
+  "tasks": 7,
+  "templates_considered": 112,
+  "test_executions": 1
+ }
+}
