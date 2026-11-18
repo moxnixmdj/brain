@@ -1,0 +1,228 @@
+{
+ "authority": "NONE -- sandbox measurement, not independent verification",
+ "model_calls": 0,
+ "network_calls": 0,
+ "rows": [
+  {
+   "parameters": [],
+   "passing": [],
+   "repo": "pallets/itsdangerous",
+   "sha": "7f4dcf83a07bb3d53f4e0e65ef1b43327b4cca90",
+   "source": "src/itsdangerous/signer.py",
+   "state": "REFUSED__NO_PARTITION"
+  },
+  {
+   "distinct_seats": [
+    766,
+    771,
+    775,
+    782
+   ],
+   "distinct_terms": [
+    "pathlib.PureWindowsPath(path).drive"
+   ],
+   "parameters": [
+    "test_invalid_license_files.license_files"
+   ],
+   "passing": [
+    {
+     "at_line": 766,
+     "condition": "'..' in path",
+     "operator": "or",
+     "term": "pathlib.PureWindowsPath(path).drive"
+    },
+    {
+     "at_line": 771,
+     "condition": "'*' in path",
+     "operator": "or",
+     "term": "pathlib.PureWindowsPath(path).drive"
+    },
+    {
+     "at_line": 775,
+     "condition": "pathlib.PurePosixPath(path).is_absolute() or pathlib.PureWindowsPath(path).is_absolute()",
+     "operator": "or",
+     "term": "pathlib.PureWindowsPath(path).drive"
+    },
+    {
+     "at_line": 782,
+     "condition": "pathlib.PureWindowsPath(path).as_posix() != path",
+     "operator": "or",
+     "term": "pathlib.PureWindowsPath(path).drive"
+    }
+   ],
+   "question": {
+    "about_input": "C:LICENSE",
+    "note": "answering this collapses the version space; guessing picks one behaviour and calls it intent",
+    "options": [
+     "self._invalid_metadata(f\"{path!r} is invalid for {self.raw_name!r}, paths must use '/' delimiter\")",
+     "self._invalid_metadata(f'{path!r} is invalid for {self.raw_name!r}, parent directory indicators are not allowed')",
+     "self._invalid_metadata(f'{path!r} is invalid for {self.raw_name!r}, paths must be relative')",
+     "self._invalid_metadata(f'{path!r} is invalid for {self.raw_name!r}, paths must be resolved')"
+    ],
+    "repairs_behind_each_option": {
+     "self._invalid_metadata(f\"{path!r} is invalid for {self.raw_name!r}, paths must use '/' delimiter\")": 1,
+     "self._invalid_metadata(f'{path!r} is invalid for {self.raw_name!r}, parent directory indicators are not allowed')": 1,
+     "self._invalid_metadata(f'{path!r} is invalid for {self.raw_name!r}, paths must be relative')": 1,
+     "self._invalid_metadata(f'{path!r} is invalid for {self.raw_name!r}, paths must be resolved')": 1
+    }
+   },
+   "repo": "pypa/packaging",
+   "sha": "022ae6c6fe5c2ef9615875d0ecfab1ae4024720f",
+   "source": "src/packaging/metadata.py",
+   "state": "UNDERDETERMINED_SUITE_ADMITS_MANY",
+   "trials": 8
+  },
+  {
+   "parameters": [],
+   "passing": [],
+   "repo": "pypa/packaging",
+   "sha": "258202ed7f796bdb8a65252a66c3fbd3e69e97f6",
+   "source": "src/packaging/utils.py",
+   "state": "REFUSED__NO_PARTITION"
+  },
+  {
+   "parameters": [],
+   "passing": [],
+   "repo": "pypa/packaging",
+   "sha": "349abfad0688f42eb835ed8a10380d6cbf6940e7",
+   "source": "src/packaging/dependency_groups.py",
+   "state": "REFUSED__NO_PARTITION"
+  },
+  {
+   "parameters": [],
+   "passing": [],
+   "repo": "pypa/packaging",
+   "sha": "553582d9162c761e4ab97ccc6cea43ac14ff2a8b",
+   "source": "src/packaging/metadata.py",
+   "state": "REFUSED__NO_PARTITION"
+  },
+  {
+   "parameters": [],
+   "passing": [],
+   "repo": "pypa/packaging",
+   "sha": "84833cc16be84bc7f1d9f64e2818afe0dd48aade",
+   "source": "src/packaging/utils.py",
+   "state": "REFUSED__NO_PARTITION"
+  },
+  {
+   "parameters": [],
+   "passing": [],
+   "repo": "pypa/packaging",
+   "sha": "9f5249fba27e63745cc9a6bc3f2a7b8f47220a8f",
+   "source": "src/packaging/metadata.py",
+   "state": "REFUSED__NO_PARTITION"
+  },
+  {
+   "parameters": [],
+   "passing": [],
+   "repo": "pypa/packaging",
+   "sha": "b80e6eb0a6c0f61dcaa9b1587f3aab370263dc65",
+   "source": "src/packaging/pylock.py",
+   "state": "REFUSED__NO_PARTITION"
+  },
+  {
+   "parameters": [],
+   "passing": [],
+   "repo": "pypa/packaging",
+   "sha": "d5fedc90bba333ed0962ba5dfb7072d38f2c1d84",
+   "source": "src/packaging/requirements.py",
+   "state": "REFUSED__NO_PARTITION"
+  },
+  {
+   "parameters": [],
+   "passing": [],
+   "repo": "hukkin/tomli",
+   "sha": "12314bde5b89a8bdc32de7403a2a4cf786187bbc",
+   "source": "src/tomli/_parser.py",
+   "state": "REFUSED__NO_PARTITION"
+  },
+  {
+   "parameters": [],
+   "passing": [],
+   "repo": "hukkin/tomli",
+   "sha": "1e6e869aa9dbbddc492608944e82d9ad5397280f",
+   "source": "src/tomli/_parser.py",
+   "state": "REFUSED__NO_PARTITION"
+  },
+  {
+   "parameters": [],
+   "passing": [],
+   "repo": "hukkin/tomli",
+   "sha": "2a2aa62f1bc71b89b74d41dd2ab67b5dd24bc129",
+   "source": "src/tomli/_parser.py",
+   "state": "REFUSED__NO_PARTITION"
+  },
+  {
+   "parameters": [],
+   "passing": [],
+   "repo": "hukkin/tomli",
+   "sha": "31c85a18468adbb5f2e892aa96cf0930ac04f93c",
+   "source": "tomli/_parser.py",
+   "state": "REFUSED__NO_PARTITION"
+  },
+  {
+   "parameters": [],
+   "passing": [],
+   "repo": "hukkin/tomli",
+   "sha": "4e245a4bbbefed99e550e196095ea65c851cf31d",
+   "source": "src/tomli/_parser.py",
+   "state": "REFUSED__NO_PARTITION"
+  },
+  {
+   "parameters": [],
+   "passing": [],
+   "repo": "hukkin/tomli",
+   "sha": "5ab9ec926d9dc1ef79e66215edd51285371fe8a0",
+   "source": "tomli/_parser.py",
+   "state": "REFUSED__NO_PARTITION"
+  },
+  {
+   "parameters": [],
+   "passing": [],
+   "repo": "hukkin/tomli",
+   "sha": "67ec7d10528bd7b00ff1fc62da9a8a1e06406179",
+   "source": "tomli/_parser.py",
+   "state": "REFUSED__NO_PARTITION"
+  },
+  {
+   "parameters": [],
+   "passing": [],
+   "repo": "hukkin/tomli",
+   "sha": "794c8e50d676f1e8e081914eb77e4a48a4f6a20b",
+   "source": "src/tomli/_parser.py",
+   "state": "REFUSED__NO_PARTITION"
+  }
+ ],
+ "schema": "BRAIN_PASSING_REPAIRS_VERSION_SPACE_V1",
+ "totals": {
+  "max_repairs_accepted": 4,
+  "repairs_accepted_total": 4,
+  "seats_per_task": {
+   "022ae6c6": 4,
+   "12314bde": 0,
+   "1e6e869a": 0,
+   "258202ed": 0,
+   "2a2aa62f": 0,
+   "31c85a18": 0,
+   "349abfad": 0,
+   "4e245a4b": 0,
+   "553582d9": 0,
+   "5ab9ec92": 0,
+   "67ec7d10": 0,
+   "794c8e50": 0,
+   "7f4dcf83": 0,
+   "84833cc1": 0,
+   "9f5249fb": 0,
+   "b80e6eb0": 0,
+   "d5fedc90": 0
+  },
+  "states": {
+   "REFUSED__NO_PARTITION": 16,
+   "UNDERDETERMINED_SUITE_ADMITS_MANY": 1
+  },
+  "tasks": 17,
+  "tasks_admitting_many": 1,
+  "tasks_with_a_discriminating_question": 1,
+  "trials": 8
+ }
+}
