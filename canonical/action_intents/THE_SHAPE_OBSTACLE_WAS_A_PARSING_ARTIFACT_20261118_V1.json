@@ -42,7 +42,7 @@
  },
  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Evidence, not expressiveness. Of 241 real single-line edits in four real projects, resolving every edit at statement level leaves 81.3% of code edits needing only a single in-vocabulary expression, 86.1% addressable by one or two expressions over names in scope, 8.7% statement-form, 4.3% beyond the node budget and 0.5% needing a name the site lacks. The published 51.4% \"shape\" figure was a line-pair diffing artifact.",
- "canonical_base_commit": "c001c61528528a81c35742c80714d31e63c10c68",
+ "canonical_base_commit": "338568c970a192bd5ab09252e3284601c27ff0b7",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -114,7 +114,7 @@
   "canonical/action_intents/THE_SHAPE_OBSTACLE_WAS_A_PARSING_ARTIFACT_20261118_V1.json"
  ],
  "recursive_obs": {
-  "canonical_base_commit": "c001c61528528a81c35742c80714d31e63c10c68",
+  "canonical_base_commit": "338568c970a192bd5ab09252e3284601c27ff0b7",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "storing the text that was edited (a spelling destroyed by a rename)",
