@@ -31228,7 +31228,7 @@
   "engines": 26,
   "knowledge_documents": 526,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 7025,
+  "research_index_records": 7028,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 452,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "2fe718b6e976f52c1222ccaf01469d57e90000a051f906e378968fbedaa873a4"
+  "value": "45cf423dd77780b0458c09cf9ddf195fab5a42375a7ae0112b5cfc2098dded04"
  },
  "engines": [
   {
@@ -175878,6 +175878,36 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "2026-11-18",
+   "id": "research:canonical/verification/IS_THE_FIX_EVEN_IN_THE_POOL_20261118_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/IS_THE_FIX_EVEN_IN_THE_POOL_20261118_V1.json",
+   "schema": "BRAIN_IS_THE_FIX_EVEN_IN_THE_POOL_V1",
+   "sha256": "a5c81207f910fea6eecb6fb357e1d9842c9a3ffc96705ab668a02441dd2b1c73",
+   "status": "",
+   "terms": {
+    "20261118": 1,
+    "all": 1,
+    "along": 1,
+    "corpus-accepted": 1,
+    "defects": 1,
+    "even": 1,
+    "false": 1,
+    "five": 1,
+    "fix": 2,
+    "generator": 1,
+    "language": 1,
+    "limit": 1,
+    "not": 1,
+    "one": 1,
+    "pool": 2,
+    "positive": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "",
    "id": "research:canonical/verification/JUDGE_THE_JUDGE_20261117_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -242588,6 +242618,69 @@
     "the_heartbeat_produced_nothing_on_seventeen_of_twenty_runs_and_still_hit_its_timeout_after_the_duplicated_entry_was_removed__measured_2026_10_27_run_40476270088_one_entry_thirty_seven_families_at_fifty_instances_was_cancelled_at_40m00s_and_returned_no_receipt_because_the_receipt_is_assembled_once_at_the_end": 1,
     "the_run_writes_its_receipt_after_every_family__an_interrupted_run_therefore_reports_every_family_it_finished_and_names_every_family_it_never_reached__the_receipt_carries_run_complete_and_pending_families__an_incomplete_run_is_never_alive__and_the_workflow_renders_the_summary_from_the_partial_receipt": 1,
     "v1": 2
+   }
+  },
+  {
+   "action_id": "IS_THE_FIX_EVEN_IN_THE_POOL_20261118_V1",
+   "capability": false,
+   "date": "2026-11-18",
+   "id": "research:canonical/action_intents/IS_THE_FIX_EVEN_IN_THE_POOL_20261118_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/IS_THE_FIX_EVEN_IN_THE_POOL_20261118_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "73159c075b3528a843d00c5a332c936b50ce21c02e7c54ccb12d53f2b5ffd6a2",
+   "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
+   "terms": {
+    "2000": 1,
+    "20261118": 1,
+    "361": 1,
+    "about": 1,
+    "accepted": 1,
+    "ast": 1,
+    "because": 1,
+    "branch": 1,
+    "cannot": 1,
+    "context": 1,
+    "corpus": 1,
+    "correct": 1,
+    "counted": 1,
+    "defect": 1,
+    "disagrees": 1,
+    "easiest": 1,
+    "even": 1,
+    "every": 1,
+    "exactly": 1,
+    "excluded": 2,
+    "express": 1,
+    "expressibility": 1,
+    "expression": 1,
+    "false": 1,
+    "five": 1,
+    "fix": 2,
+    "fixes": 1,
+    "fool": 1,
+    "own": 2,
+    "pool": 3,
+    "published": 2,
+    "site": 3
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/action_intents/IS_THE_FIX_EVEN_IN_THE_POOL_20261118_V1.md",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/IS_THE_FIX_EVEN_IN_THE_POOL_20261118_V1.md",
+   "schema": "",
+   "sha256": "7421cb878387c50dfa9c143cb89a651d386cb7ec0fa8bbd104744c149f7c822d",
+   "status": "",
+   "terms": {
+    "20261118": 1,
+    "even": 1,
+    "fix": 1,
+    "pool": 1,
+    "v1": 1
    }
   },
   {
