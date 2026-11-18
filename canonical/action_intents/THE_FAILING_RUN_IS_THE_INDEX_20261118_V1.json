@@ -45,7 +45,7 @@
  },
  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The index. Candidate actions are drawn from the source text; the evidence that selects them lives in the failing execution. Measured head to head on the same 29 real commits: the blame index derives the human fix at rank 0 from 5 evaluated candidates, where the text-proximity index needs a 400-candidate pool to place the same fix at rank 1.",
- "canonical_base_commit": "c88adba0a10840aa9257c1792078a6493b39139d",
+ "canonical_base_commit": "1f405b9267799cd8219a6a45fe532b6ab2688372",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -142,7 +142,7 @@
  ],
  "real_outcome": "Retention is solved and identification is not: the failing run's values index the fix at rank 0 for the case the text pool needed 400 candidates to reach, and 11 of 29 real failures carry no produced value at all, which is the next mechanism's boundary.",
  "recursive_obs": {
-  "canonical_base_commit": "c88adba0a10840aa9257c1792078a6493b39139d",
+  "canonical_base_commit": "1f405b9267799cd8219a6a45fe532b6ab2688372",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "storing the text that was edited (a spelling destroyed by a rename)",
