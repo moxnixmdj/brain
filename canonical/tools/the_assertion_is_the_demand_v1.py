@@ -221,6 +221,21 @@ def assert_form(test_source: str, line: int) -> tuple[str, Any]:
     return ("unknown", None)
 
 
+_MISSING = object()
+
+
+def survivors_at(masks: dict[int, int], k: int) -> int:
+    """How many candidates satisfy the first k contrasts. |S_0| is one trace's whole live set."""
+    keep = (1 << k) - 1
+    return sum(count for mask, count in masks.items() if (mask & keep) == keep)
+
+
+def contraction(depth_counts: dict[int, int], total: int) -> dict[int, int]:
+    """|S_k| = how many candidates reproduce the reference rule on each of the first k observations."""
+    return {k: sum(count for depth, count in depth_counts.items() if depth >= k)
+            for k in range(0, total + 1)}
+
+
 def namespaces(slice_of_frames: list[Any]) -> list[dict[str, Any]]:
     """The frames a candidate is evaluated in: the site's own locals, plus its globals under a key."""
     made = []
@@ -654,6 +669,8 @@ def _driver_body(config_path: str) -> int:
     bound = frame_names(table)
     signal.signal(signal.SIGALRM, _alarm)
     survivors: list[dict[str, Any]] = []
+    counts: dict[int, int] = {}
+    depth_counts: dict[int, int] = {}
     offered = 0
     seen: set[str] = set()
 
@@ -699,22 +716,46 @@ def _driver_body(config_path: str) -> int:
                 return False
         return demanded_somewhere
 
-    def preservation(expression: str) -> int:
-        """How many passing rows keep their recorded value -- an ordering signal, never a gate."""
-        kept_rows = 0
-        for part in table:
-            if not part["frames"] or part["outcome"] != "passed":
-                continue
+    # The passing rows are the CONTRASTS: each one is a situation the candidate must not disturb. Which
+    # of them a candidate satisfies is a bitmask, because the identifiability question is "how many
+    # candidates survive the first k contrasts", not "how many survive all of them".
+    # Every recorded execution of the site, in order: the failing rows' frames first. This is the whole
+    # observation set the instrument possesses, and the identifiability question is how much of it a rule
+    # needs before it is the only rule left.
+    observations: list[dict[str, Any]] = []
+    for part in sorted(table, key=lambda item: item["outcome"] != "failed"):
+        for slice_of_frames in part["frames"]:
+            observations.extend(namespaces([slice_of_frames]))
+
+    human_values: list[Any] = []
+    if config.get("identify_curve") and config.get("human_expression"):
+        for namespace in observations:
+            produced = evaluate(config["human_expression"], [namespace])
+            human_values.append(produced[0] if produced else _MISSING)
+        depth_counts: dict[int, int] = {}
+
+    contrast_rows = [part for part in table
+                     if part["outcome"] == "passed" and part["frames"] and part["kept"]][:12]
+
+    def contrast_mask(expression: str) -> int:
+        mask = 0
+        for index, part in enumerate(contrast_rows):
             values = evaluate(expression, namespaces(part["frames"]))
             if values is not None and all(safe_equal(value, original)
                                           for value, original in zip(values, part["kept"])):
-                kept_rows += 1
-        return kept_rows
+                mask |= 1 << index
+        return mask
+
+    def preservation(expression: str) -> int:
+        """How many passing rows keep their recorded value -- an ordering signal, never a gate."""
+        return bin(contrast_mask(expression)).count("1")
 
     def offer(expression: str, source: str, rank: int, ring: int) -> bool:
         nonlocal offered
         offered += 1
-        if expression in seen or len(survivors) >= config["survivors_cap"]:
+        if expression in seen:
+            return False
+        if not config.get("count_contrasts") and len(survivors) >= config["survivors_cap"]:
             return False
         seen.add(expression)
         if not names_something(expression, bound) if bound else False:
@@ -722,10 +763,28 @@ def _driver_body(config_path: str) -> int:
             # that reproduced the demanded string on the one name the test happened to use. It greened all
             # 47 tests and was wrong. A candidate that names nothing in the frame is that patch.
             return False
+        if config.get("identify_curve") and human_values:
+            # IDENTIFIABILITY, measured against the human's own rule as the ground truth: a candidate is
+            # kept while it reproduces that rule's value on every observation seen so far. `depth` is how
+            # many observations it survives; |S_k| = #{candidates : depth >= k}. One trace is one column.
+            depth = 0
+            for index, namespace in enumerate(observations):
+                produced = evaluate(expression, [namespace])
+                if not produced or not safe_equal(produced[0], human_values[index]):
+                    break
+                depth += 1
+            depth_counts[depth] = depth_counts.get(depth, 0) + 1
+            if depth >= len(observations):
+                survivors.append({"rank": rank, "expression": expression, "ring": ring,
+                                  "source": source, "depth": depth, "mask": bin(0), "preserves": 0})
+            return depth >= len(observations)
         if not admissible(expression):
             return False
-        survivors.append({"rank": rank, "expression": expression, "ring": ring, "source": source,
-                          "preserves": preservation(expression)})
+        mask = contrast_mask(expression)
+        counts[mask] = counts.get(mask, 0) + 1
+        if len(survivors) < config["survivors_cap"]:
+            survivors.append({"rank": rank, "expression": expression, "ring": ring, "source": source,
+                              "preserves": bin(mask).count("1"), "mask": bin(mask)})
         return True
 
     try:
@@ -774,14 +833,35 @@ def _driver_body(config_path: str) -> int:
         signal.setitimer(signal.ITIMER_REAL, 0)
         signal.signal(signal.SIGALRM, signal.SIG_DFL)
     result["offered"] = offered
-    survivors.sort(key=lambda item: (-item["preserves"], item["rank"] if item["rank"] >= 0 else 10**9))
+    if config.get("identify_curve") and human_values:
+        total = len(observations)
+        curve = {str(k): value for k, value in contraction(depth_counts, total).items()}
+        result["identify_curve"] = {
+            "observations": total,
+            "curve": curve,
+            "indistinguishable": curve.get(str(total), 0),
+            "depth_histogram": {str(d): c for d, c in sorted(depth_counts.items())},
+            "human_expression": config["human_expression"],
+        }
+    result["contrast"] = {
+        "rows": len(contrast_rows),
+        "admissible": sum(counts.values()),
+        "masks": {str(mask): count for mask, count in sorted(counts.items())},
+        "human_mask": bin(contrast_mask(config["human_expression"])).count("1")
+        if config.get("human_expression") else None,
+        "human_mask_bits": bin(contrast_mask(config["human_expression"]))
+        if config.get("human_expression") else None,
+    }
+    survivors.sort(key=lambda item: (-item.get("preserves", 0),
+                                     item["rank"] if item["rank"] >= 0 else 10**9))
     result["survivors"] = survivors
     out.write_text(json.dumps(result, indent=1), encoding="utf-8")
     return 0
 
 
 def explore(repo: pathlib.Path, entry: dict[str, Any], *, cap: int = 400_000, survivors_cap: int = 24,
-            verifications: int = 10, seconds: int = 180) -> dict[str, Any]:
+            verifications: int = 10, seconds: int = 180,
+            count_contrasts: bool = False, identify_curve: bool = False) -> dict[str, Any]:
     started = time.time()
     sha, test_path = entry["commit"], entry["test"]
     parent = f"{sha}^"
@@ -826,6 +906,8 @@ def explore(repo: pathlib.Path, entry: dict[str, Any], *, cap: int = 400_000, su
                 "site_expression": site["old_expression"], "cap": cap,
                 "survivors_cap": survivors_cap,
                 "human_expression": site["human_expression"],
+                "count_contrasts": bool(count_contrasts),
+                "identify_curve": bool(identify_curve),
                 "spec_literals": specification_literals(
                     (worktree / test_path).read_text(encoding="utf-8", errors="replace")),
             }), encoding="utf-8")
@@ -882,6 +964,10 @@ def explore(repo: pathlib.Path, entry: dict[str, Any], *, cap: int = 400_000, su
 
             found = None
             verified = 0
+            # AMBIGUITY: every candidate the suite also accepts is a DIFFERENT rule indistinguishable from
+            # the found one by the only gate the tree allows. Counting them is the identifiability of the
+            # row, in units of "how many fixes fit one trace".
+            greens: list[dict[str, Any]] = []
             for survivor in survivors[:verifications]:
                 patched = identify.replace_site(original, site["line"], site["span"][0],
                                                 site["span"][1], survivor["expression"])
@@ -899,16 +985,22 @@ def explore(repo: pathlib.Path, entry: dict[str, Any], *, cap: int = 400_000, su
                             refused = survivor["expression"]
                             target.write_text(original, encoding="utf-8")
                             continue
-                        found = {**survivor, "tests_green": len(whole)}
-                        break
+                        if found is None:
+                            found = {**survivor, "tests_green": len(whole)}
+                        greens.append({"expression": survivor["expression"], "rank": survivor["rank"],
+                                       "source": survivor["source"], "tests_green": len(whole)})
             target.write_text(original, encoding="utf-8")
             return {
                 "stage": "DEMAND_MET" if found else "NO_VALUE_MATCHES",
                 "failing_test": node_id, "site_line": site["line"],
                 "site_expression": site["old_expression"],
                 "human_expression": site["human_expression"],
+                "count_contrasts": bool(count_contrasts),
+                "identify_curve": bool(identify_curve),
                 "table": driven.get("table"),
                 "human_admissible": driven.get("human_admissible"),
+                "contrast": driven.get("contrast"),
+                "identify_curve": driven.get("identify_curve"),
                 "frames": driven.get("frames"),
                 "table_rows": len(driven.get("table") or []),
                 "space_offered_before_survivors": driven.get("offered"),
@@ -917,6 +1009,8 @@ def explore(repo: pathlib.Path, entry: dict[str, Any], *, cap: int = 400_000, su
                 "human_expression_rank": human_rank,
                 "verifications": verified,
                 "found": found,
+                "greens": greens,
+                "green_count": len(greens),
                 "found_is_the_human_fix": bool(
                     found and human_dump
                     and ast.dump(ast.parse(found["expression"], mode="eval").body) == human_dump),
@@ -929,14 +1023,16 @@ def explore(repo: pathlib.Path, entry: dict[str, Any], *, cap: int = 400_000, su
 
 
 def sweep(entries: Sequence[dict[str, Any]], *, receipt: pathlib.Path, cap: int,
-          survivors_cap: int, verifications: int, seconds: int) -> dict[str, Any]:
+          survivors_cap: int, verifications: int, seconds: int,
+          identify: bool = False, count: bool = False) -> dict[str, Any]:
     rows: list[dict[str, Any]] = []
     started = time.time()
     for number, entry in enumerate(entries, 1):
         repo = pathlib.Path(entry.get("repo_path") or (pathlib.Path("/tmp/repos") / entry["repo"]))
         try:
             result = explore(repo, entry, cap=cap, survivors_cap=survivors_cap,
-                             verifications=verifications, seconds=seconds)
+                             verifications=verifications, seconds=seconds, identify_curve=identify,
+                             count_contrasts=count)
         except Exception as error:  # noqa: BLE001
             result = {"stage": "EXCEPTION", "error": f"{type(error).__name__}: {error}"[:300]}
         row = {key: entry.get(key) for key in ("repo", "commit", "test")}
@@ -962,6 +1058,10 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--verifications", type=int, default=10)
     parser.add_argument("--seconds", type=int, default=180)
     parser.add_argument("--only", default="")
+    parser.add_argument("--count", action="store_true",
+                        help="count every admissible candidate (the live set), not just the first survivors")
+    parser.add_argument("--identify", action="store_true",
+                        help="count how many candidates stay indistinguishable from the human rule per observation")
     parser.add_argument("--driver", help=argparse.SUPPRESS)
     args = parser.parse_args(argv)
 
@@ -977,7 +1077,9 @@ def main(argv: Sequence[str] | None = None) -> int:
     for entry in entries:
         entry.setdefault("repo_path", str(args.repos_root / entry["repo"]))
     result = sweep(entries, receipt=args.receipt, cap=args.cap, survivors_cap=args.survivors_cap,
-                   verifications=args.verifications, seconds=args.seconds)
+                   verifications=args.verifications, seconds=args.seconds,
+                   identify=getattr(args, "identify", False),
+                   count=getattr(args, "count", False))
     print(json.dumps({"rows": len(result["rows"]), "receipt": str(args.receipt)}))
     return 0
 

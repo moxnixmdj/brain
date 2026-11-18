@@ -1,0 +1,794 @@
+{
+ "schema": "BRAIN_THE_ASSERTION_IS_THE_DEMAND_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "date": "2026-11-19",
+ "mode": "SWEEP_REAL_HISTORY",
+ "rows": [
+  {
+   "repo": "click",
+   "commit": "3495fba163dd61dea837cd557095df6c21515ac8",
+   "test": "tests/test_basic.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "click",
+   "commit": "becbde5cf416441627f779e8dd34e57738ee1c1f",
+   "test": "tests/test_testing.py",
+   "stage": "NO_VALUE_MATCHES",
+   "failing_test": "tests/test_testing.py::test_with_echo_via_pager",
+   "site_line": 617,
+   "site_expression": "stream",
+   "human_expression": "_SkipClose(stream)",
+   "count_contrasts": true,
+   "identify_curve": null,
+   "table": [
+    {
+     "node": "tests/test_testing.py::test_with_echo_via_pager",
+     "relation": "UNWRAPPED",
+     "demand": "'I/O operation on closed file.'"
+    }
+   ],
+   "human_admissible": false,
+   "contrast": {
+    "rows": 0,
+    "admissible": 0,
+    "masks": {},
+    "human_mask": 0,
+    "human_mask_bits": "0b0"
+   },
+   "frames": 1,
+   "table_rows": 1,
+   "space_offered_before_survivors": 150809,
+   "survivors": 0,
+   "survivor_sources": [],
+   "human_expression_rank": null,
+   "verifications": 0,
+   "found": null,
+   "greens": [],
+   "green_count": 0,
+   "found_is_the_human_fix": false,
+   "parameters_stored": 0,
+   "seconds": 5.53
+  },
+  {
+   "repo": "click",
+   "commit": "a3321c9ca14ddb951f04ac981f275b0de2f46208",
+   "test": "tests/test_shell_completion.py",
+   "stage": "NO_VALUE_MATCHES",
+   "failing_test": "tests/test_shell_completion.py::test_source_uses_lf_line_endings",
+   "site_line": 47,
+   "site_expression": "comp",
+   "human_expression": "comp.source()",
+   "count_contrasts": true,
+   "identify_curve": null,
+   "table": [
+    {
+     "node": "tests/test_shell_completion.py::test_source_uses_lf_line_endings",
+     "relation": "UNWRAPPED",
+     "demand": "'assert b\\'\\\\r\\\\n\\' not in b\\'#compdef cli\\\\r\\\\n\\\\r\\\\n_cli_completion() {\\\\r\\\\n    local -a completions\\\\r\\\\n    loca..."
+    }
+   ],
+   "human_admissible": false,
+   "contrast": {
+    "rows": 3,
+    "admissible": 0,
+    "masks": {},
+    "human_mask": 0,
+    "human_mask_bits": "0b0"
+   },
+   "frames": 4,
+   "table_rows": 1,
+   "space_offered_before_survivors": 149482,
+   "survivors": 0,
+   "survivor_sources": [],
+   "human_expression_rank": null,
+   "verifications": 0,
+   "found": null,
+   "greens": [],
+   "green_count": 0,
+   "found_is_the_human_fix": false,
+   "parameters_stored": 0,
+   "seconds": 5.69
+  },
+  {
+   "repo": "jinja",
+   "commit": "a150ff749a0347c41e8e353c2ce2063e8f84ab42",
+   "test": "tests/test_async.py",
+   "stage": "NO_VALUE_MATCHES",
+   "failing_test": "tests/test_async.py::test_getitem_after_filter",
+   "site_line": 1758,
+   "site_expression": "'await auto_await('",
+   "human_expression": "'(await auto_await('",
+   "count_contrasts": true,
+   "identify_curve": null,
+   "table": [
+    {
+     "node": "tests/test_async.py::test_getitem_after_filter",
+     "relation": "UNWRAPPED",
+     "demand": "\"'coroutine' object is not subscriptable\""
+    },
+    {
+     "node": "tests/test_async.py::test_getitem_after_filter",
+     "relation": "UNWRAPPED",
+     "demand": "'Exception ignored in: <coroutine object auto_await at 0x7fcacb1a0860>\\nEnable tracemalloc to get traceback where the..."
+    },
+    {
+     "node": "tests/test_async.py::test_getitem_after_call",
+     "relation": "UNWRAPPED",
+     "demand": "\"'coroutine' object is not subscriptable\""
+    },
+    {
+     "node": "tests/test_async.py::test_getitem_after_call",
+     "relation": "UNWRAPPED",
+     "demand": "'Exception ignored in: <coroutine object auto_await at 0x7fcacc72a670>\\nEnable tracemalloc to get traceback where the..."
+    }
+   ],
+   "human_admissible": false,
+   "contrast": {
+    "rows": 3,
+    "admissible": 0,
+    "masks": {},
+    "human_mask": 0,
+    "human_mask_bits": "0b0"
+   },
+   "frames": 7,
+   "table_rows": 4,
+   "space_offered_before_survivors": 154157,
+   "survivors": 0,
+   "survivor_sources": [],
+   "human_expression_rank": null,
+   "verifications": 0,
+   "found": null,
+   "greens": [],
+   "green_count": 0,
+   "found_is_the_human_fix": false,
+   "parameters_stored": 0,
+   "seconds": 6.15
+  },
+  {
+   "repo": "jinja",
+   "commit": "89310770585ed0fb8d10c46cf8d6f447bb807467",
+   "test": "tests/test_loader.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "attrs",
+   "commit": "1c962d15a743a3c18401f0c788f0fd0cb3d9acf8",
+   "test": "tests/test_annotations.py",
+   "stage": "DEMAND_MET",
+   "failing_test": "tests/test_annotations.py::TestAnnotations::test_catches_basic_type_conflict",
+   "site_line": 2494,
+   "site_expression": "'Type annotation and type argument cannot both be present'",
+   "human_expression": "f\"Type annotation and type argument cannot both be present for '{name}'.\"",
+   "count_contrasts": true,
+   "identify_curve": null,
+   "table": [
+    {
+     "node": "tests/test_annotations.py::TestAnnotations::test_catches_basic_type_conflict",
+     "relation": "UNWRAPPED",
+     "demand": "'Type annotation and type argument cannot both be present'"
+    },
+    {
+     "node": "tests/test_annotations.py::TestAnnotations::test_catches_basic_type_conflict",
+     "relation": "UNWRAPPED",
+     "demand": "\"Type annotation and type argument cannot both be present for 'x'.\""
+    },
+    {
+     "node": "tests/test_annotations.py::TestAnnotations::test_catches_basic_type_conflict",
+     "relation": "UNWRAPPED",
+     "demand": "'assert (\"Type annota...nt for \\'x\\'.\",) == (\\'Type annota... be present\\',)\\n  \\n  At index 0 diff: \"Type annotation..."
+    }
+   ],
+   "human_admissible": true,
+   "contrast": {
+    "rows": 0,
+    "admissible": 2,
+    "masks": {
+     "0": 2
+    },
+    "human_mask": 0,
+    "human_mask_bits": "0b0"
+   },
+   "frames": 1,
+   "table_rows": 3,
+   "space_offered_before_survivors": 151102,
+   "survivors": 2,
+   "survivor_sources": [
+    "induced:tests/test_annotations.py::TestAnnotations::test_catches_basic_type_conflict",
+    "induced:tests/test_annotations.py::TestAnnotations::test_catches_basic_type_conflict"
+   ],
+   "human_expression_rank": -1,
+   "verifications": 2,
+   "found": {
+    "rank": -1,
+    "expression": "f\"Type annotation and type argument cannot both be present for '{name}'.\"",
+    "ring": 4,
+    "source": "induced:tests/test_annotations.py::TestAnnotations::test_catches_basic_type_conflict",
+    "preserves": 0,
+    "mask": "0b0",
+    "tests_green": 47
+   },
+   "greens": [
+    {
+     "expression": "f\"Type annotation and type argument cannot both be present for '{name}'.\"",
+     "rank": -1,
+     "source": "induced:tests/test_annotations.py::TestAnnotations::test_catches_basic_type_conflict",
+     "tests_green": 47
+    },
+    {
+     "expression": "f\"Type annotation and type argument cannot both be present for {name!r}.\"",
+     "rank": -1,
+     "source": "induced:tests/test_annotations.py::TestAnnotations::test_catches_basic_type_conflict",
+     "tests_green": 47
+    }
+   ],
+   "green_count": 2,
+   "found_is_the_human_fix": true,
+   "parameters_stored": 0,
+   "seconds": 7.33
+  },
+  {
+   "repo": "attrs",
+   "commit": "1e07f46897488350bb44ed88f1c70d4d7461dde0",
+   "test": "tests/test_annotations.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "attrs",
+   "commit": "dbb25ce34787a30e2ffa65685f6c689a269c3521",
+   "test": "tests/test_functional.py",
+   "stage": "THE_SITE_NEVER_RAN_IN_THE_FAILING_TEST",
+   "failing_test": "tests/test_functional.py::TestFunctional::test_init_subclass[True]",
+   "site_line": 713,
+   "seconds": 2.52
+  },
+  {
+   "repo": "attrs",
+   "commit": "edcaf04a4d6b1b92996de668af9f6fea266efba2",
+   "test": "tests/test_make.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "click",
+   "commit": "051bb0f30b545cf7426deef819811815297c2798",
+   "test": "tests/test_termui.py",
+   "stage": "NO_VALUE_MATCHES",
+   "failing_test": "tests/test_termui.py::test_get_pager_file_missing_pager_keeps_borrowed_stream_open",
+   "site_line": 640,
+   "site_expression": "_SkipClose",
+   "human_expression": "KeepOpenFile",
+   "count_contrasts": true,
+   "identify_curve": null,
+   "table": [
+    {
+     "node": "tests/test_termui.py::test_get_pager_file_missing_pager_keeps_borrowed_stream_open",
+     "relation": "UNWRAPPED",
+     "demand": "'assert not True\\n +  where True = <_io.BytesIO object at 0x7fb9fded4090>.closed'"
+    },
+    {
+     "node": "tests/test_termui.py::test_echo_via_pager_tty_pager_missing",
+     "relation": "UNWRAPPED",
+     "demand": "'I/O operation on closed file.'"
+    }
+   ],
+   "human_admissible": false,
+   "contrast": {
+    "rows": 4,
+    "admissible": 0,
+    "masks": {},
+    "human_mask": 0,
+    "human_mask_bits": "0b0"
+   },
+   "frames": 4,
+   "table_rows": 2,
+   "space_offered_before_survivors": 150123,
+   "survivors": 0,
+   "survivor_sources": [],
+   "human_expression_rank": null,
+   "verifications": 0,
+   "found": null,
+   "greens": [],
+   "green_count": 0,
+   "found_is_the_human_fix": false,
+   "parameters_stored": 0,
+   "seconds": 6.03
+  },
+  {
+   "repo": "click",
+   "commit": "32ae2acd3474a57d2450ea849545b2e1258bf76a",
+   "test": "tests/test_shell_completion.py",
+   "stage": "NO_VALUE_MATCHES",
+   "failing_test": "tests/test_shell_completion.py::test_choice_case_sensitive[False-expect0]",
+   "site_line": 411,
+   "site_expression": "map(str, self.choices)",
+   "human_expression": "[self.normalize_choice(choice, ctx) for choice in self.choices]",
+   "count_contrasts": true,
+   "identify_curve": null,
+   "table": [
+    {
+     "node": "tests/test_shell_completion.py::test_choice_case_sensitive[False-expect0]",
+     "relation": "UNWRAPPED",
+     "demand": "\"assert ['Au', 'al'] == ['au', 'al']\\n  \\n  At index 0 diff: 'Au' != 'au'\\n  Use -v to get more diff\""
+    }
+   ],
+   "human_admissible": false,
+   "contrast": {
+    "rows": 12,
+    "admissible": 0,
+    "masks": {},
+    "human_mask": 0,
+    "human_mask_bits": "0b0"
+   },
+   "frames": 30,
+   "table_rows": 1,
+   "space_offered_before_survivors": 150632,
+   "survivors": 0,
+   "survivor_sources": [],
+   "human_expression_rank": null,
+   "verifications": 0,
+   "found": null,
+   "greens": [],
+   "green_count": 0,
+   "found_is_the_human_fix": false,
+   "parameters_stored": 0,
+   "seconds": 6.06
+  },
+  {
+   "repo": "click",
+   "commit": "91de59c6c8abc8251e7af551cd4546cc964288af",
+   "test": "tests/test_options.py",
+   "stage": "NO_VALUE_MATCHES",
+   "failing_test": "tests/test_options.py::test_flag_value_optional_behavior",
+   "site_line": 2783,
+   "site_expression": "self.default is UNSET",
+   "human_expression": "flag_value is not UNSET or self.default is UNSET",
+   "count_contrasts": true,
+   "identify_curve": null,
+   "table": [
+    {
+     "node": "tests/test_options.py::test_flag_value_optional_behavior",
+     "relation": "DIRECT",
+     "demand": "0"
+    },
+    {
+     "node": "tests/test_options.py::test_flag_value_with_type_conversion",
+     "relation": "DIRECT",
+     "demand": "0"
+    }
+   ],
+   "human_admissible": false,
+   "contrast": {
+    "rows": 12,
+    "admissible": 0,
+    "masks": {},
+    "human_mask": 12,
+    "human_mask_bits": "0b111111111111"
+   },
+   "frames": 18,
+   "table_rows": 2,
+   "space_offered_before_survivors": 153659,
+   "survivors": 0,
+   "survivor_sources": [],
+   "human_expression_rank": null,
+   "verifications": 0,
+   "found": null,
+   "greens": [],
+   "green_count": 0,
+   "found_is_the_human_fix": false,
+   "parameters_stored": 0,
+   "seconds": 7.9
+  },
+  {
+   "repo": "click",
+   "commit": "70c673d37eb91ba42a129be9037caf3ebed62f3e",
+   "test": "tests/test_commands.py",
+   "stage": "NO_VALUE_MATCHES",
+   "failing_test": "tests/test_commands.py::test_help_param_priority",
+   "site_line": 1300,
+   "site_expression": "HelpOption(help_options)",
+   "human_expression": "self._help_option",
+   "count_contrasts": true,
+   "identify_curve": null,
+   "table": [
+    {
+     "node": "tests/test_commands.py::test_help_param_priority",
+     "relation": "UNWRAPPED",
+     "demand": "\"assert 'Value of b is: True' not in 'Value of b is: True\\\\n'\\n  \\n  'Value of b is: True' is contained here:\\n  Stri..."
+    }
+   ],
+   "human_admissible": false,
+   "contrast": {
+    "rows": 12,
+    "admissible": 0,
+    "masks": {},
+    "human_mask": 0,
+    "human_mask_bits": "0b0"
+   },
+   "frames": 109,
+   "table_rows": 1,
+   "space_offered_before_survivors": 153044,
+   "survivors": 0,
+   "survivor_sources": [],
+   "human_expression_rank": null,
+   "verifications": 0,
+   "found": null,
+   "greens": [],
+   "green_count": 0,
+   "found_is_the_human_fix": false,
+   "parameters_stored": 0,
+   "seconds": 7.24
+  },
+  {
+   "repo": "jinja",
+   "commit": "b5120582706b9e997cfd3277b02a32fd35b1c9d4",
+   "test": "tests/test_security.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "attrs",
+   "commit": "ce89f5d11feb0805da9ed10bb165238cc959f1bb",
+   "test": "tests/test_functional.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "attrs",
+   "commit": "13105a64f2de2e257a537ad20c06ffdd1c9d7f94",
+   "test": "tests/test_converters.py",
+   "stage": "NO_VALUE_MATCHES",
+   "failing_test": "tests/test_converters.py::TestConverter::test_falsey_converter",
+   "site_line": 2024,
+   "site_expression": "a.converter",
+   "human_expression": "a.converter is not None",
+   "count_contrasts": true,
+   "identify_curve": null,
+   "table": [
+    {
+     "node": "tests/test_converters.py::TestConverter::test_falsey_converter",
+     "relation": "UNWRAPPED",
+     "demand": "\"'MyConv' object has no attribute '_fmt_converter_call'\""
+    },
+    {
+     "node": "tests/test_converters.py::TestPipe::test_wrapped_annotation",
+     "relation": "UNWRAPPED",
+     "demand": "\"assert bool is None\\n +  where None = get_return_type()\\n +    where get_return_type = <attr._compat._AnnotationExtr..."
+    }
+   ],
+   "human_admissible": false,
+   "contrast": {
+    "rows": 2,
+    "admissible": 0,
+    "masks": {},
+    "human_mask": 0,
+    "human_mask_bits": "0b0"
+   },
+   "frames": 31,
+   "table_rows": 2,
+   "space_offered_before_survivors": 151988,
+   "survivors": 0,
+   "survivor_sources": [],
+   "human_expression_rank": null,
+   "verifications": 0,
+   "found": null,
+   "greens": [],
+   "green_count": 0,
+   "found_is_the_human_fix": false,
+   "parameters_stored": 0,
+   "seconds": 5.91
+  },
+  {
+   "repo": "attrs",
+   "commit": "f5683b852b1e7ec1f26aabbb55aad332de79066d",
+   "test": "tests/test_annotations.py",
+   "stage": "NO_VALUE_MATCHES",
+   "failing_test": "tests/test_annotations.py::TestAnnotations::test_pipe",
+   "site_line": 2242,
+   "site_expression": "attrs_init",
+   "human_expression": "'__attrs_init__' if attrs_init else '__init__'",
+   "count_contrasts": true,
+   "identify_curve": null,
+   "table": [
+    {
+     "node": "tests/test_annotations.py::TestAnnotations::test_pipe",
+     "relation": "UNWRAPPED",
+     "demand": "\"'function' object has no attribute 'converter'\""
+    },
+    {
+     "node": "tests/test_annotations.py::TestAnnotations::test_pipe_empty",
+     "relation": "UNWRAPPED",
+     "demand": "\"'function' object has no attribute 'converter'\""
+    },
+    {
+     "node": "tests/test_annotations.py::TestAnnotations::test_pipe_non_introspectable",
+     "relation": "UNWRAPPED",
+     "demand": "\"'function' object has no attribute 'converter'\""
+    },
+    {
+     "node": "tests/test_annotations.py::TestAnnotations::test_pipe_nullary",
+     "relation": "UNWRAPPED",
+     "demand": "\"'function' object has no attribute 'converter'\""
+    }
+   ],
+   "human_admissible": false,
+   "contrast": {
+    "rows": 12,
+    "admissible": 0,
+    "masks": {},
+    "human_mask": 0,
+    "human_mask_bits": "0b0"
+   },
+   "frames": 57,
+   "table_rows": 4,
+   "space_offered_before_survivors": 150048,
+   "survivors": 0,
+   "survivor_sources": [],
+   "human_expression_rank": null,
+   "verifications": 0,
+   "found": null,
+   "greens": [],
+   "green_count": 0,
+   "found_is_the_human_fix": false,
+   "parameters_stored": 0,
+   "seconds": 5.6
+  },
+  {
+   "repo": "attrs",
+   "commit": "a71fbbad8950e127ebe4509b4ff0d730fb02a8b2",
+   "test": "tests/test_next_gen.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "attrs",
+   "commit": "d0c73d8faa184cdff8d6a0378ed5b85ca57cde7d",
+   "test": "tests/test_validators.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "click",
+   "commit": "a6256bfb5971d5e58585fe7b6c656134e1ade5a4",
+   "test": "tests/test_termui.py",
+   "stage": "NO_VALUE_MATCHES",
+   "failing_test": "tests/test_termui.py::test_pipepager_less_detection_matches_stem[less.exe]",
+   "site_line": 491,
+   "site_expression": "color",
+   "human_expression": "cmd_params",
+   "count_contrasts": true,
+   "identify_curve": null,
+   "table": [
+    {
+     "node": "tests/test_termui.py::test_pipepager_less_detection_matches_stem[less.exe]",
+     "relation": "UNWRAPPED",
+     "demand": "'assert False is True\\n +  where False = <click._termui_impl._PagerWriter object at 0x7f6ac8720710>.color'"
+    },
+    {
+     "node": "tests/test_termui.py::test_pipepager_less_detection_case_insensitive_on_windows",
+     "relation": "UNWRAPPED",
+     "demand": "'assert None is True'"
+    },
+    {
+     "node": "tests/test_termui.py::test_pipepager_less_raw_mode_detection[long option with r substring]",
+     "relation": "UNWRAPPED",
+     "demand": "'assert True is None'"
+    },
+    {
+     "node": "tests/test_termui.py::test_pipepager_less_raw_mode_detection[filename with R]",
+     "relation": "UNWRAPPED",
+     "demand": "'assert True is None'"
+    },
+    {
+     "node": "tests/test_termui.py::test_pipepager_less_raw_mode_detection[filename with r]",
+     "relation": "UNWRAPPED",
+     "demand": "'assert True is None'"
+    },
+    {
+     "node": "tests/test_termui.py::test_pipepager_less_raw_mode_detection[option terminator shields filenames]",
+     "relation": "UNWRAPPED",
+     "demand": "'assert True is None'"
+    },
+    {
+     "node": "tests/test_termui.py::test_pipepager_less_raw_mode_detection[long option with value]",
+     "relation": "UNWRAPPED",
+     "demand": "'assert True is None'"
+    },
+    {
+     "node": "tests/test_termui.py::test_tempfile_pager_passes_pager_params",
+     "relation": "UNWRAPPED",
+     "demand": "\"assert 'line one\\\\nline two\\\\n\\\\n' == 'line one\\\\n'\\n  \\n    line one\\n  + line two\\n  + \""
+    }
+   ],
+   "human_admissible": false,
+   "contrast": {
+    "rows": 5,
+    "admissible": 0,
+    "masks": {},
+    "human_mask": 0,
+    "human_mask_bits": "0b0"
+   },
+   "frames": 6,
+   "table_rows": 8,
+   "space_offered_before_survivors": 150774,
+   "survivors": 0,
+   "survivor_sources": [],
+   "human_expression_rank": null,
+   "verifications": 0,
+   "found": null,
+   "greens": [],
+   "green_count": 0,
+   "found_is_the_human_fix": false,
+   "parameters_stored": 0,
+   "seconds": 6.92
+  },
+  {
+   "repo": "click",
+   "commit": "b7e5fd4cc7de70280eccd39f2bb956df617e5519",
+   "test": "tests/test_shell_completion.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "click",
+   "commit": "2468b70997a6ec27ced4b4867954c90da3f92075",
+   "test": "tests/test_utils.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "click",
+   "commit": "18d29196c508b249ef1111f1f29c9133e0a8b097",
+   "test": "tests/test_arguments.py",
+   "stage": "NO_VALUE_MATCHES",
+   "failing_test": "tests/test_arguments.py::test_argument_custom_class_can_override_type_cast_value_and_never_sees_unset[argument_kwargs1-pass_argv1]",
+   "site_line": 2341,
+   "site_expression": "value in (None, UNSET)",
+   "human_expression": "value is None",
+   "count_contrasts": true,
+   "identify_curve": null,
+   "table": [
+    {
+     "node": "tests/test_arguments.py::test_argument_custom_class_can_override_type_cast_value_and_never_sees_unset[argument_kwargs1-pass_argv1]",
+     "relation": "UNWRAPPED",
+     "demand": "\"assert not AssertionError('assert Sentinel.UNSET is not Sentinel.UNSET')\\n +  where AssertionError('assert Sentinel...."
+    },
+    {
+     "node": "tests/test_arguments.py::test_argument_custom_class_can_override_type_cast_value_and_never_sees_unset[argument_kwargs4-pass_argv4]",
+     "relation": "UNWRAPPED",
+     "demand": "\"assert not AssertionError('assert Sentinel.UNSET is not Sentinel.UNSET')\\n +  where AssertionError('assert Sentinel...."
+    }
+   ],
+   "human_admissible": false,
+   "contrast": {
+    "rows": 12,
+    "admissible": 0,
+    "masks": {},
+    "human_mask": 12,
+    "human_mask_bits": "0b111111111111"
+   },
+   "frames": 184,
+   "table_rows": 2,
+   "space_offered_before_survivors": 153021,
+   "survivors": 0,
+   "survivor_sources": [],
+   "human_expression_rank": null,
+   "verifications": 0,
+   "found": null,
+   "greens": [],
+   "green_count": 0,
+   "found_is_the_human_fix": false,
+   "parameters_stored": 0,
+   "seconds": 6.4
+  },
+  {
+   "repo": "click",
+   "commit": "701b313160be12752e49b3f7cea32402c0969a69",
+   "test": "tests/test_shell_completion.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "click",
+   "commit": "4fd2fea0db423d242aedcae0a5f664efe0a93484",
+   "test": "tests/test_options.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "jinja",
+   "commit": "eec0db8642b25691867890f14fc6c9ca04c8a8c9",
+   "test": "tests/test_loader.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "jinja",
+   "commit": "f3bc9c6a915badd3871eb1bc5aae5421d2f6496d",
+   "test": "tests/test_regression.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "attrs",
+   "commit": "5d6d21aa5e598c600a3610a4721a63e58d89dc5e",
+   "test": "tests/test_converters.py",
+   "stage": "NO_VALUE_MATCHES",
+   "failing_test": "tests/test_converters.py::TestConverter::test_annotations_if_last_in_pipe",
+   "site_line": 2952,
+   "site_expression": "converters[-1]",
+   "human_expression": "last",
+   "count_contrasts": true,
+   "identify_curve": null,
+   "table": [
+    {
+     "node": "tests/test_converters.py::TestConverter::test_annotations_if_last_in_pipe",
+     "relation": "UNWRAPPED",
+     "demand": "'return'"
+    },
+    {
+     "node": "tests/test_converters.py::TestPipe::test_wrapped_annotation",
+     "relation": "UNWRAPPED",
+     "demand": "\"assert bool is None\\n +  where None = get_return_type()\\n +    where get_return_type = <attr._compat._AnnotationExtr..."
+    }
+   ],
+   "human_admissible": false,
+   "contrast": {
+    "rows": 3,
+    "admissible": 0,
+    "masks": {},
+    "human_mask": 0,
+    "human_mask_bits": "0b0"
+   },
+   "frames": 5,
+   "table_rows": 2,
+   "space_offered_before_survivors": 150303,
+   "survivors": 0,
+   "survivor_sources": [],
+   "human_expression_rank": null,
+   "verifications": 0,
+   "found": null,
+   "greens": [],
+   "green_count": 0,
+   "found_is_the_human_fix": false,
+   "parameters_stored": 0,
+   "seconds": 5.91
+  },
+  {
+   "repo": "attrs",
+   "commit": "c2824ac30f315bfbc7398960c6831d68ecc9edb4",
+   "test": "tests/test_make.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "attrs",
+   "commit": "a8191556c0aad84125d2c3435c5a2352b2f8a9ba",
+   "test": "tests/test_functional.py",
+   "stage": "NO_VALUE_MATCHES",
+   "failing_test": "tests/test_functional.py::TestFunctional::test_on_setattr_detect_inherited_validators",
+   "site_line": 918,
+   "site_expression": "_obj_setattr.__get__(self, Attribute)",
+   "human_expression": "_obj_setattr.__get__(self)",
+   "count_contrasts": true,
+   "identify_curve": null,
+   "table": [
+    {
+     "node": "tests/test_functional.py::TestFunctional::test_on_setattr_detect_inherited_validators",
+     "relation": "UNWRAPPED",
+     "demand": "'assert \\'_setattr = _cached_setattr_get(self)\\' in \"def __init__(self, x, y):\\\\n    _setattr(self, \\'x\\', x)\\\\n    _..."
+    }
+   ],
+   "human_admissible": false,
+   "contrast": {
+    "rows": 12,
+    "admissible": 0,
+    "masks": {},
+    "human_mask": 12,
+    "human_mask_bits": "0b111111111111"
+   },
+   "frames": 28,
+   "table_rows": 1,
+   "space_offered_before_survivors": 149543,
+   "survivors": 0,
+   "survivor_sources": [],
+   "human_expression_rank": null,
+   "verifications": 0,
+   "found": null,
+   "greens": [],
+   "green_count": 0,
+   "found_is_the_human_fix": false,
+   "parameters_stored": 0,
+   "seconds": 7.46
+  }
+ ],
+ "seconds": 93.2
+}
