@@ -45,7 +45,7 @@
  },
  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The index. Candidate actions are drawn from the source text; the evidence that selects them lives in the failing execution. Measured head to head on the same 29 real commits: the blame index derives the human fix at rank 0 from 5 evaluated candidates, where the text-proximity index needs a 400-candidate pool to place the same fix at rank 1.",
- "canonical_base_commit": "ebb8f636f8a60de348afb01fbf613805f819ef3a",
+ "canonical_base_commit": "c88adba0a10840aa9257c1792078a6493b39139d",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -85,42 +85,42 @@
  },
  "measured_effect": {
   "authority": "NONE__PRODUCER_RUN_SANDBOX",
-  "population": "29 real fix commits in requests, click, tqdm, httpx; each project's own post-fix tests as the oracle",
-  "blame_measured": 4,
-  "blame_identified_at_rank_0": 1,
   "blame_candidates_evaluated_per_site": 5,
+  "blame_identified_at_rank_0": 1,
+  "blame_measured": 4,
+  "blame_seconds_29_commits": 80.1,
+  "blame_stages": {
+   "MEASURED": 4,
+   "NO_BLAME": 14,
+   "NO_GUARD": 3,
+   "NO_ORACLE": 4,
+   "SUITE_DID_NOT_RUN": 4
+  },
   "click_1b0e19f505": {
    "blamed": "self.envvar = None (line 2680)",
+   "consistent_candidates": 2,
    "guard": "self.show_envvar (2679)",
    "human_fix_rank": 0,
-   "consistent_candidates": 2,
+   "seconds": 3.4,
    "tests_in_file": 119,
-   "trace_records": 5180,
-   "seconds": 3.4
+   "trace_records": 5180
   },
-  "proximity_pool": 400,
   "corrected_no_oracle_claim": "Most of the previous round's 10 NO_ORACLE rows were suites that never ran (missing deps, pytest-asyncio INTERNALERROR under tqdm's filterwarnings=error, a dict-entry fragment that parsed as nothing). An empty verdict map is now SUITE_DID_NOT_RUN.",
-  "blame_stages": {
-   "NO_BLAME": 14,
-   "MEASURED": 4,
-   "NO_ORACLE": 4,
-   "SUITE_DID_NOT_RUN": 4,
-   "NO_GUARD": 3
-  },
-  "blame_seconds_29_commits": 80.1,
-  "proximity_stages": {
-   "MEASURED": 14,
-   "FIX_LINE_DOES_NOT_PARSE": 6,
-   "FIX_IS_NOT_A_SINGLE_EXPRESSION": 5,
-   "NO_ORACLE": 2,
-   "SUITE_DID_NOT_RUN": 2
-  },
-  "proximity_seconds_29_commits": 265.7,
+  "false_identification_observed": "httpx e63b6594: one surviving candidate under blame, human fix not among the five offered",
+  "population": "29 real fix commits in requests, click, tqdm, httpx; each project's own post-fix tests as the oracle",
   "proximity_human_fix_ranks": {
    "click 1b0e19f505": 1,
    "click bf1e8be90c": 396
   },
-  "false_identification_observed": "httpx e63b6594: one surviving candidate under blame, human fix not among the five offered"
+  "proximity_pool": 400,
+  "proximity_seconds_29_commits": 265.7,
+  "proximity_stages": {
+   "FIX_IS_NOT_A_SINGLE_EXPRESSION": 5,
+   "FIX_LINE_DOES_NOT_PARSE": 6,
+   "MEASURED": 14,
+   "NO_ORACLE": 2,
+   "SUITE_DID_NOT_RUN": 2
+  }
  },
  "next_step": "Extend the same operator to the observable channels the chain does not yet close -- exception type and message, exit code, non-formatted stdout -- which are the 11 NO_BLAME commits, and then to the final-state check of a computer-use task, where OSWorld 2.0 reports 84-95% of failures.",
  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -142,7 +142,7 @@
  ],
  "real_outcome": "Retention is solved and identification is not: the failing run's values index the fix at rank 0 for the case the text pool needed 400 candidates to reach, and 11 of 29 real failures carry no produced value at all, which is the next mechanism's boundary.",
  "recursive_obs": {
-  "canonical_base_commit": "ebb8f636f8a60de348afb01fbf613805f819ef3a",
+  "canonical_base_commit": "c88adba0a10840aa9257c1792078a6493b39139d",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "storing the text that was edited (a spelling destroyed by a rename)",
@@ -156,12 +156,12 @@
   "independent_verification_required": true,
   "iteration_limit": 1,
   "obs_blocker": {
-   "intrinsic_or_path_specific": "PATH_SPECIFIC_TO_where_candidates_come_from: the source text, not the failing execution",
    "delete_bypass_substitute_options": [
     "DELETE the name table as an index: 84.6% of real fixes replace the site's expression outright",
     "BYPASS proximity ordering: it reaches the fix at rank 1 only because the blamed value happened to print one line below",
     "SUBSTITUTE a stored experience table: ~2.2% repeat coverage answers a smaller population than one trace does"
    ],
+   "intrinsic_or_path_specific": "PATH_SPECIFIC_TO_where_candidates_come_from: the source text, not the failing execution",
    "surviving_causal_blocker": "The index. Candidate actions are drawn from the source text; the evidence that selects them lives in the failing execution. Measured head to head on the same 29 real commits: the blame index derives the human fix at rank 0 from 5 evaluated candidates, where the text-proximity index needs a 400-candidate pool to place the same fix at rank 1."
   },
   "obs_capability": {
@@ -183,12 +183,12 @@
    "surviving_gap": "An edit basis whose content is folded from demonstrations and whose applicability is a context precondition, so the reachable space is not a list an author imagined."
   },
   "obs_goal": {
-   "real_outcome": "Retention is solved and identification is not: the failing run's values index the fix at rank 0 for the case the text pool needed 400 candidates to reach, and 11 of 29 real failures carry no produced value at all, which is the next mechanism's boundary.",
    "proxy_goals_deleted": [
     "a larger action library (OSWorld 2.0: the action vocabulary is not what fails; final-state exactness fails 84-95%)",
     "more repetitions of one demonstration (retention, not identification)",
     "a bigger candidate budget (rank 22 median once writable)"
    ],
+   "real_outcome": "Retention is solved and identification is not: the failing run's values index the fix at rank 0 for the case the text pool needed 400 candidates to reach, and 11 of 29 real failures carry no produced value at all, which is the next mechanism's boundary.",
    "surviving_necessity": "the failing execution is the only thing that nominates the material, and it does so at rank 0"
   },
   "obs_inherited_system": {
