@@ -42,7 +42,7 @@
  },
  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Recognition, not search. An instrument that cannot accept the truth 13 times out of 14 has no recall problem -- it does not know what it is looking for, and every 'no candidate' it reports is contaminated by its own reader.",
- "canonical_base_commit": "01c406b81d9bacf3b125d8b887f82ebfa8ad6978",
+ "canonical_base_commit": "7e95f766f467b74cbb293f85df1621b31b5b679f",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -160,7 +160,7 @@
  ],
  "real_outcome": "Before the corrections the instrument accepted the human's fix in 1 of 14 audited rows and accused it of a wrong value in 6. The audit named the causes: 2 refusals were fixes that introduce their own names (_SkipClose, an added attribute) -- composite edits that had been counted as single-expression repairs -- and 3 of the 6 accusations were demands that were pytest's rendering of the failure rather than values. After the corrections the accusations fell to 3, every one named: one mis-attributed demand ([0] vs [True]) and two exception-message demands. The verified row is unchanged and still the human's own fix.",
  "recursive_obs": {
-  "canonical_base_commit": "01c406b81d9bacf3b125d8b887f82ebfa8ad6978",
+  "canonical_base_commit": "7e95f766f467b74cbb293f85df1621b31b5b679f",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "printing 1 of 14 admissible without asking why (the audit is what makes the number usable)",
