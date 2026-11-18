@@ -60,15 +60,20 @@ def show(repo: pathlib.Path, sha: str, path: str) -> str:
 
 
 def test_command(worktree: pathlib.Path, test_file: str) -> list[str]:
-    return [sys.executable, "-m", "pytest", test_file, "-v", "--tb=no", "-p", "no:cacheprovider"]
+    # `-o asyncio_default_fixture_loop_scope=function` is not cosmetic: tqdm sets
+    # `filterwarnings = error`, and pytest-asyncio's unset-scope warning then escalates to
+    # INTERNALERROR, so the suite cannot run at all and every tqdm row reads as "no oracle".
+    return [sys.executable, "-m", "pytest", test_file, "-v", "--tb=no", "-p", "no:cacheprovider",
+            "-o", "asyncio_default_fixture_loop_scope=function"]
 
 
-def run_tests(worktree: pathlib.Path, test_file: str, seconds: int = 60) -> dict[str, str]:
-    """One test file, one verdict per test, and a hard stop.
+def run_tests_full(worktree: pathlib.Path, test_file: str, seconds: int = 60) -> tuple[dict[str, str], str]:
+    """The verdicts AND what pytest said, because an empty verdict map is not a passing suite.
 
-    stdin is closed: a candidate expression that makes a prompt fire would otherwise sit on a read
-    forever, and a hang is not a measurement. A timed-out run is recorded as TIMEOUT, which nothing can
-    survive.
+    A collection error (a missing dependency, a broken conftest) produces no PASSED/FAILED lines at all.
+    Reporting that as NO_ORACLE says "the project's tests pass on the parent", which is a claim about the
+    project. It was false for every `requests` and `httpx` commit in the first sweep: their conftests
+    import `urllib3`, which was not installed, and the run was over in half a second.
     """
     try:
         done = subprocess.run(test_command(worktree, test_file), cwd=worktree, capture_output=True,
@@ -76,7 +81,7 @@ def run_tests(worktree: pathlib.Path, test_file: str, seconds: int = 60) -> dict
                               stdin=subprocess.DEVNULL,
                               env={**__import__("os").environ, "PYTHONPATH": "src:."})
     except subprocess.TimeoutExpired:
-        return {"<timed out>": "TIMEOUT"}
+        return {"<timed out>": "TIMEOUT"}, "TIMEOUT"
     outcomes: dict[str, str] = {}
     for line in (done.stdout or "").splitlines():
         stripped = line.strip()
@@ -87,7 +92,17 @@ def run_tests(worktree: pathlib.Path, test_file: str, seconds: int = 60) -> dict
         before = VERDICT_BEFORE.match(stripped)
         if before:
             outcomes.setdefault(before.group(2), before.group(1))
-    return outcomes
+    return outcomes, ((done.stdout or "") + (done.stderr or ""))[-2500:]
+
+
+def run_tests(worktree: pathlib.Path, test_file: str, seconds: int = 60) -> dict[str, str]:
+    """One test file, one verdict per test, and a hard stop.
+
+    stdin is closed: a candidate expression that makes a prompt fire would otherwise sit on a read
+    forever, and a hang is not a measurement. A timed-out run is recorded as TIMEOUT, which nothing can
+    survive.
+    """
+    return run_tests_full(worktree, test_file, seconds)[0]
 
 
 def span_of(source: str, line: int, node: ast.AST) -> tuple[int, int] | None:
@@ -126,7 +141,13 @@ def parse_line(text: str) -> ast.Module:
     except SyntaxError:
         if text.rstrip().endswith(":"):
             return ast.parse(text + "\n        pass")
-        raise
+        # A changed line is often one ENTRY of a literal, e.g. httpx's
+        # `"raw_path": request.url.raw_path,`. Wrapping it in a dict makes both sides parse the same
+        # way, so the change point is the entry's value and not "unparseable".
+        try:
+            return ast.parse("{" + text.strip().rstrip(",") + "}")
+        except SyntaxError:
+            raise
 
 
 def enclosing_class(source: str, line: int) -> ast.ClassDef | None:
@@ -441,8 +462,11 @@ def identify(repo: pathlib.Path, sha: str, *, source_path: str, test_path: str,
                         parent_sha], capture_output=True, text=True)
         try:
             (worktree / test_path).write_text(show(repo, sha, test_path), encoding="utf-8")
-            baseline = run_tests(worktree, test_path, seconds)
+            baseline, output = run_tests_full(worktree, test_path, seconds)
             failing = {name for name, verdict in baseline.items() if verdict != "PASSED"}
+            if not baseline or "error during collection" in output.lower() or "Interrupted:" in output:
+                # A collection error is not a failing test: blaming it would be blaming a fixture.
+                return {"stage": "SUITE_DID_NOT_RUN", "output_tail": output[-600:]}
             if not failing:
                 return {"stage": "NO_ORACLE__THE_POST_FIX_TESTS_PASS_ON_THE_PARENT",
                         "baseline": baseline}
