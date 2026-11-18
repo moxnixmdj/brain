@@ -44,7 +44,7 @@
  },
  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_BOTTLENECK_IS_IDENTITY_NOT_RETENTION__ONE_REAL_COMMITS_OWN_344_TESTS_ACCEPT_FOUR_DISTINCT_REPAIRS_AT_FOUR_DIFFERENT_GUARDS_INCLUDING_THE_HUMAN_S__WHILE_THE_SAME_MACHINERY_CANNOT_BUILD_A_REPAIR_ON_SIXTEEN_OF_SEVENTEEN__SO_PERMANENCE_IS_WELL_DEFINED_FOR_BEHAVIOUR_AND_UNDEFINED_FOR_INTENT_UNTIL_A_DISCRIMINATING_QUESTION_IS_ASKED_AND_THE_40_3_PERCENT_THAT_NEEDS_NEW_CODE_IS_UNTOUCHED_BECAUSE_NO_TRACE_READING_MECHANISM_SUPPLIES_DESIGN",
- "canonical_base_commit": "ebb8f636f8a60de348afb01fbf613805f819ef3a",
+ "canonical_base_commit": "7f026f0101ba878a6fbc4c1dd13b593dfa6fd099",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -112,7 +112,7 @@
  ],
  "recursive_obs": {
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_CEILING_IS_THE_SPECIFICATION_AND_THE_SHAPE_OF_THE_CHANGE_NOT_LEARNING__A_MISSING_CHECK_IS_10_5_PERCENT_OF_REAL_CHANGED_SITES_AND_NEEDS_NEW_CODE_40_3_PERCENT__SO_NO_AMOUNT_OF_EXPERIENCE_SUPPLIES_THE_LARGER_HALF_AND_EVERY_LEARNING_ZERO_IN_ROUNDS_9_TO_12_IS_NOW_EXPLAINED_WITHOUT_A_BROKEN_INSTRUMENT",
-  "canonical_base_commit": "ebb8f636f8a60de348afb01fbf613805f819ef3a",
+  "canonical_base_commit": "7f026f0101ba878a6fbc4c1dd13b593dfa6fd099",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "re-implementing the structural specifier instead of calling derive/child_payload/run_child",
@@ -284,7 +284,7 @@
      "route": "PUT_THE_PARENT_OF_A_REAL_COMMIT_IN_FRONT_OF_THE_TREE_S_OWN_STRUCTURAL_SPECIFIER_AS_A_VARIANT__LAWS_DERIVED_FROM_NAMES_ARITIES_ANNOTATIONS_INVERSE_PAIRS_AND_STDLIB_REFERENCES_CONFIRMED_BY_EXECUTING_THE_MODULE_AS_IT_STANDS__AND_ASK_WHE_RE_ANY_CONFIRMED_LAW_REJECTS_THE_PRE_CHANGE_MODULE__REUSE_DERIVE_BUILD_GRID_CHILD_PAYLOAD_RUN_CHILD_UNCHANGED"
     }
    ],
-   "checked_at_utc": "2026-11-18T15:48:21Z",
+   "checked_at_utc": "2026-11-18T15:56:09Z",
    "comparison_dimensions": [
     "CORRECTNESS",
     "CAPABILITY_STRENGTH",
@@ -486,7 +486,7 @@
  "v22_prewrite_admission": {
   "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
   "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
-  "checked_at_utc": "2026-11-18T15:48:21Z",
+  "checked_at_utc": "2026-11-18T15:56:09Z",
   "currentness": {
    "accepted_families": 5,
    "meta_envelope_open_count": 8,
