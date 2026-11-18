@@ -41,7 +41,7 @@
  },
  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The hypothesis language, not the search. Real fixes have four productions -- replace an expression, insert a statement, move a statement, change several regions -- and this instrument has one. 8 of 30 real commits are compositions: a value produced in one place and consumed in another.",
- "canonical_base_commit": "PENDING_REBIND",
+ "canonical_base_commit": "f60e5035d2f690e0220a6356f7c3ef4fc73d34ea",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -159,7 +159,7 @@
  ],
  "real_outcome": "That 17 unaddressed rows are unsolvable; that the instrument covers 13 rows in capability (it verifies 1); that formatting is irrelevant in general, only that it is worth 1 row here; that this grammar is the population's last word.",
  "recursive_obs": {
-  "canonical_base_commit": "PENDING_REBIND",
+  "canonical_base_commit": "f60e5035d2f690e0220a6356f7c3ef4fc73d34ea",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "requiring the human's diff to have a shape (one removed line, one added line) before a site exists",
