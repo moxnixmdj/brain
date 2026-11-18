@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "d4203c5e1fd868bbf8e0147ce88edc1ebf29438a21112add914d6f1a9d4ffa39"
+  "value": "00cbb6994e15eec0a3020053bc840a22b87c8f14dbaf1e9a6190f149cfa42ee4"
  },
  "engines": [
   {
@@ -247649,7 +247649,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/THE_FAILURE_ALREADY_SAYS_WHAT_TO_WRITE_20261118_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "5950f5cd5fb8793b27751a871dc0cb6de5ad35103e1abae3cbbfe1850a226ea4",
+   "sha256": "e49c2a313710ca7ea3372fbe5984c83d4c45812dffb4b5efd917258b02ad96bf",
    "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
    "terms": {
     "121.2": 1,
