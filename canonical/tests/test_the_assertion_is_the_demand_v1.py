@@ -388,3 +388,51 @@ def test_test_literals_cross_the_process_boundary_as_source_text():
 # in a fixture: click 91de59c6c8, where the ungated instrument accepted `flag_value` (533 tests green,
 # 0 of 12 recorded passing values preserved, human fix 12 of 12). A fixture that reproduces it would
 # prove only that the fixture fails the same way.
+
+
+def test_the_site_is_read_from_the_two_revisions_not_from_the_diff_s_shape():
+    """A diff's line shape is a fact about formatting; the fix is a fact about the program.
+
+    All three of these are `MULTI_LINE_EDIT` to a hunk-based finder and are different things to the
+    instrument, and each has to be named, because "not a single expression" hid all three.
+    """
+    import sys
+    sys.path.insert(0, str(ROOT / "canonical" / "tools"))
+    import the_space_is_the_artifact_v1 as space
+
+    # a pure reformat is a diff with no fix inside it, and the AST says so
+    reformatted = space.semantic_site("x = compute(a, b)\n", "x = compute(\n    a,\n    b,\n)\n")
+    assert reformatted == (None, "NOTHING_DIFFERS_AT_AST_LEVEL"), reformatted
+
+    # one expression changed with its arguments split across lines: the finder locates it and the patcher
+    # cannot address it, and the reason names the patcher rather than blaming the source
+    wrapped = space.semantic_site("x = compute(\n    a,\n    b,\n)\n", "x = compute(\n    a,\n    c,\n)\n")
+    assert wrapped == (None, "THE_CHANGED_EXPRESSION_SPANS_SEVERAL_LINES"), wrapped
+
+    # a one-line expression change is found, with both revisions named
+    plain = space.semantic_site("def f(p):\n    return p is None\n", "def f(p):\n    return p is not None\n")
+    assert plain[0] is not None, plain
+    assert plain[0]["old_expression"] == "p is None", plain
+    assert plain[0]["human_expression"] == "p is not None", plain
+
+    # a statement that moved is TWO regions, and saying so is the honest refusal
+    moved = space.semantic_site(
+        "def f(p):\n    if p:\n        return 1\n    return norm(p)\n",
+        "def f(p):\n    p = norm(p)\n    if p:\n        return 1\n    return p\n")
+    assert moved[0] is None and moved[1] == "MORE_THAN_ONE_CHANGE_REGION", moved
+
+    # a guard inserted is not a replacement at all, and that is a different fact again
+    inserted = space.semantic_site(
+        "def f(p):\n    return p\n",
+        "def f(p):\n    if p is None:\n        return 0\n    return p\n")
+    assert inserted[0] is None, inserted
+    assert inserted[1] in ("THE_CHANGE_INSERTS_OR_DELETES_WHOLE_STATEMENTS",
+                           "MORE_THAN_ONE_CHANGE_REGION"), inserted
+
+
+def test_a_harness_failure_cannot_be_reported_as_a_fact_about_the_commit():
+    """MEASURED: a missing pytest plugin aborted collection in 15 of 30 rows, and the tool reported
+    `NO_FAILING_TEST` -- a claim about the commit, manufactured by its own environment."""
+    tool = (ROOT / "canonical" / "tools" / "the_assertion_is_the_demand_v1.py").read_text(encoding="utf-8")
+    assert '"TESTS_DID_NOT_RUN"' in tool
+    assert "if not verdicts:" in tool

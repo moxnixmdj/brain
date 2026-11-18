@@ -242,6 +242,87 @@ def site_or_reason(repo: pathlib.Path, sha: str, path: str,
     return (None, reason)
 
 
+EXPRESSION_BEARING = {ast.Assign: "value", ast.AnnAssign: "value", ast.AugAssign: "value",
+                   ast.Return: "value", ast.Expr: "value", ast.If: "test", ast.While: "test",
+                   ast.Assert: "test"}
+
+
+def expression_of(statement: ast.AST) -> ast.expr | None:
+    for kind, field in EXPRESSION_BEARING.items():
+        if isinstance(statement, kind):
+            node = getattr(statement, field, None)
+            return node if isinstance(node, ast.expr) else None
+    return None
+
+
+def _text(statement: ast.AST) -> str:
+    try:
+        return ast.unparse(statement)
+    except Exception:  # noqa: BLE001
+        return repr(statement)
+
+
+def _descend(old_body: list[ast.stmt], new_body: list[ast.stmt],
+             depth: int = 0) -> tuple[ast.stmt, ast.stmt, str] | str:
+    """The single statement the two revisions disagree about, or a reason they disagree about more."""
+    import difflib
+    left, right = [_text(s) for s in old_body], [_text(s) for s in new_body]
+    regions = [op for op in difflib.SequenceMatcher(a=left, b=right, autojunk=False).get_opcodes()
+               if op[0] != "equal"]
+    if not regions:
+        return "NOTHING_DIFFERS_AT_AST_LEVEL"
+    if len(regions) > 1:
+        return "MORE_THAN_ONE_CHANGE_REGION"
+    tag, i1, i2, j1, j2 = regions[0]
+    olds, news = old_body[i1:i2], new_body[j1:j2]
+    if not olds or not news:
+        # a pure insertion or deletion is a different edit operation, not a replacement; refusing it is a
+        # statement about this tool, and it is named rather than folded into "not a single expression".
+        return "THE_CHANGE_INSERTS_OR_DELETES_WHOLE_STATEMENTS"
+    if len(olds) == 1 and len(news) == 1:
+        old, new = olds[0], news[0]
+        if isinstance(old, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)) \
+                and type(old) is type(new) and getattr(new, "name", None) == getattr(old, "name", None):
+            return _descend(old.body, new.body, depth + 1)
+        if expression_of(old) is not None and expression_of(new) is not None:
+            return old, new, type(old).__name__
+        return "THE_CHANGED_STATEMENT_CARRIES_NO_SINGLE_EXPRESSION"
+    return "MORE_THAN_ONE_STATEMENT_CHANGED"
+
+
+def semantic_site(parent_source: str, child_source: str) -> tuple[dict[str, Any] | None, str]:
+    """The site of the fix, read from the two revisions rather than from their diff's line shape.
+
+    `MULTI_LINE_EDIT` is a fact about formatting. `frozenset(["a"])` rewritten over three lines is one
+    expression; a line moved three lines up is no new expression at all. Comparing the two revisions as
+    ASTs deletes formatting, comments and continuation lines, so what differs afterwards is the change the
+    program actually underwent -- and 4 of the 15 rows this tool excluded as "not a single expression" are
+    one statement once that is done.
+    """
+    try:
+        old_tree, new_tree = ast.parse(parent_source), ast.parse(child_source)
+    except SyntaxError:
+        return None, "THE_REVISION_DOES_NOT_PARSE"
+    located = _descend(old_tree.body, new_tree.body)
+    if isinstance(located, str):
+        return None, located
+    old_statement, new_statement, kind = located
+    old_expr, new_expr = expression_of(old_statement), expression_of(new_statement)
+    if old_expr is None or new_expr is None:
+        return None, "THE_CHANGED_STATEMENT_CARRIES_NO_SINGLE_EXPRESSION"
+    if getattr(old_expr, "end_lineno", old_expr.lineno) != old_expr.lineno:
+        # The finder located the fix and the patcher cannot address it: a site that spans several source
+        # lines needs an absolute-offset splice, and this patcher replaces one line's columns. Naming the
+        # real cause matters -- "the span is not in the parent source" would blame the source.
+        return None, "THE_CHANGED_EXPRESSION_SPANS_SEVERAL_LINES"
+    span = identify.span_of(parent_source, old_expr.lineno, old_expr)
+    if span is None:
+        return None, "THE_SPAN_IS_NOT_IN_THE_PARENT_SOURCE"
+    return ({"line": old_expr.lineno, "old_expression": ast.unparse(old_expr),
+             "human_expression": ast.unparse(new_expr), "span": span},
+            "SINGLE_STATEMENT_" + kind)
+
+
 def census(entries: Sequence[dict[str, Any]], repos_root: pathlib.Path) -> list[dict[str, Any]]:
     """The population's shape, with no oracle calls: what kind of edit each fresh commit is."""
     rows: list[dict[str, Any]] = []
