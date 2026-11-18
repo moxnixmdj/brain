@@ -59,7 +59,7 @@ def repo(tmp_path: pathlib.Path) -> pathlib.Path:
 def test_a_test_is_recognised_by_where_the_project_keeps_it() -> None:
     assert corpus.is_test("tests/test_core.py")
     assert corpus.is_test("proj/test_inner.py")
-    assert not corpus.is_test("proj/core.py") or True  # core.py is not under a test dir
+    assert not corpus.is_test("proj/core.py")
     assert corpus.is_source("proj/core.py")
     assert not corpus.is_source("tests/test_core.py")
 

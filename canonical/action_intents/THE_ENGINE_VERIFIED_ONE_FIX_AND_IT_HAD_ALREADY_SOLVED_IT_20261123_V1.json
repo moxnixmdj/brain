@@ -70,7 +70,8 @@
  "falsification_condition": "A real fix in the 45 admitted tasks that the unchanged engine derives and verifies without any human-supplied fact beyond the project's own test.",
  "generic_repair_from_single_probe": false,
  "governance_change": false,
- "highest_leverage_now": "ELICIT_THE_ONE_FACT_THAT_MAKES_THE_EDIT_DERIVABLE",
+ "highest_leverage_now": true,
+ "highest_leverage_statement": "ELICIT_THE_ONE_FACT_THAT_MAKES_THE_EDIT_DERIVABLE: after seven oracle rounds and one powered proposer round, every stage except the proposer is measured exact and free, so the only lever left is content, and the cheapest source of content is one question whose answer is executable.",
  "incremental_spend_usd": 0,
  "intentional_route_race": false,
  "load_bearing_primary": {
@@ -158,6 +159,7 @@
   ],
   "expected_parent_frontier_change": "THE_ENGINE_VERIFIED_ONE_FIX_AND_IT_HAD_ALREADY_SOLVED_IT__FIFTEEN_THOUSAND_ONE_HUNDRED_AND_FIFTEEN_REAL_COMMITS_YIELD_ONE_HUNDRED_AND_EIGHTY_ONE_ONE_LINE_FIXES_OF_WHICH_FORTY_FIVE_ARE_CHECKABLE_BY_THEIR_OWN_PROJECT__ON_ONE_HUNDRED_AND_THIRTY_FOUR_REAL_FIXES_THE_DEMAND_DRIVEN_ENGINE_VERIFIES_ONE_AND_THAT_ONE_IS_THE_ROW_IT_HAD_ALREADY_SOLVED__ZERO_OF_FORTY_FIVE_UNSEEN__THE_ORACLE_AND_THE_PROPOSER_BOTH_RETURN_NOTHING_BECAUSE_THE_CONTENT_OF_A_REPAIR_IS_AUTHORED_AND_ONLY_THE_CHECK_IS_LEFT_IN_THE_ENVIRONMENT__THE_ONLY_TERM_NOT_ALREADY_OPTIMAL_IS_THE_PROPOSER",
   "expected_parent_level_state_change": "THE_ENGINE_VERIFIED_ONE_FIX_AND_IT_HAD_ALREADY_SOLVED_IT__FIFTEEN_THOUSAND_ONE_HUNDRED_AND_FIFTEEN_REAL_COMMITS_YIELD_ONE_HUNDRED_AND_EIGHTY_ONE_ONE_LINE_FIXES_OF_WHICH_FORTY_FIVE_ARE_CHECKABLE_BY_THEIR_OWN_PROJECT__ON_ONE_HUNDRED_AND_THIRTY_FOUR_REAL_FIXES_THE_DEMAND_DRIVEN_ENGINE_VERIFIES_ONE_AND_THAT_ONE_IS_THE_ROW_IT_HAD_ALREADY_SOLVED__ZERO_OF_FORTY_FIVE_UNSEEN__THE_ORACLE_AND_THE_PROPOSER_BOTH_RETURN_NOTHING_BECAUSE_THE_CONTENT_OF_A_REPAIR_IS_AUTHORED_AND_ONLY_THE_CHECK_IS_LEFT_IN_THE_ENVIRONMENT__THE_ONLY_TERM_NOT_ALREADY_OPTIMAL_IS_THE_PROPOSER",
+  "highest_leverage_now": true,
   "independent_verification_required": true,
   "iteration_limit": 1,
   "obs_blocker": {
@@ -241,18 +243,7 @@
    ],
    "synthetic_verification_necessity": "The oracle for a real commit is that project's own post-fix test file, run on an uninstrumented copy; unit tests pin only the instrument. Independent reproduction remains open."
   },
-  "real_outcome": {
-   "bind_share": 0.3676,
-   "checkable_share": 0.2486,
-   "closure_hit_share": 0.04,
-   "demand_bound": 25,
-   "fixes": 134,
-   "in_class_share": 0.442,
-   "product": 0.0075,
-   "reached_demand_reader": 68,
-   "verified": 1,
-   "verified_unseen": 0
-  },
+  "real_outcome": "15,115 real commits -> 181 one-line fixes -> 45 checkable by their own project's verdict; the unchanged demand-driven engine ran on 134 real fixes (89 machine-gated + 45 unseen), bound a demand on 25, and verified exactly 1 -- the attrs message row it had already been tuned on. 0 of the 45 unseen.",
   "required_capability": "counterfactual intervention over a live execution trace, exact-fit predicate selection from the logged scope, and an oracle that decides without a model",
   "route_frontier": {
    "challenger_routes": [
