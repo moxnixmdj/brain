@@ -459,7 +459,7 @@
  "truth": "Round 19 measured the seed hypothesis and it is dead: 5949 documents from the repositories themselves, distilled by coverage, gained 0 of 8 parts and lost 1 to dilution. The zero is a bound of the objective, not of the corpus: the search cannot say which candidate is closer to the target.",
  "user_authorized_governance_change": false,
  "v22_prewrite_admission": {
-  "active_pointer_git_blob_sha": "0f5da7e800d1ea0eef9472db1e5e2f07bc418d1b",
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
   "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
   "checked_at_utc": "2026-11-16T00:00:00Z",
   "currentness": {
