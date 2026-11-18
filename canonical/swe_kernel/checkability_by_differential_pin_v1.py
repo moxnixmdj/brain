@@ -111,6 +111,10 @@ REQUEST = json.loads(os.environ["PIN_REQUEST"])
 def shape_value(token):
     if isinstance(token, str) and token.startswith("="):
         return token[1:]                      # a string literal the artifact itself contains
+    if isinstance(token, str) and token.startswith("@builtin:"):
+        # a builtin TYPE is a legal argument (`parse_float=float`) and cannot ride through JSON
+        import builtins as _builtins
+        return getattr(_builtins, token[len("@builtin:"):], None)
     if isinstance(token, str) and token.startswith("@json:"):
         import json as _json
         try:

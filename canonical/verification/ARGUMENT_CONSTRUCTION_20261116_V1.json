@@ -1,0 +1,795 @@
+{
+ "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+ "convergent_external_november_2026": {
+  "llm_test_generation_2026": "Plain-LLM beats the classical generators on line coverage by 17.72% and branch coverage by 19.80% (arXiv 2601.09695) -- the field's answer to binding is to pay a model to invent the arguments",
+  "mutation_reality_check_2026": "AI-generated tests score 40-55% on mutation testing against 70-90% for human tests: they produce tests that RUN, not tests that catch bugs",
+  "why_this_matters_here": "we do not need a model to invent coverage; we need arguments that make a real callable execute. The environment supplies 2.4% of those as literals and 83% only as expressions, which is the next organ"
+ },
+ "date": "2026-11-16",
+ "examples": [
+  {
+   "args": [
+    "@json:[3, 7]"
+   ],
+   "function": "_cpython_abis",
+   "module": "packaging.tags",
+   "move": null,
+   "old": "RETURNED|list|['cp37m']",
+   "repo": "pypa/packaging"
+  }
+ ],
+ "incremental_spend_usd": 0,
+ "model_calls": 0,
+ "network_calls": 0,
+ "repos": [
+  {
+   "modules": [
+    {
+     "module": "packaging.__about__",
+     "relative": "packaging/__about__.py",
+     "state": "GONE_AT_NEW"
+    },
+    {
+     "callables": [
+      {
+       "function": "_get_elf_header",
+       "state": "ALREADY_OBSERVABLE_IN_ROUND_6"
+      },
+      {
+       "function": "_get_glibc_version",
+       "state": "ALREADY_OBSERVABLE_IN_ROUND_6"
+      },
+      {
+       "function": "_glibc_version_string",
+       "state": "ALREADY_OBSERVABLE_IN_ROUND_6"
+      },
+      {
+       "function": "_glibc_version_string_confstr",
+       "state": "ALREADY_OBSERVABLE_IN_ROUND_6"
+      },
+      {
+       "function": "_glibc_version_string_ctypes",
+       "state": "ALREADY_OBSERVABLE_IN_ROUND_6"
+      },
+      {
+       "function": "_have_compatible_abi",
+       "state": "ALREADY_OBSERVABLE_IN_ROUND_6"
+      },
+      {
+       "function": "_is_linux_armhf",
+       "state": "ALREADY_OBSERVABLE_IN_ROUND_6"
+      },
+      {
+       "function": "_is_linux_i686",
+       "state": "ALREADY_OBSERVABLE_IN_ROUND_6"
+      },
+      {
+       "function": "_parse_glibc_version",
+       "state": "ALREADY_OBSERVABLE_IN_ROUND_6"
+      },
+      {
+       "function": "platform_tags",
+       "state": "ALREADY_OBSERVABLE_IN_ROUND_6"
+      }
+     ],
+     "counts": {
+      "ALREADY_OBSERVABLE_IN_ROUND_6": 10
+     },
+     "module": "packaging._manylinux",
+     "relative": "packaging/_manylinux.py"
+    },
+    {
+     "callables": [
+      {
+       "function": "_get_musl_version",
+       "state": "ALREADY_OBSERVABLE_IN_ROUND_6"
+      },
+      {
+       "encodable": 0,
+       "function": "_parse_ld_musl_from_elf",
+       "mined": 5,
+       "state": "REFUSED__EVERY_CALL_SITE_IS_UNENCODABLE",
+       "vectors_tried": 0
+      },
+      {
+       "function": "_parse_musl_version",
+       "state": "ALREADY_OBSERVABLE_IN_ROUND_6"
+      },
+      {
+       "encodable": 0,
+       "function": "_read_unpacked",
+       "mined": 3,
+       "state": "REFUSED__EVERY_CALL_SITE_IS_UNENCODABLE",
+       "vectors_tried": 0
+      },
+      {
+       "function": "platform_tags",
+       "state": "ALREADY_OBSERVABLE_IN_ROUND_6"
+      }
+     ],
+     "counts": {
+      "ALREADY_OBSERVABLE_IN_ROUND_6": 3,
+      "REFUSED__EVERY_CALL_SITE_IS_UNENCODABLE": 2
+     },
+     "module": "packaging._musllinux",
+     "relative": "packaging/_musllinux.py"
+    },
+    {
+     "module": "packaging._structures",
+     "relative": "packaging/_structures.py",
+     "state": "NO_DRIVABLE_CALLABLE"
+    },
+    {
+     "callables": [
+      {
+       "encodable": 0,
+       "function": "_coerce_parse_result",
+       "mined": 2,
+       "state": "REFUSED__EVERY_CALL_SITE_IS_UNENCODABLE",
+       "vectors_tried": 0
+      },
+      {
+       "encodable": 0,
+       "function": "_evaluate_markers",
+       "mined": 2,
+       "state": "REFUSED__EVERY_CALL_SITE_IS_UNENCODABLE",
+       "vectors_tried": 0
+      },
+      {
+       "encodable": 0,
+       "function": "_format_marker",
+       "mined": 3,
+       "state": "REFUSED__EVERY_CALL_SITE_IS_UNENCODABLE",
+       "vectors_tried": 0
+      },
+      {
+       "encodable": 0,
+       "function": "_get_env",
+       "mined": 2,
+       "state": "REFUSED__EVERY_CALL_SITE_IS_UNENCODABLE",
+       "vectors_tried": 0
+      },
+      {
+       "encodable": 0,
+       "function": "default_environment",
+       "mined": 3,
+       "state": "REFUSED__EVERY_CALL_SITE_IS_UNENCODABLE",
+       "vectors_tried": 0
+      },
+      {
+       "encodable": 0,
+       "function": "format_full_version",
+       "mined": 3,
+       "state": "REFUSED__EVERY_CALL_SITE_IS_UNENCODABLE",
+       "vectors_tried": 0
+      }
+     ],
+     "counts": {
+      "REFUSED__EVERY_CALL_SITE_IS_UNENCODABLE": 6
+     },
+     "module": "packaging.markers",
+     "relative": "packaging/markers.py"
+    },
+    {
+     "module": "packaging.requirements",
+     "relative": "packaging/requirements.py",
+     "state": "NO_DRIVABLE_CALLABLE"
+    },
+    {
+     "callables": [
+      {
+       "function": "_is_not_suffix",
+       "state": "ALREADY_OBSERVABLE_IN_ROUND_6"
+      },
+      {
+       "function": "_pad_version",
+       "state": "ALREADY_OBSERVABLE_IN_ROUND_6"
+      },
+      {
+       "function": "_require_version_compare",
+       "state": "ALREADY_OBSERVABLE_IN_ROUND_6"
+      },
+      {
+       "function": "_version_split",
+       "state": "ALREADY_OBSERVABLE_IN_ROUND_6"
+      }
+     ],
+     "counts": {
+      "ALREADY_OBSERVABLE_IN_ROUND_6": 4
+     },
+     "module": "packaging.specifiers",
+     "relative": "packaging/specifiers.py"
+    },
+    {
+     "callables": [
+      {
+       "function": "_abi3_applies",
+       "state": "ALREADY_OBSERVABLE_IN_ROUND_6"
+      },
+      {
+       "encodable": 3,
+       "function": "_cpython_abis",
+       "mined": 9,
+       "moved_at_new_release": false,
+       "state": "BECAME_OBSERVABLE",
+       "vectors_tried": 2,
+       "witness": {
+        "args": [
+         "@json:[3, 7]"
+        ],
+        "function": "_cpython_abis",
+        "new": "RETURNED|list|['cp37m']",
+        "old": "RETURNED|list|['cp37m']",
+        "stable": true
+       }
+      },
+      {
+       "function": "_generic_abi",
+       "state": "ALREADY_OBSERVABLE_IN_ROUND_6"
+      },
+      {
+       "function": "_generic_platforms",
+       "state": "ALREADY_OBSERVABLE_IN_ROUND_6"
+      },
+      {
+       "function": "_get_config_var",
+       "state": "ALREADY_OBSERVABLE_IN_ROUND_6"
+      },
+      {
+       "function": "_linux_platforms",
+       "state": "ALREADY_OBSERVABLE_IN_ROUND_6"
+      },
+      {
+       "function": "_mac_arch",
+       "state": "ALREADY_OBSERVABLE_IN_ROUND_6"
+      },
+      {
+       "function": "_mac_binary_formats",
+       "state": "ALREADY_OBSERVABLE_IN_ROUND_6"
+      },
+      {
+       "function": "_normalize_string",
+       "state": "ALREADY_OBSERVABLE_IN_ROUND_6"
+      },
+      {
+       "function": "_platform_tags",
+       "state": "ALREADY_OBSERVABLE_IN_ROUND_6"
+      },
+      {
+       "function": "_py_interpreter_range",
+       "state": "ALREADY_OBSERVABLE_IN_ROUND_6"
+      },
+      {
+       "function": "_version_nodot",
+       "state": "ALREADY_OBSERVABLE_IN_ROUND_6"
+      },
+      {
+       "encodable": 4,
+       "evidence": {
+        "args": [
+         "@json:[3, 3]",
+         "@json:\"cp33\""
+        ],
+        "function": "compatible_tags",
+        "new": "RETURNED|generator|iter[<py33-none-manylinux_2_36_x86_64 @ 140118685206720>, <py33-none-manylinux_2_35_x86_64 @ 140118685206720>, <py33-none-manylinux_2_34_x86_64 @ 140118685206720>, <py33-none-manylinux_2_33_x86_64 @ 140118685206720>, <py33-none-manylinux_2_32_x86_64 @ 140118685206720>, <py33-none-manylinux_2_31_x86_64 @ 140118685206528>, <py33-none-manylinux_2_30_x86_64 @ 140118685206528>, <py33-none-manylinux_2_29_x86_64 @ 140118685206528>]",
+        "old": "RETURNED|generator|iter[<py33-none-manylinux_2_36_x86_64 @ 139954699224512>, <py33-none-manylinux_2_35_x86_64 @ 139954699224512>, <py33-none-manylinux_2_34_x86_64 @ 139954699224512>, <py33-none-manylinux_2_33_x86_64 @ 139954699224512>, <py33-none-manylinux_2_32_x86_64 @ 139954699224512>, <py33-none-manylinux_2_31_x86_64 @ 139954699434496>, <py33-none-manylinux_2_30_x86_64 @ 139954699434496>, <py33-none-manylinux_2_29_x86_64 @ 139954699434496>]",
+        "stable": false
+       },
+       "function": "compatible_tags",
+       "mined": 8,
+       "state": "REFUSED__MINED_BUT_NEVER_RETURNED",
+       "vectors_tried": 4
+      },
+      {
+       "encodable": 5,
+       "evidence": {
+        "args": [
+         "@json:[3, 8]",
+         "@json:[\"cp38d\", \"cp38\"]"
+        ],
+        "function": "cpython_tags",
+        "new": "RETURNED|generator|iter[<cp38-cp38d-manylinux_2_36_x86_64 @ 140118685274560>, <cp38-cp38d-manylinux_2_35_x86_64 @ 140118685274560>, <cp38-cp38d-manylinux_2_34_x86_64 @ 140118685274560>, <cp38-cp38d-manylinux_2_33_x86_64 @ 140118685274560>, <cp38-cp38d-manylinux_2_32_x86_64 @ 140118685274560>, <cp38-cp38d-manylinux_2_31_x86_64 @ 140118685274432>, <cp38-cp38d-manylinux_2_30_x86_64 @ 140118685274432>, <cp38-cp38d-manylinux_2_29_x86_64 @ 140118685274432>]",
+        "old": "RETURNED|generator|iter[<cp38-cp38d-manylinux_2_36_x86_64 @ 139954699583936>, <cp38-cp38d-manylinux_2_35_x86_64 @ 139954699583936>, <cp38-cp38d-manylinux_2_34_x86_64 @ 139954699583936>, <cp38-cp38d-manylinux_2_33_x86_64 @ 139954699583936>, <cp38-cp38d-manylinux_2_32_x86_64 @ 139954699583936>, <cp38-cp38d-manylinux_2_31_x86_64 @ 139954699583808>, <cp38-cp38d-manylinux_2_30_x86_64 @ 139954699583808>, <cp38-cp38d-manylinux_2_29_x86_64 @ 139954699583808>]",
+        "stable": false
+       },
+       "function": "cpython_tags",
+       "mined": 17,
+       "state": "REFUSED__MINED_BUT_NEVER_RETURNED",
+       "vectors_tried": 4
+      },
+      {
+       "encodable": 2,
+       "evidence": {
+        "args": [
+         "@json:\"sillywalk33\"",
+         "@json:[\"abi\"]"
+        ],
+        "function": "generic_tags",
+        "new": "RETURNED|generator|iter[<sillywalk33-abi-manylinux_2_36_x86_64 @ 140118685275968>, <sillywalk33-abi-manylinux_2_35_x86_64 @ 140118685275968>, <sillywalk33-abi-manylinux_2_34_x86_64 @ 140118685275968>, <sillywalk33-abi-manylinux_2_33_x86_64 @ 140118685275968>, <sillywalk33-abi-manylinux_2_32_x86_64 @ 140118685275968>, <sillywalk33-abi-manylinux_2_31_x86_64 @ 140118685275904>, <sillywalk33-abi-manylinux_2_30_x86_64 @ 140118685275904>, <sillywalk33-abi-manylinux_2_29_x86_64 @ 140118685275904>]",
+        "old": "RETURNED|generator|iter[<sillywalk33-abi-manylinux_2_36_x86_64 @ 139954699585408>, <sillywalk33-abi-manylinux_2_35_x86_64 @ 139954699585408>, <sillywalk33-abi-manylinux_2_34_x86_64 @ 139954699585408>, <sillywalk33-abi-manylinux_2_33_x86_64 @ 139954699585408>, <sillywalk33-abi-manylinux_2_32_x86_64 @ 139954699585408>, <sillywalk33-abi-manylinux_2_31_x86_64 @ 139954699585472>, <sillywalk33-abi-manylinux_2_30_x86_64 @ 139954699585472>, <sillywalk33-abi-manylinux_2_29_x86_64 @ 139954699585472>]",
+        "stable": false
+       },
+       "function": "generic_tags",
+       "mined": 7,
+       "state": "REFUSED__MINED_BUT_NEVER_RETURNED",
+       "vectors_tried": 1
+      },
+      {
+       "function": "interpreter_name",
+       "state": "ALREADY_OBSERVABLE_IN_ROUND_6"
+      },
+      {
+       "function": "interpreter_version",
+       "state": "ALREADY_OBSERVABLE_IN_ROUND_6"
+      },
+      {
+       "function": "mac_platforms",
+       "state": "ALREADY_OBSERVABLE_IN_ROUND_6"
+      },
+      {
+       "encodable": 2,
+       "evidence": {
+        "args": [
+         "@json:\"py2.py3-none-any\""
+        ],
+        "function": "parse_tag",
+        "new": "RETURNED|frozenset|frozenset({<py3-none-any @ 140118685274880>, <py2-none-any @ 140118685274944>})",
+        "old": "RETURNED|frozenset|frozenset({<py3-none-any @ 139954699584768>, <py2-none-any @ 139954699584320>})",
+        "stable": false
+       },
+       "function": "parse_tag",
+       "mined": 4,
+       "state": "REFUSED__MINED_BUT_NEVER_RETURNED",
+       "vectors_tried": 2
+      },
+      {
+       "encodable": 0,
+       "function": "sys_tags",
+       "mined": 5,
+       "state": "REFUSED__EVERY_CALL_SITE_IS_UNENCODABLE",
+       "vectors_tried": 0
+      }
+     ],
+     "counts": {
+      "ALREADY_OBSERVABLE_IN_ROUND_6": 14,
+      "BECAME_OBSERVABLE": 1,
+      "REFUSED__EVERY_CALL_SITE_IS_UNENCODABLE": 1,
+      "REFUSED__MINED_BUT_NEVER_RETURNED": 4
+     },
+     "module": "packaging.tags",
+     "relative": "packaging/tags.py"
+    },
+    {
+     "callables": [
+      {
+       "function": "canonicalize_name",
+       "state": "ALREADY_OBSERVABLE_IN_ROUND_6"
+      },
+      {
+       "function": "canonicalize_version",
+       "state": "ALREADY_OBSERVABLE_IN_ROUND_6"
+      },
+      {
+       "encodable": 0,
+       "function": "parse_sdist_filename",
+       "mined": 2,
+       "state": "REFUSED__EVERY_CALL_SITE_IS_UNENCODABLE",
+       "vectors_tried": 0
+      },
+      {
+       "encodable": 0,
+       "function": "parse_wheel_filename",
+       "mined": 2,
+       "state": "REFUSED__EVERY_CALL_SITE_IS_UNENCODABLE",
+       "vectors_tried": 0
+      }
+     ],
+     "counts": {
+      "ALREADY_OBSERVABLE_IN_ROUND_6": 2,
+      "REFUSED__EVERY_CALL_SITE_IS_UNENCODABLE": 2
+     },
+     "module": "packaging.utils",
+     "relative": "packaging/utils.py"
+    },
+    {
+     "callables": [
+      {
+       "function": "_legacy_cmpkey",
+       "state": "ALREADY_OBSERVABLE_IN_ROUND_6"
+      },
+      {
+       "encodable": 0,
+       "function": "_parse_letter_version",
+       "mined": 3,
+       "state": "REFUSED__EVERY_CALL_SITE_IS_UNENCODABLE",
+       "vectors_tried": 0
+      },
+      {
+       "function": "_parse_local_version",
+       "state": "ALREADY_OBSERVABLE_IN_ROUND_6"
+      },
+      {
+       "function": "_parse_version_parts",
+       "state": "ALREADY_OBSERVABLE_IN_ROUND_6"
+      },
+      {
+       "function": "parse",
+       "state": "ALREADY_OBSERVABLE_IN_ROUND_6"
+      }
+     ],
+     "counts": {
+      "ALREADY_OBSERVABLE_IN_ROUND_6": 4,
+      "REFUSED__EVERY_CALL_SITE_IS_UNENCODABLE": 1
+     },
+     "module": "packaging.version",
+     "relative": "packaging/version.py"
+    },
+    {
+     "module": "setup",
+     "relative": "setup.py",
+     "state": "GONE_AT_NEW"
+    }
+   ],
+   "new": "24.0",
+   "old": "21.0",
+   "repo": "pypa/packaging",
+   "state": "MEASURED"
+  },
+  {
+   "modules": [
+    {
+     "module": "setup",
+     "relative": "setup.py",
+     "state": "NO_DRIVABLE_CALLABLE"
+    },
+    {
+     "module": "itsdangerous._json",
+     "relative": "src/itsdangerous/_json.py",
+     "state": "NO_DRIVABLE_CALLABLE"
+    },
+    {
+     "callables": [
+      {
+       "encodable": 1,
+       "evidence": {
+        "args": [
+         "@json:\"12345\""
+        ],
+        "function": "base64_decode",
+        "new": "RAISED|BadData|",
+        "old": "RAISED|BadData|",
+        "stable": true
+       },
+       "function": "base64_decode",
+       "mined": 7,
+       "state": "REFUSED__MINED_BUT_NEVER_RETURNED",
+       "vectors_tried": 1
+      },
+      {
+       "function": "base64_encode",
+       "state": "ALREADY_OBSERVABLE_IN_ROUND_6"
+      },
+      {
+       "encodable": 0,
+       "function": "bytes_to_int",
+       "mined": 2,
+       "state": "REFUSED__EVERY_CALL_SITE_IS_UNENCODABLE",
+       "vectors_tried": 0
+      },
+      {
+       "encodable": 0,
+       "function": "int_to_bytes",
+       "mined": 2,
+       "state": "REFUSED__EVERY_CALL_SITE_IS_UNENCODABLE",
+       "vectors_tried": 0
+      },
+      {
+       "function": "want_bytes",
+       "state": "ALREADY_OBSERVABLE_IN_ROUND_6"
+      }
+     ],
+     "counts": {
+      "ALREADY_OBSERVABLE_IN_ROUND_6": 2,
+      "REFUSED__EVERY_CALL_SITE_IS_UNENCODABLE": 2,
+      "REFUSED__MINED_BUT_NEVER_RETURNED": 1
+     },
+     "module": "itsdangerous.encoding",
+     "relative": "src/itsdangerous/encoding.py"
+    },
+    {
+     "module": "itsdangerous.exc",
+     "relative": "src/itsdangerous/exc.py",
+     "state": "NO_DRIVABLE_CALLABLE"
+    },
+    {
+     "module": "itsdangerous.jws",
+     "relative": "src/itsdangerous/jws.py",
+     "state": "GONE_AT_NEW"
+    },
+    {
+     "callables": [
+      {
+       "encodable": 0,
+       "function": "is_text_serializer",
+       "mined": 2,
+       "state": "REFUSED__EVERY_CALL_SITE_IS_UNENCODABLE",
+       "vectors_tried": 0
+      }
+     ],
+     "counts": {
+      "REFUSED__EVERY_CALL_SITE_IS_UNENCODABLE": 1
+     },
+     "module": "itsdangerous.serializer",
+     "relative": "src/itsdangerous/serializer.py"
+    },
+    {
+     "callables": [
+      {
+       "function": "_make_keys_list",
+       "state": "ALREADY_OBSERVABLE_IN_ROUND_6"
+      }
+     ],
+     "counts": {
+      "ALREADY_OBSERVABLE_IN_ROUND_6": 1
+     },
+     "module": "itsdangerous.signer",
+     "relative": "src/itsdangerous/signer.py"
+    },
+    {
+     "module": "itsdangerous.timed",
+     "relative": "src/itsdangerous/timed.py",
+     "state": "NO_DRIVABLE_CALLABLE"
+    },
+    {
+     "module": "itsdangerous.url_safe",
+     "relative": "src/itsdangerous/url_safe.py",
+     "state": "NO_DRIVABLE_CALLABLE"
+    }
+   ],
+   "new": "2.1.2",
+   "old": "2.0.0",
+   "repo": "pallets/itsdangerous",
+   "state": "MEASURED"
+  },
+  {
+   "detail": "git archive failed for 0.0.1",
+   "new": "1.2.0",
+   "old": "0.0.1",
+   "repo": "pypa/pyproject-hooks",
+   "state": "MATERIALISE_FAILED"
+  },
+  {
+   "modules": [
+    {
+     "callables": [
+      {
+       "encodable": 0,
+       "function": "comment_rule",
+       "mined": 2,
+       "state": "REFUSED__EVERY_CALL_SITE_IS_UNENCODABLE",
+       "vectors_tried": 0
+      },
+      {
+       "encodable": 0,
+       "function": "create_dict_rule",
+       "mined": 1,
+       "state": "REFUSED__EVERY_CALL_SITE_IS_UNENCODABLE",
+       "vectors_tried": 0
+      },
+      {
+       "encodable": 0,
+       "function": "create_list_rule",
+       "mined": 1,
+       "state": "REFUSED__EVERY_CALL_SITE_IS_UNENCODABLE",
+       "vectors_tried": 0
+      },
+      {
+       "encodable": 0,
+       "function": "key_value_rule",
+       "mined": 1,
+       "state": "REFUSED__EVERY_CALL_SITE_IS_UNENCODABLE",
+       "vectors_tried": 0
+      },
+      {
+       "encodable": 0,
+       "function": "load",
+       "mined": 2,
+       "state": "REFUSED__EVERY_CALL_SITE_IS_UNENCODABLE",
+       "vectors_tried": 0
+      },
+      {
+       "encodable": 6,
+       "evidence": {
+        "args": [
+         "@json:\"val=.\""
+        ],
+        "function": "loads",
+        "new": "RAISED|TOMLDecodeError|",
+        "old": "RAISED|TOMLDecodeError|",
+        "stable": true
+       },
+       "function": "loads",
+       "mined": 20,
+       "state": "REFUSED__MINED_BUT_NEVER_RETURNED",
+       "vectors_tried": 4
+      },
+      {
+       "encodable": 0,
+       "function": "parse_array",
+       "mined": 1,
+       "state": "REFUSED__EVERY_CALL_SITE_IS_UNENCODABLE",
+       "vectors_tried": 0
+      },
+      {
+       "encodable": 0,
+       "function": "parse_basic_str",
+       "mined": 2,
+       "state": "REFUSED__EVERY_CALL_SITE_IS_UNENCODABLE",
+       "vectors_tried": 0
+      },
+      {
+       "encodable": 0,
+       "function": "parse_basic_str_escape",
+       "mined": 1,
+       "state": "REFUSED__EVERY_CALL_SITE_IS_UNENCODABLE",
+       "vectors_tried": 0
+      },
+      {
+       "encodable": 0,
+       "function": "parse_basic_str_escape_multiline",
+       "mined": 0,
+       "state": "REFUSED__NO_MINEABLE_CALL_SITE",
+       "vectors_tried": 0
+      },
+      {
+       "encodable": 0,
+       "function": "parse_hex_char",
+       "mined": 2,
+       "state": "REFUSED__EVERY_CALL_SITE_IS_UNENCODABLE",
+       "vectors_tried": 0
+      },
+      {
+       "encodable": 0,
+       "function": "parse_inline_table",
+       "mined": 1,
+       "state": "REFUSED__EVERY_CALL_SITE_IS_UNENCODABLE",
+       "vectors_tried": 0
+      },
+      {
+       "encodable": 0,
+       "function": "parse_key",
+       "mined": 3,
+       "state": "REFUSED__EVERY_CALL_SITE_IS_UNENCODABLE",
+       "vectors_tried": 0
+      },
+      {
+       "encodable": 0,
+       "function": "parse_key_part",
+       "mined": 2,
+       "state": "REFUSED__EVERY_CALL_SITE_IS_UNENCODABLE",
+       "vectors_tried": 0
+      },
+      {
+       "encodable": 0,
+       "function": "parse_key_value_pair",
+       "mined": 2,
+       "state": "REFUSED__EVERY_CALL_SITE_IS_UNENCODABLE",
+       "vectors_tried": 0
+      },
+      {
+       "encodable": 0,
+       "function": "parse_literal_str",
+       "mined": 2,
+       "state": "REFUSED__EVERY_CALL_SITE_IS_UNENCODABLE",
+       "vectors_tried": 0
+      },
+      {
+       "encodable": 0,
+       "function": "parse_multiline_str",
+       "mined": 2,
+       "state": "REFUSED__EVERY_CALL_SITE_IS_UNENCODABLE",
+       "vectors_tried": 0
+      },
+      {
+       "encodable": 0,
+       "function": "skip_chars",
+       "mined": 15,
+       "state": "REFUSED__EVERY_CALL_SITE_IS_UNENCODABLE",
+       "vectors_tried": 0
+      },
+      {
+       "encodable": 0,
+       "function": "skip_comment",
+       "mined": 2,
+       "state": "REFUSED__EVERY_CALL_SITE_IS_UNENCODABLE",
+       "vectors_tried": 0
+      },
+      {
+       "encodable": 0,
+       "function": "skip_comments_and_array_ws",
+       "mined": 3,
+       "state": "REFUSED__EVERY_CALL_SITE_IS_UNENCODABLE",
+       "vectors_tried": 0
+      },
+      {
+       "encodable": 0,
+       "function": "skip_until",
+       "mined": 2,
+       "state": "REFUSED__EVERY_CALL_SITE_IS_UNENCODABLE",
+       "vectors_tried": 0
+      }
+     ],
+     "counts": {
+      "REFUSED__EVERY_CALL_SITE_IS_UNENCODABLE": 19,
+      "REFUSED__MINED_BUT_NEVER_RETURNED": 1,
+      "REFUSED__NO_MINEABLE_CALL_SITE": 1
+     },
+     "module": "tomli._parser",
+     "relative": "tomli/_parser.py"
+    },
+    {
+     "module": "tomli._re",
+     "relative": "tomli/_re.py",
+     "state": "NO_DRIVABLE_CALLABLE"
+    }
+   ],
+   "new": "2.0.2",
+   "old": "1.0.0",
+   "repo": "hukkin/tomli",
+   "state": "MEASURED"
+  }
+ ],
+ "reproduce": ".venv/bin/python canonical/swe_kernel/argument_construction_v1.py --json canonical/verification/ARGUMENT_CONSTRUCTION_20261116_V1.json",
+ "schema": "BRAIN_ARGUMENT_CONSTRUCTION_V1",
+ "the_question": "Round 6 measured that 30 of 76 real actions (39%) could never be exercised at all: the arguments that would make them run are not in the environment's scalar vocabulary. An environent that cannot be executed cannot be learned from. This round asks the prior question: can the arguments be CONSTRUCTED from the environment itself, with no model?",
+ "the_result": {
+  "fraction": 0.0244,
+  "of": 41,
+  "reading": "literal-and-constant mining unlocks 2.4% of the unexercised set. The other 83% are refused because their call sites pass CONSTRUCTED OBJECTS -- a parser state, a dict accumulator, a Signer, a Signer's secret. The environment's proofs are proofs about EXPRESSIONS, not about values, so construction cannot be a lookup: it must be evaluation.",
+  "refusal_census": {
+   "EVERY_CALL_SITE_IS_UNENCODABLE": 34,
+   "MINED_BUT_NEVER_RETURNED": 6,
+   "NO_MINEABLE_CALL_SITE": 1
+  },
+  "the_one": "_cpython_abis([3, 7]) in packaging.tags, mined from a real call site; returns ['cp37m']",
+  "unlocked": 1
+ },
+ "the_two_defects_this_round_found_in_itself": [
+  {
+   "defect": "call sites were only mined inside functions",
+   "fix": "mine module-level statements as well, with module constants as their scope",
+   "symptom": "module-level call sites were invisible; the round's own tests failed before any corpus number was believed"
+  },
+  {
+   "defect": "the first fixture action was 'already observable' by scalar witnesses",
+   "fix": "the fixture action now raises for every scalar witness and returns only for the mined vector, so the test can fail",
+   "symptom": "a test that claimed to demonstrate unlocking proved nothing"
+  }
+ ],
+ "totals": {
+  "ALREADY_OBSERVABLE_IN_ROUND_6": 40,
+  "BECAME_OBSERVABLE": 1,
+  "REFUSED__EVERY_CALL_SITE_IS_UNENCODABLE": 34,
+  "REFUSED__MINED_BUT_NEVER_RETURNED": 6,
+  "REFUSED__NO_MINEABLE_CALL_SITE": 1,
+  "all_callables": 81,
+  "callables": 82,
+  "modules": 22,
+  "modules_failed": 1,
+  "moved_at_new_release": 0,
+  "round_6_unexercised": 41,
+  "unexercised_fraction_unlocked": 0.0244
+ },
+ "what_this_shows": "Binding is not a lookup. Of the 41 real actions round 6 could not exercise, exactly 1 becomes executable by mining literal and constant argument vectors from the environment's own call sites, and 34 are refused because their call sites pass objects. So the next organ is a CONSTRUCTOR CLOSURE: evaluate the argument expressions the environment itself writes, recursively, with execution as the only judge of success. That is the difference between 'find the arguments' and 'run the arguments', and every earlier round has been on the wrong side of it.",
+ "what_was_built": {
+  "refusals": "a call site with keywords, star-args, or an object argument is REFUSED by name, never approximated",
+  "resolutions": [
+   "literal constants, JSON-exact only",
+   "a Name bound once to a literal in the enclosing function (bounded local constant propagation)",
+   "a module-level literal constant",
+   "a builtin type object (`parse_float=float`), which cannot ride through JSON and is legal"
+  ],
+  "source_of_arguments": "the environment's own call sites -- every python file in the tree, source AND tests, because a real call site is a proof that those arguments worked for somebody",
+  "verification": "an action becomes observable only if the mined call RETURNS and returns the same thing twice; then the SAME action is run at the later release and any move is classified by round 6's taxonomy. An unlocked action that is silently wrong would be worse than an unexercised one."
+ }
+}
