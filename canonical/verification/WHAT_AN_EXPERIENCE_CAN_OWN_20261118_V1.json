@@ -1,0 +1,1602 @@
+{
+ "schema": "BRAIN_WHAT_AN_EXPERIENCE_CAN_OWN_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "upstream": "https://github.com/jkoppel/QuixBugs",
+ "corpus_commit": "4257f44b0ff1181dedaedee6a447e133219fcebf",
+ "tool": "canonical/tools/what_an_experience_can_own_v1.py",
+ "pairs_source": "canonical/verification/THE_FAILURE_ALREADY_SAYS_WHAT_TO_WRITE_20261118_V1.json",
+ "model_dependency_count": 0,
+ "external_capability_provider_count": 0,
+ "network_calls_at_run_time": 0,
+ "programs": 31,
+ "addressability": {
+  "programs": 31,
+  "shape_multiplicity": [
+   {
+    "shape": "__S0__",
+    "sites": 112
+   },
+   {
+    "shape": "[]",
+    "sites": 14
+   },
+   {
+    "shape": "0",
+    "sites": 14
+   },
+   {
+    "shape": "__S0__[1:]",
+    "sites": 9
+   },
+   {
+    "shape": "__S0__ + 1",
+    "sites": 6
+   },
+   {
+    "shape": "__S0__.pop()",
+    "sites": 5
+   },
+   {
+    "shape": "__S0__(__S1__, __S2__)",
+    "sites": 5
+   },
+   {
+    "shape": "1",
+    "sites": 5
+   },
+   {
+    "shape": "len(__S0__)",
+    "sites": 5
+   },
+   {
+    "shape": "-1",
+    "sites": 5
+   },
+   {
+    "shape": "__S0__.append(__S1__)",
+    "sites": 5
+   },
+   {
+    "shape": "__S0__(__S1__)",
+    "sites": 4
+   }
+  ],
+  "sites_per_program": {
+   "bitcount": 3,
+   "bucketsort": 8,
+   "find_first_in_sorted": 11,
+   "find_in_sorted": 16,
+   "flatten": 9,
+   "gcd": 5,
+   "get_factors": 10,
+   "hanoi": 16,
+   "is_valid_parenthesization": 6,
+   "kheapsort": 10,
+   "knapsack": 17,
+   "kth": 17,
+   "lcs_length": 11,
+   "levenshtein": 18,
+   "lis": 13,
+   "longest_common_subsequence": 13,
+   "max_sublist_sum": 8,
+   "mergesort": 26,
+   "next_palindrome": 13,
+   "next_permutation": 18,
+   "pascal": 15,
+   "possible_change": 10,
+   "powerset": 6,
+   "quicksort": 8,
+   "rpn_eval": 18,
+   "shunting_yard": 16,
+   "sieve": 9,
+   "sqrt": 5,
+   "subsequences": 12,
+   "to_base": 7,
+   "wrap": 13
+  },
+  "distinct_shapes": 164,
+  "sites_total": 367,
+  "curve_mean_share_addressable": {
+   "1": 0.3437,
+   "2": 0.3608,
+   "4": 0.4161,
+   "8": 0.4791,
+   "16": 0.5575,
+   "24": 0.5968
+  },
+  "rows": [
+   {
+    "donors": 1,
+    "seed": 0,
+    "target_sites": 362,
+    "target_sites_the_donors_address": 112,
+    "share": 0.3094,
+    "target_programs_with_at_least_one_addressable_site": 28,
+    "target_programs": 30
+   },
+   {
+    "donors": 1,
+    "seed": 1,
+    "target_sites": 358,
+    "target_sites_the_donors_address": 111,
+    "share": 0.3101,
+    "target_programs_with_at_least_one_addressable_site": 28,
+    "target_programs": 30
+   },
+   {
+    "donors": 1,
+    "seed": 2,
+    "target_sites": 354,
+    "target_sites_the_donors_address": 143,
+    "share": 0.404,
+    "target_programs_with_at_least_one_addressable_site": 30,
+    "target_programs": 30
+   },
+   {
+    "donors": 1,
+    "seed": 3,
+    "target_sites": 351,
+    "target_sites_the_donors_address": 122,
+    "share": 0.3476,
+    "target_programs_with_at_least_one_addressable_site": 30,
+    "target_programs": 30
+   },
+   {
+    "donors": 1,
+    "seed": 4,
+    "target_sites": 351,
+    "target_sites_the_donors_address": 122,
+    "share": 0.3476,
+    "target_programs_with_at_least_one_addressable_site": 30,
+    "target_programs": 30
+   },
+   {
+    "donors": 2,
+    "seed": 0,
+    "target_sites": 351,
+    "target_sites_the_donors_address": 113,
+    "share": 0.3219,
+    "target_programs_with_at_least_one_addressable_site": 27,
+    "target_programs": 29
+   },
+   {
+    "donors": 2,
+    "seed": 1,
+    "target_sites": 345,
+    "target_sites_the_donors_address": 119,
+    "share": 0.3449,
+    "target_programs_with_at_least_one_addressable_site": 27,
+    "target_programs": 29
+   },
+   {
+    "donors": 2,
+    "seed": 2,
+    "target_sites": 349,
+    "target_sites_the_donors_address": 143,
+    "share": 0.4097,
+    "target_programs_with_at_least_one_addressable_site": 29,
+    "target_programs": 29
+   },
+   {
+    "donors": 2,
+    "seed": 3,
+    "target_sites": 338,
+    "target_sites_the_donors_address": 130,
+    "share": 0.3846,
+    "target_programs_with_at_least_one_addressable_site": 29,
+    "target_programs": 29
+   },
+   {
+    "donors": 2,
+    "seed": 4,
+    "target_sites": 341,
+    "target_sites_the_donors_address": 117,
+    "share": 0.3431,
+    "target_programs_with_at_least_one_addressable_site": 29,
+    "target_programs": 29
+   },
+   {
+    "donors": 4,
+    "seed": 0,
+    "target_sites": 321,
+    "target_sites_the_donors_address": 128,
+    "share": 0.3988,
+    "target_programs_with_at_least_one_addressable_site": 27,
+    "target_programs": 27
+   },
+   {
+    "donors": 4,
+    "seed": 1,
+    "target_sites": 324,
+    "target_sites_the_donors_address": 134,
+    "share": 0.4136,
+    "target_programs_with_at_least_one_addressable_site": 27,
+    "target_programs": 27
+   },
+   {
+    "donors": 4,
+    "seed": 2,
+    "target_sites": 330,
+    "target_sites_the_donors_address": 145,
+    "share": 0.4394,
+    "target_programs_with_at_least_one_addressable_site": 27,
+    "target_programs": 27
+   },
+   {
+    "donors": 4,
+    "seed": 3,
+    "target_sites": 303,
+    "target_sites_the_donors_address": 122,
+    "share": 0.4026,
+    "target_programs_with_at_least_one_addressable_site": 27,
+    "target_programs": 27
+   },
+   {
+    "donors": 4,
+    "seed": 4,
+    "target_sites": 317,
+    "target_sites_the_donors_address": 135,
+    "share": 0.4259,
+    "target_programs_with_at_least_one_addressable_site": 27,
+    "target_programs": 27
+   },
+   {
+    "donors": 8,
+    "seed": 0,
+    "target_sites": 280,
+    "target_sites_the_donors_address": 125,
+    "share": 0.4464,
+    "target_programs_with_at_least_one_addressable_site": 23,
+    "target_programs": 23
+   },
+   {
+    "donors": 8,
+    "seed": 1,
+    "target_sites": 273,
+    "target_sites_the_donors_address": 123,
+    "share": 0.4505,
+    "target_programs_with_at_least_one_addressable_site": 23,
+    "target_programs": 23
+   },
+   {
+    "donors": 8,
+    "seed": 2,
+    "target_sites": 292,
+    "target_sites_the_donors_address": 140,
+    "share": 0.4795,
+    "target_programs_with_at_least_one_addressable_site": 23,
+    "target_programs": 23
+   },
+   {
+    "donors": 8,
+    "seed": 3,
+    "target_sites": 240,
+    "target_sites_the_donors_address": 125,
+    "share": 0.5208,
+    "target_programs_with_at_least_one_addressable_site": 23,
+    "target_programs": 23
+   },
+   {
+    "donors": 8,
+    "seed": 4,
+    "target_sites": 273,
+    "target_sites_the_donors_address": 136,
+    "share": 0.4982,
+    "target_programs_with_at_least_one_addressable_site": 23,
+    "target_programs": 23
+   },
+   {
+    "donors": 16,
+    "seed": 0,
+    "target_sites": 194,
+    "target_sites_the_donors_address": 106,
+    "share": 0.5464,
+    "target_programs_with_at_least_one_addressable_site": 15,
+    "target_programs": 15
+   },
+   {
+    "donors": 16,
+    "seed": 1,
+    "target_sites": 194,
+    "target_sites_the_donors_address": 108,
+    "share": 0.5567,
+    "target_programs_with_at_least_one_addressable_site": 15,
+    "target_programs": 15
+   },
+   {
+    "donors": 16,
+    "seed": 2,
+    "target_sites": 200,
+    "target_sites_the_donors_address": 113,
+    "share": 0.565,
+    "target_programs_with_at_least_one_addressable_site": 15,
+    "target_programs": 15
+   },
+   {
+    "donors": 16,
+    "seed": 3,
+    "target_sites": 156,
+    "target_sites_the_donors_address": 92,
+    "share": 0.5897,
+    "target_programs_with_at_least_one_addressable_site": 15,
+    "target_programs": 15
+   },
+   {
+    "donors": 16,
+    "seed": 4,
+    "target_sites": 185,
+    "target_sites_the_donors_address": 98,
+    "share": 0.5297,
+    "target_programs_with_at_least_one_addressable_site": 15,
+    "target_programs": 15
+   },
+   {
+    "donors": 24,
+    "seed": 0,
+    "target_sites": 101,
+    "target_sites_the_donors_address": 56,
+    "share": 0.5545,
+    "target_programs_with_at_least_one_addressable_site": 7,
+    "target_programs": 7
+   },
+   {
+    "donors": 24,
+    "seed": 1,
+    "target_sites": 94,
+    "target_sites_the_donors_address": 54,
+    "share": 0.5745,
+    "target_programs_with_at_least_one_addressable_site": 7,
+    "target_programs": 7
+   },
+   {
+    "donors": 24,
+    "seed": 2,
+    "target_sites": 89,
+    "target_sites_the_donors_address": 58,
+    "share": 0.6517,
+    "target_programs_with_at_least_one_addressable_site": 7,
+    "target_programs": 7
+   },
+   {
+    "donors": 24,
+    "seed": 3,
+    "target_sites": 66,
+    "target_sites_the_donors_address": 36,
+    "share": 0.5455,
+    "target_programs_with_at_least_one_addressable_site": 7,
+    "target_programs": 7
+   },
+   {
+    "donors": 24,
+    "seed": 4,
+    "target_sites": 76,
+    "target_sites_the_donors_address": 50,
+    "share": 0.6579,
+    "target_programs_with_at_least_one_addressable_site": 7,
+    "target_programs": 7
+   }
+  ]
+ },
+ "efficacy": {
+  "pairs": [
+   {
+    "donor": "get_factors",
+    "site": "int(n ** 0.5) + 1",
+    "shape": "int(__S0__ ** 0.5) + 1",
+    "expression": "(1) + (n)",
+    "template": "(1) + (__S0__)",
+    "control_on_the_donor": {
+     "returncode": 0,
+     "timed_out": false,
+     "passes": true,
+     "tail": [
+      "...........                                                              [100%]",
+      "11 passed in 0.01s"
+     ],
+     "answer_key_in_task_dir": false
+    },
+    "attempts": 0,
+    "unseen_programs_it_fixed": [],
+    "precision_per_attempt": null
+   },
+   {
+    "donor": "kth",
+    "site": "arr[0]",
+    "shape": "__S0__[0]",
+    "expression": "max(arr)",
+    "template": "max(__S0__)",
+    "control_on_the_donor": {
+     "returncode": 0,
+     "timed_out": false,
+     "passes": true,
+     "tail": [
+      ".......                                                                  [100%]",
+      "7 passed in 0.01s"
+     ],
+     "answer_key_in_task_dir": false
+    },
+    "attempts": 1,
+    "unseen_programs_it_fixed": [],
+    "precision_per_attempt": 0.0
+   },
+   {
+    "donor": "mergesort",
+    "site": "arr",
+    "shape": "__S0__",
+    "expression": "(arr)[(1):]",
+    "template": "(__S0__)[(1):]",
+    "control_on_the_donor": {
+     "returncode": 0,
+     "timed_out": false,
+     "passes": true,
+     "tail": [
+      "..............                                                           [100%]",
+      "14 passed in 0.01s"
+     ],
+     "answer_key_in_task_dir": false
+    },
+    "attempts": 104,
+    "unseen_programs_it_fixed": [
+     "longest_common_subsequence",
+     "next_palindrome"
+    ],
+    "precision_per_attempt": 0.0192
+   }
+  ],
+  "attempts_total": 105,
+  "addressability_and_information_by_pair": [
+   {
+    "site": "int(n ** 0.5) + 1",
+    "template": "(1) + (__S0__)",
+    "sites_that_match": 0,
+    "unseen_programs_it_fixed": [],
+    "precision_per_attempt": null
+   },
+   {
+    "site": "arr[0]",
+    "template": "max(__S0__)",
+    "sites_that_match": 1,
+    "unseen_programs_it_fixed": [],
+    "precision_per_attempt": 0.0
+   },
+   {
+    "site": "arr",
+    "template": "(__S0__)[(1):]",
+    "sites_that_match": 104,
+    "unseen_programs_it_fixed": [
+     "longest_common_subsequence",
+     "next_palindrome"
+    ],
+    "precision_per_attempt": 0.0192
+   }
+  ],
+  "programs_a_stored_expression_fixed": [
+   "longest_common_subsequence",
+   "next_palindrome"
+  ],
+  "transfers": [
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "longest_common_subsequence",
+    "site": "b",
+    "expression": "(b)[(1):]",
+    "stage": "VERIFIED_BY_THE_CORPUS",
+    "returncode": 0,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "next_palindrome",
+    "site": "digit_list",
+    "expression": "(digit_list)[(1):]",
+    "stage": "VERIFIED_BY_THE_CORPUS",
+    "returncode": 0,
+    "timed_out": false
+   }
+  ],
+  "every_attempt": [
+   {
+    "pair": "arr[0]",
+    "donor": "kth",
+    "target": "quicksort",
+    "site": "arr[0]",
+    "expression": "max(arr)",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "bitcount",
+    "site": "n",
+    "expression": "(n)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "bitcount",
+    "site": "count",
+    "expression": "(count)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": null,
+    "timed_out": true
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "bucketsort",
+    "site": "arr",
+    "expression": "(arr)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "bucketsort",
+    "site": "arr",
+    "expression": "(arr)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "bucketsort",
+    "site": "sorted_arr",
+    "expression": "(sorted_arr)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "find_first_in_sorted",
+    "site": "arr",
+    "expression": "(arr)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": null,
+    "timed_out": true
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "find_first_in_sorted",
+    "site": "mid",
+    "expression": "(mid)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": null,
+    "timed_out": true
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "find_first_in_sorted",
+    "site": "mid",
+    "expression": "(mid)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "find_in_sorted",
+    "site": "start",
+    "expression": "(start)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "find_in_sorted",
+    "site": "mid",
+    "expression": "(mid)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "find_in_sorted",
+    "site": "mid",
+    "expression": "(mid)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "find_in_sorted",
+    "site": "end",
+    "expression": "(end)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "find_in_sorted",
+    "site": "mid",
+    "expression": "(mid)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "find_in_sorted",
+    "site": "arr",
+    "expression": "(arr)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "flatten",
+    "site": "arr",
+    "expression": "(arr)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "flatten",
+    "site": "x",
+    "expression": "(x)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "flatten",
+    "site": "x",
+    "expression": "(x)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "flatten",
+    "site": "x",
+    "expression": "(x)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "gcd",
+    "site": "a",
+    "expression": "(a)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "gcd",
+    "site": "b",
+    "expression": "(b)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "hanoi",
+    "site": "start",
+    "expression": "(start)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "hanoi",
+    "site": "helper",
+    "expression": "(helper)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "hanoi",
+    "site": "helper",
+    "expression": "(helper)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "hanoi",
+    "site": "end",
+    "expression": "(end)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "hanoi",
+    "site": "steps",
+    "expression": "(steps)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "is_valid_parenthesization",
+    "site": "parens",
+    "expression": "(parens)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "kheapsort",
+    "site": "heap",
+    "expression": "(heap)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "kheapsort",
+    "site": "arr",
+    "expression": "(arr)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "kheapsort",
+    "site": "heap",
+    "expression": "(heap)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "kheapsort",
+    "site": "x",
+    "expression": "(x)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "kheapsort",
+    "site": "heap",
+    "expression": "(heap)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "kheapsort",
+    "site": "heap",
+    "expression": "(heap)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": -9,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "knapsack",
+    "site": "items",
+    "expression": "(items)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "knapsack",
+    "site": "items",
+    "expression": "(items)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "kth",
+    "site": "below",
+    "expression": "(below)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "kth",
+    "site": "arr",
+    "expression": "(arr)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "kth",
+    "site": "above",
+    "expression": "(above)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "kth",
+    "site": "below",
+    "expression": "(below)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "kth",
+    "site": "k",
+    "expression": "(k)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "kth",
+    "site": "above",
+    "expression": "(above)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "kth",
+    "site": "k",
+    "expression": "(k)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "kth",
+    "site": "pivot",
+    "expression": "(pivot)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "lcs_length",
+    "site": "s",
+    "expression": "(s)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "lcs_length",
+    "site": "t",
+    "expression": "(t)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "levenshtein",
+    "site": "source",
+    "expression": "(source)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "levenshtein",
+    "site": "target",
+    "expression": "(target)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "levenshtein",
+    "site": "source",
+    "expression": "(source)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "levenshtein",
+    "site": "target",
+    "expression": "(target)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "lis",
+    "site": "arr",
+    "expression": "(arr)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "lis",
+    "site": "prefix_lengths",
+    "expression": "(prefix_lengths)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "lis",
+    "site": "i",
+    "expression": "(i)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "lis",
+    "site": "longest",
+    "expression": "(longest)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "longest_common_subsequence",
+    "site": "b",
+    "expression": "(b)[(1):]",
+    "stage": "VERIFIED_BY_THE_CORPUS",
+    "returncode": 0,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "longest_common_subsequence",
+    "site": "a",
+    "expression": "(a)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "longest_common_subsequence",
+    "site": "b",
+    "expression": "(b)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "max_sublist_sum",
+    "site": "arr",
+    "expression": "(arr)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "max_sublist_sum",
+    "site": "max_so_far",
+    "expression": "(max_so_far)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "max_sublist_sum",
+    "site": "max_ending_here",
+    "expression": "(max_ending_here)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "max_sublist_sum",
+    "site": "max_so_far",
+    "expression": "(max_so_far)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "next_palindrome",
+    "site": "digit_list",
+    "expression": "(digit_list)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "next_palindrome",
+    "site": "digit_list",
+    "expression": "(digit_list)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "next_palindrome",
+    "site": "digit_list",
+    "expression": "(digit_list)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "next_palindrome",
+    "site": "digit_list",
+    "expression": "(digit_list)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "next_palindrome",
+    "site": "digit_list",
+    "expression": "(digit_list)[(1):]",
+    "stage": "VERIFIED_BY_THE_CORPUS",
+    "returncode": 0,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "next_permutation",
+    "site": "perm",
+    "expression": "(perm)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "next_permutation",
+    "site": "i",
+    "expression": "(i)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "next_permutation",
+    "site": "perm",
+    "expression": "(perm)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "next_permutation",
+    "site": "perm",
+    "expression": "(perm)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "next_permutation",
+    "site": "next_perm",
+    "expression": "(next_perm)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "pascal",
+    "site": "n",
+    "expression": "(n)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "pascal",
+    "site": "r",
+    "expression": "(r)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "pascal",
+    "site": "row",
+    "expression": "(row)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "pascal",
+    "site": "rows",
+    "expression": "(rows)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "possible_change",
+    "site": "coins",
+    "expression": "(coins)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "possible_change",
+    "site": "coins",
+    "expression": "(coins)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "possible_change",
+    "site": "rest",
+    "expression": "(rest)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "possible_change",
+    "site": "total",
+    "expression": "(total)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "powerset",
+    "site": "arr",
+    "expression": "(arr)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "powerset",
+    "site": "arr",
+    "expression": "(arr)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "powerset",
+    "site": "rest",
+    "expression": "(rest)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "rpn_eval",
+    "site": "a",
+    "expression": "(a)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "rpn_eval",
+    "site": "b",
+    "expression": "(b)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "rpn_eval",
+    "site": "tokens",
+    "expression": "(tokens)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "rpn_eval",
+    "site": "token",
+    "expression": "(token)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "rpn_eval",
+    "site": "token",
+    "expression": "(token)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "rpn_eval",
+    "site": "token",
+    "expression": "(token)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "rpn_eval",
+    "site": "a",
+    "expression": "(a)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "rpn_eval",
+    "site": "b",
+    "expression": "(b)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "shunting_yard",
+    "site": "tokens",
+    "expression": "(tokens)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "shunting_yard",
+    "site": "token",
+    "expression": "(token)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "shunting_yard",
+    "site": "token",
+    "expression": "(token)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "shunting_yard",
+    "site": "opstack",
+    "expression": "(opstack)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "shunting_yard",
+    "site": "rpntokens",
+    "expression": "(rpntokens)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "sieve",
+    "site": "n",
+    "expression": "(n)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "sieve",
+    "site": "primes",
+    "expression": "(primes)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "sqrt",
+    "site": "approx",
+    "expression": "(approx)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": null,
+    "timed_out": true
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "subsequences",
+    "site": "a",
+    "expression": "(a)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "subsequences",
+    "site": "b",
+    "expression": "(b)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "subsequences",
+    "site": "ret",
+    "expression": "(ret)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "to_base",
+    "site": "result",
+    "expression": "(result)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "wrap",
+    "site": "text",
+    "expression": "(text)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "wrap",
+    "site": "cols",
+    "expression": "(cols)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "wrap",
+    "site": "line",
+    "expression": "(line)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   },
+   {
+    "pair": "arr",
+    "donor": "mergesort",
+    "target": "wrap",
+    "site": "lines",
+    "expression": "(lines)[(1):]",
+    "stage": "THE_CORPUS_REFUSED",
+    "returncode": 1,
+    "timed_out": false
+   }
+  ],
+  "controls_passed": 3
+ },
+ "cost": {
+  "lookups": 367,
+  "addressed": 115,
+  "seconds_for_every_lookup_in_the_corpus": 0.0149,
+  "microseconds_per_lookup": 40.6,
+  "questions_the_search_needed_to_learn_these_pairs": 1674,
+  "measured_cost_of_one_question_ms": 7.69
+ },
+ "seconds": 299.1,
+ "summary": {
+  "pairs_available": 3,
+  "controls_passed": 3,
+  "attempts_in_unseen_programs": 105,
+  "unseen_programs_a_stored_expression_fixed": 2,
+  "which": [
+   "longest_common_subsequence",
+   "next_palindrome"
+  ],
+  "addressable_share_by_donor_count": {
+   "1": 0.3437,
+   "2": 0.3608,
+   "4": 0.4161,
+   "8": 0.4791,
+   "16": 0.5575,
+   "24": 0.5968
+  },
+  "distinct_shapes_over_sites": "164/367",
+  "microseconds_per_lookup": 40.6
+ },
+ "title": "WHAT AN EXPERIENCE CAN OWN",
+ "date": "2026-11-18",
+ "question": "Store a repair in its most invariant form -- a shape of site, a demanded value, an expression -- and does it reach a program nobody experienced, and how far does that go?",
+ "what_the_two_transfers_are": {
+  "longest_common_subsequence": "the stored template (__S0__)[(1):] applied at the argument b of the recursive call gives longest_common_subsequence(a, b[1:]) -- the published fix verbatim",
+  "next_palindrome": "the same template applied at digit_list gives len(digit_list[1:]) where the published fix is len(digit_list) - 1 -- the same function of the same value, a different spelling",
+  "checked_by_hand": true
+ },
+ "the_tradeoff_it_measures": "Generality and information are one axis. The pair that carries the fix (get_factors) matches 0 unseen sites; the pair that carries almost nothing (a bare name indexed from 1) matches 104 and fixes 2 (1.92%). No representation of an experience escapes that axis; what escapes it is asking at the site, which is exact.",
+ "what_the_curve_says": "Addressability of unseen sites rises 34.4% (1 experience) -> 59.7% (24 experiences) and flattens: the marginal experience is worth about one point. Experience buys a saturating share of the surface, never the surface.",
+ "the_key": "a builtin is an operation and stays literal (len, max, sorted); a name a program defines is data and becomes a positional slot (__S0__, __S1__)",
+ "the_frontier_this_is_compared_against": {
+  "SWE-bench Verified": "state of the art ~87.6% (Claude Opus 4.7, Apr 2026, vendor); frontier agents exceed 75%",
+  "SWE-bench ProMax": "best 41.2% (GPT-5.2), tasks average 11.4 files and 261.6 lines",
+  "long horizon": "all state-of-the-art agents below 20% on long-horizon tasks",
+  "learning on the job (frozen weights, tau-bench banking, 2026)": "of 84 tasks the baseline never solved, experience converted 5 and instruction converted 22",
+  "Evo-Memory (2025/2026)": "memory gain tracks task similarity, Pearson 0.717; 'fragile in stability and procedural reuse'",
+  "PATH-Bench (2026)": "external experience does not universally improve lifelong performance; transfer does not ensure retention",
+  "ACE / A-Mem (2026)": "+2.28% with per-benchmark states, -1.26% when domains interleave; A-Mem at 577% of baseline inference cost on one model"
+ }
+}
