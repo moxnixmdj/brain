@@ -90,9 +90,22 @@ suite fails — an oracle nobody in this tree wrote. On `click@1b0e19f505` (`src
 - the human's fix is one of them; the suite cannot separate them, and that is a fact about the oracle,
   not about the search — an empty-string envvar would separate them, and no test asks for it.
 
-Across the 29 qualifying real commits the same loop is run unchanged. What it can and cannot do is in
-the receipt; the honest summary is: **the loop identifies the fix when the fix is a widening whose
-material is on the next line, and fails when the fix is a replacement.**
+Across the **29** real commits that qualify the same loop is run unchanged, with the same budget and the
+same oracle. The stages are the result:
+
+| stage | commits | what it means |
+|---|---:|---|
+| `NO_ORACLE` | 10 | the post-fix tests pass on the parent: a tidy-up, not a behaviour fix |
+| `MEASURED` | 7 | a real oracle, the pool ran |
+| `FIX_LINE_DOES_NOT_PARSE` | 7 | the changed line is a fragment or a continuation, not one expression |
+| `FIX_IS_NOT_A_SINGLE_EXPRESSION` | 5 | a structural or multi-site edit |
+
+Of the 7 with a real oracle, **one is identified end-to-end** — the `click` widening above, whose material
+is on the next line. One more has its fix in the full 400-candidate pool at **rank 396**, outside the
+budget of 32 that was actually executed. The other five are not in the pool at all, and every one of
+them is a replacement. That is the geometry measurement reproduced end-to-end on the project's own
+tests: **the loop identifies the fix when the fix is a widening whose material is one line away, and fails
+when the fix replaces the site.**
 
 ## The single bottleneck
 
@@ -140,8 +153,9 @@ thesis is wrong and the next round says so.
 - 62 of the 241 edits (25.7%) are code that spans lines; they are excluded from the geometry set, not
   explained away. The classifier resolves 18 of them at statement level and calls them statement-form.
 - The 29-commit sweep is a population of *one-line source changes that also touched a test*, not of
-  bugs. Two of the seven click commits examined so far have no oracle at all — the post-fix tests pass
-  on the parent — which is the correct verdict for a behaviour-preserving tidy-up and is reported as
-  `NO_ORACLE`, never as a success.
+  bugs. **10 of the 29 have no oracle at all** — the post-fix tests pass on the parent — which is the
+  correct verdict for a behaviour-preserving tidy-up and is reported as `NO_ORACLE`, never as a success.
+  A third of the population being invisible to the project's own tests is itself a fact about the
+  population, not a defect of the run.
 - Two survivors on the `click` bug is an identifiability result about that suite. It is not evidence
   that the search is right; it is evidence that the oracle is weaker than the fix.

@@ -2,6 +2,7 @@
  "action_id": "THE_SITE_IS_NOT_WHERE_THE_FIX_COMES_FROM_20261118_V1",
  "action_intent_id": "THE_SITE_IS_NOT_WHERE_THE_FIX_COMES_FROM_20261118_V1",
  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+ "action_summary": "Measures where a real fix's material comes from, on real commit history rather than QuixBugs. Three measurements: writability (241 edits), geometry (136 single-expression edits: 84.6% replace the site, 12.5% widen it, 2.9% narrow it), and reachability of the same 136 in a site-rooted pool ordered by material distance (5.9% contain the fix at 400 candidates; 50% of narrowings, 23.5% of widenings, 1.7% of replacements). Adds the first end-to-end identification run on real projects whose oracle is the project's own post-fix tests: click@1b0e19f505 is identified to 2 survivors of 119 tests with the human fix at rank 1, and the 29-commit sweep records where the same loop fails.",
  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
  "agent_orientation": {
   "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
@@ -45,8 +46,8 @@
   "terminal_achieved": false
  },
  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
- "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Not the vocabulary and not the form: the MATERIAL. Of 136 real single-expression line edits, the fix replaces the site's expression 84.6% of the time, and a site-rooted pool ordered by text proximity contains the fix for 5.9%. Being writable (77.4% of code edits) is not being findable.",
- "canonical_base_commit": "e425aaa0d1fa81d16e9fb4b4ecc91e4acec6ba9e",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Material selection is indexed by source text; the evidence that selects material is in the failing run's values. Grammar is 9.1% of real edits, statement form 7.5%, and pool ordering is a median rank of 22 once a fix is writable, so none of those is the binding constraint on 84.6% of edits.",
+ "canonical_base_commit": "ebb8f636f8a60de348afb01fbf613805f819ef3a",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -86,39 +87,49 @@
  },
  "measured_effect": {
   "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "code_edits": 208,
+  "fix_inside_rate": 0.029,
+  "fix_is_inside_the_site": 4,
+  "in_vocabulary": 153,
+  "in_vocabulary_rate": 0.6349,
+  "in_vocabulary_rate_of_code_edits": 0.774,
+  "instrument_defect_found_and_fixed": "parse_line could not parse a compound statement (`if x:`) and replace_site matched the site by text, so both the first identification run and the first sweep silently reported zero candidates instead of the fix",
+  "median_rank_when_reachable": 22,
+  "needs_grammar": 22,
+  "needs_grammar_rate": 0.0913,
+  "not_code": 33,
+  "reachability_by_geometry": {
+   "FIX_IS_INSIDE_THE_SITE": 0.5,
+   "SITE_IS_REPLACED": 0.0174,
+   "SITE_SURVIVES_INSIDE_THE_FIX": 0.2353
+  },
+  "reachability_rate": 0.0588,
+  "reachable_at_400_candidates": 8,
+  "real_commit_identified": "click@1b0e19f505 rank 1, 2 consistent candidates of 119 tests, human fix among them",
   "repositories": [
    "psf/requests",
    "pallets/click",
    "tqdm/tqdm",
    "encode/httpx"
   ],
-  "single_line_edits_examined": 241,
-  "code_edits": 208,
-  "in_vocabulary": 153,
-  "in_vocabulary_rate": 0.6349,
-  "in_vocabulary_rate_of_code_edits": 0.774,
-  "needs_grammar": 22,
-  "needs_grammar_rate": 0.0913,
-  "statement_form": 18,
-  "statement_form_rate": 0.0747,
-  "not_code": 33,
   "single_expression_edits_measured_for_geometry": 136,
+  "single_line_edits_examined": 241,
   "site_is_replaced": 115,
   "site_is_replaced_rate": 0.846,
   "site_survives_inside_the_fix": 17,
   "site_survives_rate": 0.125,
-  "fix_is_inside_the_site": 4,
-  "fix_inside_rate": 0.029,
-  "reachable_at_400_candidates": 8,
-  "reachability_rate": 0.0588,
-  "reachability_by_geometry": {
-   "FIX_IS_INSIDE_THE_SITE": 0.5,
-   "SITE_IS_REPLACED": 0.0174,
-   "SITE_SURVIVES_INSIDE_THE_FIX": 0.2353
+  "statement_form": 18,
+  "statement_form_rate": 0.0747,
+  "sweep_29_real_commits": {
+   "no_oracle": 10,
+   "measured": 7,
+   "line_does_not_parse": 7,
+   "not_a_single_expression": 5,
+   "identified_end_to_end": 1,
+   "in_full_pool_at_396_outside_budget": 1,
+   "not_in_pool_at_all": 5
   },
-  "median_rank_when_reachable": 22,
-  "real_commit_identified": "click@1b0e19f505 rank 1, 2 consistent candidates of 119 tests, human fix among them",
-  "instrument_defect_found_and_fixed": "parse_line could not parse a compound statement (`if x:`) and replace_site matched the site by text, so both the first identification run and the first sweep silently reported zero candidates instead of the fix"
+  "sweep_seconds": 218.0
  },
  "next_step": "Instrument the failing case, record the value the site produced and the value the test demanded, nominate material by provenance of that value, and require the human fix to be in the pool for more than 5.9% of the same 136 edits.",
  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -140,8 +151,9 @@
   "canonical/action_intents/THE_SITE_IS_NOT_WHERE_THE_FIX_COMES_FROM_20261118_V1.md",
   "canonical/action_intents/THE_SITE_IS_NOT_WHERE_THE_FIX_COMES_FROM_20261118_V1.json"
  ],
+ "real_outcome": "Writability 77.4% of code edits, reachability 5.9%: on real code the fix is usually writable and usually not findable from the site, because 84.6% of fixes replace the site's expression.",
  "recursive_obs": {
-  "canonical_base_commit": "e425aaa0d1fa81d16e9fb4b4ecc91e4acec6ba9e",
+  "canonical_base_commit": "ebb8f636f8a60de348afb01fbf613805f819ef3a",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "storing the text that was edited (a spelling destroyed by a rename)",
@@ -151,10 +163,18 @@
    "abstracting builtins away: an operation is the invariant, a program-defined name is not"
   ],
   "expected_parent_frontier_change": "A measured ceiling for memory of experience (0.597 addressable x 0.0192 precise ~ 1.1% of unseen decisions) against an exact asked question (1 bit, 7.69 ms), and the finite size of the vocabulary that would have to be stored (367 sites -> 164 shapes)",
-  "expected_parent_level_state_change": "Vocabulary insufficiency measured at 0.4% on real code: the project has been optimising the wrong 49x. The addressable population for single-site expression repair is 48.6% of real single-line edits, and 72.7% of the ones that are code at all.",
+  "expected_parent_level_state_change": "Expressibility is not the bottleneck on real code: 77.4% of code edits are a single expression the existing enumerator can already write, while only 5.9% are reachable by that enumerator's ordering. The next build is an inversion of the search index, not more grammar, more atoms or more stored experience.",
   "independent_verification_required": true,
   "iteration_limit": 1,
-  "obs_blocker": "Material selection is indexed by source text; the evidence that selects material is in the failing run's values. Grammar is 9.1% of real edits, statement form 7.5%, and pool ordering is a median rank of 22 once a fix is writable, so none of those is the binding constraint on 84.6% of edits.",
+  "obs_blocker": {
+   "intrinsic_or_path_specific": "PATH_SPECIFIC_TO_how_the_pool_is_indexed: text proximity, not the values the run produced",
+   "delete_bypass_substitute_options": [
+    "DELETE a larger candidate budget: the fix is writable but at median rank 22, so ordering binds and size does not",
+    "BYPASS the site as the material index: nominate material by the provenance of the demanded value in the failing run",
+    "SUBSTITUTE the stored-experience table: repeat-edit coverage is ~2.2%, so a table answers a smaller population than the pool does"
+   ],
+   "surviving_causal_blocker": "Material selection is indexed by source text; the evidence that selects material is in the failing run's values. Grammar is 9.1% of real edits, statement form 7.5%, and pool ordering is a median rank of 22 once a fix is writable, so none of those is the binding constraint on 84.6% of edits."
+  },
   "obs_capability": {
    "capability_work_deleted": [
     "a second lesson store or admission gate",
@@ -173,7 +193,15 @@
    ],
    "surviving_gap": "An edit basis whose content is folded from demonstrations and whose applicability is a context precondition, so the reachable space is not a list an author imagined."
   },
-  "obs_goal": "Decide, by measurement on real repository history, what actually stops a single-site repair, and pick the one obstacle whose removal unlocks the rest.",
+  "obs_goal": {
+   "real_outcome": "Writability 77.4% of code edits, reachability 5.9%: on real code the fix is usually writable and usually not findable from the site, because 84.6% of fixes replace the site's expression.",
+   "proxy_goals_deleted": [
+    "raise the candidate budget (median rank 22 once the fix is writable: the budget is not what binds)",
+    "add grammar productions for attributes (already added: 35 -> 22 edits, 9.1% remain)",
+    "teach one more edit class per failing task (QuixBugs-shaped; the real population is 84.6% replacements)"
+   ],
+   "surviving_necessity": "the material for 84.6% of real fixes is not in the site, and only the failing run's values nominate it"
+  },
   "obs_inherited_system": {
    "adjacent_capabilities_absorbed": "None by claim: the existing repair primitive and corpus oracle are reused unchanged; the induced basis adds candidates only and holds no authority.",
    "downstream_work_to_delete_or_supersede": "Any roadmap step that adds another hand-written mutation kind, or that raises a candidate budget to fix a bug whose edit is not expressible.",
@@ -266,7 +294,7 @@
     },
     {
      "comparison": {
-      "CAPABILITY_STRENGTH": "3 of 14 never-repaired bugs closed by asking (measured last round), exact",
+      "CAPABILITY_STRENGTH": "1 of 29 real fix commits identified end-to-end (producer run); 5.9% of real edits reachable",
       "CORRECTNESS": "the artifact answers, so a question is either answered or refused -- never wrong",
       "INCREMENTAL_COST": "7.69 ms per asked question, 1 bit",
       "RELIABILITY": "no saturating share: every site can be asked",
@@ -274,20 +302,20 @@
       "WALL_CLOCK": "121.2 s for 14 bugs"
      },
      "evidence": [
-      "a question survives a rename (a stored table's wins fell 7/10 -> 1/10 under rename)"
+      "click@1b0e19f505: human fix at rank 1 of the site-rooted pool; 2 consistent candidates of 119 tests",
+      "136 real single-expression edits: 5.9% reachable by proximity, 1.7% of the 115 replacements"
      ],
      "qualification_evidence": [
-      "canonical/verification/THE_FAILURE_ALREADY_SAYS_WHAT_TO_WRITE_20261118_V1.json",
-      "canonical/verification/THE_FOUR_LEVERS_OF_LEARNING_FROM_EXPERIENCE_20261116_V1.json"
+      "canonical/verification/THE_SITE_IS_NOT_WHERE_THE_FIX_COMES_FROM_20261118_V1.json"
      ],
      "qualification_evidence_classes": [
       "DIRECT_PROBE"
      ],
      "resolution": "SELECTED",
-     "route": "store the question instead of the answer, and answer it at the site"
+     "route": "INVERT_THE_SEARCH_FROM_THE_DEMANDED_VALUE_TO_THE_EXPRESSION"
     }
    ],
-   "checked_at_utc": "2026-11-18T12:38:29Z",
+   "checked_at_utc": "2026-11-18T15:36:00Z",
    "comparison_dimensions": [
     "CORRECTNESS",
     "CAPABILITY_STRENGTH",
@@ -297,9 +325,9 @@
     "VERIFIABILITY"
    ],
    "discovery_required": true,
-   "incumbent_route": "teach one more edit class whenever a bug does not close",
+   "incumbent_route": "site-rooted pool ordered by text proximity",
    "max_age_hours": 2,
-   "negative_search_summary": "Measured and refused this session: teaching more classes (8 published fixes reached, 5 of them on the program the class was read from, 18 reached with no lesson at all), re-implementing the space in order to measure it (it contradicted the solve receipt on sqrt and powerset), and bounding a generator by \"keep the N most promising neighbours\" (which fixes it reached changed with N).",
+   "negative_search_summary": "Measured and refused this session: more vocabulary or atoms (77.4% of code edits are already writable), more grammar (9.1%), statement form (7.5%), a larger budget (median rank 22 when reachable), and a stored table (~2.2% repeat coverage).",
    "query_families": [
     {
      "intent": "CAPABILITY_VECTOR",
@@ -324,15 +352,15 @@
     "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
     "BEFORE_SCARCE_GATE_SPEND"
    ],
-   "selected_route": "STORE_THE_INVARIANT_FORM_OF_A_FIX_AND_MEASURE_WHAT_IT_REACHES",
+   "selected_route": "INVERT_THE_SEARCH_FROM_THE_DEMANDED_VALUE_TO_THE_EXPRESSION",
    "selected_route_preflight": {
     "all_required_dependencies_ready": true,
-    "checked_at_utc": "2026-11-18T12:38:29Z",
+    "checked_at_utc": "2026-11-18T15:36:00Z",
     "execution_dependencies": [
      {
       "dependency": "local Python 3.11 runtime with pytest",
       "evidence": [
-       "Python 3.11 + pytest; the new instrument tests pass at 2026-11-18T12:38:29Z"
+       "Python 3.11 + pytest; 20 instrument tests pass at 2026-11-18T15:36:00Z"
       ],
       "evidence_classes": [
        "DIRECT_PROBE"
@@ -345,9 +373,9 @@
       "volatility": "STATIC"
      },
      {
-      "dependency": "QuixBugs checkout at 4257f44b including correct_python_programs for the audit",
+      "dependency": "real repositories cloned for the sweep (requests, click, tqdm, httpx)",
       "evidence": [
-       "github.com/psf/requests, pallets/click, tqdm/tqdm, encode/httpx cloned at run time; 242 single-line edits found, 241 classified, 3.4 s, at 2026-11-18T12:38:29Z"
+       "241 single-line edits and 29 fix commits measured in this sandbox at 2026-11-18T15:36:00Z"
       ],
       "evidence_classes": [
        "DIRECT_PROBE"
@@ -378,7 +406,7 @@
     "execution_dependencies_complete": true,
     "failed_dependencies": [],
     "max_age_hours": 2,
-    "selected_route": "STORE_THE_INVARIANT_FORM_OF_A_FIX_AND_MEASURE_WHAT_IT_REACHES",
+    "selected_route": "INVERT_THE_SEARCH_FROM_THE_DEMANDED_VALUE_TO_THE_EXPRESSION",
     "status": "READY"
    },
    "source_classes_checked": [
@@ -422,6 +450,7 @@
   "why_selected_route_is_fastest_sufficient": "It is the only route whose target population is the 84.6% rather than the 9.1% or the 7.5%, and it needs no training, no model and no corpus: the failing run already produces the value that nominates the material.",
   "why_this_is_not_another_organ": "It adds no knowledge, no model and no family list: grammar_closed_repair_v1 now takes the closure rule as a parameter instead of hardcoding a second list, and the judge tool takes the space builder as a parameter, so the only new code is the rule itself and the three containers that instantiate it."
  },
+ "required_capability": "material selection from the failing execution's values, then expression synthesis backward from a demanded value, verified by the project's own tests",
  "route_id": "INVERT_THE_SEARCH_FROM_THE_DEMANDED_VALUE_TO_THE_EXPRESSION",
  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
  "scope_complete_discharge": false,
@@ -482,8 +511,5 @@
   "independent_verification_completed": false,
   "result": "20 tests pass; the three receipts reproduce; independent verification open."
  },
- "weakens_existing_guard": false,
- "action_summary": "Measures where a real fix's material comes from, on real commit history rather than QuixBugs. Three measurements: writability (241 edits), geometry (136 single-expression edits: 84.6% replace the site, 12.5% widen it, 2.9% narrow it), and reachability of the same 136 in a site-rooted pool ordered by material distance (5.9% contain the fix at 400 candidates; 50% of narrowings, 23.5% of widenings, 1.7% of replacements). Adds the first end-to-end identification run on real projects whose oracle is the project's own post-fix tests: click@1b0e19f505 is identified to 2 survivors of 119 tests with the human fix at rank 1, and the 29-commit sweep records where the same loop fails.",
- "real_outcome": "Writability 77.4% of code edits, reachability 5.9%: on real code the fix is usually writable and usually not findable from the site, because 84.6% of fixes replace the site's expression.",
- "required_capability": "material selection from the failing execution's values, then expression synthesis backward from a demanded value, verified by the project's own tests"
+ "weakens_existing_guard": false
 }

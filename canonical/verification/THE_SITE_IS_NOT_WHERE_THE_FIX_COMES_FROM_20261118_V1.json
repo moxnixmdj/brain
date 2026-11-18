@@ -132,6 +132,27 @@
    "human_fix_is_among_survivors": true,
    "identifiability_note": "The two survivors differ only for a falsy non-None envvar (the empty string). No test asks that question, so the suite cannot separate them. This is a limit of the oracle, reported, not a success.",
    "sweep_rows_measured_so_far": 7
+  },
+  "end_to_end_sweep_29_real_commits": {
+   "source_receipt": "canonical/tools/identify_a_real_bugs_fix_v1.py --sweep",
+   "population": "commits with exactly one source .py line changed 1/1 that also touched a test .py file",
+   "commits": 29,
+   "seconds": 218.0,
+   "stages": {
+    "NO_ORACLE__THE_POST_FIX_TESTS_PASS_ON_THE_PARENT": 10,
+    "MEASURED": 7,
+    "FIX_LINE_DOES_NOT_PARSE": 7,
+    "FIX_IS_NOT_A_SINGLE_EXPRESSION": 5
+   },
+   "identified_end_to_end": 1,
+   "identified": [
+    "click 1b0e19f505: rank 1, 2 consistent candidates of 119 tests, human fix among them"
+   ],
+   "in_full_pool_but_outside_budget": [
+    "click bf1e8be90c at rank 396 of 400, budget executed was 32"
+   ],
+   "not_in_pool_at_all": 5,
+   "reading": "The geometry measurement repeats end-to-end: every commit the loop failed on is a replacement, and the one it identified is the widening whose material is one line below the site. Ten of the 29 commits are behaviour-preserving edits that the tests can see through, which is why they are reported as NO_ORACLE rather than as successes."
   }
  },
  "the_bottleneck": "Candidate material is chosen from the source text; the evidence that chooses it lives in the failing run's values. Grammar (9.1%), statement form (7.5%) and pool size (median rank 22 when reachable) are all smaller and already measured.",

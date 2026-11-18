@@ -43,9 +43,21 @@ candidate on a 119-test file).
 fix in the pool for more than 5.9% of them and within the first 40 candidates for more than 6 edits. If it
 does not beat proximity, this thesis is wrong and the next round records that.
 
+## The end-to-end sweep, all 29 commits
+
+| stage | commits |
+|---|---:|
+| `NO_ORACLE`: the post-fix tests pass on the parent | 10 |
+| `MEASURED`: a real oracle, the pool ran | 7 |
+| `FIX_LINE_DOES_NOT_PARSE`: a fragment or a continuation | 7 |
+| `FIX_IS_NOT_A_SINGLE_EXPRESSION`: structural or multi-site | 5 |
+
+One of the seven with a real oracle is identified (`click@1b0e19f505`, rank 1); one more has its fix in the
+400-candidate pool at rank 396, outside the budget actually executed; the other five are not in the pool at
+all and every one is a replacement.
+
 ## What is not claimed
 
-The 29-commit sweep's identification rate is a producer-run sandbox result and independent reproduction is
-open. Rows where the post-fix tests pass on the parent are reported as `NO_ORACLE`, never as successes.
-62 of the 241 edits are code that spans lines and are excluded from the geometry denominator rather than
-reclassified.
+The sweep's rate is a producer-run sandbox result and independent reproduction is open. Rows where the
+post-fix tests pass on the parent are reported as `NO_ORACLE`, never as successes. 62 of the 241 edits are
+code that spans lines and are excluded from the geometry denominator rather than reclassified.
