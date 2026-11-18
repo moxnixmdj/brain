@@ -41,7 +41,7 @@
  },
  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Recognition, not search. A demand that is not bound to an assertion is not a demand: every 'no candidate' it produces is a verdict about the reader, not about the site.",
- "canonical_base_commit": "PENDING_REBIND",
+ "canonical_base_commit": "1750783cf4944d4bdb8c20e28211f31f15347179",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -153,7 +153,7 @@
  ],
  "real_outcome": "That refusals are losses; that the 2 name-introducing rows are classified as finely as before (they now stop at pairing, named less precisely); that 1 verified row is capability; that the pairing is sound when a site feeds a helper the assertion then tests.",
  "recursive_obs": {
-  "canonical_base_commit": "PENDING_REBIND",
+  "canonical_base_commit": "1750783cf4944d4bdb8c20e28211f31f15347179",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "requiring the demanded value to equal what the site produced (that difference is the repair)",
@@ -336,7 +336,7 @@
      "route": "INDEX_ACTIONS_BY_THE_FAILING_RUN_NOT_BY_THE_SOURCE_TEXT"
     }
    ],
-   "checked_at_utc": "2026-11-22T00:00:00Z",
+   "checked_at_utc": "2026-11-18T21:39:00Z",
    "comparison_dimensions": [
     "CORRECTNESS",
     "CAPABILITY_STRENGTH",
@@ -376,7 +376,7 @@
    "selected_route": "BIND_THE_DEMAND_TO_THE_ASSERTION_THAT_SPEAKS_ABOUT_THE_SITE",
    "selected_route_preflight": {
     "all_required_dependencies_ready": true,
-    "checked_at_utc": "2026-11-18T20:43:34Z",
+    "checked_at_utc": "2026-11-18T21:39:00Z",
     "execution_dependencies": [
      {
       "dependency": "local Python 3.11 runtime with pytest",
@@ -427,7 +427,7 @@
     "execution_dependencies_complete": true,
     "failed_dependencies": [],
     "max_age_hours": 2,
-    "selected_route": "AUDIT_WHAT_THE_INSTRUMENT_ACCEPTS_BEFORE_ASKING_WHAT_IT_CAN_FIND",
+    "selected_route": "BIND_THE_DEMAND_TO_THE_ASSERTION_THAT_SPEAKS_ABOUT_THE_SITE",
     "status": "READY"
    },
    "source_classes_checked": [
@@ -464,7 +464,7 @@
    "MEASURE_THE_CEILING_WITH_THE_ADDRESS_GIVEN_FREE_THEN_NAME_WHAT_SELECTS__SELECTED"
   ],
   "selected_route": "BIND_THE_DEMAND_TO_THE_ASSERTION_THAT_SPEAKS_ABOUT_THE_SITE",
-  "selected_surviving_route": "AUDIT_WHAT_THE_INSTRUMENT_ACCEPTS_BEFORE_ASKING_WHAT_IT_CAN_FIND",
+  "selected_surviving_route": "BIND_THE_DEMAND_TO_THE_ASSERTION_THAT_SPEAKS_ABOUT_THE_SITE",
   "selected_surviving_route_class": "SYNTHESIZE_NEW_PRIMITIVE",
   "stop_condition": "Read the demand from the assertion's own expression against the frames the site ran in, because 30 of 70 refusals say the driver saw no value at all. Acceptance: bound demands on half of the in-class rows, accusations 0, verified >= 1, and any ceiling stated as a ceiling.",
   "why_selected_route_is_fastest_sufficient": "Because the question 'is the content a knowledge problem' can only be answered by handing the address over for free and measuring what the artifact's own words can say; every other route answers it by assuming an answer.",
