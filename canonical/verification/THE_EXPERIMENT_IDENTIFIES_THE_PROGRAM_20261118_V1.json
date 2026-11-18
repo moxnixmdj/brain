@@ -1,0 +1,111 @@
+{
+  "schema": "BRAIN_THE_EXPERIMENT_THAT_IDENTIFIES_V1",
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "upstream": "https://github.com/jkoppel/QuixBugs",
+  "date": "2026-11-18",
+  "title": "The experiment identifies the program: 1-4 chosen queries collapse 399-400 candidates, and correctness is only ever established on probes the choice never saw",
+  "the_theorem_that_replaces_the_earlier_guess": "An observation identifies a hypothesis exactly as far as the candidates are behaviourally distinguishable on it: log2 of the number of behavioural classes it induces among the live candidates. Measured: the corpus case that fails `lis` splits 399 candidates into 399 classes (8.64 bits); the corpus case that fails `kth` splits 400 into 1 (0 bits). An uninformative observation is not weak experience, it is a badly chosen experiment.",
+  "the_architecture_this_implies": "Not experience -> memory. Experiment -> identification. The object is a behaviour table (candidates x probes -> output); identification is set arithmetic; the next experiment is the probe that splits the survivors hardest. All of it computed from the program and the oracle, none of it stored, none of it trained.",
+  "rows": [
+    {
+      "bug": "lis",
+      "site": "length + 1",
+      "line": 14,
+      "candidates": 399,
+      "probes": 29,
+      "executions": 11571,
+      "chosen_queries": 3,
+      "survivors": 1,
+      "survivor_expression": "max(length + 1, longest)",
+      "survivor_agrees_with_the_reference_on_held_out": "26/26",
+      "bits_resolved": 8.64,
+      "stage": "IDENTIFIED_AND_CORRECT"
+    },
+    {
+      "bug": "mergesort",
+      "site": "len(arr) == 0",
+      "line": 17,
+      "candidates": 399,
+      "probes": 30,
+      "executions": 11970,
+      "chosen_queries": 2,
+      "survivors": 3,
+      "survivor_expression": null,
+      "survivor_agrees_with_the_reference_on_held_out": null,
+      "bits_resolved": 7.06,
+      "stage": "NOT_IDENTIFIED"
+    },
+    {
+      "bug": "kth",
+      "site": "kth(above, k)",
+      "line": 9,
+      "candidates": 400,
+      "probes": 16,
+      "executions": 6400,
+      "chosen_queries": 2,
+      "survivors": 1,
+      "survivor_expression": "(above)[(num_lessoreq)]",
+      "survivor_agrees_with_the_reference_on_held_out": "7/14",
+      "bits_resolved": 8.64,
+      "stage": "IDENTIFIED_BUT_WRONG_ON_HELD_OUT"
+    },
+    {
+      "bug": "get_factors",
+      "site": "int(n ** 0.5) + 1",
+      "line": 6,
+      "candidates": 399,
+      "probes": 25,
+      "executions": 9975,
+      "chosen_queries": 2,
+      "survivors": 1,
+      "survivor_expression": "(int(n ** 0.5)) + (n)",
+      "survivor_agrees_with_the_reference_on_held_out": "22/23",
+      "bits_resolved": 8.64,
+      "stage": "IDENTIFIED_BUT_WRONG_ON_HELD_OUT"
+    },
+    {
+      "bug": "next_permutation",
+      "site": "perm[j] < perm[i]",
+      "line": 6,
+      "candidates": 399,
+      "probes": 23,
+      "executions": 9177,
+      "chosen_queries": 4,
+      "survivors": 2,
+      "survivor_expression": null,
+      "survivor_agrees_with_the_reference_on_held_out": null,
+      "bits_resolved": 7.64,
+      "stage": "NOT_IDENTIFIED"
+    },
+    {
+      "bug": "possible_change",
+      "site": "total < 0",
+      "line": 8,
+      "candidates": 399,
+      "probes": 30,
+      "executions": 11970,
+      "chosen_queries": 1,
+      "survivors": 0,
+      "survivor_expression": null,
+      "survivor_agrees_with_the_reference_on_held_out": null,
+      "bits_resolved": 8.64,
+      "stage": "NOT_IDENTIFIED"
+    }
+  ],
+  "summary": {
+    "bugs": 6,
+    "identified_and_correct_on_held_out": 1,
+    "identified_but_wrong_on_held_out": 2,
+    "not_identified": 3,
+    "chosen_queries": {
+      "lis": 3,
+      "mergesort": 2,
+      "kth": 2,
+      "get_factors": 2,
+      "next_permutation": 4,
+      "possible_change": 1
+    }
+  },
+  "what_the_failures_are_and_are_not": "None of the three failures is an identification failure. `possible_change` loses every candidate on the first probe: the fix is not in the pool at the chosen site, so no number of queries can find it. `mergesort` and `next_permutation` stop with 3 and 2 survivors that no probe in the pool separates -- the pool is not discriminative enough, which is a property of the material, not of the evidence. `kth` converges to one candidate that is wrong on 7 of 14 held-out probes, at a site where the pool cannot express the fix at all.",
+  "the_rule_this_establishes": "A capability claim is only as strong as its held-out agreement. \"Identified\" without held-out probes is a corpus artifact -- the same failure this tree has had to retract twice."
+}
