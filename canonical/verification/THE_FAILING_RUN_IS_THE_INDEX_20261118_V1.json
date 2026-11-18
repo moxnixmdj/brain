@@ -1,0 +1,312 @@
+{
+ "schema": "BRAIN_THE_FAILING_RUN_IS_THE_INDEX_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "date": "2026-11-18",
+ "title": "Instant learning is retention, not identification: the failing run's own values index the fix. On click@1b0e19f505 the human fix is derived from the trace at rank 0 (2 of 119 tests survive) with 5 candidates evaluated, where the text-proximity pool needed a 400-candidate pool to place it at rank 1.",
+ "the_answer": {
+  "retention": "Solved, and the tree's law stands: O(machines x adaptation) + O(requests), crossover at the 2nd-3rd request (INSTANT_LEARNING_IN_A_NEW_ENVIRONMENT_20261116_V1). Nothing here contradicts it.",
+  "identification": "Not solved by retention and not solvable by it: one demonstration is the maximum-variance estimator, and a single trace is consistent with exponentially many hypotheses. Repetition of a sample that cannot separate hypotheses cannot separate them.",
+  "the_claim_that_is_false": "\"Give it the actions once and everything on a computer is solved.\" The action vocabulary is not what fails on a computer, and the fix is usually not the site's own expression.",
+  "why_one_shot_is_only_sound_with_a_verifier": "Retention makes a wrong generalization permanent in one step. Where an exact verifier stands at capture (tests, exit codes, state checks) one-shot learning is sound; where the verifier is a glance or a judge model it is a coin flip made permanent."
+ },
+ "external_evidence_2026": {
+  "osworld_2_0": {
+   "source": "OSWorld 2.0: Benchmarking Computer Use Agents on Long-Horizon Real-World Tasks (arXiv 2606.29537, 2026)",
+   "binary_completion_best": 0.206,
+   "partial_score_best": 0.548,
+   "failure_share": {
+    "final_state_exactness_failure": [
+     0.843,
+     0.954
+    ],
+    "premature_stop_or_false_done": [
+     0.75,
+     0.833
+    ],
+    "gui_grounding_issue": [
+     0.204,
+     0.611
+    ]
+   },
+   "their_sentence": "\"The failure is not a missing click; it is stale grounding.\"",
+   "reading": "The dominant failure is final-state verification and grounding -- identification -- not the ability to operate the GUI. Showing an agent each action once teaches the part that already works."
+  },
+  "repair_literature": {
+   "sources": [
+    "DynaFix (arXiv 2512.24635)",
+    "DAIRA (arXiv 2603.22048)",
+    "Kumushi (arXiv 2605.04251)"
+   ],
+   "reading": "2026 repair work has moved to execution-level dynamic information -- traces, variable states, crash paths -- because static context does not identify a fault. All three feed that trace to a model. This round derives the patch from the trace with no model, and measures the difference."
+  },
+  "version_space": {
+   "source": "Guiding Program Synthesis by Learning to Generate Examples (ICLR 2020) + version-space algebra; STUN",
+   "reading": "A single example leaves an exponential candidate set; the resolution is a distinguishing input that splits the survivors, not another example of the same kind. This tree already has the query machinery (how_many_hypotheses_survive_an_observation_v1, the_experiment_that_identifies_v1)."
+  }
+ },
+ "the_build": {
+  "tool": "canonical/tools/the_failing_run_names_the_expression_v1.py",
+  "mechanism": "Run the failing test under sys.settrace, record the value of every pure expression in the file (no calls, so the trace cannot perturb the run), then walk one causal chain: the failure quotes a string -> that string's source is an f-string -> the f-string's argument evaluated to X on that line -> the guard above it let X through -> the fix excludes X there.",
+  "candidates_evaluated_per_site": 5,
+  "click_1b0e19f505": {
+   "failing_test": "tests/test_options.py::test_missing_envvar",
+   "failure_quotes": "\" (env var: 'None')\"",
+   "blamed": {
+    "line": 2680,
+    "expr": "self.envvar",
+    "value": "None",
+    "type": "NoneType"
+   },
+   "guard": {
+    "line": 2679,
+    "text": "self.show_envvar"
+   },
+   "candidate_0": "(self.show_envvar) and (self.envvar) is not None",
+   "human_fix": "self.show_envvar and self.envvar is not None",
+   "human_fix_rank": 0,
+   "consistent_candidates": 2,
+   "tests_in_file": 119,
+   "trace_records": 5180
+  },
+  "why_rank_0_is_not_luck": "The candidate is not near the site by text distance; it is implied by the trace. Proximity found the same fix at rank 1 only because the blamed value is printed one line below the guard; the trace does not care where the print is."
+ },
+ "head_to_head": {
+  "population": "the same 29 real commits, same oracles, same sandbox, same dependency set",
+  "blame_index": {
+   "stages": {
+    "NO_BLAME__THE_FAILURE_CARRIES_NO_VALUE_THE_RUN_PRODUCED": 14,
+    "MEASURED": 4,
+    "NO_ORACLE__THE_POST_FIX_TESTS_PASS_ON_THE_PARENT": 4,
+    "SUITE_DID_NOT_RUN": 4,
+    "NO_GUARD_ABOVE_THE_BLAMED_VALUE": 3
+   },
+   "measured": 4,
+   "identified": 0,
+   "human_fix_at_rank_0": 1,
+   "candidates_evaluated": 5,
+   "seconds": 80.1,
+   "rows": [
+    {
+     "repo": "click",
+     "commit": "1b0e19f505",
+     "blamed": {
+      "line": 2680,
+      "expr": "self.envvar",
+      "value": "None",
+      "type": "NoneType"
+     },
+     "guard": "self.show_envvar",
+     "consistent_candidates": 2,
+     "human_fix": "self.show_envvar and self.envvar is not None",
+     "human_fix_rank": 0
+    },
+    {
+     "repo": "click",
+     "commit": "bf1e8be90c",
+     "blamed": {
+      "line": 2830,
+      "expr": "help",
+      "value": "'name flag'",
+      "type": "str"
+     },
+     "guard": "extra",
+     "consistent_candidates": 0,
+     "human_fix": "default_value",
+     "human_fix_rank": null
+    },
+    {
+     "repo": "click",
+     "commit": "40830087dd",
+     "blamed": {
+      "line": 1081,
+      "expr": "e.exit_code",
+      "value": "0",
+      "type": "int"
+     },
+     "guard": "standalone_mode",
+     "consistent_candidates": 0,
+     "human_fix": "is_flag and default_is_missing and (not self.required)",
+     "human_fix_rank": null
+    },
+    {
+     "repo": "httpx",
+     "commit": "e63b6594f2",
+     "blamed": {
+      "line": 299,
+      "expr": "host",
+      "value": "'023b76x43144'",
+      "type": "str"
+     },
+     "guard": "IPv4_STYLE_HOSTNAME.match(host)",
+     "consistent_candidates": 1,
+     "human_fix": "'^[0-9]+\\\\.[0-9]+\\\\.[0-9]+\\\\.[0-9]+$'",
+     "human_fix_rank": null
+    }
+   ]
+  },
+  "proximity_index": {
+   "stages": {
+    "MEASURED": 14,
+    "FIX_LINE_DOES_NOT_PARSE": 6,
+    "FIX_IS_NOT_A_SINGLE_EXPRESSION": 5,
+    "NO_ORACLE__THE_POST_FIX_TESTS_PASS_ON_THE_PARENT": 2,
+    "SUITE_DID_NOT_RUN": 2
+   },
+   "measured": 14,
+   "identified": 0,
+   "pool": 400,
+   "seconds": 265.7,
+   "rows": [
+    {
+     "repo": "click",
+     "commit": "a2ac5839f2",
+     "blamed": null,
+     "guard": null,
+     "consistent_candidates": 0,
+     "human_fix": "'w'",
+     "rank_in_full_pool": null
+    },
+    {
+     "repo": "click",
+     "commit": "d340b0c120",
+     "blamed": null,
+     "guard": null,
+     "consistent_candidates": 0,
+     "human_fix": "isinstance(default_value, str) and default_value == ''",
+     "rank_in_full_pool": null
+    },
+    {
+     "repo": "click",
+     "commit": "1b0e19f505",
+     "blamed": null,
+     "guard": null,
+     "consistent_candidates": 2,
+     "human_fix": "self.show_envvar and self.envvar is not None",
+     "rank_in_full_pool": 1
+    },
+    {
+     "repo": "click",
+     "commit": "bf1e8be90c",
+     "blamed": null,
+     "guard": null,
+     "consistent_candidates": 0,
+     "human_fix": "default_value",
+     "rank_in_full_pool": 396
+    },
+    {
+     "repo": "click",
+     "commit": "40830087dd",
+     "blamed": null,
+     "guard": null,
+     "consistent_candidates": 0,
+     "human_fix": "is_flag and default_is_missing and (not self.required)",
+     "rank_in_full_pool": null
+    },
+    {
+     "repo": "click",
+     "commit": "ee56925bc4",
+     "blamed": null,
+     "guard": null,
+     "consistent_candidates": 0,
+     "human_fix": "is_flag and isinstance(self.type, types.BoolParamType)",
+     "rank_in_full_pool": null
+    },
+    {
+     "repo": "click",
+     "commit": "42ee8a1f60",
+     "blamed": null,
+     "guard": null,
+     "consistent_candidates": 0,
+     "human_fix": "[self.options_metavar] if self.options_metavar else []",
+     "rank_in_full_pool": null
+    },
+    {
+     "repo": "httpx",
+     "commit": "90538a3b46",
+     "blamed": null,
+     "guard": null,
+     "consistent_candidates": 0,
+     "human_fix": "request.url.raw_path.split(b'?')",
+     "rank_in_full_pool": null
+    },
+    {
+     "repo": "httpx",
+     "commit": "e63b6594f2",
+     "blamed": null,
+     "guard": null,
+     "consistent_candidates": 0,
+     "human_fix": "'^[0-9]+\\\\.[0-9]+\\\\.[0-9]+\\\\.[0-9]+$'",
+     "rank_in_full_pool": null
+    },
+    {
+     "repo": "requests",
+     "commit": "47914226c2",
+     "blamed": null,
+     "guard": null,
+     "consistent_candidates": 0,
+     "human_fix": "_netrc and any(_netrc)",
+     "rank_in_full_pool": null
+    },
+    {
+     "repo": "requests",
+     "commit": "658c10e84a",
+     "blamed": null,
+     "guard": null,
+     "consistent_candidates": 0,
+     "human_fix": "(u'*', u'.')",
+     "rank_in_full_pool": null
+    },
+    {
+     "repo": "requests",
+     "commit": "60ea7f0c2d",
+     "blamed": null,
+     "guard": null,
+     "consistent_candidates": 0,
+     "human_fix": "self.rebuild_proxies(request, self.proxies)",
+     "rank_in_full_pool": null
+    },
+    {
+     "repo": "requests",
+     "commit": "dc75b3ca0b",
+     "blamed": null,
+     "guard": null,
+     "consistent_candidates": 0,
+     "human_fix": "'pytest>=3'",
+     "rank_in_full_pool": null
+    },
+    {
+     "repo": "tqdm",
+     "commit": "24b9e1e08a",
+     "blamed": null,
+     "guard": null,
+     "consistent_candidates": 0,
+     "human_fix": "'min(map(length_hint, iterables), default=0)'",
+     "rank_in_full_pool": null
+    }
+   ]
+  }
+ },
+ "errata": {
+  "corrected_claim": "THE_SITE_IS_NOT_WHERE_THE_FIX_COMES_FROM_20261118_V1 reported \"10 of 29 commits have no oracle: the post-fix tests pass on the parent\".",
+  "what_was_actually_true": "Most of those suites never ran. `requests` and `httpx` conftests import urllib3/trustme/uvicorn/trio, tqdm's pyproject sets `filterwarnings = error` so a pytest-asyncio warning became INTERNALERROR, and a changed line that is one entry of a dict literal (`\"raw_path\": ...`) parsed as nothing at all. An empty verdict map was read as a passing suite.",
+  "the_fix": "run_tests_full returns the verdicts AND the output; an empty map or a collection error is SUITE_DID_NOT_RUN with the tail recorded; dict-entry fragments are wrapped and parsed; the pytest invocation pins the asyncio fixture loop scope. All three are pinned by tests.",
+  "why_it_matters": "A wrong NO_ORACLE is a silent success report: it says the project's tests pass on the parent when in fact nothing was executed. It is the same class of defect as the 100% verdict from the shallowest change point."
+ },
+ "falsifier": {
+  "claim": "On this population the blame index must identify at least as many commits as the proximity index AND at a lower evaluated-candidate cost.",
+  "if_false": "the index is not the bottleneck; this file is superseded rather than patched."
+ },
+ "limits": [
+  "11 of 29 commits return NO_BLAME: their failure carries no produced value (transformations, type tests, data constants). That is the next mechanism's target.",
+  "8 of 29 could not run their suite under this sandbox's dependency set (SUITE_DID_NOT_RUN), and are counted as neither success nor failure.",
+  "2 of 29 blame a value that has no guard above it (NO_GUARD_ABOVE_THE_BLAMED_VALUE).",
+  "the blame chain currently only closes when the wrong value is formatted into the message the failure quotes; exceptions, exit codes and non-formatted stdout are not yet blamed.",
+  "producer-run sandbox measurement; independent reproduction open."
+ ],
+ "commands": [
+  "python3 canonical/tools/the_failing_run_names_the_expression_v1.py --repo /tmp/repos/click --commit 1b0e19f505 --source src/click/core.py --test tests/test_options.py",
+  "python3 canonical/tools/the_failing_run_names_the_expression_v1.py --sweep /tmp/commits.json --test-seconds 20 --receipt /tmp/blame.json",
+  "python3 canonical/tools/identify_a_real_bugs_fix_v1.py --sweep /tmp/commits.json --budget 12 --test-seconds 20 --receipt /tmp/prox.json",
+  "python3 -m pytest canonical/tests/test_the_failing_run_names_the_expression_v1.py canonical/tests/test_identify_a_real_bugs_fix_v1.py canonical/tests/test_what_a_real_fix_needs_from_the_site_v1.py -q"
+ ]
+}

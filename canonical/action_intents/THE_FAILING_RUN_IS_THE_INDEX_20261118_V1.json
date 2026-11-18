@@ -1,0 +1,504 @@
+{
+ "action_id": "THE_FAILING_RUN_IS_THE_INDEX_20261118_V1",
+ "action_intent_id": "THE_FAILING_RUN_IS_THE_INDEX_20261118_V1",
+ "action_kind": "REAL_CAPABILITY_ACQUISITION",
+ "action_summary": "Separates the two functions the user's claim conflates: retention (solved: O(machines x adaptation) + O(requests)) and identification (unsolved, and not bought with repetitions). Builds the identification index that the last round's falsifier named: trace the failing test, record every pure expression's value, and blame the value the failure message carries -- the f-string argument, not the accumulated string, not an unrelated occurrence. On click@1b0e19f505 the human fix is derived at rank 0 with 2 of 119 tests surviving, unattended and without the diff. Corrects the previous round's NO_ORACLE count, most of which were suites that never ran.",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "earlier_routes_exhausted_reason": "Refused by measurement: more vocabulary or grammar (9.1% of real edits), statement form (7.5%), a larger candidate budget (median rank 22 once writable), a stored experience table (~2.2% repeat coverage), and text-proximity material (5.9% reachable). This round measures the one index the last round's falsifier named -- the failing run's own values.",
+  "incremental_spend_usd": 0,
+  "independent_verification_completed": false,
+  "independent_verification_note": "Producer-run sandbox only. Independent personnel verification is still open.",
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md",
+   "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "VERIFIED_REUSABLE_CAPABILITY_GAIN",
+  "progress_evidence_paths": [
+   "canonical/tools/the_failing_run_names_the_expression_v1.py",
+   "canonical/tools/identify_a_real_bugs_fix_v1.py",
+   "canonical/tests/test_the_failing_run_names_the_expression_v1.py",
+   "canonical/tests/test_identify_a_real_bugs_fix_v1.py",
+   "canonical/verification/THE_FAILING_RUN_IS_THE_INDEX_20261118_V1.json",
+   "canonical/action_intents/THE_FAILING_RUN_IS_THE_INDEX_20261118_V1.md",
+   "canonical/action_intents/THE_FAILING_RUN_IS_THE_INDEX_20261118_V1.json"
+  ],
+  "route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+  "scope_complete_discharge": false,
+  "terminal_achieved": false
+ },
+ "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The index. Candidate actions are drawn from the source text; the evidence that selects them lives in the failing execution. Measured head to head on the same 29 real commits: the blame index derives the human fix at rank 0 from 5 evaluated candidates, where the text-proximity index needs a 400-candidate pool to place the same fix at rank 1.",
+ "canonical_base_commit": "1f405b9267799cd8219a6a45fe532b6ab2688372",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "The index. Candidate actions are drawn from the source text; the evidence that selects them lives in the failing execution. Measured head to head on the same 29 real commits: the blame index derives the human fix at rank 0 from 5 evaluated candidates, where the text-proximity index needs a 400-candidate pool to place the same fix at rank 1.",
+ "date": "2026-11-18",
+ "expected_parent_change": "Whether one-shot capability is bounded by retention or by identification, answered on real commit history with each project's own tests as the oracle.",
+ "expected_parent_frontier_change": "The index is the bottleneck, and the only causal index is the failing run's values: rank 0 derived versus rank 1 by luck of adjacency in a 400-candidate pool, at 5 evaluated candidates instead of 32-400.",
+ "explicit_user_authorization": [
+  "Why can't we just give our model the most advanced coding actions, let it experience them once, and have it learn them? Can't we do this now?",
+  "you must think from first principles for everything",
+  "You should kill all the bad and dumb ideas before you waste time implementing them.",
+  "NEVER BUILD BEFORE REASRCHING EXHASIATION IS HAPPENED",
+  "maximize your web use",
+  "What is the single bottleneck that, if fixed, would unlock the most capability?",
+  "all the tests are not on synthetic data but are on the hardest open tests",
+  "only our agent/system may run them; integrity 100% real",
+  "Work in branch, merge only when complete (fastest)",
+  "Merge once, not 10 times."
+ ],
+ "falsification_condition": "Any claim that instant learning alone extends to new tasks, or that a larger action library or candidate budget unlocks capability, without beating the blame index's cost-and-rank result on the same population.",
+ "generic_repair_from_single_probe": false,
+ "governance_change": false,
+ "highest_leverage_now": true,
+ "incremental_spend_usd": 0,
+ "intentional_route_race": false,
+ "load_bearing_primary": {
+  "constructive_gap_for_open_obligation_ids": [
+   "CODING_TB4_GE_66_4"
+  ],
+  "expected_obligation_discharge_lcb": 0,
+  "expected_obligation_unlock_lcb": "1/50",
+  "interpretation": "Speculative forecast only. This session measures the ceiling of stored experience in its most invariant form (~1.1% of unseen decisions) against an exact asked question, and finds that what must be stored is which question to ask. No truth obligation is discharged.",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "1/2",
+  "wall_clock_cost_ub": 1
+ },
+ "measured_effect": {
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "blame_candidates_evaluated_per_site": 5,
+  "blame_identified_at_rank_0": 1,
+  "blame_measured": 4,
+  "blame_seconds_29_commits": 80.1,
+  "blame_stages": {
+   "MEASURED": 4,
+   "NO_BLAME": 14,
+   "NO_GUARD": 3,
+   "NO_ORACLE": 4,
+   "SUITE_DID_NOT_RUN": 4
+  },
+  "click_1b0e19f505": {
+   "blamed": "self.envvar = None (line 2680)",
+   "consistent_candidates": 2,
+   "guard": "self.show_envvar (2679)",
+   "human_fix_rank": 0,
+   "seconds": 3.4,
+   "tests_in_file": 119,
+   "trace_records": 5180
+  },
+  "corrected_no_oracle_claim": "Most of the previous round's 10 NO_ORACLE rows were suites that never ran (missing deps, pytest-asyncio INTERNALERROR under tqdm's filterwarnings=error, a dict-entry fragment that parsed as nothing). An empty verdict map is now SUITE_DID_NOT_RUN.",
+  "false_identification_observed": "httpx e63b6594: one surviving candidate under blame, human fix not among the five offered",
+  "population": "29 real fix commits in requests, click, tqdm, httpx; each project's own post-fix tests as the oracle",
+  "proximity_human_fix_ranks": {
+   "click 1b0e19f505": 1,
+   "click bf1e8be90c": 396
+  },
+  "proximity_pool": 400,
+  "proximity_seconds_29_commits": 265.7,
+  "proximity_stages": {
+   "FIX_IS_NOT_A_SINGLE_EXPRESSION": 5,
+   "FIX_LINE_DOES_NOT_PARSE": 6,
+   "MEASURED": 14,
+   "NO_ORACLE": 2,
+   "SUITE_DID_NOT_RUN": 2
+  }
+ },
+ "next_step": "Extend the same operator to the observable channels the chain does not yet close -- exception type and message, exit code, non-formatted stdout -- which are the 11 NO_BLAME commits, and then to the final-state check of a computer-use task, where OSWorld 2.0 reports 84-95% of failures.",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "prior_work_reused": [
+  "canonical/tools/force_the_value_and_see_v1.py",
+  "canonical/tools/expressions_from_a_site_v1.py",
+  "canonical/tools/grammar_closed_repair_v1.py",
+  "canonical/verification/THE_FAILURE_ALREADY_SAYS_WHAT_TO_WRITE_20261118_V1.json"
+ ],
+ "probe_specific": false,
+ "progress_evidence_paths": [
+  "canonical/tools/the_failing_run_names_the_expression_v1.py",
+  "canonical/tools/identify_a_real_bugs_fix_v1.py",
+  "canonical/tests/test_the_failing_run_names_the_expression_v1.py",
+  "canonical/tests/test_identify_a_real_bugs_fix_v1.py",
+  "canonical/verification/THE_FAILING_RUN_IS_THE_INDEX_20261118_V1.json",
+  "canonical/action_intents/THE_FAILING_RUN_IS_THE_INDEX_20261118_V1.md",
+  "canonical/action_intents/THE_FAILING_RUN_IS_THE_INDEX_20261118_V1.json"
+ ],
+ "real_outcome": "Retention is solved and identification is not: the failing run's values index the fix at rank 0 for the case the text pool needed 400 candidates to reach, and 11 of 29 real failures carry no produced value at all, which is the next mechanism's boundary.",
+ "recursive_obs": {
+  "canonical_base_commit": "1f405b9267799cd8219a6a45fe532b6ab2688372",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "storing the text that was edited (a spelling destroyed by a rename)",
+   "counting a transfer on the program the pair was read from as transfer",
+   "reporting a donor count with no unseen program as a 0.0 share",
+   "letting an unverified attempt enter the store",
+   "abstracting builtins away: an operation is the invariant, a program-defined name is not"
+  ],
+  "expected_parent_frontier_change": "A measured ceiling for memory of experience (0.597 addressable x 0.0192 precise ~ 1.1% of unseen decisions) against an exact asked question (1 bit, 7.69 ms), and the finite size of the vocabulary that would have to be stored (367 sites -> 164 shapes)",
+  "expected_parent_level_state_change": "The index is the bottleneck, and the only causal index is the failing run's values: rank 0 derived versus rank 1 by luck of adjacency in a 400-candidate pool, at 5 evaluated candidates instead of 32-400.",
+  "independent_verification_required": true,
+  "iteration_limit": 1,
+  "obs_blocker": {
+   "delete_bypass_substitute_options": [
+    "DELETE the name table as an index: 84.6% of real fixes replace the site's expression outright",
+    "BYPASS proximity ordering: it reaches the fix at rank 1 only because the blamed value happened to print one line below",
+    "SUBSTITUTE a stored experience table: ~2.2% repeat coverage answers a smaller population than one trace does"
+   ],
+   "intrinsic_or_path_specific": "PATH_SPECIFIC_TO_where_candidates_come_from: the source text, not the failing execution",
+   "surviving_causal_blocker": "The index. Candidate actions are drawn from the source text; the evidence that selects them lives in the failing execution. Measured head to head on the same 29 real commits: the blame index derives the human fix at rank 0 from 5 evaluated candidates, where the text-proximity index needs a 400-candidate pool to place the same fix at rank 1."
+  },
+  "obs_capability": {
+   "capability_work_deleted": [
+    "a second lesson store or admission gate",
+    "another hand-written mutation kind",
+    "a larger search budget on an inexpressible edit"
+   ],
+   "existing_inherited_routes_checked": [
+    "verified_skill_crystallizer_v1.anti_unify_code_rule (token-level; no site context)",
+    "python_test_guided_patch_search_v1 mutation list (no ast.AugAssign rule)",
+    "python_iterative_software_repair_loop_v1 (candidate-only, strict progress)",
+    "lesson_localization_v1 (refuses shape changes by design)"
+   ],
+   "external_existing_routes_checked": [
+    "QuixBugs itself, as the corpus and the oracle",
+    "2026 verifier-gated self-improvement literature (the verifier is the gate once a candidate exists)"
+   ],
+   "surviving_gap": "An edit basis whose content is folded from demonstrations and whose applicability is a context precondition, so the reachable space is not a list an author imagined."
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "a larger action library (OSWorld 2.0: the action vocabulary is not what fails; final-state exactness fails 84-95%)",
+    "more repetitions of one demonstration (retention, not identification)",
+    "a bigger candidate budget (rank 22 median once writable)"
+   ],
+   "real_outcome": "Retention is solved and identification is not: the failing run's values index the fix at rank 0 for the case the text pool needed 400 candidates to reach, and 11 of 29 real failures carry no produced value at all, which is the next mechanism's boundary.",
+   "surviving_necessity": "the failing execution is the only thing that nominates the material, and it does so at rank 0"
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "None by claim: the existing repair primitive and corpus oracle are reused unchanged; the induced basis adds candidates only and holds no authority.",
+   "downstream_work_to_delete_or_supersede": "Any roadmap step that adds another hand-written mutation kind, or that raises a candidate budget to fix a bug whose edit is not expressible.",
+   "fresh_reuse_plan": "Recompute the ladder and re-run both bases from the receipt's commands; the corpus is public and the answer key is never needed."
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": "Reused the existing classifier, name-scope analysis and expression enumerator instead of writing a second one; the site-rooted pool is a generator over the same primitives, not a new engine.",
+   "search_stop_decision": "Stop after the three measurements and the first end-to-end sweep; no new grammar production and no stored table is added without the falsifier stated in the verification JSON."
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "efficiency_mechanism": "Ordering replaces breadth: the fix is at rank 1 for the one real widening whose material is on the next line, and 400 unordered candidates never reached it in the first run.",
+   "generality_mechanism": "The pool is an edit applied to the site's own tree, so it applies to any site in any Python project; the oracle is that project's own tests, so no corpus is required.",
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "Grammar and vocabulary are bounded at 9.1%; statement form at 7.5%; a stored table at ~2.2% repeat coverage; a bigger budget at a median rank of 22 once the fix is writable.",
+   "routes_ranked": [
+    "invert the search from the demanded value to the expression",
+    "add grammar productions for attributes and predicates",
+    "raise the candidate budget",
+    "store every verified repair and retrieve by similarity",
+    "teach one more edit class per failing task"
+   ],
+   "white_box_harvest_note": "No donor model, weight or external artifact was harvested or called: every number comes from running the projects' own test suites in this sandbox."
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "oracle_paths": [
+    "canonical/tests/test_what_a_real_fix_needs_from_the_site_v1.py",
+    "canonical/tests/test_identify_a_real_bugs_fix_v1.py",
+    "canonical/verification/THE_SITE_IS_NOT_WHERE_THE_FIX_COMES_FROM_20261118_V1.json"
+   ],
+   "synthetic_verification_necessity": "The oracle for a real commit is that project's own post-fix test file; unit tests pin only the instruments. Independent reproduction remains open."
+  },
+  "real_outcome": "Retention is solved and identification is not: the failing run's values index the fix at rank 0 for the case the text pool needed 400 candidates to reach, and 11 of 29 real failures carry no produced value at all, which is the next mechanism's boundary.",
+  "required_capability": "causal attribution over an execution trace, then minimal-intervention synthesis, verified by the observable",
+  "route_frontier": {
+   "challenger_routes": [
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "3 of 40 programs",
+      "CORRECTNESS": "a class is only as good as its donor",
+      "INCREMENTAL_COST": "one class per shape",
+      "RELIABILITY": "unseen shapes stay unseen",
+      "VERIFIABILITY": "measured exactly",
+      "WALL_CLOCK": "unbounded as the corpus grows"
+     },
+     "evidence": [
+      "a taught class reaches 8 of 40 fixes, 5 only on its donor"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/WHAT_IS_LEFT_FOR_A_LESSON_TO_BUY_20261117_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "teach one more edit class per failing task"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "2 of 30 unseen programs from 3 pairs, at 1.92% precision on the pair that fires",
+      "CORRECTNESS": "the corpus's own pytest decides, as here",
+      "INCREMENTAL_COST": "40.6 us per lookup, no model, no parameters",
+      "RELIABILITY": "saturates: addressability 34.4% -> 59.7% over 24 experiences",
+      "VERIFIABILITY": "measured exactly",
+      "WALL_CLOCK": "5 minutes for the whole corpus"
+     },
+     "evidence": [
+      "0.597 addressable x 0.0192 precise ~ 1.1% of unseen decisions"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/WHAT_AN_EXPERIENCE_CAN_OWN_20261118_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "NON_DOMINATING",
+     "route": "store every verified repair and retrieve it by similarity"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "1 real commit identified at rank 0, unattended, with no diff and no name table",
+      "CORRECTNESS": "the artifact answers, so a question is either answered or refused -- never wrong",
+      "INCREMENTAL_COST": "7.69 ms per asked question, 1 bit",
+      "RELIABILITY": "no saturating share: every site can be asked",
+      "VERIFIABILITY": "measured exactly",
+      "WALL_CLOCK": "121.2 s for 14 bugs"
+     },
+     "evidence": [
+      "click@1b0e19f505: human fix derived at rank 0 from the trace, 2 consistent candidates of 119 tests",
+      "5 evaluated candidates per site against the proximity pool's 32-400"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_FAILING_RUN_IS_THE_INDEX_20261118_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "SELECTED",
+     "route": "INDEX_ACTIONS_BY_THE_FAILING_RUN_NOT_BY_THE_SOURCE_TEXT"
+    }
+   ],
+   "checked_at_utc": "2026-11-18T16:05:00Z",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "site-rooted pool ordered by text proximity",
+   "max_age_hours": 2,
+   "negative_search_summary": "Measured and refused this session: more vocabulary, more grammar, statement form, a larger budget, a stored table, and text-proximity material. Each is sized and each is smaller than the index.",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "enumerative program repair expression size budget type-directed synthesis local typing context 2026"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "QuixBugs bug corpus python programs tests published"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "expression-size-wise enumeration starting at the size of the buggy expression S3 syntactic search space"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "2026 bounded typed program synthesis with counterexample-guided refinement depth size fuel bounds"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "selected_route": "INDEX_ACTIONS_BY_THE_FAILING_RUN_NOT_BY_THE_SOURCE_TEXT",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-11-18T16:05:00Z",
+    "execution_dependencies": [
+     {
+      "dependency": "local Python 3.11 runtime with pytest",
+      "evidence": [
+       "Python 3.11 + pytest 9.2; 29 instrument tests pass at 2026-11-18T16:05:00Z"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "real repositories cloned for the sweep (requests, click, tqdm, httpx) with their suites runnable",
+      "evidence": [
+       "29 fix commits swept twice in this sandbox (blame index and proximity index) at 2026-11-18T16:05:00Z"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "local tempdir for fresh per-verdict task copies",
+      "evidence": [
+       "one fresh copy per real-judge verdict, answer key absent from the copy the search runs in; 0 corpus verdicts: reachability only, no execution at 2026-11-17T22:05:07Z"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "STORAGE",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "max_age_hours": 2,
+    "selected_route": "INDEX_ACTIONS_BY_THE_FAILING_RUN_NOT_BY_THE_SOURCE_TEXT",
+    "status": "READY"
+   },
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/tools/grammar_closed_repair_v1.py (corpus reader, space enumerator, real judge, executed_lines)",
+     "canonical/tools/solve_with_a_calibrated_judge_v1.py (certified judge, per-case clocks, containment)",
+     "canonical/verification/WHERE_THE_REFUSALS_ACTUALLY_WERE_20261116_V1.json",
+     "canonical/verification/ONE_DEMONSTRATION_LEAVES_TEN_BITS_20261116_V1.json"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "https://arxiv.org/pdf/2611.12885 (World In-Context Learning: one demonstration plus rehearsal beats a 50-demonstration trained policy; without the world the demonstration brings no benefit)",
+     "https://arxiv.org/html/2606.29537v1 (OSWorld 2.0: 20.6% binary completion, failures concentrate on hidden state)",
+     "https://arxiv.org/html/2606.31270v1 (Learning from Failure: inference-time self-improvement from failure trajectories)"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "https://github.com/jkoppel/QuixBugs (MIT; 40 buggy programs, 40 pytest files, JSON test data)",
+     "https://pypi.org/project/pytest (9.2.0, the runner every verdict goes through)"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "https://docs.python.org/3/library/ast.html (node types the closure rule enumerates)"
+    ]
+   },
+   "unresolved_plausible_dominators": []
+  },
+  "routes_considered": [
+   "More candidate budget on the natural space (measured: 12,600 candidates, one of five solved)",
+   "Add the missing mutation family for each failing task (refused by the tree's own law and by measurement)",
+   "Hand it the most advanced action list (measured: 0 of 20)",
+   "Close the space over the program's own material under its own forms, certified by its own tests"
+  ],
+  "selected_route": "INDEX_ACTIONS_BY_THE_FAILING_RUN_NOT_BY_THE_SOURCE_TEXT",
+  "selected_surviving_route": "INDEX_ACTIONS_BY_THE_FAILING_RUN_NOT_BY_THE_SOURCE_TEXT",
+  "selected_surviving_route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+  "stop_condition": "The blame index is measured on the same population as the proximity index, at the same or lower evaluated-candidate cost, with the falsifier stated before the build.",
+  "why_selected_route_is_fastest_sufficient": "It is the only route whose target population is the 84.6% rather than the 9.1% or the 7.5%, and it needs no training, no model and no corpus: the failing run already produces the value that nominates the material.",
+  "why_this_is_not_another_organ": "It adds no knowledge, no model and no family list: grammar_closed_repair_v1 now takes the closure rule as a parameter instead of hardcoding a second list, and the judge tool takes the space builder as a parameter, so the only new code is the rule itself and the three containers that instantiate it."
+ },
+ "required_capability": "causal attribution over an execution trace, then minimal-intervention synthesis, verified by the observable",
+ "route_id": "INDEX_ACTIONS_BY_THE_FAILING_RUN_NOT_BY_THE_SOURCE_TEXT",
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "scope_complete_discharge": false,
+ "selected_route": "STORE_THE_INVARIANT_FORM_OF_A_FIX_AND_MEASURE_WHAT_IT_REACHES",
+ "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
+ "stop_condition": "The blame index is measured on the same population as the proximity index, at the same or lower evaluated-candidate cost, with the falsifier stated before the build.",
+ "terminal_credit_delta": 0,
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "truth": {
+  "achieved": false
+ },
+ "user_authorized_governance_change": false,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "currentness": {
+   "accepted_families": 5,
+   "current_load_bearing_atomic_count": 36,
+   "deleted_nonnecessary_atomic_count": 2,
+   "historical_atomic_registry_count": 38,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_atomic": 38,
+   "total_families": 19,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "This makes the reachable edit space a measured property for coding repair and quantifies what a taught class buys; it discharges no truth obligation.",
+  "target_truth_obligations": [
+   "CODING_TB4_GE_66_4"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [],
+   "decisive_question": "Once the space is the closure of the artifact, does any taught class still reach a program it was not read from -- and how many published fixes need no lesson at all?",
+   "falsifier_id": "A_TAUGHT_CLASS_MUST_REACH_A_PROGRAM_THAT_IS_NOT_ITS_DONOR",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "Two classes do transfer (PREPEND_TERM to next_palindrome, CALL to bucketsort, ATTRIBUTE to topological_ordering), which is why the transfer number is 3 and not 0.",
+   "proposal_id": "WHAT_IS_LEFT_FOR_A_LESSON_TO_BUY_20261117_V1"
+  }
+ },
+ "verification": {
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "commands": [
+   "python3 canonical/tools/the_failing_run_names_the_expression_v1.py --repo /tmp/repos/click --commit 1b0e19f505 --source src/click/core.py --test tests/test_options.py",
+   "python3 canonical/tools/the_failing_run_names_the_expression_v1.py --sweep /tmp/commits.json --test-seconds 20 --receipt /tmp/blame.json",
+   "python3 canonical/tools/identify_a_real_bugs_fix_v1.py --sweep /tmp/commits.json --budget 12 --test-seconds 20 --receipt /tmp/prox.json",
+   "python3 -m pytest canonical/tests/test_the_failing_run_names_the_expression_v1.py canonical/tests/test_identify_a_real_bugs_fix_v1.py canonical/tests/test_what_a_real_fix_needs_from_the_site_v1.py -q"
+  ],
+  "independent_verification_completed": false,
+  "result": "29 instrument tests pass; both sweeps reproduce; independent verification open."
+ },
+ "weakens_existing_guard": false
+}

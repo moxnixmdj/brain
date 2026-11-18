@@ -47,6 +47,19 @@ def test_a_compound_statement_line_parses_when_it_is_given_a_body():
     assert isinstance(with_body.body[0], ast.If)
 
 
+def test_a_dict_entry_fragment_parses_as_one_entry():
+    """httpx `90538a3b46` changes `"raw_path": request.url.raw_path,`, one entry of a dict literal.
+
+    It is not a statement and not an expression, and calling it unparseable hid a real one-line fix.
+    """
+    old = identify.parse_line('"raw_path": request.url.raw_path,')
+    new = identify.parse_line('"raw_path": request.url.raw_path.split(b"?")[0],')
+    changes = identify.needs.change_points(old, new)
+    assert len(changes) == 1, changes
+    found = ast.unparse(changes[0][2])
+    assert "raw_path" in found and "split" in found, found
+
+
 def test_the_material_for_a_guard_is_the_block_the_guard_controls():
     """The value that made the guard wrong is printed one line below it. Ring one, not ring four."""
     material = identify.proximity_material(SHOW_ENVVAR, 4, "self.show_envvar")
