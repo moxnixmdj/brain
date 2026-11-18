@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 532,
+  "knowledge_documents": 533,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 7056,
+  "research_index_records": 7059,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 452,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "084959dcd6ee7ee28a94e98b6d75b2736d7c5adb8127210f409e3a852421cd55"
+  "value": "6a78500bc34a8c55f5c3df09011a173f82b6824ff93d7a6493c07c43d09de205"
  },
  "engines": [
   {
@@ -53295,6 +53295,88 @@
     "learning",
     "solution",
     "use"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 10612,
+   "headings": [
+    "Instant learning is perfect. It is not the bottleneck.",
+    "The question, stated exactly as asked",
+    "What is real, and permanently real",
+    "What is not real: three walls, three numbers",
+    "Wall 1 — evidence. A memory cannot contain a comparison it never made.",
+    "Wall 2 — vocabulary. Killed today, by measurement, including my own two bugs.",
+    "Wall 3 — identity. The verifier cannot pick, so \"permanent\" has no referent.",
+    "The fourth wall, already counted: shape",
+    "The field says the same thing, with its own numbers",
+    "The single bottleneck, in one sentence",
+    "What is smart to do, ranked, and why each is the *ultimate* form rather than a first attempt",
+    "What I will measure next, on the hardest thing available here",
+    "What would be dishonest to claim today",
+    "Reproduce"
+   ],
+   "kind": "DOCUMENT",
+   "path": "INSTANT_LEARNING_IS_PERFECT_AND_IT_IS_NOT_THE_BOTTLENECK_20261116_V1.md",
+   "sha256": "6c63f62a131f57b0d3b49f47cbf905a55d3c85006020198986e1de52ef46052b",
+   "summary": "Round 14. Branch `arena/032d96f4-brain`, from `c88adba0`.",
+   "terms": {
+    "14": 4,
+    "17": 4,
+    "2026": 7,
+    "about": 5,
+    "actions": 4,
+    "agent": 6,
+    "already": 6,
+    "any": 5,
+    "because": 7,
+    "before": 5,
+    "cannot": 4,
+    "canonical": 5,
+    "checkable": 5,
+    "claim": 6,
+    "delta": 4,
+    "environment": 4,
+    "evidence": 9,
+    "exact": 4,
+    "failure": 4,
+    "field": 5,
+    "first": 4,
+    "instant": 5,
+    "instead": 5,
+    "learning": 7,
+    "measured": 6,
+    "memory": 5,
+    "must": 4,
+    "new": 4,
+    "no": 5,
+    "not": 31,
+    "nothing": 4,
+    "one": 11,
+    "only": 12,
+    "own": 9,
+    "permanently": 4,
+    "real": 8,
+    "round": 9,
+    "so": 5,
+    "supply": 4,
+    "term": 4,
+    "test": 5,
+    "they": 4,
+    "thing": 4,
+    "tree": 5,
+    "values": 4,
+    "verification": 4,
+    "wall": 7,
+    "zero": 8
+   },
+   "title": "Instant learning is perfect. It is not the bottleneck.",
+   "title_terms": [
+    "bottleneck",
+    "instant",
+    "learning",
+    "not",
+    "perfect"
    ]
   },
   {
@@ -86458,10 +86540,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1334,
+  "included_source_count": 1335,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "dc94f51828ce7e3c59ff7d8904ba14ccd6478cbca8dc0ae89389f0b2a3a3abf5"
+  "source_tree_digest": "13bffdd8c23f09ed6e4efca7f6949d9d70628b3a0e798b28d73b3d01629026e1"
  },
  "research_index": [
   {
@@ -168508,6 +168590,41 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/ENVIRONMENT_BASIS_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/ENVIRONMENT_BASIS_20261116_V1.json",
+   "schema": "BRAIN_ENVIRONMENT_BASIS_V1",
+   "sha256": "8b028e3825aa4a60bd6c7b5dcf504a59da3dfd33cdec5405a19612ed1ba34e6d",
+   "status": "",
+   "terms": {
+    "20261116": 1,
+    "basis": 1,
+    "environment": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/ENVIRONMENT_BASIS_WIDER_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/ENVIRONMENT_BASIS_WIDER_20261116_V1.json",
+   "schema": "BRAIN_ENVIRONMENT_BASIS_V1",
+   "sha256": "4e8b7de1081b32bab06f96759bee1f6d9d6060789aa02295c95b7efbd02ad6c2",
+   "status": "",
+   "terms": {
+    "20261116": 1,
+    "basis": 1,
+    "environment": 1,
+    "v1": 1,
+    "wider": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-10",
    "id": "research:canonical/verification/ESCAPE_ACTIVE_GAP_B_CAUSAL_RECLASSIFICATION_PUBLIC_VERIFY_20261010_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -241604,6 +241721,31 @@
     "token": 2,
     "v1": 2,
     "verified": 4
+   }
+  },
+  {
+   "action_id": "ENVIRONMENT_BASIS_AND_THE_VERIFIER_IS_THE_BOTTLENECK_20261116_V1",
+   "capability": false,
+   "date": "2026-11-16",
+   "id": "research:canonical/action_intents/ENVIRONMENT_BASIS_AND_THE_VERIFIER_IS_THE_BOTTLENECK_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/ENVIRONMENT_BASIS_AND_THE_VERIFIER_IS_THE_BOTTLENECK_20261116_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "8b08cbf34c1897bb47b4e97bb38c7a963a30bb1b9bf4bedfbf393df2d5caba16",
+   "status": "PRODUCED",
+   "terms": {
+    "20261116": 1,
+    "basis": 1,
+    "bottleneck": 1,
+    "environment": 1,
+    "environment_basis_and_the_verifier_is_the_bottleneck_20261116_v1": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "keep_every_repair_the_machinery_can_build_that_passes_the_commit_s_own_suite_then_read_the_set_as_a_version_space_and_emit_the_one_question_that_identifies_which_repair_was_meant": 1,
+    "memory_is_not_the_bottleneck__sixteen_of_seventeen_real_fix_commits_refuse_before_any_vocabulary_is_consulted__widening_the_supply_to_112_environment_derived_templates_buys_exactly_zero_reach__and_the_one_reachable_commit_s_own_suite_accepts_four_repairs_so_permanence_is_undefined_for_intent__therefore_the_binding_resource_is_a_checkable_claim__evidence_manufactured_by_intervention_and_a_demonstration_recorded_as_a_state_delta_not_as_a_gesture": 1,
+    "produced": 1,
+    "the_vocabulary_hypothesis_is_killed_by_measurement_and_the_evidence_hypothesis_is_sized__sixteen_of_seventeen_refuse_before_a_term_is_named_and_112_templates_add_nothing__so_the_next_organ_is_not_a_synthesizer_and_not_a_learner_but_a_verifier_acquisition_loop__demonstration_as_state_delta_plus_intervention_as_evidence_plus_the_discriminating_question_when_the_check_cannot_decide": 1,
+    "v1": 1,
+    "verifier": 1
    }
   },
   {
