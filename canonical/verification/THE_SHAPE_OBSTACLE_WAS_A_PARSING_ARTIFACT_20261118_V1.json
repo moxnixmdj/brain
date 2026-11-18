@@ -1,0 +1,384 @@
+{
+  "schema": "BRAIN_WHAT_A_REAL_FIX_NEEDS_FROM_THE_SITE_V1__CORRECTED",
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "date": "2026-11-18",
+  "title": "The shape obstacle was a parsing artifact: of real single-line CODE edits, 81.3% need only a single in-vocabulary expression and 86.1% are addressable by the existing machinery; statement-form repairs are 8.7%, not 51.4%",
+  "corrects": {
+    "file": "canonical/verification/WHAT_A_REAL_FIX_NEEDS_FROM_THE_SITE_20261118_V1.json",
+    "published_claim": "\"The insufficiency is SHAPE: half of real single-line edits are not a single expression replacement\" -- therefore the next build should be statement-level repair.",
+    "what_was_actually_true": "Of the 118 edits called \"not a single expression\", 26 were not code at all (comments and docstrings) and 71 were code split across lines -- an artifact of diffing LINE PAIRS. Resolving those at statement level leaves 18 statement-form changes in 241 edits (7.5%). The published conclusion would have sent the next build at 7.5% of the population while the real obstacle -- identification -- was already measured and unaddressed.",
+    "the_defect": "A line-pair diff cannot see code that spans lines; a SyntaxError on a line was treated as \"not an expression change\" instead of \"this instrument cannot see this edit\"."
+  },
+  "numbers_corrected": {
+    "single_line_edits_examined": 241,
+    "not_code_comment_or_docstring": 33,
+    "code_edits": 208,
+    "single_expression_in_vocabulary": 169,
+    "single_expression_in_vocabulary_of_code_edits": 0.8125,
+    "two_expression_joint_addressable": 10,
+    "addressable_by_existing_machinery_of_code_edits": 0.8606,
+    "statement_form": 18,
+    "statement_form_of_code_edits": 0.0865,
+    "too_large": 9,
+    "needs_new_name": 1,
+    "unresolved_continuation": 1,
+    "raw_totals": {
+      "NOT_CODE__COMMENT_OR_DOCSTRING": 33,
+      "SINGLE_EXPRESSION__IN_VOCABULARY": 169,
+      "TWO_EXPRESSIONS__JOINT_ADDRESSABLE": 10,
+      "STATEMENT_FORM__NOT_AN_EXPRESSION": 18,
+      "TOO_LARGE": 9,
+      "NEEDS_NEW_NAME": 1,
+      "CONTINUATION__CODE_SPLIT_ACROSS_LINES": 1
+    }
+  },
+  "what_this_means": "For real single-line code edits, expressiveness is NOT the binding constraint: the repair form this project already has -- one or two expressions over names in scope -- is addressable on 86.1% of them by necessary condition. What remains is evidence: whether the observations available on a task separate the surviving candidates. That is the previous build's 1-4 chosen queries, and it is the only place left to work.",
+  "the_three_instrument_defects_in_this_series": [
+    "shallowest-instead-of-deepest AST change point: reported 100% NOT_SINGLE_EXPRESSION",
+    "ancestors counted as independent change points: reported every edit as two or more changes",
+    "line-pair diffing: reported 51.4% \"shape\" where the truth is 7.5%"
+  ],
+  "what_in_vocabulary_means": "A NECESSARY condition, not sufficiency: every free name of the new expression is in scope at the site in the parent version, the expression is within the enumerator node budget, and exactly one expression subtree changed. Reachability also needs the grammar to generate that form, which the enumerator covers for the operators, subscripts, attributes and calls it implements; this measurement does not execute the site, so it cannot confirm generation for a specific case.",
+  "examples": {
+    "NOT_CODE__COMMENT_OR_DOCSTRING": [
+      {
+        "project": "click",
+        "commit": "c4a6b57bb8",
+        "subject": "type-hint out varibale",
+        "file": "src/click/shell_completion.py",
+        "old": null,
+        "new": null,
+        "missing": null,
+        "reason": "NO_CHANGE",
+        "old_line": "    out = []",
+        "new_line": "    out = []  # type: list[str]"
+      },
+      {
+        "project": "click",
+        "commit": "8386598a77",
+        "subject": "Typo",
+        "file": "src/click/core.py",
+        "old": null,
+        "new": null,
+        "missing": null,
+        "reason": "DOCSTRING",
+        "old_line": "        \"\"\"Convert and validate a value against the option's",
+        "new_line": "        \"\"\"Convert and validate a value against the parameter's"
+      },
+      {
+        "project": "click",
+        "commit": "b9e4052e38",
+        "subject": "[pre-commit.ci lite] apply automatic fixes",
+        "file": "src/click/_termui_impl.py",
+        "old": null,
+        "new": null,
+        "missing": null,
+        "reason": "NO_CHANGE",
+        "old_line": "    ",
+        "new_line": ""
+      },
+      {
+        "project": "click",
+        "commit": "b1e72b4770",
+        "subject": "Fix formatting.",
+        "file": "src/click/core.py",
+        "old": null,
+        "new": null,
+        "missing": null,
+        "reason": "NO_CHANGE",
+        "old_line": "        return self.params.pop() # type: ignore[return-value]",
+        "new_line": "        return self.params.pop()  # type: ignore[return-value]"
+      },
+      {
+        "project": "click",
+        "commit": "bd7afd459a",
+        "subject": "[pre-commit.ci lite] apply automatic fixes",
+        "file": "src/click/core.py",
+        "old": null,
+        "new": null,
+        "missing": null,
+        "reason": "NO_CHANGE",
+        "old_line": "        return self.params.pop() # type: ignore[return-value]",
+        "new_line": "        return self.params.pop()  # type: ignore[return-value]"
+      }
+    ],
+    "SINGLE_EXPRESSION__IN_VOCABULARY": [
+      {
+        "project": "click",
+        "commit": "6cb34774f2",
+        "subject": "fix skip condition",
+        "file": "tests/test_utils.py",
+        "old": "sys._is_gil_enabled()",
+        "new": "not sys._is_gil_enabled()",
+        "missing": null,
+        "reason": null,
+        "old_line": "    MAC and sys.version_info >= (3, 13) and sys._is_gil_enabled(),",
+        "new_line": "    MAC and sys.version_info >= (3, 13) and not sys._is_gil_enabled(),"
+      },
+      {
+        "project": "click",
+        "commit": "c6bf75fa74",
+        "subject": "Fixes windows specific error regarding spaces in filepaths for open_url.",
+        "file": "src/click/_termui_impl.py",
+        "old": "f'/select,{url}'",
+        "new": "'/select,'",
+        "missing": null,
+        "reason": null,
+        "old_line": "            args = [\"explorer\", f\"/select,{url}\"]",
+        "new_line": "            args = [\"explorer\", \"/select,\", url]"
+      },
+      {
+        "project": "click",
+        "commit": "dbdae17087",
+        "subject": "Fix documentation",
+        "file": "src/click/_termui_impl.py",
+        "old": "'Context manager.\\n    Yields a writable file-like object which can be used as a",
+        "new": "'Context manager.\\n    Yields a writable file-like object which can be used as a",
+        "missing": null,
+        "reason": null,
+        "old_line": "    .. versionadded:: 8.2",
+        "new_line": "    .. versionadded:: 8.4"
+      },
+      {
+        "project": "click",
+        "commit": "7db1f209b0",
+        "subject": "Popen() list-arg pager process without shell=True",
+        "file": "src/click/_termui_impl.py",
+        "old": "True",
+        "new": "False",
+        "missing": null,
+        "reason": null,
+        "old_line": "        shell=True,",
+        "new_line": "        shell=False,"
+      },
+      {
+        "project": "click",
+        "commit": "60feda3c92",
+        "subject": "Do not mention UNSET",
+        "file": "src/click/core.py",
+        "old": "\"Returns the parameter value produced by the parser.\\n\\n        If the parser di",
+        "new": "\"Returns the parameter value produced by the parser.\\n\\n        If the parser di",
+        "missing": null,
+        "reason": null,
+        "old_line": "        If no value is found, the value is returned as :attr:`UNSET`.",
+        "new_line": "        If no value is found, an internal sentinel value is returned."
+      }
+    ],
+    "TWO_EXPRESSIONS__JOINT_ADDRESSABLE": [
+      {
+        "project": "click",
+        "commit": "abaef53bab",
+        "subject": "Typing",
+        "file": "src/click/core.py",
+        "old": "t | cabc.Sequence[str]",
+        "new": "self.type | rv",
+        "missing": null,
+        "reason": null,
+        "old_line": "            rv = t.cast(cabc.Sequence[str], self.type.split_envvar_value(rv))",
+        "new_line": "            return self.type.split_envvar_value(rv)"
+      },
+      {
+        "project": "click",
+        "commit": "4f70b379b5",
+        "subject": "Fix typing",
+        "file": "src/click/core.py",
+        "old": "self.type | rv",
+        "new": "t | cabc.Sequence[str]",
+        "missing": null,
+        "reason": null,
+        "old_line": "            rv = self.type.split_envvar_value(rv)",
+        "new_line": "            rv = t.cast(cabc.Sequence[str], self.type.split_envvar_value(rv))"
+      },
+      {
+        "project": "click",
+        "commit": "742a5521c4",
+        "subject": "switch to pyproject.toml",
+        "file": "tests/test_utils.py",
+        "old": "'*.cfg' | 'setup.cfg'",
+        "new": "'*.toml' | 'pyproject.toml'",
+        "missing": null,
+        "reason": null,
+        "old_line": "    assert \"setup.cfg\" in click.utils._expand_args([\"*.cfg\"])",
+        "new_line": "    assert \"pyproject.toml\" in click.utils._expand_args([\"*.toml\"])"
+      },
+      {
+        "project": "requests",
+        "commit": "80011a7917",
+        "subject": "Remove an obsolete attribute from __attrs__",
+        "file": "requests/sessions.py",
+        "old": "'stream' | 'prefetch' | 'adapters'",
+        "new": "'trust_env' | 'adapters' | 'stream'",
+        "missing": null,
+        "reason": null,
+        "old_line": "        'cert', 'prefetch', 'adapters', 'stream', 'trust_env',",
+        "new_line": "        'cert', 'adapters', 'stream', 'trust_env',"
+      },
+      {
+        "project": "requests",
+        "commit": "8b773a4fed",
+        "subject": "[remove] remove invalid field in docete",
+        "file": "requests/__init__.py",
+        "old": "'Content-Length' | '23' | 'Content-Type' | 'Host' | 'application/x-www-form-urlencoded' | 'httpbin.org' | 'Connection' | 'close'",
+        "new": "'Content-Type' | 'application/x-www-form-urlencoded' | 'Host' | 'User-Agent' | 'httpbin.org' | 'python-requests/...' | 'Content-Length' | '23'",
+        "missing": null,
+        "reason": null,
+        "old_line": "   {'args': {}, 'data': '', 'files': {}, 'form': {'key1': 'value1', 'key2': 'value2'}, 'headers': {'Accept': '*/*', 'Acc",
+        "new_line": "   {'args': {}, 'data': '', 'files': {}, 'form': {'key1': 'value1', 'key2': 'value2'}, 'headers': {'Accept': '*/*', 'Acc"
+      }
+    ],
+    "STATEMENT_FORM__NOT_AN_EXPRESSION": [
+      {
+        "project": "click",
+        "commit": "2fbc8b1ea9",
+        "subject": "Reduce unnecessary changes",
+        "file": "src/click/core.py",
+        "old": "return self.type.split_envvar_value(rv)",
+        "new": "rv = self.type.split_envvar_value(rv)",
+        "missing": null,
+        "reason": "NOT_AN_EXPRESSION_CHANGE",
+        "old_line": "            return self.type.split_envvar_value(rv)",
+        "new_line": "            rv = self.type.split_envvar_value(rv)"
+      },
+      {
+        "project": "click",
+        "commit": "cd72d7e124",
+        "subject": "Update test name",
+        "file": "tests/test_types.py",
+        "old": "@pytest.mark.skipif(platform.system() == 'Windows', reason='Filepath syntax differences.')\ndef test_",
+        "new": "@pytest.mark.skipif(platform.system() == 'Windows', reason='Filepath syntax differences.')\ndef test_",
+        "missing": null,
+        "reason": "NOT_AN_EXPRESSION_CHANGE",
+        "old_line": "def test_path_type_with_esc_sequence():",
+        "new_line": "def test_invalid_path_with_esc_sequence():"
+      },
+      {
+        "project": "httpx",
+        "commit": "e874351f04",
+        "subject": "Update _models.py (#2840)",
+        "file": "httpx/_models.py",
+        "old": "self.extensions = {} if extensions is None else extensions",
+        "new": "self.extensions: ResponseExtensions = {} if extensions is None else extensions",
+        "missing": null,
+        "reason": "NOT_AN_EXPRESSION_CHANGE",
+        "old_line": "        self.extensions = {} if extensions is None else extensions",
+        "new_line": "        self.extensions: ResponseExtensions = {} if extensions is None else extensions"
+      },
+      {
+        "project": "httpx",
+        "commit": "c1cc6b2462",
+        "subject": "Fixes #2666: None is the default value of file for httpx.NetRCAuth (#2667)",
+        "file": "httpx/_auth.py",
+        "old": "self, file: typing.Optional[str]",
+        "new": "self, file: typing.Optional[str]=None",
+        "missing": null,
+        "reason": "NOT_AN_EXPRESSION_CHANGE",
+        "old_line": "    def __init__(self, file: typing.Optional[str]):",
+        "new_line": "    def __init__(self, file: typing.Optional[str] = None):"
+      },
+      {
+        "project": "requests",
+        "commit": "a8e9c1b436",
+        "subject": "added assert statements into tests/test_requests/test_header_validation in regar",
+        "file": "tests/test_requests.py",
+        "old": "valid_headers[key] == r.request.headers[key]",
+        "new": "assert valid_headers[key] == r.request.headers[key]",
+        "missing": null,
+        "reason": "NOT_AN_EXPRESSION_CHANGE",
+        "old_line": "            valid_headers[key] == r.request.headers[key]",
+        "new_line": "            assert valid_headers[key] == r.request.headers[key]"
+      }
+    ],
+    "TOO_LARGE": [
+      {
+        "project": "click",
+        "commit": "af2da1ef9b",
+        "subject": "Fix incorrect passing of flags to re.sub",
+        "file": "src/click/shell_completion.py",
+        "old": "re.sub('\\\\W*', '', self.prog_name.replace('-', '_'), re.ASCII)",
+        "new": "re.sub('\\\\W*', '', self.prog_name.replace('-', '_'), flags=re.ASCII)",
+        "missing": null,
+        "reason": null,
+        "old_line": "        safe_name = re.sub(r\"\\W*\", \"\", self.prog_name.replace(\"-\", \"_\"), re.ASCII)",
+        "new_line": "        safe_name = re.sub(r\"\\W*\", \"\", self.prog_name.replace(\"-\", \"_\"), flags=re.ASCII)"
+      },
+      {
+        "project": "click",
+        "commit": "03963b2e7d",
+        "subject": "Fix TypeVar for decorators that handle Commands",
+        "file": "src/click/decorators.py",
+        "old": "t.TypeVar('FC', t.Callable[..., t.Any], Command)",
+        "new": "t.TypeVar('FC', bound=t.Union[t.Callable[..., t.Any], Command])",
+        "missing": null,
+        "reason": null,
+        "old_line": "FC = t.TypeVar(\"FC\", t.Callable[..., t.Any], Command)",
+        "new_line": "FC = t.TypeVar(\"FC\", bound=t.Union[t.Callable[..., t.Any], Command])"
+      },
+      {
+        "project": "httpx",
+        "commit": "5b06aea1d6",
+        "subject": "Update _client.py (#2247)",
+        "file": "httpx/_client.py",
+        "old": "str",
+        "new": "typing.Union[str, typing.Callable[[bytes], str]]",
+        "missing": null,
+        "reason": null,
+        "old_line": "        default_encoding: str = \"utf-8\",",
+        "new_line": "        default_encoding: typing.Union[str, typing.Callable[[bytes], str]] = \"utf-8\","
+      },
+      {
+        "project": "tqdm",
+        "commit": "36ad510ef2",
+        "subject": "render",
+        "file": ".meta/mkdocs.py",
+        "old": "[path.dirname(path.dirname(__file__))] + sys.path",
+        "new": "sys.path.insert(0, path.dirname(path.dirname(__file__)))",
+        "missing": null,
+        "reason": null,
+        "old_line": "sys.path = [path.dirname(path.dirname(__file__))] + sys.path  # NOQA",
+        "new_line": "sys.path.insert(0, path.dirname(path.dirname(__file__)))  # NOQA"
+      },
+      {
+        "project": "tqdm",
+        "commit": "2730ea8614",
+        "subject": "Fixed missing attr pos when used in multi-threaded enviornment",
+        "file": "tqdm/_tqdm.py",
+        "old": "inst.pos > abs(instance.pos)",
+        "new": "hasattr(inst, 'pos') and inst.pos > abs(instance.pos)",
+        "missing": null,
+        "reason": null,
+        "old_line": "                    if inst.pos > abs(instance.pos):",
+        "new_line": "                    if hasattr(inst, \"pos\") and inst.pos > abs(instance.pos):"
+      }
+    ],
+    "NEEDS_NEW_NAME": [
+      {
+        "project": "tqdm",
+        "commit": "98f7289675",
+        "subject": "fix `contrib.concurrent` with generators",
+        "file": "tqdm/contrib/concurrent.py",
+        "old": "len",
+        "new": "length_hint",
+        "missing": [
+          "length_hint"
+        ],
+        "reason": null,
+        "old_line": "        kwargs[\"total\"] = len(iterables[0])",
+        "new_line": "        kwargs[\"total\"] = length_hint(iterables[0])"
+      }
+    ],
+    "CONTINUATION__CODE_SPLIT_ACROSS_LINES": [
+      {
+        "project": "tqdm",
+        "commit": "b3589f6736",
+        "subject": "silly syntax error fix",
+        "file": "tqdm/std.py",
+        "old": null,
+        "new": null,
+        "missing": null,
+        "reason": "CONTINUATION_OR_FRAGMENT",
+        "old_line": "        except Import Error:  # TODO: pandas>0.25.2",
+        "new_line": "        except ImportError:  # TODO: pandas>0.25.2"
+      }
+    ]
+  }
+}
