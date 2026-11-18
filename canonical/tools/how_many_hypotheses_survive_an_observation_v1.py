@@ -136,6 +136,44 @@ def perturbed(args: Sequence[Any], rng: random.Random) -> list[Any] | None:
     return out
 
 
+def agreement(item: dict[str, Any], root: pathlib.Path, name: str, *, probes: int = 12,
+              seed: int = 1) -> str:
+    """How often this candidate agrees with the corpus's reference program on NEW inputs."""
+    reference_path = root / "correct_python_programs" / f"{name}.py"
+    if not reference_path.exists():
+        return "unchecked"
+    space: dict[str, Any] = {}
+    try:
+        exec(compile(reference_path.read_text(encoding="utf-8"), "<ref>", "exec"), space)  # noqa: S102
+    except Exception:  # noqa: BLE001
+        return "reference_does_not_load"
+    truth = space.get(name)
+    if truth is None:
+        return "no_reference"
+    rng = random.Random(seed)
+    agree = 0
+    checked = 0
+    for args, _expected in gen.examples_of(root, name):
+        candidate_args = perturbed(args, rng)
+        if candidate_args is None:
+            continue
+        try:
+            want = truth(*json.loads(json.dumps(candidate_args)))
+        except Exception:  # noqa: BLE001
+            continue
+        ran, got = forced.run_case(item["source"], name, list(candidate_args), forced=None)
+        checked += 1
+        if ran:
+            try:
+                if got == want:
+                    agree += 1
+            except Exception:  # noqa: BLE001
+                pass
+        if checked >= probes:
+            break
+    return f"{agree}/{checked}" if checked else "no_probe"
+
+
 def measure(root: pathlib.Path, name: str, *, budget: int = 400, max_k: int = 5,
             unseen: int = 12, seed: int = 0) -> dict[str, Any]:
     started = time.time()
