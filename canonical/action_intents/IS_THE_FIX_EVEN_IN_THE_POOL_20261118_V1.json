@@ -30,18 +30,19 @@
   "producer_cognition_model_dependency_count": 0,
   "progress_class": "VERIFIED_REUSABLE_CAPABILITY_GAIN",
   "progress_evidence_paths": [
-   "canonical/tools/what_an_experience_can_own_v1.py",
-   "canonical/tests/test_what_an_experience_can_own_v1.py",
-   "canonical/verification/WHAT_AN_EXPERIENCE_CAN_OWN_20261118_V1.json",
-   "canonical/action_intents/WHAT_AN_EXPERIENCE_CAN_OWN_20261118_V1.md"
+   "canonical/tools/is_the_fix_even_in_the_pool_v1.py",
+   "canonical/tests/test_the_pool_can_build_what_the_site_contains_v1.py",
+   "canonical/verification/IS_THE_FIX_EVEN_IN_THE_POOL_20261118_V1.json",
+   "canonical/action_intents/IS_THE_FIX_EVEN_IN_THE_POOL_20261118_V1.md",
+   "canonical/action_intents/IS_THE_FIX_EVEN_IN_THE_POOL_20261118_V1.json"
   ],
   "route_class": "SYNTHESIZE_NEW_PRIMITIVE",
   "scope_complete_discharge": false,
   "terminal_achieved": false
  },
  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
- "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE LIMITING FACTOR IS NOT HOW MUCH IS REMEMBERED BUT WHETHER WHAT IS REMEMBERED IS INVARIANT ENOUGH TO RECUR AND INFORMATIVE ENOUGH TO BE RIGHT. Storing repairs in the most invariant form measured: 3 pairs, controls 3/3, 2 unseen programs fixed (longest_common_subsequence, next_palindrome, both the published fix), 104 matches at 1.92% precision for the only pair that transfers and 0-1 matches for the pairs that carry the fix; addressability of unseen sites saturates 34.4% -> 59.7% over 24 experiences. Memory's ceiling is 0.597 x 0.0192 ~ 1.1% of unseen decisions, while one asked question is exact at 7.69 ms.",
- "canonical_base_commit": "c001c61528528a81c35742c80714d31e63c10c68",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A negative result about expressibility is the easiest place in this project to fool yourself: a defect in a generator looks exactly like a law of nature. This branch published \"the site cannot express the fix\" and it was false five times over -- text-length material, a non-cumulative pool, a size measure that counted AST context nodes, the site's own sub-expressions excluded, and the site itself excluded from its own pool.",
+ "canonical_base_commit": "a1211499dfcff5e6f70e3ed99ccd5e29a38df39a",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -109,10 +110,11 @@
   "canonical/tools/is_the_fix_even_in_the_pool_v1.py",
   "canonical/tests/test_the_pool_can_build_what_the_site_contains_v1.py",
   "canonical/verification/IS_THE_FIX_EVEN_IN_THE_POOL_20261118_V1.json",
-  "canonical/action_intents/IS_THE_FIX_EVEN_IN_THE_POOL_20261118_V1.md"
+  "canonical/action_intents/IS_THE_FIX_EVEN_IN_THE_POOL_20261118_V1.md",
+  "canonical/action_intents/IS_THE_FIX_EVEN_IN_THE_POOL_20261118_V1.json"
  ],
  "recursive_obs": {
-  "canonical_base_commit": "c001c61528528a81c35742c80714d31e63c10c68",
+  "canonical_base_commit": "a1211499dfcff5e6f70e3ed99ccd5e29a38df39a",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "storing the text that was edited (a spelling destroyed by a rename)",
@@ -122,7 +124,7 @@
    "abstracting builtins away: an operation is the invariant, a program-defined name is not"
   ],
   "expected_parent_frontier_change": "A measured ceiling for memory of experience (0.597 addressable x 0.0192 precise ~ 1.1% of unseen decisions) against an exact asked question (1 bit, 7.69 ms), and the finite size of the vocabulary that would have to be stored (367 sites -> 164 shapes)",
-  "expected_parent_level_state_change": "A measured ceiling for memory of experience (0.597 addressable x 0.0192 precise ~ 1.1% of unseen decisions) against an exact asked question (1 bit, 7.69 ms), and the finite size of the vocabulary that would have to be stored (367 sites -> 164 shapes)",
+  "expected_parent_level_state_change": "lis and mergesort repaired by the published fixes themselves in ~2 s; and a second predicate on every solve -- correct on inputs the corpus never saw -- because next_permutation was accepted with an expression that disagrees with the reference on 361 of 2000 random permutations.",
   "independent_verification_required": true,
   "iteration_limit": 1,
   "obs_blocker": {
@@ -206,8 +208,8 @@
    ],
    "synthetic_verification_necessity": "The corpus's own published tests are the oracle; unit tests pin only the mechanism and the measurement's integrity. Independent reproduction remains open."
   },
-  "real_outcome": "Eight published bugs repaired and confirmed by the corpus's own pytest on a fresh copy, four of which this tree had recorded as having no answer in the space; kheapsort found at candidate 4,950 of 14,236 in 6 s after the narrower space was certified exhausted over 8,310 in 192.7 s.",
-  "required_capability": "Compiling one demonstrated fix into a template that generalizes to holes, and reporting honestly where it fires, where it repairs, and where no candidate can exist at all.",
+  "real_outcome": "A published \"not expressible\" claim was retracted by measurement: five defects in the enumerator, and with them repaired lis and mergesort are repaired by the published fixes themselves in ~2 s.",
+  "required_capability": "an enumerator whose material is what is actually at the site: the site, its parts, and the names in scope",
   "route_frontier": {
    "challenger_routes": [
     {
@@ -404,10 +406,10 @@
    "Close the space over the program's own material under its own forms, certified by its own tests"
   ],
   "selected_route": "STORE_THE_INVARIANT_FORM_OF_A_FIX_AND_MEASURE_WHAT_IT_REACHES",
-  "selected_surviving_route": "STORE_THE_INVARIANT_FORM_OF_A_FIX_AND_MEASURE_WHAT_IT_REACHES",
+  "selected_surviving_route": "PUBLISH_THE_COMPLETENESS_WITNESS_FOR_ANY_INSUFFICIENCY_CLAIM",
   "selected_surviving_route_class": "SYNTHESIZE_NEW_PRIMITIVE",
-  "stop_condition": "Every stored pair typed by the unseen sites it matches and the unseen programs it fixes, with controls on its own donor, and the addressability curve reported per number of experiences.",
-  "why_selected_route_is_fastest_sufficient": "Every cheaper route was measured and refused: more budget solved one of five tasks, an action list 0 of 20, a stricter judge rejected the corpus's own answer, and adding a hand-written family is refused by the tree's own law. One derivation rule replaced five imagined families and moved four impossible tasks to solved in 248 s.",
+  "stop_condition": "Every future \"not expressible\" verdict carries the witness verdict, and every solve carries both predicates: corpus-accepted and correct on inputs the corpus never saw.",
+  "why_selected_route_is_fastest_sufficient": "A completeness witness is the only cheap falsifier of a negative expressibility claim: feed the published fix to the same enumerator and see whether it offers it.",
   "why_this_is_not_another_organ": "It adds no knowledge, no model and no family list: grammar_closed_repair_v1 now takes the closure rule as a parameter instead of hardcoding a second list, and the judge tool takes the space builder as a parameter, so the only new code is the rule itself and the three containers that instantiate it."
  },
  "route_id": "PUBLISH_THE_COMPLETENESS_WITNESS_FOR_ANY_INSUFFICIENCY_CLAIM",
