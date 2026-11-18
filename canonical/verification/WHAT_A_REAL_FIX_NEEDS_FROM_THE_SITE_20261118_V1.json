@@ -1,0 +1,256 @@
+{
+  "schema": "BRAIN_WHAT_A_REAL_FIX_NEEDS_FROM_THE_SITE_V1",
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "date": "2026-11-18",
+  "title": "Of 241 real single-line edits in four real projects, 48.6% need only material the site already has, and 0.4% need a name it does not: the insufficiency is SHAPE, not names",
+  "where_the_data_is_from": {
+    "projects": [
+      "click",
+      "httpx",
+      "requests",
+      "tqdm"
+    ],
+    "source": "git history of github.com/psf/requests, pallets/click, tqdm/tqdm, encode/httpx, cloned at run time; every commit whose whole diff for one Python file is one removed and one added line",
+    "why_this_population": "it is the population a single-site expression replacement can address, so it is the population the question is about"
+  },
+  "numbers": {
+    "single_line_edits_examined": 241,
+    "in_vocabulary": 117,
+    "not_single_expression": 118,
+    "too_large": 5,
+    "needs_new_name": 1,
+    "rates": {
+      "NOT_SINGLE_EXPRESSION": 0.4896,
+      "IN_VOCABULARY": 0.4855,
+      "TOO_LARGE": 0.0207,
+      "NEEDS_NEW_NAME": 0.0041
+    },
+    "of_single_line_CODE_edits": {
+      "denominator": 161,
+      "in_vocabulary_rate": 0.7267,
+      "note": "excluding the 80 lines that do not parse at all (docstrings, comments, continuations) and counting structural changes as not-expressible"
+    },
+    "not_single_expression_reasons": [
+      [
+        "None",
+        123
+      ],
+      [
+        "LINE_DOES_NOT_PARSE",
+        80
+      ],
+      [
+        "NOT_ONE_SUBTREE",
+        38
+      ]
+    ]
+  },
+  "the_finding": "Vocabulary insufficiency is nearly absent in this population: exactly ONE edit in 241 needed a name the site did not have. What is missing is SHAPE -- half of real single-line edits are not a single expression replacement at all (a docstring, a comment, a signature, a structural change), and 2.1% exceed the enumerator node budget. The binding constraint is the FORM of the edit, not the vocabulary of the site.",
+  "what_this_changes": "Every plan to add vocabulary (more builtins, more names, more learned atoms) targets 0.4% of the population. Every plan to fix shape -- statement-level edits, multi-site edits, edits to the form of a site rather than its value -- targets 51.4%. The project has been optimising the small one.",
+  "what_in_vocabulary_means": "A NECESSARY condition, not sufficiency: every free name of the new expression is in scope at the site in the parent version, the expression is within the enumerator node budget, and exactly one expression subtree changed. Reachability also needs the grammar to generate that form, which the enumerator covers for the operators, subscripts, attributes and calls it implements; this measurement does not execute the site, so it cannot confirm generation for a specific case.",
+  "the_defect_this_measurement_had": "The first version classified 100% of edits as NOT_SINGLE_EXPRESSION over 242 real edits, because the AST diff picked the SHALLOWEST differing node -- always the module -- instead of the deepest change point. A generator defect looks exactly like a law of nature; this is the third time in this project that a 100% result was the instrument and not the world.",
+  "examples": {
+    "NOT_SINGLE_EXPRESSION": [
+      {
+        "project": "click",
+        "commit": "c4a6b57bb8",
+        "subject": "type-hint out varibale",
+        "file": "src/click/shell_completion.py",
+        "old": null,
+        "new": null,
+        "missing": null,
+        "reason": "NOT_ONE_SUBTREE",
+        "old_line": "    out = []",
+        "new_line": "    out = []  # type: list[str]"
+      },
+      {
+        "project": "click",
+        "commit": "dbdae17087",
+        "subject": "Fix documentation",
+        "file": "src/click/_termui_impl.py",
+        "old": null,
+        "new": null,
+        "missing": null,
+        "reason": "LINE_DOES_NOT_PARSE",
+        "old_line": "    .. versionadded:: 8.2",
+        "new_line": "    .. versionadded:: 8.4"
+      },
+      {
+        "project": "click",
+        "commit": "abaef53bab",
+        "subject": "Typing",
+        "file": "src/click/core.py",
+        "old": null,
+        "new": null,
+        "missing": null,
+        "reason": "NOT_ONE_SUBTREE",
+        "old_line": "            rv = t.cast(cabc.Sequence[str], self.type.split_envvar_value(rv))",
+        "new_line": "            return self.type.split_envvar_value(rv)"
+      },
+      {
+        "project": "click",
+        "commit": "4f70b379b5",
+        "subject": "Fix typing",
+        "file": "src/click/core.py",
+        "old": null,
+        "new": null,
+        "missing": null,
+        "reason": "NOT_ONE_SUBTREE",
+        "old_line": "            rv = self.type.split_envvar_value(rv)",
+        "new_line": "            rv = t.cast(cabc.Sequence[str], self.type.split_envvar_value(rv))"
+      },
+      {
+        "project": "click",
+        "commit": "8386598a77",
+        "subject": "Typo",
+        "file": "src/click/core.py",
+        "old": null,
+        "new": null,
+        "missing": null,
+        "reason": "LINE_DOES_NOT_PARSE",
+        "old_line": "        \"\"\"Convert and validate a value against the option's",
+        "new_line": "        \"\"\"Convert and validate a value against the parameter's"
+      }
+    ],
+    "IN_VOCABULARY": [
+      {
+        "project": "click",
+        "commit": "6cb34774f2",
+        "subject": "fix skip condition",
+        "file": "tests/test_utils.py",
+        "old": "sys._is_gil_enabled()",
+        "new": "not sys._is_gil_enabled()",
+        "missing": null,
+        "reason": null,
+        "old_line": "    MAC and sys.version_info >= (3, 13) and sys._is_gil_enabled(),",
+        "new_line": "    MAC and sys.version_info >= (3, 13) and not sys._is_gil_enabled(),"
+      },
+      {
+        "project": "click",
+        "commit": "c6bf75fa74",
+        "subject": "Fixes windows specific error regarding spaces in filepaths for open_url.",
+        "file": "src/click/_termui_impl.py",
+        "old": "f'/select,{url}'",
+        "new": "'/select,'",
+        "missing": null,
+        "reason": null,
+        "old_line": "            args = [\"explorer\", f\"/select,{url}\"]",
+        "new_line": "            args = [\"explorer\", \"/select,\", url]"
+      },
+      {
+        "project": "click",
+        "commit": "7db1f209b0",
+        "subject": "Popen() list-arg pager process without shell=True",
+        "file": "src/click/_termui_impl.py",
+        "old": "True",
+        "new": "False",
+        "missing": null,
+        "reason": null,
+        "old_line": "        shell=True,",
+        "new_line": "        shell=False,"
+      },
+      {
+        "project": "click",
+        "commit": "28650344c5",
+        "subject": "svg logo",
+        "file": "docs/conf.py",
+        "old": "'_static/click-vertical.svg'",
+        "new": "'_static/click-logo.svg'",
+        "missing": null,
+        "reason": null,
+        "old_line": "html_logo = \"_static/click-vertical.svg\"",
+        "new_line": "html_logo = \"_static/click-logo.svg\""
+      },
+      {
+        "project": "click",
+        "commit": "2fa500c143",
+        "subject": "fix filename formatting test for Windows compatibility",
+        "file": "tests/test_utils.py",
+        "old": "b'/x/\\xff.txt'",
+        "new": "'/x/\ufffd.txt'",
+        "missing": null,
+        "reason": null,
+        "old_line": "    assert click.format_filename(b\"/x/\\xff.txt\", shorten=True) == \"\ufffd.txt\"",
+        "new_line": "    assert click.format_filename(\"/x/\\ufffd.txt\", shorten=True) == \"\ufffd.txt\""
+      }
+    ],
+    "TOO_LARGE": [
+      {
+        "project": "click",
+        "commit": "af2da1ef9b",
+        "subject": "Fix incorrect passing of flags to re.sub",
+        "file": "src/click/shell_completion.py",
+        "old": "re.sub('\\\\W*', '', self.prog_name.replace('-', '_'), re.ASCII)",
+        "new": "re.sub('\\\\W*', '', self.prog_name.replace('-', '_'), flags=re.ASCII)",
+        "missing": null,
+        "reason": null,
+        "old_line": "        safe_name = re.sub(r\"\\W*\", \"\", self.prog_name.replace(\"-\", \"_\"), re.ASCII)",
+        "new_line": "        safe_name = re.sub(r\"\\W*\", \"\", self.prog_name.replace(\"-\", \"_\"), flags=re.ASCII)"
+      },
+      {
+        "project": "click",
+        "commit": "03963b2e7d",
+        "subject": "Fix TypeVar for decorators that handle Commands",
+        "file": "src/click/decorators.py",
+        "old": "t.TypeVar('FC', t.Callable[..., t.Any], Command)",
+        "new": "t.TypeVar('FC', bound=t.Union[t.Callable[..., t.Any], Command])",
+        "missing": null,
+        "reason": null,
+        "old_line": "FC = t.TypeVar(\"FC\", t.Callable[..., t.Any], Command)",
+        "new_line": "FC = t.TypeVar(\"FC\", bound=t.Union[t.Callable[..., t.Any], Command])"
+      },
+      {
+        "project": "httpx",
+        "commit": "5b06aea1d6",
+        "subject": "Update _client.py (#2247)",
+        "file": "httpx/_client.py",
+        "old": "str",
+        "new": "typing.Union[str, typing.Callable[[bytes], str]]",
+        "missing": null,
+        "reason": null,
+        "old_line": "        default_encoding: str = \"utf-8\",",
+        "new_line": "        default_encoding: typing.Union[str, typing.Callable[[bytes], str]] = \"utf-8\","
+      },
+      {
+        "project": "tqdm",
+        "commit": "36ad510ef2",
+        "subject": "render",
+        "file": ".meta/mkdocs.py",
+        "old": "[path.dirname(path.dirname(__file__))] + sys.path",
+        "new": "sys.path.insert(0, path.dirname(path.dirname(__file__)))",
+        "missing": null,
+        "reason": null,
+        "old_line": "sys.path = [path.dirname(path.dirname(__file__))] + sys.path  # NOQA",
+        "new_line": "sys.path.insert(0, path.dirname(path.dirname(__file__)))  # NOQA"
+      },
+      {
+        "project": "tqdm",
+        "commit": "170bf4a353",
+        "subject": "CLI better installation path support",
+        "file": "tqdm/_main.py",
+        "old": "sys.argv",
+        "new": "['tqdm'] + sys.argv[1:]",
+        "missing": null,
+        "reason": null,
+        "old_line": "    argv = RE_SHLEX.split(' '.join(sys.argv))",
+        "new_line": "    argv = RE_SHLEX.split(' '.join([\"tqdm\"] + sys.argv[1:]))"
+      }
+    ],
+    "NEEDS_NEW_NAME": [
+      {
+        "project": "tqdm",
+        "commit": "98f7289675",
+        "subject": "fix `contrib.concurrent` with generators",
+        "file": "tqdm/contrib/concurrent.py",
+        "old": "len",
+        "new": "length_hint",
+        "missing": [
+          "length_hint"
+        ],
+        "reason": null,
+        "old_line": "        kwargs[\"total\"] = len(iterables[0])",
+        "new_line": "        kwargs[\"total\"] = length_hint(iterables[0])"
+      }
+    ]
+  }
+}
