@@ -1,0 +1,101 @@
+{
+ "authority": "NONE -- sandbox measurement, not independent verification",
+ "model_calls": 0,
+ "network_calls": 0,
+ "oracle": {
+  "022ae6c6fe5c2ef9615875d0ecfab1ae4024720f": "ORACLE_APPLIED_NOT_ENOUGH",
+  "12314bde5b89a8bdc32de7403a2a4cf786187bbc": "ORACLE_NO_FIRE",
+  "794c8e50d676f1e8e081914eb77e4a48a4f6a20b": "ORACLE_NO_FIRE",
+  "7f4dcf83a07bb3d53f4e0e65ef1b43327b4cca90": "ORACLE_NO_FIRE",
+  "84833cc16be84bc7f1d9f64e2818afe0dd48aade": "ORACLE_NO_FIRE"
+ },
+ "rows": [
+  {
+   "baseline_state": "BASELINE_FAILS",
+   "depth1_candidates": 20,
+   "depth2_candidates": 24,
+   "insert_delete": false,
+   "repo": "pallets/itsdangerous",
+   "rules_learned": 1403,
+   "sha": "7f4dcf83a07bb3d53f4e0e65ef1b43327b4cca90",
+   "source": "src/itsdangerous/signer.py",
+   "state": "GRAMMAR_FIRES_NEVER_SOLVES",
+   "test": "tests/test_itsdangerous/test_serializer.py",
+   "trials": 44
+  },
+  {
+   "baseline_state": "BASELINE_FAILS",
+   "depth1_candidates": 20,
+   "depth2_candidates": 24,
+   "insert_delete": false,
+   "repo": "pypa/packaging",
+   "rules_learned": 244,
+   "sha": "022ae6c6fe5c2ef9615875d0ecfab1ae4024720f",
+   "source": "src/packaging/metadata.py",
+   "state": "GRAMMAR_FIRES_NEVER_SOLVES",
+   "test": "tests/test_metadata.py",
+   "trials": 44
+  },
+  {
+   "baseline_state": "BASELINE_NO_FIRE",
+   "depth1_candidates": 1,
+   "depth2_candidates": 2,
+   "insert_delete": false,
+   "repo": "pypa/packaging",
+   "rules_learned": 244,
+   "sha": "84833cc16be84bc7f1d9f64e2818afe0dd48aade",
+   "source": "src/packaging/utils.py",
+   "state": "GRAMMAR_FIRES_NEVER_SOLVES",
+   "test": "tests/test_utils.py",
+   "trials": 3
+  },
+  {
+   "baseline_state": "BASELINE_FAILS",
+   "depth1_candidates": 20,
+   "depth2_candidates": 24,
+   "insert_delete": false,
+   "repo": "hukkin/tomli",
+   "rules_learned": 1259,
+   "sha": "12314bde5b89a8bdc32de7403a2a4cf786187bbc",
+   "source": "src/tomli/_parser.py",
+   "state": "GRAMMAR_FIRES_NEVER_SOLVES",
+   "test": "tests/test_data.py",
+   "trials": 44
+  },
+  {
+   "baseline_state": "BASELINE_FAILS",
+   "depth1_candidates": 20,
+   "depth2_candidates": 24,
+   "insert_delete": false,
+   "repo": "hukkin/tomli",
+   "rules_learned": 1259,
+   "sha": "794c8e50d676f1e8e081914eb77e4a48a4f6a20b",
+   "source": "src/tomli/_parser.py",
+   "state": "GRAMMAR_FIRES_NEVER_SOLVES",
+   "test": "tests/test_error.py",
+   "trials": 44
+  }
+ ],
+ "schema": "BRAIN_STRUCTURAL_REWRITE_INDUCTION_V1",
+ "totals": {
+  "baseline": {
+   "BASELINE_FAILS": 4,
+   "BASELINE_NO_FIRE": 1,
+   "BASELINE_SOLVES": 0,
+   "NOT_RUN": 0
+  },
+  "rules_learned": [
+   244,
+   1259,
+   1403
+  ],
+  "solved": 0,
+  "solved_composite": 0,
+  "solved_fraction": 0.0,
+  "states": {
+   "GRAMMAR_FIRES_NEVER_SOLVES": 5
+  },
+  "tasks": 5,
+  "trials": 179
+ }
+}

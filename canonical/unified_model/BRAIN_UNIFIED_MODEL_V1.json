@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 527,
+  "knowledge_documents": 528,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 7039,
+  "research_index_records": 7041,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 452,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "c644f1233cdea0fa436599c251fa4410c61de0d4c23c84a8a759439f6d65f129"
+  "value": "42442ba17159e7e3a3bbc2995a6f581de9b0b523fe97d23d29e9fca5f9d3bafa"
  },
  "engines": [
   {
@@ -67656,6 +67656,80 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 6451,
+   "headings": [
+    "The representation is the bottleneck, not the search",
+    "What round 9 left, and what this round had to answer",
+    "First: two bugs in the corpus and the instrument, found before any number was believed",
+    "The measurement",
+    "What is real, what is not",
+    "The single bottleneck, exact",
+    "Where the series stands"
+   ],
+   "kind": "DOCUMENT",
+   "path": "THE_REPRESENTATION_IS_THE_BOTTLENECK_NOT_THE_SEARCH_20261116_V1.md",
+   "sha256": "642f64606144c15a9fef77db8fd9d9b064cfaf5445bb900118ca8eb5612ad3aa",
+   "summary": "*Round 10. 2026-11-16. Branch `arena/e7c7b049-brain`, base `9e8b043a`.*",
+   "terms": {
+    "10": 3,
+    "all": 3,
+    "anti-unification": 4,
+    "ast": 3,
+    "cannot": 4,
+    "canonical": 3,
+    "commit": 3,
+    "committed": 3,
+    "corpus": 7,
+    "diff": 3,
+    "diffs": 4,
+    "edit": 4,
+    "every": 3,
+    "exact": 4,
+    "execution": 3,
+    "failure": 3,
+    "fire": 4,
+    "first": 3,
+    "fix": 3,
+    "free": 3,
+    "gate": 4,
+    "grammar": 6,
+    "invariant": 3,
+    "learned": 7,
+    "measured": 4,
+    "move": 3,
+    "never": 3,
+    "no": 5,
+    "not": 15,
+    "now": 4,
+    "one": 6,
+    "own": 5,
+    "rather": 3,
+    "real": 13,
+    "representation": 6,
+    "reproduce": 5,
+    "rewrite": 4,
+    "round": 13,
+    "round-trip": 5,
+    "rule": 5,
+    "search": 4,
+    "site": 6,
+    "so": 6,
+    "solved": 5,
+    "than": 5,
+    "they": 5,
+    "two": 9,
+    "were": 5
+   },
+   "title": "The representation is the bottleneck, not the search",
+   "title_terms": [
+    "bottleneck",
+    "not",
+    "representation",
+    "search"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 9654,
    "headings": [
     "The Search Was Looking for Words",
@@ -86076,10 +86150,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1329,
+  "included_source_count": 1330,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "ac0c652859828ac9629720fa48a0898ba89018c878aaf388f503963f070f866d"
+  "source_tree_digest": "4c3e0925189b492fcf69b7e4dde9a872fb557ecde9dfe54e66b00a6a4536faf9"
  },
  "research_index": [
   {
@@ -204756,6 +204830,24 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/STRUCTURAL_REWRITE_INDUCTION_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/STRUCTURAL_REWRITE_INDUCTION_20261116_V1.json",
+   "schema": "BRAIN_STRUCTURAL_REWRITE_INDUCTION_V1",
+   "sha256": "ddcb91e201a5cc150eee5015c4a6b1273f3eb5696a127b6ce61f6ba2f3a1ec67",
+   "status": "",
+   "terms": {
+    "20261116": 1,
+    "induction": 1,
+    "rewrite": 1,
+    "structural": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-02",
    "id": "research:canonical/verification/STRUCTURED_METHOD_AST_V2_REPAIRED_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -247742,6 +247834,30 @@
     "real": 1,
     "structural": 1,
     "structural_check_of_real_changes_20261116_v1": 1,
+    "the_third_manufacturability_route_is_closed_by_measurement_with_a_proven_instrument__40_real_commits_188_confirmed_laws_0_kills_and_174_of_the_laws_are_bare_totality__the_cause_is_named_real_work_extends_a_specification_instead_of_violating_a_property__so_the_next_organ_must_compile_intent_into_the_discriminating_pair_rather_than_derive_it_from_the_artifact": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "STRUCTURAL_REWRITE_INDUCTION_20261116_V1",
+   "capability": false,
+   "date": "2026-11-16",
+   "id": "research:canonical/action_intents/STRUCTURAL_REWRITE_INDUCTION_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/STRUCTURAL_REWRITE_INDUCTION_20261116_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "40324e074ec2b86ec4c262e7077235547a53731693a451a72c5b45e0d8b38869",
+   "status": "PRODUCED",
+   "terms": {
+    "20261116": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "induction": 1,
+    "learn_rewrites_from_real_diffs_by_anti_unification__admit_a_rule_only_if_it_reproduces_its_own_teaching_diff_exactly__search_sequences_of_up_to_two_rewrites_under_an_execution_gate__and_execute_the_commit_s_own_diff_as_the_oracle_to_separate_representation_from_search": 1,
+    "produced": 1,
+    "rewrite": 1,
+    "round_9_located_the_synthesis_failure_in_the_grammar_and_this_round_taught_the_grammar_from_real_diffs_by_anti_unification__still_0_of_5_after_the_round_trip_admission_gate_and_the_oracle_fails_to_fire_at_its_own_teaching_diff_in_4_of_5__so_the_bottleneck_is_neither_search_nor_vocabulary_but_faithful_rewrite_representation": 1,
+    "structural": 1,
+    "structural_rewrite_induction_20261116_v1": 1,
     "the_third_manufacturability_route_is_closed_by_measurement_with_a_proven_instrument__40_real_commits_188_confirmed_laws_0_kills_and_174_of_the_laws_are_bare_totality__the_cause_is_named_real_work_extends_a_specification_instead_of_violating_a_property__so_the_next_organ_must_compile_intent_into_the_discriminating_pair_rather_than_derive_it_from_the_artifact": 1,
     "v1": 1
    }
