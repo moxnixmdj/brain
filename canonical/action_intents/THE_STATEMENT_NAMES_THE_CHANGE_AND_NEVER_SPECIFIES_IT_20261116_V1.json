@@ -360,7 +360,7 @@
    "selected_route": "READ_THE_VALUE_A_CHANGED_CONDITION_COMPARES_AGAINST_OUT_OF_THE_PROGRAM_AND_DELIVER_IT_AT_THE_TYPE_THAT_CAN_CARRY_IT",
    "selected_route_preflight": {
     "all_required_dependencies_ready": true,
-    "checked_at_utc": "2026-11-18T18:28:07Z",
+    "checked_at_utc": "2026-11-18T20:37:52Z",
     "execution_dependencies": [
      {
       "dependency": "local Python 3.11 runtime; the committed real-fix corpus, the pinning instrument, the test-file call extractor and the judge",
