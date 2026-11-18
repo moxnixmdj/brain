@@ -46,10 +46,14 @@ from expressions_from_a_site_v1 import MAX_NODES  # noqa: E402
 SCHEMA = "BRAIN_WHAT_A_REAL_FIX_NEEDS_FROM_THE_SITE_V1"
 AUTHORITY = "NONE__PRODUCER_RUN_SANDBOX"
 
-IN_VOCABULARY = "IN_VOCABULARY"
+IN_VOCABULARY = "SINGLE_EXPRESSION__IN_VOCABULARY"
+TWO_EXPRESSION = "TWO_EXPRESSIONS__JOINT_ADDRESSABLE"
+TWO_EXPRESSION_NEEDS_NAME = "TWO_EXPRESSIONS__NEEDS_A_NAME"
+STATEMENT_FORM = "STATEMENT_FORM__NOT_AN_EXPRESSION"
+NOT_CODE = "NOT_CODE__COMMENT_OR_DOCSTRING"
+CONTINUATION = "CONTINUATION__CODE_SPLIT_ACROSS_LINES"
 NEEDS_NEW_NAME = "NEEDS_NEW_NAME"
 TOO_LARGE = "TOO_LARGE"
-NOT_SINGLE_EXPRESSION = "NOT_SINGLE_EXPRESSION"
 
 FIX_WORDS = re.compile(r"\b(fix|fixes|fixed|bug|bugs|repair|broken|crash|crashing|regression|"
                        r"incorrect|wrong)\b", re.I)
@@ -198,42 +202,6 @@ def expression_size(expression: ast.expr) -> int:
     return sum(1 for node in ast.walk(expression) if isinstance(node, ast.expr))
 
 
-def classify(repo: pathlib.Path, sha: str, path: str) -> dict[str, Any] | None:
-    parent = file_at(repo, f"{sha}^", path)
-    child = file_at(repo, sha, path)
-    if parent is None or child is None:
-        return None
-    pairs = changed_pairs(repo, sha, path)
-    if not pairs or len(pairs) > MAX_CHANGED_LINES:
-        return {"kind": NOT_SINGLE_EXPRESSION, "reason": "DIFF_TOO_LARGE_OR_EMPTY",
-                "changed_pairs": len(pairs)}
-    if len(pairs) > 1:
-        return {"kind": NOT_SINGLE_EXPRESSION, "reason": "SEVERAL_LINES_CHANGED",
-                "changed_pairs": len(pairs)}
-    old_line, new_line = pairs[0]
-    try:
-        old_stmt = ast.parse(old_line.strip())
-        new_stmt = ast.parse(new_line.strip())
-    except SyntaxError:
-        return {"kind": NOT_SINGLE_EXPRESSION, "reason": "LINE_DOES_NOT_PARSE",
-                "old": old_line.strip()[:120], "new": new_line.strip()[:120]}
-    change = single_change(old_stmt, new_stmt)
-    if change is None:
-        return {"kind": NOT_SINGLE_EXPRESSION, "reason": "NOT_ONE_SUBTREE",
-                "old": old_line.strip()[:120], "new": new_line.strip()[:120]}
-    _old_expr, new_expr = change
-    line = _line_of(parent, old_line.strip())
-    scope = names_in_scope(parent, line)
-    missing = sorted(free_names(new_expr) - scope)
-    size = expression_size(new_expr)
-    verdict: dict[str, Any] = {"size": size, "new": ast.unparse(new_expr)[:160]}
-    if size > MAX_NODES:
-        verdict.update({"kind": TOO_LARGE})
-    elif missing:
-        verdict.update({"kind": NEEDS_NEW_NAME, "missing": missing})
-    else:
-        verdict.update({"kind": IN_VOCABULARY})
-    return verdict
 
 
 def _line_of(source: str, needle: str) -> int:
@@ -290,7 +258,85 @@ def single_line_candidates(repo: pathlib.Path, limit: int) -> Iterator[dict[str,
         yield ready
 
 
+def change_points(old: ast.AST, new: ast.AST) -> list[tuple[tuple, ast.AST, ast.AST]]:
+    """The INDEPENDENT deepest differences between two statements.
+
+    One difference is a single-expression edit. Two are a two-site edit on one line -- jointly
+    identifiable by pairing, which the experiment machinery can do, but a single-site search cannot.
+    More, or a change that is not an expression at all, is a statement-form edit: the thing this
+    project has never attempted.
+    """
+    old_paths, new_paths = paths_of(old), paths_of(new)
+    common = set(old_paths) & set(new_paths)
+    differing = [p for p in common
+                 if ast.dump(old_paths[p], annotate_fields=False)
+                 != ast.dump(new_paths[p], annotate_fields=False)]
+    picked: list[tuple] = []
+    for path in sorted(differing, key=len, reverse=True):
+        # Skip anything nested with an already-picked change point, in EITHER direction: an
+        # ancestor differs only because its descendant does, and counting the module as a second
+        # change point is what once made every edit look like a statement-form change.
+        if any(path[:len(other)] == other or other[:len(path)] == path for other in picked):
+            continue
+        picked.append(path)
+    return [(path, old_paths[path], new_paths[path]) for path in picked]
+
+
+def not_code_reason(old_line: str, new_line: str) -> str:
+    """A line that does not parse is either not code (a comment, a docstring) or code split across
+    lines. The first is not in the population at all; the second is code we have not addressed."""
+    old_stripped, new_stripped = old_line.strip(), new_line.strip()
+    if old_stripped.startswith("#") or new_stripped.startswith("#"):
+        return "COMMENT"
+    quotes = ('"""', "'''", '"', "'")
+    if old_stripped.startswith(quotes) and new_stripped.startswith(quotes):
+        return "DOCSTRING"
+    if '"""' in old_stripped + new_stripped or "'''" in old_stripped + new_stripped:
+        return "DOCSTRING"
+    return "CONTINUATION_OR_FRAGMENT"
+
+
+def enclosing_statement(tree: ast.AST, line: int) -> tuple[tuple, ast.AST] | None:
+    """The innermost statement that spans this line, with its structural path."""
+    paths = paths_of(tree)
+    best: tuple[tuple, ast.AST] | None = None
+    for path, node in paths.items():
+        if not isinstance(node, ast.stmt):
+            continue
+        start = getattr(node, "lineno", 0)
+        end = getattr(node, "end_lineno", start)
+        if start and start <= line <= end:
+            if best is None or (end - start) < (getattr(best[1], "end_lineno", 0)
+                                                - getattr(best[1], "lineno", 0)):
+                best = (path, node)
+    return best
+
+
+def statement_level_change(old_file: str, new_file: str, line: int) -> tuple[list, str] | None:
+    """Resolve an edit that spans lines by diffing the STATEMENT, not the line pair.
+
+    A line-pair diff cannot see code split across lines, and 71 of 241 real single-line edits are
+    exactly that. Treating them as "not an expression change" is a defect of the instrument: the edit
+    is ordinary code, the diff is what got smaller.
+    """
+    try:
+        old_tree = ast.parse(old_file)
+        new_tree = ast.parse(new_file)
+    except SyntaxError:
+        return None
+    located = enclosing_statement(old_tree, line)
+    if located is None:
+        return None
+    path, _old_stmt = located
+    new_paths = paths_of(new_tree)
+    new_stmt = new_paths.get(path)
+    if not isinstance(new_stmt, ast.stmt):
+        return None
+    return change_points(located[1], new_stmt), "STATEMENT_RESOLVED"
+
+
 def classify_line(repo: pathlib.Path, candidate: dict[str, Any]) -> dict[str, Any] | None:
+    """What this edit needed from the site, in the classes a repair form can act on."""
     parent = file_at(repo, f"{candidate['sha']}^", candidate["path"])
     if parent is None:
         return None
@@ -299,25 +345,149 @@ def classify_line(repo: pathlib.Path, candidate: dict[str, Any]) -> dict[str, An
         old_stmt = ast.parse(old_line.strip())
         new_stmt = ast.parse(new_line.strip())
     except SyntaxError:
-        return {"kind": NOT_SINGLE_EXPRESSION, "reason": "LINE_DOES_NOT_PARSE"}
-    change = single_change(old_stmt, new_stmt)
-    if change is None:
-        return {"kind": NOT_SINGLE_EXPRESSION, "reason": "NOT_ONE_SUBTREE"}
-    _old_expr, new_expr = change
+        reason = not_code_reason(old_line, new_line)
+        if reason in ("COMMENT", "DOCSTRING"):
+            return {"kind": NOT_CODE, "reason": reason}
+        child = file_at(repo, candidate["sha"], candidate["path"])
+        if child is not None:
+            resolved = statement_level_change(parent, child, _line_of(parent, old_line.strip())
+                                              or candidate.get("line", 1))
+            if resolved is not None:
+                changes, how = resolved
+                return _verdict_from_changes(changes, parent, old_line,
+                                             extra={"resolution": how})
+        return {"kind": CONTINUATION, "reason": reason}
+    changes = change_points(old_stmt, new_stmt)
+    return _verdict_from_changes(changes, parent, old_line)
+
+
+def _verdict_from_changes(changes: list, parent: str, old_line: str,
+                          extra: dict[str, Any] | None = None) -> dict[str, Any]:
     line = _line_of(parent, old_line.strip())
     scope = names_in_scope(parent, line)
-    missing = sorted(free_names(new_expr) - scope)
-    size = expression_size(new_expr)
-    verdict: dict[str, Any] = {"size": size, "new": ast.unparse(new_expr)[:160],
-                               "old": ast.unparse(_old_expr)[:160]}
-    if size > MAX_NODES:
-        verdict["kind"] = TOO_LARGE
-    elif missing:
-        verdict["kind"] = NEEDS_NEW_NAME
-        verdict["missing"] = missing
-    else:
-        verdict["kind"] = IN_VOCABULARY
+    if not changes:
+        return {"kind": NOT_CODE, "reason": "NO_CHANGE"}
+    new_expressions = [new_node for _path, _old_node, new_node in changes]
+    if all(isinstance(node, ast.expr) for node in new_expressions):
+        missing: list[str] = []
+        sizes: list[int] = []
+        for node in new_expressions:
+            missing.extend(sorted(free_names(node) - scope))
+            sizes.append(expression_size(node))
+        verdict: dict[str, Any] = {
+            "size": max(sizes),
+            "new": " | ".join(ast.unparse(node)[:80] for node in new_expressions),
+            "old": " | ".join(ast.unparse(node)[:80] for _path, node, _new in changes),
+            "change_points": len(changes),
+        }
+        if len(changes) == 1:
+            if max(sizes) > MAX_NODES:
+                verdict["kind"] = TOO_LARGE
+            elif missing:
+                verdict["kind"] = NEEDS_NEW_NAME
+                verdict["missing"] = missing
+            else:
+                verdict["kind"] = IN_VOCABULARY
+        else:
+            verdict["kind"] = TWO_EXPRESSION_NEEDS_NAME if missing else TWO_EXPRESSION
+            if missing:
+                verdict["missing"] = missing
+        if extra:
+            verdict.update(extra)
+        return verdict
+    verdict = {"kind": STATEMENT_FORM, "reason": "NOT_AN_EXPRESSION_CHANGE",
+            "change_points": len(changes),
+            "old": ast.unparse(changes[0][1])[:100], "new": ast.unparse(changes[-1][2])[:100]}
+    if extra:
+        verdict.update(extra)
     return verdict
+
+
+def single_line_candidates(repo: pathlib.Path, limit: int) -> Iterator[dict[str, Any]]:
+    """Every commit in the history whose whole diff for one .py file is ONE removed and ONE added line.
+
+    This is the population a single-site replacement can even address, so it is the population the
+    question is about. It is found in one streaming pass over the log rather than one subprocess per
+    commit, because the classification is cheap and the subprocesses are not.
+    """
+    done = subprocess.run(["git", "-C", str(repo), "log", "-p", "--unified=0", "--no-merges",
+                           "--format=%x01%H%x09%s", "-n", str(limit)],
+                          capture_output=True, text=True, encoding="utf-8", errors="replace")
+    sha = subject = None
+    files: list[str] = []
+    removed: list[str] = []
+    added: list[str] = []
+    current_file: str | None = None
+
+    def flush() -> dict[str, Any] | None:
+        if sha and len(files) == 1 and len(removed) == 1 and len(added) == 1:
+            return {"sha": sha, "subject": subject or "", "path": files[0],
+                    "old": removed[0], "new": added[0]}
+        return None
+
+    for line in done.stdout.splitlines():
+        if line.startswith("\x01"):
+            ready = flush()
+            if ready:
+                yield ready
+            sha, _, subject = line[1:].partition("\t")
+            files, removed, added = [], [], []
+            current_file = None
+            continue
+        if line.startswith("+++ b/"):
+            current_file = line[6:]
+            if current_file.endswith(".py"):
+                files.append(current_file)
+            continue
+        if line.startswith("--- ") or line.startswith("@@"):
+            continue
+        if line.startswith("-") and current_file and current_file.endswith(".py"):
+            removed.append(line[1:])
+        elif line.startswith("+") and current_file and current_file.endswith(".py"):
+            added.append(line[1:])
+    ready = flush()
+    if ready:
+        yield ready
+
+
+def change_points(old: ast.AST, new: ast.AST) -> list[tuple[tuple, ast.AST, ast.AST]]:
+    """The INDEPENDENT deepest differences between two statements.
+
+    One difference is a single-expression edit. Two are a two-site edit on one line -- jointly
+    identifiable by pairing, which the experiment machinery can do, but a single-site search cannot.
+    More, or a change that is not an expression at all, is a statement-form edit: the thing this
+    project has never attempted.
+    """
+    old_paths, new_paths = paths_of(old), paths_of(new)
+    common = set(old_paths) & set(new_paths)
+    differing = [p for p in common
+                 if ast.dump(old_paths[p], annotate_fields=False)
+                 != ast.dump(new_paths[p], annotate_fields=False)]
+    picked: list[tuple] = []
+    for path in sorted(differing, key=len, reverse=True):
+        # Skip anything nested with an already-picked change point, in EITHER direction: an
+        # ancestor differs only because its descendant does, and counting the module as a second
+        # change point is what once made every edit look like a statement-form change.
+        if any(path[:len(other)] == other or other[:len(path)] == path for other in picked):
+            continue
+        picked.append(path)
+    return [(path, old_paths[path], new_paths[path]) for path in picked]
+
+
+def not_code_reason(old_line: str, new_line: str) -> str:
+    """A line that does not parse is either not code (a comment, a docstring) or code split across
+    lines. The first is not in the population at all; the second is code we have not addressed."""
+    old_stripped, new_stripped = old_line.strip(), new_line.strip()
+    if old_stripped.startswith("#") or new_stripped.startswith("#"):
+        return "COMMENT"
+    quotes = ('"""', "'''", '"', "'")
+    if old_stripped.startswith(quotes) and new_stripped.startswith(quotes):
+        return "DOCSTRING"
+    if '"""' in old_stripped + new_stripped or "'''" in old_stripped + new_stripped:
+        return "DOCSTRING"
+    return "CONTINUATION_OR_FRAGMENT"
+
+
 
 
 def sweep(root: pathlib.Path, limit: int = 4000) -> dict[str, Any]:

@@ -1,3 +1,9 @@
+> **CORRECTION (2026-11-18, later the same day).** The "51.4% shape" figure below is an
+> artifact of diffing line pairs: 26 of those 118 edits are comments or docstrings and 71 are
+> code split across lines. Resolved at statement level, statement-form changes are 7.5% and
+> **86.1% of real single-line code edits are addressable by the existing machinery.** See
+> `THE_SHAPE_OBSTACLE_WAS_A_PARSING_ARTIFACT_20261118_V1.md` before acting on anything below.
+
 # What a real fix needs from the site
 
 *241 real single-line edits, four real projects. 48.6% need only what is already there. 0.4% need a

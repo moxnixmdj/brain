@@ -1,0 +1,475 @@
+{
+ "action_id": "THE_SHAPE_OBSTACLE_WAS_A_PARSING_ARTIFACT_20261118_V1",
+ "action_intent_id": "THE_SHAPE_OBSTACLE_WAS_A_PARSING_ARTIFACT_20261118_V1",
+ "action_kind": "REAL_CAPABILITY_ACQUISITION",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "earlier_routes_exhausted_reason": "The space walk (843.6 s for 40 bugs), condition-only angelic mining (0 conditions found), teach-more-lessons (3 of 40 programs), and the algebraically-derived rung were already measured and refused. This session measures the one form never measured -- the invariant pair -- and compares it at equal cost against asking at the site.",
+  "incremental_spend_usd": 0,
+  "independent_verification_completed": false,
+  "independent_verification_note": "Producer-run sandbox only. Independent personnel verification is still open.",
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md",
+   "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "VERIFIED_REUSABLE_CAPABILITY_GAIN",
+  "progress_evidence_paths": [
+   "canonical/tools/what_a_real_fix_needs_from_the_site_v1.py",
+   "canonical/tests/test_what_a_real_fix_needs_from_the_site_v1.py",
+   "canonical/verification/THE_SHAPE_OBSTACLE_WAS_A_PARSING_ARTIFACT_20261118_V1.json",
+   "canonical/action_intents/THE_SHAPE_OBSTACLE_WAS_A_PARSING_ARTIFACT_20261118_V1.md",
+   "canonical/action_intents/THE_SHAPE_OBSTACLE_WAS_A_PARSING_ARTIFACT_20261118_V1.json"
+  ],
+  "route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+  "scope_complete_discharge": false,
+  "terminal_achieved": false
+ },
+ "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Evidence, not expressiveness. Of 241 real single-line edits in four real projects, resolving every edit at statement level leaves 81.3% of code edits needing only a single in-vocabulary expression, 86.1% addressable by one or two expressions over names in scope, 8.7% statement-form, 4.3% beyond the node budget and 0.5% needing a name the site lacks. The published 51.4% \"shape\" figure was a line-pair diffing artifact.",
+ "canonical_base_commit": "338568c970a192bd5ab09252e3284601c27ff0b7",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "Evidence, not expressiveness. Of 241 real single-line edits in four real projects, resolving every edit at statement level leaves 81.3% of code edits needing only a single in-vocabulary expression, 86.1% addressable by one or two expressions over names in scope, 8.7% statement-form, 4.3% beyond the node budget and 0.5% needing a name the site lacks. The published 51.4% \"shape\" figure was a line-pair diffing artifact.",
+ "date": "2026-11-18",
+ "expected_parent_change": "Whether the repair FORM is the obstacle or whether the obstacle is evidence per task -- decided by resolving real edits at statement level instead of by diffing line pairs.",
+ "expected_parent_frontier_change": "The addressable share of real single-line code edits for the existing machinery is 86.1%, so the next build must be identification (the 1-4 chosen queries), not statement-level synthesis for 8.7%.",
+ "explicit_user_authorization": [
+  "Why can't we just give our model the most advanced coding actions, let it experience them once, and have it learn them? Can't we do this now?",
+  "you must think from first principles for everything",
+  "You should kill all the bad and dumb ideas before you waste time implementing them.",
+  "NEVER BUILD BEFORE REASRCHING EXHASIATION IS HAPPENED",
+  "maximize your web use",
+  "What is the single bottleneck that, if fixed, would unlock the most capability?",
+  "all the tests are not on synthetic data but are on the hardest open tests",
+  "only our agent/system may run them; integrity 100% real",
+  "Work in branch, merge only when complete (fastest)",
+  "Merge once, not 10 times."
+ ],
+ "falsification_condition": "Any plan to build statement-level synthesis, more vocabulary, or a larger node budget before the 86.1% is demonstrated on real repositories.",
+ "generic_repair_from_single_probe": false,
+ "governance_change": false,
+ "highest_leverage_now": true,
+ "incremental_spend_usd": 0,
+ "intentional_route_race": false,
+ "load_bearing_primary": {
+  "constructive_gap_for_open_obligation_ids": [
+   "CODING_TB4_GE_66_4"
+  ],
+  "expected_obligation_discharge_lcb": 0,
+  "expected_obligation_unlock_lcb": "1/50",
+  "interpretation": "Speculative forecast only. This session measures the ceiling of stored experience in its most invariant form (~1.1% of unseen decisions) against an exact asked question, and finds that what must be stored is which question to ask. No truth obligation is discharged.",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "1/2",
+  "wall_clock_cost_ub": 1
+ },
+ "measured_effect": {
+  "addressable_by_existing_machinery_of_code_edits": 0.8606,
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "code_edits": 208,
+  "corrects": "WHAT_A_REAL_FIX_NEEDS_FROM_THE_SITE_20261118_V1 (claimed shape = 51.4%)",
+  "instrument_defects_found": 3,
+  "needs_new_name": 1,
+  "repositories": [
+   "psf/requests",
+   "pallets/click",
+   "tqdm/tqdm",
+   "encode/httpx"
+  ],
+  "single_expression_in_vocabulary_of_code_edits": 0.8125,
+  "single_line_edits_examined": 241,
+  "statement_form_of_code_edits": 0.0865
+ },
+ "next_step": "Solve the 86.1% on real repositories: behaviour table plus chosen queries, with the site set derived from the real edit, and held-out verification against the project's own tests.",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "prior_work_reused": [
+  "canonical/tools/force_the_value_and_see_v1.py",
+  "canonical/tools/expressions_from_a_site_v1.py",
+  "canonical/tools/grammar_closed_repair_v1.py",
+  "canonical/verification/THE_FAILURE_ALREADY_SAYS_WHAT_TO_WRITE_20261118_V1.json"
+ ],
+ "probe_specific": false,
+ "progress_evidence_paths": [
+  "canonical/tools/what_a_real_fix_needs_from_the_site_v1.py",
+  "canonical/tests/test_what_a_real_fix_needs_from_the_site_v1.py",
+  "canonical/verification/THE_SHAPE_OBSTACLE_WAS_A_PARSING_ARTIFACT_20261118_V1.json",
+  "canonical/action_intents/THE_SHAPE_OBSTACLE_WAS_A_PARSING_ARTIFACT_20261118_V1.md",
+  "canonical/action_intents/THE_SHAPE_OBSTACLE_WAS_A_PARSING_ARTIFACT_20261118_V1.json"
+ ],
+ "recursive_obs": {
+  "canonical_base_commit": "338568c970a192bd5ab09252e3284601c27ff0b7",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "storing the text that was edited (a spelling destroyed by a rename)",
+   "counting a transfer on the program the pair was read from as transfer",
+   "reporting a donor count with no unseen program as a 0.0 share",
+   "letting an unverified attempt enter the store",
+   "abstracting builtins away: an operation is the invariant, a program-defined name is not"
+  ],
+  "expected_parent_frontier_change": "A measured ceiling for memory of experience (0.597 addressable x 0.0192 precise ~ 1.1% of unseen decisions) against an exact asked question (1 bit, 7.69 ms), and the finite size of the vocabulary that would have to be stored (367 sites -> 164 shapes)",
+  "expected_parent_level_state_change": "The addressable share of real single-line code edits for the existing machinery is 86.1%, so the next build must be identification (the 1-4 chosen queries), not statement-level synthesis for 8.7%.",
+  "independent_verification_required": true,
+  "iteration_limit": 1,
+  "obs_blocker": {
+   "delete_bypass_substitute_options": [
+    "delete the uncalibrated cheap judge as a source of verdicts",
+    "bypass by materialising the value the corpus's own test compares, bounded by the expected value's length",
+    "substitute child-process evaluation with bisection on a hang wherever a candidate can crash or hang the judge"
+   ],
+   "intrinsic_or_path_specific": "path_specific: the vocabulary ceiling is a design choice and was removed here; the multi-position and insertion rungs, and non-terminating defects, remain open.",
+   "surviving_causal_blocker": "Expressibility: the fix must be an expression the artifact's own material and forms can build. A taught class moves that boundary only for the shape it was read from, and only where a program needs that shape."
+  },
+  "obs_capability": {
+   "capability_work_deleted": [
+    "a second lesson store or admission gate",
+    "another hand-written mutation kind",
+    "a larger search budget on an inexpressible edit"
+   ],
+   "existing_inherited_routes_checked": [
+    "verified_skill_crystallizer_v1.anti_unify_code_rule (token-level; no site context)",
+    "python_test_guided_patch_search_v1 mutation list (no ast.AugAssign rule)",
+    "python_iterative_software_repair_loop_v1 (candidate-only, strict progress)",
+    "lesson_localization_v1 (refuses shape changes by design)"
+   ],
+   "external_existing_routes_checked": [
+    "QuixBugs itself, as the corpus and the oracle",
+    "2026 verifier-gated self-improvement literature (the verifier is the gate once a candidate exists)"
+   ],
+   "surviving_gap": "An edit basis whose content is folded from demonstrations and whose applicability is a context precondition, so the reachable space is not a list an author imagined."
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "a higher repair count reached by loosening what counts as repaired",
+    "counting a self-taught repair as transfer",
+    "treating a longer candidate list as more capability",
+    "quoting a corpus score as a frontier position"
+   ],
+   "real_outcome": "Whether a demonstrated fix can reach an undemonstrated bug becomes a measured property of the edit basis instead of an open question answered by assertion.",
+   "surviving_necessity": "Coding capability is gated on a correct candidate existing at all; no oracle, budget or weight can select a hypothesis the basis cannot build."
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "None by claim: the existing repair primitive and corpus oracle are reused unchanged; the induced basis adds candidates only and holds no authority.",
+   "downstream_work_to_delete_or_supersede": "Any roadmap step that adds another hand-written mutation kind, or that raises a candidate budget to fix a bug whose edit is not expressible.",
+   "fresh_reuse_plan": "Recompute the ladder and re-run both bases from the receipt's commands; the corpus is public and the answer key is never needed."
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": "Reused the existing repair loop and patch-search primitive instead of writing a second repairer; the corpus's own test files are used unmodified.",
+   "search_stop_decision": "Stop after the ladder and the 20/20 comparison; do not add template rungs without the measurement that says which rung is missing."
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "efficiency_mechanism": "Templates prune the space before execution: 224 candidates instead of 5,021 for the same held-out half.",
+   "generality_mechanism": "Anti-unification with shared holes plus a node-type context precondition, so one demonstration yields a rule that fires wherever its precondition literally holds.",
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "The list edit is a hard zero on real fixes; the budget cannot reach an inexpressible edit; the token rule has no position or context; a model is prohibited producer cognition.",
+   "routes_ranked": [
+    "induce node-level templates from demonstration pairs",
+    "add an AugAssign rule to the hand-written list",
+    "raise the candidate budget",
+    "reuse the token anti-unifier",
+    "ask a model to write the patch"
+   ],
+   "white_box_harvest_note": "The canonical ladder is recorded in full; the WHITE_BOX_HARVEST step was considered and found empty. No donor model, weight or external artifact was harvested: the mechanism was induced from the corpus's own demonstration pairs and the tree's own repair primitive."
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "oracle_paths": [
+    "canonical/tests/test_induced_edit_basis_v1.py",
+    "canonical/tests/test_quixbugs_measurement_integrity_v1.py",
+    "canonical/verification/WHAT_ONE_DEMONSTRATION_BUYS_20261116_V1.json"
+   ],
+   "synthetic_verification_necessity": "The corpus's own published tests are the oracle; unit tests pin only the mechanism and the measurement's integrity. Independent reproduction remains open."
+  },
+  "real_outcome": "A published claim retracted within one build: the shape obstacle was 7.5%, not 51.4%; the existing repair form is addressable on 86.1% of real single-line code edits.",
+  "required_capability": "identification on real repositories: behaviour table over the site a real edit touched, chosen queries, held-out verification",
+  "route_frontier": {
+   "challenger_routes": [
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "3 of 40 programs",
+      "CORRECTNESS": "a class is only as good as its donor",
+      "INCREMENTAL_COST": "one class per shape",
+      "RELIABILITY": "unseen shapes stay unseen",
+      "VERIFIABILITY": "measured exactly",
+      "WALL_CLOCK": "unbounded as the corpus grows"
+     },
+     "evidence": [
+      "a taught class reaches 8 of 40 fixes, 5 only on its donor"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/WHAT_IS_LEFT_FOR_A_LESSON_TO_BUY_20261117_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "teach one more edit class per failing task"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "2 of 30 unseen programs from 3 pairs, at 1.92% precision on the pair that fires",
+      "CORRECTNESS": "the corpus's own pytest decides, as here",
+      "INCREMENTAL_COST": "40.6 us per lookup, no model, no parameters",
+      "RELIABILITY": "saturates: addressability 34.4% -> 59.7% over 24 experiences",
+      "VERIFIABILITY": "measured exactly",
+      "WALL_CLOCK": "5 minutes for the whole corpus"
+     },
+     "evidence": [
+      "0.597 addressable x 0.0192 precise ~ 1.1% of unseen decisions"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/WHAT_AN_EXPERIENCE_CAN_OWN_20261118_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "NON_DOMINATING",
+     "route": "store every verified repair and retrieve it by similarity"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "3 of 14 never-repaired bugs closed by asking (measured last round), exact",
+      "CORRECTNESS": "the artifact answers, so a question is either answered or refused -- never wrong",
+      "INCREMENTAL_COST": "7.69 ms per asked question, 1 bit",
+      "RELIABILITY": "no saturating share: every site can be asked",
+      "VERIFIABILITY": "measured exactly",
+      "WALL_CLOCK": "121.2 s for 14 bugs"
+     },
+     "evidence": [
+      "a question survives a rename (a stored table's wins fell 7/10 -> 1/10 under rename)"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_FAILURE_ALREADY_SAYS_WHAT_TO_WRITE_20261118_V1.json",
+      "canonical/verification/THE_FOUR_LEVERS_OF_LEARNING_FROM_EXPERIENCE_20261116_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "SELECTED",
+     "route": "store the question instead of the answer, and answer it at the site"
+    }
+   ],
+   "checked_at_utc": "2026-11-18T14:20:53Z",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "teach one more edit class whenever a bug does not close",
+   "max_age_hours": 2,
+   "negative_search_summary": "Measured and refused this session: teaching more classes (8 published fixes reached, 5 of them on the program the class was read from, 18 reached with no lesson at all), re-implementing the space in order to measure it (it contradicted the solve receipt on sqrt and powerset), and bounding a generator by \"keep the N most promising neighbours\" (which fixes it reached changed with N).",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "enumerative program repair expression size budget type-directed synthesis local typing context 2026"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "QuixBugs bug corpus python programs tests published"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "expression-size-wise enumeration starting at the size of the buggy expression S3 syntactic search space"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "2026 bounded typed program synthesis with counterexample-guided refinement depth size fuel bounds"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "selected_route": "STORE_THE_INVARIANT_FORM_OF_A_FIX_AND_MEASURE_WHAT_IT_REACHES",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-11-18T14:20:53Z",
+    "execution_dependencies": [
+     {
+      "dependency": "local Python 3.11 runtime with pytest",
+      "evidence": [
+       "Python 3.11 + pytest; 10 tests on the real-edit instrument pass at 2026-11-18T14:20:53Z"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "QuixBugs checkout at 4257f44b including correct_python_programs for the audit",
+      "evidence": [
+       "four real repositories cloned at run time; 242 single-line edits, 241 classified at statement level, 5.4 s, at 2026-11-18T14:20:53Z"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "local tempdir for fresh per-verdict task copies",
+      "evidence": [
+       "one fresh copy per real-judge verdict, answer key absent from the copy the search runs in; 0 corpus verdicts: reachability only, no execution at 2026-11-17T22:05:07Z"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "STORAGE",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "max_age_hours": 2,
+    "selected_route": "STORE_THE_INVARIANT_FORM_OF_A_FIX_AND_MEASURE_WHAT_IT_REACHES",
+    "status": "READY"
+   },
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/tools/grammar_closed_repair_v1.py (corpus reader, space enumerator, real judge, executed_lines)",
+     "canonical/tools/solve_with_a_calibrated_judge_v1.py (certified judge, per-case clocks, containment)",
+     "canonical/verification/WHERE_THE_REFUSALS_ACTUALLY_WERE_20261116_V1.json",
+     "canonical/verification/ONE_DEMONSTRATION_LEAVES_TEN_BITS_20261116_V1.json"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "https://arxiv.org/pdf/2611.12885 (World In-Context Learning: one demonstration plus rehearsal beats a 50-demonstration trained policy; without the world the demonstration brings no benefit)",
+     "https://arxiv.org/html/2606.29537v1 (OSWorld 2.0: 20.6% binary completion, failures concentrate on hidden state)",
+     "https://arxiv.org/html/2606.31270v1 (Learning from Failure: inference-time self-improvement from failure trajectories)"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "https://github.com/jkoppel/QuixBugs (MIT; 40 buggy programs, 40 pytest files, JSON test data)",
+     "https://pypi.org/project/pytest (9.2.0, the runner every verdict goes through)"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "https://docs.python.org/3/library/ast.html (node types the closure rule enumerates)"
+    ]
+   },
+   "unresolved_plausible_dominators": []
+  },
+  "routes_considered": [
+   "More candidate budget on the natural space (measured: 12,600 candidates, one of five solved)",
+   "Add the missing mutation family for each failing task (refused by the tree's own law and by measurement)",
+   "Hand it the most advanced action list (measured: 0 of 20)",
+   "Close the space over the program's own material under its own forms, certified by its own tests"
+  ],
+  "selected_route": "STORE_THE_INVARIANT_FORM_OF_A_FIX_AND_MEASURE_WHAT_IT_REACHES",
+  "selected_surviving_route": "STORE_THE_INVARIANT_FORM_OF_A_FIX_AND_MEASURE_WHAT_IT_REACHES",
+  "selected_surviving_route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+  "stop_condition": "Every new instrument prints its verdicts beside the inputs that produced them before any total is quoted, and no published claim survives without statement-level resolution underneath it.",
+  "why_selected_route_is_fastest_sufficient": "It decides, with real history, whether the next cycle goes into expressiveness or into evidence. Getting it wrong costs a whole build.",
+  "why_this_is_not_another_organ": "It adds no knowledge, no model and no family list: grammar_closed_repair_v1 now takes the closure rule as a parameter instead of hardcoding a second list, and the judge tool takes the space builder as a parameter, so the only new code is the rule itself and the three containers that instantiate it."
+ },
+ "route_id": "STORE_THE_INVARIANT_FORM_OF_A_FIX_AND_MEASURE_WHAT_IT_REACHES",
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "scope_complete_discharge": false,
+ "selected_route": "STORE_THE_INVARIANT_FORM_OF_A_FIX_AND_MEASURE_WHAT_IT_REACHES",
+ "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
+ "stop_condition": "Every new instrument prints its verdicts beside the inputs that produced them before any total is quoted, and no published claim survives without statement-level resolution underneath it.",
+ "terminal_credit_delta": 0,
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "truth": {
+  "achieved": false
+ },
+ "user_authorized_governance_change": false,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "currentness": {
+   "accepted_families": 5,
+   "current_load_bearing_atomic_count": 36,
+   "deleted_nonnecessary_atomic_count": 2,
+   "historical_atomic_registry_count": 38,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_atomic": 38,
+   "total_families": 19,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "This makes the reachable edit space a measured property for coding repair and quantifies what a taught class buys; it discharges no truth obligation.",
+  "target_truth_obligations": [
+   "CODING_TB4_GE_66_4"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [],
+   "decisive_question": "Once the space is the closure of the artifact, does any taught class still reach a program it was not read from -- and how many published fixes need no lesson at all?",
+   "falsifier_id": "A_TAUGHT_CLASS_MUST_REACH_A_PROGRAM_THAT_IS_NOT_ITS_DONOR",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "Two classes do transfer (PREPEND_TERM to next_palindrome, CALL to bucketsort, ATTRIBUTE to topological_ordering), which is why the transfer number is 3 and not 0.",
+   "proposal_id": "WHAT_IS_LEFT_FOR_A_LESSON_TO_BUY_20261117_V1"
+  }
+ },
+ "verification": {
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "commands": [
+   "python3 canonical/tools/what_an_experience_can_own_v1.py --quixbugs /tmp/QuixBugs --receipt canonical/verification/WHAT_AN_EXPERIENCE_CAN_OWN_20261118_V1.json",
+   "python3 -m pytest canonical/tests/test_what_an_experience_can_own_v1.py -q",
+   "python3 execution_guard/repo_integrity_guard_v1.py"
+  ],
+  "independent_verification_completed": false,
+  "result": "3 pairs, 3/3 controls pass, 105 attempts in unseen programs, 2 fixed (both the published semantics), addressability 34.4% -> 59.7%, 40.6 us per lookup."
+ },
+ "weakens_existing_guard": false
+}

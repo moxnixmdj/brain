@@ -77,3 +77,31 @@ def test_real_history_is_not_all_one_verdict():
     assert examined > 20, receipt
     assert len(receipt["totals"]) >= 2, receipt["totals"]
     assert receipt["rates"].get(needs.IN_VOCABULARY, 0) > 0.2, receipt["rates"]
+
+
+def test_change_points_do_not_count_ancestors():
+    """An ancestor differs only because its descendant does. Counting it made every edit look like a
+    multi-site change -- defect 2 of 3 in this instrument's history."""
+    old = ast.parse("x = path.join(a, 'R')")
+    new = ast.parse("x = path.join(path.dirname(a), 'R')")
+    points = needs.change_points(old, new)
+    assert len(points) == 1, [ast.unparse(p[2]) for p in points]
+    assert ast.unparse(points[0][2]) == "path.dirname(a)"
+
+
+def test_code_split_across_lines_is_resolved_at_statement_level():
+    """A line-pair diff cannot see this edit; the statement can. This was the 51.4% artifact."""
+    old_file = "def f(a):\n    return path.join(\n        a,\n        'R',\n    )\n"
+    new_file = "def f(a):\n    return path.join(\n        path.dirname(a),\n        'R',\n    )\n"
+    resolved = needs.statement_level_change(old_file, new_file, 4)
+    assert resolved is not None
+    changes, how = resolved
+    assert how == "STATEMENT_RESOLVED"
+    assert len(changes) == 1
+    assert ast.unparse(changes[0][2]) == "path.dirname(a)"
+
+
+def test_a_comment_is_not_counted_as_a_code_edit():
+    assert needs.not_code_reason("# a comment", "# another comment") == "COMMENT"
+    assert needs.not_code_reason('"""old text"""', '"""new text"""') == "DOCSTRING"
+    assert needs.not_code_reason("value = compute(", "value = compute(") == "CONTINUATION_OR_FRAGMENT"
