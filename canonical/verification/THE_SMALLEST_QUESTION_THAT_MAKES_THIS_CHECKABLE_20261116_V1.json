@@ -1,0 +1,361 @@
+{
+ "authority": "NONE -- sandbox measurement, not independent verification",
+ "model_calls": 0,
+ "network_calls": 0,
+ "rows": [
+  {
+   "callables": 0,
+   "named": 1,
+   "parts": [
+    {
+     "candidates": 0,
+     "named": true,
+     "part_head": "default_digest_method: t.Any = staticmethod(_lazy_sha1)",
+     "state": "REFUSED__STATEMENT_QUOTES_NOTHING"
+    }
+   ],
+   "repo": "pallets/itsdangerous",
+   "sha": "7f4dcf83a07bb3d53f4e0e65ef1b43327b4cca90",
+   "source": "src/itsdangerous/signer.py",
+   "specified": 0,
+   "state": "NAMED_ONLY",
+   "statement": "access sha1 lazily",
+   "the_question": {
+    "asked_of": "the author of the change",
+    "needs": "one input and the outcome it must produce",
+    "reachable_callables": 0,
+    "statement_supplies_an_expected_value": false
+   },
+   "tokens": {
+    "exceptions": 0,
+    "identifiers": 2,
+    "numbers": 0,
+    "quoted": 0
+   },
+   "unpinned_parts": 1
+  },
+  {
+   "callables": 2,
+   "named": 0,
+   "parts": [],
+   "repo": "pypa/packaging",
+   "sha": "022ae6c6fe5c2ef9615875d0ecfab1ae4024720f",
+   "source": "src/packaging/metadata.py",
+   "specified": 0,
+   "state": "FULLY_PINNED",
+   "statement": "fix: reject drive-relative license-file paths in metadata validation (#1382)  * reject drive-relative license-file paths  * fixup! reject drive-relative license-file paths  ---------  Co-authored-by: ",
+   "the_question": {
+    "asked_of": "the author of the change",
+    "needs": "one input and the outcome it must produce",
+    "reachable_callables": 2,
+    "statement_supplies_an_expected_value": false
+   },
+   "tokens": {
+    "exceptions": 0,
+    "identifiers": 8,
+    "numbers": 1,
+    "quoted": 0
+   },
+   "unpinned_parts": 0
+  },
+  {
+   "callables": 2,
+   "named": 2,
+   "parts": [
+    {
+     "candidates": 0,
+     "named": true,
+     "part_head": "(removal)",
+     "state": "REFUSED__STATEMENT_QUOTES_NOTHING"
+    },
+    {
+     "candidates": 0,
+     "named": true,
+     "part_head": "(removal)",
+     "state": "REFUSED__STATEMENT_QUOTES_NOTHING"
+    }
+   ],
+   "repo": "pypa/packaging",
+   "sha": "2d57ce2b15a85be2c2b07ad5831ed4921429edcb",
+   "source": "src/packaging/dependency_groups.py",
+   "specified": 0,
+   "state": "NAMED_ONLY",
+   "statement": "refactor(dependency-groups): validate includes before resolving (#1439)  Resolution now has two phases. A depth-first pass parses each reachable group once and collects parse errors and include cycles",
+   "the_question": {
+    "asked_of": "the author of the change",
+    "needs": "one input and the outcome it must produce",
+    "reachable_callables": 2,
+    "statement_supplies_an_expected_value": false
+   },
+   "tokens": {
+    "exceptions": 0,
+    "identifiers": 20,
+    "numbers": 3,
+    "quoted": 0
+   },
+   "unpinned_parts": 2
+  },
+  {
+   "callables": 4,
+   "named": 0,
+   "parts": [],
+   "repo": "pypa/packaging",
+   "sha": "55584fb5ca327ba38b74ca5c668125caaebd9a5d",
+   "source": "src/packaging/_parser.py",
+   "specified": 0,
+   "state": "FULLY_PINNED",
+   "statement": "Ensure that the entire string is consumed with `parse_marker` (#687)  Co-authored-by: Pradyun Gedam <pradyunsg@users.noreply.github.com>",
+   "the_question": {
+    "asked_of": "the author of the change",
+    "needs": "one input and the outcome it must produce",
+    "reachable_callables": 4,
+    "statement_supplies_an_expected_value": true
+   },
+   "tokens": {
+    "exceptions": 0,
+    "identifiers": 4,
+    "numbers": 1,
+    "quoted": 1
+   },
+   "unpinned_parts": 0
+  },
+  {
+   "callables": 3,
+   "named": 0,
+   "parts": [],
+   "repo": "pypa/packaging",
+   "sha": "98b4bfb6828baaf01081aa3a123302fe3020b63a",
+   "source": "src/packaging/markers.py",
+   "specified": 0,
+   "state": "FULLY_PINNED",
+   "statement": "feat: marker & and | (#1146)  * feat: add and/or support for Marker  Signed-off-by: Henry Schreiner <henryschreineriii@gmail.com>  * refactor: build from marker list  Signed-off-by: Henry Schreiner <h",
+   "the_question": {
+    "asked_of": "the author of the change",
+    "needs": "one input and the outcome it must produce",
+    "reachable_callables": 3,
+    "statement_supplies_an_expected_value": false
+   },
+   "tokens": {
+    "exceptions": 0,
+    "identifiers": 7,
+    "numbers": 1,
+    "quoted": 0
+   },
+   "unpinned_parts": 0
+  },
+  {
+   "callables": 2,
+   "named": 0,
+   "parts": [],
+   "repo": "pypa/packaging",
+   "sha": "bddb69038b25b974bdf27d06d500dc05b1f8f97e",
+   "source": "src/packaging/markers.py",
+   "specified": 0,
+   "state": "FULLY_PINNED",
+   "statement": "fix(markers): reject strings for extras and dependency_groups (#1507)  * fix(markers): reject strings for extras and dependency_groups  * test(markers): cover set-valued marker compatibility",
+   "the_question": {
+    "asked_of": "the author of the change",
+    "needs": "one input and the outcome it must produce",
+    "reachable_callables": 2,
+    "statement_supplies_an_expected_value": false
+   },
+   "tokens": {
+    "exceptions": 0,
+    "identifiers": 9,
+    "numbers": 1,
+    "quoted": 0
+   },
+   "unpinned_parts": 0
+  },
+  {
+   "callables": 0,
+   "named": 0,
+   "parts": [],
+   "repo": "hukkin/tomli",
+   "sha": "12314bde5b89a8bdc32de7403a2a4cf786187bbc",
+   "source": "src/tomli/_parser.py",
+   "specified": 0,
+   "state": "FULLY_PINNED",
+   "statement": "TOML 1.1: Add \\xHH Unicode escape code to basic strings (#202)",
+   "the_question": {
+    "asked_of": "the author of the change",
+    "needs": "one input and the outcome it must produce",
+    "reachable_callables": 0,
+    "statement_supplies_an_expected_value": false
+   },
+   "tokens": {
+    "exceptions": 0,
+    "identifiers": 7,
+    "numbers": 2,
+    "quoted": 0
+   },
+   "unpinned_parts": 0
+  },
+  {
+   "callables": 1,
+   "named": 1,
+   "parts": [
+    {
+     "candidates": 0,
+     "named": false,
+     "part_head": "raise suffixed_err(src, new_pos, f\"Expected {expect!r}\") from None",
+     "state": "REFUSED__STATEMENT_QUOTES_NOTHING"
+    },
+    {
+     "candidates": 0,
+     "named": true,
+     "part_head": "raise suffixed_err(src, pos, f\"Illegal character {char!r}\")",
+     "state": "REFUSED__STATEMENT_QUOTES_NOTHING"
+    }
+   ],
+   "repo": "hukkin/tomli",
+   "sha": "31c85a18468adbb5f2e892aa96cf0930ac04f93c",
+   "source": "tomli/_parser.py",
+   "specified": 0,
+   "state": "NAMED_ONLY",
+   "statement": "Error messages: Surround illegal character by only one pair of quotation marks",
+   "the_question": {
+    "asked_of": "the author of the change",
+    "needs": "one input and the outcome it must produce",
+    "reachable_callables": 1,
+    "statement_supplies_an_expected_value": false
+   },
+   "tokens": {
+    "exceptions": 0,
+    "identifiers": 5,
+    "numbers": 0,
+    "quoted": 0
+   },
+   "unpinned_parts": 2
+  },
+  {
+   "callables": 1,
+   "named": 1,
+   "parts": [
+    {
+     "candidates": 0,
+     "named": true,
+     "part_head": "suffix_location(\n                    state, \"End of line or end of document not found after a statement\"\n               ",
+     "state": "REFUSED__STATEMENT_QUOTES_NOTHING"
+    },
+    {
+     "candidates": 0,
+     "named": false,
+     "part_head": "raise TOMLDecodeError(\n                suffix_location(state, f'Expected but did not find \"{expect_char!r}\"')\n          ",
+     "state": "REFUSED__STATEMENT_QUOTES_NOTHING"
+    },
+    {
+     "candidates": 0,
+     "named": false,
+     "part_head": "raise TOMLDecodeError(\n                suffix_location(state, f'Invalid character \"{char!r}\" found')\n            )",
+     "state": "REFUSED__STATEMENT_QUOTES_NOTHING"
+    }
+   ],
+   "repo": "hukkin/tomli",
+   "sha": "67ec7d10528bd7b00ff1fc62da9a8a1e06406179",
+   "source": "tomli/_parser.py",
+   "specified": 0,
+   "state": "NAMED_ONLY",
+   "statement": "NEW: Print line and column in error message when relevant (#8)",
+   "the_question": {
+    "asked_of": "the author of the change",
+    "needs": "one input and the outcome it must produce",
+    "reachable_callables": 1,
+    "statement_supplies_an_expected_value": false
+   },
+   "tokens": {
+    "exceptions": 0,
+    "identifiers": 5,
+    "numbers": 1,
+    "quoted": 0
+   },
+   "unpinned_parts": 3
+  },
+  {
+   "callables": 0,
+   "named": 1,
+   "parts": [
+    {
+     "candidates": 0,
+     "named": false,
+     "part_head": "(removal)",
+     "state": "REFUSED__STATEMENT_QUOTES_NOTHING"
+    },
+    {
+     "candidates": 0,
+     "named": false,
+     "part_head": "self.parse_float = parse_float\n\n        # Mutable read-only",
+     "state": "REFUSED__STATEMENT_QUOTES_NOTHING"
+    },
+    {
+     "candidates": 0,
+     "named": true,
+     "part_head": "self.flags = Flags()",
+     "state": "REFUSED__STATEMENT_QUOTES_NOTHING"
+    }
+   ],
+   "repo": "hukkin/tomli",
+   "sha": "9655d330043253c2d10e10865af9f1e56b32feb6",
+   "source": "tomli/_parser.py",
+   "specified": 0,
+   "state": "NAMED_ONLY",
+   "statement": "Unify handling of \"frozen\" and \"explicitly_created\" flags (#37)",
+   "the_question": {
+    "asked_of": "the author of the change",
+    "needs": "one input and the outcome it must produce",
+    "reachable_callables": 0,
+    "statement_supplies_an_expected_value": true
+   },
+   "tokens": {
+    "exceptions": 0,
+    "identifiers": 3,
+    "numbers": 1,
+    "quoted": 2
+   },
+   "unpinned_parts": 3
+  },
+  {
+   "callables": 0,
+   "named": 0,
+   "parts": [],
+   "repo": "hukkin/tomli",
+   "sha": "9eb2125ef49071e673d42e383b5221a268665193",
+   "source": "src/tomli/_re.py",
+   "specified": 0,
+   "state": "FULLY_PINNED",
+   "statement": "TOML 1.1: Make seconds optional in Date-Time and Time (#203)",
+   "the_question": {
+    "asked_of": "the author of the change",
+    "needs": "one input and the outcome it must produce",
+    "reachable_callables": 0,
+    "statement_supplies_an_expected_value": false
+   },
+   "tokens": {
+    "exceptions": 0,
+    "identifiers": 2,
+    "numbers": 2,
+    "quoted": 0
+   },
+   "unpinned_parts": 0
+  }
+ ],
+ "schema": "BRAIN_THE_SMALLEST_QUESTION_THAT_MAKES_THIS_CHECKABLE_V1",
+ "totals": {
+  "candidates_probed": 0,
+  "certified_share_after": 0.762,
+  "certified_share_before": 0.762,
+  "differences_found": 0,
+  "naming_share": 0.545,
+  "parts_audited": 11,
+  "parts_that_require_a_question": 11,
+  "parts_the_statement_names": 6,
+  "parts_the_statement_specifies": 0,
+  "specifying_share": 0.0,
+  "states": {
+   "FULLY_PINNED": 6,
+   "NAMED_ONLY": 5
+  },
+  "tasks": 11,
+  "tasks_with_a_statement": 11
+ }
+}

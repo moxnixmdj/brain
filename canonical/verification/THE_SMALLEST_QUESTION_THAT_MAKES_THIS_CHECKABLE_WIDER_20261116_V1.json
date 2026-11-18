@@ -1,0 +1,470 @@
+{
+ "authority": "NONE -- sandbox measurement, not independent verification",
+ "model_calls": 0,
+ "network_calls": 0,
+ "rows": [
+  {
+   "callables": 0,
+   "named": 1,
+   "parts": [
+    {
+     "candidates": 0,
+     "named": true,
+     "part_head": "default_digest_method: t.Any = staticmethod(_lazy_sha1)",
+     "state": "REFUSED__STATEMENT_QUOTES_NOTHING"
+    }
+   ],
+   "repo": "pallets/itsdangerous",
+   "sha": "7f4dcf83a07bb3d53f4e0e65ef1b43327b4cca90",
+   "source": "src/itsdangerous/signer.py",
+   "specified": 0,
+   "state": "NAMED_ONLY",
+   "statement": "access sha1 lazily",
+   "the_question": {
+    "asked_of": "the author of the change",
+    "needs": "one input and the outcome it must produce",
+    "reachable_callables": 0,
+    "statement_supplies_an_expected_value": false
+   },
+   "tokens": {
+    "exceptions": 0,
+    "identifiers": 2,
+    "numbers": 0,
+    "quoted": 0
+   },
+   "unpinned_parts": 1
+  },
+  {
+   "callables": 2,
+   "named": 0,
+   "parts": [],
+   "repo": "pypa/packaging",
+   "sha": "022ae6c6fe5c2ef9615875d0ecfab1ae4024720f",
+   "source": "src/packaging/metadata.py",
+   "specified": 0,
+   "state": "FULLY_PINNED",
+   "statement": "fix: reject drive-relative license-file paths in metadata validation (#1382)  * reject drive-relative license-file paths  * fixup! reject drive-relative license-file paths  ---------  Co-authored-by: ",
+   "the_question": {
+    "asked_of": "the author of the change",
+    "needs": "one input and the outcome it must produce",
+    "reachable_callables": 2,
+    "statement_supplies_an_expected_value": false
+   },
+   "tokens": {
+    "exceptions": 0,
+    "identifiers": 8,
+    "numbers": 1,
+    "quoted": 0
+   },
+   "unpinned_parts": 0
+  },
+  {
+   "callables": 2,
+   "named": 0,
+   "parts": [],
+   "repo": "pypa/packaging",
+   "sha": "258202ed7f796bdb8a65252a66c3fbd3e69e97f6",
+   "source": "src/packaging/utils.py",
+   "specified": 0,
+   "state": "FULLY_PINNED",
+   "statement": "Correct regex for metadata 'name' format (#925)  The current regex permits strings that end in the newline character, which is counter to what the description for the field states (\"ASCII letters and ",
+   "the_question": {
+    "asked_of": "the author of the change",
+    "needs": "one input and the outcome it must produce",
+    "reachable_callables": 2,
+    "statement_supplies_an_expected_value": true
+   },
+   "tokens": {
+    "exceptions": 0,
+    "identifiers": 8,
+    "numbers": 1,
+    "quoted": 3
+   },
+   "unpinned_parts": 0
+  },
+  {
+   "callables": 1,
+   "named": 0,
+   "parts": [],
+   "repo": "pypa/packaging",
+   "sha": "349abfad0688f42eb835ed8a10380d6cbf6940e7",
+   "source": "src/packaging/dependency_groups.py",
+   "specified": 0,
+   "state": "FULLY_PINNED",
+   "statement": "fix: dependency group malformed parse caching (#1248)  * Fix dependency group malformed parse caching  * style: format dependency group include  * Address review: assign message to a variable before e",
+   "the_question": {
+    "asked_of": "the author of the change",
+    "needs": "one input and the outcome it must produce",
+    "reachable_callables": 1,
+    "statement_supplies_an_expected_value": true
+   },
+   "tokens": {
+    "exceptions": 1,
+    "identifiers": 17,
+    "numbers": 2,
+    "quoted": 1
+   },
+   "unpinned_parts": 0
+  },
+  {
+   "callables": 2,
+   "named": 0,
+   "parts": [],
+   "repo": "pypa/packaging",
+   "sha": "553582d9162c761e4ab97ccc6cea43ac14ff2a8b",
+   "source": "src/packaging/metadata.py",
+   "specified": 0,
+   "state": "FULLY_PINNED",
+   "statement": "fix(metadata): charset error message formatting (#1121)",
+   "the_question": {
+    "asked_of": "the author of the change",
+    "needs": "one input and the outcome it must produce",
+    "reachable_callables": 2,
+    "statement_supplies_an_expected_value": false
+   },
+   "tokens": {
+    "exceptions": 0,
+    "identifiers": 4,
+    "numbers": 1,
+    "quoted": 0
+   },
+   "unpinned_parts": 0
+  },
+  {
+   "callables": 2,
+   "named": 0,
+   "parts": [],
+   "repo": "pypa/packaging",
+   "sha": "84833cc16be84bc7f1d9f64e2818afe0dd48aade",
+   "source": "src/packaging/utils.py",
+   "specified": 0,
+   "state": "FULLY_PINNED",
+   "statement": "fix(utils): reject empty project name in wheel/sdist filename parsers (#1305)",
+   "the_question": {
+    "asked_of": "the author of the change",
+    "needs": "one input and the outcome it must produce",
+    "reachable_callables": 2,
+    "statement_supplies_an_expected_value": false
+   },
+   "tokens": {
+    "exceptions": 0,
+    "identifiers": 8,
+    "numbers": 1,
+    "quoted": 0
+   },
+   "unpinned_parts": 0
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "9f5249fba27e63745cc9a6bc3f2a7b8f47220a8f",
+   "source": "src/packaging/metadata.py",
+   "state": "REFUSED__CONTROL_BROKEN"
+  },
+  {
+   "callables": 5,
+   "named": 0,
+   "parts": [],
+   "repo": "pypa/packaging",
+   "sha": "b80e6eb0a6c0f61dcaa9b1587f3aab370263dc65",
+   "source": "src/packaging/pylock.py",
+   "specified": 0,
+   "state": "FULLY_PINNED",
+   "statement": "fix(pylock): respect explicitly empty environments in select() (#1362)  Co-authored-by: r266-tech <r266-tech@users.noreply.github.com>",
+   "the_question": {
+    "asked_of": "the author of the change",
+    "needs": "one input and the outcome it must produce",
+    "reachable_callables": 5,
+    "statement_supplies_an_expected_value": false
+   },
+   "tokens": {
+    "exceptions": 0,
+    "identifiers": 7,
+    "numbers": 1,
+    "quoted": 0
+   },
+   "unpinned_parts": 0
+  },
+  {
+   "callables": 1,
+   "named": 1,
+   "parts": [
+    {
+     "candidates": 0,
+     "named": true,
+     "part_head": "elif isinstance(state, dict) and state.keys() >= set(self.__slots__):",
+     "state": "REFUSED__STATEMENT_QUOTES_NOTHING"
+    }
+   ],
+   "repo": "pypa/packaging",
+   "sha": "d5fedc90bba333ed0962ba5dfb7072d38f2c1d84",
+   "source": "src/packaging/requirements.py",
+   "specified": 0,
+   "state": "NAMED_ONLY",
+   "statement": "perf: add __slots__ to Requirement (#1320)",
+   "the_question": {
+    "asked_of": "the author of the change",
+    "needs": "one input and the outcome it must produce",
+    "reachable_callables": 1,
+    "statement_supplies_an_expected_value": false
+   },
+   "tokens": {
+    "exceptions": 0,
+    "identifiers": 2,
+    "numbers": 1,
+    "quoted": 0
+   },
+   "unpinned_parts": 1
+  },
+  {
+   "callables": 0,
+   "named": 0,
+   "parts": [],
+   "repo": "hukkin/tomli",
+   "sha": "12314bde5b89a8bdc32de7403a2a4cf786187bbc",
+   "source": "src/tomli/_parser.py",
+   "specified": 0,
+   "state": "FULLY_PINNED",
+   "statement": "TOML 1.1: Add \\xHH Unicode escape code to basic strings (#202)",
+   "the_question": {
+    "asked_of": "the author of the change",
+    "needs": "one input and the outcome it must produce",
+    "reachable_callables": 0,
+    "statement_supplies_an_expected_value": false
+   },
+   "tokens": {
+    "exceptions": 0,
+    "identifiers": 7,
+    "numbers": 2,
+    "quoted": 0
+   },
+   "unpinned_parts": 0
+  },
+  {
+   "callables": 2,
+   "named": 0,
+   "parts": [],
+   "repo": "hukkin/tomli",
+   "sha": "1e6e869aa9dbbddc492608944e82d9ad5397280f",
+   "source": "src/tomli/_parser.py",
+   "specified": 0,
+   "state": "FULLY_PINNED",
+   "statement": "Set smaller MAX_INLINE_NESTING to avoid python:3.13-alpine worker thread crash",
+   "the_question": {
+    "asked_of": "the author of the change",
+    "needs": "one input and the outcome it must produce",
+    "reachable_callables": 2,
+    "statement_supplies_an_expected_value": false
+   },
+   "tokens": {
+    "exceptions": 0,
+    "identifiers": 6,
+    "numbers": 1,
+    "quoted": 0
+   },
+   "unpinned_parts": 0
+  },
+  {
+   "callables": 0,
+   "named": 0,
+   "parts": [],
+   "repo": "hukkin/tomli",
+   "sha": "2a2aa62f1bc71b89b74d41dd2ab67b5dd24bc129",
+   "source": "src/tomli/_parser.py",
+   "specified": 0,
+   "state": "FULLY_PINNED",
+   "statement": "TOML 1.1: Allow newlines and trailing comma in inline tables (#200)",
+   "the_question": {
+    "asked_of": "the author of the change",
+    "needs": "one input and the outcome it must produce",
+    "reachable_callables": 0,
+    "statement_supplies_an_expected_value": false
+   },
+   "tokens": {
+    "exceptions": 0,
+    "identifiers": 4,
+    "numbers": 2,
+    "quoted": 0
+   },
+   "unpinned_parts": 0
+  },
+  {
+   "callables": 1,
+   "named": 1,
+   "parts": [
+    {
+     "candidates": 0,
+     "named": false,
+     "part_head": "raise suffixed_err(src, new_pos, f\"Expected {expect!r}\") from None",
+     "state": "REFUSED__STATEMENT_QUOTES_NOTHING"
+    },
+    {
+     "candidates": 0,
+     "named": true,
+     "part_head": "raise suffixed_err(src, pos, f\"Illegal character {char!r}\")",
+     "state": "REFUSED__STATEMENT_QUOTES_NOTHING"
+    }
+   ],
+   "repo": "hukkin/tomli",
+   "sha": "31c85a18468adbb5f2e892aa96cf0930ac04f93c",
+   "source": "tomli/_parser.py",
+   "specified": 0,
+   "state": "NAMED_ONLY",
+   "statement": "Error messages: Surround illegal character by only one pair of quotation marks",
+   "the_question": {
+    "asked_of": "the author of the change",
+    "needs": "one input and the outcome it must produce",
+    "reachable_callables": 1,
+    "statement_supplies_an_expected_value": false
+   },
+   "tokens": {
+    "exceptions": 0,
+    "identifiers": 5,
+    "numbers": 0,
+    "quoted": 0
+   },
+   "unpinned_parts": 2
+  },
+  {
+   "callables": 0,
+   "named": 0,
+   "parts": [],
+   "repo": "hukkin/tomli",
+   "sha": "4e245a4bbbefed99e550e196095ea65c851cf31d",
+   "source": "src/tomli/_parser.py",
+   "specified": 0,
+   "state": "FULLY_PINNED",
+   "statement": "`tomli.loads`: Raise TypeError not AttributeError. Improve message (#229)",
+   "the_question": {
+    "asked_of": "the author of the change",
+    "needs": "one input and the outcome it must produce",
+    "reachable_callables": 0,
+    "statement_supplies_an_expected_value": true
+   },
+   "tokens": {
+    "exceptions": 2,
+    "identifiers": 4,
+    "numbers": 1,
+    "quoted": 1
+   },
+   "unpinned_parts": 0
+  },
+  {
+   "callables": 1,
+   "named": 0,
+   "parts": [
+    {
+     "candidates": 0,
+     "named": false,
+     "part_head": "(removal)",
+     "state": "REFUSED__STATEMENT_QUOTES_NOTHING"
+    }
+   ],
+   "repo": "hukkin/tomli",
+   "sha": "5ab9ec926d9dc1ef79e66215edd51285371fe8a0",
+   "source": "tomli/_parser.py",
+   "specified": 0,
+   "state": "NAMED_ONLY",
+   "statement": "NEW: Allow float parse func customisation (#2)  * NEW: Allow float parse func customisation  * Add a test  * changelog  * Document parse_float",
+   "the_question": {
+    "asked_of": "the author of the change",
+    "needs": "one input and the outcome it must produce",
+    "reachable_callables": 1,
+    "statement_supplies_an_expected_value": false
+   },
+   "tokens": {
+    "exceptions": 0,
+    "identifiers": 5,
+    "numbers": 1,
+    "quoted": 0
+   },
+   "unpinned_parts": 1
+  },
+  {
+   "callables": 1,
+   "named": 1,
+   "parts": [
+    {
+     "candidates": 0,
+     "named": true,
+     "part_head": "suffix_location(\n                    state, \"End of line or end of document not found after a statement\"\n               ",
+     "state": "REFUSED__STATEMENT_QUOTES_NOTHING"
+    },
+    {
+     "candidates": 0,
+     "named": false,
+     "part_head": "raise TOMLDecodeError(\n                suffix_location(state, f'Expected but did not find \"{expect_char!r}\"')\n          ",
+     "state": "REFUSED__STATEMENT_QUOTES_NOTHING"
+    },
+    {
+     "candidates": 0,
+     "named": false,
+     "part_head": "raise TOMLDecodeError(\n                suffix_location(state, f'Invalid character \"{char!r}\" found')\n            )",
+     "state": "REFUSED__STATEMENT_QUOTES_NOTHING"
+    }
+   ],
+   "repo": "hukkin/tomli",
+   "sha": "67ec7d10528bd7b00ff1fc62da9a8a1e06406179",
+   "source": "tomli/_parser.py",
+   "specified": 0,
+   "state": "NAMED_ONLY",
+   "statement": "NEW: Print line and column in error message when relevant (#8)",
+   "the_question": {
+    "asked_of": "the author of the change",
+    "needs": "one input and the outcome it must produce",
+    "reachable_callables": 1,
+    "statement_supplies_an_expected_value": false
+   },
+   "tokens": {
+    "exceptions": 0,
+    "identifiers": 5,
+    "numbers": 1,
+    "quoted": 0
+   },
+   "unpinned_parts": 3
+  },
+  {
+   "callables": 0,
+   "named": 0,
+   "parts": [],
+   "repo": "hukkin/tomli",
+   "sha": "794c8e50d676f1e8e081914eb77e4a48a4f6a20b",
+   "source": "src/tomli/_parser.py",
+   "specified": 0,
+   "state": "FULLY_PINNED",
+   "statement": "Eagerly raise an error if parse_float produces illegal types (#180)",
+   "the_question": {
+    "asked_of": "the author of the change",
+    "needs": "one input and the outcome it must produce",
+    "reachable_callables": 0,
+    "statement_supplies_an_expected_value": false
+   },
+   "tokens": {
+    "exceptions": 0,
+    "identifiers": 4,
+    "numbers": 1,
+    "quoted": 0
+   },
+   "unpinned_parts": 0
+  }
+ ],
+ "schema": "BRAIN_THE_SMALLEST_QUESTION_THAT_MAKES_THIS_CHECKABLE_V1",
+ "totals": {
+  "candidates_probed": 0,
+  "certified_share_after": 0.762,
+  "certified_share_before": 0.762,
+  "differences_found": 0,
+  "naming_share": 0.5,
+  "parts_audited": 8,
+  "parts_that_require_a_question": 8,
+  "parts_the_statement_names": 4,
+  "parts_the_statement_specifies": 0,
+  "specifying_share": 0.0,
+  "states": {
+   "FULLY_PINNED": 11,
+   "NAMED_ONLY": 5,
+   "REFUSED__CONTROL_BROKEN": 1
+  },
+  "tasks": 17,
+  "tasks_with_a_statement": 16
+ }
+}
