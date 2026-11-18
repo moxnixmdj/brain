@@ -1,0 +1,240 @@
+{
+ "authority": "NONE -- sandbox measurement, not independent verification",
+ "model_calls": 0,
+ "network_calls": 0,
+ "rows": [
+  {
+   "calls_from_the_test": 0,
+   "parts": [
+    {
+     "assertions_tried": 0,
+     "differences": 0,
+     "part_head": "    default_digest_method: t.Any = staticmethod(_lazy_sha1)\n",
+     "state": "NOT_PINNED__NO_OBSERVABLE_DIFFERENCE"
+    }
+   ],
+   "pinned_by_synthesis": 0,
+   "repo": "pallets/itsdangerous",
+   "sha": "7f4dcf83a07bb3d53f4e0e65ef1b43327b4cca90",
+   "source": "src/itsdangerous/signer.py",
+   "state": "NOT_PINNED__NO_OBSERVABLE_DIFFERENCE",
+   "unpinned_parts": 1
+  },
+  {
+   "calls_from_the_test": 12,
+   "parts": [],
+   "pinned_by_synthesis": 0,
+   "repo": "pypa/packaging",
+   "sha": "022ae6c6fe5c2ef9615875d0ecfab1ae4024720f",
+   "source": "src/packaging/metadata.py",
+   "state": "FULLY_PINNED",
+   "unpinned_parts": 0
+  },
+  {
+   "calls_from_the_test": 3,
+   "parts": [],
+   "pinned_by_synthesis": 0,
+   "repo": "pypa/packaging",
+   "sha": "258202ed7f796bdb8a65252a66c3fbd3e69e97f6",
+   "source": "src/packaging/utils.py",
+   "state": "FULLY_PINNED",
+   "unpinned_parts": 0
+  },
+  {
+   "calls_from_the_test": 1,
+   "parts": [],
+   "pinned_by_synthesis": 0,
+   "repo": "pypa/packaging",
+   "sha": "349abfad0688f42eb835ed8a10380d6cbf6940e7",
+   "source": "src/packaging/dependency_groups.py",
+   "state": "FULLY_PINNED",
+   "unpinned_parts": 0
+  },
+  {
+   "calls_from_the_test": 12,
+   "parts": [],
+   "pinned_by_synthesis": 0,
+   "repo": "pypa/packaging",
+   "sha": "553582d9162c761e4ab97ccc6cea43ac14ff2a8b",
+   "source": "src/packaging/metadata.py",
+   "state": "FULLY_PINNED",
+   "unpinned_parts": 0
+  },
+  {
+   "calls_from_the_test": 6,
+   "parts": [],
+   "pinned_by_synthesis": 0,
+   "repo": "pypa/packaging",
+   "sha": "84833cc16be84bc7f1d9f64e2818afe0dd48aade",
+   "source": "src/packaging/utils.py",
+   "state": "FULLY_PINNED",
+   "unpinned_parts": 0
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "9f5249fba27e63745cc9a6bc3f2a7b8f47220a8f",
+   "source": "src/packaging/metadata.py",
+   "state": "REFUSED__CONTROL_BROKEN"
+  },
+  {
+   "calls_from_the_test": 12,
+   "parts": [],
+   "pinned_by_synthesis": 0,
+   "repo": "pypa/packaging",
+   "sha": "b80e6eb0a6c0f61dcaa9b1587f3aab370263dc65",
+   "source": "src/packaging/pylock.py",
+   "state": "FULLY_PINNED",
+   "unpinned_parts": 0
+  },
+  {
+   "calls_from_the_test": 5,
+   "parts": [
+    {
+     "assertions_tried": 0,
+     "differences": 0,
+     "part_head": "        elif isinstance(state, dict) and state.keys() >= set(self.__slots__):\n",
+     "state": "NOT_PINNED__NO_OBSERVABLE_DIFFERENCE"
+    }
+   ],
+   "pinned_by_synthesis": 0,
+   "repo": "pypa/packaging",
+   "sha": "d5fedc90bba333ed0962ba5dfb7072d38f2c1d84",
+   "source": "src/packaging/requirements.py",
+   "state": "NOT_PINNED__NO_OBSERVABLE_DIFFERENCE",
+   "unpinned_parts": 1
+  },
+  {
+   "calls_from_the_test": 0,
+   "parts": [],
+   "pinned_by_synthesis": 0,
+   "repo": "hukkin/tomli",
+   "sha": "12314bde5b89a8bdc32de7403a2a4cf786187bbc",
+   "source": "src/tomli/_parser.py",
+   "state": "FULLY_PINNED",
+   "unpinned_parts": 0
+  },
+  {
+   "calls_from_the_test": 6,
+   "parts": [],
+   "pinned_by_synthesis": 0,
+   "repo": "hukkin/tomli",
+   "sha": "1e6e869aa9dbbddc492608944e82d9ad5397280f",
+   "source": "src/tomli/_parser.py",
+   "state": "FULLY_PINNED",
+   "unpinned_parts": 0
+  },
+  {
+   "calls_from_the_test": 0,
+   "parts": [],
+   "pinned_by_synthesis": 0,
+   "repo": "hukkin/tomli",
+   "sha": "2a2aa62f1bc71b89b74d41dd2ab67b5dd24bc129",
+   "source": "src/tomli/_parser.py",
+   "state": "FULLY_PINNED",
+   "unpinned_parts": 0
+  },
+  {
+   "calls_from_the_test": 6,
+   "parts": [
+    {
+     "assertions_tried": 0,
+     "differences": 0,
+     "part_head": "            raise suffixed_err(src, new_pos, f\"Expected {expect!r}\") from None\n",
+     "state": "NOT_PINNED__NO_OBSERVABLE_DIFFERENCE"
+    },
+    {
+     "assertions_tried": 0,
+     "differences": 0,
+     "part_head": "            raise suffixed_err(src, pos, f\"Illegal character {char!r}\")\n",
+     "state": "NOT_PINNED__NO_OBSERVABLE_DIFFERENCE"
+    }
+   ],
+   "pinned_by_synthesis": 0,
+   "repo": "hukkin/tomli",
+   "sha": "31c85a18468adbb5f2e892aa96cf0930ac04f93c",
+   "source": "tomli/_parser.py",
+   "state": "NOT_PINNED__NO_OBSERVABLE_DIFFERENCE",
+   "unpinned_parts": 2
+  },
+  {
+   "calls_from_the_test": 0,
+   "parts": [],
+   "pinned_by_synthesis": 0,
+   "repo": "hukkin/tomli",
+   "sha": "4e245a4bbbefed99e550e196095ea65c851cf31d",
+   "source": "src/tomli/_parser.py",
+   "state": "FULLY_PINNED",
+   "unpinned_parts": 0
+  },
+  {
+   "calls_from_the_test": 5,
+   "parts": [
+    {
+     "assertions_tried": 0,
+     "differences": 0,
+     "part_head": "",
+     "state": "NOT_PINNED__NO_OBSERVABLE_DIFFERENCE"
+    }
+   ],
+   "pinned_by_synthesis": 0,
+   "repo": "hukkin/tomli",
+   "sha": "5ab9ec926d9dc1ef79e66215edd51285371fe8a0",
+   "source": "tomli/_parser.py",
+   "state": "NOT_PINNED__NO_OBSERVABLE_DIFFERENCE",
+   "unpinned_parts": 1
+  },
+  {
+   "calls_from_the_test": 5,
+   "parts": [
+    {
+     "assertions_tried": 0,
+     "differences": 0,
+     "part_head": "                suffix_location(\n                    state, \"End of line or end of document not found after a statement\"\n                )\n",
+     "state": "NOT_PINNED__NO_OBSERVABLE_DIFFERENCE"
+    },
+    {
+     "assertions_tried": 0,
+     "differences": 0,
+     "part_head": "            raise TOMLDecodeError(\n                suffix_location(state, f'Expected but did not find \"{expect_char!r}\"')\n            )\n",
+     "state": "NOT_PINNED__NO_OBSERVABLE_DIFFERENCE"
+    },
+    {
+     "assertions_tried": 0,
+     "differences": 0,
+     "part_head": "            raise TOMLDecodeError(\n                suffix_location(state, f'Invalid character \"{char!r}\" found')\n            )\n",
+     "state": "NOT_PINNED__NO_OBSERVABLE_DIFFERENCE"
+    }
+   ],
+   "pinned_by_synthesis": 0,
+   "repo": "hukkin/tomli",
+   "sha": "67ec7d10528bd7b00ff1fc62da9a8a1e06406179",
+   "source": "tomli/_parser.py",
+   "state": "NOT_PINNED__NO_OBSERVABLE_DIFFERENCE",
+   "unpinned_parts": 3
+  },
+  {
+   "calls_from_the_test": 0,
+   "parts": [],
+   "pinned_by_synthesis": 0,
+   "repo": "hukkin/tomli",
+   "sha": "794c8e50d676f1e8e081914eb77e4a48a4f6a20b",
+   "source": "src/tomli/_parser.py",
+   "state": "FULLY_PINNED",
+   "unpinned_parts": 0
+  }
+ ],
+ "schema": "BRAIN_PINS_FROM_THE_REVERTED_PART_V1",
+ "totals": {
+  "no_observable_difference": 8,
+  "pinned_by_synthesis": 0,
+  "refused_receiver": 0,
+  "share_of_unpinned_pinned": 0.0,
+  "states": {
+   "FULLY_PINNED": 11,
+   "NOT_PINNED__NO_OBSERVABLE_DIFFERENCE": 5,
+   "REFUSED__CONTROL_BROKEN": 1
+  },
+  "tasks": 17,
+  "unpinned_parts_audited": 8
+ }
+}

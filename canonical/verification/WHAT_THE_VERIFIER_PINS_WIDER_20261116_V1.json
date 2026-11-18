@@ -1,0 +1,632 @@
+{
+ "authority": "NONE -- sandbox measurement, not independent verification",
+ "model_calls": 0,
+ "network_calls": 0,
+ "rows": [
+  {
+   "behavioural_parts": 3,
+   "behavioural_pinned": 2,
+   "parts": [
+    {
+     "added_lines": "def _lazy_sha1(string: bytes = b\"\") -> t.Any:\n    \"\"\"Don't access ``hashlib.sha1`` until runtime. FIPS builds may not include\n    SHA-1, in which case the import and use as a default would fail before the\n    developer can configure something else.\n    \"\"\"\n    return hashlib.sha1(string)\n\n\n",
+     "behavioural": true,
+     "part": 0,
+     "pinned": true,
+     "tag": "insert",
+     "typing_only": false
+    },
+    {
+     "added_lines": "    default_digest_method: t.Any = staticmethod(_lazy_sha1)\n",
+     "behavioural": true,
+     "part": 1,
+     "pinned": false,
+     "tag": "replace",
+     "typing_only": false
+    },
+    {
+     "added_lines": "    default_digest_method: t.Any = staticmethod(_lazy_sha1)\n",
+     "behavioural": true,
+     "part": 2,
+     "pinned": true,
+     "tag": "replace",
+     "typing_only": false
+    }
+   ],
+   "parts_count": 3,
+   "repo": "pallets/itsdangerous",
+   "sha": "7f4dcf83a07bb3d53f4e0e65ef1b43327b4cca90",
+   "source": "src/itsdangerous/signer.py",
+   "state": "PARTIALLY_PINNED__THE_VERIFIER_WOULD_ACCEPT_A_BUG",
+   "typing_only_parts": 0,
+   "unpinned_behavioural": 1,
+   "unpinned_cosmetic": 0,
+   "unpinned_typing_only": 0
+  },
+  {
+   "behavioural_parts": 1,
+   "behavioural_pinned": 1,
+   "parts": [
+    {
+     "added_lines": "                or pathlib.PureWindowsPath(path).drive\n",
+     "behavioural": true,
+     "part": 0,
+     "pinned": true,
+     "tag": "insert",
+     "typing_only": false
+    }
+   ],
+   "parts_count": 1,
+   "repo": "pypa/packaging",
+   "sha": "022ae6c6fe5c2ef9615875d0ecfab1ae4024720f",
+   "source": "src/packaging/metadata.py",
+   "state": "FULLY_PINNED",
+   "typing_only_parts": 0,
+   "unpinned_behavioural": 0,
+   "unpinned_cosmetic": 0,
+   "unpinned_typing_only": 0
+  },
+  {
+   "behavioural_parts": 1,
+   "behavioural_pinned": 1,
+   "parts": [
+    {
+     "added_lines": "    r\"^([A-Z0-9]|[A-Z0-9][A-Z0-9._-]*[A-Z0-9])\\Z\", re.IGNORECASE\n",
+     "behavioural": true,
+     "part": 0,
+     "pinned": true,
+     "tag": "replace",
+     "typing_only": false
+    }
+   ],
+   "parts_count": 1,
+   "repo": "pypa/packaging",
+   "sha": "258202ed7f796bdb8a65252a66c3fbd3e69e97f6",
+   "source": "src/packaging/utils.py",
+   "state": "FULLY_PINNED",
+   "typing_only_parts": 0,
+   "unpinned_behavioural": 0,
+   "unpinned_cosmetic": 0,
+   "unpinned_typing_only": 0
+  },
+  {
+   "behavioural_parts": 2,
+   "behavioural_pinned": 2,
+   "parts": [
+    {
+     "added_lines": "                    if not isinstance(include_group, str):\n                        msg = (\n                            \"Dependency group include-group value is not a string: \"\n                            f\"{item!r}\"\n                        )\n                        errors.error(TypeError(msg))\n                    else:\n                        elements.append(\n                            DependencyGroupInclude(include_group=include_group)\n                        )\n",
+     "behavioural": true,
+     "part": 0,
+     "pinned": true,
+     "tag": "replace",
+     "typing_only": false
+    },
+    {
+     "added_lines": "\n        if errors.errors:\n            return ()\n",
+     "behavioural": true,
+     "part": 1,
+     "pinned": true,
+     "tag": "insert",
+     "typing_only": false
+    }
+   ],
+   "parts_count": 2,
+   "repo": "pypa/packaging",
+   "sha": "349abfad0688f42eb835ed8a10380d6cbf6940e7",
+   "source": "src/packaging/dependency_groups.py",
+   "state": "FULLY_PINNED",
+   "typing_only_parts": 0,
+   "unpinned_behavioural": 0,
+   "unpinned_cosmetic": 0,
+   "unpinned_typing_only": 0
+  },
+  {
+   "behavioural_parts": 1,
+   "behavioural_pinned": 1,
+   "parts": [
+    {
+     "added_lines": "                f\"{{field}} can only specify the UTF-8 charset, not {charset!r}\"\n",
+     "behavioural": true,
+     "part": 0,
+     "pinned": true,
+     "tag": "replace",
+     "typing_only": false
+    }
+   ],
+   "parts_count": 1,
+   "repo": "pypa/packaging",
+   "sha": "553582d9162c761e4ab97ccc6cea43ac14ff2a8b",
+   "source": "src/packaging/metadata.py",
+   "state": "FULLY_PINNED",
+   "typing_only_parts": 0,
+   "unpinned_behavioural": 0,
+   "unpinned_cosmetic": 0,
+   "unpinned_typing_only": 0
+  },
+  {
+   "behavioural_parts": 2,
+   "behavioural_pinned": 2,
+   "parts": [
+    {
+     "added_lines": "# Requires at least one character so an empty project name is rejected.\n_wheel_name_regex = re.compile(r\"^[\\w._]+$\", re.UNICODE)\n",
+     "behavioural": true,
+     "part": 0,
+     "pinned": true,
+     "tag": "replace",
+     "typing_only": false
+    },
+    {
+     "added_lines": "       Raises :class:`InvalidWheelFilename` on empty tag set components or an\n       empty project name.\n",
+     "behavioural": false,
+     "part": 1,
+     "pinned": false,
+     "tag": "replace",
+     "typing_only": false
+    },
+    {
+     "added_lines": "        if the project name is empty, or if the version portion is not a valid\n        version.\n",
+     "behavioural": false,
+     "part": 2,
+     "pinned": false,
+     "tag": "replace",
+     "typing_only": false
+    },
+    {
+     "added_lines": "\n    .. versionchanged:: 26.3\n       Raises :class:`InvalidSdistFilename` on an empty project name.\n",
+     "behavioural": false,
+     "part": 3,
+     "pinned": false,
+     "tag": "insert",
+     "typing_only": false
+    },
+    {
+     "added_lines": "    if not name_part:\n        raise InvalidSdistFilename(\n            f\"Invalid sdist filename (empty project name): {filename!r}\"\n        )\n",
+     "behavioural": true,
+     "part": 4,
+     "pinned": true,
+     "tag": "insert",
+     "typing_only": false
+    }
+   ],
+   "parts_count": 5,
+   "repo": "pypa/packaging",
+   "sha": "84833cc16be84bc7f1d9f64e2818afe0dd48aade",
+   "source": "src/packaging/utils.py",
+   "state": "PARTIALLY_PINNED__THE_VERIFIER_WOULD_ACCEPT_A_BUG",
+   "typing_only_parts": 0,
+   "unpinned_behavioural": 0,
+   "unpinned_cosmetic": 3,
+   "unpinned_typing_only": 0
+  },
+  {
+   "fixed_passed": false,
+   "parent_passed": false,
+   "repo": "pypa/packaging",
+   "sha": "9f5249fba27e63745cc9a6bc3f2a7b8f47220a8f",
+   "source": "src/packaging/metadata.py",
+   "state": "REFUSED__CONTROL_BROKEN"
+  },
+  {
+   "behavioural_parts": 1,
+   "behavioural_pinned": 1,
+   "parts": [
+    {
+     "added_lines": "        if self.environments is not None:\n",
+     "behavioural": true,
+     "part": 0,
+     "pinned": true,
+     "tag": "replace",
+     "typing_only": false
+    }
+   ],
+   "parts_count": 1,
+   "repo": "pypa/packaging",
+   "sha": "b80e6eb0a6c0f61dcaa9b1587f3aab370263dc65",
+   "source": "src/packaging/pylock.py",
+   "state": "FULLY_PINNED",
+   "typing_only_parts": 0,
+   "unpinned_behavioural": 0,
+   "unpinned_cosmetic": 0,
+   "unpinned_typing_only": 0
+  },
+  {
+   "behavioural_parts": 3,
+   "behavioural_pinned": 2,
+   "parts": [
+    {
+     "added_lines": "    __slots__ = (\"extras\", \"marker\", \"name\", \"specifier\", \"url\")\n\n",
+     "behavioural": true,
+     "part": 0,
+     "pinned": true,
+     "tag": "insert",
+     "typing_only": false
+    },
+    {
+     "added_lines": "        elif isinstance(state, dict) and state.keys() >= set(self.__slots__):\n",
+     "behavioural": true,
+     "part": 1,
+     "pinned": false,
+     "tag": "replace",
+     "typing_only": false
+    },
+    {
+     "added_lines": "            for key in self.__slots__:\n                setattr(self, key, state[key])\n",
+     "behavioural": true,
+     "part": 2,
+     "pinned": true,
+     "tag": "replace",
+     "typing_only": false
+    }
+   ],
+   "parts_count": 3,
+   "repo": "pypa/packaging",
+   "sha": "d5fedc90bba333ed0962ba5dfb7072d38f2c1d84",
+   "source": "src/packaging/requirements.py",
+   "state": "PARTIALLY_PINNED__THE_VERIFIER_WOULD_ACCEPT_A_BUG",
+   "typing_only_parts": 0,
+   "unpinned_behavioural": 1,
+   "unpinned_cosmetic": 0,
+   "unpinned_typing_only": 0
+  },
+  {
+   "behavioural_parts": 1,
+   "behavioural_pinned": 1,
+   "parts": [
+    {
+     "added_lines": "    if escape_id == \"\\\\x\":\n        return parse_hex_char(src, pos, 2)\n",
+     "behavioural": true,
+     "part": 0,
+     "pinned": true,
+     "tag": "insert",
+     "typing_only": false
+    }
+   ],
+   "parts_count": 1,
+   "repo": "hukkin/tomli",
+   "sha": "12314bde5b89a8bdc32de7403a2a4cf786187bbc",
+   "source": "src/tomli/_parser.py",
+   "state": "FULLY_PINNED",
+   "typing_only_parts": 0,
+   "unpinned_behavioural": 0,
+   "unpinned_cosmetic": 0,
+   "unpinned_typing_only": 0
+  },
+  {
+   "behavioural_parts": 1,
+   "behavioural_pinned": 1,
+   "parts": [
+    {
+     "added_lines": "# Choosing 400 as maximum inline table/array nesting level, as it's 4x the\n# spec recommended minimum (https://github.com/toml-lang/toml/pull/1087)\n# (unreleased at the time of writing) and less than half of what causes an\n# unrecoverable crash in a worker (not main) thread on a python:3.13-alpine\n# image.\nMAX_INLINE_NESTING: Final = 400\n",
+     "behavioural": true,
+     "part": 0,
+     "pinned": true,
+     "tag": "replace",
+     "typing_only": false
+    }
+   ],
+   "parts_count": 1,
+   "repo": "hukkin/tomli",
+   "sha": "1e6e869aa9dbbddc492608944e82d9ad5397280f",
+   "source": "src/tomli/_parser.py",
+   "state": "FULLY_PINNED",
+   "typing_only_parts": 0,
+   "unpinned_behavioural": 0,
+   "unpinned_cosmetic": 0,
+   "unpinned_typing_only": 0
+  },
+  {
+   "behavioural_parts": 4,
+   "behavioural_pinned": 4,
+   "parts": [
+    {
+     "added_lines": "    pos = skip_comments_and_array_ws(src, pos)\n",
+     "behavioural": true,
+     "part": 0,
+     "pinned": true,
+     "tag": "replace",
+     "typing_only": false
+    },
+    {
+     "added_lines": "        pos = skip_comments_and_array_ws(src, pos)\n",
+     "behavioural": true,
+     "part": 1,
+     "pinned": true,
+     "tag": "replace",
+     "typing_only": false
+    },
+    {
+     "added_lines": "        pos += 1\n        pos = skip_comments_and_array_ws(src, pos)\n        if src.startswith(\"}\", pos):\n            return pos + 1, nested_dict.dict\n",
+     "behavioural": true,
+     "part": 2,
+     "pinned": true,
+     "tag": "insert",
+     "typing_only": false
+    },
+    {
+     "added_lines": "",
+     "behavioural": true,
+     "part": 3,
+     "pinned": true,
+     "tag": "delete",
+     "typing_only": false
+    }
+   ],
+   "parts_count": 4,
+   "repo": "hukkin/tomli",
+   "sha": "2a2aa62f1bc71b89b74d41dd2ab67b5dd24bc129",
+   "source": "src/tomli/_parser.py",
+   "state": "FULLY_PINNED",
+   "typing_only_parts": 0,
+   "unpinned_behavioural": 0,
+   "unpinned_cosmetic": 0,
+   "unpinned_typing_only": 0
+  },
+  {
+   "behavioural_parts": 3,
+   "behavioural_pinned": 1,
+   "parts": [
+    {
+     "added_lines": "            raise suffixed_err(src, new_pos, f\"Expected {expect!r}\") from None\n",
+     "behavioural": true,
+     "part": 0,
+     "pinned": false,
+     "tag": "replace",
+     "typing_only": false
+    },
+    {
+     "added_lines": "        raise suffixed_err(src, pos, f\"Found invalid character {src[pos]!r}\")\n",
+     "behavioural": true,
+     "part": 1,
+     "pinned": true,
+     "tag": "replace",
+     "typing_only": false
+    },
+    {
+     "added_lines": "            raise suffixed_err(src, pos, f\"Illegal character {char!r}\")\n",
+     "behavioural": true,
+     "part": 2,
+     "pinned": false,
+     "tag": "replace",
+     "typing_only": false
+    }
+   ],
+   "parts_count": 3,
+   "repo": "hukkin/tomli",
+   "sha": "31c85a18468adbb5f2e892aa96cf0930ac04f93c",
+   "source": "tomli/_parser.py",
+   "state": "PARTIALLY_PINNED__THE_VERIFIER_WOULD_ACCEPT_A_BUG",
+   "typing_only_parts": 0,
+   "unpinned_behavioural": 2,
+   "unpinned_cosmetic": 0,
+   "unpinned_typing_only": 0
+  },
+  {
+   "behavioural_parts": 1,
+   "behavioural_pinned": 1,
+   "parts": [
+    {
+     "added_lines": "    try:\n        src = __s.replace(\"\\r\\n\", \"\\n\")\n    except (AttributeError, TypeError):\n        raise TypeError(\n            f\"Expected str object, not '{type(__s).__qualname__}'\"\n        ) from None\n",
+     "behavioural": true,
+     "part": 0,
+     "pinned": true,
+     "tag": "replace",
+     "typing_only": false
+    }
+   ],
+   "parts_count": 1,
+   "repo": "hukkin/tomli",
+   "sha": "4e245a4bbbefed99e550e196095ea65c851cf31d",
+   "source": "src/tomli/_parser.py",
+   "state": "FULLY_PINNED",
+   "typing_only_parts": 0,
+   "unpinned_behavioural": 0,
+   "unpinned_cosmetic": 0,
+   "unpinned_typing_only": 0
+  },
+  {
+   "behavioural_parts": 8,
+   "behavioural_pinned": 7,
+   "parts": [
+    {
+     "added_lines": "from typing import Any, Callable, Dict, Iterable, Optional, Set, Tuple, Union\n",
+     "behavioural": true,
+     "part": 0,
+     "pinned": true,
+     "tag": "replace",
+     "typing_only": false
+    },
+    {
+     "added_lines": "ParseFloat = Callable[[str], Any]\n",
+     "behavioural": true,
+     "part": 1,
+     "pinned": true,
+     "tag": "insert",
+     "typing_only": false
+    },
+    {
+     "added_lines": "def loads(s: str, *, parse_float: ParseFloat = float) -> Dict[str, Any]:  # noqa: C901\n",
+     "behavioural": true,
+     "part": 2,
+     "pinned": true,
+     "tag": "replace",
+     "typing_only": false
+    },
+    {
+     "added_lines": "    state = ParseState(s, parse_float)\n",
+     "behavioural": true,
+     "part": 3,
+     "pinned": true,
+     "tag": "replace",
+     "typing_only": false
+    },
+    {
+     "added_lines": "    def __init__(self, src: str, parse_float: ParseFloat):\n        # Read only\n",
+     "behavioural": true,
+     "part": 4,
+     "pinned": true,
+     "tag": "replace",
+     "typing_only": false
+    },
+    {
+     "added_lines": "        self.out: NestedDict = NestedDict({})\n        self.parse_float = parse_float\n\n        # Read and write\n",
+     "behavioural": true,
+     "part": 5,
+     "pinned": true,
+     "tag": "insert",
+     "typing_only": false
+    },
+    {
+     "added_lines": "",
+     "behavioural": true,
+     "part": 6,
+     "pinned": false,
+     "tag": "delete",
+     "typing_only": false
+    },
+    {
+     "added_lines": "        return state.parse_float(src[:3])\n",
+     "behavioural": true,
+     "part": 7,
+     "pinned": true,
+     "tag": "replace",
+     "typing_only": false
+    }
+   ],
+   "parts_count": 8,
+   "repo": "hukkin/tomli",
+   "sha": "5ab9ec926d9dc1ef79e66215edd51285371fe8a0",
+   "source": "tomli/_parser.py",
+   "state": "PARTIALLY_PINNED__THE_VERIFIER_WOULD_ACCEPT_A_BUG",
+   "typing_only_parts": 0,
+   "unpinned_behavioural": 1,
+   "unpinned_cosmetic": 0,
+   "unpinned_typing_only": 0
+  },
+  {
+   "behavioural_parts": 8,
+   "behavioural_pinned": 1,
+   "parts": [
+    {
+     "added_lines": "            raise TOMLDecodeError(suffix_location(state, \"Invalid statement\"))\n",
+     "behavioural": true,
+     "part": 0,
+     "pinned": true,
+     "tag": "replace",
+     "typing_only": false
+    },
+    {
+     "added_lines": "                suffix_location(\n                    state, \"End of line or end of document not found after a statement\"\n                )\n",
+     "behavioural": true,
+     "part": 1,
+     "pinned": false,
+     "tag": "replace",
+     "typing_only": false
+    },
+    {
+     "added_lines": "            raise TOMLDecodeError(\n                suffix_location(state, f'Expected but did not find \"{expect_char!r}\"')\n            )\n",
+     "behavioural": true,
+     "part": 2,
+     "pinned": false,
+     "tag": "replace",
+     "typing_only": false
+    },
+    {
+     "added_lines": "            raise TOMLDecodeError(\n                suffix_location(state, f'Invalid character \"{char!r}\" found')\n            )\n",
+     "behavioural": true,
+     "part": 3,
+     "pinned": false,
+     "tag": "replace",
+     "typing_only": false
+    },
+    {
+     "added_lines": "\n\ndef skip_comments_and_array_ws(state: ParseState) -> None:\n    while True:\n        pos_before_skip = state.pos\n        skip_chars(state, TOML_WS_AND_NEWLINE)\n        skip_comment(state)\n        if state.pos == pos_before_skip:\n            break\n",
+     "behavioural": true,
+     "part": 4,
+     "pinned": false,
+     "tag": "insert",
+     "typing_only": false
+    },
+    {
+     "added_lines": "            raise TOMLDecodeError(\n                suffix_location(state, f'Illegal character \"{c!r}\" found in a comment')\n            )\n",
+     "behavioural": true,
+     "part": 5,
+     "pinned": false,
+     "tag": "replace",
+     "typing_only": false
+    },
+    {
+     "added_lines": "        raise TOMLDecodeError(\n            suffix_location(state, f'Can not declare \"{\".\".join(key)}\" twice')\n        )\n",
+     "behavioural": true,
+     "part": 6,
+     "pinned": false,
+     "tag": "replace",
+     "typing_only": false
+    },
+    {
+     "added_lines": "        raise TOMLDecodeError(suffix_location(state, \"Can not overwrite a value\"))\n",
+     "behavioural": true,
+     "part": 7,
+     "pinned": false,
+     "tag": "replace",
+     "typing_only": false
+    }
+   ],
+   "parts_count": 8,
+   "repo": "hukkin/tomli",
+   "sha": "67ec7d10528bd7b00ff1fc62da9a8a1e06406179",
+   "source": "tomli/_parser.py",
+   "state": "PARTIALLY_PINNED__THE_VERIFIER_WOULD_ACCEPT_A_BUG",
+   "typing_only_parts": 0,
+   "unpinned_behavioural": 7,
+   "unpinned_cosmetic": 0,
+   "unpinned_typing_only": 0
+  },
+  {
+   "behavioural_parts": 2,
+   "behavioural_pinned": 2,
+   "parts": [
+    {
+     "added_lines": "    parse_float = make_safe_parse_float(parse_float)\n",
+     "behavioural": true,
+     "part": 0,
+     "pinned": true,
+     "tag": "insert",
+     "typing_only": false
+    },
+    {
+     "added_lines": "\n\ndef make_safe_parse_float(parse_float: ParseFloat) -> ParseFloat:\n    \"\"\"A decorator to make `parse_float` safe.\n\n    `parse_float` must not return dicts or lists, because these types\n    would be mixed with parsed TOML tables and arrays, thus confusing\n    the parser. The returned decorated callable raises `ValueError`\n    instead of returning illegal types.\n    \"\"\"\n    # The default `float` callable never returns illegal types. Optimize it.\n    if parse_float is float:  # type: ignore[comparison-overlap]\n        return float\n\n    def safe_parse_float(float_str: str) -> Any:\n        float_v",
+     "behavioural": true,
+     "part": 1,
+     "pinned": true,
+     "tag": "insert",
+     "typing_only": false
+    }
+   ],
+   "parts_count": 2,
+   "repo": "hukkin/tomli",
+   "sha": "794c8e50d676f1e8e081914eb77e4a48a4f6a20b",
+   "source": "src/tomli/_parser.py",
+   "state": "FULLY_PINNED",
+   "typing_only_parts": 0,
+   "unpinned_behavioural": 0,
+   "unpinned_cosmetic": 0,
+   "unpinned_typing_only": 0
+  }
+ ],
+ "schema": "BRAIN_VERIFIER_PINNING_V1",
+ "totals": {
+  "behavioural_parts": 42,
+  "behavioural_pinned": 30,
+  "parts": 45,
+  "parts_pinned": 30,
+  "pinned_share_of_behavioural": 0.714,
+  "states": {
+   "FULLY_PINNED": 10,
+   "PARTIALLY_PINNED__THE_VERIFIER_WOULD_ACCEPT_A_BUG": 6,
+   "REFUSED__CONTROL_BROKEN": 1
+  },
+  "suite_executions": 77,
+  "tasks": 17,
+  "tasks_with_controls": 16,
+  "unpinned_behavioural": 12
+ }
+}
