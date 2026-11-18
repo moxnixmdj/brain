@@ -1,0 +1,154 @@
+{
+ "authority": "NONE -- sandbox measurement, not independent verification",
+ "model_calls": 0,
+ "network_calls": 0,
+ "rows": [
+  {
+   "literal_params_only": "REFUSED__NO_OPERAND",
+   "repo": "pallets/itsdangerous",
+   "sha": "7f4dcf83a07bb3d53f4e0e65ef1b43327b4cca90",
+   "source": "src/itsdangerous/signer.py",
+   "state": "REFUSED__COLLECTION",
+   "test": "tests/test_itsdangerous/test_serializer.py"
+  },
+  {
+   "at_line": 766,
+   "captured": [
+    [
+     "tests/test_metadata.py::TestMetadata::test_invalid_license_files[license_files4]",
+     "tests/test_metadata.py::TestMetadata::test_invalid_license_files[license_files5]"
+    ],
+    6
+   ],
+   "condition": "'..' in path",
+   "literal_params_only": "SOLVED",
+   "operand": "pathlib.PureWindowsPath(path).drive",
+   "operator": "or",
+   "partitions": [
+    {
+     "argument": "value",
+     "function": "_process_license_files"
+    }
+   ],
+   "repo": "pypa/packaging",
+   "seat_function": "_process_license_files",
+   "sha": "022ae6c6fe5c2ef9615875d0ecfab1ae4024720f",
+   "source": "src/packaging/metadata.py",
+   "state": "SOLVED",
+   "terms": {
+    "_process_license_files.value": 1
+   },
+   "test": "tests/test_metadata.py",
+   "trials": 1
+  },
+  {
+   "captured": [
+    [
+     "tests/test_requirements.py::test_replace",
+     "tests/test_requirements.py::test_replace_keeps_inner_specifier_prereleases[False]",
+     "tests/test_requirements.py::test_replace_keeps_inner_specifier_prereleases[True]",
+     "tests/test_requirements.py::test_replace_validates_and_normalizes"
+    ],
+    6
+   ],
+   "literal_params_only": "REFUSED__NO_OPERAND",
+   "partitions": [
+    {
+     "argument": "requirement_string",
+     "function": "__init__"
+    }
+   ],
+   "repo": "pypa/packaging",
+   "sha": "4b243af94ff6885c89b8acd7a22fc5714b18cb96",
+   "source": "src/packaging/requirements.py",
+   "state": "REFUSED__NO_PREDICATE",
+   "terms": {
+    "__init__.requirement_string": 0
+   },
+   "test": "tests/test_requirements.py",
+   "trials": 0
+  },
+  {
+   "captured": [
+    [
+     "tests/test_metadata.py::TestMetadata::test_valid_license_expression[((MIT))-((MIT))]"
+    ],
+    6
+   ],
+   "literal_params_only": "REFUSED__NO_OPERAND",
+   "partitions": [
+    {
+     "argument": "raw_license_expression",
+     "function": "canonicalize_license_expression"
+    }
+   ],
+   "repo": "pypa/packaging",
+   "sha": "a1f705642e50b79da6be83fb0f6149daa32fc7cc",
+   "source": "src/packaging/licenses/__init__.py",
+   "state": "REFUSED__NO_PREDICATE",
+   "terms": {
+    "canonicalize_license_expression.raw_license_expression": 0
+   },
+   "test": "tests/test_metadata.py",
+   "trials": 0
+  },
+  {
+   "captured": [
+    [],
+    2
+   ],
+   "literal_params_only": "REFUSED__NO_OPERAND",
+   "partitions": [],
+   "repo": "hukkin/tomli",
+   "sha": "12314bde5b89a8bdc32de7403a2a4cf786187bbc",
+   "source": "src/tomli/_parser.py",
+   "state": "REFUSED__NO_PARTITION",
+   "test": "tests/test_data.py"
+  },
+  {
+   "captured": [
+    [
+     "tests/test_misc.py::test_parse_float"
+    ],
+    1
+   ],
+   "literal_params_only": "REFUSED__NO_OPERAND",
+   "partitions": [],
+   "repo": "hukkin/tomli",
+   "sha": "5ab9ec926d9dc1ef79e66215edd51285371fe8a0",
+   "source": "tomli/_parser.py",
+   "state": "REFUSED__NO_PARTITION",
+   "test": "tests/test_misc.py"
+  },
+  {
+   "captured": [
+    [
+     "tests/test_error.py::test_module_name"
+    ],
+    3
+   ],
+   "literal_params_only": "REFUSED__NO_OPERAND",
+   "partitions": [],
+   "repo": "hukkin/tomli",
+   "sha": "96dfe2cef79eb4c2a441d5b1b36c3ef357372c9f",
+   "source": "tomli/__init__.py",
+   "state": "REFUSED__NO_PARTITION",
+   "test": "tests/test_error.py"
+  }
+ ],
+ "schema": "BRAIN_CASE_WITNESS_V1",
+ "totals": {
+  "literal_params_only_solved": 1,
+  "partitioned": 3,
+  "solved": 1,
+  "solved_fraction": 0.1429,
+  "states": {
+   "REFUSED__COLLECTION": 1,
+   "REFUSED__NO_PARTITION": 3,
+   "REFUSED__NO_PREDICATE": 2,
+   "SOLVED": 1
+  },
+  "tasks": 7,
+  "trials": 1
+ }
+}
