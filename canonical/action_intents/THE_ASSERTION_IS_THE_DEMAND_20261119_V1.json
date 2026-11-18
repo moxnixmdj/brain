@@ -8,10 +8,10 @@
   "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
   "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
   "conversation_memory_is_authority": false,
-  "earlier_routes_exhausted_reason": "Refused by measurement, in order: the failure text as the index (0 of 15), the flipped firing without a replacement (7 of 7 broke the suite), storing the run (parameters_stored 0 and does not generalise), more vocabulary from the neighbourhood (attributes 115/136 rename-in-place is not a fix), and the statement form (7.5% of edits). What is left is the closure and what selects inside it, which is what this round measures.",
+  "earlier_routes_exhausted_reason": "Refused by measurement, in order: a bigger vocabulary (the space said 2 of 9 and the answer sat at rank 2887), a wider grammar (same two, ranks 186 and 3034), an oracle as a scalar (0 verified repairs in 32 questions per row), stored experience (parameters_stored 0, does not generalise), and the failure text as an index (0 of 15). What is left is the demand itself, which this round reads and spends no questions on.",
   "incremental_spend_usd": 0,
   "independent_verification_completed": false,
-  "independent_verification_note": "Producer-run sandbox only. Every number is an upper bound: the site is given for free in both arms.",
+  "independent_verification_note": "Producer-run sandbox only. Every number is a receipt row: 30 fresh commits, 74.9 s, 15 structural exclusions, 1 site-never-ran, 13 no-value-matches, 1 verified repair equal to the human's own fix, and the human fix admissible in 1 of 14 in-class rows.",
   "laws_read_this_session": [
    "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
    "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
@@ -29,23 +29,19 @@
   ],
   "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
   "producer_cognition_model_dependency_count": 0,
-  "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+  "progress_class": "MEASURED_MECHANISM_WITH_DECLARED_FALSIFIER_AND_ONE_VERIFIED_REPAIR",
   "progress_evidence_paths": [
-   "canonical/tools/the_space_is_the_artifact_v1.py",
-   "canonical/tests/test_the_space_is_the_artifact_v1.py",
-   "canonical/verification/THE_SPACE_IS_THE_ARTIFACT_20261119_V1.json",
-   "canonical/verification/THE_SPACE_IS_THE_ARTIFACT_WIDE_GRAMMAR_20261119_V1.json",
-   "canonical/verification/THE_SPACE_IS_THE_ARTIFACT_CENSUS_20261119_V1.json",
-   "canonical/action_intents/THE_SPACE_IS_THE_ARTIFACT_20261119_V1.md",
-   "canonical/action_intents/THE_SPACE_IS_THE_ARTIFACT_20261119_V1.json",
-   "THE_SPACE_IS_THE_ARTIFACT_20261119_V1.md"
+   "canonical/tools/the_assertion_is_the_demand_v1.py",
+   "canonical/tests/test_the_assertion_is_the_demand_v1.py",
+   "canonical/verification/THE_ASSERTION_IS_THE_DEMAND_20261119_V1.json",
+   "THE_ASSERTION_IS_THE_DEMAND_20261119_V1.md"
   ],
   "route_class": "SYNTHESIZE_NEW_PRIMITIVE",
   "scope_complete_discharge": false,
   "terminal_achieved": false
  },
  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
- "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The selection of one expression out of the closure of the language. The address is solved for free (the site is handed over in both arms, an upper bound no system could beat). The vocabulary is computable (dir() of the live types, 4 microseconds, nothing stored). The grammar is the language's. What remains is rank: the right expression sits at 2887 in the one row the base arm could reach, and at a rank the wide arm measures for the others, while each oracle question that tests one candidate costs 0.5 s. Selecting is therefore the only thing left, and a memory of one demonstrated action supplies one selected element and no ordering over the 10^5 alternatives the language admits.",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A failing test supplies a PREDICATE and a WITNESS, not an identifier. Measured over the fourteen in-class rows: 6 reach for another object's attribute, 3 for a method on such an attribute, 4 are guards (is None / or / ternary), 2 are names the site already had, 1 is an f-string over a frame name. Only that last one is a value the frame can compute in the ordinary sense. Selection cost therefore falls only to the degree the demand is selective, and a demand is selective only when it names an object -- which is a grammar of predicates over an enumerable reference space, not a larger closure and not a better prompt.",
  "canonical_base_commit": "0cdaaeb41b24bd9278051633e8fc29313dbf9957",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
@@ -181,7 +177,7 @@
    "reporting a miss without naming its stage (structural edit / site never ran / no value matches)"
   ],
   "expected_parent_frontier_change": "The frontier moves from 'the demand is a value' to 'the demand is a predicate over an enumerable reference space'. Two numbers are now on the record as falsifiers for the next round: the human's fix must become admissible in at least 10 of 14 rows (now 1 of 14), and verified generalising repairs must go from 1 to at least 8 of 30 (now 1). A round that adds vocabulary or grammar without a predicate reader is spending effort on the half that was already measured cheap.",
-  "expected_parent_level_state_change": "The claim that the demanded value converts selection into evaluation is confirmed arithmetically (0.5 s vs ~10 microseconds, 10,000x, 2.5 s per commit end to end) and refuted as a capability claim: precision is 1/1 but recall is 1/15 in class, and the first verified patch was a constant. What moves next is the admission rule and the predicate reader, with acceptance numbers declared before the build.",
+  "expected_parent_level_state_change": "The frontier moves from 'the demand is a value' to 'the demand is a predicate over an enumerable reference space'. Two numbers are now on the record as falsifiers for the next round: the human's fix must become admissible in at least 10 of 14 rows (now 1 of 14), and verified generalising repairs must go from 1 to at least 8 of 30 (now 1). A round that adds vocabulary or grammar without a predicate reader is spending effort on the half that was already measured cheap.",
   "independent_verification_required": true,
   "iteration_limit": 1,
   "obs_blocker": {
@@ -265,10 +261,31 @@
    ],
    "synthetic_verification_necessity": "The oracle for a real commit is that project's own post-fix test file, run on an uninstrumented copy; unit tests pin only the instrument. Independent reproduction remains open."
   },
-  "real_outcome": "Half of real fixes are not one expression (10 of 19 fresh commits are multi-line edits), and of the nine that are, the artifact's words plus the language's grammar say exactly one -- at rank 2887 with a 32-question budget, so zero repairs verified in the base arm and none in the wide arm either. The eight misses were each named, and eight of nine name a wall that is computed rather than known.",
+  "real_outcome": "30 fresh commits: 15 are structural edits (not a single-expression replacement), 1 has a site that never ran in the failing test, 13 have a known demand that no candidate produced, and 1 is verified with the whole file green (47 tests) and the patch IS the human's own fix. The first receipt of this round verified a DIFFERENT patch: a literal string that reproduced the demanded value on the one name the test used, green in fact and wrong in general -- the synthesis-verification asymmetry measured inside this instrument rather than borrowed from the literature. The one-line admission rule that refuses any candidate naming nothing in the frame turned that wrong green patch into the correct rule on the same row, with the demand and the space unchanged. Against this, the completeness witness is unambiguous and negative: the human's own replacement is admissible by the table in 1 of 14 in-class rows.",
   "required_capability": "counterfactual intervention over a live execution trace, exact-fit predicate selection from the logged scope, and an oracle that decides without a model",
   "route_frontier": {
    "challenger_routes": [
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "1 of 15 in class",
+      "CORRECTNESS": "the corpus's own suite, whole file",
+      "INCREMENTAL_COST": "~10 us per candidate, 2.5 s per commit",
+      "RELIABILITY": "recall is the open term",
+      "VERIFIABILITY": "receipt rows, producer-run",
+      "WALL_CLOCK": "74.9 s for 30 commits"
+     },
+     "evidence": [
+      "30 fresh commits, 74.9 s, 1 verified repair equal to the human's own fix, 0 oracle questions; human fix admissible by the table in 1 of 14 in-class rows"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_ASSERTION_IS_THE_DEMAND_20261119_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "SELECTED",
+     "route": "READ_THE_DEMANDED_VALUE_AND_FILTER_BY_FRAME_EVALUATION"
+    },
     {
      "comparison": {
       "CAPABILITY_STRENGTH": "3 of 40 programs",
@@ -334,7 +351,7 @@
      "route": "INDEX_ACTIONS_BY_THE_FAILING_RUN_NOT_BY_THE_SOURCE_TEXT"
     }
    ],
-   "checked_at_utc": "2026-11-18T17:50:20Z",
+   "checked_at_utc": "2026-11-18T18:50:14Z",
    "comparison_dimensions": [
     "CORRECTNESS",
     "CAPABILITY_STRENGTH",
@@ -344,7 +361,7 @@
     "VERIFIABILITY"
    ],
    "discovery_required": true,
-   "incumbent_route": "EXECUTE_THE_COUNTERFACTUAL_INSTEAD_OF_APPROXIMATING_IT",
+   "incumbent_route": "READ_THE_DEMANDED_VALUE_OUT_OF_THE_FAILING_ASSERTION_AND_FILTER_THE_CLOSURE_BY_EVALUATION",
    "max_age_hours": 2,
    "negative_search_summary": "Measured and refused this session: more vocabulary, more grammar, statement form, a larger budget, a stored table, and text-proximity material. Each is sized and each is smaller than the index.",
    "query_families": [
@@ -371,15 +388,15 @@
     "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
     "BEFORE_SCARCE_GATE_SPEND"
    ],
-   "selected_route": "MEASURE_THE_CEILING_OF_A_CLOSED_SPACE_AND_NAME_WHAT_SELECTS_INSIDE_IT",
+   "selected_route": "READ_THE_DEMANDED_VALUE_OUT_OF_THE_FAILING_ASSERTION_AND_FILTER_THE_CLOSURE_BY_EVALUATION",
    "selected_route_preflight": {
     "all_required_dependencies_ready": true,
-    "checked_at_utc": "2026-11-18T17:50:20Z",
+    "checked_at_utc": "2026-11-18T18:50:14Z",
     "execution_dependencies": [
      {
       "dependency": "local Python 3.11 runtime with pytest",
       "evidence": [
-       "Python 3.11 + pytest 9.2; 29 instrument tests pass at 2026-11-18T16:05:00Z"
+       "Python 3.11 + pytest 9.2; 33/33 unified-model gates and 12 instrument tests pass at 2026-11-18T18:50:14Z"
       ],
       "evidence_classes": [
        "DIRECT_PROBE"
@@ -425,7 +442,7 @@
     "execution_dependencies_complete": true,
     "failed_dependencies": [],
     "max_age_hours": 2,
-    "selected_route": "MEASURE_THE_CEILING_OF_A_CLOSED_SPACE_AND_NAME_WHAT_SELECTS_INSIDE_IT",
+    "selected_route": "READ_THE_DEMANDED_VALUE_OUT_OF_THE_FAILING_ASSERTION_AND_FILTER_THE_CLOSURE_BY_EVALUATION",
     "status": "READY"
    },
    "source_classes_checked": [
@@ -461,10 +478,10 @@
    "WIDEN_THE_VOCABULARY_WITH_MORE_NEIGHBOURHOOD_ATTRIBUTES__ALREADY_MEASURED_AT_9_1_PERCENT",
    "MEASURE_THE_CEILING_WITH_THE_ADDRESS_GIVEN_FREE_THEN_NAME_WHAT_SELECTS__SELECTED"
   ],
-  "selected_route": "MEASURE_THE_CEILING_OF_A_CLOSED_SPACE_AND_NAME_WHAT_SELECTS_INSIDE_IT",
-  "selected_surviving_route": "MEASURE_THE_CEILING_OF_A_CLOSED_SPACE_AND_NAME_WHAT_SELECTS_INSIDE_IT",
+  "selected_route": "READ_THE_DEMANDED_VALUE_OUT_OF_THE_FAILING_ASSERTION_AND_FILTER_THE_CLOSURE_BY_EVALUATION",
+  "selected_surviving_route": "READ_THE_DEMANDED_VALUE_OUT_OF_THE_FAILING_ASSERTION_AND_FILTER_THE_CLOSURE_BY_EVALUATION",
   "selected_surviving_route_class": "SYNTHESIZE_NEW_PRIMITIVE",
-  "stop_condition": "STOP when the population's shape is censused before measurement, when both arms run on the same fresh corpus with the same declared cap and budget, when every miss is named by a computed taxonomy rather than counted, when an unresolvable row is reported as unresolved within the cap and never as impossible, and when parameters_stored is 0 in both arms.",
+  "stop_condition": "STOP when the fresh corpus is mined by rule and screened before any arm runs; when every exclusion names its reason (structural edit, site never ran, no value matches) instead of being folded into a miss; when the one verified row is reported together with the wrong patch the same instrument first accepted; and when the next round's acceptance numbers are written down before it starts.",
   "why_selected_route_is_fastest_sufficient": "Because the question 'is the content a knowledge problem' can only be answered by handing the address over for free and measuring what the artifact's own words can say; every other route answers it by assuming an answer.",
   "why_this_is_not_another_organ": "It adds no knowledge, no vocabulary and no model: one AST rewrite of the module, one counter, one log of what was already in scope, and the project's own pytest as the verdict."
  },
