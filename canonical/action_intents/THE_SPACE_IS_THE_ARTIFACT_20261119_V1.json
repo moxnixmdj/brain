@@ -46,7 +46,7 @@
  },
  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The selection of one expression out of the closure of the language. The address is solved for free (the site is handed over in both arms, an upper bound no system could beat). The vocabulary is computable (dir() of the live types, 4 microseconds, nothing stored). The grammar is the language's. What remains is rank: the right expression sits at 2887 in the one row the base arm could reach, and at a rank the wide arm measures for the others, while each oracle question that tests one candidate costs 0.5 s. Selecting is therefore the only thing left, and a memory of one demonstrated action supplies one selected element and no ordering over the 10^5 alternatives the language admits.",
- "canonical_base_commit": "cabbc10b290119ba619ad4f49f74af4fa7a409e7",
+ "canonical_base_commit": "2bed659ccc37dddfaddfd2abc0b14f94e5710bb9",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -162,7 +162,7 @@
  ],
  "real_outcome": "Half of real fixes are not one expression (10 of 19 fresh commits are multi-line edits), and of the nine that are, the artifact's words plus the language's grammar say exactly one -- at rank 2887 with a 32-question budget, so zero repairs verified in the base arm and none in the wide arm either. The eight misses were each named, and eight of nine name a wall that is computed rather than known.",
  "recursive_obs": {
-  "canonical_base_commit": "cabbc10b290119ba619ad4f49f74af4fa7a409e7",
+  "canonical_base_commit": "2bed659ccc37dddfaddfd2abc0b14f94e5710bb9",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "requiring exactly one differing node to call an edit a single-expression replacement (it threw away 10 of 19 real commits, which was a property of the tool and not of the world)",
