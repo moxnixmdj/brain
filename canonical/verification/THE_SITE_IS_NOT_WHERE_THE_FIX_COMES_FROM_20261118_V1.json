@@ -1,0 +1,160 @@
+{
+ "schema": "BRAIN_THE_SITE_IS_NOT_WHERE_THE_FIX_COMES_FROM_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "date": "2026-11-18",
+ "title": "Of 136 real single-expression line edits, the fix replaces the site's expression 84.6% of the time; a site-rooted, proximity-ordered pool contains the fix for 5.9% of them. Writability is 77.4% of code edits, reachability by text proximity is 5.9%: the bottleneck is material selection, not vocabulary, not grammar, not search size.",
+ "supersedes_bottleneck_claim": {
+  "file": "canonical/action_intents/THE_FAILURE_ALREADY_SAYS_WHAT_TO_WRITE_20261118_V1.md",
+  "published_claim": "\"Observability binds computer use; expressibility binds coding\" and \"the vocabulary is the bottleneck, and vocabulary is bought by recording, not by searching\".",
+  "what_the_real_history_says": "Expressibility is 9.1% of 241 real code edits and 77.4% of code edits are a single expression the enumerator can already write. Being writable is not being findable: the same pool writes the fix but contains it within 400 ordered candidates for only 5.9% of edits.",
+  "why_the_earlier_number_was_wrong": "It was measured on QuixBugs, whose 40 published bugs are one-expression repairs by construction. On real code the fix usually discards the site's expression (84.6%), and a pool rooted at the site cannot reach an expression the site does not contain."
+ },
+ "measurements": {
+  "writability_241_real_single_line_edits": {
+   "source_receipt": "canonical/tools/what_a_real_fix_needs_from_the_site_v1.py --receipt",
+   "single_line_edits_examined": 241,
+   "totals": {
+    "NOT_CODE__COMMENT_OR_DOCSTRING": 33,
+    "NEEDS_GRAMMAR__THE_ENUMERATOR_CANNOT_WRITE_THIS_FORM": 22,
+    "SINGLE_EXPRESSION__IN_VOCABULARY": 153,
+    "TWO_EXPRESSIONS__JOINT_ADDRESSABLE": 8,
+    "STATEMENT_FORM__NOT_AN_EXPRESSION": 18,
+    "TOO_LARGE": 5,
+    "NEEDS_NEW_NAME": 1,
+    "CONTINUATION__CODE_SPLIT_ACROSS_LINES": 1
+   },
+   "rates": {
+    "NOT_CODE__COMMENT_OR_DOCSTRING": 0.1369,
+    "NEEDS_GRAMMAR__THE_ENUMERATOR_CANNOT_WRITE_THIS_FORM": 0.0913,
+    "SINGLE_EXPRESSION__IN_VOCABULARY": 0.6349,
+    "TWO_EXPRESSIONS__JOINT_ADDRESSABLE": 0.0332,
+    "STATEMENT_FORM__NOT_AN_EXPRESSION": 0.0747,
+    "TOO_LARGE": 0.0207,
+    "NEEDS_NEW_NAME": 0.0041,
+    "CONTINUATION__CODE_SPLIT_ACROSS_LINES": 0.0041
+   },
+   "code_edits": 208,
+   "expressible_share_of_code_edits": 0.774,
+   "note": "A necessary condition only: names in scope, node budget, and a form the enumerator implements. It does not say the pool will order the fix early, and measurement 3 shows it usually will not."
+  },
+  "geometry_136_real_single_expression_edits": {
+   "source_receipt": "canonical/tools/is_the_fix_a_widening_of_the_site_v1.py --receipt",
+   "totals": {
+    "FIX_IS_INSIDE_THE_SITE": 4,
+    "LINE_DOES_NOT_PARSE": 62,
+    "NO_EXPRESSION_CHANGE": 43,
+    "SITE_IS_REPLACED": 115,
+    "SITE_SURVIVES_INSIDE_THE_FIX": 17
+   },
+   "rates": {
+    "FIX_IS_INSIDE_THE_SITE": 0.0166,
+    "LINE_DOES_NOT_PARSE": 0.2573,
+    "NO_EXPRESSION_CHANGE": 0.1784,
+    "SITE_IS_REPLACED": 0.4772,
+    "SITE_SURVIVES_INSIDE_THE_FIX": 0.0705
+   },
+   "denominator": 136,
+   "added_node_kinds_when_widening": {
+    "Add": 1,
+    "And": 2,
+    "Attribute": 6,
+    "BinOp": 1,
+    "BoolOp": 3,
+    "Call": 3,
+    "Compare": 1,
+    "Constant": 3,
+    "Eq": 1,
+    "List": 2,
+    "Load": 1,
+    "Not": 2,
+    "Or": 1,
+    "Slice": 2,
+    "Subscript": 5,
+    "Tuple": 5,
+    "UnaryOp": 2
+   },
+   "note": "62 of the 241 edits are code that spans lines and 43 change nothing that is a single expression; they are excluded from this denominator, not reclassified."
+  },
+  "reachability_of_the_same_136_edits": {
+   "source_receipt": "canonical/tools/is_the_fix_a_widening_of_the_site_v1.py --receipt (rank section)",
+   "all": {
+    "best": 3,
+    "in_pool_at_400": 8,
+    "measured": 136,
+    "median_rank_when_reached": 22.0,
+    "rate": 0.0588,
+    "within_10": 4,
+    "within_40": 6
+   },
+   "by_geometry": {
+    "FIX_IS_INSIDE_THE_SITE": {
+     "best": 3,
+     "in_pool_at_400": 2,
+     "measured": 4,
+     "median_rank_when_reached": 9.0,
+     "rate": 0.5,
+     "within_10": 2,
+     "within_40": 2
+    },
+    "SITE_IS_REPLACED": {
+     "best": 22,
+     "in_pool_at_400": 2,
+     "measured": 115,
+     "median_rank_when_reached": 143.0,
+     "rate": 0.0174,
+     "within_10": 0,
+     "within_40": 1
+    },
+    "SITE_SURVIVES_INSIDE_THE_FIX": {
+     "best": 6,
+     "in_pool_at_400": 4,
+     "measured": 17,
+     "median_rank_when_reached": 33.0,
+     "rate": 0.2353,
+     "within_10": 2,
+     "within_40": 3
+    }
+   },
+   "pool_construction": "site-rooted single edits, ordered by material distance: the site, the block the site guards, the function, the class, the module; 400 candidates; nothing executed"
+  },
+  "end_to_end_real_commit_click_1b0e19f505": {
+   "source_receipt": "canonical/tools/identify_a_real_bugs_fix_v1.py --repo click --commit 1b0e19f505",
+   "site": "self.show_envvar",
+   "human_fix": "self.show_envvar and self.envvar is not None",
+   "geometry": "SITE_SURVIVES_INSIDE_THE_FIX",
+   "human_fix_rank": 1,
+   "oracle": "the project's own tests/test_options.py at the parent commit with the post-fix test file: test_missing_envvar fails, message \"Error: Missing option '--foo' (env var: 'None').\"",
+   "consistent_candidates": 2,
+   "survivors": [
+    "(self.show_envvar) and (self.envvar) is not None",
+    "(self.show_envvar) and (self.envvar)"
+   ],
+   "human_fix_is_among_survivors": true,
+   "identifiability_note": "The two survivors differ only for a falsy non-None envvar (the empty string). No test asks that question, so the suite cannot separate them. This is a limit of the oracle, reported, not a success.",
+   "sweep_rows_measured_so_far": 7
+  }
+ },
+ "the_bottleneck": "Candidate material is chosen from the source text; the evidence that chooses it lives in the failing run's values. Grammar (9.1%), statement form (7.5%) and pool size (median rank 22 when reachable) are all smaller and already measured.",
+ "the_build_this_implies": [
+  "instrument the failing case and record the value the site produced, its type, and the value the test demanded",
+  "nominate material by provenance of the demanded value in that run, not by text proximity",
+  "search the expressions that can produce the demanded value from that material, one hole, sized by the value's type",
+  "keep the project's own tests as the oracle and spend the budget on ordering"
+ ],
+ "falsifier": {
+  "population": "the same 136 real single-expression edits",
+  "claim": "value-provenance material puts the human fix in the pool for more than 5.9% of them and within 40 candidates for more than 6 edits",
+  "if_false": "the thesis is wrong and this file is superseded, not patched"
+ },
+ "limits": [
+  "25.7% of the 241 edits (62) are code that spans lines and are excluded from the geometry denominator",
+  "the 29-commit sweep is a population of one-line source changes that also touched a test, not of bugs; rows with no oracle are reported as NO_ORACLE and are not successes",
+  "the sweep's identification is a producer-run sandbox result; independent reproduction is open"
+ ],
+ "commands": [
+  "python3 canonical/tools/what_a_real_fix_needs_from_the_site_v1.py --receipt /tmp/real.json",
+  "python3 canonical/tools/is_the_fix_a_widening_of_the_site_v1.py --receipt /tmp/geometry.json",
+  "python3 canonical/tools/identify_a_real_bugs_fix_v1.py --repo /tmp/repos/click --commit 1b0e19f505 --source src/click/core.py --test tests/test_options.py --budget 32",
+  "python3 canonical/tools/identify_a_real_bugs_fix_v1.py --sweep /tmp/commits.json --budget 32 --test-seconds 10 --receipt /tmp/sweep.json"
+ ]
+}
