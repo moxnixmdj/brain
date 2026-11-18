@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 537,
+  "knowledge_documents": 538,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 7071,
+  "research_index_records": 7074,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 452,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "cc5b2bcd6bcbc8cba31c32894dd9a64324d5e26d6519aec8d72e06d3757319ed"
+  "value": "557d22508cc696df210e6cdc5d77df778a8461537cc27402babd0a4cc97c1257"
  },
  "engines": [
   {
@@ -66643,6 +66643,83 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 8657,
+   "headings": [
+    "The missing input can be manufactured — and only where a quantity guides it",
+    "What round 16 left, and the name the field uses for it",
+    "Three bugs in my own instrument, found before any number was believed",
+    "The fire proof, and the honesty proof",
+    "What the real corpus says",
+    "Why the other four were not reached — the answer to the standing question",
+    "What this round does not claim",
+    "Next"
+   ],
+   "kind": "DOCUMENT",
+   "path": "THE_MISSING_INPUT_CAN_BE_MANUFACTURED_AND_ONLY_WHERE_A_QUANTITY_GUIDES_IT_20261116_V1.md",
+   "sha256": "831ec0061b62daff37b0ee8f89efea4cb0c6c9f346d4c7d568922dac7777105d",
+   "summary": "Round 17. Branch `arena/4a06d20c-brain`, from `cabbc10b`.",
+   "terms": {
+    "12": 5,
+    "16": 5,
+    "17": 3,
+    "action": 4,
+    "artifact": 4,
+    "assertion": 8,
+    "because": 5,
+    "behavioural": 4,
+    "both": 5,
+    "changed": 6,
+    "claim": 6,
+    "corpus": 4,
+    "distance": 7,
+    "execution": 4,
+    "failed": 4,
+    "fix": 4,
+    "found": 4,
+    "four": 4,
+    "green": 4,
+    "input": 11,
+    "len": 4,
+    "line": 12,
+    "missing": 4,
+    "must": 4,
+    "mutation": 6,
+    "never": 7,
+    "no": 9,
+    "not": 24,
+    "one": 8,
+    "only": 10,
+    "over": 5,
+    "own": 6,
+    "part": 4,
+    "parts": 7,
+    "quantity": 4,
+    "reached": 6,
+    "revert": 4,
+    "round": 11,
+    "search": 6,
+    "so": 7,
+    "state": 4,
+    "suite": 4,
+    "target": 6,
+    "test": 4,
+    "tests": 8,
+    "text": 4,
+    "three": 5,
+    "were": 5
+   },
+   "title": "The missing input can be manufactured — and only where a quantity guides it",
+   "title_terms": [
+    "guides",
+    "input",
+    "manufactured",
+    "missing",
+    "only",
+    "quantity"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 21386,
    "headings": [
     "The missing part is not the experience — it is the operand, and it does not transfer",
@@ -86851,10 +86928,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1339,
+  "included_source_count": 1340,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "bb6783b064f028b3f22f889d581b04bba78c153953c7e4029b9788871985a116"
+  "source_tree_digest": "2eaa150b142635a3573a0739d0b379cab38992113253d1b0f2003216ea5d8084"
  },
  "research_index": [
   {
@@ -198887,6 +198964,43 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/REACH_THE_CHANGED_SITE_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/REACH_THE_CHANGED_SITE_20261116_V1.json",
+   "schema": "BRAIN_REACH_THE_CHANGED_SITE_V1",
+   "sha256": "f5cb7b90405fa1af25b8d4e686accb06f6942fd2a8f11926333ead3ba2916cd1",
+   "status": "",
+   "terms": {
+    "20261116": 1,
+    "changed": 1,
+    "reach": 1,
+    "site": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/REACH_THE_CHANGED_SITE_WIDER_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/REACH_THE_CHANGED_SITE_WIDER_20261116_V1.json",
+   "schema": "BRAIN_REACH_THE_CHANGED_SITE_V1",
+   "sha256": "06098861a453f8ab9ddba6485f0dd0f05fdf44392d4204eed35ece88ac4913db",
+   "status": "",
+   "terms": {
+    "20261116": 1,
+    "changed": 1,
+    "reach": 1,
+    "site": 1,
+    "v1": 1,
+    "wider": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-11-16",
    "id": "research:canonical/verification/READ_FIRST_AND_LEARN_ONLY_FOR_A_NAMED_GAP_20261116_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -251002,6 +251116,32 @@
     "the_missing_assertion_is_about_inputs_the_tests_never_use_20261116_v1": 1,
     "the_recipe_for_a_pin_is_not_in_the_tests__eight_unpinned_behavioural_parts_of_real_fixes_audited_with_the_inputs_the_human_s_own_test_literally_passes__zero_are_pinnable_because_a_suite_that_passes_cannot_differ_on_the_outcomes_it_asserts_and_the_unpinned_parts_are_exactly_those_no_input_reaches__the_instrument_is_proven_able_to_fire_on_a_fixture_where_the_suite_asserts_only_the_type_and_the_message_moves__therefore_certified_share_is_bounded_by_input_generation_not_assertion_generation_and_the_next_organ_is_path_reaching_input_synthesis": 1,
     "use": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "THE_MISSING_INPUT_CAN_BE_MANUFACTURED_AND_ONLY_WHERE_A_QUANTITY_GUIDES_IT_20261116_V1",
+   "capability": false,
+   "date": "2026-11-16",
+   "id": "research:canonical/action_intents/THE_MISSING_INPUT_CAN_BE_MANUFACTURED_AND_ONLY_WHERE_A_QUANTITY_GUIDES_IT_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/THE_MISSING_INPUT_CAN_BE_MANUFACTURED_AND_ONLY_WHERE_A_QUANTITY_GUIDES_IT_20261116_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "ab44b815f59555e7b2747846c59ae81407276eb18b017bc08ff310c6870ccc8b",
+   "status": "PRODUCED",
+   "terms": {
+    "20261116": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "generate_the_input_that_reaches_the_changed_line_by_directed_mutation_from_the_tests_own_literals_then_assert_only_if_fix_and_revert_differ": 1,
+    "guides": 1,
+    "input": 1,
+    "manufactured": 1,
+    "missing": 1,
+    "only": 1,
+    "produced": 1,
+    "quantity": 1,
+    "the_input_that_reaches_a_changed_site_can_be_generated_when_the_changed_block_compares_against_a_quantity_two_of_eight_unpinned_parts_of_real_fixes_are_now_pinned_and_verified_by_a_generated_input_and_both_come_from_the_error_path_class__the_four_that_failed_compare_against_structure_not_quantity_so_the_artifact_offers_no_distance_and_the_field_s_state_of_the_art_solves_that_with_a_model_s_one_pass_which_this_tree_refuses__therefore_the_single_bottleneck_is_reachability_reasoning_not_parameter_action_or_verifier_supply_and_the_next_organ_is_a_reachability_hypothesis_checked_by_execution_and_derived_from_data_flow_not_semantics": 2,
+    "the_missing_input_can_be_manufactured_and_only_where_a_quantity_guides_it_20261116_v1": 1,
     "v1": 1
    }
   },
