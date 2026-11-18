@@ -1,0 +1,138 @@
+{
+ "authority": "NONE -- sandbox measurement, not independent verification",
+ "model_calls": 0,
+ "network_calls": 0,
+ "rows": [
+  {
+   "parameters": [],
+   "passing": [],
+   "repo": "pallets/itsdangerous",
+   "sha": "7f4dcf83a07bb3d53f4e0e65ef1b43327b4cca90",
+   "source": "src/itsdangerous/signer.py",
+   "state": "REFUSED__NO_PARTITION"
+  },
+  {
+   "distinct_seats": [
+    766,
+    771,
+    775,
+    782
+   ],
+   "distinct_terms": [
+    "pathlib.PureWindowsPath(path).drive"
+   ],
+   "parameters": [
+    "test_invalid_license_files.license_files"
+   ],
+   "passing": [
+    {
+     "at_line": 766,
+     "condition": "'..' in path",
+     "operator": "or",
+     "term": "pathlib.PureWindowsPath(path).drive"
+    },
+    {
+     "at_line": 771,
+     "condition": "'*' in path",
+     "operator": "or",
+     "term": "pathlib.PureWindowsPath(path).drive"
+    },
+    {
+     "at_line": 775,
+     "condition": "pathlib.PurePosixPath(path).is_absolute() or pathlib.PureWindowsPath(path).is_absolute()",
+     "operator": "or",
+     "term": "pathlib.PureWindowsPath(path).drive"
+    },
+    {
+     "at_line": 782,
+     "condition": "pathlib.PureWindowsPath(path).as_posix() != path",
+     "operator": "or",
+     "term": "pathlib.PureWindowsPath(path).drive"
+    }
+   ],
+   "question": {
+    "about_input": "C:LICENSE",
+    "note": "answering this collapses the version space; guessing picks one behaviour and calls it intent",
+    "options": [
+     "self._invalid_metadata(f\"{path!r} is invalid for {self.raw_name!r}, paths must use '/' delimiter\")",
+     "self._invalid_metadata(f'{path!r} is invalid for {self.raw_name!r}, parent directory indicators are not allowed')",
+     "self._invalid_metadata(f'{path!r} is invalid for {self.raw_name!r}, paths must be relative')",
+     "self._invalid_metadata(f'{path!r} is invalid for {self.raw_name!r}, paths must be resolved')"
+    ],
+    "repairs_behind_each_option": {
+     "self._invalid_metadata(f\"{path!r} is invalid for {self.raw_name!r}, paths must use '/' delimiter\")": 1,
+     "self._invalid_metadata(f'{path!r} is invalid for {self.raw_name!r}, parent directory indicators are not allowed')": 1,
+     "self._invalid_metadata(f'{path!r} is invalid for {self.raw_name!r}, paths must be relative')": 1,
+     "self._invalid_metadata(f'{path!r} is invalid for {self.raw_name!r}, paths must be resolved')": 1
+    }
+   },
+   "repo": "pypa/packaging",
+   "sha": "022ae6c6fe5c2ef9615875d0ecfab1ae4024720f",
+   "source": "src/packaging/metadata.py",
+   "state": "UNDERDETERMINED_SUITE_ADMITS_MANY",
+   "trials": 8
+  },
+  {
+   "parameters": [],
+   "passing": [],
+   "repo": "pypa/packaging",
+   "sha": "4b243af94ff6885c89b8acd7a22fc5714b18cb96",
+   "source": "src/packaging/requirements.py",
+   "state": "REFUSED__NO_PARTITION"
+  },
+  {
+   "parameters": [],
+   "passing": [],
+   "repo": "pypa/packaging",
+   "sha": "a1f705642e50b79da6be83fb0f6149daa32fc7cc",
+   "source": "src/packaging/licenses/__init__.py",
+   "state": "REFUSED__NO_PARTITION"
+  },
+  {
+   "parameters": [],
+   "passing": [],
+   "repo": "hukkin/tomli",
+   "sha": "12314bde5b89a8bdc32de7403a2a4cf786187bbc",
+   "source": "src/tomli/_parser.py",
+   "state": "REFUSED__NO_PARTITION"
+  },
+  {
+   "parameters": [],
+   "passing": [],
+   "repo": "hukkin/tomli",
+   "sha": "5ab9ec926d9dc1ef79e66215edd51285371fe8a0",
+   "source": "tomli/_parser.py",
+   "state": "REFUSED__NO_PARTITION"
+  },
+  {
+   "parameters": [],
+   "passing": [],
+   "repo": "hukkin/tomli",
+   "sha": "96dfe2cef79eb4c2a441d5b1b36c3ef357372c9f",
+   "source": "tomli/__init__.py",
+   "state": "REFUSED__NO_PARTITION"
+  }
+ ],
+ "schema": "BRAIN_PASSING_REPAIRS_VERSION_SPACE_V1",
+ "totals": {
+  "max_repairs_accepted": 4,
+  "repairs_accepted_total": 4,
+  "seats_per_task": {
+   "022ae6c6": 4,
+   "12314bde": 0,
+   "4b243af9": 0,
+   "5ab9ec92": 0,
+   "7f4dcf83": 0,
+   "96dfe2ce": 0,
+   "a1f70564": 0
+  },
+  "states": {
+   "REFUSED__NO_PARTITION": 6,
+   "UNDERDETERMINED_SUITE_ADMITS_MANY": 1
+  },
+  "tasks": 7,
+  "tasks_admitting_many": 1,
+  "tasks_with_a_discriminating_question": 1,
+  "trials": 8
+ }
+}

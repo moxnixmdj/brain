@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 530,
+  "knowledge_documents": 531,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 7050,
+  "research_index_records": 7053,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 452,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "00359b3720fd66539513d89711fc9db4c7daa9e1581d72479cc40c3a0070dca6"
+  "value": "39bed61093a433205970717b2e25d85b8f5f915354c965fb8ebe147cffdab258"
  },
  "engines": [
   {
@@ -68265,6 +68265,86 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 8676,
+   "headings": [
+    "The suite accepts four repairs. You meant one.",
+    "The question, in your words",
+    "What this round actually did",
+    "What came back",
+    "What that means, stated without decoration",
+    "The one constructive thing this round adds",
+    "The honest ceiling, and why 40.3% is still out",
+    "Computer use, briefly",
+    "What would be dishonest to claim here",
+    "Reproduce",
+    "The next term"
+   ],
+   "kind": "DOCUMENT",
+   "path": "THE_SUITE_ACCEPTS_FOUR_REPAIRS_AND_YOU_MEANT_ONE_20261116_V1.md",
+   "sha256": "639bf5f25b79457d904624f0e1f09c27c5fe488110b1f52ed33a5c6d3709b6fb",
+   "summary": "Round 13. Branch `arena/1300ffbf-brain`, from `ebb8f636`.",
+   "terms": {
+    "12": 6,
+    "13": 3,
+    "40.3": 3,
+    "about": 5,
+    "accepts": 3,
+    "behaviour": 4,
+    "cannot": 5,
+    "canonical": 5,
+    "code": 7,
+    "commit": 5,
+    "different": 4,
+    "each": 4,
+    "every": 5,
+    "exist": 4,
+    "field": 4,
+    "four": 10,
+    "guard": 4,
+    "human": 5,
+    "invalid": 5,
+    "keep": 5,
+    "license": 6,
+    "line": 8,
+    "message": 5,
+    "must": 7,
+    "not": 25,
+    "one": 14,
+    "out": 4,
+    "own": 4,
+    "paths": 6,
+    "pkg": 4,
+    "question": 5,
+    "real": 5,
+    "refusing": 5,
+    "repair": 10,
+    "repairs": 4,
+    "round": 14,
+    "rounds": 4,
+    "same": 4,
+    "set": 5,
+    "so": 5,
+    "something": 4,
+    "space": 8,
+    "suite": 4,
+    "tests": 7,
+    "thing": 4,
+    "tree": 5,
+    "use": 4,
+    "version": 5
+   },
+   "title": "The suite accepts four repairs. You meant one.",
+   "title_terms": [
+    "accepts",
+    "four",
+    "meant",
+    "one",
+    "repairs",
+    "suite"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 4043,
    "headings": [
     "The System Already Works — 2026-11-12",
@@ -86305,10 +86385,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1332,
+  "included_source_count": 1333,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "3ecd7491b4ffd58423a3b7f57ac87f7f1d571c84380c5f0ef01fbd42dcd38e52"
+  "source_tree_digest": "d38627047d7eae3b23db8ba1207b992b9572eeac8fc40face77ed6cab1b1c43f"
  },
  "research_index": [
   {
@@ -185665,6 +185745,45 @@
    "action_id": "",
    "capability": false,
    "date": "",
+   "id": "research:canonical/verification/PASSING_REPAIRS_VERSION_SPACE_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/PASSING_REPAIRS_VERSION_SPACE_20261116_V1.json",
+   "schema": "BRAIN_PASSING_REPAIRS_VERSION_SPACE_V1",
+   "sha256": "fda5e45c28181f54af08f22718c250ef65e5640fdb5fc289b137b163c2ea3eb1",
+   "status": "",
+   "terms": {
+    "20261116": 1,
+    "passing": 1,
+    "repairs": 1,
+    "space": 1,
+    "v1": 1,
+    "version": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/PASSING_REPAIRS_VERSION_SPACE_WIDER_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/PASSING_REPAIRS_VERSION_SPACE_WIDER_20261116_V1.json",
+   "schema": "BRAIN_PASSING_REPAIRS_VERSION_SPACE_V1",
+   "sha256": "aeb944bf5f525d9679529240b15dd936126c0907c7fc886d988cd0eec7aa220e",
+   "status": "",
+   "terms": {
+    "20261116": 1,
+    "passing": 1,
+    "repairs": 1,
+    "space": 1,
+    "v1": 1,
+    "version": 1,
+    "wider": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
    "id": "research:canonical/verification/PATCH_VERDICT_AMPLIFICATION_20261116_V1.json",
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/PATCH_VERDICT_AMPLIFICATION_20261116_V1.json",
@@ -245444,6 +245563,34 @@
     "so": 2,
     "tie": 3,
     "v1": 2
+   }
+  },
+  {
+   "action_id": "PASSING_REPAIRS_VERSION_SPACE_AND_THE_QUESTION_THAT_IDENTIFIES_THE_REPAIR_20261116_V1",
+   "capability": false,
+   "date": "2026-11-16",
+   "id": "research:canonical/action_intents/PASSING_REPAIRS_VERSION_SPACE_AND_THE_QUESTION_THAT_IDENTIFIES_THE_REPAIR_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/PASSING_REPAIRS_VERSION_SPACE_AND_THE_QUESTION_THAT_IDENTIFIES_THE_REPAIR_20261116_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "794129d8325021e11224d4824acba3dbb2a6bebf413201cb2062c2afdbc82cf1",
+   "status": "PRODUCED",
+   "terms": {
+    "20261116": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "identifies": 1,
+    "keep_every_repair_the_machinery_can_build_that_passes_the_commit_s_own_suite_then_read_the_set_as_a_version_space_and_emit_the_one_question_that_identifies_which_repair_was_meant": 1,
+    "keeping_the_whole_set_of_passing_repairs_instead_of_the_first_one_turns_a_learning_question_into_an_identifiability_question__one_real_commits_own_suite_accepts_four_repairs_at_four_guards_and_names_none_of_them_while_the_machinery_reaches_only_one_commit_in_seventeen__the_version_space_is_now_printed_as_a_single_behavioural_question_with_no_model_and_the_feature_bucket_is_named_as_design_authoring_rather_than_learning": 1,
+    "passing": 1,
+    "passing_repairs_version_space_and_the_question_that_identifies_the_repair_20261116_v1": 1,
+    "produced": 1,
+    "question": 1,
+    "repair": 1,
+    "repairs": 1,
+    "space": 1,
+    "the_bottleneck_is_identity_not_retention__one_real_commits_own_344_tests_accept_four_distinct_repairs_at_four_different_guards_including_the_human_s__while_the_same_machinery_cannot_build_a_repair_on_sixteen_of_seventeen__so_permanence_is_well_defined_for_behaviour_and_undefined_for_intent_until_a_discriminating_question_is_asked_and_the_40_3_percent_that_needs_new_code_is_untouched_because_no_trace_reading_mechanism_supplies_design": 1,
+    "v1": 1,
+    "version": 1
    }
   },
   {
