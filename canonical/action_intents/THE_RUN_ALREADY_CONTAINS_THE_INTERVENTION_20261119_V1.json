@@ -44,7 +44,7 @@
   "terminal_achieved": false
  },
  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
- "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The replacement expression. The failing run can name the site and the firing whose value was wrong -- one oracle bit per candidate, 409 bits for 15 real commits -- and cannot name the value that should have been there. Measured: 3 of 15 sites reached at the human's line, 0 of 15 expressions, 7 flips that passed the failing test and broke the suite, 0 exact fits.",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The replacement expression. The failing run can name the site and the firing whose value was wrong -- measured at one oracle bit per candidate -- and cannot name the value that should have been there. 12 of 15 fresh human fixes are a value the run never produced (an attribute name, a regex, an argument, a call's routing) and 3 are behaviour that did not exist, which INSUFFICIENCY_CERTIFICATE_20261113_V1 already proves no trace can supply.",
  "canonical_base_commit": "1f405b9267799cd8219a6a45fe532b6ab2688372",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
@@ -167,10 +167,10 @@
   "canonical_base_commit": "1f405b9267799cd8219a6a45fe532b6ab2688372",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
-   "reading the failure message as the only observable channel (it carries a value for 4 of 29 older commits and 0 of 15 fresh ones at the expression level)",
-   "flipping a whole predicate (the click case is correct at one firing and wrong at another; a whole-predicate edit breaks a passing test)",
-   "scoring candidate refinements (exact fit replaces every score and threshold)",
-   "storing anything from one commit to the next (parameters_stored: 0, the table is discarded)",
+   "reading the failure message as the only observable channel (it reaches the human's line once in 15 fresh commits and the human's expression never)",
+   "flipping a whole predicate (the in-sample case is correct at one firing and wrong at another; a whole-predicate edit breaks a test that was passing)",
+   "scoring candidate refinements (exact fit replaces every score and every threshold)",
+   "storing anything from one commit to the next (parameters_stored: 0; the table is discarded)",
    "counting a flip that breaks the suite as a repair (7 of 7 such flips were refused)"
   ],
   "expected_parent_frontier_change": "The frontier moves from attribution to synthesis: the counterfactual is now executed for free (409 bits, 251 s, 15 commits, zero stored parameters), the site is reachable (3 of 15 at the human's line), and the content is not (0 of 15). Any next round that spends parameters on attribution is spending them on the solved half.",
@@ -178,28 +178,41 @@
   "independent_verification_required": true,
   "iteration_limit": 1,
   "obs_blocker": {
-   "blocker": "The replacement expression. The failing run can name the site and the firing whose value was wrong -- measured at one oracle bit per candidate -- and cannot name the value that should have been there. 12 of 15 fresh human fixes are a value the run never produced (an attribute name, a regex, an argument, a call's routing) and 3 are behaviour that did not exist, which INSUFFICIENCY_CERTIFICATE_20261113_V1 already proves no trace can supply.",
    "delete_bypass_substitute_options": [
-    "DELETE the message as the index: on the fresh corpus it reaches the human's line once in 15",
+    "DELETE the failure message as the index: on 15 fresh commits it reaches the human's line once",
     "BYPASS the search for a refinement: the logged scope answers it by exact fit, or not at all",
     "SUBSTITUTE an executed flip for a model's guess at which step to intervene on"
-   ]
+   ],
+   "intrinsic_or_path_specific": "PATH_SPECIFIC_TO_what_an_execution_can_name: values it produced, not values it should have produced",
+   "surviving_causal_blocker": "The replacement expression. The failing run can name the site and the firing whose value was wrong -- measured at one oracle bit per candidate -- and cannot name the value that should have been there. 12 of 15 fresh human fixes are a value the run never produced (an attribute name, a regex, an argument, a call's routing) and 3 are behaviour that did not exist, which INSUFFICIENCY_CERTIFICATE_20261113_V1 already proves no trace can supply."
   },
   "obs_capability": {
-   "capability_added": "site+firing identification at one oracle bit per candidate, with two refusals",
    "capability_work_deleted": [
     "any learned prior over which guards matter",
     "any stored vocabulary of predicates",
     "a larger candidate budget"
-   ]
+   ],
+   "existing_inherited_routes_checked": [
+    "canonical/tools/the_failing_run_names_the_expression_v1.py (arm A, run on the same 15 commits)",
+    "canonical/tools/force_the_value_and_see_v1.py (interior value forcing: the next composition)",
+    "canonical/runtime/bound_capabilities/python_counterfactual_spec_repair_v1.py (function-scale counterfactual repair on QuixBugs; same primitives, no repo-scale address)",
+    "canonical/tools/what_a_real_fix_needs_from_the_site_v1.py (site verdicts and single-change extraction)"
+   ],
+   "external_existing_routes_checked": [
+    "AgenTracer (ICLR 2026): counterfactual replay labels, guessed by a frontier model",
+    "CausalFlow (arXiv 2605.25338): step-level interventions written by a model",
+    "Who Broke the System? (arXiv 2607.07989): reviewed for approximating rather than executing the counterfactual"
+   ],
+   "surviving_gap": "An executed counterfactual at the granularity of one firing, which is free, exact, and still does not name the replacement expression"
   },
   "obs_goal": {
-   "goal": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
    "proxy_goals_deleted": [
     "a bigger action library (OSWorld 2.0: final-state exactness is the 84-95% failure bucket)",
     "more repetitions of one demonstration (retention, not identification)",
-    "parameters for identification (zero is correct and measurable)"
-   ]
+    "parameters for identification (zero is correct, measurable, and recorded per row)"
+   ],
+   "real_outcome": "Execution beats approximation for the counterfactual itself, and the counterfactual is not the bottleneck. Zero parameters were stored by either arm. One verified repair exists and it is in-sample; on 15 fresh real commits both channels produce nothing, and the seven 'wins' a version without the soundness and exact-fit gates would have claimed are all false.",
+   "surviving_necessity": "a model of the counterfactual is not needed where the artifact can be executed: one flipped firing is the intervention, and the oracle is the project's own tests"
   },
   "obs_inherited_system": {
    "adjacent_capabilities_absorbed": "None by claim: the existing repair primitive and corpus oracle are reused unchanged; the induced basis adds candidates only and holds no authority.",
@@ -207,31 +220,241 @@
    "fresh_reuse_plan": "Recompute the ladder and re-run both bases from the receipt's commands; the corpus is public and the answer key is never needed."
   },
   "obs_obs": {
-   "measurement": "two arms, 15 fresh commits, same oracles, same sandbox; refusals named",
-   "new_instrument": "canonical/tools/the_same_guard_twice_is_the_discriminator_v1.py",
-   "reused": "identify_a_real_bugs_fix_v1 (verdicts, spans, patches), the failing-run index (arm A)"
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": "Reused the verdict parser, span patching and suite runner instead of writing a second harness; the switch is an AST rewrite of the same lines, not a second interpreter.",
+   "search_stop_decision": "Stop after both arms on the fresh corpus; no widening of the logged scope and no value-forcing composition without the falsifier stated in the verification JSON."
   },
   "obs_solution": {
-   "one_sentence": "Execute the counterfactual on the program's own control flow instead of approximating it, and accept the answer only if the suite stays green and a predicate fits every logged firing exactly",
-   "what_it_does_not_do": "write the replacement expression"
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "efficiency_mechanism": "Ordering and exact fit replace breadth: 409 flips decided 15 commits, and no candidate refinement was scored, ranked or thresholded.",
+   "generality_mechanism": "The rewrite is generic Python AST plus a counter; the oracle is the project's own pytest; the address is a site and a firing, so it carries to any executable artifact.",
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "Message channel: 1 of 15 at the line, 0 at the expression. Whole-predicate flips: cannot express a guard that is right once and wrong once. Scoring: unnecessary once fit is exact. Stored state: costlier than re-measuring in ~50 microseconds.",
+   "routes_ranked": [
+    "force the value at the flip-identified firing and synthesize from the artifact's vocabulary",
+    "widen the logged scope beyond locals and self.__dict__",
+    "read the failure message as a second channel (measured: 0 of 15 at the expression)",
+    "raise the candidate budget",
+    "store every verified repair and retrieve by similarity"
+   ],
+   "white_box_harvest_note": "No donor model, weight or external artifact was harvested or called: every number comes from running the projects' own test suites in this sandbox."
   },
   "obs_verification": {
-   "exact_fit_gate": "a predicate that is False at the flipped firing and True at every other firing",
-   "independent_oracle": "each project's own post-fix pytest, uninstrumented copy for every verdict",
-   "soundness_gate": "the whole test file must stay green"
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "oracle_paths": [
+    "canonical/tests/test_the_same_guard_twice_is_the_discriminator_v1.py",
+    "canonical/tests/test_identify_a_real_bugs_fix_v1.py",
+    "canonical/verification/THE_SAME_GUARD_TWICE_IS_THE_DISCRIMINATOR_20261119_V1.json"
+   ],
+   "synthetic_verification_necessity": "The oracle for a real commit is that project's own post-fix test file, run on an uninstrumented copy; unit tests pin only the instrument. Independent reproduction remains open."
   },
   "real_outcome": "Execution beats approximation for the counterfactual itself, and the counterfactual is not the bottleneck. Zero parameters were stored by either arm. One verified repair exists and it is in-sample; on 15 fresh real commits both channels produce nothing, and the seven 'wins' a version without the soundness and exact-fit gates would have claimed are all false.",
   "required_capability": "counterfactual intervention over a live execution trace, exact-fit predicate selection from the logged scope, and an oracle that decides without a model",
   "route_frontier": {
+   "challenger_routes": [
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "3 of 40 programs",
+      "CORRECTNESS": "a class is only as good as its donor",
+      "INCREMENTAL_COST": "one class per shape",
+      "RELIABILITY": "unseen shapes stay unseen",
+      "VERIFIABILITY": "measured exactly",
+      "WALL_CLOCK": "unbounded as the corpus grows"
+     },
+     "evidence": [
+      "a taught class reaches 8 of 40 fixes, 5 only on its donor"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/WHAT_IS_LEFT_FOR_A_LESSON_TO_BUY_20261117_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "teach one more edit class per failing task"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "2 of 30 unseen programs from 3 pairs, at 1.92% precision on the pair that fires",
+      "CORRECTNESS": "the corpus's own pytest decides, as here",
+      "INCREMENTAL_COST": "40.6 us per lookup, no model, no parameters",
+      "RELIABILITY": "saturates: addressability 34.4% -> 59.7% over 24 experiences",
+      "VERIFIABILITY": "measured exactly",
+      "WALL_CLOCK": "5 minutes for the whole corpus"
+     },
+     "evidence": [
+      "0.597 addressable x 0.0192 precise ~ 1.1% of unseen decisions"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/WHAT_AN_EXPERIENCE_CAN_OWN_20261118_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "NON_DOMINATING",
+     "route": "store every verified repair and retrieve it by similarity"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "1 real commit identified at rank 0, unattended, with no diff and no name table",
+      "CORRECTNESS": "the artifact answers, so a question is either answered or refused -- never wrong",
+      "INCREMENTAL_COST": "7.69 ms per asked question, 1 bit",
+      "RELIABILITY": "no saturating share: every site can be asked",
+      "VERIFIABILITY": "measured exactly",
+      "WALL_CLOCK": "121.2 s for 14 bugs"
+     },
+     "evidence": [
+      "click@1b0e19f505: human fix derived at rank 0 from the trace, 2 consistent candidates of 119 tests",
+      "5 evaluated candidates per site against the proximity pool's 32-400"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_FAILING_RUN_IS_THE_INDEX_20261118_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "SELECTED",
+     "route": "INDEX_ACTIONS_BY_THE_FAILING_RUN_NOT_BY_THE_SOURCE_TEXT"
+    }
+   ],
+   "checked_at_utc": "2026-11-18T17:12:31Z",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "EXECUTE_THE_COUNTERFACTUAL_INSTEAD_OF_APPROXIMATING_IT",
+   "max_age_hours": 2,
+   "negative_search_summary": "Measured and refused this session: more vocabulary, more grammar, statement form, a larger budget, a stored table, and text-proximity material. Each is sized and each is smaller than the index.",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "enumerative program repair expression size budget type-directed synthesis local typing context 2026"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "QuixBugs bug corpus python programs tests published"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "expression-size-wise enumeration starting at the size of the buggy expression S3 syntactic search space"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "2026 bounded typed program synthesis with counterexample-guided refinement depth size fuel bounds"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
    "selected_route": "EXECUTE_THE_COUNTERFACTUAL_INSTEAD_OF_APPROXIMATING_IT",
-   "why_now": "The frontier moves from attribution to synthesis: the counterfactual is now executed for free (409 bits, 251 s, 15 commits, zero stored parameters), the site is reachable (3 of 15 at the human's line), and the content is not (0 of 15). Any next round that spends parameters on attribution is spending them on the solved half."
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-11-18T17:12:31Z",
+    "execution_dependencies": [
+     {
+      "dependency": "local Python 3.11 runtime with pytest",
+      "evidence": [
+       "Python 3.11 + pytest 9.2; 29 instrument tests pass at 2026-11-18T16:05:00Z"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "real repositories cloned for the sweep (requests, click, tqdm, httpx) with their suites runnable",
+      "evidence": [
+       "29 fix commits swept twice in this sandbox (blame index and proximity index) at 2026-11-18T16:05:00Z"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "local tempdir for fresh per-verdict task copies",
+      "evidence": [
+       "one fresh copy per real-judge verdict, answer key absent from the copy the search runs in; 0 corpus verdicts: reachability only, no execution at 2026-11-17T22:05:07Z"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "STORAGE",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "max_age_hours": 2,
+    "selected_route": "EXECUTE_THE_COUNTERFACTUAL_INSTEAD_OF_APPROXIMATING_IT",
+    "status": "READY"
+   },
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/tools/grammar_closed_repair_v1.py (corpus reader, space enumerator, real judge, executed_lines)",
+     "canonical/tools/solve_with_a_calibrated_judge_v1.py (certified judge, per-case clocks, containment)",
+     "canonical/verification/WHERE_THE_REFUSALS_ACTUALLY_WERE_20261116_V1.json",
+     "canonical/verification/ONE_DEMONSTRATION_LEAVES_TEN_BITS_20261116_V1.json"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "https://arxiv.org/pdf/2611.12885 (World In-Context Learning: one demonstration plus rehearsal beats a 50-demonstration trained policy; without the world the demonstration brings no benefit)",
+     "https://arxiv.org/html/2606.29537v1 (OSWorld 2.0: 20.6% binary completion, failures concentrate on hidden state)",
+     "https://arxiv.org/html/2606.31270v1 (Learning from Failure: inference-time self-improvement from failure trajectories)"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "https://github.com/jkoppel/QuixBugs (MIT; 40 buggy programs, 40 pytest files, JSON test data)",
+     "https://pypi.org/project/pytest (9.2.0, the runner every verdict goes through)"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "https://docs.python.org/3/library/ast.html (node types the closure rule enumerates)"
+    ]
+   },
+   "unresolved_plausible_dominators": []
   },
   "routes_considered": [
-   "Read the failure message more cleverly (measured on fresh commits: 0 of 15 at the expression level, 1 of 15 at the line)",
+   "Read the failure message more cleverly (fresh corpus: 1 of 15 at the human's line, 0 at the expression)",
    "Flip whole predicates, predicate-switching style (cannot reach a guard that is right once and wrong once)",
    "Score refinements with a learned or heuristic prior (exact fit makes scoring unnecessary)",
-   "Store what was learned on one commit (zero parameters; the observation is cheaper to re-derive)",
-   "Force the VALUE at the firing the flip fingerprints and synthesize from the artifact's vocabulary (the next round's falsifiable route)"
+   "Store what one commit taught (zero parameters; the observation is cheaper to re-derive)",
+   "Force the VALUE at the firing the flip fingerprints and synthesize from the artifact's own vocabulary (the next round's falsifiable route)"
   ],
   "selected_route": "EXECUTE_THE_COUNTERFACTUAL_INSTEAD_OF_APPROXIMATING_IT",
   "selected_surviving_route": "EXECUTE_THE_COUNTERFACTUAL_INSTEAD_OF_APPROXIMATING_IT",
@@ -283,9 +506,12 @@
   "terminal_credit_delta": 0,
   "tournament": {
    "counterexample_receipts": [
-    "canonical/verification/THE_SAME_GUARD_TWICE_IS_THE_DISCRIMINATOR_20261119_V1.json"
+    {
+     "git_blob_sha": "2e31badf73ea9ca7641354488ba15ee7722eba5c",
+     "path": "canonical/verification/THE_SAME_GUARD_TWICE_IS_THE_DISCRIMINATOR_20261119_V1.json"
+    }
    ],
-   "decisive_question": "With the site and the firing handed over for free, does anything in the artifact supply the replacement expression?",
+   "decisive_question": "With site and firing handed over for free, does anything in the artifact supply the replacement expression?",
    "falsifier_id": "A_FLIP_IDENTIFIED_FIRING_MUST_ADMIT_A_WORTHWHILE_REPLACEMENT",
    "known_counterexamples_checked": true,
    "no_known_counterexample_reason": "One in-sample repair (click@1b0e19f505) exists and is reported as in-sample; zero of fifteen fresh commits.",
