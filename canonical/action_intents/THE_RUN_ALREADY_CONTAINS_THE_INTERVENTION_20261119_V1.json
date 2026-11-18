@@ -45,7 +45,7 @@
  },
  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The replacement expression. The failing run can name the site and the firing whose value was wrong -- measured at one oracle bit per candidate -- and cannot name the value that should have been there. 12 of 15 fresh human fixes are a value the run never produced (an attribute name, a regex, an argument, a call's routing) and 3 are behaviour that did not exist, which INSUFFICIENCY_CERTIFICATE_20261113_V1 already proves no trace can supply.",
- "canonical_base_commit": "1f405b9267799cd8219a6a45fe532b6ab2688372",
+ "canonical_base_commit": "2713005ae612102ecfc9e9ec73976a4217832a22",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -164,7 +164,7 @@
  ],
  "real_outcome": "Execution beats approximation for the counterfactual itself, and the counterfactual is not the bottleneck. Zero parameters were stored by either arm. One verified repair exists and it is in-sample; on 15 fresh real commits both channels produce nothing, and the seven 'wins' a version without the soundness and exact-fit gates would have claimed are all false.",
  "recursive_obs": {
-  "canonical_base_commit": "1f405b9267799cd8219a6a45fe532b6ab2688372",
+  "canonical_base_commit": "2713005ae612102ecfc9e9ec73976a4217832a22",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "reading the failure message as the only observable channel (it reaches the human's line once in 15 fresh commits and the human's expression never)",
