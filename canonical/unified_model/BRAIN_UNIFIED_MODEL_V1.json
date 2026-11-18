@@ -31228,7 +31228,7 @@
   "engines": 26,
   "knowledge_documents": 543,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 7101,
+  "research_index_records": 7103,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 452,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "b8f98b6cb70a6902020c9e61483660cbbc3b3e5033323a5c2bbcbf51acbd534a"
+  "value": "5c9b1944eb5c85af91d2881b00381d490dd341f472c6db31128ee6c0913acd62"
  },
  "engines": [
   {
@@ -215761,6 +215761,25 @@
    "action_id": "",
    "capability": false,
    "date": "",
+   "id": "research:canonical/verification/THE_CALLERS_WERE_NEVER_ASKED_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/THE_CALLERS_WERE_NEVER_ASKED_20261116_V1.json",
+   "schema": "BRAIN_THE_CALLERS_WERE_NEVER_ASKED_V1",
+   "sha256": "ffb57adf25dd9a67160898082d6b085a1d009b9dbce90cb476df61eedd187da4",
+   "status": "",
+   "terms": {
+    "20261116": 1,
+    "asked": 1,
+    "callers": 1,
+    "never": 1,
+    "v1": 1,
+    "were": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
    "id": "research:canonical/verification/THE_CEILING_OF_LEARN_ONCE_20261116_V1.json",
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/THE_CEILING_OF_LEARN_ONCE_20261116_V1.json",
@@ -241564,6 +241583,51 @@
     "sys": 1,
     "the_browser_surface_resolves_its_driver_however_browser_v1_is_loaded__measured_against_a_live_chromium_launched_by_canonical_runtime_browser_launch_v1_sh__available_returned_true_browser_present__navigation_to_pypi_dot_org_and_github_dot_com_over_cdp_returned_titles_and_55_to_240_interactive_elements__benchmark_compiled_19_of_23_unchanged_correct_selection_17_of_23_unchanged_wrong_capability_2_of_23_unchanged__tests_162_to_165": 1,
     "v1": 2
+   }
+  },
+  {
+   "action_id": "CALLERS_PASS_VARIABLES_AND_ONLY_TESTS_STATE_VALUES_20261116_V1",
+   "capability": false,
+   "date": "2026-11-16",
+   "id": "research:canonical/action_intents/CALLERS_PASS_VARIABLES_AND_ONLY_TESTS_STATE_VALUES_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/CALLERS_PASS_VARIABLES_AND_ONLY_TESTS_STATE_VALUES_20261116_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "acf489f55894370a3d133c21d3aac3f28ae3c121bd3ef7aa30d4b2af574044a0",
+   "status": "PRODUCED",
+   "terms": {
+    "20261116": 1,
+    "about": 1,
+    "appears": 1,
+    "authored": 1,
+    "callers": 1,
+    "callers_pass_variables_and_only_tests_state_values_20261116_v1": 1,
+    "callers_pass_variables_and_only_tests_state_values__the_seventh_source_one_hundred_and_sixty_eight_literal_call_sites_harvested_from_the_repositories_own_code_ninety_of_them_in_tests_yields_three_candidates_on_residual_parts_and_zero_separating__the_three_tomli_fixes_defining_thirty_functions_have_no_literal_call_site_at_all_because_internal_calls_pass_state_objects__seven_sources_now_spent_with_zero_added_and_eleven_of_seventeen_fixes_fully_pinned_by_their_own_suites__the_oracle_is_closed_and_the_lever_moves_to_the_generator": 1,
+    "calls": 1,
+    "change": 1,
+    "changed": 1,
+    "code": 1,
+    "data": 1,
+    "discriminating": 1,
+    "documents": 1,
+    "else": 1,
+    "function": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "input": 1,
+    "knowledge": 1,
+    "literals": 1,
+    "not": 5,
+    "nowhere": 1,
+    "only": 1,
+    "operations": 1,
+    "pass": 1,
+    "passes": 1,
+    "produced": 1,
+    "prose": 1,
+    "rather": 1,
+    "read_the_value_a_changed_condition_compares_against_out_of_the_program_and_deliver_it_at_the_type_that_can_carry_it": 1,
+    "state": 2,
+    "tests": 1
    }
   },
   {

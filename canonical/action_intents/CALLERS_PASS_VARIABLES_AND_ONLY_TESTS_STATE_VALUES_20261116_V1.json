@@ -1,0 +1,493 @@
+{
+ "action_id": "CALLERS_PASS_VARIABLES_AND_ONLY_TESTS_STATE_VALUES_20261116_V1",
+ "action_intent_id": "CALLERS_PASS_VARIABLES_AND_ONLY_TESTS_STATE_VALUES_20261116_V1",
+ "action_kind": "FRESH_REUSE",
+ "action_summary": "The last untested source of the discriminating input is the code that calls the changed function. This round harvests every literal argument the repositories pass to the callables a change touches (parsing every .py except the change and its test), maps the changed module's own definitions to its import path, probes each harvested call at the fixed state and at the reverted state, and counts a pin only when the generated assertion passes at fixed and fails at the revert. Result: 168 literal call sites (90 in tests, 78 in source), 3 candidates on residual parts, 0 separating, 0 pins. The three tomli fixes define 27-30 functions and produced zero literal call sites, because internal calls pass a state object and a position, never a literal. Two instrument limits were found and fixed first: only names the test called were mapped to a module (168 sites gave 1 candidate), and the module path was not derived from where the source lives.",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "earlier_routes_exhausted_reason": "Searched the tree before building and REUSED instead: python_test_corpus_discovery_v1 only answers which files are tests (for running them) and type_directed_sampler_v1 samples capability SLOTS, so neither harvests documents a target function consumes; both engines were imported unchanged rather than reimplemented. Round 18's own essay nominated a format organ; the cheaper explanation -- seed supply -- was measured first and killed, which is why no organ in it was built.",
+  "expected_parent_frontier_change": "CALLERS_PASS_VARIABLES_AND_ONLY_TESTS_STATE_VALUES__THE_SEVENTH_SOURCE_ONE_HUNDRED_AND_SIXTY_EIGHT_LITERAL_CALL_SITES_HARVESTED_FROM_THE_REPOSITORIES_OWN_CODE_NINETY_OF_THEM_IN_TESTS_YIELDS_THREE_CANDIDATES_ON_RESIDUAL_PARTS_AND_ZERO_SEPARATING__THE_THREE_TOMLI_FIXES_DEFINING_THIRTY_FUNCTIONS_HAVE_NO_LITERAL_CALL_SITE_AT_ALL_BECAUSE_INTERNAL_CALLS_PASS_STATE_OBJECTS__SEVEN_SOURCES_NOW_SPENT_WITH_ZERO_ADDED_AND_ELEVEN_OF_SEVENTEEN_FIXES_FULLY_PINNED_BY_THEIR_OWN_SUITES__THE_ORACLE_IS_CLOSED_AND_THE_LEVER_MOVES_TO_THE_GENERATOR",
+  "incremental_spend_usd": 0,
+  "independent_verification_completed": false,
+  "independent_verification_note": "The two pins remain round 17's and were re-verified there in freshly built trees with plain pytest (fixed 2 passed, defective 2 failed); this round adds no pin of its own and claims none.",
+  "laws_read_this_session": [
+   "AGENTS.md",
+   "README.md",
+   "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+  "progress_evidence_paths": [
+   "canonical/verification/THE_CALLERS_WERE_NEVER_ASKED_20261116_V1.json"
+  ],
+  "route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+  "scope_complete_discharge": false,
+  "terminal_achieved": false
+ },
+ "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The discriminating input is authored knowledge and appears nowhere else: not in the data, not in documents, not in operations, not in the prose about a change, and not in the code that calls the changed function, which passes state rather than literals.",
+ "canonical_base_commit": "1750783cf4944d4bdb8c20e28211f31f15347179",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "The discriminating input is authored knowledge and appears nowhere else: not in the data, not in documents, not in operations, not in the prose about a change, and not in the code that calls the changed function, which passes state rather than literals.",
+ "causal_blocker_route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+ "date": "2026-11-16",
+ "deleted_or_bypassed_paths": [
+  "instrumenting only the changed block, whose comparisons cannot execute before the block is reached",
+  "using the deepest logged comparison rather than the one that returned False",
+  "treating a larger line number as progress toward the target",
+  "comparing traced line numbers of the instrumented file against the original file",
+  "counting round 17's pins again in the certified share",
+  "a second reachability pipeline instead of one composed operator"
+ ],
+ "expected_parent_change": "canonical/swe_kernel/what_the_condition_wants_v1.py, canonical/tests/test_what_the_condition_wants_v1.py, canonical/verification/WHAT_THE_CONDITION_WANTS_20261116_V1.json, canonical/verification/WHAT_THE_CONDITION_WANTS_WIDER_20261116_V1.json, ONE_DEMONSTRATION_REACHES_FORTY_SIX_PERCENT_AND_THE_REST_IS_NOT_EXPERIENCE_20261116_V1.md",
+ "expected_parent_frontier_change": "CALLERS_PASS_VARIABLES_AND_ONLY_TESTS_STATE_VALUES__THE_SEVENTH_SOURCE_ONE_HUNDRED_AND_SIXTY_EIGHT_LITERAL_CALL_SITES_HARVESTED_FROM_THE_REPOSITORIES_OWN_CODE_NINETY_OF_THEM_IN_TESTS_YIELDS_THREE_CANDIDATES_ON_RESIDUAL_PARTS_AND_ZERO_SEPARATING__THE_THREE_TOMLI_FIXES_DEFINING_THIRTY_FUNCTIONS_HAVE_NO_LITERAL_CALL_SITE_AT_ALL_BECAUSE_INTERNAL_CALLS_PASS_STATE_OBJECTS__SEVEN_SOURCES_NOW_SPENT_WITH_ZERO_ADDED_AND_ELEVEN_OF_SEVENTEEN_FIXES_FULLY_PINNED_BY_THEIR_OWN_SUITES__THE_ORACLE_IS_CLOSED_AND_THE_LEVER_MOVES_TO_THE_GENERATOR",
+ "explicit_user_authorization": [
+  "Is instant learning a complete solution for all computer use and the most advanced software engineering? What is real and what is not?",
+  "What is the single bottleneck that, if fixed, unlocks the most capability?",
+  "Own weights from scratch, every parameter calculated, an instant knowledge source, and the best part is no part.",
+  "Hardest real tests only, never synthetic; integrity real; no self-congratulation; merge once when complete."
+ ],
+ "falsification_condition": "A literal call site in the repository's own source code, on a function a change touched, whose behaviour differs between the fixed and reverted states.",
+ "generic_repair_from_single_probe": true,
+ "governance_change": false,
+ "highest_leverage_now": true,
+ "incremental_spend_usd": 0,
+ "intentional_route_race": false,
+ "load_bearing_primary": {
+  "constructive_gap_for_open_obligation_ids": [
+   "CODING_TB4_GE_66_4"
+  ],
+  "expected_obligation_discharge_lcb": 0,
+  "expected_obligation_unlock_lcb": "1/100",
+  "interpretation": "Speculative forecast only. The certified share did not move: the operand channel is composed and cheap, but the parts that need it sit behind a sequence of structural constraints, so the forecast stays at 1/100 until a format hypothesis induced from the parser's own comparisons is measured on real fixes.",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "1/4",
+  "wall_clock_cost_ub": 1
+ },
+ "measured_effect": "17 real fixes, 8 residual parts, 168 literal call sites harvested, 3 candidate calls, 0 separating, 0 pinned; 11 of 17 fixes fully pinned by their own suites; certified share 0.762 -> 0.762.",
+ "model_calls": 0,
+ "network_calls": 0,
+ "next_step": "Move the lever from the oracle to the GENERATOR, which is untouched by all seven rounds: with a discriminating input in hand, measure and raise the share of real fixes whose patch the system can synthesise, against the tree's measured 18.7% grammar coverage of real fix pieces.",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "paths": [
+  "canonical/swe_kernel/CALLERS_PASS_VARIABLES_AND_ONLY_TESTS_STATE_VALUES_20261116_V1.md",
+  "canonical/swe_kernel/the_callers_were_never_asked_v1.py",
+  "canonical/tests/test_the_callers_were_never_asked_v1.py",
+  "canonical/verification/THE_CALLERS_WERE_NEVER_ASKED_20261116_V1.json"
+ ],
+ "prior_work_reused": "checkability_by_differential_pin_v1 (canonical outcome signatures, address stripping, determinism), test_oracle_strength_measure_20261113_v1 (surviving mutants to next assertions -- the idea, not the code), what_the_verifier_actually_pins_v1 (hunks, revert, behavioural and typing-only classification), history_induced_edit_grammar_v1 (judge and environment), structural_rewrite_induction_v1 (corpus). No third mechanism was built: the round composes the two that existed and changes only the input supply.",
+ "probe_specific": false,
+ "progress_evidence_paths": [
+  "canonical/verification/THE_CALLERS_WERE_NEVER_ASKED_20261116_V1.json"
+ ],
+ "recursive_obs": {
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The discriminating input is authored knowledge and appears nowhere else: not in the data, not in documents, not in operations, not in the prose about a change, and not in the code that calls the changed function, which passes state rather than literals.",
+  "canonical_base_commit": "1750783cf4944d4bdb8c20e28211f31f15347179",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "instrumenting only the changed block, whose comparisons cannot execute before the block is reached",
+   "using the deepest logged comparison rather than the one that returned False",
+   "treating a larger line number as progress toward the target",
+   "comparing traced line numbers of the instrumented file against the original file",
+   "counting round 17's pins again in the certified share",
+   "a second reachability pipeline instead of one composed operator"
+  ],
+  "expected_parent_frontier_change": "CALLERS_PASS_VARIABLES_AND_ONLY_TESTS_STATE_VALUES__THE_SEVENTH_SOURCE_ONE_HUNDRED_AND_SIXTY_EIGHT_LITERAL_CALL_SITES_HARVESTED_FROM_THE_REPOSITORIES_OWN_CODE_NINETY_OF_THEM_IN_TESTS_YIELDS_THREE_CANDIDATES_ON_RESIDUAL_PARTS_AND_ZERO_SEPARATING__THE_THREE_TOMLI_FIXES_DEFINING_THIRTY_FUNCTIONS_HAVE_NO_LITERAL_CALL_SITE_AT_ALL_BECAUSE_INTERNAL_CALLS_PASS_STATE_OBJECTS__SEVEN_SOURCES_NOW_SPENT_WITH_ZERO_ADDED_AND_ELEVEN_OF_SEVENTEEN_FIXES_FULLY_PINNED_BY_THEIR_OWN_SUITES__THE_ORACLE_IS_CLOSED_AND_THE_LEVER_MOVES_TO_THE_GENERATOR",
+  "expected_parent_level_state_change": "CALLERS_PASS_VARIABLES_AND_ONLY_TESTS_STATE_VALUES__THE_SEVENTH_SOURCE_ONE_HUNDRED_AND_SIXTY_EIGHT_LITERAL_CALL_SITES_HARVESTED_FROM_THE_REPOSITORIES_OWN_CODE_NINETY_OF_THEM_IN_TESTS_YIELDS_THREE_CANDIDATES_ON_RESIDUAL_PARTS_AND_ZERO_SEPARATING__THE_THREE_TOMLI_FIXES_DEFINING_THIRTY_FUNCTIONS_HAVE_NO_LITERAL_CALL_SITE_AT_ALL_BECAUSE_INTERNAL_CALLS_PASS_STATE_OBJECTS__SEVEN_SOURCES_NOW_SPENT_WITH_ZERO_ADDED_AND_ELEVEN_OF_SEVENTEEN_FIXES_FULLY_PINNED_BY_THEIR_OWN_SUITES__THE_ORACLE_IS_CLOSED_AND_THE_LEVER_MOVES_TO_THE_GENERATOR",
+  "independent_verification_required": true,
+  "iteration_limit": 1,
+  "obs_blocker": {
+   "delete_bypass_substitute_options": [
+    "delete: instrumenting the changed block instead of the enclosing scope",
+    "bypass: none -- an unreached part is unobservable",
+    "substitute: a model over past inputs, refused",
+    "reuse: round 17's engine, composed"
+   ],
+   "intrinsic_or_path_specific": "intrinsic: whether an input satisfies a sequence of structural constraints is a fact about the program, not the learner",
+   "surviving_causal_blocker": "THE_OPERAND_A_CONDITION_WANTS_IS_NOW_READ_OFF_THE_PROGRAM_ITSELF_AND_IT_ADDS_ZERO_PINS__TWO_OF_EIGHT_UNPINNED_PARTS_REMAIN_PINNED_BY_MUTATION_ALONE_AND_THE_WALK_GETS_WITHIN_NINE_LINES_OF_THE_THIRD__FOUR_OF_EIGHT_HAVE_NO_GATE_THAT_ANY_SEED_EXECUTES_ONE_HAS_NO_LITERAL_CALL_IN_ITS_TEST_ONE_REMOVES_CODE__A_PARSER_FAILS_ON_A_SEQUENCE_OF_STRUCTURAL_CONSTRAINTS_NOT_ON_A_MAGIC_VALUE_SO_PASSING_ONE_GATE_BUYS_ONE_LINE_AND_THE_FIELD_ITSELF_CLOSES_THE_GAP_ONLY_WITH_A_LEARNED_MODEL_OF_WHICH_FIELDS_MATTER_WHICH_THIS_TREE_REFUSES__THEREFORE_THE_BOTTLENECK_IS_REACHABILITY_REASONING_OVER_FORMAT_AND_THE_NEXT_ORGAN_IS_A_FORMAT_HYPOTHESIS_INDUCED_FROM_THE_PARSER_S_OWN_COMPARISONS_AND_VERIFIED_BY_EXECUTION"
+  },
+  "obs_capability": {
+   "capability_work_deleted": [
+    "a solver",
+    "a learned model of critical fields",
+    "a second reachability pipeline"
+   ],
+   "existing_inherited_routes_checked": [
+    "canonical/swe_kernel/reach_the_changed_site_v1.py -- quantities and mutation, now composed in",
+    "canonical/swe_kernel/operand_invention_v1.py -- invents names in code EDITS, not input operands",
+    "canonical/runtime/bound_capabilities/python_source_taint_flow.py -- static taint, no input generation",
+    "canonical/runtime/precondition_discovery_v1.py -- induces file-suffix predicates over worlds"
+   ],
+   "external_existing_routes_checked": [
+    "REDQUEEN (NDSS'19) input-to-state correspondence; AFL++ CmpLog; Fuzzy-SAT -- the mechanism implemented here",
+    "Halo (Oakland'24): invariants from executed inputs, 43% reachable inputs vs AFLGo 5.3%, no symbolic execution",
+    "SelectFuzz (S&P'23): data-dependent narrowing; over-approximates and cannot satisfy hard path constraints",
+    "IDFuzz (USENIX'25): learns critical fields with a neural model -- refused",
+    "Cottontail (2025): a model solves the structured constraint -- refused"
+   ],
+   "surviving_gap": "a format hypothesis: which tokens, in which order, the parser demands"
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "counting a rewritten comparison as a reach",
+    "counting a logged operand as progress",
+    "quoting a mechanism's published reach against a corpus it was not measured on"
+   ],
+   "real_outcome": "17 real fixes, 8 unpinned behavioural parts (round 17's denominator), 75 operand pairs logged over 18 rewritten comparisons: 2 parts pinned and verified, BOTH by round 17's mutation engine, 0 by the operand channel; 4 never reached, of which the closest walk ended 9 lines from the target; 2 refused (one test makes no literal call, one part removes code). Certified share unchanged at 0.762. The channel fires on a fixture (a call gate re-rolled from a string to a mapping and pinned) and on real tomli code (two gates passed, a changed line reached in 26 executions), and buys nothing on the parts that need it. Four defects in the instrument were found and fixed before the zero was believed: instrumenting the changed block instead of the enclosing scope; taking the deepest logged comparison instead of the one that returned False; treating a larger line number as progress in a file whose main loop sits past the target; and comparing instrumented line numbers against original ones.",
+   "surviving_necessity": "a part behind a sequence of structural constraints is invisible to every verifier until an input satisfies the sequence"
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "round 17's engine and round 16's assertion renderer are imported unchanged",
+   "downstream_work_to_delete_or_supersede": "any claim that reachability is solved by the operand channel, and any roadmap step that expects a stronger fuzzer to cross a format",
+   "fresh_reuse_plan": "re-run both receipts: committed manifest, fresh clones, no model"
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": "four instrument defects were found and fixed before the zero was believed",
+   "search_stop_decision": "stop at 10 rounds and 160 executions per part: the walk's distance stopped improving"
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "efficiency_mechanism": "one traced child per round; 75 operand pairs for 8 parts; no solver, no model, spend 0",
+   "generality_mechanism": "nothing names tomli or TOML: comparisons and calls are instrumented generically and the operand is delivered at its own type",
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "recovery is 0 of 8; the model is forbidden; mutation is 2 of 8 and blind to structure",
+   "routes_ranked": [
+    "operand harvesting plus substitution plus a distance-guided walk (selected)",
+    "mutation with a quantity distance",
+    "recovery from the tests",
+    "a model-proposed trigger"
+   ],
+   "white_box_harvest_note": "WHITE_BOX_HARVEST considered and empty: no donor model, weight or external artifact"
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "oracle_paths": [
+    "canonical/verification/WHAT_THE_CONDITION_WANTS_WIDER_20261116_V1.json",
+    "canonical/tests/test_what_the_condition_wants_v1.py",
+    "canonical/verification/REACH_THE_CHANGED_SITE_WIDER_20261116_V1.json"
+   ],
+   "synthetic_verification_necessity": "the two fixtures are the only synthetic step; every corpus number is a real fix, a real subprocess and a real pytest verdict"
+  },
+  "real_outcome": "168 call sites, 3 candidates, 0 separating, 0 pins; 11 of 17 fixes already fully pinned by their own suites; two harvesting limits fixed before the zero.",
+  "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "route_frontier": {
+   "all_required_dependencies_ready": true,
+   "challenger_routes": [
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "none: ordering alone turns a correct composition into a broken file",
+      "CORRECTNESS": "a plan is a fact about one state; applied to another it is a guess",
+      "INCREMENTAL_COST": "zero to record, one silently damaged file to trust",
+      "RELIABILITY": "31.1% of applications damage the file without any error being raised",
+      "VERIFIABILITY": "only a postcondition check can tell, which is the selected route",
+      "WALL_CLOCK": "faster by one parse and one name scan per step"
+     },
+     "evidence": [
+      "106 of 228 matches (46.5%); 122 stale (53.5%)",
+      "71 of 228 produced a file that parses and still binds the removed name (31.1%)",
+      "all 106 matches had zero drift; 4 stale replays had zero drift as well",
+      "the operation itself stayed legal in 228 of 228 pairs, so the loss is addressing, not capability"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/ACTION_REPLAY_UNDER_CHANGE_20261116_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "REPLAY_THE_RECORDED_PLAN_WHEREVER_THE_ACTION_IS_NEEDED"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "none without the re-check",
+      "CORRECTNESS": "removes most staleness and admits the rest",
+      "INCREMENTAL_COST": "one hash per region",
+      "RELIABILITY": "strictly better than replay, strictly weaker than a postcondition check",
+      "VERIFIABILITY": "a filter, not a proof; the postcondition is the proof",
+      "WALL_CLOCK": "one hash per region, the cheapest possible filter"
+     },
+     "evidence": [
+      "118 of 122 stale replays had nonzero drift, so a region fingerprint removes most of them",
+      "4 stale replays had zero drift, so the fingerprint cannot be the licence"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/ACTION_REPLAY_UNDER_CHANGE_20261116_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "NON_DOMINATING",
+     "route": "FINGERPRINT_THE_TOUCHED_REGION_AND_REFUSE_STALE_REPLAYS"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "composition becomes available instead of accidental",
+      "CORRECTNESS": "the proof is re-run on the state in hand and the sentence is re-read after acting",
+      "INCREMENTAL_COST": "no model, no network, no store",
+      "RELIABILITY": "silent corruptions fall from 31.1% to 0 by construction",
+      "VERIFIABILITY": "reproducible from the receipt with one command and pinned by pytest",
+      "WALL_CLOCK": "one parse plus one name scan per application"
+     },
+     "evidence": [
+      "228 real two-step compositions in 62 files, four independent samples",
+      "the premise held after the change in 228 of 228 pairs, so re-deciding keeps both steps",
+      "a postcondition check costs one parse and one name scan and removes all 71 silent corruptions by construction"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/ACTION_REPLAY_UNDER_CHANGE_20261116_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "SELECTED",
+     "route": "PUT_THE_PARENT_OF_A_REAL_COMMIT_IN_FRONT_OF_THE_TREE_S_OWN_STRUCTURAL_SPECIFIER_AS_A_VARIANT__LAWS_DERIVED_FROM_NAMES_ARITIES_ANNOTATIONS_INVERSE_PAIRS_AND_STDLIB_REFERENCES_CONFIRMED_BY_EXECUTING_THE_MODULE_AS_IT_STANDS__AND_ASK_WHE_RE_ANY_CONFIRMED_LAW_REJECTS_THE_PRE_CHANGE_MODULE__REUSE_DERIVE_BUILD_GRID_CHILD_PAYLOAD_RUN_CHILD_UNCHANGED"
+    }
+   ],
+   "checked_at_utc": "2026-11-18T18:28:07Z",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "execution_dependencies": [
+    {
+     "dependency": "local Python 3.11 runtime; the committed real-fix corpus, the pinning instrument, the test-file call extractor and the judge",
+     "evidence": [
+      "canonical/tests/test_pins_from_the_reverted_part_v1.py 5 passed (including the fire proof: a suite asserting only the exception type, a message-only fix, a synthesised match assertion green on the fix and red on the mutant); PINS_FROM_THE_REVERTED_PART_20261116_V1.json recomputes (7 tasks, 2 unpinned parts, 0 pinned); PINS_FROM_THE_REVERTED_PART_WIDER_20261116_V1.json recomputes (17 tasks, 8 unpinned parts, 0 pinned, 1 refused control); compiled model PASS"
+     ],
+     "evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "evidence_scope": "GLOBAL",
+     "kind": "LOCAL_RUNTIME",
+     "required": true,
+     "scope": "GLOBAL",
+     "status": "READY",
+     "volatility": "STATIC"
+    }
+   ],
+   "execution_dependencies_complete": true,
+   "failed_dependencies": [],
+   "incumbent_route": "mutation with a distance over the changed block's quantities",
+   "max_age_hours": 24,
+   "negative_search_summary": "searched the tree first: no organ logs comparison operands, and precondition_discovery and python_source_taint_flow answer different questions. The field's model-free answer is input-to-state correspondence, implemented here at full strength; the parts that need it are behind a sequence of structural constraints, which the field closes with a learned model.",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "input-to-state correspondence RedQueen CmpLog comparison operand 2026"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "Halo counterexample-guided directed fuzzing invariants from executed inputs"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "AFL++ CmpLog SelectFuzz IDFuzz directed fuzzing implementations"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "dataflow-guided directed fuzzing 2026 reaching target site constraint"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-11-18T18:28:07Z",
+    "execution_dependencies": [
+     {
+      "dependency": "local Python 3.11 runtime; the committed real-fix corpus, the pinning instrument, the test-file call extractor and the judge",
+      "evidence": [
+       "canonical/tests/test_pins_from_the_reverted_part_v1.py 5 passed (including the fire proof: a suite asserting only the exception type, a message-only fix, a synthesised match assertion green on the fix and red on the mutant); PINS_FROM_THE_REVERTED_PART_20261116_V1.json recomputes (7 tasks, 2 unpinned parts, 0 pinned); PINS_FROM_THE_REVERTED_PART_WIDER_20261116_V1.json recomputes (17 tasks, 8 unpinned parts, 0 pinned, 1 refused control); compiled model PASS"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "max_age_hours": 2,
+    "selected_route": "READ_THE_VALUE_A_CHANGED_CONDITION_COMPARES_AGAINST_OUT_OF_THE_PROGRAM_AND_DELIVER_IT_AT_THE_TYPE_THAT_CAN_CARRY_IT",
+    "status": "READY"
+   },
+   "selected_route": "READ_THE_VALUE_A_CHANGED_CONDITION_COMPARES_AGAINST_OUT_OF_THE_PROGRAM_AND_DELIVER_IT_AT_THE_TYPE_THAT_CAN_CARRY_IT",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-11-18T21:33:08Z",
+    "execution_dependencies": [
+     {
+      "dependency": "local Python 3.11 runtime; the committed real-fix corpus, the pinning instrument, the test-file call extractor and the judge",
+      "evidence": [
+       "canonical/tests/test_pins_from_the_reverted_part_v1.py 5 passed (including the fire proof: a suite asserting only the exception type, a message-only fix, a synthesised match assertion green on the fix and red on the mutant); PINS_FROM_THE_REVERTED_PART_20261116_V1.json recomputes (7 tasks, 2 unpinned parts, 0 pinned); PINS_FROM_THE_REVERTED_PART_WIDER_20261116_V1.json recomputes (17 tasks, 8 unpinned parts, 0 pinned, 1 refused control); compiled model PASS"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "max_age_hours": 2,
+    "selected_route": "READ_THE_VALUE_A_CHANGED_CONDITION_COMPARES_AGAINST_OUT_OF_THE_PROGRAM_AND_DELIVER_IT_AT_THE_TYPE_THAT_CAN_CARRY_IT",
+    "status": "READY"
+   },
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/verification/REACH_THE_CHANGED_SITE_WIDER_20261116_V1.json (2 of 8 pinned by mutation)",
+     "canonical/swe_kernel/reach_the_changed_site_v1.py (composed, unchanged)",
+     "canonical/swe_kernel/operand_invention_v1.py (names in edits, not input operands)",
+     "canonical/verification/ONE_DEMONSTRATION_REACH_20261116_V1.json (45.8% reach, 0 damaged)"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "Fuzzy-SAT: input-to-state branch conditions inside symbolic expressions",
+     "DatAFLow: CmpLog is the approximate-taint alternative to exact DTA"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "CPython ast.NodeTransformer and frame tracing via sys.settrace (no plugin, no exec of untrusted input)",
+     "pytest raises/match semantics, used by the reused assertion renderer"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "REDQUEEN (NDSS'19): input-to-state correspondence, colourisation and replacement",
+     "AFL++ CmpLog: comparison logging including strcmp/memcmp calls",
+     "Halo (Oakland'24): invariants from executed inputs, 43% reachable inputs vs AFLGo 5.3%",
+     "SelectFuzz (S&P'23): data-dependent narrowing cannot satisfy hard path constraints",
+     "IDFuzz (USENIX'25): critical fields learned by a neural model -- refused",
+     "Cottontail (2025): a model solves the structured constraint -- refused"
+    ]
+   },
+   "stop_condition": "BOTH_RECEIPTS_RECOMPUTE_AND_THE_SHAPE_SHARES_ARE_STATED_WITH_THEIR_DENOMINATORS",
+   "unresolved_plausible_dominators": [],
+   "why_selected_route_is_fastest_sufficient": "it is the strongest mechanism that needs no model, so its zero bounds the class",
+   "why_this_is_not_another_organ": "one operator and one distance added to round 17's engine, reused assertion renderer, composed result"
+  },
+  "routes_considered": [
+   {
+    "rejected_because": "measured at 0 of 8 in round 16",
+    "route": "recover the input from the tests' own observations"
+   },
+   {
+    "rejected_because": "round 17: 2 of 8, and the 4 failures compare against structure",
+    "route": "mutation with a distance over the changed block's quantities"
+   },
+   {
+    "rejected_because": "foreign inference dependency; forbidden",
+    "route": "have a model propose the trigger or solve the structured constraint (IDFuzz, Cottontail, GapForge)"
+   },
+   {
+    "route": "read the wanted operand out of the program's own comparisons and calls, substitute it into the seed, and walk",
+    "selected": true
+   }
+  ],
+  "selected_route": "READ_THE_VALUE_A_CHANGED_CONDITION_COMPARES_AGAINST_OUT_OF_THE_PROGRAM_AND_DELIVER_IT_AT_THE_TYPE_THAT_CAN_CARRY_IT",
+  "selected_surviving_route": "READ_THE_VALUE_A_CHANGED_CONDITION_COMPARES_AGAINST_OUT_OF_THE_PROGRAM_AND_DELIVER_IT_AT_THE_TYPE_THAT_CAN_CARRY_IT",
+  "selected_surviving_route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+  "stop_condition": "Stop when the generator's own number has been measured end to end on this corpus with exact verification, or when a further source of the discriminating input is shown to add a pin.",
+  "why_selected_route_is_fastest_sufficient": "It was the only source of the discriminating input never asked, and one measurement either opens it or closes the oracle question entirely.",
+  "why_this_is_not_another_organ": "No new search: it reuses the existing two-state prober, the existing pin assertion builder from round 21, the existing hunk/revert machinery and the existing verifier; the only new code is call-site harvesting and module-path derivation."
+ },
+ "route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+ "route_id": "THE_VALUE_A_CONDITION_WANTS_IS_READ_OFF_THE_PROGRAM",
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "scope_complete_discharge": false,
+ "selected_route": "READ_THE_VALUE_A_CHANGED_CONDITION_COMPARES_AGAINST_OUT_OF_THE_PROGRAM_AND_DELIVER_IT_AT_THE_TYPE_THAT_CAN_CARRY_IT",
+ "selected_route_preflight_status": "READY",
+ "selected_surviving_route": "READ_THE_VALUE_A_CHANGED_CONDITION_COMPARES_AGAINST_OUT_OF_THE_PROGRAM_AND_DELIVER_IT_AT_THE_TYPE_THAT_CAN_CARRY_IT",
+ "selected_surviving_route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+ "status": "PRODUCED",
+ "stop_condition": "Stop when the generator's own number has been measured end to end on this corpus with exact verification, or when a further source of the discriminating input is shown to add a pin.",
+ "terminal_credit_delta": 0,
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "truth": "Seven independent sources have been spent and none adds a pin beyond the change's own test: tests, input shape, wanted value, the repositories' documents, protocol operations, the author's statement, and now the callers. Programs state values only where someone wrote a test; callers pass variables.",
+ "user_authorized_governance_change": false,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "checked_at_utc": "2026-11-16T00:00:00Z",
+  "currentness": {
+   "accepted_families": 5,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "It measures whether one execution identifies an action and what to do when it does not; it discharges no truth obligation.",
+  "target_truth_obligations": [
+   "CODING_TB4_GE_66_4"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [],
+   "decisive_question": "After one real execution, does the agent know the action -- and can it tell, before spending the second execution, that it does not?",
+   "falsifier_id": "ONE_EXECUTION_LEAVES_SURVIVORS_THAT_DIFFER_ONLY_OFF_THE_TASK_AND_REPETITION_DOES_NOT_SHRINK_THEM",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "sort and sort -u both survive a duplicate-free list and part company on the first duplicate (5 further states across 2 actions); repeating the same execution changed 0 of 7 verdicts; sort -R looked identified (7 survivors) and was contradicted by the second execution.",
+   "proposal_id": "DEMONSTRATION_SUFFICIENCY_20261116_V1"
+  }
+ },
+ "verification": "python -m pytest canonical/tests/test_what_the_condition_wants_v1.py -q; python -m canonical.swe_kernel.what_the_condition_wants_v1 --limit 17 --json canonical/verification/WHAT_THE_CONDITION_WANTS_20261116_V1.json; python -m canonical.swe_kernel.what_the_condition_wants_v1 --limit 24 --json canonical/verification/WHAT_THE_CONDITION_WANTS_WIDER_20261116_V1.json",
+ "weakens_existing_guard": false
+}
