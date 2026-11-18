@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 528,
+  "knowledge_documents": 529,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 7044,
+  "research_index_records": 7047,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 452,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "fc9ad7bf39c14fc2e7dd0f3c644ec113f28b45bf781e548724422a3092c90aaf"
+  "value": "3c978e069c8fd39a55f23cf5a26496e1b3b5aac834b6054ab8bb27a320d8172f"
  },
  "engines": [
   {
@@ -64243,6 +64243,83 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 9749,
+   "headings": [
+    "The experience is silent about the site",
+    "The question, in the user's words",
+    "First, the tree was searched before anything was built",
+    "Measurement 1 — the vocabulary fires, and it is parasitic",
+    "Measurement 2 — the failing run never touches the defective file",
+    "Measurement 3 — where the signal actually is",
+    "What this says about the question",
+    "Honest limits",
+    "The single bottleneck, after this round",
+    "Files"
+   ],
+   "kind": "DOCUMENT",
+   "path": "THE_EXPERIENCE_IS_SILENT_ABOUT_THE_SITE_20261116_V1.md",
+   "sha256": "d440916e1dba97247f06b7a464ed8904fb2597e393b688ddb82f475ab2edf6f0",
+   "summary": "**Round 11 · 16 November 2026 · branch `arena/69e9029d-brain` · base `338568c9` (round 10 merged)** Model calls 0 · network calls 0 · spend $0 · every execution a real commit's own test",
+   "terms": {
+    "10": 4,
+    "all": 6,
+    "been": 4,
+    "both": 4,
+    "candidate": 4,
+    "canonical": 7,
+    "case": 4,
+    "check": 4,
+    "commit": 8,
+    "drive": 4,
+    "elsewhere": 4,
+    "engine": 4,
+    "error": 4,
+    "every": 5,
+    "experience": 11,
+    "failing": 12,
+    "file": 10,
+    "imports": 4,
+    "input": 4,
+    "learn": 4,
+    "learned": 5,
+    "lessons": 4,
+    "measured": 5,
+    "measurement": 5,
+    "missing": 4,
+    "model": 4,
+    "never": 6,
+    "no": 10,
+    "not": 25,
+    "nothing": 6,
+    "now": 5,
+    "one": 8,
+    "operand": 5,
+    "other": 5,
+    "own": 13,
+    "packaging": 6,
+    "predicate": 9,
+    "real": 12,
+    "repository": 5,
+    "round": 8,
+    "seat": 7,
+    "site": 5,
+    "test": 8,
+    "tests": 5,
+    "they": 5,
+    "value": 5,
+    "vocabulary": 5,
+    "would": 6
+   },
+   "title": "The experience is silent about the site",
+   "title_terms": [
+    "about",
+    "experience",
+    "silent",
+    "site"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 9623,
    "headings": [
     "The first advanced action to build is the judge — measured on this tree's own test generator",
@@ -86150,10 +86227,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1330,
+  "included_source_count": 1331,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "4c3e0925189b492fcf69b7e4dde9a872fb557ecde9dfe54e66b00a6a4536faf9"
+  "source_tree_digest": "1792de790ac1fb413b9a9689e934c789f0402965339f9f83aec281311ae93b6f"
  },
  "research_index": [
   {
@@ -180580,6 +180657,23 @@
    "action_id": "",
    "capability": false,
    "date": "",
+   "id": "research:canonical/verification/OPERAND_INVENTION_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/OPERAND_INVENTION_20261116_V1.json",
+   "schema": "BRAIN_OPERAND_INVENTION_V1",
+   "sha256": "db4c97a5a693f35adaf71ddd9947b8158f7bdc157f359d9565809058f7bf398d",
+   "status": "",
+   "terms": {
+    "20261116": 1,
+    "invention": 1,
+    "operand": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
    "id": "research:canonical/verification/OPERATOR_SEMANTICS_20261112_V1.json",
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/OPERATOR_SEMANTICS_20261112_V1.json",
@@ -198040,6 +198134,24 @@
     "only": 1,
     "proposed__producer_measured__independent_verification_open": 1,
     "read": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/REAL_COMMIT_REPAIR_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/REAL_COMMIT_REPAIR_20261116_V1.json",
+   "schema": "BRAIN_REAL_COMMIT_REPAIR_V1",
+   "sha256": "87432fb5026678dc66f1afb6896065a5bd89a60ea8fbae91185ccad8885b8f6e",
+   "status": "",
+   "terms": {
+    "20261116": 1,
+    "commit": 1,
+    "real": 1,
+    "repair": 1,
     "v1": 1
    }
   },
@@ -244898,6 +245010,31 @@
     "synthesize_ast_evaluator_extension": 2,
     "test": 2,
     "via": 2
+   }
+  },
+  {
+   "action_id": "OPERAND_INVENTION_FROM_FAILING_INPUT_20261116_V1",
+   "capability": false,
+   "date": "2026-11-16",
+   "id": "research:canonical/action_intents/OPERAND_INVENTION_FROM_FAILING_INPUT_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/OPERAND_INVENTION_FROM_FAILING_INPUT_20261116_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "ee751fc4a7b62e33b70916d61a47fee06b5df8dfda95125d225e1c3694120cd6",
+   "status": "PRODUCED",
+   "terms": {
+    "20261116": 1,
+    "failing": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "hand_the_existing_repair_engine_real_commit_lessons__measure_the_absence_of_a_frame_in_the_defective_file__then_invent_the_missing_operand_from_the_failing_parameter_partition_by_real_introspection_of_the_target_s_own_imports_and_adjoin_it_at_a_real_seat": 1,
+    "input": 1,
+    "invention": 1,
+    "operand": 1,
+    "operand_invention_from_failing_input_20261116_v1": 1,
+    "produced": 1,
+    "the_experience_is_silent_about_the_site__in_7_of_7_real_commits_the_failing_run_never_touches_the_defective_file_and_the_vocabulary_learned_from_other_commits_transfers_the_source_s_operands_instead_of_its_meaning__so_what_transfers_is_only_the_partition_of_the_test_s_own_inputs_plus_the_target_s_own_imports": 1,
+    "the_third_manufacturability_route_is_closed_by_measurement_with_a_proven_instrument__40_real_commits_188_confirmed_laws_0_kills_and_174_of_the_laws_are_bare_totality__the_cause_is_named_real_work_extends_a_specification_instead_of_violating_a_property__so_the_next_organ_must_compile_intent_into_the_discriminating_pair_rather_than_derive_it_from_the_artifact": 1,
+    "v1": 1
    }
   },
   {
