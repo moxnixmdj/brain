@@ -111,6 +111,12 @@ REQUEST = json.loads(os.environ["PIN_REQUEST"])
 def shape_value(token):
     if isinstance(token, str) and token.startswith("="):
         return token[1:]                      # a string literal the artifact itself contains
+    if isinstance(token, str) and token.startswith("@json:"):
+        import json as _json
+        try:
+            return _json.loads(token[len("@json:"):])   # a value in the SHAPE the parameter expects
+        except BaseException:
+            return token[len("@json:"):]
     return {"none": None, "empty_str": "", "zero": 0, "one": 1, "minus_one": -1, "empty_bytes": b"",
             "empty_tuple": (), "empty_list": [], "empty_dict": {}, "zero_float": 0.0,
             "star": "*", "a": "a"}[token]

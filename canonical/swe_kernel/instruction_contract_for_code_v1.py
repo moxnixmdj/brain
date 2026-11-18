@@ -229,9 +229,11 @@ def _calls_for(clause: Mapping[str, Any], module: str) -> list[dict[str, Any]]:
         return []
     required = int(clause.get("required") or 0)
     index = int(clause.get("value_index") or 0)
+    shape = str(clause.get("shape") or "scalar")
+    encoded = ("=" + str(value)) if shape == "scalar" else ("@json:" + json.dumps([value]))
     tokens = [FILLERS[position % len(FILLERS)] for position in range(required)]
     if required:
-        tokens[index] = "=" + str(value)
+        tokens[index] = encoded
     calls = [{"module": module, "function": clause["function"], "args": tokens}]
     # the same callable driven through values that are not the named one: the contrast that keeps a
     # widening clause from being satisfied by 'it returns now' for an unrelated reason
