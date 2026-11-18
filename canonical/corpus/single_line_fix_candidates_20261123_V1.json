@@ -1,0 +1,4370 @@
+{
+ "schema": "BRAIN_SINGLE_LINE_FIX_COMMITS_20261123_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "stage": "shape",
+ "repos": [
+  "more-itertools",
+  "pluggy",
+  "markupsafe",
+  "werkzeug",
+  "itsdangerous",
+  "starlette",
+  "click",
+  "jinja",
+  "attrs",
+  "packaging",
+  "tomli",
+  "requests",
+  "tqdm",
+  "httpx",
+  "urllib3"
+ ],
+ "tasks": [
+  {
+   "repo": "more-itertools",
+   "commit": "172bcb3c5c7f22f24da608d13fa25d1576248067",
+   "test": "tests/test_more.py",
+   "sources": [
+    "more_itertools/more.py"
+   ],
+   "old_line": "for element in map(key, iterable) if key is not None else iterable:",
+   "new_line": "for element in iterable if key is None else map(key, iterable):",
+   "expression_pair": false,
+   "subject": "Swap the key check and use casefold in the test, as suggested in review"
+  },
+  {
+   "repo": "more-itertools",
+   "commit": "71e070b35d8c136484e91189719c2a4eccd36fc3",
+   "test": "tests/test_more.py",
+   "sources": [
+    "more_itertools/more.py"
+   ],
+   "old_line": "for element in map(key, iterable) if key else iterable:",
+   "new_line": "for element in map(key, iterable) if key is not None else iterable:",
+   "expression_pair": false,
+   "subject": "fix: honour a falsey key in all_unique"
+  },
+  {
+   "repo": "more-itertools",
+   "commit": "b0aa91efbb452eeb8ffa0447047519c6e84d5292",
+   "test": "tests/test_recipes.py",
+   "sources": [
+    "more_itertools/recipes.py"
+   ],
+   "old_line": "pools = tuple(map(tuple, iterables * repeat))",
+   "new_line": "pools = tuple(map(tuple, iterables)) * repeat",
+   "expression_pair": true,
+   "subject": "Fix random_product() as well"
+  },
+  {
+   "repo": "more-itertools",
+   "commit": "6743b2f4ad30fc93746de40b8804091be8115bd5",
+   "test": "tests/test_more.py",
+   "sources": [
+    "docs/conf.py"
+   ],
+   "old_line": "# Pygments syntax highlighting theme when broswer or user has chosen dark mode.",
+   "new_line": "# Pygments syntax highlighting theme when browser or user has chosen dark mode.",
+   "expression_pair": false,
+   "subject": "Fix typos"
+  },
+  {
+   "repo": "more-itertools",
+   "commit": "cca32949f12d473fd823e37a5530c30d2faa1332",
+   "test": "tests/test_more.py",
+   "sources": [
+    "more_itertools/more.py"
+   ],
+   "old_line": "if hasattr(iterable, '__reversed__'):",
+   "new_line": "if getattr(iterable, '__reversed__', None):",
+   "expression_pair": false,
+   "subject": "fix last() when __reversed__ is None"
+  },
+  {
+   "repo": "more-itertools",
+   "commit": "6197c8d5c95f8e1f2936fe1c753d18a881ecca6c",
+   "test": "tests/test_recipes.py",
+   "sources": [
+    "more_itertools/recipes.py"
+   ],
+   "old_line": "Like ``range(n)``, but doesn't create integegers.",
+   "new_line": "Like ``range(n)`` but doesn't create integers.",
+   "expression_pair": false,
+   "subject": "Fix the bad mistakes"
+  },
+  {
+   "repo": "more-itertools",
+   "commit": "871187db0bb1961254d633d8ad8d689563aa98b0",
+   "test": "tests/test_more.py",
+   "sources": [
+    "more_itertools/more.py"
+   ],
+   "old_line": "\"\"\"Apply ``func`` to every element of ``iterable`, yielding only those",
+   "new_line": "\"\"\"Apply *func* to every element of *iterable*, yielding only those",
+   "expression_pair": false,
+   "subject": "Integrate filter_map"
+  },
+  {
+   "repo": "more-itertools",
+   "commit": "fb89af02fdb706f74a65f2390d446df6943d3f8b",
+   "test": "tests/test_more.py",
+   "sources": [
+    "more_itertools/more.py"
+   ],
+   "old_line": "return chain(*map(repeat, iterable, repeat(n)))",
+   "new_line": "return chain.from_iterable(map(repeat, iterable, repeat(n)))",
+   "expression_pair": true,
+   "subject": "fixed repeat_each() to accept infinite iterators as input"
+  },
+  {
+   "repo": "more-itertools",
+   "commit": "254133ff846af44c99150b645bd73e4999bd06a3",
+   "test": "tests/test_more.py",
+   "sources": [
+    "more_itertools/more.py"
+   ],
+   "old_line": "prepend,",
+   "new_line": ">>> from more_itertools import prepend, value_chain",
+   "expression_pair": false,
+   "subject": "Fix flake8 warning while keeping doctest happy."
+  },
+  {
+   "repo": "more-itertools",
+   "commit": "62411c1618493f94b16901746c34e72ad415061e",
+   "test": "tests/test_more.py",
+   "sources": [
+    "more_itertools/more.py"
+   ],
+   "old_line": "return head, chain(head, it)",
+   "new_line": "return head.copy(), chain(head, it)",
+   "expression_pair": true,
+   "subject": "Fix spy to make returned iterable immutable"
+  },
+  {
+   "repo": "more-itertools",
+   "commit": "d3665d6ba2eec8cb95e9744c2085fb40af1e962b",
+   "test": "tests/test_more.py",
+   "sources": [
+    "more_itertools/more.py"
+   ],
+   "old_line": "return takewhile(bool, (seq[i : i + n] for i in count(0, n)))",
+   "new_line": "return takewhile(len, (seq[i : i + n] for i in count(0, n)))",
+   "expression_pair": true,
+   "subject": "Make sliced work with numpy arrays"
+  },
+  {
+   "repo": "pluggy",
+   "commit": "e108fa4490564b9f252fe7a8a4d1969f6f996641",
+   "test": "testing/test_pluginmanager.py",
+   "sources": [
+    "src/pluggy/_manager.py"
+   ],
+   "old_line": "or self.get_plugin(ep.name)",
+   "new_line": "or self.has_plugin(ep.name)",
+   "expression_pair": false,
+   "subject": "fix: skip registered entrypoint plugins without checking truthiness"
+  },
+  {
+   "repo": "pluggy",
+   "commit": "6abdcf6ca167f5d61297b5d86e22f3dd058031b3",
+   "test": "testing/test_details.py",
+   "sources": [
+    "src/pluggy/_manager.py"
+   ],
+   "old_line": "for hookimpl_argname in hookimpl.argnames:",
+   "new_line": "for hookimpl_argname in hookimpl.argnames + hookimpl.kwargnames:",
+   "expression_pair": false,
+   "subject": "Merge pull request #743 from feiiiiii5/fix-warn-defaulted-args"
+  },
+  {
+   "repo": "pluggy",
+   "commit": "d0ab3611f662ec5c8809fee50b304ec7af672365",
+   "test": "testing/test_pluginmanager.py",
+   "sources": [
+    "src/pluggy/_manager.py"
+   ],
+   "old_line": "except Exception: #pragma: no cover",
+   "new_line": "except Exception:  # pragma: no cover",
+   "expression_pair": false,
+   "subject": "add test to cover nonspec hook arg missing"
+  },
+  {
+   "repo": "pluggy",
+   "commit": "4326ced299cc37f4abc57c22c6298362b5379602",
+   "test": "testing/test_pluginmanager.py",
+   "sources": [
+    "src/pluggy/_manager.py"
+   ],
+   "old_line": "return set(self._name2plugin.values())",
+   "new_line": "return {x for x in self._name2plugin.values() if x is not None}",
+   "expression_pair": true,
+   "subject": "PluginManager.get_plugins no longer returns None for blocked plugins (#481)"
+  },
+  {
+   "repo": "pluggy",
+   "commit": "aac593436a655905e77ce63dd6446d7503834e8d",
+   "test": "testing/test_hookcaller.py",
+   "sources": [
+    "src/pluggy/_hooks.py"
+   ],
+   "old_line": "raise RuntimeError(",
+   "new_line": "raise ValueError(",
+   "expression_pair": false,
+   "subject": "review fixes"
+  },
+  {
+   "repo": "pluggy",
+   "commit": "672a98b4fce837957506e2b2ea4ea3e4ceefd5fd",
+   "test": "testing/test_pluginmanager.py",
+   "sources": [
+    "pluggy/__init__.py"
+   ],
+   "old_line": "warnings.DeprecationWarning",
+   "new_line": "DeprecationWarning",
+   "expression_pair": true,
+   "subject": "Fix error while issuing DeprecationWarning for __multicall__ usage"
+  },
+  {
+   "repo": "markupsafe",
+   "commit": "2f865d516184aa88465099ff7dc08c3c5bce21c3",
+   "test": "tests/test_leak.py",
+   "sources": [
+    "setup.py"
+   ],
+   "old_line": "'WARNING: The C extension could not be compiled,  speedups'",
+   "new_line": "'WARNING: The C extension could not be compiled, speedups'",
+   "expression_pair": true,
+   "subject": "fix test_leak skip"
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "285af2c465d0737e77f33bab6d29775fcd53b667",
+   "test": "tests/test_test.py",
+   "sources": [
+    "src/werkzeug/utils.py"
+   ],
+   "old_line": "location: str, code: int = 302, Response: type[Response] | None = None",
+   "new_line": "location: str, code: int = 303, Response: type[Response] | None = None",
+   "expression_pair": false,
+   "subject": "redirect defaults to 303"
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "d9cda879dd5cd13202fd7299b1eb407a6f92e0ff",
+   "test": "tests/test_test.py",
+   "sources": [
+    "src/werkzeug/routing/map.py"
+   ],
+   "old_line": "The ``sort_parameters`` and ``sort_key``  paramters were added.",
+   "new_line": "The ``sort_parameters`` and ``sort_key``  parameters were added.",
+   "expression_pair": false,
+   "subject": "update dev dependencies"
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "60ea32c88ee1fc97559872fac55708af9c147a05",
+   "test": "tests/test_debug.py",
+   "sources": [
+    "src/werkzeug/debug/tbtools.py"
+   ],
+   "old_line": "if lines:",
+   "new_line": "if line_idx < len(lines):",
+   "expression_pair": false,
+   "subject": "skip rendering missing source"
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "9aabb57c5392a20d96b1a7226b568faa33cc3c62",
+   "test": "tests/test_test.py",
+   "sources": [
+    "src/werkzeug/routing/map.py"
+   ],
+   "old_line": "The ``sort_parameters`` and ``sort_key``  paramters were added.",
+   "new_line": "The ``sort_parameters`` and ``sort_key``  parameters were added.",
+   "expression_pair": false,
+   "subject": "Fix typos discovered by codespell"
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "763609ae21a1d8d649ca19f30c61257fbee670c1",
+   "test": "tests/test_security.py",
+   "sources": [
+    "src/werkzeug/security.py"
+   ],
+   "old_line": "DEFAULT_PBKDF2_ITERATIONS = 600000",
+   "new_line": "DEFAULT_PBKDF2_ITERATIONS = 1_000_000",
+   "expression_pair": true,
+   "subject": "increase pbkdf2 iterations"
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "a1f41f13f1ac8473db9af8a61c20b73f97c3e2dc",
+   "test": "tests/test_routing.py",
+   "sources": [
+    "src/werkzeug/datastructures/auth.py"
+   ],
+   "old_line": "if key in {\"realm\", \"domain\", \"nonce\", \"opaque\", \"realm\", \"qop\"}:",
+   "new_line": "if key in {\"realm\", \"domain\", \"nonce\", \"opaque\", \"qop\"}:",
+   "expression_pair": false,
+   "subject": "address bugbear findings"
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "d0f040a65bfc39c52930f0ea0ca0a9d465bc5043",
+   "test": "tests/test_routing.py",
+   "sources": [
+    "src/werkzeug/urls.py"
+   ],
+   "old_line": "return urlencode(items, safe=\"!$'()*+,/:;?@\", encoding=encoding)",
+   "new_line": "return urlencode(items, safe=\"!$'()*,/:;?@\", encoding=encoding)",
+   "expression_pair": true,
+   "subject": "quote plus in urls"
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "351b73196ca30c26ef2a7b492508d89da370c07f",
+   "test": "tests/test_security.py",
+   "sources": [
+    "src/werkzeug/security.py"
+   ],
+   "old_line": "DEFAULT_PBKDF2_ITERATIONS = 260000",
+   "new_line": "DEFAULT_PBKDF2_ITERATIONS = 600000",
+   "expression_pair": true,
+   "subject": "increase PBKDF2 default to 600,000 iterations"
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "3a408edffde8a006a644d9c2d7bd32973421b924",
+   "test": "tests/test_routing.py",
+   "sources": [
+    "src/werkzeug/routing/rules.py"
+   ],
+   "old_line": "if final:",
+   "new_line": "if not static:",
+   "expression_pair": false,
+   "subject": "Bugfix ensure that the entire part is matched"
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "aebb04478a91ebc1cb879e97af702a1465a7745a",
+   "test": "tests/test_wrappers.py",
+   "sources": [
+    "src/werkzeug/sansio/request.py"
+   ],
+   "old_line": "from ..useragents import UserAgent as _DeprecatedUserAgent",
+   "new_line": "from ..useragents import _UserAgent as _DeprecatedUserAgent",
+   "expression_pair": false,
+   "subject": "Do not deprecate access to unparsed user_agent"
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "352cd7167984f805daf226966f38f8dfeb991313",
+   "test": "tests/test_local.py",
+   "sources": [
+    "src/werkzeug/local.py"
+   ],
+   "old_line": "__class__ = _ProxyLookup()  # type: ignore",
+   "new_line": "__class__ = _ProxyLookup(fallback=lambda self: type(self))  # type: ignore",
+   "expression_pair": true,
+   "subject": "Restore the previous Werkzeug LocalProxy __class__ behaviour"
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "61dcab062d874a4735ed036be2b53343f5f3f3c6",
+   "test": "tests/live_apps/reloader_app.py",
+   "sources": [
+    "src/werkzeug/utils.py"
+   ],
+   "old_line": "if isinstance(path_or_file, (os.PathLike, str)) or hasattr(  # type: ignore",
+   "new_line": "if isinstance(path_or_file, (os.PathLike, str)) or hasattr(",
+   "expression_pair": false,
+   "subject": "update for mypy 0.800"
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "8f8507b4623b8a2faba1e69c0da815887a54b810",
+   "test": "tests/test_http.py",
+   "sources": [
+    "src/werkzeug/_internal.py"
+   ],
+   "old_line": "yield _cookie_unquote(key), _cookie_unquote(value)",
+   "new_line": "yield key, _cookie_unquote(value)",
+   "expression_pair": true,
+   "subject": "don't unquote cookie name"
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "20cafe60ffe51a6fef4b28d69d3793f04ad10ed1",
+   "test": "tests/test_send_file.py",
+   "sources": [
+    "src/werkzeug/utils.py"
+   ],
+   "old_line": "raise ValueError(",
+   "new_line": "raise TypeError(",
+   "expression_pair": false,
+   "subject": "send_file raises TypeError for no mimetype or name"
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "d03b97779720c614287d2aef0f075ee4a1391c5b",
+   "test": "tests/test_useragents.py",
+   "sources": [
+    "src/werkzeug/useragents.py"
+   ],
+   "old_line": "(\"edge\", \"edge\"),",
+   "new_line": "(\"edge|edg\", \"edge\"),",
+   "expression_pair": true,
+   "subject": "Add new \"edg\" identifier for Edge in UserAgentPreparser Resolves #1797"
+  },
+  {
+   "repo": "starlette",
+   "commit": "438cbeda1a2e3b315a82e206cbc007626a96f2ad",
+   "test": "tests/middleware/test_wsgi.py",
+   "sources": [
+    "starlette/middleware/wsgi.py"
+   ],
+   "old_line": "if path_info.startswith(script_name):",
+   "new_line": "if path_info == script_name or path_info.startswith(script_name.rstrip(\"/\") + \"/\"):",
+   "expression_pair": false,
+   "subject": "Strip `root_path` from `PATH_INFO` only at a segment boundary in `WSGIMiddleware` (#3718)"
+  },
+  {
+   "repo": "starlette",
+   "commit": "96d5023c55b29224edb8d684868c49f681d079a9",
+   "test": "tests/middleware/test_session.py",
+   "sources": [
+    "starlette/middleware/sessions.py"
+   ],
+   "old_line": "max_age=f\"Max-Age={self.max_age}; \" if self.max_age else \"\",",
+   "new_line": "max_age=f\"Max-Age={self.max_age}; \" if self.max_age is not None else \"\",",
+   "expression_pair": true,
+   "subject": "Emit `Max-Age=0` on session cookie when `max_age=0` (#3651)"
+  },
+  {
+   "repo": "starlette",
+   "commit": "0a15da395d13e8eb6ecadeb6f4928d7d7c493fc8",
+   "test": "tests/test_staticfiles.py",
+   "sources": [
+    "starlette/staticfiles.py"
+   ],
+   "old_line": "raise HTTPException(status_code=405)",
+   "new_line": "raise HTTPException(status_code=405, headers={\"Allow\": \"GET, HEAD\"})",
+   "expression_pair": false,
+   "subject": "Include allowed methods in StaticFiles 405 responses (#3640)"
+  },
+  {
+   "repo": "starlette",
+   "commit": "4ac5302dd465e8ca952b89daacf1bb8a5f571cf2",
+   "test": "tests/conftest.py",
+   "sources": [
+    "starlette/middleware/errors.py"
+   ],
+   "old_line": "response = self.debug_response(request, exc)",
+   "new_line": "response = await run_in_threadpool(self.debug_response, request, exc)",
+   "expression_pair": true,
+   "subject": "Detect blocking calls in coroutines using BlockBuster (#2858)"
+  },
+  {
+   "repo": "starlette",
+   "commit": "78ae82cad482fe66a73fb1217f0a6609b3f998f6",
+   "test": "tests/test_responses.py",
+   "sources": [
+    "starlette/responses.py"
+   ],
+   "old_line": "if any(start > end for start, end in ranges):",
+   "new_line": "if any(start >= end for start, end in ranges):",
+   "expression_pair": false,
+   "subject": "Reject inverted single-byte Range like bytes=5-4 (#3389)"
+  },
+  {
+   "repo": "starlette",
+   "commit": "d438d397c93c055c068a2f9bd84a2cf2a8c9c7b7",
+   "test": "tests/middleware/test_gzip.py",
+   "sources": [
+    "starlette/middleware/gzip.py"
+   ],
+   "old_line": "return self.compressor.compress(body)",
+   "new_line": "return self.compressor.compress(body) + self.compressor.flush(zlib.Z_SYNC_FLUSH)",
+   "expression_pair": true,
+   "subject": "Flush GZip output for each streamed chunk (#3419)"
+  },
+  {
+   "repo": "starlette",
+   "commit": "37309255b4c1b9c381a2d24a1eaf83100984a16a",
+   "test": "tests/test_staticfiles.py",
+   "sources": [
+    "starlette/staticfiles.py"
+   ],
+   "old_line": "return etag in [tag.strip(\" W/\") for tag in if_none_match.split(\",\")]",
+   "new_line": "return etag in [tag.strip().removeprefix(\"W/\") for tag in if_none_match.split(\",\")]",
+   "expression_pair": true,
+   "subject": "Use `removeprefix` to strip weak ETag indicator in `is_not_modified` (#3193)"
+  },
+  {
+   "repo": "starlette",
+   "commit": "1a2f97293966f3e6549e4da3d00d526915b03b3b",
+   "test": "tests/test_datastructures.py",
+   "sources": [
+    "starlette/datastructures.py"
+   ],
+   "old_line": "if hostname[-1] != \"]\":",
+   "new_line": "if hostname and hostname[-1] != \"]\":",
+   "expression_pair": false,
+   "subject": "Fix IndexError in URL.replace() on a URL with no authority (#3317)"
+  },
+  {
+   "repo": "starlette",
+   "commit": "aba13f31b34083dfc0f12f265e7c53b2924a823d",
+   "test": "tests/test_formparsers.py",
+   "sources": [
+    "starlette/formparsers.py"
+   ],
+   "old_line": "except MultiPartException as exc:",
+   "new_line": "except (MultiPartException, OSError) as exc:",
+   "expression_pair": false,
+   "subject": "Catch `OSError` alongside `MultiPartException` when closing temp files (#3191)"
+  },
+  {
+   "repo": "starlette",
+   "commit": "014f0e2efaca4e34a0f4b4b1a28a70296035e09d",
+   "test": "tests/test_responses.py",
+   "sources": [
+    "starlette/responses.py"
+   ],
+   "old_line": "start = int(start_str) if start_str else file_size - int(end_str)",
+   "new_line": "start = int(start_str) if start_str else max(file_size - int(end_str), 0)",
+   "expression_pair": true,
+   "subject": "Clamp oversized suffix ranges in `FileResponse` (#3307)"
+  },
+  {
+   "repo": "starlette",
+   "commit": "348f86dc92fed6e3c0314154e38deec90a6bcabd",
+   "test": "tests/test_responses.py",
+   "sources": [
+    "starlette/responses.py"
+   ],
+   "old_line": "media_type = guess_type(filename or path)[0] or \"text/plain\"",
+   "new_line": "media_type = guess_type(filename or path)[0] or \"application/octet-stream\"",
+   "expression_pair": true,
+   "subject": "Use `\"application/octet-stream\"` as the `FileResponse` media type fallback (#3283)"
+  },
+  {
+   "repo": "starlette",
+   "commit": "496b7106a6223b1bb95785790766ec5e9b9f1c9d",
+   "test": "tests/test_templates.py",
+   "sources": [
+    "starlette/templating.py"
+   ],
+   "old_line": "self.env = jinja2.Environment(loader=loader)",
+   "new_line": "self.env = jinja2.Environment(loader=loader, autoescape=jinja2.select_autoescape())",
+   "expression_pair": true,
+   "subject": "Enable `autoescape` by default in `Jinja2Templates` (#3148)"
+  },
+  {
+   "repo": "starlette",
+   "commit": "90b805fda70db2316d79aa577f4c3eb670f9a8a1",
+   "test": "tests/test_responses.py",
+   "sources": [
+    "starlette/responses.py"
+   ],
+   "old_line": "self.headers[\"content-range\"] = f\"multipart/byteranges; boundary={boundary}\"",
+   "new_line": "self.headers[\"content-type\"] = f\"multipart/byteranges; boundary={boundary}\"",
+   "expression_pair": false,
+   "subject": "Set `Content-Type` instead of `Content-Range` on multi-range responses (#3142)"
+  },
+  {
+   "repo": "starlette",
+   "commit": "c011d1fcb27ab8b4759288479208315695ef3ca3",
+   "test": "tests/test_responses.py",
+   "sources": [
+    "starlette/responses.py"
+   ],
+   "old_line": "response = PlainTextResponse(status_code=416, headers={\"Content-Range\": f\"*/{exc.max_size}\"})",
+   "new_line": "response = PlainTextResponse(status_code=416, headers={\"Content-Range\": f\"bytes */{exc.max_size}\"})",
+   "expression_pair": true,
+   "subject": "Include `bytes` unit in Content-Range header on 416 responses"
+  },
+  {
+   "repo": "starlette",
+   "commit": "a3676ef85d4cc94f9e84900cc112a2f93423e7a4",
+   "test": "tests/middleware/test_base.py",
+   "sources": [
+    "starlette/testclient.py"
+   ],
+   "old_line": "\"See https://github.com/encode/starlette/issues/1108 for more information.\",",
+   "new_line": "\"See https://github.com/Kludex/starlette/issues/1108 for more information.\",",
+   "expression_pair": true,
+   "subject": "Update mkdocs information (#2998)"
+  },
+  {
+   "repo": "starlette",
+   "commit": "a766a58d14007f07c0b5782fa78cdc370b892796",
+   "test": "tests/test_exceptions.py",
+   "sources": [
+    "starlette/middleware/exceptions.py"
+   ],
+   "old_line": "def http_exception(self, request: Request, exc: Exception) -> Response:",
+   "new_line": "async def http_exception(self, request: Request, exc: Exception) -> Response:",
+   "expression_pair": false,
+   "subject": "Mark ExceptionMiddleware.http_exception as async to prevent thread creation. (#2922)"
+  },
+  {
+   "repo": "starlette",
+   "commit": "cba90a77fe1b5929ae99616af597665120704b7e",
+   "test": "tests/test_convertors.py",
+   "sources": [
+    "starlette/convertors.py"
+   ],
+   "old_line": "regex = \"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\"",
+   "new_line": "regex = \"[0-9a-fA-F]{8}-?[0-9a-fA-F]{4}-?[0-9a-fA-F]{4}-?[0-9a-fA-F]{4}-?[0-9a-fA-F]{12}\"",
+   "expression_pair": true,
+   "subject": "Make UUID path parameter conversion more flexible (#2806)"
+  },
+  {
+   "repo": "starlette",
+   "commit": "13d0c1fbcdb6c6f861155beed352112843e57717",
+   "test": "tests/test_applications.py",
+   "sources": [
+    "starlette/middleware/__init__.py"
+   ],
+   "old_line": "def __call__(self, app: ASGIApp, *args: P.args, **kwargs: P.kwargs) -> ASGIApp: ...  # pragma: no cover",
+   "new_line": "def __call__(self, app: ASGIApp, /, *args: P.args, **kwargs: P.kwargs) -> ASGIApp: ...  # pragma: no cover",
+   "expression_pair": false,
+   "subject": "Make _MiddlewareFactory compatible with Callable (#2768)"
+  },
+  {
+   "repo": "starlette",
+   "commit": "1131b3cbcd6f9e2aa3500fd4d7bf3cd200fa2532",
+   "test": "tests/test__utils.py",
+   "sources": [
+    "starlette/_utils.py"
+   ],
+   "old_line": "route_path = re.sub(r\"^\" + root_path, \"\", scope[\"path\"])",
+   "new_line": "route_path = re.sub(r\"^\" + root_path + r\"(?=/|$)\", \"\", scope[\"path\"])",
+   "expression_pair": true,
+   "subject": "Ensure accurate `root_path` removal in `get_route_path` function (#2600)"
+  },
+  {
+   "repo": "starlette",
+   "commit": "efa03ebd64b9a1927cb6d0da61784b400fa5a0de",
+   "test": "tests/middleware/test_session.py",
+   "sources": [
+    "starlette/testclient.py"
+   ],
+   "old_line": "url = self.base_url.join(url)",
+   "new_line": "url = self._merge_url(url)",
+   "expression_pair": true,
+   "subject": "Merge URLs properly on TestClient (#2376)"
+  },
+  {
+   "repo": "starlette",
+   "commit": "e160a17c0897f359552ede70e827cc3fefaf1b22",
+   "test": "tests/test_testclient.py",
+   "sources": [
+    "starlette/testclient.py"
+   ],
+   "old_line": "for key, value in request.headers.items()",
+   "new_line": "for key, value in request.headers.multi_items()",
+   "expression_pair": false,
+   "subject": "Don't group duplicated headers on a single string on the `TestClient` (#2219)"
+  },
+  {
+   "repo": "starlette",
+   "commit": "1797de464124b090f10cf570441e8292936d63e3",
+   "test": "tests/test_staticfiles.py",
+   "sources": [
+    "starlette/staticfiles.py"
+   ],
+   "old_line": "if os.path.commonprefix([full_path, directory]) != directory:",
+   "new_line": "if os.path.commonpath([full_path, directory]) != directory:",
+   "expression_pair": false,
+   "subject": "Merge pull request from GHSA-v5gw-mw7f-84px"
+  },
+  {
+   "repo": "starlette",
+   "commit": "865efebac909f7bfcd83451cf6bab725dddfe02d",
+   "test": "tests/test_convertors.py",
+   "sources": [
+    "starlette/convertors.py"
+   ],
+   "old_line": "regex = \"[0-9]+(.[0-9]+)?\"",
+   "new_line": "regex = r\"[0-9]+(\\.[0-9]+)?\"",
+   "expression_pair": true,
+   "subject": "Fix `FloatConvertor` regex (#1973)"
+  },
+  {
+   "repo": "starlette",
+   "commit": "14ef6bbbd6c5f03f0e1222a0a1b33ccc3a5f04cf",
+   "test": "tests/test_formparsers.py",
+   "sources": [
+    "starlette/datastructures.py"
+   ],
+   "old_line": "class FormData(ImmutableMultiDict):",
+   "new_line": "class FormData(ImmutableMultiDict[str, typing.Union[UploadFile, str]]):",
+   "expression_pair": false,
+   "subject": "Add generic type parameters to FormData (#1651)"
+  },
+  {
+   "repo": "starlette",
+   "commit": "d7cbe2a4887ad6b15fe7523ed62e28a426b7697d",
+   "test": "tests/test_routing.py",
+   "sources": [
+    "starlette/routing.py"
+   ],
+   "old_line": "if inspect.isfunction(endpoint) or inspect.isclass(endpoint):",
+   "new_line": "if inspect.isroutine(endpoint) or inspect.isclass(endpoint):",
+   "expression_pair": false,
+   "subject": "Apply right name to `Route` when created from methods (#1553)"
+  },
+  {
+   "repo": "starlette",
+   "commit": "ef4f8aaf420d412fa377c4fb36bd657a5cc3d7c1",
+   "test": "tests/test_schemas.py",
+   "sources": [
+    "starlette/routing.py"
+   ],
+   "old_line": ") -> None:",
+   "new_line": ") -> None:  # pragma: no cover",
+   "expression_pair": false,
+   "subject": "Remove routing decorators in test_schemas.py (#1500)"
+  },
+  {
+   "repo": "starlette",
+   "commit": "a6d3d8f0179cb1c2ac283bb5db779f6075854a66",
+   "test": "tests/test_formparsers.py",
+   "sources": [
+    "starlette/formparsers.py"
+   ],
+   "old_line": "boundary = params.get(b\"boundary\")",
+   "new_line": "boundary = params[b\"boundary\"]",
+   "expression_pair": true,
+   "subject": "Raise KeyError at early stage for missing boundary (#1349)"
+  },
+  {
+   "repo": "starlette",
+   "commit": "f5d61fe74a70701835ad127519245c59b172d80d",
+   "test": "tests/test_exceptions.py",
+   "sources": [
+    "starlette/exceptions.py"
+   ],
+   "old_line": "return Response(b\"\", status_code=exc.status_code)",
+   "new_line": "return Response(status_code=exc.status_code)",
+   "expression_pair": true,
+   "subject": "Add test case for `HTTPException` when status code is 204 (#1432)"
+  },
+  {
+   "repo": "starlette",
+   "commit": "7c7ec5a7f72de360bafa938d14e2e1d6f4b6cb69",
+   "test": "tests/test_routing.py",
+   "sources": [
+    "starlette/routing.py"
+   ],
+   "old_line": "path_regex += re.escape(path[idx:]) + \"$\"",
+   "new_line": "path_regex += re.escape(path[idx:].split(\":\")[0]) + \"$\"",
+   "expression_pair": true,
+   "subject": "Remove port from Host routing regex (#1322)"
+  },
+  {
+   "repo": "starlette",
+   "commit": "f5ecb53895b3220b78bb5ced592d7c26e8b3b6fa",
+   "test": "tests/middleware/test_cors.py",
+   "sources": [
+    "starlette/middleware/cors.py"
+   ],
+   "old_line": "ALL_METHODS = (\"DELETE\", \"GET\", \"OPTIONS\", \"PATCH\", \"POST\", \"PUT\")",
+   "new_line": "ALL_METHODS = (\"DELETE\", \"GET\", \"HEAD\", \"OPTIONS\", \"PATCH\", \"POST\", \"PUT\")",
+   "expression_pair": true,
+   "subject": "Add HEAD to CORS ALL_METHODS list (#1112)"
+  },
+  {
+   "repo": "starlette",
+   "commit": "faea6c290a699b5434fb8c83cb8f03f14bb64661",
+   "test": "tests/middleware/test_errors.py",
+   "sources": [
+    "starlette/middleware/errors.py"
+   ],
+   "old_line": "return \"\".join(traceback.format_tb(exc.__traceback__))",
+   "new_line": "return \"\".join(traceback.format_exception(type(exc), exc, exc.__traceback__))",
+   "expression_pair": true,
+   "subject": "Use format_exception instead of format_tb (#1031)"
+  },
+  {
+   "repo": "starlette",
+   "commit": "678f87da74232a76feb7db9b273a6b23fa56d92d",
+   "test": "tests/test_testclient.py",
+   "sources": [
+    "starlette/__init__.py"
+   ],
+   "old_line": "__version__ = \"0.13.2\"",
+   "new_line": "__version__ = \"0.13.3\"",
+   "expression_pair": true,
+   "subject": "Version 0.13.3 (#899)"
+  },
+  {
+   "repo": "starlette",
+   "commit": "20973f2ed31f4fe7faca988f8590fe3eaf70541e",
+   "test": "tests/middleware/test_cors.py",
+   "sources": [
+    "starlette/middleware/cors.py"
+   ],
+   "old_line": "if self.allow_origin_regex is not None and self.allow_origin_regex.match(",
+   "new_line": "if self.allow_origin_regex is not None and self.allow_origin_regex.fullmatch(",
+   "expression_pair": false,
+   "subject": "Security patch: Updating CORS origin regex to use a full regex match (#801)"
+  },
+  {
+   "repo": "starlette",
+   "commit": "00e830080499c47a3e72f1b4adb2678758e388ee",
+   "test": "tests/test_config.py",
+   "sources": [
+    "starlette/middleware/wsgi.py"
+   ],
+   "old_line": "await asyncio.wait_for(sender, None)",
+   "new_line": "await asyncio.wait_for(sender, None)  # type: ignore",
+   "expression_pair": true,
+   "subject": "Ignore gnarly type check in WSGI implementation (#756)"
+  },
+  {
+   "repo": "click",
+   "commit": "a2ac5839f29f61cf7f3f229c67b97d07988e479b",
+   "test": "tests/test_termui.py",
+   "sources": [
+    "src/click/_termui_impl.py"
+   ],
+   "old_line": "f = tempfile.NamedTemporaryFile(mode=\"wb\", delete=False)",
+   "new_line": "f = tempfile.NamedTemporaryFile(mode=\"w\", delete=False)",
+   "expression_pair": true,
+   "subject": "Open the pager temp file in text mode"
+  },
+  {
+   "repo": "click",
+   "commit": "d340b0c1202284a1b9d0ca892549208527d586ce",
+   "test": "tests/test_options.py",
+   "sources": [
+    "src/click/core.py"
+   ],
+   "old_line": "elif default_value == \"\":",
+   "new_line": "elif isinstance(default_value, str) and default_value == \"\":",
+   "expression_pair": false,
+   "subject": "Fix speculative speculative empty string check"
+  },
+  {
+   "repo": "click",
+   "commit": "1b0e19f50595a07957bd96a600c37cd44b7e0cc3",
+   "test": "tests/test_options.py",
+   "sources": [
+    "src/click/core.py"
+   ],
+   "old_line": "if self.show_envvar:",
+   "new_line": "if self.show_envvar and self.envvar is not None:",
+   "expression_pair": false,
+   "subject": "Don't include envvar in error hint when envvar not configured"
+  },
+  {
+   "repo": "click",
+   "commit": "afc86c748c214939e2293ec00879d85293bcd9fa",
+   "test": "tests/test_utils.py",
+   "sources": [
+    "src/click/utils.py"
+   ],
+   "old_line": "file = auto_wrap_for_ansi(file)  # type: ignore",
+   "new_line": "file = auto_wrap_for_ansi(file, color)  # type: ignore",
+   "expression_pair": true,
+   "subject": "Fix colored output on Windows (#2607)"
+  },
+  {
+   "repo": "click",
+   "commit": "bf1e8be90c46428f8bf8b45f295af80cfaf2e188",
+   "test": "tests/test_defaults.py",
+   "sources": [
+    "src/click/core.py"
+   ],
+   "old_line": "(self.opts if self.default else self.secondary_opts)[0]",
+   "new_line": "(self.opts if default_value else self.secondary_opts)[0]",
+   "expression_pair": true,
+   "subject": "show correct value for flag default when using default_map"
+  },
+  {
+   "repo": "click",
+   "commit": "3f91d2154ebc47651f0cd9798250a03821473521",
+   "test": "tests/test_types.py",
+   "sources": [
+    "src/click/types.py"
+   ],
+   "old_line": "_(\"{name} '{filename}' is a directory.\").format(",
+   "new_line": "_(\"{name} {filename!r} is a directory.\").format(",
+   "expression_pair": false,
+   "subject": "Prevent multiline error message on invalid path"
+  },
+  {
+   "repo": "click",
+   "commit": "40830087dd9e9023dbcf75befe0ca9056127a064",
+   "test": "tests/test_options.py",
+   "sources": [
+    "src/click/core.py"
+   ],
+   "old_line": "if is_flag and default_is_missing:",
+   "new_line": "if is_flag and default_is_missing and not self.required:",
+   "expression_pair": false,
+   "subject": "enforce required flag"
+  },
+  {
+   "repo": "click",
+   "commit": "ee56925bc4f5451a125317e183f498e8bd1aecb3",
+   "test": "tests/test_options.py",
+   "sources": [
+    "src/click/core.py"
+   ],
+   "old_line": "self.is_bool_flag = isinstance(self.type, types.BoolParamType)",
+   "new_line": "self.is_bool_flag = is_flag and isinstance(self.type, types.BoolParamType)",
+   "expression_pair": true,
+   "subject": "Fix is_bool_flag being set to True even if is_flag is False"
+  },
+  {
+   "repo": "click",
+   "commit": "3f44bac66138570ec9bfb7cefb8b90a5e4c9f91c",
+   "test": "tests/test_formatting.py",
+   "sources": [
+    "src/click/globals.py"
+   ],
+   "old_line": "\"\"\"\"Internal helper to get the default value of the color flag.  If a",
+   "new_line": "\"\"\"Internal helper to get the default value of the color flag.  If a",
+   "expression_pair": false,
+   "subject": "apply updated pre-commit hooks"
+  },
+  {
+   "repo": "click",
+   "commit": "42ee8a1f6011e0f4a8a19c34a545f3eb7ae978fa",
+   "test": "tests/test_formatting.py",
+   "sources": [
+    "src/click/core.py"
+   ],
+   "old_line": "rv = [self.options_metavar]",
+   "new_line": "rv = [self.options_metavar] if self.options_metavar else []",
+   "expression_pair": true,
+   "subject": "fix formatting with empty options_metavar"
+  },
+  {
+   "repo": "click",
+   "commit": "4a337ea913515e8e98e425d70701ea4fb091830e",
+   "test": "tests/test_commands.py",
+   "sources": [
+    "src/click/core.py"
+   ],
+   "old_line": "return cmd_name, cmd, args[1:]",
+   "new_line": "return cmd.name, cmd, args[1:]",
+   "expression_pair": true,
+   "subject": "use canonical command name instead of matched name"
+  },
+  {
+   "repo": "click",
+   "commit": "ce23ce8e9ff407da7411b8d28555eb3004aa37ef",
+   "test": "tests/test_utils.py",
+   "sources": [
+    "src/click/_winconsole.py"
+   ],
+   "old_line": "except OSError:",
+   "new_line": "except (OSError, io.UnsupportedOperation):",
+   "expression_pair": false,
+   "subject": "tolerate UnsupportedOperation in _winconsole._is_console()"
+  },
+  {
+   "repo": "jinja",
+   "commit": "d05bd3858c3f4990e91201dae058147caf317462",
+   "test": "tests/test_regression.py",
+   "sources": [
+    "src/jinja2/filters.py"
+   ],
+   "old_line": "return context.environment.call_test(name, item, args, kwargs)",
+   "new_line": "return context.environment.call_test(name, item, args, kwargs, context)",
+   "expression_pair": true,
+   "subject": "Pass context when using select"
+  },
+  {
+   "repo": "jinja",
+   "commit": "2eb4542cbab101910d220229a8f09c94f76c19d1",
+   "test": "tests/test_filters.py",
+   "sources": [
+    "src/jinja2/filters.py"
+   ],
+   "old_line": "except (TypeError, ValueError):",
+   "new_line": "except (TypeError, ValueError, OverflowError):",
+   "expression_pair": false,
+   "subject": "int filter handles OverflowError to handle scientific notation"
+  },
+  {
+   "repo": "jinja",
+   "commit": "004476c22b8093d47e0d92c144757879fc779a69",
+   "test": "tests/test_loader.py",
+   "sources": [
+    "src/jinja2/compiler.py"
+   ],
+   "old_line": "return update_wrapper(t.cast(F, new_func), f)",
+   "new_line": "return update_wrapper(new_func, f)  # type: ignore[return-value]",
+   "expression_pair": true,
+   "subject": "test on python 3.13"
+  },
+  {
+   "repo": "jinja",
+   "commit": "8cc3a64fa6cb90817b4bbe5aaeca87fa73ea9103",
+   "test": "tests/test_inheritance.py",
+   "sources": [
+    "src/jinja2/nodes.py"
+   ],
+   "old_line": "\"\"\"Divides the left by the right node and truncates conver the",
+   "new_line": "\"\"\"Divides the left by the right node and converts the",
+   "expression_pair": false,
+   "subject": "Fix typos"
+  },
+  {
+   "repo": "jinja",
+   "commit": "609bcb08312a844e88ff3239a0810c1ad36460d3",
+   "test": "tests/test_api.py",
+   "sources": [
+    "src/jinja2/runtime.py"
+   ],
+   "old_line": "__call__ = __getitem__ = _fail_with_undefined_error",
+   "new_line": "__call__ = __getitem__ = __contains__ = _fail_with_undefined_error",
+   "expression_pair": false,
+   "subject": "Undefined.__contains__ raises UndefinedError"
+  },
+  {
+   "repo": "jinja",
+   "commit": "73a94e00d4376da11966fd6add5bdd469b59b0da",
+   "test": "tests/test_filters.py",
+   "sources": [
+    "src/jinja2/filters.py"
+   ],
+   "old_line": "if default and isinstance(item, Undefined):",
+   "new_line": "if default is not None and isinstance(item, Undefined):",
+   "expression_pair": false,
+   "subject": "map filter can use False as default"
+  },
+  {
+   "repo": "jinja",
+   "commit": "ba080f51e0d7e20a7870573d1814eeccbc32d99a",
+   "test": "tests/test_filters.py",
+   "sources": [
+    "src/jinja2/filters.py"
+   ],
+   "old_line": "return len(_word_re.findall(s))",
+   "new_line": "return len(_word_re.findall(soft_unicode(s)))",
+   "expression_pair": true,
+   "subject": "use soft_str in do_wordcount, to trigger undefined"
+  },
+  {
+   "repo": "jinja",
+   "commit": "f7b110cbd0c59cf382790baa950d2558c1bffd03",
+   "test": "tests/test_api.py",
+   "sources": [
+    "jinja2/meta.py"
+   ],
+   "old_line": "if action == 'resolve':",
+   "new_line": "if action == 'resolve' and param not in self.environment.globals:",
+   "expression_pair": false,
+   "subject": "exclude globals from find_undeclared_variables"
+  },
+  {
+   "repo": "jinja",
+   "commit": "c5d78bed5a05e5c34e5d16f7ea3c8c10dbe682c4",
+   "test": "tests/test_lexnparse.py",
+   "sources": [
+    "jinja2/lexer.py"
+   ],
+   "old_line": "line, name, filename)",
+   "new_line": "lineno, name, filename)",
+   "expression_pair": false,
+   "subject": "test for new identifier lexer currently fails on special case unicode"
+  },
+  {
+   "repo": "jinja",
+   "commit": "9f30bc8c4d6702a2e206fd8027443d2edafe4729",
+   "test": "tests/test_filters.py",
+   "sources": [
+    "jinja2/utils.py"
+   ],
+   "old_line": "return rv",
+   "new_line": "return Markup(rv)",
+   "expression_pair": true,
+   "subject": "Make tojson always safe (fix #709)"
+  },
+  {
+   "repo": "jinja",
+   "commit": "2c74f2468b371ec91e437bce67ab64378da8570a",
+   "test": "tests/test_regression.py",
+   "sources": [
+    "jinja2/compiler.py"
+   ],
+   "old_line": "self.visit_Call(node.call, call_frame, forward_caller=True)",
+   "new_line": "self.visit_Call(node.call, frame, forward_caller=True)",
+   "expression_pair": true,
+   "subject": "Resolved a regression in 2.9 with macro call scoping"
+  },
+  {
+   "repo": "jinja",
+   "commit": "147bd571ad914579b0f40bae53aac33d35ef972e",
+   "test": "tests/test_tests.py",
+   "sources": [
+    "jinja2/parser.py"
+   ],
+   "old_line": "args = [self.parse_expression()]",
+   "new_line": "args = [self.parse_primary()]",
+   "expression_pair": true,
+   "subject": "Change grouping behavior of tests.  This fixes #401"
+  },
+  {
+   "repo": "jinja",
+   "commit": "bd32b37dd35588f0ff8fca5532e76239f13c5273",
+   "test": "tests/test_debug.py",
+   "sources": [
+    "jinja2/debug.py"
+   ],
+   "old_line": "if not name.startswith('l_'):",
+   "new_line": "if not name.startswith('l_') or value is missing:",
+   "expression_pair": false,
+   "subject": "Changed behavior of local extraction"
+  },
+  {
+   "repo": "jinja",
+   "commit": "0ea221f53b2df44b9d02aec00ff7f87424971d4e",
+   "test": "tests/test_regression.py",
+   "sources": [
+    "jinja2/environment.py"
+   ],
+   "old_line": "except (TypeError, LookupError):",
+   "new_line": "except (AttributeError, TypeError, LookupError):",
+   "expression_pair": false,
+   "subject": "Support old-style classes for attribute lookups.  Fixes #631"
+  },
+  {
+   "repo": "jinja",
+   "commit": "7c90534875ffc072341ba25dbec4e8bb740db3e1",
+   "test": "tests/test_async.py",
+   "sources": [
+    "jinja2/asyncsupport.py"
+   ],
+   "old_line": "return loop.run_until_complete(self.render_async(self, *args, **kwargs))",
+   "new_line": "return loop.run_until_complete(self.render_async(*args, **kwargs))",
+   "expression_pair": true,
+   "subject": "Restore original render func for non async usage"
+  },
+  {
+   "repo": "jinja",
+   "commit": "75685ec5e5079bcdbd443696c3d79d0cb86f7cf8",
+   "test": "tests/test_utils.py",
+   "sources": [
+    "jinja2/utils.py"
+   ],
+   "old_line": "target_attr = ' target=\"%s\"' % target",
+   "new_line": "target_attr = ' target=\"%s\"' % escape(target)",
+   "expression_pair": true,
+   "subject": "Escape target attribute in the urlize function in utils.py. (#507)"
+  },
+  {
+   "repo": "jinja",
+   "commit": "dd85761cedfaef03e18612b1fe1733e848124dab",
+   "test": "tests/test_api.py",
+   "sources": [
+    "jinja2/runtime.py"
+   ],
+   "old_line": "__float__ = __complex__ = __pow__ = __rpow__ = \\",
+   "new_line": "__float__ = __complex__ = __pow__ = __rpow__ = __sub__ = \\",
+   "expression_pair": false,
+   "subject": "Setting __sub__ equal to _fail_with_undefined_error so subtractions with undefined variables will fail properly like other arithemtic operations."
+  },
+  {
+   "repo": "jinja",
+   "commit": "29b08c85a206199094070205383e44e690ec44cf",
+   "test": "examples/basic/test_filter_and_linestatements.py",
+   "sources": [
+    "examples/basic/test.py"
+   ],
+   "old_line": "print tmpl.render()",
+   "new_line": "print(tmpl.render())",
+   "expression_pair": false,
+   "subject": "change py2 print statements to py3"
+  },
+  {
+   "repo": "attrs",
+   "commit": "116681b67e3e3c82457df38a64908dbeec2669ea",
+   "test": "tests/test_dunders.py",
+   "sources": [
+    "src/attr/_compat.py"
+   ],
+   "old_line": "return cls.__dict__.get(\"__annotations__\", {})",
+   "new_line": "return cls.__dict__.get(\"__annotations__\", {})  # noqa: RUF063",
+   "expression_pair": false,
+   "subject": "update"
+  },
+  {
+   "repo": "attrs",
+   "commit": "a572c3a4c558a8b9b48cf989fcd956ab1a279439",
+   "test": "tests/test_setattr.py",
+   "sources": [
+    "src/attr/_make.py"
+   ],
+   "old_line": "if frozen is True:",
+   "new_line": "if frozen is True and a.on_setattr is not setters.NO_OP:",
+   "expression_pair": false,
+   "subject": "Allow field(on_setattr=NO_OP) on frozen classes"
+  },
+  {
+   "repo": "attrs",
+   "commit": "3b0378dd66d33ebddb52be85b8c4aac6a914b1a2",
+   "test": "tests/test_hooks.py",
+   "sources": [
+    "src/attr/_make.py"
+   ],
+   "old_line": "attrs = field_transformer(cls, attrs)",
+   "new_line": "attrs = tuple(field_transformer(cls, attrs))",
+   "expression_pair": true,
+   "subject": "Cope with `field_transformer` being a generator (#1417)"
+  },
+  {
+   "repo": "attrs",
+   "commit": "1c962d15a743a3c18401f0c788f0fd0cb3d9acf8",
+   "test": "tests/test_annotations.py",
+   "sources": [
+    "src/attr/_make.py"
+   ],
+   "old_line": "msg = \"Type annotation and type argument cannot both be present\"",
+   "new_line": "msg = f\"Type annotation and type argument cannot both be present for '{name}'.\"",
+   "expression_pair": true,
+   "subject": "Mention what argument has both annotation and type argument (#1410)"
+  },
+  {
+   "repo": "attrs",
+   "commit": "c17b1f3ec5862dca6cd5fbd40a808a925652906f",
+   "test": "tests/test_annotations.py",
+   "sources": [
+    "src/attr/_make.py"
+   ],
+   "old_line": "{NL.join(lines) if lines else 'pass'}",
+   "new_line": "{NL.join(lines) if lines else \"pass\"}",
+   "expression_pair": true,
+   "subject": "Update Ruff"
+  },
+  {
+   "repo": "attrs",
+   "commit": "13105a64f2de2e257a537ad20c06ffdd1c9d7f94",
+   "test": "tests/test_converters.py",
+   "sources": [
+    "src/attr/_make.py"
+   ],
+   "old_line": "if a.converter and not isinstance(a.converter, Converter):",
+   "new_line": "if a.converter is not None and not isinstance(a.converter, Converter):",
+   "expression_pair": false,
+   "subject": "Use an explicit comparison to None for the converter of a field (#1374)"
+  },
+  {
+   "repo": "attrs",
+   "commit": "a08bfb90ef5104675d96b427858063a638774484",
+   "test": "tests/test_packaging.py",
+   "sources": [
+    "src/attr/__init__.py"
+   ],
+   "old_line": "if name != \"__version_info__\":",
+   "new_line": "if name not in (\"__version__\", \"__version_info__\"):",
+   "expression_pair": false,
+   "subject": "Un-deprecate __version__ for now"
+  },
+  {
+   "repo": "attrs",
+   "commit": "06ce35459453e7c2964b0e0e25794a6af9aeb976",
+   "test": "tests/attr_import_star.py",
+   "sources": [
+    "setup.py"
+   ],
+   "old_line": "\"\"\"  # noqa",
+   "new_line": "\"\"\"",
+   "expression_pair": false,
+   "subject": "pre-commit autoupdate, add yesqa"
+  },
+  {
+   "repo": "attrs",
+   "commit": "7cfa3b68c581c6a0f924933eacf7781d61bbf3b2",
+   "test": "tests/test_make.py",
+   "sources": [
+    "src/attr/_make.py"
+   ],
+   "old_line": "# As their descriptors may be overriden by a child class,",
+   "new_line": "# As their descriptors may be overridden by a child class,",
+   "expression_pair": false,
+   "subject": "Fix typos (#899)"
+  },
+  {
+   "repo": "attrs",
+   "commit": "03dd7136cf1ccc58c9612531ba9711892830c1fb",
+   "test": "tests/test_3rd_party.py",
+   "sources": [
+    "setup.py"
+   ],
+   "old_line": "\"cloudpickle\",",
+   "new_line": "'cloudpickle; python_implementation == \"CPython\"',",
+   "expression_pair": true,
+   "subject": "Do not require cloudpickle for PyPy (#892)"
+  },
+  {
+   "repo": "attrs",
+   "commit": "358c85e74c5e9c73a222268cb34c914c52135497",
+   "test": "tests/test_next_gen.py",
+   "sources": [
+    "src/attr/_next_gen.py"
+   ],
+   "old_line": "eq=True,",
+   "new_line": "eq=None,",
+   "expression_pair": true,
+   "subject": "Fix auto-detection of eq/ne in NG APIs (#671)"
+  },
+  {
+   "repo": "packaging",
+   "commit": "ae9d39c13b5f5485b6295eb100b08ef9c3dde852",
+   "test": "tests/test_pylock.py",
+   "sources": [
+    "src/packaging/pylock.py"
+   ],
+   "old_line": "return path.name == \"pylock.toml\" or bool(_PYLOCK_FILE_NAME_RE.match(path.name))",
+   "new_line": "return path.name == \"pylock.toml\" or bool(_PYLOCK_FILE_NAME_RE.fullmatch(path.name))",
+   "expression_pair": true,
+   "subject": "fix: require the complete pylock filename to match (#1446)"
+  },
+  {
+   "repo": "packaging",
+   "commit": "2aada00b158feb36109d77dc91d62baa91f7d400",
+   "test": "tests/test_requirements.py",
+   "sources": [
+    "src/packaging/specifiers.py"
+   ],
+   "old_line": "[^\\s;)]*  # The arbitrary version can be just about anything,",
+   "new_line": "[^\\s;)]+  # The arbitrary version can be just about anything,",
+   "expression_pair": false,
+   "subject": "fix: reject empty arbitrary versions in requirements (#1430)"
+  },
+  {
+   "repo": "packaging",
+   "commit": "0625596e502163179b9a82796aee82c178efc16d",
+   "test": "tests/test_utils.py",
+   "sources": [
+    "src/packaging/utils.py"
+   ],
+   "old_line": "_build_tag_regex = re.compile(r\"(\\d+)(.*)\", re.ASCII)",
+   "new_line": "_build_tag_regex = re.compile(r\"(\\d+)(.*)\\Z\", re.ASCII)",
+   "expression_pair": true,
+   "subject": "fix: anchor the wheel build tag regex to the end of the part (#1427)"
+  },
+  {
+   "repo": "packaging",
+   "commit": "2602dd07d8bd5d6c54a3ce0e212f52eb2e127f3e",
+   "test": "tests/test_requirements.py",
+   "sources": [
+    "src/packaging/_tokenizer.py"
+   ],
+   "old_line": "\"URL\": re.compile(r\"[^ \\t]+\"),",
+   "new_line": "\"URL\": re.compile(r\"\\S+\"),",
+   "expression_pair": false,
+   "subject": "fix(parser): reject whitespace in the URL token (#1379)"
+  },
+  {
+   "repo": "packaging",
+   "commit": "b80e6eb0a6c0f61dcaa9b1587f3aab370263dc65",
+   "test": "tests/test_pylock_select.py",
+   "sources": [
+    "src/packaging/pylock.py"
+   ],
+   "old_line": "if self.environments:",
+   "new_line": "if self.environments is not None:",
+   "expression_pair": false,
+   "subject": "fix(pylock): respect explicitly empty environments in select() (#1362)"
+  },
+  {
+   "repo": "packaging",
+   "commit": "189a76d54d64899adbca907c2a3efa5b6befdb28",
+   "test": "tests/test_markers.py",
+   "sources": [
+    "src/packaging/_tokenizer.py"
+   ],
+   "old_line": "\"END\": re.compile(r\"$\"),",
+   "new_line": "\"END\": re.compile(r\"\\Z\"),",
+   "expression_pair": false,
+   "subject": "fix(parser): require true end of input (#1345)"
+  },
+  {
+   "repo": "packaging",
+   "commit": "8af75907bf1140071a6a706874fcf1d73cc39c71",
+   "test": "tests/test_utils.py",
+   "sources": [
+    "src/packaging/utils.py"
+   ],
+   "old_line": "_wheel_name_regex = re.compile(r\"^[\\w._]+$\", re.UNICODE)",
+   "new_line": "_wheel_name_regex = re.compile(r\"^[\\w._]+\\Z\", re.UNICODE)",
+   "expression_pair": true,
+   "subject": "fix: wheel filename regex for \\n at end of string (#1341)"
+  },
+  {
+   "repo": "packaging",
+   "commit": "abf000549c2ec5b31357046498d6e4f0f9d7d743",
+   "test": "tests/test_metadata.py",
+   "sources": [
+    "src/packaging/metadata.py"
+   ],
+   "old_line": "if charset != \"UTF-8\":",
+   "new_line": "if charset.lower() != \"utf-8\":",
+   "expression_pair": false,
+   "subject": "fix(metadata): accept UTF-8 charset case-insensitively (#1330)"
+  },
+  {
+   "repo": "packaging",
+   "commit": "256686340e6b9247fae23045715d54bac9b3204c",
+   "test": "tests/test_tags.py",
+   "sources": [
+    "src/packaging/tags.py"
+   ],
+   "old_line": "if not isinstance(ext_suffix, str) or ext_suffix[0] != \".\":",
+   "new_line": "if not isinstance(ext_suffix, str) or not ext_suffix.startswith(\".\"):",
+   "expression_pair": false,
+   "subject": "fix(tags): raise SystemError for empty EXT_SUFFIX in _generic_abi (#1271)"
+  },
+  {
+   "repo": "packaging",
+   "commit": "82ca37d936dfcfa4d64f57d52d0a24ccfbf1be61",
+   "test": "tests/test_tags.py",
+   "sources": [
+    "src/packaging/tags.py"
+   ],
+   "old_line": "yield from generic_tags()",
+   "new_line": "yield from generic_tags(warn=warn)",
+   "expression_pair": true,
+   "subject": "fix(tags): forward warn to generic_tags() in sys_tags (#1264)"
+  },
+  {
+   "repo": "packaging",
+   "commit": "ba17fcea2367a70cba21d6bfb0931ae476ee8583",
+   "test": "tests/test_utils.py",
+   "sources": [
+    "src/packaging/utils.py"
+   ],
+   "old_line": "_normalized_regex = re.compile(r\"[a-z0-9]|[a-z0-9]([a-z0-9-](?!--))*[a-z0-9]\", re.ASCII)",
+   "new_line": "_normalized_regex = re.compile(r\"[a-z0-9]+(?:-[a-z0-9]+)*\", re.ASCII)",
+   "expression_pair": true,
+   "subject": "fix(utils): is_normalized_name rejects collapsed double-hyphen names (a--b) (#1230)"
+  },
+  {
+   "repo": "packaging",
+   "commit": "08bb047794f4e70b157dacef4538b3a6e3492743",
+   "test": "tests/test_direct_url.py",
+   "sources": [
+    "src/packaging/direct_url.py"
+   ],
+   "old_line": "user_pass, netloc_no_user_pass = netloc.split(\"@\", 1)",
+   "new_line": "user_pass, netloc_no_user_pass = netloc.rsplit(\"@\", 1)",
+   "expression_pair": true,
+   "subject": "fix: DirectUrl auth stripping with @ in passwords (#1218)"
+  },
+  {
+   "repo": "packaging",
+   "commit": "553582d9162c761e4ab97ccc6cea43ac14ff2a8b",
+   "test": "tests/test_metadata.py",
+   "sources": [
+    "src/packaging/metadata.py"
+   ],
+   "old_line": "f\"{{field}} can only specify the UTF-8 charset, not {list(charset)}\"",
+   "new_line": "f\"{{field}} can only specify the UTF-8 charset, not {charset!r}\"",
+   "expression_pair": true,
+   "subject": "fix(metadata): charset error message formatting (#1121)"
+  },
+  {
+   "repo": "packaging",
+   "commit": "42d1a7bd5c98e98a6c6acaedd0399c8f4533e269",
+   "test": "tests/test_markers.py",
+   "sources": [
+    "src/packaging/version.py"
+   ],
+   "old_line": "def decorator(func: object) -> object:",
+   "new_line": "def decorator(func: Callable[[...], object]) -> object:",
+   "expression_pair": false,
+   "subject": "chore: cleanup pre-commit a bit (#1080)"
+  },
+  {
+   "repo": "packaging",
+   "commit": "86212c87502c8026ee40140d0f5bb7bbb0d03701",
+   "test": "tests/test_pylock.py",
+   "sources": [
+    "noxfile.py"
+   ],
+   "old_line": "yyyy_mm_dd = datetime.datetime.today().strftime(\"%Y-%m-%d\")",
+   "new_line": "yyyy_mm_dd = datetime.datetime.now(tz=datetime.timezone.utc).strftime(\"%Y-%m-%d\")",
+   "expression_pair": true,
+   "subject": "chore: add ruff DTZ (#968)"
+  },
+  {
+   "repo": "packaging",
+   "commit": "6da1c50d1354284da3b1cfe3ba6cf495162421ee",
+   "test": "tests/test_requirements.py",
+   "sources": [
+    "src/packaging/requirements.py"
+   ],
+   "old_line": "yield f\"@ {self.url}\"",
+   "new_line": "yield f\" @ {self.url}\"",
+   "expression_pair": true,
+   "subject": "fix: add space before at symbol in Requirements string (#953)"
+  },
+  {
+   "repo": "packaging",
+   "commit": "258202ed7f796bdb8a65252a66c3fbd3e69e97f6",
+   "test": "tests/test_utils.py",
+   "sources": [
+    "src/packaging/utils.py"
+   ],
+   "old_line": "r\"^([A-Z0-9]|[A-Z0-9][A-Z0-9._-]*[A-Z0-9])$\", re.IGNORECASE",
+   "new_line": "r\"^([A-Z0-9]|[A-Z0-9][A-Z0-9._-]*[A-Z0-9])\\Z\", re.IGNORECASE",
+   "expression_pair": true,
+   "subject": "Correct regex for metadata 'name' format (#925)"
+  },
+  {
+   "repo": "packaging",
+   "commit": "cf2cbe2aec28f87c6228a6fb136c27931c9af407",
+   "test": "tests/test_specifiers.py",
+   "sources": [
+    "src/packaging/specifiers.py"
+   ],
+   "old_line": "if operator in [\"==\", \">=\", \"<=\", \"~=\", \"===\"]:",
+   "new_line": "if operator in [\"==\", \">=\", \"<=\", \"~=\", \"===\", \">\", \"<\"]:",
+   "expression_pair": false,
+   "subject": "Fix prerelease detection for `>` and `<` (#794)"
+  },
+  {
+   "repo": "packaging",
+   "commit": "57a6a7ff661930a8b0dde55663947b80cf3c196a",
+   "test": "tests/test_structures.py",
+   "sources": [
+    "src/packaging/_manylinux.py"
+   ],
+   "old_line": "version_string: str = getattr(os, \"confstr\")(\"CS_GNU_LIBC_VERSION\")",
+   "new_line": "version_string: Optional[str] = os.confstr(\"CS_GNU_LIBC_VERSION\")",
+   "expression_pair": true,
+   "subject": "Appply some bugbear suggestions (#761)"
+  },
+  {
+   "repo": "packaging",
+   "commit": "a2b3e346b03c0446df2ab8e7f9c997d65495dc6d",
+   "test": "tests/test_tags.py",
+   "sources": [
+    "src/packaging/tags.py"
+   ],
+   "old_line": "if py_version >= (3, 13) and _get_config_var(\"Py_NOGIL\", warn):",
+   "new_line": "if py_version >= (3, 13) and _get_config_var(\"Py_GIL_DISABLED\", warn):",
+   "expression_pair": false,
+   "subject": "Rename Py_NOGIL to Py_GIL_DISABLED (#747)"
+  },
+  {
+   "repo": "packaging",
+   "commit": "7013a6048fe13f5c937de33179763100a57d7658",
+   "test": "tests/test_tags.py",
+   "sources": [
+    "src/packaging/tags.py"
+   ],
+   "old_line": "return string.replace(\".\", \"_\").replace(\"-\", \"_\")",
+   "new_line": "return string.replace(\".\", \"_\").replace(\"-\", \"_\").replace(\" \", \"_\")",
+   "expression_pair": true,
+   "subject": "Replace spaces in platform names with underscores (#620)"
+  },
+  {
+   "repo": "packaging",
+   "commit": "e7ce051e9191c461e0a536a84c4d66a87518de66",
+   "test": "tests/test_requirements.py",
+   "sources": [
+    "packaging/_parser.py"
+   ],
+   "old_line": "\"<=, <, !=, ==, >=, >, ~=, ===, not, not in\"",
+   "new_line": "\"<=, <, !=, ==, >=, >, ~=, ===, in, not in\"",
+   "expression_pair": true,
+   "subject": "Fix a typo in an error message"
+  },
+  {
+   "repo": "packaging",
+   "commit": "33255b733a25463d5b04b6d0e9a4db5cf9f084cc",
+   "test": "tests/test_markers.py",
+   "sources": [
+    "packaging/markers.py"
+   ],
+   "old_line": "\"extra\": \"\",",
+   "new_line": "current_environment[\"extra\"] = \"\"",
+   "expression_pair": false,
+   "subject": "Do not set extra in default_environment (#554)"
+  },
+  {
+   "repo": "packaging",
+   "commit": "c5f1db976c89074e5f18f15b04cfa21132161a73",
+   "test": "tests/test_markers.py",
+   "sources": [
+    "packaging/markers.py"
+   ],
+   "old_line": "return spec.contains(lhs)",
+   "new_line": "return spec.contains(lhs, prereleases=True)",
+   "expression_pair": true,
+   "subject": "allow prerelease versions in marker evaluation (#523)"
+  },
+  {
+   "repo": "packaging",
+   "commit": "5037e4cfdb5dd464c9e6552ca2c5a745d37a93b8",
+   "test": "tests/test_tags.py",
+   "sources": [
+    "packaging/tags.py"
+   ],
+   "old_line": "if cpu_arch in {\"x86_64\", \"i386\", \"ppc64\", \"ppc\"}:",
+   "new_line": "if cpu_arch in {\"x86_64\", \"i386\", \"ppc64\", \"ppc\", \"intel\"}:",
+   "expression_pair": false,
+   "subject": "Add intel cpu_arch on MacOS as universal-compatible (#361)"
+  },
+  {
+   "repo": "packaging",
+   "commit": "8770b3b93acbd05dab759861ac869b0707cf9ab1",
+   "test": "tests/test_requirements.py",
+   "sources": [
+    "packaging/requirements.py"
+   ],
+   "old_line": "raise InvalidRequirement(\"Invalid URL given\")",
+   "new_line": "raise InvalidRequirement(\"Invalid URL: {0}\".format(req.url))",
+   "expression_pair": false,
+   "subject": "Improved error on invalid url + test"
+  },
+  {
+   "repo": "packaging",
+   "commit": "24c4e96bbe581675c7b36932e3348434da3bf023",
+   "test": "tests/test_specifiers.py",
+   "sources": [
+    "packaging/specifiers.py"
+   ],
+   "old_line": "if operator in [\"==\", \">=\", \"<=\", \"~=\"]:",
+   "new_line": "if operator in [\"==\", \">=\", \"<=\", \"~=\", \"===\"]:",
+   "expression_pair": false,
+   "subject": "Allow pre-releases when included via ==="
+  },
+  {
+   "repo": "requests",
+   "commit": "27e0981962d355b9532256f4dcb3d42f64b04d9c",
+   "test": "tests/test_requests.py",
+   "sources": [
+    "src/requests/adapters.py"
+   ],
+   "old_line": "The PreparedReqest being sent over the connection.",
+   "new_line": "The PreparedRequest being sent over the connection.",
+   "expression_pair": false,
+   "subject": "Fix remaining typos (#7395)"
+  },
+  {
+   "repo": "requests",
+   "commit": "47914226c2968802f2cdee3f6f0f6e06e4472f64",
+   "test": "tests/test_utils.py",
+   "sources": [
+    "src/requests/utils.py"
+   ],
+   "old_line": "if _netrc:",
+   "new_line": "if _netrc and any(_netrc):",
+   "expression_pair": false,
+   "subject": "Fix empty netrc entry usage (#7205)"
+  },
+  {
+   "repo": "requests",
+   "commit": "13d892bdbe9a2aa374959a166e8067c35253705d",
+   "test": "tests/test_utils.py",
+   "sources": [
+    "src/requests/utils.py"
+   ],
+   "old_line": "# filter out empty strings to avoid re.match all true.",
+   "new_line": "# filter out empty strings to avoid re.match return true in the following code.",
+   "expression_pair": false,
+   "subject": "Additional should_bypass_proxies function test cases"
+  },
+  {
+   "repo": "requests",
+   "commit": "6e5b15d542a4e85945fd72066bb6cecbc3a82191",
+   "test": "tests/test_requests.py",
+   "sources": [
+    "requests/sessions.py"
+   ],
+   "old_line": "if not scheme.startswith('https') and username and password:",
+   "new_line": "if not scheme.startswith(\"https\") and username and password:",
+   "expression_pair": false,
+   "subject": "Fix linting issues"
+  },
+  {
+   "repo": "requests",
+   "commit": "210095fd08f790a1ce640354a91c1a264a291360",
+   "test": "tests/test_utils.py",
+   "sources": [
+    "requests/utils.py"
+   ],
+   "old_line": "except OSError:",
+   "new_line": "except (OSError, ValueError):",
+   "expression_pair": false,
+   "subject": "Tolerate bad registry entries in Windows proxy settings (#6149)"
+  },
+  {
+   "repo": "requests",
+   "commit": "658c10e84a461e5298199f20f17b510b90ac478a",
+   "test": "tests/test_requests.py",
+   "sources": [
+    "requests/models.py"
+   ],
+   "old_line": "elif host.startswith(u'*'):",
+   "new_line": "elif host.startswith((u'*', u'.')):",
+   "expression_pair": false,
+   "subject": "Raise InvalidURL if hosts starts with '.' as was reported at #5367."
+  },
+  {
+   "repo": "requests",
+   "commit": "60ea7f0c2def461a9ddc20e7af0fc90b68dbe0de",
+   "test": "tests/test_requests.py",
+   "sources": [
+    "requests/sessions.py"
+   ],
+   "old_line": "kwargs.setdefault('proxies', self.proxies)",
+   "new_line": "kwargs.setdefault('proxies', self.rebuild_proxies(request, self.proxies))",
+   "expression_pair": true,
+   "subject": "#5677: Rebuild proxies on Session#send"
+  },
+  {
+   "repo": "requests",
+   "commit": "dc75b3ca0b4c95648eb07b92cb414394d99c13a0",
+   "test": "tests/test_utils.py",
+   "sources": [
+    "setup.py"
+   ],
+   "old_line": "'pytest>=2.8.0'",
+   "new_line": "'pytest>=3'",
+   "expression_pair": true,
+   "subject": "Support pytest 4"
+  },
+  {
+   "repo": "requests",
+   "commit": "907c927d60f4ba3f09cf3574a5ae90ab76aa1717",
+   "test": "tests/test_utils.py",
+   "sources": [
+    "requests/utils.py"
+   ],
+   "old_line": "params_dict[key] = value",
+   "new_line": "params_dict[key.lower()] = value",
+   "expression_pair": false,
+   "subject": "make content-type's charset information case-insensitive"
+  },
+  {
+   "repo": "requests",
+   "commit": "1278ecdf71a312dc2268f3bfc0aabfab3c006dcf",
+   "test": "tests/test_packages.py",
+   "sources": [
+    "requests/packages.py"
+   ],
+   "old_line": "__import__(package)",
+   "new_line": "locals()[package] = __import__(package)",
+   "expression_pair": false,
+   "subject": "Fix requests.packages not having package attributes"
+  },
+  {
+   "repo": "tqdm",
+   "commit": "24b9e1e08a097f1c30f2d235b63f9eb25ba47974",
+   "test": "tests/tests_concurrent.py",
+   "sources": [
+    "tqdm/contrib/concurrent.py"
+   ],
+   "old_line": "\"\"\"min(map(length_hint, iterables)), ignoring unknown lengths [default: 0]\"\"\"",
+   "new_line": "\"\"\"min(map(length_hint, iterables), default=0)\"\"\"",
+   "expression_pair": true,
+   "subject": "misc tidy"
+  },
+  {
+   "repo": "tqdm",
+   "commit": "b38a9221c4b2723a82d8b186c0fd8e7b05771a12",
+   "test": "tests/tests_tqdm.py",
+   "sources": [
+    "tqdm/std.py"
+   ],
+   "old_line": "f = '{0:.3g}'.format(n).replace('+0', '+').replace('-0', '-')",
+   "new_line": "f = f'{n:.3g}'.replace('e+0', 'e+').replace('e-0', 'e-')",
+   "expression_pair": true,
+   "subject": "fix format_num"
+  },
+  {
+   "repo": "tqdm",
+   "commit": "223561a83bcc0cca961b6b42403424b995c6e916",
+   "test": "tests/py37_asyncio.py",
+   "sources": [
+    "tqdm/asyncio.py"
+   ],
+   "old_line": "async def gather(cls, fs, *, loop=None, timeout=None, total=None, **tqdm_kwargs):",
+   "new_line": "async def gather(cls, *fs, loop=None, timeout=None, total=None, **tqdm_kwargs):",
+   "expression_pair": false,
+   "subject": "`asyncio.gather` API consistency with stdlib"
+  },
+  {
+   "repo": "tqdm",
+   "commit": "644fd81bce6f6cca1df3cc4ce217a02eaa58c85a",
+   "test": "tests/py37_asyncio.py",
+   "sources": [
+    "tqdm/asyncio.py"
+   ],
+   "old_line": "def gather(",
+   "new_line": "async def gather(",
+   "expression_pair": false,
+   "subject": "Adding a test case for tqdm_asyncio.gather, mirroring tqdm_asyncio.as_completed"
+  },
+  {
+   "repo": "tqdm",
+   "commit": "841090491a74122e0ad25f66de129964dc6e17fe",
+   "test": "tests/tests_concurrent.py",
+   "sources": [
+    "tqdm/std.py"
+   ],
+   "old_line": "except ImportError:",
+   "new_line": "except ImportError:  # pragma: no cover",
+   "expression_pair": false,
+   "subject": "tests: warnings and timeout"
+  },
+  {
+   "repo": "httpx",
+   "commit": "90538a3b4610ba49ce16c997bcfdb9101f9503be",
+   "test": "tests/test_asgi.py",
+   "sources": [
+    "httpx/_transports/asgi.py"
+   ],
+   "old_line": "\"raw_path\": request.url.raw_path,",
+   "new_line": "\"raw_path\": request.url.raw_path.split(b\"?\")[0],",
+   "expression_pair": false,
+   "subject": "Ensure that ASGI 'raw_path' does not include query component of URL. (#2999)"
+  },
+  {
+   "repo": "httpx",
+   "commit": "e63b6594f2863b7c8274eb0991ebc6cad63661f7",
+   "test": "tests/test_urlparse.py",
+   "sources": [
+    "httpx/_urlparse.py"
+   ],
+   "old_line": "IPv4_STYLE_HOSTNAME = re.compile(r\"^[0-9]+.[0-9]+.[0-9]+.[0-9]+$\")",
+   "new_line": "IPv4_STYLE_HOSTNAME = re.compile(r\"^[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+$\")",
+   "expression_pair": true,
+   "subject": "Fix encode host (#2886)"
+  },
+  {
+   "repo": "httpx",
+   "commit": "b40c04dfa604db0a5f9b48c12268c0a0c63c71d2",
+   "test": "tests/test_config.py",
+   "sources": [
+    "httpx/_compat.py"
+   ],
+   "old_line": "sys.version_info >= (3, 7) and ssl.OPENSSL_VERSION_INFO >= (1, 1, 0, 7)",
+   "new_line": "sys.version_info >= (3, 8) and ssl.OPENSSL_VERSION_INFO >= (1, 1, 0, 7)",
+   "expression_pair": true,
+   "subject": "Drop support for Python 3.7 (#2813)"
+  },
+  {
+   "repo": "httpx",
+   "commit": "d5900cd40ec85e47800e21e77bc684b9f65325ed",
+   "test": "tests/models/test_queryparams.py",
+   "sources": [
+    "httpx/_urls.py"
+   ],
+   "old_line": "self._dict = parse_qs(value)",
+   "new_line": "self._dict = parse_qs(value, keep_blank_values=True)",
+   "expression_pair": true,
+   "subject": "Fix empty query params (#2354)"
+  },
+  {
+   "repo": "httpx",
+   "commit": "52dd95fb5cb1aa0e1b00bdcfc3f8c1cbbdcf10b5",
+   "test": "tests/client/test_async_client.py",
+   "sources": [
+    "httpx/_transports/default.py"
+   ],
+   "old_line": "status_code, headers, byte_stream, extenstions = await self._pool.arequest(",
+   "new_line": "status_code, headers, byte_stream, extensions = await self._pool.arequest(",
+   "expression_pair": false,
+   "subject": "Fix extenstions typo in AsyncHTTPTransport (#1549)"
+  },
+  {
+   "repo": "httpx",
+   "commit": "0123bca3354fffcad08f7bbf7662982969b1ac63",
+   "test": "tests/test_asgi.py",
+   "sources": [
+    "httpx/_transports/asgi.py"
+   ],
+   "old_line": "\"headers\": headers,",
+   "new_line": "\"headers\": [(k.lower(), v) for (k, v) in headers],",
+   "expression_pair": false,
+   "subject": "Force lowercase ASGI headers (#1351)"
+  },
+  {
+   "repo": "httpx",
+   "commit": "666cbbdfe8259e7b6363a2eec5df8ab60e7b6003",
+   "test": "tests/models/test_responses.py",
+   "sources": [
+    "httpx/_models.py"
+   ],
+   "old_line": "if content is None or isinstance(content, bytes):",
+   "new_line": "if content is None or isinstance(content, (bytes, str)):",
+   "expression_pair": false,
+   "subject": "Fix automatic .read() when Response instances are created with content=<str> (#1324)"
+  },
+  {
+   "repo": "httpx",
+   "commit": "ad5e6eb8b0bd4a23218f835cf70025f2f7897cc0",
+   "test": "tests/test_decoders.py",
+   "sources": [
+    "httpx/_decoders.py"
+   ],
+   "old_line": "self.buffer = text",
+   "new_line": "self.buffer += text",
+   "expression_pair": false,
+   "subject": "Fixes #1033 - Ensure that text that spans 3 invocations before newline is handled - don't clobber the buffer between invocations that haven't seen any lines. (#"
+  },
+  {
+   "repo": "httpx",
+   "commit": "0296c2bbb9885bbe1b1e3210d9e3efa7a817038d",
+   "test": "tests/client/test_async_client.py",
+   "sources": [
+    "httpx/_types.py"
+   ],
+   "old_line": "RequestFiles = Union[Mapping[str, FileTypes], List[Tuple[str, FileTypes]]]",
+   "new_line": "RequestFiles = Union[Mapping[str, FileTypes], Sequence[Tuple[str, FileTypes]]]",
+   "expression_pair": true,
+   "subject": "Type check tests (#1054)"
+  },
+  {
+   "repo": "httpx",
+   "commit": "3333152b54654a438d5a8f7d0c36890a282b8eae",
+   "test": "tests/test_multipart.py",
+   "sources": [
+    "httpx/_content_streams.py"
+   ],
+   "old_line": "if isinstance(value, (list, dict)):",
+   "new_line": "if isinstance(value, list):",
+   "expression_pair": false,
+   "subject": "Don't support broken dict-of-dicts case for data argument (#811)"
+  },
+  {
+   "repo": "httpx",
+   "commit": "3462999366e01dcbc1db58ee9634093931bc9dbe",
+   "test": "tests/client/test_redirects.py",
+   "sources": [
+    "httpx/models.py"
+   ],
+   "old_line": "async def next(self) -> \"Response\":",
+   "new_line": "async def anext(self) -> \"Response\":",
+   "expression_pair": false,
+   "subject": "Rename 'next' to 'anext' on Response (#676)"
+  },
+  {
+   "repo": "httpx",
+   "commit": "43331cfb3d3d97c9886125b821a04891951eea81",
+   "test": "tests/client/test_auth.py",
+   "sources": [
+    "httpx/client.py"
+   ],
+   "old_line": "if trust_env:",
+   "new_line": "if trust_env and \"Authorization\" not in request.headers:",
+   "expression_pair": false,
+   "subject": "Ensure Authorization header has priority over .netrc"
+  },
+  {
+   "repo": "httpx",
+   "commit": "994403bec920c923a6c3970215e75d6a99385e0c",
+   "test": "tests/client/test_client.py",
+   "sources": [
+    "httpx/concurrency/asyncio.py"
+   ],
+   "old_line": "# We check our flag at the possible moment, in order to",
+   "new_line": "# We check our flag at the first possible moment, in order to",
+   "expression_pair": false,
+   "subject": "Serve test server in thread (#292)"
+  },
+  {
+   "repo": "httpx",
+   "commit": "e7aa6d67109b33eab5d3fbac0dead4c74c26167e",
+   "test": "tests/test_api.py",
+   "sources": [
+    "httpx/api.py"
+   ],
+   "old_line": "with Client() as client:",
+   "new_line": "with Client(http_versions=[\"HTTP/1.1\"]) as client:",
+   "expression_pair": false,
+   "subject": "Force HTTP/1.1 on short-lived connections (#284)"
+  },
+  {
+   "repo": "urllib3",
+   "commit": "fc76bcb911ef484bcfbdd8a27f002379d625d01f",
+   "test": "test/test_response.py",
+   "sources": [
+    "src/urllib3/response.py"
+   ],
+   "old_line": "def readinto(self, b: bytearray) -> int:",
+   "new_line": "def readinto(self, b: bytearray | memoryview[int]) -> int:",
+   "expression_pair": false,
+   "subject": "Fix readinto type hint to accept memoryview for BufferedReader compatibility (#3769)"
+  },
+  {
+   "repo": "urllib3",
+   "commit": "f80d281fe53dfe93004b856ba8b9adb3fa37da77",
+   "test": "test/contrib/test_socks.py",
+   "sources": [
+    "src/urllib3/response.py"
+   ],
+   "old_line": "def url(self, url: str) -> None:",
+   "new_line": "def url(self, url: str | None) -> None:",
+   "expression_pair": false,
+   "subject": "Update mypy (#3626)"
+  },
+  {
+   "repo": "urllib3",
+   "commit": "aa668c2f96a67dba066e35452bea165ef6dcf875",
+   "test": "test/with_dummyserver/test_connectionpool.py",
+   "sources": [
+    "src/urllib3/util/connection.py"
+   ],
+   "old_line": "_TYPE_SOCKET_OPTIONS = typing.Sequence[typing.Tuple[int, int, typing.Union[int, bytes]]]",
+   "new_line": "_TYPE_SOCKET_OPTIONS = typing.List[typing.Tuple[int, int, typing.Union[int, bytes]]]",
+   "expression_pair": true,
+   "subject": "Fix mypy error when adding to default socket options (#3448)"
+  },
+  {
+   "repo": "urllib3",
+   "commit": "07f236ba64a635d01498cc6ec17d471cc594a100",
+   "test": "test/with_dummyserver/test_chunked_transfer.py",
+   "sources": [
+    "src/urllib3/util/request.py"
+   ],
+   "old_line": "datablock = datablock.encode(\"iso-8859-1\")",
+   "new_line": "datablock = datablock.encode(\"utf-8\")",
+   "expression_pair": true,
+   "subject": "Changed default encoding of chunked request bodies to UTF-8"
+  },
+  {
+   "repo": "urllib3",
+   "commit": "90c30f5fdca56a54248614dc86570bf2692a4caa",
+   "test": "test/test_collections.py",
+   "sources": [
+    "noxfile.py"
+   ],
+   "old_line": "raise ValueError(f\"Unknown runnner: {runner}\")",
+   "new_line": "raise ValueError(f\"Unknown runner: {runner}\")",
+   "expression_pair": false,
+   "subject": "Fix some typos"
+  },
+  {
+   "repo": "urllib3",
+   "commit": "644124ecd0b6e417c527191f866daa05a5a2056d",
+   "test": "test/test_retry.py",
+   "sources": [
+    "src/urllib3/util/retry.py"
+   ],
+   "old_line": "DEFAULT_REMOVE_HEADERS_ON_REDIRECT = frozenset([\"Authorization\"])",
+   "new_line": "DEFAULT_REMOVE_HEADERS_ON_REDIRECT = frozenset([\"Cookie\", \"Authorization\"])",
+   "expression_pair": true,
+   "subject": "Merge pull request from GHSA-v845-jxx5-vc9f"
+  },
+  {
+   "repo": "urllib3",
+   "commit": "4714836a667eb4837d005eb89d34fae60b9dc6cc",
+   "test": "test/with_dummyserver/test_socketlevel.py",
+   "sources": [
+    "src/urllib3/response.py"
+   ],
+   "old_line": "while not is_fp_closed(self._fp):",
+   "new_line": "while not is_fp_closed(self._fp) or len(self._decoded_buffer) > 0:",
+   "expression_pair": false,
+   "subject": "Continue reading the response stream if there is buffered decompressed data"
+  },
+  {
+   "repo": "urllib3",
+   "commit": "a43f604115b84a9521363d3ca7fd09c5ec412e14",
+   "test": "test/__init__.py",
+   "sources": [
+    "src/urllib3/_collections.py"
+   ],
+   "old_line": "def setdefault(self, key: str, default: str = \"\") -> str:  # type: ignore[override]",
+   "new_line": "def setdefault(self, key: str, default: str = \"\") -> str:",
+   "expression_pair": false,
+   "subject": "Update mypy to 1.2.0"
+  },
+  {
+   "repo": "urllib3",
+   "commit": "b984f4fbfe877d3bbd92826b0968cf8a89337872",
+   "test": "test/test_util.py",
+   "sources": [
+    "src/urllib3/util/url.py"
+   ],
+   "old_line": "_HOST_PORT_PAT = (\"^(%s|%s|%s)(?::0*([0-9]{0,5}))?$\") % (",
+   "new_line": "_HOST_PORT_PAT = (\"^(%s|%s|%s)(?::0*?(|0|[1-9][0-9]{0,5}))?$\") % (",
+   "expression_pair": false,
+   "subject": "fixed issue with port \"0\" returning None"
+  },
+  {
+   "repo": "urllib3",
+   "commit": "b09fe5629dd3c3e3253b54d384878b2fee00f64a",
+   "test": "test/with_dummyserver/test_connectionpool.py",
+   "sources": [
+    "src/urllib3/connectionpool.py"
+   ],
+   "old_line": "'%s://%s:%s \"%s %s %s\" %s',",
+   "new_line": "'%s://%s:%s \"%s %s %s\" %s %s',",
+   "expression_pair": true,
+   "subject": "Don't ignore debug logs in pytest, fix log args issue"
+  },
+  {
+   "repo": "urllib3",
+   "commit": "77fa67aaf2dc18962fa9234d47400c8a6fc1edf4",
+   "test": "test/test_util.py",
+   "sources": [
+    "src/urllib3/util/url.py"
+   ],
+   "old_line": "_HOST_PORT_PAT = (\"^(%s|%s|%s)(?::([0-9]{0,5}))?$\") % (",
+   "new_line": "_HOST_PORT_PAT = (\"^(%s|%s|%s)(?::0*([0-9]{0,5}))?$\") % (",
+   "expression_pair": false,
+   "subject": "Strip leading zeros from ports"
+  },
+  {
+   "repo": "urllib3",
+   "commit": "7636345843bb66be17c2de8065b4235d37d05eb2",
+   "test": "test/with_dummyserver/test_https.py",
+   "sources": [
+    "src/urllib3/connectionpool.py"
+   ],
+   "old_line": "raise SSLError(",
+   "new_line": "raise ImportError(",
+   "expression_pair": false,
+   "subject": "Raise an unretryable exception when ssl module isn't available"
+  },
+  {
+   "repo": "urllib3",
+   "commit": "0175d41c017f766b2c97597ecd64c39a6da09c79",
+   "test": "test/with_dummyserver/test_chunked_transfer.py",
+   "sources": [
+    "src/urllib3/connection.py"
+   ],
+   "old_line": "if \"transfer-encoding\" not in headers:",
+   "new_line": "if \"transfer-encoding\" not in header_keys:",
+   "expression_pair": false,
+   "subject": "Don't emit multiple Transfer-Encoding headers in request_chunked()"
+  },
+  {
+   "repo": "urllib3",
+   "commit": "74d6be1ab66cef44c0f479c24b0fc1756a8fe4e9",
+   "test": "test/with_dummyserver/test_connectionpool.py",
+   "sources": [
+    "src/urllib3/connection.py"
+   ],
+   "old_line": "if \"user-agent\" not in (k.lower() for k in headers):",
+   "new_line": "if \"user-agent\" not in (six.ensure_str(k.lower()) for k in headers):",
+   "expression_pair": false,
+   "subject": "Don't send 'User-Agent' twice if header is binary"
+  },
+  {
+   "repo": "urllib3",
+   "commit": "6fc17a344532171d2a54a2cabc686f89e3658dbd",
+   "test": "test/test_ssltransport.py",
+   "sources": [
+    "src/urllib3/util/ssltransport.py"
+   ],
+   "old_line": "self, socket, ssl_context, suppress_ragged_eofs=True, server_hostname=None",
+   "new_line": "self, socket, ssl_context, server_hostname=None, suppress_ragged_eofs=True",
+   "expression_pair": false,
+   "subject": "Fix constructor parameter order in SSLTransport."
+  },
+  {
+   "repo": "urllib3",
+   "commit": "263da24d4b5c33392772e638b12d02e5b07abf9f",
+   "test": "test/test_util.py",
+   "sources": [
+    "src/urllib3/util/url.py"
+   ],
+   "old_line": "r\"(?://([^/?#]*))?\"",
+   "new_line": "r\"(?://([^\\\\/?#]*))?\"",
+   "expression_pair": true,
+   "subject": "Backslash terminates authority URL section"
+  },
+  {
+   "repo": "urllib3",
+   "commit": "9971e27e83a891ba7b832fa9e5d2f04bbcb1e65f",
+   "test": "test/test_response.py",
+   "sources": [
+    "src/urllib3/response.py"
+   ],
+   "old_line": "buffer = [b\"\"]",
+   "new_line": "buffer = []",
+   "expression_pair": true,
+   "subject": "Empty responses should have no lines."
+  }
+ ],
+ "entries": [
+  {
+   "repo": "more-itertools",
+   "commit": "172bcb3c5c7f22f24da608d13fa25d1576248067",
+   "test": "tests/test_more.py",
+   "sources": [
+    "more_itertools/more.py"
+   ],
+   "old_line": "for element in map(key, iterable) if key is not None else iterable:",
+   "new_line": "for element in iterable if key is None else map(key, iterable):",
+   "expression_pair": false,
+   "subject": "Swap the key check and use casefold in the test, as suggested in review"
+  },
+  {
+   "repo": "more-itertools",
+   "commit": "71e070b35d8c136484e91189719c2a4eccd36fc3",
+   "test": "tests/test_more.py",
+   "sources": [
+    "more_itertools/more.py"
+   ],
+   "old_line": "for element in map(key, iterable) if key else iterable:",
+   "new_line": "for element in map(key, iterable) if key is not None else iterable:",
+   "expression_pair": false,
+   "subject": "fix: honour a falsey key in all_unique"
+  },
+  {
+   "repo": "more-itertools",
+   "commit": "b0aa91efbb452eeb8ffa0447047519c6e84d5292",
+   "test": "tests/test_recipes.py",
+   "sources": [
+    "more_itertools/recipes.py"
+   ],
+   "old_line": "pools = tuple(map(tuple, iterables * repeat))",
+   "new_line": "pools = tuple(map(tuple, iterables)) * repeat",
+   "expression_pair": true,
+   "subject": "Fix random_product() as well"
+  },
+  {
+   "repo": "more-itertools",
+   "commit": "6743b2f4ad30fc93746de40b8804091be8115bd5",
+   "test": "tests/test_more.py",
+   "sources": [
+    "docs/conf.py"
+   ],
+   "old_line": "# Pygments syntax highlighting theme when broswer or user has chosen dark mode.",
+   "new_line": "# Pygments syntax highlighting theme when browser or user has chosen dark mode.",
+   "expression_pair": false,
+   "subject": "Fix typos"
+  },
+  {
+   "repo": "more-itertools",
+   "commit": "cca32949f12d473fd823e37a5530c30d2faa1332",
+   "test": "tests/test_more.py",
+   "sources": [
+    "more_itertools/more.py"
+   ],
+   "old_line": "if hasattr(iterable, '__reversed__'):",
+   "new_line": "if getattr(iterable, '__reversed__', None):",
+   "expression_pair": false,
+   "subject": "fix last() when __reversed__ is None"
+  },
+  {
+   "repo": "more-itertools",
+   "commit": "6197c8d5c95f8e1f2936fe1c753d18a881ecca6c",
+   "test": "tests/test_recipes.py",
+   "sources": [
+    "more_itertools/recipes.py"
+   ],
+   "old_line": "Like ``range(n)``, but doesn't create integegers.",
+   "new_line": "Like ``range(n)`` but doesn't create integers.",
+   "expression_pair": false,
+   "subject": "Fix the bad mistakes"
+  },
+  {
+   "repo": "more-itertools",
+   "commit": "871187db0bb1961254d633d8ad8d689563aa98b0",
+   "test": "tests/test_more.py",
+   "sources": [
+    "more_itertools/more.py"
+   ],
+   "old_line": "\"\"\"Apply ``func`` to every element of ``iterable`, yielding only those",
+   "new_line": "\"\"\"Apply *func* to every element of *iterable*, yielding only those",
+   "expression_pair": false,
+   "subject": "Integrate filter_map"
+  },
+  {
+   "repo": "more-itertools",
+   "commit": "fb89af02fdb706f74a65f2390d446df6943d3f8b",
+   "test": "tests/test_more.py",
+   "sources": [
+    "more_itertools/more.py"
+   ],
+   "old_line": "return chain(*map(repeat, iterable, repeat(n)))",
+   "new_line": "return chain.from_iterable(map(repeat, iterable, repeat(n)))",
+   "expression_pair": true,
+   "subject": "fixed repeat_each() to accept infinite iterators as input"
+  },
+  {
+   "repo": "more-itertools",
+   "commit": "254133ff846af44c99150b645bd73e4999bd06a3",
+   "test": "tests/test_more.py",
+   "sources": [
+    "more_itertools/more.py"
+   ],
+   "old_line": "prepend,",
+   "new_line": ">>> from more_itertools import prepend, value_chain",
+   "expression_pair": false,
+   "subject": "Fix flake8 warning while keeping doctest happy."
+  },
+  {
+   "repo": "more-itertools",
+   "commit": "62411c1618493f94b16901746c34e72ad415061e",
+   "test": "tests/test_more.py",
+   "sources": [
+    "more_itertools/more.py"
+   ],
+   "old_line": "return head, chain(head, it)",
+   "new_line": "return head.copy(), chain(head, it)",
+   "expression_pair": true,
+   "subject": "Fix spy to make returned iterable immutable"
+  },
+  {
+   "repo": "more-itertools",
+   "commit": "d3665d6ba2eec8cb95e9744c2085fb40af1e962b",
+   "test": "tests/test_more.py",
+   "sources": [
+    "more_itertools/more.py"
+   ],
+   "old_line": "return takewhile(bool, (seq[i : i + n] for i in count(0, n)))",
+   "new_line": "return takewhile(len, (seq[i : i + n] for i in count(0, n)))",
+   "expression_pair": true,
+   "subject": "Make sliced work with numpy arrays"
+  },
+  {
+   "repo": "pluggy",
+   "commit": "e108fa4490564b9f252fe7a8a4d1969f6f996641",
+   "test": "testing/test_pluginmanager.py",
+   "sources": [
+    "src/pluggy/_manager.py"
+   ],
+   "old_line": "or self.get_plugin(ep.name)",
+   "new_line": "or self.has_plugin(ep.name)",
+   "expression_pair": false,
+   "subject": "fix: skip registered entrypoint plugins without checking truthiness"
+  },
+  {
+   "repo": "pluggy",
+   "commit": "6abdcf6ca167f5d61297b5d86e22f3dd058031b3",
+   "test": "testing/test_details.py",
+   "sources": [
+    "src/pluggy/_manager.py"
+   ],
+   "old_line": "for hookimpl_argname in hookimpl.argnames:",
+   "new_line": "for hookimpl_argname in hookimpl.argnames + hookimpl.kwargnames:",
+   "expression_pair": false,
+   "subject": "Merge pull request #743 from feiiiiii5/fix-warn-defaulted-args"
+  },
+  {
+   "repo": "pluggy",
+   "commit": "d0ab3611f662ec5c8809fee50b304ec7af672365",
+   "test": "testing/test_pluginmanager.py",
+   "sources": [
+    "src/pluggy/_manager.py"
+   ],
+   "old_line": "except Exception: #pragma: no cover",
+   "new_line": "except Exception:  # pragma: no cover",
+   "expression_pair": false,
+   "subject": "add test to cover nonspec hook arg missing"
+  },
+  {
+   "repo": "pluggy",
+   "commit": "4326ced299cc37f4abc57c22c6298362b5379602",
+   "test": "testing/test_pluginmanager.py",
+   "sources": [
+    "src/pluggy/_manager.py"
+   ],
+   "old_line": "return set(self._name2plugin.values())",
+   "new_line": "return {x for x in self._name2plugin.values() if x is not None}",
+   "expression_pair": true,
+   "subject": "PluginManager.get_plugins no longer returns None for blocked plugins (#481)"
+  },
+  {
+   "repo": "pluggy",
+   "commit": "aac593436a655905e77ce63dd6446d7503834e8d",
+   "test": "testing/test_hookcaller.py",
+   "sources": [
+    "src/pluggy/_hooks.py"
+   ],
+   "old_line": "raise RuntimeError(",
+   "new_line": "raise ValueError(",
+   "expression_pair": false,
+   "subject": "review fixes"
+  },
+  {
+   "repo": "pluggy",
+   "commit": "672a98b4fce837957506e2b2ea4ea3e4ceefd5fd",
+   "test": "testing/test_pluginmanager.py",
+   "sources": [
+    "pluggy/__init__.py"
+   ],
+   "old_line": "warnings.DeprecationWarning",
+   "new_line": "DeprecationWarning",
+   "expression_pair": true,
+   "subject": "Fix error while issuing DeprecationWarning for __multicall__ usage"
+  },
+  {
+   "repo": "markupsafe",
+   "commit": "2f865d516184aa88465099ff7dc08c3c5bce21c3",
+   "test": "tests/test_leak.py",
+   "sources": [
+    "setup.py"
+   ],
+   "old_line": "'WARNING: The C extension could not be compiled,  speedups'",
+   "new_line": "'WARNING: The C extension could not be compiled, speedups'",
+   "expression_pair": true,
+   "subject": "fix test_leak skip"
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "285af2c465d0737e77f33bab6d29775fcd53b667",
+   "test": "tests/test_test.py",
+   "sources": [
+    "src/werkzeug/utils.py"
+   ],
+   "old_line": "location: str, code: int = 302, Response: type[Response] | None = None",
+   "new_line": "location: str, code: int = 303, Response: type[Response] | None = None",
+   "expression_pair": false,
+   "subject": "redirect defaults to 303"
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "d9cda879dd5cd13202fd7299b1eb407a6f92e0ff",
+   "test": "tests/test_test.py",
+   "sources": [
+    "src/werkzeug/routing/map.py"
+   ],
+   "old_line": "The ``sort_parameters`` and ``sort_key``  paramters were added.",
+   "new_line": "The ``sort_parameters`` and ``sort_key``  parameters were added.",
+   "expression_pair": false,
+   "subject": "update dev dependencies"
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "60ea32c88ee1fc97559872fac55708af9c147a05",
+   "test": "tests/test_debug.py",
+   "sources": [
+    "src/werkzeug/debug/tbtools.py"
+   ],
+   "old_line": "if lines:",
+   "new_line": "if line_idx < len(lines):",
+   "expression_pair": false,
+   "subject": "skip rendering missing source"
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "9aabb57c5392a20d96b1a7226b568faa33cc3c62",
+   "test": "tests/test_test.py",
+   "sources": [
+    "src/werkzeug/routing/map.py"
+   ],
+   "old_line": "The ``sort_parameters`` and ``sort_key``  paramters were added.",
+   "new_line": "The ``sort_parameters`` and ``sort_key``  parameters were added.",
+   "expression_pair": false,
+   "subject": "Fix typos discovered by codespell"
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "763609ae21a1d8d649ca19f30c61257fbee670c1",
+   "test": "tests/test_security.py",
+   "sources": [
+    "src/werkzeug/security.py"
+   ],
+   "old_line": "DEFAULT_PBKDF2_ITERATIONS = 600000",
+   "new_line": "DEFAULT_PBKDF2_ITERATIONS = 1_000_000",
+   "expression_pair": true,
+   "subject": "increase pbkdf2 iterations"
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "a1f41f13f1ac8473db9af8a61c20b73f97c3e2dc",
+   "test": "tests/test_routing.py",
+   "sources": [
+    "src/werkzeug/datastructures/auth.py"
+   ],
+   "old_line": "if key in {\"realm\", \"domain\", \"nonce\", \"opaque\", \"realm\", \"qop\"}:",
+   "new_line": "if key in {\"realm\", \"domain\", \"nonce\", \"opaque\", \"qop\"}:",
+   "expression_pair": false,
+   "subject": "address bugbear findings"
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "d0f040a65bfc39c52930f0ea0ca0a9d465bc5043",
+   "test": "tests/test_routing.py",
+   "sources": [
+    "src/werkzeug/urls.py"
+   ],
+   "old_line": "return urlencode(items, safe=\"!$'()*+,/:;?@\", encoding=encoding)",
+   "new_line": "return urlencode(items, safe=\"!$'()*,/:;?@\", encoding=encoding)",
+   "expression_pair": true,
+   "subject": "quote plus in urls"
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "351b73196ca30c26ef2a7b492508d89da370c07f",
+   "test": "tests/test_security.py",
+   "sources": [
+    "src/werkzeug/security.py"
+   ],
+   "old_line": "DEFAULT_PBKDF2_ITERATIONS = 260000",
+   "new_line": "DEFAULT_PBKDF2_ITERATIONS = 600000",
+   "expression_pair": true,
+   "subject": "increase PBKDF2 default to 600,000 iterations"
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "3a408edffde8a006a644d9c2d7bd32973421b924",
+   "test": "tests/test_routing.py",
+   "sources": [
+    "src/werkzeug/routing/rules.py"
+   ],
+   "old_line": "if final:",
+   "new_line": "if not static:",
+   "expression_pair": false,
+   "subject": "Bugfix ensure that the entire part is matched"
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "aebb04478a91ebc1cb879e97af702a1465a7745a",
+   "test": "tests/test_wrappers.py",
+   "sources": [
+    "src/werkzeug/sansio/request.py"
+   ],
+   "old_line": "from ..useragents import UserAgent as _DeprecatedUserAgent",
+   "new_line": "from ..useragents import _UserAgent as _DeprecatedUserAgent",
+   "expression_pair": false,
+   "subject": "Do not deprecate access to unparsed user_agent"
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "352cd7167984f805daf226966f38f8dfeb991313",
+   "test": "tests/test_local.py",
+   "sources": [
+    "src/werkzeug/local.py"
+   ],
+   "old_line": "__class__ = _ProxyLookup()  # type: ignore",
+   "new_line": "__class__ = _ProxyLookup(fallback=lambda self: type(self))  # type: ignore",
+   "expression_pair": true,
+   "subject": "Restore the previous Werkzeug LocalProxy __class__ behaviour"
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "61dcab062d874a4735ed036be2b53343f5f3f3c6",
+   "test": "tests/live_apps/reloader_app.py",
+   "sources": [
+    "src/werkzeug/utils.py"
+   ],
+   "old_line": "if isinstance(path_or_file, (os.PathLike, str)) or hasattr(  # type: ignore",
+   "new_line": "if isinstance(path_or_file, (os.PathLike, str)) or hasattr(",
+   "expression_pair": false,
+   "subject": "update for mypy 0.800"
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "8f8507b4623b8a2faba1e69c0da815887a54b810",
+   "test": "tests/test_http.py",
+   "sources": [
+    "src/werkzeug/_internal.py"
+   ],
+   "old_line": "yield _cookie_unquote(key), _cookie_unquote(value)",
+   "new_line": "yield key, _cookie_unquote(value)",
+   "expression_pair": true,
+   "subject": "don't unquote cookie name"
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "20cafe60ffe51a6fef4b28d69d3793f04ad10ed1",
+   "test": "tests/test_send_file.py",
+   "sources": [
+    "src/werkzeug/utils.py"
+   ],
+   "old_line": "raise ValueError(",
+   "new_line": "raise TypeError(",
+   "expression_pair": false,
+   "subject": "send_file raises TypeError for no mimetype or name"
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "d03b97779720c614287d2aef0f075ee4a1391c5b",
+   "test": "tests/test_useragents.py",
+   "sources": [
+    "src/werkzeug/useragents.py"
+   ],
+   "old_line": "(\"edge\", \"edge\"),",
+   "new_line": "(\"edge|edg\", \"edge\"),",
+   "expression_pair": true,
+   "subject": "Add new \"edg\" identifier for Edge in UserAgentPreparser Resolves #1797"
+  },
+  {
+   "repo": "starlette",
+   "commit": "438cbeda1a2e3b315a82e206cbc007626a96f2ad",
+   "test": "tests/middleware/test_wsgi.py",
+   "sources": [
+    "starlette/middleware/wsgi.py"
+   ],
+   "old_line": "if path_info.startswith(script_name):",
+   "new_line": "if path_info == script_name or path_info.startswith(script_name.rstrip(\"/\") + \"/\"):",
+   "expression_pair": false,
+   "subject": "Strip `root_path` from `PATH_INFO` only at a segment boundary in `WSGIMiddleware` (#3718)"
+  },
+  {
+   "repo": "starlette",
+   "commit": "96d5023c55b29224edb8d684868c49f681d079a9",
+   "test": "tests/middleware/test_session.py",
+   "sources": [
+    "starlette/middleware/sessions.py"
+   ],
+   "old_line": "max_age=f\"Max-Age={self.max_age}; \" if self.max_age else \"\",",
+   "new_line": "max_age=f\"Max-Age={self.max_age}; \" if self.max_age is not None else \"\",",
+   "expression_pair": true,
+   "subject": "Emit `Max-Age=0` on session cookie when `max_age=0` (#3651)"
+  },
+  {
+   "repo": "starlette",
+   "commit": "0a15da395d13e8eb6ecadeb6f4928d7d7c493fc8",
+   "test": "tests/test_staticfiles.py",
+   "sources": [
+    "starlette/staticfiles.py"
+   ],
+   "old_line": "raise HTTPException(status_code=405)",
+   "new_line": "raise HTTPException(status_code=405, headers={\"Allow\": \"GET, HEAD\"})",
+   "expression_pair": false,
+   "subject": "Include allowed methods in StaticFiles 405 responses (#3640)"
+  },
+  {
+   "repo": "starlette",
+   "commit": "4ac5302dd465e8ca952b89daacf1bb8a5f571cf2",
+   "test": "tests/conftest.py",
+   "sources": [
+    "starlette/middleware/errors.py"
+   ],
+   "old_line": "response = self.debug_response(request, exc)",
+   "new_line": "response = await run_in_threadpool(self.debug_response, request, exc)",
+   "expression_pair": true,
+   "subject": "Detect blocking calls in coroutines using BlockBuster (#2858)"
+  },
+  {
+   "repo": "starlette",
+   "commit": "78ae82cad482fe66a73fb1217f0a6609b3f998f6",
+   "test": "tests/test_responses.py",
+   "sources": [
+    "starlette/responses.py"
+   ],
+   "old_line": "if any(start > end for start, end in ranges):",
+   "new_line": "if any(start >= end for start, end in ranges):",
+   "expression_pair": false,
+   "subject": "Reject inverted single-byte Range like bytes=5-4 (#3389)"
+  },
+  {
+   "repo": "starlette",
+   "commit": "d438d397c93c055c068a2f9bd84a2cf2a8c9c7b7",
+   "test": "tests/middleware/test_gzip.py",
+   "sources": [
+    "starlette/middleware/gzip.py"
+   ],
+   "old_line": "return self.compressor.compress(body)",
+   "new_line": "return self.compressor.compress(body) + self.compressor.flush(zlib.Z_SYNC_FLUSH)",
+   "expression_pair": true,
+   "subject": "Flush GZip output for each streamed chunk (#3419)"
+  },
+  {
+   "repo": "starlette",
+   "commit": "37309255b4c1b9c381a2d24a1eaf83100984a16a",
+   "test": "tests/test_staticfiles.py",
+   "sources": [
+    "starlette/staticfiles.py"
+   ],
+   "old_line": "return etag in [tag.strip(\" W/\") for tag in if_none_match.split(\",\")]",
+   "new_line": "return etag in [tag.strip().removeprefix(\"W/\") for tag in if_none_match.split(\",\")]",
+   "expression_pair": true,
+   "subject": "Use `removeprefix` to strip weak ETag indicator in `is_not_modified` (#3193)"
+  },
+  {
+   "repo": "starlette",
+   "commit": "1a2f97293966f3e6549e4da3d00d526915b03b3b",
+   "test": "tests/test_datastructures.py",
+   "sources": [
+    "starlette/datastructures.py"
+   ],
+   "old_line": "if hostname[-1] != \"]\":",
+   "new_line": "if hostname and hostname[-1] != \"]\":",
+   "expression_pair": false,
+   "subject": "Fix IndexError in URL.replace() on a URL with no authority (#3317)"
+  },
+  {
+   "repo": "starlette",
+   "commit": "aba13f31b34083dfc0f12f265e7c53b2924a823d",
+   "test": "tests/test_formparsers.py",
+   "sources": [
+    "starlette/formparsers.py"
+   ],
+   "old_line": "except MultiPartException as exc:",
+   "new_line": "except (MultiPartException, OSError) as exc:",
+   "expression_pair": false,
+   "subject": "Catch `OSError` alongside `MultiPartException` when closing temp files (#3191)"
+  },
+  {
+   "repo": "starlette",
+   "commit": "014f0e2efaca4e34a0f4b4b1a28a70296035e09d",
+   "test": "tests/test_responses.py",
+   "sources": [
+    "starlette/responses.py"
+   ],
+   "old_line": "start = int(start_str) if start_str else file_size - int(end_str)",
+   "new_line": "start = int(start_str) if start_str else max(file_size - int(end_str), 0)",
+   "expression_pair": true,
+   "subject": "Clamp oversized suffix ranges in `FileResponse` (#3307)"
+  },
+  {
+   "repo": "starlette",
+   "commit": "348f86dc92fed6e3c0314154e38deec90a6bcabd",
+   "test": "tests/test_responses.py",
+   "sources": [
+    "starlette/responses.py"
+   ],
+   "old_line": "media_type = guess_type(filename or path)[0] or \"text/plain\"",
+   "new_line": "media_type = guess_type(filename or path)[0] or \"application/octet-stream\"",
+   "expression_pair": true,
+   "subject": "Use `\"application/octet-stream\"` as the `FileResponse` media type fallback (#3283)"
+  },
+  {
+   "repo": "starlette",
+   "commit": "496b7106a6223b1bb95785790766ec5e9b9f1c9d",
+   "test": "tests/test_templates.py",
+   "sources": [
+    "starlette/templating.py"
+   ],
+   "old_line": "self.env = jinja2.Environment(loader=loader)",
+   "new_line": "self.env = jinja2.Environment(loader=loader, autoescape=jinja2.select_autoescape())",
+   "expression_pair": true,
+   "subject": "Enable `autoescape` by default in `Jinja2Templates` (#3148)"
+  },
+  {
+   "repo": "starlette",
+   "commit": "90b805fda70db2316d79aa577f4c3eb670f9a8a1",
+   "test": "tests/test_responses.py",
+   "sources": [
+    "starlette/responses.py"
+   ],
+   "old_line": "self.headers[\"content-range\"] = f\"multipart/byteranges; boundary={boundary}\"",
+   "new_line": "self.headers[\"content-type\"] = f\"multipart/byteranges; boundary={boundary}\"",
+   "expression_pair": false,
+   "subject": "Set `Content-Type` instead of `Content-Range` on multi-range responses (#3142)"
+  },
+  {
+   "repo": "starlette",
+   "commit": "c011d1fcb27ab8b4759288479208315695ef3ca3",
+   "test": "tests/test_responses.py",
+   "sources": [
+    "starlette/responses.py"
+   ],
+   "old_line": "response = PlainTextResponse(status_code=416, headers={\"Content-Range\": f\"*/{exc.max_size}\"})",
+   "new_line": "response = PlainTextResponse(status_code=416, headers={\"Content-Range\": f\"bytes */{exc.max_size}\"})",
+   "expression_pair": true,
+   "subject": "Include `bytes` unit in Content-Range header on 416 responses"
+  },
+  {
+   "repo": "starlette",
+   "commit": "a3676ef85d4cc94f9e84900cc112a2f93423e7a4",
+   "test": "tests/middleware/test_base.py",
+   "sources": [
+    "starlette/testclient.py"
+   ],
+   "old_line": "\"See https://github.com/encode/starlette/issues/1108 for more information.\",",
+   "new_line": "\"See https://github.com/Kludex/starlette/issues/1108 for more information.\",",
+   "expression_pair": true,
+   "subject": "Update mkdocs information (#2998)"
+  },
+  {
+   "repo": "starlette",
+   "commit": "a766a58d14007f07c0b5782fa78cdc370b892796",
+   "test": "tests/test_exceptions.py",
+   "sources": [
+    "starlette/middleware/exceptions.py"
+   ],
+   "old_line": "def http_exception(self, request: Request, exc: Exception) -> Response:",
+   "new_line": "async def http_exception(self, request: Request, exc: Exception) -> Response:",
+   "expression_pair": false,
+   "subject": "Mark ExceptionMiddleware.http_exception as async to prevent thread creation. (#2922)"
+  },
+  {
+   "repo": "starlette",
+   "commit": "cba90a77fe1b5929ae99616af597665120704b7e",
+   "test": "tests/test_convertors.py",
+   "sources": [
+    "starlette/convertors.py"
+   ],
+   "old_line": "regex = \"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\"",
+   "new_line": "regex = \"[0-9a-fA-F]{8}-?[0-9a-fA-F]{4}-?[0-9a-fA-F]{4}-?[0-9a-fA-F]{4}-?[0-9a-fA-F]{12}\"",
+   "expression_pair": true,
+   "subject": "Make UUID path parameter conversion more flexible (#2806)"
+  },
+  {
+   "repo": "starlette",
+   "commit": "13d0c1fbcdb6c6f861155beed352112843e57717",
+   "test": "tests/test_applications.py",
+   "sources": [
+    "starlette/middleware/__init__.py"
+   ],
+   "old_line": "def __call__(self, app: ASGIApp, *args: P.args, **kwargs: P.kwargs) -> ASGIApp: ...  # pragma: no cover",
+   "new_line": "def __call__(self, app: ASGIApp, /, *args: P.args, **kwargs: P.kwargs) -> ASGIApp: ...  # pragma: no cover",
+   "expression_pair": false,
+   "subject": "Make _MiddlewareFactory compatible with Callable (#2768)"
+  },
+  {
+   "repo": "starlette",
+   "commit": "1131b3cbcd6f9e2aa3500fd4d7bf3cd200fa2532",
+   "test": "tests/test__utils.py",
+   "sources": [
+    "starlette/_utils.py"
+   ],
+   "old_line": "route_path = re.sub(r\"^\" + root_path, \"\", scope[\"path\"])",
+   "new_line": "route_path = re.sub(r\"^\" + root_path + r\"(?=/|$)\", \"\", scope[\"path\"])",
+   "expression_pair": true,
+   "subject": "Ensure accurate `root_path` removal in `get_route_path` function (#2600)"
+  },
+  {
+   "repo": "starlette",
+   "commit": "efa03ebd64b9a1927cb6d0da61784b400fa5a0de",
+   "test": "tests/middleware/test_session.py",
+   "sources": [
+    "starlette/testclient.py"
+   ],
+   "old_line": "url = self.base_url.join(url)",
+   "new_line": "url = self._merge_url(url)",
+   "expression_pair": true,
+   "subject": "Merge URLs properly on TestClient (#2376)"
+  },
+  {
+   "repo": "starlette",
+   "commit": "e160a17c0897f359552ede70e827cc3fefaf1b22",
+   "test": "tests/test_testclient.py",
+   "sources": [
+    "starlette/testclient.py"
+   ],
+   "old_line": "for key, value in request.headers.items()",
+   "new_line": "for key, value in request.headers.multi_items()",
+   "expression_pair": false,
+   "subject": "Don't group duplicated headers on a single string on the `TestClient` (#2219)"
+  },
+  {
+   "repo": "starlette",
+   "commit": "1797de464124b090f10cf570441e8292936d63e3",
+   "test": "tests/test_staticfiles.py",
+   "sources": [
+    "starlette/staticfiles.py"
+   ],
+   "old_line": "if os.path.commonprefix([full_path, directory]) != directory:",
+   "new_line": "if os.path.commonpath([full_path, directory]) != directory:",
+   "expression_pair": false,
+   "subject": "Merge pull request from GHSA-v5gw-mw7f-84px"
+  },
+  {
+   "repo": "starlette",
+   "commit": "865efebac909f7bfcd83451cf6bab725dddfe02d",
+   "test": "tests/test_convertors.py",
+   "sources": [
+    "starlette/convertors.py"
+   ],
+   "old_line": "regex = \"[0-9]+(.[0-9]+)?\"",
+   "new_line": "regex = r\"[0-9]+(\\.[0-9]+)?\"",
+   "expression_pair": true,
+   "subject": "Fix `FloatConvertor` regex (#1973)"
+  },
+  {
+   "repo": "starlette",
+   "commit": "14ef6bbbd6c5f03f0e1222a0a1b33ccc3a5f04cf",
+   "test": "tests/test_formparsers.py",
+   "sources": [
+    "starlette/datastructures.py"
+   ],
+   "old_line": "class FormData(ImmutableMultiDict):",
+   "new_line": "class FormData(ImmutableMultiDict[str, typing.Union[UploadFile, str]]):",
+   "expression_pair": false,
+   "subject": "Add generic type parameters to FormData (#1651)"
+  },
+  {
+   "repo": "starlette",
+   "commit": "d7cbe2a4887ad6b15fe7523ed62e28a426b7697d",
+   "test": "tests/test_routing.py",
+   "sources": [
+    "starlette/routing.py"
+   ],
+   "old_line": "if inspect.isfunction(endpoint) or inspect.isclass(endpoint):",
+   "new_line": "if inspect.isroutine(endpoint) or inspect.isclass(endpoint):",
+   "expression_pair": false,
+   "subject": "Apply right name to `Route` when created from methods (#1553)"
+  },
+  {
+   "repo": "starlette",
+   "commit": "ef4f8aaf420d412fa377c4fb36bd657a5cc3d7c1",
+   "test": "tests/test_schemas.py",
+   "sources": [
+    "starlette/routing.py"
+   ],
+   "old_line": ") -> None:",
+   "new_line": ") -> None:  # pragma: no cover",
+   "expression_pair": false,
+   "subject": "Remove routing decorators in test_schemas.py (#1500)"
+  },
+  {
+   "repo": "starlette",
+   "commit": "a6d3d8f0179cb1c2ac283bb5db779f6075854a66",
+   "test": "tests/test_formparsers.py",
+   "sources": [
+    "starlette/formparsers.py"
+   ],
+   "old_line": "boundary = params.get(b\"boundary\")",
+   "new_line": "boundary = params[b\"boundary\"]",
+   "expression_pair": true,
+   "subject": "Raise KeyError at early stage for missing boundary (#1349)"
+  },
+  {
+   "repo": "starlette",
+   "commit": "f5d61fe74a70701835ad127519245c59b172d80d",
+   "test": "tests/test_exceptions.py",
+   "sources": [
+    "starlette/exceptions.py"
+   ],
+   "old_line": "return Response(b\"\", status_code=exc.status_code)",
+   "new_line": "return Response(status_code=exc.status_code)",
+   "expression_pair": true,
+   "subject": "Add test case for `HTTPException` when status code is 204 (#1432)"
+  },
+  {
+   "repo": "starlette",
+   "commit": "7c7ec5a7f72de360bafa938d14e2e1d6f4b6cb69",
+   "test": "tests/test_routing.py",
+   "sources": [
+    "starlette/routing.py"
+   ],
+   "old_line": "path_regex += re.escape(path[idx:]) + \"$\"",
+   "new_line": "path_regex += re.escape(path[idx:].split(\":\")[0]) + \"$\"",
+   "expression_pair": true,
+   "subject": "Remove port from Host routing regex (#1322)"
+  },
+  {
+   "repo": "starlette",
+   "commit": "f5ecb53895b3220b78bb5ced592d7c26e8b3b6fa",
+   "test": "tests/middleware/test_cors.py",
+   "sources": [
+    "starlette/middleware/cors.py"
+   ],
+   "old_line": "ALL_METHODS = (\"DELETE\", \"GET\", \"OPTIONS\", \"PATCH\", \"POST\", \"PUT\")",
+   "new_line": "ALL_METHODS = (\"DELETE\", \"GET\", \"HEAD\", \"OPTIONS\", \"PATCH\", \"POST\", \"PUT\")",
+   "expression_pair": true,
+   "subject": "Add HEAD to CORS ALL_METHODS list (#1112)"
+  },
+  {
+   "repo": "starlette",
+   "commit": "faea6c290a699b5434fb8c83cb8f03f14bb64661",
+   "test": "tests/middleware/test_errors.py",
+   "sources": [
+    "starlette/middleware/errors.py"
+   ],
+   "old_line": "return \"\".join(traceback.format_tb(exc.__traceback__))",
+   "new_line": "return \"\".join(traceback.format_exception(type(exc), exc, exc.__traceback__))",
+   "expression_pair": true,
+   "subject": "Use format_exception instead of format_tb (#1031)"
+  },
+  {
+   "repo": "starlette",
+   "commit": "678f87da74232a76feb7db9b273a6b23fa56d92d",
+   "test": "tests/test_testclient.py",
+   "sources": [
+    "starlette/__init__.py"
+   ],
+   "old_line": "__version__ = \"0.13.2\"",
+   "new_line": "__version__ = \"0.13.3\"",
+   "expression_pair": true,
+   "subject": "Version 0.13.3 (#899)"
+  },
+  {
+   "repo": "starlette",
+   "commit": "20973f2ed31f4fe7faca988f8590fe3eaf70541e",
+   "test": "tests/middleware/test_cors.py",
+   "sources": [
+    "starlette/middleware/cors.py"
+   ],
+   "old_line": "if self.allow_origin_regex is not None and self.allow_origin_regex.match(",
+   "new_line": "if self.allow_origin_regex is not None and self.allow_origin_regex.fullmatch(",
+   "expression_pair": false,
+   "subject": "Security patch: Updating CORS origin regex to use a full regex match (#801)"
+  },
+  {
+   "repo": "starlette",
+   "commit": "00e830080499c47a3e72f1b4adb2678758e388ee",
+   "test": "tests/test_config.py",
+   "sources": [
+    "starlette/middleware/wsgi.py"
+   ],
+   "old_line": "await asyncio.wait_for(sender, None)",
+   "new_line": "await asyncio.wait_for(sender, None)  # type: ignore",
+   "expression_pair": true,
+   "subject": "Ignore gnarly type check in WSGI implementation (#756)"
+  },
+  {
+   "repo": "click",
+   "commit": "a2ac5839f29f61cf7f3f229c67b97d07988e479b",
+   "test": "tests/test_termui.py",
+   "sources": [
+    "src/click/_termui_impl.py"
+   ],
+   "old_line": "f = tempfile.NamedTemporaryFile(mode=\"wb\", delete=False)",
+   "new_line": "f = tempfile.NamedTemporaryFile(mode=\"w\", delete=False)",
+   "expression_pair": true,
+   "subject": "Open the pager temp file in text mode"
+  },
+  {
+   "repo": "click",
+   "commit": "d340b0c1202284a1b9d0ca892549208527d586ce",
+   "test": "tests/test_options.py",
+   "sources": [
+    "src/click/core.py"
+   ],
+   "old_line": "elif default_value == \"\":",
+   "new_line": "elif isinstance(default_value, str) and default_value == \"\":",
+   "expression_pair": false,
+   "subject": "Fix speculative speculative empty string check"
+  },
+  {
+   "repo": "click",
+   "commit": "1b0e19f50595a07957bd96a600c37cd44b7e0cc3",
+   "test": "tests/test_options.py",
+   "sources": [
+    "src/click/core.py"
+   ],
+   "old_line": "if self.show_envvar:",
+   "new_line": "if self.show_envvar and self.envvar is not None:",
+   "expression_pair": false,
+   "subject": "Don't include envvar in error hint when envvar not configured"
+  },
+  {
+   "repo": "click",
+   "commit": "afc86c748c214939e2293ec00879d85293bcd9fa",
+   "test": "tests/test_utils.py",
+   "sources": [
+    "src/click/utils.py"
+   ],
+   "old_line": "file = auto_wrap_for_ansi(file)  # type: ignore",
+   "new_line": "file = auto_wrap_for_ansi(file, color)  # type: ignore",
+   "expression_pair": true,
+   "subject": "Fix colored output on Windows (#2607)"
+  },
+  {
+   "repo": "click",
+   "commit": "bf1e8be90c46428f8bf8b45f295af80cfaf2e188",
+   "test": "tests/test_defaults.py",
+   "sources": [
+    "src/click/core.py"
+   ],
+   "old_line": "(self.opts if self.default else self.secondary_opts)[0]",
+   "new_line": "(self.opts if default_value else self.secondary_opts)[0]",
+   "expression_pair": true,
+   "subject": "show correct value for flag default when using default_map"
+  },
+  {
+   "repo": "click",
+   "commit": "3f91d2154ebc47651f0cd9798250a03821473521",
+   "test": "tests/test_types.py",
+   "sources": [
+    "src/click/types.py"
+   ],
+   "old_line": "_(\"{name} '{filename}' is a directory.\").format(",
+   "new_line": "_(\"{name} {filename!r} is a directory.\").format(",
+   "expression_pair": false,
+   "subject": "Prevent multiline error message on invalid path"
+  },
+  {
+   "repo": "click",
+   "commit": "40830087dd9e9023dbcf75befe0ca9056127a064",
+   "test": "tests/test_options.py",
+   "sources": [
+    "src/click/core.py"
+   ],
+   "old_line": "if is_flag and default_is_missing:",
+   "new_line": "if is_flag and default_is_missing and not self.required:",
+   "expression_pair": false,
+   "subject": "enforce required flag"
+  },
+  {
+   "repo": "click",
+   "commit": "ee56925bc4f5451a125317e183f498e8bd1aecb3",
+   "test": "tests/test_options.py",
+   "sources": [
+    "src/click/core.py"
+   ],
+   "old_line": "self.is_bool_flag = isinstance(self.type, types.BoolParamType)",
+   "new_line": "self.is_bool_flag = is_flag and isinstance(self.type, types.BoolParamType)",
+   "expression_pair": true,
+   "subject": "Fix is_bool_flag being set to True even if is_flag is False"
+  },
+  {
+   "repo": "click",
+   "commit": "3f44bac66138570ec9bfb7cefb8b90a5e4c9f91c",
+   "test": "tests/test_formatting.py",
+   "sources": [
+    "src/click/globals.py"
+   ],
+   "old_line": "\"\"\"\"Internal helper to get the default value of the color flag.  If a",
+   "new_line": "\"\"\"Internal helper to get the default value of the color flag.  If a",
+   "expression_pair": false,
+   "subject": "apply updated pre-commit hooks"
+  },
+  {
+   "repo": "click",
+   "commit": "42ee8a1f6011e0f4a8a19c34a545f3eb7ae978fa",
+   "test": "tests/test_formatting.py",
+   "sources": [
+    "src/click/core.py"
+   ],
+   "old_line": "rv = [self.options_metavar]",
+   "new_line": "rv = [self.options_metavar] if self.options_metavar else []",
+   "expression_pair": true,
+   "subject": "fix formatting with empty options_metavar"
+  },
+  {
+   "repo": "click",
+   "commit": "4a337ea913515e8e98e425d70701ea4fb091830e",
+   "test": "tests/test_commands.py",
+   "sources": [
+    "src/click/core.py"
+   ],
+   "old_line": "return cmd_name, cmd, args[1:]",
+   "new_line": "return cmd.name, cmd, args[1:]",
+   "expression_pair": true,
+   "subject": "use canonical command name instead of matched name"
+  },
+  {
+   "repo": "click",
+   "commit": "ce23ce8e9ff407da7411b8d28555eb3004aa37ef",
+   "test": "tests/test_utils.py",
+   "sources": [
+    "src/click/_winconsole.py"
+   ],
+   "old_line": "except OSError:",
+   "new_line": "except (OSError, io.UnsupportedOperation):",
+   "expression_pair": false,
+   "subject": "tolerate UnsupportedOperation in _winconsole._is_console()"
+  },
+  {
+   "repo": "jinja",
+   "commit": "d05bd3858c3f4990e91201dae058147caf317462",
+   "test": "tests/test_regression.py",
+   "sources": [
+    "src/jinja2/filters.py"
+   ],
+   "old_line": "return context.environment.call_test(name, item, args, kwargs)",
+   "new_line": "return context.environment.call_test(name, item, args, kwargs, context)",
+   "expression_pair": true,
+   "subject": "Pass context when using select"
+  },
+  {
+   "repo": "jinja",
+   "commit": "2eb4542cbab101910d220229a8f09c94f76c19d1",
+   "test": "tests/test_filters.py",
+   "sources": [
+    "src/jinja2/filters.py"
+   ],
+   "old_line": "except (TypeError, ValueError):",
+   "new_line": "except (TypeError, ValueError, OverflowError):",
+   "expression_pair": false,
+   "subject": "int filter handles OverflowError to handle scientific notation"
+  },
+  {
+   "repo": "jinja",
+   "commit": "004476c22b8093d47e0d92c144757879fc779a69",
+   "test": "tests/test_loader.py",
+   "sources": [
+    "src/jinja2/compiler.py"
+   ],
+   "old_line": "return update_wrapper(t.cast(F, new_func), f)",
+   "new_line": "return update_wrapper(new_func, f)  # type: ignore[return-value]",
+   "expression_pair": true,
+   "subject": "test on python 3.13"
+  },
+  {
+   "repo": "jinja",
+   "commit": "8cc3a64fa6cb90817b4bbe5aaeca87fa73ea9103",
+   "test": "tests/test_inheritance.py",
+   "sources": [
+    "src/jinja2/nodes.py"
+   ],
+   "old_line": "\"\"\"Divides the left by the right node and truncates conver the",
+   "new_line": "\"\"\"Divides the left by the right node and converts the",
+   "expression_pair": false,
+   "subject": "Fix typos"
+  },
+  {
+   "repo": "jinja",
+   "commit": "609bcb08312a844e88ff3239a0810c1ad36460d3",
+   "test": "tests/test_api.py",
+   "sources": [
+    "src/jinja2/runtime.py"
+   ],
+   "old_line": "__call__ = __getitem__ = _fail_with_undefined_error",
+   "new_line": "__call__ = __getitem__ = __contains__ = _fail_with_undefined_error",
+   "expression_pair": false,
+   "subject": "Undefined.__contains__ raises UndefinedError"
+  },
+  {
+   "repo": "jinja",
+   "commit": "73a94e00d4376da11966fd6add5bdd469b59b0da",
+   "test": "tests/test_filters.py",
+   "sources": [
+    "src/jinja2/filters.py"
+   ],
+   "old_line": "if default and isinstance(item, Undefined):",
+   "new_line": "if default is not None and isinstance(item, Undefined):",
+   "expression_pair": false,
+   "subject": "map filter can use False as default"
+  },
+  {
+   "repo": "jinja",
+   "commit": "ba080f51e0d7e20a7870573d1814eeccbc32d99a",
+   "test": "tests/test_filters.py",
+   "sources": [
+    "src/jinja2/filters.py"
+   ],
+   "old_line": "return len(_word_re.findall(s))",
+   "new_line": "return len(_word_re.findall(soft_unicode(s)))",
+   "expression_pair": true,
+   "subject": "use soft_str in do_wordcount, to trigger undefined"
+  },
+  {
+   "repo": "jinja",
+   "commit": "f7b110cbd0c59cf382790baa950d2558c1bffd03",
+   "test": "tests/test_api.py",
+   "sources": [
+    "jinja2/meta.py"
+   ],
+   "old_line": "if action == 'resolve':",
+   "new_line": "if action == 'resolve' and param not in self.environment.globals:",
+   "expression_pair": false,
+   "subject": "exclude globals from find_undeclared_variables"
+  },
+  {
+   "repo": "jinja",
+   "commit": "c5d78bed5a05e5c34e5d16f7ea3c8c10dbe682c4",
+   "test": "tests/test_lexnparse.py",
+   "sources": [
+    "jinja2/lexer.py"
+   ],
+   "old_line": "line, name, filename)",
+   "new_line": "lineno, name, filename)",
+   "expression_pair": false,
+   "subject": "test for new identifier lexer currently fails on special case unicode"
+  },
+  {
+   "repo": "jinja",
+   "commit": "9f30bc8c4d6702a2e206fd8027443d2edafe4729",
+   "test": "tests/test_filters.py",
+   "sources": [
+    "jinja2/utils.py"
+   ],
+   "old_line": "return rv",
+   "new_line": "return Markup(rv)",
+   "expression_pair": true,
+   "subject": "Make tojson always safe (fix #709)"
+  },
+  {
+   "repo": "jinja",
+   "commit": "2c74f2468b371ec91e437bce67ab64378da8570a",
+   "test": "tests/test_regression.py",
+   "sources": [
+    "jinja2/compiler.py"
+   ],
+   "old_line": "self.visit_Call(node.call, call_frame, forward_caller=True)",
+   "new_line": "self.visit_Call(node.call, frame, forward_caller=True)",
+   "expression_pair": true,
+   "subject": "Resolved a regression in 2.9 with macro call scoping"
+  },
+  {
+   "repo": "jinja",
+   "commit": "147bd571ad914579b0f40bae53aac33d35ef972e",
+   "test": "tests/test_tests.py",
+   "sources": [
+    "jinja2/parser.py"
+   ],
+   "old_line": "args = [self.parse_expression()]",
+   "new_line": "args = [self.parse_primary()]",
+   "expression_pair": true,
+   "subject": "Change grouping behavior of tests.  This fixes #401"
+  },
+  {
+   "repo": "jinja",
+   "commit": "bd32b37dd35588f0ff8fca5532e76239f13c5273",
+   "test": "tests/test_debug.py",
+   "sources": [
+    "jinja2/debug.py"
+   ],
+   "old_line": "if not name.startswith('l_'):",
+   "new_line": "if not name.startswith('l_') or value is missing:",
+   "expression_pair": false,
+   "subject": "Changed behavior of local extraction"
+  },
+  {
+   "repo": "jinja",
+   "commit": "0ea221f53b2df44b9d02aec00ff7f87424971d4e",
+   "test": "tests/test_regression.py",
+   "sources": [
+    "jinja2/environment.py"
+   ],
+   "old_line": "except (TypeError, LookupError):",
+   "new_line": "except (AttributeError, TypeError, LookupError):",
+   "expression_pair": false,
+   "subject": "Support old-style classes for attribute lookups.  Fixes #631"
+  },
+  {
+   "repo": "jinja",
+   "commit": "7c90534875ffc072341ba25dbec4e8bb740db3e1",
+   "test": "tests/test_async.py",
+   "sources": [
+    "jinja2/asyncsupport.py"
+   ],
+   "old_line": "return loop.run_until_complete(self.render_async(self, *args, **kwargs))",
+   "new_line": "return loop.run_until_complete(self.render_async(*args, **kwargs))",
+   "expression_pair": true,
+   "subject": "Restore original render func for non async usage"
+  },
+  {
+   "repo": "jinja",
+   "commit": "75685ec5e5079bcdbd443696c3d79d0cb86f7cf8",
+   "test": "tests/test_utils.py",
+   "sources": [
+    "jinja2/utils.py"
+   ],
+   "old_line": "target_attr = ' target=\"%s\"' % target",
+   "new_line": "target_attr = ' target=\"%s\"' % escape(target)",
+   "expression_pair": true,
+   "subject": "Escape target attribute in the urlize function in utils.py. (#507)"
+  },
+  {
+   "repo": "jinja",
+   "commit": "dd85761cedfaef03e18612b1fe1733e848124dab",
+   "test": "tests/test_api.py",
+   "sources": [
+    "jinja2/runtime.py"
+   ],
+   "old_line": "__float__ = __complex__ = __pow__ = __rpow__ = \\",
+   "new_line": "__float__ = __complex__ = __pow__ = __rpow__ = __sub__ = \\",
+   "expression_pair": false,
+   "subject": "Setting __sub__ equal to _fail_with_undefined_error so subtractions with undefined variables will fail properly like other arithemtic operations."
+  },
+  {
+   "repo": "jinja",
+   "commit": "29b08c85a206199094070205383e44e690ec44cf",
+   "test": "examples/basic/test_filter_and_linestatements.py",
+   "sources": [
+    "examples/basic/test.py"
+   ],
+   "old_line": "print tmpl.render()",
+   "new_line": "print(tmpl.render())",
+   "expression_pair": false,
+   "subject": "change py2 print statements to py3"
+  },
+  {
+   "repo": "attrs",
+   "commit": "116681b67e3e3c82457df38a64908dbeec2669ea",
+   "test": "tests/test_dunders.py",
+   "sources": [
+    "src/attr/_compat.py"
+   ],
+   "old_line": "return cls.__dict__.get(\"__annotations__\", {})",
+   "new_line": "return cls.__dict__.get(\"__annotations__\", {})  # noqa: RUF063",
+   "expression_pair": false,
+   "subject": "update"
+  },
+  {
+   "repo": "attrs",
+   "commit": "a572c3a4c558a8b9b48cf989fcd956ab1a279439",
+   "test": "tests/test_setattr.py",
+   "sources": [
+    "src/attr/_make.py"
+   ],
+   "old_line": "if frozen is True:",
+   "new_line": "if frozen is True and a.on_setattr is not setters.NO_OP:",
+   "expression_pair": false,
+   "subject": "Allow field(on_setattr=NO_OP) on frozen classes"
+  },
+  {
+   "repo": "attrs",
+   "commit": "3b0378dd66d33ebddb52be85b8c4aac6a914b1a2",
+   "test": "tests/test_hooks.py",
+   "sources": [
+    "src/attr/_make.py"
+   ],
+   "old_line": "attrs = field_transformer(cls, attrs)",
+   "new_line": "attrs = tuple(field_transformer(cls, attrs))",
+   "expression_pair": true,
+   "subject": "Cope with `field_transformer` being a generator (#1417)"
+  },
+  {
+   "repo": "attrs",
+   "commit": "1c962d15a743a3c18401f0c788f0fd0cb3d9acf8",
+   "test": "tests/test_annotations.py",
+   "sources": [
+    "src/attr/_make.py"
+   ],
+   "old_line": "msg = \"Type annotation and type argument cannot both be present\"",
+   "new_line": "msg = f\"Type annotation and type argument cannot both be present for '{name}'.\"",
+   "expression_pair": true,
+   "subject": "Mention what argument has both annotation and type argument (#1410)"
+  },
+  {
+   "repo": "attrs",
+   "commit": "c17b1f3ec5862dca6cd5fbd40a808a925652906f",
+   "test": "tests/test_annotations.py",
+   "sources": [
+    "src/attr/_make.py"
+   ],
+   "old_line": "{NL.join(lines) if lines else 'pass'}",
+   "new_line": "{NL.join(lines) if lines else \"pass\"}",
+   "expression_pair": true,
+   "subject": "Update Ruff"
+  },
+  {
+   "repo": "attrs",
+   "commit": "13105a64f2de2e257a537ad20c06ffdd1c9d7f94",
+   "test": "tests/test_converters.py",
+   "sources": [
+    "src/attr/_make.py"
+   ],
+   "old_line": "if a.converter and not isinstance(a.converter, Converter):",
+   "new_line": "if a.converter is not None and not isinstance(a.converter, Converter):",
+   "expression_pair": false,
+   "subject": "Use an explicit comparison to None for the converter of a field (#1374)"
+  },
+  {
+   "repo": "attrs",
+   "commit": "a08bfb90ef5104675d96b427858063a638774484",
+   "test": "tests/test_packaging.py",
+   "sources": [
+    "src/attr/__init__.py"
+   ],
+   "old_line": "if name != \"__version_info__\":",
+   "new_line": "if name not in (\"__version__\", \"__version_info__\"):",
+   "expression_pair": false,
+   "subject": "Un-deprecate __version__ for now"
+  },
+  {
+   "repo": "attrs",
+   "commit": "06ce35459453e7c2964b0e0e25794a6af9aeb976",
+   "test": "tests/attr_import_star.py",
+   "sources": [
+    "setup.py"
+   ],
+   "old_line": "\"\"\"  # noqa",
+   "new_line": "\"\"\"",
+   "expression_pair": false,
+   "subject": "pre-commit autoupdate, add yesqa"
+  },
+  {
+   "repo": "attrs",
+   "commit": "7cfa3b68c581c6a0f924933eacf7781d61bbf3b2",
+   "test": "tests/test_make.py",
+   "sources": [
+    "src/attr/_make.py"
+   ],
+   "old_line": "# As their descriptors may be overriden by a child class,",
+   "new_line": "# As their descriptors may be overridden by a child class,",
+   "expression_pair": false,
+   "subject": "Fix typos (#899)"
+  },
+  {
+   "repo": "attrs",
+   "commit": "03dd7136cf1ccc58c9612531ba9711892830c1fb",
+   "test": "tests/test_3rd_party.py",
+   "sources": [
+    "setup.py"
+   ],
+   "old_line": "\"cloudpickle\",",
+   "new_line": "'cloudpickle; python_implementation == \"CPython\"',",
+   "expression_pair": true,
+   "subject": "Do not require cloudpickle for PyPy (#892)"
+  },
+  {
+   "repo": "attrs",
+   "commit": "358c85e74c5e9c73a222268cb34c914c52135497",
+   "test": "tests/test_next_gen.py",
+   "sources": [
+    "src/attr/_next_gen.py"
+   ],
+   "old_line": "eq=True,",
+   "new_line": "eq=None,",
+   "expression_pair": true,
+   "subject": "Fix auto-detection of eq/ne in NG APIs (#671)"
+  },
+  {
+   "repo": "packaging",
+   "commit": "ae9d39c13b5f5485b6295eb100b08ef9c3dde852",
+   "test": "tests/test_pylock.py",
+   "sources": [
+    "src/packaging/pylock.py"
+   ],
+   "old_line": "return path.name == \"pylock.toml\" or bool(_PYLOCK_FILE_NAME_RE.match(path.name))",
+   "new_line": "return path.name == \"pylock.toml\" or bool(_PYLOCK_FILE_NAME_RE.fullmatch(path.name))",
+   "expression_pair": true,
+   "subject": "fix: require the complete pylock filename to match (#1446)"
+  },
+  {
+   "repo": "packaging",
+   "commit": "2aada00b158feb36109d77dc91d62baa91f7d400",
+   "test": "tests/test_requirements.py",
+   "sources": [
+    "src/packaging/specifiers.py"
+   ],
+   "old_line": "[^\\s;)]*  # The arbitrary version can be just about anything,",
+   "new_line": "[^\\s;)]+  # The arbitrary version can be just about anything,",
+   "expression_pair": false,
+   "subject": "fix: reject empty arbitrary versions in requirements (#1430)"
+  },
+  {
+   "repo": "packaging",
+   "commit": "0625596e502163179b9a82796aee82c178efc16d",
+   "test": "tests/test_utils.py",
+   "sources": [
+    "src/packaging/utils.py"
+   ],
+   "old_line": "_build_tag_regex = re.compile(r\"(\\d+)(.*)\", re.ASCII)",
+   "new_line": "_build_tag_regex = re.compile(r\"(\\d+)(.*)\\Z\", re.ASCII)",
+   "expression_pair": true,
+   "subject": "fix: anchor the wheel build tag regex to the end of the part (#1427)"
+  },
+  {
+   "repo": "packaging",
+   "commit": "2602dd07d8bd5d6c54a3ce0e212f52eb2e127f3e",
+   "test": "tests/test_requirements.py",
+   "sources": [
+    "src/packaging/_tokenizer.py"
+   ],
+   "old_line": "\"URL\": re.compile(r\"[^ \\t]+\"),",
+   "new_line": "\"URL\": re.compile(r\"\\S+\"),",
+   "expression_pair": false,
+   "subject": "fix(parser): reject whitespace in the URL token (#1379)"
+  },
+  {
+   "repo": "packaging",
+   "commit": "b80e6eb0a6c0f61dcaa9b1587f3aab370263dc65",
+   "test": "tests/test_pylock_select.py",
+   "sources": [
+    "src/packaging/pylock.py"
+   ],
+   "old_line": "if self.environments:",
+   "new_line": "if self.environments is not None:",
+   "expression_pair": false,
+   "subject": "fix(pylock): respect explicitly empty environments in select() (#1362)"
+  },
+  {
+   "repo": "packaging",
+   "commit": "189a76d54d64899adbca907c2a3efa5b6befdb28",
+   "test": "tests/test_markers.py",
+   "sources": [
+    "src/packaging/_tokenizer.py"
+   ],
+   "old_line": "\"END\": re.compile(r\"$\"),",
+   "new_line": "\"END\": re.compile(r\"\\Z\"),",
+   "expression_pair": false,
+   "subject": "fix(parser): require true end of input (#1345)"
+  },
+  {
+   "repo": "packaging",
+   "commit": "8af75907bf1140071a6a706874fcf1d73cc39c71",
+   "test": "tests/test_utils.py",
+   "sources": [
+    "src/packaging/utils.py"
+   ],
+   "old_line": "_wheel_name_regex = re.compile(r\"^[\\w._]+$\", re.UNICODE)",
+   "new_line": "_wheel_name_regex = re.compile(r\"^[\\w._]+\\Z\", re.UNICODE)",
+   "expression_pair": true,
+   "subject": "fix: wheel filename regex for \\n at end of string (#1341)"
+  },
+  {
+   "repo": "packaging",
+   "commit": "abf000549c2ec5b31357046498d6e4f0f9d7d743",
+   "test": "tests/test_metadata.py",
+   "sources": [
+    "src/packaging/metadata.py"
+   ],
+   "old_line": "if charset != \"UTF-8\":",
+   "new_line": "if charset.lower() != \"utf-8\":",
+   "expression_pair": false,
+   "subject": "fix(metadata): accept UTF-8 charset case-insensitively (#1330)"
+  },
+  {
+   "repo": "packaging",
+   "commit": "256686340e6b9247fae23045715d54bac9b3204c",
+   "test": "tests/test_tags.py",
+   "sources": [
+    "src/packaging/tags.py"
+   ],
+   "old_line": "if not isinstance(ext_suffix, str) or ext_suffix[0] != \".\":",
+   "new_line": "if not isinstance(ext_suffix, str) or not ext_suffix.startswith(\".\"):",
+   "expression_pair": false,
+   "subject": "fix(tags): raise SystemError for empty EXT_SUFFIX in _generic_abi (#1271)"
+  },
+  {
+   "repo": "packaging",
+   "commit": "82ca37d936dfcfa4d64f57d52d0a24ccfbf1be61",
+   "test": "tests/test_tags.py",
+   "sources": [
+    "src/packaging/tags.py"
+   ],
+   "old_line": "yield from generic_tags()",
+   "new_line": "yield from generic_tags(warn=warn)",
+   "expression_pair": true,
+   "subject": "fix(tags): forward warn to generic_tags() in sys_tags (#1264)"
+  },
+  {
+   "repo": "packaging",
+   "commit": "ba17fcea2367a70cba21d6bfb0931ae476ee8583",
+   "test": "tests/test_utils.py",
+   "sources": [
+    "src/packaging/utils.py"
+   ],
+   "old_line": "_normalized_regex = re.compile(r\"[a-z0-9]|[a-z0-9]([a-z0-9-](?!--))*[a-z0-9]\", re.ASCII)",
+   "new_line": "_normalized_regex = re.compile(r\"[a-z0-9]+(?:-[a-z0-9]+)*\", re.ASCII)",
+   "expression_pair": true,
+   "subject": "fix(utils): is_normalized_name rejects collapsed double-hyphen names (a--b) (#1230)"
+  },
+  {
+   "repo": "packaging",
+   "commit": "08bb047794f4e70b157dacef4538b3a6e3492743",
+   "test": "tests/test_direct_url.py",
+   "sources": [
+    "src/packaging/direct_url.py"
+   ],
+   "old_line": "user_pass, netloc_no_user_pass = netloc.split(\"@\", 1)",
+   "new_line": "user_pass, netloc_no_user_pass = netloc.rsplit(\"@\", 1)",
+   "expression_pair": true,
+   "subject": "fix: DirectUrl auth stripping with @ in passwords (#1218)"
+  },
+  {
+   "repo": "packaging",
+   "commit": "553582d9162c761e4ab97ccc6cea43ac14ff2a8b",
+   "test": "tests/test_metadata.py",
+   "sources": [
+    "src/packaging/metadata.py"
+   ],
+   "old_line": "f\"{{field}} can only specify the UTF-8 charset, not {list(charset)}\"",
+   "new_line": "f\"{{field}} can only specify the UTF-8 charset, not {charset!r}\"",
+   "expression_pair": true,
+   "subject": "fix(metadata): charset error message formatting (#1121)"
+  },
+  {
+   "repo": "packaging",
+   "commit": "42d1a7bd5c98e98a6c6acaedd0399c8f4533e269",
+   "test": "tests/test_markers.py",
+   "sources": [
+    "src/packaging/version.py"
+   ],
+   "old_line": "def decorator(func: object) -> object:",
+   "new_line": "def decorator(func: Callable[[...], object]) -> object:",
+   "expression_pair": false,
+   "subject": "chore: cleanup pre-commit a bit (#1080)"
+  },
+  {
+   "repo": "packaging",
+   "commit": "86212c87502c8026ee40140d0f5bb7bbb0d03701",
+   "test": "tests/test_pylock.py",
+   "sources": [
+    "noxfile.py"
+   ],
+   "old_line": "yyyy_mm_dd = datetime.datetime.today().strftime(\"%Y-%m-%d\")",
+   "new_line": "yyyy_mm_dd = datetime.datetime.now(tz=datetime.timezone.utc).strftime(\"%Y-%m-%d\")",
+   "expression_pair": true,
+   "subject": "chore: add ruff DTZ (#968)"
+  },
+  {
+   "repo": "packaging",
+   "commit": "6da1c50d1354284da3b1cfe3ba6cf495162421ee",
+   "test": "tests/test_requirements.py",
+   "sources": [
+    "src/packaging/requirements.py"
+   ],
+   "old_line": "yield f\"@ {self.url}\"",
+   "new_line": "yield f\" @ {self.url}\"",
+   "expression_pair": true,
+   "subject": "fix: add space before at symbol in Requirements string (#953)"
+  },
+  {
+   "repo": "packaging",
+   "commit": "258202ed7f796bdb8a65252a66c3fbd3e69e97f6",
+   "test": "tests/test_utils.py",
+   "sources": [
+    "src/packaging/utils.py"
+   ],
+   "old_line": "r\"^([A-Z0-9]|[A-Z0-9][A-Z0-9._-]*[A-Z0-9])$\", re.IGNORECASE",
+   "new_line": "r\"^([A-Z0-9]|[A-Z0-9][A-Z0-9._-]*[A-Z0-9])\\Z\", re.IGNORECASE",
+   "expression_pair": true,
+   "subject": "Correct regex for metadata 'name' format (#925)"
+  },
+  {
+   "repo": "packaging",
+   "commit": "cf2cbe2aec28f87c6228a6fb136c27931c9af407",
+   "test": "tests/test_specifiers.py",
+   "sources": [
+    "src/packaging/specifiers.py"
+   ],
+   "old_line": "if operator in [\"==\", \">=\", \"<=\", \"~=\", \"===\"]:",
+   "new_line": "if operator in [\"==\", \">=\", \"<=\", \"~=\", \"===\", \">\", \"<\"]:",
+   "expression_pair": false,
+   "subject": "Fix prerelease detection for `>` and `<` (#794)"
+  },
+  {
+   "repo": "packaging",
+   "commit": "57a6a7ff661930a8b0dde55663947b80cf3c196a",
+   "test": "tests/test_structures.py",
+   "sources": [
+    "src/packaging/_manylinux.py"
+   ],
+   "old_line": "version_string: str = getattr(os, \"confstr\")(\"CS_GNU_LIBC_VERSION\")",
+   "new_line": "version_string: Optional[str] = os.confstr(\"CS_GNU_LIBC_VERSION\")",
+   "expression_pair": true,
+   "subject": "Appply some bugbear suggestions (#761)"
+  },
+  {
+   "repo": "packaging",
+   "commit": "a2b3e346b03c0446df2ab8e7f9c997d65495dc6d",
+   "test": "tests/test_tags.py",
+   "sources": [
+    "src/packaging/tags.py"
+   ],
+   "old_line": "if py_version >= (3, 13) and _get_config_var(\"Py_NOGIL\", warn):",
+   "new_line": "if py_version >= (3, 13) and _get_config_var(\"Py_GIL_DISABLED\", warn):",
+   "expression_pair": false,
+   "subject": "Rename Py_NOGIL to Py_GIL_DISABLED (#747)"
+  },
+  {
+   "repo": "packaging",
+   "commit": "7013a6048fe13f5c937de33179763100a57d7658",
+   "test": "tests/test_tags.py",
+   "sources": [
+    "src/packaging/tags.py"
+   ],
+   "old_line": "return string.replace(\".\", \"_\").replace(\"-\", \"_\")",
+   "new_line": "return string.replace(\".\", \"_\").replace(\"-\", \"_\").replace(\" \", \"_\")",
+   "expression_pair": true,
+   "subject": "Replace spaces in platform names with underscores (#620)"
+  },
+  {
+   "repo": "packaging",
+   "commit": "e7ce051e9191c461e0a536a84c4d66a87518de66",
+   "test": "tests/test_requirements.py",
+   "sources": [
+    "packaging/_parser.py"
+   ],
+   "old_line": "\"<=, <, !=, ==, >=, >, ~=, ===, not, not in\"",
+   "new_line": "\"<=, <, !=, ==, >=, >, ~=, ===, in, not in\"",
+   "expression_pair": true,
+   "subject": "Fix a typo in an error message"
+  },
+  {
+   "repo": "packaging",
+   "commit": "33255b733a25463d5b04b6d0e9a4db5cf9f084cc",
+   "test": "tests/test_markers.py",
+   "sources": [
+    "packaging/markers.py"
+   ],
+   "old_line": "\"extra\": \"\",",
+   "new_line": "current_environment[\"extra\"] = \"\"",
+   "expression_pair": false,
+   "subject": "Do not set extra in default_environment (#554)"
+  },
+  {
+   "repo": "packaging",
+   "commit": "c5f1db976c89074e5f18f15b04cfa21132161a73",
+   "test": "tests/test_markers.py",
+   "sources": [
+    "packaging/markers.py"
+   ],
+   "old_line": "return spec.contains(lhs)",
+   "new_line": "return spec.contains(lhs, prereleases=True)",
+   "expression_pair": true,
+   "subject": "allow prerelease versions in marker evaluation (#523)"
+  },
+  {
+   "repo": "packaging",
+   "commit": "5037e4cfdb5dd464c9e6552ca2c5a745d37a93b8",
+   "test": "tests/test_tags.py",
+   "sources": [
+    "packaging/tags.py"
+   ],
+   "old_line": "if cpu_arch in {\"x86_64\", \"i386\", \"ppc64\", \"ppc\"}:",
+   "new_line": "if cpu_arch in {\"x86_64\", \"i386\", \"ppc64\", \"ppc\", \"intel\"}:",
+   "expression_pair": false,
+   "subject": "Add intel cpu_arch on MacOS as universal-compatible (#361)"
+  },
+  {
+   "repo": "packaging",
+   "commit": "8770b3b93acbd05dab759861ac869b0707cf9ab1",
+   "test": "tests/test_requirements.py",
+   "sources": [
+    "packaging/requirements.py"
+   ],
+   "old_line": "raise InvalidRequirement(\"Invalid URL given\")",
+   "new_line": "raise InvalidRequirement(\"Invalid URL: {0}\".format(req.url))",
+   "expression_pair": false,
+   "subject": "Improved error on invalid url + test"
+  },
+  {
+   "repo": "packaging",
+   "commit": "24c4e96bbe581675c7b36932e3348434da3bf023",
+   "test": "tests/test_specifiers.py",
+   "sources": [
+    "packaging/specifiers.py"
+   ],
+   "old_line": "if operator in [\"==\", \">=\", \"<=\", \"~=\"]:",
+   "new_line": "if operator in [\"==\", \">=\", \"<=\", \"~=\", \"===\"]:",
+   "expression_pair": false,
+   "subject": "Allow pre-releases when included via ==="
+  },
+  {
+   "repo": "requests",
+   "commit": "27e0981962d355b9532256f4dcb3d42f64b04d9c",
+   "test": "tests/test_requests.py",
+   "sources": [
+    "src/requests/adapters.py"
+   ],
+   "old_line": "The PreparedReqest being sent over the connection.",
+   "new_line": "The PreparedRequest being sent over the connection.",
+   "expression_pair": false,
+   "subject": "Fix remaining typos (#7395)"
+  },
+  {
+   "repo": "requests",
+   "commit": "47914226c2968802f2cdee3f6f0f6e06e4472f64",
+   "test": "tests/test_utils.py",
+   "sources": [
+    "src/requests/utils.py"
+   ],
+   "old_line": "if _netrc:",
+   "new_line": "if _netrc and any(_netrc):",
+   "expression_pair": false,
+   "subject": "Fix empty netrc entry usage (#7205)"
+  },
+  {
+   "repo": "requests",
+   "commit": "13d892bdbe9a2aa374959a166e8067c35253705d",
+   "test": "tests/test_utils.py",
+   "sources": [
+    "src/requests/utils.py"
+   ],
+   "old_line": "# filter out empty strings to avoid re.match all true.",
+   "new_line": "# filter out empty strings to avoid re.match return true in the following code.",
+   "expression_pair": false,
+   "subject": "Additional should_bypass_proxies function test cases"
+  },
+  {
+   "repo": "requests",
+   "commit": "6e5b15d542a4e85945fd72066bb6cecbc3a82191",
+   "test": "tests/test_requests.py",
+   "sources": [
+    "requests/sessions.py"
+   ],
+   "old_line": "if not scheme.startswith('https') and username and password:",
+   "new_line": "if not scheme.startswith(\"https\") and username and password:",
+   "expression_pair": false,
+   "subject": "Fix linting issues"
+  },
+  {
+   "repo": "requests",
+   "commit": "210095fd08f790a1ce640354a91c1a264a291360",
+   "test": "tests/test_utils.py",
+   "sources": [
+    "requests/utils.py"
+   ],
+   "old_line": "except OSError:",
+   "new_line": "except (OSError, ValueError):",
+   "expression_pair": false,
+   "subject": "Tolerate bad registry entries in Windows proxy settings (#6149)"
+  },
+  {
+   "repo": "requests",
+   "commit": "658c10e84a461e5298199f20f17b510b90ac478a",
+   "test": "tests/test_requests.py",
+   "sources": [
+    "requests/models.py"
+   ],
+   "old_line": "elif host.startswith(u'*'):",
+   "new_line": "elif host.startswith((u'*', u'.')):",
+   "expression_pair": false,
+   "subject": "Raise InvalidURL if hosts starts with '.' as was reported at #5367."
+  },
+  {
+   "repo": "requests",
+   "commit": "60ea7f0c2def461a9ddc20e7af0fc90b68dbe0de",
+   "test": "tests/test_requests.py",
+   "sources": [
+    "requests/sessions.py"
+   ],
+   "old_line": "kwargs.setdefault('proxies', self.proxies)",
+   "new_line": "kwargs.setdefault('proxies', self.rebuild_proxies(request, self.proxies))",
+   "expression_pair": true,
+   "subject": "#5677: Rebuild proxies on Session#send"
+  },
+  {
+   "repo": "requests",
+   "commit": "dc75b3ca0b4c95648eb07b92cb414394d99c13a0",
+   "test": "tests/test_utils.py",
+   "sources": [
+    "setup.py"
+   ],
+   "old_line": "'pytest>=2.8.0'",
+   "new_line": "'pytest>=3'",
+   "expression_pair": true,
+   "subject": "Support pytest 4"
+  },
+  {
+   "repo": "requests",
+   "commit": "907c927d60f4ba3f09cf3574a5ae90ab76aa1717",
+   "test": "tests/test_utils.py",
+   "sources": [
+    "requests/utils.py"
+   ],
+   "old_line": "params_dict[key] = value",
+   "new_line": "params_dict[key.lower()] = value",
+   "expression_pair": false,
+   "subject": "make content-type's charset information case-insensitive"
+  },
+  {
+   "repo": "requests",
+   "commit": "1278ecdf71a312dc2268f3bfc0aabfab3c006dcf",
+   "test": "tests/test_packages.py",
+   "sources": [
+    "requests/packages.py"
+   ],
+   "old_line": "__import__(package)",
+   "new_line": "locals()[package] = __import__(package)",
+   "expression_pair": false,
+   "subject": "Fix requests.packages not having package attributes"
+  },
+  {
+   "repo": "tqdm",
+   "commit": "24b9e1e08a097f1c30f2d235b63f9eb25ba47974",
+   "test": "tests/tests_concurrent.py",
+   "sources": [
+    "tqdm/contrib/concurrent.py"
+   ],
+   "old_line": "\"\"\"min(map(length_hint, iterables)), ignoring unknown lengths [default: 0]\"\"\"",
+   "new_line": "\"\"\"min(map(length_hint, iterables), default=0)\"\"\"",
+   "expression_pair": true,
+   "subject": "misc tidy"
+  },
+  {
+   "repo": "tqdm",
+   "commit": "b38a9221c4b2723a82d8b186c0fd8e7b05771a12",
+   "test": "tests/tests_tqdm.py",
+   "sources": [
+    "tqdm/std.py"
+   ],
+   "old_line": "f = '{0:.3g}'.format(n).replace('+0', '+').replace('-0', '-')",
+   "new_line": "f = f'{n:.3g}'.replace('e+0', 'e+').replace('e-0', 'e-')",
+   "expression_pair": true,
+   "subject": "fix format_num"
+  },
+  {
+   "repo": "tqdm",
+   "commit": "223561a83bcc0cca961b6b42403424b995c6e916",
+   "test": "tests/py37_asyncio.py",
+   "sources": [
+    "tqdm/asyncio.py"
+   ],
+   "old_line": "async def gather(cls, fs, *, loop=None, timeout=None, total=None, **tqdm_kwargs):",
+   "new_line": "async def gather(cls, *fs, loop=None, timeout=None, total=None, **tqdm_kwargs):",
+   "expression_pair": false,
+   "subject": "`asyncio.gather` API consistency with stdlib"
+  },
+  {
+   "repo": "tqdm",
+   "commit": "644fd81bce6f6cca1df3cc4ce217a02eaa58c85a",
+   "test": "tests/py37_asyncio.py",
+   "sources": [
+    "tqdm/asyncio.py"
+   ],
+   "old_line": "def gather(",
+   "new_line": "async def gather(",
+   "expression_pair": false,
+   "subject": "Adding a test case for tqdm_asyncio.gather, mirroring tqdm_asyncio.as_completed"
+  },
+  {
+   "repo": "tqdm",
+   "commit": "841090491a74122e0ad25f66de129964dc6e17fe",
+   "test": "tests/tests_concurrent.py",
+   "sources": [
+    "tqdm/std.py"
+   ],
+   "old_line": "except ImportError:",
+   "new_line": "except ImportError:  # pragma: no cover",
+   "expression_pair": false,
+   "subject": "tests: warnings and timeout"
+  },
+  {
+   "repo": "httpx",
+   "commit": "90538a3b4610ba49ce16c997bcfdb9101f9503be",
+   "test": "tests/test_asgi.py",
+   "sources": [
+    "httpx/_transports/asgi.py"
+   ],
+   "old_line": "\"raw_path\": request.url.raw_path,",
+   "new_line": "\"raw_path\": request.url.raw_path.split(b\"?\")[0],",
+   "expression_pair": false,
+   "subject": "Ensure that ASGI 'raw_path' does not include query component of URL. (#2999)"
+  },
+  {
+   "repo": "httpx",
+   "commit": "e63b6594f2863b7c8274eb0991ebc6cad63661f7",
+   "test": "tests/test_urlparse.py",
+   "sources": [
+    "httpx/_urlparse.py"
+   ],
+   "old_line": "IPv4_STYLE_HOSTNAME = re.compile(r\"^[0-9]+.[0-9]+.[0-9]+.[0-9]+$\")",
+   "new_line": "IPv4_STYLE_HOSTNAME = re.compile(r\"^[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+$\")",
+   "expression_pair": true,
+   "subject": "Fix encode host (#2886)"
+  },
+  {
+   "repo": "httpx",
+   "commit": "b40c04dfa604db0a5f9b48c12268c0a0c63c71d2",
+   "test": "tests/test_config.py",
+   "sources": [
+    "httpx/_compat.py"
+   ],
+   "old_line": "sys.version_info >= (3, 7) and ssl.OPENSSL_VERSION_INFO >= (1, 1, 0, 7)",
+   "new_line": "sys.version_info >= (3, 8) and ssl.OPENSSL_VERSION_INFO >= (1, 1, 0, 7)",
+   "expression_pair": true,
+   "subject": "Drop support for Python 3.7 (#2813)"
+  },
+  {
+   "repo": "httpx",
+   "commit": "d5900cd40ec85e47800e21e77bc684b9f65325ed",
+   "test": "tests/models/test_queryparams.py",
+   "sources": [
+    "httpx/_urls.py"
+   ],
+   "old_line": "self._dict = parse_qs(value)",
+   "new_line": "self._dict = parse_qs(value, keep_blank_values=True)",
+   "expression_pair": true,
+   "subject": "Fix empty query params (#2354)"
+  },
+  {
+   "repo": "httpx",
+   "commit": "52dd95fb5cb1aa0e1b00bdcfc3f8c1cbbdcf10b5",
+   "test": "tests/client/test_async_client.py",
+   "sources": [
+    "httpx/_transports/default.py"
+   ],
+   "old_line": "status_code, headers, byte_stream, extenstions = await self._pool.arequest(",
+   "new_line": "status_code, headers, byte_stream, extensions = await self._pool.arequest(",
+   "expression_pair": false,
+   "subject": "Fix extenstions typo in AsyncHTTPTransport (#1549)"
+  },
+  {
+   "repo": "httpx",
+   "commit": "0123bca3354fffcad08f7bbf7662982969b1ac63",
+   "test": "tests/test_asgi.py",
+   "sources": [
+    "httpx/_transports/asgi.py"
+   ],
+   "old_line": "\"headers\": headers,",
+   "new_line": "\"headers\": [(k.lower(), v) for (k, v) in headers],",
+   "expression_pair": false,
+   "subject": "Force lowercase ASGI headers (#1351)"
+  },
+  {
+   "repo": "httpx",
+   "commit": "666cbbdfe8259e7b6363a2eec5df8ab60e7b6003",
+   "test": "tests/models/test_responses.py",
+   "sources": [
+    "httpx/_models.py"
+   ],
+   "old_line": "if content is None or isinstance(content, bytes):",
+   "new_line": "if content is None or isinstance(content, (bytes, str)):",
+   "expression_pair": false,
+   "subject": "Fix automatic .read() when Response instances are created with content=<str> (#1324)"
+  },
+  {
+   "repo": "httpx",
+   "commit": "ad5e6eb8b0bd4a23218f835cf70025f2f7897cc0",
+   "test": "tests/test_decoders.py",
+   "sources": [
+    "httpx/_decoders.py"
+   ],
+   "old_line": "self.buffer = text",
+   "new_line": "self.buffer += text",
+   "expression_pair": false,
+   "subject": "Fixes #1033 - Ensure that text that spans 3 invocations before newline is handled - don't clobber the buffer between invocations that haven't seen any lines. (#"
+  },
+  {
+   "repo": "httpx",
+   "commit": "0296c2bbb9885bbe1b1e3210d9e3efa7a817038d",
+   "test": "tests/client/test_async_client.py",
+   "sources": [
+    "httpx/_types.py"
+   ],
+   "old_line": "RequestFiles = Union[Mapping[str, FileTypes], List[Tuple[str, FileTypes]]]",
+   "new_line": "RequestFiles = Union[Mapping[str, FileTypes], Sequence[Tuple[str, FileTypes]]]",
+   "expression_pair": true,
+   "subject": "Type check tests (#1054)"
+  },
+  {
+   "repo": "httpx",
+   "commit": "3333152b54654a438d5a8f7d0c36890a282b8eae",
+   "test": "tests/test_multipart.py",
+   "sources": [
+    "httpx/_content_streams.py"
+   ],
+   "old_line": "if isinstance(value, (list, dict)):",
+   "new_line": "if isinstance(value, list):",
+   "expression_pair": false,
+   "subject": "Don't support broken dict-of-dicts case for data argument (#811)"
+  },
+  {
+   "repo": "httpx",
+   "commit": "3462999366e01dcbc1db58ee9634093931bc9dbe",
+   "test": "tests/client/test_redirects.py",
+   "sources": [
+    "httpx/models.py"
+   ],
+   "old_line": "async def next(self) -> \"Response\":",
+   "new_line": "async def anext(self) -> \"Response\":",
+   "expression_pair": false,
+   "subject": "Rename 'next' to 'anext' on Response (#676)"
+  },
+  {
+   "repo": "httpx",
+   "commit": "43331cfb3d3d97c9886125b821a04891951eea81",
+   "test": "tests/client/test_auth.py",
+   "sources": [
+    "httpx/client.py"
+   ],
+   "old_line": "if trust_env:",
+   "new_line": "if trust_env and \"Authorization\" not in request.headers:",
+   "expression_pair": false,
+   "subject": "Ensure Authorization header has priority over .netrc"
+  },
+  {
+   "repo": "httpx",
+   "commit": "994403bec920c923a6c3970215e75d6a99385e0c",
+   "test": "tests/client/test_client.py",
+   "sources": [
+    "httpx/concurrency/asyncio.py"
+   ],
+   "old_line": "# We check our flag at the possible moment, in order to",
+   "new_line": "# We check our flag at the first possible moment, in order to",
+   "expression_pair": false,
+   "subject": "Serve test server in thread (#292)"
+  },
+  {
+   "repo": "httpx",
+   "commit": "e7aa6d67109b33eab5d3fbac0dead4c74c26167e",
+   "test": "tests/test_api.py",
+   "sources": [
+    "httpx/api.py"
+   ],
+   "old_line": "with Client() as client:",
+   "new_line": "with Client(http_versions=[\"HTTP/1.1\"]) as client:",
+   "expression_pair": false,
+   "subject": "Force HTTP/1.1 on short-lived connections (#284)"
+  },
+  {
+   "repo": "urllib3",
+   "commit": "fc76bcb911ef484bcfbdd8a27f002379d625d01f",
+   "test": "test/test_response.py",
+   "sources": [
+    "src/urllib3/response.py"
+   ],
+   "old_line": "def readinto(self, b: bytearray) -> int:",
+   "new_line": "def readinto(self, b: bytearray | memoryview[int]) -> int:",
+   "expression_pair": false,
+   "subject": "Fix readinto type hint to accept memoryview for BufferedReader compatibility (#3769)"
+  },
+  {
+   "repo": "urllib3",
+   "commit": "f80d281fe53dfe93004b856ba8b9adb3fa37da77",
+   "test": "test/contrib/test_socks.py",
+   "sources": [
+    "src/urllib3/response.py"
+   ],
+   "old_line": "def url(self, url: str) -> None:",
+   "new_line": "def url(self, url: str | None) -> None:",
+   "expression_pair": false,
+   "subject": "Update mypy (#3626)"
+  },
+  {
+   "repo": "urllib3",
+   "commit": "aa668c2f96a67dba066e35452bea165ef6dcf875",
+   "test": "test/with_dummyserver/test_connectionpool.py",
+   "sources": [
+    "src/urllib3/util/connection.py"
+   ],
+   "old_line": "_TYPE_SOCKET_OPTIONS = typing.Sequence[typing.Tuple[int, int, typing.Union[int, bytes]]]",
+   "new_line": "_TYPE_SOCKET_OPTIONS = typing.List[typing.Tuple[int, int, typing.Union[int, bytes]]]",
+   "expression_pair": true,
+   "subject": "Fix mypy error when adding to default socket options (#3448)"
+  },
+  {
+   "repo": "urllib3",
+   "commit": "07f236ba64a635d01498cc6ec17d471cc594a100",
+   "test": "test/with_dummyserver/test_chunked_transfer.py",
+   "sources": [
+    "src/urllib3/util/request.py"
+   ],
+   "old_line": "datablock = datablock.encode(\"iso-8859-1\")",
+   "new_line": "datablock = datablock.encode(\"utf-8\")",
+   "expression_pair": true,
+   "subject": "Changed default encoding of chunked request bodies to UTF-8"
+  },
+  {
+   "repo": "urllib3",
+   "commit": "90c30f5fdca56a54248614dc86570bf2692a4caa",
+   "test": "test/test_collections.py",
+   "sources": [
+    "noxfile.py"
+   ],
+   "old_line": "raise ValueError(f\"Unknown runnner: {runner}\")",
+   "new_line": "raise ValueError(f\"Unknown runner: {runner}\")",
+   "expression_pair": false,
+   "subject": "Fix some typos"
+  },
+  {
+   "repo": "urllib3",
+   "commit": "644124ecd0b6e417c527191f866daa05a5a2056d",
+   "test": "test/test_retry.py",
+   "sources": [
+    "src/urllib3/util/retry.py"
+   ],
+   "old_line": "DEFAULT_REMOVE_HEADERS_ON_REDIRECT = frozenset([\"Authorization\"])",
+   "new_line": "DEFAULT_REMOVE_HEADERS_ON_REDIRECT = frozenset([\"Cookie\", \"Authorization\"])",
+   "expression_pair": true,
+   "subject": "Merge pull request from GHSA-v845-jxx5-vc9f"
+  },
+  {
+   "repo": "urllib3",
+   "commit": "4714836a667eb4837d005eb89d34fae60b9dc6cc",
+   "test": "test/with_dummyserver/test_socketlevel.py",
+   "sources": [
+    "src/urllib3/response.py"
+   ],
+   "old_line": "while not is_fp_closed(self._fp):",
+   "new_line": "while not is_fp_closed(self._fp) or len(self._decoded_buffer) > 0:",
+   "expression_pair": false,
+   "subject": "Continue reading the response stream if there is buffered decompressed data"
+  },
+  {
+   "repo": "urllib3",
+   "commit": "a43f604115b84a9521363d3ca7fd09c5ec412e14",
+   "test": "test/__init__.py",
+   "sources": [
+    "src/urllib3/_collections.py"
+   ],
+   "old_line": "def setdefault(self, key: str, default: str = \"\") -> str:  # type: ignore[override]",
+   "new_line": "def setdefault(self, key: str, default: str = \"\") -> str:",
+   "expression_pair": false,
+   "subject": "Update mypy to 1.2.0"
+  },
+  {
+   "repo": "urllib3",
+   "commit": "b984f4fbfe877d3bbd92826b0968cf8a89337872",
+   "test": "test/test_util.py",
+   "sources": [
+    "src/urllib3/util/url.py"
+   ],
+   "old_line": "_HOST_PORT_PAT = (\"^(%s|%s|%s)(?::0*([0-9]{0,5}))?$\") % (",
+   "new_line": "_HOST_PORT_PAT = (\"^(%s|%s|%s)(?::0*?(|0|[1-9][0-9]{0,5}))?$\") % (",
+   "expression_pair": false,
+   "subject": "fixed issue with port \"0\" returning None"
+  },
+  {
+   "repo": "urllib3",
+   "commit": "b09fe5629dd3c3e3253b54d384878b2fee00f64a",
+   "test": "test/with_dummyserver/test_connectionpool.py",
+   "sources": [
+    "src/urllib3/connectionpool.py"
+   ],
+   "old_line": "'%s://%s:%s \"%s %s %s\" %s',",
+   "new_line": "'%s://%s:%s \"%s %s %s\" %s %s',",
+   "expression_pair": true,
+   "subject": "Don't ignore debug logs in pytest, fix log args issue"
+  },
+  {
+   "repo": "urllib3",
+   "commit": "77fa67aaf2dc18962fa9234d47400c8a6fc1edf4",
+   "test": "test/test_util.py",
+   "sources": [
+    "src/urllib3/util/url.py"
+   ],
+   "old_line": "_HOST_PORT_PAT = (\"^(%s|%s|%s)(?::([0-9]{0,5}))?$\") % (",
+   "new_line": "_HOST_PORT_PAT = (\"^(%s|%s|%s)(?::0*([0-9]{0,5}))?$\") % (",
+   "expression_pair": false,
+   "subject": "Strip leading zeros from ports"
+  },
+  {
+   "repo": "urllib3",
+   "commit": "7636345843bb66be17c2de8065b4235d37d05eb2",
+   "test": "test/with_dummyserver/test_https.py",
+   "sources": [
+    "src/urllib3/connectionpool.py"
+   ],
+   "old_line": "raise SSLError(",
+   "new_line": "raise ImportError(",
+   "expression_pair": false,
+   "subject": "Raise an unretryable exception when ssl module isn't available"
+  },
+  {
+   "repo": "urllib3",
+   "commit": "0175d41c017f766b2c97597ecd64c39a6da09c79",
+   "test": "test/with_dummyserver/test_chunked_transfer.py",
+   "sources": [
+    "src/urllib3/connection.py"
+   ],
+   "old_line": "if \"transfer-encoding\" not in headers:",
+   "new_line": "if \"transfer-encoding\" not in header_keys:",
+   "expression_pair": false,
+   "subject": "Don't emit multiple Transfer-Encoding headers in request_chunked()"
+  },
+  {
+   "repo": "urllib3",
+   "commit": "74d6be1ab66cef44c0f479c24b0fc1756a8fe4e9",
+   "test": "test/with_dummyserver/test_connectionpool.py",
+   "sources": [
+    "src/urllib3/connection.py"
+   ],
+   "old_line": "if \"user-agent\" not in (k.lower() for k in headers):",
+   "new_line": "if \"user-agent\" not in (six.ensure_str(k.lower()) for k in headers):",
+   "expression_pair": false,
+   "subject": "Don't send 'User-Agent' twice if header is binary"
+  },
+  {
+   "repo": "urllib3",
+   "commit": "6fc17a344532171d2a54a2cabc686f89e3658dbd",
+   "test": "test/test_ssltransport.py",
+   "sources": [
+    "src/urllib3/util/ssltransport.py"
+   ],
+   "old_line": "self, socket, ssl_context, suppress_ragged_eofs=True, server_hostname=None",
+   "new_line": "self, socket, ssl_context, server_hostname=None, suppress_ragged_eofs=True",
+   "expression_pair": false,
+   "subject": "Fix constructor parameter order in SSLTransport."
+  },
+  {
+   "repo": "urllib3",
+   "commit": "263da24d4b5c33392772e638b12d02e5b07abf9f",
+   "test": "test/test_util.py",
+   "sources": [
+    "src/urllib3/util/url.py"
+   ],
+   "old_line": "r\"(?://([^/?#]*))?\"",
+   "new_line": "r\"(?://([^\\\\/?#]*))?\"",
+   "expression_pair": true,
+   "subject": "Backslash terminates authority URL section"
+  },
+  {
+   "repo": "urllib3",
+   "commit": "9971e27e83a891ba7b832fa9e5d2f04bbcb1e65f",
+   "test": "test/test_response.py",
+   "sources": [
+    "src/urllib3/response.py"
+   ],
+   "old_line": "buffer = [b\"\"]",
+   "new_line": "buffer = []",
+   "expression_pair": true,
+   "subject": "Empty responses should have no lines."
+  }
+ ]
+}
