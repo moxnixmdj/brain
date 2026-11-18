@@ -41,7 +41,7 @@
  },
  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The acceptance evidence, not the search. A demand that cannot be bound is satisfied by a literal read from the test, and a literal can be satisfied by any frame name: the ungated instrument certified `flag_value` on click 91de59c6c8 -- 533 tests green, 0 of 12 recorded passing values preserved, the human's own fix preserving 12 of 12.",
- "canonical_base_commit": "PENDING_REBIND",
+ "canonical_base_commit": "5b5e1fc410b8c275e108cc6b06b3a9826a36476d",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -157,7 +157,7 @@
  ],
  "real_outcome": "That the fallback adds repairs (it adds none here); that 91de59c6c8 is unsolvable; that preservation is a valid gate in general (it rejected 13 of 14 real human fixes on an earlier round and is used only where the demand is weak); that 1 verified repair is capability.",
  "recursive_obs": {
-  "canonical_base_commit": "PENDING_REBIND",
+  "canonical_base_commit": "5b5e1fc410b8c275e108cc6b06b3a9826a36476d",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "the suite going green as sufficient evidence for a demand that was never bound at runtime",
