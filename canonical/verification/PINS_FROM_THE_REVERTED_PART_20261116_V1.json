@@ -1,0 +1,104 @@
+{
+ "authority": "NONE -- sandbox measurement, not independent verification",
+ "model_calls": 0,
+ "network_calls": 0,
+ "rows": [
+  {
+   "calls_from_the_test": 0,
+   "parts": [
+    {
+     "assertions_tried": 0,
+     "differences": 0,
+     "part_head": "    default_digest_method: t.Any = staticmethod(_lazy_sha1)\n",
+     "state": "NOT_PINNED__NO_OBSERVABLE_DIFFERENCE"
+    }
+   ],
+   "pinned_by_synthesis": 0,
+   "repo": "pallets/itsdangerous",
+   "sha": "7f4dcf83a07bb3d53f4e0e65ef1b43327b4cca90",
+   "source": "src/itsdangerous/signer.py",
+   "state": "NOT_PINNED__NO_OBSERVABLE_DIFFERENCE",
+   "unpinned_parts": 1
+  },
+  {
+   "calls_from_the_test": 12,
+   "parts": [],
+   "pinned_by_synthesis": 0,
+   "repo": "pypa/packaging",
+   "sha": "022ae6c6fe5c2ef9615875d0ecfab1ae4024720f",
+   "source": "src/packaging/metadata.py",
+   "state": "FULLY_PINNED",
+   "unpinned_parts": 0
+  },
+  {
+   "calls_from_the_test": 12,
+   "parts": [],
+   "pinned_by_synthesis": 0,
+   "repo": "pypa/packaging",
+   "sha": "4b243af94ff6885c89b8acd7a22fc5714b18cb96",
+   "source": "src/packaging/requirements.py",
+   "state": "FULLY_PINNED",
+   "unpinned_parts": 0
+  },
+  {
+   "calls_from_the_test": 12,
+   "parts": [],
+   "pinned_by_synthesis": 0,
+   "repo": "pypa/packaging",
+   "sha": "a1f705642e50b79da6be83fb0f6149daa32fc7cc",
+   "source": "src/packaging/licenses/__init__.py",
+   "state": "FULLY_PINNED",
+   "unpinned_parts": 0
+  },
+  {
+   "calls_from_the_test": 0,
+   "parts": [],
+   "pinned_by_synthesis": 0,
+   "repo": "hukkin/tomli",
+   "sha": "12314bde5b89a8bdc32de7403a2a4cf786187bbc",
+   "source": "src/tomli/_parser.py",
+   "state": "FULLY_PINNED",
+   "unpinned_parts": 0
+  },
+  {
+   "calls_from_the_test": 5,
+   "parts": [
+    {
+     "assertions_tried": 0,
+     "differences": 0,
+     "part_head": "",
+     "state": "NOT_PINNED__NO_OBSERVABLE_DIFFERENCE"
+    }
+   ],
+   "pinned_by_synthesis": 0,
+   "repo": "hukkin/tomli",
+   "sha": "5ab9ec926d9dc1ef79e66215edd51285371fe8a0",
+   "source": "tomli/_parser.py",
+   "state": "NOT_PINNED__NO_OBSERVABLE_DIFFERENCE",
+   "unpinned_parts": 1
+  },
+  {
+   "calls_from_the_test": 6,
+   "parts": [],
+   "pinned_by_synthesis": 0,
+   "repo": "hukkin/tomli",
+   "sha": "96dfe2cef79eb4c2a441d5b1b36c3ef357372c9f",
+   "source": "tomli/__init__.py",
+   "state": "FULLY_PINNED",
+   "unpinned_parts": 0
+  }
+ ],
+ "schema": "BRAIN_PINS_FROM_THE_REVERTED_PART_V1",
+ "totals": {
+  "no_observable_difference": 2,
+  "pinned_by_synthesis": 0,
+  "refused_receiver": 0,
+  "share_of_unpinned_pinned": 0.0,
+  "states": {
+   "FULLY_PINNED": 5,
+   "NOT_PINNED__NO_OBSERVABLE_DIFFERENCE": 2
+  },
+  "tasks": 7,
+  "unpinned_parts_audited": 2
+ }
+}
