@@ -1,0 +1,1014 @@
+{
+ "schema": "BRAIN_THE_ASSERTION_IS_THE_DEMAND_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "date": "2026-11-19",
+ "mode": "SWEEP_REAL_HISTORY",
+ "rows": [
+  {
+   "repo": "click",
+   "commit": "3495fba163dd61dea837cd557095df6c21515ac8",
+   "test": "tests/test_basic.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "click",
+   "commit": "becbde5cf416441627f779e8dd34e57738ee1c1f",
+   "test": "tests/test_testing.py",
+   "stage": "NO_RELATION_BETWEEN_THE_DEMAND_AND_THE_SITE",
+   "failing_test": "tests/test_testing.py::test_with_echo_via_pager",
+   "site_line": 617,
+   "site_expression": "stream",
+   "table": [],
+   "audit": null,
+   "prose_refused": 0,
+   "refusals": [
+    {
+     "node": "tests/test_testing.py::test_with_echo_via_pager",
+     "side": "right",
+     "demanded": "('I/O operation on closed file.',)",
+     "produced": [
+      "<_io.TextIOWrapper name='<stdout>' mode='w' encoding='utf-8'>"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_testing.py::test_with_echo_via_pager",
+     "side": "left",
+     "demanded": "ValueError('I/O operation on closed file.')",
+     "produced": [
+      "<_io.TextIOWrapper name='<stdout>' mode='w' encoding='utf-8'>"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    }
+   ],
+   "greens": [],
+   "green_count": 0,
+   "survivors": 0,
+   "parameters_stored": 0,
+   "seconds": 1.11
+  },
+  {
+   "repo": "click",
+   "commit": "a3321c9ca14ddb951f04ac981f275b0de2f46208",
+   "test": "tests/test_shell_completion.py",
+   "stage": "NO_RELATION_BETWEEN_THE_DEMAND_AND_THE_SITE",
+   "failing_test": "tests/test_shell_completion.py::test_source_uses_lf_line_endings",
+   "site_line": 47,
+   "site_expression": "comp",
+   "table": [],
+   "audit": null,
+   "prose_refused": 0,
+   "refusals": [
+    {
+     "node": "tests/test_shell_completion.py::test_source_uses_lf_line_endings",
+     "side": "right",
+     "demanded": "b'#compdef cli\\r\\n\\r\\n_cli_completion() {\\r\\n    local -a completions\\r\\n    local -a completions_with_descriptions\\r...",
+     "produced": [
+      "<click.shell_completion.ZshComplete object at 0x7fa1074ae590>"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_shell_completion.py::test_source_uses_lf_line_endings",
+     "side": "left",
+     "demanded": "b'\\r\\n'",
+     "produced": [
+      "<click.shell_completion.ZshComplete object at 0x7fa1074ae590>"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_shell_completion.py::test_source_uses_lf_line_endings",
+     "side": "right",
+     "demanded": "('assert b\\'\\\\r\\\\n\\' not in b\\'#compdef cli\\\\r\\\\n\\\\r\\\\n_cli_completion() {\\\\r\\\\n    local -a completions\\\\r\\\\n    loc...",
+     "produced": [
+      "<click.shell_completion.ZshComplete object at 0x7fa1074ae590>"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_shell_completion.py::test_source_uses_lf_line_endings",
+     "side": "left",
+     "demanded": "AssertionError('assert b\\'\\\\r\\\\n\\' not in b\\'#compdef cli\\\\r\\\\n\\\\r\\\\n_cli_completion() {\\\\r\\\\n    local -a completion...",
+     "produced": [
+      "<click.shell_completion.ZshComplete object at 0x7fa1074ae590>"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    }
+   ],
+   "greens": [],
+   "green_count": 0,
+   "survivors": 0,
+   "parameters_stored": 0,
+   "seconds": 1.1
+  },
+  {
+   "repo": "jinja",
+   "commit": "a150ff749a0347c41e8e353c2ce2063e8f84ab42",
+   "test": "tests/test_async.py",
+   "stage": "NO_RELATION_BETWEEN_THE_DEMAND_AND_THE_SITE",
+   "failing_test": "tests/test_async.py::test_getitem_after_filter",
+   "site_line": 1758,
+   "site_expression": "'await auto_await('",
+   "table": [],
+   "audit": null,
+   "prose_refused": 0,
+   "refusals": [
+    {
+     "node": "tests/test_async.py::test_getitem_after_filter",
+     "side": "right",
+     "demanded": "(\"'coroutine' object is not subscriptable\",)",
+     "produced": [
+      "'await auto_await('"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_async.py::test_getitem_after_filter",
+     "side": "left",
+     "demanded": "TypeError(\"'coroutine' object is not subscriptable\")",
+     "produced": [
+      "'await auto_await('"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_async.py::test_getitem_after_filter",
+     "side": "right",
+     "demanded": "('Exception ignored in: <coroutine object auto_await at 0x7f2606f28d40>\\nEnable tracemalloc to get traceback where th...",
+     "produced": [
+      "'await auto_await('"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_async.py::test_getitem_after_filter",
+     "side": "left",
+     "demanded": "PytestUnraisableExceptionWarning('Exception ignored in: <coroutine object auto_await at 0x7f2606f28d40>\\nEnable trace...",
+     "produced": [
+      "'await auto_await('"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_async.py::test_getitem_after_call",
+     "side": "right",
+     "demanded": "(\"'coroutine' object is not subscriptable\",)",
+     "produced": [],
+     "reason": "THE_SITE_PRODUCED_NO_VALUE"
+    },
+    {
+     "node": "tests/test_async.py::test_getitem_after_call",
+     "side": "left",
+     "demanded": "TypeError(\"'coroutine' object is not subscriptable\")",
+     "produced": [],
+     "reason": "THE_SITE_PRODUCED_NO_VALUE"
+    },
+    {
+     "node": "tests/test_async.py::test_getitem_after_call",
+     "side": "right",
+     "demanded": "('Exception ignored in: <coroutine object auto_await at 0x7f260848c930>\\nEnable tracemalloc to get traceback where th...",
+     "produced": [],
+     "reason": "THE_SITE_PRODUCED_NO_VALUE"
+    },
+    {
+     "node": "tests/test_async.py::test_getitem_after_call",
+     "side": "left",
+     "demanded": "PytestUnraisableExceptionWarning('Exception ignored in: <coroutine object auto_await at 0x7f260848c930>\\nEnable trace...",
+     "produced": [],
+     "reason": "THE_SITE_PRODUCED_NO_VALUE"
+    }
+   ],
+   "greens": [],
+   "green_count": 0,
+   "survivors": 0,
+   "parameters_stored": 0,
+   "seconds": 1.53
+  },
+  {
+   "repo": "jinja",
+   "commit": "89310770585ed0fb8d10c46cf8d6f447bb807467",
+   "test": "tests/test_loader.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "attrs",
+   "commit": "1c962d15a743a3c18401f0c788f0fd0cb3d9acf8",
+   "test": "tests/test_annotations.py",
+   "stage": "DEMAND_MET",
+   "failing_test": "tests/test_annotations.py::TestAnnotations::test_catches_basic_type_conflict",
+   "site_line": 2494,
+   "site_expression": "'Type annotation and type argument cannot both be present'",
+   "human_expression": "f\"Type annotation and type argument cannot both be present for '{name}'.\"",
+   "count_contrasts": false,
+   "identify_curve": null,
+   "audit": {
+    "expression": "f\"Type annotation and type argument cannot both be present for '{name}'.\"",
+    "failing_rows": 1,
+    "reasons": [],
+    "verdict": "ADMISSIBLE"
+   },
+   "table": [
+    {
+     "node": "tests/test_annotations.py::TestAnnotations::test_catches_basic_type_conflict",
+     "relation": "UNWRAPPED",
+     "demand": "'Type annotation and type argument cannot both be present'"
+    },
+    {
+     "node": "tests/test_annotations.py::TestAnnotations::test_catches_basic_type_conflict",
+     "relation": "UNWRAPPED",
+     "demand": "\"Type annotation and type argument cannot both be present for 'x'.\""
+    }
+   ],
+   "human_admissible": true,
+   "contrast": {
+    "rows": 0,
+    "admissible": 2,
+    "masks": {
+     "0": 2
+    },
+    "human_mask": 0,
+    "human_mask_bits": "0b0"
+   },
+   "frames": 1,
+   "table_rows": 2,
+   "space_offered_before_survivors": 151099,
+   "survivors": 2,
+   "survivor_sources": [
+    "induced:tests/test_annotations.py::TestAnnotations::test_catches_basic_type_conflict",
+    "induced:tests/test_annotations.py::TestAnnotations::test_catches_basic_type_conflict"
+   ],
+   "human_expression_rank": -1,
+   "verifications": 2,
+   "found": {
+    "rank": -1,
+    "expression": "f\"Type annotation and type argument cannot both be present for '{name}'.\"",
+    "ring": 4,
+    "source": "induced:tests/test_annotations.py::TestAnnotations::test_catches_basic_type_conflict",
+    "preserves": 0,
+    "mask": "0b0",
+    "tests_green": 47
+   },
+   "greens": [
+    {
+     "expression": "f\"Type annotation and type argument cannot both be present for '{name}'.\"",
+     "rank": -1,
+     "source": "induced:tests/test_annotations.py::TestAnnotations::test_catches_basic_type_conflict",
+     "tests_green": 47
+    },
+    {
+     "expression": "f\"Type annotation and type argument cannot both be present for {name!r}.\"",
+     "rank": -1,
+     "source": "induced:tests/test_annotations.py::TestAnnotations::test_catches_basic_type_conflict",
+     "tests_green": 47
+    }
+   ],
+   "green_count": 2,
+   "found_is_the_human_fix": true,
+   "parameters_stored": 0,
+   "seconds": 8.64
+  },
+  {
+   "repo": "attrs",
+   "commit": "1e07f46897488350bb44ed88f1c70d4d7461dde0",
+   "test": "tests/test_annotations.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "attrs",
+   "commit": "dbb25ce34787a30e2ffa65685f6c689a269c3521",
+   "test": "tests/test_functional.py",
+   "stage": "THE_SITE_NEVER_RAN_IN_THE_FAILING_TEST",
+   "failing_test": "tests/test_functional.py::TestFunctional::test_init_subclass[True]",
+   "site_line": 713,
+   "seconds": 2.95
+  },
+  {
+   "repo": "attrs",
+   "commit": "edcaf04a4d6b1b92996de668af9f6fea266efba2",
+   "test": "tests/test_make.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "click",
+   "commit": "051bb0f30b545cf7426deef819811815297c2798",
+   "test": "tests/test_termui.py",
+   "stage": "NO_RELATION_BETWEEN_THE_DEMAND_AND_THE_SITE",
+   "failing_test": "tests/test_termui.py::test_get_pager_file_missing_pager_keeps_borrowed_stream_open",
+   "site_line": 640,
+   "site_expression": "_SkipClose",
+   "table": [],
+   "audit": null,
+   "prose_refused": 0,
+   "refusals": [
+    {
+     "node": "tests/test_termui.py::test_get_pager_file_missing_pager_keeps_borrowed_stream_open",
+     "side": "right",
+     "demanded": "('assert not True\\n +  where True = <_io.BytesIO object at 0x7f2a3b834130>.closed',)",
+     "produced": [],
+     "reason": "THE_SITE_PRODUCED_NO_VALUE"
+    },
+    {
+     "node": "tests/test_termui.py::test_get_pager_file_missing_pager_keeps_borrowed_stream_open",
+     "side": "left",
+     "demanded": "AssertionError('assert not True\\n +  where True = <_io.BytesIO object at 0x7f2a3b834130>.closed')",
+     "produced": [],
+     "reason": "THE_SITE_PRODUCED_NO_VALUE"
+    },
+    {
+     "node": "tests/test_termui.py::test_echo_via_pager_tty_pager_missing",
+     "side": "right",
+     "demanded": "('I/O operation on closed file.',)",
+     "produced": [],
+     "reason": "THE_SITE_PRODUCED_NO_VALUE"
+    },
+    {
+     "node": "tests/test_termui.py::test_echo_via_pager_tty_pager_missing",
+     "side": "left",
+     "demanded": "ValueError('I/O operation on closed file.')",
+     "produced": [],
+     "reason": "THE_SITE_PRODUCED_NO_VALUE"
+    }
+   ],
+   "greens": [],
+   "green_count": 0,
+   "survivors": 0,
+   "parameters_stored": 0,
+   "seconds": 1.71
+  },
+  {
+   "repo": "click",
+   "commit": "32ae2acd3474a57d2450ea849545b2e1258bf76a",
+   "test": "tests/test_shell_completion.py",
+   "stage": "NO_RELATION_BETWEEN_THE_DEMAND_AND_THE_SITE",
+   "failing_test": "tests/test_shell_completion.py::test_choice_case_sensitive[False-expect0]",
+   "site_line": 411,
+   "site_expression": "map(str, self.choices)",
+   "table": [],
+   "audit": null,
+   "prose_refused": 0,
+   "refusals": [
+    {
+     "node": "tests/test_shell_completion.py::test_choice_case_sensitive[False-expect0]",
+     "side": "right",
+     "demanded": "['au', 'al']",
+     "produced": [
+      "<map object at 0x7f0529e82fe0>"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_shell_completion.py::test_choice_case_sensitive[False-expect0]",
+     "side": "left",
+     "demanded": "['Au', 'al']",
+     "produced": [
+      "<map object at 0x7f0529e82fe0>"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_shell_completion.py::test_choice_case_sensitive[False-expect0]",
+     "side": "right",
+     "demanded": "(\"assert ['Au', 'al'] == ['au', 'al']\\n  \\n  At index 0 diff: 'Au' != 'au'\\n  Use -v to get more diff\",)",
+     "produced": [
+      "<map object at 0x7f0529e82fe0>"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_shell_completion.py::test_choice_case_sensitive[False-expect0]",
+     "side": "left",
+     "demanded": "AssertionError(\"assert ['Au', 'al'] == ['au', 'al']\\n  \\n  At index 0 diff: 'Au' != 'au'\\n  Use -v to get more diff\")",
+     "produced": [
+      "<map object at 0x7f0529e82fe0>"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    }
+   ],
+   "greens": [],
+   "green_count": 0,
+   "survivors": 0,
+   "parameters_stored": 0,
+   "seconds": 1.07
+  },
+  {
+   "repo": "click",
+   "commit": "91de59c6c8abc8251e7af551cd4546cc964288af",
+   "test": "tests/test_options.py",
+   "stage": "NO_RELATION_BETWEEN_THE_DEMAND_AND_THE_SITE",
+   "failing_test": "tests/test_options.py::test_flag_value_optional_behavior",
+   "site_line": 2783,
+   "site_expression": "self.default is UNSET",
+   "table": [],
+   "audit": null,
+   "prose_refused": 0,
+   "refusals": [
+    {
+     "node": "tests/test_options.py::test_flag_value_optional_behavior",
+     "side": "right",
+     "demanded": "0",
+     "produced": [
+      "False"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_options.py::test_flag_value_optional_behavior",
+     "side": "left",
+     "demanded": "2",
+     "produced": [
+      "False"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_options.py::test_flag_value_with_type_conversion",
+     "side": "right",
+     "demanded": "0",
+     "produced": [
+      "False"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_options.py::test_flag_value_with_type_conversion",
+     "side": "left",
+     "demanded": "2",
+     "produced": [
+      "False"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    }
+   ],
+   "greens": [],
+   "green_count": 0,
+   "survivors": 0,
+   "parameters_stored": 0,
+   "seconds": 2.53
+  },
+  {
+   "repo": "click",
+   "commit": "70c673d37eb91ba42a129be9037caf3ebed62f3e",
+   "test": "tests/test_commands.py",
+   "stage": "NO_RELATION_BETWEEN_THE_DEMAND_AND_THE_SITE",
+   "failing_test": "tests/test_commands.py::test_help_param_priority",
+   "site_line": 1300,
+   "site_expression": "HelpOption(help_options)",
+   "table": [],
+   "audit": null,
+   "prose_refused": 0,
+   "refusals": [
+    {
+     "node": "tests/test_commands.py::test_help_param_priority",
+     "side": "right",
+     "demanded": "'Value of b is: True\\n'",
+     "produced": [
+      "<HelpOption my_help>",
+      "<HelpOption my_help>",
+      "<HelpOption my_help>",
+      "<HelpOption my_help>"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_commands.py::test_help_param_priority",
+     "side": "left",
+     "demanded": "'Value of b is: True'",
+     "produced": [
+      "<HelpOption my_help>",
+      "<HelpOption my_help>",
+      "<HelpOption my_help>",
+      "<HelpOption my_help>"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_commands.py::test_help_param_priority",
+     "side": "right",
+     "demanded": "(\"assert 'Value of b is: True' not in 'Value of b is: True\\\\n'\\n  \\n  'Value of b is: True' is contained here:\\n  Str...",
+     "produced": [
+      "<HelpOption my_help>",
+      "<HelpOption my_help>",
+      "<HelpOption my_help>",
+      "<HelpOption my_help>"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_commands.py::test_help_param_priority",
+     "side": "left",
+     "demanded": "AssertionError(\"assert 'Value of b is: True' not in 'Value of b is: True\\\\n'\\n  \\n  'Value of b is: True' is containe...",
+     "produced": [
+      "<HelpOption my_help>",
+      "<HelpOption my_help>",
+      "<HelpOption my_help>",
+      "<HelpOption my_help>"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    }
+   ],
+   "greens": [],
+   "green_count": 0,
+   "survivors": 0,
+   "parameters_stored": 0,
+   "seconds": 1.05
+  },
+  {
+   "repo": "jinja",
+   "commit": "b5120582706b9e997cfd3277b02a32fd35b1c9d4",
+   "test": "tests/test_security.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "attrs",
+   "commit": "ce89f5d11feb0805da9ed10bb165238cc959f1bb",
+   "test": "tests/test_functional.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "attrs",
+   "commit": "13105a64f2de2e257a537ad20c06ffdd1c9d7f94",
+   "test": "tests/test_converters.py",
+   "stage": "NO_RELATION_BETWEEN_THE_DEMAND_AND_THE_SITE",
+   "failing_test": "tests/test_converters.py::TestConverter::test_falsey_converter",
+   "site_line": 2024,
+   "site_expression": "a.converter",
+   "table": [],
+   "audit": null,
+   "prose_refused": 0,
+   "refusals": [
+    {
+     "node": "tests/test_converters.py::TestConverter::test_falsey_converter",
+     "side": "right",
+     "demanded": "(\"'MyConv' object has no attribute '_fmt_converter_call'\",)",
+     "produced": [
+      "<tests.test_converters.TestConverter.test_falsey_converter.<locals>.MyConv object at 0x7ff16ecf4390>"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_converters.py::TestConverter::test_falsey_converter",
+     "side": "left",
+     "demanded": "AttributeError(\"'MyConv' object has no attribute '_fmt_converter_call'\")",
+     "produced": [
+      "<tests.test_converters.TestConverter.test_falsey_converter.<locals>.MyConv object at 0x7ff16ecf4390>"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_converters.py::TestPipe::test_wrapped_annotation",
+     "side": "right",
+     "demanded": "None",
+     "produced": [
+      "Converter(converter=<function pipe.<locals>.pipe_converter at 0x7ff16ebcc400>, takes_self=True, takes_field=True)"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_converters.py::TestPipe::test_wrapped_annotation",
+     "side": "left",
+     "demanded": "<class 'bool'>",
+     "produced": [
+      "Converter(converter=<function pipe.<locals>.pipe_converter at 0x7ff16ebcc400>, takes_self=True, takes_field=True)"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_converters.py::TestPipe::test_wrapped_annotation",
+     "side": "right",
+     "demanded": "(\"assert bool is None\\n +  where None = get_return_type()\\n +    where get_return_type = <attr._compat._AnnotationExt...",
+     "produced": [
+      "Converter(converter=<function pipe.<locals>.pipe_converter at 0x7ff16ebcc400>, takes_self=True, takes_field=True)"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_converters.py::TestPipe::test_wrapped_annotation",
+     "side": "left",
+     "demanded": "AssertionError(\"assert bool is None\\n +  where None = get_return_type()\\n +    where get_return_type = <attr._compat....",
+     "produced": [
+      "Converter(converter=<function pipe.<locals>.pipe_converter at 0x7ff16ebcc400>, takes_self=True, takes_field=True)"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    }
+   ],
+   "greens": [],
+   "green_count": 0,
+   "survivors": 0,
+   "parameters_stored": 0,
+   "seconds": 0.97
+  },
+  {
+   "repo": "attrs",
+   "commit": "f5683b852b1e7ec1f26aabbb55aad332de79066d",
+   "test": "tests/test_annotations.py",
+   "stage": "NO_RELATION_BETWEEN_THE_DEMAND_AND_THE_SITE",
+   "failing_test": "tests/test_annotations.py::TestAnnotations::test_pipe",
+   "site_line": 2242,
+   "site_expression": "attrs_init",
+   "table": [],
+   "audit": null,
+   "prose_refused": 0,
+   "refusals": [
+    {
+     "node": "tests/test_annotations.py::TestAnnotations::test_pipe",
+     "side": "right",
+     "demanded": "(\"'function' object has no attribute 'converter'\",)",
+     "produced": [],
+     "reason": "THE_SITE_PRODUCED_NO_VALUE"
+    },
+    {
+     "node": "tests/test_annotations.py::TestAnnotations::test_pipe",
+     "side": "left",
+     "demanded": "AttributeError(\"'function' object has no attribute 'converter'\")",
+     "produced": [],
+     "reason": "THE_SITE_PRODUCED_NO_VALUE"
+    },
+    {
+     "node": "tests/test_annotations.py::TestAnnotations::test_pipe_empty",
+     "side": "right",
+     "demanded": "(\"'function' object has no attribute 'converter'\",)",
+     "produced": [],
+     "reason": "THE_SITE_PRODUCED_NO_VALUE"
+    },
+    {
+     "node": "tests/test_annotations.py::TestAnnotations::test_pipe_empty",
+     "side": "left",
+     "demanded": "AttributeError(\"'function' object has no attribute 'converter'\")",
+     "produced": [],
+     "reason": "THE_SITE_PRODUCED_NO_VALUE"
+    },
+    {
+     "node": "tests/test_annotations.py::TestAnnotations::test_pipe_non_introspectable",
+     "side": "right",
+     "demanded": "(\"'function' object has no attribute 'converter'\",)",
+     "produced": [],
+     "reason": "THE_SITE_PRODUCED_NO_VALUE"
+    },
+    {
+     "node": "tests/test_annotations.py::TestAnnotations::test_pipe_non_introspectable",
+     "side": "left",
+     "demanded": "AttributeError(\"'function' object has no attribute 'converter'\")",
+     "produced": [],
+     "reason": "THE_SITE_PRODUCED_NO_VALUE"
+    },
+    {
+     "node": "tests/test_annotations.py::TestAnnotations::test_pipe_nullary",
+     "side": "right",
+     "demanded": "(\"'function' object has no attribute 'converter'\",)",
+     "produced": [],
+     "reason": "THE_SITE_PRODUCED_NO_VALUE"
+    },
+    {
+     "node": "tests/test_annotations.py::TestAnnotations::test_pipe_nullary",
+     "side": "left",
+     "demanded": "AttributeError(\"'function' object has no attribute 'converter'\")",
+     "produced": [],
+     "reason": "THE_SITE_PRODUCED_NO_VALUE"
+    }
+   ],
+   "greens": [],
+   "green_count": 0,
+   "survivors": 0,
+   "parameters_stored": 0,
+   "seconds": 1.17
+  },
+  {
+   "repo": "attrs",
+   "commit": "a71fbbad8950e127ebe4509b4ff0d730fb02a8b2",
+   "test": "tests/test_next_gen.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "attrs",
+   "commit": "d0c73d8faa184cdff8d6a0378ed5b85ca57cde7d",
+   "test": "tests/test_validators.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "click",
+   "commit": "a6256bfb5971d5e58585fe7b6c656134e1ade5a4",
+   "test": "tests/test_termui.py",
+   "stage": "NO_RELATION_BETWEEN_THE_DEMAND_AND_THE_SITE",
+   "failing_test": "tests/test_termui.py::test_pipepager_less_detection_matches_stem[less.exe]",
+   "site_line": 491,
+   "site_expression": "color",
+   "table": [],
+   "audit": null,
+   "prose_refused": 0,
+   "refusals": [
+    {
+     "node": "tests/test_termui.py::test_pipepager_less_detection_matches_stem[less.exe]",
+     "side": "right",
+     "demanded": "True",
+     "produced": [],
+     "reason": "THE_SITE_PRODUCED_NO_VALUE"
+    },
+    {
+     "node": "tests/test_termui.py::test_pipepager_less_detection_matches_stem[less.exe]",
+     "side": "left",
+     "demanded": "False",
+     "produced": [],
+     "reason": "THE_SITE_PRODUCED_NO_VALUE"
+    },
+    {
+     "node": "tests/test_termui.py::test_pipepager_less_detection_matches_stem[less.exe]",
+     "side": "right",
+     "demanded": "('assert False is True\\n +  where False = <click._termui_impl._PagerWriter object at 0x7fad24aeda90>.color',)",
+     "produced": [],
+     "reason": "THE_SITE_PRODUCED_NO_VALUE"
+    },
+    {
+     "node": "tests/test_termui.py::test_pipepager_less_detection_matches_stem[less.exe]",
+     "side": "left",
+     "demanded": "AssertionError('assert False is True\\n +  where False = <click._termui_impl._PagerWriter object at 0x7fad24aeda90>.co...",
+     "produced": [],
+     "reason": "THE_SITE_PRODUCED_NO_VALUE"
+    },
+    {
+     "node": "tests/test_termui.py::test_pipepager_less_detection_case_insensitive_on_windows",
+     "side": "right",
+     "demanded": "True",
+     "produced": [],
+     "reason": "THE_SITE_PRODUCED_NO_VALUE"
+    },
+    {
+     "node": "tests/test_termui.py::test_pipepager_less_detection_case_insensitive_on_windows",
+     "side": "left",
+     "demanded": "None",
+     "produced": [],
+     "reason": "THE_SITE_PRODUCED_NO_VALUE"
+    },
+    {
+     "node": "tests/test_termui.py::test_pipepager_less_detection_case_insensitive_on_windows",
+     "side": "right",
+     "demanded": "('assert None is True',)",
+     "produced": [],
+     "reason": "THE_SITE_PRODUCED_NO_VALUE"
+    },
+    {
+     "node": "tests/test_termui.py::test_pipepager_less_detection_case_insensitive_on_windows",
+     "side": "left",
+     "demanded": "AssertionError('assert None is True')",
+     "produced": [],
+     "reason": "THE_SITE_PRODUCED_NO_VALUE"
+    }
+   ],
+   "greens": [],
+   "green_count": 0,
+   "survivors": 0,
+   "parameters_stored": 0,
+   "seconds": 2.28
+  },
+  {
+   "repo": "click",
+   "commit": "b7e5fd4cc7de70280eccd39f2bb956df617e5519",
+   "test": "tests/test_shell_completion.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "click",
+   "commit": "2468b70997a6ec27ced4b4867954c90da3f92075",
+   "test": "tests/test_utils.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "click",
+   "commit": "18d29196c508b249ef1111f1f29c9133e0a8b097",
+   "test": "tests/test_arguments.py",
+   "stage": "NO_RELATION_BETWEEN_THE_DEMAND_AND_THE_SITE",
+   "failing_test": "tests/test_arguments.py::test_argument_custom_class_can_override_type_cast_value_and_never_sees_unset[argument_kwargs1-pass_argv1]",
+   "site_line": 2341,
+   "site_expression": "value in (None, UNSET)",
+   "table": [],
+   "audit": null,
+   "prose_refused": 0,
+   "refusals": [
+    {
+     "node": "tests/test_arguments.py::test_argument_custom_class_can_override_type_cast_value_and_never_sees_unset[argument_kwargs1-pass_argv1]",
+     "side": "right",
+     "demanded": "Sentinel.UNSET",
+     "produced": [
+      "False"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_arguments.py::test_argument_custom_class_can_override_type_cast_value_and_never_sees_unset[argument_kwargs1-pass_argv1]",
+     "side": "left",
+     "demanded": "Sentinel.UNSET",
+     "produced": [
+      "False"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_arguments.py::test_argument_custom_class_can_override_type_cast_value_and_never_sees_unset[argument_kwargs1-pass_argv1]",
+     "side": "right",
+     "demanded": "(\"assert not AssertionError('assert Sentinel.UNSET is not Sentinel.UNSET')\\n +  where AssertionError('assert Sentinel...",
+     "produced": [
+      "False"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_arguments.py::test_argument_custom_class_can_override_type_cast_value_and_never_sees_unset[argument_kwargs1-pass_argv1]",
+     "side": "left",
+     "demanded": "AssertionError(\"assert not AssertionError('assert Sentinel.UNSET is not Sentinel.UNSET')\\n +  where AssertionError('a...",
+     "produced": [
+      "False"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_arguments.py::test_argument_custom_class_can_override_type_cast_value_and_never_sees_unset[argument_kwargs4-pass_argv4]",
+     "side": "right",
+     "demanded": "Sentinel.UNSET",
+     "produced": [
+      "False"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_arguments.py::test_argument_custom_class_can_override_type_cast_value_and_never_sees_unset[argument_kwargs4-pass_argv4]",
+     "side": "left",
+     "demanded": "Sentinel.UNSET",
+     "produced": [
+      "False"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_arguments.py::test_argument_custom_class_can_override_type_cast_value_and_never_sees_unset[argument_kwargs4-pass_argv4]",
+     "side": "right",
+     "demanded": "(\"assert not AssertionError('assert Sentinel.UNSET is not Sentinel.UNSET')\\n +  where AssertionError('assert Sentinel...",
+     "produced": [
+      "False"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_arguments.py::test_argument_custom_class_can_override_type_cast_value_and_never_sees_unset[argument_kwargs4-pass_argv4]",
+     "side": "left",
+     "demanded": "AssertionError(\"assert not AssertionError('assert Sentinel.UNSET is not Sentinel.UNSET')\\n +  where AssertionError('a...",
+     "produced": [
+      "False"
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    }
+   ],
+   "greens": [],
+   "green_count": 0,
+   "survivors": 0,
+   "parameters_stored": 0,
+   "seconds": 1.2
+  },
+  {
+   "repo": "click",
+   "commit": "701b313160be12752e49b3f7cea32402c0969a69",
+   "test": "tests/test_shell_completion.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "click",
+   "commit": "4fd2fea0db423d242aedcae0a5f664efe0a93484",
+   "test": "tests/test_options.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "jinja",
+   "commit": "eec0db8642b25691867890f14fc6c9ca04c8a8c9",
+   "test": "tests/test_loader.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "jinja",
+   "commit": "f3bc9c6a915badd3871eb1bc5aae5421d2f6496d",
+   "test": "tests/test_regression.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "attrs",
+   "commit": "5d6d21aa5e598c600a3610a4721a63e58d89dc5e",
+   "test": "tests/test_converters.py",
+   "stage": "NO_RELATION_BETWEEN_THE_DEMAND_AND_THE_SITE",
+   "failing_test": "tests/test_converters.py::TestConverter::test_annotations_if_last_in_pipe",
+   "site_line": 2952,
+   "site_expression": "converters[-1]",
+   "table": [],
+   "audit": null,
+   "prose_refused": 0,
+   "refusals": [
+    {
+     "node": "tests/test_converters.py::TestConverter::test_annotations_if_last_in_pipe",
+     "side": "right",
+     "demanded": "('return',)",
+     "produced": [],
+     "reason": "THE_SITE_PRODUCED_NO_VALUE"
+    },
+    {
+     "node": "tests/test_converters.py::TestConverter::test_annotations_if_last_in_pipe",
+     "side": "left",
+     "demanded": "KeyError('return')",
+     "produced": [],
+     "reason": "THE_SITE_PRODUCED_NO_VALUE"
+    },
+    {
+     "node": "tests/test_converters.py::TestPipe::test_wrapped_annotation",
+     "side": "right",
+     "demanded": "None",
+     "produced": [
+      "Converter(converter=<function TestPipe.test_wrapped_annotation.<locals>.last at 0x7f9c7ef968e0>, takes_self=False, ta..."
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_converters.py::TestPipe::test_wrapped_annotation",
+     "side": "left",
+     "demanded": "<class 'bool'>",
+     "produced": [
+      "Converter(converter=<function TestPipe.test_wrapped_annotation.<locals>.last at 0x7f9c7ef968e0>, takes_self=False, ta..."
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_converters.py::TestPipe::test_wrapped_annotation",
+     "side": "right",
+     "demanded": "(\"assert bool is None\\n +  where None = get_return_type()\\n +    where get_return_type = <attr._compat._AnnotationExt...",
+     "produced": [
+      "Converter(converter=<function TestPipe.test_wrapped_annotation.<locals>.last at 0x7f9c7ef968e0>, takes_self=False, ta..."
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    },
+    {
+     "node": "tests/test_converters.py::TestPipe::test_wrapped_annotation",
+     "side": "left",
+     "demanded": "AssertionError(\"assert bool is None\\n +  where None = get_return_type()\\n +    where get_return_type = <attr._compat....",
+     "produced": [
+      "Converter(converter=<function TestPipe.test_wrapped_annotation.<locals>.last at 0x7f9c7ef968e0>, takes_self=False, ta..."
+     ],
+     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+    }
+   ],
+   "greens": [],
+   "green_count": 0,
+   "survivors": 0,
+   "parameters_stored": 0,
+   "seconds": 1.0
+  },
+  {
+   "repo": "attrs",
+   "commit": "c2824ac30f315bfbc7398960c6831d68ecc9edb4",
+   "test": "tests/test_make.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"
+  },
+  {
+   "repo": "attrs",
+   "commit": "a8191556c0aad84125d2c3435c5a2352b2f8a9ba",
+   "test": "tests/test_functional.py",
+   "stage": "NO_RELATION_BETWEEN_THE_DEMAND_AND_THE_SITE",
+   "failing_test": "tests/test_functional.py::TestFunctional::test_on_setattr_detect_inherited_validators",
+   "site_line": 918,
+   "site_expression": "_obj_setattr.__get__(self, Attribute)",
+   "table": [],
+   "audit": null,
+   "prose_refused": 0,
+   "refusals": [
+    {
+     "node": "tests/test_functional.py::TestFunctional::test_on_setattr_detect_inherited_validators",
+     "side": "right",
+     "demanded": "\"def __init__(self, x, y):\\n    _setattr(self, 'x', x)\\n    _setattr(self, 'y', y)\\n    if _config._run_validators is...",
+     "produced": [],
+     "reason": "THE_SITE_PRODUCED_NO_VALUE"
+    },
+    {
+     "node": "tests/test_functional.py::TestFunctional::test_on_setattr_detect_inherited_validators",
+     "side": "left",
+     "demanded": "'_setattr = _cached_setattr_get(self)'",
+     "produced": [],
+     "reason": "THE_SITE_PRODUCED_NO_VALUE"
+    },
+    {
+     "node": "tests/test_functional.py::TestFunctional::test_on_setattr_detect_inherited_validators",
+     "side": "right",
+     "demanded": "('assert \\'_setattr = _cached_setattr_get(self)\\' in \"def __init__(self, x, y):\\\\n    _setattr(self, \\'x\\', x)\\\\n    ...",
+     "produced": [],
+     "reason": "THE_SITE_PRODUCED_NO_VALUE"
+    },
+    {
+     "node": "tests/test_functional.py::TestFunctional::test_on_setattr_detect_inherited_validators",
+     "side": "left",
+     "demanded": "AssertionError('assert \\'_setattr = _cached_setattr_get(self)\\' in \"def __init__(self, x, y):\\\\n    _setattr(self, \\'...",
+     "produced": [],
+     "reason": "THE_SITE_PRODUCED_NO_VALUE"
+    }
+   ],
+   "greens": [],
+   "green_count": 0,
+   "survivors": 0,
+   "parameters_stored": 0,
+   "seconds": 2.8
+  }
+ ],
+ "seconds": 31.7
+}

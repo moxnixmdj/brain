@@ -103,8 +103,14 @@ def test_the_demand_is_aligned_to_the_site():
     assert unwrapped == ("the message", "UNWRAPPED")
     element = demand.site_demand(("a", "b"), [("a", "b")])
     assert element is not None
-    one_tuple = demand.site_demand(("the message",), ["something else"])
-    assert one_tuple == ("the message", "UNWRAPPED")
+    # A one-element tuple demand binds across the unwrap *only* when it is the same slot. This assertion
+    # used to demand the opposite — that any one-element tuple bind to any string — and that is exactly
+    # how the instrument came to accuse two human fixes whose message merely differed from the site's
+    # (jinja `a150ff749a`, attrs `13105a64f2`). The demand is *meant* to differ; sharing no content means
+    # it was never about this site.
+    assert demand.site_demand(("the message",), ["something else"]) is None
+    assert demand.site_demand(("the message, for 'x'",), ["the message"]) == (
+        "the message, for 'x'", "UNWRAPPED")
     assert demand.site_demand(object(), [1, 2]) is None
 
 
@@ -275,3 +281,47 @@ def test_a_rendered_assertion_is_not_a_demand():
     assert not demand.is_prose_demand(0)
     assert not demand.is_prose_demand(("the message",))
     assert not demand.is_prose_demand("")
+
+
+def test_a_demand_is_bound_by_the_slot_not_by_equality():
+    """`0 == False` in Python, so equality alone binds a demand to a comparison the site never fed.
+
+    That is exactly how the instrument accused the human's own fix of producing "the wrong value" for an
+    assertion it had nothing to do with (`demanded=[0] produced=[True]`).
+    """
+    assert demand.site_demand(0, [False]) is None
+    assert demand.site_demand(1, [True]) is None
+    assert demand.site_demand(False, [False]) == (False, "DIRECT")
+    assert demand.site_demand("a message", ["a message"]) == ("a message", "DIRECT")
+
+
+def test_the_demanded_text_may_differ_but_must_be_the_same_slot():
+    """A repair IS a difference in content; what must not differ is the kind of thing the slot holds."""
+    old = "Type annotation and type argument cannot both be present"
+    new = "Type annotation and type argument cannot both be present for 'x'."
+    assert demand.site_demand((new,), [old]) == (new, "UNWRAPPED")
+    # an exception message bound to a bool site is not that site's slot
+    assert demand.site_demand(("'MyConv' object has no attribute '_fmt'",), [True]) is None
+    # nor is an unrelated string bound to a string site
+    assert demand.site_demand(("'coroutine' object is not subscriptable",), ["jinja2.compiler"]) is None
+    assert demand.same_slot(new, old) is True
+    assert demand.same_slot("unrelated", "jinja2.compiler") is False
+    assert demand.same_slot(True, 1) is False
+
+
+def test_a_paired_demand_may_differ_from_what_the_site_produced():
+    """The one thing a demand may never do is equal the site's value *because* it is the repair.
+
+    A test that demands 2 where the site produces 3 is the ordinary shape of a numeric bug, and a message
+    repair demands text that differs from the message the site emits. Both are bound by the pairing -- the
+    assertion's other operand already holds what the site produced -- and not by equality, which refuses
+    exactly the rows worth verifying.
+    """
+    assert demand.site_demand(2, [3], paired=True) == (2, "DIRECT")
+    assert demand.site_demand("the message, corrected", ["the message"], paired=True) == (
+        "the message, corrected", "DIRECT")
+    assert demand.site_demand(("the message, corrected",), ["the message"], paired=True) == (
+        "the message, corrected", "UNWRAPPED")
+    # without that evidence the same demand is not bound to that site at all
+    assert demand.site_demand(2, [3]) is None
+    assert demand.site_demand("the message, corrected", ["the message"]) is None
