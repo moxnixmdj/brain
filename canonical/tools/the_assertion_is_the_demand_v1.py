@@ -512,6 +512,21 @@ def live_repr(value: Any, limit: int = 120) -> str:
     return text if len(text) <= limit else text[: limit - 3] + "..."
 
 
+def is_prose_demand(value: Any) -> bool:
+    """True when a "demand" is really pytest's RENDERING of a failure, not a value the site owes.
+
+    Symmetric to `plausible()` on the candidate side. Measured on the audit: three of fourteen rows carried
+    a demand like `assert 'line one\n' == 'line one'` and the instrument then reported that the human's own
+    fix "produced the wrong value" -- an accusation manufactured by the reader.
+    """
+    if not isinstance(value, str):
+        return False
+    text = value.strip()
+    if text.startswith("assert "):
+        return True
+    return (" + where " in text) or ("\n + " in text) or ("<Result" in text) or text.startswith("Failed: ")
+
+
 def safe_equal(left: Any, right: Any) -> bool:
     try:
         return bool(left == right)
@@ -541,12 +556,48 @@ def evaluate(expression: str, locals_by_frame: list[dict[str, Any]]) -> list[Any
     return values
 
 
+def evaluate_verbose(expression: str, locals_by_frame: list[dict[str, Any]]
+                     ) -> tuple[list[Any] | None, str]:
+    """`evaluate`, but it names the reason a frame refused -- the audit needs the reason, not a None."""
+    values: list[Any] = []
+    for namespace in locals_by_frame:
+        globals_ = namespace.get("__globals__") or {}
+        try:
+            signal.setitimer(signal.ITIMER_REAL, 0.05)
+            values.append(eval(compile(expression, "<candidate>", "eval"), globals_, namespace))  # noqa: S307
+        except NameError as error:
+            return None, f"NAME_NOT_IN_FRAME:{error}"
+        except BaseException as error:  # noqa: BLE001
+            return None, f"REFUSED:{type(error).__name__}"
+        finally:
+            signal.setitimer(signal.ITIMER_REAL, 0)
+    return values, "OK"
+
+
 def _alarm(signum, frame):  # noqa: ANN001
     raise _Alarm
 
 
 class _Alarm(Exception):
     pass
+
+
+def evaluate_verbose(expression: str, locals_by_frame: list[dict[str, Any]]
+                     ) -> tuple[list[Any] | None, str]:
+    """`evaluate`, but it names the reason a frame refused -- the audit needs the reason, not a None."""
+    values: list[Any] = []
+    for namespace in locals_by_frame:
+        globals_ = namespace.get("__globals__") or {}
+        try:
+            signal.setitimer(signal.ITIMER_REAL, 0.05)
+            values.append(eval(compile(expression, "<candidate>", "eval"), globals_, namespace))  # noqa: S307
+        except NameError as error:
+            return None, f"NAME_NOT_IN_FRAME:{error}"
+        except BaseException as error:  # noqa: BLE001
+            return None, f"REFUSED:{type(error).__name__}"
+        finally:
+            signal.setitimer(signal.ITIMER_REAL, 0)
+    return values, "OK"
 
 
 def _alarm(signum, frame):  # noqa: ANN001
@@ -619,7 +670,15 @@ def _driver_body(config_path: str) -> int:
             if row["node"] != entry["node"]:
                 continue
             for side in ("right", "left"):
+                if is_prose_demand(row.get(side)):
+                    result.setdefault("prose_refused", 0)
+                    result["prose_refused"] += 1
+                    continue
                 relation = site_demand(row.get(side), part["kept"])
+                if relation is not None and is_prose_demand(relation[0]):
+                    result.setdefault("prose_refused", 0)
+                    result["prose_refused"] += 1
+                    continue
                 if relation is not None and relation[0] not in aligned:
                     aligned.append(relation[0])
                     result["table"].append({"node": entry["node"], "relation": relation[1],
@@ -665,6 +724,39 @@ def _driver_body(config_path: str) -> int:
         result["relation"] = "NONE"
         out.write_text(json.dumps(result, indent=1), encoding="utf-8")
         return 0
+
+    if config.get("audit") and config.get("human_expression"):
+        # RECOGNITION BEFORE SEARCH: does the instrument accept the human's own fix? On the last round it
+        # did so in 1 of 14 rows, and an instrument that cannot accept the truth cannot be trusted to
+        # reject a lie. Every refusal is named here, so the next fix is aimed at a cause and not a hunch.
+        human = config["human_expression"]
+        failing = [part for part in table if part["outcome"] == "failed" and part["frames"]]
+        record: dict[str, Any] = {"expression": human, "failing_rows": len(failing), "reasons": []}
+        if not failing:
+            record["verdict"] = "THE_SITE_NEVER_RAN_IN_THE_FAILING_TEST"
+        else:
+            verdict = "ADMISSIBLE"
+            for part in failing:
+                values, why = evaluate_verbose(human, namespaces(part["frames"]))
+                if values is None:
+                    verdict = "REFUSED"
+                    record["reasons"].append(why)
+                    continue
+                demands = part["demands"] or []
+                if part.get("truth") is not None:
+                    if not any(bool(value) == part["truth"] for value in values):
+                        verdict = "PREDICATE_NOT_MET"
+                        record["reasons"].append(f"truth={part['truth']} produced={live_repr(values[:3])}")
+                    continue
+                if demands and not any(safe_equal(value, wanted) for value in values for wanted in demands):
+                    verdict = "VALUE_DIFFERS"
+                    record["reasons"].append(
+                        f"demanded={live_repr(demands[:2])} produced={live_repr(values[:3])}")
+                elif demands and part["kept"] and not any(
+                        not safe_equal(value, original) for value, original in zip(values, part["kept"])):
+                    verdict = "NO_CHANGE"
+            record["verdict"] = verdict
+        result["audit"] = record
 
     bound = frame_names(table)
     signal.signal(signal.SIGALRM, _alarm)
@@ -861,7 +953,8 @@ def _driver_body(config_path: str) -> int:
 
 def explore(repo: pathlib.Path, entry: dict[str, Any], *, cap: int = 400_000, survivors_cap: int = 24,
             verifications: int = 10, seconds: int = 180,
-            count_contrasts: bool = False, identify_curve: bool = False) -> dict[str, Any]:
+            count_contrasts: bool = False, identify_curve: bool = False,
+            audit: bool = False) -> dict[str, Any]:
     started = time.time()
     sha, test_path = entry["commit"], entry["test"]
     parent = f"{sha}^"
@@ -908,6 +1001,7 @@ def explore(repo: pathlib.Path, entry: dict[str, Any], *, cap: int = 400_000, su
                 "human_expression": site["human_expression"],
                 "count_contrasts": bool(count_contrasts),
                 "identify_curve": bool(identify_curve),
+                "audit": bool(audit),
                 "spec_literals": specification_literals(
                     (worktree / test_path).read_text(encoding="utf-8", errors="replace")),
             }), encoding="utf-8")
@@ -936,12 +1030,27 @@ def explore(repo: pathlib.Path, entry: dict[str, Any], *, cap: int = 400_000, su
                 return {"stage": "NO_RELATION_BETWEEN_THE_DEMAND_AND_THE_SITE",
                         "failing_test": node_id, "site_line": site["line"],
                         "site_expression": site["old_expression"],
-                        "table": driven.get("table"),
+                        "table": driven.get("table"), "audit": driven.get("audit"),
+                        "prose_refused": driven.get("prose_refused", 0),
+                        "greens": [], "green_count": 0, "survivors": 0,
+                        "parameters_stored": 0,
                         "seconds": round(time.time() - started, 2)}
             if not driven.get("assertions"):
                 return {"stage": "NO_ASSERTION_DEMAND", "failing_test": node_id,
                         "site_line": site["line"], "site_expression": site["old_expression"],
                         "frames": driven.get("frames", 0), "pytest_code": driven.get("pytest_code"),
+                        "seconds": round(time.time() - started, 2)}
+
+            audit = driven.get("audit") or {}
+            if audit.get("verdict") == "REFUSED" and any(
+                    str(reason).startswith(("NAME_NOT_IN_FRAME", "REFUSED:AttributeError"))
+                    for reason in audit.get("reasons") or []):
+                # The fix references a name the parent commit does not have: the commit introduces it
+                # elsewhere (a class, an attribute, a local on the changed line). That is a composite edit
+                # wearing a one-line site, and counting it as an expression repair inflates the denominator.
+                return {"stage": "EXCLUDED__THE_FIX_INTRODUCES_A_NAME",
+                        "human_expression": site["human_expression"],
+                        "audit": audit, "parameters_stored": 0,
                         "seconds": round(time.time() - started, 2)}
 
             if os.environ.get("BRAIN_DEBUG_DRIVER"):
@@ -997,10 +1106,12 @@ def explore(repo: pathlib.Path, entry: dict[str, Any], *, cap: int = 400_000, su
                 "human_expression": site["human_expression"],
                 "count_contrasts": bool(count_contrasts),
                 "identify_curve": bool(identify_curve),
+                "audit": bool(audit),
                 "table": driven.get("table"),
                 "human_admissible": driven.get("human_admissible"),
                 "contrast": driven.get("contrast"),
                 "identify_curve": driven.get("identify_curve"),
+                "audit": driven.get("audit"),
                 "frames": driven.get("frames"),
                 "table_rows": len(driven.get("table") or []),
                 "space_offered_before_survivors": driven.get("offered"),
@@ -1024,7 +1135,7 @@ def explore(repo: pathlib.Path, entry: dict[str, Any], *, cap: int = 400_000, su
 
 def sweep(entries: Sequence[dict[str, Any]], *, receipt: pathlib.Path, cap: int,
           survivors_cap: int, verifications: int, seconds: int,
-          identify: bool = False, count: bool = False) -> dict[str, Any]:
+          identify: bool = False, count: bool = False, audit: bool = False) -> dict[str, Any]:
     rows: list[dict[str, Any]] = []
     started = time.time()
     for number, entry in enumerate(entries, 1):
@@ -1032,7 +1143,7 @@ def sweep(entries: Sequence[dict[str, Any]], *, receipt: pathlib.Path, cap: int,
         try:
             result = explore(repo, entry, cap=cap, survivors_cap=survivors_cap,
                              verifications=verifications, seconds=seconds, identify_curve=identify,
-                             count_contrasts=count)
+                             count_contrasts=count, audit=audit)
         except Exception as error:  # noqa: BLE001
             result = {"stage": "EXCEPTION", "error": f"{type(error).__name__}: {error}"[:300]}
         row = {key: entry.get(key) for key in ("repo", "commit", "test")}
@@ -1058,6 +1169,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--verifications", type=int, default=10)
     parser.add_argument("--seconds", type=int, default=180)
     parser.add_argument("--only", default="")
+    parser.add_argument("--audit", action="store_true",
+                        help="does the instrument accept the human's own fix? name every refusal")
     parser.add_argument("--count", action="store_true",
                         help="count every admissible candidate (the live set), not just the first survivors")
     parser.add_argument("--identify", action="store_true",
@@ -1079,7 +1192,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     result = sweep(entries, receipt=args.receipt, cap=args.cap, survivors_cap=args.survivors_cap,
                    verifications=args.verifications, seconds=args.seconds,
                    identify=getattr(args, "identify", False),
-                   count=getattr(args, "count", False))
+                   count=getattr(args, "count", False), audit=getattr(args, "audit", False))
     print(json.dumps({"rows": len(result["rows"]), "receipt": str(args.receipt)}))
     return 0
 
