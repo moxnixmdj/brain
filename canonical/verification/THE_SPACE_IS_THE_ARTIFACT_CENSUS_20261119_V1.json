@@ -1,0 +1,319 @@
+{
+ "schema": "BRAIN_THE_SPACE_IS_THE_ARTIFACT_V1_CENSUS",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "date": "2026-11-19",
+ "rows": [
+  {
+   "repo": "click",
+   "commit": "05f6fd0df4ecbd104eb7a229f9f185c2484dee69",
+   "test": "tests/test_arguments.py",
+   "site": {
+    "source": "src/click/core.py",
+    "line": 1326,
+    "old_expression": "records",
+    "human_expression": "[arg.get_help_record(ctx) for arg in args]"
+   },
+   "reasons": [
+    {
+     "source": "src/click/core.py",
+     "why": "SINGLE_EXPRESSION"
+    }
+   ],
+   "kind": "SINGLE_EXPRESSION"
+  },
+  {
+   "repo": "click",
+   "commit": "665736bc85a19a7a2357c071394b4a545617faa3",
+   "test": "tests/test_commands.py",
+   "site": null,
+   "reasons": [
+    {
+     "source": "src/click/core.py",
+     "why": "MULTI_LINE_EDIT"
+    }
+   ],
+   "kind": "MULTI_LINE_EDIT"
+  },
+  {
+   "repo": "jinja",
+   "commit": "66587ce989e5a478e0bb165371fa2b9d42b7040f",
+   "test": "tests/test_regression.py",
+   "site": null,
+   "reasons": [
+    {
+     "source": "src/jinja2/idtracking.py",
+     "why": "MULTI_LINE_EDIT"
+    }
+   ],
+   "kind": "MULTI_LINE_EDIT"
+  },
+  {
+   "repo": "jinja",
+   "commit": "d3a0b1a4abac05a071f542aa83edea4551c88fa3",
+   "test": "tests/test_nativetypes.py",
+   "site": null,
+   "reasons": [
+    {
+     "source": "src/jinja2/runtime.py",
+     "why": "MULTI_LINE_EDIT"
+    }
+   ],
+   "kind": "MULTI_LINE_EDIT"
+  },
+  {
+   "repo": "jinja",
+   "commit": "1c036cac2fe61486e3bb1cc27474bf3e09ee0cd4",
+   "test": "tests/test_filters.py",
+   "site": null,
+   "reasons": [
+    {
+     "source": "src/jinja2/filters.py",
+     "why": "MULTI_LINE_EDIT"
+    }
+   ],
+   "kind": "MULTI_LINE_EDIT"
+  },
+  {
+   "repo": "attrs",
+   "commit": "862696afb52fb7c0d47d45e05ec4feb844c11001",
+   "test": "tests/test_functional.py",
+   "site": {
+    "source": "src/attr/_make.py",
+    "line": 2627,
+    "old_expression": "True",
+    "human_expression": "name != 'alias_is_default'"
+   },
+   "reasons": [
+    {
+     "source": "src/attr/_make.py",
+     "why": "SINGLE_EXPRESSION"
+    }
+   ],
+   "kind": "SINGLE_EXPRESSION"
+  },
+  {
+   "repo": "attrs",
+   "commit": "6e3786c599279f24e91b0d57ef448f7a85d7a69f",
+   "test": "tests/test_make.py",
+   "site": {
+    "source": "src/attr/_make.py",
+    "line": 117,
+    "old_expression": "False",
+    "human_expression": "None"
+   },
+   "reasons": [
+    {
+     "source": "src/attr/_make.py",
+     "why": "SINGLE_EXPRESSION"
+    },
+    {
+     "source": "src/attr/_next_gen.py",
+     "why": "SINGLE_EXPRESSION"
+    }
+   ],
+   "kind": "SINGLE_EXPRESSION"
+  },
+  {
+   "repo": "attrs",
+   "commit": "937b1e232803cc4ec9b9375ef525fc57c24ec498",
+   "test": "tests/test_make.py",
+   "site": {
+    "source": "src/attr/_make.py",
+    "line": 2325,
+    "old_expression": "args",
+    "human_expression": "', '.join(pre_init_args)"
+   },
+   "reasons": [
+    {
+     "source": "src/attr/_make.py",
+     "why": "SINGLE_EXPRESSION"
+    }
+   ],
+   "kind": "SINGLE_EXPRESSION"
+  },
+  {
+   "repo": "click",
+   "commit": "c3535905c77a29afc84861b29d3ad366ce5451bd",
+   "test": "tests/test_shell_completion.py",
+   "site": null,
+   "reasons": [
+    {
+     "source": "src/click/shell_completion.py",
+     "why": "MULTI_LINE_EDIT"
+    }
+   ],
+   "kind": "MULTI_LINE_EDIT"
+  },
+  {
+   "repo": "click",
+   "commit": "7d05a59b9d46a415d85937630d1d812cf477f60a",
+   "test": "tests/test_defaults.py",
+   "site": null,
+   "reasons": [
+    {
+     "source": "src/click/core.py",
+     "why": "MULTI_LINE_EDIT"
+    }
+   ],
+   "kind": "MULTI_LINE_EDIT"
+  },
+  {
+   "repo": "click",
+   "commit": "61bdc2ae81f6d0dc19bd247504544659245df056",
+   "test": "tests/test_termui.py",
+   "site": null,
+   "reasons": [
+    {
+     "source": "src/click/termui.py",
+     "why": "MULTI_LINE_EDIT"
+    }
+   ],
+   "kind": "MULTI_LINE_EDIT"
+  },
+  {
+   "repo": "click",
+   "commit": "19fd4d6e18bc9fce451f92f422696b11169faa57",
+   "test": "tests/test_shell_completion.py",
+   "site": null,
+   "reasons": [
+    {
+     "source": "src/click/shell_completion.py",
+     "why": "MULTI_LINE_EDIT"
+    }
+   ],
+   "kind": "MULTI_LINE_EDIT"
+  },
+  {
+   "repo": "click",
+   "commit": "607316f9dea85ee81f8a215f5d5ae20f7f4fff71",
+   "test": "tests/test_options.py",
+   "site": {
+    "source": "src/click/core.py",
+    "line": 3170,
+    "old_expression": "isinstance(self.show_default, bool)",
+    "human_expression": "self.show_default is not None"
+   },
+   "reasons": [
+    {
+     "source": "src/click/core.py",
+     "why": "SINGLE_EXPRESSION"
+    },
+    {
+     "source": "src/click/termui.py",
+     "why": "SINGLE_EXPRESSION"
+    }
+   ],
+   "kind": "SINGLE_EXPRESSION"
+  },
+  {
+   "repo": "jinja",
+   "commit": "baff54fe1d7b74c9fa8adb9d1324a77b8a2640ad",
+   "test": "tests/test_async.py",
+   "site": {
+    "source": "src/jinja2/compiler.py",
+    "line": 1096,
+    "old_expression": "'_get_default_module(context)'",
+    "human_expression": "f\"_get_default_module{self.choose_async('_async')}(context)\""
+   },
+   "reasons": [
+    {
+     "source": "src/jinja2/compiler.py",
+     "why": "SINGLE_EXPRESSION"
+    }
+   ],
+   "kind": "SINGLE_EXPRESSION"
+  },
+  {
+   "repo": "attrs",
+   "commit": "fd7538f0e23a49ec34b636484de2d1b4b690c7fb",
+   "test": "tests/test_validators.py",
+   "site": {
+    "source": "src/attr/validators.py",
+    "line": 245,
+    "old_expression": "self.options",
+    "human_expression": "self._original_options"
+   },
+   "reasons": [
+    {
+     "source": "src/attr/validators.py",
+     "why": "SINGLE_EXPRESSION"
+    }
+   ],
+   "kind": "SINGLE_EXPRESSION"
+  },
+  {
+   "repo": "attrs",
+   "commit": "0bf0678a224dc89f150eb55861700864bec85cf6",
+   "test": "tests/test_funcs.py",
+   "site": null,
+   "reasons": [
+    {
+     "source": "src/attr/_funcs.py",
+     "why": "MULTI_LINE_EDIT"
+    }
+   ],
+   "kind": "MULTI_LINE_EDIT"
+  },
+  {
+   "repo": "attrs",
+   "commit": "7d55876ed34bf74a9c402164c11bb1f28804fd12",
+   "test": "tests/test_validators.py",
+   "site": {
+    "source": "src/attr/validators.py",
+    "line": 280,
+    "old_expression": "list",
+    "human_expression": "(list, tuple)"
+   },
+   "reasons": [
+    {
+     "source": "src/attr/validators.py",
+     "why": "SINGLE_EXPRESSION"
+    }
+   ],
+   "kind": "SINGLE_EXPRESSION"
+  },
+  {
+   "repo": "attrs",
+   "commit": "c7308a66ef1f4e60f7dbfa75177634666817d861",
+   "test": "tests/test_annotations.py",
+   "site": null,
+   "reasons": [
+    {
+     "source": "src/attr/_compat.py",
+     "why": "MULTI_LINE_EDIT"
+    },
+    {
+     "source": "src/attr/_funcs.py",
+     "why": "MULTI_LINE_EDIT"
+    }
+   ],
+   "kind": "MULTI_LINE_EDIT"
+  },
+  {
+   "repo": "attrs",
+   "commit": "0f6a9b47534912189db1200aeb7c9fb19348311e",
+   "test": "tests/test_functional.py",
+   "site": {
+    "source": "src/attr/_make.py",
+    "line": 1531,
+    "old_expression": "hash_",
+    "human_expression": "hash"
+   },
+   "reasons": [
+    {
+     "source": "docs/conf.py",
+     "why": "MULTI_LINE_EDIT"
+    },
+    {
+     "source": "src/attr/_make.py",
+     "why": "SINGLE_EXPRESSION"
+    },
+    {
+     "source": "src/attr/_next_gen.py",
+     "why": "MULTI_LINE_EDIT"
+    }
+   ],
+   "kind": "SINGLE_EXPRESSION"
+  }
+ ]
+}
