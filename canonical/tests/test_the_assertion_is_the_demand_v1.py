@@ -165,7 +165,10 @@ def test_two_demands_and_a_passing_test_constrain_the_candidate(tmp_path):
     entry = {"repo": "fixture", "commit": sha, "sources": ["src/m.py"], "test": "tests/test_m.py",
              "repo_path": str(repo)}
     result = demand.explore(repo, entry, cap=20_000, survivors_cap=12, verifications=8, seconds=120)
-    assert result["stage"] in ("DEMAND_MET", "NO_VALUE_MATCHES"), result
+    # `NO_RELATION_BETWEEN_THE_DEMAND_AND_THE_SITE` is now the honest answer for this fixture: the only
+    # "demand" it ever produced was pytest's rendering, which the reader refuses as prose.
+    assert result["stage"] in ("DEMAND_MET", "NO_VALUE_MATCHES",
+                               "NO_RELATION_BETWEEN_THE_DEMAND_AND_THE_SITE"), result
     if result["stage"] == "DEMAND_MET":
         assert result["found"]["tests_green"] >= 2
         assert result["parameters_stored"] == 0
@@ -248,7 +251,7 @@ def test_explore_reports_the_ambiguity_of_the_gate(tmp_path):
     entry = {"repo": "fixture", "commit": sha, "sources": ["src/m.py"], "test": "tests/test_m.py",
              "repo_path": str(repo)}
     result = demand.explore(repo, entry, cap=20_000, survivors_cap=8, verifications=6, seconds=120,
-                            count_contrasts=True, identify_curve=True)
+                            count_contrasts=True, identify_curve=True, audit=True)
     assert isinstance(result.get("greens"), list)
     assert result.get("green_count") == len(result["greens"])
     contrast = result.get("contrast") or {}
@@ -257,3 +260,18 @@ def test_explore_reports_the_ambiguity_of_the_gate(tmp_path):
     if curve:
         values = [curve["curve"][str(k)] for k in range(curve["observations"] + 1)]
         assert values == sorted(values, reverse=True)
+
+
+def test_a_rendered_assertion_is_not_a_demand():
+    """pytest's rendering of a failure is not a value the site owes, and reading it as one accuses the truth.
+
+    On the audit this was measured: three of fourteen rows carried a demand that began with `assert `, and
+    the instrument then reported that the human's own fix "produced the wrong value".
+    """
+    assert demand.is_prose_demand("assert 'line one\nline two\n\n' == 'line one\n\n + where x = 1")
+    assert demand.is_prose_demand("assert not AssertionError('assert a is not b')")
+    assert demand.is_prose_demand("Failed: DID NOT RAISE <class 'ValueError'>")
+    assert not demand.is_prose_demand("Type annotation and type argument cannot both be present for 'x'.")
+    assert not demand.is_prose_demand(0)
+    assert not demand.is_prose_demand(("the message",))
+    assert not demand.is_prose_demand("")

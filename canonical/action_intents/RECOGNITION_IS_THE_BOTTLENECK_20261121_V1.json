@@ -1,0 +1,545 @@
+{
+ "action_id": "RECOGNITION_IS_THE_BOTTLENECK_20261121_V1",
+ "action_intent_id": "RECOGNITION_IS_THE_BOTTLENECK_20261121_V1",
+ "action_kind": "REAL_CAPABILITY_ACQUISITION",
+ "action_summary": "Adds --audit to the demand instrument: it evaluates the human's own replacement at every recorded frame of the failing test and names why it is refused. Two corrections follow from the audit: pytest's rendering is refused as a demand (14 strings on this corpus), and a commit whose fix references a name the parent does not have is reclassified out of the denominator. 30 real commits, 71.9 s, zero parameters.",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "earlier_routes_exhausted_reason": "Refused by measurement, in order: a bigger vocabulary (the space said 2 of 9 and the answer sat at rank 2887), a wider grammar (same two, ranks 186 and 3034), an oracle as a scalar (0 verified repairs in 32 questions per row), stored experience (parameters_stored 0, does not generalise), and the failure text as an index (0 of 15). What is left is the demand itself, which this round reads and spends no questions on.",
+  "incremental_spend_usd": 0,
+  "independent_verification_completed": false,
+  "independent_verification_note": "Producer-run sandbox only. Every number is a receipt row: 30 fresh commits, 74.9 s, 15 structural exclusions, 1 site-never-ran, 13 no-value-matches, 1 verified repair equal to the human's own fix, and the human fix admissible in 1 of 14 in-class rows.",
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md",
+   "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+  "progress_evidence_paths": [
+   "canonical/tools/the_assertion_is_the_demand_v1.py",
+   "canonical/tests/test_the_assertion_is_the_demand_v1.py",
+   "canonical/verification/RECOGNITION_IS_THE_BOTTLENECK_20261121_V1.json",
+   "RECOGNITION_IS_THE_BOTTLENECK_20261121_V1.md"
+  ],
+  "route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+  "scope_complete_discharge": false,
+  "terminal_achieved": false
+ },
+ "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Recognition, not search. An instrument that cannot accept the truth 13 times out of 14 has no recall problem -- it does not know what it is looking for, and every 'no candidate' it reports is contaminated by its own reader.",
+ "canonical_base_commit": "01c406b81d9bacf3b125d8b887f82ebfa8ad6978",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "Recognition, not search. An instrument that cannot accept the truth 13 times out of 14 has no recall problem -- it does not know what it is looking for, and every 'no candidate' it reports is contaminated by its own reader.",
+ "date": "2026-11-21",
+ "expected_parent_change": "The claim that the demanded value converts selection into evaluation is confirmed arithmetically (0.5 s vs ~10 microseconds, 10,000x, 2.5 s per commit end to end) and refuted as a capability claim: precision is 1/1 but recall is 1/15 in class, and the first verified patch was a constant. What moves next is the admission rule and the predicate reader, with acceptance numbers declared before the build.",
+ "expected_parent_frontier_change": "The frontier moves from 'the demand is a value' to 'the demand is a predicate over an enumerable reference space'. Two numbers are now on the record as falsifiers for the next round: the human's fix must become admissible in at least 10 of 14 rows (now 1 of 14), and verified generalising repairs must go from 1 to at least 8 of 30 (now 1). A round that adds vocabulary or grammar without a predicate reader is spending effort on the half that was already measured cheap.",
+ "explicit_user_authorization": [
+  "Why can't we just give our model the most advanced coding actions, let it experience them once, and have it learn them? Can't we do this now?",
+  "we are building our own model. never reach for another model or use it and call it ours",
+  "every bit of our weights must be calculated, not a knowledge house",
+  "the best part is no part",
+  "you must think from first principles for everything",
+  "You should kill all the bad and dumb ideas before you waste time implementing them.",
+  "NEVER BUILD BEFORE REASRCHING EXHAUSTION IS HAPPENED",
+  "maximize your web use",
+  "What is the single bottleneck that, if fixed, would unlock the most capability?",
+  "all the tests are not on synthetic data but are on the hardest open tests",
+  "only our agent/system may run them; integrity 100% real",
+  "the honest truth is that we keep testing on bugs we already know work",
+  "Work in branch, merge only when complete (fastest)",
+  "Merge once, not 10 times."
+ ],
+ "falsification_condition": "FALSIFIED if the audit's verdicts are reported without the rows that produced them; if a prose demand is counted as a wrong answer by the human; if a composite edit is counted as an expression repair; if the accusations are said to have fallen without naming which three remain.",
+ "generic_repair_from_single_probe": false,
+ "governance_change": false,
+ "highest_leverage_now": true,
+ "incremental_spend_usd": 0,
+ "intentional_route_race": false,
+ "load_bearing_primary": {
+  "constructive_gap_for_open_obligation_ids": [
+   "CODING_TB4_GE_66_4"
+  ],
+  "expected_obligation_discharge_lcb": 0,
+  "expected_obligation_unlock_lcb": "1/50",
+  "interpretation": "Speculative forecast only. The round removes a false route (parameters or a better index) and leaves the content problem isolated, which is the only way the next mechanism can be falsified. No truth obligation is discharged.",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "1/2",
+  "wall_clock_cost_ub": 1
+ },
+ "measured_effect": {
+  "after_corrections": {
+   "ADMISSIBLE": 1,
+   "REFUSED": 2,
+   "THE_SITE_NEVER_RAN": 2,
+   "VALUE_DIFFERS": 3,
+   "audited": 8,
+   "prose_demands_refused": 14,
+   "stages": {
+    "demand_met": 1,
+    "fix_introduces_a_name": 2,
+    "no_relation_prose_refused": 6,
+    "no_value_matches": 5,
+    "not_single_expression": 15,
+    "site_never_ran": 1
+   }
+  },
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "before_corrections": {
+   "ADMISSIBLE": 1,
+   "REFUSED": 4,
+   "THE_SITE_NEVER_RAN": 3,
+   "VALUE_DIFFERS": 6,
+   "audited": 14
+  },
+  "corpus": {
+   "repos": [
+    "click",
+    "jinja",
+    "attrs"
+   ],
+   "rows": 30,
+   "source": "the 30 commit SHAs of the previous round's receipt, re-mined for their changed source files"
+  },
+  "cost": {
+   "model_calls": 0,
+   "parameters_stored": 0,
+   "seconds": 71.9
+  },
+  "external_state": {
+   "memory_relocates_the_problem": "arXiv 2604.27003: external memory moves continual learning to representation and retrieval rather than removing it",
+   "strict_evaluators_decide_what_memory_is_worth": "ACL 2026 (2026.acl-long.27): unfiltered experience addition performs below a fixed-memory baseline; strict evaluators are what help",
+   "verifier_gate_decides": "Skill-Pro (ICML 2026): removing the verifier gate makes the agent reuse plausible, wrong skills"
+  },
+  "named_residuals": [
+   "91de59c6c8: demanded=[0] produced=[True] -- the demand is bound to an assertion the site has nothing to do with",
+   "13105a64f2: the demand is an exception message; the site does not produce it",
+   "a150ff749a: the demand is a coroutine/lazy-object message; the site does not produce it",
+   "becbde5cf4: the fix introduces _SkipClose, a class defined in the same commit",
+   "5d6d21aa5e: the fix uses `last`, a name the parent commit does not bind at that line"
+  ],
+  "what_this_does_not_claim": "That the 5 NO_VALUE_MATCHES rows are impossible; that the 2 excluded composites are failures; that 1 admissible row is a ceiling. All three are facts about this reader and this closure, and the audit exists so the next round moves a named cause."
+ },
+ "next_step": "Kill the mis-attributed demand: bind each comparison to the assertion whose operands the site actually produced, and refuse a demand that cannot be bound. Acceptance: accusations against the truth = 0 on the audited rows, ADMISSIBLE >= 6 of the audited rows, and the verified count unchanged at 1 or better.",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "prior_work_reused": [
+  "canonical/tools/expressions_from_a_site_v1.py",
+  "canonical/tools/force_the_value_and_see_v1.py",
+  "canonical/tools/is_the_fix_even_in_the_pool_v1.py",
+  "canonical/tools/identify_a_real_bugs_fix_v1.py",
+  "canonical/tools/what_a_real_fix_needs_from_the_site_v1.py",
+  "canonical/tools/the_same_guard_twice_is_the_discriminator_v1.py",
+  "canonical/verification/THE_SAME_GUARD_TWICE_IS_THE_DISCRIMINATOR_20261119_V1.json",
+  "canonical/verification/INSUFFICIENCY_CERTIFICATE_20261113_V1.json"
+ ],
+ "probe_specific": false,
+ "progress_evidence_paths": [
+  "canonical/tools/the_assertion_is_the_demand_v1.py",
+  "canonical/tests/test_the_assertion_is_the_demand_v1.py",
+  "canonical/verification/THE_ASSERTION_IS_THE_DEMAND_20261119_V1.json",
+  "THE_ASSERTION_IS_THE_DEMAND_20261119_V1.md",
+  "canonical/tools/the_space_is_the_artifact_v1.py",
+  "canonical/action_intents/THE_SPACE_IS_THE_ARTIFACT_20261119_V1.json"
+ ],
+ "real_outcome": "Before the corrections the instrument accepted the human's fix in 1 of 14 audited rows and accused it of a wrong value in 6. The audit named the causes: 2 refusals were fixes that introduce their own names (_SkipClose, an added attribute) -- composite edits that had been counted as single-expression repairs -- and 3 of the 6 accusations were demands that were pytest's rendering of the failure rather than values. After the corrections the accusations fell to 3, every one named: one mis-attributed demand ([0] vs [True]) and two exception-message demands. The verified row is unchanged and still the human's own fix.",
+ "recursive_obs": {
+  "canonical_base_commit": "01c406b81d9bacf3b125d8b887f82ebfa8ad6978",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "printing 1 of 14 admissible without asking why (the audit is what makes the number usable)",
+   "accepting pytest's rendering of a failure as the value the site owes",
+   "counting a commit that introduces its own names as a single-expression repair",
+   "reporting an accusation against the human's fix without naming the demand it was based on"
+  ],
+  "expected_parent_frontier_change": "The frontier moves from 'the demand is a value' to 'the demand is a predicate over an enumerable reference space'. Two numbers are now on the record as falsifiers for the next round: the human's fix must become admissible in at least 10 of 14 rows (now 1 of 14), and verified generalising repairs must go from 1 to at least 8 of 30 (now 1). A round that adds vocabulary or grammar without a predicate reader is spending effort on the half that was already measured cheap.",
+  "expected_parent_level_state_change": "The frontier moves from 'the demand is a value' to 'the demand is a predicate over an enumerable reference space'. Two numbers are now on the record as falsifiers for the next round: the human's fix must become admissible in at least 10 of 14 rows (now 1 of 14), and verified generalising repairs must go from 1 to at least 8 of 30 (now 1). A round that adds vocabulary or grammar without a predicate reader is spending effort on the half that was already measured cheap.",
+  "independent_verification_required": true,
+  "iteration_limit": 1,
+  "obs_blocker": {
+   "delete_bypass_substitute_options": [
+    "delete the admissible fraction as a capability measure -- it is a recognition measure and is now labelled so",
+    "bypass the audit by trusting the demand reader (it accused the truth six times)",
+    "substitute the corpus's suite for a recogniser: the suite is the gate, the audit is the reader"
+   ],
+   "intrinsic_or_path_specific": "intrinsic: whether a demand can be bound to an assertion is a fact about the program and the test, not about the searcher.",
+   "surviving_causal_blocker": "Recognition, not search. An instrument that cannot accept the truth 13 times out of 14 has no recall problem -- it does not know what it is looking for, and every 'no candidate' it reports is contaminated by its own reader."
+  },
+  "obs_capability": {
+   "capability_work_deleted": [
+    "a stored attribute vocabulary (dir() is fresher and costs nothing)",
+    "a stored grammar table (the language's own grammar is reused)",
+    "requiring one differing node to call an edit a single expression (it manufactured a 10-of-19 exclusion that was a property of the tool)"
+   ],
+   "existing_inherited_routes_checked": [
+    "canonical/tools/the_failing_run_names_the_expression_v1.py (arm A, run on the same 15 commits)",
+    "canonical/tools/force_the_value_and_see_v1.py (interior value forcing: the next composition)",
+    "canonical/runtime/bound_capabilities/python_counterfactual_spec_repair_v1.py (function-scale counterfactual repair on QuixBugs; same primitives, no repo-scale address)",
+    "canonical/tools/what_a_real_fix_needs_from_the_site_v1.py (site verdicts and single-change extraction)"
+   ],
+   "external_existing_routes_checked": [
+    "AgenTracer (ICLR 2026): counterfactual replay labels, guessed by a frontier model",
+    "CausalFlow (arXiv 2605.25338): step-level interventions written by a model",
+    "Who Broke the System? (arXiv 2607.07989): reviewed for approximating rather than executing the counterfactual"
+   ],
+   "surviving_gap": "Selection: which expression, out of a closure of 10^5, produces the value the failing assertion demanded, at a rank an oracle budget can afford."
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "a bigger action library (OSWorld 2.0: final-state exactness is the 84-95% failure bucket)",
+    "more repetitions of one demonstration (retention, not identification)",
+    "parameters for identification (zero is correct, measurable, and recorded per row)"
+   ],
+   "real_outcome": "Execution beats approximation for the counterfactual itself, and the counterfactual is not the bottleneck. Zero parameters were stored by either arm. One verified repair exists and it is in-sample; on 15 fresh real commits both channels produce nothing, and the seven 'wins' a version without the soundness and exact-fit gates would have claimed are all false.",
+   "surviving_necessity": "a model of the counterfactual is not needed where the artifact can be executed: one flipped firing is the intervention, and the oracle is the project's own tests"
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "None by claim: the existing repair primitive and corpus oracle are reused unchanged; the induced basis adds candidates only and holds no authority.",
+   "downstream_work_to_delete_or_supersede": "Any roadmap step that adds another hand-written mutation kind, or that raises a candidate budget to fix a bug whose edit is not expressible.",
+   "fresh_reuse_plan": "Recompute the ladder and re-run both bases from the receipt's commands; the corpus is public and the answer key is never needed."
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": "Reused the verdict parser, span patching and suite runner instead of writing a second harness; the switch is an AST rewrite of the same lines, not a second interpreter.",
+   "search_stop_decision": "Stop after both arms on the fresh corpus; no widening of the logged scope and no value-forcing composition without the falsifier stated in the verification JSON."
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "efficiency_mechanism": "Ordering and exact fit replace breadth: 409 flips decided 15 commits, and no candidate refinement was scored, ranked or thresholded.",
+   "generality_mechanism": "The rewrite is generic Python AST plus a counter; the oracle is the project's own pytest; the address is a site and a firing, so it carries to any executable artifact.",
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "Message channel: 1 of 15 at the line, 0 at the expression. Whole-predicate flips: cannot express a guard that is right once and wrong once. Scoring: unnecessary once fit is exact. Stored state: costlier than re-measuring in ~50 microseconds.",
+   "routes_ranked": [
+    "force the value at the flip-identified firing and synthesize from the artifact's vocabulary",
+    "widen the logged scope beyond locals and self.__dict__",
+    "read the failure message as a second channel (measured: 0 of 15 at the expression)",
+    "raise the candidate budget",
+    "store every verified repair and retrieve by similarity"
+   ],
+   "white_box_harvest_note": "No donor model, weight or external artifact was harvested or called: every number comes from running the projects' own test suites in this sandbox."
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "oracle_paths": [
+    "canonical/tests/test_the_same_guard_twice_is_the_discriminator_v1.py",
+    "canonical/tests/test_identify_a_real_bugs_fix_v1.py",
+    "canonical/verification/THE_SAME_GUARD_TWICE_IS_THE_DISCRIMINATOR_20261119_V1.json"
+   ],
+   "synthetic_verification_necessity": "The oracle for a real commit is that project's own post-fix test file, run on an uninstrumented copy; unit tests pin only the instrument. Independent reproduction remains open."
+  },
+  "real_outcome": "Before the corrections the instrument accepted the human's fix in 1 of 14 audited rows and accused it of a wrong value in 6. The audit named the causes: 2 refusals were fixes that introduce their own names (_SkipClose, an added attribute) -- composite edits that had been counted as single-expression repairs -- and 3 of the 6 accusations were demands that were pytest's rendering of the failure rather than values. After the corrections the accusations fell to 3, every one named: one mis-attributed demand ([0] vs [True]) and two exception-message demands. The verified row is unchanged and still the human's own fix.",
+  "required_capability": "counterfactual intervention over a live execution trace, exact-fit predicate selection from the logged scope, and an oracle that decides without a model",
+  "route_frontier": {
+   "challenger_routes": [
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "1 of 15 in class",
+      "CORRECTNESS": "the corpus's own suite, whole file",
+      "INCREMENTAL_COST": "~10 us per candidate, 2.5 s per commit",
+      "RELIABILITY": "recall is the open term",
+      "VERIFIABILITY": "receipt rows, producer-run",
+      "WALL_CLOCK": "74.9 s for 30 commits"
+     },
+     "evidence": [
+      "30 fresh commits, 74.9 s, 1 verified repair equal to the human's own fix, 0 oracle questions; human fix admissible by the table in 1 of 14 in-class rows"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_ASSERTION_IS_THE_DEMAND_20261119_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "SELECTED",
+     "route": "READ_THE_DEMANDED_VALUE_AND_FILTER_BY_FRAME_EVALUATION"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "3 of 40 programs",
+      "CORRECTNESS": "a class is only as good as its donor",
+      "INCREMENTAL_COST": "one class per shape",
+      "RELIABILITY": "unseen shapes stay unseen",
+      "VERIFIABILITY": "measured exactly",
+      "WALL_CLOCK": "unbounded as the corpus grows"
+     },
+     "evidence": [
+      "a taught class reaches 8 of 40 fixes, 5 only on its donor"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/WHAT_IS_LEFT_FOR_A_LESSON_TO_BUY_20261117_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "teach one more edit class per failing task"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "2 of 30 unseen programs from 3 pairs, at 1.92% precision on the pair that fires",
+      "CORRECTNESS": "the corpus's own pytest decides, as here",
+      "INCREMENTAL_COST": "40.6 us per lookup, no model, no parameters",
+      "RELIABILITY": "saturates: addressability 34.4% -> 59.7% over 24 experiences",
+      "VERIFIABILITY": "measured exactly",
+      "WALL_CLOCK": "5 minutes for the whole corpus"
+     },
+     "evidence": [
+      "0.597 addressable x 0.0192 precise ~ 1.1% of unseen decisions"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/WHAT_AN_EXPERIENCE_CAN_OWN_20261118_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "NON_DOMINATING",
+     "route": "store every verified repair and retrieve it by similarity"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "1 real commit identified at rank 0, unattended, with no diff and no name table",
+      "CORRECTNESS": "the artifact answers, so a question is either answered or refused -- never wrong",
+      "INCREMENTAL_COST": "7.69 ms per asked question, 1 bit",
+      "RELIABILITY": "no saturating share: every site can be asked",
+      "VERIFIABILITY": "measured exactly",
+      "WALL_CLOCK": "121.2 s for 14 bugs"
+     },
+     "evidence": [
+      "click@1b0e19f505: human fix derived at rank 0 from the trace, 2 consistent candidates of 119 tests",
+      "5 evaluated candidates per site against the proximity pool's 32-400"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_FAILING_RUN_IS_THE_INDEX_20261118_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "SELECTED",
+     "route": "INDEX_ACTIONS_BY_THE_FAILING_RUN_NOT_BY_THE_SOURCE_TEXT"
+    }
+   ],
+   "checked_at_utc": "2026-11-18T20:43:34Z",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "AUDIT_WHAT_THE_INSTRUMENT_ACCEPTS_BEFORE_ASKING_WHAT_IT_CAN_FIND",
+   "max_age_hours": 2,
+   "negative_search_summary": "Measured and refused this session: more vocabulary, more grammar, statement form, a larger budget, a stored table, and text-proximity material. Each is sized and each is smaller than the index.",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "enumerative program repair expression size budget type-directed synthesis local typing context 2026"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "QuixBugs bug corpus python programs tests published"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "expression-size-wise enumeration starting at the size of the buggy expression S3 syntactic search space"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "2026 bounded typed program synthesis with counterexample-guided refinement depth size fuel bounds"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "selected_route": "AUDIT_WHAT_THE_INSTRUMENT_ACCEPTS_BEFORE_ASKING_WHAT_IT_CAN_FIND",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-11-18T20:43:34Z",
+    "execution_dependencies": [
+     {
+      "dependency": "local Python 3.11 runtime with pytest",
+      "evidence": [
+       "Python 3.11 + pytest 9.2; 33/33 unified-model gates and 12 instrument tests pass at 2026-11-18T18:50:14Z"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "real repositories cloned for the sweep (requests, click, tqdm, httpx) with their suites runnable",
+      "evidence": [
+       "29 fix commits swept twice in this sandbox (blame index and proximity index) at 2026-11-18T16:05:00Z"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "local tempdir for fresh per-verdict task copies",
+      "evidence": [
+       "one fresh copy per real-judge verdict, answer key absent from the copy the search runs in; 0 corpus verdicts: reachability only, no execution at 2026-11-17T22:05:07Z"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "STORAGE",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "max_age_hours": 2,
+    "selected_route": "AUDIT_WHAT_THE_INSTRUMENT_ACCEPTS_BEFORE_ASKING_WHAT_IT_CAN_FIND",
+    "status": "READY"
+   },
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/tools/grammar_closed_repair_v1.py (corpus reader, space enumerator, real judge, executed_lines)",
+     "canonical/tools/solve_with_a_calibrated_judge_v1.py (certified judge, per-case clocks, containment)",
+     "canonical/verification/WHERE_THE_REFUSALS_ACTUALLY_WERE_20261116_V1.json",
+     "canonical/verification/ONE_DEMONSTRATION_LEAVES_TEN_BITS_20261116_V1.json"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "https://arxiv.org/pdf/2611.12885 (World In-Context Learning: one demonstration plus rehearsal beats a 50-demonstration trained policy; without the world the demonstration brings no benefit)",
+     "https://arxiv.org/html/2606.29537v1 (OSWorld 2.0: 20.6% binary completion, failures concentrate on hidden state)",
+     "https://arxiv.org/html/2606.31270v1 (Learning from Failure: inference-time self-improvement from failure trajectories)"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "https://github.com/jkoppel/QuixBugs (MIT; 40 buggy programs, 40 pytest files, JSON test data)",
+     "https://pypi.org/project/pytest (9.2.0, the runner every verdict goes through)"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "https://docs.python.org/3/library/ast.html (node types the closure rule enumerates)"
+    ]
+   },
+   "unresolved_plausible_dominators": []
+  },
+  "routes_considered": [
+   "TRAIN_OR_DISTIL_A_MODEL_TO_PROPOSE_EXPRESSIONS__REFUSED_BY_OWNER_LAW_AND_UNNECESSARY_HERE",
+   "WIDEN_THE_VOCABULARY_WITH_MORE_NEIGHBOURHOOD_ATTRIBUTES__ALREADY_MEASURED_AT_9_1_PERCENT",
+   "MEASURE_THE_CEILING_WITH_THE_ADDRESS_GIVEN_FREE_THEN_NAME_WHAT_SELECTS__SELECTED"
+  ],
+  "selected_route": "AUDIT_WHAT_THE_INSTRUMENT_ACCEPTS_BEFORE_ASKING_WHAT_IT_CAN_FIND",
+  "selected_surviving_route": "AUDIT_WHAT_THE_INSTRUMENT_ACCEPTS_BEFORE_ASKING_WHAT_IT_CAN_FIND",
+  "selected_surviving_route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+  "stop_condition": "STOP when the fresh corpus is mined by rule and screened before any arm runs; when every exclusion names its reason (structural edit, site never ran, no value matches) instead of being folded into a miss; when the one verified row is reported together with the wrong patch the same instrument first accepted; and when the next round's acceptance numbers are written down before it starts.",
+  "why_selected_route_is_fastest_sufficient": "Because the question 'is the content a knowledge problem' can only be answered by handing the address over for free and measuring what the artifact's own words can say; every other route answers it by assuming an answer.",
+  "why_this_is_not_another_organ": "It adds no knowledge, no vocabulary and no model: one AST rewrite of the module, one counter, one log of what was already in scope, and the project's own pytest as the verdict."
+ },
+ "required_capability": "counterfactual intervention over a live execution trace, exact-fit predicate selection from the logged scope, and an oracle that decides without a model",
+ "route_id": "AUDIT_WHAT_THE_INSTRUMENT_ACCEPTS_BEFORE_ASKING_WHAT_IT_CAN_FIND",
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "scope_complete_discharge": false,
+ "selected_route": "AUDIT_WHAT_THE_INSTRUMENT_ACCEPTS_BEFORE_ASKING_WHAT_IT_CAN_FIND",
+ "status": "PROPOSED__PRODUCER_MEASURED__NEGATIVE_RESULT_RECORDED__INDEPENDENT_VERIFICATION_OPEN",
+ "stop_condition": "STOP when the fresh corpus is mined by rule and screened before any arm runs; when every exclusion names its reason (structural edit, site never ran, no value matches) instead of being folded into a miss; when the one verified row is reported together with the wrong patch the same instrument first accepted; and when the next round's acceptance numbers are written down before it starts.",
+ "terminal_credit_delta": 0,
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "truth": {
+  "achieved": false
+ },
+ "user_authorized_governance_change": false,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "currentness": {
+   "accepted_families": 5,
+   "current_load_bearing_atomic_count": 36,
+   "deleted_nonnecessary_atomic_count": 2,
+   "historical_atomic_registry_count": 38,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_atomic": 38,
+   "total_families": 19,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "This measures the reach of an executed counterfactual over real commit history and finds the content of the fix outside it; it discharges no truth obligation.",
+  "target_truth_obligations": [
+   "CODING_TB4_GE_66_4"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [
+    {
+     "git_blob_sha": "aa752cadab44d7b354814507d437f4fa485aaf74",
+     "path": "canonical/verification/RECOGNITION_IS_THE_BOTTLENECK_20261121_V1.json"
+    }
+   ],
+   "decisive_question": "Before asking what the instrument can find, does it accept the human's own fix -- and if not, why not?",
+   "falsifier_id": "THE_DEMAND_MUST_ADMIT_THE_HUMAN_FIX_AND_NOT_A_CONSTANT",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "Zero generalising repairs out of thirty fresh commits is the counterexample, and it is recorded in the receipt rather than hidden.",
+   "proposal_id": "THE_ASSERTION_IS_THE_DEMAND_20261119_V1"
+  }
+ },
+ "verification": {
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "commands": [
+   "python3 canonical/tools/the_assertion_is_the_demand_v1.py --commits /tmp/corpus/c30.json --audit --survivors-cap 8 --verifications 8 --receipt canonical/verification/RECOGNITION_IS_THE_BOTTLENECK_20261121_V1.json",
+   "python3 -m pytest canonical/tests/test_the_assertion_is_the_demand_v1.py -q"
+  ],
+  "independent_verification_completed": false,
+  "independent_verification_required": true
+ },
+ "weakens_existing_guard": false
+}
