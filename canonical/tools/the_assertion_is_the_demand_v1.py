@@ -375,6 +375,38 @@ def guard_productions(table: list, width: int = 10) -> list[str]:
     return made[:4000]
 
 
+def test_literals(test_source: str, node_id: str, cap: int = 24) -> list[Any]:
+    """The values the failing test itself writes down -- the specification, in source.
+
+    A test states what it expects. When the runtime cannot bind a demand (the assertion's operands do not
+    hold what the site produced, which is 13 of 30 real commits) the expected value is still *written* in
+    the test, and reading it is not a guess: it is the artifact's own text. What is NOT allowed is to
+    offer that literal back as the candidate -- that satisfies the test without computing anything, and it
+    is the one patch this instrument verified and called wrong. The literal is the DEMAND; the candidate
+    must still produce it from a name in the frame.
+    """
+    try:
+        tree = ast.parse(test_source)
+    except SyntaxError:
+        return []
+    target = node_id.split("::")[-1]
+    found: list[Any] = []
+
+    def collect(node: ast.AST) -> None:
+        for inner in ast.walk(node):
+            if isinstance(inner, ast.Constant) and isinstance(inner.value, (str, bytes, int, float)) \
+                    and not isinstance(inner.value, bool):
+                if len(repr(inner.value)) <= 200 and inner.value not in found and len(found) < cap:
+                    found.append(inner.value)
+
+    for node in ast.walk(tree):
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and node.name == target:
+            collect(node)
+            if found:
+                return found
+    return []
+
+
 def specification_literals(test_source: str) -> list[str]:
     """Literals the failing test says out loud -- the specification's own vocabulary."""
     try:
@@ -811,6 +843,40 @@ def _driver_body(config_path: str) -> int:
             targets.append((part["node"], "TRUTHY" if part["truth"] else "FALSY"))
         for demanded in part["demands"]:
             targets.append((part["node"], demanded))
+    provenance = "BOUND_ASSERTION"
+    if not targets:
+        # THE TEST FILE IS THE SPECIFICATION. Runtime binding fails whenever the assertion's operands do not
+        # already hold what the site produced -- 13 of 30 real commits. The expected value is then not
+        # unknown: it is written in the failing test, and reading it is the artifact's own text rather than
+        # a model's guess. The candidate still has to produce that value from a name in the frame, so a
+        # literal copied out of the test is refused at `offer()` and the suite remains the only judge.
+        literals_by_test = config.get("test_literals") or {}
+        for part in table:
+            if part["outcome"] != "failed" or not part["frames"]:
+                continue
+            for text in literals_by_test.get(part["node"]) or []:
+                try:
+                    value = ast.literal_eval(text)
+                except (ValueError, SyntaxError):
+                    continue
+                # THE FILTER READS THE PARTS, NOT `targets`. Appending only to `targets` produced candidates
+                # that `admissible()` then rejected as unchanged-from-nothing: the fallback looked like it
+                # searched 20,632 expressions and found none, when in fact no demand had been installed.
+                part["demands"].append(value)
+                targets.append((part["node"], value))
+        if targets:
+            provenance = "SPEC_LITERALS"
+    result["demand_provenance"] = provenance
+    if provenance == "SPEC_LITERALS":
+        result["spec_preservation_gate"] = {
+            "requires_all_passing_rows": True,
+            "passing_rows_available": len([part for part in table
+                                           if part["outcome"] == "passed" and part["frames"] and part["kept"]]),
+            "why": "a demand read from the test's own text carries no runtime proof that the assertion is "
+                   "about this site, so a candidate must also preserve the site's recorded behaviour where "
+                   "the tests pass"}
+    result["demanded_literals"] = {str(node): [str(text)[:120] for text in texts][:8]
+                                   for node, texts in (config.get("test_literals") or {}).items()}
     if not targets:
         result["relation"] = "NONE"
         out.write_text(json.dumps(result, indent=1), encoding="utf-8")
@@ -936,6 +1002,30 @@ def _driver_body(config_path: str) -> int:
     def offer(expression: str, source: str, rank: int, ring: int) -> bool:
         nonlocal offered
         offered += 1
+        if provenance == "SPEC_LITERALS":
+            # THE WEAKER THE DEMAND'S EVIDENCE, THE STRONGER THE ACCEPTANCE EVIDENCE MUST BE. A demand read
+            # from the test's own text has no runtime proof that the assertion is about this site, so the
+            # suite going green is not enough: MEASURED, the first ungated version accepted `flag_value` -- a
+            # bare frame name -- on click 91de59c6c8 because it greened 533 tests while preserving 0 of 12
+            # recorded passing values of the site, where the human's own fix preserves 12 of 12. A patch that
+            # changes the site everywhere the tests look is not a repair; it is a different function that
+            # happens to pass. With no passing rows to compare against, no claim is made at all.
+            # SAME SLOT, NOT SAME VALUE -- the same law the demand binder uses, now on the candidate.
+            # `flag_value` returning a list where the site returns a bool is not a repair of this site under
+            # any reading; it is a different function wearing the site's name.
+            for part in table:
+                if not part["kept"]:
+                    continue
+                produced = evaluate(expression, namespaces(part["frames"]))
+                if produced is None:
+                    return False
+                if not all(type(value) is type(original)
+                           for value, original in zip(produced, part["kept"])):
+                    return False
+            # And where passing tests recorded the site's behaviour, the candidate must leave it alone:
+            # measured, `flag_value` preserved 0 of 12 while the human's fix preserves 12 of 12.
+            if contrast_rows and contrast_mask(expression) != (1 << len(contrast_rows)) - 1:
+                return False
         if expression in seen:
             return False
         if not config.get("count_contrasts") and len(survivors) >= config["survivors_cap"]:
@@ -1058,21 +1148,53 @@ def explore(repo: pathlib.Path, entry: dict[str, Any], *, cap: int = 400_000, su
         try:
             (worktree / test_path).write_text(identify.show(repo, sha, test_path), encoding="utf-8")
             source_path, site = None, None
-            original = None
+            original, site_finder, why = None, None, None
             for candidate_source in entry["sources"]:
                 text = identify.show(repo, parent, candidate_source)
                 if not text:
                     continue
-                found, _why = space_tool.site_or_reason(repo, sha, candidate_source, text)
+                found, why = space_tool.site_or_reason(repo, sha, candidate_source, text)
                 if found is not None:
                     source_path, site, original = candidate_source, found, text
+                    site_finder = "diff_hunk"
                     break
             if site is None:
-                return {"stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT"}
+                # FORMATTING IS NOT A FACT ABOUT THE FIX. The hunk finder needs one removed and one added
+                # line, so it excludes a one-expression change that the formatter wrapped, and it excludes a
+                # line that was merely moved. The two revisions as ASTs are the same fix with the formatting
+                # deleted; 4 of the 15 excluded rows are one statement there.
+                semantic_reasons = []
+                for candidate_source in entry["sources"]:
+                    text = identify.show(repo, parent, candidate_source)
+                    if not text:
+                        continue
+                    child_text = identify.show(repo, sha, candidate_source)
+                    found, semantic_why = space_tool.semantic_site(text, child_text)
+                    semantic_reasons.append(f"{candidate_source}:{semantic_why}")
+                    if found is not None:
+                        source_path, site, original = candidate_source, found, text
+                        site_finder = "semantic_ast"
+                        break
+                # BOTH FINDERS REPORT. The hunk reason alone ("MULTI_LINE_EDIT") is a fact about a diff;
+                # the AST reason is a fact about the fix, and the receipt must carry the second or the
+                # exclusion cannot be argued with.
+                ast_reason = "|".join(semantic_reasons) if semantic_reasons else "NO_SOURCE_FILE_IN_THE_COMMIT"
+                why = f"{why or 'HUNK_FINDER_FOUND_NOTHING'}|AST:{ast_reason}"
+            if site is None:
+                # "Not a single expression" is a bucket, not a reason. The population's own words are
+                # already computed by `site_or_reason`; discarding them made 15 different facts look like
+                # one exclusion. Every exclusion now names the fact that produced it.
+                return {"stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT",
+                        "why": why or "NO_SOURCE_FILE_IN_THE_COMMIT"}
 
-            verdicts, _output = identify.run_tests_full(worktree, test_path, seconds)
+            verdicts, output = identify.run_tests_full(worktree, test_path, seconds)
             failing = identify.failing_tests(verdicts)
             if not failing:
+                # A HARNESS FAILURE MUST NOT WEAR A FACT'S NAME. Measured: a missing pytest plugin aborted
+                # collection in 15 of 30 rows and this line reported "no failing test" -- a claim about the
+                # commit, manufactured by my own environment. Nothing ran; that is what it now says.
+                if not verdicts:
+                    return {"stage": "TESTS_DID_NOT_RUN", "pytest_tail": (output or "")[-400:]}
                 return {"stage": "NO_FAILING_TEST"}
             node_id = failing[0]
             node = node_id if "::" in node_id else f"{test_path}::{node_id}"
@@ -1095,6 +1217,15 @@ def explore(repo: pathlib.Path, entry: dict[str, Any], *, cap: int = 400_000, su
                 "audit": bool(audit),
                 "spec_literals": specification_literals(
                     (worktree / test_path).read_text(encoding="utf-8", errors="replace")),
+                # as SOURCE TEXT, not live objects: a bytes literal is not JSON-serialisable and the whole
+                # row died on it (2 of 30) -- the config crosses a process boundary, so it must be text.
+                # PER FAILING TEST, never the file and never one test's literals for another: a candidate
+                # must satisfy every failing test, and attaching `test_two`'s expected values to
+                # `test_three` made the filter unsatisfiable by construction -- the fallback then reported
+                # "found nothing" on rows where the fix was one name away.
+                "test_literals": {node: [live_repr(value) for value in test_literals(
+                    (worktree / test_path).read_text(encoding="utf-8", errors="replace"), node)]
+                    for node in failing},
             }), encoding="utf-8")
             env = {**os.environ, "PYTHONPATH": os.pathsep.join([str(worktree), str(worktree / "src"),
                                                                 str(TOOLS), str(REPO)])}
@@ -1116,20 +1247,25 @@ def explore(repo: pathlib.Path, entry: dict[str, Any], *, cap: int = 400_000, su
                 return {"stage": "DRIVER_ERROR", "error": driven["driver_error"]}
             if not driven.get("frames"):
                 return {"stage": "THE_SITE_NEVER_RAN_IN_THE_FAILING_TEST", "failing_test": node_id,
-                        "site_line": site["line"], "seconds": round(time.time() - started, 2)}
+                        "site_line": site["line"], "site_finder": site_finder,
+                        "seconds": round(time.time() - started, 2)}
             if driven.get("relation") == "NONE":
                 return {"stage": "NO_RELATION_BETWEEN_THE_DEMAND_AND_THE_SITE",
                         "failing_test": node_id, "site_line": site["line"],
+                        "site_finder": site_finder,
                         "site_expression": site["old_expression"],
                         "table": driven.get("table"), "audit": driven.get("audit"),
                         "prose_refused": driven.get("prose_refused", 0),
                         "refusals": driven.get("refusals") or [],
+                        "demand_provenance": driven.get("demand_provenance") or "NONE",
+                        "demanded_literals": driven.get("demanded_literals") or {},
                         "greens": [], "green_count": 0, "survivors": 0,
                         "parameters_stored": 0,
                         "seconds": round(time.time() - started, 2)}
             if not driven.get("assertions"):
                 return {"stage": "NO_ASSERTION_DEMAND", "failing_test": node_id,
-                        "site_line": site["line"], "site_expression": site["old_expression"],
+                        "site_line": site["line"], "site_finder": site_finder,
+                        "site_expression": site["old_expression"],
                         "frames": driven.get("frames", 0), "pytest_code": driven.get("pytest_code"),
                         "seconds": round(time.time() - started, 2)}
 
@@ -1142,6 +1278,7 @@ def explore(repo: pathlib.Path, entry: dict[str, Any], *, cap: int = 400_000, su
                 # wearing a one-line site, and counting it as an expression repair inflates the denominator.
                 return {"stage": "EXCLUDED__THE_FIX_INTRODUCES_A_NAME",
                         "human_expression": site["human_expression"],
+                        "demand_provenance": driven.get("demand_provenance"),
                         "audit": audit, "parameters_stored": 0,
                         "seconds": round(time.time() - started, 2)}
 
@@ -1192,8 +1329,11 @@ def explore(repo: pathlib.Path, entry: dict[str, Any], *, cap: int = 400_000, su
                                        "source": survivor["source"], "tests_green": len(whole)})
             target.write_text(original, encoding="utf-8")
             return {
-                "stage": "DEMAND_MET" if found else "NO_VALUE_MATCHES",
-                "failing_test": node_id, "site_line": site["line"],
+                "stage": ("DEMAND_MET" if found else
+                          ("SPEC_DEMAND_FOUND_NOTHING" if driven.get("demand_provenance") == "SPEC_LITERALS"
+                           else "NO_VALUE_MATCHES")),
+                "demand_provenance": driven.get("demand_provenance"),
+                "failing_test": node_id, "site_line": site["line"], "site_finder": site_finder,
                 "site_expression": site["old_expression"],
                 "human_expression": site["human_expression"],
                 "count_contrasts": bool(count_contrasts),

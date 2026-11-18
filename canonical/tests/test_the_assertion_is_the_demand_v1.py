@@ -20,6 +20,7 @@ break: a green suite alone is what a lie looks like.
 """
 
 import ast
+import json
 import pathlib
 import subprocess
 import sys
@@ -178,8 +179,13 @@ def test_two_demands_and_a_passing_test_constrain_the_candidate(tmp_path):
     if result["stage"] == "DEMAND_MET":
         assert result["found"]["tests_green"] >= 2
         assert result["parameters_stored"] == 0
+        # The site here is the literal `1` inside `return x + 1`, so the replacement is `x` -- the
+        # enclosing `x + x` is the human's fix, produced by substituting at the site, not by rewriting it.
         found = result["found"]["expression"]
-        assert eval(found, {}, {"x": 2}) == 4 and eval(found, {}, {"x": 3}) == 6, found  # noqa: S307
+        assert found != "1", found
+        # substituting at the site: `x + 1` becomes `x + (<found>)`
+        assert eval(f"x + ({found})", {}, {"x": 2}) == 4, found  # noqa: S307
+        assert eval(f"x + ({found})", {}, {"x": 3}) == 6, found  # noqa: S307
 
 
 def test_a_constant_that_greens_one_test_and_breaks_another_is_refused(tmp_path):
@@ -325,3 +331,108 @@ def test_a_paired_demand_may_differ_from_what_the_site_produced():
     # without that evidence the same demand is not bound to that site at all
     assert demand.site_demand(2, [3]) is None
     assert demand.site_demand("the message, corrected", ["the message"]) is None
+
+
+def test_the_specification_is_the_failing_test_and_not_the_whole_file():
+    """A test states what it expects; the other tests in the file state something else.
+
+    Reading the file's literals would put another test's expected value into this site's demand -- and the
+    site would then be asked to produce a value its own failing test never mentions.
+    """
+    import textwrap
+    source = textwrap.dedent('''
+        def test_one():
+            assert render("x") == "for x."
+
+        def test_two():
+            assert render("y") == "a completely different message"
+            assert 7 == 7
+    ''')
+    one = demand.test_literals(source, "tests/test_m.py::test_one")
+    two = demand.test_literals(source, "tests/test_m.py::test_two")
+    assert sorted(one) == sorted(["x", "for x."])
+    assert "a completely different message" in two and "for x." not in two
+    # a boolean is a predicate, never a demanded value
+    assert True not in one and True not in two
+    assert demand.test_literals(source, "tests/test_m.py::test_missing") == []
+
+
+def test_a_specification_demand_never_wears_the_bound_demand_s_verdict():
+    """A demand read from the test's own text is weaker evidence than a demand bound at runtime.
+
+    Reporting the weaker one as `NO_VALUE_MATCHES` would claim the instrument proved no expression can
+    produce the demand, when all it proved is that the closure was searched against a literal.
+    """
+    tool = (pathlib.Path(__file__).resolve().parents[1] / "tools" /
+            "the_assertion_is_the_demand_v1.py").read_text(encoding="utf-8")
+    assert '"SPEC_DEMAND_FOUND_NOTHING"' in tool
+    assert 'demand_provenance' in tool
+    # the fallback fires only when nothing bound at runtime
+    assert 'if not targets:' in tool and 'SPEC_LITERALS' in tool
+
+
+def test_test_literals_cross_the_process_boundary_as_source_text():
+    """The config is JSON: a bytes literal in it killed two whole rows before this was fixed."""
+    import textwrap
+    source = textwrap.dedent('''
+        def test_bytes():
+            assert b"#compdef cli" in out
+    ''')
+    values = demand.test_literals(source, "tests/test_t.py::test_bytes")
+    assert any(isinstance(value, bytes) for value in values)
+    encoded = json.dumps([demand.live_repr(value) for value in values])
+    assert json.loads(encoded)
+
+
+# The candidate-side gate for specification demands is measured on REAL material rather than reproduced
+# in a fixture: click 91de59c6c8, where the ungated instrument accepted `flag_value` (533 tests green,
+# 0 of 12 recorded passing values preserved, human fix 12 of 12). A fixture that reproduces it would
+# prove only that the fixture fails the same way.
+
+
+def test_the_site_is_read_from_the_two_revisions_not_from_the_diff_s_shape():
+    """A diff's line shape is a fact about formatting; the fix is a fact about the program.
+
+    All three of these are `MULTI_LINE_EDIT` to a hunk-based finder and are different things to the
+    instrument, and each has to be named, because "not a single expression" hid all three.
+    """
+    import sys
+    sys.path.insert(0, str(ROOT / "canonical" / "tools"))
+    import the_space_is_the_artifact_v1 as space
+
+    # a pure reformat is a diff with no fix inside it, and the AST says so
+    reformatted = space.semantic_site("x = compute(a, b)\n", "x = compute(\n    a,\n    b,\n)\n")
+    assert reformatted == (None, "NOTHING_DIFFERS_AT_AST_LEVEL"), reformatted
+
+    # one expression changed with its arguments split across lines: the finder locates it and the patcher
+    # cannot address it, and the reason names the patcher rather than blaming the source
+    wrapped = space.semantic_site("x = compute(\n    a,\n    b,\n)\n", "x = compute(\n    a,\n    c,\n)\n")
+    assert wrapped == (None, "THE_CHANGED_EXPRESSION_SPANS_SEVERAL_LINES"), wrapped
+
+    # a one-line expression change is found, with both revisions named
+    plain = space.semantic_site("def f(p):\n    return p is None\n", "def f(p):\n    return p is not None\n")
+    assert plain[0] is not None, plain
+    assert plain[0]["old_expression"] == "p is None", plain
+    assert plain[0]["human_expression"] == "p is not None", plain
+
+    # a statement that moved is TWO regions, and saying so is the honest refusal
+    moved = space.semantic_site(
+        "def f(p):\n    if p:\n        return 1\n    return norm(p)\n",
+        "def f(p):\n    p = norm(p)\n    if p:\n        return 1\n    return p\n")
+    assert moved[0] is None and moved[1] == "MORE_THAN_ONE_CHANGE_REGION", moved
+
+    # a guard inserted is not a replacement at all, and that is a different fact again
+    inserted = space.semantic_site(
+        "def f(p):\n    return p\n",
+        "def f(p):\n    if p is None:\n        return 0\n    return p\n")
+    assert inserted[0] is None, inserted
+    assert inserted[1] in ("THE_CHANGE_INSERTS_OR_DELETES_WHOLE_STATEMENTS",
+                           "MORE_THAN_ONE_CHANGE_REGION"), inserted
+
+
+def test_a_harness_failure_cannot_be_reported_as_a_fact_about_the_commit():
+    """MEASURED: a missing pytest plugin aborted collection in 15 of 30 rows, and the tool reported
+    `NO_FAILING_TEST` -- a claim about the commit, manufactured by its own environment."""
+    tool = (ROOT / "canonical" / "tools" / "the_assertion_is_the_demand_v1.py").read_text(encoding="utf-8")
+    assert '"TESTS_DID_NOT_RUN"' in tool
+    assert "if not verdicts:" in tool

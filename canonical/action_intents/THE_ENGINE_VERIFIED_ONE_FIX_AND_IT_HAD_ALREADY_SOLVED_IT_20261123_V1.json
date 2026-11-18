@@ -43,7 +43,7 @@
  },
  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Content: the value a fix must produce is not written in the assertion that fails, and the shape a fix must take is not in the vocabulary the environment offers. Seven oracle rounds and one powered proposer round both return nothing new; every stage of the pipeline is already exact, zero-parameter and free.",
- "canonical_base_commit": "5b5e1fc410b8c275e108cc6b06b3a9826a36476d",
+ "canonical_base_commit": "aba0219bb6cecc73cc6324c3e9feac6e505b1ac1",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 1,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -149,7 +149,7 @@
  "real_outcome": "That refusals are losses; that the 2 name-introducing rows are classified as finely as before (they now stop at pairing, named less precisely); that 1 verified row is capability; that the pairing is sound when a site feeds a helper the assertion then tests.",
  "recursive_obs": {
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Content: the value a fix must produce is not written in the assertion that fails, and the shape a fix must take is not in the vocabulary the environment offers. Seven oracle rounds and one powered proposer round both return nothing new; every stage of the pipeline is already exact, zero-parameter and free.",
-  "canonical_base_commit": "5b5e1fc410b8c275e108cc6b06b3a9826a36476d",
+  "canonical_base_commit": "aba0219bb6cecc73cc6324c3e9feac6e505b1ac1",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "requiring the demanded value to equal what the site produced (that difference is the repair)",
