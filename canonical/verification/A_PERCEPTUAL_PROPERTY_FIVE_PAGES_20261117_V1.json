@@ -1,0 +1,266 @@
+{
+ "schema": "BRAIN_A_PERCEPTUAL_PROPERTY_CLASS_ACCOUNT_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+ "kind": "receipt",
+ "generated_utc": "2026-11-17T23:30:00Z",
+ "incremental_spend_usd": 0,
+ "producer_cognition_model_dependency_count": 0,
+ "protocol": {
+  "instrument": "canonical/tools/aimed_action_measure_v1.py",
+  "substrate": "chromium (Bridge + SeedEnv, default jsdom is dead)",
+  "arms": [
+   "A_shipped_hand",
+   "G_aimed_hand",
+   "D_decoy_aimed"
+  ],
+  "budget": 900,
+  "seed": 1060,
+  "measure": "canonical/verification/PERCEPTUAL_PROPERTY_CLASS_MEASURE_20261117_V1.jsonl",
+  "consolidated_receipt": "canonical/verification/PERCEPTUAL_PROPERTY_CLASS_RECEIPT_20261117_V1.json"
+ },
+ "summary": {
+  "pages": 5,
+  "solved_by_G": 3,
+  "solved_by_A": 0,
+  "solved_by_D": 0,
+  "terminal_unreachable": [
+   "hover-shape"
+  ],
+  "terminal_refused_meaning_model": [
+   "click-checkboxes-soft"
+  ],
+  "unsolved_30_to": 28,
+  "gain_over_shipped": [
+   "click-shades",
+   "drag-shapes-2",
+   "text-editor"
+  ],
+  "gain_over_decoy": [
+   "click-shades",
+   "drag-shapes-2",
+   "text-editor"
+  ]
+ },
+ "pages": {
+  "click-shades": {
+   "A_shipped_hand": {
+    "pass": false,
+    "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+    "actions_spent": null,
+    "rule": null,
+    "verified_on_fresh_page": false,
+    "plan_len": 0
+   },
+   "G_aimed_hand": {
+    "pass": true,
+    "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+    "actions_spent": null,
+    "rule": {
+     "rule": "CLICK_INSTRUCTED_SHADE",
+     "witness": {
+      "element": 7,
+      "colour": "blue",
+      "hue": 240.0
+     }
+    },
+    "verified_on_fresh_page": true,
+    "plan_len": 22
+   },
+   "D_decoy_aimed": {
+    "pass": false,
+    "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+    "actions_spent": null,
+    "rule": null,
+    "verified_on_fresh_page": false,
+    "plan_len": 0
+   }
+  },
+  "drag-shapes-2": {
+   "A_shipped_hand": {
+    "pass": false,
+    "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+    "actions_spent": null,
+    "rule": null,
+    "verified_on_fresh_page": false,
+    "plan_len": 0
+   },
+   "G_aimed_hand": {
+    "pass": true,
+    "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+    "actions_spent": null,
+    "rule": {
+     "rule": "GRAB_FOR_BOX_PARTITION",
+     "witness": {
+      "element": 4,
+      "tag": "polygon"
+     }
+    },
+    "verified_on_fresh_page": true,
+    "plan_len": 17
+   },
+   "D_decoy_aimed": {
+    "pass": false,
+    "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+    "actions_spent": null,
+    "rule": null,
+    "verified_on_fresh_page": false,
+    "plan_len": 0
+   }
+  },
+  "hover-shape": {
+   "A_shipped_hand": {
+    "pass": false,
+    "status": "OPEN__ENVIRONMENT_NOT_REPEATABLE_UNDER_THIS_STATE_KEY",
+    "actions_spent": null,
+    "rule": null,
+    "verified_on_fresh_page": false,
+    "plan_len": 0
+   },
+   "G_aimed_hand": {
+    "pass": false,
+    "status": "OPEN__ENVIRONMENT_NOT_REPEATABLE_UNDER_THIS_STATE_KEY",
+    "actions_spent": null,
+    "rule": null,
+    "verified_on_fresh_page": false,
+    "plan_len": 0
+   },
+   "D_decoy_aimed": {
+    "pass": false,
+    "status": "OPEN__ENVIRONMENT_NOT_REPEATABLE_UNDER_THIS_STATE_KEY",
+    "actions_spent": null,
+    "rule": null,
+    "verified_on_fresh_page": false,
+    "plan_len": 0
+   }
+  },
+  "text-editor": {
+   "A_shipped_hand": {
+    "pass": false,
+    "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+    "actions_spent": null,
+    "rule": null,
+    "verified_on_fresh_page": false,
+    "plan_len": 0
+   },
+   "G_aimed_hand": {
+    "pass": true,
+    "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+    "actions_spent": null,
+    "rule": {
+     "rule": "DOUBLE_AT_THE_NAMED_RUN",
+     "witness": {
+      "element": 27,
+      "run": "viverra",
+      "point": [
+       125.5,
+       103.1
+      ]
+     }
+    },
+    "verified_on_fresh_page": true,
+    "plan_len": 13
+   },
+   "D_decoy_aimed": {
+    "pass": false,
+    "status": "OPEN__ENVIRONMENT_NOT_REPEATABLE_UNDER_THIS_STATE_KEY",
+    "actions_spent": null,
+    "rule": null,
+    "verified_on_fresh_page": false,
+    "plan_len": 0
+   }
+  },
+  "click-checkboxes-soft": {
+   "A_shipped_hand": {
+    "pass": false,
+    "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+    "actions_spent": null,
+    "rule": null,
+    "verified_on_fresh_page": false,
+    "plan_len": 0
+   },
+   "G_aimed_hand": {
+    "pass": false,
+    "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+    "actions_spent": null,
+    "rule": null,
+    "verified_on_fresh_page": false,
+    "plan_len": 0
+   },
+   "D_decoy_aimed": {
+    "pass": false,
+    "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+    "actions_spent": null,
+    "rule": null,
+    "verified_on_fresh_page": false,
+    "plan_len": 0
+   }
+  }
+ },
+ "terminals": {
+  "hover-shape": {
+   "kind": "PREDICATE_UNREACHABLE_AT_EVERY_SEED",
+   "evidence": [
+    "miniwob/html/hover-shape.html pays endEpisode(0,false) from core.startStep only; nothing ever calls done()",
+    "miniwob/core/core.js timeout handler calls endEpisode(-1,false) -- the harness fails any wait with time_limit",
+    "observed: 0 endEpisode success events across all runs; A=92a and D=122a end ENVIRONMENT_NOT_REPEATABLE (clock), G=415a budget-open"
+   ],
+   "account": "3rd predicate-unreachable page alongside circle-center and right-angle; unsolved 30 -> 28 with this class's other two terminals accounted."
+  },
+  "click-checkboxes-soft": {
+   "kind": "REFUSED_NEEDS_A_MODEL_OF_MEANING__MEASURED",
+   "reward_predicate": "endEpisode(r/elems, r>0) with FULL_REWARD=1.0 -- every box must be correct",
+   "instance_seed1060": {
+    "utterance": "Select words similar to homes, unhappy, real, chubby and click Submit.",
+    "labels": [
+     "sad",
+     "houses",
+     "mini",
+     "actual",
+     "chubby",
+     "red"
+    ],
+    "intended_from_page_source_chgroups": [
+     "sad",
+     "houses",
+     "actual",
+     "chubby"
+    ],
+    "required_pair_missed_by_both_sources": [
+     "unhappy",
+     "sad"
+    ]
+   },
+   "external_sources_measured": {
+    "wordnet3_synset_coclustering": {
+     "within_group_pairs": "158/492 = 0.321",
+     "cross_group_false_pairs": 2
+    },
+    "roget_section_membership": {
+     "within_group_pairs": "312/492 = 0.634",
+     "cross_group_false_pairs": 2644,
+     "note": "sections are coarse (large/small collide) and still miss sad~unhappy"
+    }
+   },
+   "account": "The 34 hand-rolled synonym groups are reproduced by NO tested free lexical source at the perfection FULL_REWARD demands; the module's declared refusal (needs a model of meaning, not an algebra over structure) now carries measurements instead of a prior."
+  }
+ },
+ "regression": {
+  "instrument": "REGRESSION_TASKS (exact_stated_geometry_measure_v1 list), budget 400, seed 1060, all three arms",
+  "result": "11/12 pass all arms; simple-arithmetic fails all arms at 400 exactly as in the pass-16 baseline (no change)"
+ },
+ "changes": {
+  "changed_modules": [
+   "canonical/runtime/aimed_action_v1.py",
+   "canonical/tools/aimed_action_measure_v1.py",
+   "canonical/tools/miniwob_chromium_bridge_v1.mjs",
+   "canonical/tools/miniwob_one_success_generalisation_measure_v1.py"
+  ],
+  "operators": [
+   "CLICK_INSTRUCTED_SHADE",
+   "GRAB_FOR_BOX_PARTITION",
+   "DOUBLE_AT_THE_NAMED_RUN",
+   "DRAG_OVER_THE_NAMED_RUN",
+   "CLEAR_A_WRONG_SELECTION"
+  ]
+ }
+}

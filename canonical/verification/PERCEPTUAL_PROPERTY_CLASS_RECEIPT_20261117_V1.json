@@ -1,0 +1,335 @@
+{
+ "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+ "generated_utc": "2026-11-17T23:24:43Z",
+ "incremental_spend_usd": 0,
+ "kind": "receipt",
+ "pages": [
+  {
+   "arms": {
+    "A_shipped_hand": {
+     "budget_spent": 900,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 11.6,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    },
+    "D_decoy_aimed": {
+     "budget_spent": 900,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 11.9,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    },
+    "G_aimed_hand": {
+     "budget_spent": 775,
+     "pass": true,
+     "plan_len": 22,
+     "rule": {
+      "rule": "CLICK_INSTRUCTED_SHADE",
+      "witness": {
+       "colour": "blue",
+       "element": 7,
+       "hue": 240.0
+      }
+     },
+     "seconds": 4.1,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    }
+   },
+   "budget": 900,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 3175,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.18.1",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "kind": "page",
+   "seconds": 27.7,
+   "seed": 1060,
+   "task": "click-shades"
+  },
+  {
+   "arms": {
+    "A_shipped_hand": {
+     "budget_spent": 900,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 20.6,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    },
+    "D_decoy_aimed": {
+     "budget_spent": 900,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 21.8,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    },
+    "G_aimed_hand": {
+     "budget_spent": 30,
+     "pass": true,
+     "plan_len": 17,
+     "rule": {
+      "rule": "GRAB_FOR_BOX_PARTITION",
+      "witness": {
+       "element": 4,
+       "tag": "polygon"
+      }
+     },
+     "seconds": 2.4,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    }
+   },
+   "budget": 900,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 3175,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.18.1",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "kind": "page",
+   "seconds": 44.8,
+   "seed": 1060,
+   "task": "drag-shapes-2"
+  },
+  {
+   "arms": {
+    "A_shipped_hand": {
+     "budget_spent": 92,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 4.3,
+     "status": "OPEN__ENVIRONMENT_NOT_REPEATABLE_UNDER_THIS_STATE_KEY",
+     "verified_on_fresh_page": false
+    },
+    "D_decoy_aimed": {
+     "budget_spent": 122,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 5.6,
+     "status": "OPEN__ENVIRONMENT_NOT_REPEATABLE_UNDER_THIS_STATE_KEY",
+     "verified_on_fresh_page": false
+    },
+    "G_aimed_hand": {
+     "budget_spent": 415,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 29.7,
+     "status": "OPEN__ENVIRONMENT_NOT_REPEATABLE_UNDER_THIS_STATE_KEY",
+     "verified_on_fresh_page": false
+    }
+   },
+   "budget": 900,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 3175,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.18.1",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "kind": "page",
+   "seconds": 39.7,
+   "seed": 1060,
+   "task": "hover-shape"
+  },
+  {
+   "arms": {
+    "A_shipped_hand": {
+     "budget_spent": 900,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 15.5,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    },
+    "D_decoy_aimed": {
+     "budget_spent": 105,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 6.3,
+     "status": "OPEN__ENVIRONMENT_NOT_REPEATABLE_UNDER_THIS_STATE_KEY",
+     "verified_on_fresh_page": false
+    },
+    "G_aimed_hand": {
+     "budget_spent": 49,
+     "pass": true,
+     "plan_len": 13,
+     "rule": {
+      "rule": "DOUBLE_AT_THE_NAMED_RUN",
+      "witness": {
+       "element": 27,
+       "point": [
+        125.5,
+        103.1
+       ],
+       "run": "viverra"
+      }
+     },
+     "seconds": 1.0,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    }
+   },
+   "budget": 900,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 3175,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.18.1",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "kind": "page",
+   "seconds": 23.0,
+   "seed": 1060,
+   "task": "text-editor"
+  },
+  {
+   "arms": {
+    "A_shipped_hand": {
+     "budget_spent": 900,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 13.3,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    },
+    "D_decoy_aimed": {
+     "budget_spent": 900,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 14.7,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    },
+    "G_aimed_hand": {
+     "budget_spent": 900,
+     "pass": false,
+     "plan_len": 0,
+     "rule": null,
+     "seconds": 13.6,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    }
+   },
+   "budget": 900,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 3175,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.18.1",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "kind": "page",
+   "seconds": 41.7,
+   "seed": 1060,
+   "task": "click-checkboxes-soft"
+  }
+ ],
+ "producer_cognition_model_dependency_count": 0,
+ "schema": "BRAIN_AIMED_ACTION_MEASURE_V1",
+ "summary": {
+  "arms": {
+   "A_shipped_hand": {
+    "actions_spent": 3692,
+    "pass": 0,
+    "pass_tasks": [],
+    "rules_that_solved": [],
+    "seconds": 65.3,
+    "verified": 0
+   },
+   "D_decoy_aimed": {
+    "actions_spent": 2927,
+    "pass": 0,
+    "pass_tasks": [],
+    "rules_that_solved": [],
+    "seconds": 60.3,
+    "verified": 0
+   },
+   "G_aimed_hand": {
+    "actions_spent": 2169,
+    "pass": 3,
+    "pass_tasks": [
+     "click-shades",
+     "drag-shapes-2",
+     "text-editor"
+    ],
+    "rules_that_solved": [
+     "CLICK_INSTRUCTED_SHADE",
+     "DOUBLE_AT_THE_NAMED_RUN",
+     "GRAB_FOR_BOX_PARTITION"
+    ],
+    "seconds": 50.8,
+    "verified": 3
+   }
+  },
+  "gain_over_decoy": [
+   "click-shades",
+   "drag-shapes-2",
+   "text-editor"
+  ],
+  "gain_over_shipped": [
+   "click-shades",
+   "drag-shapes-2",
+   "text-editor"
+  ],
+  "pages": 5
+ }
+}

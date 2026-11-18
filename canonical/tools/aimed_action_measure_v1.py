@@ -89,6 +89,7 @@ class AimedPrices:
         self._base = tool.GuidedPrices()
         self._for: Any = None
         self._aimed: dict[str, int] = {}
+        self._partition_release = False
 
     def __call__(self, observation: Mapping[str, Any], action: str) -> tuple[int, int]:
         if observation is not self._for:
@@ -98,12 +99,22 @@ class AimedPrices:
             # early enough that it is reached at every state (it used to starve behind the
             # marks), late enough that the derivations of THAT state go first (a submit
             # pressed before them scores partial and the episode is over).
+            rows = aimed.aimed_rows(observation)
             self._aimed = {
                 row["action"]: (1 if row["rule"] == "FINALIZE_BUTTON" else 0)
-                for row in aimed.aimed_rows(observation)
+                for row in rows
             }
+            # While the instruction's own release (a partition's side of the boxes) is on
+            # offer, an ARBITRARY release is not the instruction's own: priced one, so the
+            # free run the search follows to its end is the partition's choreography rather
+            # than every wrong place a held shape could be let go of. Only where that
+            # release exists -- everywhere else the shipped prices stand unchanged.
+            self._partition_release = any(
+                row["rule"] == "RELEASE_IN_INSTRUCTED_BOX" for row in rows)
         if action in self._aimed:
             return 0, self._aimed[action]
+        if self._partition_release and (action.startswith("drop@") or action.startswith("dropat@")):
+            return 1, 1
         return self._base(observation, action)
 
 

@@ -1,0 +1,1474 @@
+{
+ "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+ "commits": [
+  {
+   "commit": "7a983f7f0068669ead9d4f7571be24d6c0d83eb9",
+   "instruction": "Bump for release",
+   "modules": [
+    {
+     "module": "packaging",
+     "refusals": [
+      {
+       "refusal": "REFUSED__NO_VALUE_IN_THE_INSTRUCTION",
+       "why": "the sentence names nothing checkable"
+      }
+     ],
+     "verdict": "REFUSED"
+    }
+   ],
+   "refusal_kinds": [
+    "REFUSED__NO_VALUE_IN_THE_INSTRUCTION"
+   ],
+   "repo": "pypa/packaging",
+   "ships_a_test": false,
+   "sources": [
+    "src/packaging/__init__.py"
+   ],
+   "verdict": "REFUSED"
+  },
+  {
+   "commit": "4d8534061364e3cbfee582192ab81a095ec2db51",
+   "instruction": "Add riscv64 as a supported manylinux architecture (#751)",
+   "modules": [
+    {
+     "clauses": [
+      {
+       "fixed": {
+        "outcome": "RETURNED",
+        "type": "bool",
+        "value_repr": "False"
+       },
+       "operator": "ACCEPTS_NAMED",
+       "parent": {
+        "outcome": "RETURNED",
+        "type": "bool",
+        "value_repr": "False"
+       },
+       "value": "riscv64",
+       "verdict": "WRONG_AT_FIXED"
+      },
+      {
+       "operator": "STILL_RUNS",
+       "verdict": "NOT_APPLICABLE"
+      }
+     ],
+     "direction": "WIDENING",
+     "discriminating_clauses": 0,
+     "module": "packaging._manylinux",
+     "refusals": [
+      {
+       "function": null,
+       "refusal": "REFUSED__THE_NAMED_VALUE_IS_NOT_IN_THE_ENVIRONMENT",
+       "value": "751"
+      }
+     ],
+     "vacuous_clauses": 0,
+     "verdict": "WRONG_AT_FIXED",
+     "wrong_clauses": 1
+    }
+   ],
+   "refusal_kinds": [
+    "REFUSED__THE_NAMED_VALUE_IS_NOT_IN_THE_ENVIRONMENT"
+   ],
+   "repo": "pypa/packaging",
+   "ships_a_test": false,
+   "sources": [
+    "src/packaging/_manylinux.py"
+   ],
+   "verdict": "WRONG_AT_FIXED"
+  },
+  {
+   "commit": "4dce7618f59d623512b21d846da3e072e86aaf2e",
+   "instruction": "Apply some ruff suggestions (#772)",
+   "modules": [
+    {
+     "module": "packaging._manylinux",
+     "refusals": [
+      {
+       "refusal": "REFUSED__NO_DIRECTION_IN_THE_INSTRUCTION",
+       "values": [
+        "772"
+       ],
+       "why": "no verb states what should happen"
+      }
+     ],
+     "verdict": "REFUSED"
+    }
+   ],
+   "refusal_kinds": [
+    "REFUSED__NO_DIRECTION_IN_THE_INSTRUCTION"
+   ],
+   "repo": "pypa/packaging",
+   "ships_a_test": false,
+   "sources": [
+    "src/packaging/_manylinux.py"
+   ],
+   "verdict": "REFUSED"
+  },
+  {
+   "commit": "57a6a7ff661930a8b0dde55663947b80cf3c196a",
+   "instruction": "Appply some bugbear suggestions (#761)",
+   "modules": [
+    {
+     "module": "packaging._manylinux",
+     "refusals": [
+      {
+       "refusal": "REFUSED__NO_DIRECTION_IN_THE_INSTRUCTION",
+       "values": [
+        "761"
+       ],
+       "why": "no verb states what should happen"
+      }
+     ],
+     "verdict": "REFUSED"
+    }
+   ],
+   "refusal_kinds": [
+    "REFUSED__NO_DIRECTION_IN_THE_INSTRUCTION"
+   ],
+   "repo": "pypa/packaging",
+   "ships_a_test": true,
+   "sources": [
+    "src/packaging/_manylinux.py"
+   ],
+   "verdict": "REFUSED"
+  },
+  {
+   "commit": "7bcd6d8ec33f0a614f9d017d31be4b50ece1549a",
+   "instruction": " Apply some refurb suggestions (#763)",
+   "modules": [
+    {
+     "module": "packaging._parser",
+     "refusals": [
+      {
+       "refusal": "REFUSED__NO_DIRECTION_IN_THE_INSTRUCTION",
+       "values": [
+        "763"
+       ],
+       "why": "no verb states what should happen"
+      }
+     ],
+     "verdict": "REFUSED"
+    },
+    {
+     "module": "packaging.requirements",
+     "refusals": [
+      {
+       "refusal": "REFUSED__NO_DIRECTION_IN_THE_INSTRUCTION",
+       "values": [
+        "763"
+       ],
+       "why": "no verb states what should happen"
+      }
+     ],
+     "verdict": "REFUSED"
+    },
+    {
+     "module": "packaging.specifiers",
+     "refusals": [
+      {
+       "refusal": "REFUSED__NO_DIRECTION_IN_THE_INSTRUCTION",
+       "values": [
+        "763"
+       ],
+       "why": "no verb states what should happen"
+      }
+     ],
+     "verdict": "REFUSED"
+    }
+   ],
+   "refusal_kinds": [
+    "REFUSED__NO_DIRECTION_IN_THE_INSTRUCTION"
+   ],
+   "repo": "pypa/packaging",
+   "ships_a_test": true,
+   "sources": [
+    "src/packaging/_parser.py",
+    "src/packaging/requirements.py",
+    "src/packaging/specifiers.py"
+   ],
+   "verdict": "REFUSED"
+  },
+  {
+   "commit": "a2b3e346b03c0446df2ab8e7f9c997d65495dc6d",
+   "instruction": "Rename Py_NOGIL to Py_GIL_DISABLED (#747)",
+   "modules": [
+    {
+     "module": "packaging.tags",
+     "refusals": [
+      {
+       "refusal": "REFUSED__NO_DIRECTION_IN_THE_INSTRUCTION",
+       "values": [
+        "Py_NOGIL",
+        "Py_GIL_DISABLED",
+        "747"
+       ],
+       "why": "no verb states what should happen"
+      }
+     ],
+     "verdict": "REFUSED"
+    }
+   ],
+   "refusal_kinds": [
+    "REFUSED__NO_DIRECTION_IN_THE_INSTRUCTION"
+   ],
+   "repo": "pypa/packaging",
+   "ships_a_test": true,
+   "sources": [
+    "src/packaging/tags.py"
+   ],
+   "verdict": "REFUSED"
+  },
+  {
+   "commit": "7e4f2588923e647bb7c3d5b350473e39e4b279d4",
+   "instruction": "Support --disable-gil builds (PEP 703) in packaging.tags (#728)",
+   "modules": [
+    {
+     "clauses": [
+      {
+       "fixed": {
+        "outcome": "RETURNED",
+        "type": "bool",
+        "value_repr": "False"
+       },
+       "operator": "ACCEPTS_NAMED",
+       "parent": {
+        "outcome": "NOT_CALLABLE",
+        "type": null,
+        "value_repr": null
+       },
+       "value": "--disable-gil",
+       "verdict": "WRONG_AT_FIXED"
+      },
+      {
+       "operator": "STILL_RUNS",
+       "verdict": "NOT_APPLICABLE"
+      }
+     ],
+     "direction": "WIDENING",
+     "discriminating_clauses": 0,
+     "module": "packaging.tags",
+     "refusals": [
+      {
+       "function": null,
+       "refusal": "REFUSED__THE_NAMED_VALUE_IS_NOT_IN_THE_ENVIRONMENT",
+       "value": "703"
+      },
+      {
+       "function": null,
+       "refusal": "REFUSED__THE_NAMED_VALUE_IS_NOT_IN_THE_ENVIRONMENT",
+       "value": "packaging.tags"
+      },
+      {
+       "function": null,
+       "refusal": "REFUSED__THE_NAMED_VALUE_IS_NOT_IN_THE_ENVIRONMENT",
+       "value": "728"
+      }
+     ],
+     "vacuous_clauses": 0,
+     "verdict": "WRONG_AT_FIXED",
+     "wrong_clauses": 1
+    }
+   ],
+   "refusal_kinds": [
+    "REFUSED__THE_NAMED_VALUE_IS_NOT_IN_THE_ENVIRONMENT"
+   ],
+   "repo": "pypa/packaging",
+   "ships_a_test": true,
+   "sources": [
+    "src/packaging/tags.py"
+   ],
+   "verdict": "WRONG_AT_FIXED"
+  },
+  {
+   "commit": "080405b1974efff3e7b5a199c3b6592f36ad97e0",
+   "instruction": "Correctly use the ExceptionGroup shim only when needed (#736)",
+   "modules": [
+    {
+     "module": "packaging.metadata",
+     "refusals": [
+      {
+       "refusal": "REFUSED__NO_DIRECTION_IN_THE_INSTRUCTION",
+       "values": [
+        "736"
+       ],
+       "why": "no verb states what should happen"
+      }
+     ],
+     "verdict": "REFUSED"
+    }
+   ],
+   "refusal_kinds": [
+    "REFUSED__NO_DIRECTION_IN_THE_INSTRUCTION"
+   ],
+   "repo": "pypa/packaging",
+   "ships_a_test": true,
+   "sources": [
+    "src/packaging/metadata.py"
+   ],
+   "verdict": "REFUSED"
+  },
+  {
+   "commit": "09f131b326453f18a217fe34f4f7a77603b545db",
+   "instruction": "Default optional metadata values to None (#734)",
+   "modules": [
+    {
+     "module": "packaging.metadata",
+     "refusals": [
+      {
+       "refusal": "REFUSED__NO_DIRECTION_IN_THE_INSTRUCTION",
+       "values": [
+        "734"
+       ],
+       "why": "no verb states what should happen"
+      }
+     ],
+     "verdict": "REFUSED"
+    }
+   ],
+   "refusal_kinds": [
+    "REFUSED__NO_DIRECTION_IN_THE_INSTRUCTION"
+   ],
+   "repo": "pypa/packaging",
+   "ships_a_test": true,
+   "sources": [
+    "src/packaging/metadata.py"
+   ],
+   "verdict": "REFUSED"
+  },
+  {
+   "commit": "f13c298f0a623f3f7e01cc8395956b718d21503a",
+   "instruction": "Clarify version split/join usage (#725)",
+   "modules": [
+    {
+     "module": "packaging.specifiers",
+     "refusals": [
+      {
+       "refusal": "REFUSED__NO_DIRECTION_IN_THE_INSTRUCTION",
+       "values": [
+        "725"
+       ],
+       "why": "no verb states what should happen"
+      }
+     ],
+     "verdict": "REFUSED"
+    }
+   ],
+   "refusal_kinds": [
+    "REFUSED__NO_DIRECTION_IN_THE_INSTRUCTION"
+   ],
+   "repo": "pypa/packaging",
+   "ships_a_test": false,
+   "sources": [
+    "src/packaging/specifiers.py"
+   ],
+   "verdict": "REFUSED"
+  },
+  {
+   "commit": "c52d2b30465ace6d11f54c01b6ea30419a94b5ef",
+   "instruction": "Fix specifier matching when it is long and has an epoch (#712)",
+   "modules": [
+    {
+     "module": "packaging.specifiers",
+     "refusals": [
+      {
+       "function": null,
+       "refusal": "REFUSED__THE_NAMED_VALUE_IS_NOT_IN_THE_ENVIRONMENT",
+       "value": "712"
+      }
+     ],
+     "verdict": "REFUSED"
+    }
+   ],
+   "refusal_kinds": [
+    "REFUSED__THE_NAMED_VALUE_IS_NOT_IN_THE_ENVIRONMENT"
+   ],
+   "repo": "pypa/packaging",
+   "ships_a_test": true,
+   "sources": [
+    "src/packaging/specifiers.py"
+   ],
+   "verdict": "REFUSED"
+  },
+  {
+   "commit": "cc0c65cb43537491ba468da1ba9b9f49c932d9eb",
+   "instruction": "Bump for development",
+   "modules": [
+    {
+     "module": "packaging",
+     "refusals": [
+      {
+       "refusal": "REFUSED__NO_VALUE_IN_THE_INSTRUCTION",
+       "why": "the sentence names nothing checkable"
+      }
+     ],
+     "verdict": "REFUSED"
+    }
+   ],
+   "refusal_kinds": [
+    "REFUSED__NO_VALUE_IN_THE_INSTRUCTION"
+   ],
+   "repo": "pypa/packaging",
+   "ships_a_test": false,
+   "sources": [
+    "src/packaging/__init__.py"
+   ],
+   "verdict": "REFUSED"
+  },
+  {
+   "commit": "b3a5d7d68991c040615d5345bb55f61de53ba176",
+   "instruction": "Bump for release",
+   "modules": [
+    {
+     "module": "packaging",
+     "refusals": [
+      {
+       "refusal": "REFUSED__NO_VALUE_IN_THE_INSTRUCTION",
+       "why": "the sentence names nothing checkable"
+      }
+     ],
+     "verdict": "REFUSED"
+    }
+   ],
+   "refusal_kinds": [
+    "REFUSED__NO_VALUE_IN_THE_INSTRUCTION"
+   ],
+   "repo": "pypa/packaging",
+   "ships_a_test": false,
+   "sources": [
+    "src/packaging/__init__.py"
+   ],
+   "verdict": "REFUSED"
+  },
+  {
+   "commit": "524b701c6e30fc4da9355117367273f591c6de72",
+   "instruction": "parse_{sdist,wheel}_filename: don't raise InvalidVersion (#721)",
+   "modules": [
+    {
+     "module": "packaging.utils",
+     "refusals": [
+      {
+       "refusal": "REFUSED__NO_DIRECTION_IN_THE_INSTRUCTION",
+       "values": [
+        "721"
+       ],
+       "why": "no verb states what should happen"
+      }
+     ],
+     "verdict": "REFUSED"
+    }
+   ],
+   "refusal_kinds": [
+    "REFUSED__NO_DIRECTION_IN_THE_INSTRUCTION"
+   ],
+   "repo": "pypa/packaging",
+   "ships_a_test": true,
+   "sources": [
+    "src/packaging/utils.py"
+   ],
+   "verdict": "REFUSED"
+  },
+  {
+   "commit": "b509bef6a4573595b23a97ecbfe569000918157f",
+   "instruction": "Typing annotations fixed (#723)",
+   "modules": [
+    {
+     "module": "packaging.version",
+     "refusals": [
+      {
+       "refusal": "REFUSED__NO_DIRECTION_IN_THE_INSTRUCTION",
+       "values": [
+        "723"
+       ],
+       "why": "no verb states what should happen"
+      }
+     ],
+     "verdict": "REFUSED"
+    }
+   ],
+   "refusal_kinds": [
+    "REFUSED__NO_DIRECTION_IN_THE_INSTRUCTION"
+   ],
+   "repo": "pypa/packaging",
+   "ships_a_test": false,
+   "sources": [
+    "src/packaging/version.py"
+   ],
+   "verdict": "REFUSED"
+  },
+  {
+   "commit": "702353715de375a65e49d1ae4af21c35dce838b8",
+   "instruction": "fix: Update copyright date for docs (#713)",
+   "modules": [
+    {
+     "module": "packaging",
+     "refusals": [
+      {
+       "function": null,
+       "refusal": "REFUSED__THE_NAMED_VALUE_IS_NOT_IN_THE_ENVIRONMENT",
+       "value": "713"
+      }
+     ],
+     "verdict": "REFUSED"
+    }
+   ],
+   "refusal_kinds": [
+    "REFUSED__THE_NAMED_VALUE_IS_NOT_IN_THE_ENVIRONMENT"
+   ],
+   "repo": "pypa/packaging",
+   "ships_a_test": false,
+   "sources": [
+    "src/packaging/__init__.py"
+   ],
+   "verdict": "REFUSED"
+  },
+  {
+   "commit": "c1346dfdafecffc30ca777ac004ed2898e60e34e",
+   "instruction": "fix: Detect when a platform is 32-bit more accurately (#711)",
+   "modules": [
+    {
+     "module": "packaging.tags",
+     "refusals": [
+      {
+       "function": null,
+       "refusal": "REFUSED__THE_NAMED_VALUE_IS_NOT_IN_THE_ENVIRONMENT",
+       "value": "711"
+      }
+     ],
+     "verdict": "REFUSED"
+    }
+   ],
+   "refusal_kinds": [
+    "REFUSED__THE_NAMED_VALUE_IS_NOT_IN_THE_ENVIRONMENT"
+   ],
+   "repo": "pypa/packaging",
+   "ships_a_test": true,
+   "sources": [
+    "src/packaging/tags.py"
+   ],
+   "verdict": "REFUSED"
+  },
+  {
+   "commit": "61e6efb6b6ee99e445f575bc522b716daeaa37cf",
+   "instruction": "Support enriched metadata in `packaging.metadata` (#686)",
+   "modules": [
+    {
+     "module": "packaging.metadata",
+     "refusals": [
+      {
+       "function": null,
+       "refusal": "REFUSED__THE_NAMED_VALUE_IS_NOT_IN_THE_ENVIRONMENT",
+       "value": "packaging.metadata"
+      },
+      {
+       "function": null,
+       "refusal": "REFUSED__THE_NAMED_VALUE_IS_NOT_IN_THE_ENVIRONMENT",
+       "value": "686"
+      }
+     ],
+     "verdict": "REFUSED"
+    },
+    {
+     "module": "packaging.utils",
+     "refusals": [
+      {
+       "function": null,
+       "refusal": "REFUSED__THE_NAMED_VALUE_IS_NOT_IN_THE_ENVIRONMENT",
+       "value": "packaging.metadata"
+      },
+      {
+       "function": null,
+       "refusal": "REFUSED__THE_NAMED_VALUE_IS_NOT_IN_THE_ENVIRONMENT",
+       "value": "686"
+      }
+     ],
+     "verdict": "REFUSED"
+    }
+   ],
+   "refusal_kinds": [
+    "REFUSED__THE_NAMED_VALUE_IS_NOT_IN_THE_ENVIRONMENT"
+   ],
+   "repo": "pypa/packaging",
+   "ships_a_test": true,
+   "sources": [
+    "src/packaging/metadata.py",
+    "src/packaging/utils.py"
+   ],
+   "verdict": "REFUSED"
+  },
+  {
+   "commit": "33cc1f75a0b91113ca1feb0751416ec4a165e3f4",
+   "instruction": "Fix typos found by codespell (#706)",
+   "modules": [
+    {
+     "module": "packaging.metadata",
+     "refusals": [
+      {
+       "function": null,
+       "refusal": "REFUSED__THE_NAMED_VALUE_IS_NOT_IN_THE_ENVIRONMENT",
+       "value": "706"
+      }
+     ],
+     "verdict": "REFUSED"
+    }
+   ],
+   "refusal_kinds": [
+    "REFUSED__THE_NAMED_VALUE_IS_NOT_IN_THE_ENVIRONMENT"
+   ],
+   "repo": "pypa/packaging",
+   "ships_a_test": false,
+   "sources": [
+    "src/packaging/metadata.py"
+   ],
+   "verdict": "REFUSED"
+  },
+  {
+   "commit": "e120b49667e1c769ff60a4181cb1897c78f4f386",
+   "instruction": "Fix version regex pattern pre-release labels to be sorted (#705)",
+   "modules": [
+    {
+     "module": "packaging.version",
+     "refusals": [
+      {
+       "function": null,
+       "refusal": "REFUSED__THE_NAMED_VALUE_IS_NOT_IN_THE_ENVIRONMENT",
+       "value": "705"
+      }
+     ],
+     "verdict": "REFUSED"
+    }
+   ],
+   "refusal_kinds": [
+    "REFUSED__THE_NAMED_VALUE_IS_NOT_IN_THE_ENVIRONMENT"
+   ],
+   "repo": "pypa/packaging",
+   "ships_a_test": false,
+   "sources": [
+    "src/packaging/version.py"
+   ],
+   "verdict": "REFUSED"
+  },
+  {
+   "commit": "e5a7893a99d64acb18ca8eec8848daa026c1c4de",
+   "instruction": "Update pyupgrade to Python 3.7+ (#580)",
+   "modules": [
+    {
+     "module": "packaging._musllinux",
+     "refusals": [
+      {
+       "refusal": "REFUSED__NO_DIRECTION_IN_THE_INSTRUCTION",
+       "values": [
+        "3.7",
+        "580"
+       ],
+       "why": "no verb states what should happen"
+      }
+     ],
+     "verdict": "REFUSED"
+    },
+    {
+     "module": "packaging.tags",
+     "refusals": [
+      {
+       "refusal": "REFUSED__NO_DIRECTION_IN_THE_INSTRUCTION",
+       "values": [
+        "3.7",
+        "580"
+       ],
+       "why": "no verb states what should happen"
+      }
+     ],
+     "verdict": "REFUSED"
+    }
+   ],
+   "refusal_kinds": [
+    "REFUSED__NO_DIRECTION_IN_THE_INSTRUCTION"
+   ],
+   "repo": "pypa/packaging",
+   "ships_a_test": true,
+   "sources": [
+    "src/packaging/_musllinux.py",
+    "src/packaging/tags.py"
+   ],
+   "verdict": "REFUSED"
+  },
+  {
+   "commit": "1277904652c497ec84560a830a2e01d434358818",
+   "instruction": "Ability to install `armv7l manylinux/musllinux` wheels on `armv8l` (#690)",
+   "modules": [
+    {
+     "module": "packaging._manylinux",
+     "refusals": [
+      {
+       "refusal": "REFUSED__NO_DIRECTION_IN_THE_INSTRUCTION",
+       "values": [
+        "armv7l manylinux/musllinux",
+        "armv8l",
+        "690"
+       ],
+       "why": "no verb states what should happen"
+      }
+     ],
+     "verdict": "REFUSED"
+    },
+    {
+     "module": "packaging._musllinux",
+     "refusals": [
+      {
+       "refusal": "REFUSED__NO_DIRECTION_IN_THE_INSTRUCTION",
+       "values": [
+        "armv7l manylinux/musllinux",
+        "armv8l",
+        "690"
+       ],
+       "why": "no verb states what should happen"
+      }
+     ],
+     "verdict": "REFUSED"
+    },
+    {
+     "module": "packaging.tags",
+     "refusals": [
+      {
+       "refusal": "REFUSED__NO_DIRECTION_IN_THE_INSTRUCTION",
+       "values": [
+        "armv7l manylinux/musllinux",
+        "armv8l",
+        "690"
+       ],
+       "why": "no verb states what should happen"
+      }
+     ],
+     "verdict": "REFUSED"
+    }
+   ],
+   "refusal_kinds": [
+    "REFUSED__NO_DIRECTION_IN_THE_INSTRUCTION"
+   ],
+   "repo": "pypa/packaging",
+   "ships_a_test": true,
+   "sources": [
+    "src/packaging/_manylinux.py",
+    "src/packaging/_musllinux.py",
+    "src/packaging/tags.py"
+   ],
+   "verdict": "REFUSED"
+  },
+  {
+   "commit": "2f80de7fd2a8bc199dadf5cf3f5f302a17084792",
+   "instruction": "Add platform tag support for LoongArch (#693)",
+   "modules": [
+    {
+     "module": "packaging._manylinux",
+     "refusals": [
+      {
+       "function": null,
+       "refusal": "REFUSED__THE_NAMED_VALUE_IS_NOT_IN_THE_ENVIRONMENT",
+       "value": "693"
+      }
+     ],
+     "verdict": "REFUSED"
+    }
+   ],
+   "refusal_kinds": [
+    "REFUSED__THE_NAMED_VALUE_IS_NOT_IN_THE_ENVIRONMENT"
+   ],
+   "repo": "pypa/packaging",
+   "ships_a_test": false,
+   "sources": [
+    "src/packaging/_manylinux.py"
+   ],
+   "verdict": "REFUSED"
+  },
+  {
+   "commit": "e8f839f7400253998a07a993420ae308bb4f159d",
+   "instruction": "Canonicalize names for requirements comparison (#696)",
+   "modules": [
+    {
+     "module": "packaging.requirements",
+     "refusals": [
+      {
+       "refusal": "REFUSED__NO_DIRECTION_IN_THE_INSTRUCTION",
+       "values": [
+        "696"
+       ],
+       "why": "no verb states what should happen"
+      }
+     ],
+     "verdict": "REFUSED"
+    }
+   ],
+   "refusal_kinds": [
+    "REFUSED__NO_DIRECTION_IN_THE_INSTRUCTION"
+   ],
+   "repo": "pypa/packaging",
+   "ships_a_test": true,
+   "sources": [
+    "src/packaging/requirements.py"
+   ],
+   "verdict": "REFUSED"
+  },
+  {
+   "commit": "538cd15c7d73d5a7466f8343e256923e77ab7113",
+   "instruction": "remove unused argument in `_manylinux._is_compatible` (#700)",
+   "modules": [
+    {
+     "module": "packaging._manylinux",
+     "refusals": [
+      {
+       "function": null,
+       "refusal": "REFUSED__THE_NAMED_VALUE_IS_NOT_IN_THE_ENVIRONMENT",
+       "value": "_manylinux._is_compatible"
+      },
+      {
+       "function": null,
+       "refusal": "REFUSED__THE_NAMED_VALUE_IS_NOT_IN_THE_ENVIRONMENT",
+       "value": "700"
+      }
+     ],
+     "verdict": "REFUSED"
+    }
+   ],
+   "refusal_kinds": [
+    "REFUSED__THE_NAMED_VALUE_IS_NOT_IN_THE_ENVIRONMENT"
+   ],
+   "repo": "pypa/packaging",
+   "ships_a_test": true,
+   "sources": [
+    "src/packaging/_manylinux.py"
+   ],
+   "verdict": "REFUSED"
+  },
+  {
+   "commit": "2b389f3a1ae895d050e4afc5152877f2c100564a",
+   "instruction": "Add PyPy 3.10 to CI (#699)",
+   "modules": [
+    {
+     "module": "noxfile",
+     "refusals": [
+      {
+       "function": null,
+       "refusal": "REFUSED__THE_NAMED_VALUE_IS_NOT_IN_A_CALLABLE",
+       "value": "3.10"
+      },
+      {
+       "function": null,
+       "refusal": "REFUSED__THE_NAMED_VALUE_IS_NOT_IN_THE_ENVIRONMENT",
+       "value": "699"
+      }
+     ],
+     "verdict": "REFUSED"
+    }
+   ],
+   "refusal_kinds": [
+    "REFUSED__THE_NAMED_VALUE_IS_NOT_IN_A_CALLABLE",
+    "REFUSED__THE_NAMED_VALUE_IS_NOT_IN_THE_ENVIRONMENT"
+   ],
+   "repo": "pypa/packaging",
+   "ships_a_test": false,
+   "sources": [
+    "noxfile.py"
+   ],
+   "verdict": "REFUSED"
+  },
+  {
+   "commit": "f8893d4b06a3231896687b6c45625b7ae98c4993",
+   "instruction": "Add types for packaging.version._Version (#665)",
+   "modules": [
+    {
+     "module": "packaging.version",
+     "refusals": [
+      {
+       "function": null,
+       "refusal": "REFUSED__THE_NAMED_VALUE_IS_NOT_IN_A_CALLABLE",
+       "value": "packaging.version"
+      },
+      {
+       "function": null,
+       "refusal": "REFUSED__THE_NAMED_VALUE_IS_NOT_IN_THE_ENVIRONMENT",
+       "value": "665"
+      }
+     ],
+     "verdict": "REFUSED"
+    }
+   ],
+   "refusal_kinds": [
+    "REFUSED__THE_NAMED_VALUE_IS_NOT_IN_A_CALLABLE",
+    "REFUSED__THE_NAMED_VALUE_IS_NOT_IN_THE_ENVIRONMENT"
+   ],
+   "repo": "pypa/packaging",
+   "ships_a_test": false,
+   "sources": [
+    "src/packaging/version.py"
+   ],
+   "verdict": "REFUSED"
+  },
+  {
+   "commit": "fe8f0bb99c41c5e3a8c2395d4e849c1eff72949c",
+   "instruction": "Remove URL validation from requirement parsing (#684)",
+   "modules": [
+    {
+     "module": "packaging.requirements",
+     "refusals": [
+      {
+       "function": null,
+       "refusal": "REFUSED__THE_NAMED_VALUE_IS_NOT_IN_THE_ENVIRONMENT",
+       "value": "684"
+      }
+     ],
+     "verdict": "REFUSED"
+    }
+   ],
+   "refusal_kinds": [
+    "REFUSED__THE_NAMED_VALUE_IS_NOT_IN_THE_ENVIRONMENT"
+   ],
+   "repo": "pypa/packaging",
+   "ships_a_test": true,
+   "sources": [
+    "src/packaging/requirements.py"
+   ],
+   "verdict": "REFUSED"
+  },
+  {
+   "commit": "63f4cfe679fb3d9322e56d8569207ecff4735238",
+   "instruction": "Add Python 3.12 to CI (#689)",
+   "modules": [
+    {
+     "module": "noxfile",
+     "refusals": [
+      {
+       "function": null,
+       "refusal": "REFUSED__THE_NAMED_VALUE_IS_NOT_IN_A_CALLABLE",
+       "value": "3.12"
+      },
+      {
+       "function": null,
+       "refusal": "REFUSED__THE_NAMED_VALUE_IS_NOT_IN_THE_ENVIRONMENT",
+       "value": "689"
+      }
+     ],
+     "verdict": "REFUSED"
+    }
+   ],
+   "refusal_kinds": [
+    "REFUSED__THE_NAMED_VALUE_IS_NOT_IN_A_CALLABLE",
+    "REFUSED__THE_NAMED_VALUE_IS_NOT_IN_THE_ENVIRONMENT"
+   ],
+   "repo": "pypa/packaging",
+   "ships_a_test": false,
+   "sources": [
+    "noxfile.py"
+   ],
+   "verdict": "REFUSED"
+  },
+  {
+   "commit": "55584fb5ca327ba38b74ca5c668125caaebd9a5d",
+   "instruction": "Ensure that the entire string is consumed with `parse_marker` (#687)",
+   "modules": [
+    {
+     "module": "packaging._parser",
+     "refusals": [
+      {
+       "refusal": "REFUSED__NO_DIRECTION_IN_THE_INSTRUCTION",
+       "values": [
+        "parse_marker",
+        "687"
+       ],
+       "why": "no verb states what should happen"
+      }
+     ],
+     "verdict": "REFUSED"
+    }
+   ],
+   "refusal_kinds": [
+    "REFUSED__NO_DIRECTION_IN_THE_INSTRUCTION"
+   ],
+   "repo": "pypa/packaging",
+   "ships_a_test": true,
+   "sources": [
+    "src/packaging/_parser.py"
+   ],
+   "verdict": "REFUSED"
+  },
+  {
+   "commit": "30d4a1c5fb5a6c32d6d725f97935330960ce5d15",
+   "instruction": "Bump for development",
+   "modules": [
+    {
+     "module": "packaging",
+     "refusals": [
+      {
+       "refusal": "REFUSED__NO_VALUE_IN_THE_INSTRUCTION",
+       "why": "the sentence names nothing checkable"
+      }
+     ],
+     "verdict": "REFUSED"
+    }
+   ],
+   "refusal_kinds": [
+    "REFUSED__NO_VALUE_IN_THE_INSTRUCTION"
+   ],
+   "repo": "pypa/packaging",
+   "ships_a_test": false,
+   "sources": [
+    "src/packaging/__init__.py"
+   ],
+   "verdict": "REFUSED"
+  },
+  {
+   "commit": "d563917280d65a6ce2e622bd3d07438e1ee259f3",
+   "instruction": "Bump for release",
+   "modules": [
+    {
+     "module": "packaging",
+     "refusals": [
+      {
+       "refusal": "REFUSED__NO_VALUE_IN_THE_INSTRUCTION",
+       "why": "the sentence names nothing checkable"
+      }
+     ],
+     "verdict": "REFUSED"
+    }
+   ],
+   "refusal_kinds": [
+    "REFUSED__NO_VALUE_IN_THE_INSTRUCTION"
+   ],
+   "repo": "pypa/packaging",
+   "ships_a_test": false,
+   "sources": [
+    "src/packaging/__init__.py"
+   ],
+   "verdict": "REFUSED"
+  },
+  {
+   "commit": "5b34465682d40ddd42dd6cba88e158e1674de7b9",
+   "instruction": "Import underlying parser functions as an underscored variable (#663)",
+   "modules": [
+    {
+     "module": "packaging.markers",
+     "refusals": [
+      {
+       "refusal": "REFUSED__NO_DIRECTION_IN_THE_INSTRUCTION",
+       "values": [
+        "663"
+       ],
+       "why": "no verb states what should happen"
+      }
+     ],
+     "verdict": "REFUSED"
+    },
+    {
+     "module": "packaging.requirements",
+     "refusals": [
+      {
+       "refusal": "REFUSED__NO_DIRECTION_IN_THE_INSTRUCTION",
+       "values": [
+        "663"
+       ],
+       "why": "no verb states what should happen"
+      }
+     ],
+     "verdict": "REFUSED"
+    }
+   ],
+   "refusal_kinds": [
+    "REFUSED__NO_DIRECTION_IN_THE_INSTRUCTION"
+   ],
+   "repo": "pypa/packaging",
+   "ships_a_test": false,
+   "sources": [
+    "src/packaging/markers.py",
+    "src/packaging/requirements.py"
+   ],
+   "verdict": "REFUSED"
+  },
+  {
+   "commit": "7013a6048fe13f5c937de33179763100a57d7658",
+   "instruction": "Replace spaces in platform names with underscores (#620)",
+   "modules": [
+    {
+     "module": "packaging.tags",
+     "refusals": [
+      {
+       "refusal": "REFUSED__NO_DIRECTION_IN_THE_INSTRUCTION",
+       "values": [
+        "620"
+       ],
+       "why": "no verb states what should happen"
+      }
+     ],
+     "verdict": "REFUSED"
+    }
+   ],
+   "refusal_kinds": [
+    "REFUSED__NO_DIRECTION_IN_THE_INSTRUCTION"
+   ],
+   "repo": "pypa/packaging",
+   "ships_a_test": true,
+   "sources": [
+    "src/packaging/tags.py"
+   ],
+   "verdict": "REFUSED"
+  },
+  {
+   "commit": "28c1a05d571d15a3c54c1dedc2ce0e503d486697",
+   "instruction": "Relax typing of _key on _BaseVersion (#669)",
+   "modules": [
+    {
+     "module": "packaging.version",
+     "refusals": [
+      {
+       "refusal": "REFUSED__NO_DIRECTION_IN_THE_INSTRUCTION",
+       "values": [
+        "669"
+       ],
+       "why": "no verb states what should happen"
+      }
+     ],
+     "verdict": "REFUSED"
+    }
+   ],
+   "refusal_kinds": [
+    "REFUSED__NO_DIRECTION_IN_THE_INSTRUCTION"
+   ],
+   "repo": "pypa/packaging",
+   "ships_a_test": false,
+   "sources": [
+    "src/packaging/version.py"
+   ],
+   "verdict": "REFUSED"
+  },
+  {
+   "commit": "a6c9bc4dce968f7bfc05e4a93137f65ce4564be9",
+   "instruction": "Handle prefix match with zeros at end of prefix correctly (#674)",
+   "modules": [
+    {
+     "module": "packaging.specifiers",
+     "refusals": [
+      {
+       "function": null,
+       "refusal": "REFUSED__THE_NAMED_VALUE_IS_NOT_IN_THE_ENVIRONMENT",
+       "value": "674"
+      }
+     ],
+     "verdict": "REFUSED"
+    }
+   ],
+   "refusal_kinds": [
+    "REFUSED__THE_NAMED_VALUE_IS_NOT_IN_THE_ENVIRONMENT"
+   ],
+   "repo": "pypa/packaging",
+   "ships_a_test": true,
+   "sources": [
+    "src/packaging/specifiers.py"
+   ],
+   "verdict": "REFUSED"
+  },
+  {
+   "commit": "7722044f4b0f689eec8cb89afc8d3e4bb8e62908",
+   "instruction": "Parse raw metadata (#671)",
+   "modules": [
+    {
+     "module": "noxfile",
+     "refusals": [
+      {
+       "refusal": "REFUSED__NO_DIRECTION_IN_THE_INSTRUCTION",
+       "values": [
+        "671"
+       ],
+       "why": "no verb states what should happen"
+      }
+     ],
+     "verdict": "REFUSED"
+    },
+    {
+     "module": "packaging._manylinux",
+     "refusals": [
+      {
+       "refusal": "REFUSED__NO_DIRECTION_IN_THE_INSTRUCTION",
+       "values": [
+        "671"
+       ],
+       "why": "no verb states what should happen"
+      }
+     ],
+     "verdict": "REFUSED"
+    }
+   ],
+   "refusal_kinds": [
+    "REFUSED__NO_DIRECTION_IN_THE_INSTRUCTION"
+   ],
+   "repo": "pypa/packaging",
+   "ships_a_test": true,
+   "sources": [
+    "noxfile.py",
+    "src/packaging/_manylinux.py",
+    "src/packaging/metadata.py"
+   ],
+   "verdict": "REFUSED"
+  },
+  {
+   "commit": "96d85be0e3d1d0f7fa42ce0cf41cdcce884fa8e0",
+   "instruction": "Improve error for local version label with unsupported operators (#675)",
+   "modules": [
+    {
+     "module": "packaging._parser",
+     "refusals": [
+      {
+       "refusal": "REFUSED__NO_DIRECTION_IN_THE_INSTRUCTION",
+       "values": [
+        "675"
+       ],
+       "why": "no verb states what should happen"
+      }
+     ],
+     "verdict": "REFUSED"
+    },
+    {
+     "module": "packaging._tokenizer",
+     "refusals": [
+      {
+       "refusal": "REFUSED__NO_DIRECTION_IN_THE_INSTRUCTION",
+       "values": [
+        "675"
+       ],
+       "why": "no verb states what should happen"
+      }
+     ],
+     "verdict": "REFUSED"
+    }
+   ],
+   "refusal_kinds": [
+    "REFUSED__NO_DIRECTION_IN_THE_INSTRUCTION"
+   ],
+   "repo": "pypa/packaging",
+   "ships_a_test": true,
+   "sources": [
+    "src/packaging/_parser.py",
+    "src/packaging/_tokenizer.py"
+   ],
+   "verdict": "REFUSED"
+  },
+  {
+   "commit": "1b9da4420e9e23046dc095a3779f2607ae6e4d62",
+   "instruction": "Upgrade to latest mypy (#664)",
+   "modules": [
+    {
+     "module": "packaging.specifiers",
+     "refusals": [
+      {
+       "refusal": "REFUSED__NO_DIRECTION_IN_THE_INSTRUCTION",
+       "values": [
+        "664"
+       ],
+       "why": "no verb states what should happen"
+      }
+     ],
+     "verdict": "REFUSED"
+    },
+    {
+     "module": "packaging.tags",
+     "refusals": [
+      {
+       "refusal": "REFUSED__NO_DIRECTION_IN_THE_INSTRUCTION",
+       "values": [
+        "664"
+       ],
+       "why": "no verb states what should happen"
+      }
+     ],
+     "verdict": "REFUSED"
+    }
+   ],
+   "refusal_kinds": [
+    "REFUSED__NO_DIRECTION_IN_THE_INSTRUCTION"
+   ],
+   "repo": "pypa/packaging",
+   "ships_a_test": false,
+   "sources": [
+    "src/packaging/specifiers.py",
+    "src/packaging/tags.py"
+   ],
+   "verdict": "REFUSED"
+  },
+  {
+   "commit": "068a0b5975a95a5cc30262599ca29bb6ceabe4af",
+   "instruction": "Add dedicated error for specifiers with incorrect `.*` suffix",
+   "modules": [
+    {
+     "module": "packaging._parser",
+     "refusals": [
+      {
+       "refusal": "REFUSED__NO_VALUE_IN_THE_INSTRUCTION",
+       "why": "the sentence names nothing checkable"
+      }
+     ],
+     "verdict": "REFUSED"
+    },
+    {
+     "module": "packaging._tokenizer",
+     "refusals": [
+      {
+       "refusal": "REFUSED__NO_VALUE_IN_THE_INSTRUCTION",
+       "why": "the sentence names nothing checkable"
+      }
+     ],
+     "verdict": "REFUSED"
+    }
+   ],
+   "refusal_kinds": [
+    "REFUSED__NO_VALUE_IN_THE_INSTRUCTION"
+   ],
+   "repo": "pypa/packaging",
+   "ships_a_test": true,
+   "sources": [
+    "src/packaging/_parser.py",
+    "src/packaging/_tokenizer.py"
+   ],
+   "verdict": "REFUSED"
+  }
+ ],
+ "date": "2026-11-16",
+ "incremental_spend_usd": 0,
+ "model_calls": 0,
+ "network_calls": 0,
+ "refusal_census": {
+  "REFUSED__NO_DIRECTION_IN_THE_INSTRUCTION": 19,
+  "REFUSED__NO_VALUE_IN_THE_INSTRUCTION": 6,
+  "REFUSED__THE_NAMED_VALUE_IS_NOT_IN_A_CALLABLE": 3,
+  "REFUSED__THE_NAMED_VALUE_IS_NOT_IN_THE_ENVIRONMENT": 15
+ },
+ "reproduce": ".venv/bin/python canonical/swe_kernel/instruction_contract_for_code_v1.py --corpus --limit 40 --json canonical/verification/INSTRUCTION_CONTRACT_FOR_CODE_20261116_V1.json",
+ "reused_not_rebuilt": {
+  "corpus": "canonical/swe_kernel/structural_check_of_real_changes_v1.py -- commits_touching_sources, module_name_for, read only",
+  "execution": "canonical/swe_kernel/checkability_by_differential_pin_v1.py -- probe, read only",
+  "materialisation": "canonical/swe_kernel/witness_inversion_v1.py -- materialise, read only",
+  "the_pattern": "canonical/runtime/instruction_contract_v1.py -- a small closed clause language, refusals named one by one, falsifiable in both directions; read, not modified"
+ },
+ "schema": "BRAIN_INSTRUCTION_CONTRACT_FOR_CODE_V1",
+ "states": {
+  "commits": 40,
+  "compiled": 2,
+  "discriminating": 0,
+  "refused": 38,
+  "untested": 19,
+  "vacuous": 0,
+  "with_tests": 21,
+  "wrong_at_fixed": 2
+ },
+ "the_instrument_is_proven_able_to_win_before_its_zero_is_read": "test_a_real_instruction_compiles_into_a_discriminating_contract builds a real two-state repository where the parent raises and the fixed state accepts the named value, and the compiler returns DISCRIMINATING with the expected outcomes. The same file pins VACUOUS and WRONG_AT_FIXED, so the corpus zero is a statement about the supply of specifications in history, not about a grader that cannot pass or cannot fail.",
+ "the_language": {
+  "clauses": [
+   "ACCEPTS_NAMED",
+   "REJECTS_NAMED",
+   "NAMED_IN_OUTCOME",
+   "STILL_RUNS"
+  ],
+  "directions": {
+   "NARROWING": [
+    "remove",
+    "removes",
+    "reject",
+    "rejects",
+    "disallow",
+    "disallows",
+    "drop",
+    "drops",
+    "disable",
+    "disables",
+    "forbid",
+    "forbids",
+    "ban",
+    "bans",
+    "retire"
+   ],
+   "REPAIR": [
+    "fix",
+    "fixes",
+    "correct",
+    "corrects",
+    "repair",
+    "repairs",
+    "validate",
+    "validates",
+    "clamp",
+    "clamps",
+    "check",
+    "checks",
+    "detect",
+    "detects"
+   ],
+   "WIDENING": [
+    "add",
+    "support",
+    "supports",
+    "supported",
+    "accept",
+    "accepts",
+    "allow",
+    "allows",
+    "enable",
+    "enables",
+    "recognise",
+    "recognize",
+    "handle",
+    "handles",
+    "include",
+    "includes",
+    "permit"
+   ]
+  },
+  "refusals": [
+   "REFUSED__NO_VALUE_IN_THE_INSTRUCTION",
+   "REFUSED__THE_NAMED_VALUE_IS_NOT_IN_THE_ENVIRONMENT",
+   "REFUSED__THE_NAMED_VALUE_IS_NOT_IN_A_CALLABLE",
+   "REFUSED__NO_DIRECTION_IN_THE_INSTRUCTION",
+   "REFUSED__NO_SINGLE_ARGUMENT_CALLABLE"
+  ],
+  "values": "quoted strings and value-shaped tokens the sentence itself names"
+ },
+ "the_three_bugs_this_round_found_in_itself": [
+  {
+   "bug": "refusals double-counted",
+   "direction_it_flattered": "made the refusal rate look larger and the compile rate smaller",
+   "fix": "one increment path; commit-level and module-level denominators reported apart",
+   "symptom": "40 commits read as 78 refusals"
+  },
+  {
+   "bug": "direction read inside the named value",
+   "direction_it_flattered": "it produced the only WRONG_AT_FIXED that the bug fix then turned into a false DISCRIMINATING",
+   "fix": "strip the sentence's own named values before reading its verb; test pins WIDENING and NARROWING on the same flag",
+   "symptom": "'Support --disable-gil builds' parsed as NARROWING because the flag contains `disable`"
+  },
+  {
+   "bug": "a bool that returned False counted as acceptance",
+   "direction_it_flattered": "manufactured a win out of the environment saying no",
+   "fix": "_succeeded requires a truthy return; falsy containers and False are refusals; test pins all five cases",
+   "symptom": "ACCEPTS_NAMED satisfied by `supports_arch('riscv64') -> False`; 1 DISCRIMINATING appeared"
+  }
+ ],
+ "the_two_compiled_rows_in_full": [
+  {
+   "clause": "ACCEPTS_NAMED(riscv64) at `_have_compatible_abi`",
+   "commit": "4d85340613",
+   "instruction": "Add riscv64 as a supported manylinux architecture (#751)",
+   "module": "packaging._manylinux",
+   "observed": "parent RETURNED False, fixed RETURNED False",
+   "ships_a_test": false,
+   "verdict": "WRONG_AT_FIXED",
+   "why": "the sentence's value is a BUILD TARGET; the callable whose text contains it is the ABI-compatibility test, and what actually changed is the generator that lists supported architectures. The value sits in the module, the mechanism that decides it sits elsewhere in the same module."
+  },
+  {
+   "clause": "ACCEPTS_NAMED(--disable-gil) at the callable whose text contains the flag",
+   "commit": "7e4f258892",
+   "instruction": "Support --disable-gil builds (PEP 703) in packaging.tags (#728)",
+   "module": "packaging.tags",
+   "observed": "parent NOT_CALLABLE, fixed RETURNED False",
+   "ships_a_test": true,
+   "verdict": "WRONG_AT_FIXED",
+   "why": "the 'value' is a BUILD FLAG named in prose, not an argument to any callable; the ground call returns False, so the environment does not exhibit the acceptance the sentence asserts. The human shipped a test for it; the model-free compiler could not find the mechanism."
+  }
+ ],
+ "what_a_contract_is": "the instruction's own named value, grounded in a callable the environment defines, driven at both states, judged in both directions. It says 'the named value is accepted here', never 'the change is what the user wanted'.",
+ "what_this_shows": "The value names a target; the site names a mechanism; textual occurrence does not connect them. 95% of real commit messages state no value at all or no direction at all (NO_DIRECTION 19, NO_VALUE 6, and 15 more name a value the environment never contains) -- that is the vocabulary-insufficiency certificate of 2026-11-13 arriving in the coding domain. The 5% that do name a value and a direction compile into a contract whose SITE is wrong both times, and the strict judge catches both. So the missing half in coding is not the value and not the direction: it is WHERE the claim is decided. Every November-2026 system that compiles instructions (ContextCov, RefineAct, AgentGuardUtil) spends a model in exactly that phase. This organ does not, and its measured ceiling against history is 2/40 compiled, 0/40 usable."
+}
