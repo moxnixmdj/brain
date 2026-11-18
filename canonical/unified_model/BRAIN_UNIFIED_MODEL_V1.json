@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 524,
+  "knowledge_documents": 526,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 7024,
+  "research_index_records": 7025,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 452,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "ddd4e10613a1d99d35c0e9496b91d40cd4ed49064db32abb1987d136969c8ad3"
+  "value": "2fe718b6e976f52c1222ccaf01469d57e90000a051f906e378968fbedaa873a4"
  },
  "engines": [
   {
@@ -47091,6 +47091,81 @@
    "title_terms": [
     "grows",
     "vocabulary"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 6789,
+   "headings": [
+    "Binding is not a lookup. It is evaluation",
+    "What round 6 left, and why this round exists",
+    "What was built",
+    "The measurement, on round 6's exact denominator",
+    "What the census says — and it is the finding",
+    "Two defects I found in this instrument before any number was believed",
+    "Where the whole series now stands",
+    "The next organ, named"
+   ],
+   "kind": "DOCUMENT",
+   "path": "BINDING_IS_NOT_A_LOOKUP_IT_IS_EVALUATION_20261116_V1.md",
+   "sha256": "64ca0a4977a7ed78f3de164c46e947b800752b68a712dc432289df40599b6b95",
+   "summary": "*Round 7. 2026-11-16. Branch `arena/d68bba94-brain`, base `90e2e795`.*",
+   "terms": {
+    "13": 2,
+    "2.4": 3,
+    "39": 3,
+    "40": 5,
+    "41": 2,
+    "83": 2,
+    "about": 2,
+    "action": 5,
+    "actions": 8,
+    "against": 3,
+    "all": 4,
+    "argument": 6,
+    "arguments": 6,
+    "because": 3,
+    "call": 9,
+    "cannot": 4,
+    "each": 3,
+    "environment": 11,
+    "evaluation": 3,
+    "every": 4,
+    "expressions": 5,
+    "lookup": 3,
+    "mined": 3,
+    "model": 4,
+    "moved": 3,
+    "name": 3,
+    "never": 3,
+    "next": 3,
+    "not": 14,
+    "now": 5,
+    "observable": 4,
+    "one": 4,
+    "only": 10,
+    "organ": 4,
+    "own": 5,
+    "proofs": 4,
+    "real": 8,
+    "release": 3,
+    "returns": 6,
+    "round": 16,
+    "run": 6,
+    "same": 5,
+    "scalar": 4,
+    "site": 9,
+    "so": 4,
+    "test": 3,
+    "tests": 6,
+    "those": 3
+   },
+   "title": "Binding is not a lookup. It is evaluation",
+   "title_terms": [
+    "binding",
+    "evaluation",
+    "lookup",
+    "not"
    ]
   },
   {
@@ -64088,6 +64163,82 @@
     "environment",
     "key",
     "not"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 8567,
+   "headings": [
+    "The environment is the answer to its own question",
+    "The question you are asking, stated as a testable claim",
+    "What was built",
+    "The measurement, on round 6's denominator",
+    "Why this is not a metric artifact — three checks",
+    "What is still refused, by name",
+    "The honest answer to \"so is everything solved?\"",
+    "What is real, what is not, and the smartest next thing",
+    "Where the series stands"
+   ],
+   "kind": "DOCUMENT",
+   "path": "THE_ENVIRONMENT_IS_THE_ANSWER_TO_ITS_OWN_QUESTION_20261116_V1.md",
+   "sha256": "baabb333d637cb220778c235a1298390d47a307ab58ad7dab3245a9ce99cfd1a",
+   "summary": "*Round 8. 2026-11-16. Branch `arena/006395f8-brain`, base `f79f9566`.*",
+   "terms": {
+    "11": 3,
+    "13": 3,
+    "2.4": 3,
+    "2026": 3,
+    "22": 4,
+    "28": 5,
+    "38": 4,
+    "47": 3,
+    "73.7": 4,
+    "78.6": 4,
+    "82": 4,
+    "about": 3,
+    "action": 6,
+    "actions": 12,
+    "all": 4,
+    "arguments": 3,
+    "arity": 5,
+    "because": 5,
+    "both": 5,
+    "call": 5,
+    "claim": 4,
+    "class": 3,
+    "computer": 3,
+    "environment": 14,
+    "every": 3,
+    "evidence": 4,
+    "exact": 3,
+    "exactly": 3,
+    "execution": 5,
+    "exposure": 5,
+    "model": 8,
+    "move": 6,
+    "never": 8,
+    "no": 10,
+    "not": 15,
+    "object": 4,
+    "one": 4,
+    "only": 4,
+    "own": 10,
+    "previously": 4,
+    "reached": 4,
+    "real": 11,
+    "release": 8,
+    "round": 20,
+    "same": 8,
+    "still": 4,
+    "tests": 4,
+    "wall": 4
+   },
+   "title": "The environment is the answer to its own question",
+   "title_terms": [
+    "answer",
+    "environment",
+    "own",
+    "question"
    ]
   },
   {
@@ -85846,10 +85997,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1326,
+  "included_source_count": 1328,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "46bf49075786463bb6cd134a50e7e39ca0c11098de106403db19feea8b45c652"
+  "source_tree_digest": "7d1da14f62b92c64ba53503d5191ef66ec8b377bb4ef2935f36f19cfc8430c96"
  },
  "research_index": [
   {
@@ -155790,6 +155941,23 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "2026-11-16",
+   "id": "research:canonical/verification/ARGUMENT_CONSTRUCTION_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/ARGUMENT_CONSTRUCTION_20261116_V1.json",
+   "schema": "BRAIN_ARGUMENT_CONSTRUCTION_V1",
+   "sha256": "5acfdc9a363df4d9cffef3467f086f918444fdd9469dc0fb5fb4a9e1e426dec1",
+   "status": "",
+   "terms": {
+    "20261116": 1,
+    "argument": 1,
+    "construction": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "",
    "id": "research:canonical/verification/ARM_LEARNED_IN_ONE_RUN_20261116_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -175705,36 +175873,6 @@
     "scoped": 1,
     "v1": 1,
     "verify": 1
-   }
-  },
-  {
-   "action_id": "",
-   "capability": false,
-   "date": "2026-11-18",
-   "id": "research:canonical/verification/IS_THE_FIX_EVEN_IN_THE_POOL_20261118_V1.json",
-   "kind": "RESEARCH_RECORD",
-   "path": "canonical/verification/IS_THE_FIX_EVEN_IN_THE_POOL_20261118_V1.json",
-   "schema": "BRAIN_IS_THE_FIX_EVEN_IN_THE_POOL_V1",
-   "sha256": "a5c81207f910fea6eecb6fb357e1d9842c9a3ffc96705ab668a02441dd2b1c73",
-   "status": "",
-   "terms": {
-    "20261118": 1,
-    "all": 1,
-    "along": 1,
-    "corpus-accepted": 1,
-    "defects": 1,
-    "even": 1,
-    "false": 1,
-    "five": 1,
-    "fix": 2,
-    "generator": 1,
-    "language": 1,
-    "limit": 1,
-    "not": 1,
-    "one": 1,
-    "pool": 2,
-    "positive": 1,
-    "v1": 1
    }
   },
   {
@@ -202743,6 +202881,23 @@
     "terminal": 1,
     "v1": 1,
     "verification": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "2026-11-16",
+   "id": "research:canonical/verification/SCENARIO_OBSERVATION_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/SCENARIO_OBSERVATION_20261116_V1.json",
+   "schema": "BRAIN_SCENARIO_OBSERVATION_V1",
+   "sha256": "2ed5e25a9cd3845b955c0911d7949feb9d420e44549fccf3b6b510e6c59204a9",
+   "status": "",
+   "terms": {
+    "20261116": 1,
+    "observation": 1,
+    "scenario": 1,
+    "v1": 1
    }
   },
   {
@@ -232651,6 +232806,29 @@
    }
   },
   {
+   "action_id": "ARGUMENT_CONSTRUCTION_20261116_V1",
+   "capability": false,
+   "date": "2026-11-16",
+   "id": "research:canonical/action_intents/ARGUMENT_CONSTRUCTION_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/ARGUMENT_CONSTRUCTION_20261116_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "2487f9fc8cdaba24a5e3b7a9db5922cc04f04e954bbd42cb5d6ea4eabddadf98",
+   "status": "PRODUCED",
+   "terms": {
+    "20261116": 1,
+    "argument": 1,
+    "argument_construction_20261116_v1": 1,
+    "binding_is_not_a_lookup_it_is_evaluation__of_the_41_real_actions_round_6_could_not_exercise_only_one_becomes_executable_from_the_environment_s_own_literal_call_sites_and_34_are_refused_because_those_call_sites_pass_constructed_objects__so_the_environment_proves_expressions_and_never_values_and_the_missing_organ_is_a_constructor_closure_that_evaluates_them": 1,
+    "construction": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "mine_the_environment_s_own_call_sites_and_encode_each_argument_vector_as_prober_tokens__resolving_names_only_from_local_literals_module_constants_and_builtin_types__then_accept_an_action_as_executable_only_if_the_mined_call_returns_twice_and_check_it_against_the_later_release": 1,
+    "produced": 1,
+    "the_third_manufacturability_route_is_closed_by_measurement_with_a_proven_instrument__40_real_commits_188_confirmed_laws_0_kills_and_174_of_the_laws_are_bare_totality__the_cause_is_named_real_work_extends_a_specification_instead_of_violating_a_property__so_the_next_organ_must_compile_intent_into_the_discriminating_pair_rather_than_derive_it_from_the_artifact": 1,
+    "v1": 1
+   }
+  },
+  {
    "action_id": "ARTIFACT_FREE_STEP_ADMITTED_WHEN_IT_CONSUMES_BYTES_THE_PROOF_ALREADY_REHASHED_V1_20261022_V1",
    "capability": false,
    "date": "2026-10-22",
@@ -242413,69 +242591,6 @@
    }
   },
   {
-   "action_id": "IS_THE_FIX_EVEN_IN_THE_POOL_20261118_V1",
-   "capability": false,
-   "date": "2026-11-18",
-   "id": "research:canonical/action_intents/IS_THE_FIX_EVEN_IN_THE_POOL_20261118_V1.json",
-   "kind": "RESEARCH_RECORD",
-   "path": "canonical/action_intents/IS_THE_FIX_EVEN_IN_THE_POOL_20261118_V1.json",
-   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "73159c075b3528a843d00c5a332c936b50ce21c02e7c54ccb12d53f2b5ffd6a2",
-   "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
-   "terms": {
-    "2000": 1,
-    "20261118": 1,
-    "361": 1,
-    "about": 1,
-    "accepted": 1,
-    "ast": 1,
-    "because": 1,
-    "branch": 1,
-    "cannot": 1,
-    "context": 1,
-    "corpus": 1,
-    "correct": 1,
-    "counted": 1,
-    "defect": 1,
-    "disagrees": 1,
-    "easiest": 1,
-    "even": 1,
-    "every": 1,
-    "exactly": 1,
-    "excluded": 2,
-    "express": 1,
-    "expressibility": 1,
-    "expression": 1,
-    "false": 1,
-    "five": 1,
-    "fix": 2,
-    "fixes": 1,
-    "fool": 1,
-    "own": 2,
-    "pool": 3,
-    "published": 2,
-    "site": 3
-   }
-  },
-  {
-   "action_id": "",
-   "capability": false,
-   "date": "",
-   "id": "research:canonical/action_intents/IS_THE_FIX_EVEN_IN_THE_POOL_20261118_V1.md",
-   "kind": "RESEARCH_RECORD",
-   "path": "canonical/action_intents/IS_THE_FIX_EVEN_IN_THE_POOL_20261118_V1.md",
-   "schema": "",
-   "sha256": "7421cb878387c50dfa9c143cb89a651d386cb7ec0fa8bbd104744c149f7c822d",
-   "status": "",
-   "terms": {
-    "20261118": 1,
-    "even": 1,
-    "fix": 1,
-    "pool": 1,
-    "v1": 1
-   }
-  },
-  {
    "action_id": "JUDGE_SELF_CLAIM_AGAINST_EXTERNAL_BASELINE_AND_ONBOARD_V1_20261102",
    "capability": false,
    "date": "2026-11-01",
@@ -246062,6 +246177,29 @@
     "tree": 3,
     "unittest": 3,
     "v1": 2
+   }
+  },
+  {
+   "action_id": "SCENARIO_OBSERVATION_20261116_V1",
+   "capability": false,
+   "date": "2026-11-16",
+   "id": "research:canonical/action_intents/SCENARIO_OBSERVATION_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/SCENARIO_OBSERVATION_20261116_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "16d83b4d948a5e9044476aa879ab90db6085d4bd4414b33c7aba4fc88f0c4c90",
+   "status": "PRODUCED",
+   "terms": {
+    "20261116": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "observation": 1,
+    "produced": 1,
+    "round_7_proved_the_environment_s_text_cannot_construct_its_own_arguments__1_of_41__because_a_call_site_passes_objects_and_text_only_proves_expressions__so_the_only_construction_that_is_guaranteed_real_is_the_environment_s_own_execution_and_the_missing_organ_was_observation_by_running_the_environment_s_own_scenarios_not_by_inventing_arguments": 1,
+    "run_the_environment_s_own_test_suite_under_a_recording_tracer_and_observe_every_call_into_the_package_as_returned_with_a_normalised_digest_or_raised_with_the_exception_name__requireing_two_agreeing_runs_at_the_old_revision_and_recording_both_sides_of_every_move_at_the_new_one": 1,
+    "scenario": 1,
+    "scenario_observation_20261116_v1": 1,
+    "the_third_manufacturability_route_is_closed_by_measurement_with_a_proven_instrument__40_real_commits_188_confirmed_laws_0_kills_and_174_of_the_laws_are_bare_totality__the_cause_is_named_real_work_extends_a_specification_instead_of_violating_a_property__so_the_next_organ_must_compile_intent_into_the_discriminating_pair_rather_than_derive_it_from_the_artifact": 1,
+    "v1": 1
    }
   },
   {
