@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 529,
+  "knowledge_documents": 530,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 7047,
+  "research_index_records": 7050,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 452,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "3c978e069c8fd39a55f23cf5a26496e1b3b5aac834b6054ab8bb27a320d8172f"
+  "value": "00359b3720fd66539513d89711fc9db4c7daa9e1581d72479cc40c3a0070dca6"
  },
  "engines": [
   {
@@ -66960,6 +66960,84 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 11466,
+   "headings": [
+    "The pair is necessary. It is not sufficient. The shape decides.",
+    "0. Your claim, split into parts that can each be checked",
+    "1. What I built, and why it was not a rebuild",
+    "2. Measurement 1 — the pair is now obtainable. And it is not enough.",
+    "3. Measurement 2 — the census of shapes, over every changed site in the corpus",
+    "4. The outside world, November 2026 — it says the same thing from the other side",
+    "5. So: what is real, what is not, and what is smartest now",
+    "6. What this does not claim",
+    "Reproduce"
+   ],
+   "kind": "DOCUMENT",
+   "path": "THE_PAIR_IS_NECESSARY_NOT_SUFFICIENT_20261116_V1.md",
+   "sha256": "7e7ab5b0caef3b27a60f2c1f72243743de2bafcec20897f90343d10e2a179cfb",
+   "summary": "**Round 12 · 16 November 2026 · branch `arena/35b422e5-brain` · base `52201aad`** Model calls 0 · network calls 0 · spend $0 · every execution is a real commit's own test Receipts: `canonical/verification/CASE_WITNESS_20261116_V1.json`, `canonical/verification/CHANGE_SHAPE_CENSUS_20261116_V1.json`",
+   "terms": {
+    "11": 6,
+    "12": 4,
+    "2026": 10,
+    "about": 5,
+    "already": 5,
+    "canonical": 7,
+    "case": 4,
+    "cases": 4,
+    "change": 5,
+    "changed": 5,
+    "check": 5,
+    "code": 7,
+    "commit": 4,
+    "correct": 4,
+    "every": 6,
+    "execution": 4,
+    "experience": 5,
+    "file": 6,
+    "gui": 4,
+    "instant": 5,
+    "learning": 6,
+    "measured": 7,
+    "mechanism": 5,
+    "memorisable": 5,
+    "missing": 5,
+    "model": 5,
+    "new": 6,
+    "no": 9,
+    "not": 24,
+    "now": 4,
+    "once": 4,
+    "one": 13,
+    "only": 5,
+    "own": 4,
+    "predicate": 6,
+    "real": 17,
+    "round": 11,
+    "shape": 9,
+    "sites": 6,
+    "skill": 5,
+    "skills": 5,
+    "so": 5,
+    "solved": 7,
+    "specification": 5,
+    "test": 5,
+    "verification": 7,
+    "work": 5,
+    "zero": 5
+   },
+   "title": "The pair is necessary. It is not sufficient. The shape decides.",
+   "title_terms": [
+    "decides",
+    "necessary",
+    "not",
+    "pair",
+    "shape",
+    "sufficient"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 9176,
    "headings": [
     "The four-phase plan was refused, and the reason is measurable",
@@ -86227,10 +86305,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1331,
+  "included_source_count": 1332,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "1792de790ac1fb413b9a9689e934c789f0402965339f9f83aec281311ae93b6f"
+  "source_tree_digest": "3ecd7491b4ffd58423a3b7f57ac87f7f1d571c84380c5f0ef01fbd42dcd38e52"
  },
  "research_index": [
   {
@@ -159385,6 +159463,23 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/CASE_WITNESS_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/CASE_WITNESS_20261116_V1.json",
+   "schema": "BRAIN_CASE_WITNESS_V1",
+   "sha256": "2bca3b3724c3ef567141c6d71bcbb7b0caa6dd953badf7393b639359a3ef6894",
+   "status": "",
+   "terms": {
+    "20261116": 1,
+    "case": 1,
+    "v1": 1,
+    "witness": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-03",
    "id": "research:canonical/verification/CAUSAL_CUT_ADMISSION_GATE_V2_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -159790,6 +159885,24 @@
     "v1": 1,
     "v5": 1,
     "verify": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/CHANGE_SHAPE_CENSUS_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/CHANGE_SHAPE_CENSUS_20261116_V1.json",
+   "schema": "BRAIN_CHANGE_SHAPE_CENSUS_V1",
+   "sha256": "c42869aee9e678c9223c7a1bd19a4568926a695077cdaf830e04ba8a206f1beb",
+   "status": "",
+   "terms": {
+    "20261116": 1,
+    "census": 1,
+    "change": 1,
+    "shape": 1,
+    "v1": 1
    }
   },
   {
@@ -239932,6 +240045,32 @@
     "number": 1,
     "only": 1,
     "self-model": 2
+   }
+  },
+  {
+   "action_id": "CASE_WITNESS_AND_CHANGE_SHAPE_CENSUS_20261116_V1",
+   "capability": false,
+   "date": "2026-11-16",
+   "id": "research:canonical/action_intents/CASE_WITNESS_AND_CHANGE_SHAPE_CENSUS_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/CASE_WITNESS_AND_CHANGE_SHAPE_CENSUS_20261116_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "9f6f4724e2c2c3d0041f44804e595d1e57f38ddc1189e6c7b2cb8560859982ef",
+   "status": "PRODUCED",
+   "terms": {
+    "20261116": 1,
+    "capture_the_discriminating_pair_at_case_granularity_then_size_every_mechanism_against_the_shape_of_the_change_it_can_possibly_address": 1,
+    "case": 1,
+    "case_witness_and_change_shape_census_20261116_v1": 1,
+    "census": 1,
+    "change": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "produced": 1,
+    "shape": 1,
+    "the_ceiling_is_the_specification_and_the_shape_of_the_change_not_learning__a_missing_check_is_10_5_percent_of_real_changed_sites_and_needs_new_code_40_3_percent__so_no_amount_of_experience_supplies_the_larger_half_and_every_learning_zero_in_rounds_9_to_12_is_now_explained_without_a_broken_instrument": 1,
+    "the_third_manufacturability_route_is_closed_by_measurement_with_a_proven_instrument__40_real_commits_188_confirmed_laws_0_kills_and_174_of_the_laws_are_bare_totality__the_cause_is_named_real_work_extends_a_specification_instead_of_violating_a_property__so_the_next_organ_must_compile_intent_into_the_discriminating_pair_rather_than_derive_it_from_the_artifact": 1,
+    "v1": 1,
+    "witness": 1
    }
   },
   {

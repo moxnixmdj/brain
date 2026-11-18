@@ -1,0 +1,45 @@
+{
+ "authority": "NONE -- sandbox measurement, not independent verification",
+ "model_calls": 0,
+ "network_calls": 0,
+ "per_repository": {
+  "itsdangerous": {
+   "FEATURE_NEW_DEFINITION": 1,
+   "GUARD_ADDED": 2,
+   "STRUCTURAL_OTHER": 2,
+   "VALUE_ADDED": 2,
+   "VALUE_OR_OPERATOR_SUBSTITUTION": 3
+  },
+  "packaging": {
+   "FEATURE_NEW_DEFINITION": 46,
+   "GUARD_ADDED": 15,
+   "STRUCTURAL_OTHER": 18,
+   "VALUE_ADDED": 35,
+   "VALUE_OR_OPERATOR_SUBSTITUTION": 45
+  },
+  "tomli": {
+   "FEATURE_NEW_DEFINITION": 6,
+   "GUARD_ADDED": 3,
+   "STRUCTURAL_OTHER": 4,
+   "VALUE_ADDED": 7,
+   "VALUE_OR_OPERATOR_SUBSTITUTION": 2
+  }
+ },
+ "schema": "BRAIN_CHANGE_SHAPE_CENSUS_V1",
+ "totals": {
+  "new_code_required_share": 0.4031,
+  "predicate_addressable": {
+   "GUARD_ADDED": 20
+  },
+  "predicate_addressable_share": 0.1047,
+  "replay_addressable_share": 0.4921,
+  "shapes": {
+   "FEATURE_NEW_DEFINITION": 53,
+   "GUARD_ADDED": 20,
+   "STRUCTURAL_OTHER": 24,
+   "VALUE_ADDED": 44,
+   "VALUE_OR_OPERATOR_SUBSTITUTION": 50
+  },
+  "sites": 191
+ }
+}
