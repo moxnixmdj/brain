@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 539,
+  "knowledge_documents": 540,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 7080,
+  "research_index_records": 7083,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 452,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "d7220ec4fcfa7e15f381f25655e61527b731dad9d708e49fd91724491a95ddf5"
+  "value": "e00fbf78eb900deaed131eeb4725a6ce80f31dce390913e893c178f74034abc2"
  },
  "engines": [
   {
@@ -55619,6 +55619,87 @@
     "real",
     "space",
     "ten"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 8207,
+   "headings": [
+    "One demonstration reaches 45.8% of a machine, and the missing 54.2% is not an experience problem",
+    "The claim in the prompt, stated so it can be killed",
+    "What is real",
+    "What this round built, and what it measured",
+    "The result, and the four bugs that had to die first",
+    "Why zero, stated as a mechanism rather than an excuse",
+    "What this does not claim",
+    "What is next, and why it is the only remaining move"
+   ],
+   "kind": "DOCUMENT",
+   "path": "ONE_DEMONSTRATION_REACHES_FORTY_SIX_PERCENT_AND_THE_REST_IS_NOT_EXPERIENCE_20261116_V1.md",
+   "sha256": "2ebb5585c21484d8829a89abc5f516c40c2b066f2275f03eca545707fee20029",
+   "summary": "Round 18. Branch `arena/d5aa8d71-brain`, from `5c94fed6`.",
+   "terms": {
+    "17": 9,
+    "45.8": 4,
+    "action": 3,
+    "against": 3,
+    "already": 4,
+    "buys": 4,
+    "call": 3,
+    "changed": 3,
+    "channel": 3,
+    "claim": 5,
+    "code": 3,
+    "comparison": 4,
+    "comparisons": 5,
+    "demonstration": 6,
+    "every": 3,
+    "false": 4,
+    "field": 3,
+    "four": 4,
+    "gate": 4,
+    "input": 6,
+    "inputs": 4,
+    "line": 6,
+    "measured": 6,
+    "mechanism": 4,
+    "model": 6,
+    "no": 5,
+    "not": 24,
+    "one": 9,
+    "only": 4,
+    "operand": 7,
+    "over": 6,
+    "own": 9,
+    "pairs": 4,
+    "parts": 7,
+    "pinned": 4,
+    "reached": 4,
+    "reaches": 4,
+    "real": 7,
+    "round": 13,
+    "rounds": 4,
+    "seed": 4,
+    "sites": 5,
+    "so": 6,
+    "target": 5,
+    "tree": 4,
+    "walk": 5,
+    "were": 4,
+    "zero": 4
+   },
+   "title": "One demonstration reaches 45.8% of a machine, and the missing 54.2% is not an experience problem",
+   "title_terms": [
+    "45.8",
+    "54.2",
+    "demonstration",
+    "experience",
+    "machine",
+    "missing",
+    "not",
+    "one",
+    "problem",
+    "reaches"
    ]
   },
   {
@@ -87008,10 +87089,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1341,
+  "included_source_count": 1342,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "067ea01f985b6978cd466c61d24d38faeafe01bcf73e12f19b35d574ef547f04"
+  "source_tree_digest": "b61caa484cd8b22172eced24147d251474927206d935b009eba46b19e3c73521"
  },
  "research_index": [
   {
@@ -219273,6 +219354,41 @@
    "action_id": "",
    "capability": false,
    "date": "",
+   "id": "research:canonical/verification/WHAT_THE_CONDITION_WANTS_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/WHAT_THE_CONDITION_WANTS_20261116_V1.json",
+   "schema": "BRAIN_WHAT_THE_CONDITION_WANTS_V1",
+   "sha256": "faac900405360b0be906f1e87505d87866e2b4467e58a3a5bd723845c1591358",
+   "status": "",
+   "terms": {
+    "20261116": 1,
+    "condition": 1,
+    "v1": 1,
+    "wants": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/WHAT_THE_CONDITION_WANTS_WIDER_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/WHAT_THE_CONDITION_WANTS_WIDER_20261116_V1.json",
+   "schema": "BRAIN_WHAT_THE_CONDITION_WANTS_V1",
+   "sha256": "ceb280b68c863d8bb35195517a39fd2e54526286a1010c2a6cc6f5403d20d060",
+   "status": "",
+   "terms": {
+    "20261116": 1,
+    "condition": 1,
+    "v1": 1,
+    "wants": 1,
+    "wider": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
    "id": "research:canonical/verification/WHAT_THE_OPERAND_NAMES_COST_20261112_V1.json",
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/WHAT_THE_OPERAND_NAMES_COST_20261112_V1.json",
@@ -245764,6 +245880,35 @@
     "test": 1,
     "the_project_has_named_three_different_single_bottlenecks_in_one_day_because_each_note_measured_one_factor_of_one_equation_space_observation_and_oracle_and_no_instrument_said_per_task_which_factor_binds": 1,
     "treated": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "ONE_DEMONSTRATION_REACHES_FORTY_SIX_PERCENT_AND_THE_REST_IS_NOT_EXPERIENCE_20261116_V1",
+   "capability": false,
+   "date": "2026-11-16",
+   "id": "research:canonical/action_intents/ONE_DEMONSTRATION_REACHES_FORTY_SIX_PERCENT_AND_THE_REST_IS_NOT_EXPERIENCE_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/ONE_DEMONSTRATION_REACHES_FORTY_SIX_PERCENT_AND_THE_REST_IS_NOT_EXPERIENCE_20261116_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "aad948745069df6d2d7b5494e6c8b53274c1022c6f0458838c6b750d701411fa",
+   "status": "PRODUCED",
+   "terms": {
+    "20261116": 1,
+    "demonstration": 1,
+    "experience": 1,
+    "forty": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "not": 1,
+    "one": 1,
+    "one_demonstration_reaches_forty_six_percent_and_the_rest_is_not_experience_20261116_v1": 1,
+    "percent": 1,
+    "produced": 1,
+    "reaches": 1,
+    "read_the_value_a_changed_condition_compares_against_out_of_the_program_and_deliver_it_at_the_type_that_can_carry_it": 1,
+    "rest": 1,
+    "six": 1,
+    "the_operand_a_condition_wants_is_now_read_off_the_program_itself_and_it_adds_zero_pins__two_of_eight_unpinned_parts_remain_pinned_by_mutation_alone_and_the_walk_gets_within_nine_lines_of_the_third__four_of_eight_have_no_gate_that_any_seed_executes_one_has_no_literal_call_in_its_test_one_removes_code__a_parser_fails_on_a_sequence_of_structural_constraints_not_on_a_magic_value_so_passing_one_gate_buys_one_line_and_the_field_itself_closes_the_gap_only_with_a_learned_model_of_which_fields_matter_which_this_tree_refuses__therefore_the_bottleneck_is_reachability_reasoning_over_format_and_the_next_organ_is_a_format_hypothesis_induced_from_the_parser_s_own_comparisons_and_verified_by_execution": 2,
     "v1": 1
    }
   },
