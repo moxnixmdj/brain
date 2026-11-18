@@ -46,7 +46,7 @@
  },
  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The selection of one expression out of the closure of the language. The address is solved for free (the site is handed over in both arms, an upper bound no system could beat). The vocabulary is computable (dir() of the live types, 4 microseconds, nothing stored). The grammar is the language's. What remains is rank: the right expression sits at 2887 in the one row the base arm could reach, and at a rank the wide arm measures for the others, while each oracle question that tests one candidate costs 0.5 s. Selecting is therefore the only thing left, and a memory of one demonstrated action supplies one selected element and no ordering over the 10^5 alternatives the language admits.",
- "canonical_base_commit": "5c94fed6d2e1f11bdfbdbc2fc79e7b9a1a32eb3f",
+ "canonical_base_commit": "0cdaaeb41b24bd9278051633e8fc29313dbf9957",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -171,7 +171,7 @@
  ],
  "real_outcome": "30 fresh commits: 15 are structural edits (not a single-expression replacement), 1 has a site that never ran in the failing test, 13 have a known demand that no candidate produced, and 1 is verified with the whole file green (47 tests) and the patch IS the human's own fix. The first receipt of this round verified a DIFFERENT patch: a literal string that reproduced the demanded value on the one name the test used, green in fact and wrong in general -- the synthesis-verification asymmetry measured inside this instrument rather than borrowed from the literature. The one-line admission rule that refuses any candidate naming nothing in the frame turned that wrong green patch into the correct rule on the same row, with the demand and the space unchanged. Against this, the completeness witness is unambiguous and negative: the human's own replacement is admissible by the table in 1 of 14 in-class rows.",
  "recursive_obs": {
-  "canonical_base_commit": "5c94fed6d2e1f11bdfbdbc2fc79e7b9a1a32eb3f",
+  "canonical_base_commit": "0cdaaeb41b24bd9278051633e8fc29313dbf9957",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "a passing test's recorded site value as a hard constraint on the fix (it rejected thirteen of fourteen real human fixes; preservation is an ordering signal, the suite is the gate)",
