@@ -31228,7 +31228,7 @@
   "engines": 26,
   "knowledge_documents": 540,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 7083,
+  "research_index_records": 7086,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 452,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "e00fbf78eb900deaed131eeb4725a6ce80f31dce390913e893c178f74034abc2"
+  "value": "c28edcdb5ac73691dc37976f2aeee29898dea20b360cea66f97768c213b1fc3f"
  },
  "engines": [
   {
@@ -215713,6 +215713,43 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/THE_REPOSITORY_IS_THE_SEED_CORPUS_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/THE_REPOSITORY_IS_THE_SEED_CORPUS_20261116_V1.json",
+   "schema": "BRAIN_THE_REPOSITORY_IS_THE_SEED_CORPUS_V1",
+   "sha256": "1ddbed09d3cb238304eb618ca785b597ff4ef442ab6fd1a1007988b01a623f6a",
+   "status": "",
+   "terms": {
+    "20261116": 1,
+    "corpus": 1,
+    "repository": 1,
+    "seed": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/THE_REPOSITORY_IS_THE_SEED_CORPUS_WIDER_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/THE_REPOSITORY_IS_THE_SEED_CORPUS_WIDER_20261116_V1.json",
+   "schema": "BRAIN_THE_REPOSITORY_IS_THE_SEED_CORPUS_V1",
+   "sha256": "a4b36f13006f7b1c223c4b439cef9572b3db1822820fd19f32e42ec49a2a7c5b",
+   "status": "",
+   "terms": {
+    "20261116": 1,
+    "corpus": 1,
+    "repository": 1,
+    "seed": 1,
+    "v1": 1,
+    "wider": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-11-16",
    "id": "research:canonical/verification/THE_ROW_WAS_ALWAYS_THERE_20261116_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -243262,6 +243299,51 @@
     "synthesis": 2,
     "test": 2,
     "via": 2
+   }
+  },
+  {
+   "action_id": "FIVE_THOUSAND_DOCUMENTS_CHANGE_NOTHING_BECAUSE_THE_SEARCH_CANNOT_SAY_CLOSER_20261116_V1",
+   "capability": false,
+   "date": "2026-11-16",
+   "id": "research:canonical/action_intents/FIVE_THOUSAND_DOCUMENTS_CHANGE_NOTHING_BECAUSE_THE_SEARCH_CANNOT_SAY_CLOSER_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/FIVE_THOUSAND_DOCUMENTS_CHANGE_NOTHING_BECAUSE_THE_SEARCH_CANNOT_SAY_CLOSER_20261116_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "054f0051220fdc51adf2c97079315c21a33c0448a6c7917a55c482525a1452db",
+   "status": "PRODUCED",
+   "terms": {
+    "20261116": 1,
+    "because": 1,
+    "budget": 1,
+    "candidates": 1,
+    "cannot": 1,
+    "change": 1,
+    "closer": 1,
+    "corpus": 1,
+    "distance": 1,
+    "documents": 1,
+    "engines": 1,
+    "five": 1,
+    "five_thousand_documents_change_nothing_because_the_search_cannot_say_closer_20261116_v1": 1,
+    "fixed": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "line": 1,
+    "lost": 1,
+    "measure": 1,
+    "no": 1,
+    "not": 1,
+    "nothing": 1,
+    "novelty": 1,
+    "objective": 1,
+    "part": 2,
+    "per-gate": 1,
+    "pinned": 1,
+    "produced": 1,
+    "read_the_value_a_changed_condition_compares_against_out_of_the_program_and_deliver_it_at_the_type_that_can_carry_it": 1,
+    "retain": 1,
+    "richer": 1,
+    "say": 1,
+    "search": 1
    }
   },
   {
