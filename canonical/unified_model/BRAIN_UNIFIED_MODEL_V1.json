@@ -31228,7 +31228,7 @@
   "engines": 26,
   "knowledge_documents": 527,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 7030,
+  "research_index_records": 7033,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 452,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "e52e501d63e37d13fa7aa3c95c41f2e703b0db4c6e0bf9e6055e8c100195d9f4"
+  "value": "ead05e5b170d8b1b67c32976e2835955b4550197c93e0105fea7dceac0a33d21"
  },
  "engines": [
   {
@@ -179968,6 +179968,33 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "2026-11-18",
+   "id": "research:canonical/verification/ONE_OBSERVATION_IDENTIFIES_ONE_BUG_IN_SIX_20261118_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/ONE_OBSERVATION_IDENTIFIES_ONE_BUG_IN_SIX_20261118_V1.json",
+   "schema": "BRAIN_HOW_MANY_HYPOTHESES_SURVIVE_AN_OBSERVATION_V1",
+   "sha256": "07f599b69589103d52d9da9ec03ec8fa67c3cebc542789cdcdff3740fdd586b6",
+   "status": "",
+   "terms": {
+    "20261118": 1,
+    "bug": 2,
+    "fix": 1,
+    "identifiability": 1,
+    "identifies": 2,
+    "limit": 1,
+    "not": 1,
+    "observation": 2,
+    "one": 4,
+    "six": 2,
+    "speed": 1,
+    "storage": 1,
+    "v1": 1,
+    "vocabulary": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "",
    "id": "research:canonical/verification/ONE_PUBLISHED_FIX_COUNTERFACTUAL_20261112_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -244339,6 +244366,71 @@
     "the_once_learnt_solves_everything_claim_fails_four_of_five_links_and_the_loop_axis_needs_an_anchored_observation_verdict_instrument": 1,
     "typed": 1,
     "universal-lever": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "ONE_OBSERVATION_IDENTIFIES_ONE_BUG_IN_SIX_20261118_V1",
+   "capability": false,
+   "date": "2026-11-18",
+   "id": "research:canonical/action_intents/ONE_OBSERVATION_IDENTIFIES_ONE_BUG_IN_SIX_20261118_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/ONE_OBSERVATION_IDENTIFIES_ONE_BUG_IN_SIX_20261118_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "0e0137ad167d04e59356d830b51798c4aafd200f52024739f30dfa753cfc5ac0",
+   "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
+   "terms": {
+    "20261118": 1,
+    "23": 1,
+    "400": 1,
+    "after": 1,
+    "becomes": 1,
+    "belief": 1,
+    "beyond": 1,
+    "bug": 3,
+    "consistent": 1,
+    "constraint": 1,
+    "corpus": 1,
+    "corpus-accepted": 1,
+    "depending": 1,
+    "disagrees": 1,
+    "eliminates": 1,
+    "every": 1,
+    "except": 1,
+    "experience": 1,
+    "failing": 1,
+    "false": 1,
+    "fix": 3,
+    "fixed": 1,
+    "fixes": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "hands": 1,
+    "hypotheses": 1,
+    "identifies": 3,
+    "inputs": 1,
+    "lis": 1,
+    "observation": 6,
+    "one": 7,
+    "six": 2
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/action_intents/ONE_OBSERVATION_IDENTIFIES_ONE_BUG_IN_SIX_20261118_V1.md",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/ONE_OBSERVATION_IDENTIFIES_ONE_BUG_IN_SIX_20261118_V1.md",
+   "schema": "",
+   "sha256": "061cea633407ed4bc75c69ad92bd17f6e0561fc2283991f9b13874e02ddc35b2",
+   "status": "",
+   "terms": {
+    "20261118": 1,
+    "bug": 1,
+    "identifies": 1,
+    "observation": 1,
+    "one": 2,
+    "six": 1,
     "v1": 1
    }
   },

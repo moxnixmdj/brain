@@ -1,0 +1,285 @@
+{
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "date": "2026-11-18",
+  "question": "Give the model the most advanced actions, let it experience each once, and it owns them permanently -- is that true, and does it generalise to all computer use?",
+  "rows": [
+    {
+      "bug": "lis",
+      "candidates_offered": 399,
+      "corpus_cases": 12,
+      "failing_cases": 4,
+      "identified_at_k": 1,
+      "line": 14,
+      "site": "length + 1",
+      "smallest_at_k1": "max(length + 1, longest)",
+      "smallest_at_k1_correct_on_perturbed_inputs": "12/12",
+      "steps": [
+        {
+          "k": 1,
+          "smallest": "max(length + 1, longest)",
+          "smallest_correct_on_unseen": "12/12",
+          "smallest_size": 6,
+          "survivors": 1
+        },
+        {
+          "k": 2,
+          "smallest": "max(length + 1, longest)",
+          "smallest_correct_on_unseen": "12/12",
+          "smallest_size": 6,
+          "survivors": 1
+        },
+        {
+          "k": 3,
+          "smallest": "max(length + 1, longest)",
+          "smallest_correct_on_unseen": "12/12",
+          "smallest_size": 6,
+          "survivors": 1
+        },
+        {
+          "k": 4,
+          "smallest": "max(length + 1, longest)",
+          "smallest_correct_on_unseen": "12/12",
+          "smallest_size": 6,
+          "survivors": 1
+        },
+        {
+          "k": 5,
+          "smallest": "max(length + 1, longest)",
+          "smallest_correct_on_unseen": "12/12",
+          "smallest_size": 6,
+          "survivors": 1
+        }
+      ],
+      "survivors_at_k1": 1
+    },
+    {
+      "bug": "mergesort",
+      "candidates_offered": 399,
+      "corpus_cases": 14,
+      "failing_cases": 13,
+      "identified_at_k": 2,
+      "line": 17,
+      "site": "len(arr) == 0",
+      "smallest_at_k1": "(len(arr)) % (2)",
+      "smallest_at_k1_correct_on_perturbed_inputs": "3/12",
+      "steps": [
+        {
+          "k": 1,
+          "smallest": "(len(arr)) % (2)",
+          "smallest_correct_on_unseen": "3/12",
+          "smallest_size": 5,
+          "survivors": 7
+        },
+        {
+          "k": 2,
+          "smallest": "(len(arr)) < (2)",
+          "smallest_correct_on_unseen": "12/12",
+          "smallest_size": 5,
+          "survivors": 6
+        },
+        {
+          "k": 3,
+          "smallest": "(len(arr)) < (2)",
+          "smallest_correct_on_unseen": "12/12",
+          "smallest_size": 5,
+          "survivors": 6
+        },
+        {
+          "k": 4,
+          "smallest": "(len(arr)) < (2)",
+          "smallest_correct_on_unseen": "12/12",
+          "smallest_size": 5,
+          "survivors": 6
+        },
+        {
+          "k": 5,
+          "smallest": "(len(arr)) < (2)",
+          "smallest_correct_on_unseen": "12/12",
+          "smallest_size": 5,
+          "survivors": 6
+        }
+      ],
+      "survivors_at_k1": 7
+    },
+    {
+      "bug": "kth",
+      "candidates_offered": 400,
+      "corpus_cases": 7,
+      "failing_cases": 4,
+      "identified_at_k": 4,
+      "line": 9,
+      "site": "kth(above, k)",
+      "smallest_at_k1": "k",
+      "smallest_at_k1_correct_on_perturbed_inputs": "4/12",
+      "steps": [
+        {
+          "k": 1,
+          "smallest": "k",
+          "smallest_correct_on_unseen": "4/12",
+          "smallest_size": 1,
+          "survivors": 400
+        },
+        {
+          "k": 2,
+          "smallest": "min(above)",
+          "smallest_correct_on_unseen": "6/12",
+          "smallest_size": 3,
+          "survivors": 3
+        },
+        {
+          "k": 3,
+          "smallest": "(above)[(num_less)]",
+          "smallest_correct_on_unseen": "6/12",
+          "smallest_size": 3,
+          "survivors": 1
+        },
+        {
+          "k": 4,
+          "survivors": 0
+        }
+      ],
+      "survivors_at_k1": 400
+    },
+    {
+      "bug": "get_factors",
+      "candidates_offered": 399,
+      "corpus_cases": 11,
+      "failing_cases": 10,
+      "identified_at_k": null,
+      "line": 6,
+      "site": "int(n ** 0.5) + 1",
+      "smallest_at_k1": "(int(n ** 0.5)) + (n)",
+      "smallest_at_k1_correct_on_perturbed_inputs": "9/12",
+      "steps": [
+        {
+          "k": 1,
+          "smallest": "(int(n ** 0.5)) + (n)",
+          "smallest_correct_on_unseen": "9/12",
+          "smallest_size": 7,
+          "survivors": 3
+        },
+        {
+          "k": 2,
+          "smallest": "(int(n ** 0.5)) + (n)",
+          "smallest_correct_on_unseen": "9/12",
+          "smallest_size": 7,
+          "survivors": 3
+        },
+        {
+          "k": 3,
+          "smallest": "(int(n ** 0.5)) + (n)",
+          "smallest_correct_on_unseen": "9/12",
+          "smallest_size": 7,
+          "survivors": 3
+        },
+        {
+          "k": 4,
+          "smallest": "(int(n ** 0.5)) + (n)",
+          "smallest_correct_on_unseen": "9/12",
+          "smallest_size": 7,
+          "survivors": 3
+        },
+        {
+          "k": 5,
+          "smallest": "(int(n ** 0.5)) + (n)",
+          "smallest_correct_on_unseen": "9/12",
+          "smallest_size": 7,
+          "survivors": 3
+        }
+      ],
+      "survivors_at_k1": 3
+    },
+    {
+      "bug": "next_permutation",
+      "candidates_offered": 399,
+      "corpus_cases": 8,
+      "failing_cases": 8,
+      "identified_at_k": null,
+      "line": 6,
+      "site": "perm[j] < perm[i]",
+      "smallest_at_k1": "(perm[j]) > (j)",
+      "smallest_at_k1_correct_on_perturbed_inputs": "8/12",
+      "steps": [
+        {
+          "k": 1,
+          "smallest": "(perm[j]) > (j)",
+          "smallest_correct_on_unseen": "8/12",
+          "smallest_size": 5,
+          "survivors": 23
+        },
+        {
+          "k": 2,
+          "smallest": "(perm[j]) > (j)",
+          "smallest_correct_on_unseen": "8/12",
+          "smallest_size": 5,
+          "survivors": 9
+        },
+        {
+          "k": 3,
+          "smallest": "(perm[j]) > (j)",
+          "smallest_correct_on_unseen": "8/12",
+          "smallest_size": 5,
+          "survivors": 9
+        },
+        {
+          "k": 4,
+          "smallest": "(perm[j]) > (j)",
+          "smallest_correct_on_unseen": "8/12",
+          "smallest_size": 5,
+          "survivors": 9
+        },
+        {
+          "k": 5,
+          "smallest": "(perm[j]) > (j)",
+          "smallest_correct_on_unseen": "8/12",
+          "smallest_size": 5,
+          "survivors": 9
+        }
+      ],
+      "survivors_at_k1": 23
+    },
+    {
+      "bug": "possible_change",
+      "candidates_offered": 399,
+      "corpus_cases": 10,
+      "failing_cases": 9,
+      "identified_at_k": 1,
+      "line": 8,
+      "site": "total < 0",
+      "smallest_at_k1": null,
+      "smallest_at_k1_correct_on_perturbed_inputs": null,
+      "steps": [
+        {
+          "k": 1,
+          "survivors": 0
+        }
+      ],
+      "survivors_at_k1": 0
+    }
+  ],
+  "schema": "BRAIN_HOW_MANY_HYPOTHESES_SURVIVE_AN_OBSERVATION_V1",
+  "summary": {
+    "a_third_of_the_corpus_is_a_false_positive_machine": "every corpus-accepted fix except lis (and mergesort from k=2) disagrees with the reference program on perturbed inputs",
+    "bugs": 6,
+    "identified_by_one_observation": 1,
+    "survivors_at_k1": {
+      "get_factors": 3,
+      "kth": 400,
+      "lis": 1,
+      "mergesort": 7,
+      "next_permutation": 23,
+      "possible_change": 0
+    }
+  },
+  "the_confound_that_is_stated_not_hidden": "Perturbed inputs can leave a function's precondition (kth requires 0 <= k < len(arr)), so a disagreement is evidence of weakness and not a proof of wrongness. The direction is unambiguous: no candidate that is correct on perturbed inputs ever came from the corpus alone.",
+  "the_rule_this_establishes": "A claim that a capability is permanent must state the number of surviving hypotheses after one observation. \"It learned it\" without that number is a claim about a corpus, not about learning.",
+  "the_self_deception_caught_in_this_build": "The first version drew its \"unseen\" probes from the corpus itself, so a corpus-fitting candidate scored 12/12 unseen. That is the corpus grading itself, and it produced the exact kind of number this tree has had to retract before. Probes are perturbed inputs now.",
+  "the_theory_that_was_missing": {
+    "name": "angelic forest (Mechtaev et al., Angelix, ICSE 2016)",
+    "statement": "For a suspicious expression, its angelic value in a path is a value that, if returned there, makes the test pass; the forest is the set over paths, and any expression satisfying every pair repairs the program.",
+    "why_it_is_not_the_answer_by_itself": "Every implementation computes the forest with symbolic execution. This build tried to compute it by forcing values by execution instead and found the wall: at a loop-carried site, no single value repairs anything, because the site runs many times per case and the demanded value differs per occurrence. The unit is the ANGELIC PATH, and obtaining it without symbolic execution is unsolved -- the 2026 state of the art still extracts it from the correct version of the program, which does not exist at run time."
+  },
+  "title": "One observation identifies the fix on one bug in six: the limit is identifiability, not speed, vocabulary, or storage",
+  "upstream": "https://github.com/jkoppel/QuixBugs",
+  "what_is_measured": "For a bug's fix site: take the candidates the site's own material builds, run each on k corpus cases, and count how many are still consistent. k=1 is the promise the thesis rests on."
+}
