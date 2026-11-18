@@ -42,7 +42,7 @@
  },
  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The engines retain candidates by line novelty, which is not a measure of distance to the part; with no per-gate objective a richer corpus spreads a fixed budget thinner and a pinned part can be lost.",
- "canonical_base_commit": "0cdaaeb41b24bd9278051633e8fc29313dbf9957",
+ "canonical_base_commit": "4418cc685dcf1a17422eecd46a5bec74c69bf0d4",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -103,7 +103,7 @@
  ],
  "recursive_obs": {
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The engines retain candidates by line novelty, which is not a measure of distance to the part; with no per-gate objective a richer corpus spreads a fixed budget thinner and a pinned part can be lost.",
-  "canonical_base_commit": "0cdaaeb41b24bd9278051633e8fc29313dbf9957",
+  "canonical_base_commit": "4418cc685dcf1a17422eecd46a5bec74c69bf0d4",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "instrumenting only the changed block, whose comparisons cannot execute before the block is reached",
