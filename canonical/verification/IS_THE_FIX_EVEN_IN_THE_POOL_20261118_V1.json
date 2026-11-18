@@ -1,0 +1,121 @@
+{
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "corpus_commit": "4257f44b0ff1181dedaedee6a447e133219fcebf",
+  "corrects": {
+    "receipt": "canonical/verification/THE_FAILURE_ALREADY_SAYS_WHAT_TO_WRITE_20261118_V1.json",
+    "the_defect": "the enumerator, not the vocabulary. (1) it admitted only terms whose TEXT was <= 3 characters, so a local named 'length', 'longest', 'coins' or 'perm' could be offered alone and never combined; (2) it replaced its pool with each level's output, so an atom could never be combined with a composite -- which is exactly the shape of all three published fixes.",
+    "the_sentence_that_was_wrong": "where_it_stops.meaning: 'the failing case is not fixed by any expression the site's own material can build, so the fix is not one expression at one site'",
+    "what_is_now_unresolved_rather_than_answered": "with both defects repaired and 6000 candidates offered per site (about 1 s each), none of the three published fixes is offered. The correct verdict is UNRESOLVED, not IMPOSSIBLE.",
+    "why_it_was_wrong": "the corpus says otherwise. lis: 'longest = length + 1' -> 'longest = max(longest, length + 1)'. next_permutation: 'if perm[j] < perm[i]:' -> 'if perm[i] < perm[j]:'. possible_change: 'if total < 0:' -> 'if total < 0 or not coins:'. Every one is one expression over names and operators already at the site."
+  },
+  "date": "2026-11-18",
+  "external_capability_provider_count": 0,
+  "model_dependency_count": 0,
+  "network_calls_at_run_time": 0,
+  "outcome_after_repair": {
+    "bugs_rerun": 6,
+    "corpus_accepted": 5,
+    "corpus_accepted_false_positive": {
+      "bug": "next_permutation",
+      "disagreements_with_correct_python_programs": "361 of 2000 random permutations",
+      "example": "[3,7,8,4,1,2] -> found [3,4,2,1,7,8], correct [3,7,8,4,2,1]",
+      "expression": "(perm[j]) // (j)"
+    },
+    "correct_on_inputs_the_corpus_never_saw": 4,
+    "defects": [
+      "material admitted by text length <= 3",
+      "pool replaced instead of cumulative at each level",
+      "_size counted AST context nodes (Load/Store), so a name measured 2 and only constants were atoms",
+      "the site's own sub-expressions were not material",
+      "the site's own expression was excluded from its own pool"
+    ],
+    "defects_total": 5,
+    "questions_asked_total": 15076,
+    "seconds_total": 6.4,
+    "solved_by_the_published_fix_itself": [
+      "lis",
+      "mergesort"
+    ],
+    "unanswered_not_impossible": [
+      "possible_change:CHILD_TIMED_OUT"
+    ]
+  },
+  "rows": [
+    {
+      "candidates_offered": 6000,
+      "cases": 12,
+      "contexts_observed": 7,
+      "published_fix_expression": "max(longest, length + 1)",
+      "rank_of_the_published_fix": null,
+      "seconds_spent": 0.95,
+      "site": "length + 1",
+      "stage": "NOT_OFFERED_WITHIN_THE_CAP__NOT_A_CLAIM_OF_IMPOSSIBILITY",
+      "task": "lis"
+    },
+    {
+      "candidates_offered": 6000,
+      "cases": 8,
+      "contexts_observed": 1,
+      "published_fix_expression": "perm[i] < perm[j]",
+      "rank_of_the_published_fix": null,
+      "seconds_spent": 1.18,
+      "site": "perm[j] < perm[i]",
+      "stage": "NOT_OFFERED_WITHIN_THE_CAP__NOT_A_CLAIM_OF_IMPOSSIBILITY",
+      "task": "next_permutation"
+    },
+    {
+      "candidates_offered": 6000,
+      "cases": 10,
+      "contexts_observed": 18,
+      "published_fix_expression": "total < 0 or not coins",
+      "rank_of_the_published_fix": null,
+      "seconds_spent": 1.01,
+      "site": "total < 0",
+      "stage": "NOT_OFFERED_WITHIN_THE_CAP__NOT_A_CLAIM_OF_IMPOSSIBILITY",
+      "task": "possible_change"
+    }
+  ],
+  "schema": "BRAIN_IS_THE_FIX_EVEN_IN_THE_POOL_V1",
+  "summary": {
+    "candidates_offered_per_site": {
+      "lis": 6000,
+      "next_permutation": 6000,
+      "possible_change": 6000
+    },
+    "measured": 3,
+    "rank_of_the_published_fix": {
+      "lis": null,
+      "next_permutation": null,
+      "possible_change": null
+    },
+    "reading": "A fix that is offered is a completeness witness for that site: the pool can build it, so any earlier 'not expressible' verdict about this site was a claim about the code. A fix that is not offered within the cap is unresolved, not impossible.",
+    "seconds_spent": {
+      "lis": 0.95,
+      "next_permutation": 1.18,
+      "possible_change": 1.01
+    },
+    "tasks": [
+      "lis",
+      "next_permutation",
+      "possible_change"
+    ],
+    "the_fix_is_in_the_pool": {
+      "lis": false,
+      "next_permutation": false,
+      "possible_change": false
+    }
+  },
+  "the_arithmetic_of_why_blind_enumeration_cannot_reach_a_size_6_fix": {
+    "atoms_at_a_site": "20-40 names, constants and builtins",
+    "candidates_offered_per_site_here": 6000,
+    "forms_per_pair": "~45 (arithmetic, comparison, boolean, subscript, slice, literals, builtin calls)",
+    "level_2_candidates": "pool 160 x 160 x 45 = 1,152,000",
+    "share_of_level_2_that_reaches_the_pool": "0.5%",
+    "where_the_three_fixes_live": "size 5-6 (atom x composite, or composite x composite)"
+  },
+  "the_published_fix_is_used_only_to_measure_reachability": true,
+  "the_rule_this_establishes": "An insufficiency claim is a claim about the world; a failure to find is a claim about the code. Publish the witness or say unresolved -- and when a witness is published, publish both predicates: accepted by the corpus, and correct on inputs the corpus never saw.",
+  "title": "The fix was in the pool all along: five generator defects, not a limit of the language, and one corpus-accepted false positive",
+  "tool": "canonical/tools/is_the_fix_even_in_the_pool_v1.py",
+  "upstream": "https://github.com/jkoppel/QuixBugs"
+}

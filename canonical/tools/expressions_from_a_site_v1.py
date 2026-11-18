@@ -72,10 +72,18 @@ def base_terms(source: str, function_name: str, site_text: str,
 
 
 def _size(text: str) -> int:
+    """How many expression nodes the text contains -- not how many AST nodes.
+
+    `ast.walk` also visits the `Load`/`Store` context attached to every name, so counting all nodes
+    makes `arr` look like size 2 and a bare constant look like size 1. An atom test built on that
+    number admits only constants, and a local can never become material: that is how `max(longest,
+    length + 1)` was declared inexpressible with all three of its parts sitting at the site.
+    """
     try:
-        return sum(1 for _ in ast.walk(ast.parse(text, mode="eval").body))
+        body = ast.parse(text, mode="eval").body
     except SyntaxError:
         return 10 ** 6
+    return sum(1 for node in ast.walk(body) if isinstance(node, ast.expr))
 
 
 def _combinations(left: str, right: str, function_name: str) -> Iterator[str]:
