@@ -99,6 +99,17 @@
    "what": "probe:>|positional",
    "why": "empirical cli probe"
   },
+  "g13ac1849c37a68f902864d973623443216b960ccd97a2e4e8505f78f4fa9d9f0": {
+   "cost": 1.0,
+   "created": 1794959886.042561,
+   "helped": 0,
+   "id": "g13ac1849c37a68f902864d973623443216b960ccd97a2e4e8505f78f4fa9d9f0",
+   "last_seen": 1794959886.042561,
+   "resolved": false,
+   "trials": 0,
+   "what": "retry",
+   "why": "unknown_operator root5be10fa21f59"
+  },
   "g141732298032": {
    "cost": 1.0,
    "created": 1793264802.120144,
@@ -148,7 +159,7 @@
    "created": 1794494390.5340219,
    "helped": 0,
    "id": "g18dfbba74f614087bc8f20a2782da7a5c198963a4541f8b7fdae17b9ed7bae83",
-   "last_seen": 1794494390.5340219,
+   "last_seen": 1794960233.9621983,
    "resolved": false,
    "trials": 0,
    "what": "profit",
@@ -253,6 +264,17 @@
    "what": "margin",
    "why": "unknown_operator rootbffeca5d9ebe"
   },
+  "g26e5e636ddf621a676d553610848a3f09f8e30893ee534dfd83169c460cdc894": {
+   "cost": 1.0,
+   "created": 1794959885.8371027,
+   "helped": 0,
+   "id": "g26e5e636ddf621a676d553610848a3f09f8e30893ee534dfd83169c460cdc894",
+   "last_seen": 1794959885.8371027,
+   "resolved": false,
+   "trials": 0,
+   "what": "profit",
+   "why": "unknown_operator root01ea06b37930"
+  },
   "g284143994353": {
    "cost": 1.0,
    "created": 1793266064.380599,
@@ -318,6 +340,17 @@
    "trials": 0,
    "what": "define",
    "why": "unknown_operator rootd1ddcb3ed5cf"
+  },
+  "g312ae628b1d6617fd45c18670df163b05974fdb4a45483b1090a83fc57ba0117": {
+   "cost": 1.0,
+   "created": 1794959885.839464,
+   "helped": 0,
+   "id": "g312ae628b1d6617fd45c18670df163b05974fdb4a45483b1090a83fc57ba0117",
+   "last_seen": 1794959885.839464,
+   "resolved": false,
+   "trials": 0,
+   "what": "margin",
+   "why": "unknown_operator root01ea06b37930"
   },
   "g320504364511": {
    "cost": 1.0,
@@ -440,6 +473,17 @@
    "what": "transcribe the audio in this recording to text",
    "why": "raw goal compilation gap"
   },
+  "g4109503c193a55265f0aa5576d584aacfcb58ae9e822ad8ad61854a1547a7e26": {
+   "cost": 1.0,
+   "created": 1794959885.7473865,
+   "helped": 0,
+   "id": "g4109503c193a55265f0aa5576d584aacfcb58ae9e822ad8ad61854a1547a7e26",
+   "last_seen": 1794959885.7473865,
+   "resolved": false,
+   "trials": 0,
+   "what": "files",
+   "why": "unknown_operator roote8e4c01e5e0c"
+  },
   "g421844338923": {
    "cost": 1.0,
    "created": 1793266064.38011,
@@ -456,7 +500,7 @@
    "created": 1794494391.150514,
    "helped": 0,
    "id": "g422ad6fce913cd7da98bd4394c1435fd6c1f37980cf1da79973b872ae5f32277",
-   "last_seen": 1794494391.150514,
+   "last_seen": 1794960234.5539994,
    "resolved": false,
    "trials": 0,
    "what": "revenue",
@@ -792,6 +836,17 @@
    "what": "ONLY_1_INDEPENDENT_CHANNEL(S)_NEED_2",
    "why": "ONLY_1_INDEPENDENT_CHANNEL(S)_NEED_2"
   },
+  "g6c121c4363ac524c579461a8ca434519168d409bd779c3d0c67c706e052dea87": {
+   "cost": 1.0,
+   "created": 1794959885.7051191,
+   "helped": 0,
+   "id": "g6c121c4363ac524c579461a8ca434519168d409bd779c3d0c67c706e052dea87",
+   "last_seen": 1794959885.7051191,
+   "resolved": false,
+   "trials": 0,
+   "what": "about",
+   "why": "unknown_operator root9c7beefe24d7"
+  },
   "g703274280680": {
    "cost": 1.0,
    "created": 1793264802.119693,
@@ -869,6 +924,17 @@
    "what": "practice:math_numeric_sympy",
    "why": "live learning cycle"
   },
+  "g788ec942a5d4da07a874a80035de9197ec01d156ec144fc8d7c24d3ac6d96c44": {
+   "cost": 1.0,
+   "created": 1794959886.102498,
+   "helped": 0,
+   "id": "g788ec942a5d4da07a874a80035de9197ec01d156ec144fc8d7c24d3ac6d96c44",
+   "last_seen": 1794959886.102498,
+   "resolved": false,
+   "trials": 0,
+   "what": "notes",
+   "why": "unknown_operator root92d87bedee22"
+  },
   "g7e5e853bc198475473e1a55d4f2784d24ac3c2454856375a6146d9c7ceeb6031": {
    "cost": 1.0,
    "created": 1794495950.7030454,
@@ -901,6 +967,17 @@
    "trials": 2,
    "what": "probe:--output|stdin",
    "why": "empirical cli probe"
+  },
+  "g81e8bba3888aa8de17ee154e49a358cad037316b7af7919ea2711b8affac0cc7": {
+   "cost": 1.0,
+   "created": 1794959885.969805,
+   "helped": 0,
+   "id": "g81e8bba3888aa8de17ee154e49a358cad037316b7af7919ea2711b8affac0cc7",
+   "last_seen": 1794959885.969805,
+   "resolved": false,
+   "trials": 0,
+   "what": "lines",
+   "why": "unknown_operator rootb2fcc06b73b5"
   },
   "g828982030742": {
    "cost": 1.0,
@@ -1089,6 +1166,17 @@
    "what": "profit",
    "why": "unknown_operator rootafcb3f429980"
   },
+  "g9eeb1eee92bc3f46530b176aee185f7f719e4e2bed5a0bd75abfb969a3bf1a73": {
+   "cost": 1.0,
+   "created": 1794959886.0699492,
+   "helped": 0,
+   "id": "g9eeb1eee92bc3f46530b176aee185f7f719e4e2bed5a0bd75abfb969a3bf1a73",
+   "last_seen": 1794959886.0699492,
+   "resolved": false,
+   "trials": 0,
+   "what": "retry",
+   "why": "unknown_operator root01bd5c604b99"
+  },
   "gb263651b7eacea941fae3621a258a396d9a06920e4b0655b594e107b2ce42ebb": {
    "cost": 1.0,
    "created": 1794495950.98596,
@@ -1166,6 +1254,17 @@
    "what": "margin",
    "why": "unknown_operator root66b12e69b598"
   },
+  "gc8ba5ec73c0b78cfa23f23f73405b419b04fb335929d6a7ce23e3ed9ed65b420": {
+   "cost": 1.0,
+   "created": 1794959885.889423,
+   "helped": 0,
+   "id": "gc8ba5ec73c0b78cfa23f23f73405b419b04fb335929d6a7ce23e3ed9ed65b420",
+   "last_seen": 1794959885.889423,
+   "resolved": false,
+   "trials": 0,
+   "what": "profit",
+   "why": "unknown_operator root840b27e616a3"
+  },
   "gd017788ab2e8ec97d330bee5aa1a2b5f5b24df5103b1c8c94c12437a6e953c40": {
    "cost": 1.0,
    "created": 1794494227.3612792,
@@ -1176,6 +1275,17 @@
    "trials": 0,
    "what": "files",
    "why": "unknown_operator rootbb886a16d028"
+  },
+  "gd214810b034e6068d6dea457d1d5a71aee400d9df68b90c70f91436920e086f3": {
+   "cost": 1.0,
+   "created": 1794959886.009993,
+   "helped": 0,
+   "id": "gd214810b034e6068d6dea457d1d5a71aee400d9df68b90c70f91436920e086f3",
+   "last_seen": 1794959886.009993,
+   "resolved": false,
+   "trials": 0,
+   "what": "retry",
+   "why": "unknown_operator roota1ab4d631d7b"
   },
   "gddc33b7088ee9d6aaa2c4f0c825a6394a15455208dfa556d9acccfbe03fdb946": {
    "cost": 1.0,
@@ -1193,11 +1303,22 @@
    "created": 1794494390.5363297,
    "helped": 0,
    "id": "gdf289cd6d46c433692f992639412cafa1ae2d9f975f8d15700bbe05e9d286372",
-   "last_seen": 1794494390.5363297,
+   "last_seen": 1794960233.9646661,
    "resolved": false,
    "trials": 0,
    "what": "margin",
    "why": "unknown_operator root5678b5415ecc"
+  },
+  "gdfae43a6975d74105d1465ed2ffde86da0f616428c6068f0d4a112c4d21fecf9": {
+   "cost": 1.0,
+   "created": 1794959885.8920715,
+   "helped": 0,
+   "id": "gdfae43a6975d74105d1465ed2ffde86da0f616428c6068f0d4a112c4d21fecf9",
+   "last_seen": 1794959885.8920715,
+   "resolved": false,
+   "trials": 0,
+   "what": "margin",
+   "why": "unknown_operator root840b27e616a3"
   },
   "ge1b1c4955a5e20dfa14256fa272b198d5b51fe56af5592bfe2a583052ad0748a": {
    "cost": 1.0,
@@ -1231,6 +1352,17 @@
    "trials": 1,
    "what": "spreadv",
    "why": "unknown_operator root5b390d825531"
+  },
+  "gee5cb663447f5814f18b244913612c6923f978d6125f1d7e4837d56829129654": {
+   "cost": 1.0,
+   "created": 1794959885.780632,
+   "helped": 0,
+   "id": "gee5cb663447f5814f18b244913612c6923f978d6125f1d7e4837d56829129654",
+   "last_seen": 1794959885.780632,
+   "resolved": false,
+   "trials": 0,
+   "what": "define",
+   "why": "unknown_operator rootc202bb4d236d"
   },
   "gf063631c810106903207d60961c506bbad524d5437cb5d8ecf66373d3ca94ab5": {
    "cost": 1.0,
@@ -1270,7 +1402,7 @@
    "created": 1794494258.5879457,
    "helped": 0,
    "id": "gfecc13c6c1cbc1abea485a0a36ff898e02d2e2bcf38a40f313369d8813a4e2b3",
-   "last_seen": 1794494258.5879457,
+   "last_seen": 1794960076.2187128,
    "resolved": false,
    "trials": 0,
    "what": "zzzz",
@@ -1279,11 +1411,11 @@
   "gfed073cebb4192a5aba86be95d317a21cc5f5c541f7e5d1bde4f111ef4fc95d4": {
    "cost": 1.0,
    "created": 1794494393.8911777,
-   "helped": 1,
+   "helped": 2,
    "id": "gfed073cebb4192a5aba86be95d317a21cc5f5c541f7e5d1bde4f111ef4fc95d4",
-   "last_seen": 1794494393.916321,
+   "last_seen": 1794960240.7750013,
    "resolved": true,
-   "trials": 1,
+   "trials": 2,
    "what": "median",
    "why": "unknown_operator root5393aeedfb44"
   }

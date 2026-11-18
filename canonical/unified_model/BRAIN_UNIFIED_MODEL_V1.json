@@ -31228,7 +31228,7 @@
   "engines": 26,
   "knowledge_documents": 523,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 7013,
+  "research_index_records": 7016,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 452,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "91cf4868a94ac9e4e6329e2d012f3341a402e80b2d9c57e1719f328151bb6eba"
+  "value": "fc6b830ea48e313660ce454dce0d163a6509abff26562c15a903bf6bf0833f50"
  },
  "engines": [
   {
@@ -213844,6 +213844,25 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "2026-11-18",
+   "id": "research:canonical/verification/THE_FAILURE_ALREADY_SAYS_WHAT_TO_WRITE_20261118_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/THE_FAILURE_ALREADY_SAYS_WHAT_TO_WRITE_20261118_V1.json",
+   "schema": "BRAIN_FORCE_THE_VALUE_AND_SEE_V1",
+   "sha256": "0cf02643c4bf437812e1b302e4585e4b3a0e16161a2c6379f001ec551137a42f",
+   "status": "",
+   "terms": {
+    "20261118": 1,
+    "already": 2,
+    "failure": 2,
+    "says": 2,
+    "v1": 1,
+    "write": 2
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "",
    "id": "research:canonical/verification/THE_FOUR_LEVERS_OF_LEARNING_FROM_EXPERIENCE_20261116_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -248279,6 +248298,70 @@
     "row": 3,
     "rows": 2,
     "v1": 2
+   }
+  },
+  {
+   "action_id": "THE_FAILURE_ALREADY_SAYS_WHAT_TO_WRITE_20261118_V1",
+   "capability": false,
+   "date": "2026-11-18",
+   "id": "research:canonical/action_intents/THE_FAILURE_ALREADY_SAYS_WHAT_TO_WRITE_20261118_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/THE_FAILURE_ALREADY_SAYS_WHAT_TO_WRITE_20261118_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "e49c2a313710ca7ea3372fbe5984c83d4c45812dffb4b5efd917258b02ad96bf",
+   "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
+   "terms": {
+    "121.2": 1,
+    "14": 2,
+    "15": 1,
+    "20261118": 1,
+    "7.7": 1,
+    "759": 1,
+    "already": 1,
+    "answer": 1,
+    "ask_the_failing_case_which_expression_it_wanted": 1,
+    "budget": 1,
+    "bugs": 2,
+    "build": 1,
+    "but": 1,
+    "calibrated": 1,
+    "cases": 1,
+    "closed": 1,
+    "cost": 1,
+    "exhausts": 1,
+    "express": 1,
+    "expressibility": 1,
+    "expression": 3,
+    "factor": 1,
+    "failure": 3,
+    "fix": 1,
+    "fixed": 2,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "no": 3,
+    "not": 2,
+    "one": 4,
+    "published": 4,
+    "site": 5,
+    "write": 2
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/action_intents/THE_FAILURE_ALREADY_SAYS_WHAT_TO_WRITE_20261118_V1.md",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/THE_FAILURE_ALREADY_SAYS_WHAT_TO_WRITE_20261118_V1.md",
+   "schema": "",
+   "sha256": "97b17c4d14723960dbfdaa3adcf1b3b86c3b2c3ef5ffd7a30ae198f34a329f1e",
+   "status": "",
+   "terms": {
+    "20261118": 1,
+    "already": 1,
+    "failure": 1,
+    "says": 1,
+    "v1": 1,
+    "write": 1
    }
   },
   {
