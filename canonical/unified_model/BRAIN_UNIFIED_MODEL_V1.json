@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "04508a9e7dc522229aa388577000bde96500cb34b7c3cda9bdb8a27db8ceb953"
+  "value": "852c74385fff9e66c1b3ad96ef5cb822a194e83a066ef607e1bbd969ce903875"
  },
  "engines": [
   {
@@ -242420,7 +242420,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/IS_THE_FIX_EVEN_IN_THE_POOL_20261118_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "642f5f19d4d3bb01032b38f70ab39c0f33eca8729a0a4bbbc8c3d7756eeda54c",
+   "sha256": "55cc468deb2de714d90e6c44acf1e416ec978789862246c7d58d41cea1082cb1",
    "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
    "terms": {
     "2000": 1,
