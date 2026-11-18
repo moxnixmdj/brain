@@ -1,0 +1,454 @@
+{
+ "authority": "NONE -- sandbox measurement, not independent verification",
+ "kill_criterion": "if the operation dimension does not pin strictly more of the same parts than the literal-call search (2 of 8), the dimension is dead",
+ "model_calls": 0,
+ "network_calls": 0,
+ "rows": [
+  {
+   "parts": [
+    {
+     "cases": 108,
+     "differences": 0,
+     "literal_calls": "NOT_REACHED",
+     "part_head": "__lazy_modules__ = {\"bisect\", \"copyreg\", f\"{__spec__.parent}._ranges\"}",
+     "state": "NOT_REACHED"
+    },
+    {
+     "cases": 108,
+     "differences": 0,
+     "literal_calls": "NOT_REACHED",
+     "part_head": "SupportsIndex,",
+     "state": "NOT_REACHED"
+    }
+   ],
+   "pinned": 0,
+   "repo": "pypa/packaging",
+   "seeds": 12,
+   "sha": "46167dcdb1c8ae42c2dd72d3fdb91564be65a0db",
+   "source": "src/packaging/ranges.py",
+   "state": "NOT_REACHED",
+   "unpinned_parts": 2
+  },
+  {
+   "parts": [],
+   "pinned": 0,
+   "repo": "pypa/packaging",
+   "seeds": 12,
+   "sha": "5a7d3386d2777180a381eb947f21293124ce8df5",
+   "source": "src/packaging/_parser.py",
+   "state": "FULLY_PINNED",
+   "unpinned_parts": 0
+  },
+  {
+   "parts": [],
+   "pinned": 0,
+   "repo": "pypa/packaging",
+   "seeds": 12,
+   "sha": "491af5d517cdf6d72c2cf754f6eafd247ab8f559",
+   "source": "src/packaging/markers.py",
+   "state": "FULLY_PINNED",
+   "unpinned_parts": 0
+  },
+  {
+   "parts": [
+    {
+     "cases": 108,
+     "differences": 0,
+     "literal_calls": "REFUSED__PART_REMOVES_CODE",
+     "part_head": "(removal)",
+     "state": "NOT_REACHED"
+    },
+    {
+     "cases": 108,
+     "differences": 0,
+     "literal_calls": "REFUSED__PART_REMOVES_CODE",
+     "part_head": "(removal)",
+     "state": "NOT_REACHED"
+    }
+   ],
+   "pinned": 0,
+   "repo": "pypa/packaging",
+   "seeds": 12,
+   "sha": "a03bde12d560b16b175c336c373040347773ce03",
+   "source": "src/packaging/requirements.py",
+   "state": "NOT_REACHED",
+   "unpinned_parts": 2
+  },
+  {
+   "parts": [],
+   "pinned": 0,
+   "repo": "pypa/packaging",
+   "seeds": 12,
+   "sha": "cd91074b050056e2013c08611370abb4138165e7",
+   "source": "src/packaging/ranges.py",
+   "state": "FULLY_PINNED",
+   "unpinned_parts": 0
+  },
+  {
+   "parts": [],
+   "pinned": 0,
+   "repo": "pypa/packaging",
+   "seeds": 12,
+   "sha": "bddb69038b25b974bdf27d06d500dc05b1f8f97e",
+   "source": "src/packaging/markers.py",
+   "state": "FULLY_PINNED",
+   "unpinned_parts": 0
+  },
+  {
+   "parts": [],
+   "pinned": 0,
+   "repo": "pypa/packaging",
+   "seeds": 12,
+   "sha": "4b243af94ff6885c89b8acd7a22fc5714b18cb96",
+   "source": "src/packaging/requirements.py",
+   "state": "FULLY_PINNED",
+   "unpinned_parts": 0
+  },
+  {
+   "parts": [],
+   "pinned": 0,
+   "repo": "pypa/packaging",
+   "seeds": 11,
+   "sha": "0625596e502163179b9a82796aee82c178efc16d",
+   "source": "src/packaging/utils.py",
+   "state": "FULLY_PINNED",
+   "unpinned_parts": 0
+  },
+  {
+   "parts": [],
+   "pinned": 0,
+   "repo": "pypa/packaging",
+   "seeds": 12,
+   "sha": "d17cfaf0b77a5690f03087359e7c8d665a3c728d",
+   "source": "src/packaging/_parser.py",
+   "state": "FULLY_PINNED",
+   "unpinned_parts": 0
+  },
+  {
+   "parts": [],
+   "pinned": 0,
+   "repo": "pypa/packaging",
+   "seeds": 6,
+   "sha": "2602dd07d8bd5d6c54a3ce0e212f52eb2e127f3e",
+   "source": "src/packaging/_tokenizer.py",
+   "state": "FULLY_PINNED",
+   "unpinned_parts": 0
+  },
+  {
+   "parts": [],
+   "pinned": 0,
+   "repo": "pypa/packaging",
+   "seeds": 5,
+   "sha": "fe18f139c5b3d73cd9fdd9b25f1eda1b6fd7ba15",
+   "source": "src/packaging/requirements.py",
+   "state": "FULLY_PINNED",
+   "unpinned_parts": 0
+  },
+  {
+   "parts": [],
+   "pinned": 0,
+   "repo": "pypa/packaging",
+   "seeds": 6,
+   "sha": "8af75907bf1140071a6a706874fcf1d73cc39c71",
+   "source": "src/packaging/utils.py",
+   "state": "FULLY_PINNED",
+   "unpinned_parts": 0
+  },
+  {
+   "parts": [
+    {
+     "cases": 108,
+     "differences": 0,
+     "literal_calls": "NOT_REACHED",
+     "part_head": "return cls.from_raw(raw, validate=validate)",
+     "state": "NOT_REACHED"
+    }
+   ],
+   "pinned": 0,
+   "repo": "pypa/packaging",
+   "seeds": 12,
+   "sha": "206834025040aca6f8a2fdfc4039dbfa2a9861a6",
+   "source": "src/packaging/metadata.py",
+   "state": "NOT_REACHED",
+   "unpinned_parts": 1
+  },
+  {
+   "parts": [],
+   "pinned": 0,
+   "repo": "pypa/packaging",
+   "seeds": 1,
+   "sha": "30824d9e3b33372a81af5e7a1d7e2ceb95e348c6",
+   "source": "src/packaging/dependency_groups.py",
+   "state": "FULLY_PINNED",
+   "unpinned_parts": 0
+  },
+  {
+   "parts": [],
+   "pinned": 0,
+   "repo": "pypa/packaging",
+   "seeds": 12,
+   "sha": "4c663c9ef5e1ec4f64b01ea9a61c981890a56407",
+   "source": "src/packaging/markers.py",
+   "state": "FULLY_PINNED",
+   "unpinned_parts": 0
+  },
+  {
+   "parts": [
+    {
+     "cases": 45,
+     "differences": 0,
+     "literal_calls": "NOT_REACHED",
+     "part_head": "elif isinstance(state, dict) and state.keys() >= set(self.__slots__):",
+     "state": "NOT_REACHED"
+    }
+   ],
+   "pinned": 0,
+   "repo": "pypa/packaging",
+   "seeds": 5,
+   "sha": "d5fedc90bba333ed0962ba5dfb7072d38f2c1d84",
+   "source": "src/packaging/requirements.py",
+   "state": "NOT_REACHED",
+   "unpinned_parts": 1
+  },
+  {
+   "parts": [],
+   "pinned": 0,
+   "repo": "pypa/packaging",
+   "seeds": 0,
+   "sha": "a0661b5f5c8838af81c5098b2a564e62852decb4",
+   "source": "src/packaging/direct_url.py",
+   "state": "FULLY_PINNED",
+   "unpinned_parts": 0
+  },
+  {
+   "parts": [],
+   "pinned": 0,
+   "repo": "pypa/packaging",
+   "seeds": 12,
+   "sha": "1b00eeffc6bec070c10e7e6ecf03c03f9789eed2",
+   "source": "src/packaging/metadata.py",
+   "state": "FULLY_PINNED",
+   "unpinned_parts": 0
+  },
+  {
+   "parts": [],
+   "pinned": 0,
+   "repo": "pypa/packaging",
+   "seeds": 12,
+   "sha": "0a85b41e24c9b55b83f05ae696d73e8294a5b094",
+   "source": "src/packaging/markers.py",
+   "state": "FULLY_PINNED",
+   "unpinned_parts": 0
+  },
+  {
+   "parts": [],
+   "pinned": 0,
+   "repo": "pypa/packaging",
+   "seeds": 12,
+   "sha": "c4fb81ff6eba16fdd24d50e9d9d002fdbece6dd4",
+   "source": "src/packaging/ranges.py",
+   "state": "FULLY_PINNED",
+   "unpinned_parts": 0
+  },
+  {
+   "parts": [],
+   "pinned": 0,
+   "repo": "pypa/packaging",
+   "seeds": 6,
+   "sha": "84833cc16be84bc7f1d9f64e2818afe0dd48aade",
+   "source": "src/packaging/utils.py",
+   "state": "FULLY_PINNED",
+   "unpinned_parts": 0
+  },
+  {
+   "parts": [],
+   "pinned": 0,
+   "repo": "pypa/packaging",
+   "seeds": 5,
+   "sha": "fbea07c1f23f182141ca4e2aacf5f82d1c6c9f45",
+   "source": "src/packaging/_parser.py",
+   "state": "FULLY_PINNED",
+   "unpinned_parts": 0
+  },
+  {
+   "parts": [],
+   "pinned": 0,
+   "repo": "pypa/packaging",
+   "seeds": 5,
+   "sha": "fbd0d4b4b83ba492ec9d5dd4eaa8e8df33288b1f",
+   "source": "src/packaging/requirements.py",
+   "state": "FULLY_PINNED",
+   "unpinned_parts": 0
+  },
+  {
+   "parts": [],
+   "pinned": 0,
+   "repo": "pypa/packaging",
+   "seeds": 12,
+   "sha": "07265129295b4b95b9143b50e3ce4709f31a8c49",
+   "source": "src/packaging/markers.py",
+   "state": "FULLY_PINNED",
+   "unpinned_parts": 0
+  },
+  {
+   "parts": [],
+   "pinned": 0,
+   "repo": "pypa/packaging",
+   "seeds": 5,
+   "sha": "d8e08df11bfa50e987375546eda1f0ee3f27bd41",
+   "source": "src/packaging/requirements.py",
+   "state": "FULLY_PINNED",
+   "unpinned_parts": 0
+  },
+  {
+   "parts": [],
+   "pinned": 0,
+   "repo": "pypa/packaging",
+   "seeds": 0,
+   "sha": "08bb047794f4e70b157dacef4538b3a6e3492743",
+   "source": "src/packaging/direct_url.py",
+   "state": "FULLY_PINNED",
+   "unpinned_parts": 0
+  },
+  {
+   "parts": [],
+   "pinned": 0,
+   "repo": "pypa/packaging",
+   "seeds": 5,
+   "sha": "5c163f5382fb6cba408b7c42efb8a03ffa041f4b",
+   "source": "src/packaging/requirements.py",
+   "state": "FULLY_PINNED",
+   "unpinned_parts": 0
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "9f5249fba27e63745cc9a6bc3f2a7b8f47220a8f",
+   "source": "src/packaging/metadata.py",
+   "state": "REFUSED__CONTROL_BROKEN"
+  },
+  {
+   "parts": [],
+   "pinned": 0,
+   "repo": "pypa/packaging",
+   "seeds": 12,
+   "sha": "98b4bfb6828baaf01081aa3a123302fe3020b63a",
+   "source": "src/packaging/markers.py",
+   "state": "FULLY_PINNED",
+   "unpinned_parts": 0
+  },
+  {
+   "parts": [
+    {
+     "differences": 0,
+     "literal_calls": "REFUSED__NO_SEED",
+     "part_head": "return other is self",
+     "state": "REFUSED__NO_SEED"
+    },
+    {
+     "differences": 0,
+     "literal_calls": "REFUSED__NO_SEED",
+     "part_head": "return other is self",
+     "state": "REFUSED__NO_SEED"
+    }
+   ],
+   "pinned": 0,
+   "repo": "pypa/packaging",
+   "seeds": 0,
+   "sha": "f8f16338e10d5d509ea2a29e0f0cf56baf4be565",
+   "source": "src/packaging/_structures.py",
+   "state": "NOT_REACHED",
+   "unpinned_parts": 2
+  },
+  {
+   "parts": [],
+   "pinned": 0,
+   "repo": "pypa/packaging",
+   "seeds": 2,
+   "sha": "6da1c50d1354284da3b1cfe3ba6cf495162421ee",
+   "source": "src/packaging/requirements.py",
+   "state": "FULLY_PINNED",
+   "unpinned_parts": 0
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "e83801f455b056b5bafd6b69a9db1aacdc807bb6",
+   "source": "src/packaging/metadata.py",
+   "state": "REFUSED__CONTROL_BROKEN"
+  },
+  {
+   "parts": [
+    {
+     "cases": 18,
+     "differences": 0,
+     "literal_calls": "REACHED_NO_DIFFERENCE",
+     "part_head": "span_end=None,",
+     "state": "NOT_REACHED"
+    }
+   ],
+   "pinned": 0,
+   "repo": "pypa/packaging",
+   "seeds": 2,
+   "sha": "888eb1452625196985701e2727c5416b70e969fd",
+   "source": "src/packaging/_parser.py",
+   "state": "NOT_REACHED",
+   "unpinned_parts": 1
+  },
+  {
+   "parts": [],
+   "pinned": 0,
+   "repo": "pypa/packaging",
+   "seeds": 4,
+   "sha": "524b701c6e30fc4da9355117367273f591c6de72",
+   "source": "src/packaging/utils.py",
+   "state": "FULLY_PINNED",
+   "unpinned_parts": 0
+  },
+  {
+   "parts": [],
+   "pinned": 0,
+   "repo": "pypa/packaging",
+   "seeds": 2,
+   "sha": "e8f839f7400253998a07a993420ae308bb4f159d",
+   "source": "src/packaging/requirements.py",
+   "state": "FULLY_PINNED",
+   "unpinned_parts": 0
+  },
+  {
+   "parts": [
+    {
+     "cases": 18,
+     "differences": 0,
+     "literal_calls": "REFUSED__PART_REMOVES_CODE",
+     "part_head": "(removal)",
+     "state": "NOT_REACHED"
+    }
+   ],
+   "pinned": 0,
+   "repo": "pypa/packaging",
+   "seeds": 2,
+   "sha": "fe8f0bb99c41c5e3a8c2395d4e849c1eff72949c",
+   "source": "src/packaging/requirements.py",
+   "state": "NOT_REACHED",
+   "unpinned_parts": 1
+  }
+ ],
+ "schema": "BRAIN_THE_OPERATION_IS_THE_MISSING_DIMENSION_V1",
+ "totals": {
+  "baseline_on_this_population": 0,
+  "cases_executed": 621,
+  "certified_share_after": 0.762,
+  "certified_share_before": 0.762,
+  "differences_found": 0,
+  "gain_over_the_seed_search": -2,
+  "literal_call_baseline_pinned": 2,
+  "parts_audited": 10,
+  "parts_pinned": 0,
+  "pinned_by_operation": {},
+  "states": {
+   "FULLY_PINNED": 27,
+   "NOT_REACHED": 7,
+   "REFUSED__CONTROL_BROKEN": 2
+  },
+  "tasks": 36
+ }
+}

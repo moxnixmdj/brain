@@ -31228,7 +31228,7 @@
   "engines": 26,
   "knowledge_documents": 542,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 7092,
+  "research_index_records": 7095,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 452,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "61f7f50f1cfb46a18d351f82af374675ba35c9491d370abdc77eb5cac60aa528"
+  "value": "8e9bb3913c1269acfde6e5941ea67fa01771990fc59eff32ccf943e53b973c97"
  },
  "engines": [
   {
@@ -215875,6 +215875,44 @@
    "action_id": "",
    "capability": false,
    "date": "",
+   "id": "research:canonical/verification/THE_OPERATION_IS_THE_MISSING_DIMENSION_OPERATIONS_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/THE_OPERATION_IS_THE_MISSING_DIMENSION_OPERATIONS_20261116_V1.json",
+   "schema": "BRAIN_THE_OPERATION_IS_THE_MISSING_DIMENSION_V1",
+   "sha256": "041800c0a745944675f3fef71182498bb988e42703dffad97ca5a8845abc50a9",
+   "status": "",
+   "terms": {
+    "20261116": 1,
+    "dimension": 1,
+    "missing": 1,
+    "operation": 1,
+    "operations": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/THE_OPERATION_IS_THE_MISSING_DIMENSION_RANDOM_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/THE_OPERATION_IS_THE_MISSING_DIMENSION_RANDOM_20261116_V1.json",
+   "schema": "BRAIN_THE_OPERATION_IS_THE_MISSING_DIMENSION_V1",
+   "sha256": "15196a8fd3f384fba2621516184d5bcabf56697fff0c78476eba51da4ab67157",
+   "status": "",
+   "terms": {
+    "20261116": 1,
+    "dimension": 1,
+    "missing": 1,
+    "operation": 1,
+    "random": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
    "id": "research:canonical/verification/THE_PREMISE_IS_THE_SENSE_20261116_V1.json",
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/THE_PREMISE_IS_THE_SENSE_20261116_V1.json",
@@ -253344,6 +253382,51 @@
     "sentence": 2,
     "swe": 2,
     "v1": 2
+   }
+  },
+  {
+   "action_id": "THE_VERB_WAS_THE_LAST_UNTOUCHED_DIMENSION_AND_IT_IS_EMPTY_WHERE_IT_IS_NEEDED_20261116_V1",
+   "capability": false,
+   "date": "2026-11-16",
+   "id": "research:canonical/action_intents/THE_VERB_WAS_THE_LAST_UNTOUCHED_DIMENSION_AND_IT_IS_EMPTY_WHERE_IT_IS_NEEDED_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/THE_VERB_WAS_THE_LAST_UNTOUCHED_DIMENSION_AND_IT_IS_EMPTY_WHERE_IT_IS_NEEDED_20261116_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "09eae9f40b8014fbe326a66838e94621b00435044aeca937cda54ad4962d4f35",
+   "status": "PRODUCED",
+   "terms": {
+    "20261116": 1,
+    "arrives": 1,
+    "artifact": 1,
+    "change": 1,
+    "dimension": 1,
+    "discriminating": 2,
+    "document": 1,
+    "empty": 1,
+    "file": 2,
+    "fixed": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "input": 2,
+    "inside": 1,
+    "knowledge": 1,
+    "last": 1,
+    "needed": 1,
+    "no": 5,
+    "operation": 1,
+    "part": 1,
+    "parts": 1,
+    "produced": 1,
+    "protocol": 1,
+    "read_the_value_a_changed_condition_compares_against_out_of_the_program_and_deliver_it_at_the_type_that_can_carry_it": 1,
+    "residual": 1,
+    "reverted": 1,
+    "seed": 1,
+    "separates": 1,
+    "the_verb_was_the_last_untouched_dimension_and_it_is_empty_where_it_is_needed_20261116_v1": 1,
+    "the_verb_was_the_last_untouched_dimension_and_it_is_empty_where_it_is_needed__the_same_seeds_through_the_languages_own_protocol_pin_zero_of_eight_and_zero_of_ten_on_the_population_where_an_operation_is_what_changed__zero_separating_outcomes_in_nine_hundred_and_fifty_four_executions__the_structure_is_the_result_a_fix_that_changes_copy_or_pickle_or_equality_ships_the_test_that_names_it_so_the_part_is_not_open_and_the_open_part_has_no_operation_where_the_two_states_differ__input_value_corpus_and_verb_are_now_four_spent_dimensions_with_zero_new_pins_beyond_the_changes_own_test_so_what_remains_must_be_manufactured_from_stated_intent": 1,
+    "untouched": 1,
+    "v1": 1,
+    "value": 1
    }
   },
   {
