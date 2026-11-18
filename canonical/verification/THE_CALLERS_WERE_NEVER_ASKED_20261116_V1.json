@@ -1,0 +1,306 @@
+{
+ "authority": "NONE -- sandbox measurement, not independent verification",
+ "kill_criterion": "if caller-harvested arguments do not pin strictly more residual parts than the six sources already spent (0 added by rounds 18-21), the source is dead",
+ "model_calls": 0,
+ "network_calls": 0,
+ "rows": [
+  {
+   "call_sites": 2,
+   "call_sites_in_source": 0,
+   "call_sites_in_tests": 2,
+   "candidates": 2,
+   "defined": 6,
+   "parts": [
+    {
+     "candidates": 2,
+     "differences": 0,
+     "part_head": "default_digest_method: t.Any = staticmethod(_lazy_sha1)",
+     "pin": null,
+     "state": "NO_SEPARATING_CALL"
+    }
+   ],
+   "pinned": 0,
+   "repo": "pallets/itsdangerous",
+   "sha": "7f4dcf83a07bb3d53f4e0e65ef1b43327b4cca90",
+   "source": "src/itsdangerous/signer.py",
+   "state": "NO_SEPARATING_CALL",
+   "unpinned_parts": 1
+  },
+  {
+   "call_sites": 9,
+   "call_sites_in_source": 0,
+   "call_sites_in_tests": 9,
+   "candidates": 9,
+   "defined": 11,
+   "parts": [],
+   "pinned": 0,
+   "repo": "pypa/packaging",
+   "sha": "022ae6c6fe5c2ef9615875d0ecfab1ae4024720f",
+   "source": "src/packaging/metadata.py",
+   "state": "FULLY_PINNED",
+   "unpinned_parts": 0
+  },
+  {
+   "call_sites": 40,
+   "call_sites_in_source": 0,
+   "call_sites_in_tests": 40,
+   "candidates": 40,
+   "defined": 9,
+   "parts": [],
+   "pinned": 0,
+   "repo": "pypa/packaging",
+   "sha": "258202ed7f796bdb8a65252a66c3fbd3e69e97f6",
+   "source": "src/packaging/utils.py",
+   "state": "FULLY_PINNED",
+   "unpinned_parts": 0
+  },
+  {
+   "call_sites": 0,
+   "call_sites_in_source": 0,
+   "call_sites_in_tests": 0,
+   "candidates": 0,
+   "defined": 9,
+   "parts": [],
+   "pinned": 0,
+   "repo": "pypa/packaging",
+   "sha": "349abfad0688f42eb835ed8a10380d6cbf6940e7",
+   "source": "src/packaging/dependency_groups.py",
+   "state": "FULLY_PINNED",
+   "unpinned_parts": 0
+  },
+  {
+   "call_sites": 9,
+   "call_sites_in_source": 0,
+   "call_sites_in_tests": 9,
+   "candidates": 9,
+   "defined": 11,
+   "parts": [],
+   "pinned": 0,
+   "repo": "pypa/packaging",
+   "sha": "553582d9162c761e4ab97ccc6cea43ac14ff2a8b",
+   "source": "src/packaging/metadata.py",
+   "state": "FULLY_PINNED",
+   "unpinned_parts": 0
+  },
+  {
+   "call_sites": 40,
+   "call_sites_in_source": 38,
+   "call_sites_in_tests": 2,
+   "candidates": 40,
+   "defined": 9,
+   "parts": [],
+   "pinned": 0,
+   "repo": "pypa/packaging",
+   "sha": "84833cc16be84bc7f1d9f64e2818afe0dd48aade",
+   "source": "src/packaging/utils.py",
+   "state": "FULLY_PINNED",
+   "unpinned_parts": 0
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "9f5249fba27e63745cc9a6bc3f2a7b8f47220a8f",
+   "source": "src/packaging/metadata.py",
+   "state": "REFUSED__CONTROL_BROKEN"
+  },
+  {
+   "call_sites": 40,
+   "call_sites_in_source": 40,
+   "call_sites_in_tests": 0,
+   "candidates": 40,
+   "defined": 31,
+   "parts": [],
+   "pinned": 0,
+   "repo": "pypa/packaging",
+   "sha": "b80e6eb0a6c0f61dcaa9b1587f3aab370263dc65",
+   "source": "src/packaging/pylock.py",
+   "state": "FULLY_PINNED",
+   "unpinned_parts": 0
+  },
+  {
+   "call_sites": 1,
+   "call_sites_in_source": 0,
+   "call_sites_in_tests": 1,
+   "candidates": 1,
+   "defined": 3,
+   "parts": [
+    {
+     "candidates": 1,
+     "differences": 0,
+     "part_head": "elif isinstance(state, dict) and state.keys() >= set(self.__slots__):",
+     "pin": null,
+     "state": "NO_SEPARATING_CALL"
+    }
+   ],
+   "pinned": 0,
+   "repo": "pypa/packaging",
+   "sha": "d5fedc90bba333ed0962ba5dfb7072d38f2c1d84",
+   "source": "src/packaging/requirements.py",
+   "state": "NO_SEPARATING_CALL",
+   "unpinned_parts": 1
+  },
+  {
+   "call_sites": 9,
+   "call_sites_in_source": 0,
+   "call_sites_in_tests": 9,
+   "candidates": 8,
+   "defined": 29,
+   "parts": [],
+   "pinned": 0,
+   "repo": "hukkin/tomli",
+   "sha": "12314bde5b89a8bdc32de7403a2a4cf786187bbc",
+   "source": "src/tomli/_parser.py",
+   "state": "FULLY_PINNED",
+   "unpinned_parts": 0
+  },
+  {
+   "call_sites": 9,
+   "call_sites_in_source": 0,
+   "call_sites_in_tests": 9,
+   "candidates": 8,
+   "defined": 29,
+   "parts": [],
+   "pinned": 0,
+   "repo": "hukkin/tomli",
+   "sha": "1e6e869aa9dbbddc492608944e82d9ad5397280f",
+   "source": "src/tomli/_parser.py",
+   "state": "FULLY_PINNED",
+   "unpinned_parts": 0
+  },
+  {
+   "call_sites": 9,
+   "call_sites_in_source": 0,
+   "call_sites_in_tests": 9,
+   "candidates": 8,
+   "defined": 29,
+   "parts": [],
+   "pinned": 0,
+   "repo": "hukkin/tomli",
+   "sha": "2a2aa62f1bc71b89b74d41dd2ab67b5dd24bc129",
+   "source": "src/tomli/_parser.py",
+   "state": "FULLY_PINNED",
+   "unpinned_parts": 0
+  },
+  {
+   "call_sites": 0,
+   "call_sites_in_source": 0,
+   "call_sites_in_tests": 0,
+   "candidates": 0,
+   "defined": 28,
+   "parts": [
+    {
+     "candidates": 0,
+     "part_head": "raise suffixed_err(src, new_pos, f\"Expected {expect!r}\") from None",
+     "state": "REFUSED__NO_LITERAL_CALL_SITE"
+    },
+    {
+     "candidates": 0,
+     "part_head": "raise suffixed_err(src, pos, f\"Illegal character {char!r}\")",
+     "state": "REFUSED__NO_LITERAL_CALL_SITE"
+    }
+   ],
+   "pinned": 0,
+   "repo": "hukkin/tomli",
+   "sha": "31c85a18468adbb5f2e892aa96cf0930ac04f93c",
+   "source": "tomli/_parser.py",
+   "state": "NO_SEPARATING_CALL",
+   "unpinned_parts": 2
+  },
+  {
+   "call_sites": 0,
+   "call_sites_in_source": 0,
+   "call_sites_in_tests": 0,
+   "candidates": 0,
+   "defined": 29,
+   "parts": [],
+   "pinned": 0,
+   "repo": "hukkin/tomli",
+   "sha": "4e245a4bbbefed99e550e196095ea65c851cf31d",
+   "source": "src/tomli/_parser.py",
+   "state": "FULLY_PINNED",
+   "unpinned_parts": 0
+  },
+  {
+   "call_sites": 0,
+   "call_sites_in_source": 0,
+   "call_sites_in_tests": 0,
+   "candidates": 0,
+   "defined": 27,
+   "parts": [
+    {
+     "candidates": 0,
+     "part_head": "(removal)",
+     "state": "REFUSED__NO_LITERAL_CALL_SITE"
+    }
+   ],
+   "pinned": 0,
+   "repo": "hukkin/tomli",
+   "sha": "5ab9ec926d9dc1ef79e66215edd51285371fe8a0",
+   "source": "tomli/_parser.py",
+   "state": "NO_SEPARATING_CALL",
+   "unpinned_parts": 1
+  },
+  {
+   "call_sites": 0,
+   "call_sites_in_source": 0,
+   "call_sites_in_tests": 0,
+   "candidates": 0,
+   "defined": 30,
+   "parts": [
+    {
+     "candidates": 0,
+     "part_head": "suffix_location(\n                    state, \"End of line or end of document not found after a statement\"\n               ",
+     "state": "REFUSED__NO_LITERAL_CALL_SITE"
+    },
+    {
+     "candidates": 0,
+     "part_head": "raise TOMLDecodeError(\n                suffix_location(state, f'Expected but did not find \"{expect_char!r}\"')\n          ",
+     "state": "REFUSED__NO_LITERAL_CALL_SITE"
+    },
+    {
+     "candidates": 0,
+     "part_head": "raise TOMLDecodeError(\n                suffix_location(state, f'Invalid character \"{char!r}\" found')\n            )",
+     "state": "REFUSED__NO_LITERAL_CALL_SITE"
+    }
+   ],
+   "pinned": 0,
+   "repo": "hukkin/tomli",
+   "sha": "67ec7d10528bd7b00ff1fc62da9a8a1e06406179",
+   "source": "tomli/_parser.py",
+   "state": "NO_SEPARATING_CALL",
+   "unpinned_parts": 3
+  },
+  {
+   "call_sites": 0,
+   "call_sites_in_source": 0,
+   "call_sites_in_tests": 0,
+   "candidates": 0,
+   "defined": 29,
+   "parts": [],
+   "pinned": 0,
+   "repo": "hukkin/tomli",
+   "sha": "794c8e50d676f1e8e081914eb77e4a48a4f6a20b",
+   "source": "src/tomli/_parser.py",
+   "state": "FULLY_PINNED",
+   "unpinned_parts": 0
+  }
+ ],
+ "schema": "BRAIN_THE_CALLERS_WERE_NEVER_ASKED_V1",
+ "totals": {
+  "call_sites_harvested": 168,
+  "call_sites_in_source": 78,
+  "call_sites_in_tests": 90,
+  "candidates_probed": 3,
+  "certified_share_after": 0.762,
+  "certified_share_before": 0.762,
+  "gain_over_the_six_spent_sources": 0,
+  "parts_audited": 8,
+  "parts_pinned": 0,
+  "separating_calls": 0,
+  "states": {
+   "FULLY_PINNED": 11,
+   "NO_SEPARATING_CALL": 5,
+   "REFUSED__CONTROL_BROKEN": 1
+  },
+  "tasks": 17
+ }
+}
