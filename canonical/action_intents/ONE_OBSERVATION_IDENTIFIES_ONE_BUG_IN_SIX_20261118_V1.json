@@ -42,7 +42,7 @@
  },
  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Turning an observation into a constraint that is true beyond the observation. Measured: after one failing observation, the number of programs still consistent with it at the fix site is 1, 3, 7, 23 or 400 depending on the bug -- one observation identifies the fix on one bug in six. Experience does not teach a rule; it eliminates some hypotheses and hands the rest to a prior.",
- "canonical_base_commit": "9ee703a86e62886f3c06fe2015e12ebf59149ca2",
+ "canonical_base_commit": "ce7d85d24de1b2776982c6d38967b19eeb92e498",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -123,7 +123,7 @@
   "canonical/action_intents/ONE_OBSERVATION_IDENTIFIES_ONE_BUG_IN_SIX_20261118_V1.json"
  ],
  "recursive_obs": {
-  "canonical_base_commit": "9ee703a86e62886f3c06fe2015e12ebf59149ca2",
+  "canonical_base_commit": "ce7d85d24de1b2776982c6d38967b19eeb92e498",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "storing the text that was edited (a spelling destroyed by a rename)",
