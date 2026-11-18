@@ -48,9 +48,9 @@
           "version": "3.2.9",
           "wheel_sha256": "9a5db42bc5dff014806c58a20b9eae7322a134abb6fce3c92c181bfb275ec5b3"
         },
-        "output_bytes": 5309,
+        "output_bytes": 5311,
         "output_path": "canonical/astra_runtime/tmp/typed_swe_reports/12f8c37663b0_typed_swe_report.json",
-        "output_sha256": "611cfe02a664fa57f754bfe15d5c99706a12229d8cd16a7d3770145aa0ee9187",
+        "output_sha256": "beac10a6a18fb31db9ce3cb9f213e9059ca90e913c607acc3f4c9bf3e81d99d2",
         "output_verified": true,
         "row_count": 1,
         "status_value": "PASS"
@@ -77,13 +77,16 @@
     }
   ],
   "created_at_utc": "2026-11-12T14:36:13.941757+00:00",
+  "last_rewind_reason": "DURABLE_EFFECT_INVALID_OR_MISSING",
+  "last_rewound_from_action_index": 0,
   "mission_id": "KIND142",
   "next_action_index": 2,
   "plan_sha256": "884cf86fefb721ed972164063411d3bbf149e3d22cd728cc6550b508907c8b0b",
-  "resume_count": 0,
+  "resume_count": 1,
+  "rewind_count": 1,
   "schema": "PROJECT_BRAIN_CONTROLLER_CHECKPOINT_V1",
   "status": "COMPLETE",
   "step_id": "live-raw-goal-controller",
   "test_interrupt_injected": false,
-  "updated_at_utc": "2026-11-12T14:36:14.639738+00:00"
+  "updated_at_utc": "2026-11-17T23:55:43.409630+00:00"
 }

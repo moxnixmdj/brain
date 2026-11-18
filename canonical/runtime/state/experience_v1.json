@@ -2,8 +2,30 @@
  "cells": {
   "archive.tar_gz.create_from_manifest|verified": {
    "first_seen": 1792312443.2875447,
-   "last_seen": 1794498242.8359478,
+   "last_seen": 1794960829.3893332,
    "observations": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
     1,
     1,
     1,
@@ -92,6 +114,16 @@
    "where": "archive.tar_gz.create_from_manifest",
    "why": "VERIFIED"
   },
+  "archive.verify.tar_gz.gnu|archive.tar_gz.available": {
+   "first_seen": 1794959702.7242112,
+   "last_seen": 1794959702.7242138,
+   "observations": [
+    -1
+   ],
+   "structural": false,
+   "where": "archive.verify.tar_gz.gnu",
+   "why": "archive.tar_gz.available"
+  },
   "archive.verify.tar_gz.gnu|runtimeerror": {
    "first_seen": 1792312443.3720834,
    "last_seen": 1792316099.1447587,
@@ -115,8 +147,10 @@
   },
   "archive.verify.tar_gz.gnu|verified": {
    "first_seen": 1792316179.6037304,
-   "last_seen": 1794498873.9062946,
+   "last_seen": 1794960830.1742406,
    "observations": [
+    1,
+    1,
     1,
     1,
     1,
@@ -151,8 +185,9 @@
   },
   "auto.pypi.msgpack|bound_pypi_install_failed": {
    "first_seen": 1794494700.5311034,
-   "last_seen": 1794496991.344986,
+   "last_seen": 1794960818.0565608,
    "observations": [
+    -1,
     -1,
     -1,
     -1,
@@ -213,8 +248,13 @@
   },
   "docx.document.verify.intent_ooxml|verified": {
    "first_seen": 1792312443.1245909,
-   "last_seen": 1794496392.5188076,
+   "last_seen": 1794960828.8455741,
    "observations": [
+    1,
+    1,
+    1,
+    1,
+    1,
     1,
     1,
     1,
@@ -608,8 +648,9 @@
   },
   "python.source.audit.ast|verified": {
    "first_seen": 1792312443.2595565,
-   "last_seen": 1794949692.3986452,
+   "last_seen": 1794960827.0187445,
    "observations": [
+    1,
     1,
     1,
     1,
@@ -838,6 +879,30 @@
    "structural": false,
    "where": "xlsx.table.verify_against_json_records",
    "why": "VERIFIED"
+  }
+ },
+ "procedures": {
+  "archive+create+gz+manifest+tar": {
+   "capability_id": "archive.tar_gz.create_from_manifest",
+   "examples": [
+    "create a tar.gz archive from the manifest"
+   ],
+   "first_taught": 1794959702.7257326,
+   "goal": "create a tar.gz archive from the manifest",
+   "last_taught": 1794960807.6483896,
+   "signature": "archive+create+gz+manifest+tar",
+   "uses": 0
+  },
+  "docx+verify": {
+   "capability_id": "docx.document.verify.intent_ooxml",
+   "examples": [
+    "verify the docx canonical/astra_runtime/tmp/DOCX_INTENT_VERIFY.docx"
+   ],
+   "first_taught": 1794959702.6850703,
+   "goal": "verify the docx canonical/astra_runtime/tmp/DOCX_INTENT_VERIFY.docx",
+   "last_taught": 1794960807.5366943,
+   "signature": "docx+verify",
+   "uses": 0
   }
  },
  "resolutions": {}

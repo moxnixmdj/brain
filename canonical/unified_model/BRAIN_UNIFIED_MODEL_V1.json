@@ -31228,7 +31228,7 @@
   "engines": 26,
   "knowledge_documents": 518,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 7001,
+  "research_index_records": 7003,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 452,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "a77a3b26d99191b94db1e52b876bd431b55c71296beae6d8d0fd370980b303b2"
+  "value": "047c0240f79dd9b707df10964290957b658764155fad98329b2f461749a2b1a9"
  },
  "engines": [
   {
@@ -213326,6 +213326,25 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "2026-11-18",
+   "id": "research:canonical/verification/THE_FAILURE_ALREADY_SAYS_WHAT_TO_WRITE_20261118_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/THE_FAILURE_ALREADY_SAYS_WHAT_TO_WRITE_20261118_V1.json",
+   "schema": "BRAIN_FORCE_THE_VALUE_AND_SEE_V1",
+   "sha256": "0cf02643c4bf437812e1b302e4585e4b3a0e16161a2c6379f001ec551137a42f",
+   "status": "",
+   "terms": {
+    "20261118": 1,
+    "already": 2,
+    "failure": 2,
+    "says": 2,
+    "v1": 1,
+    "write": 2
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "",
    "id": "research:canonical/verification/THE_FOUR_LEVERS_OF_LEARNING_FROM_EXPERIENCE_20261116_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -247620,6 +247639,25 @@
     "row": 3,
     "rows": 2,
     "v1": 2
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/action_intents/THE_FAILURE_ALREADY_SAYS_WHAT_TO_WRITE_20261118_V1.md",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/THE_FAILURE_ALREADY_SAYS_WHAT_TO_WRITE_20261118_V1.md",
+   "schema": "",
+   "sha256": "97b17c4d14723960dbfdaa3adcf1b3b86c3b2c3ef5ffd7a30ae198f34a329f1e",
+   "status": "",
+   "terms": {
+    "20261118": 1,
+    "already": 1,
+    "failure": 1,
+    "says": 1,
+    "v1": 1,
+    "write": 1
    }
   },
   {
