@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 535,
+  "knowledge_documents": 536,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 7065,
+  "research_index_records": 7068,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 452,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "9b3dba58c7b07b9b6994b6a74d2c40f45386ccca1c8963ce930916e3533dba23"
+  "value": "021d4ab0dcde94b26867b180771925f9d3deb7bb70e12c4b3bb2983af6749432"
  },
  "engines": [
   {
@@ -66566,6 +66566,83 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 6042,
+   "headings": [
+    "The missing assertion is about inputs the tests never use",
+    "What round 15 promised, and what happened when it was attempted",
+    "What came back",
+    "The instrument is proven able to fire",
+    "What this actually tells us — and it changes the next move",
+    "What would be dishonest to claim",
+    "Reproduce"
+   ],
+   "kind": "DOCUMENT",
+   "path": "THE_MISSING_ASSERTION_IS_ABOUT_INPUTS_THE_TESTS_NEVER_USE_20261116_V1.md",
+   "sha256": "692ce474c19ee76b6e6c7ca207078c28189f1a0f73206dd84a4e7c81b4b660d5",
+   "summary": "Round 16. Branch `arena/35586c4a-brain`, from `b655fe40`.",
+   "terms": {
+    "15": 3,
+    "16": 3,
+    "already": 4,
+    "assertion": 7,
+    "assertions": 4,
+    "asserts": 3,
+    "because": 5,
+    "before": 3,
+    "bin": 3,
+    "calls": 5,
+    "canonical": 6,
+    "capability": 3,
+    "change": 4,
+    "exactly": 4,
+    "fix": 5,
+    "fixes": 3,
+    "generation": 4,
+    "input": 8,
+    "inputs": 8,
+    "instrument": 4,
+    "measured": 4,
+    "missing": 4,
+    "module": 3,
+    "move": 3,
+    "must": 3,
+    "next": 5,
+    "no": 6,
+    "not": 9,
+    "one": 4,
+    "only": 8,
+    "outcome": 3,
+    "own": 7,
+    "part": 5,
+    "parts": 5,
+    "python": 4,
+    "reaches": 6,
+    "real": 7,
+    "round": 6,
+    "set": 4,
+    "so": 3,
+    "suite": 7,
+    "test": 5,
+    "tests": 7,
+    "unpinned": 3,
+    "verification": 4,
+    "were": 4,
+    "would": 4,
+    "zero": 5
+   },
+   "title": "The missing assertion is about inputs the tests never use",
+   "title_terms": [
+    "about",
+    "assertion",
+    "inputs",
+    "missing",
+    "never",
+    "tests",
+    "use"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 21386,
    "headings": [
     "The missing part is not the experience — it is the operand, and it does not transfer",
@@ -86696,10 +86773,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1337,
+  "included_source_count": 1338,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "090dc0c6830bcb0403b60548c9b7bb69cc9fd942efa6106c9b026df9da44b8c6"
+  "source_tree_digest": "4076ff410c64575646359cd148799543623cf477447641b0da40afa5336230a0"
  },
  "research_index": [
   {
@@ -186314,6 +186391,43 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/PINS_FROM_THE_REVERTED_PART_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/PINS_FROM_THE_REVERTED_PART_20261116_V1.json",
+   "schema": "BRAIN_PINS_FROM_THE_REVERTED_PART_V1",
+   "sha256": "91e4ddea059429921a2740d337521a252997968a9afd687f81294377bb8533a5",
+   "status": "",
+   "terms": {
+    "20261116": 1,
+    "part": 1,
+    "pins": 1,
+    "reverted": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/PINS_FROM_THE_REVERTED_PART_WIDER_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/PINS_FROM_THE_REVERTED_PART_WIDER_20261116_V1.json",
+   "schema": "BRAIN_PINS_FROM_THE_REVERTED_PART_V1",
+   "sha256": "9fdf6211010e425aeaca534a2041622b766dcd8201d7c97a2c52a95ac15eefad",
+   "status": "",
+   "terms": {
+    "20261116": 1,
+    "part": 1,
+    "pins": 1,
+    "reverted": 1,
+    "v1": 1,
+    "wider": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-08",
    "id": "research:canonical/verification/POLICY_COVER_MINIMAX_OPTIMALITY_SPRITE_VERIFICATION_20261008_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -250758,6 +250872,34 @@
     "ten-row": 2,
     "unique": 5,
     "wrong": 3
+   }
+  },
+  {
+   "action_id": "THE_MISSING_ASSERTION_IS_ABOUT_INPUTS_THE_TESTS_NEVER_USE_20261116_V1",
+   "capability": false,
+   "date": "2026-11-16",
+   "id": "research:canonical/action_intents/THE_MISSING_ASSERTION_IS_ABOUT_INPUTS_THE_TESTS_NEVER_USE_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/THE_MISSING_ASSERTION_IS_ABOUT_INPUTS_THE_TESTS_NEVER_USE_20261116_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "5f9cb5eece9711b6ddc310b17207d0734f6e27a819883b891f49730d1ecfa27e",
+   "status": "PRODUCED",
+   "terms": {
+    "20261116": 1,
+    "about": 1,
+    "assertion": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "inputs": 1,
+    "keep_every_repair_the_machinery_can_build_that_passes_the_commit_s_own_suite_then_read_the_set_as_a_version_space_and_emit_the_one_question_that_identifies_which_repair_was_meant": 1,
+    "missing": 1,
+    "never": 1,
+    "produced": 1,
+    "tests": 1,
+    "the_assertion_half_of_round_15_s_next_step_is_closed_by_measurement__zero_of_eight_unpinned_parts_can_be_pinned_from_the_tests_own_inputs_and_the_reason_is_structural__a_test_suite_is_a_set_of_inputs_that_reach_code_so_certified_share_is_bounded_by_input_generation__the_next_organ_is_path_reaching_input_synthesis_for_a_changed_site_which_is_the_only_way_to_make_an_unpinned_part_observable": 1,
+    "the_missing_assertion_is_about_inputs_the_tests_never_use_20261116_v1": 1,
+    "the_recipe_for_a_pin_is_not_in_the_tests__eight_unpinned_behavioural_parts_of_real_fixes_audited_with_the_inputs_the_human_s_own_test_literally_passes__zero_are_pinnable_because_a_suite_that_passes_cannot_differ_on_the_outcomes_it_asserts_and_the_unpinned_parts_are_exactly_those_no_input_reaches__the_instrument_is_proven_able_to_fire_on_a_fixture_where_the_suite_asserts_only_the_type_and_the_message_moves__therefore_certified_share_is_bounded_by_input_generation_not_assertion_generation_and_the_next_organ_is_path_reaching_input_synthesis": 1,
+    "use": 1,
+    "v1": 1
    }
   },
   {
