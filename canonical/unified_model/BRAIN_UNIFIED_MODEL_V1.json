@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 534,
+  "knowledge_documents": 535,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 7062,
+  "research_index_records": 7065,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 452,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "e4351a4b849c0ba17d6b8865706414447c55f4ab08c9818aa65378c043bbc3b4"
+  "value": "9b3dba58c7b07b9b6994b6a74d2c40f45386ccca1c8963ce930916e3533dba23"
  },
  "engines": [
   {
@@ -69213,6 +69213,84 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 5766,
+   "headings": [
+    "The verifier pins 71% of the change. You were told it was 100%.",
+    "The word nobody audited",
+    "What came back",
+    "part reverted:",
+    "Why this is the answer to the question you keep asking",
+    "The capability this gives, which is not a verdict",
+    "What would be dishonest to claim",
+    "Reproduce"
+   ],
+   "kind": "DOCUMENT",
+   "path": "THE_VERIFIER_PINS_SEVENTY_ONE_PERCENT_OF_THE_CHANGE_20261116_V1.md",
+   "sha256": "f257f067ed8a91e3e3c0f5cea7188fc39b053f84b5ba4b0d69301c486caf2cb7",
+   "summary": "Round 15. Branch `arena/17762d9d-brain`, from `89b8f8b3`.",
+   "terms": {
+    "15": 2,
+    "16": 2,
+    "71.4": 4,
+    "about": 5,
+    "agent": 7,
+    "answer": 3,
+    "assertion": 4,
+    "because": 4,
+    "behavioural": 4,
+    "bin": 3,
+    "canonical": 5,
+    "certified": 3,
+    "change": 8,
+    "every": 4,
+    "fix": 7,
+    "fixes": 4,
+    "identity": 3,
+    "instant": 3,
+    "learner": 3,
+    "learning": 3,
+    "model": 3,
+    "no": 5,
+    "not": 12,
+    "observed": 3,
+    "once": 4,
+    "one": 7,
+    "own": 4,
+    "part": 8,
+    "parts": 8,
+    "pass": 3,
+    "passes": 3,
+    "pinned": 5,
+    "pinning": 3,
+    "property": 3,
+    "python": 4,
+    "raises": 3,
+    "real": 6,
+    "round": 6,
+    "same": 4,
+    "still": 3,
+    "suite": 10,
+    "tests": 3,
+    "venv": 3,
+    "verification": 3,
+    "verifier": 6,
+    "whether": 3,
+    "work": 3,
+    "would": 4
+   },
+   "title": "The verifier pins 71% of the change. You were told it was 100%.",
+   "title_terms": [
+    "100",
+    "71",
+    "change",
+    "pins",
+    "told",
+    "verifier",
+    "were"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 17511,
    "headings": [
     "No — and the reason is not the one you think. Our verifier was running zero tests and reporting PASS.",
@@ -86618,10 +86696,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1336,
+  "included_source_count": 1337,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "d469c051425f047d888e72224a43f27c30a516e99775fe9811e4d1fd5babd3ae"
+  "source_tree_digest": "090dc0c6830bcb0403b60548c9b7bb69cc9fd942efa6106c9b026df9da44b8c6"
  },
  "research_index": [
   {
@@ -218729,6 +218807,41 @@
    "action_id": "",
    "capability": false,
    "date": "",
+   "id": "research:canonical/verification/WHAT_THE_VERIFIER_PINS_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/WHAT_THE_VERIFIER_PINS_20261116_V1.json",
+   "schema": "BRAIN_VERIFIER_PINNING_V1",
+   "sha256": "5ab5a4a631fd771c2810e2cd25c0acc9e3be8555d1b364236d834d36fa178498",
+   "status": "",
+   "terms": {
+    "20261116": 1,
+    "pins": 1,
+    "v1": 1,
+    "verifier": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/WHAT_THE_VERIFIER_PINS_WIDER_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/WHAT_THE_VERIFIER_PINS_WIDER_20261116_V1.json",
+   "schema": "BRAIN_VERIFIER_PINNING_V1",
+   "sha256": "275a15b4b2c76e0e973c92e1cbd88a01b182034ba8bb4aad2d8c2e41e7e27730",
+   "status": "",
+   "terms": {
+    "20261116": 1,
+    "pins": 1,
+    "v1": 1,
+    "verifier": 1,
+    "wider": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
    "id": "research:canonical/verification/WHAT_TRANSFERS_20261113_V1.json",
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/WHAT_TRANSFERS_20261113_V1.json",
@@ -254318,6 +254431,30 @@
     "space": 1,
     "stride": 1,
     "target": 1
+   }
+  },
+  {
+   "action_id": "WHAT_THE_VERIFIER_ACTUALLY_PINS_20261116_V1",
+   "capability": false,
+   "date": "2026-11-16",
+   "id": "research:canonical/action_intents/WHAT_THE_VERIFIER_ACTUALLY_PINS_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/WHAT_THE_VERIFIER_ACTUALLY_PINS_20261116_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "a67694bf49e1eeebeb6c3c285004ad7ae82b1bef766a60f755aa54d287af5c7c",
+   "status": "PRODUCED",
+   "terms": {
+    "20261116": 1,
+    "actually": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "keep_every_repair_the_machinery_can_build_that_passes_the_commit_s_own_suite_then_read_the_set_as_a_version_space_and_emit_the_one_question_that_identifies_which_repair_was_meant": 1,
+    "pins": 1,
+    "produced": 1,
+    "the_word_verified_has_never_been_audited__reverting_one_part_of_a_real_fix_shows_the_suite_requires_30_of_45_parts_and_pin_71_4_percent_of_behavioural_parts__six_of_sixteen_fixes_contain_a_behavioural_part_the_suite_would_accept_without_and_one_fix_is_seven_of_eight_reversible__the_mechanism_is_assertion_strength_not_model_strength__an_error_message_rewrite_is_invisible_to_a_suite_that_asserts_the_exception_type__so_learning_again_is_exact_about_what_was_stored_and_silent_about_whether_it_was_observed": 1,
+    "v1": 1,
+    "verified_is_a_property_of_the_assertions_not_of_the_learner__71_4_percent_of_the_behavioural_parts_of_real_fixes_are_pinned_and_six_of_sixteen_fixes_carry_a_part_the_suite_would_accept_without__the_three_measured_terms_reach_1_of_17_identity_0_of_4_and_certification_0_714_now_compose_into_one_honest_confidence__so_the_next_organ_synthesises_the_assertion_that_pins_an_unpinned_part_rather_than_any_more_learning_or_search": 1,
+    "verifier": 1,
+    "what_the_verifier_actually_pins_20261116_v1": 1
    }
   },
   {
