@@ -31228,7 +31228,7 @@
   "engines": 26,
   "knowledge_documents": 538,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 7077,
+  "research_index_records": 7074,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 452,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "ea3a1864f56f35a943aeada2b6ddb4720f7bfb881a0d4557e7e5e6c663be9ab3"
+  "value": "92e9e9c94fea6e1c72e5a92fa592db3fdb6f094e3bd30de676342525e70e71d5"
  },
  "engines": [
   {
@@ -66643,6 +66643,83 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 8657,
+   "headings": [
+    "The missing input can be manufactured — and only where a quantity guides it",
+    "What round 16 left, and the name the field uses for it",
+    "Three bugs in my own instrument, found before any number was believed",
+    "The fire proof, and the honesty proof",
+    "What the real corpus says",
+    "Why the other four were not reached — the answer to the standing question",
+    "What this round does not claim",
+    "Next"
+   ],
+   "kind": "DOCUMENT",
+   "path": "THE_MISSING_INPUT_CAN_BE_MANUFACTURED_AND_ONLY_WHERE_A_QUANTITY_GUIDES_IT_20261116_V1.md",
+   "sha256": "831ec0061b62daff37b0ee8f89efea4cb0c6c9f346d4c7d568922dac7777105d",
+   "summary": "Round 17. Branch `arena/4a06d20c-brain`, from `cabbc10b`.",
+   "terms": {
+    "12": 5,
+    "16": 5,
+    "17": 3,
+    "action": 4,
+    "artifact": 4,
+    "assertion": 8,
+    "because": 5,
+    "behavioural": 4,
+    "both": 5,
+    "changed": 6,
+    "claim": 6,
+    "corpus": 4,
+    "distance": 7,
+    "execution": 4,
+    "failed": 4,
+    "fix": 4,
+    "found": 4,
+    "four": 4,
+    "green": 4,
+    "input": 11,
+    "len": 4,
+    "line": 12,
+    "missing": 4,
+    "must": 4,
+    "mutation": 6,
+    "never": 7,
+    "no": 9,
+    "not": 24,
+    "one": 8,
+    "only": 10,
+    "over": 5,
+    "own": 6,
+    "part": 4,
+    "parts": 7,
+    "quantity": 4,
+    "reached": 6,
+    "revert": 4,
+    "round": 11,
+    "search": 6,
+    "so": 7,
+    "state": 4,
+    "suite": 4,
+    "target": 6,
+    "test": 4,
+    "tests": 8,
+    "text": 4,
+    "three": 5,
+    "were": 5
+   },
+   "title": "The missing input can be manufactured — and only where a quantity guides it",
+   "title_terms": [
+    "guides",
+    "input",
+    "manufactured",
+    "missing",
+    "only",
+    "quantity"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 21386,
    "headings": [
     "The missing part is not the experience — it is the operand, and it does not transfer",
@@ -68573,86 +68650,6 @@
     "single",
     "space",
     "vocabulary"
-   ]
-  },
-  {
-   "authority": "NOT_A_LAW",
-   "bytes": 15481,
-   "headings": [
-    "The space is the artifact, and the artifact is the whole problem",
-    "1. What was already measured, and therefore what is not being re-argued",
-    "2. The question this round actually answers",
-    "3. Population, declared before either arm ran",
-    "4. The instrument",
-    "5. The measurement",
-    "6. What each miss was missing, named and computed",
-    "7. The bottleneck, stated as arithmetic",
-    "8. What is real, what is not",
-    "9. Computer use is a different question, and it is the one where the claim is closest to true",
-    "10. Falsifier",
-    "11. Limits",
-    "12. Reproducing"
-   ],
-   "kind": "DOCUMENT",
-   "path": "THE_SPACE_IS_THE_ARTIFACT_20261119_V1.md",
-   "sha256": "cc0daccd560c132600168b3572550da8c295c8e9a04cdcfeac9f7048bccabd53",
-   "summary": "**Date** 2026-11-19 · **Branch** `arena/a449ff95-brain` · **Authority** NONE__PRODUCER_RUN_SANDBOX · **Parameters stored** 0 · **Model calls** 0 · **Spend** $0",
-   "terms": {
-    "10": 8,
-    "action": 10,
-    "all": 7,
-    "already": 7,
-    "arm": 6,
-    "attrs": 14,
-    "because": 6,
-    "candidate": 7,
-    "canonical": 12,
-    "cap": 9,
-    "click": 6,
-    "closure": 9,
-    "commit": 7,
-    "commits": 10,
-    "dir": 8,
-    "every": 7,
-    "expression": 15,
-    "file": 11,
-    "first": 6,
-    "grammar": 6,
-    "human": 12,
-    "instrument": 6,
-    "language": 11,
-    "list": 6,
-    "measured": 9,
-    "model": 7,
-    "name": 6,
-    "nine": 6,
-    "no": 18,
-    "not": 45,
-    "once": 7,
-    "one": 34,
-    "only": 8,
-    "oracle": 8,
-    "parameters": 8,
-    "per": 8,
-    "python3": 6,
-    "question": 10,
-    "rank": 15,
-    "real": 9,
-    "round": 9,
-    "site": 10,
-    "space": 9,
-    "test": 15,
-    "the_space_is_the_artifact_v1.py": 6,
-    "tools": 6,
-    "under": 8,
-    "vocabulary": 7
-   },
-   "title": "The space is the artifact, and the artifact is the whole problem",
-   "title_terms": [
-    "artifact",
-    "problem",
-    "space",
-    "whole"
    ]
   },
   {
@@ -86934,7 +86931,7 @@
   "included_source_count": 1340,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "47ae201ba9ad2fdf9e51f408b2ab511983ace5430bae16600b33aad85f7a5774"
+  "source_tree_digest": "2eaa150b142635a3573a0739d0b379cab38992113253d1b0f2003216ea5d8084"
  },
  "research_index": [
   {
@@ -198967,6 +198964,43 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/REACH_THE_CHANGED_SITE_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/REACH_THE_CHANGED_SITE_20261116_V1.json",
+   "schema": "BRAIN_REACH_THE_CHANGED_SITE_V1",
+   "sha256": "f5cb7b90405fa1af25b8d4e686accb06f6942fd2a8f11926333ead3ba2916cd1",
+   "status": "",
+   "terms": {
+    "20261116": 1,
+    "changed": 1,
+    "reach": 1,
+    "site": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/REACH_THE_CHANGED_SITE_WIDER_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/REACH_THE_CHANGED_SITE_WIDER_20261116_V1.json",
+   "schema": "BRAIN_REACH_THE_CHANGED_SITE_V1",
+   "sha256": "06098861a453f8ab9ddba6485f0dd0f05fdf44392d4204eed35ece88ac4913db",
+   "status": "",
+   "terms": {
+    "20261116": 1,
+    "changed": 1,
+    "reach": 1,
+    "site": 1,
+    "v1": 1,
+    "wider": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-11-16",
    "id": "research:canonical/verification/READ_FIRST_AND_LEARN_ONLY_FOR_A_NAMED_GAP_20261116_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -215660,79 +215694,6 @@
     "time": 1,
     "v1": 1,
     "vocabulary": 1
-   }
-  },
-  {
-   "action_id": "",
-   "capability": false,
-   "date": "2026-11-19",
-   "id": "research:canonical/verification/THE_SPACE_IS_THE_ARTIFACT_20261119_V1.json",
-   "kind": "RESEARCH_RECORD",
-   "path": "canonical/verification/THE_SPACE_IS_THE_ARTIFACT_20261119_V1.json",
-   "schema": "BRAIN_THE_SPACE_IS_THE_ARTIFACT_V1",
-   "sha256": "6306caf8af6d2feb8fbcdb7f82fce95968a0f524ba175bbbad4d88845283cdeb",
-   "status": "",
-   "terms": {
-    "20261119": 1,
-    "artifact": 1,
-    "space": 1,
-    "v1": 1
-   }
-  },
-  {
-   "action_id": "",
-   "capability": false,
-   "date": "2026-11-19",
-   "id": "research:canonical/verification/THE_SPACE_IS_THE_ARTIFACT_CENSUS_20261119_V1.json",
-   "kind": "RESEARCH_RECORD",
-   "path": "canonical/verification/THE_SPACE_IS_THE_ARTIFACT_CENSUS_20261119_V1.json",
-   "schema": "BRAIN_THE_SPACE_IS_THE_ARTIFACT_V1_CENSUS",
-   "sha256": "e19a993d9d989bc3cc9012984fd5a1b89a54cb4fb83fa432e33f87ac15833d0d",
-   "status": "",
-   "terms": {
-    "20261119": 1,
-    "artifact": 1,
-    "census": 1,
-    "space": 1,
-    "v1": 1
-   }
-  },
-  {
-   "action_id": "",
-   "capability": false,
-   "date": "2026-11-19",
-   "id": "research:canonical/verification/THE_SPACE_IS_THE_ARTIFACT_FULL_VOCABULARY_20261119_V1.json",
-   "kind": "RESEARCH_RECORD",
-   "path": "canonical/verification/THE_SPACE_IS_THE_ARTIFACT_FULL_VOCABULARY_20261119_V1.json",
-   "schema": "BRAIN_THE_SPACE_IS_THE_ARTIFACT_V1",
-   "sha256": "7f406f617b41926aaf0b29d2889cdd67c9d7f9c8f584885be2efe483f585a6ce",
-   "status": "",
-   "terms": {
-    "20261119": 1,
-    "artifact": 1,
-    "full": 1,
-    "space": 1,
-    "v1": 1,
-    "vocabulary": 1
-   }
-  },
-  {
-   "action_id": "",
-   "capability": false,
-   "date": "2026-11-19",
-   "id": "research:canonical/verification/THE_SPACE_IS_THE_ARTIFACT_WIDE_GRAMMAR_20261119_V1.json",
-   "kind": "RESEARCH_RECORD",
-   "path": "canonical/verification/THE_SPACE_IS_THE_ARTIFACT_WIDE_GRAMMAR_20261119_V1.json",
-   "schema": "BRAIN_THE_SPACE_IS_THE_ARTIFACT_V1",
-   "sha256": "eff6c2db929f5700c23ce12840b9a40b7c9979c3b0ba20831e84612a6359e210",
-   "status": "",
-   "terms": {
-    "20261119": 1,
-    "artifact": 1,
-    "grammar": 1,
-    "space": 1,
-    "v1": 1,
-    "wide": 1
    }
   },
   {
@@ -251159,6 +251120,32 @@
    }
   },
   {
+   "action_id": "THE_MISSING_INPUT_CAN_BE_MANUFACTURED_AND_ONLY_WHERE_A_QUANTITY_GUIDES_IT_20261116_V1",
+   "capability": false,
+   "date": "2026-11-16",
+   "id": "research:canonical/action_intents/THE_MISSING_INPUT_CAN_BE_MANUFACTURED_AND_ONLY_WHERE_A_QUANTITY_GUIDES_IT_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/THE_MISSING_INPUT_CAN_BE_MANUFACTURED_AND_ONLY_WHERE_A_QUANTITY_GUIDES_IT_20261116_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "a1d30c1de42efc4b758213efb400ff3d06cc5156bea1d4ee8fd645a7642b03e8",
+   "status": "PRODUCED",
+   "terms": {
+    "20261116": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "generate_the_input_that_reaches_the_changed_line_by_directed_mutation_from_the_tests_own_literals_then_assert_only_if_fix_and_revert_differ": 1,
+    "guides": 1,
+    "input": 1,
+    "manufactured": 1,
+    "missing": 1,
+    "only": 1,
+    "produced": 1,
+    "quantity": 1,
+    "the_input_that_reaches_a_changed_site_can_be_generated_when_the_changed_block_compares_against_a_quantity_two_of_eight_unpinned_parts_of_real_fixes_are_now_pinned_and_verified_by_a_generated_input_and_both_come_from_the_error_path_class__the_four_that_failed_compare_against_structure_not_quantity_so_the_artifact_offers_no_distance_and_the_field_s_state_of_the_art_solves_that_with_a_model_s_one_pass_which_this_tree_refuses__therefore_the_single_bottleneck_is_reachability_reasoning_not_parameter_action_or_verifier_supply_and_the_next_organ_is_a_reachability_hypothesis_checked_by_execution_and_derived_from_data_flow_not_semantics": 2,
+    "the_missing_input_can_be_manufactured_and_only_where_a_quantity_guides_it_20261116_v1": 1,
+    "v1": 1
+   }
+  },
+  {
    "action_id": "THE_MISSING_PART_IS_THE_OPERAND_20261116_V1",
    "capability": false,
    "date": "2026-11-16",
@@ -252213,68 +252200,6 @@
     "the_space_is_assembled_not_listed_20261116_v1": 1,
     "v1": 1,
     "vocabulary": 1
-   }
-  },
-  {
-   "action_id": "THE_SPACE_IS_THE_ARTIFACT_20261119_V1",
-   "capability": false,
-   "date": "2026-11-19",
-   "id": "research:canonical/action_intents/THE_SPACE_IS_THE_ARTIFACT_20261119_V1.json",
-   "kind": "RESEARCH_RECORD",
-   "path": "canonical/action_intents/THE_SPACE_IS_THE_ARTIFACT_20261119_V1.json",
-   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "2cdf55e259db4edb392c23f680b34405068ae80de7550c9d319a92db65fb0a6b",
-   "status": "PROPOSED__PRODUCER_MEASURED__NEGATIVE_RESULT_RECORDED__INDEPENDENT_VERIFICATION_",
-   "terms": {
-    "0.5": 2,
-    "10": 1,
-    "20261119": 1,
-    "2887": 1,
-    "50": 1,
-    "action": 1,
-    "address": 1,
-    "adds": 1,
-    "admits": 1,
-    "against": 1,
-    "alternatives": 1,
-    "any": 1,
-    "arm": 2,
-    "arms": 1,
-    "artifact": 1,
-    "assertion": 1,
-    "base": 1,
-    "beat": 1,
-    "both": 1,
-    "closure": 2,
-    "expression": 4,
-    "grammar": 2,
-    "language": 3,
-    "microseconds": 2,
-    "no": 2,
-    "one": 5,
-    "only": 2,
-    "ordering": 2,
-    "over": 2,
-    "rank": 2,
-    "selection": 3,
-    "vocabulary": 2
-   }
-  },
-  {
-   "action_id": "",
-   "capability": false,
-   "date": "",
-   "id": "research:canonical/action_intents/THE_SPACE_IS_THE_ARTIFACT_20261119_V1.md",
-   "kind": "RESEARCH_RECORD",
-   "path": "canonical/action_intents/THE_SPACE_IS_THE_ARTIFACT_20261119_V1.md",
-   "schema": "",
-   "sha256": "cc0daccd560c132600168b3572550da8c295c8e9a04cdcfeac9f7048bccabd53",
-   "status": "",
-   "terms": {
-    "20261119": 1,
-    "artifact": 1,
-    "space": 1,
-    "v1": 1
    }
   },
   {
