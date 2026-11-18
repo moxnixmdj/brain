@@ -86,6 +86,35 @@ def _size(text: str) -> int:
     return sum(1 for node in ast.walk(body) if isinstance(node, ast.expr))
 
 
+def attribute_terms(source: str, contexts: Sequence[dict[str, Any]]) -> list[str]:
+    """`base.attr` for every attribute the source uses on a name that is in scope at the site.
+
+    This is material, not invention: the object's own attributes are as much "already at the site" as
+    its locals are. Leaving them out is why a real one-line fix like
+    `if self.show_envvar` -> `if self.show_envvar and self.envvar is not None` was unreachable while
+    every part of it was in scope -- `self.envvar` is not a NAME, and a free-name test counts it as
+    just `self`. Measured on real commit history: 16.8% of single-line code edits need a form the
+    grammar could not write, and attribute access is the bulk of it.
+    """
+    bases: set[str] = set()
+    for context in contexts:
+        bases.update(k for k in (context.get("locals") or {}) if k.isidentifier())
+    if not bases:
+        return []
+    names: list[str] = []
+    try:
+        tree = ast.parse(source)
+    except SyntaxError:
+        return []
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Attribute) and isinstance(node.value, ast.Name):
+            if node.value.id in bases:
+                text = f"{node.value.id}.{node.attr}"
+                if text not in names:
+                    names.append(text)
+    return names
+
+
 def _combinations(left: str, right: str, function_name: str) -> Iterator[str]:
     """The grammar of the language, not a list of fixes: every form a Python expression may take."""
     for operator in BINOPS:

@@ -41,7 +41,7 @@ REPO = TOOLS.parents[1]
 sys.path.insert(0, str(TOOLS))
 sys.path.insert(0, str(REPO))
 
-from expressions_from_a_site_v1 import MAX_NODES  # noqa: E402
+from expressions_from_a_site_v1 import MAX_NODES, SAFE_BUILTINS as SAFE_BUILTIN_NAMES  # noqa: E402
 
 SCHEMA = "BRAIN_WHAT_A_REAL_FIX_NEEDS_FROM_THE_SITE_V1"
 AUTHORITY = "NONE__PRODUCER_RUN_SANDBOX"
@@ -51,6 +51,43 @@ TWO_EXPRESSION = "TWO_EXPRESSIONS__JOINT_ADDRESSABLE"
 TWO_EXPRESSION_NEEDS_NAME = "TWO_EXPRESSIONS__NEEDS_A_NAME"
 STATEMENT_FORM = "STATEMENT_FORM__NOT_AN_EXPRESSION"
 NOT_CODE = "NOT_CODE__COMMENT_OR_DOCSTRING"
+NEEDS_GRAMMAR = "NEEDS_GRAMMAR__THE_ENUMERATOR_CANNOT_WRITE_THIS_FORM"
+
+# What the expression grammar can actually write. Everything outside this set is a missing production,
+# not a missing name. Attribute access is the big one: `self.envvar` is not a NAME, and counting the free
+# name `self` as "in scope" made a measurement of names look like a measurement of expressibility.
+GENERABLE_NODES = {
+    "Add", "And", "BinOp", "BitAnd", "BitOr", "BitXor", "BoolOp", "Compare", "Constant", "Del", "Div",
+    "Eq", "FloorDiv", "Gt", "GtE", "In", "Invert", "Is", "IsNot", "LShift", "List", "Load", "Lt", "LtE",
+    "MatMult", "Mod", "Mult", "Name", "Not", "NotEq", "NotIn", "Or", "Pow", "RShift", "Slice", "Store",
+    "Sub", "Subscript", "Tuple", "UAdd", "USub", "UnaryOp",
+}
+
+
+def node_kinds(expression: ast.AST) -> set[str]:
+    return {type(node).__name__ for node in ast.walk(expression)}
+
+
+def generable(expression: ast.AST, allowed_calls: set[str],
+              attribute_names: set[str] | None = None) -> bool:
+    kinds = node_kinds(expression)
+    extra = {"Call", "Attribute"} if attribute_names is not None else {"Call"}
+    if kinds - GENERABLE_NODES - extra:
+        return False
+    if attribute_names is not None:
+        for node in ast.walk(expression):
+            # `self.envvar` is writable now: the enumerator offers `base.attr` for every attribute the
+            # source already uses on a name in scope. A chain like `a.b.c` is still not.
+            if isinstance(node, ast.Attribute):
+                if not isinstance(node.value, ast.Name) or node.attr not in attribute_names:
+                    return False
+    for node in ast.walk(expression):
+        if isinstance(node, ast.Call):
+            if not isinstance(node.func, ast.Name) or node.func.id not in allowed_calls:
+                return False
+    return True
+
+
 CONTINUATION = "CONTINUATION__CODE_SPLIT_ACROSS_LINES"
 NEEDS_NEW_NAME = "NEEDS_NEW_NAME"
 TOO_LARGE = "TOO_LARGE"
@@ -211,89 +248,10 @@ def _line_of(source: str, needle: str) -> int:
     return 1
 
 
-def single_line_candidates(repo: pathlib.Path, limit: int) -> Iterator[dict[str, Any]]:
-    """Every commit in the history whose whole diff for one .py file is ONE removed and ONE added line.
-
-    This is the population a single-site replacement can even address, so it is the population the
-    question is about. It is found in one streaming pass over the log rather than one subprocess per
-    commit, because the classification is cheap and the subprocesses are not.
-    """
-    done = subprocess.run(["git", "-C", str(repo), "log", "-p", "--unified=0", "--no-merges",
-                           "--format=%x01%H%x09%s", "-n", str(limit)],
-                          capture_output=True, text=True, encoding="utf-8", errors="replace")
-    sha = subject = None
-    files: list[str] = []
-    removed: list[str] = []
-    added: list[str] = []
-    current_file: str | None = None
-
-    def flush() -> dict[str, Any] | None:
-        if sha and len(files) == 1 and len(removed) == 1 and len(added) == 1:
-            return {"sha": sha, "subject": subject or "", "path": files[0],
-                    "old": removed[0], "new": added[0]}
-        return None
-
-    for line in done.stdout.splitlines():
-        if line.startswith("\x01"):
-            ready = flush()
-            if ready:
-                yield ready
-            sha, _, subject = line[1:].partition("\t")
-            files, removed, added = [], [], []
-            current_file = None
-            continue
-        if line.startswith("+++ b/"):
-            current_file = line[6:]
-            if current_file.endswith(".py"):
-                files.append(current_file)
-            continue
-        if line.startswith("--- ") or line.startswith("@@"):
-            continue
-        if line.startswith("-") and current_file and current_file.endswith(".py"):
-            removed.append(line[1:])
-        elif line.startswith("+") and current_file and current_file.endswith(".py"):
-            added.append(line[1:])
-    ready = flush()
-    if ready:
-        yield ready
 
 
-def change_points(old: ast.AST, new: ast.AST) -> list[tuple[tuple, ast.AST, ast.AST]]:
-    """The INDEPENDENT deepest differences between two statements.
-
-    One difference is a single-expression edit. Two are a two-site edit on one line -- jointly
-    identifiable by pairing, which the experiment machinery can do, but a single-site search cannot.
-    More, or a change that is not an expression at all, is a statement-form edit: the thing this
-    project has never attempted.
-    """
-    old_paths, new_paths = paths_of(old), paths_of(new)
-    common = set(old_paths) & set(new_paths)
-    differing = [p for p in common
-                 if ast.dump(old_paths[p], annotate_fields=False)
-                 != ast.dump(new_paths[p], annotate_fields=False)]
-    picked: list[tuple] = []
-    for path in sorted(differing, key=len, reverse=True):
-        # Skip anything nested with an already-picked change point, in EITHER direction: an
-        # ancestor differs only because its descendant does, and counting the module as a second
-        # change point is what once made every edit look like a statement-form change.
-        if any(path[:len(other)] == other or other[:len(path)] == path for other in picked):
-            continue
-        picked.append(path)
-    return [(path, old_paths[path], new_paths[path]) for path in picked]
 
 
-def not_code_reason(old_line: str, new_line: str) -> str:
-    """A line that does not parse is either not code (a comment, a docstring) or code split across
-    lines. The first is not in the population at all; the second is code we have not addressed."""
-    old_stripped, new_stripped = old_line.strip(), new_line.strip()
-    if old_stripped.startswith("#") or new_stripped.startswith("#"):
-        return "COMMENT"
-    quotes = ('"""', "'''", '"', "'")
-    if old_stripped.startswith(quotes) and new_stripped.startswith(quotes):
-        return "DOCSTRING"
-    if '"""' in old_stripped + new_stripped or "'''" in old_stripped + new_stripped:
-        return "DOCSTRING"
-    return "CONTINUATION_OR_FRAGMENT"
 
 
 def enclosing_statement(tree: ast.AST, line: int) -> tuple[tuple, ast.AST] | None:
@@ -362,7 +320,8 @@ def classify_line(repo: pathlib.Path, candidate: dict[str, Any]) -> dict[str, An
 
 
 def _verdict_from_changes(changes: list, parent: str, old_line: str,
-                          extra: dict[str, Any] | None = None) -> dict[str, Any]:
+                          extra: dict[str, Any] | None = None,
+                          candidate_function: str = "") -> dict[str, Any]:
     line = _line_of(parent, old_line.strip())
     scope = names_in_scope(parent, line)
     if not changes:
@@ -380,14 +339,25 @@ def _verdict_from_changes(changes: list, parent: str, old_line: str,
             "old": " | ".join(ast.unparse(node)[:80] for _path, node, _new in changes),
             "change_points": len(changes),
         }
+        allowed_calls = set(SAFE_BUILTIN_NAMES) | {candidate_function}
+        try:
+            attribute_names = {node.attr for node in ast.walk(ast.parse(parent))
+                               if isinstance(node, ast.Attribute)}
+        except SyntaxError:
+            attribute_names = set()
+        verdict["node_kinds"] = sorted(set().union(*(node_kinds(node) for node in new_expressions)))
         if len(changes) == 1:
-            if max(sizes) > MAX_NODES:
+            if not generable(new_expressions[0], allowed_calls, attribute_names):
+                verdict["kind"] = NEEDS_GRAMMAR
+            elif max(sizes) > MAX_NODES:
                 verdict["kind"] = TOO_LARGE
             elif missing:
                 verdict["kind"] = NEEDS_NEW_NAME
                 verdict["missing"] = missing
             else:
                 verdict["kind"] = IN_VOCABULARY
+        elif not all(generable(node, allowed_calls, attribute_names) for node in new_expressions):
+            verdict["kind"] = NEEDS_GRAMMAR
         else:
             verdict["kind"] = TWO_EXPRESSION_NEEDS_NAME if missing else TWO_EXPRESSION
             if missing:
