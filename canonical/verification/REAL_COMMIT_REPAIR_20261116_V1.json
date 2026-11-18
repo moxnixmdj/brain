@@ -1,0 +1,366 @@
+{
+ "authority": "NONE -- sandbox measurement, not independent verification",
+ "model_calls": 0,
+ "network_calls": 0,
+ "rows": [
+  {
+   "entries": [],
+   "lessons": 35,
+   "repo": "pallets/itsdangerous",
+   "sha": "7f4dcf83a07bb3d53f4e0e65ef1b43327b4cca90",
+   "source": "src/itsdangerous/signer.py",
+   "state": "REFUSED__NO_ENTRY_IN_TEST",
+   "test": "tests/test_itsdangerous/test_serializer.py",
+   "without_vocabulary": "REFUSED__NO_ENTRY_IN_TEST"
+  },
+  {
+   "any_site_hit": true,
+   "entries": [
+    "parse_email"
+   ],
+   "hunk": [
+    [
+     777,
+     778
+    ]
+   ],
+   "lessons": 13,
+   "origins": [
+    "edit_kind"
+   ],
+   "proposals": 30,
+   "repo": "pypa/packaging",
+   "sha": "022ae6c6fe5c2ef9615875d0ecfab1ae4024720f",
+   "site_hits": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29
+   ],
+   "source": "src/packaging/metadata.py",
+   "state": "VOCABULARY_FIRES_NEVER_SOLVES",
+   "test": "tests/test_metadata.py",
+   "trials": 30,
+   "without_vocabulary": "REFUSED__NO_PROPOSAL"
+  },
+  {
+   "entries": [],
+   "lessons": 13,
+   "repo": "pypa/packaging",
+   "sha": "4b243af94ff6885c89b8acd7a22fc5714b18cb96",
+   "source": "src/packaging/requirements.py",
+   "state": "REFUSED__NO_ENTRY_IN_TEST",
+   "test": "tests/test_requirements.py",
+   "without_vocabulary": "REFUSED__NO_ENTRY_IN_TEST"
+  },
+  {
+   "entries": [],
+   "lessons": 13,
+   "repo": "pypa/packaging",
+   "sha": "a1f705642e50b79da6be83fb0f6149daa32fc7cc",
+   "source": "src/packaging/licenses/__init__.py",
+   "state": "REFUSED__NO_ENTRY_IN_TEST",
+   "test": "tests/test_metadata.py",
+   "without_vocabulary": "REFUSED__NO_ENTRY_IN_TEST"
+  },
+  {
+   "any_site_hit": true,
+   "entries": [
+    "loads"
+   ],
+   "hunk": [
+    [
+     582,
+     583
+    ]
+   ],
+   "lessons": 35,
+   "origins": [
+    "edit_kind"
+   ],
+   "proposals": 30,
+   "repo": "hukkin/tomli",
+   "sha": "12314bde5b89a8bdc32de7403a2a4cf786187bbc",
+   "site_hits": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29
+   ],
+   "source": "src/tomli/_parser.py",
+   "state": "VOCABULARY_FIRES_NEVER_SOLVES",
+   "test": "tests/test_data.py",
+   "trials": 30,
+   "without_vocabulary": "REFUSED__NO_PROPOSAL"
+  },
+  {
+   "any_site_hit": true,
+   "entries": [
+    "loads"
+   ],
+   "hunk": [
+    [
+     4,
+     5
+    ],
+    [
+     40,
+     41
+    ],
+    [
+     47,
+     48
+    ],
+    [
+     52,
+     53
+    ],
+    [
+     105,
+     106
+    ],
+    [
+     108,
+     109
+    ],
+    [
+     109,
+     110
+    ],
+    [
+     627,
+     628
+    ],
+    [
+     630,
+     631
+    ],
+    [
+     638,
+     639
+    ]
+   ],
+   "lessons": 35,
+   "origins": [
+    "edit_kind"
+   ],
+   "proposals": 30,
+   "repo": "hukkin/tomli",
+   "sha": "5ab9ec926d9dc1ef79e66215edd51285371fe8a0",
+   "site_hits": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29
+   ],
+   "source": "tomli/_parser.py",
+   "state": "VOCABULARY_FIRES_NEVER_SOLVES",
+   "test": "tests/test_misc.py",
+   "trials": 30,
+   "without_vocabulary": "REFUSED__NO_PROPOSAL"
+  },
+  {
+   "entries": [],
+   "lessons": 35,
+   "repo": "hukkin/tomli",
+   "sha": "96dfe2cef79eb4c2a441d5b1b36c3ef357372c9f",
+   "source": "tomli/__init__.py",
+   "state": "REFUSED__NO_ENTRY_IN_TEST",
+   "test": "tests/test_error.py",
+   "without_vocabulary": "REFUSED__NO_ENTRY_IN_TEST"
+  }
+ ],
+ "schema": "BRAIN_REAL_COMMIT_REPAIR_V1",
+ "totals": {
+  "lessons": [
+   13,
+   35
+  ],
+  "proposals": 90,
+  "site_hit_ranks": [
+   0,
+   0,
+   0,
+   1,
+   1,
+   1,
+   2,
+   2,
+   2,
+   3,
+   3,
+   3,
+   4,
+   4,
+   4,
+   5,
+   5,
+   5,
+   6,
+   6,
+   6,
+   7,
+   7,
+   7,
+   8,
+   8,
+   8,
+   9,
+   9,
+   9,
+   10,
+   10,
+   10,
+   11,
+   11,
+   11,
+   12,
+   12,
+   12,
+   13,
+   13,
+   13,
+   14,
+   14,
+   14,
+   15,
+   15,
+   15,
+   16,
+   16,
+   16,
+   17,
+   17,
+   17,
+   18,
+   18,
+   18,
+   19,
+   19,
+   19,
+   20,
+   20,
+   20,
+   21,
+   21,
+   21,
+   22,
+   22,
+   22,
+   23,
+   23,
+   23,
+   24,
+   24,
+   24,
+   25,
+   25,
+   25,
+   26,
+   26,
+   26,
+   27,
+   27,
+   27,
+   28,
+   28,
+   28,
+   29,
+   29,
+   29
+  ],
+  "solved": 0,
+  "solved_fraction": 0.0,
+  "states": {
+   "REFUSED__NO_ENTRY_IN_TEST": 4,
+   "VOCABULARY_FIRES_NEVER_SOLVES": 3
+  },
+  "tasks": 7,
+  "tasks_proposing": 3,
+  "tasks_with_site_hit": 3,
+  "trials": 90,
+  "without_vocabulary": {
+   "FAILED": 0,
+   "REFUSED": 7,
+   "SOLVED": 0
+  }
+ }
+}

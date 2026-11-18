@@ -1,0 +1,118 @@
+{
+ "authority": "NONE -- sandbox measurement, not independent verification",
+ "model_calls": 0,
+ "network_calls": 0,
+ "rows": [
+  {
+   "failing": [],
+   "parameters": [],
+   "passing": 0,
+   "repo": "pallets/itsdangerous",
+   "sha": "7f4dcf83a07bb3d53f4e0e65ef1b43327b4cca90",
+   "source": "src/itsdangerous/signer.py",
+   "state": "REFUSED__NO_OPERAND",
+   "term": null,
+   "terms": 0,
+   "test": "tests/test_itsdangerous/test_serializer.py"
+  },
+  {
+   "at_line": 766,
+   "condition": "'..' in path",
+   "failing": [
+    "C:LICENSE",
+    "d:secrets/key.txt"
+   ],
+   "operand": "pathlib.PureWindowsPath(path).drive",
+   "operator": "or",
+   "parameters": [
+    "test_invalid_license_files.license_files"
+   ],
+   "passing": 12,
+   "repo": "pypa/packaging",
+   "seats": [
+    766,
+    771,
+    775,
+    782
+   ],
+   "sha": "022ae6c6fe5c2ef9615875d0ecfab1ae4024720f",
+   "source": "src/packaging/metadata.py",
+   "state": "SOLVED",
+   "term": "pathlib.PureWindowsPath(x).drive",
+   "terms": 1,
+   "test": "tests/test_metadata.py",
+   "trials": 1
+  },
+  {
+   "failing": [],
+   "parameters": [],
+   "passing": 0,
+   "repo": "pypa/packaging",
+   "sha": "4b243af94ff6885c89b8acd7a22fc5714b18cb96",
+   "source": "src/packaging/requirements.py",
+   "state": "REFUSED__NO_OPERAND",
+   "term": null,
+   "terms": 0,
+   "test": "tests/test_requirements.py"
+  },
+  {
+   "failing": [],
+   "parameters": [],
+   "passing": 0,
+   "repo": "pypa/packaging",
+   "sha": "a1f705642e50b79da6be83fb0f6149daa32fc7cc",
+   "source": "src/packaging/licenses/__init__.py",
+   "state": "REFUSED__NO_OPERAND",
+   "term": null,
+   "terms": 0,
+   "test": "tests/test_metadata.py"
+  },
+  {
+   "failing": [],
+   "parameters": [],
+   "passing": 0,
+   "repo": "hukkin/tomli",
+   "sha": "12314bde5b89a8bdc32de7403a2a4cf786187bbc",
+   "source": "src/tomli/_parser.py",
+   "state": "REFUSED__NO_OPERAND",
+   "term": null,
+   "terms": 0,
+   "test": "tests/test_data.py"
+  },
+  {
+   "failing": [],
+   "parameters": [],
+   "passing": 0,
+   "repo": "hukkin/tomli",
+   "sha": "5ab9ec926d9dc1ef79e66215edd51285371fe8a0",
+   "source": "tomli/_parser.py",
+   "state": "REFUSED__NO_OPERAND",
+   "term": null,
+   "terms": 0,
+   "test": "tests/test_misc.py"
+  },
+  {
+   "failing": [],
+   "parameters": [],
+   "passing": 0,
+   "repo": "hukkin/tomli",
+   "sha": "96dfe2cef79eb4c2a441d5b1b36c3ef357372c9f",
+   "source": "tomli/__init__.py",
+   "state": "REFUSED__NO_OPERAND",
+   "term": null,
+   "terms": 0,
+   "test": "tests/test_error.py"
+  }
+ ],
+ "schema": "BRAIN_OPERAND_INVENTION_V1",
+ "totals": {
+  "solved": 1,
+  "solved_fraction": 0.1429,
+  "states": {
+   "REFUSED__NO_OPERAND": 6,
+   "SOLVED": 1
+  },
+  "tasks": 7,
+  "trials": 1
+ }
+}
