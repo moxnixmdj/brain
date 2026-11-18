@@ -110,7 +110,20 @@ def literal_expression(value: Any) -> str | None:
     return text if len(text) <= 400 else None
 
 
-def site_demand(demand: Any, recorded: list[Any]) -> tuple[Any, str] | None:
+def same_slot(demand: Any, recorded: Any) -> bool:
+    """Same kind, and for text, edited content -- not identical content, which is the whole repair.
+
+    A `str` demand of any content would bind to any `str` site, and that is how the exception-message rows
+    accused the truth. Text that shares nothing with what the site produced is not that site's slot.
+    """
+    if type(demand) is not type(recorded):
+        return False
+    if isinstance(demand, str):
+        return demand == recorded or demand in recorded or recorded in demand
+    return True
+
+
+def site_demand(demand: Any, recorded: list[Any], paired: bool = False) -> tuple[Any, str] | None:
     """What the DEMAND is at the site, found by aligning it with the value the site produced.
 
     The assertion compares whatever it compares; the site produced something else. Two structures are
@@ -125,16 +138,39 @@ def site_demand(demand: Any, recorded: list[Any]) -> tuple[Any, str] | None:
     which is what the site supplies; a bytes blob that the site never produced is not the site's demand
     and is reported as unrelated rather than forced.
     """
+    # BINDING IS TYPE-STRICT. `0 == False` and `1 == True` are true in Python, so a value that merely
+    # compares equal can bind a demand to a comparison the site never fed -- and the instrument then
+    # accuses the human's own fix of producing "the wrong value" for an assertion it has nothing to do
+    # with. Measured: one of the three remaining accusations was exactly `demanded=[0] produced=[True]`.
+    # A demand the site cannot be shown to feed is refused, not forced.
+    def same(left: Any, right: Any) -> bool:
+        return type(left) is type(right) and safe_equal(left, right)
+
+    if paired:
+        # THE ASSERTION IS ALREADY SHOWN TO BE ABOUT THE SITE: one of its operands holds exactly what the
+        # site produced, so the other operand is the demand. Here the demanded value must NOT be compared
+        # with the site's value -- their difference is the defect being repaired. Only structure is read:
+        # `assert (msg,) == exc.args` demands the message, not a tuple.
+        if isinstance(demand, (tuple, list)) and len(demand) == 1 \
+                and not any(isinstance(value, (tuple, list)) for value in recorded):
+            return demand[0], "UNWRAPPED"
+        return demand, "DIRECT"
+
     for value in recorded:
-        if safe_equal(demand, value):
+        if same(demand, value):
             return demand, "DIRECT"
     if isinstance(demand, (tuple, list)):
-        if len(demand) == 1 and not isinstance(recorded[0] if recorded else None, (tuple, list)):
+        if len(demand) == 1 and not isinstance(recorded[0] if recorded else None, (tuple, list)) \
+                and any(same_slot(demand[0], value) for value in recorded):
+            # SAME SLOT, NOT SAME VALUE. The demanded value is *meant* to differ from the one the site
+            # produced -- that is the repair. What must not differ is the kind: a `str` demand on a `bool`
+            # site is not that site's slot at all, and binding it accuses the truth (measured twice: the
+            # exception-message rows). Requiring equality destroyed the one row this instrument verifies.
             return demand[0], "UNWRAPPED"
         for value in recorded:
             if isinstance(value, (tuple, list)) and len(value) == len(demand):
                 for index, (left, right) in enumerate(zip(demand, value)):
-                    if safe_equal(left, right):
+                    if same(left, right):
                         return demand[index], "ELEMENT"
     return None
 
@@ -669,16 +705,70 @@ def _driver_body(config_path: str) -> int:
         for row in capture.rows:
             if row["node"] != entry["node"]:
                 continue
+            # PAIR THE OPERANDS BEFORE READING EITHER. An assertion is about the site only if one of its
+            # operands already holds what the site produced; that operand IS the site and the demand is
+            # the other one. Reading a side against the site in isolation cannot tell a demand from the
+            # site's own value -- and it forces the demand to equal what the site produced, which refuses
+            # every real repair (the repair is precisely the difference). The pairing is the evidence, and
+            # it is checkable: the matched operand is recorded in the receipt.
+            pairs: list[tuple[str, str, list[Any]]] = []
+            for site_side, demand_side in (("left", "right"), ("right", "left")):
+                matched = [value for value in part["kept"]
+                           if type(row.get(site_side)) is type(value) and safe_equal(row.get(site_side), value)]
+                if matched:
+                    pairs.append((site_side, demand_side, matched))
+            if pairs:
+                for site_side, demand_side, matched in pairs:
+                    demanded = row.get(demand_side)
+                    if is_prose_demand(demanded):
+                        result["prose_refused"] = result.get("prose_refused", 0) + 1
+                        result.setdefault("refusals", []).append(
+                            {"node": entry["node"], "side": demand_side,
+                             "demanded": live_repr(demanded)[:200],
+                             "produced": [live_repr(v)[:120] for v in matched][:4],
+                             "reason": "PROSE_IS_NOT_AN_EXPRESSION"})
+                        continue
+                    relation = site_demand(demanded, matched, paired=True)
+                    if relation is None:
+                        result.setdefault("refusals", []).append(
+                            {"node": entry["node"], "side": demand_side,
+                             "demanded": live_repr(demanded)[:200],
+                             "produced": [live_repr(v)[:120] for v in matched][:4],
+                             "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"})
+                        continue
+                    if relation[0] not in aligned:
+                        aligned.append(relation[0])
+                        result["table"].append({"node": entry["node"], "relation": relation[1],
+                                                "demand": live_repr(relation[0]),
+                                                "site_operand": site_side})
+                continue
             for side in ("right", "left"):
+                # A refusal is a claim too ("this assertion does not speak about this site"), and an
+                # unchecked claim is worth nothing. Every refused operand is written into the receipt
+                # with what the site actually produced, so the refusal can be read back and disputed.
+                refused = [{"node": entry["node"], "side": side,
+                            "demanded": live_repr(row.get(side))[:200],
+                            "produced": [live_repr(k)[:120] for k in (part["kept"] or [])][:4]}]
                 if is_prose_demand(row.get(side)):
                     result.setdefault("prose_refused", 0)
                     result["prose_refused"] += 1
+                    result.setdefault("refusals", []).extend(
+                        {**r, "reason": "PROSE_IS_NOT_AN_EXPRESSION"} for r in refused)
                     continue
                 relation = site_demand(row.get(side), part["kept"])
                 if relation is not None and is_prose_demand(relation[0]):
                     result.setdefault("prose_refused", 0)
                     result["prose_refused"] += 1
+                    result.setdefault("refusals", []).extend(
+                        {**r, "reason": "PROSE_IS_NOT_AN_EXPRESSION"} for r in refused)
                     continue
+                if relation is None:
+                    # "Nothing was produced" and "the demand shares no slot with what was produced" are
+                    # different findings and must be named differently: the first is a limit of the
+                    # driver, the second is a fact about the assertion.
+                    why = ("THE_SITE_PRODUCED_NO_VALUE" if not part["kept"]
+                           else "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED")
+                    result.setdefault("refusals", []).extend({**r, "reason": why} for r in refused)
                 if relation is not None and relation[0] not in aligned:
                     aligned.append(relation[0])
                     result["table"].append({"node": entry["node"], "relation": relation[1],
@@ -710,6 +800,7 @@ def _driver_body(config_path: str) -> int:
                 part["truth"] = True
         table.append(part)
     result["table"] = result["table"][:12]
+    result["refusals"] = (result.get("refusals") or [])[:8]
     if not any(part["frames"] for part in table):
         out.write_text(json.dumps(result, indent=1), encoding="utf-8")
         return 0
@@ -1032,6 +1123,7 @@ def explore(repo: pathlib.Path, entry: dict[str, Any], *, cap: int = 400_000, su
                         "site_expression": site["old_expression"],
                         "table": driven.get("table"), "audit": driven.get("audit"),
                         "prose_refused": driven.get("prose_refused", 0),
+                        "refusals": driven.get("refusals") or [],
                         "greens": [], "green_count": 0, "survivors": 0,
                         "parameters_stored": 0,
                         "seconds": round(time.time() - started, 2)}
