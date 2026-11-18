@@ -1,0 +1,52 @@
+{
+ "authority": "NONE -- sandbox measurement, not independent verification",
+ "convergent_external_november_2026": {
+  "PSearch (2026)": "201/835 Defects4J and 54.67% SWE-bench-Lite, but every candidate it searches comes from a 480B model: search is the selector, not the generator",
+  "TraceRepair (2026)": "392 Defects4J fixes, and its stated carrying object is 'runtime facts as shared constraints' -- the observation half this tree already has",
+  "vanilla LLM repair (survey 2026)": "37.67% on SWE-bench-Lite without search infrastructure"
+ },
+ "corpus": {
+  "candidates_mined": 73,
+  "honesty_note": "6 tasks from ONE repository is a ceiling statement about the grammar, not a benchmark score",
+  "rule": "one python source file and one test file changed, and the commit's test file must FAIL at the parent and PASS at the commit -- verified by execution, not by reading",
+  "source": "real commits of pypa/packaging, pallets/itsdangerous and hukkin/tomli (last 600 commits each)",
+  "tasks_that_pass_the_gate": 6,
+  "why_the_rest_were_dropped": "their test files do not run in this sandbox (packaging's tests import dependencies the sandbox does not have) or already pass at the parent, which means the commit changed tests rather than behaviour"
+ },
+ "cost_usd": 0.0,
+ "date": "2026-11-16",
+ "grammar": {
+  "applicability": "a template fires only where its ancestry context matches AND the site still holds the template's OLD value -- transfer, not analogy",
+  "hand_written_operators_in_this_file": 0,
+  "induced_from": "the other two repositories' commits only (leave-one-repository-out)",
+  "templates": 73
+ },
+ "model_calls": 0,
+ "next_bottleneck_named": "EDIT PROPOSAL, and specifically SHAPE CHANGES: the commits in this corpus that the grammar cannot express are changes to expression structure (a name becomes a call, a branch becomes a guard, a literal becomes a computed value). A truly ultimate solution cannot enumerate those either -- it must read them out of the environment the same way rounds 7 and 8 did for arguments and observations: the repository's own history contains the shape changes, and NON_EXECUTABLE templates are currently discarded. The next organ must learn shape rewrites from those discarded diffs and verify every one of them by execution.",
+ "reproduce": "python canonical/swe_kernel/history_induced_edit_grammar_v1.py --corpus /tmp/corpus9/tasks.json --json canonical/verification/HISTORY_INDUCED_EDIT_GRAMMAR_20261116_V1.json",
+ "schema": "BRAIN_HISTORY_INDUCED_EDIT_GRAMMAR_V1",
+ "the_measurement": {
+  "budget_was_exhaustive": true,
+  "decomposition": {
+   "COMPOSITE_EDIT_REQUIRED": 2,
+   "NOT_EXPRESSIBLE": 2,
+   "REFUSED__NO_TEMPLATE_FIRES": 2
+  },
+  "executions_spent": 62,
+  "mean_executions_per_task": 10.33,
+  "runtime_traceback_site_found": 0,
+  "search_budget_per_task": 400,
+  "solved": 0,
+  "solved_fraction": 0.0,
+  "tasks": 6,
+  "why_no_runtime_site": "all six real fixes are asserted on a MESSAGE or a return value inside the test, so the exception never propagates out of the source file and no runtime frame exists to localise from; localisation for this class of task must come from the asserted value, not from a traceback"
+ },
+ "the_question": "Round 8 closed the observation half: 28 of 38 previously unobservable real actions are exercised by the environment's own tests, 22 of them move at the next release, and every move carries both sides of its evidence. Observation produces no change. The standing question is the synthesis-verification asymmetry: retrieval handles about 2.2% of SWE-bench Verified, so a real agent must COMPOSE an edit. This round asks the only question that decides whether a model-free system can compile edits at all: can an edit grammar read out of real repository history produce a real fix, and when it cannot, is the failure the grammar or the search?",
+ "the_three_verdicts_explained": {
+  "COMPOSITE_EDIT_REQUIRED (2)": "the commit's own edit IS a single grammar template, it fires at the right place, and applying it alone does NOT pass the test: those commits changed more than one node, so a single-template grammar cannot represent them",
+  "NOT_EXPRESSIBLE (2)": "the commit's edit is not a template in the basis at all (it changes the SHAPE of an expression, which induced_edit_basis_v1 already classifies as NON_EXECUTABLE)",
+  "REFUSED__NO_TEMPLATE_FIRES (2)": "no template's precondition holds anywhere in the file"
+ },
+ "what_the_tree_already_had": "induced_edit_basis_v1 already states the defect in its own words: the repair machinery enumerates a hand-written operator list and 'that list decides everything, and it decides it BEFORE any search happens'. python_test_guided_patch_search_v1 already applies, judges and restores candidates under a test gate. Neither was measured on real commits. This round adds no operator list: the grammar is induced from real diffs (induced_edit_basis_v1.induce_templates, reused) and, for every task, induced ONLY from OTHER repositories' commits.",
+ "what_this_proves": "The verification half of the asymmetry is SOLVED, and it is free: 62 executions, $0, no model, every candidate restored byte-exactly, every judgement made by a real test from a real commit. The synthesis half is EMPTY: an execution-gated, history-induced, context-matched template grammar solves 0 of 6 real fixes, and not one of the six failures is a search failure. Two are composite-edit failures, two are shape changes the basis cannot express, two have no firing site at all. The wall is exactly where the 2026 literature puts it -- PSearch needs an LLM to propose the edit and then uses search only to choose among 32 proposals (201 of 835 Defects4J) -- and this round shows the proposal step is where a model-free system currently has nothing, not the choosing step."
+}
