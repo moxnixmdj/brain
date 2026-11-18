@@ -45,7 +45,7 @@
   "terminal_achieved": false
  },
  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
- "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The replacement expression. The failing run can name the site and the firing whose value was wrong -- measured at one oracle bit per candidate -- and cannot name the value that should have been there. 12 of 15 fresh human fixes are a value the run never produced (an attribute name, a regex, an argument, a call's routing) and 3 are behaviour that did not exist, which INSUFFICIENCY_CERTIFICATE_20261113_V1 already proves no trace can supply.",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The selection of one expression out of the closure of the language. The address is solved for free (the site is handed over in both arms, an upper bound no system could beat). The vocabulary is computable (dir() of the live types, 4 microseconds, nothing stored). The grammar is the language's. What remains is rank: the right expression sits at 2887 in the one row the base arm could reach, and at a rank the wide arm measures for the others, while each oracle question that tests one candidate costs 0.5 s. Selecting is therefore the only thing left, and a memory of one demonstrated action supplies one selected element and no ordering over the 10^5 alternatives the language admits.",
  "canonical_base_commit": "cabbc10b290119ba619ad4f49f74af4fa7a409e7",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
@@ -175,8 +175,35 @@
   "expected_parent_level_state_change": "The frontier moves from 'find the expression' to 'select the expression': closure is construction, selection is the bottleneck, and the only zero-parameter instrument that collapses selection is the value the failing assertion demanded, forced into a recorded frame (50 microseconds) instead of run against the suite (0.5 s). Any next round that adds vocabulary or grammar without an ordering is spending effort on the cheap half.",
   "independent_verification_required": true,
   "iteration_limit": 1,
-  "obs_blocker": "The selection of one expression out of the closure of the language. The address is solved for free (the site is handed over in both arms, an upper bound no system could beat). The vocabulary is computable (dir() of the live types, 4 microseconds, nothing stored). The grammar is the language's. What remains is rank: the right expression sits at 2887 in the one row the base arm could reach, and at a rank the wide arm measures for the others, while each oracle question that tests one candidate costs 0.5 s. Selecting is therefore the only thing left, and a memory of one demonstrated action supplies one selected element and no ordering over the 10^5 alternatives the language admits.",
-  "obs_capability": "A declared, versioned, reproducible ceiling over a closed zero-parameter expression space at a given site, with a taxonomy that names what each miss is missing.",
+  "obs_blocker": {
+   "delete_bypass_substitute_options": [
+    "DELETE the search for the site: it is handed over for free in every arm of this round",
+    "DELETE the search for vocabulary: dir() of the live types and of builtins is 4 microseconds",
+    "BYPASS the ordering: the value the failing assertion demanded, forced at the site, filters the closure in 50 microseconds per candidate instead of 0.5 s per oracle question",
+    "SUBSTITUTE nothing for the specification: the words of the failing test are the only source of a literal the artifact never mentions"
+   ],
+   "intrinsic_or_path_specific": "INTRINSIC_TO_SELECTION: the rank of the right expression inside the closure of the language, which no address and no memory supplies",
+   "surviving_causal_blocker": "The selection of one expression out of the closure of the language. The address is solved for free (the site is handed over in both arms, an upper bound no system could beat). The vocabulary is computable (dir() of the live types, 4 microseconds, nothing stored). The grammar is the language's. What remains is rank: the right expression sits at 2887 in the one row the base arm could reach, and at a rank the wide arm measures for the others, while each oracle question that tests one candidate costs 0.5 s. Selecting is therefore the only thing left, and a memory of one demonstrated action supplies one selected element and no ordering over the 10^5 alternatives the language admits."
+  },
+  "obs_capability": {
+   "capability_work_deleted": [
+    "a stored attribute vocabulary (dir() is fresher and costs nothing)",
+    "a stored grammar table (the language's own grammar is reused)",
+    "requiring one differing node to call an edit a single expression (it manufactured a 10-of-19 exclusion that was a property of the tool)"
+   ],
+   "existing_inherited_routes_checked": [
+    "canonical/tools/the_failing_run_names_the_expression_v1.py (arm A, run on the same 15 commits)",
+    "canonical/tools/force_the_value_and_see_v1.py (interior value forcing: the next composition)",
+    "canonical/runtime/bound_capabilities/python_counterfactual_spec_repair_v1.py (function-scale counterfactual repair on QuixBugs; same primitives, no repo-scale address)",
+    "canonical/tools/what_a_real_fix_needs_from_the_site_v1.py (site verdicts and single-change extraction)"
+   ],
+   "external_existing_routes_checked": [
+    "AgenTracer (ICLR 2026): counterfactual replay labels, guessed by a frontier model",
+    "CausalFlow (arXiv 2605.25338): step-level interventions written by a model",
+    "Who Broke the System? (arXiv 2607.07989): reviewed for approximating rather than executing the counterfactual"
+   ],
+   "surviving_gap": "Selection: which expression, out of a closure of 10^5, produces the value the failing assertion demanded, at a rank an oracle budget can afford."
+  },
   "obs_goal": {
    "proxy_goals_deleted": [
     "a bigger action library (OSWorld 2.0: final-state exactness is the 84-95% failure bucket)",
@@ -299,7 +326,7 @@
      "route": "INDEX_ACTIONS_BY_THE_FAILING_RUN_NOT_BY_THE_SOURCE_TEXT"
     }
    ],
-   "checked_at_utc": "2026-11-18T17:12:31Z",
+   "checked_at_utc": "2026-11-18T17:50:20Z",
    "comparison_dimensions": [
     "CORRECTNESS",
     "CAPABILITY_STRENGTH",
@@ -336,10 +363,10 @@
     "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
     "BEFORE_SCARCE_GATE_SPEND"
    ],
-   "selected_route": "EXECUTE_THE_COUNTERFACTUAL_INSTEAD_OF_APPROXIMATING_IT",
+   "selected_route": "MEASURE_THE_CEILING_OF_A_CLOSED_SPACE_AND_NAME_WHAT_SELECTS_INSIDE_IT",
    "selected_route_preflight": {
     "all_required_dependencies_ready": true,
-    "checked_at_utc": "2026-11-18T17:12:31Z",
+    "checked_at_utc": "2026-11-18T17:50:20Z",
     "execution_dependencies": [
      {
       "dependency": "local Python 3.11 runtime with pytest",
@@ -390,7 +417,7 @@
     "execution_dependencies_complete": true,
     "failed_dependencies": [],
     "max_age_hours": 2,
-    "selected_route": "EXECUTE_THE_COUNTERFACTUAL_INSTEAD_OF_APPROXIMATING_IT",
+    "selected_route": "MEASURE_THE_CEILING_OF_A_CLOSED_SPACE_AND_NAME_WHAT_SELECTS_INSIDE_IT",
     "status": "READY"
    },
    "source_classes_checked": [
