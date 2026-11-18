@@ -42,7 +42,7 @@
  },
  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Two obstacles, in this order: (1) can the material at the site build the fix at all, and (2) does the experiment that was observed separate the candidates the material admits. An observation resolves log2 of the behavioural classes it induces among the live candidates: the case that fails lis resolves 8.64 bits (399 -> 1), the case that fails kth resolves zero (400 -> 400). Memory and speed are not on the list.",
- "canonical_base_commit": "c001c61528528a81c35742c80714d31e63c10c68",
+ "canonical_base_commit": "9e8b043a408fc8fb67291a15e09ea171bc7b6d42",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -124,7 +124,7 @@
   "canonical/action_intents/THE_EXPERIMENT_IDENTIFIES_THE_PROGRAM_20261118_V1.json"
  ],
  "recursive_obs": {
-  "canonical_base_commit": "c001c61528528a81c35742c80714d31e63c10c68",
+  "canonical_base_commit": "9e8b043a408fc8fb67291a15e09ea171bc7b6d42",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "storing the text that was edited (a spelling destroyed by a rename)",
