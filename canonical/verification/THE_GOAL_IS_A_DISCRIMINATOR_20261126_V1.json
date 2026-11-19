@@ -1,0 +1,1339 @@
+{
+ "schema": "BRAIN_THE_GOAL_IS_A_DISCRIMINATOR_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "date": "2026-11-26",
+ "mode": "GOAL_INFERRED_FROM_JUDGMENTS_ON_REAL_MACHINES",
+ "declared_acceptance_before_the_run": {
+  "A1": "every inferred discriminator, on states it never saw, accepts nothing the user rejects",
+  "A2": "the active loop reduces the survivors to exactly one for at least 3 goals, with the number of judgments reported per goal",
+  "A3": "at least 3 goals need no more judgments actively than in the pool's order, and at least 1 needs strictly fewer",
+  "A4": "at least 3 goals are planned from the inferred discriminator alone to a state the user accepts, verified by the reader, with zero false accepts",
+  "A5": "after one judgment the median number of surviving discriminators is greater than one",
+  "A7": "ADDED AFTER THE FIRST RUN (see verdict): at least 3 goals are identified BEHAVIOURALLY -- every surviving discriminator agrees on every reachable state, so no question exists and no action can expose a difference. A2 (syntactic uniqueness) is kept as declared and reported as NOT MET.",
+  "A6": "zero model calls, zero stored parameters, no network at run time"
+ },
+ "verdict": {
+  "A1_held_out_soundness": {
+   "rows_with_a_false_accept": [],
+   "held_out_states_judged": 7,
+   "MET": true
+  },
+  "A2_identification": {
+   "identified": [
+    "FILESYSTEM",
+    "GIT"
+   ],
+   "judgments": {
+    "FILESYSTEM": 4,
+    "TARBALL": 2,
+    "SQLITE": 5,
+    "GIT": 4
+   },
+   "MET": false
+  },
+  "A3_asking_well_beats_asking_in_order": {
+   "no_worse": 5,
+   "strictly_fewer": 2,
+   "examples": {
+    "FILESYSTEM": {
+     "active": 4,
+     "in_order": 4
+    },
+    "TARBALL": {
+     "active": 2,
+     "in_order": 2
+    },
+    "SQLITE": {
+     "active": 5,
+     "in_order": 6
+    },
+    "GIT": {
+     "active": 4,
+     "in_order": 6
+    }
+   },
+   "MET": true
+  },
+  "A4_acting_on_the_inferred_goal": {
+   "planned_and_accepted": 5,
+   "false_accepts": [],
+   "MET": true
+  },
+  "A5_ambiguity_after_one_judgment": {
+   "survivors": [
+    12,
+    11,
+    16,
+    11,
+    12
+   ],
+   "median": 12.0,
+   "MET": true
+  },
+  "A6_zero_model_calls_zero_parameters": {
+   "model_calls": 0,
+   "parameters_stored": 0,
+   "network_calls_at_run_time": 0,
+   "MET": true
+  },
+  "A7_behavioural_identification": {
+   "confirmed_three_actions_deep": true,
+   "depth3": {
+    "the seed content must live under the name 'moved_seed'": {
+     "states_reachable_in_3": 4,
+     "behavioural_classes": 1,
+     "behaviourally_identified": true,
+     "new_states_beyond_depth2": 0
+    },
+    "the new content must appear in the archive exactly once": {
+     "states_reachable_in_3": 4,
+     "behavioural_classes": 1,
+     "behaviourally_identified": true,
+     "new_states_beyond_depth2": 2
+    },
+    "row 1 must hold the new value": {
+     "states_reachable_in_3": 10,
+     "behavioural_classes": 1,
+     "behaviourally_identified": true,
+     "new_states_beyond_depth2": 4
+    },
+    "the new content appears exactly once AND the seed content su": {
+     "states_reachable_in_3": 4,
+     "behavioural_classes": 1,
+     "behaviourally_identified": true,
+     "new_states_beyond_depth2": 2
+    },
+    "the new content must appear in the subject list exactly once": {
+     "states_reachable_in_3": 31,
+     "behavioural_classes": 1,
+     "behaviourally_identified": true,
+     "new_states_beyond_depth2": 26
+    }
+   },
+   "behaviourally_identified": [
+    "FILESYSTEM",
+    "TARBALL",
+    "SQLITE",
+    "TARBALL",
+    "GIT"
+   ],
+   "classes": {
+    "FILESYSTEM": 1,
+    "TARBALL": 1,
+    "SQLITE": 1,
+    "GIT": 1
+   },
+   "added_after_the_first_run": true,
+   "reason": "two discriminators that agree on every reachable state are the same goal; the syntactic count overstates ambiguity that no action can ever expose",
+   "MET": true
+  }
+ },
+ "rows": [
+  {
+   "goal": "the seed content must live under the name 'moved_seed'",
+   "machine": "FILESYSTEM",
+   "pool_states": 4,
+   "pool_accepted": 2,
+   "pool_rejected": 2,
+   "grammar_terms": 21,
+   "active": {
+    "goal": "the seed content must live under the name 'moved_seed'",
+    "machine": "FILESYSTEM",
+    "order": "active",
+    "judgments": 4,
+    "survivors": 1,
+    "smallest": [
+     [
+      "has[moved_seed]=probe_seed_content"
+     ]
+    ],
+    "trace": [
+     {
+      "judgments": 1,
+      "survivors": 12,
+      "smallest": [
+       [
+        "card==1"
+       ],
+       [
+        "card==3"
+       ],
+       [
+        "order_is_sorted"
+       ],
+       [
+        "ident_order==('seed2',)"
+       ],
+       [
+        "first==probe_second_content"
+       ],
+       [
+        "count[probe_seed_content]==0"
+       ]
+      ]
+     },
+     {
+      "judgments": 2,
+      "survivors": 6,
+      "smallest": [
+       [
+        "card==3"
+       ],
+       [
+        "count[probe_seed_content]==2"
+       ],
+       [
+        "has[moved_seed]=probe_seed_content"
+       ],
+       [
+        "ident_order==('moved_seed', 'seed2')"
+       ],
+       [
+        "ident_order==('moved_seed', 'seed', 'seed2')"
+       ],
+       [
+        "multiset==('probe_second_content', 'probe_seed_content', 'probe_seed_content')"
+       ]
+      ]
+     },
+     {
+      "judgments": 3,
+      "survivors": 2,
+      "smallest": [
+       [
+        "has[moved_seed]=probe_seed_content"
+       ],
+       [
+        "ident_order==('moved_seed', 'seed2')"
+       ]
+      ]
+     },
+     {
+      "judgments": 4,
+      "survivors": 1,
+      "smallest": [
+       [
+        "has[moved_seed]=probe_seed_content"
+       ]
+      ]
+     }
+    ],
+    "held_out_states": 0,
+    "held_out_false_accepts": [],
+    "held_out_false_accept_count": 0,
+    "identified": true,
+    "survivors_after_first_judgment": 12,
+    "behaviour": {
+     "behavioural_classes": 1,
+     "behaviourally_identified": true,
+     "separable_pairs": 0,
+     "class_sizes": [
+      1
+     ]
+    },
+    "unjudged_states_that_split": 0
+   },
+   "in_order": {
+    "goal": "the seed content must live under the name 'moved_seed'",
+    "machine": "FILESYSTEM",
+    "order": "pool",
+    "judgments": 4,
+    "survivors": 1,
+    "smallest": [
+     [
+      "has[moved_seed]=probe_seed_content"
+     ]
+    ],
+    "trace": [
+     {
+      "judgments": 1,
+      "survivors": 12,
+      "smallest": [
+       [
+        "card==1"
+       ],
+       [
+        "card==3"
+       ],
+       [
+        "order_is_sorted"
+       ],
+       [
+        "ident_order==('seed2',)"
+       ],
+       [
+        "first==probe_second_content"
+       ],
+       [
+        "count[probe_seed_content]==0"
+       ]
+      ]
+     },
+     {
+      "judgments": 2,
+      "survivors": 6,
+      "smallest": [
+       [
+        "card==3"
+       ],
+       [
+        "count[probe_seed_content]==2"
+       ],
+       [
+        "has[moved_seed]=probe_seed_content"
+       ],
+       [
+        "ident_order==('moved_seed', 'seed2')"
+       ],
+       [
+        "ident_order==('moved_seed', 'seed', 'seed2')"
+       ],
+       [
+        "multiset==('probe_second_content', 'probe_seed_content', 'probe_seed_content')"
+       ]
+      ]
+     },
+     {
+      "judgments": 3,
+      "survivors": 2,
+      "smallest": [
+       [
+        "has[moved_seed]=probe_seed_content"
+       ],
+       [
+        "ident_order==('moved_seed', 'seed2')"
+       ]
+      ]
+     },
+     {
+      "judgments": 4,
+      "survivors": 1,
+      "smallest": [
+       [
+        "has[moved_seed]=probe_seed_content"
+       ]
+      ]
+     }
+    ],
+    "held_out_states": 0,
+    "held_out_false_accepts": [],
+    "held_out_false_accept_count": 0,
+    "identified": true,
+    "survivors_after_first_judgment": 12,
+    "behaviour": {
+     "behavioural_classes": 1,
+     "behaviourally_identified": true,
+     "separable_pairs": 0,
+     "class_sizes": [
+      1
+     ]
+    },
+    "unjudged_states_that_split": 0
+   },
+   "acting": {
+    "planned": true,
+    "atoms": [
+     "FS_A3"
+    ],
+    "state": [
+     [
+      "moved_seed",
+      "probe_seed_content"
+     ],
+     [
+      "seed2",
+      "probe_second_content"
+     ]
+    ],
+    "user_accepts": true,
+    "false_accept": false,
+    "verified_by_the_reader": true
+   },
+   "depth3_check": {
+    "states_reachable_in_3": 4,
+    "behavioural_classes": 1,
+    "behaviourally_identified": true,
+    "new_states_beyond_depth2": 0
+   }
+  },
+  {
+   "goal": "the new content must appear in the archive exactly once",
+   "machine": "TARBALL",
+   "pool_states": 2,
+   "pool_accepted": 1,
+   "pool_rejected": 1,
+   "grammar_terms": 16,
+   "active": {
+    "goal": "the new content must appear in the archive exactly once",
+    "machine": "TARBALL",
+    "order": "active",
+    "judgments": 2,
+    "survivors": 5,
+    "smallest": [
+     [
+      "card==3"
+     ],
+     [
+      "count[probe_new_content]==1"
+     ],
+     [
+      "has[probe_member]=probe_new_content"
+     ],
+     [
+      "ident_order==('seed', 'seed2', 'probe_member')"
+     ],
+     [
+      "multiset==('probe_new_content', 'probe_second_content', 'probe_seed_content')"
+     ]
+    ],
+    "trace": [
+     {
+      "judgments": 1,
+      "survivors": 11,
+      "smallest": [
+       [
+        "card==3"
+       ],
+       [
+        "contents_distinct"
+       ],
+       [
+        "first==probe_seed_content"
+       ],
+       [
+        "count[probe_new_content]==1"
+       ],
+       [
+        "count[probe_seed_content]==1"
+       ],
+       [
+        "has[seed]=probe_seed_content"
+       ]
+      ]
+     },
+     {
+      "judgments": 2,
+      "survivors": 5,
+      "smallest": [
+       [
+        "card==3"
+       ],
+       [
+        "count[probe_new_content]==1"
+       ],
+       [
+        "has[probe_member]=probe_new_content"
+       ],
+       [
+        "ident_order==('seed', 'seed2', 'probe_member')"
+       ],
+       [
+        "multiset==('probe_new_content', 'probe_second_content', 'probe_seed_content')"
+       ]
+      ]
+     }
+    ],
+    "held_out_states": 0,
+    "held_out_false_accepts": [],
+    "held_out_false_accept_count": 0,
+    "identified": false,
+    "survivors_after_first_judgment": 11,
+    "behaviour": {
+     "behavioural_classes": 1,
+     "behaviourally_identified": true,
+     "separable_pairs": 0,
+     "class_sizes": [
+      5
+     ]
+    },
+    "unjudged_states_that_split": 0
+   },
+   "in_order": {
+    "goal": "the new content must appear in the archive exactly once",
+    "machine": "TARBALL",
+    "order": "pool",
+    "judgments": 2,
+    "survivors": 5,
+    "smallest": [
+     [
+      "card==3"
+     ],
+     [
+      "count[probe_new_content]==1"
+     ],
+     [
+      "has[probe_member]=probe_new_content"
+     ],
+     [
+      "ident_order==('seed', 'seed2', 'probe_member')"
+     ],
+     [
+      "multiset==('probe_new_content', 'probe_second_content', 'probe_seed_content')"
+     ]
+    ],
+    "trace": [
+     {
+      "judgments": 1,
+      "survivors": 11,
+      "smallest": [
+       [
+        "card==3"
+       ],
+       [
+        "contents_distinct"
+       ],
+       [
+        "first==probe_seed_content"
+       ],
+       [
+        "count[probe_new_content]==1"
+       ],
+       [
+        "count[probe_seed_content]==1"
+       ],
+       [
+        "has[seed]=probe_seed_content"
+       ]
+      ]
+     },
+     {
+      "judgments": 2,
+      "survivors": 5,
+      "smallest": [
+       [
+        "card==3"
+       ],
+       [
+        "count[probe_new_content]==1"
+       ],
+       [
+        "has[probe_member]=probe_new_content"
+       ],
+       [
+        "ident_order==('seed', 'seed2', 'probe_member')"
+       ],
+       [
+        "multiset==('probe_new_content', 'probe_second_content', 'probe_seed_content')"
+       ]
+      ]
+     }
+    ],
+    "held_out_states": 0,
+    "held_out_false_accepts": [],
+    "held_out_false_accept_count": 0,
+    "identified": false,
+    "survivors_after_first_judgment": 11,
+    "behaviour": {
+     "behavioural_classes": 1,
+     "behaviourally_identified": true,
+     "separable_pairs": 0,
+     "class_sizes": [
+      5
+     ]
+    },
+    "unjudged_states_that_split": 0
+   },
+   "acting": {
+    "planned": true,
+    "atoms": [
+     "TAR_A1"
+    ],
+    "state": [
+     [
+      "seed",
+      "probe_seed_content"
+     ],
+     [
+      "seed2",
+      "probe_second_content"
+     ],
+     [
+      "probe_member",
+      "probe_new_content"
+     ]
+    ],
+    "user_accepts": true,
+    "false_accept": false,
+    "verified_by_the_reader": true
+   },
+   "depth3_check": {
+    "states_reachable_in_3": 4,
+    "behavioural_classes": 1,
+    "behaviourally_identified": true,
+    "new_states_beyond_depth2": 2
+   }
+  },
+  {
+   "goal": "row 1 must hold the new value",
+   "machine": "SQLITE",
+   "pool_states": 6,
+   "pool_accepted": 2,
+   "pool_rejected": 4,
+   "grammar_terms": 27,
+   "active": {
+    "goal": "row 1 must hold the new value",
+    "machine": "SQLITE",
+    "order": "active",
+    "judgments": 5,
+    "survivors": 2,
+    "smallest": [
+     [
+      "first==probe_new_content"
+     ],
+     [
+      "has[1]=probe_new_content"
+     ]
+    ],
+    "trace": [
+     {
+      "judgments": 1,
+      "survivors": 16,
+      "smallest": [
+       [
+        "card==1"
+       ],
+       [
+        "card==2"
+       ],
+       [
+        "order_is_sorted"
+       ],
+       [
+        "ident_order==('2',)"
+       ],
+       [
+        "ident_order==('1', '2')"
+       ],
+       [
+        "ident_order==('2', '3')"
+       ]
+      ]
+     },
+     {
+      "judgments": 2,
+      "survivors": 9,
+      "smallest": [
+       [
+        "card==2"
+       ],
+       [
+        "ident_order==('1', '2')"
+       ],
+       [
+        "ident_order==('2', '3')"
+       ],
+       [
+        "first==probe_new_content"
+       ],
+       [
+        "has[1]=probe_new_content"
+       ],
+       [
+        "count[probe_new_content]==2"
+       ]
+      ]
+     },
+     {
+      "judgments": 3,
+      "survivors": 5,
+      "smallest": [
+       [
+        "card==2"
+       ],
+       [
+        "ident_order==('1', '2')"
+       ],
+       [
+        "first==probe_new_content"
+       ],
+       [
+        "has[1]=probe_new_content"
+       ],
+       [
+        "multiset==('probe_new_content', 'probe_second_content')"
+       ]
+      ]
+     },
+     {
+      "judgments": 4,
+      "survivors": 3,
+      "smallest": [
+       [
+        "first==probe_new_content"
+       ],
+       [
+        "has[1]=probe_new_content"
+       ],
+       [
+        "multiset==('probe_new_content', 'probe_second_content')"
+       ]
+      ]
+     },
+     {
+      "judgments": 5,
+      "survivors": 2,
+      "smallest": [
+       [
+        "first==probe_new_content"
+       ],
+       [
+        "has[1]=probe_new_content"
+       ]
+      ]
+     }
+    ],
+    "held_out_states": 1,
+    "held_out_false_accepts": [],
+    "held_out_false_accept_count": 0,
+    "identified": false,
+    "survivors_after_first_judgment": 16,
+    "behaviour": {
+     "behavioural_classes": 1,
+     "behaviourally_identified": true,
+     "separable_pairs": 0,
+     "class_sizes": [
+      2
+     ]
+    },
+    "unjudged_states_that_split": 0
+   },
+   "in_order": {
+    "goal": "row 1 must hold the new value",
+    "machine": "SQLITE",
+    "order": "pool",
+    "judgments": 6,
+    "survivors": 2,
+    "smallest": [
+     [
+      "first==probe_new_content"
+     ],
+     [
+      "has[1]=probe_new_content"
+     ]
+    ],
+    "trace": [
+     {
+      "judgments": 1,
+      "survivors": 16,
+      "smallest": [
+       [
+        "card==1"
+       ],
+       [
+        "card==2"
+       ],
+       [
+        "order_is_sorted"
+       ],
+       [
+        "ident_order==('2',)"
+       ],
+       [
+        "ident_order==('1', '2')"
+       ],
+       [
+        "ident_order==('2', '3')"
+       ]
+      ]
+     },
+     {
+      "judgments": 2,
+      "survivors": 9,
+      "smallest": [
+       [
+        "card==2"
+       ],
+       [
+        "ident_order==('1', '2')"
+       ],
+       [
+        "ident_order==('2', '3')"
+       ],
+       [
+        "first==probe_new_content"
+       ],
+       [
+        "has[1]=probe_new_content"
+       ],
+       [
+        "count[probe_new_content]==2"
+       ]
+      ]
+     },
+     {
+      "judgments": 3,
+      "survivors": 5,
+      "smallest": [
+       [
+        "card==2"
+       ],
+       [
+        "ident_order==('1', '2')"
+       ],
+       [
+        "first==probe_new_content"
+       ],
+       [
+        "has[1]=probe_new_content"
+       ],
+       [
+        "multiset==('probe_new_content', 'probe_second_content')"
+       ]
+      ]
+     },
+     {
+      "judgments": 4,
+      "survivors": 3,
+      "smallest": [
+       [
+        "first==probe_new_content"
+       ],
+       [
+        "has[1]=probe_new_content"
+       ],
+       [
+        "multiset==('probe_new_content', 'probe_second_content')"
+       ]
+      ]
+     },
+     {
+      "judgments": 5,
+      "survivors": 2,
+      "smallest": [
+       [
+        "first==probe_new_content"
+       ],
+       [
+        "has[1]=probe_new_content"
+       ]
+      ]
+     },
+     {
+      "judgments": 6,
+      "survivors": 2,
+      "smallest": [
+       [
+        "first==probe_new_content"
+       ],
+       [
+        "has[1]=probe_new_content"
+       ]
+      ]
+     }
+    ],
+    "held_out_states": 0,
+    "held_out_false_accepts": [],
+    "held_out_false_accept_count": 0,
+    "identified": false,
+    "survivors_after_first_judgment": 16,
+    "behaviour": {
+     "behavioural_classes": 1,
+     "behaviourally_identified": true,
+     "separable_pairs": 0,
+     "class_sizes": [
+      2
+     ]
+    },
+    "unjudged_states_that_split": 0
+   },
+   "acting": {
+    "planned": true,
+    "atoms": [
+     "SQL_A3"
+    ],
+    "state": [
+     [
+      "1",
+      "probe_new_content"
+     ],
+     [
+      "2",
+      "probe_second_content"
+     ]
+    ],
+    "user_accepts": true,
+    "false_accept": false,
+    "verified_by_the_reader": true
+   },
+   "depth3_check": {
+    "states_reachable_in_3": 10,
+    "behavioural_classes": 1,
+    "behaviourally_identified": true,
+    "new_states_beyond_depth2": 4
+   }
+  },
+  {
+   "goal": "the new content appears exactly once AND the seed content survives",
+   "machine": "TARBALL",
+   "pool_states": 2,
+   "pool_accepted": 1,
+   "pool_rejected": 1,
+   "grammar_terms": 16,
+   "active": {
+    "goal": "the new content appears exactly once AND the seed content survives",
+    "machine": "TARBALL",
+    "order": "active",
+    "judgments": 2,
+    "survivors": 5,
+    "smallest": [
+     [
+      "card==3"
+     ],
+     [
+      "count[probe_new_content]==1"
+     ],
+     [
+      "has[probe_member]=probe_new_content"
+     ],
+     [
+      "ident_order==('seed', 'seed2', 'probe_member')"
+     ],
+     [
+      "multiset==('probe_new_content', 'probe_second_content', 'probe_seed_content')"
+     ]
+    ],
+    "trace": [
+     {
+      "judgments": 1,
+      "survivors": 11,
+      "smallest": [
+       [
+        "card==3"
+       ],
+       [
+        "contents_distinct"
+       ],
+       [
+        "first==probe_seed_content"
+       ],
+       [
+        "count[probe_new_content]==1"
+       ],
+       [
+        "count[probe_seed_content]==1"
+       ],
+       [
+        "has[seed]=probe_seed_content"
+       ]
+      ]
+     },
+     {
+      "judgments": 2,
+      "survivors": 5,
+      "smallest": [
+       [
+        "card==3"
+       ],
+       [
+        "count[probe_new_content]==1"
+       ],
+       [
+        "has[probe_member]=probe_new_content"
+       ],
+       [
+        "ident_order==('seed', 'seed2', 'probe_member')"
+       ],
+       [
+        "multiset==('probe_new_content', 'probe_second_content', 'probe_seed_content')"
+       ]
+      ]
+     }
+    ],
+    "held_out_states": 0,
+    "held_out_false_accepts": [],
+    "held_out_false_accept_count": 0,
+    "identified": false,
+    "survivors_after_first_judgment": 11,
+    "behaviour": {
+     "behavioural_classes": 1,
+     "behaviourally_identified": true,
+     "separable_pairs": 0,
+     "class_sizes": [
+      5
+     ]
+    },
+    "unjudged_states_that_split": 0
+   },
+   "in_order": {
+    "goal": "the new content appears exactly once AND the seed content survives",
+    "machine": "TARBALL",
+    "order": "pool",
+    "judgments": 2,
+    "survivors": 5,
+    "smallest": [
+     [
+      "card==3"
+     ],
+     [
+      "count[probe_new_content]==1"
+     ],
+     [
+      "has[probe_member]=probe_new_content"
+     ],
+     [
+      "ident_order==('seed', 'seed2', 'probe_member')"
+     ],
+     [
+      "multiset==('probe_new_content', 'probe_second_content', 'probe_seed_content')"
+     ]
+    ],
+    "trace": [
+     {
+      "judgments": 1,
+      "survivors": 11,
+      "smallest": [
+       [
+        "card==3"
+       ],
+       [
+        "contents_distinct"
+       ],
+       [
+        "first==probe_seed_content"
+       ],
+       [
+        "count[probe_new_content]==1"
+       ],
+       [
+        "count[probe_seed_content]==1"
+       ],
+       [
+        "has[seed]=probe_seed_content"
+       ]
+      ]
+     },
+     {
+      "judgments": 2,
+      "survivors": 5,
+      "smallest": [
+       [
+        "card==3"
+       ],
+       [
+        "count[probe_new_content]==1"
+       ],
+       [
+        "has[probe_member]=probe_new_content"
+       ],
+       [
+        "ident_order==('seed', 'seed2', 'probe_member')"
+       ],
+       [
+        "multiset==('probe_new_content', 'probe_second_content', 'probe_seed_content')"
+       ]
+      ]
+     }
+    ],
+    "held_out_states": 0,
+    "held_out_false_accepts": [],
+    "held_out_false_accept_count": 0,
+    "identified": false,
+    "survivors_after_first_judgment": 11,
+    "behaviour": {
+     "behavioural_classes": 1,
+     "behaviourally_identified": true,
+     "separable_pairs": 0,
+     "class_sizes": [
+      5
+     ]
+    },
+    "unjudged_states_that_split": 0
+   },
+   "acting": {
+    "planned": true,
+    "atoms": [
+     "TAR_A1"
+    ],
+    "state": [
+     [
+      "seed",
+      "probe_seed_content"
+     ],
+     [
+      "seed2",
+      "probe_second_content"
+     ],
+     [
+      "probe_member",
+      "probe_new_content"
+     ]
+    ],
+    "user_accepts": true,
+    "false_accept": false,
+    "verified_by_the_reader": true
+   },
+   "depth3_check": {
+    "states_reachable_in_3": 4,
+    "behavioural_classes": 1,
+    "behaviourally_identified": true,
+    "new_states_beyond_depth2": 2
+   }
+  },
+  {
+   "goal": "the new content must appear in the subject list exactly once",
+   "machine": "GIT",
+   "pool_states": 10,
+   "pool_accepted": 5,
+   "pool_rejected": 5,
+   "grammar_terms": 41,
+   "active": {
+    "goal": "the new content must appear in the subject list exactly once",
+    "machine": "GIT",
+    "order": "active",
+    "judgments": 4,
+    "survivors": 1,
+    "smallest": [
+     [
+      "count[probe_new_content]==1"
+     ]
+    ],
+    "trace": [
+     {
+      "judgments": 1,
+      "survivors": 12,
+      "smallest": [
+       [
+        "card==3"
+       ],
+       [
+        "order_is_sorted"
+       ],
+       [
+        "contents_distinct"
+       ],
+       [
+        "first==probe_new_content"
+       ],
+       [
+        "count[probe_new_content]==1"
+       ],
+       [
+        "count[probe_seed_content]==1"
+       ]
+      ]
+     },
+     {
+      "judgments": 2,
+      "survivors": 6,
+      "smallest": [
+       [
+        "order_is_sorted"
+       ],
+       [
+        "contents_distinct"
+       ],
+       [
+        "first==probe_new_content"
+       ],
+       [
+        "count[probe_new_content]==1"
+       ],
+       [
+        "count[probe_seed_content]==1"
+       ],
+       [
+        "has[3cd039adc2e3fbe33f226e41539b5f1b8afc5c5c]=probe_seed_content"
+       ]
+      ]
+     },
+     {
+      "judgments": 3,
+      "survivors": 3,
+      "smallest": [
+       [
+        "contents_distinct"
+       ],
+       [
+        "count[probe_new_content]==1"
+       ],
+       [
+        "has[3cd039adc2e3fbe33f226e41539b5f1b8afc5c5c]=probe_seed_content"
+       ]
+      ]
+     },
+     {
+      "judgments": 4,
+      "survivors": 1,
+      "smallest": [
+       [
+        "count[probe_new_content]==1"
+       ]
+      ]
+     }
+    ],
+    "held_out_states": 6,
+    "held_out_false_accepts": [],
+    "held_out_false_accept_count": 0,
+    "identified": true,
+    "survivors_after_first_judgment": 12,
+    "behaviour": {
+     "behavioural_classes": 1,
+     "behaviourally_identified": true,
+     "separable_pairs": 0,
+     "class_sizes": [
+      1
+     ]
+    },
+    "unjudged_states_that_split": 0
+   },
+   "in_order": {
+    "goal": "the new content must appear in the subject list exactly once",
+    "machine": "GIT",
+    "order": "pool",
+    "judgments": 6,
+    "survivors": 1,
+    "smallest": [
+     [
+      "count[probe_new_content]==1"
+     ]
+    ],
+    "trace": [
+     {
+      "judgments": 1,
+      "survivors": 12,
+      "smallest": [
+       [
+        "card==3"
+       ],
+       [
+        "order_is_sorted"
+       ],
+       [
+        "contents_distinct"
+       ],
+       [
+        "first==probe_new_content"
+       ],
+       [
+        "count[probe_new_content]==1"
+       ],
+       [
+        "count[probe_seed_content]==1"
+       ]
+      ]
+     },
+     {
+      "judgments": 2,
+      "survivors": 8,
+      "smallest": [
+       [
+        "card==3"
+       ],
+       [
+        "first==probe_new_content"
+       ],
+       [
+        "count[probe_new_content]==1"
+       ],
+       [
+        "count[probe_second_content]==1"
+       ],
+       [
+        "has[58daaa821f40e88af3959fa1cafeca2164c664d9]=probe_new_content"
+       ],
+       [
+        "has[228272129038e9be5b191518567d9c0affc85849]=probe_second_content"
+       ]
+      ]
+     },
+     {
+      "judgments": 3,
+      "survivors": 2,
+      "smallest": [
+       [
+        "first==probe_new_content"
+       ],
+       [
+        "count[probe_new_content]==1"
+       ]
+      ]
+     },
+     {
+      "judgments": 4,
+      "survivors": 2,
+      "smallest": [
+       [
+        "first==probe_new_content"
+       ],
+       [
+        "count[probe_new_content]==1"
+       ]
+      ]
+     },
+     {
+      "judgments": 5,
+      "survivors": 2,
+      "smallest": [
+       [
+        "first==probe_new_content"
+       ],
+       [
+        "count[probe_new_content]==1"
+       ]
+      ]
+     },
+     {
+      "judgments": 6,
+      "survivors": 1,
+      "smallest": [
+       [
+        "count[probe_new_content]==1"
+       ]
+      ]
+     }
+    ],
+    "held_out_states": 4,
+    "held_out_false_accepts": [],
+    "held_out_false_accept_count": 0,
+    "identified": true,
+    "survivors_after_first_judgment": 12,
+    "behaviour": {
+     "behavioural_classes": 1,
+     "behaviourally_identified": true,
+     "separable_pairs": 0,
+     "class_sizes": [
+      1
+     ]
+    },
+    "unjudged_states_that_split": 0
+   },
+   "acting": {
+    "planned": true,
+    "atoms": [
+     "GIT_A1"
+    ],
+    "state": [
+     [
+      "2d175a4a73cc31e0a421e089b7bb3b79fa1c9195",
+      "probe_new_content"
+     ],
+     [
+      "7e0a1dd4a905657d56b2854d78a88e791fb9774d",
+      "probe_second_content"
+     ],
+     [
+      "6302081b8437fe1d7c004a71aa4b714be5b5cd17",
+      "probe_seed_content"
+     ]
+    ],
+    "user_accepts": true,
+    "false_accept": false,
+    "verified_by_the_reader": true
+   },
+   "depth3_check": {
+    "states_reachable_in_3": 31,
+    "behavioural_classes": 1,
+    "behaviourally_identified": true,
+    "new_states_beyond_depth2": 26
+   }
+  }
+ ],
+ "seconds": 18.1,
+ "model_calls": 0,
+ "parameters_stored": 0,
+ "limits": [
+  "the grammar is a grammar: a discriminator outside it -- a permission, a pixel, a deadline -- is reported NO_DISCRIMINATOR_IN_GRAMMAR rather than approximated",
+  "judgments are produced by real executions but by this tool's own predicate; a human's taste is the next study, and a human who is inconsistent makes the answer empty",
+  "four CLI machines, no display: on a screen the terms are pixels, widget trees and scroll offsets, which is the same problem with more literals"
+ ]
+}
