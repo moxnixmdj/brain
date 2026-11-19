@@ -29,7 +29,7 @@
   ],
   "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
   "producer_cognition_model_dependency_count": 0,
-  "progress_class": "INDEPENDENT_VERIFICATION_OF_A_RELATION_AND_FALSIFICATION_OF_ITS_SCOPE",
+  "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
   "progress_evidence_paths": [
    "canonical/verification/THE_RELATION_NOT_THE_VALUE_THIRTY_20261125_V1.json",
    "canonical/verification/THE_RELATION_NOT_THE_VALUE_FORTY_FIVE_20261125_V1.json",
