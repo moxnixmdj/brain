@@ -49,6 +49,7 @@ from canonical.swe_kernel.instant_one_shot_learning_v1 import (  # noqa: E402
     admit_before_persistence,
     remember_skill,
     replay_skill,
+    run_computer_use_demo,
     OBSERVE_DONE,
     CREDIT_DONE,
     IDENTIFY_DONE,
@@ -766,3 +767,60 @@ def test_replay_refuses_without_identify(tmp_root):
     )
     assert result["phase"] == "REPLAY"
     assert result["status"] == REFUSED
+
+# --------------------------------------------------------------------------- #
+# computer-use task end-to-end demo
+# --------------------------------------------------------------------------- #
+
+
+def test_computer_use_demo_complete(tmp_root):
+    """End-to-end instant one-shot learning on a real computer-use task (cp).
+
+    All 10 phases complete on a real shell command with zero model calls,
+    zero network calls, zero knowledge house. Admission passes on held-out
+    Python victims, and REPLAY reproduces the skill on a new state.
+    """
+    engine = InstantOneShotLearning(tmp_root)
+
+    # Seed the input file so cp can run
+    (tmp_root / "in.txt").write_bytes(b"hello\n")
+
+    report = run_computer_use_demo(engine, task_name="cp")
+
+    assert report["status"] == "COMPLETE"
+    assert report["result"] == "INSTANT_ONE_SHOT_LEARNING_COMPLETE"
+    assert report["admitted"] is True
+    assert report["model_calls"] == 0
+    assert report["network_calls"] == 0
+    assert report["stored_knowledge_bytes"] == 0
+    assert report["knowledge_house"] is False
+
+    # All 10 phases done
+    phase_statuses = {p["phase"]: p["status"] for p in report["phases"]}
+    assert phase_statuses["OBSERVE"] == "OBSERVE_DONE__TRACE_CAPTURED"
+    assert phase_statuses["CREDIT"] == "CREDIT_DONE__CAUSAL_STEPS_IDENTIFIED"
+    assert phase_statuses["IDENTIFY"] == "IDENTIFY_DONE__RULE_CLOSED"
+    assert phase_statuses["CONTRACT"] == "CONTRACT_DONE__EFFECT_CONTRACT_EXTRACTED"
+    assert phase_statuses["APPLICABILITY"] == "APPLICABILITY_DONE__APPLICABILITY_CLASSIFIED"
+    assert phase_statuses["COMPOSE"] == "COMPOSE_DONE__CHAIN_VERIFIED"
+    assert phase_statuses["HORIZON"] == "HORIZON_DONE__SUBGOALS_EXECUTED"
+    assert phase_statuses["ADMIT"] == "ADMIT_DONE__HELD_OUT_VALIDATED"
+    assert phase_statuses["REMEMBER"] == "REMEMBER_DONE__PERSISTED_TO_STORE"
+    assert phase_statuses["REPLAY"] == "REPLAY_DONE__REPRODUCED_ON_NEW_STATE"
+
+    # Replay verified
+    assert report["replay_done"] is True
+    assert report["replay_return_code"] == 0
+
+    # Computer-use task recorded
+    assert report["computer_use_task"]["name"] == "cp"
+    assert report["computer_use_task"]["right_command"] == "cp in.txt out.dat"
+
+
+def test_computer_use_demo_unknown_task_refuses(tmp_root):
+    """Unknown computer-use task is refused."""
+    engine = InstantOneShotLearning(tmp_root)
+    report = run_computer_use_demo(engine, task_name="nonexistent_task")
+    assert report["status"] == "REFUSED__ONE_SHOT_LEARNING_FAILED"
+    assert "TASK_NOT_FOUND" in report["reason"]
+
