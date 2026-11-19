@@ -42,7 +42,7 @@
  },
  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The residual class was an artifact of the first state of the run. Every suite this project executed began at reset, where the probe count starts at zero and every atom moves it by at most one, so created_once[c] and monotone[c] and final:count[c]==1 are the same sentence at every depth, on every machine. One real action from one real pre-state -- write the probe content to `seed`, then copy `seed` to `copy` -- separates them: 80 pre-state experiments over three machines, 25 separations, 8 substantive (all created_once without the single-copy sentence, all exit 0), the goal's class 2 -> 1 with the conjunction as the survivor, and behaviours 429 -> 649 as the honest cost. The price of what was called irreducible is 2 actions and 0 questions of the user.",
- "canonical_base_commit": "4f4c843dad8425d976da1ce60b4fdeeaebb360ba",
+ "canonical_base_commit": "932ddb7889d45d12c9725967927a5e642cb86153",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -115,7 +115,7 @@
    "hypotheses": 17955,
    "standard": 2,
    "widened": 1,
-   "widened_text": "created_once[probe_new_content] ∧ final:count[probe_new_content]==1"
+   "widened_text": "created_once[probe_new_content] \u2227 final:count[probe_new_content]==1"
   },
   "honest_cost": {
    "behaviours_standard": 429,
@@ -201,7 +201,7 @@
  ],
  "real_outcome": "That the ceiling was the convention: the residual the previous receipt could not separate is forced by starting at reset, and one action from a reachable pre-state separates it at zero questions; that the goal's class over a fixed 189-term grammar falls from 2 statements to 1, the conjunction created_once and final:count==1; and that the honest cost is 429 -> 649 behaviours, with TARBALL unable to show a second copy at all because its reader folds same-name members into one doubled row.",
  "recursive_obs": {
-  "canonical_base_commit": "4f4c843dad8425d976da1ce60b4fdeeaebb360ba",
+  "canonical_base_commit": "932ddb7889d45d12c9725967927a5e642cb86153",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "a suite that begins every run at the machine's reset state",
@@ -505,15 +505,13 @@
      "route": "PRICE_THE_RESIDUAL_CLASS_OF_EVERY_GOAL_ACROSS_ENVIRONMENTS_AND_ANSWER_IT_IN_WORDS"
     },
     {
-     "route": "SEPARATE_THE_RESIDUAL_BY_LETTING_THE_RUN_BEGIN_WHERE_THE_MACHINE_ALREADY_IS",
-     "resolution": "SELECTED",
      "comparison": {
-      "CORRECTNESS": "one real action from a pre-state the machine actually reaches, with the pre-state reproduced before the action is judged",
       "CAPABILITY_STRENGTH": "the goal's class 2 -> 1 over a fixed 189-term grammar; 8 substantive witnesses on 2 machines",
-      "WALL_CLOCK": "36.6 s for 80 experiments and the whole analysis",
+      "CORRECTNESS": "one real action from a pre-state the machine actually reaches, with the pre-state reproduced before the action is judged",
       "INCREMENTAL_COST": "0 parameters, 0 model calls, 2 actions of prefix at most",
       "RELIABILITY": "0 fabricated pre-states; the only degenerate direction is proved impossible, not assumed",
-      "VERIFIABILITY": "receipt rows plus 13 tests that re-execute the round"
+      "VERIFIABILITY": "receipt rows plus 13 tests that re-execute the round",
+      "WALL_CLOCK": "36.6 s for 80 experiments and the whole analysis"
      },
      "evidence": [
       "canonical/verification/THE_PRE_STATE_IS_THE_MISSING_PART_20261116_V1.json",
@@ -524,7 +522,9 @@
      ],
      "qualification_evidence_classes": [
       "DIRECT_PROBE"
-     ]
+     ],
+     "resolution": "SELECTED",
+     "route": "SEPARATE_THE_RESIDUAL_BY_LETTING_THE_RUN_BEGIN_WHERE_THE_MACHINE_ALREADY_IS"
     }
    ],
    "checked_at_utc": "2026-11-19T03:36:08Z",
