@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "c3090bdc994799ec55cb6783de599a6b331308335f2682326c3e3d123a60f8de"
+  "value": "acad31d6e2d0d087d3b0adcd3a912943671b155da1743a3adc34db0cfc76f78a"
  },
  "engines": [
   {
@@ -237063,7 +237063,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/AN_ACTIONS_VOCABULARY_IS_ITS_REFUSAL_SURFACE_20261119_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "e7c668ad82e166677b658b819f1e1dab97acae6c2b74b151404de6d5b8ce9e88",
+   "sha256": "3a93b09d68e31563f3d451aec46e01deff099a3264515e625eadc7e207116678",
    "status": "PROPOSED__PRODUCER_MEASURED__5_OF_6_MET__1_HONEST_NEGATIVE__VOCABULARY_NO_LONGER",
    "terms": {
     "123": 1,
