@@ -43,7 +43,7 @@
  },
  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The wall is coverage, not hypotheses, and coverage is an exploration budget: the agent must visit states that vary the facts it needs to rule out, and it cannot know which those are until it has visited them. Soundness and coverage are both necessary -- coverage without soundness is undecided, soundness without coverage is confidently wrong -- so the one thing worth parameters is choosing the next state variation that maximally splits the survivor set, with any column whose check disagrees with the action's own outcome rejected first.",
- "canonical_base_commit": "9e832e7263bbbfb378c6f21b28c5bf8e3e021823",
+ "canonical_base_commit": "c35892faec7683e10cbbc8f117cb31f6176121f4",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -155,7 +155,7 @@
  ],
  "real_outcome": "That the certificate's 8,388,608 was the cost of enumerating, not of identifying: identification is coverage-linear (<=24 executions), a success is the irrelevance evidence, and the residue is abstention caused either by unvaried facts or by a column whose check is narrower than its claim.",
  "recursive_obs": {
-  "canonical_base_commit": "9e832e7263bbbfb378c6f21b28c5bf8e3e021823",
+  "canonical_base_commit": "c35892faec7683e10cbbc8f117cb31f6176121f4",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "the enumeration of hypothesis sets",
