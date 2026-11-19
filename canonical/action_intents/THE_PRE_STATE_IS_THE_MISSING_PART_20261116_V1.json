@@ -42,7 +42,7 @@
  },
  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The residual class was an artifact of the first state of the run. Every suite this project executed began at reset, where the probe count starts at zero and every atom moves it by at most one, so created_once[c] and monotone[c] and final:count[c]==1 are the same sentence at every depth, on every machine. One real action from one real pre-state -- write the probe content to `seed`, then copy `seed` to `copy` -- separates them: 80 pre-state experiments over three machines, 25 separations, 8 substantive (all created_once without the single-copy sentence, all exit 0), the goal's class 2 -> 1 with the conjunction as the survivor, and behaviours 429 -> 649 as the honest cost. The price of what was called irreducible is 2 actions and 0 questions of the user.",
- "canonical_base_commit": "7b88d0c5bd34a188e0f9a1e99b64073b30f1f625",
+ "canonical_base_commit": "4f4c843dad8425d976da1ce60b4fdeeaebb360ba",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -86,82 +86,11 @@
  },
  "measured_effect": {
   "authority": "NONE__PRODUCER_RUN_SANDBOX",
-  "what_was_withdrawn": {
-   "previous_residual_statements": 2,
-   "previous_questions_of_the_user": 1.0,
-   "previous_runs_that_could_pay_it": 0,
-   "why_it_appeared": "every run began at reset with the probe count at zero and unit steps, which makes created_once and monotone and final:count==1 the same sentence at every depth"
-  },
-  "standard_suite": {
-   "runs": {
-    "TARBALL": 87,
-    "FILESYSTEM": 68,
-    "SQLITE": 48
-   },
-   "runs_total": 203,
-   "pair_disagreements": 0,
-   "delta_values_by_machine": {
-    "TARBALL": [
-     -1,
-     0,
-     1
-    ],
-    "FILESYSTEM": [
-     -1,
-     0,
-     1
-    ],
-    "SQLITE": [
-     0,
-     1
-    ]
-   }
-  },
-  "pre_state_experiments": {
-   "experiments": 80,
-   "separations": 25,
-   "substantive": 8,
-   "degenerate": 17,
-   "degenerate_accepted_no_ops": 15,
-   "degenerate_refusals": 2,
-   "not_reproduced": 0,
-   "pre_states": {
-    "TARBALL": 5,
-    "FILESYSTEM": 8,
-    "SQLITE": 5
-   }
-  },
-  "first_substantive_witness": {
-   "machine": "FILESYSTEM",
-   "prefix": [
-    "FS_A1"
-   ],
-   "atom": "FS_A4",
-   "count_before": 1,
-   "count_after": 2,
-   "delta": 1
-  },
-  "price": {
-   "questions_of_the_user": 0,
-   "actions": 2,
-   "previous_price": "log2(2) = 1 question, 0 runs"
-  },
-  "goal_class": {
-   "standard": 2,
-   "widened": 1,
-   "widened_text": "created_once[probe_new_content] ∧ final:count[probe_new_content]==1",
-   "grammar_terms": 189,
-   "hypotheses": 17955
-  },
-  "honest_cost": {
-   "behaviours_standard": 429,
-   "behaviours_widened": 649
-  },
-  "reader_limit": {
-   "machine": "TARBALL",
-   "count_after_one_append": 1,
-   "count_after_two_appends": 0,
-   "why": "two members named `seed`; extracting by name prints both bodies, so each row carries the doubled text and no row equals the probe content"
+  "cost": {
+   "model_calls": 0,
+   "network_calls_at_run_time": 0,
+   "parameters_stored": 0,
+   "seconds": 36.6
   },
   "declared_acceptance": {
    "P1": "MET (0 disagreements, unit steps measured)",
@@ -171,13 +100,84 @@
    "P5": "MET (0 pre-states fabricated, no substantive witness a refusal)",
    "P6": "MET (0 model calls, 0 parameters)"
   },
+  "first_substantive_witness": {
+   "atom": "FS_A4",
+   "count_after": 2,
+   "count_before": 1,
+   "delta": 1,
+   "machine": "FILESYSTEM",
+   "prefix": [
+    "FS_A1"
+   ]
+  },
+  "goal_class": {
+   "grammar_terms": 189,
+   "hypotheses": 17955,
+   "standard": 2,
+   "widened": 1,
+   "widened_text": "created_once[probe_new_content] ∧ final:count[probe_new_content]==1"
+  },
+  "honest_cost": {
+   "behaviours_standard": 429,
+   "behaviours_widened": 649
+  },
   "markdown": "THE_PRE_STATE_IS_THE_MISSING_PART_20261116_V1.md",
+  "pre_state_experiments": {
+   "degenerate": 17,
+   "degenerate_accepted_no_ops": 15,
+   "degenerate_refusals": 2,
+   "experiments": 80,
+   "not_reproduced": 0,
+   "pre_states": {
+    "FILESYSTEM": 8,
+    "SQLITE": 5,
+    "TARBALL": 5
+   },
+   "separations": 25,
+   "substantive": 8
+  },
+  "price": {
+   "actions": 2,
+   "previous_price": "log2(2) = 1 question, 0 runs",
+   "questions_of_the_user": 0
+  },
+  "reader_limit": {
+   "count_after_one_append": 1,
+   "count_after_two_appends": 0,
+   "machine": "TARBALL",
+   "why": "two members named `seed`; extracting by name prints both bodies, so each row carries the doubled text and no row equals the probe content"
+  },
   "receipt": "canonical/verification/THE_PRE_STATE_IS_THE_MISSING_PART_20261116_V1.json",
-  "cost": {
-   "model_calls": 0,
-   "network_calls_at_run_time": 0,
-   "parameters_stored": 0,
-   "seconds": 36.6
+  "standard_suite": {
+   "delta_values_by_machine": {
+    "FILESYSTEM": [
+     -1,
+     0,
+     1
+    ],
+    "SQLITE": [
+     0,
+     1
+    ],
+    "TARBALL": [
+     -1,
+     0,
+     1
+    ]
+   },
+   "pair_disagreements": 0,
+   "runs": {
+    "FILESYSTEM": 68,
+    "SQLITE": 48,
+    "TARBALL": 87
+   },
+   "runs_total": 203
+  },
+  "what_was_withdrawn": {
+   "previous_questions_of_the_user": 1.0,
+   "previous_residual_statements": 2,
+   "previous_runs_that_could_pay_it": 0,
+   "why_it_appeared": "every run began at reset with the probe count at zero and unit steps, which makes created_once and monotone and final:count==1 the same sentence at every depth"
   }
  },
  "next_step": "Move from a state the experimenter chose to a state a repository is in. Take one real repository task judged by its own tests; the pre-state is the working tree as it is, including uncommitted changes and a failed prior edit, and the prefix that reaches it is git stash/apply or the reflog, executed and not simulated. Prediction: at least one pair of goal statements that no clean-checkout run can separate becomes separable by a run beginning from a dirty tree, at a price of at most three real actions and zero questions. Falsifier: if the clean-checkout suite alone separates every residual pair on the first real repo, this law is local to file-and-archive machines and must be withdrawn; a separation obtained only by the tool refusing to run counts as nothing.",
@@ -201,7 +201,7 @@
  ],
  "real_outcome": "That the ceiling was the convention: the residual the previous receipt could not separate is forced by starting at reset, and one action from a reachable pre-state separates it at zero questions; that the goal's class over a fixed 189-term grammar falls from 2 statements to 1, the conjunction created_once and final:count==1; and that the honest cost is 429 -> 649 behaviours, with TARBALL unable to show a second copy at all because its reader folds same-name members into one doubled row.",
  "recursive_obs": {
-  "canonical_base_commit": "7b88d0c5bd34a188e0f9a1e99b64073b30f1f625",
+  "canonical_base_commit": "4f4c843dad8425d976da1ce60b4fdeeaebb360ba",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "a suite that begins every run at the machine's reset state",
@@ -267,8 +267,10 @@
     "BYPASS",
     "REUSE",
     "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
     "COMPOSE",
-    "CONFIGURE"
+    "CONFIGURE",
+    "INTEGRATE"
    ],
    "efficiency_mechanism": "80 experiments and 36.6 s: replay a prefix, refuse unless the pre-state is reproduced, execute one atom, read once. The same experiments measure the unit-step premise and the separation",
    "generality_mechanism": "nothing is specific to these machines: any executed action can be tried from any reachable pre-state, and the statement pair is a boolean function of the run",
@@ -480,9 +482,9 @@
     {
      "comparison": {
       "CAPABILITY_STRENGTH": "prices breadth and its saturation: 622 behaviours, the goal's class 4 -> 2 -> 2, a residual of one question of words",
-      "CORRECTNESS": "every number is a bitmask count over 555 executed runs; all seven subsets are reported, so no environment is taken on faith",
+      "CORRECTNESS": "correct for suites that begin at reset, where the pair is forced to agree; not a claim about the machines",
       "INCREMENTAL_COST": "0 parameters, 0 model calls, one term evaluation per machine",
-      "RELIABILITY": "sound and self-correcting: the previous round's syntactic count is retracted inside the receipt, with the arithmetic",
+      "RELIABILITY": "superseded: the residual it priced in words is separated by one action from a reachable pre-state, at zero questions",
       "VERIFIABILITY": "receipt rows, producer-run, every count pinned in the suite",
       "WALL_CLOCK": "108.8 s for three machines, 555 runs, 29 890 hypotheses and seven subsets"
      },
@@ -499,11 +501,33 @@
      "qualification_evidence_classes": [
       "DIRECT_PROBE"
      ],
-     "resolution": "SELECTED",
+     "resolution": "DISQUALIFIED",
      "route": "PRICE_THE_RESIDUAL_CLASS_OF_EVERY_GOAL_ACROSS_ENVIRONMENTS_AND_ANSWER_IT_IN_WORDS"
+    },
+    {
+     "route": "SEPARATE_THE_RESIDUAL_BY_LETTING_THE_RUN_BEGIN_WHERE_THE_MACHINE_ALREADY_IS",
+     "resolution": "SELECTED",
+     "comparison": {
+      "CORRECTNESS": "one real action from a pre-state the machine actually reaches, with the pre-state reproduced before the action is judged",
+      "CAPABILITY_STRENGTH": "the goal's class 2 -> 1 over a fixed 189-term grammar; 8 substantive witnesses on 2 machines",
+      "WALL_CLOCK": "36.6 s for 80 experiments and the whole analysis",
+      "INCREMENTAL_COST": "0 parameters, 0 model calls, 2 actions of prefix at most",
+      "RELIABILITY": "0 fabricated pre-states; the only degenerate direction is proved impossible, not assumed",
+      "VERIFIABILITY": "receipt rows plus 13 tests that re-execute the round"
+     },
+     "evidence": [
+      "canonical/verification/THE_PRE_STATE_IS_THE_MISSING_PART_20261116_V1.json",
+      "canonical/tests/test_the_pre_state_is_the_missing_part_v1.py"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/BREADTH_BUYS_WHAT_REPETITION_CANNOT_20261201_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ]
     }
    ],
-   "checked_at_utc": "2026-11-19T03:11:07Z",
+   "checked_at_utc": "2026-11-19T03:36:08Z",
    "comparison_dimensions": [
     "CORRECTNESS",
     "CAPABILITY_STRENGTH",
@@ -540,15 +564,15 @@
     "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
     "BEFORE_SCARCE_GATE_SPEND"
    ],
-   "selected_route": "PRICE_THE_RESIDUAL_CLASS_OF_EVERY_GOAL_ACROSS_ENVIRONMENTS_AND_ANSWER_IT_IN_WORDS",
+   "selected_route": "SEPARATE_THE_RESIDUAL_BY_LETTING_THE_RUN_BEGIN_WHERE_THE_MACHINE_ALREADY_IS",
    "selected_route_preflight": {
     "all_required_dependencies_ready": true,
-    "checked_at_utc": "2026-11-19T03:11:07Z",
+    "checked_at_utc": "2026-11-19T03:36:08Z",
     "execution_dependencies": [
      {
       "dependency": "local Python 3.11 runtime with pytest",
       "evidence": [
-       "10 instrument tests pass in 110 s; 33/33 unified-model gates pass"
+       "13 instrument tests pass in 36.5 s; 33/33 unified-model gates pass"
       ],
       "evidence_classes": [
        "DIRECT_PROBE"
@@ -563,7 +587,7 @@
      {
       "dependency": "real tool binaries the machines drive (sh, mv, cp, rm, sqlite3, tar)",
       "evidence": [
-       "555 real runs across three machines, 244 terms evaluated once per machine, seven subsets analysed"
+       "203 reset-started runs plus 80 pre-state experiments across three machines, 0 pre-states fabricated"
       ],
       "evidence_classes": [
        "DIRECT_PROBE"
@@ -576,9 +600,9 @@
       "volatility": "STATIC"
      },
      {
-      "dependency": "local tempdir for one fresh reset per machine and per run",
+      "dependency": "local tempdir for one fresh reset and one prefix replay per experiment",
       "evidence": [
-       "one reset per sequence; runs deduplicated by trace; 30 sequences kept undeduplicated for the atom goal"
+       "each experiment replays a real prefix and refuses itself unless the recorded pre-state is reproduced; 0 refusals of that kind"
       ],
       "evidence_classes": [
        "DIRECT_PROBE"
@@ -594,7 +618,7 @@
     "execution_dependencies_complete": true,
     "failed_dependencies": [],
     "max_age_hours": 2,
-    "selected_route": "PRICE_THE_RESIDUAL_CLASS_OF_EVERY_GOAL_ACROSS_ENVIRONMENTS_AND_ANSWER_IT_IN_WORDS",
+    "selected_route": "SEPARATE_THE_RESIDUAL_BY_LETTING_THE_RUN_BEGIN_WHERE_THE_MACHINE_ALREADY_IS",
     "status": "READY"
    },
    "source_classes_checked": [
