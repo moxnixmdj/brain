@@ -31,9 +31,10 @@
   "producer_cognition_model_dependency_count": 0,
   "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
   "progress_evidence_paths": [
-   "canonical/verification/THE_HYPOTHESIS_GRAMMAR_IS_THE_BOTTLENECK_20261122_V1.json",
-   "THE_HYPOTHESIS_GRAMMAR_IS_THE_BOTTLENECK_20261122_V1.md",
-   "canonical/tools/the_space_is_the_artifact_v1.py"
+   "canonical/verification/THE_VOCABULARY_IS_THE_ARTIFACT_20261125_V1.json",
+   "THE_VOCABULARY_IS_THE_ARTIFACT_20261125_V1.md",
+   "canonical/tools/the_vocabulary_is_the_artifact_v1.py",
+   "canonical/tests/test_the_vocabulary_is_the_artifact_v1.py"
   ],
   "route_class": "SYNTHESIZE_NEW_PRIMITIVE",
   "scope_complete_discharge": false,
@@ -41,7 +42,7 @@
  },
  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The observable vocabulary. An agent whose effects are cardinality and multiset cannot see a rename or a re-ordering, so it cannot state the goal, cannot choose the only atom that achieves it, and cannot know it succeeded. Measured on five real machines: 3 of 6 requests are unstateable, and for 2 of them the atom that does the job is the atom the vocabulary calls inert.",
- "canonical_base_commit": "575e9c0b3d7420c991b53eca673cc5589c35114f",
+ "canonical_base_commit": "d2b698bc3ed79de1947570127bdc81aa701ccc3e",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -85,26 +86,6 @@
  },
  "measured_effect": {
   "authority": "NONE__PRODUCER_RUN_SANDBOX",
-  "machines": [
-   "FILESYSTEM",
-   "GIT",
-   "TARBALL",
-   "SQLITE",
-   "SORT"
-  ],
-  "cost": {
-   "model_calls": 0,
-   "parameters_stored": 0,
-   "seconds": 7.1,
-   "network_calls_at_run_time": 0
-  },
-  "declared_acceptance": {
-   "A1_3_unstateable_then_solved_on_3_machines": "MET (3: FILESYSTEM, SORT, SQLITE)",
-   "A2_nothing_solved_is_lost": "MET",
-   "A3_goal_directed_smaller_and_blindness_real": "MET (3 of 5 relations used; 3 atoms invisible to FIXED)",
-   "A4_reproduced_by_a_second_full_pass": "MET",
-   "A5_zero_model_calls_zero_parameters": "MET"
-  },
   "blindness": {
    "atoms_invisible_to_fixed": 3,
    "filesystem": [
@@ -115,10 +96,18 @@
     "SRT_A2 (tac)"
    ]
   },
-  "the_causal_link": "for 2 of the 3 recovered requests the solving atom is one the fixed vocabulary called inert",
-  "second_failure_mode": "SQLITE UPDATE is visible to FIXED; what is unstateable is the goal (no identity->content binding)",
-  "excluded": {
-   "GIT": "hash_before == hash_after for an amend with the same message in the same second: no offered atom can produce a new commit object with the same subjects"
+  "cost": {
+   "model_calls": 0,
+   "network_calls_at_run_time": 0,
+   "parameters_stored": 0,
+   "seconds": 7.1
+  },
+  "declared_acceptance": {
+   "A1_3_unstateable_then_solved_on_3_machines": "MET (3: FILESYSTEM, SORT, SQLITE)",
+   "A2_nothing_solved_is_lost": "MET",
+   "A3_goal_directed_smaller_and_blindness_real": "MET (3 of 5 relations used; 3 atoms invisible to FIXED)",
+   "A4_reproduced_by_a_second_full_pass": "MET",
+   "A5_zero_model_calls_zero_parameters": "MET"
   },
   "distinguishable_atom_pairs": {
    "FILESYSTEM": {
@@ -130,13 +119,25 @@
     "full": 5
    }
   },
-  "receipt": "canonical/verification/THE_VOCABULARY_IS_THE_ARTIFACT_20261125_V1.json",
+  "excluded": {
+   "GIT": "hash_before == hash_after for an amend with the same message in the same second: no offered atom can produce a new commit object with the same subjects"
+  },
   "external_2026": [
    "OSWorld 2.0 (arXiv 2606.29537): best binary 20.6%; 'all current agents are weak at recovering and maintaining hidden state ... state the instruction does not provide directly'",
    "dynamic predicate invention with meta-interpretive learning (arXiv 2602.17217)",
    "TheoryCoder-2 growing a library of learned predicate classifiers (arXiv 2602.00929)",
    "ExoPredicator predicate invention from 1-2 demonstrations (ICLR 2026) -- all three propose predicates with a language model; this round computes them from the reader with no model"
-  ]
+  ],
+  "machines": [
+   "FILESYSTEM",
+   "GIT",
+   "TARBALL",
+   "SQLITE",
+   "SORT"
+  ],
+  "receipt": "canonical/verification/THE_VOCABULARY_IS_THE_ARTIFACT_20261125_V1.json",
+  "second_failure_mode": "SQLITE UPDATE is visible to FIXED; what is unstateable is the goal (no identity->content binding)",
+  "the_causal_link": "for 2 of the 3 recovered requests the solving atom is one the fixed vocabulary called inert"
  },
  "next_step": "Goal-directed relation invention: given real accepted/rejected state pairs from the same five machines, search a grammar of relations over the reader's output for the smallest relation that separates every pair, add exactly that relation, and then plan. Acceptance declared before the run: the invented relation separates every given pair, is minimal among the separating relations, and turns at least one previously unstateable request into a solved one, with 0 parameters and the reader as the only judge.",
  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -160,7 +161,7 @@
  ],
  "real_outcome": "Not that environments cannot be learned, but that a fixed vocabulary of effects closes doors before any search begins: it hides the atom (mv, sort) or it cannot state the goal (a row's value). The vocabulary must be derived from the reader and admitted only where a goal uses it.",
  "recursive_obs": {
-  "canonical_base_commit": "575e9c0b3d7420c991b53eca673cc5589c35114f",
+  "canonical_base_commit": "d2b698bc3ed79de1947570127bdc81aa701ccc3e",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "a hand-written effect list (PERSIST/REMOVE/REPLACE) as the representation of what an action does",
@@ -546,9 +547,9 @@
    "python3 canonical/tools/the_vocabulary_is_the_artifact_v1.py --receipt canonical/verification/THE_VOCABULARY_IS_THE_ARTIFACT_20261125_V1.json",
    "python3 -m pytest canonical/tests/test_the_vocabulary_is_the_artifact_v1.py -q"
   ],
-  "tests_green": 43,
   "independent_verification_completed": false,
-  "independent_verification_required": true
+  "independent_verification_required": true,
+  "tests_green": 43
  },
  "weakens_existing_guard": false
 }
