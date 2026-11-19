@@ -221,11 +221,18 @@ this change. No assertion was relaxed; no failure was hidden.
 3. **A state key that can see what the page's behaviour depends on** — 3 pages stop because the
    same look behaves differently; that is a missing observable, and the insufficiency
    certificate is the instrument that decides whether a given observable can separate them.
-4. **Wire the existing admission gate into every autonomous caller** so nothing is admitted
-   `UNGATED` silently: `autonomous_awake_loop_v1`, `cow_impact_repair_engine_v1`,
-   `multistep_repo_closed_loop_solver_v1`, `retained_repair_session_v1` (structurally one
-   target — record the limitation), `swe_self_improvement_bridge_v1`. Each caller owns a
-   victim corpus with specs, or the row stays `UNGATED` and is counted.
+4. **Done in this branch (`arena/53c84b6b-brain`):** wired held-out admission victims into
+   every `crystallize_code_fix` call in `autonomous_awake_loop_v1.py` (3 call sites:
+   `AWAKE_CONFINED_MULTIFILE_REPAIR`, and two `AWAKE_DISCOVERED_REPAIR` paths). A new
+   `_admission_victims_for()` helper builds victims from OTHER workspace modules (never the
+   module under repair, never test/`__pycache__`/conftest files), each with an oracle that
+   freezes the module's current behaviour via `run_snippet` at probe points `(0,1,5,10,100)`.
+   The admission gate then checks `PRESERVED` (already-correct code untouched) or `BROKEN`
+   / `REGRESSED` (reject + invalidate any existing live copy). Where no probeable victim
+   exists the call falls back to the previous behaviour rather than admitting blindly.
+   Remaining callers (`cow_impact_repair_engine_v1`, `multistep_repo_closed_loop_solver_v1`,
+   `retained_repair_session_v1`, `swe_self_improvement_bridge_v1`) still pass no victims and
+   remain `UNGATED` — recorded as a known limitation, not hidden.
 5. **Weights last:** consolidate only admitted, deduplicated, contrastive traces (on-policy
    self-distillation or sparse/low-rank updates, replay, reserved no-retrieval probes), after
    1–4 exist, gated ENGRAM-style (candidate without retrieval must match base+retrieval on
