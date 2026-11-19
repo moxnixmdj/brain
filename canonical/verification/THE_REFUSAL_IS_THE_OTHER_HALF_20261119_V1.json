@@ -1,0 +1,2092 @@
+{
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "cost": {
+  "executions": 48,
+  "model_calls": 0,
+  "network_calls_at_run_time": 0,
+  "parameters_stored": 0,
+  "seconds": 0.6
+ },
+ "date": "2026-11-19",
+ "declared_acceptance_before_the_receipt_run": {
+  "K1": "after the single success every action still has more than one distinct behaviour consistent",
+  "K2": "for every action: each violation changes exactly one fact and it is the dropped coordinate, every violation is refused, distinct coordinates give distinct messages, and the same coordinate under a different distractor gives the same message",
+  "K3": "one refusal per coordinate leaves exactly one distinct behaviour, and it is the true precondition",
+  "K4": "every refusal leaves the tree byte-identical",
+  "K5": "every action is identified with 1 success + k refusals, against 160 state interventions and 0",
+  "K6": "zero model calls, zero parameters, zero network"
+ },
+ "limits": [
+  "the fact vector is measured with the program's own check where one exists (tar -tzf, gzip -t, patch --dry-run, git diff --quiet), and at least one of those checks is measurably narrower than the fact it is used for -- recorded in K2, not hidden",
+  "ten actions, one machine, one producer; a census of these ten",
+  "the fact vector is hand-written: the agent must be given (or construct) the nine facts a state is described by, and no refusal tells it which facts exist -- this is the reach bottleneck, restated",
+  "the message is normalised by a declared rewrite (paths and distractor names out); the rewrite is a part and it is counted as one, while injectivity and invariance are measured on what remains",
+  "identification is up to the states measured: one distinct behaviour over these states, not over the world",
+  "some real failures are destructive; this sample's are not, and K4 measures that rather than assuming it",
+  "a refusal names a missing fact; it does not say how to obtain it, and nothing here builds the remedy"
+ ],
+ "mode": "BREAK_EACH_REAL_ACTION_ONCE_PER_COORDINATE_AND_MEASURE_WHETHER_THE_REFUSAL_IS_A_DECLARATION",
+ "rows": [
+  {
+   "action": "git_stash_pop",
+   "argv": [
+    "git",
+    "-c",
+    "user.email=a@b.c",
+    "-c",
+    "user.name=t",
+    "-c",
+    "commit.gpgsign=false",
+    "stash",
+    "pop"
+   ],
+   "base": {
+    "applied": true,
+    "coord": null,
+    "facts": {
+     "clean": true,
+     "repo_present": true,
+     "stash": true,
+     "template_present": true,
+     "tools_present": true
+    },
+    "message": "On branch main Changes not staged for commit: (use \"git add <file>...\" to update what will be committed) (use \"git restore <file>...\" to discard changes in working directory) modified: README.txt no changes added to commit (use \"git add\" and/or \"git commit -a\") Dropped refs/stash@{0} (a890a35fccb208e9de08e74190bbafd63c80a988)",
+    "only_bookkeeping": false,
+    "raw_message": "On branch main\nChanges not staged for commit:\n  (use \"git add <file>...\" to update what will be committed)\n  (use \"git restore <file>...\" to discard changes in working directory)\n\tmodified:   README.txt\n\nno changes added to commit (use \"git add\" and/or \"git commit -a\")\nDropped refs/stash@{0} (a890a35fccb208e9de08e74190bbafd63c80a988)\n",
+    "rc": 0,
+    "touched": [
+     "repo/README.txt"
+    ],
+    "tree_unchanged": false,
+    "variant": 0
+   },
+   "coords": [
+    "stash",
+    "clean"
+   ],
+   "each_violation_changed_exactly_one_fact": true,
+   "every_violation_was_refused": true,
+   "facts": [
+    "stash",
+    "clean",
+    "tools_present",
+    "repo_present",
+    "template_present"
+   ],
+   "injective": true,
+   "invariant_under_distractor": true,
+   "messages": {
+    "clean": "error: Your local changes to the following files would be overwritten by merge: README.txt Please commit your changes or stash them before you merge. Aborting On branch main Changes not staged for commit: (use \"git add <file>...\" to update what will be committed) (use \"git restore <file>...\" to discard changes in working directory) modified: README.txt no changes added to commit (use \"git add\" and",
+    "stash": "No stash entries found."
+   },
+   "refusals": 4,
+   "refusals_confined_to_bookkeeping": [],
+   "refusals_that_changed_something": {},
+   "refusals_that_left_the_tree_identical": 4,
+   "states": [
+    {
+     "clean": true,
+     "repo_present": true,
+     "stash": true,
+     "template_present": true,
+     "tools_present": true
+    },
+    {
+     "clean": true,
+     "repo_present": true,
+     "stash": false,
+     "template_present": true,
+     "tools_present": true
+    },
+    {
+     "clean": true,
+     "repo_present": true,
+     "stash": false,
+     "template_present": true,
+     "tools_present": true
+    },
+    {
+     "clean": false,
+     "repo_present": true,
+     "stash": true,
+     "template_present": true,
+     "tools_present": true
+    },
+    {
+     "clean": false,
+     "repo_present": true,
+     "stash": true,
+     "template_present": true,
+     "tools_present": true
+    }
+   ],
+   "the_changed_fact_is_the_dropped_coordinate": true,
+   "violations": [
+    {
+     "coord": "stash",
+     "coords_that_changed": [
+      "stash"
+     ],
+     "facts": {
+      "clean": true,
+      "repo_present": true,
+      "stash": false,
+      "template_present": true,
+      "tools_present": true
+     },
+     "message": "No stash entries found.",
+     "only_bookkeeping": true,
+     "raw_message": "No stash entries found.\n",
+     "rc": 1,
+     "refused": true,
+     "touched": [],
+     "tree_unchanged": true,
+     "variant": 0
+    },
+    {
+     "coord": "stash",
+     "coords_that_changed": [
+      "stash"
+     ],
+     "facts": {
+      "clean": true,
+      "repo_present": true,
+      "stash": false,
+      "template_present": true,
+      "tools_present": true
+     },
+     "message": "No stash entries found.",
+     "only_bookkeeping": true,
+     "raw_message": "No stash entries found.\n",
+     "rc": 1,
+     "refused": true,
+     "touched": [],
+     "tree_unchanged": true,
+     "variant": 1
+    },
+    {
+     "coord": "clean",
+     "coords_that_changed": [
+      "clean"
+     ],
+     "facts": {
+      "clean": false,
+      "repo_present": true,
+      "stash": true,
+      "template_present": true,
+      "tools_present": true
+     },
+     "message": "error: Your local changes to the following files would be overwritten by merge: README.txt Please commit your changes or stash them before you merge. Aborting On branch main Changes not staged for commit: (use \"git add <file>...\" to update what will be committed) (use \"git restore <file>...\" to discard changes in working directory) modified: README.txt no changes added to commit (use \"git add\" and",
+     "only_bookkeeping": true,
+     "raw_message": "error: Your local changes to the following files would be overwritten by merge:\n\tREADME.txt\nPlease commit your changes or stash them before you merge.\nAborting\nOn branch main\nChanges not staged for commit:\n  (use \"git add <file>...\" to update what will be committed)\n  (use \"git restore <file>...\" to discard changes in working directory)\n\tmodified:   README.txt\n\nno changes added to commit (use \"git add\" and/or \"git commit -a\")\nThe stash entry is kept in case you need it again.\n",
+     "rc": 1,
+     "refused": true,
+     "touched": [],
+     "tree_unchanged": true,
+     "variant": 0
+    },
+    {
+     "coord": "clean",
+     "coords_that_changed": [
+      "clean"
+     ],
+     "facts": {
+      "clean": false,
+      "repo_present": true,
+      "stash": true,
+      "template_present": true,
+      "tools_present": true
+     },
+     "message": "error: Your local changes to the following files would be overwritten by merge: README.txt Please commit your changes or stash them before you merge. Aborting On branch main Changes not staged for commit: (use \"git add <file>...\" to update what will be committed) (use \"git restore <file>...\" to discard changes in working directory) modified: README.txt no changes added to commit (use \"git add\" and",
+     "only_bookkeeping": true,
+     "raw_message": "error: Your local changes to the following files would be overwritten by merge:\n\tREADME.txt\nPlease commit your changes or stash them before you merge.\nAborting\nOn branch main\nChanges not staged for commit:\n  (use \"git add <file>...\" to update what will be committed)\n  (use \"git restore <file>...\" to discard changes in working directory)\n\tmodified:   README.txt\n\nno changes added to commit (use \"git add\" and/or \"git commit -a\")\nThe stash entry is kept in case you need it again.\n",
+     "rc": 1,
+     "refused": true,
+     "touched": [],
+     "tree_unchanged": true,
+     "variant": 1
+    }
+   ]
+  },
+  {
+   "action": "patch_apply",
+   "argv": [
+    "patch",
+    "-p1",
+    "--forward",
+    "--no-backup-if-mismatch",
+    "-i",
+    "files/p.patch"
+   ],
+   "base": {
+    "applied": true,
+    "coord": null,
+    "facts": {
+     "context": true,
+     "exists": true,
+     "repo_present": true,
+     "template_present": true,
+     "tools_present": true
+    },
+    "message": "patching file files/a.txt",
+    "only_bookkeeping": false,
+    "raw_message": "patching file files/a.txt\n",
+    "rc": 0,
+    "touched": [
+     "files/a.txt"
+    ],
+    "tree_unchanged": false,
+    "variant": 0
+   },
+   "coords": [
+    "context",
+    "exists"
+   ],
+   "each_violation_changed_exactly_one_fact": true,
+   "every_violation_was_refused": true,
+   "facts": [
+    "context",
+    "exists",
+    "tools_present",
+    "repo_present",
+    "template_present"
+   ],
+   "injective": true,
+   "invariant_under_distractor": true,
+   "messages": {
+    "context": "patching file files/a.txt Hunk #1 FAILED at 1. 1 out of 1 hunk FAILED -- saving rejects to file files/a.txt.rej",
+    "exists": "can't find file to patch at input line 3 Perhaps you used the wrong -p or --strip option? The text leading up to this was: -------------------------- |--- a/files/a.txt |+++ b/files/a.txt -------------------------- File to patch: Skip this patch? [y] Skipping patch. 1 out of 1 hunk ignored"
+   },
+   "refusals": 4,
+   "refusals_confined_to_bookkeeping": [
+    "context#0",
+    "context#1"
+   ],
+   "refusals_that_changed_something": {
+    "context#0": [
+     "files/a.txt.rej"
+    ],
+    "context#1": [
+     "files/a.txt.rej"
+    ]
+   },
+   "refusals_that_left_the_tree_identical": 2,
+   "states": [
+    {
+     "context": true,
+     "exists": true,
+     "repo_present": true,
+     "template_present": true,
+     "tools_present": true
+    },
+    {
+     "context": false,
+     "exists": true,
+     "repo_present": true,
+     "template_present": true,
+     "tools_present": true
+    },
+    {
+     "context": false,
+     "exists": true,
+     "repo_present": true,
+     "template_present": true,
+     "tools_present": true
+    },
+    {
+     "context": true,
+     "exists": false,
+     "repo_present": true,
+     "template_present": true,
+     "tools_present": true
+    },
+    {
+     "context": true,
+     "exists": false,
+     "repo_present": true,
+     "template_present": true,
+     "tools_present": true
+    }
+   ],
+   "the_changed_fact_is_the_dropped_coordinate": true,
+   "violations": [
+    {
+     "coord": "context",
+     "coords_that_changed": [
+      "context"
+     ],
+     "facts": {
+      "context": false,
+      "exists": true,
+      "repo_present": true,
+      "template_present": true,
+      "tools_present": true
+     },
+     "message": "patching file files/a.txt Hunk #1 FAILED at 1. 1 out of 1 hunk FAILED -- saving rejects to file files/a.txt.rej",
+     "only_bookkeeping": true,
+     "raw_message": "patching file files/a.txt\nHunk #1 FAILED at 1.\n1 out of 1 hunk FAILED -- saving rejects to file files/a.txt.rej\n",
+     "rc": 1,
+     "refused": true,
+     "touched": [
+      "files/a.txt.rej"
+     ],
+     "tree_unchanged": false,
+     "variant": 0
+    },
+    {
+     "coord": "context",
+     "coords_that_changed": [
+      "context"
+     ],
+     "facts": {
+      "context": false,
+      "exists": true,
+      "repo_present": true,
+      "template_present": true,
+      "tools_present": true
+     },
+     "message": "patching file files/a.txt Hunk #1 FAILED at 1. 1 out of 1 hunk FAILED -- saving rejects to file files/a.txt.rej",
+     "only_bookkeeping": true,
+     "raw_message": "patching file files/a.txt\nHunk #1 FAILED at 1.\n1 out of 1 hunk FAILED -- saving rejects to file files/a.txt.rej\n",
+     "rc": 1,
+     "refused": true,
+     "touched": [
+      "files/a.txt.rej"
+     ],
+     "tree_unchanged": false,
+     "variant": 1
+    },
+    {
+     "coord": "exists",
+     "coords_that_changed": [
+      "exists"
+     ],
+     "facts": {
+      "context": true,
+      "exists": false,
+      "repo_present": true,
+      "template_present": true,
+      "tools_present": true
+     },
+     "message": "can't find file to patch at input line 3 Perhaps you used the wrong -p or --strip option? The text leading up to this was: -------------------------- |--- a/files/a.txt |+++ b/files/a.txt -------------------------- File to patch: Skip this patch? [y] Skipping patch. 1 out of 1 hunk ignored",
+     "only_bookkeeping": true,
+     "raw_message": "can't find file to patch at input line 3\nPerhaps you used the wrong -p or --strip option?\nThe text leading up to this was:\n--------------------------\n|--- a/files/a.txt\n|+++ b/files/a.txt\n--------------------------\nFile to patch: \nSkip this patch? [y] \nSkipping patch.\n1 out of 1 hunk ignored\n",
+     "rc": 1,
+     "refused": true,
+     "touched": [],
+     "tree_unchanged": true,
+     "variant": 0
+    },
+    {
+     "coord": "exists",
+     "coords_that_changed": [
+      "exists"
+     ],
+     "facts": {
+      "context": true,
+      "exists": false,
+      "repo_present": true,
+      "template_present": true,
+      "tools_present": true
+     },
+     "message": "can't find file to patch at input line 3 Perhaps you used the wrong -p or --strip option? The text leading up to this was: -------------------------- |--- a/files/a.txt |+++ b/files/a.txt -------------------------- File to patch: Skip this patch? [y] Skipping patch. 1 out of 1 hunk ignored",
+     "only_bookkeeping": true,
+     "raw_message": "can't find file to patch at input line 3\nPerhaps you used the wrong -p or --strip option?\nThe text leading up to this was:\n--------------------------\n|--- a/files/a.txt\n|+++ b/files/a.txt\n--------------------------\nFile to patch: \nSkip this patch? [y] \nSkipping patch.\n1 out of 1 hunk ignored\n",
+     "rc": 1,
+     "refused": true,
+     "touched": [],
+     "tree_unchanged": true,
+     "variant": 1
+    }
+   ]
+  },
+  {
+   "action": "gzip_decompress",
+   "argv": [
+    "gzip",
+    "-d",
+    "files/x.gz"
+   ],
+   "base": {
+    "applied": true,
+    "coord": null,
+    "facts": {
+     "exists": true,
+     "gzip": true,
+     "repo_present": true,
+     "template_present": true,
+     "tools_present": true
+    },
+    "message": "",
+    "only_bookkeeping": false,
+    "raw_message": "",
+    "rc": 0,
+    "touched": [
+     "files/x",
+     "files/x.gz"
+    ],
+    "tree_unchanged": false,
+    "variant": 0
+   },
+   "coords": [
+    "gzip",
+    "exists"
+   ],
+   "each_violation_changed_exactly_one_fact": true,
+   "every_violation_was_refused": true,
+   "facts": [
+    "gzip",
+    "exists",
+    "tools_present",
+    "repo_present",
+    "template_present"
+   ],
+   "injective": true,
+   "invariant_under_distractor": true,
+   "messages": {
+    "exists": "gzip: files/x.gz: No such file or directory",
+    "gzip": "gzip: files/x.gz: not in gzip format"
+   },
+   "refusals": 4,
+   "refusals_confined_to_bookkeeping": [],
+   "refusals_that_changed_something": {},
+   "refusals_that_left_the_tree_identical": 4,
+   "states": [
+    {
+     "exists": true,
+     "gzip": true,
+     "repo_present": true,
+     "template_present": true,
+     "tools_present": true
+    },
+    {
+     "exists": true,
+     "gzip": false,
+     "repo_present": true,
+     "template_present": true,
+     "tools_present": true
+    },
+    {
+     "exists": true,
+     "gzip": false,
+     "repo_present": true,
+     "template_present": true,
+     "tools_present": true
+    },
+    {
+     "exists": false,
+     "gzip": true,
+     "repo_present": true,
+     "template_present": true,
+     "tools_present": true
+    },
+    {
+     "exists": false,
+     "gzip": true,
+     "repo_present": true,
+     "template_present": true,
+     "tools_present": true
+    }
+   ],
+   "the_changed_fact_is_the_dropped_coordinate": true,
+   "violations": [
+    {
+     "coord": "gzip",
+     "coords_that_changed": [
+      "gzip"
+     ],
+     "facts": {
+      "exists": true,
+      "gzip": false,
+      "repo_present": true,
+      "template_present": true,
+      "tools_present": true
+     },
+     "message": "gzip: files/x.gz: not in gzip format",
+     "only_bookkeeping": true,
+     "raw_message": "\ngzip: files/x.gz: not in gzip format\n",
+     "rc": 1,
+     "refused": true,
+     "touched": [],
+     "tree_unchanged": true,
+     "variant": 0
+    },
+    {
+     "coord": "gzip",
+     "coords_that_changed": [
+      "gzip"
+     ],
+     "facts": {
+      "exists": true,
+      "gzip": false,
+      "repo_present": true,
+      "template_present": true,
+      "tools_present": true
+     },
+     "message": "gzip: files/x.gz: not in gzip format",
+     "only_bookkeeping": true,
+     "raw_message": "\ngzip: files/x.gz: not in gzip format\n",
+     "rc": 1,
+     "refused": true,
+     "touched": [],
+     "tree_unchanged": true,
+     "variant": 1
+    },
+    {
+     "coord": "exists",
+     "coords_that_changed": [
+      "exists"
+     ],
+     "facts": {
+      "exists": false,
+      "gzip": true,
+      "repo_present": true,
+      "template_present": true,
+      "tools_present": true
+     },
+     "message": "gzip: files/x.gz: No such file or directory",
+     "only_bookkeeping": true,
+     "raw_message": "gzip: files/x.gz: No such file or directory\n",
+     "rc": 1,
+     "refused": true,
+     "touched": [],
+     "tree_unchanged": true,
+     "variant": 0
+    },
+    {
+     "coord": "exists",
+     "coords_that_changed": [
+      "exists"
+     ],
+     "facts": {
+      "exists": false,
+      "gzip": true,
+      "repo_present": true,
+      "template_present": true,
+      "tools_present": true
+     },
+     "message": "gzip: files/x.gz: No such file or directory",
+     "only_bookkeeping": true,
+     "raw_message": "gzip: files/x.gz: No such file or directory\n",
+     "rc": 1,
+     "refused": true,
+     "touched": [],
+     "tree_unchanged": true,
+     "variant": 1
+    }
+   ]
+  },
+  {
+   "action": "tar_extract",
+   "argv": [
+    "tar",
+    "-xzf",
+    "files/b.tar.gz"
+   ],
+   "base": {
+    "applied": true,
+    "coord": null,
+    "facts": {
+     "exists": true,
+     "repo_present": true,
+     "tar": true,
+     "template_present": true,
+     "tools_present": true
+    },
+    "message": "",
+    "only_bookkeeping": false,
+    "raw_message": "",
+    "rc": 0,
+    "touched": [
+     "m.txt"
+    ],
+    "tree_unchanged": false,
+    "variant": 0
+   },
+   "coords": [
+    "tar",
+    "exists"
+   ],
+   "each_violation_changed_exactly_one_fact": true,
+   "every_violation_was_refused": true,
+   "facts": [
+    "tar",
+    "exists",
+    "tools_present",
+    "repo_present",
+    "template_present"
+   ],
+   "injective": true,
+   "invariant_under_distractor": true,
+   "messages": {
+    "exists": "tar (child): files/b.tar.gz: Cannot open: No such file or directory tar (child): Error is not recoverable: exiting now tar: Child returned status 2 tar: Error is not recoverable: exiting now",
+    "tar": "gzip: stdin: not in gzip format tar: Child returned status 1 tar: Error is not recoverable: exiting now"
+   },
+   "refusals": 4,
+   "refusals_confined_to_bookkeeping": [],
+   "refusals_that_changed_something": {},
+   "refusals_that_left_the_tree_identical": 4,
+   "states": [
+    {
+     "exists": true,
+     "repo_present": true,
+     "tar": true,
+     "template_present": true,
+     "tools_present": true
+    },
+    {
+     "exists": true,
+     "repo_present": true,
+     "tar": false,
+     "template_present": true,
+     "tools_present": true
+    },
+    {
+     "exists": true,
+     "repo_present": true,
+     "tar": false,
+     "template_present": true,
+     "tools_present": true
+    },
+    {
+     "exists": false,
+     "repo_present": true,
+     "tar": true,
+     "template_present": true,
+     "tools_present": true
+    },
+    {
+     "exists": false,
+     "repo_present": true,
+     "tar": true,
+     "template_present": true,
+     "tools_present": true
+    }
+   ],
+   "the_changed_fact_is_the_dropped_coordinate": true,
+   "violations": [
+    {
+     "coord": "tar",
+     "coords_that_changed": [
+      "tar"
+     ],
+     "facts": {
+      "exists": true,
+      "repo_present": true,
+      "tar": false,
+      "template_present": true,
+      "tools_present": true
+     },
+     "message": "gzip: stdin: not in gzip format tar: Child returned status 1 tar: Error is not recoverable: exiting now",
+     "only_bookkeeping": true,
+     "raw_message": "\ngzip: stdin: not in gzip format\ntar: Child returned status 1\ntar: Error is not recoverable: exiting now\n",
+     "rc": 2,
+     "refused": true,
+     "touched": [],
+     "tree_unchanged": true,
+     "variant": 0
+    },
+    {
+     "coord": "tar",
+     "coords_that_changed": [
+      "tar"
+     ],
+     "facts": {
+      "exists": true,
+      "repo_present": true,
+      "tar": false,
+      "template_present": true,
+      "tools_present": true
+     },
+     "message": "gzip: stdin: not in gzip format tar: Child returned status 1 tar: Error is not recoverable: exiting now",
+     "only_bookkeeping": true,
+     "raw_message": "\ngzip: stdin: not in gzip format\ntar: Child returned status 1\ntar: Error is not recoverable: exiting now\n",
+     "rc": 2,
+     "refused": true,
+     "touched": [],
+     "tree_unchanged": true,
+     "variant": 1
+    },
+    {
+     "coord": "exists",
+     "coords_that_changed": [
+      "exists"
+     ],
+     "facts": {
+      "exists": false,
+      "repo_present": true,
+      "tar": true,
+      "template_present": true,
+      "tools_present": true
+     },
+     "message": "tar (child): files/b.tar.gz: Cannot open: No such file or directory tar (child): Error is not recoverable: exiting now tar: Child returned status 2 tar: Error is not recoverable: exiting now",
+     "only_bookkeeping": true,
+     "raw_message": "tar (child): files/b.tar.gz: Cannot open: No such file or directory\ntar (child): Error is not recoverable: exiting now\ntar: Child returned status 2\ntar: Error is not recoverable: exiting now\n",
+     "rc": 2,
+     "refused": true,
+     "touched": [],
+     "tree_unchanged": true,
+     "variant": 0
+    },
+    {
+     "coord": "exists",
+     "coords_that_changed": [
+      "exists"
+     ],
+     "facts": {
+      "exists": false,
+      "repo_present": true,
+      "tar": true,
+      "template_present": true,
+      "tools_present": true
+     },
+     "message": "tar (child): files/b.tar.gz: Cannot open: No such file or directory tar (child): Error is not recoverable: exiting now tar: Child returned status 2 tar: Error is not recoverable: exiting now",
+     "only_bookkeeping": true,
+     "raw_message": "tar (child): files/b.tar.gz: Cannot open: No such file or directory\ntar (child): Error is not recoverable: exiting now\ntar: Child returned status 2\ntar: Error is not recoverable: exiting now\n",
+     "rc": 2,
+     "refused": true,
+     "touched": [],
+     "tree_unchanged": true,
+     "variant": 1
+    }
+   ]
+  },
+  {
+   "action": "cp_into_dir",
+   "argv": [
+    "cp",
+    "files/a.txt",
+    "files/dir/"
+   ],
+   "base": {
+    "applied": true,
+    "coord": null,
+    "facts": {
+     "dest_is_dir": true,
+     "repo_present": true,
+     "source": true,
+     "template_present": true,
+     "tools_present": true
+    },
+    "message": "",
+    "only_bookkeeping": false,
+    "raw_message": "",
+    "rc": 0,
+    "touched": [
+     "files/dir/a.txt"
+    ],
+    "tree_unchanged": false,
+    "variant": 0
+   },
+   "coords": [
+    "dest_is_dir",
+    "source"
+   ],
+   "each_violation_changed_exactly_one_fact": true,
+   "every_violation_was_refused": true,
+   "facts": [
+    "dest_is_dir",
+    "source",
+    "tools_present",
+    "repo_present",
+    "template_present"
+   ],
+   "injective": true,
+   "invariant_under_distractor": true,
+   "messages": {
+    "dest_is_dir": "cp: cannot stat 'files/dir/': Not a directory",
+    "source": "cp: cannot stat 'files/a.txt': No such file or directory"
+   },
+   "refusals": 4,
+   "refusals_confined_to_bookkeeping": [],
+   "refusals_that_changed_something": {},
+   "refusals_that_left_the_tree_identical": 4,
+   "states": [
+    {
+     "dest_is_dir": true,
+     "repo_present": true,
+     "source": true,
+     "template_present": true,
+     "tools_present": true
+    },
+    {
+     "dest_is_dir": false,
+     "repo_present": true,
+     "source": true,
+     "template_present": true,
+     "tools_present": true
+    },
+    {
+     "dest_is_dir": false,
+     "repo_present": true,
+     "source": true,
+     "template_present": true,
+     "tools_present": true
+    },
+    {
+     "dest_is_dir": true,
+     "repo_present": true,
+     "source": false,
+     "template_present": true,
+     "tools_present": true
+    },
+    {
+     "dest_is_dir": true,
+     "repo_present": true,
+     "source": false,
+     "template_present": true,
+     "tools_present": true
+    }
+   ],
+   "the_changed_fact_is_the_dropped_coordinate": true,
+   "violations": [
+    {
+     "coord": "dest_is_dir",
+     "coords_that_changed": [
+      "dest_is_dir"
+     ],
+     "facts": {
+      "dest_is_dir": false,
+      "repo_present": true,
+      "source": true,
+      "template_present": true,
+      "tools_present": true
+     },
+     "message": "cp: cannot stat 'files/dir/': Not a directory",
+     "only_bookkeeping": true,
+     "raw_message": "cp: cannot stat 'files/dir/': Not a directory\n",
+     "rc": 1,
+     "refused": true,
+     "touched": [],
+     "tree_unchanged": true,
+     "variant": 0
+    },
+    {
+     "coord": "dest_is_dir",
+     "coords_that_changed": [
+      "dest_is_dir"
+     ],
+     "facts": {
+      "dest_is_dir": false,
+      "repo_present": true,
+      "source": true,
+      "template_present": true,
+      "tools_present": true
+     },
+     "message": "cp: cannot stat 'files/dir/': Not a directory",
+     "only_bookkeeping": true,
+     "raw_message": "cp: cannot stat 'files/dir/': Not a directory\n",
+     "rc": 1,
+     "refused": true,
+     "touched": [],
+     "tree_unchanged": true,
+     "variant": 1
+    },
+    {
+     "coord": "source",
+     "coords_that_changed": [
+      "source"
+     ],
+     "facts": {
+      "dest_is_dir": true,
+      "repo_present": true,
+      "source": false,
+      "template_present": true,
+      "tools_present": true
+     },
+     "message": "cp: cannot stat 'files/a.txt': No such file or directory",
+     "only_bookkeeping": true,
+     "raw_message": "cp: cannot stat 'files/a.txt': No such file or directory\n",
+     "rc": 1,
+     "refused": true,
+     "touched": [],
+     "tree_unchanged": true,
+     "variant": 0
+    },
+    {
+     "coord": "source",
+     "coords_that_changed": [
+      "source"
+     ],
+     "facts": {
+      "dest_is_dir": true,
+      "repo_present": true,
+      "source": false,
+      "template_present": true,
+      "tools_present": true
+     },
+     "message": "cp: cannot stat 'files/a.txt': No such file or directory",
+     "only_bookkeeping": true,
+     "raw_message": "cp: cannot stat 'files/a.txt': No such file or directory\n",
+     "rc": 1,
+     "refused": true,
+     "touched": [],
+     "tree_unchanged": true,
+     "variant": 1
+    }
+   ]
+  },
+  {
+   "action": "mkdir_nested",
+   "argv": [
+    "mkdir",
+    "files/nodir/sub"
+   ],
+   "base": {
+    "applied": true,
+    "coord": null,
+    "facts": {
+     "absent": true,
+     "parent": true,
+     "repo_present": true,
+     "template_present": true,
+     "tools_present": true
+    },
+    "message": "",
+    "only_bookkeeping": false,
+    "raw_message": "",
+    "rc": 0,
+    "touched": [
+     "files/nodir/sub"
+    ],
+    "tree_unchanged": false,
+    "variant": 0
+   },
+   "coords": [
+    "parent",
+    "absent"
+   ],
+   "each_violation_changed_exactly_one_fact": true,
+   "every_violation_was_refused": true,
+   "facts": [
+    "parent",
+    "absent",
+    "tools_present",
+    "repo_present",
+    "template_present"
+   ],
+   "injective": true,
+   "invariant_under_distractor": true,
+   "messages": {
+    "absent": "mkdir: cannot create directory \u2018files/nodir/sub\u2019: File exists",
+    "parent": "mkdir: cannot create directory \u2018files/nodir/sub\u2019: No such file or directory"
+   },
+   "refusals": 4,
+   "refusals_confined_to_bookkeeping": [],
+   "refusals_that_changed_something": {},
+   "refusals_that_left_the_tree_identical": 4,
+   "states": [
+    {
+     "absent": true,
+     "parent": true,
+     "repo_present": true,
+     "template_present": true,
+     "tools_present": true
+    },
+    {
+     "absent": true,
+     "parent": false,
+     "repo_present": true,
+     "template_present": true,
+     "tools_present": true
+    },
+    {
+     "absent": true,
+     "parent": false,
+     "repo_present": true,
+     "template_present": true,
+     "tools_present": true
+    },
+    {
+     "absent": false,
+     "parent": true,
+     "repo_present": true,
+     "template_present": true,
+     "tools_present": true
+    },
+    {
+     "absent": false,
+     "parent": true,
+     "repo_present": true,
+     "template_present": true,
+     "tools_present": true
+    }
+   ],
+   "the_changed_fact_is_the_dropped_coordinate": true,
+   "violations": [
+    {
+     "coord": "parent",
+     "coords_that_changed": [
+      "parent"
+     ],
+     "facts": {
+      "absent": true,
+      "parent": false,
+      "repo_present": true,
+      "template_present": true,
+      "tools_present": true
+     },
+     "message": "mkdir: cannot create directory \u2018files/nodir/sub\u2019: No such file or directory",
+     "only_bookkeeping": true,
+     "raw_message": "mkdir: cannot create directory \u2018files/nodir/sub\u2019: No such file or directory\n",
+     "rc": 1,
+     "refused": true,
+     "touched": [],
+     "tree_unchanged": true,
+     "variant": 0
+    },
+    {
+     "coord": "parent",
+     "coords_that_changed": [
+      "parent"
+     ],
+     "facts": {
+      "absent": true,
+      "parent": false,
+      "repo_present": true,
+      "template_present": true,
+      "tools_present": true
+     },
+     "message": "mkdir: cannot create directory \u2018files/nodir/sub\u2019: No such file or directory",
+     "only_bookkeeping": true,
+     "raw_message": "mkdir: cannot create directory \u2018files/nodir/sub\u2019: No such file or directory\n",
+     "rc": 1,
+     "refused": true,
+     "touched": [],
+     "tree_unchanged": true,
+     "variant": 1
+    },
+    {
+     "coord": "absent",
+     "coords_that_changed": [
+      "absent"
+     ],
+     "facts": {
+      "absent": false,
+      "parent": true,
+      "repo_present": true,
+      "template_present": true,
+      "tools_present": true
+     },
+     "message": "mkdir: cannot create directory \u2018files/nodir/sub\u2019: File exists",
+     "only_bookkeeping": true,
+     "raw_message": "mkdir: cannot create directory \u2018files/nodir/sub\u2019: File exists\n",
+     "rc": 1,
+     "refused": true,
+     "touched": [],
+     "tree_unchanged": true,
+     "variant": 0
+    },
+    {
+     "coord": "absent",
+     "coords_that_changed": [
+      "absent"
+     ],
+     "facts": {
+      "absent": false,
+      "parent": true,
+      "repo_present": true,
+      "template_present": true,
+      "tools_present": true
+     },
+     "message": "mkdir: cannot create directory \u2018files/nodir/sub\u2019: File exists",
+     "only_bookkeeping": true,
+     "raw_message": "mkdir: cannot create directory \u2018files/nodir/sub\u2019: File exists\n",
+     "rc": 1,
+     "refused": true,
+     "touched": [],
+     "tree_unchanged": true,
+     "variant": 1
+    }
+   ]
+  },
+  {
+   "action": "rmdir_empty",
+   "argv": [
+    "rmdir",
+    "files/dir"
+   ],
+   "base": {
+    "applied": true,
+    "coord": null,
+    "facts": {
+     "empty": true,
+     "exists": true,
+     "repo_present": true,
+     "template_present": true,
+     "tools_present": true
+    },
+    "message": "",
+    "only_bookkeeping": false,
+    "raw_message": "",
+    "rc": 0,
+    "touched": [
+     "files/dir"
+    ],
+    "tree_unchanged": false,
+    "variant": 0
+   },
+   "coords": [
+    "exists",
+    "empty"
+   ],
+   "each_violation_changed_exactly_one_fact": true,
+   "every_violation_was_refused": true,
+   "facts": [
+    "exists",
+    "empty",
+    "tools_present",
+    "repo_present",
+    "template_present"
+   ],
+   "injective": true,
+   "invariant_under_distractor": true,
+   "messages": {
+    "empty": "rmdir: failed to remove 'files/dir': Directory not empty",
+    "exists": "rmdir: failed to remove 'files/dir': No such file or directory"
+   },
+   "refusals": 4,
+   "refusals_confined_to_bookkeeping": [],
+   "refusals_that_changed_something": {},
+   "refusals_that_left_the_tree_identical": 4,
+   "states": [
+    {
+     "empty": true,
+     "exists": true,
+     "repo_present": true,
+     "template_present": true,
+     "tools_present": true
+    },
+    {
+     "empty": true,
+     "exists": false,
+     "repo_present": true,
+     "template_present": true,
+     "tools_present": true
+    },
+    {
+     "empty": true,
+     "exists": false,
+     "repo_present": true,
+     "template_present": true,
+     "tools_present": true
+    },
+    {
+     "empty": false,
+     "exists": true,
+     "repo_present": true,
+     "template_present": true,
+     "tools_present": true
+    },
+    {
+     "empty": false,
+     "exists": true,
+     "repo_present": true,
+     "template_present": true,
+     "tools_present": true
+    }
+   ],
+   "the_changed_fact_is_the_dropped_coordinate": true,
+   "violations": [
+    {
+     "coord": "exists",
+     "coords_that_changed": [
+      "exists"
+     ],
+     "facts": {
+      "empty": true,
+      "exists": false,
+      "repo_present": true,
+      "template_present": true,
+      "tools_present": true
+     },
+     "message": "rmdir: failed to remove 'files/dir': No such file or directory",
+     "only_bookkeeping": true,
+     "raw_message": "rmdir: failed to remove 'files/dir': No such file or directory\n",
+     "rc": 1,
+     "refused": true,
+     "touched": [],
+     "tree_unchanged": true,
+     "variant": 0
+    },
+    {
+     "coord": "exists",
+     "coords_that_changed": [
+      "exists"
+     ],
+     "facts": {
+      "empty": true,
+      "exists": false,
+      "repo_present": true,
+      "template_present": true,
+      "tools_present": true
+     },
+     "message": "rmdir: failed to remove 'files/dir': No such file or directory",
+     "only_bookkeeping": true,
+     "raw_message": "rmdir: failed to remove 'files/dir': No such file or directory\n",
+     "rc": 1,
+     "refused": true,
+     "touched": [],
+     "tree_unchanged": true,
+     "variant": 1
+    },
+    {
+     "coord": "empty",
+     "coords_that_changed": [
+      "empty"
+     ],
+     "facts": {
+      "empty": false,
+      "exists": true,
+      "repo_present": true,
+      "template_present": true,
+      "tools_present": true
+     },
+     "message": "rmdir: failed to remove 'files/dir': Directory not empty",
+     "only_bookkeeping": true,
+     "raw_message": "rmdir: failed to remove 'files/dir': Directory not empty\n",
+     "rc": 1,
+     "refused": true,
+     "touched": [],
+     "tree_unchanged": true,
+     "variant": 0
+    },
+    {
+     "coord": "empty",
+     "coords_that_changed": [
+      "empty"
+     ],
+     "facts": {
+      "empty": false,
+      "exists": true,
+      "repo_present": true,
+      "template_present": true,
+      "tools_present": true
+     },
+     "message": "rmdir: failed to remove 'files/dir': Directory not empty",
+     "only_bookkeeping": true,
+     "raw_message": "rmdir: failed to remove 'files/dir': Directory not empty\n",
+     "rc": 1,
+     "refused": true,
+     "touched": [],
+     "tree_unchanged": true,
+     "variant": 1
+    }
+   ]
+  },
+  {
+   "action": "ln_symlink",
+   "argv": [
+    "ln",
+    "-s",
+    "files/a.txt",
+    "files/sub/link"
+   ],
+   "base": {
+    "applied": true,
+    "coord": null,
+    "facts": {
+     "absent": true,
+     "parent": true,
+     "repo_present": true,
+     "template_present": true,
+     "tools_present": true
+    },
+    "message": "",
+    "only_bookkeeping": true,
+    "raw_message": "",
+    "rc": 0,
+    "touched": [],
+    "tree_unchanged": true,
+    "variant": 0
+   },
+   "coords": [
+    "parent",
+    "absent"
+   ],
+   "each_violation_changed_exactly_one_fact": true,
+   "every_violation_was_refused": true,
+   "facts": [
+    "parent",
+    "absent",
+    "tools_present",
+    "repo_present",
+    "template_present"
+   ],
+   "injective": true,
+   "invariant_under_distractor": true,
+   "messages": {
+    "absent": "ln: failed to create symbolic link 'files/sub/link': File exists",
+    "parent": "ln: failed to create symbolic link 'files/sub/link': No such file or directory"
+   },
+   "refusals": 4,
+   "refusals_confined_to_bookkeeping": [],
+   "refusals_that_changed_something": {},
+   "refusals_that_left_the_tree_identical": 4,
+   "states": [
+    {
+     "absent": true,
+     "parent": true,
+     "repo_present": true,
+     "template_present": true,
+     "tools_present": true
+    },
+    {
+     "absent": true,
+     "parent": false,
+     "repo_present": true,
+     "template_present": true,
+     "tools_present": true
+    },
+    {
+     "absent": true,
+     "parent": false,
+     "repo_present": true,
+     "template_present": true,
+     "tools_present": true
+    },
+    {
+     "absent": false,
+     "parent": true,
+     "repo_present": true,
+     "template_present": true,
+     "tools_present": true
+    },
+    {
+     "absent": false,
+     "parent": true,
+     "repo_present": true,
+     "template_present": true,
+     "tools_present": true
+    }
+   ],
+   "the_changed_fact_is_the_dropped_coordinate": true,
+   "violations": [
+    {
+     "coord": "parent",
+     "coords_that_changed": [
+      "parent"
+     ],
+     "facts": {
+      "absent": true,
+      "parent": false,
+      "repo_present": true,
+      "template_present": true,
+      "tools_present": true
+     },
+     "message": "ln: failed to create symbolic link 'files/sub/link': No such file or directory",
+     "only_bookkeeping": true,
+     "raw_message": "ln: failed to create symbolic link 'files/sub/link': No such file or directory\n",
+     "rc": 1,
+     "refused": true,
+     "touched": [],
+     "tree_unchanged": true,
+     "variant": 0
+    },
+    {
+     "coord": "parent",
+     "coords_that_changed": [
+      "parent"
+     ],
+     "facts": {
+      "absent": true,
+      "parent": false,
+      "repo_present": true,
+      "template_present": true,
+      "tools_present": true
+     },
+     "message": "ln: failed to create symbolic link 'files/sub/link': No such file or directory",
+     "only_bookkeeping": true,
+     "raw_message": "ln: failed to create symbolic link 'files/sub/link': No such file or directory\n",
+     "rc": 1,
+     "refused": true,
+     "touched": [],
+     "tree_unchanged": true,
+     "variant": 1
+    },
+    {
+     "coord": "absent",
+     "coords_that_changed": [
+      "absent"
+     ],
+     "facts": {
+      "absent": false,
+      "parent": true,
+      "repo_present": true,
+      "template_present": true,
+      "tools_present": true
+     },
+     "message": "ln: failed to create symbolic link 'files/sub/link': File exists",
+     "only_bookkeeping": true,
+     "raw_message": "ln: failed to create symbolic link 'files/sub/link': File exists\n",
+     "rc": 1,
+     "refused": true,
+     "touched": [],
+     "tree_unchanged": true,
+     "variant": 0
+    },
+    {
+     "coord": "absent",
+     "coords_that_changed": [
+      "absent"
+     ],
+     "facts": {
+      "absent": false,
+      "parent": true,
+      "repo_present": true,
+      "template_present": true,
+      "tools_present": true
+     },
+     "message": "ln: failed to create symbolic link 'files/sub/link': File exists",
+     "only_bookkeeping": true,
+     "raw_message": "ln: failed to create symbolic link 'files/sub/link': File exists\n",
+     "rc": 1,
+     "refused": true,
+     "touched": [],
+     "tree_unchanged": true,
+     "variant": 1
+    }
+   ]
+  },
+  {
+   "action": "sort_check",
+   "argv": [
+    "sort",
+    "-c",
+    "files/sorted.txt"
+   ],
+   "base": {
+    "applied": true,
+    "coord": null,
+    "facts": {
+     "exists": true,
+     "repo_present": true,
+     "sorted": true,
+     "template_present": true,
+     "tools_present": true
+    },
+    "message": "",
+    "only_bookkeeping": true,
+    "raw_message": "",
+    "rc": 0,
+    "touched": [],
+    "tree_unchanged": true,
+    "variant": 0
+   },
+   "coords": [
+    "exists",
+    "sorted"
+   ],
+   "each_violation_changed_exactly_one_fact": true,
+   "every_violation_was_refused": true,
+   "facts": [
+    "exists",
+    "sorted",
+    "tools_present",
+    "repo_present",
+    "template_present"
+   ],
+   "injective": true,
+   "invariant_under_distractor": true,
+   "messages": {
+    "exists": "sort: open failed: files/sorted.txt: No such file or directory",
+    "sorted": "sort: files/sorted.txt:2: disorder: <b>"
+   },
+   "refusals": 4,
+   "refusals_confined_to_bookkeeping": [],
+   "refusals_that_changed_something": {},
+   "refusals_that_left_the_tree_identical": 4,
+   "states": [
+    {
+     "exists": true,
+     "repo_present": true,
+     "sorted": true,
+     "template_present": true,
+     "tools_present": true
+    },
+    {
+     "exists": false,
+     "repo_present": true,
+     "sorted": true,
+     "template_present": true,
+     "tools_present": true
+    },
+    {
+     "exists": false,
+     "repo_present": true,
+     "sorted": true,
+     "template_present": true,
+     "tools_present": true
+    },
+    {
+     "exists": true,
+     "repo_present": true,
+     "sorted": false,
+     "template_present": true,
+     "tools_present": true
+    },
+    {
+     "exists": true,
+     "repo_present": true,
+     "sorted": false,
+     "template_present": true,
+     "tools_present": true
+    }
+   ],
+   "the_changed_fact_is_the_dropped_coordinate": true,
+   "violations": [
+    {
+     "coord": "exists",
+     "coords_that_changed": [
+      "exists"
+     ],
+     "facts": {
+      "exists": false,
+      "repo_present": true,
+      "sorted": true,
+      "template_present": true,
+      "tools_present": true
+     },
+     "message": "sort: open failed: files/sorted.txt: No such file or directory",
+     "only_bookkeeping": true,
+     "raw_message": "sort: open failed: files/sorted.txt: No such file or directory\n",
+     "rc": 2,
+     "refused": true,
+     "touched": [],
+     "tree_unchanged": true,
+     "variant": 0
+    },
+    {
+     "coord": "exists",
+     "coords_that_changed": [
+      "exists"
+     ],
+     "facts": {
+      "exists": false,
+      "repo_present": true,
+      "sorted": true,
+      "template_present": true,
+      "tools_present": true
+     },
+     "message": "sort: open failed: files/sorted.txt: No such file or directory",
+     "only_bookkeeping": true,
+     "raw_message": "sort: open failed: files/sorted.txt: No such file or directory\n",
+     "rc": 2,
+     "refused": true,
+     "touched": [],
+     "tree_unchanged": true,
+     "variant": 1
+    },
+    {
+     "coord": "sorted",
+     "coords_that_changed": [
+      "sorted"
+     ],
+     "facts": {
+      "exists": true,
+      "repo_present": true,
+      "sorted": false,
+      "template_present": true,
+      "tools_present": true
+     },
+     "message": "sort: files/sorted.txt:2: disorder: <b>",
+     "only_bookkeeping": true,
+     "raw_message": "sort: files/sorted.txt:2: disorder: b0\n",
+     "rc": 1,
+     "refused": true,
+     "touched": [],
+     "tree_unchanged": true,
+     "variant": 0
+    },
+    {
+     "coord": "sorted",
+     "coords_that_changed": [
+      "sorted"
+     ],
+     "facts": {
+      "exists": true,
+      "repo_present": true,
+      "sorted": false,
+      "template_present": true,
+      "tools_present": true
+     },
+     "message": "sort: files/sorted.txt:2: disorder: <b>",
+     "only_bookkeeping": true,
+     "raw_message": "sort: files/sorted.txt:2: disorder: b1\n",
+     "rc": 1,
+     "refused": true,
+     "touched": [],
+     "tree_unchanged": true,
+     "variant": 1
+    }
+   ]
+  },
+  {
+   "action": "chmod_file",
+   "argv": [
+    "chmod",
+    "644",
+    "files/a.txt"
+   ],
+   "base": {
+    "applied": true,
+    "coord": null,
+    "facts": {
+     "exists": true,
+     "repo_present": true,
+     "template_present": true,
+     "tools_present": true
+    },
+    "message": "",
+    "only_bookkeeping": true,
+    "raw_message": "",
+    "rc": 0,
+    "touched": [],
+    "tree_unchanged": true,
+    "variant": 0
+   },
+   "coords": [
+    "exists"
+   ],
+   "each_violation_changed_exactly_one_fact": true,
+   "every_violation_was_refused": true,
+   "facts": [
+    "exists",
+    "tools_present",
+    "repo_present",
+    "template_present"
+   ],
+   "injective": true,
+   "invariant_under_distractor": true,
+   "messages": {
+    "exists": "chmod: cannot access 'files/a.txt': No such file or directory"
+   },
+   "refusals": 2,
+   "refusals_confined_to_bookkeeping": [],
+   "refusals_that_changed_something": {},
+   "refusals_that_left_the_tree_identical": 2,
+   "states": [
+    {
+     "exists": true,
+     "repo_present": true,
+     "template_present": true,
+     "tools_present": true
+    },
+    {
+     "exists": false,
+     "repo_present": true,
+     "template_present": true,
+     "tools_present": true
+    },
+    {
+     "exists": false,
+     "repo_present": true,
+     "template_present": true,
+     "tools_present": true
+    }
+   ],
+   "the_changed_fact_is_the_dropped_coordinate": true,
+   "violations": [
+    {
+     "coord": "exists",
+     "coords_that_changed": [
+      "exists"
+     ],
+     "facts": {
+      "exists": false,
+      "repo_present": true,
+      "template_present": true,
+      "tools_present": true
+     },
+     "message": "chmod: cannot access 'files/a.txt': No such file or directory",
+     "only_bookkeeping": true,
+     "raw_message": "chmod: cannot access 'files/a.txt': No such file or directory\n",
+     "rc": 1,
+     "refused": true,
+     "touched": [],
+     "tree_unchanged": true,
+     "variant": 0
+    },
+    {
+     "coord": "exists",
+     "coords_that_changed": [
+      "exists"
+     ],
+     "facts": {
+      "exists": false,
+      "repo_present": true,
+      "template_present": true,
+      "tools_present": true
+     },
+     "message": "chmod: cannot access 'files/a.txt': No such file or directory",
+     "only_bookkeeping": true,
+     "raw_message": "chmod: cannot access 'files/a.txt': No such file or directory\n",
+     "rc": 1,
+     "refused": true,
+     "touched": [],
+     "tree_unchanged": true,
+     "variant": 1
+    }
+   ]
+  }
+ ],
+ "schema": "BRAIN_THE_REFUSAL_IS_THE_OTHER_HALF_V1",
+ "spaces": {
+  "chmod_file": {
+   "distinct_behaviours_after_refusals": 1,
+   "distinct_behaviours_after_the_one_success": 2,
+   "hypotheses_enumerated": 33,
+   "identified": true,
+   "survivors_after_one_refusal_per_coordinate": 4,
+   "survivors_after_the_one_success": 11,
+   "the_survivor_is_the_true_precondition": true
+  },
+  "cp_into_dir": {
+   "distinct_behaviours_after_refusals": 1,
+   "distinct_behaviours_after_the_one_success": 4,
+   "hypotheses_enumerated": 51,
+   "identified": true,
+   "survivors_after_one_refusal_per_coordinate": 1,
+   "survivors_after_the_one_success": 16,
+   "the_survivor_is_the_true_precondition": true
+  },
+  "git_stash_pop": {
+   "distinct_behaviours_after_refusals": 1,
+   "distinct_behaviours_after_the_one_success": 4,
+   "hypotheses_enumerated": 51,
+   "identified": true,
+   "survivors_after_one_refusal_per_coordinate": 1,
+   "survivors_after_the_one_success": 16,
+   "the_survivor_is_the_true_precondition": true
+  },
+  "gzip_decompress": {
+   "distinct_behaviours_after_refusals": 1,
+   "distinct_behaviours_after_the_one_success": 4,
+   "hypotheses_enumerated": 51,
+   "identified": true,
+   "survivors_after_one_refusal_per_coordinate": 1,
+   "survivors_after_the_one_success": 16,
+   "the_survivor_is_the_true_precondition": true
+  },
+  "ln_symlink": {
+   "distinct_behaviours_after_refusals": 1,
+   "distinct_behaviours_after_the_one_success": 4,
+   "hypotheses_enumerated": 51,
+   "identified": true,
+   "survivors_after_one_refusal_per_coordinate": 1,
+   "survivors_after_the_one_success": 16,
+   "the_survivor_is_the_true_precondition": true
+  },
+  "mkdir_nested": {
+   "distinct_behaviours_after_refusals": 1,
+   "distinct_behaviours_after_the_one_success": 4,
+   "hypotheses_enumerated": 51,
+   "identified": true,
+   "survivors_after_one_refusal_per_coordinate": 1,
+   "survivors_after_the_one_success": 16,
+   "the_survivor_is_the_true_precondition": true
+  },
+  "patch_apply": {
+   "distinct_behaviours_after_refusals": 1,
+   "distinct_behaviours_after_the_one_success": 4,
+   "hypotheses_enumerated": 51,
+   "identified": true,
+   "survivors_after_one_refusal_per_coordinate": 1,
+   "survivors_after_the_one_success": 16,
+   "the_survivor_is_the_true_precondition": true
+  },
+  "rmdir_empty": {
+   "distinct_behaviours_after_refusals": 1,
+   "distinct_behaviours_after_the_one_success": 4,
+   "hypotheses_enumerated": 51,
+   "identified": true,
+   "survivors_after_one_refusal_per_coordinate": 1,
+   "survivors_after_the_one_success": 16,
+   "the_survivor_is_the_true_precondition": true
+  },
+  "sort_check": {
+   "distinct_behaviours_after_refusals": 1,
+   "distinct_behaviours_after_the_one_success": 4,
+   "hypotheses_enumerated": 51,
+   "identified": true,
+   "survivors_after_one_refusal_per_coordinate": 1,
+   "survivors_after_the_one_success": 16,
+   "the_survivor_is_the_true_precondition": true
+  },
+  "tar_extract": {
+   "distinct_behaviours_after_refusals": 1,
+   "distinct_behaviours_after_the_one_success": 4,
+   "hypotheses_enumerated": 51,
+   "identified": true,
+   "survivors_after_one_refusal_per_coordinate": 1,
+   "survivors_after_the_one_success": 16,
+   "the_survivor_is_the_true_precondition": true
+  }
+ },
+ "verdict": {
+  "K1_one_success_is_a_point_not_a_boundary": {
+   "MET": true,
+   "minimum": 2,
+   "per_action_distinct_behaviours_left": {
+    "chmod_file": 2,
+    "cp_into_dir": 4,
+    "git_stash_pop": 4,
+    "gzip_decompress": 4,
+    "ln_symlink": 4,
+    "mkdir_nested": 4,
+    "patch_apply": 4,
+    "rmdir_empty": 4,
+    "sort_check": 4,
+    "tar_extract": 4
+   }
+  },
+  "K2_the_refusal_is_a_function_of_the_violated_coordinate": {
+   "MET": true,
+   "actions_injective": [
+    "git_stash_pop",
+    "patch_apply",
+    "gzip_decompress",
+    "tar_extract",
+    "cp_into_dir",
+    "mkdir_nested",
+    "rmdir_empty",
+    "ln_symlink",
+    "sort_check",
+    "chmod_file"
+   ],
+   "actions_invariant_under_distractor": [
+    "git_stash_pop",
+    "patch_apply",
+    "gzip_decompress",
+    "tar_extract",
+    "cp_into_dir",
+    "mkdir_nested",
+    "rmdir_empty",
+    "ln_symlink",
+    "sort_check",
+    "chmod_file"
+   ],
+   "actions_not_refused": [],
+   "actions_where_that_fact_was_the_dropped_coordinate": 10,
+   "actions_where_the_violation_changed_exactly_one_fact": 10,
+   "the_declared_check_is_narrower_than_the_fact_it_serves": {
+    "MEASURED": true,
+    "file": "a gzip whose payload is not a tar archive",
+    "means": "the declared check accepts a file that is not an archive, so the fact it is used for is narrower than the check's own claim",
+    "tar_tzf_exit": 0,
+    "tar_tzf_said": ""
+   },
+   "witnesses": {
+    "chmod_file": {
+     "exists": "chmod: cannot access 'files/a.txt': No such file or directory"
+    },
+    "cp_into_dir": {
+     "dest_is_dir": "cp: cannot stat 'files/dir/': Not a directory",
+     "source": "cp: cannot stat 'files/a.txt': No such file or directory"
+    },
+    "git_stash_pop": {
+     "clean": "error: Your local changes to the following files would be overwritten by merge: README.txt Please commit your changes or stash them before you merge. Aborting On branch main Changes not staged for commit: (use \"git add <file>...\" to update what will be committed) (use \"git restore <file>...\" to discard changes in working directory) modified: README.txt no changes added to commit (use \"git add\" and",
+     "stash": "No stash entries found."
+    },
+    "gzip_decompress": {
+     "exists": "gzip: files/x.gz: No such file or directory",
+     "gzip": "gzip: files/x.gz: not in gzip format"
+    },
+    "ln_symlink": {
+     "absent": "ln: failed to create symbolic link 'files/sub/link': File exists",
+     "parent": "ln: failed to create symbolic link 'files/sub/link': No such file or directory"
+    },
+    "mkdir_nested": {
+     "absent": "mkdir: cannot create directory \u2018files/nodir/sub\u2019: File exists",
+     "parent": "mkdir: cannot create directory \u2018files/nodir/sub\u2019: No such file or directory"
+    },
+    "patch_apply": {
+     "context": "patching file files/a.txt Hunk #1 FAILED at 1. 1 out of 1 hunk FAILED -- saving rejects to file files/a.txt.rej",
+     "exists": "can't find file to patch at input line 3 Perhaps you used the wrong -p or --strip option? The text leading up to this was: -------------------------- |--- a/files/a.txt |+++ b/files/a.txt -------------------------- File to patch: Skip this patch? [y] Skipping patch. 1 out of 1 hunk ignored"
+    },
+    "rmdir_empty": {
+     "empty": "rmdir: failed to remove 'files/dir': Directory not empty",
+     "exists": "rmdir: failed to remove 'files/dir': No such file or directory"
+    },
+    "sort_check": {
+     "exists": "sort: open failed: files/sorted.txt: No such file or directory",
+     "sorted": "sort: files/sorted.txt:2: disorder: <b>"
+    },
+    "tar_extract": {
+     "exists": "tar (child): files/b.tar.gz: Cannot open: No such file or directory tar (child): Error is not recoverable: exiting now tar: Child returned status 2 tar: Error is not recoverable: exiting now",
+     "tar": "gzip: stdin: not in gzip format tar: Child returned status 1 tar: Error is not recoverable: exiting now"
+    }
+   }
+  },
+  "K3_one_refusal_per_coordinate_identifies": {
+   "MET": true,
+   "identified": [
+    "git_stash_pop",
+    "patch_apply",
+    "gzip_decompress",
+    "tar_extract",
+    "cp_into_dir",
+    "mkdir_nested",
+    "rmdir_empty",
+    "ln_symlink",
+    "sort_check",
+    "chmod_file"
+   ],
+   "identified_and_equal_to_the_true_precondition": [
+    "git_stash_pop",
+    "patch_apply",
+    "gzip_decompress",
+    "tar_extract",
+    "cp_into_dir",
+    "mkdir_nested",
+    "rmdir_empty",
+    "ln_symlink",
+    "sort_check",
+    "chmod_file"
+   ],
+   "per_action": {
+    "chmod_file": {
+     "distinct_behaviours_after_refusals": 1,
+     "distinct_behaviours_after_the_one_success": 2,
+     "hypotheses_enumerated": 33,
+     "identified": true,
+     "survivors_after_one_refusal_per_coordinate": 4,
+     "survivors_after_the_one_success": 11,
+     "the_survivor_is_the_true_precondition": true
+    },
+    "cp_into_dir": {
+     "distinct_behaviours_after_refusals": 1,
+     "distinct_behaviours_after_the_one_success": 4,
+     "hypotheses_enumerated": 51,
+     "identified": true,
+     "survivors_after_one_refusal_per_coordinate": 1,
+     "survivors_after_the_one_success": 16,
+     "the_survivor_is_the_true_precondition": true
+    },
+    "git_stash_pop": {
+     "distinct_behaviours_after_refusals": 1,
+     "distinct_behaviours_after_the_one_success": 4,
+     "hypotheses_enumerated": 51,
+     "identified": true,
+     "survivors_after_one_refusal_per_coordinate": 1,
+     "survivors_after_the_one_success": 16,
+     "the_survivor_is_the_true_precondition": true
+    },
+    "gzip_decompress": {
+     "distinct_behaviours_after_refusals": 1,
+     "distinct_behaviours_after_the_one_success": 4,
+     "hypotheses_enumerated": 51,
+     "identified": true,
+     "survivors_after_one_refusal_per_coordinate": 1,
+     "survivors_after_the_one_success": 16,
+     "the_survivor_is_the_true_precondition": true
+    },
+    "ln_symlink": {
+     "distinct_behaviours_after_refusals": 1,
+     "distinct_behaviours_after_the_one_success": 4,
+     "hypotheses_enumerated": 51,
+     "identified": true,
+     "survivors_after_one_refusal_per_coordinate": 1,
+     "survivors_after_the_one_success": 16,
+     "the_survivor_is_the_true_precondition": true
+    },
+    "mkdir_nested": {
+     "distinct_behaviours_after_refusals": 1,
+     "distinct_behaviours_after_the_one_success": 4,
+     "hypotheses_enumerated": 51,
+     "identified": true,
+     "survivors_after_one_refusal_per_coordinate": 1,
+     "survivors_after_the_one_success": 16,
+     "the_survivor_is_the_true_precondition": true
+    },
+    "patch_apply": {
+     "distinct_behaviours_after_refusals": 1,
+     "distinct_behaviours_after_the_one_success": 4,
+     "hypotheses_enumerated": 51,
+     "identified": true,
+     "survivors_after_one_refusal_per_coordinate": 1,
+     "survivors_after_the_one_success": 16,
+     "the_survivor_is_the_true_precondition": true
+    },
+    "rmdir_empty": {
+     "distinct_behaviours_after_refusals": 1,
+     "distinct_behaviours_after_the_one_success": 4,
+     "hypotheses_enumerated": 51,
+     "identified": true,
+     "survivors_after_one_refusal_per_coordinate": 1,
+     "survivors_after_the_one_success": 16,
+     "the_survivor_is_the_true_precondition": true
+    },
+    "sort_check": {
+     "distinct_behaviours_after_refusals": 1,
+     "distinct_behaviours_after_the_one_success": 4,
+     "hypotheses_enumerated": 51,
+     "identified": true,
+     "survivors_after_one_refusal_per_coordinate": 1,
+     "survivors_after_the_one_success": 16,
+     "the_survivor_is_the_true_precondition": true
+    },
+    "tar_extract": {
+     "distinct_behaviours_after_refusals": 1,
+     "distinct_behaviours_after_the_one_success": 4,
+     "hypotheses_enumerated": 51,
+     "identified": true,
+     "survivors_after_one_refusal_per_coordinate": 1,
+     "survivors_after_the_one_success": 16,
+     "the_survivor_is_the_true_precondition": true
+    }
+   }
+  },
+  "K4_the_failure_is_free": {
+   "MET": true,
+   "claim": "a refusal does not touch the objects under the action; anything it does write is its own bookkeeping, and that is counted rather than assumed away",
+   "fraction_identical": 0.9474,
+   "objects_changed_by_any_refusal": [],
+   "refusals": 38,
+   "refusals_confined_to_bookkeeping": 2,
+   "refusals_that_left_the_tree_identical": 36,
+   "refusals_that_wrote_anything": {
+    "patch_apply": {
+     "context#0": [
+      "files/a.txt.rej"
+     ],
+     "context#1": [
+      "files/a.txt.rej"
+     ]
+    }
+   }
+  },
+  "K5_the_schedule_price": {
+   "MET": true,
+   "actions_identified_here": 10,
+   "actions_the_previous_round_identified": 0,
+   "executions_for_the_user_plan": 10,
+   "executions_for_this_schedule": 48,
+   "refusals_per_action": {
+    "chmod_file": 1,
+    "cp_into_dir": 2,
+    "git_stash_pop": 2,
+    "gzip_decompress": 2,
+    "ln_symlink": 2,
+    "mkdir_nested": 2,
+    "patch_apply": 2,
+    "rmdir_empty": 2,
+    "sort_check": 2,
+    "tar_extract": 2
+   },
+   "state_interventions_the_previous_round_ran": 160,
+   "successes_per_action": 1
+  },
+  "K6_zero": {
+   "MET": true,
+   "model_calls": 0,
+   "network_calls_at_run_time": 0,
+   "parameters_stored": 0
+  }
+ },
+ "why_this_round": {
+  "the_answer_being_tested": "a refusal message is a function of the violated precondition coordinate, so the precondition is declared by the program rather than sampled by the agent",
+  "the_gap_it_closes": "the tree measured that a success identifies applicability 0/200, that the precondition is not in the trace (160 states, 0 identified, best accuracy 1.0), and that a check mode is an oracle (1.0 held-out) -- but every one of those used a supplied fact vocabulary and none asked what a REFUSAL is",
+  "why_it_could_fail": "messages may collide across coordinates, may vary with distractors, may name a cause that is not a precondition, or a refusal may not be free (a partial effect)"
+ }
+}
