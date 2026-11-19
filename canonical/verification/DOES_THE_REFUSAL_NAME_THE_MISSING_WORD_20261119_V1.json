@@ -1,0 +1,1943 @@
+{
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "cost": {
+  "model_calls": 0,
+  "network": "three repository clones during preparation; the measurement runs offline afterwards",
+  "parameters_stored": 0
+ },
+ "date": "2026-11-19",
+ "declared_acceptance_before_the_receipt_run": {
+  "K1": "at least twenty real tasks run, each at its own parent commit, and each failure is the machine's own",
+  "K2": "for every fix that introduces a new identifier or literal, it is recorded whether the refusal names it",
+  "K3": "the result is broken down by the round-22 shape classification rather than collapsed into a score",
+  "K4": "zero model calls and zero parameters"
+ },
+ "limits": [
+  "the refusal text is the failure section pytest prints; a word can be named in a form this extraction does not recognise, which biases against the finding, not for it",
+  "the fix's new words are computed from the two states, so a fix that renames rather than adds is scored as having a new word; that is the honest reading of 'the word the fix introduces'",
+  "tasks whose historical suites do not run under this interpreter are recorded, not scored",
+  "naming is necessary, not sufficient: a named word still has to be placed, and placement is not measured here",
+  "no claim of independent verification"
+ ],
+ "mode": "RUN_REAL_FAILING_UPSTREAM_TESTS_AND_TEST_WHETHER_THE_REFUSAL_NAMES_THE_FIXS_NEW_WORD",
+ "per_task": [
+  {
+   "exception_line": "TypeError: cannot create 'VersionRange' instances directly; use SpecifierSet.to_range(), VersionRange.full(), VersionRange.empty(), VersionRange.singleton(), or VersionRange.from_bounds() instead",
+   "failed_at_parent": true,
+   "named_names": [],
+   "named_strings": [],
+   "new_names": [
+    "SupportsIndex",
+    "_IntervalState",
+    "_PointState",
+    "__newobj__",
+    "__reduce_ex__",
+    "_intervals_from_state",
+    "_intervals_state",
+    "_point_from_state",
+    "_point_state",
+    "_restore_version_range",
+    "copyreg",
+    "extra",
+    "name",
+    "protocol",
+    "reduction",
+    "state",
+    "super",
+    "type"
+   ],
+   "new_strings": [
+    "copyreg"
+   ],
+   "node": "tests/test_ranges.py::test_copy_and_pickle_preserve_state[False--None-copy]",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 286,
+   "refusal_names_a_new_identifier": false,
+   "refusal_names_a_new_word": false,
+   "repo": "pypa/packaging",
+   "sha": "46167dcdb1",
+   "source": "src/packaging/ranges.py"
+  },
+  {
+   "new_names": [],
+   "new_strings": [],
+   "node": "tests/test_requirements.py::TestRequirementParsing::test_nonempty_arbitrary_version[===arbitrarystring,>=",
+   "output_tail": "no tests ran in 0.19s\nERROR: not found: /tmp/refusal-repos/pypa__packaging/tests/test_requirements.py::TestRequirementParsing::test_nonempty_arbitrary_version\n(no match in any of [<Class TestRequirementParsing>])\n",
+   "ran": false,
+   "reason": "harness:the recorded node does not exist at this commit",
+   "repo": "pypa/packaging",
+   "sha": "5a7d3386d2",
+   "source": "src/packaging/_parser.py"
+  },
+  {
+   "exception_line": "+  where False = _group_contains(<ExceptionInfo ExceptionGroup(\"[dependency-groups] data for 'group1' was malformed\", [CyclicDependencyGroup('Cyclic dependency group include while resolving group1: Gr",
+   "failed_at_parent": true,
+   "named_names": [],
+   "named_strings": [],
+   "new_names": [],
+   "new_strings": [],
+   "node": "tests/test_dependency_groups.py::test_cyclic_include_self_with_unnormalized_spelling[group1-Group1-group1]",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 529,
+   "refusal_names_a_new_identifier": false,
+   "refusal_names_a_new_word": false,
+   "repo": "pypa/packaging",
+   "sha": "8efde605cc",
+   "source": "src/packaging/dependency_groups.py"
+  },
+  {
+   "new_names": [
+    "_eval_extra_set",
+    "_prepare_extra",
+    "continue",
+    "extras",
+    "literal"
+   ],
+   "new_strings": [
+    "Undefined {op!r} on {extras!r} and {literal!r}."
+   ],
+   "node": "tests/test_markers.py::TestExtraSetEvaluation::test_marker_evaluation[set-extra",
+   "output_tail": "no tests ran in 0.12s\nERROR: not found: /tmp/refusal-repos/pypa__packaging/tests/test_markers.py::TestExtraSetEvaluation::test_marker_evaluation\n(no match in any of [<Class TestExtraSetEvaluation>])\n",
+   "ran": false,
+   "reason": "harness:the recorded node does not exist at this commit",
+   "repo": "pypa/packaging",
+   "sha": "7d0611d420",
+   "source": "src/packaging/markers.py"
+  },
+  {
+   "exception_line": "assert <Marker('python_version >= \"3.6\" and os_name == \"posix\" and platform_system == \"Linux\"')> == <Marker('(python_version >= \"3.6\" and os_name == \"posix\") and platform_system == \"Linux\"')>",
+   "failed_at_parent": true,
+   "named_names": [],
+   "named_strings": [],
+   "new_names": [
+    "_join_markers",
+    "_splice_operand",
+    "i",
+    "range",
+    "while"
+   ],
+   "new_strings": [],
+   "node": "tests/test_markers.py::test_chaining_associativity_and_str",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 280,
+   "refusal_names_a_new_identifier": false,
+   "refusal_names_a_new_word": false,
+   "repo": "pypa/packaging",
+   "sha": "491af5d517",
+   "source": "src/packaging/markers.py"
+  },
+  {
+   "exception_line": "Use -v to get more diff",
+   "failed_at_parent": true,
+   "named_names": [],
+   "named_strings": [],
+   "new_names": [
+    "True",
+    "_canonical_specs",
+    "all",
+    "inner",
+    "p",
+    "s",
+    "spec",
+    "spec_prereleases",
+    "specs",
+    "strict",
+    "zip"
+   ],
+   "new_strings": [],
+   "node": "tests/test_requirements.py::test_requirement_copy_preserves_inner_prereleases[pickle]",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 277,
+   "refusal_names_a_new_identifier": false,
+   "refusal_names_a_new_word": false,
+   "repo": "pypa/packaging",
+   "sha": "a03bde12d5",
+   "source": "src/packaging/requirements.py"
+  },
+  {
+   "exception_line": "Use -v to get more diff",
+   "failed_at_parent": true,
+   "named_names": [],
+   "named_strings": [],
+   "new_names": [],
+   "new_strings": [],
+   "node": "tests/test_ranges.py::TestPrereleaseRegion::test_named_literal_prerelease_inside_union_bounds[None-False]",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 295,
+   "refusal_names_a_new_identifier": false,
+   "refusal_names_a_new_word": false,
+   "repo": "pypa/packaging",
+   "sha": "cd91074b05",
+   "source": "src/packaging/ranges.py"
+  },
+  {
+   "exception_line": "Failed: DID NOT RAISE InvalidLicenseExpression",
+   "failed_at_parent": true,
+   "named_names": [],
+   "named_strings": [],
+   "new_names": [
+    "isascii"
+   ],
+   "new_strings": [
+    "Invalid licenseref (non-ASCII): {ref!r}"
+   ],
+   "node": "tests/test_licenses.py::test_licenseref_rejects_kelvin_sign[LicenseRef-\\u212austom]",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 145,
+   "refusal_names_a_new_identifier": false,
+   "refusal_names_a_new_word": false,
+   "repo": "pypa/packaging",
+   "sha": "8c37b0476f",
+   "source": "src/packaging/licenses/__init__.py"
+  },
+  {
+   "exception_line": "Use -v to get more diff",
+   "failed_at_parent": true,
+   "named_names": [],
+   "named_strings": [],
+   "new_names": [],
+   "new_strings": [],
+   "node": "tests/test_metadata.py::TestMetadata::test_subclass_round_trip[False-False]",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 249,
+   "refusal_names_a_new_identifier": false,
+   "refusal_names_a_new_word": false,
+   "repo": "pypa/packaging",
+   "sha": "b1c439b0f1",
+   "source": "src/packaging/metadata.py"
+  },
+  {
+   "exception_line": "+      where ExceptionGroup(\"[dependency-groups] data for 'root' was malformed\", [InvalidRequirement('Expected semicolon (after name with no version specifier) or end\\n    invalid parent requirement\\n",
+   "failed_at_parent": true,
+   "named_names": [],
+   "named_strings": [],
+   "new_names": [
+    "parsed"
+   ],
+   "new_strings": [],
+   "node": "tests/test_dependency_groups.py::test_malformed_group_does_not_hide_included_group_errors",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 1121,
+   "refusal_names_a_new_identifier": false,
+   "refusal_names_a_new_word": false,
+   "repo": "pypa/packaging",
+   "sha": "31b2d01319",
+   "source": "src/packaging/dependency_groups.py"
+  },
+  {
+   "exception_line": "Failed: DID NOT RAISE UndefinedComparison",
+   "failed_at_parent": true,
+   "named_names": [],
+   "named_strings": [],
+   "new_names": [],
+   "new_strings": [
+    "Marker {key!r} must be a set, not {rhs!r}."
+   ],
+   "node": "tests/test_markers.py::TestMarker::test_set_valued_marker_rejects_string[-in-extras]",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 141,
+   "refusal_names_a_new_identifier": false,
+   "refusal_names_a_new_word": false,
+   "repo": "pypa/packaging",
+   "sha": "bddb69038b",
+   "source": "src/packaging/markers.py"
+  },
+  {
+   "exception_line": "AssertionError: _resolve('leaf') call not found",
+   "failed_at_parent": true,
+   "named_names": [],
+   "named_strings": [],
+   "new_names": [
+    "_validate",
+    "pop",
+    "resolved",
+    "stack",
+    "visited"
+   ],
+   "new_strings": [],
+   "node": "tests/test_dependency_groups.py::test_expand_contract_model_only_does_inner_lookup_once",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 154,
+   "refusal_names_a_new_identifier": false,
+   "refusal_names_a_new_word": false,
+   "repo": "pypa/packaging",
+   "sha": "2d57ce2b15",
+   "source": "src/packaging/dependency_groups.py"
+  },
+  {
+   "exception_line": "AttributeError: 'Requirement' object has no attribute '__replace__'",
+   "failed_at_parent": true,
+   "named_names": [
+    "__replace__"
+   ],
+   "named_strings": [],
+   "new_names": [
+    "Any",
+    "Self",
+    "_UNSET",
+    "__class__",
+    "__replace__",
+    "builtins",
+    "copy",
+    "deepcopy",
+    "result",
+    "sentinel",
+    "sys",
+    "typing_extensions",
+    "version_info"
+   ],
+   "new_strings": [
+    "Replacement fields do not round-trip: {str(tmp)!r}",
+    "_UNSET"
+   ],
+   "node": "tests/test_requirements.py::test_replace",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 156,
+   "refusal_names_a_new_identifier": true,
+   "refusal_names_a_new_word": true,
+   "repo": "pypa/packaging",
+   "sha": "4b243af94f",
+   "source": "src/packaging/requirements.py"
+  },
+  {
+   "new_names": [
+    "dict",
+    "setdefault"
+   ],
+   "new_strings": [],
+   "node": "tests/test_licenses.py::test_licenseref_case_variants_use_first_spelling[LicenseRef-mit",
+   "output_tail": "no tests ran in 0.03s\nERROR: not found: /tmp/refusal-repos/pypa__packaging/tests/test_licenses.py::test_licenseref_case_variants_use_first_spelling\n(no match in any of [<Module test_licenses.py>])\n",
+   "ran": false,
+   "reason": "harness:the recorded node does not exist at this commit",
+   "repo": "pypa/packaging",
+   "sha": "2c87a33f66",
+   "source": "src/packaging/licenses/__init__.py"
+  },
+  {
+   "exception_line": "Failed: DID NOT RAISE InvalidWheelFilename",
+   "failed_at_parent": true,
+   "named_names": [],
+   "named_strings": [],
+   "new_names": [],
+   "new_strings": [
+    "(\\d+)(.*)\\Z"
+   ],
+   "node": "tests/test_utils.py::test_parse_wheel_invalid_filename[foo-1.0-1\\n-py3-none-any.whl]",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 142,
+   "refusal_names_a_new_identifier": false,
+   "refusal_names_a_new_word": false,
+   "repo": "pypa/packaging",
+   "sha": "0625596e50",
+   "source": "src/packaging/utils.py"
+  },
+  {
+   "exception_line": "AssertionError: _resolve('leaf', 'root', <ANY>, <ANY>) call not found",
+   "failed_at_parent": true,
+   "named_names": [],
+   "named_strings": [],
+   "new_names": [
+    "add",
+    "error_count_before_parse",
+    "seen_error_groups",
+    "set"
+   ],
+   "new_strings": [],
+   "node": "tests/test_dependency_groups.py::test_expand_contract_model_only_does_inner_lookup_once",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 176,
+   "refusal_names_a_new_identifier": false,
+   "refusal_names_a_new_word": false,
+   "repo": "pypa/packaging",
+   "sha": "959bb79c06",
+   "source": "src/packaging/dependency_groups.py"
+  },
+  {
+   "exception_line": "+ <MagicMock name='literal_eval()' id='140210772846800'>",
+   "failed_at_parent": true,
+   "named_names": [],
+   "named_strings": [],
+   "new_names": [
+    "isprintable"
+   ],
+   "new_strings": [],
+   "node": "tests/test_markers.py::TestNode::test_process_python_str_skips_literal_eval_for_plain_string[\"plain\"-plain]",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 256,
+   "refusal_names_a_new_identifier": false,
+   "refusal_names_a_new_word": false,
+   "repo": "pypa/packaging",
+   "sha": "d17cfaf0b7",
+   "source": "src/packaging/_parser.py"
+  },
+  {
+   "exception_line": "Failed: DID NOT RAISE InvalidMetadata",
+   "failed_at_parent": true,
+   "named_names": [],
+   "named_strings": [],
+   "new_names": [
+    "drive"
+   ],
+   "new_strings": [],
+   "node": "tests/test_metadata.py::TestMetadata::test_invalid_license_files[license_files4]",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 133,
+   "refusal_names_a_new_identifier": false,
+   "refusal_names_a_new_word": false,
+   "repo": "pypa/packaging",
+   "sha": "022ae6c6fe",
+   "source": "src/packaging/metadata.py"
+  },
+  {
+   "new_names": [],
+   "new_strings": [
+    "\\S+"
+   ],
+   "node": "tests/test_requirements.py::TestRequirementParsing::test_error_when_suffixed_with_line_break[name",
+   "output_tail": "no tests ran in 0.19s\nERROR: not found: /tmp/refusal-repos/pypa__packaging/tests/test_requirements.py::TestRequirementParsing::test_error_when_suffixed_with_line_break\n(no match in any of [<Class TestRequirementParsing>])\n",
+   "ran": false,
+   "reason": "harness:the recorded node does not exist at this commit",
+   "repo": "pypa/packaging",
+   "sha": "2602dd07d8",
+   "source": "src/packaging/_tokenizer.py"
+  },
+  {
+   "exception_line": "Failed: DID NOT RAISE PylockSelectError",
+   "failed_at_parent": true,
+   "named_names": [],
+   "named_strings": [],
+   "new_names": [
+    "canonical_dependency_groups",
+    "canonical_extras",
+    "canonicalize_name",
+    "dependency_group",
+    "extra",
+    "set",
+    "unknown_dependency_groups",
+    "unknown_extras"
+   ],
+   "new_strings": [
+    "Undeclared dependency groups: ",
+    "Undeclared extras: {', '.join(sorted(unknown_extras))}",
+    "{', '.join(sorted(unknown_dependency_groups))}"
+   ],
+   "node": "tests/test_pylock_select.py::test_unknown_extras",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 128,
+   "refusal_names_a_new_identifier": false,
+   "refusal_names_a_new_word": false,
+   "repo": "pypa/packaging",
+   "sha": "23669b1b69",
+   "source": "src/packaging/pylock.py"
+  },
+  {
+   "exception_line": "+  where True = <LowerBound [None>.inclusive",
+   "failed_at_parent": true,
+   "named_names": [],
+   "named_strings": [],
+   "new_names": [],
+   "new_strings": [],
+   "node": "tests/test_ranges.py::TestUnboundedEnds::test_lower_spellings_are_one_bound",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 165,
+   "refusal_names_a_new_identifier": false,
+   "refusal_names_a_new_word": false,
+   "repo": "pypa/packaging",
+   "sha": "55cbf1b942",
+   "source": "src/packaging/_ranges.py"
+  },
+  {
+   "exception_line": "Failed: DID NOT RAISE PylockSelectError",
+   "failed_at_parent": true,
+   "named_names": [],
+   "named_strings": [],
+   "new_names": [],
+   "new_strings": [],
+   "node": "tests/test_pylock_select.py::test_lock_no_matching_env[environments0]",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 155,
+   "refusal_names_a_new_identifier": false,
+   "refusal_names_a_new_word": false,
+   "repo": "pypa/packaging",
+   "sha": "b80e6eb0a6",
+   "source": "src/packaging/pylock.py"
+  },
+  {
+   "exception_line": "Failed: DID NOT RAISE InvalidMetadata",
+   "failed_at_parent": true,
+   "named_names": [],
+   "named_strings": [],
+   "new_names": [
+    "_LINE_BOUNDARY_RE",
+    "compile",
+    "re",
+    "search",
+    "sub"
+   ],
+   "new_strings": [
+    "Check the field contains no line breaks.",
+    "\\r\\n|[\\n\\r\\v\\f\\x1c\\x1d\\x1e\\x85\\u2028\\u2029]"
+   ],
+   "node": "tests/test_metadata.py::TestMetadata::test_invalid_summary[Hello\\rAgain]",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 125,
+   "refusal_names_a_new_identifier": false,
+   "refusal_names_a_new_word": false,
+   "repo": "pypa/packaging",
+   "sha": "2d873eb600",
+   "source": "src/packaging/metadata.py"
+  },
+  {
+   "exception_line": "+  where False = isinstance(PackageWheel(name=None, upload_time=None, url=None, path='./foo-1.0-py3-none-any.whl', size=None, hashes={'sha256': 'abc123'}), PackageSdist)",
+   "failed_at_parent": true,
+   "named_names": [],
+   "named_strings": [],
+   "new_names": [],
+   "new_strings": [],
+   "node": "tests/test_pylock_select.py::test_empty_tags_selects_sdist_instead_of_host_compatible_wheel",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 314,
+   "refusal_names_a_new_identifier": false,
+   "refusal_names_a_new_word": false,
+   "repo": "pypa/packaging",
+   "sha": "826426fc88",
+   "source": "src/packaging/pylock.py"
+  },
+  {
+   "exception_line": "packaging.specifiers.InvalidSpecifier: Invalid specifier: 'y'",
+   "failed_at_parent": true,
+   "named_names": [
+    "InvalidSpecifier"
+   ],
+   "named_strings": [],
+   "new_names": [
+    "InvalidSpecifier"
+   ],
+   "new_strings": [],
+   "node": "tests/test_requirements.py::TestRequirementParsing::test_error_when_specifier_set_rejects_parsed_specifier",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 187,
+   "refusal_names_a_new_identifier": true,
+   "refusal_names_a_new_word": true,
+   "repo": "pypa/packaging",
+   "sha": "fe18f139c5",
+   "source": "src/packaging/requirements.py"
+  },
+  {
+   "exception_line": "TypeError: Pylock.select() got an unexpected keyword argument 'prefer_sdist_predicate'",
+   "failed_at_parent": true,
+   "named_names": [
+    "prefer_sdist_predicate"
+   ],
+   "named_strings": [],
+   "new_names": [
+    "prefer_sdist_predicate"
+   ],
+   "new_strings": [],
+   "node": "tests/test_pylock_select.py::test_prefer_sdist_predicate[compatible-wheel-predicate-false]",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 192,
+   "refusal_names_a_new_identifier": true,
+   "refusal_names_a_new_word": true,
+   "repo": "pypa/packaging",
+   "sha": "9c652e4b4c",
+   "source": "src/packaging/pylock.py"
+  },
+  {
+   "exception_line": "Failed: DID NOT RAISE InvalidWheelFilename",
+   "failed_at_parent": true,
+   "named_names": [],
+   "named_strings": [],
+   "new_names": [],
+   "new_strings": [
+    "^[\\w._]+\\Z"
+   ],
+   "node": "tests/test_utils.py::test_parse_wheel_invalid_filename[foo\\n-1.0-py3-none-any.whl]",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 140,
+   "refusal_names_a_new_identifier": false,
+   "refusal_names_a_new_word": false,
+   "repo": "pypa/packaging",
+   "sha": "8af75907bf",
+   "source": "src/packaging/utils.py"
+  },
+  {
+   "exception_line": "+  where 1 = len((InvalidMetadata(\"unrecognized field: 'hello'\"),))",
+   "failed_at_parent": true,
+   "named_names": [],
+   "named_strings": [],
+   "new_names": [
+    "validated"
+   ],
+   "new_strings": [],
+   "node": "tests/test_metadata.py::TestMetadata::test_from_email_unparsed",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 179,
+   "refusal_names_a_new_identifier": false,
+   "refusal_names_a_new_word": false,
+   "repo": "pypa/packaging",
+   "sha": "2068340250",
+   "source": "src/packaging/metadata.py"
+  },
+  {
+   "exception_line": null,
+   "failed_at_parent": true,
+   "named_names": [],
+   "named_strings": [],
+   "new_names": [],
+   "new_strings": [],
+   "node": "tests/test_metadata.py::TestMetadata::test_from_email_description_content_type_lowercase_charset",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 103,
+   "refusal_names_a_new_identifier": false,
+   "refusal_names_a_new_word": false,
+   "repo": "pypa/packaging",
+   "sha": "abf000549c",
+   "source": "src/packaging/metadata.py"
+  },
+  {
+   "new_names": [
+    "IndexError",
+    "content_type_header",
+    "defect",
+    "defects",
+    "invalid_msg"
+   ],
+   "new_strings": [
+    "{value!r} is not a valid content type for {self.raw_name!r}",
+    "{value!r} is not a valid content type for {self.raw_name!r}: {defect}"
+   ],
+   "node": "tests/test_metadata.py::TestMetadata::test_from_email_wraps_description_content_type_parse_errors[text/plain\\n",
+   "output_tail": "no tests ran in 0.14s\nERROR: not found: /tmp/refusal-repos/pypa__packaging/tests/test_metadata.py::TestMetadata::test_from_email_wraps_description_content_type_parse_errors\n(no match in any of [<Class TestMetadata>])\n",
+   "ran": false,
+   "reason": "harness:the recorded node does not exist at this commit",
+   "repo": "pypa/packaging",
+   "sha": "9d0ec47b36",
+   "source": "src/packaging/metadata.py"
+  },
+  {
+   "exception_line": "+ ''version'' is invalid for 'version'",
+   "failed_at_parent": true,
+   "named_names": [],
+   "named_strings": [],
+   "new_names": [],
+   "new_strings": [
+    "paths must use '/' delimiter",
+    "valid Markdown variants for {self.raw_name!r} are ",
+    "{import_name!r} is invalid for {self.raw_name!r}; ",
+    "{list(markdown_variants)}, not {variant!r}",
+    "{name!r} is invalid for {self.raw_name!r}",
+    "{name!r} is invalid for {self.raw_name!r}; ",
+    "{path!r} is invalid for {self.raw_name!r}, ",
+    "{path!r} is invalid for {self.raw_name!r}, paths must be relative",
+    "{path!r} is invalid for {self.raw_name!r}, paths must be resolved",
+    "{req!r} is invalid for {self.raw_name!r}",
+    "{self.raw_name!r} can only specify the UTF-8 charset, not {charset!r}",
+    "{self.raw_name!r} is a required field",
+    "{self.raw_name!r} must be a single line",
+    "{self.raw_name!r} must be one of {list(content_types)}, not {value!r}",
+    "{value!r} is invalid for {self.raw_name!r}"
+   ],
+   "node": "tests/test_metadata.py::TestMetadata::test_invalid_version_with_placeholder_text",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 263,
+   "refusal_names_a_new_identifier": false,
+   "refusal_names_a_new_word": false,
+   "repo": "pypa/packaging",
+   "sha": "458b0ae53e",
+   "source": "src/packaging/metadata.py"
+  },
+  {
+   "exception_line": "^",
+   "failed_at_parent": true,
+   "named_names": [
+    "InvalidRequirement"
+   ],
+   "named_strings": [],
+   "new_names": [
+    "InvalidRequirement",
+    "collect"
+   ],
+   "new_strings": [],
+   "node": "tests/test_dependency_groups.py::test_resolution_collects_invalid_requirement_with_sibling_errors",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 752,
+   "refusal_names_a_new_identifier": true,
+   "refusal_names_a_new_word": true,
+   "repo": "pypa/packaging",
+   "sha": "30824d9e3b",
+   "source": "src/packaging/dependency_groups.py"
+  },
+  {
+   "exception_line": "+ \"S_P__A_M\" in extras",
+   "failed_at_parent": true,
+   "named_names": [],
+   "named_strings": [],
+   "new_names": [],
+   "new_strings": [],
+   "node": "tests/test_markers.py::TestMarker::test_membership_value_str_normalization[extras]",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 217,
+   "refusal_names_a_new_identifier": false,
+   "refusal_names_a_new_word": false,
+   "repo": "pypa/packaging",
+   "sha": "4c663c9ef5",
+   "source": "src/packaging/markers.py"
+  },
+  {
+   "exception_line": "+  where True = hasattr(<Requirement('requests>=2.0')>, '__dict__')",
+   "failed_at_parent": true,
+   "named_names": [],
+   "named_strings": [],
+   "new_names": [
+    "__slots__",
+    "key",
+    "keys",
+    "setattr"
+   ],
+   "new_strings": [
+    "extras",
+    "marker",
+    "name",
+    "specifier",
+    "url"
+   ],
+   "node": "tests/test_requirements.py::test_requirement_slots",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 197,
+   "refusal_names_a_new_identifier": false,
+   "refusal_names_a_new_word": false,
+   "repo": "pypa/packaging",
+   "sha": "d5fedc90bb",
+   "source": "src/packaging/requirements.py"
+  },
+  {
+   "exception_line": "Failed: DID NOT RAISE DirectUrlValidationError",
+   "failed_at_parent": true,
+   "named_names": [],
+   "named_strings": [],
+   "new_names": [
+    "SplitResult",
+    "_file_url_has_absolute_path",
+    "startswith"
+   ],
+   "new_strings": [
+    "File URL must be absolute when dir_info is present"
+   ],
+   "node": "tests/test_direct_url.py::test_dir_info_url_requires_absolute_file_url[file:relative]",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 185,
+   "refusal_names_a_new_identifier": false,
+   "refusal_names_a_new_word": false,
+   "repo": "pypa/packaging",
+   "sha": "a0661b5f5c",
+   "source": "src/packaging/direct_url.py"
+  },
+  {
+   "exception_line": "AssertionError: lhs must be a string",
+   "failed_at_parent": true,
+   "named_names": [],
+   "named_strings": [],
+   "new_names": [],
+   "new_strings": [
+    "Set-valued marker {environment_key!r} can only be used ",
+    "side of {op.serialize()!r}.",
+    "with the membership form (e.g. \"<name>\" in ",
+    "{environment_key}); it cannot appear on the left-hand "
+   ],
+   "node": "tests/test_markers.py::TestMarker::test_set_valued_marker_on_lhs_raises_undefined_comparison[==-extras]",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 163,
+   "refusal_names_a_new_identifier": false,
+   "refusal_names_a_new_word": false,
+   "repo": "pypa/packaging",
+   "sha": "2c688aa15f",
+   "source": "src/packaging/markers.py"
+  },
+  {
+   "exception_line": "AssertionError",
+   "failed_at_parent": true,
+   "named_names": [],
+   "named_strings": [],
+   "new_names": [],
+   "new_strings": [
+    "payload is not a string"
+   ],
+   "node": "tests/test_metadata.py::TestRawMetadata::test_description_multipart_payload[False]",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 116,
+   "refusal_names_a_new_identifier": false,
+   "refusal_names_a_new_word": false,
+   "repo": "pypa/packaging",
+   "sha": "1b00eeffc6",
+   "source": "src/packaging/metadata.py"
+  },
+  {
+   "exception_line": "+    where evaluate = <Marker('python_version < \"3.10\" and sys_platform == \"linux\" or sys_platform == \"darwin\"')>.evaluate",
+   "failed_at_parent": true,
+   "named_names": [],
+   "named_strings": [],
+   "new_names": [],
+   "new_strings": [],
+   "node": "tests/test_markers.py::test_str_preserves_nested_group_precedence",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 570,
+   "refusal_names_a_new_identifier": false,
+   "refusal_names_a_new_word": false,
+   "repo": "pypa/packaging",
+   "sha": "0a85b41e24",
+   "source": "src/packaging/markers.py"
+  },
+  {
+   "exception_line": "Failed: DID NOT RAISE ValueError",
+   "failed_at_parent": true,
+   "named_names": [],
+   "named_strings": [],
+   "new_names": [],
+   "new_strings": [],
+   "node": "tests/test_ranges.py::TestSetAlgebra::test_difference_requires_matching_policy",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 126,
+   "refusal_names_a_new_identifier": false,
+   "refusal_names_a_new_word": false,
+   "repo": "pypa/packaging",
+   "sha": "c4fb81ff6e",
+   "source": "src/packaging/ranges.py"
+  },
+  {
+   "exception_line": "Failed: DID NOT RAISE InvalidWheelFilename",
+   "failed_at_parent": true,
+   "named_names": [],
+   "named_strings": [],
+   "new_names": [],
+   "new_strings": [
+    "Invalid sdist filename (empty project name): {filename!r}",
+    "^[\\w._]+$"
+   ],
+   "node": "tests/test_utils.py::test_parse_wheel_invalid_filename[-1.0-py3-none-any.whl]",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 135,
+   "refusal_names_a_new_identifier": false,
+   "refusal_names_a_new_word": false,
+   "repo": "pypa/packaging",
+   "sha": "84833cc16b",
+   "source": "src/packaging/utils.py"
+  },
+  {
+   "exception_line": "~~~~~~~~~~~~~~~^",
+   "failed_at_parent": true,
+   "named_names": [
+    "or"
+   ],
+   "named_strings": [
+    "!=",
+    "==",
+    "dev or local versions"
+   ],
+   "new_names": [
+    "or",
+    "startswith"
+   ],
+   "new_strings": [
+    "!=",
+    ".* suffix cannot be used with pre-release, post-release, ",
+    "==",
+    "===",
+    "dev or local versions"
+   ],
+   "node": "tests/test_requirements.py::TestRequirementParsing::test_error_when_prefix_match_uses_post_release[==]",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 508,
+   "refusal_names_a_new_identifier": true,
+   "refusal_names_a_new_word": true,
+   "repo": "pypa/packaging",
+   "sha": "fbea07c1f2",
+   "source": "src/packaging/_parser.py"
+  },
+  {
+   "exception_line": "+      where full = VersionRange.full",
+   "failed_at_parent": true,
+   "named_names": [],
+   "named_strings": [],
+   "new_names": [],
+   "new_strings": [],
+   "node": "tests/test_ranges.py::TestSetAlgebra::test_union_full_preserves_autodetected_prerelease_policy",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 374,
+   "refusal_names_a_new_identifier": false,
+   "refusal_names_a_new_word": false,
+   "repo": "pypa/packaging",
+   "sha": "d2fa923848",
+   "source": "src/packaging/ranges.py"
+  },
+  {
+   "exception_line": "AssertionError: assert <Requirement('urllib3[secure]')> == <Requirement('urllib3[SECURE]')>",
+   "failed_at_parent": true,
+   "named_names": [],
+   "named_strings": [],
+   "new_names": [
+    "for",
+    "in",
+    "other_extras",
+    "self_extras"
+   ],
+   "new_strings": [],
+   "node": "tests/test_requirements.py::TestRequirementBehaviour::test_equivalent_reqs_equal_hashes_unequal_strings[urllib3[secure]-urllib3[SECURE]]",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 243,
+   "refusal_names_a_new_identifier": false,
+   "refusal_names_a_new_word": false,
+   "repo": "pypa/packaging",
+   "sha": "fbd0d4b4b8",
+   "source": "src/packaging/requirements.py"
+  },
+  {
+   "exception_line": "packaging.direct_url.DirectUrlValidationError: URL scheme must be file:// when dir_info is present in 'url'",
+   "failed_at_parent": true,
+   "named_names": [],
+   "named_strings": [
+    "file"
+   ],
+   "new_names": [],
+   "new_strings": [
+    "file"
+   ],
+   "node": "tests/test_direct_url.py::test_dir_info_url_scheme_file_case_insensitive[FILE:///home/myproject]",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 223,
+   "refusal_names_a_new_identifier": false,
+   "refusal_names_a_new_word": true,
+   "repo": "pypa/packaging",
+   "sha": "e80f70f8b1",
+   "source": "src/packaging/direct_url.py"
+  },
+  {
+   "exception_line": "KeyError: 'extras'",
+   "failed_at_parent": true,
+   "named_names": [
+    "KeyError"
+   ],
+   "named_strings": [],
+   "new_names": [
+    "KeyError",
+    "_lookup_environment"
+   ],
+   "new_strings": [],
+   "node": "tests/test_markers.py::TestMarker::test_missing_environment_key_raises_undefined_environment_name",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 143,
+   "refusal_names_a_new_identifier": true,
+   "refusal_names_a_new_word": true,
+   "repo": "pypa/packaging",
+   "sha": "b19df947aa",
+   "source": "src/packaging/markers.py"
+  },
+  {
+   "exception_line": "?          +  ^    +",
+   "failed_at_parent": true,
+   "named_names": [],
+   "named_strings": [],
+   "new_names": [],
+   "new_strings": [],
+   "node": "tests/test_markers.py::TestMarker::test_extra_compared_to_variable_not_normalized",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 262,
+   "refusal_names_a_new_identifier": false,
+   "refusal_names_a_new_word": false,
+   "repo": "pypa/packaging",
+   "sha": "0726512929",
+   "source": "src/packaging/markers.py"
+  },
+  {
+   "new_names": [
+    "msg"
+   ],
+   "new_strings": [
+    "Dependency group include-group value is not a string: ",
+    "{item!r}"
+   ],
+   "node": "tests/test_dependency_groups.py::test_malformed_group_entries_are_not_cached_on_resolver_instance[item0-InvalidDependencyGroupObject-Invalid",
+   "output_tail": "no tests ran in 0.08s\nERROR: not found: /tmp/refusal-repos/pypa__packaging/tests/test_dependency_groups.py::test_malformed_group_entries_are_not_cached_on_resolver_instance\n(no match in any of [<Module test_dependency_groups.py>])\n",
+   "ran": false,
+   "reason": "harness:the recorded node does not exist at this commit",
+   "repo": "pypa/packaging",
+   "sha": "349abfad06",
+   "source": "src/packaging/dependency_groups.py"
+  },
+  {
+   "exception_line": "+  and   5688316124271654264 = hash(<Requirement('foo==1.0.0.0')>)",
+   "failed_at_parent": true,
+   "named_names": [],
+   "named_strings": [],
+   "new_names": [
+    "frozenset"
+   ],
+   "new_strings": [],
+   "node": "tests/test_requirements.py::TestRequirementBehaviour::test_equivalent_reqs_equal_hashes_unequal_strings[foo==1.0.0-foo==1.0.0.0]",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 359,
+   "refusal_names_a_new_identifier": false,
+   "refusal_names_a_new_word": false,
+   "repo": "pypa/packaging",
+   "sha": "d8e08df11b",
+   "source": "src/packaging/requirements.py"
+  },
+  {
+   "exception_line": "+  where True = is_normalized_name('a--b')",
+   "failed_at_parent": true,
+   "named_names": [],
+   "named_strings": [],
+   "new_names": [],
+   "new_strings": [
+    "[a-z0-9]+(?:-[a-z0-9]+)*"
+   ],
+   "node": "tests/test_utils.py::test_is_normalized_name[a--b-a-b]",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 180,
+   "refusal_names_a_new_identifier": false,
+   "refusal_names_a_new_word": false,
+   "repo": "pypa/packaging",
+   "sha": "ba17fcea23",
+   "source": "src/packaging/utils.py"
+  },
+  {
+   "exception_line": "?         +++",
+   "failed_at_parent": true,
+   "named_names": [],
+   "named_strings": [],
+   "new_names": [
+    "rsplit"
+   ],
+   "new_strings": [],
+   "node": "tests/test_direct_url.py::test_strip_url[https://user:pa@ss@g.c/user/repo.git-safe_user_passwords2-https://g.c/user/repo.git]",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 328,
+   "refusal_names_a_new_identifier": false,
+   "refusal_names_a_new_word": false,
+   "repo": "pypa/packaging",
+   "sha": "08bb047794",
+   "source": "src/packaging/direct_url.py"
+  },
+  {
+   "exception_line": "+    where <SpecifierSet('>=1.0')> = <Requirement('foo>=1.0')>.specifier",
+   "failed_at_parent": true,
+   "named_names": [
+    "_prereleases"
+   ],
+   "named_strings": [],
+   "new_names": [
+    "_prereleases",
+    "elif",
+    "else",
+    "len",
+    "prereleases"
+   ],
+   "new_strings": [],
+   "node": "tests/test_requirements.py::test_pickle_requirement_preserves_prereleases[True]",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 274,
+   "refusal_names_a_new_identifier": true,
+   "refusal_names_a_new_word": true,
+   "repo": "pypa/packaging",
+   "sha": "5c163f5382",
+   "source": "src/packaging/requirements.py"
+  },
+  {
+   "exception_line": null,
+   "failed_at_parent": false,
+   "named_names": [],
+   "named_strings": [],
+   "new_names": [],
+   "new_strings": [
+    "2.6"
+   ],
+   "node": "tests/test_metadata.py::TestRawMetadata::test_complete",
+   "pytest_returncode": 0,
+   "ran": true,
+   "refusal_chars": 0,
+   "refusal_names_a_new_identifier": false,
+   "refusal_names_a_new_word": false,
+   "repo": "pypa/packaging",
+   "sha": "9f5249fba2",
+   "source": "src/packaging/metadata.py"
+  },
+  {
+   "exception_line": "ImportError: cannot import name '_format_full_version' from 'packaging.markers' (/tmp/refusal-repos/pypa__packaging/src/packaging/markers.py)",
+   "failed_at_parent": true,
+   "named_names": [
+    "_format_full_version"
+   ],
+   "named_strings": [],
+   "new_names": [
+    "_format_full_version"
+   ],
+   "new_strings": [],
+   "node": "tests/test_markers.py",
+   "pytest_returncode": 2,
+   "ran": true,
+   "refusal_chars": 273,
+   "refusal_names_a_new_identifier": true,
+   "refusal_names_a_new_word": true,
+   "repo": "pypa/packaging",
+   "sha": "668da8662a",
+   "source": "src/packaging/markers.py"
+  },
+  {
+   "exception_line": "TypeError: unsupported operand type(s) for &: 'Marker' and 'Marker'",
+   "failed_at_parent": true,
+   "named_names": [],
+   "named_strings": [],
+   "new_names": [
+    "__and__",
+    "__new__",
+    "__or__",
+    "_from_markers",
+    "classmethod",
+    "cls",
+    "new"
+   ],
+   "new_strings": [],
+   "node": "tests/test_markers.py::test_and_operator_evaluates_true",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 156,
+   "refusal_names_a_new_identifier": false,
+   "refusal_names_a_new_word": false,
+   "repo": "pypa/packaging",
+   "sha": "98b4bfb682",
+   "source": "src/packaging/markers.py"
+  },
+  {
+   "exception_line": "Actual message: \"'description-content-type' can only specify the UTF-8 charset, not ['i', 's', 'o', '-', '8', '8', '5', '9', '-', '1']\"",
+   "failed_at_parent": true,
+   "named_names": [],
+   "named_strings": [],
+   "new_names": [],
+   "new_strings": [
+    "{{field}} can only specify the UTF-8 charset, not {charset!r}"
+   ],
+   "node": "tests/test_metadata.py::TestMetadata::test_invalid_charset_error_message",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 317,
+   "refusal_names_a_new_identifier": false,
+   "refusal_names_a_new_word": false,
+   "repo": "pypa/packaging",
+   "sha": "553582d916",
+   "source": "src/packaging/metadata.py"
+  },
+  {
+   "exception_line": "assert Infinity <= Infinity",
+   "failed_at_parent": true,
+   "named_names": [],
+   "named_strings": [],
+   "new_names": [
+    "is",
+    "not"
+   ],
+   "new_strings": [],
+   "node": "tests/test_structures.py::test_infinity_self_comparison",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 116,
+   "refusal_names_a_new_identifier": false,
+   "refusal_names_a_new_word": false,
+   "repo": "pypa/packaging",
+   "sha": "f8f16338e1",
+   "source": "src/packaging/_structures.py"
+  },
+  {
+   "new_names": [],
+   "new_strings": [
+    " @ {self.url}"
+   ],
+   "node": "tests/test_requirements.py::TestRequirementBehaviour::test_str_and_repr[--",
+   "output_tail": "no tests ran in 0.19s\nERROR: not found: /tmp/refusal-repos/pypa__packaging/tests/test_requirements.py::TestRequirementBehaviour::test_str_and_repr\n(no match in any of [<Class TestRequirementBehaviour>])\n",
+   "ran": false,
+   "reason": "harness:the recorded node does not exist at this commit",
+   "repo": "pypa/packaging",
+   "sha": "6da1c50d13",
+   "source": "src/packaging/requirements.py"
+  },
+  {
+   "exception_line": "packaging.metadata.InvalidMetadata: '((MIT))' is invalid for 'license-expression'",
+   "failed_at_parent": true,
+   "named_names": [],
+   "named_strings": [],
+   "new_names": [],
+   "new_strings": [],
+   "node": "tests/test_metadata.py::TestMetadata::test_valid_license_expression[((MIT))-((MIT))]",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 284,
+   "refusal_names_a_new_identifier": false,
+   "refusal_names_a_new_word": false,
+   "repo": "pypa/packaging",
+   "sha": "a1f705642e",
+   "source": "src/packaging/licenses/__init__.py"
+  },
+  {
+   "exception_line": "+  where 3 = len({'import-name': ['beaglevote', '_beaglevote ; private'], 'thisisnotreal': ['Hello!'], 'import-namespace': ['spam', '_bacon ; private']})",
+   "failed_at_parent": true,
+   "named_names": [
+    "private"
+   ],
+   "named_strings": [
+    "import-name",
+    "import-namespace",
+    "private"
+   ],
+   "new_names": [
+    "_process_import_names",
+    "_process_import_namespaces",
+    "identifier",
+    "import_name",
+    "import_names",
+    "import_namespaces",
+    "isidentifier",
+    "iskeyword",
+    "keyword",
+    "lstrip",
+    "partition",
+    "private",
+    "rstrip",
+    "semicolon"
+   ],
+   "new_strings": [
+    "2.5",
+    ":external:ref:`core-metadata-import-name`",
+    ":external:ref:`core-metadata-import-namespace`",
+    "import-name",
+    "import-namespace",
+    "import_names",
+    "import_namespaces",
+    "private",
+    "the only valid option is 'private'",
+    "{identifier!r} is a keyword",
+    "{identifier!r} is not a valid identifier",
+    "{import_name!r} is invalid for {{field}}; ",
+    "{name!r} is invalid for {{field}}; "
+   ],
+   "node": "tests/test_metadata.py::TestRawMetadata::test_complete",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 281,
+   "refusal_names_a_new_identifier": true,
+   "refusal_names_a_new_word": true,
+   "repo": "pypa/packaging",
+   "sha": "e83801f455",
+   "source": "src/packaging/metadata.py"
+  },
+  {
+   "exception_line": "AttributeError: 'Metadata' object has no attribute 'as_rfc822'",
+   "failed_at_parent": true,
+   "named_names": [
+    "as_rfc822"
+   ],
+   "named_strings": [],
+   "new_names": [
+    "EmailPolicy",
+    "Policy",
+    "RFC822Message",
+    "RFC822Policy",
+    "__class__",
+    "_write_metadata",
+    "as_bytes",
+    "as_rfc822",
+    "as_string",
+    "email_name",
+    "encode",
+    "header_store_parse",
+    "item",
+    "join",
+    "mangle_from_",
+    "max_line_length",
+    "replace",
+    "set_payload",
+    "size",
+    "unixfrom",
+    "utf8",
+    "validator"
+   ],
+   "new_strings": [
+    "\n        Return an RFC822 message with the metadata.\n        ",
+    "\n        Return the bytes representation of the message.\n\n        This handles unicode encoding.\n        ",
+    "utf-8",
+    "{label}, {url}"
+   ],
+   "node": "tests/test_metadata.py::TestMetadataWriting::test_write_metadata",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 151,
+   "refusal_names_a_new_identifier": true,
+   "refusal_names_a_new_word": true,
+   "repo": "pypa/packaging",
+   "sha": "3b20e0fd02",
+   "source": "src/packaging/metadata.py"
+  },
+  {
+   "exception_line": "name",
+   "failed_at_parent": true,
+   "named_names": [],
+   "named_strings": [
+    "semicolon (after URL and whitespace)"
+   ],
+   "new_names": [],
+   "new_strings": [
+    "Expected {expected} or end",
+    "comma (within version specifier), semicolon (after version specifier)",
+    "semicolon (after URL and whitespace)",
+    "semicolon (after name with no version specifier)"
+   ],
+   "node": "tests/test_requirements.py::TestRequirementParsing::test_error_no_space_after_url",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 583,
+   "refusal_names_a_new_identifier": false,
+   "refusal_names_a_new_word": true,
+   "repo": "pypa/packaging",
+   "sha": "888eb14526",
+   "source": "src/packaging/_parser.py"
+  },
+  {
+   "exception_line": "Failed: DID NOT RAISE InvalidName",
+   "failed_at_parent": true,
+   "named_names": [],
+   "named_strings": [],
+   "new_names": [],
+   "new_strings": [
+    "^([A-Z0-9]|[A-Z0-9][A-Z0-9._-]*[A-Z0-9])\\Z"
+   ],
+   "node": "tests/test_utils.py::test_canonicalize_name_invalid[hi\\n-hi\\n]",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 122,
+   "refusal_names_a_new_identifier": false,
+   "refusal_names_a_new_word": false,
+   "repo": "pypa/packaging",
+   "sha": "258202ed7f",
+   "source": "src/packaging/utils.py"
+  },
+  {
+   "new_names": [
+    "SyntaxError"
+   ],
+   "new_strings": [
+    "eval"
+   ],
+   "node": "tests/test_metadata.py::TestMetadata::test_invalid_license_expression[(",
+   "output_tail": "no tests ran in 0.11s\nERROR: not found: /tmp/refusal-repos/pypa__packaging/tests/test_metadata.py::TestMetadata::test_invalid_license_expression\n(no match in any of [<Class TestMetadata>])\n",
+   "ran": false,
+   "reason": "harness:the recorded node does not exist at this commit",
+   "repo": "pypa/packaging",
+   "sha": "2680259b4f",
+   "source": "src/packaging/licenses/__init__.py"
+  },
+  {
+   "exception_line": "Actual message: \"['name'] is not allowed as a dynamic field\"",
+   "failed_at_parent": true,
+   "named_names": [],
+   "named_strings": [],
+   "new_names": [],
+   "new_strings": [
+    "{dynamic_field!r} is not a valid dynamic field",
+    "{dynamic_field!r} is not allowed as a dynamic field"
+   ],
+   "node": "tests/test_metadata.py::TestMetadata::test_disallowed_dynamic[name]",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 254,
+   "refusal_names_a_new_identifier": false,
+   "refusal_names_a_new_word": false,
+   "repo": "pypa/packaging",
+   "sha": "a716c52b5f",
+   "source": "src/packaging/metadata.py"
+  },
+  {
+   "exception_line": "packaging.version.InvalidVersion: Invalid version: '3.11.1+'",
+   "failed_at_parent": true,
+   "named_names": [],
+   "named_strings": [],
+   "new_names": [
+    "_repair_python_full_version",
+    "env"
+   ],
+   "new_strings": [],
+   "node": "tests/test_markers.py::TestMarker::test_python_full_version_untagged_user_provided",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 162,
+   "refusal_names_a_new_identifier": false,
+   "refusal_names_a_new_word": false,
+   "repo": "pypa/packaging",
+   "sha": "c385b58c4d",
+   "source": "src/packaging/markers.py"
+  },
+  {
+   "exception_line": "packaging.version.InvalidVersion: Invalid version: '3.11.1+'",
+   "failed_at_parent": true,
+   "named_names": [],
+   "named_strings": [],
+   "new_names": [
+    "endswith"
+   ],
+   "new_strings": [
+    "local"
+   ],
+   "node": "tests/test_markers.py::TestMarker::test_python_full_version_untagged",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 148,
+   "refusal_names_a_new_identifier": false,
+   "refusal_names_a_new_word": false,
+   "repo": "pypa/packaging",
+   "sha": "3e67fc775e",
+   "source": "src/packaging/markers.py"
+  },
+  {
+   "exception_line": "+  where '' = getattr(<packaging.metadata.Metadata object at 0x7fadbafe8990>, 'author')",
+   "failed_at_parent": true,
+   "named_names": [],
+   "named_strings": [],
+   "new_names": [],
+   "new_strings": [],
+   "node": "tests/test_metadata.py::TestMetadata::test_optional_defaults_to_none[author]",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 222,
+   "refusal_names_a_new_identifier": false,
+   "refusal_names_a_new_word": false,
+   "repo": "pypa/packaging",
+   "sha": "09f131b326",
+   "source": "src/packaging/metadata.py"
+  },
+  {
+   "exception_line": "packaging.version.InvalidVersion: Invalid version: '1.x'",
+   "failed_at_parent": true,
+   "named_names": [],
+   "named_strings": [],
+   "new_names": [
+    "as",
+    "e"
+   ],
+   "new_strings": [
+    "Invalid sdist filename (invalid version): {filename}",
+    "Invalid wheel filename (invalid version): {filename}"
+   ],
+   "node": "tests/test_utils.py::test_parse_wheel_invalid_filename[foobar-1.x-py3-none-any.whl]",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 159,
+   "refusal_names_a_new_identifier": false,
+   "refusal_names_a_new_word": false,
+   "repo": "pypa/packaging",
+   "sha": "524b701c6e",
+   "source": "src/packaging/utils.py"
+  },
+  {
+   "exception_line": "AssertionError: assert <Requirement('scikit-learn==1.0.1')> == <Requirement('scikit_learn==1.0.1')>",
+   "failed_at_parent": true,
+   "named_names": [],
+   "named_strings": [],
+   "new_names": [
+    "Iterator",
+    "_iter_parts",
+    "canonicalize_name",
+    "utils",
+    "yield"
+   ],
+   "new_strings": [],
+   "node": "tests/test_requirements.py::TestRequirementBehaviour::test_equivalent_reqs_equal_hashes_unequal_strings[scikit-learn==1.0.1-scikit_learn==1.0.1]",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 259,
+   "refusal_names_a_new_identifier": false,
+   "refusal_names_a_new_word": false,
+   "repo": "pypa/packaging",
+   "sha": "e8f839f740",
+   "source": "src/packaging/requirements.py"
+  },
+  {
+   "exception_line": "packaging.requirements.InvalidRequirement: Invalid URL: gopher:/foo/com",
+   "failed_at_parent": true,
+   "named_names": [],
+   "named_strings": [],
+   "new_names": [],
+   "new_strings": [],
+   "node": "tests/test_requirements.py::test_basic_valid_requirement_parsing[-None-gopher:/foo/com--extras0-package]",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 199,
+   "refusal_names_a_new_identifier": false,
+   "refusal_names_a_new_word": false,
+   "repo": "pypa/packaging",
+   "sha": "fe8f0bb99c",
+   "source": "src/packaging/requirements.py"
+  },
+  {
+   "new_names": [
+    "_parse_full_marker",
+    "retval"
+   ],
+   "new_strings": [
+    "end of marker expression"
+   ],
+   "node": "tests/test_markers.py::TestMarker::test_parses_invalid[(python_version",
+   "output_tail": "no tests ran in 0.11s\nERROR: not found: /tmp/refusal-repos/pypa__packaging/tests/test_markers.py::TestMarker::test_parses_invalid\n(no match in any of [<Class TestMarker>])\n",
+   "ran": false,
+   "reason": "harness:the recorded node does not exist at this commit",
+   "repo": "pypa/packaging",
+   "sha": "55584fb5ca",
+   "source": "src/packaging/_parser.py"
+  },
+  {
+   "exception_line": "ImportError: cannot import name '_lazy_sha1' from 'itsdangerous.signer' (/tmp/refusal-repos/pallets__itsdangerous/src/itsdangerous/signer.py)",
+   "failed_at_parent": true,
+   "named_names": [
+    "_lazy_sha1"
+   ],
+   "named_strings": [],
+   "new_names": [
+    "_lazy_sha1",
+    "string"
+   ],
+   "new_strings": [],
+   "node": "tests/test_itsdangerous/test_serializer.py",
+   "pytest_returncode": 2,
+   "ran": true,
+   "refusal_chars": 321,
+   "refusal_names_a_new_identifier": true,
+   "refusal_names_a_new_word": true,
+   "repo": "pallets/itsdangerous",
+   "sha": "7f4dcf83a0",
+   "source": "src/itsdangerous/signer.py"
+  },
+  {
+   "exception_line": "AssertionError: RecursionError not raised",
+   "failed_at_parent": true,
+   "named_names": [],
+   "named_strings": [],
+   "new_names": [],
+   "new_strings": [],
+   "node": "tests/test_misc.py::TestMiscellaneous::test_inline_array_recursion_limit",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 157,
+   "refusal_names_a_new_identifier": false,
+   "refusal_names_a_new_word": false,
+   "repo": "hukkin/tomli",
+   "sha": "1e6e869aa9",
+   "source": "src/tomli/_parser.py"
+  },
+  {
+   "exception_line": "AssertionError: RecursionError not raised",
+   "failed_at_parent": true,
+   "named_names": [],
+   "named_strings": [],
+   "new_names": [
+    "MAX_KEY_PARTS"
+   ],
+   "new_strings": [
+    "TOML key has more than the allowed {MAX_KEY_PARTS} parts"
+   ],
+   "node": "tests/test_misc.py::TestMiscellaneous::test_key_recursion_limit",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 158,
+   "refusal_names_a_new_identifier": false,
+   "refusal_names_a_new_word": false,
+   "repo": "hukkin/tomli",
+   "sha": "e1fdb94bc9",
+   "source": "src/tomli/_parser.py"
+  },
+  {
+   "new_names": [],
+   "new_strings": [],
+   "node": null,
+   "ran": false,
+   "reason": "no failed node recorded",
+   "repo": "hukkin/tomli",
+   "sha": "9eb2125ef4",
+   "source": "src/tomli/_re.py"
+  },
+  {
+   "new_names": [],
+   "new_strings": [
+    "\\x"
+   ],
+   "node": null,
+   "ran": false,
+   "reason": "no failed node recorded",
+   "repo": "hukkin/tomli",
+   "sha": "12314bde5b",
+   "source": "src/tomli/_parser.py"
+  },
+  {
+   "new_names": [],
+   "new_strings": [],
+   "node": null,
+   "ran": false,
+   "reason": "no failed node recorded",
+   "repo": "hukkin/tomli",
+   "sha": "2a2aa62f1b",
+   "source": "src/tomli/_parser.py"
+  },
+  {
+   "exception_line": "AssertionError: DeprecationWarning not triggered",
+   "failed_at_parent": true,
+   "named_names": [
+    "DeprecationWarning"
+   ],
+   "named_strings": [],
+   "new_names": [
+    "DEPRECATED_DEFAULT",
+    "DeprecationWarning",
+    "args",
+    "colno",
+    "doc",
+    "errmsg",
+    "lineno",
+    "stacklevel",
+    "warn",
+    "warnings"
+   ],
+   "new_strings": [
+    "Free-form arguments for TOMLDecodeError are deprecated. ",
+    "Please set 'msg' (str), 'doc' (str) and 'pos' (int) arguments only.",
+    "Sentinel to be used as default arg during deprecation\n    period of TOMLDecodeError's free-form arguments.",
+    "line {lineno}, column {colno}",
+    "{msg} (at {coord_repr})"
+   ],
+   "node": "tests/test_error.py::TestError::test_deprecated_tomldecodeerror",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 141,
+   "refusal_names_a_new_identifier": true,
+   "refusal_names_a_new_word": true,
+   "repo": "hukkin/tomli",
+   "sha": "d1d6a8571b",
+   "source": "src/tomli/_parser.py"
+  },
+  {
+   "exception_line": "+ Expected str object, not 'bytes'",
+   "failed_at_parent": true,
+   "named_names": [],
+   "named_strings": [],
+   "new_names": [],
+   "new_strings": [
+    "Expected str object, not '{type(__s).__qualname__}"
+   ],
+   "node": "tests/test_error.py::TestError::test_type_error",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 283,
+   "refusal_names_a_new_identifier": false,
+   "refusal_names_a_new_word": false,
+   "repo": "hukkin/tomli",
+   "sha": "4e245a4bbb",
+   "source": "src/tomli/_parser.py"
+  },
+  {
+   "exception_line": "AssertionError: ValueError not raised",
+   "failed_at_parent": true,
+   "named_names": [],
+   "named_strings": [],
+   "new_names": [
+    "float_str",
+    "float_value",
+    "is",
+    "make_safe_parse_float",
+    "safe_parse_float"
+   ],
+   "new_strings": [
+    "parse_float must not return dicts or lists"
+   ],
+   "node": "tests/test_error.py::TestError::test_invalid_parse_float",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 130,
+   "refusal_names_a_new_identifier": false,
+   "refusal_names_a_new_word": false,
+   "repo": "hukkin/tomli",
+   "sha": "794c8e50d6",
+   "source": "src/tomli/_parser.py"
+  },
+  {
+   "exception_line": "AttributeError: 'str' object has no attribute 'decode'",
+   "failed_at_parent": true,
+   "named_names": [],
+   "named_strings": [],
+   "new_names": [
+    "TypeError",
+    "b"
+   ],
+   "new_strings": [
+    "File must be opened in binary mode, e.g. use `open('foo.toml', 'rb')`"
+   ],
+   "node": "tests/test_misc.py::TestMiscellaneous::test_incorrect_load",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 143,
+   "refusal_names_a_new_identifier": false,
+   "refusal_names_a_new_word": false,
+   "repo": "hukkin/tomli",
+   "sha": "8b962e1349",
+   "source": "src/tomli/_parser.py"
+  },
+  {
+   "exception_line": "+ tomli._parser",
+   "failed_at_parent": true,
+   "named_names": [],
+   "named_strings": [
+    "tomli"
+   ],
+   "new_names": [
+    "__module__"
+   ],
+   "new_strings": [
+    "tomli"
+   ],
+   "node": "tests/test_error.py::test_module_name",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 182,
+   "refusal_names_a_new_identifier": false,
+   "refusal_names_a_new_word": true,
+   "repo": "hukkin/tomli",
+   "sha": "96dfe2cef7",
+   "source": "tomli/__init__.py"
+  },
+  {
+   "exception_line": "+    where TOMLDecodeError('Found invalid character \"\\'\\\\n\\'\" (at line 1, column 6)') = <ExceptionInfo TOMLDecodeError('Found invalid character \"\\'\\\\n\\'\" (at line 1, column 6)') tblen=7>.value",
+   "failed_at_parent": true,
+   "named_names": [],
+   "named_strings": [],
+   "new_names": [],
+   "new_strings": [
+    "Expected {expect!r}",
+    "Found invalid character {src[pos]!r}",
+    "Illegal character {char!r}"
+   ],
+   "node": "tests/test_error.py::test_invalid_char_quotes",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 526,
+   "refusal_names_a_new_identifier": false,
+   "refusal_names_a_new_word": false,
+   "repo": "hukkin/tomli",
+   "sha": "31c85a1846",
+   "source": "tomli/_parser.py"
+  },
+  {
+   "exception_line": null,
+   "failed_at_parent": false,
+   "named_names": [],
+   "named_strings": [],
+   "new_names": [],
+   "new_strings": [
+    "A lil' TOML parser."
+   ],
+   "node": "tests/test_misc.py::test_own_pyproject",
+   "pytest_returncode": 0,
+   "ran": true,
+   "refusal_chars": 0,
+   "refusal_names_a_new_identifier": false,
+   "refusal_names_a_new_word": false,
+   "repo": "hukkin/tomli",
+   "sha": "9af551b578",
+   "source": "tomli/__init__.py"
+  },
+  {
+   "exception_line": "ImportError: cannot import name 'Flags' from 'tomli._parser' (/tmp/refusal-repos/hukkin__tomli/tomli/_parser.py)",
+   "failed_at_parent": true,
+   "named_names": [
+    "Flags"
+   ],
+   "named_strings": [
+    "flags"
+   ],
+   "new_names": [
+    "EXPLICIT_NEST",
+    "FROZEN",
+    "Flags",
+    "_meta",
+    "flag",
+    "flags",
+    "is_",
+    "pop",
+    "recursive",
+    "set_for_relative_key",
+    "unset_all"
+   ],
+   "new_strings": [
+    "Flags that map to parsed keys/namespaces.",
+    "flags",
+    "recursive_flags"
+   ],
+   "node": "tests/test_flags.py",
+   "pytest_returncode": 2,
+   "ran": true,
+   "refusal_chars": 238,
+   "refusal_names_a_new_identifier": true,
+   "refusal_names_a_new_word": true,
+   "repo": "hukkin/tomli",
+   "sha": "9655d33004",
+   "source": "tomli/_parser.py"
+  },
+  {
+   "exception_line": "+ Invalid value",
+   "failed_at_parent": true,
+   "named_names": [
+    "column",
+    "line"
+   ],
+   "named_strings": [],
+   "new_names": [
+    "column",
+    "count",
+    "line",
+    "location_repr",
+    "msg",
+    "suffix_location"
+   ],
+   "new_strings": [
+    " Expected \"]]\"",
+    "Found \"{end_marker!r}\" at the end of an array declaration.",
+    "Invalid initial character for a key part",
+    "Invalid statement",
+    "Suffix an error message with location in source.",
+    "Unexpected sequence",
+    "end of document",
+    "line {line}, column {column}",
+    "{msg} (at {location_repr(state)})"
+   ],
+   "node": "tests/test_error.py::test_line_and_col",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 235,
+   "refusal_names_a_new_identifier": true,
+   "refusal_names_a_new_word": true,
+   "repo": "hukkin/tomli",
+   "sha": "67ec7d1052",
+   "source": "tomli/_parser.py"
+  },
+  {
+   "exception_line": "TypeError: loads() got an unexpected keyword argument 'parse_float'",
+   "failed_at_parent": true,
+   "named_names": [
+    "parse_float"
+   ],
+   "named_strings": [],
+   "new_names": [
+    "Callable",
+    "ParseFloat",
+    "parse_float"
+   ],
+   "new_strings": [],
+   "node": "tests/test_misc.py::test_parse_float",
+   "pytest_returncode": 1,
+   "ran": true,
+   "refusal_chars": 156,
+   "refusal_names_a_new_identifier": true,
+   "refusal_names_a_new_word": true,
+   "repo": "hukkin/tomli",
+   "sha": "5ab9ec926d",
+   "source": "tomli/_parser.py"
+  }
+ ],
+ "schema": "BRAIN_DOES_THE_REFUSAL_NAME_THE_MISSING_WORD_V1",
+ "verdict": {
+  "K1_the_measurement_runs_real_suites_at_the_parent_commit": {
+   "MET": true,
+   "could_not_run": 12,
+   "failed_at_parent_as_recorded": 73,
+   "note": "a task that could not run is recorded with its reason and is never counted as evidence for or against",
+   "ran": 75,
+   "tasks": 87
+  },
+  "K2_refusals_name_a_word_the_fix_adds": {
+   "MET": true,
+   "fixes_with_a_new_word": 57,
+   "fraction_any": 0.316,
+   "fraction_identifier": 0.263,
+   "named_a_new_identifier": 15,
+   "named_any_new_word": 18
+  },
+  "K3_the_outcome_is_reported_per_shape_not_as_a_score": {
+   "MET": true,
+   "shapes": {
+    "line_count_changed": {
+     "named": 17,
+     "tasks": 60
+    },
+    "multi_token_within_the_lines": {
+     "named": 1,
+     "tasks": 7
+    },
+    "one_token_from_the_machine": {
+     "named": 0,
+     "tasks": 1
+    },
+    "one_token_inside_a_literal": {
+     "named": 0,
+     "tasks": 5
+    }
+   }
+  },
+  "K4_zero": {
+   "MET": true,
+   "model_calls": 0,
+   "parameters_stored": 0
+  }
+ },
+ "why_this_round": {
+  "the_answer_being_tested": "if refusals name the missing word, the checker is a proposer and the search collapses; if they only grade, proposal is the bottleneck and no parameter-free route exists without a checker that speaks",
+  "the_gap_it_closes": "round 22 showed a vocabulary cannot supply an edit (0 of 8 one-token fixes drew their word from the file) and named the next mechanism: the goal is a refusal at a site. That mechanism only works if the refusal NAMES the missing word, which was never tested",
+  "why_it_could_fail": "the exception may name only types and values, never the new identifier; the suites may not run at their historical commits"
+ }
+}
