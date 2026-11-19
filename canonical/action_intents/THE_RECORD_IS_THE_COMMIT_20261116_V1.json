@@ -8,10 +8,10 @@
   "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
   "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
   "conversation_memory_is_authority": false,
-  "earlier_routes_exhausted_reason": "Refused by measurement, in order: a hand-written vocabulary, relations over the reader, a goal handed in, the coarsest sufficient statistic, a free-running refinement loop, a supplied predicate called the goal, a syntactic count of statements, a price of the residual in words, a reset-started suite, a check mode discovered from the program (exact for 5 of 10, blind to the world), and then the claim that the decision had to be read at all: it is decided by a free attempt.",
+  "earlier_routes_exhausted_reason": "Refused by measurement, in order: a hand-written vocabulary, relations over the reader, a goal handed in, the coarsest sufficient statistic, a free-running refinement loop, a supplied predicate called the goal, a syntactic count of statements, a price of the residual in words, a reset-started suite, a check mode discovered from the program (exact for 5 of 10, blind to the world), the claim that the decision had to be read at all (it is decided by a free attempt), and then the claim that the commit had to be one rename (it is decided by a durable record).",
   "incremental_spend_usd": 0,
   "independent_verification_completed": false,
-  "independent_verification_note": "Producer-run sandbox only. Every number is a receipt row: 160 states, 10 actions, 80 refused attempts all free, 80 commits all exact and undoable, ENOTEMPTY for os.replace on a populated directory, RENAME_EXCHANGE supported here, the fallback window observed, 0 model calls, 0 parameters.",
+  "independent_verification_note": "Producer-run sandbox only. Every number is a receipt row: 6 operations produced by tar and rm, 10 crash boundaries all accounted for, 8 of 8 armed boundaries recovered to the target byte-exactly, 56 of 56 second recoveries after a crash inside recovery, the no-record control half-applied at 5 of 9 boundaries with nothing to recover from, 868-byte record, 16 fsyncs, 7 renames, 0 model calls, 0 parameters, 0 network calls.",
   "laws_read_this_session": [
    "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
    "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
@@ -31,10 +31,10 @@
   "producer_cognition_model_dependency_count": 0,
   "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
   "progress_evidence_paths": [
-   "canonical/verification/THE_FAILED_ATTEMPT_IS_FREE_20261116_V1.json",
-   "THE_FAILED_ATTEMPT_IS_FREE_20261116_V1.md",
-   "canonical/tools/the_failed_attempt_is_free_v1.py",
-   "canonical/tests/test_the_failed_attempt_is_free_v1.py"
+   "canonical/verification/THE_RECORD_IS_THE_COMMIT_20261116_V1.json",
+   "THE_RECORD_IS_THE_COMMIT_20261116_V1.md",
+   "canonical/tools/the_record_is_the_commit_v1.py",
+   "canonical/tests/test_the_record_is_the_commit_v1.py"
   ],
   "route_class": "SYNTHESIZE_NEW_PRIMITIVE",
   "scope_complete_discharge": false,
