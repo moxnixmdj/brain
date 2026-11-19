@@ -1,0 +1,646 @@
+{
+ "schema": "BRAIN_THE_BRANCH_IS_THE_MODEL_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "date": "2026-11-28",
+ "environment": {
+  "kind": "real machine: git",
+  "base_repo": "https://github.com/pypa/packaging.git",
+  "target_commit": "6abe6f4096062f95ec8c478719a489a98dddc160",
+  "edges": [
+   "git_merge_abort",
+   "git_rebase_abort",
+   "git_checkout_main",
+   "git_stash_pop",
+   "git_stash_drop",
+   "git_checkout_discard",
+   "git_clean_fd",
+   "git_add_all",
+   "git_commit",
+   "git_branch_force_delete"
+  ],
+  "damage_kinds": [
+   "wrong_branch",
+   "conflicted_merge",
+   "conflicted_rebase",
+   "stashed_wrong_branch",
+   "conflict_and_stash",
+   "deep",
+   "wrong_branch"
+  ]
+ },
+ "claim": "the successor of an edge is not predicted, it is had: one copy plus one execution per edge",
+ "summary": {
+  "tasks": 7,
+  "solved_with_learning": 6,
+  "solved_without_knowledge": 7,
+  "executions_with_learning": 658,
+  "executions_without_knowledge": 1315,
+  "edges_pruned": 318,
+  "solvable_but_lost_to_pruning": [
+   "deep"
+  ],
+  "plans": {
+   "wrong_branch": [
+    "git_checkout_main",
+    "git_clean_fd"
+   ],
+   "conflicted_merge": [
+    "git_merge_abort",
+    "git_checkout_main",
+    "git_clean_fd"
+   ],
+   "conflicted_rebase": [
+    "git_rebase_abort",
+    "git_checkout_main",
+    "git_clean_fd"
+   ],
+   "stashed_wrong_branch": [
+    "git_checkout_main",
+    "git_stash_pop",
+    "git_clean_fd",
+    "git_add_all",
+    "git_commit"
+   ],
+   "conflict_and_stash": [
+    "git_merge_abort",
+    "git_checkout_main",
+    "git_stash_pop",
+    "git_clean_fd",
+    "git_add_all",
+    "git_commit"
+   ]
+  },
+  "depths": {
+   "wrong_branch": 2,
+   "conflicted_merge": 3,
+   "conflicted_rebase": 3,
+   "stashed_wrong_branch": 5,
+   "conflict_and_stash": 6
+  },
+  "solved_order_only": 7,
+  "executions_order_only": 1337,
+  "warm_solved": 6,
+  "executions_warm": 639,
+  "identified_conditions": {
+   "git_merge_abort": "UNDETERMINED",
+   "git_rebase_abort": "UNDETERMINED",
+   "git_checkout_main": "UNDETERMINED",
+   "git_stash_pop": "UNDETERMINED",
+   "git_stash_drop": "UNDETERMINED",
+   "git_checkout_discard": "UNDETERMINED",
+   "git_clean_fd": "UNDETERMINED",
+   "git_add_all": "UNDETERMINED",
+   "git_commit": "UNDETERMINED",
+   "git_branch_force_delete": "UNDETERMINED"
+  },
+  "seconds": 229.8,
+  "parameters_stored": 0,
+  "model_calls": 0,
+  "transitions_predicted": 0,
+  "transitions_branched": 658
+ },
+ "rows": [
+  {
+   "solved": true,
+   "depth": 2,
+   "plan": [
+    "git_checkout_main",
+    "git_clean_fd"
+   ],
+   "expansions": 2,
+   "edges_tried": 17,
+   "executions": 17,
+   "copies": 17,
+   "pruned_by_knowledge": 0,
+   "seconds": 0.68,
+   "task": "wrong_branch",
+   "mode": "LEARNING_AND_PRUNING",
+   "preserve": false,
+   "goal_reason_at_start": "on side, 2 modified/untracked, 1 file(s) changed that nobody asked about, head e36a0a1d != 6abe6f40",
+   "knowledge_before": 0,
+   "knowledge_after": 17
+  },
+  {
+   "solved": true,
+   "depth": 3,
+   "plan": [
+    "git_merge_abort",
+    "git_checkout_main",
+    "git_clean_fd"
+   ],
+   "expansions": 5,
+   "edges_tried": 46,
+   "executions": 46,
+   "copies": 46,
+   "pruned_by_knowledge": 1,
+   "seconds": 1.77,
+   "task": "conflicted_merge",
+   "mode": "LEARNING_AND_PRUNING",
+   "preserve": false,
+   "goal_reason_at_start": "on side, 3 modified/untracked, operation in progress, 1 file(s) changed that nobody asked about, head e36a0a1d != 6abe6f40",
+   "knowledge_before": 17,
+   "knowledge_after": 63
+  },
+  {
+   "solved": true,
+   "depth": 3,
+   "plan": [
+    "git_rebase_abort",
+    "git_checkout_main",
+    "git_clean_fd"
+   ],
+   "expansions": 5,
+   "edges_tried": 42,
+   "executions": 42,
+   "copies": 42,
+   "pruned_by_knowledge": 5,
+   "seconds": 2.32,
+   "task": "conflicted_rebase",
+   "mode": "LEARNING_AND_PRUNING",
+   "preserve": false,
+   "goal_reason_at_start": "on HEAD, 3 modified/untracked, operation in progress",
+   "knowledge_before": 63,
+   "knowledge_after": 105
+  },
+  {
+   "solved": true,
+   "depth": 5,
+   "plan": [
+    "git_checkout_main",
+    "git_stash_pop",
+    "git_clean_fd",
+    "git_add_all",
+    "git_commit"
+   ],
+   "expansions": 29,
+   "edges_tried": 176,
+   "executions": 176,
+   "copies": 176,
+   "pruned_by_knowledge": 113,
+   "seconds": 12.6,
+   "task": "stashed_wrong_branch",
+   "mode": "LEARNING_AND_PRUNING",
+   "preserve": true,
+   "goal_reason_at_start": "on side, 2 modified/untracked, stash present, 1 file(s) changed that nobody asked about, the original history is no longer an ancestor, the stashed work is not in the commit",
+   "knowledge_before": 105,
+   "knowledge_after": 281
+  },
+  {
+   "solved": true,
+   "depth": 6,
+   "plan": [
+    "git_merge_abort",
+    "git_checkout_main",
+    "git_stash_pop",
+    "git_clean_fd",
+    "git_add_all",
+    "git_commit"
+   ],
+   "expansions": 40,
+   "edges_tried": 265,
+   "executions": 265,
+   "copies": 265,
+   "pruned_by_knowledge": 134,
+   "seconds": 14.59,
+   "task": "conflict_and_stash",
+   "mode": "LEARNING_AND_PRUNING",
+   "preserve": true,
+   "goal_reason_at_start": "on side, 3 modified/untracked, stash present, operation in progress, 1 file(s) changed that nobody asked about, the original history is no longer an ancestor, the stashed work is not in the commit",
+   "knowledge_before": 281,
+   "knowledge_after": 546
+  },
+  {
+   "solved": false,
+   "depth": null,
+   "plan": [],
+   "expansions": 16,
+   "edges_tried": 103,
+   "executions": 103,
+   "copies": 103,
+   "pruned_by_knowledge": 57,
+   "seconds": 5.67,
+   "task": "deep",
+   "mode": "LEARNING_AND_PRUNING",
+   "preserve": true,
+   "goal_reason_at_start": "on side, 4 modified/untracked, stash present, operation in progress, 1 file(s) changed that nobody asked about, the original history is no longer an ancestor, the stashed work is not in the commit",
+   "knowledge_before": 546,
+   "knowledge_after": 649
+  },
+  {
+   "solved": true,
+   "depth": 2,
+   "plan": [
+    "git_checkout_main",
+    "git_clean_fd"
+   ],
+   "expansions": 2,
+   "edges_tried": 9,
+   "executions": 9,
+   "copies": 9,
+   "pruned_by_knowledge": 8,
+   "seconds": 0.79,
+   "task": "wrong_branch",
+   "mode": "LEARNING_AND_PRUNING",
+   "preserve": false,
+   "goal_reason_at_start": "on side, 2 modified/untracked, 1 file(s) changed that nobody asked about, head e36a0a1d != 6abe6f40",
+   "knowledge_before": 649,
+   "knowledge_after": 658
+  },
+  {
+   "solved": true,
+   "depth": 2,
+   "plan": [
+    "git_checkout_main",
+    "git_clean_fd"
+   ],
+   "expansions": 2,
+   "edges_tried": 17,
+   "executions": 17,
+   "copies": 17,
+   "pruned_by_knowledge": 0,
+   "seconds": 0.67,
+   "task": "wrong_branch",
+   "mode": "NO_KNOWLEDGE_CONTROL"
+  },
+  {
+   "solved": true,
+   "depth": 3,
+   "plan": [
+    "git_merge_abort",
+    "git_checkout_main",
+    "git_clean_fd"
+   ],
+   "expansions": 5,
+   "edges_tried": 47,
+   "executions": 47,
+   "copies": 47,
+   "pruned_by_knowledge": 0,
+   "seconds": 1.67,
+   "task": "conflicted_merge",
+   "mode": "NO_KNOWLEDGE_CONTROL"
+  },
+  {
+   "solved": true,
+   "depth": 3,
+   "plan": [
+    "git_rebase_abort",
+    "git_checkout_main",
+    "git_clean_fd"
+   ],
+   "expansions": 5,
+   "edges_tried": 47,
+   "executions": 47,
+   "copies": 47,
+   "pruned_by_knowledge": 0,
+   "seconds": 1.92,
+   "task": "conflicted_rebase",
+   "mode": "NO_KNOWLEDGE_CONTROL"
+  },
+  {
+   "solved": true,
+   "depth": 5,
+   "plan": [
+    "git_checkout_main",
+    "git_stash_pop",
+    "git_clean_fd",
+    "git_add_all",
+    "git_commit"
+   ],
+   "expansions": 29,
+   "edges_tried": 289,
+   "executions": 289,
+   "copies": 289,
+   "pruned_by_knowledge": 0,
+   "seconds": 12.33,
+   "task": "stashed_wrong_branch",
+   "mode": "NO_KNOWLEDGE_CONTROL"
+  },
+  {
+   "solved": true,
+   "depth": 6,
+   "plan": [
+    "git_merge_abort",
+    "git_checkout_main",
+    "git_stash_pop",
+    "git_clean_fd",
+    "git_add_all",
+    "git_commit"
+   ],
+   "expansions": 45,
+   "edges_tried": 449,
+   "executions": 449,
+   "copies": 449,
+   "pruned_by_knowledge": 0,
+   "seconds": 22.64,
+   "task": "conflict_and_stash",
+   "mode": "NO_KNOWLEDGE_CONTROL"
+  },
+  {
+   "solved": true,
+   "depth": 6,
+   "plan": [
+    "git_merge_abort",
+    "git_checkout_main",
+    "git_stash_pop",
+    "git_clean_fd",
+    "git_add_all",
+    "git_commit"
+   ],
+   "expansions": 45,
+   "edges_tried": 449,
+   "executions": 449,
+   "copies": 449,
+   "pruned_by_knowledge": 0,
+   "seconds": 18.22,
+   "task": "deep",
+   "mode": "NO_KNOWLEDGE_CONTROL"
+  },
+  {
+   "solved": true,
+   "depth": 2,
+   "plan": [
+    "git_checkout_main",
+    "git_clean_fd"
+   ],
+   "expansions": 2,
+   "edges_tried": 17,
+   "executions": 17,
+   "copies": 17,
+   "pruned_by_knowledge": 0,
+   "seconds": 0.66,
+   "task": "wrong_branch",
+   "mode": "NO_KNOWLEDGE_CONTROL"
+  },
+  {
+   "solved": true,
+   "depth": 2,
+   "plan": [
+    "git_checkout_main",
+    "git_clean_fd"
+   ],
+   "expansions": 2,
+   "edges_tried": 17,
+   "executions": 17,
+   "copies": 17,
+   "pruned_by_knowledge": 0,
+   "seconds": 0.63,
+   "task": "wrong_branch",
+   "mode": "ORDER_ONLY_NO_DELETION",
+   "preserve": false,
+   "goal_reason_at_start": "on side, 2 modified/untracked, 1 file(s) changed that nobody asked about, head e36a0a1d != 6abe6f40"
+  },
+  {
+   "solved": true,
+   "depth": 3,
+   "plan": [
+    "git_merge_abort",
+    "git_checkout_main",
+    "git_clean_fd"
+   ],
+   "expansions": 5,
+   "edges_tried": 46,
+   "executions": 46,
+   "copies": 46,
+   "pruned_by_knowledge": 0,
+   "seconds": 1.82,
+   "task": "conflicted_merge",
+   "mode": "ORDER_ONLY_NO_DELETION",
+   "preserve": false,
+   "goal_reason_at_start": "on side, 3 modified/untracked, operation in progress, 1 file(s) changed that nobody asked about, head e36a0a1d != 6abe6f40"
+  },
+  {
+   "solved": true,
+   "depth": 3,
+   "plan": [
+    "git_rebase_abort",
+    "git_checkout_main",
+    "git_clean_fd"
+   ],
+   "expansions": 5,
+   "edges_tried": 45,
+   "executions": 45,
+   "copies": 45,
+   "pruned_by_knowledge": 0,
+   "seconds": 2.58,
+   "task": "conflicted_rebase",
+   "mode": "ORDER_ONLY_NO_DELETION",
+   "preserve": false,
+   "goal_reason_at_start": "on HEAD, 3 modified/untracked, operation in progress"
+  },
+  {
+   "solved": true,
+   "depth": 5,
+   "plan": [
+    "git_checkout_main",
+    "git_stash_pop",
+    "git_clean_fd",
+    "git_add_all",
+    "git_commit"
+   ],
+   "expansions": 29,
+   "edges_tried": 287,
+   "executions": 287,
+   "copies": 287,
+   "pruned_by_knowledge": 0,
+   "seconds": 21.84,
+   "task": "stashed_wrong_branch",
+   "mode": "ORDER_ONLY_NO_DELETION",
+   "preserve": true,
+   "goal_reason_at_start": "on side, 2 modified/untracked, stash present, 1 file(s) changed that nobody asked about, the original history is no longer an ancestor, the stashed work is not in the commit"
+  },
+  {
+   "solved": true,
+   "depth": 6,
+   "plan": [
+    "git_merge_abort",
+    "git_stash_pop",
+    "git_checkout_main",
+    "git_clean_fd",
+    "git_add_all",
+    "git_commit"
+   ],
+   "expansions": 46,
+   "edges_tried": 458,
+   "executions": 458,
+   "copies": 458,
+   "pruned_by_knowledge": 0,
+   "seconds": 22.54,
+   "task": "conflict_and_stash",
+   "mode": "ORDER_ONLY_NO_DELETION",
+   "preserve": true,
+   "goal_reason_at_start": "on side, 3 modified/untracked, stash present, operation in progress, 1 file(s) changed that nobody asked about, the original history is no longer an ancestor, the stashed work is not in the commit"
+  },
+  {
+   "solved": true,
+   "depth": 6,
+   "plan": [
+    "git_merge_abort",
+    "git_checkout_main",
+    "git_stash_pop",
+    "git_clean_fd",
+    "git_add_all",
+    "git_commit"
+   ],
+   "expansions": 47,
+   "edges_tried": 468,
+   "executions": 468,
+   "copies": 468,
+   "pruned_by_knowledge": 0,
+   "seconds": 36.9,
+   "task": "deep",
+   "mode": "ORDER_ONLY_NO_DELETION",
+   "preserve": true,
+   "goal_reason_at_start": "on side, 4 modified/untracked, stash present, operation in progress, 1 file(s) changed that nobody asked about, the original history is no longer an ancestor, the stashed work is not in the commit"
+  },
+  {
+   "solved": true,
+   "depth": 2,
+   "plan": [
+    "git_checkout_main",
+    "git_clean_fd"
+   ],
+   "expansions": 2,
+   "edges_tried": 16,
+   "executions": 16,
+   "copies": 16,
+   "pruned_by_knowledge": 0,
+   "seconds": 1.42,
+   "task": "wrong_branch",
+   "mode": "ORDER_ONLY_NO_DELETION",
+   "preserve": false,
+   "goal_reason_at_start": "on side, 2 modified/untracked, 1 file(s) changed that nobody asked about, head e36a0a1d != 6abe6f40"
+  },
+  {
+   "solved": true,
+   "depth": 2,
+   "plan": [
+    "git_checkout_main",
+    "git_clean_fd"
+   ],
+   "expansions": 2,
+   "edges_tried": 9,
+   "executions": 9,
+   "copies": 9,
+   "pruned_by_knowledge": 8,
+   "seconds": 0.54,
+   "task": "wrong_branch",
+   "mode": "WARM_SECOND_PASS",
+   "preserve": false,
+   "goal_reason_at_start": "on side, 2 modified/untracked, 1 file(s) changed that nobody asked about, head e36a0a1d != 6abe6f40"
+  },
+  {
+   "solved": true,
+   "depth": 3,
+   "plan": [
+    "git_merge_abort",
+    "git_checkout_main",
+    "git_clean_fd"
+   ],
+   "expansions": 5,
+   "edges_tried": 29,
+   "executions": 29,
+   "copies": 29,
+   "pruned_by_knowledge": 18,
+   "seconds": 1.47,
+   "task": "conflicted_merge",
+   "mode": "WARM_SECOND_PASS",
+   "preserve": false,
+   "goal_reason_at_start": "on side, 3 modified/untracked, operation in progress, 1 file(s) changed that nobody asked about, head e36a0a1d != 6abe6f40"
+  },
+  {
+   "solved": true,
+   "depth": 3,
+   "plan": [
+    "git_rebase_abort",
+    "git_checkout_main",
+    "git_clean_fd"
+   ],
+   "expansions": 5,
+   "edges_tried": 30,
+   "executions": 30,
+   "copies": 30,
+   "pruned_by_knowledge": 17,
+   "seconds": 1.9,
+   "task": "conflicted_rebase",
+   "mode": "WARM_SECOND_PASS",
+   "preserve": false,
+   "goal_reason_at_start": "on HEAD, 3 modified/untracked, operation in progress"
+  },
+  {
+   "solved": true,
+   "depth": 5,
+   "plan": [
+    "git_checkout_main",
+    "git_stash_pop",
+    "git_clean_fd",
+    "git_add_all",
+    "git_commit"
+   ],
+   "expansions": 29,
+   "edges_tried": 189,
+   "executions": 189,
+   "copies": 189,
+   "pruned_by_knowledge": 100,
+   "seconds": 11.63,
+   "task": "stashed_wrong_branch",
+   "mode": "WARM_SECOND_PASS",
+   "preserve": true,
+   "goal_reason_at_start": "on side, 2 modified/untracked, stash present, 1 file(s) changed that nobody asked about, the original history is no longer an ancestor, the stashed work is not in the commit"
+  },
+  {
+   "solved": true,
+   "depth": 6,
+   "plan": [
+    "git_merge_abort",
+    "git_checkout_main",
+    "git_stash_pop",
+    "git_clean_fd",
+    "git_add_all",
+    "git_commit"
+   ],
+   "expansions": 40,
+   "edges_tried": 264,
+   "executions": 264,
+   "copies": 264,
+   "pruned_by_knowledge": 135,
+   "seconds": 16.68,
+   "task": "conflict_and_stash",
+   "mode": "WARM_SECOND_PASS",
+   "preserve": true,
+   "goal_reason_at_start": "on side, 3 modified/untracked, stash present, operation in progress, 1 file(s) changed that nobody asked about, the original history is no longer an ancestor, the stashed work is not in the commit"
+  },
+  {
+   "solved": false,
+   "depth": null,
+   "plan": [],
+   "expansions": 17,
+   "edges_tried": 109,
+   "executions": 109,
+   "copies": 109,
+   "pruned_by_knowledge": 61,
+   "seconds": 6.84,
+   "task": "deep",
+   "mode": "WARM_SECOND_PASS",
+   "preserve": true,
+   "goal_reason_at_start": "on side, 4 modified/untracked, stash present, operation in progress, 1 file(s) changed that nobody asked about, the original history is no longer an ancestor, the stashed work is not in the commit"
+  },
+  {
+   "solved": true,
+   "depth": 2,
+   "plan": [
+    "git_checkout_main",
+    "git_clean_fd"
+   ],
+   "expansions": 2,
+   "edges_tried": 9,
+   "executions": 9,
+   "copies": 9,
+   "pruned_by_knowledge": 8,
+   "seconds": 0.62,
+   "task": "wrong_branch",
+   "mode": "WARM_SECOND_PASS",
+   "preserve": false,
+   "goal_reason_at_start": "on side, 2 modified/untracked, 1 file(s) changed that nobody asked about, head e36a0a1d != 6abe6f40"
+  }
+ ]
+}
