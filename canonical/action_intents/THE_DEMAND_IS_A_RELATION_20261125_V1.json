@@ -41,8 +41,8 @@
   "terminal_achieved": false
  },
  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
- "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The demand language: one relation over one value at one site verifies 2 of 75; the population's demands are relations over frames, and each hand-built form buys ~1 row in 35.",
- "canonical_base_commit": "d2b698bc3ed79de1947570127bdc81aa701ccc3e",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Not the store, not the search cost, not the oracle, not the site finder: the demand language. The instrument can state one relation over one value at one site; the corpus's demands are relations over frames (a condition lifted out of its enclosing branch, two sites that must agree, a call that must return bytes). 2 of 75 real fixes are one-frame relations and both verify; the other 73 are not.",
+ "canonical_base_commit": "8d236fd019e1c29b685d58ac8f7453adcce19b9b",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -179,7 +179,7 @@
  ],
  "real_outcome": "That a demand whose relation is one frame wide CAN be found by running: 2 verified repairs at the human's own line (attrs 13105a64f2, packaging b80e6eb0a6), from 366 probed boolean positions, with the human edit accepted as a control on 70 of 75 rows. That a wrong edit can pass the right test: the more-itertools cca32949f1 coincidence was verified by the first version of the instrument and is recorded as a defect, not a result. That the population's remaining demands are relations over frames (click 4fd2fea0db lifts a condition out of its enclosing branch) and that a per-site projection refuses them correctly.",
  "recursive_obs": {
-  "canonical_base_commit": "d2b698bc3ed79de1947570127bdc81aa701ccc3e",
+  "canonical_base_commit": "8d236fd019e1c29b685d58ac8f7453adcce19b9b",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "assuming a falsey value at a guard is the demand without checking it is a boolean position",
@@ -361,7 +361,7 @@
      "route": "INDEX_ACTIONS_BY_THE_FAILING_RUN_NOT_BY_THE_SOURCE_TEXT"
     }
    ],
-   "checked_at_utc": "2026-11-18T22:57:31Z",
+   "checked_at_utc": "2026-11-19T03:16:10Z",
    "comparison_dimensions": [
     "CORRECTNESS",
     "CAPABILITY_STRENGTH",
@@ -371,9 +371,9 @@
     "VERIFIABILITY"
    ],
    "discovery_required": true,
-   "incumbent_route": "AUDIT_WHAT_THE_INSTRUMENT_ACCEPTS_BEFORE_ASKING_WHAT_IT_CAN_FIND",
+   "incumbent_route": "A_SITE_IS_NOT_A_PRODUCTION_20261124_V1",
    "max_age_hours": 2,
-   "negative_search_summary": "Refused by measurement this session: formatting as a cause of exclusion (1 row recovered of 30, three of the four candidates are genuine moves or two-region edits); a bigger candidate space (150,000 offered, 0 admissible); and the previous round's own claim that the specification fallback adds repairs (it adds none).",
+   "negative_search_summary": "Refused by measurement this session: enumerating the projection at every guard (308 sites, 616 candidates, 111 s for the first row, correct site past attempt 80); counting every Name inside an If test as a boolean question (498 sites, one of which verified a coincidence: hasattr(True, X) taking the branch the human's getattr fix takes); and 'at least one test flips' as the repair criterion (a click 4fd2fea0db candidate flipped 2 of the human's 5).",
    "query_families": [
     {
      "intent": "CAPABILITY_VECTOR",
@@ -398,10 +398,10 @@
     "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
     "BEFORE_SCARCE_GATE_SPEND"
    ],
-   "selected_route": "READ_THE_FIX_FROM_THE_AST_AND_NAME_THE_GRAMMAR_OF_THE_POPULATION",
+   "selected_route": "TEST_THE_RELATION: THE GUARD IS ASKED THE WRONG QUESTION OF THE VALUE IT HOLDS",
    "selected_route_preflight": {
     "all_required_dependencies_ready": true,
-    "checked_at_utc": "2026-11-18T22:57:31Z",
+    "checked_at_utc": "2026-11-19T03:16:10Z",
     "execution_dependencies": [
      {
       "dependency": "local Python 3.11 runtime with pytest",
@@ -452,7 +452,7 @@
     "execution_dependencies_complete": true,
     "failed_dependencies": [],
     "max_age_hours": 2,
-    "selected_route": "READ_THE_FIX_FROM_THE_AST_AND_NAME_THE_GRAMMAR_OF_THE_POPULATION",
+    "selected_route": "TEST_THE_RELATION: THE GUARD IS ASKED THE WRONG QUESTION OF THE VALUE IT HOLDS",
     "status": "READY"
    },
    "source_classes_checked": [
@@ -488,10 +488,10 @@
    "WIDEN_THE_VOCABULARY_WITH_MORE_NEIGHBOURHOOD_ATTRIBUTES__ALREADY_MEASURED_AT_9_1_PERCENT",
    "MEASURE_THE_CEILING_WITH_THE_ADDRESS_GIVEN_FREE_THEN_NAME_WHAT_SELECTS__SELECTED"
   ],
-  "selected_route": "READ_THE_FIX_FROM_THE_AST_AND_NAME_THE_GRAMMAR_OF_THE_POPULATION",
-  "selected_surviving_route": "READ_THE_FIX_FROM_THE_AST_AND_NAME_THE_GRAMMAR_OF_THE_POPULATION",
+  "selected_route": "TEST_THE_RELATION: THE GUARD IS ASKED THE WRONG QUESTION OF THE VALUE IT HOLDS",
+  "selected_surviving_route": "TEST_THE_RELATION: THE GUARD IS ASKED THE WRONG QUESTION OF THE VALUE IT HOLDS",
   "selected_surviving_route_class": "SYNTHESIZE_NEW_PRIMITIVE",
-  "stop_condition": "Give the instrument a relation language and a cross-frame producer trace: instrument the assertion's own call, take the callee's argument and return values, ask the callee's sites for the demanded return, and allow the three projections at a test site (`x`, `x is not None`, `not x`). Same 30 rows, same declared acceptance -- 1 verified repair whose AST fact is MORE_THAN_ONE_CHANGE_REGION, accusations 0, no verified row preserving 0 recorded passing values -- and the same rule: an unmet acceptance is recorded as a falsification, not tuned into a pass.",
+  "stop_condition": "Make the demand language a function learned from the run: for every boolean position the probe already reports the pair (the question the code asked, the value that arrived), and the witness judge supplies the label. The next round must show that a relation over frames -- at minimum `the same question must be asked regardless of the enclosing condition` (click 4fd2fea0db) and `two sites must agree` (jinja a150ff749a) -- can be proposed from that pair and verified, or record the falsification. Same 75 rows, same control rule: the human edit must verify under the same judge, or the row is refused.",
   "why_selected_route_is_fastest_sufficient": "Because the question 'is the content a knowledge problem' can only be answered by handing the address over for free and measuring what the artifact's own words can say; every other route answers it by assuming an answer.",
   "why_this_is_not_another_organ": "It adds no knowledge, no vocabulary and no model: one AST rewrite of the module, one counter, one log of what was already in scope, and the project's own pytest as the verdict."
  },
