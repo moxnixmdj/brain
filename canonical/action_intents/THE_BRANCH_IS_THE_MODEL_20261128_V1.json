@@ -31,9 +31,10 @@
   "producer_cognition_model_dependency_count": 0,
   "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
   "progress_evidence_paths": [
-   "canonical/verification/WHAT_A_DECISION_COSTS_20261127_V1.json",
-   "canonical/tools/what_a_decision_costs_v1.py",
-   "canonical/tests/test_what_a_decision_costs_v1.py"
+   "canonical/verification/THE_BRANCH_IS_THE_MODEL_20261128_V1.json",
+   "canonical/tools/the_branch_is_the_model_v1.py",
+   "canonical/tests/test_the_branch_is_the_model_v1.py",
+   "THE_BRANCH_IS_THE_MODEL_20261128_V1.md"
   ],
   "route_class": "SYNTHESIZE_NEW_PRIMITIVE",
   "scope_complete_discharge": false,
