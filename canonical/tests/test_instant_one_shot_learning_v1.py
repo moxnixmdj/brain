@@ -824,3 +824,77 @@ def test_computer_use_demo_unknown_task_refuses(tmp_root):
     assert report["status"] == "REFUSED__ONE_SHOT_LEARNING_FAILED"
     assert "TASK_NOT_FOUND" in report["reason"]
 
+
+def test_computer_use_agent_integration(tmp_root):
+    """ComputerUseAgent as execution layer for instant one-shot learning.
+
+    The agent's SENSE synthesises the state key (SEPARATION + STABILITY)
+    from computer_use_check_density_v1 TASKS and mutants. The instant one-shot
+    learning loop then runs all 10 phases on the real shell command.
+
+    Zero model calls, zero network calls, zero knowledge house.
+    """
+    engine = InstantOneShotLearning(tmp_root)
+    (tmp_root / "in.txt").write_bytes(b"hello\n")
+
+    report = engine.run_with_computer_use_agent(
+        instruction="cp",
+        victims=[
+            {
+                "name": "lesson_example",
+                "before": "def process(src):\n    return 'decoy.txt'\n",
+                "after": "def process(src):\n    return src\n",
+                "language": "python",
+                "error_class": "boundary",
+            },
+            {
+                "name": "unseen_defective",
+                "before": "def process(src):\n    return 'wrong_source.txt'\n",
+                "after": "def process(src):\n    return src\n",
+                "language": "python",
+                "error_class": "boundary",
+            },
+            {
+                "name": "already_correct",
+                "before": "def process(src):\n    return 'decoy.txt' if False else src\n",
+                "after": "def process(src):\n    return src\n",
+                "language": "python",
+                "error_class": "boundary",
+                "probes": ("in.txt", "data.txt", "sample.txt"),
+            },
+        ],
+    )
+
+    assert report["status"] == "COMPLETE"
+    assert report["result"] == "INSTANT_ONE_SHOT_LEARNING_COMPLETE"
+    assert report["admitted"] is True
+    assert report["model_calls"] == 0
+    assert report["network_calls"] == 0
+    assert report["stored_knowledge_bytes"] == 0
+    assert report["knowledge_house"] is False
+
+    # Agent integration
+    agent = report["computer_use_agent"]
+    assert agent["right_command"] == "cp in.txt out.dat"
+    assert agent["minimal_cover"] == ["content"]
+    assert agent["every_wrong_action_separable"] is True
+    assert agent["model_calls"] == 0
+    assert agent["network_calls"] == 0
+
+    # All 10 phases done
+    phase_statuses = {p["phase"]: p["status"] for p in report["phases"]}
+    assert phase_statuses["OBSERVE"] == "OBSERVE_DONE__TRACE_CAPTURED"
+    assert phase_statuses["CREDIT"] == "CREDIT_DONE__CAUSAL_STEPS_IDENTIFIED"
+    assert phase_statuses["IDENTIFY"] == "IDENTIFY_DONE__RULE_CLOSED"
+    assert phase_statuses["CONTRACT"] == "CONTRACT_DONE__EFFECT_CONTRACT_EXTRACTED"
+    assert phase_statuses["APPLICABILITY"] == "APPLICABILITY_DONE__APPLICABILITY_CLASSIFIED"
+    assert phase_statuses["COMPOSE"] == "COMPOSE_DONE__CHAIN_VERIFIED"
+    assert phase_statuses["HORIZON"] == "HORIZON_DONE__SUBGOALS_EXECUTED"
+    assert phase_statuses["ADMIT"] == "ADMIT_DONE__HELD_OUT_VALIDATED"
+    assert phase_statuses["REMEMBER"] == "REMEMBER_DONE__PERSISTED_TO_STORE"
+    assert phase_statuses["REPLAY"] == "REPLAY_DONE__REPRODUCED_ON_NEW_STATE"
+
+    # Replay verified
+    assert report["replay_done"] is True
+    assert report["replay_return_code"] == 0
+

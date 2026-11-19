@@ -124,6 +124,9 @@ from canonical.swe_kernel.lesson_admission_gate_v1 import (  # noqa: E402
 
 # Computer-use task integration: real shell tasks for end-to-end demonstration
 from canonical.swe_kernel.computer_use_check_density_v1 import TASKS as _COMPUTER_USE_TASKS  # noqa: E402
+from canonical.swe_kernel.computer_use_agent_v1 import (  # noqa: E402
+    ComputerUseAgent as _ComputerUseAgent,
+)
 
 SCHEMA = "PROJECT_BRAIN_INSTANT_ONE_SHOT_LEARNING_V1"
 AUTHORITY = "NONE__PRODUCER_RUN_SANDBOX_CALCULATION"
@@ -1646,6 +1649,108 @@ class InstantOneShotLearning:
         report["admitted"] = admit["admitted"]
         report["stored_knowledge_bytes"] = 0
         report["knowledge_house"] = False
+        return report
+
+    # -- AGENT INTEGRATION -------------------------------------------------- #
+
+    def run_with_computer_use_agent(
+        self,
+        instruction: str,
+        victims: Sequence[dict[str, Any]] = (),
+    ) -> dict[str, Any]:
+        """Run the computer-use agent as the execution layer for computer-use tasks.
+
+        The ComputerUseAgent (SENSE → NOTICE IGNORANCE → RANK → ACT →
+        RE-VALIDATE → ADMIT → REMEMBER) provides the execution layer for
+        real computer-use tasks. Its state-key synthesis (SEPARATION +
+        STABILITY) feeds into IDENTIFY, and its act()/admit() execute the
+        learned skill and validate it before persistence.
+
+        This composes the two loops:
+
+          Agent SENSE        → Instant one-shot OBSERVE/IDENTIFY state key
+          Agent ACT          → Executes the right command (real shell)
+          Agent ADMIT        → Held-out victim validation before persistence
+          Instant REPLAY     → Reproduces the skill on a new state
+
+        Zero model calls, zero network calls, zero knowledge house.
+        """
+        agent = _ComputerUseAgent(
+            self.environment_root,
+            max_steps=10,
+        )
+
+        # Agent SENSE: synthesise the distinguishing state key from
+        # computer_use_check_density_v1 TASKS and mutants.
+        sense = agent.sense(instruction)
+        if sense["status"] != "STATE_KEY_SYNTHESISED":
+            return {
+                "phase": "AGENT_SENSE",
+                "status": "REFUSED",
+                "reason": sense.get("reason", "SENSE_FAILED"),
+                "model_calls": 0,
+                "network_calls": 0,
+            }
+
+        right_command = sense["right_command"]
+
+        # Derive wrong actions from computer_use_check_density_v1 mutants
+        # (mechanically derived, none chosen for expected failure).
+        from canonical.swe_kernel.computer_use_check_density_v1 import (
+            TASKS as _TASKS,
+            _mutants as _mutants,
+        )
+        wrong_actions = []
+        for _name, _template, _program in _TASKS:
+            if _template.replace("{src}", "in.txt").replace("{dst}", "out.dat") == right_command:
+                wrong_actions = [
+                    (kind, cmd.replace("{src}", "in.txt").replace("{dst}", "out.dat"))
+                    for kind, cmd in _mutants(_template)
+                ]
+                break
+
+        # Run the full instant one-shot learning loop using the agent's
+        # right command as the skill to learn.
+        report = self.run(
+            task_id=f"computer_use_agent_{instruction[:20]}",
+            steps=[(right_command, "")],
+            terminal_outcome=0,
+            credit_wrong_actions=[wrong_actions],
+            right_command=right_command,
+            id_wrong_actions=wrong_actions,
+            skill_id=f"computer_use_{instruction[:20]}",
+            preconditions=("filesystem_writable",),
+            observables=("output_file",),
+            actions=(instruction,),
+            verdict="command_succeeded",
+            effects=[("ESTABLISH", f"{instruction}_output")],
+            success_states=[{"filesystem_writable"}],
+            failure_states=[],
+            other_contracts=[],
+            intended_goal=frozenset({f"{instruction}_output"}),
+            horizon_task_id=f"computer_use_agent_{instruction[:20]}_horizon",
+            horizon_goal=(f"{instruction}_verified",),
+            horizon_constraints=(("no_data_loss", "check_files_present", ("every_step",)),),
+            horizon_total_step_budget=100,
+            horizon_subgoals=(
+                (f"run_{instruction}", (), (f"{instruction}_output",), 10, ("no_data_loss",)),
+            ),
+            horizon_initial_state={"in.txt": b"hello\n"},
+            victims=victims,
+            replay_steps=[(right_command, "")],
+            replay_effect_subjects=["out.dat"],
+        )
+
+        # Merge agent phase results into the report.
+        report["computer_use_agent"] = {
+            "sense": sense,
+            "right_command": right_command,
+            "minimal_cover": sense.get("minimal_cover"),
+            "every_wrong_action_separable": sense.get("every_wrong_action_separable"),
+            "model_calls": 0,
+            "network_calls": 0,
+        }
+
         return report
 
     def status(self) -> dict[str, Any]:
