@@ -189,7 +189,7 @@
  ],
  "real_outcome": "That the goal's table transfers upward with zero verdict errors (87/87 at depth 4) while conflating 1765 pairs; that one counterexample is enough but only a cell-labelling policy finds it inside six questions; that both computable orderings are worse than chance; and that last round's 208 collisions was a statement about injectivity, not correctness.",
  "recursive_obs": {
-  "canonical_base_commit": "3568a33a9c3a76496debb781b6fff0960b652885",
+  "canonical_base_commit": "5a21116bc4cad6a0960c47d2e717dbc36124845d",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "handing the goal's relation to the agent",
@@ -228,7 +228,8 @@
     "NeuroAbs (arXiv 2608.17304): counterexample reduction/generalisation to cut CEGAR iterations",
     "counterexample-guided Cartesian abstraction refinement (planning; POMDP CEGAR arXiv 1701.06209): semi-completeness as the honest ceiling",
     "query-by-committee disagreement active learning (Seung et al. 1992): the classic ordering this round measures and finds degenerate here"
-   ]
+   ],
+   "surviving_gap": "The question policy. The statistic is priced and it travels (87/87 at depth 4); what does not exist yet is a constructive question -- a run the agent builds to separate the surviving statistics rather than a pair it picks from a pool it already has. Its price at depth 5 is the next measurement, with the falsifiers already registered."
   },
   "obs_goal": {
    "proxy_goals_deleted": [
@@ -441,7 +442,7 @@
      "route": "ASK_FOR_ONE_COUNTEREXAMPLE_AND_LABEL_WHOLE_CELLS_INSTEAD_OF_HUNTING_DISAGREEMENT"
     }
    ],
-   "checked_at_utc": "2026-11-19T01:30:04Z",
+   "checked_at_utc": "2026-11-19T01:31:25Z",
    "comparison_dimensions": [
     "CORRECTNESS",
     "CAPABILITY_STRENGTH",
@@ -481,7 +482,7 @@
    "selected_route": "ASK_FOR_ONE_COUNTEREXAMPLE_AND_LABEL_WHOLE_CELLS_INSTEAD_OF_HUNTING_DISAGREEMENT",
    "selected_route_preflight": {
     "all_required_dependencies_ready": true,
-    "checked_at_utc": "2026-11-19T01:30:04Z",
+    "checked_at_utc": "2026-11-19T01:31:25Z",
     "execution_dependencies": [
      {
       "dependency": "local Python 3.11 runtime with pytest",
