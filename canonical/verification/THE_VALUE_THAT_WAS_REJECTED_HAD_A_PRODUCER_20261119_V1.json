@@ -1,0 +1,1902 @@
+{
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "cost": {
+  "model_calls": 0,
+  "network": "repository clones during preparation; the measurement runs offline",
+  "parameters_stored": 0
+ },
+ "date": "2026-11-19",
+ "declared_acceptance_before_the_receipt_run": {
+  "K1": "at least twenty refused states executed under the tracer and the trace recorded",
+  "K2": "the rejected value is read from the checker's own diagnostic and its producer located",
+  "K3": "the producer is compared with the functions the shipped fix changed, and with its lines",
+  "K4": "the failures the traceback cannot localise are counted separately and localised by provenance",
+  "K5": "zero model calls and zero parameters"
+ },
+ "limits": [
+  "the producer is matched by repr equality against the rejected operand; a repr collision attributes the wrong producer, which this cannot detect without identity capture inside the assertion",
+  "only frames of the file under repair are traced, so a producer in another file is invisible by design",
+  "'the fix changed that function' is necessary, not sufficient: a function can be changed for a reason unrelated to the rejected value",
+  "value-based fault localisation exists in the literature with learned rankers; this asks the narrower, parameter-free question and makes no comparison with those rankers",
+  "no claim of independent verification"
+ ],
+ "mode": "TRACE_THE_REFUSED_RUN_FOR_THE_PRODUCER_OF_THE_REJECTED_VALUE_AND_CHECK_IT_LOCALISES_THE_FIX",
+ "per_task": [
+  {
+   "events": 343,
+   "failed": true,
+   "fix_function_on_the_path": false,
+   "fix_functions": [
+    "__reduce_ex__",
+    "_intervals_from_state",
+    "_intervals_state",
+    "_point_from_state",
+    "_point_state",
+    "_restore_version_range"
+   ],
+   "fix_functions_executed": [],
+   "node": "tests/test_ranges.py::test_copy_and_pickle_preserve_state[False--None-copy]",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "pypa/packaging",
+   "sha": "46167dcdb1",
+   "source": "src/packaging/ranges.py",
+   "traceback_points_into_the_source": true
+  },
+  {
+   "events": 6,
+   "failed": true,
+   "fix_function_on_the_path": false,
+   "fix_functions": [
+    "_try_parse_specifier_set"
+   ],
+   "fix_functions_executed": [],
+   "node": "tests/test_requirements.py::TestRequirementParsing::test_nonempty_arbitrary_version[===arbitrarystring,>=",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "pypa/packaging",
+   "sha": "5a7d3386d2",
+   "source": "src/packaging/_parser.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "events": 18,
+   "failed": true,
+   "fix_function_on_the_path": true,
+   "fix_functions": [
+    "_validate"
+   ],
+   "fix_functions_executed": [
+    "_validate"
+   ],
+   "node": "tests/test_dependency_groups.py::test_cyclic_include_self_with_unnormalized_spelling[group1-Group1-group1]",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "pypa/packaging",
+   "sha": "8efde605cc",
+   "source": "src/packaging/dependency_groups.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "events": 6,
+   "failed": true,
+   "fix_function_on_the_path": false,
+   "fix_functions": [
+    "_eval_extra_set",
+    "_evaluate_markers",
+    "_prepare_extra",
+    "evaluate",
+    "evaluate_prepared",
+    "prepare_environment"
+   ],
+   "fix_functions_executed": [],
+   "node": "tests/test_markers.py::TestExtraSetEvaluation::test_marker_evaluation[set-extra",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "pypa/packaging",
+   "sha": "7d0611d420",
+   "source": "src/packaging/markers.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "events": 41,
+   "failed": true,
+   "fix_function_on_the_path": true,
+   "fix_functions": [
+    "__and__",
+    "__or__",
+    "_join_markers",
+    "_splice_operand"
+   ],
+   "fix_functions_executed": [
+    "__and__"
+   ],
+   "node": "tests/test_markers.py::test_chaining_associativity_and_str",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": "<Marker('python_version >= \"3.6\" and os_name",
+   "repo": "pypa/packaging",
+   "sha": "491af5d517",
+   "source": "src/packaging/markers.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "events": 16,
+   "failed": true,
+   "fix_function_on_the_path": true,
+   "fix_functions": [
+    "__getstate__",
+    "__setstate__"
+   ],
+   "fix_functions_executed": [
+    "__getstate__",
+    "__setstate__"
+   ],
+   "node": "tests/test_requirements.py::test_requirement_copy_preserves_inner_prereleases[pickle]",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "pypa/packaging",
+   "sha": "a03bde12d5",
+   "source": "src/packaging/requirements.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "events": 385,
+   "failed": true,
+   "fix_function_on_the_path": true,
+   "fix_functions": [
+    "_build",
+    "_combine_literals",
+    "_struct_admits"
+   ],
+   "fix_functions_executed": [
+    "_build",
+    "_combine_literals",
+    "_struct_admits"
+   ],
+   "node": "tests/test_ranges.py::TestPrereleaseRegion::test_named_literal_prerelease_inside_union_bounds[None-False]",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "pypa/packaging",
+   "sha": "cd91074b05",
+   "source": "src/packaging/ranges.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "events": 3,
+   "failed": true,
+   "fix_function_on_the_path": true,
+   "fix_functions": [
+    "canonicalize_license_expression"
+   ],
+   "fix_functions_executed": [
+    "canonicalize_license_expression"
+   ],
+   "node": "tests/test_licenses.py::test_licenseref_rejects_kelvin_sign[LicenseRef-\\u212austom]",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "pypa/packaging",
+   "sha": "8c37b0476f",
+   "source": "src/packaging/licenses/__init__.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "events": 125,
+   "failed": true,
+   "fix_function_on_the_path": true,
+   "fix_functions": [
+    "_write_metadata",
+    "from_raw"
+   ],
+   "fix_functions_executed": [
+    "_write_metadata",
+    "from_raw"
+   ],
+   "node": "tests/test_metadata.py::TestMetadata::test_subclass_round_trip[False-False]",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "pypa/packaging",
+   "sha": "b1c439b0f1",
+   "source": "src/packaging/metadata.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "events": 19,
+   "failed": true,
+   "fix_function_on_the_path": true,
+   "fix_functions": [
+    "_parse_group"
+   ],
+   "fix_functions_executed": [
+    "_parse_group"
+   ],
+   "node": "tests/test_dependency_groups.py::test_malformed_group_does_not_hide_included_group_errors",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": "1",
+   "repo": "pypa/packaging",
+   "sha": "31b2d01319",
+   "source": "src/packaging/dependency_groups.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "events": 23,
+   "failed": true,
+   "fix_function_on_the_path": true,
+   "fix_functions": [
+    "_normalize",
+    "evaluate"
+   ],
+   "fix_functions_executed": [
+    "_normalize",
+    "evaluate"
+   ],
+   "node": "tests/test_markers.py::TestMarker::test_set_valued_marker_rejects_string[-in-extras]",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "pypa/packaging",
+   "sha": "bddb69038b",
+   "source": "src/packaging/markers.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "events": 52,
+   "failed": true,
+   "fix_function_on_the_path": true,
+   "fix_functions": [
+    "_resolve",
+    "_validate",
+    "resolve"
+   ],
+   "fix_functions_executed": [
+    "_resolve",
+    "resolve"
+   ],
+   "node": "tests/test_dependency_groups.py::test_expand_contract_model_only_does_inner_lookup_once",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "pypa/packaging",
+   "sha": "2d57ce2b15",
+   "source": "src/packaging/dependency_groups.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "events": 4,
+   "failed": true,
+   "fix_function_on_the_path": false,
+   "fix_functions": [
+    "__replace__"
+   ],
+   "fix_functions_executed": [],
+   "node": "tests/test_requirements.py::test_replace",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "pypa/packaging",
+   "sha": "4b243af94f",
+   "source": "src/packaging/requirements.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "events": 2,
+   "failed": true,
+   "fix_function_on_the_path": false,
+   "fix_functions": [
+    "canonicalize_license_expression"
+   ],
+   "fix_functions_executed": [],
+   "node": "tests/test_licenses.py::test_licenseref_case_variants_use_first_spelling[LicenseRef-mit",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "pypa/packaging",
+   "sha": "2c87a33f66",
+   "source": "src/packaging/licenses/__init__.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "events": 6,
+   "failed": true,
+   "fix_function_on_the_path": false,
+   "fix_functions": [],
+   "fix_functions_executed": [],
+   "node": "tests/test_utils.py::test_parse_wheel_invalid_filename[foo-1.0-1\\n-py3-none-any.whl]",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "pypa/packaging",
+   "sha": "0625596e50",
+   "source": "src/packaging/utils.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "events": 52,
+   "failed": true,
+   "fix_function_on_the_path": true,
+   "fix_functions": [
+    "_parse_group",
+    "_resolve",
+    "resolve"
+   ],
+   "fix_functions_executed": [
+    "_parse_group",
+    "_resolve",
+    "resolve"
+   ],
+   "node": "tests/test_dependency_groups.py::test_expand_contract_model_only_does_inner_lookup_once",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "pypa/packaging",
+   "sha": "959bb79c06",
+   "source": "src/packaging/dependency_groups.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "events": 9,
+   "failed": true,
+   "fix_function_on_the_path": true,
+   "fix_functions": [
+    "process_python_str"
+   ],
+   "fix_functions_executed": [
+    "process_python_str"
+   ],
+   "node": "tests/test_markers.py::TestNode::test_process_python_str_skips_literal_eval_for_plain_string[\"plain\"-plain]",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": "\"<MagicMock n...67965614224'>\"",
+   "repo": "pypa/packaging",
+   "sha": "d17cfaf0b7",
+   "source": "src/packaging/_parser.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "events": 75,
+   "failed": true,
+   "fix_function_on_the_path": true,
+   "fix_functions": [
+    "_process_license_files"
+   ],
+   "fix_functions_executed": [
+    "_process_license_files"
+   ],
+   "node": "tests/test_metadata.py::TestMetadata::test_invalid_license_files[license_files4]",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "pypa/packaging",
+   "sha": "022ae6c6fe",
+   "source": "src/packaging/metadata.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "events": 4,
+   "failed": true,
+   "fix_function_on_the_path": false,
+   "fix_functions": [],
+   "fix_functions_executed": [],
+   "node": "tests/test_requirements.py::TestRequirementParsing::test_error_when_suffixed_with_line_break[name",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "pypa/packaging",
+   "sha": "2602dd07d8",
+   "source": "src/packaging/_tokenizer.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "events": 52,
+   "failed": true,
+   "fix_function_on_the_path": true,
+   "fix_functions": [
+    "select"
+   ],
+   "fix_functions_executed": [
+    "select"
+   ],
+   "node": "tests/test_pylock_select.py::test_unknown_extras",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "pypa/packaging",
+   "sha": "23669b1b69",
+   "source": "src/packaging/pylock.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "events": 290,
+   "failed": true,
+   "fix_function_on_the_path": true,
+   "fix_functions": [
+    "__init__"
+   ],
+   "fix_functions_executed": [
+    "__init__"
+   ],
+   "node": "tests/test_ranges.py::TestUnboundedEnds::test_lower_spellings_are_one_bound",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "pypa/packaging",
+   "sha": "55cbf1b942",
+   "source": "src/packaging/_ranges.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "events": 53,
+   "failed": true,
+   "fix_function_on_the_path": true,
+   "fix_functions": [
+    "select"
+   ],
+   "fix_functions_executed": [
+    "select"
+   ],
+   "node": "tests/test_pylock_select.py::test_lock_no_matching_env[environments0]",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "pypa/packaging",
+   "sha": "b80e6eb0a6",
+   "source": "src/packaging/pylock.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "events": 75,
+   "failed": true,
+   "fix_function_on_the_path": true,
+   "fix_functions": [
+    "_process_summary",
+    "header_store_parse"
+   ],
+   "fix_functions_executed": [
+    "_process_summary"
+   ],
+   "node": "tests/test_metadata.py::TestMetadata::test_invalid_summary[Hello\\rAgain]",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "pypa/packaging",
+   "sha": "2d873eb600",
+   "source": "src/packaging/metadata.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "events": 139,
+   "failed": true,
+   "fix_function_on_the_path": true,
+   "fix_functions": [
+    "select"
+   ],
+   "fix_functions_executed": [
+    "select"
+   ],
+   "node": "tests/test_pylock_select.py::test_empty_tags_selects_sdist_instead_of_host_compatible_wheel",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "pypa/packaging",
+   "sha": "826426fc88",
+   "source": "src/packaging/pylock.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "events": 8,
+   "failed": true,
+   "fix_function_on_the_path": true,
+   "fix_functions": [
+    "__init__"
+   ],
+   "fix_functions_executed": [
+    "__init__"
+   ],
+   "node": "tests/test_requirements.py::TestRequirementParsing::test_error_when_specifier_set_rejects_parsed_specifier",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "pypa/packaging",
+   "sha": "fe18f139c5",
+   "source": "src/packaging/requirements.py",
+   "traceback_points_into_the_source": true
+  },
+  {
+   "events": 133,
+   "failed": true,
+   "fix_function_on_the_path": false,
+   "fix_functions": [
+    "select"
+   ],
+   "fix_functions_executed": [],
+   "node": "tests/test_pylock_select.py::test_prefer_sdist_predicate[compatible-wheel-predicate-false]",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "pypa/packaging",
+   "sha": "9c652e4b4c",
+   "source": "src/packaging/pylock.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "events": 6,
+   "failed": true,
+   "fix_function_on_the_path": false,
+   "fix_functions": [],
+   "fix_functions_executed": [],
+   "node": "tests/test_utils.py::test_parse_wheel_invalid_filename[foo\\n-1.0-py3-none-any.whl]",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "pypa/packaging",
+   "sha": "8af75907bf",
+   "source": "src/packaging/utils.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "events": 76,
+   "failed": true,
+   "fix_function_on_the_path": true,
+   "fix_functions": [
+    "from_email"
+   ],
+   "fix_functions_executed": [
+    "from_email"
+   ],
+   "node": "tests/test_metadata.py::TestMetadata::test_from_email_unparsed",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": "1",
+   "repo": "pypa/packaging",
+   "sha": "2068340250",
+   "source": "src/packaging/metadata.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "events": 86,
+   "failed": true,
+   "fix_function_on_the_path": true,
+   "fix_functions": [
+    "_process_description_content_type"
+   ],
+   "fix_functions_executed": [
+    "_process_description_content_type"
+   ],
+   "node": "tests/test_metadata.py::TestMetadata::test_from_email_description_content_type_lowercase_charset",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "pypa/packaging",
+   "sha": "abf000549c",
+   "source": "src/packaging/metadata.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "events": 72,
+   "failed": true,
+   "fix_function_on_the_path": false,
+   "fix_functions": [
+    "_process_description_content_type"
+   ],
+   "fix_functions_executed": [],
+   "node": "tests/test_metadata.py::TestMetadata::test_from_email_wraps_description_content_type_parse_errors[text/plain\\n",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "pypa/packaging",
+   "sha": "9d0ec47b36",
+   "source": "src/packaging/metadata.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "events": 77,
+   "failed": true,
+   "fix_function_on_the_path": true,
+   "fix_functions": [
+    "_invalid_metadata",
+    "_process_description_content_type",
+    "_process_import_names",
+    "_process_license_expression",
+    "_process_license_files",
+    "_process_name",
+    "_process_provides_extra",
+    "_process_requires_dist",
+    "_process_requires_python",
+    "_process_summary",
+    "_process_version"
+   ],
+   "fix_functions_executed": [
+    "_invalid_metadata",
+    "_process_version"
+   ],
+   "node": "tests/test_metadata.py::TestMetadata::test_invalid_version_with_placeholder_text",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": "\"''version'' ...for 'version'\"",
+   "repo": "pypa/packaging",
+   "sha": "458b0ae53e",
+   "source": "src/packaging/metadata.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "events": 15,
+   "failed": true,
+   "fix_function_on_the_path": true,
+   "fix_functions": [
+    "_parse_group"
+   ],
+   "fix_functions_executed": [
+    "_parse_group"
+   ],
+   "node": "tests/test_dependency_groups.py::test_resolution_collects_invalid_requirement_with_sibling_errors",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "pypa/packaging",
+   "sha": "30824d9e3b",
+   "source": "src/packaging/dependency_groups.py",
+   "traceback_points_into_the_source": true
+  },
+  {
+   "events": 23,
+   "failed": true,
+   "fix_function_on_the_path": true,
+   "fix_functions": [
+    "_normalize_extras"
+   ],
+   "fix_functions_executed": [
+    "_normalize_extras"
+   ],
+   "node": "tests/test_markers.py::TestMarker::test_membership_value_str_normalization[extras]",
+   "operands": {
+    "self": "<Marker('\"S_P__A_M\" in extras')>"
+   },
+   "produced": true,
+   "producer_function": "__str__",
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_line": 403,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": "'\"S_P__A_M\" in extras'",
+   "repo": "pypa/packaging",
+   "sha": "4c663c9ef5",
+   "source": "src/packaging/markers.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "events": 9,
+   "failed": true,
+   "fix_function_on_the_path": false,
+   "fix_functions": [
+    "__setstate__"
+   ],
+   "fix_functions_executed": [],
+   "node": "tests/test_requirements.py::test_requirement_slots",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "pypa/packaging",
+   "sha": "d5fedc90bb",
+   "source": "src/packaging/requirements.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "events": 23,
+   "failed": true,
+   "fix_function_on_the_path": true,
+   "fix_functions": [
+    "_file_url_has_absolute_path",
+    "_from_dict"
+   ],
+   "fix_functions_executed": [
+    "_from_dict"
+   ],
+   "node": "tests/test_direct_url.py::test_dir_info_url_requires_absolute_file_url[file:relative]",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "pypa/packaging",
+   "sha": "a0661b5f5c",
+   "source": "src/packaging/direct_url.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "events": 22,
+   "failed": true,
+   "fix_function_on_the_path": true,
+   "fix_functions": [
+    "_evaluate_markers"
+   ],
+   "fix_functions_executed": [
+    "_evaluate_markers"
+   ],
+   "node": "tests/test_markers.py::TestMarker::test_set_valued_marker_on_lhs_raises_undefined_comparison[==-extras]",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "pypa/packaging",
+   "sha": "2c688aa15f",
+   "source": "src/packaging/markers.py",
+   "traceback_points_into_the_source": true
+  },
+  {
+   "events": 74,
+   "failed": true,
+   "fix_function_on_the_path": true,
+   "fix_functions": [
+    "_get_payload"
+   ],
+   "fix_functions_executed": [
+    "_get_payload"
+   ],
+   "node": "tests/test_metadata.py::TestRawMetadata::test_description_multipart_payload[False]",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "pypa/packaging",
+   "sha": "1b00eeffc6",
+   "source": "src/packaging/metadata.py",
+   "traceback_points_into_the_source": true
+  },
+  {
+   "events": 126,
+   "failed": true,
+   "fix_function_on_the_path": true,
+   "fix_functions": [
+    "_format_marker"
+   ],
+   "fix_functions_executed": [
+    "_format_marker"
+   ],
+   "node": "tests/test_markers.py::test_str_preserves_nested_group_precedence",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "pypa/packaging",
+   "sha": "0a85b41e24",
+   "source": "src/packaging/markers.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "events": 330,
+   "failed": true,
+   "fix_function_on_the_path": true,
+   "fix_functions": [
+    "difference",
+    "is_subset"
+   ],
+   "fix_functions_executed": [
+    "difference"
+   ],
+   "node": "tests/test_ranges.py::TestSetAlgebra::test_difference_requires_matching_policy",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "pypa/packaging",
+   "sha": "c4fb81ff6e",
+   "source": "src/packaging/ranges.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "events": 6,
+   "failed": true,
+   "fix_function_on_the_path": true,
+   "fix_functions": [
+    "parse_sdist_filename",
+    "parse_wheel_filename"
+   ],
+   "fix_functions_executed": [
+    "parse_wheel_filename"
+   ],
+   "node": "tests/test_utils.py::test_parse_wheel_invalid_filename[-1.0-py3-none-any.whl]",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "pypa/packaging",
+   "sha": "84833cc16b",
+   "source": "src/packaging/utils.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "events": 12,
+   "failed": true,
+   "fix_function_on_the_path": true,
+   "fix_functions": [
+    "_parse_version_many"
+   ],
+   "fix_functions_executed": [
+    "_parse_version_many"
+   ],
+   "node": "tests/test_requirements.py::TestRequirementParsing::test_error_when_prefix_match_uses_post_release[==]",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "pypa/packaging",
+   "sha": "fbea07c1f2",
+   "source": "src/packaging/_parser.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "events": 340,
+   "failed": true,
+   "fix_function_on_the_path": true,
+   "fix_functions": [
+    "union"
+   ],
+   "fix_functions_executed": [
+    "union"
+   ],
+   "node": "tests/test_ranges.py::TestSetAlgebra::test_union_full_preserves_autodetected_prerelease_policy",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "pypa/packaging",
+   "sha": "d2fa923848",
+   "source": "src/packaging/ranges.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "events": 26,
+   "failed": true,
+   "fix_function_on_the_path": true,
+   "fix_functions": [
+    "__eq__",
+    "__hash__"
+   ],
+   "fix_functions_executed": [
+    "__eq__"
+   ],
+   "node": "tests/test_requirements.py::TestRequirementBehaviour::test_equivalent_reqs_equal_hashes_unequal_strings[urllib3[secure]-urllib3[SECURE]]",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "pypa/packaging",
+   "sha": "fbd0d4b4b8",
+   "source": "src/packaging/requirements.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "events": 26,
+   "failed": true,
+   "fix_function_on_the_path": true,
+   "fix_functions": [
+    "_from_dict"
+   ],
+   "fix_functions_executed": [
+    "_from_dict"
+   ],
+   "node": "tests/test_direct_url.py::test_dir_info_url_scheme_file_case_insensitive[FILE:///home/myproject]",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "pypa/packaging",
+   "sha": "e80f70f8b1",
+   "source": "src/packaging/direct_url.py",
+   "traceback_points_into_the_source": true
+  },
+  {
+   "events": 21,
+   "failed": true,
+   "fix_function_on_the_path": true,
+   "fix_functions": [
+    "_evaluate_markers",
+    "_lookup_environment"
+   ],
+   "fix_functions_executed": [
+    "_evaluate_markers"
+   ],
+   "node": "tests/test_markers.py::TestMarker::test_missing_environment_key_raises_undefined_environment_name",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "pypa/packaging",
+   "sha": "b19df947aa",
+   "source": "src/packaging/markers.py",
+   "traceback_points_into_the_source": true
+  },
+  {
+   "events": 19,
+   "failed": true,
+   "fix_function_on_the_path": true,
+   "fix_functions": [
+    "_normalize_extras"
+   ],
+   "fix_functions_executed": [
+    "_normalize_extras"
+   ],
+   "node": "tests/test_markers.py::TestMarker::test_extra_compared_to_variable_not_normalized",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": "'extra",
+   "repo": "pypa/packaging",
+   "sha": "0726512929",
+   "source": "src/packaging/markers.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "events": 6,
+   "failed": true,
+   "fix_function_on_the_path": false,
+   "fix_functions": [
+    "_parse_group"
+   ],
+   "fix_functions_executed": [],
+   "node": "tests/test_dependency_groups.py::test_malformed_group_entries_are_not_cached_on_resolver_instance[item0-InvalidDependencyGroupObject-Invalid",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "pypa/packaging",
+   "sha": "349abfad06",
+   "source": "src/packaging/dependency_groups.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "events": 24,
+   "failed": true,
+   "fix_function_on_the_path": true,
+   "fix_functions": [
+    "__hash__"
+   ],
+   "fix_functions_executed": [
+    "__hash__"
+   ],
+   "node": "tests/test_requirements.py::TestRequirementBehaviour::test_equivalent_reqs_equal_hashes_unequal_strings[foo==1.0.0-foo==1.0.0.0]",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "pypa/packaging",
+   "sha": "d8e08df11b",
+   "source": "src/packaging/requirements.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "events": 6,
+   "failed": true,
+   "fix_function_on_the_path": false,
+   "fix_functions": [],
+   "fix_functions_executed": [],
+   "node": "tests/test_utils.py::test_is_normalized_name[a--b-a-b]",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "pypa/packaging",
+   "sha": "ba17fcea23",
+   "source": "src/packaging/utils.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "events": 10,
+   "failed": true,
+   "fix_function_on_the_path": true,
+   "fix_functions": [
+    "_strip_auth_from_netloc"
+   ],
+   "fix_functions_executed": [
+    "_strip_auth_from_netloc"
+   ],
+   "node": "tests/test_direct_url.py::test_strip_url[https://user:pa@ss@g.c/user/repo.git-safe_user_passwords2-https://g.c/user/repo.git]",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "pypa/packaging",
+   "sha": "08bb047794",
+   "source": "src/packaging/direct_url.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "events": 16,
+   "failed": true,
+   "fix_function_on_the_path": true,
+   "fix_functions": [
+    "__getstate__",
+    "__setstate__"
+   ],
+   "fix_functions_executed": [
+    "__getstate__",
+    "__setstate__"
+   ],
+   "node": "tests/test_requirements.py::test_pickle_requirement_preserves_prereleases[True]",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "pypa/packaging",
+   "sha": "5c163f5382",
+   "source": "src/packaging/requirements.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "events": 85,
+   "failed": false,
+   "node": "tests/test_metadata.py::TestRawMetadata::test_complete",
+   "ran": true,
+   "reason": "the reconstructed refused state passed",
+   "repo": "pypa/packaging",
+   "sha": "9f5249fba2",
+   "source": "src/packaging/metadata.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "events": 6,
+   "failed": true,
+   "fix_function_on_the_path": false,
+   "fix_functions": [
+    "_format_full_version",
+    "default_environment"
+   ],
+   "fix_functions_executed": [],
+   "node": "tests/test_markers.py",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "pypa/packaging",
+   "sha": "668da8662a",
+   "source": "src/packaging/markers.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "events": 14,
+   "failed": true,
+   "fix_function_on_the_path": false,
+   "fix_functions": [
+    "__and__",
+    "__or__",
+    "_from_markers"
+   ],
+   "fix_functions_executed": [],
+   "node": "tests/test_markers.py::test_and_operator_evaluates_true",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "pypa/packaging",
+   "sha": "98b4bfb682",
+   "source": "src/packaging/markers.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "events": 77,
+   "failed": true,
+   "fix_function_on_the_path": true,
+   "fix_functions": [
+    "_process_description_content_type"
+   ],
+   "fix_functions_executed": [
+    "_process_description_content_type"
+   ],
+   "node": "tests/test_metadata.py::TestMetadata::test_invalid_charset_error_message",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "pypa/packaging",
+   "sha": "553582d916",
+   "source": "src/packaging/metadata.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "events": 9,
+   "failed": true,
+   "fix_function_on_the_path": true,
+   "fix_functions": [
+    "__eq__",
+    "__ge__",
+    "__gt__",
+    "__le__",
+    "__lt__"
+   ],
+   "fix_functions_executed": [
+    "__le__",
+    "__lt__"
+   ],
+   "node": "tests/test_structures.py::test_infinity_self_comparison",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": "Infinity <= Infinity",
+   "repo": "pypa/packaging",
+   "sha": "f8f16338e1",
+   "source": "src/packaging/_structures.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "events": 3,
+   "failed": true,
+   "fix_function_on_the_path": false,
+   "fix_functions": [
+    "_iter_parts"
+   ],
+   "fix_functions_executed": [],
+   "node": "tests/test_requirements.py::TestRequirementBehaviour::test_str_and_repr[--",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "pypa/packaging",
+   "sha": "6da1c50d13",
+   "source": "src/packaging/requirements.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "events": 4,
+   "failed": true,
+   "fix_function_on_the_path": true,
+   "fix_functions": [
+    "canonicalize_license_expression"
+   ],
+   "fix_functions_executed": [
+    "canonicalize_license_expression"
+   ],
+   "node": "tests/test_metadata.py::TestMetadata::test_valid_license_expression[((MIT))-((MIT))]",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "pypa/packaging",
+   "sha": "a1f705642e",
+   "source": "src/packaging/licenses/__init__.py",
+   "traceback_points_into_the_source": true
+  },
+  {
+   "events": 75,
+   "failed": true,
+   "fix_function_on_the_path": true,
+   "fix_functions": [
+    "_process_import_names",
+    "_process_license_expression",
+    "_write_metadata",
+    "parse_email"
+   ],
+   "fix_functions_executed": [
+    "parse_email"
+   ],
+   "node": "tests/test_metadata.py::TestRawMetadata::test_complete",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "pypa/packaging",
+   "sha": "e83801f455",
+   "source": "src/packaging/metadata.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "events": 73,
+   "failed": true,
+   "fix_function_on_the_path": true,
+   "fix_functions": [
+    "__init__",
+    "_write_metadata",
+    "as_bytes",
+    "as_rfc822",
+    "header_store_parse"
+   ],
+   "fix_functions_executed": [
+    "__init__"
+   ],
+   "node": "tests/test_metadata.py::TestMetadataWriting::test_write_metadata",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "pypa/packaging",
+   "sha": "3b20e0fd02",
+   "source": "src/packaging/metadata.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "events": 11,
+   "failed": true,
+   "fix_function_on_the_path": true,
+   "fix_functions": [
+    "_parse_requirement_details",
+    "_parse_requirement_marker"
+   ],
+   "fix_functions_executed": [
+    "_parse_requirement_details",
+    "_parse_requirement_marker"
+   ],
+   "node": "tests/test_requirements.py::TestRequirementParsing::test_error_no_space_after_url",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "pypa/packaging",
+   "sha": "888eb14526",
+   "source": "src/packaging/_parser.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "events": 5,
+   "failed": true,
+   "fix_function_on_the_path": false,
+   "fix_functions": [],
+   "fix_functions_executed": [],
+   "node": "tests/test_utils.py::test_canonicalize_name_invalid[hi\\n-hi\\n]",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "pypa/packaging",
+   "sha": "258202ed7f",
+   "source": "src/packaging/utils.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "events": 2,
+   "failed": true,
+   "fix_function_on_the_path": false,
+   "fix_functions": [
+    "canonicalize_license_expression"
+   ],
+   "fix_functions_executed": [],
+   "node": "tests/test_metadata.py::TestMetadata::test_invalid_license_expression[(",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "pypa/packaging",
+   "sha": "2680259b4f",
+   "source": "src/packaging/licenses/__init__.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "events": 67,
+   "failed": true,
+   "fix_function_on_the_path": true,
+   "fix_functions": [
+    "_process_dynamic"
+   ],
+   "fix_functions_executed": [
+    "_process_dynamic"
+   ],
+   "node": "tests/test_metadata.py::TestMetadata::test_disallowed_dynamic[name]",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "pypa/packaging",
+   "sha": "a716c52b5f",
+   "source": "src/packaging/metadata.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "events": 19,
+   "failed": true,
+   "fix_function_on_the_path": true,
+   "fix_functions": [
+    "_repair_python_full_version",
+    "evaluate"
+   ],
+   "fix_functions_executed": [
+    "evaluate"
+   ],
+   "node": "tests/test_markers.py::TestMarker::test_python_full_version_untagged_user_provided",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "pypa/packaging",
+   "sha": "c385b58c4d",
+   "source": "src/packaging/markers.py",
+   "traceback_points_into_the_source": true
+  },
+  {
+   "events": 19,
+   "failed": true,
+   "fix_function_on_the_path": true,
+   "fix_functions": [
+    "evaluate"
+   ],
+   "fix_functions_executed": [
+    "evaluate"
+   ],
+   "node": "tests/test_markers.py::TestMarker::test_python_full_version_untagged",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "pypa/packaging",
+   "sha": "3e67fc775e",
+   "source": "src/packaging/markers.py",
+   "traceback_points_into_the_source": true
+  },
+  {
+   "events": 65,
+   "failed": true,
+   "fix_function_on_the_path": true,
+   "fix_functions": [
+    "__get__"
+   ],
+   "fix_functions_executed": [
+    "__get__"
+   ],
+   "node": "tests/test_metadata.py::TestMetadata::test_optional_defaults_to_none[author]",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "pypa/packaging",
+   "sha": "09f131b326",
+   "source": "src/packaging/metadata.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "events": 6,
+   "failed": true,
+   "fix_function_on_the_path": true,
+   "fix_functions": [
+    "parse_sdist_filename",
+    "parse_wheel_filename"
+   ],
+   "fix_functions_executed": [
+    "parse_wheel_filename"
+   ],
+   "node": "tests/test_utils.py::test_parse_wheel_invalid_filename[foobar-1.x-py3-none-any.whl]",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "pypa/packaging",
+   "sha": "524b701c6e",
+   "source": "src/packaging/utils.py",
+   "traceback_points_into_the_source": true
+  },
+  {
+   "events": 14,
+   "failed": true,
+   "fix_function_on_the_path": true,
+   "fix_functions": [
+    "__eq__",
+    "__hash__",
+    "__str__",
+    "_iter_parts"
+   ],
+   "fix_functions_executed": [
+    "__eq__",
+    "__str__"
+   ],
+   "node": "tests/test_requirements.py::TestRequirementBehaviour::test_equivalent_reqs_equal_hashes_unequal_strings[scikit-learn==1.0.1-scikit_learn==1.0.1]",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "pypa/packaging",
+   "sha": "e8f839f740",
+   "source": "src/packaging/requirements.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "events": 6,
+   "failed": true,
+   "fix_function_on_the_path": true,
+   "fix_functions": [
+    "__init__"
+   ],
+   "fix_functions_executed": [
+    "__init__"
+   ],
+   "node": "tests/test_requirements.py::test_basic_valid_requirement_parsing[-None-gopher:/foo/com--extras0-package]",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "pypa/packaging",
+   "sha": "fe8f0bb99c",
+   "source": "src/packaging/requirements.py",
+   "traceback_points_into_the_source": true
+  },
+  {
+   "events": 6,
+   "failed": true,
+   "fix_function_on_the_path": false,
+   "fix_functions": [
+    "_parse_full_marker",
+    "parse_marker"
+   ],
+   "fix_functions_executed": [],
+   "node": "tests/test_markers.py::TestMarker::test_parses_invalid[(python_version",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "pypa/packaging",
+   "sha": "55584fb5ca",
+   "source": "src/packaging/_parser.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "events": 5,
+   "failed": true,
+   "fix_function_on_the_path": false,
+   "fix_functions": [
+    "_lazy_sha1"
+   ],
+   "fix_functions_executed": [],
+   "node": "tests/test_itsdangerous/test_serializer.py",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "pallets/itsdangerous",
+   "sha": "7f4dcf83a0",
+   "source": "src/itsdangerous/signer.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "events": 4000,
+   "failed": true,
+   "fix_function_on_the_path": false,
+   "fix_functions": [],
+   "fix_functions_executed": [],
+   "node": "tests/test_misc.py::TestMiscellaneous::test_inline_array_recursion_limit",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "hukkin/tomli",
+   "sha": "1e6e869aa9",
+   "source": "src/tomli/_parser.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "events": 4000,
+   "failed": true,
+   "fix_function_on_the_path": true,
+   "fix_functions": [
+    "parse_key"
+   ],
+   "fix_functions_executed": [
+    "parse_key"
+   ],
+   "node": "tests/test_misc.py::TestMiscellaneous::test_key_recursion_limit",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "hukkin/tomli",
+   "sha": "e1fdb94bc9",
+   "source": "src/tomli/_parser.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "node": null,
+   "ran": false,
+   "reason": "no failed node or test path recorded",
+   "repo": "hukkin/tomli",
+   "sha": "9eb2125ef4",
+   "source": "src/tomli/_re.py"
+  },
+  {
+   "node": null,
+   "ran": false,
+   "reason": "no failed node or test path recorded",
+   "repo": "hukkin/tomli",
+   "sha": "12314bde5b",
+   "source": "src/tomli/_parser.py"
+  },
+  {
+   "node": null,
+   "ran": false,
+   "reason": "no failed node or test path recorded",
+   "repo": "hukkin/tomli",
+   "sha": "2a2aa62f1b",
+   "source": "src/tomli/_parser.py"
+  },
+  {
+   "events": 38,
+   "failed": true,
+   "fix_function_on_the_path": false,
+   "fix_functions": [
+    "__init__",
+    "create_dict_rule",
+    "create_list_rule",
+    "key_value_rule",
+    "loads",
+    "parse_array",
+    "parse_basic_str",
+    "parse_basic_str_escape",
+    "parse_hex_char",
+    "parse_inline_table",
+    "parse_key_part",
+    "parse_key_value_pair",
+    "parse_value",
+    "skip_until"
+   ],
+   "fix_functions_executed": [],
+   "node": "tests/test_error.py::TestError::test_deprecated_tomldecodeerror",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "hukkin/tomli",
+   "sha": "d1d6a8571b",
+   "source": "src/tomli/_parser.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "events": 39,
+   "failed": true,
+   "fix_function_on_the_path": true,
+   "fix_functions": [
+    "loads"
+   ],
+   "fix_functions_executed": [
+    "loads"
+   ],
+   "node": "tests/test_error.py::TestError::test_type_error",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "hukkin/tomli",
+   "sha": "4e245a4bbb",
+   "source": "src/tomli/_parser.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "events": 56,
+   "failed": true,
+   "fix_function_on_the_path": true,
+   "fix_functions": [
+    "loads",
+    "make_safe_parse_float",
+    "safe_parse_float"
+   ],
+   "fix_functions_executed": [
+    "loads"
+   ],
+   "node": "tests/test_error.py::TestError::test_invalid_parse_float",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "hukkin/tomli",
+   "sha": "794c8e50d6",
+   "source": "src/tomli/_parser.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "events": 39,
+   "failed": true,
+   "fix_function_on_the_path": true,
+   "fix_functions": [
+    "load"
+   ],
+   "fix_functions_executed": [
+    "load"
+   ],
+   "node": "tests/test_misc.py::TestMiscellaneous::test_incorrect_load",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "hukkin/tomli",
+   "sha": "8b962e1349",
+   "source": "src/tomli/_parser.py",
+   "traceback_points_into_the_source": true
+  },
+  {
+   "events": 1,
+   "failed": true,
+   "fix_function_on_the_path": false,
+   "fix_functions": [],
+   "fix_functions_executed": [],
+   "node": "tests/test_error.py::test_module_name",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "hukkin/tomli",
+   "sha": "96dfe2cef7",
+   "source": "tomli/__init__.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "events": 54,
+   "failed": true,
+   "fix_function_on_the_path": true,
+   "fix_functions": [
+    "parse_basic_str",
+    "skip_until"
+   ],
+   "fix_functions_executed": [
+    "skip_until"
+   ],
+   "node": "tests/test_error.py::test_invalid_char_quotes",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": "\" '\\\\n' \" in 'Found invalid character \"\\'\\\\n\\'\" (at line 1, column 6)'",
+   "repo": "hukkin/tomli",
+   "sha": "31c85a1846",
+   "source": "tomli/_parser.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "events": 1,
+   "failed": false,
+   "node": "tests/test_misc.py::test_own_pyproject",
+   "ran": true,
+   "reason": "the reconstructed refused state passed",
+   "repo": "hukkin/tomli",
+   "sha": "9af551b578",
+   "source": "tomli/__init__.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "events": 37,
+   "failed": true,
+   "fix_function_on_the_path": false,
+   "fix_functions": [
+    "__init__",
+    "append_nest_to_list",
+    "create_dict_rule",
+    "create_list_rule",
+    "is_",
+    "key_value_rule",
+    "parse_inline_table",
+    "set",
+    "set_for_relative_key",
+    "unset_all"
+   ],
+   "fix_functions_executed": [],
+   "node": "tests/test_flags.py",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "hukkin/tomli",
+   "sha": "9655d33004",
+   "source": "tomli/_parser.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "events": 54,
+   "failed": true,
+   "fix_function_on_the_path": true,
+   "fix_functions": [
+    "comment_rule",
+    "create_dict_rule",
+    "create_list_rule",
+    "key_value_rule",
+    "loads",
+    "location_repr",
+    "parse_array",
+    "parse_basic_str",
+    "parse_basic_str_escape_sequence",
+    "parse_hex_char",
+    "parse_inline_table",
+    "parse_key_part",
+    "parse_key_value_pair",
+    "parse_multiline_basic_str",
+    "parse_multiline_literal_str",
+    "parse_regex",
+    "parse_value",
+    "skip_comments_and_array_ws",
+    "skip_until",
+    "suffix_location"
+   ],
+   "fix_functions_executed": [
+    "key_value_rule",
+    "loads",
+    "parse_key_part",
+    "parse_key_value_pair",
+    "parse_value"
+   ],
+   "node": "tests/test_error.py::test_line_and_col",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "hukkin/tomli",
+   "sha": "67ec7d1052",
+   "source": "tomli/_parser.py",
+   "traceback_points_into_the_source": false
+  },
+  {
+   "events": 37,
+   "failed": true,
+   "fix_function_on_the_path": false,
+   "fix_functions": [
+    "__init__",
+    "_parse_value",
+    "loads"
+   ],
+   "fix_functions_executed": [],
+   "node": "tests/test_misc.py::test_parse_float",
+   "produced": false,
+   "producer_is_a_function_the_fix_changed": false,
+   "producer_within_three_lines_of_the_fix": false,
+   "ran": true,
+   "rejected": null,
+   "repo": "hukkin/tomli",
+   "sha": "5ab9ec926d",
+   "source": "tomli/_parser.py",
+   "traceback_points_into_the_source": false
+  }
+ ],
+ "schema": "BRAIN_THE_VALUE_THAT_WAS_REJECTED_HAD_A_PRODUCER_V1",
+ "verdict": {
+  "K1_the_refused_state_is_executed_under_a_tracer": {
+   "MET": true,
+   "could_not_run": 3,
+   "failed": 82,
+   "median_traced_returns": 23,
+   "ran": 84,
+   "tasks": 87
+  },
+  "K2_a_producer_of_the_rejected_value_is_found": {
+   "MET": true,
+   "failures_with_a_rejected_operand": 9,
+   "fraction": 0.012,
+   "producer_found": 1
+  },
+  "K3_the_producer_localises_the_fix": {
+   "MET": true,
+   "fraction_near": 0.0,
+   "fraction_of_produced": 0.0,
+   "producer_is_a_function_the_fix_changed": 0,
+   "producer_within_three_lines_of_the_fix": 0
+  },
+  "K4_the_gain_is_the_failures_the_traceback_cannot_localise": {
+   "MET": true,
+   "failures_without_a_source_frame": 69,
+   "fraction": 0.0,
+   "fraction_of_failures": 0.841,
+   "fraction_on_the_path": 0.652,
+   "note": "this is the only number that matters: it is the part of the corpus the machine does not localise today, and the part that provenance would localise instead",
+   "of_those_localised_by_provenance": 0,
+   "of_those_where_a_function_the_fix_changed_was_on_the_path": 45
+  },
+  "K5_zero": {
+   "MET": true,
+   "model_calls": 0,
+   "parameters_stored": 0
+  }
+ },
+ "why_this_round": {
+  "the_answer_being_tested": "if the producer of the rejected value is usually a function the real fix changed, then the observation that identifies an edit can be produced by tracing, and repair is identification again",
+  "the_gap_it_closes": "rounds 22-24 showed the proposal cannot come from vocabulary, corpus, refusal or check; round 24 named the only remaining observation, the provenance of the rejected value, and this measures it",
+  "why_it_could_fail": "repr matching may miss; the fix may be in a sibling of the producer; the value may be produced by a correct expression from wrong operands"
+ }
+}
