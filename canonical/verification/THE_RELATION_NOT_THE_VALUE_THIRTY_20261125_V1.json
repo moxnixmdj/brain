@@ -1,0 +1,1334 @@
+{
+ "schema": "BRAIN_THE_RELATION_NOT_THE_VALUE_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "date": "2026-11-25",
+ "mode": "SWEEP_REAL_HISTORY",
+ "rows": [
+  {
+   "repo": "click",
+   "commit": "3495fba163dd61dea837cd557095df6c21515ac8",
+   "test": "tests/test_basic.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_basic.py::test_param_named_help[argument]",
+    "tests/test_basic.py::test_param_named_help[custom-flags]",
+    "tests/test_basic.py::test_param_named_help[no-collision]",
+    "tests/test_basic.py::test_param_named_help[option]",
+    "tests/test_basic.py::test_param_squatting_help_option_name"
+   ],
+   "baseline_verdicts": 102,
+   "guard_sites": 155,
+   "falsey_sites": 13,
+   "observed": [
+    {
+     "line": 2962,
+     "expression": "self.secondary_opts",
+     "value": "[]"
+    },
+    {
+     "line": 3047,
+     "expression": "self.secondary_opts",
+     "value": "[]"
+    },
+    {
+     "line": 3192,
+     "expression": "self.secondary_opts",
+     "value": "[]"
+    },
+    {
+     "line": 2586,
+     "expression": "unset_keys",
+     "value": "{}"
+    },
+    {
+     "line": 3241,
+     "expression": "self.secondary_opts",
+     "value": "[]"
+    },
+    {
+     "line": 3259,
+     "expression": "extra_items",
+     "value": "[]"
+    }
+   ],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_basic.py::test_param_named_help[no-collision]",
+     "tests/test_basic.py::test_param_named_help[argument]",
+     "tests/test_basic.py::test_param_named_help[option]",
+     "tests/test_basic.py::test_param_named_help[custom-flags]",
+     "tests/test_basic.py::test_param_squatting_help_option_name"
+    ]
+   },
+   "stage": "NO_PROJECTION_REPAIRS",
+   "attempts": 13,
+   "seconds": 28.79
+  },
+  {
+   "repo": "click",
+   "commit": "becbde5cf416441627f779e8dd34e57738ee1c1f",
+   "test": "tests/test_testing.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_testing.py::test_with_echo_via_pager"
+   ],
+   "baseline_verdicts": 42,
+   "guard_sites": 39,
+   "falsey_sites": 0,
+   "observed": [],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_testing.py::test_with_echo_via_pager"
+    ]
+   },
+   "stage": "NO_FALSEY_GUARD",
+   "attempts": 0,
+   "seconds": 4.96
+  },
+  {
+   "repo": "click",
+   "commit": "a3321c9ca14ddb951f04ac981f275b0de2f46208",
+   "test": "tests/test_shell_completion.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_shell_completion.py::test_source_uses_lf_line_endings"
+   ],
+   "baseline_verdicts": 54,
+   "guard_sites": 7,
+   "falsey_sites": 3,
+   "observed": [
+    {
+     "line": 542,
+     "expression": "value",
+     "value": "''"
+    },
+    {
+     "line": 412,
+     "expression": "incomplete",
+     "value": "''"
+    },
+    {
+     "line": 418,
+     "expression": "incomplete",
+     "value": "''"
+    }
+   ],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_shell_completion.py::test_source_uses_lf_line_endings"
+    ]
+   },
+   "stage": "NO_PROJECTION_REPAIRS",
+   "attempts": 3,
+   "seconds": 9.55
+  },
+  {
+   "repo": "jinja",
+   "commit": "a150ff749a0347c41e8e353c2ce2063e8f84ab42",
+   "test": "tests/test_async.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_async.py::test_getitem_after_call",
+    "tests/test_async.py::test_getitem_after_filter"
+   ],
+   "baseline_verdicts": 58,
+   "guard_sites": 110,
+   "falsey_sites": 16,
+   "observed": [
+    {
+     "line": 594,
+     "expression": "undefs",
+     "value": "[]"
+    },
+    {
+     "line": 1178,
+     "expression": "node.else_",
+     "value": "[]"
+    },
+    {
+     "line": 1227,
+     "expression": "node.else_",
+     "value": "[]"
+    },
+    {
+     "line": 1594,
+     "expression": "self._assign_stack",
+     "value": "[]"
+    },
+    {
+     "line": 455,
+     "expression": "self._new_lines",
+     "value": "0"
+    },
+    {
+     "line": 1656,
+     "expression": "idx",
+     "value": "0"
+    }
+   ],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_async.py::test_getitem_after_filter",
+     "tests/test_async.py::test_getitem_after_call"
+    ]
+   },
+   "stage": "NO_PROJECTION_REPAIRS",
+   "attempts": 16,
+   "seconds": 32.85
+  },
+  {
+   "repo": "jinja",
+   "commit": "89310770585ed0fb8d10c46cf8d6f447bb807467",
+   "test": "tests/test_loader.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_loader.py::test_package_zip_omit_curdir[./]",
+    "tests/test_loader.py::test_package_zip_omit_curdir[.]",
+    "tests/test_loader.py::test_package_zip_omit_curdir[]"
+   ],
+   "baseline_verdicts": 37,
+   "guard_sites": 3,
+   "falsey_sites": 0,
+   "observed": [],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_loader.py::test_package_zip_omit_curdir[]",
+     "tests/test_loader.py::test_package_zip_omit_curdir[.]",
+     "tests/test_loader.py::test_package_zip_omit_curdir[./]"
+    ]
+   },
+   "stage": "NO_FALSEY_GUARD",
+   "attempts": 0,
+   "seconds": 4.95
+  },
+  {
+   "repo": "attrs",
+   "commit": "1c962d15a743a3c18401f0c788f0fd0cb3d9acf8",
+   "test": "tests/test_annotations.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_annotations.py::TestAnnotations::test_catches_basic_type_conflict"
+   ],
+   "baseline_verdicts": 47,
+   "guard_sites": 89,
+   "falsey_sites": 6,
+   "observed": [
+    {
+     "line": 1152,
+     "expression": "sa_attrs",
+     "value": "{}"
+    },
+    {
+     "line": 2289,
+     "expression": "attrs_to_validate",
+     "value": "[]"
+    },
+    {
+     "line": 2326,
+     "expression": "kw_only_args",
+     "value": "[]"
+    },
+    {
+     "line": 899,
+     "expression": "cached_properties",
+     "value": "{}"
+    },
+    {
+     "line": 412,
+     "expression": "unannotated",
+     "value": "set()"
+    },
+    {
+     "line": 3102,
+     "expression": "converters",
+     "value": "()"
+    }
+   ],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_annotations.py::TestAnnotations::test_catches_basic_type_conflict"
+    ]
+   },
+   "stage": "NO_PROJECTION_REPAIRS",
+   "attempts": 6,
+   "seconds": 14.9
+  },
+  {
+   "repo": "attrs",
+   "commit": "1e07f46897488350bb44ed88f1c70d4d7461dde0",
+   "test": "tests/test_annotations.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_annotations.py::TestAnnotations::test_pipe",
+    "tests/test_annotations.py::TestAnnotations::test_pipe_empty",
+    "tests/test_annotations.py::TestAnnotations::test_pipe_non_introspectable",
+    "tests/test_annotations.py::TestAnnotations::test_pipe_nullary"
+   ],
+   "baseline_verdicts": 47,
+   "guard_sites": 84,
+   "falsey_sites": 6,
+   "observed": [
+    {
+     "line": 1037,
+     "expression": "sa_attrs",
+     "value": "{}"
+    },
+    {
+     "line": 2160,
+     "expression": "attrs_to_validate",
+     "value": "[]"
+    },
+    {
+     "line": 2197,
+     "expression": "kw_only_args",
+     "value": "[]"
+    },
+    {
+     "line": 807,
+     "expression": "cached_properties",
+     "value": "{}"
+    },
+    {
+     "line": 261,
+     "expression": "attr_names",
+     "value": "[]"
+    },
+    {
+     "line": 2941,
+     "expression": "converters",
+     "value": "()"
+    }
+   ],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_annotations.py::TestAnnotations::test_pipe",
+     "tests/test_annotations.py::TestAnnotations::test_pipe_empty",
+     "tests/test_annotations.py::TestAnnotations::test_pipe_non_introspectable",
+     "tests/test_annotations.py::TestAnnotations::test_pipe_nullary"
+    ]
+   },
+   "stage": "NO_PROJECTION_REPAIRS",
+   "attempts": 6,
+   "seconds": 14.6
+  },
+  {
+   "repo": "attrs",
+   "commit": "dbb25ce34787a30e2ffa65685f6c689a269c3521",
+   "test": "tests/test_functional.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_functional.py::TestFunctional::test_init_subclass[False]",
+    "tests/test_functional.py::TestFunctional::test_init_subclass[True]"
+   ],
+   "baseline_verdicts": 406,
+   "guard_sites": 79,
+   "falsey_sites": 5,
+   "observed": [
+    {
+     "line": 1047,
+     "expression": "sa_attrs",
+     "value": "{}"
+    },
+    {
+     "line": 2169,
+     "expression": "attrs_to_validate",
+     "value": "[]"
+    },
+    {
+     "line": 2206,
+     "expression": "kw_only_args",
+     "value": "[]"
+    },
+    {
+     "line": 817,
+     "expression": "cached_properties",
+     "value": "{}"
+    },
+    {
+     "line": 259,
+     "expression": "attr_names",
+     "value": "[]"
+    }
+   ],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_functional.py::TestFunctional::test_init_subclass[True]",
+     "tests/test_functional.py::TestFunctional::test_init_subclass[False]"
+    ]
+   },
+   "stage": "NO_PROJECTION_REPAIRS",
+   "attempts": 5,
+   "seconds": 17.26
+  },
+  {
+   "repo": "attrs",
+   "commit": "edcaf04a4d6b1b92996de668af9f6fea266efba2",
+   "test": "tests/test_make.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_make.py::TestMakeClass::test_annotations",
+    "tests/test_make.py::TestMakeClass::test_annotations_resolve"
+   ],
+   "baseline_verdicts": 259,
+   "guard_sites": 73,
+   "falsey_sites": 6,
+   "observed": [
+    {
+     "line": 1163,
+     "expression": "sa_attrs",
+     "value": "{}"
+    },
+    {
+     "line": 2475,
+     "expression": "attrs_to_validate",
+     "value": "[]"
+    },
+    {
+     "line": 2514,
+     "expression": "kw_only_args",
+     "value": "[]"
+    },
+    {
+     "line": 933,
+     "expression": "cached_properties",
+     "value": "{}"
+    },
+    {
+     "line": 363,
+     "expression": "attr_names",
+     "value": "[]"
+    },
+    {
+     "line": 2331,
+     "expression": "a.validator",
+     "value": "[]"
+    }
+   ],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_make.py::TestMakeClass::test_annotations",
+     "tests/test_make.py::TestMakeClass::test_annotations_resolve"
+    ]
+   },
+   "stage": "NO_PROJECTION_REPAIRS",
+   "attempts": 6,
+   "seconds": 40.16
+  },
+  {
+   "repo": "click",
+   "commit": "051bb0f30b545cf7426deef819811815297c2798",
+   "test": "tests/test_termui.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_termui.py::test_echo_via_pager_tty_pager_missing",
+    "tests/test_termui.py::test_get_pager_file_missing_pager_keeps_borrowed_stream_open"
+   ],
+   "baseline_verdicts": 224,
+   "guard_sites": 39,
+   "falsey_sites": 2,
+   "observed": [
+    {
+     "line": 169,
+     "expression": "self.avg",
+     "value": "[]"
+    },
+    {
+     "line": 418,
+     "expression": "pager_cmd_parts",
+     "value": "[]"
+    }
+   ],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_termui.py::test_get_pager_file_missing_pager_keeps_borrowed_stream_open",
+     "tests/test_termui.py::test_echo_via_pager_tty_pager_missing"
+    ]
+   },
+   "stage": "NO_PROJECTION_REPAIRS",
+   "attempts": 2,
+   "seconds": 9.78
+  },
+  {
+   "repo": "click",
+   "commit": "32ae2acd3474a57d2450ea849545b2e1258bf76a",
+   "test": "tests/test_shell_completion.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_shell_completion.py::test_choice_case_sensitive[False-expect0]"
+   ],
+   "baseline_verdicts": 54,
+   "guard_sites": 29,
+   "falsey_sites": 0,
+   "observed": [],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_shell_completion.py::test_choice_case_sensitive[False-expect0]"
+    ]
+   },
+   "stage": "NO_FALSEY_GUARD",
+   "attempts": 0,
+   "seconds": 5.01
+  },
+  {
+   "repo": "click",
+   "commit": "91de59c6c8abc8251e7af551cd4546cc964288af",
+   "test": "tests/test_options.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_options.py::test_flag_value_optional_behavior",
+    "tests/test_options.py::test_flag_value_with_type_conversion"
+   ],
+   "baseline_verdicts": 533,
+   "guard_sites": 143,
+   "falsey_sites": 19,
+   "observed": [
+    {
+     "line": 2957,
+     "expression": "self.secondary_opts",
+     "value": "[]"
+    },
+    {
+     "line": 2447,
+     "expression": "unset_keys",
+     "value": "{}"
+    },
+    {
+     "line": 1242,
+     "expression": "args",
+     "value": "[]"
+    },
+    {
+     "line": 1155,
+     "expression": "text",
+     "value": "''"
+    },
+    {
+     "line": 3006,
+     "expression": "self.secondary_opts",
+     "value": "[]"
+    },
+    {
+     "line": 3024,
+     "expression": "extra_items",
+     "value": "[]"
+    }
+   ],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_options.py::test_flag_value_optional_behavior",
+     "tests/test_options.py::test_flag_value_with_type_conversion"
+    ]
+   },
+   "stage": "NO_PROJECTION_REPAIRS",
+   "attempts": 19,
+   "seconds": 52.43
+  },
+  {
+   "repo": "click",
+   "commit": "70c673d37eb91ba42a129be9037caf3ebed62f3e",
+   "test": "tests/test_commands.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_commands.py::test_help_param_priority"
+   ],
+   "baseline_verdicts": 60,
+   "guard_sites": 131,
+   "falsey_sites": 11,
+   "observed": [
+    {
+     "line": 1390,
+     "expression": "args",
+     "value": "[]"
+    },
+    {
+     "line": 2692,
+     "expression": "self.secondary_opts",
+     "value": "[]"
+    },
+    {
+     "line": 1400,
+     "expression": "args",
+     "value": "[]"
+    },
+    {
+     "line": 1864,
+     "expression": "args",
+     "value": "()"
+    },
+    {
+     "line": 2599,
+     "expression": "self.secondary_opts",
+     "value": "[]"
+    },
+    {
+     "line": 1362,
+     "expression": "text",
+     "value": "''"
+    }
+   ],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_commands.py::test_help_param_priority"
+    ]
+   },
+   "stage": "NO_PROJECTION_REPAIRS",
+   "attempts": 11,
+   "seconds": 23.38
+  },
+  {
+   "repo": "jinja",
+   "commit": "b5120582706b9e997cfd3277b02a32fd35b1c9d4",
+   "test": "tests/test_security.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_security.py::TestSandbox::test_immutable_environment"
+   ],
+   "baseline_verdicts": 15,
+   "guard_sites": 2,
+   "falsey_sites": 1,
+   "observed": [
+    {
+     "line": 366,
+     "expression": "kwargs",
+     "value": "{}"
+    }
+   ],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_security.py::TestSandbox::test_immutable_environment"
+    ]
+   },
+   "stage": "NO_PROJECTION_REPAIRS",
+   "attempts": 1,
+   "seconds": 6.26
+  },
+  {
+   "repo": "attrs",
+   "commit": "ce89f5d11feb0805da9ed10bb165238cc959f1bb",
+   "test": "tests/test_functional.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_functional.py::TestFunctional::test_frozen_instance[FrozenToo]",
+    "tests/test_functional.py::TestFunctional::test_frozen_instance[Frozen]"
+   ],
+   "baseline_verdicts": 409,
+   "guard_sites": 0,
+   "falsey_sites": 0,
+   "observed": [],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_functional.py::TestFunctional::test_frozen_instance[Frozen]",
+     "tests/test_functional.py::TestFunctional::test_frozen_instance[FrozenToo]"
+    ]
+   },
+   "stage": "NO_FALSEY_GUARD",
+   "attempts": 0,
+   "seconds": 6.64
+  },
+  {
+   "repo": "attrs",
+   "commit": "13105a64f2de2e257a537ad20c06ffdd1c9d7f94",
+   "test": "tests/test_converters.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_converters.py::TestConverter::test_falsey_converter",
+    "tests/test_converters.py::TestPipe::test_wrapped_annotation"
+   ],
+   "baseline_verdicts": 38,
+   "guard_sites": 85,
+   "falsey_sites": 8,
+   "observed": [
+    {
+     "line": 1037,
+     "expression": "sa_attrs",
+     "value": "{}"
+    },
+    {
+     "line": 2160,
+     "expression": "attrs_to_validate",
+     "value": "[]"
+    },
+    {
+     "line": 2197,
+     "expression": "kw_only_args",
+     "value": "[]"
+    },
+    {
+     "line": 807,
+     "expression": "cached_properties",
+     "value": "{}"
+    },
+    {
+     "line": 261,
+     "expression": "attr_names",
+     "value": "[]"
+    },
+    {
+     "line": 185,
+     "expression": "converter",
+     "value": "<tests.test_converters.TestConverter.test_falsey_converter.<locals>.MyConv object at 0x7f33845ae7d0>"
+    }
+   ],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_converters.py::TestConverter::test_falsey_converter"
+    ]
+   },
+   "stage": "VERIFIED",
+   "projection": "is not None",
+   "site_line": 2024,
+   "site_expression": "a.converter",
+   "replacement": "(a.converter) is not None",
+   "observed_value": "<tests.test_converters.TestConverter.test_falsey_converter.<locals>.MyConv object at 0x7f33845ae7d0>",
+   "observed_type": "MyConv",
+   "attempts": 7,
+   "flipped": [
+    "tests/test_converters.py::TestConverter::test_falsey_converter"
+   ],
+   "seconds": 15.69
+  },
+  {
+   "repo": "attrs",
+   "commit": "f5683b852b1e7ec1f26aabbb55aad332de79066d",
+   "test": "tests/test_annotations.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_annotations.py::TestAnnotations::test_pipe",
+    "tests/test_annotations.py::TestAnnotations::test_pipe_empty",
+    "tests/test_annotations.py::TestAnnotations::test_pipe_non_introspectable",
+    "tests/test_annotations.py::TestAnnotations::test_pipe_nullary"
+   ],
+   "baseline_verdicts": 47,
+   "guard_sites": 0,
+   "falsey_sites": 0,
+   "observed": [],
+   "control": {
+    "accepted": false,
+    "reason": "NO_TEST_FLIPPED",
+    "flipped": []
+   },
+   "stage": "REFUSED__CONTROL_BROKEN",
+   "seconds": 4.64
+  },
+  {
+   "repo": "attrs",
+   "commit": "a71fbbad8950e127ebe4509b4ff0d730fb02a8b2",
+   "test": "tests/test_next_gen.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_next_gen.py::TestNextGen::test_setting_traceback_on_exception[decorator0]",
+    "tests/test_next_gen.py::TestNextGen::test_setting_traceback_on_exception[decorator1]"
+   ],
+   "baseline_verdicts": 32,
+   "guard_sites": 72,
+   "falsey_sites": 4,
+   "observed": [
+    {
+     "line": 1047,
+     "expression": "sa_attrs",
+     "value": "{}"
+    },
+    {
+     "line": 2323,
+     "expression": "attrs_to_validate",
+     "value": "[]"
+    },
+    {
+     "line": 2361,
+     "expression": "kw_only_args",
+     "value": "[]"
+    },
+    {
+     "line": 342,
+     "expression": "attr_names",
+     "value": "[]"
+    }
+   ],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_next_gen.py::TestNextGen::test_setting_traceback_on_exception[decorator0]",
+     "tests/test_next_gen.py::TestNextGen::test_setting_traceback_on_exception[decorator1]"
+    ]
+   },
+   "stage": "NO_PROJECTION_REPAIRS",
+   "attempts": 4,
+   "seconds": 11.1
+  },
+  {
+   "repo": "attrs",
+   "commit": "d0c73d8faa184cdff8d6a0378ed5b85ca57cde7d",
+   "test": "tests/test_validators.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_validators.py::TestDeepIterable::test_fail_invalid_member[member_validator1]",
+    "tests/test_validators.py::TestDeepIterable::test_fail_invalid_member[member_validator2]",
+    "tests/test_validators.py::TestDeepIterable::test_fail_invalid_member_and_iterable[member_validator1]",
+    "tests/test_validators.py::TestDeepIterable::test_fail_invalid_member_and_iterable[member_validator2]",
+    "tests/test_validators.py::TestDeepIterable::test_noncallable_validators[member_validator4-42]",
+    "tests/test_validators.py::TestDeepIterable::test_noncallable_validators[member_validator5-42]",
+    "tests/test_validators.py::TestDeepIterable::test_repr_member_only_sequence",
+    "tests/test_validators.py::TestDeepIterable::test_repr_sequence_member_and_iterable"
+   ],
+   "baseline_verdicts": 126,
+   "guard_sites": 3,
+   "falsey_sites": 1,
+   "observed": [
+    {
+     "line": 196,
+     "expression": "flags",
+     "value": "0"
+    }
+   ],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_validators.py::TestDeepIterable::test_success_member_only[member_validator1]",
+     "tests/test_validators.py::TestDeepIterable::test_success_member_and_iterable[member_validator1]",
+     "tests/test_validators.py::TestDeepIterable::test_fail_invalid_member[member_validator1]",
+     "tests/test_validators.py::TestDeepIterable::test_fail_invalid_member_and_iterable[member_validator1]",
+     "tests/test_validators.py::TestDeepIterable::test_success_member_only[member_validator2]",
+     "tests/test_validators.py::TestDeepIterable::test_success_member_and_iterable[member_validator2]"
+    ]
+   },
+   "stage": "NO_PROJECTION_REPAIRS",
+   "attempts": 1,
+   "seconds": 6.41
+  },
+  {
+   "repo": "click",
+   "commit": "a6256bfb5971d5e58585fe7b6c656134e1ade5a4",
+   "test": "tests/test_termui.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_termui.py::test_pipepager_less_detection_case_insensitive_on_windows",
+    "tests/test_termui.py::test_pipepager_less_detection_matches_stem[less.exe]",
+    "tests/test_termui.py::test_pipepager_less_raw_mode_detection[filename",
+    "tests/test_termui.py::test_pipepager_less_raw_mode_detection[filename with R]",
+    "tests/test_termui.py::test_pipepager_less_raw_mode_detection[filename with r]",
+    "tests/test_termui.py::test_pipepager_less_raw_mode_detection[long",
+    "tests/test_termui.py::test_pipepager_less_raw_mode_detection[long option with r substring]",
+    "tests/test_termui.py::test_pipepager_less_raw_mode_detection[long option with value]"
+   ],
+   "baseline_verdicts": 267,
+   "guard_sites": 39,
+   "falsey_sites": 4,
+   "observed": [
+    {
+     "line": 146,
+     "expression": "self._completed_intervals",
+     "value": "0"
+    },
+    {
+     "line": 164,
+     "expression": "self.avg",
+     "value": "[]"
+    },
+    {
+     "line": 541,
+     "expression": "less_flags",
+     "value": "''"
+    },
+    {
+     "line": 471,
+     "expression": "pager_cmd_parts",
+     "value": "[]"
+    }
+   ],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_termui.py::test_pipepager_less_detection_matches_stem[less.exe]",
+     "tests/test_termui.py::test_pipepager_less_detection_case_insensitive_on_windows",
+     "tests/test_termui.py::test_pipepager_less_raw_mode_detection[long option with r substring]",
+     "tests/test_termui.py::test_pipepager_less_raw_mode_detection[filename with R]",
+     "tests/test_termui.py::test_pipepager_less_raw_mode_detection[filename with r]",
+     "tests/test_termui.py::test_pipepager_less_raw_mode_detection[option terminator shields filenames]"
+    ]
+   },
+   "stage": "NO_PROJECTION_REPAIRS",
+   "attempts": 4,
+   "seconds": 14.07
+  },
+  {
+   "repo": "click",
+   "commit": "b7e5fd4cc7de70280eccd39f2bb956df617e5519",
+   "test": "tests/test_shell_completion.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_shell_completion.py::test_full_complete[fish-env4-plain,a\\nplain,b\\tbee\\n]",
+    "tests/test_shell_completion.py::test_full_complete[fish-env5-plain,b\\tbee\\n]",
+    "tests/test_shell_completion.py::test_full_complete[fish-env6-plain,b\\tbee\\n]"
+   ],
+   "baseline_verdicts": 53,
+   "guard_sites": 7,
+   "falsey_sites": 3,
+   "observed": [
+    {
+     "line": 543,
+     "expression": "value",
+     "value": "''"
+    },
+    {
+     "line": 413,
+     "expression": "incomplete",
+     "value": "''"
+    },
+    {
+     "line": 419,
+     "expression": "incomplete",
+     "value": "''"
+    }
+   ],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_shell_completion.py::test_full_complete[fish-env4-plain,a\\nplain,b\\tbee\\n]",
+     "tests/test_shell_completion.py::test_full_complete[fish-env5-plain,b\\tbee\\n]",
+     "tests/test_shell_completion.py::test_full_complete[fish-env6-plain,b\\tbee\\n]"
+    ]
+   },
+   "stage": "NO_PROJECTION_REPAIRS",
+   "attempts": 3,
+   "seconds": 9.37
+  },
+  {
+   "repo": "click",
+   "commit": "2468b70997a6ec27ced4b4867954c90da3f92075",
+   "test": "tests/test_utils.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_utils.py::test_echo_writing_to_standard_error",
+    "tests/test_utils.py::test_full_prompt_passed_to_readline[confirm]",
+    "tests/test_utils.py::test_full_prompt_passed_to_readline[prompt-custom-suffix]",
+    "tests/test_utils.py::test_full_prompt_passed_to_readline[prompt-hidden]",
+    "tests/test_utils.py::test_full_prompt_passed_to_readline[prompt]",
+    "tests/test_utils.py::test_prompts_abort"
+   ],
+   "baseline_verdicts": 147,
+   "guard_sites": 16,
+   "falsey_sites": 1,
+   "observed": [
+    {
+     "line": 180,
+     "expression": "value",
+     "value": "''"
+    }
+   ],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_utils.py::test_prompts_abort",
+     "tests/test_utils.py::test_full_prompt_passed_to_readline[prompt]",
+     "tests/test_utils.py::test_full_prompt_passed_to_readline[prompt-hidden]",
+     "tests/test_utils.py::test_full_prompt_passed_to_readline[prompt-custom-suffix]",
+     "tests/test_utils.py::test_full_prompt_passed_to_readline[confirm]",
+     "tests/test_utils.py::test_echo_writing_to_standard_error"
+    ]
+   },
+   "stage": "NO_PROJECTION_REPAIRS",
+   "attempts": 1,
+   "seconds": 7.21
+  },
+  {
+   "repo": "click",
+   "commit": "18d29196c508b249ef1111f1f29c9133e0a8b097",
+   "test": "tests/test_arguments.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_arguments.py::test_argument_custom_class_can_override_type_cast_value_and_never_sees_unset[argument_kwargs1-pass_argv1]",
+    "tests/test_arguments.py::test_argument_custom_class_can_override_type_cast_value_and_never_sees_unset[argument_kwargs4-pass_argv4]"
+   ],
+   "baseline_verdicts": 91,
+   "guard_sites": 141,
+   "falsey_sites": 11,
+   "observed": [
+    {
+     "line": 2918,
+     "expression": "self.secondary_opts",
+     "value": "[]"
+    },
+    {
+     "line": 1242,
+     "expression": "args",
+     "value": "[]"
+    },
+    {
+     "line": 1220,
+     "expression": "args",
+     "value": "[]"
+    },
+    {
+     "line": 2739,
+     "expression": "self.secondary_opts",
+     "value": "[]"
+    },
+    {
+     "line": 2812,
+     "expression": "self.secondary_opts",
+     "value": "[]"
+    },
+    {
+     "line": 2469,
+     "expression": "rv",
+     "value": "''"
+    }
+   ],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_arguments.py::test_argument_custom_class_can_override_type_cast_value_and_never_sees_unset[argument_kwargs1-pass_argv1]",
+     "tests/test_arguments.py::test_argument_custom_class_can_override_type_cast_value_and_never_sees_unset[argument_kwargs4-pass_argv4]"
+    ]
+   },
+   "stage": "NO_PROJECTION_REPAIRS",
+   "attempts": 11,
+   "seconds": 24.33
+  },
+  {
+   "repo": "click",
+   "commit": "701b313160be12752e49b3f7cea32402c0969a69",
+   "test": "tests/test_shell_completion.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_shell_completion.py::test_full_complete[fish-env6-plain,b\\tbee\\n]"
+   ],
+   "baseline_verdicts": 52,
+   "guard_sites": 7,
+   "falsey_sites": 3,
+   "observed": [
+    {
+     "line": 528,
+     "expression": "value",
+     "value": "''"
+    },
+    {
+     "line": 412,
+     "expression": "incomplete",
+     "value": "''"
+    },
+    {
+     "line": 418,
+     "expression": "item.help",
+     "value": "''"
+    }
+   ],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_shell_completion.py::test_full_complete[fish-env6-plain,b\\tbee\\n]"
+    ]
+   },
+   "stage": "NO_PROJECTION_REPAIRS",
+   "attempts": 3,
+   "seconds": 9.49
+  },
+  {
+   "repo": "click",
+   "commit": "4fd2fea0db423d242aedcae0a5f664efe0a93484",
+   "test": "tests/test_options.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_options.py::test_flag_value_is_correctly_set[opts1-True-True]",
+    "tests/test_options.py::test_flag_value_is_correctly_set[opts3-True-False]",
+    "tests/test_options.py::test_flag_value_is_correctly_set[opts5-True-True]",
+    "tests/test_options.py::test_flag_value_is_correctly_set[opts7-True-False]",
+    "tests/test_options.py::test_flag_value_is_correctly_set[opts9-True-True]"
+   ],
+   "baseline_verdicts": 144,
+   "guard_sites": 140,
+   "falsey_sites": 17,
+   "observed": [
+    {
+     "line": 2649,
+     "expression": "self.secondary_opts",
+     "value": "[]"
+    },
+    {
+     "line": 2748,
+     "expression": "self.secondary_opts",
+     "value": "[]"
+    },
+    {
+     "line": 1199,
+     "expression": "args",
+     "value": "[]"
+    },
+    {
+     "line": 1125,
+     "expression": "text",
+     "value": "''"
+    },
+    {
+     "line": 2797,
+     "expression": "self.secondary_opts",
+     "value": "[]"
+    },
+    {
+     "line": 2815,
+     "expression": "extra_items",
+     "value": "[]"
+    }
+   ],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_options.py::test_flag_value_is_correctly_set[opts1-True-True]",
+     "tests/test_options.py::test_flag_value_is_correctly_set[opts3-True-False]",
+     "tests/test_options.py::test_flag_value_is_correctly_set[opts5-True-True]",
+     "tests/test_options.py::test_flag_value_is_correctly_set[opts7-True-False]",
+     "tests/test_options.py::test_flag_value_is_correctly_set[opts9-True-True]"
+    ]
+   },
+   "stage": "NO_PROJECTION_REPAIRS",
+   "attempts": 17,
+   "seconds": 35.66
+  },
+  {
+   "repo": "jinja",
+   "commit": "eec0db8642b25691867890f14fc6c9ca04c8a8c9",
+   "test": "tests/test_loader.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_loader.py::test_package_file_list",
+    "tests/test_loader.py::test_package_file_source[foo/test.html-FOO]",
+    "tests/test_loader.py::test_package_file_source[test.html-BAR]"
+   ],
+   "baseline_verdicts": 40,
+   "guard_sites": 3,
+   "falsey_sites": 0,
+   "observed": [],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_loader.py::test_package_file_source[foo/test.html-FOO]",
+     "tests/test_loader.py::test_package_file_source[test.html-BAR]",
+     "tests/test_loader.py::test_package_file_list"
+    ]
+   },
+   "stage": "NO_FALSEY_GUARD",
+   "attempts": 0,
+   "seconds": 4.9
+  },
+  {
+   "repo": "jinja",
+   "commit": "f3bc9c6a915badd3871eb1bc5aae5421d2f6496d",
+   "test": "tests/test_regression.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_regression.py::TestBug::test_nested_loop_scoping"
+   ],
+   "baseline_verdicts": 53,
+   "guard_sites": 110,
+   "falsey_sites": 16,
+   "observed": [
+    {
+     "line": 594,
+     "expression": "undefs",
+     "value": "[]"
+    },
+    {
+     "line": 1180,
+     "expression": "node.else_",
+     "value": "[]"
+    },
+    {
+     "line": 1229,
+     "expression": "node.else_",
+     "value": "[]"
+    },
+    {
+     "line": 1591,
+     "expression": "self._assign_stack",
+     "value": "[]"
+    },
+    {
+     "line": 455,
+     "expression": "self._new_lines",
+     "value": "0"
+    },
+    {
+     "line": 1645,
+     "expression": "idx",
+     "value": "0"
+    }
+   ],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_regression.py::TestBug::test_nested_loop_scoping"
+    ]
+   },
+   "stage": "NO_PROJECTION_REPAIRS",
+   "attempts": 16,
+   "seconds": 31.73
+  },
+  {
+   "repo": "attrs",
+   "commit": "5d6d21aa5e598c600a3610a4721a63e58d89dc5e",
+   "test": "tests/test_converters.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_converters.py::TestConverter::test_annotations_if_last_in_pipe",
+    "tests/test_converters.py::TestPipe::test_wrapped_annotation"
+   ],
+   "baseline_verdicts": 33,
+   "guard_sites": 4,
+   "falsey_sites": 0,
+   "observed": [],
+   "control": {
+    "accepted": false,
+    "reason": "NO_TEST_FLIPPED",
+    "flipped": []
+   },
+   "stage": "REFUSED__CONTROL_BROKEN",
+   "seconds": 4.44
+  },
+  {
+   "repo": "attrs",
+   "commit": "c2824ac30f315bfbc7398960c6831d68ecc9edb4",
+   "test": "tests/test_make.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_make.py::TestAttributes::test_pre_init_args[False]",
+    "tests/test_make.py::TestAttributes::test_pre_init_args[True]",
+    "tests/test_make.py::TestAttributes::test_pre_init_kwargs[False]",
+    "tests/test_make.py::TestAttributes::test_pre_init_kwargs[True]",
+    "tests/test_make.py::TestAttributes::test_pre_init_kwargs_only[False]",
+    "tests/test_make.py::TestAttributes::test_pre_init_kwargs_only[True]"
+   ],
+   "baseline_verdicts": 257,
+   "guard_sites": 70,
+   "falsey_sites": 5,
+   "observed": [
+    {
+     "line": 1046,
+     "expression": "sa_attrs",
+     "value": "{}"
+    },
+    {
+     "line": 2326,
+     "expression": "attrs_to_validate",
+     "value": "[]"
+    },
+    {
+     "line": 2364,
+     "expression": "kw_only_args",
+     "value": "[]"
+    },
+    {
+     "line": 351,
+     "expression": "attr_names",
+     "value": "[]"
+    },
+    {
+     "line": 2184,
+     "expression": "a.validator",
+     "value": "[]"
+    }
+   ],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_make.py::TestAttributes::test_pre_init_args[True]",
+     "tests/test_make.py::TestAttributes::test_pre_init_args[False]",
+     "tests/test_make.py::TestAttributes::test_pre_init_kwargs[True]",
+     "tests/test_make.py::TestAttributes::test_pre_init_kwargs[False]",
+     "tests/test_make.py::TestAttributes::test_pre_init_kwargs_only[True]",
+     "tests/test_make.py::TestAttributes::test_pre_init_kwargs_only[False]"
+    ]
+   },
+   "stage": "NO_PROJECTION_REPAIRS",
+   "attempts": 5,
+   "seconds": 33.68
+  },
+  {
+   "repo": "attrs",
+   "commit": "a8191556c0aad84125d2c3435c5a2352b2f8a9ba",
+   "test": "tests/test_functional.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_functional.py::TestFunctional::test_on_setattr_detect_inherited_validators"
+   ],
+   "baseline_verdicts": 402,
+   "guard_sites": 71,
+   "falsey_sites": 4,
+   "observed": [
+    {
+     "line": 1022,
+     "expression": "sa_attrs",
+     "value": "{}"
+    },
+    {
+     "line": 2294,
+     "expression": "attrs_to_validate",
+     "value": "[]"
+    },
+    {
+     "line": 2334,
+     "expression": "kw_only_args",
+     "value": "[]"
+    },
+    {
+     "line": 342,
+     "expression": "attr_names",
+     "value": "[]"
+    }
+   ],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_functional.py::TestFunctional::test_on_setattr_detect_inherited_validators"
+    ]
+   },
+   "stage": "NO_PROJECTION_REPAIRS",
+   "attempts": 4,
+   "seconds": 15.01
+  }
+ ],
+ "seconds": 499.4
+}
