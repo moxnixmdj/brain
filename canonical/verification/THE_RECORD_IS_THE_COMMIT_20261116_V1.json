@@ -1,0 +1,1669 @@
+{
+ "schema": "BRAIN_THE_RECORD_IS_THE_COMMIT_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "date": "2026-11-16",
+ "mode": "PORTABLE_MULTI_PATH_COMMIT_WITH_RECORD_CRASHED_AT_EVERY_BOUNDARY",
+ "why_this_round": {
+  "the_residual_it_closes": "the previous round's commit was one atomic step only where renameat2(RENAME_EXCHANGE) exists, and a two-rename window everywhere else",
+  "the_falsifier_it_runs": "if a record-based commit cannot recover byte-exactly from a crash between two single-path renames, multi-path commits have no sound portable implementation",
+  "reused_not_rebuilt": [
+   "canonical/runtime/root3_typed_durable_admin_write_v1.py (write -> fsync(file) -> rename -> fsync(parent), pre-state binding)",
+   "canonical/runtime/canonical_apply_transaction_v1.py (staged overlay, preimage receipts, commit eligibility)",
+   "canonical/tools/the_failed_attempt_is_free_v1.py (stage, digest, remove)",
+   "canonical/tools/the_check_mode_is_the_oracle_v1.py (state digest, tree removal)"
+  ]
+ },
+ "criteria_were_declared_after_a_prototype_probe": false,
+ "criterion_refinement_after_the_first_run": {
+  "what_the_draft_criterion_said": "with the record, a crash at EVERY boundary recovers to the target",
+  "what_the_first_run_showed": "8/9 recovered; the single exception was `before_journal`, where the record does not exist yet by construction and the tree is still the pre-state",
+  "why_the_refinement_is_a_strengthening_not_a_relaxation": "it replaces one undifferentiated count with three buckets, each with its own asserted outcome, so a pre-record crash must ALSO prove the tree is untouched and that no record exists -- a draft failure would have been silent about the pre-state",
+  "no_measured_boundary_was_dropped": true
+ },
+ "declared_acceptance_before_the_receipt_run": {
+  "K1": "without a record, at least one crash boundary leaves a tree that is neither the pre-state nor the target, and there is no record to recover from",
+  "K2": "with the record, every commit-crash boundary recovers to the target byte-exactly",
+  "K3": "a crash inside recovery, at every step, followed by recovery again, still reaches the target byte-exactly",
+  "K4": "with no crash the commit is byte-exact, leaves no record, no stage and no temp file",
+  "K5": "every replace is fsync(file) -> rename -> fsync(dir), in that order, traced",
+  "K6": "zero model calls, zero parameters, zero network"
+ },
+ "the_effect": {
+  "commands": [
+   "tar --sort=name --mtime=@0 ... -cf bundle.tgz alpha.txt beta.txt gamma.txt delta.txt epsilon.txt",
+   "tar -xzf bundle.tgz",
+   "rm -f obsolete.txt"
+  ],
+  "operations": [
+   {
+    "path": "alpha.txt",
+    "pre": null,
+    "post": "55b7c7848b34609eed358ea0d43a3ea35edca07250b836c5d1daf9f560bc20a5",
+    "kind": "create"
+   },
+   {
+    "path": "beta.txt",
+    "pre": null,
+    "post": "e711338b84869aff4d66dc3938eea17c3ae6615b359f7232c804a214e2b666d4",
+    "kind": "create"
+   },
+   {
+    "path": "delta.txt",
+    "pre": null,
+    "post": "d5652087e34d0bb951685ca0839c07a5590778a8fa6f6804d2c7cfc89ba1bce8",
+    "kind": "create"
+   },
+   {
+    "path": "epsilon.txt",
+    "pre": null,
+    "post": "5fbc07016db45f9bf26c10926fc22ba72a7f7a46f7d37f264992d75816b69e34",
+    "kind": "create"
+   },
+   {
+    "path": "gamma.txt",
+    "pre": null,
+    "post": "4832beb27a24767131694c3b477d05d3fb1621f668ac190c51f398cd0fc797b8",
+    "kind": "create"
+   },
+   {
+    "path": "obsolete.txt",
+    "pre": "ddd8094811c31d9fd7a665b0dc8182587fbbc4a59ab19b5eeb9ea0b4a4a1a345",
+    "post": null,
+    "kind": "delete"
+   }
+  ],
+  "operation_kinds": [
+   "create",
+   "delete"
+  ],
+  "pre_state_digest": "77ba599ce0aa6147ced8bf3d26fc9363e7d0c18348e66c120eebc7fea6eebbbb",
+  "target_digest": "4db3163c979e28f92e81145ceab96e0ca0d8a17563d1e47dbd5a0250ece7d273"
+ },
+ "verdict": {
+  "K1_without_a_record_a_crash_leaves_a_tree_that_is_neither_state": {
+   "boundaries": 9,
+   "trees_that_are_neither": [
+    "after_op:alpha.txt",
+    "after_op:beta.txt",
+    "after_op:delta.txt",
+    "after_op:epsilon.txt",
+    "after_op:gamma.txt"
+   ],
+   "records_to_recover_from": 0,
+   "MET": true
+  },
+  "K2_the_durable_record_is_the_commit_point": {
+   "boundaries": 10,
+   "unarmed_boundaries": [
+    "before_journal"
+   ],
+   "unarmed_leave_the_pre_state_and_hold_no_record": true,
+   "armed_boundaries": [
+    "after_journal",
+    "after_op:alpha.txt",
+    "after_op:beta.txt",
+    "after_op:delta.txt",
+    "after_op:epsilon.txt",
+    "after_op:gamma.txt",
+    "after_op:obsolete.txt",
+    "after_committed"
+   ],
+   "armed_recovered_to_target": 8,
+   "armed_failures": [],
+   "completed_boundaries": [
+    "after_cleanup"
+   ],
+   "completed_are_already_the_target": true,
+   "crashes_that_left_a_half_applied_tree_before_recovery": [
+    "after_op:alpha.txt",
+    "after_op:beta.txt",
+    "after_op:delta.txt",
+    "after_op:epsilon.txt",
+    "after_op:gamma.txt"
+   ],
+   "records_left_behind_after_recovery": [],
+   "stages_left_behind_after_recovery": [
+    "before_journal"
+   ],
+   "MET": true
+  },
+  "K3_recovery_is_itself_crash_safe": {
+   "runs": 56,
+   "recovered_to_target": 56,
+   "failures": [],
+   "MET": true
+  },
+  "K4_the_quiet_path_is_exact_and_leaves_nothing": {
+   "completed": true,
+   "tree_equals_target": true,
+   "record_and_stage_cleaned": true,
+   "temporary_files_left": [],
+   "MET": true
+  },
+  "K5_the_first_principle_is_in_the_primitive_and_in_order": {
+   "trace": [
+    "fsync(file):commit.journal.json",
+    "rename:commit.journal.json",
+    "fsync(dir):/tmp/d1/order",
+    "fsync(file):alpha.txt",
+    "rename:alpha.txt",
+    "fsync(dir):/tmp/d1/order/live",
+    "fsync(file):beta.txt",
+    "rename:beta.txt",
+    "fsync(dir):/tmp/d1/order/live",
+    "fsync(file):delta.txt",
+    "rename:delta.txt",
+    "fsync(dir):/tmp/d1/order/live",
+    "fsync(file):epsilon.txt",
+    "rename:epsilon.txt",
+    "fsync(dir):/tmp/d1/order/live",
+    "fsync(file):gamma.txt",
+    "rename:gamma.txt",
+    "fsync(dir):/tmp/d1/order/live",
+    "unlink:obsolete.txt",
+    "fsync(dir):/tmp/d1/order/live",
+    "fsync(file):commit.journal.json",
+    "rename:commit.journal.json",
+    "fsync(dir):/tmp/d1/order",
+    "fsync(dir):/tmp/d1/order"
+   ],
+   "every_replace_is_fsync_file_then_rename_then_fsync_dir": true,
+   "why_the_last_step_is_not_optional": "measured October 2026 with dm-log-writes on ext4, xfs and btrfs: without the parent-directory fsync a crash keeps the OLD target contents and the fsynced temp is orphaned beside it, so the rename is atomic but not durable (atomically #22, write-file-atomic #243)",
+   "MET": true
+  },
+  "K6_zero": {
+   "model_calls": 0,
+   "parameters_stored": 0,
+   "network_calls_at_run_time": 0,
+   "MET": true
+  }
+ },
+ "control": [
+  {
+   "crash_at": "before_journal",
+   "tree_is_pre_state": true,
+   "tree_is_target": false,
+   "tree_is_neither": false,
+   "record_to_recover_from": false
+  },
+  {
+   "crash_at": "after_journal",
+   "tree_is_pre_state": true,
+   "tree_is_target": false,
+   "tree_is_neither": false,
+   "record_to_recover_from": false
+  },
+  {
+   "crash_at": "after_op:alpha.txt",
+   "tree_is_pre_state": false,
+   "tree_is_target": false,
+   "tree_is_neither": true,
+   "record_to_recover_from": false
+  },
+  {
+   "crash_at": "after_op:beta.txt",
+   "tree_is_pre_state": false,
+   "tree_is_target": false,
+   "tree_is_neither": true,
+   "record_to_recover_from": false
+  },
+  {
+   "crash_at": "after_op:delta.txt",
+   "tree_is_pre_state": false,
+   "tree_is_target": false,
+   "tree_is_neither": true,
+   "record_to_recover_from": false
+  },
+  {
+   "crash_at": "after_op:epsilon.txt",
+   "tree_is_pre_state": false,
+   "tree_is_target": false,
+   "tree_is_neither": true,
+   "record_to_recover_from": false
+  },
+  {
+   "crash_at": "after_op:gamma.txt",
+   "tree_is_pre_state": false,
+   "tree_is_target": false,
+   "tree_is_neither": true,
+   "record_to_recover_from": false
+  },
+  {
+   "crash_at": "after_op:obsolete.txt",
+   "tree_is_pre_state": false,
+   "tree_is_target": true,
+   "tree_is_neither": false,
+   "record_to_recover_from": false
+  },
+  {
+   "crash_at": "after_committed",
+   "tree_is_pre_state": false,
+   "tree_is_target": true,
+   "tree_is_neither": false,
+   "record_to_recover_from": false
+  }
+ ],
+ "recorded": [
+  {
+   "crash_at": "before_journal",
+   "bucket": "unarmed",
+   "record_present_before_recovery": false,
+   "tree_before_recovery_is_pre_state": true,
+   "tree_before_recovery_is_half_applied": false,
+   "recovery": {
+    "recovered": false,
+    "reason": "NO_RECORD",
+    "trace": [],
+    "phase": "recover"
+   },
+   "tree_equals_target_after_recovery": false,
+   "record_still_present": false,
+   "stage_still_present": true
+  },
+  {
+   "crash_at": "after_journal",
+   "bucket": "armed",
+   "record_present_before_recovery": true,
+   "tree_before_recovery_is_pre_state": true,
+   "tree_before_recovery_is_half_applied": false,
+   "recovery": {
+    "recovered": true,
+    "replayed": 6,
+    "operations": 6,
+    "trace": [
+     "fsync(file):alpha.txt",
+     "rename:alpha.txt",
+     "fsync(dir):/tmp/d1/recorded-after_journal/live",
+     "fsync(file):beta.txt",
+     "rename:beta.txt",
+     "fsync(dir):/tmp/d1/recorded-after_journal/live",
+     "fsync(file):delta.txt",
+     "rename:delta.txt",
+     "fsync(dir):/tmp/d1/recorded-after_journal/live",
+     "fsync(file):epsilon.txt",
+     "rename:epsilon.txt",
+     "fsync(dir):/tmp/d1/recorded-after_journal/live",
+     "fsync(file):gamma.txt",
+     "rename:gamma.txt",
+     "fsync(dir):/tmp/d1/recorded-after_journal/live",
+     "unlink:obsolete.txt",
+     "fsync(dir):/tmp/d1/recorded-after_journal/live",
+     "fsync(file):commit.journal.json",
+     "rename:commit.journal.json",
+     "fsync(dir):/tmp/d1/recorded-after_journal",
+     "fsync(dir):/tmp/d1/recorded-after_journal"
+    ],
+    "phase": "recover"
+   },
+   "tree_equals_target_after_recovery": true,
+   "record_still_present": false,
+   "stage_still_present": false
+  },
+  {
+   "crash_at": "after_op:alpha.txt",
+   "bucket": "armed",
+   "record_present_before_recovery": true,
+   "tree_before_recovery_is_pre_state": false,
+   "tree_before_recovery_is_half_applied": true,
+   "recovery": {
+    "recovered": true,
+    "replayed": 5,
+    "operations": 6,
+    "trace": [
+     "fsync(file):beta.txt",
+     "rename:beta.txt",
+     "fsync(dir):/tmp/d1/recorded-after_op-alpha.txt/live",
+     "fsync(file):delta.txt",
+     "rename:delta.txt",
+     "fsync(dir):/tmp/d1/recorded-after_op-alpha.txt/live",
+     "fsync(file):epsilon.txt",
+     "rename:epsilon.txt",
+     "fsync(dir):/tmp/d1/recorded-after_op-alpha.txt/live",
+     "fsync(file):gamma.txt",
+     "rename:gamma.txt",
+     "fsync(dir):/tmp/d1/recorded-after_op-alpha.txt/live",
+     "unlink:obsolete.txt",
+     "fsync(dir):/tmp/d1/recorded-after_op-alpha.txt/live",
+     "fsync(file):commit.journal.json",
+     "rename:commit.journal.json",
+     "fsync(dir):/tmp/d1/recorded-after_op-alpha.txt",
+     "fsync(dir):/tmp/d1/recorded-after_op-alpha.txt"
+    ],
+    "phase": "recover"
+   },
+   "tree_equals_target_after_recovery": true,
+   "record_still_present": false,
+   "stage_still_present": false
+  },
+  {
+   "crash_at": "after_op:beta.txt",
+   "bucket": "armed",
+   "record_present_before_recovery": true,
+   "tree_before_recovery_is_pre_state": false,
+   "tree_before_recovery_is_half_applied": true,
+   "recovery": {
+    "recovered": true,
+    "replayed": 4,
+    "operations": 6,
+    "trace": [
+     "fsync(file):delta.txt",
+     "rename:delta.txt",
+     "fsync(dir):/tmp/d1/recorded-after_op-beta.txt/live",
+     "fsync(file):epsilon.txt",
+     "rename:epsilon.txt",
+     "fsync(dir):/tmp/d1/recorded-after_op-beta.txt/live",
+     "fsync(file):gamma.txt",
+     "rename:gamma.txt",
+     "fsync(dir):/tmp/d1/recorded-after_op-beta.txt/live",
+     "unlink:obsolete.txt",
+     "fsync(dir):/tmp/d1/recorded-after_op-beta.txt/live",
+     "fsync(file):commit.journal.json",
+     "rename:commit.journal.json",
+     "fsync(dir):/tmp/d1/recorded-after_op-beta.txt",
+     "fsync(dir):/tmp/d1/recorded-after_op-beta.txt"
+    ],
+    "phase": "recover"
+   },
+   "tree_equals_target_after_recovery": true,
+   "record_still_present": false,
+   "stage_still_present": false
+  },
+  {
+   "crash_at": "after_op:delta.txt",
+   "bucket": "armed",
+   "record_present_before_recovery": true,
+   "tree_before_recovery_is_pre_state": false,
+   "tree_before_recovery_is_half_applied": true,
+   "recovery": {
+    "recovered": true,
+    "replayed": 3,
+    "operations": 6,
+    "trace": [
+     "fsync(file):epsilon.txt",
+     "rename:epsilon.txt",
+     "fsync(dir):/tmp/d1/recorded-after_op-delta.txt/live",
+     "fsync(file):gamma.txt",
+     "rename:gamma.txt",
+     "fsync(dir):/tmp/d1/recorded-after_op-delta.txt/live",
+     "unlink:obsolete.txt",
+     "fsync(dir):/tmp/d1/recorded-after_op-delta.txt/live",
+     "fsync(file):commit.journal.json",
+     "rename:commit.journal.json",
+     "fsync(dir):/tmp/d1/recorded-after_op-delta.txt",
+     "fsync(dir):/tmp/d1/recorded-after_op-delta.txt"
+    ],
+    "phase": "recover"
+   },
+   "tree_equals_target_after_recovery": true,
+   "record_still_present": false,
+   "stage_still_present": false
+  },
+  {
+   "crash_at": "after_op:epsilon.txt",
+   "bucket": "armed",
+   "record_present_before_recovery": true,
+   "tree_before_recovery_is_pre_state": false,
+   "tree_before_recovery_is_half_applied": true,
+   "recovery": {
+    "recovered": true,
+    "replayed": 2,
+    "operations": 6,
+    "trace": [
+     "fsync(file):gamma.txt",
+     "rename:gamma.txt",
+     "fsync(dir):/tmp/d1/recorded-after_op-epsilon.txt/live",
+     "unlink:obsolete.txt",
+     "fsync(dir):/tmp/d1/recorded-after_op-epsilon.txt/live",
+     "fsync(file):commit.journal.json",
+     "rename:commit.journal.json",
+     "fsync(dir):/tmp/d1/recorded-after_op-epsilon.txt",
+     "fsync(dir):/tmp/d1/recorded-after_op-epsilon.txt"
+    ],
+    "phase": "recover"
+   },
+   "tree_equals_target_after_recovery": true,
+   "record_still_present": false,
+   "stage_still_present": false
+  },
+  {
+   "crash_at": "after_op:gamma.txt",
+   "bucket": "armed",
+   "record_present_before_recovery": true,
+   "tree_before_recovery_is_pre_state": false,
+   "tree_before_recovery_is_half_applied": true,
+   "recovery": {
+    "recovered": true,
+    "replayed": 1,
+    "operations": 6,
+    "trace": [
+     "unlink:obsolete.txt",
+     "fsync(dir):/tmp/d1/recorded-after_op-gamma.txt/live",
+     "fsync(file):commit.journal.json",
+     "rename:commit.journal.json",
+     "fsync(dir):/tmp/d1/recorded-after_op-gamma.txt",
+     "fsync(dir):/tmp/d1/recorded-after_op-gamma.txt"
+    ],
+    "phase": "recover"
+   },
+   "tree_equals_target_after_recovery": true,
+   "record_still_present": false,
+   "stage_still_present": false
+  },
+  {
+   "crash_at": "after_op:obsolete.txt",
+   "bucket": "armed",
+   "record_present_before_recovery": true,
+   "tree_before_recovery_is_pre_state": false,
+   "tree_before_recovery_is_half_applied": false,
+   "recovery": {
+    "recovered": true,
+    "replayed": 0,
+    "operations": 6,
+    "trace": [
+     "fsync(file):commit.journal.json",
+     "rename:commit.journal.json",
+     "fsync(dir):/tmp/d1/recorded-after_op-obsolete.txt",
+     "fsync(dir):/tmp/d1/recorded-after_op-obsolete.txt"
+    ],
+    "phase": "recover"
+   },
+   "tree_equals_target_after_recovery": true,
+   "record_still_present": false,
+   "stage_still_present": false
+  },
+  {
+   "crash_at": "after_committed",
+   "bucket": "armed",
+   "record_present_before_recovery": true,
+   "tree_before_recovery_is_pre_state": false,
+   "tree_before_recovery_is_half_applied": false,
+   "recovery": {
+    "recovered": true,
+    "replayed": 0,
+    "operations": 6,
+    "trace": [
+     "fsync(file):commit.journal.json",
+     "rename:commit.journal.json",
+     "fsync(dir):/tmp/d1/recorded-after_committed",
+     "fsync(dir):/tmp/d1/recorded-after_committed"
+    ],
+    "phase": "recover"
+   },
+   "tree_equals_target_after_recovery": true,
+   "record_still_present": false,
+   "stage_still_present": false
+  },
+  {
+   "crash_at": "after_cleanup",
+   "bucket": "completed",
+   "record_present_before_recovery": false,
+   "tree_before_recovery_is_pre_state": false,
+   "tree_before_recovery_is_half_applied": false,
+   "recovery": {
+    "recovered": false,
+    "reason": "NO_RECORD",
+    "trace": [],
+    "phase": "recover"
+   },
+   "tree_equals_target_after_recovery": true,
+   "record_still_present": false,
+   "stage_still_present": false
+  }
+ ],
+ "recovery_injected": [
+  {
+   "commit_crash_at": "after_journal",
+   "recovery_crash_at": 0,
+   "second_recovery": {
+    "recovered": true,
+    "replayed": 6,
+    "operations": 6,
+    "trace": [
+     "fsync(file):alpha.txt",
+     "rename:alpha.txt",
+     "fsync(dir):/tmp/d1/again-after_journal-0/live",
+     "fsync(file):beta.txt",
+     "rename:beta.txt",
+     "fsync(dir):/tmp/d1/again-after_journal-0/live",
+     "fsync(file):delta.txt",
+     "rename:delta.txt",
+     "fsync(dir):/tmp/d1/again-after_journal-0/live",
+     "fsync(file):epsilon.txt",
+     "rename:epsilon.txt",
+     "fsync(dir):/tmp/d1/again-after_journal-0/live",
+     "fsync(file):gamma.txt",
+     "rename:gamma.txt",
+     "fsync(dir):/tmp/d1/again-after_journal-0/live",
+     "unlink:obsolete.txt",
+     "fsync(dir):/tmp/d1/again-after_journal-0/live",
+     "fsync(file):commit.journal.json",
+     "rename:commit.journal.json",
+     "fsync(dir):/tmp/d1/again-after_journal-0",
+     "fsync(dir):/tmp/d1/again-after_journal-0"
+    ],
+    "phase": "recover"
+   },
+   "tree_equals_target": true
+  },
+  {
+   "commit_crash_at": "after_journal",
+   "recovery_crash_at": 1,
+   "second_recovery": {
+    "recovered": true,
+    "replayed": 5,
+    "operations": 6,
+    "trace": [
+     "fsync(file):beta.txt",
+     "rename:beta.txt",
+     "fsync(dir):/tmp/d1/again-after_journal-1/live",
+     "fsync(file):delta.txt",
+     "rename:delta.txt",
+     "fsync(dir):/tmp/d1/again-after_journal-1/live",
+     "fsync(file):epsilon.txt",
+     "rename:epsilon.txt",
+     "fsync(dir):/tmp/d1/again-after_journal-1/live",
+     "fsync(file):gamma.txt",
+     "rename:gamma.txt",
+     "fsync(dir):/tmp/d1/again-after_journal-1/live",
+     "unlink:obsolete.txt",
+     "fsync(dir):/tmp/d1/again-after_journal-1/live",
+     "fsync(file):commit.journal.json",
+     "rename:commit.journal.json",
+     "fsync(dir):/tmp/d1/again-after_journal-1",
+     "fsync(dir):/tmp/d1/again-after_journal-1"
+    ],
+    "phase": "recover"
+   },
+   "tree_equals_target": true
+  },
+  {
+   "commit_crash_at": "after_journal",
+   "recovery_crash_at": 2,
+   "second_recovery": {
+    "recovered": true,
+    "replayed": 4,
+    "operations": 6,
+    "trace": [
+     "fsync(file):delta.txt",
+     "rename:delta.txt",
+     "fsync(dir):/tmp/d1/again-after_journal-2/live",
+     "fsync(file):epsilon.txt",
+     "rename:epsilon.txt",
+     "fsync(dir):/tmp/d1/again-after_journal-2/live",
+     "fsync(file):gamma.txt",
+     "rename:gamma.txt",
+     "fsync(dir):/tmp/d1/again-after_journal-2/live",
+     "unlink:obsolete.txt",
+     "fsync(dir):/tmp/d1/again-after_journal-2/live",
+     "fsync(file):commit.journal.json",
+     "rename:commit.journal.json",
+     "fsync(dir):/tmp/d1/again-after_journal-2",
+     "fsync(dir):/tmp/d1/again-after_journal-2"
+    ],
+    "phase": "recover"
+   },
+   "tree_equals_target": true
+  },
+  {
+   "commit_crash_at": "after_journal",
+   "recovery_crash_at": 3,
+   "second_recovery": {
+    "recovered": true,
+    "replayed": 3,
+    "operations": 6,
+    "trace": [
+     "fsync(file):epsilon.txt",
+     "rename:epsilon.txt",
+     "fsync(dir):/tmp/d1/again-after_journal-3/live",
+     "fsync(file):gamma.txt",
+     "rename:gamma.txt",
+     "fsync(dir):/tmp/d1/again-after_journal-3/live",
+     "unlink:obsolete.txt",
+     "fsync(dir):/tmp/d1/again-after_journal-3/live",
+     "fsync(file):commit.journal.json",
+     "rename:commit.journal.json",
+     "fsync(dir):/tmp/d1/again-after_journal-3",
+     "fsync(dir):/tmp/d1/again-after_journal-3"
+    ],
+    "phase": "recover"
+   },
+   "tree_equals_target": true
+  },
+  {
+   "commit_crash_at": "after_journal",
+   "recovery_crash_at": 4,
+   "second_recovery": {
+    "recovered": true,
+    "replayed": 2,
+    "operations": 6,
+    "trace": [
+     "fsync(file):gamma.txt",
+     "rename:gamma.txt",
+     "fsync(dir):/tmp/d1/again-after_journal-4/live",
+     "unlink:obsolete.txt",
+     "fsync(dir):/tmp/d1/again-after_journal-4/live",
+     "fsync(file):commit.journal.json",
+     "rename:commit.journal.json",
+     "fsync(dir):/tmp/d1/again-after_journal-4",
+     "fsync(dir):/tmp/d1/again-after_journal-4"
+    ],
+    "phase": "recover"
+   },
+   "tree_equals_target": true
+  },
+  {
+   "commit_crash_at": "after_journal",
+   "recovery_crash_at": 5,
+   "second_recovery": {
+    "recovered": true,
+    "replayed": 1,
+    "operations": 6,
+    "trace": [
+     "unlink:obsolete.txt",
+     "fsync(dir):/tmp/d1/again-after_journal-5/live",
+     "fsync(file):commit.journal.json",
+     "rename:commit.journal.json",
+     "fsync(dir):/tmp/d1/again-after_journal-5",
+     "fsync(dir):/tmp/d1/again-after_journal-5"
+    ],
+    "phase": "recover"
+   },
+   "tree_equals_target": true
+  },
+  {
+   "commit_crash_at": "after_journal",
+   "recovery_crash_at": 6,
+   "second_recovery": {
+    "recovered": false,
+    "reason": "NO_RECORD",
+    "trace": [],
+    "phase": "recover"
+   },
+   "tree_equals_target": true
+  },
+  {
+   "commit_crash_at": "after_op:alpha.txt",
+   "recovery_crash_at": 0,
+   "second_recovery": {
+    "recovered": true,
+    "replayed": 5,
+    "operations": 6,
+    "trace": [
+     "fsync(file):beta.txt",
+     "rename:beta.txt",
+     "fsync(dir):/tmp/d1/again-after_op-alpha.txt-0/live",
+     "fsync(file):delta.txt",
+     "rename:delta.txt",
+     "fsync(dir):/tmp/d1/again-after_op-alpha.txt-0/live",
+     "fsync(file):epsilon.txt",
+     "rename:epsilon.txt",
+     "fsync(dir):/tmp/d1/again-after_op-alpha.txt-0/live",
+     "fsync(file):gamma.txt",
+     "rename:gamma.txt",
+     "fsync(dir):/tmp/d1/again-after_op-alpha.txt-0/live",
+     "unlink:obsolete.txt",
+     "fsync(dir):/tmp/d1/again-after_op-alpha.txt-0/live",
+     "fsync(file):commit.journal.json",
+     "rename:commit.journal.json",
+     "fsync(dir):/tmp/d1/again-after_op-alpha.txt-0",
+     "fsync(dir):/tmp/d1/again-after_op-alpha.txt-0"
+    ],
+    "phase": "recover"
+   },
+   "tree_equals_target": true
+  },
+  {
+   "commit_crash_at": "after_op:alpha.txt",
+   "recovery_crash_at": 1,
+   "second_recovery": {
+    "recovered": true,
+    "replayed": 5,
+    "operations": 6,
+    "trace": [
+     "fsync(file):beta.txt",
+     "rename:beta.txt",
+     "fsync(dir):/tmp/d1/again-after_op-alpha.txt-1/live",
+     "fsync(file):delta.txt",
+     "rename:delta.txt",
+     "fsync(dir):/tmp/d1/again-after_op-alpha.txt-1/live",
+     "fsync(file):epsilon.txt",
+     "rename:epsilon.txt",
+     "fsync(dir):/tmp/d1/again-after_op-alpha.txt-1/live",
+     "fsync(file):gamma.txt",
+     "rename:gamma.txt",
+     "fsync(dir):/tmp/d1/again-after_op-alpha.txt-1/live",
+     "unlink:obsolete.txt",
+     "fsync(dir):/tmp/d1/again-after_op-alpha.txt-1/live",
+     "fsync(file):commit.journal.json",
+     "rename:commit.journal.json",
+     "fsync(dir):/tmp/d1/again-after_op-alpha.txt-1",
+     "fsync(dir):/tmp/d1/again-after_op-alpha.txt-1"
+    ],
+    "phase": "recover"
+   },
+   "tree_equals_target": true
+  },
+  {
+   "commit_crash_at": "after_op:alpha.txt",
+   "recovery_crash_at": 2,
+   "second_recovery": {
+    "recovered": true,
+    "replayed": 4,
+    "operations": 6,
+    "trace": [
+     "fsync(file):delta.txt",
+     "rename:delta.txt",
+     "fsync(dir):/tmp/d1/again-after_op-alpha.txt-2/live",
+     "fsync(file):epsilon.txt",
+     "rename:epsilon.txt",
+     "fsync(dir):/tmp/d1/again-after_op-alpha.txt-2/live",
+     "fsync(file):gamma.txt",
+     "rename:gamma.txt",
+     "fsync(dir):/tmp/d1/again-after_op-alpha.txt-2/live",
+     "unlink:obsolete.txt",
+     "fsync(dir):/tmp/d1/again-after_op-alpha.txt-2/live",
+     "fsync(file):commit.journal.json",
+     "rename:commit.journal.json",
+     "fsync(dir):/tmp/d1/again-after_op-alpha.txt-2",
+     "fsync(dir):/tmp/d1/again-after_op-alpha.txt-2"
+    ],
+    "phase": "recover"
+   },
+   "tree_equals_target": true
+  },
+  {
+   "commit_crash_at": "after_op:alpha.txt",
+   "recovery_crash_at": 3,
+   "second_recovery": {
+    "recovered": true,
+    "replayed": 3,
+    "operations": 6,
+    "trace": [
+     "fsync(file):epsilon.txt",
+     "rename:epsilon.txt",
+     "fsync(dir):/tmp/d1/again-after_op-alpha.txt-3/live",
+     "fsync(file):gamma.txt",
+     "rename:gamma.txt",
+     "fsync(dir):/tmp/d1/again-after_op-alpha.txt-3/live",
+     "unlink:obsolete.txt",
+     "fsync(dir):/tmp/d1/again-after_op-alpha.txt-3/live",
+     "fsync(file):commit.journal.json",
+     "rename:commit.journal.json",
+     "fsync(dir):/tmp/d1/again-after_op-alpha.txt-3",
+     "fsync(dir):/tmp/d1/again-after_op-alpha.txt-3"
+    ],
+    "phase": "recover"
+   },
+   "tree_equals_target": true
+  },
+  {
+   "commit_crash_at": "after_op:alpha.txt",
+   "recovery_crash_at": 4,
+   "second_recovery": {
+    "recovered": true,
+    "replayed": 2,
+    "operations": 6,
+    "trace": [
+     "fsync(file):gamma.txt",
+     "rename:gamma.txt",
+     "fsync(dir):/tmp/d1/again-after_op-alpha.txt-4/live",
+     "unlink:obsolete.txt",
+     "fsync(dir):/tmp/d1/again-after_op-alpha.txt-4/live",
+     "fsync(file):commit.journal.json",
+     "rename:commit.journal.json",
+     "fsync(dir):/tmp/d1/again-after_op-alpha.txt-4",
+     "fsync(dir):/tmp/d1/again-after_op-alpha.txt-4"
+    ],
+    "phase": "recover"
+   },
+   "tree_equals_target": true
+  },
+  {
+   "commit_crash_at": "after_op:alpha.txt",
+   "recovery_crash_at": 5,
+   "second_recovery": {
+    "recovered": true,
+    "replayed": 1,
+    "operations": 6,
+    "trace": [
+     "unlink:obsolete.txt",
+     "fsync(dir):/tmp/d1/again-after_op-alpha.txt-5/live",
+     "fsync(file):commit.journal.json",
+     "rename:commit.journal.json",
+     "fsync(dir):/tmp/d1/again-after_op-alpha.txt-5",
+     "fsync(dir):/tmp/d1/again-after_op-alpha.txt-5"
+    ],
+    "phase": "recover"
+   },
+   "tree_equals_target": true
+  },
+  {
+   "commit_crash_at": "after_op:alpha.txt",
+   "recovery_crash_at": 6,
+   "second_recovery": {
+    "recovered": false,
+    "reason": "NO_RECORD",
+    "trace": [],
+    "phase": "recover"
+   },
+   "tree_equals_target": true
+  },
+  {
+   "commit_crash_at": "after_op:beta.txt",
+   "recovery_crash_at": 0,
+   "second_recovery": {
+    "recovered": true,
+    "replayed": 4,
+    "operations": 6,
+    "trace": [
+     "fsync(file):delta.txt",
+     "rename:delta.txt",
+     "fsync(dir):/tmp/d1/again-after_op-beta.txt-0/live",
+     "fsync(file):epsilon.txt",
+     "rename:epsilon.txt",
+     "fsync(dir):/tmp/d1/again-after_op-beta.txt-0/live",
+     "fsync(file):gamma.txt",
+     "rename:gamma.txt",
+     "fsync(dir):/tmp/d1/again-after_op-beta.txt-0/live",
+     "unlink:obsolete.txt",
+     "fsync(dir):/tmp/d1/again-after_op-beta.txt-0/live",
+     "fsync(file):commit.journal.json",
+     "rename:commit.journal.json",
+     "fsync(dir):/tmp/d1/again-after_op-beta.txt-0",
+     "fsync(dir):/tmp/d1/again-after_op-beta.txt-0"
+    ],
+    "phase": "recover"
+   },
+   "tree_equals_target": true
+  },
+  {
+   "commit_crash_at": "after_op:beta.txt",
+   "recovery_crash_at": 1,
+   "second_recovery": {
+    "recovered": true,
+    "replayed": 4,
+    "operations": 6,
+    "trace": [
+     "fsync(file):delta.txt",
+     "rename:delta.txt",
+     "fsync(dir):/tmp/d1/again-after_op-beta.txt-1/live",
+     "fsync(file):epsilon.txt",
+     "rename:epsilon.txt",
+     "fsync(dir):/tmp/d1/again-after_op-beta.txt-1/live",
+     "fsync(file):gamma.txt",
+     "rename:gamma.txt",
+     "fsync(dir):/tmp/d1/again-after_op-beta.txt-1/live",
+     "unlink:obsolete.txt",
+     "fsync(dir):/tmp/d1/again-after_op-beta.txt-1/live",
+     "fsync(file):commit.journal.json",
+     "rename:commit.journal.json",
+     "fsync(dir):/tmp/d1/again-after_op-beta.txt-1",
+     "fsync(dir):/tmp/d1/again-after_op-beta.txt-1"
+    ],
+    "phase": "recover"
+   },
+   "tree_equals_target": true
+  },
+  {
+   "commit_crash_at": "after_op:beta.txt",
+   "recovery_crash_at": 2,
+   "second_recovery": {
+    "recovered": true,
+    "replayed": 4,
+    "operations": 6,
+    "trace": [
+     "fsync(file):delta.txt",
+     "rename:delta.txt",
+     "fsync(dir):/tmp/d1/again-after_op-beta.txt-2/live",
+     "fsync(file):epsilon.txt",
+     "rename:epsilon.txt",
+     "fsync(dir):/tmp/d1/again-after_op-beta.txt-2/live",
+     "fsync(file):gamma.txt",
+     "rename:gamma.txt",
+     "fsync(dir):/tmp/d1/again-after_op-beta.txt-2/live",
+     "unlink:obsolete.txt",
+     "fsync(dir):/tmp/d1/again-after_op-beta.txt-2/live",
+     "fsync(file):commit.journal.json",
+     "rename:commit.journal.json",
+     "fsync(dir):/tmp/d1/again-after_op-beta.txt-2",
+     "fsync(dir):/tmp/d1/again-after_op-beta.txt-2"
+    ],
+    "phase": "recover"
+   },
+   "tree_equals_target": true
+  },
+  {
+   "commit_crash_at": "after_op:beta.txt",
+   "recovery_crash_at": 3,
+   "second_recovery": {
+    "recovered": true,
+    "replayed": 3,
+    "operations": 6,
+    "trace": [
+     "fsync(file):epsilon.txt",
+     "rename:epsilon.txt",
+     "fsync(dir):/tmp/d1/again-after_op-beta.txt-3/live",
+     "fsync(file):gamma.txt",
+     "rename:gamma.txt",
+     "fsync(dir):/tmp/d1/again-after_op-beta.txt-3/live",
+     "unlink:obsolete.txt",
+     "fsync(dir):/tmp/d1/again-after_op-beta.txt-3/live",
+     "fsync(file):commit.journal.json",
+     "rename:commit.journal.json",
+     "fsync(dir):/tmp/d1/again-after_op-beta.txt-3",
+     "fsync(dir):/tmp/d1/again-after_op-beta.txt-3"
+    ],
+    "phase": "recover"
+   },
+   "tree_equals_target": true
+  },
+  {
+   "commit_crash_at": "after_op:beta.txt",
+   "recovery_crash_at": 4,
+   "second_recovery": {
+    "recovered": true,
+    "replayed": 2,
+    "operations": 6,
+    "trace": [
+     "fsync(file):gamma.txt",
+     "rename:gamma.txt",
+     "fsync(dir):/tmp/d1/again-after_op-beta.txt-4/live",
+     "unlink:obsolete.txt",
+     "fsync(dir):/tmp/d1/again-after_op-beta.txt-4/live",
+     "fsync(file):commit.journal.json",
+     "rename:commit.journal.json",
+     "fsync(dir):/tmp/d1/again-after_op-beta.txt-4",
+     "fsync(dir):/tmp/d1/again-after_op-beta.txt-4"
+    ],
+    "phase": "recover"
+   },
+   "tree_equals_target": true
+  },
+  {
+   "commit_crash_at": "after_op:beta.txt",
+   "recovery_crash_at": 5,
+   "second_recovery": {
+    "recovered": true,
+    "replayed": 1,
+    "operations": 6,
+    "trace": [
+     "unlink:obsolete.txt",
+     "fsync(dir):/tmp/d1/again-after_op-beta.txt-5/live",
+     "fsync(file):commit.journal.json",
+     "rename:commit.journal.json",
+     "fsync(dir):/tmp/d1/again-after_op-beta.txt-5",
+     "fsync(dir):/tmp/d1/again-after_op-beta.txt-5"
+    ],
+    "phase": "recover"
+   },
+   "tree_equals_target": true
+  },
+  {
+   "commit_crash_at": "after_op:beta.txt",
+   "recovery_crash_at": 6,
+   "second_recovery": {
+    "recovered": false,
+    "reason": "NO_RECORD",
+    "trace": [],
+    "phase": "recover"
+   },
+   "tree_equals_target": true
+  },
+  {
+   "commit_crash_at": "after_op:delta.txt",
+   "recovery_crash_at": 0,
+   "second_recovery": {
+    "recovered": true,
+    "replayed": 3,
+    "operations": 6,
+    "trace": [
+     "fsync(file):epsilon.txt",
+     "rename:epsilon.txt",
+     "fsync(dir):/tmp/d1/again-after_op-delta.txt-0/live",
+     "fsync(file):gamma.txt",
+     "rename:gamma.txt",
+     "fsync(dir):/tmp/d1/again-after_op-delta.txt-0/live",
+     "unlink:obsolete.txt",
+     "fsync(dir):/tmp/d1/again-after_op-delta.txt-0/live",
+     "fsync(file):commit.journal.json",
+     "rename:commit.journal.json",
+     "fsync(dir):/tmp/d1/again-after_op-delta.txt-0",
+     "fsync(dir):/tmp/d1/again-after_op-delta.txt-0"
+    ],
+    "phase": "recover"
+   },
+   "tree_equals_target": true
+  },
+  {
+   "commit_crash_at": "after_op:delta.txt",
+   "recovery_crash_at": 1,
+   "second_recovery": {
+    "recovered": true,
+    "replayed": 3,
+    "operations": 6,
+    "trace": [
+     "fsync(file):epsilon.txt",
+     "rename:epsilon.txt",
+     "fsync(dir):/tmp/d1/again-after_op-delta.txt-1/live",
+     "fsync(file):gamma.txt",
+     "rename:gamma.txt",
+     "fsync(dir):/tmp/d1/again-after_op-delta.txt-1/live",
+     "unlink:obsolete.txt",
+     "fsync(dir):/tmp/d1/again-after_op-delta.txt-1/live",
+     "fsync(file):commit.journal.json",
+     "rename:commit.journal.json",
+     "fsync(dir):/tmp/d1/again-after_op-delta.txt-1",
+     "fsync(dir):/tmp/d1/again-after_op-delta.txt-1"
+    ],
+    "phase": "recover"
+   },
+   "tree_equals_target": true
+  },
+  {
+   "commit_crash_at": "after_op:delta.txt",
+   "recovery_crash_at": 2,
+   "second_recovery": {
+    "recovered": true,
+    "replayed": 3,
+    "operations": 6,
+    "trace": [
+     "fsync(file):epsilon.txt",
+     "rename:epsilon.txt",
+     "fsync(dir):/tmp/d1/again-after_op-delta.txt-2/live",
+     "fsync(file):gamma.txt",
+     "rename:gamma.txt",
+     "fsync(dir):/tmp/d1/again-after_op-delta.txt-2/live",
+     "unlink:obsolete.txt",
+     "fsync(dir):/tmp/d1/again-after_op-delta.txt-2/live",
+     "fsync(file):commit.journal.json",
+     "rename:commit.journal.json",
+     "fsync(dir):/tmp/d1/again-after_op-delta.txt-2",
+     "fsync(dir):/tmp/d1/again-after_op-delta.txt-2"
+    ],
+    "phase": "recover"
+   },
+   "tree_equals_target": true
+  },
+  {
+   "commit_crash_at": "after_op:delta.txt",
+   "recovery_crash_at": 3,
+   "second_recovery": {
+    "recovered": true,
+    "replayed": 3,
+    "operations": 6,
+    "trace": [
+     "fsync(file):epsilon.txt",
+     "rename:epsilon.txt",
+     "fsync(dir):/tmp/d1/again-after_op-delta.txt-3/live",
+     "fsync(file):gamma.txt",
+     "rename:gamma.txt",
+     "fsync(dir):/tmp/d1/again-after_op-delta.txt-3/live",
+     "unlink:obsolete.txt",
+     "fsync(dir):/tmp/d1/again-after_op-delta.txt-3/live",
+     "fsync(file):commit.journal.json",
+     "rename:commit.journal.json",
+     "fsync(dir):/tmp/d1/again-after_op-delta.txt-3",
+     "fsync(dir):/tmp/d1/again-after_op-delta.txt-3"
+    ],
+    "phase": "recover"
+   },
+   "tree_equals_target": true
+  },
+  {
+   "commit_crash_at": "after_op:delta.txt",
+   "recovery_crash_at": 4,
+   "second_recovery": {
+    "recovered": true,
+    "replayed": 2,
+    "operations": 6,
+    "trace": [
+     "fsync(file):gamma.txt",
+     "rename:gamma.txt",
+     "fsync(dir):/tmp/d1/again-after_op-delta.txt-4/live",
+     "unlink:obsolete.txt",
+     "fsync(dir):/tmp/d1/again-after_op-delta.txt-4/live",
+     "fsync(file):commit.journal.json",
+     "rename:commit.journal.json",
+     "fsync(dir):/tmp/d1/again-after_op-delta.txt-4",
+     "fsync(dir):/tmp/d1/again-after_op-delta.txt-4"
+    ],
+    "phase": "recover"
+   },
+   "tree_equals_target": true
+  },
+  {
+   "commit_crash_at": "after_op:delta.txt",
+   "recovery_crash_at": 5,
+   "second_recovery": {
+    "recovered": true,
+    "replayed": 1,
+    "operations": 6,
+    "trace": [
+     "unlink:obsolete.txt",
+     "fsync(dir):/tmp/d1/again-after_op-delta.txt-5/live",
+     "fsync(file):commit.journal.json",
+     "rename:commit.journal.json",
+     "fsync(dir):/tmp/d1/again-after_op-delta.txt-5",
+     "fsync(dir):/tmp/d1/again-after_op-delta.txt-5"
+    ],
+    "phase": "recover"
+   },
+   "tree_equals_target": true
+  },
+  {
+   "commit_crash_at": "after_op:delta.txt",
+   "recovery_crash_at": 6,
+   "second_recovery": {
+    "recovered": false,
+    "reason": "NO_RECORD",
+    "trace": [],
+    "phase": "recover"
+   },
+   "tree_equals_target": true
+  },
+  {
+   "commit_crash_at": "after_op:epsilon.txt",
+   "recovery_crash_at": 0,
+   "second_recovery": {
+    "recovered": true,
+    "replayed": 2,
+    "operations": 6,
+    "trace": [
+     "fsync(file):gamma.txt",
+     "rename:gamma.txt",
+     "fsync(dir):/tmp/d1/again-after_op-epsilon.txt-0/live",
+     "unlink:obsolete.txt",
+     "fsync(dir):/tmp/d1/again-after_op-epsilon.txt-0/live",
+     "fsync(file):commit.journal.json",
+     "rename:commit.journal.json",
+     "fsync(dir):/tmp/d1/again-after_op-epsilon.txt-0",
+     "fsync(dir):/tmp/d1/again-after_op-epsilon.txt-0"
+    ],
+    "phase": "recover"
+   },
+   "tree_equals_target": true
+  },
+  {
+   "commit_crash_at": "after_op:epsilon.txt",
+   "recovery_crash_at": 1,
+   "second_recovery": {
+    "recovered": true,
+    "replayed": 2,
+    "operations": 6,
+    "trace": [
+     "fsync(file):gamma.txt",
+     "rename:gamma.txt",
+     "fsync(dir):/tmp/d1/again-after_op-epsilon.txt-1/live",
+     "unlink:obsolete.txt",
+     "fsync(dir):/tmp/d1/again-after_op-epsilon.txt-1/live",
+     "fsync(file):commit.journal.json",
+     "rename:commit.journal.json",
+     "fsync(dir):/tmp/d1/again-after_op-epsilon.txt-1",
+     "fsync(dir):/tmp/d1/again-after_op-epsilon.txt-1"
+    ],
+    "phase": "recover"
+   },
+   "tree_equals_target": true
+  },
+  {
+   "commit_crash_at": "after_op:epsilon.txt",
+   "recovery_crash_at": 2,
+   "second_recovery": {
+    "recovered": true,
+    "replayed": 2,
+    "operations": 6,
+    "trace": [
+     "fsync(file):gamma.txt",
+     "rename:gamma.txt",
+     "fsync(dir):/tmp/d1/again-after_op-epsilon.txt-2/live",
+     "unlink:obsolete.txt",
+     "fsync(dir):/tmp/d1/again-after_op-epsilon.txt-2/live",
+     "fsync(file):commit.journal.json",
+     "rename:commit.journal.json",
+     "fsync(dir):/tmp/d1/again-after_op-epsilon.txt-2",
+     "fsync(dir):/tmp/d1/again-after_op-epsilon.txt-2"
+    ],
+    "phase": "recover"
+   },
+   "tree_equals_target": true
+  },
+  {
+   "commit_crash_at": "after_op:epsilon.txt",
+   "recovery_crash_at": 3,
+   "second_recovery": {
+    "recovered": true,
+    "replayed": 2,
+    "operations": 6,
+    "trace": [
+     "fsync(file):gamma.txt",
+     "rename:gamma.txt",
+     "fsync(dir):/tmp/d1/again-after_op-epsilon.txt-3/live",
+     "unlink:obsolete.txt",
+     "fsync(dir):/tmp/d1/again-after_op-epsilon.txt-3/live",
+     "fsync(file):commit.journal.json",
+     "rename:commit.journal.json",
+     "fsync(dir):/tmp/d1/again-after_op-epsilon.txt-3",
+     "fsync(dir):/tmp/d1/again-after_op-epsilon.txt-3"
+    ],
+    "phase": "recover"
+   },
+   "tree_equals_target": true
+  },
+  {
+   "commit_crash_at": "after_op:epsilon.txt",
+   "recovery_crash_at": 4,
+   "second_recovery": {
+    "recovered": true,
+    "replayed": 2,
+    "operations": 6,
+    "trace": [
+     "fsync(file):gamma.txt",
+     "rename:gamma.txt",
+     "fsync(dir):/tmp/d1/again-after_op-epsilon.txt-4/live",
+     "unlink:obsolete.txt",
+     "fsync(dir):/tmp/d1/again-after_op-epsilon.txt-4/live",
+     "fsync(file):commit.journal.json",
+     "rename:commit.journal.json",
+     "fsync(dir):/tmp/d1/again-after_op-epsilon.txt-4",
+     "fsync(dir):/tmp/d1/again-after_op-epsilon.txt-4"
+    ],
+    "phase": "recover"
+   },
+   "tree_equals_target": true
+  },
+  {
+   "commit_crash_at": "after_op:epsilon.txt",
+   "recovery_crash_at": 5,
+   "second_recovery": {
+    "recovered": true,
+    "replayed": 1,
+    "operations": 6,
+    "trace": [
+     "unlink:obsolete.txt",
+     "fsync(dir):/tmp/d1/again-after_op-epsilon.txt-5/live",
+     "fsync(file):commit.journal.json",
+     "rename:commit.journal.json",
+     "fsync(dir):/tmp/d1/again-after_op-epsilon.txt-5",
+     "fsync(dir):/tmp/d1/again-after_op-epsilon.txt-5"
+    ],
+    "phase": "recover"
+   },
+   "tree_equals_target": true
+  },
+  {
+   "commit_crash_at": "after_op:epsilon.txt",
+   "recovery_crash_at": 6,
+   "second_recovery": {
+    "recovered": false,
+    "reason": "NO_RECORD",
+    "trace": [],
+    "phase": "recover"
+   },
+   "tree_equals_target": true
+  },
+  {
+   "commit_crash_at": "after_op:gamma.txt",
+   "recovery_crash_at": 0,
+   "second_recovery": {
+    "recovered": true,
+    "replayed": 1,
+    "operations": 6,
+    "trace": [
+     "unlink:obsolete.txt",
+     "fsync(dir):/tmp/d1/again-after_op-gamma.txt-0/live",
+     "fsync(file):commit.journal.json",
+     "rename:commit.journal.json",
+     "fsync(dir):/tmp/d1/again-after_op-gamma.txt-0",
+     "fsync(dir):/tmp/d1/again-after_op-gamma.txt-0"
+    ],
+    "phase": "recover"
+   },
+   "tree_equals_target": true
+  },
+  {
+   "commit_crash_at": "after_op:gamma.txt",
+   "recovery_crash_at": 1,
+   "second_recovery": {
+    "recovered": true,
+    "replayed": 1,
+    "operations": 6,
+    "trace": [
+     "unlink:obsolete.txt",
+     "fsync(dir):/tmp/d1/again-after_op-gamma.txt-1/live",
+     "fsync(file):commit.journal.json",
+     "rename:commit.journal.json",
+     "fsync(dir):/tmp/d1/again-after_op-gamma.txt-1",
+     "fsync(dir):/tmp/d1/again-after_op-gamma.txt-1"
+    ],
+    "phase": "recover"
+   },
+   "tree_equals_target": true
+  },
+  {
+   "commit_crash_at": "after_op:gamma.txt",
+   "recovery_crash_at": 2,
+   "second_recovery": {
+    "recovered": true,
+    "replayed": 1,
+    "operations": 6,
+    "trace": [
+     "unlink:obsolete.txt",
+     "fsync(dir):/tmp/d1/again-after_op-gamma.txt-2/live",
+     "fsync(file):commit.journal.json",
+     "rename:commit.journal.json",
+     "fsync(dir):/tmp/d1/again-after_op-gamma.txt-2",
+     "fsync(dir):/tmp/d1/again-after_op-gamma.txt-2"
+    ],
+    "phase": "recover"
+   },
+   "tree_equals_target": true
+  },
+  {
+   "commit_crash_at": "after_op:gamma.txt",
+   "recovery_crash_at": 3,
+   "second_recovery": {
+    "recovered": true,
+    "replayed": 1,
+    "operations": 6,
+    "trace": [
+     "unlink:obsolete.txt",
+     "fsync(dir):/tmp/d1/again-after_op-gamma.txt-3/live",
+     "fsync(file):commit.journal.json",
+     "rename:commit.journal.json",
+     "fsync(dir):/tmp/d1/again-after_op-gamma.txt-3",
+     "fsync(dir):/tmp/d1/again-after_op-gamma.txt-3"
+    ],
+    "phase": "recover"
+   },
+   "tree_equals_target": true
+  },
+  {
+   "commit_crash_at": "after_op:gamma.txt",
+   "recovery_crash_at": 4,
+   "second_recovery": {
+    "recovered": true,
+    "replayed": 1,
+    "operations": 6,
+    "trace": [
+     "unlink:obsolete.txt",
+     "fsync(dir):/tmp/d1/again-after_op-gamma.txt-4/live",
+     "fsync(file):commit.journal.json",
+     "rename:commit.journal.json",
+     "fsync(dir):/tmp/d1/again-after_op-gamma.txt-4",
+     "fsync(dir):/tmp/d1/again-after_op-gamma.txt-4"
+    ],
+    "phase": "recover"
+   },
+   "tree_equals_target": true
+  },
+  {
+   "commit_crash_at": "after_op:gamma.txt",
+   "recovery_crash_at": 5,
+   "second_recovery": {
+    "recovered": true,
+    "replayed": 1,
+    "operations": 6,
+    "trace": [
+     "unlink:obsolete.txt",
+     "fsync(dir):/tmp/d1/again-after_op-gamma.txt-5/live",
+     "fsync(file):commit.journal.json",
+     "rename:commit.journal.json",
+     "fsync(dir):/tmp/d1/again-after_op-gamma.txt-5",
+     "fsync(dir):/tmp/d1/again-after_op-gamma.txt-5"
+    ],
+    "phase": "recover"
+   },
+   "tree_equals_target": true
+  },
+  {
+   "commit_crash_at": "after_op:gamma.txt",
+   "recovery_crash_at": 6,
+   "second_recovery": {
+    "recovered": false,
+    "reason": "NO_RECORD",
+    "trace": [],
+    "phase": "recover"
+   },
+   "tree_equals_target": true
+  },
+  {
+   "commit_crash_at": "after_op:obsolete.txt",
+   "recovery_crash_at": 0,
+   "second_recovery": {
+    "recovered": true,
+    "replayed": 0,
+    "operations": 6,
+    "trace": [
+     "fsync(file):commit.journal.json",
+     "rename:commit.journal.json",
+     "fsync(dir):/tmp/d1/again-after_op-obsolete.txt-0",
+     "fsync(dir):/tmp/d1/again-after_op-obsolete.txt-0"
+    ],
+    "phase": "recover"
+   },
+   "tree_equals_target": true
+  },
+  {
+   "commit_crash_at": "after_op:obsolete.txt",
+   "recovery_crash_at": 1,
+   "second_recovery": {
+    "recovered": true,
+    "replayed": 0,
+    "operations": 6,
+    "trace": [
+     "fsync(file):commit.journal.json",
+     "rename:commit.journal.json",
+     "fsync(dir):/tmp/d1/again-after_op-obsolete.txt-1",
+     "fsync(dir):/tmp/d1/again-after_op-obsolete.txt-1"
+    ],
+    "phase": "recover"
+   },
+   "tree_equals_target": true
+  },
+  {
+   "commit_crash_at": "after_op:obsolete.txt",
+   "recovery_crash_at": 2,
+   "second_recovery": {
+    "recovered": true,
+    "replayed": 0,
+    "operations": 6,
+    "trace": [
+     "fsync(file):commit.journal.json",
+     "rename:commit.journal.json",
+     "fsync(dir):/tmp/d1/again-after_op-obsolete.txt-2",
+     "fsync(dir):/tmp/d1/again-after_op-obsolete.txt-2"
+    ],
+    "phase": "recover"
+   },
+   "tree_equals_target": true
+  },
+  {
+   "commit_crash_at": "after_op:obsolete.txt",
+   "recovery_crash_at": 3,
+   "second_recovery": {
+    "recovered": true,
+    "replayed": 0,
+    "operations": 6,
+    "trace": [
+     "fsync(file):commit.journal.json",
+     "rename:commit.journal.json",
+     "fsync(dir):/tmp/d1/again-after_op-obsolete.txt-3",
+     "fsync(dir):/tmp/d1/again-after_op-obsolete.txt-3"
+    ],
+    "phase": "recover"
+   },
+   "tree_equals_target": true
+  },
+  {
+   "commit_crash_at": "after_op:obsolete.txt",
+   "recovery_crash_at": 4,
+   "second_recovery": {
+    "recovered": true,
+    "replayed": 0,
+    "operations": 6,
+    "trace": [
+     "fsync(file):commit.journal.json",
+     "rename:commit.journal.json",
+     "fsync(dir):/tmp/d1/again-after_op-obsolete.txt-4",
+     "fsync(dir):/tmp/d1/again-after_op-obsolete.txt-4"
+    ],
+    "phase": "recover"
+   },
+   "tree_equals_target": true
+  },
+  {
+   "commit_crash_at": "after_op:obsolete.txt",
+   "recovery_crash_at": 5,
+   "second_recovery": {
+    "recovered": true,
+    "replayed": 0,
+    "operations": 6,
+    "trace": [
+     "fsync(file):commit.journal.json",
+     "rename:commit.journal.json",
+     "fsync(dir):/tmp/d1/again-after_op-obsolete.txt-5",
+     "fsync(dir):/tmp/d1/again-after_op-obsolete.txt-5"
+    ],
+    "phase": "recover"
+   },
+   "tree_equals_target": true
+  },
+  {
+   "commit_crash_at": "after_op:obsolete.txt",
+   "recovery_crash_at": 6,
+   "second_recovery": {
+    "recovered": false,
+    "reason": "NO_RECORD",
+    "trace": [],
+    "phase": "recover"
+   },
+   "tree_equals_target": true
+  },
+  {
+   "commit_crash_at": "after_committed",
+   "recovery_crash_at": 0,
+   "second_recovery": {
+    "recovered": true,
+    "replayed": 0,
+    "operations": 6,
+    "trace": [
+     "fsync(file):commit.journal.json",
+     "rename:commit.journal.json",
+     "fsync(dir):/tmp/d1/again-after_committed-0",
+     "fsync(dir):/tmp/d1/again-after_committed-0"
+    ],
+    "phase": "recover"
+   },
+   "tree_equals_target": true
+  },
+  {
+   "commit_crash_at": "after_committed",
+   "recovery_crash_at": 1,
+   "second_recovery": {
+    "recovered": true,
+    "replayed": 0,
+    "operations": 6,
+    "trace": [
+     "fsync(file):commit.journal.json",
+     "rename:commit.journal.json",
+     "fsync(dir):/tmp/d1/again-after_committed-1",
+     "fsync(dir):/tmp/d1/again-after_committed-1"
+    ],
+    "phase": "recover"
+   },
+   "tree_equals_target": true
+  },
+  {
+   "commit_crash_at": "after_committed",
+   "recovery_crash_at": 2,
+   "second_recovery": {
+    "recovered": true,
+    "replayed": 0,
+    "operations": 6,
+    "trace": [
+     "fsync(file):commit.journal.json",
+     "rename:commit.journal.json",
+     "fsync(dir):/tmp/d1/again-after_committed-2",
+     "fsync(dir):/tmp/d1/again-after_committed-2"
+    ],
+    "phase": "recover"
+   },
+   "tree_equals_target": true
+  },
+  {
+   "commit_crash_at": "after_committed",
+   "recovery_crash_at": 3,
+   "second_recovery": {
+    "recovered": true,
+    "replayed": 0,
+    "operations": 6,
+    "trace": [
+     "fsync(file):commit.journal.json",
+     "rename:commit.journal.json",
+     "fsync(dir):/tmp/d1/again-after_committed-3",
+     "fsync(dir):/tmp/d1/again-after_committed-3"
+    ],
+    "phase": "recover"
+   },
+   "tree_equals_target": true
+  },
+  {
+   "commit_crash_at": "after_committed",
+   "recovery_crash_at": 4,
+   "second_recovery": {
+    "recovered": true,
+    "replayed": 0,
+    "operations": 6,
+    "trace": [
+     "fsync(file):commit.journal.json",
+     "rename:commit.journal.json",
+     "fsync(dir):/tmp/d1/again-after_committed-4",
+     "fsync(dir):/tmp/d1/again-after_committed-4"
+    ],
+    "phase": "recover"
+   },
+   "tree_equals_target": true
+  },
+  {
+   "commit_crash_at": "after_committed",
+   "recovery_crash_at": 5,
+   "second_recovery": {
+    "recovered": true,
+    "replayed": 0,
+    "operations": 6,
+    "trace": [
+     "fsync(file):commit.journal.json",
+     "rename:commit.journal.json",
+     "fsync(dir):/tmp/d1/again-after_committed-5",
+     "fsync(dir):/tmp/d1/again-after_committed-5"
+    ],
+    "phase": "recover"
+   },
+   "tree_equals_target": true
+  },
+  {
+   "commit_crash_at": "after_committed",
+   "recovery_crash_at": 6,
+   "second_recovery": {
+    "recovered": false,
+    "reason": "NO_RECORD",
+    "trace": [],
+    "phase": "recover"
+   },
+   "tree_equals_target": true
+  }
+ ],
+ "limits": [
+  "process death is not power loss: os._exit measures recovery logic and the visibility of a half-commit, not durability across a power cut; a block-layer harness (dm-log-writes) is the only way to test that and this sandbox does not have it",
+  "fsync returning success is not proof of stable storage: cheap media accepts a flush and lies (PostgreSQL 2018), and no software fsync can detect it",
+  "the journal is single-writer; two recoveries racing on one record are outside the contract",
+  "the paths are files under one tree; an atomic subtree swap is the previous round's RENAME_EXCHANGE, which this does not replace where it exists",
+  "one filesystem: ext2/3 in this sandbox"
+ ],
+ "cost": {
+  "seconds": 11.6,
+  "model_calls": 0,
+  "parameters_stored": 0,
+  "network_calls_at_run_time": 0
+ }
+}
