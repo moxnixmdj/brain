@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "a59f7abbfa3e647363115b74d6b479cebd8dbbfe11eddd433adaaf8c9f2569cc"
+  "value": "c2c2e3667c6aba6c15fd4e0ba6209f4483550664009dfdfd1cbd69c5732e6e20"
  },
  "engines": [
   {
@@ -218010,7 +218010,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
    "schema": "BRAIN_THE_REPERTOIRE_IS_A_QUERY_V1",
-   "sha256": "0468070b2afbd8d41b4bd0adfb6437a9e24dd5cc4c0ea764019b6a44dca980fe",
+   "sha256": "9ddf07288c22e720181f99513256ffb02d0c69a18d0dfd0e7a391086d767fbbd",
    "status": "",
    "terms": {
     "20261129": 1,
