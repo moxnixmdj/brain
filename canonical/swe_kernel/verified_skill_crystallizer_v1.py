@@ -1097,7 +1097,11 @@ class VerifiedSkillStore:
         admission_victims: Sequence[Any] | None = None,
         admission_archive: Sequence[Any] | None = None,
         localize_lesson: bool = False,
+        goal_judge: Callable[[str, Any], Any] | None = None,
+        equivalence_probes: Sequence[Any] | None = None,
+        precondition_name: str | None = None,
     ) -> dict[str, Any]:
+
         from canonical.runtime.memory_policy_v1 import can_write_memory
 
         if not can_write_memory():
@@ -1316,6 +1320,59 @@ class VerifiedSkillStore:
             rule["admission"] = _admission.record_for_store(admission_report)
         else:
             rule["admission"] = dict(_admission.UNGATED_RECORD)
+
+        # EQUIVALENCE: when the caller supplies a total judge, admission also
+        # requires the rule to agree with the judge on every trace of the
+        # declared observation space. The gate's victims are a sample of that
+        # space; this closes the sample -- or refuses with a named witness.
+        # Agreement on runs alone is consistency, not equivalence; an
+        # unidentified reading is stored nowhere.
+        if goal_judge is not None:
+            from canonical.swe_kernel import consistency_vs_equivalence_v1 as _C
+
+            probes = tuple(equivalence_probes or ())
+            if not probes:
+                return {
+                    "crystallized": False,
+                    "reason": "GOAL_JUDGE_REQUIRES_EQUIVALENCE_PROBES",
+                    "admission": rule.get("admission"),
+                }
+            eq = _C.prove_code_rule(
+                rule,
+                lesson_before,
+                lesson_after,
+                goal_judge,
+                probes,
+                language=language,
+                precondition_name=precondition_name,
+            )
+            if eq.kind == _C.COUNTEREXAMPLE:
+                return {
+                    "crystallized": False,
+                    "reason": f"ADMISSION_EQUIVALENCE_REFUTED:{eq.witness.sha256()[:16]}",
+                    "admission": rule.get("admission"),
+                    "equivalence": eq.record(),
+                }
+            if eq.kind == _C.UNKNOWN:
+                return {
+                    "crystallized": False,
+                    "reason": f"ADMISSION_EQUIVALENCE_UNDECIDED:{eq.reason}",
+                    "admission": rule.get("admission"),
+                    "equivalence": eq.record(),
+                }
+            rule["equivalence"] = eq.record()
+
+            # Equivalence is additive, not substitutive: the gate must still
+            # have admitted on held-out execution evidence. An equivalence
+            # proof does not resurrect an ungated admission.
+            if rule.get("admission", {}).get("verdict") != _admission.ADMIT:
+                return {
+                    "crystallized": False,
+                    "reason": "ADMISSION_UNGATED_EQUIVALENCE_NOT_SUFFICIENT",
+                    "admission": rule.get("admission"),
+                    "equivalence": rule.get("equivalence"),
+                }
+
         if precondition_evidence is not None:
             rule["precondition_presence"] = precondition_evidence
         if localization_record is not None:
