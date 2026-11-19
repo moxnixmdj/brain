@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "bae7e14ccc0b195fa1550910b0316f61754de5161f54eaf647ab99b26b9f0ebd"
+  "value": "911fd97eb38cf07da4dfc27ca65ca1580dc86024e25dce33bf08d3992cfc3a57"
  },
  "engines": [
   {
@@ -254728,7 +254728,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/THE_VOCABULARY_IS_THE_ARTIFACT_20261125_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "63b10530df3ec1bbbe72a38f1ac852c963d2705f3ca6327bf7e05fd6f534666d",
+   "sha256": "e4488a8922b5beac117f13770a06375e59e279d955d7ee776cf4f6fcef5c304c",
    "status": "PROPOSED__PRODUCER_MEASURED__MECHANISM_WORKS_ON_FIVE_REAL_MACHINES__INDEPENDENT_",
    "terms": {
     "20261125": 1,
