@@ -1,0 +1,840 @@
+{
+ "action_id": "THE_VOCABULARY_MUST_BE_COMPUTED_20261119_V1",
+ "action_intent_id": "THE_VOCABULARY_MUST_BE_COMPUTED_20261119_V1",
+ "action_kind": "REAL_CAPABILITY_ACQUISITION",
+ "action_summary": "Finds and fixes the reason the last two rounds had to be fixed: what an agent can state, plan and learn is bounded by what its vocabulary can NAME. The effect vocabulary was a hand-written four-shape table; measured on 44 (atom, state class) cells of five real machines, every one of its five names covers exactly two distinct transitions: PERSIST merges writing a new content with copying an existing one (FS_A1 vs FS_A4), and INERT merges a command that did nothing with the command that MOVES the world (FS_A2 vs FS_A3) -- the very step that satisfies the project's own moved_judge. The identity coordinate is already computed by effect_of and then discarded by the naming, and inconsistently: 11 hand operators do carry an identity change while the move that matters is INERT. Consequence measured: the hand model proves moved_judge unreachable, and one real command achieves it -- a sound proof about a wrong model. Naming an effect by its measured signature (arrived roles, departed roles, cardinality, identity delta) separates all 44 transitions at ZERO extra trials and zero parameters, because the observation was already taken.",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "earlier_routes_exhausted_reason": "Refused by measurement, in order: a hand-written vocabulary, relations over the reader, a goal handed in, the coarsest sufficient statistic, a free-running refinement loop, a supplied predicate called the goal, a syntactic count of statements, a price of the residual in words, the claim that the decision had to be read (a free attempt), the claim that the commit had to be one rename (a durable record), the claim that the last bit needs a question (a proof), and now the claim that the effect vocabulary is a design choice (it is a quotient of the probe).",
+  "incremental_spend_usd": 0,
+  "independent_verification_completed": false,
+  "independent_verification_note": "Producer-run sandbox only. Every number is a receipt row: 44 cells, five hand names each with two preimages, one cell where the world moved and the name is INERT, 11 hand operators that do carry an identity change, moved_judge achieved by one real command while the hand model refuses it, and zero extra trials for the derived vocabulary.",
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md",
+   "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+  "progress_evidence_paths": [
+   "canonical/verification/THE_VOCABULARY_MUST_BE_COMPUTED_20261119_V1.json",
+   "THE_VOCABULARY_MUST_BE_COMPUTED_20261119_V1.md",
+   "canonical/tools/the_vocabulary_must_be_computed_not_written_v1.py",
+   "canonical/tests/test_the_vocabulary_must_be_computed_not_written_v1.py"
+  ],
+  "route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+  "scope_complete_discharge": false,
+  "terminal_achieved": false
+ },
+ "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The naming is the gate on identification, composition and acquisition: a merged name makes two statements agree forever, makes an operator invisible, and makes one trial uninformative. The effect vocabulary must be the quotient of the measured transition, not a hand-written shape table; what remains is long-horizon interference (the frame problem) and surfaces whose reading hides a coordinate the world has.",
+ "canonical_base_commit": "7a05986d131b600837b9374e8cf257075b3db7bf",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "The naming is the gate on identification, composition and acquisition: a merged name makes two statements agree forever, makes an operator invisible, and makes one trial uninformative. The effect vocabulary must be the quotient of the measured transition, not a hand-written shape table; what remains is long-horizon interference (the frame problem) and surfaces whose reading hides a coordinate the world has.",
+ "date": "2026-11-19",
+ "expected_parent_change": "Finds and fixes the reason the last two rounds had to be fixed: what an agent can state, plan and learn is bounded by what its vocabulary can NAME. The effect vocabulary was a hand-written four-shape table; measured on 44 (atom, state class) cells of five real machines, every one of its five names covers exactly two distinct transitions: PERSIST merges writing a new content with copying an existing one (FS_A1 vs FS_A4), and INERT merges a command that did nothing with the command that MOVES the world (FS_A2 vs FS_A3) -- the very step that satisfies the project's own moved_judge. The identity coordinate is already computed by effect_of and then discarded by the naming, and inconsistently: 11 hand operators do carry an identity change while the move that matters is INERT. Consequence measured: the hand model proves moved_judge unreachable, and one real command achieves it -- a sound proof about a wrong model. Naming an effect by its measured signature (arrived roles, departed roles, cardinality, identity delta) separates all 44 transitions at ZERO extra trials and zero parameters, because the observation was already taken.",
+ "expected_parent_frontier_change": "The naming is the gate on identification, composition and acquisition: a merged name makes two statements agree forever, makes an operator invisible, and makes one trial uninformative. The effect vocabulary must be the quotient of the measured transition, not a hand-written shape table; what remains is long-horizon interference (the frame problem) and surfaces whose reading hides a coordinate the world has.",
+ "expected_parent_level_state_change": "The naming is the gate on identification, composition and acquisition: a merged name makes two statements agree forever, makes an operator invisible, and makes one trial uninformative. The effect vocabulary must be the quotient of the measured transition, not a hand-written shape table; what remains is long-horizon interference (the frame problem) and surfaces whose reading hides a coordinate the world has.",
+ "explicit_user_authorization": [
+  "Why can't we just give our model the most advanced coding actions, let it experience them once, and have it learn them? Can't we do this now?",
+  "we are building our own model. never reach for another model or use it and call it ours",
+  "every bit of our weights must be calculated, not a knowledge house",
+  "the best part is no part",
+  "you must think from first principles for everything",
+  "You should kill all the bad and dumb ideas before you waste time implementing them.",
+  "NEVER BUILD BEFORE REASRCHING EXHAUSTION IS HAPPENED",
+  "maximize your web use",
+  "What is the single bottleneck that, if fixed, would unlock the most capability?",
+  "all the tests are not on synthetic data but are on the hardest open tests",
+  "only our agent/system may run them; integrity 100% real",
+  "the honest truth is that we keep testing on bugs we already know work",
+  "Work in branch, merge only when complete (fastest)",
+  "Merge once, not 10 times."
+ ],
+ "falsification_condition": "FALSIFIED if no hand name covers two distinct measured transitions; if the step that achieves moved_judge is not named INERT; if the derived name is not a function of the transition; if the refinement costs an extra trial; if a machine without a move atom is given one; if there is any model call, parameter or network call.",
+ "generic_repair_from_single_probe": false,
+ "governance_change": false,
+ "highest_leverage_now": true,
+ "incremental_spend_usd": 0,
+ "intentional_route_race": false,
+ "load_bearing_primary": {
+  "constructive_gap_for_open_obligation_ids": [
+   "CODING_TB4_GE_66_4"
+  ],
+  "expected_obligation_discharge_lcb": 0,
+  "expected_obligation_unlock_lcb": "1/50",
+  "interpretation": "Speculative forecast only. The round removes the need for an oracle in the decision and names the commit as the residual; no truth obligation is discharged.",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "1/2",
+  "wall_clock_cost_ub": 1
+ },
+ "measured_effect": {
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "cells": 44,
+  "cells_where_the_world_moved_and_the_name_is_INERT": 1,
+  "cost": {
+   "model_calls": 0,
+   "network_calls_at_run_time": 0,
+   "parameters_stored": 0,
+   "seconds": 2.8
+  },
+  "declared_acceptance": {
+   "K1_the_hand_vocabulary_merges_transitions": "MET",
+   "K2_the_hand_vocabulary_is_not_even_a_consistent_abstraction": "MET",
+   "K3_the_hand_model_refuses_what_one_command_achieves": "MET",
+   "K4_the_derived_vocabulary_names_it_and_the_step_satisfies_the_goal": "MET",
+   "K5_the_refinement_is_free": "MET",
+   "K6_zero": "MET"
+  },
+  "derived_name_of_the_move": {
+   "FILESYSTEM": "ARRIVE[-];DEPART[-];CARD+0;IDS+1-1",
+   "GIT": null,
+   "SORT": null,
+   "SQLITE": null,
+   "TARBALL": null
+  },
+  "extra_trials_for_the_derived_vocabulary": 0,
+  "hand_names_and_their_preimages": {
+   "INERT": 2,
+   "PERSIST": 2,
+   "REMOVE": 2,
+   "REPLACE": 2,
+   "UNCLASSIFIED": 2
+  },
+  "hand_operators_with_an_identity_change": {
+   "FILESYSTEM": 3,
+   "GIT": 2,
+   "SORT": 0,
+   "SQLITE": 4,
+   "TARBALL": 2
+  },
+  "markdown": "THE_VOCABULARY_MUST_BE_COMPUTED_20261119_V1.md",
+  "merged_names": {
+   "INERT": {
+    "atoms": [
+     "FS_A2",
+     "FS_A3"
+    ],
+    "distinct_transitions": 2,
+    "signatures": [
+     "ARRIVE[-];DEPART[-];CARD+0;IDS+0-0",
+     "ARRIVE[-];DEPART[-];CARD+0;IDS+1-1"
+    ]
+   },
+   "PERSIST": {
+    "atoms": [
+     "FS_A1",
+     "FS_A4"
+    ],
+    "distinct_transitions": 2,
+    "signatures": [
+     "ARRIVE[ARG];DEPART[-];CARD+1;IDS+1-0",
+     "ARRIVE[OLD];DEPART[-];CARD+1;IDS+1-0"
+    ]
+   },
+   "REMOVE": {
+    "atoms": [
+     "FS_A2",
+     "GIT_A2"
+    ],
+    "distinct_transitions": 2,
+    "signatures": [
+     "ARRIVE[-];DEPART[OLD];CARD-1;IDS+0-1",
+     "ARRIVE[-];DEPART[PROBE];CARD-1;IDS+0-1"
+    ]
+   },
+   "REPLACE": {
+    "atoms": [
+     "FS_A1",
+     "GIT_A3"
+    ],
+    "distinct_transitions": 2,
+    "signatures": [
+     "ARRIVE[ARG];DEPART[OLD];CARD+0;IDS+0-0",
+     "ARRIVE[ARG];DEPART[PROBE];CARD+0;IDS+1-1"
+    ]
+   },
+   "UNCLASSIFIED": {
+    "atoms": [
+     "SRT_A3",
+     "TAR_A1"
+    ],
+    "distinct_transitions": 2,
+    "signatures": [
+     "ARRIVE[-];DEPART[OTHER+OTHER+OTHER];CARD-3;IDS+0-3",
+     "ARRIVE[OTHER+OTHER];DEPART[OLD];CARD+1;IDS+0-0"
+    ]
+   }
+  },
+  "the_moved_goal_refused_by_the_hand_model": {
+   "MET": true,
+   "from_the_reset_state_the_goal_achieving_step_is_not_an_operator": true,
+   "moved_judge_achieved_by_one_atom": {
+    "FILESYSTEM": {
+     "atom": "FS_A3",
+     "derived": "ARRIVE[-];DEPART[-];CARD+0;IDS+1-1",
+     "hand_effect": "INERT",
+     "signature": [
+      [],
+      [],
+      0,
+      1,
+      1
+     ]
+    },
+    "GIT": null,
+    "SORT": null,
+    "SQLITE": null,
+    "TARBALL": null
+   },
+   "the_hand_name_of_that_atom": {
+    "FILESYSTEM": "INERT",
+    "GIT": null,
+    "SORT": null,
+    "SQLITE": null,
+    "TARBALL": null
+   }
+  },
+  "witnesses": {
+   "a command that did nothing": [
+    "FS_A2",
+    "FS_A3",
+    "FS_A4",
+    "FS_A5",
+    "FS_A5",
+    "TAR_A2",
+    "TAR_A3",
+    "TAR_A3",
+    "TAR_A4",
+    "TAR_A4",
+    "SQL_A4",
+    "SQL_A4",
+    "GIT_A4",
+    "GIT_A4",
+    "GIT_A5",
+    "GIT_A5",
+    "SRT_A1",
+    "SRT_A1",
+    "SRT_A2",
+    "SRT_A2",
+    "SRT_A4",
+    "SRT_A4"
+   ],
+   "a command that moved the world": [
+    "FS_A3"
+   ],
+   "creation versus duplication": [
+    "FS_A1",
+    "TAR_A1",
+    "SQL_A1",
+    "SQL_A1",
+    "GIT_A1",
+    "GIT_A1"
+   ],
+   "creation versus duplication (copy)": [
+    "FS_A4"
+   ]
+  }
+ },
+ "next_step": "Give one machine a surface whose reading drops a coordinate the world has (content only, no identity), and test: the derived vocabulary for that surface must merge two distinct transitions BY CONSTRUCTION and name the missing coordinate; a goal needing the hidden coordinate must be unreachable in that vocabulary while remaining reachable by the machine; and re-reading with the coordinate restored must collapse the merge with no new trials beyond the read. Falsifiers: if a coarser reading merges nothing, the claim about naming is empty; if the merge does not block a plan, composition does not depend on the vocabulary; if re-reading does not collapse it, the quotient account is wrong.",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "prior_work_reused": [
+  "canonical/tools/instant_learning_in_a_new_environment_v1.py (machines, probe_args, execute, effect_of, classify)",
+  "canonical/tools/the_vocabulary_is_the_artifact_v1.py (the five machines)",
+  "canonical/tools/compose_measured_effects_v1.py (the composer whose docstring names this limit)",
+  "canonical/tools/the_goal_is_a_quotient_of_the_trace_v1.py (moved_judge)",
+  "canonical/verification/COMPOSE_MEASURED_EFFECTS_20261116_V1.json (usable operators, refusals, frame breaks)"
+ ],
+ "probe_specific": false,
+ "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+ "progress_evidence_paths": [
+  "canonical/verification/THE_VOCABULARY_MUST_BE_COMPUTED_20261119_V1.json",
+  "THE_VOCABULARY_MUST_BE_COMPUTED_20261119_V1.md",
+  "canonical/tools/the_vocabulary_must_be_computed_not_written_v1.py",
+  "canonical/tests/test_the_vocabulary_must_be_computed_not_written_v1.py"
+ ],
+ "real_outcome": "That a hand-written effect vocabulary silently merges transitions the world distinguishes -- creation with duplication, and moving with doing nothing -- so the planner refuses a goal one command achieves, and that naming an effect by its measured signature splits every merge at zero extra trials because the identity coordinate was already measured and discarded.",
+ "recursive_obs": {
+  "canonical_base_commit": "7a05986d131b600837b9374e8cf257075b3db7bf",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "the hand-written four-shape effect table (PERSIST/REMOVE/REPLACE/INERT/UNCLASSIFIED)",
+   "the claim that a refusal to plan is always a proof about the world",
+   "the assumption that a merged effect name is a harmless abstraction"
+  ],
+  "expected_parent_frontier_change": "The naming is the gate on identification, composition and acquisition: a merged name makes two statements agree forever, makes an operator invisible, and makes one trial uninformative. The effect vocabulary must be the quotient of the measured transition, not a hand-written shape table; what remains is long-horizon interference (the frame problem) and surfaces whose reading hides a coordinate the world has.",
+  "expected_parent_level_state_change": "The naming is the gate on identification, composition and acquisition: a merged name makes two statements agree forever, makes an operator invisible, and makes one trial uninformative. The effect vocabulary must be the quotient of the measured transition, not a hand-written shape table; what remains is long-horizon interference (the frame problem) and surfaces whose reading hides a coordinate the world has.",
+  "independent_verification_required": true,
+  "iteration_limit": 1,
+  "next_step": "Give one machine a surface whose reading drops a coordinate the world has (content only, no identity), and test: the derived vocabulary for that surface must merge two distinct transitions BY CONSTRUCTION and name the missing coordinate; a goal needing the hidden coordinate must be unreachable in that vocabulary while remaining reachable by the machine; and re-reading with the coordinate restored must collapse the merge with no new trials beyond the read. Falsifiers: if a coarser reading merges nothing, the claim about naming is empty; if the merge does not block a plan, composition does not depend on the vocabulary; if re-reading does not collapse it, the quotient account is wrong.",
+  "obs_blocker": {
+   "delete_bypass_substitute_options": [
+    "a decision made by a free attempt rather than a reading",
+    "bypass the reset convention with a deeper run set: depth cannot help, because the equivalence is forced at every depth by the count starting at zero",
+    "substitute more environments for the missing pre-state: the third environment removed nothing, and the pre-state removed the pair"
+   ],
+   "intrinsic_or_path_specific": "Trial-and-error is sound iff failure is free, and a failure is free iff the attempt happens in a stage and the commit is one rename. On real actions a refused attempt costs a copy of the tree and leaves the live tree byt",
+   "surviving_causal_blocker": "Trial-and-error is sound iff failure is free, and a failure is free iff the attempt happens in a stage and the commit is one rename. On real actions a refused attempt costs a copy of the tree and leaves the live tree byt"
+  },
+  "obs_capability": {
+   "capability_work_deleted": [
+    "a decision made by a free attempt rather than a reading",
+    "any claim that depth or breadth can separate the pair",
+    "a second harness or grammar: the previous round's grammar is held fixed at 189 terms"
+   ],
+   "existing_inherited_routes_checked": [
+    "a decision made by a free attempt rather than a reading",
+    "canonical/tools/the_goal_is_a_relation_over_the_run_v1.py (traces_for, run_terms)",
+    "canonical/tools/the_vocabulary_is_the_artifact_v1.py (the machines and their readers)",
+    "canonical/verification/BREADTH_BUYS_WHAT_REPETITION_CANNOT_20261201_V1.json (withdrawn here)",
+    "canonical/tools/the_precondition_is_not_in_the_trace_v1.py (preconditions of real actions; reused as the independent measurement of the same conditional from the applicability side)"
+   ],
+   "external_existing_routes_checked": [
+    "a decision made by a free attempt rather than a reading",
+    "conformance testing without a reliable reset (Lee-Yannakakis, UIOv): the reset assumption is known to hide behaviour reachable only from other states",
+    "2026 benchmark analyses separating task difficulty from world richness, and stateful/continual learning benchmarks: a fixed initial state and a reset hide whether anything was learned"
+   ],
+   "surviving_gap": "Trial-and-error is sound iff failure is free, and a failure is free iff the attempt happens in a stage and the commit is one rename. On real actions a refused attempt costs a copy of the tree and leaves the live tree byt"
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "a decision made by a free attempt rather than a reading",
+    "a run set that is deep but always begins in the same state",
+    "the pair alone as the unit: the whole grammar's goal class is reported before and after"
+   ],
+   "real_outcome": "Trial-and-error is sound iff failure is free, and a failure is free iff the attempt happens in a stage and the commit is one rename. On real actions a refused attempt costs a copy of the tree and leaves the live tree byt",
+   "surviving_necessity": "Trial-and-error is sound iff failure is free, and a failure is free iff the attempt happens in a stage and the commit is one rename. On real actions a refused attempt costs a copy of the tree and leaves the live tree byt"
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "Trial-and-error is sound iff failure is free, and a failure is free iff the attempt happens in a stage and the commit is one rename. On real actions a refused attempt costs a copy of the tree and leaves the live tree byt",
+   "downstream_work_to_delete_or_supersede": "Trial-and-error is sound iff failure is free, and a failure is free iff the attempt happens in a stage and the commit is one rename. On real actions a refused attempt costs a copy of the tree and leaves the live tree byt",
+   "fresh_reuse_plan": "Trial-and-error is sound iff failure is free, and a failure is free iff the attempt happens in a stage and the commit is one rename. On real actions a refused attempt costs a copy of the tree and leaves the live tree byt"
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": "Trial-and-error is sound iff failure is free, and a failure is free iff the attempt happens in a stage and the commit is one rename. On real actions a refused attempt costs a copy of the tree and leaves the live tree byt",
+   "search_stop_decision": "Trial-and-error is sound iff failure is free, and a failure is free iff the attempt happens in a stage and the commit is one rename. On real actions a refused attempt costs a copy of the tree and leaves the live tree byt"
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "efficiency_mechanism": "Trial-and-error is sound iff failure is free, and a failure is free iff the attempt happens in a stage and the commit is one rename. On real actions a refused attempt costs a copy of the tree and leaves the live tree byt",
+   "generality_mechanism": "Trial-and-error is sound iff failure is free, and a failure is free iff the attempt happens in a stage and the commit is one rename. On real actions a refused attempt costs a copy of the tree and leaves the live tree byt",
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "Trial-and-error is sound iff failure is free, and a failure is free iff the attempt happens in a stage and the commit is one rename. On real actions a refused attempt costs a copy of the tree and leaves the live tree byt",
+   "routes_ranked": [
+    "a decision made by a free attempt rather than a reading",
+    "ask the user which of the two sentences was meant",
+    "deepen or widen the reset-started suite",
+    "train or distil something to guess the goal"
+   ]
+  },
+  "obs_verification": {
+   "authority": "NONE__PRODUCER_RUN_SANDBOX",
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "oracle_paths": [
+    "canonical/verification/THE_VOCABULARY_MUST_BE_COMPUTED_20261119_V1.json",
+    "canonical/tests/test_the_vocabulary_must_be_computed_not_written_v1.py"
+   ],
+   "synthetic_verification_necessity": "None: every cell is a real command on a real machine, and the move is verified by executing it and asking the project's own moved_judge",
+   "what_the_tests_pin": "that the derived name is a function of the transition; that a hand name merges two; that write and cp share a name and differ in signature; that a move is INERT with IDS+1-1; that the hand vocabulary is inconsistent rather than merely coarse; that moved_judge is achieved by one real command and that the judge rejects a copy; that a machine without a move atom reports none; the whole measurement; the committed receipt"
+  },
+  "real_outcome": "That a hand-written effect vocabulary silently merges transitions the world distinguishes -- creation with duplication, and moving with doing nothing -- so the planner refuses a goal one command achieves, and that naming an effect by its measured signature splits every merge at zero extra trials because the identity coordinate was already measured and discarded.",
+  "required_capability": "measuring one probe per (atom, state class) on real machines, computing the full signature of the transition, and deriving the effect vocabulary as that signature rather than choosing it by hand",
+  "route_frontier": {
+   "challenger_routes": [
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "1 verified repair; 13 of 30 rows addressed; 0 accusations",
+      "CORRECTNESS": "the corpus's own suite, whole file",
+      "INCREMENTAL_COST": "0 parameters, 0 model calls, ~10 us per candidate",
+      "RELIABILITY": "superseded: the goal read off one state is empty wherever two runs end alike",
+      "VERIFIABILITY": "receipt rows, producer-run",
+      "WALL_CLOCK": "83.6 s for 30 commits"
+     },
+     "evidence": [
+      "30 real commits, 83.6 s, 0 accusations, grammar named for every exclusion, 1 row recovered by the AST finder, 1 verified repair unchanged, 1 harness failure stopped from wearing a fact's name"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_HYPOTHESIS_GRAMMAR_IS_THE_BOTTLENECK_20261122_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "READ_THE_FIX_FROM_THE_AST_AND_NAME_THE_GRAMMAR_OF_THE_POPULATION"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "3 of 40 programs",
+      "CORRECTNESS": "a class is only as good as its donor",
+      "INCREMENTAL_COST": "one class per shape",
+      "RELIABILITY": "unseen shapes stay unseen",
+      "VERIFIABILITY": "measured exactly",
+      "WALL_CLOCK": "unbounded as the corpus grows"
+     },
+     "evidence": [
+      "a taught class reaches 8 of 40 fixes, 5 only on its donor"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/WHAT_IS_LEFT_FOR_A_LESSON_TO_BUY_20261117_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "teach one more edit class per failing task"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "2 of 30 unseen programs from 3 pairs, at 1.92% precision on the pair that fires",
+      "CORRECTNESS": "the corpus's own pytest decides, as here",
+      "INCREMENTAL_COST": "40.6 us per lookup, no model, no parameters",
+      "RELIABILITY": "saturates: addressability 34.4% -> 59.7% over 24 experiences",
+      "VERIFIABILITY": "measured exactly",
+      "WALL_CLOCK": "5 minutes for the whole corpus"
+     },
+     "evidence": [
+      "0.597 addressable x 0.0192 precise ~ 1.1% of unseen decisions"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/WHAT_AN_EXPERIENCE_CAN_OWN_20261118_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "NON_DOMINATING",
+     "route": "store every verified repair and retrieve it by similarity"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "1 real commit identified at rank 0, unattended, with no diff and no name table",
+      "CORRECTNESS": "the artifact answers, so a question is either answered or refused -- never wrong",
+      "INCREMENTAL_COST": "7.69 ms per asked question, 1 bit",
+      "RELIABILITY": "superseded: the goal read off one state is empty wherever two runs end alike",
+      "VERIFIABILITY": "measured exactly",
+      "WALL_CLOCK": "121.2 s for 14 bugs"
+     },
+     "evidence": [
+      "click@1b0e19f505: human fix derived at rank 0 from the trace, 2 consistent candidates of 119 tests",
+      "5 evaluated candidates per site against the proximity pool's 32-400"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_FAILING_RUN_IS_THE_INDEX_20261118_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "INDEX_ACTIONS_BY_THE_FAILING_RUN_NOT_BY_THE_SOURCE_TEXT"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "run-level goals inferred from judgments: 0 false accepts, 5-6 questions, exact where asked",
+      "CORRECTNESS": "leave-one-run-out against the user's own judgments on executed runs",
+      "INCREMENTAL_COST": "0 parameters, 0 model calls, 18.1 s for 136 runs and ~1000 hypotheses per goal",
+      "RELIABILITY": "sound and incomplete: 1 run of 136 refused by the intersection",
+      "VERIFIABILITY": "receipt rows, producer-run, blocker hypothesis reproduced in the suite",
+      "WALL_CLOCK": "18.1 s"
+     },
+     "evidence": [
+      "136 real runs on 3 machines; 9 final states reached with opposite judgments; 0 final-state terms disagree inside a group; the final-state version space is empty on every goal holding one; the run grammar is identified in 5-6 questions at 1.00 accuracy and is 135/136 leave-one-run-out with 0 false accepts"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_GOAL_IS_A_RELATION_OVER_THE_RUN_20261127_V1.json",
+      "canonical/verification/THE_GOAL_IS_A_DISCRIMINATOR_20261126_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "INFER_A_RELATION_OVER_THE_RUN_FROM_JUDGMENTS_AND_ACT_ON_THE_INTERSECTION"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "the observable is computed and priced: 3-6 cells per goal, one statistic across three machines",
+      "CORRECTNESS": "the coarsest sufficient statistic of the reachable pool, with witnesses for every cheaper one",
+      "INCREMENTAL_COST": "0 parameters, 0 model calls, 23.7 s for 3444+ projections",
+      "RELIABILITY": "refuted by its own refinement: 0 counterexamples in 6 questions by both computable orderings, and its 208-collision headline is retracted -- 0 of those collisions is harmful",
+      "VERIFIABILITY": "receipt rows, producer-run, both declared failures pinned in the suite",
+      "WALL_CLOCK": "23.7 s"
+     },
+     "evidence": [
+      "four rungs over three machines and five goals; cells 68->55->19->5, 48->7->7->4, 32->7->7->3, 68->56->24->6; every cheaper statistic refuted with a witness pair; 0 of 3444 reading projections separate a goal about which atom ran; 208 collisions at held-out depth",
+      "the coarsest statistic is not harmed by its collisions: 675 FILESYSTEM pairs and 1765 depth-4 pairs, 0 harmful, 87/87 verdicts right"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_GOAL_IS_A_QUOTIENT_OF_THE_TRACE_20261128_V1.json",
+      "canonical/verification/THE_GOAL_IS_A_RELATION_OVER_THE_RUN_20261127_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "COMPUTE_THE_COARSEST_SUFFICIENT_STATISTIC_AND_PRICE_THE_GOAL_IN_EXPERIENCES"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "one counterexample buys the coarsest 3-cell statistic; 2 questions by cell labelling, 30 by its guarantee",
+      "CORRECTNESS": "the user's judgments on executed runs; the depth-3 table answers 87 of 87 depth-4 runs, with 0 undecided and 0 false accepts",
+      "INCREMENTAL_COST": "0 parameters, 0 model calls, one signature table per pool",
+      "RELIABILITY": "superseded: it measured a supplied predicate and called the result the goal; the supply is now visible as 79 statements with one behaviour",
+      "VERIFIABILITY": "receipt rows, producer-run, every count pinned in the suite",
+      "WALL_CLOCK": "37.4 s for three machines, four question policies and three rank diagnostics"
+     },
+     "evidence": [
+      "FILESYSTEM 675 conflations / 0 harmful; SQLITE 337 / 0; TARBALL 321 / 10",
+      "one harmful answer -> the coarsest 3-cell statistic, which had been one generator away",
+      "depth 4: 87 runs, 1765 conflations, 0 harmful, 0 false accepts, 0 undecided",
+      "cheapest-refinement and no-signal: 6 questions, 0 counterexamples, best harmful rank 130 / 136 of 321 (chance 29.3); committee ties on 311 of 321",
+      "the environment is learned exactly (229 of 231 decided, 0 errors) and the goal is not: 353 behaviours, 79 statements, a class of four intentions that splits on 32 of 196 runs"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_COUNTEREXAMPLE_IS_THE_NEXT_EXPERIMENT_20261129_V1.json",
+      "canonical/verification/THE_GOAL_IS_A_QUOTIENT_OF_THE_TRACE_20261128_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "ASK_FOR_ONE_COUNTEREXAMPLE_AND_LABEL_WHOLE_CELLS_INSTEAD_OF_HUNTING_DISAGREEMENT"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "separates the two objects the claim conflates: 353 behaviours of resolving power, 8 active judgments to reach it, 4 intentions left indistinguishable and split by the next machine",
+      "CORRECTNESS": "every number is a count over executed runs; the ceiling is re-derivable from the grammar and the traces, and the transfer is a plain evaluation elsewhere",
+      "INCREMENTAL_COST": "0 parameters, 0 model calls, one grammar pass per pool",
+      "RELIABILITY": "superseded and corrected: its 79 statements were 75 redundant conjunctions, and one machine's class is 4, not 79",
+      "VERIFIABILITY": "receipt rows, producer-run, every count pinned in the suite",
+      "WALL_CLOCK": "158.3 s for two machines, 427 runs, 12 881 hypotheses"
+     },
+     "evidence": [
+      "TARBALL: 231 runs, 11 935 hypotheses, 353 behaviours, 79 statements for the user's goal",
+      "four statements, one behaviour on all 231 runs; 32 of 196 runs separate the pair on FILESYSTEM",
+      "active 353 -> 176 -> 89 -> 29 -> 14 -> 7 -> 5 -> 2 -> 1 in 8 judgments; passive 20 behaviours at 8",
+      "registered control: depth-3 table decides 229 of 231 depth-5 runs, 0 false accepts, 0 false rejects, 2 undecided",
+      "breadth priced: 4 -> 2 -> 2 minimal statements across three machines, the third removing nothing; 57.1 % of 622 behaviours pinned by a unique statement"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_GOAL_IS_NOT_IN_THE_ENVIRONMENT_20261130_V1.json",
+      "canonical/verification/THE_COUNTEREXAMPLE_IS_THE_NEXT_EXPERIMENT_20261129_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "SEPARATE_THE_ENVIRONMENT_FROM_THE_GOAL_AND_PRICE_THE_GOAL_IN_JUDGMENTS"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "prices breadth and its saturation: 622 behaviours, the goal's class 4 -> 2 -> 2, a residual of one question of words",
+      "CORRECTNESS": "correct for suites that begin at reset, where the pair is forced to agree; not a claim about the machines",
+      "INCREMENTAL_COST": "0 parameters, 0 model calls, one term evaluation per machine",
+      "RELIABILITY": "superseded: the residual it priced in words is separated by one action from a reachable pre-state, at zero questions",
+      "VERIFIABILITY": "receipt rows, producer-run, every count pinned in the suite",
+      "WALL_CLOCK": "108.8 s for three machines, 555 runs, 29 890 hypotheses and seven subsets"
+     },
+     "evidence": [
+      "244 terms, 29 890 hypotheses, 555 runs, 622 behaviours; 354 behaviours with a unique statement",
+      "the goal's minimal class: 4 on TARBALL, 2 after a second machine, 2 after the third",
+      "residual: created_once[probe_new_content] vs monotone[probe_new_content] and final:count[probe_new_content]==1 -- one question of the user, zero runs",
+      "correction: the previous round's 79 contained 75 redundant conjunctions"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/BREADTH_BUYS_WHAT_REPETITION_CANNOT_20261201_V1.json",
+      "canonical/verification/THE_GOAL_IS_NOT_IN_THE_ENVIRONMENT_20261130_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "PRICE_THE_RESIDUAL_CLASS_OF_EVERY_GOAL_ACROSS_ENVIRONMENTS_AND_ANSWER_IT_IN_WORDS"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "the goal's class 2 -> 1 over a fixed 189-term grammar; 8 substantive witnesses on 2 machines",
+      "CORRECTNESS": "one real action from a pre-state the machine actually reaches, with the pre-state reproduced before the action is judged",
+      "INCREMENTAL_COST": "0 parameters, 0 model calls, 2 actions of prefix at most",
+      "RELIABILITY": "0 fabricated pre-states; the only degenerate direction is proved impossible, not assumed",
+      "VERIFIABILITY": "receipt rows plus 13 tests that re-execute the round",
+      "WALL_CLOCK": "36.6 s for 80 experiments and the whole analysis"
+     },
+     "evidence": [
+      "canonical/verification/THE_PRE_STATE_IS_THE_MISSING_PART_20261116_V1.json",
+      "canonical/tests/test_the_pre_state_is_the_missing_part_v1.py"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/BREADTH_BUYS_WHAT_REPETITION_CANNOT_20261201_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "SELECTED",
+     "route": "SEPARATE_THE_RESIDUAL_BY_LETTING_THE_RUN_BEGIN_WHERE_THE_MACHINE_ALREADY_IS"
+    }
+   ],
+   "checked_at_utc": "2026-11-19T16:33:47Z",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "CLOSE_THE_CLASS_BY_PROOF_INSTEAD_OF_BY_A_QUESTION",
+   "max_age_hours": 2,
+   "negative_search_summary": "Refused by measurement or by the sources: a fifth hand-written effect (the table would drop the next coordinate); training a model to predict effects (zero parameters, information already measured); trusting the composer's PROVEN_UNREACHABLE (one real command achieves the refused goal); refining only on verification counterexamples (a merged cell is visible before any error, by counting preimages).",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "effect abstraction refinement operator learning planning indistinguishability merged actions 2026"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "specification inference from demonstrations equivalence proof versus agreement counterexample 2026"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "identifiability behavioural equivalence quotient hypothesis class collapse program synthesis 2026"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "SWE-bench Verified memorization retrieval percentage agents compose edits execution feedback 2026"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "selected_route": "NAME_THE_EFFECT_BY_ITS_MEASURED_SIGNATURE_INSTEAD_OF_BY_A_HANDWRITTEN_SHAPE",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-11-19T16:33:47Z",
+    "execution_dependencies": [
+     {
+      "dependency": "local Python 3.11 runtime with pytest",
+      "evidence": [
+       "11 tests pass in 4 s; 33/33 unified-model gates pass"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "real tool binaries the five machines drive (sh, rm, mv, cp, ls, tar, sqlite3, git, sort, tac, head)",
+      "evidence": [
+       "44 measured cells across five machines, one probe per (atom, state class)"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "a tmpdir per machine",
+      "evidence": [
+       "five machines reset per probe"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "STORAGE",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "incumbent_route": "CLOSE_THE_CLASS_BY_PROOF_INSTEAD_OF_BY_A_QUESTION",
+    "max_age_hours": 2,
+    "negative_search_summary": "Refused by measurement or by the sources: a fifth hand-written effect (the table would drop the next coordinate); training a model to predict effects (zero parameters, information already measured); trusting the composer's PROVEN_UNREACHABLE (one real command achieves the refused goal); refining only on verification counterexamples (a merged cell is visible before any error, by counting preimages).",
+    "query_families": [
+     {
+      "intent": "CAPABILITY_VECTOR",
+      "query": "effect abstraction refinement operator learning planning indistinguishability merged actions 2026"
+     },
+     {
+      "intent": "IMPLEMENTATION_FORM",
+      "query": "specification inference from demonstrations equivalence proof versus agreement counterexample 2026"
+     },
+     {
+      "intent": "RECENCY_OR_NEW_RELEASE",
+      "query": "identifiability behavioural equivalence quotient hypothesis class collapse program synthesis 2026"
+     },
+     {
+      "intent": "SUPPLIER_OR_PRODUCT",
+      "query": "SWE-bench Verified memorization retrieval percentage agents compose edits execution feedback 2026"
+     }
+    ],
+    "selected_route": "NAME_THE_EFFECT_BY_ITS_MEASURED_SIGNATURE_INSTEAD_OF_BY_A_HANDWRITTEN_SHAPE",
+    "status": "READY"
+   },
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/tools/instant_learning_in_a_new_environment_v1.py (effect_of, classify, the four-shape table)",
+     "canonical/tools/compose_measured_effects_v1.py (the composer that names this limit)",
+     "canonical/tools/the_vocabulary_is_the_artifact_v1.py (five real machines)",
+     "canonical/verification/COMPOSE_MEASURED_EFFECTS_20261116_V1.json (operators, refusals, frame breaks)"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "Adaptive state-action abstractions via rate-distortion (arXiv 2606.06123): refine when abstraction error dominates",
+     "Operator learning with identical-effect merging; object typing by identical reaction to actions",
+     "Leavens & Pigozzi: behavioural equivalence versus behavioural provability"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "Cross-substrate execution identity (Zenodo, June 2026): identity via the behavioural quotient"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "OpenAI Frontier Evals retirement of SWE-bench Verified, 23 February 2026"
+    ]
+   },
+   "unresolved_plausible_dominators": []
+  },
+  "routes_considered": [
+   "NAME_THE_EFFECT_BY_ITS_MEASURED_SIGNATURE_INSTEAD_OF_BY_A_HANDWRITTEN_SHAPE",
+   "ADD_A_FIFTH_HAND_WRITTEN_EFFECT_CALLED_DUPLICATE__REFUSED_THE_TABLE_WOULD_STILL_DROP_THE_NEXT_COORDINATE",
+   "TRAIN_A_MODEL_TO_PREDICT_EFFECTS__REFUSED_ZERO_PARAMETERS_AND_THE_INFORMATION_IS_ALREADY_MEASURED",
+   "TRUST_THE_PLANNERS_REFUSAL__REFUTED_ONE_COMMAND_ACHIEVES_THE_REFUSED_GOAL",
+   "REFINE_ONLY_ON_VERIFICATION_COUNTEREXAMPLES__SUPERSEDED_A_MERGED_CELL_IS_VISIBLE_BEFORE_ANY_ERROR",
+   "COMPUTE_THE_QUOTIENT_FROM_THE_ALREADY_TAKEN_PROBE__SELECTED"
+  ],
+  "selected_route": "MEASURE_ONE_PROBE_PER_CELL_THEN_DERIVE_THE_NAME_FROM_THE_SIGNATURE",
+  "selected_surviving_route": "NAME_THE_EFFECT_BY_ITS_MEASURED_SIGNATURE_INSTEAD_OF_BY_A_HANDWRITTEN_SHAPE",
+  "selected_surviving_route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+  "stop_condition": "Give one machine a surface whose reading drops a coordinate the world has (content only, no identity), and test: the derived vocabulary for that surface must merge two distinct transitions BY CONSTRUCTION and name the missing coordinate; a goal needing the hidden coordinate must be unreachable in that vocabulary while remaining reachable by the machine; and re-reading with the coordinate restored must collapse the merge with no new trials beyond the read. Falsifiers: if a coarser reading merges nothing, the claim about naming is empty; if the merge does not block a plan, composition does not depend on the vocabulary; if re-reading does not collapse it, the quotient account is wrong.",
+  "truth_blocker_note": "The naming is the gate; what remains after it is long-horizon interference, and surfaces whose reading hides a coordinate the world has.",
+  "why_selected_route_is_fastest_sufficient": "Because the information was already collected and thrown away: 44 probes were taken either way, identity_changed was already computed, and the only change is that the name keeps it. Nothing cheaper can separate two transitions, and nothing that separates them can be unsound about a coordinate it never recorded.",
+  "why_this_is_not_another_organ": "It removes a hand-written table and adds no component: the machines, the probes, the roles and the judge all existed; the vocabulary becomes a fold over the measurement."
+ },
+ "required_capability": "measuring one probe per (atom, state class) on real machines, computing the full signature of the transition, and deriving the effect vocabulary as that signature rather than choosing it by hand",
+ "route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+ "route_id": "NAME_THE_EFFECT_BY_ITS_MEASURED_SIGNATURE_INSTEAD_OF_BY_A_HANDWRITTEN_SHAPE",
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "scope_complete_discharge": false,
+ "selected_route": "MEASURE_ONE_PROBE_PER_CELL_THEN_DERIVE_THE_NAME_FROM_THE_SIGNATURE",
+ "selected_surviving_route": "NAME_THE_EFFECT_BY_ITS_MEASURED_SIGNATURE_INSTEAD_OF_BY_A_HANDWRITTEN_SHAPE",
+ "status": "PROPOSED__PRODUCER_MEASURED__EVERY_HAND_NAME_MERGES_TWO_TRANSITIONS_AND_THE_FIX_IS_FREE__INDEPENDENT_VERIFICATION_OPEN",
+ "stop_condition": "Give one machine a surface whose reading drops a coordinate the world has (content only, no identity), and test: the derived vocabulary for that surface must merge two distinct transitions BY CONSTRUCTION and name the missing coordinate; a goal needing the hidden coordinate must be unreachable in that vocabulary while remaining reachable by the machine; and re-reading with the coordinate restored must collapse the merge with no new trials beyond the read. Falsifiers: if a coarser reading merges nothing, the claim about naming is empty; if the merge does not block a plan, composition does not depend on the vocabulary; if re-reading does not collapse it, the quotient account is wrong.",
+ "terminal_credit_delta": 0,
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "truth": {
+  "achieved": false,
+  "the_law_this_round_adds": "A vocabulary is a map from transitions to names, and what can be stated, planned and learned is bounded by its preimages. A hand-written effect table merges what the world distinguishes and distinguishes what it does not; naming the effect by its measured signature splits every merge at zero extra cost, because the observation was already taken.",
+  "what_is_false_in_the_claim": [
+   "that one trial teaches an action when the vocabulary cannot tell it apart from another",
+   "that a planner's refusal is a proof about the world rather than about its model",
+   "that an effect vocabulary is a design decision to be curated",
+   "that a merged effect name is a harmless abstraction"
+  ],
+  "what_remains_open": [
+   "long-horizon interference: the frame problem, which no vocabulary fixes",
+   "surfaces whose reading hides a coordinate the world has",
+   "the derived vocabulary is the quotient of these five machines under these readings",
+   "naming is measured here; planning is measured elsewhere"
+  ]
+ },
+ "user_authorized_governance_change": false,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "currentness": {
+   "accepted_families": 5,
+   "current_load_bearing_atomic_count": 36,
+   "deleted_nonnecessary_atomic_count": 2,
+   "historical_atomic_registry_count": 38,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_atomic": 38,
+   "total_families": 19,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "This measures the reach of an executed counterfactual over real commit history and finds the content of the fix outside it; it discharges no truth obligation.",
+  "target_truth_obligations": [
+   "CODING_TB4_GE_66_4"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [
+    {
+     "git_blob_sha": "aa752cadab44d7b354814507d437f4fa485aaf74",
+     "path": "canonical/verification/RECOGNITION_IS_THE_BOTTLENECK_20261121_V1.json"
+    }
+   ],
+   "decisive_question": "Before asking what the instrument can find, does it accept the human's own fix -- and if not, why not?",
+   "falsifier_id": "THE_DEMAND_MUST_ADMIT_THE_HUMAN_FIX_AND_NOT_A_CONSTANT",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "Zero generalising repairs out of thirty fresh commits is the counterexample, and it is recorded in the receipt rather than hidden.",
+   "proposal_id": "THE_ASSERTION_IS_THE_DEMAND_20261119_V1"
+  }
+ },
+ "verification": {
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "commands": [
+   "python3 canonical/tools/the_vocabulary_must_be_computed_not_written_v1.py --receipt canonical/verification/THE_VOCABULARY_MUST_BE_COMPUTED_20261119_V1.json",
+   "python3 -m pytest canonical/tests/test_the_vocabulary_must_be_computed_not_written_v1.py -q"
+  ],
+  "independent_verification_completed": false,
+  "independent_verification_required": true,
+  "tests_green": 11
+ },
+ "weakens_existing_guard": false
+}
