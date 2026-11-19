@@ -42,7 +42,7 @@
  },
  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The purpose-bearing command line: which program, on which object, for which end. The machine supplies the verbs and the state supplies the objects, at the price of one execution each; nothing supplies the third, and no learning speed makes it appear.",
- "canonical_base_commit": "1d6905bb07f24d2c9b2239c1b56daa9adbf39469",
+ "canonical_base_commit": "4137a2f2b2a0434377bef20e8453a2e5cd2a0f54",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -134,7 +134,7 @@
  ],
  "real_outcome": "The action vocabulary of a machine is a free query: 437 programs and 4,621 options re-derived in 46.6 s with zero parameters, so nothing about it needs to be learned once and kept forever. But the catalogue is not a repertoire: 0 of 80 accepted options changed a byte, because an option is a modifier whose object lives in the state, and the catalogue cannot bind a need to a page (no lexical threshold separates the needs a shell can serve from the ones nothing can). Verbs come from the machine, objects from the state, and the purpose from neither -- which is the same bottleneck r27 found when three goals were satisfiable by destroying the work.",
  "recursive_obs": {
-  "canonical_base_commit": "1d6905bb07f24d2c9b2239c1b56daa9adbf39469",
+  "canonical_base_commit": "4137a2f2b2a0434377bef20e8453a2e5cd2a0f54",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "a stored repertoire of learned actions: the catalogue is re-derived in 46.6 s and cannot go stale",
@@ -461,7 +461,7 @@
      "route": "SEPARATE_THE_RESIDUAL_BY_LETTING_THE_RUN_BEGIN_WHERE_THE_MACHINE_ALREADY_IS"
     }
    ],
-   "checked_at_utc": "2026-11-19T05:32:24Z",
+   "checked_at_utc": "2026-11-19T05:38:21Z",
    "comparison_dimensions": [
     "CORRECTNESS",
     "CAPABILITY_STRENGTH",
@@ -501,7 +501,7 @@
    "selected_route": "QUERY_THE_MACHINES_CATALOGUE: READ THE VERBS, BIND THE OBJECTS FROM THE STATE, KEEP NOTHING",
    "selected_route_preflight": {
     "all_required_dependencies_ready": true,
-    "checked_at_utc": "2026-11-19T05:32:24Z",
+    "checked_at_utc": "2026-11-19T05:38:21Z",
     "execution_dependencies": [
      {
       "dependency": "local Python 3.11 runtime with pytest",
