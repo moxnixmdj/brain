@@ -1,0 +1,1573 @@
+{
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "basis": [
+  {
+   "arity": 2,
+   "operator": "Eq"
+  },
+  {
+   "arity": 1,
+   "operator": "Not"
+  },
+  {
+   "arity": 2,
+   "operator": "And"
+  },
+  {
+   "arity": 2,
+   "operator": "BitOr"
+  },
+  {
+   "arity": 2,
+   "operator": "Or"
+  },
+  {
+   "arity": 2,
+   "operator": "Is"
+  },
+  {
+   "arity": 2,
+   "operator": "IsNot"
+  },
+  {
+   "arity": 2,
+   "operator": "In"
+  },
+  {
+   "arity": 2,
+   "operator": "NotIn"
+  },
+  {
+   "arity": 1,
+   "operator": "USub"
+  }
+ ],
+ "basis_from": "canonical/verification/WHERE_THE_MISSING_TERM_COMES_FROM_20261116_V1.json",
+ "broken": {
+  "K1_every_fix_with_a_term_is_priced": {
+   "MET": true,
+   "claims": "every fix that has a term gets a size and a cost",
+   "value": 87
+  },
+  "K2_basis_is_read_not_written": {
+   "MET": true,
+   "claims": "the operator basis comes from the round-28 census, not from this file",
+   "value": 10
+  },
+  "K3_no_free_pruner_rejects_the_true_term": {
+   "MET": true,
+   "claims": "soundness: a pruner that rejects the real fix is a bug, not a pruner",
+   "value": 0
+  },
+  "K4_cost_is_timed_not_assumed": {
+   "MET": true,
+   "claims": "at least 10^4 evaluations were timed on this machine",
+   "value": 1002240
+  },
+  "K5_recursion_agrees_with_enumeration": {
+   "MET": true,
+   "claims": "the closed-form size equals brute-force enumeration at depth 2 on a small scope",
+   "value": true
+  }
+ },
+ "fixes_checkable_under_one_hour": 2,
+ "fixes_checkable_under_one_minute": 2,
+ "fixes_with_a_term": 87,
+ "free_pruners_reject_the_true_term": 0,
+ "hard_decoy_rejection_share": 0.0,
+ "hard_decoys": 574,
+ "hard_decoys_rejected_by_free_pruners": 0,
+ "malformed_decoys": 64,
+ "malformed_decoys_rejected": 3,
+ "malformed_rejection_share": 4.7,
+ "measurable_microseconds_per_check": 0.189,
+ "median_depth": 4,
+ "median_language_size": 232900984159017890632800682555135787246704689606200,
+ "median_seconds_to_check_the_language": 4.4018286006054383e+43,
+ "model_dependency_count": 0,
+ "network_calls_at_run_time": 0,
+ "rows": [
+  {
+   "atoms": 225,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 20,
+    "hard_rejected": 0,
+    "malformed_decoys": 3,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 7,
+   "language_size": 2817005101365303984644923894123469361008653821820234225498951748339708968519074575780296516760634880846885836123437195030101786276529028583014356813202900023662797679611473086487527237204688020262431356163575,
+   "repo": "pypa/packaging",
+   "sha": "46167dcdb1c8",
+   "source": "src/packaging/ranges.py",
+   "term": "tuple((((_point_state(lower.version), lower.inclusive), (_point_state(upper.version), upper.inclusiv"
+  },
+  {
+   "atoms": 203,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 4,
+    "hard_rejected": 0,
+    "malformed_decoys": 0,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 4,
+   "language_size": 295504336193266255339295873166034713388360931726765,
+   "repo": "pypa/packaging",
+   "sha": "5a7d3386d277",
+   "source": "src/packaging/_parser.py",
+   "term": "token is None or not token.text"
+  },
+  {
+   "atoms": 175,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 7,
+    "hard_rejected": 0,
+    "malformed_decoys": 1,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 2,
+   "language_size": 481573716225,
+   "repo": "pypa/packaging",
+   "sha": "8efde605cc26",
+   "source": "src/packaging/dependency_groups.py",
+   "term": "CyclicDependencyGroup(requested_group, group, include_group)"
+  },
+  {
+   "atoms": 222,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 10,
+    "hard_rejected": 0,
+    "malformed_decoys": 1,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 5,
+   "language_size": 12215400281928963153712265786117375513807049923201066521523015759876500322488893186107814140947402587138,
+   "repo": "pypa/packaging",
+   "sha": "7d0611d420c8",
+   "source": "src/packaging/markers.py",
+   "term": "groups[-1].append(_eval_extra_set(rhs_value, op, lhs.value))"
+  },
+  {
+   "atoms": 203,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 16,
+    "hard_rejected": 0,
+    "malformed_decoys": 3,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 5,
+   "language_size": 698582501672183431582736042206866657659635801479678185778815167537232788674834121107839048780395838093,
+   "repo": "pypa/packaging",
+   "sha": "491af5d517cd",
+   "source": "src/packaging/markers.py",
+   "term": "all((markers[i] == op for i in range(1, len(markers), 2)))"
+  },
+  {
+   "atoms": 177,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 28,
+    "hard_rejected": 0,
+    "malformed_decoys": 5,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 7,
+   "language_size": 608948309051443422818898729494648783281790001938234024073259974801461843098321272414644438794591556350818948816514481772044454054340012560520370271706603982633145685164022243865289802762823715119940903,
+   "repo": "pypa/packaging",
+   "sha": "a03bde12d560",
+   "source": "src/packaging/requirements.py",
+   "term": "not isinstance(inner, tuple) or len(inner) != len(specs) or (not all((p is None or isinstance(p, boo"
+  },
+  {
+   "atoms": 221,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 18,
+    "hard_rejected": 0,
+    "malformed_decoys": 2,
+    "malformed_rejected": 1,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 6,
+   "language_size": 894316655964042217480408983704977360512758541534764678945582803053033309462896392945254922616137423949703536468979588136923350791013615851489779973207117701259488662548754755983642392264423318072609428755131,
+   "repo": "pypa/packaging",
+   "sha": "cd91074b0500",
+   "source": "src/packaging/ranges.py",
+   "term": "(parsed := coerce_version(literal)) is not None and prereleases_configured is None and parsed.is_pre"
+  },
+  {
+   "atoms": 204,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 2,
+    "hard_rejected": 0,
+    "malformed_decoys": 0,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 4,
+   "language_size": 319660495854708801179105175580252330978625384596020,
+   "repo": "pypa/packaging",
+   "sha": "8c37b0476f94",
+   "source": "src/packaging/licenses/__init__.py",
+   "term": "not ref.isascii()"
+  },
+  {
+   "atoms": 204,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 2,
+    "hard_rejected": 0,
+    "malformed_decoys": 0,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 4,
+   "language_size": 319660495854708801179105175580252330978625384596020,
+   "repo": "pypa/packaging",
+   "sha": "b1c439b0f1fb",
+   "source": "src/packaging/metadata.py",
+   "term": "Metadata.__dict__.items()"
+  },
+  {
+   "atoms": 184,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 6,
+    "hard_rejected": 0,
+    "malformed_decoys": 1,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 4,
+   "language_size": 61397962957086290165545866283146111270109862079560,
+   "repo": "pypa/packaging",
+   "sha": "31b2d0131910",
+   "source": "src/packaging/dependency_groups.py",
+   "term": "len(errors.errors) == error_count_before_parse"
+  },
+  {
+   "atoms": 201,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 12,
+    "hard_rejected": 0,
+    "malformed_decoys": 2,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 4,
+   "language_size": 252235795508860157399639870295764425498639694802351,
+   "repo": "pypa/packaging",
+   "sha": "bddb69038b25",
+   "source": "src/packaging/markers.py",
+   "term": "(canonicalize_name(lhs), {canonicalize_name(v) for v in rhs})"
+  },
+  {
+   "atoms": 178,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 8,
+    "hard_rejected": 0,
+    "malformed_decoys": 1,
+    "malformed_rejected": 1,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 5,
+   "language_size": 10446857530450863749735302985966677162069889364012820860342608104068824675386295019777169762103574318,
+   "repo": "pypa/packaging",
+   "sha": "2d57ce2b15a8",
+   "source": "src/packaging/dependency_groups.py",
+   "term": "resolved.extend(self._resolve(_normalize_name(item.include_group)))"
+  },
+  {
+   "atoms": 175,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 5,
+    "hard_rejected": 0,
+    "malformed_decoys": 2,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 5,
+   "language_size": 6066390210593166974625068604780648015313107735344434776085123714794865916689213662088377964299506025,
+   "repo": "pypa/packaging",
+   "sha": "4b243af94ff6",
+   "source": "src/packaging/requirements.py",
+   "term": "InvalidRequirement(f'Replacement fields do not round-trip: {str(tmp)!r}')"
+  },
+  {
+   "atoms": 204,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 12,
+    "hard_rejected": 0,
+    "malformed_decoys": 1,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 6,
+   "language_size": 5345961615472272275313451047916701208522463476398012745024005235574220710412928218091325122419374834489862445061640520872757716613475173630459600354973265131166036782680928375083474710064801449763464230580,
+   "repo": "pypa/packaging",
+   "sha": "2c87a33f6658",
+   "source": "src/packaging/licenses/__init__.py",
+   "term": "license_refs.setdefault(ref.lower(), licenseref_prefix + ref[len(licenseref_prefix):])"
+  },
+  {
+   "atoms": 175,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 4,
+    "hard_rejected": 0,
+    "malformed_decoys": 0,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 3,
+   "language_size": 1855304061457794788577625,
+   "repo": "pypa/packaging",
+   "sha": "0625596e5021",
+   "source": "src/packaging/utils.py",
+   "term": "re.compile('(\\\\d+)(.*)\\\\Z', re.ASCII)"
+  },
+  {
+   "atoms": 173,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 6,
+    "hard_rejected": 0,
+    "malformed_decoys": 1,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 4,
+   "language_size": 22914289063710465273186377080985204904248186231435,
+   "repo": "pypa/packaging",
+   "sha": "959bb79c06cb",
+   "source": "src/packaging/dependency_groups.py",
+   "term": "len(errors.errors) > error_count_before_parse"
+  },
+  {
+   "atoms": 186,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 4,
+    "hard_rejected": 0,
+    "malformed_decoys": 1,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 5,
+   "language_size": 42612826427228897764019991575840203759927144618568008872682712742709919456725119622773116995057535526,
+   "repo": "pypa/packaging",
+   "sha": "d17cfaf0b77a",
+   "source": "src/packaging/_parser.py",
+   "term": "Value(python_str[1:-1])"
+  },
+  {
+   "atoms": 198,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 4,
+    "hard_rejected": 0,
+    "malformed_decoys": 0,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 4,
+   "language_size": 198325372137379224505904210625581068866601569093210,
+   "repo": "pypa/packaging",
+   "sha": "022ae6c6fe5c",
+   "source": "src/packaging/metadata.py",
+   "term": "pathlib.PureWindowsPath(path).drive"
+  },
+  {
+   "atoms": 161,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 2,
+    "hard_rejected": 0,
+    "malformed_decoys": 0,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 3,
+   "language_size": 952649956218086104499591,
+   "repo": "pypa/packaging",
+   "sha": "2602dd07d8bd",
+   "source": "src/packaging/_tokenizer.py",
+   "term": "re.compile('\\\\S+')"
+  },
+  {
+   "atoms": 255,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 6,
+    "hard_rejected": 0,
+    "malformed_decoys": 2,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 6,
+   "language_size": 8450109073570598515511688390595807355023476176458351269485820788526182544634425044067272183764885069361015948339130762482730416239075971703942842464403015780677563548694937971944826545258488705554760832684397785,
+   "repo": "pypa/packaging",
+   "sha": "23669b1b69fb",
+   "source": "src/packaging/pylock.py",
+   "term": "PylockSelectError(f\"Undeclared extras: {', '.join(sorted(unknown_extras))}\")"
+  },
+  {
+   "atoms": 191,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 2,
+    "hard_rejected": 0,
+    "malformed_decoys": 0,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 2,
+   "language_size": 683187860081,
+   "repo": "pypa/packaging",
+   "sha": "55cbf1b9426f",
+   "source": "src/packaging/_ranges.py",
+   "term": "version is None"
+  },
+  {
+   "atoms": 247,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 2,
+    "hard_rejected": 0,
+    "malformed_decoys": 0,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 3,
+   "language_size": 29171809411372404159335953,
+   "repo": "pypa/packaging",
+   "sha": "b80e6eb0a6c0",
+   "source": "src/packaging/pylock.py",
+   "term": "self.environments is not None"
+  },
+  {
+   "atoms": 190,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 6,
+    "hard_rejected": 0,
+    "malformed_decoys": 0,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 4,
+   "language_size": 102559864372930058956604687306833725445399843809890,
+   "repo": "pypa/packaging",
+   "sha": "2d873eb60020",
+   "source": "src/packaging/metadata.py",
+   "term": "_LINE_BOUNDARY_RE.sub('\\n' + ' ' * size, value)"
+  },
+  {
+   "atoms": 247,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 8,
+    "hard_rejected": 0,
+    "malformed_decoys": 1,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 4,
+   "language_size": 6807955714666593293635462849663487520847307841739073,
+   "repo": "pypa/packaging",
+   "sha": "826426fc8877",
+   "source": "src/packaging/pylock.py",
+   "term": "create_compatible_tags_selector(tags if tags is not None else sys_tags())"
+  },
+  {
+   "atoms": 164,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 4,
+    "hard_rejected": 0,
+    "malformed_decoys": 1,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 3,
+   "language_size": 1104149351527469681128220,
+   "repo": "pypa/packaging",
+   "sha": "fe18f139c5b3",
+   "source": "src/packaging/requirements.py",
+   "term": "SpecifierSet(parsed.specifier)"
+  },
+  {
+   "atoms": 246,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 5,
+    "hard_rejected": 0,
+    "malformed_decoys": 0,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 5,
+   "language_size": 325666382035703391123361229284072541180953880069809701276948148379191635656759433759927044777506715039466,
+   "repo": "pypa/packaging",
+   "sha": "9c652e4b4ced",
+   "source": "src/packaging/pylock.py",
+   "term": "Callable[[NormalizedName], bool] | None"
+  },
+  {
+   "atoms": 176,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 4,
+    "hard_rejected": 0,
+    "malformed_decoys": 0,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 3,
+   "language_size": 1941770763894532246626896,
+   "repo": "pypa/packaging",
+   "sha": "8af75907bf11",
+   "source": "src/packaging/utils.py",
+   "term": "re.compile('^[\\\\w._]+\\\\Z', re.UNICODE)"
+  },
+  {
+   "atoms": 189,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 16,
+    "hard_rejected": 0,
+    "malformed_decoys": 1,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 6,
+   "language_size": 40420474412173938222917132065570024365587857215665110574113745337448670104687116750528213649208067514682476991877397565633194678141333372477764315537210035840742564015232764235123404859170320035717825755,
+   "repo": "pypa/packaging",
+   "sha": "206834025040",
+   "source": "src/packaging/metadata.py",
+   "term": "not (isinstance(exc, InvalidMetadata) and exc.field in unparsed and (_EMAIL_TO_RAW_MAPPING.get(exc.f"
+  },
+  {
+   "atoms": 218,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 2,
+    "hard_rejected": 0,
+    "malformed_decoys": 0,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 4,
+   "language_size": 923925415095817944723154986422859350277785869509830,
+   "repo": "pypa/packaging",
+   "sha": "abf000549c2e",
+   "source": "src/packaging/metadata.py",
+   "term": "charset.lower() != 'utf-8'"
+  },
+  {
+   "atoms": 213,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 8,
+    "hard_rejected": 0,
+    "malformed_decoys": 1,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 4,
+   "language_size": 637529295745840579877759530094087173910101962255075,
+   "repo": "pypa/packaging",
+   "sha": "9d0ec47b36a1",
+   "source": "src/packaging/metadata.py",
+   "term": "f'{self.raw_name!r} must be one of {list(content_types)}, not {value!r}'"
+  },
+  {
+   "atoms": 193,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 4,
+    "hard_rejected": 0,
+    "malformed_decoys": 0,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 5,
+   "language_size": 138874175441705822048271327077775604167195606338604631327740379570830524813570416057006067229500551383,
+   "repo": "pypa/packaging",
+   "sha": "458b0ae53e5a",
+   "source": "src/packaging/metadata.py",
+   "term": "self._invalid_metadata(f'{self.raw_name!r} is a required field')"
+  },
+  {
+   "atoms": 181,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 4,
+    "hard_rejected": 0,
+    "malformed_decoys": 0,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 3,
+   "language_size": 2429165456991164449977331,
+   "repo": "pypa/packaging",
+   "sha": "30824d9e3b33",
+   "source": "src/packaging/dependency_groups.py",
+   "term": "errors.collect(InvalidRequirement)"
+  },
+  {
+   "atoms": 193,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 15,
+    "hard_rejected": 0,
+    "malformed_decoys": 2,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 4,
+   "language_size": 131754589788034434743808606970463403111888161440055,
+   "repo": "pypa/packaging",
+   "sha": "4c663c9ef5e1",
+   "source": "src/packaging/markers.py",
+   "term": "isinstance(rhs, Variable) and rhs.value in MARKERS_ALLOWING_SET and isinstance(lhs, Value)"
+  },
+  {
+   "atoms": 171,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 12,
+    "hard_rejected": 0,
+    "malformed_decoys": 2,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 5,
+   "language_size": 2896145344088621367889328422837419430700433134446152370965920801974989392606146964979497377817018541,
+   "repo": "pypa/packaging",
+   "sha": "d5fedc90bba3",
+   "source": "src/packaging/requirements.py",
+   "term": "isinstance(state, dict) and state.keys() >= set(self.__slots__)"
+  },
+  {
+   "atoms": 177,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 2,
+    "hard_rejected": 0,
+    "malformed_decoys": 0,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 4,
+   "language_size": 33023843459932264898977317439511011380912493161543,
+   "repo": "pypa/packaging",
+   "sha": "a0661b5f5c88",
+   "source": "src/packaging/direct_url.py",
+   "term": "parsed_url.path.startswith('/')"
+  },
+  {
+   "atoms": 212,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 8,
+    "hard_rejected": 0,
+    "malformed_decoys": 1,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 6,
+   "language_size": 62596193060408463998368798447504456214961858386924015693573877923618518966333773804754139993719003375367087025874734634633410414360795563105653241941092406058695272280687491990396502642058921685709227045548,
+   "repo": "pypa/packaging",
+   "sha": "2c688aa15f65",
+   "source": "src/packaging/markers.py",
+   "term": "UndefinedComparison(f'Set-valued marker {environment_key!r} can only be used with the membership for"
+  },
+  {
+   "atoms": 196,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 6,
+    "hard_rejected": 0,
+    "malformed_decoys": 1,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 3,
+   "language_size": 4590854848924963472272636,
+   "repo": "pypa/packaging",
+   "sha": "1b00eeffc6be",
+   "source": "src/packaging/metadata.py",
+   "term": "not isinstance(payload, str)"
+  },
+  {
+   "atoms": 204,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 6,
+    "hard_rejected": 0,
+    "malformed_decoys": 1,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 3,
+   "language_size": 6321199410068459312191860,
+   "repo": "pypa/packaging",
+   "sha": "0a85b41e24c9",
+   "source": "src/packaging/markers.py",
+   "term": "_format_marker(marker[0], first=first)"
+  },
+  {
+   "atoms": 186,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 4,
+    "hard_rejected": 0,
+    "malformed_decoys": 0,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 4,
+   "language_size": 72983582423745220130073143058244838309665662125286,
+   "repo": "pypa/packaging",
+   "sha": "c4fb81ff6eba",
+   "source": "src/packaging/ranges.py",
+   "term": "self.difference(other).is_empty"
+  },
+  {
+   "atoms": 191,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 3,
+    "hard_rejected": 0,
+    "malformed_decoys": 1,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 4,
+   "language_size": 111539778984775337975579974962834477973905411195641,
+   "repo": "pypa/packaging",
+   "sha": "84833cc16be8",
+   "source": "src/packaging/utils.py",
+   "term": "InvalidSdistFilename(f'Invalid sdist filename (empty project name): {filename!r}')"
+  },
+  {
+   "atoms": 204,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 6,
+    "hard_rejected": 0,
+    "malformed_decoys": 0,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 6,
+   "language_size": 5345961615472272275313451047916701208522463476398012745024005235574220710412928218091325122419374834489862445061640520872757716613475173630459600354973265131166036782680928375083474710064801449763464230580,
+   "repo": "pypa/packaging",
+   "sha": "fbea07c1f23f",
+   "source": "src/packaging/_parser.py",
+   "term": "specifier.startswith('!=') or (specifier.startswith('==') and (not specifier.startswith('===')))"
+  },
+  {
+   "atoms": 194,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 12,
+    "hard_rejected": 0,
+    "malformed_decoys": 0,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 3,
+   "language_size": 4229428221302739165065150,
+   "repo": "pypa/packaging",
+   "sha": "d2fa92384821",
+   "source": "src/packaging/ranges.py",
+   "term": "self._combine_literals(other, new_bounds, intersect=False, admit_arbitrary=combined_arb, prereleases"
+  },
+  {
+   "atoms": 164,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 10,
+    "hard_rejected": 0,
+    "malformed_decoys": 2,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 4,
+   "language_size": 9753166323821691287486742706759102840691061143900,
+   "repo": "pypa/packaging",
+   "sha": "fbd0d4b4b83b",
+   "source": "src/packaging/requirements.py",
+   "term": "frozenset((canonicalize_name(e) for e in self.extras))"
+  },
+  {
+   "atoms": 188,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 6,
+    "hard_rejected": 0,
+    "malformed_decoys": 0,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 7,
+   "language_size": 28790287947600922059926344671248591273126743731906957942345461872540541440018196346281043498718329503652943300964662782990757097187628269557867344284085965386944992130748072827481348190062070499411509956,
+   "repo": "pypa/packaging",
+   "sha": "e80f70f8b164",
+   "source": "src/packaging/direct_url.py",
+   "term": "direct_url.dir_info is not None and urllib.parse.urlsplit(direct_url.url).scheme != 'file'"
+  },
+  {
+   "atoms": 208,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 9,
+    "hard_rejected": 0,
+    "malformed_decoys": 0,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 5,
+   "language_size": 1521127521294296767436728517694396332013099224986108601787234387057125515895023981877301798832934112048,
+   "repo": "pypa/packaging",
+   "sha": "b19df947aa03",
+   "source": "src/packaging/markers.py",
+   "term": "dict[str, str | AbstractSet[str]]"
+  },
+  {
+   "atoms": 198,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 14,
+    "hard_rejected": 0,
+    "malformed_decoys": 2,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 4,
+   "language_size": 198325372137379224505904210625581068866601569093210,
+   "repo": "pypa/packaging",
+   "sha": "07265129295b",
+   "source": "src/packaging/markers.py",
+   "term": "isinstance(lhs, Variable) and lhs.value == 'extra' and isinstance(rhs, Value)"
+  },
+  {
+   "atoms": 180,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 6,
+    "hard_rejected": 0,
+    "malformed_decoys": 1,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 3,
+   "language_size": 2323923670565350972274700,
+   "repo": "pypa/packaging",
+   "sha": "349abfad0688",
+   "source": "src/packaging/dependency_groups.py",
+   "term": "not isinstance(include_group, str)"
+  },
+  {
+   "atoms": 161,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 16,
+    "hard_rejected": 0,
+    "malformed_decoys": 3,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 5,
+   "language_size": 421699774050358541726870780008619931779414384285372417604947060834158504198327203937152404494242551,
+   "repo": "pypa/packaging",
+   "sha": "d8e08df11bfa",
+   "source": "src/packaging/requirements.py",
+   "term": "hash((canonicalize_name(self.name), frozenset(self.extras), self.specifier, self.url, self.marker))"
+  },
+  {
+   "atoms": 175,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 4,
+    "hard_rejected": 0,
+    "malformed_decoys": 0,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 3,
+   "language_size": 1855304061457794788577625,
+   "repo": "pypa/packaging",
+   "sha": "ba17fcea2367",
+   "source": "src/packaging/utils.py",
+   "term": "re.compile('[a-z0-9]+(?:-[a-z0-9]+)*', re.ASCII)"
+  },
+  {
+   "atoms": 180,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 2,
+    "hard_rejected": 0,
+    "malformed_decoys": 0,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 3,
+   "language_size": 2323923670565350972274700,
+   "repo": "pypa/packaging",
+   "sha": "08bb047794f4",
+   "source": "src/packaging/direct_url.py",
+   "term": "netloc.rsplit('@', 1)"
+  },
+  {
+   "atoms": 170,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 24,
+    "hard_rejected": 0,
+    "malformed_decoys": 4,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 5,
+   "language_size": 2400877598981430205485522233670895787600431153410502767597087234315823477575280816522056155556601910,
+   "repo": "pypa/packaging",
+   "sha": "5c163f5382fb",
+   "source": "src/packaging/requirements.py",
+   "term": "isinstance(state, tuple) and len(state) == 2 and isinstance(state[0], str) and (state[1] is None or "
+  },
+  {
+   "atoms": 195,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 2,
+    "hard_rejected": 0,
+    "malformed_decoys": 0,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 3,
+   "language_size": 4406900423756175962489925,
+   "repo": "pypa/packaging",
+   "sha": "9f5249fba27e",
+   "source": "src/packaging/metadata.py",
+   "term": "Literal['1.0', '1.1', '1.2', '2.1', '2.2', '2.3', '2.4', '2.5', '2.6']"
+  },
+  {
+   "atoms": 206,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 4,
+    "hard_rejected": 0,
+    "malformed_decoys": 1,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 4,
+   "language_size": 373628936143464170230965018553229735427468327898706,
+   "repo": "pypa/packaging",
+   "sha": "668da8662a11",
+   "source": "src/packaging/markers.py",
+   "term": "_format_full_version(sys.implementation.version)"
+  },
+  {
+   "atoms": 206,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 6,
+    "hard_rejected": 0,
+    "malformed_decoys": 0,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 4,
+   "language_size": 373628936143464170230965018553229735427468327898706,
+   "repo": "pypa/packaging",
+   "sha": "98b4bfb6828b",
+   "source": "src/packaging/markers.py",
+   "term": "self._from_markers([self._markers, 'and', other._markers])"
+  },
+  {
+   "atoms": 208,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 2,
+    "hard_rejected": 0,
+    "malformed_decoys": 0,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 3,
+   "language_size": 7382847806210415880889392,
+   "repo": "pypa/packaging",
+   "sha": "553582d9162c",
+   "source": "src/packaging/metadata.py",
+   "term": "f'{{field}} can only specify the UTF-8 charset, not {charset!r}'"
+  },
+  {
+   "atoms": 157,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 4,
+    "hard_rejected": 0,
+    "malformed_decoys": 0,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 2,
+   "language_size": 312069552963,
+   "repo": "pypa/packaging",
+   "sha": "f8f16338e10d",
+   "source": "src/packaging/_structures.py",
+   "term": "other is self"
+  },
+  {
+   "atoms": 169,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 2,
+    "hard_rejected": 0,
+    "malformed_decoys": 0,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 5,
+   "language_size": 1988105854157351653061314659520733623660647331059078125122636986426608039919835348888373587484534895,
+   "repo": "pypa/packaging",
+   "sha": "6da1c50d1354",
+   "source": "src/packaging/requirements.py",
+   "term": "(yield f' @ {self.url}')"
+  },
+  {
+   "atoms": 197,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 6,
+    "hard_rejected": 0,
+    "malformed_decoys": 0,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 5,
+   "language_size": 267623471281396879731597168606126331560053576526869126377980669339961181990569167497461834117031263763,
+   "repo": "pypa/packaging",
+   "sha": "a1f705642e50",
+   "source": "src/packaging/licenses/__init__.py",
+   "term": "token == '(' and python_tokens and (python_tokens[-1] not in {'or', 'and', '('})"
+  },
+  {
+   "atoms": 222,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 4,
+    "hard_rejected": 0,
+    "malformed_decoys": 0,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 5,
+   "language_size": 12215400281928963153712265786117375513807049923201066521523015759876500322488893186107814140947402587138,
+   "repo": "pypa/packaging",
+   "sha": "e83801f455b0",
+   "source": "src/packaging/metadata.py",
+   "term": "semicolon and private.lstrip() != 'private'"
+  },
+  {
+   "atoms": 227,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 6,
+    "hard_rejected": 0,
+    "malformed_decoys": 0,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 5,
+   "language_size": 24903918525842447416193820226495953423429683281480864503618899551039245677845354693524978585795558913013,
+   "repo": "pypa/packaging",
+   "sha": "3b20e0fd026f",
+   "source": "src/packaging/metadata.py",
+   "term": "self.as_string(unixfrom, policy=policy).encode('utf-8')"
+  },
+  {
+   "atoms": 194,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 2,
+    "hard_rejected": 0,
+    "malformed_decoys": 0,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 3,
+   "language_size": 4229428221302739165065150,
+   "repo": "pypa/packaging",
+   "sha": "888eb1452625",
+   "source": "src/packaging/_parser.py",
+   "term": "f'Expected {expected} or end'"
+  },
+  {
+   "atoms": 176,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 2,
+    "hard_rejected": 0,
+    "malformed_decoys": 0,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 2,
+   "language_size": 492667829456,
+   "repo": "pypa/packaging",
+   "sha": "258202ed7f79",
+   "source": "src/packaging/utils.py",
+   "term": "re.IGNORECASE"
+  },
+  {
+   "atoms": 199,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 6,
+    "hard_rejected": 0,
+    "malformed_decoys": 0,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 5,
+   "language_size": 369670537225919989545429090321844385130483121279410663382536956570758442228254467959384162417874205905,
+   "repo": "pypa/packaging",
+   "sha": "2680259b4fa8",
+   "source": "src/packaging/licenses/__init__.py",
+   "term": "token == ')' and python_tokens and (python_tokens[-1] == '(')"
+  },
+  {
+   "atoms": 189,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 4,
+    "hard_rejected": 0,
+    "malformed_decoys": 0,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 4,
+   "language_size": 94261177665788589227846367666837002462313806660475,
+   "repo": "pypa/packaging",
+   "sha": "a716c52b5f3c",
+   "source": "src/packaging/metadata.py",
+   "term": "self._invalid_metadata(f'{dynamic_field!r} is not a valid dynamic field')"
+  },
+  {
+   "atoms": 186,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 2,
+    "hard_rejected": 0,
+    "malformed_decoys": 0,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 4,
+   "language_size": 72983582423745220130073143058244838309665662125286,
+   "repo": "pypa/packaging",
+   "sha": "c385b58c4d0e",
+   "source": "src/packaging/markers.py",
+   "term": "env['python_full_version'].endswith('+')"
+  },
+  {
+   "atoms": 192,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 2,
+    "hard_rejected": 0,
+    "malformed_decoys": 0,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 4,
+   "language_size": 121252832603553555498394895157239197048852509726528,
+   "repo": "pypa/packaging",
+   "sha": "3e67fc775e93",
+   "source": "src/packaging/markers.py",
+   "term": "current_environment['python_full_version'].endswith('+')"
+  },
+  {
+   "atoms": 210,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 8,
+    "hard_rejected": 0,
+    "malformed_decoys": 0,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 5,
+   "language_size": 2065745631778028729523284831888327524990596108226642672422594437825030893767823811729669660167836726030,
+   "repo": "pypa/packaging",
+   "sha": "09f131b32645",
+   "source": "src/packaging/metadata.py",
+   "term": "_Validator[Optional[List[requirements.Requirement]]]"
+  },
+  {
+   "atoms": 200,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 4,
+    "hard_rejected": 0,
+    "malformed_decoys": 1,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 4,
+   "language_size": 232900984159017890632800682555135787246704689606200,
+   "repo": "pypa/packaging",
+   "sha": "524b701c6e30",
+   "source": "src/packaging/utils.py",
+   "term": "InvalidWheelFilename(f'Invalid wheel filename (invalid version): {filename}')"
+  },
+  {
+   "atoms": 162,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 10,
+    "hard_rejected": 0,
+    "malformed_decoys": 2,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 7,
+   "language_size": 2113822334863658890841275834429050520283653182366803079705032466438227513540636357334255014264542880062100235037900380874168087012782611396316216142214726196299709370676175158054805382668384244683198,
+   "repo": "pypa/packaging",
+   "sha": "e8f839f74002",
+   "source": "src/packaging/requirements.py",
+   "term": "hash((self.__class__.__name__, *self._iter_parts(canonicalize_name(self.name))))"
+  },
+  {
+   "atoms": 170,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 1,
+    "hard_rejected": 0,
+    "malformed_decoys": 0,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 3,
+   "language_size": 1471549971492996287134550,
+   "repo": "pypa/packaging",
+   "sha": "fe8f0bb99c41",
+   "source": "src/packaging/requirements.py",
+   "term": "parsed.url or None"
+  },
+  {
+   "atoms": 186,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 7,
+    "hard_rejected": 0,
+    "malformed_decoys": 2,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 3,
+   "language_size": 3020421792229003292381766,
+   "repo": "pypa/packaging",
+   "sha": "55584fb5ca32",
+   "source": "src/packaging/_parser.py",
+   "term": "_parse_full_marker(Tokenizer(source, rules=DEFAULT_RULES))"
+  },
+  {
+   "atoms": 166,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 4,
+    "hard_rejected": 0,
+    "malformed_decoys": 0,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 3,
+   "language_size": 1216493689943168610848026,
+   "repo": "pallets/itsdangerous",
+   "sha": "7f4dcf83a07b",
+   "source": "src/itsdangerous/signer.py",
+   "term": "hashlib.sha1(string)"
+  },
+  {
+   "atoms": 201,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 2,
+    "hard_rejected": 0,
+    "malformed_decoys": 0,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 1,
+   "language_size": 323811,
+   "repo": "hukkin/tomli",
+   "sha": "1e6e869aa9db",
+   "source": "src/tomli/_parser.py",
+   "term": "MAX_INLINE_NESTING"
+  },
+  {
+   "atoms": 212,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 4,
+    "hard_rejected": 0,
+    "malformed_decoys": 1,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 4,
+   "language_size": 591315808928330686038462029792917335380900640209708,
+   "repo": "hukkin/tomli",
+   "sha": "e1fdb94bc998",
+   "source": "src/tomli/_parser.py",
+   "term": "RecursionError(f'TOML key has more than the allowed {MAX_KEY_PARTS} parts')"
+  },
+  {
+   "atoms": 170,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 6,
+    "hard_rejected": 0,
+    "malformed_decoys": 0,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 3,
+   "language_size": 1471549971492996287134550,
+   "repo": "hukkin/tomli",
+   "sha": "9eb2125ef490",
+   "source": "src/tomli/_re.py",
+   "term": "re.compile(_TIME_RE_STR, flags=re.VERBOSE)"
+  },
+  {
+   "atoms": 221,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 2,
+    "hard_rejected": 0,
+    "malformed_decoys": 0,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 2,
+   "language_size": 1224112924931,
+   "repo": "hukkin/tomli",
+   "sha": "12314bde5b89",
+   "source": "src/tomli/_parser.py",
+   "term": "escape_id == '\\\\x'"
+  },
+  {
+   "atoms": 223,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 4,
+    "hard_rejected": 0,
+    "malformed_decoys": 0,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 3,
+   "language_size": 12882963507198156465103657,
+   "repo": "hukkin/tomli",
+   "sha": "2a2aa62f1bc7",
+   "source": "src/tomli/_parser.py",
+   "term": "src.startswith('}', pos)"
+  },
+  {
+   "atoms": 225,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 10,
+    "hard_rejected": 0,
+    "malformed_decoys": 1,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 5,
+   "language_size": 18765010995751188157112273600297134712105059542297161450787089965725903560555240026222123024150283669175,
+   "repo": "hukkin/tomli",
+   "sha": "d1d6a8571b06",
+   "source": "src/tomli/_parser.py",
+   "term": "TOMLDecodeError(f'Found invalid character {src[pos]!r}', src, pos)"
+  },
+  {
+   "atoms": 227,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 6,
+    "hard_rejected": 0,
+    "malformed_decoys": 2,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 6,
+   "language_size": 4961641263534389274037480373658849474820583877514851342175438508486974612454644645559938710160686118606866504318319428131288017865788302995661687013255952276804300411922275953923757111642549713524806849123253,
+   "repo": "hukkin/tomli",
+   "sha": "4e245a4bbbef",
+   "source": "src/tomli/_parser.py",
+   "term": "TypeError(f\"Expected str object, not '{type(__s).__qualname__}'\")"
+  },
+  {
+   "atoms": 209,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 8,
+    "hard_rejected": 0,
+    "malformed_decoys": 1,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 3,
+   "language_size": 7671451446882350438275415,
+   "repo": "hukkin/tomli",
+   "sha": "794c8e50d676",
+   "source": "src/tomli/_parser.py",
+   "term": "isinstance(float_value, (dict, list))"
+  },
+  {
+   "atoms": 210,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 2,
+    "hard_rejected": 0,
+    "malformed_decoys": 0,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 3,
+   "language_size": 7969878864332629909311150,
+   "repo": "hukkin/tomli",
+   "sha": "8b962e13490a",
+   "source": "src/tomli/_parser.py",
+   "term": "__fp.read()"
+  },
+  {
+   "atoms": 152,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 1,
+    "hard_rejected": 0,
+    "malformed_decoys": 0,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 2,
+   "language_size": 274203263528,
+   "repo": "hukkin/tomli",
+   "sha": "96dfe2cef79e",
+   "source": "tomli/__init__.py",
+   "term": "TOMLDecodeError.__module__"
+  },
+  {
+   "atoms": 222,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 10,
+    "hard_rejected": 0,
+    "malformed_decoys": 1,
+    "malformed_rejected": 1,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 5,
+   "language_size": 12215400281928963153712265786117375513807049923201066521523015759876500322488893186107814140947402587138,
+   "repo": "hukkin/tomli",
+   "sha": "31c85a18468a",
+   "source": "tomli/_parser.py",
+   "term": "suffixed_err(src, pos, f'Found invalid character {src[pos]!r}')"
+  },
+  {
+   "atoms": 153,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 0,
+    "hard_rejected": 0,
+    "malformed_decoys": 0,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 1,
+   "language_size": 187731,
+   "repo": "hukkin/tomli",
+   "sha": "9af551b578d0",
+   "source": "tomli/__init__.py",
+   "term": "\"A lil' TOML parser.\""
+  },
+  {
+   "atoms": 241,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 12,
+    "hard_rejected": 0,
+    "malformed_decoys": 0,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 5,
+   "language_size": 168865642833090372693070732954395180538011313024662058440245241894333194498741658277970281999518424655271,
+   "repo": "hukkin/tomli",
+   "sha": "9655d3300432",
+   "source": "tomli/_parser.py",
+   "term": "state.flags.is_(key, Flags.EXPLICIT_NEST) or state.flags.is_(key, Flags.FROZEN)"
+  },
+  {
+   "atoms": 224,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 8,
+    "hard_rejected": 0,
+    "malformed_decoys": 2,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 7,
+   "language_size": 2118597936698483763725057206505486979781552973218732689173588497851921844491692150268190791136589344935685209456064142934655865141502543073149804394184705200774551973719867828487891753805139275618064444411680,
+   "repo": "hukkin/tomli",
+   "sha": "67ec7d10528b",
+   "source": "tomli/_parser.py",
+   "term": "TOMLDecodeError(suffix_location(state, f'''Can not declare \"{'.'.join(key)}\" twice'''))"
+  },
+  {
+   "atoms": 201,
+   "cost_checks": 11520,
+   "decoy": {
+    "hard_decoys": 5,
+    "hard_rejected": 0,
+    "malformed_decoys": 0,
+    "malformed_rejected": 0,
+    "pruner_rejects_the_true_term": false
+   },
+   "depth": 4,
+   "language_size": 252235795508860157399639870295764425498639694802351,
+   "repo": "hukkin/tomli",
+   "sha": "5ab9ec926d9d",
+   "source": "tomli/_parser.py",
+   "term": "Callable[[str], Any]"
+  }
+ ],
+ "schema": "BRAIN_WHAT_THE_LANGUAGE_COSTS_TO_CHECK_V1",
+ "test_suite_runs": 0,
+ "timed_checks_total": 1002240
+}
