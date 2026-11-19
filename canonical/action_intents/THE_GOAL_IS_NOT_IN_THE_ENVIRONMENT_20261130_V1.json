@@ -175,7 +175,7 @@
  ],
  "real_outcome": "That the machine is learned once and stays exact (229 of 231 decided at a depth never measured, 0 errors) while the goal is only ever identified up to a behaviour: 353 behaviours, 79 statements for one goal, four intentions indistinguishable on every reachable run of one machine and separated on 32 of 196 runs of the next. Asking is already optimal; the ceiling is the environment's reach.",
  "recursive_obs": {
-  "canonical_base_commit": "5a21116bc4cad6a0960c47d2e717dbc36124845d",
+  "canonical_base_commit": "f2b32fe3874d0c64c25bdec7900fa3b667538696",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "handing the goal's relation to the agent",
@@ -454,7 +454,7 @@
      "route": "SEPARATE_THE_ENVIRONMENT_FROM_THE_GOAL_AND_PRICE_THE_GOAL_IN_JUDGMENTS"
     }
    ],
-   "checked_at_utc": "2026-11-19T02:24:40Z",
+   "checked_at_utc": "2026-11-19T02:25:57Z",
    "comparison_dimensions": [
     "CORRECTNESS",
     "CAPABILITY_STRENGTH",
@@ -494,7 +494,7 @@
    "selected_route": "SEPARATE_THE_ENVIRONMENT_FROM_THE_GOAL_AND_PRICE_THE_GOAL_IN_JUDGMENTS",
    "selected_route_preflight": {
     "all_required_dependencies_ready": true,
-    "checked_at_utc": "2026-11-19T02:24:40Z",
+    "checked_at_utc": "2026-11-19T02:25:57Z",
     "execution_dependencies": [
      {
       "dependency": "local Python 3.11 runtime with pytest",
