@@ -115,7 +115,7 @@
    "hypotheses": 17955,
    "standard": 2,
    "widened": 1,
-   "widened_text": "created_once[probe_new_content] \u2227 final:count[probe_new_content]==1"
+   "widened_text": "created_once[probe_new_content] ∧ final:count[probe_new_content]==1"
   },
   "honest_cost": {
    "behaviours_standard": 429,
@@ -183,6 +183,7 @@
  "next_step": "Move from a state the experimenter chose to a state a repository is in. Take one real repository task judged by its own tests; the pre-state is the working tree as it is, including uncommitted changes and a failed prior edit, and the prefix that reaches it is git stash/apply or the reflog, executed and not simulated. Prediction: at least one pair of goal statements that no clean-checkout run can separate becomes separable by a run beginning from a dirty tree, at a price of at most three real actions and zero questions. Falsifier: if the clean-checkout suite alone separates every residual pair on the first real repo, this law is local to file-and-archive machines and must be withdrawn; a separation obtained only by the tool refusing to run counts as nothing.",
  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
  "prior_work_reused": [
+  "canonical/tools/the_precondition_is_not_in_the_trace_v1.py (the applicability side of the same object; 10 real actions, 160 real states)",
   "canonical/tools/instant_learning_in_a_new_environment_v1.py (machines, atoms, execute, PROBE_*)",
   "canonical/tools/the_goal_is_a_relation_over_the_run_v1.py (traces_for, run_terms, the two statements)",
   "canonical/tools/the_goal_is_a_discriminator_v1.py (Term)",
@@ -233,7 +234,8 @@
     "canonical/tools/breadth_buys_what_repetition_cannot_v1.py (Analysis, union_terms, judge_mask)",
     "canonical/tools/the_goal_is_a_relation_over_the_run_v1.py (traces_for, run_terms)",
     "canonical/tools/the_vocabulary_is_the_artifact_v1.py (the machines and their readers)",
-    "canonical/verification/BREADTH_BUYS_WHAT_REPETITION_CANNOT_20261201_V1.json (withdrawn here)"
+    "canonical/verification/BREADTH_BUYS_WHAT_REPETITION_CANNOT_20261201_V1.json (withdrawn here)",
+    "canonical/tools/the_precondition_is_not_in_the_trace_v1.py (preconditions of real actions; reused as the independent measurement of the same conditional from the applicability side)"
    ],
    "external_existing_routes_checked": [
     "state-machine preconditions (QuickCheck/PropEr): a command's meaning is per state, which is the part the atom model lacks",

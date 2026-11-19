@@ -168,6 +168,15 @@ out to be a convention. What is now measured is the direction of the next price:
 meaning. It has a meaning **per pre-state**, and a suite that fixes the pre-state has thrown that meaning
 away before it starts.
 
+The tree has already measured the other half of this, in a round merged while this one was being
+written: `the_precondition_is_not_in_the_trace_v1` shows, on a real machine with real `git`/`tar`/`gzip`/
+`patch` and the programs' own exit statuses as oracle, that successes identify 0 of 10 actions' exact
+preconditions and that for 3 of them the sensor vocabulary cannot express the precondition at all. That
+round prices **where an action applies**. This round prices **what a statement about a run means when the
+run is allowed to start anywhere** — the two are the same object seen from two sides: an action is a
+conditional, and the condition is a set of pre-states, so a suite that fixes one pre-state has fixed the
+only argument the conditional has.
+
 The classical mechanism for exactly this is preconditions — QuickCheck's and PropEr's state machines require
 each command to declare the states in which it is legal, precisely because a command's effect is a function
 of the state it is applied to. Our atom model has `Atom(ident, steps)` and no precondition. That is the part
