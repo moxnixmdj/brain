@@ -1818,7 +1818,7 @@ def _make_computer_use_victim(
         "    os.rmdir(tmpdir)",
         "    return result.returncode",
     ]
-    return "\\n".join(lines) + "\\n"
+    return chr(10).join(lines) + chr(10)
 
 
 def _make_computer_use_victim_pair(
@@ -1836,7 +1836,7 @@ def _make_computer_use_victim_pair(
     Returns (before_source, after_source, probe_points).
     """
     before = _make_computer_use_victim(
-        command_template, "'decoy.txt'", src_param=src_param,
+        command_template, "decoy.txt", src_param=src_param,
     )
     after = _make_computer_use_victim(
         command_template, src_param, src_param=src_param,
@@ -1884,28 +1884,74 @@ def run_computer_use_demo(
     input_file = engine.environment_root / "in.txt"
     input_file.write_bytes(b"hello\n")
 
-    # ADMIT victims: use the proven Python lesson (return hardcoded -> return parameter).
-    # Computer-use tasks teach the skill; admission validates it on held-out Python
-    # programs. One demonstration buys a hypothesis; admission buys permanence.
+    src_param = "src"
+
+    # ADMIT victims: use computer-use victims (shell commands wrapped as Python
+    # functions) so the admission gate validates the actual computer-use skill,
+    # not an unrelated Python boundary lesson.
+    # victims[0] defines the lesson (before/after pair the rule is induced from).
+    # victims[1] is an unseen defective -> must be REPAIRED.
+    # victims[2] is already correct -> must be PRESERVED.
+    #
+    # NOTE: lesson_after must use `src` as a Python variable (unquoted), not
+    # `'src'` as a string literal. _make_computer_use_victim cannot generate
+    # unquoted variable references, so we write lesson_after manually.
+    lesson_before = _make_computer_use_victim(
+        template, "decoy.txt", src_param=src_param,
+    )
+    lesson_after = (
+        "def process(" + src_param + "):" + chr(10) +
+        "    import subprocess, tempfile, os" + chr(10) +
+        "    tmpdir = tempfile.mkdtemp()" + chr(10) +
+        "    with open(os.path.join(tmpdir, " + src_param + "), 'w') as f:" + chr(10) +
+        "        f.write('hello\\n')" + chr(10) +
+        "    dst = os.path.join(tmpdir, 'out.dat')" + chr(10) +
+        "    result = subprocess.run(['cp', " + src_param + ", dst], cwd=tmpdir, capture_output=True)" + chr(10) +
+        "    for name in os.listdir(tmpdir):" + chr(10) +
+        "        os.unlink(os.path.join(tmpdir, name))" + chr(10) +
+        "    os.rmdir(tmpdir)" + chr(10) +
+        "    return result.returncode" + chr(10)
+    )
+    unseen_defective_before = _make_computer_use_victim(
+        template, "wrong_source.txt", src_param=src_param,
+    )
+    # already_correct: uses a file that always exists (/etc/hostname) so the
+    # command succeeds on every probe; rule fires on 'decoy.txt' -> src, and
+    # after repair behavior is unchanged -> PRESERVED.
+    already_correct_before = (
+        "def process(" + src_param + "):" + chr(10) +
+        "    import subprocess, tempfile, os" + chr(10) +
+        "    tmpdir = tempfile.mkdtemp()" + chr(10) +
+        "    with open(os.path.join(tmpdir, " + src_param + "), 'w') as f:" + chr(10) +
+        "        f.write('hello\\n')" + chr(10) +
+        "    dst = os.path.join(tmpdir, 'out.dat')" + chr(10) +
+        "    result = subprocess.run(['cp', '/etc/hostname', 'out.dat'], cwd=tmpdir, capture_output=True)" + chr(10) +
+        "    for name in os.listdir(tmpdir):" + chr(10) +
+        "        os.unlink(os.path.join(tmpdir, name))" + chr(10) +
+        "    os.rmdir(tmpdir)" + chr(10) +
+        "    return result.returncode" + chr(10)
+    )
     victims = [
         {
             "name": "lesson_example",
-            "before": "def process(src):\n    return 'decoy.txt'\n",
-            "after": "def process(src):\n    return src\n",
+            "before": lesson_before,
+            "after": lesson_after,
             "language": "python",
             "error_class": "boundary",
+            "probes": ("in.txt", "data.txt", "sample.txt"),
         },
         {
             "name": "unseen_defective",
-            "before": "def process(src):\n    return 'wrong_source.txt'\n",
-            "after": "def process(src):\n    return src\n",
+            "before": unseen_defective_before,
+            "after": lesson_after,
             "language": "python",
             "error_class": "boundary",
+            "probes": ("in.txt", "data.txt", "sample.txt"),
         },
         {
             "name": "already_correct",
-            "before": "def process(src):\n    return 'decoy.txt' if False else src\n",
-            "after": "def process(src):\n    return src\n",
+            "before": already_correct_before,
+            "after": lesson_after,
             "language": "python",
             "error_class": "boundary",
             "probes": ("in.txt", "data.txt", "sample.txt"),
@@ -1916,6 +1962,7 @@ def run_computer_use_demo(
     right_cmd = template.replace("{src}", "in.txt").replace("{dst}", "out.dat")
     # Wrong actions must FAIL to create credit/counterfactual separation.
     # Use a nonexistent source file so the command fails (rc != 0).
+    wrong_cmd = template.replace("{src}", "nonexistent.txt").replace("{dst}", "out.dat")
     wrong_cmd = template.replace("{src}", "nonexistent.txt").replace("{dst}", "out.dat")
 
     report = engine.run(
