@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 567,
+  "knowledge_documents": 568,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 7158,
+  "research_index_records": 7160,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 452,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "f8c31ae197354786d814d848135d4699d7391e9162589dbb7e8714cd4cab9d87"
+  "value": "00d46700612533f40618cad4b498619041360e98a06cc153b35f612439794bdc"
  },
  "engines": [
   {
@@ -48791,6 +48791,83 @@
     "ideas",
     "not",
     "programs"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 11809,
+   "headings": [
+    "Coverage is the bottleneck, not hypotheses",
+    "0. The open thread this closes",
+    "1. The schedule in the question decides almost nothing",
+    "2. What actually removes the survivors: successes, not refusals",
+    "3. The three that stay undecided, each for a measured reason — and never wrong",
+    "4. Why this is not the combinatorics the certificate feared",
+    "5. The single bottleneck, restated at the layer it actually lives",
+    "6. What is real, what is not",
+    "7. Next step, pre-registered",
+    "Sources"
+   ],
+   "kind": "DOCUMENT",
+   "path": "COVERAGE_IS_THE_BOTTLENECK_20261119_V1.md",
+   "sha256": "112bd396162d0c8edf24e9f918d7b3beb56beab5fd48edcf455aa5621c31105c",
+   "summary": "*Round dated 2026-11-19. Receipt: `canonical/verification/COVERAGE_IS_THE_BOTTLENECK_NOT_HYPOTHESES_20261119_V1.json`. Tool: `canonical/tools/coverage_is_the_bottleneck_not_hypotheses_v1.py`. Tests: 11, all green. Nine real actions, 36 real states, 17 facts, 486 measured executions, 4.6 s. No model, no parameters, no network.*",
+   "terms": {
+    "1.000": 7,
+    "10": 9,
+    "12": 6,
+    "120": 6,
+    "17": 7,
+    "24": 5,
+    "608": 5,
+    "action": 12,
+    "actions": 6,
+    "agent": 5,
+    "budget": 5,
+    "cannot": 5,
+    "check": 5,
+    "column": 5,
+    "coverage": 13,
+    "each": 5,
+    "every": 12,
+    "exact": 6,
+    "executions": 9,
+    "fact": 14,
+    "facts": 16,
+    "held-out": 9,
+    "hypothesis": 5,
+    "identification": 6,
+    "measured": 8,
+    "must": 10,
+    "never": 6,
+    "nine": 8,
+    "no": 7,
+    "not": 29,
+    "nothing": 6,
+    "one": 21,
+    "only": 5,
+    "per": 6,
+    "real": 9,
+    "refusal": 6,
+    "refusals": 5,
+    "round": 10,
+    "rule": 8,
+    "schedule": 5,
+    "set": 5,
+    "so": 9,
+    "soundness": 5,
+    "state": 12,
+    "states": 12,
+    "success": 9,
+    "survivors": 9,
+    "undecided": 14
+   },
+   "title": "Coverage is the bottleneck, not hypotheses",
+   "title_terms": [
+    "bottleneck",
+    "coverage",
+    "hypotheses",
+    "not"
    ]
   },
   {
@@ -89208,10 +89285,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1369,
+  "included_source_count": 1370,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "e1a84fe504f8eafdd6c5a2eaf5c5edac0dcad371fa7817e8cb891c117fd84451"
+  "source_tree_digest": "473277500425d813f6a0e1c29ddb824e1ee754a8bf5787a6979e315ce8499e70"
  },
  "research_index": [
   {
@@ -165841,6 +165918,25 @@
     "theorem": 1,
     "v1": 1,
     "verification": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "2026-11-19",
+   "id": "research:canonical/verification/COVERAGE_IS_THE_BOTTLENECK_NOT_HYPOTHESES_20261119_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/COVERAGE_IS_THE_BOTTLENECK_NOT_HYPOTHESES_20261119_V1.json",
+   "schema": "BRAIN_COVERAGE_IS_THE_BOTTLENECK_NOT_HYPOTHESES_V1",
+   "sha256": "0c0fcc7a832daa60114c181d1a3090aff2a68e825a5067479717c4082ac9b095",
+   "status": "",
+   "terms": {
+    "20261119": 1,
+    "bottleneck": 1,
+    "coverage": 1,
+    "hypotheses": 1,
+    "not": 1,
+    "v1": 1
    }
   },
   {
@@ -245203,6 +245299,51 @@
     "trace": 2,
     "v1": 2,
     "verified": 3
+   }
+  },
+  {
+   "action_id": "COVERAGE_IS_THE_BOTTLENECK_20261119_V1",
+   "capability": false,
+   "date": "2026-11-19",
+   "id": "research:canonical/action_intents/COVERAGE_IS_THE_BOTTLENECK_20261119_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/COVERAGE_IS_THE_BOTTLENECK_20261119_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "cbfd0e085131df706c4851a9736851cc739c4fe16714d6aa12b0fb2baeda9579",
+   "status": "PROPOSED__PRODUCER_MEASURED__6_OF_9_EXACT_3_ABSTAIN_0_WRONG__INDEPENDENT_VERIFIC",
+   "terms": {
+    "action": 2,
+    "agent": 2,
+    "any": 2,
+    "both": 2,
+    "budget": 2,
+    "cannot": 2,
+    "check": 2,
+    "choosing": 2,
+    "column": 2,
+    "confidently": 2,
+    "coverage": 11,
+    "disagrees": 2,
+    "exploration": 2,
+    "facts": 2,
+    "first": 2,
+    "hypotheses": 2,
+    "know": 2,
+    "maximally": 2,
+    "must": 2,
+    "necessary": 2,
+    "needs": 2,
+    "next": 2,
+    "not": 2,
+    "one": 2,
+    "out": 2,
+    "outcome": 2,
+    "own": 2,
+    "parameters": 2,
+    "rejected": 2,
+    "rule": 2,
+    "set": 2,
+    "soundness": 6
    }
   },
   {
