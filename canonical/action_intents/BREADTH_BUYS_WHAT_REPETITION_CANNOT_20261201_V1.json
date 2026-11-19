@@ -1,0 +1,690 @@
+{
+ "action_id": "BREADTH_BUYS_WHAT_REPETITION_CANNOT_20261201_V1",
+ "action_intent_id": "BREADTH_BUYS_WHAT_REPETITION_CANNOT_20261201_V1",
+ "action_kind": "REAL_CAPABILITY_ACQUISITION",
+ "action_summary": "Prices breadth. One grammar over a tarball, a filesystem and a SQLite database -- 244 terms, 29 890 hypotheses, 555 executed runs -- gives 622 behaviours; the user's goal has 4 minimal statements on the richest single machine, 2 after a second environment, and still 2 after a third, which removes nothing. Only 57.1 % of behaviours are pinned by a unique minimal statement. The residual is log2(class) questions of the user and zero runs. It also retracts the previous round's 79: 75 of them were redundant conjunctions, and the goal's minimal class is 4.",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "earlier_routes_exhausted_reason": "Refused by measurement, in order: hand-written vocabulary, relations over the reader, a goal handed in, the coarsest sufficient statistic, a free-running refinement loop, a supplied predicate called the goal, and now a syntactic count of statements -- retracted inside the receipt that replaces it.",
+  "incremental_spend_usd": 0,
+  "independent_verification_completed": false,
+  "independent_verification_note": "Producer-run sandbox only. Every number is a receipt row: seven subsets, 622 behaviours, the goal's class 4 -> 2 -> 2, the residual's two sentences, and the retraction arithmetic.",
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md",
+   "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+  "progress_evidence_paths": [
+   "canonical/verification/BREADTH_BUYS_WHAT_REPETITION_CANNOT_20261201_V1.json",
+   "BREADTH_BUYS_WHAT_REPETITION_CANNOT_20261201_V1.md",
+   "canonical/tools/breadth_buys_what_repetition_cannot_v1.py",
+   "canonical/tests/test_breadth_buys_what_repetition_cannot_v1.py"
+  ],
+  "route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+  "scope_complete_discharge": false,
+  "terminal_achieved": false
+ },
+ "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The residual class, and the fact that only language closes it. One grammar over three machines (244 terms, 29 890 hypotheses, 555 executed runs) gives 622 behaviours; the user's goal has 4 minimal statements on the richest single machine, 2 after a second environment, and still 2 after a third -- which removes nothing. Only 57.1 % of behaviours are pinned by a unique minimal statement (mean class 2.09, largest 38). The remainder costs log2(class) questions of the user and no run of any machine can pay one.",
+ "canonical_base_commit": "c79206b161462ebdb890f29bce15b2f4e5e8ad09",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "The residual class, and the fact that only language closes it. One grammar over three machines (244 terms, 29 890 hypotheses, 555 executed runs) gives 622 behaviours; the user's goal has 4 minimal statements on the richest single machine, 2 after a second environment, and still 2 after a third -- which removes nothing. Only 57.1 % of behaviours are pinned by a unique minimal statement (mean class 2.09, largest 38). The remainder costs log2(class) questions of the user and no run of any machine can pay one.",
+ "date": "2026-12-01",
+ "expected_parent_change": "Breadth buys what repetition cannot and then stops. Adding an environment halves the goal's class (4 -> 2) and adds 270 behaviours; adding the third removes nothing. The residual class is counted for every behaviour, not only the goal: 57.1 % of 622 behaviours are pinned by a unique minimal statement, the mean carries 2.09 and the worst 38. The remainder is a price in words -- log2(class) questions -- and the environment can never pay it.",
+ "expected_parent_frontier_change": "Breadth buys what repetition cannot and then stops. Adding an environment halves the goal's class (4 -> 2) and adds 270 behaviours; adding the third removes nothing. The residual class is counted for every behaviour, not only the goal: 57.1 % of 622 behaviours are pinned by a unique minimal statement, the mean carries 2.09 and the worst 38. The remainder is a price in words -- log2(class) questions -- and the environment can never pay it.",
+ "explicit_user_authorization": [
+  "Why can't we just give our model the most advanced coding actions, let it experience them once, and have it learn them? Can't we do this now?",
+  "we are building our own model. never reach for another model or use it and call it ours",
+  "every bit of our weights must be calculated, not a knowledge house",
+  "the best part is no part",
+  "you must think from first principles for everything",
+  "You should kill all the bad and dumb ideas before you waste time implementing them.",
+  "NEVER BUILD BEFORE REASRCHING EXHAUSTION IS HAPPENED",
+  "maximize your web use",
+  "What is the single bottleneck that, if fixed, would unlock the most capability?",
+  "all the tests are not on synthetic data but are on the hardest open tests",
+  "only our agent/system may run them; integrity 100% real",
+  "the honest truth is that we keep testing on bugs we already know work",
+  "Work in branch, merge only when complete (fastest)",
+  "Merge once, not 10 times."
+ ],
+ "falsification_condition": "FALSIFIED if the union does not have strictly more behaviours than every single machine; if the union's minimal class is not strictly smaller than the richest single machine's; if the residual is reported as one statement; if the third machine is claimed to remove something; if a class is counted syntactically rather than by behaviour; if any count in the markdown disagrees with the receipt.",
+ "generic_repair_from_single_probe": false,
+ "governance_change": false,
+ "highest_leverage_now": true,
+ "incremental_spend_usd": 0,
+ "intentional_route_race": false,
+ "load_bearing_primary": {
+  "constructive_gap_for_open_obligation_ids": [
+   "CODING_TB4_GE_66_4"
+  ],
+  "expected_obligation_discharge_lcb": 0,
+  "expected_obligation_unlock_lcb": "1/50",
+  "interpretation": "Speculative forecast only. The round computes the observable and prices the goal; no truth obligation is discharged.",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "1/2",
+  "wall_clock_cost_ub": 1
+ },
+ "measured_effect": {
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "behaviours_with_a_unique_statement": {
+   "FILESYSTEM": 82,
+   "SQLITE": 29,
+   "TARBALL": 190,
+   "union": 354
+  },
+  "correction": {
+   "minimal_class": 4,
+   "previous_round_reported": 79,
+   "redundant_conjunctions": 75
+  },
+  "cost": {
+   "model_calls": 0,
+   "network_calls_at_run_time": 0,
+   "parameters_stored": 0,
+   "seconds": 108.8
+  },
+  "declared_acceptance": {
+   "B1": "MET (622 > 353)",
+   "B2": "MET (4 -> 2)",
+   "B3": "MET (residual 2)",
+   "B4": "MET (2 removed, then 0)",
+   "B5": "MET (1 question, 0 runs)",
+   "B6": "MET"
+  },
+  "goal_class": {
+   "all_three": 2,
+   "best_pair": 2,
+   "one_machine_TARBALL": 4
+  },
+  "largest_class_union": 38,
+  "machines": [
+   "TARBALL",
+   "FILESYSTEM",
+   "SQLITE"
+  ],
+  "marginal": {
+   "second_machine_removed": 2,
+   "third_machine_removed": 0
+  },
+  "markdown": "BREADTH_BUYS_WHAT_REPETITION_CANNOT_20261201_V1.md",
+  "mean_class_union": 2.09,
+  "receipt": "canonical/verification/BREADTH_BUYS_WHAT_REPETITION_CANNOT_20261201_V1.json",
+  "residual": {
+   "questions_of_the_user": 1.0,
+   "runs_that_can_pay_it": 0,
+   "statements": [
+    "created_once[probe_new_content]",
+    "monotone[probe_new_content] and final:count[probe_new_content]==1"
+   ]
+  },
+  "resolving_power": {
+   "FILESYSTEM": 129,
+   "SQLITE": 78,
+   "TARBALL": 353,
+   "union": 622
+  },
+  "scale": {
+   "hypotheses": 29890,
+   "runs": 555,
+   "subsets": 7,
+   "terms": 244
+  },
+  "share_unique_union": 0.571
+ },
+ "next_step": "Build the intake and price it: put the residual's two sentences to a user, and measure (i) whether one sentence collapses the class in log2(class) questions or fewer, and (ii) whether the chosen sentence predicts verdicts on a fourth environment it was never fitted on. Pre-registered: more than log2(class) questions, or a chosen sentence that mispredicts out of sample, kills the claim that the residual is exactly a matter of words.",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "prior_work_reused": [
+  "canonical/tools/the_goal_is_a_relation_over_the_run_v1.py (run_terms grammar, traces_for)",
+  "canonical/tools/the_goal_is_a_discriminator_v1.py (Term)",
+  "canonical/tools/the_goal_is_a_quotient_of_the_trace_v1.py (portable_judge)",
+  "canonical/tools/the_goal_is_not_in_the_environment_v1.py (the class machinery, corrected here)",
+  "canonical/tools/the_vocabulary_is_the_artifact_v1.py (the machines)",
+  "canonical/tools/instant_learning_in_a_new_environment_v1.py (execution)",
+  "canonical/verification/THE_GOAL_IS_NOT_IN_THE_ENVIRONMENT_20261130_V1.json"
+ ],
+ "probe_specific": false,
+ "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+ "progress_evidence_paths": [
+  "canonical/verification/BREADTH_BUYS_WHAT_REPETITION_CANNOT_20261201_V1.json",
+  "BREADTH_BUYS_WHAT_REPETITION_CANNOT_20261201_V1.md",
+  "canonical/tools/breadth_buys_what_repetition_cannot_v1.py",
+  "canonical/tests/test_breadth_buys_what_repetition_cannot_v1.py"
+ ],
+ "real_outcome": "That breadth is real and finite: 622 behaviours from 555 runs, the goal's class 4 -> 2 -> 2 across three environments, the third buying nothing; that only 57.1 % of behaviours are pinned by one statement; and that the remainder is exactly log2(class) questions of the user, which no run of any machine can answer.",
+ "recursive_obs": {
+  "canonical_base_commit": "c79206b161462ebdb890f29bce15b2f4e5e8ad09",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "handing the goal's relation to the agent",
+   "breaking a tie between surviving disciminators by choosing the simplest or the first",
+   "acting when the survivors disagree about every reachable state",
+   "calling an ambiguity irreducible without rebuilding the reachable set deeper"
+  ],
+  "expected_parent_frontier_change": "Breadth buys what repetition cannot and then stops. Adding an environment halves the goal's class (4 -> 2) and adds 270 behaviours; adding the third removes nothing. The residual class is counted for every behaviour, not only the goal: 57.1 % of 622 behaviours are pinned by a unique minimal statement, the mean carries 2.09 and the worst 38. The remainder is a price in words -- log2(class) questions -- and the environment can never pay it.",
+  "expected_parent_level_state_change": "Breadth buys what repetition cannot and then stops. Adding an environment halves the goal's class (4 -> 2) and adds 270 behaviours; adding the third removes nothing. The residual class is counted for every behaviour, not only the goal: 57.1 % of 622 behaviours are pinned by a unique minimal statement, the mean carries 2.09 and the worst 38. The remainder is a price in words -- log2(class) questions -- and the environment can never pay it.",
+  "independent_verification_required": true,
+  "iteration_limit": 1,
+  "next_step": "Build the intake and price it: put the residual's two sentences to a user, and measure (i) whether one sentence collapses the class in log2(class) questions or fewer, and (ii) whether the chosen sentence predicts verdicts on a fourth environment it was never fitted on. Pre-registered: more than log2(class) questions, or a chosen sentence that mispredicts out of sample, kills the claim that the residual is exactly a matter of words.",
+  "obs_blocker": {
+   "delete_bypass_substitute_options": [
+    "delete the claim that more experience of the same machine helps: the third environment removed nothing",
+    "bypass the residual with a syntactic count: 75 of 79 were redundant, and minimality is now behavioural",
+    "substitute a bigger learner for the missing channel: the residual is log2(class) bits of what the user meant"
+   ],
+   "intrinsic_or_path_specific": "intrinsic: which sentences an environment can separate is a fact about the environment's reach, so no learner and no dial closes the residual",
+   "surviving_causal_blocker": "The residual class, and the fact that only language closes it. One grammar over three machines (244 terms, 29 890 hypotheses, 555 executed runs) gives 622 behaviours; the user's goal has 4 minimal statements on the richest single machine, 2 after a second environment, and still 2 after a third -- which removes nothing. Only 57.1 % of behaviours are pinned by a unique minimal statement (mean class 2.09, largest 38). The remainder costs log2(class) questions of the user and no run of any machine can pay one."
+  },
+  "obs_capability": {
+   "capability_work_deleted": [
+    "a second grammar or a second harness",
+    "a syntactic count of statements (behavioural minimality replaces it)",
+    "any claim that repetition of one machine is breadth"
+   ],
+   "existing_inherited_routes_checked": [
+    "canonical/tools/the_goal_is_not_in_the_environment_v1.py (the class machinery, corrected here)",
+    "canonical/tools/the_goal_is_a_relation_over_the_run_v1.py (the grammar)",
+    "canonical/tools/the_experiment_that_identifies_v1.py (chosen probes over a behaviour table)",
+    "canonical/tools/the_goal_is_a_quotient_of_the_trace_v1.py (the statistic and its table)"
+   ],
+   "external_existing_routes_checked": [
+    "adaptive distinguishing sequences and conformance testing (W-method, Wp, L# with ADS): experiments that separate hypotheses, and the ceiling they leave",
+    "characterization sets and state identification: identification up to behavioural equivalence",
+    "query by committee and label-versus-comparison results (PMLR v180): the question form sets the price",
+    "error-aware active automata learning (2026) and incremental fingerprinting (arXiv 2601.21680)"
+   ],
+   "surviving_gap": "The intake for the user's sentence. The residual is log2(class) bits of what the user meant, and there is no channel for it: verdicts are exhausted, so the next capability is one question per bit, asked after the world is exhausted and never before."
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "a count of consistent statements as a count of intentions (75 of 79 were redundant)",
+    "a deeper run set of one machine as breadth (repetition saturates at its resolving power)",
+    "the goal alone as the unit (the class is counted for all 622 behaviours)"
+   ],
+   "real_outcome": "Breadth is real and finite: 4 -> 2 -> 2 across three environments with the third buying nothing; 57.1 % of behaviours pinned by one statement; the remainder log2(class) questions of the user.",
+   "surviving_necessity": "no model of the goal is needed where the class is a count over bitmasks; and no amount of experience removes a residual that the world cannot exhibit"
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "The grammar, the machines and the class machinery are earlier rounds' work, reused unchanged; the new objects are a per-behaviour distribution and its price in words.",
+   "downstream_work_to_delete_or_supersede": "Any count of statements that does not exclude redundant conjunctions, and any claim that a deeper run set of one machine is breadth.",
+   "fresh_reuse_plan": "Recompute from the receipt's two commands; everything is local and public."
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": "Terms are evaluated once per machine and combined by AND, so all seven subsets are derived from one evaluation; no second harness, no second grammar.",
+   "search_stop_decision": "Stop at minimal statements per behaviour, not at consistent ones: the syntactic count flattered the argument by a factor of twenty and is now excluded by construction."
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "efficiency_mechanism": "One evaluation of 244 terms per machine, combined by AND into 29 890 hypotheses over 555 runs, then class counts by bitmask grouping: 108.8 s for seven subsets and 622 behaviours.",
+   "generality_mechanism": "Nothing is specific to these machines: the class of a behaviour under a set of environments is computable wherever behaviours are boolean functions of runs.",
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "A deeper run set of one machine: saturates at its resolving power. A syntactic count: inflated by a factor of twenty. A model: refused by owner law and unnecessary for a count.",
+   "routes_ranked": [
+    "count every behaviour's minimal class under every subset and price the residual",
+    "deepen one machine",
+    "count consistent statements syntactically",
+    "train or distil something to guess the goal"
+   ]
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "oracle_paths": [
+    "canonical/verification/BREADTH_BUYS_WHAT_REPETITION_CANNOT_20261201_V1.json",
+    "canonical/tests/test_breadth_buys_what_repetition_cannot_v1.py",
+    "canonical/verification/THE_GOAL_IS_NOT_IN_THE_ENVIRONMENT_20261130_V1.json"
+   ],
+   "synthetic_verification_necessity": "The suite re-executes the round and pins the seven subsets, the class distribution, the residual texts and the retraction arithmetic; the judges remain this tool's own predicates, stated as the supply."
+  },
+  "real_outcome": "That breadth is real and finite: 622 behaviours from 555 runs, the goal's class 4 -> 2 -> 2 across three environments, the third buying nothing; that only 57.1 % of behaviours are pinned by one statement; and that the remainder is exactly log2(class) questions of the user, which no run of any machine can answer.",
+  "required_capability": "counterfactual intervention over a live execution trace, exact-fit predicate selection from the logged scope, and an oracle that decides without a model",
+  "route_frontier": {
+   "challenger_routes": [
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "1 verified repair; 13 of 30 rows addressed; 0 accusations",
+      "CORRECTNESS": "the corpus's own suite, whole file",
+      "INCREMENTAL_COST": "0 parameters, 0 model calls, ~10 us per candidate",
+      "RELIABILITY": "superseded: the goal read off one state is empty wherever two runs end alike",
+      "VERIFIABILITY": "receipt rows, producer-run",
+      "WALL_CLOCK": "83.6 s for 30 commits"
+     },
+     "evidence": [
+      "30 real commits, 83.6 s, 0 accusations, grammar named for every exclusion, 1 row recovered by the AST finder, 1 verified repair unchanged, 1 harness failure stopped from wearing a fact's name"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_HYPOTHESIS_GRAMMAR_IS_THE_BOTTLENECK_20261122_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "READ_THE_FIX_FROM_THE_AST_AND_NAME_THE_GRAMMAR_OF_THE_POPULATION"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "3 of 40 programs",
+      "CORRECTNESS": "a class is only as good as its donor",
+      "INCREMENTAL_COST": "one class per shape",
+      "RELIABILITY": "unseen shapes stay unseen",
+      "VERIFIABILITY": "measured exactly",
+      "WALL_CLOCK": "unbounded as the corpus grows"
+     },
+     "evidence": [
+      "a taught class reaches 8 of 40 fixes, 5 only on its donor"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/WHAT_IS_LEFT_FOR_A_LESSON_TO_BUY_20261117_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "teach one more edit class per failing task"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "2 of 30 unseen programs from 3 pairs, at 1.92% precision on the pair that fires",
+      "CORRECTNESS": "the corpus's own pytest decides, as here",
+      "INCREMENTAL_COST": "40.6 us per lookup, no model, no parameters",
+      "RELIABILITY": "saturates: addressability 34.4% -> 59.7% over 24 experiences",
+      "VERIFIABILITY": "measured exactly",
+      "WALL_CLOCK": "5 minutes for the whole corpus"
+     },
+     "evidence": [
+      "0.597 addressable x 0.0192 precise ~ 1.1% of unseen decisions"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/WHAT_AN_EXPERIENCE_CAN_OWN_20261118_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "NON_DOMINATING",
+     "route": "store every verified repair and retrieve it by similarity"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "1 real commit identified at rank 0, unattended, with no diff and no name table",
+      "CORRECTNESS": "the artifact answers, so a question is either answered or refused -- never wrong",
+      "INCREMENTAL_COST": "7.69 ms per asked question, 1 bit",
+      "RELIABILITY": "superseded: the goal read off one state is empty wherever two runs end alike",
+      "VERIFIABILITY": "measured exactly",
+      "WALL_CLOCK": "121.2 s for 14 bugs"
+     },
+     "evidence": [
+      "click@1b0e19f505: human fix derived at rank 0 from the trace, 2 consistent candidates of 119 tests",
+      "5 evaluated candidates per site against the proximity pool's 32-400"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_FAILING_RUN_IS_THE_INDEX_20261118_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "INDEX_ACTIONS_BY_THE_FAILING_RUN_NOT_BY_THE_SOURCE_TEXT"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "run-level goals inferred from judgments: 0 false accepts, 5-6 questions, exact where asked",
+      "CORRECTNESS": "leave-one-run-out against the user's own judgments on executed runs",
+      "INCREMENTAL_COST": "0 parameters, 0 model calls, 18.1 s for 136 runs and ~1000 hypotheses per goal",
+      "RELIABILITY": "sound and incomplete: 1 run of 136 refused by the intersection",
+      "VERIFIABILITY": "receipt rows, producer-run, blocker hypothesis reproduced in the suite",
+      "WALL_CLOCK": "18.1 s"
+     },
+     "evidence": [
+      "136 real runs on 3 machines; 9 final states reached with opposite judgments; 0 final-state terms disagree inside a group; the final-state version space is empty on every goal holding one; the run grammar is identified in 5-6 questions at 1.00 accuracy and is 135/136 leave-one-run-out with 0 false accepts"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_GOAL_IS_A_RELATION_OVER_THE_RUN_20261127_V1.json",
+      "canonical/verification/THE_GOAL_IS_A_DISCRIMINATOR_20261126_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "INFER_A_RELATION_OVER_THE_RUN_FROM_JUDGMENTS_AND_ACT_ON_THE_INTERSECTION"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "the observable is computed and priced: 3-6 cells per goal, one statistic across three machines",
+      "CORRECTNESS": "the coarsest sufficient statistic of the reachable pool, with witnesses for every cheaper one",
+      "INCREMENTAL_COST": "0 parameters, 0 model calls, 23.7 s for 3444+ projections",
+      "RELIABILITY": "refuted by its own refinement: 0 counterexamples in 6 questions by both computable orderings, and its 208-collision headline is retracted -- 0 of those collisions is harmful",
+      "VERIFIABILITY": "receipt rows, producer-run, both declared failures pinned in the suite",
+      "WALL_CLOCK": "23.7 s"
+     },
+     "evidence": [
+      "four rungs over three machines and five goals; cells 68->55->19->5, 48->7->7->4, 32->7->7->3, 68->56->24->6; every cheaper statistic refuted with a witness pair; 0 of 3444 reading projections separate a goal about which atom ran; 208 collisions at held-out depth",
+      "the coarsest statistic is not harmed by its collisions: 675 FILESYSTEM pairs and 1765 depth-4 pairs, 0 harmful, 87/87 verdicts right"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_GOAL_IS_A_QUOTIENT_OF_THE_TRACE_20261128_V1.json",
+      "canonical/verification/THE_GOAL_IS_A_RELATION_OVER_THE_RUN_20261127_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "COMPUTE_THE_COARSEST_SUFFICIENT_STATISTIC_AND_PRICE_THE_GOAL_IN_EXPERIENCES"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "one counterexample buys the coarsest 3-cell statistic; 2 questions by cell labelling, 30 by its guarantee",
+      "CORRECTNESS": "the user's judgments on executed runs; the depth-3 table answers 87 of 87 depth-4 runs, with 0 undecided and 0 false accepts",
+      "INCREMENTAL_COST": "0 parameters, 0 model calls, one signature table per pool",
+      "RELIABILITY": "superseded: it measured a supplied predicate and called the result the goal; the supply is now visible as 79 statements with one behaviour",
+      "VERIFIABILITY": "receipt rows, producer-run, every count pinned in the suite",
+      "WALL_CLOCK": "37.4 s for three machines, four question policies and three rank diagnostics"
+     },
+     "evidence": [
+      "FILESYSTEM 675 conflations / 0 harmful; SQLITE 337 / 0; TARBALL 321 / 10",
+      "one harmful answer -> the coarsest 3-cell statistic, which had been one generator away",
+      "depth 4: 87 runs, 1765 conflations, 0 harmful, 0 false accepts, 0 undecided",
+      "cheapest-refinement and no-signal: 6 questions, 0 counterexamples, best harmful rank 130 / 136 of 321 (chance 29.3); committee ties on 311 of 321",
+      "the environment is learned exactly (229 of 231 decided, 0 errors) and the goal is not: 353 behaviours, 79 statements, a class of four intentions that splits on 32 of 196 runs"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_COUNTEREXAMPLE_IS_THE_NEXT_EXPERIMENT_20261129_V1.json",
+      "canonical/verification/THE_GOAL_IS_A_QUOTIENT_OF_THE_TRACE_20261128_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "ASK_FOR_ONE_COUNTEREXAMPLE_AND_LABEL_WHOLE_CELLS_INSTEAD_OF_HUNTING_DISAGREEMENT"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "separates the two objects the claim conflates: 353 behaviours of resolving power, 8 active judgments to reach it, 4 intentions left indistinguishable and split by the next machine",
+      "CORRECTNESS": "every number is a count over executed runs; the ceiling is re-derivable from the grammar and the traces, and the transfer is a plain evaluation elsewhere",
+      "INCREMENTAL_COST": "0 parameters, 0 model calls, one grammar pass per pool",
+      "RELIABILITY": "superseded and corrected: its 79 statements were 75 redundant conjunctions, and one machine's class is 4, not 79",
+      "VERIFIABILITY": "receipt rows, producer-run, every count pinned in the suite",
+      "WALL_CLOCK": "158.3 s for two machines, 427 runs, 12 881 hypotheses"
+     },
+     "evidence": [
+      "TARBALL: 231 runs, 11 935 hypotheses, 353 behaviours, 79 statements for the user's goal",
+      "four statements, one behaviour on all 231 runs; 32 of 196 runs separate the pair on FILESYSTEM",
+      "active 353 -> 176 -> 89 -> 29 -> 14 -> 7 -> 5 -> 2 -> 1 in 8 judgments; passive 20 behaviours at 8",
+      "registered control: depth-3 table decides 229 of 231 depth-5 runs, 0 false accepts, 0 false rejects, 2 undecided",
+      "breadth priced: 4 -> 2 -> 2 minimal statements across three machines, the third removing nothing; 57.1 % of 622 behaviours pinned by a unique statement"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_GOAL_IS_NOT_IN_THE_ENVIRONMENT_20261130_V1.json",
+      "canonical/verification/THE_COUNTEREXAMPLE_IS_THE_NEXT_EXPERIMENT_20261129_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "SEPARATE_THE_ENVIRONMENT_FROM_THE_GOAL_AND_PRICE_THE_GOAL_IN_JUDGMENTS"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "prices breadth and its saturation: 622 behaviours, the goal's class 4 -> 2 -> 2, a residual of one question of words",
+      "CORRECTNESS": "every number is a bitmask count over 555 executed runs; all seven subsets are reported, so no environment is taken on faith",
+      "INCREMENTAL_COST": "0 parameters, 0 model calls, one term evaluation per machine",
+      "RELIABILITY": "sound and self-correcting: the previous round's syntactic count is retracted inside the receipt, with the arithmetic",
+      "VERIFIABILITY": "receipt rows, producer-run, every count pinned in the suite",
+      "WALL_CLOCK": "108.8 s for three machines, 555 runs, 29 890 hypotheses and seven subsets"
+     },
+     "evidence": [
+      "244 terms, 29 890 hypotheses, 555 runs, 622 behaviours; 354 behaviours with a unique statement",
+      "the goal's minimal class: 4 on TARBALL, 2 after a second machine, 2 after the third",
+      "residual: created_once[probe_new_content] vs monotone[probe_new_content] and final:count[probe_new_content]==1 -- one question of the user, zero runs",
+      "correction: the previous round's 79 contained 75 redundant conjunctions"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/BREADTH_BUYS_WHAT_REPETITION_CANNOT_20261201_V1.json",
+      "canonical/verification/THE_GOAL_IS_NOT_IN_THE_ENVIRONMENT_20261130_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "SELECTED",
+     "route": "PRICE_THE_RESIDUAL_CLASS_OF_EVERY_GOAL_ACROSS_ENVIRONMENTS_AND_ANSWER_IT_IN_WORDS"
+    }
+   ],
+   "checked_at_utc": "2026-11-19T03:11:07Z",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "PRICE_THE_RESIDUAL_CLASS_OF_EVERY_GOAL_ACROSS_ENVIRONMENTS_AND_ANSWER_IT_IN_WORDS",
+   "max_age_hours": 2,
+   "negative_search_summary": "Refused by measurement: deepening one machine (saturates at its resolving power), a syntactic count of statements (75 of 79 redundant), a bigger learner (the residual is bits of what the user meant), and treating a second environment as unbounded progress (the third removed nothing).",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "state identification characterization set conformance testing behavioural equivalence minimal distinguishing statements"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "version space minimal hypothesis redundancy structural equivalence queries identification"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "2026 goal underspecification eliciting user intent language versus demonstration agents"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "AALpy LearnLib distinguishing sequences benchmarking identification black-box 2026"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "selected_route": "PRICE_THE_RESIDUAL_CLASS_OF_EVERY_GOAL_ACROSS_ENVIRONMENTS_AND_ANSWER_IT_IN_WORDS",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-11-19T03:11:07Z",
+    "execution_dependencies": [
+     {
+      "dependency": "local Python 3.11 runtime with pytest",
+      "evidence": [
+       "10 instrument tests pass in 110 s; 33/33 unified-model gates pass"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "real tool binaries the machines drive (sh, mv, cp, rm, sqlite3, tar)",
+      "evidence": [
+       "555 real runs across three machines, 244 terms evaluated once per machine, seven subsets analysed"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "local tempdir for one fresh reset per machine and per run",
+      "evidence": [
+       "one reset per sequence; runs deduplicated by trace; 30 sequences kept undeduplicated for the atom goal"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "STORAGE",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "max_age_hours": 2,
+    "selected_route": "PRICE_THE_RESIDUAL_CLASS_OF_EVERY_GOAL_ACROSS_ENVIRONMENTS_AND_ANSWER_IT_IN_WORDS",
+    "status": "READY"
+   },
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/tools/grammar_closed_repair_v1.py (corpus reader, space enumerator, real judge, executed_lines)",
+     "canonical/tools/solve_with_a_calibrated_judge_v1.py (certified judge, per-case clocks, containment)",
+     "canonical/verification/WHERE_THE_REFUSALS_ACTUALLY_WERE_20261116_V1.json",
+     "canonical/verification/ONE_DEMONSTRATION_LEAVES_TEN_BITS_20261116_V1.json"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "https://arxiv.org/pdf/2611.12885 (World In-Context Learning: one demonstration plus rehearsal beats a 50-demonstration trained policy; without the world the demonstration brings no benefit)",
+     "https://arxiv.org/html/2606.29537v1 (OSWorld 2.0: 20.6% binary completion, failures concentrate on hidden state)",
+     "https://arxiv.org/html/2606.31270v1 (Learning from Failure: inference-time self-improvement from failure trajectories)"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "https://github.com/jkoppel/QuixBugs (MIT; 40 buggy programs, 40 pytest files, JSON test data)",
+     "https://pypi.org/project/pytest (9.2.0, the runner every verdict goes through)"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "https://docs.python.org/3/library/ast.html (node types the closure rule enumerates)"
+    ]
+   },
+   "unresolved_plausible_dominators": []
+  },
+  "routes_considered": [
+   "TRAIN_OR_DISTIL_A_MODEL__REFUSED_BY_OWNER_LAW_AND_UNNECESSARY_HERE",
+   "ADD_A_DEEPER_RUN_SET_OF_ONE_MACHINE__SATURATES_AT_ITS_RESOLVING_POWER",
+   "COUNT_EVERY_BEHAVIOURS_CLASS_UNDER_EVERY_SUBSET_AND_PRICE_THE_RESIDUAL__SELECTED"
+  ],
+  "selected_route": "COUNT_THE_MINIMAL_STATEMENTS_OF_EACH_BEHAVIOUR_UNDER_EVERY_SUBSET_OF_THE_WORLD",
+  "selected_surviving_route": "PRICE_THE_RESIDUAL_CLASS_OF_EVERY_GOAL_ACROSS_ENVIRONMENTS_AND_ANSWER_IT_IN_WORDS",
+  "selected_surviving_route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+  "stop_condition": "Build the intake and price it: put the residual's two sentences to a user, and measure (i) whether one sentence collapses the class in log2(class) questions or fewer, and (ii) whether the chosen sentence predicts verdicts on a fourth environment it was never fitted on. Pre-registered: more than log2(class) questions, or a chosen sentence that mispredicts out of sample, kills the claim that the residual is exactly a matter of words.",
+  "why_selected_route_is_fastest_sufficient": "Because the only remaining question is whether breadth finishes the identification, and that is a count: every behaviour's minimal class under every subset of the world, with redundancy separated from intention.",
+  "why_this_is_not_another_organ": "It adds no knowledge and no model: one grammar already in the tree, evaluated once into bitmasks, and a count of minimal statements per behaviour."
+ },
+ "required_capability": "counting the class of every behaviour under every subset of the world, distinguishing redundancy from intention, and pricing the remainder in questions of the user",
+ "route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+ "route_id": "PRICE_THE_RESIDUAL_CLASS_OF_EVERY_GOAL_ACROSS_ENVIRONMENTS_AND_ANSWER_IT_IN_WORDS",
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "scope_complete_discharge": false,
+ "selected_route": "COUNT_THE_MINIMAL_STATEMENTS_OF_EACH_BEHAVIOUR_UNDER_EVERY_SUBSET_OF_THE_WORLD",
+ "selected_surviving_route": "PRICE_THE_RESIDUAL_CLASS_OF_EVERY_GOAL_ACROSS_ENVIRONMENTS_AND_ANSWER_IT_IN_WORDS",
+ "status": "PROPOSED__PRODUCER_MEASURED__BREADTH_PRICED_AND_SATURATED__RESIDUAL_ONE_QUESTION_OF_WORDS__INDEPENDENT_VERIFICATION_OPEN",
+ "stop_condition": "Build the intake and price it: put the residual's two sentences to a user, and measure (i) whether one sentence collapses the class in log2(class) questions or fewer, and (ii) whether the chosen sentence predicts verdicts on a fourth environment it was never fitted on. Pre-registered: more than log2(class) questions, or a chosen sentence that mispredicts out of sample, kills the claim that the residual is exactly a matter of words.",
+ "terminal_credit_delta": 0,
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "truth": {
+  "achieved": false,
+  "the_law_this_round_adds": "Breadth buys what repetition cannot, and then stops. Repetition saturates at a machine's resolving power; breadth halves the goal's class and adds behaviours, then saturates too, at a residual that is a property of what the environments can exhibit. That residual is a class of minimal statements and its size is a price in words: log2(class) questions the user must answer, none of which any run can answer.",
+  "what_is_false_in_the_claim": [
+   "that instant learning in new environments identifies the goal: 4 -> 2 -> 2, the third environment buys nothing",
+   "that the ambiguity is a budget: the two residual sentences differ only on runs no machine here can produce",
+   "that most goals are pinned by one sentence: 57.1 % of 622 behaviours are, the mean carries 2.09 and the worst 38",
+   "that a count of statements is a count of intentions: 75 of the previous round's 79 were redundant conjunctions",
+   "that this is coding capability: no edit is composed; this prices what an edit would be for"
+  ]
+ },
+ "user_authorized_governance_change": false,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "currentness": {
+   "accepted_families": 5,
+   "current_load_bearing_atomic_count": 36,
+   "deleted_nonnecessary_atomic_count": 2,
+   "historical_atomic_registry_count": 38,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_atomic": 38,
+   "total_families": 19,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "This measures the reach of an executed counterfactual over real commit history and finds the content of the fix outside it; it discharges no truth obligation.",
+  "target_truth_obligations": [
+   "CODING_TB4_GE_66_4"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [
+    {
+     "git_blob_sha": "aa752cadab44d7b354814507d437f4fa485aaf74",
+     "path": "canonical/verification/RECOGNITION_IS_THE_BOTTLENECK_20261121_V1.json"
+    }
+   ],
+   "decisive_question": "Before asking what the instrument can find, does it accept the human's own fix -- and if not, why not?",
+   "falsifier_id": "THE_DEMAND_MUST_ADMIT_THE_HUMAN_FIX_AND_NOT_A_CONSTANT",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "Zero generalising repairs out of thirty fresh commits is the counterexample, and it is recorded in the receipt rather than hidden.",
+   "proposal_id": "THE_ASSERTION_IS_THE_DEMAND_20261119_V1"
+  }
+ },
+ "verification": {
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "commands": [
+   "python3 canonical/tools/breadth_buys_what_repetition_cannot_v1.py --receipt canonical/verification/BREADTH_BUYS_WHAT_REPETITION_CANNOT_20261201_V1.json",
+   "python3 -m pytest canonical/tests/test_breadth_buys_what_repetition_cannot_v1.py -q"
+  ],
+  "independent_verification_completed": false,
+  "independent_verification_required": true,
+  "tests_green": 10
+ },
+ "weakens_existing_guard": false
+}
