@@ -1,0 +1,220 @@
+{
+ "schema": "BRAIN_AGREEMENT_IS_NOT_EQUIVALENCE_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "date": "2026-11-19",
+ "mode": "FIVE_REAL_MACHINES__ONE_GRAMMAR__A_PROOF_INSTEAD_OF_A_QUESTION",
+ "correction_to_the_previous_round": {
+  "what_it_said": "the residual class can only be closed by language, not by experience",
+  "what_is_true": "it cannot be closed by experience, and it does not need language either: the class contains a statement provably equivalent to the goal's own judge, so the bit is paid by a proof",
+  "why_it_matters": "a question of the user is the most expensive bit available; pricing the residual at one question overpriced it by exactly one question",
+  "what_it_got_right": "no run separates the two statements, and this round measures that this is not a shortage of evidence -- the distinguishing transition is outside the alphabet of every machine in the tree"
+ },
+ "criteria_were_declared_after_a_prototype_probe": true,
+ "which_criteria_were_already_seen": {
+  "seen_before_this_round": [
+   "K1 -- the two texts are in the previous receipt"
+  ],
+  "not_seen_before_this_round": [
+   "K2",
+   "K3",
+   "K4",
+   "K5",
+   "K6"
+  ]
+ },
+ "declared_acceptance_before_the_receipt_run": {
+  "K2": "both statements agree with the judge on every trace of all five machines",
+  "K3": "over the count envelope exactly one statement is equivalent to the judge, and the other differs on a history that is exhibited as a witness",
+  "K4": "no machine's atom adds two copies in one step, so the witness is not exhibitable at any depth",
+  "K5": "zero questions of the user are needed",
+  "K6": "the precondition count(initial)==0 holds on all five machines"
+ },
+ "the_class": {
+  "runs": 555,
+  "hypotheses": 29890,
+  "behaviours": 622,
+  "trivial_behaviours_excluded": 2,
+  "behaviours_with_a_unique_statement": 354,
+  "share_unique": 0.571,
+  "mean_class": 2.09,
+  "largest_class": 38,
+  "goal_statements_with_the_behaviour": 72,
+  "goal_minimal_statements": 2,
+  "goal_minimal_texts": [
+   "created_once[probe_new_content]",
+   "monotone[probe_new_content] \u2227 final:count[probe_new_content]==1"
+  ]
+ },
+ "pools": {
+  "TARBALL": 231,
+  "FILESYSTEM": 196,
+  "SQLITE": 128,
+  "GIT": 300,
+  "SORT": 128
+ },
+ "depths": {
+  "TARBALL": 5,
+  "FILESYSTEM": 4,
+  "SQLITE": 4,
+  "GIT": 4,
+  "SORT": 4
+ },
+ "verdict": {
+  "K1_the_class_reproduces_as_two_statements": {
+   "statements": [
+    "created_once[probe_new_content]",
+    "monotone[probe_new_content] \u2227 final:count[probe_new_content]==1"
+   ],
+   "runs_on_the_three_fitted_machines": 555,
+   "MET": true
+  },
+  "K2_agreement_is_total_and_still_not_identity": {
+   "per_statement": {
+    "created_once[probe_new_content]": {
+     "TARBALL": {
+      "runs": 231,
+      "differs_from_the_judge": 0
+     },
+     "FILESYSTEM": {
+      "runs": 196,
+      "differs_from_the_judge": 0
+     },
+     "SQLITE": {
+      "runs": 128,
+      "differs_from_the_judge": 0
+     },
+     "GIT": {
+      "runs": 300,
+      "differs_from_the_judge": 0
+     },
+     "SORT": {
+      "runs": 128,
+      "differs_from_the_judge": 0
+     },
+     "ALL_FIVE": {
+      "runs": 983,
+      "differs_from_the_judge": 0
+     }
+    },
+    "monotone[probe_new_content] \u2227 final:count[probe_new_content]==1": {
+     "TARBALL": {
+      "runs": 231,
+      "differs_from_the_judge": 0
+     },
+     "FILESYSTEM": {
+      "runs": 196,
+      "differs_from_the_judge": 0
+     },
+     "SQLITE": {
+      "runs": 128,
+      "differs_from_the_judge": 0
+     },
+     "GIT": {
+      "runs": 300,
+      "differs_from_the_judge": 0
+     },
+     "SORT": {
+      "runs": 128,
+      "differs_from_the_judge": 0
+     },
+     "ALL_FIVE": {
+      "runs": 983,
+      "differs_from_the_judge": 0
+     }
+    }
+   },
+   "MET": true
+  },
+  "K3_the_proof_finds_the_difference_that_no_run_shows": {
+   "envelope": {
+    "created_once[probe_new_content]": {
+     "histories": 38791,
+     "differs_from_the_judge": 42
+    },
+    "monotone[probe_new_content] \u2227 final:count[probe_new_content]==1": {
+     "histories": 38791,
+     "differs_from_the_judge": 0
+    }
+   },
+   "witness": {
+    "statement": "created_once[probe_new_content]",
+    "counts": [
+     0,
+     2
+    ],
+    "statement_says": true,
+    "judge_says": false
+   },
+   "exactly_one_statement_is_equivalent": true,
+   "MET": true
+  },
+  "K4_the_witness_is_not_exhibitable_by_any_machine": {
+   "alphabet": {
+    "TARBALL": {
+     "atoms": 4,
+     "largest_single_step_increase": 0
+    },
+    "FILESYSTEM": {
+     "atoms": 5,
+     "largest_single_step_increase": 1
+    },
+    "SQLITE": {
+     "atoms": 4,
+     "largest_single_step_increase": 1
+    },
+    "GIT": {
+     "atoms": 5,
+     "largest_single_step_increase": 1
+    },
+    "SORT": {
+     "atoms": 4,
+     "largest_single_step_increase": 0
+    }
+   },
+   "the_witness_needs_a_step_of": [
+    0,
+    2
+   ],
+   "MET": true
+  },
+  "K5_the_price_is_zero_questions_corrected": {
+   "the_previous_round_priced": "log2(2) = 1 question of the user",
+   "questions_needed_here": 0,
+   "because": "the class contains a statement provably equivalent to the goal's own judge",
+   "MET": true
+  },
+  "K6_permanence_is_a_checkable_precondition": {
+   "precondition": "count(initial state) == 0",
+   "measured": {
+    "TARBALL": 0,
+    "FILESYSTEM": 0,
+    "SQLITE": 0,
+    "GIT": 0,
+    "SORT": 0
+   },
+   "survivor": "monotone[probe_new_content] \u2227 final:count[probe_new_content]==1",
+   "rejected": [
+    "created_once[probe_new_content]"
+   ],
+   "MET": true
+  },
+  "K7_zero": {
+   "model_calls": 0,
+   "parameters_stored": 0,
+   "network_calls_at_run_time": 0,
+   "MET": true
+  }
+ },
+ "cost": {
+  "seconds": 138.7,
+  "model_calls": 0,
+  "parameters_stored": 0,
+  "network_calls_at_run_time": 0
+ },
+ "limits": [
+  "the equivalence is proved for this judge and this grammar, over a bounded count envelope (6 steps, jumps -3..+3); the envelope is a complete quotient for statements that read only the count, which is what the two disputed statements read",
+  "the general claim is a criterion -- permanence is proven equivalence under a checkable precondition -- not a theorem that every goal has a total judge",
+  "five CLI machines, depths 5/4/4/4/4, no network at run time, no model, no parameters",
+  "the witness is a model, not a run: it refutes an equivalence, and K4 measures that no machine in the tree could produce it"
+ ]
+}
