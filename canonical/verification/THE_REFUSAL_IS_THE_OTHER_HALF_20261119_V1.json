@@ -29,7 +29,7 @@
  "rows": [
   {
    "action": "git_stash_pop",
-   "argv": [
+   "action_argv": [
     "git",
     "-c",
     "user.email=a@b.c",
@@ -50,9 +50,9 @@
      "template_present": true,
      "tools_present": true
     },
-    "message": "On branch main Changes not staged for commit: (use \"git add <file>...\" to update what will be committed) (use \"git restore <file>...\" to discard changes in working directory) modified: README.txt no changes added to commit (use \"git add\" and/or \"git commit -a\") Dropped refs/stash@{0} (a890a35fccb208e9de08e74190bbafd63c80a988)",
+    "message": "On branch main Changes not staged for commit: (use \"git add <file>...\" to update what will be committed) (use \"git restore <file>...\" to discard changes in working directory) modified: README.txt no changes added to commit (use \"git add\" and/or \"git commit -a\") Dropped refs/stash@{0} (eaf4bd6f901f47be37eba77e42bc0a51f6c9faf4)",
     "only_bookkeeping": false,
-    "raw_message": "On branch main\nChanges not staged for commit:\n  (use \"git add <file>...\" to update what will be committed)\n  (use \"git restore <file>...\" to discard changes in working directory)\n\tmodified:   README.txt\n\nno changes added to commit (use \"git add\" and/or \"git commit -a\")\nDropped refs/stash@{0} (a890a35fccb208e9de08e74190bbafd63c80a988)\n",
+    "raw_message": "On branch main\nChanges not staged for commit:\n  (use \"git add <file>...\" to update what will be committed)\n  (use \"git restore <file>...\" to discard changes in working directory)\n\tmodified:   README.txt\n\nno changes added to commit (use \"git add\" and/or \"git commit -a\")\nDropped refs/stash@{0} (eaf4bd6f901f47be37eba77e42bc0a51f6c9faf4)\n",
     "rc": 0,
     "touched": [
      "repo/README.txt"
@@ -210,7 +210,7 @@
   },
   {
    "action": "patch_apply",
-   "argv": [
+   "action_argv": [
     "patch",
     "-p1",
     "--forward",
@@ -402,7 +402,7 @@
   },
   {
    "action": "gzip_decompress",
-   "argv": [
+   "action_argv": [
     "gzip",
     "-d",
     "files/x.gz"
@@ -578,7 +578,7 @@
   },
   {
    "action": "tar_extract",
-   "argv": [
+   "action_argv": [
     "tar",
     "-xzf",
     "files/b.tar.gz"
@@ -753,7 +753,7 @@
   },
   {
    "action": "cp_into_dir",
-   "argv": [
+   "action_argv": [
     "cp",
     "files/a.txt",
     "files/dir/"
@@ -928,7 +928,7 @@
   },
   {
    "action": "mkdir_nested",
-   "argv": [
+   "action_argv": [
     "mkdir",
     "files/nodir/sub"
    ],
@@ -1102,7 +1102,7 @@
   },
   {
    "action": "rmdir_empty",
-   "argv": [
+   "action_argv": [
     "rmdir",
     "files/dir"
    ],
@@ -1276,7 +1276,7 @@
   },
   {
    "action": "ln_symlink",
-   "argv": [
+   "action_argv": [
     "ln",
     "-s",
     "files/a.txt",
@@ -1450,7 +1450,7 @@
   },
   {
    "action": "sort_check",
-   "argv": [
+   "action_argv": [
     "sort",
     "-c",
     "files/sorted.txt"
@@ -1623,7 +1623,7 @@
   },
   {
    "action": "chmod_file",
-   "argv": [
+   "action_argv": [
     "chmod",
     "644",
     "files/a.txt"

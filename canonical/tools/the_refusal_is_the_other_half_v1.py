@@ -359,7 +359,7 @@ def measure_action(template: pathlib.Path, root: pathlib.Path, action: Action) -
             violations.append(row)
     primary = [row for row in violations if row["variant"] == 0]
     repeat = [row for row in violations if row["variant"] == 1]
-    return {"action": action.name, "argv": action.argv, "coords": action.coords, "base": base,
+    return {"action": action.name, "action_argv": action.argv, "coords": action.coords, "base": base,
             "violations": violations,
             "each_violation_changed_exactly_one_fact": all(
                 len(row["coords_that_changed"]) == 1 for row in primary),
