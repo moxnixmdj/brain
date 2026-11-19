@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 546,
+  "knowledge_documents": 547,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 7112,
+  "research_index_records": 7114,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 452,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "688b585e494117a02654ff9cf5af99f5936b0393925c189344efff83bf4271df"
+  "value": "4679d6c67d09bdcd61d0051a137b8413c8e8361922edf274eb5d9074143f2bb2"
  },
  "engines": [
   {
@@ -46869,6 +46869,84 @@
     "rule",
     "single",
     "trace"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 10792,
+   "headings": [
+    "A SITE IS NOT A PRODUCTION",
+    "1. The question, unchanged",
+    "2. Declared before the run",
+    "3. What was built",
+    "4. The measurement",
+    "5. What the seven fixes actually are (measured, not asserted)",
+    "6. The one line that names the bottleneck",
+    "7. A defect found on the way — the accusation class, caught in the oracle",
+    "8. What is false in the claim",
+    "9. The single bottleneck, named",
+    "10. Next, and how it is falsified",
+    "11. Accounting"
+   ],
+   "kind": "DOCUMENT",
+   "path": "A_SITE_IS_NOT_A_PRODUCTION_20261124_V1.md",
+   "sha256": "ec0a37c2ac9a5782ad52cf3d45073f9c497330798f117b116bfc9f3433e970d3",
+   "summary": "**The demand was right, the movement was wrong, and the fix contains the real answer.**",
+   "terms": {
+    "30": 8,
+    "a.converter": 7,
+    "acceptance": 4,
+    "action": 7,
+    "another": 5,
+    "argument": 4,
+    "attrs": 5,
+    "both": 5,
+    "branch": 7,
+    "call": 4,
+    "candidate": 5,
+    "cannot": 4,
+    "changed": 5,
+    "click": 7,
+    "declared": 5,
+    "defect": 4,
+    "demand": 14,
+    "demanded": 7,
+    "fact": 4,
+    "false": 7,
+    "fix": 8,
+    "fixes": 4,
+    "frame": 4,
+    "function": 5,
+    "human": 4,
+    "instrument": 6,
+    "line": 7,
+    "model": 5,
+    "never": 5,
+    "new": 10,
+    "no": 5,
+    "none": 7,
+    "not": 34,
+    "one": 25,
+    "production": 7,
+    "real": 6,
+    "recorded": 5,
+    "relation": 8,
+    "repair": 5,
+    "round": 6,
+    "rows": 6,
+    "run": 7,
+    "same": 16,
+    "site": 17,
+    "test": 9,
+    "two": 5,
+    "value": 16,
+    "verified": 10
+   },
+   "title": "A SITE IS NOT A PRODUCTION",
+   "title_terms": [
+    "not",
+    "production",
+    "site"
    ]
   },
   {
@@ -87551,10 +87629,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1348,
+  "included_source_count": 1349,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "ca3706e555531d396a017dbc9080219ed3b79c81abf0beecbe9ba34f9da56d6e"
+  "source_tree_digest": "6c68d7bf7bc28e28e278a2f7830802e3cdf40cb2958aee96431feb688771f424"
  },
  "research_index": [
   {
@@ -157973,6 +158051,24 @@
     "rule": 1,
     "single": 1,
     "trace": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "2026-11-20",
+   "id": "research:canonical/verification/A_SITE_IS_NOT_A_PRODUCTION_20261124_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/A_SITE_IS_NOT_A_PRODUCTION_20261124_V1.json",
+   "schema": "BRAIN_THE_ASSERTION_IS_THE_DEMAND_V1",
+   "sha256": "9fec2eb67e96e2160d6765ec603ae14a6ef080f94a9ebdfc57436bae1ab6a1ab",
+   "status": "",
+   "terms": {
+    "20261124": 1,
+    "not": 1,
+    "production": 1,
+    "site": 1,
     "v1": 1
    }
   },
@@ -240572,6 +240668,51 @@
     "single": 1,
     "trace": 1,
     "v1": 1
+   }
+  },
+  {
+   "action_id": "A_SITE_IS_NOT_A_PRODUCTION_20261124_V1",
+   "capability": false,
+   "date": "2026-11-24",
+   "id": "research:canonical/action_intents/A_SITE_IS_NOT_A_PRODUCTION_20261124_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_SITE_IS_NOT_A_PRODUCTION_20261124_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "a0eae82087391610a2c74273199b02af04019a2f7fa5ae2b5b656c46a32784b1",
+   "status": "PROPOSED__PRODUCER_MEASURED__NEGATIVE_RESULT_RECORDED__INDEPENDENT_VERIFICATION_",
+   "terms": {
+    "20261124": 1,
+    "37": 1,
+    "a_site_is_not_a_production_20261124_v1": 1,
+    "another": 1,
+    "anywhere": 1,
+    "argument": 1,
+    "asserts": 1,
+    "assumed": 1,
+    "branch": 1,
+    "cannot": 1,
+    "changed": 1,
+    "composition": 1,
+    "consistency": 1,
+    "create": 1,
+    "definitions": 1,
+    "demand": 4,
+    "described": 1,
+    "did": 2,
+    "documentation": 1,
+    "every": 1,
+    "examined": 1,
+    "exist": 1,
+    "express": 1,
+    "file": 1,
+    "fixes": 2,
+    "not": 5,
+    "one": 2,
+    "production": 4,
+    "rather": 2,
+    "relation": 2,
+    "site": 3,
+    "than": 2
    }
   },
   {

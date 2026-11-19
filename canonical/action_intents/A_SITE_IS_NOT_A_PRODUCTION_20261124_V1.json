@@ -41,7 +41,7 @@
  },
  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Not the site and not the store: the demand language. An instrument that can only demand a value at the site cannot express the relation its own test asserts, and 2 of 7 examined fixes create a production that did not exist anywhere rather than move one.",
- "canonical_base_commit": "f60e5035d2f690e0220a6356f7c3ef4fc73d34ea",
+ "canonical_base_commit": "575e9c0b3d7420c991b53eca673cc5589c35114f",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -85,6 +85,17 @@
  },
  "measured_effect": {
   "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "composition": {
+   "attempts": 37,
+   "outcomes": {
+    "NO_RELATION_BETWEEN_THE_DEMAND_AND_THE_SITE": 8,
+    "NO_VALUE_MATCHES": 5,
+    "SPEC_DEMAND_FOUND_NOTHING": 22,
+    "THE_SITE_NEVER_RAN_IN_THE_FAILING_TEST": 2
+   },
+   "rows_reached": 7,
+   "verified_by_shift": 0
+  },
   "corpus": {
    "repos": [
     "click",
@@ -99,43 +110,32 @@
    "parameters_stored": 0,
    "seconds": 574.2
   },
-  "stages": {
-   "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT": 14,
-   "SPEC_DEMAND_FOUND_NOTHING": 8,
-   "NO_RELATION_BETWEEN_THE_DEMAND_AND_THE_SITE": 6,
-   "DEMAND_MET": 1,
-   "THE_SITE_NEVER_RAN_IN_THE_FAILING_TEST": 1
-  },
-  "composition": {
-   "rows_reached": 7,
-   "attempts": 37,
-   "verified_by_shift": 0,
-   "outcomes": {
-    "SPEC_DEMAND_FOUND_NOTHING": 22,
-    "NO_VALUE_MATCHES": 5,
-    "NO_RELATION_BETWEEN_THE_DEMAND_AND_THE_SITE": 8,
-    "THE_SITE_NEVER_RAN_IN_THE_FAILING_TEST": 2
-   }
-  },
   "declared_acceptance": {
-   "verified_repair_with_ast_fact_MORE_THAN_ONE_CHANGE_REGION": "NOT MET (0)",
    "accusations_zero": "MET (0 of 30)",
-   "no_verified_row_preserving_0_recorded_passing_values": "MET"
-  },
-  "what_the_human_fix_actually_is": {
-   "new_production": 2,
-   "predicate_relation_changed": 1,
-   "type_at_an_argument": 1,
-   "statement_inside_a_branch": 1,
-   "consistency_across_sites": 1,
-   "documentation_and_import": 1
+   "no_verified_row_preserving_0_recorded_passing_values": "MET",
+   "verified_repair_with_ast_fact_MORE_THAN_ONE_CHANGE_REGION": "NOT MET (0)"
   },
   "oracle_freshness_defect": {
-   "measured_before_the_fix": "4 of 8 explorations of a one-line fixture scored the previous candidate's bytecode",
+   "audit": "the 30-row sweep re-run after the fix: 0 of 30 stages changed",
    "fixed": "identify_a_real_bugs_fix_v1.fresh_bytecode()",
-   "audit": "the 30-row sweep re-run after the fix: 0 of 30 stages changed"
+   "measured_before_the_fix": "4 of 8 explorations of a one-line fixture scored the previous candidate's bytecode"
   },
-  "receipt": "canonical/verification/A_SITE_IS_NOT_A_PRODUCTION_20261124_V1.json"
+  "receipt": "canonical/verification/A_SITE_IS_NOT_A_PRODUCTION_20261124_V1.json",
+  "stages": {
+   "DEMAND_MET": 1,
+   "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT": 14,
+   "NO_RELATION_BETWEEN_THE_DEMAND_AND_THE_SITE": 6,
+   "SPEC_DEMAND_FOUND_NOTHING": 8,
+   "THE_SITE_NEVER_RAN_IN_THE_FAILING_TEST": 1
+  },
+  "what_the_human_fix_actually_is": {
+   "consistency_across_sites": 1,
+   "documentation_and_import": 1,
+   "new_production": 2,
+   "predicate_relation_changed": 1,
+   "statement_inside_a_branch": 1,
+   "type_at_an_argument": 1
+  }
  },
  "next_step": "Give the instrument a relation language and a cross-frame producer trace: instrument the assertion's own call, take the callee's argument and return values, ask the callee's sites for the demanded return, and allow the three projections at a test site (`x`, `x is not None`, `not x`). Same 30 rows, same declared acceptance -- 1 verified repair whose AST fact is MORE_THAN_ONE_CHANGE_REGION, accusations 0, no verified row preserving 0 recorded passing values -- and the same rule: an unmet acceptance is recorded as a falsification, not tuned into a pass.",
  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -148,6 +148,7 @@
   "canonical/verification/INSUFFICIENCY_CERTIFICATE_20261113_V1.json"
  ],
  "probe_specific": false,
+ "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
  "progress_evidence_paths": [
   "canonical/verification/A_SITE_IS_NOT_A_PRODUCTION_20261124_V1.json",
   "A_SITE_IS_NOT_A_PRODUCTION_20261124_V1.md",
@@ -157,7 +158,7 @@
  ],
  "real_outcome": "Not that compositions are unreachable, but that a composition is a RELATION before it is a location: the remaining population does not move a value elsewhere, it evaluates a different relation (2 new productions, 1 `is not None`, 1 type at an argument, 1 statement inside a branch, 1 multi-site consistency). The instrument's demand language -- one value, one site -- is the ceiling.",
  "recursive_obs": {
-  "canonical_base_commit": "f60e5035d2f690e0220a6356f7c3ef4fc73d34ea",
+  "canonical_base_commit": "575e9c0b3d7420c991b53eca673cc5589c35114f",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "assuming a composition is a value produced at a different site",
@@ -165,7 +166,7 @@
    "reporting a shifted site's failure as a fact about the demand instead of about the production"
   ],
   "expected_parent_frontier_change": "The composition is measured rather than assumed: 37 shifts of an unchanged demand over 7 rows verify 0, and every one of the 7 human fixes is now described by the production it needed (2 new definitions, 1 changed relation, 1 type at an argument, 1 statement inside a branch, 1 multi-site consistency, 1 documentation). The oracle can no longer score a file it did not run.",
-  "expected_parent_level_state_change": "Every exclusion now names the AST fact that caused it, from both revisions with formatting deleted. 8 rows are more-than-one-region, 3 are more-than-one-statement, 2 insert or delete whole statements, 1 needs a multi-line span, 13 are addressed. The claim that formatting hid real work is falsified on real material: it recovers 1 row of 30, not 4.",
+  "expected_parent_level_state_change": "The composition is measured rather than assumed: 37 shifts of an unchanged demand over 7 rows verify 0, and every one of the 7 human fixes is now described by the production it needed (2 new definitions, 1 changed relation, 1 type at an argument, 1 statement inside a branch, 1 multi-site consistency, 1 documentation). The oracle can no longer score a file it did not run.",
   "independent_verification_required": true,
   "iteration_limit": 1,
   "obs_blocker": {
@@ -469,7 +470,7 @@
   "selected_route": "READ_THE_FIX_FROM_THE_AST_AND_NAME_THE_GRAMMAR_OF_THE_POPULATION",
   "selected_surviving_route": "READ_THE_FIX_FROM_THE_AST_AND_NAME_THE_GRAMMAR_OF_THE_POPULATION",
   "selected_surviving_route_class": "SYNTHESIZE_NEW_PRIMITIVE",
-  "stop_condition": "Build the absolute-offset patcher and the composition production: a hypothesis may produce a value at one site and consume it at another, with the suite as the only judge. Acceptance declared before the build: 1 verified repair whose AST fact is MORE_THAN_ONE_CHANGE_REGION, accusations 0, and no verified row that preserves 0 recorded passing values.",
+  "stop_condition": "Give the instrument a relation language and a cross-frame producer trace: instrument the assertion's own call, take the callee's argument and return values, ask the callee's sites for the demanded return, and allow the three projections at a test site (`x`, `x is not None`, `not x`). Same 30 rows, same declared acceptance -- 1 verified repair whose AST fact is MORE_THAN_ONE_CHANGE_REGION, accusations 0, no verified row preserving 0 recorded passing values -- and the same rule: an unmet acceptance is recorded as a falsification, not tuned into a pass.",
   "why_selected_route_is_fastest_sufficient": "Because the question 'is the content a knowledge problem' can only be answered by handing the address over for free and measuring what the artifact's own words can say; every other route answers it by assuming an answer.",
   "why_this_is_not_another_organ": "It adds no knowledge, no vocabulary and no model: one AST rewrite of the module, one counter, one log of what was already in scope, and the project's own pytest as the verdict."
  },
@@ -541,10 +542,9 @@
    "python3 canonical/tools/the_assertion_is_the_demand_v1.py --commits /tmp/corpus/c30.json --receipt canonical/verification/A_SITE_IS_NOT_A_PRODUCTION_20261124_V1.json --repos-root /tmp/repos --shift-sites 6",
    "python3 -m pytest canonical/tests/test_the_space_is_the_artifact_v1.py canonical/tests/test_the_assertion_is_the_demand_v1.py -q"
   ],
-  "tests_green": 39,
   "independent_verification_completed": false,
-  "independent_verification_required": true
+  "independent_verification_required": true,
+  "tests_green": 39
  },
- "weakens_existing_guard": false,
- "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM"
+ "weakens_existing_guard": false
 }
