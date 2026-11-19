@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 571,
+  "knowledge_documents": 572,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 7164,
+  "research_index_records": 7166,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 452,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "acad31d6e2d0d087d3b0adcd3a912943671b155da1743a3adc34db0cfc76f78a"
+  "value": "2af0524028d0dd6b370c3de18627fc3b1d30ab422c964cfa919d4ba105d8725a"
  },
  "engines": [
   {
@@ -45117,6 +45117,84 @@
     "measured",
     "right",
     "wrong"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 6071,
+   "headings": [
+    "An action's effect is a provenance map — and one execution is enough to know it",
+    "Where the question now stands",
+    "The principle",
+    "The measurement",
+    "Why this is not a world model",
+    "What is real and what is not",
+    "The bottleneck has moved — to the goal"
+   ],
+   "kind": "DOCUMENT",
+   "path": "AN_ACTIONS_EFFECT_IS_A_PROVENANCE_MAP_20261119_V1.md",
+   "sha256": "2f5ec554a13be8f2c51b219d2f42f1442779d91cf3ac872611f3643783c09db9",
+   "summary": "**Receipt:** `canonical/verification/AN_ACTIONS_EFFECT_IS_A_PROVENANCE_MAP_20261119_V1.json` · 6 of 6 gates MET · 0.2 s, 8 real binaries, **24 of 24 unexecuted states predicted whole-tree exactly**, 0 model calls, 0 parameters, 0 network.",
+   "terms": {
+    "24": 6,
+    "action": 9,
+    "actions": 3,
+    "argument": 4,
+    "arguments": 3,
+    "because": 3,
+    "both": 4,
+    "cannot": 3,
+    "claim": 3,
+    "compose": 3,
+    "computer": 3,
+    "content": 4,
+    "cp": 3,
+    "derived": 4,
+    "directory": 3,
+    "effect": 7,
+    "exactly": 6,
+    "execution": 7,
+    "first": 3,
+    "goal": 9,
+    "last": 3,
+    "model": 4,
+    "not": 15,
+    "now": 3,
+    "one": 13,
+    "own": 4,
+    "path": 3,
+    "precondition": 3,
+    "predicted": 4,
+    "provenance": 7,
+    "read": 3,
+    "real": 7,
+    "refusal": 4,
+    "round": 7,
+    "rounds": 3,
+    "rule": 5,
+    "says": 3,
+    "second": 4,
+    "shape": 3,
+    "so": 5,
+    "state": 4,
+    "states": 4,
+    "step": 3,
+    "system": 4,
+    "tree": 4,
+    "two": 7,
+    "use": 3,
+    "vocabulary": 5
+   },
+   "title": "An action's effect is a provenance map — and one execution is enough to know it",
+   "title_terms": [
+    "action",
+    "effect",
+    "enough",
+    "execution",
+    "know",
+    "map",
+    "one",
+    "provenance"
    ]
   },
   {
@@ -89525,10 +89603,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1373,
+  "included_source_count": 1374,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "93ff33160b005cc2f8b6c7820c57f5c82467b6f1dfe0000097c63ff7c7ebf81a"
+  "source_tree_digest": "91c5841c8f7d65b54927977a01f8350d022d5fb07a7c43b2f261533c3604bd01"
  },
  "research_index": [
   {
@@ -159394,6 +159472,25 @@
     "edits": 1,
     "failure": 1,
     "program": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "2026-11-19",
+   "id": "research:canonical/verification/AN_ACTIONS_EFFECT_IS_A_PROVENANCE_MAP_20261119_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/AN_ACTIONS_EFFECT_IS_A_PROVENANCE_MAP_20261119_V1.json",
+   "schema": "BRAIN_AN_ACTIONS_EFFECT_IS_A_PROVENANCE_MAP_V1",
+   "sha256": "d284b822574324a44930a270878426b841eb90c9882ddf8839c86fb226fcaeed",
+   "status": "",
+   "terms": {
+    "20261119": 1,
+    "actions": 1,
+    "effect": 1,
+    "map": 1,
+    "provenance": 1,
     "v1": 1
    }
   },
@@ -237053,6 +237150,51 @@
     "synthesize_a_space_that_is_the_closure_of_the_programs_own_material_under_its_own_forms_instead_of_a_hand_written_list_of_known_fixes": 1,
     "tree": 1,
     "under": 1
+   }
+  },
+  {
+   "action_id": "AN_ACTIONS_EFFECT_IS_A_PROVENANCE_MAP_20261119_V1",
+   "capability": false,
+   "date": "2026-11-19",
+   "id": "research:canonical/action_intents/AN_ACTIONS_EFFECT_IS_A_PROVENANCE_MAP_20261119_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/AN_ACTIONS_EFFECT_IS_A_PROVENANCE_MAP_20261119_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "523ddace34d82f3d99fbeef51de1a92f2badc197d1c9a17a9e12ee761e336bba",
+   "status": "PROPOSED__PRODUCER_MEASURED__6_OF_6_MET__EFFECT_VOCABULARY_DERIVED_FROM_PROVENAN",
+   "terms": {
+    "20261119": 1,
+    "24": 2,
+    "action": 2,
+    "actions": 2,
+    "agent": 1,
+    "an_actions_effect_is_a_provenance_map_20261119_v1": 1,
+    "any": 1,
+    "argument": 2,
+    "becomes": 1,
+    "both": 1,
+    "budget": 1,
+    "cannot": 1,
+    "check": 1,
+    "choosing": 1,
+    "closes": 1,
+    "column": 1,
+    "compose": 1,
+    "compose_measured_effects_v1": 1,
+    "confidently": 1,
+    "coverage": 5,
+    "cp": 1,
+    "designed": 1,
+    "disagrees": 1,
+    "effect": 4,
+    "first": 2,
+    "map": 2,
+    "one": 2,
+    "provenance": 2,
+    "so": 2,
+    "soundness": 3,
+    "values": 2,
+    "wall": 2
    }
   },
   {
