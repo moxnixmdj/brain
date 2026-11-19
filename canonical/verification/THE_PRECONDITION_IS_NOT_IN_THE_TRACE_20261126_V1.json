@@ -1,0 +1,1439 @@
+{
+ "schema": "BRAIN_THE_PRECONDITION_IS_NOT_IN_THE_TRACE_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "date": "2026-11-26",
+ "environment": {
+  "kind": "real machine: git, tar, gzip, patch",
+  "base_repo": "https://github.com/pypa/packaging.git",
+  "commit": null,
+  "states": 160
+ },
+ "oracle": "each program's own exit status; a failure whose stderr names a non-precondition cause is AMBIGUOUS and dropped",
+ "summary": {
+  "actions_attempted": 10,
+  "actions_measured": 10,
+  "actions_refused": 0,
+  "vocabulary_sufficient": 7,
+  "vocabulary_insufficient": 3,
+  "insufficient_actions": [
+   "tar_extract",
+   "gzip_decompress",
+   "patch_apply"
+  ],
+  "arm_a_accuracy_by_k": {
+   "1": 0.5625,
+   "2": 0.7125,
+   "4": 0.8625
+  },
+  "arm_a_identified_ever": 0,
+  "arm_b_accuracy_sufficient": 0.9464,
+  "arm_b_accuracy_insufficient": 0.5833,
+  "arm_b_identified": 0,
+  "arm_b_executions": 38,
+  "arm_a_rule_equalled_the_true_precondition": 0,
+  "arm_a_best_accuracy": 1.0,
+  "retention_total": 30,
+  "retention_attempted": 30,
+  "selector_stops_unfalsifiable": 9,
+  "arm_b_matches_exact_precondition": 0,
+  "ambiguous_oracle_total": 0,
+  "retention": {
+   "git_stash_pop": "3/3",
+   "git_merge_abort": "3/3",
+   "git_rebase_abort": "3/3",
+   "git_checkout_feature": "3/3",
+   "git_branch_delete_feature": "3/3",
+   "git_rm_cached_tracked": "3/3",
+   "tar_extract": "3/3",
+   "gzip_decompress": "3/3",
+   "chmod_exec": "3/3",
+   "patch_apply": "3/3"
+  },
+  "seconds": 18.1,
+  "parameters_stored": 0,
+  "model_calls": 0
+ },
+ "rows": [
+  {
+   "action": "git_stash_pop",
+   "purpose": "restore work that was set aside",
+   "argv": [
+    "git",
+    "stash",
+    "pop"
+   ],
+   "states": 16,
+   "applies": 8,
+   "does_not_apply": 8,
+   "ambiguous_oracle": [],
+   "vocabulary_size": 16,
+   "exact_precondition_in_vocabulary": [
+    "stash.present"
+   ],
+   "intended_precondition": [
+    "stash.present"
+   ],
+   "witness_agrees_with_intent": true,
+   "fact_groups_that_never_vary": [
+    "branch.feature",
+    "branch.main",
+    "file.readme",
+    "merge.idle",
+    "rebase.idle",
+    "stash.absent",
+    "stash.present",
+    "worktree.clean",
+    "worktree.dirty",
+    "worktree.has_untracked"
+   ],
+   "fact_groups": 14,
+   "arm_a_successes_only": [
+    {
+     "demonstrations": 1,
+     "learner_status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+     "learner_reason": "NO_FAILURE__NECESSITY_IS_ONLY_REFUTED_BY_FAILURE",
+     "licensed_requirement_size": 15,
+     "rule_from_demonstrations": {
+      "accuracy": 0.5,
+      "precision": 0.0,
+      "recall": 0.0,
+      "n": 8
+     },
+     "rule_always_true": {
+      "accuracy": 0.5,
+      "precision": 0.5,
+      "recall": 1.0,
+      "n": 8
+     },
+     "survivors": 0,
+     "most_general": [],
+     "rule_equals_the_true_precondition": false
+    },
+    {
+     "demonstrations": 2,
+     "learner_status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+     "learner_reason": "NO_FAILURE__NECESSITY_IS_ONLY_REFUTED_BY_FAILURE",
+     "licensed_requirement_size": 11,
+     "rule_from_demonstrations": {
+      "accuracy": 0.5,
+      "precision": 0.0,
+      "recall": 0.0,
+      "n": 8
+     },
+     "rule_always_true": {
+      "accuracy": 0.5,
+      "precision": 0.5,
+      "recall": 1.0,
+      "n": 8
+     },
+     "survivors": 0,
+     "most_general": [],
+     "rule_equals_the_true_precondition": false
+    },
+    {
+     "demonstrations": 4,
+     "learner_status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+     "learner_reason": "NO_FAILURE__NECESSITY_IS_ONLY_REFUTED_BY_FAILURE",
+     "licensed_requirement_size": 11,
+     "rule_from_demonstrations": {
+      "accuracy": 0.5,
+      "precision": 0.0,
+      "recall": 0.0,
+      "n": 8
+     },
+     "rule_always_true": {
+      "accuracy": 0.5,
+      "precision": 0.5,
+      "recall": 1.0,
+      "n": 8
+     },
+     "survivors": 0,
+     "most_general": [],
+     "rule_equals_the_true_precondition": false
+    }
+   ],
+   "held_out_base_rate": 0.5,
+   "arm_b_fallback_requirement_size": 1,
+   "arm_b_contrasts": {
+    "executions": 4,
+    "survivors_after_evidence": 1536,
+    "stop_reason": "EVERY_REACHABLE_STATE_GIVES_THE_SAME_ANSWER_FOR_ALL_SURVIVORS",
+    "status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+    "requirement": [],
+    "accuracy_on_held_out": {
+     "accuracy": 1.0,
+     "precision": 1.0,
+     "recall": 1.0,
+     "n": 8
+    },
+    "matches_exact_precondition": false,
+    "trajectory": [
+     {
+      "state": "git_stash_pop-pos05",
+      "outcome": true,
+      "status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+      "survivors": 0
+     },
+     {
+      "state": "git_stash_pop-neg03",
+      "outcome": false,
+      "status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+      "survivors": 12288
+     },
+     {
+      "state": "git_stash_pop-pos03",
+      "outcome": true,
+      "status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+      "survivors": 1536
+     },
+     {
+      "stop": "EVERY_REACHABLE_STATE_GIVES_THE_SAME_ANSWER_FOR_ALL_SURVIVORS",
+      "survivors_before": 1536
+     }
+    ]
+   },
+   "retention_replays_ok": "3/3",
+   "stage": "MEASURED"
+  },
+  {
+   "action": "git_merge_abort",
+   "purpose": "give up an interrupted merge",
+   "argv": [
+    "git",
+    "merge",
+    "--abort"
+   ],
+   "states": 16,
+   "applies": 8,
+   "does_not_apply": 8,
+   "ambiguous_oracle": [],
+   "vocabulary_size": 17,
+   "exact_precondition_in_vocabulary": [
+    "merge.in_progress"
+   ],
+   "intended_precondition": [
+    "merge.in_progress"
+   ],
+   "witness_agrees_with_intent": true,
+   "fact_groups_that_never_vary": [
+    "branch.feature",
+    "branch.main",
+    "file.readme",
+    "merge.idle",
+    "merge.in_progress",
+    "rebase.idle",
+    "stash.absent",
+    "worktree.clean",
+    "worktree.dirty",
+    "worktree.has_untracked"
+   ],
+   "fact_groups": 14,
+   "arm_a_successes_only": [
+    {
+     "demonstrations": 1,
+     "learner_status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+     "learner_reason": "NO_FAILURE__NECESSITY_IS_ONLY_REFUTED_BY_FAILURE",
+     "licensed_requirement_size": 15,
+     "rule_from_demonstrations": {
+      "accuracy": 0.5,
+      "precision": 0.0,
+      "recall": 0.0,
+      "n": 8
+     },
+     "rule_always_true": {
+      "accuracy": 0.5,
+      "precision": 0.5,
+      "recall": 1.0,
+      "n": 8
+     },
+     "survivors": 0,
+     "most_general": [],
+     "rule_equals_the_true_precondition": false
+    },
+    {
+     "demonstrations": 2,
+     "learner_status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+     "learner_reason": "NO_FAILURE__NECESSITY_IS_ONLY_REFUTED_BY_FAILURE",
+     "licensed_requirement_size": 13,
+     "rule_from_demonstrations": {
+      "accuracy": 0.75,
+      "precision": 1.0,
+      "recall": 0.5,
+      "n": 8
+     },
+     "rule_always_true": {
+      "accuracy": 0.5,
+      "precision": 0.5,
+      "recall": 1.0,
+      "n": 8
+     },
+     "survivors": 0,
+     "most_general": [],
+     "rule_equals_the_true_precondition": false
+    },
+    {
+     "demonstrations": 4,
+     "learner_status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+     "learner_reason": "NO_FAILURE__NECESSITY_IS_ONLY_REFUTED_BY_FAILURE",
+     "licensed_requirement_size": 13,
+     "rule_from_demonstrations": {
+      "accuracy": 0.75,
+      "precision": 1.0,
+      "recall": 0.5,
+      "n": 8
+     },
+     "rule_always_true": {
+      "accuracy": 0.5,
+      "precision": 0.5,
+      "recall": 1.0,
+      "n": 8
+     },
+     "survivors": 0,
+     "most_general": [],
+     "rule_equals_the_true_precondition": false
+    }
+   ],
+   "held_out_base_rate": 0.5,
+   "arm_b_fallback_requirement_size": 1,
+   "arm_b_contrasts": {
+    "executions": 4,
+    "survivors_after_evidence": 7936,
+    "stop_reason": "EVERY_REACHABLE_STATE_GIVES_THE_SAME_ANSWER_FOR_ALL_SURVIVORS",
+    "status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+    "requirement": [],
+    "accuracy_on_held_out": {
+     "accuracy": 0.625,
+     "precision": 0.6667,
+     "recall": 0.5,
+     "n": 8
+    },
+    "matches_exact_precondition": false,
+    "trajectory": [
+     {
+      "state": "git_merge_abort-pos07",
+      "outcome": true,
+      "status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+      "survivors": 0
+     },
+     {
+      "state": "git_merge_abort-pos03",
+      "outcome": true,
+      "status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+      "survivors": 0
+     },
+     {
+      "state": "git_merge_abort-neg07",
+      "outcome": false,
+      "status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+      "survivors": 7936
+     },
+     {
+      "stop": "EVERY_REACHABLE_STATE_GIVES_THE_SAME_ANSWER_FOR_ALL_SURVIVORS",
+      "survivors_before": 7936
+     }
+    ]
+   },
+   "retention_replays_ok": "3/3",
+   "stage": "MEASURED"
+  },
+  {
+   "action": "git_rebase_abort",
+   "purpose": "give up an interrupted rebase",
+   "argv": [
+    "git",
+    "rebase",
+    "--abort"
+   ],
+   "states": 16,
+   "applies": 8,
+   "does_not_apply": 8,
+   "ambiguous_oracle": [],
+   "vocabulary_size": 13,
+   "exact_precondition_in_vocabulary": [
+    "rebase.in_progress"
+   ],
+   "intended_precondition": [
+    "rebase.in_progress"
+   ],
+   "witness_agrees_with_intent": true,
+   "fact_groups_that_never_vary": [
+    "branch.feature",
+    "branch.main",
+    "file.readme",
+    "merge.idle",
+    "rebase.idle",
+    "rebase.in_progress",
+    "stash.absent",
+    "worktree.clean",
+    "worktree.dirty",
+    "worktree.has_untracked"
+   ],
+   "fact_groups": 14,
+   "arm_a_successes_only": [
+    {
+     "demonstrations": 1,
+     "learner_status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+     "learner_reason": "NO_FAILURE__NECESSITY_IS_ONLY_REFUTED_BY_FAILURE",
+     "licensed_requirement_size": 14,
+     "rule_from_demonstrations": {
+      "accuracy": 0.5,
+      "precision": 0.0,
+      "recall": 0.0,
+      "n": 8
+     },
+     "rule_always_true": {
+      "accuracy": 0.5,
+      "precision": 0.5,
+      "recall": 1.0,
+      "n": 8
+     },
+     "survivors": 0,
+     "most_general": [],
+     "rule_equals_the_true_precondition": false
+    },
+    {
+     "demonstrations": 2,
+     "learner_status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+     "learner_reason": "NO_FAILURE__NECESSITY_IS_ONLY_REFUTED_BY_FAILURE",
+     "licensed_requirement_size": 10,
+     "rule_from_demonstrations": {
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "n": 8
+     },
+     "rule_always_true": {
+      "accuracy": 0.5,
+      "precision": 0.5,
+      "recall": 1.0,
+      "n": 8
+     },
+     "survivors": 0,
+     "most_general": [],
+     "rule_equals_the_true_precondition": false
+    },
+    {
+     "demonstrations": 4,
+     "learner_status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+     "learner_reason": "NO_FAILURE__NECESSITY_IS_ONLY_REFUTED_BY_FAILURE",
+     "licensed_requirement_size": 10,
+     "rule_from_demonstrations": {
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "n": 8
+     },
+     "rule_always_true": {
+      "accuracy": 0.5,
+      "precision": 0.5,
+      "recall": 1.0,
+      "n": 8
+     },
+     "survivors": 0,
+     "most_general": [],
+     "rule_equals_the_true_precondition": false
+    }
+   ],
+   "held_out_base_rate": 0.5,
+   "arm_b_fallback_requirement_size": 1,
+   "arm_b_contrasts": {
+    "executions": 4,
+    "survivors_after_evidence": 768,
+    "stop_reason": "EVERY_REACHABLE_STATE_GIVES_THE_SAME_ANSWER_FOR_ALL_SURVIVORS",
+    "status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+    "requirement": [],
+    "accuracy_on_held_out": {
+     "accuracy": 1.0,
+     "precision": 1.0,
+     "recall": 1.0,
+     "n": 8
+    },
+    "matches_exact_precondition": false,
+    "trajectory": [
+     {
+      "state": "git_rebase_abort-pos05",
+      "outcome": true,
+      "status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+      "survivors": 0
+     },
+     {
+      "state": "git_rebase_abort-pos03",
+      "outcome": true,
+      "status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+      "survivors": 0
+     },
+     {
+      "state": "git_rebase_abort-neg03",
+      "outcome": false,
+      "status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+      "survivors": 768
+     },
+     {
+      "stop": "EVERY_REACHABLE_STATE_GIVES_THE_SAME_ANSWER_FOR_ALL_SURVIVORS",
+      "survivors_before": 768
+     }
+    ]
+   },
+   "retention_replays_ok": "3/3",
+   "stage": "MEASURED"
+  },
+  {
+   "action": "git_checkout_feature",
+   "purpose": "switch to the feature branch",
+   "argv": [
+    "git",
+    "checkout",
+    "feature"
+   ],
+   "states": 16,
+   "applies": 8,
+   "does_not_apply": 8,
+   "ambiguous_oracle": [],
+   "vocabulary_size": 16,
+   "exact_precondition_in_vocabulary": [
+    "branch.feature.exists"
+   ],
+   "intended_precondition": [
+    "branch.feature.exists"
+   ],
+   "witness_agrees_with_intent": true,
+   "fact_groups_that_never_vary": [
+    "branch.main",
+    "file.readme",
+    "merge.idle",
+    "rebase.idle",
+    "stash.absent",
+    "worktree.clean",
+    "worktree.has_untracked"
+   ],
+   "fact_groups": 12,
+   "arm_a_successes_only": [
+    {
+     "demonstrations": 1,
+     "learner_status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+     "learner_reason": "NO_FAILURE__NECESSITY_IS_ONLY_REFUTED_BY_FAILURE",
+     "licensed_requirement_size": 14,
+     "rule_from_demonstrations": {
+      "accuracy": 0.5,
+      "precision": 0.0,
+      "recall": 0.0,
+      "n": 8
+     },
+     "rule_always_true": {
+      "accuracy": 0.5,
+      "precision": 0.5,
+      "recall": 1.0,
+      "n": 8
+     },
+     "survivors": 0,
+     "most_general": [],
+     "rule_equals_the_true_precondition": false
+    },
+    {
+     "demonstrations": 2,
+     "learner_status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+     "learner_reason": "NO_FAILURE__NECESSITY_IS_ONLY_REFUTED_BY_FAILURE",
+     "licensed_requirement_size": 12,
+     "rule_from_demonstrations": {
+      "accuracy": 0.75,
+      "precision": 1.0,
+      "recall": 0.5,
+      "n": 8
+     },
+     "rule_always_true": {
+      "accuracy": 0.5,
+      "precision": 0.5,
+      "recall": 1.0,
+      "n": 8
+     },
+     "survivors": 0,
+     "most_general": [],
+     "rule_equals_the_true_precondition": false
+    },
+    {
+     "demonstrations": 4,
+     "learner_status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+     "learner_reason": "NO_FAILURE__NECESSITY_IS_ONLY_REFUTED_BY_FAILURE",
+     "licensed_requirement_size": 11,
+     "rule_from_demonstrations": {
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "n": 8
+     },
+     "rule_always_true": {
+      "accuracy": 0.5,
+      "precision": 0.5,
+      "recall": 1.0,
+      "n": 8
+     },
+     "survivors": 0,
+     "most_general": [],
+     "rule_equals_the_true_precondition": false
+    }
+   ],
+   "held_out_base_rate": 0.5,
+   "arm_b_fallback_requirement_size": 1,
+   "arm_b_contrasts": {
+    "executions": 4,
+    "survivors_after_evidence": 1536,
+    "stop_reason": "EVERY_REACHABLE_STATE_GIVES_THE_SAME_ANSWER_FOR_ALL_SURVIVORS",
+    "status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+    "requirement": [],
+    "accuracy_on_held_out": {
+     "accuracy": 1.0,
+     "precision": 1.0,
+     "recall": 1.0,
+     "n": 8
+    },
+    "matches_exact_precondition": false,
+    "trajectory": [
+     {
+      "state": "git_checkout_feature-neg05",
+      "outcome": false,
+      "status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+      "survivors": 12288
+     },
+     {
+      "state": "git_checkout_feature-pos03",
+      "outcome": true,
+      "status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+      "survivors": 3072
+     },
+     {
+      "state": "git_checkout_feature-pos07",
+      "outcome": true,
+      "status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+      "survivors": 1536
+     },
+     {
+      "stop": "EVERY_REACHABLE_STATE_GIVES_THE_SAME_ANSWER_FOR_ALL_SURVIVORS",
+      "survivors_before": 1536
+     }
+    ]
+   },
+   "retention_replays_ok": "3/3",
+   "stage": "MEASURED"
+  },
+  {
+   "action": "git_branch_delete_feature",
+   "purpose": "delete a branch that has been merged",
+   "argv": [
+    "git",
+    "branch",
+    "-d",
+    "feature"
+   ],
+   "states": 16,
+   "applies": 8,
+   "does_not_apply": 8,
+   "ambiguous_oracle": [],
+   "vocabulary_size": 15,
+   "exact_precondition_in_vocabulary": [
+    "branch.feature.merged"
+   ],
+   "intended_precondition": [
+    "branch.feature.exists",
+    "branch.feature.merged"
+   ],
+   "witness_agrees_with_intent": false,
+   "fact_groups_that_never_vary": [
+    "branch.main",
+    "file.readme",
+    "merge.idle",
+    "rebase.idle",
+    "stash.absent",
+    "worktree.clean",
+    "worktree.has_untracked"
+   ],
+   "fact_groups": 12,
+   "arm_a_successes_only": [
+    {
+     "demonstrations": 1,
+     "learner_status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+     "learner_reason": "NO_FAILURE__NECESSITY_IS_ONLY_REFUTED_BY_FAILURE",
+     "licensed_requirement_size": 15,
+     "rule_from_demonstrations": {
+      "accuracy": 0.5,
+      "precision": 0.0,
+      "recall": 0.0,
+      "n": 8
+     },
+     "rule_always_true": {
+      "accuracy": 0.5,
+      "precision": 0.5,
+      "recall": 1.0,
+      "n": 8
+     },
+     "survivors": 0,
+     "most_general": [],
+     "rule_equals_the_true_precondition": false
+    },
+    {
+     "demonstrations": 2,
+     "learner_status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+     "learner_reason": "NO_FAILURE__NECESSITY_IS_ONLY_REFUTED_BY_FAILURE",
+     "licensed_requirement_size": 12,
+     "rule_from_demonstrations": {
+      "accuracy": 0.75,
+      "precision": 1.0,
+      "recall": 0.5,
+      "n": 8
+     },
+     "rule_always_true": {
+      "accuracy": 0.5,
+      "precision": 0.5,
+      "recall": 1.0,
+      "n": 8
+     },
+     "survivors": 0,
+     "most_general": [],
+     "rule_equals_the_true_precondition": false
+    },
+    {
+     "demonstrations": 4,
+     "learner_status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+     "learner_reason": "NO_FAILURE__NECESSITY_IS_ONLY_REFUTED_BY_FAILURE",
+     "licensed_requirement_size": 11,
+     "rule_from_demonstrations": {
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "n": 8
+     },
+     "rule_always_true": {
+      "accuracy": 0.5,
+      "precision": 0.5,
+      "recall": 1.0,
+      "n": 8
+     },
+     "survivors": 0,
+     "most_general": [],
+     "rule_equals_the_true_precondition": false
+    }
+   ],
+   "held_out_base_rate": 0.5,
+   "arm_b_fallback_requirement_size": 1,
+   "arm_b_contrasts": {
+    "executions": 4,
+    "survivors_after_evidence": 1024,
+    "stop_reason": "EVERY_REACHABLE_STATE_GIVES_THE_SAME_ANSWER_FOR_ALL_SURVIVORS",
+    "status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+    "requirement": [],
+    "accuracy_on_held_out": {
+     "accuracy": 1.0,
+     "precision": 1.0,
+     "recall": 1.0,
+     "n": 8
+    },
+    "matches_exact_precondition": false,
+    "trajectory": [
+     {
+      "state": "git_branch_delete_feature-pos03",
+      "outcome": true,
+      "status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+      "survivors": 0
+     },
+     {
+      "state": "git_branch_delete_feature-neg07",
+      "outcome": false,
+      "status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+      "survivors": 2048
+     },
+     {
+      "state": "git_branch_delete_feature-pos07",
+      "outcome": true,
+      "status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+      "survivors": 1024
+     },
+     {
+      "stop": "EVERY_REACHABLE_STATE_GIVES_THE_SAME_ANSWER_FOR_ALL_SURVIVORS",
+      "survivors_before": 1024
+     }
+    ]
+   },
+   "retention_replays_ok": "3/3",
+   "stage": "MEASURED"
+  },
+  {
+   "action": "git_rm_cached_tracked",
+   "purpose": "untrack a file while keeping it on disk",
+   "argv": [
+    "git",
+    "rm",
+    "--cached",
+    "-q",
+    "README.rst"
+   ],
+   "states": 16,
+   "applies": 8,
+   "does_not_apply": 8,
+   "ambiguous_oracle": [],
+   "vocabulary_size": 15,
+   "exact_precondition_in_vocabulary": [
+    "file.readme.tracked"
+   ],
+   "intended_precondition": [
+    "file.readme.tracked"
+   ],
+   "witness_agrees_with_intent": true,
+   "fact_groups_that_never_vary": [
+    "branch.feature",
+    "branch.main",
+    "merge.idle",
+    "rebase.idle",
+    "stash.absent",
+    "worktree.clean",
+    "worktree.dirty",
+    "worktree.has_untracked"
+   ],
+   "fact_groups": 13,
+   "arm_a_successes_only": [
+    {
+     "demonstrations": 1,
+     "learner_status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+     "learner_reason": "NO_FAILURE__NECESSITY_IS_ONLY_REFUTED_BY_FAILURE",
+     "licensed_requirement_size": 15,
+     "rule_from_demonstrations": {
+      "accuracy": 0.625,
+      "precision": 1.0,
+      "recall": 0.25,
+      "n": 8
+     },
+     "rule_always_true": {
+      "accuracy": 0.5,
+      "precision": 0.5,
+      "recall": 1.0,
+      "n": 8
+     },
+     "survivors": 0,
+     "most_general": [],
+     "rule_equals_the_true_precondition": false
+    },
+    {
+     "demonstrations": 2,
+     "learner_status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+     "learner_reason": "NO_FAILURE__NECESSITY_IS_ONLY_REFUTED_BY_FAILURE",
+     "licensed_requirement_size": 15,
+     "rule_from_demonstrations": {
+      "accuracy": 0.625,
+      "precision": 1.0,
+      "recall": 0.25,
+      "n": 8
+     },
+     "rule_always_true": {
+      "accuracy": 0.5,
+      "precision": 0.5,
+      "recall": 1.0,
+      "n": 8
+     },
+     "survivors": 0,
+     "most_general": [],
+     "rule_equals_the_true_precondition": false
+    },
+    {
+     "demonstrations": 4,
+     "learner_status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+     "learner_reason": "NO_FAILURE__NECESSITY_IS_ONLY_REFUTED_BY_FAILURE",
+     "licensed_requirement_size": 11,
+     "rule_from_demonstrations": {
+      "accuracy": 0.875,
+      "precision": 1.0,
+      "recall": 0.75,
+      "n": 8
+     },
+     "rule_always_true": {
+      "accuracy": 0.5,
+      "precision": 0.5,
+      "recall": 1.0,
+      "n": 8
+     },
+     "survivors": 0,
+     "most_general": [],
+     "rule_equals_the_true_precondition": false
+    }
+   ],
+   "held_out_base_rate": 0.5,
+   "arm_b_fallback_requirement_size": 1,
+   "arm_b_contrasts": {
+    "executions": 4,
+    "survivors_after_evidence": 1536,
+    "stop_reason": "EVERY_REACHABLE_STATE_GIVES_THE_SAME_ANSWER_FOR_ALL_SURVIVORS",
+    "status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+    "requirement": [],
+    "accuracy_on_held_out": {
+     "accuracy": 1.0,
+     "precision": 1.0,
+     "recall": 1.0,
+     "n": 8
+    },
+    "matches_exact_precondition": false,
+    "trajectory": [
+     {
+      "state": "git_rm_cached_tracked-pos05",
+      "outcome": true,
+      "status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+      "survivors": 0
+     },
+     {
+      "state": "git_rm_cached_tracked-pos07",
+      "outcome": true,
+      "status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+      "survivors": 0
+     },
+     {
+      "state": "git_rm_cached_tracked-neg07",
+      "outcome": false,
+      "status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+      "survivors": 1536
+     },
+     {
+      "stop": "EVERY_REACHABLE_STATE_GIVES_THE_SAME_ANSWER_FOR_ALL_SURVIVORS",
+      "survivors_before": 1536
+     }
+    ]
+   },
+   "retention_replays_ok": "3/3",
+   "stage": "MEASURED"
+  },
+  {
+   "action": "tar_extract",
+   "purpose": "unpack an archive",
+   "argv": [
+    "tar",
+    "-xzf",
+    "bundle.tgz"
+   ],
+   "states": 16,
+   "applies": 8,
+   "does_not_apply": 8,
+   "ambiguous_oracle": [],
+   "vocabulary_size": 15,
+   "exact_precondition_in_vocabulary": null,
+   "intended_precondition": [
+    "VALID_ARCHIVE_NOT_OBSERVABLE"
+   ],
+   "witness_agrees_with_intent": false,
+   "fact_groups_that_never_vary": [
+    "branch.feature",
+    "branch.main",
+    "file.readme",
+    "merge.idle",
+    "rebase.idle",
+    "stash.absent",
+    "worktree.clean",
+    "worktree.has_untracked"
+   ],
+   "fact_groups": 12,
+   "arm_a_successes_only": [
+    {
+     "demonstrations": 1,
+     "learner_status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+     "learner_reason": "NO_FAILURE__NECESSITY_IS_ONLY_REFUTED_BY_FAILURE",
+     "licensed_requirement_size": 14,
+     "rule_from_demonstrations": {
+      "accuracy": 0.625,
+      "precision": 1.0,
+      "recall": 0.25,
+      "n": 8
+     },
+     "rule_always_true": {
+      "accuracy": 0.5,
+      "precision": 0.5,
+      "recall": 1.0,
+      "n": 8
+     },
+     "survivors": 0,
+     "most_general": [],
+     "rule_equals_the_true_precondition": false
+    },
+    {
+     "demonstrations": 2,
+     "learner_status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+     "learner_reason": "NO_FAILURE__NECESSITY_IS_ONLY_REFUTED_BY_FAILURE",
+     "licensed_requirement_size": 14,
+     "rule_from_demonstrations": {
+      "accuracy": 0.625,
+      "precision": 1.0,
+      "recall": 0.25,
+      "n": 8
+     },
+     "rule_always_true": {
+      "accuracy": 0.5,
+      "precision": 0.5,
+      "recall": 1.0,
+      "n": 8
+     },
+     "survivors": 0,
+     "most_general": [],
+     "rule_equals_the_true_precondition": false
+    },
+    {
+     "demonstrations": 4,
+     "learner_status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+     "learner_reason": "NO_FAILURE__NECESSITY_IS_ONLY_REFUTED_BY_FAILURE",
+     "licensed_requirement_size": 14,
+     "rule_from_demonstrations": {
+      "accuracy": 0.625,
+      "precision": 1.0,
+      "recall": 0.25,
+      "n": 8
+     },
+     "rule_always_true": {
+      "accuracy": 0.5,
+      "precision": 0.5,
+      "recall": 1.0,
+      "n": 8
+     },
+     "survivors": 0,
+     "most_general": [],
+     "rule_equals_the_true_precondition": false
+    }
+   ],
+   "held_out_base_rate": 0.5,
+   "arm_b_fallback_requirement_size": 2,
+   "arm_b_contrasts": {
+    "executions": 3,
+    "survivors_after_evidence": 4096,
+    "stop_reason": "EVERY_REACHABLE_STATE_GIVES_THE_SAME_ANSWER_FOR_ALL_SURVIVORS",
+    "status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+    "requirement": [],
+    "accuracy_on_held_out": {
+     "accuracy": 0.5,
+     "precision": 0.5,
+     "recall": 0.25,
+     "n": 8
+    },
+    "matches_exact_precondition": false,
+    "trajectory": [
+     {
+      "state": "tar_extract-neg05",
+      "outcome": false,
+      "status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+      "survivors": 8192
+     },
+     {
+      "state": "tar_extract-neg01",
+      "outcome": false,
+      "status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+      "survivors": 4096
+     },
+     {
+      "stop": "EVERY_REACHABLE_STATE_GIVES_THE_SAME_ANSWER_FOR_ALL_SURVIVORS",
+      "survivors_before": 4096
+     }
+    ]
+   },
+   "retention_replays_ok": "3/3",
+   "stage": "MEASURED"
+  },
+  {
+   "action": "gzip_decompress",
+   "purpose": "decompress a file",
+   "argv": [
+    "gzip",
+    "-d",
+    "payload.gz"
+   ],
+   "states": 16,
+   "applies": 8,
+   "does_not_apply": 8,
+   "ambiguous_oracle": [],
+   "vocabulary_size": 15,
+   "exact_precondition_in_vocabulary": null,
+   "intended_precondition": [
+    "VALID_GZIP_NOT_OBSERVABLE"
+   ],
+   "witness_agrees_with_intent": false,
+   "fact_groups_that_never_vary": [
+    "branch.feature",
+    "branch.main",
+    "file.readme",
+    "merge.idle",
+    "rebase.idle",
+    "stash.absent",
+    "worktree.clean",
+    "worktree.has_untracked"
+   ],
+   "fact_groups": 12,
+   "arm_a_successes_only": [
+    {
+     "demonstrations": 1,
+     "learner_status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+     "learner_reason": "NO_FAILURE__NECESSITY_IS_ONLY_REFUTED_BY_FAILURE",
+     "licensed_requirement_size": 14,
+     "rule_from_demonstrations": {
+      "accuracy": 0.625,
+      "precision": 1.0,
+      "recall": 0.25,
+      "n": 8
+     },
+     "rule_always_true": {
+      "accuracy": 0.5,
+      "precision": 0.5,
+      "recall": 1.0,
+      "n": 8
+     },
+     "survivors": 0,
+     "most_general": [],
+     "rule_equals_the_true_precondition": false
+    },
+    {
+     "demonstrations": 2,
+     "learner_status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+     "learner_reason": "NO_FAILURE__NECESSITY_IS_ONLY_REFUTED_BY_FAILURE",
+     "licensed_requirement_size": 13,
+     "rule_from_demonstrations": {
+      "accuracy": 0.875,
+      "precision": 1.0,
+      "recall": 0.75,
+      "n": 8
+     },
+     "rule_always_true": {
+      "accuracy": 0.5,
+      "precision": 0.5,
+      "recall": 1.0,
+      "n": 8
+     },
+     "survivors": 0,
+     "most_general": [],
+     "rule_equals_the_true_precondition": false
+    },
+    {
+     "demonstrations": 4,
+     "learner_status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+     "learner_reason": "NO_FAILURE__NECESSITY_IS_ONLY_REFUTED_BY_FAILURE",
+     "licensed_requirement_size": 12,
+     "rule_from_demonstrations": {
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "n": 8
+     },
+     "rule_always_true": {
+      "accuracy": 0.5,
+      "precision": 0.5,
+      "recall": 1.0,
+      "n": 8
+     },
+     "survivors": 0,
+     "most_general": [],
+     "rule_equals_the_true_precondition": false
+    }
+   ],
+   "held_out_base_rate": 0.5,
+   "arm_b_fallback_requirement_size": 0,
+   "arm_b_contrasts": {
+    "executions": 3,
+    "survivors_after_evidence": 0,
+    "stop_reason": "EVERY_REACHABLE_STATE_GIVES_THE_SAME_ANSWER_FOR_ALL_SURVIVORS",
+    "status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+    "requirement": [],
+    "accuracy_on_held_out": {
+     "accuracy": 0.5,
+     "precision": 0.5,
+     "recall": 1.0,
+     "n": 8
+    },
+    "matches_exact_precondition": false,
+    "trajectory": [
+     {
+      "state": "gzip_decompress-pos07",
+      "outcome": true,
+      "status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+      "survivors": 0
+     },
+     {
+      "state": "gzip_decompress-pos03",
+      "outcome": true,
+      "status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+      "survivors": 0
+     },
+     {
+      "stop": "EVERY_REACHABLE_STATE_GIVES_THE_SAME_ANSWER_FOR_ALL_SURVIVORS",
+      "survivors_before": 4096
+     }
+    ]
+   },
+   "retention_replays_ok": "3/3",
+   "stage": "MEASURED"
+  },
+  {
+   "action": "chmod_exec",
+   "purpose": "make a file executable",
+   "argv": [
+    "chmod",
+    "+x",
+    "script.sh"
+   ],
+   "states": 16,
+   "applies": 8,
+   "does_not_apply": 8,
+   "ambiguous_oracle": [],
+   "vocabulary_size": 17,
+   "exact_precondition_in_vocabulary": [
+    "file.script.nonempty"
+   ],
+   "intended_precondition": [
+    "file.script.nonempty"
+   ],
+   "witness_agrees_with_intent": true,
+   "fact_groups_that_never_vary": [
+    "branch.feature",
+    "branch.main",
+    "file.readme",
+    "merge.idle",
+    "rebase.idle",
+    "stash.absent",
+    "worktree.clean",
+    "worktree.has_untracked"
+   ],
+   "fact_groups": 12,
+   "arm_a_successes_only": [
+    {
+     "demonstrations": 1,
+     "learner_status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+     "learner_reason": "NO_FAILURE__NECESSITY_IS_ONLY_REFUTED_BY_FAILURE",
+     "licensed_requirement_size": 17,
+     "rule_from_demonstrations": {
+      "accuracy": 0.625,
+      "precision": 1.0,
+      "recall": 0.25,
+      "n": 8
+     },
+     "rule_always_true": {
+      "accuracy": 0.5,
+      "precision": 0.5,
+      "recall": 1.0,
+      "n": 8
+     },
+     "survivors": 0,
+     "most_general": [],
+     "rule_equals_the_true_precondition": false
+    },
+    {
+     "demonstrations": 2,
+     "learner_status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+     "learner_reason": "NO_FAILURE__NECESSITY_IS_ONLY_REFUTED_BY_FAILURE",
+     "licensed_requirement_size": 15,
+     "rule_from_demonstrations": {
+      "accuracy": 0.625,
+      "precision": 1.0,
+      "recall": 0.25,
+      "n": 8
+     },
+     "rule_always_true": {
+      "accuracy": 0.5,
+      "precision": 0.5,
+      "recall": 1.0,
+      "n": 8
+     },
+     "survivors": 0,
+     "most_general": [],
+     "rule_equals_the_true_precondition": false
+    },
+    {
+     "demonstrations": 4,
+     "learner_status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+     "learner_reason": "NO_FAILURE__NECESSITY_IS_ONLY_REFUTED_BY_FAILURE",
+     "licensed_requirement_size": 13,
+     "rule_from_demonstrations": {
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "n": 8
+     },
+     "rule_always_true": {
+      "accuracy": 0.5,
+      "precision": 0.5,
+      "recall": 1.0,
+      "n": 8
+     },
+     "survivors": 0,
+     "most_general": [],
+     "rule_equals_the_true_precondition": false
+    }
+   ],
+   "held_out_base_rate": 0.5,
+   "arm_b_fallback_requirement_size": 1,
+   "arm_b_contrasts": {
+    "executions": 4,
+    "survivors_after_evidence": 7168,
+    "stop_reason": null,
+    "status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+    "requirement": [],
+    "accuracy_on_held_out": {
+     "accuracy": 1.0,
+     "precision": 1.0,
+     "recall": 1.0,
+     "n": 8
+    },
+    "matches_exact_precondition": false,
+    "trajectory": [
+     {
+      "state": "chmod_exec-pos07",
+      "outcome": true,
+      "status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+      "survivors": 0
+     },
+     {
+      "state": "chmod_exec-pos03",
+      "outcome": true,
+      "status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+      "survivors": 0
+     },
+     {
+      "state": "chmod_exec-neg01",
+      "outcome": false,
+      "status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+      "survivors": 7168
+     }
+    ]
+   },
+   "retention_replays_ok": "3/3",
+   "stage": "MEASURED"
+  },
+  {
+   "action": "patch_apply",
+   "purpose": "apply a change that is shipped as a patch",
+   "argv": [
+    "patch",
+    "--batch",
+    "--forward",
+    "-p1",
+    "--dry-run",
+    "-i",
+    "change.patch"
+   ],
+   "states": 16,
+   "applies": 8,
+   "does_not_apply": 8,
+   "ambiguous_oracle": [],
+   "vocabulary_size": 13,
+   "exact_precondition_in_vocabulary": null,
+   "intended_precondition": [
+    "PATCH_APPLIES_NOT_OBSERVABLE"
+   ],
+   "witness_agrees_with_intent": false,
+   "fact_groups_that_never_vary": [
+    "branch.feature",
+    "branch.main",
+    "file.readme",
+    "merge.idle",
+    "rebase.idle",
+    "stash.absent",
+    "worktree.clean",
+    "worktree.has_untracked",
+    "worktree.no_untracked"
+   ],
+   "fact_groups": 13,
+   "arm_a_successes_only": [
+    {
+     "demonstrations": 1,
+     "learner_status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+     "learner_reason": "NO_FAILURE__NECESSITY_IS_ONLY_REFUTED_BY_FAILURE",
+     "licensed_requirement_size": 14,
+     "rule_from_demonstrations": {
+      "accuracy": 0.625,
+      "precision": 1.0,
+      "recall": 0.25,
+      "n": 8
+     },
+     "rule_always_true": {
+      "accuracy": 0.5,
+      "precision": 0.5,
+      "recall": 1.0,
+      "n": 8
+     },
+     "survivors": 0,
+     "most_general": [],
+     "rule_equals_the_true_precondition": false
+    },
+    {
+     "demonstrations": 2,
+     "learner_status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+     "learner_reason": "NO_FAILURE__NECESSITY_IS_ONLY_REFUTED_BY_FAILURE",
+     "licensed_requirement_size": 13,
+     "rule_from_demonstrations": {
+      "accuracy": 0.625,
+      "precision": 1.0,
+      "recall": 0.25,
+      "n": 8
+     },
+     "rule_always_true": {
+      "accuracy": 0.5,
+      "precision": 0.5,
+      "recall": 1.0,
+      "n": 8
+     },
+     "survivors": 0,
+     "most_general": [],
+     "rule_equals_the_true_precondition": false
+    },
+    {
+     "demonstrations": 4,
+     "learner_status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+     "learner_reason": "NO_FAILURE__NECESSITY_IS_ONLY_REFUTED_BY_FAILURE",
+     "licensed_requirement_size": 11,
+     "rule_from_demonstrations": {
+      "accuracy": 0.875,
+      "precision": 1.0,
+      "recall": 0.75,
+      "n": 8
+     },
+     "rule_always_true": {
+      "accuracy": 0.5,
+      "precision": 0.5,
+      "recall": 1.0,
+      "n": 8
+     },
+     "survivors": 0,
+     "most_general": [],
+     "rule_equals_the_true_precondition": false
+    }
+   ],
+   "held_out_base_rate": 0.5,
+   "arm_b_fallback_requirement_size": 1,
+   "arm_b_contrasts": {
+    "executions": 4,
+    "survivors_after_evidence": 1024,
+    "stop_reason": "EVERY_REACHABLE_STATE_GIVES_THE_SAME_ANSWER_FOR_ALL_SURVIVORS",
+    "status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+    "requirement": [],
+    "accuracy_on_held_out": {
+     "accuracy": 0.75,
+     "precision": 0.75,
+     "recall": 0.75,
+     "n": 8
+    },
+    "matches_exact_precondition": false,
+    "trajectory": [
+     {
+      "state": "patch_apply-pos03",
+      "outcome": true,
+      "status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+      "survivors": 0
+     },
+     {
+      "state": "patch_apply-neg05",
+      "outcome": false,
+      "status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+      "survivors": 4096
+     },
+     {
+      "state": "patch_apply-pos07",
+      "outcome": true,
+      "status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+      "survivors": 1024
+     },
+     {
+      "stop": "EVERY_REACHABLE_STATE_GIVES_THE_SAME_ANSWER_FOR_ALL_SURVIVORS",
+      "survivors_before": 1024
+     }
+    ]
+   },
+   "retention_replays_ok": "3/3",
+   "stage": "MEASURED"
+  }
+ ]
+}
