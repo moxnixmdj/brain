@@ -1,0 +1,944 @@
+{
+ "schema": "BRAIN_THE_VOCABULARY_IS_THE_ARTIFACT_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "date": "2026-11-25",
+ "mode": "FIVE_REAL_MACHINES__THREE_VOCABULARIES",
+ "declared_acceptance_before_the_run": {
+  "A1": "at least 3 requests that are NOT_STATEABLE under FIXED are SOLVED under the goal-directed vocabulary, on at least 3 machines, each decided by the machine's own reader and stable on a second read",
+  "A2": "no request solved under FIXED is lost under GOAL_DIRECTED",
+  "A3": "the goal-directed vocabulary is strictly smaller than FULL, and at least one atom that FIXED calls inert is seen to move a relation",
+  "A4": "every such verdict is reproduced by a second full pass over every cell",
+  "A5": "zero model calls, zero stored parameters, five real machines"
+ },
+ "verdict": {
+  "A1_unstateable_then_solved": {
+   "count": 3,
+   "machines": [
+    "FILESYSTEM",
+    "SORT",
+    "SQLITE"
+   ],
+   "requests": [
+    "move the seed content to a new name",
+    "the lines in ascending order",
+    "the seed row must hold the new value"
+   ],
+   "MET": true
+  },
+  "A2_nothing_solved_is_lost": {
+   "lost": [],
+   "MET": true
+  },
+  "A3_goal_directed_is_smaller_and_blindness_is_real": {
+   "vocabulary_used": [
+    "MULTISET",
+    "ORDER",
+    "PAIRING"
+   ],
+   "full_vocabulary": [
+    "CARD",
+    "MULTISET",
+    "ORDER",
+    "IDENT",
+    "PAIRING"
+   ],
+   "strictly_smaller": true,
+   "atoms_invisible_to_fixed": 3,
+   "MET": true
+  },
+  "A4_reproduced_by_a_second_full_pass": {
+   "MET": true
+  },
+  "A5_zero_model_calls_zero_parameters": {
+   "model_calls": 0,
+   "parameters_stored": 0,
+   "machines": [
+    "FILESYSTEM",
+    "GIT",
+    "SORT",
+    "SQLITE",
+    "TARBALL"
+   ],
+   "MET": true
+  }
+ },
+ "machines": {
+  "FILESYSTEM": {
+   "atoms_offered": 5,
+   "adaptation_trials": 40,
+   "union_fixed": {
+    "FS_A1": [
+     "CARD",
+     "MULTISET"
+    ],
+    "FS_A2": [
+     "CARD",
+     "MULTISET"
+    ],
+    "FS_A3": [],
+    "FS_A4": [
+     "CARD",
+     "MULTISET"
+    ],
+    "FS_A5": []
+   },
+   "union_full": {
+    "FS_A1": [
+     "CARD",
+     "MULTISET",
+     "ORDER",
+     "IDENT",
+     "PAIRING"
+    ],
+    "FS_A2": [
+     "CARD",
+     "MULTISET",
+     "ORDER",
+     "IDENT",
+     "PAIRING"
+    ],
+    "FS_A3": [
+     "IDENT",
+     "PAIRING"
+    ],
+    "FS_A4": [
+     "CARD",
+     "MULTISET",
+     "ORDER",
+     "IDENT",
+     "PAIRING"
+    ],
+    "FS_A5": []
+   },
+   "blindness": {
+    "atoms_invisible_to_fixed": [
+     "FS_A3"
+    ],
+    "count": 1,
+    "what_they_do": {
+     "FS_A3": [
+      "IDENT",
+      "PAIRING"
+     ]
+    },
+    "cells_that_show_it": {
+     "FS_A3": [
+      {
+       "state_class": "TARGET_ABSENT",
+       "binding": "SAME_CONTENT",
+       "full": [
+        "IDENT",
+        "PAIRING"
+       ]
+      },
+      {
+       "state_class": "TARGET_EXISTS",
+       "binding": "NEW_CONTENT",
+       "full": [
+        "IDENT",
+        "PAIRING"
+       ]
+      },
+      {
+       "state_class": "TARGET_EXISTS",
+       "binding": "SAME_CONTENT",
+       "full": [
+        "IDENT",
+        "PAIRING"
+       ]
+      }
+     ]
+    },
+    "reproduced_by_a_second_pass": true
+   },
+   "distinguishable_atom_pairs": {
+    "fixed": 6,
+    "full": 7
+   }
+  },
+  "GIT": {
+   "atoms_offered": 5,
+   "adaptation_trials": 40,
+   "union_fixed": {
+    "GIT_A1": [
+     "CARD",
+     "MULTISET"
+    ],
+    "GIT_A2": [
+     "CARD",
+     "MULTISET"
+    ],
+    "GIT_A3": [
+     "MULTISET"
+    ],
+    "GIT_A4": [],
+    "GIT_A5": []
+   },
+   "union_full": {
+    "GIT_A1": [
+     "CARD",
+     "MULTISET",
+     "ORDER",
+     "IDENT",
+     "PAIRING"
+    ],
+    "GIT_A2": [
+     "CARD",
+     "MULTISET",
+     "ORDER",
+     "IDENT",
+     "PAIRING"
+    ],
+    "GIT_A3": [
+     "MULTISET",
+     "ORDER",
+     "IDENT",
+     "PAIRING"
+    ],
+    "GIT_A4": [],
+    "GIT_A5": []
+   },
+   "blindness": {
+    "atoms_invisible_to_fixed": [],
+    "count": 0,
+    "what_they_do": {},
+    "cells_that_show_it": {},
+    "reproduced_by_a_second_pass": true
+   },
+   "distinguishable_atom_pairs": {
+    "fixed": 8,
+    "full": 8
+   }
+  },
+  "TARBALL": {
+   "atoms_offered": 4,
+   "adaptation_trials": 32,
+   "union_fixed": {
+    "TAR_A1": [
+     "CARD",
+     "MULTISET"
+    ],
+    "TAR_A2": [
+     "CARD",
+     "MULTISET"
+    ],
+    "TAR_A3": [],
+    "TAR_A4": []
+   },
+   "union_full": {
+    "TAR_A1": [
+     "CARD",
+     "MULTISET",
+     "ORDER",
+     "IDENT",
+     "PAIRING"
+    ],
+    "TAR_A2": [
+     "CARD",
+     "MULTISET",
+     "ORDER",
+     "IDENT",
+     "PAIRING"
+    ],
+    "TAR_A3": [],
+    "TAR_A4": []
+   },
+   "blindness": {
+    "atoms_invisible_to_fixed": [],
+    "count": 0,
+    "what_they_do": {},
+    "cells_that_show_it": {},
+    "reproduced_by_a_second_pass": true
+   },
+   "distinguishable_atom_pairs": {
+    "fixed": 4,
+    "full": 4
+   }
+  },
+  "SQLITE": {
+   "atoms_offered": 4,
+   "adaptation_trials": 32,
+   "union_fixed": {
+    "SQL_A1": [
+     "CARD",
+     "MULTISET"
+    ],
+    "SQL_A2": [
+     "CARD",
+     "MULTISET"
+    ],
+    "SQL_A3": [
+     "MULTISET"
+    ],
+    "SQL_A4": []
+   },
+   "union_full": {
+    "SQL_A1": [
+     "CARD",
+     "MULTISET",
+     "ORDER",
+     "IDENT",
+     "PAIRING"
+    ],
+    "SQL_A2": [
+     "CARD",
+     "MULTISET",
+     "ORDER",
+     "IDENT",
+     "PAIRING"
+    ],
+    "SQL_A3": [
+     "MULTISET",
+     "ORDER",
+     "PAIRING"
+    ],
+    "SQL_A4": []
+   },
+   "blindness": {
+    "atoms_invisible_to_fixed": [],
+    "count": 0,
+    "what_they_do": {},
+    "cells_that_show_it": {},
+    "reproduced_by_a_second_pass": true
+   },
+   "distinguishable_atom_pairs": {
+    "fixed": 5,
+    "full": 5
+   }
+  },
+  "SORT": {
+   "atoms_offered": 4,
+   "adaptation_trials": 32,
+   "union_fixed": {
+    "SRT_A1": [],
+    "SRT_A2": [],
+    "SRT_A3": [
+     "CARD",
+     "MULTISET"
+    ],
+    "SRT_A4": []
+   },
+   "union_full": {
+    "SRT_A1": [
+     "ORDER",
+     "PAIRING"
+    ],
+    "SRT_A2": [
+     "ORDER",
+     "PAIRING"
+    ],
+    "SRT_A3": [
+     "CARD",
+     "MULTISET",
+     "ORDER",
+     "IDENT",
+     "PAIRING"
+    ],
+    "SRT_A4": []
+   },
+   "blindness": {
+    "atoms_invisible_to_fixed": [
+     "SRT_A1",
+     "SRT_A2"
+    ],
+    "count": 2,
+    "what_they_do": {
+     "SRT_A1": [
+      "ORDER",
+      "PAIRING"
+     ],
+     "SRT_A2": [
+      "ORDER",
+      "PAIRING"
+     ]
+    },
+    "cells_that_show_it": {
+     "SRT_A1": [
+      {
+       "state_class": "TARGET_ABSENT",
+       "binding": "NEW_CONTENT",
+       "full": [
+        "ORDER",
+        "PAIRING"
+       ]
+      },
+      {
+       "state_class": "TARGET_ABSENT",
+       "binding": "SAME_CONTENT",
+       "full": [
+        "ORDER",
+        "PAIRING"
+       ]
+      },
+      {
+       "state_class": "TARGET_EXISTS",
+       "binding": "NEW_CONTENT",
+       "full": [
+        "ORDER",
+        "PAIRING"
+       ]
+      },
+      {
+       "state_class": "TARGET_EXISTS",
+       "binding": "SAME_CONTENT",
+       "full": [
+        "ORDER",
+        "PAIRING"
+       ]
+      }
+     ],
+     "SRT_A2": [
+      {
+       "state_class": "TARGET_ABSENT",
+       "binding": "NEW_CONTENT",
+       "full": [
+        "ORDER",
+        "PAIRING"
+       ]
+      },
+      {
+       "state_class": "TARGET_ABSENT",
+       "binding": "SAME_CONTENT",
+       "full": [
+        "ORDER",
+        "PAIRING"
+       ]
+      },
+      {
+       "state_class": "TARGET_EXISTS",
+       "binding": "NEW_CONTENT",
+       "full": [
+        "ORDER",
+        "PAIRING"
+       ]
+      },
+      {
+       "state_class": "TARGET_EXISTS",
+       "binding": "SAME_CONTENT",
+       "full": [
+        "ORDER",
+        "PAIRING"
+       ]
+      }
+     ]
+    },
+    "reproduced_by_a_second_pass": true
+   },
+   "distinguishable_atom_pairs": {
+    "fixed": 3,
+    "full": 5
+   }
+  }
+ },
+ "rows": [
+  {
+   "request": "one more copy of the new content",
+   "machine": "FILESYSTEM",
+   "relation_needed": "MULTISET",
+   "fixed": {
+    "request": "one more copy of the new content",
+    "machine": "FILESYSTEM",
+    "relation": "MULTISET",
+    "stateable": true,
+    "candidates": 3,
+    "executed": [
+     {
+      "atom": "FS_A1",
+      "moved": [
+       "CARD",
+       "MULTISET"
+      ],
+      "satisfied": true
+     }
+    ],
+    "atom": "FS_A1",
+    "solved": true,
+    "verdict_is_the_reader": true,
+    "stable_on_a_second_read": true
+   },
+   "goal_directed": {
+    "request": "one more copy of the new content",
+    "machine": "FILESYSTEM",
+    "relation": "MULTISET",
+    "stateable": true,
+    "candidates": 3,
+    "executed": [
+     {
+      "atom": "FS_A1",
+      "moved": [
+       "MULTISET"
+      ],
+      "satisfied": true
+     }
+    ],
+    "atom": "FS_A1",
+    "solved": true,
+    "verdict_is_the_reader": true,
+    "stable_on_a_second_read": true
+   },
+   "full": {
+    "request": "one more copy of the new content",
+    "machine": "FILESYSTEM",
+    "relation": "MULTISET",
+    "stateable": true,
+    "candidates": 4,
+    "executed": [
+     {
+      "atom": "FS_A1",
+      "moved": [
+       "CARD",
+       "MULTISET",
+       "ORDER",
+       "IDENT",
+       "PAIRING"
+      ],
+      "satisfied": true
+     }
+    ],
+    "atom": "FS_A1",
+    "solved": true,
+    "verdict_is_the_reader": true,
+    "stable_on_a_second_read": true
+   }
+  },
+  {
+   "request": "move the seed content to a new name",
+   "machine": "FILESYSTEM",
+   "relation_needed": "PAIRING",
+   "fixed": {
+    "request": "move the seed content to a new name",
+    "machine": "FILESYSTEM",
+    "relation": "PAIRING",
+    "stateable": false,
+    "candidates": 3,
+    "executed": [],
+    "atom": null,
+    "solved": false,
+    "verdict_is_the_reader": true,
+    "stable_on_a_second_read": false
+   },
+   "goal_directed": {
+    "request": "move the seed content to a new name",
+    "machine": "FILESYSTEM",
+    "relation": "PAIRING",
+    "stateable": true,
+    "candidates": 4,
+    "executed": [
+     {
+      "atom": "FS_A1",
+      "moved": [
+       "MULTISET",
+       "PAIRING"
+      ],
+      "satisfied": false
+     },
+     {
+      "atom": "FS_A2",
+      "moved": [
+       "MULTISET",
+       "PAIRING"
+      ],
+      "satisfied": false
+     },
+     {
+      "atom": "FS_A3",
+      "moved": [
+       "PAIRING"
+      ],
+      "satisfied": true
+     }
+    ],
+    "atom": "FS_A3",
+    "solved": true,
+    "verdict_is_the_reader": true,
+    "stable_on_a_second_read": true
+   },
+   "full": {
+    "request": "move the seed content to a new name",
+    "machine": "FILESYSTEM",
+    "relation": "PAIRING",
+    "stateable": true,
+    "candidates": 4,
+    "executed": [
+     {
+      "atom": "FS_A1",
+      "moved": [
+       "CARD",
+       "MULTISET",
+       "ORDER",
+       "IDENT",
+       "PAIRING"
+      ],
+      "satisfied": false
+     },
+     {
+      "atom": "FS_A2",
+      "moved": [
+       "CARD",
+       "MULTISET",
+       "ORDER",
+       "IDENT",
+       "PAIRING"
+      ],
+      "satisfied": false
+     },
+     {
+      "atom": "FS_A3",
+      "moved": [
+       "IDENT",
+       "PAIRING"
+      ],
+      "satisfied": true
+     }
+    ],
+    "atom": "FS_A3",
+    "solved": true,
+    "verdict_is_the_reader": true,
+    "stable_on_a_second_read": true
+   },
+   "the_atom_it_needs_is_invisible_to_fixed": true
+  },
+  {
+   "request": "a new commit object, same subjects",
+   "machine": "GIT",
+   "relation_needed": "IDENT",
+   "fixed": {
+    "request": "a new commit object, same subjects",
+    "machine": "GIT",
+    "relation": "IDENT",
+    "stateable": false,
+    "candidates": 3,
+    "executed": [],
+    "atom": null,
+    "solved": false,
+    "verdict_is_the_reader": true,
+    "stable_on_a_second_read": false
+   },
+   "goal_directed": {
+    "request": "a new commit object, same subjects",
+    "machine": "GIT",
+    "relation": "IDENT",
+    "stateable": true,
+    "candidates": 3,
+    "executed": [
+     {
+      "atom": "GIT_A1",
+      "moved": [
+       "MULTISET",
+       "IDENT"
+      ],
+      "satisfied": false
+     },
+     {
+      "atom": "GIT_A2",
+      "moved": [
+       "MULTISET",
+       "IDENT"
+      ],
+      "satisfied": false
+     },
+     {
+      "atom": "GIT_A3",
+      "moved": [
+       "MULTISET",
+       "IDENT"
+      ],
+      "satisfied": false
+     }
+    ],
+    "atom": null,
+    "solved": false,
+    "verdict_is_the_reader": true,
+    "stable_on_a_second_read": false
+   },
+   "full": {
+    "request": "a new commit object, same subjects",
+    "machine": "GIT",
+    "relation": "IDENT",
+    "stateable": true,
+    "candidates": 3,
+    "executed": [
+     {
+      "atom": "GIT_A1",
+      "moved": [
+       "CARD",
+       "MULTISET",
+       "ORDER",
+       "IDENT",
+       "PAIRING"
+      ],
+      "satisfied": false
+     },
+     {
+      "atom": "GIT_A2",
+      "moved": [
+       "CARD",
+       "MULTISET",
+       "ORDER",
+       "IDENT",
+       "PAIRING"
+      ],
+      "satisfied": false
+     },
+     {
+      "atom": "GIT_A3",
+      "moved": [
+       "MULTISET",
+       "ORDER",
+       "IDENT",
+       "PAIRING"
+      ],
+      "satisfied": false
+     }
+    ],
+    "atom": null,
+    "solved": false,
+    "verdict_is_the_reader": true,
+    "stable_on_a_second_read": false
+   },
+   "excluded_from_acceptance": "git identity is a function of tree, parent, message and dates; measured here: the hash did not move"
+  },
+  {
+   "request": "the lines in ascending order",
+   "machine": "SORT",
+   "relation_needed": "ORDER",
+   "fixed": {
+    "request": "the lines in ascending order",
+    "machine": "SORT",
+    "relation": "ORDER",
+    "stateable": false,
+    "candidates": 1,
+    "executed": [],
+    "atom": null,
+    "solved": false,
+    "verdict_is_the_reader": true,
+    "stable_on_a_second_read": false
+   },
+   "goal_directed": {
+    "request": "the lines in ascending order",
+    "machine": "SORT",
+    "relation": "ORDER",
+    "stateable": true,
+    "candidates": 3,
+    "executed": [
+     {
+      "atom": "SRT_A1",
+      "moved": [
+       "ORDER"
+      ],
+      "satisfied": true
+     }
+    ],
+    "atom": "SRT_A1",
+    "solved": true,
+    "verdict_is_the_reader": true,
+    "stable_on_a_second_read": true
+   },
+   "full": {
+    "request": "the lines in ascending order",
+    "machine": "SORT",
+    "relation": "ORDER",
+    "stateable": true,
+    "candidates": 3,
+    "executed": [
+     {
+      "atom": "SRT_A1",
+      "moved": [
+       "ORDER",
+       "PAIRING"
+      ],
+      "satisfied": true
+     }
+    ],
+    "atom": "SRT_A1",
+    "solved": true,
+    "verdict_is_the_reader": true,
+    "stable_on_a_second_read": true
+   },
+   "the_atom_it_needs_is_invisible_to_fixed": true
+  },
+  {
+   "request": "the seed row must hold the new value",
+   "machine": "SQLITE",
+   "relation_needed": "PAIRING",
+   "fixed": {
+    "request": "the seed row must hold the new value",
+    "machine": "SQLITE",
+    "relation": "PAIRING",
+    "stateable": false,
+    "candidates": 3,
+    "executed": [],
+    "atom": null,
+    "solved": false,
+    "verdict_is_the_reader": true,
+    "stable_on_a_second_read": false
+   },
+   "goal_directed": {
+    "request": "the seed row must hold the new value",
+    "machine": "SQLITE",
+    "relation": "PAIRING",
+    "stateable": true,
+    "candidates": 3,
+    "executed": [
+     {
+      "atom": "SQL_A1",
+      "moved": [
+       "MULTISET",
+       "PAIRING"
+      ],
+      "satisfied": false
+     },
+     {
+      "atom": "SQL_A2",
+      "moved": [
+       "MULTISET",
+       "PAIRING"
+      ],
+      "satisfied": false
+     },
+     {
+      "atom": "SQL_A3",
+      "moved": [
+       "MULTISET",
+       "PAIRING"
+      ],
+      "satisfied": true
+     }
+    ],
+    "atom": "SQL_A3",
+    "solved": true,
+    "verdict_is_the_reader": true,
+    "stable_on_a_second_read": true
+   },
+   "full": {
+    "request": "the seed row must hold the new value",
+    "machine": "SQLITE",
+    "relation": "PAIRING",
+    "stateable": true,
+    "candidates": 3,
+    "executed": [
+     {
+      "atom": "SQL_A1",
+      "moved": [
+       "CARD",
+       "MULTISET",
+       "ORDER",
+       "IDENT",
+       "PAIRING"
+      ],
+      "satisfied": false
+     },
+     {
+      "atom": "SQL_A2",
+      "moved": [
+       "CARD",
+       "MULTISET",
+       "ORDER",
+       "IDENT",
+       "PAIRING"
+      ],
+      "satisfied": false
+     },
+     {
+      "atom": "SQL_A3",
+      "moved": [
+       "MULTISET",
+       "ORDER",
+       "PAIRING"
+      ],
+      "satisfied": true
+     }
+    ],
+    "atom": "SQL_A3",
+    "solved": true,
+    "verdict_is_the_reader": true,
+    "stable_on_a_second_read": true
+   },
+   "the_atom_it_needs_is_invisible_to_fixed": false
+  },
+  {
+   "request": "one more member with the new content",
+   "machine": "TARBALL",
+   "relation_needed": "MULTISET",
+   "fixed": {
+    "request": "one more member with the new content",
+    "machine": "TARBALL",
+    "relation": "MULTISET",
+    "stateable": true,
+    "candidates": 2,
+    "executed": [
+     {
+      "atom": "TAR_A1",
+      "moved": [
+       "CARD",
+       "MULTISET"
+      ],
+      "satisfied": true
+     }
+    ],
+    "atom": "TAR_A1",
+    "solved": true,
+    "verdict_is_the_reader": true,
+    "stable_on_a_second_read": true
+   },
+   "goal_directed": {
+    "request": "one more member with the new content",
+    "machine": "TARBALL",
+    "relation": "MULTISET",
+    "stateable": true,
+    "candidates": 2,
+    "executed": [
+     {
+      "atom": "TAR_A1",
+      "moved": [
+       "MULTISET"
+      ],
+      "satisfied": true
+     }
+    ],
+    "atom": "TAR_A1",
+    "solved": true,
+    "verdict_is_the_reader": true,
+    "stable_on_a_second_read": true
+   },
+   "full": {
+    "request": "one more member with the new content",
+    "machine": "TARBALL",
+    "relation": "MULTISET",
+    "stateable": true,
+    "candidates": 2,
+    "executed": [
+     {
+      "atom": "TAR_A1",
+      "moved": [
+       "CARD",
+       "MULTISET",
+       "ORDER",
+       "IDENT",
+       "PAIRING"
+      ],
+      "satisfied": true
+     }
+    ],
+    "atom": "TAR_A1",
+    "solved": true,
+    "verdict_is_the_reader": true,
+    "stable_on_a_second_read": true
+   }
+  }
+ ],
+ "git_identity_probe": {
+  "atom": "GIT_A3",
+  "hash_before": "a13d51b5039a0fa1bb57fa8e5cf074e7777fb8dd",
+  "hash_after": "a13d51b5039a0fa1bb57fa8e5cf074e7777fb8dd",
+  "identity_changed": false
+ },
+ "seconds": 7.1,
+ "model_calls": 0,
+ "parameters_stored": 0,
+ "limits": [
+  "the five relations are a grammar, not the world: a state difference outside it -- permissions, ownership, pixels, widget trees -- is invisible to all three vocabularies",
+  "five CLI surfaces, not five GUIs: there is no display in this sandbox",
+  "adaptation costs one probe per atom per cell; the vocabulary changes what the probes buy, not their price"
+ ]
+}
