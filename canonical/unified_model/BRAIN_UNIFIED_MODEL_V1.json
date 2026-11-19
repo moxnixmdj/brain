@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 564,
+  "knowledge_documents": 565,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 7152,
+  "research_index_records": 7154,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 452,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "e95a125c0129da55f919dc30d9404ad9938aa2a572b569c7643b63c437081083"
+  "value": "cf8f58790d0d32775a1a2d87446cb4888da6ba61da944d52e5dd9d08a0a64ffd"
  },
  "engines": [
   {
@@ -44838,6 +44838,83 @@
     "repository",
     "rules",
     "working"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 18712,
+   "headings": [
+    "Agreement is not equivalence",
+    "0. The answer on one page",
+    "1. The arithmetic of \"it agrees on everything\"",
+    "2. What the two sentences actually say, and the witness",
+    "3. Why no machine can exhibit it — measured on the alphabet, not argued",
+    "4. What the field already knows about this, and the two things it proves by accident",
+    "5. The single bottleneck, sharpened",
+    "6. What this says about our model, our weights, and the sentient creature",
+    "7. What is real, what is not",
+    "8. Next step, pre-registered",
+    "Sources"
+   ],
+   "kind": "DOCUMENT",
+   "path": "AGREEMENT_IS_NOT_EQUIVALENCE_20261119_V1.md",
+   "sha256": "f278c4fbf1b757a91b2af0075180d2c12d36be3b03f359e336e8446528b1b9d5",
+   "summary": "*Round dated 2026-11-19. Receipt: `canonical/verification/AGREEMENT_IS_NOT_EQUIVALENCE_20261119_V1.json`. Tool: `canonical/tools/agreement_is_not_equivalence_v1.py`. Tests: 21, all green. Five real machines (tarball, filesystem, SQLite, git, sort), one grammar of 244 terms, 983 executed runs, no model, no weights, no parameters, no network. 138.7 s.*",
+   "terms": {
+    "2026": 10,
+    "983": 6,
+    "about": 7,
+    "agreement": 8,
+    "all": 6,
+    "alphabet": 6,
+    "any": 9,
+    "atom": 10,
+    "because": 6,
+    "behavioural": 6,
+    "class": 11,
+    "count": 13,
+    "created_once": 7,
+    "environment": 10,
+    "equivalence": 20,
+    "every": 10,
+    "exactly": 12,
+    "five": 10,
+    "goal": 16,
+    "judge": 18,
+    "machine": 10,
+    "machines": 11,
+    "measured": 7,
+    "model": 10,
+    "never": 12,
+    "no": 20,
+    "not": 55,
+    "once": 11,
+    "one": 35,
+    "only": 8,
+    "over": 8,
+    "precondition": 10,
+    "proof": 15,
+    "question": 7,
+    "real": 9,
+    "round": 15,
+    "rule": 8,
+    "run": 16,
+    "runs": 15,
+    "same": 8,
+    "so": 9,
+    "statement": 9,
+    "statements": 13,
+    "step": 11,
+    "swe-bench": 7,
+    "two": 21,
+    "user": 10,
+    "witness": 11
+   },
+   "title": "Agreement is not equivalence",
+   "title_terms": [
+    "agreement",
+    "equivalence",
+    "not"
    ]
   },
   {
@@ -88975,10 +89052,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1366,
+  "included_source_count": 1367,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "df7d7201f0a3f0120297424b30f8731f892220cfa8391be092529661f6c0d767"
+  "source_tree_digest": "2c1cf293b04adbd1974821cca5444d82a4ac2cf7863be7df1b65833eb127934e"
  },
  "research_index": [
   {
@@ -158788,6 +158865,24 @@
     "v13": 1,
     "v2": 1,
     "verify": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "2026-11-19",
+   "id": "research:canonical/verification/AGREEMENT_IS_NOT_EQUIVALENCE_20261119_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/AGREEMENT_IS_NOT_EQUIVALENCE_20261119_V1.json",
+   "schema": "BRAIN_AGREEMENT_IS_NOT_EQUIVALENCE_V1",
+   "sha256": "147110ce51c17219496dd8efab5ece594a24da736667cf273cee280a1cae516a",
+   "status": "",
+   "terms": {
+    "20261119": 1,
+    "agreement": 1,
+    "equivalence": 1,
+    "not": 1,
+    "v1": 1
    }
   },
   {
@@ -236258,6 +236353,51 @@
     "orientation": 1,
     "root_readme_identity_card_plus_machine_readable_contract_quoting_current_law_verbatim_plus_stdlib_checker_with_brief_verify_and_intent_check_plus_enforcement_inside_the_existing_trusted_load_bearing_gate_reading_the_contract_at_base__no_new_workflow__no_human_review_step": 1,
     "v1": 1
+   }
+  },
+  {
+   "action_id": "AGREEMENT_IS_NOT_EQUIVALENCE_20261119_V1",
+   "capability": false,
+   "date": "2026-11-19",
+   "id": "research:canonical/action_intents/AGREEMENT_IS_NOT_EQUIVALENCE_20261119_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/AGREEMENT_IS_NOT_EQUIVALENCE_20261119_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "57b5dc83863dfe3bcb80c5aa069c343437684f929b391a66272aa1e0b07e8fb6",
+   "status": "PROPOSED__PRODUCER_MEASURED__AGREEMENT_IS_NOT_EQUIVALENCE_AND_THE_BIT_IS_PAID_BY",
+   "terms": {
+    "20261119": 1,
+    "agreement": 1,
+    "asymmetry": 2,
+    "but": 2,
+    "closed": 2,
+    "consistent": 2,
+    "different": 2,
+    "edit": 4,
+    "environment": 2,
+    "equal": 2,
+    "experience": 2,
+    "goal": 6,
+    "identification": 2,
+    "judge": 2,
+    "learned": 2,
+    "nobody": 2,
+    "not": 5,
+    "only": 2,
+    "problem": 2,
+    "producing": 2,
+    "proof": 2,
+    "proved": 2,
+    "remaining": 2,
+    "rule": 4,
+    "runs": 2,
+    "second": 2,
+    "seen": 2,
+    "survives": 2,
+    "synthesis": 2,
+    "verifies": 2,
+    "witness": 2,
+    "words": 2
    }
   },
   {
