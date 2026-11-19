@@ -229,6 +229,6 @@ The tests for the next round are the repository's own: real, unmodified, and run
 
 ---
 
-*Authority: NONE. Producer-run sandbox measurement, 36.6 s, 13 green tests, 0 model calls, 0 stored
+*Authority: NONE. Producer-run sandbox measurement, 36.2 s, 13 green tests, 0 model calls, 0 stored
 parameters, 0 network calls at run time. Every number above is a field of the receipt, and the receipt
 recomputes to itself.*

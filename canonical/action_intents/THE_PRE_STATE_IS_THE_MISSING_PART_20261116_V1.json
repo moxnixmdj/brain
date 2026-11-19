@@ -90,7 +90,7 @@
    "model_calls": 0,
    "network_calls_at_run_time": 0,
    "parameters_stored": 0,
-   "seconds": 36.6
+   "seconds": 36.2
   },
   "declared_acceptance": {
    "P1": "MET (0 disagreements, unit steps measured)",
