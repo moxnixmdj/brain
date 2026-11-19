@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "d2b1b5e18fcd7eedcaf7c9ad30ac82357944a5f64b7628250d921de32e9d246d"
+  "value": "e95a125c0129da55f919dc30d9404ad9938aa2a572b569c7643b63c437081083"
  },
  "engines": [
   {
@@ -255428,7 +255428,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/THE_RECORD_IS_THE_COMMIT_20261116_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "1f189c8055f53d838fa1edb14522e2dcef739f23f6620913fd38538af49ea1e5",
+   "sha256": "c8a9bf9e1f6b2a595fa2c7cbca3fb39dbf665c3906ff8aaa8ce69be2dd0577ca",
    "status": "PROPOSED__PRODUCER_MEASURED__RECORD_IS_THE_COMMIT_AND_THE_PORTABLE_RESIDUAL_IS_G",
    "terms": {
     "anywhere": 2,
