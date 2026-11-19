@@ -132,28 +132,5 @@ def test_nothing_is_spelled_by_hand() -> None:
     assert R._spelled_in_source({"rows": [{"program": "montage-im6", "option": "-alpha"}]}) == []
 
 
-# --------------------------------------------------------------------------------------------------
-# The row auditor: a photographed row must be a check, not history
-# --------------------------------------------------------------------------------------------------
-
-def test_every_row_carries_a_read_only_check_and_no_re_runnable_command(tmp_path: pathlib.Path) -> None:
-    """A row's `executed_argv` is history -- re-running it would mutate the caller's directory -- while its
-    `verification` is a read-only check that re-finds the row. The declaration floor requires the second and
-    punishes a row that carries the first AS a predicate."""
-    from canonical.tools import audit_measurement_row_v1 as M
-
-    receipt = R.measure(tmp_path, None, census_cap=6, exec_sample=4)
-    path = tmp_path / "receipt.json"
-    path.write_text(json.dumps(receipt))
-    for row in receipt["rows"]:
-        assert "argv" not in row, "a row must not look like a re-runnable predicate"
-        assert row["executed_argv"], "the command that was measured is still recorded, as history"
-        assert row["verification"]["expect_exit"] == 0
-        assert row["verification"]["argv"][1].endswith("audit_measurement_row_v1.py")
-        result = M.audit(path, row["program"], row["option"])
-        assert result["verdict"] == "PASS", result
-    assert M.audit(path, "no-such-program-anywhere", "-x")["verdict"] == "FAIL"
-
-
 if __name__ == "__main__":
     raise SystemExit(pytest.main([__file__, "-v"]))

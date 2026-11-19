@@ -131,6 +131,12 @@ K4 an advertised check is real (**void** — with nothing mutating, a check cann
 K5 an undo restores the tree (**void** — no inverse pair could be formed); K6 a query is cheap (met: 46.7 s,
 1.15 MB); K7 the catalogue cannot refuse (met: no separating threshold); K8 nothing hand-written (met).
 
+The tree's declaration floor caught this round's own receipt: 164 census rows were counted as verifications
+that ask for nothing to be checked, and the floor rose from 595 to 759. Making each row carry an auditor fixed
+the count and was still wrong — it printed a "declaration" for every photograph of an execution instead of
+checking anything anyone doubted. A census row is a photograph; the check that matters is the one command in
+Reproduction, which reproduces the whole receipt. The rows are therefore history only, and the floor is HELD.
+
 Four met, one failed, two void. The failure and the voids are reported, not hidden, because they are the same
 finding from three directions: **on a machine, a list of options is not a repertoire of actions.** The executed
 sample is a stratified stride over the catalogue — half the pages advertising an effect, half not — so it is not

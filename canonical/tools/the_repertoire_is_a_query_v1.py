@@ -95,9 +95,6 @@ from typing import Any, Sequence
 
 SCHEMA = "BRAIN_THE_REPERTOIRE_IS_A_QUERY_V1"
 
-#: Where the census writes its receipt, and where each row's auditor is told to look for itself.
-RECEIPT_DEFAULT = "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json"
-
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
@@ -578,16 +575,6 @@ def measure(root: pathlib.Path, receipt_path: pathlib.Path | None = None,
             result["line"] = line[:200]
             result["advertises_check"] = any(word in line.lower() for word in GUARD_WORDS)
             result["advertises_inverse"] = any(word in line.lower() for word in INVERSE_WORDS)
-            # A photograph is not a declaration: a row that asks for nothing to be checked is history. Each
-            # row therefore carries the argv of the read-only auditor that re-finds it, so the claim "this
-            # option, executed, exited N and changed nothing" stays checkable without re-running the program
-            # (which would mutate whatever directory the auditor was called from).
-            result["executed"] = True
-            result["verification"] = {
-                "argv": ["python3", "canonical/tools/audit_measurement_row_v1.py",
-                         "--receipt", RECEIPT_DEFAULT, "--program", str(result["program"]),
-                         "--option", str(option)],
-                "expect_exit": 0}
             rows.append(result)
     # "The process existed" is not "the program accepted the option": `cut -b` runs and exits 2. An
     # action is an option its own program accepts, so the census counts `accepted`, not `ran`.

@@ -20,7 +20,7 @@
   "option_lines": 13250,
   "distinct_options": 4621,
   "catalogue_bytes": 1147793,
-  "read_seconds": 47.3,
+  "read_seconds": 47.0,
   "executed_pages": [
    "addr2line",
    "docker-entrypoint.sh",
@@ -54,7 +54,7 @@
   "advertised_checks_that_changed_nothing": 3,
   "inverse_pairs": 0,
   "inverse_pairs_that_restored": 0,
-  "seconds": 53.2,
+  "seconds": 53.1,
   "model_calls": 0,
   "parameters_stored": 0,
   "network_calls_at_run_time": 0
@@ -95,8 +95,8 @@
   },
   "K6_a_query_is_cheap": {
    "criterion": "< 300 s to re-derive, > 20 kB if stored",
-   "read_seconds": 47.3,
-   "whole_run_seconds": 53.2,
+   "read_seconds": 47.0,
+   "whole_run_seconds": 53.1,
    "catalogue_bytes": 1147793,
    "MET": true
   },
@@ -403,28 +403,14 @@
    "snippet": "addr2line: 'a.out': No such file",
    "line": "-a --addresses         Show addresses -b --target=<bfdname>  Set the binary file format -e --exe=<executable>  Set the input file name (default is a.out)",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "addr2line",
-     "--option",
-     "-a"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "addr2line",
    "program": "addr2line",
    "option": "-b",
    "exit": 1,
-   "seconds": 0.003,
+   "seconds": 0.009,
    "executed_argv": [
     "addr2line",
     "-b",
@@ -437,28 +423,14 @@
    "snippet": "addr2line: 'a.out': No such file",
    "line": "-b --target=<bfdname>  Set the binary file format -e --exe=<executable>  Set the input file name (default is a.out) -i --inlines           Unwind inlined functions",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "addr2line",
-     "--option",
-     "-b"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "addr2line",
    "program": "addr2line",
    "option": "-e",
    "exit": 1,
-   "seconds": 0.006,
+   "seconds": 0.009,
    "executed_argv": [
     "addr2line",
     "-e",
@@ -471,28 +443,14 @@
    "snippet": "addr2line: README.rst: file format not recognized",
    "line": "-e --exe=<executable>  Set the input file name (default is a.out) -i --inlines           Unwind inlined functions -j --section=<name>    Read section-relative offsets instead of addresses",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "addr2line",
-     "--option",
-     "-e"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "addr2line",
    "program": "addr2line",
    "option": "-i",
    "exit": 1,
-   "seconds": 0.001,
+   "seconds": 0.004,
    "executed_argv": [
     "addr2line",
     "-i"
@@ -504,28 +462,14 @@
    "snippet": "addr2line: 'a.out': No such file",
    "line": "-i --inlines           Unwind inlined functions -j --section=<name>    Read section-relative offsets instead of addresses -p --pretty-print      Make the output easier to read for humans",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "addr2line",
-     "--option",
-     "-i"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "addr2line",
    "program": "addr2line",
    "option": "-j",
    "exit": 1,
-   "seconds": 0.003,
+   "seconds": 0.008,
    "executed_argv": [
     "addr2line",
     "-j",
@@ -538,28 +482,14 @@
    "snippet": "addr2line: 'a.out': No such file",
    "line": "-j --section=<name>    Read section-relative offsets instead of addresses -p --pretty-print      Make the output easier to read for humans -s --basenames         Strip directory names",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "addr2line",
-     "--option",
-     "-j"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "addr2line",
    "program": "addr2line",
    "option": "-p",
    "exit": 1,
-   "seconds": 0.002,
+   "seconds": 0.004,
    "executed_argv": [
     "addr2line",
     "-p"
@@ -571,28 +501,14 @@
    "snippet": "addr2line: 'a.out': No such file",
    "line": "-p --pretty-print      Make the output easier to read for humans -s --basenames         Strip directory names -f --functions         Show function names",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "addr2line",
-     "--option",
-     "-p"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "addr2line",
    "program": "addr2line",
    "option": "-s",
    "exit": 1,
-   "seconds": 0.001,
+   "seconds": 0.004,
    "executed_argv": [
     "addr2line",
     "-s"
@@ -604,21 +520,7 @@
    "snippet": "addr2line: 'a.out': No such file",
    "line": "-s --basenames         Strip directory names -f --functions         Show function names -C --demangle[=style]  Demangle function names",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "addr2line",
-     "--option",
-     "-s"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "addr2line",
@@ -637,28 +539,14 @@
    "snippet": "addr2line: 'a.out': No such file",
    "line": "-f --functions         Show function names -C --demangle[=style]  Demangle function names -R --recurse-limit     Enable a limit on recursion whilst demangling.  [Default]",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "addr2line",
-     "--option",
-     "-f"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "addr2line",
    "program": "addr2line",
    "option": "-C",
    "exit": 1,
-   "seconds": 0.001,
+   "seconds": 0.002,
    "executed_argv": [
     "addr2line",
     "-C"
@@ -670,28 +558,14 @@
    "snippet": "addr2line: 'a.out': No such file",
    "line": "-C --demangle[=style]  Demangle function names -R --recurse-limit     Enable a limit on recursion whilst demangling.  [Default] -r --no-recurse-limit  Disable a limit on recursion whilst demangling",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "addr2line",
-     "--option",
-     "-C"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "addr2line",
    "program": "addr2line",
    "option": "-R",
    "exit": 1,
-   "seconds": 0.001,
+   "seconds": 0.004,
    "executed_argv": [
     "addr2line",
     "-R"
@@ -703,28 +577,14 @@
    "snippet": "addr2line: 'a.out': No such file",
    "line": "-R --recurse-limit     Enable a limit on recursion whilst demangling.  [Default] -r --no-recurse-limit  Disable a limit on recursion whilst demangling -h --help              Display this information",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "addr2line",
-     "--option",
-     "-R"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "addr2line",
    "program": "addr2line",
    "option": "-r",
    "exit": 1,
-   "seconds": 0.001,
+   "seconds": 0.002,
    "executed_argv": [
     "addr2line",
     "-r"
@@ -736,21 +596,7 @@
    "snippet": "addr2line: 'a.out': No such file",
    "line": "-r --no-recurse-limit  Disable a limit on recursion whilst demangling -h --help              Display this information -v --version           Display the program's version",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "addr2line",
-     "--option",
-     "-r"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "addr2line",
@@ -769,21 +615,7 @@
    "snippet": "Usage: addr2line [option(s)] [addr(s)]",
    "line": "-h --help              Display this information -v --version           Display the program's version ",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "addr2line",
-     "--option",
-     "-h"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "docker-entrypoint.sh",
@@ -802,28 +634,14 @@
    "snippet": "",
    "line": "--abort-on-uncaught-exception aborting instead of exiting causes a core file to be generated for analysis",
    "advertises_check": false,
-   "advertises_inverse": true,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "docker-entrypoint.sh",
-     "--option",
-     "--abort-on-uncaught-exception"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": true
   },
   {
    "page": "docker-entrypoint.sh",
    "program": "docker-entrypoint.sh",
    "option": "--cpu-prof-dir",
    "exit": 9,
-   "seconds": 0.016,
+   "seconds": 0.017,
    "executed_argv": [
     "docker-entrypoint.sh",
     "--cpu-prof-dir",
@@ -836,28 +654,14 @@
    "snippet": "node: --cpu-prof-dir must be used with --cpu-prof",
    "line": "--cpu-prof-dir=...          Directory where the V8 profiles generated by --cpu-prof will be placed. Does not affect --prof.",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "docker-entrypoint.sh",
-     "--option",
-     "--cpu-prof-dir"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "docker-entrypoint.sh",
    "program": "docker-entrypoint.sh",
    "option": "--env-file-if-exists",
    "exit": 0,
-   "seconds": 0.042,
+   "seconds": 0.041,
    "executed_argv": [
     "docker-entrypoint.sh",
     "--env-file-if-exists",
@@ -870,28 +674,14 @@
    "snippet": "",
    "line": "--env-file-if-exists=...    set environment variables from supplied file -e, --eval=...              evaluate script",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "docker-entrypoint.sh",
-     "--option",
-     "--env-file-if-exists"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "docker-entrypoint.sh",
    "program": "docker-entrypoint.sh",
    "option": "--experimental-sea-config",
    "exit": 1,
-   "seconds": 0.016,
+   "seconds": 0.024,
    "executed_argv": [
     "docker-entrypoint.sh",
     "--experimental-sea-config",
@@ -904,21 +694,7 @@
    "snippet": "Cannot parse JSON from README.rst: INCORRECT_TYPE: The JSON element does not have the requested type.",
    "line": "--experimental-sea-config=... Generate a blob that can be embedded into the single executable application",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "docker-entrypoint.sh",
-     "--option",
-     "--experimental-sea-config"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "docker-entrypoint.sh",
@@ -938,21 +714,7 @@
    "snippet": "node: --heap-prof-interval must be used with --heap-prof",
    "line": "--heap-prof-interval=...    specified sampling interval in bytes for the V8 heap profile generated with --heap-prof. (default: 512 * 1024)",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "docker-entrypoint.sh",
-     "--option",
-     "--heap-prof-interval"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "docker-entrypoint.sh",
@@ -972,21 +734,7 @@
    "snippet": "node: --inspect-publish-uid destination can be stderr or http",
    "line": "--inspect-publish-uid=...   comma separated list of destinations for inspector uid(default: stderr,http) --inspect-wait[=[host:]port]",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "docker-entrypoint.sh",
-     "--option",
-     "--inspect-publish-uid"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "docker-entrypoint.sh",
@@ -1005,21 +753,7 @@
    "snippet": "",
    "line": "--no-experimental-global-navigator expose experimental Navigator API on the global scope",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "docker-entrypoint.sh",
-     "--option",
-     "--no-experimental-global-navigator"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "docker-entrypoint.sh",
@@ -1038,21 +772,7 @@
    "snippet": "",
    "line": "--openssl-legacy-provider   enable OpenSSL 3.0 legacy provider --openssl-shared-config     enable OpenSSL shared configuration --pending-deprecation       emit pending deprecation warnings",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "docker-entrypoint.sh",
-     "--option",
-     "--openssl-legacy-provider"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "docker-entrypoint.sh",
@@ -1071,21 +791,7 @@
    "snippet": "",
    "line": "--report-exclude-env        Exclude environment variables when generating report (default: false) --report-exclude-network    exclude network interface diagnostics.",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "docker-entrypoint.sh",
-     "--option",
-     "--report-exclude-env"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "docker-entrypoint.sh",
@@ -1105,28 +811,14 @@
    "snippet": "",
    "line": "--test-coverage-branches=... the branch coverage minimum threshold --test-coverage-exclude=... exclude files from coverage report that",
    "advertises_check": true,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "docker-entrypoint.sh",
-     "--option",
-     "--test-coverage-branches"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "docker-entrypoint.sh",
    "program": "docker-entrypoint.sh",
    "option": "--title",
    "exit": 0,
-   "seconds": 0.041,
+   "seconds": 0.04,
    "executed_argv": [
     "docker-entrypoint.sh",
     "--title",
@@ -1139,21 +831,7 @@
    "snippet": "",
    "line": "--title=...                 the process title to use on startup --tls-cipher-list=...       use an alternative default TLS cipher list",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "docker-entrypoint.sh",
-     "--option",
-     "--title"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "docker-entrypoint.sh",
@@ -1173,21 +851,7 @@
    "snippet": "",
    "line": "--trace-event-file-pattern=... Template string specifying the filepath for the trace-events data, it supports",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "docker-entrypoint.sh",
-     "--option",
-     "--trace-event-file-pattern"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "gp-display-html",
@@ -1206,21 +870,7 @@
    "snippet": "Usage: gprofng display html [OPTION(S)] EXPERIMENT(S)",
    "line": "--help              print usage information and exit. --version           print the version number and exit. --verbose {on|off}  enable/disable verbose mode that shows diagnostic",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "gp-display-html",
-     "--option",
-     "--help"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "gp-display-html",
@@ -1239,21 +889,7 @@
    "snippet": "gp-display-html GNU binutils version 2.40.00",
    "line": "--version           print the version number and exit. --verbose {on|off}  enable/disable verbose mode that shows diagnostic messages about the processing of the data; default",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "gp-display-html",
-     "--option",
-     "--version"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "gp-display-html",
@@ -1272,21 +908,7 @@
    "snippet": "There is one error in the options:",
    "line": "--verbose {on|off}  enable/disable verbose mode that shows diagnostic messages about the processing of the data; default is off.",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "gp-display-html",
-     "--option",
-     "--verbose"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "gp-display-html",
@@ -1305,28 +927,14 @@
    "snippet": "[Error]   input error:   2 fatal input errors have been detected:",
    "line": "-d, --debug {on|s|m|l|xl|off}  control the printing of run time information to assist with troubleshooting, or further development of this tool; on gives a modest amount",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "gp-display-html",
-     "--option",
-     "-d"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "gp-display-html",
    "program": "gp-display-html",
    "option": "--debug",
    "exit": 0,
-   "seconds": 0.032,
+   "seconds": 0.064,
    "executed_argv": [
     "gp-display-html",
     "--debug"
@@ -1338,21 +946,7 @@
    "snippet": "There is one error in the options:",
    "line": "-d, --debug {on|s|m|l|xl|off}  control the printing of run time information to assist with troubleshooting, or further development of this tool; on gives a modest amount",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "gp-display-html",
-     "--option",
-     "--debug"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "gp-display-html",
@@ -1371,28 +965,14 @@
    "snippet": "[Error]   input error:   2 fatal input errors have been detected:",
    "line": "-hp, ----highlight-percentage <value>  a percentage value in the interval [0,100] to select and color code source lines as well as instructions that are",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "gp-display-html",
-     "--option",
-     "-hp"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "gp-display-html",
    "program": "gp-display-html",
    "option": "-o",
    "exit": 255,
-   "seconds": 0.114,
+   "seconds": 0.115,
    "executed_argv": [
     "gp-display-html",
     "-o"
@@ -1404,28 +984,14 @@
    "snippet": "[Error]   input error:   2 fatal input errors have been detected:",
    "line": "-o, --output <dir-name>  use <dir-name> to store the results in; the default name is ./display.<n>.html with <n> the first positive integer number not in use; an",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "gp-display-html",
-     "--option",
-     "-o"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "gp-display-html",
    "program": "gp-display-html",
    "option": "--output",
    "exit": 255,
-   "seconds": 0.065,
+   "seconds": 0.115,
    "executed_argv": [
     "gp-display-html",
     "--output"
@@ -1437,28 +1003,14 @@
    "snippet": "[Error]   input error:   2 fatal input errors have been detected:",
    "line": "-o, --output <dir-name>  use <dir-name> to store the results in; the default name is ./display.<n>.html with <n> the first positive integer number not in use; an",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "gp-display-html",
-     "--option",
-     "--output"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "gp-display-html",
    "program": "gp-display-html",
    "option": "-O",
    "exit": 255,
-   "seconds": 0.065,
+   "seconds": 0.115,
    "executed_argv": [
     "gp-display-html",
     "-O"
@@ -1470,21 +1022,7 @@
    "snippet": "[Error]   input error:   2 fatal input errors have been detected:",
    "line": "-O, --overwrite <dir-name>  use <dir-name> to store the results in and overwrite any existing directory with the same name; make sure that umask is set to the",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "gp-display-html",
-     "--option",
-     "-O"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "gp-display-html",
@@ -1503,21 +1041,7 @@
    "snippet": "[Error]   input error:   2 fatal input errors have been detected:",
    "line": "-O, --overwrite <dir-name>  use <dir-name> to store the results in and overwrite any existing directory with the same name; make sure that umask is set to the",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "gp-display-html",
-     "--option",
-     "--overwrite"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "gp-display-html",
@@ -1536,28 +1060,14 @@
    "snippet": "[Error]   input error:   2 fatal input errors have been detected:",
    "line": "-q, --quiet {on|off}  disable/allow the display of all warning, debug and verbose messages; if set to on, the settings for verbose, warnings and debug are ignored; default",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "gp-display-html",
-     "--option",
-     "-q"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "gp-display-html",
    "program": "gp-display-html",
    "option": "--quiet",
    "exit": 0,
-   "seconds": 0.065,
+   "seconds": 0.066,
    "executed_argv": [
     "gp-display-html",
     "--quiet"
@@ -1569,28 +1079,14 @@
    "snippet": "There is one error in the options:",
    "line": "-q, --quiet {on|off}  disable/allow the display of all warning, debug and verbose messages; if set to on, the settings for verbose, warnings and debug are ignored; default",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "gp-display-html",
-     "--option",
-     "--quiet"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "pip3",
    "program": "pip3",
    "option": "-h",
    "exit": 0,
-   "seconds": 0.215,
+   "seconds": 0.214,
    "executed_argv": [
     "pip3",
     "-h"
@@ -1602,28 +1098,14 @@
    "snippet": "Usage:   ",
    "line": "-h, --help                  Show help. --debug                     Let unhandled exceptions propagate outside the main subroutine, instead of logging them to",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "pip3",
-     "--option",
-     "-h"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "pip3",
    "program": "pip3",
    "option": "--debug",
    "exit": 0,
-   "seconds": 0.215,
+   "seconds": 0.22,
    "executed_argv": [
     "pip3",
     "--debug"
@@ -1635,21 +1117,7 @@
    "snippet": "Usage:   ",
    "line": "--debug                     Let unhandled exceptions propagate outside the main subroutine, instead of logging them to stderr.",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "pip3",
-     "--option",
-     "--debug"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "pip3",
@@ -1668,28 +1136,14 @@
    "snippet": "Usage:   ",
    "line": "--require-virtualenv        Allow pip to only run in a virtual environment; exit with an error otherwise. --python <python>           Run pip with the specified Python interpreter.",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "pip3",
-     "--option",
-     "--require-virtualenv"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "pip3",
    "program": "pip3",
    "option": "-v",
    "exit": 0,
-   "seconds": 0.216,
+   "seconds": 0.214,
    "executed_argv": [
     "pip3",
     "-v"
@@ -1701,28 +1155,14 @@
    "snippet": "Usage:   ",
    "line": "-v, --verbose               Give more output. Option is additive, and can be used up to 3 times. -V, --version               Show version and exit.",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "pip3",
-     "--option",
-     "-v"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "pip3",
    "program": "pip3",
    "option": "-V",
    "exit": 0,
-   "seconds": 0.215,
+   "seconds": 0.216,
    "executed_argv": [
     "pip3",
     "-V"
@@ -1734,21 +1174,7 @@
    "snippet": "pip 23.0.1 from /usr/lib/python3/dist-packages/pip (python 3.11)",
    "line": "-V, --version               Show version and exit. -q, --quiet                 Give less output. Option is additive, and can be used up to 3 times (corresponding to WARNING,",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "pip3",
-     "--option",
-     "-V"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "pip3",
@@ -1767,21 +1193,7 @@
    "snippet": "Usage:   ",
    "line": "-q, --quiet                 Give less output. Option is additive, and can be used up to 3 times (corresponding to WARNING, ERROR, and CRITICAL logging levels).",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "pip3",
-     "--option",
-     "-q"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "pip3",
@@ -1800,21 +1212,7 @@
    "snippet": "Usage:   ",
    "line": "--log <path>                Path to a verbose appending log. --no-input                  Disable prompting for input. --proxy <proxy>             Specify a proxy in the form",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "pip3",
-     "--option",
-     "--log"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "pip3",
@@ -1833,28 +1231,14 @@
    "snippet": "Usage:   ",
    "line": "--proxy <proxy>             Specify a proxy in the form scheme://[user:passwd@]proxy.server:port. --retries <retries>         Maximum number of retries each connection should",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "pip3",
-     "--option",
-     "--proxy"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "pip3",
    "program": "pip3",
    "option": "--timeout",
    "exit": 2,
-   "seconds": 0.215,
+   "seconds": 0.216,
    "executed_argv": [
     "pip3",
     "--timeout"
@@ -1866,21 +1250,7 @@
    "snippet": "Usage:   ",
    "line": "--timeout <sec>             Set the socket timeout (default 15 seconds). --exists-action <action>    Default action when a path already exists: (s)witch, (i)gnore, (w)ipe, (b)ackup, (a)bort.",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "pip3",
-     "--option",
-     "--timeout"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "pip3",
@@ -1899,21 +1269,7 @@
    "snippet": "Usage:   ",
    "line": "--trusted-host <hostname>   Mark this host or host:port pair as trusted, even though it does not have valid or any HTTPS. --cert <path>               Path to PEM-encoded CA certificate bundle. If",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "pip3",
-     "--option",
-     "--trusted-host"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "pip3",
@@ -1932,21 +1288,7 @@
    "snippet": "Usage:   ",
    "line": "--client-cert <path>        Path to SSL client certificate, a single file containing the private key and the certificate in PEM format.",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "pip3",
-     "--option",
-     "--client-cert"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "pip3",
@@ -1965,21 +1307,7 @@
    "snippet": "Usage:   ",
    "line": "--no-cache-dir              Disable the cache. --disable-pip-version-check Don't periodically check PyPI to determine",
    "advertises_check": true,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "pip3",
-     "--option",
-     "--no-cache-dir"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "slabtop",
@@ -1999,21 +1327,7 @@
    "snippet": "slabtop: illegal delay: 'README.rst'",
    "line": "-d, --delay <secs>  delay updates -o, --once          only display once, then exit -s, --sort <char>   specify sort criteria by character (see below)",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "slabtop",
-     "--option",
-     "-d"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "slabtop",
@@ -2033,21 +1347,7 @@
    "snippet": "slabtop: illegal delay: 'README.rst'",
    "line": "-d, --delay <secs>  delay updates -o, --once          only display once, then exit -s, --sort <char>   specify sort criteria by character (see below)",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "slabtop",
-     "--option",
-     "--delay"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "slabtop",
@@ -2066,28 +1366,14 @@
    "snippet": "slabtop: Unable to create slabinfo structure: Permission denied",
    "line": "-o, --once          only display once, then exit -s, --sort <char>   specify sort criteria by character (see below) ",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "slabtop",
-     "--option",
-     "-o"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "slabtop",
    "program": "slabtop",
    "option": "--once",
    "exit": 1,
-   "seconds": 0.004,
+   "seconds": 0.003,
    "executed_argv": [
     "slabtop",
     "--once"
@@ -2099,21 +1385,7 @@
    "snippet": "slabtop: Unable to create slabinfo structure: Permission denied",
    "line": "-o, --once          only display once, then exit -s, --sort <char>   specify sort criteria by character (see below) ",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "slabtop",
-     "--option",
-     "--once"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "slabtop",
@@ -2133,21 +1405,7 @@
    "snippet": "slabtop: Unable to create slabinfo structure: Permission denied",
    "line": "-s, --sort <char>   specify sort criteria by character (see below)  -h, --help     display this help and exit",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "slabtop",
-     "--option",
-     "-s"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "slabtop",
@@ -2167,21 +1425,7 @@
    "snippet": "slabtop: Unable to create slabinfo structure: Permission denied",
    "line": "-s, --sort <char>   specify sort criteria by character (see below)  -h, --help     display this help and exit",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "slabtop",
-     "--option",
-     "--sort"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "slabtop",
@@ -2200,28 +1444,14 @@
    "snippet": "Usage:",
    "line": "-h, --help     display this help and exit -V, --version  output version information and exit ",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "slabtop",
-     "--option",
-     "-h"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "slabtop",
    "program": "slabtop",
    "option": "--help",
    "exit": 0,
-   "seconds": 0.004,
+   "seconds": 0.003,
    "executed_argv": [
     "slabtop",
     "--help"
@@ -2233,21 +1463,7 @@
    "snippet": "Usage:",
    "line": "-h, --help     display this help and exit -V, --version  output version information and exit ",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "slabtop",
-     "--option",
-     "--help"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "slabtop",
@@ -2266,21 +1482,7 @@
    "snippet": "slabtop from procps-ng 4.0.2",
    "line": "-V, --version  output version information and exit  The following are valid sort criteria:",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "slabtop",
-     "--option",
-     "-V"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "slabtop",
@@ -2299,21 +1501,7 @@
    "snippet": "slabtop from procps-ng 4.0.2",
    "line": "-V, --version  output version information and exit  The following are valid sort criteria:",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "slabtop",
-     "--option",
-     "--version"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "ucf",
@@ -2332,21 +1520,7 @@
    "snippet": "Debian GNU/Linux ucf Revision: 3.00 .",
    "line": "-h,     --help          print this message -s foo, --src-dir  foo  Set the src dir (historical md5sums live here) --sum-file bar  Force the historical md5sums to be read from",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "ucf",
-     "--option",
-     "-h"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "ucf",
@@ -2365,21 +1539,7 @@
    "snippet": "Debian GNU/Linux ucf Revision: 3.00 .",
    "line": "-h,     --help          print this message -s foo, --src-dir  foo  Set the src dir (historical md5sums live here) --sum-file bar  Force the historical md5sums to be read from",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "ucf",
-     "--option",
-     "--help"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "ucf",
@@ -2399,28 +1559,14 @@
    "snippet": "ucf: Need to be run as root.",
    "line": "-s foo, --src-dir  foo  Set the src dir (historical md5sums live here) --sum-file bar  Force the historical md5sums to be read from this file.  Overrides any setting of --src-dir.",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "ucf",
-     "--option",
-     "-s"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "ucf",
    "program": "ucf",
    "option": "--src-dir",
    "exit": 2,
-   "seconds": 0.025,
+   "seconds": 0.024,
    "executed_argv": [
     "ucf",
     "--src-dir",
@@ -2433,28 +1579,14 @@
    "snippet": "ucf: Need to be run as root.",
    "line": "-s foo, --src-dir  foo  Set the src dir (historical md5sums live here) --sum-file bar  Force the historical md5sums to be read from this file.  Overrides any setting of --src-dir.",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "ucf",
-     "--option",
-     "--src-dir"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "ucf",
    "program": "ucf",
    "option": "-d",
    "exit": 2,
-   "seconds": 0.008,
+   "seconds": 0.009,
    "executed_argv": [
     "ucf",
     "-d"
@@ -2466,21 +1598,7 @@
    "snippet": "ucf: Need to be run as root.",
    "line": "-d[n], --debug=[n]      Set the Debug level to N. Please note there must be no spaces before the debug level -n,     --no-action     Dry run. No action is actually taken.",
    "advertises_check": true,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "ucf",
-     "--option",
-     "-d"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "ucf",
@@ -2499,21 +1617,7 @@
    "snippet": "ucf: Need to be run as root.",
    "line": "-d[n], --debug=[n]      Set the Debug level to N. Please note there must be no spaces before the debug level -n,     --no-action     Dry run. No action is actually taken.",
    "advertises_check": true,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "ucf",
-     "--option",
-     "--debug"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "ucf",
@@ -2532,21 +1636,7 @@
    "snippet": "*** ERROR: Need exactly two arguments, got 0",
    "line": "-n,     --no-action     Dry run. No action is actually taken. -P foo, --package foo   Don't follow dpkg-divert diversions by package foo. -v,     --verbose       Make the script verbose",
    "advertises_check": true,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "ucf",
-     "--option",
-     "-n"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "ucf",
@@ -2565,28 +1655,14 @@
    "snippet": "*** ERROR: Need exactly two arguments, got 0",
    "line": "-n,     --no-action     Dry run. No action is actually taken. -P foo, --package foo   Don't follow dpkg-divert diversions by package foo. -v,     --verbose       Make the script verbose",
    "advertises_check": true,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "ucf",
-     "--option",
-     "--no-action"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "ucf",
    "program": "ucf",
    "option": "-P",
    "exit": 2,
-   "seconds": 0.024,
+   "seconds": 0.025,
    "executed_argv": [
     "ucf",
     "-P",
@@ -2599,28 +1675,14 @@
    "snippet": "ucf: Need to be run as root.",
    "line": "-P foo, --package foo   Don't follow dpkg-divert diversions by package foo. -v,     --verbose       Make the script verbose --three-way     Register this file in the cache, and turn on the",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "ucf",
-     "--option",
-     "-P"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "ucf",
    "program": "ucf",
    "option": "--package",
    "exit": 2,
-   "seconds": 0.017,
+   "seconds": 0.025,
    "executed_argv": [
     "ucf",
     "--package",
@@ -2633,21 +1695,7 @@
    "snippet": "ucf: Need to be run as root.",
    "line": "-P foo, --package foo   Don't follow dpkg-divert diversions by package foo. -v,     --verbose       Make the script verbose --three-way     Register this file in the cache, and turn on the",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "ucf",
-     "--option",
-     "--package"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "ucf",
@@ -2666,21 +1714,7 @@
    "snippet": "ucf: Need to be run as root.",
    "line": "-v,     --verbose       Make the script verbose --three-way     Register this file in the cache, and turn on the diff3 option allowing the merging of maintainer",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "ucf",
-     "--option",
-     "-v"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "ucf",
@@ -2699,21 +1733,7 @@
    "snippet": "ucf: Need to be run as root.",
    "line": "-v,     --verbose       Make the script verbose --three-way     Register this file in the cache, and turn on the diff3 option allowing the merging of maintainer",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "ucf",
-     "--option",
-     "--verbose"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "systemd-sysext list",
@@ -2733,21 +1753,7 @@
    "snippet": "systemd-sysext [OPTIONS...] COMMAND",
    "line": "-h --help               Show this help --version            Show package version ",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "systemd-sysext",
-     "--option",
-     "-h"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "systemd-sysext list",
@@ -2767,21 +1773,7 @@
    "snippet": "systemd-sysext [OPTIONS...] COMMAND",
    "line": "-h --help               Show this help --version            Show package version ",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "systemd-sysext",
-     "--option",
-     "--help"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "systemd-sysext list",
@@ -2801,21 +1793,7 @@
    "snippet": "systemd 252 (252.39-1~deb12u2)",
    "line": "--version            Show package version  Options:",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "systemd-sysext",
-     "--option",
-     "--version"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "systemd-sysext list",
@@ -2835,28 +1813,14 @@
    "snippet": "No OS extensions found.",
    "line": "--no-pager           Do not pipe output into a pager --no-legend          Do not show the headers and footers --root=PATH          Operate relative to root path",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "systemd-sysext",
-     "--option",
-     "--no-pager"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "systemd-sysext list",
    "program": "systemd-sysext",
    "option": "--no-legend",
    "exit": 0,
-   "seconds": 0.004,
+   "seconds": 0.003,
    "executed_argv": [
     "systemd-sysext",
     "list",
@@ -2869,21 +1833,7 @@
    "snippet": "No OS extensions found.",
    "line": "--no-legend          Do not show the headers and footers --root=PATH          Operate relative to root path --json=pretty|short|off",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "systemd-sysext",
-     "--option",
-     "--no-legend"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "systemd-sysext list",
@@ -2904,21 +1854,7 @@
    "snippet": "Failed to discover extension images: Not a directory",
    "line": "--root=PATH          Operate relative to root path --json=pretty|short|off Generate JSON output",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "systemd-sysext",
-     "--option",
-     "--root"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "systemd-sysext list",
@@ -2939,21 +1875,7 @@
    "snippet": "Unknown argument to --json= switch: README.rst",
    "line": "--json=pretty|short|off Generate JSON output --force              Ignore version incompatibilities",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "systemd-sysext",
-     "--option",
-     "--json"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "systemd-sysext list",
@@ -2973,21 +1895,7 @@
    "snippet": "No OS extensions found.",
    "line": "--force              Ignore version incompatibilities  See the systemd-sysext(8) man page for details.",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "systemd-sysext",
-     "--option",
-     "--force"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "[",
@@ -3006,21 +1914,7 @@
    "snippet": "Usage: test EXPRESSION",
    "line": "--help        display this help and exit --version     output version information and exit ",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "[",
-     "--option",
-     "--help"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "[",
@@ -3039,21 +1933,7 @@
    "snippet": "[: missing ']'",
    "line": "-n STRING            the length of STRING is nonzero STRING               equivalent to -n STRING -z STRING            the length of STRING is zero",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "[",
-     "--option",
-     "-n"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "[",
@@ -3072,28 +1952,14 @@
    "snippet": "[: missing ']'",
    "line": "-b FILE     FILE exists and is block special -c FILE     FILE exists and is character special -d FILE     FILE exists and is a directory",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "[",
-     "--option",
-     "-b"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "[",
    "program": "[",
    "option": "-d",
    "exit": 2,
-   "seconds": 0.001,
+   "seconds": 0.002,
    "executed_argv": [
     "[",
     "-d"
@@ -3105,21 +1971,7 @@
    "snippet": "[: missing ']'",
    "line": "-d FILE     FILE exists and is a directory -e FILE     FILE exists -f FILE     FILE exists and is a regular file",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "[",
-     "--option",
-     "-d"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "[",
@@ -3138,21 +1990,7 @@
    "snippet": "[: missing ']'",
    "line": "-f FILE     FILE exists and is a regular file -g FILE     FILE exists and is set-group-ID -G FILE     FILE exists and is owned by the effective group ID",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "[",
-     "--option",
-     "-f"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "[",
@@ -3171,28 +2009,14 @@
    "snippet": "[: missing ']'",
    "line": "-G FILE     FILE exists and is owned by the effective group ID -h FILE     FILE exists and is a symbolic link (same as -L) -k FILE     FILE exists and has its sticky bit set",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "[",
-     "--option",
-     "-G"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "[",
    "program": "[",
    "option": "-k",
    "exit": 2,
-   "seconds": 0.002,
+   "seconds": 0.001,
    "executed_argv": [
     "[",
     "-k"
@@ -3204,21 +2028,7 @@
    "snippet": "[: missing ']'",
    "line": "-k FILE     FILE exists and has its sticky bit set -L FILE     FILE exists and is a symbolic link (same as -h) -N FILE     FILE exists and has been modified since it was last read",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "[",
-     "--option",
-     "-k"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "[",
@@ -3237,21 +2047,7 @@
    "snippet": "[: missing ']'",
    "line": "-N FILE     FILE exists and has been modified since it was last read -O FILE     FILE exists and is owned by the effective user ID -p FILE     FILE exists and is a named pipe",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "[",
-     "--option",
-     "-N"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "[",
@@ -3270,21 +2066,7 @@
    "snippet": "[: missing ']'",
    "line": "-p FILE     FILE exists and is a named pipe -r FILE     FILE exists and the user has read access -s FILE     FILE exists and has a size greater than zero",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "[",
-     "--option",
-     "-p"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "[",
@@ -3303,28 +2085,14 @@
    "snippet": "[: missing ']'",
    "line": "-s FILE     FILE exists and has a size greater than zero -S FILE     FILE exists and is a socket -t FD       file descriptor FD is opened on a terminal",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "[",
-     "--option",
-     "-s"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "[",
    "program": "[",
    "option": "-t",
    "exit": 2,
-   "seconds": 0.002,
+   "seconds": 0.001,
    "executed_argv": [
     "[",
     "-t"
@@ -3336,28 +2104,14 @@
    "snippet": "[: missing ']'",
    "line": "-t FD       file descriptor FD is opened on a terminal -u FILE     FILE exists and its set-user-ID bit is set -w FILE     FILE exists and the user has write access",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "[",
-     "--option",
-     "-t"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "[",
    "program": "[",
    "option": "-w",
    "exit": 2,
-   "seconds": 0.001,
+   "seconds": 0.002,
    "executed_argv": [
     "[",
     "-w"
@@ -3369,21 +2123,7 @@
    "snippet": "[: missing ']'",
    "line": "-w FILE     FILE exists and the user has write access -x FILE     FILE exists and the user has execute (or search) access ",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "[",
-     "--option",
-     "-w"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "cpp",
@@ -3402,21 +2142,7 @@
    "snippet": "# 0 \"<stdin>\"",
    "line": "-pass-exit-codes         Exit with highest error code from a phase. --help                   Display this information. --target-help            Display target specific command line options (including ",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "cpp",
-     "--option",
-     "-pass-exit-codes"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "cpp",
@@ -3435,21 +2161,7 @@
    "snippet": "Usage: cpp [options] file...",
    "line": "--help={common|optimizers|params|target|warnings|[^]{joined|separate|undocumented}}[,...]. Display specific types of command line options. (Use '-v --help' to display command line options of sub-proce",
    "advertises_check": false,
-   "advertises_inverse": true,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "cpp",
-     "--option",
-     "--help"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": true
   },
   {
    "page": "cpp",
@@ -3468,21 +2180,7 @@
    "snippet": "12",
    "line": "-dumpversion             Display the version of the compiler. -dumpmachine             Display the compiler's target processor. -foffload=<targets>      Specify offloading targets.",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "cpp",
-     "--option",
-     "-dumpversion"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "cpp",
@@ -3501,28 +2199,14 @@
    "snippet": "install: /usr/lib/gcc/x86_64-linux-gnu/12/",
    "line": "-print-search-dirs       Display the directories in the compiler's search path. -print-libgcc-file-name  Display the name of the compiler's companion library. -print-file-name=<lib>   Display the full",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "cpp",
-     "--option",
-     "-print-search-dirs"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "cpp",
    "program": "cpp",
    "option": "-print-prog-name",
    "exit": 1,
-   "seconds": 0.003,
+   "seconds": 0.004,
    "executed_argv": [
     "cpp",
     "-print-prog-name"
@@ -3534,28 +2218,14 @@
    "snippet": "cpp: error: unrecognized command-line option '-print-prog-name'; did you mean '--print-prog-name'?",
    "line": "-print-prog-name=<prog>  Display the full path to compiler component <prog>. -print-multiarch         Display the target's normalized GNU triplet, used as a component in the library path.",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "cpp",
-     "--option",
-     "-print-prog-name"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "cpp",
    "program": "cpp",
    "option": "-print-multi-lib",
    "exit": 0,
-   "seconds": 0.002,
+   "seconds": 0.004,
    "executed_argv": [
     "cpp",
     "-print-multi-lib"
@@ -3567,21 +2237,7 @@
    "snippet": ".;",
    "line": "-print-multi-lib         Display the mapping between command line options and multiple library search directories. -print-multi-os-directory Display the relative path to OS libraries.",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "cpp",
-     "--option",
-     "-print-multi-lib"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "cpp",
@@ -3600,28 +2256,14 @@
    "snippet": "cpp: fatal error: not configured with sysroot headers suffix",
    "line": "-print-sysroot-headers-suffix Display the sysroot suffix used to find headers. -Wa,<options>            Pass comma-separated <options> on to the assembler. -Wp,<options>            Pass comma-separate",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "cpp",
-     "--option",
-     "-print-sysroot-headers-suffix"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "cpp",
    "program": "cpp",
    "option": "-Wl",
    "exit": 1,
-   "seconds": 0.003,
+   "seconds": 0.004,
    "executed_argv": [
     "cpp",
     "-Wl"
@@ -3633,21 +2275,7 @@
    "snippet": "cpp: error: unrecognized command-line option '-Wl'; did you mean '-W'?",
    "line": "-Wl,<options>            Pass comma-separated <options> on to the linker. -Xassembler <arg>        Pass <arg> on to the assembler. -Xpreprocessor <arg>     Pass <arg> on to the preprocessor.",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "cpp",
-     "--option",
-     "-Wl"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "cpp",
@@ -3667,21 +2295,7 @@
    "snippet": "# 0 \"<stdin>\"",
    "line": "-Xlinker <arg>           Pass <arg> on to the linker. -save-temps              Do not delete intermediate files. -save-temps=<arg>        Do not delete intermediate files.",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "cpp",
-     "--option",
-     "-Xlinker"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "cpp",
@@ -3700,21 +2314,7 @@
    "snippet": "# 0 \"<stdin>\"",
    "line": "-no-canonical-prefixes   Do not canonicalize paths when building relative prefixes to other gcc components. -pipe                    Use pipes rather than intermediate files.",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "cpp",
-     "--option",
-     "-no-canonical-prefixes"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "cpp",
@@ -3734,21 +2334,7 @@
    "snippet": "cpp: fatal error: specs file malformed after 4 characters",
    "line": "-specs=<file>            Override built-in specs with the contents of <file>. -std=<standard>          Assume that the input sources are for <standard>. --sysroot=<directory>    Use <directory> as the",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "cpp",
-     "--option",
-     "-specs"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "cpp",
@@ -3768,21 +2354,7 @@
    "snippet": "# 0 \"<stdin>\"",
    "line": "-B <directory>           Add <directory> to the compiler's search paths. -v                       Display the programs invoked by the compiler. -###                     Like -v but options quoted and ",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "cpp",
-     "--option",
-     "-B"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "false",
@@ -3801,28 +2373,14 @@
    "snippet": "Usage: false [ignored command line arguments]",
    "line": "--help        display this help and exit --version     output version information and exit ",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "false",
-     "--option",
-     "--help"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "false",
    "program": "false",
    "option": "--version",
    "exit": 1,
-   "seconds": 0.001,
+   "seconds": 0.004,
    "executed_argv": [
     "false",
     "--version"
@@ -3834,21 +2392,7 @@
    "snippet": "false (GNU coreutils) 9.1",
    "line": "--version     output version information and exit  NOTE: your shell may have its own version of false, which usually supersedes",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "false",
-     "--option",
-     "--version"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "last",
@@ -3867,28 +2411,14 @@
    "snippet": "reboot   system boot  Mon Jun 15 17:00   still running      6.1.158+",
    "line": "-a, --hostlast       display hostnames in the last column -d, --dns            translate the IP number back into a hostname -f, --file <file>    use a specific file instead of /var/log/wtmp",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "last",
-     "--option",
-     "-a"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "last",
    "program": "last",
    "option": "-d",
    "exit": 0,
-   "seconds": 0.004,
+   "seconds": 0.008,
    "executed_argv": [
     "last",
     "-d"
@@ -3900,21 +2430,7 @@
    "snippet": "reboot   system boot  0.0.0.0          Mon Jun 15 17:00   still running",
    "line": "-d, --dns            translate the IP number back into a hostname -f, --file <file>    use a specific file instead of /var/log/wtmp -F, --fulltimes      print full login and logout times and dates",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "last",
-     "--option",
-     "-d"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "last",
@@ -3931,31 +2447,17 @@
    "changed": false,
    "accepted": true,
    "ran": true,
-   "snippet": "README.rst begins Thu Nov 19 05:46:59 2026",
+   "snippet": "README.rst begins Thu Nov 19 05:54:35 2026",
    "line": "-f, --file <file>    use a specific file instead of /var/log/wtmp -F, --fulltimes      print full login and logout times and dates -i, --ip             display IP numbers in numbers-and-dots notation",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "last",
-     "--option",
-     "-f"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "last",
    "program": "last",
    "option": "-F",
    "exit": 0,
-   "seconds": 0.001,
+   "seconds": 0.002,
    "executed_argv": [
     "last",
     "-F"
@@ -3967,21 +2469,7 @@
    "snippet": "reboot   system boot  6.1.158+         Mon Jun 15 17:00:01 2026   still running",
    "line": "-F, --fulltimes      print full login and logout times and dates -i, --ip             display IP numbers in numbers-and-dots notation -n, --limit <number> how many lines to show",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "last",
-     "--option",
-     "-F"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "last",
@@ -4000,28 +2488,14 @@
    "snippet": "reboot   system boot  0.0.0.0          Mon Jun 15 17:00   still running",
    "line": "-i, --ip             display IP numbers in numbers-and-dots notation -n, --limit <number> how many lines to show -R, --nohostname     don't display the hostname field",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "last",
-     "--option",
-     "-i"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "last",
    "program": "last",
    "option": "-n",
    "exit": 1,
-   "seconds": 0.004,
+   "seconds": 0.003,
    "executed_argv": [
     "last",
     "-n",
@@ -4034,21 +2508,7 @@
    "snippet": "last: failed to parse number: 'README.rst'",
    "line": "-n, --limit <number> how many lines to show -R, --nohostname     don't display the hostname field -s, --since <time>   display the lines since the specified time",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "last",
-     "--option",
-     "-n"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "last",
@@ -4067,28 +2527,14 @@
    "snippet": "reboot   system boot  Mon Jun 15 17:00   still running",
    "line": "-R, --nohostname     don't display the hostname field -s, --since <time>   display the lines since the specified time -t, --until <time>   display the lines until the specified time",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "last",
-     "--option",
-     "-R"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "last",
    "program": "last",
    "option": "-s",
    "exit": 1,
-   "seconds": 0.004,
+   "seconds": 0.003,
    "executed_argv": [
     "last",
     "-s",
@@ -4101,21 +2547,7 @@
    "snippet": "last: invalid time value \"README.rst\"",
    "line": "-s, --since <time>   display the lines since the specified time -t, --until <time>   display the lines until the specified time -p, --present <time> display who were present at the specified time",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "last",
-     "--option",
-     "-s"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "last",
@@ -4135,21 +2567,7 @@
    "snippet": "last: invalid time value \"README.rst\"",
    "line": "-t, --until <time>   display the lines until the specified time -p, --present <time> display who were present at the specified time -w, --fullnames      display full user and domain names",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "last",
-     "--option",
-     "-t"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "last",
@@ -4169,21 +2587,7 @@
    "snippet": "last: invalid time value \"README.rst\"",
    "line": "-p, --present <time> display who were present at the specified time -w, --fullnames      display full user and domain names -x, --system         display system shutdown entries and run level changes",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "last",
-     "--option",
-     "-p"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "last",
@@ -4202,21 +2606,7 @@
    "snippet": "reboot   system boot  6.1.158+         Mon Jun 15 17:00   still running",
    "line": "-w, --fullnames      display full user and domain names -x, --system         display system shutdown entries and run level changes --time-format <format>  show timestamps in the specified <format>:",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "last",
-     "--option",
-     "-w"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "last",
@@ -4235,21 +2625,7 @@
    "snippet": "runlevel (to lvl 5)   6.1.158+         Mon Jun 15 17:00   still running",
    "line": "-x, --system         display system shutdown entries and run level changes --time-format <format>  show timestamps in the specified <format>: notime|short|full|iso",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "last",
-     "--option",
-     "-x"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "piconv",
@@ -4268,21 +2644,7 @@
    "snippet": "7bit-jis",
    "line": "-l,--list lists all available encodings -r,--resolve encoding_alias",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "piconv",
-     "--option",
-     "-l"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "piconv",
@@ -4301,21 +2663,7 @@
    "snippet": "7bit-jis",
    "line": "-l,--list lists all available encodings -r,--resolve encoding_alias",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "piconv",
-     "--option",
-     "--list"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "piconv",
@@ -4334,21 +2682,7 @@
    "snippet": "Option r requires an argument",
    "line": "-r,--resolve encoding_alias resolve encoding to its (Encode) canonical name -f,--from from_encoding",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "piconv",
-     "--option",
-     "-r"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "piconv",
@@ -4367,21 +2701,7 @@
    "snippet": "Option resolve requires an argument",
    "line": "-r,--resolve encoding_alias resolve encoding to its (Encode) canonical name -f,--from from_encoding",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "piconv",
-     "--option",
-     "--resolve"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "piconv",
@@ -4400,21 +2720,7 @@
    "snippet": "Option f requires an argument",
    "line": "-f,--from from_encoding when omitted, the current locale will be used -t,--to to_encoding",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "piconv",
-     "--option",
-     "-f"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "piconv",
@@ -4433,21 +2739,7 @@
    "snippet": "Option from requires an argument",
    "line": "-f,--from from_encoding when omitted, the current locale will be used -t,--to to_encoding",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "piconv",
-     "--option",
-     "--from"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "piconv",
@@ -4466,21 +2758,7 @@
    "snippet": "Option t requires an argument",
    "line": "-t,--to to_encoding when omitted, the current locale will be used -s,--string string",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "piconv",
-     "--option",
-     "-t"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "piconv",
@@ -4499,21 +2777,7 @@
    "snippet": "Option to requires an argument",
    "line": "-t,--to to_encoding when omitted, the current locale will be used -s,--string string",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "piconv",
-     "--option",
-     "--to"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "piconv",
@@ -4532,28 +2796,14 @@
    "snippet": "Option s requires an argument",
    "line": "-s,--string string \"string\" will be the input instead of STDIN or files The following are mainly of interest to Encode hackers:",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "piconv",
-     "--option",
-     "-s"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "piconv",
    "program": "piconv",
    "option": "--string",
    "exit": 0,
-   "seconds": 0.032,
+   "seconds": 0.016,
    "executed_argv": [
     "piconv",
     "--string"
@@ -4565,28 +2815,14 @@
    "snippet": "Option string requires an argument",
    "line": "-s,--string string \"string\" will be the input instead of STDIN or files The following are mainly of interest to Encode hackers:",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "piconv",
-     "--option",
-     "--string"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "piconv",
    "program": "piconv",
    "option": "-C",
    "exit": 0,
-   "seconds": 0.032,
+   "seconds": 0.016,
    "executed_argv": [
     "piconv",
     "-C"
@@ -4598,28 +2834,14 @@
    "snippet": "Option C requires an argument",
    "line": "-C N | -c           check the validity of the input -D,--debug          show debug information -S,--scheme scheme  use the scheme for conversion",
    "advertises_check": true,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "piconv",
-     "--option",
-     "-C"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "piconv",
    "program": "piconv",
    "option": "-D",
    "exit": 0,
-   "seconds": 0.032,
+   "seconds": 0.016,
    "executed_argv": [
     "piconv",
     "-D"
@@ -4631,21 +2853,7 @@
    "snippet": "piconv [-f from_encoding] [-t to_encoding]",
    "line": "-D,--debug          show debug information -S,--scheme scheme  use the scheme for conversion Those are handy when you can only see ASCII characters:",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "piconv",
-     "--option",
-     "-D"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "runcon",
@@ -4664,21 +2872,7 @@
    "snippet": "kernel",
    "line": "-c, --compute      compute process transition context before modifying -t, --type=TYPE    type (for same role as parent) -u, --user=USER    user identity",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "runcon",
-     "--option",
-     "-c"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "runcon",
@@ -4697,21 +2891,7 @@
    "snippet": "kernel",
    "line": "-c, --compute      compute process transition context before modifying -t, --type=TYPE    type (for same role as parent) -u, --user=USER    user identity",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "runcon",
-     "--option",
-     "--compute"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "runcon",
@@ -4731,28 +2911,14 @@
    "snippet": "kernel",
    "line": "-t, --type=TYPE    type (for same role as parent) -u, --user=USER    user identity -r, --role=ROLE    role",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "runcon",
-     "--option",
-     "-t"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "runcon",
    "program": "runcon",
    "option": "--type",
    "exit": 0,
-   "seconds": 0.003,
+   "seconds": 0.004,
    "executed_argv": [
     "runcon",
     "--type",
@@ -4765,21 +2931,7 @@
    "snippet": "kernel",
    "line": "-t, --type=TYPE    type (for same role as parent) -u, --user=USER    user identity -r, --role=ROLE    role",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "runcon",
-     "--option",
-     "--type"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "runcon",
@@ -4799,21 +2951,7 @@
    "snippet": "kernel",
    "line": "-u, --user=USER    user identity -r, --role=ROLE    role -l, --range=RANGE  levelrange",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "runcon",
-     "--option",
-     "-u"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "runcon",
@@ -4833,28 +2971,14 @@
    "snippet": "kernel",
    "line": "-u, --user=USER    user identity -r, --role=ROLE    role -l, --range=RANGE  levelrange",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "runcon",
-     "--option",
-     "--user"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "runcon",
    "program": "runcon",
    "option": "-r",
    "exit": 0,
-   "seconds": 0.003,
+   "seconds": 0.004,
    "executed_argv": [
     "runcon",
     "-r",
@@ -4867,21 +2991,7 @@
    "snippet": "kernel",
    "line": "-r, --role=ROLE    role -l, --range=RANGE  levelrange --help        display this help and exit",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "runcon",
-     "--option",
-     "-r"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "runcon",
@@ -4901,21 +3011,7 @@
    "snippet": "kernel",
    "line": "-r, --role=ROLE    role -l, --range=RANGE  levelrange --help        display this help and exit",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "runcon",
-     "--option",
-     "--role"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "runcon",
@@ -4935,21 +3031,7 @@
    "snippet": "kernel",
    "line": "-l, --range=RANGE  levelrange --help        display this help and exit --version     output version information and exit",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "runcon",
-     "--option",
-     "-l"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "runcon",
@@ -4969,21 +3051,7 @@
    "snippet": "kernel",
    "line": "-l, --range=RANGE  levelrange --help        display this help and exit --version     output version information and exit",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "runcon",
-     "--option",
-     "--range"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "runcon",
@@ -5002,21 +3070,7 @@
    "snippet": "Usage: runcon CONTEXT COMMAND [args]",
    "line": "--help        display this help and exit --version     output version information and exit ",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "runcon",
-     "--option",
-     "--help"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "runcon",
@@ -5035,21 +3089,7 @@
    "snippet": "runcon (GNU coreutils) 9.1",
    "line": "--version     output version information and exit  GNU coreutils online help: <https://www.gnu.org/software/coreutils/>",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "runcon",
-     "--option",
-     "--version"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "systemd-escape",
@@ -5068,21 +3108,7 @@
    "snippet": "systemd-escape [OPTIONS...] [NAME...]",
    "line": "-h --help               Show this help --version            Show package version --suffix=SUFFIX      Unit suffix to append to escaped strings",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "systemd-escape",
-     "--option",
-     "-h"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "systemd-escape",
@@ -5101,21 +3127,7 @@
    "snippet": "systemd-escape [OPTIONS...] [NAME...]",
    "line": "-h --help               Show this help --version            Show package version --suffix=SUFFIX      Unit suffix to append to escaped strings",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "systemd-escape",
-     "--option",
-     "--help"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "systemd-escape",
@@ -5134,21 +3146,7 @@
    "snippet": "systemd 252 (252.39-1~deb12u2)",
    "line": "--version            Show package version --suffix=SUFFIX      Unit suffix to append to escaped strings --template=TEMPLATE  Insert strings as instance into template",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "systemd-escape",
-     "--option",
-     "--version"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "systemd-escape",
@@ -5168,21 +3166,7 @@
    "snippet": "Invalid unit suffix type \"README.rst\".",
    "line": "--suffix=SUFFIX      Unit suffix to append to escaped strings --template=TEMPLATE  Insert strings as instance into template --instance           With --unescape, show just the instance part",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "systemd-escape",
-     "--option",
-     "--suffix"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "systemd-escape",
@@ -5202,28 +3186,14 @@
    "snippet": "Template name README.rst is not valid.",
    "line": "--template=TEMPLATE  Insert strings as instance into template --instance           With --unescape, show just the instance part -u --unescape           Unescape strings",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "systemd-escape",
-     "--option",
-     "--template"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "systemd-escape",
    "program": "systemd-escape",
    "option": "--instance",
    "exit": 1,
-   "seconds": 0.004,
+   "seconds": 0.003,
    "executed_argv": [
     "systemd-escape",
     "--instance"
@@ -5235,28 +3205,14 @@
    "snippet": "Not enough arguments.",
    "line": "--instance           With --unescape, show just the instance part -u --unescape           Unescape strings -m --mangle             Mangle strings",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "systemd-escape",
-     "--option",
-     "--instance"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "systemd-escape",
    "program": "systemd-escape",
    "option": "--unescape",
    "exit": 1,
-   "seconds": 0.004,
+   "seconds": 0.003,
    "executed_argv": [
     "systemd-escape",
     "--unescape"
@@ -5268,21 +3224,7 @@
    "snippet": "Not enough arguments.",
    "line": "--instance           With --unescape, show just the instance part -u --unescape           Unescape strings -m --mangle             Mangle strings",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "systemd-escape",
-     "--option",
-     "--unescape"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "systemd-escape",
@@ -5301,21 +3243,7 @@
    "snippet": "Not enough arguments.",
    "line": "-u --unescape           Unescape strings -m --mangle             Mangle strings -p --path               When escaping/unescaping assume the string is a path",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "systemd-escape",
-     "--option",
-     "-u"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "systemd-escape",
@@ -5334,28 +3262,14 @@
    "snippet": "Not enough arguments.",
    "line": "-u --unescape           Unescape strings -m --mangle             Mangle strings -p --path               When escaping/unescaping assume the string is a path",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "systemd-escape",
-     "--option",
-     "--unescape"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "systemd-escape",
    "program": "systemd-escape",
    "option": "-m",
    "exit": 1,
-   "seconds": 0.003,
+   "seconds": 0.004,
    "executed_argv": [
     "systemd-escape",
     "-m"
@@ -5367,21 +3281,7 @@
    "snippet": "Not enough arguments.",
    "line": "-m --mangle             Mangle strings -p --path               When escaping/unescaping assume the string is a path ",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "systemd-escape",
-     "--option",
-     "-m"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "systemd-escape",
@@ -5400,21 +3300,7 @@
    "snippet": "Not enough arguments.",
    "line": "-m --mangle             Mangle strings -p --path               When escaping/unescaping assume the string is a path ",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "systemd-escape",
-     "--option",
-     "--mangle"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "systemd-escape",
@@ -5433,21 +3319,7 @@
    "snippet": "Not enough arguments.",
    "line": "-p --path               When escaping/unescaping assume the string is a path  See the systemd-escape(1) man page for details.",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "systemd-escape",
-     "--option",
-     "-p"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "timedatectl show-timesync",
@@ -5467,21 +3339,7 @@
    "snippet": "timedatectl [OPTIONS...] COMMAND ...",
    "line": "-h --help                Show this help message --version             Show package version --no-pager            Do not pipe output into a pager",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "timedatectl",
-     "--option",
-     "-h"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "timedatectl show-timesync",
@@ -5501,21 +3359,7 @@
    "snippet": "timedatectl [OPTIONS...] COMMAND ...",
    "line": "-h --help                Show this help message --version             Show package version --no-pager            Do not pipe output into a pager",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "timedatectl",
-     "--option",
-     "--help"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "timedatectl show-timesync",
@@ -5535,21 +3379,7 @@
    "snippet": "systemd 252 (252.39-1~deb12u2)",
    "line": "--version             Show package version --no-pager            Do not pipe output into a pager --no-ask-password     Do not prompt for password",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "timedatectl",
-     "--option",
-     "--version"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "timedatectl show-timesync",
@@ -5569,21 +3399,7 @@
    "snippet": "Failed to connect to bus: No such file or directory",
    "line": "--no-pager            Do not pipe output into a pager --no-ask-password     Do not prompt for password -H --host=[USER@]HOST    Operate on remote host",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "timedatectl",
-     "--option",
-     "--no-pager"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "timedatectl show-timesync",
@@ -5603,21 +3419,7 @@
    "snippet": "Failed to connect to bus: No such file or directory",
    "line": "--no-ask-password     Do not prompt for password -H --host=[USER@]HOST    Operate on remote host -M --machine=CONTAINER   Operate on local container",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "timedatectl",
-     "--option",
-     "--no-ask-password"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "timedatectl show-timesync",
@@ -5638,28 +3440,14 @@
    "snippet": "ssh: Could not resolve hostname readme.rst: Name or service not known",
    "line": "-H --host=[USER@]HOST    Operate on remote host -M --machine=CONTAINER   Operate on local container --adjust-system-clock Adjust system clock when changing local RTC mode",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "timedatectl",
-     "--option",
-     "-H"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "timedatectl show-timesync",
    "program": "timedatectl",
    "option": "--host",
    "exit": 1,
-   "seconds": 0.021,
+   "seconds": 0.02,
    "executed_argv": [
     "timedatectl",
     "show-timesync",
@@ -5673,21 +3461,7 @@
    "snippet": "ssh: Could not resolve hostname readme.rst: Name or service not known",
    "line": "-H --host=[USER@]HOST    Operate on remote host -M --machine=CONTAINER   Operate on local container --adjust-system-clock Adjust system clock when changing local RTC mode",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "timedatectl",
-     "--option",
-     "--host"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "timedatectl show-timesync",
@@ -5708,21 +3482,7 @@
    "snippet": "Failed to connect to bus: Host is down",
    "line": "-M --machine=CONTAINER   Operate on local container --adjust-system-clock Adjust system clock when changing local RTC mode --monitor             Monitor status of systemd-timesyncd",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "timedatectl",
-     "--option",
-     "-M"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "timedatectl show-timesync",
@@ -5743,28 +3503,14 @@
    "snippet": "Failed to connect to bus: Host is down",
    "line": "-M --machine=CONTAINER   Operate on local container --adjust-system-clock Adjust system clock when changing local RTC mode --monitor             Monitor status of systemd-timesyncd",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "timedatectl",
-     "--option",
-     "--machine"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "timedatectl show-timesync",
    "program": "timedatectl",
    "option": "--adjust-system-clock",
    "exit": 1,
-   "seconds": 0.003,
+   "seconds": 0.004,
    "executed_argv": [
     "timedatectl",
     "show-timesync",
@@ -5777,21 +3523,7 @@
    "snippet": "Failed to connect to bus: No such file or directory",
    "line": "--adjust-system-clock Adjust system clock when changing local RTC mode --monitor             Monitor status of systemd-timesyncd -p --property=NAME       Show only properties by this name",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "timedatectl",
-     "--option",
-     "--adjust-system-clock"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "timedatectl show-timesync",
@@ -5811,21 +3543,7 @@
    "snippet": "Failed to connect to bus: No such file or directory",
    "line": "--monitor             Monitor status of systemd-timesyncd -p --property=NAME       Show only properties by this name -a --all                 Show all properties, including empty ones",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "timedatectl",
-     "--option",
-     "--monitor"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   },
   {
    "page": "timedatectl show-timesync",
@@ -5846,21 +3564,7 @@
    "snippet": "Failed to connect to bus: No such file or directory",
    "line": "-p --property=NAME       Show only properties by this name -a --all                 Show all properties, including empty ones --value               When showing properties, only print the value",
    "advertises_check": false,
-   "advertises_inverse": false,
-   "executed": true,
-   "verification": {
-    "argv": [
-     "python3",
-     "canonical/tools/audit_measurement_row_v1.py",
-     "--receipt",
-     "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
-     "--program",
-     "timedatectl",
-     "--option",
-     "-p"
-    ],
-    "expect_exit": 0
-   }
+   "advertises_inverse": false
   }
  ],
  "limits": [

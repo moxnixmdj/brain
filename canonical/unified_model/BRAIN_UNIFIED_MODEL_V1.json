@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "c2c2e3667c6aba6c15fd4e0ba6209f4483550664009dfdfd1cbd69c5732e6e20"
+  "value": "32067f306e78fbdb794d2fc8c078c0ee567b6cc9b38c0816156335d85e73217f"
  },
  "engines": [
   {
@@ -69703,7 +69703,7 @@
   },
   {
    "authority": "NOT_A_LAW",
-   "bytes": 9600,
+   "bytes": 10148,
    "headings": [
     "The repertoire is a query, not a possession: 437 programs, 4,621 options, 47 seconds — and not one sampled option is an action",
     "What the tree had already settled, so this round does not re-argue it",
@@ -69718,20 +69718,19 @@
    ],
    "kind": "DOCUMENT",
    "path": "THE_REPERTOIRE_IS_A_QUERY_20261129_V1.md",
-   "sha256": "13492521ad8bcc3487283260ecbf6558c42b59e1477a6f09a45782da950c1840",
+   "sha256": "6a594afa48f4ff07e4813c9b8ea65e527d8922038043eef938b881a84d78bece",
    "summary": "*2026-11-29. The question, taken whole: instant learning and instant learning in new environments are solved, so give the model the smartest actions, let it experience each once, and it owns any computer permanently. Is that true, what is wrong, what is real, and what is the smartest thing to do?*",
    "terms": {
-    "164": 3,
+    "164": 4,
     "437": 5,
-    "47": 3,
     "621": 5,
-    "80": 3,
     "action": 11,
     "actions": 9,
     "cannot": 11,
     "catalogue": 10,
-    "check": 8,
-    "each": 5,
+    "check": 9,
+    "each": 6,
+    "every": 4,
     "git": 4,
     "gzip": 4,
     "half": 4,
@@ -69745,12 +69744,12 @@
     "no": 9,
     "none": 6,
     "not": 30,
-    "nothing": 10,
+    "nothing": 11,
     "object": 10,
-    "one": 11,
+    "one": 12,
     "option": 9,
     "options": 8,
-    "own": 14,
+    "own": 15,
     "page": 7,
     "program": 9,
     "programs": 7,
@@ -69759,16 +69758,17 @@
     "r27": 4,
     "read": 4,
     "real": 15,
-    "round": 6,
+    "round": 7,
     "run": 6,
     "same": 4,
     "serve": 4,
     "so": 9,
     "state": 8,
     "three": 6,
-    "were": 6,
+    "tree": 4,
+    "were": 7,
     "world": 4,
-    "wrong": 4
+    "wrong": 5
    },
    "title": "The repertoire is a query, not a possession: 437 programs, 4,621 options, 47 seconds — and not one sampled option is an action",
    "title_terms": [
@@ -88902,7 +88902,7 @@
   "included_source_count": 1365,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "ebdfb6a40bc1a6901103d9345688a2bf9adb3875b6af594391084645e03eedea"
+  "source_tree_digest": "0ed017aadc5f860f27589b2eff8584f3f535e271a608970086d5300e6be37adc"
  },
  "research_index": [
   {
@@ -218010,7 +218010,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
    "schema": "BRAIN_THE_REPERTOIRE_IS_A_QUERY_V1",
-   "sha256": "9ddf07288c22e720181f99513256ffb02d0c69a18d0dfd0e7a391086d767fbbd",
+   "sha256": "ed0c150044e7c393360275d6f4d132c3395150fffd15708d8b851040f36106e1",
    "status": "",
    "terms": {
     "20261129": 1,
