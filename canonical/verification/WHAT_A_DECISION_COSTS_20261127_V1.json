@@ -1,0 +1,710 @@
+{
+ "schema": "BRAIN_WHAT_A_DECISION_COSTS_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "date": "2026-11-27",
+ "environment": {
+  "kind": "real machine: git, tar, gzip, patch",
+  "base_repo": "https://github.com/pypa/packaging.git",
+  "commit": null,
+  "states": 160
+ },
+ "oracle": "each program's own exit status, read in a copy; the copy is deleted",
+ "summary": {
+  "actions": 10,
+  "refused": 0,
+  "states": 160,
+  "copy_seconds_per_state": 0.0145,
+  "accuracy_guess": 0.5,
+  "accuracy_demonstration": 0.6125,
+  "accuracy_trial_always": 1.0,
+  "accuracy_trial_then_know": 0.925,
+  "executions_trial_always": 160,
+  "executions_trial_then_know": 52,
+  "actions_where_the_trial_stopped": 10,
+  "requirements_named": 0,
+  "decisions_decided_without_trial": 108,
+  "actions_covered_by_chooser": 7,
+  "actions_never_stopping_the_trial": [],
+  "executions_with_chooser": 37,
+  "chooser_saved_executions": 15,
+  "seconds": 26.1,
+  "parameters_stored": 0,
+  "model_calls": 0
+ },
+ "rows": [
+  {
+   "action": "git_stash_pop",
+   "purpose": "restore work that was set aside",
+   "argv": [
+    "git",
+    "stash",
+    "pop"
+   ],
+   "states": 16,
+   "applies": 8,
+   "does_not_apply": 8,
+   "ambiguous": 0,
+   "base_rate": 0.5,
+   "guess": {
+    "accuracy": 0.5,
+    "executions": 0,
+    "decisions": 16
+   },
+   "demonstration": {
+    "accuracy": 0.625,
+    "accuracy_always_true": 0.5,
+    "executions": 1,
+    "decisions": 16,
+    "licensed_requirement_size": 16
+   },
+   "trial_always": {
+    "accuracy": 1.0,
+    "executions": 16,
+    "copies": 16,
+    "seconds": 0.232,
+    "knowledge": null
+   },
+   "trial_then_know": {
+    "accuracy": 1.0,
+    "executions": 5,
+    "decisions": 16,
+    "decided_without_trial": 11,
+    "last_trial_at_decision": 7,
+    "requirement": null,
+    "survivors_after_stream": 512,
+    "status_after_stream": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+    "trials_stopped_somewhere": true,
+    "decided_without_trial_fraction": 0.6875
+   },
+   "trial_choose": {
+    "executions_to_knowledge": 5,
+    "decisions": 13,
+    "accuracy": 1.0,
+    "covers_every_state": true,
+    "requirement": null,
+    "survivors_after_choice": 512,
+    "order": [
+     "git_stash_pop-pos06",
+     "git_stash_pop-neg00",
+     "git_stash_pop-pos01",
+     "git_stash_pop-pos05",
+     "git_stash_pop-pos07"
+    ]
+   },
+   "exchange_rate": {
+    "executions_trial_always": 16,
+    "executions_trial_then_know": 5,
+    "saved": 11,
+    "saved_fraction": 0.6875,
+    "chooser_saved_vs_stream": 0
+   },
+   "stage": "MEASURED"
+  },
+  {
+   "action": "git_merge_abort",
+   "purpose": "give up an interrupted merge",
+   "argv": [
+    "git",
+    "merge",
+    "--abort"
+   ],
+   "states": 16,
+   "applies": 8,
+   "does_not_apply": 8,
+   "ambiguous": 0,
+   "base_rate": 0.5,
+   "guess": {
+    "accuracy": 0.5,
+    "executions": 0,
+    "decisions": 16
+   },
+   "demonstration": {
+    "accuracy": 0.625,
+    "accuracy_always_true": 0.5,
+    "executions": 1,
+    "decisions": 16,
+    "licensed_requirement_size": 17
+   },
+   "trial_always": {
+    "accuracy": 1.0,
+    "executions": 16,
+    "copies": 16,
+    "seconds": 0.232,
+    "knowledge": null
+   },
+   "trial_then_know": {
+    "accuracy": 1.0,
+    "executions": 4,
+    "decisions": 16,
+    "decided_without_trial": 12,
+    "last_trial_at_decision": 5,
+    "requirement": null,
+    "survivors_after_stream": 768,
+    "status_after_stream": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+    "trials_stopped_somewhere": true,
+    "decided_without_trial_fraction": 0.75
+   },
+   "trial_choose": {
+    "executions_to_knowledge": 5,
+    "decisions": 10,
+    "accuracy": 1.0,
+    "covers_every_state": true,
+    "requirement": null,
+    "survivors_after_choice": 768,
+    "order": [
+     "git_merge_abort-pos03",
+     "git_merge_abort-pos07",
+     "git_merge_abort-pos05",
+     "git_merge_abort-neg06",
+     "git_merge_abort-pos02"
+    ]
+   },
+   "exchange_rate": {
+    "executions_trial_always": 16,
+    "executions_trial_then_know": 4,
+    "saved": 12,
+    "saved_fraction": 0.75,
+    "chooser_saved_vs_stream": -1
+   },
+   "stage": "MEASURED"
+  },
+  {
+   "action": "git_rebase_abort",
+   "purpose": "give up an interrupted rebase",
+   "argv": [
+    "git",
+    "rebase",
+    "--abort"
+   ],
+   "states": 16,
+   "applies": 8,
+   "does_not_apply": 8,
+   "ambiguous": 0,
+   "base_rate": 0.5,
+   "guess": {
+    "accuracy": 0.5,
+    "executions": 0,
+    "decisions": 16
+   },
+   "demonstration": {
+    "accuracy": 0.625,
+    "accuracy_always_true": 0.5,
+    "executions": 1,
+    "decisions": 16,
+    "licensed_requirement_size": 13
+   },
+   "trial_always": {
+    "accuracy": 1.0,
+    "executions": 16,
+    "copies": 16,
+    "seconds": 0.232,
+    "knowledge": null
+   },
+   "trial_then_know": {
+    "accuracy": 1.0,
+    "executions": 4,
+    "decisions": 16,
+    "decided_without_trial": 12,
+    "last_trial_at_decision": 5,
+    "requirement": null,
+    "survivors_after_stream": 768,
+    "status_after_stream": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+    "trials_stopped_somewhere": true,
+    "decided_without_trial_fraction": 0.75
+   },
+   "trial_choose": {
+    "executions_to_knowledge": 5,
+    "decisions": 12,
+    "accuracy": 1.0,
+    "covers_every_state": true,
+    "requirement": null,
+    "survivors_after_choice": 768,
+    "order": [
+     "git_rebase_abort-pos06",
+     "git_rebase_abort-pos04",
+     "git_rebase_abort-pos01",
+     "git_rebase_abort-pos07",
+     "git_rebase_abort-neg06"
+    ]
+   },
+   "exchange_rate": {
+    "executions_trial_always": 16,
+    "executions_trial_then_know": 4,
+    "saved": 12,
+    "saved_fraction": 0.75,
+    "chooser_saved_vs_stream": -1
+   },
+   "stage": "MEASURED"
+  },
+  {
+   "action": "git_checkout_feature",
+   "purpose": "switch to the feature branch",
+   "argv": [
+    "git",
+    "checkout",
+    "feature"
+   ],
+   "states": 16,
+   "applies": 8,
+   "does_not_apply": 8,
+   "ambiguous": 0,
+   "base_rate": 0.5,
+   "guess": {
+    "accuracy": 0.5,
+    "executions": 0,
+    "decisions": 16
+   },
+   "demonstration": {
+    "accuracy": 0.625,
+    "accuracy_always_true": 0.5,
+    "executions": 1,
+    "decisions": 16,
+    "licensed_requirement_size": 16
+   },
+   "trial_always": {
+    "accuracy": 1.0,
+    "executions": 16,
+    "copies": 16,
+    "seconds": 0.232,
+    "knowledge": null
+   },
+   "trial_then_know": {
+    "accuracy": 1.0,
+    "executions": 6,
+    "decisions": 16,
+    "decided_without_trial": 10,
+    "last_trial_at_decision": 7,
+    "requirement": null,
+    "survivors_after_stream": 1536,
+    "status_after_stream": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+    "trials_stopped_somewhere": true,
+    "decided_without_trial_fraction": 0.625
+   },
+   "trial_choose": {
+    "executions_to_knowledge": 5,
+    "decisions": 11,
+    "accuracy": 1.0,
+    "covers_every_state": true,
+    "requirement": null,
+    "survivors_after_choice": 1536,
+    "order": [
+     "git_checkout_feature-pos04",
+     "git_checkout_feature-pos05",
+     "git_checkout_feature-pos07",
+     "git_checkout_feature-neg03",
+     "git_checkout_feature-pos01"
+    ]
+   },
+   "exchange_rate": {
+    "executions_trial_always": 16,
+    "executions_trial_then_know": 6,
+    "saved": 10,
+    "saved_fraction": 0.625,
+    "chooser_saved_vs_stream": 1
+   },
+   "stage": "MEASURED"
+  },
+  {
+   "action": "git_branch_delete_feature",
+   "purpose": "delete a branch that has been merged",
+   "argv": [
+    "git",
+    "branch",
+    "-d",
+    "feature"
+   ],
+   "states": 16,
+   "applies": 8,
+   "does_not_apply": 8,
+   "ambiguous": 0,
+   "base_rate": 0.5,
+   "guess": {
+    "accuracy": 0.5,
+    "executions": 0,
+    "decisions": 16
+   },
+   "demonstration": {
+    "accuracy": 0.625,
+    "accuracy_always_true": 0.5,
+    "executions": 1,
+    "decisions": 16,
+    "licensed_requirement_size": 15
+   },
+   "trial_always": {
+    "accuracy": 1.0,
+    "executions": 16,
+    "copies": 16,
+    "seconds": 0.232,
+    "knowledge": null
+   },
+   "trial_then_know": {
+    "accuracy": 1.0,
+    "executions": 5,
+    "decisions": 16,
+    "decided_without_trial": 11,
+    "last_trial_at_decision": 5,
+    "requirement": null,
+    "survivors_after_stream": 1024,
+    "status_after_stream": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+    "trials_stopped_somewhere": true,
+    "decided_without_trial_fraction": 0.6875
+   },
+   "trial_choose": {
+    "executions_to_knowledge": 5,
+    "decisions": 14,
+    "accuracy": 1.0,
+    "covers_every_state": true,
+    "requirement": null,
+    "survivors_after_choice": 1024,
+    "order": [
+     "git_branch_delete_feature-pos03",
+     "git_branch_delete_feature-neg07",
+     "git_branch_delete_feature-pos04",
+     "git_branch_delete_feature-pos06",
+     "git_branch_delete_feature-pos05"
+    ]
+   },
+   "exchange_rate": {
+    "executions_trial_always": 16,
+    "executions_trial_then_know": 5,
+    "saved": 11,
+    "saved_fraction": 0.6875,
+    "chooser_saved_vs_stream": 0
+   },
+   "stage": "MEASURED"
+  },
+  {
+   "action": "git_rm_cached_tracked",
+   "purpose": "untrack a file while keeping it on disk",
+   "argv": [
+    "git",
+    "rm",
+    "--cached",
+    "-q",
+    "README.rst"
+   ],
+   "states": 16,
+   "applies": 8,
+   "does_not_apply": 8,
+   "ambiguous": 0,
+   "base_rate": 0.5,
+   "guess": {
+    "accuracy": 0.5,
+    "executions": 0,
+    "decisions": 16
+   },
+   "demonstration": {
+    "accuracy": 0.6875,
+    "accuracy_always_true": 0.5,
+    "executions": 1,
+    "decisions": 16,
+    "licensed_requirement_size": 15
+   },
+   "trial_always": {
+    "accuracy": 1.0,
+    "executions": 16,
+    "copies": 16,
+    "seconds": 0.232,
+    "knowledge": null
+   },
+   "trial_then_know": {
+    "accuracy": 1.0,
+    "executions": 7,
+    "decisions": 16,
+    "decided_without_trial": 9,
+    "last_trial_at_decision": 13,
+    "requirement": null,
+    "survivors_after_stream": 768,
+    "status_after_stream": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+    "trials_stopped_somewhere": true,
+    "decided_without_trial_fraction": 0.5625
+   },
+   "trial_choose": {
+    "executions_to_knowledge": 5,
+    "decisions": 11,
+    "accuracy": 1.0,
+    "covers_every_state": true,
+    "requirement": null,
+    "survivors_after_choice": 768,
+    "order": [
+     "git_rm_cached_tracked-pos03",
+     "git_rm_cached_tracked-pos02",
+     "git_rm_cached_tracked-pos05",
+     "git_rm_cached_tracked-pos06",
+     "git_rm_cached_tracked-neg02"
+    ]
+   },
+   "exchange_rate": {
+    "executions_trial_always": 16,
+    "executions_trial_then_know": 7,
+    "saved": 9,
+    "saved_fraction": 0.5625,
+    "chooser_saved_vs_stream": 2
+   },
+   "stage": "MEASURED"
+  },
+  {
+   "action": "tar_extract",
+   "purpose": "unpack an archive",
+   "argv": [
+    "tar",
+    "-xzf",
+    "bundle.tgz"
+   ],
+   "states": 16,
+   "applies": 8,
+   "does_not_apply": 8,
+   "ambiguous": 0,
+   "base_rate": 0.5,
+   "guess": {
+    "accuracy": 0.5,
+    "executions": 0,
+    "decisions": 16
+   },
+   "demonstration": {
+    "accuracy": 0.5,
+    "accuracy_always_true": 0.5,
+    "executions": 1,
+    "decisions": 16,
+    "licensed_requirement_size": 15
+   },
+   "trial_always": {
+    "accuracy": 1.0,
+    "executions": 16,
+    "copies": 16,
+    "seconds": 0.232,
+    "knowledge": null
+   },
+   "trial_then_know": {
+    "accuracy": 0.75,
+    "executions": 5,
+    "decisions": 16,
+    "decided_without_trial": 11,
+    "last_trial_at_decision": 6,
+    "requirement": null,
+    "survivors_after_stream": 3072,
+    "status_after_stream": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+    "trials_stopped_somewhere": true,
+    "decided_without_trial_fraction": 0.6875
+   },
+   "trial_choose": {
+    "executions_to_knowledge": 1,
+    "decisions": 8,
+    "accuracy": 0.0,
+    "covers_every_state": false,
+    "requirement": null,
+    "survivors_after_choice": 0,
+    "order": [
+     "tar_extract-neg05"
+    ]
+   },
+   "exchange_rate": {
+    "executions_trial_always": 16,
+    "executions_trial_then_know": 5,
+    "saved": 11,
+    "saved_fraction": 0.6875,
+    "chooser_saved_vs_stream": 4
+   },
+   "stage": "MEASURED"
+  },
+  {
+   "action": "gzip_decompress",
+   "purpose": "decompress a file",
+   "argv": [
+    "gzip",
+    "-d",
+    "payload.gz"
+   ],
+   "states": 16,
+   "applies": 8,
+   "does_not_apply": 8,
+   "ambiguous": 0,
+   "base_rate": 0.5,
+   "guess": {
+    "accuracy": 0.5,
+    "executions": 0,
+    "decisions": 16
+   },
+   "demonstration": {
+    "accuracy": 0.5625,
+    "accuracy_always_true": 0.5,
+    "executions": 1,
+    "decisions": 16,
+    "licensed_requirement_size": 15
+   },
+   "trial_always": {
+    "accuracy": 1.0,
+    "executions": 16,
+    "copies": 16,
+    "seconds": 0.232,
+    "knowledge": null
+   },
+   "trial_then_know": {
+    "accuracy": 0.6875,
+    "executions": 5,
+    "decisions": 16,
+    "decided_without_trial": 11,
+    "last_trial_at_decision": 10,
+    "requirement": null,
+    "survivors_after_stream": 3072,
+    "status_after_stream": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+    "trials_stopped_somewhere": true,
+    "decided_without_trial_fraction": 0.6875
+   },
+   "trial_choose": {
+    "executions_to_knowledge": 1,
+    "decisions": 8,
+    "accuracy": 0.0,
+    "covers_every_state": false,
+    "requirement": null,
+    "survivors_after_choice": 0,
+    "order": [
+     "gzip_decompress-neg03"
+    ]
+   },
+   "exchange_rate": {
+    "executions_trial_always": 16,
+    "executions_trial_then_know": 5,
+    "saved": 11,
+    "saved_fraction": 0.6875,
+    "chooser_saved_vs_stream": 4
+   },
+   "stage": "MEASURED"
+  },
+  {
+   "action": "chmod_exec",
+   "purpose": "make a file executable",
+   "argv": [
+    "chmod",
+    "+x",
+    "script.sh"
+   ],
+   "states": 16,
+   "applies": 8,
+   "does_not_apply": 8,
+   "ambiguous": 0,
+   "base_rate": 0.5,
+   "guess": {
+    "accuracy": 0.5,
+    "executions": 0,
+    "decisions": 16
+   },
+   "demonstration": {
+    "accuracy": 0.625,
+    "accuracy_always_true": 0.5,
+    "executions": 1,
+    "decisions": 16,
+    "licensed_requirement_size": 17
+   },
+   "trial_always": {
+    "accuracy": 1.0,
+    "executions": 16,
+    "copies": 16,
+    "seconds": 0.232,
+    "knowledge": null
+   },
+   "trial_then_know": {
+    "accuracy": 1.0,
+    "executions": 5,
+    "decisions": 16,
+    "decided_without_trial": 11,
+    "last_trial_at_decision": 5,
+    "requirement": null,
+    "survivors_after_stream": 7168,
+    "status_after_stream": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+    "trials_stopped_somewhere": true,
+    "decided_without_trial_fraction": 0.6875
+   },
+   "trial_choose": {
+    "executions_to_knowledge": 4,
+    "decisions": 8,
+    "accuracy": 1.0,
+    "covers_every_state": true,
+    "requirement": null,
+    "survivors_after_choice": 7168,
+    "order": [
+     "chmod_exec-pos01",
+     "chmod_exec-pos07",
+     "chmod_exec-pos04",
+     "chmod_exec-neg04"
+    ]
+   },
+   "exchange_rate": {
+    "executions_trial_always": 16,
+    "executions_trial_then_know": 5,
+    "saved": 11,
+    "saved_fraction": 0.6875,
+    "chooser_saved_vs_stream": 1
+   },
+   "stage": "MEASURED"
+  },
+  {
+   "action": "patch_apply",
+   "purpose": "apply a change that is shipped as a patch",
+   "argv": [
+    "patch",
+    "--batch",
+    "--forward",
+    "-p1",
+    "--dry-run",
+    "-i",
+    "change.patch"
+   ],
+   "states": 16,
+   "applies": 8,
+   "does_not_apply": 8,
+   "ambiguous": 0,
+   "base_rate": 0.5,
+   "guess": {
+    "accuracy": 0.5,
+    "executions": 0,
+    "decisions": 16
+   },
+   "demonstration": {
+    "accuracy": 0.625,
+    "accuracy_always_true": 0.5,
+    "executions": 1,
+    "decisions": 16,
+    "licensed_requirement_size": 13
+   },
+   "trial_always": {
+    "accuracy": 1.0,
+    "executions": 16,
+    "copies": 16,
+    "seconds": 0.232,
+    "knowledge": null
+   },
+   "trial_then_know": {
+    "accuracy": 0.8125,
+    "executions": 6,
+    "decisions": 16,
+    "decided_without_trial": 10,
+    "last_trial_at_decision": 14,
+    "requirement": null,
+    "survivors_after_stream": 896,
+    "status_after_stream": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+    "trials_stopped_somewhere": true,
+    "decided_without_trial_fraction": 0.625
+   },
+   "trial_choose": {
+    "executions_to_knowledge": 1,
+    "decisions": 9,
+    "accuracy": 0.3333,
+    "covers_every_state": false,
+    "requirement": null,
+    "survivors_after_choice": 0,
+    "order": [
+     "patch_apply-neg01"
+    ]
+   },
+   "exchange_rate": {
+    "executions_trial_always": 16,
+    "executions_trial_then_know": 6,
+    "saved": 10,
+    "saved_fraction": 0.625,
+    "chooser_saved_vs_stream": 5
+   },
+   "stage": "MEASURED"
+  }
+ ]
+}
