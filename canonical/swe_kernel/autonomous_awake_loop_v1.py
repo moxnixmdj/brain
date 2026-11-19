@@ -41,9 +41,86 @@ from canonical.swe_kernel import rule_expiry_v1 as rule_exp
 from canonical.swe_kernel.causal_trace_to_skill_compiler_v1 import (
     compile_and_qualify_skill,
 )
+from canonical.swe_kernel.lesson_admission_gate_v1 import Victim
 from canonical.swe_kernel.verified_skill_crystallizer_v1 import VerifiedSkillStore
+from canonical.tools.rule_generalization_probe_v1 import run_snippet
 
 SCHEMA = "PROJECT_BRAIN_AUTONOMOUS_AWAKE_LOOP_V1"
+
+# ---------------------------------------------------------------------------
+# Held-out admission victims for the crystallize call sites below.
+#
+# Nothing becomes permanent without a held-out execution verdict. Every
+# `crystallize_code_fix` call in this loop now supplies `admission_victims` built
+# from OTHER workspace modules (never the module being repaired, never test
+# files). Each victim's oracle freezes the module's current behaviour by running
+# it at simple probe points; the admission gate then checks the candidate edit
+# preserves that behaviour (PRESERVED) or breaks it (BROKEN -> REJECT). A rule
+# that breaks already-correct code is refused before it ever touches SQLite --
+# this is exactly the `inclusive_cap` harm the gate was built to prevent.
+#
+# Modules whose top-level function cannot be probed with a single integer
+# argument are skipped: a victim that cannot be executed is not evidence, and
+# the gate's own `run_snippet` runner makes the same assumption, so probing here
+# mirrors what the gate will do at admission time.
+# ---------------------------------------------------------------------------
+def _admission_victims_for(
+    cow_root: pathlib.Path,
+    exclude_rels: Sequence[str] = (),
+    max_victims: int = 8,
+) -> tuple:
+    """Build held-out admission victims from workspace modules not being repaired.
+
+    Each victim is an already-correct Python module whose behaviour is captured
+    by running its top-level function at simple probe points. The oracle
+    freezes current behaviour; the admission gate checks the candidate edit
+    preserves it (PRESERVED) or breaks it (BROKEN -> REJECT).
+    """
+    exclude = set(exclude_rels)
+    victims: list = []
+    probes = (0, 1, 5, 10, 100)
+
+    for py_file in sorted(cow_root.rglob("*.py")):
+        if len(victims) >= max_victims:
+            break
+        try:
+            rel = py_file.relative_to(cow_root).as_posix()
+        except ValueError:
+            continue
+        if rel in exclude:
+            continue
+        name = pathlib.Path(rel).name
+        if name.startswith("test_") or name == "conftest.py":
+            continue
+        if "__pycache__" in py_file.parts or ".git" in py_file.parts:
+            continue
+        try:
+            source = py_file.read_text(encoding="utf-8")
+        except OSError:
+            continue
+        try:
+            ast.parse(source)
+        except SyntaxError:
+            continue
+        # Only modules whose top-level function answers a single integer
+        # argument can be probed -- and only if running it doesn't crash.
+        try:
+            _ = tuple(run_snippet(source, (p,)) for p in probes)
+        except Exception:
+            continue
+        victims.append(
+            Victim(
+                victim_id=f"held_out:{rel}",
+                source=source,
+                # The oracle states the spec: current behaviour, frozen before
+                # the edit. It is called once per probe on the ORIGINAL source,
+                # so an edit cannot move its own goalposts.
+                oracle=lambda _s, p, _src=source: run_snippet(_src, (p,)),
+                probes=probes,
+            )
+        )
+    return tuple(victims)
+
 
 _AST_BINOP_SWAPS: dict[type[ast.operator], tuple[type[ast.operator], ...]] = {
     ast.Add: (ast.Sub, ast.Mult),
@@ -893,6 +970,9 @@ class AwakeAgencyDaemon:
 
         winner = override_batch[int(passing[0])]
         skill_ids: list[str] = []
+        # Held-out admission victims: every other workspace module must survive
+        # this repair unchanged. Built once per batch, excluding the repaired files.
+        victims = _admission_victims_for(cow_root, exclude_rels=list(winner.keys()))
         for rel_p, new_s in winner.items():
             before_s = (cow_root / rel_p).read_text(encoding="utf-8")
             cow_write_text(cow_root / rel_p, new_s)
@@ -903,6 +983,7 @@ class AwakeAgencyDaemon:
                 after_snippet=new_s,
                 language="python",
                 error_class="AWAKE_CONFINED_MULTIFILE_REPAIR",
+                admission_victims=victims,
             )
             if cryst.get("crystallized") and cryst.get("skill_id"):
                 skill_ids.append(str(cryst["skill_id"]))
@@ -1144,6 +1225,9 @@ class AwakeAgencyDaemon:
                     continue
 
                 cow_write_text(cow_mod, before_src)
+                # Held-out admission victims: every other workspace module must
+                # survive this repair unchanged.
+                victims = _admission_victims_for(cow_root, exclude_rels=[str(rel_mod)])
                 cryst = self.skill_store.crystallize_code_fix(
                     before_snippet=before_src,
                     after_snippet=solved_src,
@@ -1151,6 +1235,7 @@ class AwakeAgencyDaemon:
                     error_class="AWAKE_DISCOVERED_REPAIR",
                     contract=_awake_contract,
                     training_verifier=project_oracle,
+                    admission_victims=victims,
                 )
                 if not cryst.get("crystallized"):
                     cryst = self.skill_store.crystallize_code_fix(
@@ -1159,6 +1244,7 @@ class AwakeAgencyDaemon:
                         language="python",
                         error_class="AWAKE_DISCOVERED_REPAIR",
                         twin_oracle=oracle,
+                        admission_victims=victims,
                     )
                 cow_write_text(cow_mod, solved_src)
                 if cryst.get("crystallized") and cryst.get("skill_id"):
