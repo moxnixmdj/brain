@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "f6a8dba7933f000cb8bde976ebed09b9c06a270197299cc5d3f898c6ea31e581"
+  "value": "c85057e0eeea1767dc6b85e4b27175e7c72e7ee6140f0de75f9c43f6ce9a3f59"
  },
  "engines": [
   {
@@ -258448,7 +258448,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/THE_WORD_IS_GIVEN_AND_ONLY_THE_SLOT_IS_UNKNOWN_20261119_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "8d6b67da140895fbd1adb490cafe17f1b8ce8cecf28cffc81d48131059df39c8",
+   "sha256": "a486e6dfcef9571a16cc68187108295736a99759b780722c260fdd4376b699c3",
    "status": "COMPLETE",
    "terms": {
     "20261119": 1,

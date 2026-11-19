@@ -444,7 +444,7 @@
      "route": "SEPARATE_THE_RESIDUAL_BY_LETTING_THE_RUN_BEGIN_WHERE_THE_MACHINE_ALREADY_IS"
     }
    ],
-   "checked_at_utc": "2026-11-19T17:13:13Z",
+   "checked_at_utc": "2026-11-19T19:15:29Z",
    "comparison_dimensions": [
     "CORRECTNESS",
     "CAPABILITY_STRENGTH",
@@ -456,7 +456,7 @@
    "discovery_required": true,
    "incumbent_route": "ELICIT_ONE_REFUSAL_PER_PRECONDITION_COORDINATE_INSTEAD_OF_ONE_SUCCESS_PER_ACTION",
    "max_age_hours": 2,
-   "negative_search_summary": "Refused by measurement or by the sources: enumerating hypotheses as the certificate did (the cost of enumeration, not of identification); one success plus refusals (4,096-16,384 survivors, 0-33% decided); training on rollouts (statistical where the schedule is exact); trusting a published check (tar -tzf).",
+   "negative_search_summary": "Refused by measurement or by the sources: enumerating hypotheses as the certificate did (the cost of enumeration, not of identification); one success plus refusals (4,096-16,384 survivors, 0-33% decided); training on rollouts (statistical where the schedule is exact); trusting a published check (tar -tzf). Refused by measurement this round: speaking checks plus a local slot (ceiling 2.7% on 73 executed refusals), and the assumption that the machine localises a value failure into the source (18%).",
    "query_families": [
     {
      "intent": "CAPABILITY_VECTOR",
@@ -484,7 +484,8 @@
    "selected_route": "VARY_THE_FACTS_INSTEAD_OF_ENUMERATING_THE_HYPOTHESES",
    "selected_route_preflight": {
     "all_required_dependencies_ready": true,
-    "checked_at_utc": "2026-11-19T17:13:13Z",
+    "checked_at_utc": "2026-11-19T19:15:29Z",
+    "evidence_refresh_round_24": "dependencies ready (local python3 + pytest, three repair suites re-run now: 48 passed in 1.63s); challenger routes enumerated and every one measured or refused, so no unresolved plausible dominator remains",
     "execution_dependencies": [
      {
       "dependency": "local Python 3.11 runtime with pytest",
@@ -580,7 +581,27 @@
     ],
     "OFFICIAL_PRIMARY": [
      "OpenAI Frontier Evals retirement of SWE-bench Verified, 23 February 2026"
-    ]
+    ],
+    "round_24_refresh": {
+     "challenger_routes_this_round": [
+      "speaking checks + slot search -- measured ceiling 2.7%, spent",
+      "a bigger vocabulary or seed corpus -- 0 gained, 1 lost (round 21)",
+      "the file's own alphabet -- 0 of 8 one-token fixes (round 22)",
+      "blind generate-and-verify -- 4,581 executions per fix (round 22)",
+      "the refusal's own words -- 32% named, 0 of 5 for literal fixes (round 23)",
+      "value provenance -- not yet measured; the only route with no measurement against it"
+     ],
+     "checked_at_utc": "2026-11-19T19:15:29Z",
+     "web_sources_checked_now": [
+      "arxiv 2604.11770 SpecTune -- intermediate postconditions, LLM-proposed, execution-graded",
+      "arxiv 2602.00129 CodePilot -- MCTS over LLM patches with execution reward; localization blamed for a third of failures",
+      "arxiv 2604.19305 DebugRepair -- runtime state as feedback, LLM-driven",
+      "arxiv 2602.11202 interwhen -- 'verifiers themselves are scarce'; auto-synthesis of verifiers",
+      "arxiv 2602.18998 -- both test-time scaling axes plateau on a verification gap",
+      "SyGuS / CEGIS (Alur et al.) -- the parameter-free frame: sketch plus assertions, counterexample-guided"
+     ],
+     "what_was_checked": "dependencies ready (local python3 + pytest, three repair suites re-run now: 48 passed in 1.63s); challenger routes enumerated and every one measured or refused, so no unresolved plausible dominator remains"
+    }
    },
    "unresolved_plausible_dominators": []
   },
