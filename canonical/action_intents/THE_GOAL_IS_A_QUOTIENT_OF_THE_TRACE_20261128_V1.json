@@ -42,7 +42,7 @@
  },
  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The run set that fixes which statistic may be believed. A goal is a quotient of the trace and its price is the number of cells of the coarsest sufficient statistic; that number is relative to the runs executed. Measured: 68 -> 55 -> 19 -> 5 cells across four rungs of supplied structure, and 208 collisions when the statistic chosen on two-action runs is asked to carry three-action runs.",
- "canonical_base_commit": "0dcdf88517e36f4bea987adc845d097283c41c4b",
+ "canonical_base_commit": "3568a33a9c3a76496debb781b6fff0960b652885",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -154,7 +154,7 @@
  ],
  "real_outcome": "That the goal's price in experiences is computable and small (3-6 cells) once the statistic is in hand; that the statistic, not the action, is the unit; that one experience is not enough because the price is k, not 1; and that every sufficiency claim is relative to the deepest run in the set.",
  "recursive_obs": {
-  "canonical_base_commit": "0dcdf88517e36f4bea987adc845d097283c41c4b",
+  "canonical_base_commit": "3568a33a9c3a76496debb781b6fff0960b652885",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "handing the goal's relation to the agent",
@@ -380,7 +380,7 @@
      "route": "COMPUTE_THE_COARSEST_SUFFICIENT_STATISTIC_AND_PRICE_THE_GOAL_IN_EXPERIENCES"
     }
    ],
-   "checked_at_utc": "2026-11-18T22:57:31Z",
+   "checked_at_utc": "2026-11-19T01:00:57Z",
    "comparison_dimensions": [
     "CORRECTNESS",
     "CAPABILITY_STRENGTH",
@@ -420,7 +420,7 @@
    "selected_route": "COMPUTE_THE_COARSEST_SUFFICIENT_STATISTIC_AND_PRICE_THE_GOAL_IN_EXPERIENCES",
    "selected_route_preflight": {
     "all_required_dependencies_ready": true,
-    "checked_at_utc": "2026-11-19T00:59:37Z",
+    "checked_at_utc": "2026-11-19T01:00:57Z",
     "execution_dependencies": [
      {
       "dependency": "local Python 3.11 runtime with pytest",
