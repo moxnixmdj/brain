@@ -1,0 +1,718 @@
+{
+ "action_id": "THE_PRE_STATE_IS_THE_MISSING_PART_20261116_V1",
+ "action_intent_id": "THE_PRE_STATE_IS_THE_MISSING_PART_20261116_V1",
+ "action_kind": "REAL_CAPABILITY_ACQUISITION",
+ "action_summary": "Withdraws the previous round's irreducible residual and measures why it appeared. Every run in this project began at reset; from a count of zero with unit steps, created_once and monotone-and-final-count-1 are the same sentence at any depth, so 203 fresh standard runs over three real tools disagree nowhere. Eighty pre-state experiments -- replay a real prefix, refuse the experiment unless the recorded pre-state is reproduced, execute one real atom -- separate the pair 25 times: 8 substantive (write the probe content, copy it: count 1 -> 2), 17 degenerate, of which 15 are no-ops the tool accepted and 2 are refusals. On the widened suite the goal's class falls from 2 minimal statements to 1, the conjunction, at a cost of 429 -> 649 behaviours. Price of the 'irreducible' bit: 2 actions, 0 questions of the user.",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "earlier_routes_exhausted_reason": "Refused by measurement, in order: hand-written vocabulary, relations over the reader, a goal handed in, the coarsest sufficient statistic, a free-running refinement loop, a supplied predicate called the goal, a syntactic count of statements, a price of the residual in words -- and now a suite whose first state was fixed at reset, withdrawn inside the receipt that replaces it.",
+  "incremental_spend_usd": 0,
+  "independent_verification_completed": false,
+  "independent_verification_note": "Producer-run sandbox only. Every number is a receipt row: 203 standard runs with 0 disagreements, 80 pre-state experiments with 25 separations and 8 substantive witnesses, the goal's class 2 -> 1, behaviours 429 -> 649, and the tarball reader probe.",
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md",
+   "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+  "progress_evidence_paths": [
+   "canonical/verification/THE_PRE_STATE_IS_THE_MISSING_PART_20261116_V1.json",
+   "THE_PRE_STATE_IS_THE_MISSING_PART_20261116_V1.md",
+   "canonical/tools/the_pre_state_is_the_missing_part_v1.py",
+   "canonical/tests/test_the_pre_state_is_the_missing_part_v1.py"
+  ],
+  "route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+  "scope_complete_discharge": false,
+  "terminal_achieved": false
+ },
+ "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The residual class was an artifact of the first state of the run. Every suite this project executed began at reset, where the probe count starts at zero and every atom moves it by at most one, so created_once[c] and monotone[c] and final:count[c]==1 are the same sentence at every depth, on every machine. One real action from one real pre-state -- write the probe content to `seed`, then copy `seed` to `copy` -- separates them: 80 pre-state experiments over three machines, 25 separations, 8 substantive (all created_once without the single-copy sentence, all exit 0), the goal's class 2 -> 1 with the conjunction as the survivor, and behaviours 429 -> 649 as the honest cost. The price of what was called irreducible is 2 actions and 0 questions of the user.",
+ "canonical_base_commit": "7b88d0c5bd34a188e0f9a1e99b64073b30f1f625",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "The residual class was an artifact of the first state of the run. Every suite this project executed began at reset, where the probe count starts at zero and every atom moves it by at most one, so created_once[c] and monotone[c] and final:count[c]==1 are the same sentence at every depth, on every machine. One real action from one real pre-state -- write the probe content to `seed`, then copy `seed` to `copy` -- separates them: 80 pre-state experiments over three machines, 25 separations, 8 substantive (all created_once without the single-copy sentence, all exit 0), the goal's class 2 -> 1 with the conjunction as the survivor, and behaviours 429 -> 649 as the honest cost. The price of what was called irreducible is 2 actions and 0 questions of the user.",
+ "date": "2026-11-16",
+ "expected_parent_change": "An action has a meaning per pre-state, and a suite that fixes its first state has already thrown that meaning away. On 203 fresh reset-started runs of three real tools the pair disagrees nowhere, because arithmetic forces it to agree; on 283 runs that include one action from each reachable pre-state it disagrees, and the user's goal stops being a class of two sentences: the only minimal statement with its behaviour is created_once and final:count==1. What was priced as one question of the user costs two actions. The remaining cost is not in the pair but in the world: behaviours rise from 429 to 649, and on the tarball a second copy of the same bytes is unobservable because the reader folds same-name members into one doubled row.",
+ "expected_parent_frontier_change": "An action has a meaning per pre-state, and a suite that fixes its first state has already thrown that meaning away. On 203 fresh reset-started runs of three real tools the pair disagrees nowhere, because arithmetic forces it to agree; on 283 runs that include one action from each reachable pre-state it disagrees, and the user's goal stops being a class of two sentences: the only minimal statement with its behaviour is created_once and final:count==1. What was priced as one question of the user costs two actions. The remaining cost is not in the pair but in the world: behaviours rise from 429 to 649, and on the tarball a second copy of the same bytes is unobservable because the reader folds same-name members into one doubled row.",
+ "explicit_user_authorization": [
+  "Why can't we just give our model the most advanced coding actions, let it experience them once, and have it learn them? Can't we do this now?",
+  "we are building our own model. never reach for another model or use it and call it ours",
+  "every bit of our weights must be calculated, not a knowledge house",
+  "the best part is no part",
+  "you must think from first principles for everything",
+  "You should kill all the bad and dumb ideas before you waste time implementing them.",
+  "NEVER BUILD BEFORE REASRCHING EXHAUSTION IS HAPPENED",
+  "maximize your web use",
+  "What is the single bottleneck that, if fixed, would unlock the most capability?",
+  "all the tests are not on synthetic data but are on the hardest open tests",
+  "only our agent/system may run them; integrity 100% real",
+  "the honest truth is that we keep testing on bugs we already know work",
+  "Work in branch, merge only when complete (fastest)",
+  "Merge once, not 10 times."
+ ],
+ "falsification_condition": "FALSIFIED if a reset-started run of these machines separates the pair; if no substantive pre-state experiment separates it on at least two machines; if any substantive witness is a refusal or rests on a pre-state that was not reproduced; if the goal's class on the widened suite is not exactly one; if the widening adds no behaviours; if any count in the markdown disagrees with the receipt.",
+ "generic_repair_from_single_probe": false,
+ "governance_change": false,
+ "highest_leverage_now": true,
+ "incremental_spend_usd": 0,
+ "intentional_route_race": false,
+ "load_bearing_primary": {
+  "constructive_gap_for_open_obligation_ids": [
+   "CODING_TB4_GE_66_4"
+  ],
+  "expected_obligation_discharge_lcb": 0,
+  "expected_obligation_unlock_lcb": "1/50",
+  "interpretation": "Speculative forecast only. The round withdraws a measured ceiling and replaces it with a measured cost; no truth obligation is discharged.",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "1/2",
+  "wall_clock_cost_ub": 1
+ },
+ "measured_effect": {
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "what_was_withdrawn": {
+   "previous_residual_statements": 2,
+   "previous_questions_of_the_user": 1.0,
+   "previous_runs_that_could_pay_it": 0,
+   "why_it_appeared": "every run began at reset with the probe count at zero and unit steps, which makes created_once and monotone and final:count==1 the same sentence at every depth"
+  },
+  "standard_suite": {
+   "runs": {
+    "TARBALL": 87,
+    "FILESYSTEM": 68,
+    "SQLITE": 48
+   },
+   "runs_total": 203,
+   "pair_disagreements": 0,
+   "delta_values_by_machine": {
+    "TARBALL": [
+     -1,
+     0,
+     1
+    ],
+    "FILESYSTEM": [
+     -1,
+     0,
+     1
+    ],
+    "SQLITE": [
+     0,
+     1
+    ]
+   }
+  },
+  "pre_state_experiments": {
+   "experiments": 80,
+   "separations": 25,
+   "substantive": 8,
+   "degenerate": 17,
+   "degenerate_accepted_no_ops": 15,
+   "degenerate_refusals": 2,
+   "not_reproduced": 0,
+   "pre_states": {
+    "TARBALL": 5,
+    "FILESYSTEM": 8,
+    "SQLITE": 5
+   }
+  },
+  "first_substantive_witness": {
+   "machine": "FILESYSTEM",
+   "prefix": [
+    "FS_A1"
+   ],
+   "atom": "FS_A4",
+   "count_before": 1,
+   "count_after": 2,
+   "delta": 1
+  },
+  "price": {
+   "questions_of_the_user": 0,
+   "actions": 2,
+   "previous_price": "log2(2) = 1 question, 0 runs"
+  },
+  "goal_class": {
+   "standard": 2,
+   "widened": 1,
+   "widened_text": "created_once[probe_new_content] ∧ final:count[probe_new_content]==1",
+   "grammar_terms": 189,
+   "hypotheses": 17955
+  },
+  "honest_cost": {
+   "behaviours_standard": 429,
+   "behaviours_widened": 649
+  },
+  "reader_limit": {
+   "machine": "TARBALL",
+   "count_after_one_append": 1,
+   "count_after_two_appends": 0,
+   "why": "two members named `seed`; extracting by name prints both bodies, so each row carries the doubled text and no row equals the probe content"
+  },
+  "declared_acceptance": {
+   "P1": "MET (0 disagreements, unit steps measured)",
+   "P2": "MET (one substantive direction, 2 machines, all exit 0)",
+   "P3": "MET (2 actions, 0 questions)",
+   "P4": "MET (class 2 -> 1, behaviours 429 -> 649)",
+   "P5": "MET (0 pre-states fabricated, no substantive witness a refusal)",
+   "P6": "MET (0 model calls, 0 parameters)"
+  },
+  "markdown": "THE_PRE_STATE_IS_THE_MISSING_PART_20261116_V1.md",
+  "receipt": "canonical/verification/THE_PRE_STATE_IS_THE_MISSING_PART_20261116_V1.json",
+  "cost": {
+   "model_calls": 0,
+   "network_calls_at_run_time": 0,
+   "parameters_stored": 0,
+   "seconds": 36.6
+  }
+ },
+ "next_step": "Move from a state the experimenter chose to a state a repository is in. Take one real repository task judged by its own tests; the pre-state is the working tree as it is, including uncommitted changes and a failed prior edit, and the prefix that reaches it is git stash/apply or the reflog, executed and not simulated. Prediction: at least one pair of goal statements that no clean-checkout run can separate becomes separable by a run beginning from a dirty tree, at a price of at most three real actions and zero questions. Falsifier: if the clean-checkout suite alone separates every residual pair on the first real repo, this law is local to file-and-archive machines and must be withdrawn; a separation obtained only by the tool refusing to run counts as nothing.",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "prior_work_reused": [
+  "canonical/tools/instant_learning_in_a_new_environment_v1.py (machines, atoms, execute, PROBE_*)",
+  "canonical/tools/the_goal_is_a_relation_over_the_run_v1.py (traces_for, run_terms, the two statements)",
+  "canonical/tools/the_goal_is_a_discriminator_v1.py (Term)",
+  "canonical/tools/the_goal_is_a_quotient_of_the_trace_v1.py (portable_judge)",
+  "canonical/tools/the_vocabulary_is_the_artifact_v1.py (the machines' readers)",
+  "canonical/tools/breadth_buys_what_repetition_cannot_v1.py (Analysis, union_terms, masks_on, judge_mask)",
+  "canonical/verification/BREADTH_BUYS_WHAT_REPETITION_CANNOT_20261201_V1.json (the claim withdrawn here)"
+ ],
+ "probe_specific": false,
+ "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+ "progress_evidence_paths": [
+  "canonical/verification/THE_PRE_STATE_IS_THE_MISSING_PART_20261116_V1.json",
+  "THE_PRE_STATE_IS_THE_MISSING_PART_20261116_V1.md",
+  "canonical/tools/the_pre_state_is_the_missing_part_v1.py",
+  "canonical/tests/test_the_pre_state_is_the_missing_part_v1.py"
+ ],
+ "real_outcome": "That the ceiling was the convention: the residual the previous receipt could not separate is forced by starting at reset, and one action from a reachable pre-state separates it at zero questions; that the goal's class over a fixed 189-term grammar falls from 2 statements to 1, the conjunction created_once and final:count==1; and that the honest cost is 429 -> 649 behaviours, with TARBALL unable to show a second copy at all because its reader folds same-name members into one doubled row.",
+ "recursive_obs": {
+  "canonical_base_commit": "7b88d0c5bd34a188e0f9a1e99b64073b30f1f625",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "a suite that begins every run at the machine's reset state",
+   "a question to the user where an action from a reachable pre-state would answer",
+   "a claim of irreducibility that was not tested against a non-reset first state",
+   "counting a separation that rests on a pre-state that was not reproduced"
+  ],
+  "expected_parent_frontier_change": "An action has a meaning per pre-state, and a suite that fixes its first state has already thrown that meaning away. On 203 fresh reset-started runs of three real tools the pair disagrees nowhere, because arithmetic forces it to agree; on 283 runs that include one action from each reachable pre-state it disagrees, and the user's goal stops being a class of two sentences: the only minimal statement with its behaviour is created_once and final:count==1. What was priced as one question of the user costs two actions. The remaining cost is not in the pair but in the world: behaviours rise from 429 to 649, and on the tarball a second copy of the same bytes is unobservable because the reader folds same-name members into one doubled row.",
+  "expected_parent_level_state_change": "An action has a meaning per pre-state, and a suite that fixes its first state has already thrown that meaning away. On 203 fresh reset-started runs of three real tools the pair disagrees nowhere, because arithmetic forces it to agree; on 283 runs that include one action from each reachable pre-state it disagrees, and the user's goal stops being a class of two sentences: the only minimal statement with its behaviour is created_once and final:count==1. What was priced as one question of the user costs two actions. The remaining cost is not in the pair but in the world: behaviours rise from 429 to 649, and on the tarball a second copy of the same bytes is unobservable because the reader folds same-name members into one doubled row.",
+  "independent_verification_required": true,
+  "iteration_limit": 1,
+  "next_step": "Move from a state the experimenter chose to a state a repository is in. Take one real repository task judged by its own tests; the pre-state is the working tree as it is, including uncommitted changes and a failed prior edit, and the prefix that reaches it is git stash/apply or the reflog, executed and not simulated. Prediction: at least one pair of goal statements that no clean-checkout run can separate becomes separable by a run beginning from a dirty tree, at a price of at most three real actions and zero questions. Falsifier: if the clean-checkout suite alone separates every residual pair on the first real repo, this law is local to file-and-archive machines and must be withdrawn; a separation obtained only by the tool refusing to run counts as nothing.",
+  "obs_blocker": {
+   "delete_bypass_substitute_options": [
+    "delete the claim that the residual was information only language could supply: one action from a reachable pre-state separated it at zero questions",
+    "bypass the reset convention with a deeper run set: depth cannot help, because the equivalence is forced at every depth by the count starting at zero",
+    "substitute more environments for the missing pre-state: the third environment removed nothing, and the pre-state removed the pair"
+   ],
+   "intrinsic_or_path_specific": "intrinsic to the action, not to the machine: a command's effect is a function of the state it is applied to, so any suite that fixes the first state cannot exhibit the difference. The one exception found is the reader, which is path-specific: TARBALL cannot show a second copy at all",
+   "surviving_causal_blocker": "The residual class was an artifact of the first state of the run. Every suite this project executed began at reset, where the probe count starts at zero and every atom moves it by at most one, so created_once[c] and monotone[c] and final:count[c]==1 are the same sentence at every depth, on every machine. One real action from one real pre-state -- write the probe content to `seed`, then copy `seed` to `copy` -- separates them: 80 pre-state experiments over three machines, 25 separations, 8 substantive (all created_once without the single-copy sentence, all exit 0), the goal's class 2 -> 1 with the conjunction as the survivor, and behaviours 429 -> 649 as the honest cost. The price of what was called irreducible is 2 actions and 0 questions of the user."
+  },
+  "obs_capability": {
+   "capability_work_deleted": [
+    "the residual's price in words (the question is now answered by an action)",
+    "any claim that depth or breadth can separate the pair",
+    "a second harness or grammar: the previous round's grammar is held fixed at 189 terms"
+   ],
+   "existing_inherited_routes_checked": [
+    "canonical/tools/breadth_buys_what_repetition_cannot_v1.py (Analysis, union_terms, judge_mask)",
+    "canonical/tools/the_goal_is_a_relation_over_the_run_v1.py (traces_for, run_terms)",
+    "canonical/tools/the_vocabulary_is_the_artifact_v1.py (the machines and their readers)",
+    "canonical/verification/BREADTH_BUYS_WHAT_REPETITION_CANNOT_20261201_V1.json (withdrawn here)"
+   ],
+   "external_existing_routes_checked": [
+    "state-machine preconditions (QuickCheck/PropEr): a command's meaning is per state, which is the part the atom model lacks",
+    "conformance testing without a reliable reset (Lee-Yannakakis, UIOv): the reset assumption is known to hide behaviour reachable only from other states",
+    "2026 benchmark analyses separating task difficulty from world richness, and stateful/continual learning benchmarks: a fixed initial state and a reset hide whether anything was learned"
+   ],
+   "surviving_gap": "acting from a state the system did not choose: the pre-state of a real repository task, reached by a real prefix, judged by the repository's own tests"
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "a residual priced in questions when a reachable pre-state can answer it",
+    "a run set that is deep but always begins in the same state",
+    "the pair alone as the unit: the whole grammar's goal class is reported before and after"
+   ],
+   "real_outcome": "That the ceiling was the convention: the residual the previous receipt could not separate is forced by starting at reset, and one action from a reachable pre-state separates it at zero questions; that the goal's class over a fixed 189-term grammar falls from 2 statements to 1, the conjunction created_once and final:count==1; and that the honest cost is 429 -> 649 behaviours, with TARBALL unable to show a second copy at all because its reader folds same-name members into one doubled row.",
+   "surviving_necessity": "no model is needed to separate two statements: one action from one real pre-state does it, and the arithmetic that forced them to agree is written down and falsifiable"
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "The machines, the grammar and the class machinery are earlier rounds' work, reused unchanged; the new objects are a reachable pre-state with its real prefix and a two-state run.",
+   "downstream_work_to_delete_or_supersede": "Any suite that begins every run at reset, and any residual priced in questions that a reachable pre-state could answer.",
+   "fresh_reuse_plan": "Recompute from the receipt's two commands; everything is local and public."
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": "one walks pass keeps the sequences traces_for throws away, so pre-states are reached with real prefixes and the standard pool is the same runs as before (pinned byte for byte)",
+   "search_stop_decision": "stop at the first substantive witness in the declared order, and at two actions of prefix; a degenerate separation is reported but never counted as evidence about what an action does"
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "COMPOSE",
+    "CONFIGURE"
+   ],
+   "efficiency_mechanism": "80 experiments and 36.6 s: replay a prefix, refuse unless the pre-state is reproduced, execute one atom, read once. The same experiments measure the unit-step premise and the separation",
+   "generality_mechanism": "nothing is specific to these machines: any executed action can be tried from any reachable pre-state, and the statement pair is a boolean function of the run",
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "A deeper run set: the equivalence is forced at every depth. More environments: the third bought nothing. A question to the user: the action answered it. A model: refused by owner law and unnecessary for a two-state run",
+   "routes_ranked": [
+    "execute one action from each reachable pre-state and judge the two-state run",
+    "ask the user which of the two sentences was meant",
+    "deepen or widen the reset-started suite",
+    "train or distil something to guess the goal"
+   ]
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "oracle_paths": [
+    "canonical/verification/THE_PRE_STATE_IS_THE_MISSING_PART_20261116_V1.json",
+    "canonical/tests/test_the_pre_state_is_the_missing_part_v1.py",
+    "canonical/verification/BREADTH_BUYS_WHAT_REPETITION_CANNOT_20261201_V1.json"
+   ],
+   "synthetic_verification_necessity": "Thirteen tests re-execute the round and pin the retraction, the witnesses, the price, the class fall, the behaviour cost and the tarball reader; the systems under test are GNU tar, GNU coreutils and SQLite, executed."
+  },
+  "real_outcome": "That the ceiling was the convention: the residual the previous receipt could not separate is forced by starting at reset, and one action from a reachable pre-state separates it at zero questions; that the goal's class over a fixed 189-term grammar falls from 2 statements to 1, the conjunction created_once and final:count==1; and that the honest cost is 429 -> 649 behaviours, with TARBALL unable to show a second copy at all because its reader folds same-name members into one doubled row.",
+  "required_capability": "reconstructing the first state of a run from a real prefix, refusing an experiment that does not reproduce it, measuring the action's effect per pre-state, and separating a statement pair the reset-started suite forced to agree",
+  "route_frontier": {
+   "challenger_routes": [
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "1 verified repair; 13 of 30 rows addressed; 0 accusations",
+      "CORRECTNESS": "the corpus's own suite, whole file",
+      "INCREMENTAL_COST": "0 parameters, 0 model calls, ~10 us per candidate",
+      "RELIABILITY": "superseded: the goal read off one state is empty wherever two runs end alike",
+      "VERIFIABILITY": "receipt rows, producer-run",
+      "WALL_CLOCK": "83.6 s for 30 commits"
+     },
+     "evidence": [
+      "30 real commits, 83.6 s, 0 accusations, grammar named for every exclusion, 1 row recovered by the AST finder, 1 verified repair unchanged, 1 harness failure stopped from wearing a fact's name"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_HYPOTHESIS_GRAMMAR_IS_THE_BOTTLENECK_20261122_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "READ_THE_FIX_FROM_THE_AST_AND_NAME_THE_GRAMMAR_OF_THE_POPULATION"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "3 of 40 programs",
+      "CORRECTNESS": "a class is only as good as its donor",
+      "INCREMENTAL_COST": "one class per shape",
+      "RELIABILITY": "unseen shapes stay unseen",
+      "VERIFIABILITY": "measured exactly",
+      "WALL_CLOCK": "unbounded as the corpus grows"
+     },
+     "evidence": [
+      "a taught class reaches 8 of 40 fixes, 5 only on its donor"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/WHAT_IS_LEFT_FOR_A_LESSON_TO_BUY_20261117_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "teach one more edit class per failing task"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "2 of 30 unseen programs from 3 pairs, at 1.92% precision on the pair that fires",
+      "CORRECTNESS": "the corpus's own pytest decides, as here",
+      "INCREMENTAL_COST": "40.6 us per lookup, no model, no parameters",
+      "RELIABILITY": "saturates: addressability 34.4% -> 59.7% over 24 experiences",
+      "VERIFIABILITY": "measured exactly",
+      "WALL_CLOCK": "5 minutes for the whole corpus"
+     },
+     "evidence": [
+      "0.597 addressable x 0.0192 precise ~ 1.1% of unseen decisions"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/WHAT_AN_EXPERIENCE_CAN_OWN_20261118_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "NON_DOMINATING",
+     "route": "store every verified repair and retrieve it by similarity"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "1 real commit identified at rank 0, unattended, with no diff and no name table",
+      "CORRECTNESS": "the artifact answers, so a question is either answered or refused -- never wrong",
+      "INCREMENTAL_COST": "7.69 ms per asked question, 1 bit",
+      "RELIABILITY": "superseded: the goal read off one state is empty wherever two runs end alike",
+      "VERIFIABILITY": "measured exactly",
+      "WALL_CLOCK": "121.2 s for 14 bugs"
+     },
+     "evidence": [
+      "click@1b0e19f505: human fix derived at rank 0 from the trace, 2 consistent candidates of 119 tests",
+      "5 evaluated candidates per site against the proximity pool's 32-400"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_FAILING_RUN_IS_THE_INDEX_20261118_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "INDEX_ACTIONS_BY_THE_FAILING_RUN_NOT_BY_THE_SOURCE_TEXT"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "run-level goals inferred from judgments: 0 false accepts, 5-6 questions, exact where asked",
+      "CORRECTNESS": "leave-one-run-out against the user's own judgments on executed runs",
+      "INCREMENTAL_COST": "0 parameters, 0 model calls, 18.1 s for 136 runs and ~1000 hypotheses per goal",
+      "RELIABILITY": "sound and incomplete: 1 run of 136 refused by the intersection",
+      "VERIFIABILITY": "receipt rows, producer-run, blocker hypothesis reproduced in the suite",
+      "WALL_CLOCK": "18.1 s"
+     },
+     "evidence": [
+      "136 real runs on 3 machines; 9 final states reached with opposite judgments; 0 final-state terms disagree inside a group; the final-state version space is empty on every goal holding one; the run grammar is identified in 5-6 questions at 1.00 accuracy and is 135/136 leave-one-run-out with 0 false accepts"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_GOAL_IS_A_RELATION_OVER_THE_RUN_20261127_V1.json",
+      "canonical/verification/THE_GOAL_IS_A_DISCRIMINATOR_20261126_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "INFER_A_RELATION_OVER_THE_RUN_FROM_JUDGMENTS_AND_ACT_ON_THE_INTERSECTION"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "the observable is computed and priced: 3-6 cells per goal, one statistic across three machines",
+      "CORRECTNESS": "the coarsest sufficient statistic of the reachable pool, with witnesses for every cheaper one",
+      "INCREMENTAL_COST": "0 parameters, 0 model calls, 23.7 s for 3444+ projections",
+      "RELIABILITY": "refuted by its own refinement: 0 counterexamples in 6 questions by both computable orderings, and its 208-collision headline is retracted -- 0 of those collisions is harmful",
+      "VERIFIABILITY": "receipt rows, producer-run, both declared failures pinned in the suite",
+      "WALL_CLOCK": "23.7 s"
+     },
+     "evidence": [
+      "four rungs over three machines and five goals; cells 68->55->19->5, 48->7->7->4, 32->7->7->3, 68->56->24->6; every cheaper statistic refuted with a witness pair; 0 of 3444 reading projections separate a goal about which atom ran; 208 collisions at held-out depth",
+      "the coarsest statistic is not harmed by its collisions: 675 FILESYSTEM pairs and 1765 depth-4 pairs, 0 harmful, 87/87 verdicts right"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_GOAL_IS_A_QUOTIENT_OF_THE_TRACE_20261128_V1.json",
+      "canonical/verification/THE_GOAL_IS_A_RELATION_OVER_THE_RUN_20261127_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "COMPUTE_THE_COARSEST_SUFFICIENT_STATISTIC_AND_PRICE_THE_GOAL_IN_EXPERIENCES"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "one counterexample buys the coarsest 3-cell statistic; 2 questions by cell labelling, 30 by its guarantee",
+      "CORRECTNESS": "the user's judgments on executed runs; the depth-3 table answers 87 of 87 depth-4 runs, with 0 undecided and 0 false accepts",
+      "INCREMENTAL_COST": "0 parameters, 0 model calls, one signature table per pool",
+      "RELIABILITY": "superseded: it measured a supplied predicate and called the result the goal; the supply is now visible as 79 statements with one behaviour",
+      "VERIFIABILITY": "receipt rows, producer-run, every count pinned in the suite",
+      "WALL_CLOCK": "37.4 s for three machines, four question policies and three rank diagnostics"
+     },
+     "evidence": [
+      "FILESYSTEM 675 conflations / 0 harmful; SQLITE 337 / 0; TARBALL 321 / 10",
+      "one harmful answer -> the coarsest 3-cell statistic, which had been one generator away",
+      "depth 4: 87 runs, 1765 conflations, 0 harmful, 0 false accepts, 0 undecided",
+      "cheapest-refinement and no-signal: 6 questions, 0 counterexamples, best harmful rank 130 / 136 of 321 (chance 29.3); committee ties on 311 of 321",
+      "the environment is learned exactly (229 of 231 decided, 0 errors) and the goal is not: 353 behaviours, 79 statements, a class of four intentions that splits on 32 of 196 runs"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_COUNTEREXAMPLE_IS_THE_NEXT_EXPERIMENT_20261129_V1.json",
+      "canonical/verification/THE_GOAL_IS_A_QUOTIENT_OF_THE_TRACE_20261128_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "ASK_FOR_ONE_COUNTEREXAMPLE_AND_LABEL_WHOLE_CELLS_INSTEAD_OF_HUNTING_DISAGREEMENT"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "separates the two objects the claim conflates: 353 behaviours of resolving power, 8 active judgments to reach it, 4 intentions left indistinguishable and split by the next machine",
+      "CORRECTNESS": "every number is a count over executed runs; the ceiling is re-derivable from the grammar and the traces, and the transfer is a plain evaluation elsewhere",
+      "INCREMENTAL_COST": "0 parameters, 0 model calls, one grammar pass per pool",
+      "RELIABILITY": "superseded and corrected: its 79 statements were 75 redundant conjunctions, and one machine's class is 4, not 79",
+      "VERIFIABILITY": "receipt rows, producer-run, every count pinned in the suite",
+      "WALL_CLOCK": "158.3 s for two machines, 427 runs, 12 881 hypotheses"
+     },
+     "evidence": [
+      "TARBALL: 231 runs, 11 935 hypotheses, 353 behaviours, 79 statements for the user's goal",
+      "four statements, one behaviour on all 231 runs; 32 of 196 runs separate the pair on FILESYSTEM",
+      "active 353 -> 176 -> 89 -> 29 -> 14 -> 7 -> 5 -> 2 -> 1 in 8 judgments; passive 20 behaviours at 8",
+      "registered control: depth-3 table decides 229 of 231 depth-5 runs, 0 false accepts, 0 false rejects, 2 undecided",
+      "breadth priced: 4 -> 2 -> 2 minimal statements across three machines, the third removing nothing; 57.1 % of 622 behaviours pinned by a unique statement"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_GOAL_IS_NOT_IN_THE_ENVIRONMENT_20261130_V1.json",
+      "canonical/verification/THE_COUNTEREXAMPLE_IS_THE_NEXT_EXPERIMENT_20261129_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "SEPARATE_THE_ENVIRONMENT_FROM_THE_GOAL_AND_PRICE_THE_GOAL_IN_JUDGMENTS"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "prices breadth and its saturation: 622 behaviours, the goal's class 4 -> 2 -> 2, a residual of one question of words",
+      "CORRECTNESS": "every number is a bitmask count over 555 executed runs; all seven subsets are reported, so no environment is taken on faith",
+      "INCREMENTAL_COST": "0 parameters, 0 model calls, one term evaluation per machine",
+      "RELIABILITY": "sound and self-correcting: the previous round's syntactic count is retracted inside the receipt, with the arithmetic",
+      "VERIFIABILITY": "receipt rows, producer-run, every count pinned in the suite",
+      "WALL_CLOCK": "108.8 s for three machines, 555 runs, 29 890 hypotheses and seven subsets"
+     },
+     "evidence": [
+      "244 terms, 29 890 hypotheses, 555 runs, 622 behaviours; 354 behaviours with a unique statement",
+      "the goal's minimal class: 4 on TARBALL, 2 after a second machine, 2 after the third",
+      "residual: created_once[probe_new_content] vs monotone[probe_new_content] and final:count[probe_new_content]==1 -- one question of the user, zero runs",
+      "correction: the previous round's 79 contained 75 redundant conjunctions"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/BREADTH_BUYS_WHAT_REPETITION_CANNOT_20261201_V1.json",
+      "canonical/verification/THE_GOAL_IS_NOT_IN_THE_ENVIRONMENT_20261130_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "SELECTED",
+     "route": "PRICE_THE_RESIDUAL_CLASS_OF_EVERY_GOAL_ACROSS_ENVIRONMENTS_AND_ANSWER_IT_IN_WORDS"
+    }
+   ],
+   "checked_at_utc": "2026-11-19T03:11:07Z",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "PRICE_THE_RESIDUAL_CLASS_OF_EVERY_GOAL_ACROSS_ENVIRONMENTS_AND_ANSWER_IT_IN_WORDS",
+   "max_age_hours": 2,
+   "negative_search_summary": "Refused by measurement: deepening one machine (saturates at its resolving power), a syntactic count of statements (75 of 79 redundant), a bigger learner (the residual is bits of what the user meant), and treating a second environment as unbounded progress (the third removed nothing).",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "state identification characterization set conformance testing behavioural equivalence minimal distinguishing statements"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "version space minimal hypothesis redundancy structural equivalence queries identification"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "2026 goal underspecification eliciting user intent language versus demonstration agents"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "AALpy LearnLib distinguishing sequences benchmarking identification black-box 2026"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "selected_route": "PRICE_THE_RESIDUAL_CLASS_OF_EVERY_GOAL_ACROSS_ENVIRONMENTS_AND_ANSWER_IT_IN_WORDS",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-11-19T03:11:07Z",
+    "execution_dependencies": [
+     {
+      "dependency": "local Python 3.11 runtime with pytest",
+      "evidence": [
+       "10 instrument tests pass in 110 s; 33/33 unified-model gates pass"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "real tool binaries the machines drive (sh, mv, cp, rm, sqlite3, tar)",
+      "evidence": [
+       "555 real runs across three machines, 244 terms evaluated once per machine, seven subsets analysed"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "local tempdir for one fresh reset per machine and per run",
+      "evidence": [
+       "one reset per sequence; runs deduplicated by trace; 30 sequences kept undeduplicated for the atom goal"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "STORAGE",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "max_age_hours": 2,
+    "selected_route": "PRICE_THE_RESIDUAL_CLASS_OF_EVERY_GOAL_ACROSS_ENVIRONMENTS_AND_ANSWER_IT_IN_WORDS",
+    "status": "READY"
+   },
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/tools/grammar_closed_repair_v1.py (corpus reader, space enumerator, real judge, executed_lines)",
+     "canonical/tools/solve_with_a_calibrated_judge_v1.py (certified judge, per-case clocks, containment)",
+     "canonical/verification/WHERE_THE_REFUSALS_ACTUALLY_WERE_20261116_V1.json",
+     "canonical/verification/ONE_DEMONSTRATION_LEAVES_TEN_BITS_20261116_V1.json"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "https://arxiv.org/pdf/2611.12885 (World In-Context Learning: one demonstration plus rehearsal beats a 50-demonstration trained policy; without the world the demonstration brings no benefit)",
+     "https://arxiv.org/html/2606.29537v1 (OSWorld 2.0: 20.6% binary completion, failures concentrate on hidden state)",
+     "https://arxiv.org/html/2606.31270v1 (Learning from Failure: inference-time self-improvement from failure trajectories)"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "https://github.com/jkoppel/QuixBugs (MIT; 40 buggy programs, 40 pytest files, JSON test data)",
+     "https://pypi.org/project/pytest (9.2.0, the runner every verdict goes through)"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "https://docs.python.org/3/library/ast.html (node types the closure rule enumerates)"
+    ]
+   },
+   "unresolved_plausible_dominators": []
+  },
+  "routes_considered": [
+   "TRAIN_OR_DISTIL_A_MODEL__REFUSED_BY_OWNER_LAW_AND_UNNECESSARY_FOR_A_TWO_STATE_RUN",
+   "DEEPEN_OR_WIDEN_THE_RESET_STARTED_SUITE__REFUSED_BY_ARITHMETIC_AND_BY_MEASUREMENT",
+   "ASK_THE_USER_WHICH_SENTENCE_WAS_MEANT__SUPERSEDED_BY_A_REACHABLE_PRE_STATE",
+   "EXECUTE_ONE_ACTION_FROM_EACH_REACHABLE_PRE_STATE__SELECTED"
+  ],
+  "selected_route": "REPLAY_A_REAL_PREFIX_AND_EXECUTE_ONE_ACTION_FROM_A_REACHABLE_PRE_STATE",
+  "selected_surviving_route": "SEPARATE_THE_RESIDUAL_BY_LETTING_THE_RUN_BEGIN_WHERE_THE_MACHINE_ALREADY_IS",
+  "selected_surviving_route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+  "stop_condition": "Move from a state the experimenter chose to a state a repository is in. Take one real repository task judged by its own tests; the pre-state is the working tree as it is, including uncommitted changes and a failed prior edit, and the prefix that reaches it is git stash/apply or the reflog, executed and not simulated. Prediction: at least one pair of goal statements that no clean-checkout run can separate becomes separable by a run beginning from a dirty tree, at a price of at most three real actions and zero questions. Falsifier: if the clean-checkout suite alone separates every residual pair on the first real repo, this law is local to file-and-archive machines and must be withdrawn; a separation obtained only by the tool refusing to run counts as nothing.",
+  "why_selected_route_is_fastest_sufficient": "Because the ambiguity lived in the first state of the run, and a first state is reachable by a prefix: two actions decide what 555 runs could not, and the same experiments prove the premise that made the 555 runs agree.",
+  "why_this_is_not_another_organ": "It adds no knowledge, no model and no grammar: one walks pass over the machines already in the tree, one action per reachable pre-state, and the previous round's own term set held fixed."
+ },
+ "required_capability": "reconstructing the first state of a run from a real prefix, refusing an experiment that does not reproduce it, measuring the action's effect per pre-state, and separating a statement pair the reset-started suite forced to agree",
+ "route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+ "route_id": "SEPARATE_THE_RESIDUAL_BY_LETTING_THE_RUN_BEGIN_WHERE_THE_MACHINE_ALREADY_IS",
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "scope_complete_discharge": false,
+ "selected_route": "REPLAY_A_REAL_PREFIX_AND_EXECUTE_ONE_ACTION_FROM_A_REACHABLE_PRE_STATE",
+ "selected_surviving_route": "SEPARATE_THE_RESIDUAL_BY_LETTING_THE_RUN_BEGIN_WHERE_THE_MACHINE_ALREADY_IS",
+ "status": "PROPOSED__PRODUCER_MEASURED__THE_CEILING_WAS_THE_RESET_CONVENTION__PRE_STATE_SEPARATES_THE_RESIDUAL__INDEPENDENT_VERIFICATION_OPEN",
+ "stop_condition": "Move from a state the experimenter chose to a state a repository is in. Take one real repository task judged by its own tests; the pre-state is the working tree as it is, including uncommitted changes and a failed prior edit, and the prefix that reaches it is git stash/apply or the reflog, executed and not simulated. Prediction: at least one pair of goal statements that no clean-checkout run can separate becomes separable by a run beginning from a dirty tree, at a price of at most three real actions and zero questions. Falsifier: if the clean-checkout suite alone separates every residual pair on the first real repo, this law is local to file-and-archive machines and must be withdrawn; a separation obtained only by the tool refusing to run counts as nothing.",
+ "terminal_credit_delta": 0,
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "truth": {
+  "achieved": false,
+  "the_law_this_round_adds": "An action has a meaning per pre-state. A suite that fixes its first state deletes that meaning before it starts: what this project called an irreducible residual was a theorem of starting at reset, and one action from a reachable pre-state separated it at zero questions. What is scarce is not runs; it is the states a run is allowed to begin in.",
+  "what_is_false_in_the_claim": [
+   "that the residual was irreducible: it was forced by reset, and one action from a reachable pre-state separates it -- 8 substantive witnesses on 2 machines",
+   "that its price was log2(2) = 1 question of the user: it is 0 questions and 2 actions",
+   "that the goal cannot be identified by experience: on the widened suite its class is 1, the conjunction",
+   "that widening the suite is free: behaviours rise 429 -> 649 while the pair's class falls 2 -> 1",
+   "that a machine's atoms are its vocabulary: on TARBALL a second copy of the same bytes is unobservable, so the reader limits what any statement can say",
+   "that this is coding capability: no edit is composed; the next round must start from a dirty tree"
+  ]
+ },
+ "user_authorized_governance_change": false,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "currentness": {
+   "accepted_families": 5,
+   "current_load_bearing_atomic_count": 36,
+   "deleted_nonnecessary_atomic_count": 2,
+   "historical_atomic_registry_count": 38,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_atomic": 38,
+   "total_families": 19,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "This measures the reach of an executed counterfactual over real commit history and finds the content of the fix outside it; it discharges no truth obligation.",
+  "target_truth_obligations": [
+   "CODING_TB4_GE_66_4"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [
+    {
+     "git_blob_sha": "aa752cadab44d7b354814507d437f4fa485aaf74",
+     "path": "canonical/verification/RECOGNITION_IS_THE_BOTTLENECK_20261121_V1.json"
+    }
+   ],
+   "decisive_question": "Before asking what the instrument can find, does it accept the human's own fix -- and if not, why not?",
+   "falsifier_id": "THE_DEMAND_MUST_ADMIT_THE_HUMAN_FIX_AND_NOT_A_CONSTANT",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "Zero generalising repairs out of thirty fresh commits is the counterexample, and it is recorded in the receipt rather than hidden.",
+   "proposal_id": "THE_ASSERTION_IS_THE_DEMAND_20261119_V1"
+  }
+ },
+ "verification": {
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "commands": [
+   "python3 canonical/tools/the_pre_state_is_the_missing_part_v1.py --receipt canonical/verification/THE_PRE_STATE_IS_THE_MISSING_PART_20261116_V1.json",
+   "python3 -m pytest canonical/tests/test_the_pre_state_is_the_missing_part_v1.py -q"
+  ],
+  "independent_verification_completed": false,
+  "independent_verification_required": true,
+  "tests_green": 13
+ },
+ "weakens_existing_guard": false
+}

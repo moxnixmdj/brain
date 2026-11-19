@@ -1,0 +1,716 @@
+{
+ "schema": "BRAIN_THE_PRE_STATE_IS_THE_MISSING_PART_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "date": "2026-11-16",
+ "mode": "ONE_ACTION_FROM_A_REAL_PRE_STATE_SEPARATES_WHAT_A_RESET_STARTED_SUITE_CANNOT",
+ "retraction_of_the_previous_round": {
+  "what_was_claimed": "the residual class for the goal is 2 statements, priced at log2(2) = 1 question of the user, with 0 runs of any of three machines able to pay it",
+  "what_it_was": "a theorem about suites that begin at reset: with the probe count starting at 0 and every atom changing it by at most one, created_once is the same sentence as monotone and final count == 1, at every depth and for every machine",
+  "what_is_true_now": "one real action from one real pre-state separates the two statements in both directions, at the price of a prefix of length <= 2 and zero questions of the user",
+  "why_it_matters": "the ceiling was the first state of the run, which is the experimenter's convention and not a property of tar, coreutils or SQLite; a measured limit is only a limit until the convention that produced it is named"
+ },
+ "criteria_were_declared_after_a_prototype_probe": false,
+ "criteria_revised_after_the_first_receipt_run": {
+  "P5": {
+   "was": "the first implementation added a condition the declared criterion did not contain: that every atom executed by an experiment exits zero",
+   "is": "the declared criterion is what is checked -- every pre-state reproduced exactly, nothing fabricated -- plus a stronger one: no witness may be a failed action",
+   "why": "GNU tar --delete of a member that is absent and GNU mv of a name that is absent exit non-zero and do nothing: that is the tool being real, not a fabrication. The first implementation therefore failed on a condition it had invented, and the honest repair is to check the condition that matters"
+  },
+  "P2 and P3": {
+   "was": "a pre-state experiment separates the pair",
+   "is": "a pre-state experiment that changes the probe count separates the pair (strengthened, not relaxed: the first run already met the weaker version)",
+   "why": "the first run showed the pair separates even on a no-op from a state holding one copy. That is true and worth reporting, but it is degenerate: the claim worth making is that a run which changes the count separates them, and a no-op cannot be mistaken for evidence about what an action does"
+  }
+ },
+ "probes_run_before_the_criteria_were_written": [
+  "a two-action run of FS_A1;FS_A4 was executed while reading the code, and it made the count rise twice, so it does not separate the pair: this checked the theorem's premise",
+  "no pre-state experiment (replay a prefix, then act) was run before P1-P6 were written"
+ ],
+ "declared_acceptance_before_the_receipt_run": {
+  "P1": "the pair disagrees on zero reset-started runs and every atom moves the count by at most one, so the equivalence is forced and is not evidence about the world",
+  "P2": "a pre-state experiment separates the pair in both directions on at least two machines",
+  "P3": "the separation costs at most a prefix of length 2 plus one action and zero questions",
+  "P4": "the pair's class is 1 on the widened suite and 2 on the standard one",
+  "P5": "every experiment either reproduces its recorded pre-state or is excluded",
+  "P6": "zero model calls, zero stored parameters, every run executed"
+ },
+ "verdict": {
+  "P1_the_equivalence_is_forced_on_reset_started_suites": {
+   "runs": {
+    "TARBALL": 87,
+    "FILESYSTEM": 68,
+    "SQLITE": 48
+   },
+   "disagreements": 0,
+   "delta_values_by_machine": {
+    "TARBALL": [
+     -1,
+     0,
+     1
+    ],
+    "FILESYSTEM": [
+     -1,
+     0,
+     1
+    ],
+    "SQLITE": [
+     0,
+     1
+    ]
+   },
+   "unit_steps_observed": true,
+   "fidelity_pin_walks_equal_traces_for": {
+    "TARBALL": true,
+    "FILESYSTEM": true,
+    "SQLITE": true
+   },
+   "MET": true
+  },
+  "P2_the_pair_separates_in_one_substantive_direction_only": {
+   "substantive_created_once_only": 8,
+   "substantive_single_copy_only": 0,
+   "machines_with_a_substantive_witness": [
+    "FILESYSTEM",
+    "SQLITE"
+   ],
+   "all_substantive_witnesses_exited_zero": true,
+   "degenerate_separations_the_tool_accepted": 15,
+   "degenerate_separations_the_tool_refused": 2,
+   "why_the_other_direction_cannot_be_substantive": "on a run with no decrease and unit steps, the final count is start + the number of increases; `single_copy` and not `created_once` forces increases = 0 and final = 1, so start = 1 and nothing may change. A substantive witness for that direction is not missing, it is impossible, and that impossibility is the whole reason the previous round's pair could not be separated from reset",
+   "MET": true
+  },
+  "P3_the_price_is_actions_and_not_questions": {
+   "first_substantive_witness": {
+    "machine": "FILESYSTEM",
+    "prefix": [
+     "FS_A1"
+    ],
+    "prefix_length": 1,
+    "atom": "FS_A4",
+    "count_before": 1,
+    "count_after": 2,
+    "delta": 1,
+    "created_once": true,
+    "single_copy": false
+   },
+   "longest_prefix_used": 2,
+   "questions_of_the_user": 0,
+   "previous_round_priced_it_at": "log2(2) = 1 question of the user, 0 runs able to pay it",
+   "MET": true
+  },
+  "P4_the_residual_class_is_one_on_the_widened_suite": {
+   "standard": {
+    "runs": 203,
+    "disagreements": 0,
+    "class_size": 2
+   },
+   "widened": {
+    "runs": 283,
+    "disagreements": 25,
+    "class_size": 1
+   },
+   "goal_statements_standard": 2,
+   "goal_statements_widened": 1,
+   "goal_text_widened": [
+    "created_once[probe_new_content] \u2227 final:count[probe_new_content]==1"
+   ],
+   "MET": true
+  },
+  "P5_no_pre_state_is_fabricated_and_no_substantive_witness_is_a_refusal": {
+   "experiments": 80,
+   "not_reproduced": 0,
+   "refusals_listed": 7,
+   "refused_by_the_tool": [
+    {
+     "machine": "TARBALL",
+     "atom": "TAR_A2",
+     "exit": 2,
+     "prefix": [
+      "TAR_A2"
+     ]
+    },
+    {
+     "machine": "FILESYSTEM",
+     "atom": "FS_A3",
+     "exit": 1,
+     "prefix": [
+      "FS_A2"
+     ]
+    },
+    {
+     "machine": "FILESYSTEM",
+     "atom": "FS_A4",
+     "exit": 1,
+     "prefix": [
+      "FS_A2"
+     ]
+    },
+    {
+     "machine": "FILESYSTEM",
+     "atom": "FS_A3",
+     "exit": 1,
+     "prefix": [
+      "FS_A3"
+     ]
+    },
+    {
+     "machine": "FILESYSTEM",
+     "atom": "FS_A4",
+     "exit": 1,
+     "prefix": [
+      "FS_A3"
+     ]
+    },
+    {
+     "machine": "FILESYSTEM",
+     "atom": "FS_A3",
+     "exit": 1,
+     "prefix": [
+      "FS_A1",
+      "FS_A3"
+     ]
+    },
+    {
+     "machine": "FILESYSTEM",
+     "atom": "FS_A4",
+     "exit": 1,
+     "prefix": [
+      "FS_A1",
+      "FS_A3"
+     ]
+    }
+   ],
+   "MET": true
+  },
+  "P6_zero": {
+   "model_calls": 0,
+   "parameters_stored": 0,
+   "network_calls_at_run_time": 0,
+   "MET": true
+  }
+ },
+ "witnesses": {
+  "substantive_that_changed_the_count": {
+   "created_once_only": [
+    {
+     "machine": "FILESYSTEM",
+     "prefix": [
+      "FS_A1"
+     ],
+     "prefix_length": 1,
+     "atom": "FS_A4",
+     "count_before": 1,
+     "count_after": 2,
+     "delta": 1,
+     "before": [
+      [
+       "seed",
+       "probe_new_content"
+      ],
+      [
+       "seed2",
+       "probe_second_content"
+      ]
+     ],
+     "after": [
+      [
+       "copy",
+       "probe_new_content"
+      ],
+      [
+       "seed",
+       "probe_new_content"
+      ],
+      [
+       "seed2",
+       "probe_second_content"
+      ]
+     ]
+    },
+    {
+     "machine": "FILESYSTEM",
+     "prefix": [
+      "FS_A1",
+      "FS_A3"
+     ],
+     "prefix_length": 2,
+     "atom": "FS_A1",
+     "count_before": 1,
+     "count_after": 2,
+     "delta": 1,
+     "before": [
+      [
+       "copy",
+       "probe_new_content"
+      ],
+      [
+       "seed2",
+       "probe_second_content"
+      ]
+     ],
+     "after": [
+      [
+       "copy",
+       "probe_new_content"
+      ],
+      [
+       "seed",
+       "probe_new_content"
+      ],
+      [
+       "seed2",
+       "probe_second_content"
+      ]
+     ]
+    },
+    {
+     "machine": "FILESYSTEM",
+     "prefix": [
+      "FS_A3",
+      "FS_A1"
+     ],
+     "prefix_length": 2,
+     "atom": "FS_A4",
+     "count_before": 1,
+     "count_after": 2,
+     "delta": 1,
+     "before": [
+      [
+       "copy",
+       "probe_seed_content"
+      ],
+      [
+       "seed",
+       "probe_new_content"
+      ],
+      [
+       "seed2",
+       "probe_second_content"
+      ]
+     ],
+     "after": [
+      [
+       "copy",
+       "probe_new_content"
+      ],
+      [
+       "seed",
+       "probe_new_content"
+      ],
+      [
+       "seed2",
+       "probe_second_content"
+      ]
+     ]
+    },
+    {
+     "machine": "SQLITE",
+     "prefix": [
+      "SQL_A1"
+     ],
+     "prefix_length": 1,
+     "atom": "SQL_A1",
+     "count_before": 1,
+     "count_after": 2,
+     "delta": 1,
+     "before": [
+      [
+       "1",
+       "probe_seed_content"
+      ],
+      [
+       "2",
+       "probe_second_content"
+      ],
+      [
+       "3",
+       "probe_new_content"
+      ]
+     ],
+     "after": [
+      [
+       "1",
+       "probe_seed_content"
+      ],
+      [
+       "2",
+       "probe_second_content"
+      ],
+      [
+       "3",
+       "probe_new_content"
+      ],
+      [
+       "4",
+       "probe_new_content"
+      ]
+     ]
+    },
+    {
+     "machine": "SQLITE",
+     "prefix": [
+      "SQL_A1"
+     ],
+     "prefix_length": 1,
+     "atom": "SQL_A3",
+     "count_before": 1,
+     "count_after": 2,
+     "delta": 1,
+     "before": [
+      [
+       "1",
+       "probe_seed_content"
+      ],
+      [
+       "2",
+       "probe_second_content"
+      ],
+      [
+       "3",
+       "probe_new_content"
+      ]
+     ],
+     "after": [
+      [
+       "1",
+       "probe_new_content"
+      ],
+      [
+       "2",
+       "probe_second_content"
+      ],
+      [
+       "3",
+       "probe_new_content"
+      ]
+     ]
+    },
+    {
+     "machine": "SQLITE",
+     "prefix": [
+      "SQL_A3"
+     ],
+     "prefix_length": 1,
+     "atom": "SQL_A1",
+     "count_before": 1,
+     "count_after": 2,
+     "delta": 1,
+     "before": [
+      [
+       "1",
+       "probe_new_content"
+      ],
+      [
+       "2",
+       "probe_second_content"
+      ]
+     ],
+     "after": [
+      [
+       "1",
+       "probe_new_content"
+      ],
+      [
+       "2",
+       "probe_second_content"
+      ],
+      [
+       "3",
+       "probe_new_content"
+      ]
+     ]
+    },
+    {
+     "machine": "SQLITE",
+     "prefix": [
+      "SQL_A1",
+      "SQL_A1"
+     ],
+     "prefix_length": 2,
+     "atom": "SQL_A1",
+     "count_before": 2,
+     "count_after": 3,
+     "delta": 1,
+     "before": [
+      [
+       "1",
+       "probe_seed_content"
+      ],
+      [
+       "2",
+       "probe_second_content"
+      ],
+      [
+       "3",
+       "probe_new_content"
+      ],
+      [
+       "4",
+       "probe_new_content"
+      ]
+     ],
+     "after": [
+      [
+       "1",
+       "probe_seed_content"
+      ],
+      [
+       "2",
+       "probe_second_content"
+      ],
+      [
+       "3",
+       "probe_new_content"
+      ],
+      [
+       "4",
+       "probe_new_content"
+      ],
+      [
+       "5",
+       "probe_new_content"
+      ]
+     ]
+    },
+    {
+     "machine": "SQLITE",
+     "prefix": [
+      "SQL_A1",
+      "SQL_A1"
+     ],
+     "prefix_length": 2,
+     "atom": "SQL_A3",
+     "count_before": 2,
+     "count_after": 3,
+     "delta": 1,
+     "before": [
+      [
+       "1",
+       "probe_seed_content"
+      ],
+      [
+       "2",
+       "probe_second_content"
+      ],
+      [
+       "3",
+       "probe_new_content"
+      ],
+      [
+       "4",
+       "probe_new_content"
+      ]
+     ],
+     "after": [
+      [
+       "1",
+       "probe_new_content"
+      ],
+      [
+       "2",
+       "probe_second_content"
+      ],
+      [
+       "3",
+       "probe_new_content"
+      ],
+      [
+       "4",
+       "probe_new_content"
+      ]
+     ]
+    }
+   ],
+   "single_copy_only": []
+  },
+  "degenerate_that_changed_nothing": {
+   "count": 17,
+   "accepted_no_ops": 15,
+   "refusals": 2,
+   "accepted_examples": [
+    {
+     "machine": "TARBALL",
+     "prefix": [
+      "TAR_A2",
+      "TAR_A1"
+     ],
+     "atom": "TAR_A3",
+     "count_before": 1,
+     "count_after": 1
+    },
+    {
+     "machine": "TARBALL",
+     "prefix": [
+      "TAR_A2",
+      "TAR_A1"
+     ],
+     "atom": "TAR_A4",
+     "count_before": 1,
+     "count_after": 1
+    },
+    {
+     "machine": "FILESYSTEM",
+     "prefix": [
+      "FS_A1"
+     ],
+     "atom": "FS_A1",
+     "count_before": 1,
+     "count_after": 1
+    },
+    {
+     "machine": "FILESYSTEM",
+     "prefix": [
+      "FS_A1"
+     ],
+     "atom": "FS_A3",
+     "count_before": 1,
+     "count_after": 1
+    }
+   ],
+   "example": {
+    "machine": "TARBALL",
+    "prefix": [
+     "TAR_A2",
+     "TAR_A1"
+    ],
+    "prefix_length": 2,
+    "atom": "TAR_A3",
+    "count_before": 1,
+    "count_after": 1
+   },
+   "why_it_counts": "a run from a state that already holds one copy separates the pair even when nothing happens, which is exactly why a suite whose runs all begin at zero can never see the difference"
+  },
+  "all_separating_experiments": 25,
+  "experiments": 80
+ },
+ "discovery_where_the_substantive_direction_is_missing": {
+  "delta_from_a_state_holding_one_copy": {
+   "TARBALL": {
+    "TAR_A1": -1,
+    "TAR_A2": -1,
+    "TAR_A3": 0,
+    "TAR_A4": 0
+   },
+   "FILESYSTEM": {
+    "FS_A1": 0,
+    "FS_A2": -1,
+    "FS_A3": 0,
+    "FS_A4": 1,
+    "FS_A5": 0
+   },
+   "SQLITE": {
+    "SQL_A1": 1,
+    "SQL_A2": 0,
+    "SQL_A3": 0,
+    "SQL_A4": 0
+   }
+  },
+  "tarball_duplicate_member_probe": {
+   "what_was_done": "delete the seed member, append the probe content as `seed`, then append it again as `seed` -- two members, same name, same bytes",
+   "exits": [
+    0,
+    0
+   ],
+   "rows_after_one_append": [
+    [
+     "seed2",
+     "probe_second_content"
+    ],
+    [
+     "seed",
+     "probe_new_content"
+    ]
+   ],
+   "rows_after_two_appends": [
+    [
+     "seed2",
+     "probe_second_content"
+    ],
+    [
+     "seed",
+     "probe_new_contentprobe_new_content"
+    ],
+    [
+     "seed",
+     "probe_new_contentprobe_new_content"
+    ]
+   ],
+   "count_after_one": 1,
+   "count_after_two": 0,
+   "reading": "the member list holds two entries named `seed`, but extracting by name prints both bodies, so each row carries the doubled text and no row equals the probe content: the count goes from one to zero, not to two. On this machine a second copy is not observable at all, which is why TARBALL cannot offer the substantive witness -- its own reader is the limiting part"
+  },
+  "what_it_means": "a machine can only offer the substantive witness if one of its atoms adds a copy from a state that already holds one; on TARBALL the only such route is a second member with the same name, and that machine's reader folds the two members into one row, so its own observation cannot see the second copy -- on that machine the reader is the limiting part"
+ },
+ "pre_states": {
+  "TARBALL": {
+   "reachable_within_a_prefix_of_2": 5,
+   "exercised": 5,
+   "cap": 10
+  },
+  "FILESYSTEM": {
+   "reachable_within_a_prefix_of_2": 8,
+   "exercised": 8,
+   "cap": 12
+  },
+  "SQLITE": {
+   "reachable_within_a_prefix_of_2": 7,
+   "exercised": 5,
+   "cap": 5
+  }
+ },
+ "secondary_evidence_full_grammar_term_set_held_fixed": {
+  "terms": 189,
+  "standard": {
+   "runs": 203,
+   "hypotheses": 17955,
+   "behaviours": 429,
+   "goal_minimal_statements": 2,
+   "goal_minimal_texts": [
+    "created_once[probe_new_content]",
+    "monotone[probe_new_content] \u2227 final:count[probe_new_content]==1"
+   ]
+  },
+  "widened": {
+   "runs": 283,
+   "hypotheses": 17955,
+   "behaviours": 649,
+   "goal_minimal_statements": 1,
+   "goal_minimal_texts": [
+    "created_once[probe_new_content] \u2227 final:count[probe_new_content]==1"
+   ]
+  },
+  "note": "widening adds runs and therefore behaviours; the number reported here is the goal's class over the whole grammar, which can fall for the pair's reason and rise nowhere"
+ },
+ "theorem": {
+  "statement": "on any suite whose runs begin with zero copies of the probe content, if every atom changes that count by at most one, then created_once[c] and monotone[c] and final:count[c]==1 are the same function of the run",
+  "premise_measured": {
+   "TARBALL": [
+    -1,
+    0,
+    1
+   ],
+   "FILESYSTEM": [
+    -1,
+    0,
+    1
+   ],
+   "SQLITE": [
+    0,
+    1
+   ]
+  },
+  "how_to_falsify": "find an atom that creates two copies of one content in a single action, or a suite that starts with a copy already present; the second is what this round does on purpose"
+ },
+ "cost": {
+  "seconds": 36.2,
+  "model_calls": 0,
+  "parameters_stored": 0,
+  "network_calls_at_run_time": 0
+ },
+ "limits": [
+  "pre-states are those reachable in at most two real actions and capped per machine; the closure of the state space is not enumerated",
+  "the theorem's premise is measured on the states exercised, not proved for every state",
+  "widening the suite adds behaviours, so it costs statements elsewhere: the goal's class over the full grammar is reported for both suites rather than only the flattering one",
+  "the synthesis side of coding is untouched: this says what an edit would have to satisfy, not how to compose the edit"
+ ]
+}
