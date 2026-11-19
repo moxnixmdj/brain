@@ -1,0 +1,652 @@
+{
+ "schema": "BRAIN_THE_CHECK_MODE_IS_THE_ORACLE_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "date": "2026-11-16",
+ "mode": "DISCOVER_EACH_PROGRAMS_OWN_CHECK_MODE_AND_MEASURE_WHAT_IT_CANNOT_SEE",
+ "why_this_round": {
+  "the_gap_it_closes": "the previous round could not state three actions' preconditions in its sensor vocabulary and named the reason in its own source: the validity probe of the artifact was the action itself",
+  "the_pre_registered_next_step": "construct the observable by composing a program whose exit status decides the fact, and measure whether the decision becomes exact for free",
+  "the_condition_that_makes_it_a_mechanism": "the check mode is discovered from the program's own help output and the action's own argv; no table from an action to a dry run exists here"
+ },
+ "criteria_were_declared_after_a_prototype_probe": false,
+ "declared_acceptance_before_the_receipt_run": {
+  "K1": "a check mode is discovered for at least three actions with training agreement 1.0, and the three vocabulary-insufficient actions are among them",
+  "K2": "every discovered check leaves the state byte-identical on held-out states, while the action changes it on at least half the states where it applies",
+  "K3": "each check's held-out agreement equals its training agreement",
+  "K4": "at least half of the ten actions have no check mode reaching training agreement 1.0",
+  "K5": "on the traps the check is wrong in at least two of the three",
+  "K6": "zero model calls, zero parameters, zero network, no hand-written action-to-guard rule"
+ },
+ "verdict": {
+  "K1_the_check_mode_is_discovered_not_written": {
+   "guards": {
+    "git_rebase_abort": [
+     "git",
+     "rebase",
+     "--show-current-patch"
+    ],
+    "git_rm_cached_tracked": [
+     "git",
+     "rm",
+     "--cached",
+     "-n",
+     "README.rst"
+    ],
+    "tar_extract": [
+     "tar",
+     "-tzf",
+     "bundle.tgz"
+    ],
+    "gzip_decompress": [
+     "gzip",
+     "-l",
+     "payload.gz"
+    ],
+    "patch_apply_real": [
+     "patch",
+     "--dry-run",
+     "--forward",
+     "-p1",
+     "-i",
+     "change.patch"
+    ]
+   },
+   "with_training_agreement_1": [
+    "git_rebase_abort",
+    "git_rm_cached_tracked",
+    "tar_extract",
+    "gzip_decompress",
+    "patch_apply_real"
+   ],
+   "vocabulary_insufficient_actions": [
+    "tar_extract",
+    "gzip_decompress",
+    "patch_apply_real"
+   ],
+   "vocabulary_insufficient_actions_now_guarded": [
+    "tar_extract",
+    "gzip_decompress",
+    "patch_apply_real"
+   ],
+   "MET": true
+  },
+  "K2_the_check_is_an_observation_and_the_action_is_an_effect": {
+   "held_out_guard_changed": {
+    "git_rebase_abort": 0,
+    "git_rm_cached_tracked": 0,
+    "tar_extract": 0,
+    "gzip_decompress": 0,
+    "patch_apply_real": 0
+   },
+   "held_out_action_changed": {
+    "git_rebase_abort": 4,
+    "git_rm_cached_tracked": 4,
+    "tar_extract": 4,
+    "gzip_decompress": 4,
+    "patch_apply_real": 4
+   },
+   "held_out_states_action_applied": {
+    "git_rebase_abort": 4,
+    "git_rm_cached_tracked": 4,
+    "tar_extract": 4,
+    "gzip_decompress": 4,
+    "patch_apply_real": 4
+   },
+   "MET": true
+  },
+  "K3_no_overfitting": {
+   "train": {
+    "git_rebase_abort": 1.0,
+    "git_rm_cached_tracked": 1.0,
+    "tar_extract": 1.0,
+    "gzip_decompress": 1.0,
+    "patch_apply_real": 1.0
+   },
+   "held_out": {
+    "git_rebase_abort": 1.0,
+    "git_rm_cached_tracked": 1.0,
+    "tar_extract": 1.0,
+    "gzip_decompress": 1.0,
+    "patch_apply_real": 1.0
+   },
+   "MET": true
+  },
+  "K4_the_census_is_not_all_yes": {
+   "guarded": [
+    "git_rebase_abort",
+    "git_rm_cached_tracked",
+    "tar_extract",
+    "gzip_decompress",
+    "patch_apply_real"
+   ],
+   "unguardable": [
+    "git_stash_pop",
+    "git_merge_abort",
+    "git_checkout_feature",
+    "git_branch_delete_feature",
+    "chmod_exec"
+   ],
+   "MET": true
+  },
+  "K5_the_check_tests_the_input_and_not_the_world": {
+   "traps": [
+    {
+     "action": "tar_extract",
+     "stage": "MEASURED",
+     "trap_effective": true,
+     "guard_argv": [
+      "tar",
+      "-tzf",
+      "bundle.tgz"
+     ],
+     "guard_exit": 0,
+     "guard_says_applies": true,
+     "action_exit": 2,
+     "action_applies": false,
+     "guard_wrong": true,
+     "why": "the archive, the gzip stream and the patch are all valid; the directory the effect needs to write into is read-only, which no check of the input can see"
+    },
+    {
+     "action": "gzip_decompress",
+     "stage": "MEASURED",
+     "trap_effective": true,
+     "guard_argv": [
+      "gzip",
+      "-l",
+      "payload.gz"
+     ],
+     "guard_exit": 0,
+     "guard_says_applies": true,
+     "action_exit": 1,
+     "action_applies": false,
+     "guard_wrong": true,
+     "why": "the archive, the gzip stream and the patch are all valid; the directory the effect needs to write into is read-only, which no check of the input can see"
+    },
+    {
+     "action": "patch_apply_real",
+     "stage": "MEASURED",
+     "trap_effective": true,
+     "guard_argv": [
+      "patch",
+      "--dry-run",
+      "--forward",
+      "-p1",
+      "-i",
+      "change.patch"
+     ],
+     "guard_exit": 0,
+     "guard_says_applies": true,
+     "action_exit": 2,
+     "action_applies": false,
+     "guard_wrong": true,
+     "why": "the archive, the gzip stream and the patch are all valid; the directory the effect needs to write into is read-only, which no check of the input can see"
+    }
+   ],
+   "wrong_in": [
+    "tar_extract",
+    "gzip_decompress",
+    "patch_apply_real"
+   ],
+   "MET": true
+  },
+  "K6_zero": {
+   "model_calls": 0,
+   "parameters_stored": 0,
+   "network_calls_at_run_time": 0,
+   "hand_written_action_to_guard_rules": 0,
+   "MET": true
+  }
+ },
+ "actions": [
+  {
+   "action": "git_stash_pop",
+   "purpose": "restore work that was set aside",
+   "action_argv": [
+    "git",
+    "stash",
+    "pop"
+   ],
+   "states": 16,
+   "applies": 8,
+   "does_not_apply": 8,
+   "ambiguous": [],
+   "split": {
+    "train": 8,
+    "held_out": 8,
+    "rule": "odd indices train, even held out, per class"
+   },
+   "armed_by": null,
+   "page_bytes": 169,
+   "page_from": "git stash pop --help",
+   "page_tokens": {
+    "short": 1,
+    "long": 2
+   },
+   "applies_states_where_the_action_changes_a_byte": 8,
+   "candidates": 6,
+   "survivors_after_screen": 0,
+   "survivors_that_change_a_byte": 0,
+   "survivors_that_leave_the_state_alone": 0,
+   "audit_candidates": 320,
+   "audit_survivors_that_leave_the_state_alone": 0,
+   "class": "UNGUARDABLE__NO_CANDIDATE_AGREED",
+   "train_agreement": 0.0
+  },
+  {
+   "action": "git_merge_abort",
+   "purpose": "give up an interrupted merge",
+   "action_argv": [
+    "git",
+    "merge",
+    "--abort"
+   ],
+   "states": 16,
+   "applies": 8,
+   "does_not_apply": 8,
+   "ambiguous": [],
+   "split": {
+    "train": 8,
+    "held_out": 8,
+    "rule": "odd indices train, even held out, per class"
+   },
+   "armed_by": null,
+   "page_bytes": 2090,
+   "page_from": "git merge -h",
+   "page_tokens": {
+    "short": 9,
+    "long": 28
+   },
+   "applies_states_where_the_action_changes_a_byte": 8,
+   "candidates": 101,
+   "survivors_after_screen": 0,
+   "survivors_that_change_a_byte": 0,
+   "survivors_that_leave_the_state_alone": 0,
+   "audit_candidates": 320,
+   "audit_survivors_that_leave_the_state_alone": 0,
+   "class": "UNGUARDABLE__NO_CANDIDATE_AGREED",
+   "train_agreement": 0.0
+  },
+  {
+   "action": "git_rebase_abort",
+   "purpose": "give up an interrupted rebase",
+   "action_argv": [
+    "git",
+    "rebase",
+    "--abort"
+   ],
+   "states": 16,
+   "applies": 8,
+   "does_not_apply": 8,
+   "ambiguous": [],
+   "split": {
+    "train": 8,
+    "held_out": 8,
+    "rule": "odd indices train, even held out, per class"
+   },
+   "armed_by": null,
+   "page_bytes": 2998,
+   "page_from": "git rebase -h",
+   "page_tokens": {
+    "short": 12,
+    "long": 36
+   },
+   "applies_states_where_the_action_changes_a_byte": 8,
+   "candidates": 131,
+   "survivors_after_screen": 3,
+   "survivors_that_change_a_byte": 2,
+   "survivors_that_leave_the_state_alone": 1,
+   "guard_argv": [
+    "git",
+    "rebase",
+    "--show-current-patch"
+   ],
+   "announced_by_its_own_page": true,
+   "train_agreement": 1.0,
+   "held_out_agreement": 1.0,
+   "held_out_guard_changed": 0,
+   "held_out_action_changed": 4,
+   "held_out_states_action_applied": 4,
+   "held_out_disagreements": [],
+   "selected_by": "agreement on training states, read-only required, ties to the shorter argv",
+   "class": "GUARDED__EXACT"
+  },
+  {
+   "action": "git_checkout_feature",
+   "purpose": "switch to the feature branch",
+   "action_argv": [
+    "git",
+    "checkout",
+    "feature"
+   ],
+   "states": 16,
+   "applies": 8,
+   "does_not_apply": 8,
+   "ambiguous": [],
+   "split": {
+    "train": 8,
+    "held_out": 8,
+    "rule": "odd indices train, even held out, per class"
+   },
+   "armed_by": null,
+   "page_bytes": 1697,
+   "page_from": "git checkout feature --help",
+   "page_tokens": {
+    "short": 9,
+    "long": 19
+   },
+   "applies_states_where_the_action_changes_a_byte": 8,
+   "candidates": 56,
+   "survivors_after_screen": 16,
+   "survivors_that_change_a_byte": 16,
+   "survivors_that_leave_the_state_alone": 0,
+   "audit_candidates": 320,
+   "audit_survivors_that_leave_the_state_alone": 0,
+   "class": "UNGUARDABLE__EVERY_AGREEING_CANDIDATE_PERFORMED_THE_EFFECT",
+   "train_agreement": 0.0
+  },
+  {
+   "action": "git_branch_delete_feature",
+   "purpose": "delete a branch that has been merged",
+   "action_argv": [
+    "git",
+    "branch",
+    "-d",
+    "feature"
+   ],
+   "states": 16,
+   "applies": 8,
+   "does_not_apply": 8,
+   "ambiguous": [],
+   "split": {
+    "train": 8,
+    "held_out": 8,
+    "rule": "odd indices train, even held out, per class"
+   },
+   "armed_by": null,
+   "page_bytes": 2439,
+   "page_from": "git branch -h",
+   "page_tokens": {
+    "short": 15,
+    "long": 27
+   },
+   "applies_states_where_the_action_changes_a_byte": 8,
+   "candidates": 98,
+   "survivors_after_screen": 14,
+   "survivors_that_change_a_byte": 14,
+   "survivors_that_leave_the_state_alone": 0,
+   "audit_candidates": 320,
+   "audit_survivors_that_leave_the_state_alone": 0,
+   "class": "UNGUARDABLE__EVERY_AGREEING_CANDIDATE_PERFORMED_THE_EFFECT",
+   "train_agreement": 0.0
+  },
+  {
+   "action": "git_rm_cached_tracked",
+   "purpose": "untrack a file while keeping it on disk",
+   "action_argv": [
+    "git",
+    "rm",
+    "--cached",
+    "-q",
+    "README.rst"
+   ],
+   "states": 16,
+   "applies": 8,
+   "does_not_apply": 8,
+   "ambiguous": [],
+   "split": {
+    "train": 8,
+    "held_out": 8,
+    "rule": "odd indices train, even held out, per class"
+   },
+   "armed_by": null,
+   "page_bytes": 772,
+   "page_from": "git rm -h",
+   "page_tokens": {
+    "short": 4,
+    "long": 8
+   },
+   "applies_states_where_the_action_changes_a_byte": 8,
+   "candidates": 34,
+   "survivors_after_screen": 16,
+   "survivors_that_change_a_byte": 12,
+   "survivors_that_leave_the_state_alone": 4,
+   "guard_argv": [
+    "git",
+    "rm",
+    "--cached",
+    "-n",
+    "README.rst"
+   ],
+   "announced_by_its_own_page": true,
+   "train_agreement": 1.0,
+   "held_out_agreement": 1.0,
+   "held_out_guard_changed": 0,
+   "held_out_action_changed": 4,
+   "held_out_states_action_applied": 4,
+   "held_out_disagreements": [],
+   "selected_by": "agreement on training states, read-only required, ties to the shorter argv",
+   "class": "GUARDED__EXACT"
+  },
+  {
+   "action": "tar_extract",
+   "purpose": "unpack an archive",
+   "action_argv": [
+    "tar",
+    "-xzf",
+    "bundle.tgz"
+   ],
+   "states": 16,
+   "applies": 8,
+   "does_not_apply": 8,
+   "ambiguous": [],
+   "split": {
+    "train": 8,
+    "held_out": 8,
+    "rule": "odd indices train, even held out, per class"
+   },
+   "armed_by": "remove_every_regular_file_not_named_in_the_argv",
+   "page_bytes": 16663,
+   "page_from": "tar --help",
+   "page_tokens": {
+    "short": 45,
+    "long": 170
+   },
+   "applies_states_where_the_action_changes_a_byte": 8,
+   "candidates": 320,
+   "survivors_after_screen": 122,
+   "survivors_that_change_a_byte": 115,
+   "survivors_that_leave_the_state_alone": 7,
+   "guard_argv": [
+    "tar",
+    "-tzf",
+    "bundle.tgz"
+   ],
+   "announced_by_its_own_page": true,
+   "train_agreement": 1.0,
+   "held_out_agreement": 1.0,
+   "held_out_guard_changed": 0,
+   "held_out_action_changed": 4,
+   "held_out_states_action_applied": 4,
+   "held_out_disagreements": [],
+   "selected_by": "agreement on training states, read-only required, ties to the shorter argv",
+   "class": "GUARDED__EXACT"
+  },
+  {
+   "action": "gzip_decompress",
+   "purpose": "decompress a file",
+   "action_argv": [
+    "gzip",
+    "-d",
+    "payload.gz"
+   ],
+   "states": 16,
+   "applies": 8,
+   "does_not_apply": 8,
+   "ambiguous": [],
+   "split": {
+    "train": 8,
+    "held_out": 8,
+    "rule": "odd indices train, even held out, per class"
+   },
+   "armed_by": null,
+   "page_bytes": 1246,
+   "page_from": "gzip --help",
+   "page_tokens": {
+    "short": 15,
+    "long": 19
+   },
+   "applies_states_where_the_action_changes_a_byte": 8,
+   "candidates": 48,
+   "survivors_after_screen": 28,
+   "survivors_that_change_a_byte": 20,
+   "survivors_that_leave_the_state_alone": 8,
+   "guard_argv": [
+    "gzip",
+    "-l",
+    "payload.gz"
+   ],
+   "announced_by_its_own_page": true,
+   "train_agreement": 1.0,
+   "held_out_agreement": 1.0,
+   "held_out_guard_changed": 0,
+   "held_out_action_changed": 4,
+   "held_out_states_action_applied": 4,
+   "held_out_disagreements": [],
+   "selected_by": "agreement on training states, read-only required, ties to the shorter argv",
+   "class": "GUARDED__EXACT"
+  },
+  {
+   "action": "chmod_exec",
+   "purpose": "make a file executable",
+   "action_argv": [
+    "chmod",
+    "+x",
+    "script.sh"
+   ],
+   "states": 16,
+   "applies": 8,
+   "does_not_apply": 8,
+   "ambiguous": [],
+   "split": {
+    "train": 8,
+    "held_out": 8,
+    "rule": "odd indices train, even held out, per class"
+   },
+   "armed_by": null,
+   "page_bytes": 1150,
+   "page_from": "chmod --help",
+   "page_tokens": {
+    "short": 4,
+    "long": 10
+   },
+   "applies_states_where_the_action_changes_a_byte": 8,
+   "candidates": 14,
+   "survivors_after_screen": 11,
+   "survivors_that_change_a_byte": 11,
+   "survivors_that_leave_the_state_alone": 0,
+   "audit_candidates": 320,
+   "audit_survivors_that_leave_the_state_alone": 0,
+   "class": "UNGUARDABLE__EVERY_AGREEING_CANDIDATE_PERFORMED_THE_EFFECT",
+   "train_agreement": 0.0
+  },
+  {
+   "action": "patch_apply_real",
+   "purpose": "apply a change that is shipped as a patch",
+   "action_argv": [
+    "patch",
+    "--batch",
+    "--forward",
+    "-p1",
+    "-i",
+    "change.patch"
+   ],
+   "states": 16,
+   "applies": 8,
+   "does_not_apply": 8,
+   "ambiguous": [],
+   "split": {
+    "train": 8,
+    "held_out": 8,
+    "rule": "odd indices train, even held out, per class"
+   },
+   "armed_by": null,
+   "page_bytes": 2956,
+   "page_from": "patch --help",
+   "page_tokens": {
+    "short": 27,
+    "long": 39
+   },
+   "applies_states_where_the_action_changes_a_byte": 8,
+   "candidates": 168,
+   "survivors_after_screen": 68,
+   "survivors_that_change_a_byte": 66,
+   "survivors_that_leave_the_state_alone": 2,
+   "guard_argv": [
+    "patch",
+    "--dry-run",
+    "--forward",
+    "-p1",
+    "-i",
+    "change.patch"
+   ],
+   "announced_by_its_own_page": true,
+   "train_agreement": 1.0,
+   "held_out_agreement": 1.0,
+   "held_out_guard_changed": 0,
+   "held_out_action_changed": 4,
+   "held_out_states_action_applied": 4,
+   "held_out_disagreements": [],
+   "selected_by": "agreement on training states, read-only required, ties to the shorter argv",
+   "class": "GUARDED__EXACT"
+  }
+ ],
+ "price": {
+  "decision_with_the_state_vocabulary": {
+   "executions": 0,
+   "accuracy": 0.7647,
+   "source": "the previous round's name-level observation, quoted not re-measured"
+  },
+  "decision_with_the_action_itself": {
+   "executions": 1,
+   "accuracy": 1.0,
+   "residual": "the effect has already happened"
+  },
+  "decision_with_a_discovered_check": {
+   "executions_per_decision": 1,
+   "accuracy": {
+    "git_rebase_abort": 1.0,
+    "git_rm_cached_tracked": 1.0,
+    "tar_extract": 1.0,
+    "gzip_decompress": 1.0,
+    "patch_apply_real": 1.0
+   },
+   "candidates_considered": {
+    "git_rebase_abort": 131,
+    "git_rm_cached_tracked": 34,
+    "tar_extract": 320,
+    "gzip_decompress": 48,
+    "patch_apply_real": 168
+   },
+   "candidates_that_agreed_and_changed_nothing": {
+    "git_rebase_abort": 1,
+    "git_rm_cached_tracked": 4,
+    "tar_extract": 7,
+    "gzip_decompress": 8,
+    "patch_apply_real": 2
+   },
+   "residual": "the input, not the environment: see K5"
+  }
+ },
+ "cost": {
+  "seconds": 59.8,
+  "model_calls": 0,
+  "parameters_stored": 0,
+  "network_calls_at_run_time": 0
+ },
+ "limits": [
+  "the guard grammar is three declared rewrites of the action's own argv; an action whose check mode no rewrite reaches is counted unguardable BY THIS GRAMMAR, not in principle",
+  "ten actions, one machine, one producer; the census is a count on these",
+  "the trap's force depends on the process not being root; the receipt records whether the write was actually refused on each trap",
+  "a check mode decides applicability; it says nothing about whether the action's effect is what the user wanted, which is the older and deeper residual"
+ ]
+}

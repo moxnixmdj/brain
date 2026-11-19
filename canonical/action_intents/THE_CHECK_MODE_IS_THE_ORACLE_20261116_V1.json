@@ -1,0 +1,761 @@
+{
+ "action_id": "THE_CHECK_MODE_IS_THE_ORACLE_20261116_V1",
+ "action_intent_id": "THE_CHECK_MODE_IS_THE_ORACLE_20261116_V1",
+ "action_kind": "REAL_CAPABILITY_ACQUISITION",
+ "action_summary": "Does the pre-registered next step: construct the observable for the actions whose deciding fact no cheap sensor can see. On 160 real states of 10 real actions (git, tar, gzip, chmod, patch), a check mode is DISCOVERED from the program's own page -- most specific help first, three declared rewrites of the action's own argv with the options that page prints, a read-only requirement, and agreement with the action's own exit status on training states -- then scored on held-out states. Five actions get an exact check (tar -tzf, gzip -l, patch --dry-run, git rm -n, git rebase --show-current-patch), all 1.0 on held-out states and all changing no byte. Five get none: two where no rewrite agrees, three where every agreeing rewording performs the effect. Three held-out traps where the input is valid and the directory refuses the write are mispredicted 3 of 3: the check tests the input, not the world. No model, no weights, no parameters, no network.",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "earlier_routes_exhausted_reason": "Refused by measurement, in order: hand-written vocabulary, relations over the reader, a goal handed in, the coarsest sufficient statistic, a free-running refinement loop, a supplied predicate called the goal, a syntactic count of statements, a price of the residual in words, a suite whose first state was fixed at reset, and then the claim that the missing observable had to be designed by us: it is printed by the program, and this round read it off rather than inventing it.",
+  "incremental_spend_usd": 0,
+  "independent_verification_completed": false,
+  "independent_verification_note": "Producer-run sandbox only. Every number is a receipt row: 160 real states of 10 real actions, 5 guards discovered from the programs' own pages with held-out agreement 1.0 and 0 bytes changed, 5 actions with no read-only rewrite (2 no agreement, 3 only the effect agrees), 3 of 3 environment traps mispredicted, 0 model calls, 0 parameters, 0 network.",
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md",
+   "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+  "progress_evidence_paths": [
+   "canonical/verification/THE_CHECK_MODE_IS_THE_ORACLE_20261116_V1.json",
+   "THE_CHECK_MODE_IS_THE_ORACLE_20261116_V1.md",
+   "canonical/tools/the_check_mode_is_the_oracle_v1.py",
+   "canonical/tests/test_the_check_mode_is_the_oracle_v1.py"
+  ],
+  "route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+  "scope_complete_discharge": false,
+  "terminal_achieved": false
+ },
+ "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Not the learner and not the vocabulary. Nothing observes the world's acceptance before the act. A program's check mode is a read-only decision procedure for its input (5 of 10 actions, exact on held-out states, discovered with no hand-written rule), and it cannot see a refused write (3 of 3 traps wrong), because it never spends what the action spends.",
+ "canonical_base_commit": "61b3d41f8926be7a0cfb078dd0c3c6081f5b84b0",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "Not the learner and not the vocabulary. Nothing observes the world's acceptance before the act. A program's check mode is a read-only decision procedure for its input (5 of 10 actions, exact on held-out states, discovered with no hand-written rule), and it cannot see a refused write (3 of 3 traps wrong), because it never spends what the action spends.",
+ "date": "2026-11-16",
+ "expected_parent_change": "Does the pre-registered next step: construct the observable for the actions whose deciding fact no cheap sensor can see. On 160 real states of 10 real actions (git, tar, gzip, chmod, patch), a check mode is DISCOVERED from the program's own page -- most specific help first, three declared rewrites of the action's own argv with the options that page prints, a read-only requirement, and agreement with the action's own exit status on training states -- then scored on held-out states. Five actions get an exact check (tar -tzf, gzip -l, patch --dry-run, git rm -n, git rebase --show-current-patch), all 1.0 on held-out states and all changing no byte. Five get none: two where no rewrite agrees, three where every agreeing rewording performs the effect. Three held-out traps where the input is valid and the directory refuses the write are mispredicted 3 of 3: the check tests the input, not the world. No model, no weights, no parameters, no network.",
+ "expected_parent_frontier_change": "The decision-before-act is free where the program prints a check mode and impossible where it does not: 5 of 10 real actions get an exact read-only decision discovered mechanically from their own help page, and 3 of 3 environment refusals are mispredicted by those same checks. What is scarce is not the oracle but the part of the world a check does not touch.",
+ "explicit_user_authorization": [
+  "Why can't we just give our model the most advanced coding actions, let it experience them once, and have it learn them? Can't we do this now?",
+  "we are building our own model. never reach for another model or use it and call it ours",
+  "every bit of our weights must be calculated, not a knowledge house",
+  "the best part is no part",
+  "you must think from first principles for everything",
+  "You should kill all the bad and dumb ideas before you waste time implementing them.",
+  "NEVER BUILD BEFORE REASRCHING EXHAUSTION IS HAPPENED",
+  "maximize your web use",
+  "What is the single bottleneck that, if fixed, would unlock the most capability?",
+  "all the tests are not on synthetic data but are on the hardest open tests",
+  "only our agent/system may run them; integrity 100% real",
+  "the honest truth is that we keep testing on bugs we already know work",
+  "Work in branch, merge only when complete (fastest)",
+  "Merge once, not 10 times."
+ ],
+ "falsification_condition": "FALSIFIED if any discovered guard is spelled in the tool rather than selected by measured agreement; if any guard changes a byte on a held-out state; if a guard's held-out agreement is below its training agreement; if the three vocabulary-insufficient actions are not among the guarded; if the trap states are not refused by the shell (running as root makes them vacuous) or if the check is right on more than one of them; if any model call, parameter or network call is made.",
+ "generic_repair_from_single_probe": false,
+ "governance_change": false,
+ "highest_leverage_now": true,
+ "incremental_spend_usd": 0,
+ "intentional_route_race": false,
+ "load_bearing_primary": {
+  "constructive_gap_for_open_obligation_ids": [
+   "CODING_TB4_GE_66_4"
+  ],
+  "expected_obligation_discharge_lcb": 0,
+  "expected_obligation_unlock_lcb": "1/50",
+  "interpretation": "Speculative forecast only. The round replaces a vocabulary the project was going to design with a page the program already prints; no truth obligation is discharged.",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "1/2",
+  "wall_clock_cost_ub": 1
+ },
+ "measured_effect": {
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "cost": {
+   "model_calls": 0,
+   "network_calls_at_run_time": 0,
+   "parameters_stored": 0,
+   "seconds": 59.8
+  },
+  "declared_acceptance": {
+   "K1_check_mode_discovered_not_written": "MET (5 guards, all training agreement 1.0, incl. tar/gzip/patch)",
+   "K2_check_is_observation_action_is_effect": "MET (guards change 0 bytes; actions change 4/4 applies-states)",
+   "K3_no_overfitting": "MET (train 1.0 = held-out 1.0 for all 5)",
+   "K4_census_is_not_all_yes": "MET (5 of 10 unguardable)",
+   "K5_check_tests_input_not_world": "MET (3 of 3 traps wrong; trap effective on all 3)",
+   "K6_zero": "MET (0 model calls, 0 parameters, 0 network, no written action-to-guard rule; AST test)"
+  },
+  "guards": {
+   "git_rebase_abort": [
+    "git",
+    "rebase",
+    "--show-current-patch"
+   ],
+   "git_rm_cached_tracked": [
+    "git",
+    "rm",
+    "--cached",
+    "-n",
+    "README.rst"
+   ],
+   "gzip_decompress": [
+    "gzip",
+    "-l",
+    "payload.gz"
+   ],
+   "patch_apply_real": [
+    "patch",
+    "--dry-run",
+    "--forward",
+    "-p1",
+    "-i",
+    "change.patch"
+   ],
+   "tar_extract": [
+    "tar",
+    "-tzf",
+    "bundle.tgz"
+   ]
+  },
+  "markdown": "THE_CHECK_MODE_IS_THE_ORACLE_20261116_V1.md",
+  "price": {
+   "a_discovered_check": {
+    "accuracy": 1.0,
+    "executions": 1,
+    "residual": "the input, not the world: 3 of 3 traps wrong"
+   },
+   "state_vocabulary": {
+    "accuracy": 0.7647,
+    "executions": 0,
+    "source": "previous round, quoted"
+   },
+   "the_action_itself": {
+    "accuracy": 1.0,
+    "executions": 1,
+    "residual": "the effect has happened"
+   }
+  },
+  "readers_mistakes_the_receipt_records": [
+   "longest page instead of the action's own page (git --help for git rm) -> 4 false unguardable",
+   "an error message accepted as the interface (git merge --help, 98 bytes) -> 0 tokens, false unguardable",
+   "a content-only digest made chmod invisible -> EFFECT_INVISIBLE for a real effect",
+   "agreement without read-only scored the action's relabelled copy at 1.0 (git branch -d -d, chmod -R +x)",
+   "tar extraction was idempotent on the family, so the effect existed only after a declared arming"
+  ],
+  "traps": {
+   "gzip_decompress": {
+    "action_exit": 1,
+    "guard_exit": 0
+   },
+   "patch_apply_real": {
+    "action_exit": 2,
+    "guard_exit": 0
+   },
+   "tar_extract": {
+    "action_exit": 2,
+    "guard_exit": 0
+   }
+  },
+  "unguardable": {
+   "chmod_exec": "EVERY_AGREEING_CANDIDATE_PERFORMED_THE_EFFECT",
+   "git_branch_delete_feature": "EVERY_AGREEING_CANDIDATE_PERFORMED_THE_EFFECT",
+   "git_checkout_feature": "EVERY_AGREEING_CANDIDATE_PERFORMED_THE_EFFECT",
+   "git_merge_abort": "NO_CANDIDATE_AGREED",
+   "git_stash_pop": "NO_CANDIDATE_AGREED"
+  }
+ },
+ "next_step": "Spend the same trick on the side the traps exposed: for each guarded action, find a read-only probe whose exit status depends on the environment and not on the input -- write-permission and free-space checks in the target directory, an extraction into a scratch copy followed by a rename, a lock taken and released -- and measure whether the probe closes the trap. Prediction, stated before the run: at least two of the three traps close, and the closure is discovered per machine. Falsifier: if no read-only probe in reach separates 'valid input, world refuses' from 'valid input, world accepts' for at least two traps, then the boundary is a property of pre-act observation and not of this tool, and the claim must be withdrawn to 'a correct decision is available for whatever the program can check'.",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "prior_work_reused": [
+  "canonical/tools/the_precondition_is_not_in_the_trace_v1.py (states, verdict, vocabulary; the round this one answers)",
+  "canonical/verification/THE_PRICE_OF_A_CORRECT_DECISION_20261127_V1.json (the price table this round undercuts)",
+  "canonical/action_intents/THE_PRICE_OF_A_CORRECT_DECISION_20261127_V1.json (the next step, quoted)"
+ ],
+ "probe_specific": false,
+ "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+ "progress_evidence_paths": [
+  "canonical/verification/THE_CHECK_MODE_IS_THE_ORACLE_20261116_V1.json",
+  "THE_CHECK_MODE_IS_THE_ORACLE_20261116_V1.md",
+  "canonical/tools/the_check_mode_is_the_oracle_v1.py",
+  "canonical/tests/test_the_check_mode_is_the_oracle_v1.py"
+ ],
+ "real_outcome": "That the missing observable was in the program and not in the vocabulary: 5 of 10 real actions decided exactly and at one execution by a check mode discovered from their own page, including the three no sensor could see; that 5 of 10 have no such check, three of them because every agreeing rewording performs the effect; and that all three discovered checks are wrong where the world refuses the effect. The oracle is present, partial, and blind exactly at the boundary between reading and acting.",
+ "recursive_obs": {
+  "canonical_base_commit": "61b3d41f8926be7a0cfb078dd0c3c6081f5b84b0",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "a hand-written table from an action to its dry run",
+   "a sensor vocabulary designed by us instead of a page printed by the program",
+   "a candidate that agrees because it performs the effect",
+   "an error message accepted as the program's interface",
+   "a content-only digest that cannot see a permission change",
+   "a state family in which the action's own effect is idempotent"
+  ],
+  "expected_parent_frontier_change": "The decision-before-act is free where the program prints a check mode and impossible where it does not: 5 of 10 real actions get an exact read-only decision discovered mechanically from their own help page, and 3 of 3 environment refusals are mispredicted by those same checks. What is scarce is not the oracle but the part of the world a check does not touch.",
+  "expected_parent_level_state_change": "The decision-before-act is free where the program prints a check mode and impossible where it does not: 5 of 10 real actions get an exact read-only decision discovered mechanically from their own help page, and 3 of 3 environment refusals are mispredicted by those same checks. What is scarce is not the oracle but the part of the world a check does not touch.",
+  "independent_verification_required": true,
+  "iteration_limit": 1,
+  "next_step": "Spend the same trick on the side the traps exposed: for each guarded action, find a read-only probe whose exit status depends on the environment and not on the input -- write-permission and free-space checks in the target directory, an extraction into a scratch copy followed by a rename, a lock taken and released -- and measure whether the probe closes the trap. Prediction, stated before the run: at least two of the three traps close, and the closure is discovered per machine. Falsifier: if no read-only probe in reach separates 'valid input, world refuses' from 'valid input, world accepts' for at least two traps, then the boundary is a property of pre-act observation and not of this tool, and the claim must be withdrawn to 'a correct decision is available for whatever the program can check'.",
+  "obs_blocker": {
+   "delete_bypass_substitute_options": [
+    "a blocker priced as vocabulary where it is an interface",
+    "bypass the reset convention with a deeper run set: depth cannot help, because the equivalence is forced at every depth by the count starting at zero",
+    "substitute more environments for the missing pre-state: the third environment removed nothing, and the pre-state removed the pair"
+   ],
+   "intrinsic_or_path_specific": "a blocker priced as vocabulary where it is an interface",
+   "surviving_causal_blocker": "a blocker priced as vocabulary where it is an interface"
+  },
+  "obs_capability": {
+   "capability_work_deleted": [
+    "a capability measured by learning speed where it is measured by what can be decided",
+    "any claim that depth or breadth can separate the pair",
+    "a second harness or grammar: the previous round's grammar is held fixed at 189 terms"
+   ],
+   "existing_inherited_routes_checked": [
+    "a capability measured by learning speed where it is measured by what can be decided",
+    "canonical/tools/the_goal_is_a_relation_over_the_run_v1.py (traces_for, run_terms)",
+    "canonical/tools/the_vocabulary_is_the_artifact_v1.py (the machines and their readers)",
+    "canonical/verification/BREADTH_BUYS_WHAT_REPETITION_CANNOT_20261201_V1.json (withdrawn here)",
+    "canonical/tools/the_precondition_is_not_in_the_trace_v1.py (preconditions of real actions; reused as the independent measurement of the same conditional from the applicability side)"
+   ],
+   "external_existing_routes_checked": [
+    "a capability measured by learning speed where it is measured by what can be decided",
+    "conformance testing without a reliable reset (Lee-Yannakakis, UIOv): the reset assumption is known to hide behaviour reachable only from other states",
+    "2026 benchmark analyses separating task difficulty from world richness, and stateful/continual learning benchmarks: a fixed initial state and a reset hide whether anything was learned"
+   ],
+   "surviving_gap": "a capability measured by learning speed where it is measured by what can be decided"
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "a goal read from the user's words where the program can be asked",
+    "a run set that is deep but always begins in the same state",
+    "the pair alone as the unit: the whole grammar's goal class is reported before and after"
+   ],
+   "real_outcome": "a goal read from the user's words where the program can be asked",
+   "surviving_necessity": "a goal read from the user's words where the program can be asked"
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "the states, verdicts and price table of the previous round, reused unchanged",
+   "downstream_work_to_delete_or_supersede": "the states, verdicts and price table of the previous round, reused unchanged",
+   "fresh_reuse_plan": "the states, verdicts and price table of the previous round, reused unchanged"
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": "an observation of the input treated as an observation of the world",
+   "search_stop_decision": "an observation of the input treated as an observation of the world"
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "efficiency_mechanism": "a mechanism designed by us where the mechanism is the program's own exit status",
+   "generality_mechanism": "a mechanism designed by us where the mechanism is the program's own exit status",
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "a mechanism designed by us where the mechanism is the program's own exit status",
+   "routes_ranked": [
+    "a mechanism designed by us where the mechanism is the program's own exit status",
+    "ask the user which of the two sentences was meant",
+    "deepen or widen the reset-started suite",
+    "train or distil something to guess the goal"
+   ]
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "oracle_paths": [
+    "canonical/verification/THE_CHECK_MODE_IS_THE_ORACLE_20261116_V1.json",
+    "canonical/tests/test_the_check_mode_is_the_oracle_v1.py"
+   ],
+   "synthetic_verification_necessity": "None: every guard is executed against real programs on real states, and the action's own exit status in a copy is the truth. Nothing is simulated.",
+   "verification_that_would_change_the_verdict": "an independent run in which a discovered guard changes a byte, or in which a trap is not refused by the shell, or in which the same guard is not re-derived from the same page"
+  },
+  "real_outcome": "That the missing observable was in the program and not in the vocabulary: 5 of 10 real actions decided exactly and at one execution by a check mode discovered from their own page, including the three no sensor could see; that 5 of 10 have no such check, three of them because every agreeing rewording performs the effect; and that all three discovered checks are wrong where the world refuses the effect. The oracle is present, partial, and blind exactly at the boundary between reading and acting.",
+  "required_capability": "reading a program's own contract by executing it, searching a bounded rewrite space of the action's own argv, requiring a read-only candidate, and distinguishing a decision from a relabelled action by measuring bytes",
+  "route_frontier": {
+   "challenger_routes": [
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "1 verified repair; 13 of 30 rows addressed; 0 accusations",
+      "CORRECTNESS": "the corpus's own suite, whole file",
+      "INCREMENTAL_COST": "0 parameters, 0 model calls, ~10 us per candidate",
+      "RELIABILITY": "superseded: the goal read off one state is empty wherever two runs end alike",
+      "VERIFIABILITY": "receipt rows, producer-run",
+      "WALL_CLOCK": "83.6 s for 30 commits"
+     },
+     "evidence": [
+      "30 real commits, 83.6 s, 0 accusations, grammar named for every exclusion, 1 row recovered by the AST finder, 1 verified repair unchanged, 1 harness failure stopped from wearing a fact's name"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_HYPOTHESIS_GRAMMAR_IS_THE_BOTTLENECK_20261122_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "READ_THE_FIX_FROM_THE_AST_AND_NAME_THE_GRAMMAR_OF_THE_POPULATION"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "3 of 40 programs",
+      "CORRECTNESS": "a class is only as good as its donor",
+      "INCREMENTAL_COST": "one class per shape",
+      "RELIABILITY": "unseen shapes stay unseen",
+      "VERIFIABILITY": "measured exactly",
+      "WALL_CLOCK": "unbounded as the corpus grows"
+     },
+     "evidence": [
+      "a taught class reaches 8 of 40 fixes, 5 only on its donor"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/WHAT_IS_LEFT_FOR_A_LESSON_TO_BUY_20261117_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "teach one more edit class per failing task"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "2 of 30 unseen programs from 3 pairs, at 1.92% precision on the pair that fires",
+      "CORRECTNESS": "the corpus's own pytest decides, as here",
+      "INCREMENTAL_COST": "40.6 us per lookup, no model, no parameters",
+      "RELIABILITY": "saturates: addressability 34.4% -> 59.7% over 24 experiences",
+      "VERIFIABILITY": "measured exactly",
+      "WALL_CLOCK": "5 minutes for the whole corpus"
+     },
+     "evidence": [
+      "0.597 addressable x 0.0192 precise ~ 1.1% of unseen decisions"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/WHAT_AN_EXPERIENCE_CAN_OWN_20261118_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "NON_DOMINATING",
+     "route": "store every verified repair and retrieve it by similarity"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "1 real commit identified at rank 0, unattended, with no diff and no name table",
+      "CORRECTNESS": "the artifact answers, so a question is either answered or refused -- never wrong",
+      "INCREMENTAL_COST": "7.69 ms per asked question, 1 bit",
+      "RELIABILITY": "superseded: the goal read off one state is empty wherever two runs end alike",
+      "VERIFIABILITY": "measured exactly",
+      "WALL_CLOCK": "121.2 s for 14 bugs"
+     },
+     "evidence": [
+      "click@1b0e19f505: human fix derived at rank 0 from the trace, 2 consistent candidates of 119 tests",
+      "5 evaluated candidates per site against the proximity pool's 32-400"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_FAILING_RUN_IS_THE_INDEX_20261118_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "INDEX_ACTIONS_BY_THE_FAILING_RUN_NOT_BY_THE_SOURCE_TEXT"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "run-level goals inferred from judgments: 0 false accepts, 5-6 questions, exact where asked",
+      "CORRECTNESS": "leave-one-run-out against the user's own judgments on executed runs",
+      "INCREMENTAL_COST": "0 parameters, 0 model calls, 18.1 s for 136 runs and ~1000 hypotheses per goal",
+      "RELIABILITY": "sound and incomplete: 1 run of 136 refused by the intersection",
+      "VERIFIABILITY": "receipt rows, producer-run, blocker hypothesis reproduced in the suite",
+      "WALL_CLOCK": "18.1 s"
+     },
+     "evidence": [
+      "136 real runs on 3 machines; 9 final states reached with opposite judgments; 0 final-state terms disagree inside a group; the final-state version space is empty on every goal holding one; the run grammar is identified in 5-6 questions at 1.00 accuracy and is 135/136 leave-one-run-out with 0 false accepts"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_GOAL_IS_A_RELATION_OVER_THE_RUN_20261127_V1.json",
+      "canonical/verification/THE_GOAL_IS_A_DISCRIMINATOR_20261126_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "INFER_A_RELATION_OVER_THE_RUN_FROM_JUDGMENTS_AND_ACT_ON_THE_INTERSECTION"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "the observable is computed and priced: 3-6 cells per goal, one statistic across three machines",
+      "CORRECTNESS": "the coarsest sufficient statistic of the reachable pool, with witnesses for every cheaper one",
+      "INCREMENTAL_COST": "0 parameters, 0 model calls, 23.7 s for 3444+ projections",
+      "RELIABILITY": "refuted by its own refinement: 0 counterexamples in 6 questions by both computable orderings, and its 208-collision headline is retracted -- 0 of those collisions is harmful",
+      "VERIFIABILITY": "receipt rows, producer-run, both declared failures pinned in the suite",
+      "WALL_CLOCK": "23.7 s"
+     },
+     "evidence": [
+      "four rungs over three machines and five goals; cells 68->55->19->5, 48->7->7->4, 32->7->7->3, 68->56->24->6; every cheaper statistic refuted with a witness pair; 0 of 3444 reading projections separate a goal about which atom ran; 208 collisions at held-out depth",
+      "the coarsest statistic is not harmed by its collisions: 675 FILESYSTEM pairs and 1765 depth-4 pairs, 0 harmful, 87/87 verdicts right"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_GOAL_IS_A_QUOTIENT_OF_THE_TRACE_20261128_V1.json",
+      "canonical/verification/THE_GOAL_IS_A_RELATION_OVER_THE_RUN_20261127_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "COMPUTE_THE_COARSEST_SUFFICIENT_STATISTIC_AND_PRICE_THE_GOAL_IN_EXPERIENCES"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "one counterexample buys the coarsest 3-cell statistic; 2 questions by cell labelling, 30 by its guarantee",
+      "CORRECTNESS": "the user's judgments on executed runs; the depth-3 table answers 87 of 87 depth-4 runs, with 0 undecided and 0 false accepts",
+      "INCREMENTAL_COST": "0 parameters, 0 model calls, one signature table per pool",
+      "RELIABILITY": "superseded: it measured a supplied predicate and called the result the goal; the supply is now visible as 79 statements with one behaviour",
+      "VERIFIABILITY": "receipt rows, producer-run, every count pinned in the suite",
+      "WALL_CLOCK": "37.4 s for three machines, four question policies and three rank diagnostics"
+     },
+     "evidence": [
+      "FILESYSTEM 675 conflations / 0 harmful; SQLITE 337 / 0; TARBALL 321 / 10",
+      "one harmful answer -> the coarsest 3-cell statistic, which had been one generator away",
+      "depth 4: 87 runs, 1765 conflations, 0 harmful, 0 false accepts, 0 undecided",
+      "cheapest-refinement and no-signal: 6 questions, 0 counterexamples, best harmful rank 130 / 136 of 321 (chance 29.3); committee ties on 311 of 321",
+      "the environment is learned exactly (229 of 231 decided, 0 errors) and the goal is not: 353 behaviours, 79 statements, a class of four intentions that splits on 32 of 196 runs"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_COUNTEREXAMPLE_IS_THE_NEXT_EXPERIMENT_20261129_V1.json",
+      "canonical/verification/THE_GOAL_IS_A_QUOTIENT_OF_THE_TRACE_20261128_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "ASK_FOR_ONE_COUNTEREXAMPLE_AND_LABEL_WHOLE_CELLS_INSTEAD_OF_HUNTING_DISAGREEMENT"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "separates the two objects the claim conflates: 353 behaviours of resolving power, 8 active judgments to reach it, 4 intentions left indistinguishable and split by the next machine",
+      "CORRECTNESS": "every number is a count over executed runs; the ceiling is re-derivable from the grammar and the traces, and the transfer is a plain evaluation elsewhere",
+      "INCREMENTAL_COST": "0 parameters, 0 model calls, one grammar pass per pool",
+      "RELIABILITY": "superseded and corrected: its 79 statements were 75 redundant conjunctions, and one machine's class is 4, not 79",
+      "VERIFIABILITY": "receipt rows, producer-run, every count pinned in the suite",
+      "WALL_CLOCK": "158.3 s for two machines, 427 runs, 12 881 hypotheses"
+     },
+     "evidence": [
+      "TARBALL: 231 runs, 11 935 hypotheses, 353 behaviours, 79 statements for the user's goal",
+      "four statements, one behaviour on all 231 runs; 32 of 196 runs separate the pair on FILESYSTEM",
+      "active 353 -> 176 -> 89 -> 29 -> 14 -> 7 -> 5 -> 2 -> 1 in 8 judgments; passive 20 behaviours at 8",
+      "registered control: depth-3 table decides 229 of 231 depth-5 runs, 0 false accepts, 0 false rejects, 2 undecided",
+      "breadth priced: 4 -> 2 -> 2 minimal statements across three machines, the third removing nothing; 57.1 % of 622 behaviours pinned by a unique statement"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_GOAL_IS_NOT_IN_THE_ENVIRONMENT_20261130_V1.json",
+      "canonical/verification/THE_COUNTEREXAMPLE_IS_THE_NEXT_EXPERIMENT_20261129_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "SEPARATE_THE_ENVIRONMENT_FROM_THE_GOAL_AND_PRICE_THE_GOAL_IN_JUDGMENTS"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "prices breadth and its saturation: 622 behaviours, the goal's class 4 -> 2 -> 2, a residual of one question of words",
+      "CORRECTNESS": "correct for suites that begin at reset, where the pair is forced to agree; not a claim about the machines",
+      "INCREMENTAL_COST": "0 parameters, 0 model calls, one term evaluation per machine",
+      "RELIABILITY": "superseded: the residual it priced in words is separated by one action from a reachable pre-state, at zero questions",
+      "VERIFIABILITY": "receipt rows, producer-run, every count pinned in the suite",
+      "WALL_CLOCK": "108.8 s for three machines, 555 runs, 29 890 hypotheses and seven subsets"
+     },
+     "evidence": [
+      "244 terms, 29 890 hypotheses, 555 runs, 622 behaviours; 354 behaviours with a unique statement",
+      "the goal's minimal class: 4 on TARBALL, 2 after a second machine, 2 after the third",
+      "residual: created_once[probe_new_content] vs monotone[probe_new_content] and final:count[probe_new_content]==1 -- one question of the user, zero runs",
+      "correction: the previous round's 79 contained 75 redundant conjunctions"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/BREADTH_BUYS_WHAT_REPETITION_CANNOT_20261201_V1.json",
+      "canonical/verification/THE_GOAL_IS_NOT_IN_THE_ENVIRONMENT_20261130_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "PRICE_THE_RESIDUAL_CLASS_OF_EVERY_GOAL_ACROSS_ENVIRONMENTS_AND_ANSWER_IT_IN_WORDS"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "the goal's class 2 -> 1 over a fixed 189-term grammar; 8 substantive witnesses on 2 machines",
+      "CORRECTNESS": "one real action from a pre-state the machine actually reaches, with the pre-state reproduced before the action is judged",
+      "INCREMENTAL_COST": "0 parameters, 0 model calls, 2 actions of prefix at most",
+      "RELIABILITY": "0 fabricated pre-states; the only degenerate direction is proved impossible, not assumed",
+      "VERIFIABILITY": "receipt rows plus 13 tests that re-execute the round",
+      "WALL_CLOCK": "36.6 s for 80 experiments and the whole analysis"
+     },
+     "evidence": [
+      "canonical/verification/THE_PRE_STATE_IS_THE_MISSING_PART_20261116_V1.json",
+      "canonical/tests/test_the_pre_state_is_the_missing_part_v1.py"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/BREADTH_BUYS_WHAT_REPETITION_CANNOT_20261201_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "SELECTED",
+     "route": "SEPARATE_THE_RESIDUAL_BY_LETTING_THE_RUN_BEGIN_WHERE_THE_MACHINE_ALREADY_IS"
+    }
+   ],
+   "checked_at_utc": "2026-11-19T03:36:08Z",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "PRICE_THE_RESIDUAL_CLASS_OF_EVERY_GOAL_ACROSS_ENVIRONMENTS_AND_ANSWER_IT_IN_WORDS",
+   "max_age_hours": 2,
+   "negative_search_summary": "Refused by measurement: deepening one machine (saturates at its resolving power), a syntactic count of statements (75 of 79 redundant), a bigger learner (the residual is bits of what the user meant), and treating a second environment as unbounded progress (the third removed nothing).",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "state identification characterization set conformance testing behavioural equivalence minimal distinguishing statements"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "version space minimal hypothesis redundancy structural equivalence queries identification"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "2026 goal underspecification eliciting user intent language versus demonstration agents"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "AALpy LearnLib distinguishing sequences benchmarking identification black-box 2026"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "selected_route": "ASK_THE_PROGRAM_FOR_A_READ_ONLY_DECISION_INSTEAD_OF_LEARNING_ONE",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-11-19T04:15:09Z",
+    "execution_dependencies": [
+     {
+      "dependency": "local Python 3.11 runtime with pytest",
+      "evidence": [
+       "13 instrument tests pass in 36.5 s; 33/33 unified-model gates pass"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "real tool binaries the machines drive (sh, mv, cp, rm, sqlite3, tar)",
+      "evidence": [
+       "203 reset-started runs plus 80 pre-state experiments across three machines, 0 pre-states fabricated"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "local tempdir for one fresh reset and one prefix replay per experiment",
+      "evidence": [
+       "each experiment replays a real prefix and refuses itself unless the recorded pre-state is reproduced; 0 refusals of that kind"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "STORAGE",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "incumbent_route": "SEPARATE_THE_RESIDUAL_BY_LETTING_THE_RUN_BEGIN_WHERE_THE_MACHINE_ALREADY_IS",
+    "max_age_hours": 2,
+    "negative_search_summary": "Refused by measurement: a hand-written table from action to dry run (forbidden by the owner's law), a sensor vocabulary (0.7647 on the previous round's machine), a predictor or model of the program (no model, no parameters), and agreement without the read-only requirement (git branch -d -d, chmod -R +x and git -P rm all score 1.0 against their own action).",
+    "query_families": [
+     {
+      "intent": "CAPABILITY_VECTOR",
+      "query": "programmatic dry-run check mode exit status precondition verification command line 2026"
+     },
+     {
+      "intent": "IMPLEMENTATION_FORM",
+      "query": "side-effect-free verification before action agents sandboxed dry run state machine precondition"
+     },
+     {
+      "intent": "RECENCY_OR_NEW_RELEASE",
+      "query": "2026 test oracle implicit exit status agent verification before execution TOCTOU"
+     },
+     {
+      "intent": "SUPPLIER_OR_PRODUCT",
+      "query": "PreAct compiled state machine computer use agents verify before transition atomicity agents"
+     }
+    ],
+    "selected_route": "ASK_THE_PROGRAM_FOR_A_READ_ONLY_DECISION_INSTEAD_OF_LEARNING_ONE",
+    "status": "READY"
+   },
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/tools/grammar_closed_repair_v1.py (corpus reader, space enumerator, real judge, executed_lines)",
+     "canonical/tools/solve_with_a_calibrated_judge_v1.py (certified judge, per-case clocks, containment)",
+     "canonical/verification/WHERE_THE_REFUSALS_ACTUALLY_WERE_20261116_V1.json",
+     "canonical/verification/ONE_DEMONSTRATION_LEAVES_TEN_BITS_20261116_V1.json"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "https://arxiv.org/pdf/2611.12885 (World In-Context Learning: one demonstration plus rehearsal beats a 50-demonstration trained policy; without the world the demonstration brings no benefit)",
+     "https://arxiv.org/html/2606.29537v1 (OSWorld 2.0: 20.6% binary completion, failures concentrate on hidden state)",
+     "https://arxiv.org/html/2606.31270v1 (Learning from Failure: inference-time self-improvement from failure trajectories)"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "https://github.com/jkoppel/QuixBugs (MIT; 40 buggy programs, 40 pytest files, JSON test data)",
+     "https://pypi.org/project/pytest (9.2.0, the runner every verdict goes through)"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "https://docs.python.org/3/library/ast.html (node types the closure rule enumerates)"
+    ]
+   },
+   "unresolved_plausible_dominators": []
+  },
+  "routes_considered": [
+   "ASK_THE_PROGRAM_FOR_A_READ_ONLY_DECISION_INSTEAD_OF_LEARNING_ONE",
+   "TRAIN_OR_DISTIL_A_MODEL__REFUSED_BY_OWNER_LAW_AND_UNNECESSARY_FOR_A_TWO_STATE_RUN",
+   "DEEPEN_OR_WIDEN_THE_RESET_STARTED_SUITE__REFUSED_BY_ARITHMETIC_AND_BY_MEASUREMENT",
+   "ASK_THE_USER_WHICH_SENTENCE_WAS_MEANT__SUPERSEDED_BY_A_REACHABLE_PRE_STATE",
+   "EXECUTE_ONE_ACTION_FROM_EACH_REACHABLE_PRE_STATE__SELECTED"
+  ],
+  "selected_route": "DISCOVER_EACH_PROGRAMS_CHECK_MODE_AND_MEASURE_WHAT_IT_CANNOT_SEE",
+  "selected_surviving_route": "ASK_THE_PROGRAM_FOR_A_READ_ONLY_DECISION_INSTEAD_OF_LEARNING_ONE",
+  "selected_surviving_route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+  "stop_condition": "Spend the same trick on the side the traps exposed: for each guarded action, find a read-only probe whose exit status depends on the environment and not on the input -- write-permission and free-space checks in the target directory, an extraction into a scratch copy followed by a rename, a lock taken and released -- and measure whether the probe closes the trap. Prediction, stated before the run: at least two of the three traps close, and the closure is discovered per machine. Falsifier: if no read-only probe in reach separates 'valid input, world refuses' from 'valid input, world accepts' for at least two traps, then the boundary is a property of pre-act observation and not of this tool, and the claim must be withdrawn to 'a correct decision is available for whatever the program can check'.",
+  "why_selected_route_is_fastest_sufficient": "Because the decision is made by the program that already owns the action: one page read and at most 320 command lines per action, once per machine, with no model, no vocabulary and no parameters, and it lands exactly on held-out states for 5 of 10 real actions. Nothing is cheaper than asking the program; nothing costs more than the single execution the action itself would spend.",
+  "why_this_is_not_another_organ": "It adds no knowledge, no model and no grammar: one walks pass over the machines already in the tree, one action per reachable pre-state, and the previous round's own term set held fixed."
+ },
+ "required_capability": "reading a program's own contract by executing it, searching a bounded rewrite space of the action's own argv, requiring a read-only candidate, and distinguishing a decision from a relabelled action by measuring bytes",
+ "route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+ "route_id": "ASK_THE_PROGRAM_FOR_A_READ_ONLY_DECISION_INSTEAD_OF_LEARNING_ONE",
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "scope_complete_discharge": false,
+ "selected_route": "DISCOVER_EACH_PROGRAMS_CHECK_MODE_AND_MEASURE_WHAT_IT_CANNOT_SEE",
+ "selected_surviving_route": "ASK_THE_PROGRAM_FOR_A_READ_ONLY_DECISION_INSTEAD_OF_LEARNING_ONE",
+ "status": "PROPOSED__PRODUCER_MEASURED__THE_ORACLE_IS_IN_THE_PROGRAM_AND_PARTIAL__INDEPENDENT_VERIFICATION_OPEN",
+ "stop_condition": "Spend the same trick on the side the traps exposed: for each guarded action, find a read-only probe whose exit status depends on the environment and not on the input -- write-permission and free-space checks in the target directory, an extraction into a scratch copy followed by a rename, a lock taken and released -- and measure whether the probe closes the trap. Prediction, stated before the run: at least two of the three traps close, and the closure is discovered per machine. Falsifier: if no read-only probe in reach separates 'valid input, world refuses' from 'valid input, world accepts' for at least two traps, then the boundary is a property of pre-act observation and not of this tool, and the claim must be withdrawn to 'a correct decision is available for whatever the program can check'.",
+ "terminal_credit_delta": 0,
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "truth": {
+  "achieved": false,
+  "the_law_this_round_adds": "The oracle is the program's own check mode, and it is partial. A read-only rewrite of the action's own command line decides its input exactly for 5 of 10 real actions at one execution and zero knowledge; a candidate that agrees and changes a byte is the action, not a check; and every such check is blind exactly where the world, and not the input, refuses the effect.",
+  "what_is_false_in_the_claim": [
+   "that the three vocabulary-insufficient actions needed a vocabulary: tar -tzf, gzip -l and patch --dry-run are printed by the programs themselves and decide the fact exactly",
+   "that a check mode found by agreement is a check: git branch -d -d, chmod -R +x and git -P rm all scored 1.0 against their own action before read-only became a criterion",
+   "that a demonstration plus a trial makes an action safe to reuse: 5 of 10 real actions have no pre-act reading any rewording of their argv reaches, so 'learned once' is a licence to have acted",
+   "that the residual is the missing oracle: it is present, exact and blind at the input boundary",
+   "that an oracle of the input is an oracle of the outcome: 3 of 3 environment refusals mispredicted",
+   "that this is sentience or a route to it: nothing here reads a state the act would create"
+  ]
+ },
+ "user_authorized_governance_change": false,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "currentness": {
+   "accepted_families": 5,
+   "current_load_bearing_atomic_count": 36,
+   "deleted_nonnecessary_atomic_count": 2,
+   "historical_atomic_registry_count": 38,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_atomic": 38,
+   "total_families": 19,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "This measures the reach of an executed counterfactual over real commit history and finds the content of the fix outside it; it discharges no truth obligation.",
+  "target_truth_obligations": [
+   "CODING_TB4_GE_66_4"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [
+    {
+     "git_blob_sha": "aa752cadab44d7b354814507d437f4fa485aaf74",
+     "path": "canonical/verification/RECOGNITION_IS_THE_BOTTLENECK_20261121_V1.json"
+    }
+   ],
+   "decisive_question": "Before asking what the instrument can find, does it accept the human's own fix -- and if not, why not?",
+   "falsifier_id": "THE_DEMAND_MUST_ADMIT_THE_HUMAN_FIX_AND_NOT_A_CONSTANT",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "Zero generalising repairs out of thirty fresh commits is the counterexample, and it is recorded in the receipt rather than hidden.",
+   "proposal_id": "THE_ASSERTION_IS_THE_DEMAND_20261119_V1"
+  }
+ },
+ "verification": {
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "commands": [
+   "python3 canonical/tools/the_check_mode_is_the_oracle_v1.py --receipt canonical/verification/THE_CHECK_MODE_IS_THE_ORACLE_20261116_V1.json",
+   "python3 -m pytest canonical/tests/test_the_check_mode_is_the_oracle_v1.py -q"
+  ],
+  "independent_verification_completed": false,
+  "independent_verification_required": true,
+  "tests_green": 14
+ },
+ "weakens_existing_guard": false
+}
