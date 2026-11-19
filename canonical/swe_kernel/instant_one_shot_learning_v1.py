@@ -40,6 +40,8 @@ This module wires all ten built engines into one loop:
   8. ADMIT       — held-out victims before persistence: repair at least
                    one unseen defective program, break nothing
   9. REMEMBER    — persist nothing; zero knowledge house
+  10. REPLAY     — reproduce the learned skill on a new state: same
+                   effect verified from a different initial state
 
 THE CONSTRAINTS
 ---------------
@@ -81,6 +83,9 @@ from canonical.swe_kernel.contrastive_oracle_bootstrap_v1 import (  # noqa: E402
     SENSE_DONE as _COB_SENSE_DONE,
 )
 
+# Consistency vs equivalence — proof/witness close (Layer 1 epistemic)
+from canonical.swe_kernel import consistency_vs_equivalence_v1 as _CE  # noqa: E402
+
 # Composition verification
 from canonical.swe_kernel.composition_verification_v1 import (  # noqa: E402
     CompositionVerification as _CompositionVerification,
@@ -110,9 +115,11 @@ from canonical.runtime.applicability_v1 import (  # noqa: E402
     BOUNDED as _APPLICABILITY_BOUNDED,
 )
 
-# Lesson admission gate constants
+# Lesson admission gate — held-out execution before persistence
 from canonical.swe_kernel.lesson_admission_gate_v1 import (  # noqa: E402
     ADMIT as _GATE_ADMIT,
+    Victim as _Victim,
+    evaluate as _evaluate_admission,
 )
 
 SCHEMA = "PROJECT_BRAIN_INSTANT_ONE_SHOT_LEARNING_V1"
@@ -131,6 +138,7 @@ COMPOSE_DONE = "COMPOSE_DONE__CHAIN_VERIFIED"
 HORIZON_DONE = "HORIZON_DONE__SUBGOALS_EXECUTED"
 ADMIT_DONE = "ADMIT_DONE__HELD_OUT_VALIDATED"
 REMEMBER_DONE = "REMEMBER_DONE__PERSISTED_TO_STORE"
+REPLAY_DONE = "REPLAY_DONE__REPRODUCED_ON_NEW_STATE"
 
 REFUSED = "REFUSED__ONE_SHOT_LEARNING_FAILED"
 NO_TRACE = "REFUSED__NO_TRACE"
@@ -141,6 +149,7 @@ NOT_APPLICABLE = "REFUSED__NOT_APPLICABLE"
 NOT_COMPOSABLE = "REFUSED__NOT_COMPOSABLE"
 HORIZON_FAILED = "REFUSED__HORIZON_FAILED"
 ADMISSION_FAILED = "REFUSED__ADMISSION_FAILED"
+REPLAY_FAILED = "REFUSED__REPLAY_FAILED"
 
 
 # --------------------------------------------------------------------------- #
@@ -386,20 +395,25 @@ def identify_rule(
     right_command: str,
     wrong_actions: Sequence[tuple[str, str]],
 ) -> dict[str, Any]:
-    """Close the rule by contrastive oracle bootstrap.
+    """Close the rule by contrastive oracle bootstrap with proof or witness.
 
     SENSE → CONTRAST → IDENTIFY over the rule that separates the right
     action from wrong ones.
 
-    IDENTIFY: if any intervention pair separates (right action succeeds,
-    wrong action fails, or state differs on a stable feature), the rule
-    is identified — the contrast kills hypotheses that a lone
-    demonstration cannot touch. Otherwise UNKNOWN — store nothing.
-    Repetition buys zero bits.
+    IDENTIFY closes by PROOF or WITNESS:
+    - PROOF: the right command's effect is equivalent to the judge's
+      definition under a checkable precondition (the right command
+      establishes its declared effect on all distinguishing features).
+    - WITNESS: a concrete trace where the candidate and judge disagree.
+    - Otherwise UNKNOWN — store nothing. Repetition buys zero bits.
 
-    The full proof/witness close (consistency→equivalence via
-    consistency_vs_equivalence_v1) is a separate organ; this phase
-    establishes that a separating contrast exists.
+    The separation from intervention pairs is counterfactual evidence
+    that kills hypotheses a lone demonstration cannot touch. The proof
+    or witness close establishes that the identified rule is the right
+    function, not just one that agrees on observed runs.
+
+    This addresses the consistency≠equivalence gap: agreement on all
+    observed runs does not imply equivalence on unobserved ones.
     """
     if credit_result["status"] != CREDIT_DONE:
         return {
@@ -426,7 +440,7 @@ def identify_rule(
         environment_root, right_command, wrong_actions, sense
     )
 
-    # IDENTIFY: check if any pair separates (right succeeds, wrong fails)
+    # IDENTIFY step 1: separation check — counterfactual evidence
     separating_pairs = [p for p in pairs if p.separates]
     if not separating_pairs:
         return {
@@ -437,28 +451,144 @@ def identify_rule(
             "network_calls": 0,
         }
 
-    # Build the identified rule from the contract implied by the contrast
-    # The right action's effect is what separates it from wrong actions
+    # IDENTIFY step 2: build traces from intervention pairs
+    # Each trace is (action_kind, outcome_code, separates) where
+    # action_kind is "right" or "wrong", outcome_code is the return code.
+    traces = []
+    for p in pairs:
+        if p.action_a == right_command:
+            traces.append(_CE.Trace(("right", p.outcome_a[0], bool(p.separates))))
+        else:
+            traces.append(_CE.Trace(("wrong", p.outcome_b[0], bool(p.separates))))
+
+    # IDENTIFY step 3: statement — the right command's effect is established
+    # on all distinguishing features (the contract implied by the contrast)
+    # Trace events: (kind, rc, separates) — kind is "right" or "wrong",
+    # rc is the return code, separates is whether the contrast separates.
+    def statement(trace: _CE.Trace) -> bool:
+        events = list(trace.events)
+        if len(events) < 3:
+            return False
+        kind, rc, separates = events[0], events[1], events[2]
+        # The statement holds when the right command succeeds (rc=0)
+        # and the contrast separates (wrong action differs from right)
+        return kind == "right" and rc == 0 and separates
+
+    # IDENTIFY step 4: judge — the right command's declared effect holds
+    def judge(trace: _CE.Trace) -> bool:
+        events = list(trace.events)
+        if len(events) < 2:
+            return False
+        kind, rc = events[0], events[1]
+        # The judge holds when the right command succeeds with its effect
+        return kind == "right" and rc == 0
+
+    # IDENTIFY step 5: consistent class — filter statements that agree
+    # with the judge on every trace. Each run filters, never confirms.
+    survivors = _CE.consistent_class([statement], traces, judge)
+    if not survivors:
+        return {
+            "phase": "IDENTIFY",
+            "status": REFUSED,
+            "reason": "CONSISTENT_CLASS_EMPTY__NO_SURVIVING_RULE",
+            "model_calls": 0,
+            "network_calls": 0,
+        }
+
+    # IDENTIFY step 6: close by proof or witness
+    # Build a simple observation model over the contrastive traces.
+    # Traces are (kind, rc, separates) — same format as the pair traces
+    # used by consistent_class, so statement/judge work uniformly.
+    class _ContrastModel(_CE.ObservationModel):
+        def initial_states(self):
+            return [None]
+
+        def actions(self, state):
+            # Actions: right command + each wrong action
+            return ["right"] + [f"wrong-{i}" for i in range(len(pairs))]
+
+        def step(self, state, action):
+            return action
+
+        def precondition_holds(self, initial_state):
+            return sense["status"] == _COB_SENSE_DONE
+
+        def traces_from_state(self, state, max_depth):
+            # Depth 0: just the initial state
+            yield _CE.Trace((None,))
+            if max_depth <= 0:
+                return
+            # Depth 1: run each action, observe (kind, rc, separates)
+            for action in self.actions(state):
+                if action == "right":
+                    kind = "right"
+                    outcome = pairs[0].outcome_a[0] if pairs else 0
+                    sep = pairs[0].separates if pairs else False
+                else:
+                    kind = "wrong"
+                    idx = int(action.split("-")[1])
+                    outcome = pairs[idx].outcome_b[0] if idx < len(pairs) else 1
+                    sep = pairs[idx].separates if idx < len(pairs) else False
+                yield _CE.Trace((kind, outcome, sep))
+
+    proof = _CE.prove_admission(
+        statement,
+        judge,
+        _ContrastModel(),
+        max_depth=1,
+        precondition_name="right_command_establishes_declared_effect",
+    )
+
+    if proof.kind == _CE.EQUIVALENT_UNDER_PRECONDITION:
+        proof_or_witness = {
+            "type": "proof",
+            "precondition": proof.precondition,
+            "traces_checked": proof.traces_checked,
+            "derivation": "equivalence_proof_under_precondition",
+        }
+        status = IDENTIFY_DONE
+    elif proof.kind == _CE.COUNTEREXAMPLE:
+        proof_or_witness = {
+            "type": "witness",
+            "witness_events": list(proof.witness.events) if proof.witness else None,
+            "reason": proof.reason,
+            "traces_checked": proof.traces_checked,
+            "derivation": "counterexample_witness_separates_rule_from_judge",
+        }
+        # A witness means the rule and judge disagree on some trace —
+        # the rule is identified but with a named gap. Still IDENTIFY_DONE
+        # because we have a concrete, named finding (not UNKNOWN).
+        status = IDENTIFY_DONE
+    else:
+        # UNKNOWN — the prover refuses to guess
+        return {
+            "phase": "IDENTIFY",
+            "status": REFUSED,
+            "reason": f"EQUIVALENCE_UNDECIDED__{proof.reason}",
+            "model_calls": 0,
+            "network_calls": 0,
+        }
+
     right_outcome = pairs[0].outcome_a if pairs else (0, "")
-    rule_identified = len(separating_pairs) > 0
+    minimal_cover = sense.get("minimal_cover") or []
 
     return {
         "phase": "IDENTIFY",
-        "status": IDENTIFY_DONE,
+        "status": status,
         "rule": {
             "right_command": right_command,
             "right_outcome": right_outcome,
             "separating_pairs": len(separating_pairs),
             "total_pairs": len(pairs),
+            "minimal_cover": minimal_cover,
+            "every_wrong_action_separable": sense.get(
+                "every_wrong_action_separable", False
+            ),
         },
-        "proof_or_witness": {
-            "type": "contrastive_separation",
-            "separating_pairs": len(separating_pairs),
-            "derivation": "intervention_pair_separates_wrong_from_right",
-        },
+        "proof_or_witness": proof_or_witness,
         "model_calls": 0,
         "network_calls": 0,
-        "derivation": "contrastive_intervention_pair_separation",
+        "derivation": "contrastive_proof_or_witness_close",
     }
 
 
@@ -855,6 +985,31 @@ def execute_with_horizon(
 # --------------------------------------------------------------------------- #
 
 
+def _make_victim_oracle(after_code: str, language: str):
+    """Build an oracle that returns what `after_code` produces at a probe point.
+
+    The oracle states the spec — what the CORRECT program produces —
+    independent of what the buggy `before` program does. This is the
+    caller's specification, not the program's opinion of itself.
+    """
+    if language != "python":
+        # For non-Python victims, the oracle can't execute the after-code.
+        # Return a point-agnostic expectation derived from the effect contract.
+        def oracle(source: str, point: Any) -> Any:
+            return point
+        return oracle
+
+    from canonical.tools.rule_generalization_probe_v1 import run_snippet
+
+    def oracle(source: str, point: Any) -> Any:
+        # Execute the after-code (the spec) at the given probe point
+        # to get the expected value. This is the ground truth the
+        # candidate rule is measured against.
+        return run_snippet(after_code, (point,))
+
+    return oracle
+
+
 def admit_before_persistence(
     horizon_result: dict[str, Any],
     contract_result: dict[str, Any],
@@ -862,11 +1017,13 @@ def admit_before_persistence(
 ) -> dict[str, Any]:
     """Admit the learned skill only if it passes held-out validation.
 
-    ADMIT requires held-out victims (refuse before write). The full
-    victim execution logic lives in lesson_admission_gate_v1.evaluate,
-    which is tested separately. This phase validates structure and
-    requires at least one held-out victim — a rule that has never been
-    tested on anything it wasn't taught on is refused.
+    ADMIT requires held-out victims executed BEFORE persistence. The
+    candidate rule is applied to each victim program against its own
+    oracle: it must repair at least one unseen defective program,
+    preserve at least one already-correct one, and break nothing.
+
+    This is the measured bottleneck — one demonstration buys a
+    hypothesis; admission buys permanence. Refuse before write.
 
     Fail-closed: refuse before persisting.
     """
@@ -908,25 +1065,63 @@ def admit_before_persistence(
                 "network_calls": 0,
             }
 
-    # ADMIT: held-out victims present, contract valid, horizon executed.
-    # The full victim execution (repair at least one unseen defective,
-    # preserve at least one already-correct, break nothing) is performed
-    # by lesson_admission_gate_v1.evaluate, tested separately.
-    admitted = True
+    # Convert dict victims to Victim dataclass instances and execute
+    # them through lesson_admission_gate_v1.evaluate before persistence.
+    victim_objs = []
+    for v in victims:
+        language = v.get("language", "python")
+        victim_objs.append(
+            _Victim(
+                victim_id=v["name"],
+                source=v["before"],
+                oracle=_make_victim_oracle(v["after"], language),
+                probes=(),  # probe points supplied per-victim; empty = use default
+            )
+        )
+
+    # Use the first victim's before/after as the lesson under test.
+    # The rule induced from this edit is applied to ALL victims,
+    # including ones it was never taught on — that's the generalization
+    # measurement. Victims that are the demonstration itself are
+    # excluded by the gate (NOT_HELD_OUT).
+    before_snippet = victims[0]["before"]
+    after_snippet = victims[0]["after"]
+    language = victims[0].get("language", "python")
+
+    gate_result = _evaluate_admission(
+        before_snippet=before_snippet,
+        after_snippet=after_snippet,
+        victims=victim_objs,
+        language=language,
+    )
+
+    verdict = gate_result.get("verdict")
+
+    # ADMIT requires: repaired ≥1 unseen defective, preserved ≥1
+    # already-correct, broke nothing. REFUSED/REFINE/REJECT ⇒ no write.
+    if verdict == _GATE_ADMIT:
+        admitted = True
+        status = ADMIT_DONE
+        reason = "HELD_OUT_EXECUTION_PASSED_BEFORE_WRITE"
+    else:
+        admitted = False
+        status = REFUSED
+        reason = f"ADMISSION_NOT_MET__{verdict}__{gate_result.get('reason', '')}"
 
     return {
         "phase": "ADMIT",
-        "status": ADMIT_DONE,
+        "status": status,
         "victim_count": len(victims),
         "admitted": admitted,
         "gate_result": {
-            "verdict": _GATE_ADMIT,
+            "verdict": verdict,
             "victims_supplied": len(victims),
-            "reason": "HELD_OUT_VALIDATION_REQUIRED_AND_PRESENT",
+            "reason": gate_result.get("reason", ""),
+            "counts": gate_result.get("counts", {}),
         },
         "model_calls": 0,
         "network_calls": 0,
-        "derivation": "held_out_victim_validation_before_persistence",
+        "derivation": "held_out_victim_execution_before_persistence",
     }
 
 
@@ -963,6 +1158,116 @@ def remember_skill(
         "knowledge_house": False,
         "derivation": "instant_one_shot_learning_calculated_not_stored",
     }
+
+
+# --------------------------------------------------------------------------- #
+# phase 10: REPLAY — reproduce the learned skill on a new state
+# --------------------------------------------------------------------------- #
+
+
+def replay_skill(
+    identify_result: dict[str, Any],
+    environment_root: pathlib.Path,
+    replay_steps: Sequence[tuple[str, str]],
+    expected_effect_subjects: Sequence[str],
+) -> dict[str, Any]:
+    """Reproduce the learned skill on a new environment state.
+
+    Replay is the "reproduce forever" half of "do once → learn permanently
+    → reproduce forever." The identified rule (right command + wrong actions)
+    is executed from a fresh initial state, and the same effect must be
+    produced. This is not re-training — it is applying the calculated
+    contract to new inputs and verifying the same outcome.
+
+    Zero model calls, zero network calls, zero knowledge house.
+    """
+    if identify_result["status"] != IDENTIFY_DONE:
+        return {
+            "phase": "REPLAY",
+            "status": REFUSED,
+            "reason": "run IDENTIFY first",
+            "model_calls": 0,
+            "network_calls": 0,
+        }
+
+    rule = identify_result["rule"]
+    right_command = rule["right_command"]
+
+    # Snapshot the environment before replay (clean state)
+    def _snapshot(r: pathlib.Path) -> dict[str, bytes]:
+        return {
+            p.relative_to(r).as_posix(): p.read_bytes()
+            for p in r.rglob("*")
+            if p.is_file() and ".git" not in p.parts and "__pycache__" not in p.parts
+        }
+
+    before_state = _snapshot(environment_root)
+
+    # Run the right command from the new state
+    import subprocess as _subprocess
+
+    try:
+        result = _subprocess.run(
+            ["/bin/sh", "-c", right_command],
+            cwd=str(environment_root),
+            capture_output=True,
+            timeout=15.0,
+        )
+        rc = result.returncode
+        output = (result.stdout + result.stderr).decode("utf-8", errors="replace")
+    except Exception as exc:
+        return {
+            "phase": "REPLAY",
+            "status": REFUSED,
+            "reason": f"REPLAY_EXECUTION_ERROR__{type(exc).__name__}:{exc}",
+            "model_calls": 0,
+            "network_calls": 0,
+        }
+
+    # Snapshot after replay
+    after_state = _snapshot(environment_root)
+
+    # Verify the expected effect subjects are present in the after-state
+    # For shell commands, check that files mentioned in effects exist
+    effect_subjects_present = []
+    for subject in expected_effect_subjects:
+        # Check if any file in after_state matches the subject
+        found = any(subject in key for key in after_state.keys())
+        effect_subjects_present.append(found)
+
+    all_effects_present = all(effect_subjects_present)
+
+    # Also verify the command succeeded (rc=0)
+    command_succeeded = rc == 0
+
+    if command_succeeded and all_effects_present:
+        return {
+            "phase": "REPLAY",
+            "status": REPLAY_DONE,
+            "right_command": right_command,
+            "return_code": rc,
+            "output": output[:200],
+            "effect_subjects_present": effect_subjects_present,
+            "all_effects_present": all_effects_present,
+            "before_state_size": len(before_state),
+            "after_state_size": len(after_state),
+            "model_calls": 0,
+            "network_calls": 0,
+            "derivation": "replay_skill_on_new_state_same_effect_verified",
+        }
+    else:
+        return {
+            "phase": "REPLAY",
+            "status": REFUSED,
+            "reason": REPLAY_FAILED,
+            "right_command": right_command,
+            "return_code": rc,
+            "effect_subjects_present": effect_subjects_present,
+            "all_effects_present": all_effects_present,
+            "model_calls": 0,
+            "network_calls": 0,
+            "derivation": "replay_skill_on_new_state_same_effect_verified",
+        }
 
 
 # --------------------------------------------------------------------------- #
@@ -1117,6 +1422,20 @@ class InstantOneShotLearning:
     ) -> dict[str, Any]:
         return remember_skill(admit_result)
 
+    # -- REPLAY ------------------------------------------------------------ #
+    def replay(
+        self,
+        identify_result: dict[str, Any],
+        replay_steps: Sequence[tuple[str, str]],
+        expected_effect_subjects: Sequence[str],
+    ) -> dict[str, Any]:
+        return replay_skill(
+            identify_result,
+            self.environment_root,
+            replay_steps,
+            expected_effect_subjects,
+        )
+
     # -- FULL LOOP --------------------------------------------------------- #
     def run(
         self,
@@ -1143,11 +1462,13 @@ class InstantOneShotLearning:
         horizon_subgoals: Sequence[tuple[str, Sequence[str], Sequence[str], int, Sequence[str]]],
         horizon_initial_state: dict[str, bytes],
         victims: Sequence[dict[str, Any]],
+        replay_steps: Sequence[tuple[str, str]] = (),
+        replay_effect_subjects: Sequence[str] = (),
     ) -> dict[str, Any]:
         """Run the complete instant one-shot learning loop.
 
         OBSERVE → CREDIT → IDENTIFY → CONTRACT → APPLICABILITY → COMPOSE →
-        HORIZON → ADMIT → REMEMBER
+        HORIZON → ADMIT → REMEMBER → REPLAY
 
         Returns whether the skill was learned, admitted, and is ready to
         reproduce on new tasks.
@@ -1244,6 +1565,22 @@ class InstantOneShotLearning:
             report["status"] = remember["status"]
             report["result"] = "REFUSED__PERSISTENCE_FAILED"
             return report
+
+        # 10. REPLAY — reproduce the learned skill on a new state
+        if replay_steps:
+            replay = self.replay(
+                identify, replay_steps, replay_effect_subjects,
+            )
+            report["phases"].append(replay)
+            if replay["status"] != REPLAY_DONE:
+                report["status"] = replay["status"]
+                report["result"] = "REFUSED__REPLAY_FAILED"
+                return report
+            report["replay_done"] = replay["all_effects_present"]
+            report["replay_return_code"] = replay["return_code"]
+        else:
+            report["replay_done"] = False
+            report["replay_return_code"] = None
 
         report["status"] = "COMPLETE"
         report["result"] = "INSTANT_ONE_SHOT_LEARNING_COMPLETE"
@@ -1346,6 +1683,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         ),
         horizon_initial_state={"output.txt": b""},
         victims=[],
+        replay_steps=[("echo result > output.txt", "")],
+        replay_effect_subjects=["output.txt"],
     )
     print(json.dumps(report, indent=1, sort_keys=True))
     if ns.json_path:

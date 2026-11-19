@@ -48,11 +48,17 @@ from canonical.swe_kernel.instant_one_shot_learning_v1 import (  # noqa: E402
     execute_with_horizon,
     admit_before_persistence,
     remember_skill,
+    replay_skill,
     OBSERVE_DONE,
     CREDIT_DONE,
     IDENTIFY_DONE,
     CONTRACT_DONE,
     APPLICABILITY_DONE,
+    COMPOSE_DONE,
+    HORIZON_DONE,
+    ADMIT_DONE,
+    REMEMBER_DONE,
+    REPLAY_DONE,
     COMPOSE_DONE,
     HORIZON_DONE,
     ADMIT_DONE,
@@ -719,3 +725,44 @@ def test_repetition_buys_zero_bits(tmp_root):
     assert observe1["step_count"] == observe2["step_count"]
     assert observe1["terminal_outcome"] == observe2["terminal_outcome"]
     # Same calculated result — repetition buys zero bits
+
+
+# --------------------------------------------------------------------------- #
+# replay phase
+# --------------------------------------------------------------------------- #
+
+
+def test_replay_reproduces_on_new_state(tmp_root):
+    """REPLAY reproduces the identified rule on a new environment state."""
+    observe = observe_task(
+        tmp_root, "task_1", [("echo result > output.txt", "")], terminal_outcome=1
+    )
+    credit = attribute_credit(tmp_root, observe, [[("fail", "exit 1")]])
+    identify = identify_rule(
+        tmp_root, credit, "echo result > output.txt", [("wrong", "exit 1")]
+    )
+    assert identify["status"] == IDENTIFY_DONE
+
+    result = replay_skill(
+        identify,
+        tmp_root,
+        replay_steps=[("echo result > output.txt", "")],
+        expected_effect_subjects=["output.txt"],
+    )
+    assert result["phase"] == "REPLAY"
+    assert result["status"] == REPLAY_DONE
+    assert result["all_effects_present"] is True
+    assert result["model_calls"] == 0
+    assert result["network_calls"] == 0
+
+
+def test_replay_refuses_without_identify(tmp_root):
+    """REPLAY refuses when IDENTIFY hasn't been run."""
+    result = replay_skill(
+        {"status": "NOT_IDENTIFIED"},
+        tmp_root,
+        replay_steps=[("echo result > output.txt", "")],
+        expected_effect_subjects=["output.txt"],
+    )
+    assert result["phase"] == "REPLAY"
+    assert result["status"] == REFUSED
