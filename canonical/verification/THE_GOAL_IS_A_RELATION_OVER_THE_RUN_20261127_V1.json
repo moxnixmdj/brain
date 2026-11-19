@@ -1,0 +1,963 @@
+{
+ "schema": "BRAIN_THE_GOAL_IS_A_RELATION_OVER_THE_RUN_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "date": "2026-11-27",
+ "mode": "GOAL_INFERRED_FROM_JUDGMENTS_ON_REAL_RUNS",
+ "declared_acceptance_before_the_run": {
+  "B1": "on at least two machines, a final state is reached by real runs with opposite judgments, counted rather than constructed",
+  "B2": "no term that reads only the final state disagrees inside a group; on any judgment set holding one such group the end-state grammar has no consistent hypothesis; leave-one-run-out produces at least one false accept",
+  "B3": "every group is separated by some run-term, every goal keeps a consistent hypothesis, and leave-one-run-out has 0 false accepts and 0 false rejects",
+  "B4": "the run grammar reaches agreement in k judgments with an exactly correct goal; the end-state grammar reaches agreement on a goal that is wrong; both k are counted",
+  "B5": "zero model calls, zero stored parameters, every run a real execution"
+ },
+ "verdict": {
+  "B1_indistinguishable_groups_are_real": {
+   "groups": 9,
+   "machines": [
+    "FILESYSTEM",
+    "SQLITE",
+    "TARBALL"
+   ],
+   "MET": true
+  },
+  "B2_the_end_state_goal_is_empty": {
+   "final_state_terms_that_disagree_inside_a_group": 0,
+   "every_goal_with_a_group_has_no_consistent_hypothesis": true,
+   "leave_one_out_false_accepts": 1,
+   "MET": true
+  },
+  "B3_the_run_goal_is_not_empty_and_sound": {
+   "groups_separated_by_some_run_term": 9,
+   "groups": 9,
+   "every_goal_has_a_consistent_hypothesis": true,
+   "leave_one_out_false_accepts": 0,
+   "leave_one_out_false_rejects": 1,
+   "MET": false
+  },
+  "B4_identification_is_a_count": {
+   "run_goal_identified_after": [
+    5,
+    6,
+    5
+   ],
+   "run_goal_accuracy_when_identified": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "end_state_goal_identified_after": [
+    4,
+    7,
+    2
+   ],
+   "end_state_goal_accuracy_when_identified": [
+    0.8235,
+    0.7917,
+    0.95
+   ],
+   "MET": true
+  },
+  "B5_zero": {
+   "model_calls": 0,
+   "parameters_stored": 0,
+   "network_calls_at_run_time": 0,
+   "MET": true
+  }
+ },
+ "rows": [
+  {
+   "machine": "FILESYSTEM",
+   "goal": "copy it before you move it: the original existed in two places at once",
+   "sequences_executed": 155,
+   "runs": 68,
+   "accepted_runs": 18,
+   "rejected_runs": 50,
+   "terms_over_the_run": 28,
+   "terms_over_the_final_state_only": 15,
+   "indistinguishable_groups": 4,
+   "indistinguishable_examples": [
+    {
+     "final_state": [
+      [
+       "backup",
+       "probe_seed_content"
+      ],
+      [
+       "seed2",
+       "probe_second_content"
+      ]
+     ],
+     "runs": [
+      2,
+      12,
+      14,
+      18,
+      38,
+      42,
+      44,
+      48,
+      50,
+      59,
+      61,
+      65
+     ],
+     "judgments": [
+      false,
+      false,
+      true,
+      false,
+      false,
+      false,
+      true,
+      true,
+      true,
+      false,
+      true,
+      false
+     ]
+    },
+    {
+     "final_state": [
+      [
+       "backup",
+       "probe_new_content"
+      ],
+      [
+       "seed2",
+       "probe_second_content"
+      ]
+     ],
+     "runs": [
+      7,
+      23,
+      28,
+      30,
+      33,
+      39,
+      45,
+      54
+     ],
+     "judgments": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      true,
+      false
+     ]
+    },
+    {
+     "final_state": [
+      [
+       "backup",
+       "probe_new_content"
+      ],
+      [
+       "seed",
+       "probe_new_content"
+      ],
+      [
+       "seed2",
+       "probe_second_content"
+      ]
+     ],
+     "runs": [
+      8,
+      24,
+      27,
+      29,
+      34,
+      40,
+      46,
+      55
+     ],
+     "judgments": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      true,
+      false
+     ]
+    }
+   ],
+   "structural": {
+    "final_state_terms_that_disagree_inside_a_group": 0,
+    "groups_separated_by_some_run_term": 4,
+    "groups": 4
+   },
+   "final_state_only": {
+    "consistent_hypotheses_on_the_full_judgment_set": 0,
+    "smallest_hypothesis": null,
+    "leave_one_out": {
+     "runs": 68,
+     "decided": 0,
+     "correct": 0,
+     "accuracy_where_decided": null,
+     "false_accepts": 0,
+     "false_accept_indices": [],
+     "false_rejects": 0,
+     "false_reject_indices": [],
+     "undecided": 68
+    },
+    "identification": {
+     "identified_after": 4,
+     "vocabulary_emptied_after": null,
+     "agreeing_goal_accuracy": 0.8235,
+     "agreeing_goal_false_accepts": 0,
+     "judgments_asked": [
+      [
+       3,
+       true
+      ],
+      [
+       2,
+       false
+      ],
+      [
+       4,
+       false
+      ],
+      [
+       11,
+       false
+      ]
+     ],
+     "history": [
+      {
+       "judgments": 0,
+       "survivors": 120,
+       "behavioural_classes": 28,
+       "false_accepts": 0,
+       "false_rejects": 18,
+       "undecided": 0,
+       "accuracy_of_the_intersection": 0.7353
+      },
+      {
+       "judgments": 1,
+       "survivors": 28,
+       "behavioural_classes": 8,
+       "false_accepts": 0,
+       "false_rejects": 12,
+       "undecided": 0,
+       "accuracy_of_the_intersection": 0.8235
+      },
+      {
+       "judgments": 2,
+       "survivors": 18,
+       "behavioural_classes": 4,
+       "false_accepts": 0,
+       "false_rejects": 12,
+       "undecided": 0,
+       "accuracy_of_the_intersection": 0.8235
+      },
+      {
+       "judgments": 3,
+       "survivors": 14,
+       "behavioural_classes": 3,
+       "false_accepts": 0,
+       "false_rejects": 12,
+       "undecided": 0,
+       "accuracy_of_the_intersection": 0.8235
+      },
+      {
+       "judgments": 4,
+       "survivors": 10,
+       "behavioural_classes": 1,
+       "false_accepts": 0,
+       "false_rejects": 12,
+       "undecided": 0,
+       "accuracy_of_the_intersection": 0.8235
+      }
+     ]
+    }
+   },
+   "over_the_run": {
+    "consistent_hypotheses_on_the_full_judgment_set": 7,
+    "smallest_hypothesis": [
+     "two_copies[probe_seed_content]"
+    ],
+    "leave_one_out": {
+     "runs": 68,
+     "decided": 68,
+     "correct": 67,
+     "accuracy_where_decided": 0.9853,
+     "false_accepts": 0,
+     "false_accept_indices": [],
+     "false_rejects": 1,
+     "false_reject_indices": [
+      44
+     ],
+     "undecided": 0
+    },
+    "identification": {
+     "identified_after": 5,
+     "vocabulary_emptied_after": null,
+     "agreeing_goal_accuracy": 1.0,
+     "agreeing_goal_false_accepts": 0,
+     "judgments_asked": [
+      [
+       3,
+       true
+      ],
+      [
+       4,
+       false
+      ],
+      [
+       46,
+       true
+      ],
+      [
+       30,
+       false
+      ],
+      [
+       44,
+       true
+      ]
+     ],
+     "history": [
+      {
+       "judgments": 0,
+       "survivors": 406,
+       "behavioural_classes": 60,
+       "false_accepts": 0,
+       "false_rejects": 18,
+       "undecided": 0,
+       "accuracy_of_the_intersection": 0.7353
+      },
+      {
+       "judgments": 1,
+       "survivors": 105,
+       "behavioural_classes": 27,
+       "false_accepts": 0,
+       "false_rejects": 12,
+       "undecided": 0,
+       "accuracy_of_the_intersection": 0.8235
+      },
+      {
+       "judgments": 2,
+       "survivors": 50,
+       "behavioural_classes": 13,
+       "false_accepts": 0,
+       "false_rejects": 12,
+       "undecided": 0,
+       "accuracy_of_the_intersection": 0.8235
+      },
+      {
+       "judgments": 3,
+       "survivors": 24,
+       "behavioural_classes": 6,
+       "false_accepts": 0,
+       "false_rejects": 7,
+       "undecided": 0,
+       "accuracy_of_the_intersection": 0.8971
+      },
+      {
+       "judgments": 4,
+       "survivors": 13,
+       "behavioural_classes": 5,
+       "false_accepts": 0,
+       "false_rejects": 7,
+       "undecided": 0,
+       "accuracy_of_the_intersection": 0.8971
+      },
+      {
+       "judgments": 5,
+       "survivors": 7,
+       "behavioural_classes": 1,
+       "false_accepts": 0,
+       "false_rejects": 0,
+       "undecided": 0,
+       "accuracy_of_the_intersection": 1.0
+      }
+     ]
+    }
+   }
+  },
+  {
+   "machine": "SQLITE",
+   "goal": "replace the row in place: the old value and the new value never coexisted",
+   "sequences_executed": 84,
+   "runs": 48,
+   "accepted_runs": 16,
+   "rejected_runs": 32,
+   "terms_over_the_run": 44,
+   "terms_over_the_final_state_only": 18,
+   "indistinguishable_groups": 4,
+   "indistinguishable_examples": [
+    {
+     "final_state": [
+      [
+       "2",
+       "probe_second_content"
+      ],
+      [
+       "3",
+       "probe_new_content"
+      ]
+     ],
+     "runs": [
+      5,
+      8,
+      21,
+      25,
+      29,
+      30,
+      37,
+      40
+     ],
+     "judgments": [
+      false,
+      true,
+      false,
+      false,
+      true,
+      true,
+      false,
+      true
+     ]
+    },
+    {
+     "final_state": [
+      [
+       "1",
+       "probe_new_content"
+      ],
+      [
+       "2",
+       "probe_second_content"
+      ],
+      [
+       "3",
+       "probe_new_content"
+      ]
+     ],
+     "runs": [
+      6,
+      10,
+      23,
+      26,
+      33,
+      34,
+      38,
+      42
+     ],
+     "judgments": [
+      false,
+      true,
+      false,
+      false,
+      true,
+      true,
+      false,
+      true
+     ]
+    },
+    {
+     "final_state": [
+      [
+       "2",
+       "probe_second_content"
+      ],
+      [
+       "3",
+       "probe_new_content"
+      ],
+      [
+       "4",
+       "probe_new_content"
+      ]
+     ],
+     "runs": [
+      17,
+      20,
+      28
+     ],
+     "judgments": [
+      false,
+      false,
+      true
+     ]
+    }
+   ],
+   "structural": {
+    "final_state_terms_that_disagree_inside_a_group": 0,
+    "groups_separated_by_some_run_term": 4,
+    "groups": 4
+   },
+   "final_state_only": {
+    "consistent_hypotheses_on_the_full_judgment_set": 0,
+    "smallest_hypothesis": null,
+    "leave_one_out": {
+     "runs": 48,
+     "decided": 0,
+     "correct": 0,
+     "accuracy_where_decided": null,
+     "false_accepts": 0,
+     "false_accept_indices": [],
+     "false_rejects": 0,
+     "false_reject_indices": [],
+     "undecided": 48
+    },
+    "identification": {
+     "identified_after": 7,
+     "vocabulary_emptied_after": null,
+     "agreeing_goal_accuracy": 0.7917,
+     "agreeing_goal_false_accepts": 0,
+     "judgments_asked": [
+      [
+       16,
+       false
+      ],
+      [
+       6,
+       false
+      ],
+      [
+       18,
+       false
+      ],
+      [
+       2,
+       true
+      ],
+      [
+       0,
+       false
+      ],
+      [
+       3,
+       false
+      ],
+      [
+       5,
+       false
+      ]
+     ],
+     "history": [
+      {
+       "judgments": 0,
+       "survivors": 171,
+       "behavioural_classes": 33,
+       "false_accepts": 0,
+       "false_rejects": 16,
+       "undecided": 0,
+       "accuracy_of_the_intersection": 0.6667
+      },
+      {
+       "judgments": 1,
+       "survivors": 126,
+       "behavioural_classes": 25,
+       "false_accepts": 0,
+       "false_rejects": 16,
+       "undecided": 0,
+       "accuracy_of_the_intersection": 0.6667
+      },
+      {
+       "judgments": 2,
+       "survivors": 104,
+       "behavioural_classes": 17,
+       "false_accepts": 0,
+       "false_rejects": 16,
+       "undecided": 0,
+       "accuracy_of_the_intersection": 0.6667
+      },
+      {
+       "judgments": 3,
+       "survivors": 92,
+       "behavioural_classes": 14,
+       "false_accepts": 0,
+       "false_rejects": 16,
+       "undecided": 0,
+       "accuracy_of_the_intersection": 0.6667
+      },
+      {
+       "judgments": 4,
+       "survivors": 11,
+       "behavioural_classes": 4,
+       "false_accepts": 0,
+       "false_rejects": 10,
+       "undecided": 0,
+       "accuracy_of_the_intersection": 0.7917
+      },
+      {
+       "judgments": 5,
+       "survivors": 8,
+       "behavioural_classes": 3,
+       "false_accepts": 0,
+       "false_rejects": 10,
+       "undecided": 0,
+       "accuracy_of_the_intersection": 0.7917
+      },
+      {
+       "judgments": 6,
+       "survivors": 5,
+       "behavioural_classes": 2,
+       "false_accepts": 0,
+       "false_rejects": 10,
+       "undecided": 0,
+       "accuracy_of_the_intersection": 0.7917
+      },
+      {
+       "judgments": 7,
+       "survivors": 2,
+       "behavioural_classes": 1,
+       "false_accepts": 0,
+       "false_rejects": 10,
+       "undecided": 0,
+       "accuracy_of_the_intersection": 0.7917
+      }
+     ]
+    }
+   },
+   "over_the_run": {
+    "consistent_hypotheses_on_the_full_judgment_set": 1,
+    "smallest_hypothesis": [
+     "at_least_once[probe_new_content]",
+     "never_together[probe_new_content;probe_seed_content]"
+    ],
+    "leave_one_out": {
+     "runs": 48,
+     "decided": 48,
+     "correct": 48,
+     "accuracy_where_decided": 1.0,
+     "false_accepts": 0,
+     "false_accept_indices": [],
+     "false_rejects": 0,
+     "false_reject_indices": [],
+     "undecided": 0
+    },
+    "identification": {
+     "identified_after": 6,
+     "vocabulary_emptied_after": null,
+     "agreeing_goal_accuracy": 1.0,
+     "agreeing_goal_false_accepts": 0,
+     "judgments_asked": [
+      [
+       16,
+       false
+      ],
+      [
+       8,
+       true
+      ],
+      [
+       2,
+       true
+      ],
+      [
+       0,
+       false
+      ],
+      [
+       1,
+       false
+      ],
+      [
+       10,
+       true
+      ]
+     ],
+     "history": [
+      {
+       "judgments": 0,
+       "survivors": 990,
+       "behavioural_classes": 34,
+       "false_accepts": 0,
+       "false_rejects": 16,
+       "undecided": 0,
+       "accuracy_of_the_intersection": 0.6667
+      },
+      {
+       "judgments": 1,
+       "survivors": 800,
+       "behavioural_classes": 20,
+       "false_accepts": 0,
+       "false_rejects": 16,
+       "undecided": 0,
+       "accuracy_of_the_intersection": 0.6667
+      },
+      {
+       "judgments": 2,
+       "survivors": 30,
+       "behavioural_classes": 10,
+       "false_accepts": 0,
+       "false_rejects": 12,
+       "undecided": 0,
+       "accuracy_of_the_intersection": 0.75
+      },
+      {
+       "judgments": 3,
+       "survivors": 15,
+       "behavioural_classes": 4,
+       "false_accepts": 0,
+       "false_rejects": 6,
+       "undecided": 0,
+       "accuracy_of_the_intersection": 0.875
+      },
+      {
+       "judgments": 4,
+       "survivors": 8,
+       "behavioural_classes": 3,
+       "false_accepts": 0,
+       "false_rejects": 6,
+       "undecided": 0,
+       "accuracy_of_the_intersection": 0.875
+      },
+      {
+       "judgments": 5,
+       "survivors": 2,
+       "behavioural_classes": 2,
+       "false_accepts": 0,
+       "false_rejects": 6,
+       "undecided": 0,
+       "accuracy_of_the_intersection": 0.875
+      },
+      {
+       "judgments": 6,
+       "survivors": 1,
+       "behavioural_classes": 1,
+       "false_accepts": 0,
+       "false_rejects": 0,
+       "undecided": 0,
+       "accuracy_of_the_intersection": 1.0
+      }
+     ]
+    }
+   }
+  },
+  {
+   "machine": "TARBALL",
+   "goal": "add the member once, keep it: exactly one write, never removed",
+   "sequences_executed": 84,
+   "runs": 20,
+   "accepted_runs": 6,
+   "rejected_runs": 14,
+   "terms_over_the_run": 45,
+   "terms_over_the_final_state_only": 17,
+   "indistinguishable_groups": 1,
+   "indistinguishable_examples": [
+    {
+     "final_state": [
+      [
+       "seed",
+       "probe_seed_content"
+      ],
+      [
+       "seed2",
+       "probe_second_content"
+      ],
+      [
+       "member",
+       "probe_new_content"
+      ]
+     ],
+     "runs": [
+      0,
+      4,
+      5,
+      10,
+      14,
+      17,
+      18
+     ],
+     "judgments": [
+      true,
+      true,
+      true,
+      false,
+      true,
+      true,
+      true
+     ]
+    }
+   ],
+   "structural": {
+    "final_state_terms_that_disagree_inside_a_group": 0,
+    "groups_separated_by_some_run_term": 1,
+    "groups": 1
+   },
+   "final_state_only": {
+    "consistent_hypotheses_on_the_full_judgment_set": 0,
+    "smallest_hypothesis": null,
+    "leave_one_out": {
+     "runs": 20,
+     "decided": 1,
+     "correct": 0,
+     "accuracy_where_decided": 0.0,
+     "false_accepts": 1,
+     "false_accept_indices": [
+      10
+     ],
+     "false_rejects": 0,
+     "false_reject_indices": [],
+     "undecided": 19
+    },
+    "identification": {
+     "identified_after": 2,
+     "vocabulary_emptied_after": null,
+     "agreeing_goal_accuracy": 0.95,
+     "agreeing_goal_false_accepts": 1,
+     "judgments_asked": [
+      [
+       0,
+       true
+      ],
+      [
+       1,
+       false
+      ]
+     ],
+     "history": [
+      {
+       "judgments": 0,
+       "survivors": 153,
+       "behavioural_classes": 12,
+       "false_accepts": 0,
+       "false_rejects": 6,
+       "undecided": 0,
+       "accuracy_of_the_intersection": 0.7
+      },
+      {
+       "judgments": 1,
+       "survivors": 45,
+       "behavioural_classes": 5,
+       "false_accepts": 1,
+       "false_rejects": 0,
+       "undecided": 0,
+       "accuracy_of_the_intersection": 0.95
+      },
+      {
+       "judgments": 2,
+       "survivors": 24,
+       "behavioural_classes": 1,
+       "false_accepts": 1,
+       "false_rejects": 0,
+       "undecided": 0,
+       "accuracy_of_the_intersection": 0.95
+      }
+     ]
+    }
+   },
+   "over_the_run": {
+    "consistent_hypotheses_on_the_full_judgment_set": 24,
+    "smallest_hypothesis": [
+     "created_once[probe_new_content]"
+    ],
+    "leave_one_out": {
+     "runs": 20,
+     "decided": 20,
+     "correct": 20,
+     "accuracy_where_decided": 1.0,
+     "false_accepts": 0,
+     "false_accept_indices": [],
+     "false_rejects": 0,
+     "false_reject_indices": [],
+     "undecided": 0
+    },
+    "identification": {
+     "identified_after": 5,
+     "vocabulary_emptied_after": null,
+     "agreeing_goal_accuracy": 1.0,
+     "agreeing_goal_false_accepts": 0,
+     "judgments_asked": [
+      [
+       0,
+       true
+      ],
+      [
+       8,
+       false
+      ],
+      [
+       3,
+       false
+      ],
+      [
+       1,
+       false
+      ],
+      [
+       2,
+       false
+      ]
+     ],
+     "history": [
+      {
+       "judgments": 0,
+       "survivors": 1035,
+       "behavioural_classes": 23,
+       "false_accepts": 0,
+       "false_rejects": 6,
+       "undecided": 0,
+       "accuracy_of_the_intersection": 0.7
+      },
+      {
+       "judgments": 1,
+       "survivors": 231,
+       "behavioural_classes": 13,
+       "false_accepts": 0,
+       "false_rejects": 0,
+       "undecided": 0,
+       "accuracy_of_the_intersection": 1.0
+      },
+      {
+       "judgments": 2,
+       "survivors": 111,
+       "behavioural_classes": 9,
+       "false_accepts": 0,
+       "false_rejects": 0,
+       "undecided": 0,
+       "accuracy_of_the_intersection": 1.0
+      },
+      {
+       "judgments": 3,
+       "survivors": 60,
+       "behavioural_classes": 5,
+       "false_accepts": 0,
+       "false_rejects": 0,
+       "undecided": 0,
+       "accuracy_of_the_intersection": 1.0
+      },
+      {
+       "judgments": 4,
+       "survivors": 27,
+       "behavioural_classes": 2,
+       "false_accepts": 0,
+       "false_rejects": 0,
+       "undecided": 0,
+       "accuracy_of_the_intersection": 1.0
+      },
+      {
+       "judgments": 5,
+       "survivors": 24,
+       "behavioural_classes": 1,
+       "false_accepts": 0,
+       "false_rejects": 0,
+       "undecided": 0,
+       "accuracy_of_the_intersection": 1.0
+      }
+     ]
+    }
+   }
+  }
+ ],
+ "depth": 3,
+ "seconds": 18.1,
+ "model_calls": 0,
+ "parameters_stored": 0,
+ "limits": [
+  "the trace grammar is a grammar: a goal outside it is refused (undecided), not approximated",
+  "the end-state grammar is incomplete by theorem; the run grammar only by construction",
+  "three CLI machines, no display: on a screen the trace is longer and the same",
+  "GIT is not included: its reset is five git invocations per run, and the three machines present carry the same structure",
+  "runs are deduplicated by trace, so action sequences that read identically are one run",
+  "judgments come from real executions but from this tool's predicates; a human's sense of 'the right way' is the next study"
+ ]
+}

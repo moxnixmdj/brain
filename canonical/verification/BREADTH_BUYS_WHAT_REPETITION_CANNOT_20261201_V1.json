@@ -1,0 +1,212 @@
+{
+ "schema": "BRAIN_BREADTH_BUYS_WHAT_REPETITION_CANNOT_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "date": "2026-12-01",
+ "mode": "ONE_GRAMMAR_OVER_THREE_MACHINES_PRICES_BREADTH_AND_COUNTS_THE_RESIDUAL",
+ "correction_to_the_previous_round": {
+  "what_was_reported": "79 statements consistent with everything the user said on TARBALL",
+  "what_it_was": "79 contains 75 redundant conjunctions; the goal's minimal class is 4",
+  "why_it_matters": "a count that flatters the argument is the failure this project hunts; the corrected count makes the claim stronger and the residual smaller"
+ },
+ "criteria_were_declared_after_a_prototype_probe": true,
+ "prototype_note": "a probe over the same three pools ran while the tool was written and produced the headline numbers, so B1-B6 are confirmatory; they are written as structural claims so that an edited tool cannot pass them by accident",
+ "declared_acceptance_before_the_receipt_run": {
+  "B1": "the union of the three machines has strictly more distinct behaviours than any single machine",
+  "B2": "the union's minimal class for the user's goal is strictly smaller than the richest single machine's",
+  "B3": "the union's minimal class for the user's goal is still greater than one",
+  "B4": "the third machine removes fewer minimal statements than the second",
+  "B5": "the residual is log2(class) questions of the user, and no run can pay one of them",
+  "B6": "zero model calls, zero stored parameters, every run executed"
+ },
+ "verdict": {
+  "B1_breadth_increases_resolving_power": {
+   "single": {
+    "TARBALL": 353,
+    "FILESYSTEM": 129,
+    "SQLITE": 78
+   },
+   "union": 622,
+   "MET": true
+  },
+  "B2_breadth_shrinks_the_goal_class": {
+   "richest_single_machine": {
+    "TARBALL": 4
+   },
+   "union": 2,
+   "MET": true
+  },
+  "B3_the_residual_survives_every_machine": {
+   "residual_statements": 2,
+   "texts": [
+    "created_once[probe_new_content]",
+    "monotone[probe_new_content] \u2227 final:count[probe_new_content]==1"
+   ],
+   "MET": true
+  },
+  "B4_breadth_saturates": {
+   "marginal": {
+    "first_machine_goal_minimal": 4,
+    "after_two_machines_goal_minimal": 2,
+    "after_three_machines_goal_minimal": 2,
+    "second_machine_removed": 2,
+    "third_machine_removed": 0
+   },
+   "MET": true
+  },
+  "B5_the_residual_is_priced_in_words": {
+   "questions_of_the_user": 1.0,
+   "runs_that_could_pay_it": 0,
+   "MET": true
+  },
+  "B6_zero": {
+   "model_calls": 0,
+   "parameters_stored": 0,
+   "network_calls_at_run_time": 0,
+   "MET": true
+  }
+ },
+ "subsets": {
+  "TARBALL": {
+   "runs": 231,
+   "hypotheses": 29890,
+   "behaviours": 353,
+   "trivial_behaviours_excluded": 2,
+   "behaviours_with_a_unique_statement": 190,
+   "share_unique": 0.5413,
+   "mean_class": 2.06,
+   "largest_class": 20,
+   "goal_statements_with_the_behaviour": 79,
+   "goal_minimal_statements": 4,
+   "goal_minimal_texts": [
+    "created_once[probe_new_content]",
+    "at_least_once[probe_new_content] \u2227 monotone[probe_new_content]",
+    "monotone[probe_new_content] \u2227 final:count[probe_new_content]==1",
+    "monotone[probe_new_content] \u2227 final:has[seed]=probe_new_content"
+   ]
+  },
+  "FILESYSTEM": {
+   "runs": 196,
+   "hypotheses": 29890,
+   "behaviours": 129,
+   "trivial_behaviours_excluded": 2,
+   "behaviours_with_a_unique_statement": 82,
+   "share_unique": 0.6457,
+   "mean_class": 1.71,
+   "largest_class": 10,
+   "goal_statements_with_the_behaviour": 79,
+   "goal_minimal_statements": 2,
+   "goal_minimal_texts": [
+    "created_once[probe_new_content]",
+    "monotone[probe_new_content] \u2227 final:count[probe_new_content]==1"
+   ]
+  },
+  "SQLITE": {
+   "runs": 128,
+   "hypotheses": 29890,
+   "behaviours": 78,
+   "trivial_behaviours_excluded": 2,
+   "behaviours_with_a_unique_statement": 29,
+   "share_unique": 0.3816,
+   "mean_class": 4.04,
+   "largest_class": 20,
+   "goal_statements_with_the_behaviour": 155,
+   "goal_minimal_statements": 2,
+   "goal_minimal_texts": [
+    "created_once[probe_new_content]",
+    "final:count[probe_new_content]==1"
+   ]
+  },
+  "TARBALL+FILESYSTEM": {
+   "runs": 427,
+   "hypotheses": 29890,
+   "behaviours": 503,
+   "trivial_behaviours_excluded": 2,
+   "behaviours_with_a_unique_statement": 288,
+   "share_unique": 0.5749,
+   "mean_class": 1.84,
+   "largest_class": 20,
+   "goal_statements_with_the_behaviour": 73,
+   "goal_minimal_statements": 2,
+   "goal_minimal_texts": [
+    "created_once[probe_new_content]",
+    "monotone[probe_new_content] \u2227 final:count[probe_new_content]==1"
+   ]
+  },
+  "TARBALL+SQLITE": {
+   "runs": 359,
+   "hypotheses": 29890,
+   "behaviours": 520,
+   "trivial_behaviours_excluded": 2,
+   "behaviours_with_a_unique_statement": 282,
+   "share_unique": 0.5444,
+   "mean_class": 2.22,
+   "largest_class": 38,
+   "goal_statements_with_the_behaviour": 72,
+   "goal_minimal_statements": 2,
+   "goal_minimal_texts": [
+    "created_once[probe_new_content]",
+    "monotone[probe_new_content] \u2227 final:count[probe_new_content]==1"
+   ]
+  },
+  "FILESYSTEM+SQLITE": {
+   "runs": 324,
+   "hypotheses": 29890,
+   "behaviours": 217,
+   "trivial_behaviours_excluded": 2,
+   "behaviours_with_a_unique_statement": 125,
+   "share_unique": 0.5814,
+   "mean_class": 2.35,
+   "largest_class": 20,
+   "goal_statements_with_the_behaviour": 78,
+   "goal_minimal_statements": 2,
+   "goal_minimal_texts": [
+    "created_once[probe_new_content]",
+    "monotone[probe_new_content] \u2227 final:count[probe_new_content]==1"
+   ]
+  },
+  "TARBALL+FILESYSTEM+SQLITE": {
+   "runs": 555,
+   "hypotheses": 29890,
+   "behaviours": 622,
+   "trivial_behaviours_excluded": 2,
+   "behaviours_with_a_unique_statement": 354,
+   "share_unique": 0.571,
+   "mean_class": 2.09,
+   "largest_class": 38,
+   "goal_statements_with_the_behaviour": 72,
+   "goal_minimal_statements": 2,
+   "goal_minimal_texts": [
+    "created_once[probe_new_content]",
+    "monotone[probe_new_content] \u2227 final:count[probe_new_content]==1"
+   ]
+  }
+ },
+ "terms": 244,
+ "runs": {
+  "TARBALL": 231,
+  "FILESYSTEM": 196,
+  "SQLITE": 128
+ },
+ "depths": {
+  "TARBALL": 5,
+  "FILESYSTEM": 4,
+  "SQLITE": 4
+ },
+ "cost": {
+  "seconds": 108.8,
+  "model_calls": 0,
+  "parameters_stored": 0,
+  "network_calls_at_run_time": 0
+ },
+ "definitions": {
+  "behaviour": "the bitmask of a statement over every executed run: two statements are the same knowledge when their masks are equal",
+  "class": "the number of minimal statements carrying one behaviour; a conjunction of two is non-minimal when one conjunct alone already carries it",
+  "residual": "the class of the user's goal on the union: statements no run of any of the three machines can tell apart"
+ },
+ "limits": [
+  "the grammar is supplied and small (244 terms over these machines' literals); the ceiling is computed for it, not for goals in general",
+  "three CLI machines at depths 5/4/4; depth 6 is out of reach here and named, not simulated",
+  "the synthesis side of coding is untouched: this prices what an edit would be for, not an edit",
+  "log2(k) is a count of questions, not a dialogue: it says what must be asked, not how well"
+ ]
+}
