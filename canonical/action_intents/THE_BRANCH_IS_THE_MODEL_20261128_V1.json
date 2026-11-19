@@ -42,7 +42,7 @@
  },
  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The specification, not the transition model: every collapse in this round was a goal satisfiable by destroying something (a stash, an ancestor commit, another branch's tip), found by a plan rather than by review. The second-order blocker is the state key -- coarser than the goal it makes the search silently incomplete while every individual step stays exact.",
- "canonical_base_commit": "932ddb7889d45d12c9725967927a5e642cb86153",
+ "canonical_base_commit": "9d9aeb21b6eac03f132c643584f11bd035baf977",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -133,7 +133,7 @@
  ],
  "real_outcome": "A real repair needs no world model at all: one copy plus one execution returns the applicability decision AND the exact successor, so the planner searches real states; 5 of 6 damaged states were repaired in the learned stream and 6 of 6 in the control, each verified by git itself. The only unsound component is the learned condition used to DELETE work (50% fewer executions, one task in seven lost, conditions named 0 of 10), while the same knowledge used to ORDER bought nothing (1337 vs 1315). The remaining designed part is the dedup key, not the model, and the binding constraint on the whole idea is the specification: three successive goals were satisfied by plans that destroyed a stash, a history, or another branch.",
  "recursive_obs": {
-  "canonical_base_commit": "932ddb7889d45d12c9725967927a5e642cb86153",
+  "canonical_base_commit": "9d9aeb21b6eac03f132c643584f11bd035baf977",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "the learned transition model as a planning substrate (environment_learning_v1) -- on a machine the successor is had, not predicted",
@@ -322,7 +322,7 @@
      "route": "INDEX_ACTIONS_BY_THE_FAILING_RUN_NOT_BY_THE_SOURCE_TEXT"
     }
    ],
-   "checked_at_utc": "2026-11-19T04:12:12Z",
+   "checked_at_utc": "2026-11-19T04:20:12Z",
    "comparison_dimensions": [
     "CORRECTNESS",
     "CAPABILITY_STRENGTH",
@@ -362,7 +362,7 @@
    "selected_route": "BRANCH_AS_VERIFIER: COPY THE STATE, RUN THE ACTION, SEARCH REAL STATES, PREDICT NOTHING",
    "selected_route_preflight": {
     "all_required_dependencies_ready": true,
-    "checked_at_utc": "2026-11-19T04:12:12Z",
+    "checked_at_utc": "2026-11-19T04:20:12Z",
     "execution_dependencies": [
      {
       "dependency": "local Python 3.11 runtime with pytest",
