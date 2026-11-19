@@ -1,0 +1,973 @@
+{
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "cost": {
+  "model_calls": 0,
+  "network_calls_at_run_time": 0,
+  "parameters_stored": 0,
+  "seconds": 0.2
+ },
+ "date": "2026-11-19",
+ "declared_acceptance_before_the_receipt_run": {
+  "K1": "one execution per action, every changed path inside an argument or a container member of one",
+  "K2": "every changed path's value is explained by a relation against the pre-state; ambiguity reported",
+  "K3": "applied blind to three unexecuted variants, the predicted tree matches byte-for-byte",
+  "K4": "cp's goal is inexpressible in a presence-only vocabulary and one step under provenance",
+  "K5": "the second step fails alone, succeeds after the first, and the final tree is predicted first",
+  "K6": "zero model calls, parameters, network"
+ },
+ "limits": [
+  "the provenance relation library is small and written: identity, gunzip, tar member, sorted lines, empty, plus kind/link/mode/delete. An effect expressed by a relation outside it is reported as unexplained",
+  "eight binaries over a file tree; a GUI has no byte-identical delta and would need its own provenance lattice, which this receipt does not claim",
+  "actions that read ambient state (a build system reading timestamps, git reading an index) are not in this pool: their effects are conditioned on facts, which is what the refusal-surface round provides",
+  "three held-out variants per action; the variants vary names, nesting, sizes and payloads, not yet the shape of the action's own arguments",
+  "no claim of independent verification"
+ ],
+ "mode": "EFFECT_VOCABULARY_DERIVED_FROM_PROVENANCE_IN_ONE_EXECUTION",
+ "per_action": {
+  "chmod_600": {
+   "ambiguous_explanations": [],
+   "content_and_kind_exact": 3,
+   "held_out": [
+    {
+     "content_and_kind_exact": true,
+     "message": "",
+     "mismatched": [],
+     "rc": 0,
+     "variant": 1,
+     "whole_tree_exact_including_mode": true
+    },
+    {
+     "content_and_kind_exact": true,
+     "message": "",
+     "mismatched": [],
+     "rc": 0,
+     "variant": 2,
+     "whole_tree_exact_including_mode": true
+    },
+    {
+     "content_and_kind_exact": true,
+     "message": "",
+     "mismatched": [],
+     "rc": 0,
+     "variant": 3,
+     "whole_tree_exact_including_mode": true
+    }
+   ],
+   "one_execution_changed": [
+    "mode/m0.txt"
+   ],
+   "rule": [
+    {
+     "dest": [
+      {
+       "index": 2,
+       "kind": "arg"
+      }
+     ],
+     "mode": 384,
+     "path": "mode/m0.txt",
+     "value": {
+      "relation": "identity",
+      "source_arg": 2
+     }
+    }
+   ],
+   "support_contained": true,
+   "unexplained_paths": [],
+   "whole_tree_exact": 3
+  },
+  "cp": {
+   "ambiguous_explanations": [],
+   "content_and_kind_exact": 3,
+   "held_out": [
+    {
+     "content_and_kind_exact": true,
+     "message": "",
+     "mismatched": [],
+     "rc": 0,
+     "variant": 1,
+     "whole_tree_exact_including_mode": true
+    },
+    {
+     "content_and_kind_exact": true,
+     "message": "",
+     "mismatched": [],
+     "rc": 0,
+     "variant": 2,
+     "whole_tree_exact_including_mode": true
+    },
+    {
+     "content_and_kind_exact": true,
+     "message": "",
+     "mismatched": [],
+     "rc": 0,
+     "variant": 3,
+     "whole_tree_exact_including_mode": true
+    }
+   ],
+   "one_execution_changed": [
+    "out/copy.txt"
+   ],
+   "rule": [
+    {
+     "dest": [
+      {
+       "index": 2,
+       "kind": "arg"
+      }
+     ],
+     "mode": 420,
+     "path": "out/copy.txt",
+     "value": {
+      "relation": "identity",
+      "source_arg": 1
+     }
+    }
+   ],
+   "support_contained": true,
+   "unexplained_paths": [],
+   "whole_tree_exact": 3
+  },
+  "gzip_d": {
+   "ambiguous_explanations": [],
+   "content_and_kind_exact": 3,
+   "held_out": [
+    {
+     "content_and_kind_exact": true,
+     "message": "",
+     "mismatched": [],
+     "rc": 0,
+     "variant": 1,
+     "whole_tree_exact_including_mode": true
+    },
+    {
+     "content_and_kind_exact": true,
+     "message": "",
+     "mismatched": [],
+     "rc": 0,
+     "variant": 2,
+     "whole_tree_exact_including_mode": true
+    },
+    {
+     "content_and_kind_exact": true,
+     "message": "",
+     "mismatched": [],
+     "rc": 0,
+     "variant": 3,
+     "whole_tree_exact_including_mode": true
+    }
+   ],
+   "one_execution_changed": [
+    "pack/blob0"
+   ],
+   "rule": [
+    {
+     "dest": [
+      {
+       "index": 2,
+       "kind": "derived",
+       "suffix": ".gz"
+      }
+     ],
+     "mode": 420,
+     "path": "pack/blob0",
+     "value": {
+      "relation": "gunzip",
+      "source_arg": 2
+     }
+    }
+   ],
+   "support_contained": true,
+   "unexplained_paths": [],
+   "whole_tree_exact": 3
+  },
+  "ln_s": {
+   "ambiguous_explanations": [],
+   "content_and_kind_exact": 3,
+   "held_out": [
+    {
+     "content_and_kind_exact": true,
+     "message": "",
+     "mismatched": [],
+     "rc": 0,
+     "variant": 1,
+     "whole_tree_exact_including_mode": true
+    },
+    {
+     "content_and_kind_exact": true,
+     "message": "",
+     "mismatched": [],
+     "rc": 0,
+     "variant": 2,
+     "whole_tree_exact_including_mode": true
+    },
+    {
+     "content_and_kind_exact": true,
+     "message": "",
+     "mismatched": [],
+     "rc": 0,
+     "variant": 3,
+     "whole_tree_exact_including_mode": true
+    }
+   ],
+   "one_execution_changed": [
+    "links/l0.txt"
+   ],
+   "rule": [
+    {
+     "dest": [
+      {
+       "index": 3,
+       "kind": "arg"
+      }
+     ],
+     "path": "links/l0.txt",
+     "value": {
+      "kind": "link",
+      "target": "../src/t0.txt",
+      "target_arg": 2
+     }
+    }
+   ],
+   "support_contained": true,
+   "unexplained_paths": [],
+   "whole_tree_exact": 3
+  },
+  "mkdir": {
+   "ambiguous_explanations": [],
+   "content_and_kind_exact": 3,
+   "held_out": [
+    {
+     "content_and_kind_exact": true,
+     "message": "",
+     "mismatched": [],
+     "rc": 0,
+     "variant": 1,
+     "whole_tree_exact_including_mode": true
+    },
+    {
+     "content_and_kind_exact": true,
+     "message": "",
+     "mismatched": [],
+     "rc": 0,
+     "variant": 2,
+     "whole_tree_exact_including_mode": true
+    },
+    {
+     "content_and_kind_exact": true,
+     "message": "",
+     "mismatched": [],
+     "rc": 0,
+     "variant": 3,
+     "whole_tree_exact_including_mode": true
+    }
+   ],
+   "one_execution_changed": [
+    "made/d0"
+   ],
+   "rule": [
+    {
+     "dest": [
+      {
+       "index": 1,
+       "kind": "arg"
+      }
+     ],
+     "path": "made/d0",
+     "value": {
+      "kind": "dir"
+     }
+    }
+   ],
+   "support_contained": true,
+   "unexplained_paths": [],
+   "whole_tree_exact": 3
+  },
+  "rm_f": {
+   "ambiguous_explanations": [],
+   "content_and_kind_exact": 3,
+   "held_out": [
+    {
+     "content_and_kind_exact": true,
+     "message": "",
+     "mismatched": [],
+     "rc": 0,
+     "variant": 1,
+     "whole_tree_exact_including_mode": true
+    },
+    {
+     "content_and_kind_exact": true,
+     "message": "",
+     "mismatched": [],
+     "rc": 0,
+     "variant": 2,
+     "whole_tree_exact_including_mode": true
+    },
+    {
+     "content_and_kind_exact": true,
+     "message": "",
+     "mismatched": [],
+     "rc": 0,
+     "variant": 3,
+     "whole_tree_exact_including_mode": true
+    }
+   ],
+   "one_execution_changed": [
+    "junk/j0.txt"
+   ],
+   "rule": [
+    {
+     "dest": [
+      {
+       "index": 2,
+       "kind": "arg"
+      }
+     ],
+     "path": "junk/j0.txt",
+     "value": {
+      "kind": "delete"
+     }
+    }
+   ],
+   "support_contained": true,
+   "unexplained_paths": [],
+   "whole_tree_exact": 3
+  },
+  "sort_o": {
+   "ambiguous_explanations": [],
+   "content_and_kind_exact": 3,
+   "held_out": [
+    {
+     "content_and_kind_exact": true,
+     "message": "",
+     "mismatched": [],
+     "rc": 0,
+     "variant": 1,
+     "whole_tree_exact_including_mode": true
+    },
+    {
+     "content_and_kind_exact": true,
+     "message": "",
+     "mismatched": [],
+     "rc": 0,
+     "variant": 2,
+     "whole_tree_exact_including_mode": true
+    },
+    {
+     "content_and_kind_exact": true,
+     "message": "",
+     "mismatched": [],
+     "rc": 0,
+     "variant": 3,
+     "whole_tree_exact_including_mode": true
+    }
+   ],
+   "one_execution_changed": [
+    "txt/s0.txt"
+   ],
+   "rule": [
+    {
+     "dest": [
+      {
+       "index": 2,
+       "kind": "arg"
+      }
+     ],
+     "mode": 420,
+     "path": "txt/s0.txt",
+     "value": {
+      "relation": "sort_lines",
+      "source_arg": 3
+     }
+    }
+   ],
+   "support_contained": true,
+   "unexplained_paths": [],
+   "whole_tree_exact": 3
+  },
+  "tar_x": {
+   "ambiguous_explanations": [],
+   "content_and_kind_exact": 3,
+   "held_out": [
+    {
+     "content_and_kind_exact": true,
+     "message": "",
+     "mismatched": [],
+     "rc": 0,
+     "variant": 1,
+     "whole_tree_exact_including_mode": true
+    },
+    {
+     "content_and_kind_exact": true,
+     "message": "",
+     "mismatched": [],
+     "rc": 0,
+     "variant": 2,
+     "whole_tree_exact_including_mode": true
+    },
+    {
+     "content_and_kind_exact": true,
+     "message": "",
+     "mismatched": [],
+     "rc": 0,
+     "variant": 3,
+     "whole_tree_exact_including_mode": true
+    }
+   ],
+   "one_execution_changed": [
+    "out/m0",
+    "out/m0/deep",
+    "out/m0/deep/second.txt",
+    "out/m0/first.txt"
+   ],
+   "rule": [
+    {
+     "dest": [
+      {
+       "index": 4,
+       "kind": "under_arg",
+       "rest": "m0"
+      }
+     ],
+     "path": "out/m0",
+     "value": {
+      "kind": "dir"
+     }
+    },
+    {
+     "dest": [
+      {
+       "index": 4,
+       "kind": "under_arg",
+       "rest": "m0/deep"
+      }
+     ],
+     "path": "out/m0/deep",
+     "value": {
+      "kind": "dir"
+     }
+    },
+    {
+     "dest": [
+      {
+       "index": 4,
+       "kind": "under_arg",
+       "rest": "m0/deep/second.txt"
+      }
+     ],
+     "mode": 420,
+     "path": "out/m0/deep/second.txt",
+     "value": {
+      "container_arg": 2,
+      "member": "m0/deep/second.txt",
+      "relation": "tar_member"
+     }
+    },
+    {
+     "dest": [
+      {
+       "index": 4,
+       "kind": "under_arg",
+       "rest": "m0/first.txt"
+      }
+     ],
+     "mode": 420,
+     "path": "out/m0/first.txt",
+     "value": {
+      "container_arg": 2,
+      "member": "m0/first.txt",
+      "relation": "tar_member"
+     }
+    }
+   ],
+   "support_contained": true,
+   "unexplained_paths": [],
+   "whole_tree_exact": 3
+  }
+ },
+ "schema": "BRAIN_AN_ACTIONS_EFFECT_IS_A_PROVENANCE_MAP_V1",
+ "state_definition": {
+  "excluded": [
+   "mtime",
+   "atime",
+   "owner"
+  ],
+  "per_path": [
+   "kind",
+   "content_sha256_or_link_target",
+   "mode"
+  ]
+ },
+ "verdict": {
+  "K1_one_execution_yields_a_localised_delta_inside_a_derivable_support": {
+   "MET": true,
+   "actions": 8,
+   "changed_paths_per_action": {
+    "chmod_600": 1,
+    "cp": 1,
+    "gzip_d": 1,
+    "ln_s": 1,
+    "mkdir": 1,
+    "rm_f": 1,
+    "sort_o": 1,
+    "tar_x": 4
+   },
+   "executions": 35,
+   "support_contained": {
+    "chmod_600": true,
+    "cp": true,
+    "gzip_d": true,
+    "ln_s": true,
+    "mkdir": true,
+    "rm_f": true,
+    "sort_o": true,
+    "tar_x": true
+   }
+  },
+  "K2_provenance_explains_every_change": {
+   "MET": true,
+   "alternatives_reported": {
+    "chmod_600": [],
+    "cp": [],
+    "gzip_d": [],
+    "ln_s": [],
+    "mkdir": [],
+    "rm_f": [],
+    "sort_o": [],
+    "tar_x": []
+   },
+   "rules": {
+    "chmod_600": [
+     {
+      "dest": [
+       {
+        "index": 2,
+        "kind": "arg"
+       }
+      ],
+      "mode": 384,
+      "path": "mode/m0.txt",
+      "value": {
+       "relation": "identity",
+       "source_arg": 2
+      }
+     }
+    ],
+    "cp": [
+     {
+      "dest": [
+       {
+        "index": 2,
+        "kind": "arg"
+       }
+      ],
+      "mode": 420,
+      "path": "out/copy.txt",
+      "value": {
+       "relation": "identity",
+       "source_arg": 1
+      }
+     }
+    ],
+    "gzip_d": [
+     {
+      "dest": [
+       {
+        "index": 2,
+        "kind": "derived",
+        "suffix": ".gz"
+       }
+      ],
+      "mode": 420,
+      "path": "pack/blob0",
+      "value": {
+       "relation": "gunzip",
+       "source_arg": 2
+      }
+     }
+    ],
+    "ln_s": [
+     {
+      "dest": [
+       {
+        "index": 3,
+        "kind": "arg"
+       }
+      ],
+      "path": "links/l0.txt",
+      "value": {
+       "kind": "link",
+       "target": "../src/t0.txt",
+       "target_arg": 2
+      }
+     }
+    ],
+    "mkdir": [
+     {
+      "dest": [
+       {
+        "index": 1,
+        "kind": "arg"
+       }
+      ],
+      "path": "made/d0",
+      "value": {
+       "kind": "dir"
+      }
+     }
+    ],
+    "rm_f": [
+     {
+      "dest": [
+       {
+        "index": 2,
+        "kind": "arg"
+       }
+      ],
+      "path": "junk/j0.txt",
+      "value": {
+       "kind": "delete"
+      }
+     }
+    ],
+    "sort_o": [
+     {
+      "dest": [
+       {
+        "index": 2,
+        "kind": "arg"
+       }
+      ],
+      "mode": 420,
+      "path": "txt/s0.txt",
+      "value": {
+       "relation": "sort_lines",
+       "source_arg": 3
+      }
+     }
+    ],
+    "tar_x": [
+     {
+      "dest": [
+       {
+        "index": 4,
+        "kind": "under_arg",
+        "rest": "m0"
+       }
+      ],
+      "path": "out/m0",
+      "value": {
+       "kind": "dir"
+      }
+     },
+     {
+      "dest": [
+       {
+        "index": 4,
+        "kind": "under_arg",
+        "rest": "m0/deep"
+       }
+      ],
+      "path": "out/m0/deep",
+      "value": {
+       "kind": "dir"
+      }
+     },
+     {
+      "dest": [
+       {
+        "index": 4,
+        "kind": "under_arg",
+        "rest": "m0/deep/second.txt"
+       }
+      ],
+      "mode": 420,
+      "path": "out/m0/deep/second.txt",
+      "value": {
+       "container_arg": 2,
+       "member": "m0/deep/second.txt",
+       "relation": "tar_member"
+      }
+     },
+     {
+      "dest": [
+       {
+        "index": 4,
+        "kind": "under_arg",
+        "rest": "m0/first.txt"
+       }
+      ],
+      "mode": 420,
+      "path": "out/m0/first.txt",
+      "value": {
+       "container_arg": 2,
+       "member": "m0/first.txt",
+       "relation": "tar_member"
+      }
+     }
+    ]
+   },
+   "unexplained": {
+    "chmod_600": [],
+    "cp": [],
+    "gzip_d": [],
+    "ln_s": [],
+    "mkdir": [],
+    "rm_f": [],
+    "sort_o": [],
+    "tar_x": []
+   }
+  },
+  "K3_one_execution_predicts_unexecuted_states_whole_tree": {
+   "MET": true,
+   "content_and_kind_exact": 24,
+   "held_out_states": 24,
+   "per_action": {
+    "chmod_600": [
+     {
+      "content_and_kind_exact": true,
+      "message": "",
+      "mismatched": [],
+      "rc": 0,
+      "variant": 1,
+      "whole_tree_exact_including_mode": true
+     },
+     {
+      "content_and_kind_exact": true,
+      "message": "",
+      "mismatched": [],
+      "rc": 0,
+      "variant": 2,
+      "whole_tree_exact_including_mode": true
+     },
+     {
+      "content_and_kind_exact": true,
+      "message": "",
+      "mismatched": [],
+      "rc": 0,
+      "variant": 3,
+      "whole_tree_exact_including_mode": true
+     }
+    ],
+    "cp": [
+     {
+      "content_and_kind_exact": true,
+      "message": "",
+      "mismatched": [],
+      "rc": 0,
+      "variant": 1,
+      "whole_tree_exact_including_mode": true
+     },
+     {
+      "content_and_kind_exact": true,
+      "message": "",
+      "mismatched": [],
+      "rc": 0,
+      "variant": 2,
+      "whole_tree_exact_including_mode": true
+     },
+     {
+      "content_and_kind_exact": true,
+      "message": "",
+      "mismatched": [],
+      "rc": 0,
+      "variant": 3,
+      "whole_tree_exact_including_mode": true
+     }
+    ],
+    "gzip_d": [
+     {
+      "content_and_kind_exact": true,
+      "message": "",
+      "mismatched": [],
+      "rc": 0,
+      "variant": 1,
+      "whole_tree_exact_including_mode": true
+     },
+     {
+      "content_and_kind_exact": true,
+      "message": "",
+      "mismatched": [],
+      "rc": 0,
+      "variant": 2,
+      "whole_tree_exact_including_mode": true
+     },
+     {
+      "content_and_kind_exact": true,
+      "message": "",
+      "mismatched": [],
+      "rc": 0,
+      "variant": 3,
+      "whole_tree_exact_including_mode": true
+     }
+    ],
+    "ln_s": [
+     {
+      "content_and_kind_exact": true,
+      "message": "",
+      "mismatched": [],
+      "rc": 0,
+      "variant": 1,
+      "whole_tree_exact_including_mode": true
+     },
+     {
+      "content_and_kind_exact": true,
+      "message": "",
+      "mismatched": [],
+      "rc": 0,
+      "variant": 2,
+      "whole_tree_exact_including_mode": true
+     },
+     {
+      "content_and_kind_exact": true,
+      "message": "",
+      "mismatched": [],
+      "rc": 0,
+      "variant": 3,
+      "whole_tree_exact_including_mode": true
+     }
+    ],
+    "mkdir": [
+     {
+      "content_and_kind_exact": true,
+      "message": "",
+      "mismatched": [],
+      "rc": 0,
+      "variant": 1,
+      "whole_tree_exact_including_mode": true
+     },
+     {
+      "content_and_kind_exact": true,
+      "message": "",
+      "mismatched": [],
+      "rc": 0,
+      "variant": 2,
+      "whole_tree_exact_including_mode": true
+     },
+     {
+      "content_and_kind_exact": true,
+      "message": "",
+      "mismatched": [],
+      "rc": 0,
+      "variant": 3,
+      "whole_tree_exact_including_mode": true
+     }
+    ],
+    "rm_f": [
+     {
+      "content_and_kind_exact": true,
+      "message": "",
+      "mismatched": [],
+      "rc": 0,
+      "variant": 1,
+      "whole_tree_exact_including_mode": true
+     },
+     {
+      "content_and_kind_exact": true,
+      "message": "",
+      "mismatched": [],
+      "rc": 0,
+      "variant": 2,
+      "whole_tree_exact_including_mode": true
+     },
+     {
+      "content_and_kind_exact": true,
+      "message": "",
+      "mismatched": [],
+      "rc": 0,
+      "variant": 3,
+      "whole_tree_exact_including_mode": true
+     }
+    ],
+    "sort_o": [
+     {
+      "content_and_kind_exact": true,
+      "message": "",
+      "mismatched": [],
+      "rc": 0,
+      "variant": 1,
+      "whole_tree_exact_including_mode": true
+     },
+     {
+      "content_and_kind_exact": true,
+      "message": "",
+      "mismatched": [],
+      "rc": 0,
+      "variant": 2,
+      "whole_tree_exact_including_mode": true
+     },
+     {
+      "content_and_kind_exact": true,
+      "message": "",
+      "mismatched": [],
+      "rc": 0,
+      "variant": 3,
+      "whole_tree_exact_including_mode": true
+     }
+    ],
+    "tar_x": [
+     {
+      "content_and_kind_exact": true,
+      "message": "",
+      "mismatched": [],
+      "rc": 0,
+      "variant": 1,
+      "whole_tree_exact_including_mode": true
+     },
+     {
+      "content_and_kind_exact": true,
+      "message": "",
+      "mismatched": [],
+      "rc": 0,
+      "variant": 2,
+      "whole_tree_exact_including_mode": true
+     },
+     {
+      "content_and_kind_exact": true,
+      "message": "",
+      "mismatched": [],
+      "rc": 0,
+      "variant": 3,
+      "whole_tree_exact_including_mode": true
+     }
+    ]
+   },
+   "whole_tree_exact_including_mode": 24
+  },
+  "K4_the_effect_vocabulary_now_names_what_it_could_not": {
+   "MET": true,
+   "action": "cp",
+   "counterexample": {
+    "indistinguishable_to_a_presence_only_vocabulary": true,
+    "the_goal_differs_between_them": true,
+    "two_states_with_identical_presence_and_mode": true
+   },
+   "presence_only_vocabulary_expressible": false,
+   "prior_art_it_closes": "compose_measured_effects_v1: 'cp (which duplicates a content, a shape outside the three-effect vocabulary) is unusable'",
+   "provenance_names_it": true,
+   "the_goal": "the destination has the source's content",
+   "what_the_old_vocabulary_could_say": "{created, deleted, inert} -- so the goal is not statable"
+  },
+  "K5_two_actions_compose_when_the_second_precondition_is_the_firsts_effect": {
+   "MET": true,
+   "composed_goal_reached": true,
+   "first_step_rc": 0,
+   "predicted_before_execution": true,
+   "reachable_under_presence_only": false,
+   "second_step_alone_message": "cp: cannot create regular file 'out/deep/x.txt': No such file or directory",
+   "second_step_alone_rc": 1,
+   "second_step_rc": 0
+  },
+  "K6_zero": {
+   "MET": true,
+   "model_calls": 0,
+   "network_calls_at_run_time": 0,
+   "parameters_stored": 0
+  }
+ },
+ "why_this_round": {
+  "the_answer_being_tested": "an effect is a provenance map from post-state values to pre-state values; it is inferred from one execution and transports to unexecuted states, so the vocabulary is generated by the action rather than designed for it",
+  "the_gap_it_closes": "compose_measured_effects_v1 can only use effects its hand-designed vocabulary can name, so `cp` was unusable and any goal about a duplicated content was unreachable",
+  "why_it_could_fail": "if a changed path lies outside the derivable support; if a value has no provenance in the pre-state; if the rule does not transport to states with different names, sizes and nesting"
+ }
+}
