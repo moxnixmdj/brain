@@ -50,7 +50,7 @@
  "causal_blocker": "The wall is coverage, not hypotheses, and coverage is an exploration budget: the agent must visit states that vary the facts it needs to rule out, and it cannot know which those are until it has visited them. Soundness and coverage are both necessary -- coverage without soundness is undecided, soundness without coverage is confidently wrong -- so the one thing worth parameters is choosing the next state variation that maximally splits the survivor set, with any column whose check disagrees with the action's own outcome rejected first.",
  "date": "2026-11-19",
  "expected_parent_change": "Closes the open thread in the certificate the question names. INSUFFICIENCY_CERTIFICATE_20261113 closed the vocabulary to 31 facts and found the obstacle 'moved from representation to combinatorics': 8,388,608 hypotheses against a learner cap of 12. Measured here on nine real actions, 36 real states and 17 real facts (486 executions): identification never enumerates that space. One success plus the two nearest refusals -- the charitable form of 'experience each action once' -- leaves 4,096-16,384 survivors that agree on nothing off-sample (6-12 of 12 held-out states undecided, set accuracy 0.000-0.333). Adding VARIED successes collapses them to 2-4 and is exact on held-out for 6 of 9 actions in at most 24 executions, because only a success in which a fact is FALSE can eliminate the superset -- so a success is the irrelevance evidence, correcting the previous round's 'a success teaches nothing'. The three residue cases are named, one of them (tar_x) for an UNSOUND column: its fact is computed by tar -tzf, which returns 0 for a gzip of garbage. Confident error: zero; the failure mode is abstention, which is the only safe one. n=17 costs 131,072 subsets and 129,140,163 conjunctions, and nothing enumerates either.",
- "expected_parent_frontier_change": "The wall is coverage, not hypotheses, and coverage is an exploration budget: the agent must visit states that vary the facts it needs to rule out, and it cannot know which those are until it has visited them. Soundness and coverage are both necessary -- coverage without soundness is undecided, soundness without coverage is confidently wrong -- so the one thing worth parameters is choosing the next state variation that maximally splits the survivor set, with any column whose check disagrees with the action's own outcome rejected first.",
+ "expected_parent_frontier_change": "A fact is a prediction of the action it gates, not a description of the world. Reader agreement locates doubt; only the executed outcome decides. With no unsound columns left in the pool, the entire remaining loss is which state to execute next.",
  "expected_parent_level_state_change": "The wall is coverage, not hypotheses, and coverage is an exploration budget: the agent must visit states that vary the facts it needs to rule out, and it cannot know which those are until it has visited them. Soundness and coverage are both necessary -- coverage without soundness is undecided, soundness without coverage is confidently wrong -- so the one thing worth parameters is choosing the next state variation that maximally splits the survivor set, with any column whose check disagrees with the action's own outcome rejected first.",
  "explicit_user_authorization": [
   "Why can't we just give our model the most advanced coding actions, let it experience them once, and have it learn them? Can't we do this now?",
@@ -155,15 +155,15 @@
  ],
  "real_outcome": "That the certificate's 8,388,608 was the cost of enumerating, not of identifying: identification is coverage-linear (<=24 executions), a success is the irrelevance evidence, and the residue is abstention caused either by unvaried facts or by a column whose check is narrower than its claim.",
  "recursive_obs": {
-  "canonical_base_commit": "9e832e7263bbbfb378c6f21b28c5bf8e3e021823",
+  "canonical_base_commit": "c779c37551b4ec0977b249d846dc7f1ad6461835",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
-   "the claim that tar -tzf is an unsound column (the previous round's own written stop condition)",
-   "consensus as the arbiter of a fact",
-   "the reading that an abstention proves the column wrong"
+   "the enumeration of hypothesis sets",
+   "the claim that a success teaches nothing",
+   "trusting a cheap check as a fact"
   ],
   "expected_parent_frontier_change": "The wall is coverage, not hypotheses, and coverage is an exploration budget: the agent must visit states that vary the facts it needs to rule out, and it cannot know which those are until it has visited them. Soundness and coverage are both necessary -- coverage without soundness is undecided, soundness without coverage is confidently wrong -- so the one thing worth parameters is choosing the next state variation that maximally splits the survivor set, with any column whose check disagrees with the action's own outcome rejected first.",
-  "expected_parent_level_state_change": "A fact is a prediction of the action it gates, not a description of the world. Reader agreement locates doubt; only the outcome decides. With no unsound columns left, the entire remaining loss is which state to execute next.",
+  "expected_parent_level_state_change": "A fact is a prediction of the action it gates, not a description of the world. Reader agreement locates doubt; only the executed outcome decides. With no unsound columns left in the pool, the entire remaining loss is which state to execute next.",
   "independent_verification_required": true,
   "iteration_limit": 1,
   "next_step": "Replace the coverage search with a computed one: given a survivor set, select the next state variation that maximally splits it (a fact whose value is unpinned, made true in one state and false in another, with the action validated by the fact vector before execution). Measure (1) variations needed to reach a behaviourally unique set must fall below the count of unpinned facts, (2) every chosen variation must be realisable without an invalid state, (3) a soundness pre-check must reject tar -tzf as a column before it poisons a rule. Falsifiers: if a computed variation never beats an arbitrary one, the survivor set carries no usable signal; if a variation cannot be realised validly, the vocabulary's reach is the limit rather than the policy; if the pre-check rejects a sound column, the law is one-sided.",
@@ -173,8 +173,8 @@
     "bypass the reset convention with a deeper run set: depth cannot help, because the equivalence is forced at every depth by the count starting at zero",
     "substitute more environments for the missing pre-state: the third environment removed nothing, and the pre-state removed the pair"
    ],
-   "intrinsic_or_path_specific": "Trial-and-error is sound iff failure is free, and a failure is free iff the attempt happens in a stage and the commit is one rename. On real actions a refused attempt costs a copy of the tree and leaves the live tree byt",
-   "surviving_causal_blocker": "Trial-and-error is sound iff failure is free, and a failure is free iff the attempt happens in a stage and the commit is one rename. On real actions a refused attempt costs a copy of the tree and leaves the live tree byt"
+   "intrinsic_or_path_specific": "A reader disagrees with the column on the gzip whose payload is not an archive. The disagreement is not the blocker -- the blocker was the assumption that agreement with the world is what a column is for.",
+   "surviving_causal_blocker": "A reader disagrees with the column on the gzip whose payload is not an archive. The disagreement is not the blocker -- the blocker was the assumption that agreement with the world is what a column is for."
   },
   "obs_capability": {
    "capability_work_deleted": [
@@ -194,7 +194,7 @@
     "conformance testing without a reliable reset (Lee-Yannakakis, UIOv): the reset assumption is known to hide behaviour reachable only from other states",
     "2026 benchmark analyses separating task difficulty from world richness, and stateful/continual learning benchmarks: a fixed initial state and a reset hide whether anything was learned"
    ],
-   "surviving_gap": "Trial-and-error is sound iff failure is free, and a failure is free iff the attempt happens in a stage and the commit is one rename. On real actions a refused attempt costs a copy of the tree and leaves the live tree byt"
+   "surviving_gap": "Two independent implementations per fact (shell tools vs stdlib gzip/tarfile/os.lstat/pathlib/hunk matching), a conformance test per action over the whole pool, and a held-out accuracy comparison between the primary and conjunction columns."
   },
   "obs_goal": {
    "proxy_goals_deleted": [
@@ -202,18 +202,54 @@
     "a run set that is deep but always begins in the same state",
     "the pair alone as the unit: the whole grammar's goal class is reported before and after"
    ],
-   "real_outcome": "Trial-and-error is sound iff failure is free, and a failure is free iff the attempt happens in a stage and the commit is one rename. On real actions a refused attempt costs a copy of the tree and leaves the live tree byt",
-   "surviving_necessity": "Trial-and-error is sound iff failure is free, and a failure is free iff the attempt happens in a stage and the commit is one rename. On real actions a refused attempt costs a copy of the tree and leaves the live tree byt"
+   "real_outcome": "Establish whether a fact may be arbitrated by independent readers. It may not: the divergence is real and free, but the verdict belongs to the action the fact gates.",
+   "surviving_necessity": "Establish whether a fact may be arbitrated by independent readers. It may not: the divergence is real and free, but the verdict belongs to the action the fact gates."
   },
   "obs_inherited_system": {
-   "adjacent_capabilities_absorbed": "Trial-and-error is sound iff failure is free, and a failure is free iff the attempt happens in a stage and the commit is one rename. On real actions a refused attempt costs a copy of the tree and leaves the live tree byt",
-   "downstream_work_to_delete_or_supersede": "Trial-and-error is sound iff failure is free, and a failure is free iff the attempt happens in a stage and the commit is one rename. On real actions a refused attempt costs a copy of the tree and leaves the live tree byt",
-   "fresh_reuse_plan": "Trial-and-error is sound iff failure is free, and a failure is free iff the attempt happens in a stage and the commit is one rename. On real actions a refused attempt costs a copy of the tree and leaves the live tree byt"
+   "adjacent_capabilities_absorbed": "Reuses the coverage round's 37-state pool, nine actions, mask/survivors/nearest/behaviour, and the refusal round's world and runner; no new world trials were added.",
+   "downstream_work_to_delete_or_supersede": "Reuses the coverage round's 37-state pool, nine actions, mask/survivors/nearest/behaviour, and the refusal round's world and runner; no new world trials were added.",
+   "fresh_reuse_plan": "Reuses the coverage round's 37-state pool, nine actions, mask/survivors/nearest/behaviour, and the refusal round's world and runner; no new world trials were added."
   },
-  "obs_obs": "Two independent implementations of every fact, 34 readings over 37 states, diverge on exactly one fact at exactly one state. The third reading confirms the world's view; the action's own exit status confirms the column's. Consensus arbitration costs 0.077 on tar_x and buys nothing anywhere, so the arbiter is conformance, not agreement.",
-  "obs_solution": "Keep both readers because reading is free and divergence is how the doubt is located; never let them vote. Judge a column by whether it predicts the action on every state of the pool, and let the executed outcome override any consensus, including a consensus with the world.",
-  "obs_verification": "6 of 6 declared gates MET, 17 tests green, 37 states byte-identical after all readings, no fact turned false->true, 9 of 9 columns conform to their action, 0 model calls, 0 parameters, 0 network.",
-  "real_outcome": "The previous round's unsound-column attribution for tar_x is withdrawn: tar -xzf exits zero on the gzip of garbage, so the shell check was a faithful predictor. All three abstentions are coverage, one cause not two.",
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": "Deleted: the assumption that an independent reader may convict a column, and the previous round's soundness gate. Cached: the 37-state pool and its measured actions.",
+   "search_stop_decision": "Next: act on the corrected attribution. Since no column is unsound and every abstention left is coverage, the lever is choosing the next state, not the next reader. Measure whether a computed next-variation rule (pick the fact that splits the survivor set most, validate the state by the fact vector before executing) reaches a behaviourally unique set within the number of unpinned facts."
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "efficiency_mechanism": "Keep both readers because reading is free and divergence locates the doubt; never let them vote. Judge a column by conformance to its action, and let the executed outcome override any consensus, including a consensus with the world.",
+   "generality_mechanism": "Keep both readers because reading is free and divergence locates the doubt; never let them vote. Judge a column by conformance to its action, and let the executed outcome override any consensus, including a consensus with the world.",
+   "implementation_still_necessary": true,
+   "lo": "",
+   "losing_routes_reason": "Keep both readers because reading is free and divergence locates the doubt; never let them vote. Judge a column by conformance to its action, and let the executed outcome override any consensus, including a consensus with the world.",
+   "routes_ranked": [
+    "a decision made by a free attempt rather than a reading",
+    "ask the user which of the two sentences was meant",
+    "deepen or widen the reset-started suite",
+    "train or distil something to guess the goal"
+   ]
+  },
+  "obs_verification": {
+   "authority": "6 of 6 declared gates MET, 17 tests green, 37 states byte-identical after 34 readings, no fact turned false->true, 9 of 9 columns conform, 0 model calls, 0 parameters, 0 network.",
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "oracle_paths": [
+    "canonical/verification/A_FACT_IS_A_CONJUNCTION_OF_ITS_READERS_20261119_V1.json",
+    "canonical/tests/test_a_fact_is_a_conjunction_of_its_readers_v1.py"
+   ],
+   "synthetic_verification_necessity": "None: 34 readings and every action executed against 37 real trees; no synthetic state speaks for a real tool",
+   "what_the_tests_pin": "that consensus never beats the primary column on any action; that the action succeeds on the diverging state; that no column fails conformance; that the conjunction only ever turns a fact false; that every state is byte-identical after reading; that a fresh run reproduces the receipt"
+  },
+  "real_outcome": "The previous round's unsound-column attribution for tar_x is withdrawn: tar -xzf exits zero on the gzip of garbage, so the shell check was a faithful predictor. All three abstentions are coverage -- one cause, not two.",
   "required_capability": "measuring one outcome per (action, state) on real binaries, representing survivors as bitmasks, and scoring a survivor set as a rule only where it is unanimous",
   "route_frontier": {
    "challenger_routes": [
@@ -600,7 +636,7 @@
   "selected_surviving_route_class": "SYNTHESIZE_NEW_PRIMITIVE",
   "stop_condition": "Next: act on the corrected attribution. Since no column is unsound and every abstention left is coverage, the lever is choosing the next state, not the next reader. Measure whether a computed next-variation rule (pick the fact that splits the survivor set most, validate the state by the fact vector before executing) reaches a behaviourally unique set within the number of unpinned facts.",
   "truth_blocker_note": "The wall is coverage, not hypotheses, and coverage is an exploration budget: the agent must visit states that vary the facts it needs to rule out, and it cannot know which those are until it has visited them. Soundness and coverage are both necessary -- coverage without soundness is undecided, soundness without coverage is confidently wrong -- so the one thing worth parameters is choosing the next state variation that maximally splits the survivor set, with any column whose check disagrees with the action's own outcome rejected first.",
-  "why_selected_route_is_fastest_sufficient": "It needs no new world and no new executions: reading is free, and the round reuses the 37-state pool to overturn a claim rather than to add capability it cannot verify.",
+  "why_selected_route_is_fastest_sufficient": "It needs no new world and no new executions: reading is free, and the round overturns a claim with the pool it already measured.",
   "why_this_is_not_another_organ": "No learner, no vocabulary table, no reward: survivors are bitmasks over facts the machine already answers, and the schedule is a choice of states."
  },
  "required_capability": "measuring one outcome per (action, state) on real binaries, representing survivors as bitmasks, and scoring a survivor set as a rule only where it is unanimous",
@@ -611,7 +647,7 @@
  "selected_route": "ONE_REFUSAL_PER_COORDINATE_PLUS_VARIED_SUCCESSES_FOR_IRRELEVANCE",
  "selected_surviving_route": "VARY_THE_FACTS_INSTEAD_OF_ENUMERATING_THE_HYPOTHESES",
  "status": "PROPOSED__PRODUCER_MEASURED__6_OF_6_MET__CONSENSUS_ARBITRATION_REFUTED__THE_COLUMN_WAS_NEVER_UNSOUND__INDEPENDENT_VERIFICATION_OPEN",
- "stop_condition": "Next: act on the corrected attribution. Since no column is unsound and every abstention left is coverage, the remaining lever is choosing which state to execute next, not which reader to trust. Measure whether a computed next-variation rule (pick the fact that splits the survivor set most, validate the state by the fact vector before executing) reaches a behaviourally unique set within the number of unpinned facts.",
+ "stop_condition": "Next: act on the corrected attribution. Since no column is unsound and every abstention left is coverage, the lever is choosing the next state, not the next reader. Measure whether a computed next-variation rule (pick the fact that splits the survivor set most, validate the state by the fact vector before executing) reaches a behaviourally unique set within the number of unpinned facts.",
  "terminal_credit_delta": 0,
  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
  "truth": {
