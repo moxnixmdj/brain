@@ -60,6 +60,8 @@ for path in (str(TOOLS), str(REPO)):
 import identify_a_real_bugs_fix_v1 as identify  # noqa: E402
 import the_space_is_the_artifact_v1 as space_tool  # noqa: E402
 
+identify_tool = identify  # `identify` is also a flag name; the module keeps a name no parameter can shadow
+
 SCHEMA = "BRAIN_THE_ASSERTION_IS_THE_DEMAND_V1"
 AUTHORITY = "NONE__PRODUCER_RUN_SANDBOX"
 HELPER = "__brain_site__"
@@ -843,7 +845,7 @@ def _driver_body(config_path: str) -> int:
             targets.append((part["node"], "TRUTHY" if part["truth"] else "FALSY"))
         for demanded in part["demands"]:
             targets.append((part["node"], demanded))
-    provenance = "BOUND_ASSERTION"
+    provenance = "NONE"
     if not targets:
         # THE TEST FILE IS THE SPECIFICATION. Runtime binding fails whenever the assertion's operands do not
         # already hold what the site produced -- 13 of 30 real commits. The expected value is then not
@@ -866,6 +868,8 @@ def _driver_body(config_path: str) -> int:
                 targets.append((part["node"], value))
         if targets:
             provenance = "SPEC_LITERALS"
+    else:
+        provenance = "BOUND_ASSERTION"
     result["demand_provenance"] = provenance
     if provenance == "SPEC_LITERALS":
         result["spec_preservation_gate"] = {
@@ -1135,7 +1139,8 @@ def _driver_body(config_path: str) -> int:
 def explore(repo: pathlib.Path, entry: dict[str, Any], *, cap: int = 400_000, survivors_cap: int = 24,
             verifications: int = 10, seconds: int = 180,
             count_contrasts: bool = False, identify_curve: bool = False,
-            audit: bool = False) -> dict[str, Any]:
+            audit: bool = False, site_override: dict[str, Any] | None = None,
+            shifted_from: int | None = None) -> dict[str, Any]:
     started = time.time()
     sha, test_path = entry["commit"], entry["test"]
     parent = f"{sha}^"
@@ -1149,7 +1154,17 @@ def explore(repo: pathlib.Path, entry: dict[str, Any], *, cap: int = 400_000, su
             (worktree / test_path).write_text(identify.show(repo, sha, test_path), encoding="utf-8")
             source_path, site = None, None
             original, site_finder, why = None, None, None
-            for candidate_source in entry["sources"]:
+            if site_override is not None:
+                # THE SITE IS CHOSEN BY THE DEMAND, NOT BY THE DIFF. Same demand, another production in the
+                # same function: the value is fixed and only its producer moves, so this costs no
+                # combinatorics -- and it is the production the population's grammar was missing.
+                for candidate_source in entry["sources"]:
+                    text = identify.show(repo, parent, candidate_source)
+                    if text:
+                        source_path, site, original = candidate_source, site_override, text
+                        site_finder = "site_shift"
+                        break
+            for candidate_source in ([] if site is not None else entry["sources"]):
                 text = identify.show(repo, parent, candidate_source)
                 if not text:
                     continue
@@ -1227,8 +1242,11 @@ def explore(repo: pathlib.Path, entry: dict[str, Any], *, cap: int = 400_000, su
                     (worktree / test_path).read_text(encoding="utf-8", errors="replace"), node)]
                     for node in failing},
             }), encoding="utf-8")
-            env = {**os.environ, "PYTHONPATH": os.pathsep.join([str(worktree), str(worktree / "src"),
-                                                                str(TOOLS), str(REPO)])}
+            # The driver imports the artifact as well as the patched module, so it needs the same
+            # freshness rule: a stale .pyc of the target file would score a candidate that never ran.
+            env = {**os.environ, **identify_tool.fresh_bytecode(worktree),
+                   "PYTHONPATH": os.pathsep.join([str(worktree), str(worktree / "src"),
+                                                  str(TOOLS), str(REPO)])}
             driver_run = None
             try:
                 driver_run = subprocess.run([sys.executable, str(pathlib.Path(__file__).resolve()),
@@ -1334,6 +1352,7 @@ def explore(repo: pathlib.Path, entry: dict[str, Any], *, cap: int = 400_000, su
                            else "NO_VALUE_MATCHES")),
                 "demand_provenance": driven.get("demand_provenance"),
                 "failing_test": node_id, "site_line": site["line"], "site_finder": site_finder,
+                "shifted_from_line": shifted_from,
                 "site_expression": site["old_expression"],
                 "human_expression": site["human_expression"],
                 "count_contrasts": bool(count_contrasts),
@@ -1367,7 +1386,8 @@ def explore(repo: pathlib.Path, entry: dict[str, Any], *, cap: int = 400_000, su
 
 def sweep(entries: Sequence[dict[str, Any]], *, receipt: pathlib.Path, cap: int,
           survivors_cap: int, verifications: int, seconds: int,
-          identify: bool = False, count: bool = False, audit: bool = False) -> dict[str, Any]:
+          identify: bool = False, count: bool = False, audit: bool = False,
+          shift_sites: int = 0) -> dict[str, Any]:
     rows: list[dict[str, Any]] = []
     started = time.time()
     for number, entry in enumerate(entries, 1):
@@ -1378,6 +1398,37 @@ def sweep(entries: Sequence[dict[str, Any]], *, receipt: pathlib.Path, cap: int,
                              count_contrasts=count, audit=audit)
         except Exception as error:  # noqa: BLE001
             result = {"stage": "EXCEPTION", "error": f"{type(error).__name__}: {error}"[:300]}
+        if result.get("stage") in ("SPEC_DEMAND_FOUND_NOTHING", "NO_VALUE_MATCHES") and shift_sites:
+            # THE COMPOSITION: same demand, another production in the same function. The value is fixed and
+            # only its producer moves, so this costs no combinatorics. Every attempt goes into the receipt,
+            # including the ones that fail, because "we looked elsewhere and it was not there" is a fact.
+            attempts = []
+            parent_source = None
+            source_path = (entry.get("sources") or [None])[0]
+            if source_path:
+                parent_source = identify_tool.show(repo, f"{entry['commit']}^", source_path)
+            if parent_source:
+                for site in space_tool.sites_in_function(parent_source, result.get("site_line") or 0,
+                                                        limit=shift_sites,
+                                                        exclude=result.get("site_line")):
+                    try:
+                        shifted = explore(repo, entry, cap=cap, survivors_cap=survivors_cap,
+                                          verifications=min(verifications, 3), seconds=seconds,
+                                          count_contrasts=count, identify_curve=identify,
+                                          audit=audit, site_override=site,
+                                          shifted_from=result.get("site_line"))
+                    except Exception as error:  # noqa: BLE001
+                        attempts.append({"line": site["line"],
+                                         "stage": f"EXCEPTION:{type(error).__name__}: {error}"[:160]})
+                        continue
+                    attempts.append({"line": site["line"], "expression": site["old_expression"],
+                                     "stage": shifted.get("stage")})
+                    if shifted.get("stage") == "DEMAND_MET":
+                        shifted["shift_attempts"] = attempts
+                        shifted["shifted_from_stage"] = result.get("stage")
+                        result = shifted
+                        break
+            result.setdefault("shift_attempts", attempts)
         row = {key: entry.get(key) for key in ("repo", "commit", "test")}
         row.update(result)
         rows.append(row)
@@ -1407,6 +1458,8 @@ def main(argv: Sequence[str] | None = None) -> int:
                         help="count every admissible candidate (the live set), not just the first survivors")
     parser.add_argument("--identify", action="store_true",
                         help="count how many candidates stay indistinguishable from the human rule per observation")
+    parser.add_argument("--shift-sites", type=int, default=0,
+                        help="also ask the same demand at the other productions in the changed function")
     parser.add_argument("--driver", help=argparse.SUPPRESS)
     args = parser.parse_args(argv)
 
@@ -1424,7 +1477,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     result = sweep(entries, receipt=args.receipt, cap=args.cap, survivors_cap=args.survivors_cap,
                    verifications=args.verifications, seconds=args.seconds,
                    identify=getattr(args, "identify", False),
-                   count=getattr(args, "count", False), audit=getattr(args, "audit", False))
+                   count=getattr(args, "count", False), audit=getattr(args, "audit", False),
+                   shift_sites=getattr(args, "shift_sites", 0))
     print(json.dumps({"rows": len(result["rows"]), "receipt": str(args.receipt)}))
     return 0
 

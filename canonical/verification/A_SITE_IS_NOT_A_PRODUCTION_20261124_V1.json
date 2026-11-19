@@ -1,0 +1,914 @@
+{
+ "schema": "BRAIN_THE_ASSERTION_IS_THE_DEMAND_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "date": "2026-11-20",
+ "mode": "SWEEP_REAL_HISTORY__THE_SAME_DEMAND_ASKED_AT_ANOTHER_PRODUCTION",
+ "rows": [
+  {
+   "repo": "click",
+   "commit": "3495fba163dd61dea837cd557095df6c21515ac8",
+   "test": "tests/test_basic.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT",
+   "ast_fact": "MORE_THAN_ONE_CHANGE_REGION",
+   "why": "MULTI_LINE_EDIT|AST:src/click/core.py:MORE_THAN_ONE_CHANGE_REGION",
+   "demand_provenance": null,
+   "site_line": null,
+   "site_finder": null,
+   "shifted_from_line": null
+  },
+  {
+   "repo": "click",
+   "commit": "becbde5cf416441627f779e8dd34e57738ee1c1f",
+   "test": "tests/test_testing.py",
+   "stage": "SPEC_DEMAND_FOUND_NOTHING",
+   "ast_fact": null,
+   "why": null,
+   "demand_provenance": "SPEC_LITERALS",
+   "site_line": 617,
+   "site_finder": "diff_hunk",
+   "shifted_from_line": null,
+   "shift_attempts": [
+    {
+     "line": 616,
+     "expression": "False",
+     "stage": "SPEC_DEMAND_FOUND_NOTHING"
+    },
+    {
+     "line": 615,
+     "expression": "color is None",
+     "stage": "SPEC_DEMAND_FOUND_NOTHING"
+    },
+    {
+     "line": 614,
+     "expression": "get_best_encoding(stream)",
+     "stage": "SPEC_DEMAND_FOUND_NOTHING"
+    },
+    {
+     "line": 613,
+     "expression": "'Simply print unformatted text.  This is the ultimate fallback.'",
+     "stage": "SPEC_DEMAND_FOUND_NOTHING"
+    }
+   ],
+   "shift_attempts_count": 4
+  },
+  {
+   "repo": "click",
+   "commit": "a3321c9ca14ddb951f04ac981f275b0de2f46208",
+   "test": "tests/test_shell_completion.py",
+   "stage": "SPEC_DEMAND_FOUND_NOTHING",
+   "ast_fact": null,
+   "why": null,
+   "demand_provenance": "SPEC_LITERALS",
+   "site_line": 47,
+   "site_finder": "diff_hunk",
+   "shifted_from_line": null,
+   "shift_attempts": [
+    {
+     "line": 46,
+     "expression": "instruction == 'source'",
+     "stage": "SPEC_DEMAND_FOUND_NOTHING"
+    },
+    {
+     "line": 48,
+     "expression": "0",
+     "stage": "SPEC_DEMAND_FOUND_NOTHING"
+    },
+    {
+     "line": 44,
+     "expression": "comp_cls(cli, ctx_args, prog_name, complete_var)",
+     "stage": "SPEC_DEMAND_FOUND_NOTHING"
+    },
+    {
+     "line": 50,
+     "expression": "instruction == 'complete'",
+     "stage": "NO_RELATION_BETWEEN_THE_DEMAND_AND_THE_SITE"
+    },
+    {
+     "line": 51,
+     "expression": "echo(comp.complete())",
+     "stage": "NO_RELATION_BETWEEN_THE_DEMAND_AND_THE_SITE"
+    },
+    {
+     "line": 42,
+     "expression": "1",
+     "stage": "THE_SITE_NEVER_RAN_IN_THE_FAILING_TEST"
+    }
+   ],
+   "shift_attempts_count": 6
+  },
+  {
+   "repo": "jinja",
+   "commit": "a150ff749a0347c41e8e353c2ce2063e8f84ab42",
+   "test": "tests/test_async.py",
+   "stage": "SPEC_DEMAND_FOUND_NOTHING",
+   "ast_fact": null,
+   "why": null,
+   "demand_provenance": "SPEC_LITERALS",
+   "site_line": 1758,
+   "site_finder": "diff_hunk",
+   "shifted_from_line": null,
+   "shift_attempts": [
+    {
+     "line": 1757,
+     "expression": "self.environment.is_async",
+     "stage": "SPEC_DEMAND_FOUND_NOTHING"
+    },
+    {
+     "line": 1760,
+     "expression": "is_filter",
+     "stage": "SPEC_DEMAND_FOUND_NOTHING"
+    },
+    {
+     "line": 1761,
+     "expression": "self.write(f'{self.filters[node.name]}(')",
+     "stage": "SPEC_DEMAND_FOUND_NOTHING"
+    },
+    {
+     "line": 1762,
+     "expression": "self.environment.filters.get(node.name)",
+     "stage": "SPEC_DEMAND_FOUND_NOTHING"
+    },
+    {
+     "line": 1764,
+     "expression": "self.write(f'{self.tests[node.name]}(')",
+     "stage": "NO_RELATION_BETWEEN_THE_DEMAND_AND_THE_SITE"
+    },
+    {
+     "line": 1765,
+     "expression": "self.environment.tests.get(node.name)",
+     "stage": "NO_RELATION_BETWEEN_THE_DEMAND_AND_THE_SITE"
+    }
+   ],
+   "shift_attempts_count": 6
+  },
+  {
+   "repo": "jinja",
+   "commit": "89310770585ed0fb8d10c46cf8d6f447bb807467",
+   "test": "tests/test_loader.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT",
+   "ast_fact": "MORE_THAN_ONE_CHANGE_REGION",
+   "why": "MULTI_LINE_EDIT|AST:src/jinja2/loaders.py:MORE_THAN_ONE_CHANGE_REGION",
+   "demand_provenance": null,
+   "site_line": null,
+   "site_finder": null,
+   "shifted_from_line": null
+  },
+  {
+   "repo": "attrs",
+   "commit": "1c962d15a743a3c18401f0c788f0fd0cb3d9acf8",
+   "test": "tests/test_annotations.py",
+   "stage": "DEMAND_MET",
+   "ast_fact": null,
+   "why": null,
+   "demand_provenance": "BOUND_ASSERTION",
+   "site_line": 2494,
+   "site_finder": "diff_hunk",
+   "shifted_from_line": null,
+   "site_expression": "'Type annotation and type argument cannot both be present'",
+   "human_expression": "f\"Type annotation and type argument cannot both be present for '{name}'.\"",
+   "found_is_the_human_fix": true,
+   "preserved_passing_values": 0,
+   "greens": 2,
+   "parameters_stored": 0
+  },
+  {
+   "repo": "attrs",
+   "commit": "1e07f46897488350bb44ed88f1c70d4d7461dde0",
+   "test": "tests/test_annotations.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT",
+   "ast_fact": "MORE_THAN_ONE_CHANGE_REGION",
+   "why": "MULTI_LINE_EDIT|AST:src/attr/_make.py:MORE_THAN_ONE_CHANGE_REGION",
+   "demand_provenance": null,
+   "site_line": null,
+   "site_finder": null,
+   "shifted_from_line": null
+  },
+  {
+   "repo": "attrs",
+   "commit": "dbb25ce34787a30e2ffa65685f6c689a269c3521",
+   "test": "tests/test_functional.py",
+   "stage": "THE_SITE_NEVER_RAN_IN_THE_FAILING_TEST",
+   "ast_fact": null,
+   "why": null,
+   "demand_provenance": null,
+   "site_line": 713,
+   "site_finder": "diff_hunk",
+   "shifted_from_line": null
+  },
+  {
+   "repo": "attrs",
+   "commit": "edcaf04a4d6b1b92996de668af9f6fea266efba2",
+   "test": "tests/test_make.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT",
+   "ast_fact": "MORE_THAN_ONE_STATEMENT_CHANGED",
+   "why": "MULTI_LINE_EDIT|AST:src/attr/_make.py:MORE_THAN_ONE_STATEMENT_CHANGED",
+   "demand_provenance": null,
+   "site_line": null,
+   "site_finder": null,
+   "shifted_from_line": null
+  },
+  {
+   "repo": "click",
+   "commit": "051bb0f30b545cf7426deef819811815297c2798",
+   "test": "tests/test_termui.py",
+   "stage": "NO_RELATION_BETWEEN_THE_DEMAND_AND_THE_SITE",
+   "ast_fact": null,
+   "why": null,
+   "demand_provenance": "NONE",
+   "site_line": 640,
+   "site_finder": "diff_hunk",
+   "shifted_from_line": null
+  },
+  {
+   "repo": "click",
+   "commit": "32ae2acd3474a57d2450ea849545b2e1258bf76a",
+   "test": "tests/test_shell_completion.py",
+   "stage": "NO_RELATION_BETWEEN_THE_DEMAND_AND_THE_SITE",
+   "ast_fact": null,
+   "why": null,
+   "demand_provenance": "NONE",
+   "site_line": 411,
+   "site_finder": "diff_hunk",
+   "shifted_from_line": null
+  },
+  {
+   "repo": "click",
+   "commit": "91de59c6c8abc8251e7af551cd4546cc964288af",
+   "test": "tests/test_options.py",
+   "stage": "SPEC_DEMAND_FOUND_NOTHING",
+   "ast_fact": null,
+   "why": null,
+   "demand_provenance": "SPEC_LITERALS",
+   "site_line": 2783,
+   "site_finder": "diff_hunk",
+   "shifted_from_line": null,
+   "shift_attempts": [
+    {
+     "line": 2782,
+     "expression": "is_flag is False and (not self._flag_needs_value)",
+     "stage": "SPEC_DEMAND_FOUND_NOTHING"
+    },
+    {
+     "line": 2785,
+     "expression": "is_flag",
+     "stage": "SPEC_DEMAND_FOUND_NOTHING"
+    },
+    {
+     "line": 2787,
+     "expression": "self.default is UNSET and (not self.required) and (not self.prompt)",
+     "stage": "SPEC_DEMAND_FOUND_NOTHING"
+    },
+    {
+     "line": 2779,
+     "expression": "True",
+     "stage": "NO_RELATION_BETWEEN_THE_DEMAND_AND_THE_SITE"
+    },
+    {
+     "line": 2788,
+     "expression": "multiple",
+     "stage": "SPEC_DEMAND_FOUND_NOTHING"
+    },
+    {
+     "line": 2778,
+     "expression": "self.secondary_opts",
+     "stage": "NO_RELATION_BETWEEN_THE_DEMAND_AND_THE_SITE"
+    }
+   ],
+   "shift_attempts_count": 6
+  },
+  {
+   "repo": "click",
+   "commit": "70c673d37eb91ba42a129be9037caf3ebed62f3e",
+   "test": "tests/test_commands.py",
+   "stage": "SPEC_DEMAND_FOUND_NOTHING",
+   "ast_fact": null,
+   "why": null,
+   "demand_provenance": "SPEC_LITERALS",
+   "site_line": 1300,
+   "site_finder": "diff_hunk",
+   "shifted_from_line": null,
+   "shift_attempts": [
+    {
+     "line": 1295,
+     "expression": "None",
+     "stage": "THE_SITE_NEVER_RAN_IN_THE_FAILING_TEST"
+    },
+    {
+     "line": 1294,
+     "expression": "not help_options or not self.add_help_option",
+     "stage": "SPEC_DEMAND_FOUND_NOTHING"
+    },
+    {
+     "line": 1292,
+     "expression": "self.get_help_option_names(ctx)",
+     "stage": "SPEC_DEMAND_FOUND_NOTHING"
+    }
+   ],
+   "shift_attempts_count": 3
+  },
+  {
+   "repo": "jinja",
+   "commit": "b5120582706b9e997cfd3277b02a32fd35b1c9d4",
+   "test": "tests/test_security.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT",
+   "ast_fact": "THE_CHANGED_EXPRESSION_SPANS_SEVERAL_LINES",
+   "why": "MULTI_LINE_EDIT|AST:src/jinja2/sandbox.py:THE_CHANGED_EXPRESSION_SPANS_SEVERAL_LINES",
+   "demand_provenance": null,
+   "site_line": null,
+   "site_finder": null,
+   "shifted_from_line": null
+  },
+  {
+   "repo": "attrs",
+   "commit": "ce89f5d11feb0805da9ed10bb165238cc959f1bb",
+   "test": "tests/test_functional.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT",
+   "ast_fact": "MORE_THAN_ONE_STATEMENT_CHANGED",
+   "why": "MULTI_LINE_EDIT|AST:src/attr/exceptions.py:MORE_THAN_ONE_STATEMENT_CHANGED",
+   "demand_provenance": null,
+   "site_line": null,
+   "site_finder": null,
+   "shifted_from_line": null
+  },
+  {
+   "repo": "attrs",
+   "commit": "13105a64f2de2e257a537ad20c06ffdd1c9d7f94",
+   "test": "tests/test_converters.py",
+   "stage": "SPEC_DEMAND_FOUND_NOTHING",
+   "ast_fact": null,
+   "why": null,
+   "demand_provenance": "SPEC_LITERALS",
+   "site_line": 2024,
+   "site_finder": "diff_hunk",
+   "shifted_from_line": null,
+   "shift_attempts": [
+    {
+     "line": 2025,
+     "expression": "Converter(a.converter)",
+     "stage": "NO_VALUE_MATCHES"
+    },
+    {
+     "line": 2022,
+     "expression": "'self' if has_factory and a.default.takes_self else ''",
+     "stage": "NO_VALUE_MATCHES"
+    },
+    {
+     "line": 2021,
+     "expression": "isinstance(a.default, Factory)",
+     "stage": "SPEC_DEMAND_FOUND_NOTHING"
+    },
+    {
+     "line": 2027,
+     "expression": "a.converter",
+     "stage": "SPEC_DEMAND_FOUND_NOTHING"
+    },
+    {
+     "line": 2019,
+     "expression": "a.alias",
+     "stage": "NO_VALUE_MATCHES"
+    },
+    {
+     "line": 2029,
+     "expression": "a.init is False",
+     "stage": "SPEC_DEMAND_FOUND_NOTHING"
+    }
+   ],
+   "shift_attempts_count": 6
+  },
+  {
+   "repo": "attrs",
+   "commit": "f5683b852b1e7ec1f26aabbb55aad332de79066d",
+   "test": "tests/test_annotations.py",
+   "stage": "NO_RELATION_BETWEEN_THE_DEMAND_AND_THE_SITE",
+   "ast_fact": null,
+   "why": null,
+   "demand_provenance": "NONE",
+   "site_line": 2242,
+   "site_finder": "diff_hunk",
+   "shifted_from_line": null
+  },
+  {
+   "repo": "attrs",
+   "commit": "a71fbbad8950e127ebe4509b4ff0d730fb02a8b2",
+   "test": "tests/test_next_gen.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT",
+   "ast_fact": "MORE_THAN_ONE_CHANGE_REGION",
+   "why": "MULTI_LINE_EDIT|AST:src/attr/_make.py:MORE_THAN_ONE_CHANGE_REGION",
+   "demand_provenance": null,
+   "site_line": null,
+   "site_finder": null,
+   "shifted_from_line": null
+  },
+  {
+   "repo": "attrs",
+   "commit": "d0c73d8faa184cdff8d6a0378ed5b85ca57cde7d",
+   "test": "tests/test_validators.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT",
+   "ast_fact": "MORE_THAN_ONE_STATEMENT_CHANGED",
+   "why": "MULTI_LINE_EDIT|AST:src/attr/validators.py:MORE_THAN_ONE_STATEMENT_CHANGED",
+   "demand_provenance": null,
+   "site_line": null,
+   "site_finder": null,
+   "shifted_from_line": null
+  },
+  {
+   "repo": "click",
+   "commit": "a6256bfb5971d5e58585fe7b6c656134e1ade5a4",
+   "test": "tests/test_termui.py",
+   "stage": "SPEC_DEMAND_FOUND_NOTHING",
+   "ast_fact": null,
+   "why": null,
+   "demand_provenance": "SPEC_LITERALS",
+   "site_line": 491,
+   "site_finder": "diff_hunk",
+   "shifted_from_line": null,
+   "shift_attempts": [
+    {
+     "line": 490,
+     "expression": "use_tempfile",
+     "stage": "NO_VALUE_MATCHES"
+    },
+    {
+     "line": 493,
+     "expression": "_pipepager(cmd_path, cmd_params, color)",
+     "stage": "NO_RELATION_BETWEEN_THE_DEMAND_AND_THE_SITE"
+    },
+    {
+     "line": 488,
+     "expression": "resolved",
+     "stage": "SPEC_DEMAND_FOUND_NOTHING"
+    },
+    {
+     "line": 486,
+     "expression": "_nullpager(stdout, color)",
+     "stage": "NO_RELATION_BETWEEN_THE_DEMAND_AND_THE_SITE"
+    },
+    {
+     "line": 484,
+     "expression": "resolved is None",
+     "stage": "NO_VALUE_MATCHES"
+    },
+    {
+     "line": 482,
+     "expression": "_resolve_pager_command(pager_cmd_parts)",
+     "stage": "SPEC_DEMAND_FOUND_NOTHING"
+    }
+   ],
+   "shift_attempts_count": 6
+  },
+  {
+   "repo": "click",
+   "commit": "b7e5fd4cc7de70280eccd39f2bb956df617e5519",
+   "test": "tests/test_shell_completion.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT",
+   "ast_fact": "MORE_THAN_ONE_CHANGE_REGION",
+   "why": "MULTI_LINE_EDIT|AST:src/click/shell_completion.py:MORE_THAN_ONE_CHANGE_REGION",
+   "demand_provenance": null,
+   "site_line": null,
+   "site_finder": null,
+   "shifted_from_line": null
+  },
+  {
+   "repo": "click",
+   "commit": "2468b70997a6ec27ced4b4867954c90da3f92075",
+   "test": "tests/test_utils.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT",
+   "ast_fact": "MORE_THAN_ONE_CHANGE_REGION",
+   "why": "MULTI_LINE_EDIT|AST:src/click/termui.py:MORE_THAN_ONE_CHANGE_REGION",
+   "demand_provenance": null,
+   "site_line": null,
+   "site_finder": null,
+   "shifted_from_line": null
+  },
+  {
+   "repo": "click",
+   "commit": "18d29196c508b249ef1111f1f29c9133e0a8b097",
+   "test": "tests/test_arguments.py",
+   "stage": "NO_RELATION_BETWEEN_THE_DEMAND_AND_THE_SITE",
+   "ast_fact": null,
+   "why": null,
+   "demand_provenance": "NONE",
+   "site_line": 2341,
+   "site_finder": "diff_hunk",
+   "shifted_from_line": null
+  },
+  {
+   "repo": "click",
+   "commit": "701b313160be12752e49b3f7cea32402c0969a69",
+   "test": "tests/test_shell_completion.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT",
+   "ast_fact": "THE_CHANGE_INSERTS_OR_DELETES_WHOLE_STATEMENTS",
+   "why": "MULTI_LINE_EDIT|AST:src/click/shell_completion.py:THE_CHANGE_INSERTS_OR_DELETES_WHOLE_STATEMENTS",
+   "demand_provenance": null,
+   "site_line": null,
+   "site_finder": null,
+   "shifted_from_line": null
+  },
+  {
+   "repo": "click",
+   "commit": "4fd2fea0db423d242aedcae0a5f664efe0a93484",
+   "test": "tests/test_options.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT",
+   "ast_fact": "MORE_THAN_ONE_CHANGE_REGION",
+   "why": "MULTI_LINE_EDIT|AST:src/click/core.py:MORE_THAN_ONE_CHANGE_REGION",
+   "demand_provenance": null,
+   "site_line": null,
+   "site_finder": null,
+   "shifted_from_line": null
+  },
+  {
+   "repo": "jinja",
+   "commit": "eec0db8642b25691867890f14fc6c9ca04c8a8c9",
+   "test": "tests/test_loader.py",
+   "stage": "NO_RELATION_BETWEEN_THE_DEMAND_AND_THE_SITE",
+   "ast_fact": null,
+   "why": null,
+   "demand_provenance": "NONE",
+   "site_line": 296,
+   "site_finder": "semantic_ast",
+   "shifted_from_line": null
+  },
+  {
+   "repo": "jinja",
+   "commit": "f3bc9c6a915badd3871eb1bc5aae5421d2f6496d",
+   "test": "tests/test_regression.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT",
+   "ast_fact": "THE_CHANGE_INSERTS_OR_DELETES_WHOLE_STATEMENTS",
+   "why": "MULTI_LINE_EDIT|AST:src/jinja2/compiler.py:THE_CHANGE_INSERTS_OR_DELETES_WHOLE_STATEMENTS",
+   "demand_provenance": null,
+   "site_line": null,
+   "site_finder": null,
+   "shifted_from_line": null
+  },
+  {
+   "repo": "attrs",
+   "commit": "5d6d21aa5e598c600a3610a4721a63e58d89dc5e",
+   "test": "tests/test_converters.py",
+   "stage": "SPEC_DEMAND_FOUND_NOTHING",
+   "ast_fact": null,
+   "why": null,
+   "demand_provenance": "SPEC_LITERALS",
+   "site_line": 2952,
+   "site_finder": "diff_hunk",
+   "shifted_from_line": null
+  },
+  {
+   "repo": "attrs",
+   "commit": "c2824ac30f315bfbc7398960c6831d68ecc9edb4",
+   "test": "tests/test_make.py",
+   "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT",
+   "ast_fact": "MORE_THAN_ONE_CHANGE_REGION",
+   "why": "MULTI_LINE_EDIT|AST:src/attr/_make.py:MORE_THAN_ONE_CHANGE_REGION",
+   "demand_provenance": null,
+   "site_line": null,
+   "site_finder": null,
+   "shifted_from_line": null
+  },
+  {
+   "repo": "attrs",
+   "commit": "a8191556c0aad84125d2c3435c5a2352b2f8a9ba",
+   "test": "tests/test_functional.py",
+   "stage": "NO_RELATION_BETWEEN_THE_DEMAND_AND_THE_SITE",
+   "ast_fact": null,
+   "why": null,
+   "demand_provenance": "NONE",
+   "site_line": 918,
+   "site_finder": "diff_hunk",
+   "shifted_from_line": null
+  }
+ ],
+ "seconds": 574.2,
+ "composition": {
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "what": "the same demand, unchanged, asked at up to six other statement-level single-line expressions in the function the human changed, nearest first; the human's line is excluded by construction because it is the answer key",
+  "code": [
+   "canonical/tools/the_space_is_the_artifact_v1.py::sites_in_function",
+   "canonical/tools/the_assertion_is_the_demand_v1.py::explore(site_override=, shifted_from=)"
+  ],
+  "rows_reached": 7,
+  "attempts": 37,
+  "verified_by_shift": 0,
+  "outcomes": {
+   "SPEC_DEMAND_FOUND_NOTHING": 22,
+   "NO_VALUE_MATCHES": 5,
+   "NO_RELATION_BETWEEN_THE_DEMAND_AND_THE_SITE": 8,
+   "THE_SITE_NEVER_RAN_IN_THE_FAILING_TEST": 2
+  },
+  "declared_acceptance_before_the_run": {
+   "verified_repair_with_ast_fact_MORE_THAN_ONE_CHANGE_REGION": "NOT MET (0)",
+   "accusations_zero": "MET (0 of 30)",
+   "no_verified_row_preserving_0_recorded_passing_values": "MET"
+  },
+  "falsified": "ANOTHER SITE IS NOT ANOTHER PRODUCTION: keeping the demand fixed and moving its producer recovers 0 of 7 rows, so the 8 multi-region rows are not a located-elsewhere value",
+  "what_the_human_fix_actually_is": {
+   "authority": "measured from both revisions' ASTs at the changed function: new top-level definitions, changed If tests, added/removed code lines",
+   "rows": [
+    {
+     "repo": "click",
+     "commit": "becbde5cf4",
+     "site_line": 617,
+     "parent_if_tests": [
+      "color is None"
+     ],
+     "child_if_tests": [],
+     "new_top_level_productions": [
+      "_SkipClose"
+     ],
+     "added_code_lines": 13,
+     "removed_code_lines": 2,
+     "admitted_lines": [
+      "class _SkipClose:",
+      "def __init__(self, stream: t.IO[t.Any]) -> None:",
+      "self.stream = stream",
+      "def __getattr__(self, name: str) -> t.Any:",
+      "return getattr(self.stream, name)",
+      "@property"
+     ]
+    },
+    {
+     "repo": "click",
+     "commit": "a3321c9ca1",
+     "site_line": 47,
+     "parent_if_tests": [
+      "comp_cls is None",
+      "instruction == 'source'",
+      "instruction == 'complete'"
+     ],
+     "child_if_tests": [
+      "comp_cls is None",
+      "instruction == 'source'",
+      "instruction == 'complete'"
+     ],
+     "new_top_level_productions": [],
+     "added_code_lines": 2,
+     "removed_code_lines": 2,
+     "admitted_lines": [
+      "echo(comp.source().encode(), nl=False)",
+      "echo(comp.complete().encode())"
+     ]
+    },
+    {
+     "repo": "jinja",
+     "commit": "a150ff749a",
+     "site_line": 1758,
+     "parent_if_tests": [
+      "self.environment.is_async",
+      "is_filter",
+      "func is None and (not frame.soft_frame)",
+      "pass_arg is not None",
+      "self.environment.is_async"
+     ],
+     "child_if_tests": [
+      "self.environment.is_async",
+      "is_filter",
+      "func is None and (not frame.soft_frame)",
+      "pass_arg is not None",
+      "self.environment.is_async"
+     ],
+     "new_top_level_productions": [],
+     "added_code_lines": 4,
+     "removed_code_lines": 4,
+     "admitted_lines": [
+      "self.write(\"(await auto_await(\")",
+      "self.write(\"))\")",
+      "self.write(\"(await auto_await(\")",
+      "self.write(\"))\")"
+     ]
+    },
+    {
+     "repo": "click",
+     "commit": "91de59c6c8",
+     "site_line": 2783,
+     "parent_if_tests": [
+      "help",
+      "prompt is True",
+      "deprecated",
+      "is_flag is None",
+      "is_flag",
+      "self.is_bool_flag",
+      "self.default is True and self.flag_value is not UNSET",
+      "self.flag_value is UNSET",
+      "count",
+      "__debug__",
+      "self.name is None",
+      "prompt is False",
+      "flag_value is not UNSET",
+      "is_flag is False and (not self._flag_needs_value)",
+      "self.default is UNSET and (not self.required) and (not self.",
+      "type is None",
+      "self.default is UNSET and (not self.required)",
+      "self.is_flag",
+      "type is None",
+      "self.default is UNSET",
+      "deprecated and prompt",
+      "self.nargs == -1",
+      "not self.is_bool_flag and self.secondary_opts",
+      "self.is_bool_flag and self.hide_input and (self.prompt is no",
+      "self.count",
+      "self._flag_needs_value",
+      "multiple",
+      "flag_value is UNSET",
+      "self.multiple",
+      "self.is_flag",
+      "self.secondary_opts",
+      "isinstance(flag_value, bool)"
+     ],
+     "child_if_tests": [
+      "help",
+      "prompt is True",
+      "deprecated",
+      "is_flag is None",
+      "is_flag",
+      "self.is_bool_flag",
+      "self.default is True and self.flag_value is not UNSET",
+      "self.flag_value is UNSET",
+      "count",
+      "__debug__",
+      "self.name is None",
+      "prompt is False",
+      "flag_value is not UNSET",
+      "is_flag is False and (not self._flag_needs_value)",
+      "self.default is UNSET and (not self.required) and (not self.",
+      "type is None",
+      "self.default is UNSET and (not self.required)",
+      "self.is_flag",
+      "type is None",
+      "self.default is UNSET",
+      "deprecated and prompt",
+      "self.nargs == -1",
+      "not self.is_bool_flag and self.secondary_opts",
+      "self.is_bool_flag and self.hide_input and (self.prompt is no",
+      "self.count",
+      "self._flag_needs_value",
+      "multiple",
+      "flag_value is UNSET",
+      "self.multiple",
+      "self.is_flag",
+      "self.secondary_opts",
+      "isinstance(flag_value, bool)"
+     ],
+     "new_top_level_productions": [],
+     "added_code_lines": 4,
+     "removed_code_lines": 3,
+     "admitted_lines": [
+      ".. versionchanged:: 8.3.dev",
+      "If ``flag_value`` is set or no default is provided, the flag can be",
+      "accepted without an argument.",
+      "self._flag_needs_value = flag_value is not UNSET or self.default is UN"
+     ]
+    },
+    {
+     "repo": "click",
+     "commit": "70c673d37e",
+     "site_line": 1300,
+     "parent_if_tests": [
+      "not help_options or not self.add_help_option"
+     ],
+     "child_if_tests": [
+      "not help_options or not self.add_help_option",
+      "self._help_option is None"
+     ],
+     "new_top_level_productions": [],
+     "added_code_lines": 14,
+     "removed_code_lines": 6,
+     "admitted_lines": [
+      "The declared parameters are re-shuffled depending on the order in whic",
+      "they were invoked, as well as the eagerness of each parameters.",
+      "The invocation order takes precedence over the declaration order. I.e.",
+      "order in which the user provided them to the CLI is respected.",
+      "This behavior and its effect on callback evaluation is detailed at:",
+      "https://click.palletsprojects.com/en/stable/advanced/#callback-evaluat"
+     ]
+    },
+    {
+     "repo": "attrs",
+     "commit": "13105a64f2",
+     "site_line": 2024,
+     "parent_if_tests": [
+      "needs_cached_setattr",
+      "attrs_to_validate",
+      "call_post_init",
+      "does_cache_hash",
+      "is_exc",
+      "kw_only_args",
+      "call_pre_init and pre_init_has_args",
+      "a.validator",
+      "a.converter and (not isinstance(a.converter, Converter))",
+      "a.init is False",
+      "a.init is True",
+      "is_frozen",
+      "has_factory",
+      "a.default is not NOTHING and (not has_factory)",
+      "a.type is not None and converter is None",
+      "is_slotted",
+      "converter is not None",
+      "converter is not None",
+      "a.kw_only",
+      "converter is not None",
+      "has_factory",
+      "converter is not None and converter._first_param_type",
+      "a.kw_only",
+      "converter is not None",
+      "a.kw_only",
+      "converter is not None"
+     ],
+     "child_if_tests": [
+      "needs_cached_setattr",
+      "attrs_to_validate",
+      "call_post_init",
+      "does_cache_hash",
+      "is_exc",
+      "kw_only_args",
+      "call_pre_init and pre_init_has_args",
+      "a.validator",
+      "a.converter is not None and (not isinstance(a.converter, Con",
+      "a.init is False",
+      "a.init is True",
+      "is_frozen",
+      "has_factory",
+      "a.default is not NOTHING and (not has_factory)",
+      "a.type is not None and converter is None",
+      "is_slotted",
+      "converter is not None",
+      "converter is not None",
+      "a.kw_only",
+      "converter is not None",
+      "has_factory",
+      "converter is not None and converter._first_param_type",
+      "a.kw_only",
+      "converter is not None",
+      "a.kw_only",
+      "converter is not None"
+     ],
+     "new_top_level_productions": [],
+     "added_code_lines": 1,
+     "removed_code_lines": 1,
+     "admitted_lines": [
+      "if a.converter is not None and not isinstance(a.converter, Converter):"
+     ]
+    },
+    {
+     "repo": "click",
+     "commit": "a6256bfb59",
+     "site_line": 491,
+     "parent_if_tests": [
+      "stdout is None",
+      "not isatty(sys.stdin) or not isatty(stdout)",
+      "pager_cmd_parts",
+      "resolved is None",
+      "use_tempfile",
+      "os.environ.get('TERM') in ('dumb', 'emacs')"
+     ],
+     "child_if_tests": [
+      "stdout is None",
+      "not isatty(sys.stdin) or not isatty(stdout)",
+      "pager_cmd_parts",
+      "resolved is None",
+      "use_tempfile",
+      "os.environ.get('TERM') in ('dumb', 'emacs')"
+     ],
+     "new_top_level_productions": [
+      "_less_uses_raw_mode"
+     ],
+     "added_code_lines": 32,
+     "removed_code_lines": 11,
+     "admitted_lines": [
+      "return _tempfilepager(cmd_path, cmd_params, color)",
+      "def _less_uses_raw_mode(less_env: str, cmd_params: list[str]) -> bool:",
+      "Parses the tokens of the ``LESS`` environment variable and the command",
+      "line: only short-option clusters (``-R``, ``-rX``, ``-XrY``) and the",
+      "``--raw-control-chars`` long option request raw mode. Filenames and",
+      "long-option values may carry the letter ``r`` without being such a"
+     ]
+    }
+   ],
+   "reading": {
+    "new_production": 2,
+    "predicate_relation_changed": 1,
+    "type_at_an_argument": 1,
+    "statement_inside_a_branch": 1,
+    "consistency_across_sites": 1,
+    "documentation_and_import": 1
+   },
+   "the_smallest_fix_of_the_thirty": {
+    "repo": "attrs",
+    "commit": "13105a64f2",
+    "one_line": "if a.converter and not isinstance(a.converter, Converter)  ->  if a.converter is not None and not isinstance(a.converter, Converter)",
+    "why_no_value_and_no_site_reaches_it": "the site already holds the demanded object; the defect is the projection (truthiness instead of identity). The demanded fact is a relation on what the TEST computes (a falsey converter still doubles the value), and the test's call is in another frame from the site's operands, so the runtime binder never sees it."
+   }
+  }
+ },
+ "oracle_freshness": {
+  "defect_found": "CPython validates a .pyc by the source's mtime in whole seconds and its size, so a repair that swaps a value for a name of the same length inside the same second loads the PREVIOUS candidate's bytecode",
+  "measured_before_the_fix": "4 of 8 explorations of a one-line fixture reported FAILED for an expression that passes, with the corrected file on disk and `assert 3 == 4` in the traceback",
+  "why_it_matters": "the same mask turns a failing candidate into a VERIFIED one whenever a passing candidate of the same size ran first: a false verification, which is the accusation class",
+  "fix": "canonical/tools/identify_a_real_bugs_fix_v1.py::fresh_bytecode -- delete every __pycache__ and run with PYTHONDONTWRITEBYTECODE=1 and a fresh PYTHONPYCACHEPREFIX; used by run_tests_full, the space search's run_one and the assertion driver",
+  "regression_test": "canonical/tests/test_the_space_is_the_artifact_v1.py::test_a_same_size_edit_in_the_same_second_is_not_masked_by_stale_bytecode",
+  "audit_of_the_previous_round": "the 30-row sweep was re-run after the fix: 0 of 30 stages changed, so the 1 verified repair of the previous receipt was not a cache artifact"
+ },
+ "cost": {
+  "model_calls": 0,
+  "parameters_stored": 0,
+  "seconds": 574.2
+ }
+}
