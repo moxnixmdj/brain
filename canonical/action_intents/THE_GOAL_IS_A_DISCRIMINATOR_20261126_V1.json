@@ -42,7 +42,7 @@
  },
  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The goal's discriminator and the states that can separate it. A relation the system cannot state is a goal it cannot form; a state it cannot reach is a question it cannot ask. Measured: median 12 minimal discriminators survive one judgment, and on every machine the survivors are behaviourally identical three actions deep.",
- "canonical_base_commit": "d2b698bc3ed79de1947570127bdc81aa701ccc3e",
+ "canonical_base_commit": "954351c11f75af35edc6654c8136dabda70e04e6",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -86,17 +86,11 @@
  },
  "measured_effect": {
   "authority": "NONE__PRODUCER_RUN_SANDBOX",
-  "machines": [
-   "FILESYSTEM",
-   "TARBALL",
-   "SQLITE",
-   "GIT"
-  ],
   "cost": {
    "model_calls": 0,
+   "network_calls_at_run_time": 0,
    "parameters_stored": 0,
-   "seconds": 18.1,
-   "network_calls_at_run_time": 0
+   "seconds": 18.1
   },
   "declared_acceptance": {
    "A1_held_out_soundness": "MET (0 false accepts on 6 held-out states)",
@@ -107,12 +101,11 @@
    "A6_zero_model_calls_zero_parameters": "MET",
    "A7_behavioural_identification": "MET, ADDED AFTER THE FIRST RUN with the reason recorded: every survivor agrees on every reachable state, confirmed three actions deep"
   },
-  "the_law": "identification is bounded by the reachable contrast set, not by the number of questions; where survivors agree on every reachable state they are the same goal, and the agent may act on their intersection",
   "depth3": {
+   "FILESYSTEM": "4 -> 4, classes 1",
    "GIT": "6 -> 31 reachable states, behavioural classes 1",
    "SQLITE": "6 -> 10, classes 1",
-   "TARBALL": "2 -> 4, classes 1",
-   "FILESYSTEM": "4 -> 4, classes 1"
+   "TARBALL": "2 -> 4, classes 1"
   },
   "external_2026": [
    "TeleTune (arXiv 2610.05437) names Goal Underspecification and solves it with an LLM goal-inference prompt",
@@ -121,7 +114,14 @@
    "Accepted but Wrong (arXiv 2611.08269): the fix is which input is asked, not more tests",
    "OSWorld 2.0 (arXiv 2606.29537): best binary 20.6%, failures concentrate on implicit state"
   ],
-  "receipt": "canonical/verification/THE_GOAL_IS_A_DISCRIMINATOR_20261126_V1.json"
+  "machines": [
+   "FILESYSTEM",
+   "TARBALL",
+   "SQLITE",
+   "GIT"
+  ],
+  "receipt": "canonical/verification/THE_GOAL_IS_A_DISCRIMINATOR_20261126_V1.json",
+  "the_law": "identification is bounded by the reachable contrast set, not by the number of questions; where survivors agree on every reachable state they are the same goal, and the agent may act on their intersection"
  },
  "next_step": "The same mechanism on trajectories, where computer use actually fails: the user judges two RUNS and the agent recovers the smallest relation over the run (order, multiplicity, who-did-what), then acts. Acceptance declared before the run: zero false accepts, behavioural identification at two levels of reachability, and the residual ambiguity counted rather than approximated.",
  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -144,7 +144,7 @@
  ],
  "real_outcome": "Not that the goal can always be identified, but that the cases where it cannot are exactly the cases where it does not need to be: the survivors agree on every reachable state, so the intersection licenses every action the user would accept.",
  "recursive_obs": {
-  "canonical_base_commit": "d2b698bc3ed79de1947570127bdc81aa701ccc3e",
+  "canonical_base_commit": "954351c11f75af35edc6654c8136dabda70e04e6",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "handing the goal's relation to the agent",
@@ -529,9 +529,9 @@
    "python3 canonical/tools/the_goal_is_a_discriminator_v1.py --receipt canonical/verification/THE_GOAL_IS_A_DISCRIMINATOR_20261126_V1.json",
    "python3 -m pytest canonical/tests/test_the_goal_is_a_discriminator_v1.py -q"
   ],
-  "tests_green": 5,
   "independent_verification_completed": false,
-  "independent_verification_required": true
+  "independent_verification_required": true,
+  "tests_green": 5
  },
  "weakens_existing_guard": false
 }
