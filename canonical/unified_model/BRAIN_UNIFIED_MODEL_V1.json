@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "05a015566e6b6d91d7321ebc671a42623544c83af416e8cc309caed4bce0079c"
+  "value": "0362cf62cf855f4e7ee51db5466ac6746df1447ff498cb770b3a5009ae274598"
  },
  "engines": [
   {
@@ -68766,7 +68766,7 @@
    ],
    "kind": "DOCUMENT",
    "path": "THE_PRE_STATE_IS_THE_MISSING_PART_20261116_V1.md",
-   "sha256": "a79c43c18863f2e7f2a9be1b3b1ff7227f4a0de861ac6788c247785cff99f9b7",
+   "sha256": "966daa095d6ad42b5560adda7a0756e91d0bbf5c7aa5aa590c773643a61eb37b",
    "summary": "*Round dated 2026-11-16. Receipt: `canonical/verification/THE_PRE_STATE_IS_THE_MISSING_PART_20261116_V1.json`. Tool: `canonical/tools/the_pre_state_is_the_missing_part_v1.py`. Tests: 13, all green, 36.5 s. No model, no weights, no parameters, no network at run time. The systems under test are GNU tar, GNU coreutils and SQLite, executed; nothing here is a model of them.*",
    "terms": {
     "about": 6,
@@ -88410,7 +88410,7 @@
   "included_source_count": 1359,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "824d0012a83ae7169b9f6a5c67bd4b9fc92a610fcbb4bbec4f6249d7e7b41a92"
+  "source_tree_digest": "ad898b3b38e5d98896a225a1860c1e800d56193041843b88c79b98df3ced8bec"
  },
  "research_index": [
   {
@@ -254378,7 +254378,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/THE_PRE_STATE_IS_THE_MISSING_PART_20261116_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "f39955bac66151166b1d675c96552a9dc366549968c633cb7f8e6471b7065f54",
+   "sha256": "4c461851b52543e4bace8ee0477bcbd0a41680858071ceec05bb6e90be3e7013",
    "status": "PROPOSED__PRODUCER_MEASURED__THE_CEILING_WAS_THE_RESET_CONVENTION__PRE_STATE_SEP",
    "terms": {
     "429": 2,
