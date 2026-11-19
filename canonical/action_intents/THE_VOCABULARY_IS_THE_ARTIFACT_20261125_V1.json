@@ -1,0 +1,554 @@
+{
+ "action_id": "THE_VOCABULARY_IS_THE_ARTIFACT_20261125_V1",
+ "action_intent_id": "THE_VOCABULARY_IS_THE_ARTIFACT_20261125_V1",
+ "action_kind": "REAL_CAPABILITY_ACQUISITION",
+ "action_summary": "Replaces the hand-written effect list with relations over the machine's own state and measures, on five real machines (filesystem, git, tarball, sqlite, and a sort machine whose only change is the order of lines), what a fixed {CARD, MULTISET} vocabulary cannot state. 3 of 6 requests are unstateable under it and solved under the goal-directed vocabulary, on 3 machines, each decided by the machine's reader and stable on a second read; for 2 of the 3 the atom that solves it is exactly the atom the fixed vocabulary calls inert (mv, sort). 3 atoms invisible to the fixed vocabulary, reproduced by a second full pass. The goal-directed vocabulary uses 3 of 5 relations, so it carries no term a goal does not need. One request is excluded with its measured reason: git identity includes dates, so an amend in the same second is byte-identical. 7.1 s, 0 parameters, 0 model calls, no network.",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "earlier_routes_exhausted_reason": "Refused by measurement, in order: a bigger vocabulary, a wider grammar, an oracle as a scalar, stored experience, the failure text as an index, two binding rules, candidate supply itself, formatting as the cause of exclusion, the site as the cause of composition, and now the effect list as the vocabulary. What is left is the vocabulary itself: relations, admitted by the goal, grown without a model.",
+  "incremental_spend_usd": 0,
+  "independent_verification_completed": false,
+  "independent_verification_note": "Producer-run sandbox only. Every number is a receipt row: five real machines, every atom in four cells run twice, 3 requests unstateable under the fixed vocabulary and solved under the goal-directed one, each stable on a second read, 3 atoms invisible to the fixed vocabulary, one request excluded with its measured reason, 7.1 s, 0 parameters, 0 model calls.",
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md",
+   "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+  "progress_evidence_paths": [
+   "canonical/verification/THE_HYPOTHESIS_GRAMMAR_IS_THE_BOTTLENECK_20261122_V1.json",
+   "THE_HYPOTHESIS_GRAMMAR_IS_THE_BOTTLENECK_20261122_V1.md",
+   "canonical/tools/the_space_is_the_artifact_v1.py"
+  ],
+  "route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+  "scope_complete_discharge": false,
+  "terminal_achieved": false
+ },
+ "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The observable vocabulary. An agent whose effects are cardinality and multiset cannot see a rename or a re-ordering, so it cannot state the goal, cannot choose the only atom that achieves it, and cannot know it succeeded. Measured on five real machines: 3 of 6 requests are unstateable, and for 2 of them the atom that does the job is the atom the vocabulary calls inert.",
+ "canonical_base_commit": "575e9c0b3d7420c991b53eca673cc5589c35114f",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "The observable vocabulary. An agent whose effects are cardinality and multiset cannot see a rename or a re-ordering, so it cannot state the goal, cannot choose the only atom that achieves it, and cannot know it succeeded. Measured on five real machines: 3 of 6 requests are unstateable, and for 2 of them the atom that does the job is the atom the vocabulary calls inert.",
+ "date": "2026-11-25",
+ "expected_parent_change": "The vocabulary is measured instead of assumed. A fixed effect list is shown to be blind on real tools (mv, sort), the blindness is shown to hide the only atom that can serve the goal, and a goal-directed vocabulary recovers 3 of 3 such requests with the machine's reader as the only judge.",
+ "expected_parent_frontier_change": "The vocabulary is measured instead of assumed. A fixed effect list is shown to be blind on real tools (mv, sort), the blindness is shown to hide the only atom that can serve the goal, and a goal-directed vocabulary recovers 3 of 3 such requests with the machine's reader as the only judge.",
+ "explicit_user_authorization": [
+  "Why can't we just give our model the most advanced coding actions, let it experience them once, and have it learn them? Can't we do this now?",
+  "we are building our own model. never reach for another model or use it and call it ours",
+  "every bit of our weights must be calculated, not a knowledge house",
+  "the best part is no part",
+  "you must think from first principles for everything",
+  "You should kill all the bad and dumb ideas before you waste time implementing them.",
+  "NEVER BUILD BEFORE REASRCHING EXHAUSTION IS HAPPENED",
+  "maximize your web use",
+  "What is the single bottleneck that, if fixed, would unlock the most capability?",
+  "all the tests are not on synthetic data but are on the hardest open tests",
+  "only our agent/system may run them; integrity 100% real",
+  "the honest truth is that we keep testing on bugs we already know work",
+  "Work in branch, merge only when complete (fastest)",
+  "Merge once, not 10 times."
+ ],
+ "falsification_condition": "FALSIFIED if a request is called unstateable while its relation is in the vocabulary; if an atom is called inert without a second full pass; if the git row is counted as a vocabulary failure when the measured reason is identity-by-dates; if any solved row is not stable on a second read; if the goal-directed vocabulary is reported smaller than it is.",
+ "generic_repair_from_single_probe": false,
+ "governance_change": false,
+ "highest_leverage_now": true,
+ "incremental_spend_usd": 0,
+ "intentional_route_race": false,
+ "load_bearing_primary": {
+  "constructive_gap_for_open_obligation_ids": [
+   "CODING_TB4_GE_66_4"
+  ],
+  "expected_obligation_discharge_lcb": 0,
+  "expected_obligation_unlock_lcb": "1/50",
+  "interpretation": "Speculative forecast only. The round moves the bottleneck from the actions an agent has seen to the relations it can state, and shows on real tools that a fixed effect list closes doors. No truth obligation is discharged.",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "1/2",
+  "wall_clock_cost_ub": 1
+ },
+ "measured_effect": {
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "machines": [
+   "FILESYSTEM",
+   "GIT",
+   "TARBALL",
+   "SQLITE",
+   "SORT"
+  ],
+  "cost": {
+   "model_calls": 0,
+   "parameters_stored": 0,
+   "seconds": 7.1,
+   "network_calls_at_run_time": 0
+  },
+  "declared_acceptance": {
+   "A1_3_unstateable_then_solved_on_3_machines": "MET (3: FILESYSTEM, SORT, SQLITE)",
+   "A2_nothing_solved_is_lost": "MET",
+   "A3_goal_directed_smaller_and_blindness_real": "MET (3 of 5 relations used; 3 atoms invisible to FIXED)",
+   "A4_reproduced_by_a_second_full_pass": "MET",
+   "A5_zero_model_calls_zero_parameters": "MET"
+  },
+  "blindness": {
+   "atoms_invisible_to_fixed": 3,
+   "filesystem": [
+    "FS_A3 (mv): IDENT+PAIRING, invisible to CARD+MULTISET"
+   ],
+   "sort": [
+    "SRT_A1 (sort)",
+    "SRT_A2 (tac)"
+   ]
+  },
+  "the_causal_link": "for 2 of the 3 recovered requests the solving atom is one the fixed vocabulary called inert",
+  "second_failure_mode": "SQLITE UPDATE is visible to FIXED; what is unstateable is the goal (no identity->content binding)",
+  "excluded": {
+   "GIT": "hash_before == hash_after for an amend with the same message in the same second: no offered atom can produce a new commit object with the same subjects"
+  },
+  "distinguishable_atom_pairs": {
+   "FILESYSTEM": {
+    "fixed": 6,
+    "full": 7
+   },
+   "SORT": {
+    "fixed": 3,
+    "full": 5
+   }
+  },
+  "receipt": "canonical/verification/THE_VOCABULARY_IS_THE_ARTIFACT_20261125_V1.json",
+  "external_2026": [
+   "OSWorld 2.0 (arXiv 2606.29537): best binary 20.6%; 'all current agents are weak at recovering and maintaining hidden state ... state the instruction does not provide directly'",
+   "dynamic predicate invention with meta-interpretive learning (arXiv 2602.17217)",
+   "TheoryCoder-2 growing a library of learned predicate classifiers (arXiv 2602.00929)",
+   "ExoPredicator predicate invention from 1-2 demonstrations (ICLR 2026) -- all three propose predicates with a language model; this round computes them from the reader with no model"
+  ]
+ },
+ "next_step": "Goal-directed relation invention: given real accepted/rejected state pairs from the same five machines, search a grammar of relations over the reader's output for the smallest relation that separates every pair, add exactly that relation, and then plan. Acceptance declared before the run: the invented relation separates every given pair, is minimal among the separating relations, and turns at least one previously unstateable request into a solved one, with 0 parameters and the reader as the only judge.",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "prior_work_reused": [
+  "canonical/tools/instant_learning_in_a_new_environment_v1.py",
+  "canonical/tools/identify_a_real_bugs_fix_v1.py",
+  "canonical/verification/INSTANT_LEARNING_IN_A_NEW_ENVIRONMENT_20261116_V1.json",
+  "canonical/verification/DEMONSTRATION_SUFFICIENCY_20261116_V1.json",
+  "canonical/verification/IDENTIFICATION_COST_IN_A_REAL_SPACE_20261116_V1.json",
+  "canonical/verification/ONE_DEMONSTRATION_IS_NOT_IDENTIFICATION_MEASURE_20261116_V1.json",
+  "canonical/verification/INSUFFICIENCY_CERTIFICATE_20261113_V1.json",
+  "canonical/verification/A_SITE_IS_NOT_A_PRODUCTION_20261124_V1.json"
+ ],
+ "probe_specific": false,
+ "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+ "progress_evidence_paths": [
+  "canonical/verification/THE_VOCABULARY_IS_THE_ARTIFACT_20261125_V1.json",
+  "THE_VOCABULARY_IS_THE_ARTIFACT_20261125_V1.md",
+  "canonical/tools/the_vocabulary_is_the_artifact_v1.py",
+  "canonical/tests/test_the_vocabulary_is_the_artifact_v1.py"
+ ],
+ "real_outcome": "Not that environments cannot be learned, but that a fixed vocabulary of effects closes doors before any search begins: it hides the atom (mv, sort) or it cannot state the goal (a row's value). The vocabulary must be derived from the reader and admitted only where a goal uses it.",
+ "recursive_obs": {
+  "canonical_base_commit": "575e9c0b3d7420c991b53eca673cc5589c35114f",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "a hand-written effect list (PERSIST/REMOVE/REPLACE) as the representation of what an action does",
+   "treating 'the atom was experienced' as 'the atom is known'",
+   "one probe as a fact: every inert verdict is now a second full pass",
+   "counting an unreachable request as a vocabulary failure when the measured reason is elsewhere"
+  ],
+  "expected_parent_frontier_change": "The composition is measured rather than assumed: 37 shifts of an unchanged demand over 7 rows verify 0, and every one of the 7 human fixes is now described by the production it needed (2 new definitions, 1 changed relation, 1 type at an argument, 1 statement inside a branch, 1 multi-site consistency, 1 documentation). The oracle can no longer score a file it did not run.",
+  "expected_parent_level_state_change": "The vocabulary is measured instead of assumed. A fixed effect list is shown to be blind on real tools (mv, sort), the blindness is shown to hide the only atom that can serve the goal, and a goal-directed vocabulary recovers 3 of 3 such requests with the machine's reader as the only judge.",
+  "independent_verification_required": true,
+  "iteration_limit": 1,
+  "obs_blocker": {
+   "delete_bypass_substitute_options": [
+    "delete the admissible fraction as a capability measure -- it is a recognition measure and is now labelled so",
+    "bypass the audit by trusting the demand reader (it accused the truth six times)",
+    "substitute the corpus's suite for a recogniser: the suite is the gate, the audit is the reader"
+   ],
+   "intrinsic_or_path_specific": "intrinsic: whether a demand can be bound to an assertion is a fact about the program and the test, not about the searcher.",
+   "surviving_causal_blocker": "The hypothesis language, not the search. Real fixes have four productions -- replace an expression, insert a statement, move a statement, change several regions -- and this instrument has one. 8 of 30 real commits are compositions: a value produced in one place and consumed in another."
+  },
+  "obs_capability": {
+   "capability_work_deleted": [
+    "a stored attribute vocabulary (dir() is fresher and costs nothing)",
+    "a stored grammar table (the language's own grammar is reused)",
+    "requiring one differing node to call an edit a single expression (it manufactured a 10-of-19 exclusion that was a property of the tool)"
+   ],
+   "existing_inherited_routes_checked": [
+    "canonical/tools/the_failing_run_names_the_expression_v1.py (arm A, run on the same 15 commits)",
+    "canonical/tools/force_the_value_and_see_v1.py (interior value forcing: the next composition)",
+    "canonical/runtime/bound_capabilities/python_counterfactual_spec_repair_v1.py (function-scale counterfactual repair on QuixBugs; same primitives, no repo-scale address)",
+    "canonical/tools/what_a_real_fix_needs_from_the_site_v1.py (site verdicts and single-change extraction)"
+   ],
+   "external_existing_routes_checked": [
+    "AgenTracer (ICLR 2026): counterfactual replay labels, guessed by a frontier model",
+    "CausalFlow (arXiv 2605.25338): step-level interventions written by a model",
+    "Who Broke the System? (arXiv 2607.07989): reviewed for approximating rather than executing the counterfactual"
+   ],
+   "surviving_gap": "Selection: which expression, out of a closure of 10^5, produces the value the failing assertion demanded, at a rank an oracle budget can afford."
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "a bigger action library (OSWorld 2.0: final-state exactness is the 84-95% failure bucket)",
+    "more repetitions of one demonstration (retention, not identification)",
+    "parameters for identification (zero is correct, measurable, and recorded per row)"
+   ],
+   "real_outcome": "Execution beats approximation for the counterfactual itself, and the counterfactual is not the bottleneck. Zero parameters were stored by either arm. One verified repair exists and it is in-sample; on 15 fresh real commits both channels produce nothing, and the seven 'wins' a version without the soundness and exact-fit gates would have claimed are all false.",
+   "surviving_necessity": "a model of the counterfactual is not needed where the artifact can be executed: one flipped firing is the intervention, and the oracle is the project's own tests"
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "None by claim: the existing repair primitive and corpus oracle are reused unchanged; the induced basis adds candidates only and holds no authority.",
+   "downstream_work_to_delete_or_supersede": "Any roadmap step that adds another hand-written mutation kind, or that raises a candidate budget to fix a bug whose edit is not expressible.",
+   "fresh_reuse_plan": "Recompute the ladder and re-run both bases from the receipt's commands; the corpus is public and the answer key is never needed."
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": "Reused the verdict parser, span patching and suite runner instead of writing a second harness; the switch is an AST rewrite of the same lines, not a second interpreter.",
+   "search_stop_decision": "Stop after both arms on the fresh corpus; no widening of the logged scope and no value-forcing composition without the falsifier stated in the verification JSON."
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "efficiency_mechanism": "Ordering and exact fit replace breadth: 409 flips decided 15 commits, and no candidate refinement was scored, ranked or thresholded.",
+   "generality_mechanism": "The rewrite is generic Python AST plus a counter; the oracle is the project's own pytest; the address is a site and a firing, so it carries to any executable artifact.",
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "Message channel: 1 of 15 at the line, 0 at the expression. Whole-predicate flips: cannot express a guard that is right once and wrong once. Scoring: unnecessary once fit is exact. Stored state: costlier than re-measuring in ~50 microseconds.",
+   "routes_ranked": [
+    "force the value at the flip-identified firing and synthesize from the artifact's vocabulary",
+    "widen the logged scope beyond locals and self.__dict__",
+    "read the failure message as a second channel (measured: 0 of 15 at the expression)",
+    "raise the candidate budget",
+    "store every verified repair and retrieve by similarity"
+   ],
+   "white_box_harvest_note": "No donor model, weight or external artifact was harvested or called: every number comes from running the projects' own test suites in this sandbox."
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "oracle_paths": [
+    "canonical/tests/test_the_same_guard_twice_is_the_discriminator_v1.py",
+    "canonical/tests/test_identify_a_real_bugs_fix_v1.py",
+    "canonical/verification/THE_SAME_GUARD_TWICE_IS_THE_DISCRIMINATOR_20261119_V1.json"
+   ],
+   "synthetic_verification_necessity": "The oracle for a real commit is that project's own post-fix test file, run on an uninstrumented copy; unit tests pin only the instrument. Independent reproduction remains open."
+  },
+  "real_outcome": "That 17 unaddressed rows are unsolvable; that the instrument covers 13 rows in capability (it verifies 1); that formatting is irrelevant in general, only that it is worth 1 row here; that this grammar is the population's last word.",
+  "required_capability": "counterfactual intervention over a live execution trace, exact-fit predicate selection from the logged scope, and an oracle that decides without a model",
+  "route_frontier": {
+   "challenger_routes": [
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "1 verified repair; 13 of 30 rows addressed; 0 accusations",
+      "CORRECTNESS": "the corpus's own suite, whole file",
+      "INCREMENTAL_COST": "0 parameters, 0 model calls, ~10 us per candidate",
+      "RELIABILITY": "recall is the open term",
+      "VERIFIABILITY": "receipt rows, producer-run",
+      "WALL_CLOCK": "83.6 s for 30 commits"
+     },
+     "evidence": [
+      "30 real commits, 83.6 s, 0 accusations, grammar named for every exclusion, 1 row recovered by the AST finder, 1 verified repair unchanged, 1 harness failure stopped from wearing a fact's name"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_HYPOTHESIS_GRAMMAR_IS_THE_BOTTLENECK_20261122_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "SELECTED",
+     "route": "READ_THE_FIX_FROM_THE_AST_AND_NAME_THE_GRAMMAR_OF_THE_POPULATION"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "3 of 40 programs",
+      "CORRECTNESS": "a class is only as good as its donor",
+      "INCREMENTAL_COST": "one class per shape",
+      "RELIABILITY": "unseen shapes stay unseen",
+      "VERIFIABILITY": "measured exactly",
+      "WALL_CLOCK": "unbounded as the corpus grows"
+     },
+     "evidence": [
+      "a taught class reaches 8 of 40 fixes, 5 only on its donor"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/WHAT_IS_LEFT_FOR_A_LESSON_TO_BUY_20261117_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "teach one more edit class per failing task"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "2 of 30 unseen programs from 3 pairs, at 1.92% precision on the pair that fires",
+      "CORRECTNESS": "the corpus's own pytest decides, as here",
+      "INCREMENTAL_COST": "40.6 us per lookup, no model, no parameters",
+      "RELIABILITY": "saturates: addressability 34.4% -> 59.7% over 24 experiences",
+      "VERIFIABILITY": "measured exactly",
+      "WALL_CLOCK": "5 minutes for the whole corpus"
+     },
+     "evidence": [
+      "0.597 addressable x 0.0192 precise ~ 1.1% of unseen decisions"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/WHAT_AN_EXPERIENCE_CAN_OWN_20261118_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "NON_DOMINATING",
+     "route": "store every verified repair and retrieve it by similarity"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "1 real commit identified at rank 0, unattended, with no diff and no name table",
+      "CORRECTNESS": "the artifact answers, so a question is either answered or refused -- never wrong",
+      "INCREMENTAL_COST": "7.69 ms per asked question, 1 bit",
+      "RELIABILITY": "no saturating share: every site can be asked",
+      "VERIFIABILITY": "measured exactly",
+      "WALL_CLOCK": "121.2 s for 14 bugs"
+     },
+     "evidence": [
+      "click@1b0e19f505: human fix derived at rank 0 from the trace, 2 consistent candidates of 119 tests",
+      "5 evaluated candidates per site against the proximity pool's 32-400"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_FAILING_RUN_IS_THE_INDEX_20261118_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "SELECTED",
+     "route": "INDEX_ACTIONS_BY_THE_FAILING_RUN_NOT_BY_THE_SOURCE_TEXT"
+    }
+   ],
+   "checked_at_utc": "2026-11-18T22:57:31Z",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "AUDIT_WHAT_THE_INSTRUMENT_ACCEPTS_BEFORE_ASKING_WHAT_IT_CAN_FIND",
+   "max_age_hours": 2,
+   "negative_search_summary": "Refused by measurement this session: formatting as a cause of exclusion (1 row recovered of 30, three of the four candidates are genuine moves or two-region edits); a bigger candidate space (150,000 offered, 0 admissible); and the previous round's own claim that the specification fallback adds repairs (it adds none).",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "enumerative program repair expression size budget type-directed synthesis local typing context 2026"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "QuixBugs bug corpus python programs tests published"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "expression-size-wise enumeration starting at the size of the buggy expression S3 syntactic search space"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "2026 bounded typed program synthesis with counterexample-guided refinement depth size fuel bounds"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "selected_route": "READ_THE_FIX_FROM_THE_AST_AND_NAME_THE_GRAMMAR_OF_THE_POPULATION",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-11-18T22:57:31Z",
+    "execution_dependencies": [
+     {
+      "dependency": "local Python 3.11 runtime with pytest",
+      "evidence": [
+       "Python 3.11 + pytest 9.2; 33/33 unified-model gates and 12 instrument tests pass at 2026-11-18T18:50:14Z"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "real repositories cloned for the sweep (requests, click, tqdm, httpx) with their suites runnable",
+      "evidence": [
+       "29 fix commits swept twice in this sandbox (blame index and proximity index) at 2026-11-18T16:05:00Z"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "local tempdir for fresh per-verdict task copies",
+      "evidence": [
+       "one fresh copy per real-judge verdict, answer key absent from the copy the search runs in; 0 corpus verdicts: reachability only, no execution at 2026-11-17T22:05:07Z"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "STORAGE",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "max_age_hours": 2,
+    "selected_route": "READ_THE_FIX_FROM_THE_AST_AND_NAME_THE_GRAMMAR_OF_THE_POPULATION",
+    "status": "READY"
+   },
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/tools/grammar_closed_repair_v1.py (corpus reader, space enumerator, real judge, executed_lines)",
+     "canonical/tools/solve_with_a_calibrated_judge_v1.py (certified judge, per-case clocks, containment)",
+     "canonical/verification/WHERE_THE_REFUSALS_ACTUALLY_WERE_20261116_V1.json",
+     "canonical/verification/ONE_DEMONSTRATION_LEAVES_TEN_BITS_20261116_V1.json"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "https://arxiv.org/pdf/2611.12885 (World In-Context Learning: one demonstration plus rehearsal beats a 50-demonstration trained policy; without the world the demonstration brings no benefit)",
+     "https://arxiv.org/html/2606.29537v1 (OSWorld 2.0: 20.6% binary completion, failures concentrate on hidden state)",
+     "https://arxiv.org/html/2606.31270v1 (Learning from Failure: inference-time self-improvement from failure trajectories)"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "https://github.com/jkoppel/QuixBugs (MIT; 40 buggy programs, 40 pytest files, JSON test data)",
+     "https://pypi.org/project/pytest (9.2.0, the runner every verdict goes through)"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "https://docs.python.org/3/library/ast.html (node types the closure rule enumerates)"
+    ]
+   },
+   "unresolved_plausible_dominators": []
+  },
+  "routes_considered": [
+   "TRAIN_OR_DISTIL_A_MODEL_TO_PROPOSE_EXPRESSIONS__REFUSED_BY_OWNER_LAW_AND_UNNECESSARY_HERE",
+   "WIDEN_THE_VOCABULARY_WITH_MORE_NEIGHBOURHOOD_ATTRIBUTES__ALREADY_MEASURED_AT_9_1_PERCENT",
+   "MEASURE_THE_CEILING_WITH_THE_ADDRESS_GIVEN_FREE_THEN_NAME_WHAT_SELECTS__SELECTED"
+  ],
+  "selected_route": "READ_THE_FIX_FROM_THE_AST_AND_NAME_THE_GRAMMAR_OF_THE_POPULATION",
+  "selected_surviving_route": "READ_THE_FIX_FROM_THE_AST_AND_NAME_THE_GRAMMAR_OF_THE_POPULATION",
+  "selected_surviving_route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+  "stop_condition": "Goal-directed relation invention: given real accepted/rejected state pairs from the same five machines, search a grammar of relations over the reader's output for the smallest relation that separates every pair, add exactly that relation, and then plan. Acceptance declared before the run: the invented relation separates every given pair, is minimal among the separating relations, and turns at least one previously unstateable request into a solved one, with 0 parameters and the reader as the only judge.",
+  "why_selected_route_is_fastest_sufficient": "Because the question 'is the content a knowledge problem' can only be answered by handing the address over for free and measuring what the artifact's own words can say; every other route answers it by assuming an answer.",
+  "why_this_is_not_another_organ": "It adds no knowledge, no vocabulary and no model: one AST rewrite of the module, one counter, one log of what was already in scope, and the project's own pytest as the verdict."
+ },
+ "required_capability": "counterfactual intervention over a live execution trace, exact-fit predicate selection from the logged scope, and an oracle that decides without a model",
+ "route_id": "GROW_THE_VOCABULARY_FROM_THE_READER_AND_ADMIT_ONLY_WHAT_A_GOAL_USES",
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "scope_complete_discharge": false,
+ "selected_route": "MEASURE_WHAT_A_FIXED_EFFECT_VOCABULARY_CANNOT_STATE_ON_FIVE_REAL_MACHINES",
+ "status": "PROPOSED__PRODUCER_MEASURED__MECHANISM_WORKS_ON_FIVE_REAL_MACHINES__INDEPENDENT_VERIFICATION_OPEN",
+ "stop_condition": "Goal-directed relation invention: given real accepted/rejected state pairs from the same five machines, search a grammar of relations over the reader's output for the smallest relation that separates every pair, add exactly that relation, and then plan. Acceptance declared before the run: the invented relation separates every given pair, is minimal among the separating relations, and turns at least one previously unstateable request into a solved one, with 0 parameters and the reader as the only judge.",
+ "terminal_credit_delta": 0,
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "truth": {
+  "achieved": false,
+  "the_law_this_round_adds": "THE VOCABULARY IS THE ARTIFACT. An effect is a computable object -- the set of relations that moved between two readings -- and a goal can only be stated, planned for and verified in relations the system carries. Experience of an atom whose effect no relation names is experience of nothing.",
+  "what_is_false_in_the_claim": [
+   "that experiencing the most advanced action once installs it: mv was experienced in every cell of the probe table twice and still could not take the rename request",
+   "that repetition fixes an unstateable goal: a thousand observations of an invisible change are a thousand observations of nothing",
+   "that one demonstration identifies the rule: median 1037 surviving programs, 4 of 23 tasks identified",
+   "that an action list transfers: 0 of 20 held-out bugs at any budget; an action shape from one demonstration reaches 1-2 of 20",
+   "that any of this solves 'any computer use': the five relations are a grammar, not the world, and OSWorld 2.0's hardest phenomena need relations nobody wrote down"
+  ]
+ },
+ "user_authorized_governance_change": false,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "currentness": {
+   "accepted_families": 5,
+   "current_load_bearing_atomic_count": 36,
+   "deleted_nonnecessary_atomic_count": 2,
+   "historical_atomic_registry_count": 38,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_atomic": 38,
+   "total_families": 19,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "This measures the reach of an executed counterfactual over real commit history and finds the content of the fix outside it; it discharges no truth obligation.",
+  "target_truth_obligations": [
+   "CODING_TB4_GE_66_4"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [
+    {
+     "git_blob_sha": "aa752cadab44d7b354814507d437f4fa485aaf74",
+     "path": "canonical/verification/RECOGNITION_IS_THE_BOTTLENECK_20261121_V1.json"
+    }
+   ],
+   "decisive_question": "Before asking what the instrument can find, does it accept the human's own fix -- and if not, why not?",
+   "falsifier_id": "THE_DEMAND_MUST_ADMIT_THE_HUMAN_FIX_AND_NOT_A_CONSTANT",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "Zero generalising repairs out of thirty fresh commits is the counterexample, and it is recorded in the receipt rather than hidden.",
+   "proposal_id": "THE_ASSERTION_IS_THE_DEMAND_20261119_V1"
+  }
+ },
+ "verification": {
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "commands": [
+   "python3 canonical/tools/the_vocabulary_is_the_artifact_v1.py --receipt canonical/verification/THE_VOCABULARY_IS_THE_ARTIFACT_20261125_V1.json",
+   "python3 -m pytest canonical/tests/test_the_vocabulary_is_the_artifact_v1.py -q"
+  ],
+  "tests_green": 43,
+  "independent_verification_completed": false,
+  "independent_verification_required": true
+ },
+ "weakens_existing_guard": false
+}
