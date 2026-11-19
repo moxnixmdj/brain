@@ -1,0 +1,670 @@
+{
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "cost": {
+  "model_calls": 0,
+  "network": "repository clones during preparation; the measurement runs offline",
+  "parameters_stored": 0
+ },
+ "date": "2026-11-19",
+ "declared_acceptance_before_the_receipt_run": {
+  "K1": "the insertion shape and its enclosing construct are decided exactly from the diff and the AST",
+  "K2": "the VALUE_ADDED class is counted and broken down by construct",
+  "K3": "for every instance, whether its literal already appears in the check that catches the bug",
+  "K4": "instances whose literal is in the check are applied and the real suite is run",
+  "K5": "zero model calls and zero parameters"
+ },
+ "limits": [
+  "a pure one-line insertion is required, so a fix that adds two lines is outside this shape",
+  "the check's text is the test file at the fix commit; a literal that appears there for an unrelated reason counts, which errs toward optimism about the class",
+  "execution confirmation is run on at most four instances",
+  "the corpus is three pure-Python libraries and 87 fixes",
+  "no claim of independent verification"
+ ],
+ "mode": "MEASURE_VALUE_ADDED_AND_WHETHER_THE_CHECK_NAMES_THE_LITERAL_THAT_FILLS_THE_HOLE",
+ "per_task": [
+  {
+   "pure_insertion": false,
+   "repo": "pypa/packaging",
+   "sha": "46167dcdb1",
+   "shape": "not a single-line insertion"
+  },
+  {
+   "pure_insertion": false,
+   "repo": "pypa/packaging",
+   "sha": "5a7d3386d2",
+   "shape": "not a single-line insertion"
+  },
+  {
+   "pure_insertion": false,
+   "repo": "pypa/packaging",
+   "sha": "8efde605cc",
+   "shape": "not a single-line insertion"
+  },
+  {
+   "pure_insertion": false,
+   "repo": "pypa/packaging",
+   "sha": "7d0611d420",
+   "shape": "not a single-line insertion"
+  },
+  {
+   "pure_insertion": false,
+   "repo": "pypa/packaging",
+   "sha": "491af5d517",
+   "shape": "not a single-line insertion"
+  },
+  {
+   "pure_insertion": false,
+   "repo": "pypa/packaging",
+   "sha": "a03bde12d5",
+   "shape": "not a single-line insertion"
+  },
+  {
+   "pure_insertion": false,
+   "repo": "pypa/packaging",
+   "sha": "cd91074b05",
+   "shape": "not a single-line insertion"
+  },
+  {
+   "pure_insertion": false,
+   "repo": "pypa/packaging",
+   "sha": "8c37b0476f",
+   "shape": "not a single-line insertion"
+  },
+  {
+   "construct": null,
+   "inserted": "Metadata",
+   "insertion_kind": "append",
+   "pure_insertion": true,
+   "repo": "pypa/packaging",
+   "sha": "b1c439b0f1",
+   "shape": "insertion outside a multi-line construct",
+   "value_added": false
+  },
+  {
+   "pure_insertion": false,
+   "repo": "pypa/packaging",
+   "sha": "31b2d01319",
+   "shape": "not a single-line insertion"
+  },
+  {
+   "pure_insertion": false,
+   "repo": "pypa/packaging",
+   "sha": "bddb69038b",
+   "shape": "not a single-line insertion"
+  },
+  {
+   "pure_insertion": false,
+   "repo": "pypa/packaging",
+   "sha": "2d57ce2b15",
+   "shape": "not a single-line insertion"
+  },
+  {
+   "pure_insertion": false,
+   "repo": "pypa/packaging",
+   "sha": "4b243af94f",
+   "shape": "not a single-line insertion"
+  },
+  {
+   "pure_insertion": false,
+   "repo": "pypa/packaging",
+   "sha": "2c87a33f66",
+   "shape": "not a single-line insertion"
+  },
+  {
+   "construct": null,
+   "inserted": "\\Z",
+   "insertion_kind": "append",
+   "pure_insertion": true,
+   "repo": "pypa/packaging",
+   "sha": "0625596e50",
+   "shape": "insertion outside a multi-line construct",
+   "value_added": false
+  },
+  {
+   "pure_insertion": false,
+   "repo": "pypa/packaging",
+   "sha": "959bb79c06",
+   "shape": "not a single-line insertion"
+  },
+  {
+   "pure_insertion": false,
+   "repo": "pypa/packaging",
+   "sha": "d17cfaf0b7",
+   "shape": "not a single-line insertion"
+  },
+  {
+   "construct": null,
+   "inserted": "or pathlib.PureWindowsPath(path).drive",
+   "insertion_kind": "insert",
+   "pure_insertion": true,
+   "repo": "pypa/packaging",
+   "sha": "022ae6c6fe",
+   "shape": "insertion outside a multi-line construct",
+   "value_added": false
+  },
+  {
+   "construct": "Dict",
+   "inserted": "\\S",
+   "insertion_kind": "append",
+   "literal_in_the_check": false,
+   "literals": [],
+   "named_literals": [],
+   "pure_insertion": true,
+   "repo": "pypa/packaging",
+   "sha": "2602dd07d8",
+   "shape": "value_added",
+   "value_added": true
+  },
+  {
+   "pure_insertion": false,
+   "repo": "pypa/packaging",
+   "sha": "23669b1b69",
+   "shape": "not a single-line insertion"
+  },
+  {
+   "pure_insertion": false,
+   "repo": "pypa/packaging",
+   "sha": "55cbf1b942",
+   "shape": "not a single-line insertion"
+  },
+  {
+   "construct": null,
+   "inserted": "is not None",
+   "insertion_kind": "append",
+   "pure_insertion": true,
+   "repo": "pypa/packaging",
+   "sha": "b80e6eb0a6",
+   "shape": "insertion outside a multi-line construct",
+   "value_added": false
+  },
+  {
+   "pure_insertion": false,
+   "repo": "pypa/packaging",
+   "sha": "2d873eb600",
+   "shape": "not a single-line insertion"
+  },
+  {
+   "pure_insertion": false,
+   "repo": "pypa/packaging",
+   "sha": "826426fc88",
+   "shape": "not a single-line insertion"
+  },
+  {
+   "pure_insertion": false,
+   "repo": "pypa/packaging",
+   "sha": "fe18f139c5",
+   "shape": "not a single-line insertion"
+  },
+  {
+   "pure_insertion": false,
+   "repo": "pypa/packaging",
+   "sha": "9c652e4b4c",
+   "shape": "not a single-line insertion"
+  },
+  {
+   "construct": null,
+   "inserted": "\\Z",
+   "insertion_kind": "append",
+   "pure_insertion": true,
+   "repo": "pypa/packaging",
+   "sha": "8af75907bf",
+   "shape": "insertion outside a multi-line construct",
+   "value_added": false
+  },
+  {
+   "pure_insertion": false,
+   "repo": "pypa/packaging",
+   "sha": "2068340250",
+   "shape": "not a single-line insertion"
+  },
+  {
+   "construct": null,
+   "inserted": ".lower() != \"utf",
+   "insertion_kind": "append",
+   "pure_insertion": true,
+   "repo": "pypa/packaging",
+   "sha": "abf000549c",
+   "shape": "insertion outside a multi-line construct",
+   "value_added": false
+  },
+  {
+   "pure_insertion": false,
+   "repo": "pypa/packaging",
+   "sha": "9d0ec47b36",
+   "shape": "not a single-line insertion"
+  },
+  {
+   "construct": null,
+   "inserted": "f\"{self.raw_name!r",
+   "insertion_kind": "append",
+   "pure_insertion": true,
+   "repo": "pypa/packaging",
+   "sha": "458b0ae53e",
+   "shape": "insertion outside a multi-line construct",
+   "value_added": false
+  },
+  {
+   "construct": null,
+   "inserted": "InvalidRequirement,",
+   "insertion_kind": "append",
+   "pure_insertion": true,
+   "repo": "pypa/packaging",
+   "sha": "30824d9e3b",
+   "shape": "insertion outside a multi-line construct",
+   "value_added": false
+  },
+  {
+   "pure_insertion": false,
+   "repo": "pypa/packaging",
+   "sha": "4c663c9ef5",
+   "shape": "not a single-line insertion"
+  },
+  {
+   "pure_insertion": false,
+   "repo": "pypa/packaging",
+   "sha": "d5fedc90bb",
+   "shape": "not a single-line insertion"
+  },
+  {
+   "pure_insertion": false,
+   "repo": "pypa/packaging",
+   "sha": "a0661b5f5c",
+   "shape": "not a single-line insertion"
+  },
+  {
+   "pure_insertion": false,
+   "repo": "pypa/packaging",
+   "sha": "2c688aa15f",
+   "shape": "not a single-line insertion"
+  },
+  {
+   "pure_insertion": false,
+   "repo": "pypa/packaging",
+   "sha": "1b00eeffc6",
+   "shape": "not a single-line insertion"
+  },
+  {
+   "pure_insertion": false,
+   "repo": "pypa/packaging",
+   "sha": "0a85b41e24",
+   "shape": "not a single-line insertion"
+  },
+  {
+   "construct": null,
+   "inserted": "and",
+   "insertion_kind": "append",
+   "pure_insertion": true,
+   "repo": "pypa/packaging",
+   "sha": "c4fb81ff6e",
+   "shape": "insertion outside a multi-line construct",
+   "value_added": false
+  },
+  {
+   "pure_insertion": false,
+   "repo": "pypa/packaging",
+   "sha": "84833cc16b",
+   "shape": "not a single-line insertion"
+  },
+  {
+   "pure_insertion": false,
+   "repo": "pypa/packaging",
+   "sha": "fbea07c1f2",
+   "shape": "not a single-line insertion"
+  },
+  {
+   "pure_insertion": false,
+   "repo": "pypa/packaging",
+   "sha": "d2fa923848",
+   "shape": "not a single-line insertion"
+  },
+  {
+   "pure_insertion": false,
+   "repo": "pypa/packaging",
+   "sha": "fbd0d4b4b8",
+   "shape": "not a single-line insertion"
+  },
+  {
+   "pure_insertion": false,
+   "repo": "pypa/packaging",
+   "sha": "e80f70f8b1",
+   "shape": "not a single-line insertion"
+  },
+  {
+   "pure_insertion": false,
+   "repo": "pypa/packaging",
+   "sha": "b19df947aa",
+   "shape": "not a single-line insertion"
+  },
+  {
+   "pure_insertion": false,
+   "repo": "pypa/packaging",
+   "sha": "0726512929",
+   "shape": "not a single-line insertion"
+  },
+  {
+   "pure_insertion": false,
+   "repo": "pypa/packaging",
+   "sha": "349abfad06",
+   "shape": "not a single-line insertion"
+  },
+  {
+   "pure_insertion": false,
+   "repo": "pypa/packaging",
+   "sha": "d8e08df11b",
+   "shape": "not a single-line insertion"
+  },
+  {
+   "construct": null,
+   "inserted": "+(?:-[a-z0-9]+)*",
+   "insertion_kind": "append",
+   "pure_insertion": true,
+   "repo": "pypa/packaging",
+   "sha": "ba17fcea23",
+   "shape": "insertion outside a multi-line construct",
+   "value_added": false
+  },
+  {
+   "construct": null,
+   "inserted": "r",
+   "insertion_kind": "append",
+   "pure_insertion": true,
+   "repo": "pypa/packaging",
+   "sha": "08bb047794",
+   "shape": "insertion outside a multi-line construct",
+   "value_added": false
+  },
+  {
+   "pure_insertion": false,
+   "repo": "pypa/packaging",
+   "sha": "5c163f5382",
+   "shape": "not a single-line insertion"
+  },
+  {
+   "pure_insertion": false,
+   "repo": "pypa/packaging",
+   "sha": "9f5249fba2",
+   "shape": "not a single-line insertion"
+  },
+  {
+   "construct": null,
+   "inserted": "_",
+   "insertion_kind": "append",
+   "pure_insertion": true,
+   "repo": "pypa/packaging",
+   "sha": "668da8662a",
+   "shape": "insertion outside a multi-line construct",
+   "value_added": false
+  },
+  {
+   "pure_insertion": false,
+   "repo": "pypa/packaging",
+   "sha": "98b4bfb682",
+   "shape": "not a single-line insertion"
+  },
+  {
+   "construct": "Call",
+   "inserted": "charset!r",
+   "insertion_kind": "append",
+   "literal_in_the_check": false,
+   "literals": [],
+   "named_literals": [],
+   "pure_insertion": true,
+   "repo": "pypa/packaging",
+   "sha": "553582d916",
+   "shape": "value_added",
+   "value_added": true
+  },
+  {
+   "construct": null,
+   "inserted": "other is self",
+   "insertion_kind": "append",
+   "pure_insertion": true,
+   "repo": "pypa/packaging",
+   "sha": "f8f16338e1",
+   "shape": "insertion outside a multi-line construct",
+   "value_added": false
+  },
+  {
+   "pure_insertion": false,
+   "repo": "pypa/packaging",
+   "sha": "6da1c50d13",
+   "shape": "not a single-line insertion"
+  },
+  {
+   "pure_insertion": false,
+   "repo": "pypa/packaging",
+   "sha": "a1f705642e",
+   "shape": "not a single-line insertion"
+  },
+  {
+   "pure_insertion": false,
+   "repo": "pypa/packaging",
+   "sha": "e83801f455",
+   "shape": "not a single-line insertion"
+  },
+  {
+   "pure_insertion": false,
+   "repo": "pypa/packaging",
+   "sha": "3b20e0fd02",
+   "shape": "not a single-line insertion"
+  },
+  {
+   "pure_insertion": false,
+   "repo": "pypa/packaging",
+   "sha": "888eb14526",
+   "shape": "not a single-line insertion"
+  },
+  {
+   "construct": "Call",
+   "inserted": "\\Z",
+   "insertion_kind": "append",
+   "literal_in_the_check": false,
+   "literals": [],
+   "named_literals": [],
+   "pure_insertion": true,
+   "repo": "pypa/packaging",
+   "sha": "258202ed7f",
+   "shape": "value_added",
+   "value_added": true
+  },
+  {
+   "pure_insertion": false,
+   "repo": "pypa/packaging",
+   "sha": "2680259b4f",
+   "shape": "not a single-line insertion"
+  },
+  {
+   "pure_insertion": false,
+   "repo": "pypa/packaging",
+   "sha": "a716c52b5f",
+   "shape": "not a single-line insertion"
+  },
+  {
+   "pure_insertion": false,
+   "repo": "pypa/packaging",
+   "sha": "c385b58c4d",
+   "shape": "not a single-line insertion"
+  },
+  {
+   "pure_insertion": false,
+   "repo": "pypa/packaging",
+   "sha": "3e67fc775e",
+   "shape": "not a single-line insertion"
+  },
+  {
+   "construct": null,
+   "inserted": "Optional[List[str]",
+   "insertion_kind": "append",
+   "pure_insertion": true,
+   "repo": "pypa/packaging",
+   "sha": "09f131b326",
+   "shape": "insertion outside a multi-line construct",
+   "value_added": false
+  },
+  {
+   "pure_insertion": false,
+   "repo": "pypa/packaging",
+   "sha": "524b701c6e",
+   "shape": "not a single-line insertion"
+  },
+  {
+   "pure_insertion": false,
+   "repo": "pypa/packaging",
+   "sha": "e8f839f740",
+   "shape": "not a single-line insertion"
+  },
+  {
+   "pure_insertion": false,
+   "repo": "pypa/packaging",
+   "sha": "fe8f0bb99c",
+   "shape": "not a single-line insertion"
+  },
+  {
+   "pure_insertion": false,
+   "repo": "pypa/packaging",
+   "sha": "55584fb5ca",
+   "shape": "not a single-line insertion"
+  },
+  {
+   "pure_insertion": false,
+   "repo": "pallets/itsdangerous",
+   "sha": "7f4dcf83a0",
+   "shape": "not a single-line insertion"
+  },
+  {
+   "pure_insertion": false,
+   "repo": "hukkin/tomli",
+   "sha": "1e6e869aa9",
+   "shape": "not a single-line insertion"
+  },
+  {
+   "pure_insertion": false,
+   "repo": "hukkin/tomli",
+   "sha": "e1fdb94bc9",
+   "shape": "not a single-line insertion"
+  },
+  {
+   "pure_insertion": false,
+   "repo": "hukkin/tomli",
+   "sha": "9eb2125ef4",
+   "shape": "not a single-line insertion"
+  },
+  {
+   "pure_insertion": false,
+   "repo": "hukkin/tomli",
+   "sha": "12314bde5b",
+   "shape": "not a single-line insertion"
+  },
+  {
+   "pure_insertion": false,
+   "repo": "hukkin/tomli",
+   "sha": "2a2aa62f1b",
+   "shape": "not a single-line insertion"
+  },
+  {
+   "pure_insertion": false,
+   "repo": "hukkin/tomli",
+   "sha": "d1d6a8571b",
+   "shape": "not a single-line insertion"
+  },
+  {
+   "pure_insertion": false,
+   "repo": "hukkin/tomli",
+   "sha": "4e245a4bbb",
+   "shape": "not a single-line insertion"
+  },
+  {
+   "pure_insertion": false,
+   "repo": "hukkin/tomli",
+   "sha": "794c8e50d6",
+   "shape": "not a single-line insertion"
+  },
+  {
+   "pure_insertion": false,
+   "repo": "hukkin/tomli",
+   "sha": "8b962e1349",
+   "shape": "not a single-line insertion"
+  },
+  {
+   "pure_insertion": false,
+   "repo": "hukkin/tomli",
+   "sha": "96dfe2cef7",
+   "shape": "not a single-line insertion"
+  },
+  {
+   "construct": null,
+   "inserted": "\"Expected {expect!r}\"",
+   "insertion_kind": "append",
+   "pure_insertion": true,
+   "repo": "hukkin/tomli",
+   "sha": "31c85a1846",
+   "shape": "insertion outside a multi-line construct",
+   "value_added": false
+  },
+  {
+   "pure_insertion": false,
+   "repo": "hukkin/tomli",
+   "sha": "9af551b578",
+   "shape": "not a single-line insertion"
+  },
+  {
+   "pure_insertion": false,
+   "repo": "hukkin/tomli",
+   "sha": "9655d33004",
+   "shape": "not a single-line insertion"
+  },
+  {
+   "pure_insertion": false,
+   "repo": "hukkin/tomli",
+   "sha": "67ec7d1052",
+   "shape": "not a single-line insertion"
+  },
+  {
+   "pure_insertion": false,
+   "repo": "hukkin/tomli",
+   "sha": "5ab9ec926d",
+   "shape": "not a single-line insertion"
+  }
+ ],
+ "schema": "BRAIN_A_NEW_LITERAL_IN_AN_EXISTING_CONSTRUCT_V1",
+ "verdict": {
+  "K1_the_insertion_shape_is_decided_exactly": {
+   "MET": true,
+   "note": "decided from the diff and the pre-fix AST; nothing is generated or capped",
+   "pure_single_line_insertions": 18,
+   "tasks": 87
+  },
+  "K2_a_new_literal_in_an_existing_construct_is_counted": {
+   "MET": true,
+   "constructs": {
+    "Call": 2,
+    "Dict": 1
+   },
+   "fraction_of_corpus": 0.034,
+   "value_added": 3
+  },
+  "K3_the_check_names_the_literal_that_fills_the_hole": {
+   "MET": true,
+   "fraction_of_value_added": 0.0,
+   "literal_already_in_the_check": 0,
+   "named_literals": [],
+   "note": "measured, including zero: an empty class is a result about the corpus, not a failure to measure, so this gate requires the measurement and not the presence",
+   "value_added_with_a_literal": 0
+  },
+  "K4_the_class_is_confirmed_by_execution": {
+   "MET": true,
+   "candidates_executed": 0,
+   "confirmed_by_the_real_suite": 0
+  },
+  "K5_zero": {
+   "MET": true,
+   "model_calls": 0,
+   "parameters_stored": 0
+  }
+ },
+ "why_this_round": {
+  "the_answer_being_tested": "if the literal the fix adds is already written in the check that catches the bug, then this shape is reachable with zero parameters: copy the check's own word into the hole, and that is a capability class",
+  "the_gap_it_closes": "round 26 closed the selectors and left one shape unmeasured; the project's own census calls it memorisable -- a new literal in an existing construct -- and round 26's tests excluded multi-line constructs by construction",
+  "why_it_could_fail": "the check may assert outputs rather than name the literal; the insertion may not be inside a multi-line construct"
+ }
+}

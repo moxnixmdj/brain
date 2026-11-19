@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 577,
+  "knowledge_documents": 578,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 7176,
+  "research_index_records": 7178,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 452,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "965c39cf0516e62ea399addb30ff77c773ddf12efda271b47f913b9aad2cb48b"
+  "value": "47756a3103dd8dc4b8e915ba8cea0477bedc6a2b2638a4ec38140cd532e4f490"
  },
  "engines": [
   {
@@ -46336,6 +46336,87 @@
     "name",
     "renamed",
     "uses"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 5987,
+   "headings": [
+    "A new literal in an existing construct: it occurs three times, and the check never says the word",
+    "The correction first",
+    "What this round measured",
+    "What this closes, and what it fixes in the record",
+    "The single bottleneck, in its final and usable form",
+    "The smartest thing to do next",
+    "Limits"
+   ],
+   "kind": "DOCUMENT",
+   "path": "A_NEW_LITERAL_IN_AN_EXISTING_CONSTRUCT_20261119_V1.md",
+   "sha256": "baaf01d2d0dc6289c0f0a6878169f8eaa12d74b241762046f4c4cf69476ad69c",
+   "summary": "**Round 27. Receipt: `canonical/verification/A_NEW_LITERAL_IN_AN_EXISTING_CONSTRUCT_20261119_V1.json`. Tool: `canonical/tools/a_new_literal_in_an_existing_construct_v1.py`. Zero model calls, zero parameters.**",
+   "terms": {
+    "26": 3,
+    "87": 6,
+    "absent": 3,
+    "all": 3,
+    "already": 4,
+    "because": 5,
+    "before": 3,
+    "both": 3,
+    "calls": 3,
+    "canonical": 3,
+    "census": 3,
+    "check": 6,
+    "code": 3,
+    "construct": 6,
+    "element": 6,
+    "every": 3,
+    "execution": 4,
+    "fix": 4,
+    "fixes": 7,
+    "form": 3,
+    "generation": 3,
+    "here": 4,
+    "line": 4,
+    "literal": 6,
+    "measured": 6,
+    "memorisable": 5,
+    "must": 4,
+    "never": 4,
+    "new": 5,
+    "no": 7,
+    "not": 15,
+    "nothing": 3,
+    "one": 13,
+    "only": 4,
+    "own": 4,
+    "parameters": 3,
+    "part": 4,
+    "predicate": 3,
+    "project": 6,
+    "rather": 4,
+    "real": 7,
+    "round": 5,
+    "route": 4,
+    "shape": 6,
+    "site": 4,
+    "so": 5,
+    "than": 4,
+    "zero": 5
+   },
+   "title": "A new literal in an existing construct: it occurs three times, and the check never says the word",
+   "title_terms": [
+    "check",
+    "construct",
+    "existing",
+    "literal",
+    "never",
+    "new",
+    "occurs",
+    "says",
+    "three",
+    "times",
+    "word"
    ]
   },
   {
@@ -89989,10 +90070,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1379,
+  "included_source_count": 1380,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "672480bfa4295d4ac8a5ef0213c886b701f0591e4e111ea43a5ed4d0eb28c52c"
+  "source_tree_digest": "fdfaccf8511b6cbceda711edcd2e37cf6e1e445df35ee069ab7dc081ea7da3e8"
  },
  "research_index": [
   {
@@ -160447,6 +160528,25 @@
     "two": 1,
     "v1": 1,
     "worth": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "2026-11-19",
+   "id": "research:canonical/verification/A_NEW_LITERAL_IN_AN_EXISTING_CONSTRUCT_20261119_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/A_NEW_LITERAL_IN_AN_EXISTING_CONSTRUCT_20261119_V1.json",
+   "schema": "BRAIN_A_NEW_LITERAL_IN_AN_EXISTING_CONSTRUCT_V1",
+   "sha256": "920ede87a66c54ceec6dd924a6f6f5999e13f6842b74bbdbd716db7bb61107c5",
+   "status": "",
+   "terms": {
+    "20261119": 1,
+    "construct": 1,
+    "existing": 1,
+    "literal": 1,
+    "new": 1,
+    "v1": 1
    }
   },
   {
@@ -241239,6 +241339,51 @@
     "spaces": 3,
     "v1": 2,
     "word": 3
+   }
+  },
+  {
+   "action_id": "A_NEW_LITERAL_IN_AN_EXISTING_CONSTRUCT_20261119_V1",
+   "capability": false,
+   "date": "2026-11-19",
+   "id": "research:canonical/action_intents/A_NEW_LITERAL_IN_AN_EXISTING_CONSTRUCT_20261119_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_NEW_LITERAL_IN_AN_EXISTING_CONSTRUCT_20261119_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "9441bf37adee523da64bde92c4b2382dc3ff3823f3552ea1612f7033a6a4a7d5",
+   "status": "COMPLETE",
+   "terms": {
+    "20261119": 1,
+    "24": 2,
+    "a_new_literal_in_an_existing_construct_20261119_v1": 1,
+    "action": 2,
+    "actions": 1,
+    "agent": 1,
+    "any": 1,
+    "argument": 2,
+    "becomes": 1,
+    "both": 1,
+    "budget": 1,
+    "cannot": 1,
+    "check": 1,
+    "choosing": 1,
+    "closes": 1,
+    "column": 1,
+    "complete": 1,
+    "compose": 1,
+    "compose_measured_effects_v1": 1,
+    "confidently": 1,
+    "construct": 1,
+    "coverage": 5,
+    "cp": 1,
+    "designed": 1,
+    "disagrees": 1,
+    "effect": 3,
+    "first": 2,
+    "one": 2,
+    "so": 2,
+    "soundness": 3,
+    "values": 2,
+    "wall": 2
    }
   },
   {
