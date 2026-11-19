@@ -1,0 +1,2103 @@
+{
+ "schema": "BRAIN_THE_COUNTEREXAMPLE_IS_THE_NEXT_EXPERIMENT_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "date": "2026-11-29",
+ "mode": "CEGAR_OVER_THE_GOALS_STATISTIC_WITH_EXECUTED_RUNS_TWO_CURRENCIES_CELLS_AND_QUESTIONS",
+ "declared_acceptance_before_the_run": {
+  "C1": "on at least two machines the statistic fitted one depth shallower confuses real deeper runs",
+  "C2": "at least one confusion is harmful: the shallow table accepts a run the user rejects",
+  "C3": "one question per counterexample removes every confusion at that depth within six",
+  "C4": "exactness at depth d does not carry to d+1 (TARBALL, depth 4)",
+  "C5": "zero model calls, zero stored parameters, every run executed"
+ },
+ "verdict": {
+  "C1_the_statistic_confuses_deeper_runs": {
+   "conflated_pairs_at_depth3": {
+    "FILESYSTEM": 675,
+    "TARBALL": 321
+   },
+   "SQLITE": 337,
+   "MET": true
+  },
+  "C2_some_confusions_are_harmful": {
+   "false_accepts_of_the_shallow_table": {
+    "FILESYSTEM": 0,
+    "TARBALL": 2
+   },
+   "harmful_pairs_at_depth3": {
+    "FILESYSTEM": 0,
+    "TARBALL": 10
+   },
+   "MET": true
+  },
+  "C3_one_question_per_counterexample_is_enough": {
+   "control_policy_cell_labelling": {
+    "FILESYSTEM": {
+     "questions_used": 0,
+     "counterexamples_found": 0,
+     "reached_exactness": true,
+     "ceiling_n_minus_cells": 63
+    },
+    "TARBALL": {
+     "questions_used": 2,
+     "counterexamples_found": 1,
+     "reached_exactness": true,
+     "ceiling_n_minus_cells": 30
+    }
+   },
+   "free_running_orderings": {
+    "cheapest_refinement": {
+     "FILESYSTEM": {
+      "questions": 0,
+      "counterexamples_found": 0,
+      "exact_at_depth_after": 0
+     },
+     "TARBALL": {
+      "questions": 6,
+      "counterexamples_found": 0,
+      "exact_at_depth_after": null
+     }
+    },
+    "max_disagreement": {
+     "FILESYSTEM": {
+      "questions": 0,
+      "counterexamples_found": 0,
+      "exact_at_depth_after": 0
+     },
+     "TARBALL": {
+      "questions": 1,
+      "counterexamples_found": 1,
+      "exact_at_depth_after": 1
+     }
+    },
+    "no_signal": {
+     "FILESYSTEM": {
+      "questions": 0,
+      "counterexamples_found": 0,
+      "exact_at_depth_after": 0
+     },
+     "TARBALL": {
+      "questions": 6,
+      "counterexamples_found": 0,
+      "exact_at_depth_after": null
+     }
+    }
+   },
+   "budget": 6,
+   "note": "the cell-labelling policy was added as the soundness control after both computable orderings failed; it is not a free-running policy and the receipt says so",
+   "MET": true
+  },
+  "C4_exactness_does_not_travel": {
+   "depth3_statistic": [
+    "holders_ever[probe_new_content]",
+    "decrements[probe_new_content]"
+   ],
+   "confusions_of_that_statistic_on_depth4": 1765,
+   "harmful_on_depth4": 0,
+   "statistic_after_asking_on_depth3": [
+    "holders_ever[probe_new_content]",
+    "decrements[probe_new_content]"
+   ],
+   "its_confusions_on_depth4": 1765,
+   "verdict_level__table_learned_at_depth3_applied_to_depth4": {
+    "runs": 87,
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "reading": "the criterion is met at the level of cells and refuted at the level of verdicts: the depth-3 statistic conflates 1765 pairs of depth-4 runs and gets every one of the 87 verdicts right, so injectivity is not what correctness needs",
+   "MET": true
+  },
+  "C5_zero": {
+   "model_calls": 0,
+   "parameters_stored": 0,
+   "network_calls_at_run_time": 0,
+   "MET": true
+  }
+ },
+ "rows": {
+  "FILESYSTEM": {
+   "runs": {
+    "depth2": 21,
+    "depth3": 68
+   },
+   "statistic_at_depth2": [
+    "increments[probe_new_content]",
+    "decrements[probe_new_content]"
+   ],
+   "cells_at_depth2": 4,
+   "table_from_depth2_on_depth3": {
+    "runs": 68,
+    "undecided": 2,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "conflations_at_depth3": {
+    "conflated_pairs": 675,
+    "harmful_pairs": 0,
+    "cells": 5
+   },
+   "expressibility_at_depth3": {
+    "sufficient_statistics_at_depth": 274,
+    "coarsest": [
+     "increments[probe_new_content]",
+     "decrements[probe_new_content]"
+    ],
+    "cells": 5,
+    "extends_the_shallow_winner": true,
+    "added_generators": []
+   },
+   "cegar_cheapest": {
+    "acquisition": "cheapest_refinement",
+    "steps": [
+     {
+      "question": 0,
+      "statistic": [
+       "increments[probe_new_content]",
+       "decrements[probe_new_content]"
+      ],
+      "cells_on_known": 4,
+      "surviving_statistics": 349,
+      "bits_to_identify": 8.4,
+      "conflated_pairs": 675,
+      "harmful_pairs": 0
+     }
+    ],
+    "questions": 0,
+    "exact_at_depth_after": 0,
+    "harmful_answers": 0,
+    "final_statistic": [
+     "increments[probe_new_content]",
+     "decrements[probe_new_content]"
+    ],
+    "final_cells_on_known": 4
+   },
+   "cegar_committee": {
+    "acquisition": "max_disagreement",
+    "steps": [
+     {
+      "question": 0,
+      "statistic": [
+       "increments[probe_new_content]",
+       "decrements[probe_new_content]"
+      ],
+      "cells_on_known": 4,
+      "surviving_statistics": 349,
+      "bits_to_identify": 8.4,
+      "conflated_pairs": 675,
+      "harmful_pairs": 0
+     }
+    ],
+    "questions": 0,
+    "exact_at_depth_after": 0,
+    "harmful_answers": 0,
+    "final_statistic": [
+     "increments[probe_new_content]",
+     "decrements[probe_new_content]"
+    ],
+    "final_cells_on_known": 4
+   },
+   "cegar_no_signal": {
+    "acquisition": "no_signal",
+    "steps": [
+     {
+      "question": 0,
+      "statistic": [
+       "increments[probe_new_content]",
+       "decrements[probe_new_content]"
+      ],
+      "cells_on_known": 4,
+      "surviving_statistics": 349,
+      "bits_to_identify": 8.4,
+      "conflated_pairs": 675,
+      "harmful_pairs": 0
+     }
+    ],
+    "questions": 0,
+    "exact_at_depth_after": 0,
+    "harmful_answers": 0,
+    "final_statistic": [
+     "increments[probe_new_content]",
+     "decrements[probe_new_content]"
+    ],
+    "final_cells_on_known": 4
+   },
+   "cegar_exhaustive": {
+    "acquisition": "exhaustive_cell",
+    "steps": [
+     {
+      "question": 0,
+      "statistic": [
+       "increments[probe_new_content]",
+       "decrements[probe_new_content]"
+      ],
+      "cells_on_known": 4,
+      "surviving_statistics": 349,
+      "bits_to_identify": 8.4,
+      "conflated_pairs": 675,
+      "harmful_pairs": 0
+     }
+    ],
+    "questions": 0,
+    "exact_at_depth_after": 0,
+    "harmful_answers": 0,
+    "final_statistic": [
+     "increments[probe_new_content]",
+     "decrements[probe_new_content]"
+    ],
+    "final_cells_on_known": 4
+   },
+   "guaranteed_questions": 63,
+   "acquisition_diagnostics": {
+    "rank_cheapest_refinement": {
+     "pairs": 675,
+     "harmful": 0,
+     "best_harmful_rank": null,
+     "harmful_ranks": [],
+     "random_first_harmful_expectation": null
+    },
+    "rank_max_disagreement": {
+     "pairs": 675,
+     "harmful": 0,
+     "best_harmful_rank": null,
+     "harmful_ranks": [],
+     "random_first_harmful_expectation": null
+    },
+    "rank_no_signal": {
+     "pairs": 675,
+     "harmful": 0,
+     "best_harmful_rank": null,
+     "harmful_ranks": [],
+     "random_first_harmful_expectation": null
+    },
+    "committee_is_degenerate": {
+     "pairs": 675,
+     "pairs_where_every_coarsest_statistic_agrees": 80,
+     "decision": "an ordering that ties on almost every pair is index order, not information"
+    }
+   }
+  },
+  "TARBALL": {
+   "runs": {
+    "depth2": 11,
+    "depth3": 32
+   },
+   "statistic_at_depth2": [
+    "holders_ever[probe_new_content]"
+   ],
+   "cells_at_depth2": 2,
+   "table_from_depth2_on_depth3": {
+    "runs": 32,
+    "undecided": 0,
+    "false_accepts": 2,
+    "false_rejects": 0
+   },
+   "conflations_at_depth3": {
+    "conflated_pairs": 321,
+    "harmful_pairs": 10,
+    "cells": 2
+   },
+   "expressibility_at_depth3": {
+    "sufficient_statistics_at_depth": 779,
+    "coarsest": [
+     "holders_ever[probe_new_content]",
+     "decrements[probe_new_content]"
+    ],
+    "cells": 3,
+    "extends_the_shallow_winner": true,
+    "added_generators": [
+     "decrements[probe_new_content]"
+    ]
+   },
+   "cegar_cheapest": {
+    "acquisition": "cheapest_refinement",
+    "steps": [
+     {
+      "question": 0,
+      "statistic": [
+       "holders_ever[probe_new_content]"
+      ],
+      "cells_on_known": 2,
+      "surviving_statistics": 782,
+      "bits_to_identify": 9.6,
+      "conflated_pairs": 321,
+      "harmful_pairs": 10,
+      "asked": [
+       0,
+       1
+      ],
+      "was_harmful": false
+     },
+     {
+      "question": 1,
+      "statistic": [
+       "holders_ever[probe_new_content]"
+      ],
+      "cells_on_known": 2,
+      "surviving_statistics": 782,
+      "bits_to_identify": 9.6,
+      "conflated_pairs": 321,
+      "harmful_pairs": 10,
+      "asked": [
+       0,
+       2
+      ],
+      "was_harmful": false
+     },
+     {
+      "question": 2,
+      "statistic": [
+       "holders_ever[probe_new_content]"
+      ],
+      "cells_on_known": 2,
+      "surviving_statistics": 782,
+      "bits_to_identify": 9.6,
+      "conflated_pairs": 321,
+      "harmful_pairs": 10,
+      "asked": [
+       0,
+       3
+      ],
+      "was_harmful": false
+     },
+     {
+      "question": 3,
+      "statistic": [
+       "holders_ever[probe_new_content]"
+      ],
+      "cells_on_known": 2,
+      "surviving_statistics": 782,
+      "bits_to_identify": 9.6,
+      "conflated_pairs": 321,
+      "harmful_pairs": 10,
+      "asked": [
+       0,
+       4
+      ],
+      "was_harmful": false
+     },
+     {
+      "question": 4,
+      "statistic": [
+       "holders_ever[probe_new_content]"
+      ],
+      "cells_on_known": 2,
+      "surviving_statistics": 782,
+      "bits_to_identify": 9.6,
+      "conflated_pairs": 321,
+      "harmful_pairs": 10,
+      "asked": [
+       0,
+       5
+      ],
+      "was_harmful": false
+     },
+     {
+      "question": 5,
+      "statistic": [
+       "holders_ever[probe_new_content]"
+      ],
+      "cells_on_known": 2,
+      "surviving_statistics": 782,
+      "bits_to_identify": 9.6,
+      "conflated_pairs": 321,
+      "harmful_pairs": 10,
+      "asked": [
+       0,
+       7
+      ],
+      "was_harmful": false
+     },
+     {
+      "question": 6,
+      "statistic": [
+       "holders_ever[probe_new_content]"
+      ],
+      "cells_on_known": 2,
+      "surviving_statistics": 782,
+      "bits_to_identify": 9.6,
+      "conflated_pairs": 321,
+      "harmful_pairs": 10
+     }
+    ],
+    "questions": 6,
+    "exact_at_depth_after": null,
+    "harmful_answers": 0,
+    "final_statistic": [
+     "holders_ever[probe_new_content]"
+    ],
+    "final_cells_on_known": 2
+   },
+   "cegar_committee": {
+    "acquisition": "max_disagreement",
+    "steps": [
+     {
+      "question": 0,
+      "statistic": [
+       "holders_ever[probe_new_content]"
+      ],
+      "cells_on_known": 2,
+      "surviving_statistics": 782,
+      "bits_to_identify": 9.6,
+      "conflated_pairs": 321,
+      "harmful_pairs": 10,
+      "asked": [
+       6,
+       19
+      ],
+      "was_harmful": true
+     },
+     {
+      "question": 1,
+      "statistic": [
+       "holders_ever[probe_new_content]",
+       "decrements[probe_new_content]"
+      ],
+      "cells_on_known": 3,
+      "surviving_statistics": 865,
+      "bits_to_identify": 9.8,
+      "conflated_pairs": 311,
+      "harmful_pairs": 0
+     }
+    ],
+    "questions": 1,
+    "exact_at_depth_after": 1,
+    "harmful_answers": 1,
+    "final_statistic": [
+     "holders_ever[probe_new_content]",
+     "decrements[probe_new_content]"
+    ],
+    "final_cells_on_known": 3
+   },
+   "cegar_no_signal": {
+    "acquisition": "no_signal",
+    "steps": [
+     {
+      "question": 0,
+      "statistic": [
+       "holders_ever[probe_new_content]"
+      ],
+      "cells_on_known": 2,
+      "surviving_statistics": 782,
+      "bits_to_identify": 9.6,
+      "conflated_pairs": 321,
+      "harmful_pairs": 10,
+      "asked": [
+       0,
+       1
+      ],
+      "was_harmful": false
+     },
+     {
+      "question": 1,
+      "statistic": [
+       "holders_ever[probe_new_content]"
+      ],
+      "cells_on_known": 2,
+      "surviving_statistics": 782,
+      "bits_to_identify": 9.6,
+      "conflated_pairs": 321,
+      "harmful_pairs": 10,
+      "asked": [
+       0,
+       2
+      ],
+      "was_harmful": false
+     },
+     {
+      "question": 2,
+      "statistic": [
+       "holders_ever[probe_new_content]"
+      ],
+      "cells_on_known": 2,
+      "surviving_statistics": 782,
+      "bits_to_identify": 9.6,
+      "conflated_pairs": 321,
+      "harmful_pairs": 10,
+      "asked": [
+       1,
+       2
+      ],
+      "was_harmful": false
+     },
+     {
+      "question": 3,
+      "statistic": [
+       "holders_ever[probe_new_content]"
+      ],
+      "cells_on_known": 2,
+      "surviving_statistics": 782,
+      "bits_to_identify": 9.6,
+      "conflated_pairs": 321,
+      "harmful_pairs": 10,
+      "asked": [
+       0,
+       3
+      ],
+      "was_harmful": false
+     },
+     {
+      "question": 4,
+      "statistic": [
+       "holders_ever[probe_new_content]"
+      ],
+      "cells_on_known": 2,
+      "surviving_statistics": 782,
+      "bits_to_identify": 9.6,
+      "conflated_pairs": 321,
+      "harmful_pairs": 10,
+      "asked": [
+       0,
+       4
+      ],
+      "was_harmful": false
+     },
+     {
+      "question": 5,
+      "statistic": [
+       "holders_ever[probe_new_content]"
+      ],
+      "cells_on_known": 2,
+      "surviving_statistics": 782,
+      "bits_to_identify": 9.6,
+      "conflated_pairs": 321,
+      "harmful_pairs": 10,
+      "asked": [
+       0,
+       5
+      ],
+      "was_harmful": false
+     },
+     {
+      "question": 6,
+      "statistic": [
+       "holders_ever[probe_new_content]"
+      ],
+      "cells_on_known": 2,
+      "surviving_statistics": 782,
+      "bits_to_identify": 9.6,
+      "conflated_pairs": 321,
+      "harmful_pairs": 10
+     }
+    ],
+    "questions": 6,
+    "exact_at_depth_after": null,
+    "harmful_answers": 0,
+    "final_statistic": [
+     "holders_ever[probe_new_content]"
+    ],
+    "final_cells_on_known": 2
+   },
+   "cegar_exhaustive": {
+    "acquisition": "exhaustive_cell",
+    "steps": [
+     {
+      "question": 0,
+      "statistic": [
+       "holders_ever[probe_new_content]"
+      ],
+      "cells_on_known": 2,
+      "surviving_statistics": 782,
+      "bits_to_identify": 9.6,
+      "conflated_pairs": 321,
+      "harmful_pairs": 10,
+      "asked": [
+       6,
+       14
+      ],
+      "was_harmful": false
+     },
+     {
+      "question": 1,
+      "statistic": [
+       "holders_ever[probe_new_content]"
+      ],
+      "cells_on_known": 2,
+      "surviving_statistics": 782,
+      "bits_to_identify": 9.6,
+      "conflated_pairs": 321,
+      "harmful_pairs": 10,
+      "asked": [
+       6,
+       19
+      ],
+      "was_harmful": true
+     },
+     {
+      "question": 2,
+      "statistic": [
+       "holders_ever[probe_new_content]",
+       "decrements[probe_new_content]"
+      ],
+      "cells_on_known": 3,
+      "surviving_statistics": 845,
+      "bits_to_identify": 9.7,
+      "conflated_pairs": 311,
+      "harmful_pairs": 0
+     }
+    ],
+    "questions": 2,
+    "exact_at_depth_after": 2,
+    "harmful_answers": 1,
+    "final_statistic": [
+     "holders_ever[probe_new_content]",
+     "decrements[probe_new_content]"
+    ],
+    "final_cells_on_known": 3
+   },
+   "guaranteed_questions": 30,
+   "acquisition_diagnostics": {
+    "rank_cheapest_refinement": {
+     "pairs": 321,
+     "harmful": 10,
+     "best_harmful_rank": 130,
+     "harmful_ranks": [
+      130,
+      131,
+      240,
+      241,
+      284,
+      285,
+      286,
+      287
+     ],
+     "random_first_harmful_expectation": 29.3
+    },
+    "rank_max_disagreement": {
+     "pairs": 321,
+     "harmful": 10,
+     "best_harmful_rank": 0,
+     "harmful_ranks": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+     ],
+     "random_first_harmful_expectation": 29.3
+    },
+    "rank_no_signal": {
+     "pairs": 321,
+     "harmful": 10,
+     "best_harmful_rank": 136,
+     "harmful_ranks": [
+      136,
+      137,
+      240,
+      241,
+      284,
+      285,
+      286,
+      287
+     ],
+     "random_first_harmful_expectation": 29.3
+    },
+    "committee_is_degenerate": {
+     "pairs": 321,
+     "pairs_where_every_coarsest_statistic_agrees": 311,
+     "decision": "an ordering that ties on almost every pair is index order, not information"
+    }
+   }
+  }
+ },
+ "depth4": {
+  "runs": 87,
+  "labels_true": 16,
+  "statistic": [
+   "holders_ever[probe_new_content]",
+   "decrements[probe_new_content]"
+  ],
+  "cells_at_depth4": 3,
+  "conflations_of_the_depth3_statistic": 1765,
+  "harmful_conflations": 0,
+  "table_learned_at_depth3_on_depth4_runs": {
+   "runs": 87,
+   "undecided": 0,
+   "false_accepts": 0,
+   "false_rejects": 0
+  },
+  "table_of_the_one_generator_statistic_on_depth4": {
+   "runs": 87,
+   "undecided": 31,
+   "false_accepts": 0,
+   "false_rejects": 0
+  },
+  "conflations_after_the_loop_on_depth3": 1765
+ },
+ "sqlite": {
+  "statistic_at_depth2": [
+   "increments[probe_new_content]"
+  ],
+  "conflations_at_depth3": {
+   "conflated_pairs": 337,
+   "harmful_pairs": 0,
+   "cells": 4,
+   "pairs": [
+    [
+     0,
+     2
+    ],
+    [
+     1,
+     3
+    ],
+    [
+     0,
+     5
+    ],
+    [
+     0,
+     7
+    ],
+    [
+     0,
+     8
+    ],
+    [
+     0,
+     11
+    ],
+    [
+     0,
+     12
+    ],
+    [
+     0,
+     14
+    ],
+    [
+     1,
+     9
+    ],
+    [
+     1,
+     13
+    ],
+    [
+     1,
+     15
+    ],
+    [
+     2,
+     5
+    ],
+    [
+     2,
+     7
+    ],
+    [
+     2,
+     8
+    ],
+    [
+     2,
+     11
+    ],
+    [
+     2,
+     12
+    ],
+    [
+     2,
+     14
+    ],
+    [
+     3,
+     9
+    ],
+    [
+     3,
+     13
+    ],
+    [
+     3,
+     15
+    ],
+    [
+     0,
+     21
+    ],
+    [
+     0,
+     25
+    ],
+    [
+     0,
+     27
+    ],
+    [
+     0,
+     29
+    ],
+    [
+     0,
+     30
+    ],
+    [
+     0,
+     35
+    ],
+    [
+     0,
+     37
+    ],
+    [
+     0,
+     39
+    ],
+    [
+     0,
+     40
+    ],
+    [
+     0,
+     43
+    ],
+    [
+     0,
+     44
+    ],
+    [
+     0,
+     46
+    ],
+    [
+     1,
+     31
+    ],
+    [
+     1,
+     41
+    ],
+    [
+     1,
+     45
+    ],
+    [
+     1,
+     47
+    ],
+    [
+     2,
+     21
+    ],
+    [
+     2,
+     25
+    ],
+    [
+     2,
+     27
+    ],
+    [
+     2,
+     29
+    ],
+    [
+     2,
+     30
+    ],
+    [
+     2,
+     35
+    ],
+    [
+     2,
+     37
+    ],
+    [
+     2,
+     39
+    ],
+    [
+     2,
+     40
+    ],
+    [
+     2,
+     43
+    ],
+    [
+     2,
+     44
+    ],
+    [
+     2,
+     46
+    ],
+    [
+     3,
+     31
+    ],
+    [
+     3,
+     41
+    ],
+    [
+     3,
+     45
+    ],
+    [
+     3,
+     47
+    ],
+    [
+     4,
+     6
+    ],
+    [
+     4,
+     10
+    ],
+    [
+     5,
+     7
+    ],
+    [
+     5,
+     8
+    ],
+    [
+     5,
+     11
+    ],
+    [
+     5,
+     12
+    ],
+    [
+     5,
+     14
+    ],
+    [
+     6,
+     10
+    ],
+    [
+     7,
+     8
+    ],
+    [
+     7,
+     11
+    ],
+    [
+     7,
+     12
+    ],
+    [
+     7,
+     14
+    ],
+    [
+     8,
+     11
+    ],
+    [
+     8,
+     12
+    ],
+    [
+     8,
+     14
+    ],
+    [
+     9,
+     13
+    ],
+    [
+     9,
+     15
+    ],
+    [
+     11,
+     12
+    ],
+    [
+     11,
+     14
+    ],
+    [
+     12,
+     14
+    ],
+    [
+     13,
+     15
+    ],
+    [
+     4,
+     17
+    ],
+    [
+     4,
+     19
+    ],
+    [
+     4,
+     20
+    ],
+    [
+     4,
+     23
+    ],
+    [
+     4,
+     24
+    ],
+    [
+     4,
+     26
+    ],
+    [
+     4,
+     28
+    ],
+    [
+     4,
+     33
+    ],
+    [
+     4,
+     34
+    ],
+    [
+     4,
+     36
+    ],
+    [
+     4,
+     38
+    ],
+    [
+     4,
+     42
+    ],
+    [
+     5,
+     21
+    ],
+    [
+     5,
+     25
+    ],
+    [
+     5,
+     27
+    ],
+    [
+     5,
+     29
+    ],
+    [
+     5,
+     30
+    ],
+    [
+     5,
+     35
+    ],
+    [
+     5,
+     37
+    ],
+    [
+     5,
+     39
+    ],
+    [
+     5,
+     40
+    ],
+    [
+     5,
+     43
+    ],
+    [
+     5,
+     44
+    ],
+    [
+     5,
+     46
+    ],
+    [
+     6,
+     17
+    ],
+    [
+     6,
+     19
+    ],
+    [
+     6,
+     20
+    ],
+    [
+     6,
+     23
+    ],
+    [
+     6,
+     24
+    ],
+    [
+     6,
+     26
+    ],
+    [
+     6,
+     28
+    ],
+    [
+     6,
+     33
+    ],
+    [
+     6,
+     34
+    ],
+    [
+     6,
+     36
+    ],
+    [
+     6,
+     38
+    ],
+    [
+     6,
+     42
+    ],
+    [
+     7,
+     21
+    ],
+    [
+     7,
+     25
+    ],
+    [
+     7,
+     27
+    ],
+    [
+     7,
+     29
+    ],
+    [
+     7,
+     30
+    ],
+    [
+     7,
+     35
+    ],
+    [
+     7,
+     37
+    ],
+    [
+     7,
+     39
+    ],
+    [
+     7,
+     40
+    ],
+    [
+     7,
+     43
+    ],
+    [
+     7,
+     44
+    ],
+    [
+     7,
+     46
+    ],
+    [
+     8,
+     21
+    ],
+    [
+     8,
+     25
+    ],
+    [
+     8,
+     27
+    ],
+    [
+     8,
+     29
+    ],
+    [
+     8,
+     30
+    ],
+    [
+     8,
+     35
+    ],
+    [
+     8,
+     37
+    ],
+    [
+     8,
+     39
+    ],
+    [
+     8,
+     40
+    ],
+    [
+     8,
+     43
+    ],
+    [
+     8,
+     44
+    ],
+    [
+     8,
+     46
+    ],
+    [
+     9,
+     31
+    ],
+    [
+     9,
+     41
+    ],
+    [
+     9,
+     45
+    ],
+    [
+     9,
+     47
+    ],
+    [
+     10,
+     17
+    ],
+    [
+     10,
+     19
+    ],
+    [
+     10,
+     20
+    ],
+    [
+     10,
+     23
+    ],
+    [
+     10,
+     24
+    ],
+    [
+     10,
+     26
+    ],
+    [
+     10,
+     28
+    ],
+    [
+     10,
+     33
+    ],
+    [
+     10,
+     34
+    ],
+    [
+     10,
+     36
+    ],
+    [
+     10,
+     38
+    ],
+    [
+     10,
+     42
+    ],
+    [
+     11,
+     21
+    ],
+    [
+     11,
+     25
+    ],
+    [
+     11,
+     27
+    ],
+    [
+     11,
+     29
+    ],
+    [
+     11,
+     30
+    ],
+    [
+     11,
+     35
+    ],
+    [
+     11,
+     37
+    ],
+    [
+     11,
+     39
+    ],
+    [
+     11,
+     40
+    ],
+    [
+     11,
+     43
+    ],
+    [
+     11,
+     44
+    ],
+    [
+     11,
+     46
+    ],
+    [
+     12,
+     21
+    ],
+    [
+     12,
+     25
+    ],
+    [
+     12,
+     27
+    ],
+    [
+     12,
+     29
+    ],
+    [
+     12,
+     30
+    ],
+    [
+     12,
+     35
+    ],
+    [
+     12,
+     37
+    ],
+    [
+     12,
+     39
+    ],
+    [
+     12,
+     40
+    ],
+    [
+     12,
+     43
+    ],
+    [
+     12,
+     44
+    ],
+    [
+     12,
+     46
+    ],
+    [
+     13,
+     31
+    ],
+    [
+     13,
+     41
+    ],
+    [
+     13,
+     45
+    ],
+    [
+     13,
+     47
+    ],
+    [
+     14,
+     21
+    ],
+    [
+     14,
+     25
+    ],
+    [
+     14,
+     27
+    ],
+    [
+     14,
+     29
+    ],
+    [
+     14,
+     30
+    ],
+    [
+     14,
+     35
+    ],
+    [
+     14,
+     37
+    ],
+    [
+     14,
+     39
+    ],
+    [
+     14,
+     40
+    ],
+    [
+     14,
+     43
+    ],
+    [
+     14,
+     44
+    ],
+    [
+     14,
+     46
+    ],
+    [
+     15,
+     31
+    ],
+    [
+     15,
+     41
+    ],
+    [
+     15,
+     45
+    ],
+    [
+     15,
+     47
+    ],
+    [
+     16,
+     18
+    ],
+    [
+     16,
+     22
+    ],
+    [
+     16,
+     32
+    ],
+    [
+     17,
+     19
+    ],
+    [
+     17,
+     20
+    ],
+    [
+     17,
+     23
+    ],
+    [
+     17,
+     24
+    ],
+    [
+     17,
+     26
+    ],
+    [
+     17,
+     28
+    ],
+    [
+     17,
+     33
+    ],
+    [
+     17,
+     34
+    ],
+    [
+     17,
+     36
+    ],
+    [
+     17,
+     38
+    ],
+    [
+     17,
+     42
+    ],
+    [
+     18,
+     22
+    ],
+    [
+     18,
+     32
+    ],
+    [
+     19,
+     20
+    ],
+    [
+     19,
+     23
+    ],
+    [
+     19,
+     24
+    ],
+    [
+     19,
+     26
+    ],
+    [
+     19,
+     28
+    ],
+    [
+     19,
+     33
+    ],
+    [
+     19,
+     34
+    ],
+    [
+     19,
+     36
+    ],
+    [
+     19,
+     38
+    ],
+    [
+     19,
+     42
+    ],
+    [
+     20,
+     23
+    ],
+    [
+     20,
+     24
+    ],
+    [
+     20,
+     26
+    ],
+    [
+     20,
+     28
+    ],
+    [
+     20,
+     33
+    ],
+    [
+     20,
+     34
+    ],
+    [
+     20,
+     36
+    ],
+    [
+     20,
+     38
+    ],
+    [
+     20,
+     42
+    ],
+    [
+     21,
+     25
+    ],
+    [
+     21,
+     27
+    ],
+    [
+     21,
+     29
+    ],
+    [
+     21,
+     30
+    ],
+    [
+     21,
+     35
+    ],
+    [
+     21,
+     37
+    ],
+    [
+     21,
+     39
+    ],
+    [
+     21,
+     40
+    ],
+    [
+     21,
+     43
+    ],
+    [
+     21,
+     44
+    ],
+    [
+     21,
+     46
+    ],
+    [
+     22,
+     32
+    ],
+    [
+     23,
+     24
+    ],
+    [
+     23,
+     26
+    ],
+    [
+     23,
+     28
+    ],
+    [
+     23,
+     33
+    ],
+    [
+     23,
+     34
+    ],
+    [
+     23,
+     36
+    ],
+    [
+     23,
+     38
+    ],
+    [
+     23,
+     42
+    ],
+    [
+     24,
+     26
+    ],
+    [
+     24,
+     28
+    ],
+    [
+     24,
+     33
+    ],
+    [
+     24,
+     34
+    ],
+    [
+     24,
+     36
+    ],
+    [
+     24,
+     38
+    ],
+    [
+     24,
+     42
+    ],
+    [
+     25,
+     27
+    ],
+    [
+     25,
+     29
+    ],
+    [
+     25,
+     30
+    ],
+    [
+     25,
+     35
+    ],
+    [
+     25,
+     37
+    ],
+    [
+     25,
+     39
+    ],
+    [
+     25,
+     40
+    ],
+    [
+     25,
+     43
+    ],
+    [
+     25,
+     44
+    ],
+    [
+     25,
+     46
+    ],
+    [
+     26,
+     28
+    ],
+    [
+     26,
+     33
+    ],
+    [
+     26,
+     34
+    ],
+    [
+     26,
+     36
+    ],
+    [
+     26,
+     38
+    ],
+    [
+     26,
+     42
+    ],
+    [
+     27,
+     29
+    ],
+    [
+     27,
+     30
+    ],
+    [
+     27,
+     35
+    ],
+    [
+     27,
+     37
+    ],
+    [
+     27,
+     39
+    ],
+    [
+     27,
+     40
+    ],
+    [
+     27,
+     43
+    ],
+    [
+     27,
+     44
+    ],
+    [
+     27,
+     46
+    ],
+    [
+     28,
+     33
+    ],
+    [
+     28,
+     34
+    ],
+    [
+     28,
+     36
+    ],
+    [
+     28,
+     38
+    ],
+    [
+     28,
+     42
+    ],
+    [
+     29,
+     30
+    ],
+    [
+     29,
+     35
+    ],
+    [
+     29,
+     37
+    ],
+    [
+     29,
+     39
+    ],
+    [
+     29,
+     40
+    ],
+    [
+     29,
+     43
+    ],
+    [
+     29,
+     44
+    ],
+    [
+     29,
+     46
+    ],
+    [
+     30,
+     35
+    ],
+    [
+     30,
+     37
+    ],
+    [
+     30,
+     39
+    ],
+    [
+     30,
+     40
+    ],
+    [
+     30,
+     43
+    ],
+    [
+     30,
+     44
+    ],
+    [
+     30,
+     46
+    ],
+    [
+     31,
+     41
+    ],
+    [
+     31,
+     45
+    ],
+    [
+     31,
+     47
+    ],
+    [
+     33,
+     34
+    ],
+    [
+     33,
+     36
+    ],
+    [
+     33,
+     38
+    ],
+    [
+     33,
+     42
+    ],
+    [
+     34,
+     36
+    ],
+    [
+     34,
+     38
+    ],
+    [
+     34,
+     42
+    ],
+    [
+     35,
+     37
+    ],
+    [
+     35,
+     39
+    ],
+    [
+     35,
+     40
+    ],
+    [
+     35,
+     43
+    ],
+    [
+     35,
+     44
+    ],
+    [
+     35,
+     46
+    ],
+    [
+     36,
+     38
+    ],
+    [
+     36,
+     42
+    ],
+    [
+     37,
+     39
+    ],
+    [
+     37,
+     40
+    ],
+    [
+     37,
+     43
+    ],
+    [
+     37,
+     44
+    ],
+    [
+     37,
+     46
+    ],
+    [
+     38,
+     42
+    ],
+    [
+     39,
+     40
+    ],
+    [
+     39,
+     43
+    ],
+    [
+     39,
+     44
+    ],
+    [
+     39,
+     46
+    ],
+    [
+     40,
+     43
+    ],
+    [
+     40,
+     44
+    ],
+    [
+     40,
+     46
+    ],
+    [
+     41,
+     45
+    ],
+    [
+     41,
+     47
+    ],
+    [
+     43,
+     44
+    ],
+    [
+     43,
+     46
+    ],
+    [
+     44,
+     46
+    ],
+    [
+     45,
+     47
+    ]
+   ]
+  }
+ },
+ "diagnostics_added_after_the_first_run": {
+  "why": "C3 failed on the first execution; these orderings were added to say whether the failure is about the statistic, the family, or the question",
+  "status": "diagnostic, not a criterion"
+ },
+ "seconds": 36.9,
+ "model_calls": 0,
+ "parameters_stored": 0,
+ "limits": [
+  "the generator families are the previous round's; refinement means refitting inside them, not inventing a predicate",
+  "the refit is over an enumerated family, not a proof of the coarsest possible refinement",
+  "three CLI machines, no display; a goal is priced here, an act is not",
+  "the acquisition orderings are heuristics and are reported as orderings, not as optima"
+ ]
+}

@@ -1,0 +1,653 @@
+{
+ "action_id": "THE_COUNTEREXAMPLE_IS_THE_NEXT_EXPERIMENT_20261129_V1",
+ "action_intent_id": "THE_COUNTEREXAMPLE_IS_THE_NEXT_EXPERIMENT_20261129_V1",
+ "action_kind": "REAL_CAPABILITY_ACQUISITION",
+ "action_summary": "Prices refinement in the currency nobody bills: questions. A statistic fitted at depth 2 conflates 675 (FILESYSTEM), 337 (SQLITE) and 321 (TARBALL) pairs of depth-3 runs, and only 10 of the 321 change a verdict. One harmful answer moves the statistic to the coarsest 3-cell one, which then answers all 87 depth-4 runs correctly while still conflating 1765 pairs. So a collision is not an error, and the counterexample cannot be looked for -- only asked for, one cell at a time.",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "earlier_routes_exhausted_reason": "Refused by measurement, in order: hand-written vocabulary, relations over the reader, a goal handed in, the coarsest sufficient statistic, and now a free-running refinement loop -- which asked six questions, met no counterexample, and ranked the first harmful pair below chance.",
+  "incremental_spend_usd": 0,
+  "independent_verification_completed": false,
+  "independent_verification_note": "Producer-run sandbox only. Every number is a receipt row: 675 / 337 / 321 conflations and their harmful counts, four question policies, three rank diagnostics, and 87 depth-4 runs judged by the same portable goal the last two rounds used.",
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md",
+   "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+  "progress_evidence_paths": [
+   "canonical/verification/THE_COUNTEREXAMPLE_IS_THE_NEXT_EXPERIMENT_20261129_V1.json",
+   "THE_COUNTEREXAMPLE_IS_THE_NEXT_EXPERIMENT_20261129_V1.md",
+   "canonical/tools/the_counterexample_is_the_next_experiment_v1.py",
+   "canonical/tests/test_the_counterexample_is_the_next_experiment_v1.py"
+  ],
+  "route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+  "scope_complete_discharge": false,
+  "terminal_achieved": false
+ },
+ "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The question, not the statistic. The repair is one generator away and inside the family (779 sufficient statistics at depth 3, coarsest 3 cells) and one harmful answer is enough to find it, but no computable ordering can locate that pair: cheapest-refinement and no-signal put the first harmful pair at rank 130 and 136 of 321 where a random scan expects 29, and committee disagreement ties on 311 of 321. Only labelling whole cells is sound, at n - cells questions (30 on TARBALL, 63 on FILESYSTEM).",
+ "canonical_base_commit": "5a21116bc4cad6a0960c47d2e717dbc36124845d",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "The question, not the statistic. The repair is one generator away and inside the family (779 sufficient statistics at depth 3, coarsest 3 cells) and one harmful answer is enough to find it, but no computable ordering can locate that pair: cheapest-refinement and no-signal put the first harmful pair at rank 130 and 136 of 321 where a random scan expects 29, and committee disagreement ties on 311 of 321. Only labelling whole cells is sound, at n - cells questions (30 on TARBALL, 63 on FILESYSTEM).",
+ "date": "2026-11-29",
+ "expected_parent_change": "A conflation is not an error and a counterexample is not a statistic: sufficiency is a statement about verdicts, not cells. The coarsest statistic may conflate 1765 pairs and be right about all 87 runs; refinement costs one counterexample but its price is set by the question -- 2 questions by cell labelling, 30 guaranteed, 130 by cheapest-refinement. Last round's 208 collisions is retracted as a sufficiency failure.",
+ "expected_parent_frontier_change": "A conflation is not an error and a counterexample is not a statistic: sufficiency is a statement about verdicts, not cells. The coarsest statistic may conflate 1765 pairs and be right about all 87 runs; refinement costs one counterexample but its price is set by the question -- 2 questions by cell labelling, 30 guaranteed, 130 by cheapest-refinement. Last round's 208 collisions is retracted as a sufficiency failure.",
+ "explicit_user_authorization": [
+  "Why can't we just give our model the most advanced coding actions, let it experience them once, and have it learn them? Can't we do this now?",
+  "we are building our own model. never reach for another model or use it and call it ours",
+  "every bit of our weights must be calculated, not a knowledge house",
+  "the best part is no part",
+  "you must think from first principles for everything",
+  "You should kill all the bad and dumb ideas before you waste time implementing them.",
+  "NEVER BUILD BEFORE REASRCHING EXHAUSTION IS HAPPENED",
+  "maximize your web use",
+  "What is the single bottleneck that, if fixed, would unlock the most capability?",
+  "all the tests are not on synthetic data but are on the hardest open tests",
+  "only our agent/system may run them; integrity 100% real",
+  "the honest truth is that we keep testing on bugs we already know work",
+  "Work in branch, merge only when complete (fastest)",
+  "Merge once, not 10 times."
+ ],
+ "falsification_condition": "FALSIFIED if a FILESYSTEM conflation is reported as harmful; if the three-cell table makes one verdict error among the 87 depth-4 runs; if one harmful answer is reported as insufficient; if the guarantee n - cells is reported as the observed cost; if the cell-labelling control is described as free-running; if any count in the markdown disagrees with the receipt.",
+ "generic_repair_from_single_probe": false,
+ "governance_change": false,
+ "highest_leverage_now": true,
+ "incremental_spend_usd": 0,
+ "intentional_route_race": false,
+ "load_bearing_primary": {
+  "constructive_gap_for_open_obligation_ids": [
+   "CODING_TB4_GE_66_4"
+  ],
+  "expected_obligation_discharge_lcb": 0,
+  "expected_obligation_unlock_lcb": "1/50",
+  "interpretation": "Speculative forecast only. The round computes the observable and prices the goal; no truth obligation is discharged.",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "1/2",
+  "wall_clock_cost_ub": 1
+ },
+ "measured_effect": {
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "conflations_at_depth3": {
+   "FILESYSTEM": {
+    "harmful": 0,
+    "pairs": 675
+   },
+   "SQLITE": {
+    "harmful": 0,
+    "pairs": 337
+   },
+   "TARBALL": {
+    "harmful": 10,
+    "pairs": 321
+   }
+  },
+  "cost": {
+   "model_calls": 0,
+   "network_calls_at_run_time": 0,
+   "parameters_stored": 0,
+   "seconds": 37.4
+  },
+  "declared_acceptance": {
+   "C1_the_statistic_confuses_deeper_runs": "MET (675 / 337 / 321 pairs on three machines)",
+   "C2_some_confusions_are_harmful": "MET (10 on TARBALL; 2 false accepts)",
+   "C3_one_question_per_counterexample": "MET by the cell-labelling control (2 questions, 1 counterexample); FAILED by both free-running orderings",
+   "C4_exactness_does_not_travel": "MET literally (1765 conflations) and REFUTED at verdict level (0 harmful, 87/87 right)",
+   "C5_zero": "MET"
+  },
+  "depth4": {
+   "cells": 3,
+   "conflations": 1765,
+   "false_accepts": 0,
+   "false_rejects": 0,
+   "harmful": 0,
+   "runs": 87,
+   "undecided": 0
+  },
+  "machines": [
+   "FILESYSTEM",
+   "SQLITE",
+   "TARBALL"
+  ],
+  "markdown": "THE_COUNTEREXAMPLE_IS_THE_NEXT_EXPERIMENT_20261129_V1.md",
+  "questions": {
+   "cell_labelling_control": {
+    "counterexamples": 1,
+    "exact_at_depth": 2,
+    "guarantee_n_minus_cells": {
+     "FILESYSTEM": 63,
+     "TARBALL": 30
+    },
+    "questions": 2
+   },
+   "cheapest_refinement": {
+    "counterexamples": 0,
+    "exact_at_depth": null,
+    "questions": 6
+   },
+   "max_disagreement": {
+    "counterexamples": 1,
+    "exact_at_depth": 1,
+    "questions": 1,
+    "ties": "311 of 321"
+   },
+   "no_signal": {
+    "counterexamples": 0,
+    "exact_at_depth": null,
+    "questions": 6
+   }
+  },
+  "receipt": "canonical/verification/THE_COUNTEREXAMPLE_IS_THE_NEXT_EXPERIMENT_20261129_V1.json",
+  "repair": {
+   "added_generators": [
+    "decrements[probe_new_content]"
+   ],
+   "coarsest_cells": 3,
+   "extends_the_shallow_winner": true,
+   "sufficient_statistics_at_depth3": 779
+  },
+  "stale_table_false_accepts": {
+   "FILESYSTEM": 0,
+   "TARBALL": 2
+  }
+ },
+ "next_step": "Make the question constructive at depth 5: the agent builds a run to separate the surviving statistics instead of choosing among existing pairs. Pre-registered: fewer than 3 constructed questions to a verdict-exact table makes 'learn once, refine by asking' a mechanism; more than n - cells kills it; any verdict error at depth 5 kills 'the table travels'.",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "prior_work_reused": [
+  "canonical/tools/the_goal_is_a_quotient_of_the_trace_v1.py (generators, lattice, coarsest, images_of)",
+  "canonical/tools/instant_learning_in_a_new_environment_v1.py (machines, atoms, readers, execution)",
+  "canonical/tools/the_goal_is_a_relation_over_the_run_v1.py (run reading, traces_for, count helpers)",
+  "canonical/tools/the_vocabulary_is_the_artifact_v1.py (the four CLI machines)",
+  "canonical/verification/THE_GOAL_IS_A_QUOTIENT_OF_THE_TRACE_20261128_V1.json",
+  "canonical/verification/INSUFFICIENCY_CERTIFICATE_20261113_V1.json"
+ ],
+ "probe_specific": false,
+ "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+ "progress_evidence_paths": [
+  "canonical/verification/THE_COUNTEREXAMPLE_IS_THE_NEXT_EXPERIMENT_20261129_V1.json",
+  "THE_COUNTEREXAMPLE_IS_THE_NEXT_EXPERIMENT_20261129_V1.md",
+  "canonical/tools/the_counterexample_is_the_next_experiment_v1.py",
+  "canonical/tests/test_the_counterexample_is_the_next_experiment_v1.py"
+ ],
+ "real_outcome": "That the goal's table transfers upward with zero verdict errors (87/87 at depth 4) while conflating 1765 pairs; that one counterexample is enough but only a cell-labelling policy finds it inside six questions; that both computable orderings are worse than chance; and that last round's 208 collisions was a statement about injectivity, not correctness.",
+ "recursive_obs": {
+  "canonical_base_commit": "3568a33a9c3a76496debb781b6fff0960b652885",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "handing the goal's relation to the agent",
+   "breaking a tie between surviving disciminators by choosing the simplest or the first",
+   "acting when the survivors disagree about every reachable state",
+   "calling an ambiguity irreducible without rebuilding the reachable set deeper"
+  ],
+  "expected_parent_frontier_change": "A conflation is not an error and a counterexample is not a statistic: sufficiency is a statement about verdicts, not cells. The coarsest statistic may conflate 1765 pairs and be right about all 87 runs; refinement costs one counterexample but its price is set by the question -- 2 questions by cell labelling, 30 guaranteed, 130 by cheapest-refinement. Last round's 208 collisions is retracted as a sufficiency failure.",
+  "expected_parent_level_state_change": "A conflation is not an error and a counterexample is not a statistic: sufficiency is a statement about verdicts, not cells. The coarsest statistic may conflate 1765 pairs and be right about all 87 runs; refinement costs one counterexample but its price is set by the question -- 2 questions by cell labelling, 30 guaranteed, 130 by cheapest-refinement. Last round's 208 collisions is retracted as a sufficiency failure.",
+  "independent_verification_required": true,
+  "iteration_limit": 1,
+  "next_step": "Make the question constructive at depth 5: the agent builds a run to separate the surviving statistics instead of choosing among existing pairs. Pre-registered: fewer than 3 constructed questions to a verdict-exact table makes 'learn once, refine by asking' a mechanism; more than n - cells kills it; any verdict error at depth 5 kills 'the table travels'.",
+  "obs_blocker": {
+   "delete_bypass_substitute_options": [
+    "delete the claim that a collision is a failure: 0 harmful on FILESYSTEM and at depth 4",
+    "bypass the search by labelling cells: sound, and its guarantee is n - cells (30 / 63)",
+    "substitute a deeper run set for a question: depth 4 was answered correctly by the depth-3 table"
+   ],
+   "intrinsic_or_path_specific": "intrinsic: which conflation changes a verdict is a fact about the user's goal, not about the searcher, so no ordering over runs recovers it before it is asked.",
+   "surviving_causal_blocker": "The question, not the statistic. The repair is one generator away and inside the family (779 sufficient statistics at depth 3, coarsest 3 cells) and one harmful answer is enough to find it, but no computable ordering can locate that pair: cheapest-refinement and no-signal put the first harmful pair at rank 130 and 136 of 321 where a random scan expects 29, and committee disagreement ties on 311 of 321. Only labelling whole cells is sound, at n - cells questions (30 on TARBALL, 63 on FILESYSTEM)."
+  },
+  "obs_capability": {
+   "capability_work_deleted": [
+    "a predicate-invention layer (779 sufficient statistics already existed; the repair was on the shelf)",
+    "an oracle estimate of which pair is harmful (measured: 0 of 6 questions by two orderings)",
+    "a deeper run set as a substitute for asking (depth 4 cost nothing in verdicts)"
+   ],
+   "existing_inherited_routes_checked": [
+    "canonical/tools/the_goal_is_a_quotient_of_the_trace_v1.py (the lattice this round refines)",
+    "canonical/tools/the_goal_is_a_relation_over_the_run_v1.py (traces_for, judgments)",
+    "canonical/tools/the_vocabulary_is_the_artifact_v1.py (the machines)",
+    "canonical/tools/instant_learning_in_a_new_environment_v1.py (execution, readers)"
+   ],
+   "external_existing_routes_checked": [
+    "TriCEGAR (arXiv 2601.22997): predicate-tree abstraction over agent traces refined by spurious counterexamples; supplies the loop, not the price",
+    "NeuroAbs (arXiv 2608.17304): counterexample reduction/generalisation to cut CEGAR iterations",
+    "counterexample-guided Cartesian abstraction refinement (planning; POMDP CEGAR arXiv 1701.06209): semi-completeness as the honest ceiling",
+    "query-by-committee disagreement active learning (Seung et al. 1992): the classic ordering this round measures and finds degenerate here"
+   ]
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "a statistic assumed sufficient because it sufficed on shallower runs (refuted 675 / 337 / 321 times, and retracted as an error at all: 0 harmful on two machines)",
+    "injectivity as a goal (1765 conflations with 0 wrong verdicts)",
+    "a free-running refinement loop as a mechanism (0 counterexamples in 6 questions, twice)"
+   ],
+   "real_outcome": "The goal's table is bought once and travels: 3 cells fitted at depth 3 answer 87 of 87 depth-4 runs, none undecided. What does not travel is the asking: the counterexample that buys the third cell costs two questions under cell labelling, 30 under its own guarantee, and was not found at all in six by either computable ordering.",
+   "surviving_necessity": "no model of the goal is needed where the goal's statistic is computable and its verdicts are the only oracle; and no search is needed where one harmful answer is enough -- but the question has to be aimed, and the agent cannot aim it"
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "The previous round's lattice and machines are reused unchanged; the new object is a price, not a capability, and it holds no authority.",
+   "downstream_work_to_delete_or_supersede": "Any step that treats a conflation as an error, and any refinement loop that runs without a question policy whose cost is bounded.",
+   "fresh_reuse_plan": "Recompute from the receipt's two commands; the machines are local and public."
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": "Generator values are precomputed once per pool (signatures), so every ordering is a set difference; the lattice enumeration is reused from the previous round unchanged; no second harness, no second environment.",
+   "search_stop_decision": "Stop when no conflation changes a verdict -- not when no conflation remains. The stopping rule is about the user's judgments, not about the statistic's injectivity."
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "efficiency_mechanism": "One signature table per pool makes every acquisition ordering a set difference, so four policies and three rank diagnostics cost 37 s in total; the refit is the same lattice enumeration.",
+   "generality_mechanism": "The statistic is unchanged and machine-independent; what is new is a currency -- questions -- and it is the currency that does not transfer between depths.",
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "Cheapest-refinement and no-signal orderings: 6 questions, 0 counterexamples, first harmful pair at rank 130 and 136 of 321 (chance: 29). Committee disagreement: degenerate, 311 of 321 ties.",
+   "routes_ranked": [
+    "label whole cells and ask for one counterexample at a time, priced in questions",
+    "hunt the counterexample by cheapest implied refinement",
+    "hunt it by committee disagreement among surviving statistics",
+    "hunt it by trace length (the no-signal control)"
+   ]
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "oracle_paths": [
+    "canonical/verification/THE_COUNTEREXAMPLE_IS_THE_NEXT_EXPERIMENT_20261129_V1.json",
+    "canonical/tests/test_the_counterexample_is_the_next_experiment_v1.py",
+    "canonical/verification/THE_GOAL_IS_A_QUOTIENT_OF_THE_TRACE_20261128_V1.json"
+   ],
+   "synthetic_verification_necessity": "The suite re-executes the round and pins every count, including the two failed orderings and the degenerate committee; the judges remain this tool's own predicates, stated as a limit."
+  },
+  "real_outcome": "That the goal's table transfers upward with zero verdict errors (87/87 at depth 4) while conflating 1765 pairs; that one counterexample is enough but only a cell-labelling policy finds it inside six questions; that both computable orderings are worse than chance; and that last round's 208 collisions was a statement about injectivity, not correctness.",
+  "required_capability": "counterfactual intervention over a live execution trace, exact-fit predicate selection from the logged scope, and an oracle that decides without a model",
+  "route_frontier": {
+   "challenger_routes": [
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "1 verified repair; 13 of 30 rows addressed; 0 accusations",
+      "CORRECTNESS": "the corpus's own suite, whole file",
+      "INCREMENTAL_COST": "0 parameters, 0 model calls, ~10 us per candidate",
+      "RELIABILITY": "superseded: the goal read off one state is empty wherever two runs end alike",
+      "VERIFIABILITY": "receipt rows, producer-run",
+      "WALL_CLOCK": "83.6 s for 30 commits"
+     },
+     "evidence": [
+      "30 real commits, 83.6 s, 0 accusations, grammar named for every exclusion, 1 row recovered by the AST finder, 1 verified repair unchanged, 1 harness failure stopped from wearing a fact's name"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_HYPOTHESIS_GRAMMAR_IS_THE_BOTTLENECK_20261122_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "READ_THE_FIX_FROM_THE_AST_AND_NAME_THE_GRAMMAR_OF_THE_POPULATION"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "3 of 40 programs",
+      "CORRECTNESS": "a class is only as good as its donor",
+      "INCREMENTAL_COST": "one class per shape",
+      "RELIABILITY": "unseen shapes stay unseen",
+      "VERIFIABILITY": "measured exactly",
+      "WALL_CLOCK": "unbounded as the corpus grows"
+     },
+     "evidence": [
+      "a taught class reaches 8 of 40 fixes, 5 only on its donor"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/WHAT_IS_LEFT_FOR_A_LESSON_TO_BUY_20261117_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "teach one more edit class per failing task"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "2 of 30 unseen programs from 3 pairs, at 1.92% precision on the pair that fires",
+      "CORRECTNESS": "the corpus's own pytest decides, as here",
+      "INCREMENTAL_COST": "40.6 us per lookup, no model, no parameters",
+      "RELIABILITY": "saturates: addressability 34.4% -> 59.7% over 24 experiences",
+      "VERIFIABILITY": "measured exactly",
+      "WALL_CLOCK": "5 minutes for the whole corpus"
+     },
+     "evidence": [
+      "0.597 addressable x 0.0192 precise ~ 1.1% of unseen decisions"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/WHAT_AN_EXPERIENCE_CAN_OWN_20261118_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "NON_DOMINATING",
+     "route": "store every verified repair and retrieve it by similarity"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "1 real commit identified at rank 0, unattended, with no diff and no name table",
+      "CORRECTNESS": "the artifact answers, so a question is either answered or refused -- never wrong",
+      "INCREMENTAL_COST": "7.69 ms per asked question, 1 bit",
+      "RELIABILITY": "superseded: the goal read off one state is empty wherever two runs end alike",
+      "VERIFIABILITY": "measured exactly",
+      "WALL_CLOCK": "121.2 s for 14 bugs"
+     },
+     "evidence": [
+      "click@1b0e19f505: human fix derived at rank 0 from the trace, 2 consistent candidates of 119 tests",
+      "5 evaluated candidates per site against the proximity pool's 32-400"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_FAILING_RUN_IS_THE_INDEX_20261118_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "INDEX_ACTIONS_BY_THE_FAILING_RUN_NOT_BY_THE_SOURCE_TEXT"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "run-level goals inferred from judgments: 0 false accepts, 5-6 questions, exact where asked",
+      "CORRECTNESS": "leave-one-run-out against the user's own judgments on executed runs",
+      "INCREMENTAL_COST": "0 parameters, 0 model calls, 18.1 s for 136 runs and ~1000 hypotheses per goal",
+      "RELIABILITY": "sound and incomplete: 1 run of 136 refused by the intersection",
+      "VERIFIABILITY": "receipt rows, producer-run, blocker hypothesis reproduced in the suite",
+      "WALL_CLOCK": "18.1 s"
+     },
+     "evidence": [
+      "136 real runs on 3 machines; 9 final states reached with opposite judgments; 0 final-state terms disagree inside a group; the final-state version space is empty on every goal holding one; the run grammar is identified in 5-6 questions at 1.00 accuracy and is 135/136 leave-one-run-out with 0 false accepts"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_GOAL_IS_A_RELATION_OVER_THE_RUN_20261127_V1.json",
+      "canonical/verification/THE_GOAL_IS_A_DISCRIMINATOR_20261126_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "INFER_A_RELATION_OVER_THE_RUN_FROM_JUDGMENTS_AND_ACT_ON_THE_INTERSECTION"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "the observable is computed and priced: 3-6 cells per goal, one statistic across three machines",
+      "CORRECTNESS": "the coarsest sufficient statistic of the reachable pool, with witnesses for every cheaper one",
+      "INCREMENTAL_COST": "0 parameters, 0 model calls, 23.7 s for 3444+ projections",
+      "RELIABILITY": "refuted by its own refinement: 0 counterexamples in 6 questions by both computable orderings, and its 208-collision headline is retracted -- 0 of those collisions is harmful",
+      "VERIFIABILITY": "receipt rows, producer-run, both declared failures pinned in the suite",
+      "WALL_CLOCK": "23.7 s"
+     },
+     "evidence": [
+      "four rungs over three machines and five goals; cells 68->55->19->5, 48->7->7->4, 32->7->7->3, 68->56->24->6; every cheaper statistic refuted with a witness pair; 0 of 3444 reading projections separate a goal about which atom ran; 208 collisions at held-out depth",
+      "the coarsest statistic is not harmed by its collisions: 675 FILESYSTEM pairs and 1765 depth-4 pairs, 0 harmful, 87/87 verdicts right"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_GOAL_IS_A_QUOTIENT_OF_THE_TRACE_20261128_V1.json",
+      "canonical/verification/THE_GOAL_IS_A_RELATION_OVER_THE_RUN_20261127_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "COMPUTE_THE_COARSEST_SUFFICIENT_STATISTIC_AND_PRICE_THE_GOAL_IN_EXPERIENCES"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "one counterexample buys the coarsest 3-cell statistic; 2 questions by cell labelling, 30 by its guarantee",
+      "CORRECTNESS": "the user's judgments on executed runs; the depth-3 table answers 87 of 87 depth-4 runs, with 0 undecided and 0 false accepts",
+      "INCREMENTAL_COST": "0 parameters, 0 model calls, one signature table per pool",
+      "RELIABILITY": "sound and priced: the guarantee is n - cells; both free-running orderings failed inside six questions and rank the first harmful pair below chance",
+      "VERIFIABILITY": "receipt rows, producer-run, every count pinned in the suite",
+      "WALL_CLOCK": "37.4 s for three machines, four question policies and three rank diagnostics"
+     },
+     "evidence": [
+      "FILESYSTEM 675 conflations / 0 harmful; SQLITE 337 / 0; TARBALL 321 / 10",
+      "one harmful answer -> the coarsest 3-cell statistic, which had been one generator away",
+      "depth 4: 87 runs, 1765 conflations, 0 harmful, 0 false accepts, 0 undecided",
+      "cheapest-refinement and no-signal: 6 questions, 0 counterexamples, best harmful rank 130 / 136 of 321 (chance 29.3); committee ties on 311 of 321"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_COUNTEREXAMPLE_IS_THE_NEXT_EXPERIMENT_20261129_V1.json",
+      "canonical/verification/THE_GOAL_IS_A_QUOTIENT_OF_THE_TRACE_20261128_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "SELECTED",
+     "route": "ASK_FOR_ONE_COUNTEREXAMPLE_AND_LABEL_WHOLE_CELLS_INSTEAD_OF_HUNTING_DISAGREEMENT"
+    }
+   ],
+   "checked_at_utc": "2026-11-19T01:30:04Z",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "ASK_FOR_ONE_COUNTEREXAMPLE_AND_LABEL_WHOLE_CELLS_INSTEAD_OF_HUNTING_DISAGREEMENT",
+   "max_age_hours": 2,
+   "negative_search_summary": "Refused by measurement: a free-running refinement loop (0 counterexamples in 6 questions, twice), committee disagreement (311 of 321 ties), predicate invention (779 sufficient statistics already existed), and a deeper run set as a substitute for asking (0 harmful at depth 4).",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "counterexample-guided abstraction refinement 2026 agent traces predicate abstraction learned abstraction refinement"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "query by committee disagreement active learning degenerate ties version space splitting"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "2026 minimal separating test suite subset selection falsifying run set"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "CEGAR minimal counterexample cost model number of queries single counterexample analysis"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "selected_route": "ASK_FOR_ONE_COUNTEREXAMPLE_AND_LABEL_WHOLE_CELLS_INSTEAD_OF_HUNTING_DISAGREEMENT",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-11-19T01:30:04Z",
+    "execution_dependencies": [
+     {
+      "dependency": "local Python 3.11 runtime with pytest",
+      "evidence": [
+       "10 instrument tests pass in 38 s; 33/33 unified-model gates pass"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "real tool binaries the machines drive (sh, mv, cp, rm, sqlite3, tar)",
+      "evidence": [
+       "4210 depth-3 runs and 87 depth-4 runs executed, the reader sampled after every step, four question policies priced"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "local tempdir for one fresh reset per machine and per run",
+      "evidence": [
+       "one reset per sequence; runs deduplicated by trace; 30 sequences kept undeduplicated for the atom goal"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "STORAGE",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "max_age_hours": 2,
+    "selected_route": "ASK_FOR_ONE_COUNTEREXAMPLE_AND_LABEL_WHOLE_CELLS_INSTEAD_OF_HUNTING_DISAGREEMENT",
+    "status": "READY"
+   },
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/tools/grammar_closed_repair_v1.py (corpus reader, space enumerator, real judge, executed_lines)",
+     "canonical/tools/solve_with_a_calibrated_judge_v1.py (certified judge, per-case clocks, containment)",
+     "canonical/verification/WHERE_THE_REFUSALS_ACTUALLY_WERE_20261116_V1.json",
+     "canonical/verification/ONE_DEMONSTRATION_LEAVES_TEN_BITS_20261116_V1.json"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "https://arxiv.org/pdf/2611.12885 (World In-Context Learning: one demonstration plus rehearsal beats a 50-demonstration trained policy; without the world the demonstration brings no benefit)",
+     "https://arxiv.org/html/2606.29537v1 (OSWorld 2.0: 20.6% binary completion, failures concentrate on hidden state)",
+     "https://arxiv.org/html/2606.31270v1 (Learning from Failure: inference-time self-improvement from failure trajectories)"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "https://github.com/jkoppel/QuixBugs (MIT; 40 buggy programs, 40 pytest files, JSON test data)",
+     "https://pypi.org/project/pytest (9.2.0, the runner every verdict goes through)"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "https://docs.python.org/3/library/ast.html (node types the closure rule enumerates)"
+    ]
+   },
+   "unresolved_plausible_dominators": []
+  },
+  "routes_considered": [
+   "TRAIN_OR_DISTIL_A_MODEL__REFUSED_BY_OWNER_LAW_AND_UNNECESSARY_HERE",
+   "REFINE_BY_ANY_CONFLATED_PAIR__FAILED_BY_MEASUREMENT__TWO_ORDERINGS_WORSE_THAN_CHANCE",
+   "PRICE_THE_REFINEMENT_IN_QUESTIONS_AND_LABEL_WHOLE_CELLS__SELECTED"
+  ],
+  "selected_route": "PRICE_REFINEMENT_IN_QUESTIONS_AND_TAKE_THE_CELL_LABELLING_POLICY",
+  "selected_surviving_route": "ASK_FOR_ONE_COUNTEREXAMPLE_AND_LABEL_WHOLE_CELLS_INSTEAD_OF_HUNTING_DISAGREEMENT",
+  "selected_surviving_route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+  "stop_condition": "Make the question constructive at depth 5: the agent builds a run to separate the surviving statistics instead of choosing among existing pairs. Pre-registered: fewer than 3 constructed questions to a verdict-exact table makes 'learn once, refine by asking' a mechanism; more than n - cells kills it; any verdict error at depth 5 kills 'the table travels'.",
+  "why_selected_route_is_fastest_sufficient": "Because the price of a wrong statistic is not cells but questions, and the only policy that can pay it soundly is to label a cell: every free-running ordering tested spends its whole budget on pairs the user judges alike.",
+  "why_this_is_not_another_organ": "It adds no knowledge and no model: the same lattice, one question per counterexample, and a count of questions instead of experiments."
+ },
+ "required_capability": "pricing counterexample-guided refinement in two currencies -- cells and questions -- and proving by measurement which question policies can find a harmful conflation",
+ "route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+ "route_id": "ASK_FOR_ONE_COUNTEREXAMPLE_AND_LABEL_WHOLE_CELLS_INSTEAD_OF_HUNTING_DISAGREEMENT",
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "scope_complete_discharge": false,
+ "selected_route": "PRICE_REFINEMENT_IN_QUESTIONS_AND_TAKE_THE_CELL_LABELLING_POLICY",
+ "status": "PROPOSED__PRODUCER_MEASURED__REFINEMENT_PRICED_IN_QUESTIONS__ONE_DECLARED_CRITERION_REFUTED_AT_VERDICT_LEVEL__INDEPENDENT_VERIFICATION_OPEN",
+ "stop_condition": "Make the question constructive at depth 5: the agent builds a run to separate the surviving statistics instead of choosing among existing pairs. Pre-registered: fewer than 3 constructed questions to a verdict-exact table makes 'learn once, refine by asking' a mechanism; more than n - cells kills it; any verdict error at depth 5 kills 'the table travels'.",
+ "terminal_credit_delta": 0,
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "truth": {
+  "achieved": false,
+  "the_law_this_round_adds": "A conflation is not an error and a counterexample is not a statistic. Sufficiency is a statement about verdicts, not cells, so the coarsest statistic may conflate thousands of pairs and be right about every run; a counterexample is enough on its own, but harm is not where disagreement, refinement cost or novelty is, so it can only be asked for -- at one question per run minus one per cell.",
+  "what_is_false_in_the_claim": [
+   "that a colliding statistic is a failing one: 675 FILESYSTEM collisions and 1765 TARBALL depth-4 collisions, 0 harmful, 87/87 verdicts right",
+   "that a free-running loop finds the counterexample: two computable orderings ask six questions, meet none, and rank the first harmful pair at 130 and 136 of 321 where chance expects 29",
+   "that committee disagreement is information: 311 of 321 pairs tie, so the ordering is index order",
+   "that the vocabulary blocked the repair: 779 sufficient statistics existed at depth 3 and the coarsest was one generator from the shallow winner",
+   "that a passing suite is acceptance: a statistic can abstain on 31 of 87 runs, or conflate 1765 pairs and answer all 87 correctly, and both are different from knowing"
+  ]
+ },
+ "user_authorized_governance_change": false,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "currentness": {
+   "accepted_families": 5,
+   "current_load_bearing_atomic_count": 36,
+   "deleted_nonnecessary_atomic_count": 2,
+   "historical_atomic_registry_count": 38,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_atomic": 38,
+   "total_families": 19,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "This measures the reach of an executed counterfactual over real commit history and finds the content of the fix outside it; it discharges no truth obligation.",
+  "target_truth_obligations": [
+   "CODING_TB4_GE_66_4"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [
+    {
+     "git_blob_sha": "aa752cadab44d7b354814507d437f4fa485aaf74",
+     "path": "canonical/verification/RECOGNITION_IS_THE_BOTTLENECK_20261121_V1.json"
+    }
+   ],
+   "decisive_question": "Before asking what the instrument can find, does it accept the human's own fix -- and if not, why not?",
+   "falsifier_id": "THE_DEMAND_MUST_ADMIT_THE_HUMAN_FIX_AND_NOT_A_CONSTANT",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "Zero generalising repairs out of thirty fresh commits is the counterexample, and it is recorded in the receipt rather than hidden.",
+   "proposal_id": "THE_ASSERTION_IS_THE_DEMAND_20261119_V1"
+  }
+ },
+ "verification": {
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "commands": [
+   "python3 canonical/tools/the_counterexample_is_the_next_experiment_v1.py --receipt canonical/verification/THE_COUNTEREXAMPLE_IS_THE_NEXT_EXPERIMENT_20261129_V1.json",
+   "python3 -m pytest canonical/tests/test_the_counterexample_is_the_next_experiment_v1.py -q"
+  ],
+  "independent_verification_completed": false,
+  "independent_verification_required": true,
+  "tests_green": 10
+ },
+ "weakens_existing_guard": false
+}
