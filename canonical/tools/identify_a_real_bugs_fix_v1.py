@@ -103,7 +103,8 @@ def fresh_bytecode(worktree: pathlib.Path) -> dict[str, str]:
             "PYTHONPYCACHEPREFIX": str(worktree / ".brain_pycache")}
 
 
-def run_tests_full(worktree: pathlib.Path, test_file: str, seconds: int = 60) -> tuple[dict[str, str], str]:
+def run_tests_full(worktree: pathlib.Path, test_file: str, seconds: int = 60,
+                   extra_env: dict[str, str] | None = None) -> tuple[dict[str, str], str]:
     """The verdicts AND what pytest said, because an empty verdict map is not a passing suite.
 
     A collection error (a missing dependency, a broken conftest) produces no PASSED/FAILED lines at all.
@@ -115,7 +116,8 @@ def run_tests_full(worktree: pathlib.Path, test_file: str, seconds: int = 60) ->
         done = subprocess.run(test_command(worktree, test_file), cwd=worktree, capture_output=True,
                               text=True, encoding="utf-8", errors="replace", timeout=seconds,
                               stdin=subprocess.DEVNULL,
-                              env={**__import__("os").environ, **fresh_bytecode(worktree)})
+                              env={**__import__("os").environ, **fresh_bytecode(worktree),
+                                   **(extra_env or {})})
     except subprocess.TimeoutExpired:
         return {"<timed out>": "TIMEOUT"}, "TIMEOUT"
     outcomes: dict[str, str] = {}

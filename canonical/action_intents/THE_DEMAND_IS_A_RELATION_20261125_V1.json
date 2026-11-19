@@ -1,0 +1,572 @@
+{
+ "action_id": "THE_DEMAND_IS_A_RELATION_20261125_V1",
+ "action_intent_id": "THE_DEMAND_IS_A_RELATION_20261125_V1",
+ "action_kind": "REAL_CAPABILITY_ACQUISITION",
+ "action_summary": "Probes every boolean position of every If test in one real failing run, keeps the sites where the value that arrived was falsey, not None and not bool -- the exact shape of `if a.converter` receiving a converter whose __bool__ is False -- projects `(expr) is not None`, and judges each candidate by the project's own test file against the human edit's footprint, with the human edit run as a control on every row. 75 real commits, 12 repositories, 2148 s: 366 falsey guard sites, 364 projections judged, 70 of 75 controls accepted, 2 verified repairs (attrs 13105a64f2 `a.converter`, packaging b80e6eb0a6 `self.environments`), both at the human's own line, 0 parameters, 0 model calls. Three instrument defects were found mid-round and both corpora re-run in full after each: the criterion rejected the answer key, 'at least one test flips' accepted a nonsense edit, and a call argument was treated as a question -- that last one had verified a coincidence (`hasattr(True, '__reversed__')` takes the same branch the human fix takes). The form is one frame wide; the corpus's remaining demands are relations over frames, and each hand-built form buys ~1 row in 35.",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "earlier_routes_exhausted_reason": "Refused by measurement, in order: a bigger vocabulary, a wider grammar, an oracle as a scalar, stored experience, the failure text as an index, two binding rules, candidate supply itself, formatting as the cause of exclusion, the site as the cause, and now the one-frame relation -- which verifies exactly where the relation is one frame wide and nowhere else. What is left is a relation language over frames.",
+  "incremental_spend_usd": 0,
+  "independent_verification_completed": false,
+  "independent_verification_note": "Producer-run sandbox only. Every number is a receipt row: 75 fresh commits, 2148 s, 366 probed boolean positions, 364 projections judged, 70 controls accepted, 2 verified repairs at the human's line, 0 parameters, 0 model calls, and every instrument defect found mid-round recorded with the re-run that followed it.",
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md",
+   "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "INDEPENDENT_VERIFICATION_OF_A_RELATION_AND_FALSIFICATION_OF_ITS_SCOPE",
+  "progress_evidence_paths": [
+   "canonical/verification/THE_RELATION_NOT_THE_VALUE_THIRTY_20261125_V1.json",
+   "canonical/verification/THE_RELATION_NOT_THE_VALUE_FORTY_FIVE_20261125_V1.json",
+   "canonical/tools/the_relation_not_the_value_v1.py",
+   "canonical/tests/test_the_relation_not_the_value_v1.py"
+  ],
+  "route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+  "scope_complete_discharge": false,
+  "terminal_achieved": false
+ },
+ "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The demand language: one relation over one value at one site verifies 2 of 75; the population's demands are relations over frames, and each hand-built form buys ~1 row in 35.",
+ "canonical_base_commit": "d2b698bc3ed79de1947570127bdc81aa701ccc3e",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "Not the store, not the search cost, not the oracle, not the site finder: the demand language. The instrument can state one relation over one value at one site; the corpus's demands are relations over frames (a condition lifted out of its enclosing branch, two sites that must agree, a call that must return bytes). 2 of 75 real fixes are one-frame relations and both verify; the other 73 are not.",
+ "date": "2026-11-25",
+ "expected_parent_change": "Probes every boolean position of every If test in one real failing run, keeps the sites where the value that arrived was falsey, not None and not bool -- the exact shape of `if a.converter` receiving a converter whose __bool__ is False -- projects `(expr) is not None`, and judges each candidate by the project's own test file against the human edit's footprint, with the human edit run as a control on every row. 75 real commits, 12 repositories, 2148 s: 366 falsey guard sites, 364 projections judged, 70 of 75 controls accepted, 2 verified repairs (attrs 13105a64f2 `a.converter`, packaging b80e6eb0a6 `self.environments`), both at the human's own line, 0 parameters, 0 model calls. Three instrument defects were found mid-round and both corpora re-run in full after each: the criterion rejected the answer key, 'at least one test flips' accepted a nonsense edit, and a call argument was treated as a question -- that last one had verified a coincidence (`hasattr(True, '__reversed__')` takes the same branch the human fix takes). The form is one frame wide; the corpus's remaining demands are relations over frames, and each hand-built form buys ~1 row in 35.",
+ "expected_parent_frontier_change": "Probes every boolean position of every If test in one real failing run, keeps the sites where the value that arrived was falsey, not None and not bool -- the exact shape of `if a.converter` receiving a converter whose __bool__ is False -- projects `(expr) is not None`, and judges each candidate by the project's own test file against the human edit's footprint, with the human edit run as a control on every row. 75 real commits, 12 repositories, 2148 s: 366 falsey guard sites, 364 projections judged, 70 of 75 controls accepted, 2 verified repairs (attrs 13105a64f2 `a.converter`, packaging b80e6eb0a6 `self.environments`), both at the human's own line, 0 parameters, 0 model calls. Three instrument defects were found mid-round and both corpora re-run in full after each: the criterion rejected the answer key, 'at least one test flips' accepted a nonsense edit, and a call argument was treated as a question -- that last one had verified a coincidence (`hasattr(True, '__reversed__')` takes the same branch the human fix takes). The form is one frame wide; the corpus's remaining demands are relations over frames, and each hand-built form buys ~1 row in 35.",
+ "explicit_user_authorization": [
+  "Why can't we just give our model the most advanced coding actions, let it experience them once, and have it learn them? Can't we do this now?",
+  "we are building our own model. never reach for another model or use it and call it ours",
+  "every bit of our weights must be calculated, not a knowledge house",
+  "the best part is no part",
+  "you must think from first principles for everything",
+  "You should kill all the bad and dumb ideas before you waste time implementing them.",
+  "NEVER BUILD BEFORE REASRCHING EXHAUSTION IS HAPPENED",
+  "maximize your web use",
+  "What is the single bottleneck that, if fixed, would unlock the most capability?",
+  "all the tests are not on synthetic data but are on the hardest open tests",
+  "only our agent/system may run them; integrity 100% real",
+  "the honest truth is that we keep testing on bugs we already know work",
+  "Work in branch, merge only when complete (fastest)",
+  "Merge once, not 10 times."
+ ],
+ "falsification_condition": "FALSIFIED if a verified row is not the human's own line or an edit of the same relation; if the more-itertools cca32949f1 coincidence is reported as a repair (it was, in the pre-fix run, and it is recorded here as a defect); if a row whose control was rejected is counted as a capability result; if the 2 of 75 is reported as more than it is.",
+ "generic_repair_from_single_probe": false,
+ "governance_change": false,
+ "highest_leverage_now": true,
+ "incremental_spend_usd": 0,
+ "intentional_route_race": false,
+ "load_bearing_primary": {
+  "constructive_gap_for_open_obligation_ids": [
+   "CODING_TB4_GE_66_4"
+  ],
+  "expected_obligation_discharge_lcb": 0,
+  "expected_obligation_unlock_lcb": "1/50",
+  "interpretation": "Speculative forecast only. The round prices the second form of the demand language and measures that one-frame relations verify while cross-frame ones do not; no truth obligation is discharged.",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "1/2",
+  "wall_clock_cost_ub": 2
+ },
+ "measured_effect": {
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "corpus": {
+   "repos": [
+    "attrs",
+    "click",
+    "jinja",
+    "packaging",
+    "more-itertools",
+    "httpx",
+    "werkzeug"
+   ],
+   "rows": 75,
+   "source": "30 commits re-derived from the previous receipt + the 45 one-line-fix commits this engine had never run"
+  },
+  "cost": {
+   "model_calls": 0,
+   "parameters_stored": 0,
+   "seconds": 2148
+  },
+  "essay": "THE_DEMAND_IS_A_RELATION_20261125_V1.md",
+  "instrument_defects_found_and_fixed": {
+   "boolean_position_criterion": "every Name inside an If test was a site, so `hasattr(iterable, X)` projected its ARGUMENT into `hasattr(True, X)`, which flipped the human's fail-to-pass test at more-itertools cca32949f1; restricting to boolean positions removed it (498 -> 165 sites on the 30 corpus) and both sweeps were re-run",
+   "bytecode_offsets": "CPython col_offset is a UTF-8 byte offset; a comprehension target is a Name inside the If test and cannot be wrapped",
+   "control_criterion": "a judge demanding every parent-failing test pass rejects the human's own fix; the human edit is now a control and its footprint is the demand's definition",
+   "footprint_criterion": "'at least one test flips' accepted a click 4fd2fea0db candidate that flipped 2 of the human's 5"
+  },
+  "receipts": [
+   "canonical/verification/THE_RELATION_NOT_THE_VALUE_THIRTY_20261125_V1.json",
+   "canonical/verification/THE_RELATION_NOT_THE_VALUE_FORTY_FIVE_20261125_V1.json"
+  ],
+  "sites": {
+   "control_accepted": 70,
+   "falsey_guard_sites": 366,
+   "projections_judged": 364,
+   "rows": 75
+  },
+  "stages": {
+   "NO_FAILING_TEST": 2,
+   "NO_FALSEY_GUARD": 17,
+   "NO_PROJECTION_REPAIRS": 51,
+   "REFUSED__CONTROL_BROKEN": 3,
+   "VERIFIED": 2
+  },
+  "verified": [
+   {
+    "attempt": 7,
+    "commit": "13105a64f2",
+    "expression": "a.converter",
+    "flipped": [
+     "tests/test_converters.py::TestConverter::test_falsey_converter"
+    ],
+    "observed_type": "MyConv",
+    "of": 8,
+    "replacement": "(a.converter) is not None",
+    "repo": "attrs",
+    "site_line": 2024
+   },
+   {
+    "attempt": 1,
+    "commit": "b80e6eb0a6",
+    "expression": "self.environments",
+    "flipped": [
+     "tests/test_pylock_select.py::test_lock_no_matching_env[environments0]"
+    ],
+    "observed_type": "list",
+    "of": 2,
+    "replacement": "(self.environments) is not None",
+    "repo": "packaging",
+    "site_line": 839
+   }
+  ]
+ },
+ "next_step": "Make the demand language a function learned from the run: for every boolean position the probe already reports the pair (the question the code asked, the value that arrived), and the witness judge supplies the label. The next round must show that a relation over frames -- at minimum `the same question must be asked regardless of the enclosing condition` (click 4fd2fea0db) and `two sites must agree` (jinja a150ff749a) -- can be proposed from that pair and verified, or record the falsification. Same 75 rows, same control rule: the human edit must verify under the same judge, or the row is refused.",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "prior_work_reused": [
+  "canonical/tools/the_assertion_is_the_demand_v1.py",
+  "canonical/tools/the_space_is_the_artifact_v1.py",
+  "canonical/tools/what_a_real_fix_needs_from_the_site_v1.py",
+  "canonical/tools/identify_a_real_bugs_fix_v1.py",
+  "canonical/verification/A_SITE_IS_NOT_A_PRODUCTION_20261124_V1.json",
+  "canonical/verification/A_DEMAND_MUST_BE_BOUND_TO_THE_SITE_20261122_V1.json",
+  "canonical/corpus/single_line_fix_commits_20261123_V1.json"
+ ],
+ "probe_specific": false,
+ "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+ "progress_evidence_paths": [
+  "canonical/verification/A_SITE_IS_NOT_A_PRODUCTION_20261124_V1.json",
+  "A_SITE_IS_NOT_A_PRODUCTION_20261124_V1.md",
+  "canonical/tools/the_space_is_the_artifact_v1.py",
+  "canonical/tools/the_assertion_is_the_demand_v1.py",
+  "canonical/tools/identify_a_real_bugs_fix_v1.py"
+ ],
+ "real_outcome": "That a demand whose relation is one frame wide CAN be found by running: 2 verified repairs at the human's own line (attrs 13105a64f2, packaging b80e6eb0a6), from 366 probed boolean positions, with the human edit accepted as a control on 70 of 75 rows. That a wrong edit can pass the right test: the more-itertools cca32949f1 coincidence was verified by the first version of the instrument and is recorded as a defect, not a result. That the population's remaining demands are relations over frames (click 4fd2fea0db lifts a condition out of its enclosing branch) and that a per-site projection refuses them correctly.",
+ "recursive_obs": {
+  "canonical_base_commit": "d2b698bc3ed79de1947570127bdc81aa701ccc3e",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "assuming a falsey value at a guard is the demand without checking it is a boolean position",
+   "trusting a control-free criterion that cannot reject the answer key",
+   "trusting 'at least one test flipped' as a repair"
+  ],
+  "expected_parent_frontier_change": "Probes every boolean position of every If test in one real failing run, keeps the sites where the value that arrived was falsey, not None and not bool -- the exact shape of `if a.converter` receiving a converter whose __bool__ is False -- projects `(expr) is not None`, and judges each candidate by the project's own test file against the human edit's footprint, with the human edit run as a control on every row. 75 real commits, 12 repositories, 2148 s: 366 falsey guard sites, 364 projections judged, 70 of 75 controls accepted, 2 verified repairs (attrs 13105a64f2 `a.converter`, packaging b80e6eb0a6 `self.environments`), both at the human's own line, 0 parameters, 0 model calls. Three instrument defects were found mid-round and both corpora re-run in full after each: the criterion rejected the answer key, 'at least one test flips' accepted a nonsense edit, and a call argument was treated as a question -- that last one had verified a coincidence (`hasattr(True, '__reversed__')` takes the same branch the human fix takes). The form is one frame wide; the corpus's remaining demands are relations over frames, and each hand-built form buys ~1 row in 35.",
+  "expected_parent_level_state_change": "Probes every boolean position of every If test in one real failing run, keeps the sites where the value that arrived was falsey, not None and not bool -- the exact shape of `if a.converter` receiving a converter whose __bool__ is False -- projects `(expr) is not None`, and judges each candidate by the project's own test file against the human edit's footprint, with the human edit run as a control on every row. 75 real commits, 12 repositories, 2148 s: 366 falsey guard sites, 364 projections judged, 70 of 75 controls accepted, 2 verified repairs (attrs 13105a64f2 `a.converter`, packaging b80e6eb0a6 `self.environments`), both at the human's own line, 0 parameters, 0 model calls. Three instrument defects were found mid-round and both corpora re-run in full after each: the criterion rejected the answer key, 'at least one test flips' accepted a nonsense edit, and a call argument was treated as a question -- that last one had verified a coincidence (`hasattr(True, '__reversed__')` takes the same branch the human fix takes). The form is one frame wide; the corpus's remaining demands are relations over frames, and each hand-built form buys ~1 row in 35.",
+  "independent_verification_required": true,
+  "iteration_limit": 1,
+  "obs_blocker": {
+   "delete_bypass_substitute_options": [
+    "delete the admissible fraction as a capability measure -- it is a recognition measure and is now labelled so",
+    "bypass the audit by trusting the demand reader (it accused the truth six times)",
+    "substitute the corpus's suite for a recogniser: the suite is the gate, the audit is the reader"
+   ],
+   "intrinsic_or_path_specific": "intrinsic: whether a demand can be bound to an assertion is a fact about the program and the test, not about the searcher.",
+   "surviving_causal_blocker": "The hypothesis language, not the search. Real fixes have four productions -- replace an expression, insert a statement, move a statement, change several regions -- and this instrument has one. 8 of 30 real commits are compositions: a value produced in one place and consumed in another."
+  },
+  "obs_capability": {
+   "capability_work_deleted": [
+    "a stored attribute vocabulary (dir() is fresher and costs nothing)",
+    "a stored grammar table (the language's own grammar is reused)",
+    "requiring one differing node to call an edit a single expression (it manufactured a 10-of-19 exclusion that was a property of the tool)"
+   ],
+   "existing_inherited_routes_checked": [
+    "canonical/tools/the_failing_run_names_the_expression_v1.py (arm A, run on the same 15 commits)",
+    "canonical/tools/force_the_value_and_see_v1.py (interior value forcing: the next composition)",
+    "canonical/runtime/bound_capabilities/python_counterfactual_spec_repair_v1.py (function-scale counterfactual repair on QuixBugs; same primitives, no repo-scale address)",
+    "canonical/tools/what_a_real_fix_needs_from_the_site_v1.py (site verdicts and single-change extraction)"
+   ],
+   "external_existing_routes_checked": [
+    "AgenTracer (ICLR 2026): counterfactual replay labels, guessed by a frontier model",
+    "CausalFlow (arXiv 2605.25338): step-level interventions written by a model",
+    "Who Broke the System? (arXiv 2607.07989): reviewed for approximating rather than executing the counterfactual"
+   ],
+   "surviving_gap": "Selection: which expression, out of a closure of 10^5, produces the value the failing assertion demanded, at a rank an oracle budget can afford."
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "a bigger action library (OSWorld 2.0: final-state exactness is the 84-95% failure bucket)",
+    "more repetitions of one demonstration (retention, not identification)",
+    "parameters for identification (zero is correct, measurable, and recorded per row)"
+   ],
+   "real_outcome": "Execution beats approximation for the counterfactual itself, and the counterfactual is not the bottleneck. Zero parameters were stored by either arm. One verified repair exists and it is in-sample; on 15 fresh real commits both channels produce nothing, and the seven 'wins' a version without the soundness and exact-fit gates would have claimed are all false.",
+   "surviving_necessity": "a model of the counterfactual is not needed where the artifact can be executed: one flipped firing is the intervention, and the oracle is the project's own tests"
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "None by claim: the existing repair primitive and corpus oracle are reused unchanged; the induced basis adds candidates only and holds no authority.",
+   "downstream_work_to_delete_or_supersede": "Any roadmap step that adds another hand-written mutation kind, or that raises a candidate budget to fix a bug whose edit is not expressible.",
+   "fresh_reuse_plan": "Recompute the ladder and re-run both bases from the receipt's commands; the corpus is public and the answer key is never needed."
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": "Reused the verdict parser, span patching and suite runner instead of writing a second harness; the switch is an AST rewrite of the same lines, not a second interpreter.",
+   "search_stop_decision": "Stop after both arms on the fresh corpus; no widening of the logged scope and no value-forcing composition without the falsifier stated in the verification JSON."
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "efficiency_mechanism": "Ordering and exact fit replace breadth: 409 flips decided 15 commits, and no candidate refinement was scored, ranked or thresholded.",
+   "generality_mechanism": "The rewrite is generic Python AST plus a counter; the oracle is the project's own pytest; the address is a site and a firing, so it carries to any executable artifact.",
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "Message channel: 1 of 15 at the line, 0 at the expression. Whole-predicate flips: cannot express a guard that is right once and wrong once. Scoring: unnecessary once fit is exact. Stored state: costlier than re-measuring in ~50 microseconds.",
+   "routes_ranked": [
+    "force the value at the flip-identified firing and synthesize from the artifact's vocabulary",
+    "widen the logged scope beyond locals and self.__dict__",
+    "read the failure message as a second channel (measured: 0 of 15 at the expression)",
+    "raise the candidate budget",
+    "store every verified repair and retrieve by similarity"
+   ],
+   "white_box_harvest_note": "No donor model, weight or external artifact was harvested or called: every number comes from running the projects' own test suites in this sandbox."
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "oracle_paths": [
+    "canonical/tests/test_the_same_guard_twice_is_the_discriminator_v1.py",
+    "canonical/tests/test_identify_a_real_bugs_fix_v1.py",
+    "canonical/verification/THE_SAME_GUARD_TWICE_IS_THE_DISCRIMINATOR_20261119_V1.json"
+   ],
+   "synthetic_verification_necessity": "The oracle for a real commit is that project's own post-fix test file, run on an uninstrumented copy; unit tests pin only the instrument. Independent reproduction remains open."
+  },
+  "real_outcome": "That 17 unaddressed rows are unsolvable; that the instrument covers 13 rows in capability (it verifies 1); that formatting is irrelevant in general, only that it is worth 1 row here; that this grammar is the population's last word.",
+  "required_capability": "counterfactual intervention over a live execution trace, exact-fit predicate selection from the logged scope, and an oracle that decides without a model",
+  "route_frontier": {
+   "challenger_routes": [
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "1 verified repair; 13 of 30 rows addressed; 0 accusations",
+      "CORRECTNESS": "the corpus's own suite, whole file",
+      "INCREMENTAL_COST": "0 parameters, 0 model calls, ~10 us per candidate",
+      "RELIABILITY": "recall is the open term",
+      "VERIFIABILITY": "receipt rows, producer-run",
+      "WALL_CLOCK": "83.6 s for 30 commits"
+     },
+     "evidence": [
+      "30 real commits, 83.6 s, 0 accusations, grammar named for every exclusion, 1 row recovered by the AST finder, 1 verified repair unchanged, 1 harness failure stopped from wearing a fact's name"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_HYPOTHESIS_GRAMMAR_IS_THE_BOTTLENECK_20261122_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "SELECTED",
+     "route": "READ_THE_FIX_FROM_THE_AST_AND_NAME_THE_GRAMMAR_OF_THE_POPULATION"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "3 of 40 programs",
+      "CORRECTNESS": "a class is only as good as its donor",
+      "INCREMENTAL_COST": "one class per shape",
+      "RELIABILITY": "unseen shapes stay unseen",
+      "VERIFIABILITY": "measured exactly",
+      "WALL_CLOCK": "unbounded as the corpus grows"
+     },
+     "evidence": [
+      "a taught class reaches 8 of 40 fixes, 5 only on its donor"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/WHAT_IS_LEFT_FOR_A_LESSON_TO_BUY_20261117_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "teach one more edit class per failing task"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "2 of 30 unseen programs from 3 pairs, at 1.92% precision on the pair that fires",
+      "CORRECTNESS": "the corpus's own pytest decides, as here",
+      "INCREMENTAL_COST": "40.6 us per lookup, no model, no parameters",
+      "RELIABILITY": "saturates: addressability 34.4% -> 59.7% over 24 experiences",
+      "VERIFIABILITY": "measured exactly",
+      "WALL_CLOCK": "5 minutes for the whole corpus"
+     },
+     "evidence": [
+      "0.597 addressable x 0.0192 precise ~ 1.1% of unseen decisions"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/WHAT_AN_EXPERIENCE_CAN_OWN_20261118_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "NON_DOMINATING",
+     "route": "store every verified repair and retrieve it by similarity"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "1 real commit identified at rank 0, unattended, with no diff and no name table",
+      "CORRECTNESS": "the artifact answers, so a question is either answered or refused -- never wrong",
+      "INCREMENTAL_COST": "7.69 ms per asked question, 1 bit",
+      "RELIABILITY": "no saturating share: every site can be asked",
+      "VERIFIABILITY": "measured exactly",
+      "WALL_CLOCK": "121.2 s for 14 bugs"
+     },
+     "evidence": [
+      "click@1b0e19f505: human fix derived at rank 0 from the trace, 2 consistent candidates of 119 tests",
+      "5 evaluated candidates per site against the proximity pool's 32-400"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_FAILING_RUN_IS_THE_INDEX_20261118_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "SELECTED",
+     "route": "INDEX_ACTIONS_BY_THE_FAILING_RUN_NOT_BY_THE_SOURCE_TEXT"
+    }
+   ],
+   "checked_at_utc": "2026-11-18T22:57:31Z",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "AUDIT_WHAT_THE_INSTRUMENT_ACCEPTS_BEFORE_ASKING_WHAT_IT_CAN_FIND",
+   "max_age_hours": 2,
+   "negative_search_summary": "Refused by measurement this session: formatting as a cause of exclusion (1 row recovered of 30, three of the four candidates are genuine moves or two-region edits); a bigger candidate space (150,000 offered, 0 admissible); and the previous round's own claim that the specification fallback adds repairs (it adds none).",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "enumerative program repair expression size budget type-directed synthesis local typing context 2026"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "QuixBugs bug corpus python programs tests published"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "expression-size-wise enumeration starting at the size of the buggy expression S3 syntactic search space"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "2026 bounded typed program synthesis with counterexample-guided refinement depth size fuel bounds"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "selected_route": "READ_THE_FIX_FROM_THE_AST_AND_NAME_THE_GRAMMAR_OF_THE_POPULATION",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-11-18T22:57:31Z",
+    "execution_dependencies": [
+     {
+      "dependency": "local Python 3.11 runtime with pytest",
+      "evidence": [
+       "Python 3.11 + pytest 9.2; 33/33 unified-model gates and 12 instrument tests pass at 2026-11-18T18:50:14Z"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "real repositories cloned for the sweep (requests, click, tqdm, httpx) with their suites runnable",
+      "evidence": [
+       "29 fix commits swept twice in this sandbox (blame index and proximity index) at 2026-11-18T16:05:00Z"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "local tempdir for fresh per-verdict task copies",
+      "evidence": [
+       "one fresh copy per real-judge verdict, answer key absent from the copy the search runs in; 0 corpus verdicts: reachability only, no execution at 2026-11-17T22:05:07Z"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "STORAGE",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "max_age_hours": 2,
+    "selected_route": "READ_THE_FIX_FROM_THE_AST_AND_NAME_THE_GRAMMAR_OF_THE_POPULATION",
+    "status": "READY"
+   },
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/tools/grammar_closed_repair_v1.py (corpus reader, space enumerator, real judge, executed_lines)",
+     "canonical/tools/solve_with_a_calibrated_judge_v1.py (certified judge, per-case clocks, containment)",
+     "canonical/verification/WHERE_THE_REFUSALS_ACTUALLY_WERE_20261116_V1.json",
+     "canonical/verification/ONE_DEMONSTRATION_LEAVES_TEN_BITS_20261116_V1.json"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "https://arxiv.org/pdf/2611.12885 (World In-Context Learning: one demonstration plus rehearsal beats a 50-demonstration trained policy; without the world the demonstration brings no benefit)",
+     "https://arxiv.org/html/2606.29537v1 (OSWorld 2.0: 20.6% binary completion, failures concentrate on hidden state)",
+     "https://arxiv.org/html/2606.31270v1 (Learning from Failure: inference-time self-improvement from failure trajectories)"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "https://github.com/jkoppel/QuixBugs (MIT; 40 buggy programs, 40 pytest files, JSON test data)",
+     "https://pypi.org/project/pytest (9.2.0, the runner every verdict goes through)"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "https://docs.python.org/3/library/ast.html (node types the closure rule enumerates)"
+    ]
+   },
+   "unresolved_plausible_dominators": []
+  },
+  "routes_considered": [
+   "TRAIN_OR_DISTIL_A_MODEL_TO_PROPOSE_EXPRESSIONS__REFUSED_BY_OWNER_LAW_AND_UNNECESSARY_HERE",
+   "WIDEN_THE_VOCABULARY_WITH_MORE_NEIGHBOURHOOD_ATTRIBUTES__ALREADY_MEASURED_AT_9_1_PERCENT",
+   "MEASURE_THE_CEILING_WITH_THE_ADDRESS_GIVEN_FREE_THEN_NAME_WHAT_SELECTS__SELECTED"
+  ],
+  "selected_route": "READ_THE_FIX_FROM_THE_AST_AND_NAME_THE_GRAMMAR_OF_THE_POPULATION",
+  "selected_surviving_route": "READ_THE_FIX_FROM_THE_AST_AND_NAME_THE_GRAMMAR_OF_THE_POPULATION",
+  "selected_surviving_route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+  "stop_condition": "Give the instrument a relation language and a cross-frame producer trace: instrument the assertion's own call, take the callee's argument and return values, ask the callee's sites for the demanded return, and allow the three projections at a test site (`x`, `x is not None`, `not x`). Same 30 rows, same declared acceptance -- 1 verified repair whose AST fact is MORE_THAN_ONE_CHANGE_REGION, accusations 0, no verified row preserving 0 recorded passing values -- and the same rule: an unmet acceptance is recorded as a falsification, not tuned into a pass.",
+  "why_selected_route_is_fastest_sufficient": "Because the question 'is the content a knowledge problem' can only be answered by handing the address over for free and measuring what the artifact's own words can say; every other route answers it by assuming an answer.",
+  "why_this_is_not_another_organ": "It adds no knowledge, no vocabulary and no model: one AST rewrite of the module, one counter, one log of what was already in scope, and the project's own pytest as the verdict."
+ },
+ "required_capability": "counterfactual intervention over a live execution trace, exact-fit predicate selection from the logged scope, and an oracle that decides without a model",
+ "route_id": "ASK_THE_SAME_DEMAND_AT_ANOTHER_PRODUCTION_IN_THE_SAME_FUNCTION",
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "scope_complete_discharge": false,
+ "selected_route": "TEST_THE_RELATION: THE GUARD IS ASKED THE WRONG QUESTION OF THE VALUE IT HOLDS",
+ "status": "PROPOSED__PRODUCER_MEASURED__TWO_VERIFIED_REPAIRS__INDEPENDENT_VERIFICATION_OPEN",
+ "stop_condition": "Make the demand language a function learned from the run: for every boolean position the probe already reports the pair (the question the code asked, the value that arrived), and the witness judge supplies the label. The next round must show that a relation over frames -- at minimum `the same question must be asked regardless of the enclosing condition` (click 4fd2fea0db) and `two sites must agree` (jinja a150ff749a) -- can be proposed from that pair and verified, or record the falsification. Same 75 rows, same control rule: the human edit must verify under the same judge, or the row is refused.",
+ "terminal_credit_delta": 0,
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "truth": {
+  "achieved": false,
+  "the_law_this_round_adds": "A DEMAND IS A RELATION, NOT A VALUE. Its producer may be in another frame. 2 verified repairs in 75, both the same one-frame relation (`if x:` -> `if x is not None:` at a guard already holding the right object); 366 candidate sites, 0.55% precision; the remaining demands are relations over frames.",
+  "what_is_false_in_the_claim": [
+   "that exposing the model to the most advanced coding action once installs it: a demonstration shows the form of the edit and never the demand it serves, and 364 form-correct projections verify twice",
+   "that the store (parameters, repetition, context) is the constraint: 0 parameters, 2148 s, 75 commits, 2 verified",
+   "that a passing test certifies an edit: a wrong edit at more-itertools cca32949f1 flipped the human's own fail-to-pass test because the nonsense coincided with the fix",
+   "that instant learning in new environments is solved: the environment supplies the failing test, and in 51 of 75 rows no projection of any observed falsey value is the demand"
+  ]
+ },
+ "user_authorized_governance_change": false,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "currentness": {
+   "accepted_families": 5,
+   "current_load_bearing_atomic_count": 36,
+   "deleted_nonnecessary_atomic_count": 2,
+   "historical_atomic_registry_count": 38,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_atomic": 38,
+   "total_families": 19,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "This measures the reach of an executed counterfactual over real commit history and finds the content of the fix outside it; it discharges no truth obligation.",
+  "target_truth_obligations": [
+   "CODING_TB4_GE_66_4"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [
+    {
+     "git_blob_sha": "aa752cadab44d7b354814507d437f4fa485aaf74",
+     "path": "canonical/verification/RECOGNITION_IS_THE_BOTTLENECK_20261121_V1.json"
+    }
+   ],
+   "decisive_question": "Before asking what the instrument can find, does it accept the human's own fix -- and if not, why not?",
+   "falsifier_id": "THE_DEMAND_MUST_ADMIT_THE_HUMAN_FIX_AND_NOT_A_CONSTANT",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "Zero generalising repairs out of thirty fresh commits is the counterexample, and it is recorded in the receipt rather than hidden.",
+   "proposal_id": "THE_ASSERTION_IS_THE_DEMAND_20261119_V1"
+  }
+ },
+ "verification": {
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "commands": [
+   "python3 canonical/tools/the_relation_not_the_value_v1.py --commits /tmp/thirty.json --receipt canonical/verification/THE_RELATION_NOT_THE_VALUE_THIRTY_20261125_V1.json --cap 24",
+   "python3 canonical/tools/the_relation_not_the_value_v1.py --commits canonical/corpus/single_line_fix_commits_20261123_V1.json --receipt canonical/verification/THE_RELATION_NOT_THE_VALUE_FORTY_FIVE_20261125_V1.json --cap 24",
+   "python3 -m pytest canonical/tests/test_the_relation_not_the_value_v1.py -q"
+  ],
+  "independent_verification_completed": false,
+  "independent_verification_required": true,
+  "tests_green": 10
+ },
+ "weakens_existing_guard": false
+}

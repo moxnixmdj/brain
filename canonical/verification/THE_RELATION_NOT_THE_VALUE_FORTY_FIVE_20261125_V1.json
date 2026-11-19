@@ -1,0 +1,1671 @@
+{
+ "schema": "BRAIN_THE_RELATION_NOT_THE_VALUE_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "date": "2026-11-25",
+ "mode": "SWEEP_REAL_HISTORY",
+ "rows": [
+  {
+   "repo": "attrs",
+   "commit": "1c962d15a743a3c18401f0c788f0fd0cb3d9acf8",
+   "test": "tests/test_annotations.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_annotations.py::TestAnnotations::test_catches_basic_type_conflict"
+   ],
+   "baseline_verdicts": 47,
+   "guard_sites": 89,
+   "falsey_sites": 6,
+   "observed": [
+    {
+     "line": 1152,
+     "expression": "sa_attrs",
+     "value": "{}"
+    },
+    {
+     "line": 2289,
+     "expression": "attrs_to_validate",
+     "value": "[]"
+    },
+    {
+     "line": 2326,
+     "expression": "kw_only_args",
+     "value": "[]"
+    },
+    {
+     "line": 899,
+     "expression": "cached_properties",
+     "value": "{}"
+    },
+    {
+     "line": 412,
+     "expression": "unannotated",
+     "value": "set()"
+    },
+    {
+     "line": 3102,
+     "expression": "converters",
+     "value": "()"
+    }
+   ],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_annotations.py::TestAnnotations::test_catches_basic_type_conflict"
+    ]
+   },
+   "stage": "NO_PROJECTION_REPAIRS",
+   "attempts": 6,
+   "seconds": 14.42
+  },
+  {
+   "repo": "attrs",
+   "commit": "3b0378dd66d33ebddb52be85b8c4aac6a914b1a2",
+   "test": "tests/test_hooks.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_hooks.py::TestTransformHook::test_hook_generator"
+   ],
+   "baseline_verdicts": 14,
+   "guard_sites": 89,
+   "falsey_sites": 5,
+   "observed": [
+    {
+     "line": 1152,
+     "expression": "sa_attrs",
+     "value": "{}"
+    },
+    {
+     "line": 2289,
+     "expression": "attrs_to_validate",
+     "value": "[]"
+    },
+    {
+     "line": 2326,
+     "expression": "kw_only_args",
+     "value": "[]"
+    },
+    {
+     "line": 899,
+     "expression": "cached_properties",
+     "value": "{}"
+    },
+    {
+     "line": 412,
+     "expression": "unannotated",
+     "value": "set()"
+    }
+   ],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_hooks.py::TestTransformHook::test_hook_generator"
+    ]
+   },
+   "stage": "NO_PROJECTION_REPAIRS",
+   "attempts": 5,
+   "seconds": 12.29
+  },
+  {
+   "repo": "attrs",
+   "commit": "a08bfb90ef5104675d96b427858063a638774484",
+   "test": "tests/test_packaging.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_packaging.py::TestLegacyMetadataHack::test_author[attr]",
+    "tests/test_packaging.py::TestLegacyMetadataHack::test_author[attrs]",
+    "tests/test_packaging.py::TestLegacyMetadataHack::test_copyright[attr]",
+    "tests/test_packaging.py::TestLegacyMetadataHack::test_copyright[attrs]",
+    "tests/test_packaging.py::TestLegacyMetadataHack::test_description[attr]",
+    "tests/test_packaging.py::TestLegacyMetadataHack::test_description[attrs]",
+    "tests/test_packaging.py::TestLegacyMetadataHack::test_email[attr]",
+    "tests/test_packaging.py::TestLegacyMetadataHack::test_email[attrs]"
+   ],
+   "baseline_verdicts": 22,
+   "guard_sites": 0,
+   "falsey_sites": 0,
+   "observed": [],
+   "control": {
+    "accepted": false,
+    "reason": "NO_TEST_FLIPPED",
+    "flipped": []
+   },
+   "stage": "REFUSED__CONTROL_BROKEN",
+   "seconds": 4.48
+  },
+  {
+   "repo": "attrs",
+   "commit": "a572c3a4c558a8b9b48cf989fcd956ab1a279439",
+   "test": "tests/test_setattr.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_setattr.py::TestSetAttr::test_frozen_on_setattr_nops[nop1]"
+   ],
+   "baseline_verdicts": 39,
+   "guard_sites": 95,
+   "falsey_sites": 4,
+   "observed": [
+    {
+     "line": 1173,
+     "expression": "sa_attrs",
+     "value": "{}"
+    },
+    {
+     "line": 2348,
+     "expression": "attrs_to_validate",
+     "value": "[]"
+    },
+    {
+     "line": 2385,
+     "expression": "kw_only_args",
+     "value": "[]"
+    },
+    {
+     "line": 922,
+     "expression": "cached_properties",
+     "value": "{}"
+    }
+   ],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_setattr.py::TestSetAttr::test_frozen_on_setattr_nops[nop1]"
+    ]
+   },
+   "stage": "NO_PROJECTION_REPAIRS",
+   "attempts": 4,
+   "seconds": 11.26
+  },
+  {
+   "repo": "click",
+   "commit": "1b0e19f50595a07957bd96a600c37cd44b7e0cc3",
+   "test": "tests/test_options.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_options.py::test_missing_envvar"
+   ],
+   "baseline_verdicts": 144,
+   "guard_sites": 141,
+   "falsey_sites": 17,
+   "observed": [
+    {
+     "line": 2650,
+     "expression": "self.secondary_opts",
+     "value": "[]"
+    },
+    {
+     "line": 2749,
+     "expression": "self.secondary_opts",
+     "value": "[]"
+    },
+    {
+     "line": 1199,
+     "expression": "args",
+     "value": "[]"
+    },
+    {
+     "line": 1125,
+     "expression": "text",
+     "value": "''"
+    },
+    {
+     "line": 2798,
+     "expression": "self.secondary_opts",
+     "value": "[]"
+    },
+    {
+     "line": 2816,
+     "expression": "extra_items",
+     "value": "[]"
+    }
+   ],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_options.py::test_missing_envvar"
+    ]
+   },
+   "stage": "NO_PROJECTION_REPAIRS",
+   "attempts": 17,
+   "seconds": 35.94
+  },
+  {
+   "repo": "click",
+   "commit": "3f91d2154ebc47651f0cd9798250a03821473521",
+   "test": "tests/test_types.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_types.py::test_path_type_with_esc_sequence"
+   ],
+   "baseline_verdicts": 39,
+   "guard_sites": 27,
+   "falsey_sites": 0,
+   "observed": [],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_types.py::test_path_type_with_esc_sequence"
+    ]
+   },
+   "stage": "NO_FALSEY_GUARD",
+   "attempts": 0,
+   "seconds": 4.62
+  },
+  {
+   "repo": "click",
+   "commit": "40830087dd9e9023dbcf75befe0ca9056127a064",
+   "test": "tests/test_options.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_options.py::test_missing_required_flag"
+   ],
+   "baseline_verdicts": 109,
+   "guard_sites": 132,
+   "falsey_sites": 15,
+   "observed": [
+    {
+     "line": 2550,
+     "expression": "self.secondary_opts",
+     "value": "[]"
+    },
+    {
+     "line": 2641,
+     "expression": "self.secondary_opts",
+     "value": "[]"
+    },
+    {
+     "line": 1389,
+     "expression": "args",
+     "value": "[]"
+    },
+    {
+     "line": 1353,
+     "expression": "text",
+     "value": "''"
+    },
+    {
+     "line": 2690,
+     "expression": "self.secondary_opts",
+     "value": "[]"
+    },
+    {
+     "line": 2771,
+     "expression": "extra",
+     "value": "[]"
+    }
+   ],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_options.py::test_missing_required_flag"
+    ]
+   },
+   "stage": "NO_PROJECTION_REPAIRS",
+   "attempts": 15,
+   "seconds": 30.53
+  },
+  {
+   "repo": "click",
+   "commit": "42ee8a1f6011e0f4a8a19c34a545f3eb7ae978fa",
+   "test": "tests/test_formatting.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_formatting.py::test_formatting_with_options_metavar_empty"
+   ],
+   "baseline_verdicts": 16,
+   "guard_sites": 116,
+   "falsey_sites": 7,
+   "observed": [
+    {
+     "line": 2362,
+     "expression": "self.secondary_opts",
+     "value": "[]"
+    },
+    {
+     "line": 2389,
+     "expression": "self.secondary_opts",
+     "value": "[]"
+    },
+    {
+     "line": 2435,
+     "expression": "extra",
+     "value": "[]"
+    },
+    {
+     "line": 1253,
+     "expression": "args",
+     "value": "[]"
+    },
+    {
+     "line": 1158,
+     "expression": "help_options",
+     "value": "set()"
+    },
+    {
+     "line": 2268,
+     "expression": "self.secondary_opts",
+     "value": "[]"
+    }
+   ],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_formatting.py::test_formatting_with_options_metavar_empty"
+    ]
+   },
+   "stage": "NO_PROJECTION_REPAIRS",
+   "attempts": 7,
+   "seconds": 15.94
+  },
+  {
+   "repo": "click",
+   "commit": "4a337ea913515e8e98e425d70701ea4fb091830e",
+   "test": "tests/test_commands.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_commands.py::test_aliased_command_canonical_name"
+   ],
+   "baseline_verdicts": 14,
+   "guard_sites": 100,
+   "falsey_sites": 9,
+   "observed": [
+    {
+     "line": 1073,
+     "expression": "args",
+     "value": "[]"
+    },
+    {
+     "line": 1889,
+     "expression": "self.secondary_opts",
+     "value": "[]"
+    },
+    {
+     "line": 1083,
+     "expression": "args",
+     "value": "[]"
+    },
+    {
+     "line": 1807,
+     "expression": "self.secondary_opts",
+     "value": "[]"
+    },
+    {
+     "line": 1916,
+     "expression": "self.secondary_opts",
+     "value": "[]"
+    },
+    {
+     "line": 1950,
+     "expression": "extra",
+     "value": "[]"
+    }
+   ],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_commands.py::test_aliased_command_canonical_name"
+    ]
+   },
+   "stage": "NO_PROJECTION_REPAIRS",
+   "attempts": 9,
+   "seconds": 18.62
+  },
+  {
+   "repo": "click",
+   "commit": "bf1e8be90c46428f8bf8b45f295af80cfaf2e188",
+   "test": "tests/test_defaults.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_defaults.py::test_flag_default_map"
+   ],
+   "baseline_verdicts": 5,
+   "guard_sites": 133,
+   "falsey_sites": 9,
+   "observed": [
+    {
+     "line": 2605,
+     "expression": "self.secondary_opts",
+     "value": "[]"
+    },
+    {
+     "line": 1396,
+     "expression": "args",
+     "value": "[]"
+    },
+    {
+     "line": 2696,
+     "expression": "self.secondary_opts",
+     "value": "[]"
+    },
+    {
+     "line": 1406,
+     "expression": "args",
+     "value": "[]"
+    },
+    {
+     "line": 2853,
+     "expression": "param.default",
+     "value": "()"
+    },
+    {
+     "line": 1870,
+     "expression": "args",
+     "value": "()"
+    }
+   ],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_defaults.py::test_flag_default_map"
+    ]
+   },
+   "stage": "NO_PROJECTION_REPAIRS",
+   "attempts": 9,
+   "seconds": 19.26
+  },
+  {
+   "repo": "click",
+   "commit": "d340b0c1202284a1b9d0ca892549208527d586ce",
+   "test": "tests/test_options.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_options.py::test_show_default_with_empty_string[non-string-comparable-object]"
+   ],
+   "baseline_verdicts": 552,
+   "guard_sites": 145,
+   "falsey_sites": 19,
+   "observed": [
+    {
+     "line": 2979,
+     "expression": "self.secondary_opts",
+     "value": "[]"
+    },
+    {
+     "line": 2452,
+     "expression": "unset_keys",
+     "value": "{}"
+    },
+    {
+     "line": 1242,
+     "expression": "args",
+     "value": "[]"
+    },
+    {
+     "line": 1155,
+     "expression": "text",
+     "value": "''"
+    },
+    {
+     "line": 3028,
+     "expression": "self.secondary_opts",
+     "value": "[]"
+    },
+    {
+     "line": 3046,
+     "expression": "extra_items",
+     "value": "[]"
+    }
+   ],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_options.py::test_show_default_with_empty_string[non-string-comparable-object]"
+    ]
+   },
+   "stage": "NO_PROJECTION_REPAIRS",
+   "attempts": 19,
+   "seconds": 51.79
+  },
+  {
+   "repo": "httpx",
+   "commit": "e63b6594f2863b7c8274eb0991ebc6cad63661f7",
+   "test": "tests/test_urlparse.py",
+   "parameters_stored": 0,
+   "stage": "NO_FAILING_TEST",
+   "seconds": 0.68
+  },
+  {
+   "repo": "jinja",
+   "commit": "2eb4542cbab101910d220229a8f09c94f76c19d1",
+   "test": "tests/test_filters.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_filters.py::TestFilter::test_int[1e10000-0]"
+   ],
+   "baseline_verdicts": 132,
+   "guard_sites": 28,
+   "falsey_sites": 4,
+   "observed": [
+    {
+     "line": 1037,
+     "expression": "kwargs",
+     "value": "{}"
+    },
+    {
+     "line": 861,
+     "expression": "lines",
+     "value": "[]"
+    },
+    {
+     "line": 1732,
+     "expression": "args",
+     "value": "()"
+    },
+    {
+     "line": 1736,
+     "expression": "kwargs",
+     "value": "{}"
+    }
+   ],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_filters.py::TestFilter::test_int[1e10000-0]"
+    ]
+   },
+   "stage": "NO_PROJECTION_REPAIRS",
+   "attempts": 4,
+   "seconds": 12.95
+  },
+  {
+   "repo": "jinja",
+   "commit": "d05bd3858c3f4990e91201dae058147caf317462",
+   "test": "tests/test_regression.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_regression.py::TestBug::test_pass_context_with_select"
+   ],
+   "baseline_verdicts": 53,
+   "guard_sites": 28,
+   "falsey_sites": 0,
+   "observed": [],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_regression.py::TestBug::test_pass_context_with_select"
+    ]
+   },
+   "stage": "NO_FALSEY_GUARD",
+   "attempts": 0,
+   "seconds": 5.0
+  },
+  {
+   "repo": "more-itertools",
+   "commit": "62411c1618493f94b16901746c34e72ad415061e",
+   "test": "tests/test_more.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_more.py::SpyTests::test_immutable"
+   ],
+   "baseline_verdicts": 323,
+   "guard_sites": 20,
+   "falsey_sites": 8,
+   "observed": [
+    {
+     "line": 324,
+     "expression": "self._cache",
+     "value": "deque([])"
+    },
+    {
+     "line": 283,
+     "expression": "self._cache",
+     "value": "deque([])"
+    },
+    {
+     "line": 592,
+     "expression": "depth",
+     "value": "0"
+    },
+    {
+     "line": 1163,
+     "expression": "buf",
+     "value": "[]"
+    },
+    {
+     "line": 1206,
+     "expression": "buf",
+     "value": "[]"
+    },
+    {
+     "line": 1511,
+     "expression": "head",
+     "value": "[]"
+    }
+   ],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_more.py::SpyTests::test_immutable"
+    ]
+   },
+   "stage": "NO_PROJECTION_REPAIRS",
+   "attempts": 8,
+   "seconds": 201.13
+  },
+  {
+   "repo": "more-itertools",
+   "commit": "71e070b35d8c136484e91189719c2a4eccd36fc3",
+   "test": "tests/test_more.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_more.py::AllUniqueTests::test_falsey_key_is_honoured"
+   ],
+   "baseline_verdicts": 621,
+   "guard_sites": 51,
+   "falsey_sites": 22,
+   "observed": [
+    {
+     "line": 445,
+     "expression": "self._cache",
+     "value": "deque([])"
+    },
+    {
+     "line": 402,
+     "expression": "self._cache",
+     "value": "deque([])"
+    },
+    {
+     "line": 1065,
+     "expression": "window",
+     "value": "deque([], maxlen=3)"
+    },
+    {
+     "line": 1356,
+     "expression": "dims",
+     "value": "0"
+    },
+    {
+     "line": 1646,
+     "expression": "buf",
+     "value": "[]"
+    },
+    {
+     "line": 1631,
+     "expression": "buf",
+     "value": "[]"
+    }
+   ],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_more.py::AllUniqueTests::test_falsey_key_is_honoured"
+    ]
+   },
+   "stage": "NO_PROJECTION_REPAIRS",
+   "attempts": 22,
+   "seconds": 414.15
+  },
+  {
+   "repo": "more-itertools",
+   "commit": "b0aa91efbb452eeb8ffa0447047519c6e84d5292",
+   "test": "tests/test_recipes.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_recipes.py::RandomProductTests::test_list_with_repeat"
+   ],
+   "baseline_verdicts": 137,
+   "guard_sites": 2,
+   "falsey_sites": 0,
+   "observed": [],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_recipes.py::RandomProductTests::test_list_with_repeat"
+    ]
+   },
+   "stage": "NO_FALSEY_GUARD",
+   "attempts": 0,
+   "seconds": 30.27
+  },
+  {
+   "repo": "more-itertools",
+   "commit": "cca32949f12d473fd823e37a5530c30d2faa1332",
+   "test": "tests/test_more.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_more.py::LastTests::test_reversed_is_none"
+   ],
+   "baseline_verdicts": 544,
+   "guard_sites": 46,
+   "falsey_sites": 16,
+   "observed": [
+    {
+     "line": 436,
+     "expression": "self._cache",
+     "value": "deque([])"
+    },
+    {
+     "line": 395,
+     "expression": "self._cache",
+     "value": "deque([])"
+    },
+    {
+     "line": 1006,
+     "expression": "window",
+     "value": "deque([], maxlen=3)"
+    },
+    {
+     "line": 1548,
+     "expression": "buf",
+     "value": "[]"
+    },
+    {
+     "line": 1540,
+     "expression": "buf",
+     "value": "[]"
+    },
+    {
+     "line": 1586,
+     "expression": "buf",
+     "value": "[]"
+    }
+   ],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_more.py::LastTests::test_reversed_is_none"
+    ]
+   },
+   "stage": "NO_PROJECTION_REPAIRS",
+   "attempts": 16,
+   "seconds": 260.24
+  },
+  {
+   "repo": "more-itertools",
+   "commit": "d3665d6ba2eec8cb95e9744c2085fb40af1e962b",
+   "test": "tests/test_more.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_more.py::SlicedTests::test_numpy_like_array"
+   ],
+   "baseline_verdicts": 315,
+   "guard_sites": 18,
+   "falsey_sites": 7,
+   "observed": [
+    {
+     "line": 324,
+     "expression": "self._cache",
+     "value": "deque([])"
+    },
+    {
+     "line": 283,
+     "expression": "self._cache",
+     "value": "deque([])"
+    },
+    {
+     "line": 1101,
+     "expression": "buf",
+     "value": "[]"
+    },
+    {
+     "line": 1125,
+     "expression": "buf",
+     "value": "[]"
+    },
+    {
+     "line": 1414,
+     "expression": "head",
+     "value": "[]"
+    },
+    {
+     "line": 1756,
+     "expression": "self",
+     "value": "numeric_range(1.5, 1.0, 1.5)"
+    }
+   ],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_more.py::SlicedTests::test_numpy_like_array"
+    ]
+   },
+   "stage": "NO_PROJECTION_REPAIRS",
+   "attempts": 7,
+   "seconds": 198.21
+  },
+  {
+   "repo": "packaging",
+   "commit": "0625596e502163179b9a82796aee82c178efc16d",
+   "test": "tests/test_utils.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_utils.py::test_parse_wheel_invalid_filename[foo-1.0-1\\n-py3-none-any.whl]",
+    "tests/test_utils.py::test_parse_wheel_invalid_filename[foo-1.0-1\\nabc-py3-none-any.whl]"
+   ],
+   "baseline_verdicts": 79,
+   "guard_sites": 3,
+   "falsey_sites": 2,
+   "observed": [
+    {
+     "line": 354,
+     "expression": "sep",
+     "value": "''"
+    },
+    {
+     "line": 356,
+     "expression": "name_part",
+     "value": "''"
+    }
+   ],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_utils.py::test_parse_wheel_invalid_filename[foo-1.0-1\\n-py3-none-any.whl]",
+     "tests/test_utils.py::test_parse_wheel_invalid_filename[foo-1.0-1\\nabc-py3-none-any.whl]"
+    ]
+   },
+   "stage": "NO_PROJECTION_REPAIRS",
+   "attempts": 2,
+   "seconds": 7.19
+  },
+  {
+   "repo": "packaging",
+   "commit": "08bb047794f4e70b157dacef4538b3a6e3492743",
+   "test": "tests/test_direct_url.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_direct_url.py::test_strip_url[https://user:pa@ss@g.c/user/repo.git-safe_user_passwords2-https://g.c/user/repo.git]",
+    "tests/test_direct_url.py::test_to_dict_strip_url_with_at_in_password"
+   ],
+   "baseline_verdicts": 37,
+   "guard_sites": 6,
+   "falsey_sites": 0,
+   "observed": [],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_direct_url.py::test_strip_url[https://user:pa@ss@g.c/user/repo.git-safe_user_passwords2-https://g.c/user/repo.git]",
+     "tests/test_direct_url.py::test_to_dict_strip_url_with_at_in_password"
+    ]
+   },
+   "stage": "NO_FALSEY_GUARD",
+   "attempts": 0,
+   "seconds": 4.4
+  },
+  {
+   "repo": "packaging",
+   "commit": "189a76d54d64899adbca907c2a3efa5b6befdb28",
+   "test": "tests/test_markers.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_markers.py::TestMarker::test_parses_invalid_trailing_line_break[\\n]"
+   ],
+   "baseline_verdicts": 2306,
+   "guard_sites": 1,
+   "falsey_sites": 0,
+   "observed": [],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_markers.py::TestMarker::test_parses_invalid_trailing_line_break[\\n]"
+    ]
+   },
+   "stage": "NO_FALSEY_GUARD",
+   "attempts": 0,
+   "seconds": 10.53
+  },
+  {
+   "repo": "packaging",
+   "commit": "258202ed7f796bdb8a65252a66c3fbd3e69e97f6",
+   "test": "tests/test_utils.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_utils.py::test_canonicalize_name_invalid[hi\\n-hi\\n]"
+   ],
+   "baseline_verdicts": 60,
+   "guard_sites": 2,
+   "falsey_sites": 1,
+   "observed": [
+    {
+     "line": 151,
+     "expression": "sep",
+     "value": "''"
+    }
+   ],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_utils.py::test_canonicalize_name_invalid[hi\\n-hi\\n]"
+    ]
+   },
+   "stage": "NO_PROJECTION_REPAIRS",
+   "attempts": 1,
+   "seconds": 6.17
+  },
+  {
+   "repo": "packaging",
+   "commit": "553582d9162c761e4ab97ccc6cea43ac14ff2a8b",
+   "test": "tests/test_metadata.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_metadata.py::TestMetadata::test_invalid_charset_error_message"
+   ],
+   "baseline_verdicts": 295,
+   "guard_sites": 8,
+   "falsey_sites": 2,
+   "observed": [
+    {
+     "line": 489,
+     "expression": "payload",
+     "value": "''"
+    },
+    {
+     "line": 746,
+     "expression": "semicolon",
+     "value": "''"
+    }
+   ],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_metadata.py::TestMetadata::test_invalid_charset_error_message"
+    ]
+   },
+   "stage": "NO_PROJECTION_REPAIRS",
+   "attempts": 2,
+   "seconds": 9.3
+  },
+  {
+   "repo": "packaging",
+   "commit": "8af75907bf1140071a6a706874fcf1d73cc39c71",
+   "test": "tests/test_utils.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_utils.py::test_parse_wheel_invalid_filename[foo\\n-1.0-py3-none-any.whl]"
+   ],
+   "baseline_verdicts": 75,
+   "guard_sites": 3,
+   "falsey_sites": 2,
+   "observed": [
+    {
+     "line": 317,
+     "expression": "sep",
+     "value": "''"
+    },
+    {
+     "line": 319,
+     "expression": "name_part",
+     "value": "''"
+    }
+   ],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_utils.py::test_parse_wheel_invalid_filename[foo\\n-1.0-py3-none-any.whl]"
+    ]
+   },
+   "stage": "NO_PROJECTION_REPAIRS",
+   "attempts": 2,
+   "seconds": 7.86
+  },
+  {
+   "repo": "packaging",
+   "commit": "b80e6eb0a6c0f61dcaa9b1587f3aab370263dc65",
+   "test": "tests/test_pylock_select.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_pylock_select.py::test_lock_no_matching_env[environments0]"
+   ],
+   "baseline_verdicts": 29,
+   "guard_sites": 16,
+   "falsey_sites": 2,
+   "observed": [
+    {
+     "line": 839,
+     "expression": "self.environments",
+     "value": "[]"
+    },
+    {
+     "line": 912,
+     "expression": "package.wheels",
+     "value": "[]"
+    }
+   ],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_pylock_select.py::test_lock_no_matching_env[environments0]"
+    ]
+   },
+   "stage": "VERIFIED",
+   "projection": "is not None",
+   "site_line": 839,
+   "site_expression": "self.environments",
+   "replacement": "(self.environments) is not None",
+   "observed_value": "[]",
+   "observed_type": "list",
+   "attempts": 1,
+   "flipped": [
+    "tests/test_pylock_select.py::test_lock_no_matching_env[environments0]"
+   ],
+   "seconds": 6.27
+  },
+  {
+   "repo": "packaging",
+   "commit": "ba17fcea2367a70cba21d6bfb0931ae476ee8583",
+   "test": "tests/test_utils.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_utils.py::test_is_normalized_name[1--1-1-1]",
+    "tests/test_utils.py::test_is_normalized_name[a--b-a-b]"
+   ],
+   "baseline_verdicts": 70,
+   "guard_sites": 2,
+   "falsey_sites": 1,
+   "observed": [
+    {
+     "line": 293,
+     "expression": "sep",
+     "value": "''"
+    }
+   ],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_utils.py::test_is_normalized_name[a--b-a-b]",
+     "tests/test_utils.py::test_is_normalized_name[1--1-1-1]"
+    ]
+   },
+   "stage": "NO_PROJECTION_REPAIRS",
+   "attempts": 1,
+   "seconds": 6.02
+  },
+  {
+   "repo": "packaging",
+   "commit": "e7ce051e9191c461e0a536a84c4d66a87518de66",
+   "test": "tests/test_requirements.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_requirements.py::TestRequirementParsing::test_error_invalid_marker_notin_without_whitespace",
+    "tests/test_requirements.py::TestRequirementParsing::test_error_invalid_marker_with_invalid_op",
+    "tests/test_requirements.py::TestRequirementParsing::test_error_when_no_word_boundary"
+   ],
+   "baseline_verdicts": 4703,
+   "guard_sites": 0,
+   "falsey_sites": 0,
+   "observed": [],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_requirements.py::TestRequirementParsing::test_error_invalid_marker_notin_without_whitespace",
+     "tests/test_requirements.py::TestRequirementParsing::test_error_when_no_word_boundary",
+     "tests/test_requirements.py::TestRequirementParsing::test_error_invalid_marker_with_invalid_op"
+    ]
+   },
+   "stage": "NO_FALSEY_GUARD",
+   "attempts": 0,
+   "seconds": 21.35
+  },
+  {
+   "repo": "pluggy",
+   "commit": "4326ced299cc37f4abc57c22c6298362b5379602",
+   "test": "testing/test_pluginmanager.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "testing/test_pluginmanager.py::test_set_blocked"
+   ],
+   "baseline_verdicts": 37,
+   "guard_sites": 12,
+   "falsey_sites": 4,
+   "observed": [
+    {
+     "line": 341,
+     "expression": "notinspec",
+     "value": "set()"
+    },
+    {
+     "line": 515,
+     "expression": "plugins_to_remove",
+     "value": "set()"
+    },
+    {
+     "line": 218,
+     "expression": "hookcallers",
+     "value": "[]"
+    },
+    {
+     "line": 269,
+     "expression": "names",
+     "value": "[]"
+    }
+   ],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "testing/test_pluginmanager.py::test_set_blocked"
+    ]
+   },
+   "stage": "NO_PROJECTION_REPAIRS",
+   "attempts": 4,
+   "seconds": 9.72
+  },
+  {
+   "repo": "pluggy",
+   "commit": "6abdcf6ca167f5d61297b5d86e22f3dd058031b3",
+   "test": "testing/test_details.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "testing/test_details.py::test_warn_when_deprecated_args_with_defaults_specified"
+   ],
+   "baseline_verdicts": 16,
+   "guard_sites": 14,
+   "falsey_sites": 2,
+   "observed": [
+    {
+     "line": 433,
+     "expression": "notinspec",
+     "value": "set()"
+    },
+    {
+     "line": 632,
+     "expression": "plugins_to_remove",
+     "value": "set()"
+    }
+   ],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "testing/test_details.py::test_warn_when_deprecated_args_with_defaults_specified"
+    ]
+   },
+   "stage": "NO_PROJECTION_REPAIRS",
+   "attempts": 2,
+   "seconds": 6.41
+  },
+  {
+   "repo": "pluggy",
+   "commit": "e108fa4490564b9f252fe7a8a4d1969f6f996641",
+   "test": "testing/test_pluginmanager.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "testing/test_pluginmanager.py::test_load_setuptools_instantiation[bool-raises]",
+    "testing/test_pluginmanager.py::test_load_setuptools_instantiation[falsey]"
+   ],
+   "baseline_verdicts": 75,
+   "guard_sites": 14,
+   "falsey_sites": 4,
+   "observed": [
+    {
+     "line": 432,
+     "expression": "notinspec",
+     "value": "set()"
+    },
+    {
+     "line": 631,
+     "expression": "plugins_to_remove",
+     "value": "set()"
+    },
+    {
+     "line": 299,
+     "expression": "hookcallers",
+     "value": "[]"
+    },
+    {
+     "line": 350,
+     "expression": "names",
+     "value": "[]"
+    }
+   ],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "testing/test_pluginmanager.py::test_load_setuptools_instantiation[falsey]",
+     "testing/test_pluginmanager.py::test_load_setuptools_instantiation[bool-raises]"
+    ]
+   },
+   "stage": "NO_PROJECTION_REPAIRS",
+   "attempts": 4,
+   "seconds": 10.18
+  },
+  {
+   "repo": "starlette",
+   "commit": "20973f2ed31f4fe7faca988f8590fe3eaf70541e",
+   "test": "tests/middleware/test_cors.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/middleware/test_cors.py::test_cors_allow_origin_regex_fullmatch"
+   ],
+   "baseline_verdicts": 9,
+   "guard_sites": 11,
+   "falsey_sites": 3,
+   "observed": [
+    {
+     "line": 130,
+     "expression": "failures",
+     "value": "[]"
+    },
+    {
+     "line": 37,
+     "expression": "expose_headers",
+     "value": "()"
+    },
+    {
+     "line": 51,
+     "expression": "allow_headers",
+     "value": "()"
+    }
+   ],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/middleware/test_cors.py::test_cors_allow_origin_regex_fullmatch"
+    ]
+   },
+   "stage": "NO_PROJECTION_REPAIRS",
+   "attempts": 3,
+   "seconds": 9.88
+  },
+  {
+   "repo": "tqdm",
+   "commit": "223561a83bcc0cca961b6b42403424b995c6e916",
+   "test": "tests/py37_asyncio.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/py37_asyncio.py::test_gather"
+   ],
+   "baseline_verdicts": 7,
+   "guard_sites": 1,
+   "falsey_sites": 0,
+   "observed": [],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/py37_asyncio.py::test_gather"
+    ]
+   },
+   "stage": "NO_FALSEY_GUARD",
+   "attempts": 0,
+   "seconds": 7.51
+  },
+  {
+   "repo": "tqdm",
+   "commit": "b38a9221c4b2723a82d8b186c0fd8e7b05771a12",
+   "test": "tests/tests_tqdm.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/tests_tqdm.py::test_format_num"
+   ],
+   "baseline_verdicts": 70,
+   "guard_sites": 57,
+   "falsey_sites": 18,
+   "observed": [
+    {
+     "line": 417,
+     "expression": "h",
+     "value": "0"
+    },
+    {
+     "line": 585,
+     "expression": "prefix",
+     "value": "''"
+    },
+    {
+     "line": 187,
+     "expression": "format_spec",
+     "value": "''"
+    },
+    {
+     "line": 628,
+     "expression": "prefix",
+     "value": "''"
+    },
+    {
+     "line": 553,
+     "expression": "elapsed",
+     "value": "0"
+    },
+    {
+     "line": 997,
+     "expression": "kwargs",
+     "value": "{}"
+    }
+   ],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/tests_tqdm.py::test_format_num"
+    ]
+   },
+   "stage": "NO_PROJECTION_REPAIRS",
+   "attempts": 18,
+   "seconds": 49.91
+  },
+  {
+   "repo": "urllib3",
+   "commit": "4714836a667eb4837d005eb89d34fae60b9dc6cc",
+   "test": "test/with_dummyserver/test_socketlevel.py",
+   "parameters_stored": 0,
+   "stage": "NO_FAILING_TEST",
+   "seconds": 42.83
+  },
+  {
+   "repo": "urllib3",
+   "commit": "644124ecd0b6e417c527191f866daa05a5a2056d",
+   "test": "test/test_retry.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "test/test_retry.py::TestRetry::test_retry_default_remove_headers_on_redirect"
+   ],
+   "baseline_verdicts": 61,
+   "guard_sites": 15,
+   "falsey_sites": 2,
+   "observed": [
+    {
+     "line": 419,
+     "expression": "retry_counts",
+     "value": "[]"
+    },
+    {
+     "line": 333,
+     "expression": "retry_after",
+     "value": "0.0"
+    }
+   ],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "test/test_retry.py::TestRetry::test_retry_default_remove_headers_on_redirect"
+    ]
+   },
+   "stage": "NO_PROJECTION_REPAIRS",
+   "attempts": 2,
+   "seconds": 9.82
+  },
+  {
+   "repo": "urllib3",
+   "commit": "77fa67aaf2dc18962fa9234d47400c8a6fc1edf4",
+   "test": "test/test_util.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "test/test_util.py::TestUtil::test_parse_url_remove_leading_zeros"
+   ],
+   "baseline_verdicts": 332,
+   "guard_sites": 20,
+   "falsey_sites": 6,
+   "observed": [
+    {
+     "line": 112,
+     "expression": "path",
+     "value": "''"
+    },
+    {
+     "line": 444,
+     "expression": "path",
+     "value": "''"
+    },
+    {
+     "line": 459,
+     "expression": "path",
+     "value": "''"
+    },
+    {
+     "line": 447,
+     "expression": "query",
+     "value": "''"
+    },
+    {
+     "line": 449,
+     "expression": "fragment",
+     "value": "''"
+    },
+    {
+     "line": 284,
+     "expression": "output",
+     "value": "[]"
+    }
+   ],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "test/test_util.py::TestUtil::test_parse_url_remove_leading_zeros"
+    ]
+   },
+   "stage": "NO_PROJECTION_REPAIRS",
+   "attempts": 6,
+   "seconds": 18.35
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "285af2c465d0737e77f33bab6d29775fcd53b667",
+   "test": "tests/test_test.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_test.py::test_redirects_are_tracked"
+   ],
+   "baseline_verdicts": 60,
+   "guard_sites": 14,
+   "falsey_sites": 0,
+   "observed": [],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_test.py::test_redirects_are_tracked"
+    ]
+   },
+   "stage": "NO_FALSEY_GUARD",
+   "attempts": 0,
+   "seconds": 5.21
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "351b73196ca30c26ef2a7b492508d89da370c07f",
+   "test": "tests/test_security.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_security.py::test_password_hashing"
+   ],
+   "baseline_verdicts": 4,
+   "guard_sites": 3,
+   "falsey_sites": 1,
+   "observed": [
+    {
+     "line": 119,
+     "expression": "directory",
+     "value": "''"
+    }
+   ],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_security.py::test_password_hashing"
+    ]
+   },
+   "stage": "NO_PROJECTION_REPAIRS",
+   "attempts": 1,
+   "seconds": 7.01
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "352cd7167984f805daf226966f38f8dfeb991313",
+   "test": "tests/test_local.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_local.py::test_proxy_fallback"
+   ],
+   "baseline_verdicts": 62,
+   "guard_sites": 1,
+   "falsey_sites": 0,
+   "observed": [],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_local.py::test_proxy_fallback"
+    ]
+   },
+   "stage": "NO_FALSEY_GUARD",
+   "attempts": 0,
+   "seconds": 5.14
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "3a408edffde8a006a644d9c2d7bd32973421b924",
+   "test": "tests/test_routing.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_routing.py::test_weighting"
+   ],
+   "baseline_verdicts": 108,
+   "guard_sites": 15,
+   "falsey_sites": 1,
+   "observed": [
+    {
+     "line": 824,
+     "expression": "defaults",
+     "value": "()"
+    }
+   ],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_routing.py::test_weighting"
+    ]
+   },
+   "stage": "NO_PROJECTION_REPAIRS",
+   "attempts": 1,
+   "seconds": 13.1
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "763609ae21a1d8d649ca19f30c61257fbee670c1",
+   "test": "tests/test_security.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_security.py::test_pbkdf2"
+   ],
+   "baseline_verdicts": 12,
+   "guard_sites": 2,
+   "falsey_sites": 2,
+   "observed": [
+    {
+     "line": 31,
+     "expression": "args",
+     "value": "[]"
+    },
+    {
+     "line": 140,
+     "expression": "directory",
+     "value": "''"
+    }
+   ],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_security.py::test_pbkdf2"
+    ]
+   },
+   "stage": "NO_PROJECTION_REPAIRS",
+   "attempts": 2,
+   "seconds": 12.14
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "8f8507b4623b8a2faba1e69c0da815887a54b810",
+   "test": "tests/test_http.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_http.py::TestHTTPUtility::test_parse_cookie"
+   ],
+   "baseline_verdicts": 55,
+   "guard_sites": 15,
+   "falsey_sites": 0,
+   "observed": [],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_http.py::TestHTTPUtility::test_parse_cookie"
+    ]
+   },
+   "stage": "NO_FALSEY_GUARD",
+   "attempts": 0,
+   "seconds": 4.98
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "d03b97779720c614287d2aef0f075ee4a1391c5b",
+   "test": "tests/test_useragents.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_useragents.py::test_edge_browsers[user_agent1-windows-edge-81.0.416.68-None]",
+    "tests/test_useragents.py::test_edge_browsers[user_agent2-windows-edge-84.0.499.0-None]"
+   ],
+   "baseline_verdicts": 3,
+   "guard_sites": 0,
+   "falsey_sites": 0,
+   "observed": [],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_useragents.py::test_edge_browsers[user_agent1-windows-edge-81.0.416.68-None]",
+     "tests/test_useragents.py::test_edge_browsers[user_agent2-windows-edge-84.0.499.0-None]"
+    ]
+   },
+   "stage": "NO_FALSEY_GUARD",
+   "attempts": 0,
+   "seconds": 5.1
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "d0f040a65bfc39c52930f0ea0ca0a9d465bc5043",
+   "test": "tests/test_routing.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_routing.py::test_build_append_unknown_dict[1+2-?v=1%2B2]"
+   ],
+   "baseline_verdicts": 116,
+   "guard_sites": 29,
+   "falsey_sites": 0,
+   "observed": [],
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_routing.py::test_build_append_unknown_dict[1+2-?v=1%2B2]"
+    ]
+   },
+   "stage": "NO_FALSEY_GUARD",
+   "attempts": 0,
+   "seconds": 10.42
+  }
+ ],
+ "seconds": 1649.0
+}
