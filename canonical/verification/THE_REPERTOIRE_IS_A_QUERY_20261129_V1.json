@@ -1,0 +1,3577 @@
+{
+ "schema": "BRAIN_THE_REPERTOIRE_IS_A_QUERY_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "date": "2026-11-29",
+ "question": "is the repertoire something gathered and kept, or something read when needed?",
+ "declared_before_the_run": {
+  "K1_the_machine_describes_itself": ">= 40 programs and >= 400 options",
+  "K2_an_option_is_not_an_action": "< half of the executed options are accepted by their own program",
+  "K3_the_catalogue_promises_and_the_state_decides": "at least half of the executed pages that advertise an effect produce one",
+  "K4_a_guard_is_advertised_and_real": ">= half of advertised checks change nothing",
+  "K5_undo_is_a_property": ">= half of inverse pairs restore the tree",
+  "K6_a_query_is_cheap": "< 300 s to re-derive, > 20 kB if stored",
+  "K7_the_catalogue_cannot_refuse": "the top score of an unanswerable need overlaps the top score of an answerable one",
+  "K8_nothing_is_written_by_hand": "no program or option spelled in this source"
+ },
+ "summary": {
+  "programs_read": 437,
+  "pages_read": 492,
+  "branches_read": 55,
+  "option_lines": 13250,
+  "distinct_options": 4621,
+  "catalogue_bytes": 1147793,
+  "read_seconds": 47.0,
+  "executed_pages": [
+   "addr2line",
+   "docker-entrypoint.sh",
+   "gp-display-html",
+   "lzless",
+   "pip3",
+   "slabtop",
+   "ucf",
+   "systemd-sysext list",
+   "[",
+   "cpp",
+   "false",
+   "last",
+   "piconv",
+   "runcon",
+   "systemd-escape",
+   "timedatectl show-timesync"
+  ],
+  "options_executed": 164,
+  "options_that_ran": 164,
+  "options_accepted": 80,
+  "options_that_mutated": 0,
+  "options_read_only": 80,
+  "options_not_actions": 84,
+  "options_that_needed_an_object": 44,
+  "pages_advertising_an_effect": 198,
+  "pages_advertising_none": 294,
+  "advertised_pages_that_changed_something": 0,
+  "unadvertised_pages_that_changed_something": 0,
+  "advertised_checks": 3,
+  "advertised_checks_that_changed_nothing": 3,
+  "inverse_pairs": 0,
+  "inverse_pairs_that_restored": 0,
+  "seconds": 53.1,
+  "model_calls": 0,
+  "parameters_stored": 0,
+  "network_calls_at_run_time": 0
+ },
+ "verdict": {
+  "K1_the_machine_describes_itself": {
+   "criterion": ">= 40 programs and >= 400 options",
+   "programs": 437,
+   "options": 13250,
+   "MET": true
+  },
+  "K2_an_option_is_not_an_action": {
+   "criterion": "< half of the executed options are accepted by their own program",
+   "executed": 164,
+   "ran": 80,
+   "MET": true
+  },
+  "K3_the_catalogue_promises_and_the_state_decides": {
+   "criterion": "at least half of the executed pages that advertise an effect produce one",
+   "advertised_pages_executed": 7,
+   "advertised_pages_that_changed_something": 0,
+   "unadvertised_pages_that_changed_something": 0,
+   "changed_options": 0,
+   "accepted_options": 80,
+   "MET": false
+  },
+  "K4_a_guard_is_advertised_and_real": {
+   "criterion": ">= half of advertised checks change nothing",
+   "advertised": 3,
+   "changed_nothing": 3,
+   "MET": null
+  },
+  "K5_undo_is_a_property": {
+   "criterion": ">= half of inverse pairs restore the tree",
+   "pairs": 0,
+   "restored": 0,
+   "MET": null
+  },
+  "K6_a_query_is_cheap": {
+   "criterion": "< 300 s to re-derive, > 20 kB if stored",
+   "read_seconds": 47.0,
+   "whole_run_seconds": 53.1,
+   "catalogue_bytes": 1147793,
+   "MET": true
+  },
+  "K7_the_catalogue_cannot_refuse": {
+   "criterion": "the top score of an unanswerable need overlaps the top score of an answerable one",
+   "scores_if_the_shell_can_serve": {
+    "min": 5.478,
+    "median": 7.546
+   },
+   "scores_if_it_cannot": {
+    "max": 7.301,
+    "median": 5.359
+   },
+   "a_threshold_that_separates": null,
+   "MET": true
+  },
+  "K8_nothing_is_written_by_hand": {
+   "criterion": "no program or option spelled in this source",
+   "MET": false
+  }
+ },
+ "purpose": {
+  "rows": [
+   {
+    "need": "give up a merge that went wrong and leave the files as they were",
+    "can_serve_by_my_prior": true,
+    "top_score": 7.466,
+    "top": [
+     {
+      "page": "systemd-sysext merge",
+      "score": 7.466
+     },
+     {
+      "page": "pldd",
+      "score": 7.372
+     },
+     {
+      "page": "systemd-sysext",
+      "score": 6.767
+     }
+    ],
+    "best_page_by_name": "systemd-sysext merge",
+    "name_overlap": 1
+   },
+   {
+    "need": "put back the work I set aside earlier",
+    "can_serve_by_my_prior": true,
+    "top_score": 5.478,
+    "top": [
+     {
+      "page": "gh",
+      "score": 5.478
+     },
+     {
+      "page": "git grep",
+      "score": 5.397
+     },
+     {
+      "page": "scriptreplay",
+      "score": 5.319
+     }
+    ],
+    "best_page_by_name": "debconf-set-selections",
+    "name_overlap": 1
+   },
+   {
+    "need": "find out whether this archive is readable without unpacking it",
+    "can_serve_by_my_prior": true,
+    "top_score": 10.01,
+    "top": [
+     {
+      "page": "lslocks",
+      "score": 10.01
+     },
+     {
+      "page": "gp-archive",
+      "score": 6.683
+     },
+     {
+      "page": "tar",
+      "score": 6.117
+     }
+    ],
+    "best_page_by_name": "gp-archive",
+    "name_overlap": 1
+   },
+   {
+    "need": "put the file back the way it was in the last commit",
+    "can_serve_by_my_prior": true,
+    "top_score": 7.626,
+    "top": [
+     {
+      "page": "envd",
+      "score": 7.626
+     },
+     {
+      "page": "scriptreplay",
+      "score": 6.819
+     },
+     {
+      "page": "last",
+      "score": 6.811
+     }
+    ],
+    "best_page_by_name": "podchecker file",
+    "name_overlap": 1
+   },
+   {
+    "need": "stage everything I changed",
+    "can_serve_by_my_prior": true,
+    "top_score": 6.192,
+    "top": [
+     {
+      "page": "dpkg-mergechangelogs",
+      "score": 6.192
+     },
+     {
+      "page": "groups",
+      "score": 5.75
+     },
+     {
+      "page": "[",
+      "score": 0.0
+     }
+    ],
+    "best_page_by_name": null,
+    "name_overlap": 0
+   },
+   {
+    "need": "show the last few lines of the log",
+    "can_serve_by_my_prior": true,
+    "top_score": 12.359,
+    "top": [
+     {
+      "page": "last",
+      "score": 12.359
+     },
+     {
+      "page": "git log",
+      "score": 8.568
+     },
+     {
+      "page": "script",
+      "score": 7.102
+     }
+    ],
+    "best_page_by_name": "timedatectl show-timesync",
+    "name_overlap": 1
+   },
+   {
+    "need": "remember to buy milk tomorrow",
+    "can_serve_by_my_prior": false,
+    "top_score": 0.0,
+    "top": [
+     {
+      "page": "[",
+      "score": 0.0
+     },
+     {
+      "page": "addpart",
+      "score": 0.0
+     },
+     {
+      "page": "addr2line",
+      "score": 0.0
+     }
+    ],
+    "best_page_by_name": null,
+    "name_overlap": 0
+   },
+   {
+    "need": "email my landlord about the leak",
+    "can_serve_by_my_prior": false,
+    "top_score": 5.368,
+    "top": [
+     {
+      "page": "bashbug",
+      "score": 5.368
+     },
+     {
+      "page": "lslogins",
+      "score": 3.998
+     },
+     {
+      "page": "systemd-notify",
+      "score": 3.921
+     }
+    ],
+    "best_page_by_name": null,
+    "name_overlap": 0
+   },
+   {
+    "need": "tell me whether my colleague will approve the change",
+    "can_serve_by_my_prior": false,
+    "top_score": 4.147,
+    "top": [
+     {
+      "page": "perlivp",
+      "score": 4.147
+     },
+     {
+      "page": "yarn",
+      "score": 4.147
+     },
+     {
+      "page": "yarnpkg",
+      "score": 4.147
+     }
+    ],
+    "best_page_by_name": null,
+    "name_overlap": 0
+   },
+   {
+    "need": "decide whether this architecture is worth the cost",
+    "can_serve_by_my_prior": false,
+    "top_score": 7.103,
+    "top": [
+     {
+      "page": "dpkg-architecture",
+      "score": 7.103
+     },
+     {
+      "page": "ld",
+      "score": 5.959
+     },
+     {
+      "page": "dpkg-name",
+      "score": 5.725
+     }
+    ],
+    "best_page_by_name": "dpkg-architecture",
+    "name_overlap": 1
+   },
+   {
+    "need": "make the code easier for a new person to understand",
+    "can_serve_by_my_prior": false,
+    "top_score": 5.35,
+    "top": [
+     {
+      "page": "gp-display-src",
+      "score": 5.35
+     },
+     {
+      "page": "iconv",
+      "score": 5.019
+     },
+     {
+      "page": "c++",
+      "score": 3.844
+     }
+    ],
+    "best_page_by_name": null,
+    "name_overlap": 0
+   },
+   {
+    "need": "make the build twice as fast",
+    "can_serve_by_my_prior": false,
+    "top_score": 7.301,
+    "top": [
+     {
+      "page": "dpkg-buildpackage",
+      "score": 7.301
+     },
+     {
+      "page": "dpkg-checkbuilddeps",
+      "score": 7.301
+     },
+     {
+      "page": "skill",
+      "score": 7.299
+     }
+    ],
+    "best_page_by_name": null,
+    "name_overlap": 0
+   }
+  ],
+  "score_if_the_shell_can_serve": {
+   "min": 5.478,
+   "median": 7.546
+  },
+  "score_if_it_cannot": {
+   "max": 7.301,
+   "median": 5.359
+  },
+  "a_threshold_that_separates": null,
+  "pages_in_the_index": 492
+ },
+ "inverses": [],
+ "rows": [
+  {
+   "page": "addr2line",
+   "program": "addr2line",
+   "option": "-a",
+   "exit": 1,
+   "seconds": 0.004,
+   "executed_argv": [
+    "addr2line",
+    "-a"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "addr2line: 'a.out': No such file",
+   "line": "-a --addresses         Show addresses -b --target=<bfdname>  Set the binary file format -e --exe=<executable>  Set the input file name (default is a.out)",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "addr2line",
+   "program": "addr2line",
+   "option": "-b",
+   "exit": 1,
+   "seconds": 0.009,
+   "executed_argv": [
+    "addr2line",
+    "-b",
+    "README.rst"
+   ],
+   "bound_operand": "README.rst",
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "addr2line: 'a.out': No such file",
+   "line": "-b --target=<bfdname>  Set the binary file format -e --exe=<executable>  Set the input file name (default is a.out) -i --inlines           Unwind inlined functions",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "addr2line",
+   "program": "addr2line",
+   "option": "-e",
+   "exit": 1,
+   "seconds": 0.009,
+   "executed_argv": [
+    "addr2line",
+    "-e",
+    "README.rst"
+   ],
+   "bound_operand": "README.rst",
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "addr2line: README.rst: file format not recognized",
+   "line": "-e --exe=<executable>  Set the input file name (default is a.out) -i --inlines           Unwind inlined functions -j --section=<name>    Read section-relative offsets instead of addresses",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "addr2line",
+   "program": "addr2line",
+   "option": "-i",
+   "exit": 1,
+   "seconds": 0.004,
+   "executed_argv": [
+    "addr2line",
+    "-i"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "addr2line: 'a.out': No such file",
+   "line": "-i --inlines           Unwind inlined functions -j --section=<name>    Read section-relative offsets instead of addresses -p --pretty-print      Make the output easier to read for humans",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "addr2line",
+   "program": "addr2line",
+   "option": "-j",
+   "exit": 1,
+   "seconds": 0.008,
+   "executed_argv": [
+    "addr2line",
+    "-j",
+    "README.rst"
+   ],
+   "bound_operand": "README.rst",
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "addr2line: 'a.out': No such file",
+   "line": "-j --section=<name>    Read section-relative offsets instead of addresses -p --pretty-print      Make the output easier to read for humans -s --basenames         Strip directory names",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "addr2line",
+   "program": "addr2line",
+   "option": "-p",
+   "exit": 1,
+   "seconds": 0.004,
+   "executed_argv": [
+    "addr2line",
+    "-p"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "addr2line: 'a.out': No such file",
+   "line": "-p --pretty-print      Make the output easier to read for humans -s --basenames         Strip directory names -f --functions         Show function names",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "addr2line",
+   "program": "addr2line",
+   "option": "-s",
+   "exit": 1,
+   "seconds": 0.004,
+   "executed_argv": [
+    "addr2line",
+    "-s"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "addr2line: 'a.out': No such file",
+   "line": "-s --basenames         Strip directory names -f --functions         Show function names -C --demangle[=style]  Demangle function names",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "addr2line",
+   "program": "addr2line",
+   "option": "-f",
+   "exit": 1,
+   "seconds": 0.002,
+   "executed_argv": [
+    "addr2line",
+    "-f"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "addr2line: 'a.out': No such file",
+   "line": "-f --functions         Show function names -C --demangle[=style]  Demangle function names -R --recurse-limit     Enable a limit on recursion whilst demangling.  [Default]",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "addr2line",
+   "program": "addr2line",
+   "option": "-C",
+   "exit": 1,
+   "seconds": 0.002,
+   "executed_argv": [
+    "addr2line",
+    "-C"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "addr2line: 'a.out': No such file",
+   "line": "-C --demangle[=style]  Demangle function names -R --recurse-limit     Enable a limit on recursion whilst demangling.  [Default] -r --no-recurse-limit  Disable a limit on recursion whilst demangling",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "addr2line",
+   "program": "addr2line",
+   "option": "-R",
+   "exit": 1,
+   "seconds": 0.004,
+   "executed_argv": [
+    "addr2line",
+    "-R"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "addr2line: 'a.out': No such file",
+   "line": "-R --recurse-limit     Enable a limit on recursion whilst demangling.  [Default] -r --no-recurse-limit  Disable a limit on recursion whilst demangling -h --help              Display this information",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "addr2line",
+   "program": "addr2line",
+   "option": "-r",
+   "exit": 1,
+   "seconds": 0.002,
+   "executed_argv": [
+    "addr2line",
+    "-r"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "addr2line: 'a.out': No such file",
+   "line": "-r --no-recurse-limit  Disable a limit on recursion whilst demangling -h --help              Display this information -v --version           Display the program's version",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "addr2line",
+   "program": "addr2line",
+   "option": "-h",
+   "exit": 0,
+   "seconds": 0.001,
+   "executed_argv": [
+    "addr2line",
+    "-h"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "Usage: addr2line [option(s)] [addr(s)]",
+   "line": "-h --help              Display this information -v --version           Display the program's version ",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "docker-entrypoint.sh",
+   "program": "docker-entrypoint.sh",
+   "option": "--abort-on-uncaught-exception",
+   "exit": 0,
+   "seconds": 0.033,
+   "executed_argv": [
+    "docker-entrypoint.sh",
+    "--abort-on-uncaught-exception"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "",
+   "line": "--abort-on-uncaught-exception aborting instead of exiting causes a core file to be generated for analysis",
+   "advertises_check": false,
+   "advertises_inverse": true
+  },
+  {
+   "page": "docker-entrypoint.sh",
+   "program": "docker-entrypoint.sh",
+   "option": "--cpu-prof-dir",
+   "exit": 9,
+   "seconds": 0.017,
+   "executed_argv": [
+    "docker-entrypoint.sh",
+    "--cpu-prof-dir",
+    "README.rst"
+   ],
+   "bound_operand": "README.rst",
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "node: --cpu-prof-dir must be used with --cpu-prof",
+   "line": "--cpu-prof-dir=...          Directory where the V8 profiles generated by --cpu-prof will be placed. Does not affect --prof.",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "docker-entrypoint.sh",
+   "program": "docker-entrypoint.sh",
+   "option": "--env-file-if-exists",
+   "exit": 0,
+   "seconds": 0.041,
+   "executed_argv": [
+    "docker-entrypoint.sh",
+    "--env-file-if-exists",
+    "README.rst"
+   ],
+   "bound_operand": "README.rst",
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "",
+   "line": "--env-file-if-exists=...    set environment variables from supplied file -e, --eval=...              evaluate script",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "docker-entrypoint.sh",
+   "program": "docker-entrypoint.sh",
+   "option": "--experimental-sea-config",
+   "exit": 1,
+   "seconds": 0.024,
+   "executed_argv": [
+    "docker-entrypoint.sh",
+    "--experimental-sea-config",
+    "README.rst"
+   ],
+   "bound_operand": "README.rst",
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "Cannot parse JSON from README.rst: INCORRECT_TYPE: The JSON element does not have the requested type.",
+   "line": "--experimental-sea-config=... Generate a blob that can be embedded into the single executable application",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "docker-entrypoint.sh",
+   "program": "docker-entrypoint.sh",
+   "option": "--heap-prof-interval",
+   "exit": 9,
+   "seconds": 0.016,
+   "executed_argv": [
+    "docker-entrypoint.sh",
+    "--heap-prof-interval",
+    "README.rst"
+   ],
+   "bound_operand": "README.rst",
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "node: --heap-prof-interval must be used with --heap-prof",
+   "line": "--heap-prof-interval=...    specified sampling interval in bytes for the V8 heap profile generated with --heap-prof. (default: 512 * 1024)",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "docker-entrypoint.sh",
+   "program": "docker-entrypoint.sh",
+   "option": "--inspect-publish-uid",
+   "exit": 9,
+   "seconds": 0.016,
+   "executed_argv": [
+    "docker-entrypoint.sh",
+    "--inspect-publish-uid",
+    "README.rst"
+   ],
+   "bound_operand": "README.rst",
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "node: --inspect-publish-uid destination can be stderr or http",
+   "line": "--inspect-publish-uid=...   comma separated list of destinations for inspector uid(default: stderr,http) --inspect-wait[=[host:]port]",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "docker-entrypoint.sh",
+   "program": "docker-entrypoint.sh",
+   "option": "--no-experimental-global-navigator",
+   "exit": 0,
+   "seconds": 0.032,
+   "executed_argv": [
+    "docker-entrypoint.sh",
+    "--no-experimental-global-navigator"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "",
+   "line": "--no-experimental-global-navigator expose experimental Navigator API on the global scope",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "docker-entrypoint.sh",
+   "program": "docker-entrypoint.sh",
+   "option": "--openssl-legacy-provider",
+   "exit": 0,
+   "seconds": 0.032,
+   "executed_argv": [
+    "docker-entrypoint.sh",
+    "--openssl-legacy-provider"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "",
+   "line": "--openssl-legacy-provider   enable OpenSSL 3.0 legacy provider --openssl-shared-config     enable OpenSSL shared configuration --pending-deprecation       emit pending deprecation warnings",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "docker-entrypoint.sh",
+   "program": "docker-entrypoint.sh",
+   "option": "--report-exclude-env",
+   "exit": 0,
+   "seconds": 0.032,
+   "executed_argv": [
+    "docker-entrypoint.sh",
+    "--report-exclude-env"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "",
+   "line": "--report-exclude-env        Exclude environment variables when generating report (default: false) --report-exclude-network    exclude network interface diagnostics.",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "docker-entrypoint.sh",
+   "program": "docker-entrypoint.sh",
+   "option": "--test-coverage-branches",
+   "exit": 0,
+   "seconds": 0.04,
+   "executed_argv": [
+    "docker-entrypoint.sh",
+    "--test-coverage-branches",
+    "README.rst"
+   ],
+   "bound_operand": "README.rst",
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "",
+   "line": "--test-coverage-branches=... the branch coverage minimum threshold --test-coverage-exclude=... exclude files from coverage report that",
+   "advertises_check": true,
+   "advertises_inverse": false
+  },
+  {
+   "page": "docker-entrypoint.sh",
+   "program": "docker-entrypoint.sh",
+   "option": "--title",
+   "exit": 0,
+   "seconds": 0.04,
+   "executed_argv": [
+    "docker-entrypoint.sh",
+    "--title",
+    "README.rst"
+   ],
+   "bound_operand": "README.rst",
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "",
+   "line": "--title=...                 the process title to use on startup --tls-cipher-list=...       use an alternative default TLS cipher list",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "docker-entrypoint.sh",
+   "program": "docker-entrypoint.sh",
+   "option": "--trace-event-file-pattern",
+   "exit": 0,
+   "seconds": 0.04,
+   "executed_argv": [
+    "docker-entrypoint.sh",
+    "--trace-event-file-pattern",
+    "README.rst"
+   ],
+   "bound_operand": "README.rst",
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "",
+   "line": "--trace-event-file-pattern=... Template string specifying the filepath for the trace-events data, it supports",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "gp-display-html",
+   "program": "gp-display-html",
+   "option": "--help",
+   "exit": 0,
+   "seconds": 0.065,
+   "executed_argv": [
+    "gp-display-html",
+    "--help"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "Usage: gprofng display html [OPTION(S)] EXPERIMENT(S)",
+   "line": "--help              print usage information and exit. --version           print the version number and exit. --verbose {on|off}  enable/disable verbose mode that shows diagnostic",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "gp-display-html",
+   "program": "gp-display-html",
+   "option": "--version",
+   "exit": 0,
+   "seconds": 0.064,
+   "executed_argv": [
+    "gp-display-html",
+    "--version"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "gp-display-html GNU binutils version 2.40.00",
+   "line": "--version           print the version number and exit. --verbose {on|off}  enable/disable verbose mode that shows diagnostic messages about the processing of the data; default",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "gp-display-html",
+   "program": "gp-display-html",
+   "option": "--verbose",
+   "exit": 0,
+   "seconds": 0.064,
+   "executed_argv": [
+    "gp-display-html",
+    "--verbose"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "There is one error in the options:",
+   "line": "--verbose {on|off}  enable/disable verbose mode that shows diagnostic messages about the processing of the data; default is off.",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "gp-display-html",
+   "program": "gp-display-html",
+   "option": "-d",
+   "exit": 255,
+   "seconds": 0.114,
+   "executed_argv": [
+    "gp-display-html",
+    "-d"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "[Error]   input error:   2 fatal input errors have been detected:",
+   "line": "-d, --debug {on|s|m|l|xl|off}  control the printing of run time information to assist with troubleshooting, or further development of this tool; on gives a modest amount",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "gp-display-html",
+   "program": "gp-display-html",
+   "option": "--debug",
+   "exit": 0,
+   "seconds": 0.064,
+   "executed_argv": [
+    "gp-display-html",
+    "--debug"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "There is one error in the options:",
+   "line": "-d, --debug {on|s|m|l|xl|off}  control the printing of run time information to assist with troubleshooting, or further development of this tool; on gives a modest amount",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "gp-display-html",
+   "program": "gp-display-html",
+   "option": "-hp",
+   "exit": 255,
+   "seconds": 0.114,
+   "executed_argv": [
+    "gp-display-html",
+    "-hp"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "[Error]   input error:   2 fatal input errors have been detected:",
+   "line": "-hp, ----highlight-percentage <value>  a percentage value in the interval [0,100] to select and color code source lines as well as instructions that are",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "gp-display-html",
+   "program": "gp-display-html",
+   "option": "-o",
+   "exit": 255,
+   "seconds": 0.115,
+   "executed_argv": [
+    "gp-display-html",
+    "-o"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "[Error]   input error:   2 fatal input errors have been detected:",
+   "line": "-o, --output <dir-name>  use <dir-name> to store the results in; the default name is ./display.<n>.html with <n> the first positive integer number not in use; an",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "gp-display-html",
+   "program": "gp-display-html",
+   "option": "--output",
+   "exit": 255,
+   "seconds": 0.115,
+   "executed_argv": [
+    "gp-display-html",
+    "--output"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "[Error]   input error:   2 fatal input errors have been detected:",
+   "line": "-o, --output <dir-name>  use <dir-name> to store the results in; the default name is ./display.<n>.html with <n> the first positive integer number not in use; an",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "gp-display-html",
+   "program": "gp-display-html",
+   "option": "-O",
+   "exit": 255,
+   "seconds": 0.115,
+   "executed_argv": [
+    "gp-display-html",
+    "-O"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "[Error]   input error:   2 fatal input errors have been detected:",
+   "line": "-O, --overwrite <dir-name>  use <dir-name> to store the results in and overwrite any existing directory with the same name; make sure that umask is set to the",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "gp-display-html",
+   "program": "gp-display-html",
+   "option": "--overwrite",
+   "exit": 255,
+   "seconds": 0.065,
+   "executed_argv": [
+    "gp-display-html",
+    "--overwrite"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "[Error]   input error:   2 fatal input errors have been detected:",
+   "line": "-O, --overwrite <dir-name>  use <dir-name> to store the results in and overwrite any existing directory with the same name; make sure that umask is set to the",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "gp-display-html",
+   "program": "gp-display-html",
+   "option": "-q",
+   "exit": 255,
+   "seconds": 0.114,
+   "executed_argv": [
+    "gp-display-html",
+    "-q"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "[Error]   input error:   2 fatal input errors have been detected:",
+   "line": "-q, --quiet {on|off}  disable/allow the display of all warning, debug and verbose messages; if set to on, the settings for verbose, warnings and debug are ignored; default",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "gp-display-html",
+   "program": "gp-display-html",
+   "option": "--quiet",
+   "exit": 0,
+   "seconds": 0.066,
+   "executed_argv": [
+    "gp-display-html",
+    "--quiet"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "There is one error in the options:",
+   "line": "-q, --quiet {on|off}  disable/allow the display of all warning, debug and verbose messages; if set to on, the settings for verbose, warnings and debug are ignored; default",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "pip3",
+   "program": "pip3",
+   "option": "-h",
+   "exit": 0,
+   "seconds": 0.214,
+   "executed_argv": [
+    "pip3",
+    "-h"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "Usage:   ",
+   "line": "-h, --help                  Show help. --debug                     Let unhandled exceptions propagate outside the main subroutine, instead of logging them to",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "pip3",
+   "program": "pip3",
+   "option": "--debug",
+   "exit": 0,
+   "seconds": 0.22,
+   "executed_argv": [
+    "pip3",
+    "--debug"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "Usage:   ",
+   "line": "--debug                     Let unhandled exceptions propagate outside the main subroutine, instead of logging them to stderr.",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "pip3",
+   "program": "pip3",
+   "option": "--require-virtualenv",
+   "exit": 0,
+   "seconds": 0.215,
+   "executed_argv": [
+    "pip3",
+    "--require-virtualenv"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "Usage:   ",
+   "line": "--require-virtualenv        Allow pip to only run in a virtual environment; exit with an error otherwise. --python <python>           Run pip with the specified Python interpreter.",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "pip3",
+   "program": "pip3",
+   "option": "-v",
+   "exit": 0,
+   "seconds": 0.214,
+   "executed_argv": [
+    "pip3",
+    "-v"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "Usage:   ",
+   "line": "-v, --verbose               Give more output. Option is additive, and can be used up to 3 times. -V, --version               Show version and exit.",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "pip3",
+   "program": "pip3",
+   "option": "-V",
+   "exit": 0,
+   "seconds": 0.216,
+   "executed_argv": [
+    "pip3",
+    "-V"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "pip 23.0.1 from /usr/lib/python3/dist-packages/pip (python 3.11)",
+   "line": "-V, --version               Show version and exit. -q, --quiet                 Give less output. Option is additive, and can be used up to 3 times (corresponding to WARNING,",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "pip3",
+   "program": "pip3",
+   "option": "-q",
+   "exit": 0,
+   "seconds": 0.215,
+   "executed_argv": [
+    "pip3",
+    "-q"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "Usage:   ",
+   "line": "-q, --quiet                 Give less output. Option is additive, and can be used up to 3 times (corresponding to WARNING, ERROR, and CRITICAL logging levels).",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "pip3",
+   "program": "pip3",
+   "option": "--log",
+   "exit": 2,
+   "seconds": 0.215,
+   "executed_argv": [
+    "pip3",
+    "--log"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "Usage:   ",
+   "line": "--log <path>                Path to a verbose appending log. --no-input                  Disable prompting for input. --proxy <proxy>             Specify a proxy in the form",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "pip3",
+   "program": "pip3",
+   "option": "--proxy",
+   "exit": 2,
+   "seconds": 0.215,
+   "executed_argv": [
+    "pip3",
+    "--proxy"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "Usage:   ",
+   "line": "--proxy <proxy>             Specify a proxy in the form scheme://[user:passwd@]proxy.server:port. --retries <retries>         Maximum number of retries each connection should",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "pip3",
+   "program": "pip3",
+   "option": "--timeout",
+   "exit": 2,
+   "seconds": 0.216,
+   "executed_argv": [
+    "pip3",
+    "--timeout"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "Usage:   ",
+   "line": "--timeout <sec>             Set the socket timeout (default 15 seconds). --exists-action <action>    Default action when a path already exists: (s)witch, (i)gnore, (w)ipe, (b)ackup, (a)bort.",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "pip3",
+   "program": "pip3",
+   "option": "--trusted-host",
+   "exit": 2,
+   "seconds": 0.215,
+   "executed_argv": [
+    "pip3",
+    "--trusted-host"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "Usage:   ",
+   "line": "--trusted-host <hostname>   Mark this host or host:port pair as trusted, even though it does not have valid or any HTTPS. --cert <path>               Path to PEM-encoded CA certificate bundle. If",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "pip3",
+   "program": "pip3",
+   "option": "--client-cert",
+   "exit": 2,
+   "seconds": 0.215,
+   "executed_argv": [
+    "pip3",
+    "--client-cert"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "Usage:   ",
+   "line": "--client-cert <path>        Path to SSL client certificate, a single file containing the private key and the certificate in PEM format.",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "pip3",
+   "program": "pip3",
+   "option": "--no-cache-dir",
+   "exit": 0,
+   "seconds": 0.215,
+   "executed_argv": [
+    "pip3",
+    "--no-cache-dir"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "Usage:   ",
+   "line": "--no-cache-dir              Disable the cache. --disable-pip-version-check Don't periodically check PyPI to determine",
+   "advertises_check": true,
+   "advertises_inverse": false
+  },
+  {
+   "page": "slabtop",
+   "program": "slabtop",
+   "option": "-d",
+   "exit": 1,
+   "seconds": 0.008,
+   "executed_argv": [
+    "slabtop",
+    "-d",
+    "README.rst"
+   ],
+   "bound_operand": "README.rst",
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "slabtop: illegal delay: 'README.rst'",
+   "line": "-d, --delay <secs>  delay updates -o, --once          only display once, then exit -s, --sort <char>   specify sort criteria by character (see below)",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "slabtop",
+   "program": "slabtop",
+   "option": "--delay",
+   "exit": 1,
+   "seconds": 0.008,
+   "executed_argv": [
+    "slabtop",
+    "--delay",
+    "README.rst"
+   ],
+   "bound_operand": "README.rst",
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "slabtop: illegal delay: 'README.rst'",
+   "line": "-d, --delay <secs>  delay updates -o, --once          only display once, then exit -s, --sort <char>   specify sort criteria by character (see below)",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "slabtop",
+   "program": "slabtop",
+   "option": "-o",
+   "exit": 1,
+   "seconds": 0.003,
+   "executed_argv": [
+    "slabtop",
+    "-o"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "slabtop: Unable to create slabinfo structure: Permission denied",
+   "line": "-o, --once          only display once, then exit -s, --sort <char>   specify sort criteria by character (see below) ",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "slabtop",
+   "program": "slabtop",
+   "option": "--once",
+   "exit": 1,
+   "seconds": 0.003,
+   "executed_argv": [
+    "slabtop",
+    "--once"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "slabtop: Unable to create slabinfo structure: Permission denied",
+   "line": "-o, --once          only display once, then exit -s, --sort <char>   specify sort criteria by character (see below) ",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "slabtop",
+   "program": "slabtop",
+   "option": "-s",
+   "exit": 1,
+   "seconds": 0.008,
+   "executed_argv": [
+    "slabtop",
+    "-s",
+    "README.rst"
+   ],
+   "bound_operand": "README.rst",
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "slabtop: Unable to create slabinfo structure: Permission denied",
+   "line": "-s, --sort <char>   specify sort criteria by character (see below)  -h, --help     display this help and exit",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "slabtop",
+   "program": "slabtop",
+   "option": "--sort",
+   "exit": 1,
+   "seconds": 0.008,
+   "executed_argv": [
+    "slabtop",
+    "--sort",
+    "README.rst"
+   ],
+   "bound_operand": "README.rst",
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "slabtop: Unable to create slabinfo structure: Permission denied",
+   "line": "-s, --sort <char>   specify sort criteria by character (see below)  -h, --help     display this help and exit",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "slabtop",
+   "program": "slabtop",
+   "option": "-h",
+   "exit": 0,
+   "seconds": 0.004,
+   "executed_argv": [
+    "slabtop",
+    "-h"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "Usage:",
+   "line": "-h, --help     display this help and exit -V, --version  output version information and exit ",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "slabtop",
+   "program": "slabtop",
+   "option": "--help",
+   "exit": 0,
+   "seconds": 0.003,
+   "executed_argv": [
+    "slabtop",
+    "--help"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "Usage:",
+   "line": "-h, --help     display this help and exit -V, --version  output version information and exit ",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "slabtop",
+   "program": "slabtop",
+   "option": "-V",
+   "exit": 0,
+   "seconds": 0.003,
+   "executed_argv": [
+    "slabtop",
+    "-V"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "slabtop from procps-ng 4.0.2",
+   "line": "-V, --version  output version information and exit  The following are valid sort criteria:",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "slabtop",
+   "program": "slabtop",
+   "option": "--version",
+   "exit": 0,
+   "seconds": 0.003,
+   "executed_argv": [
+    "slabtop",
+    "--version"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "slabtop from procps-ng 4.0.2",
+   "line": "-V, --version  output version information and exit  The following are valid sort criteria:",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "ucf",
+   "program": "ucf",
+   "option": "-h",
+   "exit": 0,
+   "seconds": 0.008,
+   "executed_argv": [
+    "ucf",
+    "-h"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "Debian GNU/Linux ucf Revision: 3.00 .",
+   "line": "-h,     --help          print this message -s foo, --src-dir  foo  Set the src dir (historical md5sums live here) --sum-file bar  Force the historical md5sums to be read from",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "ucf",
+   "program": "ucf",
+   "option": "--help",
+   "exit": 0,
+   "seconds": 0.008,
+   "executed_argv": [
+    "ucf",
+    "--help"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "Debian GNU/Linux ucf Revision: 3.00 .",
+   "line": "-h,     --help          print this message -s foo, --src-dir  foo  Set the src dir (historical md5sums live here) --sum-file bar  Force the historical md5sums to be read from",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "ucf",
+   "program": "ucf",
+   "option": "-s",
+   "exit": 2,
+   "seconds": 0.025,
+   "executed_argv": [
+    "ucf",
+    "-s",
+    "README.rst"
+   ],
+   "bound_operand": "README.rst",
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "ucf: Need to be run as root.",
+   "line": "-s foo, --src-dir  foo  Set the src dir (historical md5sums live here) --sum-file bar  Force the historical md5sums to be read from this file.  Overrides any setting of --src-dir.",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "ucf",
+   "program": "ucf",
+   "option": "--src-dir",
+   "exit": 2,
+   "seconds": 0.024,
+   "executed_argv": [
+    "ucf",
+    "--src-dir",
+    "README.rst"
+   ],
+   "bound_operand": "README.rst",
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "ucf: Need to be run as root.",
+   "line": "-s foo, --src-dir  foo  Set the src dir (historical md5sums live here) --sum-file bar  Force the historical md5sums to be read from this file.  Overrides any setting of --src-dir.",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "ucf",
+   "program": "ucf",
+   "option": "-d",
+   "exit": 2,
+   "seconds": 0.009,
+   "executed_argv": [
+    "ucf",
+    "-d"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "ucf: Need to be run as root.",
+   "line": "-d[n], --debug=[n]      Set the Debug level to N. Please note there must be no spaces before the debug level -n,     --no-action     Dry run. No action is actually taken.",
+   "advertises_check": true,
+   "advertises_inverse": false
+  },
+  {
+   "page": "ucf",
+   "program": "ucf",
+   "option": "--debug",
+   "exit": 2,
+   "seconds": 0.008,
+   "executed_argv": [
+    "ucf",
+    "--debug"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "ucf: Need to be run as root.",
+   "line": "-d[n], --debug=[n]      Set the Debug level to N. Please note there must be no spaces before the debug level -n,     --no-action     Dry run. No action is actually taken.",
+   "advertises_check": true,
+   "advertises_inverse": false
+  },
+  {
+   "page": "ucf",
+   "program": "ucf",
+   "option": "-n",
+   "exit": 2,
+   "seconds": 0.008,
+   "executed_argv": [
+    "ucf",
+    "-n"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "*** ERROR: Need exactly two arguments, got 0",
+   "line": "-n,     --no-action     Dry run. No action is actually taken. -P foo, --package foo   Don't follow dpkg-divert diversions by package foo. -v,     --verbose       Make the script verbose",
+   "advertises_check": true,
+   "advertises_inverse": false
+  },
+  {
+   "page": "ucf",
+   "program": "ucf",
+   "option": "--no-action",
+   "exit": 2,
+   "seconds": 0.008,
+   "executed_argv": [
+    "ucf",
+    "--no-action"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "*** ERROR: Need exactly two arguments, got 0",
+   "line": "-n,     --no-action     Dry run. No action is actually taken. -P foo, --package foo   Don't follow dpkg-divert diversions by package foo. -v,     --verbose       Make the script verbose",
+   "advertises_check": true,
+   "advertises_inverse": false
+  },
+  {
+   "page": "ucf",
+   "program": "ucf",
+   "option": "-P",
+   "exit": 2,
+   "seconds": 0.025,
+   "executed_argv": [
+    "ucf",
+    "-P",
+    "README.rst"
+   ],
+   "bound_operand": "README.rst",
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "ucf: Need to be run as root.",
+   "line": "-P foo, --package foo   Don't follow dpkg-divert diversions by package foo. -v,     --verbose       Make the script verbose --three-way     Register this file in the cache, and turn on the",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "ucf",
+   "program": "ucf",
+   "option": "--package",
+   "exit": 2,
+   "seconds": 0.025,
+   "executed_argv": [
+    "ucf",
+    "--package",
+    "README.rst"
+   ],
+   "bound_operand": "README.rst",
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "ucf: Need to be run as root.",
+   "line": "-P foo, --package foo   Don't follow dpkg-divert diversions by package foo. -v,     --verbose       Make the script verbose --three-way     Register this file in the cache, and turn on the",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "ucf",
+   "program": "ucf",
+   "option": "-v",
+   "exit": 2,
+   "seconds": 0.008,
+   "executed_argv": [
+    "ucf",
+    "-v"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "ucf: Need to be run as root.",
+   "line": "-v,     --verbose       Make the script verbose --three-way     Register this file in the cache, and turn on the diff3 option allowing the merging of maintainer",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "ucf",
+   "program": "ucf",
+   "option": "--verbose",
+   "exit": 2,
+   "seconds": 0.008,
+   "executed_argv": [
+    "ucf",
+    "--verbose"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "ucf: Need to be run as root.",
+   "line": "-v,     --verbose       Make the script verbose --three-way     Register this file in the cache, and turn on the diff3 option allowing the merging of maintainer",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "systemd-sysext list",
+   "program": "systemd-sysext",
+   "option": "-h",
+   "exit": 0,
+   "seconds": 0.008,
+   "executed_argv": [
+    "systemd-sysext",
+    "list",
+    "-h"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "systemd-sysext [OPTIONS...] COMMAND",
+   "line": "-h --help               Show this help --version            Show package version ",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "systemd-sysext list",
+   "program": "systemd-sysext",
+   "option": "--help",
+   "exit": 0,
+   "seconds": 0.004,
+   "executed_argv": [
+    "systemd-sysext",
+    "list",
+    "--help"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "systemd-sysext [OPTIONS...] COMMAND",
+   "line": "-h --help               Show this help --version            Show package version ",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "systemd-sysext list",
+   "program": "systemd-sysext",
+   "option": "--version",
+   "exit": 0,
+   "seconds": 0.004,
+   "executed_argv": [
+    "systemd-sysext",
+    "list",
+    "--version"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "systemd 252 (252.39-1~deb12u2)",
+   "line": "--version            Show package version  Options:",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "systemd-sysext list",
+   "program": "systemd-sysext",
+   "option": "--no-pager",
+   "exit": 0,
+   "seconds": 0.003,
+   "executed_argv": [
+    "systemd-sysext",
+    "list",
+    "--no-pager"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "No OS extensions found.",
+   "line": "--no-pager           Do not pipe output into a pager --no-legend          Do not show the headers and footers --root=PATH          Operate relative to root path",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "systemd-sysext list",
+   "program": "systemd-sysext",
+   "option": "--no-legend",
+   "exit": 0,
+   "seconds": 0.003,
+   "executed_argv": [
+    "systemd-sysext",
+    "list",
+    "--no-legend"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "No OS extensions found.",
+   "line": "--no-legend          Do not show the headers and footers --root=PATH          Operate relative to root path --json=pretty|short|off",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "systemd-sysext list",
+   "program": "systemd-sysext",
+   "option": "--root",
+   "exit": 1,
+   "seconds": 0.008,
+   "executed_argv": [
+    "systemd-sysext",
+    "list",
+    "--root",
+    "README.rst"
+   ],
+   "bound_operand": "README.rst",
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "Failed to discover extension images: Not a directory",
+   "line": "--root=PATH          Operate relative to root path --json=pretty|short|off Generate JSON output",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "systemd-sysext list",
+   "program": "systemd-sysext",
+   "option": "--json",
+   "exit": 1,
+   "seconds": 0.008,
+   "executed_argv": [
+    "systemd-sysext",
+    "list",
+    "--json",
+    "README.rst"
+   ],
+   "bound_operand": "README.rst",
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "Unknown argument to --json= switch: README.rst",
+   "line": "--json=pretty|short|off Generate JSON output --force              Ignore version incompatibilities",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "systemd-sysext list",
+   "program": "systemd-sysext",
+   "option": "--force",
+   "exit": 0,
+   "seconds": 0.004,
+   "executed_argv": [
+    "systemd-sysext",
+    "list",
+    "--force"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "No OS extensions found.",
+   "line": "--force              Ignore version incompatibilities  See the systemd-sysext(8) man page for details.",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "[",
+   "program": "[",
+   "option": "--help",
+   "exit": 0,
+   "seconds": 0.001,
+   "executed_argv": [
+    "[",
+    "--help"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "Usage: test EXPRESSION",
+   "line": "--help        display this help and exit --version     output version information and exit ",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "[",
+   "program": "[",
+   "option": "-n",
+   "exit": 2,
+   "seconds": 0.001,
+   "executed_argv": [
+    "[",
+    "-n"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "[: missing ']'",
+   "line": "-n STRING            the length of STRING is nonzero STRING               equivalent to -n STRING -z STRING            the length of STRING is zero",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "[",
+   "program": "[",
+   "option": "-b",
+   "exit": 2,
+   "seconds": 0.001,
+   "executed_argv": [
+    "[",
+    "-b"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "[: missing ']'",
+   "line": "-b FILE     FILE exists and is block special -c FILE     FILE exists and is character special -d FILE     FILE exists and is a directory",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "[",
+   "program": "[",
+   "option": "-d",
+   "exit": 2,
+   "seconds": 0.002,
+   "executed_argv": [
+    "[",
+    "-d"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "[: missing ']'",
+   "line": "-d FILE     FILE exists and is a directory -e FILE     FILE exists -f FILE     FILE exists and is a regular file",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "[",
+   "program": "[",
+   "option": "-f",
+   "exit": 2,
+   "seconds": 0.001,
+   "executed_argv": [
+    "[",
+    "-f"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "[: missing ']'",
+   "line": "-f FILE     FILE exists and is a regular file -g FILE     FILE exists and is set-group-ID -G FILE     FILE exists and is owned by the effective group ID",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "[",
+   "program": "[",
+   "option": "-G",
+   "exit": 2,
+   "seconds": 0.001,
+   "executed_argv": [
+    "[",
+    "-G"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "[: missing ']'",
+   "line": "-G FILE     FILE exists and is owned by the effective group ID -h FILE     FILE exists and is a symbolic link (same as -L) -k FILE     FILE exists and has its sticky bit set",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "[",
+   "program": "[",
+   "option": "-k",
+   "exit": 2,
+   "seconds": 0.001,
+   "executed_argv": [
+    "[",
+    "-k"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "[: missing ']'",
+   "line": "-k FILE     FILE exists and has its sticky bit set -L FILE     FILE exists and is a symbolic link (same as -h) -N FILE     FILE exists and has been modified since it was last read",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "[",
+   "program": "[",
+   "option": "-N",
+   "exit": 2,
+   "seconds": 0.001,
+   "executed_argv": [
+    "[",
+    "-N"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "[: missing ']'",
+   "line": "-N FILE     FILE exists and has been modified since it was last read -O FILE     FILE exists and is owned by the effective user ID -p FILE     FILE exists and is a named pipe",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "[",
+   "program": "[",
+   "option": "-p",
+   "exit": 2,
+   "seconds": 0.001,
+   "executed_argv": [
+    "[",
+    "-p"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "[: missing ']'",
+   "line": "-p FILE     FILE exists and is a named pipe -r FILE     FILE exists and the user has read access -s FILE     FILE exists and has a size greater than zero",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "[",
+   "program": "[",
+   "option": "-s",
+   "exit": 2,
+   "seconds": 0.001,
+   "executed_argv": [
+    "[",
+    "-s"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "[: missing ']'",
+   "line": "-s FILE     FILE exists and has a size greater than zero -S FILE     FILE exists and is a socket -t FD       file descriptor FD is opened on a terminal",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "[",
+   "program": "[",
+   "option": "-t",
+   "exit": 2,
+   "seconds": 0.001,
+   "executed_argv": [
+    "[",
+    "-t"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "[: missing ']'",
+   "line": "-t FD       file descriptor FD is opened on a terminal -u FILE     FILE exists and its set-user-ID bit is set -w FILE     FILE exists and the user has write access",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "[",
+   "program": "[",
+   "option": "-w",
+   "exit": 2,
+   "seconds": 0.002,
+   "executed_argv": [
+    "[",
+    "-w"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "[: missing ']'",
+   "line": "-w FILE     FILE exists and the user has write access -x FILE     FILE exists and the user has execute (or search) access ",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "cpp",
+   "program": "cpp",
+   "option": "-pass-exit-codes",
+   "exit": 0,
+   "seconds": 0.008,
+   "executed_argv": [
+    "cpp",
+    "-pass-exit-codes"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "# 0 \"<stdin>\"",
+   "line": "-pass-exit-codes         Exit with highest error code from a phase. --help                   Display this information. --target-help            Display target specific command line options (including ",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "cpp",
+   "program": "cpp",
+   "option": "--help",
+   "exit": 0,
+   "seconds": 0.001,
+   "executed_argv": [
+    "cpp",
+    "--help"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "Usage: cpp [options] file...",
+   "line": "--help={common|optimizers|params|target|warnings|[^]{joined|separate|undocumented}}[,...]. Display specific types of command line options. (Use '-v --help' to display command line options of sub-proce",
+   "advertises_check": false,
+   "advertises_inverse": true
+  },
+  {
+   "page": "cpp",
+   "program": "cpp",
+   "option": "-dumpversion",
+   "exit": 0,
+   "seconds": 0.001,
+   "executed_argv": [
+    "cpp",
+    "-dumpversion"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "12",
+   "line": "-dumpversion             Display the version of the compiler. -dumpmachine             Display the compiler's target processor. -foffload=<targets>      Specify offloading targets.",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "cpp",
+   "program": "cpp",
+   "option": "-print-search-dirs",
+   "exit": 0,
+   "seconds": 0.001,
+   "executed_argv": [
+    "cpp",
+    "-print-search-dirs"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "install: /usr/lib/gcc/x86_64-linux-gnu/12/",
+   "line": "-print-search-dirs       Display the directories in the compiler's search path. -print-libgcc-file-name  Display the name of the compiler's companion library. -print-file-name=<lib>   Display the full",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "cpp",
+   "program": "cpp",
+   "option": "-print-prog-name",
+   "exit": 1,
+   "seconds": 0.004,
+   "executed_argv": [
+    "cpp",
+    "-print-prog-name"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "cpp: error: unrecognized command-line option '-print-prog-name'; did you mean '--print-prog-name'?",
+   "line": "-print-prog-name=<prog>  Display the full path to compiler component <prog>. -print-multiarch         Display the target's normalized GNU triplet, used as a component in the library path.",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "cpp",
+   "program": "cpp",
+   "option": "-print-multi-lib",
+   "exit": 0,
+   "seconds": 0.004,
+   "executed_argv": [
+    "cpp",
+    "-print-multi-lib"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": ".;",
+   "line": "-print-multi-lib         Display the mapping between command line options and multiple library search directories. -print-multi-os-directory Display the relative path to OS libraries.",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "cpp",
+   "program": "cpp",
+   "option": "-print-sysroot-headers-suffix",
+   "exit": 1,
+   "seconds": 0.001,
+   "executed_argv": [
+    "cpp",
+    "-print-sysroot-headers-suffix"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "cpp: fatal error: not configured with sysroot headers suffix",
+   "line": "-print-sysroot-headers-suffix Display the sysroot suffix used to find headers. -Wa,<options>            Pass comma-separated <options> on to the assembler. -Wp,<options>            Pass comma-separate",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "cpp",
+   "program": "cpp",
+   "option": "-Wl",
+   "exit": 1,
+   "seconds": 0.004,
+   "executed_argv": [
+    "cpp",
+    "-Wl"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "cpp: error: unrecognized command-line option '-Wl'; did you mean '-W'?",
+   "line": "-Wl,<options>            Pass comma-separated <options> on to the linker. -Xassembler <arg>        Pass <arg> on to the assembler. -Xpreprocessor <arg>     Pass <arg> on to the preprocessor.",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "cpp",
+   "program": "cpp",
+   "option": "-Xlinker",
+   "exit": 0,
+   "seconds": 0.01,
+   "executed_argv": [
+    "cpp",
+    "-Xlinker",
+    "README.rst"
+   ],
+   "bound_operand": "README.rst",
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "# 0 \"<stdin>\"",
+   "line": "-Xlinker <arg>           Pass <arg> on to the linker. -save-temps              Do not delete intermediate files. -save-temps=<arg>        Do not delete intermediate files.",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "cpp",
+   "program": "cpp",
+   "option": "-no-canonical-prefixes",
+   "exit": 0,
+   "seconds": 0.008,
+   "executed_argv": [
+    "cpp",
+    "-no-canonical-prefixes"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "# 0 \"<stdin>\"",
+   "line": "-no-canonical-prefixes   Do not canonicalize paths when building relative prefixes to other gcc components. -pipe                    Use pipes rather than intermediate files.",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "cpp",
+   "program": "cpp",
+   "option": "-specs",
+   "exit": 1,
+   "seconds": 0.003,
+   "executed_argv": [
+    "cpp",
+    "-specs",
+    "README.rst"
+   ],
+   "bound_operand": "README.rst",
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "cpp: fatal error: specs file malformed after 4 characters",
+   "line": "-specs=<file>            Override built-in specs with the contents of <file>. -std=<standard>          Assume that the input sources are for <standard>. --sysroot=<directory>    Use <directory> as the",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "cpp",
+   "program": "cpp",
+   "option": "-B",
+   "exit": 0,
+   "seconds": 0.01,
+   "executed_argv": [
+    "cpp",
+    "-B",
+    "README.rst"
+   ],
+   "bound_operand": "README.rst",
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "# 0 \"<stdin>\"",
+   "line": "-B <directory>           Add <directory> to the compiler's search paths. -v                       Display the programs invoked by the compiler. -###                     Like -v but options quoted and ",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "false",
+   "program": "false",
+   "option": "--help",
+   "exit": 1,
+   "seconds": 0.001,
+   "executed_argv": [
+    "false",
+    "--help"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "Usage: false [ignored command line arguments]",
+   "line": "--help        display this help and exit --version     output version information and exit ",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "false",
+   "program": "false",
+   "option": "--version",
+   "exit": 1,
+   "seconds": 0.004,
+   "executed_argv": [
+    "false",
+    "--version"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "false (GNU coreutils) 9.1",
+   "line": "--version     output version information and exit  NOTE: your shell may have its own version of false, which usually supersedes",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "last",
+   "program": "last",
+   "option": "-a",
+   "exit": 0,
+   "seconds": 0.001,
+   "executed_argv": [
+    "last",
+    "-a"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "reboot   system boot  Mon Jun 15 17:00   still running      6.1.158+",
+   "line": "-a, --hostlast       display hostnames in the last column -d, --dns            translate the IP number back into a hostname -f, --file <file>    use a specific file instead of /var/log/wtmp",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "last",
+   "program": "last",
+   "option": "-d",
+   "exit": 0,
+   "seconds": 0.008,
+   "executed_argv": [
+    "last",
+    "-d"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "reboot   system boot  0.0.0.0          Mon Jun 15 17:00   still running",
+   "line": "-d, --dns            translate the IP number back into a hostname -f, --file <file>    use a specific file instead of /var/log/wtmp -F, --fulltimes      print full login and logout times and dates",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "last",
+   "program": "last",
+   "option": "-f",
+   "exit": 0,
+   "seconds": 0.003,
+   "executed_argv": [
+    "last",
+    "-f",
+    "README.rst"
+   ],
+   "bound_operand": "README.rst",
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "README.rst begins Thu Nov 19 05:54:35 2026",
+   "line": "-f, --file <file>    use a specific file instead of /var/log/wtmp -F, --fulltimes      print full login and logout times and dates -i, --ip             display IP numbers in numbers-and-dots notation",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "last",
+   "program": "last",
+   "option": "-F",
+   "exit": 0,
+   "seconds": 0.002,
+   "executed_argv": [
+    "last",
+    "-F"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "reboot   system boot  6.1.158+         Mon Jun 15 17:00:01 2026   still running",
+   "line": "-F, --fulltimes      print full login and logout times and dates -i, --ip             display IP numbers in numbers-and-dots notation -n, --limit <number> how many lines to show",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "last",
+   "program": "last",
+   "option": "-i",
+   "exit": 0,
+   "seconds": 0.001,
+   "executed_argv": [
+    "last",
+    "-i"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "reboot   system boot  0.0.0.0          Mon Jun 15 17:00   still running",
+   "line": "-i, --ip             display IP numbers in numbers-and-dots notation -n, --limit <number> how many lines to show -R, --nohostname     don't display the hostname field",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "last",
+   "program": "last",
+   "option": "-n",
+   "exit": 1,
+   "seconds": 0.003,
+   "executed_argv": [
+    "last",
+    "-n",
+    "README.rst"
+   ],
+   "bound_operand": "README.rst",
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "last: failed to parse number: 'README.rst'",
+   "line": "-n, --limit <number> how many lines to show -R, --nohostname     don't display the hostname field -s, --since <time>   display the lines since the specified time",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "last",
+   "program": "last",
+   "option": "-R",
+   "exit": 0,
+   "seconds": 0.001,
+   "executed_argv": [
+    "last",
+    "-R"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "reboot   system boot  Mon Jun 15 17:00   still running",
+   "line": "-R, --nohostname     don't display the hostname field -s, --since <time>   display the lines since the specified time -t, --until <time>   display the lines until the specified time",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "last",
+   "program": "last",
+   "option": "-s",
+   "exit": 1,
+   "seconds": 0.003,
+   "executed_argv": [
+    "last",
+    "-s",
+    "README.rst"
+   ],
+   "bound_operand": "README.rst",
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "last: invalid time value \"README.rst\"",
+   "line": "-s, --since <time>   display the lines since the specified time -t, --until <time>   display the lines until the specified time -p, --present <time> display who were present at the specified time",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "last",
+   "program": "last",
+   "option": "-t",
+   "exit": 1,
+   "seconds": 0.003,
+   "executed_argv": [
+    "last",
+    "-t",
+    "README.rst"
+   ],
+   "bound_operand": "README.rst",
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "last: invalid time value \"README.rst\"",
+   "line": "-t, --until <time>   display the lines until the specified time -p, --present <time> display who were present at the specified time -w, --fullnames      display full user and domain names",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "last",
+   "program": "last",
+   "option": "-p",
+   "exit": 1,
+   "seconds": 0.003,
+   "executed_argv": [
+    "last",
+    "-p",
+    "README.rst"
+   ],
+   "bound_operand": "README.rst",
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "last: invalid time value \"README.rst\"",
+   "line": "-p, --present <time> display who were present at the specified time -w, --fullnames      display full user and domain names -x, --system         display system shutdown entries and run level changes",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "last",
+   "program": "last",
+   "option": "-w",
+   "exit": 0,
+   "seconds": 0.001,
+   "executed_argv": [
+    "last",
+    "-w"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "reboot   system boot  6.1.158+         Mon Jun 15 17:00   still running",
+   "line": "-w, --fullnames      display full user and domain names -x, --system         display system shutdown entries and run level changes --time-format <format>  show timestamps in the specified <format>:",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "last",
+   "program": "last",
+   "option": "-x",
+   "exit": 0,
+   "seconds": 0.001,
+   "executed_argv": [
+    "last",
+    "-x"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "runlevel (to lvl 5)   6.1.158+         Mon Jun 15 17:00   still running",
+   "line": "-x, --system         display system shutdown entries and run level changes --time-format <format>  show timestamps in the specified <format>: notime|short|full|iso",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "piconv",
+   "program": "piconv",
+   "option": "-l",
+   "exit": 0,
+   "seconds": 0.016,
+   "executed_argv": [
+    "piconv",
+    "-l"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "7bit-jis",
+   "line": "-l,--list lists all available encodings -r,--resolve encoding_alias",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "piconv",
+   "program": "piconv",
+   "option": "--list",
+   "exit": 0,
+   "seconds": 0.016,
+   "executed_argv": [
+    "piconv",
+    "--list"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "7bit-jis",
+   "line": "-l,--list lists all available encodings -r,--resolve encoding_alias",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "piconv",
+   "program": "piconv",
+   "option": "-r",
+   "exit": 0,
+   "seconds": 0.016,
+   "executed_argv": [
+    "piconv",
+    "-r"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "Option r requires an argument",
+   "line": "-r,--resolve encoding_alias resolve encoding to its (Encode) canonical name -f,--from from_encoding",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "piconv",
+   "program": "piconv",
+   "option": "--resolve",
+   "exit": 0,
+   "seconds": 0.016,
+   "executed_argv": [
+    "piconv",
+    "--resolve"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "Option resolve requires an argument",
+   "line": "-r,--resolve encoding_alias resolve encoding to its (Encode) canonical name -f,--from from_encoding",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "piconv",
+   "program": "piconv",
+   "option": "-f",
+   "exit": 0,
+   "seconds": 0.016,
+   "executed_argv": [
+    "piconv",
+    "-f"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "Option f requires an argument",
+   "line": "-f,--from from_encoding when omitted, the current locale will be used -t,--to to_encoding",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "piconv",
+   "program": "piconv",
+   "option": "--from",
+   "exit": 0,
+   "seconds": 0.016,
+   "executed_argv": [
+    "piconv",
+    "--from"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "Option from requires an argument",
+   "line": "-f,--from from_encoding when omitted, the current locale will be used -t,--to to_encoding",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "piconv",
+   "program": "piconv",
+   "option": "-t",
+   "exit": 0,
+   "seconds": 0.016,
+   "executed_argv": [
+    "piconv",
+    "-t"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "Option t requires an argument",
+   "line": "-t,--to to_encoding when omitted, the current locale will be used -s,--string string",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "piconv",
+   "program": "piconv",
+   "option": "--to",
+   "exit": 0,
+   "seconds": 0.016,
+   "executed_argv": [
+    "piconv",
+    "--to"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "Option to requires an argument",
+   "line": "-t,--to to_encoding when omitted, the current locale will be used -s,--string string",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "piconv",
+   "program": "piconv",
+   "option": "-s",
+   "exit": 0,
+   "seconds": 0.016,
+   "executed_argv": [
+    "piconv",
+    "-s"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "Option s requires an argument",
+   "line": "-s,--string string \"string\" will be the input instead of STDIN or files The following are mainly of interest to Encode hackers:",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "piconv",
+   "program": "piconv",
+   "option": "--string",
+   "exit": 0,
+   "seconds": 0.016,
+   "executed_argv": [
+    "piconv",
+    "--string"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "Option string requires an argument",
+   "line": "-s,--string string \"string\" will be the input instead of STDIN or files The following are mainly of interest to Encode hackers:",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "piconv",
+   "program": "piconv",
+   "option": "-C",
+   "exit": 0,
+   "seconds": 0.016,
+   "executed_argv": [
+    "piconv",
+    "-C"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "Option C requires an argument",
+   "line": "-C N | -c           check the validity of the input -D,--debug          show debug information -S,--scheme scheme  use the scheme for conversion",
+   "advertises_check": true,
+   "advertises_inverse": false
+  },
+  {
+   "page": "piconv",
+   "program": "piconv",
+   "option": "-D",
+   "exit": 0,
+   "seconds": 0.016,
+   "executed_argv": [
+    "piconv",
+    "-D"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "piconv [-f from_encoding] [-t to_encoding]",
+   "line": "-D,--debug          show debug information -S,--scheme scheme  use the scheme for conversion Those are handy when you can only see ASCII characters:",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "runcon",
+   "program": "runcon",
+   "option": "-c",
+   "exit": 0,
+   "seconds": 0.001,
+   "executed_argv": [
+    "runcon",
+    "-c"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "kernel",
+   "line": "-c, --compute      compute process transition context before modifying -t, --type=TYPE    type (for same role as parent) -u, --user=USER    user identity",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "runcon",
+   "program": "runcon",
+   "option": "--compute",
+   "exit": 0,
+   "seconds": 0.001,
+   "executed_argv": [
+    "runcon",
+    "--compute"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "kernel",
+   "line": "-c, --compute      compute process transition context before modifying -t, --type=TYPE    type (for same role as parent) -u, --user=USER    user identity",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "runcon",
+   "program": "runcon",
+   "option": "-t",
+   "exit": 0,
+   "seconds": 0.003,
+   "executed_argv": [
+    "runcon",
+    "-t",
+    "README.rst"
+   ],
+   "bound_operand": "README.rst",
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "kernel",
+   "line": "-t, --type=TYPE    type (for same role as parent) -u, --user=USER    user identity -r, --role=ROLE    role",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "runcon",
+   "program": "runcon",
+   "option": "--type",
+   "exit": 0,
+   "seconds": 0.004,
+   "executed_argv": [
+    "runcon",
+    "--type",
+    "README.rst"
+   ],
+   "bound_operand": "README.rst",
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "kernel",
+   "line": "-t, --type=TYPE    type (for same role as parent) -u, --user=USER    user identity -r, --role=ROLE    role",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "runcon",
+   "program": "runcon",
+   "option": "-u",
+   "exit": 0,
+   "seconds": 0.003,
+   "executed_argv": [
+    "runcon",
+    "-u",
+    "README.rst"
+   ],
+   "bound_operand": "README.rst",
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "kernel",
+   "line": "-u, --user=USER    user identity -r, --role=ROLE    role -l, --range=RANGE  levelrange",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "runcon",
+   "program": "runcon",
+   "option": "--user",
+   "exit": 0,
+   "seconds": 0.003,
+   "executed_argv": [
+    "runcon",
+    "--user",
+    "README.rst"
+   ],
+   "bound_operand": "README.rst",
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "kernel",
+   "line": "-u, --user=USER    user identity -r, --role=ROLE    role -l, --range=RANGE  levelrange",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "runcon",
+   "program": "runcon",
+   "option": "-r",
+   "exit": 0,
+   "seconds": 0.004,
+   "executed_argv": [
+    "runcon",
+    "-r",
+    "README.rst"
+   ],
+   "bound_operand": "README.rst",
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "kernel",
+   "line": "-r, --role=ROLE    role -l, --range=RANGE  levelrange --help        display this help and exit",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "runcon",
+   "program": "runcon",
+   "option": "--role",
+   "exit": 0,
+   "seconds": 0.004,
+   "executed_argv": [
+    "runcon",
+    "--role",
+    "README.rst"
+   ],
+   "bound_operand": "README.rst",
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "kernel",
+   "line": "-r, --role=ROLE    role -l, --range=RANGE  levelrange --help        display this help and exit",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "runcon",
+   "program": "runcon",
+   "option": "-l",
+   "exit": 0,
+   "seconds": 0.003,
+   "executed_argv": [
+    "runcon",
+    "-l",
+    "README.rst"
+   ],
+   "bound_operand": "README.rst",
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "kernel",
+   "line": "-l, --range=RANGE  levelrange --help        display this help and exit --version     output version information and exit",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "runcon",
+   "program": "runcon",
+   "option": "--range",
+   "exit": 0,
+   "seconds": 0.003,
+   "executed_argv": [
+    "runcon",
+    "--range",
+    "README.rst"
+   ],
+   "bound_operand": "README.rst",
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "kernel",
+   "line": "-l, --range=RANGE  levelrange --help        display this help and exit --version     output version information and exit",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "runcon",
+   "program": "runcon",
+   "option": "--help",
+   "exit": 0,
+   "seconds": 0.001,
+   "executed_argv": [
+    "runcon",
+    "--help"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "Usage: runcon CONTEXT COMMAND [args]",
+   "line": "--help        display this help and exit --version     output version information and exit ",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "runcon",
+   "program": "runcon",
+   "option": "--version",
+   "exit": 0,
+   "seconds": 0.001,
+   "executed_argv": [
+    "runcon",
+    "--version"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "runcon (GNU coreutils) 9.1",
+   "line": "--version     output version information and exit  GNU coreutils online help: <https://www.gnu.org/software/coreutils/>",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "systemd-escape",
+   "program": "systemd-escape",
+   "option": "-h",
+   "exit": 0,
+   "seconds": 0.008,
+   "executed_argv": [
+    "systemd-escape",
+    "-h"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "systemd-escape [OPTIONS...] [NAME...]",
+   "line": "-h --help               Show this help --version            Show package version --suffix=SUFFIX      Unit suffix to append to escaped strings",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "systemd-escape",
+   "program": "systemd-escape",
+   "option": "--help",
+   "exit": 0,
+   "seconds": 0.008,
+   "executed_argv": [
+    "systemd-escape",
+    "--help"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "systemd-escape [OPTIONS...] [NAME...]",
+   "line": "-h --help               Show this help --version            Show package version --suffix=SUFFIX      Unit suffix to append to escaped strings",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "systemd-escape",
+   "program": "systemd-escape",
+   "option": "--version",
+   "exit": 0,
+   "seconds": 0.004,
+   "executed_argv": [
+    "systemd-escape",
+    "--version"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "systemd 252 (252.39-1~deb12u2)",
+   "line": "--version            Show package version --suffix=SUFFIX      Unit suffix to append to escaped strings --template=TEMPLATE  Insert strings as instance into template",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "systemd-escape",
+   "program": "systemd-escape",
+   "option": "--suffix",
+   "exit": 1,
+   "seconds": 0.008,
+   "executed_argv": [
+    "systemd-escape",
+    "--suffix",
+    "README.rst"
+   ],
+   "bound_operand": "README.rst",
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "Invalid unit suffix type \"README.rst\".",
+   "line": "--suffix=SUFFIX      Unit suffix to append to escaped strings --template=TEMPLATE  Insert strings as instance into template --instance           With --unescape, show just the instance part",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "systemd-escape",
+   "program": "systemd-escape",
+   "option": "--template",
+   "exit": 1,
+   "seconds": 0.008,
+   "executed_argv": [
+    "systemd-escape",
+    "--template",
+    "README.rst"
+   ],
+   "bound_operand": "README.rst",
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "Template name README.rst is not valid.",
+   "line": "--template=TEMPLATE  Insert strings as instance into template --instance           With --unescape, show just the instance part -u --unescape           Unescape strings",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "systemd-escape",
+   "program": "systemd-escape",
+   "option": "--instance",
+   "exit": 1,
+   "seconds": 0.003,
+   "executed_argv": [
+    "systemd-escape",
+    "--instance"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "Not enough arguments.",
+   "line": "--instance           With --unescape, show just the instance part -u --unescape           Unescape strings -m --mangle             Mangle strings",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "systemd-escape",
+   "program": "systemd-escape",
+   "option": "--unescape",
+   "exit": 1,
+   "seconds": 0.003,
+   "executed_argv": [
+    "systemd-escape",
+    "--unescape"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "Not enough arguments.",
+   "line": "--instance           With --unescape, show just the instance part -u --unescape           Unescape strings -m --mangle             Mangle strings",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "systemd-escape",
+   "program": "systemd-escape",
+   "option": "-u",
+   "exit": 1,
+   "seconds": 0.004,
+   "executed_argv": [
+    "systemd-escape",
+    "-u"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "Not enough arguments.",
+   "line": "-u --unescape           Unescape strings -m --mangle             Mangle strings -p --path               When escaping/unescaping assume the string is a path",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "systemd-escape",
+   "program": "systemd-escape",
+   "option": "--unescape",
+   "exit": 1,
+   "seconds": 0.003,
+   "executed_argv": [
+    "systemd-escape",
+    "--unescape"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "Not enough arguments.",
+   "line": "-u --unescape           Unescape strings -m --mangle             Mangle strings -p --path               When escaping/unescaping assume the string is a path",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "systemd-escape",
+   "program": "systemd-escape",
+   "option": "-m",
+   "exit": 1,
+   "seconds": 0.004,
+   "executed_argv": [
+    "systemd-escape",
+    "-m"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "Not enough arguments.",
+   "line": "-m --mangle             Mangle strings -p --path               When escaping/unescaping assume the string is a path ",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "systemd-escape",
+   "program": "systemd-escape",
+   "option": "--mangle",
+   "exit": 1,
+   "seconds": 0.004,
+   "executed_argv": [
+    "systemd-escape",
+    "--mangle"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "Not enough arguments.",
+   "line": "-m --mangle             Mangle strings -p --path               When escaping/unescaping assume the string is a path ",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "systemd-escape",
+   "program": "systemd-escape",
+   "option": "-p",
+   "exit": 1,
+   "seconds": 0.004,
+   "executed_argv": [
+    "systemd-escape",
+    "-p"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "Not enough arguments.",
+   "line": "-p --path               When escaping/unescaping assume the string is a path  See the systemd-escape(1) man page for details.",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "timedatectl show-timesync",
+   "program": "timedatectl",
+   "option": "-h",
+   "exit": 0,
+   "seconds": 0.003,
+   "executed_argv": [
+    "timedatectl",
+    "show-timesync",
+    "-h"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "timedatectl [OPTIONS...] COMMAND ...",
+   "line": "-h --help                Show this help message --version             Show package version --no-pager            Do not pipe output into a pager",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "timedatectl show-timesync",
+   "program": "timedatectl",
+   "option": "--help",
+   "exit": 0,
+   "seconds": 0.003,
+   "executed_argv": [
+    "timedatectl",
+    "show-timesync",
+    "--help"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "timedatectl [OPTIONS...] COMMAND ...",
+   "line": "-h --help                Show this help message --version             Show package version --no-pager            Do not pipe output into a pager",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "timedatectl show-timesync",
+   "program": "timedatectl",
+   "option": "--version",
+   "exit": 0,
+   "seconds": 0.004,
+   "executed_argv": [
+    "timedatectl",
+    "show-timesync",
+    "--version"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": true,
+   "ran": true,
+   "snippet": "systemd 252 (252.39-1~deb12u2)",
+   "line": "--version             Show package version --no-pager            Do not pipe output into a pager --no-ask-password     Do not prompt for password",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "timedatectl show-timesync",
+   "program": "timedatectl",
+   "option": "--no-pager",
+   "exit": 1,
+   "seconds": 0.004,
+   "executed_argv": [
+    "timedatectl",
+    "show-timesync",
+    "--no-pager"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "Failed to connect to bus: No such file or directory",
+   "line": "--no-pager            Do not pipe output into a pager --no-ask-password     Do not prompt for password -H --host=[USER@]HOST    Operate on remote host",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "timedatectl show-timesync",
+   "program": "timedatectl",
+   "option": "--no-ask-password",
+   "exit": 1,
+   "seconds": 0.004,
+   "executed_argv": [
+    "timedatectl",
+    "show-timesync",
+    "--no-ask-password"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "Failed to connect to bus: No such file or directory",
+   "line": "--no-ask-password     Do not prompt for password -H --host=[USER@]HOST    Operate on remote host -M --machine=CONTAINER   Operate on local container",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "timedatectl show-timesync",
+   "program": "timedatectl",
+   "option": "-H",
+   "exit": 1,
+   "seconds": 0.02,
+   "executed_argv": [
+    "timedatectl",
+    "show-timesync",
+    "-H",
+    "README.rst"
+   ],
+   "bound_operand": "README.rst",
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "ssh: Could not resolve hostname readme.rst: Name or service not known",
+   "line": "-H --host=[USER@]HOST    Operate on remote host -M --machine=CONTAINER   Operate on local container --adjust-system-clock Adjust system clock when changing local RTC mode",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "timedatectl show-timesync",
+   "program": "timedatectl",
+   "option": "--host",
+   "exit": 1,
+   "seconds": 0.02,
+   "executed_argv": [
+    "timedatectl",
+    "show-timesync",
+    "--host",
+    "README.rst"
+   ],
+   "bound_operand": "README.rst",
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "ssh: Could not resolve hostname readme.rst: Name or service not known",
+   "line": "-H --host=[USER@]HOST    Operate on remote host -M --machine=CONTAINER   Operate on local container --adjust-system-clock Adjust system clock when changing local RTC mode",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "timedatectl show-timesync",
+   "program": "timedatectl",
+   "option": "-M",
+   "exit": 1,
+   "seconds": 0.008,
+   "executed_argv": [
+    "timedatectl",
+    "show-timesync",
+    "-M",
+    "README.rst"
+   ],
+   "bound_operand": "README.rst",
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "Failed to connect to bus: Host is down",
+   "line": "-M --machine=CONTAINER   Operate on local container --adjust-system-clock Adjust system clock when changing local RTC mode --monitor             Monitor status of systemd-timesyncd",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "timedatectl show-timesync",
+   "program": "timedatectl",
+   "option": "--machine",
+   "exit": 1,
+   "seconds": 0.008,
+   "executed_argv": [
+    "timedatectl",
+    "show-timesync",
+    "--machine",
+    "README.rst"
+   ],
+   "bound_operand": "README.rst",
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "Failed to connect to bus: Host is down",
+   "line": "-M --machine=CONTAINER   Operate on local container --adjust-system-clock Adjust system clock when changing local RTC mode --monitor             Monitor status of systemd-timesyncd",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "timedatectl show-timesync",
+   "program": "timedatectl",
+   "option": "--adjust-system-clock",
+   "exit": 1,
+   "seconds": 0.004,
+   "executed_argv": [
+    "timedatectl",
+    "show-timesync",
+    "--adjust-system-clock"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "Failed to connect to bus: No such file or directory",
+   "line": "--adjust-system-clock Adjust system clock when changing local RTC mode --monitor             Monitor status of systemd-timesyncd -p --property=NAME       Show only properties by this name",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "timedatectl show-timesync",
+   "program": "timedatectl",
+   "option": "--monitor",
+   "exit": 1,
+   "seconds": 0.004,
+   "executed_argv": [
+    "timedatectl",
+    "show-timesync",
+    "--monitor"
+   ],
+   "bound_operand": null,
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "Failed to connect to bus: No such file or directory",
+   "line": "--monitor             Monitor status of systemd-timesyncd -p --property=NAME       Show only properties by this name -a --all                 Show all properties, including empty ones",
+   "advertises_check": false,
+   "advertises_inverse": false
+  },
+  {
+   "page": "timedatectl show-timesync",
+   "program": "timedatectl",
+   "option": "-p",
+   "exit": 1,
+   "seconds": 0.008,
+   "executed_argv": [
+    "timedatectl",
+    "show-timesync",
+    "-p",
+    "README.rst"
+   ],
+   "bound_operand": "README.rst",
+   "changed": false,
+   "accepted": false,
+   "ran": true,
+   "snippet": "Failed to connect to bus: No such file or directory",
+   "line": "-p --property=NAME       Show only properties by this name -a --all                 Show all properties, including empty ones --value               When showing properties, only print the value",
+   "advertises_check": false,
+   "advertises_inverse": false
+  }
+ ],
+ "limits": [
+  "one machine, one producer, one day: the census is a count on this box, not a law about all",
+  "the executed pages are chosen by the declared needs through lexical retrieval, so they are the branches reachable from these sentences; a branch no sentence reaches is unmeasured, not unusable",
+  "an option executed with no argument is not a complete action; argument synthesis is a separate problem (r22: the caller passes variables)",
+  "the deny list keeps privileged programs out of the read; it is a safety guard, so the census says nothing about them",
+  "lexical retrieval is a floor, not a ceiling: a better ranker raises the scores and does not change K7's shape, because what is missing is the purpose, not the ranking"
+ ]
+}
