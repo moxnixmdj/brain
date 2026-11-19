@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 570,
+  "knowledge_documents": 571,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 7162,
+  "research_index_records": 7164,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 452,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "4de6d99fef474a25e562d86f3cda41a541770e857b195a64e5c62df36cfb2d25"
+  "value": "c3090bdc994799ec55cb6783de599a6b331308335f2682326c3e3d123a60f8de"
  },
  "engines": [
   {
@@ -45117,6 +45117,85 @@
     "measured",
     "right",
     "wrong"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 7366,
+   "headings": [
+    "Why \"let it experience each action once\" cannot work — and what does",
+    "The claim under test",
+    "The single bottleneck",
+    "The answer this round measures",
+    "The structural confirmation of last round",
+    "The negative result, kept",
+    "The three objections, answered structurally",
+    "What is real, and what is not",
+    "Next"
+   ],
+   "kind": "DOCUMENT",
+   "path": "AN_ACTIONS_VOCABULARY_IS_ITS_REFUSAL_SURFACE_20261119_V1.md",
+   "sha256": "f9d9ffe91773034eed80018a1f19ca707c758518728473837513cc75ae4366c7",
+   "summary": "**Receipt:** `canonical/verification/AN_ACTIONS_VOCABULARY_IS_ITS_REFUSAL_SURFACE_20261119_V1.json` · 5 of 6 gates MET, one honestly NOT MET · 1.2 s, 8 real binaries, 98 executions, 160 unexecuted joint states, **0 model calls, 0 parameters, 0 network**.",
+   "terms": {
+    "160": 6,
+    "98": 3,
+    "accepts": 4,
+    "action": 9,
+    "all": 3,
+    "because": 3,
+    "binaries": 3,
+    "candidate": 3,
+    "cannot": 3,
+    "composition": 4,
+    "conditions": 4,
+    "construction": 3,
+    "coverage": 3,
+    "each": 5,
+    "eisdir": 3,
+    "eloop": 3,
+    "enoent": 5,
+    "every": 5,
+    "exactly": 4,
+    "executions": 5,
+    "experience": 7,
+    "false": 8,
+    "gzip": 4,
+    "learned": 5,
+    "never": 4,
+    "next": 4,
+    "no": 7,
+    "not": 22,
+    "once": 4,
+    "one": 20,
+    "own": 6,
+    "per": 5,
+    "precondition": 5,
+    "property": 6,
+    "real": 6,
+    "refusal": 7,
+    "refusals": 4,
+    "round": 7,
+    "same": 5,
+    "so": 4,
+    "states": 6,
+    "success": 4,
+    "surface": 4,
+    "tar": 4,
+    "vocabulary": 7,
+    "wall": 4,
+    "would": 4,
+    "wrong": 4
+   },
+   "title": "Why \"let it experience each action once\" cannot work — and what does",
+   "title_terms": [
+    "action",
+    "cannot",
+    "each",
+    "experience",
+    "let",
+    "once",
+    "work"
    ]
   },
   {
@@ -89446,10 +89525,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1372,
+  "included_source_count": 1373,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "b1d709d5a71a807312c4a7791fec3823ca4d777db12dbfa242a9d1361aef7adf"
+  "source_tree_digest": "93ff33160b005cc2f8b6c7820c57f5c82467b6f1dfe0000097c63ff7c7ebf81a"
  },
  "research_index": [
   {
@@ -159316,6 +159395,25 @@
     "failure": 1,
     "program": 1,
     "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "2026-11-19",
+   "id": "research:canonical/verification/AN_ACTIONS_VOCABULARY_IS_ITS_REFUSAL_SURFACE_20261119_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/AN_ACTIONS_VOCABULARY_IS_ITS_REFUSAL_SURFACE_20261119_V1.json",
+   "schema": "BRAIN_AN_ACTIONS_VOCABULARY_IS_ITS_REFUSAL_SURFACE_V1",
+   "sha256": "518e6066f0baa4775dfd509ae30e546806ecbe01d6ed41768149d434aa689b84",
+   "status": "",
+   "terms": {
+    "20261119": 1,
+    "actions": 1,
+    "refusal": 1,
+    "surface": 1,
+    "v1": 1,
+    "vocabulary": 1
    }
   },
   {
@@ -236955,6 +237053,51 @@
     "synthesize_a_space_that_is_the_closure_of_the_programs_own_material_under_its_own_forms_instead_of_a_hand_written_list_of_known_fixes": 1,
     "tree": 1,
     "under": 1
+   }
+  },
+  {
+   "action_id": "AN_ACTIONS_VOCABULARY_IS_ITS_REFUSAL_SURFACE_20261119_V1",
+   "capability": false,
+   "date": "2026-11-19",
+   "id": "research:canonical/action_intents/AN_ACTIONS_VOCABULARY_IS_ITS_REFUSAL_SURFACE_20261119_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/AN_ACTIONS_VOCABULARY_IS_ITS_REFUSAL_SURFACE_20261119_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "e7c668ad82e166677b658b819f1e1dab97acae6c2b74b151404de6d5b8ce9e88",
+   "status": "PROPOSED__PRODUCER_MEASURED__5_OF_6_MET__1_HONEST_NEGATIVE__VOCABULARY_NO_LONGER",
+   "terms": {
+    "123": 1,
+    "160": 3,
+    "20261119": 1,
+    "98": 1,
+    "action": 1,
+    "actions": 1,
+    "agent": 1,
+    "an_actions_vocabulary_is_its_refusal_surface_20261119_v1": 1,
+    "any": 1,
+    "assumption": 1,
+    "both": 1,
+    "budget": 1,
+    "candidate": 1,
+    "cannot": 2,
+    "check": 1,
+    "checks": 1,
+    "choosing": 1,
+    "column": 1,
+    "conditions": 1,
+    "confidently": 2,
+    "controlled": 1,
+    "coverage": 5,
+    "disagrees": 1,
+    "enumerates": 1,
+    "exactly": 1,
+    "not": 2,
+    "one": 3,
+    "so": 2,
+    "soundness": 3,
+    "states": 2,
+    "vocabulary": 2,
+    "wrong": 2
    }
   },
   {
