@@ -1,0 +1,1586 @@
+{
+ "schema": "BRAIN_THE_VOCABULARY_MUST_BE_COMPUTED_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "date": "2026-11-19",
+ "mode": "FIVE_REAL_MACHINES__ONE_PROBE_PER_CELL__TWO_NAMINGS_OF_THE_SAME_TRANSITIONS",
+ "why_this_round": {
+  "the_previous_round_left": "identification is closed by proof, and the next bottleneck is synthesis",
+  "what_this_round_found": "synthesis is bounded by the NAMING of effects: a hand-written table maps distinct measured transitions to one word, so the planner cannot choose between them, and a goal that mentions identity cannot even be stated",
+  "the_fix_is_not_a_learner": "the naming is computed from the transition that was already measured: arrived roles, departed roles, cardinality delta, identity delta"
+ },
+ "criteria_were_declared_after_a_prototype_probe": false,
+ "declared_acceptance_before_the_receipt_run": {
+  "K1": "at least one hand-written name stands for two or more distinct measured transitions, with creation-versus-duplication and listing-versus-moving as witnesses",
+  "K2": "at least one cell whose world moved is named INERT, and at least one hand-level operator does carry an identity change -- the vocabulary is inconsistent, not merely coarse",
+  "K3": "at least one machine achieves moved_judge in one atom whose hand effect is outside the three-effect vocabulary",
+  "K4": "the derived vocabulary names those transitions distinctly and the one-step move has a derived name",
+  "K5": "the refinement costs zero additional trials",
+  "K6": "zero model calls, zero parameters, zero network calls"
+ },
+ "verdict": {
+  "K1_the_hand_vocabulary_merges_transitions": {
+   "cells": 44,
+   "hand_names_seen": {
+    "PERSIST": 2,
+    "REPLACE": 2,
+    "INERT": 2,
+    "REMOVE": 2,
+    "UNCLASSIFIED": 2
+   },
+   "merged_names": {
+    "PERSIST": {
+     "distinct_transitions": 2,
+     "signatures": [
+      "ARRIVE[ARG];DEPART[-];CARD+1;IDS+1-0",
+      "ARRIVE[OLD];DEPART[-];CARD+1;IDS+1-0"
+     ],
+     "atoms": [
+      "FS_A1",
+      "FS_A4"
+     ]
+    },
+    "REPLACE": {
+     "distinct_transitions": 2,
+     "signatures": [
+      "ARRIVE[ARG];DEPART[OLD];CARD+0;IDS+0-0",
+      "ARRIVE[ARG];DEPART[PROBE];CARD+0;IDS+1-1"
+     ],
+     "atoms": [
+      "FS_A1",
+      "GIT_A3"
+     ]
+    },
+    "INERT": {
+     "distinct_transitions": 2,
+     "signatures": [
+      "ARRIVE[-];DEPART[-];CARD+0;IDS+0-0",
+      "ARRIVE[-];DEPART[-];CARD+0;IDS+1-1"
+     ],
+     "atoms": [
+      "FS_A2",
+      "FS_A3"
+     ]
+    },
+    "REMOVE": {
+     "distinct_transitions": 2,
+     "signatures": [
+      "ARRIVE[-];DEPART[OLD];CARD-1;IDS+0-1",
+      "ARRIVE[-];DEPART[PROBE];CARD-1;IDS+0-1"
+     ],
+     "atoms": [
+      "FS_A2",
+      "GIT_A2"
+     ]
+    },
+    "UNCLASSIFIED": {
+     "distinct_transitions": 2,
+     "signatures": [
+      "ARRIVE[-];DEPART[OTHER+OTHER+OTHER];CARD-3;IDS+0-3",
+      "ARRIVE[OTHER+OTHER];DEPART[OLD];CARD+1;IDS+0-0"
+     ],
+     "atoms": [
+      "SRT_A3",
+      "TAR_A1"
+     ]
+    }
+   },
+   "witnesses": {
+    "creation versus duplication": [
+     "FS_A1",
+     "TAR_A1",
+     "SQL_A1",
+     "SQL_A1",
+     "GIT_A1",
+     "GIT_A1"
+    ],
+    "creation versus duplication (copy)": [
+     "FS_A4"
+    ],
+    "a command that did nothing": [
+     "FS_A2",
+     "FS_A3",
+     "FS_A4",
+     "FS_A5",
+     "FS_A5",
+     "TAR_A2",
+     "TAR_A3",
+     "TAR_A3",
+     "TAR_A4",
+     "TAR_A4",
+     "SQL_A4",
+     "SQL_A4",
+     "GIT_A4",
+     "GIT_A4",
+     "GIT_A5",
+     "GIT_A5",
+     "SRT_A1",
+     "SRT_A1",
+     "SRT_A2",
+     "SRT_A2",
+     "SRT_A4",
+     "SRT_A4"
+    ],
+    "a command that moved the world": [
+     "FS_A3"
+    ]
+   },
+   "MET": true
+  },
+  "K2_the_hand_vocabulary_is_not_even_a_consistent_abstraction": {
+   "the_identity_coordinate_is_dropped_where_it_matters": {
+    "cells_whose_world_moved_but_whose_hand_name_is_INERT": [
+     {
+      "machine": "FILESYSTEM",
+      "atom": "FS_A3",
+      "state_class": "TARGET_EXISTS",
+      "hand_effect": "INERT",
+      "derived": "ARRIVE[-];DEPART[-];CARD+0;IDS+1-1"
+     }
+    ],
+    "count": 1
+   },
+   "the_same_atom_can_be_named_two_ways_in_two_state_classes": [
+    {
+     "machine": "FILESYSTEM",
+     "atom": "FS_A1",
+     "names": [
+      "PERSIST",
+      "REPLACE"
+     ]
+    },
+    {
+     "machine": "FILESYSTEM",
+     "atom": "FS_A2",
+     "names": [
+      "INERT",
+      "REMOVE"
+     ]
+    },
+    {
+     "machine": "FILESYSTEM",
+     "atom": "FS_A4",
+     "names": [
+      "INERT",
+      "PERSIST"
+     ]
+    },
+    {
+     "machine": "TARBALL",
+     "atom": "TAR_A1",
+     "names": [
+      "PERSIST",
+      "UNCLASSIFIED"
+     ]
+    },
+    {
+     "machine": "TARBALL",
+     "atom": "TAR_A2",
+     "names": [
+      "INERT",
+      "REMOVE"
+     ]
+    }
+   ],
+   "hand_operators_with_an_identity_change": {
+    "FILESYSTEM": 3,
+    "TARBALL": 2,
+    "SQLITE": 4,
+    "GIT": 2,
+    "SORT": 0
+   },
+   "why_that_is_worse_than_coarse": "a coarse abstraction is at least a function of the state; this one records the same coordinate in some cells and drops it in others, so no hand-level rule can be sound about when a move is visible",
+   "MET": true
+  },
+  "K3_the_hand_model_refuses_what_one_command_achieves": {
+   "from_the_reset_state_the_goal_achieving_step_is_not_an_operator": true,
+   "moved_judge_achieved_by_one_atom": {
+    "FILESYSTEM": {
+     "atom": "FS_A3",
+     "hand_effect": "INERT",
+     "signature": [
+      [],
+      [],
+      0,
+      1,
+      1
+     ],
+     "derived": "ARRIVE[-];DEPART[-];CARD+0;IDS+1-1"
+    },
+    "TARBALL": null,
+    "SQLITE": null,
+    "GIT": null,
+    "SORT": null
+   },
+   "the_hand_name_of_that_atom": {
+    "FILESYSTEM": "INERT",
+    "TARBALL": null,
+    "SQLITE": null,
+    "GIT": null,
+    "SORT": null
+   },
+   "MET": true
+  },
+  "K4_the_derived_vocabulary_names_it_and_the_step_satisfies_the_goal": {
+   "per_machine": {
+    "FILESYSTEM": {
+     "cells_with_an_identity_change": 4,
+     "derived_names": [
+      "ARRIVE[-];DEPART[-];CARD+0;IDS+1-1",
+      "ARRIVE[-];DEPART[OLD];CARD-1;IDS+0-1",
+      "ARRIVE[ARG];DEPART[-];CARD+1;IDS+1-0",
+      "ARRIVE[OLD];DEPART[-];CARD+1;IDS+1-0"
+     ]
+    },
+    "TARBALL": {
+     "cells_with_an_identity_change": 2,
+     "derived_names": [
+      "ARRIVE[-];DEPART[OLD];CARD-1;IDS+0-1",
+      "ARRIVE[ARG];DEPART[-];CARD+1;IDS+1-0"
+     ]
+    },
+    "SQLITE": {
+     "cells_with_an_identity_change": 4,
+     "derived_names": [
+      "ARRIVE[-];DEPART[OLD];CARD-1;IDS+0-1",
+      "ARRIVE[ARG];DEPART[-];CARD+1;IDS+1-0"
+     ]
+    },
+    "GIT": {
+     "cells_with_an_identity_change": 6,
+     "derived_names": [
+      "ARRIVE[-];DEPART[PROBE];CARD-1;IDS+0-1",
+      "ARRIVE[ARG];DEPART[-];CARD+1;IDS+1-0",
+      "ARRIVE[ARG];DEPART[PROBE];CARD+0;IDS+1-1"
+     ]
+    },
+    "SORT": {
+     "cells_with_an_identity_change": 2,
+     "derived_names": [
+      "ARRIVE[-];DEPART[OTHER+OTHER+OTHER];CARD-3;IDS+0-3"
+     ]
+    }
+   },
+   "the_derived_name_of_the_one_step_move": {
+    "FILESYSTEM": "ARRIVE[-];DEPART[-];CARD+0;IDS+1-1",
+    "TARBALL": null,
+    "SQLITE": null,
+    "GIT": null,
+    "SORT": null
+   },
+   "MET": true
+  },
+  "K5_the_refinement_is_free": {
+   "trials": 44,
+   "extra_trials_for_the_derived_vocabulary": 0,
+   "because": "identity_changed was already computed by effect_of and discarded by the naming; the same probe supplies the fourth coordinate",
+   "cells_where_the_hand_name_and_the_derived_name_disagree": 1,
+   "MET": true
+  },
+  "K6_zero": {
+   "model_calls": 0,
+   "parameters_stored": 0,
+   "network_calls_at_run_time": 0,
+   "MET": true
+  }
+ },
+ "per_machine": {
+  "FILESYSTEM": {
+   "cells": [
+    {
+     "_machine": "FILESYSTEM",
+     "atom": "FS_A1",
+     "state_class": "TARGET_ABSENT",
+     "exit": 0,
+     "hand_effect": "PERSIST",
+     "addressable": true,
+     "hand_says_identity_changed": true,
+     "signature": [
+      [
+       "ARG"
+      ],
+      [],
+      1,
+      1,
+      0
+     ],
+     "derived": "ARRIVE[ARG];DEPART[-];CARD+1;IDS+1-0",
+     "arrived": [
+      "ARG"
+     ],
+     "departed": [],
+     "cardinality": 1,
+     "appeared": 1,
+     "vanished": 0
+    },
+    {
+     "_machine": "FILESYSTEM",
+     "atom": "FS_A1",
+     "state_class": "TARGET_EXISTS",
+     "exit": 0,
+     "hand_effect": "REPLACE",
+     "addressable": true,
+     "hand_says_identity_changed": false,
+     "signature": [
+      [
+       "ARG"
+      ],
+      [
+       "OLD"
+      ],
+      0,
+      0,
+      0
+     ],
+     "derived": "ARRIVE[ARG];DEPART[OLD];CARD+0;IDS+0-0",
+     "arrived": [
+      "ARG"
+     ],
+     "departed": [
+      "OLD"
+     ],
+     "cardinality": 0,
+     "appeared": 0,
+     "vanished": 0
+    },
+    {
+     "_machine": "FILESYSTEM",
+     "atom": "FS_A2",
+     "state_class": "TARGET_ABSENT",
+     "exit": 0,
+     "hand_effect": "INERT",
+     "addressable": false,
+     "hand_says_identity_changed": false,
+     "signature": [
+      [],
+      [],
+      0,
+      0,
+      0
+     ],
+     "derived": "ARRIVE[-];DEPART[-];CARD+0;IDS+0-0",
+     "arrived": [],
+     "departed": [],
+     "cardinality": 0,
+     "appeared": 0,
+     "vanished": 0
+    },
+    {
+     "_machine": "FILESYSTEM",
+     "atom": "FS_A2",
+     "state_class": "TARGET_EXISTS",
+     "exit": 0,
+     "hand_effect": "REMOVE",
+     "addressable": true,
+     "hand_says_identity_changed": true,
+     "signature": [
+      [],
+      [
+       "OLD"
+      ],
+      -1,
+      0,
+      1
+     ],
+     "derived": "ARRIVE[-];DEPART[OLD];CARD-1;IDS+0-1",
+     "arrived": [],
+     "departed": [
+      "OLD"
+     ],
+     "cardinality": -1,
+     "appeared": 0,
+     "vanished": 1
+    },
+    {
+     "_machine": "FILESYSTEM",
+     "atom": "FS_A3",
+     "state_class": "TARGET_ABSENT",
+     "exit": 1,
+     "hand_effect": "INERT",
+     "addressable": false,
+     "hand_says_identity_changed": false,
+     "signature": [
+      [],
+      [],
+      0,
+      0,
+      0
+     ],
+     "derived": "ARRIVE[-];DEPART[-];CARD+0;IDS+0-0",
+     "arrived": [],
+     "departed": [],
+     "cardinality": 0,
+     "appeared": 0,
+     "vanished": 0
+    },
+    {
+     "_machine": "FILESYSTEM",
+     "atom": "FS_A3",
+     "state_class": "TARGET_EXISTS",
+     "exit": 0,
+     "hand_effect": "INERT",
+     "addressable": false,
+     "hand_says_identity_changed": true,
+     "signature": [
+      [],
+      [],
+      0,
+      1,
+      1
+     ],
+     "derived": "ARRIVE[-];DEPART[-];CARD+0;IDS+1-1",
+     "arrived": [],
+     "departed": [],
+     "cardinality": 0,
+     "appeared": 1,
+     "vanished": 1
+    },
+    {
+     "_machine": "FILESYSTEM",
+     "atom": "FS_A4",
+     "state_class": "TARGET_ABSENT",
+     "exit": 1,
+     "hand_effect": "INERT",
+     "addressable": false,
+     "hand_says_identity_changed": false,
+     "signature": [
+      [],
+      [],
+      0,
+      0,
+      0
+     ],
+     "derived": "ARRIVE[-];DEPART[-];CARD+0;IDS+0-0",
+     "arrived": [],
+     "departed": [],
+     "cardinality": 0,
+     "appeared": 0,
+     "vanished": 0
+    },
+    {
+     "_machine": "FILESYSTEM",
+     "atom": "FS_A4",
+     "state_class": "TARGET_EXISTS",
+     "exit": 0,
+     "hand_effect": "PERSIST",
+     "addressable": true,
+     "hand_says_identity_changed": true,
+     "signature": [
+      [
+       "OLD"
+      ],
+      [],
+      1,
+      1,
+      0
+     ],
+     "derived": "ARRIVE[OLD];DEPART[-];CARD+1;IDS+1-0",
+     "arrived": [
+      "OLD"
+     ],
+     "departed": [],
+     "cardinality": 1,
+     "appeared": 1,
+     "vanished": 0
+    },
+    {
+     "_machine": "FILESYSTEM",
+     "atom": "FS_A5",
+     "state_class": "TARGET_ABSENT",
+     "exit": 0,
+     "hand_effect": "INERT",
+     "addressable": false,
+     "hand_says_identity_changed": false,
+     "signature": [
+      [],
+      [],
+      0,
+      0,
+      0
+     ],
+     "derived": "ARRIVE[-];DEPART[-];CARD+0;IDS+0-0",
+     "arrived": [],
+     "departed": [],
+     "cardinality": 0,
+     "appeared": 0,
+     "vanished": 0
+    },
+    {
+     "_machine": "FILESYSTEM",
+     "atom": "FS_A5",
+     "state_class": "TARGET_EXISTS",
+     "exit": 0,
+     "hand_effect": "INERT",
+     "addressable": false,
+     "hand_says_identity_changed": false,
+     "signature": [
+      [],
+      [],
+      0,
+      0,
+      0
+     ],
+     "derived": "ARRIVE[-];DEPART[-];CARD+0;IDS+0-0",
+     "arrived": [],
+     "departed": [],
+     "cardinality": 0,
+     "appeared": 0,
+     "vanished": 0
+    }
+   ],
+   "collisions": {
+    "names": {
+     "PERSIST": 2,
+     "REPLACE": 1,
+     "INERT": 2,
+     "REMOVE": 1
+    },
+    "merged_names": [
+     "INERT",
+     "PERSIST"
+    ],
+    "merged": {
+     "PERSIST": {
+      "distinct_transitions": 2,
+      "signatures": [
+       "ARRIVE[ARG];DEPART[-];CARD+1;IDS+1-0",
+       "ARRIVE[OLD];DEPART[-];CARD+1;IDS+1-0"
+      ],
+      "atoms": [
+       "FS_A1",
+       "FS_A4"
+      ]
+     },
+     "INERT": {
+      "distinct_transitions": 2,
+      "signatures": [
+       "ARRIVE[-];DEPART[-];CARD+0;IDS+0-0",
+       "ARRIVE[-];DEPART[-];CARD+0;IDS+1-1"
+      ],
+      "atoms": [
+       "FS_A2",
+       "FS_A3"
+      ]
+     }
+    }
+   },
+   "hand_expressiveness": {
+    "operators": 4,
+    "operators_that_change_identity": 3,
+    "effect_words_the_table_can_use": [
+     "PERSIST",
+     "REMOVE",
+     "REPLACE"
+    ]
+   },
+   "derived_expressiveness": {
+    "cells_with_an_identity_change": 4,
+    "derived_names": [
+     "ARRIVE[-];DEPART[-];CARD+0;IDS+1-1",
+     "ARRIVE[-];DEPART[OLD];CARD-1;IDS+0-1",
+     "ARRIVE[ARG];DEPART[-];CARD+1;IDS+1-0",
+     "ARRIVE[OLD];DEPART[-];CARD+1;IDS+1-0"
+    ]
+   },
+   "moved": {
+    "machine": "FILESYSTEM",
+    "atom_that_achieves_the_moved_goal": {
+     "atom": "FS_A3",
+     "hand_effect": "INERT",
+     "signature": [
+      [],
+      [],
+      0,
+      1,
+      1
+     ],
+     "derived": "ARRIVE[-];DEPART[-];CARD+0;IDS+1-1"
+    }
+   }
+  },
+  "TARBALL": {
+   "cells": [
+    {
+     "_machine": "TARBALL",
+     "atom": "TAR_A1",
+     "state_class": "TARGET_ABSENT",
+     "exit": 0,
+     "hand_effect": "PERSIST",
+     "addressable": true,
+     "hand_says_identity_changed": true,
+     "signature": [
+      [
+       "ARG"
+      ],
+      [],
+      1,
+      1,
+      0
+     ],
+     "derived": "ARRIVE[ARG];DEPART[-];CARD+1;IDS+1-0",
+     "arrived": [
+      "ARG"
+     ],
+     "departed": [],
+     "cardinality": 1,
+     "appeared": 1,
+     "vanished": 0
+    },
+    {
+     "_machine": "TARBALL",
+     "atom": "TAR_A1",
+     "state_class": "TARGET_EXISTS",
+     "exit": 0,
+     "hand_effect": "UNCLASSIFIED",
+     "addressable": false,
+     "hand_says_identity_changed": true,
+     "signature": [
+      [
+       "OTHER",
+       "OTHER"
+      ],
+      [
+       "OLD"
+      ],
+      1,
+      0,
+      0
+     ],
+     "derived": "ARRIVE[OTHER+OTHER];DEPART[OLD];CARD+1;IDS+0-0",
+     "arrived": [
+      "OTHER",
+      "OTHER"
+     ],
+     "departed": [
+      "OLD"
+     ],
+     "cardinality": 1,
+     "appeared": 0,
+     "vanished": 0
+    },
+    {
+     "_machine": "TARBALL",
+     "atom": "TAR_A2",
+     "state_class": "TARGET_ABSENT",
+     "exit": 2,
+     "hand_effect": "INERT",
+     "addressable": false,
+     "hand_says_identity_changed": false,
+     "signature": [
+      [],
+      [],
+      0,
+      0,
+      0
+     ],
+     "derived": "ARRIVE[-];DEPART[-];CARD+0;IDS+0-0",
+     "arrived": [],
+     "departed": [],
+     "cardinality": 0,
+     "appeared": 0,
+     "vanished": 0
+    },
+    {
+     "_machine": "TARBALL",
+     "atom": "TAR_A2",
+     "state_class": "TARGET_EXISTS",
+     "exit": 0,
+     "hand_effect": "REMOVE",
+     "addressable": true,
+     "hand_says_identity_changed": true,
+     "signature": [
+      [],
+      [
+       "OLD"
+      ],
+      -1,
+      0,
+      1
+     ],
+     "derived": "ARRIVE[-];DEPART[OLD];CARD-1;IDS+0-1",
+     "arrived": [],
+     "departed": [
+      "OLD"
+     ],
+     "cardinality": -1,
+     "appeared": 0,
+     "vanished": 1
+    },
+    {
+     "_machine": "TARBALL",
+     "atom": "TAR_A3",
+     "state_class": "TARGET_ABSENT",
+     "exit": 0,
+     "hand_effect": "INERT",
+     "addressable": false,
+     "hand_says_identity_changed": false,
+     "signature": [
+      [],
+      [],
+      0,
+      0,
+      0
+     ],
+     "derived": "ARRIVE[-];DEPART[-];CARD+0;IDS+0-0",
+     "arrived": [],
+     "departed": [],
+     "cardinality": 0,
+     "appeared": 0,
+     "vanished": 0
+    },
+    {
+     "_machine": "TARBALL",
+     "atom": "TAR_A3",
+     "state_class": "TARGET_EXISTS",
+     "exit": 0,
+     "hand_effect": "INERT",
+     "addressable": false,
+     "hand_says_identity_changed": false,
+     "signature": [
+      [],
+      [],
+      0,
+      0,
+      0
+     ],
+     "derived": "ARRIVE[-];DEPART[-];CARD+0;IDS+0-0",
+     "arrived": [],
+     "departed": [],
+     "cardinality": 0,
+     "appeared": 0,
+     "vanished": 0
+    },
+    {
+     "_machine": "TARBALL",
+     "atom": "TAR_A4",
+     "state_class": "TARGET_ABSENT",
+     "exit": 0,
+     "hand_effect": "INERT",
+     "addressable": false,
+     "hand_says_identity_changed": false,
+     "signature": [
+      [],
+      [],
+      0,
+      0,
+      0
+     ],
+     "derived": "ARRIVE[-];DEPART[-];CARD+0;IDS+0-0",
+     "arrived": [],
+     "departed": [],
+     "cardinality": 0,
+     "appeared": 0,
+     "vanished": 0
+    },
+    {
+     "_machine": "TARBALL",
+     "atom": "TAR_A4",
+     "state_class": "TARGET_EXISTS",
+     "exit": 0,
+     "hand_effect": "INERT",
+     "addressable": false,
+     "hand_says_identity_changed": false,
+     "signature": [
+      [],
+      [],
+      0,
+      0,
+      0
+     ],
+     "derived": "ARRIVE[-];DEPART[-];CARD+0;IDS+0-0",
+     "arrived": [],
+     "departed": [],
+     "cardinality": 0,
+     "appeared": 0,
+     "vanished": 0
+    }
+   ],
+   "collisions": {
+    "names": {
+     "PERSIST": 1,
+     "UNCLASSIFIED": 1,
+     "INERT": 1,
+     "REMOVE": 1
+    },
+    "merged_names": [],
+    "merged": {}
+   },
+   "hand_expressiveness": {
+    "operators": 2,
+    "operators_that_change_identity": 2,
+    "effect_words_the_table_can_use": [
+     "PERSIST",
+     "REMOVE"
+    ]
+   },
+   "derived_expressiveness": {
+    "cells_with_an_identity_change": 2,
+    "derived_names": [
+     "ARRIVE[-];DEPART[OLD];CARD-1;IDS+0-1",
+     "ARRIVE[ARG];DEPART[-];CARD+1;IDS+1-0"
+    ]
+   },
+   "moved": {
+    "machine": "TARBALL",
+    "atom_that_achieves_the_moved_goal": null
+   }
+  },
+  "SQLITE": {
+   "cells": [
+    {
+     "_machine": "SQLITE",
+     "atom": "SQL_A1",
+     "state_class": "TARGET_ABSENT",
+     "exit": 0,
+     "hand_effect": "PERSIST",
+     "addressable": true,
+     "hand_says_identity_changed": true,
+     "signature": [
+      [
+       "ARG"
+      ],
+      [],
+      1,
+      1,
+      0
+     ],
+     "derived": "ARRIVE[ARG];DEPART[-];CARD+1;IDS+1-0",
+     "arrived": [
+      "ARG"
+     ],
+     "departed": [],
+     "cardinality": 1,
+     "appeared": 1,
+     "vanished": 0
+    },
+    {
+     "_machine": "SQLITE",
+     "atom": "SQL_A1",
+     "state_class": "TARGET_EXISTS",
+     "exit": 0,
+     "hand_effect": "PERSIST",
+     "addressable": true,
+     "hand_says_identity_changed": true,
+     "signature": [
+      [
+       "ARG"
+      ],
+      [],
+      1,
+      1,
+      0
+     ],
+     "derived": "ARRIVE[ARG];DEPART[-];CARD+1;IDS+1-0",
+     "arrived": [
+      "ARG"
+     ],
+     "departed": [],
+     "cardinality": 1,
+     "appeared": 1,
+     "vanished": 0
+    },
+    {
+     "_machine": "SQLITE",
+     "atom": "SQL_A2",
+     "state_class": "TARGET_ABSENT",
+     "exit": 0,
+     "hand_effect": "REMOVE",
+     "addressable": true,
+     "hand_says_identity_changed": true,
+     "signature": [
+      [],
+      [
+       "OLD"
+      ],
+      -1,
+      0,
+      1
+     ],
+     "derived": "ARRIVE[-];DEPART[OLD];CARD-1;IDS+0-1",
+     "arrived": [],
+     "departed": [
+      "OLD"
+     ],
+     "cardinality": -1,
+     "appeared": 0,
+     "vanished": 1
+    },
+    {
+     "_machine": "SQLITE",
+     "atom": "SQL_A2",
+     "state_class": "TARGET_EXISTS",
+     "exit": 0,
+     "hand_effect": "REMOVE",
+     "addressable": true,
+     "hand_says_identity_changed": true,
+     "signature": [
+      [],
+      [
+       "OLD"
+      ],
+      -1,
+      0,
+      1
+     ],
+     "derived": "ARRIVE[-];DEPART[OLD];CARD-1;IDS+0-1",
+     "arrived": [],
+     "departed": [
+      "OLD"
+     ],
+     "cardinality": -1,
+     "appeared": 0,
+     "vanished": 1
+    },
+    {
+     "_machine": "SQLITE",
+     "atom": "SQL_A3",
+     "state_class": "TARGET_ABSENT",
+     "exit": 0,
+     "hand_effect": "REPLACE",
+     "addressable": true,
+     "hand_says_identity_changed": false,
+     "signature": [
+      [
+       "ARG"
+      ],
+      [
+       "OLD"
+      ],
+      0,
+      0,
+      0
+     ],
+     "derived": "ARRIVE[ARG];DEPART[OLD];CARD+0;IDS+0-0",
+     "arrived": [
+      "ARG"
+     ],
+     "departed": [
+      "OLD"
+     ],
+     "cardinality": 0,
+     "appeared": 0,
+     "vanished": 0
+    },
+    {
+     "_machine": "SQLITE",
+     "atom": "SQL_A3",
+     "state_class": "TARGET_EXISTS",
+     "exit": 0,
+     "hand_effect": "REPLACE",
+     "addressable": true,
+     "hand_says_identity_changed": false,
+     "signature": [
+      [
+       "ARG"
+      ],
+      [
+       "OLD"
+      ],
+      0,
+      0,
+      0
+     ],
+     "derived": "ARRIVE[ARG];DEPART[OLD];CARD+0;IDS+0-0",
+     "arrived": [
+      "ARG"
+     ],
+     "departed": [
+      "OLD"
+     ],
+     "cardinality": 0,
+     "appeared": 0,
+     "vanished": 0
+    },
+    {
+     "_machine": "SQLITE",
+     "atom": "SQL_A4",
+     "state_class": "TARGET_ABSENT",
+     "exit": 0,
+     "hand_effect": "INERT",
+     "addressable": false,
+     "hand_says_identity_changed": false,
+     "signature": [
+      [],
+      [],
+      0,
+      0,
+      0
+     ],
+     "derived": "ARRIVE[-];DEPART[-];CARD+0;IDS+0-0",
+     "arrived": [],
+     "departed": [],
+     "cardinality": 0,
+     "appeared": 0,
+     "vanished": 0
+    },
+    {
+     "_machine": "SQLITE",
+     "atom": "SQL_A4",
+     "state_class": "TARGET_EXISTS",
+     "exit": 0,
+     "hand_effect": "INERT",
+     "addressable": false,
+     "hand_says_identity_changed": false,
+     "signature": [
+      [],
+      [],
+      0,
+      0,
+      0
+     ],
+     "derived": "ARRIVE[-];DEPART[-];CARD+0;IDS+0-0",
+     "arrived": [],
+     "departed": [],
+     "cardinality": 0,
+     "appeared": 0,
+     "vanished": 0
+    }
+   ],
+   "collisions": {
+    "names": {
+     "PERSIST": 1,
+     "REMOVE": 1,
+     "REPLACE": 1,
+     "INERT": 1
+    },
+    "merged_names": [],
+    "merged": {}
+   },
+   "hand_expressiveness": {
+    "operators": 6,
+    "operators_that_change_identity": 4,
+    "effect_words_the_table_can_use": [
+     "PERSIST",
+     "REMOVE",
+     "REPLACE"
+    ]
+   },
+   "derived_expressiveness": {
+    "cells_with_an_identity_change": 4,
+    "derived_names": [
+     "ARRIVE[-];DEPART[OLD];CARD-1;IDS+0-1",
+     "ARRIVE[ARG];DEPART[-];CARD+1;IDS+1-0"
+    ]
+   },
+   "moved": {
+    "machine": "SQLITE",
+    "atom_that_achieves_the_moved_goal": null
+   }
+  },
+  "GIT": {
+   "cells": [
+    {
+     "_machine": "GIT",
+     "atom": "GIT_A1",
+     "state_class": "TARGET_ABSENT",
+     "exit": 0,
+     "hand_effect": "PERSIST",
+     "addressable": true,
+     "hand_says_identity_changed": true,
+     "signature": [
+      [
+       "ARG"
+      ],
+      [],
+      1,
+      1,
+      0
+     ],
+     "derived": "ARRIVE[ARG];DEPART[-];CARD+1;IDS+1-0",
+     "arrived": [
+      "ARG"
+     ],
+     "departed": [],
+     "cardinality": 1,
+     "appeared": 1,
+     "vanished": 0
+    },
+    {
+     "_machine": "GIT",
+     "atom": "GIT_A1",
+     "state_class": "TARGET_EXISTS",
+     "exit": 0,
+     "hand_effect": "PERSIST",
+     "addressable": true,
+     "hand_says_identity_changed": true,
+     "signature": [
+      [
+       "ARG"
+      ],
+      [],
+      1,
+      1,
+      0
+     ],
+     "derived": "ARRIVE[ARG];DEPART[-];CARD+1;IDS+1-0",
+     "arrived": [
+      "ARG"
+     ],
+     "departed": [],
+     "cardinality": 1,
+     "appeared": 1,
+     "vanished": 0
+    },
+    {
+     "_machine": "GIT",
+     "atom": "GIT_A2",
+     "state_class": "TARGET_ABSENT",
+     "exit": 0,
+     "hand_effect": "REMOVE",
+     "addressable": false,
+     "hand_says_identity_changed": true,
+     "signature": [
+      [],
+      [
+       "PROBE"
+      ],
+      -1,
+      0,
+      1
+     ],
+     "derived": "ARRIVE[-];DEPART[PROBE];CARD-1;IDS+0-1",
+     "arrived": [],
+     "departed": [
+      "PROBE"
+     ],
+     "cardinality": -1,
+     "appeared": 0,
+     "vanished": 1
+    },
+    {
+     "_machine": "GIT",
+     "atom": "GIT_A2",
+     "state_class": "TARGET_EXISTS",
+     "exit": 0,
+     "hand_effect": "REMOVE",
+     "addressable": false,
+     "hand_says_identity_changed": true,
+     "signature": [
+      [],
+      [
+       "PROBE"
+      ],
+      -1,
+      0,
+      1
+     ],
+     "derived": "ARRIVE[-];DEPART[PROBE];CARD-1;IDS+0-1",
+     "arrived": [],
+     "departed": [
+      "PROBE"
+     ],
+     "cardinality": -1,
+     "appeared": 0,
+     "vanished": 1
+    },
+    {
+     "_machine": "GIT",
+     "atom": "GIT_A3",
+     "state_class": "TARGET_ABSENT",
+     "exit": 0,
+     "hand_effect": "REPLACE",
+     "addressable": false,
+     "hand_says_identity_changed": true,
+     "signature": [
+      [
+       "ARG"
+      ],
+      [
+       "PROBE"
+      ],
+      0,
+      1,
+      1
+     ],
+     "derived": "ARRIVE[ARG];DEPART[PROBE];CARD+0;IDS+1-1",
+     "arrived": [
+      "ARG"
+     ],
+     "departed": [
+      "PROBE"
+     ],
+     "cardinality": 0,
+     "appeared": 1,
+     "vanished": 1
+    },
+    {
+     "_machine": "GIT",
+     "atom": "GIT_A3",
+     "state_class": "TARGET_EXISTS",
+     "exit": 0,
+     "hand_effect": "REPLACE",
+     "addressable": false,
+     "hand_says_identity_changed": true,
+     "signature": [
+      [
+       "ARG"
+      ],
+      [
+       "PROBE"
+      ],
+      0,
+      1,
+      1
+     ],
+     "derived": "ARRIVE[ARG];DEPART[PROBE];CARD+0;IDS+1-1",
+     "arrived": [
+      "ARG"
+     ],
+     "departed": [
+      "PROBE"
+     ],
+     "cardinality": 0,
+     "appeared": 1,
+     "vanished": 1
+    },
+    {
+     "_machine": "GIT",
+     "atom": "GIT_A4",
+     "state_class": "TARGET_ABSENT",
+     "exit": 0,
+     "hand_effect": "INERT",
+     "addressable": false,
+     "hand_says_identity_changed": false,
+     "signature": [
+      [],
+      [],
+      0,
+      0,
+      0
+     ],
+     "derived": "ARRIVE[-];DEPART[-];CARD+0;IDS+0-0",
+     "arrived": [],
+     "departed": [],
+     "cardinality": 0,
+     "appeared": 0,
+     "vanished": 0
+    },
+    {
+     "_machine": "GIT",
+     "atom": "GIT_A4",
+     "state_class": "TARGET_EXISTS",
+     "exit": 0,
+     "hand_effect": "INERT",
+     "addressable": false,
+     "hand_says_identity_changed": false,
+     "signature": [
+      [],
+      [],
+      0,
+      0,
+      0
+     ],
+     "derived": "ARRIVE[-];DEPART[-];CARD+0;IDS+0-0",
+     "arrived": [],
+     "departed": [],
+     "cardinality": 0,
+     "appeared": 0,
+     "vanished": 0
+    },
+    {
+     "_machine": "GIT",
+     "atom": "GIT_A5",
+     "state_class": "TARGET_ABSENT",
+     "exit": 0,
+     "hand_effect": "INERT",
+     "addressable": false,
+     "hand_says_identity_changed": false,
+     "signature": [
+      [],
+      [],
+      0,
+      0,
+      0
+     ],
+     "derived": "ARRIVE[-];DEPART[-];CARD+0;IDS+0-0",
+     "arrived": [],
+     "departed": [],
+     "cardinality": 0,
+     "appeared": 0,
+     "vanished": 0
+    },
+    {
+     "_machine": "GIT",
+     "atom": "GIT_A5",
+     "state_class": "TARGET_EXISTS",
+     "exit": 0,
+     "hand_effect": "INERT",
+     "addressable": false,
+     "hand_says_identity_changed": false,
+     "signature": [
+      [],
+      [],
+      0,
+      0,
+      0
+     ],
+     "derived": "ARRIVE[-];DEPART[-];CARD+0;IDS+0-0",
+     "arrived": [],
+     "departed": [],
+     "cardinality": 0,
+     "appeared": 0,
+     "vanished": 0
+    }
+   ],
+   "collisions": {
+    "names": {
+     "PERSIST": 1,
+     "REMOVE": 1,
+     "REPLACE": 1,
+     "INERT": 1
+    },
+    "merged_names": [],
+    "merged": {}
+   },
+   "hand_expressiveness": {
+    "operators": 2,
+    "operators_that_change_identity": 2,
+    "effect_words_the_table_can_use": [
+     "PERSIST"
+    ]
+   },
+   "derived_expressiveness": {
+    "cells_with_an_identity_change": 6,
+    "derived_names": [
+     "ARRIVE[-];DEPART[PROBE];CARD-1;IDS+0-1",
+     "ARRIVE[ARG];DEPART[-];CARD+1;IDS+1-0",
+     "ARRIVE[ARG];DEPART[PROBE];CARD+0;IDS+1-1"
+    ]
+   },
+   "moved": {
+    "machine": "GIT",
+    "atom_that_achieves_the_moved_goal": null
+   }
+  },
+  "SORT": {
+   "cells": [
+    {
+     "_machine": "SORT",
+     "atom": "SRT_A1",
+     "state_class": "TARGET_ABSENT",
+     "exit": 0,
+     "hand_effect": "INERT",
+     "addressable": false,
+     "hand_says_identity_changed": false,
+     "signature": [
+      [],
+      [],
+      0,
+      0,
+      0
+     ],
+     "derived": "ARRIVE[-];DEPART[-];CARD+0;IDS+0-0",
+     "arrived": [],
+     "departed": [],
+     "cardinality": 0,
+     "appeared": 0,
+     "vanished": 0
+    },
+    {
+     "_machine": "SORT",
+     "atom": "SRT_A1",
+     "state_class": "TARGET_EXISTS",
+     "exit": 0,
+     "hand_effect": "INERT",
+     "addressable": false,
+     "hand_says_identity_changed": false,
+     "signature": [
+      [],
+      [],
+      0,
+      0,
+      0
+     ],
+     "derived": "ARRIVE[-];DEPART[-];CARD+0;IDS+0-0",
+     "arrived": [],
+     "departed": [],
+     "cardinality": 0,
+     "appeared": 0,
+     "vanished": 0
+    },
+    {
+     "_machine": "SORT",
+     "atom": "SRT_A2",
+     "state_class": "TARGET_ABSENT",
+     "exit": 0,
+     "hand_effect": "INERT",
+     "addressable": false,
+     "hand_says_identity_changed": false,
+     "signature": [
+      [],
+      [],
+      0,
+      0,
+      0
+     ],
+     "derived": "ARRIVE[-];DEPART[-];CARD+0;IDS+0-0",
+     "arrived": [],
+     "departed": [],
+     "cardinality": 0,
+     "appeared": 0,
+     "vanished": 0
+    },
+    {
+     "_machine": "SORT",
+     "atom": "SRT_A2",
+     "state_class": "TARGET_EXISTS",
+     "exit": 0,
+     "hand_effect": "INERT",
+     "addressable": false,
+     "hand_says_identity_changed": false,
+     "signature": [
+      [],
+      [],
+      0,
+      0,
+      0
+     ],
+     "derived": "ARRIVE[-];DEPART[-];CARD+0;IDS+0-0",
+     "arrived": [],
+     "departed": [],
+     "cardinality": 0,
+     "appeared": 0,
+     "vanished": 0
+    },
+    {
+     "_machine": "SORT",
+     "atom": "SRT_A3",
+     "state_class": "TARGET_ABSENT",
+     "exit": 0,
+     "hand_effect": "UNCLASSIFIED",
+     "addressable": false,
+     "hand_says_identity_changed": true,
+     "signature": [
+      [],
+      [
+       "OTHER",
+       "OTHER",
+       "OTHER"
+      ],
+      -3,
+      0,
+      3
+     ],
+     "derived": "ARRIVE[-];DEPART[OTHER+OTHER+OTHER];CARD-3;IDS+0-3",
+     "arrived": [],
+     "departed": [
+      "OTHER",
+      "OTHER",
+      "OTHER"
+     ],
+     "cardinality": -3,
+     "appeared": 0,
+     "vanished": 3
+    },
+    {
+     "_machine": "SORT",
+     "atom": "SRT_A3",
+     "state_class": "TARGET_EXISTS",
+     "exit": 0,
+     "hand_effect": "UNCLASSIFIED",
+     "addressable": false,
+     "hand_says_identity_changed": true,
+     "signature": [
+      [],
+      [
+       "OTHER",
+       "OTHER",
+       "OTHER"
+      ],
+      -3,
+      0,
+      3
+     ],
+     "derived": "ARRIVE[-];DEPART[OTHER+OTHER+OTHER];CARD-3;IDS+0-3",
+     "arrived": [],
+     "departed": [
+      "OTHER",
+      "OTHER",
+      "OTHER"
+     ],
+     "cardinality": -3,
+     "appeared": 0,
+     "vanished": 3
+    },
+    {
+     "_machine": "SORT",
+     "atom": "SRT_A4",
+     "state_class": "TARGET_ABSENT",
+     "exit": 0,
+     "hand_effect": "INERT",
+     "addressable": false,
+     "hand_says_identity_changed": false,
+     "signature": [
+      [],
+      [],
+      0,
+      0,
+      0
+     ],
+     "derived": "ARRIVE[-];DEPART[-];CARD+0;IDS+0-0",
+     "arrived": [],
+     "departed": [],
+     "cardinality": 0,
+     "appeared": 0,
+     "vanished": 0
+    },
+    {
+     "_machine": "SORT",
+     "atom": "SRT_A4",
+     "state_class": "TARGET_EXISTS",
+     "exit": 0,
+     "hand_effect": "INERT",
+     "addressable": false,
+     "hand_says_identity_changed": false,
+     "signature": [
+      [],
+      [],
+      0,
+      0,
+      0
+     ],
+     "derived": "ARRIVE[-];DEPART[-];CARD+0;IDS+0-0",
+     "arrived": [],
+     "departed": [],
+     "cardinality": 0,
+     "appeared": 0,
+     "vanished": 0
+    }
+   ],
+   "collisions": {
+    "names": {
+     "INERT": 1,
+     "UNCLASSIFIED": 1
+    },
+    "merged_names": [],
+    "merged": {}
+   },
+   "hand_expressiveness": {
+    "operators": 0,
+    "operators_that_change_identity": 0,
+    "effect_words_the_table_can_use": []
+   },
+   "derived_expressiveness": {
+    "cells_with_an_identity_change": 2,
+    "derived_names": [
+     "ARRIVE[-];DEPART[OTHER+OTHER+OTHER];CARD-3;IDS+0-3"
+    ]
+   },
+   "moved": {
+    "machine": "SORT",
+    "atom_that_achieves_the_moved_goal": null
+   }
+  }
+ },
+ "cost": {
+  "seconds": 2.8,
+  "model_calls": 0,
+  "parameters_stored": 0,
+  "network_calls_at_run_time": 0
+ },
+ "limits": [
+  "five CLI machines and their own readers; the derived vocabulary is the quotient of these transitions under these readings",
+  "the planner question is not re-planned here: this round measures what a vocabulary can NAME, and the composer's own receipt measures what it can plan",
+  "the derived name prints the signature; it is canonical and mechanical, not learned",
+  "one probe per (atom, state class), exactly the probe the project already takes"
+ ]
+}
