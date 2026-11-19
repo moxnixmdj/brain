@@ -513,7 +513,7 @@ def measure(root: pathlib.Path, repo_url: str, commit: str | None, seed: int = 7
         row: dict[str, Any] = {
             "action": action.name,
             "purpose": action.purpose,
-            "argv": list(action.argv),
+            "action_argv": list(action.argv),
             "states": len(table),
             "applies": len(positive),
             "does_not_apply": len(negative),

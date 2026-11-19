@@ -114,7 +114,7 @@ def measure_action(action, states, root: pathlib.Path, copy_seconds: float) -> d
     result: dict[str, Any] = {
         "action": action.name,
         "purpose": action.purpose,
-        "argv": list(action.argv),
+        "action_argv": list(action.argv),
         "states": len(table),
         "applies": len(positives),
         "does_not_apply": len(negatives),

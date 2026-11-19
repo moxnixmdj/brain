@@ -35,7 +35,7 @@
   {
    "action": "git_stash_pop",
    "purpose": "restore work that was set aside",
-   "argv": [
+   "action_argv": [
     "git",
     "stash",
     "pop"
@@ -103,7 +103,7 @@
   {
    "action": "git_merge_abort",
    "purpose": "give up an interrupted merge",
-   "argv": [
+   "action_argv": [
     "git",
     "merge",
     "--abort"
@@ -171,7 +171,7 @@
   {
    "action": "git_rebase_abort",
    "purpose": "give up an interrupted rebase",
-   "argv": [
+   "action_argv": [
     "git",
     "rebase",
     "--abort"
@@ -239,7 +239,7 @@
   {
    "action": "git_checkout_feature",
    "purpose": "switch to the feature branch",
-   "argv": [
+   "action_argv": [
     "git",
     "checkout",
     "feature"
@@ -307,7 +307,7 @@
   {
    "action": "git_branch_delete_feature",
    "purpose": "delete a branch that has been merged",
-   "argv": [
+   "action_argv": [
     "git",
     "branch",
     "-d",
@@ -376,7 +376,7 @@
   {
    "action": "git_rm_cached_tracked",
    "purpose": "untrack a file while keeping it on disk",
-   "argv": [
+   "action_argv": [
     "git",
     "rm",
     "--cached",
@@ -446,7 +446,7 @@
   {
    "action": "tar_extract",
    "purpose": "unpack an archive",
-   "argv": [
+   "action_argv": [
     "tar",
     "-xzf",
     "bundle.tgz"
@@ -510,7 +510,7 @@
   {
    "action": "gzip_decompress",
    "purpose": "decompress a file",
-   "argv": [
+   "action_argv": [
     "gzip",
     "-d",
     "payload.gz"
@@ -574,7 +574,7 @@
   {
    "action": "chmod_exec",
    "purpose": "make a file executable",
-   "argv": [
+   "action_argv": [
     "chmod",
     "+x",
     "script.sh"
@@ -641,7 +641,7 @@
   {
    "action": "patch_apply",
    "purpose": "apply a change that is shipped as a patch",
-   "argv": [
+   "action_argv": [
     "patch",
     "--batch",
     "--forward",
