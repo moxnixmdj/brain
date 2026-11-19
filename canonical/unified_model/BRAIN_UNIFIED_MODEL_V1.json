@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 554,
+  "knowledge_documents": 555,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 7131,
+  "research_index_records": 7133,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 452,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "2e4ceaec4dc5c385396929dda8da0a6ce096e1f9d0fc918beaa90e2fd69a86ae"
+  "value": "2a3134a043a2f3911e7ae9253a7e9d04eda82c16b63dadfbba35f42378fcbf55"
  },
  "engines": [
   {
@@ -47402,6 +47402,83 @@
     "evaluation",
     "lookup",
     "not"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 8536,
+   "headings": [
+    "Breadth buys what repetition cannot",
+    "1. First, a retraction of my own last number",
+    "2. The claim under test",
+    "3. Results",
+    "4. What is false, and what it costs",
+    "5. The criteria, as written before the receipt run",
+    "6. The law",
+    "7. What is real and what is not",
+    "8. The single bottleneck",
+    "9. Next step, pre-registered"
+   ],
+   "kind": "DOCUMENT",
+   "path": "BREADTH_BUYS_WHAT_REPETITION_CANNOT_20261201_V1.md",
+   "sha256": "4d1450be536e9d105b5b322c94d965fed1016ee4e88a8d53dfb898803761c9dd",
+   "summary": "**2026-12-01 · branch `arena/791f90af-brain` · receipt `canonical/verification/BREADTH_BUYS_WHAT_REPETITION_CANNOT_20261201_V1.json`**",
+   "terms": {
+    "555": 5,
+    "622": 6,
+    "79": 4,
+    "after": 6,
+    "any": 7,
+    "behaviour": 6,
+    "behaviours": 8,
+    "breadth": 9,
+    "claim": 4,
+    "class": 22,
+    "count": 5,
+    "environment": 5,
+    "environments": 8,
+    "every": 5,
+    "exactly": 4,
+    "experience": 5,
+    "false": 7,
+    "first": 5,
+    "goal": 15,
+    "log": 5,
+    "machine": 11,
+    "machines": 5,
+    "met": 6,
+    "minimal": 7,
+    "model": 4,
+    "my": 4,
+    "never": 5,
+    "no": 11,
+    "not": 17,
+    "one": 16,
+    "only": 5,
+    "over": 4,
+    "questions": 5,
+    "residual": 13,
+    "run": 8,
+    "runs": 10,
+    "same": 5,
+    "second": 6,
+    "sentence": 6,
+    "sentences": 6,
+    "statement": 6,
+    "statements": 9,
+    "tarball": 5,
+    "than": 5,
+    "third": 5,
+    "three": 8,
+    "two": 7,
+    "user": 12
+   },
+   "title": "Breadth buys what repetition cannot",
+   "title_terms": [
+    "breadth",
+    "buys",
+    "cannot",
+    "repetition"
    ]
   },
   {
@@ -88168,10 +88245,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1356,
+  "included_source_count": 1357,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "5cd9fc3b1781f950ae6f55122b64c68dbb21f86d6059c9141cf3b5035624c641"
+  "source_tree_digest": "984dcbae1c8788fcb8bcdfcc7abf2bdb610aef2522f095ccae86350ad9dc3805"
  },
  "research_index": [
   {
@@ -159125,6 +159202,25 @@
     "runner": 1,
     "v1": 1,
     "verification": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "2026-12-01",
+   "id": "research:canonical/verification/BREADTH_BUYS_WHAT_REPETITION_CANNOT_20261201_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/BREADTH_BUYS_WHAT_REPETITION_CANNOT_20261201_V1.json",
+   "schema": "BRAIN_BREADTH_BUYS_WHAT_REPETITION_CANNOT_V1",
+   "sha256": "17a258f45cd5979ab223cd0d2f23c02cfc78ee9095fb7a35a7b3082996152c06",
+   "status": "",
+   "terms": {
+    "20261201": 1,
+    "breadth": 1,
+    "buys": 1,
+    "cannot": 1,
+    "repetition": 1,
+    "v1": 1
    }
   },
   {
@@ -242769,6 +242865,51 @@
     "stated_git_operations": 1,
     "v1": 1,
     "while": 1
+   }
+  },
+  {
+   "action_id": "BREADTH_BUYS_WHAT_REPETITION_CANNOT_20261201_V1",
+   "capability": false,
+   "date": "2026-12-01",
+   "id": "research:canonical/action_intents/BREADTH_BUYS_WHAT_REPETITION_CANNOT_20261201_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/BREADTH_BUYS_WHAT_REPETITION_CANNOT_20261201_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "6afb148f5e5feb0fd178775fe4dac4636176317823ea494416b179f299d6d656",
+   "status": "PROPOSED__PRODUCER_MEASURED__BREADTH_PRICED_AND_SATURATED__RESIDUAL_ONE_QUESTION",
+   "terms": {
+    "2.09": 2,
+    "20261201": 1,
+    "38": 2,
+    "57.1": 2,
+    "622": 2,
+    "adding": 2,
+    "after": 2,
+    "behaviours": 4,
+    "breadth": 2,
+    "buys": 2,
+    "cannot": 2,
+    "class": 6,
+    "environment": 3,
+    "goal": 3,
+    "log2": 2,
+    "machine": 2,
+    "mean": 2,
+    "minimal": 3,
+    "nothing": 2,
+    "one": 2,
+    "only": 3,
+    "pay": 2,
+    "pinned": 2,
+    "questions": 2,
+    "remainder": 2,
+    "removes": 2,
+    "repetition": 2,
+    "residual": 2,
+    "statement": 2,
+    "third": 2,
+    "unique": 2,
+    "user": 2
    }
   },
   {
