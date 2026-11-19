@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "2938bc87160fab7620ebd9c0be19d84b928807b4977c33605a2fe97054fa4a32"
+  "value": "0016f3b95b5382595ec83c24711cb64afdd4374a062e88f6db5dba3bcade629a"
  },
  "engines": [
   {
@@ -70552,7 +70552,7 @@
   },
   {
    "authority": "NOT_A_LAW",
-   "bytes": 15763,
+   "bytes": 16396,
    "headings": [
     "The single bottleneck — admission by evidence, closed by proof — 19 November 2026",
     "1. The claim is five transitions, and four of them fail",
@@ -70570,28 +70570,28 @@
    ],
    "kind": "DOCUMENT",
    "path": "THE_SINGLE_BOTTLENECK_20261119_V1.md",
-   "sha256": "78e2cc8d265c1e6e27b079a7db74514e0219f6c6e8bedf7e1041255de271d80b",
+   "sha256": "358e30ae4192bcd5b1d91682b0557f7e7bae45ebc93f3190c67262d6ec2e3bf5",
    "summary": "**Branch:** `arena/2e68df35-brain` (base `7a05986d` of `main`). **Authority: NONE.** Producer-run sandbox measurement and code change on this branch only. `truth.achieved` stays `false`. No capability registered, no family flipped, no base-model/LLM weights updated, no independent verifier claimed. No model was called, no network was used for any measurement.",
    "terms": {
-    "100": 7,
+    "100": 8,
     "2026": 6,
     "action": 5,
     "actions": 5,
-    "admission": 10,
+    "admission": 11,
     "all": 6,
-    "any": 5,
+    "any": 6,
     "before": 5,
-    "branch": 8,
+    "branch": 9,
     "canonical": 9,
     "coverage": 5,
     "each": 5,
     "equivalence": 9,
     "every": 13,
     "exactly": 8,
-    "exists": 5,
+    "exists": 6,
     "four": 5,
     "gate": 7,
-    "held-out": 7,
+    "held-out": 8,
     "instant": 5,
     "judge": 15,
     "knowledge": 5,
@@ -70599,11 +70599,11 @@
     "lesson": 5,
     "measured": 15,
     "more": 9,
-    "most": 5,
-    "no": 20,
-    "not": 30,
+    "new": 6,
+    "no": 22,
+    "not": 31,
     "now": 6,
-    "one": 19,
+    "one": 18,
     "only": 9,
     "page": 6,
     "pages": 7,
@@ -70615,7 +70615,7 @@
     "same": 6,
     "tests": 12,
     "trace": 8,
-    "ungated": 7,
+    "ungated": 6,
     "verified": 7,
     "vs": 8,
     "witness": 7,
@@ -89373,7 +89373,7 @@
   "included_source_count": 1371,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "6bf67a4648d036f2f3b9060165852846f815733f95261dc14e998ac491cdb547"
+  "source_tree_digest": "17ca0ac4fdcdc615f50a784ed91843ce1150243c776ea7e2279b0fb8862ab828"
  },
  "research_index": [
   {
