@@ -1,0 +1,1135 @@
+{
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "cost": {
+  "executions": 486,
+  "model_calls": 0,
+  "network_calls_at_run_time": 0,
+  "parameters_stored": 0,
+  "seconds": 4.6
+ },
+ "date": "2026-11-19",
+ "declared_acceptance_before_the_receipt_run": {
+  "K1": "at least one action has a survivor of the one-success schedule that mispredicts a held-out state",
+  "K2": "every action's varied-success schedule predicts held-out outcomes at 1.0 and has strictly fewer survivors",
+  "K3": "the reduction is the irrelevance evidence carried by successes",
+  "K4": "the executions of the schedule are fewer than 2^n, and the certificate's bound is quoted, not re-derived",
+  "K5": "zero model calls, parameters, network"
+ },
+ "limits": [
+  "one machine, nine actions, 27 states, 17 facts; a census of these",
+  "the hypothesis space is required-fact conjunctions without polarity; with polarity the count is 3^n and the argument is unchanged because nothing enumerates either",
+  "the pool's facts are correlated (a_is_dir and a_exists), so minimal survivors can be several; the receipt counts them instead of picking one",
+  "identification is up to the facts the pool varies: every fact that never varies is named in K3 and is permanently unidentifiable from this data",
+  "the held-out partition is small, so an accuracy of 1.0 is exact on eight states per action, not on the world",
+  "this does not price exploration: it prices the schedule once the states exist, and finding the states that vary a fact is the remaining work"
+ ],
+ "mode": "MEASURE_WHETHER_THE_WALL_IS_THE_HYPOTHESIS_COUNT_OR_THE_COVERAGE_OF_THE_STATES",
+ "pool": {
+  "facts": [
+   "a_exists",
+   "a_is_dir",
+   "dir_exists",
+   "dir_empty",
+   "nodir_exists",
+   "sub_exists",
+   "link_absent",
+   "xgz_exists",
+   "xgz_valid",
+   "sorted_exists",
+   "sorted_sorted",
+   "patch_applies",
+   "repo_is_git",
+   "stash_present",
+   "tree_clean",
+   "btgz_exists",
+   "btgz_valid"
+  ],
+  "faults": 18,
+  "held_out": 12,
+  "seen": 24,
+  "states": 36
+ },
+ "rows": [
+  {
+   "A_decides_but_wrongly_somewhere": false,
+   "A_is_undecided_or_wrong_on_a_held_out_state": true,
+   "action": "cp_a_into_dir",
+   "action_argv": [
+    "cp",
+    "files/a.txt",
+    "files/dir/"
+   ],
+   "coordinates": [
+    "a_exists",
+    "dir_exists"
+   ],
+   "coverage": {
+    "fact_vector_is_sound": true,
+    "facts_that_vary_off_sample": [
+     "a_exists",
+     "dir_exists",
+     "dir_empty",
+     "nodir_exists",
+     "sub_exists",
+     "link_absent",
+     "xgz_exists",
+     "xgz_valid",
+     "sorted_exists",
+     "sorted_sorted",
+     "patch_applies",
+     "btgz_valid"
+    ],
+    "facts_true_in_every_seen_success": [
+     "a_exists",
+     "dir_exists",
+     "repo_is_git"
+    ],
+    "reading": "a fact that is true in every success and varies off-sample can be conjoined to the precondition without contradicting any observation, so the survivor set is undecided exactly there",
+    "seen_successes": 18,
+    "states_the_fact_vector_misdescribes": [],
+    "unfalsifiable_and_mattering": []
+   },
+   "failures_seen": 6,
+   "held_out": 12,
+   "irrelevance_evidence": {
+    "facts_on_which_two_seen_successes_disagree": 13
+   },
+   "schedule_A": {
+    "behaviour_on_held_out": {
+     "accuracy_of_the_set": 0.3333,
+     "accuracy_where_decided": 1.0,
+     "held_out": 12,
+     "unanimous_and_right": 4,
+     "unanimous_and_wrong": 0,
+     "undecided": 8
+    },
+    "executions": 3,
+    "minimal_survivors": 4,
+    "name": "one success + the two nearest refusals",
+    "per_hypothesis_accuracy_range": [
+     0.3333,
+     1.0
+    ],
+    "survivors": 4608
+   },
+   "schedule_B": {
+    "behaviour_on_held_out": {
+     "accuracy_of_the_set": 1.0,
+     "accuracy_where_decided": 1.0,
+     "held_out": 12,
+     "unanimous_and_right": 12,
+     "unanimous_and_wrong": 0,
+     "undecided": 0
+    },
+    "executions": 20,
+    "minimal_survivors": 1,
+    "name": "every seen success + the same two refusals",
+    "per_hypothesis_accuracy_range": [
+     1.0,
+     1.0
+    ],
+    "survivors": 2
+   },
+   "successes_seen": 18,
+   "the_true_precondition_is_among_the_minimal": true
+  },
+  {
+   "A_decides_but_wrongly_somewhere": false,
+   "A_is_undecided_or_wrong_on_a_held_out_state": true,
+   "action": "rmdir_dir",
+   "action_argv": [
+    "rmdir",
+    "files/dir"
+   ],
+   "coordinates": [
+    "dir_exists",
+    "dir_empty"
+   ],
+   "coverage": {
+    "fact_vector_is_sound": true,
+    "facts_that_vary_off_sample": [
+     "a_exists",
+     "dir_exists",
+     "dir_empty",
+     "nodir_exists",
+     "sub_exists",
+     "link_absent",
+     "xgz_exists",
+     "xgz_valid",
+     "sorted_exists",
+     "sorted_sorted",
+     "patch_applies",
+     "btgz_valid"
+    ],
+    "facts_true_in_every_seen_success": [
+     "dir_exists",
+     "dir_empty",
+     "repo_is_git"
+    ],
+    "reading": "a fact that is true in every success and varies off-sample can be conjoined to the precondition without contradicting any observation, so the survivor set is undecided exactly there",
+    "seen_successes": 22,
+    "states_the_fact_vector_misdescribes": [],
+    "unfalsifiable_and_mattering": []
+   },
+   "failures_seen": 2,
+   "held_out": 12,
+   "irrelevance_evidence": {
+    "facts_on_which_two_seen_successes_disagree": 14
+   },
+   "schedule_A": {
+    "behaviour_on_held_out": {
+     "accuracy_of_the_set": 0.25,
+     "accuracy_where_decided": 1.0,
+     "held_out": 12,
+     "unanimous_and_right": 3,
+     "unanimous_and_wrong": 0,
+     "undecided": 9
+    },
+    "executions": 3,
+    "minimal_survivors": 2,
+    "name": "one success + the two nearest refusals",
+    "per_hypothesis_accuracy_range": [
+     0.25,
+     1.0
+    ],
+    "survivors": 5120
+   },
+   "schedule_B": {
+    "behaviour_on_held_out": {
+     "accuracy_of_the_set": 1.0,
+     "accuracy_where_decided": 1.0,
+     "held_out": 12,
+     "unanimous_and_right": 12,
+     "unanimous_and_wrong": 0,
+     "undecided": 0
+    },
+    "executions": 24,
+    "minimal_survivors": 1,
+    "name": "every seen success + the same two refusals",
+    "per_hypothesis_accuracy_range": [
+     1.0,
+     1.0
+    ],
+    "survivors": 4
+   },
+   "successes_seen": 22,
+   "the_true_precondition_is_among_the_minimal": false
+  },
+  {
+   "A_decides_but_wrongly_somewhere": false,
+   "A_is_undecided_or_wrong_on_a_held_out_state": true,
+   "action": "gzip_x",
+   "action_argv": [
+    "gzip",
+    "-d",
+    "files/x.gz"
+   ],
+   "coordinates": [
+    "xgz_exists",
+    "xgz_valid"
+   ],
+   "coverage": {
+    "fact_vector_is_sound": true,
+    "facts_that_vary_off_sample": [
+     "a_exists",
+     "dir_exists",
+     "dir_empty",
+     "nodir_exists",
+     "sub_exists",
+     "link_absent",
+     "xgz_exists",
+     "xgz_valid",
+     "sorted_exists",
+     "sorted_sorted",
+     "patch_applies",
+     "btgz_valid"
+    ],
+    "facts_true_in_every_seen_success": [
+     "xgz_exists",
+     "xgz_valid",
+     "repo_is_git"
+    ],
+    "reading": "a fact that is true in every success and varies off-sample can be conjoined to the precondition without contradicting any observation, so the survivor set is undecided exactly there",
+    "seen_successes": 18,
+    "states_the_fact_vector_misdescribes": [],
+    "unfalsifiable_and_mattering": []
+   },
+   "failures_seen": 6,
+   "held_out": 12,
+   "irrelevance_evidence": {
+    "facts_on_which_two_seen_successes_disagree": 14
+   },
+   "schedule_A": {
+    "behaviour_on_held_out": {
+     "accuracy_of_the_set": 0.3333,
+     "accuracy_where_decided": 1.0,
+     "held_out": 12,
+     "unanimous_and_right": 4,
+     "unanimous_and_wrong": 0,
+     "undecided": 8
+    },
+    "executions": 3,
+    "minimal_survivors": 1,
+    "name": "one success + the two nearest refusals",
+    "per_hypothesis_accuracy_range": [
+     0.3333,
+     1.0
+    ],
+    "survivors": 4096
+   },
+   "schedule_B": {
+    "behaviour_on_held_out": {
+     "accuracy_of_the_set": 1.0,
+     "accuracy_where_decided": 1.0,
+     "held_out": 12,
+     "unanimous_and_right": 12,
+     "unanimous_and_wrong": 0,
+     "undecided": 0
+    },
+    "executions": 20,
+    "minimal_survivors": 1,
+    "name": "every seen success + the same two refusals",
+    "per_hypothesis_accuracy_range": [
+     1.0,
+     1.0
+    ],
+    "survivors": 4
+   },
+   "successes_seen": 18,
+   "the_true_precondition_is_among_the_minimal": false
+  },
+  {
+   "A_decides_but_wrongly_somewhere": false,
+   "A_is_undecided_or_wrong_on_a_held_out_state": true,
+   "action": "sort_c",
+   "action_argv": [
+    "sort",
+    "-c",
+    "files/sorted.txt"
+   ],
+   "coordinates": [
+    "sorted_exists",
+    "sorted_sorted"
+   ],
+   "coverage": {
+    "fact_vector_is_sound": true,
+    "facts_that_vary_off_sample": [
+     "a_exists",
+     "dir_exists",
+     "dir_empty",
+     "nodir_exists",
+     "sub_exists",
+     "link_absent",
+     "xgz_exists",
+     "xgz_valid",
+     "sorted_exists",
+     "sorted_sorted",
+     "patch_applies",
+     "btgz_valid"
+    ],
+    "facts_true_in_every_seen_success": [
+     "sorted_exists",
+     "sorted_sorted",
+     "repo_is_git"
+    ],
+    "reading": "a fact that is true in every success and varies off-sample can be conjoined to the precondition without contradicting any observation, so the survivor set is undecided exactly there",
+    "seen_successes": 21,
+    "states_the_fact_vector_misdescribes": [],
+    "unfalsifiable_and_mattering": []
+   },
+   "failures_seen": 3,
+   "held_out": 12,
+   "irrelevance_evidence": {
+    "facts_on_which_two_seen_successes_disagree": 14
+   },
+   "schedule_A": {
+    "behaviour_on_held_out": {
+     "accuracy_of_the_set": 0.25,
+     "accuracy_where_decided": 1.0,
+     "held_out": 12,
+     "unanimous_and_right": 3,
+     "unanimous_and_wrong": 0,
+     "undecided": 9
+    },
+    "executions": 3,
+    "minimal_survivors": 2,
+    "name": "one success + the two nearest refusals",
+    "per_hypothesis_accuracy_range": [
+     0.25,
+     1.0
+    ],
+    "survivors": 5120
+   },
+   "schedule_B": {
+    "behaviour_on_held_out": {
+     "accuracy_of_the_set": 1.0,
+     "accuracy_where_decided": 1.0,
+     "held_out": 12,
+     "unanimous_and_right": 12,
+     "unanimous_and_wrong": 0,
+     "undecided": 0
+    },
+    "executions": 23,
+    "minimal_survivors": 1,
+    "name": "every seen success + the same two refusals",
+    "per_hypothesis_accuracy_range": [
+     1.0,
+     1.0
+    ],
+    "survivors": 4
+   },
+   "successes_seen": 21,
+   "the_true_precondition_is_among_the_minimal": false
+  },
+  {
+   "A_decides_but_wrongly_somewhere": false,
+   "A_is_undecided_or_wrong_on_a_held_out_state": true,
+   "action": "ln_link",
+   "action_argv": [
+    "ln",
+    "-s",
+    "files/a.txt",
+    "files/sub/link"
+   ],
+   "coordinates": [
+    "sub_exists",
+    "link_absent"
+   ],
+   "coverage": {
+    "fact_vector_is_sound": true,
+    "facts_that_vary_off_sample": [
+     "a_exists",
+     "dir_exists",
+     "dir_empty",
+     "nodir_exists",
+     "sub_exists",
+     "link_absent",
+     "xgz_exists",
+     "xgz_valid",
+     "sorted_exists",
+     "sorted_sorted",
+     "patch_applies",
+     "btgz_valid"
+    ],
+    "facts_true_in_every_seen_success": [
+     "dir_exists",
+     "dir_empty",
+     "sub_exists",
+     "link_absent",
+     "sorted_exists",
+     "sorted_sorted",
+     "repo_is_git",
+     "stash_present",
+     "tree_clean",
+     "btgz_exists",
+     "btgz_valid"
+    ],
+    "reading": "a fact that is true in every success and varies off-sample can be conjoined to the precondition without contradicting any observation, so the survivor set is undecided exactly there",
+    "seen_successes": 3,
+    "states_the_fact_vector_misdescribes": [],
+    "unfalsifiable_and_mattering": []
+   },
+   "failures_seen": 21,
+   "held_out": 12,
+   "irrelevance_evidence": {
+    "facts_on_which_two_seen_successes_disagree": 4
+   },
+   "schedule_A": {
+    "behaviour_on_held_out": {
+     "accuracy_of_the_set": 0.9167,
+     "accuracy_where_decided": 1.0,
+     "held_out": 12,
+     "unanimous_and_right": 11,
+     "unanimous_and_wrong": 0,
+     "undecided": 1
+    },
+    "executions": 3,
+    "minimal_survivors": 1,
+    "name": "one success + the two nearest refusals",
+    "per_hypothesis_accuracy_range": [
+     0.9167,
+     1.0
+    ],
+    "survivors": 4096
+   },
+   "schedule_B": {
+    "behaviour_on_held_out": {
+     "accuracy_of_the_set": 0.9167,
+     "accuracy_where_decided": 1.0,
+     "held_out": 12,
+     "unanimous_and_right": 11,
+     "unanimous_and_wrong": 0,
+     "undecided": 1
+    },
+    "executions": 5,
+    "minimal_survivors": 1,
+    "name": "every seen success + the same two refusals",
+    "per_hypothesis_accuracy_range": [
+     0.9167,
+     1.0
+    ],
+    "survivors": 1024
+   },
+   "successes_seen": 3,
+   "the_true_precondition_is_among_the_minimal": false
+  },
+  {
+   "A_decides_but_wrongly_somewhere": false,
+   "A_is_undecided_or_wrong_on_a_held_out_state": true,
+   "action": "git_stash_pop",
+   "action_argv": [
+    "git",
+    "-c",
+    "user.email=a@b.c",
+    "-c",
+    "user.name=t",
+    "-c",
+    "commit.gpgsign=false",
+    "stash",
+    "pop"
+   ],
+   "coordinates": [
+    "stash_present",
+    "tree_clean"
+   ],
+   "coverage": {
+    "fact_vector_is_sound": true,
+    "facts_that_vary_off_sample": [
+     "a_exists",
+     "dir_exists",
+     "dir_empty",
+     "nodir_exists",
+     "sub_exists",
+     "link_absent",
+     "xgz_exists",
+     "xgz_valid",
+     "sorted_exists",
+     "sorted_sorted",
+     "patch_applies",
+     "btgz_valid"
+    ],
+    "facts_true_in_every_seen_success": [
+     "repo_is_git",
+     "stash_present",
+     "tree_clean"
+    ],
+    "reading": "a fact that is true in every success and varies off-sample can be conjoined to the precondition without contradicting any observation, so the survivor set is undecided exactly there",
+    "seen_successes": 19,
+    "states_the_fact_vector_misdescribes": [],
+    "unfalsifiable_and_mattering": []
+   },
+   "failures_seen": 5,
+   "held_out": 12,
+   "irrelevance_evidence": {
+    "facts_on_which_two_seen_successes_disagree": 14
+   },
+   "schedule_A": {
+    "behaviour_on_held_out": {
+     "accuracy_of_the_set": 0.0,
+     "accuracy_where_decided": 0.0,
+     "held_out": 12,
+     "unanimous_and_right": 0,
+     "unanimous_and_wrong": 0,
+     "undecided": 12
+    },
+    "executions": 3,
+    "minimal_survivors": 2,
+    "name": "one success + the two nearest refusals",
+    "per_hypothesis_accuracy_range": [
+     0.0,
+     1.0
+    ],
+    "survivors": 5120
+   },
+   "schedule_B": {
+    "behaviour_on_held_out": {
+     "accuracy_of_the_set": 1.0,
+     "accuracy_where_decided": 1.0,
+     "held_out": 12,
+     "unanimous_and_right": 12,
+     "unanimous_and_wrong": 0,
+     "undecided": 0
+    },
+    "executions": 21,
+    "minimal_survivors": 1,
+    "name": "every seen success + the same two refusals",
+    "per_hypothesis_accuracy_range": [
+     1.0,
+     1.0
+    ],
+    "survivors": 2
+   },
+   "successes_seen": 19,
+   "the_true_precondition_is_among_the_minimal": true
+  },
+  {
+   "A_decides_but_wrongly_somewhere": false,
+   "A_is_undecided_or_wrong_on_a_held_out_state": true,
+   "action": "patch_apply",
+   "action_argv": [
+    "patch",
+    "-p1",
+    "--forward",
+    "--no-backup-if-mismatch",
+    "-i",
+    "files/p.patch"
+   ],
+   "coordinates": [
+    "patch_applies"
+   ],
+   "coverage": {
+    "fact_vector_is_sound": true,
+    "facts_that_vary_off_sample": [
+     "a_exists",
+     "dir_exists",
+     "dir_empty",
+     "nodir_exists",
+     "sub_exists",
+     "link_absent",
+     "xgz_exists",
+     "xgz_valid",
+     "sorted_exists",
+     "sorted_sorted",
+     "patch_applies",
+     "btgz_valid"
+    ],
+    "facts_true_in_every_seen_success": [
+     "a_exists",
+     "patch_applies",
+     "repo_is_git"
+    ],
+    "reading": "a fact that is true in every success and varies off-sample can be conjoined to the precondition without contradicting any observation, so the survivor set is undecided exactly there",
+    "seen_successes": 18,
+    "states_the_fact_vector_misdescribes": [],
+    "unfalsifiable_and_mattering": []
+   },
+   "failures_seen": 6,
+   "held_out": 12,
+   "irrelevance_evidence": {
+    "facts_on_which_two_seen_successes_disagree": 13
+   },
+   "schedule_A": {
+    "behaviour_on_held_out": {
+     "accuracy_of_the_set": 0.3333,
+     "accuracy_where_decided": 1.0,
+     "held_out": 12,
+     "unanimous_and_right": 4,
+     "unanimous_and_wrong": 0,
+     "undecided": 8
+    },
+    "executions": 3,
+    "minimal_survivors": 1,
+    "name": "one success + the two nearest refusals",
+    "per_hypothesis_accuracy_range": [
+     0.3333,
+     1.0
+    ],
+    "survivors": 4096
+   },
+   "schedule_B": {
+    "behaviour_on_held_out": {
+     "accuracy_of_the_set": 1.0,
+     "accuracy_where_decided": 1.0,
+     "held_out": 12,
+     "unanimous_and_right": 12,
+     "unanimous_and_wrong": 0,
+     "undecided": 0
+    },
+    "executions": 20,
+    "minimal_survivors": 1,
+    "name": "every seen success + the same two refusals",
+    "per_hypothesis_accuracy_range": [
+     1.0,
+     1.0
+    ],
+    "survivors": 4
+   },
+   "successes_seen": 18,
+   "the_true_precondition_is_among_the_minimal": true
+  },
+  {
+   "A_decides_but_wrongly_somewhere": false,
+   "A_is_undecided_or_wrong_on_a_held_out_state": true,
+   "action": "mkdir_nodir_sub",
+   "action_argv": [
+    "mkdir",
+    "files/nodir/sub"
+   ],
+   "coordinates": [
+    "nodir_exists"
+   ],
+   "coverage": {
+    "fact_vector_is_sound": true,
+    "facts_that_vary_off_sample": [
+     "a_exists",
+     "dir_exists",
+     "dir_empty",
+     "nodir_exists",
+     "sub_exists",
+     "link_absent",
+     "xgz_exists",
+     "xgz_valid",
+     "sorted_exists",
+     "sorted_sorted",
+     "patch_applies",
+     "btgz_valid"
+    ],
+    "facts_true_in_every_seen_success": [
+     "dir_exists",
+     "dir_empty",
+     "nodir_exists",
+     "link_absent",
+     "xgz_exists",
+     "xgz_valid",
+     "repo_is_git",
+     "stash_present",
+     "tree_clean",
+     "btgz_exists",
+     "btgz_valid"
+    ],
+    "reading": "a fact that is true in every success and varies off-sample can be conjoined to the precondition without contradicting any observation, so the survivor set is undecided exactly there",
+    "seen_successes": 3,
+    "states_the_fact_vector_misdescribes": [],
+    "unfalsifiable_and_mattering": [
+     "dir_empty",
+     "dir_exists",
+     "xgz_valid"
+    ]
+   },
+   "failures_seen": 21,
+   "held_out": 12,
+   "irrelevance_evidence": {
+    "facts_on_which_two_seen_successes_disagree": 4
+   },
+   "schedule_A": {
+    "behaviour_on_held_out": {
+     "accuracy_of_the_set": 0.8333,
+     "accuracy_where_decided": 1.0,
+     "held_out": 12,
+     "unanimous_and_right": 10,
+     "unanimous_and_wrong": 0,
+     "undecided": 2
+    },
+    "executions": 3,
+    "minimal_survivors": 1,
+    "name": "one success + the two nearest refusals",
+    "per_hypothesis_accuracy_range": [
+     0.8333,
+     1.0
+    ],
+    "survivors": 16384
+   },
+   "schedule_B": {
+    "behaviour_on_held_out": {
+     "accuracy_of_the_set": 0.8333,
+     "accuracy_where_decided": 1.0,
+     "held_out": 12,
+     "unanimous_and_right": 10,
+     "unanimous_and_wrong": 0,
+     "undecided": 2
+    },
+    "executions": 5,
+    "minimal_survivors": 1,
+    "name": "every seen success + the same two refusals",
+    "per_hypothesis_accuracy_range": [
+     0.8333,
+     1.0
+    ],
+    "survivors": 1024
+   },
+   "successes_seen": 3,
+   "the_true_precondition_is_among_the_minimal": true
+  },
+  {
+   "A_decides_but_wrongly_somewhere": false,
+   "A_is_undecided_or_wrong_on_a_held_out_state": true,
+   "action": "tar_x",
+   "action_argv": [
+    "tar",
+    "-xzf",
+    "files/b.tar.gz"
+   ],
+   "coordinates": [
+    "btgz_exists",
+    "btgz_valid"
+   ],
+   "coverage": {
+    "fact_vector_is_sound": true,
+    "facts_that_vary_off_sample": [
+     "a_exists",
+     "dir_exists",
+     "dir_empty",
+     "nodir_exists",
+     "sub_exists",
+     "link_absent",
+     "xgz_exists",
+     "xgz_valid",
+     "sorted_exists",
+     "sorted_sorted",
+     "patch_applies",
+     "btgz_valid"
+    ],
+    "facts_true_in_every_seen_success": [
+     "repo_is_git",
+     "btgz_exists",
+     "btgz_valid"
+    ],
+    "reading": "a fact that is true in every success and varies off-sample can be conjoined to the precondition without contradicting any observation, so the survivor set is undecided exactly there",
+    "seen_successes": 22,
+    "states_the_fact_vector_misdescribes": [],
+    "unfalsifiable_and_mattering": []
+   },
+   "failures_seen": 2,
+   "held_out": 12,
+   "irrelevance_evidence": {
+    "facts_on_which_two_seen_successes_disagree": 14
+   },
+   "schedule_A": {
+    "behaviour_on_held_out": {
+     "accuracy_of_the_set": 0.1667,
+     "accuracy_where_decided": 1.0,
+     "held_out": 12,
+     "unanimous_and_right": 2,
+     "unanimous_and_wrong": 0,
+     "undecided": 10
+    },
+    "executions": 3,
+    "minimal_survivors": 2,
+    "name": "one success + the two nearest refusals",
+    "per_hypothesis_accuracy_range": [
+     0.1667,
+     1.0
+    ],
+    "survivors": 6144
+   },
+   "schedule_B": {
+    "behaviour_on_held_out": {
+     "accuracy_of_the_set": 0.9167,
+     "accuracy_where_decided": 1.0,
+     "held_out": 12,
+     "unanimous_and_right": 11,
+     "unanimous_and_wrong": 0,
+     "undecided": 1
+    },
+    "executions": 24,
+    "minimal_survivors": 2,
+    "name": "every seen success + the same two refusals",
+    "per_hypothesis_accuracy_range": [
+     0.9167,
+     1.0
+    ],
+    "survivors": 6
+   },
+   "successes_seen": 22,
+   "the_true_precondition_is_among_the_minimal": false
+  }
+ ],
+ "schema": "BRAIN_COVERAGE_IS_THE_BOTTLENECK_NOT_HYPOTHESES_V1",
+ "verdict": {
+  "K1_one_success_plus_refusals_leaves_a_rule_that_cannot_decide_off_sample": {
+   "MET": true,
+   "accuracy_of_the_set_under_A": {
+    "cp_a_into_dir": 0.3333,
+    "git_stash_pop": 0.0,
+    "gzip_x": 0.3333,
+    "ln_link": 0.9167,
+    "mkdir_nodir_sub": 0.8333,
+    "patch_apply": 0.3333,
+    "rmdir_dir": 0.25,
+    "sort_c": 0.25,
+    "tar_x": 0.1667
+   },
+   "decides_but_wrongly_under_A": {
+    "cp_a_into_dir": 0,
+    "git_stash_pop": 0,
+    "gzip_x": 0,
+    "ln_link": 0,
+    "mkdir_nodir_sub": 0,
+    "patch_apply": 0,
+    "rmdir_dir": 0,
+    "sort_c": 0,
+    "tar_x": 0
+   },
+   "maximum_accuracy_of_the_set": 0.9167,
+   "per_hypothesis_accuracy_range_under_A": {
+    "cp_a_into_dir": [
+     0.3333,
+     1.0
+    ],
+    "git_stash_pop": [
+     0.0,
+     1.0
+    ],
+    "gzip_x": [
+     0.3333,
+     1.0
+    ],
+    "ln_link": [
+     0.9167,
+     1.0
+    ],
+    "mkdir_nodir_sub": [
+     0.8333,
+     1.0
+    ],
+    "patch_apply": [
+     0.3333,
+     1.0
+    ],
+    "rmdir_dir": [
+     0.25,
+     1.0
+    ],
+    "sort_c": [
+     0.25,
+     1.0
+    ],
+    "tar_x": [
+     0.1667,
+     1.0
+    ]
+   },
+   "the_metric": "a survivor set is a rule only where it is unanimous; undecided is measured as undecided, not scored as correct",
+   "undecided_under_A": {
+    "cp_a_into_dir": 8,
+    "git_stash_pop": 12,
+    "gzip_x": 8,
+    "ln_link": 1,
+    "mkdir_nodir_sub": 2,
+    "patch_apply": 8,
+    "rmdir_dir": 9,
+    "sort_c": 9,
+    "tar_x": 10
+   }
+  },
+  "K2_varied_successes_make_identification_exact_on_held_out": {
+   "MET": true,
+   "accuracy_of_the_set_under_B": {
+    "cp_a_into_dir": 1.0,
+    "git_stash_pop": 1.0,
+    "gzip_x": 1.0,
+    "ln_link": 0.9167,
+    "mkdir_nodir_sub": 0.8333,
+    "patch_apply": 1.0,
+    "rmdir_dir": 1.0,
+    "sort_c": 1.0,
+    "tar_x": 0.9167
+   },
+   "confidently_wrong_anywhere": {},
+   "coverage_predicts_identification": {
+    "coverage_but_not_identified": [
+     "ln_link",
+     "tar_x"
+    ],
+    "identified": [
+     "cp_a_into_dir",
+     "rmdir_dir",
+     "gzip_x",
+     "sort_c",
+     "git_stash_pop",
+     "patch_apply"
+    ],
+    "identified_but_no_coverage": [],
+    "reading": "identification happens exactly when two things hold together: the facts mean what they claim (soundness) and no fact that is true in every success can be false where the action still applies (coverage). Coverage without soundness is undecided, soundness without coverage is confidently wrong, and both failures are named rather than averaged away",
+    "sound_and_covered": [
+     "cp_a_into_dir",
+     "rmdir_dir",
+     "gzip_x",
+     "sort_c",
+     "ln_link",
+     "git_stash_pop",
+     "patch_apply",
+     "tar_x"
+    ],
+    "states_the_fact_vector_misdescribes": {},
+    "unfalsifiable_facts_that_vary_off_sample": {
+     "cp_a_into_dir": [],
+     "git_stash_pop": [],
+     "gzip_x": [],
+     "ln_link": [],
+     "mkdir_nodir_sub": [
+      "dir_empty",
+      "dir_exists",
+      "xgz_valid"
+     ],
+     "patch_apply": [],
+     "rmdir_dir": [],
+     "sort_c": [],
+     "tar_x": []
+    },
+    "unsound_fact_vectors": []
+   },
+   "exact_on_held_out": [
+    "cp_a_into_dir",
+    "rmdir_dir",
+    "gzip_x",
+    "sort_c",
+    "git_stash_pop",
+    "patch_apply"
+   ],
+   "survivor_counts": {
+    "cp_a_into_dir": [
+     4608,
+     2
+    ],
+    "git_stash_pop": [
+     5120,
+     2
+    ],
+    "gzip_x": [
+     4096,
+     4
+    ],
+    "ln_link": [
+     4096,
+     1024
+    ],
+    "mkdir_nodir_sub": [
+     16384,
+     1024
+    ],
+    "patch_apply": [
+     4096,
+     4
+    ],
+    "rmdir_dir": [
+     5120,
+     4
+    ],
+    "sort_c": [
+     5120,
+     4
+    ],
+    "tar_x": [
+     6144,
+     6
+    ]
+   },
+   "survivors_of_the_undecided": {
+    "ln_link": 1024,
+    "mkdir_nodir_sub": 1024,
+    "tar_x": 6
+   },
+   "the_failure_mode_is_abstention_not_error": true,
+   "undecided": [
+    "ln_link",
+    "mkdir_nodir_sub",
+    "tar_x"
+   ],
+   "undecided_under_B": {
+    "cp_a_into_dir": 0,
+    "git_stash_pop": 0,
+    "gzip_x": 0,
+    "ln_link": 1,
+    "mkdir_nodir_sub": 2,
+    "patch_apply": 0,
+    "rmdir_dir": 0,
+    "sort_c": 0,
+    "tar_x": 1
+   },
+   "wrong_under_B": {
+    "cp_a_into_dir": 0,
+    "git_stash_pop": 0,
+    "gzip_x": 0,
+    "ln_link": 0,
+    "mkdir_nodir_sub": 0,
+    "patch_apply": 0,
+    "rmdir_dir": 0,
+    "sort_c": 0,
+    "tar_x": 0
+   }
+  },
+  "K3_a_success_is_the_irrelevance_evidence": {
+   "MET": true,
+   "actions_where_extra_successes_removed_nothing": [],
+   "facts_that_never_vary": [
+    "repo_is_git"
+   ],
+   "facts_that_vary_anywhere_in_the_pool": 16,
+   "reading": "successes are not wasted information: two successes that disagree on a fact prove it is not a coordinate, and that is the only such proof available -- the previous round's 'a success teaches nothing' was true only for a single base state",
+   "survivors_fall_by_action": {
+    "cp_a_into_dir": [
+     4608,
+     2
+    ],
+    "git_stash_pop": [
+     5120,
+     2
+    ],
+    "gzip_x": [
+     4096,
+     4
+    ],
+    "ln_link": [
+     4096,
+     1024
+    ],
+    "mkdir_nodir_sub": [
+     16384,
+     1024
+    ],
+    "patch_apply": [
+     4096,
+     4
+    ],
+    "rmdir_dir": [
+     5120,
+     4
+    ],
+    "sort_c": [
+     5120,
+     4
+    ],
+    "tar_x": [
+     6144,
+     6
+    ]
+   },
+   "the_previous_round_said": "one success leaves every behaviour alive, so a success teaches nothing",
+   "what_this_measures": "two successes that differ in a fact prove that fact is not a coordinate, which is the only evidence of irrelevance there is"
+  },
+  "K4_the_price_is_coverage_not_hypotheses": {
+   "MET": true,
+   "candidate_conjunctions_with_polarity": 129140163,
+   "candidate_subsets": 131072,
+   "certificates_bound_with_polarity": 94143178827,
+   "certificates_open_bound_at_23_effective_facts": 8388608,
+   "executions_under_A": {
+    "cp_a_into_dir": 3,
+    "git_stash_pop": 3,
+    "gzip_x": 3,
+    "ln_link": 3,
+    "mkdir_nodir_sub": 3,
+    "patch_apply": 3,
+    "rmdir_dir": 3,
+    "sort_c": 3,
+    "tar_x": 3
+   },
+   "executions_under_B": {
+    "cp_a_into_dir": 20,
+    "git_stash_pop": 21,
+    "gzip_x": 20,
+    "ln_link": 5,
+    "mkdir_nodir_sub": 5,
+    "patch_apply": 20,
+    "rmdir_dir": 24,
+    "sort_c": 23,
+    "tar_x": 24
+   },
+   "facts": 17,
+   "most_executions_for_any_action": 24,
+   "reading": "the hypothesis space is 2^n or 3^n, but nothing in the schedule enumerates it: the cost is 1 success + k refusals + one success per fact that must be shown irrelevant"
+  },
+  "K5_zero": {
+   "MET": true,
+   "model_calls": 0,
+   "network_calls_at_run_time": 0,
+   "parameters_stored": 0
+  }
+ },
+ "why_this_round": {
+  "the_answer_being_tested": "identification never enumerates the hypothesis space; it needs the facts that matter to be varied, so the cost is coverage-linear",
+  "the_gap_it_closes": "INSUFFICIENCY_CERTIFICATE_20261113_V1 closed the vocabulary to 31 facts and found the obstacle moved to combinatorics: 8388608 hypotheses against a learner cap of 12",
+  "why_it_could_fail": "if the one-success schedule already predicted held-out outcomes exactly, or if varied successes did not reduce the survivors, or if an unvaried fact could somehow be ruled out"
+ }
+}
