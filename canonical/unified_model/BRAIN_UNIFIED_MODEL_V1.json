@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "3fbfd53a28658f0eb1d8c805cc5014d8907e39d2f63f90c38df39b63dceb533a"
+  "value": "4de6d99fef474a25e562d86f3cda41a541770e857b195a64e5c62df36cfb2d25"
  },
  "engines": [
   {
@@ -70628,7 +70628,7 @@
   },
   {
    "authority": "NOT_A_LAW",
-   "bytes": 15763,
+   "bytes": 16396,
    "headings": [
     "The single bottleneck — admission by evidence, closed by proof — 19 November 2026",
     "1. The claim is five transitions, and four of them fail",
@@ -70646,28 +70646,28 @@
    ],
    "kind": "DOCUMENT",
    "path": "THE_SINGLE_BOTTLENECK_20261119_V1.md",
-   "sha256": "78e2cc8d265c1e6e27b079a7db74514e0219f6c6e8bedf7e1041255de271d80b",
+   "sha256": "358e30ae4192bcd5b1d91682b0557f7e7bae45ebc93f3190c67262d6ec2e3bf5",
    "summary": "**Branch:** `arena/2e68df35-brain` (base `7a05986d` of `main`). **Authority: NONE.** Producer-run sandbox measurement and code change on this branch only. `truth.achieved` stays `false`. No capability registered, no family flipped, no base-model/LLM weights updated, no independent verifier claimed. No model was called, no network was used for any measurement.",
    "terms": {
-    "100": 7,
+    "100": 8,
     "2026": 6,
     "action": 5,
     "actions": 5,
-    "admission": 10,
+    "admission": 11,
     "all": 6,
-    "any": 5,
+    "any": 6,
     "before": 5,
-    "branch": 8,
+    "branch": 9,
     "canonical": 9,
     "coverage": 5,
     "each": 5,
     "equivalence": 9,
     "every": 13,
     "exactly": 8,
-    "exists": 5,
+    "exists": 6,
     "four": 5,
     "gate": 7,
-    "held-out": 7,
+    "held-out": 8,
     "instant": 5,
     "judge": 15,
     "knowledge": 5,
@@ -70675,11 +70675,11 @@
     "lesson": 5,
     "measured": 15,
     "more": 9,
-    "most": 5,
-    "no": 20,
-    "not": 30,
+    "new": 6,
+    "no": 22,
+    "not": 31,
     "now": 6,
-    "one": 19,
+    "one": 18,
     "only": 9,
     "page": 6,
     "pages": 7,
@@ -70691,7 +70691,7 @@
     "same": 6,
     "tests": 12,
     "trace": 8,
-    "ungated": 7,
+    "ungated": 6,
     "verified": 7,
     "vs": 8,
     "witness": 7,
@@ -89449,7 +89449,7 @@
   "included_source_count": 1372,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "3a7f4e9224c230e042fa67abe1a118baf7fce79bf3674eb8e53548f2c9953ed9"
+  "source_tree_digest": "b1d709d5a71a807312c4a7791fec3823ca4d777db12dbfa242a9d1361aef7adf"
  },
  "research_index": [
   {
@@ -239587,7 +239587,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/A_FACT_IS_A_CONJUNCTION_OF_ITS_READERS_20261119_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "17ff541b397eed402ec206152292ee8a9b2dd541bf2c797c85bc62f27ed41a59",
+   "sha256": "9966e431c6f7b31103abff5a42b804e84725e8ae8f3d0ade350245e23987e75f",
    "status": "PROPOSED__PRODUCER_MEASURED__6_OF_6_MET__CONSENSUS_ARBITRATION_REFUTED__THE_COLU",
    "terms": {
     "20261119": 1,
