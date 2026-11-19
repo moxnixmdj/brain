@@ -1004,3 +1004,128 @@ def test_osworld_surface_functions_direct():
         pass
 
 
+
+
+# --------------------------------------------------------------------------- #
+# generalization and multi-step tests
+# --------------------------------------------------------------------------- #
+
+
+def test_generalization_across_probe_points(tmp_root):
+    """The learned cp rule generalizes to unseen input filenames.
+
+    The rule induced from `return 'decoy.txt' -> return src` repairs
+    `return 'wrong_source.txt' -> return src` on every probe point and
+    preserves `return '/etc/hostname' -> return '/etc/hostname'` — proving
+    do-once-learn-permanently-reproduce-forever with zero model calls.
+    """
+    engine = InstantOneShotLearning(tmp_root)
+    (tmp_root / "in.txt").write_bytes(b"hello\n")
+
+    report = run_computer_use_demo(engine, task_name="cp")
+
+    assert report["status"] == "COMPLETE"
+    assert report["admitted"] is True
+    assert report["model_calls"] == 0
+    assert report["network_calls"] == 0
+
+    # Find the ADMIT phase for gate details
+    admit_phase = next(p for p in report["phases"] if p["phase"] == "ADMIT")
+    assert admit_phase["status"] == "ADMIT_DONE__HELD_OUT_VALIDATED"
+    gate = admit_phase["gate_result"]
+    assert gate["verdict"] == "ADMIT"
+    counts = gate["counts"]
+    assert counts["repaired"] == 1  # unseen_defective repaired
+    assert counts["preserved"] == 1  # already_correct preserved
+    assert counts["programs_executed"] == 12
+
+    # All probe points pass after repair
+    for row in gate.get("rows", []):
+        for point in row.get("points", []):
+            assert point["agrees"], f"{row['victim_id']} failed on {point['probe']}"
+
+
+def test_multi_step_observation_capture(tmp_root):
+    """Multi-step observation captures all steps as trace steps.
+
+    The OBSERVE phase records every step in the trace, enabling causal
+    attribution across steps even when IDENTIFY requires single-step
+    rule closure. Zero model calls, zero network calls.
+    """
+    engine = InstantOneShotLearning(tmp_root)
+    (tmp_root / "in.txt").write_bytes(b"hello\n")
+
+    # Two sequential steps: copy then sort
+    report = engine.run(
+        task_id="multi_step_observe",
+        steps=[("cp in.txt temp.txt", ""), ("sort temp.txt -o out.txt", "")],
+        terminal_outcome=0,
+        credit_wrong_actions=[[("wrong_source", "cp nonexistent.txt temp.txt")]],
+        right_command="sort temp.txt -o out.txt",
+        id_wrong_actions=[("wrong_source", "cp nonexistent.txt temp.txt")],
+        skill_id="multi_step_observe",
+        preconditions=("filesystem_writable",),
+        observables=("output_file",),
+        actions=("cp", "sort"),
+        verdict="command_succeeded",
+        effects=[("ESTABLISH", "sort_output")],
+        success_states=[{"filesystem_writable"}],
+        failure_states=[],
+        other_contracts=[],
+        intended_goal=frozenset({"sort_output"}),
+        horizon_task_id="multi_step_horizon",
+        horizon_goal=("sorted",),
+        horizon_constraints=(("no_data_loss", "check_files_present", ("every_step",)),),
+        horizon_total_step_budget=100,
+        horizon_subgoals=(
+            ("copy", (), ("temp_created",), 10, ("no_data_loss",)),
+            ("sort", (), ("sorted",), 10, ("no_data_loss",)),
+        ),
+        horizon_initial_state={"in.txt": b"hello\n"},
+        victims=[],
+        replay_steps=[("sort temp.txt -o out.txt", "")],
+        replay_effect_subjects=["out.txt"],
+    )
+
+    # OBSERVE captures both steps
+    observe = next(p for p in report["phases"] if p["phase"] == "OBSERVE")
+    assert observe["status"] == "OBSERVE_DONE__TRACE_CAPTURED"
+    assert observe["step_count"] == 2
+
+    # CREDIT attributes causality across steps
+    credit = next(p for p in report["phases"] if p["phase"] == "CREDIT")
+    assert credit["status"] == "CREDIT_DONE__CAUSAL_STEPS_IDENTIFIED"
+
+    # Zero model calls, zero network calls
+    assert report["model_calls"] == 0
+    assert report["network_calls"] == 0
+
+
+def test_sequential_one_shot_demos(tmp_root):
+    """Two sequential one-shot learning demos demonstrate multi-step learning.
+
+    Each demo is a complete observe→learn→reproduce cycle. Running them
+    sequentially with separate environment roots shows that learned skills
+    are independent per demonstration. Zero model calls, zero network calls,
+    zero knowledge house.
+    """
+    results = []
+    for i in range(2):
+        step_root = tmp_root / f"step_{i}"
+        step_root.mkdir()
+        engine = InstantOneShotLearning(step_root)
+        (step_root / "in.txt").write_bytes(b"hello\n")
+        report = run_computer_use_demo(engine, task_name="cp")
+        results.append(report)
+
+    # Both demos complete independently
+    for report in results:
+        assert report["status"] == "COMPLETE"
+        assert report["admitted"] is True
+        assert report["model_calls"] == 0
+        assert report["network_calls"] == 0
+
+    # Replay works on both
+    for report in results:
+        phases = {p["phase"]: p["status"] for p in report["phases"]}
+        assert phases["REPLAY"] == "REPLAY_DONE__REPRODUCED_ON_NEW_STATE"

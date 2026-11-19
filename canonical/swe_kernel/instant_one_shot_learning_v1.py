@@ -2128,6 +2128,74 @@ def run_osworld_demo(
     shell_right = "cp in.txt out.dat"
     shell_wrong = [("wrong_source", "cp nonexistent.txt out.dat")]
 
+    # Computer-use victims: shell commands wrapped as Python functions,
+    # so ADMIT validates the actual computer-use skill (cp), not an
+    # unrelated Python boundary lesson. OSWorld output (right_command)
+    # determines which shell command to learn.
+    src_param = "src"
+    template = "cp {src} {dst}"
+    lesson_before = _make_computer_use_victim(
+        template, "decoy.txt", src_param=src_param,
+    )
+    lesson_after = (
+        "def process(" + src_param + "):" + chr(10) +
+        "    import subprocess, tempfile, os" + chr(10) +
+        "    tmpdir = tempfile.mkdtemp()" + chr(10) +
+        "    with open(os.path.join(tmpdir, " + src_param + "), 'w') as f:" + chr(10) +
+        "        f.write('hello\\n')" + chr(10) +
+        "    dst = os.path.join(tmpdir, 'out.dat')" + chr(10) +
+        "    result = subprocess.run(['cp', " + src_param + ", dst], cwd=tmpdir, capture_output=True)" + chr(10) +
+        "    for name in os.listdir(tmpdir):" + chr(10) +
+        "        os.unlink(os.path.join(tmpdir, name))" + chr(10) +
+        "    os.rmdir(tmpdir)" + chr(10) +
+        "    return result.returncode" + chr(10)
+    )
+    unseen_defective_before = _make_computer_use_victim(
+        template, "wrong_source.txt", src_param=src_param,
+    )
+    # already_correct: uses /etc/hostname (always exists) so the command
+    # succeeds on every probe; rule fires on 'decoy.txt' -> src, behavior
+    # unchanged after repair -> PRESERVED.
+    already_correct_before = (
+        "def process(" + src_param + "):" + chr(10) +
+        "    import subprocess, tempfile, os" + chr(10) +
+        "    tmpdir = tempfile.mkdtemp()" + chr(10) +
+        "    with open(os.path.join(tmpdir, " + src_param + "), 'w') as f:" + chr(10) +
+        "        f.write('hello\\n')" + chr(10) +
+        "    dst = os.path.join(tmpdir, 'out.dat')" + chr(10) +
+        "    result = subprocess.run(['cp', '/etc/hostname', 'out.dat'], cwd=tmpdir, capture_output=True)" + chr(10) +
+        "    for name in os.listdir(tmpdir):" + chr(10) +
+        "        os.unlink(os.path.join(tmpdir, name))" + chr(10) +
+        "    os.rmdir(tmpdir)" + chr(10) +
+        "    return result.returncode" + chr(10)
+    )
+    victims = [
+        {
+            "name": "lesson_example",
+            "before": lesson_before,
+            "after": lesson_after,
+            "language": "python",
+            "error_class": "boundary",
+            "probes": ("in.txt", "data.txt", "sample.txt"),
+        },
+        {
+            "name": "unseen_defective",
+            "before": unseen_defective_before,
+            "after": lesson_after,
+            "language": "python",
+            "error_class": "boundary",
+            "probes": ("in.txt", "data.txt", "sample.txt"),
+        },
+        {
+            "name": "already_correct",
+            "before": already_correct_before,
+            "after": lesson_after,
+            "language": "python",
+            "error_class": "boundary",
+            "probes": ("in.txt", "data.txt", "sample.txt"),
+        },
+    ]
+
     report = engine.run(
         task_id="osworld_click_target",
         steps=[(shell_right, "")],
@@ -2153,30 +2221,7 @@ def run_osworld_demo(
             ("click_target", (), ("target_selected",), 10, ("no_data_loss",)),
         ),
         horizon_initial_state={"screen": b"mock_frame"},
-        victims=[
-            {
-                "name": "lesson_example",
-                "before": "def process(target):\n    return 'wrong_target'\n",
-                "after": "def process(target):\n    return target\n",
-                "language": "python",
-                "error_class": "boundary",
-            },
-            {
-                "name": "unseen_defective",
-                "before": "def process(target):\n    return 'other_target'\n",
-                "after": "def process(target):\n    return target\n",
-                "language": "python",
-                "error_class": "boundary",
-            },
-            {
-                "name": "already_correct",
-                "before": "def process(target):\n    return 'wrong_target' if False else target\n",
-                "after": "def process(target):\n    return target\n",
-                "language": "python",
-                "error_class": "boundary",
-                "probes": ("target_a", "target_b", "target_c"),
-            },
-        ],
+        victims=victims,
         replay_steps=[(right_command, "")],
         replay_effect_subjects=["out.dat"],
     )
