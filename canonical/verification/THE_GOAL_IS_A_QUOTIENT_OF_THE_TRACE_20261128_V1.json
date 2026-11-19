@@ -1,0 +1,587 @@
+{
+ "schema": "BRAIN_THE_GOAL_IS_A_QUOTIENT_OF_THE_TRACE_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "date": "2026-11-28",
+ "mode": "THE_OBSERVABLE_IS_COMPUTED_FROM_THE_READING_NOT_SUPPLIED",
+ "declared_acceptance_before_the_run": {
+  "F1": "one single generator suffices for the same sentence on all three machines",
+  "F2": "each goal's coarsest statistic is insufficient for the other goal on the same pool: the quotient is chosen by the goal, not by the machine",
+  "F3": "no rung of the reading separates a goal about which atom ran, and the executor's own call log does",
+  "F4": "the ladder is non-increasing in cells and reaches at most four cells at the top rung, with every cell pure",
+  "F5": "the statistic chosen on the depth-2 pool has no collision on the depth-3 pool",
+  "F6": "zero model calls, zero stored parameters, no network at run time"
+ },
+ "verdict": {
+  "F1_one_projection_carries_one_sentence_on_three_machines": {
+   "single_generators_sufficient_on_all_three": [
+    "contents_by_step",
+    "content_delta",
+    "change_events",
+    "rows_trace",
+    "count_trace[probe_new_content]",
+    "count_delta[probe_new_content]",
+    "holders_by_step[probe_new_content]"
+   ],
+   "MET": true
+  },
+  "F2_the_quotient_is_chosen_by_the_goal": {
+   "portable_winner": [
+    "increments[probe_new_content]",
+    "decrements[probe_new_content]"
+   ],
+   "pair_goal_winner": [
+    "contents_ever[copy]",
+    "increments[probe_seed_content]"
+   ],
+   "portable_winner_on_the_pair_pool": [
+    false
+   ],
+   "portable_winner_witnesses_there": [
+    [
+     0,
+     11
+    ],
+    [
+     0,
+     37
+    ],
+    [
+     0,
+     41
+    ]
+   ],
+   "pair_winner_on_the_portable_pool": [
+    false
+   ],
+   "pair_winner_witnesses_there": [
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     4
+    ],
+    [
+     0,
+     6
+    ]
+   ],
+   "MET": true
+  },
+  "F3_insufficiency_then_repair": {
+   "reading_projections_that_suffice_at_every_rung": {
+    "raw": 0,
+    "fields": 0,
+    "literal": 0,
+    "derived": 0
+   },
+   "single_generators_after_the_call_log": [
+    "atom_sequence"
+   ],
+   "repair_cells": 30,
+   "MET": true
+  },
+  "F4_the_ladder_is_the_exchange_rate": {
+   "cells_by_rung": {
+    "FILESYSTEM": {
+     "raw": 68,
+     "fields": 55,
+     "literal": 19,
+     "derived": 5
+    },
+    "SQLITE": {
+     "raw": 48,
+     "fields": 7,
+     "literal": 7,
+     "derived": 4
+    },
+    "TARBALL": {
+     "raw": 32,
+     "fields": 7,
+     "literal": 7,
+     "derived": 3
+    }
+   },
+   "distinct_runs": {
+    "FILESYSTEM": 68,
+    "SQLITE": 48,
+    "TARBALL": 32
+   },
+   "pair_goal_cells_by_rung": {
+    "raw": 68,
+    "fields": 56,
+    "literal": 24,
+    "derived": 6
+   },
+   "cells_are_pure_at_the_top": true,
+   "non_increasing_along_the_ladder": true,
+   "MET": false
+  },
+  "F5_held_out_reachability": {
+   "chosen_on_depth_2": [
+    "increments[probe_new_content]",
+    "decrements[probe_new_content]"
+   ],
+   "collisions_on_depth_3": {
+    "projections": [
+     "increments[probe_new_content]",
+     "decrements[probe_new_content]"
+    ],
+    "deep_runs": 68,
+    "collisions_on_the_deep_pool": 208
+   },
+   "MET": false
+  },
+  "F6_zero": {
+   "model_calls": 0,
+   "parameters_stored": 0,
+   "network_calls_at_run_time": 0,
+   "MET": true
+  }
+ },
+ "portable_goal": {
+  "FILESYSTEM": {
+   "runs": 68,
+   "accepted": 26,
+   "ladder": {
+    "raw": {
+     "generators": 1,
+     "projections": 1,
+     "sufficient": 1,
+     "coarsest": {
+      "projections": [
+       "rows_trace"
+      ],
+      "size": 1,
+      "images": 68,
+      "bits": 6.09,
+      "witnesses_of_cheaper_projections": []
+     },
+     "table": {
+      "cells": 68,
+      "impure_cells": 0,
+      "runs": 68,
+      "held_out_runs": 34,
+      "held_out_unseen_cell": 34,
+      "held_out_wrong_on_a_seen_cell": 0
+     }
+    },
+    "fields": {
+     "generators": 10,
+     "projections": 55,
+     "sufficient": 36,
+     "coarsest": {
+      "projections": [
+       "content_delta"
+      ],
+      "size": 1,
+      "images": 55,
+      "bits": 5.78,
+      "witnesses_of_cheaper_projections": []
+     },
+     "table": {
+      "cells": 55,
+      "impure_cells": 0,
+      "runs": 68,
+      "held_out_runs": 34,
+      "held_out_unseen_cell": 27,
+      "held_out_wrong_on_a_seen_cell": 0
+     }
+    },
+    "literal": {
+     "generators": 28,
+     "projections": 406,
+     "sufficient": 185,
+     "coarsest": {
+      "projections": [
+       "count_delta[probe_new_content]"
+      ],
+      "size": 1,
+      "images": 19,
+      "bits": 4.25,
+      "witnesses_of_cheaper_projections": []
+     },
+     "table": {
+      "cells": 19,
+      "impure_cells": 0,
+      "runs": 68,
+      "held_out_runs": 34,
+      "held_out_unseen_cell": 4,
+      "held_out_wrong_on_a_seen_cell": 0
+     }
+    },
+    "derived": {
+     "generators": 40,
+     "projections": 820,
+     "sufficient": 274,
+     "coarsest": {
+      "projections": [
+       "increments[probe_new_content]",
+       "decrements[probe_new_content]"
+      ],
+      "size": 2,
+      "images": 5,
+      "bits": 2.32,
+      "witnesses_of_cheaper_projections": []
+     },
+     "table": {
+      "cells": 5,
+      "impure_cells": 0,
+      "runs": 68,
+      "held_out_runs": 34,
+      "held_out_unseen_cell": 0,
+      "held_out_wrong_on_a_seen_cell": 0
+     }
+    }
+   }
+  },
+  "SQLITE": {
+   "runs": 48,
+   "accepted": 20,
+   "ladder": {
+    "raw": {
+     "generators": 1,
+     "projections": 1,
+     "sufficient": 1,
+     "coarsest": {
+      "projections": [
+       "rows_trace"
+      ],
+      "size": 1,
+      "images": 48,
+      "bits": 5.58,
+      "witnesses_of_cheaper_projections": []
+     },
+     "table": {
+      "cells": 48,
+      "impure_cells": 0,
+      "runs": 48,
+      "held_out_runs": 24,
+      "held_out_unseen_cell": 24,
+      "held_out_wrong_on_a_seen_cell": 0
+     }
+    },
+    "fields": {
+     "generators": 10,
+     "projections": 55,
+     "sufficient": 52,
+     "coarsest": {
+      "projections": [
+       "content_to_identities"
+      ],
+      "size": 1,
+      "images": 7,
+      "bits": 2.81,
+      "witnesses_of_cheaper_projections": []
+     },
+     "table": {
+      "cells": 7,
+      "impure_cells": 0,
+      "runs": 48,
+      "held_out_runs": 24,
+      "held_out_unseen_cell": 9,
+      "held_out_wrong_on_a_seen_cell": 0
+     }
+    },
+    "literal": {
+     "generators": 32,
+     "projections": 528,
+     "sufficient": 328,
+     "coarsest": {
+      "projections": [
+       "content_to_identities"
+      ],
+      "size": 1,
+      "images": 7,
+      "bits": 2.81,
+      "witnesses_of_cheaper_projections": []
+     },
+     "table": {
+      "cells": 7,
+      "impure_cells": 0,
+      "runs": 48,
+      "held_out_runs": 24,
+      "held_out_unseen_cell": 9,
+      "held_out_wrong_on_a_seen_cell": 0
+     }
+    },
+    "derived": {
+     "generators": 44,
+     "projections": 990,
+     "sufficient": 508,
+     "coarsest": {
+      "projections": [
+       "increments[probe_new_content]"
+      ],
+      "size": 1,
+      "images": 4,
+      "bits": 2.0,
+      "witnesses_of_cheaper_projections": []
+     },
+     "table": {
+      "cells": 4,
+      "impure_cells": 0,
+      "runs": 48,
+      "held_out_runs": 24,
+      "held_out_unseen_cell": 9,
+      "held_out_wrong_on_a_seen_cell": 0
+     }
+    }
+   }
+  },
+  "TARBALL": {
+   "runs": 32,
+   "accepted": 5,
+   "ladder": {
+    "raw": {
+     "generators": 1,
+     "projections": 1,
+     "sufficient": 1,
+     "coarsest": {
+      "projections": [
+       "rows_trace"
+      ],
+      "size": 1,
+      "images": 32,
+      "bits": 5.0,
+      "witnesses_of_cheaper_projections": []
+     },
+     "table": {
+      "cells": 32,
+      "impure_cells": 0,
+      "runs": 32,
+      "held_out_runs": 16,
+      "held_out_unseen_cell": 16,
+      "held_out_wrong_on_a_seen_cell": 0
+     }
+    },
+    "fields": {
+     "generators": 10,
+     "projections": 55,
+     "sufficient": 52,
+     "coarsest": {
+      "projections": [
+       "final_contents"
+      ],
+      "size": 1,
+      "images": 7,
+      "bits": 2.81,
+      "witnesses_of_cheaper_projections": []
+     },
+     "table": {
+      "cells": 7,
+      "impure_cells": 0,
+      "runs": 32,
+      "held_out_runs": 16,
+      "held_out_unseen_cell": 2,
+      "held_out_wrong_on_a_seen_cell": 0
+     }
+    },
+    "literal": {
+     "generators": 42,
+     "projections": 903,
+     "sufficient": 438,
+     "coarsest": {
+      "projections": [
+       "count_delta[probe_new_content]"
+      ],
+      "size": 1,
+      "images": 7,
+      "bits": 2.81,
+      "witnesses_of_cheaper_projections": []
+     },
+     "table": {
+      "cells": 7,
+      "impure_cells": 0,
+      "runs": 32,
+      "held_out_runs": 16,
+      "held_out_unseen_cell": 1,
+      "held_out_wrong_on_a_seen_cell": 0
+     }
+    },
+    "derived": {
+     "generators": 70,
+     "projections": 2485,
+     "sufficient": 779,
+     "coarsest": {
+      "projections": [
+       "holders_ever[probe_new_content]",
+       "decrements[probe_new_content]"
+      ],
+      "size": 2,
+      "images": 3,
+      "bits": 1.58,
+      "witnesses_of_cheaper_projections": []
+     },
+     "table": {
+      "cells": 3,
+      "impure_cells": 0,
+      "runs": 32,
+      "held_out_runs": 16,
+      "held_out_unseen_cell": 0,
+      "held_out_wrong_on_a_seen_cell": 0
+     }
+    }
+   }
+  }
+ },
+ "pair_goal": {
+  "runs": 68,
+  "accepted": 11,
+  "ladder": {
+   "raw": {
+    "sufficient": 1,
+    "coarsest": {
+     "projections": [
+      "rows_trace"
+     ],
+     "size": 1,
+     "images": 68,
+     "bits": 6.09,
+     "witnesses_of_cheaper_projections": []
+    },
+    "table": {
+     "cells": 68,
+     "impure_cells": 0,
+     "runs": 68,
+     "held_out_runs": 34,
+     "held_out_unseen_cell": 34,
+     "held_out_wrong_on_a_seen_cell": 0
+    }
+   },
+   "fields": {
+    "sufficient": 36,
+    "coarsest": {
+     "projections": [
+      "final_contents",
+      "identities_by_step"
+     ],
+     "size": 2,
+     "images": 56,
+     "bits": 5.81,
+     "witnesses_of_cheaper_projections": []
+    },
+    "table": {
+     "cells": 56,
+     "impure_cells": 0,
+     "runs": 68,
+     "held_out_runs": 34,
+     "held_out_unseen_cell": 25,
+     "held_out_wrong_on_a_seen_cell": 0
+    }
+   },
+   "literal": {
+    "sufficient": 145,
+    "coarsest": {
+     "projections": [
+      "count_delta[probe_seed_content]",
+      "holders_ever[probe_seed_content]"
+     ],
+     "size": 2,
+     "images": 24,
+     "bits": 4.58,
+     "witnesses_of_cheaper_projections": []
+    },
+    "table": {
+     "cells": 24,
+     "impure_cells": 0,
+     "runs": 68,
+     "held_out_runs": 34,
+     "held_out_unseen_cell": 5,
+     "held_out_wrong_on_a_seen_cell": 0
+    }
+   },
+   "derived": {
+    "sufficient": 205,
+    "coarsest": {
+     "projections": [
+      "contents_ever[copy]",
+      "increments[probe_seed_content]"
+     ],
+     "size": 2,
+     "images": 6,
+     "bits": 2.58,
+     "witnesses_of_cheaper_projections": []
+    },
+    "table": {
+     "cells": 6,
+     "impure_cells": 0,
+     "runs": 68,
+     "held_out_runs": 34,
+     "held_out_unseen_cell": 0,
+     "held_out_wrong_on_a_seen_cell": 0
+    }
+   }
+  }
+ },
+ "atom_goal": {
+  "sequences": 30,
+  "accepted": 10,
+  "reading_ladder": {
+   "raw": {
+    "sufficient": 0
+   },
+   "fields": {
+    "sufficient": 0
+   },
+   "literal": {
+    "sufficient": 0
+   },
+   "derived": {
+    "sufficient": 0
+   }
+  },
+  "two_sequences_one_reading_opposite_judgments": [
+   [
+    [
+     "FS_A1",
+     "FS_A1"
+    ],
+    [
+     "FS_A1",
+     "FS_A5"
+    ]
+   ],
+   [
+    [
+     "FS_A2",
+     "FS_A2"
+    ],
+    [
+     "FS_A2",
+     "FS_A5"
+    ]
+   ]
+  ],
+  "repair": {
+   "projections": [
+    "atom_sequence"
+   ],
+   "size": 1,
+   "images": 30,
+   "bits": 4.91,
+   "witnesses_of_cheaper_projections": []
+  },
+  "repair_cells": 30
+ },
+ "held_out_reachability": {
+  "projections": [
+   "increments[probe_new_content]",
+   "decrements[probe_new_content]"
+  ],
+  "deep_runs": 68,
+  "collisions_on_the_deep_pool": 208
+ },
+ "depth": 3,
+ "seconds": 23.7,
+ "model_calls": 0,
+ "parameters_stored": 0,
+ "limits": [
+  "the statistics are typed by the reading's own structure and its own literals; the top rung is a fixed small algebra over a literal, not a per-goal choice, but it is supplied",
+  "the coarsest function of the trace is the label itself (two cells) and it is unlearnable; the ladder is the honest trade-off between supplied structure and bought experience",
+  "the projection transfers across machines, the table does not: k cells are refilled per environment",
+  "three CLI machines, no display; no planning and no synthesis here",
+  "cells are a lower bound on the experiences the goal costs, because a cell cannot be labelled from another cell"
+ ]
+}
