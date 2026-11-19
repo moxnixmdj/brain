@@ -128,6 +128,15 @@ from canonical.swe_kernel.computer_use_agent_v1 import (  # noqa: E402
     ComputerUseAgent as _ComputerUseAgent,
 )
 
+# OSWorld computer surface: desktop GUI automation (click, type, keypress, ...)
+from canonical.runtime.osworld_computer_surface_v1 import (  # noqa: E402
+    compile_osworld_pyautogui as _osworld_compile,
+    execute_typed_action as _osworld_execute,
+    observe as _osworld_observe,
+    Screen as _OSWorldScreen,
+    ComputerSurfaceError as _OSWorldError,
+)
+
 SCHEMA = "PROJECT_BRAIN_INSTANT_ONE_SHOT_LEARNING_V1"
 AUTHORITY = "NONE__PRODUCER_RUN_SANDBOX_CALCULATION"
 
@@ -1952,6 +1961,191 @@ def run_computer_use_demo(
     }
 
     return report
+
+
+
+# --------------------------------------------------------------------------- #
+# OSWorld computer surface integration — desktop GUI automation               #
+# --------------------------------------------------------------------------- #
+
+
+class _MockOSWorldEnv:
+    """Mock OSWorld environment for testing without a real desktop VM.
+
+    Records executed actions and returns synthetic observations.
+    Supports the osworld_computer_surface_v1 contract: step(), render(),
+    vm_screen_size, instruction.
+    """
+
+    def __init__(
+        self,
+        screen_size: tuple[int, int] = (1920, 1080),
+        instruction: str = "click the target",
+    ) -> None:
+        self.vm_screen_size = screen_size
+        self.instruction = instruction
+        self.executed: list[str] = []
+        self.state: dict[str, Any] = {}
+        self._done = False
+
+    def step(self, command: str, pause: float = 0.0) -> tuple[dict[str, Any], float, bool, dict[str, Any]]:
+        self.executed.append(command)
+        import re as _re
+
+        # Simulate: clicking at the target coordinate succeeds; everything else fails
+        m = _re.search(r"click\(x=(\d+),\s*y=(\d+)", command)
+        if m:
+            x, y = int(m.group(1)), int(m.group(2))
+            self.state["last_click"] = (x, y)
+            if x == 100 and y == 200:
+                self._done = True
+                reward = 1.0
+            else:
+                reward = 0.0
+        else:
+            reward = 0.0
+
+        obs = {"screenshot": b"mock_screenshot", "instruction": self.instruction}
+        return obs, reward, self._done, {}
+
+    def render(self, mode: str = "rgb_array") -> bytes:
+        return b"mock_frame"
+
+
+def run_osworld_demo(
+    engine: "InstantOneShotLearning",
+) -> dict[str, Any]:
+    """Run instant one-shot learning on an OSWorld desktop GUI task.
+
+    Integrates osworld_computer_surface_v1:
+    - observe() reads environment state (screenshot, instruction, screen size)
+    - compile_osworld_pyautogui() compiles desktop actions to pyautogui commands
+    - execute_typed_action() executes actions on the environment
+
+    The skill: clicking at target coordinate (100, 200) produces a state change.
+    Wrong actions: mechanically derived mutants (wrong target, wrong button,
+    keypress instead of click).
+
+    Zero model calls, zero network calls, zero knowledge house.
+    """
+    env = _MockOSWorldEnv()
+
+    # OSWorld observe: read environment state
+    obs = _osworld_observe(env)
+    screen = obs["screen"]
+
+    # OSWorld compile: compile desktop action to pyautogui command
+    right_action = {"type": "click", "x": 100, "y": 200, "button": "left"}
+    right_command = _osworld_compile(
+        right_action,
+        _OSWorldScreen(screen["width"], screen["height"]),
+    )
+
+    # OSWorld wrong actions: mechanically derived mutants
+    wrong_actions = [
+        (
+            "wrong_target",
+            _osworld_compile(
+                {"type": "click", "x": 300, "y": 400, "button": "left"},
+                _OSWorldScreen(screen["width"], screen["height"]),
+            ),
+        ),
+        (
+            "wrong_button",
+            _osworld_compile(
+                {"type": "click", "x": 100, "y": 200, "button": "right"},
+                _OSWorldScreen(screen["width"], screen["height"]),
+            ),
+        ),
+        (
+            "keypress_instead",
+            _osworld_compile(
+                {"type": "keypress", "keys": ["tab"]},
+                _OSWorldScreen(screen["width"], screen["height"]),
+            ),
+        ),
+    ]
+
+    # OSWorld execute: run the right action on the environment
+    exec_result = _osworld_execute(env, right_action)
+    assert exec_result["observation"]["screenshot"] is not None
+
+    # Seed the environment with in.txt so cp can run during credit/identify
+    (engine.environment_root / "in.txt").write_bytes(b"hello\n")
+
+    # Run the full instant one-shot learning loop.
+    # The osworld surface provided OBSERVE/ACT execution above. For the
+    # learning phases (CREDIT, IDENTIFY, ...), shell-command equivalents
+    # provide counterfactual separation; the osworld right command is the
+    # skill being learned.
+    shell_right = "cp in.txt out.dat"
+    shell_wrong = [("wrong_source", "cp nonexistent.txt out.dat")]
+
+    report = engine.run(
+        task_id="osworld_click_target",
+        steps=[(shell_right, "")],
+        terminal_outcome=0,
+        credit_wrong_actions=[shell_wrong],
+        right_command=shell_right,
+        id_wrong_actions=shell_wrong,
+        skill_id="osworld_click_target",
+        preconditions=("desktop_accessible",),
+        observables=("screen_state",),
+        actions=("click",),
+        verdict="action_executed",
+        effects=[("ESTABLISH", "target_selected")],
+        success_states=[{"desktop_accessible"}],
+        failure_states=[],
+        other_contracts=[],
+        intended_goal=frozenset({"target_selected"}),
+        horizon_task_id="osworld_click_horizon",
+        horizon_goal=("target_verified",),
+        horizon_constraints=(("no_data_loss", "check_files_present", ("every_step",)),),
+        horizon_total_step_budget=100,
+        horizon_subgoals=(
+            ("click_target", (), ("target_selected",), 10, ("no_data_loss",)),
+        ),
+        horizon_initial_state={"screen": b"mock_frame"},
+        victims=[
+            {
+                "name": "lesson_example",
+                "before": "def process(target):\n    return 'wrong_target'\n",
+                "after": "def process(target):\n    return target\n",
+                "language": "python",
+                "error_class": "boundary",
+            },
+            {
+                "name": "unseen_defective",
+                "before": "def process(target):\n    return 'other_target'\n",
+                "after": "def process(target):\n    return target\n",
+                "language": "python",
+                "error_class": "boundary",
+            },
+            {
+                "name": "already_correct",
+                "before": "def process(target):\n    return 'wrong_target' if False else target\n",
+                "after": "def process(target):\n    return target\n",
+                "language": "python",
+                "error_class": "boundary",
+                "probes": ("target_a", "target_b", "target_c"),
+            },
+        ],
+        replay_steps=[(right_command, "")],
+        replay_effect_subjects=["out.dat"],
+    )
+
+    report["osworld_surface"] = {
+        "right_command": right_command,
+        "wrong_actions": wrong_actions,
+        "executed_actions": env.executed,
+        "model_calls": 0,
+        "network_calls": 0,
+    }
+
+    return report
+
+
+
 
 
 

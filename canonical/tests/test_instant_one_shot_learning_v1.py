@@ -50,6 +50,7 @@ from canonical.swe_kernel.instant_one_shot_learning_v1 import (  # noqa: E402
     remember_skill,
     replay_skill,
     run_computer_use_demo,
+    run_osworld_demo,
     OBSERVE_DONE,
     CREDIT_DONE,
     IDENTIFY_DONE,
@@ -897,4 +898,109 @@ def test_computer_use_agent_integration(tmp_root):
     # Replay verified
     assert report["replay_done"] is True
     assert report["replay_return_code"] == 0
+
+
+# --------------------------------------------------------------------------- #
+# osworld computer surface end-to-end demo
+# --------------------------------------------------------------------------- #
+
+
+def test_osworld_demo_complete(tmp_root):
+    """End-to-end instant one-shot learning on an OSWorld desktop GUI task.
+
+    Integrates osworld_computer_surface_v1:
+    - observe() reads environment state
+    - compile_osworld_pyautogui() compiles desktop actions to commands
+    - execute_typed_action() executes actions on the environment
+
+    All 10 phases complete with zero model calls, zero network calls,
+    zero knowledge house.
+    """
+    engine = InstantOneShotLearning(tmp_root)
+
+    report = run_osworld_demo(engine)
+
+    assert report["status"] == "COMPLETE"
+    assert report["result"] == "INSTANT_ONE_SHOT_LEARNING_COMPLETE"
+    assert report["admitted"] is True
+    assert report["model_calls"] == 0
+    assert report["network_calls"] == 0
+    assert report["stored_knowledge_bytes"] == 0
+    assert report["knowledge_house"] is False
+
+    # OSWorld surface integration
+    osworld = report["osworld_surface"]
+    assert osworld["right_command"] == "pyautogui.click(x=100, y=200, button='left')"
+    assert len(osworld["executed_actions"]) == 1
+    assert osworld["executed_actions"][0] == "pyautogui.click(x=100, y=200, button='left')"
+    assert osworld["model_calls"] == 0
+    assert osworld["network_calls"] == 0
+
+    # All 10 phases done
+    phase_statuses = {p["phase"]: p["status"] for p in report["phases"]}
+    assert phase_statuses["OBSERVE"] == "OBSERVE_DONE__TRACE_CAPTURED"
+    assert phase_statuses["CREDIT"] == "CREDIT_DONE__CAUSAL_STEPS_IDENTIFIED"
+    assert phase_statuses["IDENTIFY"] == "IDENTIFY_DONE__RULE_CLOSED"
+    assert phase_statuses["CONTRACT"] == "CONTRACT_DONE__EFFECT_CONTRACT_EXTRACTED"
+    assert phase_statuses["APPLICABILITY"] == "APPLICABILITY_DONE__APPLICABILITY_CLASSIFIED"
+    assert phase_statuses["COMPOSE"] == "COMPOSE_DONE__CHAIN_VERIFIED"
+    assert phase_statuses["HORIZON"] == "HORIZON_DONE__SUBGOALS_EXECUTED"
+    assert phase_statuses["ADMIT"] == "ADMIT_DONE__HELD_OUT_VALIDATED"
+    assert phase_statuses["REMEMBER"] == "REMEMBER_DONE__PERSISTED_TO_STORE"
+    assert phase_statuses["REPLAY"] == "REPLAY_DONE__REPRODUCED_ON_NEW_STATE"
+
+    # Replay verified
+    assert report["replay_done"] is True
+    assert report["replay_return_code"] == 0
+
+
+def test_osworld_surface_functions_direct():
+    """osworld_computer_surface_v1 functions work with zero model/network calls."""
+    from canonical.runtime.osworld_computer_surface_v1 import (
+        compile_osworld_pyautogui,
+        execute_typed_action,
+        observe,
+        Screen,
+        ComputerSurfaceError,
+    )
+
+    class MockEnv:
+        def __init__(self):
+            self.vm_screen_size = (1920, 1080)
+            self.instruction = "test"
+            self.executed = []
+
+        def step(self, command, pause=0.0):
+            self.executed.append(command)
+            return {"screenshot": b"img", "instruction": "test"}, 1.0, True, {}
+
+        def render(self, mode="rgb_array"):
+            return b"frame"
+
+    env = MockEnv()
+
+    # observe
+    obs = observe(env)
+    assert "screenshot" in obs
+    assert "instruction" in obs
+    assert obs["screen"]["width"] == 1920
+    assert obs["screen"]["height"] == 1080
+
+    # compile
+    action = {"type": "click", "x": 50, "y": 60, "button": "left"}
+    cmd = compile_osworld_pyautogui(action, Screen(1920, 1080))
+    assert cmd == "pyautogui.click(x=50, y=60, button='left')"
+
+    # execute
+    result = execute_typed_action(env, action)
+    assert result["compiled_action"] == cmd
+    assert env.executed == [cmd]
+
+    # Error handling
+    try:
+        compile_osworld_pyautogui({"type": "invalid"}, Screen(1920, 1080))
+        assert False, "Should have raised"
+    except ComputerSurfaceError:
+        pass
+
 
