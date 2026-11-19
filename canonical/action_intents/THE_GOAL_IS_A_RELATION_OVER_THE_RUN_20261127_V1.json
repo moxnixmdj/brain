@@ -42,7 +42,7 @@
  },
  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The reachable contrast set. A goal about the run cannot be represented by any function of the final state, so the currency of identification is a run that the surviving hypotheses disagree about. Measured: 9 final states reached with opposite judgments on 3 machines within three actions, the final-state vocabulary empty on every such set, and the run-level goal identified in 5-6 questions with 0 false accepts.",
- "canonical_base_commit": "954351c11f75af35edc6654c8136dabda70e04e6",
+ "canonical_base_commit": "0dcdf88517e36f4bea987adc845d097283c41c4b",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -131,7 +131,7 @@
  ],
  "real_outcome": "That histories are learnable by the same mechanism; that the final-state vocabulary is empty rather than imprecise; that agreement is a stopping rule and not a proof (it converges on a wrong goal in 2-7 questions); that one held-out run is lost when acting without further questions.",
  "recursive_obs": {
-  "canonical_base_commit": "954351c11f75af35edc6654c8136dabda70e04e6",
+  "canonical_base_commit": "0dcdf88517e36f4bea987adc845d097283c41c4b",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "handing the goal's relation to the agent",
@@ -140,7 +140,7 @@
    "calling an ambiguity irreducible without rebuilding the reachable set deeper"
   ],
   "expected_parent_frontier_change": "The goal may be about the run: order, multiplicity and who-held-what-when are now in the hypothesis language, inferred from judgments on executed runs. Acting on the intersection of every consistent run-level hypothesis is sound (0 false accepts on 136 held-out runs) and incomplete by one run, which is reported rather than excused.",
-  "expected_parent_level_state_change": "The goal is inferred rather than given, the agent chooses its own next question, and it refuses to act where the survivors disagree. The residual ambiguity is measured to be behaviourally invisible, so acting on the intersection of all survivors is sound on held-out states: 0 false accepts.",
+  "expected_parent_level_state_change": "The goal may be about the run: order, multiplicity and who-held-what-when are now in the hypothesis language, inferred from judgments on executed runs. Acting on the intersection of every consistent run-level hypothesis is sound (0 false accepts on 136 held-out runs) and incomplete by one run, which is reported rather than excused.",
   "independent_verification_required": true,
   "iteration_limit": 1,
   "obs_blocker": {
@@ -232,7 +232,7 @@
       "CAPABILITY_STRENGTH": "1 verified repair; 13 of 30 rows addressed; 0 accusations",
       "CORRECTNESS": "the corpus's own suite, whole file",
       "INCREMENTAL_COST": "0 parameters, 0 model calls, ~10 us per candidate",
-      "RELIABILITY": "recall is the open term",
+      "RELIABILITY": "superseded: the goal read off one state is empty wherever two runs end alike",
       "VERIFIABILITY": "receipt rows, producer-run",
       "WALL_CLOCK": "83.6 s for 30 commits"
      },
@@ -245,7 +245,7 @@
      "qualification_evidence_classes": [
       "DIRECT_PROBE"
      ],
-     "resolution": "SELECTED",
+     "resolution": "DISQUALIFIED",
      "route": "READ_THE_FIX_FROM_THE_AST_AND_NAME_THE_GRAMMAR_OF_THE_POPULATION"
     },
     {
@@ -295,7 +295,7 @@
       "CAPABILITY_STRENGTH": "1 real commit identified at rank 0, unattended, with no diff and no name table",
       "CORRECTNESS": "the artifact answers, so a question is either answered or refused -- never wrong",
       "INCREMENTAL_COST": "7.69 ms per asked question, 1 bit",
-      "RELIABILITY": "no saturating share: every site can be asked",
+      "RELIABILITY": "superseded: the goal read off one state is empty wherever two runs end alike",
       "VERIFIABILITY": "measured exactly",
       "WALL_CLOCK": "121.2 s for 14 bugs"
      },
@@ -309,8 +309,30 @@
      "qualification_evidence_classes": [
       "DIRECT_PROBE"
      ],
-     "resolution": "SELECTED",
+     "resolution": "DISQUALIFIED",
      "route": "INDEX_ACTIONS_BY_THE_FAILING_RUN_NOT_BY_THE_SOURCE_TEXT"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "run-level goals inferred from judgments: 0 false accepts, 5-6 questions, exact where asked",
+      "CORRECTNESS": "leave-one-run-out against the user's own judgments on executed runs",
+      "INCREMENTAL_COST": "0 parameters, 0 model calls, 18.1 s for 136 runs and ~1000 hypotheses per goal",
+      "RELIABILITY": "sound and incomplete: 1 run of 136 refused by the intersection",
+      "VERIFIABILITY": "receipt rows, producer-run, blocker hypothesis reproduced in the suite",
+      "WALL_CLOCK": "18.1 s"
+     },
+     "evidence": [
+      "136 real runs on 3 machines; 9 final states reached with opposite judgments; 0 final-state terms disagree inside a group; the final-state version space is empty on every goal holding one; the run grammar is identified in 5-6 questions at 1.00 accuracy and is 135/136 leave-one-run-out with 0 false accepts"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_GOAL_IS_A_RELATION_OVER_THE_RUN_20261127_V1.json",
+      "canonical/verification/THE_GOAL_IS_A_DISCRIMINATOR_20261126_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "SELECTED",
+     "route": "INFER_A_RELATION_OVER_THE_RUN_FROM_JUDGMENTS_AND_ACT_ON_THE_INTERSECTION"
     }
    ],
    "checked_at_utc": "2026-11-18T22:57:31Z",
@@ -323,9 +345,9 @@
     "VERIFIABILITY"
    ],
    "discovery_required": true,
-   "incumbent_route": "AUDIT_WHAT_THE_INSTRUMENT_ACCEPTS_BEFORE_ASKING_WHAT_IT_CAN_FIND",
+   "incumbent_route": "INFER_A_RELATION_OVER_THE_RUN_FROM_JUDGMENTS_AND_ACT_ON_THE_INTERSECTION",
    "max_age_hours": 2,
-   "negative_search_summary": "Refused by measurement this session: formatting as a cause of exclusion (1 row recovered of 30, three of the four candidates are genuine moves or two-region edits); a bigger candidate space (150,000 offered, 0 admissible); and the previous round's own claim that the specification fallback adds repairs (it adds none).",
+   "negative_search_summary": "Refused by measurement: widening the final-state vocabulary (empty by theorem), guessing among survivors (costs the accusation class), and treating the minimal survivor set as the version space (measured to reject 32 accepted runs).",
    "query_families": [
     {
      "intent": "CAPABILITY_VECTOR",
@@ -350,15 +372,15 @@
     "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
     "BEFORE_SCARCE_GATE_SPEND"
    ],
-   "selected_route": "READ_THE_FIX_FROM_THE_AST_AND_NAME_THE_GRAMMAR_OF_THE_POPULATION",
+   "selected_route": "INFER_A_RELATION_OVER_THE_RUN_FROM_JUDGMENTS_AND_ACT_ON_THE_INTERSECTION",
    "selected_route_preflight": {
     "all_required_dependencies_ready": true,
-    "checked_at_utc": "2026-11-18T22:57:31Z",
+    "checked_at_utc": "2026-11-19T00:44:26Z",
     "execution_dependencies": [
      {
       "dependency": "local Python 3.11 runtime with pytest",
       "evidence": [
-       "Python 3.11 + pytest 9.2; 33/33 unified-model gates and 12 instrument tests pass at 2026-11-18T18:50:14Z"
+       "Python 3.11 + pytest 7.5s; 6 instrument tests and 33/33 unified-model gates pass, 2026-11-19T00:44Z"
       ],
       "evidence_classes": [
        "DIRECT_PROBE"
@@ -371,9 +393,9 @@
       "volatility": "STATIC"
      },
      {
-      "dependency": "real repositories cloned for the sweep (requests, click, tqdm, httpx) with their suites runnable",
+      "dependency": "real tool binaries the machines drive (sh, mv, cp, rm, sqlite3, tar)",
       "evidence": [
-       "29 fix commits swept twice in this sandbox (blame index and proximity index) at 2026-11-18T16:05:00Z"
+       "323 action sequences executed in this sandbox with the reader sampled after every step, 2026-11-19T00:44Z"
       ],
       "evidence_classes": [
        "DIRECT_PROBE"
@@ -386,9 +408,9 @@
       "volatility": "STATIC"
      },
      {
-      "dependency": "local tempdir for fresh per-verdict task copies",
+      "dependency": "local tempdir for one fresh reset of each machine per run",
       "evidence": [
-       "one fresh copy per real-judge verdict, answer key absent from the copy the search runs in; 0 corpus verdicts: reachability only, no execution at 2026-11-17T22:05:07Z"
+       "one reset per action sequence; 136 distinct runs kept, runs deduplicated by trace, 2026-11-19T00:44Z"
       ],
       "evidence_classes": [
        "DIRECT_PROBE"
@@ -404,7 +426,7 @@
     "execution_dependencies_complete": true,
     "failed_dependencies": [],
     "max_age_hours": 2,
-    "selected_route": "READ_THE_FIX_FROM_THE_AST_AND_NAME_THE_GRAMMAR_OF_THE_POPULATION",
+    "selected_route": "INFER_A_RELATION_OVER_THE_RUN_FROM_JUDGMENTS_AND_ACT_ON_THE_INTERSECTION",
     "status": "READY"
    },
    "source_classes_checked": [
@@ -440,8 +462,8 @@
    "WIDEN_THE_VOCABULARY_WITH_MORE_NEIGHBOURHOOD_ATTRIBUTES__ALREADY_MEASURED_AT_9_1_PERCENT",
    "MEASURE_THE_CEILING_WITH_THE_ADDRESS_GIVEN_FREE_THEN_NAME_WHAT_SELECTS__SELECTED"
   ],
-  "selected_route": "RECOVER_A_CONJUNCTION_OF_RUN_TERMS_FROM_ACCEPT_REJECT_JUDGMENTS_OVER_REAL_RUNS",
-  "selected_surviving_route": "RECOVER_A_CONJUNCTION_OF_RUN_TERMS_FROM_ACCEPT_REJECT_JUDGMENTS_OVER_REAL_RUNS",
+  "selected_route": "INFER_A_RELATION_OVER_THE_RUN_FROM_JUDGMENTS_AND_ACT_ON_THE_INTERSECTION",
+  "selected_surviving_route": "INFER_A_RELATION_OVER_THE_RUN_FROM_JUDGMENTS_AND_ACT_ON_THE_INTERSECTION",
   "selected_surviving_route_class": "SYNTHESIZE_NEW_PRIMITIVE",
   "stop_condition": "The same mechanism where the run is genuinely long: 20-60 steps, only a handful of runs executable, on the project's own hardest open material. Pre-registered: zero false accepts on held-out runs, the question count, and how many reachable contrasts actually exist.",
   "why_selected_route_is_fastest_sufficient": "Because the question 'is the goal readable off one state' can only be answered by executing runs that end alike and differ in history; every other route answers it by assuming an answer.",
