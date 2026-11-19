@@ -1,0 +1,734 @@
+{
+ "action_id": "THE_FAILED_ATTEMPT_IS_FREE_20261116_V1",
+ "action_intent_id": "THE_FAILED_ATTEMPT_IS_FREE_20261116_V1",
+ "action_kind": "REAL_CAPABILITY_ACQUISITION",
+ "action_summary": "Measures what actually makes one-trial learning sound: not the decision, the free failure. On 160 real states of 10 real actions, staging the attempt in a copy and committing with renameat2(RENAME_EXCHANGE) decides every action at 1.0 -- including the five the previous round proved no check mode can guard -- with 80 of 80 refused attempts leaving the live tree byte-identical, and 80 of 80 commits exact, displaced-tree-exact and undoable. os.replace, the publication primitive this tree already uses, fails on a populated directory with ENOTEMPTY; the two-rename fallback has a measured window in which the live path does not exist; a read-only parent refuses the commit and moves nothing.",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "earlier_routes_exhausted_reason": "Refused by measurement, in order: a hand-written vocabulary, relations over the reader, a goal handed in, the coarsest sufficient statistic, a free-running refinement loop, a supplied predicate called the goal, a syntactic count of statements, a price of the residual in words, a reset-started suite, a check mode discovered from the program (exact for 5 of 10, blind to the world), and then the claim that the decision had to be read at all: it is decided by a free attempt.",
+  "incremental_spend_usd": 0,
+  "independent_verification_completed": false,
+  "independent_verification_note": "Producer-run sandbox only. Every number is a receipt row: 160 states, 10 actions, 80 refused attempts all free, 80 commits all exact and undoable, ENOTEMPTY for os.replace on a populated directory, RENAME_EXCHANGE supported here, the fallback window observed, 0 model calls, 0 parameters.",
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md",
+   "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+  "progress_evidence_paths": [
+   "canonical/verification/THE_FAILED_ATTEMPT_IS_FREE_20261116_V1.json",
+   "THE_FAILED_ATTEMPT_IS_FREE_20261116_V1.md",
+   "canonical/tools/the_failed_attempt_is_free_v1.py",
+   "canonical/tests/test_the_failed_attempt_is_free_v1.py"
+  ],
+  "route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+  "scope_complete_discharge": false,
+  "terminal_achieved": false
+ },
+ "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Trial-and-error is sound iff failure is free, and a failure is free iff the attempt happens in a stage and the commit is one rename. On real actions a refused attempt costs a copy of the tree and leaves the live tree byte-identical (80 of 80), a committed attempt is exact and undoable (80 of 80), and the decision no longer depends on the action being readable -- the five actions no check mode could guard are decided at 1.0 by attempt. What remains is the commit: atomic only where the filesystem can exchange two populated paths, with a measured window everywhere else.",
+ "canonical_base_commit": "1d6905bb07f24d2c9b2239c1b56daa9adbf39469",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "Trial-and-error is sound iff failure is free, and a failure is free iff the attempt happens in a stage and the commit is one rename. On real actions a refused attempt costs a copy of the tree and leaves the live tree byte-identical (80 of 80), a committed attempt is exact and undoable (80 of 80), and the decision no longer depends on the action being readable -- the five actions no check mode could guard are decided at 1.0 by attempt. What remains is the commit: atomic only where the filesystem can exchange two populated paths, with a measured window everywhere else.",
+ "date": "2026-11-16",
+ "expected_parent_change": "Measures what actually makes one-trial learning sound: not the decision, the free failure. On 160 real states of 10 real actions, staging the attempt in a copy and committing with renameat2(RENAME_EXCHANGE) decides every action at 1.0 -- including the five the previous round proved no check mode can guard -- with 80 of 80 refused attempts leaving the live tree byte-identical, and 80 of 80 commits exact, displaced-tree-exact and undoable. os.replace, the publication primitive this tree already uses, fails on a populated directory with ENOTEMPTY; the two-rename fallback has a measured window in which the live path does not exist; a read-only parent refuses the commit and moves nothing.",
+ "expected_parent_frontier_change": "The decision half of trial-and-error is solved by not deciding: attempt in a stage, and a wrong attempt costs a copy. The remaining half is the commit, which is one atomic rename only where the filesystem can exchange two populated paths, and a window everywhere else.",
+ "expected_parent_level_state_change": "The decision half of trial-and-error is solved by not deciding: attempt in a stage, and a wrong attempt costs a copy. The remaining half is the commit, which is one atomic rename only where the filesystem can exchange two populated paths, and a window everywhere else.",
+ "explicit_user_authorization": [
+  "Why can't we just give our model the most advanced coding actions, let it experience them once, and have it learn them? Can't we do this now?",
+  "we are building our own model. never reach for another model or use it and call it ours",
+  "every bit of our weights must be calculated, not a knowledge house",
+  "the best part is no part",
+  "you must think from first principles for everything",
+  "You should kill all the bad and dumb ideas before you waste time implementing them.",
+  "NEVER BUILD BEFORE REASRCHING EXHAUSTION IS HAPPENED",
+  "maximize your web use",
+  "What is the single bottleneck that, if fixed, would unlock the most capability?",
+  "all the tests are not on synthetic data but are on the hardest open tests",
+  "only our agent/system may run them; integrity 100% real",
+  "the honest truth is that we keep testing on bugs we already know work",
+  "Work in branch, merge only when complete (fastest)",
+  "Merge once, not 10 times."
+ ],
+ "falsification_condition": "FALSIFIED if any refused attempt changes one byte of the live tree; if any committed attempt leaves the live tree different from the stage; if the displaced tree is not byte-identical to the pre-state; if undoing the exchange does not restore the pre-state; if os.replace is reported as able to replace a populated directory; if the fallback window is not observed; if there is any model call or parameter.",
+ "generic_repair_from_single_probe": false,
+ "governance_change": false,
+ "highest_leverage_now": true,
+ "incremental_spend_usd": 0,
+ "intentional_route_race": false,
+ "load_bearing_primary": {
+  "constructive_gap_for_open_obligation_ids": [
+   "CODING_TB4_GE_66_4"
+  ],
+  "expected_obligation_discharge_lcb": 0,
+  "expected_obligation_unlock_lcb": "1/50",
+  "interpretation": "Speculative forecast only. The round removes the need for an oracle in the decision and names the commit as the residual; no truth obligation is discharged.",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "1/2",
+  "wall_clock_cost_ub": 1
+ },
+ "measured_effect": {
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "commit_primitive": {
+   "exchange_supported_here": true,
+   "fallback_window": true,
+   "os_replace_on_populated_directory": [
+    "OSError:ENOTEMPTY:Directory not empty"
+   ]
+  },
+  "committed_attempts": 80,
+  "cost": {
+   "model_calls": 0,
+   "network_calls_at_run_time": 0,
+   "parameters_stored": 0,
+   "seconds": 9.2
+  },
+  "declared_acceptance": {
+   "K1_the_staged_decision_is_the_real_decision": "MET",
+   "K2_a_refused_attempt_is_free": "MET",
+   "K3_a_committed_attempt_is_exact_and_undoable": "MET",
+   "K4_the_commit_primitive_measured": "MET",
+   "K5_the_price_of_undo": "MEASURED",
+   "K6_zero": "MET"
+  },
+  "markdown": "THE_FAILED_ATTEMPT_IS_FREE_20261116_V1.md",
+  "price_of_undo": {
+   "amplification_by_content_bytes": {
+    "chmod_exec": null,
+    "git_branch_delete_feature": 151.1,
+    "git_checkout_feature": 14.9,
+    "git_merge_abort": 12.4,
+    "git_rebase_abort": 6.9,
+    "git_rm_cached_tracked": 74.6,
+    "git_stash_pop": 47.2,
+    "gzip_decompress": 601.1,
+    "patch_apply_real": 4810.8,
+    "tar_extract": null
+   },
+   "bytes_staged_per_attempt": {
+    "chmod_exec": 28872,
+    "git_branch_delete_feature": 29008,
+    "git_checkout_feature": 28894,
+    "git_merge_abort": 29598,
+    "git_rebase_abort": 31541,
+    "git_rm_cached_tracked": 28704,
+    "git_stash_pop": 29745,
+    "gzip_decompress": 28854,
+    "patch_apply_real": 28865,
+    "tar_extract": 28856
+   }
+  },
+  "refused_attempts": 80,
+  "staged_decision_agreement": {
+   "chmod_exec": 1.0,
+   "git_branch_delete_feature": 1.0,
+   "git_checkout_feature": 1.0,
+   "git_merge_abort": 1.0,
+   "git_rebase_abort": 1.0,
+   "git_rm_cached_tracked": 1.0,
+   "git_stash_pop": 1.0,
+   "gzip_decompress": 1.0,
+   "patch_apply_real": 1.0,
+   "tar_extract": 1.0
+  }
+ },
+ "next_step": "Take the commit to the place it does not exist: for effects where RENAME_EXCHANGE is unavailable, write a write-ahead record (paths, preimage digests, staged tree), fsync it, commit as a sequence of single-path renames each atomic on its own, and recover from the record on the next start. Prediction: a record-based commit recovers byte-exactly from a crash injected at every step of a multi-path commit, at one fsync per step. Falsifier: if recovery is not byte-exact from a crash between two single-path renames, or needs a step that is itself not atomic, then multi-path commits have no sound portable implementation and any-computer-use must be restricted to effects that fit in one rename.",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "prior_work_reused": [
+  "canonical/runtime/brokered_workspace_execution_v1.py (snapshot, stage, checker, publish)",
+  "canonical/runtime/repair_candidate_broker_v1.py (snapshot_project, stage_project)",
+  "canonical/tools/the_check_mode_is_the_oracle_v1.py (10 actions, 160 states, digest, traps)",
+  "canonical/tools/the_precondition_is_not_in_the_trace_v1.py (states, verdict, run)",
+  "canonical/verification/THE_CHECK_MODE_IS_THE_ORACLE_20261116_V1.json (the limit this round removes)"
+ ],
+ "probe_specific": false,
+ "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+ "progress_evidence_paths": [
+  "canonical/verification/THE_FAILED_ATTEMPT_IS_FREE_20261116_V1.json",
+  "THE_FAILED_ATTEMPT_IS_FREE_20261116_V1.md",
+  "canonical/tools/the_failed_attempt_is_free_v1.py",
+  "canonical/tests/test_the_failed_attempt_is_free_v1.py"
+ ],
+ "real_outcome": "That one-trial learning is licensed by reversibility, not by knowledge: with a stage and an exchange, every action is decided by attempt at 1.0 including the five no check mode could guard, refusals are free (80/80 byte-identical live tree), commits are exact and undoable (80/80), and the only irreducible step is the commit, which os.replace cannot perform on a populated directory (ENOTEMPTY) and which the portable fallback performs with a window.",
+ "recursive_obs": {
+  "canonical_base_commit": "1d6905bb07f24d2c9b2239c1b56daa9adbf39469",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "an oracle that reads whether an action applies (replaced by a free attempt)",
+   "a sensor vocabulary for the world's refusal (replaced by a stage)",
+   "the assumption that os.replace is an atomic publication for a live target",
+   "a two-rename commit presented as atomic"
+  ],
+  "expected_parent_frontier_change": "The decision half of trial-and-error is solved by not deciding: attempt in a stage, and a wrong attempt costs a copy. The remaining half is the commit, which is one atomic rename only where the filesystem can exchange two populated paths, and a window everywhere else.",
+  "expected_parent_level_state_change": "The decision half of trial-and-error is solved by not deciding: attempt in a stage, and a wrong attempt costs a copy. The remaining half is the commit, which is one atomic rename only where the filesystem can exchange two populated paths, and a window everywhere else.",
+  "independent_verification_required": true,
+  "iteration_limit": 1,
+  "next_step": "Take the commit to the place it does not exist: for effects where RENAME_EXCHANGE is unavailable, write a write-ahead record (paths, preimage digests, staged tree), fsync it, commit as a sequence of single-path renames each atomic on its own, and recover from the record on the next start. Prediction: a record-based commit recovers byte-exactly from a crash injected at every step of a multi-path commit, at one fsync per step. Falsifier: if recovery is not byte-exact from a crash between two single-path renames, or needs a step that is itself not atomic, then multi-path commits have no sound portable implementation and any-computer-use must be restricted to effects that fit in one rename.",
+  "obs_blocker": {
+   "delete_bypass_substitute_options": [
+    "a decision made by a free attempt rather than a reading",
+    "bypass the reset convention with a deeper run set: depth cannot help, because the equivalence is forced at every depth by the count starting at zero",
+    "substitute more environments for the missing pre-state: the third environment removed nothing, and the pre-state removed the pair"
+   ],
+   "intrinsic_or_path_specific": "Trial-and-error is sound iff failure is free, and a failure is free iff the attempt happens in a stage and the commit is one rename. On real actions a refused attempt costs a copy of the tree and leaves the live tree byt",
+   "surviving_causal_blocker": "Trial-and-error is sound iff failure is free, and a failure is free iff the attempt happens in a stage and the commit is one rename. On real actions a refused attempt costs a copy of the tree and leaves the live tree byt"
+  },
+  "obs_capability": {
+   "capability_work_deleted": [
+    "a decision made by a free attempt rather than a reading",
+    "any claim that depth or breadth can separate the pair",
+    "a second harness or grammar: the previous round's grammar is held fixed at 189 terms"
+   ],
+   "existing_inherited_routes_checked": [
+    "a decision made by a free attempt rather than a reading",
+    "canonical/tools/the_goal_is_a_relation_over_the_run_v1.py (traces_for, run_terms)",
+    "canonical/tools/the_vocabulary_is_the_artifact_v1.py (the machines and their readers)",
+    "canonical/verification/BREADTH_BUYS_WHAT_REPETITION_CANNOT_20261201_V1.json (withdrawn here)",
+    "canonical/tools/the_precondition_is_not_in_the_trace_v1.py (preconditions of real actions; reused as the independent measurement of the same conditional from the applicability side)"
+   ],
+   "external_existing_routes_checked": [
+    "a decision made by a free attempt rather than a reading",
+    "conformance testing without a reliable reset (Lee-Yannakakis, UIOv): the reset assumption is known to hide behaviour reachable only from other states",
+    "2026 benchmark analyses separating task difficulty from world richness, and stateful/continual learning benchmarks: a fixed initial state and a reset hide whether anything was learned"
+   ],
+   "surviving_gap": "Trial-and-error is sound iff failure is free, and a failure is free iff the attempt happens in a stage and the commit is one rename. On real actions a refused attempt costs a copy of the tree and leaves the live tree byt"
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "a decision made by a free attempt rather than a reading",
+    "a run set that is deep but always begins in the same state",
+    "the pair alone as the unit: the whole grammar's goal class is reported before and after"
+   ],
+   "real_outcome": "Trial-and-error is sound iff failure is free, and a failure is free iff the attempt happens in a stage and the commit is one rename. On real actions a refused attempt costs a copy of the tree and leaves the live tree byt",
+   "surviving_necessity": "Trial-and-error is sound iff failure is free, and a failure is free iff the attempt happens in a stage and the commit is one rename. On real actions a refused attempt costs a copy of the tree and leaves the live tree byt"
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "Trial-and-error is sound iff failure is free, and a failure is free iff the attempt happens in a stage and the commit is one rename. On real actions a refused attempt costs a copy of the tree and leaves the live tree byt",
+   "downstream_work_to_delete_or_supersede": "Trial-and-error is sound iff failure is free, and a failure is free iff the attempt happens in a stage and the commit is one rename. On real actions a refused attempt costs a copy of the tree and leaves the live tree byt",
+   "fresh_reuse_plan": "Trial-and-error is sound iff failure is free, and a failure is free iff the attempt happens in a stage and the commit is one rename. On real actions a refused attempt costs a copy of the tree and leaves the live tree byt"
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": "Trial-and-error is sound iff failure is free, and a failure is free iff the attempt happens in a stage and the commit is one rename. On real actions a refused attempt costs a copy of the tree and leaves the live tree byt",
+   "search_stop_decision": "Trial-and-error is sound iff failure is free, and a failure is free iff the attempt happens in a stage and the commit is one rename. On real actions a refused attempt costs a copy of the tree and leaves the live tree byt"
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "efficiency_mechanism": "Trial-and-error is sound iff failure is free, and a failure is free iff the attempt happens in a stage and the commit is one rename. On real actions a refused attempt costs a copy of the tree and leaves the live tree byt",
+   "generality_mechanism": "Trial-and-error is sound iff failure is free, and a failure is free iff the attempt happens in a stage and the commit is one rename. On real actions a refused attempt costs a copy of the tree and leaves the live tree byt",
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "Trial-and-error is sound iff failure is free, and a failure is free iff the attempt happens in a stage and the commit is one rename. On real actions a refused attempt costs a copy of the tree and leaves the live tree byt",
+   "routes_ranked": [
+    "a decision made by a free attempt rather than a reading",
+    "ask the user which of the two sentences was meant",
+    "deepen or widen the reset-started suite",
+    "train or distil something to guess the goal"
+   ]
+  },
+  "obs_verification": {
+   "authority": "NONE__PRODUCER_RUN_SANDBOX",
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "oracle_paths": [
+    "canonical/verification/THE_FAILED_ATTEMPT_IS_FREE_20261116_V1.json",
+    "canonical/tests/test_the_failed_attempt_is_free_v1.py"
+   ],
+   "synthetic_verification_necessity": "None: every attempt runs a real program on a real tree, and the commit is a real renameat2 call.",
+   "verification_that_would_change_the_verdict": "an independent run in which a refused attempt changes a byte, or a commit leaves live != stage, or the undo does not restore the pre-state"
+  },
+  "real_outcome": "That one-trial learning is licensed by reversibility, not by knowledge: with a stage and an exchange, every action is decided by attempt at 1.0 including the five no check mode could guard, refusals are free (80/80 byte-identical live tree), commits are exact and undoable (80/80), and the only irreducible step is the commit, which os.replace cannot perform on a populated directory (ENOTEMPTY) and which the portable fallback performs with a window.",
+  "required_capability": "staging a live tree, running a real action there, verifying the staged result, committing by one renameat2 exchange, verifying the displaced tree, and undoing byte-exactly",
+  "route_frontier": {
+   "challenger_routes": [
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "1 verified repair; 13 of 30 rows addressed; 0 accusations",
+      "CORRECTNESS": "the corpus's own suite, whole file",
+      "INCREMENTAL_COST": "0 parameters, 0 model calls, ~10 us per candidate",
+      "RELIABILITY": "superseded: the goal read off one state is empty wherever two runs end alike",
+      "VERIFIABILITY": "receipt rows, producer-run",
+      "WALL_CLOCK": "83.6 s for 30 commits"
+     },
+     "evidence": [
+      "30 real commits, 83.6 s, 0 accusations, grammar named for every exclusion, 1 row recovered by the AST finder, 1 verified repair unchanged, 1 harness failure stopped from wearing a fact's name"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_HYPOTHESIS_GRAMMAR_IS_THE_BOTTLENECK_20261122_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "READ_THE_FIX_FROM_THE_AST_AND_NAME_THE_GRAMMAR_OF_THE_POPULATION"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "3 of 40 programs",
+      "CORRECTNESS": "a class is only as good as its donor",
+      "INCREMENTAL_COST": "one class per shape",
+      "RELIABILITY": "unseen shapes stay unseen",
+      "VERIFIABILITY": "measured exactly",
+      "WALL_CLOCK": "unbounded as the corpus grows"
+     },
+     "evidence": [
+      "a taught class reaches 8 of 40 fixes, 5 only on its donor"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/WHAT_IS_LEFT_FOR_A_LESSON_TO_BUY_20261117_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "teach one more edit class per failing task"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "2 of 30 unseen programs from 3 pairs, at 1.92% precision on the pair that fires",
+      "CORRECTNESS": "the corpus's own pytest decides, as here",
+      "INCREMENTAL_COST": "40.6 us per lookup, no model, no parameters",
+      "RELIABILITY": "saturates: addressability 34.4% -> 59.7% over 24 experiences",
+      "VERIFIABILITY": "measured exactly",
+      "WALL_CLOCK": "5 minutes for the whole corpus"
+     },
+     "evidence": [
+      "0.597 addressable x 0.0192 precise ~ 1.1% of unseen decisions"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/WHAT_AN_EXPERIENCE_CAN_OWN_20261118_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "NON_DOMINATING",
+     "route": "store every verified repair and retrieve it by similarity"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "1 real commit identified at rank 0, unattended, with no diff and no name table",
+      "CORRECTNESS": "the artifact answers, so a question is either answered or refused -- never wrong",
+      "INCREMENTAL_COST": "7.69 ms per asked question, 1 bit",
+      "RELIABILITY": "superseded: the goal read off one state is empty wherever two runs end alike",
+      "VERIFIABILITY": "measured exactly",
+      "WALL_CLOCK": "121.2 s for 14 bugs"
+     },
+     "evidence": [
+      "click@1b0e19f505: human fix derived at rank 0 from the trace, 2 consistent candidates of 119 tests",
+      "5 evaluated candidates per site against the proximity pool's 32-400"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_FAILING_RUN_IS_THE_INDEX_20261118_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "INDEX_ACTIONS_BY_THE_FAILING_RUN_NOT_BY_THE_SOURCE_TEXT"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "run-level goals inferred from judgments: 0 false accepts, 5-6 questions, exact where asked",
+      "CORRECTNESS": "leave-one-run-out against the user's own judgments on executed runs",
+      "INCREMENTAL_COST": "0 parameters, 0 model calls, 18.1 s for 136 runs and ~1000 hypotheses per goal",
+      "RELIABILITY": "sound and incomplete: 1 run of 136 refused by the intersection",
+      "VERIFIABILITY": "receipt rows, producer-run, blocker hypothesis reproduced in the suite",
+      "WALL_CLOCK": "18.1 s"
+     },
+     "evidence": [
+      "136 real runs on 3 machines; 9 final states reached with opposite judgments; 0 final-state terms disagree inside a group; the final-state version space is empty on every goal holding one; the run grammar is identified in 5-6 questions at 1.00 accuracy and is 135/136 leave-one-run-out with 0 false accepts"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_GOAL_IS_A_RELATION_OVER_THE_RUN_20261127_V1.json",
+      "canonical/verification/THE_GOAL_IS_A_DISCRIMINATOR_20261126_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "INFER_A_RELATION_OVER_THE_RUN_FROM_JUDGMENTS_AND_ACT_ON_THE_INTERSECTION"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "the observable is computed and priced: 3-6 cells per goal, one statistic across three machines",
+      "CORRECTNESS": "the coarsest sufficient statistic of the reachable pool, with witnesses for every cheaper one",
+      "INCREMENTAL_COST": "0 parameters, 0 model calls, 23.7 s for 3444+ projections",
+      "RELIABILITY": "refuted by its own refinement: 0 counterexamples in 6 questions by both computable orderings, and its 208-collision headline is retracted -- 0 of those collisions is harmful",
+      "VERIFIABILITY": "receipt rows, producer-run, both declared failures pinned in the suite",
+      "WALL_CLOCK": "23.7 s"
+     },
+     "evidence": [
+      "four rungs over three machines and five goals; cells 68->55->19->5, 48->7->7->4, 32->7->7->3, 68->56->24->6; every cheaper statistic refuted with a witness pair; 0 of 3444 reading projections separate a goal about which atom ran; 208 collisions at held-out depth",
+      "the coarsest statistic is not harmed by its collisions: 675 FILESYSTEM pairs and 1765 depth-4 pairs, 0 harmful, 87/87 verdicts right"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_GOAL_IS_A_QUOTIENT_OF_THE_TRACE_20261128_V1.json",
+      "canonical/verification/THE_GOAL_IS_A_RELATION_OVER_THE_RUN_20261127_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "COMPUTE_THE_COARSEST_SUFFICIENT_STATISTIC_AND_PRICE_THE_GOAL_IN_EXPERIENCES"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "one counterexample buys the coarsest 3-cell statistic; 2 questions by cell labelling, 30 by its guarantee",
+      "CORRECTNESS": "the user's judgments on executed runs; the depth-3 table answers 87 of 87 depth-4 runs, with 0 undecided and 0 false accepts",
+      "INCREMENTAL_COST": "0 parameters, 0 model calls, one signature table per pool",
+      "RELIABILITY": "superseded: it measured a supplied predicate and called the result the goal; the supply is now visible as 79 statements with one behaviour",
+      "VERIFIABILITY": "receipt rows, producer-run, every count pinned in the suite",
+      "WALL_CLOCK": "37.4 s for three machines, four question policies and three rank diagnostics"
+     },
+     "evidence": [
+      "FILESYSTEM 675 conflations / 0 harmful; SQLITE 337 / 0; TARBALL 321 / 10",
+      "one harmful answer -> the coarsest 3-cell statistic, which had been one generator away",
+      "depth 4: 87 runs, 1765 conflations, 0 harmful, 0 false accepts, 0 undecided",
+      "cheapest-refinement and no-signal: 6 questions, 0 counterexamples, best harmful rank 130 / 136 of 321 (chance 29.3); committee ties on 311 of 321",
+      "the environment is learned exactly (229 of 231 decided, 0 errors) and the goal is not: 353 behaviours, 79 statements, a class of four intentions that splits on 32 of 196 runs"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_COUNTEREXAMPLE_IS_THE_NEXT_EXPERIMENT_20261129_V1.json",
+      "canonical/verification/THE_GOAL_IS_A_QUOTIENT_OF_THE_TRACE_20261128_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "ASK_FOR_ONE_COUNTEREXAMPLE_AND_LABEL_WHOLE_CELLS_INSTEAD_OF_HUNTING_DISAGREEMENT"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "separates the two objects the claim conflates: 353 behaviours of resolving power, 8 active judgments to reach it, 4 intentions left indistinguishable and split by the next machine",
+      "CORRECTNESS": "every number is a count over executed runs; the ceiling is re-derivable from the grammar and the traces, and the transfer is a plain evaluation elsewhere",
+      "INCREMENTAL_COST": "0 parameters, 0 model calls, one grammar pass per pool",
+      "RELIABILITY": "superseded and corrected: its 79 statements were 75 redundant conjunctions, and one machine's class is 4, not 79",
+      "VERIFIABILITY": "receipt rows, producer-run, every count pinned in the suite",
+      "WALL_CLOCK": "158.3 s for two machines, 427 runs, 12 881 hypotheses"
+     },
+     "evidence": [
+      "TARBALL: 231 runs, 11 935 hypotheses, 353 behaviours, 79 statements for the user's goal",
+      "four statements, one behaviour on all 231 runs; 32 of 196 runs separate the pair on FILESYSTEM",
+      "active 353 -> 176 -> 89 -> 29 -> 14 -> 7 -> 5 -> 2 -> 1 in 8 judgments; passive 20 behaviours at 8",
+      "registered control: depth-3 table decides 229 of 231 depth-5 runs, 0 false accepts, 0 false rejects, 2 undecided",
+      "breadth priced: 4 -> 2 -> 2 minimal statements across three machines, the third removing nothing; 57.1 % of 622 behaviours pinned by a unique statement"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_GOAL_IS_NOT_IN_THE_ENVIRONMENT_20261130_V1.json",
+      "canonical/verification/THE_COUNTEREXAMPLE_IS_THE_NEXT_EXPERIMENT_20261129_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "SEPARATE_THE_ENVIRONMENT_FROM_THE_GOAL_AND_PRICE_THE_GOAL_IN_JUDGMENTS"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "prices breadth and its saturation: 622 behaviours, the goal's class 4 -> 2 -> 2, a residual of one question of words",
+      "CORRECTNESS": "correct for suites that begin at reset, where the pair is forced to agree; not a claim about the machines",
+      "INCREMENTAL_COST": "0 parameters, 0 model calls, one term evaluation per machine",
+      "RELIABILITY": "superseded: the residual it priced in words is separated by one action from a reachable pre-state, at zero questions",
+      "VERIFIABILITY": "receipt rows, producer-run, every count pinned in the suite",
+      "WALL_CLOCK": "108.8 s for three machines, 555 runs, 29 890 hypotheses and seven subsets"
+     },
+     "evidence": [
+      "244 terms, 29 890 hypotheses, 555 runs, 622 behaviours; 354 behaviours with a unique statement",
+      "the goal's minimal class: 4 on TARBALL, 2 after a second machine, 2 after the third",
+      "residual: created_once[probe_new_content] vs monotone[probe_new_content] and final:count[probe_new_content]==1 -- one question of the user, zero runs",
+      "correction: the previous round's 79 contained 75 redundant conjunctions"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/BREADTH_BUYS_WHAT_REPETITION_CANNOT_20261201_V1.json",
+      "canonical/verification/THE_GOAL_IS_NOT_IN_THE_ENVIRONMENT_20261130_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "PRICE_THE_RESIDUAL_CLASS_OF_EVERY_GOAL_ACROSS_ENVIRONMENTS_AND_ANSWER_IT_IN_WORDS"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "the goal's class 2 -> 1 over a fixed 189-term grammar; 8 substantive witnesses on 2 machines",
+      "CORRECTNESS": "one real action from a pre-state the machine actually reaches, with the pre-state reproduced before the action is judged",
+      "INCREMENTAL_COST": "0 parameters, 0 model calls, 2 actions of prefix at most",
+      "RELIABILITY": "0 fabricated pre-states; the only degenerate direction is proved impossible, not assumed",
+      "VERIFIABILITY": "receipt rows plus 13 tests that re-execute the round",
+      "WALL_CLOCK": "36.6 s for 80 experiments and the whole analysis"
+     },
+     "evidence": [
+      "canonical/verification/THE_PRE_STATE_IS_THE_MISSING_PART_20261116_V1.json",
+      "canonical/tests/test_the_pre_state_is_the_missing_part_v1.py"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/BREADTH_BUYS_WHAT_REPETITION_CANNOT_20261201_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "SELECTED",
+     "route": "SEPARATE_THE_RESIDUAL_BY_LETTING_THE_RUN_BEGIN_WHERE_THE_MACHINE_ALREADY_IS"
+    }
+   ],
+   "checked_at_utc": "2026-11-19T03:36:08Z",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "PRICE_THE_RESIDUAL_CLASS_OF_EVERY_GOAL_ACROSS_ENVIRONMENTS_AND_ANSWER_IT_IN_WORDS",
+   "max_age_hours": 2,
+   "negative_search_summary": "Refused by measurement: deepening one machine (saturates at its resolving power), a syntactic count of statements (75 of 79 redundant), a bigger learner (the residual is bits of what the user meant), and treating a second environment as unbounded progress (the third removed nothing).",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "state identification characterization set conformance testing behavioural equivalence minimal distinguishing statements"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "version space minimal hypothesis redundancy structural equivalence queries identification"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "2026 goal underspecification eliciting user intent language versus demonstration agents"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "AALpy LearnLib distinguishing sequences benchmarking identification black-box 2026"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "selected_route": "MAKE_THE_FAILURE_FREE_INSTEAD_OF_PREDICTING_THE_EFFECT",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-11-19T05:21:05Z",
+    "execution_dependencies": [
+     {
+      "dependency": "local Python 3.11 runtime with pytest",
+      "evidence": [
+       "13 instrument tests pass in 36.5 s; 33/33 unified-model gates pass"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "real tool binaries the machines drive (sh, mv, cp, rm, sqlite3, tar)",
+      "evidence": [
+       "203 reset-started runs plus 80 pre-state experiments across three machines, 0 pre-states fabricated"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "local tempdir for one fresh reset and one prefix replay per experiment",
+      "evidence": [
+       "each experiment replays a real prefix and refuses itself unless the recorded pre-state is reproduced; 0 refusals of that kind"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "STORAGE",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "incumbent_route": "SEPARATE_THE_RESIDUAL_BY_LETTING_THE_RUN_BEGIN_WHERE_THE_MACHINE_ALREADY_IS",
+    "max_age_hours": 2,
+    "negative_search_summary": "Refused by measurement: a better read of the state (0.7647), a check mode discovered from the program (exact for 5 of 10, blind to the world), a prediction of the world (no model), and a two-rename commit presented as atomic (a window was observed).",
+    "query_families": [
+     {
+      "intent": "CAPABILITY_VECTOR",
+      "query": "renameat2 RENAME_EXCHANGE atomic directory swap supported filesystems 2026"
+     },
+     {
+      "intent": "IMPLEMENTATION_FORM",
+      "query": "staged promotion recovery record fsync crash injection rollback byte-exact 2026"
+     },
+     {
+      "intent": "RECENCY_OR_NEW_RELEASE",
+      "query": "agent atomic apply rollback workspace isolation trial and error safe 2026"
+     },
+     {
+      "intent": "SUPPLIER_OR_PRODUCT",
+      "query": "git worktree copy-on-write reflink cheap staged tree agent"
+     }
+    ],
+    "selected_route": "MAKE_THE_FAILURE_FREE_INSTEAD_OF_PREDICTING_THE_EFFECT",
+    "status": "READY"
+   },
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/tools/grammar_closed_repair_v1.py (corpus reader, space enumerator, real judge, executed_lines)",
+     "canonical/tools/solve_with_a_calibrated_judge_v1.py (certified judge, per-case clocks, containment)",
+     "canonical/verification/WHERE_THE_REFUSALS_ACTUALLY_WERE_20261116_V1.json",
+     "canonical/verification/ONE_DEMONSTRATION_LEAVES_TEN_BITS_20261116_V1.json"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "https://arxiv.org/pdf/2611.12885 (World In-Context Learning: one demonstration plus rehearsal beats a 50-demonstration trained policy; without the world the demonstration brings no benefit)",
+     "https://arxiv.org/html/2606.29537v1 (OSWorld 2.0: 20.6% binary completion, failures concentrate on hidden state)",
+     "https://arxiv.org/html/2606.31270v1 (Learning from Failure: inference-time self-improvement from failure trajectories)"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "https://github.com/jkoppel/QuixBugs (MIT; 40 buggy programs, 40 pytest files, JSON test data)",
+     "https://pypi.org/project/pytest (9.2.0, the runner every verdict goes through)"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "https://docs.python.org/3/library/ast.html (node types the closure rule enumerates)"
+    ]
+   },
+   "unresolved_plausible_dominators": []
+  },
+  "routes_considered": [
+   "MAKE_THE_FAILURE_FREE_INSTEAD_OF_PREDICTING_THE_EFFECT",
+   "ASK_THE_PROGRAM_FOR_A_READ_ONLY_DECISION_INSTEAD_OF_LEARNING_ONE",
+   "TRAIN_OR_DISTIL_A_MODEL__REFUSED_BY_OWNER_LAW_AND_UNNECESSARY_FOR_A_TWO_STATE_RUN",
+   "DEEPEN_OR_WIDEN_THE_RESET_STARTED_SUITE__REFUSED_BY_ARITHMETIC_AND_BY_MEASUREMENT",
+   "ASK_THE_USER_WHICH_SENTENCE_WAS_MEANT__SUPERSEDED_BY_A_REACHABLE_PRE_STATE",
+   "EXECUTE_ONE_ACTION_FROM_EACH_REACHABLE_PRE_STATE__SELECTED"
+  ],
+  "selected_route": "STAGE_RUN_VERIFY_EXCHANGE_VERIFY_UNDO_VERIFY_ON_REAL_ACTIONS",
+  "selected_surviving_route": "MAKE_THE_FAILURE_FREE_INSTEAD_OF_PREDICTING_THE_EFFECT",
+  "selected_surviving_route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+  "stop_condition": "Take the commit to the place it does not exist: for effects where RENAME_EXCHANGE is unavailable, write a write-ahead record (paths, preimage digests, staged tree), fsync it, commit as a sequence of single-path renames each atomic on its own, and recover from the record on the next start. Prediction: a record-based commit recovers byte-exactly from a crash injected at every step of a multi-path commit, at one fsync per step. Falsifier: if recovery is not byte-exact from a crash between two single-path renames, or needs a step that is itself not atomic, then multi-path commits have no sound portable implementation and any-computer-use must be restricted to effects that fit in one rename.",
+  "why_selected_route_is_fastest_sufficient": "Because it needs no knowledge at all: one copy and one exit status decide the action, one rename makes it real, and the same rename takes it back. Nothing cheaper can be sound, and nothing sound is cheaper.",
+  "why_this_is_not_another_organ": "It adds no knowledge, no model and no grammar: one walks pass over the machines already in the tree, one action per reachable pre-state, and the previous round's own term set held fixed."
+ },
+ "required_capability": "staging a live tree, running a real action there, verifying the staged result, committing by one renameat2 exchange, verifying the displaced tree, and undoing byte-exactly",
+ "route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+ "route_id": "MAKE_THE_FAILURE_FREE_INSTEAD_OF_PREDICTING_THE_EFFECT",
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "scope_complete_discharge": false,
+ "selected_route": "STAGE_RUN_VERIFY_EXCHANGE_VERIFY_UNDO_VERIFY_ON_REAL_ACTIONS",
+ "selected_surviving_route": "MAKE_THE_FAILURE_FREE_INSTEAD_OF_PREDICTING_THE_EFFECT",
+ "status": "PROPOSED__PRODUCER_MEASURED__FAILURE_IS_FREE_AND_THE_COMMIT_IS_THE_RESIDUAL__INDEPENDENT_VERIFICATION_OPEN",
+ "stop_condition": "Take the commit to the place it does not exist: for effects where RENAME_EXCHANGE is unavailable, write a write-ahead record (paths, preimage digests, staged tree), fsync it, commit as a sequence of single-path renames each atomic on its own, and recover from the record on the next start. Prediction: a record-based commit recovers byte-exactly from a crash injected at every step of a multi-path commit, at one fsync per step. Falsifier: if recovery is not byte-exact from a crash between two single-path renames, or needs a step that is itself not atomic, then multi-path commits have no sound portable implementation and any-computer-use must be restricted to effects that fit in one rename.",
+ "terminal_credit_delta": 0,
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "truth": {
+  "achieved": false,
+  "the_law_this_round_adds": "Trial-and-error is sound iff failure is free, and a failure is free iff the attempt happens in a stage and the commit is one rename. On real actions a refused attempt costs a copy of the tree and leaves the live tree byte-identical (80 of 80), a committed attempt is exact and undoable (80 of 80), and the decision no longer depends on the action being readable -- the five actions no check mode could guard are decided at 1.0 by attempt. What remains is the commit: atomic only where the filesystem can exchange two populated paths, with a measured window everywhere else.",
+  "what_is_false_in_the_claim": [
+   "that a check mode is needed to decide an action: the five actions no check mode could guard are decided at 1.0 by attempting in a stage",
+   "that this tree's atomic publication is atomic: os.replace on a populated directory fails ENOTEMPTY, so it is atomic only for an absent target",
+   "that a refused attempt costs the world: 80 of 80 refusals left the live tree byte-identical",
+   "that one trial gives permanent knowledge of the effect: the effect is a function of the environment, and what is permanent is the licence to try",
+   "that trial-and-error is safe in general: only for effects confined to the staged tree; a network call, a process or an absolute path outside is not undoable here",
+   "that exchange is a compare-and-swap: confirmed against the Nov-2026 record, and the concurrency boundary is declared instead"
+  ]
+ },
+ "user_authorized_governance_change": false,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "currentness": {
+   "accepted_families": 5,
+   "current_load_bearing_atomic_count": 36,
+   "deleted_nonnecessary_atomic_count": 2,
+   "historical_atomic_registry_count": 38,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_atomic": 38,
+   "total_families": 19,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "This measures the reach of an executed counterfactual over real commit history and finds the content of the fix outside it; it discharges no truth obligation.",
+  "target_truth_obligations": [
+   "CODING_TB4_GE_66_4"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [
+    {
+     "git_blob_sha": "aa752cadab44d7b354814507d437f4fa485aaf74",
+     "path": "canonical/verification/RECOGNITION_IS_THE_BOTTLENECK_20261121_V1.json"
+    }
+   ],
+   "decisive_question": "Before asking what the instrument can find, does it accept the human's own fix -- and if not, why not?",
+   "falsifier_id": "THE_DEMAND_MUST_ADMIT_THE_HUMAN_FIX_AND_NOT_A_CONSTANT",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "Zero generalising repairs out of thirty fresh commits is the counterexample, and it is recorded in the receipt rather than hidden.",
+   "proposal_id": "THE_ASSERTION_IS_THE_DEMAND_20261119_V1"
+  }
+ },
+ "verification": {
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "commands": [
+   "python3 canonical/tools/the_failed_attempt_is_free_v1.py --receipt canonical/verification/THE_FAILED_ATTEMPT_IS_FREE_20261116_V1.json",
+   "python3 -m pytest canonical/tests/test_the_failed_attempt_is_free_v1.py -q"
+  ],
+  "independent_verification_completed": false,
+  "independent_verification_required": true,
+  "tests_green": 12
+ },
+ "weakens_existing_guard": false
+}

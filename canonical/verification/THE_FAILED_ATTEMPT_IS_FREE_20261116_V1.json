@@ -1,0 +1,637 @@
+{
+ "schema": "BRAIN_THE_FAILED_ATTEMPT_IS_FREE_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "date": "2026-11-16",
+ "mode": "STAGE_RUN_VERIFY_SWAP_VERIFY_UNDO_VERIFY_ON_REAL_ACTIONS",
+ "why_this_round": {
+  "the_claim": "one trial per action, learned permanently, therefore all computer use",
+  "what_the_previous_round_left": "the decision is exact for 5 of 10 real actions from a program's own check mode, and 3 of 3 environment refusals are mispredicted, so a check cannot license the act",
+  "what_this_round_changes": "the decision is not read, it is attempted where failure is free, and the commit is the only irreversible step",
+  "reused_not_rebuilt": [
+   "canonical/runtime/brokered_workspace_execution_v1.py (snapshot, stage, verify, publish)",
+   "canonical/runtime/repair_candidate_broker_v1.py (snapshot_project, stage_project)",
+   "canonical/tools/the_check_mode_is_the_oracle_v1.py (the 10 actions, the states, the digest)",
+   "canonical/tools/the_precondition_is_not_in_the_trace_v1.py (states, verdict, run)"
+  ]
+ },
+ "criteria_were_declared_after_a_prototype_probe": false,
+ "declared_acceptance_before_the_receipt_run": {
+  "K1": "the staged exit status equals the action's real applicability on every state of every action, including the five no check mode could guard",
+  "K2": "every refused attempt leaves the live tree byte-identical",
+  "K3": "every committed attempt: live == stage, displaced == pre-state, and swapping back restores the pre-state, all byte-exact",
+  "K4": "os.replace of a populated directory fails; RENAME_EXCHANGE swaps two populated trees in one step; the two-rename fallback has a window with the live path missing",
+  "K5": "one copy of the tree per attempt, reported in bytes and seconds",
+  "K6": "zero model calls, zero parameters, zero network"
+ },
+ "verdict": {
+  "K1_the_staged_decision_is_the_real_decision": {
+   "agreement": {
+    "git_stash_pop": 1.0,
+    "git_merge_abort": 1.0,
+    "git_rebase_abort": 1.0,
+    "git_checkout_feature": 1.0,
+    "git_branch_delete_feature": 1.0,
+    "git_rm_cached_tracked": 1.0,
+    "tar_extract": 1.0,
+    "gzip_decompress": 1.0,
+    "chmod_exec": 1.0,
+    "patch_apply_real": 1.0
+   },
+   "the_five_no_check_mode_could_guard": {
+    "git_stash_pop": 1.0,
+    "git_merge_abort": 1.0,
+    "git_checkout_feature": 1.0,
+    "git_branch_delete_feature": 1.0,
+    "chmod_exec": 1.0
+   },
+   "MET": true
+  },
+  "K2_a_refused_attempt_is_free": {
+   "refused_attempts": 80,
+   "refused_attempts_that_changed_one_byte": [],
+   "try_refused_attempts": [
+    {
+     "action": "tar_extract",
+     "state": "tar_extract-world",
+     "staged_exit": 2,
+     "staged_changed": false,
+     "staged_bytes": 28862,
+     "seconds_in_stage": 0.004,
+     "staged_output": "tar: README.rst: Cannot open: File exists\ntar: Exiting with failure status due to previous errors",
+     "decision": "REFUSED",
+     "live_unchanged": true,
+     "trap": "tar_extract:read_only_target",
+     "trap_effective": true,
+     "live_exit": 2,
+     "live_output": "tar: README.rst: Cannot open: File exists\ntar: Exiting with failure status due to previous errors",
+     "stage_reproduced_the_refusal": true,
+     "live_tree_unchanged_by_the_refused_attempt": true
+    },
+    {
+     "action": "gzip_decompress",
+     "state": "gzip_decompress-world",
+     "staged_exit": 1,
+     "staged_changed": false,
+     "staged_bytes": 28860,
+     "seconds_in_stage": 0.001,
+     "staged_output": "gzip: payload: Permission denied",
+     "decision": "REFUSED",
+     "live_unchanged": true,
+     "trap": "gzip_decompress:read_only_target",
+     "trap_effective": true,
+     "live_exit": 1,
+     "live_output": "gzip: payload: Permission denied",
+     "stage_reproduced_the_refusal": true,
+     "live_tree_unchanged_by_the_refused_attempt": true
+    },
+    {
+     "action": "patch_apply_real",
+     "state": "patch_apply_real-world",
+     "staged_exit": 2,
+     "staged_changed": false,
+     "staged_bytes": 28873,
+     "seconds_in_stage": 0.002,
+     "staged_output": "patch: **** Can't create temporary file ./conflict.txt.oPcqSOc : Permission denied",
+     "decision": "REFUSED",
+     "live_unchanged": true,
+     "trap": "patch_apply_real:read_only_target",
+     "trap_effective": true,
+     "live_exit": 2,
+     "live_output": "patch: **** Can't create temporary file ./conflict.txt.oq2Cs2f : Permission denied",
+     "stage_reproduced_the_refusal": true,
+     "live_tree_unchanged_by_the_refused_attempt": true
+    }
+   ],
+   "trap_stage_reproduced_the_live_refusal": {
+    "tar_extract:read_only_target": true,
+    "gzip_decompress:read_only_target": true,
+    "patch_apply_real:read_only_target": true
+   },
+   "MET": true
+  },
+  "K3_a_committed_attempt_is_exact_and_undoable": {
+   "committed_attempts": 80,
+   "live_differs_from_stage": [],
+   "displaced_differs_from_pre_state": [],
+   "undo_failures": [],
+   "MET": true
+  },
+  "K4_the_commit_primitive_measured": {
+   "os_replace_on_populated_directory": [
+    "OSError:ENOTEMPTY:Directory not empty"
+   ],
+   "exchange": "RENAME_EXCHANGE",
+   "exchange_supported_here": true,
+   "fallback_window": {
+    "trap": "two_rename_fallback_window",
+    "trap_effective": true,
+    "live_path_missing_between_renames": true,
+    "live_equals_stage_after": true,
+    "note": "the portable fallback has a window in which the live tree does not exist; a crash inside it leaves no live tree at all, which is why the record/journal exists"
+   },
+   "read_only_parent_at_the_commit": {
+    "trap": "tar_extract:read_only_parent_at_the_commit",
+    "trap_effective": true,
+    "commit": "Permission denied",
+    "commit_refused": true,
+    "live_unchanged_after_failed_commit": true,
+    "note": "the stage was already built and verified; only the commit is refused, and a refused commit is a free failure because nothing moved"
+   },
+   "MET": true
+  },
+  "K5_the_price_of_undo": {
+   "bytes_staged_per_attempt": {
+    "git_stash_pop": 29755,
+    "git_merge_abort": 29604,
+    "git_rebase_abort": 31549,
+    "git_checkout_feature": 28902,
+    "git_branch_delete_feature": 29014,
+    "git_rm_cached_tracked": 28712,
+    "tar_extract": 28862,
+    "gzip_decompress": 28860,
+    "chmod_exec": 28878,
+    "patch_apply_real": 28873
+   },
+   "bytes_of_actual_effect": {
+    "git_stash_pop": 630,
+    "git_merge_abort": 2386,
+    "git_rebase_abort": 4551,
+    "git_checkout_feature": 1939,
+    "git_branch_delete_feature": 192,
+    "git_rm_cached_tracked": 385,
+    "tar_extract": 0,
+    "gzip_decompress": 48,
+    "chmod_exec": 0,
+    "patch_apply_real": 6
+   },
+   "entries_of_actual_effect": {
+    "git_stash_pop": 5,
+    "git_merge_abort": 7,
+    "git_rebase_abort": 23,
+    "git_checkout_feature": 3,
+    "git_branch_delete_feature": 2,
+    "git_rm_cached_tracked": 1,
+    "tar_extract": 0,
+    "gzip_decompress": 2,
+    "chmod_exec": 1,
+    "patch_apply_real": 1
+   },
+   "effect_is_mode_only": {
+    "git_stash_pop": false,
+    "git_merge_abort": false,
+    "git_rebase_abort": false,
+    "git_checkout_feature": false,
+    "git_branch_delete_feature": false,
+    "git_rm_cached_tracked": false,
+    "tar_extract": true,
+    "gzip_decompress": false,
+    "chmod_exec": true,
+    "patch_apply_real": false
+   },
+   "amplification_by_content_bytes": {
+    "git_stash_pop": 47.2,
+    "git_merge_abort": 12.4,
+    "git_rebase_abort": 6.9,
+    "git_checkout_feature": 14.9,
+    "git_branch_delete_feature": 151.1,
+    "git_rm_cached_tracked": 74.6,
+    "tar_extract": null,
+    "gzip_decompress": 601.2,
+    "chmod_exec": null,
+    "patch_apply_real": 4812.2
+   },
+   "note": "a mode-only effect has zero content bytes; the copy is still the whole tree, which is why the price of undo is a property of the tree and not of the edit",
+   "seconds_in_stage": {
+    "git_stash_pop": 0.005,
+    "git_merge_abort": 0.003,
+    "git_rebase_abort": 0.006,
+    "git_checkout_feature": 0.003,
+    "git_branch_delete_feature": 0.003,
+    "git_rm_cached_tracked": 0.002,
+    "tar_extract": 0.004,
+    "gzip_decompress": 0.001,
+    "chmod_exec": 0.003,
+    "patch_apply_real": 0.002
+   },
+   "MEASURED": true
+  },
+  "K6_zero": {
+   "model_calls": 0,
+   "parameters_stored": 0,
+   "network_calls_at_run_time": 0,
+   "MET": true
+  }
+ },
+ "actions": [
+  {
+   "action": "git_stash_pop",
+   "action_argv": [
+    "git",
+    "stash",
+    "pop"
+   ],
+   "states": 16,
+   "applies": 8,
+   "does_not_apply": 8,
+   "staged_decision_agreement": 1.0,
+   "refused_attempts": 8,
+   "refused_attempts_that_changed_the_live_tree": [],
+   "committed_attempts": 8,
+   "commit_mechanisms": [
+    "RENAME_EXCHANGE"
+   ],
+   "committed_where_live_differs_from_stage": [],
+   "committed_where_displaced_differs_from_pre_state": [],
+   "undo_failures": [],
+   "os_replace_on_populated_directory": [
+    "OSError:ENOTEMPTY:Directory not empty"
+   ],
+   "staged_bytes": 29755,
+   "effect_bytes": 630,
+   "effect_entries": 5,
+   "effect_is_empty": false,
+   "effect_is_mode_only": false,
+   "amplification_by_content_bytes": 47.2,
+   "seconds_in_stage": 0.005
+  },
+  {
+   "action": "git_merge_abort",
+   "action_argv": [
+    "git",
+    "merge",
+    "--abort"
+   ],
+   "states": 16,
+   "applies": 8,
+   "does_not_apply": 8,
+   "staged_decision_agreement": 1.0,
+   "refused_attempts": 8,
+   "refused_attempts_that_changed_the_live_tree": [],
+   "committed_attempts": 8,
+   "commit_mechanisms": [
+    "RENAME_EXCHANGE"
+   ],
+   "committed_where_live_differs_from_stage": [],
+   "committed_where_displaced_differs_from_pre_state": [],
+   "undo_failures": [],
+   "os_replace_on_populated_directory": [
+    "OSError:ENOTEMPTY:Directory not empty"
+   ],
+   "staged_bytes": 29604,
+   "effect_bytes": 2386,
+   "effect_entries": 7,
+   "effect_is_empty": false,
+   "effect_is_mode_only": false,
+   "amplification_by_content_bytes": 12.4,
+   "seconds_in_stage": 0.003
+  },
+  {
+   "action": "git_rebase_abort",
+   "action_argv": [
+    "git",
+    "rebase",
+    "--abort"
+   ],
+   "states": 16,
+   "applies": 8,
+   "does_not_apply": 8,
+   "staged_decision_agreement": 1.0,
+   "refused_attempts": 8,
+   "refused_attempts_that_changed_the_live_tree": [],
+   "committed_attempts": 8,
+   "commit_mechanisms": [
+    "RENAME_EXCHANGE"
+   ],
+   "committed_where_live_differs_from_stage": [],
+   "committed_where_displaced_differs_from_pre_state": [],
+   "undo_failures": [],
+   "os_replace_on_populated_directory": [
+    "OSError:ENOTEMPTY:Directory not empty"
+   ],
+   "staged_bytes": 31549,
+   "effect_bytes": 4551,
+   "effect_entries": 23,
+   "effect_is_empty": false,
+   "effect_is_mode_only": false,
+   "amplification_by_content_bytes": 6.9,
+   "seconds_in_stage": 0.006
+  },
+  {
+   "action": "git_checkout_feature",
+   "action_argv": [
+    "git",
+    "checkout",
+    "feature"
+   ],
+   "states": 16,
+   "applies": 8,
+   "does_not_apply": 8,
+   "staged_decision_agreement": 1.0,
+   "refused_attempts": 8,
+   "refused_attempts_that_changed_the_live_tree": [],
+   "committed_attempts": 8,
+   "commit_mechanisms": [
+    "RENAME_EXCHANGE"
+   ],
+   "committed_where_live_differs_from_stage": [],
+   "committed_where_displaced_differs_from_pre_state": [],
+   "undo_failures": [],
+   "os_replace_on_populated_directory": [
+    "OSError:ENOTEMPTY:Directory not empty"
+   ],
+   "staged_bytes": 28902,
+   "effect_bytes": 1939,
+   "effect_entries": 3,
+   "effect_is_empty": false,
+   "effect_is_mode_only": false,
+   "amplification_by_content_bytes": 14.9,
+   "seconds_in_stage": 0.003
+  },
+  {
+   "action": "git_branch_delete_feature",
+   "action_argv": [
+    "git",
+    "branch",
+    "-d",
+    "feature"
+   ],
+   "states": 16,
+   "applies": 8,
+   "does_not_apply": 8,
+   "staged_decision_agreement": 1.0,
+   "refused_attempts": 8,
+   "refused_attempts_that_changed_the_live_tree": [],
+   "committed_attempts": 8,
+   "commit_mechanisms": [
+    "RENAME_EXCHANGE"
+   ],
+   "committed_where_live_differs_from_stage": [],
+   "committed_where_displaced_differs_from_pre_state": [],
+   "undo_failures": [],
+   "os_replace_on_populated_directory": [
+    "OSError:ENOTEMPTY:Directory not empty"
+   ],
+   "staged_bytes": 29014,
+   "effect_bytes": 192,
+   "effect_entries": 2,
+   "effect_is_empty": false,
+   "effect_is_mode_only": false,
+   "amplification_by_content_bytes": 151.1,
+   "seconds_in_stage": 0.003
+  },
+  {
+   "action": "git_rm_cached_tracked",
+   "action_argv": [
+    "git",
+    "rm",
+    "--cached",
+    "-q",
+    "README.rst"
+   ],
+   "states": 16,
+   "applies": 8,
+   "does_not_apply": 8,
+   "staged_decision_agreement": 1.0,
+   "refused_attempts": 8,
+   "refused_attempts_that_changed_the_live_tree": [],
+   "committed_attempts": 8,
+   "commit_mechanisms": [
+    "RENAME_EXCHANGE"
+   ],
+   "committed_where_live_differs_from_stage": [],
+   "committed_where_displaced_differs_from_pre_state": [],
+   "undo_failures": [],
+   "os_replace_on_populated_directory": [
+    "OSError:ENOTEMPTY:Directory not empty"
+   ],
+   "staged_bytes": 28712,
+   "effect_bytes": 385,
+   "effect_entries": 1,
+   "effect_is_empty": false,
+   "effect_is_mode_only": false,
+   "amplification_by_content_bytes": 74.6,
+   "seconds_in_stage": 0.002
+  },
+  {
+   "action": "tar_extract",
+   "action_argv": [
+    "tar",
+    "-xzf",
+    "bundle.tgz"
+   ],
+   "states": 16,
+   "applies": 8,
+   "does_not_apply": 8,
+   "staged_decision_agreement": 1.0,
+   "refused_attempts": 8,
+   "refused_attempts_that_changed_the_live_tree": [],
+   "committed_attempts": 8,
+   "commit_mechanisms": [
+    "RENAME_EXCHANGE"
+   ],
+   "committed_where_live_differs_from_stage": [],
+   "committed_where_displaced_differs_from_pre_state": [],
+   "undo_failures": [],
+   "os_replace_on_populated_directory": [
+    "OSError:ENOTEMPTY:Directory not empty"
+   ],
+   "staged_bytes": 28862,
+   "effect_bytes": 0,
+   "effect_entries": 0,
+   "effect_is_empty": true,
+   "effect_is_mode_only": true,
+   "amplification_by_content_bytes": null,
+   "seconds_in_stage": 0.004
+  },
+  {
+   "action": "gzip_decompress",
+   "action_argv": [
+    "gzip",
+    "-d",
+    "payload.gz"
+   ],
+   "states": 16,
+   "applies": 8,
+   "does_not_apply": 8,
+   "staged_decision_agreement": 1.0,
+   "refused_attempts": 8,
+   "refused_attempts_that_changed_the_live_tree": [],
+   "committed_attempts": 8,
+   "commit_mechanisms": [
+    "RENAME_EXCHANGE"
+   ],
+   "committed_where_live_differs_from_stage": [],
+   "committed_where_displaced_differs_from_pre_state": [],
+   "undo_failures": [],
+   "os_replace_on_populated_directory": [
+    "OSError:ENOTEMPTY:Directory not empty"
+   ],
+   "staged_bytes": 28860,
+   "effect_bytes": 48,
+   "effect_entries": 2,
+   "effect_is_empty": false,
+   "effect_is_mode_only": false,
+   "amplification_by_content_bytes": 601.2,
+   "seconds_in_stage": 0.001
+  },
+  {
+   "action": "chmod_exec",
+   "action_argv": [
+    "chmod",
+    "+x",
+    "script.sh"
+   ],
+   "states": 16,
+   "applies": 8,
+   "does_not_apply": 8,
+   "staged_decision_agreement": 1.0,
+   "refused_attempts": 8,
+   "refused_attempts_that_changed_the_live_tree": [],
+   "committed_attempts": 8,
+   "commit_mechanisms": [
+    "RENAME_EXCHANGE"
+   ],
+   "committed_where_live_differs_from_stage": [],
+   "committed_where_displaced_differs_from_pre_state": [],
+   "undo_failures": [],
+   "os_replace_on_populated_directory": [
+    "OSError:ENOTEMPTY:Directory not empty"
+   ],
+   "staged_bytes": 28878,
+   "effect_bytes": 0,
+   "effect_entries": 1,
+   "effect_is_empty": false,
+   "effect_is_mode_only": true,
+   "amplification_by_content_bytes": null,
+   "seconds_in_stage": 0.003
+  },
+  {
+   "action": "patch_apply_real",
+   "action_argv": [
+    "patch",
+    "--batch",
+    "--forward",
+    "-p1",
+    "-i",
+    "change.patch"
+   ],
+   "states": 16,
+   "applies": 8,
+   "does_not_apply": 8,
+   "staged_decision_agreement": 1.0,
+   "refused_attempts": 8,
+   "refused_attempts_that_changed_the_live_tree": [],
+   "committed_attempts": 8,
+   "commit_mechanisms": [
+    "RENAME_EXCHANGE"
+   ],
+   "committed_where_live_differs_from_stage": [],
+   "committed_where_displaced_differs_from_pre_state": [],
+   "undo_failures": [],
+   "os_replace_on_populated_directory": [
+    "OSError:ENOTEMPTY:Directory not empty"
+   ],
+   "staged_bytes": 28873,
+   "effect_bytes": 6,
+   "effect_entries": 1,
+   "effect_is_empty": false,
+   "effect_is_mode_only": false,
+   "amplification_by_content_bytes": 4812.2,
+   "seconds_in_stage": 0.002
+  }
+ ],
+ "traps": [
+  {
+   "action": "tar_extract",
+   "state": "tar_extract-world",
+   "staged_exit": 2,
+   "staged_changed": false,
+   "staged_bytes": 28862,
+   "seconds_in_stage": 0.004,
+   "staged_output": "tar: README.rst: Cannot open: File exists\ntar: Exiting with failure status due to previous errors",
+   "decision": "REFUSED",
+   "live_unchanged": true,
+   "trap": "tar_extract:read_only_target",
+   "trap_effective": true,
+   "live_exit": 2,
+   "live_output": "tar: README.rst: Cannot open: File exists\ntar: Exiting with failure status due to previous errors",
+   "stage_reproduced_the_refusal": true,
+   "live_tree_unchanged_by_the_refused_attempt": true
+  },
+  {
+   "action": "gzip_decompress",
+   "state": "gzip_decompress-world",
+   "staged_exit": 1,
+   "staged_changed": false,
+   "staged_bytes": 28860,
+   "seconds_in_stage": 0.001,
+   "staged_output": "gzip: payload: Permission denied",
+   "decision": "REFUSED",
+   "live_unchanged": true,
+   "trap": "gzip_decompress:read_only_target",
+   "trap_effective": true,
+   "live_exit": 1,
+   "live_output": "gzip: payload: Permission denied",
+   "stage_reproduced_the_refusal": true,
+   "live_tree_unchanged_by_the_refused_attempt": true
+  },
+  {
+   "action": "patch_apply_real",
+   "state": "patch_apply_real-world",
+   "staged_exit": 2,
+   "staged_changed": false,
+   "staged_bytes": 28873,
+   "seconds_in_stage": 0.002,
+   "staged_output": "patch: **** Can't create temporary file ./conflict.txt.oPcqSOc : Permission denied",
+   "decision": "REFUSED",
+   "live_unchanged": true,
+   "trap": "patch_apply_real:read_only_target",
+   "trap_effective": true,
+   "live_exit": 2,
+   "live_output": "patch: **** Can't create temporary file ./conflict.txt.oq2Cs2f : Permission denied",
+   "stage_reproduced_the_refusal": true,
+   "live_tree_unchanged_by_the_refused_attempt": true
+  },
+  {
+   "trap": "tar_extract:read_only_parent_at_the_commit",
+   "trap_effective": true,
+   "commit": "Permission denied",
+   "commit_refused": true,
+   "live_unchanged_after_failed_commit": true,
+   "note": "the stage was already built and verified; only the commit is refused, and a refused commit is a free failure because nothing moved"
+  },
+  {
+   "trap": "two_rename_fallback_window",
+   "trap_effective": true,
+   "live_path_missing_between_renames": true,
+   "live_equals_stage_after": true,
+   "note": "the portable fallback has a window in which the live tree does not exist; a crash inside it leaves no live tree at all, which is why the record/journal exists"
+  }
+ ],
+ "the_law": {
+  "trial_and_error_is_sound_iff_failure_is_free": true,
+  "what_is_free": "an attempt that is refused, because the live tree was never touched",
+  "what_is_not_free": "the commit, which is one rename: atomic where the filesystem can exchange two populated paths, a window everywhere else",
+  "what_is_not_stageable": "an effect outside the tree (network, processes, absolute paths, another user's files); these ten actions are confined, which is a scope and not a proof",
+  "why_this_removes_the_previous_limit": "the five actions no check mode could guard are decided by attempt at the same accuracy as the five that could, so the census of readable checks stops being the ceiling"
+ },
+ "concurrency_boundary": {
+  "declared": "the agent owns the live path; a same-UID writer that replaces it between the check and the exchange is outside the contract",
+  "evidence": "harness-evolver #124 (Sep 2026): exchange-then-validate is not a compare-and-swap, and a displaced concurrent write can be lost",
+  "consequence": "the receipt does not claim cas semantics; it claims free refusal and exact undo for a workspace the agent owns"
+ },
+ "cost": {
+  "seconds": 9.2,
+  "model_calls": 0,
+  "parameters_stored": 0,
+  "network_calls_at_run_time": 0
+ },
+ "limits": [
+  "ten actions, one filesystem (ext2/3 in this sandbox), one producer; the census is a count on these",
+  "staging copies the tree; the amplification is measured, and a cheap copy (reflink, hardlink farm, CoW snapshot) would lower it without changing the law",
+  "the exchange is not a compare-and-swap under uncooperative writers; the boundary above",
+  "an effect that escapes the tree is not undoable here",
+  "a refused commit leaves the stage built and verified; discarding it is the caller's step",
+  "on tar_extract the commit's effect is zero entries, because extraction of this archive over this tree is idempotent (the previous round had to arm the family to make the effect visible); the attempt still decides correctly, which is the point of deciding by attempt rather than by reading the effect"
+ ]
+}
