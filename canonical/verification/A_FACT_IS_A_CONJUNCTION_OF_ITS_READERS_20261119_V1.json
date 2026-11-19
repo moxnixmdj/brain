@@ -1,0 +1,411 @@
+{
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "cost": {
+  "model_calls": 0,
+  "network_calls_at_run_time": 0,
+  "parameters_stored": 0,
+  "seconds": 7.7
+ },
+ "date": "2026-11-19",
+ "declared_acceptance_before_the_receipt_run": {
+  "K1": "at least one fact has a state where two independent readers disagree, third reading confirms",
+  "K2": "the action succeeds on that state, the primary column conforms, the consensus column does not, and consensus is worse on exactly that action",
+  "K3": "every state is byte-identical after all readings",
+  "K4": "no fact is ever turned from false to true by the conjunction, and its cost is reported",
+  "K5": "no action's columns fail to conform, so the previous round's attribution is corrected",
+  "K6": "zero model calls, parameters, network"
+ },
+ "limits": [
+  "two readers by one producer: a shared misunderstanding is not excluded",
+  "conformance is measured on 37 states; a permissive action and a permissive check can agree everywhere measured and still diverge off-sample",
+  "the claims are hand-written; this round audits the arbitration rule, not the choice of facts",
+  "conjunction is the wrong arbiter here and the receipt says so: it costs recall where the action is permissive, and the loss is measured rather than argued",
+  "one machine, 17 facts, 37 states, nine actions"
+ ],
+ "mode": "TWO_INDEPENDENT_READERS_PER_FACT_AND_CONFORMANCE_AS_THE_ARBITER",
+ "per_action": {
+  "audited": {
+   "cp_a_into_dir": {
+    "behaviour": {
+     "accuracy_of_the_set": 1.0,
+     "accuracy_where_decided": 1.0,
+     "held_out": 13,
+     "unanimous_and_right": 13,
+     "unanimous_and_wrong": 0,
+     "undecided": 0
+    },
+    "survivors": 2,
+    "the_columns_conform_to_the_action_on_every_state": true
+   },
+   "git_stash_pop": {
+    "behaviour": {
+     "accuracy_of_the_set": 1.0,
+     "accuracy_where_decided": 1.0,
+     "held_out": 13,
+     "unanimous_and_right": 13,
+     "unanimous_and_wrong": 0,
+     "undecided": 0
+    },
+    "survivors": 2,
+    "the_columns_conform_to_the_action_on_every_state": true
+   },
+   "gzip_x": {
+    "behaviour": {
+     "accuracy_of_the_set": 1.0,
+     "accuracy_where_decided": 1.0,
+     "held_out": 13,
+     "unanimous_and_right": 13,
+     "unanimous_and_wrong": 0,
+     "undecided": 0
+    },
+    "survivors": 4,
+    "the_columns_conform_to_the_action_on_every_state": true
+   },
+   "ln_link": {
+    "behaviour": {
+     "accuracy_of_the_set": 0.9231,
+     "accuracy_where_decided": 1.0,
+     "held_out": 13,
+     "unanimous_and_right": 12,
+     "unanimous_and_wrong": 0,
+     "undecided": 1
+    },
+    "survivors": 1024,
+    "the_columns_conform_to_the_action_on_every_state": true
+   },
+   "mkdir_nodir_sub": {
+    "behaviour": {
+     "accuracy_of_the_set": 0.8462,
+     "accuracy_where_decided": 1.0,
+     "held_out": 13,
+     "unanimous_and_right": 11,
+     "unanimous_and_wrong": 0,
+     "undecided": 2
+    },
+    "survivors": 1024,
+    "the_columns_conform_to_the_action_on_every_state": true
+   },
+   "patch_apply": {
+    "behaviour": {
+     "accuracy_of_the_set": 1.0,
+     "accuracy_where_decided": 1.0,
+     "held_out": 13,
+     "unanimous_and_right": 13,
+     "unanimous_and_wrong": 0,
+     "undecided": 0
+    },
+    "survivors": 4,
+    "the_columns_conform_to_the_action_on_every_state": true
+   },
+   "rmdir_dir": {
+    "behaviour": {
+     "accuracy_of_the_set": 1.0,
+     "accuracy_where_decided": 1.0,
+     "held_out": 13,
+     "unanimous_and_right": 13,
+     "unanimous_and_wrong": 0,
+     "undecided": 0
+    },
+    "survivors": 4,
+    "the_columns_conform_to_the_action_on_every_state": true
+   },
+   "sort_c": {
+    "behaviour": {
+     "accuracy_of_the_set": 1.0,
+     "accuracy_where_decided": 1.0,
+     "held_out": 13,
+     "unanimous_and_right": 13,
+     "unanimous_and_wrong": 0,
+     "undecided": 0
+    },
+    "survivors": 4,
+    "the_columns_conform_to_the_action_on_every_state": true
+   },
+   "tar_x": {
+    "behaviour": {
+     "accuracy_of_the_set": 0.8462,
+     "accuracy_where_decided": 1.0,
+     "held_out": 13,
+     "unanimous_and_right": 11,
+     "unanimous_and_wrong": 0,
+     "undecided": 2
+    },
+    "survivors": 6,
+    "the_columns_conform_to_the_action_on_every_state": false
+   }
+  },
+  "primary": {
+   "cp_a_into_dir": {
+    "behaviour": {
+     "accuracy_of_the_set": 1.0,
+     "accuracy_where_decided": 1.0,
+     "held_out": 13,
+     "unanimous_and_right": 13,
+     "unanimous_and_wrong": 0,
+     "undecided": 0
+    },
+    "survivors": 2,
+    "the_columns_conform_to_the_action_on_every_state": true
+   },
+   "git_stash_pop": {
+    "behaviour": {
+     "accuracy_of_the_set": 1.0,
+     "accuracy_where_decided": 1.0,
+     "held_out": 13,
+     "unanimous_and_right": 13,
+     "unanimous_and_wrong": 0,
+     "undecided": 0
+    },
+    "survivors": 2,
+    "the_columns_conform_to_the_action_on_every_state": true
+   },
+   "gzip_x": {
+    "behaviour": {
+     "accuracy_of_the_set": 1.0,
+     "accuracy_where_decided": 1.0,
+     "held_out": 13,
+     "unanimous_and_right": 13,
+     "unanimous_and_wrong": 0,
+     "undecided": 0
+    },
+    "survivors": 4,
+    "the_columns_conform_to_the_action_on_every_state": true
+   },
+   "ln_link": {
+    "behaviour": {
+     "accuracy_of_the_set": 0.9231,
+     "accuracy_where_decided": 1.0,
+     "held_out": 13,
+     "unanimous_and_right": 12,
+     "unanimous_and_wrong": 0,
+     "undecided": 1
+    },
+    "survivors": 1024,
+    "the_columns_conform_to_the_action_on_every_state": true
+   },
+   "mkdir_nodir_sub": {
+    "behaviour": {
+     "accuracy_of_the_set": 0.8462,
+     "accuracy_where_decided": 1.0,
+     "held_out": 13,
+     "unanimous_and_right": 11,
+     "unanimous_and_wrong": 0,
+     "undecided": 2
+    },
+    "survivors": 1024,
+    "the_columns_conform_to_the_action_on_every_state": true
+   },
+   "patch_apply": {
+    "behaviour": {
+     "accuracy_of_the_set": 1.0,
+     "accuracy_where_decided": 1.0,
+     "held_out": 13,
+     "unanimous_and_right": 13,
+     "unanimous_and_wrong": 0,
+     "undecided": 0
+    },
+    "survivors": 4,
+    "the_columns_conform_to_the_action_on_every_state": true
+   },
+   "rmdir_dir": {
+    "behaviour": {
+     "accuracy_of_the_set": 1.0,
+     "accuracy_where_decided": 1.0,
+     "held_out": 13,
+     "unanimous_and_right": 13,
+     "unanimous_and_wrong": 0,
+     "undecided": 0
+    },
+    "survivors": 4,
+    "the_columns_conform_to_the_action_on_every_state": true
+   },
+   "sort_c": {
+    "behaviour": {
+     "accuracy_of_the_set": 1.0,
+     "accuracy_where_decided": 1.0,
+     "held_out": 13,
+     "unanimous_and_right": 13,
+     "unanimous_and_wrong": 0,
+     "undecided": 0
+    },
+    "survivors": 4,
+    "the_columns_conform_to_the_action_on_every_state": true
+   },
+   "tar_x": {
+    "behaviour": {
+     "accuracy_of_the_set": 0.9231,
+     "accuracy_where_decided": 1.0,
+     "held_out": 13,
+     "unanimous_and_right": 12,
+     "unanimous_and_wrong": 0,
+     "undecided": 1
+    },
+    "survivors": 6,
+    "the_columns_conform_to_the_action_on_every_state": true
+   }
+  }
+ },
+ "pool": {
+  "facts": [
+   "a_exists",
+   "a_is_dir",
+   "dir_exists",
+   "dir_empty",
+   "nodir_exists",
+   "sub_exists",
+   "link_absent",
+   "xgz_exists",
+   "xgz_valid",
+   "sorted_exists",
+   "sorted_sorted",
+   "patch_applies",
+   "repo_is_git",
+   "stash_present",
+   "tree_clean",
+   "btgz_exists",
+   "btgz_valid"
+  ],
+  "held_out": 13,
+  "seen": 24,
+  "states": 37
+ },
+ "schema": "BRAIN_A_FACT_IS_A_CONJUNCTION_OF_ITS_READERS_V1",
+ "verdict": {
+  "K1_a_second_independent_reader_surfaces_a_divergence": {
+   "MET": true,
+   "facts_with_a_disagreement": {
+    "btgz_valid": [
+     36
+    ]
+   },
+   "third_reading_confirms_the_file_is_not_an_archive": true,
+   "witness": {
+    "fact": "btgz_valid",
+    "primary_reader_says": true,
+    "second_reader_says": false,
+    "state": [
+     "a_valid_gzip_whose_payload_is_not_a_tar"
+    ],
+    "the_action_tar_x_succeeded_there": true,
+    "third_reading": {
+     "gzip_members_inflate": true,
+     "payload_head": "this is not a tar archive\n",
+     "python_tarfile_says": false,
+     "tar_tzf_exit": 0
+    }
+   }
+  },
+  "K2_the_divergence_does_not_convict_the_column_the_action_does": {
+   "MET": true,
+   "claim": "a column's job is to predict the action it gates, not to describe the world; where the two differ, the column that matches the action is the one a plan needs",
+   "columns_conforming_after_the_consensus_audit": {
+    "cp_a_into_dir": true,
+    "git_stash_pop": true,
+    "gzip_x": true,
+    "ln_link": true,
+    "mkdir_nodir_sub": true,
+    "patch_apply": true,
+    "rmdir_dir": true,
+    "sort_c": true,
+    "tar_x": false
+   },
+   "columns_conforming_to_their_action": {
+    "cp_a_into_dir": true,
+    "git_stash_pop": true,
+    "gzip_x": true,
+    "ln_link": true,
+    "mkdir_nodir_sub": true,
+    "patch_apply": true,
+    "rmdir_dir": true,
+    "sort_c": true,
+    "tar_x": true
+   },
+   "consensus_is_worse_on": [
+    "tar_x"
+   ],
+   "held_out_accuracy_consensus": {
+    "cp_a_into_dir": 1.0,
+    "git_stash_pop": 1.0,
+    "gzip_x": 1.0,
+    "ln_link": 0.9231,
+    "mkdir_nodir_sub": 0.8462,
+    "patch_apply": 1.0,
+    "rmdir_dir": 1.0,
+    "sort_c": 1.0,
+    "tar_x": 0.8462
+   },
+   "held_out_accuracy_primary": {
+    "cp_a_into_dir": 1.0,
+    "git_stash_pop": 1.0,
+    "gzip_x": 1.0,
+    "ln_link": 0.9231,
+    "mkdir_nodir_sub": 0.8462,
+    "patch_apply": 1.0,
+    "rmdir_dir": 1.0,
+    "sort_c": 1.0,
+    "tar_x": 0.9231
+   },
+   "the_action_is_as_permissive_as_the_check": true,
+   "witness": {
+    "fact": "btgz_valid",
+    "primary_reader_says": true,
+    "second_reader_says": false,
+    "state": [
+     "a_valid_gzip_whose_payload_is_not_a_tar"
+    ],
+    "the_action_tar_x_succeeded_there": true,
+    "third_reading": {
+     "gzip_members_inflate": true,
+     "payload_head": "this is not a tar archive\n",
+     "python_tarfile_says": false,
+     "tar_tzf_exit": 0
+    }
+   }
+  },
+  "K3_reading_costs_nothing": {
+   "MET": true,
+   "readers": 34,
+   "states": 37,
+   "states_unchanged_after_all_readings": 37,
+   "world_trials_added_by_the_second_reader": 0
+  },
+  "K4_the_collapse_has_one_direction_and_a_measured_cost": {
+   "MET": true,
+   "cost_of_the_conservative_direction": {
+    "cp_a_into_dir": 0.0,
+    "git_stash_pop": 0.0,
+    "gzip_x": 0.0,
+    "ln_link": 0.0,
+    "mkdir_nodir_sub": 0.0,
+    "patch_apply": 0.0,
+    "rmdir_dir": 0.0,
+    "sort_c": 0.0,
+    "tar_x": -0.0769
+   },
+   "facts_turned_false_by_the_conjunction": [
+    "btgz_valid"
+   ],
+   "facts_turned_true_by_the_conjunction": [],
+   "states_where_audited_differs_from_primary": [
+    36
+   ]
+  },
+  "K5_every_abstention_left_by_the_previous_round_is_coverage_not_an_unsound_column": {
+   "MET": true,
+   "columns_that_do_not_conform": [],
+   "the_previous_rounds_attribution": "tar_x was said to abstain because its column was unsound",
+   "what_this_measures": "the column conforms to the action on every state of the pool, so the abstention was coverage; the unsoundness was the world's, not the column's"
+  },
+  "K6_zero": {
+   "MET": true,
+   "model_calls": 0,
+   "network_calls_at_run_time": 0,
+   "parameters_stored": 0
+  }
+ },
+ "why_this_round": {
+  "the_answer_being_tested": "a second independent reader surfaces the divergence, but the arbiter is the action: a column is correct when it predicts the action, not when it describes the world",
+  "the_gap_it_closes": "the previous round attributed one abstention (tar_x) to an unsound column, because tar -tzf accepts a gzip of garbage",
+  "why_it_could_fail": "if no second reader disagreed anywhere; if the action refused the garbage, which would make the column unsound as claimed; if consensus matched or beat conformance"
+ }
+}
