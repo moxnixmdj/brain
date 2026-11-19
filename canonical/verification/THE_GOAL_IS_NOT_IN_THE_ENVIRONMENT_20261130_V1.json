@@ -1,0 +1,601 @@
+{
+ "schema": "BRAIN_THE_GOAL_IS_NOT_IN_THE_ENVIRONMENT_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "date": "2026-11-30",
+ "mode": "SEPARATE_THE_ENVIRONMENT_FROM_THE_GOAL_AND_PRICE_EACH_IN_JUDGMENTS",
+ "declared_acceptance_before_the_run": {
+  "G1": "the grammar can state the user's goal exactly on the reachable set, or the receipt says it cannot",
+  "G2": "two different statements share one behaviour on every reachable run at the deepest affordable depth",
+  "G3": "at least one such pair separates on the other machine",
+  "G4": "active questions isolate one behaviour class in at most eight judgments, and the ordered sequence needs more",
+  "G5": "zero model calls, zero stored parameters, every run executed"
+ },
+ "verdict": {
+  "G1_the_grammar_can_state_the_goal": {
+   "exact": {
+    "TARBALL": 79,
+    "FILESYSTEM": 11
+   },
+   "consistent_with_every_run": {
+    "TARBALL": 79,
+    "FILESYSTEM": 11
+   },
+   "MET": true
+  },
+  "G2_two_statements_one_behaviour": {
+   "witness": {
+    "mask_true_runs": 5,
+    "runs": 231,
+    "a": [
+     "never_removed[probe_seed_content]"
+    ],
+    "b": [
+     "monotone[probe_seed_content]"
+    ],
+    "class_size": 4,
+    "nontrivial": true,
+    "class_statements": [
+     "never_removed[probe_seed_content]",
+     "monotone[probe_seed_content]",
+     "final:count[probe_seed_content]==1",
+     "final:has[seed]=probe_seed_content"
+    ]
+   },
+   "class_size": 4,
+   "statements_consistent_with_every_run": {
+    "TARBALL": 79,
+    "FILESYSTEM": 11
+   },
+   "behaviours_when_every_run_is_judged": {
+    "TARBALL": 1,
+    "FILESYSTEM": 1
+   },
+   "MET": true
+  },
+  "G3_the_pair_separates_in_a_new_environment": {
+   "disagreements": 32,
+   "MET": true
+  },
+  "G4_active_questions_isolate_a_behaviour": {
+   "active_judgments": 8,
+   "passive_judgments": 8,
+   "active_converged": true,
+   "passive_survivors_at_the_same_budget": 323,
+   "MET": true
+  },
+  "G5_zero": {
+   "model_calls": 0,
+   "parameters_stored": 0,
+   "network_calls_at_run_time": 0,
+   "MET": true
+  },
+  "environment_control_registered_last_round": {
+   "control": {
+    "statistic": [
+     "holders_ever[probe_new_content]",
+     "decrements[probe_new_content]"
+    ],
+    "shallow_runs": 32,
+    "deep_runs": 231,
+    "undecided": 2,
+    "false_accepts": 0,
+    "false_rejects": 0,
+    "correct_where_decided": 229,
+    "deep_true": 42
+   },
+   "reading": "the machine is known exactly at a depth it was not measured on; the goal is not",
+   "MET": true
+  }
+ },
+ "machines": {
+  "TARBALL": {
+   "runs": 231,
+   "terms": 154,
+   "hypotheses": 11935,
+   "distinct_behaviours_in_the_family": 353,
+   "user_goal_stated_exactly": [
+    [
+     "created_once[probe_new_content]"
+    ],
+    [
+     "at_least_once[probe_new_content]",
+     "created_once[probe_new_content]"
+    ],
+    [
+     "at_least_once[probe_new_content]",
+     "monotone[probe_new_content]"
+    ],
+    [
+     "created_once[probe_new_content]",
+     "monotone[probe_new_content]"
+    ],
+    [
+     "created_once[probe_new_content]",
+     "monotone[probe_new_contentprobe_new_content]"
+    ]
+   ],
+   "user_goal_stated_exactly_count": 79,
+   "consistent_with_every_run": 79,
+   "ceiling_witness": {
+    "mask_true_runs": 5,
+    "runs": 231,
+    "a": [
+     "never_removed[probe_seed_content]"
+    ],
+    "b": [
+     "monotone[probe_seed_content]"
+    ],
+    "class_size": 4,
+    "nontrivial": true,
+    "class_statements": [
+     "never_removed[probe_seed_content]",
+     "monotone[probe_seed_content]",
+     "final:count[probe_seed_content]==1",
+     "final:has[seed]=probe_seed_content"
+    ]
+   },
+   "ceiling_class_statements": [
+    "never_removed[probe_seed_content]",
+    "monotone[probe_seed_content]",
+    "final:count[probe_seed_content]==1",
+    "final:has[seed]=probe_seed_content"
+   ],
+   "single_term_statements_of_the_users_goal": [
+    [
+     "created_once[probe_new_content]"
+    ]
+   ],
+   "statements_consistent_with_every_run": 79,
+   "behaviours_when_every_run_is_judged": 1,
+   "active": {
+    "order": "active",
+    "steps": [
+     {
+      "judgments": 0,
+      "survivors": 11935,
+      "behaviours": 353,
+      "bits_to_identify": 8.46,
+      "judged": 54,
+      "answer": false
+     },
+     {
+      "judgments": 1,
+      "survivors": 8695,
+      "behaviours": 176,
+      "bits_to_identify": 7.46,
+      "judged": 3,
+      "answer": false
+     },
+     {
+      "judgments": 2,
+      "survivors": 7681,
+      "behaviours": 89,
+      "bits_to_identify": 6.48,
+      "judged": 6,
+      "answer": true
+     },
+     {
+      "judgments": 3,
+      "survivors": 337,
+      "behaviours": 29,
+      "bits_to_identify": 4.86,
+      "judged": 35,
+      "answer": true
+     },
+     {
+      "judgments": 4,
+      "survivors": 312,
+      "behaviours": 14,
+      "bits_to_identify": 3.81,
+      "judged": 2,
+      "answer": false
+     },
+     {
+      "judgments": 5,
+      "survivors": 236,
+      "behaviours": 7,
+      "bits_to_identify": 2.81,
+      "judged": 20,
+      "answer": false
+     },
+     {
+      "judgments": 6,
+      "survivors": 234,
+      "behaviours": 5,
+      "bits_to_identify": 2.32,
+      "judged": 56,
+      "answer": false
+     },
+     {
+      "judgments": 7,
+      "survivors": 81,
+      "behaviours": 2,
+      "bits_to_identify": 1.0,
+      "judged": 90,
+      "answer": true
+     },
+     {
+      "judgments": 8,
+      "survivors": 79,
+      "behaviours": 1,
+      "bits_to_identify": 0.0
+     }
+    ],
+    "judgments": 8,
+    "converged": true,
+    "final_survivors": 79,
+    "final_behaviours": 1,
+    "final_masks": [
+     112908583486941721931906868987113842415562069654978279009048527388736
+    ]
+   },
+   "passive": {
+    "order": "passive",
+    "steps": [
+     {
+      "judgments": 0,
+      "survivors": 11935,
+      "behaviours": 353,
+      "bits_to_identify": 8.46,
+      "judged": 0,
+      "answer": false
+     },
+     {
+      "judgments": 1,
+      "survivors": 8365,
+      "behaviours": 143,
+      "bits_to_identify": 7.16,
+      "judged": 1,
+      "answer": false
+     },
+     {
+      "judgments": 2,
+      "survivors": 8047,
+      "behaviours": 101,
+      "bits_to_identify": 6.66,
+      "judged": 2,
+      "answer": false
+     },
+     {
+      "judgments": 3,
+      "survivors": 7635,
+      "behaviours": 93,
+      "bits_to_identify": 6.54,
+      "judged": 3,
+      "answer": false
+     },
+     {
+      "judgments": 4,
+      "survivors": 7144,
+      "behaviours": 76,
+      "bits_to_identify": 6.25,
+      "judged": 4,
+      "answer": false
+     },
+     {
+      "judgments": 5,
+      "survivors": 7140,
+      "behaviours": 75,
+      "bits_to_identify": 6.23,
+      "judged": 5,
+      "answer": false
+     },
+     {
+      "judgments": 6,
+      "survivors": 7140,
+      "behaviours": 75,
+      "bits_to_identify": 6.23,
+      "judged": 6,
+      "answer": true
+     },
+     {
+      "judgments": 7,
+      "survivors": 323,
+      "behaviours": 20,
+      "bits_to_identify": 4.32,
+      "judged": 7,
+      "answer": false
+     },
+     {
+      "judgments": 8,
+      "survivors": 323,
+      "behaviours": 20,
+      "bits_to_identify": 4.32
+     }
+    ],
+    "judgments": 8,
+    "converged": false,
+    "final_survivors": 323,
+    "final_behaviours": 20,
+    "final_masks": [
+     112895419443911045156566264682169957598043013080702288326127299592256,
+     112895421050849089509475191996445431013611348607996477417767443628096,
+     112908583486940955684136436042663395583498124129469302108678801866816,
+     112908583486941721931906868987113842415560831714938993628773628264512,
+     112908583486941721931906868987113842415562069654978279009048527388736,
+     112908585093879000037045363356938871595214888924177305465567110512704,
+     112908585093879766284815751699898921366032551378249737069213824073792,
+     112908585093879766284815796301389318427277596509646996985661936910400,
+     112908585093879766284815796301389318427278834449686282365936836034624,
+     113751202340692545726338393422344091944251485494682931612719034417216,
+     113751202943294312358673509873681373078497897613102362242645113192512,
+     114159346720127443341676081534785289831978267649167251001906579374144,
+     114172510160629913270643132055635078818304124262309625611684417126464,
+     114172510562364424358866561607147598349987683621021139905269724627008,
+     114172510562364424358866578332706497247955039772809844391540854112320,
+     114172510763230913655207815562521913120367748611448682834850454454336,
+     114172510763231679902978231781413461054583180228940351755339366416448,
+     114172510763231679902978242931786060319894750996799488079520119406656,
+     114172510763231679902978248506972359952549298440689770861335596777536,
+     114172510763231679902978248506972359952550536380729056241610495901760
+    ]
+   }
+  },
+  "FILESYSTEM": {
+   "runs": 196,
+   "terms": 43,
+   "hypotheses": 946,
+   "distinct_behaviours_in_the_family": 129,
+   "user_goal_stated_exactly": [
+    [
+     "created_once[probe_new_content]"
+    ],
+    [
+     "at_least_once[probe_new_content]",
+     "created_once[probe_new_content]"
+    ],
+    [
+     "created_once[probe_new_content]",
+     "monotone[probe_new_content]"
+    ],
+    [
+     "created_once[probe_new_content]",
+     "never_removed[probe_second_content]"
+    ],
+    [
+     "created_once[probe_new_content]",
+     "at_least_once[probe_second_content]"
+    ]
+   ],
+   "user_goal_stated_exactly_count": 11,
+   "consistent_with_every_run": 11,
+   "ceiling_witness": {
+    "mask_true_runs": 10,
+    "runs": 196,
+    "a": [
+     "created_once[probe_seed_content]"
+    ],
+    "b": [
+     "final:count[probe_seed_content]==2"
+    ],
+    "class_size": 2,
+    "nontrivial": true,
+    "class_statements": [
+     "created_once[probe_seed_content]",
+     "final:count[probe_seed_content]==2"
+    ]
+   },
+   "ceiling_class_statements": [
+    "created_once[probe_seed_content]",
+    "final:count[probe_seed_content]==2"
+   ],
+   "single_term_statements_of_the_users_goal": [
+    [
+     "created_once[probe_new_content]"
+    ]
+   ],
+   "statements_consistent_with_every_run": 11,
+   "behaviours_when_every_run_is_judged": 1,
+   "active": {
+    "order": "active",
+    "steps": [
+     {
+      "judgments": 0,
+      "survivors": 946,
+      "behaviours": 129,
+      "bits_to_identify": 7.01,
+      "judged": 2,
+      "answer": false
+     },
+     {
+      "judgments": 1,
+      "survivors": 756,
+      "behaviours": 80,
+      "bits_to_identify": 6.32,
+      "judged": 13,
+      "answer": true
+     },
+     {
+      "judgments": 2,
+      "survivors": 99,
+      "behaviours": 32,
+      "bits_to_identify": 5.0,
+      "judged": 46,
+      "answer": false
+     },
+     {
+      "judgments": 3,
+      "survivors": 49,
+      "behaviours": 15,
+      "bits_to_identify": 3.91,
+      "judged": 45,
+      "answer": true
+     },
+     {
+      "judgments": 4,
+      "survivors": 25,
+      "behaviours": 6,
+      "bits_to_identify": 2.58,
+      "judged": 128,
+      "answer": false
+     },
+     {
+      "judgments": 5,
+      "survivors": 14,
+      "behaviours": 3,
+      "bits_to_identify": 1.58,
+      "judged": 0,
+      "answer": true
+     },
+     {
+      "judgments": 6,
+      "survivors": 11,
+      "behaviours": 1,
+      "bits_to_identify": 0.0
+     }
+    ],
+    "judgments": 6,
+    "converged": true,
+    "final_survivors": 11,
+    "final_behaviours": 1,
+    "final_masks": [
+     3661387262903533428988267177216974197791720156654859266721
+    ]
+   },
+   "passive": {
+    "order": "passive",
+    "steps": [
+     {
+      "judgments": 0,
+      "survivors": 946,
+      "behaviours": 129,
+      "bits_to_identify": 7.01,
+      "judged": 0,
+      "answer": true
+     },
+     {
+      "judgments": 1,
+      "survivors": 120,
+      "behaviours": 35,
+      "bits_to_identify": 5.13,
+      "judged": 1,
+      "answer": false
+     },
+     {
+      "judgments": 2,
+      "survivors": 75,
+      "behaviours": 28,
+      "bits_to_identify": 4.81,
+      "judged": 2,
+      "answer": false
+     },
+     {
+      "judgments": 3,
+      "survivors": 56,
+      "behaviours": 22,
+      "bits_to_identify": 4.46,
+      "judged": 3,
+      "answer": false
+     },
+     {
+      "judgments": 4,
+      "survivors": 56,
+      "behaviours": 22,
+      "bits_to_identify": 4.46,
+      "judged": 4,
+      "answer": false
+     },
+     {
+      "judgments": 5,
+      "survivors": 56,
+      "behaviours": 22,
+      "bits_to_identify": 4.46,
+      "judged": 5,
+      "answer": true
+     },
+     {
+      "judgments": 6,
+      "survivors": 56,
+      "behaviours": 22,
+      "bits_to_identify": 4.46,
+      "judged": 6,
+      "answer": false
+     },
+     {
+      "judgments": 7,
+      "survivors": 47,
+      "behaviours": 19,
+      "bits_to_identify": 4.25,
+      "judged": 7,
+      "answer": true
+     },
+     {
+      "judgments": 8,
+      "survivors": 32,
+      "behaviours": 11,
+      "bits_to_identify": 3.46
+     }
+    ],
+    "judgments": 8,
+    "converged": false,
+    "final_survivors": 32,
+    "final_behaviours": 11,
+    "final_masks": [
+     3158497629440833872459838333253690691405040214509013238177,
+     3170733289492203211482847079544445763236526417786714522273,
+     3170733289868996602357220490761502660565004304702114955937,
+     3170745449185831469702413690160896145038397350469722768033,
+     3170745449562624871465988996347456987678975651084241011361,
+     3170751529409438999895197183220088181997904841569550271137,
+     3636807268724609027061248826937405374427979841560706623649,
+     3649091552672861101746454381360980513126529260233773099425,
+     3661387262903533428988267177216974197791720156654859266721,
+     3661387263280326831092130042621332038723301595197474941601,
+     3673671552697792228582806547035966492612972979308703329185
+    ]
+   }
+  }
+ },
+ "transfer": {
+  "witness": {
+   "mask_true_runs": 5,
+   "runs": 231,
+   "a": [
+    "never_removed[probe_seed_content]"
+   ],
+   "b": [
+    "monotone[probe_seed_content]"
+   ],
+   "class_size": 4,
+   "nontrivial": true,
+   "class_statements": [
+    "never_removed[probe_seed_content]",
+    "monotone[probe_seed_content]",
+    "final:count[probe_seed_content]==1",
+    "final:has[seed]=probe_seed_content"
+   ]
+  },
+  "other_machine": "FILESYSTEM",
+  "other_runs": 196,
+  "disagreements": 32,
+  "first": [
+   {
+    "run": 13,
+    "a": true,
+    "b": false
+   },
+   {
+    "run": 14,
+    "a": true,
+    "b": false
+   },
+   {
+    "run": 43,
+    "a": true,
+    "b": false
+   }
+  ]
+ },
+ "cost": {
+  "seconds": 158.3,
+  "model_calls": 0,
+  "parameters_stored": 0,
+  "network_calls_at_run_time": 0
+ },
+ "limits": [
+  "the goal grammar is supplied and small; the ceiling is computed for this grammar, not for goals in general",
+  "two CLI machines and no display; transfer is between the two, not across computer use",
+  "identification up to behavioural equivalence is not intention: the round's point is that the two are different objects with different prices",
+  "the depth-5 pool is the deepest the enumeration affords here (231 runs in 76 s); depth 6 is out of reach in this sandbox and is named, not faked"
+ ]
+}
