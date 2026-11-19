@@ -1,0 +1,1670 @@
+{
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "cost": {
+  "model_calls": 0,
+  "network_calls_at_run_time": 0,
+  "parameters_stored": 0,
+  "seconds": 1.2
+ },
+ "date": "2026-11-19",
+ "declared_acceptance_before_the_receipt_run": {
+  "K1": "every action has a finite surface, one execution per property, and the valid base state is applicable",
+  "K2": "message classes are reported, with the ones that merge independently violable properties named",
+  "K3": "the class-granular explanation predicts unexecuted two- and three-mutation states with zero wrong",
+  "K4": "item granularity -- ignoring the words -- produces strictly more false accepts than the class rule",
+  "K5": "one success decides zero held-out states; one execution per property decides nearly all at linear cost",
+  "K6": "zero model calls, parameters, network"
+ },
+ "environment": {
+  "mutations": [
+   "absent",
+   "as_dir",
+   "already_there",
+   "parent_absent",
+   "parent_is_file",
+   "self_link",
+   "unreadable",
+   "garbage",
+   "wrapped_garbage",
+   "empty"
+  ],
+  "root_user": false,
+  "unreadable_reachable": true
+ },
+ "limits": [
+  "the mutation library is the generator of candidate properties: generic over paths, but still a finite written list, so a condition no listed mutation can violate is not enumerated",
+  "single-property sufficiency is tested only on pairs and triples drawn from the same library",
+  "a condition the environment cannot violate (read permission as root) is reported, not learned",
+  "preconditions only: effects are not derived, and an action with no refusals (rm -f) teaches its applicability trivially while teaching nothing about what it changed",
+  "eight binaries on one machine; the score is over joint states built from the same perturbations",
+  "no claim of independent verification"
+ ],
+ "mode": "VOCABULARY_GENERATED_BY_THE_ACTIONS_OWN_REFUSAL_SURFACE",
+ "per_action": {
+  "chmod_600": {
+   "ambiguous_classes": {
+    "chmod: cannot access '<pa>': no such file or directory": {
+     "independently_violable": true,
+     "members": [
+      "work/p0/mode.txt|absent",
+      "work/p0/mode.txt|parent_absent"
+     ]
+    }
+   },
+   "base_applicable": true,
+   "class_behaviour": {
+    "exact": 20,
+    "false_accept": 0,
+    "false_reject": 0,
+    "held_out": 20,
+    "undecided": 0,
+    "wrong": 0
+   },
+   "class_explanation": {
+    "granularity": "class",
+    "required_items": [
+     0,
+     3,
+     5
+    ],
+    "searched_units": 3,
+    "units": [
+     {
+      "members": [
+       0,
+       3
+      ],
+      "name": "chmod: cannot access '<pa>': no such file or directory"
+     },
+     {
+      "members": [
+       5
+      ],
+      "name": "chmod: cannot access '<pa>': too many levels of symbolic links"
+     }
+    ]
+   },
+   "experiments_executed": 9,
+   "held_out_states": 20,
+   "item_behaviour": {
+    "exact": 20,
+    "false_accept": 0,
+    "false_reject": 0,
+    "held_out": 20,
+    "undecided": 0,
+    "wrong": 0
+   },
+   "item_explanation": {
+    "granularity": "item",
+    "required_items": [
+     0,
+     5
+    ],
+    "searched_units": 4,
+    "units": [
+     {
+      "members": [
+       0
+      ],
+      "name": "work/p0/mode.txt|absent"
+     },
+     {
+      "members": [
+       5
+      ],
+      "name": "work/p0/mode.txt|self_link"
+     }
+    ]
+   },
+   "items_generated": 10,
+   "message_classes": {
+    "chmod: cannot access '<pa>': no such file or directory": [
+     "work/p0/mode.txt|absent",
+     "work/p0/mode.txt|parent_absent"
+    ],
+    "chmod: cannot access '<pa>': not a directory": [
+     "work/p0/mode.txt|parent_is_file"
+    ],
+    "chmod: cannot access '<pa>': too many levels of symbolic links": [
+     "work/p0/mode.txt|self_link"
+    ]
+   },
+   "mutations_that_did_not_refuse": [
+    "as_dir",
+    "empty",
+    "garbage",
+    "unreadable",
+    "wrapped_garbage"
+   ],
+   "once_admissible": 1,
+   "once_behaviour": {
+    "exact": 6,
+    "false_accept": 14,
+    "false_reject": 0,
+    "held_out": 20,
+    "undecided": 0,
+    "wrong": 14
+   },
+   "refusals": 4
+  },
+  "cp": {
+   "ambiguous_classes": {
+    "cp: cannot stat '<pa>': no such file or directory": {
+     "independently_violable": true,
+     "members": [
+      "work/p0/source.txt|absent",
+      "work/p0/source.txt|parent_absent"
+     ]
+    }
+   },
+   "base_applicable": true,
+   "class_behaviour": {
+    "exact": 20,
+    "false_accept": 0,
+    "false_reject": 0,
+    "held_out": 20,
+    "undecided": 0,
+    "wrong": 0
+   },
+   "class_explanation": {
+    "granularity": "class",
+    "required_items": [
+     0,
+     1,
+     3,
+     5,
+     6,
+     13,
+     14,
+     15,
+     16
+    ],
+    "searched_units": 9,
+    "units": [
+     {
+      "members": [
+       1
+      ],
+      "name": "cp: -r not specified; omitting directory '<pa>'"
+     },
+     {
+      "members": [
+       13
+      ],
+      "name": "cp: cannot create regular file '<pb>': no such file or directory"
+     },
+     {
+      "members": [
+       16
+      ],
+      "name": "cp: cannot create regular file '<pb>': permission denied"
+     },
+     {
+      "members": [
+       6
+      ],
+      "name": "cp: cannot open '<pa>' for reading: permission denied"
+     },
+     {
+      "members": [
+       0,
+       3
+      ],
+      "name": "cp: cannot stat '<pa>': no such file or directory"
+     },
+     {
+      "members": [
+       5
+      ],
+      "name": "cp: cannot stat '<pa>': too many levels of symbolic links"
+     },
+     {
+      "members": [
+       14
+      ],
+      "name": "cp: cannot stat '<pb>': not a directory"
+     },
+     {
+      "members": [
+       15
+      ],
+      "name": "cp: cannot stat '<pb>': too many levels of symbolic links"
+     }
+    ]
+   },
+   "experiments_executed": 18,
+   "held_out_states": 20,
+   "item_behaviour": {
+    "exact": 20,
+    "false_accept": 0,
+    "false_reject": 0,
+    "held_out": 20,
+    "undecided": 0,
+    "wrong": 0
+   },
+   "item_explanation": {
+    "granularity": "item",
+    "required_items": [
+     0,
+     1,
+     5,
+     6,
+     13,
+     14,
+     15,
+     16
+    ],
+    "searched_units": 10,
+    "units": [
+     {
+      "members": [
+       0
+      ],
+      "name": "work/p0/source.txt|absent"
+     },
+     {
+      "members": [
+       1
+      ],
+      "name": "work/p0/source.txt|as_dir"
+     },
+     {
+      "members": [
+       5
+      ],
+      "name": "work/p0/source.txt|self_link"
+     },
+     {
+      "members": [
+       6
+      ],
+      "name": "work/p0/source.txt|unreadable"
+     },
+     {
+      "members": [
+       13
+      ],
+      "name": "work/p1/copy.txt|parent_absent"
+     },
+     {
+      "members": [
+       14
+      ],
+      "name": "work/p1/copy.txt|parent_is_file"
+     },
+     {
+      "members": [
+       15
+      ],
+      "name": "work/p1/copy.txt|self_link"
+     },
+     {
+      "members": [
+       16
+      ],
+      "name": "work/p1/copy.txt|unreadable"
+     }
+    ]
+   },
+   "items_generated": 20,
+   "message_classes": {
+    "cp: -r not specified; omitting directory '<pa>'": [
+     "work/p0/source.txt|as_dir"
+    ],
+    "cp: cannot create regular file '<pb>': no such file or directory": [
+     "work/p1/copy.txt|parent_absent"
+    ],
+    "cp: cannot create regular file '<pb>': permission denied": [
+     "work/p1/copy.txt|unreadable"
+    ],
+    "cp: cannot open '<pa>' for reading: permission denied": [
+     "work/p0/source.txt|unreadable"
+    ],
+    "cp: cannot stat '<pa>': no such file or directory": [
+     "work/p0/source.txt|absent",
+     "work/p0/source.txt|parent_absent"
+    ],
+    "cp: cannot stat '<pa>': not a directory": [
+     "work/p0/source.txt|parent_is_file"
+    ],
+    "cp: cannot stat '<pa>': too many levels of symbolic links": [
+     "work/p0/source.txt|self_link"
+    ],
+    "cp: cannot stat '<pb>': not a directory": [
+     "work/p1/copy.txt|parent_is_file"
+    ],
+    "cp: cannot stat '<pb>': too many levels of symbolic links": [
+     "work/p1/copy.txt|self_link"
+    ]
+   },
+   "mutations_that_did_not_refuse": [
+    "already_there",
+    "as_dir",
+    "empty",
+    "garbage",
+    "wrapped_garbage"
+   ],
+   "once_admissible": 2,
+   "once_behaviour": {
+    "exact": 3,
+    "false_accept": 17,
+    "false_reject": 0,
+    "held_out": 20,
+    "undecided": 0,
+    "wrong": 17
+   },
+   "refusals": 10
+  },
+  "gzip_d": {
+   "ambiguous_classes": {
+    "gzip: <pa>: no such file or directory": {
+     "independently_violable": true,
+     "members": [
+      "work/p0/payload.gz|absent",
+      "work/p0/payload.gz|parent_absent"
+     ]
+    }
+   },
+   "base_applicable": true,
+   "class_behaviour": {
+    "exact": 20,
+    "false_accept": 0,
+    "false_reject": 0,
+    "held_out": 20,
+    "undecided": 0,
+    "wrong": 0
+   },
+   "class_explanation": {
+    "granularity": "class",
+    "required_items": [
+     0,
+     1,
+     3,
+     5,
+     6,
+     7,
+     9
+    ],
+    "searched_units": 7,
+    "units": [
+     {
+      "members": [
+       1
+      ],
+      "name": "gzip: <pa> is a directory -- ignored"
+     },
+     {
+      "members": [
+       0,
+       3
+      ],
+      "name": "gzip: <pa>: no such file or directory"
+     },
+     {
+      "members": [
+       7
+      ],
+      "name": "gzip: <pa>: not in gzip format"
+     },
+     {
+      "members": [
+       6
+      ],
+      "name": "gzip: <pa>: permission denied"
+     },
+     {
+      "members": [
+       5
+      ],
+      "name": "gzip: <pa>: too many levels of symbolic links"
+     },
+     {
+      "members": [
+       9
+      ],
+      "name": "gzip: <pa>: unexpected end of file"
+     }
+    ]
+   },
+   "experiments_executed": 9,
+   "held_out_states": 20,
+   "item_behaviour": {
+    "exact": 20,
+    "false_accept": 0,
+    "false_reject": 0,
+    "held_out": 20,
+    "undecided": 0,
+    "wrong": 0
+   },
+   "item_explanation": {
+    "granularity": "item",
+    "required_items": [
+     0,
+     1,
+     5,
+     6,
+     7,
+     9
+    ],
+    "searched_units": 8,
+    "units": [
+     {
+      "members": [
+       0
+      ],
+      "name": "work/p0/payload.gz|absent"
+     },
+     {
+      "members": [
+       1
+      ],
+      "name": "work/p0/payload.gz|as_dir"
+     },
+     {
+      "members": [
+       5
+      ],
+      "name": "work/p0/payload.gz|self_link"
+     },
+     {
+      "members": [
+       6
+      ],
+      "name": "work/p0/payload.gz|unreadable"
+     },
+     {
+      "members": [
+       7
+      ],
+      "name": "work/p0/payload.gz|garbage"
+     },
+     {
+      "members": [
+       9
+      ],
+      "name": "work/p0/payload.gz|empty"
+     }
+    ]
+   },
+   "items_generated": 10,
+   "message_classes": {
+    "gzip: <pa> is a directory -- ignored": [
+     "work/p0/payload.gz|as_dir"
+    ],
+    "gzip: <pa>: no such file or directory": [
+     "work/p0/payload.gz|absent",
+     "work/p0/payload.gz|parent_absent"
+    ],
+    "gzip: <pa>: not a directory": [
+     "work/p0/payload.gz|parent_is_file"
+    ],
+    "gzip: <pa>: not in gzip format": [
+     "work/p0/payload.gz|garbage"
+    ],
+    "gzip: <pa>: permission denied": [
+     "work/p0/payload.gz|unreadable"
+    ],
+    "gzip: <pa>: too many levels of symbolic links": [
+     "work/p0/payload.gz|self_link"
+    ],
+    "gzip: <pa>: unexpected end of file": [
+     "work/p0/payload.gz|empty"
+    ]
+   },
+   "mutations_that_did_not_refuse": [
+    "wrapped_garbage"
+   ],
+   "once_admissible": 1,
+   "once_behaviour": {
+    "exact": 1,
+    "false_accept": 19,
+    "false_reject": 0,
+    "held_out": 20,
+    "undecided": 0,
+    "wrong": 19
+   },
+   "refusals": 8
+  },
+  "head_1": {
+   "ambiguous_classes": {
+    "head: cannot open '<pa>' for reading: no such file or directory": {
+     "independently_violable": true,
+     "members": [
+      "work/p0/readme.txt|absent",
+      "work/p0/readme.txt|parent_absent"
+     ]
+    }
+   },
+   "base_applicable": true,
+   "class_behaviour": {
+    "exact": 20,
+    "false_accept": 0,
+    "false_reject": 0,
+    "held_out": 20,
+    "undecided": 0,
+    "wrong": 0
+   },
+   "class_explanation": {
+    "granularity": "class",
+    "required_items": [
+     0,
+     1,
+     3,
+     5,
+     6
+    ],
+    "searched_units": 5,
+    "units": [
+     {
+      "members": [
+       0,
+       3
+      ],
+      "name": "head: cannot open '<pa>' for reading: no such file or directory"
+     },
+     {
+      "members": [
+       6
+      ],
+      "name": "head: cannot open '<pa>' for reading: permission denied"
+     },
+     {
+      "members": [
+       5
+      ],
+      "name": "head: cannot open '<pa>' for reading: too many levels of symbolic links"
+     },
+     {
+      "members": [
+       1
+      ],
+      "name": "head: error reading '<pa>': is a directory"
+     }
+    ]
+   },
+   "experiments_executed": 9,
+   "held_out_states": 20,
+   "item_behaviour": {
+    "exact": 20,
+    "false_accept": 0,
+    "false_reject": 0,
+    "held_out": 20,
+    "undecided": 0,
+    "wrong": 0
+   },
+   "item_explanation": {
+    "granularity": "item",
+    "required_items": [
+     0,
+     1,
+     5,
+     6
+    ],
+    "searched_units": 6,
+    "units": [
+     {
+      "members": [
+       0
+      ],
+      "name": "work/p0/readme.txt|absent"
+     },
+     {
+      "members": [
+       1
+      ],
+      "name": "work/p0/readme.txt|as_dir"
+     },
+     {
+      "members": [
+       5
+      ],
+      "name": "work/p0/readme.txt|self_link"
+     },
+     {
+      "members": [
+       6
+      ],
+      "name": "work/p0/readme.txt|unreadable"
+     }
+    ]
+   },
+   "items_generated": 10,
+   "message_classes": {
+    "head: cannot open '<pa>' for reading: no such file or directory": [
+     "work/p0/readme.txt|absent",
+     "work/p0/readme.txt|parent_absent"
+    ],
+    "head: cannot open '<pa>' for reading: not a directory": [
+     "work/p0/readme.txt|parent_is_file"
+    ],
+    "head: cannot open '<pa>' for reading: permission denied": [
+     "work/p0/readme.txt|unreadable"
+    ],
+    "head: cannot open '<pa>' for reading: too many levels of symbolic links": [
+     "work/p0/readme.txt|self_link"
+    ],
+    "head: error reading '<pa>': is a directory": [
+     "work/p0/readme.txt|as_dir"
+    ]
+   },
+   "mutations_that_did_not_refuse": [
+    "empty",
+    "garbage",
+    "wrapped_garbage"
+   ],
+   "once_admissible": 1,
+   "once_behaviour": {
+    "exact": 4,
+    "false_accept": 16,
+    "false_reject": 0,
+    "held_out": 20,
+    "undecided": 0,
+    "wrong": 16
+   },
+   "refusals": 6
+  },
+  "ln_s": {
+   "ambiguous_classes": {
+    "ln: failed to create symbolic link '<pa>': file exists": {
+     "independently_violable": true,
+     "members": [
+      "work/p1/link.txt|already_there",
+      "work/p1/link.txt|empty",
+      "work/p1/link.txt|garbage",
+      "work/p1/link.txt|self_link",
+      "work/p1/link.txt|unreadable",
+      "work/p1/link.txt|wrapped_garbage"
+     ]
+    }
+   },
+   "base_applicable": true,
+   "class_behaviour": {
+    "exact": 20,
+    "false_accept": 0,
+    "false_reject": 0,
+    "held_out": 20,
+    "undecided": 0,
+    "wrong": 0
+   },
+   "class_explanation": {
+    "granularity": "class",
+    "required_items": [
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9
+    ],
+    "searched_units": 3,
+    "units": [
+     {
+      "members": [
+       2,
+       5,
+       6,
+       7,
+       8,
+       9
+      ],
+      "name": "ln: failed to create symbolic link '<pa>': file exists"
+     },
+     {
+      "members": [
+       3
+      ],
+      "name": "ln: failed to create symbolic link '<pa>': no such file or directory"
+     },
+     {
+      "members": [
+       4
+      ],
+      "name": "ln: failed to create symbolic link '<pa>': not a directory"
+     }
+    ]
+   },
+   "experiments_executed": 18,
+   "held_out_states": 20,
+   "item_behaviour": {
+    "exact": 20,
+    "false_accept": 0,
+    "false_reject": 0,
+    "held_out": 20,
+    "undecided": 0,
+    "wrong": 0
+   },
+   "item_explanation": {
+    "granularity": "item",
+    "required_items": [
+     2,
+     3,
+     4,
+     5
+    ],
+    "searched_units": 8,
+    "units": [
+     {
+      "members": [
+       2
+      ],
+      "name": "work/p1/link.txt|already_there"
+     },
+     {
+      "members": [
+       3
+      ],
+      "name": "work/p1/link.txt|parent_absent"
+     },
+     {
+      "members": [
+       4
+      ],
+      "name": "work/p1/link.txt|parent_is_file"
+     },
+     {
+      "members": [
+       5
+      ],
+      "name": "work/p1/link.txt|self_link"
+     }
+    ]
+   },
+   "items_generated": 20,
+   "message_classes": {
+    "ln: failed to create symbolic link '<pa>': file exists": [
+     "work/p1/link.txt|already_there",
+     "work/p1/link.txt|empty",
+     "work/p1/link.txt|garbage",
+     "work/p1/link.txt|self_link",
+     "work/p1/link.txt|unreadable",
+     "work/p1/link.txt|wrapped_garbage"
+    ],
+    "ln: failed to create symbolic link '<pa>': no such file or directory": [
+     "work/p1/link.txt|parent_absent"
+    ],
+    "ln: failed to create symbolic link '<pa>': not a directory": [
+     "work/p1/link.txt|parent_is_file"
+    ]
+   },
+   "mutations_that_did_not_refuse": [
+    "absent",
+    "as_dir",
+    "empty",
+    "garbage",
+    "parent_absent",
+    "parent_is_file",
+    "self_link",
+    "unreadable",
+    "wrapped_garbage"
+   ],
+   "once_admissible": 2,
+   "once_behaviour": {
+    "exact": 3,
+    "false_accept": 17,
+    "false_reject": 0,
+    "held_out": 20,
+    "undecided": 0,
+    "wrong": 17
+   },
+   "refusals": 8
+  },
+  "mkdir": {
+   "ambiguous_classes": {
+    "mkdir: cannot create directory \u2018<pa>\u2019: file exists": {
+     "independently_violable": true,
+     "members": [
+      "work/p0/newdir|already_there",
+      "work/p0/newdir|as_dir",
+      "work/p0/newdir|empty",
+      "work/p0/newdir|garbage",
+      "work/p0/newdir|self_link",
+      "work/p0/newdir|unreadable",
+      "work/p0/newdir|wrapped_garbage"
+     ]
+    }
+   },
+   "base_applicable": true,
+   "class_behaviour": {
+    "exact": 20,
+    "false_accept": 0,
+    "false_reject": 0,
+    "held_out": 20,
+    "undecided": 0,
+    "wrong": 0
+   },
+   "class_explanation": {
+    "granularity": "class",
+    "required_items": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9
+    ],
+    "searched_units": 3,
+    "units": [
+     {
+      "members": [
+       1,
+       2,
+       5,
+       6,
+       7,
+       8,
+       9
+      ],
+      "name": "mkdir: cannot create directory \u2018<pa>\u2019: file exists"
+     },
+     {
+      "members": [
+       3
+      ],
+      "name": "mkdir: cannot create directory \u2018<pa>\u2019: no such file or directory"
+     },
+     {
+      "members": [
+       4
+      ],
+      "name": "mkdir: cannot create directory \u2018<pa>\u2019: not a directory"
+     }
+    ]
+   },
+   "experiments_executed": 9,
+   "held_out_states": 20,
+   "item_behaviour": {
+    "exact": 20,
+    "false_accept": 0,
+    "false_reject": 0,
+    "held_out": 20,
+    "undecided": 0,
+    "wrong": 0
+   },
+   "item_explanation": {
+    "granularity": "item",
+    "required_items": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "searched_units": 9,
+    "units": [
+     {
+      "members": [
+       1
+      ],
+      "name": "work/p0/newdir|as_dir"
+     },
+     {
+      "members": [
+       2
+      ],
+      "name": "work/p0/newdir|already_there"
+     },
+     {
+      "members": [
+       3
+      ],
+      "name": "work/p0/newdir|parent_absent"
+     },
+     {
+      "members": [
+       4
+      ],
+      "name": "work/p0/newdir|parent_is_file"
+     },
+     {
+      "members": [
+       5
+      ],
+      "name": "work/p0/newdir|self_link"
+     }
+    ]
+   },
+   "items_generated": 10,
+   "message_classes": {
+    "mkdir: cannot create directory \u2018<pa>\u2019: file exists": [
+     "work/p0/newdir|already_there",
+     "work/p0/newdir|as_dir",
+     "work/p0/newdir|empty",
+     "work/p0/newdir|garbage",
+     "work/p0/newdir|self_link",
+     "work/p0/newdir|unreadable",
+     "work/p0/newdir|wrapped_garbage"
+    ],
+    "mkdir: cannot create directory \u2018<pa>\u2019: no such file or directory": [
+     "work/p0/newdir|parent_absent"
+    ],
+    "mkdir: cannot create directory \u2018<pa>\u2019: not a directory": [
+     "work/p0/newdir|parent_is_file"
+    ]
+   },
+   "mutations_that_did_not_refuse": [],
+   "once_admissible": 1,
+   "once_behaviour": {
+    "exact": 0,
+    "false_accept": 20,
+    "false_reject": 0,
+    "held_out": 20,
+    "undecided": 0,
+    "wrong": 20
+   },
+   "refusals": 9
+  },
+  "rm_f": {
+   "ambiguous_classes": {},
+   "base_applicable": true,
+   "class_behaviour": {
+    "exact": 20,
+    "false_accept": 0,
+    "false_reject": 0,
+    "held_out": 20,
+    "undecided": 0,
+    "wrong": 0
+   },
+   "class_explanation": {
+    "granularity": "class",
+    "required_items": [
+     1
+    ],
+    "searched_units": 1,
+    "units": [
+     {
+      "members": [
+       1
+      ],
+      "name": "rm: cannot remove '<pa>': is a directory"
+     }
+    ]
+   },
+   "experiments_executed": 9,
+   "held_out_states": 20,
+   "item_behaviour": {
+    "exact": 20,
+    "false_accept": 0,
+    "false_reject": 0,
+    "held_out": 20,
+    "undecided": 0,
+    "wrong": 0
+   },
+   "item_explanation": {
+    "granularity": "item",
+    "required_items": [
+     1
+    ],
+    "searched_units": 1,
+    "units": [
+     {
+      "members": [
+       1
+      ],
+      "name": "work/p0/gone.txt|as_dir"
+     }
+    ]
+   },
+   "items_generated": 10,
+   "message_classes": {
+    "rm: cannot remove '<pa>': is a directory": [
+     "work/p0/gone.txt|as_dir"
+    ]
+   },
+   "mutations_that_did_not_refuse": [
+    "already_there",
+    "empty",
+    "garbage",
+    "parent_absent",
+    "parent_is_file",
+    "self_link",
+    "unreadable",
+    "wrapped_garbage"
+   ],
+   "once_admissible": 1,
+   "once_behaviour": {
+    "exact": 19,
+    "false_accept": 1,
+    "false_reject": 0,
+    "held_out": 20,
+    "undecided": 0,
+    "wrong": 1
+   },
+   "refusals": 1
+  },
+  "tar_x": {
+   "ambiguous_classes": {
+    "tar (child): <pa>: cannot open: no such file or directory": {
+     "independently_violable": true,
+     "members": [
+      "work/p0/archive.tgz|absent",
+      "work/p0/archive.tgz|parent_absent"
+     ]
+    }
+   },
+   "base_applicable": true,
+   "class_behaviour": {
+    "exact": 20,
+    "false_accept": 0,
+    "false_reject": 0,
+    "held_out": 20,
+    "undecided": 0,
+    "wrong": 0
+   },
+   "class_explanation": {
+    "granularity": "class",
+    "required_items": [
+     0,
+     1,
+     3,
+     5,
+     6,
+     7,
+     9
+    ],
+    "searched_units": 7,
+    "units": [
+     {
+      "members": [
+       7
+      ],
+      "name": "gzip: stdin: not in gzip format"
+     },
+     {
+      "members": [
+       9
+      ],
+      "name": "gzip: stdin: unexpected end of file"
+     },
+     {
+      "members": [
+       0,
+       3
+      ],
+      "name": "tar (child): <pa>: cannot open: no such file or directory"
+     },
+     {
+      "members": [
+       6
+      ],
+      "name": "tar (child): <pa>: cannot open: permission denied"
+     },
+     {
+      "members": [
+       5
+      ],
+      "name": "tar (child): <pa>: cannot open: too many levels of symbolic links"
+     },
+     {
+      "members": [
+       1
+      ],
+      "name": "tar (child): <pa>: cannot read: is a directory"
+     }
+    ]
+   },
+   "experiments_executed": 9,
+   "held_out_states": 20,
+   "item_behaviour": {
+    "exact": 20,
+    "false_accept": 0,
+    "false_reject": 0,
+    "held_out": 20,
+    "undecided": 0,
+    "wrong": 0
+   },
+   "item_explanation": {
+    "granularity": "item",
+    "required_items": [
+     0,
+     1,
+     5,
+     6,
+     7,
+     9
+    ],
+    "searched_units": 8,
+    "units": [
+     {
+      "members": [
+       0
+      ],
+      "name": "work/p0/archive.tgz|absent"
+     },
+     {
+      "members": [
+       1
+      ],
+      "name": "work/p0/archive.tgz|as_dir"
+     },
+     {
+      "members": [
+       5
+      ],
+      "name": "work/p0/archive.tgz|self_link"
+     },
+     {
+      "members": [
+       6
+      ],
+      "name": "work/p0/archive.tgz|unreadable"
+     },
+     {
+      "members": [
+       7
+      ],
+      "name": "work/p0/archive.tgz|garbage"
+     },
+     {
+      "members": [
+       9
+      ],
+      "name": "work/p0/archive.tgz|empty"
+     }
+    ]
+   },
+   "items_generated": 10,
+   "message_classes": {
+    "gzip: stdin: not in gzip format": [
+     "work/p0/archive.tgz|garbage"
+    ],
+    "gzip: stdin: unexpected end of file": [
+     "work/p0/archive.tgz|empty"
+    ],
+    "tar (child): <pa>: cannot open: no such file or directory": [
+     "work/p0/archive.tgz|absent",
+     "work/p0/archive.tgz|parent_absent"
+    ],
+    "tar (child): <pa>: cannot open: not a directory": [
+     "work/p0/archive.tgz|parent_is_file"
+    ],
+    "tar (child): <pa>: cannot open: permission denied": [
+     "work/p0/archive.tgz|unreadable"
+    ],
+    "tar (child): <pa>: cannot open: too many levels of symbolic links": [
+     "work/p0/archive.tgz|self_link"
+    ],
+    "tar (child): <pa>: cannot read: is a directory": [
+     "work/p0/archive.tgz|as_dir"
+    ]
+   },
+   "mutations_that_did_not_refuse": [
+    "wrapped_garbage"
+   ],
+   "once_admissible": 1,
+   "once_behaviour": {
+    "exact": 1,
+    "false_accept": 19,
+    "false_reject": 0,
+    "held_out": 20,
+    "undecided": 0,
+    "wrong": 19
+   },
+   "refusals": 8
+  }
+ },
+ "schema": "BRAIN_AN_ACTIONS_VOCABULARY_IS_ITS_REFUSAL_SURFACE_V1",
+ "verdict": {
+  "K1_the_refusal_surface_is_finite_and_one_execution_per_property_enumerates_it": {
+   "MET": true,
+   "actions": 8,
+   "actions_with_no_refusal_at_all": [],
+   "all_base_states_applicable": true,
+   "executions": 98,
+   "per_action": {
+    "chmod_600": {
+     "executed": 9,
+     "generated": 10,
+     "refusals": 4
+    },
+    "cp": {
+     "executed": 18,
+     "generated": 20,
+     "refusals": 10
+    },
+    "gzip_d": {
+     "executed": 9,
+     "generated": 10,
+     "refusals": 8
+    },
+    "head_1": {
+     "executed": 9,
+     "generated": 10,
+     "refusals": 6
+    },
+    "ln_s": {
+     "executed": 18,
+     "generated": 20,
+     "refusals": 8
+    },
+    "mkdir": {
+     "executed": 9,
+     "generated": 10,
+     "refusals": 9
+    },
+    "rm_f": {
+     "executed": 9,
+     "generated": 10,
+     "refusals": 1
+    },
+    "tar_x": {
+     "executed": 9,
+     "generated": 10,
+     "refusals": 8
+    }
+   }
+  },
+  "K2_the_words_fix_the_grain_of_the_conditions": {
+   "MET": true,
+   "claim": "when one message covers two properties, the program itself declines to distinguish them, so the class -- not the property -- is the unit a precondition may use",
+   "classes_that_merge_independently_violable_properties": {
+    "chmod_600": {
+     "chmod: cannot access '<pa>': no such file or directory": {
+      "independently_violable": true,
+      "members": [
+       "work/p0/mode.txt|absent",
+       "work/p0/mode.txt|parent_absent"
+      ]
+     }
+    },
+    "cp": {
+     "cp: cannot stat '<pa>': no such file or directory": {
+      "independently_violable": true,
+      "members": [
+       "work/p0/source.txt|absent",
+       "work/p0/source.txt|parent_absent"
+      ]
+     }
+    },
+    "gzip_d": {
+     "gzip: <pa>: no such file or directory": {
+      "independently_violable": true,
+      "members": [
+       "work/p0/payload.gz|absent",
+       "work/p0/payload.gz|parent_absent"
+      ]
+     }
+    },
+    "head_1": {
+     "head: cannot open '<pa>' for reading: no such file or directory": {
+      "independently_violable": true,
+      "members": [
+       "work/p0/readme.txt|absent",
+       "work/p0/readme.txt|parent_absent"
+      ]
+     }
+    },
+    "ln_s": {
+     "ln: failed to create symbolic link '<pa>': file exists": {
+      "independently_violable": true,
+      "members": [
+       "work/p1/link.txt|already_there",
+       "work/p1/link.txt|empty",
+       "work/p1/link.txt|garbage",
+       "work/p1/link.txt|self_link",
+       "work/p1/link.txt|unreadable",
+       "work/p1/link.txt|wrapped_garbage"
+      ]
+     }
+    },
+    "mkdir": {
+     "mkdir: cannot create directory \u2018<pa>\u2019: file exists": {
+      "independently_violable": true,
+      "members": [
+       "work/p0/newdir|already_there",
+       "work/p0/newdir|as_dir",
+       "work/p0/newdir|empty",
+       "work/p0/newdir|garbage",
+       "work/p0/newdir|self_link",
+       "work/p0/newdir|unreadable",
+       "work/p0/newdir|wrapped_garbage"
+      ]
+     }
+    },
+    "tar_x": {
+     "tar (child): <pa>: cannot open: no such file or directory": {
+      "independently_violable": true,
+      "members": [
+       "work/p0/archive.tgz|absent",
+       "work/p0/archive.tgz|parent_absent"
+      ]
+     }
+    }
+   },
+   "message_classes": {
+    "chmod_600": {
+     "chmod: cannot access '<pa>': no such file or directory": [
+      "work/p0/mode.txt|absent",
+      "work/p0/mode.txt|parent_absent"
+     ],
+     "chmod: cannot access '<pa>': not a directory": [
+      "work/p0/mode.txt|parent_is_file"
+     ],
+     "chmod: cannot access '<pa>': too many levels of symbolic links": [
+      "work/p0/mode.txt|self_link"
+     ]
+    },
+    "cp": {
+     "cp: -r not specified; omitting directory '<pa>'": [
+      "work/p0/source.txt|as_dir"
+     ],
+     "cp: cannot create regular file '<pb>': no such file or directory": [
+      "work/p1/copy.txt|parent_absent"
+     ],
+     "cp: cannot create regular file '<pb>': permission denied": [
+      "work/p1/copy.txt|unreadable"
+     ],
+     "cp: cannot open '<pa>' for reading: permission denied": [
+      "work/p0/source.txt|unreadable"
+     ],
+     "cp: cannot stat '<pa>': no such file or directory": [
+      "work/p0/source.txt|absent",
+      "work/p0/source.txt|parent_absent"
+     ],
+     "cp: cannot stat '<pa>': not a directory": [
+      "work/p0/source.txt|parent_is_file"
+     ],
+     "cp: cannot stat '<pa>': too many levels of symbolic links": [
+      "work/p0/source.txt|self_link"
+     ],
+     "cp: cannot stat '<pb>': not a directory": [
+      "work/p1/copy.txt|parent_is_file"
+     ],
+     "cp: cannot stat '<pb>': too many levels of symbolic links": [
+      "work/p1/copy.txt|self_link"
+     ]
+    },
+    "gzip_d": {
+     "gzip: <pa> is a directory -- ignored": [
+      "work/p0/payload.gz|as_dir"
+     ],
+     "gzip: <pa>: no such file or directory": [
+      "work/p0/payload.gz|absent",
+      "work/p0/payload.gz|parent_absent"
+     ],
+     "gzip: <pa>: not a directory": [
+      "work/p0/payload.gz|parent_is_file"
+     ],
+     "gzip: <pa>: not in gzip format": [
+      "work/p0/payload.gz|garbage"
+     ],
+     "gzip: <pa>: permission denied": [
+      "work/p0/payload.gz|unreadable"
+     ],
+     "gzip: <pa>: too many levels of symbolic links": [
+      "work/p0/payload.gz|self_link"
+     ],
+     "gzip: <pa>: unexpected end of file": [
+      "work/p0/payload.gz|empty"
+     ]
+    },
+    "head_1": {
+     "head: cannot open '<pa>' for reading: no such file or directory": [
+      "work/p0/readme.txt|absent",
+      "work/p0/readme.txt|parent_absent"
+     ],
+     "head: cannot open '<pa>' for reading: not a directory": [
+      "work/p0/readme.txt|parent_is_file"
+     ],
+     "head: cannot open '<pa>' for reading: permission denied": [
+      "work/p0/readme.txt|unreadable"
+     ],
+     "head: cannot open '<pa>' for reading: too many levels of symbolic links": [
+      "work/p0/readme.txt|self_link"
+     ],
+     "head: error reading '<pa>': is a directory": [
+      "work/p0/readme.txt|as_dir"
+     ]
+    },
+    "ln_s": {
+     "ln: failed to create symbolic link '<pa>': file exists": [
+      "work/p1/link.txt|already_there",
+      "work/p1/link.txt|empty",
+      "work/p1/link.txt|garbage",
+      "work/p1/link.txt|self_link",
+      "work/p1/link.txt|unreadable",
+      "work/p1/link.txt|wrapped_garbage"
+     ],
+     "ln: failed to create symbolic link '<pa>': no such file or directory": [
+      "work/p1/link.txt|parent_absent"
+     ],
+     "ln: failed to create symbolic link '<pa>': not a directory": [
+      "work/p1/link.txt|parent_is_file"
+     ]
+    },
+    "mkdir": {
+     "mkdir: cannot create directory \u2018<pa>\u2019: file exists": [
+      "work/p0/newdir|already_there",
+      "work/p0/newdir|as_dir",
+      "work/p0/newdir|empty",
+      "work/p0/newdir|garbage",
+      "work/p0/newdir|self_link",
+      "work/p0/newdir|unreadable",
+      "work/p0/newdir|wrapped_garbage"
+     ],
+     "mkdir: cannot create directory \u2018<pa>\u2019: no such file or directory": [
+      "work/p0/newdir|parent_absent"
+     ],
+     "mkdir: cannot create directory \u2018<pa>\u2019: not a directory": [
+      "work/p0/newdir|parent_is_file"
+     ]
+    },
+    "rm_f": {
+     "rm: cannot remove '<pa>': is a directory": [
+      "work/p0/gone.txt|as_dir"
+     ]
+    },
+    "tar_x": {
+     "gzip: stdin: not in gzip format": [
+      "work/p0/archive.tgz|garbage"
+     ],
+     "gzip: stdin: unexpected end of file": [
+      "work/p0/archive.tgz|empty"
+     ],
+     "tar (child): <pa>: cannot open: no such file or directory": [
+      "work/p0/archive.tgz|absent",
+      "work/p0/archive.tgz|parent_absent"
+     ],
+     "tar (child): <pa>: cannot open: not a directory": [
+      "work/p0/archive.tgz|parent_is_file"
+     ],
+     "tar (child): <pa>: cannot open: permission denied": [
+      "work/p0/archive.tgz|unreadable"
+     ],
+     "tar (child): <pa>: cannot open: too many levels of symbolic links": [
+      "work/p0/archive.tgz|self_link"
+     ],
+     "tar (child): <pa>: cannot read: is a directory": [
+      "work/p0/archive.tgz|as_dir"
+     ]
+    }
+   }
+  },
+  "K3_the_surface_learned_precondition_predicts_unexecuted_joint_mutations": {
+   "MET": true,
+   "class_granularity": {
+    "chmod_600": {
+     "exact": 20,
+     "false_accept": 0,
+     "false_reject": 0,
+     "held_out": 20,
+     "undecided": 0,
+     "wrong": 0
+    },
+    "cp": {
+     "exact": 20,
+     "false_accept": 0,
+     "false_reject": 0,
+     "held_out": 20,
+     "undecided": 0,
+     "wrong": 0
+    },
+    "gzip_d": {
+     "exact": 20,
+     "false_accept": 0,
+     "false_reject": 0,
+     "held_out": 20,
+     "undecided": 0,
+     "wrong": 0
+    },
+    "head_1": {
+     "exact": 20,
+     "false_accept": 0,
+     "false_reject": 0,
+     "held_out": 20,
+     "undecided": 0,
+     "wrong": 0
+    },
+    "ln_s": {
+     "exact": 20,
+     "false_accept": 0,
+     "false_reject": 0,
+     "held_out": 20,
+     "undecided": 0,
+     "wrong": 0
+    },
+    "mkdir": {
+     "exact": 20,
+     "false_accept": 0,
+     "false_reject": 0,
+     "held_out": 20,
+     "undecided": 0,
+     "wrong": 0
+    },
+    "rm_f": {
+     "exact": 20,
+     "false_accept": 0,
+     "false_reject": 0,
+     "held_out": 20,
+     "undecided": 0,
+     "wrong": 0
+    },
+    "tar_x": {
+     "exact": 20,
+     "false_accept": 0,
+     "false_reject": 0,
+     "held_out": 20,
+     "undecided": 0,
+     "wrong": 0
+    }
+   },
+   "false_accepts": 0,
+   "note": "the surface was enumerated with single-property mutations; every scored state combines two or three",
+   "wrong": 0
+  },
+  "K4_the_words_are_load_bearing_item_granularity_breaks": {
+   "MET": false,
+   "claim_as_declared": "ignoring the words and requiring one property out of an ambiguous pair buys a false accept",
+   "class_false_accepts": 0,
+   "class_wrong": 0,
+   "item_false_accepts": 0,
+   "item_granularity": {
+    "chmod_600": {
+     "exact": 20,
+     "false_accept": 0,
+     "false_reject": 0,
+     "held_out": 20,
+     "undecided": 0,
+     "wrong": 0
+    },
+    "cp": {
+     "exact": 20,
+     "false_accept": 0,
+     "false_reject": 0,
+     "held_out": 20,
+     "undecided": 0,
+     "wrong": 0
+    },
+    "gzip_d": {
+     "exact": 20,
+     "false_accept": 0,
+     "false_reject": 0,
+     "held_out": 20,
+     "undecided": 0,
+     "wrong": 0
+    },
+    "head_1": {
+     "exact": 20,
+     "false_accept": 0,
+     "false_reject": 0,
+     "held_out": 20,
+     "undecided": 0,
+     "wrong": 0
+    },
+    "ln_s": {
+     "exact": 20,
+     "false_accept": 0,
+     "false_reject": 0,
+     "held_out": 20,
+     "undecided": 0,
+     "wrong": 0
+    },
+    "mkdir": {
+     "exact": 20,
+     "false_accept": 0,
+     "false_reject": 0,
+     "held_out": 20,
+     "undecided": 0,
+     "wrong": 0
+    },
+    "rm_f": {
+     "exact": 20,
+     "false_accept": 0,
+     "false_reject": 0,
+     "held_out": 20,
+     "undecided": 0,
+     "wrong": 0
+    },
+    "tar_x": {
+     "exact": 20,
+     "false_accept": 0,
+     "false_reject": 0,
+     "held_out": 20,
+     "undecided": 0,
+     "wrong": 0
+    }
+   },
+   "item_wrong": 0,
+   "what_this_does_NOT_retract": "the words still select WHICH generic properties are conditions (K3): that selection is the whole gain, and it survives",
+   "what_was_measured": "with an exact minimum-cardinality cover at both grains, item granularity is not worse: 0 false accepts, 0 wrong, same 160 states",
+   "why_the_declaration_failed": "the class rule and the item rule agree wherever the two members of a class are violated together, and the minimum cover never picks a member that a refusal does not already witness -- so the grain of the words does not change a prediction on this pool"
+  },
+  "K5_one_experience_is_not_enough_and_one_execution_per_property_is": {
+   "MET": true,
+   "class": {
+    "exact": 160,
+    "undecided": 0,
+    "wrong": 0
+   },
+   "cost": {
+    "executions": 98,
+    "joint_states_never_executed": 527360,
+    "ratio": 5381.2
+   },
+   "declared_criterion_before_the_run": "one success decides zero held-out states",
+   "held_out_total": 160,
+   "once": {
+    "exact": 37,
+    "undecided": 0,
+    "wrong": 123
+   },
+   "the_declared_criterion_is_NOT_met_because_the_baseline_is_worse_than_declared": "one success does not abstain, it answers -- and is wrong on most unexecuted states, because every property that happened to be false in the single success is then believed irrelevant",
+   "the_rounds_claim_survived_in_a_stronger_form": "one execution per property is exact on every held-out state, 0 wrong, in 98 executions"
+  },
+  "K6_zero": {
+   "MET": true,
+   "model_calls": 0,
+   "network_calls_at_run_time": 0,
+   "parameters_stored": 0
+  }
+ },
+ "why_this_round": {
+  "the_answer_being_tested": "a program can only refuse on a condition it checks, and its refusal says which -- so one controlled violation per property enumerates a sufficient vocabulary, with no trace-completeness assumption and nothing inferred from successes",
+  "the_gap_it_closes": "every prior round and every action-model-learning paper takes the fact vocabulary as an input; the insufficiency certificate says that is where the wall is",
+  "why_it_could_fail": "if the surface is unbounded; if message classes merge properties that vary independently, making the grain unsound; if single-property refusals do not predict joint unexecuted states; if one experience is already enough"
+ }
+}
