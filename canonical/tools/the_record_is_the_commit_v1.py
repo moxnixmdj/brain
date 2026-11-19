@@ -524,6 +524,31 @@ def measure(root: pathlib.Path, receipt_path: pathlib.Path | None = None) -> dic
                        "pre_state_digest": base_pre, "target_digest": base_target},
         "verdict": verdict,
         "control": control, "recorded": recorded, "recovery_injected": in_recovery,
+        "prior_art": {
+            "the_mechanism_is_not_new_and_that_is_the_point": "write-ahead logging plus idempotent redo is "
+                "ARIES (1992): a log record is forced before the data, and redo is idempotent because every page "
+                "carries the LSN of the last record applied to it. This round's per-path sha256 pre/post digest is "
+                "the file-granularity version of the per-page LSN, and nothing more.",
+            "independent_implementations_that_converge_on_it": [
+                "fstx (neptro/fstx, Sep 2026): stages in a private directory, journals every entry, applies "
+                "no-replace renames in waves separated by fsync barriers, writes a durable COMMITTED marker, and "
+                "refuses rather than guesses when it cannot interpret a state -- the same shape, keyed by inode "
+                "rather than by digest",
+                "bx (getkono/bx, PR 9): journal every write, rollback an interrupted one, restore exactly, with one "
+                "rule that this round also obeys -- unlink the journal last",
+                "soqrates (jvanbuel/soqrates, PRs 6 and 27): a durable journal of the intended end state, idempotent "
+                "application, and the stated reason recovery must be re-runnable: a crash during recovery is a crash "
+                "like any other",
+                "tessera (vig-os/tessera, PR 696): recovery must itself be rewritten through the durable write path, "
+                "or a crash inside recovery loses the journal and every commit in it",
+                "openscion (bnsd55/openscion, issue 237): asserts the durability order from a recorded log and adds "
+                "dm-log-writes mutation checks -- remove the directory fsync and the suite must fail",
+                "keel (Nuu-maan/keel, issue 2): SIGKILL leaves the page cache alive, so it cannot prove fsync "
+                "ordering"],
+            "what_this_round_adds_beyond_them": "not the idea: the measurement that answers a falsifier posed in this "
+                "tree -- a crash at all 10 boundaries of a real tar/rm commit, a crash inside recovery at all 7 of its "
+                "steps (56/56), the no-record control that reproduces the previous round's failure on demand, and the "
+                "three-bucket separation that makes a pre-record crash an asserted pre-state rather than a silent gap"},
         "limits": [
             "process death is not power loss: os._exit measures recovery logic and the visibility of a "
             "half-commit, not durability across a power cut; a block-layer harness (dm-log-writes) is the "

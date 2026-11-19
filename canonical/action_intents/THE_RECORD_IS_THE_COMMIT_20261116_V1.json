@@ -2,7 +2,7 @@
  "action_id": "THE_RECORD_IS_THE_COMMIT_20261116_V1",
  "action_intent_id": "THE_RECORD_IS_THE_COMMIT_20261116_V1",
  "action_kind": "REAL_CAPABILITY_ACQUISITION",
- "action_summary": "Runs the previous round's pre-registered falsifier and answers it: a record-based commit DOES recover byte-exactly from a crash between two single-path renames, so multi-path commits have a sound portable implementation and last round's residual -- atomic only where the filesystem can exchange two populated paths -- is dissolved rather than engineered around. A 6-operation real commit (GNU tar extracting five members, rm deleting one) is crashed at all 10 boundaries: before the record the tree is provably still the pre-state and there is no record (all-or-nothing); at and after the durable record all 8 boundaries recover to the target byte-exactly; a crash after cleanup finds the target with nothing to replay. Recovery is itself crashed inside every one of its steps: 56 of 56 second recoveries reach the target. The no-record control leaves a tree that is neither state at 5 of 9 boundaries with nothing to recover from -- which is exactly why the previous round's single-rename limit was real. 868-byte record, 16 fsyncs, 7 renames per 6-operation commit. The durable record, not the sequence of renames, is the commit.",
+ "action_summary": "Runs the previous round's pre-registered falsifier and answers it: a record-based commit DOES recover byte-exactly from a crash between two single-path renames, so multi-path commits have a sound portable implementation and last round's residual -- atomic only where the filesystem can exchange two populated paths -- is dissolved rather than engineered around. A 6-operation real commit (GNU tar extracting five members, rm deleting one) is crashed at all 10 boundaries: before the record the tree is provably still the pre-state and there is no record (all-or-nothing); at and after the durable record all 8 boundaries recover to the target byte-exactly; a crash after cleanup finds the target with nothing to replay. Recovery is itself crashed inside every one of its steps: 56 of 56 second recoveries reach the target. The no-record control leaves a tree that is neither state at 5 of 9 boundaries with nothing to recover from -- exactly why the previous round's single-rename limit was real. 868-byte record, 16 fsyncs, 7 renames per 6-operation commit. The durable record, not the sequence of renames, is the commit point.",
  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
  "agent_orientation": {
   "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
@@ -41,14 +41,14 @@
   "terminal_achieved": false
  },
  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
- "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The commit is portable: a durable record beside the tree, one idempotent per-path replace or delete keyed by pre/post digests, and a replay that finishes only what the digests say is unfinished, recovers byte-exactly from a crash at every boundary (8/8) and from a crash inside recovery at every step (56/56). The record, not the rename sequence, is the commit point; before it the tree is untouched and there is nothing to recover.",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The commit is now portable: a durable per-path record makes a multi-path commit recoverable byte-exactly without RENAME_EXCHANGE, so an arbitrary effect over a local tree is reversible on NFS, CIFS, Windows and anywhere plain rename exists. What remains is not atomicity but scope: the record can only describe effects that live in the tree, and fsync is a promise the device can break.",
  "canonical_base_commit": "837f81211eee15ee9e248247400c4c8ce3b64265",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
  "causal_blocker": "The commit is now portable: a durable per-path record makes a multi-path commit recoverable byte-exactly without RENAME_EXCHANGE, so an arbitrary effect over a local tree is reversible on NFS, CIFS, Windows and anywhere plain rename exists. What remains is not atomicity but scope: the record can only describe effects that live in the tree, and fsync is a promise the device can break.",
  "date": "2026-11-16",
- "expected_parent_change": "Runs the previous round's pre-registered falsifier and answers it: a record-based commit DOES recover byte-exactly from a crash between two single-path renames, so multi-path commits have a sound portable implementation and last round's residual -- atomic only where the filesystem can exchange two populated paths -- is dissolved rather than engineered around. A 6-operation real commit (GNU tar extracting five members, rm deleting one) is crashed at all 10 boundaries: before the record the tree is provably still the pre-state and there is no record (all-or-nothing); at and after the durable record all 8 boundaries recover to the target byte-exactly; a crash after cleanup finds the target with nothing to replay. Recovery is itself crashed inside every one of its steps: 56 of 56 second recoveries reach the target. The no-record control leaves a tree that is neither state at 5 of 9 boundaries with nothing to recover from -- which is exactly why the previous round's single-rename limit was real. 868-byte record, 16 fsyncs, 7 renames per 6-operation commit. The durable record, not the sequence of renames, is the commit.",
+ "expected_parent_change": "Runs the previous round's pre-registered falsifier and answers it: a record-based commit DOES recover byte-exactly from a crash between two single-path renames, so multi-path commits have a sound portable implementation and last round's residual -- atomic only where the filesystem can exchange two populated paths -- is dissolved rather than engineered around. A 6-operation real commit (GNU tar extracting five members, rm deleting one) is crashed at all 10 boundaries: before the record the tree is provably still the pre-state and there is no record (all-or-nothing); at and after the durable record all 8 boundaries recover to the target byte-exactly; a crash after cleanup finds the target with nothing to replay. Recovery is itself crashed inside every one of its steps: 56 of 56 second recoveries reach the target. The no-record control leaves a tree that is neither state at 5 of 9 boundaries with nothing to recover from -- exactly why the previous round's single-rename limit was real. 868-byte record, 16 fsyncs, 7 renames per 6-operation commit. The durable record, not the sequence of renames, is the commit point.",
  "expected_parent_frontier_change": "The commit is now portable: a durable per-path record makes a multi-path commit recoverable byte-exactly without RENAME_EXCHANGE, so an arbitrary effect over a local tree is reversible on NFS, CIFS, Windows and anywhere plain rename exists. What remains is not atomicity but scope: the record can only describe effects that live in the tree, and fsync is a promise the device can break.",
  "expected_parent_level_state_change": "The commit is now portable: a durable per-path record makes a multi-path commit recoverable byte-exactly without RENAME_EXCHANGE, so an arbitrary effect over a local tree is reversible on NFS, CIFS, Windows and anywhere plain rename exists. What remains is not atomicity but scope: the record can only describe effects that live in the tree, and fsync is a promise the device can break.",
  "explicit_user_authorization": [
@@ -79,7 +79,7 @@
   ],
   "expected_obligation_discharge_lcb": 0,
   "expected_obligation_unlock_lcb": "1/50",
-  "interpretation": "Speculative forecast only. The round removes the last filesystem-capability dependency from committing an arbitrary effect; no truth obligation is discharged.",
+  "interpretation": "Speculative forecast only. The round removes the need for an oracle in the decision and names the commit as the residual; no truth obligation is discharged.",
   "open_obligation_ids": [],
   "scope_complete_discharge": false,
   "success_probability_lcb": "1/2",
@@ -106,7 +106,7 @@
    "parameters_stored": 0,
    "record_bytes": 868,
    "renames_per_commit": 7,
-   "seconds": 11.6,
+   "seconds": 11.8,
    "unlinks": 1
   },
   "declared_acceptance": {
@@ -130,7 +130,7 @@
    ],
    "operations": 6,
    "produced_by": [
-    "tar --sort=name --mtime=@0 ... -cf bundle.tgz",
+    "tar -cf bundle.tgz (five members)",
     "tar -xzf bundle.tgz",
     "rm -f obsolete.txt"
    ]
@@ -159,10 +159,492 @@
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "the claim that a multi-path commit is atomic only where RENAME_EXCHANGE exists",
-   "the two-rename fallback with a window in which the live path does not exist",
-   "the assumption that recovery needs a human or a supervisor to decide what was finished"
+   "the two-rename fallback with a measured window in which the live path does not exist",
+   "the assumption that recovery needs a supervisor to decide which operations were finished"
   ],
-  "expected_parent_frontier_change": "The commit is now portable: a durable per-path record makes a multi-path commit recoverable byte-exactly without RENAME_EXCHANGE, so an arbitrary effect over a local tree is reversible on NFS, CIFS, Windows and anywhere plain rename exists. What remains is not atomicity but scope: the record can only describe effects that live in the tree, and fsync is a promise the device can break."
+  "expected_parent_frontier_change": "The commit is now portable: a durable per-path record makes a multi-path commit recoverable byte-exactly without RENAME_EXCHANGE, so an arbitrary effect over a local tree is reversible on NFS, CIFS, Windows and anywhere plain rename exists. What remains is not atomicity but scope: the record can only describe effects that live in the tree, and fsync is a promise the device can break.",
+  "expected_parent_level_state_change": "The commit is now portable: a durable per-path record makes a multi-path commit recoverable byte-exactly without RENAME_EXCHANGE, so an arbitrary effect over a local tree is reversible on NFS, CIFS, Windows and anywhere plain rename exists. What remains is not atomicity but scope: the record can only describe effects that live in the tree, and fsync is a promise the device can break.",
+  "independent_verification_required": true,
+  "iteration_limit": 1,
+  "next_step": "Test the durability the record now relies on, at the layer where it can actually be tested: drive the same commit under dm-log-writes and replay the block log at every crash point, to see whether the record and the tree survive a power cut (not a process kill) in the same order. Prediction: the tree never contains a half-written file, and the record is either absent (pre-state) or complete (replayable), because every step is fsync(file) -> rename -> fsync(dir). Falsifier: if any replayed image contains a torn or zero-length file, or a record that names operations whose pre-images were never durable, then the ordering is wrong and the record cannot be trusted after power loss -- which would put the residual back in the mechanism instead of the device.",
+  "obs_blocker": {
+   "delete_bypass_substitute_options": [
+    "a decision made by a free attempt rather than a reading",
+    "bypass the reset convention with a deeper run set: depth cannot help, because the equivalence is forced at every depth by the count starting at zero",
+    "substitute more environments for the missing pre-state: the third environment removed nothing, and the pre-state removed the pair"
+   ],
+   "intrinsic_or_path_specific": "Trial-and-error is sound iff failure is free, and a failure is free iff the attempt happens in a stage and the commit is one rename. On real actions a refused attempt costs a copy of the tree and leaves the live tree byt",
+   "surviving_causal_blocker": "Trial-and-error is sound iff failure is free, and a failure is free iff the attempt happens in a stage and the commit is one rename. On real actions a refused attempt costs a copy of the tree and leaves the live tree byt"
+  },
+  "obs_capability": {
+   "capability_work_deleted": [
+    "a decision made by a free attempt rather than a reading",
+    "any claim that depth or breadth can separate the pair",
+    "a second harness or grammar: the previous round's grammar is held fixed at 189 terms"
+   ],
+   "existing_inherited_routes_checked": [
+    "a decision made by a free attempt rather than a reading",
+    "canonical/tools/the_goal_is_a_relation_over_the_run_v1.py (traces_for, run_terms)",
+    "canonical/tools/the_vocabulary_is_the_artifact_v1.py (the machines and their readers)",
+    "canonical/verification/BREADTH_BUYS_WHAT_REPETITION_CANNOT_20261201_V1.json (withdrawn here)",
+    "canonical/tools/the_precondition_is_not_in_the_trace_v1.py (preconditions of real actions; reused as the independent measurement of the same conditional from the applicability side)"
+   ],
+   "external_existing_routes_checked": [
+    "a decision made by a free attempt rather than a reading",
+    "conformance testing without a reliable reset (Lee-Yannakakis, UIOv): the reset assumption is known to hide behaviour reachable only from other states",
+    "2026 benchmark analyses separating task difficulty from world richness, and stateful/continual learning benchmarks: a fixed initial state and a reset hide whether anything was learned"
+   ],
+   "surviving_gap": "Trial-and-error is sound iff failure is free, and a failure is free iff the attempt happens in a stage and the commit is one rename. On real actions a refused attempt costs a copy of the tree and leaves the live tree byt"
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "a decision made by a free attempt rather than a reading",
+    "a run set that is deep but always begins in the same state",
+    "the pair alone as the unit: the whole grammar's goal class is reported before and after"
+   ],
+   "real_outcome": "Trial-and-error is sound iff failure is free, and a failure is free iff the attempt happens in a stage and the commit is one rename. On real actions a refused attempt costs a copy of the tree and leaves the live tree byt",
+   "surviving_necessity": "Trial-and-error is sound iff failure is free, and a failure is free iff the attempt happens in a stage and the commit is one rename. On real actions a refused attempt costs a copy of the tree and leaves the live tree byt"
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "Trial-and-error is sound iff failure is free, and a failure is free iff the attempt happens in a stage and the commit is one rename. On real actions a refused attempt costs a copy of the tree and leaves the live tree byt",
+   "downstream_work_to_delete_or_supersede": "Trial-and-error is sound iff failure is free, and a failure is free iff the attempt happens in a stage and the commit is one rename. On real actions a refused attempt costs a copy of the tree and leaves the live tree byt",
+   "fresh_reuse_plan": "Trial-and-error is sound iff failure is free, and a failure is free iff the attempt happens in a stage and the commit is one rename. On real actions a refused attempt costs a copy of the tree and leaves the live tree byt"
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": "Trial-and-error is sound iff failure is free, and a failure is free iff the attempt happens in a stage and the commit is one rename. On real actions a refused attempt costs a copy of the tree and leaves the live tree byt",
+   "search_stop_decision": "Trial-and-error is sound iff failure is free, and a failure is free iff the attempt happens in a stage and the commit is one rename. On real actions a refused attempt costs a copy of the tree and leaves the live tree byt"
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "efficiency_mechanism": "Trial-and-error is sound iff failure is free, and a failure is free iff the attempt happens in a stage and the commit is one rename. On real actions a refused attempt costs a copy of the tree and leaves the live tree byt",
+   "generality_mechanism": "Trial-and-error is sound iff failure is free, and a failure is free iff the attempt happens in a stage and the commit is one rename. On real actions a refused attempt costs a copy of the tree and leaves the live tree byt",
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "Trial-and-error is sound iff failure is free, and a failure is free iff the attempt happens in a stage and the commit is one rename. On real actions a refused attempt costs a copy of the tree and leaves the live tree byt",
+   "routes_ranked": [
+    "a decision made by a free attempt rather than a reading",
+    "ask the user which of the two sentences was meant",
+    "deepen or widen the reset-started suite",
+    "train or distil something to guess the goal"
+   ]
+  },
+  "obs_verification": {
+   "authority": "NONE__PRODUCER_RUN_SANDBOX",
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "oracle_paths": [
+    "canonical/verification/THE_RECORD_IS_THE_COMMIT_20261116_V1.json",
+    "canonical/tests/test_the_record_is_the_commit_v1.py"
+   ],
+   "synthetic_verification_necessity": "None: every crash is injected in a real child process, the effect is made by real tar and rm on real trees, and the target is the stage's own digest, not a typed expectation.",
+   "what_the_tests_pin": "the primitive's order, the mode the write must carry, idempotent replay, refusal of a drifted path, the record's location outside the tree, the pre-record pre-state, the no-record control, an interrupted recovery, the quiet path, the whole measurement twice, and the producer's import list"
+  },
+  "real_outcome": "That multi-path commit atomicity is a solved, portable problem with no new syscall: the durable record is the commit, operations are idempotent per path by digest, replay is a fold over those digests, and the whole thing is crash-safe against a crash inside recovery itself (56/56). The residual named last round is gone; what replaces it is the scope of an effect (a tree, not a network) and the honesty of the device's flush.",
+  "required_capability": "writing a durable journal beside a live tree, expressing an effect as idempotent per-path replace/delete operations keyed by pre- and post-digests, replaying it, refusing drift, and proving the replay is crash-safe against a crash inside itself",
+  "route_frontier": {
+   "challenger_routes": [
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "1 verified repair; 13 of 30 rows addressed; 0 accusations",
+      "CORRECTNESS": "the corpus's own suite, whole file",
+      "INCREMENTAL_COST": "0 parameters, 0 model calls, ~10 us per candidate",
+      "RELIABILITY": "superseded: the goal read off one state is empty wherever two runs end alike",
+      "VERIFIABILITY": "receipt rows, producer-run",
+      "WALL_CLOCK": "83.6 s for 30 commits"
+     },
+     "evidence": [
+      "30 real commits, 83.6 s, 0 accusations, grammar named for every exclusion, 1 row recovered by the AST finder, 1 verified repair unchanged, 1 harness failure stopped from wearing a fact's name"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_HYPOTHESIS_GRAMMAR_IS_THE_BOTTLENECK_20261122_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "READ_THE_FIX_FROM_THE_AST_AND_NAME_THE_GRAMMAR_OF_THE_POPULATION"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "3 of 40 programs",
+      "CORRECTNESS": "a class is only as good as its donor",
+      "INCREMENTAL_COST": "one class per shape",
+      "RELIABILITY": "unseen shapes stay unseen",
+      "VERIFIABILITY": "measured exactly",
+      "WALL_CLOCK": "unbounded as the corpus grows"
+     },
+     "evidence": [
+      "a taught class reaches 8 of 40 fixes, 5 only on its donor"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/WHAT_IS_LEFT_FOR_A_LESSON_TO_BUY_20261117_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "teach one more edit class per failing task"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "2 of 30 unseen programs from 3 pairs, at 1.92% precision on the pair that fires",
+      "CORRECTNESS": "the corpus's own pytest decides, as here",
+      "INCREMENTAL_COST": "40.6 us per lookup, no model, no parameters",
+      "RELIABILITY": "saturates: addressability 34.4% -> 59.7% over 24 experiences",
+      "VERIFIABILITY": "measured exactly",
+      "WALL_CLOCK": "5 minutes for the whole corpus"
+     },
+     "evidence": [
+      "0.597 addressable x 0.0192 precise ~ 1.1% of unseen decisions"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/WHAT_AN_EXPERIENCE_CAN_OWN_20261118_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "NON_DOMINATING",
+     "route": "store every verified repair and retrieve it by similarity"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "1 real commit identified at rank 0, unattended, with no diff and no name table",
+      "CORRECTNESS": "the artifact answers, so a question is either answered or refused -- never wrong",
+      "INCREMENTAL_COST": "7.69 ms per asked question, 1 bit",
+      "RELIABILITY": "superseded: the goal read off one state is empty wherever two runs end alike",
+      "VERIFIABILITY": "measured exactly",
+      "WALL_CLOCK": "121.2 s for 14 bugs"
+     },
+     "evidence": [
+      "click@1b0e19f505: human fix derived at rank 0 from the trace, 2 consistent candidates of 119 tests",
+      "5 evaluated candidates per site against the proximity pool's 32-400"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_FAILING_RUN_IS_THE_INDEX_20261118_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "INDEX_ACTIONS_BY_THE_FAILING_RUN_NOT_BY_THE_SOURCE_TEXT"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "run-level goals inferred from judgments: 0 false accepts, 5-6 questions, exact where asked",
+      "CORRECTNESS": "leave-one-run-out against the user's own judgments on executed runs",
+      "INCREMENTAL_COST": "0 parameters, 0 model calls, 18.1 s for 136 runs and ~1000 hypotheses per goal",
+      "RELIABILITY": "sound and incomplete: 1 run of 136 refused by the intersection",
+      "VERIFIABILITY": "receipt rows, producer-run, blocker hypothesis reproduced in the suite",
+      "WALL_CLOCK": "18.1 s"
+     },
+     "evidence": [
+      "136 real runs on 3 machines; 9 final states reached with opposite judgments; 0 final-state terms disagree inside a group; the final-state version space is empty on every goal holding one; the run grammar is identified in 5-6 questions at 1.00 accuracy and is 135/136 leave-one-run-out with 0 false accepts"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_GOAL_IS_A_RELATION_OVER_THE_RUN_20261127_V1.json",
+      "canonical/verification/THE_GOAL_IS_A_DISCRIMINATOR_20261126_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "INFER_A_RELATION_OVER_THE_RUN_FROM_JUDGMENTS_AND_ACT_ON_THE_INTERSECTION"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "the observable is computed and priced: 3-6 cells per goal, one statistic across three machines",
+      "CORRECTNESS": "the coarsest sufficient statistic of the reachable pool, with witnesses for every cheaper one",
+      "INCREMENTAL_COST": "0 parameters, 0 model calls, 23.7 s for 3444+ projections",
+      "RELIABILITY": "refuted by its own refinement: 0 counterexamples in 6 questions by both computable orderings, and its 208-collision headline is retracted -- 0 of those collisions is harmful",
+      "VERIFIABILITY": "receipt rows, producer-run, both declared failures pinned in the suite",
+      "WALL_CLOCK": "23.7 s"
+     },
+     "evidence": [
+      "four rungs over three machines and five goals; cells 68->55->19->5, 48->7->7->4, 32->7->7->3, 68->56->24->6; every cheaper statistic refuted with a witness pair; 0 of 3444 reading projections separate a goal about which atom ran; 208 collisions at held-out depth",
+      "the coarsest statistic is not harmed by its collisions: 675 FILESYSTEM pairs and 1765 depth-4 pairs, 0 harmful, 87/87 verdicts right"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_GOAL_IS_A_QUOTIENT_OF_THE_TRACE_20261128_V1.json",
+      "canonical/verification/THE_GOAL_IS_A_RELATION_OVER_THE_RUN_20261127_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "COMPUTE_THE_COARSEST_SUFFICIENT_STATISTIC_AND_PRICE_THE_GOAL_IN_EXPERIENCES"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "one counterexample buys the coarsest 3-cell statistic; 2 questions by cell labelling, 30 by its guarantee",
+      "CORRECTNESS": "the user's judgments on executed runs; the depth-3 table answers 87 of 87 depth-4 runs, with 0 undecided and 0 false accepts",
+      "INCREMENTAL_COST": "0 parameters, 0 model calls, one signature table per pool",
+      "RELIABILITY": "superseded: it measured a supplied predicate and called the result the goal; the supply is now visible as 79 statements with one behaviour",
+      "VERIFIABILITY": "receipt rows, producer-run, every count pinned in the suite",
+      "WALL_CLOCK": "37.4 s for three machines, four question policies and three rank diagnostics"
+     },
+     "evidence": [
+      "FILESYSTEM 675 conflations / 0 harmful; SQLITE 337 / 0; TARBALL 321 / 10",
+      "one harmful answer -> the coarsest 3-cell statistic, which had been one generator away",
+      "depth 4: 87 runs, 1765 conflations, 0 harmful, 0 false accepts, 0 undecided",
+      "cheapest-refinement and no-signal: 6 questions, 0 counterexamples, best harmful rank 130 / 136 of 321 (chance 29.3); committee ties on 311 of 321",
+      "the environment is learned exactly (229 of 231 decided, 0 errors) and the goal is not: 353 behaviours, 79 statements, a class of four intentions that splits on 32 of 196 runs"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_COUNTEREXAMPLE_IS_THE_NEXT_EXPERIMENT_20261129_V1.json",
+      "canonical/verification/THE_GOAL_IS_A_QUOTIENT_OF_THE_TRACE_20261128_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "ASK_FOR_ONE_COUNTEREXAMPLE_AND_LABEL_WHOLE_CELLS_INSTEAD_OF_HUNTING_DISAGREEMENT"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "separates the two objects the claim conflates: 353 behaviours of resolving power, 8 active judgments to reach it, 4 intentions left indistinguishable and split by the next machine",
+      "CORRECTNESS": "every number is a count over executed runs; the ceiling is re-derivable from the grammar and the traces, and the transfer is a plain evaluation elsewhere",
+      "INCREMENTAL_COST": "0 parameters, 0 model calls, one grammar pass per pool",
+      "RELIABILITY": "superseded and corrected: its 79 statements were 75 redundant conjunctions, and one machine's class is 4, not 79",
+      "VERIFIABILITY": "receipt rows, producer-run, every count pinned in the suite",
+      "WALL_CLOCK": "158.3 s for two machines, 427 runs, 12 881 hypotheses"
+     },
+     "evidence": [
+      "TARBALL: 231 runs, 11 935 hypotheses, 353 behaviours, 79 statements for the user's goal",
+      "four statements, one behaviour on all 231 runs; 32 of 196 runs separate the pair on FILESYSTEM",
+      "active 353 -> 176 -> 89 -> 29 -> 14 -> 7 -> 5 -> 2 -> 1 in 8 judgments; passive 20 behaviours at 8",
+      "registered control: depth-3 table decides 229 of 231 depth-5 runs, 0 false accepts, 0 false rejects, 2 undecided",
+      "breadth priced: 4 -> 2 -> 2 minimal statements across three machines, the third removing nothing; 57.1 % of 622 behaviours pinned by a unique statement"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_GOAL_IS_NOT_IN_THE_ENVIRONMENT_20261130_V1.json",
+      "canonical/verification/THE_COUNTEREXAMPLE_IS_THE_NEXT_EXPERIMENT_20261129_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "SEPARATE_THE_ENVIRONMENT_FROM_THE_GOAL_AND_PRICE_THE_GOAL_IN_JUDGMENTS"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "prices breadth and its saturation: 622 behaviours, the goal's class 4 -> 2 -> 2, a residual of one question of words",
+      "CORRECTNESS": "correct for suites that begin at reset, where the pair is forced to agree; not a claim about the machines",
+      "INCREMENTAL_COST": "0 parameters, 0 model calls, one term evaluation per machine",
+      "RELIABILITY": "superseded: the residual it priced in words is separated by one action from a reachable pre-state, at zero questions",
+      "VERIFIABILITY": "receipt rows, producer-run, every count pinned in the suite",
+      "WALL_CLOCK": "108.8 s for three machines, 555 runs, 29 890 hypotheses and seven subsets"
+     },
+     "evidence": [
+      "244 terms, 29 890 hypotheses, 555 runs, 622 behaviours; 354 behaviours with a unique statement",
+      "the goal's minimal class: 4 on TARBALL, 2 after a second machine, 2 after the third",
+      "residual: created_once[probe_new_content] vs monotone[probe_new_content] and final:count[probe_new_content]==1 -- one question of the user, zero runs",
+      "correction: the previous round's 79 contained 75 redundant conjunctions"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/BREADTH_BUYS_WHAT_REPETITION_CANNOT_20261201_V1.json",
+      "canonical/verification/THE_GOAL_IS_NOT_IN_THE_ENVIRONMENT_20261130_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "PRICE_THE_RESIDUAL_CLASS_OF_EVERY_GOAL_ACROSS_ENVIRONMENTS_AND_ANSWER_IT_IN_WORDS"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "the goal's class 2 -> 1 over a fixed 189-term grammar; 8 substantive witnesses on 2 machines",
+      "CORRECTNESS": "one real action from a pre-state the machine actually reaches, with the pre-state reproduced before the action is judged",
+      "INCREMENTAL_COST": "0 parameters, 0 model calls, 2 actions of prefix at most",
+      "RELIABILITY": "0 fabricated pre-states; the only degenerate direction is proved impossible, not assumed",
+      "VERIFIABILITY": "receipt rows plus 13 tests that re-execute the round",
+      "WALL_CLOCK": "36.6 s for 80 experiments and the whole analysis"
+     },
+     "evidence": [
+      "canonical/verification/THE_PRE_STATE_IS_THE_MISSING_PART_20261116_V1.json",
+      "canonical/tests/test_the_pre_state_is_the_missing_part_v1.py"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/BREADTH_BUYS_WHAT_REPETITION_CANNOT_20261201_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "SELECTED",
+     "route": "SEPARATE_THE_RESIDUAL_BY_LETTING_THE_RUN_BEGIN_WHERE_THE_MACHINE_ALREADY_IS"
+    }
+   ],
+   "checked_at_utc": "2026-11-19T14:28:46Z",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "STAGE_RUN_VERIFY_EXCHANGE_VERIFY_UNDO_VERIFY_ON_REAL_ACTIONS",
+   "max_age_hours": 2,
+   "negative_search_summary": "Refused by measurement or by the sources: a wider syscall (RENAME_EXCHANGE is absent on NFS/CIFS/9p/vfat/exfat/Windows), a two-rename fallback accepting the window (the no-record control reproduces the half-applied tree at 5 of 9 boundaries), a naive atomic rename (measured Oct 2026: without a parent-directory fsync the rename is lost across power loss and the fsynced temp is orphaned), an in-memory supervisor (memory dies with the crash), and a rollback log over applied steps (backward undo cannot tell applied from applied twice, where forward replay over digests converges).",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "multi-file atomic update journal replay fsync directory durability rename not durable ext4 2026"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "write-ahead journal replay idempotent per-path commit crash recovery implementation 2026"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "dm-log-writes power loss test order of writes fsync durability tooling 2026"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "github library atomic multi-file write journal fsync directory recovery 2026"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "selected_route": "MAKE_THE_RECORD_THE_COMMIT_INSTEAD_OF_WIDENING_THE_RENAME",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-11-19T14:28:46Z",
+    "execution_dependencies": [
+     {
+      "dependency": "local Python 3.11 runtime with pytest",
+      "evidence": [
+       "18 tests pass in 25 s; 33/33 unified-model gates pass"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "real tool binaries the effect is produced by (tar, gzip, rm)",
+      "evidence": [
+       "6 operations produced by tar packing five members, tar extracting them, and rm deleting one; no target byte typed by hand"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "a local filesystem that provides rename and a fsyncable directory",
+      "evidence": [
+       "10 crash boundaries accounted for; 8 of 8 armed boundaries recovered byte-exactly; 56 of 56 second recoveries after a crash inside recovery"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "STORAGE",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "incumbent_route": "STAGE_RUN_VERIFY_EXCHANGE_VERIFY_UNDO_VERIFY_ON_REAL_ACTIONS",
+    "max_age_hours": 2,
+    "negative_search_summary": "Refused by measurement or by the sources: a wider syscall (RENAME_EXCHANGE is absent on NFS/CIFS/9p/vfat/exfat/Windows), a two-rename fallback accepting the window (the no-record control reproduces the half-applied tree at 5 of 9 boundaries), a naive atomic rename (measured Oct 2026: without a parent-directory fsync the rename is lost across power loss and the fsynced temp is orphaned), an in-memory supervisor (memory dies with the crash), and a rollback log over applied steps (backward undo cannot tell applied from applied twice, where forward replay over digests converges).",
+    "query_families": [
+     {
+      "intent": "CAPABILITY_VECTOR",
+      "query": "multi-file atomic update journal replay fsync directory durability rename not durable ext4 2026"
+     },
+     {
+      "intent": "IMPLEMENTATION_FORM",
+      "query": "write-ahead journal replay idempotent per-path commit crash recovery implementation 2026"
+     },
+     {
+      "intent": "RECENCY_OR_NEW_RELEASE",
+      "query": "dm-log-writes power loss test order of writes fsync durability tooling 2026"
+     },
+     {
+      "intent": "SUPPLIER_OR_PRODUCT",
+      "query": "github library atomic multi-file write journal fsync directory recovery 2026"
+     }
+    ],
+    "selected_route": "MAKE_THE_RECORD_THE_COMMIT_INSTEAD_OF_WIDENING_THE_RENAME",
+    "status": "READY"
+   },
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/runtime/root3_typed_durable_admin_write_v1.py (write -> fsync(file) -> rename -> fsync(parent))",
+     "canonical/tools/the_failed_attempt_is_free_v1.py (stage, digest, undo)",
+     "canonical/verification/THE_FAILED_ATTEMPT_IS_FREE_20261116_V1.json (the residual this round dissolves)",
+     "canonical/verification/THE_RECORD_IS_THE_COMMIT_20261116_V1.json (this round)"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "getkono/bx PR 9 (journal every write, restore exactly, unlink the journal last)",
+     "jvanbuel/soqrates PRs 6 and 27 (durable end-state journal, idempotent apply, recovery can crash and be re-run)",
+     "vig-os/tessera PR 696 (recovery must be rewritten through the durable write path)",
+     "bnsd55/openscion issue 237 (recorded durability order + dm-log-writes mutation checks)",
+     "Nuu-maan/keel issue 2 (SIGKILL leaves the page cache alive)",
+     "atomically#22 and write-file-atomic#243 (a rename without the directory fsync is lost across power loss)"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "neptro/fstx: journal + no-replace renames in fsync-separated waves + durable COMMITTED marker + RecoveryRequired",
+     "JaviLianes8/durablewrite: temp-same-dir + fsync + rename + dir fsync, with its own stated power-loss limit",
+     "cplieger/atomicfile: Durable only when file and parent-dir fsync both completed",
+     "LarsArtmann/go-atomic-write: fingerprint-based TOCTOU plus fsync durability"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "kernel.org dm-log-writes device-mapper target documentation (log ordering, replay-log marks)",
+     "ARIES: A Transaction Recovery Method Supporting Fine-Granularity Locking and Partial Rollbacks Using Write-Ahead Logging (WAL, per-page LSN, idempotent redo, three-pass restart)"
+    ]
+   },
+   "unresolved_plausible_dominators": []
+  },
+  "routes_considered": [
+   "MAKE_THE_RECORD_THE_COMMIT_INSTEAD_OF_WIDENING_THE_RENAME",
+   "REQUIRE_RENAMEAT2_EXCHANGE_AND_REFUSE_ELSEWHERE__REFUSED_BY_PORTABILITY_MATRIX",
+   "TWO_RENAME_FALLBACK_ACCEPTING_THE_WINDOW__REFUSED_BY_MEASUREMENT",
+   "WAL_IN_THE_FILESYSTEM_JOURNAL__NOT_PORTABLE_AND_NOT_OURS",
+   "SUPERVISOR_OR_DAEMON_THAT_DECIDES_WHAT_FINISHED__DELETED_THE_DIGESTS_DECIDE",
+   "ROLLBACK_LOG_UNDOING_APPLIED_STEPS__SUPERSEDED_FORWARD_REPLAY_IS_IDEMPOTENT"
+  ],
+  "selected_route": "RECORD_THEN_REPLAY_EVERY_PATH_THEN_CRASH_EVERY_BOUNDARY",
+  "selected_surviving_route": "MAKE_THE_RECORD_THE_COMMIT_INSTEAD_OF_WIDENING_THE_RENAME",
+  "selected_surviving_route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+  "stop_condition": "Test the durability the record now relies on, at the layer where it can actually be tested: drive the same commit under dm-log-writes and replay the block log at every crash point, to see whether the record and the tree survive a power cut (not a process kill) in the same order. Prediction: the tree never contains a half-written file, and the record is either absent (pre-state) or complete (replayable), because every step is fsync(file) -> rename -> fsync(dir). Falsifier: if any replayed image contains a torn or zero-length file, or a record that names operations whose pre-images were never durable, then the ordering is wrong and the record cannot be trusted after power loss -- which would put the residual back in the mechanism instead of the device.",
+  "truth_blocker_note": "The residual moved from atomicity to scope: the record can describe a tree, not a message already delivered to another machine.",
+  "why_selected_route_is_fastest_sufficient": "Because it needs no capability the machine might lack: one durable record names the operations and their pre/post digests, every step is a per-path replace or delete that is atomic on its own, and replay is a fold that any process can run. Nothing cheaper can survive a crash between two renames, and nothing that survives one needs more than rename and fsync.",
+  "why_this_is_not_another_organ": "It adds no service, no daemon and no new syscall: the record is a file written with the durable-write primitive this tree already uses, and recovery is the same function as the commit."
  },
  "required_capability": "writing a durable journal beside a live tree, expressing an effect as idempotent per-path replace/delete operations keyed by pre- and post-digests, replaying it, refusing drift, and proving the replay is crash-safe against a crash inside itself",
  "route_class": "SYNTHESIZE_NEW_PRIMITIVE",
@@ -179,14 +661,9 @@
   "achieved": false,
   "the_law_this_round_adds": "A commit is atomic exactly where its record is durable: write the record, fsync it, then any number of idempotent single-path steps, and a crash anywhere after the record replays to the target -- measured at 8/8 boundaries and 56/56 crashes inside recovery, with a pre-record crash provably leaving the pre-state. Atomicity stops being a filesystem capability and becomes a per-path digest condition.",
   "what_is_false_in_the_claim": [
-   "that a check mode is needed to decide an action: the five actions no check mode could guard are decided at 1.0 by attempting in a stage",
-   "that this tree's atomic publication is atomic: os.replace on a populated directory fails ENOTEMPTY, so it is atomic only for an absent target",
-   "that a refused attempt costs the world: 80 of 80 refusals left the live tree byte-identical",
-   "that one trial gives permanent knowledge of the effect: the effect is a function of the environment, and what is permanent is the licence to try",
-   "that trial-and-error is safe in general: only for effects confined to the staged tree; a network call, a process or an absolute path outside is not undoable here",
-   "that exchange is a compare-and-swap: confirmed against the Nov-2026 record, and the concurrency boundary is declared instead",
    "that a multi-path commit needs RENAME_EXCHANGE, or a bigger syscall, to be atomic",
-   "that the commit point is the sequence of renames rather than the durable record"
+   "that the commit point is the sequence of renames rather than the durable record",
+   "that a crash before any operation is a failure rather than the all-or-nothing property"
   ],
   "what_remains_open": [
    "power-loss durability: os._exit is not a power cut, and only dm-log-writes can test the order after one",

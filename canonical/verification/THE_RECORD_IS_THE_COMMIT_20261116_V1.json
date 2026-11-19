@@ -144,28 +144,28 @@
    "trace": [
     "fsync(file):commit.journal.json",
     "rename:commit.journal.json",
-    "fsync(dir):/tmp/d1/order",
+    "fsync(dir):/tmp/rc8/order",
     "fsync(file):alpha.txt",
     "rename:alpha.txt",
-    "fsync(dir):/tmp/d1/order/live",
+    "fsync(dir):/tmp/rc8/order/live",
     "fsync(file):beta.txt",
     "rename:beta.txt",
-    "fsync(dir):/tmp/d1/order/live",
+    "fsync(dir):/tmp/rc8/order/live",
     "fsync(file):delta.txt",
     "rename:delta.txt",
-    "fsync(dir):/tmp/d1/order/live",
+    "fsync(dir):/tmp/rc8/order/live",
     "fsync(file):epsilon.txt",
     "rename:epsilon.txt",
-    "fsync(dir):/tmp/d1/order/live",
+    "fsync(dir):/tmp/rc8/order/live",
     "fsync(file):gamma.txt",
     "rename:gamma.txt",
-    "fsync(dir):/tmp/d1/order/live",
+    "fsync(dir):/tmp/rc8/order/live",
     "unlink:obsolete.txt",
-    "fsync(dir):/tmp/d1/order/live",
+    "fsync(dir):/tmp/rc8/order/live",
     "fsync(file):commit.journal.json",
     "rename:commit.journal.json",
-    "fsync(dir):/tmp/d1/order",
-    "fsync(dir):/tmp/d1/order"
+    "fsync(dir):/tmp/rc8/order",
+    "fsync(dir):/tmp/rc8/order"
    ],
    "every_replace_is_fsync_file_then_rename_then_fsync_dir": true,
    "why_the_last_step_is_not_optional": "measured October 2026 with dm-log-writes on ext4, xfs and btrfs: without the parent-directory fsync a crash keeps the OLD target contents and the fsynced temp is orphaned beside it, so the rename is atomic but not durable (atomically #22, write-file-atomic #243)",
@@ -273,25 +273,25 @@
     "trace": [
      "fsync(file):alpha.txt",
      "rename:alpha.txt",
-     "fsync(dir):/tmp/d1/recorded-after_journal/live",
+     "fsync(dir):/tmp/rc8/recorded-after_journal/live",
      "fsync(file):beta.txt",
      "rename:beta.txt",
-     "fsync(dir):/tmp/d1/recorded-after_journal/live",
+     "fsync(dir):/tmp/rc8/recorded-after_journal/live",
      "fsync(file):delta.txt",
      "rename:delta.txt",
-     "fsync(dir):/tmp/d1/recorded-after_journal/live",
+     "fsync(dir):/tmp/rc8/recorded-after_journal/live",
      "fsync(file):epsilon.txt",
      "rename:epsilon.txt",
-     "fsync(dir):/tmp/d1/recorded-after_journal/live",
+     "fsync(dir):/tmp/rc8/recorded-after_journal/live",
      "fsync(file):gamma.txt",
      "rename:gamma.txt",
-     "fsync(dir):/tmp/d1/recorded-after_journal/live",
+     "fsync(dir):/tmp/rc8/recorded-after_journal/live",
      "unlink:obsolete.txt",
-     "fsync(dir):/tmp/d1/recorded-after_journal/live",
+     "fsync(dir):/tmp/rc8/recorded-after_journal/live",
      "fsync(file):commit.journal.json",
      "rename:commit.journal.json",
-     "fsync(dir):/tmp/d1/recorded-after_journal",
-     "fsync(dir):/tmp/d1/recorded-after_journal"
+     "fsync(dir):/tmp/rc8/recorded-after_journal",
+     "fsync(dir):/tmp/rc8/recorded-after_journal"
     ],
     "phase": "recover"
    },
@@ -312,22 +312,22 @@
     "trace": [
      "fsync(file):beta.txt",
      "rename:beta.txt",
-     "fsync(dir):/tmp/d1/recorded-after_op-alpha.txt/live",
+     "fsync(dir):/tmp/rc8/recorded-after_op-alpha.txt/live",
      "fsync(file):delta.txt",
      "rename:delta.txt",
-     "fsync(dir):/tmp/d1/recorded-after_op-alpha.txt/live",
+     "fsync(dir):/tmp/rc8/recorded-after_op-alpha.txt/live",
      "fsync(file):epsilon.txt",
      "rename:epsilon.txt",
-     "fsync(dir):/tmp/d1/recorded-after_op-alpha.txt/live",
+     "fsync(dir):/tmp/rc8/recorded-after_op-alpha.txt/live",
      "fsync(file):gamma.txt",
      "rename:gamma.txt",
-     "fsync(dir):/tmp/d1/recorded-after_op-alpha.txt/live",
+     "fsync(dir):/tmp/rc8/recorded-after_op-alpha.txt/live",
      "unlink:obsolete.txt",
-     "fsync(dir):/tmp/d1/recorded-after_op-alpha.txt/live",
+     "fsync(dir):/tmp/rc8/recorded-after_op-alpha.txt/live",
      "fsync(file):commit.journal.json",
      "rename:commit.journal.json",
-     "fsync(dir):/tmp/d1/recorded-after_op-alpha.txt",
-     "fsync(dir):/tmp/d1/recorded-after_op-alpha.txt"
+     "fsync(dir):/tmp/rc8/recorded-after_op-alpha.txt",
+     "fsync(dir):/tmp/rc8/recorded-after_op-alpha.txt"
     ],
     "phase": "recover"
    },
@@ -348,19 +348,19 @@
     "trace": [
      "fsync(file):delta.txt",
      "rename:delta.txt",
-     "fsync(dir):/tmp/d1/recorded-after_op-beta.txt/live",
+     "fsync(dir):/tmp/rc8/recorded-after_op-beta.txt/live",
      "fsync(file):epsilon.txt",
      "rename:epsilon.txt",
-     "fsync(dir):/tmp/d1/recorded-after_op-beta.txt/live",
+     "fsync(dir):/tmp/rc8/recorded-after_op-beta.txt/live",
      "fsync(file):gamma.txt",
      "rename:gamma.txt",
-     "fsync(dir):/tmp/d1/recorded-after_op-beta.txt/live",
+     "fsync(dir):/tmp/rc8/recorded-after_op-beta.txt/live",
      "unlink:obsolete.txt",
-     "fsync(dir):/tmp/d1/recorded-after_op-beta.txt/live",
+     "fsync(dir):/tmp/rc8/recorded-after_op-beta.txt/live",
      "fsync(file):commit.journal.json",
      "rename:commit.journal.json",
-     "fsync(dir):/tmp/d1/recorded-after_op-beta.txt",
-     "fsync(dir):/tmp/d1/recorded-after_op-beta.txt"
+     "fsync(dir):/tmp/rc8/recorded-after_op-beta.txt",
+     "fsync(dir):/tmp/rc8/recorded-after_op-beta.txt"
     ],
     "phase": "recover"
    },
@@ -381,16 +381,16 @@
     "trace": [
      "fsync(file):epsilon.txt",
      "rename:epsilon.txt",
-     "fsync(dir):/tmp/d1/recorded-after_op-delta.txt/live",
+     "fsync(dir):/tmp/rc8/recorded-after_op-delta.txt/live",
      "fsync(file):gamma.txt",
      "rename:gamma.txt",
-     "fsync(dir):/tmp/d1/recorded-after_op-delta.txt/live",
+     "fsync(dir):/tmp/rc8/recorded-after_op-delta.txt/live",
      "unlink:obsolete.txt",
-     "fsync(dir):/tmp/d1/recorded-after_op-delta.txt/live",
+     "fsync(dir):/tmp/rc8/recorded-after_op-delta.txt/live",
      "fsync(file):commit.journal.json",
      "rename:commit.journal.json",
-     "fsync(dir):/tmp/d1/recorded-after_op-delta.txt",
-     "fsync(dir):/tmp/d1/recorded-after_op-delta.txt"
+     "fsync(dir):/tmp/rc8/recorded-after_op-delta.txt",
+     "fsync(dir):/tmp/rc8/recorded-after_op-delta.txt"
     ],
     "phase": "recover"
    },
@@ -411,13 +411,13 @@
     "trace": [
      "fsync(file):gamma.txt",
      "rename:gamma.txt",
-     "fsync(dir):/tmp/d1/recorded-after_op-epsilon.txt/live",
+     "fsync(dir):/tmp/rc8/recorded-after_op-epsilon.txt/live",
      "unlink:obsolete.txt",
-     "fsync(dir):/tmp/d1/recorded-after_op-epsilon.txt/live",
+     "fsync(dir):/tmp/rc8/recorded-after_op-epsilon.txt/live",
      "fsync(file):commit.journal.json",
      "rename:commit.journal.json",
-     "fsync(dir):/tmp/d1/recorded-after_op-epsilon.txt",
-     "fsync(dir):/tmp/d1/recorded-after_op-epsilon.txt"
+     "fsync(dir):/tmp/rc8/recorded-after_op-epsilon.txt",
+     "fsync(dir):/tmp/rc8/recorded-after_op-epsilon.txt"
     ],
     "phase": "recover"
    },
@@ -437,11 +437,11 @@
     "operations": 6,
     "trace": [
      "unlink:obsolete.txt",
-     "fsync(dir):/tmp/d1/recorded-after_op-gamma.txt/live",
+     "fsync(dir):/tmp/rc8/recorded-after_op-gamma.txt/live",
      "fsync(file):commit.journal.json",
      "rename:commit.journal.json",
-     "fsync(dir):/tmp/d1/recorded-after_op-gamma.txt",
-     "fsync(dir):/tmp/d1/recorded-after_op-gamma.txt"
+     "fsync(dir):/tmp/rc8/recorded-after_op-gamma.txt",
+     "fsync(dir):/tmp/rc8/recorded-after_op-gamma.txt"
     ],
     "phase": "recover"
    },
@@ -462,8 +462,8 @@
     "trace": [
      "fsync(file):commit.journal.json",
      "rename:commit.journal.json",
-     "fsync(dir):/tmp/d1/recorded-after_op-obsolete.txt",
-     "fsync(dir):/tmp/d1/recorded-after_op-obsolete.txt"
+     "fsync(dir):/tmp/rc8/recorded-after_op-obsolete.txt",
+     "fsync(dir):/tmp/rc8/recorded-after_op-obsolete.txt"
     ],
     "phase": "recover"
    },
@@ -484,8 +484,8 @@
     "trace": [
      "fsync(file):commit.journal.json",
      "rename:commit.journal.json",
-     "fsync(dir):/tmp/d1/recorded-after_committed",
-     "fsync(dir):/tmp/d1/recorded-after_committed"
+     "fsync(dir):/tmp/rc8/recorded-after_committed",
+     "fsync(dir):/tmp/rc8/recorded-after_committed"
     ],
     "phase": "recover"
    },
@@ -521,25 +521,25 @@
     "trace": [
      "fsync(file):alpha.txt",
      "rename:alpha.txt",
-     "fsync(dir):/tmp/d1/again-after_journal-0/live",
+     "fsync(dir):/tmp/rc8/again-after_journal-0/live",
      "fsync(file):beta.txt",
      "rename:beta.txt",
-     "fsync(dir):/tmp/d1/again-after_journal-0/live",
+     "fsync(dir):/tmp/rc8/again-after_journal-0/live",
      "fsync(file):delta.txt",
      "rename:delta.txt",
-     "fsync(dir):/tmp/d1/again-after_journal-0/live",
+     "fsync(dir):/tmp/rc8/again-after_journal-0/live",
      "fsync(file):epsilon.txt",
      "rename:epsilon.txt",
-     "fsync(dir):/tmp/d1/again-after_journal-0/live",
+     "fsync(dir):/tmp/rc8/again-after_journal-0/live",
      "fsync(file):gamma.txt",
      "rename:gamma.txt",
-     "fsync(dir):/tmp/d1/again-after_journal-0/live",
+     "fsync(dir):/tmp/rc8/again-after_journal-0/live",
      "unlink:obsolete.txt",
-     "fsync(dir):/tmp/d1/again-after_journal-0/live",
+     "fsync(dir):/tmp/rc8/again-after_journal-0/live",
      "fsync(file):commit.journal.json",
      "rename:commit.journal.json",
-     "fsync(dir):/tmp/d1/again-after_journal-0",
-     "fsync(dir):/tmp/d1/again-after_journal-0"
+     "fsync(dir):/tmp/rc8/again-after_journal-0",
+     "fsync(dir):/tmp/rc8/again-after_journal-0"
     ],
     "phase": "recover"
    },
@@ -555,22 +555,22 @@
     "trace": [
      "fsync(file):beta.txt",
      "rename:beta.txt",
-     "fsync(dir):/tmp/d1/again-after_journal-1/live",
+     "fsync(dir):/tmp/rc8/again-after_journal-1/live",
      "fsync(file):delta.txt",
      "rename:delta.txt",
-     "fsync(dir):/tmp/d1/again-after_journal-1/live",
+     "fsync(dir):/tmp/rc8/again-after_journal-1/live",
      "fsync(file):epsilon.txt",
      "rename:epsilon.txt",
-     "fsync(dir):/tmp/d1/again-after_journal-1/live",
+     "fsync(dir):/tmp/rc8/again-after_journal-1/live",
      "fsync(file):gamma.txt",
      "rename:gamma.txt",
-     "fsync(dir):/tmp/d1/again-after_journal-1/live",
+     "fsync(dir):/tmp/rc8/again-after_journal-1/live",
      "unlink:obsolete.txt",
-     "fsync(dir):/tmp/d1/again-after_journal-1/live",
+     "fsync(dir):/tmp/rc8/again-after_journal-1/live",
      "fsync(file):commit.journal.json",
      "rename:commit.journal.json",
-     "fsync(dir):/tmp/d1/again-after_journal-1",
-     "fsync(dir):/tmp/d1/again-after_journal-1"
+     "fsync(dir):/tmp/rc8/again-after_journal-1",
+     "fsync(dir):/tmp/rc8/again-after_journal-1"
     ],
     "phase": "recover"
    },
@@ -586,19 +586,19 @@
     "trace": [
      "fsync(file):delta.txt",
      "rename:delta.txt",
-     "fsync(dir):/tmp/d1/again-after_journal-2/live",
+     "fsync(dir):/tmp/rc8/again-after_journal-2/live",
      "fsync(file):epsilon.txt",
      "rename:epsilon.txt",
-     "fsync(dir):/tmp/d1/again-after_journal-2/live",
+     "fsync(dir):/tmp/rc8/again-after_journal-2/live",
      "fsync(file):gamma.txt",
      "rename:gamma.txt",
-     "fsync(dir):/tmp/d1/again-after_journal-2/live",
+     "fsync(dir):/tmp/rc8/again-after_journal-2/live",
      "unlink:obsolete.txt",
-     "fsync(dir):/tmp/d1/again-after_journal-2/live",
+     "fsync(dir):/tmp/rc8/again-after_journal-2/live",
      "fsync(file):commit.journal.json",
      "rename:commit.journal.json",
-     "fsync(dir):/tmp/d1/again-after_journal-2",
-     "fsync(dir):/tmp/d1/again-after_journal-2"
+     "fsync(dir):/tmp/rc8/again-after_journal-2",
+     "fsync(dir):/tmp/rc8/again-after_journal-2"
     ],
     "phase": "recover"
    },
@@ -614,16 +614,16 @@
     "trace": [
      "fsync(file):epsilon.txt",
      "rename:epsilon.txt",
-     "fsync(dir):/tmp/d1/again-after_journal-3/live",
+     "fsync(dir):/tmp/rc8/again-after_journal-3/live",
      "fsync(file):gamma.txt",
      "rename:gamma.txt",
-     "fsync(dir):/tmp/d1/again-after_journal-3/live",
+     "fsync(dir):/tmp/rc8/again-after_journal-3/live",
      "unlink:obsolete.txt",
-     "fsync(dir):/tmp/d1/again-after_journal-3/live",
+     "fsync(dir):/tmp/rc8/again-after_journal-3/live",
      "fsync(file):commit.journal.json",
      "rename:commit.journal.json",
-     "fsync(dir):/tmp/d1/again-after_journal-3",
-     "fsync(dir):/tmp/d1/again-after_journal-3"
+     "fsync(dir):/tmp/rc8/again-after_journal-3",
+     "fsync(dir):/tmp/rc8/again-after_journal-3"
     ],
     "phase": "recover"
    },
@@ -639,13 +639,13 @@
     "trace": [
      "fsync(file):gamma.txt",
      "rename:gamma.txt",
-     "fsync(dir):/tmp/d1/again-after_journal-4/live",
+     "fsync(dir):/tmp/rc8/again-after_journal-4/live",
      "unlink:obsolete.txt",
-     "fsync(dir):/tmp/d1/again-after_journal-4/live",
+     "fsync(dir):/tmp/rc8/again-after_journal-4/live",
      "fsync(file):commit.journal.json",
      "rename:commit.journal.json",
-     "fsync(dir):/tmp/d1/again-after_journal-4",
-     "fsync(dir):/tmp/d1/again-after_journal-4"
+     "fsync(dir):/tmp/rc8/again-after_journal-4",
+     "fsync(dir):/tmp/rc8/again-after_journal-4"
     ],
     "phase": "recover"
    },
@@ -660,11 +660,11 @@
     "operations": 6,
     "trace": [
      "unlink:obsolete.txt",
-     "fsync(dir):/tmp/d1/again-after_journal-5/live",
+     "fsync(dir):/tmp/rc8/again-after_journal-5/live",
      "fsync(file):commit.journal.json",
      "rename:commit.journal.json",
-     "fsync(dir):/tmp/d1/again-after_journal-5",
-     "fsync(dir):/tmp/d1/again-after_journal-5"
+     "fsync(dir):/tmp/rc8/again-after_journal-5",
+     "fsync(dir):/tmp/rc8/again-after_journal-5"
     ],
     "phase": "recover"
    },
@@ -691,22 +691,22 @@
     "trace": [
      "fsync(file):beta.txt",
      "rename:beta.txt",
-     "fsync(dir):/tmp/d1/again-after_op-alpha.txt-0/live",
+     "fsync(dir):/tmp/rc8/again-after_op-alpha.txt-0/live",
      "fsync(file):delta.txt",
      "rename:delta.txt",
-     "fsync(dir):/tmp/d1/again-after_op-alpha.txt-0/live",
+     "fsync(dir):/tmp/rc8/again-after_op-alpha.txt-0/live",
      "fsync(file):epsilon.txt",
      "rename:epsilon.txt",
-     "fsync(dir):/tmp/d1/again-after_op-alpha.txt-0/live",
+     "fsync(dir):/tmp/rc8/again-after_op-alpha.txt-0/live",
      "fsync(file):gamma.txt",
      "rename:gamma.txt",
-     "fsync(dir):/tmp/d1/again-after_op-alpha.txt-0/live",
+     "fsync(dir):/tmp/rc8/again-after_op-alpha.txt-0/live",
      "unlink:obsolete.txt",
-     "fsync(dir):/tmp/d1/again-after_op-alpha.txt-0/live",
+     "fsync(dir):/tmp/rc8/again-after_op-alpha.txt-0/live",
      "fsync(file):commit.journal.json",
      "rename:commit.journal.json",
-     "fsync(dir):/tmp/d1/again-after_op-alpha.txt-0",
-     "fsync(dir):/tmp/d1/again-after_op-alpha.txt-0"
+     "fsync(dir):/tmp/rc8/again-after_op-alpha.txt-0",
+     "fsync(dir):/tmp/rc8/again-after_op-alpha.txt-0"
     ],
     "phase": "recover"
    },
@@ -722,22 +722,22 @@
     "trace": [
      "fsync(file):beta.txt",
      "rename:beta.txt",
-     "fsync(dir):/tmp/d1/again-after_op-alpha.txt-1/live",
+     "fsync(dir):/tmp/rc8/again-after_op-alpha.txt-1/live",
      "fsync(file):delta.txt",
      "rename:delta.txt",
-     "fsync(dir):/tmp/d1/again-after_op-alpha.txt-1/live",
+     "fsync(dir):/tmp/rc8/again-after_op-alpha.txt-1/live",
      "fsync(file):epsilon.txt",
      "rename:epsilon.txt",
-     "fsync(dir):/tmp/d1/again-after_op-alpha.txt-1/live",
+     "fsync(dir):/tmp/rc8/again-after_op-alpha.txt-1/live",
      "fsync(file):gamma.txt",
      "rename:gamma.txt",
-     "fsync(dir):/tmp/d1/again-after_op-alpha.txt-1/live",
+     "fsync(dir):/tmp/rc8/again-after_op-alpha.txt-1/live",
      "unlink:obsolete.txt",
-     "fsync(dir):/tmp/d1/again-after_op-alpha.txt-1/live",
+     "fsync(dir):/tmp/rc8/again-after_op-alpha.txt-1/live",
      "fsync(file):commit.journal.json",
      "rename:commit.journal.json",
-     "fsync(dir):/tmp/d1/again-after_op-alpha.txt-1",
-     "fsync(dir):/tmp/d1/again-after_op-alpha.txt-1"
+     "fsync(dir):/tmp/rc8/again-after_op-alpha.txt-1",
+     "fsync(dir):/tmp/rc8/again-after_op-alpha.txt-1"
     ],
     "phase": "recover"
    },
@@ -753,19 +753,19 @@
     "trace": [
      "fsync(file):delta.txt",
      "rename:delta.txt",
-     "fsync(dir):/tmp/d1/again-after_op-alpha.txt-2/live",
+     "fsync(dir):/tmp/rc8/again-after_op-alpha.txt-2/live",
      "fsync(file):epsilon.txt",
      "rename:epsilon.txt",
-     "fsync(dir):/tmp/d1/again-after_op-alpha.txt-2/live",
+     "fsync(dir):/tmp/rc8/again-after_op-alpha.txt-2/live",
      "fsync(file):gamma.txt",
      "rename:gamma.txt",
-     "fsync(dir):/tmp/d1/again-after_op-alpha.txt-2/live",
+     "fsync(dir):/tmp/rc8/again-after_op-alpha.txt-2/live",
      "unlink:obsolete.txt",
-     "fsync(dir):/tmp/d1/again-after_op-alpha.txt-2/live",
+     "fsync(dir):/tmp/rc8/again-after_op-alpha.txt-2/live",
      "fsync(file):commit.journal.json",
      "rename:commit.journal.json",
-     "fsync(dir):/tmp/d1/again-after_op-alpha.txt-2",
-     "fsync(dir):/tmp/d1/again-after_op-alpha.txt-2"
+     "fsync(dir):/tmp/rc8/again-after_op-alpha.txt-2",
+     "fsync(dir):/tmp/rc8/again-after_op-alpha.txt-2"
     ],
     "phase": "recover"
    },
@@ -781,16 +781,16 @@
     "trace": [
      "fsync(file):epsilon.txt",
      "rename:epsilon.txt",
-     "fsync(dir):/tmp/d1/again-after_op-alpha.txt-3/live",
+     "fsync(dir):/tmp/rc8/again-after_op-alpha.txt-3/live",
      "fsync(file):gamma.txt",
      "rename:gamma.txt",
-     "fsync(dir):/tmp/d1/again-after_op-alpha.txt-3/live",
+     "fsync(dir):/tmp/rc8/again-after_op-alpha.txt-3/live",
      "unlink:obsolete.txt",
-     "fsync(dir):/tmp/d1/again-after_op-alpha.txt-3/live",
+     "fsync(dir):/tmp/rc8/again-after_op-alpha.txt-3/live",
      "fsync(file):commit.journal.json",
      "rename:commit.journal.json",
-     "fsync(dir):/tmp/d1/again-after_op-alpha.txt-3",
-     "fsync(dir):/tmp/d1/again-after_op-alpha.txt-3"
+     "fsync(dir):/tmp/rc8/again-after_op-alpha.txt-3",
+     "fsync(dir):/tmp/rc8/again-after_op-alpha.txt-3"
     ],
     "phase": "recover"
    },
@@ -806,13 +806,13 @@
     "trace": [
      "fsync(file):gamma.txt",
      "rename:gamma.txt",
-     "fsync(dir):/tmp/d1/again-after_op-alpha.txt-4/live",
+     "fsync(dir):/tmp/rc8/again-after_op-alpha.txt-4/live",
      "unlink:obsolete.txt",
-     "fsync(dir):/tmp/d1/again-after_op-alpha.txt-4/live",
+     "fsync(dir):/tmp/rc8/again-after_op-alpha.txt-4/live",
      "fsync(file):commit.journal.json",
      "rename:commit.journal.json",
-     "fsync(dir):/tmp/d1/again-after_op-alpha.txt-4",
-     "fsync(dir):/tmp/d1/again-after_op-alpha.txt-4"
+     "fsync(dir):/tmp/rc8/again-after_op-alpha.txt-4",
+     "fsync(dir):/tmp/rc8/again-after_op-alpha.txt-4"
     ],
     "phase": "recover"
    },
@@ -827,11 +827,11 @@
     "operations": 6,
     "trace": [
      "unlink:obsolete.txt",
-     "fsync(dir):/tmp/d1/again-after_op-alpha.txt-5/live",
+     "fsync(dir):/tmp/rc8/again-after_op-alpha.txt-5/live",
      "fsync(file):commit.journal.json",
      "rename:commit.journal.json",
-     "fsync(dir):/tmp/d1/again-after_op-alpha.txt-5",
-     "fsync(dir):/tmp/d1/again-after_op-alpha.txt-5"
+     "fsync(dir):/tmp/rc8/again-after_op-alpha.txt-5",
+     "fsync(dir):/tmp/rc8/again-after_op-alpha.txt-5"
     ],
     "phase": "recover"
    },
@@ -858,19 +858,19 @@
     "trace": [
      "fsync(file):delta.txt",
      "rename:delta.txt",
-     "fsync(dir):/tmp/d1/again-after_op-beta.txt-0/live",
+     "fsync(dir):/tmp/rc8/again-after_op-beta.txt-0/live",
      "fsync(file):epsilon.txt",
      "rename:epsilon.txt",
-     "fsync(dir):/tmp/d1/again-after_op-beta.txt-0/live",
+     "fsync(dir):/tmp/rc8/again-after_op-beta.txt-0/live",
      "fsync(file):gamma.txt",
      "rename:gamma.txt",
-     "fsync(dir):/tmp/d1/again-after_op-beta.txt-0/live",
+     "fsync(dir):/tmp/rc8/again-after_op-beta.txt-0/live",
      "unlink:obsolete.txt",
-     "fsync(dir):/tmp/d1/again-after_op-beta.txt-0/live",
+     "fsync(dir):/tmp/rc8/again-after_op-beta.txt-0/live",
      "fsync(file):commit.journal.json",
      "rename:commit.journal.json",
-     "fsync(dir):/tmp/d1/again-after_op-beta.txt-0",
-     "fsync(dir):/tmp/d1/again-after_op-beta.txt-0"
+     "fsync(dir):/tmp/rc8/again-after_op-beta.txt-0",
+     "fsync(dir):/tmp/rc8/again-after_op-beta.txt-0"
     ],
     "phase": "recover"
    },
@@ -886,19 +886,19 @@
     "trace": [
      "fsync(file):delta.txt",
      "rename:delta.txt",
-     "fsync(dir):/tmp/d1/again-after_op-beta.txt-1/live",
+     "fsync(dir):/tmp/rc8/again-after_op-beta.txt-1/live",
      "fsync(file):epsilon.txt",
      "rename:epsilon.txt",
-     "fsync(dir):/tmp/d1/again-after_op-beta.txt-1/live",
+     "fsync(dir):/tmp/rc8/again-after_op-beta.txt-1/live",
      "fsync(file):gamma.txt",
      "rename:gamma.txt",
-     "fsync(dir):/tmp/d1/again-after_op-beta.txt-1/live",
+     "fsync(dir):/tmp/rc8/again-after_op-beta.txt-1/live",
      "unlink:obsolete.txt",
-     "fsync(dir):/tmp/d1/again-after_op-beta.txt-1/live",
+     "fsync(dir):/tmp/rc8/again-after_op-beta.txt-1/live",
      "fsync(file):commit.journal.json",
      "rename:commit.journal.json",
-     "fsync(dir):/tmp/d1/again-after_op-beta.txt-1",
-     "fsync(dir):/tmp/d1/again-after_op-beta.txt-1"
+     "fsync(dir):/tmp/rc8/again-after_op-beta.txt-1",
+     "fsync(dir):/tmp/rc8/again-after_op-beta.txt-1"
     ],
     "phase": "recover"
    },
@@ -914,19 +914,19 @@
     "trace": [
      "fsync(file):delta.txt",
      "rename:delta.txt",
-     "fsync(dir):/tmp/d1/again-after_op-beta.txt-2/live",
+     "fsync(dir):/tmp/rc8/again-after_op-beta.txt-2/live",
      "fsync(file):epsilon.txt",
      "rename:epsilon.txt",
-     "fsync(dir):/tmp/d1/again-after_op-beta.txt-2/live",
+     "fsync(dir):/tmp/rc8/again-after_op-beta.txt-2/live",
      "fsync(file):gamma.txt",
      "rename:gamma.txt",
-     "fsync(dir):/tmp/d1/again-after_op-beta.txt-2/live",
+     "fsync(dir):/tmp/rc8/again-after_op-beta.txt-2/live",
      "unlink:obsolete.txt",
-     "fsync(dir):/tmp/d1/again-after_op-beta.txt-2/live",
+     "fsync(dir):/tmp/rc8/again-after_op-beta.txt-2/live",
      "fsync(file):commit.journal.json",
      "rename:commit.journal.json",
-     "fsync(dir):/tmp/d1/again-after_op-beta.txt-2",
-     "fsync(dir):/tmp/d1/again-after_op-beta.txt-2"
+     "fsync(dir):/tmp/rc8/again-after_op-beta.txt-2",
+     "fsync(dir):/tmp/rc8/again-after_op-beta.txt-2"
     ],
     "phase": "recover"
    },
@@ -942,16 +942,16 @@
     "trace": [
      "fsync(file):epsilon.txt",
      "rename:epsilon.txt",
-     "fsync(dir):/tmp/d1/again-after_op-beta.txt-3/live",
+     "fsync(dir):/tmp/rc8/again-after_op-beta.txt-3/live",
      "fsync(file):gamma.txt",
      "rename:gamma.txt",
-     "fsync(dir):/tmp/d1/again-after_op-beta.txt-3/live",
+     "fsync(dir):/tmp/rc8/again-after_op-beta.txt-3/live",
      "unlink:obsolete.txt",
-     "fsync(dir):/tmp/d1/again-after_op-beta.txt-3/live",
+     "fsync(dir):/tmp/rc8/again-after_op-beta.txt-3/live",
      "fsync(file):commit.journal.json",
      "rename:commit.journal.json",
-     "fsync(dir):/tmp/d1/again-after_op-beta.txt-3",
-     "fsync(dir):/tmp/d1/again-after_op-beta.txt-3"
+     "fsync(dir):/tmp/rc8/again-after_op-beta.txt-3",
+     "fsync(dir):/tmp/rc8/again-after_op-beta.txt-3"
     ],
     "phase": "recover"
    },
@@ -967,13 +967,13 @@
     "trace": [
      "fsync(file):gamma.txt",
      "rename:gamma.txt",
-     "fsync(dir):/tmp/d1/again-after_op-beta.txt-4/live",
+     "fsync(dir):/tmp/rc8/again-after_op-beta.txt-4/live",
      "unlink:obsolete.txt",
-     "fsync(dir):/tmp/d1/again-after_op-beta.txt-4/live",
+     "fsync(dir):/tmp/rc8/again-after_op-beta.txt-4/live",
      "fsync(file):commit.journal.json",
      "rename:commit.journal.json",
-     "fsync(dir):/tmp/d1/again-after_op-beta.txt-4",
-     "fsync(dir):/tmp/d1/again-after_op-beta.txt-4"
+     "fsync(dir):/tmp/rc8/again-after_op-beta.txt-4",
+     "fsync(dir):/tmp/rc8/again-after_op-beta.txt-4"
     ],
     "phase": "recover"
    },
@@ -988,11 +988,11 @@
     "operations": 6,
     "trace": [
      "unlink:obsolete.txt",
-     "fsync(dir):/tmp/d1/again-after_op-beta.txt-5/live",
+     "fsync(dir):/tmp/rc8/again-after_op-beta.txt-5/live",
      "fsync(file):commit.journal.json",
      "rename:commit.journal.json",
-     "fsync(dir):/tmp/d1/again-after_op-beta.txt-5",
-     "fsync(dir):/tmp/d1/again-after_op-beta.txt-5"
+     "fsync(dir):/tmp/rc8/again-after_op-beta.txt-5",
+     "fsync(dir):/tmp/rc8/again-after_op-beta.txt-5"
     ],
     "phase": "recover"
    },
@@ -1019,16 +1019,16 @@
     "trace": [
      "fsync(file):epsilon.txt",
      "rename:epsilon.txt",
-     "fsync(dir):/tmp/d1/again-after_op-delta.txt-0/live",
+     "fsync(dir):/tmp/rc8/again-after_op-delta.txt-0/live",
      "fsync(file):gamma.txt",
      "rename:gamma.txt",
-     "fsync(dir):/tmp/d1/again-after_op-delta.txt-0/live",
+     "fsync(dir):/tmp/rc8/again-after_op-delta.txt-0/live",
      "unlink:obsolete.txt",
-     "fsync(dir):/tmp/d1/again-after_op-delta.txt-0/live",
+     "fsync(dir):/tmp/rc8/again-after_op-delta.txt-0/live",
      "fsync(file):commit.journal.json",
      "rename:commit.journal.json",
-     "fsync(dir):/tmp/d1/again-after_op-delta.txt-0",
-     "fsync(dir):/tmp/d1/again-after_op-delta.txt-0"
+     "fsync(dir):/tmp/rc8/again-after_op-delta.txt-0",
+     "fsync(dir):/tmp/rc8/again-after_op-delta.txt-0"
     ],
     "phase": "recover"
    },
@@ -1044,16 +1044,16 @@
     "trace": [
      "fsync(file):epsilon.txt",
      "rename:epsilon.txt",
-     "fsync(dir):/tmp/d1/again-after_op-delta.txt-1/live",
+     "fsync(dir):/tmp/rc8/again-after_op-delta.txt-1/live",
      "fsync(file):gamma.txt",
      "rename:gamma.txt",
-     "fsync(dir):/tmp/d1/again-after_op-delta.txt-1/live",
+     "fsync(dir):/tmp/rc8/again-after_op-delta.txt-1/live",
      "unlink:obsolete.txt",
-     "fsync(dir):/tmp/d1/again-after_op-delta.txt-1/live",
+     "fsync(dir):/tmp/rc8/again-after_op-delta.txt-1/live",
      "fsync(file):commit.journal.json",
      "rename:commit.journal.json",
-     "fsync(dir):/tmp/d1/again-after_op-delta.txt-1",
-     "fsync(dir):/tmp/d1/again-after_op-delta.txt-1"
+     "fsync(dir):/tmp/rc8/again-after_op-delta.txt-1",
+     "fsync(dir):/tmp/rc8/again-after_op-delta.txt-1"
     ],
     "phase": "recover"
    },
@@ -1069,16 +1069,16 @@
     "trace": [
      "fsync(file):epsilon.txt",
      "rename:epsilon.txt",
-     "fsync(dir):/tmp/d1/again-after_op-delta.txt-2/live",
+     "fsync(dir):/tmp/rc8/again-after_op-delta.txt-2/live",
      "fsync(file):gamma.txt",
      "rename:gamma.txt",
-     "fsync(dir):/tmp/d1/again-after_op-delta.txt-2/live",
+     "fsync(dir):/tmp/rc8/again-after_op-delta.txt-2/live",
      "unlink:obsolete.txt",
-     "fsync(dir):/tmp/d1/again-after_op-delta.txt-2/live",
+     "fsync(dir):/tmp/rc8/again-after_op-delta.txt-2/live",
      "fsync(file):commit.journal.json",
      "rename:commit.journal.json",
-     "fsync(dir):/tmp/d1/again-after_op-delta.txt-2",
-     "fsync(dir):/tmp/d1/again-after_op-delta.txt-2"
+     "fsync(dir):/tmp/rc8/again-after_op-delta.txt-2",
+     "fsync(dir):/tmp/rc8/again-after_op-delta.txt-2"
     ],
     "phase": "recover"
    },
@@ -1094,16 +1094,16 @@
     "trace": [
      "fsync(file):epsilon.txt",
      "rename:epsilon.txt",
-     "fsync(dir):/tmp/d1/again-after_op-delta.txt-3/live",
+     "fsync(dir):/tmp/rc8/again-after_op-delta.txt-3/live",
      "fsync(file):gamma.txt",
      "rename:gamma.txt",
-     "fsync(dir):/tmp/d1/again-after_op-delta.txt-3/live",
+     "fsync(dir):/tmp/rc8/again-after_op-delta.txt-3/live",
      "unlink:obsolete.txt",
-     "fsync(dir):/tmp/d1/again-after_op-delta.txt-3/live",
+     "fsync(dir):/tmp/rc8/again-after_op-delta.txt-3/live",
      "fsync(file):commit.journal.json",
      "rename:commit.journal.json",
-     "fsync(dir):/tmp/d1/again-after_op-delta.txt-3",
-     "fsync(dir):/tmp/d1/again-after_op-delta.txt-3"
+     "fsync(dir):/tmp/rc8/again-after_op-delta.txt-3",
+     "fsync(dir):/tmp/rc8/again-after_op-delta.txt-3"
     ],
     "phase": "recover"
    },
@@ -1119,13 +1119,13 @@
     "trace": [
      "fsync(file):gamma.txt",
      "rename:gamma.txt",
-     "fsync(dir):/tmp/d1/again-after_op-delta.txt-4/live",
+     "fsync(dir):/tmp/rc8/again-after_op-delta.txt-4/live",
      "unlink:obsolete.txt",
-     "fsync(dir):/tmp/d1/again-after_op-delta.txt-4/live",
+     "fsync(dir):/tmp/rc8/again-after_op-delta.txt-4/live",
      "fsync(file):commit.journal.json",
      "rename:commit.journal.json",
-     "fsync(dir):/tmp/d1/again-after_op-delta.txt-4",
-     "fsync(dir):/tmp/d1/again-after_op-delta.txt-4"
+     "fsync(dir):/tmp/rc8/again-after_op-delta.txt-4",
+     "fsync(dir):/tmp/rc8/again-after_op-delta.txt-4"
     ],
     "phase": "recover"
    },
@@ -1140,11 +1140,11 @@
     "operations": 6,
     "trace": [
      "unlink:obsolete.txt",
-     "fsync(dir):/tmp/d1/again-after_op-delta.txt-5/live",
+     "fsync(dir):/tmp/rc8/again-after_op-delta.txt-5/live",
      "fsync(file):commit.journal.json",
      "rename:commit.journal.json",
-     "fsync(dir):/tmp/d1/again-after_op-delta.txt-5",
-     "fsync(dir):/tmp/d1/again-after_op-delta.txt-5"
+     "fsync(dir):/tmp/rc8/again-after_op-delta.txt-5",
+     "fsync(dir):/tmp/rc8/again-after_op-delta.txt-5"
     ],
     "phase": "recover"
    },
@@ -1171,13 +1171,13 @@
     "trace": [
      "fsync(file):gamma.txt",
      "rename:gamma.txt",
-     "fsync(dir):/tmp/d1/again-after_op-epsilon.txt-0/live",
+     "fsync(dir):/tmp/rc8/again-after_op-epsilon.txt-0/live",
      "unlink:obsolete.txt",
-     "fsync(dir):/tmp/d1/again-after_op-epsilon.txt-0/live",
+     "fsync(dir):/tmp/rc8/again-after_op-epsilon.txt-0/live",
      "fsync(file):commit.journal.json",
      "rename:commit.journal.json",
-     "fsync(dir):/tmp/d1/again-after_op-epsilon.txt-0",
-     "fsync(dir):/tmp/d1/again-after_op-epsilon.txt-0"
+     "fsync(dir):/tmp/rc8/again-after_op-epsilon.txt-0",
+     "fsync(dir):/tmp/rc8/again-after_op-epsilon.txt-0"
     ],
     "phase": "recover"
    },
@@ -1193,13 +1193,13 @@
     "trace": [
      "fsync(file):gamma.txt",
      "rename:gamma.txt",
-     "fsync(dir):/tmp/d1/again-after_op-epsilon.txt-1/live",
+     "fsync(dir):/tmp/rc8/again-after_op-epsilon.txt-1/live",
      "unlink:obsolete.txt",
-     "fsync(dir):/tmp/d1/again-after_op-epsilon.txt-1/live",
+     "fsync(dir):/tmp/rc8/again-after_op-epsilon.txt-1/live",
      "fsync(file):commit.journal.json",
      "rename:commit.journal.json",
-     "fsync(dir):/tmp/d1/again-after_op-epsilon.txt-1",
-     "fsync(dir):/tmp/d1/again-after_op-epsilon.txt-1"
+     "fsync(dir):/tmp/rc8/again-after_op-epsilon.txt-1",
+     "fsync(dir):/tmp/rc8/again-after_op-epsilon.txt-1"
     ],
     "phase": "recover"
    },
@@ -1215,13 +1215,13 @@
     "trace": [
      "fsync(file):gamma.txt",
      "rename:gamma.txt",
-     "fsync(dir):/tmp/d1/again-after_op-epsilon.txt-2/live",
+     "fsync(dir):/tmp/rc8/again-after_op-epsilon.txt-2/live",
      "unlink:obsolete.txt",
-     "fsync(dir):/tmp/d1/again-after_op-epsilon.txt-2/live",
+     "fsync(dir):/tmp/rc8/again-after_op-epsilon.txt-2/live",
      "fsync(file):commit.journal.json",
      "rename:commit.journal.json",
-     "fsync(dir):/tmp/d1/again-after_op-epsilon.txt-2",
-     "fsync(dir):/tmp/d1/again-after_op-epsilon.txt-2"
+     "fsync(dir):/tmp/rc8/again-after_op-epsilon.txt-2",
+     "fsync(dir):/tmp/rc8/again-after_op-epsilon.txt-2"
     ],
     "phase": "recover"
    },
@@ -1237,13 +1237,13 @@
     "trace": [
      "fsync(file):gamma.txt",
      "rename:gamma.txt",
-     "fsync(dir):/tmp/d1/again-after_op-epsilon.txt-3/live",
+     "fsync(dir):/tmp/rc8/again-after_op-epsilon.txt-3/live",
      "unlink:obsolete.txt",
-     "fsync(dir):/tmp/d1/again-after_op-epsilon.txt-3/live",
+     "fsync(dir):/tmp/rc8/again-after_op-epsilon.txt-3/live",
      "fsync(file):commit.journal.json",
      "rename:commit.journal.json",
-     "fsync(dir):/tmp/d1/again-after_op-epsilon.txt-3",
-     "fsync(dir):/tmp/d1/again-after_op-epsilon.txt-3"
+     "fsync(dir):/tmp/rc8/again-after_op-epsilon.txt-3",
+     "fsync(dir):/tmp/rc8/again-after_op-epsilon.txt-3"
     ],
     "phase": "recover"
    },
@@ -1259,13 +1259,13 @@
     "trace": [
      "fsync(file):gamma.txt",
      "rename:gamma.txt",
-     "fsync(dir):/tmp/d1/again-after_op-epsilon.txt-4/live",
+     "fsync(dir):/tmp/rc8/again-after_op-epsilon.txt-4/live",
      "unlink:obsolete.txt",
-     "fsync(dir):/tmp/d1/again-after_op-epsilon.txt-4/live",
+     "fsync(dir):/tmp/rc8/again-after_op-epsilon.txt-4/live",
      "fsync(file):commit.journal.json",
      "rename:commit.journal.json",
-     "fsync(dir):/tmp/d1/again-after_op-epsilon.txt-4",
-     "fsync(dir):/tmp/d1/again-after_op-epsilon.txt-4"
+     "fsync(dir):/tmp/rc8/again-after_op-epsilon.txt-4",
+     "fsync(dir):/tmp/rc8/again-after_op-epsilon.txt-4"
     ],
     "phase": "recover"
    },
@@ -1280,11 +1280,11 @@
     "operations": 6,
     "trace": [
      "unlink:obsolete.txt",
-     "fsync(dir):/tmp/d1/again-after_op-epsilon.txt-5/live",
+     "fsync(dir):/tmp/rc8/again-after_op-epsilon.txt-5/live",
      "fsync(file):commit.journal.json",
      "rename:commit.journal.json",
-     "fsync(dir):/tmp/d1/again-after_op-epsilon.txt-5",
-     "fsync(dir):/tmp/d1/again-after_op-epsilon.txt-5"
+     "fsync(dir):/tmp/rc8/again-after_op-epsilon.txt-5",
+     "fsync(dir):/tmp/rc8/again-after_op-epsilon.txt-5"
     ],
     "phase": "recover"
    },
@@ -1310,11 +1310,11 @@
     "operations": 6,
     "trace": [
      "unlink:obsolete.txt",
-     "fsync(dir):/tmp/d1/again-after_op-gamma.txt-0/live",
+     "fsync(dir):/tmp/rc8/again-after_op-gamma.txt-0/live",
      "fsync(file):commit.journal.json",
      "rename:commit.journal.json",
-     "fsync(dir):/tmp/d1/again-after_op-gamma.txt-0",
-     "fsync(dir):/tmp/d1/again-after_op-gamma.txt-0"
+     "fsync(dir):/tmp/rc8/again-after_op-gamma.txt-0",
+     "fsync(dir):/tmp/rc8/again-after_op-gamma.txt-0"
     ],
     "phase": "recover"
    },
@@ -1329,11 +1329,11 @@
     "operations": 6,
     "trace": [
      "unlink:obsolete.txt",
-     "fsync(dir):/tmp/d1/again-after_op-gamma.txt-1/live",
+     "fsync(dir):/tmp/rc8/again-after_op-gamma.txt-1/live",
      "fsync(file):commit.journal.json",
      "rename:commit.journal.json",
-     "fsync(dir):/tmp/d1/again-after_op-gamma.txt-1",
-     "fsync(dir):/tmp/d1/again-after_op-gamma.txt-1"
+     "fsync(dir):/tmp/rc8/again-after_op-gamma.txt-1",
+     "fsync(dir):/tmp/rc8/again-after_op-gamma.txt-1"
     ],
     "phase": "recover"
    },
@@ -1348,11 +1348,11 @@
     "operations": 6,
     "trace": [
      "unlink:obsolete.txt",
-     "fsync(dir):/tmp/d1/again-after_op-gamma.txt-2/live",
+     "fsync(dir):/tmp/rc8/again-after_op-gamma.txt-2/live",
      "fsync(file):commit.journal.json",
      "rename:commit.journal.json",
-     "fsync(dir):/tmp/d1/again-after_op-gamma.txt-2",
-     "fsync(dir):/tmp/d1/again-after_op-gamma.txt-2"
+     "fsync(dir):/tmp/rc8/again-after_op-gamma.txt-2",
+     "fsync(dir):/tmp/rc8/again-after_op-gamma.txt-2"
     ],
     "phase": "recover"
    },
@@ -1367,11 +1367,11 @@
     "operations": 6,
     "trace": [
      "unlink:obsolete.txt",
-     "fsync(dir):/tmp/d1/again-after_op-gamma.txt-3/live",
+     "fsync(dir):/tmp/rc8/again-after_op-gamma.txt-3/live",
      "fsync(file):commit.journal.json",
      "rename:commit.journal.json",
-     "fsync(dir):/tmp/d1/again-after_op-gamma.txt-3",
-     "fsync(dir):/tmp/d1/again-after_op-gamma.txt-3"
+     "fsync(dir):/tmp/rc8/again-after_op-gamma.txt-3",
+     "fsync(dir):/tmp/rc8/again-after_op-gamma.txt-3"
     ],
     "phase": "recover"
    },
@@ -1386,11 +1386,11 @@
     "operations": 6,
     "trace": [
      "unlink:obsolete.txt",
-     "fsync(dir):/tmp/d1/again-after_op-gamma.txt-4/live",
+     "fsync(dir):/tmp/rc8/again-after_op-gamma.txt-4/live",
      "fsync(file):commit.journal.json",
      "rename:commit.journal.json",
-     "fsync(dir):/tmp/d1/again-after_op-gamma.txt-4",
-     "fsync(dir):/tmp/d1/again-after_op-gamma.txt-4"
+     "fsync(dir):/tmp/rc8/again-after_op-gamma.txt-4",
+     "fsync(dir):/tmp/rc8/again-after_op-gamma.txt-4"
     ],
     "phase": "recover"
    },
@@ -1405,11 +1405,11 @@
     "operations": 6,
     "trace": [
      "unlink:obsolete.txt",
-     "fsync(dir):/tmp/d1/again-after_op-gamma.txt-5/live",
+     "fsync(dir):/tmp/rc8/again-after_op-gamma.txt-5/live",
      "fsync(file):commit.journal.json",
      "rename:commit.journal.json",
-     "fsync(dir):/tmp/d1/again-after_op-gamma.txt-5",
-     "fsync(dir):/tmp/d1/again-after_op-gamma.txt-5"
+     "fsync(dir):/tmp/rc8/again-after_op-gamma.txt-5",
+     "fsync(dir):/tmp/rc8/again-after_op-gamma.txt-5"
     ],
     "phase": "recover"
    },
@@ -1436,8 +1436,8 @@
     "trace": [
      "fsync(file):commit.journal.json",
      "rename:commit.journal.json",
-     "fsync(dir):/tmp/d1/again-after_op-obsolete.txt-0",
-     "fsync(dir):/tmp/d1/again-after_op-obsolete.txt-0"
+     "fsync(dir):/tmp/rc8/again-after_op-obsolete.txt-0",
+     "fsync(dir):/tmp/rc8/again-after_op-obsolete.txt-0"
     ],
     "phase": "recover"
    },
@@ -1453,8 +1453,8 @@
     "trace": [
      "fsync(file):commit.journal.json",
      "rename:commit.journal.json",
-     "fsync(dir):/tmp/d1/again-after_op-obsolete.txt-1",
-     "fsync(dir):/tmp/d1/again-after_op-obsolete.txt-1"
+     "fsync(dir):/tmp/rc8/again-after_op-obsolete.txt-1",
+     "fsync(dir):/tmp/rc8/again-after_op-obsolete.txt-1"
     ],
     "phase": "recover"
    },
@@ -1470,8 +1470,8 @@
     "trace": [
      "fsync(file):commit.journal.json",
      "rename:commit.journal.json",
-     "fsync(dir):/tmp/d1/again-after_op-obsolete.txt-2",
-     "fsync(dir):/tmp/d1/again-after_op-obsolete.txt-2"
+     "fsync(dir):/tmp/rc8/again-after_op-obsolete.txt-2",
+     "fsync(dir):/tmp/rc8/again-after_op-obsolete.txt-2"
     ],
     "phase": "recover"
    },
@@ -1487,8 +1487,8 @@
     "trace": [
      "fsync(file):commit.journal.json",
      "rename:commit.journal.json",
-     "fsync(dir):/tmp/d1/again-after_op-obsolete.txt-3",
-     "fsync(dir):/tmp/d1/again-after_op-obsolete.txt-3"
+     "fsync(dir):/tmp/rc8/again-after_op-obsolete.txt-3",
+     "fsync(dir):/tmp/rc8/again-after_op-obsolete.txt-3"
     ],
     "phase": "recover"
    },
@@ -1504,8 +1504,8 @@
     "trace": [
      "fsync(file):commit.journal.json",
      "rename:commit.journal.json",
-     "fsync(dir):/tmp/d1/again-after_op-obsolete.txt-4",
-     "fsync(dir):/tmp/d1/again-after_op-obsolete.txt-4"
+     "fsync(dir):/tmp/rc8/again-after_op-obsolete.txt-4",
+     "fsync(dir):/tmp/rc8/again-after_op-obsolete.txt-4"
     ],
     "phase": "recover"
    },
@@ -1521,8 +1521,8 @@
     "trace": [
      "fsync(file):commit.journal.json",
      "rename:commit.journal.json",
-     "fsync(dir):/tmp/d1/again-after_op-obsolete.txt-5",
-     "fsync(dir):/tmp/d1/again-after_op-obsolete.txt-5"
+     "fsync(dir):/tmp/rc8/again-after_op-obsolete.txt-5",
+     "fsync(dir):/tmp/rc8/again-after_op-obsolete.txt-5"
     ],
     "phase": "recover"
    },
@@ -1549,8 +1549,8 @@
     "trace": [
      "fsync(file):commit.journal.json",
      "rename:commit.journal.json",
-     "fsync(dir):/tmp/d1/again-after_committed-0",
-     "fsync(dir):/tmp/d1/again-after_committed-0"
+     "fsync(dir):/tmp/rc8/again-after_committed-0",
+     "fsync(dir):/tmp/rc8/again-after_committed-0"
     ],
     "phase": "recover"
    },
@@ -1566,8 +1566,8 @@
     "trace": [
      "fsync(file):commit.journal.json",
      "rename:commit.journal.json",
-     "fsync(dir):/tmp/d1/again-after_committed-1",
-     "fsync(dir):/tmp/d1/again-after_committed-1"
+     "fsync(dir):/tmp/rc8/again-after_committed-1",
+     "fsync(dir):/tmp/rc8/again-after_committed-1"
     ],
     "phase": "recover"
    },
@@ -1583,8 +1583,8 @@
     "trace": [
      "fsync(file):commit.journal.json",
      "rename:commit.journal.json",
-     "fsync(dir):/tmp/d1/again-after_committed-2",
-     "fsync(dir):/tmp/d1/again-after_committed-2"
+     "fsync(dir):/tmp/rc8/again-after_committed-2",
+     "fsync(dir):/tmp/rc8/again-after_committed-2"
     ],
     "phase": "recover"
    },
@@ -1600,8 +1600,8 @@
     "trace": [
      "fsync(file):commit.journal.json",
      "rename:commit.journal.json",
-     "fsync(dir):/tmp/d1/again-after_committed-3",
-     "fsync(dir):/tmp/d1/again-after_committed-3"
+     "fsync(dir):/tmp/rc8/again-after_committed-3",
+     "fsync(dir):/tmp/rc8/again-after_committed-3"
     ],
     "phase": "recover"
    },
@@ -1617,8 +1617,8 @@
     "trace": [
      "fsync(file):commit.journal.json",
      "rename:commit.journal.json",
-     "fsync(dir):/tmp/d1/again-after_committed-4",
-     "fsync(dir):/tmp/d1/again-after_committed-4"
+     "fsync(dir):/tmp/rc8/again-after_committed-4",
+     "fsync(dir):/tmp/rc8/again-after_committed-4"
     ],
     "phase": "recover"
    },
@@ -1634,8 +1634,8 @@
     "trace": [
      "fsync(file):commit.journal.json",
      "rename:commit.journal.json",
-     "fsync(dir):/tmp/d1/again-after_committed-5",
-     "fsync(dir):/tmp/d1/again-after_committed-5"
+     "fsync(dir):/tmp/rc8/again-after_committed-5",
+     "fsync(dir):/tmp/rc8/again-after_committed-5"
     ],
     "phase": "recover"
    },
@@ -1653,6 +1653,18 @@
    "tree_equals_target": true
   }
  ],
+ "prior_art": {
+  "the_mechanism_is_not_new_and_that_is_the_point": "write-ahead logging plus idempotent redo is ARIES (1992): a log record is forced before the data, and redo is idempotent because every page carries the LSN of the last record applied to it. This round's per-path sha256 pre/post digest is the file-granularity version of the per-page LSN, and nothing more.",
+  "independent_implementations_that_converge_on_it": [
+   "fstx (neptro/fstx, Sep 2026): stages in a private directory, journals every entry, applies no-replace renames in waves separated by fsync barriers, writes a durable COMMITTED marker, and refuses rather than guesses when it cannot interpret a state -- the same shape, keyed by inode rather than by digest",
+   "bx (getkono/bx, PR 9): journal every write, rollback an interrupted one, restore exactly, with one rule that this round also obeys -- unlink the journal last",
+   "soqrates (jvanbuel/soqrates, PRs 6 and 27): a durable journal of the intended end state, idempotent application, and the stated reason recovery must be re-runnable: a crash during recovery is a crash like any other",
+   "tessera (vig-os/tessera, PR 696): recovery must itself be rewritten through the durable write path, or a crash inside recovery loses the journal and every commit in it",
+   "openscion (bnsd55/openscion, issue 237): asserts the durability order from a recorded log and adds dm-log-writes mutation checks -- remove the directory fsync and the suite must fail",
+   "keel (Nuu-maan/keel, issue 2): SIGKILL leaves the page cache alive, so it cannot prove fsync ordering"
+  ],
+  "what_this_round_adds_beyond_them": "not the idea: the measurement that answers a falsifier posed in this tree -- a crash at all 10 boundaries of a real tar/rm commit, a crash inside recovery at all 7 of its steps (56/56), the no-record control that reproduces the previous round's failure on demand, and the three-bucket separation that makes a pre-record crash an asserted pre-state rather than a silent gap"
+ },
  "limits": [
   "process death is not power loss: os._exit measures recovery logic and the visibility of a half-commit, not durability across a power cut; a block-layer harness (dm-log-writes) is the only way to test that and this sandbox does not have it",
   "fsync returning success is not proof of stable storage: cheap media accepts a flush and lies (PostgreSQL 2018), and no software fsync can detect it",
@@ -1661,7 +1673,7 @@
   "one filesystem: ext2/3 in this sandbox"
  ],
  "cost": {
-  "seconds": 11.6,
+  "seconds": 11.8,
   "model_calls": 0,
   "parameters_stored": 0,
   "network_calls_at_run_time": 0

@@ -147,6 +147,42 @@ and the next round's falsifier is written against exactly that gap. And beneath 
 is a promise the device can break — PostgreSQL's 2018 fsync-error incident is the canonical demonstration —
 and no amount of ordering in the caller can detect a disk that lies.
 
+## 3b. The mechanism is not new, and that is the strongest thing about it
+
+A round that claims a mechanism should say who already has it. Write-ahead logging plus idempotent redo is
+**ARIES**, 1992: force the log record before the data, make redo idempotent by stamping every page with the LSN
+of the last record applied to it, and recover with analysis → redo → undo. This round's per-path sha256
+pre/post digest is the file-granularity version of the per-page LSN and nothing more [7].
+
+And the whole shape exists in the open, more than once:
+
+- **`fstx`** (Sep 2026) stages changes in a private directory, writes a **journal listing every entry**, applies
+  them as **no-replace renames in waves separated by fsync barriers**, writes a durable **`COMMITTED`** marker,
+  and — the detail worth copying — **refuses rather than guesses**: `RecoveryRequired` and `inspect()`, touching
+  nothing [8]. Its key is the inode number; this round's is the content digest.
+- **`bx`** journals every write, rolls an interrupted one back, restores exactly, and states the one rule this
+  round also obeys: **unlink the journal last** [9].
+- **`soqrates`** writes the intended end state as one durable entry, applies it idempotently, and says why
+  recovery must be re-runnable — *"recovery can itself crash and be rerun … idempotent writes of the full end
+  state make repeated replay converge"* [10].
+- **`tessera`** had to fix exactly the bug that makes a recovery worthless: `recover` rewrote the journal with
+  `fs::write` instead of the durable path, so *"a crash during recovery could lose the journal, and every
+  committed block with it"* [11].
+- **`openscion`** asserts the durability order out of a recorded log and adds `dm-log-writes` **mutation
+  checks** — remove the directory fsync, and the suite must fail [12]. **`keel`** files the same correction as a
+  bug: `SIGKILL` leaves the page cache alive, so it cannot prove fsync ordering [13].
+
+This is corroboration, not competition, and it changes what the round can honestly claim. **It did not invent
+the mechanism; it answered a falsifier.** The falsifier was posed inside this tree, about a specific residual:
+*a multi-path commit is atomic only where the filesystem can exchange two populated paths.* The answer is the
+measurement — ten boundaries of a real `tar`/`rm` commit, seven steps inside recovery crashed and re-run
+(56/56), the no-record control reproducing the old failure on demand, and the three-bucket separation that
+turns "a crash before the record" into an asserted pre-state instead of a silent gap.
+
+That the idea is standard is the point the governing law makes. A mechanism that has survived thirty years of
+database engineering and has independent implementations in four languages is not an incremental invention to
+be replaced next round. It is the final form, and the work is to show it holds here, with no new part.
+
 ## 4. What is real, what is not, and the single limiting factor
 
 Three rounds, in order, each removing one reason for the same answer:
@@ -270,4 +306,14 @@ local named state is now committable, atomic, crash-recoverable and portable, wi
    boundary, and physical power loss recorded as `NOT TESTED`.
 6. `AgentDesk#7239` (Oct 2026) — fsync the parent and its ancestors up to a trusted root; a deletion must sync
    its parent or the deletion comes back.
-7. PostgreSQL fsync-error incident, 2018 — a device can accept a flush and lie.
+7. ARIES (Mohan et al., 1992) — WAL, per-page LSN, idempotent redo, three-pass recovery.
+8. `fstx` (neptro/fstx, Sep 2026) — journal + no-replace renames in fsync-separated waves + durable `COMMITTED`
+   marker + refuse-rather-than-guess recovery.
+9. `bx` (getkono/bx, PR 9) — journal every write, restore exactly, unlink the journal last.
+10. `soqrates` (jvanbuel/soqrates, PRs 6, 27) — durable end-state journal, idempotent apply, recovery may itself
+   crash and be re-run.
+11. `tessera` (vig-os/tessera, PR 696) — recovery must be rewritten through the durable write path.
+12. `openscion` (bnsd55/openscion, issue 237) — durability order asserted from a recorded log, with
+   `dm-log-writes` mutation checks.
+13. `keel` (Nuu-maan/keel, issue 2) — `SIGKILL` is not a power cut; it cannot prove fsync ordering.
+14. PostgreSQL fsync-error incident, 2018 — a device can accept a flush and lie.
