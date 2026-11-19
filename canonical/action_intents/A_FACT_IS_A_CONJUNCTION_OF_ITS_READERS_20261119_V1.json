@@ -8,10 +8,10 @@
   "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
   "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
   "conversation_memory_is_authority": false,
-  "earlier_routes_exhausted_reason": "Refused by measurement, in order: a hand-written vocabulary, relations over the reader, a goal handed in, the coarsest sufficient statistic, a free-running refinement loop, a supplied predicate called the goal, a syntactic count of statements, the price of the residual in words, a read decision, a one-rename commit, a question for the last bit, a designed effect vocabulary, one successful try per action, and now enumerating the hypothesis space the certificate counted.",
+  "earlier_routes_exhausted_reason": "Refused by measurement, in order: a hand-written vocabulary, relations over the reader, a goal handed in, the coarsest sufficient statistic, a free-running refinement loop, a supplied predicate called the goal, a syntactic count of statements, the price of the residual in words, a read decision, a one-rename commit, a question for the last bit, a designed effect vocabulary, one successful try per action, and now enumerating the hypothesis space the certificate counted. Refused here by measurement: consensus arbitration of a fact.",
   "incremental_spend_usd": 0,
   "independent_verification_completed": false,
-  "independent_verification_note": "Producer-run sandbox only. Every number is a receipt row: 17 facts, 36 states, nine actions, 486 executions; 4,096-16,384 survivors from one success with 0.000-0.333 held-out set accuracy; 2-4 survivors and 1.000 for six actions after varied successes; three named abstentions, one from an unsound column; zero confident errors; 131,072 subsets and 129,140,163 conjunctions never enumerated.",
+  "independent_verification_note": "Producer-run sandbox only. Every number is a receipt row: 37 states, 17 facts, 34 readers, nine actions, 7.7 s; one fact diverges at one state; the action succeeds there; conformance 9/9 before the audit and 8/9 after; tar_x 0.923 -> 0.846 under consensus; 0 facts turned true; 0 bytes changed; 0 model calls, 0 parameters, 0 network.",
   "laws_read_this_session": [
    "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
    "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
@@ -31,10 +31,11 @@
   "producer_cognition_model_dependency_count": 0,
   "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
   "progress_evidence_paths": [
-   "canonical/verification/COVERAGE_IS_THE_BOTTLENECK_NOT_HYPOTHESES_20261119_V1.json",
-   "COVERAGE_IS_THE_BOTTLENECK_20261119_V1.md",
-   "canonical/tools/coverage_is_the_bottleneck_not_hypotheses_v1.py",
-   "canonical/tests/test_coverage_is_the_bottleneck_not_hypotheses_v1.py"
+   "canonical/verification/A_FACT_IS_A_CONJUNCTION_OF_ITS_READERS_20261119_V1.json",
+   "canonical/action_intents/A_FACT_IS_A_CONJUNCTION_OF_ITS_READERS_20261119_V1.json",
+   "canonical/tools/a_fact_is_a_conjunction_of_its_readers_v1.py",
+   "canonical/tests/test_a_fact_is_a_conjunction_of_its_readers_v1.py",
+   "A_FACT_IS_A_CONJUNCTION_OF_ITS_READERS_20261119_V1.md"
   ],
   "route_class": "SYNTHESIZE_NEW_PRIMITIVE",
   "scope_complete_discharge": false,
@@ -157,13 +158,450 @@
   "canonical_base_commit": "9e832e7263bbbfb378c6f21b28c5bf8e3e021823",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
-   "the claim that tar -tzf is an unsound column (the previous round's written stop condition)",
+   "the claim that tar -tzf is an unsound column (the previous round's own written stop condition)",
    "consensus as the arbiter of a fact",
    "the reading that an abstention proves the column wrong"
   ],
-  "expected_parent_frontier_change": "A column is judged by whether it predicts the action it gates, not by whether it describes the world. Two independent readers are still worth their price, because they are free and they surface divergence -- but they do not vote. Where the action and an abstract notion of the world disagree, the plan follows the action, and the honest move is to say the world is permissive, not that the column is broken.",
-  "generation_rule_changed": "a fact about a precondition is a prediction of the action, and only the action can falsify it",
-  "index_displacement_note": "Replaces the coverage round's `stop_condition`, which demanded a soundness gate that rejects tar -tzf; measurement says tar -tzf conforms to tar -xzf on all 37 states, so such a gate would have destroyed a correct column on a presupposition."
+  "expected_parent_frontier_change": "The wall is coverage, not hypotheses, and coverage is an exploration budget: the agent must visit states that vary the facts it needs to rule out, and it cannot know which those are until it has visited them. Soundness and coverage are both necessary -- coverage without soundness is undecided, soundness without coverage is confidently wrong -- so the one thing worth parameters is choosing the next state variation that maximally splits the survivor set, with any column whose check disagrees with the action's own outcome rejected first.",
+  "expected_parent_level_state_change": "A fact is a prediction of the action it gates, not a description of the world. Reader agreement locates doubt; only the outcome decides. With no unsound columns left, the entire remaining loss is which state to execute next.",
+  "independent_verification_required": true,
+  "iteration_limit": 1,
+  "next_step": "Replace the coverage search with a computed one: given a survivor set, select the next state variation that maximally splits it (a fact whose value is unpinned, made true in one state and false in another, with the action validated by the fact vector before execution). Measure (1) variations needed to reach a behaviourally unique set must fall below the count of unpinned facts, (2) every chosen variation must be realisable without an invalid state, (3) a soundness pre-check must reject tar -tzf as a column before it poisons a rule. Falsifiers: if a computed variation never beats an arbitrary one, the survivor set carries no usable signal; if a variation cannot be realised validly, the vocabulary's reach is the limit rather than the policy; if the pre-check rejects a sound column, the law is one-sided.",
+  "obs_blocker": {
+   "delete_bypass_substitute_options": [
+    "a decision made by a free attempt rather than a reading",
+    "bypass the reset convention with a deeper run set: depth cannot help, because the equivalence is forced at every depth by the count starting at zero",
+    "substitute more environments for the missing pre-state: the third environment removed nothing, and the pre-state removed the pair"
+   ],
+   "intrinsic_or_path_specific": "Trial-and-error is sound iff failure is free, and a failure is free iff the attempt happens in a stage and the commit is one rename. On real actions a refused attempt costs a copy of the tree and leaves the live tree byt",
+   "surviving_causal_blocker": "Trial-and-error is sound iff failure is free, and a failure is free iff the attempt happens in a stage and the commit is one rename. On real actions a refused attempt costs a copy of the tree and leaves the live tree byt"
+  },
+  "obs_capability": {
+   "capability_work_deleted": [
+    "a decision made by a free attempt rather than a reading",
+    "any claim that depth or breadth can separate the pair",
+    "a second harness or grammar: the previous round's grammar is held fixed at 189 terms"
+   ],
+   "existing_inherited_routes_checked": [
+    "a decision made by a free attempt rather than a reading",
+    "canonical/tools/the_goal_is_a_relation_over_the_run_v1.py (traces_for, run_terms)",
+    "canonical/tools/the_vocabulary_is_the_artifact_v1.py (the machines and their readers)",
+    "canonical/verification/BREADTH_BUYS_WHAT_REPETITION_CANNOT_20261201_V1.json (withdrawn here)",
+    "canonical/tools/the_precondition_is_not_in_the_trace_v1.py (preconditions of real actions; reused as the independent measurement of the same conditional from the applicability side)"
+   ],
+   "external_existing_routes_checked": [
+    "a decision made by a free attempt rather than a reading",
+    "conformance testing without a reliable reset (Lee-Yannakakis, UIOv): the reset assumption is known to hide behaviour reachable only from other states",
+    "2026 benchmark analyses separating task difficulty from world richness, and stateful/continual learning benchmarks: a fixed initial state and a reset hide whether anything was learned"
+   ],
+   "surviving_gap": "Trial-and-error is sound iff failure is free, and a failure is free iff the attempt happens in a stage and the commit is one rename. On real actions a refused attempt costs a copy of the tree and leaves the live tree byt"
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "a decision made by a free attempt rather than a reading",
+    "a run set that is deep but always begins in the same state",
+    "the pair alone as the unit: the whole grammar's goal class is reported before and after"
+   ],
+   "real_outcome": "Trial-and-error is sound iff failure is free, and a failure is free iff the attempt happens in a stage and the commit is one rename. On real actions a refused attempt costs a copy of the tree and leaves the live tree byt",
+   "surviving_necessity": "Trial-and-error is sound iff failure is free, and a failure is free iff the attempt happens in a stage and the commit is one rename. On real actions a refused attempt costs a copy of the tree and leaves the live tree byt"
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "Trial-and-error is sound iff failure is free, and a failure is free iff the attempt happens in a stage and the commit is one rename. On real actions a refused attempt costs a copy of the tree and leaves the live tree byt",
+   "downstream_work_to_delete_or_supersede": "Trial-and-error is sound iff failure is free, and a failure is free iff the attempt happens in a stage and the commit is one rename. On real actions a refused attempt costs a copy of the tree and leaves the live tree byt",
+   "fresh_reuse_plan": "Trial-and-error is sound iff failure is free, and a failure is free iff the attempt happens in a stage and the commit is one rename. On real actions a refused attempt costs a copy of the tree and leaves the live tree byt"
+  },
+  "obs_obs": "Two independent implementations of every fact, 34 readings over 37 states, diverge on exactly one fact at exactly one state. The third reading confirms the world's view; the action's own exit status confirms the column's. Consensus arbitration costs 0.077 on tar_x and buys nothing anywhere, so the arbiter is conformance, not agreement.",
+  "obs_solution": "Keep both readers because reading is free and divergence is how the doubt is located; never let them vote. Judge a column by whether it predicts the action on every state of the pool, and let the executed outcome override any consensus, including a consensus with the world.",
+  "obs_verification": "6 of 6 declared gates MET, 17 tests green, 37 states byte-identical after all readings, no fact turned false->true, 9 of 9 columns conform to their action, 0 model calls, 0 parameters, 0 network.",
+  "real_outcome": "The previous round's unsound-column attribution for tar_x is withdrawn: tar -xzf exits zero on the gzip of garbage, so the shell check was a faithful predictor. All three abstentions are coverage, one cause not two.",
+  "required_capability": "measuring one outcome per (action, state) on real binaries, representing survivors as bitmasks, and scoring a survivor set as a rule only where it is unanimous",
+  "route_frontier": {
+   "challenger_routes": [
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "1 verified repair; 13 of 30 rows addressed; 0 accusations",
+      "CORRECTNESS": "the corpus's own suite, whole file",
+      "INCREMENTAL_COST": "0 parameters, 0 model calls, ~10 us per candidate",
+      "RELIABILITY": "superseded: the goal read off one state is empty wherever two runs end alike",
+      "VERIFIABILITY": "receipt rows, producer-run",
+      "WALL_CLOCK": "83.6 s for 30 commits"
+     },
+     "evidence": [
+      "30 real commits, 83.6 s, 0 accusations, grammar named for every exclusion, 1 row recovered by the AST finder, 1 verified repair unchanged, 1 harness failure stopped from wearing a fact's name"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_HYPOTHESIS_GRAMMAR_IS_THE_BOTTLENECK_20261122_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "READ_THE_FIX_FROM_THE_AST_AND_NAME_THE_GRAMMAR_OF_THE_POPULATION"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "3 of 40 programs",
+      "CORRECTNESS": "a class is only as good as its donor",
+      "INCREMENTAL_COST": "one class per shape",
+      "RELIABILITY": "unseen shapes stay unseen",
+      "VERIFIABILITY": "measured exactly",
+      "WALL_CLOCK": "unbounded as the corpus grows"
+     },
+     "evidence": [
+      "a taught class reaches 8 of 40 fixes, 5 only on its donor"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/WHAT_IS_LEFT_FOR_A_LESSON_TO_BUY_20261117_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "teach one more edit class per failing task"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "2 of 30 unseen programs from 3 pairs, at 1.92% precision on the pair that fires",
+      "CORRECTNESS": "the corpus's own pytest decides, as here",
+      "INCREMENTAL_COST": "40.6 us per lookup, no model, no parameters",
+      "RELIABILITY": "saturates: addressability 34.4% -> 59.7% over 24 experiences",
+      "VERIFIABILITY": "measured exactly",
+      "WALL_CLOCK": "5 minutes for the whole corpus"
+     },
+     "evidence": [
+      "0.597 addressable x 0.0192 precise ~ 1.1% of unseen decisions"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/WHAT_AN_EXPERIENCE_CAN_OWN_20261118_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "NON_DOMINATING",
+     "route": "store every verified repair and retrieve it by similarity"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "1 real commit identified at rank 0, unattended, with no diff and no name table",
+      "CORRECTNESS": "the artifact answers, so a question is either answered or refused -- never wrong",
+      "INCREMENTAL_COST": "7.69 ms per asked question, 1 bit",
+      "RELIABILITY": "superseded: the goal read off one state is empty wherever two runs end alike",
+      "VERIFIABILITY": "measured exactly",
+      "WALL_CLOCK": "121.2 s for 14 bugs"
+     },
+     "evidence": [
+      "click@1b0e19f505: human fix derived at rank 0 from the trace, 2 consistent candidates of 119 tests",
+      "5 evaluated candidates per site against the proximity pool's 32-400"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_FAILING_RUN_IS_THE_INDEX_20261118_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "INDEX_ACTIONS_BY_THE_FAILING_RUN_NOT_BY_THE_SOURCE_TEXT"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "run-level goals inferred from judgments: 0 false accepts, 5-6 questions, exact where asked",
+      "CORRECTNESS": "leave-one-run-out against the user's own judgments on executed runs",
+      "INCREMENTAL_COST": "0 parameters, 0 model calls, 18.1 s for 136 runs and ~1000 hypotheses per goal",
+      "RELIABILITY": "sound and incomplete: 1 run of 136 refused by the intersection",
+      "VERIFIABILITY": "receipt rows, producer-run, blocker hypothesis reproduced in the suite",
+      "WALL_CLOCK": "18.1 s"
+     },
+     "evidence": [
+      "136 real runs on 3 machines; 9 final states reached with opposite judgments; 0 final-state terms disagree inside a group; the final-state version space is empty on every goal holding one; the run grammar is identified in 5-6 questions at 1.00 accuracy and is 135/136 leave-one-run-out with 0 false accepts"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_GOAL_IS_A_RELATION_OVER_THE_RUN_20261127_V1.json",
+      "canonical/verification/THE_GOAL_IS_A_DISCRIMINATOR_20261126_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "INFER_A_RELATION_OVER_THE_RUN_FROM_JUDGMENTS_AND_ACT_ON_THE_INTERSECTION"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "the observable is computed and priced: 3-6 cells per goal, one statistic across three machines",
+      "CORRECTNESS": "the coarsest sufficient statistic of the reachable pool, with witnesses for every cheaper one",
+      "INCREMENTAL_COST": "0 parameters, 0 model calls, 23.7 s for 3444+ projections",
+      "RELIABILITY": "refuted by its own refinement: 0 counterexamples in 6 questions by both computable orderings, and its 208-collision headline is retracted -- 0 of those collisions is harmful",
+      "VERIFIABILITY": "receipt rows, producer-run, both declared failures pinned in the suite",
+      "WALL_CLOCK": "23.7 s"
+     },
+     "evidence": [
+      "four rungs over three machines and five goals; cells 68->55->19->5, 48->7->7->4, 32->7->7->3, 68->56->24->6; every cheaper statistic refuted with a witness pair; 0 of 3444 reading projections separate a goal about which atom ran; 208 collisions at held-out depth",
+      "the coarsest statistic is not harmed by its collisions: 675 FILESYSTEM pairs and 1765 depth-4 pairs, 0 harmful, 87/87 verdicts right"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_GOAL_IS_A_QUOTIENT_OF_THE_TRACE_20261128_V1.json",
+      "canonical/verification/THE_GOAL_IS_A_RELATION_OVER_THE_RUN_20261127_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "COMPUTE_THE_COARSEST_SUFFICIENT_STATISTIC_AND_PRICE_THE_GOAL_IN_EXPERIENCES"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "one counterexample buys the coarsest 3-cell statistic; 2 questions by cell labelling, 30 by its guarantee",
+      "CORRECTNESS": "the user's judgments on executed runs; the depth-3 table answers 87 of 87 depth-4 runs, with 0 undecided and 0 false accepts",
+      "INCREMENTAL_COST": "0 parameters, 0 model calls, one signature table per pool",
+      "RELIABILITY": "superseded: it measured a supplied predicate and called the result the goal; the supply is now visible as 79 statements with one behaviour",
+      "VERIFIABILITY": "receipt rows, producer-run, every count pinned in the suite",
+      "WALL_CLOCK": "37.4 s for three machines, four question policies and three rank diagnostics"
+     },
+     "evidence": [
+      "FILESYSTEM 675 conflations / 0 harmful; SQLITE 337 / 0; TARBALL 321 / 10",
+      "one harmful answer -> the coarsest 3-cell statistic, which had been one generator away",
+      "depth 4: 87 runs, 1765 conflations, 0 harmful, 0 false accepts, 0 undecided",
+      "cheapest-refinement and no-signal: 6 questions, 0 counterexamples, best harmful rank 130 / 136 of 321 (chance 29.3); committee ties on 311 of 321",
+      "the environment is learned exactly (229 of 231 decided, 0 errors) and the goal is not: 353 behaviours, 79 statements, a class of four intentions that splits on 32 of 196 runs"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_COUNTEREXAMPLE_IS_THE_NEXT_EXPERIMENT_20261129_V1.json",
+      "canonical/verification/THE_GOAL_IS_A_QUOTIENT_OF_THE_TRACE_20261128_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "ASK_FOR_ONE_COUNTEREXAMPLE_AND_LABEL_WHOLE_CELLS_INSTEAD_OF_HUNTING_DISAGREEMENT"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "separates the two objects the claim conflates: 353 behaviours of resolving power, 8 active judgments to reach it, 4 intentions left indistinguishable and split by the next machine",
+      "CORRECTNESS": "every number is a count over executed runs; the ceiling is re-derivable from the grammar and the traces, and the transfer is a plain evaluation elsewhere",
+      "INCREMENTAL_COST": "0 parameters, 0 model calls, one grammar pass per pool",
+      "RELIABILITY": "superseded and corrected: its 79 statements were 75 redundant conjunctions, and one machine's class is 4, not 79",
+      "VERIFIABILITY": "receipt rows, producer-run, every count pinned in the suite",
+      "WALL_CLOCK": "158.3 s for two machines, 427 runs, 12 881 hypotheses"
+     },
+     "evidence": [
+      "TARBALL: 231 runs, 11 935 hypotheses, 353 behaviours, 79 statements for the user's goal",
+      "four statements, one behaviour on all 231 runs; 32 of 196 runs separate the pair on FILESYSTEM",
+      "active 353 -> 176 -> 89 -> 29 -> 14 -> 7 -> 5 -> 2 -> 1 in 8 judgments; passive 20 behaviours at 8",
+      "registered control: depth-3 table decides 229 of 231 depth-5 runs, 0 false accepts, 0 false rejects, 2 undecided",
+      "breadth priced: 4 -> 2 -> 2 minimal statements across three machines, the third removing nothing; 57.1 % of 622 behaviours pinned by a unique statement"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_GOAL_IS_NOT_IN_THE_ENVIRONMENT_20261130_V1.json",
+      "canonical/verification/THE_COUNTEREXAMPLE_IS_THE_NEXT_EXPERIMENT_20261129_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "SEPARATE_THE_ENVIRONMENT_FROM_THE_GOAL_AND_PRICE_THE_GOAL_IN_JUDGMENTS"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "prices breadth and its saturation: 622 behaviours, the goal's class 4 -> 2 -> 2, a residual of one question of words",
+      "CORRECTNESS": "correct for suites that begin at reset, where the pair is forced to agree; not a claim about the machines",
+      "INCREMENTAL_COST": "0 parameters, 0 model calls, one term evaluation per machine",
+      "RELIABILITY": "superseded: the residual it priced in words is separated by one action from a reachable pre-state, at zero questions",
+      "VERIFIABILITY": "receipt rows, producer-run, every count pinned in the suite",
+      "WALL_CLOCK": "108.8 s for three machines, 555 runs, 29 890 hypotheses and seven subsets"
+     },
+     "evidence": [
+      "244 terms, 29 890 hypotheses, 555 runs, 622 behaviours; 354 behaviours with a unique statement",
+      "the goal's minimal class: 4 on TARBALL, 2 after a second machine, 2 after the third",
+      "residual: created_once[probe_new_content] vs monotone[probe_new_content] and final:count[probe_new_content]==1 -- one question of the user, zero runs",
+      "correction: the previous round's 79 contained 75 redundant conjunctions"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/BREADTH_BUYS_WHAT_REPETITION_CANNOT_20261201_V1.json",
+      "canonical/verification/THE_GOAL_IS_NOT_IN_THE_ENVIRONMENT_20261130_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "PRICE_THE_RESIDUAL_CLASS_OF_EVERY_GOAL_ACROSS_ENVIRONMENTS_AND_ANSWER_IT_IN_WORDS"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "the goal's class 2 -> 1 over a fixed 189-term grammar; 8 substantive witnesses on 2 machines",
+      "CORRECTNESS": "one real action from a pre-state the machine actually reaches, with the pre-state reproduced before the action is judged",
+      "INCREMENTAL_COST": "0 parameters, 0 model calls, 2 actions of prefix at most",
+      "RELIABILITY": "0 fabricated pre-states; the only degenerate direction is proved impossible, not assumed",
+      "VERIFIABILITY": "receipt rows plus 13 tests that re-execute the round",
+      "WALL_CLOCK": "36.6 s for 80 experiments and the whole analysis"
+     },
+     "evidence": [
+      "canonical/verification/THE_PRE_STATE_IS_THE_MISSING_PART_20261116_V1.json",
+      "canonical/tests/test_the_pre_state_is_the_missing_part_v1.py"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/BREADTH_BUYS_WHAT_REPETITION_CANNOT_20261201_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "SELECTED",
+     "route": "SEPARATE_THE_RESIDUAL_BY_LETTING_THE_RUN_BEGIN_WHERE_THE_MACHINE_ALREADY_IS"
+    }
+   ],
+   "checked_at_utc": "2026-11-19T17:13:13Z",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "ELICIT_ONE_REFUSAL_PER_PRECONDITION_COORDINATE_INSTEAD_OF_ONE_SUCCESS_PER_ACTION",
+   "max_age_hours": 2,
+   "negative_search_summary": "Refused by measurement or by the sources: enumerating hypotheses as the certificate did (the cost of enumeration, not of identification); one success plus refusals (4,096-16,384 survivors, 0-33% decided); training on rollouts (statistical where the schedule is exact); trusting a published check (tar -tzf).",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "irrelevant feature elimination requires variation contrastive examples identifiability learning preconditions 2026"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "learning action preconditions from error messages refusals rather than demonstrations 2026"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "contrastive identification presentation every positive in a pair no learner can tell apart 2026"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "SWE-bench Verified memorization retrieval percentage agents compose edits execution feedback 2026"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "selected_route": "VARY_THE_FACTS_INSTEAD_OF_ENUMERATING_THE_HYPOTHESES",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-11-19T17:13:13Z",
+    "execution_dependencies": [
+     {
+      "dependency": "local Python 3.11 runtime with pytest",
+      "evidence": [
+       "11 tests pass in 4.8 s; 33/33 unified-model gates pass"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "real binaries: git, patch, gzip, tar, sort, rmdir, mkdir, ln, cp",
+      "evidence": [
+       "486 executions over 36 states and nine actions"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "writable tmpdir per state",
+      "evidence": [
+       "each state is a copy of one template tree"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "STORAGE",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "incumbent_route": "ELICIT_ONE_REFUSAL_PER_PRECONDITION_COORDINATE_INSTEAD_OF_ONE_SUCCESS_PER_ACTION",
+    "max_age_hours": 2,
+    "negative_search_summary": "Refused by measurement or by the sources: enumerating hypotheses as the certificate did (the cost of enumeration, not of identification); one success plus refusals (4,096-16,384 survivors, 0-33% decided); training on rollouts (statistical where the schedule is exact); trusting a published check (tar -tzf).",
+    "query_families": [
+     {
+      "intent": "CAPABILITY_VECTOR",
+      "query": "irrelevant feature elimination requires variation contrastive examples identifiability learning preconditions 2026"
+     },
+     {
+      "intent": "IMPLEMENTATION_FORM",
+      "query": "learning action preconditions from error messages refusals rather than demonstrations 2026"
+     },
+     {
+      "intent": "RECENCY_OR_NEW_RELEASE",
+      "query": "contrastive identification presentation every positive in a pair no learner can tell apart 2026"
+     },
+     {
+      "intent": "SUPPLIER_OR_PRODUCT",
+      "query": "SWE-bench Verified memorization retrieval percentage agents compose edits execution feedback 2026"
+     }
+    ],
+    "selected_route": "VARY_THE_FACTS_INSTEAD_OF_ENUMERATING_THE_HYPOTHESES",
+    "status": "READY"
+   },
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/verification/INSUFFICIENCY_CERTIFICATE_20261113_V1.json (8,388,608 / cap 12)",
+     "canonical/verification/THE_PRECONDITION_IS_NOT_IN_THE_TRACE_20261126_V1.json (160 states, 0/10)",
+     "canonical/tools/the_refusal_is_the_other_half_v1.py (world and runner)"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "Contrastive identification (arXiv 2605.06211, May 2026): coverage of the support is necessary for identification",
+     "Agent Learning via Early Experience (arXiv 2510.08558v3)",
+     "Adaptive state-action abstractions via rate-distortion (arXiv 2606.06123)"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "real binaries: git, patch, gzip, tar, sort, rmdir, mkdir, ln, cp"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "OpenAI Frontier Evals retirement of SWE-bench Verified, 23 February 2026"
+    ]
+   },
+   "unresolved_plausible_dominators": []
+  },
+  "routes_considered": [
+   "VARY_THE_FACTS_INSTEAD_OF_ENUMERATING_THE_HYPOTHESES",
+   "ENUMERATE_HYPOTHESES_AS_THE_CERTIFICATE_DID__REFUTED_AS_THE_COST_OF_IDENTIFICATION",
+   "ONE_SUCCESS_PLUS_REFUSALS__MEASURED_4K_TO_16K_SURVIVORS_AND_0_TO_33_PERCENT_DECIDED",
+   "TRAIN_ON_ROLLOUTS__REFUSED_STATISTICAL_WHERE_THE_SCHEDULE_IS_EXACT_AND_FREE",
+   "TRUST_THE_PROGRAMS_CHECK__REFUTED_TAR_TZF_ACCEPTS_GARBAGE",
+   "CUTS_PLUS_VARIED_SUCCESSES__SELECTED"
+  ],
+  "selected_route": "ONE_REFUSAL_PER_COORDINATE_PLUS_VARIED_SUCCESSES_FOR_IRRELEVANCE",
+  "selected_surviving_route": "VARY_THE_FACTS_INSTEAD_OF_ENUMERATING_THE_HYPOTHESES",
+  "selected_surviving_route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+  "stop_condition": "Next: act on the corrected attribution. Since no column is unsound and every abstention left is coverage, the lever is choosing the next state, not the next reader. Measure whether a computed next-variation rule (pick the fact that splits the survivor set most, validate the state by the fact vector before executing) reaches a behaviourally unique set within the number of unpinned facts.",
+  "truth_blocker_note": "The wall is coverage, not hypotheses, and coverage is an exploration budget: the agent must visit states that vary the facts it needs to rule out, and it cannot know which those are until it has visited them. Soundness and coverage are both necessary -- coverage without soundness is undecided, soundness without coverage is confidently wrong -- so the one thing worth parameters is choosing the next state variation that maximally splits the survivor set, with any column whose check disagrees with the action's own outcome rejected first.",
+  "why_selected_route_is_fastest_sufficient": "It needs no new world and no new executions: reading is free, and the round reuses the 37-state pool to overturn a claim rather than to add capability it cannot verify.",
+  "why_this_is_not_another_organ": "No learner, no vocabulary table, no reward: survivors are bitmasks over facts the machine already answers, and the schedule is a choice of states."
  },
  "required_capability": "measuring one outcome per (action, state) on real binaries, representing survivors as bitmasks, and scoring a survivor set as a rule only where it is unanimous",
  "route_class": "SYNTHESIZE_NEW_PRIMITIVE",

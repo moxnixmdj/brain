@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 569,
+  "knowledge_documents": 570,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 7160,
+  "research_index_records": 7162,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 452,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "2938bc87160fab7620ebd9c0be19d84b928807b4977c33605a2fe97054fa4a32"
+  "value": "9592a1209fc143af6fd4f927dd7078fbc86986f8268931960c8a3e929619adde"
  },
  "engines": [
   {
@@ -45877,6 +45877,82 @@
     "constant",
     "demonstration",
     "no"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 4517,
+   "headings": [
+    "A fact is a conjunction of its readers — and that is not enough to make it right",
+    "The move this round tried, and the reason it was wrong",
+    "What actually happened",
+    "The law",
+    "What this changes in the thesis",
+    "Limits"
+   ],
+   "kind": "DOCUMENT",
+   "path": "A_FACT_IS_A_CONJUNCTION_OF_ITS_READERS_20261119_V1.md",
+   "sha256": "3ba2befd599727d5e01dd421997ba832687702c18168eb246fbd3926d38c9fd0",
+   "summary": "**Receipt:** `canonical/verification/A_FACT_IS_A_CONJUNCTION_OF_ITS_READERS_20261119_V1.json` · 6 of 6 gates MET · 7.7 s, 37 states, 17 facts, 34 readers, 9 actions, zero model calls, zero parameters, zero network.",
+   "terms": {
+    "0.846": 4,
+    "0.923": 4,
+    "34": 2,
+    "37": 4,
+    "about": 2,
+    "abstention": 2,
+    "action": 11,
+    "actions": 3,
+    "agree": 3,
+    "all": 2,
+    "also": 2,
+    "archive": 3,
+    "because": 2,
+    "buy": 2,
+    "calls": 2,
+    "column": 4,
+    "columns": 3,
+    "conflict": 2,
+    "conformance": 3,
+    "conjunction": 4,
+    "fact": 7,
+    "facts": 3,
+    "garbage": 3,
+    "independent": 4,
+    "never": 4,
+    "no": 3,
+    "not": 14,
+    "one": 14,
+    "only": 3,
+    "outcome": 4,
+    "payload": 3,
+    "permissive": 3,
+    "reader": 4,
+    "readers": 9,
+    "round": 5,
+    "so": 5,
+    "state": 5,
+    "states": 5,
+    "tar": 6,
+    "tar_x": 4,
+    "they": 3,
+    "two": 8,
+    "tzf": 3,
+    "unsound": 3,
+    "world": 5,
+    "would": 3,
+    "wrong": 4,
+    "zero": 4
+   },
+   "title": "A fact is a conjunction of its readers — and that is not enough to make it right",
+   "title_terms": [
+    "conjunction",
+    "enough",
+    "fact",
+    "make",
+    "not",
+    "readers",
+    "right"
    ]
   },
   {
@@ -89370,10 +89446,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1371,
+  "included_source_count": 1372,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "6bf67a4648d036f2f3b9060165852846f815733f95261dc14e998ac491cdb547"
+  "source_tree_digest": "3a7f4e9224c230e042fa67abe1a118baf7fce79bf3674eb8e53548f2c9953ed9"
  },
  "research_index": [
   {
@@ -159751,6 +159827,24 @@
     "demand": 1,
     "must": 1,
     "site": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "2026-11-19",
+   "id": "research:canonical/verification/A_FACT_IS_A_CONJUNCTION_OF_ITS_READERS_20261119_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/A_FACT_IS_A_CONJUNCTION_OF_ITS_READERS_20261119_V1.json",
+   "schema": "BRAIN_A_FACT_IS_A_CONJUNCTION_OF_ITS_READERS_V1",
+   "sha256": "15cf9e69845d3f5b0b070ec100bf8ccaa61eb872ca91ffc87b5e9d2f70107eec",
+   "status": "",
+   "terms": {
+    "20261119": 1,
+    "conjunction": 1,
+    "fact": 1,
+    "readers": 1,
     "v1": 1
    }
   },
@@ -239483,6 +239577,51 @@
     "the_most_ordinary_sentence_a_software_engineer_says_must_be_answered_v1_20261029_v1": 2,
     "v1": 2,
     "workspace": 2
+   }
+  },
+  {
+   "action_id": "A_FACT_IS_A_CONJUNCTION_OF_ITS_READERS_20261119_V1",
+   "capability": false,
+   "date": "2026-11-19",
+   "id": "research:canonical/action_intents/A_FACT_IS_A_CONJUNCTION_OF_ITS_READERS_20261119_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_FACT_IS_A_CONJUNCTION_OF_ITS_READERS_20261119_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "b53810aab201a890d2625101faa17ae04abaefbd7a7a47cdaf2cba603ccf6e91",
+   "status": "PROPOSED__PRODUCER_MEASURED__6_OF_6_MET__CONSENSUS_ARBITRATION_REFUTED__THE_COLU",
+   "terms": {
+    "action": 2,
+    "agent": 2,
+    "any": 2,
+    "both": 2,
+    "budget": 2,
+    "cannot": 2,
+    "check": 2,
+    "choosing": 2,
+    "column": 2,
+    "confidently": 2,
+    "coverage": 10,
+    "disagrees": 2,
+    "exploration": 2,
+    "facts": 2,
+    "first": 2,
+    "hypotheses": 2,
+    "know": 2,
+    "maximally": 2,
+    "must": 2,
+    "necessary": 2,
+    "needs": 2,
+    "next": 2,
+    "not": 2,
+    "one": 2,
+    "out": 2,
+    "outcome": 2,
+    "own": 2,
+    "parameters": 2,
+    "rejected": 2,
+    "rule": 2,
+    "set": 2,
+    "soundness": 6
    }
   },
   {
