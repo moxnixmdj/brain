@@ -47,6 +47,9 @@ Receipt: `canonical/verification/SENSOR_REQUEST_ADMISSION_IN_OSWORLD_20261120_V1
   defect, not a capability result.
 - The first design considered was editing the pinned OSWorld kernels. The pin audit killed it before
   implementation.
+- The load-bearing gate rejected the first PR because the intent's evidence paths were all HEAD-existing
+  (needed for the pre-build intent check) and therefore did not show changed evidence. The post-build
+  intent now names the new report, bridge, test and receipt; both intent-check and the gate pass.
 
 ## What remains
 

@@ -31,12 +31,12 @@
   "producer_cognition_model_dependency_count": 0,
   "progress_class": "VERIFIED_INTEGRATION_OF_OWNED_CAPABILITY",
   "progress_evidence_paths": [
+   "SENSOR_REQUEST_ADMISSION_IN_OSWORLD_20261120_V1.md",
+   "canonical/runtime/osworld_sensor_request_bridge_v1.py",
+   "canonical/tests/test_osworld_sensor_request_bridge_v1.py",
+   "canonical/verification/SENSOR_REQUEST_ADMISSION_IN_OSWORLD_20261120_V1.json",
    "A_SENSOR_REQUEST_IS_COMPUTABLE_20261120_V1.md",
-   "canonical/tools/a_sensor_request_is_computable_v1.py",
-   "canonical/verification/A_SENSOR_REQUEST_IS_COMPUTABLE_20261120_V1.json",
-   "canonical/runtime/osworld_v21_brain_agent_adapter_v1.py",
-   "canonical/runtime/osworld_v21_host_guest_ops_v1.py",
-   "canonical/runtime/osworld_v21_state_ops_v1.py"
+   "canonical/tools/a_sensor_request_is_computable_v1.py"
   ],
   "route_class": "SYNTHESIZE_NEW_PRIMITIVE",
   "scope_complete_discharge": false,
@@ -75,7 +75,8 @@
     "why": "the owned capability becomes reachable through the live adapter"
    }
   ],
-  "independent_oracle": "A fresh real directory executes the exact compiled guest program via subprocess; a second fresh sensor measurement independently re-admits the store."
+  "independent_oracle": "A fresh real directory executes the exact compiled guest program via subprocess; a second fresh sensor measurement independently re-admits the store.",
+  "orientation_evidence_note": "Pre-build check used HEAD-existing evidence; post-build intent now names new paths so the load-bearing gate can see the changed evidence."
  },
  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The computed sensor request has no consumer: without an admission wrapper and a real guest-program execution, the request cannot affect any live agent path.",
@@ -163,12 +164,12 @@
  "probe_specific": false,
  "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
  "progress_evidence_paths": [
+  "SENSOR_REQUEST_ADMISSION_IN_OSWORLD_20261120_V1.md",
+  "canonical/runtime/osworld_sensor_request_bridge_v1.py",
+  "canonical/tests/test_osworld_sensor_request_bridge_v1.py",
+  "canonical/verification/SENSOR_REQUEST_ADMISSION_IN_OSWORLD_20261120_V1.json",
   "A_SENSOR_REQUEST_IS_COMPUTABLE_20261120_V1.md",
-  "canonical/tools/a_sensor_request_is_computable_v1.py",
-  "canonical/verification/A_SENSOR_REQUEST_IS_COMPUTABLE_20261120_V1.json",
-  "canonical/runtime/osworld_v21_brain_agent_adapter_v1.py",
-  "canonical/runtime/osworld_v21_host_guest_ops_v1.py",
-  "canonical/runtime/osworld_v21_state_ops_v1.py"
+  "canonical/tools/a_sensor_request_is_computable_v1.py"
  ],
  "real_outcome": "The computed sensor request is still isolated in a producer tool. This branch integrates it through the OSWorld 2.1 adapter's existing guest_controller injection point without editing any pinned runtime kernel. A wrapper re-verifies the external store on a fresh real filesystem, then compiles a read-only stat-field assertion alongside the pinned state-op compiler and sends the exact program to the benchmark guest controller. Fresh-directory execution, stale-store rejection, wrong-value rejection, and adapter-level receipt tests are declared as the oracle. Zero model calls, zero parameters, zero spend.",
  "recursive_obs": {
