@@ -467,6 +467,41 @@ def rule_is_applicable(rule: Mapping[str, Any]) -> bool:
     return isinstance(rule, Mapping) and rule.get('state') in APPLICABLE_RULE_STATES
 
 
+# CST skeleton format for multi-line structural edits.
+# Compiles pattern_tokens/replacement_tokens into Tree-Sitter CST skeletons and
+# matches them against source text via iter_cst_skeleton_candidates. This serves
+# multi-line edits (>=2 lines each side) that token-based matching cannot capture.
+_CST_FORMAT = "cst_skeleton_v1"
+
+
+def _iter_cst_rule_candidates(source_text: str, rule: Mapping[str, Any]):
+    """Yield candidate rewrites using Tree-Sitter CST skeleton unification.
+
+    Compiles the rule's pattern_tokens/replacement_tokens into a CST skeleton
+    (pattern_skeleton, replacement_skeleton) via compile_rule_to_cst_skeleton,
+    then matches the skeleton against source_text using tree-sitter structural
+    descent. Yields each syntactically valid rewrite.
+    """
+    try:
+        from canonical.swe_kernel.tree_sitter_cst_skill_skeleton_v1 import (  # noqa: E402
+            compile_rule_to_cst_skeleton,
+            iter_cst_skeleton_candidates,
+        )
+    except ImportError:
+        return
+
+    lang = str(rule.get("language") or "python").lower()
+    compiled = compile_rule_to_cst_skeleton(rule)
+    if compiled is None:
+        return
+
+    # Yield candidates from the CST skeleton matcher
+    for candidate in iter_cst_skeleton_candidates(
+        source_text, rule, target_language=lang, max_candidates=8, minimize=True
+    ):
+        yield candidate
+
+
 def iter_crystallized_code_rule_candidates(source_text, rule):
     if not rule_is_applicable(rule):
         return
@@ -474,6 +509,8 @@ def iter_crystallized_code_rule_candidates(source_text, rule):
         yield from _PY_EDIT.candidates(source_text, rule, _apply_token_rule)
     elif rule.get('pattern_format') is None:
         yield from _iter_token_rule_candidates(source_text, rule)
+    elif rule.get('pattern_format') == _CST_FORMAT:
+        yield from _iter_cst_rule_candidates(source_text, rule)
 
 
 def apply_crystallized_code_rule(source_text: str, rule: Mapping[str, Any]) -> str | None:
