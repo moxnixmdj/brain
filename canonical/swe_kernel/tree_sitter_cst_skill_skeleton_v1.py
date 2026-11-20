@@ -870,7 +870,14 @@ def compile_rule_to_cst_skeleton(rule: Mapping[str, Any]) -> dict[str, Any] | No
             kind, val = str(item[0]), str(item[1])
             if kind in ("hole_id", "hole_num", "hole_str"):
                 if kind == "hole_str":
-                    return ""
+                    # `hole_str` tokens name string literals introduced only in
+                    # the replacement snippet. Skip them in pattern rendering so
+                    # the rest of the tokens still produce valid raw text.
+                    # (Previously `return ""` aborted the entire render, making
+                    # `compile_rule_to_cst_skeleton` return None for any rule
+                    # containing a `hole_str` token -- which includes most
+                    # multi-line edits that involve string literals.)
+                    continue
                 syn = hole_to_synth.get(val)
                 if syn is None:
                     counter += 1
