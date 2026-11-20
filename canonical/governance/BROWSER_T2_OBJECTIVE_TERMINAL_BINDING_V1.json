@@ -29,7 +29,7 @@
     },
     "registry": {
       "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
-      "blob_sha": "afa00109031d638fef32cc3fe10be18786605c39"
+      "blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31"
     },
     "grounding_runtime": {
       "path": "canonical/runtime/consensus_dom_grounding.py",
