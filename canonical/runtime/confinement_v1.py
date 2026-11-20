@@ -146,6 +146,36 @@ def _inside(worktree: Path, declared: str) -> bool:
     return resolved == worktree_resolved or worktree_resolved in resolved.parents
 
 
+def _mirror_worktree(host_root: Path, worktree: Path) -> None:
+    """Mirror the host's working tree into the worktree.
+
+    ``git clone --no-local`` only replicates tracked files.  A goal that creates
+    source or test files on the fly (before the clone runs) leaves them untracked
+    or gitignored, so they are absent from the clone and any capability resolving
+    ``source_root`` to such a path hits SOURCE_ROOT_INVALID.  Copy every file
+    from the host's working tree into the worktree (except ``.git``) so the
+    capability sees the same files the host sees.
+    """
+    if shutil.which("rsync"):
+        subprocess.run(
+            ["rsync", "-a", "--exclude=.git/", f"{host_root}/", f"{worktree}/"],
+            capture_output=True, text=True, timeout=600)
+    else:
+        for entry in host_root.rglob("*"):
+            if ".git" in entry.parts:
+                continue
+            rel = entry.relative_to(host_root)
+            dst = worktree / rel
+            try:
+                if entry.is_dir() and not entry.is_symlink():
+                    dst.mkdir(parents=True, exist_ok=True)
+                elif entry.is_file() and not entry.is_symlink():
+                    dst.parent.mkdir(parents=True, exist_ok=True)
+                    shutil.copy2(entry, dst)
+            except (OSError, ValueError):
+                continue  # best effort; a missing file stays absent
+
+
 def admit(
     host_root: str | Path,
     argv: Sequence[str],
@@ -183,6 +213,9 @@ def admit(
         shutil.rmtree(worktree, ignore_errors=True)
         return {"admitted": False, "refused": "CLONE_FAILED",
                 "detail": clone.stderr[-300:]}
+    # Mirror the host's working tree into the worktree so a capability
+    # resolving source_root to a freshly created directory finds it there.
+    _mirror_worktree(root, worktree)
     for effect in effects:
         if not _inside(worktree, effect):
             shutil.rmtree(worktree, ignore_errors=True)

@@ -46,6 +46,7 @@ row, each effect argument named.
 from __future__ import annotations
 
 import json
+import shutil
 from pathlib import Path
 from typing import Any, Mapping
 
@@ -157,6 +158,17 @@ def run_confined_capability(
         return None
     entrypoint = str(entry.get("entrypoint") or "run")
 
+    # Normalize absolute path args that live under host_root to paths relative
+    # to host_root, so they resolve correctly inside the disposable worktree.
+    # An absolute host path like /home/user/brain/canonical/x becomes
+    # canonical/x, which is valid both outside and inside confinement.
+    for _key, _value in list(args.items()):
+        if isinstance(_value, str) and Path(_value).is_absolute():
+            try:
+                args[_key] = str(Path(_value).relative_to(host))
+            except ValueError:
+                pass  # not under host_root; leave as-is (effect_args check handles it)
+
     budget = float(decl.get("budget_s") or 600.0)
     argv = ["python3", "-c", RUNNER, module_name, entrypoint, json.dumps(args)]
     conf = CF.admit(host, argv, budget_s=budget, declared_effects=effects)
@@ -203,11 +215,28 @@ def run_confined_capability(
             }
 
         adapter_result.setdefault("capability_id", str(cid))
+        adapter_result.setdefault("compiled_capability_id", str(cid))
         adapter_result["confinement"] = receipt
         adapter_result["dependency"] = {
             "type": "confinement", "modules": [], "executor": EXECUTOR,
         }
         adapter_result["terminal_authority"] = False
+        # A confined repair that applied changes must land them on the host
+        # so the door's source-change verification sees them.  The worktree
+        # is disposable; copy written source files back before release.
+        if adapter_result.get("pass") is True and adapter_result.get("applied") is True:
+            files_written = adapter_result.get("files_written") or []
+            for rel in files_written:
+                if not isinstance(rel, str) or not rel.strip():
+                    continue
+                src = conf.worktree / rel
+                dst = host / rel
+                try:
+                    if src.is_file():
+                        dst.parent.mkdir(parents=True, exist_ok=True)
+                        shutil.copy2(src, dst)
+                except (OSError, ValueError):
+                    continue  # best effort; a file that cannot land stays confined
         # The same ruler the local path uses, applied to the confined result.
         from canonical.runtime import live_brain_route_admission_v1 as _door
 
