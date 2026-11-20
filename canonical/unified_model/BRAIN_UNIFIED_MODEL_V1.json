@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 584,
+  "knowledge_documents": 585,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 7188,
+  "research_index_records": 7190,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 452,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "628ced77529b5ee2ddf01f0ea62258ee776baf8564bd32976d73ff4673537cab"
+  "value": "94210b19f75d20a11b604fc1d674240c9aaaf735f450b3d76b6b37050f4d065d"
  },
  "engines": [
   {
@@ -48653,6 +48653,78 @@
     "experience",
     "makes",
     "measured"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 3341,
+   "headings": [
+    "Compute the law algebra — 2026-11-20",
+    "What this removes",
+    "First design killed",
+    "Measured result",
+    "What remains"
+   ],
+   "kind": "DOCUMENT",
+   "path": "COMPUTED_LAW_ALGEBRA_20261120_V1.md",
+   "sha256": "8a93eb73542e2fb6d9d1d561c87b51b88bf68d652bbce39af4e8817a18764d92",
+   "summary": "Authority: `NONE__PRODUCER_RUN_SANDBOX`. No independent verification, capability/acceptance/ terminal credit, benchmark score, model call or stored parameter.",
+   "terms": {
+    "19": 2,
+    "accepts": 2,
+    "actually": 2,
+    "benchmark": 2,
+    "both": 2,
+    "canonical": 4,
+    "clear": 2,
+    "closure": 6,
+    "compute": 2,
+    "computed": 2,
+    "content": 2,
+    "design": 2,
+    "digest": 2,
+    "every": 2,
+    "exception": 3,
+    "false": 3,
+    "file": 2,
+    "first": 2,
+    "flag": 2,
+    "grammar": 3,
+    "had": 2,
+    "head.branch": 2,
+    "held": 2,
+    "holes": 2,
+    "independent": 2,
+    "induced": 2,
+    "key": 3,
+    "law": 3,
+    "legitimate": 3,
+    "met": 2,
+    "model": 2,
+    "named": 3,
+    "names": 3,
+    "no": 9,
+    "no_new": 4,
+    "not": 7,
+    "only": 3,
+    "prefix": 3,
+    "preserve": 3,
+    "real": 3,
+    "ref": 3,
+    "restore": 4,
+    "result": 4,
+    "set": 3,
+    "supplied": 3,
+    "tests": 3,
+    "truth": 3,
+    "verification": 3
+   },
+   "title": "Compute the law algebra — 2026-11-20",
+   "title_terms": [
+    "2026-11-20",
+    "algebra",
+    "compute",
+    "law"
    ]
   },
   {
@@ -90514,10 +90586,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1386,
+  "included_source_count": 1387,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "ffd4f6e629b8eaed9e6c5e0e95a35a146d00e87e388482c1e161f081492f5bf3"
+  "source_tree_digest": "722f6e25d77d218538742742c4d87111a8c39649e60a458bb0842fa67537c54a"
  },
  "research_index": [
   {
@@ -166292,6 +166364,24 @@
     "v1": 1,
     "verification": 1,
     "zero": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/COMPUTED_LAW_ALGEBRA_20261120_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/COMPUTED_LAW_ALGEBRA_20261120_V1.json",
+   "schema": "BRAIN_COMPUTED_LAW_ALGEBRA_V1",
+   "sha256": "486dfcd91b295364ab10ed4b9f7cf939f45ca61b1edb1267f769c642e4719985",
+   "status": "",
+   "terms": {
+    "20261120": 1,
+    "algebra": 1,
+    "computed": 1,
+    "law": 1,
+    "v1": 1
    }
   },
   {
@@ -246664,6 +246754,51 @@
     "general_reusable_problem_solving_capability_frontier": 1,
     "nothing_is_ever_compressed__the_g_t_bridge_rejected_every_statement_body_organ_and_reported_fabricated_gain__so_experience_could_not_compound": 1,
     "v1": 1
+   }
+  },
+  {
+   "action_id": "COMPUTED_LAW_ALGEBRA_20261120_V1",
+   "capability": false,
+   "date": "2026-11-20",
+   "id": "research:canonical/action_intents/COMPUTED_LAW_ALGEBRA_20261120_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/COMPUTED_LAW_ALGEBRA_20261120_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "83543455057c91fedf1adb22e2c4f12af1966a7680d1d07c3bc7dfbed701ef36",
+   "status": "PROPOSED__PRODUCER_MEASURED__NO_MODEL_CALLS__INDEPENDENT_VERIFICATION_OPEN",
+   "terms": {
+    "179": 1,
+    "180": 1,
+    "20261120": 1,
+    "accepts": 1,
+    "accuracy": 1,
+    "algebra": 1,
+    "also": 1,
+    "broken": 1,
+    "calls": 1,
+    "clear": 1,
+    "closure": 4,
+    "completion": 1,
+    "compute_the_law_vocabulary_from_the_reading": 1,
+    "computed": 2,
+    "computed_law_algebra_20261120_v1": 1,
+    "different": 1,
+    "environment": 1,
+    "exceptions": 1,
+    "experimenter": 1,
+    "failed": 1,
+    "false": 2,
+    "finds": 1,
+    "first": 1,
+    "five": 1,
+    "law": 3,
+    "names": 2,
+    "not": 3,
+    "only": 2,
+    "pypa": 2,
+    "real": 2,
+    "selector": 2,
+    "vocabulary": 2
    }
   },
   {
