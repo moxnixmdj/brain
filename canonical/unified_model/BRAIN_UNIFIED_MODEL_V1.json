@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 586,
+  "knowledge_documents": 587,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 7192,
+  "research_index_records": 7194,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 452,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "825f25396e0fe14ce8d98a4a1d98b4472cb3252b55df8434cb94a6e33a62e0ff"
+  "value": "6b74420fa11ca23777984b3e291801dadd1de3b68522df1a1843f89957ff6cbd"
  },
  "engines": [
   {
@@ -47182,6 +47182,80 @@
     "showing",
     "teacher",
     "untangles"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 4592,
+   "headings": [
+    "A sensor request is computable — 2026-11-20",
+    "The single bottleneck",
+    "Plan killed before claiming success",
+    "Two defects found, not hidden",
+    "Measured result",
+    "What this changes, and what it does not",
+    "Next bottleneck"
+   ],
+   "kind": "DOCUMENT",
+   "path": "A_SENSOR_REQUEST_IS_COMPUTABLE_20261120_V1.md",
+   "sha256": "8041e6718b5b9aa2f597a05facf5ba0f5eefa8e5caead596451f3e97b8ba500d",
+   "summary": "Authority: `NONE__PRODUCER_RUN_SANDBOX`. No independent verification, no benchmark score, no capability/acceptance/terminal credit, no runtime model call, no stored parameter.",
+   "terms": {
+    "accept": 2,
+    "accepts": 2,
+    "action": 5,
+    "after": 4,
+    "appeared": 2,
+    "bank": 2,
+    "before": 3,
+    "benchmark": 2,
+    "both": 2,
+    "bottleneck": 3,
+    "cannot": 2,
+    "canonical": 4,
+    "capability": 2,
+    "effect": 3,
+    "execution": 4,
+    "false": 6,
+    "field": 6,
+    "fields": 4,
+    "fires": 3,
+    "law": 4,
+    "measured": 3,
+    "missing": 3,
+    "mkdir": 3,
+    "model": 3,
+    "name": 4,
+    "new": 5,
+    "next": 3,
+    "no": 11,
+    "not": 11,
+    "old": 5,
+    "one": 5,
+    "only": 3,
+    "path": 4,
+    "reader": 3,
+    "readings": 4,
+    "real": 6,
+    "relation": 4,
+    "request": 9,
+    "run": 3,
+    "sensor": 5,
+    "st_mode": 3,
+    "tests": 3,
+    "tie": 3,
+    "time": 3,
+    "tree": 6,
+    "true": 3,
+    "used": 3,
+    "value": 3
+   },
+   "title": "A sensor request is computable — 2026-11-20",
+   "title_terms": [
+    "2026-11-20",
+    "computable",
+    "request",
+    "sensor"
    ]
   },
   {
@@ -90659,10 +90733,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1388,
+  "included_source_count": 1389,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "5d7b87c3f05631be7b7d65def543493218022349e80682bde7421b66a60b5b59"
+  "source_tree_digest": "168b31738e36b5047dfa220e86080d2d2c5baa63e60f473dce873483e851ea61"
  },
  "research_index": [
   {
@@ -161154,6 +161228,24 @@
     "pages": 1,
     "perceptual": 1,
     "property": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/A_SENSOR_REQUEST_IS_COMPUTABLE_20261120_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/A_SENSOR_REQUEST_IS_COMPUTABLE_20261120_V1.json",
+   "schema": "BRAIN_A_SENSOR_REQUEST_IS_COMPUTABLE_V1",
+   "sha256": "c0536b9dff17b85101f8a934d2984df8c222c9f2a42622e7ac8faa483c95a411",
+   "status": "",
+   "terms": {
+    "20261120": 1,
+    "computable": 1,
+    "request": 1,
+    "sensor": 1,
     "v1": 1
    }
   },
@@ -244316,6 +244408,51 @@
     "the_intent_tangle_was_declared_movable_only_by_a_second_showing_and_multi_showing_teaching_had_never_been_measured_on_the_tracked_corpus": 1,
     "untangles": 1,
     "v1": 1
+   }
+  },
+  {
+   "action_id": "A_SENSOR_REQUEST_IS_COMPUTABLE_20261120_V1",
+   "capability": false,
+   "date": "2026-11-20",
+   "id": "research:canonical/action_intents/A_SENSOR_REQUEST_IS_COMPUTABLE_20261120_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_SENSOR_REQUEST_IS_COMPUTABLE_20261120_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "7a157fba9c9f319b3ec66b2331a2fd3bcefc64c2c76d41074d3ad7f1eb7e7385",
+   "status": "PROPOSED__PRODUCER_MEASURED__NO_MODEL_CALLS__INDEPENDENT_VERIFICATION_OPEN",
+   "terms": {
+    "16": 1,
+    "20261120": 1,
+    "a_sensor_request_is_computable_20261120_v1": 2,
+    "accepts": 2,
+    "after": 1,
+    "alphabetical": 1,
+    "appeared": 1,
+    "before": 1,
+    "benchmark": 1,
+    "beyond": 1,
+    "but": 1,
+    "calls": 1,
+    "claim": 1,
+    "close": 1,
+    "computable": 1,
+    "compute": 1,
+    "computes": 1,
+    "content-only": 1,
+    "controls": 1,
+    "defects": 1,
+    "effect": 2,
+    "execution": 2,
+    "false": 3,
+    "field": 2,
+    "fields": 2,
+    "no": 4,
+    "not": 3,
+    "old": 2,
+    "project": 2,
+    "real": 2,
+    "request": 3,
+    "sensor": 4
    }
   },
   {

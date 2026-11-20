@@ -1,0 +1,192 @@
+{
+ "schema": "BRAIN_A_SENSOR_REQUEST_IS_COMPUTABLE_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "claim": "A sensor missing from the old view is requested from an OS-derived field bank; the widened reader closes the hole on a different tree without path names or hand-written kind predicates.",
+ "declared_before_the_run": [
+  "H1 the content-only reader sees no mkdir/mkdir_p change in either tree",
+  "H2 the mkdir effect is real on disk",
+  "H3 one positive execution selects a request from dynamically discovered stat fields",
+  "H4 the selected field/value relation has zero errors on both trees",
+  "H5 'a new path appeared' alone has false accepts",
+  "H6 zero model calls and zero stored parameters"
+ ],
+ "limits": [
+  "a real filesystem with a supplied action bank and depth-one mutations",
+  "interface widening is requested, not grown from the old readings",
+  "no GUI, browser, benchmark score or independent verification"
+ ],
+ "sensor_bank_fields": [
+  "st_atime",
+  "st_atime_ns",
+  "st_blksize",
+  "st_blocks",
+  "st_ctime",
+  "st_ctime_ns",
+  "st_dev",
+  "st_gid",
+  "st_ino",
+  "st_mode",
+  "st_mtime",
+  "st_mtime_ns",
+  "st_nlink",
+  "st_rdev",
+  "st_size",
+  "st_uid"
+ ],
+ "selection_diagnostics": {
+  "positive_executions": 1,
+  "stability_repeats": 1,
+  "control_actions": [
+   "touch",
+   "write_file",
+   "symlink",
+   "chmod",
+   "rmdir",
+   "noop"
+  ],
+  "unstable_fields": [
+   "st_atime",
+   "st_atime_ns",
+   "st_ctime",
+   "st_ctime_ns",
+   "st_ino",
+   "st_mtime",
+   "st_mtime_ns"
+  ],
+  "minimal_false_fires": 0,
+  "minimal_tie_fields": [
+   "st_mode",
+   "st_nlink",
+   "st_size"
+  ],
+  "tie_break": "alphabetical field order; ties are reported, not hidden",
+  "scored": [
+   {
+    "field": "st_mode",
+    "false_fires": []
+   },
+   {
+    "field": "st_nlink",
+    "false_fires": []
+   },
+   {
+    "field": "st_size",
+    "false_fires": []
+   },
+   {
+    "field": "st_blocks",
+    "false_fires": [
+     "touch",
+     "symlink"
+    ]
+   },
+   {
+    "field": "st_blksize",
+    "false_fires": [
+     "touch",
+     "write_file",
+     "symlink"
+    ]
+   },
+   {
+    "field": "st_dev",
+    "false_fires": [
+     "touch",
+     "write_file",
+     "symlink"
+    ]
+   },
+   {
+    "field": "st_gid",
+    "false_fires": [
+     "touch",
+     "write_file",
+     "symlink"
+    ]
+   },
+   {
+    "field": "st_rdev",
+    "false_fires": [
+     "touch",
+     "write_file",
+     "symlink"
+    ]
+   },
+   {
+    "field": "st_uid",
+    "false_fires": [
+     "touch",
+     "write_file",
+     "symlink"
+    ]
+   }
+  ]
+ },
+ "sensor_request": {
+  "kind": "new_path_field_value",
+  "field": "st_mode",
+  "value": 16877
+ },
+ "naive_train": {
+  "rows": 8,
+  "hits": [
+   "mkdir",
+   "mkdir_p",
+   "touch",
+   "write_file",
+   "symlink"
+  ],
+  "false_accepts": [
+   "touch",
+   "write_file",
+   "symlink"
+  ],
+  "false_rejects": []
+ },
+ "naive_held": {
+  "rows": 8,
+  "hits": [
+   "mkdir",
+   "mkdir_p",
+   "touch",
+   "write_file",
+   "symlink"
+  ],
+  "false_accepts": [
+   "touch",
+   "write_file",
+   "symlink"
+  ],
+  "false_rejects": []
+ },
+ "selected_train": {
+  "rows": 8,
+  "hits": [
+   "mkdir",
+   "mkdir_p"
+  ],
+  "false_accepts": [],
+  "false_rejects": []
+ },
+ "selected_held": {
+  "rows": 8,
+  "hits": [
+   "mkdir",
+   "mkdir_p"
+  ],
+  "false_accepts": [],
+  "false_rejects": []
+ },
+ "criteria": {
+  "H1_old_reader_blind_to_mkdir": true,
+  "H2_effect_real_on_disk": true,
+  "H3_request_computed_from_one_positive": true,
+  "H4_closure_zero_errors": true,
+  "H5_naive_new_path_ablation_loses": true,
+  "H6_zero_model_calls_and_parameters": true
+ },
+ "met": true,
+ "model_calls": 0,
+ "parameters_stored": 0,
+ "seconds": 0.1
+}
