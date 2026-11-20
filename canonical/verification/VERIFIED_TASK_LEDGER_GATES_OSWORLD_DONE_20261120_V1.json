@@ -1,0 +1,69 @@
+{
+ "schema": "BRAIN_VERIFIED_TASK_LEDGER_GATES_OSWORLD_DONE_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "claim": "A zero-model policy wrapper compiles only explicit instruction evidence into pinned assertions and gates DONE on fresh real-guest PASS receipts after the last mutation.",
+ "declared_before_the_run": [
+  "NO_EXPLICIT_STATE_PATH",
+  "AMBIGUOUS_QUOTED_TARGET",
+  "fresh_measurement admission required",
+  "later mutation invalidates older PASS",
+  "FAIL never overridden"
+ ],
+ "integration_point": "BrainOSWorldAgent(policy_provider=osworld_verified_policy_v1.decide)",
+ "new_components": [
+  "canonical/runtime/osworld_verified_task_ledger_v1.py",
+  "canonical/runtime/osworld_verified_policy_v1.py",
+  "canonical/tests/test_osworld_verified_task_ledger_v1.py"
+ ],
+ "pinned_kernels_sha256": {
+  "canonical/runtime/osworld_v21_state_ops_v1.py": "954fb7a253b4064007f95069116476a260e8a6c43bf1c24740641d57c23f5b6f",
+  "canonical/runtime/osworld_v21_host_guest_ops_v1.py": "6d451a6c88e0d9f4ac11c9648eb153cda81c8bf4c6c240b46a894f04efa93b86",
+  "canonical/runtime/osworld_v21_brain_agent_adapter_v1.py": "e3f36cfd0847f59f6cbbd3b9f74f2d6cbad38e36eefa2c05292d14f532e328cd",
+  "canonical/runtime/osworld_sensor_request_bridge_v1.py": "4ef1519833569657b481ba28a748687df168aef47eb89191e516121538b0b235"
+ },
+ "commands": {
+  "new_suite": ".venv/bin/python -m pytest canonical/tests/test_osworld_verified_task_ledger_v1.py -q",
+  "targeted_suite": ".venv/bin/python -m pytest canonical/tests/test_osworld_v21_state_ops_v1.py canonical/tests/test_guest_state_ops_execute_for_real_v1.py canonical/tests/test_osworld_v21_brain_agent_adapter_v1.py canonical/tests/test_osworld_sensor_request_bridge_v1.py canonical/tests/test_osworld_verified_task_ledger_v1.py -q",
+  "guard": ".venv/bin/python execution_guard/repo_integrity_guard_v1.py",
+  "unified_compile": ".venv/bin/python canonical/runtime/compile_brain_unified_model_v1.py",
+  "unified_verify": ".venv/bin/python canonical/runtime/verify_brain_unified_model_v1.py --seed ab6e15ab137ed07f --output canonical/verification/BRAIN_UNIFIED_MODEL_V1_VERIFICATION_20261020.json"
+ },
+ "results": {
+  "new_suite": "11 passed in 0.53s",
+  "targeted_suite": "71 passed in 2.94s",
+  "guard": "rules=17 violations=0 PASS",
+  "unified_verify": "TOTAL 33/33 PASS (digest intentionally omitted from this indexed receipt to avoid the documented recompile cycle)",
+  "real_guest_directory_receipt": "SENSOR_REQUEST:PASS with admission.source=fresh_measurement",
+  "real_guest_file_receipt": "ASSERT_TEXT_CONTAINS:PASS from pinned state ops"
+ },
+ "criteria": {
+  "A_explicit_requirements_only": true,
+  "B_assertion_ops_are_pinned": true,
+  "C_fresh_pass_required_for_done": true,
+  "D_later_mutation_invalidates_pass": true,
+  "E_wrong_path_and_forged_admission_rejected": true,
+  "F_ambiguous_and_gui_instructions_fail_closed": true,
+  "G_fail_never_overridden": true,
+  "H_no_pinned_kernel_edited": true,
+  "I_unified_artifact_recompiled_and_verified": true,
+  "J_zero_model_calls_and_parameters": true
+ },
+ "met": true,
+ "failed_or_rejected_this_round": [
+  "full shared-process test_osworld* suite had pre-existing order-dependent failure on osworld_v21_browser_ops_v1 in sys.modules; passes in isolation and with new tests excluded",
+  "model judge/planner killed before build",
+  "pinned kernel edits killed before build",
+  "no benchmark or GUI success claimed"
+ ],
+ "limits": [
+  "No untouched OSWorld 2.1 task executed",
+  "No GUI/browser task solved",
+  "No independent verification or terminal authority",
+  "No single-experience learning or unseen-environment test",
+  "Quoted values cannot yet be bound across multiple paths; fail closed"
+ ],
+ "model_calls": 0,
+ "parameters_stored": 0,
+ "incremental_spend_usd": 0,
+ "checked_at_utc": "2026-11-20T13:51:25Z"
+}
