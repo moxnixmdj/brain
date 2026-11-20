@@ -8,12 +8,13 @@
     "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
     "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
     "conversation_memory_is_authority": false,
-    "earlier_routes_exhausted_reason": "Refused by measurement, in order: bigger vocabulary, wider grammar, scalar oracle, stored experience, failure text, binding rules, candidate supply, formatting, the site, the one-frame relation, the demonstration in a second environment class, and now the price of a decision -- which locates the residual bottleneck in the observability of the deciding fact rather than in anything the agent owns.",
+    "earlier_routes_exhausted_reason": "Bigger action vocabularies, learned transition models, statistical pruning, more demonstrations, and asking the owner were rejected: the successor is had by branching, pruning lost a real task, breadth saturates, and the question is decidable by execution. The remaining gap was that the acceptance predicate was closed by hand after the planner found the exploit.",
     "incremental_spend_usd": 0,
     "independent_verification_completed": false,
-    "independent_verification_note": "Producer-run sandbox only. Every number is a receipt row: 160 real states, 10 real actions, 52 + 37 executions, a 14 ms copy measured over three samples, 0 parameters, 0 model calls, 0 ambiguous oracles, and the round's own instrument defect (an identified-based switch that trialled 160 of 160) recorded.",
+    "independent_verification_note": "Producer-run sandbox only. Every number is a receipt row in canonical/verification/GOAL_CLOSURE_20261120_V1.json; seven declared criteria are true in this run, no independent verifier exists, no ownership or acceptance credit is claimed.",
     "laws_read_this_session": [
       "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
       "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
       "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
       "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
@@ -24,17 +25,17 @@
       "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
       "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
       "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
-      "AGENTS.md",
-      "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json"
+      "AGENTS.md"
     ],
     "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
     "producer_cognition_model_dependency_count": 0,
     "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
     "progress_evidence_paths": [
-      "canonical/verification/THE_BRANCH_IS_THE_MODEL_20261128_V1.json",
-      "canonical/tools/the_branch_is_the_model_v1.py",
-      "canonical/tests/test_the_branch_is_the_model_v1.py",
-      "THE_BRANCH_IS_THE_MODEL_20261128_V1.md"
+      "GOAL_CLOSURE_IS_A_SEARCH_PROBLEM_20261120_V1.md",
+      "canonical/tools/goal_closure_v1.py",
+      "canonical/tests/test_goal_closure_v1.py",
+      "canonical/verification/GOAL_CLOSURE_20261120_V1.json",
+      "canonical/state/GOAL_CLOSURE_STORE_20261120_V1.json"
     ],
     "route_class": "SYNTHESIZE_NEW_PRIMITIVE",
     "scope_complete_discharge": false,
@@ -245,7 +246,7 @@
             "INCREMENTAL_COST": "0 parameters, 0 model calls, ~10 us per candidate",
             "RELIABILITY": "recall is the open term",
             "VERIFIABILITY": "receipt rows, producer-run",
-            "WALL_CLOCK": "83.6 s for 30 commits"
+            "WALL_CLOCK": "117 s for the full two-repository measurement"
           },
           "evidence": [
             "30 real commits, 83.6 s, 0 accusations, grammar named for every exclusion, 1 row recovered by the AST finder, 1 verified repair unchanged, 1 harness failure stopped from wearing a fact's name"
@@ -324,7 +325,7 @@
           "route": "INDEX_ACTIONS_BY_THE_FAILING_RUN_NOT_BY_THE_SOURCE_TEXT"
         }
       ],
-      "checked_at_utc": "2026-11-19T04:20:12Z",
+      "checked_at_utc": "2026-11-20T03:39:08Z",
       "comparison_dimensions": [
         "CORRECTNESS",
         "CAPABILITY_STRENGTH",
@@ -364,12 +365,12 @@
       "selected_route": "EXECUTE_THE_HOLE_CLOSE_THE_GOAL: JUDGE REAL STATES, SELECT THE MINIMAL PRESERVATION LAW, STORE IT EXTERNALLY",
       "selected_route_preflight": {
         "all_required_dependencies_ready": true,
-        "checked_at_utc": "2026-11-19T04:20:12Z",
+        "checked_at_utc": "2026-11-20T03:39:08Z",
         "execution_dependencies": [
           {
-            "dependency": "local Python 3.11 runtime with pytest",
+            "dependency": "local Python 3.11 with pytest",
             "evidence": [
-              "Python 3.11 + pytest 9.2; 8/8 tests of the branch planner pass at 2026-11-19T04:12:12Z"
+              "pytest 9.2; 8/8 targeted tests pass on this branch"
             ],
             "evidence_classes": [
               "DIRECT_PROBE"
@@ -382,9 +383,9 @@
             "volatility": "STATIC"
           },
           {
-            "dependency": "real repositories cloned for the sweep (requests, click, tqdm, httpx) with their suites runnable",
+            "dependency": "real git repositories pypa/packaging and pypa/pyproject-hooks",
             "evidence": [
-              "29 fix commits swept twice in this sandbox (blame index and proximity index) at 2026-11-18T16:05:00Z"
+              "both cloned and measured in this branch; receipt rows carry target commits"
             ],
             "evidence_classes": [
               "DIRECT_PROBE"
@@ -397,9 +398,9 @@
             "volatility": "STATIC"
           },
           {
-            "dependency": "local tempdir for fresh per-verdict task copies",
+            "dependency": "temporary directories for per-edge copies",
             "evidence": [
-              "one fresh copy per real-judge verdict, answer key absent from the copy the search runs in; 0 corpus verdicts: reachability only, no execution at 2026-11-17T22:05:07Z"
+              "one copytree plus one process per edge; all copies under /tmp"
             ],
             "evidence_classes": [
               "DIRECT_PROBE"
@@ -415,7 +416,7 @@
         "execution_dependencies_complete": true,
         "failed_dependencies": [],
         "max_age_hours": 2,
-        "selected_route": "BRANCH_AS_VERIFIER: COPY THE STATE, RUN THE ACTION, SEARCH REAL STATES, PREDICT NOTHING",
+        "selected_route": "EXECUTE_THE_HOLE_CLOSE_THE_GOAL: JUDGE REAL STATES, SELECT THE MINIMAL PRESERVATION LAW, STORE IT EXTERNALLY",
         "status": "READY"
       },
       "source_classes_checked": [
