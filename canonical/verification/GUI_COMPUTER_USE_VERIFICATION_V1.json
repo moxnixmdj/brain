@@ -1,0 +1,17 @@
+{
+  "schema": "PROJECT_BRAIN_GUI_VERIFICATION_V1",
+  "status": "VERIFIED__GUI_CAPS_EXERCISED",
+  "caps": ["CAP_GUI_GROUND_V1", "CAP_GUI_ACT_V1", "CAP_GUI_VERIFY_V1"],
+  "method": "held-out GUI state file with decisive margin + independent re-read, sabotage control rejected",
+  "heldout": {
+    "state_file": "canonical/tmp/gui_state_probe.json",
+    "elements": 3,
+    "ground": {"target": "Submit", "margin": "inf", "decisive": true},
+    "act": {"action": "CLICK_SEMANTIC", "verified": true},
+    "verify": {"verified": true, "reason": "TARGET_ACTION_FOUND"},
+    "sabotage": {"tampered_value": "__IMPOSSIBLE__", "correctly_rejected": true}
+  },
+  "persistent_learned_bytes": 0,
+  "external_learned_capability_calls": 0,
+  "repro": "python3 -c 'from canonical.runtime.gui_computer_use_registry_v1 import invoke; print(invoke(\"CAP_GUI_GROUND_V1\", {\"target_label\":\"Submit\",\"state_path\":\"canonical/tmp/gui_state_probe.json\"}, \".\"))'"
+}

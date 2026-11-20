@@ -1,0 +1,1530 @@
+{
+  "cuts": {
+    "0ff936c7c2683729": {
+      "cut_receipt": {
+        "ablations": [
+          {
+            "kept": true,
+            "oracle_result": false,
+            "removed_original_idx": 8,
+            "trial_len": 8
+          },
+          {
+            "kept": true,
+            "oracle_result": false,
+            "removed_original_idx": 7,
+            "trial_len": 8
+          },
+          {
+            "kept": true,
+            "oracle_result": false,
+            "removed_original_idx": 6,
+            "trial_len": 8
+          },
+          {
+            "kept": false,
+            "oracle_result": true,
+            "removed_original_idx": 5,
+            "trial_len": 8
+          },
+          {
+            "kept": true,
+            "oracle_result": false,
+            "removed_original_idx": 4,
+            "trial_len": 7
+          },
+          {
+            "kept": true,
+            "oracle_result": false,
+            "removed_original_idx": 3,
+            "trial_len": 7
+          },
+          {
+            "kept": false,
+            "oracle_result": true,
+            "removed_original_idx": 2,
+            "trial_len": 7
+          },
+          {
+            "kept": true,
+            "oracle_result": false,
+            "removed_original_idx": 1,
+            "trial_len": 6
+          },
+          {
+            "kept": false,
+            "oracle_result": true,
+            "removed_original_idx": 0,
+            "trial_len": 6
+          }
+        ],
+        "all_necessary": true,
+        "derivation": "backward_greedy_omission_counterfactual_minimal_cut",
+        "elapsed_ms": 0.184,
+        "kept_indices": [
+          1,
+          3,
+          4,
+          6,
+          7,
+          8
+        ],
+        "minimal_len": 6,
+        "minimal_trace": [
+          {
+            "content": "def authenticate(token):\n    if not token:\n        return False\n    return token == 'secret'\n",
+            "layer": "python_file_op",
+            "op": "write_text",
+            "path": "src/auth.py"
+          },
+          {
+            "content": "def query(sql):\n    if not sql:\n        return []\n    return execute(sql)\n",
+            "layer": "python_file_op",
+            "op": "write_text",
+            "path": "src/db.py"
+          },
+          {
+            "content": "def handle(req):\n    if not req:\n        return 500\n    return 200\n",
+            "layer": "python_file_op",
+            "op": "write_text",
+            "path": "src/api.py"
+          },
+          {
+            "content": "def render(x):\n    if not x:\n        return ''\n    return str(x)\n",
+            "layer": "python_file_op",
+            "op": "write_text",
+            "path": "src/ui.py"
+          },
+          {
+            "layer": "semantic_dom",
+            "op": "FILL_SEMANTIC",
+            "selector": {
+              "name": "Summary",
+              "role": "textbox"
+            },
+            "value": "Fix null deref: use truthiness check"
+          },
+          {
+            "layer": "semantic_dom",
+            "op": "CLICK_SEMANTIC",
+            "selector": {
+              "name": "Submit",
+              "role": "button"
+            }
+          }
+        ],
+        "model_calls": 0,
+        "necessity_receipts": [
+          {
+            "is_necessary": true,
+            "removed_oracle_result": false,
+            "step_original_idx": 1
+          },
+          {
+            "is_necessary": true,
+            "removed_oracle_result": false,
+            "step_original_idx": 3
+          },
+          {
+            "is_necessary": true,
+            "removed_oracle_result": false,
+            "step_original_idx": 4
+          },
+          {
+            "is_necessary": true,
+            "removed_oracle_result": false,
+            "step_original_idx": 6
+          },
+          {
+            "is_necessary": true,
+            "removed_oracle_result": false,
+            "step_original_idx": 7
+          },
+          {
+            "is_necessary": true,
+            "removed_oracle_result": false,
+            "step_original_idx": 8
+          }
+        ],
+        "network_calls": 0,
+        "oracle_calls": 17,
+        "original_len": 9,
+        "pruned_count": 3,
+        "pruned_indices": [
+          0,
+          2,
+          5
+        ],
+        "schema": "PROJECT_BRAIN_CAUSAL_CUT_ATTRIBUTION_V1",
+        "status": "CUT_MINIMAL__NECESSARY_AND_SUFFICIENT",
+        "sufficiency_verified": true
+      },
+      "family_id": "0ff936c7c2683729",
+      "family_predicate": {
+        "action_schema": {
+          "holes": [
+            "?path0",
+            "?str0",
+            "?str1",
+            "?str2",
+            "?str3",
+            "?str4",
+            "?str5",
+            "?str6",
+            "?path1",
+            "?str7",
+            "?path2",
+            "?num0",
+            "?num1",
+            "?str8",
+            "?path3",
+            "?str9",
+            "?str10",
+            "?str11",
+            "?str12",
+            "?str13",
+            "?str14",
+            "?str15",
+            "?str16",
+            "?str17",
+            "?str18",
+            "?str19",
+            "?str20",
+            "?str21"
+          ],
+          "layers": [
+            "python_file_op",
+            "python_file_op",
+            "python_file_op",
+            "python_file_op",
+            "semantic_dom",
+            "semantic_dom"
+          ],
+          "literal_kinds": [
+            "path",
+            "str",
+            "num"
+          ],
+          "step_count": 6
+        },
+        "derivation": "causal_cut_family_predicate_induced_and_falsified",
+        "falsifier": {
+          "destroy_negative": {
+            "existing_file_content": "unrelated content the skill never read \u2014 e.g., user data",
+            "expected_outcome": "PREDICATE_REJECTS_DESTRUCTIVE_OVERGENERALIZATION",
+            "generalized_write_would_destroy": "__any_path__",
+            "guard": "requires edit_of + edit_preserves_outside or file creation in empty slot",
+            "why_rejected": "content_a_generalized_write_would_destroy__skill_must_not_replace_unread_file"
+          },
+          "expected_outcome": "PREDICATE_REJECTS_NEGATIVE",
+          "negative_pre_state": {
+            "missing": [
+              "__required_file__"
+            ]
+          },
+          "negative_trace": [
+            {
+              "argv": [
+                "true"
+              ],
+              "layer": "cli_exec"
+            }
+          ],
+          "why_rejected": "precondition_files_missing_and_layer_mismatch"
+        },
+        "family_id": "0ff936c7c2683729",
+        "postcondition": {
+          "checks": [
+            {
+              "contains": "def authenticate(token):",
+              "kind": "file_contains",
+              "path": "src/auth.py"
+            },
+            {
+              "contains": "def query(sql):",
+              "kind": "file_contains",
+              "path": "src/db.py"
+            },
+            {
+              "contains": "def handle(req):",
+              "kind": "file_contains",
+              "path": "src/api.py"
+            },
+            {
+              "contains": "def render(x):",
+              "kind": "file_contains",
+              "path": "src/ui.py"
+            },
+            {
+              "kind": "gui_submit_verified",
+              "target": "Submit"
+            }
+          ],
+          "kind": "long_horizon_composition_verified"
+        },
+        "precondition": {
+          "excludes": [],
+          "requires": [
+            "filesystem_accessible"
+          ],
+          "requires_content": {
+            "if req is None:": "if req is None:",
+            "if sql is None:": "if sql is None:",
+            "if token is None:": "if token is None:",
+            "if x is None:": "if x is None:"
+          }
+        }
+      },
+      "goal": "Fix null deref in 4 files (use truthiness check) and confirm fix via GUI Confirm button",
+      "kept_indices": [
+        1,
+        3,
+        4,
+        6,
+        7,
+        8
+      ],
+      "minimal_len": 6,
+      "minimal_trace": [
+        {
+          "content": "def authenticate(token):\n    if not token:\n        return False\n    return token == 'secret'\n",
+          "layer": "python_file_op",
+          "op": "write_text",
+          "path": "src/auth.py"
+        },
+        {
+          "content": "def query(sql):\n    if not sql:\n        return []\n    return execute(sql)\n",
+          "layer": "python_file_op",
+          "op": "write_text",
+          "path": "src/db.py"
+        },
+        {
+          "content": "def handle(req):\n    if not req:\n        return 500\n    return 200\n",
+          "layer": "python_file_op",
+          "op": "write_text",
+          "path": "src/api.py"
+        },
+        {
+          "content": "def render(x):\n    if not x:\n        return ''\n    return str(x)\n",
+          "layer": "python_file_op",
+          "op": "write_text",
+          "path": "src/ui.py"
+        },
+        {
+          "layer": "semantic_dom",
+          "op": "FILL_SEMANTIC",
+          "selector": {
+            "name": "Summary",
+            "role": "textbox"
+          },
+          "value": "Fix null deref: use truthiness check"
+        },
+        {
+          "layer": "semantic_dom",
+          "op": "CLICK_SEMANTIC",
+          "selector": {
+            "name": "Submit",
+            "role": "button"
+          }
+        }
+      ],
+      "original_len": 9,
+      "post_state": {
+        "src/api.py": "def handle(req):\n    if not req:\n        return 500\n    return 200\n",
+        "src/auth.py": "def authenticate(token):\n    if not token:\n        return False\n    return token == 'secret'\n",
+        "src/db.py": "def query(sql):\n    if not sql:\n        return []\n    return execute(sql)\n",
+        "src/ui.py": "def render(x):\n    if not x:\n        return ''\n    return str(x)\n"
+      },
+      "pre_state": {
+        "src/api.py": "def handle(req):\n    if req is None:\n        return 500\n    return 200\n",
+        "src/auth.py": "def authenticate(token):\n    if token is None:\n        return False\n    return token == 'secret'\n",
+        "src/db.py": "def query(sql):\n    if sql is None:\n        return []\n    return execute(sql)\n",
+        "src/ui.py": "def render(x):\n    if x is None:\n        return ''\n    return str(x)\n"
+      },
+      "pruned_count": 3
+    },
+    "8a006125f416a05e": {
+      "cut_receipt": {
+        "ablations": [
+          {
+            "kept": true,
+            "oracle_result": false,
+            "removed_original_idx": 14,
+            "trial_len": 14
+          },
+          {
+            "kept": true,
+            "oracle_result": false,
+            "removed_original_idx": 13,
+            "trial_len": 14
+          },
+          {
+            "kept": true,
+            "oracle_result": false,
+            "removed_original_idx": 12,
+            "trial_len": 14
+          },
+          {
+            "kept": true,
+            "oracle_result": false,
+            "removed_original_idx": 11,
+            "trial_len": 14
+          },
+          {
+            "kept": true,
+            "oracle_result": false,
+            "removed_original_idx": 10,
+            "trial_len": 14
+          },
+          {
+            "kept": true,
+            "oracle_result": false,
+            "removed_original_idx": 9,
+            "trial_len": 14
+          },
+          {
+            "kept": false,
+            "oracle_result": true,
+            "removed_original_idx": 8,
+            "trial_len": 14
+          },
+          {
+            "kept": true,
+            "oracle_result": false,
+            "removed_original_idx": 7,
+            "trial_len": 13
+          },
+          {
+            "kept": true,
+            "oracle_result": false,
+            "removed_original_idx": 6,
+            "trial_len": 13
+          },
+          {
+            "kept": true,
+            "oracle_result": false,
+            "removed_original_idx": 5,
+            "trial_len": 13
+          },
+          {
+            "kept": true,
+            "oracle_result": false,
+            "removed_original_idx": 4,
+            "trial_len": 13
+          },
+          {
+            "kept": false,
+            "oracle_result": true,
+            "removed_original_idx": 3,
+            "trial_len": 13
+          },
+          {
+            "kept": true,
+            "oracle_result": false,
+            "removed_original_idx": 2,
+            "trial_len": 12
+          },
+          {
+            "kept": true,
+            "oracle_result": false,
+            "removed_original_idx": 1,
+            "trial_len": 12
+          },
+          {
+            "kept": true,
+            "oracle_result": false,
+            "removed_original_idx": 0,
+            "trial_len": 12
+          }
+        ],
+        "all_necessary": true,
+        "derivation": "backward_greedy_omission_counterfactual_minimal_cut",
+        "elapsed_ms": 5979.647,
+        "kept_indices": [
+          0,
+          1,
+          2,
+          4,
+          5,
+          6,
+          7,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14
+        ],
+        "minimal_len": 13,
+        "minimal_trace": [
+          {
+            "content": "def authenticate(token):\n    if not token:\n        return False\n    return token == 'secret'\n",
+            "layer": "python_file_op",
+            "op": "write_text",
+            "path": "src/auth.py"
+          },
+          {
+            "content": "def query(sql):\n    if not sql:\n        return []\n    return execute(sql)\n",
+            "layer": "python_file_op",
+            "op": "write_text",
+            "path": "src/db.py"
+          },
+          {
+            "content": "def handle(req):\n    if not req:\n        return 500\n    return 200\n",
+            "layer": "python_file_op",
+            "op": "write_text",
+            "path": "src/api.py"
+          },
+          {
+            "content": "def render(x):\n    if not x:\n        return ''\n    return str(x)\n",
+            "layer": "python_file_op",
+            "op": "write_text",
+            "path": "src/ui.py"
+          },
+          {
+            "content": "CACHE={'a': 1}\ndef get(k):\n    return CACHE.get(k)\n",
+            "layer": "python_file_op",
+            "op": "write_text",
+            "path": "src/cache.py"
+          },
+          {
+            "content": "def normalize(s):\n    if not s:\n        return None\n    return s.strip()\n",
+            "layer": "python_file_op",
+            "op": "write_text",
+            "path": "src/util.py"
+          },
+          {
+            "content": "PORT=8080\ndef load():\n    return PORT or 8000\n",
+            "layer": "python_file_op",
+            "op": "write_text",
+            "path": "src/conf.py"
+          },
+          {
+            "content": "import logging\nLOGGED=[]\ndef emit(msg):\n    if not msg:\n        return\n    LOGGED.append(msg)\n",
+            "layer": "python_file_op",
+            "op": "write_text",
+            "path": "src/log.py"
+          },
+          {
+            "content": "def fetch(url):\n    if not url:\n        raise ValueError()\n    return request(url)\n",
+            "layer": "python_file_op",
+            "op": "write_text",
+            "path": "src/net.py"
+          },
+          {
+            "content": "DATA=[]\ndef push(v):\n    if not v:\n        return\n    DATA.append(v)\n",
+            "layer": "python_file_op",
+            "op": "write_text",
+            "path": "src/store.py"
+          },
+          {
+            "content": "def main(args):\n    args=args or []\n    run(args)\n",
+            "layer": "python_file_op",
+            "op": "write_text",
+            "path": "src/cli.py"
+          },
+          {
+            "layer": "semantic_dom",
+            "op": "FILL_SEMANTIC",
+            "selector": {
+              "name": "Changelog",
+              "role": "textbox"
+            },
+            "value": "pure hetero fix"
+          },
+          {
+            "layer": "semantic_dom",
+            "op": "CLICK_SEMANTIC",
+            "selector": {
+              "name": "Ship",
+              "role": "button"
+            }
+          }
+        ],
+        "model_calls": 0,
+        "necessity_receipts": [
+          {
+            "is_necessary": true,
+            "removed_oracle_result": false,
+            "step_original_idx": 0
+          },
+          {
+            "is_necessary": true,
+            "removed_oracle_result": false,
+            "step_original_idx": 1
+          },
+          {
+            "is_necessary": true,
+            "removed_oracle_result": false,
+            "step_original_idx": 2
+          },
+          {
+            "is_necessary": true,
+            "removed_oracle_result": false,
+            "step_original_idx": 4
+          },
+          {
+            "is_necessary": true,
+            "removed_oracle_result": false,
+            "step_original_idx": 5
+          },
+          {
+            "is_necessary": true,
+            "removed_oracle_result": false,
+            "step_original_idx": 6
+          },
+          {
+            "is_necessary": true,
+            "removed_oracle_result": false,
+            "step_original_idx": 7
+          },
+          {
+            "is_necessary": true,
+            "removed_oracle_result": false,
+            "step_original_idx": 9
+          },
+          {
+            "is_necessary": true,
+            "removed_oracle_result": false,
+            "step_original_idx": 10
+          },
+          {
+            "is_necessary": true,
+            "removed_oracle_result": false,
+            "step_original_idx": 11
+          },
+          {
+            "is_necessary": true,
+            "removed_oracle_result": false,
+            "step_original_idx": 12
+          },
+          {
+            "is_necessary": true,
+            "removed_oracle_result": false,
+            "step_original_idx": 13
+          },
+          {
+            "is_necessary": true,
+            "removed_oracle_result": false,
+            "step_original_idx": 14
+          }
+        ],
+        "network_calls": 0,
+        "oracle_calls": 30,
+        "original_len": 15,
+        "pruned_count": 2,
+        "pruned_indices": [
+          3,
+          8
+        ],
+        "schema": "PROJECT_BRAIN_CAUSAL_CUT_ATTRIBUTION_V1",
+        "status": "CUT_MINIMAL__NECESSARY_AND_SUFFICIENT",
+        "sufficiency_verified": true
+      },
+      "family_id": "8a006125f416a05e",
+      "family_predicate": {
+        "action_schema": {
+          "holes": [
+            "?path0",
+            "?str0",
+            "?str1",
+            "?str2",
+            "?str3",
+            "?str4",
+            "?str5",
+            "?str6",
+            "?path1",
+            "?str7",
+            "?path2",
+            "?num0",
+            "?num1",
+            "?str8",
+            "?path3",
+            "?str9",
+            "?path4",
+            "?num2",
+            "?str10",
+            "?path5",
+            "?str11",
+            "?path6",
+            "?num3",
+            "?num4",
+            "?str12",
+            "?path7",
+            "?str13",
+            "?path8",
+            "?str14",
+            "?path9",
+            "?str15",
+            "?path10",
+            "?str16",
+            "?str17",
+            "?str18",
+            "?str19",
+            "?str20",
+            "?str21",
+            "?str22",
+            "?str23",
+            "?str24",
+            "?str25",
+            "?str26",
+            "?str27",
+            "?str28"
+          ],
+          "layers": [
+            "python_file_op",
+            "python_file_op",
+            "python_file_op",
+            "python_file_op",
+            "python_file_op",
+            "python_file_op",
+            "python_file_op",
+            "python_file_op",
+            "python_file_op",
+            "python_file_op",
+            "python_file_op",
+            "semantic_dom",
+            "semantic_dom"
+          ],
+          "literal_kinds": [
+            "path",
+            "str",
+            "num"
+          ],
+          "step_count": 13
+        },
+        "derivation": "causal_cut_family_predicate_induced_and_falsified",
+        "falsifier": {
+          "destroy_negative": {
+            "existing_file_content": "unrelated content the skill never read \u2014 e.g., user data",
+            "expected_outcome": "PREDICATE_REJECTS_DESTRUCTIVE_OVERGENERALIZATION",
+            "generalized_write_would_destroy": "__any_path__",
+            "guard": "requires edit_of + edit_preserves_outside or file creation in empty slot",
+            "why_rejected": "content_a_generalized_write_would_destroy__skill_must_not_replace_unread_file"
+          },
+          "expected_outcome": "PREDICATE_REJECTS_NEGATIVE",
+          "negative_pre_state": {
+            "missing": [
+              "__required_file__"
+            ]
+          },
+          "negative_trace": [
+            {
+              "argv": [
+                "true"
+              ],
+              "layer": "cli_exec"
+            }
+          ],
+          "why_rejected": "precondition_files_missing_and_layer_mismatch"
+        },
+        "family_id": "8a006125f416a05e",
+        "postcondition": {
+          "checks": [
+            {
+              "contains": "def authenticate(token):",
+              "kind": "file_contains",
+              "path": "src/auth.py"
+            },
+            {
+              "contains": "def query(sql):",
+              "kind": "file_contains",
+              "path": "src/db.py"
+            },
+            {
+              "contains": "def handle(req):",
+              "kind": "file_contains",
+              "path": "src/api.py"
+            },
+            {
+              "contains": "def render(x):",
+              "kind": "file_contains",
+              "path": "src/ui.py"
+            },
+            {
+              "contains": "CACHE={'a': 1}",
+              "kind": "file_contains",
+              "path": "src/cache.py"
+            },
+            {
+              "contains": "def normalize(s):",
+              "kind": "file_contains",
+              "path": "src/util.py"
+            },
+            {
+              "contains": "PORT=8080",
+              "kind": "file_contains",
+              "path": "src/conf.py"
+            },
+            {
+              "contains": "import logging",
+              "kind": "file_contains",
+              "path": "src/log.py"
+            },
+            {
+              "contains": "def fetch(url):",
+              "kind": "file_contains",
+              "path": "src/net.py"
+            },
+            {
+              "contains": "DATA=[]",
+              "kind": "file_contains",
+              "path": "src/store.py"
+            },
+            {
+              "contains": "def main(args):",
+              "kind": "file_contains",
+              "path": "src/cli.py"
+            },
+            {
+              "kind": "gui_submit_verified",
+              "target": "Submit"
+            }
+          ],
+          "kind": "long_horizon_composition_verified"
+        },
+        "precondition": {
+          "excludes": [],
+          "requires": [
+            "filesystem_accessible"
+          ],
+          "requires_content": {
+            "if PORT is None:": "if PORT is None:",
+            "if args is None:": "if args is None:",
+            "if msg is None:": "if msg is None:",
+            "if req is None:": "if req is None:",
+            "if s == '':": "if s == '':",
+            "if sql is None:": "if sql is None:",
+            "if token is None:": "if token is None:",
+            "if url is None:": "if url is None:",
+            "if v is None:": "if v is None:",
+            "if x is None:": "if x is None:",
+            "return CACHE[k]": "return CACHE[k]"
+          }
+        }
+      },
+      "goal": "Fix 11 pure heterogeneous files and deploy via GUI Deploy",
+      "kept_indices": [
+        0,
+        1,
+        2,
+        4,
+        5,
+        6,
+        7,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ],
+      "minimal_len": 13,
+      "minimal_trace": [
+        {
+          "content": "def authenticate(token):\n    if not token:\n        return False\n    return token == 'secret'\n",
+          "layer": "python_file_op",
+          "op": "write_text",
+          "path": "src/auth.py"
+        },
+        {
+          "content": "def query(sql):\n    if not sql:\n        return []\n    return execute(sql)\n",
+          "layer": "python_file_op",
+          "op": "write_text",
+          "path": "src/db.py"
+        },
+        {
+          "content": "def handle(req):\n    if not req:\n        return 500\n    return 200\n",
+          "layer": "python_file_op",
+          "op": "write_text",
+          "path": "src/api.py"
+        },
+        {
+          "content": "def render(x):\n    if not x:\n        return ''\n    return str(x)\n",
+          "layer": "python_file_op",
+          "op": "write_text",
+          "path": "src/ui.py"
+        },
+        {
+          "content": "CACHE={'a': 1}\ndef get(k):\n    return CACHE.get(k)\n",
+          "layer": "python_file_op",
+          "op": "write_text",
+          "path": "src/cache.py"
+        },
+        {
+          "content": "def normalize(s):\n    if not s:\n        return None\n    return s.strip()\n",
+          "layer": "python_file_op",
+          "op": "write_text",
+          "path": "src/util.py"
+        },
+        {
+          "content": "PORT=8080\ndef load():\n    return PORT or 8000\n",
+          "layer": "python_file_op",
+          "op": "write_text",
+          "path": "src/conf.py"
+        },
+        {
+          "content": "import logging\nLOGGED=[]\ndef emit(msg):\n    if not msg:\n        return\n    LOGGED.append(msg)\n",
+          "layer": "python_file_op",
+          "op": "write_text",
+          "path": "src/log.py"
+        },
+        {
+          "content": "def fetch(url):\n    if not url:\n        raise ValueError()\n    return request(url)\n",
+          "layer": "python_file_op",
+          "op": "write_text",
+          "path": "src/net.py"
+        },
+        {
+          "content": "DATA=[]\ndef push(v):\n    if not v:\n        return\n    DATA.append(v)\n",
+          "layer": "python_file_op",
+          "op": "write_text",
+          "path": "src/store.py"
+        },
+        {
+          "content": "def main(args):\n    args=args or []\n    run(args)\n",
+          "layer": "python_file_op",
+          "op": "write_text",
+          "path": "src/cli.py"
+        },
+        {
+          "layer": "semantic_dom",
+          "op": "FILL_SEMANTIC",
+          "selector": {
+            "name": "Changelog",
+            "role": "textbox"
+          },
+          "value": "pure hetero fix"
+        },
+        {
+          "layer": "semantic_dom",
+          "op": "CLICK_SEMANTIC",
+          "selector": {
+            "name": "Ship",
+            "role": "button"
+          }
+        }
+      ],
+      "original_len": 15,
+      "post_state": {
+        "src/api.py": "def handle(req):\n    if not req:\n        return 500\n    return 200\n",
+        "src/auth.py": "def authenticate(token):\n    if not token:\n        return False\n    return token == 'secret'\n",
+        "src/cache.py": "CACHE={'a': 1}\ndef get(k):\n    return CACHE.get(k)\n",
+        "src/cli.py": "def main(args):\n    args=args or []\n    run(args)\n",
+        "src/conf.py": "PORT=8080\ndef load():\n    return PORT or 8000\n",
+        "src/db.py": "def query(sql):\n    if not sql:\n        return []\n    return execute(sql)\n",
+        "src/log.py": "import logging\nLOGGED=[]\ndef emit(msg):\n    if not msg:\n        return\n    LOGGED.append(msg)\n",
+        "src/net.py": "def fetch(url):\n    if not url:\n        raise ValueError()\n    return request(url)\n",
+        "src/store.py": "DATA=[]\ndef push(v):\n    if not v:\n        return\n    DATA.append(v)\n",
+        "src/ui.py": "def render(x):\n    if not x:\n        return ''\n    return str(x)\n",
+        "src/util.py": "def normalize(s):\n    if not s:\n        return None\n    return s.strip()\n"
+      },
+      "pre_state": {
+        "src/api.py": "def handle(req):\n    if req is None:\n        return 500\n    return 200\n",
+        "src/auth.py": "def authenticate(token):\n    if token is None:\n        return False\n    return True\n",
+        "src/cache.py": "CACHE={'a': 1}\ndef get(k):\n    return CACHE[k]\n",
+        "src/cli.py": "def main(args):\n    if args is None:\n        args=[]\n    run(args)\n",
+        "src/conf.py": "PORT=8080\ndef load():\n    if PORT is None:\n        return 8000\n    return PORT\n",
+        "src/db.py": "def query(sql):\n    if sql is None:\n        return []\n    return execute(sql)\n",
+        "src/log.py": "import logging\nLOGGED=[]\ndef emit(msg):\n    if msg is None:\n        return\n    LOGGED.append(msg)\n",
+        "src/net.py": "def fetch(url):\n    if url is None:\n        raise ValueError()\n    return request(url)\n",
+        "src/store.py": "DATA=[]\ndef push(v):\n    if v is None:\n        return\n    DATA.append(v)\n",
+        "src/ui.py": "def render(x):\n    if x is None:\n        return ''\n    return str(x)\n",
+        "src/util.py": "def normalize(s):\n    if s == '':\n        return None\n    return s.strip()\n"
+      },
+      "pruned_count": 2
+    },
+    "aa022865439040b8": {
+      "cut_receipt": {
+        "ablations": [
+          {
+            "kept": true,
+            "oracle_result": false,
+            "removed_original_idx": 14,
+            "trial_len": 14
+          },
+          {
+            "kept": true,
+            "oracle_result": false,
+            "removed_original_idx": 13,
+            "trial_len": 14
+          },
+          {
+            "kept": true,
+            "oracle_result": false,
+            "removed_original_idx": 12,
+            "trial_len": 14
+          },
+          {
+            "kept": true,
+            "oracle_result": false,
+            "removed_original_idx": 11,
+            "trial_len": 14
+          },
+          {
+            "kept": true,
+            "oracle_result": false,
+            "removed_original_idx": 10,
+            "trial_len": 14
+          },
+          {
+            "kept": true,
+            "oracle_result": false,
+            "removed_original_idx": 9,
+            "trial_len": 14
+          },
+          {
+            "kept": false,
+            "oracle_result": true,
+            "removed_original_idx": 8,
+            "trial_len": 14
+          },
+          {
+            "kept": true,
+            "oracle_result": false,
+            "removed_original_idx": 7,
+            "trial_len": 13
+          },
+          {
+            "kept": true,
+            "oracle_result": false,
+            "removed_original_idx": 6,
+            "trial_len": 13
+          },
+          {
+            "kept": true,
+            "oracle_result": false,
+            "removed_original_idx": 5,
+            "trial_len": 13
+          },
+          {
+            "kept": true,
+            "oracle_result": false,
+            "removed_original_idx": 4,
+            "trial_len": 13
+          },
+          {
+            "kept": false,
+            "oracle_result": true,
+            "removed_original_idx": 3,
+            "trial_len": 13
+          },
+          {
+            "kept": true,
+            "oracle_result": false,
+            "removed_original_idx": 2,
+            "trial_len": 12
+          },
+          {
+            "kept": true,
+            "oracle_result": false,
+            "removed_original_idx": 1,
+            "trial_len": 12
+          },
+          {
+            "kept": true,
+            "oracle_result": false,
+            "removed_original_idx": 0,
+            "trial_len": 12
+          }
+        ],
+        "all_necessary": true,
+        "derivation": "backward_greedy_omission_counterfactual_minimal_cut",
+        "elapsed_ms": 0.591,
+        "kept_indices": [
+          0,
+          1,
+          2,
+          4,
+          5,
+          6,
+          7,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14
+        ],
+        "minimal_len": 13,
+        "minimal_trace": [
+          {
+            "content": "def authenticate(token):\n    if not token:\n        return False\n    return token == 'secret'\n",
+            "layer": "python_file_op",
+            "op": "write_text",
+            "path": "src/auth.py"
+          },
+          {
+            "content": "def query(sql):\n    if not sql:\n        return []\n    return execute(sql)\n",
+            "layer": "python_file_op",
+            "op": "write_text",
+            "path": "src/db.py"
+          },
+          {
+            "content": "def handle(req):\n    if not req:\n        return 500\n    return 200\n",
+            "layer": "python_file_op",
+            "op": "write_text",
+            "path": "src/api.py"
+          },
+          {
+            "content": "def render(x):\n    if not x:\n        return ''\n    return str(x)\n",
+            "layer": "python_file_op",
+            "op": "write_text",
+            "path": "src/ui.py"
+          },
+          {
+            "content": "CACHE={}\ndef get(k):\n    return CACHE.get(k)\n",
+            "layer": "python_file_op",
+            "op": "write_text",
+            "path": "src/cache.py"
+          },
+          {
+            "content": "def normalize(s):\n    if not s:\n        return None\n    return s.strip()\n",
+            "layer": "python_file_op",
+            "op": "write_text",
+            "path": "src/util.py"
+          },
+          {
+            "content": "PORT=8080\ndef load():\n    return PORT or 8000\n",
+            "layer": "python_file_op",
+            "op": "write_text",
+            "path": "src/conf.py"
+          },
+          {
+            "content": "import logging\ndef emit(msg):\n    if not msg:\n        return\n    logging.info(msg)\n",
+            "layer": "python_file_op",
+            "op": "write_text",
+            "path": "src/log.py"
+          },
+          {
+            "content": "def fetch(url):\n    if not url:\n        raise ValueError()\n    return request(url)\n",
+            "layer": "python_file_op",
+            "op": "write_text",
+            "path": "src/net.py"
+          },
+          {
+            "content": "DATA=[]\ndef push(v):\n    if v is not None:\n        DATA.append(v)\n",
+            "layer": "python_file_op",
+            "op": "write_text",
+            "path": "src/store.py"
+          },
+          {
+            "content": "def main(args):\n    args=args or []\n    run(args)\n",
+            "layer": "python_file_op",
+            "op": "write_text",
+            "path": "src/cli.py"
+          },
+          {
+            "layer": "semantic_dom",
+            "op": "FILL_SEMANTIC",
+            "selector": {
+              "name": "Changelog",
+              "role": "textbox"
+            },
+            "value": "hetero 11-file fix"
+          },
+          {
+            "layer": "semantic_dom",
+            "op": "CLICK_SEMANTIC",
+            "selector": {
+              "name": "Ship",
+              "role": "button"
+            }
+          }
+        ],
+        "model_calls": 0,
+        "necessity_receipts": [
+          {
+            "is_necessary": true,
+            "removed_oracle_result": false,
+            "step_original_idx": 0
+          },
+          {
+            "is_necessary": true,
+            "removed_oracle_result": false,
+            "step_original_idx": 1
+          },
+          {
+            "is_necessary": true,
+            "removed_oracle_result": false,
+            "step_original_idx": 2
+          },
+          {
+            "is_necessary": true,
+            "removed_oracle_result": false,
+            "step_original_idx": 4
+          },
+          {
+            "is_necessary": true,
+            "removed_oracle_result": false,
+            "step_original_idx": 5
+          },
+          {
+            "is_necessary": true,
+            "removed_oracle_result": false,
+            "step_original_idx": 6
+          },
+          {
+            "is_necessary": true,
+            "removed_oracle_result": false,
+            "step_original_idx": 7
+          },
+          {
+            "is_necessary": true,
+            "removed_oracle_result": false,
+            "step_original_idx": 9
+          },
+          {
+            "is_necessary": true,
+            "removed_oracle_result": false,
+            "step_original_idx": 10
+          },
+          {
+            "is_necessary": true,
+            "removed_oracle_result": false,
+            "step_original_idx": 11
+          },
+          {
+            "is_necessary": true,
+            "removed_oracle_result": false,
+            "step_original_idx": 12
+          },
+          {
+            "is_necessary": true,
+            "removed_oracle_result": false,
+            "step_original_idx": 13
+          },
+          {
+            "is_necessary": true,
+            "removed_oracle_result": false,
+            "step_original_idx": 14
+          }
+        ],
+        "network_calls": 0,
+        "oracle_calls": 30,
+        "original_len": 15,
+        "pruned_count": 2,
+        "pruned_indices": [
+          3,
+          8
+        ],
+        "schema": "PROJECT_BRAIN_CAUSAL_CUT_ATTRIBUTION_V1",
+        "status": "CUT_MINIMAL__NECESSARY_AND_SUFFICIENT",
+        "sufficiency_verified": true
+      },
+      "family_id": "aa022865439040b8",
+      "family_predicate": {
+        "action_schema": {
+          "holes": [
+            "?path0",
+            "?str0",
+            "?str1",
+            "?str2",
+            "?str3",
+            "?str4",
+            "?str5",
+            "?str6",
+            "?path1",
+            "?str7",
+            "?path2",
+            "?num0",
+            "?num1",
+            "?str8",
+            "?path3",
+            "?str9",
+            "?path4",
+            "?str10",
+            "?path5",
+            "?str11",
+            "?path6",
+            "?num2",
+            "?num3",
+            "?str12",
+            "?path7",
+            "?str13",
+            "?path8",
+            "?str14",
+            "?path9",
+            "?str15",
+            "?path10",
+            "?str16",
+            "?str17",
+            "?str18",
+            "?str19",
+            "?str20",
+            "?str21",
+            "?str22",
+            "?str23",
+            "?str24",
+            "?str25",
+            "?str26",
+            "?str27",
+            "?str28"
+          ],
+          "layers": [
+            "python_file_op",
+            "python_file_op",
+            "python_file_op",
+            "python_file_op",
+            "python_file_op",
+            "python_file_op",
+            "python_file_op",
+            "python_file_op",
+            "python_file_op",
+            "python_file_op",
+            "python_file_op",
+            "semantic_dom",
+            "semantic_dom"
+          ],
+          "literal_kinds": [
+            "path",
+            "str",
+            "num"
+          ],
+          "step_count": 13
+        },
+        "derivation": "causal_cut_family_predicate_induced_and_falsified",
+        "falsifier": {
+          "destroy_negative": {
+            "existing_file_content": "unrelated content the skill never read \u2014 e.g., user data",
+            "expected_outcome": "PREDICATE_REJECTS_DESTRUCTIVE_OVERGENERALIZATION",
+            "generalized_write_would_destroy": "__any_path__",
+            "guard": "requires edit_of + edit_preserves_outside or file creation in empty slot",
+            "why_rejected": "content_a_generalized_write_would_destroy__skill_must_not_replace_unread_file"
+          },
+          "expected_outcome": "PREDICATE_REJECTS_NEGATIVE",
+          "negative_pre_state": {
+            "missing": [
+              "__required_file__"
+            ]
+          },
+          "negative_trace": [
+            {
+              "argv": [
+                "true"
+              ],
+              "layer": "cli_exec"
+            }
+          ],
+          "why_rejected": "precondition_files_missing_and_layer_mismatch"
+        },
+        "family_id": "aa022865439040b8",
+        "postcondition": {
+          "checks": [
+            {
+              "contains": "def authenticate(token):",
+              "kind": "file_contains",
+              "path": "src/auth.py"
+            },
+            {
+              "contains": "def query(sql):",
+              "kind": "file_contains",
+              "path": "src/db.py"
+            },
+            {
+              "contains": "def handle(req):",
+              "kind": "file_contains",
+              "path": "src/api.py"
+            },
+            {
+              "contains": "def render(x):",
+              "kind": "file_contains",
+              "path": "src/ui.py"
+            },
+            {
+              "contains": "CACHE={}",
+              "kind": "file_contains",
+              "path": "src/cache.py"
+            },
+            {
+              "contains": "def normalize(s):",
+              "kind": "file_contains",
+              "path": "src/util.py"
+            },
+            {
+              "contains": "PORT=8080",
+              "kind": "file_contains",
+              "path": "src/conf.py"
+            },
+            {
+              "contains": "import logging",
+              "kind": "file_contains",
+              "path": "src/log.py"
+            },
+            {
+              "contains": "def fetch(url):",
+              "kind": "file_contains",
+              "path": "src/net.py"
+            },
+            {
+              "contains": "DATA=[]",
+              "kind": "file_contains",
+              "path": "src/store.py"
+            },
+            {
+              "contains": "def main(args):",
+              "kind": "file_contains",
+              "path": "src/cli.py"
+            },
+            {
+              "kind": "gui_submit_verified",
+              "target": "Submit"
+            }
+          ],
+          "kind": "long_horizon_composition_verified"
+        },
+        "precondition": {
+          "excludes": [],
+          "requires": [
+            "filesystem_accessible"
+          ],
+          "requires_content": {
+            "CACHE={}": "CACHE={}",
+            "if PORT is None:": "if PORT is None:",
+            "if args is None:": "if args is None:",
+            "if k not in CACHE:": "if k not in CACHE:",
+            "if msg is None:": "if msg is None:",
+            "if req is None:": "if req is None:",
+            "if s == '':": "if s == '':",
+            "if sql is None:": "if sql is None:",
+            "if token is None:": "if token is None:",
+            "if url is None:": "if url is None:",
+            "if v is None:": "if v is None:",
+            "if x is None:": "if x is None:"
+          }
+        }
+      },
+      "goal": "Fix 11 heterogeneous files and deploy via GUI Deploy",
+      "kept_indices": [
+        0,
+        1,
+        2,
+        4,
+        5,
+        6,
+        7,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ],
+      "minimal_len": 13,
+      "minimal_trace": [
+        {
+          "content": "def authenticate(token):\n    if not token:\n        return False\n    return token == 'secret'\n",
+          "layer": "python_file_op",
+          "op": "write_text",
+          "path": "src/auth.py"
+        },
+        {
+          "content": "def query(sql):\n    if not sql:\n        return []\n    return execute(sql)\n",
+          "layer": "python_file_op",
+          "op": "write_text",
+          "path": "src/db.py"
+        },
+        {
+          "content": "def handle(req):\n    if not req:\n        return 500\n    return 200\n",
+          "layer": "python_file_op",
+          "op": "write_text",
+          "path": "src/api.py"
+        },
+        {
+          "content": "def render(x):\n    if not x:\n        return ''\n    return str(x)\n",
+          "layer": "python_file_op",
+          "op": "write_text",
+          "path": "src/ui.py"
+        },
+        {
+          "content": "CACHE={}\ndef get(k):\n    return CACHE.get(k)\n",
+          "layer": "python_file_op",
+          "op": "write_text",
+          "path": "src/cache.py"
+        },
+        {
+          "content": "def normalize(s):\n    if not s:\n        return None\n    return s.strip()\n",
+          "layer": "python_file_op",
+          "op": "write_text",
+          "path": "src/util.py"
+        },
+        {
+          "content": "PORT=8080\ndef load():\n    return PORT or 8000\n",
+          "layer": "python_file_op",
+          "op": "write_text",
+          "path": "src/conf.py"
+        },
+        {
+          "content": "import logging\ndef emit(msg):\n    if not msg:\n        return\n    logging.info(msg)\n",
+          "layer": "python_file_op",
+          "op": "write_text",
+          "path": "src/log.py"
+        },
+        {
+          "content": "def fetch(url):\n    if not url:\n        raise ValueError()\n    return request(url)\n",
+          "layer": "python_file_op",
+          "op": "write_text",
+          "path": "src/net.py"
+        },
+        {
+          "content": "DATA=[]\ndef push(v):\n    if v is not None:\n        DATA.append(v)\n",
+          "layer": "python_file_op",
+          "op": "write_text",
+          "path": "src/store.py"
+        },
+        {
+          "content": "def main(args):\n    args=args or []\n    run(args)\n",
+          "layer": "python_file_op",
+          "op": "write_text",
+          "path": "src/cli.py"
+        },
+        {
+          "layer": "semantic_dom",
+          "op": "FILL_SEMANTIC",
+          "selector": {
+            "name": "Changelog",
+            "role": "textbox"
+          },
+          "value": "hetero 11-file fix"
+        },
+        {
+          "layer": "semantic_dom",
+          "op": "CLICK_SEMANTIC",
+          "selector": {
+            "name": "Ship",
+            "role": "button"
+          }
+        }
+      ],
+      "original_len": 15,
+      "post_state": {
+        "src/api.py": "def handle(req):\n    if not req:\n        return 500\n    return 200\n",
+        "src/auth.py": "def authenticate(token):\n    if not token:\n        return False\n    return token == 'secret'\n",
+        "src/cache.py": "CACHE={}\ndef get(k):\n    return CACHE.get(k)\n",
+        "src/cli.py": "def main(args):\n    args=args or []\n    run(args)\n",
+        "src/conf.py": "PORT=8080\ndef load():\n    return PORT or 8000\n",
+        "src/db.py": "def query(sql):\n    if not sql:\n        return []\n    return execute(sql)\n",
+        "src/log.py": "import logging\ndef emit(msg):\n    if not msg:\n        return\n    logging.info(msg)\n",
+        "src/net.py": "def fetch(url):\n    if not url:\n        raise ValueError()\n    return request(url)\n",
+        "src/store.py": "DATA=[]\ndef push(v):\n    if v is not None:\n        DATA.append(v)\n",
+        "src/ui.py": "def render(x):\n    if not x:\n        return ''\n    return str(x)\n",
+        "src/util.py": "def normalize(s):\n    if not s:\n        return None\n    return s.strip()\n"
+      },
+      "pre_state": {
+        "src/api.py": "def handle(req):\n    if req is None:\n        return 500\n    return 200\n",
+        "src/auth.py": "def authenticate(token):\n    if token is None:\n        return False\n    return token == 'secret'\n",
+        "src/cache.py": "CACHE={}\ndef get(k):\n    if k not in CACHE:\n        return None\n    return CACHE[k]\n",
+        "src/cli.py": "def main(args):\n    if args is None:\n        args=[]\n    run(args)\n",
+        "src/conf.py": "PORT=8080\ndef load():\n    if PORT is None:\n        return 8000\n    return PORT\n",
+        "src/db.py": "def query(sql):\n    if sql is None:\n        return []\n    return execute(sql)\n",
+        "src/log.py": "import logging\ndef emit(msg):\n    if msg is None:\n        return\n    logging.info(msg)\n",
+        "src/net.py": "def fetch(url):\n    if url is None:\n        raise ValueError()\n    return request(url)\n",
+        "src/store.py": "DATA=[]\ndef push(v):\n    if v is None:\n        return\n    DATA.append(v)\n",
+        "src/ui.py": "def render(x):\n    if x is None:\n        return ''\n    return str(x)\n",
+        "src/util.py": "def normalize(s):\n    if s == '':\n        return None\n    return s.strip()\n"
+      },
+      "pruned_count": 2
+    }
+  },
+  "schema": "PROJECT_BRAIN_CAUSAL_CUT_STORE_V1"
+}

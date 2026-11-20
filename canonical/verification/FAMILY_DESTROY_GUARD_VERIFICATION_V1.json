@@ -1,0 +1,40 @@
+{
+  "schema": "PROJECT_BRAIN_FAMILY_DESTROY_GUARD_VERIFICATION_V1",
+  "status": "VERIFIED__DESTROY_GUARD_EXERCISED",
+  "method": "content_a_generalized_write_would_destroy live probe + family predicate edit_of guard, zero model calls",
+  "caps": ["family_predicate_induction_v1.path_context_aware", "family_predicate_induction_v1.destroy_guard"],
+  "heldout": {
+    "teach_world_empty": {
+      "pre_state": {},
+      "trace": [{"layer": "python_file_op", "op": "write_text", "path": "geom.py", "content": "def new_name(): pass\nx=1\n"}],
+      "content_a_generalized_write_would_destroy": null,
+      "verdict": "CREATE_IN_EMPTY_SLOT__NOT_DESTRUCTIVE"
+    },
+    "replay_world_with_unrelated": {
+      "existing_file": "geom.py",
+      "existing_content": "def old_name(): pass\nunrelated_data = 'user secret'\n",
+      "abstract": [{"layer": "python_file_op", "op": "write_text", "path": "geom.py", "content": "def ?str0(): pass\nx=1\n"}],
+      "inst": [{"layer": "python_file_op", "op": "write_text", "path": "geom.py", "content": "def new_name(): pass\nx=1\n"}],
+      "content_a_generalized_write_would_destroy": "geom.py",
+      "verdict": "DESTRUCTIVE_OVERGENERALIZATION__CORRECTLY_DETECTED"
+    },
+    "family_edit_guard": {
+      "pre": {"geom.py": "def old_name(): pass\nx=1\n"},
+      "post": {"geom.py": "def new_name(): pass\nx=1\n"},
+      "postcondition": {"kind": "file_contains", "path": "geom.py", "contains": "def new_name(): pass", "edit_of": "geom.py", "edit_preserves_outside": true},
+      "destroy_negative": {"status": "GUARDED_BY_EDIT_PRESERVES_OUTSIDE"},
+      "verdict": "EDIT_PRESERVES_OUTSIDE_GUARD__OUTSIDE_CONTENT_PRESERVED"
+    },
+    "family_creation_no_guard": {
+      "pre": {},
+      "post": {"geom.py": "def new_name(): pass\nx=1\n"},
+      "postcondition": {"kind": "file_contains", "path": "geom.py", "contains": "def new_name(): pass"},
+      "destroy_negative": {"generalized_write_would_destroy": "geom.py", "why_rejected": "content_a_generalized_write_would_destroy__skill_must_not_replace_unread_file"},
+      "verdict": "CREATION_FAMILY_DOCUMENTS_DESTROY_RISK__REJECTS_IN_WORLD_WITH_UNRELATED_CONTENT"
+    }
+  },
+  "persistent_learned_bytes": 0,
+  "external_learned_capability_calls": 0,
+  "repro": "python3 -c \"from canonical.swe_kernel.causal_trace_to_skill_compiler_v1 import content_a_generalized_write_would_destroy; print(content_a_generalized_write_would_destroy([{'layer':'python_file_op','op':'write_text','path':'geom.py','content':'def ?str0(): pass\\nx=1\\n'}], [{'layer':'python_file_op','op':'write_text','path':'geom.py','content':'def new_name(): pass\\nx=1\\n'}], cwd='/tmp/with_unrelated_geom'))\"",
+  "prior_verification": "canonical/swe_kernel/causal_trace_to_skill_compiler_v1.py:content_a_generalized_write_would_destroy (measured 2026-11-11)"
+}
