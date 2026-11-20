@@ -310,7 +310,10 @@ def enumerate_states(start: pathlib.Path, target: str, workspace: pathlib.Path,
                     else:
                         rows.append(Judgment(origin, after, child, "HOLE", plan + (edge.name,)))
                 if key in seen:
-                    shutil.rmtree(child, ignore_errors=True)
+                    # A judged row is evidence: keep its path so a later audit can re-read it.
+                    # Duplicate states are still excluded from the frontier.
+                    if not literal:
+                        shutil.rmtree(child, ignore_errors=True)
                     continue
                 seen.add(key)
                 next_frontier.append((child, plan + (edge.name,), after))

@@ -2,16 +2,16 @@
  "action_id": "COVERAGE_COMPLETES_THE_CLOSURE_20261120_V1",
  "action_intent_id": "COVERAGE_COMPLETES_THE_CLOSURE_20261120_V1",
  "action_kind": "REAL_CAPABILITY_ACQUISITION",
- "action_summary": "A model-free coverage audit names applicable laws with zero judged holes, constructs the missing class with real git executions, minimally repairs a contradictory literal goal, refits the closure, and re-tests transfer. Before refit the held repository has 52 accepted holes and 0 false rejects; after refit the three-law closure has 0/0 on held and training rows. The old literal planner finds a destructive plan; with the repaired goal the closed planner finds a legitimate one. C1-C6 true in the producer receipt; 0 parameters, 0 model calls. Not independent verification, not \u00a76 completion.",
+ "action_summary": "Two model-free closures of the judged-class blind spot. A coverage audit names laws with no witnessing holes, constructs the missing class by real git execution, minimally repairs a contradictory goal, refits, and transfers: 52 held holes before, 0 after, 0 false rejects on pypa/pyproject-hooks. Then a verifier is derived from one observed damaged origin (facts only: refs, status, stash digests, worktree bytes, target tree) with no task string or supplied judge; it agrees with the old supplied judge on 359/359 judged states and selects the same unique three-law closure with 0/0 held errors. C1-C6 and D1-D5 true in producer receipts; 14/14 targeted tests pass; 0 parameters, 0 model calls. Not independent verification and not \u00a76 completion.",
  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
  "agent_orientation": {
   "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
   "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
   "conversation_memory_is_authority": false,
-  "earlier_routes_exhausted_reason": "Bigger vocabularies, transition models, statistical pruning and hand-written goals were already measured or rejected; the prior closure still accepted 16 unjudged rescue-class holes. The remaining bottleneck was class coverage and a contradictory goal, not planner strength or law count.",
+  "earlier_routes_exhausted_reason": "Bigger vocabularies, transition models, statistical pruning and hand-written goals or judges were already measured or rejected. The measured failures were an unjudged class, a contradictory goal, and a verifier carrying a task string, not planner strength.",
   "incremental_spend_usd": 0,
   "independent_verification_completed": false,
-  "independent_verification_note": "Producer-run sandbox only. C1-C6 are true in the coverage receipt; no independent verifier, no benchmark score, no capability or terminal credit.",
+  "independent_verification_note": "Producer-run sandbox only. C1-C6 and D1-D5 are true in two receipts; 0 disagreements over 359 rows; no independent verifier, benchmark score, capability or terminal credit.",
   "laws_read_this_session": [
    "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
    "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
@@ -32,9 +32,13 @@
   "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
   "progress_evidence_paths": [
    "COVERAGE_COMPLETES_THE_CLOSURE_20261120_V1.md",
+   "ONE_ORIGIN_DERIVES_THE_JUDGE_20261120_V1.md",
    "canonical/tools/coverage_completes_the_closure_v1.py",
+   "canonical/tools/one_origin_derives_the_judge_v1.py",
    "canonical/tests/test_coverage_completes_the_closure_v1.py",
+   "canonical/tests/test_one_origin_derives_the_judge_v1.py",
    "canonical/verification/COVERAGE_COMPLETES_THE_CLOSURE_20261120_V1.json",
+   "canonical/verification/ONE_ORIGIN_DERIVES_THE_JUDGE_20261120_V1.json",
    "canonical/state/COVERAGE_CLOSURE_STORE_20261120_V1.json"
   ],
   "route_class": "SYNTHESIZE_NEW_PRIMITIVE",
@@ -42,15 +46,15 @@
   "terminal_achieved": false
  },
  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
- "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The closure was learned only from judged classes: applicable laws with zero witnessing holes were untested, and a contradictory literal goal prevented a destructive class from producing discriminating judgments.",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A closure learned from judged classes still depended on a supplied per-class verifier containing a task string; the verifier had to be computed from one observed origin.",
  "canonical_base_commit": "e1ce165d9e18a79f8e604adc788c61ba2c68732f",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
- "causal_blocker": "The closure was learned only from judged classes: applicable laws with zero witnessing holes were untested, and a contradictory literal goal prevented a destructive class from producing discriminating judgments.",
+ "causal_blocker": "A closure learned from judged classes still depended on a supplied per-class verifier containing a task string; the verifier had to be computed from one observed origin.",
  "date": "2026-11-20",
- "expected_parent_change": "A model-free coverage audit names applicable laws with zero judged holes, constructs the missing class with real git executions, minimally repairs a contradictory literal goal, refits the closure, and re-tests transfer. Before refit the held repository has 52 accepted holes and 0 false rejects; after refit the three-law closure has 0/0 on held and training rows. The old literal planner finds a destructive plan; with the repaired goal the closed planner finds a legitimate one. C1-C6 true in the producer receipt; 0 parameters, 0 model calls. Not independent verification, not \u00a76 completion.",
- "expected_parent_frontier_change": "A model-free coverage audit names applicable laws with zero judged holes, constructs the missing class with real git executions, minimally repairs a contradictory literal goal, refits the closure, and re-tests transfer. Before refit the held repository has 52 accepted holes and 0 false rejects; after refit the three-law closure has 0/0 on held and training rows. The old literal planner finds a destructive plan; with the repaired goal the closed planner finds a legitimate one. C1-C6 true in the producer receipt; 0 parameters, 0 model calls. Not independent verification, not \u00a76 completion.",
+ "expected_parent_change": "Two model-free closures of the judged-class blind spot. A coverage audit names laws with no witnessing holes, constructs the missing class by real git execution, minimally repairs a contradictory goal, refits, and transfers: 52 held holes before, 0 after, 0 false rejects on pypa/pyproject-hooks. Then a verifier is derived from one observed damaged origin (facts only: refs, status, stash digests, worktree bytes, target tree) with no task string or supplied judge; it agrees with the old supplied judge on 359/359 judged states and selects the same unique three-law closure with 0/0 held errors. C1-C6 and D1-D5 true in producer receipts; 14/14 targeted tests pass; 0 parameters, 0 model calls. Not independent verification and not \u00a76 completion.",
+ "expected_parent_frontier_change": "Two model-free closures of the judged-class blind spot. A coverage audit names laws with no witnessing holes, constructs the missing class by real git execution, minimally repairs a contradictory goal, refits, and transfers: 52 held holes before, 0 after, 0 false rejects on pypa/pyproject-hooks. Then a verifier is derived from one observed damaged origin (facts only: refs, status, stash digests, worktree bytes, target tree) with no task string or supplied judge; it agrees with the old supplied judge on 359/359 judged states and selects the same unique three-law closure with 0/0 held errors. C1-C6 and D1-D5 true in producer receipts; 14/14 targeted tests pass; 0 parameters, 0 model calls. Not independent verification and not \u00a76 completion.",
  "explicit_user_authorization": [
   "Why can't we just give our model the most advanced coding actions, let it experience them once, and have it learn them? Can't we do this now?",
   "we are building our own model. never reach for another model or use it and call it ours",
@@ -67,7 +71,7 @@
   "Work in branch, merge only when complete (fastest)",
   "Merge once, not 10 times."
  ],
- "falsification_condition": "FALSIFIED if an applicable law still has zero witnessing rows after construction, if more than one goal clause must be dropped, if the refitted closure accepts any held hole or rejects any legitimate state, or if any parameter or model call is used.",
+ "falsification_condition": "FALSIFIED if an applicable law still has no witness after construction, a goal needs more than one clause repair, the refitted closure accepts any hole or rejects any legitimate state, the derived judge disagrees with the supplied judge, or any parameter/model call is used.",
  "generic_repair_from_single_probe": false,
  "governance_change": false,
  "highest_leverage_now": true,
@@ -91,7 +95,7 @@
    "model_calls": 0,
    "parameters_stored": 0,
    "transitions_predicted": 0,
-   "seconds": 390.5,
+   "seconds": 756.7,
    "edges_executed": "219 constructed rows plus held-out evaluation over 19 legitimate states"
   },
   "environment": {
@@ -156,38 +160,56 @@
     "C4_old_holes_are_rejected": true,
     "C5_zero_false_rejects_and_zero_model_calls": true,
     "C6_old_plan_destructive_new_plan_repairs": true
+   },
+   "derived_judge": {
+    "train_rows": 180,
+    "held_rows": 179,
+    "disagreements": 0,
+    "closure": [
+     "ref_preserve",
+     "tracking_preserve",
+     "stash_restore"
+    ],
+    "held_false_accepts": 0,
+    "held_false_rejects": 0,
+    "seconds": 366.2
    }
   }
  },
- "next_step": "Remove the supplied judge: derive a judgment from one observed repair plus repository checks, then attack a class whose setup sequence was not in the construction set.",
+ "next_step": "Start from a state the machine reaches without a supplied damage class, derive its verifier, and refit under a held-out class; falsify on any wrong verdict or transfer error.",
  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
  "prior_work_reused": [
   "canonical/tools/goal_closure_v1.py",
   "canonical/tests/test_goal_closure_v1.py",
   "canonical/tools/coverage_is_the_bottleneck_not_hypotheses_v1.py",
-  "canonical/tools/the_counterexample_is_the_next_experiment_v1.py"
+  "canonical/tools/the_counterexample_is_the_next_experiment_v1.py",
+  "canonical/tools/coverage_completes_the_closure_v1.py"
  ],
  "probe_specific": false,
  "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
  "progress_evidence_paths": [
   "COVERAGE_COMPLETES_THE_CLOSURE_20261120_V1.md",
+  "ONE_ORIGIN_DERIVES_THE_JUDGE_20261120_V1.md",
   "canonical/tools/coverage_completes_the_closure_v1.py",
+  "canonical/tools/one_origin_derives_the_judge_v1.py",
   "canonical/tests/test_coverage_completes_the_closure_v1.py",
+  "canonical/tests/test_one_origin_derives_the_judge_v1.py",
   "canonical/verification/COVERAGE_COMPLETES_THE_CLOSURE_20261120_V1.json",
+  "canonical/verification/ONE_ORIGIN_DERIVES_THE_JUDGE_20261120_V1.json",
   "canonical/state/COVERAGE_CLOSURE_STORE_20261120_V1.json"
  ],
- "real_outcome": "A model-free coverage audit names applicable laws with zero judged holes, constructs the missing class with real git executions, minimally repairs a contradictory literal goal, refits the closure, and re-tests transfer. Before refit the held repository has 52 accepted holes and 0 false rejects; after refit the three-law closure has 0/0 on held and training rows. The old literal planner finds a destructive plan; with the repaired goal the closed planner finds a legitimate one. C1-C6 true in the producer receipt; 0 parameters, 0 model calls. Not independent verification, not \u00a76 completion.",
+ "real_outcome": "Two model-free closures of the judged-class blind spot. A coverage audit names laws with no witnessing holes, constructs the missing class by real git execution, minimally repairs a contradictory goal, refits, and transfers: 52 held holes before, 0 after, 0 false rejects on pypa/pyproject-hooks. Then a verifier is derived from one observed damaged origin (facts only: refs, status, stash digests, worktree bytes, target tree) with no task string or supplied judge; it agrees with the old supplied judge on 359/359 judged states and selects the same unique three-law closure with 0/0 held errors. C1-C6 and D1-D5 true in producer receipts; 14/14 targeted tests pass; 0 parameters, 0 model calls. Not independent verification and not \u00a76 completion.",
  "recursive_obs": {
   "canonical_base_commit": "e1ce165d9e18a79f8e604adc788c61ba2c68732f",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
-   "a hand-written goal clause: minimally repaired from satisfiability, not guessed",
+   "a hand-written goal clause: selected by minimal satisfiability repair",
+   "a supplied per-class judge: derived from one origin's facts",
    "learned transition models: real copies are successors",
-   "statistical pruning: unsound deletion lost a real task earlier",
-   "stored parameters: closure names are in a deletable JSON store"
+   "stored parameters: law names are in a deletable JSON store"
   ],
   "expected_parent_frontier_change": "Deletes the world model from planning. On a real clone of pypa/packaging, 6 real damaged states and 10 real git actions, the planner copies the state, runs the action and reads the exit status: one execution yields both applicability and the exact successor, so the search runs over real directories and predicts nothing (transitions_predicted = 0). Pruning on learned conditions solves 6 of 7 in 658 executions (318 edges deleted); the no-knowledge control solves 7 of 7 in 1315; using the same knowledge only to ORDER solves 7 of 7 in 1337. Pruning buys 50% and loses one task in seven, and the conditions pruned on are named 0 of 10. Three goals were falsified by plans: cleanliness is met by dropping the stash (destroying the work), identity with the starting commit plus preserve is unsatisfiable (204 executions, 0 solved), and the content goal was met by committing the mess onto the branch it was on until every other branch tip was pinned. The remaining designed part is the dedup KEY: coarse key 0 of 3 hard tasks at 1500 expansions; keyed on what git reports, solved at depth 5, 6, 6. 0 parameters, 0 model calls, 0 transitions predicted.",
-  "expected_parent_level_state_change": "A model-free coverage audit names applicable laws with zero judged holes, constructs the missing class with real git executions, minimally repairs a contradictory literal goal, refits the closure, and re-tests transfer. Before refit the held repository has 52 accepted holes and 0 false rejects; after refit the three-law closure has 0/0 on held and training rows. The old literal planner finds a destructive plan; with the repaired goal the closed planner finds a legitimate one. C1-C6 true in the producer receipt; 0 parameters, 0 model calls. Not independent verification, not \u00a76 completion.",
+  "expected_parent_level_state_change": "Two model-free closures of the judged-class blind spot. A coverage audit names laws with no witnessing holes, constructs the missing class by real git execution, minimally repairs a contradictory goal, refits, and transfers: 52 held holes before, 0 after, 0 false rejects on pypa/pyproject-hooks. Then a verifier is derived from one observed damaged origin (facts only: refs, status, stash digests, worktree bytes, target tree) with no task string or supplied judge; it agrees with the old supplied judge on 359/359 judged states and selects the same unique three-law closure with 0/0 held errors. C1-C6 and D1-D5 true in producer receipts; 14/14 targeted tests pass; 0 parameters, 0 model calls. Not independent verification and not \u00a76 completion.",
   "independent_verification_required": true,
   "iteration_limit": 1,
   "obs_blocker": {
@@ -197,7 +219,7 @@
     "bypass verification",
     "substitute a model judge"
    ],
-   "surviving_causal_blocker": "The closure was learned only from judged classes: applicable laws with zero witnessing holes were untested, and a contradictory literal goal prevented a destructive class from producing discriminating judgments."
+   "surviving_causal_blocker": "A closure learned from judged classes still depended on a supplied per-class verifier containing a task string; the verifier had to be computed from one observed origin."
   },
   "obs_capability": {
    "existing_inherited_routes_checked": [
@@ -211,7 +233,7 @@
    "capability_work_deleted": [
     "the hand-written preservation clause"
    ],
-   "surviving_gap": "automatic construction of a missing judged class and minimal repair of a contradictory goal"
+   "surviving_gap": "automatic discovery of an origin and repair vocabulary without supplied damage classes"
   },
   "obs_goal": {
    "real_outcome": "A repair of a real repository with no world model, verified by the repository's own queries.",
@@ -220,16 +242,16 @@
     "a stored lesson that agrees but is not equivalent",
     "a hand-written acceptance clause"
    ],
-   "surviving_necessity": "the refitted closure must reject the constructed holes and accept legitimate states on a different repository"
+   "surviving_necessity": "the derived judge must agree with the supplied judge and the refitted closure must reject all holes without rejecting legitimate states"
   },
   "obs_inherited_system": {
-   "downstream_work_to_delete_or_supersede": "only the unjudged-class transfer claim in the earlier closure report",
+   "downstream_work_to_delete_or_supersede": "the supplied per-class preserve flag and task-string judge in the coverage experiment",
    "adjacent_capabilities_absorbed": "the real-state search and the repository judge from the prior round.",
-   "fresh_reuse_plan": "Reuse the same damage algebra and refit store for any future class-coverage claim."
+   "fresh_reuse_plan": "Reuse derived verifiers and the law store for any future class-coverage claim."
   },
   "obs_obs": {
    "analysis_steps_deleted_or_cached": "No world model and no learned prior: one real execution per edge, cached as the search node.",
-   "search_stop_decision": "Stop when every applicable law has a witnessing row and both held-out error counts are zero; report abstentions.",
+   "search_stop_decision": "Stop when every applicable law has a witness, both held-out errors are zero and the derived judge has zero disagreements; report abstentions.",
    "affected_layers_only_on_revalidation": true
   },
   "obs_solution": {
@@ -247,7 +269,7 @@
     {
      "route": "audit, construct, repair, refit, re-test",
      "rank": 1,
-     "why": "52 -> 0 false accepts with 0 false rejects and no new parameters"
+     "why": "52 -> 0 false accepts and 359/359 judge agreement with 0 parameters"
     },
     {
      "route": "hand-write more clauses",
@@ -271,9 +293,9 @@
   "obs_verification": {
    "direct_real_effect_verification_considered": true,
    "existing_oracle_considered": true,
-   "synthetic_verification_necessity": "None: repository refs, file bytes and git status are oracles."
+   "synthetic_verification_necessity": "None: repository refs, file bytes, stash digests and supplied-judge agreement are oracles."
   },
-  "real_outcome": "A model-free coverage audit names applicable laws with zero judged holes, constructs the missing class with real git executions, minimally repairs a contradictory literal goal, refits the closure, and re-tests transfer. Before refit the held repository has 52 accepted holes and 0 false rejects; after refit the three-law closure has 0/0 on held and training rows. The old literal planner finds a destructive plan; with the repaired goal the closed planner finds a legitimate one. C1-C6 true in the producer receipt; 0 parameters, 0 model calls. Not independent verification, not \u00a76 completion.",
+  "real_outcome": "Two model-free closures of the judged-class blind spot. A coverage audit names laws with no witnessing holes, constructs the missing class by real git execution, minimally repairs a contradictory goal, refits, and transfers: 52 held holes before, 0 after, 0 false rejects on pypa/pyproject-hooks. Then a verifier is derived from one observed damaged origin (facts only: refs, status, stash digests, worktree bytes, target tree) with no task string or supplied judge; it agrees with the old supplied judge on 359/359 judged states and selects the same unique three-law closure with 0/0 held errors. C1-C6 and D1-D5 true in producer receipts; 14/14 targeted tests pass; 0 parameters, 0 model calls. Not independent verification and not \u00a76 completion.",
   "required_capability": "enumeration of real successor states, minimal law selection from judgments, and an enforceable external closure store with no model calls",
   "route_frontier": {
    "challenger_routes": [
@@ -281,11 +303,12 @@
      "route": "AUDIT_UNJUDGED_CLASSES_CONSTRUCT_REPAIR_REFIT",
      "resolution": "SELECTED",
      "evidence": [
-      "52 held holes -> 0 after refit; 0 false rejects; C1-C6 true",
+      "52 held holes -> 0 after refit; 0 false rejects",
+      "359/359 agreement between derived and supplied judges",
       "old literal planner destructive, repaired-goal planner legitimate"
      ],
      "qualification_evidence": [
-      "canonical/verification/COVERAGE_COMPLETES_THE_CLOSURE_20261120_V1.json"
+      "canonical/verification/ONE_ORIGIN_DERIVES_THE_JUDGE_20261120_V1.json"
      ],
      "qualification_evidence_classes": [
       "DIRECT_PROBE"
@@ -303,7 +326,8 @@
      "route": "write_more_goal_clauses",
      "resolution": "DISQUALIFIED",
      "evidence": [
-      "contradictory goal admitted destructive plans; one clause had to be removed"
+      "contradictory goal admitted destructive plans; one clause had to be removed",
+      "supplied judge contained a task string"
      ],
      "qualification_evidence": [
       "canonical/verification/COVERAGE_COMPLETES_THE_CLOSURE_20261120_V1.json"
@@ -324,7 +348,7 @@
      "route": "use_a_model_judge",
      "resolution": "DISQUALIFIED",
      "evidence": [
-      "forbidden runtime model dependency"
+      "forbidden runtime model dependency; derived judge uses measured facts only"
      ],
      "qualification_evidence": [
       "canonical/verification/GOAL_CLOSURE_20261120_V1.json"
@@ -342,7 +366,7 @@
      }
     }
    ],
-   "checked_at_utc": "2026-11-20T11:25:06Z",
+   "checked_at_utc": "2026-11-20T11:46:34Z",
    "comparison_dimensions": [
     "CORRECTNESS",
     "CAPABILITY_STRENGTH",
@@ -354,7 +378,7 @@
    "discovery_required": true,
    "incumbent_route": "EXECUTE_THE_HOLE_CLOSE_THE_GOAL: JUDGE REAL STATES, SELECT THE MINIMAL PRESERVATION LAW, STORE IT EXTERNALLY",
    "max_age_hours": 2,
-   "negative_search_summary": "This session rejected a model judge, a larger law vocabulary, statistical pruning and hand-written clauses; the measured 52 held holes were caused by an unjudged class and a contradictory goal.",
+   "negative_search_summary": "This session rejected a model judge, a larger law vocabulary, statistical pruning, hand-written clauses and a task-string verifier; the measured 52 held holes and the supplied judge were the defects.",
    "query_families": [
     {
      "intent": "CAPABILITY_VECTOR",
@@ -382,12 +406,12 @@
    "selected_route": "EXECUTE_THE_HOLE_CLOSE_THE_GOAL: JUDGE REAL STATES, SELECT THE MINIMAL PRESERVATION LAW, STORE IT EXTERNALLY",
    "selected_route_preflight": {
     "all_required_dependencies_ready": true,
-    "checked_at_utc": "2026-11-20T11:25:06Z",
+    "checked_at_utc": "2026-11-20T11:46:34Z",
     "execution_dependencies": [
      {
       "dependency": "local Python 3.11 with pytest",
       "evidence": [
-       "pytest 9.2; 12/12 targeted tests pass on this branch"
+       "pytest 9.2; 14/14 targeted tests pass on this branch"
       ],
       "evidence_classes": [
        "DIRECT_PROBE"
@@ -402,7 +426,7 @@
      {
       "dependency": "real git repositories pypa/packaging and pypa/pyproject-hooks",
       "evidence": [
-       "both repositories cloned and measured for this receipt; commits recorded in the tool receipt"
+       "both repositories cloned and measured twice; commits recorded in the tool receipts"
       ],
       "evidence_classes": [
        "DIRECT_PROBE"
@@ -449,7 +473,8 @@
     "BRAIN_INHERITED": [
      "canonical/tools/goal_closure_v1.py",
      "canonical/tools/coverage_is_the_bottleneck_not_hypotheses_v1.py",
-     "canonical/verification/GOAL_CLOSURE_20261120_V1.json"
+     "canonical/verification/GOAL_CLOSURE_20261120_V1.json",
+     "canonical/verification/COVERAGE_COMPLETES_THE_CLOSURE_20261120_V1.json"
     ],
     "BROAD_WEB_OR_COMMUNITY": [
      "https://arxiv.org/html/2608.18482 (NeuroAssertion: coverage-driven assertion generation and CEGAR; inspiration only)",
@@ -476,8 +501,8 @@
   "selected_route": "BRANCH_AS_VERIFIER: COPY THE STATE, RUN THE ACTION, SEARCH REAL STATES, PREDICT NOTHING",
   "selected_surviving_route": "EXECUTE_THE_HOLE_CLOSE_THE_GOAL: JUDGE REAL STATES, SELECT THE MINIMAL PRESERVATION LAW, STORE IT EXTERNALLY",
   "selected_surviving_route_class": "DELETE_THE_WORLD_MODEL_KEEP_THE_VERIFIER",
-  "stop_condition": "Keep the closure external and deletable; never claim transfer to an unjudged class; report audited coverage beside every closure result; no benchmark or \u00a76 claim from this experiment.",
-  "why_selected_route_is_fastest_sufficient": "The same real-state searcher, judge interface and external law store already exist. The only missing primitive was a coverage audit plus constructive witness and minimal goal repair; adding a model or a larger action vocabulary would add runtime dependency without addressing the measured 52 accepted holes.",
+  "stop_condition": "Keep law stores external and deletable; never claim transfer to an unjudged class; report derived-versus-supplied disagreement beside every verifier result; no benchmark or \u00a76 claim from these experiments.",
+  "why_selected_route_is_fastest_sufficient": "The same real-state searcher and law store exist; the only missing objects were class coverage and a verifier computed from observed facts. Adding a model or a larger vocabulary would add dependency without addressing measured disagreements and false accepts.",
   "why_this_is_not_another_organ": "It removes an organ: the planner keeps no model of transitions, and the estimate of what an action will do is replaced by the action itself."
  },
  "required_capability": "enumeration of real successor states, minimal law selection from judgments, and an enforceable external closure store with no model calls",
@@ -486,12 +511,12 @@
  "scope_complete_discharge": false,
  "selected_route": "EXECUTE_THE_HOLE_CLOSE_THE_GOAL: JUDGE REAL STATES, SELECT THE MINIMAL PRESERVATION LAW, STORE IT EXTERNALLY",
  "status": "PROPOSED__PRODUCER_MEASURED__NO_MODEL_CALLS__INDEPENDENT_VERIFICATION_OPEN",
- "stop_condition": "Keep the closure external and deletable; never claim transfer to an unjudged class; report audited coverage beside every closure result; no benchmark or \u00a76 claim from this experiment.",
+ "stop_condition": "Keep law stores external and deletable; never claim transfer to an unjudged class; report derived-versus-supplied disagreement beside every verifier result; no benchmark or \u00a76 claim from these experiments.",
  "terminal_credit_delta": 0,
  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
  "truth": {
   "achieved": false,
-  "the_law_this_round_adds": "A law with no witnessing row is not a validated law; make the missing class executable, repair the contradictory goal minimally, and refit. Robustness is measured by zero false accepts and zero false rejects after transfer, not by agreement."
+  "the_law_this_round_adds": "A law with no witnessing row is unvalidated; construct the class and repair the goal minimally. A verifier can be computed from one origin's measured facts without a task string, and its agreement with the old judge is an auditable count, not an assumption."
  },
  "user_authorized_governance_change": false,
  "v22_prewrite_admission": {
@@ -539,12 +564,13 @@
  "verification": {
   "authority": "NONE__PRODUCER_RUN_SANDBOX",
   "commands": [
-   "python3 canonical/tools/coverage_completes_the_closure_v1.py --root /tmp/coverage-run2 --train-repo https://github.com/pypa/packaging.git --held-repo https://github.com/pypa/pyproject-hooks.git --receipt canonical/verification/COVERAGE_COMPLETES_THE_CLOSURE_20261120_V1.json --store canonical/state/COVERAGE_CLOSURE_STORE_20261120_V1.json",
-   "python3 -m pytest canonical/tests/test_coverage_completes_the_closure_v1.py canonical/tests/test_goal_closure_v1.py -q"
+   "python3 canonical/tools/coverage_completes_the_closure_v1.py --root /tmp/coverage-run2 --receipt canonical/verification/COVERAGE_COMPLETES_THE_CLOSURE_20261120_V1.json --store canonical/state/COVERAGE_CLOSURE_STORE_20261120_V1.json",
+   "python3 canonical/tools/one_origin_derives_the_judge_v1.py --root /tmp/one-origin-run2 --receipt canonical/verification/ONE_ORIGIN_DERIVES_THE_JUDGE_20261120_V1.json",
+   "python3 -m pytest canonical/tests/test_goal_closure_v1.py canonical/tests/test_coverage_completes_the_closure_v1.py canonical/tests/test_one_origin_derives_the_judge_v1.py -q"
   ],
   "expected": {
-   "tests": "12 passed",
-   "acceptance": "C1-C6 true in producer run"
+   "tests": "14 passed",
+   "acceptance": "C1-C6 and D1-D5 true in two producer receipts"
   }
  },
  "weakens_existing_guard": false
