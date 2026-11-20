@@ -1,0 +1,15 @@
+{
+ "schema": "BRAIN_SENSOR_REQUEST_STORE_V1",
+ "request": {
+  "field": "st_mode"
+ },
+ "learned_relation": {
+  "kind": "new_path_field_value",
+  "field": "st_mode",
+  "value": 16877
+ },
+ "derived_from": "one positive execution plus stability repeat",
+ "removable": true,
+ "parameters": 0,
+ "model_calls": 0
+}
