@@ -258,12 +258,23 @@ def _signature(fn: ast.FunctionDef | ast.AsyncFunctionDef) -> dict[str, Any]:
 
 
 def _declined_names(fn: ast.FunctionDef | ast.AsyncFunctionDef) -> list[str]:
+    """Names of dangerous functions actually CALLED in this function body.
+
+    Only flags names that appear as the callee of a `Call` node, not names that
+    are merely mentioned in comments, docstrings, or string literals. A function
+    that documents ``open()`` in a docstring is safe to call; a function that
+    actually calls ``open()`` is not. This lets more functions have laws
+    confirmed, strengthening the error signal without executing dangerous code
+    (execution happens in a bounded child process regardless).
+    """
     hits: list[str] = []
     for node in ast.walk(fn):
-        if isinstance(node, ast.Name) and node.id in DANGEROUS_NAMES:
-            hits.append(node.id)
-        elif isinstance(node, ast.Attribute) and node.attr in DANGEROUS_NAMES:
-            hits.append(node.attr)
+        if isinstance(node, ast.Call):
+            func = node.func
+            if isinstance(func, ast.Name) and func.id in DANGEROUS_NAMES:
+                hits.append(func.id)
+            elif isinstance(func, ast.Attribute) and func.attr in DANGEROUS_NAMES:
+                hits.append(func.attr)
     ordered: list[str] = []
     for hit in hits:
         if hit not in ordered:
