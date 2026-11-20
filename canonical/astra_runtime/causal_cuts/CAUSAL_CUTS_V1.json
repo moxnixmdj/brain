@@ -799,7 +799,8 @@
             "if url is None:": "if url is None:",
             "if v is None:": "if v is None:",
             "if x is None:": "if x is None:",
-            "return CACHE[k]": "return CACHE[k]"
+            "return CACHE[k]": "return CACHE[k]",
+            "CACHE={'a': 1}": "CACHE={'a': 1}"
           }
         }
       },
