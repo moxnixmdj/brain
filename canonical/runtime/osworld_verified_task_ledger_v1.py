@@ -31,13 +31,17 @@ benchmark score, capability credit or independent verification of the agent.
 """
 from __future__ import annotations
 
+import json
 import re
+from pathlib import Path
 from typing import Any, Callable, Mapping, Sequence
 
+from canonical.runtime.generic_tool_argument_binder_v1 import canonical_field
 from canonical.runtime.osworld_v21_state_ops_v1 import StateOpsError, _path
 from canonical.runtime.osworld_v21_workflow_policy_v1 import split_explicit_subgoals
 
 SCHEMA = "BRAIN_OSWORLD_VERIFIED_TASK_LEDGER_V1"
+WEB_APP_REGISTRY = Path(__file__).with_name("osworld_v21_web_app_ops_registry_v1.json")
 
 # A path must start at a boundary that is not part of a URL or another token, and
 # must use only characters the pinned state-op compiler can represent safely.
@@ -51,6 +55,17 @@ _RELATION_RE = re.compile(
     re.I,
 )
 _RESPECTIVELY_RE = re.compile(r"\brespectively\b", re.I)
+_APP_FIELD_RE = re.compile(
+    r"\b(subject|recipient|to|body|content|message|title|name|status|amount|date|description)\s+"
+    r"(?:is\s+|as\s+|of\s+)?[\"\u201c\x27]([^\"\u201d\x27]{1,500})[\"\u201d\x27]",
+    re.I,
+)
+_APP_VALUE_FIRST_RE = re.compile(
+    r"[\"\u201c\x27]([^\"\u201d\x27]{1,500})[\"\u201d\x27]\s+"
+    r"(?:as\s+)?(?:the\s+)?"
+    r"(subject|recipient|to|body|content|message|title|name|status|amount|date|description)\b",
+    re.I,
+)
 
 _MUTATING_OPS = frozenset({
     "MKDIR", "WRITE_TEXT", "COPY", "MOVE", "DELETE", "TEXT_REPLACE",
@@ -137,6 +152,129 @@ def _base_requirement(clause: str, path: str) -> dict[str, Any]:
     }
 
 
+def _web_app_specs() -> dict[str, dict[str, Any]]:
+    """Read the external operation registry; no app/operation is hard-coded here."""
+    try:
+        raw = json.loads(WEB_APP_REGISTRY.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {}
+    apps = raw.get("apps") if isinstance(raw, Mapping) else None
+    specs: dict[str, dict[str, Any]] = {}
+    if not isinstance(apps, Mapping):
+        return specs
+    for name, spec in apps.items():
+        if not isinstance(spec, Mapping):
+            continue
+        operations = spec.get("operations")
+        observations = sorted(
+            op for op in (operations or {})
+            if isinstance(op, str) and op.casefold().startswith("observe")
+        ) if isinstance(operations, Mapping) else []
+        if len(observations) != 1:
+            continue
+        hints = [name]
+        hints.extend(str(x) for x in (spec.get("url_hints") or []) if len(str(x)) >= 3)
+        specs[str(name)] = {
+            "app": str(name), "observation": observations[0], "hints": hints,
+        }
+    return specs
+
+
+def _app_mentions(clause: str, specs: Mapping[str, Mapping[str, Any]]) -> list[str]:
+    mentions: list[str] = []
+    for name, spec in specs.items():
+        for hint in spec.get("hints") or []:
+            pattern = r"(?<![A-Za-z0-9])" + re.escape(str(hint)) + r"(?![A-Za-z0-9])"
+            if re.search(pattern, clause, re.I):
+                mentions.append(name)
+                break
+    return sorted(set(mentions))
+
+
+def _app_field_values(clause: str) -> list[tuple[str, str]]:
+    pairs: list[tuple[str, str]] = []
+    for match in _APP_FIELD_RE.finditer(clause):
+        pairs.append((canonical_field(match.group(1)), str(match.group(2)).strip()))
+    for match in _APP_VALUE_FIRST_RE.finditer(clause):
+        pairs.append((canonical_field(match.group(2)), str(match.group(1)).strip()))
+    out: list[tuple[str, str]] = []
+    for pair in pairs:
+        if all(str(pair[0]) != str(x[0]) or str(pair[1]) != str(x[1]) for x in out):
+            out.append(pair)
+    return out
+
+
+def _compile_app_requirements(clause: str) -> tuple[list[dict[str, Any]], list[str]]:
+    specs = _web_app_specs()
+    apps = _app_mentions(clause, specs)
+    if not apps:
+        return [], []
+    if len(apps) > 1:
+        return [], ["AMBIGUOUS_APP_IN_CLAUSE"]
+    app = apps[0]
+    pairs = _app_field_values(clause)
+    if not pairs:
+        return [], ["APP_GOAL_NOT_MACHINE_CHECKABLE"]
+    spec = specs[app]
+    requirements = []
+    for field, value in pairs:
+        requirements.append({
+            "kind": "APP_STATE_FIELD", "app": app, "field": field, "value": value,
+            "op": spec["observation"], "ops": [],
+        })
+    return requirements, []
+
+
+def _record_has_field_value(value: Any, field: str, wanted: str, depth: int = 0) -> bool:
+    if depth > 10:
+        return False
+    if isinstance(value, Mapping):
+        for key, item in value.items():
+            if isinstance(key, str) and canonical_field(key) == field:
+                if isinstance(item, (str, int, float, bool)) and str(item).strip() == wanted:
+                    return True
+            if _record_has_field_value(item, field, wanted, depth + 1):
+                return True
+    elif isinstance(value, Sequence) and not isinstance(value, (str, bytes, bytearray)):
+        return any(_record_has_field_value(item, field, wanted, depth + 1) for item in value)
+    return False
+
+
+def _app_pass_row_index(rows: list[Mapping[str, Any]], requirement: Mapping[str, Any]) -> int | None:
+    hit: int | None = None
+    for index, row in enumerate(rows):
+        if row.get("operation_error"):
+            continue
+        submitted = row.get("submitted_web_app_operation")
+        result = row.get("web_app_result")
+        if not (isinstance(submitted, Mapping) and isinstance(result, Mapping)):
+            continue
+        if result.get("ok") is not True:
+            continue
+        if (str(submitted.get("app") or "") != requirement.get("app")
+                or str(submitted.get("operation") or "") != requirement.get("op")):
+            continue
+        if _record_has_field_value(result.get("result"), str(requirement.get("field")),
+                                   str(requirement.get("value"))):
+            hit = index
+    return hit
+
+
+def _web_app_mutation(row: Mapping[str, Any]) -> set[str] | None:
+    """A non-observation product op has unknown scope and invalidates all app evidence."""
+    submitted = row.get("submitted_web_app_operation")
+    if isinstance(submitted, Mapping):
+        operation = str(submitted.get("operation") or "")
+        if operation and not operation.casefold().startswith("observe"):
+            return None
+    app_result = row.get("app_result")
+    if isinstance(app_result, Mapping):
+        operation = str(app_result.get("operation") or "")
+        if operation and not operation.casefold().startswith("observe"):
+            return None
+    return set()
+
+
 def _bind_clause(
     clause: str,
     path_spans: Sequence[Mapping[str, Any]],
@@ -207,19 +345,25 @@ def compile_requirements(instruction: Any) -> tuple[list[dict[str, Any]], list[s
         local, local_errors = _bind_clause(clause, paths, quotes)
         errors.extend(local_errors)
         requirements.extend(local)
+        app_requirements, app_errors = _compile_app_requirements(clause)
+        errors.extend(app_errors)
+        requirements.extend(app_requirements)
 
-    by_path: dict[str, dict[str, Any]] = {}
+    by_key: dict[tuple[str, ...], dict[str, Any]] = {}
     for requirement in requirements:
-        path = str(requirement.get("path"))
-        previous = by_path.get(path)
+        if requirement.get("kind") == "APP_STATE_FIELD":
+            key = ("APP", str(requirement.get("app")), str(requirement.get("field")))
+        else:
+            key = ("PATH", str(requirement.get("path")))
+        previous = by_key.get(key)
         if previous is not None and previous != requirement:
-            errors.append("CONFLICTING_REQUIREMENTS:" + path)
+            errors.append("CONFLICTING_REQUIREMENTS:" + ":".join(key))
             continue
-        by_path[path] = requirement
+        by_key[key] = requirement
 
-    if not by_path:
+    if not by_key:
         errors.append("NO_EXPLICIT_STATE_PATH")
-    return [by_path[key] for key in sorted(by_path)], sorted(set(errors))
+    return [by_key[key] for key in sorted(by_key)], sorted(set(errors))
 
 
 def assertion_ops(requirement: Mapping[str, Any]) -> list[dict[str, Any]]:
@@ -339,29 +483,43 @@ def audit(state: Mapping[str, Any], requirements: Sequence[Mapping[str, Any]]) -
     unknown (for example ``RUN_CLI``) is treated as global and invalidates all.
     """
     rows = _rows(state)
-    mutations: list[tuple[int, set[str] | None]] = [
-        (index, _mutated_paths(row)) for index, row in enumerate(rows)
-    ]
-    last_mutation = max((index for index, paths in mutations if paths is not None or paths is None),
-                        default=-1)
+    mutations: list[tuple[int, set[str] | None]] = []
+    for index, row in enumerate(rows):
+        paths = _mutated_paths(row)
+        web = _web_app_mutation(row)
+        combined = None if paths is None or web is None else set(paths or set()) | set(web)
+        mutations.append((index, combined))
+    last_mutation = max(
+        (index for index, mutated in mutations if mutated is None or mutated),
+        default=-1,
+    )
 
     evidence: list[dict[str, Any]] = []
     for requirement in requirements:
-        index = _pass_row_index(rows, requirement)
+        is_app = requirement.get("kind") == "APP_STATE_FIELD"
+        index = (_app_pass_row_index(rows, requirement) if is_app
+                 else _pass_row_index(rows, requirement))
         path = str(requirement.get("path") or "")
         invalidated_by: list[int] = []
         if index is not None:
             for mutation_index, mutated in mutations:
                 if mutation_index <= index:
                     continue
-                if mutated is None or path in mutated:
+                if mutated is None or (not is_app and path in (mutated or set())):
                     invalidated_by.append(mutation_index)
         verified = index is not None and not invalidated_by
         evidence.append({
             "kind": requirement.get("kind"),
             "path": requirement.get("path"),
+            "app": requirement.get("app"),
+            "field": requirement.get("field"),
+            "value": requirement.get("value"),
             "verified": verified,
-            "basis": "ADAPTER_VISIBLE_GUEST_PASS_RECEIPT_AFTER_LAST_PATH_MUTATION" if verified else "NONE",
+            "basis": (
+                "PRODUCT_NATIVE_READBACK_AFTER_LAST_MUTATION" if verified and is_app else
+                "ADAPTER_VISIBLE_GUEST_PASS_RECEIPT_AFTER_LAST_PATH_MUTATION" if verified else
+                "NONE"
+            ),
             "pass_row_index": index,
             "last_mutation_row_index": last_mutation,
             "invalidated_by_rows": invalidated_by,
@@ -438,17 +596,32 @@ def decide(
     # let an unverified value be reported as completion. Nothing is emitted
     # until the ambiguity is resolved by a clearer instruction.
     ops: list[dict[str, Any]] = []
+    app_action: dict[str, Any] | None = None
     if not errors:
         for requirement, evidence in zip(requirements, ledger["evidence"]):
             if evidence["verified"]:
                 continue
+            if requirement.get("kind") == "APP_STATE_FIELD":
+                if app_action is None:
+                    app_action = {
+                        "type": "WEB_APP_OP",
+                        "app": requirement.get("app"),
+                        "operation": requirement.get("op"),
+                        "args": {},
+                    }
+                continue
             ops.extend(assertion_ops(requirement))
     receipt["withheld_reason"] = (
-        "UNRESOLVED_REQUIREMENT" if errors or not ops else "FRESH_PASS_REQUIRED"
+        "UNRESOLVED_REQUIREMENT" if errors else
+        "FRESH_APP_READBACK_REQUIRED" if app_action is not None else
+        "FRESH_PASS_REQUIRED" if ops else "NO_ACTIONABLE_REQUIREMENT"
     )
     out = dict(base)
     out["_policy_receipt"] = receipt
-    if ops:
+    if app_action is not None:
+        out["response"] = "DONE withheld until product-native read-back proves the app state"
+        out["actions"] = [app_action]
+    elif ops:
         out["response"] = "DONE withheld until pinned assertions pass"
         out["actions"] = [{"type": "STATE_OPS", "ops": ops}]
     else:
