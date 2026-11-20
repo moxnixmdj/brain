@@ -39,6 +39,16 @@ class Environment:
         self.controller = Controller(root)
 
 
+class NoBrowser:
+    """The ledger tests exercise guest ops only; no CDP endpoint is available."""
+
+    def bind_environment(self, environment: Any) -> None:
+        return None
+
+    def run(self, op: Mapping[str, Any]) -> dict[str, Any]:
+        raise AssertionError("unexpected browser operation: " + str(op))
+
+
 def _state(instruction: str, rows: list[dict[str, Any]]) -> dict[str, Any]:
     return {"instruction": instruction, "history": rows, "screenshot_sha256": "a" * 64}
 
@@ -72,10 +82,16 @@ def test_explicit_directory_receipt_from_real_guest_allows_done() -> None:
         assert requirements == [{
             "kind": "DIRECTORY_SENSOR", "path": str(target),
             "op": "ASSERT_SENSOR_REQUEST",
+            "ops": ["ASSERT_PATH_EXISTS", "ASSERT_SENSOR_REQUEST"],
         }]
+        assert L.assertion_ops(requirements[0]) == [
+            {"type": "ASSERT_PATH_EXISTS", "path": str(target)},
+            {"type": "ASSERT_SENSOR_REQUEST", "path": str(target)},
+        ]
 
         ops = [
             {"type": "MKDIR", "path": str(target)},
+            {"type": "ASSERT_PATH_EXISTS", "path": str(target)},
             {"type": "ASSERT_SENSOR_REQUEST", "path": str(target)},
         ]
         bridge = AdmittedSensorGuestOps()
@@ -180,7 +196,7 @@ def test_sensor_pass_without_fresh_admission_is_rejected() -> None:
 def test_ambiguous_quotes_and_multiple_paths_fail_closed() -> None:
     instruction = 'Write "alpha" into /tmp/a and "beta" into /tmp/b'
     requirements, errors = L.compile_requirements(instruction)
-    assert "AMBIGUOUS_QUOTED_TARGET" in errors
+    assert "AMBIGUOUS_CLAUSE_BINDING" in errors
     out = L.decide(_state(instruction, []), _done)
     assert out["actions"] == [{"type": "WAIT"}]
     assert out["_policy_receipt"]["withheld_reason"] == "UNRESOLVED_REQUIREMENT"
@@ -222,3 +238,152 @@ def test_module_has_no_runtime_model_or_network_dependency() -> None:
     for forbidden in ("openai", "anthropic", "requests", "urllib.request", "torch",
                       "transformers", "http.client"):
         assert forbidden not in source
+
+
+def test_two_explicit_clauses_bind_each_quoted_value_to_its_own_path() -> None:
+    with tempfile.TemporaryDirectory(prefix="brain-ledger-multi-") as tmp:
+        root = pathlib.Path(tmp)
+        first, second = root / "a.txt", root / "b.txt"
+        instruction = f'Write "alpha" into {first}; write "beta" into {second}'
+        requirements, errors = L.compile_requirements(instruction)
+        assert errors == []
+        assert [(r["path"], r.get("text")) for r in requirements] == [
+            (str(first), "alpha"), (str(second), "beta")
+        ]
+
+        ops = [
+            {"type": "WRITE_TEXT", "path": str(first), "text": "alpha value"},
+            {"type": "WRITE_TEXT", "path": str(second), "text": "beta value"},
+            {"type": "ASSERT_TEXT_CONTAINS", "path": str(first), "text": "alpha"},
+            {"type": "ASSERT_TEXT_CONTAINS", "path": str(second), "text": "beta"},
+        ]
+        guest = OSWorldHostGuestOps()
+        guest.bind_environment(Environment(root))
+        result = guest.run({"ops": ops})
+        out = L.decide(_state(instruction, [_row(ops, result)]), _done)
+        assert out["actions"] == [{"type": "DONE"}]
+        assert out["_policy_receipt"]["requirement_count"] == 2
+
+
+def test_bounded_respectively_pairs_values_with_paths_in_order() -> None:
+    first, second = "/tmp/ledger-respectively-a", "/tmp/ledger-respectively-b"
+    instruction = f'Write "alpha" into {first} and "beta" into {second}, respectively'
+    requirements, errors = L.compile_requirements(instruction)
+    assert errors == []
+    assert [(r["path"], r.get("text")) for r in requirements] == [
+        (first, "alpha"), (second, "beta")
+    ]
+
+
+def test_conflicting_values_for_one_path_fail_closed() -> None:
+    target = "/tmp/ledger-conflict-target"
+    instruction = f'Write "alpha" into {target}; write "beta" into {target}'
+    requirements, errors = L.compile_requirements(instruction)
+    assert any("CONFLICTING_REQUIREMENTS" in error for error in errors)
+    out = L.decide(_state(instruction, []), _done)
+    assert out["actions"] == [{"type": "WAIT"}]
+    assert out["_policy_receipt"]["verified"] is False
+
+
+def test_one_stale_item_in_a_multi_item_task_blocks_the_whole_done() -> None:
+    with tempfile.TemporaryDirectory(prefix="brain-ledger-multi-stale-") as tmp:
+        root = pathlib.Path(tmp)
+        first, second = root / "a.txt", root / "b.txt"
+        instruction = f'Write "alpha" into {first}; write "beta" into {second}'
+        ops = [
+            {"type": "WRITE_TEXT", "path": str(first), "text": "alpha value"},
+            {"type": "WRITE_TEXT", "path": str(second), "text": "beta value"},
+            {"type": "ASSERT_TEXT_CONTAINS", "path": str(first), "text": "alpha"},
+            {"type": "ASSERT_TEXT_CONTAINS", "path": str(second), "text": "beta"},
+        ]
+        guest = OSWorldHostGuestOps()
+        guest.bind_environment(Environment(root))
+        result = guest.run({"ops": ops})
+        mutation = {"type": "WRITE_TEXT", "path": str(second), "text": "changed"}
+        mutated = guest.run({"ops": [mutation]})
+        rows = [_row(ops, result), _row([mutation], mutated)]
+
+        out = L.decide(_state(instruction, rows), _done)
+        assert out["actions"][0]["type"] == "STATE_OPS"
+        assert out["actions"][0]["ops"] == [
+            {"type": "ASSERT_TEXT_CONTAINS", "path": str(second), "text": "beta"}
+        ]
+        audit = L.audit(_state(instruction, rows), L.compile_requirements(instruction)[0])
+        assert [row["verified"] for row in audit["evidence"]] == [True, False]
+
+
+def _obs() -> dict[str, Any]:
+    return {"screenshot": b"ledger-screen", "accessibility_tree": "<root/>"}
+
+
+def test_adapter_executes_file_assertion_before_it_accepts_done() -> None:
+    from canonical.runtime.osworld_v21_brain_agent_adapter_v1 import BrainOSWorldAgent
+
+    with tempfile.TemporaryDirectory(prefix="brain-ledger-adapter-file-") as tmp:
+        root = pathlib.Path(tmp)
+        target = root / "notes.txt"
+        target.write_text("Q4 report", encoding="utf-8")
+        instruction = f'Write "Q4" into {target}'
+        agent = BrainOSWorldAgent(
+            policy_provider=lambda state: L.decide(state, _done),
+            policy_id="adapter-ledger-file-test",
+            browser_controller=NoBrowser(),
+            guest_controller=AdmittedSensorGuestOps(),
+        )
+        agent.bind_environment(Environment(root))
+        agent.reset()
+
+        response, actions = agent.predict(instruction, _obs())
+        assert actions == ["WAIT"]
+        prior = agent.history[-1]
+        assert prior["submitted_operations"] == [
+            {"type": "ASSERT_TEXT_CONTAINS", "path": str(target), "text": "Q4"}
+        ]
+        assert "ASSERT_TEXT_CONTAINS:PASS:" + str(target) in prior["guest_result"]["output"]
+
+        response, actions = agent.predict(instruction, _obs())
+        assert actions == ["DONE"]
+
+
+def test_adapter_executes_dual_directory_assertion_before_it_accepts_done() -> None:
+    from canonical.runtime.osworld_v21_brain_agent_adapter_v1 import BrainOSWorldAgent
+
+    with tempfile.TemporaryDirectory(prefix="brain-ledger-adapter-dir-") as tmp:
+        root = pathlib.Path(tmp)
+        target = root / "reports"
+        target.mkdir()
+        instruction = f"Create a directory {target}"
+        agent = BrainOSWorldAgent(
+            policy_provider=lambda state: L.decide(state, _done),
+            policy_id="adapter-ledger-dir-test",
+            browser_controller=NoBrowser(),
+            guest_controller=AdmittedSensorGuestOps(),
+        )
+        agent.bind_environment(Environment(root))
+        agent.reset()
+
+        response, actions = agent.predict(instruction, _obs())
+        assert actions == ["WAIT"]
+        prior = agent.history[-1]
+        assert [op["type"] for op in prior["submitted_operations"]] == [
+            "ASSERT_PATH_EXISTS", "ASSERT_SENSOR_REQUEST"
+        ]
+        output = prior["guest_result"]["output"]
+        assert "ASSERT_PATH_EXISTS:PASS:" + str(target) in output
+        assert "SENSOR_REQUEST:PASS:" in output
+        assert prior["guest_result"]["admission"]["source"] == "fresh_measurement"
+
+        response, actions = agent.predict(instruction, _obs())
+        assert actions == ["DONE"]
+
+
+def test_verified_agent_factory_wires_the_ledger_and_admitted_bridge() -> None:
+    from canonical.runtime.osworld_verified_agent_v1 import build_verified_agent
+    from canonical.runtime.osworld_verified_policy_v1 import decide as verified_decide
+    from canonical.runtime.osworld_v21_brain_agent_adapter_v1 import BrainOSWorldAgent
+
+    agent = build_verified_agent(policy_id="factory-test")
+    assert isinstance(agent, BrainOSWorldAgent)
+    assert agent.policy_id == "factory-test"
+    assert agent.policy_provider is verified_decide
+    assert isinstance(agent.guest_controller, AdmittedSensorGuestOps)
