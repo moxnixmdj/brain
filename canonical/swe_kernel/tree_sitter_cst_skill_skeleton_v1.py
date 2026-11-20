@@ -339,8 +339,21 @@ def _ident_or_hole(txt: str, hole_by_ident: Mapping[str, str] | None) -> tuple[s
     return ("ATOM", txt)
 
 
-def cst_to_canonical_expr(node: Any, raw: bytes, hole_by_ident: Mapping[str, str] | None = None) -> tuple[Any, ...]:
-    """Project a concrete Tree-Sitter expression node onto a canonical language-neutral tuple."""
+def cst_to_canonical_expr(
+    node: Any,
+    raw: bytes,
+    hole_by_ident: Mapping[str, str] | None = None,
+    allow_containers: bool = False,
+) -> tuple[Any, ...]:
+    """Project a concrete Tree-Sitter expression node onto a canonical language-neutral tuple.
+
+    When `allow_containers` is True, `_NON_REWRITE_CONTAINERS` (module, block, function_definition,
+    etc.) and multi-line nodes are eligible for `GENERIC_CST` canonicalization. This is used by
+    `_direct_cst_changed_expr_pair` to lift multi-line statement fragments into CST skeletons so
+    that `compile_rule_to_cst_skeleton` no longer returns None for statement-level edits.
+    Container allowance is NOT propagated to recursive child calls -- children use the default
+    (expression-only) rules.
+    """
     node = _unwrap_expr(node)
     len_arg = _extract_len_arg(node, raw)
     if len_arg is not None:
@@ -438,8 +451,11 @@ def cst_to_canonical_expr(node: Any, raw: bytes, hole_by_ident: Mapping[str, str
 
     # Generic structural CST decomposition: handles ALL syntax constructs (`+=`, comprehensions,
     # lambdas, tuples, dicts, slices, clauses, statements) without construct whitelists!
+    # When allow_containers is True, _NON_REWRITE_CONTAINERS and multi-line nodes are eligible.
     named = [c for c in node.children if c.is_named]
-    if named and t not in _NON_REWRITE_CONTAINERS and b"\n" not in raw[node.start_byte:node.end_byte]:
+    if named and (allow_containers or t not in _NON_REWRITE_CONTAINERS) and (
+        allow_containers or b"\n" not in raw[node.start_byte:node.end_byte]
+    ):
         spans: list[str] = []
         cursor = node.start_byte
         child_skels: list[tuple[Any, ...]] = []
@@ -815,6 +831,19 @@ def _direct_cst_changed_expr_pair(
         if p_sk != r_sk and not _contains_opaque(p_sk) and not _contains_opaque(r_sk):
             is_ret = _is_in_return_or_tail_position(pn_u, src_lang)
             return p_sk, r_sk, is_ret
+
+    # Fallback: container-level canonicalization for multi-line statement fragments.
+    # When the lockstep LCA descent breaks at a statement container (module, block,
+    # assignment, function_definition, ...) because multiple named children differ or
+    # the child count changed (statements added/removed), try to canonicalize the
+    # container nodes directly as GENERIC_CST skeletons. This lets
+    # compile_rule_to_cst_skeleton return a non-None skeleton for statement-level edits
+    # instead of returning None.
+    if pn.type == rn.type and pn.type in _NON_REWRITE_CONTAINERS:
+        p_sk = cst_to_canonical_expr(pn, pat_raw, synth_to_hole, allow_containers=True)
+        r_sk = cst_to_canonical_expr(rn, rep_raw, synth_to_hole, allow_containers=True)
+        if p_sk != r_sk and not _contains_opaque(p_sk) and not _contains_opaque(r_sk):
+            return p_sk, r_sk, False
     return None
 
 
@@ -849,6 +878,15 @@ def compile_rule_to_cst_skeleton(rule: Mapping[str, Any]) -> dict[str, Any] | No
                     hole_to_synth[val] = syn
                     synth_to_hole[syn] = val
                 parts.append(syn)
+            elif kind == "fresh_id":
+                # `fresh_id` tokens (e.g. `?fresh0:y`) name identifiers introduced only in
+                # the replacement snippet. Render them as valid Python identifiers so
+                # tree-sitter can parse the multi-line replacement text. Without this,
+                # `compile_rule_to_cst_skeleton` returns None for any rule whose
+                # replacement introduces a new name -- which is exactly the class of
+                # multi-line statement fragments that currently hit the 0/14 ceiling.
+                clean = val.lstrip("?").replace(":", "_")
+                parts.append(clean)
             else:
                 parts.append(val)
         return "".join(parts)

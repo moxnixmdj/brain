@@ -398,7 +398,10 @@ def _anti_unify_token_rule(
 
     for kind, val in toks_b:
         if kind == "ws":
-            pattern_tokens.append(("ws", " "))
+            # Preserve newlines in pattern whitespace so multi-line rules keep their
+            # line structure for CST skeleton compilation. Single-line rules are
+            # unaffected (whitespace without "\n" stays as " ").
+            pattern_tokens.append(("ws", "\n" if "\n" in val else " "))
             continue
         if kind in _HOLE_PREFIX and not (kind == "ident" and val in pinned_idents):
             bucket = hole_maps[kind]
