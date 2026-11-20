@@ -1,0 +1,26 @@
+{
+ "schema": "BRAIN_GOAL_CLOSURE_STORE_V1",
+ "laws": [
+  "ref_preserve",
+  "tracking_preserve",
+  "stash_restore"
+ ],
+ "derived_from": {
+  "status": "CLOSURE_FOUND",
+  "closures": [
+   [
+    "ref_preserve",
+    "tracking_preserve",
+    "stash_restore"
+   ]
+  ],
+  "minimal_size": 3
+ },
+ "reference": {
+  "repo": "https://github.com/pypa/packaging.git"
+ },
+ "parameters": 0,
+ "model_calls": 0,
+ "removable": true,
+ "note": "Delete this file to remove the learned knowledge; the mechanism is unchanged."
+}

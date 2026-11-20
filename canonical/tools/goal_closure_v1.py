@@ -358,7 +358,8 @@ def evaluate(closure: Sequence[str], rows: Sequence[Judgment], target: str) -> d
 
 def plan(start: pathlib.Path, target: str, workspace: pathlib.Path,
          closure: Sequence[str], *, max_depth: int = 6, cap: int = 260,
-         reference: Mapping[str, str] | None = None) -> dict[str, Any]:
+         reference: Mapping[str, str] | None = None,
+         weak: Callable[[pathlib.Path, str], tuple[bool, str]] | None = None) -> dict[str, Any]:
     begun = time.time()
     if workspace.exists():
         shutil.rmtree(workspace)
@@ -383,7 +384,7 @@ def plan(start: pathlib.Path, target: str, workspace: pathlib.Path,
                 if not applied or child is None:
                     continue
                 after = read_state(child, target, reference)
-                literal, _why = literal_goal(child, target)
+                literal, _why = (weak or literal_goal)(child, target)
                 if literal and closure_holds(closure, origin, after, target, child):
                     return {"solved": True, "plan": list(prefix + (edge.name,)),
                             "edges": edges, "seconds": round(time.time() - begun, 2)}

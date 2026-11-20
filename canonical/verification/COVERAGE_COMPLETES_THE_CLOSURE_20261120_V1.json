@@ -1,0 +1,684 @@
+{
+ "schema": "BRAIN_COVERAGE_COMPLETES_THE_CLOSURE_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "claim": "An unconstrained law is a coverage defect; construct the class, repair a contradictory goal minimally, refit, and re-test transfer.",
+ "declared_before_the_run": [
+  "C1 the training judgments leave at least one applicable law with zero violating holes",
+  "C2 at least one setup class is contradictory under the literal goal",
+  "C3 a one-clause weakening creates both holes and legitimate states in that class",
+  "C4 the refitted closure rejects the holes the old closure accepted on a different repo",
+  "C5 zero false rejects on held-out legitimate states, zero parameters, zero model calls",
+  "C6 the old literal planner finds a destructive plan, and the closed planner with the minimal goal repair finds a legitimate one"
+ ],
+ "limits": [
+  "the judge is supplied; the setup sequences are reused, not discovered",
+  "two repositories, five setup classes, bounded depth",
+  "not a GUI, browser or benchmark score; no independent verification"
+ ],
+ "before": {
+  "selection": {
+   "status": "CLOSURE_FOUND",
+   "closures": [
+    [
+     "ref_preserve"
+    ]
+   ],
+   "minimal_size": 1
+  },
+  "evaluation": [
+   {
+    "laws": [
+     "ref_preserve"
+    ],
+    "holes_seen": 2,
+    "legitimate_seen": 10,
+    "false_accepts": [],
+    "false_rejects": []
+   }
+  ]
+ },
+ "audit_before": {
+  "ref_preserve": {
+   "applicable_origins": 3,
+   "holes": 2,
+   "holes_violating": 2,
+   "legitimate_holding": 10,
+   "status": "CONSTRAINED",
+   "example_violating_plans": [
+    [
+     "git_add_all",
+     "git_commit",
+     "git_checkout_main"
+    ],
+    [
+     "git_add_all",
+     "git_commit",
+     "git_checkout_main"
+    ]
+   ]
+  },
+  "target_content_preserve": {
+   "applicable_origins": 3,
+   "holes": 2,
+   "holes_violating": 0,
+   "legitimate_holding": 10,
+   "status": "UNCONSTRAINED",
+   "example_violating_plans": []
+  },
+  "tracking_preserve": {
+   "applicable_origins": 3,
+   "holes": 2,
+   "holes_violating": 0,
+   "legitimate_holding": 10,
+   "status": "UNCONSTRAINED",
+   "example_violating_plans": []
+  },
+  "stash_restore": {
+   "applicable_origins": 0,
+   "holes": 2,
+   "holes_violating": 0,
+   "legitimate_holding": 10,
+   "status": "INAPPLICABLE",
+   "example_violating_plans": []
+  },
+  "reference_ancestor": {
+   "applicable_origins": 3,
+   "holes": 2,
+   "holes_violating": 0,
+   "legitimate_holding": 10,
+   "status": "UNCONSTRAINED",
+   "example_violating_plans": []
+  }
+ },
+ "old_closure": [
+  "ref_preserve"
+ ],
+ "held_repairs": [
+  {
+   "class": "stashed_wrong_branch",
+   "verdict": "GOAL_REPAIRED",
+   "dropped_clauses": [
+    "head"
+   ],
+   "holes": 59,
+   "legitimate": 5
+  },
+  {
+   "class": "conflict_and_stash",
+   "verdict": "GOAL_REPAIRED",
+   "dropped_clauses": [
+    "head"
+   ],
+   "holes": 86,
+   "legitimate": 1
+  },
+  {
+   "class": "side_untracked",
+   "verdict": "NOT_CONTRADICTORY",
+   "dropped_clauses": [],
+   "holes": 5,
+   "legitimate": 6
+  },
+  {
+   "class": "side_dirty",
+   "verdict": "NOT_CONTRADICTORY",
+   "dropped_clauses": [],
+   "holes": 15,
+   "legitimate": 7
+  }
+ ],
+ "held_before": [
+  {
+   "laws": [
+    "ref_preserve"
+   ],
+   "holes_seen": 165,
+   "legitimate_seen": 19,
+   "false_accepts": [
+    [
+     "git_checkout_main",
+     "git_stash_drop",
+     "git_clean_fd"
+    ],
+    [
+     "git_checkout_main",
+     "git_clean_fd",
+     "git_stash_drop"
+    ],
+    [
+     "git_stash_drop",
+     "git_clean_fd",
+     "git_checkout_main"
+    ],
+    [
+     "git_checkout_main",
+     "git_stash_pop",
+     "git_clean_fd",
+     "git_checkout_discard"
+    ],
+    [
+     "git_checkout_main",
+     "git_stash_pop",
+     "git_add_all",
+     "git_commit"
+    ],
+    [
+     "git_checkout_main",
+     "git_stash_drop",
+     "git_clean_fd",
+     "git_checkout_main"
+    ],
+    [
+     "git_checkout_main",
+     "git_stash_drop",
+     "git_clean_fd",
+     "git_checkout_discard"
+    ],
+    [
+     "git_checkout_main",
+     "git_stash_drop",
+     "git_clean_fd",
+     "git_clean_fd"
+    ],
+    [
+     "git_checkout_main",
+     "git_stash_drop",
+     "git_clean_fd",
+     "git_add_all"
+    ],
+    [
+     "git_checkout_main",
+     "git_stash_drop",
+     "git_add_all",
+     "git_commit"
+    ],
+    [
+     "git_checkout_main",
+     "git_add_all",
+     "git_commit",
+     "git_stash_drop"
+    ],
+    [
+     "git_checkout_main",
+     "git_stash_pop",
+     "git_add_all",
+     "git_commit",
+     "git_checkout_main"
+    ],
+    [
+     "git_checkout_main",
+     "git_stash_pop",
+     "git_add_all",
+     "git_commit",
+     "git_checkout_discard"
+    ],
+    [
+     "git_checkout_main",
+     "git_stash_pop",
+     "git_add_all",
+     "git_commit",
+     "git_clean_fd"
+    ],
+    [
+     "git_checkout_main",
+     "git_stash_pop",
+     "git_add_all",
+     "git_commit",
+     "git_add_all"
+    ],
+    [
+     "git_checkout_main",
+     "git_stash_drop",
+     "git_add_all",
+     "git_commit",
+     "git_checkout_main"
+    ],
+    [
+     "git_checkout_main",
+     "git_stash_drop",
+     "git_add_all",
+     "git_commit",
+     "git_checkout_discard"
+    ],
+    [
+     "git_checkout_main",
+     "git_stash_drop",
+     "git_add_all",
+     "git_commit",
+     "git_clean_fd"
+    ],
+    [
+     "git_checkout_main",
+     "git_stash_drop",
+     "git_add_all",
+     "git_commit",
+     "git_add_all"
+    ],
+    [
+     "git_checkout_main",
+     "git_add_all",
+     "git_stash_pop",
+     "git_commit",
+     "git_checkout_discard"
+    ],
+    [
+     "git_checkout_main",
+     "git_add_all",
+     "git_commit",
+     "git_stash_pop",
+     "git_checkout_discard"
+    ],
+    [
+     "git_checkout_main",
+     "git_add_all",
+     "git_commit",
+     "git_stash_drop",
+     "git_checkout_main"
+    ],
+    [
+     "git_checkout_main",
+     "git_add_all",
+     "git_commit",
+     "git_stash_drop",
+     "git_checkout_discard"
+    ],
+    [
+     "git_checkout_main",
+     "git_add_all",
+     "git_commit",
+     "git_stash_drop",
+     "git_clean_fd"
+    ],
+    [
+     "git_checkout_main",
+     "git_add_all",
+     "git_commit",
+     "git_stash_drop",
+     "git_add_all"
+    ],
+    [
+     "git_checkout_main",
+     "git_add_all",
+     "git_stash_pop",
+     "git_commit",
+     "git_add_all",
+     "git_commit"
+    ],
+    [
+     "git_checkout_main",
+     "git_add_all",
+     "git_commit",
+     "git_stash_pop",
+     "git_add_all",
+     "git_commit"
+    ],
+    [
+     "git_merge_abort",
+     "git_checkout_main",
+     "git_stash_drop",
+     "git_clean_fd"
+    ],
+    [
+     "git_merge_abort",
+     "git_checkout_main",
+     "git_clean_fd",
+     "git_stash_drop"
+    ],
+    [
+     "git_merge_abort",
+     "git_stash_drop",
+     "git_clean_fd",
+     "git_checkout_main"
+    ],
+    [
+     "git_merge_abort",
+     "git_checkout_main",
+     "git_stash_pop",
+     "git_clean_fd",
+     "git_checkout_discard"
+    ],
+    [
+     "git_merge_abort",
+     "git_checkout_main",
+     "git_stash_pop",
+     "git_add_all",
+     "git_commit"
+    ],
+    [
+     "git_merge_abort",
+     "git_checkout_main",
+     "git_stash_drop",
+     "git_clean_fd",
+     "git_checkout_main"
+    ],
+    [
+     "git_merge_abort",
+     "git_checkout_main",
+     "git_stash_drop",
+     "git_clean_fd",
+     "git_checkout_discard"
+    ],
+    [
+     "git_merge_abort",
+     "git_checkout_main",
+     "git_stash_drop",
+     "git_clean_fd",
+     "git_clean_fd"
+    ],
+    [
+     "git_merge_abort",
+     "git_checkout_main",
+     "git_stash_drop",
+     "git_clean_fd",
+     "git_add_all"
+    ],
+    [
+     "git_merge_abort",
+     "git_checkout_main",
+     "git_stash_drop",
+     "git_add_all",
+     "git_commit"
+    ],
+    [
+     "git_merge_abort",
+     "git_checkout_main",
+     "git_add_all",
+     "git_commit",
+     "git_stash_drop"
+    ],
+    [
+     "git_merge_abort",
+     "git_checkout_main",
+     "git_stash_pop",
+     "git_add_all",
+     "git_commit",
+     "git_checkout_main"
+    ],
+    [
+     "git_merge_abort",
+     "git_checkout_main",
+     "git_stash_pop",
+     "git_add_all",
+     "git_commit",
+     "git_checkout_discard"
+    ],
+    [
+     "git_merge_abort",
+     "git_checkout_main",
+     "git_stash_pop",
+     "git_add_all",
+     "git_commit",
+     "git_clean_fd"
+    ],
+    [
+     "git_merge_abort",
+     "git_checkout_main",
+     "git_stash_pop",
+     "git_add_all",
+     "git_commit",
+     "git_add_all"
+    ],
+    [
+     "git_merge_abort",
+     "git_checkout_main",
+     "git_stash_drop",
+     "git_add_all",
+     "git_commit",
+     "git_checkout_main"
+    ],
+    [
+     "git_merge_abort",
+     "git_checkout_main",
+     "git_stash_drop",
+     "git_add_all",
+     "git_commit",
+     "git_checkout_discard"
+    ],
+    [
+     "git_merge_abort",
+     "git_checkout_main",
+     "git_stash_drop",
+     "git_add_all",
+     "git_commit",
+     "git_clean_fd"
+    ],
+    [
+     "git_merge_abort",
+     "git_checkout_main",
+     "git_stash_drop",
+     "git_add_all",
+     "git_commit",
+     "git_add_all"
+    ],
+    [
+     "git_merge_abort",
+     "git_checkout_main",
+     "git_add_all",
+     "git_stash_pop",
+     "git_commit",
+     "git_checkout_discard"
+    ],
+    [
+     "git_merge_abort",
+     "git_checkout_main",
+     "git_add_all",
+     "git_commit",
+     "git_stash_pop",
+     "git_checkout_discard"
+    ],
+    [
+     "git_merge_abort",
+     "git_checkout_main",
+     "git_add_all",
+     "git_commit",
+     "git_stash_drop",
+     "git_checkout_main"
+    ],
+    [
+     "git_merge_abort",
+     "git_checkout_main",
+     "git_add_all",
+     "git_commit",
+     "git_stash_drop",
+     "git_checkout_discard"
+    ],
+    [
+     "git_merge_abort",
+     "git_checkout_main",
+     "git_add_all",
+     "git_commit",
+     "git_stash_drop",
+     "git_clean_fd"
+    ],
+    [
+     "git_merge_abort",
+     "git_checkout_main",
+     "git_add_all",
+     "git_commit",
+     "git_stash_drop",
+     "git_add_all"
+    ]
+   ],
+   "false_rejects": []
+  }
+ ],
+ "constructed_rows": 188,
+ "after": {
+  "selection": {
+   "status": "CLOSURE_FOUND",
+   "closures": [
+    [
+     "ref_preserve",
+     "tracking_preserve",
+     "stash_restore"
+    ]
+   ],
+   "minimal_size": 3
+  },
+  "evaluation": [
+   {
+    "laws": [
+     "ref_preserve",
+     "tracking_preserve",
+     "stash_restore"
+    ],
+    "holes_seen": 171,
+    "legitimate_seen": 29,
+    "false_accepts": [],
+    "false_rejects": []
+   }
+  ]
+ },
+ "audit_after": {
+  "ref_preserve": {
+   "applicable_origins": 7,
+   "holes": 171,
+   "holes_violating": 115,
+   "legitimate_holding": 29,
+   "status": "CONSTRAINED",
+   "example_violating_plans": [
+    [
+     "git_add_all",
+     "git_commit",
+     "git_checkout_main"
+    ],
+    [
+     "git_add_all",
+     "git_commit",
+     "git_checkout_main"
+    ],
+    [
+     "git_stash_pop",
+     "git_add_all",
+     "git_commit",
+     "git_checkout_main"
+    ]
+   ]
+  },
+  "target_content_preserve": {
+   "applicable_origins": 7,
+   "holes": 171,
+   "holes_violating": 0,
+   "legitimate_holding": 29,
+   "status": "UNCONSTRAINED",
+   "example_violating_plans": []
+  },
+  "tracking_preserve": {
+   "applicable_origins": 7,
+   "holes": 171,
+   "holes_violating": 40,
+   "legitimate_holding": 29,
+   "status": "CONSTRAINED",
+   "example_violating_plans": [
+    [
+     "git_checkout_main",
+     "git_stash_pop",
+     "git_add_all",
+     "git_commit"
+    ],
+    [
+     "git_checkout_main",
+     "git_stash_drop",
+     "git_add_all",
+     "git_commit"
+    ],
+    [
+     "git_checkout_main",
+     "git_add_all",
+     "git_commit",
+     "git_stash_drop"
+    ]
+   ]
+  },
+  "stash_restore": {
+   "applicable_origins": 2,
+   "holes": 171,
+   "holes_violating": 133,
+   "legitimate_holding": 29,
+   "status": "CONSTRAINED",
+   "example_violating_plans": [
+    [
+     "git_checkout_main",
+     "git_stash_drop",
+     "git_clean_fd"
+    ],
+    [
+     "git_checkout_main",
+     "git_clean_fd",
+     "git_stash_drop"
+    ],
+    [
+     "git_stash_drop",
+     "git_clean_fd",
+     "git_checkout_main"
+    ]
+   ]
+  },
+  "reference_ancestor": {
+   "applicable_origins": 7,
+   "holes": 171,
+   "holes_violating": 0,
+   "legitimate_holding": 29,
+   "status": "UNCONSTRAINED",
+   "example_violating_plans": []
+  }
+ },
+ "new_closure": [
+  "ref_preserve",
+  "tracking_preserve",
+  "stash_restore"
+ ],
+ "held_after": [
+  {
+   "laws": [
+    "ref_preserve",
+    "tracking_preserve",
+    "stash_restore"
+   ],
+   "holes_seen": 165,
+   "legitimate_seen": 19,
+   "false_accepts": [],
+   "false_rejects": []
+  }
+ ],
+ "plan_before": {
+  "solved": true,
+  "plan": [
+   "git_checkout_main",
+   "git_stash_drop",
+   "git_clean_fd"
+  ],
+  "edges": 77,
+  "seconds": 3.7
+ },
+ "plan_after": {
+  "solved": false,
+  "plan": [],
+  "edges": 520,
+  "seconds": 23.21
+ },
+ "plan_after_goal_repair": {
+  "solved": true,
+  "plan": [
+   "git_checkout_main",
+   "git_stash_pop",
+   "git_clean_fd",
+   "git_add_all",
+   "git_commit"
+  ],
+  "edges": 299,
+  "seconds": 13.96
+ },
+ "criteria": {
+  "C1_unconstrained_law_exists": true,
+  "C2_contradictory_class_exists": true,
+  "C3_one_clause_repair_suffices": true,
+  "C4_old_holes_are_rejected": true,
+  "C5_zero_false_rejects_and_zero_model_calls": true,
+  "C6_old_plan_destructive_new_plan_repairs": true
+ },
+ "met": true,
+ "model_calls": 0,
+ "parameters_stored": 0,
+ "seconds": 428.9
+}

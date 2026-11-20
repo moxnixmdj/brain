@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 581,
+  "knowledge_documents": 582,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 7184,
+  "research_index_records": 7186,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 452,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "23c113bf2107f3158916620220d1676d931e28429e7f03aee5db719a478f7192"
+  "value": "d29dcf72d5f4d117d7d62c6bafc0ead7ec60ee140d7c7e031881e45493ef23d6"
  },
  "engines": [
   {
@@ -49105,6 +49105,80 @@
     "ideas",
     "not",
     "programs"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 7330,
+   "headings": [
+    "Coverage completes the closure — 2026-11-20",
+    "Requirements restated and resolved",
+    "Project and frontier research",
+    "§3 verdict",
+    "One plan; rejected ideas",
+    "Measured result",
+    "What is still missing"
+   ],
+   "kind": "DOCUMENT",
+   "path": "COVERAGE_COMPLETES_THE_CLOSURE_20261120_V1.md",
+   "sha256": "ff9b3f2b0ce8d3e805d53a5af01f6aba5e47481d7a1ea5c043edbe3efb8d3edd",
+   "summary": "Authority: `NONE__PRODUCER_RUN_SANDBOX`. No acceptance, capability credit, terminal credit, independent verification, benchmark score or operating model is claimed. Parameters stored: 0. Runtime model calls: 0. Transitions predicted: 0; every edge is a real copy-and-execute of git.",
+   "terms": {
+    "accepted": 5,
+    "already": 4,
+    "applicable": 3,
+    "arxiv": 3,
+    "audit": 4,
+    "before": 4,
+    "benchmark": 4,
+    "bottleneck": 4,
+    "calls": 5,
+    "canonical": 4,
+    "capability": 3,
+    "class": 6,
+    "classes": 5,
+    "closure": 12,
+    "coverage": 3,
+    "each": 3,
+    "earlier": 3,
+    "evidence": 3,
+    "experience": 4,
+    "false": 7,
+    "goal": 8,
+    "holes": 8,
+    "judge": 4,
+    "judged": 5,
+    "law": 8,
+    "legitimate": 4,
+    "literal": 5,
+    "missing": 4,
+    "model": 9,
+    "no": 9,
+    "not": 10,
+    "only": 4,
+    "own": 4,
+    "parameters": 4,
+    "plan": 5,
+    "planner": 4,
+    "real": 5,
+    "receipt": 4,
+    "refit": 8,
+    "rejected": 6,
+    "repair": 6,
+    "run": 4,
+    "runtime": 6,
+    "single": 5,
+    "states": 4,
+    "store": 7,
+    "true": 5,
+    "zero": 6
+   },
+   "title": "Coverage completes the closure — 2026-11-20",
+   "title_terms": [
+    "2026-11-20",
+    "closure",
+    "completes",
+    "coverage"
    ]
   },
   {
@@ -90294,10 +90368,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1383,
+  "included_source_count": 1384,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "5f900ac897e26c099222e85ae1bdd3ed87fb9245a3f9d66a4f0934df8fab3fcb"
+  "source_tree_digest": "7d9ce8200a2b335cdaf148ec42e2e40b417132f48951d895f82f5378eaa00ab7"
  },
  "research_index": [
   {
@@ -167002,6 +167076,24 @@
     "theorem": 1,
     "v1": 1,
     "verification": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/COVERAGE_COMPLETES_THE_CLOSURE_20261120_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/COVERAGE_COMPLETES_THE_CLOSURE_20261120_V1.json",
+   "schema": "BRAIN_COVERAGE_COMPLETES_THE_CLOSURE_V1",
+   "sha256": "fed421f8e1b18ee718b5ff9dfb29d7c436c3e19f3e5bedad8906c777ca9366ad",
+   "status": "",
+   "terms": {
+    "20261120": 1,
+    "closure": 1,
+    "completes": 1,
+    "coverage": 1,
+    "v1": 1
    }
   },
   {
@@ -246713,6 +246805,51 @@
     "trace": 2,
     "v1": 2,
     "verified": 3
+   }
+  },
+  {
+   "action_id": "COVERAGE_COMPLETES_THE_CLOSURE_20261120_V1",
+   "capability": false,
+   "date": "2026-11-20",
+   "id": "research:canonical/action_intents/COVERAGE_COMPLETES_THE_CLOSURE_20261120_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/COVERAGE_COMPLETES_THE_CLOSURE_20261120_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "a1cd4960290ac8931c148f9b7f4c52f3a83470642d669a1e070067b0c968591c",
+   "status": "PROPOSED__PRODUCER_MEASURED__NO_MODEL_CALLS__INDEPENDENT_VERIFICATION_OPEN",
+   "terms": {
+    "20261120": 1,
+    "52": 1,
+    "accepted": 1,
+    "after": 1,
+    "applicable": 2,
+    "audit": 1,
+    "before": 1,
+    "c1-c6": 1,
+    "calls": 1,
+    "class": 2,
+    "classes": 1,
+    "closed": 1,
+    "closure": 4,
+    "completes": 1,
+    "completion": 1,
+    "constructs": 1,
+    "contradictory": 2,
+    "coverage": 2,
+    "coverage_completes_the_closure_20261120_v1": 1,
+    "destructive": 2,
+    "finds": 2,
+    "goal": 3,
+    "held": 2,
+    "holes": 3,
+    "judged": 2,
+    "laws": 2,
+    "literal": 3,
+    "not": 2,
+    "planner": 2,
+    "real": 2,
+    "refit": 2,
+    "zero": 2
    }
   },
   {
