@@ -50,3 +50,4 @@ canonical/tmp_*.json
 
 # Third-party benchmark clones (QuixBugs etc.). Never part of the project.
 .benchmarks/
+node_modules/
