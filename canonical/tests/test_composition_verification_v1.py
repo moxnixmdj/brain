@@ -229,7 +229,7 @@ def test_contrast_derivation_is_first_principles(simple_compatible_chain):
     steps = [(c, frozenset({"subject:x"})) for c in simple_compatible_chain]
     sense = sense_chain(steps, frozenset({"subject:x", "subject:y"}))
     result = generate_compositions(sense)
-    assert result["derivation"] == "pairwise_contracts_plus_transitive_and_shared_state_checks"
+    assert result["derivation"] == "pairwise_contracts_plus_transitive_and_shared_state_checks_plus_sequence_verification"
     assert result["model_calls"] == 0
     assert result["network_calls"] == 0
 

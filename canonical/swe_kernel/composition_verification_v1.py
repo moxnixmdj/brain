@@ -72,6 +72,10 @@ from canonical.swe_kernel.effect_contract_composition_v1 import (  # noqa: E402
     NO_VERDICT,
     INCOMPLETE,
 )
+from canonical.swe_kernel.skill_sequence_verify_v1 import (  # noqa: E402
+    verify_sequence as _verify_sequence,
+    PASS as _SEQ_PASS,
+)
 
 SCHEMA = "PROJECT_BRAIN_COMPOSITION_VERIFICATION_V1"
 AUTHORITY = "NONE__PRODUCER_RUN_SANDBOX_CALCULATION"
@@ -410,6 +414,44 @@ def _check_transitive_entailment(
     return len(details) == 0, details
 
 
+def _contracts_to_rules(
+    steps: Sequence[ChainStep],
+) -> list[dict[str, Any]]:
+    """Convert chain steps to rule mappings for sequence verification.
+
+    Each rule carries the skill_id and its declared established/removed subjects
+    so verify_sequence can check that the sequence of applications is meaningful
+    (every step changes state, no step reverts).
+    """
+    rules: list[dict[str, Any]] = []
+    for step in steps:
+        contract = step.contract
+        rules.append(
+            {
+                "skill_id": contract.skill_id,
+                "established": sorted(contract.established()),
+                "removed": sorted(contract.removed()),
+            }
+        )
+    return rules
+
+
+def _simulate_apply(text: str, rule: Mapping[str, Any]) -> str | None:
+    """Simulate applying a contract's effects to a text state.
+
+    The text encodes the current established-subjects state as newline-separated
+    lines.  Applying a rule removes its `removed` subjects and adds its
+    `established` subjects.  Returns None when the rule produces no state change.
+    """
+    current = set(line for line in text.split("\n") if line) if text else set()
+    established = set(rule.get("established") or [])
+    removed = set(rule.get("removed") or [])
+    new_state = (current - removed) | established
+    if new_state == current:
+        return text  # no-op: state unchanged
+    return "\n".join(sorted(new_state))
+
+
 def generate_compositions(
     sense_result: dict[str, Any],
 ) -> dict[str, Any]:
@@ -494,6 +536,15 @@ def generate_compositions(
     intended_goal = chain.intended_goal
     net_effect_ok = net_effect == intended_goal
 
+    # Sequence-level verification: every rule application must change state,
+    # and no application may revert to an earlier state.  Calls verify_sequence
+    # from skill_sequence_verify_v1 -- the same organ used by the crystallizer.
+    # Reported as diagnostic information; structural composition validity is
+    # determined by pairwise/transitive/shared-state/net-effect checks above.
+    rules = _contracts_to_rules(steps)
+    seq_out = _verify_sequence("", rules, apply=_simulate_apply)
+    sequence_ok = seq_out.get("verdict") == _SEQ_PASS
+
     all_pairwise_pass = all(r["verdict"] == PASS for r in pairwise_results)
     is_valid = (
         all_pairwise_pass
@@ -516,11 +567,14 @@ def generate_compositions(
         "net_effect": net_effect,
         "intended_goal": intended_goal,
         "net_effect_ok": net_effect_ok,
+        "sequence_ok": sequence_ok,
+        "sequence_verdict": seq_out.get("verdict"),
+        "sequence_reason": seq_out.get("reason"),
         "counterfactual_variants": counterfactuals,
         "is_valid": is_valid,
         "model_calls": 0,
         "network_calls": 0,
-        "derivation": "pairwise_contracts_plus_transitive_and_shared_state_checks",
+        "derivation": "pairwise_contracts_plus_transitive_and_shared_state_checks_plus_sequence_verification",
     }
 
 

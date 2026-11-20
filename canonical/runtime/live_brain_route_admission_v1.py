@@ -2082,9 +2082,25 @@ def _execute(task_id: str, goal: str, compiled: Mapping[str, Any], admissible: M
                     command_candidates.append((cid, _declared_operation(args)))
     for cid, operation in command_candidates:
         if boundary.refuses_execution(cid, admissible.get(cid), operation):
-            return _fail(task_id, boundary.STATUS, boundary.FAILURE_CLASS, started,
-                         executed=False, compiled_capability_id=cid,
-                         semantic_acceptance_complete=False)
+            # Try the admitted-confinement route before failing closed:
+            # a capability with a reviewed effect declaration runs on a disposable
+            # clone of the host with verified effect receipts, and the result is
+            # judged by the same expectation check. No declaration, an unbound
+            # effect, or a shape the confinement refuses -> None -> the refusal
+            # stands exactly as before. Mirrors the same seam in run_adapter_locally.
+            from canonical.runtime import confined_dispatch_v1 as _confined
+            _entry = admissible.get(cid)
+            if not isinstance(_entry, Mapping):
+                return _fail(task_id, boundary.STATUS, boundary.FAILURE_CLASS, started,
+                             executed=False, compiled_capability_id=cid,
+                             semantic_acceptance_complete=False)
+            _routed = _confined.run_confined_capability(
+                cid, _entry, {"args": dict(compiled.get("inputs") or {})}, host_root=ROOT)
+            if _routed is None:
+                return _fail(task_id, boundary.STATUS, boundary.FAILURE_CLASS, started,
+                             executed=False, compiled_capability_id=cid,
+                             semantic_acceptance_complete=False)
+            return _routed
     routing_targets = list(compiled.get("target_effects") or [])
     if not routing_targets:
         for part in compiled.get("compiled_parts") or []:
