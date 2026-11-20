@@ -2484,134 +2484,120 @@ def run_computer_use_multi_step_demo(
     engine: "InstantOneShotLearning",
     instruction: str = "cp",
 ) -> dict[str, Any]:
-    """Run instant one-shot learning with multi-step contrastive bootstrap.
+    """Run instant one-shot learning with multi-step credit assignment.
 
-    Uses contrastive_oracle_bootstrap_v1.py (path item 5):
+    Uses credit_assignment_v1.py (Layer 2 / PR #7022):
     SENSE → CONTRAST → IDENTIFY → ADMIT → REMEMBER
 
-    Every execution step becomes a contrastive intervention pair against
-    resettable environments. The class is closed by proof or witness, never
-    by repetition.
+    Attributes which steps in a multi-step agent trace caused the terminal
+    outcome using counterfactual interventions at the point of commitment.
+    Steps with positive credit are causal (changing them changes the outcome);
+    steps with zero credit are not causal (surface accidents, not causes).
+
+    Every step becomes a counterfactual intervention against a resettable
+    environment snapshot. The class is closed by counterfactual separation,
+    never by repetition.
 
     Zero model calls, zero network calls, zero knowledge house.
     """
-    from canonical.swe_kernel.contrastive_oracle_bootstrap_v1 import (
-        ContrastiveOracleBootstrap,
+    from canonical.swe_kernel.credit_assignment_v1 import (
+        CreditAssignment,
         SENSE_DONE,
         CONTRAST_DONE,
         IDENTIFIED,
-        ADMITTED,
+        REMEMBERED,
+        AgentTrace,
+        TraceStep,
     )
+    ADMITTED = "ADMITTED"
 
-    # The before/after snippet pair: boundary condition (<= 100 -> < 100)
-    # with probe variation so the proof/witness mechanism can close the class.
-    before_snippet = "def classify(x):\n    return x <= 100\n"
-    after_snippet = "def classify(x):\n    return x < 100\n"
-    probes = (0, 99, 100, 101)
+    # Multi-step computer-use trace: create then process
+    # Step 0: echo hello > work.dat   (right action - creates working file, succeeds)
+    # Step 1: cat work.dat > out.dat  (follow-up action - produces output, succeeds)
+    # Terminal outcome: success (1)
+    steps = [
+        ("echo hello > work.dat", ""),
+        ("cat work.dat > out.dat", ""),
+    ]
+    terminal_outcome = 1
 
-    bootstrap = ContrastiveOracleBootstrap(engine.environment_root)
-
-    # Phase 1: SENSE
-    sense = bootstrap.sense(instruction)
-    if sense["status"] != SENSE_DONE:
-        return {
-            "status": f"REFUSED__BOOTSTRAP_FAILED__{sense.get('reason', '')}",
-            "model_calls": 0,
-            "network_calls": 0,
-        }
-
-    # Phase 2: CONTRAST — inject task name into result for IDENTIFY phase.
-    contrast = bootstrap.contrast(sense)
-    if contrast["status"] != CONTRAST_DONE:
-        return {
-            "status": f"REFUSED__BOOTSTRAP_FAILED__{contrast.get('reason', '')}",
-            "model_calls": 0,
-            "network_calls": 0,
-        }
-    contrast["task"] = sense.get("task", "")
-
-    # Phase 3: IDENTIFY
-    identify = bootstrap.identify(contrast, before_snippet, after_snippet, probes)
-    if identify["status"] != IDENTIFIED:
-        return {
-            "status": f"REFUSED__BOOTSTRAP_FAILED__{identify.get('reason', '')}",
-            "model_calls": 0,
-            "network_calls": 0,
-        }
-
-    # Phase 4: ADMIT — use manual victims with independent oracle (like generalization demo)
-    from canonical.swe_kernel.lesson_admission_gate_v1 import evaluate, Victim
-    from canonical.tools.rule_generalization_probe_v1 import run_snippet
-
-    correct_source = after_snippet
-
-    def _make_oracle(src_text):
-        def _oracle(_s, p, _src=src_text):
-            return run_snippet(_src, (p,))
-        return _oracle
-
-    victims = [
-        Victim(
-            victim_id="defective:classify_boundary",
-            source="def classify(x: int) -> bool:\n    return x <= 100\n",
-            oracle=_make_oracle("def classify(x: int) -> bool:\n    return x < 100\n"),
-            probes=(100,),
-        ),
-        Victim(
-            victim_id="correct:classify_below_boundary",
-            source="def classify(x: int) -> bool:\n    return x <= 100\n",
-            oracle=_make_oracle("def classify(x: int) -> bool:\n    return x < 100\n"),
-            probes=(50, 75),
-        ),
+    # Wrong actions (mutants) for each step — counterfactuals at point of commitment
+    # Step 0 mutant: exit 1 (fails, breaking the chain)
+    # Step 1 mutant: exit 1 (fails)
+    wrong_actions = [
+        [("fail_step", "exit 1")],
+        [("fail_step", "exit 1")],
     ]
 
-    rule = identify.get("rule", {})
-    admission = evaluate(
-        before_snippet=before_snippet,
-        after_snippet=after_snippet,
-        victims=victims,
-        rule=rule,
-        language="python",
+    # Hold-out trace: same structure, different content — validates attribution generalizes
+    holdout_steps = [
+        ("echo world > work.dat", ""),
+        ("cat work.dat > out.dat", ""),
+    ]
+    holdout_trace = AgentTrace(
+        steps=tuple(
+            TraceStep(
+                step_index=i,
+                state_snapshot={},
+                action=action_str,
+                outcome=(0, ""),
+            )
+            for i, (action_str, _) in enumerate(holdout_steps)
+        ),
+        terminal_outcome=1,
     )
-    admitted = admission.get("verdict") == "ADMIT"
-    counts = admission.get("counts", {})
 
-    admit = {
-        "phase": "ADMIT",
-        "status": ADMITTED if admitted else "REFUSED",
-        "verdict": admission.get("verdict"),
-        "reason": admission.get("reason"),
-        "repaired": counts.get("repaired", 0),
-        "preserved": counts.get("preserved", 0),
-        "broken": counts.get("broken", 0),
-        "regressed": counts.get("regressed", 0),
-        "victims_offered": counts.get("victims_offered", 0),
-        "model_calls": 0,
-        "network_calls": 0,
-    }
-    if admit["status"] != ADMITTED:
+    ca = CreditAssignment(engine.environment_root)
+
+    # Phase 1: SENSE — observe the multi-step trace
+    sense = ca.sense(steps, terminal_outcome)
+    if sense["status"] != SENSE_DONE:
         return {
-            "status": f"REFUSED__BOOTSTRAP_FAILED__{admit.get('reason', '')}",
+            "status": f"REFUSED__CREDIT_FAILED__{sense.get('reason', '')}",
             "model_calls": 0,
             "network_calls": 0,
         }
 
-    # Phase 5: REMEMBER — zero knowledge house
-    remember = {
-        "phase": "REMEMBER",
-        "status": "REMEMBER_DONE",
-        "admitted": admit["status"] == ADMITTED,
-        "victim_count": admit.get("victims_offered", 0),
-        "model_calls": 0,
-        "network_calls": 0,
-        "stored_knowledge_bytes": 0,
-        "knowledge_house": False,
-    }
+    # Phase 2: CONTRAST — generate counterfactual interventions for each step
+    contrast = ca.contrast(sense, wrong_actions)
+    if contrast["status"] != CONTRAST_DONE:
+        return {
+            "status": f"REFUSED__CREDIT_FAILED__{contrast.get('reason', '')}",
+            "model_calls": 0,
+            "network_calls": 0,
+        }
+
+    # Phase 3: IDENTIFY — close credit by counterfactual comparison
+    identify = ca.identify(contrast)
+    if identify["status"] != IDENTIFIED:
+        return {
+            "status": f"REFUSED__CREDIT_FAILED__{identify.get('reason', '')}",
+            "model_calls": 0,
+            "network_calls": 0,
+        }
+
+    # Phase 4: ADMIT — held-out validation: attribution must hold on hold-out traces
+    admit = ca.admit(identify, [holdout_trace], wrong_actions)
+    if admit["status"] != ADMITTED:
+        return {
+            "status": f"REFUSED__CREDIT_FAILED__{admit.get('reason', '')}",
+            "model_calls": 0,
+            "network_calls": 0,
+        }
+
+    # Phase 5: REMEMBER — zero knowledge house; attribution is calculated, not stored
+    remember = ca.remember(admit)
+    if remember["status"] != REMEMBERED:
+        return {
+            "status": f"REFUSED__CREDIT_FAILED__{remember.get('reason', '')}",
+            "model_calls": 0,
+            "network_calls": 0,
+        }
 
     report = {
         "phase": "COMPLETE",
         "status": "COMPLETE",
-        "result": "CONTRASTIVE_ORACLE_BOOTSTRAP_COMPLETE",
+        "result": "CREDIT_ASSIGNMENT_COMPLETE",
         "phases": [sense, contrast, identify, admit, remember],
     }
 
@@ -2623,9 +2609,202 @@ def run_computer_use_multi_step_demo(
         "network_calls": 0,
         "stored_knowledge_bytes": 0,
         "knowledge_house": False,
-        "bootstrap": report,
+        "causal_steps": identify["causal_steps"],
+        "non_causal_steps": identify["non_causal_steps"],
+        "total_credit": identify["total_credit"],
+        "credit_assignment": report,
     }
 
+
+# --------------------------------------------------------------------------- #
+# Horizon-bounded execution demo — long-horizon task decomposition (Layer 4 / PR #7024)
+# --------------------------------------------------------------------------- #
+
+
+def run_horizon_bounded_demo(
+    engine: "InstantOneShotLearning",
+) -> dict[str, Any]:
+    """Run instant one-shot learning with horizon-bounded execution.
+
+    Uses horizon_bounded_execution_v1.py (Layer 4 / PR #7024):
+    SENSE → CONTRAST → IDENTIFY → ADMIT → REMEMBER
+
+    Decomposes long-horizon tasks into bounded sub-goals with checkpoint/restore
+    at every boundary and constraint preservation across the whole chain.
+
+    Addresses the three failure modes that break long-horizon computer use:
+    1. HORIZON COLLAPSE: sub-goal step budgets enforce per-sub-goal horizons
+    2. CONSTRAINT EVAPORATION: every global constraint verified after each sub-goal
+    3. ERROR COMPOUNDING: checkpoint/restore at each sub-goal boundary
+
+    Zero model calls, zero network calls, zero knowledge house.
+    """
+    from canonical.swe_kernel.horizon_bounded_execution_v1 import (
+        HorizonBoundedExecution,
+        SubGoal,
+        Constraint,
+        SENSE_DONE,
+        CONTRAST_DONE,
+        IDENTIFIED,
+        ADMITTED,
+        REMEMBERED,
+    )
+
+    # A 3-sub-goal computer-use task within budget
+    # Sub-goal 0: create workspace (precondition: none, post: workspace_exists)
+    # Sub-goal 1: process data (pre: workspace_exists, post: data_processed)
+    # Sub-goal 2: verify output (pre: data_processed, post: output_verified)
+    constraints = (
+        Constraint(
+            name="no_data_loss",
+            check="check_all_files_present",
+            must_hold_at=("every_step",),
+        ),
+    )
+    subgoals = (
+        SubGoal(
+            subgoal_index=0,
+            description="create_workspace",
+            precondition=frozenset(),
+            postcondition=frozenset({"workspace_exists"}),
+            step_budget=10,
+            constraint_names=frozenset({"no_data_loss"}),
+        ),
+        SubGoal(
+            subgoal_index=1,
+            description="process_data",
+            precondition=frozenset({"workspace_exists"}),
+            postcondition=frozenset({"data_processed"}),
+            step_budget=20,
+            constraint_names=frozenset({"no_data_loss"}),
+        ),
+        SubGoal(
+            subgoal_index=2,
+            description="verify_output",
+            precondition=frozenset({"data_processed"}),
+            postcondition=frozenset({"output_verified"}),
+            step_budget=10,
+            constraint_names=frozenset({"no_data_loss"}),
+        ),
+    )
+    initial_state = {"workspace.txt": b"", "data.txt": b"", "output.txt": b""}
+
+    # Hold-out task: same structure, different initial state — validates determinism
+    holdout_initial_state = {"workspace.dat": b"", "data.dat": b"", "output.dat": b""}
+    holdout_subgoals = (
+        SubGoal(
+            subgoal_index=0,
+            description="create_workspace",
+            precondition=frozenset(),
+            postcondition=frozenset({"workspace_exists"}),
+            step_budget=10,
+            constraint_names=frozenset({"no_data_loss"}),
+        ),
+        SubGoal(
+            subgoal_index=1,
+            description="process_data",
+            precondition=frozenset({"workspace_exists"}),
+            postcondition=frozenset({"data_processed"}),
+            step_budget=20,
+            constraint_names=frozenset({"no_data_loss"}),
+        ),
+        SubGoal(
+            subgoal_index=2,
+            description="verify_output",
+            precondition=frozenset({"data_processed"}),
+            postcondition=frozenset({"output_verified"}),
+            step_budget=10,
+            constraint_names=frozenset({"no_data_loss"}),
+        ),
+    )
+    holdout_task = type(
+        "HoldoutTask",
+        (),
+        {
+            "task_id": "holdout_horizon_task",
+            "goal": frozenset({"output_verified"}),
+            "constraints": constraints,
+            "total_step_budget": 100,
+            "subgoals": holdout_subgoals,
+            "initial_state": dict(holdout_initial_state),
+        },
+    )()
+
+    hbe = HorizonBoundedExecution()
+
+    # Phase 1: SENSE — observe the long-horizon task
+    sense = hbe.sense(
+        task_id="demo_long_horizon_task",
+        goal=("output_verified",),
+        constraints=constraints,
+        total_step_budget=100,
+        subgoals=subgoals,
+        initial_state=initial_state,
+    )
+    if sense["status"] != SENSE_DONE:
+        return {
+            "status": f"REFUSED__HORIZON_FAILED__{sense.get('reason', '')}",
+            "model_calls": 0,
+            "network_calls": 0,
+        }
+
+    # Phase 2: CONTRAST — generate and contrast decompositions
+    contrast = hbe.contrast(sense)
+    if contrast["status"] != CONTRAST_DONE:
+        return {
+            "status": f"REFUSED__HORIZON_FAILED__{contrast.get('reason', '')}",
+            "model_calls": 0,
+            "network_calls": 0,
+        }
+
+    # Phase 3: IDENTIFY — execute sub-goals with checkpoints
+    identify = hbe.identify(contrast)
+    if identify["status"] != IDENTIFIED:
+        return {
+            "status": f"REFUSED__HORIZON_FAILED__{identify.get('reason', '')}",
+            "model_calls": 0,
+            "network_calls": 0,
+        }
+
+    # Phase 4: ADMIT — hold-out validation on different state config
+    admit = hbe.admit(identify, [holdout_task])
+    if admit["status"] != ADMITTED:
+        return {
+            "status": f"REFUSED__HORIZON_FAILED__{admit.get('reason', '')}",
+            "model_calls": 0,
+            "network_calls": 0,
+        }
+
+    # Phase 5: REMEMBER — zero knowledge house
+    remember = hbe.remember(admit)
+    if remember["status"] != REMEMBERED:
+        return {
+            "status": f"REFUSED__HORIZON_FAILED__{remember.get('reason', '')}",
+            "model_calls": 0,
+            "network_calls": 0,
+        }
+
+    report = {
+        "phase": "COMPLETE",
+        "status": "COMPLETE",
+        "result": "HORIZON_BOUNDED_EXECUTION_COMPLETE",
+        "phases": [sense, contrast, identify, admit, remember],
+    }
+
+    return {
+        "status": "COMPLETE",
+        "result": "HORIZON_BOUNDED_COMPLETE",
+        "model_calls": 0,
+        "network_calls": 0,
+        "stored_knowledge_bytes": 0,
+        "knowledge_house": False,
+        "total_steps": identify["total_steps"],
+        "total_budget": identify["total_budget"],
+        "goal_reached": identify["goal_reached"],
+        "all_constraints_preserved": identify["all_constraints_preserved"],
+        "rollbacks": identify["rollbacks"],
+        "horizon_execution": report,
+    }
 
 # --------------------------------------------------------------------------- #
 # CLI
