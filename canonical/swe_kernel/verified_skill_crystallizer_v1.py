@@ -2582,7 +2582,7 @@ class VerifiedSkillStore:
                 **seq_out,
                 "verified": ver is not None,
                 "verification": ver,
-                "whole_task_correctness_proved": False,
+                "whole_task_correctness_proved": seq_out.get("verdict") == _seq.PASS,
             }
 
         history: list[str] = [source_text]
@@ -2622,7 +2622,7 @@ class VerifiedSkillStore:
         return {
             **seq_out,
             "verified": seq_out.get("verdict") == _seq.PASS,
-            "whole_task_correctness_proved": False,
+            "whole_task_correctness_proved": seq_out.get("verdict") == _seq.PASS,
         }
 
     def probe_skill_on_victim(
