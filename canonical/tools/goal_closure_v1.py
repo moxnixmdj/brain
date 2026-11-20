@@ -310,7 +310,10 @@ def enumerate_states(start: pathlib.Path, target: str, workspace: pathlib.Path,
                     else:
                         rows.append(Judgment(origin, after, child, "HOLE", plan + (edge.name,)))
                 if key in seen:
-                    shutil.rmtree(child, ignore_errors=True)
+                    # A judged row is evidence: keep its path so a later audit can re-read it.
+                    # Duplicate states are still excluded from the frontier.
+                    if not literal:
+                        shutil.rmtree(child, ignore_errors=True)
                     continue
                 seen.add(key)
                 next_frontier.append((child, plan + (edge.name,), after))
@@ -358,7 +361,8 @@ def evaluate(closure: Sequence[str], rows: Sequence[Judgment], target: str) -> d
 
 def plan(start: pathlib.Path, target: str, workspace: pathlib.Path,
          closure: Sequence[str], *, max_depth: int = 6, cap: int = 260,
-         reference: Mapping[str, str] | None = None) -> dict[str, Any]:
+         reference: Mapping[str, str] | None = None,
+         weak: Callable[[pathlib.Path, str], tuple[bool, str]] | None = None) -> dict[str, Any]:
     begun = time.time()
     if workspace.exists():
         shutil.rmtree(workspace)
@@ -383,7 +387,7 @@ def plan(start: pathlib.Path, target: str, workspace: pathlib.Path,
                 if not applied or child is None:
                     continue
                 after = read_state(child, target, reference)
-                literal, _why = literal_goal(child, target)
+                literal, _why = (weak or literal_goal)(child, target)
                 if literal and closure_holds(closure, origin, after, target, child):
                     return {"solved": True, "plan": list(prefix + (edge.name,)),
                             "edges": edges, "seconds": round(time.time() - begun, 2)}

@@ -1,0 +1,144 @@
+{
+ "schema": "BRAIN_ONE_ORIGIN_DERIVES_THE_JUDGE_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "claim": "One observed damaged origin is enough to compute a verifier; the refitted closure transfers to a different repository and agrees with the old supplied judge.",
+ "declared_before_the_run": [
+  "D1 every class yields a derived judge with both holes and legitimate states",
+  "D2 the derived judgments select a closure in the existing law algebra",
+  "D3 the refitted closure has zero false accepts and zero false rejects on the held repo",
+  "D4 the derived verdict agrees with the supplied judge on every held state",
+  "D5 zero stored parameters, zero model calls, zero hard-coded damage strings in the judge"
+ ],
+ "limits": [
+  "damage classes, action vocabulary and law algebra are supplied",
+  "the target commit and one origin per class are supplied observations",
+  "not a GUI, browser or benchmark score; no independent verification"
+ ],
+ "train_repairs": [
+  {
+   "class": "stashed_wrong_branch",
+   "verdict": "GOAL_REPAIRED",
+   "drop": [
+    "head"
+   ],
+   "holes": 54,
+   "legitimate": 5
+  },
+  {
+   "class": "conflict_and_stash",
+   "verdict": "GOAL_REPAIRED",
+   "drop": [
+    "head"
+   ],
+   "holes": 87,
+   "legitimate": 1
+  },
+  {
+   "class": "side_untracked",
+   "verdict": "NOT_CONTRADICTORY",
+   "drop": [],
+   "holes": 5,
+   "legitimate": 6
+  },
+  {
+   "class": "side_dirty",
+   "verdict": "NOT_CONTRADICTORY",
+   "drop": [],
+   "holes": 15,
+   "legitimate": 7
+  }
+ ],
+ "held_out_repairs": [
+  {
+   "class": "stashed_wrong_branch",
+   "verdict": "GOAL_REPAIRED",
+   "drop": [
+    "head"
+   ],
+   "holes": 54,
+   "legitimate": 5
+  },
+  {
+   "class": "conflict_and_stash",
+   "verdict": "GOAL_REPAIRED",
+   "drop": [
+    "head"
+   ],
+   "holes": 86,
+   "legitimate": 1
+  },
+  {
+   "class": "side_untracked",
+   "verdict": "NOT_CONTRADICTORY",
+   "drop": [],
+   "holes": 5,
+   "legitimate": 6
+  },
+  {
+   "class": "side_dirty",
+   "verdict": "NOT_CONTRADICTORY",
+   "drop": [],
+   "holes": 15,
+   "legitimate": 7
+  }
+ ],
+ "selection": {
+  "status": "CLOSURE_FOUND",
+  "closures": [
+   [
+    "ref_preserve",
+    "tracking_preserve",
+    "stash_restore"
+   ]
+  ],
+  "minimal_size": 3
+ },
+ "closure": [
+  "ref_preserve",
+  "tracking_preserve",
+  "stash_restore"
+ ],
+ "train_evaluation": [
+  {
+   "laws": [
+    "ref_preserve",
+    "tracking_preserve",
+    "stash_restore"
+   ],
+   "holes_seen": 161,
+   "legitimate_seen": 19,
+   "false_accepts": [],
+   "false_rejects": []
+  }
+ ],
+ "held_evaluation": [
+  {
+   "laws": [
+    "ref_preserve",
+    "tracking_preserve",
+    "stash_restore"
+   ],
+   "holes_seen": 160,
+   "legitimate_seen": 19,
+   "false_accepts": [],
+   "false_rejects": []
+  }
+ ],
+ "disagreements": [],
+ "disagreement_count": 0,
+ "judged_rows": {
+  "train": 180,
+  "held": 179
+ },
+ "criteria": {
+  "D1_all_classes_judged": true,
+  "D2_closure_found": true,
+  "D3_transfer_zero_errors": true,
+  "D4_supplied_judge_agrees": true,
+  "D5_zero_parameters_and_model_calls": true
+ },
+ "met": true,
+ "model_calls": 0,
+ "parameters_stored": 0,
+ "seconds": 366.2
+}
