@@ -37,6 +37,10 @@ from pathlib import Path
 from typing import Any, Callable, Mapping, Sequence
 
 from canonical.runtime.generic_tool_argument_binder_v1 import canonical_field
+from canonical.runtime.osworld_v21_receipt_dataflow_v3 import (
+    _relational_refs as relational_refs,
+    materialize_explicit_references,
+)
 from canonical.runtime.osworld_v21_state_ops_v1 import StateOpsError, _path
 from canonical.runtime.osworld_v21_workflow_policy_v1 import split_explicit_subgoals
 
@@ -260,6 +264,25 @@ def _app_pass_row_index(rows: list[Mapping[str, Any]], requirement: Mapping[str,
     return hit
 
 
+def _observation_row_index(rows: list[Mapping[str, Any]], requirement: Mapping[str, Any]) -> int | None:
+    """Find a successful product-native readback of the required source."""
+    hit: int | None = None
+    for index, row in enumerate(rows):
+        if row.get("operation_error"):
+            continue
+        submitted = row.get("submitted_web_app_operation")
+        result = row.get("web_app_result")
+        if not (isinstance(submitted, Mapping) and isinstance(result, Mapping)):
+            continue
+        if result.get("ok") is not True:
+            continue
+        if (str(submitted.get("app") or "") != str(requirement.get("app"))
+                or str(submitted.get("operation") or "") != str(requirement.get("op"))):
+            continue
+        hit = index
+    return hit
+
+
 def _web_app_mutation(row: Mapping[str, Any]) -> set[str] | None:
     """A non-observation product op has unknown scope and invalidates all app evidence."""
     submitted = row.get("submitted_web_app_operation")
@@ -325,7 +348,7 @@ def _bind_clause(
     return requirements, errors
 
 
-def compile_requirements(instruction: Any) -> tuple[list[dict[str, Any]], list[str]]:
+def _compile_literal_requirements(instruction: Any) -> tuple[list[dict[str, Any]], list[str]]:
     """Compile only explicitly stated, machine-checkable completion conditions.
 
     Returns ``(requirements, errors)``. An error, an empty requirement set or an
@@ -366,6 +389,125 @@ def compile_requirements(instruction: Any) -> tuple[list[dict[str, Any]], list[s
     return [by_key[key] for key in sorted(by_key)], sorted(set(errors))
 
 
+def _relational_source_requirement(clause: str) -> dict[str, Any] | None:
+    """Return a registry-bound observation requirement for one relational clause."""
+    specs = _web_app_specs()
+    apps = _app_mentions(clause, specs)
+    if len(apps) != 1:
+        return None
+    spec = specs[apps[0]]
+    return {
+        "kind": "APP_OBSERVATION",
+        "app": spec["app"],
+        "op": spec["observation"],
+        "source_hint": spec["app"],
+        "ops": [],
+    }
+
+
+def compile_requirements(
+    instruction: Any,
+    prior_rows: Sequence[Mapping[str, Any]] = (),
+) -> tuple[list[dict[str, Any]], list[str]]:
+    """Compile literal and receipt-derived completion conditions.
+
+    A relational expression such as ``the count of events from Calendar`` is
+    never answered from parameters or world knowledge. It is resolved only from
+    prior structured receipts by the existing provenance-bound dataflow V3, and
+    the resulting literal becomes an ordinary guest-asserted file condition.
+    Until such a receipt exists, only the registry-bound product observation is
+    required, so DONE cannot be reached on an unverified relation.
+    """
+    text = str(instruction or "").strip()
+    if not text:
+        return _compile_literal_requirements(instruction)
+
+    clauses = [(start, end, clause) for start, end, clause in _clause_spans(text)]
+    clauses_with_refs = [clause for _start, _end, clause in clauses if relational_refs(clause)]
+    literal_clauses = [clause for _start, _end, clause in clauses if not relational_refs(clause)]
+    literal, errors = (
+        _compile_literal_requirements("; ".join(literal_clauses)) if literal_clauses else ([], [])
+    )
+
+    derived_by_path: dict[str, list[dict[str, Any]]] = {}
+    source_requirements: dict[tuple[str, str], dict[str, Any]] = {}
+    for _start, _end, clause in clauses:
+        if not relational_refs(clause):
+            continue
+        paths, path_errors = _path_spans(clause)
+        errors.extend(path_errors)
+        source = _relational_source_requirement(clause)
+        if source is None:
+            errors.append("RELATIONAL_SOURCE_NOT_REGISTRY_BOUND")
+            continue
+        source_requirements[(str(source["app"]), str(source["op"]))] = source
+
+        flow = materialize_explicit_references(clause, prior_rows)
+        if flow.get("pass") is not True:
+            errors.append("RELATIONAL_REFERENCE_UNRESOLVED")
+            continue
+        supported = [
+            binding for binding in (flow.get("bindings") or [])
+            if isinstance(binding, Mapping)
+            and str(binding.get("kind") or "") in {"count", "projection", "filtered"}
+        ]
+        if len(supported) != 1:
+            errors.append("RELATIONAL_MULTIPLE_REFERENCES_UNSUPPORTED")
+            continue
+        if len(paths) != 1:
+            errors.append("RELATIONAL_TARGET_PATH_AMBIGUOUS")
+            continue
+        literal_target, _literal_target_errors = _bind_clause(
+            clause, paths, _quote_spans(clause)
+        )
+        if any(str(r.get("kind")) == "TEXT_CONTAINS" for r in literal_target):
+            # The path names a directory containing a quoted filename, not the
+            # file whose contents must equal the receipt-derived value.
+            errors.append("RELATIONAL_TARGET_PATH_NOT_FILE")
+            continue
+        value = supported[0].get("value")
+        text_value = value if isinstance(value, str) else json.dumps(
+            value, ensure_ascii=False, default=str
+        )
+        path = str(paths[0]["value"])
+        bound = {
+            "kind": "TEXT_CONTAINS", "path": path, "text": text_value,
+            "op": "ASSERT_TEXT_CONTAINS",
+            "ops": ["ASSERT_TEXT_CONTAINS", "ASSERT_TEXT_EQUALS"],
+            "comparison": "equal", "derived_from": "RECEIPT_DATAFLOW_V3",
+            "derived_provenance": [
+                dict(p) for p in (supported[0].get("provenance") or [])
+                if isinstance(p, Mapping)
+            ],
+        }
+        derived_by_path.setdefault(path, []).append(bound)
+
+    by_key: dict[tuple[str, ...], dict[str, Any]] = {}
+    for requirement in literal:
+        if str(requirement.get("kind")) == "APP_STATE_FIELD":
+            key = ("APP", str(requirement.get("app")), str(requirement.get("field")))
+        else:
+            key = ("PATH", str(requirement.get("path")))
+        if str(requirement.get("path") or "") in derived_by_path:
+            continue
+        by_key[key] = requirement
+    for path, requirements in derived_by_path.items():
+        for requirement in requirements:
+            by_key[("PATH", path)] = requirement
+    for requirement in source_requirements.values():
+        key = ("OBSERVATION", str(requirement["app"]), str(requirement["op"]))
+        by_key[key] = requirement
+
+    if clauses_with_refs:
+        # The observation clause is now machine-checkable through the registry,
+        # and a path requirement is supplied by receipt-derived binding rather
+        # than by a literal quoted value in the original instruction.
+        errors = [error for error in errors if error != "APP_GOAL_NOT_MACHINE_CHECKABLE"]
+        if source_requirements:
+            errors = [error for error in errors if error != "NO_EXPLICIT_STATE_PATH"]
+    return [by_key[key] for key in sorted(by_key)], sorted(set(errors))
+
+
 def assertion_ops(requirement: Mapping[str, Any]) -> list[dict[str, Any]]:
     """Render the pinned guest assertion batch for one requirement.
 
@@ -377,8 +519,12 @@ def assertion_ops(requirement: Mapping[str, Any]) -> list[dict[str, Any]]:
     path = requirement.get("path")
     ops = {
         "PATH_EXISTS": [{"type": "ASSERT_PATH_EXISTS", "path": path}],
-        "TEXT_CONTAINS": [{"type": "ASSERT_TEXT_CONTAINS", "path": path,
-                           "text": requirement.get("text")}],
+        "TEXT_CONTAINS": ([
+            {"type": "ASSERT_TEXT_CONTAINS", "path": path, "text": requirement.get("text")},
+            {"type": "ASSERT_TEXT_EQUALS", "path": path, "text": requirement.get("text")},
+        ] if requirement.get("derived_from") else [
+            {"type": "ASSERT_TEXT_CONTAINS", "path": path, "text": requirement.get("text")},
+        ]),
         "DIRECTORY_SENSOR": [
             {"type": "ASSERT_PATH_EXISTS", "path": path},
             {"type": "ASSERT_SENSOR_REQUEST", "path": path},
@@ -435,9 +581,18 @@ def _pass_row_index(rows: list[Mapping[str, Any]], requirement: Mapping[str, Any
                     and _ops_include(ops, {"type": "ASSERT_PATH_EXISTS", "path": path})):
                 hit = index
         elif kind == "TEXT_CONTAINS":
-            if ("ASSERT_TEXT_CONTAINS:PASS:" + str(path) in output
-                    and _ops_include(ops, {"type": "ASSERT_TEXT_CONTAINS", "path": path,
-                                           "text": requirement.get("text")})):
+            passed = "ASSERT_TEXT_CONTAINS:PASS:" + str(path) in output
+            submitted = _ops_include(
+                ops, {"type": "ASSERT_TEXT_CONTAINS", "path": path,
+                      "text": requirement.get("text")}
+            )
+            if requirement.get("derived_from"):
+                passed = passed and "ASSERT_TEXT_EQUALS:PASS:" + str(path) in output
+                submitted = submitted and _ops_include(
+                    ops, {"type": "ASSERT_TEXT_EQUALS", "path": path,
+                          "text": requirement.get("text")}
+                )
+            if passed and submitted:
                 hit = index
         elif kind == "DIRECTORY_SENSOR":
             guest = row.get("guest_result")
@@ -496,10 +651,20 @@ def audit(state: Mapping[str, Any], requirements: Sequence[Mapping[str, Any]]) -
 
     evidence: list[dict[str, Any]] = []
     for requirement in requirements:
-        is_app = requirement.get("kind") == "APP_STATE_FIELD"
-        index = (_app_pass_row_index(rows, requirement) if is_app
-                 else _pass_row_index(rows, requirement))
+        kind = str(requirement.get("kind") or "")
+        is_app = kind in {"APP_STATE_FIELD", "APP_OBSERVATION"}
+        if kind == "APP_OBSERVATION":
+            index = _observation_row_index(rows, requirement)
+        elif is_app:
+            index = _app_pass_row_index(rows, requirement)
+        else:
+            index = _pass_row_index(rows, requirement)
         path = str(requirement.get("path") or "")
+        provenance = [
+            int(p.get("row_index")) for p in (requirement.get("derived_provenance") or [])
+            if isinstance(p, Mapping) and isinstance(p.get("row_index"), int)
+        ]
+        source_index = max(provenance, default=-1)
         invalidated_by: list[int] = []
         if index is not None:
             for mutation_index, mutated in mutations:
@@ -507,20 +672,29 @@ def audit(state: Mapping[str, Any], requirements: Sequence[Mapping[str, Any]]) -
                     continue
                 if mutated is None or (not is_app and path in (mutated or set())):
                     invalidated_by.append(mutation_index)
+                elif provenance and mutation_index > source_index and mutated:
+                    invalidated_by.append(mutation_index)
         verified = index is not None and not invalidated_by
+        basis = "NONE"
+        if verified:
+            if kind == "APP_OBSERVATION":
+                basis = "PRODUCT_NATIVE_READBACK_OBSERVATION"
+            elif is_app:
+                basis = "PRODUCT_NATIVE_READBACK_AFTER_LAST_MUTATION"
+            elif provenance:
+                basis = "RECEIPT_DATAFLOW_DERIVED_GUEST_PASS_RECEIPT"
+            else:
+                basis = "ADAPTER_VISIBLE_GUEST_PASS_RECEIPT_AFTER_LAST_PATH_MUTATION"
         evidence.append({
-            "kind": requirement.get("kind"),
+            "kind": kind,
             "path": requirement.get("path"),
             "app": requirement.get("app"),
             "field": requirement.get("field"),
             "value": requirement.get("value"),
             "verified": verified,
-            "basis": (
-                "PRODUCT_NATIVE_READBACK_AFTER_LAST_MUTATION" if verified and is_app else
-                "ADAPTER_VISIBLE_GUEST_PASS_RECEIPT_AFTER_LAST_PATH_MUTATION" if verified else
-                "NONE"
-            ),
+            "basis": basis,
             "pass_row_index": index,
+            "source_row_index": source_index if provenance else None,
             "last_mutation_row_index": last_mutation,
             "invalidated_by_rows": invalidated_by,
         })
@@ -565,7 +739,7 @@ def decide(
         base = {"response": "no base policy supplied", "actions": [{"type": "WAIT"}]}
 
     instruction = state.get("instruction") if isinstance(state, Mapping) else None
-    requirements, errors = compile_requirements(instruction)
+    requirements, errors = compile_requirements(instruction, _rows(state))
     ledger = audit(state, requirements)
     receipt = {
         "schema": SCHEMA,
@@ -597,21 +771,25 @@ def decide(
     # until the ambiguity is resolved by a clearer instruction.
     ops: list[dict[str, Any]] = []
     app_action: dict[str, Any] | None = None
-    if not errors:
-        for requirement, evidence in zip(requirements, ledger["evidence"]):
-            if evidence["verified"]:
-                continue
-            if requirement.get("kind") == "APP_STATE_FIELD":
-                if app_action is None:
-                    app_action = {
-                        "type": "WEB_APP_OP",
-                        "app": requirement.get("app"),
-                        "operation": requirement.get("op"),
-                        "args": {},
-                    }
-                continue
+    for requirement, evidence in zip(requirements, ledger["evidence"]):
+        if evidence["verified"]:
+            continue
+        kind = str(requirement.get("kind") or "")
+        if kind in {"APP_STATE_FIELD", "APP_OBSERVATION"}:
+            if app_action is None:
+                app_action = {
+                    "type": "WEB_APP_OP",
+                    "app": requirement.get("app"),
+                    "operation": requirement.get("op"),
+                    "args": {},
+                }
+            continue
+        if not errors:
             ops.extend(assertion_ops(requirement))
     receipt["withheld_reason"] = (
+        "RELATIONAL_REFERENCE_UNRESOLVED" if any(
+            str(error).startswith("RELATIONAL_") for error in errors
+        ) else
         "UNRESOLVED_REQUIREMENT" if errors else
         "FRESH_APP_READBACK_REQUIRED" if app_action is not None else
         "FRESH_PASS_REQUIRED" if ops else "NO_ACTIONABLE_REQUIREMENT"

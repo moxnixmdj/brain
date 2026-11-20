@@ -1,0 +1,75 @@
+{
+ "schema": "BRAIN_RECEIPT_DERIVED_APP_STATE_GATES_ADAPTER_DONE_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "claim": "A zero-model ledger gates DONE on relational/aggregate app facts resolved only from structured product-native receipts and re-measured by exact guest assertions, with provenance-bound invalidation.",
+ "declared_before_the_run": [
+  "dataflow V3 is the only relation evaluator",
+  "the source app must be registry-bound and use one observe_* operation",
+  "the relation must be explicitly stated in the instruction",
+  "no parameter, model, world fact, task ID or /api/state use",
+  "guest must PASS both contains and exact equality assertions",
+  "later app or path mutation invalidates evidence",
+  "no pinned kernel edits"
+ ],
+ "integration_point": "BrainOSWorldAgentV7(policy_provider=verified_decide, web_app_controller=OSWorldHostWebAppOps, guest_controller=OSWorldHostGuestOps)",
+ "pinned_kernels_sha256": {
+  "canonical/runtime/osworld_v21_state_ops_v1.py": "954fb7a253b4064007f95069116476a260e8a6c43bf1c24740641d57c23f5b6f",
+  "canonical/runtime/osworld_v21_host_guest_ops_v1.py": "6d451a6c88e0d9f4ac11c9648eb153cda81c8bf4c6c240b46a894f04efa93b86",
+  "canonical/runtime/osworld_v21_brain_agent_adapter_v1.py": "e3f36cfd0847f59f6cbbd3b9f74f2d6cbad38e36eefa2c05292d14f532e328cd",
+  "canonical/runtime/osworld_v21_brain_agent_adapter_v7.py": "4fc8ee57d7f01b43f885890577631b3ad5416ac03af1851f415773d11afa13a1",
+  "canonical/runtime/osworld_v21_host_web_app_ops_v1.py": "5ca8ea43ac7b5c2f26e486b7e1d86a1c270163f8e31dd4170fdaa4c53b56162e",
+  "canonical/runtime/osworld_sensor_request_bridge_v1.py": "4ef1519833569657b481ba28a748687df168aef47eb89191e516121538b0b235",
+  "canonical/runtime/osworld_v21_receipt_dataflow_v3.py": "4ee4cc830eb64fff775650ed5fbc201bd1f6886b526ab144522d8daa886f1687"
+ },
+ "commands": {
+  "new_suite": ".venv/bin/python -m pytest canonical/tests/test_osworld_verified_task_ledger_v1.py -q",
+  "targeted_suite": ".venv/bin/python -m pytest canonical/tests/test_osworld_v21_state_ops_v1.py canonical/tests/test_guest_state_ops_execute_for_real_v1.py canonical/tests/test_osworld_v21_brain_agent_adapter_v1.py canonical/tests/test_osworld_v21_web_app_ops_v1.py canonical/tests/test_osworld_sensor_request_bridge_v1.py canonical/tests/test_osworld_v21_receipt_dataflow_v3.py canonical/tests/test_osworld_v21_terminal_authority_v18.py canonical/tests/test_osworld_verified_task_ledger_v1.py -q",
+  "full_osworld_suite": ".venv/bin/python -m pytest canonical/tests/test_osworld* -q",
+  "guard": "python3 execution_guard/repo_integrity_guard_v1.py",
+  "unified_compile": "python3 canonical/runtime/compile_brain_unified_model_v1.py",
+  "unified_verify": "python3 canonical/runtime/verify_brain_unified_model_v1.py --output canonical/verification/BRAIN_UNIFIED_MODEL_V1_VERIFICATION_20261020.json"
+ },
+ "results": {
+  "new_suite": "30 passed in 5.29s",
+  "targeted_suite": "114 passed in 7.48s",
+  "full_osworld_suite": "284 passed, 1 pre-existing order-dependent sys.modules failure",
+  "guard": "rules=17 violations=0 PASS",
+  "unified_verify": "TOTAL 33/33 PASS (digest in report only, not embedded here, to avoid the recompile cycle)",
+  "real_http_calendar_receipt": "PASS with count=2 through unchanged registry validator",
+  "derived_guest_assertions": "ASSERT_TEXT_CONTAINS and ASSERT_TEXT_EQUALS PASS from real guest execution",
+  "adapter_done": "PASS only after observation plus exact receipt-derived guest PASS",
+  "wrong_value_and_later_mutation": "blocked"
+ },
+ "criteria": {
+  "A_explicit_relational_expression_only": true,
+  "B_registry_observation_only": true,
+  "C_dataflow_v3_is_only_relation_evaluator": true,
+  "D_provenance_retained_and_exact_equality_required": true,
+  "E_later_app_or_path_mutation_invalidates": true,
+  "F_adapter_v7_reaches_done_only_after_derived_proof": true,
+  "G_pin_integrity_preserved": true,
+  "H_zero_model_calls_and_parameters": true
+ },
+ "met": true,
+ "failed_or_rejected_this_round": [
+  "new ontology killed: dataflow V3 already resolves count/first/last/all/filtered",
+  "model judge killed before build",
+  "hidden app state and /api/state killed before build",
+  "contains-only file assertion killed: exact equality added",
+  "first wrong-value test failed because the assertion correctly raised GuestOpsError; harness changed to use a real write without assertions",
+  "local HTTP harness first lacked /api/calendar/actions; fixed in harness only",
+  "full shared-process test_osworld* retains pre-existing sys.modules pollution failure"
+ ],
+ "limits": [
+  "no real CDP browser or OSWorld 2.1 task image",
+  "no GUI/browser success",
+  "no SWE-bench Pro, Terminal-Bench or unseen-environment run",
+  "no single-experience learning benchmark result",
+  "no benchmark score or independent verification",
+  "no §6 completion"
+ ],
+ "model_calls": 0,
+ "parameters_stored": 0,
+ "incremental_spend_usd": 0,
+ "checked_at_utc": "2026-11-20T14:45:20Z"
+}
