@@ -401,6 +401,10 @@ class _LocalAppServer:
         from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
         messages = [{"id": "m1", "subject": "Q4 report", "body": "initial"}]
+        events = [
+            {"id": "e1", "title": "Standup", "status": "done"},
+            {"id": "e2", "title": "Review", "status": "open"},
+        ]
 
         class Handler(BaseHTTPRequestHandler):
             def log_message(self, *_: Any) -> None:
@@ -417,22 +421,31 @@ class _LocalAppServer:
             def do_GET(self) -> None:  # noqa: N802
                 if self.path == "/api/mail":
                     self._send({"messages": messages})
+                elif self.path == "/api/calendar":
+                    self._send({"events": list(events)})
                 else:
                     self._send({"error": "not found"}, 404)
 
             def do_POST(self) -> None:  # noqa: N802
-                if self.path != "/api/mail/send":
-                    self._send({"error": "not found"}, 404)
-                    return
                 length = int(self.headers.get("Content-Length") or 0)
                 payload = _json.loads(self.rfile.read(length) or b"{}")
-                messages.append({
-                    "id": "m" + str(len(messages) + 1),
-                    "subject": str(payload.get("subject") or ""),
-                    "body": str(payload.get("body") or ""),
-                    "to": str(payload.get("to") or ""),
-                })
-                self._send({"ok": True})
+                if self.path == "/api/mail/send":
+                    messages.append({
+                        "id": "m" + str(len(messages) + 1),
+                        "subject": str(payload.get("subject") or ""),
+                        "body": str(payload.get("body") or ""),
+                        "to": str(payload.get("to") or ""),
+                    })
+                    self._send({"ok": True})
+                elif self.path == "/api/calendar/actions":
+                    events.append({
+                        "id": "e" + str(len(events) + 1),
+                        "title": str((payload.get("request") or {}).get("title") or ""),
+                        "status": "open",
+                    })
+                    self._send({"ok": True})
+                else:
+                    self._send({"error": "not found"}, 404)
 
         self.server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
         self.thread = threading.Thread(target=self.server.serve_forever, daemon=True)
@@ -494,7 +507,7 @@ class _LocalWebAppOps(OSWorldHostWebAppOps):
             request = Request()
 
             def __init__(self) -> None:
-                self.pages = [type("Page", (), {"url": outer.base_url + "/mailhub"})()]
+                self.pages = [type("Page", (), {"url": outer.base_url + "/mailhub/calendar"})()]
 
         class Browser:
             def __init__(self) -> None:
@@ -636,5 +649,207 @@ def test_adapter_does_not_done_when_readback_value_is_absent() -> None:
             response, actions = agent.predict(instruction, _obs())
             assert actions == ["WAIT"]
         assert all(row.get("actions") == ["WAIT"] for row in agent.history)
+    finally:
+        server.close()
+
+
+def test_relational_goal_requires_product_readback_before_any_file_assertion() -> None:
+    instruction = (
+        'Check Calendar; then create "/home/oai/share/count.txt" containing '
+        'the count of events from Calendar'
+    )
+    requirements, errors = L.compile_requirements(instruction)
+    assert errors == ["RELATIONAL_REFERENCE_UNRESOLVED"]
+    assert requirements == [{
+        "kind": "APP_OBSERVATION", "app": "calendar_web",
+        "op": "observe_calendar", "source_hint": "calendar_web", "ops": [],
+    }]
+    out = L.decide(_state(instruction, []), _done)
+    assert out["actions"][0] == {
+        "type": "WEB_APP_OP", "app": "calendar_web",
+        "operation": "observe_calendar", "args": {},
+    }
+    assert out["_policy_receipt"]["verified"] is False
+
+
+def test_relational_count_is_bound_only_from_real_http_receipt_then_guest_pass() -> None:
+    server = _LocalAppServer()
+    try:
+        ops = _LocalWebAppOps(server.url)
+        observe = {"app": "calendar_web", "operation": "observe_calendar", "args": {}}
+        result = ops.run(observe)
+        assert result["ok"] is True
+        assert result["result"] == {"events": [
+            {"id": "e1", "title": "Standup", "status": "done"},
+            {"id": "e2", "title": "Review", "status": "open"},
+        ]}
+        with tempfile.TemporaryDirectory(prefix="brain-relational-ledger-") as tmp:
+            target = pathlib.Path(tmp) / "count.txt"
+            instruction = (
+                f'Check Calendar; then create "{target}" containing '
+                'the count of events from Calendar'
+            )
+            history = [_web_app_row(observe, result)]
+            requirements, errors = L.compile_requirements(instruction, history)
+            assert errors == []
+            derived = [r for r in requirements if r.get("derived_from")]
+            assert len(derived) == 1
+            assert derived[0]["text"] == "2"
+            assert derived[0]["derived_provenance"] == [{
+                "row_index": 0, "source": "web_app_result", "path": ["events"],
+            }]
+            assert L.assertion_ops(derived[0]) == [
+                {"type": "ASSERT_TEXT_CONTAINS", "path": str(target), "text": "2"},
+                {"type": "ASSERT_TEXT_EQUALS", "path": str(target), "text": "2"},
+            ]
+
+            withheld = L.decide(_state(instruction, history), _done)
+            assert withheld["actions"][0]["type"] == "STATE_OPS"
+
+            write_ops = [
+                {"type": "WRITE_TEXT", "path": str(target), "text": "2"},
+                *L.assertion_ops(derived[0]),
+            ]
+            guest = OSWorldHostGuestOps()
+            guest.bind_environment(Environment(pathlib.Path(tmp)))
+            guest_result = guest.run({"ops": write_ops})
+            assert "ASSERT_TEXT_EQUALS:PASS:" + str(target) in guest_result["output"]
+            history.append(_row(write_ops, guest_result))
+            out = L.decide(_state(instruction, history), _done)
+            assert out["actions"] == [{"type": "DONE"}]
+            evidence = out["_policy_receipt"]
+            assert evidence["verified"] is True
+            assert evidence["errors"] == []
+    finally:
+        server.close()
+
+
+def test_relational_done_is_blocked_when_file_holds_a_different_count() -> None:
+    server = _LocalAppServer()
+    try:
+        ops = _LocalWebAppOps(server.url)
+        observe = {"app": "calendar_web", "operation": "observe_calendar", "args": {}}
+        result = ops.run(observe)
+        with tempfile.TemporaryDirectory(prefix="brain-relational-negative-") as tmp:
+            target = pathlib.Path(tmp) / "count.txt"
+            instruction = (
+                f'Check Calendar; then create "{target}" containing '
+                'the count of events from Calendar'
+            )
+            history = [_web_app_row(observe, result)]
+            requirements, _ = L.compile_requirements(instruction, history)
+            derived = [r for r in requirements if r.get("derived_from")][0]
+            wrong_ops = [{"type": "WRITE_TEXT", "path": str(target), "text": "3"}]
+            guest = OSWorldHostGuestOps()
+            guest.bind_environment(Environment(pathlib.Path(tmp)))
+            wrong = guest.run({"ops": wrong_ops})
+            assert wrong["ok"] is True
+            history.append(_row(wrong_ops, wrong))
+            out = L.decide(_state(instruction, history), _done)
+            assert out["actions"][0]["type"] == "STATE_OPS"
+            assert out["_policy_receipt"]["verified"] is False
+    finally:
+        server.close()
+
+
+def test_later_calendar_mutation_invalidates_receipt_derived_file_evidence() -> None:
+    server = _LocalAppServer()
+    try:
+        ops = _LocalWebAppOps(server.url)
+        observe = {"app": "calendar_web", "operation": "observe_calendar", "args": {}}
+        observed = ops.run(observe)
+        mutation = {
+            "app": "calendar_web", "operation": "action",
+            "args": {"request": {"kind": "add_event", "title": "Extra"}},
+        }
+        mutated = ops.run(mutation)
+        with tempfile.TemporaryDirectory(prefix="brain-relational-stale-") as tmp:
+            target = pathlib.Path(tmp) / "count.txt"
+            instruction = (
+                f'Check Calendar; then create "{target}" containing '
+                'the count of events from Calendar'
+            )
+            history = [_web_app_row(observe, observed)]
+            requirements, _ = L.compile_requirements(instruction, history)
+            derived = [r for r in requirements if r.get("derived_from")][0]
+            write_ops = [
+                {"type": "WRITE_TEXT", "path": str(target), "text": "2"},
+                *L.assertion_ops(derived),
+            ]
+            guest = OSWorldHostGuestOps()
+            guest.bind_environment(Environment(pathlib.Path(tmp)))
+            passed = guest.run({"ops": write_ops})
+            assert "ASSERT_TEXT_EQUALS:PASS:" + str(target) in passed["output"]
+            history.append(_row(write_ops, passed))
+            assert L.decide(_state(instruction, history), _done)["actions"] == [{"type": "DONE"}]
+
+            # A later product mutation after the same readback row invalidates the
+            # derived value even though the guest assertion receipt is unchanged.
+            stale = _state(instruction, history + [_web_app_row(mutation, mutated)])
+            audit_result = L.audit(stale, L.compile_requirements(instruction, history)[0])
+            assert audit_result["verified"] is False
+            assert audit_result["evidence"][0]["invalidated_by_rows"] == [2]
+            assert L.decide(stale, _done)["actions"][0]["type"] == "WEB_APP_OP"
+    finally:
+        server.close()
+
+
+def test_adapter_reaches_done_only_after_relational_readback_and_guest_write() -> None:
+    from canonical.runtime.osworld_v21_brain_agent_adapter_v7 import BrainOSWorldAgentV7
+
+    server = _LocalAppServer()
+    try:
+        ops = _LocalWebAppOps(server.url)
+        with tempfile.TemporaryDirectory(prefix="brain-relational-adapter-") as tmp:
+            target = pathlib.Path(tmp) / "count.txt"
+            instruction = (
+                f'Check Calendar; then create "{target}" containing '
+                'the count of events from Calendar'
+            )
+
+            def base_policy(state: Mapping[str, Any]) -> dict[str, Any]:
+                requirements, _ = L.compile_requirements(
+                    state.get("instruction"), state.get("history") or []
+                )
+                derived = [r for r in requirements if r.get("derived_from")]
+                if derived:
+                    audit_result = L.audit(state, requirements)
+                    if not all(e["verified"] for e in audit_result["evidence"]):
+                        write_ops = [
+                            {"type": "WRITE_TEXT", "path": str(target),
+                             "text": str(derived[0]["text"])},
+                            *L.assertion_ops(derived[0]),
+                        ]
+                        return {"response": "write receipt-derived value",
+                                "actions": [{"type": "STATE_OPS", "ops": write_ops}]}
+                return {"response": "finish", "actions": [{"type": "DONE"}]}
+
+            guest = OSWorldHostGuestOps()
+            guest.bind_environment(Environment(pathlib.Path(tmp)))
+            agent = BrainOSWorldAgentV7(
+                policy_provider=lambda state: L.decide(state, base_policy),
+                policy_id="relational-ledger-adapter-test",
+                browser_controller=NoBrowser(),
+                guest_controller=guest,
+                web_app_controller=ops,
+            )
+            agent.reset()
+            response, actions = agent.predict(instruction, _obs())
+            assert actions == ["WAIT"]
+            assert agent.history[-1]["submitted_web_app_operation"] == {
+                "app": "calendar_web", "operation": "observe_calendar", "args": {},
+            }
+            assert agent.history[-1]["web_app_result"]["ok"] is True
+
+            response, actions = agent.predict(instruction, _obs())
+            assert actions == ["WAIT"]
+            assert agent.history[-1]["guest_result"]["ok"] is True
+            assert "ASSERT_TEXT_EQUALS:PASS:" + str(target) in (
+                agent.history[-1]["guest_result"]["output"]
+            )
+
+            response, actions = agent.predict(instruction, _obs())
+            assert actions == ["DONE"]
+            assert agent.history[-1]["policy_receipt"]["verified"] is True
     finally:
         server.close()
