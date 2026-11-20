@@ -31226,18 +31226,18 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 593,
+  "knowledge_documents": 594,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 7207,
+  "research_index_records": 7210,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 452,
-  "source_index_modules": 2001
+  "source_index_modules": 2002
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "3c0efe2b6efd3b1bd4940faa3c39dea821b4c0b144d06ae357eeb2f873ac7b1d"
+  "value": "c3027dc68303b7091b26bab6f26e1035be31e77377c3c4f6d726c3c78c43a905"
  },
  "engines": [
   {
@@ -56370,6 +56370,84 @@
     "two",
     "unanswered",
     "unmeasurable"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 8208,
+   "headings": [
+    "Observable preconditions transfer to a third environment — 2026-11-20",
+    "0. Requirements confirmed",
+    "1. Research findings",
+    "Project",
+    "Web / frontier (inputs only)",
+    "2. §3 verdict",
+    "3. Ultimate minimal plan and design kill",
+    "4. Build and hard test",
+    "5. Honest limits and next bottleneck"
+   ],
+   "kind": "DOCUMENT",
+   "path": "OBSERVABLE_PRECONDITIONS_TRANSFER_TO_THIRD_ENVIRONMENT_20261120_V1.md",
+   "sha256": "1ae76c4dbd853a1e62ab8e0e24cbf81c01820d7728a28539c2e11f3ed86ae503",
+   "summary": "Authority: `NONE__PRODUCER_RUN_SANDBOX`. This is a zero-model, real-process measurement of an external-store capability. It is not a benchmark score, GUI success, independent verification, capability credit, or §6 completion.",
+   "terms": {
+    "16": 5,
+    "48": 6,
+    "action": 6,
+    "actions": 8,
+    "affordance": 5,
+    "already": 3,
+    "applies": 5,
+    "before": 3,
+    "benchmark": 4,
+    "bottleneck": 4,
+    "calls": 3,
+    "canonical": 3,
+    "condition": 6,
+    "conditions": 5,
+    "each": 4,
+    "environment": 5,
+    "exact": 4,
+    "external": 5,
+    "facts": 4,
+    "false": 4,
+    "latent": 4,
+    "learner": 5,
+    "learning": 5,
+    "model": 7,
+    "new": 8,
+    "no": 4,
+    "not": 12,
+    "observable": 5,
+    "one": 7,
+    "only": 6,
+    "open": 4,
+    "parameters": 4,
+    "probe": 8,
+    "read-only": 7,
+    "real": 7,
+    "repository": 6,
+    "runtime": 4,
+    "source": 4,
+    "states": 4,
+    "store": 9,
+    "target": 11,
+    "test": 4,
+    "third": 4,
+    "transfer": 4,
+    "unobservable": 4,
+    "vocabulary": 4,
+    "would": 4,
+    "zero": 4
+   },
+   "title": "Observable preconditions transfer to a third environment — 2026-11-20",
+   "title_terms": [
+    "2026-11-20",
+    "environment",
+    "observable",
+    "preconditions",
+    "third",
+    "transfer"
    ]
   },
   {
@@ -91212,10 +91290,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1395,
+  "included_source_count": 1396,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "531cf750092dc3ecc1e36e89bde59f2c3e20205723e0f8a8d624b4d82035e314"
+  "source_tree_digest": "acbb1f6756ac090cb742a00abdc5ecfe783bcbb22d72ff717f8a8ecedd43f6c6"
  },
  "research_index": [
   {
@@ -185217,6 +185295,24 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "2026-11-20",
+   "id": "research:canonical/verification/OBSERVABLE_CONDITION_TRANSFER_20261120_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/OBSERVABLE_CONDITION_TRANSFER_20261120_V1.json",
+   "schema": "BRAIN_OBSERVABLE_CONDITION_TRANSFER_V1",
+   "sha256": "e7ca5d97a0d2b0ee1b9250c7bc3c27f2efb5a660049f1c50539d1576ad59da64",
+   "status": "",
+   "terms": {
+    "20261120": 1,
+    "condition": 1,
+    "observable": 1,
+    "transfer": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "",
    "id": "research:canonical/verification/OBSERVABLE_DESCRIPTOR_20261116_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -185275,6 +185371,27 @@
     "two": 1,
     "v1": 1,
     "verification": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/OBSERVABLE_PRECONDITIONS_TRANSFER_GATES_THIRD_ENVIRONMENT_20261120_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/OBSERVABLE_PRECONDITIONS_TRANSFER_GATES_THIRD_ENVIRONMENT_20261120_V1.json",
+   "schema": "BRAIN_OBSERVABLE_PRECONDITIONS_TRANSFER_GATES_THIRD_ENVIRONMENT_V1",
+   "sha256": "2ccd5b20a616da6f40082ce61c36de9a7c49d461e257b5af291126889cdcc56f",
+   "status": "",
+   "terms": {
+    "20261120": 1,
+    "environment": 1,
+    "gates": 1,
+    "observable": 1,
+    "preconditions": 1,
+    "third": 1,
+    "transfer": 1,
+    "v1": 1
    }
   },
   {
@@ -251835,6 +251952,51 @@
    }
   },
   {
+   "action_id": "OBSERVABLE_PRECONDITIONS_TRANSFER_TO_THIRD_ENVIRONMENT_20261120_V1",
+   "capability": false,
+   "date": "2026-11-20",
+   "id": "research:canonical/action_intents/OBSERVABLE_PRECONDITIONS_TRANSFER_TO_THIRD_ENVIRONMENT_20261120_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/OBSERVABLE_PRECONDITIONS_TRANSFER_TO_THIRD_ENVIRONMENT_20261120_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "d7494c0c262b2aff0621e5910275dab1d4cd824865980840887f56f06b591ccf",
+   "status": "BUILD_MEASURED__MERGE_PENDING",
+   "terms": {
+    "20261120": 1,
+    "action": 1,
+    "actions": 1,
+    "add": 1,
+    "applicability": 1,
+    "build_measured__merge_pending": 1,
+    "buy": 1,
+    "calls": 1,
+    "cannot": 1,
+    "cheap": 1,
+    "conditions": 1,
+    "contrasts": 1,
+    "deciding": 1,
+    "digest-checked": 1,
+    "edits": 1,
+    "entries": 1,
+    "environment": 1,
+    "even": 1,
+    "executions": 1,
+    "existing": 2,
+    "external": 1,
+    "facts": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "learned": 1,
+    "observable": 2,
+    "observable_preconditions_transfer_to_third_environment_20261120_v1": 2,
+    "preconditions": 2,
+    "real": 3,
+    "repository": 2,
+    "third": 2,
+    "transfer": 2,
+    "zero": 3
+   }
+  },
+  {
    "action_id": "OBSERVATION_IDENTITY_IS_PART_OF_THE_MODEL_20261112_V1",
    "capability": false,
    "date": "2026-11-12",
@@ -305498,6 +305660,42 @@
     "totality": 2,
     "v1": 2,
     "valid_cost": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/observable_probe_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/observable_probe_v1.py",
+   "sha256": "3c434c512d12a02abb02934189ace7d7ce400984bef899d983702515af85a42c",
+   "summary": "Read-only probes that turn latent action preconditions into observable facts.",
+   "symbol_count": 5,
+   "symbols": [
+    "ProbeError",
+    "augment",
+    "run_probe",
+    "sense",
+    "state_digest"
+   ],
+   "terms": {
+    "action": 1,
+    "augment": 1,
+    "facts": 1,
+    "latent": 1,
+    "observable": 2,
+    "preconditions": 1,
+    "probe": 1,
+    "probeerror": 1,
+    "probes": 1,
+    "read-only": 1,
+    "run_probe": 1,
+    "sense": 1,
+    "state_digest": 1,
+    "turn": 1,
+    "v1": 1
    }
   },
   {

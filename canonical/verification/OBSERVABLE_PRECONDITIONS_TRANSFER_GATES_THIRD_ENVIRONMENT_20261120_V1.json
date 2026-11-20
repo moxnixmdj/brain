@@ -1,0 +1,72 @@
+{
+ "schema": "BRAIN_OBSERVABLE_PRECONDITIONS_TRANSFER_GATES_THIRD_ENVIRONMENT_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "claim": "Read-only probes make previously unobservable action preconditions observable; the existing external condition store buys those conditions in one real repository and transfers them to a third with zero target learning executions.",
+ "declared_before_the_run": [
+  "probes must be read-only and digest-checked",
+  "probes must not be the action itself",
+  "reuse applicability_v1, contrast_selection_v1 and instant_condition_store_v1 unchanged",
+  "existing store entries must survive unchanged",
+  "target learning executions must be zero",
+  "each program's own exit status is the oracle",
+  "no model calls, no parameters, no pinned kernel edits"
+ ],
+ "artifacts": {
+  "runtime_probe": "canonical/runtime/observable_probe_v1.py",
+  "measurement_tool": "canonical/tools/observable_condition_transfer_v1.py",
+  "measurement_receipt": "canonical/verification/OBSERVABLE_CONDITION_TRANSFER_20261120_V1.json",
+  "tests": "canonical/tests/test_observable_probe_v1.py",
+  "store": "canonical/astra_runtime/state/INSTANT_CONDITION_STORE_V1.json",
+  "store_digest_before": "fc8cb29382039776d5fee2f5333f04cfbcd1d1b542cc33e0b58817b34bc94682",
+  "store_digest_after": "ee71dd15bfb5a0c45e73546e9b77195d993a6cc8740d0a476b7cc5803eea767f"
+ },
+ "commands": {
+  "deterministic_suites": ".venv/bin/python -m pytest canonical/tests/test_observable_probe_v1.py canonical/tests/test_instant_condition_store_v1.py -q",
+  "transfer": "python3 canonical/tools/observable_condition_transfer_v1.py --receipt canonical/verification/OBSERVABLE_CONDITION_TRANSFER_20261120_V1.json",
+  "declaration_floor": "python3 canonical/tools/auditability_report_v1.py --floor --baseline canonical/verification/AUDITABILITY_DECLARATION_FLOOR_20261112_V1.json"
+ },
+ "results": {
+  "deterministic_suites": "8 passed in 0.62s",
+  "source_actions": 3,
+  "source_learning_executions": 13,
+  "source_exact_identifications": 0,
+  "source_held_out_accuracy_each": 1.0,
+  "target_actions": 7,
+  "target_learning_executions": 0,
+  "target_evaluation_oracles": 112,
+  "latent_action_decisions": "48/48 correct, 0 false applies",
+  "preserved_action_decisions": "48/48 correct, entries unchanged",
+  "unseen_action_decisions": "16/16 OPEN, 0 false applies (no APPLIES states in target)",
+  "probe_agreement": "1.0 for archive_valid, gzip_valid and patch_applies",
+  "declaration_floor": "HELD at 595"
+ },
+ "criteria": {
+  "A_probes_distinct_from_actions": true,
+  "B_probes_read_only_and_digest_checked": true,
+  "C_existing_store_entries_unchanged": true,
+  "D_target_learning_executions_zero": true,
+  "E_latent_conditions_transfer_without_false_applies": true,
+  "F_real_process_exit_status_oracle": true,
+  "G_zero_model_calls_and_parameters": true,
+  "H_pinned_organs_unchanged": true
+ },
+ "met": true,
+ "failed_or_rejected_this_round": [
+  "model/VLM affordance judge killed before build",
+  "new learner killed before build: existing version space is sufficient",
+  "mutating validity probes killed before build: digest check is mandatory",
+  "storing raw target traces killed before build: condition only"
+ ],
+ "limits": [
+  "0 of 3 conditions exactly identified; all are PROVISIONAL least-demanding survivors",
+  "unseen action had no applying state in the third repository",
+  "probe vocabulary is domain-specific and not yet dynamic",
+  "no GUI/browser, OSWorld 2.1, SWE-bench Pro or Terminal-Bench run",
+  "no benchmark score, hidden evaluator or independent verification",
+  "no §6 completion"
+ ],
+ "model_calls": 0,
+ "parameters_stored": 0,
+ "incremental_spend_usd": 0,
+ "checked_at_utc": "2026-11-20T15:27:03Z"
+}

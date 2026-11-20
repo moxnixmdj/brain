@@ -1,0 +1,352 @@
+{
+ "schema": "BRAIN_OBSERVABLE_CONDITION_TRANSFER_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "date": "2026-11-20",
+ "claim": "Read-only probes make previously unobservable action preconditions observable; the existing external store then buys those conditions in one real repository and transfers them to a third with zero target learning executions.",
+ "oracle": "each real program's own exit status; probes are read-only and digest-checked",
+ "summary": {
+  "source_repo": "https://github.com/pallets/click.git",
+  "source_commit": "fbdc9bb39eff05f3e4ad18c89c73fbebe9e50339",
+  "source_seed": 23,
+  "source_latent_actions": 3,
+  "source_learning_executions": 13,
+  "source_exact_identifications": 0,
+  "target_repo": "https://github.com/psf/requests.git",
+  "target_commit": "73c2ebb6df993b624b0d30733c9d237d72fa0906",
+  "target_seed": 31,
+  "target_actions": 7,
+  "target_learning_executions": 0,
+  "target_evaluation_oracles": 112,
+  "latent_action_accuracy": 1.0,
+  "latent_false_applies": 0,
+  "preserved_action_accuracy": 1.0,
+  "preserved_entries_unchanged": true,
+  "unseen_false_applies": 0,
+  "unseen_open_states": 16,
+  "unseen_states": 16,
+  "store_digest_before": "fc8cb29382039776d5fee2f5333f04cfbcd1d1b542cc33e0b58817b34bc94682",
+  "store_digest_after": "ee71dd15bfb5a0c45e73546e9b77195d993a6cc8740d0a476b7cc5803eea767f",
+  "model_calls": 0,
+  "parameters_stored": 0,
+  "seconds": 45.5
+ },
+ "source_rows": [
+  {
+   "action": "tar_extract",
+   "stage": "MEASURED",
+   "executions": 4,
+   "boundary_status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+   "survivor_count": 8192,
+   "required": [
+    "archive_valid.valid"
+   ],
+   "successes": 3,
+   "failures": 1,
+   "held_out_accuracy": 1.0,
+   "held_out_states": 8,
+   "trajectory": [
+    {
+     "outcome": true,
+     "status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+     "survivors": 0
+    },
+    {
+     "outcome": true,
+     "status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+     "survivors": 0
+    },
+    {
+     "outcome": false,
+     "status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+     "survivors": 8192
+    },
+    {
+     "stop": "EVERY_REACHABLE_STATE_GIVES_THE_SAME_ANSWER_FOR_ALL_SURVIVORS",
+     "status": "NO_REACHABLE_STATE_SPLITS_THE_SURVIVORS"
+    }
+   ]
+  },
+  {
+   "action": "gzip_decompress",
+   "stage": "MEASURED",
+   "executions": 4,
+   "boundary_status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+   "survivor_count": 8192,
+   "required": [
+    "gzip_valid.valid"
+   ],
+   "successes": 3,
+   "failures": 1,
+   "held_out_accuracy": 1.0,
+   "held_out_states": 8,
+   "trajectory": [
+    {
+     "outcome": true,
+     "status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+     "survivors": 0
+    },
+    {
+     "outcome": false,
+     "status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+     "survivors": 16384
+    },
+    {
+     "outcome": true,
+     "status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+     "survivors": 8192
+    },
+    {
+     "stop": "EVERY_REACHABLE_STATE_GIVES_THE_SAME_ANSWER_FOR_ALL_SURVIVORS",
+     "status": "NO_REACHABLE_STATE_SPLITS_THE_SURVIVORS"
+    }
+   ]
+  },
+  {
+   "action": "patch_apply",
+   "stage": "MEASURED",
+   "executions": 5,
+   "boundary_status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+   "survivor_count": 1024,
+   "required": [
+    "patch_applies.valid"
+   ],
+   "successes": 3,
+   "failures": 2,
+   "held_out_accuracy": 1.0,
+   "held_out_states": 8,
+   "trajectory": [
+    {
+     "outcome": false,
+     "status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+     "survivors": 98304
+    },
+    {
+     "outcome": false,
+     "status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+     "survivors": 90112
+    },
+    {
+     "outcome": true,
+     "status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+     "survivors": 4096
+    },
+    {
+     "outcome": true,
+     "status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+     "survivors": 1024
+    },
+    {
+     "stop": "EVERY_REACHABLE_STATE_GIVES_THE_SAME_ANSWER_FOR_ALL_SURVIVORS",
+     "status": "NO_REACHABLE_STATE_SPLITS_THE_SURVIVORS"
+    }
+   ]
+  }
+ ],
+ "target_rows": [
+  {
+   "action": "tar_extract",
+   "in_store": true,
+   "states": 16,
+   "decisions": {
+    "APPLIES": 8,
+    "DOES_NOT_APPLY": 8
+   },
+   "truth": {
+    "applies": 8,
+    "does_not_apply": 8
+   },
+   "correct": 16,
+   "accuracy": 1.0,
+   "false_applies": 0,
+   "missed_applies": 0,
+   "probe_agreement": {
+    "probe": "archive_valid",
+    "states": 16,
+    "agreement": 1.0
+   },
+   "probe_facts": [
+    "archive_valid.absent",
+    "archive_valid.invalid",
+    "archive_valid.valid",
+    "gzip_valid.absent",
+    "gzip_valid.valid",
+    "patch_applies.invalid"
+   ]
+  },
+  {
+   "action": "gzip_decompress",
+   "in_store": true,
+   "states": 16,
+   "decisions": {
+    "APPLIES": 8,
+    "DOES_NOT_APPLY": 8
+   },
+   "truth": {
+    "applies": 8,
+    "does_not_apply": 8
+   },
+   "correct": 16,
+   "accuracy": 1.0,
+   "false_applies": 0,
+   "missed_applies": 0,
+   "probe_agreement": {
+    "probe": "gzip_valid",
+    "states": 16,
+    "agreement": 1.0
+   },
+   "probe_facts": [
+    "archive_valid.absent",
+    "archive_valid.valid",
+    "gzip_valid.absent",
+    "gzip_valid.invalid",
+    "gzip_valid.valid",
+    "patch_applies.invalid"
+   ]
+  },
+  {
+   "action": "patch_apply",
+   "in_store": true,
+   "states": 16,
+   "decisions": {
+    "APPLIES": 8,
+    "DOES_NOT_APPLY": 8
+   },
+   "truth": {
+    "applies": 8,
+    "does_not_apply": 8
+   },
+   "correct": 16,
+   "accuracy": 1.0,
+   "false_applies": 0,
+   "missed_applies": 0,
+   "probe_agreement": {
+    "probe": "patch_applies",
+    "states": 16,
+    "agreement": 1.0
+   },
+   "probe_facts": [
+    "archive_valid.absent",
+    "archive_valid.valid",
+    "gzip_valid.absent",
+    "gzip_valid.valid",
+    "patch_applies.absent",
+    "patch_applies.invalid",
+    "patch_applies.valid"
+   ]
+  },
+  {
+   "action": "git_stash_pop",
+   "in_store": true,
+   "states": 16,
+   "decisions": {
+    "APPLIES": 8,
+    "DOES_NOT_APPLY": 8
+   },
+   "truth": {
+    "applies": 8,
+    "does_not_apply": 8
+   },
+   "correct": 16,
+   "accuracy": 1.0,
+   "false_applies": 0,
+   "missed_applies": 0,
+   "probe_agreement": {
+    "probe": null,
+    "states": 0,
+    "agreement": null
+   },
+   "probe_facts": [
+    "archive_valid.absent",
+    "archive_valid.valid",
+    "gzip_valid.absent",
+    "gzip_valid.valid",
+    "patch_applies.invalid"
+   ]
+  },
+  {
+   "action": "git_merge_abort",
+   "in_store": true,
+   "states": 16,
+   "decisions": {
+    "APPLIES": 8,
+    "DOES_NOT_APPLY": 8
+   },
+   "truth": {
+    "applies": 8,
+    "does_not_apply": 8
+   },
+   "correct": 16,
+   "accuracy": 1.0,
+   "false_applies": 0,
+   "missed_applies": 0,
+   "probe_agreement": {
+    "probe": null,
+    "states": 0,
+    "agreement": null
+   },
+   "probe_facts": [
+    "archive_valid.absent",
+    "archive_valid.valid",
+    "gzip_valid.absent",
+    "gzip_valid.valid",
+    "patch_applies.invalid"
+   ]
+  },
+  {
+   "action": "git_checkout_feature",
+   "in_store": true,
+   "states": 16,
+   "decisions": {
+    "APPLIES": 8,
+    "DOES_NOT_APPLY": 8
+   },
+   "truth": {
+    "applies": 8,
+    "does_not_apply": 8
+   },
+   "correct": 16,
+   "accuracy": 1.0,
+   "false_applies": 0,
+   "missed_applies": 0,
+   "probe_agreement": {
+    "probe": null,
+    "states": 0,
+    "agreement": null
+   },
+   "probe_facts": [
+    "archive_valid.absent",
+    "archive_valid.valid",
+    "gzip_valid.absent",
+    "gzip_valid.valid",
+    "patch_applies.invalid"
+   ]
+  },
+  {
+   "action": "git_rm_cached_tracked",
+   "in_store": false,
+   "states": 16,
+   "decisions": {
+    "OPEN__NO_USABLE_CONDITION": 16
+   },
+   "truth": {
+    "does_not_apply": 16
+   },
+   "correct": 0,
+   "accuracy": 0.0,
+   "false_applies": 0,
+   "missed_applies": 0,
+   "probe_agreement": {
+    "probe": null,
+    "states": 0,
+    "agreement": null
+   },
+   "probe_facts": [
+    "archive_valid.absent",
+    "archive_valid.valid",
+    "gzip_valid.absent",
+    "gzip_valid.valid",
+    "patch_applies.invalid"
+   ]
+  }
+ ]
+}
