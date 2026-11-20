@@ -1,0 +1,223 @@
+{
+ "schema": "BRAIN_PROVISIONAL_REFUTATION_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "date": "2026-11-20",
+ "claim": "One real counterexample in a fourth repository narrows a PROVISIONAL rule through its recorded support facts, without re-buying the condition, while a previously repaired action stays intact.",
+ "oracle": "each real program's own exit status; support facts come from real positive states",
+ "summary": {
+  "source_repo": "https://github.com/pallets/click.git",
+  "source_upstream_commit": "08b803cf32ceb2ae6a772c62d5da42757a897d44",
+  "source_constructed_head": "51a6913e64333d47fb91bcf5679a56c4287234e6",
+  "target_repo": "https://github.com/pallets/flask.git",
+  "target_upstream_commit": "49943b5a94413a530761350f04e896f76e8d620e",
+  "target_constructed_head": "abf16e6119ea29792da3e26defb4ce19eb46f259",
+  "target_learning_executions": 0,
+  "targeted_refutation_executions": 1,
+  "support_acquisition_executions": 2,
+  "counterexample_pre_prediction": "APPLIES",
+  "counterexample_oracle_applies": false,
+  "repair": "REPAIRED__SCOPE_NARROWED",
+  "repair_status": "PROVISIONAL__LEAST_DEMANDING_SURVIVOR",
+  "required_before": [
+   "stash.present"
+  ],
+  "required_after": [
+   "stash.present",
+   "worktree.clean"
+  ],
+  "counterexample_post_prediction": "DOES_NOT_APPLY",
+  "repair_blocked_counterexample": true,
+  "before_accuracy": {
+   "git_stash_pop": 1.0,
+   "tar_extract": 1.0
+  },
+  "after_accuracy": {
+   "git_stash_pop": 1.0,
+   "tar_extract": 1.0
+  },
+  "after_false_applies": 0,
+  "dynamic": {
+   "clean_prediction": "APPLIES",
+   "dirty_prediction": "DOES_NOT_APPLY",
+   "dirty_oracle_applies": false,
+   "dirty_file": ".devcontainer/devcontainer.json",
+   "flipped_without_learning": true
+  },
+  "store_digest_before": "ee71dd15bfb5a0c45e73546e9b77195d993a6cc8740d0a476b7cc5803eea767f",
+  "store_digest_with_support": "5c3a615b149fa6ec4b0d7ed904529d8f56da08bd56c6fbdbefbf9ba9b1bf4985",
+  "store_digest_after": "b295bf32965969dd90adad3b027ba2a8f2bd015b00b2ba6357e8e33105256f47",
+  "model_calls": 0,
+  "parameters_stored": 0,
+  "seconds": 43.8
+ },
+ "support_rows": {
+  "git_stash_pop": {
+   "stage": "ATTACHED",
+   "state": "git_stash_pop-pos00",
+   "facts": [
+    "archive_valid.valid",
+    "branch.feature.absent",
+    "branch.main.exists",
+    "file.archive.nonempty",
+    "file.archive.present",
+    "file.gzip.absent",
+    "file.patch.nonempty",
+    "file.patch.present",
+    "file.readme.untracked",
+    "file.script.absent",
+    "gzip_valid.absent",
+    "merge.idle",
+    "patch_applies.invalid",
+    "rebase.idle",
+    "stash.present",
+    "worktree.clean",
+    "worktree.has_untracked"
+   ]
+  },
+  "tar_extract": {
+   "stage": "ATTACHED",
+   "state": "tar_extract-pos00",
+   "facts": [
+    "archive_valid.valid",
+    "branch.feature.absent",
+    "branch.main.exists",
+    "file.archive.nonempty",
+    "file.archive.present",
+    "file.gzip.nonempty",
+    "file.gzip.present",
+    "file.patch.nonempty",
+    "file.patch.present",
+    "file.readme.untracked",
+    "file.script.nonempty",
+    "file.script.not_executable",
+    "file.script.present",
+    "gzip_valid.valid",
+    "merge.idle",
+    "patch_applies.invalid",
+    "rebase.idle",
+    "stash.absent",
+    "worktree.clean",
+    "worktree.has_untracked"
+   ]
+  }
+ },
+ "counterexample": {
+  "facts": [
+   "archive_valid.valid",
+   "branch.feature.absent",
+   "branch.main.exists",
+   "file.archive.nonempty",
+   "file.archive.present",
+   "file.gzip.absent",
+   "file.patch.nonempty",
+   "file.patch.present",
+   "file.readme.untracked",
+   "file.script.absent",
+   "gzip_valid.absent",
+   "merge.idle",
+   "patch_applies.invalid",
+   "rebase.idle",
+   "stash.present",
+   "worktree.dirty",
+   "worktree.has_untracked"
+  ],
+  "applies": false,
+  "note": "On branch main\nYour branch is ahead of 'origin/main' by 3 commits.\n  (use \"git push\" to publish your local commits)\n\nChanges not staged for commit:\n  (use \"git add <file>...\" to update what will be co",
+  "path": "/tmp/provisional-refutation/target/counterexample",
+  "dirty_file": ".devcontainer/devcontainer.json"
+ },
+ "repair_result": {
+  "status": "PROVISIONAL__LEAST_DEMANDING_SURVIVOR",
+  "repair": "REPAIRED__SCOPE_NARROWED",
+  "changed": true,
+  "required": [
+   "stash.present",
+   "worktree.clean"
+  ],
+  "required_before": [
+   "stash.present"
+  ],
+  "added_fact": "worktree.clean",
+  "survivor_count_before": 0,
+  "survivor_count_after": 65536
+ },
+ "before_rows": [
+  {
+   "action": "git_stash_pop",
+   "in_store": true,
+   "states": 16,
+   "decisions": {
+    "APPLIES": 8,
+    "DOES_NOT_APPLY": 8
+   },
+   "truth": {
+    "applies": 8,
+    "does_not_apply": 8
+   },
+   "correct": 16,
+   "accuracy": 1.0,
+   "false_applies": 0,
+   "missed_applies": 0
+  },
+  {
+   "action": "tar_extract",
+   "in_store": true,
+   "states": 16,
+   "decisions": {
+    "APPLIES": 8,
+    "DOES_NOT_APPLY": 8
+   },
+   "truth": {
+    "applies": 8,
+    "does_not_apply": 8
+   },
+   "correct": 16,
+   "accuracy": 1.0,
+   "false_applies": 0,
+   "missed_applies": 0
+  }
+ ],
+ "after_rows": [
+  {
+   "action": "git_stash_pop",
+   "in_store": true,
+   "states": 16,
+   "decisions": {
+    "APPLIES": 8,
+    "DOES_NOT_APPLY": 8
+   },
+   "truth": {
+    "applies": 8,
+    "does_not_apply": 8
+   },
+   "correct": 16,
+   "accuracy": 1.0,
+   "false_applies": 0,
+   "missed_applies": 0
+  },
+  {
+   "action": "tar_extract",
+   "in_store": true,
+   "states": 16,
+   "decisions": {
+    "APPLIES": 8,
+    "DOES_NOT_APPLY": 8
+   },
+   "truth": {
+    "applies": 8,
+    "does_not_apply": 8
+   },
+   "correct": 16,
+   "accuracy": 1.0,
+   "false_applies": 0,
+   "missed_applies": 0
+  }
+ ],
+ "dynamic_shift": {
+  "clean_prediction": "APPLIES",
+  "dirty_prediction": "DOES_NOT_APPLY",
+  "dirty_oracle_applies": false,
+  "dirty_file": ".devcontainer/devcontainer.json",
+  "flipped_without_learning": true
+ }
+}

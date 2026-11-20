@@ -6,7 +6,8 @@
    "action_key": "[\"git\",\"stash\",\"pop\"]",
    "condition_status": "PROVISIONAL__LEAST_DEMANDING_SURVIVOR",
    "required": [
-    "stash.present"
+    "stash.present",
+    "worktree.clean"
    ],
    "source": {
     "environment": "source",
@@ -50,7 +51,8 @@
        "status": "NO_REACHABLE_STATE_SPLITS_THE_SURVIVORS"
       }
      ]
-    }
+    },
+    "survivor_count_before": 0
    },
    "external_model_dependency": false,
    "task_specific_policy_data": false,
@@ -58,6 +60,64 @@
     "git",
     "stash",
     "pop"
+   ],
+   "support_facts": [
+    "archive_valid.valid",
+    "branch.feature.absent",
+    "branch.main.exists",
+    "file.archive.nonempty",
+    "file.archive.present",
+    "file.gzip.absent",
+    "file.patch.nonempty",
+    "file.patch.present",
+    "file.readme.untracked",
+    "file.script.absent",
+    "gzip_valid.absent",
+    "merge.idle",
+    "patch_applies.invalid",
+    "rebase.idle",
+    "stash.present",
+    "worktree.clean",
+    "worktree.has_untracked"
+   ],
+   "support_source": {
+    "role": "one_real_positive_support_state",
+    "state": "git_stash_pop-pos00"
+   },
+   "refutations": [
+    {
+     "facts": [
+      "archive_valid.valid",
+      "branch.feature.absent",
+      "branch.main.exists",
+      "file.archive.nonempty",
+      "file.archive.present",
+      "file.gzip.absent",
+      "file.patch.nonempty",
+      "file.patch.present",
+      "file.readme.untracked",
+      "file.script.absent",
+      "gzip_valid.absent",
+      "merge.idle",
+      "patch_applies.invalid",
+      "rebase.idle",
+      "stash.present",
+      "worktree.dirty",
+      "worktree.has_untracked"
+     ],
+     "outcome": false,
+     "repair": "REPAIRED__SCOPE_NARROWED",
+     "required_before": [
+      "stash.present"
+     ],
+     "required_after": [
+      "stash.present",
+      "worktree.clean"
+     ],
+     "status_before": "PROVISIONAL__LEAST_DEMANDING_SURVIVOR",
+     "status_after": "PROVISIONAL__LEAST_DEMANDING_SURVIVOR",
+     "boundary_survivor_count": 65536
+    }
    ]
   },
   "[\"git\",\"merge\",\"--abort\"]": {
@@ -390,7 +450,33 @@
     ]
    },
    "external_model_dependency": false,
-   "task_specific_policy_data": false
+   "task_specific_policy_data": false,
+   "support_facts": [
+    "archive_valid.valid",
+    "branch.feature.absent",
+    "branch.main.exists",
+    "file.archive.nonempty",
+    "file.archive.present",
+    "file.gzip.nonempty",
+    "file.gzip.present",
+    "file.patch.nonempty",
+    "file.patch.present",
+    "file.readme.untracked",
+    "file.script.nonempty",
+    "file.script.not_executable",
+    "file.script.present",
+    "gzip_valid.valid",
+    "merge.idle",
+    "patch_applies.invalid",
+    "rebase.idle",
+    "stash.absent",
+    "worktree.clean",
+    "worktree.has_untracked"
+   ],
+   "support_source": {
+    "role": "one_real_positive_support_state",
+    "state": "tar_extract-pos00"
+   }
   },
   "[\"gzip\",\"-d\",\"payload.gz\"]": {
    "action_key": "[\"gzip\",\"-d\",\"payload.gz\"]",
@@ -525,5 +611,5 @@
    "task_specific_policy_data": false
   }
  },
- "updated_at": "2026-11-20T15:25:19Z"
+ "updated_at": "2026-11-20T15:47:05Z"
 }

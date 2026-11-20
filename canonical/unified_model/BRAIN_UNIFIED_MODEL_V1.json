@@ -31226,18 +31226,18 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 594,
+  "knowledge_documents": 595,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 7210,
+  "research_index_records": 7212,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 452,
-  "source_index_modules": 2002
+  "source_index_modules": 2003
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "c3027dc68303b7091b26bab6f26e1035be31e77377c3c4f6d726c3c78c43a905"
+  "value": "6f3c00dab905ce89d8dc880fd57340b45f792fccdbe50a5b616bc0f0d58d0961"
  },
  "engines": [
   {
@@ -90010,6 +90010,82 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 4740,
+   "headings": [
+    "Targeted refutation of a PROVISIONAL rule — measured, not assumed",
+    "What was tested",
+    "Measured result",
+    "Two failed designs were measured and rejected",
+    "Hard checks run here",
+    "What this does NOT establish"
+   ],
+   "kind": "DOCUMENT",
+   "path": "canonical/verification/PROVISIONAL_REFUTATION_20261120_V1.md",
+   "sha256": "77fd21d1edb88b95dbfebc8aedcb3862c40979ac6c24c2e47dc4655a3bef5760",
+   "summary": "Date: 2026-11-20. Branch: `arena/5856d496-brain`. Authority: **NONE** (producer-run sandbox measurement). Machine receipt: `canonical/verification/PROVISIONAL_REFUTATION_20261120_V1.json`.",
+   "terms": {
+    "1.0": 4,
+    "33": 2,
+    "595": 2,
+    "accuracy": 3,
+    "action": 2,
+    "adds": 3,
+    "after": 3,
+    "applies": 4,
+    "authority": 2,
+    "base": 2,
+    "before": 2,
+    "canonical": 2,
+    "constructed": 3,
+    "counterexample": 3,
+    "does_not_apply": 4,
+    "execution": 3,
+    "fact": 4,
+    "falsifying": 3,
+    "file": 3,
+    "floor": 3,
+    "head": 3,
+    "learning": 3,
+    "measured": 3,
+    "new": 3,
+    "no": 4,
+    "not": 10,
+    "one": 8,
+    "oracle": 3,
+    "passed": 3,
+    "prediction": 4,
+    "program": 3,
+    "provisional": 4,
+    "real": 5,
+    "refutation": 3,
+    "repair": 5,
+    "repository": 3,
+    "rule": 5,
+    "source": 3,
+    "stash": 3,
+    "stash.present": 4,
+    "state": 6,
+    "store": 5,
+    "stored": 4,
+    "support": 3,
+    "target": 4,
+    "tests": 3,
+    "upstream": 3,
+    "worktree.clean": 3
+   },
+   "title": "Targeted refutation of a PROVISIONAL rule — measured, not assumed",
+   "title_terms": [
+    "assumed",
+    "measured",
+    "not",
+    "provisional",
+    "refutation",
+    "rule",
+    "targeted"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 14230,
    "headings": [
     "Final integration validation",
@@ -91290,10 +91366,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1396,
+  "included_source_count": 1397,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "acbb1f6756ac090cb742a00abdc5ecfe783bcbb22d72ff717f8a8ecedd43f6c6"
+  "source_tree_digest": "cc8a9d765c80a0040e1fa4ffbdf8e4618ebe494e29c1776e53a5c7d3ed24428a"
  },
  "research_index": [
   {
@@ -196781,6 +196857,23 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "2026-11-20",
+   "id": "research:canonical/verification/PROVISIONAL_REFUTATION_20261120_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/PROVISIONAL_REFUTATION_20261120_V1.json",
+   "schema": "BRAIN_PROVISIONAL_REFUTATION_V1",
+   "sha256": "c812f96667f3b13022520c3c94b828cc04dd746f6d1b64343ae805f3582e8723",
+   "status": "",
+   "terms": {
+    "20261120": 1,
+    "provisional": 1,
+    "refutation": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-07",
    "id": "research:canonical/verification/PSTAR_PERSISTENT_RESIDUAL_WOLFRAM_VERIFICATION_20261007_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -256419,6 +256512,51 @@
     "nothing": 1,
     "only": 1,
     "path": 1
+   }
+  },
+  {
+   "action_id": "TARGETED_PROVISIONAL_REFUTATION_20261120_V1",
+   "capability": false,
+   "date": "2026-11-20",
+   "id": "research:canonical/action_intents/TARGETED_PROVISIONAL_REFUTATION_20261120_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/TARGETED_PROVISIONAL_REFUTATION_20261120_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "43895674057d6eabd174d567d0303ead8c926b3d3e37f466b5bcd886a7a528af",
+   "status": "BUILD_MEASURED__MERGE_PENDING",
+   "terms": {
+    "20261120": 1,
+    "accuracy": 1,
+    "after": 1,
+    "another": 1,
+    "because": 1,
+    "build_measured__merge_pending": 1,
+    "call": 1,
+    "calls": 1,
+    "capability": 1,
+    "computed": 2,
+    "counterexample": 1,
+    "deleting": 1,
+    "dynamic": 1,
+    "edits": 1,
+    "executions": 1,
+    "existing": 1,
+    "fact": 1,
+    "flip": 1,
+    "fourth": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "learning": 2,
+    "mechanism": 1,
+    "model": 1,
+    "narrow": 1,
+    "narrowed": 1,
+    "no": 3,
+    "one": 2,
+    "provisional": 3,
+    "real": 2,
+    "refutation": 2,
+    "targeted_provisional_refutation_20261120_v1": 2,
+    "zero": 3
    }
   },
   {
@@ -317193,6 +317331,39 @@
     "scope_relation": 1,
     "string_set": 1,
     "v2": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/provisional_repair_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/provisional_repair_v1.py",
+   "sha256": "c642e4bba1cd8b6b4bd6349060b391f119324197a692dbcf48b193a178da186e",
+   "summary": "Targeted refutation of a PROVISIONAL rule in the external store.",
+   "symbol_count": 5,
+   "symbols": [
+    "RepairError",
+    "_quarantine",
+    "attach_support",
+    "repair",
+    "report"
+   ],
+   "terms": {
+    "attach_support": 1,
+    "external": 1,
+    "provisional": 2,
+    "quarantine": 1,
+    "refutation": 1,
+    "repair": 2,
+    "repairerror": 1,
+    "report": 1,
+    "rule": 1,
+    "store": 1,
+    "targeted": 1,
+    "v1": 1
    }
   },
   {

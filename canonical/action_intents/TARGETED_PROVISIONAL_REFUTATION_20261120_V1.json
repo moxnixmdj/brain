@@ -1,0 +1,531 @@
+{
+ "action_id": "TARGETED_PROVISIONAL_REFUTATION_20261120_V1",
+ "action_intent_id": "TARGETED_PROVISIONAL_REFUTATION_20261120_V1",
+ "action_kind": "REAL_CAPABILITY_ACQUISITION",
+ "action_summary": "Use one real counterexample in a fourth repository to narrow a PROVISIONAL rule by one computed fact from its recorded support state, with zero target learning executions, no accuracy regression, and a dynamic prediction flip without another learning call. Zero model calls, zero parameters, no pinned edits.",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "earlier_routes_exhausted_reason": "Global quarantine fails closed but deletes the capability; replacing the least-demanding survivor drops accuracy and creates false applies.",
+  "incremental_spend_usd": 0,
+  "independent_oracle": "The target repository's own git stash pop exit status on a real conflict.",
+  "independent_verification_completed": false,
+  "independent_verification_note": "Producer-run sandbox with a local HTTP app; no benchmark score, capability or terminal credit.",
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "orientation_evidence_note": "Refutation receipt and report are new in this PR; the probe and store organs are reused unchanged from the base commit except for the computed repair module.",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+  "progress_evidence_paths": [
+   "OBSERVABLE_PRECONDITIONS_TRANSFER_TO_THIRD_ENVIRONMENT_20261120_V1.md",
+   "canonical/runtime/observable_probe_v1.py",
+   "canonical/tools/observable_condition_transfer_v1.py",
+   "canonical/tests/test_observable_probe_v1.py",
+   "canonical/astra_runtime/state/INSTANT_CONDITION_STORE_V1.json",
+   "canonical/verification/OBSERVABLE_CONDITION_TRANSFER_20261120_V1.json",
+   "canonical/verification/OBSERVABLE_PRECONDITIONS_TRANSFER_GATES_THIRD_ENVIRONMENT_20261120_V1.json"
+  ],
+  "route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+  "route_order_walk": [
+   {
+    "route": "DELETE",
+    "why": "V7 adapter, registry and dataflow are load-bearing"
+   },
+   {
+    "route": "BYPASS",
+    "why": "accepting any WEB_APP_OP is the soundness defect"
+   },
+   {
+    "route": "REUSE",
+    "why": "reuse web app ops registry, V7 adapter, canonical_field and existing ledger"
+   },
+   {
+    "route": "ADAPT",
+    "why": "extend unpinned ledger and agent factory only"
+   },
+   {
+    "route": "SUBSTITUTE",
+    "why": "no existing read-back DONE gate consumes explicit app field/value goals"
+   },
+   {
+    "route": "COMPOSE",
+    "why": "compose explicit binding, product-native observation and receipt audit"
+   },
+   {
+    "route": "CONFIGURE",
+    "why": "configuration cannot create the missing proof"
+   },
+   {
+    "route": "INTEGRATE",
+    "why": "adapter-level real HTTP test is the target"
+   }
+  ],
+  "scope_complete_discharge": false,
+  "terminal_achieved": false
+ },
+ "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::PROVISIONAL rules could silently stay wrong after a real refutation because no computed mechanism narrowed them without deleting an existing capability.",
+ "canonical_base_commit": "3f449baed6fc3112dd376e6e6a1cc36219f1c069",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "PROVISIONAL rules could silently stay wrong after a real refutation because no computed mechanism narrowed them without deleting an existing capability.",
+ "date": "2026-11-20",
+ "expected_parent_change": "Use one real counterexample in a fourth repository to narrow a PROVISIONAL rule by one computed fact from its recorded support state, with zero target learning executions, no accuracy regression, and a dynamic prediction flip without another learning call. Zero model calls, zero parameters, no pinned edits.",
+ "expected_parent_frontier_change": "Use one real counterexample in a fourth repository to narrow a PROVISIONAL rule by one computed fact from its recorded support state, with zero target learning executions, no accuracy regression, and a dynamic prediction flip without another learning call. Zero model calls, zero parameters, no pinned edits.",
+ "explicit_user_authorization": [
+  "Why can't we just give our model the most advanced coding actions, let it experience them once, and have it learn them? Can't we do this now?",
+  "we are building our own model. never reach for another model or use it and call it ours",
+  "every bit of our weights must be calculated, not a knowledge house",
+  "the best part is no part",
+  "you must think from first principles for everything",
+  "You should kill all the bad and dumb ideas before you waste time implementing them.",
+  "NEVER BUILD BEFORE REASRCHING EXHAUSTION IS HAPPENED",
+  "maximize your web use",
+  "What is the single bottleneck that, if fixed, would unlock the most capability?",
+  "all the tests are not on synthetic data but are on the hardest open tests",
+  "only our agent/system may run them; integrity 100% real",
+  "the honest truth is that we keep testing on bugs we already know work",
+  "Work in branch, merge only when complete (fastest)",
+  "Merge once, not 10 times."
+ ],
+ "falsification_condition": "FALSIFIED if a repair writes an unverified fact, replaces an existing required fact on one counterexample, quarantines an action with a computed survivor available, uses target learning executions, or adds a model call or parameter.",
+ "generic_repair_from_single_probe": false,
+ "governance_change": false,
+ "highest_leverage_now": true,
+ "incremental_spend_usd": 0,
+ "intentional_route_race": false,
+ "load_bearing_primary": {
+  "constructive_gap_for_open_obligation_ids": [
+   "CODING_TB4_GE_66_4"
+  ],
+  "expected_obligation_discharge_lcb": 0,
+  "expected_obligation_unlock_lcb": "1/100",
+  "interpretation": "Speculative forecast only. Closing acceptance holes narrows a coding/computer-use gap; no truth obligation is discharged.",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "1/4",
+  "wall_clock_cost_ub": 1
+ },
+ "measured_effect": {
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "cost": {
+   "edges_executed": "real git stash/pop conflicts on pallets/flask; 0 target learning executions, 1 refutation execution, 2 source support executions",
+   "model_calls": 0,
+   "parameters_stored": 0,
+   "seconds": 43.8
+  },
+  "environment": {
+   "kind": "fresh real repository clones",
+   "trees": "fresh"
+  },
+  "outcome": {
+   "status": "PASS",
+   "repair": "REPAIRED__SCOPE_NARROWED",
+   "required_after": [
+    "stash.present",
+    "worktree.clean"
+   ],
+   "accuracy_before": {
+    "git_stash_pop": 1.0,
+    "tar_extract": 1.0
+   },
+   "accuracy_after": {
+    "git_stash_pop": 1.0,
+    "tar_extract": 1.0
+   },
+   "false_applies_after": 0,
+   "flipped_without_learning": true
+  }
+ },
+ "next_step": "Test refutation across several independent actions and a fifth repository; then re-examine whether any single-experience rule can be promoted beyond PROVISIONAL.",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "prior_work_reused": [
+  "canonical/runtime/instant_condition_store_v1.py",
+  "canonical/runtime/applicability_v1.py",
+  "canonical/runtime/observable_probe_v1.py",
+  "canonical/action_intents/OBSERVABLE_PRECONDITIONS_TRANSFER_TO_THIRD_ENVIRONMENT_20261120_V1.json"
+ ],
+ "probe_specific": false,
+ "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+ "progress_evidence_paths": [
+  "canonical/verification/PROVISIONAL_REFUTATION_20261120_V1.md",
+  "canonical/runtime/provisional_repair_v1.py",
+  "canonical/tests/test_provisional_repair_v1.py",
+  "canonical/tools/provisional_refutation_v1.py",
+  "canonical/verification/PROVISIONAL_REFUTATION_20261120_V1.json",
+  "canonical/astra_runtime/state/INSTANT_CONDITION_STORE_V1.json"
+ ],
+ "real_outcome": "Use one real counterexample in a fourth repository to narrow a PROVISIONAL rule by one computed fact from its recorded support state, with zero target learning executions, no accuracy regression, and a dynamic prediction flip without another learning call. Zero model calls, zero parameters, no pinned edits.",
+ "recursive_obs": {
+  "canonical_base_commit": "3f449baed6fc3112dd376e6e6a1cc36219f1c069",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "global quarantine of an otherwise repairable action: rejected",
+   "replacing previously required facts on one counterexample: rejected",
+   "a model judge or hidden repository state: forbidden"
+  ],
+  "expected_parent_frontier_change": "Deletes the world model from planning. On a real clone of pypa/packaging, 6 real damaged states and 10 real git actions, the planner copies the state, runs the action and reads the exit status: one execution yields both applicability and the exact successor, so the search runs over real directories and predicts nothing (transitions_predicted = 0). Pruning on learned conditions solves 6 of 7 in 658 executions (318 edges deleted); the no-knowledge control solves 7 of 7 in 1315; using the same knowledge only to ORDER solves 7 of 7 in 1337. Pruning buys 50% and loses one task in seven, and the conditions pruned on are named 0 of 10. Three goals were falsified by plans: cleanliness is met by dropping the stash (destroying the work), identity with the starting commit plus preserve is unsatisfiable (204 executions, 0 solved), and the content goal was met by committing the mess onto the branch it was on until every other branch tip was pinned. The remaining designed part is the dedup KEY: coarse key 0 of 3 hard tasks at 1500 expansions; keyed on what git reports, solved at depth 5, 6, 6. 0 parameters, 0 model calls, 0 transitions predicted.",
+  "expected_parent_level_state_change": "Use one real counterexample in a fourth repository to narrow a PROVISIONAL rule by one computed fact from its recorded support state, with zero target learning executions, no accuracy regression, and a dynamic prediction flip without another learning call. Zero model calls, zero parameters, no pinned edits.",
+  "independent_verification_required": true,
+  "iteration_limit": 1,
+  "obs_blocker": {
+   "delete_bypass_substitute_options": [
+    "delete the PROVISIONAL rule and refuse the action",
+    "bypass the refutation and keep predicting APPLIES",
+    "substitute a model judge for the program exit status"
+   ],
+   "intrinsic_or_path_specific": "intrinsic: the literal goal is exploitable by a state the planner can reach",
+   "surviving_causal_blocker": "PROVISIONAL rules could silently stay wrong after a real refutation because no computed mechanism narrowed them without deleting an existing capability."
+  },
+  "obs_capability": {
+   "capability_work_deleted": [
+    "the hand-written preservation clause"
+   ],
+   "existing_inherited_routes_checked": [
+    "canonical/tools/the_branch_is_the_model_v1.py",
+    "canonical/tools/the_goal_is_a_discriminator_v1.py",
+    "canonical/tools/the_same_guard_twice_is_the_discriminator_v1.py"
+   ],
+   "external_existing_routes_checked": [
+    "2026 specification-gaming and adversarial-specification reviews"
+   ],
+   "surviving_gap": "one action and one repository only; no general single-experience learning claim"
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "a larger action vocabulary",
+    "a stored lesson that agrees but is not equivalent",
+    "a hand-written acceptance clause"
+   ],
+   "real_outcome": "A repair of a real repository with no world model, verified by the repository's own queries.",
+   "surviving_necessity": "the program exit status must disagree before any repair is written"
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "the real-state search and the repository judge from the prior round.",
+   "downstream_work_to_delete_or_supersede": "Silent persistence of an unrefuted PROVISIONAL rule.",
+   "fresh_reuse_plan": "Register support facts and refutation records in the external store, never in parameters."
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": "No world model and no learned prior: one real execution per edge, cached as the search node.",
+   "search_stop_decision": "Stop when the real counterexample is blocked and all measured target states retain their prior accuracy."
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "implementation_still_necessary": false,
+   "losing_routes_reason": "They either destroy capability, regress measured accuracy, or spend forbidden executions.",
+   "routes_ranked": [
+    {
+     "rank": 1,
+     "route": "ADD_ONE_SUPPORT_SEPARATING_FACT",
+     "why": "preserves capability and blocks the real counterexample"
+    },
+    {
+     "rank": 2,
+     "route": "QUARANTINE_GLOBALLY",
+     "why": "fail-closed but destroys a working action"
+    },
+    {
+     "rank": 3,
+     "route": "REPLACE_WITH_LEAST_DEMANDING_SURVIVOR",
+     "why": "measured 0.75 accuracy and 4 false applies"
+    },
+    {
+     "rank": 4,
+     "route": "TARGET_RELEARNING",
+     "why": "violates zero target learning executions"
+    }
+   ]
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "None: real git exit statuses and a real repository conflict are the oracle."
+  },
+  "real_outcome": "Use one real counterexample in a fourth repository to narrow a PROVISIONAL rule by one computed fact from its recorded support state, with zero target learning executions, no accuracy regression, and a dynamic prediction flip without another learning call. Zero model calls, zero parameters, no pinned edits.",
+  "required_capability": "computed targeted refutation of external PROVISIONAL rules with support preservation and fail-closed quarantine",
+  "route_frontier": {
+   "challenger_routes": [
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "app-state verification",
+      "CORRECTNESS": "pending",
+      "INCREMENTAL_COST": "0 parameters",
+      "RELIABILITY": "fail-closed",
+      "VERIFIABILITY": "real HTTP receipts",
+      "WALL_CLOCK": "pending"
+     },
+     "evidence": [
+      "explicit app field/value binding",
+      "fresh product-native read-back"
+     ],
+     "qualification_evidence": [
+      "pending"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "SELECTED",
+     "route": "TARGETED_PROVISIONAL_REFUTATION_20261120_V1"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "same behavior",
+      "CORRECTNESS": "audit defect",
+      "INCREMENTAL_COST": "pin break",
+      "RELIABILITY": "unknown",
+      "VERIFIABILITY": "hash check",
+      "WALL_CLOCK": "n/a"
+     },
+     "evidence": [
+      "byte-pinned files"
+     ],
+     "qualification_evidence": [
+      "pending"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "edit pinned kernel"
+    }
+   ],
+   "checked_at_utc": "2026-11-20T15:49:24Z",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "SILENTLY_PERSIST_PROVISIONAL_RULE_AFTER_REFUTATION",
+   "max_age_hours": 2,
+   "negative_search_summary": "Global quarantine and least-demanding-survivor replacement were measured and regressed capability or accuracy; target relearning is forbidden by the execution budget.",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "2026 counterexample guided refinement agent memory provisional rules continual learning active testing precondition disagreement"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "QuixBugs bug corpus python programs tests published"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "expression-size-wise enumeration starting at the size of the buggy expression S3 syntactic search space"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "2026 zero-call verification end-state agreement compiled checks long-horizon task state"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "selected_route": "TARGETED_PROVISIONAL_REFUTATION_20261120_V1",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-11-20T14:19:05Z",
+    "evidence_classes": [
+     "LOCAL_RUNTIME"
+    ],
+    "execution_dependencies": [
+     {
+      "dependency": "local Python 3.11 with pytest and real git",
+      "evidence": [
+       "BrainOSWorldAgent passes full history to policy provider"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "real git repositories pallets/click and pallets/flask",
+      "evidence": [
+       "real stash conflicts produce nonzero exit status in the target repository"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "temporary directories for per-edge copies",
+      "evidence": [
+       "one copytree plus one process per edge; all copies under /tmp"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "STORAGE",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "max_age_hours": 2,
+    "selected_route": "TARGETED_PROVISIONAL_REFUTATION_20261120_V1",
+    "status": "READY"
+   },
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/runtime/osworld_v21_workflow_policy_v13.py",
+     "canonical/runtime/osworld_v21_receipt_dataflow_v3.py",
+     "canonical/runtime/osworld_sensor_request_bridge_v1.py"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "https://arxiv.org/html/2606.11521 (counterexample-guided refinement; context only)",
+     "https://arxiv.org/pdf/2611.14326v1 (falsification-gated memory with preconditions; context only)"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "https://github.com/jkoppel/QuixBugs (MIT; 40 buggy programs, 40 pytest files, JSON test data)",
+     "https://pypi.org/project/pytest (9.2.0, the runner every verdict goes through)"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "https://docs.python.org/3/library/ast.html (node types the closure rule enumerates)"
+    ]
+   },
+   "unresolved_plausible_dominators": []
+  },
+  "routes_considered": [
+   "quarantine the whole rule",
+   "replace the least-demanding survivor",
+   "add one separating fact to the existing rule",
+   "re-buy the condition on the target",
+   "call a model judge"
+  ],
+  "selected_route": "TARGETED_PROVISIONAL_REFUTATION_20261120_V1",
+  "selected_surviving_route": "TARGETED_PROVISIONAL_REFUTATION_20261120_V1",
+  "selected_surviving_route_class": "ADD_ONE_COMPUTED_SEPARATING_FACT_KEEP_EXISTING_REQUIREMENTS",
+  "stop_condition": "Fail closed when the support and falsifying fact-sets have no separating survivor; never claim GUI, benchmark or \u00a76 completion from one narrowed rule.",
+  "why_selected_route_is_fastest_sufficient": "It adds one fact to the existing rule using only the stored support state and the real falsifying state; no new search, model, or target learning execution.",
+  "why_this_is_not_another_organ": "It reuses the existing store and learner boundary; the only new mechanism is a one-fact additive repair that fails closed."
+ },
+ "required_capability": "enumeration of real successor states, minimal law selection from judgments, and an enforceable external closure store with no model calls",
+ "route_id": "TARGETED_PROVISIONAL_REFUTATION_20261120_V1",
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "scope_complete_discharge": false,
+ "selected_route": "TARGETED_PROVISIONAL_REFUTATION_20261120_V1",
+ "status": "BUILD_MEASURED__MERGE_PENDING",
+ "stop_condition": "Fail closed when the support and falsifying fact-sets have no separating survivor; never claim GUI, benchmark or \u00a76 completion from one narrowed rule.",
+ "terminal_credit_delta": 0,
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "truth": {
+  "achieved": false,
+  "the_law_this_round_adds": "A PROVISIONAL rule can be narrowed by one computed separating fact from a recorded support state and one real falsifying execution, without replacing earlier requirements or buying a new condition on the target."
+ },
+ "user_authorized_governance_change": false,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "currentness": {
+   "accepted_families": 5,
+   "current_load_bearing_atomic_count": 36,
+   "deleted_nonnecessary_atomic_count": 2,
+   "historical_atomic_registry_count": 38,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_atomic": 38,
+   "total_families": 19,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "This measures the reach of an executed counterfactual over real commit history and finds the content of the fix outside it; it discharges no truth obligation.",
+  "target_truth_obligations": [
+   "CODING_TB4_GE_66_4"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [
+    {
+     "path": "canonical/verification/PROVISIONAL_REFUTATION_20261120_V1.json",
+     "git_blob_sha": "7e73b916fbe221cd5890f281f0db201b17cceebc"
+    }
+   ],
+   "decisive_question": "Can one real disagreement narrow a PROVISIONAL rule without deleting capability or re-learning on the target?",
+   "falsifier_id": "ONE_REAL_FALSE_APPLY_MUST_NOT_DELETE_THE_ACTION",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "Zero generalising repairs out of thirty fresh commits is the counterexample, and it is recorded in the receipt rather than hidden.",
+   "proposal_id": "TARGETED_PROVISIONAL_REFUTATION_20261120_V1"
+  }
+ },
+ "verification": {
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "commands": [
+   ".venv/bin/python -m pytest canonical/tests/test_provisional_repair_v1.py canonical/tests/test_instant_condition_store_v1.py canonical/tests/test_observable_probe_v1.py -q",
+   "python3 canonical/tools/provisional_refutation_v1.py --receipt canonical/verification/PROVISIONAL_REFUTATION_20261120_V1.json",
+   "python3 canonical/tools/auditability_report_v1.py --floor --baseline canonical/verification/AUDITABILITY_DECLARATION_FLOOR_20261112_V1.json",
+   "python3 canonical/runtime/compile_brain_unified_model_v1.py",
+   "python3 canonical/runtime/verify_brain_unified_model_v1.py",
+   "python3 execution_guard/repo_integrity_guard_v1.py"
+  ],
+  "expected": {
+   "tests": "14 passed targeted; 40 passed with declaration-floor test",
+   "refutation": "one computed narrowing, 0 accuracy regression, dynamic flip",
+   "floor": "595 == 595 held",
+   "unified": "33/33 PASS"
+  }
+ },
+ "weakens_existing_guard": false,
+ "selected_surviving_route": "TARGETED_PROVISIONAL_REFUTATION_20261120_V1"
+}
