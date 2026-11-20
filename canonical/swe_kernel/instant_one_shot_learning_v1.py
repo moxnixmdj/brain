@@ -95,6 +95,24 @@ from canonical.swe_kernel.image_verification_v1 import (  # noqa: E402
     ImageVerification as _ImageVerification,
 )
 
+# Program synthesis from single demonstration (zero model calls, deterministic abstraction)
+from canonical.swe_kernel.program_synthesizer_v1 import (  # noqa: E402
+    ProgramSynthesizer as _ProgramSynthesizer,
+    SynthesizedProgram as _SynthesizedProgram,
+    synthesize_program as _synthesize_program,
+)
+
+# Deterministic trace recording, bit-exact replay, counterfactual forking (zero model calls)
+from canonical.swe_kernel.deterministic_trace_replay_v1 import (  # noqa: E402
+    TraceRecorder as _TraceRecorder,
+    BitExactReplayer as _BitExactReplayer,
+    CounterfactualForker as _CounterfactualForker,
+    RecordedTrace as _RecordedTrace,
+    TraceFrame as _TraceFrame,
+    record_trace as _record_trace,
+    replay_trace as _replay_trace,
+)
+
 # Contrastive oracle bootstrap
 from canonical.swe_kernel.contrastive_oracle_bootstrap_v1 import (  # noqa: E402
     sense_state_key as _cob_sense_state_key,
@@ -1569,6 +1587,194 @@ class InstantOneShotLearning:
         Zero model calls, zero network calls.
         """
         return _verify_visual_change(image_a, image_b, threshold)
+
+    # -- PROGRAM SYNTHESIS ------------------------------------------------- #
+    def synthesize_program(
+        self,
+        steps: Sequence[tuple[str, str]],
+        terminal_outcome: int,
+        param_names: Sequence[str] | None = None,
+    ) -> dict[str, Any]:
+        """Synthesize a shell program from one successful trace.
+
+        Abstracts literals into variables, detects loops and conditionals,
+        and emits a parameterized shell script that generalizes to new inputs.
+
+        Zero model calls, zero network calls.
+        """
+        return _synthesize_program(
+            list(steps),
+            terminal_outcome,
+            list(param_names) if param_names is not None else None,
+        )
+
+    def verify_synthesized_program(
+        self,
+        program_script: str,
+        program_parameters: Sequence[str],
+        environment_root: pathlib.Path | None = None,
+        test_cases: Sequence[tuple[Sequence[str], int]] = (),
+    ) -> dict[str, Any]:
+        """Verify a synthesized program against test cases.
+
+        Each test case is (args, expected_return_code). The program is
+        executed with each set of args and results compared.
+
+        Zero model calls, zero network calls.
+        """
+        root = environment_root or self.environment_root
+        program = _SynthesizedProgram(
+            script=program_script,
+            parameters=tuple(program_parameters),
+            description="verified_program",
+            model_calls=0,
+            network_calls=0,
+        )
+        synth = _ProgramSynthesizer()
+        return synth.verify_program(program, root, list(test_cases))
+
+    # -- TRACE RECORDING --------------------------------------------------- #
+    def record_trace(
+        self,
+        steps: Sequence[tuple[str, str]],
+        trace_id: str | None = None,
+    ) -> dict[str, Any]:
+        """Record a sequence of shell actions as a bit-exact trace.
+
+        Before each step, the filesystem is snapshotted. The result is a
+        content-addressed trace that can be replayed bit-exactly or forked
+        counterfactually.
+
+        Zero model calls, zero network calls.
+        """
+        recorder = _TraceRecorder(self.environment_root)
+        trace = recorder.record(list(steps), trace_id)
+        return {
+            "trace_id": trace.trace_id,
+            "frames": [
+                {
+                    "step_index": f.step_index,
+                    "action": f.action,
+                    "state_snapshot": {
+                        k: v.decode("latin-1") for k, v in f.state_snapshot.items()
+                    },
+                    "return_code": f.return_code,
+                    "stdout": f.stdout,
+                    "stderr": f.stderr,
+                    "frame_hash": f.frame_hash,
+                }
+                for f in trace.frames
+            ],
+            "terminal_outcome": trace.terminal_outcome,
+            "total_steps": trace.total_steps,
+            "model_calls": trace.model_calls,
+            "network_calls": trace.network_calls,
+        }
+
+    # -- TRACE REPLAY ------------------------------------------------------ #
+    def replay_trace(
+        self,
+        trace_dict: dict[str, Any],
+    ) -> dict[str, Any]:
+        """Replay a recorded trace bit-exactly.
+
+        Restores each snapshot before executing its action. Verifies that
+        replayed return codes and output match the recorded ones.
+
+        Zero model calls, zero network calls.
+        """
+        # Reconstruct RecordedTrace from dict with snapshots restored
+        frames = []
+        for f in trace_dict["frames"]:
+            snapshot = {
+                k: v.encode("latin-1") for k, v in f.get("state_snapshot", {}).items()
+            }
+            frames.append(
+                _TraceFrame(
+                    step_index=f["step_index"],
+                    action=f["action"],
+                    state_snapshot=snapshot,
+                    return_code=f["return_code"],
+                    stdout=f["stdout"],
+                    stderr=f["stderr"],
+                    frame_hash=f.get("frame_hash", ""),
+                )
+            )
+
+        trace = _RecordedTrace(
+            trace_id=trace_dict["trace_id"],
+            frames=tuple(frames),
+            terminal_outcome=trace_dict["terminal_outcome"],
+            total_steps=trace_dict["total_steps"],
+            model_calls=0,
+            network_calls=0,
+        )
+
+        replayer = _BitExactReplayer(self.environment_root)
+        return replayer.replay(trace)
+
+    # -- COUNTERFACTUAL FORK ----------------------------------------------- #
+    def fork_trace(
+        self,
+        trace_dict: dict[str, Any],
+        fork_step: int,
+        mutated_action: str,
+    ) -> dict[str, Any]:
+        """Counterfactual fork: rewind to step k, mutate one action, replay forward.
+
+        Answers: "What would happen if step k had been different?"
+
+        Zero model calls, zero network calls.
+        """
+        # Reconstruct RecordedTrace from dict with snapshots restored
+        frames = []
+        for f in trace_dict["frames"]:
+            snapshot = {
+                k: v.encode("latin-1") for k, v in f.get("state_snapshot", {}).items()
+            }
+            frames.append(
+                _TraceFrame(
+                    step_index=f["step_index"],
+                    action=f["action"],
+                    state_snapshot=snapshot,
+                    return_code=f["return_code"],
+                    stdout=f["stdout"],
+                    stderr=f["stderr"],
+                    frame_hash=f.get("frame_hash", ""),
+                )
+            )
+
+        trace = _RecordedTrace(
+            trace_id=trace_dict["trace_id"],
+            frames=tuple(frames),
+            terminal_outcome=trace_dict["terminal_outcome"],
+            total_steps=trace_dict["total_steps"],
+            model_calls=0,
+            network_calls=0,
+        )
+
+        forker = _CounterfactualForker(self.environment_root)
+        result = forker.fork_at(trace, fork_step, mutated_action)
+
+        return {
+            "fork_step": result.fork_step,
+            "mutated_action": result.mutated_action,
+            "original_outcome": result.original_outcome,
+            "forked_outcome": result.forked_outcome,
+            "outcome_changed": result.outcome_changed,
+            "frames_after_fork": [
+                {
+                    "step_index": f.step_index,
+                    "action": f.action,
+                    "return_code": f.return_code,
+                    "stdout": f.stdout,
+                    "stderr": f.stderr,
+                }
+                for f in result.frames_after_fork
+            ],
+            "model_calls": result.model_calls,
+            "network_calls": result.network_calls,
+        }
 
     # -- FULL LOOP --------------------------------------------------------- #
     def run(
@@ -3248,6 +3454,117 @@ def run_expanded_demo(
             "admit": admit,
             "remember": remember,
             "replay": replay,
+            "verify_image": image_verify,
+        },
+    }
+
+
+# --------------------------------------------------------------------------- #
+# Expanded demo 2 — program synthesis, trace replay, counterfactual forking   #
+# --------------------------------------------------------------------------- #
+
+
+def run_synthesis_replay_demo(
+    engine: "InstantOneShotLearning",
+    steps: Sequence[tuple[str, str]] = None,
+) -> dict[str, Any]:
+    """Expanded demo demonstrating program synthesis + trace replay + counterfactual forking.
+
+    This is the "replay/counterfactual/synthesis backbone" — three best-player
+    modules at their positions:
+
+    1. ProgramSynthesizer — abstract one successful trace into a parameterized
+       shell program (variables, loops) — zero model calls
+    2. TraceRecorder + BitExactReplayer — record and replay traces bit-exactly
+       — zero model calls during replay
+    3. CounterfactualForker — rewind to any step, mutate one action, replay
+       forward to see outcome changes — zero model calls
+
+    Phases:
+      OBSERVE → SYNTHESIZE → VERIFY → RECORD → REPLAY → FORK → VERIFY_IMAGE
+
+    Zero model calls, zero network calls, zero knowledge house.
+    """
+    if steps is None:
+        steps = [
+            ("echo hello > in.txt", ""),
+            ("cp in.txt out.dat", ""),
+            ("cat out.dat", ""),
+        ]
+
+    terminal_outcome = 0
+
+    # ── Phase 1: OBSERVE — run once, capture trace with snapshots ──────── #
+    (engine.environment_root / "in.txt").write_bytes(b"hello world\n")
+    observe = engine.observe("synthesis_replay_task", list(steps), terminal_outcome)
+    if observe["status"] != OBSERVE_DONE:
+        return {
+            "status": "REFUSED",
+            "reason": f"OBSERVE_REFUSED__{observe.get('reason', '')}",
+            "model_calls": 0,
+            "network_calls": 0,
+        }
+
+    # ── Phase 2: SYNTHESIZE — abstract trace into parameterized program ─── #
+    synthesis = engine.synthesize_program(
+        list(steps),
+        terminal_outcome,
+        param_names=["src", "dst"],
+    )
+
+    # ── Phase 3: VERIFY — test synthesized program on new inputs ────────── #
+    # Test the synthesized cp program on different file names
+    root = engine.environment_root
+    (root / "data.txt").write_bytes(b"test data\n")
+    verify = engine.verify_synthesized_program(
+        synthesis["script"],
+        synthesis["parameters"],
+        environment_root=root,
+        test_cases=([
+            (["data.txt", "copy.dat"], 0),
+            (["in.txt", "backup.dat"], 0),
+        ]),
+    )
+
+    # ── Phase 4: RECORD — record the trace for bit-exact replay ─────────── #
+    # Reset environment first
+    for f in root.iterdir():
+        if f.is_file():
+            f.unlink()
+    (root / "in.txt").write_bytes(b"replay test\n")
+    trace = engine.record_trace(list(steps), "synthesis_replay_trace")
+
+    # ── Phase 5: REPLAY — bit-exact replay of the recorded trace ────────── #
+    replay = engine.replay_trace(trace)
+
+    # ── Phase 6: FORK — counterfactual fork at step 1 (cp → mv) ─────────── #
+    # What if step 1 used mv instead of cp? Does the outcome change?
+    fork = engine.fork_trace(trace, fork_step=1, mutated_action="mv in.txt out2.dat")
+
+    # ── Phase 7: VERIFY_IMAGE — deterministic pixel diff (if images exist) ─ #
+    # Create two test images and verify they differ
+    import tempfile as _tempfile
+    with _tempfile.TemporaryDirectory() as _tmpdir:
+        img_a = pathlib.Path(_tmpdir) / "before.png"
+        img_b = pathlib.Path(_tmpdir) / "after.png"
+        img_a.write_bytes(b"\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR" + b"\x00" * 100)
+        img_b.write_bytes(b"\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR" + b"\x01" * 100)
+        image_verify = engine.verify_image(str(img_a), str(img_b), threshold=0)
+
+    return {
+        "status": "COMPLETE",
+        "result": "SYNTHESIS_REPLAY_DEMO_COMPLETE",
+        "model_calls": 0,
+        "network_calls": 0,
+        "stored_knowledge_bytes": 0,
+        "knowledge_house": False,
+        "phases": {
+            "observe": observe,
+            "synthesize": synthesis,
+            "verify": verify,
+            "record": trace,
+            "replay": replay,
+            "fork": fork,
             "verify_image": image_verify,
         },
     }
