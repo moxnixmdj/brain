@@ -1,0 +1,260 @@
+{
+ "schema": "BRAIN_DISCOVER_ORIGINS_FROM_ACTIONS_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "claim": "Damaged origins, verifiers and judged rows can be discovered by executing generic actions from a clean clone; the refitted closure transfers to origins discovered independently in a different repository.",
+ "declared_before_the_run": [
+  "E1 at least three distinct defect families are discovered in each repository",
+  "E2 no named damage class or task string is used in discovery or judging",
+  "E3 the discovered training rows select a closure in the existing law algebra",
+  "E4 that closure has zero false accepts and zero false rejects on held origins",
+  "E5 zero model calls and zero stored parameters"
+ ],
+ "limits": [
+  "mutation vocabulary, law algebra, target and depth bounds are supplied",
+  "only five defect families; not a browser, GUI or benchmark score",
+  "producer-run only; no independent verification"
+ ],
+ "train_discovery": {
+  "edges": 320,
+  "origins": 3,
+  "families": [
+   [
+    "stash",
+    "untracked"
+   ],
+   [
+    "untracked"
+   ],
+   [
+    "content_mismatch",
+    "untracked",
+    "wrong_branch"
+   ]
+  ],
+  "plans": [
+   [
+    "edit_tracked",
+    "stash_push"
+   ],
+   [
+    "checkout_main"
+   ],
+   [
+    "checkout_side"
+   ]
+  ]
+ },
+ "train_judgments": [
+  {
+   "discovery_plan": [
+    "edit_tracked",
+    "stash_push"
+   ],
+   "defects": [
+    "stash",
+    "untracked"
+   ],
+   "verdict": "GOAL_REPAIRED",
+   "drop": [
+    "head"
+   ],
+   "holes": 34,
+   "legitimate": 5,
+   "applicable_laws": [
+    "ref_preserve",
+    "reference_ancestor",
+    "stash_restore",
+    "target_content_preserve",
+    "tracking_preserve"
+   ]
+  },
+  {
+   "discovery_plan": [
+    "checkout_main"
+   ],
+   "defects": [
+    "untracked"
+   ],
+   "verdict": "GOAL_REPAIRED",
+   "drop": [
+    "head"
+   ],
+   "holes": 5,
+   "legitimate": 5,
+   "applicable_laws": [
+    "ref_preserve",
+    "reference_ancestor",
+    "target_content_preserve",
+    "tracking_preserve"
+   ]
+  },
+  {
+   "discovery_plan": [
+    "checkout_side"
+   ],
+   "defects": [
+    "content_mismatch",
+    "untracked",
+    "wrong_branch"
+   ],
+   "verdict": "NOT_CONTRADICTORY",
+   "drop": [],
+   "holes": 5,
+   "legitimate": 6,
+   "applicable_laws": [
+    "ref_preserve",
+    "reference_ancestor",
+    "target_content_preserve",
+    "tracking_preserve"
+   ]
+  }
+ ],
+ "held_out_discovery": {
+  "edges": 320,
+  "origins": 3,
+  "families": [
+   [
+    "stash",
+    "untracked"
+   ],
+   [
+    "untracked"
+   ],
+   [
+    "content_mismatch",
+    "untracked",
+    "wrong_branch"
+   ]
+  ],
+  "plans": [
+   [
+    "edit_tracked",
+    "stash_push"
+   ],
+   [
+    "checkout_main"
+   ],
+   [
+    "checkout_side"
+   ]
+  ]
+ },
+ "held_out_judgments": [
+  {
+   "discovery_plan": [
+    "edit_tracked",
+    "stash_push"
+   ],
+   "defects": [
+    "stash",
+    "untracked"
+   ],
+   "verdict": "GOAL_REPAIRED",
+   "drop": [
+    "head"
+   ],
+   "holes": 34,
+   "legitimate": 5,
+   "applicable_laws": [
+    "ref_preserve",
+    "reference_ancestor",
+    "stash_restore",
+    "target_content_preserve",
+    "tracking_preserve"
+   ]
+  },
+  {
+   "discovery_plan": [
+    "checkout_main"
+   ],
+   "defects": [
+    "untracked"
+   ],
+   "verdict": "GOAL_REPAIRED",
+   "drop": [
+    "head"
+   ],
+   "holes": 5,
+   "legitimate": 5,
+   "applicable_laws": [
+    "ref_preserve",
+    "reference_ancestor",
+    "target_content_preserve",
+    "tracking_preserve"
+   ]
+  },
+  {
+   "discovery_plan": [
+    "checkout_side"
+   ],
+   "defects": [
+    "content_mismatch",
+    "untracked",
+    "wrong_branch"
+   ],
+   "verdict": "NOT_CONTRADICTORY",
+   "drop": [],
+   "holes": 5,
+   "legitimate": 6,
+   "applicable_laws": [
+    "ref_preserve",
+    "reference_ancestor",
+    "target_content_preserve",
+    "tracking_preserve"
+   ]
+  }
+ ],
+ "selection": {
+  "status": "CLOSURE_FOUND",
+  "closures": [
+   [
+    "ref_preserve",
+    "tracking_preserve",
+    "stash_restore"
+   ]
+  ],
+  "minimal_size": 3
+ },
+ "closure": [
+  "ref_preserve",
+  "tracking_preserve",
+  "stash_restore"
+ ],
+ "train_evaluation": [
+  {
+   "laws": [
+    "ref_preserve",
+    "tracking_preserve",
+    "stash_restore"
+   ],
+   "holes_seen": 44,
+   "legitimate_seen": 16,
+   "false_accepts": [],
+   "false_rejects": []
+  }
+ ],
+ "held_evaluation": [
+  {
+   "laws": [
+    "ref_preserve",
+    "tracking_preserve",
+    "stash_restore"
+   ],
+   "holes_seen": 44,
+   "legitimate_seen": 16,
+   "false_accepts": [],
+   "false_rejects": []
+  }
+ ],
+ "criteria": {
+  "E1_three_defect_families_discovered": true,
+  "E2_no_named_damage_class_or_task_string": true,
+  "E3_closure_found": true,
+  "E4_transfer_zero_errors": true,
+  "E5_zero_parameters_and_model_calls": true
+ },
+ "met": true,
+ "model_calls": 0,
+ "parameters_stored": 0,
+ "seconds": 96.1
+}
