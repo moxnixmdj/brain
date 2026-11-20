@@ -16,6 +16,7 @@ import pytest
 from canonical.runtime import osworld_verified_task_ledger_v1 as L
 from canonical.runtime.osworld_sensor_request_bridge_v1 import AdmittedSensorGuestOps
 from canonical.runtime.osworld_v21_host_guest_ops_v1 import OSWorldHostGuestOps
+from canonical.runtime.osworld_v21_host_web_app_ops_v1 import OSWorldHostWebAppOps
 
 
 class Controller:
@@ -380,10 +381,260 @@ def test_adapter_executes_dual_directory_assertion_before_it_accepts_done() -> N
 def test_verified_agent_factory_wires_the_ledger_and_admitted_bridge() -> None:
     from canonical.runtime.osworld_verified_agent_v1 import build_verified_agent
     from canonical.runtime.osworld_verified_policy_v1 import decide as verified_decide
-    from canonical.runtime.osworld_v21_brain_agent_adapter_v1 import BrainOSWorldAgent
+    from canonical.runtime.osworld_v21_brain_agent_adapter_v7 import BrainOSWorldAgentV7
+    from canonical.runtime.osworld_v21_host_web_app_ops_v1 import OSWorldHostWebAppOps
 
     agent = build_verified_agent(policy_id="factory-test")
-    assert isinstance(agent, BrainOSWorldAgent)
+    assert isinstance(agent, BrainOSWorldAgentV7)
     assert agent.policy_id == "factory-test"
     assert agent.policy_provider is verified_decide
     assert isinstance(agent.guest_controller, AdmittedSensorGuestOps)
+    assert isinstance(agent.web_app_controller, OSWorldHostWebAppOps)
+
+
+class _LocalAppServer:
+    """A real HTTP endpoint for product-native read-back tests (no CDP, no model)."""
+
+    def __init__(self) -> None:
+        import json as _json
+        import threading
+        from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+
+        messages = [{"id": "m1", "subject": "Q4 report", "body": "initial"}]
+
+        class Handler(BaseHTTPRequestHandler):
+            def log_message(self, *_: Any) -> None:
+                return None
+
+            def _send(self, payload: Any, status: int = 200) -> None:
+                body = _json.dumps(payload).encode("utf-8")
+                self.send_response(status)
+                self.send_header("Content-Type", "application/json")
+                self.send_header("Content-Length", str(len(body)))
+                self.end_headers()
+                self.wfile.write(body)
+
+            def do_GET(self) -> None:  # noqa: N802
+                if self.path == "/api/mail":
+                    self._send({"messages": messages})
+                else:
+                    self._send({"error": "not found"}, 404)
+
+            def do_POST(self) -> None:  # noqa: N802
+                if self.path != "/api/mail/send":
+                    self._send({"error": "not found"}, 404)
+                    return
+                length = int(self.headers.get("Content-Length") or 0)
+                payload = _json.loads(self.rfile.read(length) or b"{}")
+                messages.append({
+                    "id": "m" + str(len(messages) + 1),
+                    "subject": str(payload.get("subject") or ""),
+                    "body": str(payload.get("body") or ""),
+                    "to": str(payload.get("to") or ""),
+                })
+                self._send({"ok": True})
+
+        self.server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+        self.thread = threading.Thread(target=self.server.serve_forever, daemon=True)
+        self.thread.start()
+        self.url = "http://127.0.0.1:" + str(self.server.server_port)
+
+    def close(self) -> None:
+        self.server.shutdown()
+        self.server.server_close()
+        self.thread.join(timeout=5)
+
+
+class _LocalWebAppOps(OSWorldHostWebAppOps):
+    """Reuse the real registry validator and result packaging over local HTTP."""
+
+    def __init__(self, base_url: str) -> None:
+        import json as _json
+        import urllib.request
+        super().__init__(remote_debugging_url=base_url)
+        self.base_url = base_url
+        self._urlopen = urllib.request.urlopen
+        self._Request = urllib.request.Request
+        self._json = _json
+
+    def bind_environment(self, environment: Any) -> None:
+        self.remote_debugging_url = self.base_url
+
+    def _connect(self) -> tuple[Any, Any]:
+        outer = self
+
+        class Response:
+            def __init__(self, raw: bytes, status: int) -> None:
+                self.raw = raw
+                self.status = status
+
+            @property
+            def ok(self) -> bool:
+                return 200 <= self.status < 300
+
+            def text(self) -> str:
+                return self.raw.decode("utf-8")
+
+            def json(self) -> Any:
+                return outer._json.loads(self.text())
+
+        class Request:
+            def fetch(self, url: str, *, method: str, timeout: int,
+                      data: Any = None, headers: Any = None) -> Response:
+                if isinstance(data, (dict, list)):
+                    data = outer._json.dumps(data).encode("utf-8")
+                elif isinstance(data, str):
+                    data = data.encode("utf-8")
+                request = outer._Request(url, data=data, method=method,
+                                         headers=headers or {})
+                with outer._urlopen(request, timeout=timeout) as reply:
+                    return Response(reply.read(), int(reply.status))
+
+        class Context:
+            request = Request()
+
+            def __init__(self) -> None:
+                self.pages = [type("Page", (), {"url": outer.base_url + "/mailhub"})()]
+
+        class Browser:
+            def __init__(self) -> None:
+                self.contexts = [Context()]
+
+        class Playwright:
+            def stop(self) -> None:
+                return None
+
+        return Playwright(), Browser()
+
+
+def _web_app_row(payload: Mapping[str, Any], result: Mapping[str, Any]) -> dict[str, Any]:
+    return {
+        "screenshot_sha256": "a" * 64,
+        "action_fingerprint": "x",
+        "actions": ["WAIT"],
+        "response": "web app op",
+        "submitted_web_app_operation": dict(payload),
+        "web_app_result": dict(result),
+    }
+
+
+def test_app_field_value_is_compiled_only_from_explicit_evidence() -> None:
+    instruction = 'Send an email in Mailhub with subject "Q4 report"'
+    requirements, errors = L.compile_requirements(instruction)
+    assert errors == []
+    assert len(requirements) == 1
+    assert requirements[0]["kind"] == "APP_STATE_FIELD"
+    assert requirements[0]["app"] == "mailhub"
+    assert requirements[0]["field"] == "name"
+    assert requirements[0]["value"] == "Q4 report"
+    assert requirements[0]["op"] == "observe_mail"
+
+
+def test_app_without_explicit_field_value_fails_closed() -> None:
+    requirements, errors = L.compile_requirements("Check something in Mailhub")
+    assert "APP_GOAL_NOT_MACHINE_CHECKABLE" in errors
+    out = L.decide(_state("Check something in Mailhub", []), _done)
+    assert out["actions"] == [{"type": "WAIT"}]
+
+
+def test_real_http_readback_with_exact_field_value_allows_done() -> None:
+    server = _LocalAppServer()
+    try:
+        ops = _LocalWebAppOps(server.url)
+        observe = {"app": "mailhub", "operation": "observe_mail", "args": {}}
+        result = ops.run(observe)
+        assert result["ok"] is True
+        instruction = 'Send an email in Mailhub with subject "Q4 report"'
+        out = L.decide(_state(instruction, [_web_app_row(observe, result)]), _done)
+        assert out["actions"] == [{"type": "DONE"}]
+        assert out["_policy_receipt"]["verified"] is True
+    finally:
+        server.close()
+
+
+def test_wrong_value_readback_does_not_allow_done() -> None:
+    server = _LocalAppServer()
+    try:
+        ops = _LocalWebAppOps(server.url)
+        observe = {"app": "mailhub", "operation": "observe_mail", "args": {}}
+        result = ops.run(observe)
+        instruction = 'Send an email in Mailhub with subject "Missing report"'
+        out = L.decide(_state(instruction, [_web_app_row(observe, result)]), _done)
+        assert out["actions"][0]["type"] == "WEB_APP_OP"
+        assert out["_policy_receipt"]["verified"] is False
+    finally:
+        server.close()
+
+
+def test_later_web_app_mutation_invalidates_readback() -> None:
+    server = _LocalAppServer()
+    try:
+        ops = _LocalWebAppOps(server.url)
+        observe = {"app": "mailhub", "operation": "observe_mail", "args": {}}
+        observed = ops.run(observe)
+        mutation = {
+            "app": "mailhub", "operation": "send",
+            "args": {"to": "x@example.com", "subject": "Q4 report", "body": "changed"},
+        }
+        mutated = ops.run(mutation)
+        instruction = 'Send an email in Mailhub with subject "Q4 report"'
+        rows = [_web_app_row(observe, observed), _web_app_row(mutation, mutated)]
+        out = L.decide(_state(instruction, rows), _done)
+        assert out["actions"][0]["type"] == "WEB_APP_OP"
+        audit = L.audit(_state(instruction, rows), L.compile_requirements(instruction)[0])
+        assert audit["evidence"][0]["invalidated_by_rows"] == [1]
+    finally:
+        server.close()
+
+
+def test_adapter_reaches_done_only_after_real_http_readback() -> None:
+    from canonical.runtime.osworld_v21_brain_agent_adapter_v7 import BrainOSWorldAgentV7
+
+    server = _LocalAppServer()
+    try:
+        ops = _LocalWebAppOps(server.url)
+        agent = BrainOSWorldAgentV7(
+            policy_provider=lambda state: L.decide(state, _done),
+            policy_id="web-readback-adapter-test",
+            browser_controller=NoBrowser(),
+            guest_controller=AdmittedSensorGuestOps(),
+            web_app_controller=ops,
+        )
+        agent.reset()
+        instruction = 'Send an email in Mailhub with subject "Q4 report"'
+
+        response, actions = agent.predict(instruction, _obs())
+        assert actions == ["WAIT"]
+        prior = agent.history[-1]
+        assert prior["submitted_web_app_operation"]["app"] == "mailhub"
+        assert prior["submitted_web_app_operation"]["operation"] == "observe_mail"
+        assert prior["web_app_result"]["ok"] is True
+
+        response, actions = agent.predict(instruction, _obs())
+        assert actions == ["DONE"]
+        assert agent.history[-1]["completion_evidence"]["kind"] == "WEB_APP_OP_SUCCESS_RECEIPT"
+    finally:
+        server.close()
+
+
+def test_adapter_does_not_done_when_readback_value_is_absent() -> None:
+    from canonical.runtime.osworld_v21_brain_agent_adapter_v7 import BrainOSWorldAgentV7
+
+    server = _LocalAppServer()
+    try:
+        ops = _LocalWebAppOps(server.url)
+        agent = BrainOSWorldAgentV7(
+            policy_provider=lambda state: L.decide(state, _done),
+            policy_id="web-readback-negative-test",
+            browser_controller=NoBrowser(),
+            guest_controller=AdmittedSensorGuestOps(),
+            web_app_controller=ops,
+        )
+        agent.reset()
+        instruction = 'Send an email in Mailhub with subject "Absent report"'
+        for _ in range(2):
+            response, actions = agent.predict(instruction, _obs())
+            assert actions == ["WAIT"]
+        assert all(row.get("actions") == ["WAIT"] for row in agent.history)
+    finally:
+        server.close()
