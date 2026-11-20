@@ -1,0 +1,428 @@
+{
+ "schema": "BRAIN_GOAL_CLOSURE_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "authority_note": "Producer-run. No independent verifier, no ownership credit.",
+ "claim": "A goal hole is found by executing the plan that exploits it, and closed by the smallest preservation law set the judgments require.",
+ "limits": [
+  "the judge is supplied; intention is not invented",
+  "five laws, bounded depth: no closure found is relative to both",
+  "not a computer-use or SWE benchmark score"
+ ],
+ "train_census": [
+  {
+   "repository": "train",
+   "task": "wrong_branch",
+   "edges_executed": 70,
+   "holes": 1,
+   "legitimate": 6,
+   "example_hole_plans": [
+    [
+     "git_add_all",
+     "git_commit",
+     "git_checkout_main"
+    ]
+   ]
+  },
+  {
+   "repository": "train",
+   "task": "conflicted_merge",
+   "edges_executed": 90,
+   "holes": 1,
+   "legitimate": 2,
+   "example_hole_plans": [
+    [
+     "git_add_all",
+     "git_commit",
+     "git_checkout_main"
+    ]
+   ]
+  },
+  {
+   "repository": "train",
+   "task": "conflicted_rebase",
+   "edges_executed": 100,
+   "holes": 0,
+   "legitimate": 2,
+   "example_hole_plans": []
+  }
+ ],
+ "selection": {
+  "status": "CLOSURE_FOUND",
+  "closures": [
+   [
+    "ref_preserve"
+   ]
+  ],
+  "minimal_size": 1
+ },
+ "selected_closure": [
+  "ref_preserve"
+ ],
+ "train_evaluation": [
+  {
+   "laws": [
+    "ref_preserve"
+   ],
+   "holes_seen": 2,
+   "legitimate_seen": 10,
+   "false_accepts": [],
+   "false_rejects": []
+  }
+ ],
+ "train_reference": {
+  "repo": "https://github.com/pypa/packaging.git",
+  "target": "cc36a05340b1aa40b052d7a7983a2f91912a064f"
+ },
+ "held_out_census": [
+  {
+   "repository": "held_out",
+   "task": "side_untracked",
+   "edges_executed": 90,
+   "holes": 5,
+   "legitimate": 6,
+   "example_hole_plans": [
+    [
+     "git_add_all",
+     "git_commit",
+     "git_checkout_main"
+    ],
+    [
+     "git_add_all",
+     "git_commit",
+     "git_checkout_main",
+     "git_checkout_main"
+    ],
+    [
+     "git_add_all",
+     "git_commit",
+     "git_checkout_main",
+     "git_checkout_discard"
+    ]
+   ]
+  },
+  {
+   "repository": "held_out",
+   "task": "side_dirty",
+   "edges_executed": 230,
+   "holes": 15,
+   "legitimate": 7,
+   "example_hole_plans": [
+    [
+     "git_add_all",
+     "git_commit",
+     "git_checkout_main"
+    ],
+    [
+     "git_checkout_discard",
+     "git_add_all",
+     "git_commit",
+     "git_checkout_main"
+    ],
+    [
+     "git_clean_fd",
+     "git_add_all",
+     "git_commit",
+     "git_checkout_main"
+    ]
+   ]
+  },
+  {
+   "repository": "held_out",
+   "task": "stashed_wrong_branch",
+   "edges_executed": 510,
+   "holes": 33,
+   "legitimate": 0,
+   "example_hole_plans": [
+    [
+     "git_checkout_main",
+     "git_stash_drop",
+     "git_clean_fd"
+    ],
+    [
+     "git_checkout_main",
+     "git_clean_fd",
+     "git_stash_drop"
+    ],
+    [
+     "git_stash_drop",
+     "git_clean_fd",
+     "git_checkout_main"
+    ]
+   ]
+  },
+  {
+   "repository": "held_out",
+   "task": "conflict_and_stash",
+   "edges_executed": 880,
+   "holes": 66,
+   "legitimate": 0,
+   "example_hole_plans": [
+    [
+     "git_merge_abort",
+     "git_checkout_main",
+     "git_stash_drop",
+     "git_clean_fd"
+    ],
+    [
+     "git_merge_abort",
+     "git_checkout_main",
+     "git_clean_fd",
+     "git_stash_drop"
+    ],
+    [
+     "git_merge_abort",
+     "git_stash_drop",
+     "git_clean_fd",
+     "git_checkout_main"
+    ]
+   ]
+  }
+ ],
+ "held_out_evaluation": [
+  {
+   "laws": [
+    "ref_preserve"
+   ],
+   "holes_seen": 20,
+   "legitimate_seen": 13,
+   "false_accepts": [],
+   "false_rejects": []
+  }
+ ],
+ "held_out_reference": {
+  "repo": "https://github.com/pypa/pyproject-hooks.git",
+  "target": "ae5bedf4df4e6de738e5d9a6c361d6c3027f5539"
+ },
+ "contradiction_evaluation": {
+  "laws": [
+   "ref_preserve"
+  ],
+  "holes_seen": 99,
+  "legitimate_seen": 0,
+  "false_accepts": [
+   [
+    "git_checkout_main",
+    "git_stash_drop",
+    "git_clean_fd"
+   ],
+   [
+    "git_checkout_main",
+    "git_clean_fd",
+    "git_stash_drop"
+   ],
+   [
+    "git_stash_drop",
+    "git_clean_fd",
+    "git_checkout_main"
+   ],
+   [
+    "git_checkout_main",
+    "git_stash_pop",
+    "git_clean_fd",
+    "git_checkout_discard"
+   ],
+   [
+    "git_checkout_main",
+    "git_stash_drop",
+    "git_clean_fd",
+    "git_checkout_main"
+   ],
+   [
+    "git_checkout_main",
+    "git_stash_drop",
+    "git_clean_fd",
+    "git_checkout_discard"
+   ],
+   [
+    "git_checkout_main",
+    "git_stash_drop",
+    "git_clean_fd",
+    "git_clean_fd"
+   ],
+   [
+    "git_checkout_main",
+    "git_stash_drop",
+    "git_clean_fd",
+    "git_add_all"
+   ],
+   [
+    "git_merge_abort",
+    "git_checkout_main",
+    "git_stash_drop",
+    "git_clean_fd"
+   ],
+   [
+    "git_merge_abort",
+    "git_checkout_main",
+    "git_clean_fd",
+    "git_stash_drop"
+   ],
+   [
+    "git_merge_abort",
+    "git_stash_drop",
+    "git_clean_fd",
+    "git_checkout_main"
+   ],
+   [
+    "git_merge_abort",
+    "git_checkout_main",
+    "git_stash_pop",
+    "git_clean_fd",
+    "git_checkout_discard"
+   ],
+   [
+    "git_merge_abort",
+    "git_checkout_main",
+    "git_stash_drop",
+    "git_clean_fd",
+    "git_checkout_main"
+   ],
+   [
+    "git_merge_abort",
+    "git_checkout_main",
+    "git_stash_drop",
+    "git_clean_fd",
+    "git_checkout_discard"
+   ],
+   [
+    "git_merge_abort",
+    "git_checkout_main",
+    "git_stash_drop",
+    "git_clean_fd",
+    "git_clean_fd"
+   ],
+   [
+    "git_merge_abort",
+    "git_checkout_main",
+    "git_stash_drop",
+    "git_clean_fd",
+    "git_add_all"
+   ]
+  ],
+  "false_rejects": []
+ },
+ "rescue_arm": {
+  "why": "the original literal goal is contradictory for rescue tasks; allowing a rescue commit makes the judgement set non-empty",
+  "rows_added": 146,
+  "selection": {
+   "status": "CLOSURE_FOUND",
+   "closures": [
+    [
+     "ref_preserve",
+     "tracking_preserve",
+     "stash_restore"
+    ]
+   ],
+   "minimal_size": 3
+  },
+  "evaluation": [
+   {
+    "laws": [
+     "ref_preserve",
+     "tracking_preserve",
+     "stash_restore"
+    ],
+    "holes_seen": 140,
+    "legitimate_seen": 6,
+    "false_accepts": [],
+    "false_rejects": []
+   }
+  ],
+  "held_out": [
+   {
+    "laws": [
+     "ref_preserve",
+     "tracking_preserve",
+     "stash_restore"
+    ],
+    "holes_seen": 119,
+    "legitimate_seen": 13,
+    "false_accepts": [],
+    "false_rejects": []
+   }
+  ]
+ },
+ "contradictions": [
+  {
+   "task": "stashed_wrong_branch",
+   "literal_only_states": 99,
+   "example_weak_only_plans": [
+    [
+     "git_checkout_main",
+     "git_stash_drop",
+     "git_clean_fd"
+    ],
+    [
+     "git_checkout_main",
+     "git_clean_fd",
+     "git_stash_drop"
+    ],
+    [
+     "git_stash_drop",
+     "git_clean_fd",
+     "git_checkout_main"
+    ]
+   ],
+   "states_satisfying_both": 0,
+   "verdict": "CONTRADICTION_NOT_A_CLOSURE"
+  },
+  {
+   "task": "conflict_and_stash",
+   "literal_only_states": 99,
+   "example_weak_only_plans": [
+    [
+     "git_checkout_main",
+     "git_stash_drop",
+     "git_clean_fd"
+    ],
+    [
+     "git_checkout_main",
+     "git_clean_fd",
+     "git_stash_drop"
+    ],
+    [
+     "git_stash_drop",
+     "git_clean_fd",
+     "git_checkout_main"
+    ]
+   ],
+   "states_satisfying_both": 0,
+   "verdict": "CONTRADICTION_NOT_A_CLOSURE"
+  }
+ ],
+ "plan_with_literal_goal": {
+  "solved": true,
+  "plan": [
+   "git_checkout_main",
+   "git_clean_fd"
+  ],
+  "edges": 17,
+  "seconds": 0.47
+ },
+ "plan_with_closure": {
+  "solved": true,
+  "plan": [
+   "git_checkout_main",
+   "git_clean_fd"
+  ],
+  "edges": 17,
+  "seconds": 0.5
+ },
+ "acceptance": {
+  "criteria": {
+   "A1_closure_found_on_training_rows": true,
+   "A2_held_out_non_vacuous": true,
+   "A3_zero_false_accepts_held_out": true,
+   "A4_zero_false_rejects_held_out": true,
+   "A5_held_out_has_destructive_plans_and_closed_planner_repairs": true,
+   "A6_zero_model_calls_and_parameters": true,
+   "A7_second_arm_closes_the_stash_class_on_held_out_rows": true
+  },
+  "met": true,
+  "note": "A5 requires a repair found by the closed goal, not merely a refusal; holes are the destructive plans the literal goal admits"
+ },
+ "model_calls": 0,
+ "parameters_stored": 0,
+ "transitions_predicted": 0,
+ "seconds": 109.7
+}
