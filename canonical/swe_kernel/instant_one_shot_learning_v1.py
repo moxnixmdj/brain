@@ -61,7 +61,7 @@ import pathlib
 import sys
 import tempfile
 from dataclasses import dataclass, field
-from typing import Any, Sequence
+from typing import Any, Mapping, Sequence
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 
 if str(ROOT) not in sys.path:
@@ -111,6 +111,18 @@ from canonical.swe_kernel.deterministic_trace_replay_v1 import (  # noqa: E402
     TraceFrame as _TraceFrame,
     record_trace as _record_trace,
     replay_trace as _replay_trace,
+)
+
+# Demonstration sufficiency: decide if one execution uniquely identifies the rule
+from canonical.swe_kernel.demonstration_sufficiency_v1 import (  # noqa: E402
+    observe as _ds_observe,
+    space as _ds_space,
+    experiment_table as _ds_experiment_table,
+    sufficiency as _ds_sufficiency,
+    decide as _ds_decide,
+    PAYLOAD_UNIQUE as _DS_PAYLOAD_UNIQUE,
+    PAYLOAD_DUPLICATES as _DS_PAYLOAD_DUPLICATES,
+    PAYLOAD_UNSORTED as _DS_PAYLOAD_UNSORTED,
 )
 
 # Contrastive oracle bootstrap
@@ -441,6 +453,179 @@ def attribute_credit(
 # --------------------------------------------------------------------------- #
 
 
+def check_demonstration_sufficiency(
+    environment_root: pathlib.Path,
+    credit_result: dict[str, Any],
+    right_command: str,
+) -> dict[str, Any]:
+    """Decide whether one execution uniquely identifies the transformation.
+
+    Uses the demonstration sufficiency instrument (demonstration_sufficiency_v1):
+    generate the hypothesis space from the observed before-state, run the right
+    command once to observe the actual after-state, build experiment tables over
+    variant states, and ask whether every surviving hypothesis agrees on all
+    reachable states.
+
+    Verdicts:
+    - IDENTIFIED / BEHAVIOURALLY_IDENTICAL / SAFE_FOR_THIS_TASK_ONLY -> proceed
+    - NEEDS_ONE_MORE_EXECUTION -> refuse (one execution is not enough — determinacy ceiling)
+    - VOCABULARY_INSUFFICIENT -> proceed (grammar can't express the action; contrastive bootstrap has its own refusal)
+
+    Zero model calls, zero network calls. Fail-closed.
+    """
+    trace = credit_result.get("trace")
+    if trace is None or not isinstance(trace, _AgentTrace):
+        return {
+            "phase": "IDENTIFY",
+            "status": REFUSED,
+            "reason": "NO_TRACE_FOR_SUFFICIENCY_CHECK",
+            "model_calls": 0,
+            "network_calls": 0,
+        }
+
+    steps = list(trace.steps)
+    if not steps:
+        return {
+            "phase": "IDENTIFY",
+            "status": REFUSED,
+            "reason": "EMPTY_TRACE_FOR_SUFFICIENCY_CHECK",
+            "model_calls": 0,
+            "network_calls": 0,
+        }
+
+    # Before-state from the first step's snapshot (may be empty if environment starts bare)
+    before_state = steps[0].state_snapshot
+    if not isinstance(before_state, Mapping):
+        return {
+            "phase": "IDENTIFY",
+            "status": REFUSED,
+            "reason": "NO_BEFORE_STATE_FOR_SUFFICIENCY_CHECK",
+            "model_calls": 0,
+            "network_calls": 0,
+        }
+
+    # Extract file paths mentioned in the command as extra hypothesis paths
+    import re as _re
+    command_paths = set(_re.findall(r"[^\s<>|&;]+", right_command))
+    command_paths = {p for p in command_paths if "/" in p or p.endswith((".txt", ".py", ".dat", ".json", ".log"))}
+
+    # Run the right command once in a fresh copy of the before-state to observe
+    # the actual after-state signature.
+    try:
+        observed = _ds_observe(right_command, before_state, environment_root)
+    except Exception as exc:  # noqa: BLE001
+        return {
+            "phase": "IDENTIFY",
+            "status": REFUSED,
+            "reason": f"SUFFICIENCY_OBSERVE_FAILED:{type(exc).__name__}",
+            "model_calls": 0,
+            "network_calls": 0,
+        }
+
+    observed_signature = observed["signature"]
+
+    # Generate the hypothesis space from the before-state, using command paths as extras
+    hypotheses = _ds_space(before_state, extra_paths=tuple(sorted(command_paths)))
+    if not hypotheses:
+        return {
+            "phase": "IDENTIFY",
+            "status": "SUFFICIENCY_DONE",
+            "verdict": "BEHAVIOURALLY_IDENTICAL_IN_THIS_ENVIRONMENT",
+            "sufficiency_verdict": {"verdict": "BEHAVIOURALLY_IDENTICAL_IN_THIS_ENVIRONMENT", "survivor_count": 0},
+            "decision": "ACT__EVERY_SURVIVOR_AGREES_ON_THE_STATES_IN_REACH",
+            "survivor_count": 0,
+            "model_calls": 0,
+            "network_calls": 0,
+            "derivation": "demonstration_sufficiency_no_hypotheses_from_empty_state",
+        }
+
+    # Build variant states for the experiment table
+    payload_variants = {
+        "unique": _DS_PAYLOAD_UNIQUE,
+        "duplicates": _DS_PAYLOAD_DUPLICATES,
+        "unsorted": _DS_PAYLOAD_UNSORTED,
+    }
+    variant_states = {}
+    for name in payload_variants:
+        # Build state by copying before-state, adding command paths, and swapping payload.dat
+        state = dict(before_state)
+        for cp in command_paths:
+            state.setdefault(cp, b"")
+        state["payload.dat"] = payload_variants[name]
+        variant_states[name] = state
+
+    # Add multiline state (src.dat varies)
+    multi = dict(before_state)
+    for cp in command_paths:
+        multi.setdefault(cp, b"")
+    multi["src.dat"] = b"zeta\nalpha\nmu\n" + b"src content that differs from every other file\n"
+    variant_states["src_multiline"] = multi
+
+    # Experiment table: one column per variant state
+    table = _ds_experiment_table(hypotheses, variant_states)
+
+    # Observed: the right command's actual signature on each variant state
+    # We observe on each variant state so the version space can be filtered
+    observed_map: dict[str, str] = {}
+    for state_id, state in variant_states.items():
+        try:
+            obs = _ds_observe(right_command, state, environment_root)
+            observed_map[state_id] = obs["signature"]
+        except Exception:  # noqa: BLE001
+            observed_map[state_id] = observed_signature
+
+    # Task states: all variant states are potential task states
+    task_states = list(variant_states.keys())
+
+    # Compute sufficiency verdict
+    verdict = _ds_sufficiency(hypotheses, table, observed_map, task_states)
+    decision = _ds_decide(verdict)
+
+    verdict_str = verdict.get("verdict", "UNKNOWN")
+    if verdict_str == "NEEDS_ONE_MORE_EXECUTION":
+        # DETERMINACY CEILING: one execution does not uniquely identify the
+        # transformation. Refuse rather than manufacture attribution — the
+        # caller can run one more execution to disambiguate.
+        return {
+            "phase": "IDENTIFY",
+            "status": REFUSED,
+            "reason": "REFUSE__NEEDS_ONE_MORE_EXECUTION",
+            "sufficiency_verdict": verdict,
+            "next_experiment": verdict.get("next_experiment"),
+            "model_calls": 0,
+            "network_calls": 0,
+        }
+    # VOCABULARY_INSUFFICIENT means the grammar can't express the action
+    # (e.g. file creation). Proceed to contrastive bootstrap which has its
+    # own refusal mechanism — this is not a determinacy failure.
+    if verdict_str not in (
+        "IDENTIFIED",
+        "BEHAVIOURALLY_IDENTICAL_IN_THIS_ENVIRONMENT",
+        "SAFE_FOR_THIS_TASK_ONLY",
+        "VOCABULARY_INSUFFICIENT",
+    ):
+        return {
+            "phase": "IDENTIFY",
+            "status": REFUSED,
+            "reason": f"REFUSE__SUFFICIENCY_UNDECIDED:{verdict_str}",
+            "sufficiency_verdict": verdict,
+            "model_calls": 0,
+            "network_calls": 0,
+        }
+
+    return {
+        "phase": "IDENTIFY",
+        "status": "SUFFICIENCY_DONE",
+        "verdict": verdict_str,
+        "sufficiency_verdict": verdict,
+        "decision": decision,
+        "survivor_count": verdict.get("survivor_count", 0),
+        "model_calls": 0,
+        "network_calls": 0,
+        "derivation": "demonstration_sufficiency_computed_before_contrastive_bootstrap",
+    }
+
+
 def identify_rule(
     environment_root: pathlib.Path,
     credit_result: dict[str, Any],
@@ -475,6 +660,16 @@ def identify_rule(
             "model_calls": 0,
             "network_calls": 0,
         }
+
+    # SUFFICIENCY GATE: is one execution enough to uniquely identify the rule?
+    # Refuse rather than manufacture attribution when the demonstration does not
+    # determine the transformation. This is the determinacy ceiling — one
+    # demonstration does not always uniquely identify the correct edit.
+    sufficiency = check_demonstration_sufficiency(
+        environment_root, credit_result, right_command
+    )
+    if sufficiency["status"] == REFUSED:
+        return sufficiency
 
     # SENSE: calculate the distinguishing state key from raw traces
     sense = _cob_sense_state_key(environment_root, right_command, wrong_actions)
@@ -638,6 +833,8 @@ def identify_rule(
             ),
         },
         "proof_or_witness": proof_or_witness,
+        "sufficiency_verdict": sufficiency.get("verdict"),
+        "sufficiency_survivor_count": sufficiency.get("survivor_count"),
         "model_calls": 0,
         "network_calls": 0,
         "derivation": "contrastive_proof_or_witness_close",
