@@ -1,0 +1,153 @@
+{
+ "schema": "BRAIN_PERMISSIONS_ARE_A_RELATION_TOO_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "claim": "A relation invisible to the old five-relation grammar (file mode) is computed from a new reader's facts and transfers to a different directory.",
+ "declared_before_the_run": [
+  "G1 mode, content and extra-path defect families are discovered in both trees",
+  "G2 the computed algebra selects a closure from training rows",
+  "G3 zero false accepts and zero false rejects on the held tree",
+  "G4 the closure contains a mode relation and no file name",
+  "G5 zero model calls and zero stored parameters"
+ ],
+ "limits": [
+  "action vocabulary, target tree and bounds are supplied",
+  "real filesystem, but not a GUI, browser or open benchmark",
+  "producer-run; no independent verification"
+ ],
+ "train_discovery": {
+  "discovery_edges": 56,
+  "families": [
+   [
+    "content_mismatch"
+   ],
+   [
+    "extra_path"
+   ],
+   [
+    "mode_mismatch"
+   ]
+  ],
+  "plans": [
+   [
+    "break_content:alpha.txt"
+   ],
+   [
+    "add_extra"
+   ],
+   [
+    "break_mode:alpha.txt"
+   ]
+  ]
+ },
+ "held_discovery": {
+  "discovery_edges": 90,
+  "families": [
+   [
+    "content_mismatch"
+   ],
+   [
+    "extra_path"
+   ],
+   [
+    "mode_mismatch"
+   ]
+  ],
+  "plans": [
+   [
+    "break_content:q.txt"
+   ],
+   [
+    "add_extra"
+   ],
+   [
+    "break_mode:q.txt"
+   ]
+  ]
+ },
+ "selection": {
+  "status": "CLOSURE_FOUND",
+  "closures": [
+   [
+    {
+     "kind": "restore",
+     "from": "target",
+     "to": "content"
+    },
+    {
+     "kind": "restore",
+     "from": "targetmode",
+     "to": "mode"
+    }
+   ]
+  ],
+  "minimal_size": 2,
+  "nonconstant_vectors": 7
+ },
+ "computed_laws": [
+  {
+   "kind": "restore",
+   "from": "target",
+   "to": "content"
+  },
+  {
+   "kind": "restore",
+   "from": "targetmode",
+   "to": "mode"
+  }
+ ],
+ "train_evaluation": [
+  {
+   "laws": [
+    {
+     "kind": "restore",
+     "from": "target",
+     "to": "content"
+    },
+    {
+     "kind": "restore",
+     "from": "targetmode",
+     "to": "mode"
+    }
+   ],
+   "holes_seen": 604,
+   "legitimate_seen": 38,
+   "false_accepts": [],
+   "false_rejects": []
+  }
+ ],
+ "held_evaluation": [
+  {
+   "laws": [
+    {
+     "kind": "restore",
+     "from": "target",
+     "to": "content"
+    },
+    {
+     "kind": "restore",
+     "from": "targetmode",
+     "to": "mode"
+    }
+   ],
+   "holes_seen": 660,
+   "legitimate_seen": 44,
+   "false_accepts": [],
+   "false_rejects": []
+  }
+ ],
+ "judged_rows": {
+  "train": 642,
+  "held": 704
+ },
+ "criteria": {
+  "G1_mode_family_discovered": true,
+  "G2_closure_found": true,
+  "G3_transfer_zero_errors": true,
+  "G4_mode_relation_without_file_names": true,
+  "G5_zero_model_calls_and_parameters": true
+ },
+ "met": true,
+ "model_calls": 0,
+ "parameters_stored": 0,
+ "seconds": 1.3
+}
