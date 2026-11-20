@@ -1,0 +1,203 @@
+{
+ "schema": "BRAIN_COMPUTED_LAW_ALGEBRA_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "claim": "The preservation vocabulary is computed from readings; the smallest separator transfers to judged rows from a different repository.",
+ "declared_before_the_run": [
+  "F1 the selector receives no named law, file name or commit digest",
+  "F2 the computed algebra selects a closure from training rows",
+  "F3 the selected closure has zero false accepts and zero false rejects on held rows",
+  "F4 no false accept/reject under the old named closure is hidden by this comparison",
+  "F5 zero model calls and zero stored parameters"
+ ],
+ "limits": [
+  "template grammar, damage classes, target commits and bounds are supplied",
+  "git only; not a GUI, browser or open benchmark score",
+  "producer-run; no independent verification"
+ ],
+ "computed_candidates": [
+  {
+   "true_rows": 157,
+   "law": {
+    "kind": "restore",
+    "from": "target",
+    "to": "content"
+   }
+  },
+  {
+   "true_rows": 143,
+   "law": {
+    "kind": "no_new",
+    "prefix": "content"
+   }
+  },
+  {
+   "true_rows": 133,
+   "law": {
+    "kind": "preserve_except_value",
+    "prefix": "ref",
+    "key": "head.branch",
+    "scope": "before"
+   }
+  },
+  {
+   "true_rows": 79,
+   "law": {
+    "kind": "preserve_except_prefix",
+    "prefix": "content",
+    "witness": "status"
+   }
+  },
+  {
+   "true_rows": 71,
+   "law": {
+    "kind": "preserve_except_value",
+    "prefix": "ref",
+    "key": "head.branch",
+    "scope": "after"
+   }
+  },
+  {
+   "true_rows": 55,
+   "law": {
+    "kind": "restore",
+    "from": "stash_content",
+    "to": "content"
+   }
+  },
+  {
+   "true_rows": 33,
+   "law": {
+    "kind": "preserve",
+    "prefix": "stash"
+   }
+  },
+  {
+   "true_rows": 29,
+   "law": {
+    "kind": "preserve",
+    "prefix": "ref"
+   }
+  }
+ ],
+ "selection": {
+  "status": "CLOSURE_FOUND",
+  "closures": [
+   [
+    {
+     "kind": "restore",
+     "from": "stash_content",
+     "to": "content"
+    },
+    {
+     "kind": "no_new",
+     "prefix": "content"
+    },
+    {
+     "kind": "preserve_except_value",
+     "prefix": "ref",
+     "key": "head.branch",
+     "scope": "after"
+    }
+   ]
+  ],
+  "minimal_size": 3,
+  "nonconstant_vectors": 8
+ },
+ "computed_laws": [
+  {
+   "kind": "restore",
+   "from": "stash_content",
+   "to": "content"
+  },
+  {
+   "kind": "no_new",
+   "prefix": "content"
+  },
+  {
+   "kind": "preserve_except_value",
+   "prefix": "ref",
+   "key": "head.branch",
+   "scope": "after"
+  }
+ ],
+ "train_evaluation": [
+  {
+   "laws": [
+    {
+     "kind": "restore",
+     "from": "stash_content",
+     "to": "content"
+    },
+    {
+     "kind": "no_new",
+     "prefix": "content"
+    },
+    {
+     "kind": "preserve_except_value",
+     "prefix": "ref",
+     "key": "head.branch",
+     "scope": "after"
+    }
+   ],
+   "holes_seen": 160,
+   "legitimate_seen": 19,
+   "false_accepts": [],
+   "false_rejects": []
+  }
+ ],
+ "held_evaluation": [
+  {
+   "laws": [
+    {
+     "kind": "restore",
+     "from": "stash_content",
+     "to": "content"
+    },
+    {
+     "kind": "no_new",
+     "prefix": "content"
+    },
+    {
+     "kind": "preserve_except_value",
+     "prefix": "ref",
+     "key": "head.branch",
+     "scope": "after"
+    }
+   ],
+   "holes_seen": 161,
+   "legitimate_seen": 19,
+   "false_accepts": [],
+   "false_rejects": []
+  }
+ ],
+ "named_baseline": {
+  "laws": [
+   "ref_preserve",
+   "tracking_preserve",
+   "stash_restore"
+  ],
+  "train": {
+   "false_accepts": 0,
+   "false_rejects": 0
+  },
+  "held": {
+   "false_accepts": 0,
+   "false_rejects": 0
+  }
+ },
+ "judged_rows": {
+  "train": 179,
+  "held": 180
+ },
+ "criteria": {
+  "F1_no_named_law_input": true,
+  "F2_closure_found": true,
+  "F3_transfer_zero_errors": true,
+  "F4_named_baseline_zero_errors": true,
+  "F5_zero_model_calls_and_parameters": true
+ },
+ "met": true,
+ "model_calls": 0,
+ "parameters_stored": 0,
+ "seconds": 252.1
+}

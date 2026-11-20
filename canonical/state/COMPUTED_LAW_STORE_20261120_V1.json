@@ -1,0 +1,48 @@
+{
+ "schema": "BRAIN_COMPUTED_LAW_STORE_V1",
+ "laws": [
+  {
+   "kind": "restore",
+   "from": "stash_content",
+   "to": "content"
+  },
+  {
+   "kind": "no_new",
+   "prefix": "content"
+  },
+  {
+   "kind": "preserve_except_value",
+   "prefix": "ref",
+   "key": "head.branch",
+   "scope": "after"
+  }
+ ],
+ "derived_from": {
+  "status": "CLOSURE_FOUND",
+  "closures": [
+   [
+    {
+     "kind": "restore",
+     "from": "stash_content",
+     "to": "content"
+    },
+    {
+     "kind": "no_new",
+     "prefix": "content"
+    },
+    {
+     "kind": "preserve_except_value",
+     "prefix": "ref",
+     "key": "head.branch",
+     "scope": "after"
+    }
+   ]
+  ],
+  "minimal_size": 3,
+  "nonconstant_vectors": 8
+ },
+ "parameters": 0,
+ "model_calls": 0,
+ "removable": true,
+ "note": "Delete this file to remove the learned closure; the selector is unchanged."
+}
