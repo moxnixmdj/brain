@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 585,
+  "knowledge_documents": 586,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 7190,
+  "research_index_records": 7192,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 452,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "94210b19f75d20a11b604fc1d674240c9aaaf735f450b3d76b6b37050f4d065d"
+  "value": "825f25396e0fe14ce8d98a4a1d98b4472cb3252b55df8434cb94a6e33a62e0ff"
  },
  "engines": [
   {
@@ -59104,6 +59104,79 @@
     "loudly",
     "not",
     "permanence"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 3578,
+   "headings": [
+    "Permissions are a relation too — 2026-11-20",
+    "The bottleneck",
+    "What was built",
+    "Three designs killed before the result",
+    "Measured result",
+    "What remains"
+   ],
+   "kind": "DOCUMENT",
+   "path": "PERMISSIONS_ARE_A_RELATION_TOO_20261120_V1.md",
+   "sha256": "7cdf33918555f25845fab829cb9f29840ac2432f7929fca109d98f3eb401de2c",
+   "summary": "Authority: `NONE__PRODUCER_RUN_SANDBOX`. No independent verification, benchmark score, capability/ acceptance/terminal credit, runtime model call or stored parameter.",
+   "terms": {
+    "action": 3,
+    "before": 2,
+    "benchmark": 2,
+    "both": 2,
+    "bottleneck": 2,
+    "break": 2,
+    "bytes": 4,
+    "canonical": 4,
+    "closure": 4,
+    "computed": 3,
+    "content": 5,
+    "different": 3,
+    "discovered": 2,
+    "discovery": 3,
+    "every": 2,
+    "extra": 4,
+    "facts": 2,
+    "false": 2,
+    "file": 3,
+    "fixed": 3,
+    "generic": 2,
+    "git": 2,
+    "held": 2,
+    "holes": 2,
+    "independent": 2,
+    "law": 3,
+    "machine": 3,
+    "mode": 10,
+    "name": 4,
+    "new": 3,
+    "no": 8,
+    "not": 5,
+    "only": 4,
+    "path": 3,
+    "preserve": 4,
+    "reader": 4,
+    "real": 4,
+    "relation": 3,
+    "restore": 5,
+    "result": 3,
+    "run": 3,
+    "target": 9,
+    "targetmode": 3,
+    "tests": 4,
+    "training": 3,
+    "tree": 5,
+    "verification": 3,
+    "whose": 3
+   },
+   "title": "Permissions are a relation too — 2026-11-20",
+   "title_terms": [
+    "2026-11-20",
+    "permissions",
+    "relation",
+    "too"
    ]
   },
   {
@@ -90586,10 +90659,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1387,
+  "included_source_count": 1388,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "722f6e25d77d218538742742c4d87111a8c39649e60a458bb0842fa67537c54a"
+  "source_tree_digest": "5d7b87c3f05631be7b7d65def543493218022349e80682bde7421b66a60b5b59"
  },
  "research_index": [
   {
@@ -190392,6 +190465,24 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/PERMISSIONS_ARE_A_RELATION_TOO_20261120_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/PERMISSIONS_ARE_A_RELATION_TOO_20261120_V1.json",
+   "schema": "BRAIN_PERMISSIONS_ARE_A_RELATION_TOO_V1",
+   "sha256": "aae8c14d00327a716f7c4b2452850148f29fc04cb36004f3bbe7d1611020a9d3",
+   "status": "",
+   "terms": {
+    "20261120": 1,
+    "permissions": 1,
+    "relation": 1,
+    "too": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-07",
    "id": "research:canonical/verification/PERSISTENT_CAPABILITY_INFORMATION_NECESSITY_WOLFRAM_VERIFICATION_20261007_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -252055,6 +252146,51 @@
     "the_research_record_is_now_reachable_through_the_model_without_inflating_the_capability_claim__6256_governance_verification_and_intent_records_are_indexed_as_research_index_with_capability_false_on_every_row_solve_never_routes_there_and_find_research_answers_where_was_this_decided_rather_than_run_this__generated_outputs_are_excluded_so_the_compile_is_a_verified_fixed_point__capability_count_stays_363__new_digest_fb389ce2__107_tests_ok_verifier_33_of_33_benchmark_unchanged_at_17_of_23_and_12_of_23": 1,
     "v1": 2,
     "vocabulary": 1
+   }
+  },
+  {
+   "action_id": "PERMISSIONS_ARE_A_RELATION_TOO_20261120_V1",
+   "capability": false,
+   "date": "2026-11-20",
+   "id": "research:canonical/action_intents/PERMISSIONS_ARE_A_RELATION_TOO_20261120_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/PERMISSIONS_ARE_A_RELATION_TOO_20261120_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "bac43be80ae21723abbad34d3325fdac9d9427193f4c7c0eedf49d22a79161b7",
+   "status": "PROPOSED__PRODUCER_MEASURED__NO_MODEL_CALLS__INDEPENDENT_VERIFICATION_OPEN",
+   "terms": {
+    "20261120": 1,
+    "642": 1,
+    "704": 1,
+    "accepts": 1,
+    "actions": 1,
+    "applied": 1,
+    "blind": 1,
+    "boolean": 1,
+    "both": 1,
+    "bytes": 1,
+    "calls": 1,
+    "closure": 1,
+    "completion": 1,
+    "computed": 2,
+    "content": 2,
+    "defects": 1,
+    "different": 1,
+    "directory": 1,
+    "explicitly": 2,
+    "false": 2,
+    "grammar": 2,
+    "mode": 3,
+    "new": 3,
+    "not": 3,
+    "old": 2,
+    "permissions": 2,
+    "permissions_are_a_relation_too_20261120_v1": 2,
+    "reader": 2,
+    "relation": 3,
+    "restore": 2,
+    "selector": 2,
+    "target": 2
    }
   },
   {

@@ -1,0 +1,37 @@
+{
+ "schema": "BRAIN_COMPUTED_LAW_STORE_V1",
+ "laws": [
+  {
+   "kind": "restore",
+   "from": "target",
+   "to": "content"
+  },
+  {
+   "kind": "restore",
+   "from": "targetmode",
+   "to": "mode"
+  }
+ ],
+ "derived_from": {
+  "status": "CLOSURE_FOUND",
+  "closures": [
+   [
+    {
+     "kind": "restore",
+     "from": "target",
+     "to": "content"
+    },
+    {
+     "kind": "restore",
+     "from": "targetmode",
+     "to": "mode"
+    }
+   ]
+  ],
+  "minimal_size": 2,
+  "nonconstant_vectors": 7
+ },
+ "parameters": 0,
+ "model_calls": 0,
+ "removable": true
+}
