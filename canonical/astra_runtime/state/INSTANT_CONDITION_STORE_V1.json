@@ -330,7 +330,200 @@
     "+x",
     "script.sh"
    ]
+  },
+  "[\"tar\",\"-xzf\",\"bundle.tgz\"]": {
+   "action_key": "[\"tar\",\"-xzf\",\"bundle.tgz\"]",
+   "program": [
+    "tar",
+    "-xzf",
+    "bundle.tgz"
+   ],
+   "condition_status": "PROVISIONAL__LEAST_DEMANDING_SURVIVOR",
+   "required": [
+    "archive_valid.valid"
+   ],
+   "source": {
+    "environment": "observable-source",
+    "repo": "https://github.com/pallets/click.git",
+    "commit": "fbdc9bb39eff05f3e4ad18c89c73fbebe9e50339",
+    "learned": {
+     "stage": "MEASURED",
+     "executions": 4,
+     "boundary_status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+     "survivor_count": 8192,
+     "required": [
+      "archive_valid.valid"
+     ],
+     "successes": 3,
+     "failures": 1,
+     "held_out_accuracy": 1.0,
+     "held_out_states": 8,
+     "trajectory": [
+      {
+       "outcome": true,
+       "status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+       "survivors": 0
+      },
+      {
+       "outcome": true,
+       "status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+       "survivors": 0
+      },
+      {
+       "outcome": false,
+       "status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+       "survivors": 8192
+      },
+      {
+       "stop": "EVERY_REACHABLE_STATE_GIVES_THE_SAME_ANSWER_FOR_ALL_SURVIVORS",
+       "status": "NO_REACHABLE_STATE_SPLITS_THE_SURVIVORS"
+      }
+     ]
+    },
+    "probes": [
+     "archive_valid.absent",
+     "archive_valid.invalid",
+     "archive_valid.valid",
+     "gzip_valid.absent",
+     "gzip_valid.valid",
+     "patch_applies.invalid"
+    ]
+   },
+   "external_model_dependency": false,
+   "task_specific_policy_data": false
+  },
+  "[\"gzip\",\"-d\",\"payload.gz\"]": {
+   "action_key": "[\"gzip\",\"-d\",\"payload.gz\"]",
+   "program": [
+    "gzip",
+    "-d",
+    "payload.gz"
+   ],
+   "condition_status": "PROVISIONAL__LEAST_DEMANDING_SURVIVOR",
+   "required": [
+    "gzip_valid.valid"
+   ],
+   "source": {
+    "environment": "observable-source",
+    "repo": "https://github.com/pallets/click.git",
+    "commit": "fbdc9bb39eff05f3e4ad18c89c73fbebe9e50339",
+    "learned": {
+     "stage": "MEASURED",
+     "executions": 4,
+     "boundary_status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+     "survivor_count": 8192,
+     "required": [
+      "gzip_valid.valid"
+     ],
+     "successes": 3,
+     "failures": 1,
+     "held_out_accuracy": 1.0,
+     "held_out_states": 8,
+     "trajectory": [
+      {
+       "outcome": true,
+       "status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+       "survivors": 0
+      },
+      {
+       "outcome": false,
+       "status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+       "survivors": 16384
+      },
+      {
+       "outcome": true,
+       "status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+       "survivors": 8192
+      },
+      {
+       "stop": "EVERY_REACHABLE_STATE_GIVES_THE_SAME_ANSWER_FOR_ALL_SURVIVORS",
+       "status": "NO_REACHABLE_STATE_SPLITS_THE_SURVIVORS"
+      }
+     ]
+    },
+    "probes": [
+     "archive_valid.absent",
+     "archive_valid.valid",
+     "gzip_valid.absent",
+     "gzip_valid.invalid",
+     "gzip_valid.valid",
+     "patch_applies.invalid"
+    ]
+   },
+   "external_model_dependency": false,
+   "task_specific_policy_data": false
+  },
+  "[\"patch\",\"--batch\",\"--forward\",\"-p1\",\"--dry-run\",\"-i\",\"change.patch\"]": {
+   "action_key": "[\"patch\",\"--batch\",\"--forward\",\"-p1\",\"--dry-run\",\"-i\",\"change.patch\"]",
+   "program": [
+    "patch",
+    "--batch",
+    "--forward",
+    "-p1",
+    "--dry-run",
+    "-i",
+    "change.patch"
+   ],
+   "condition_status": "PROVISIONAL__LEAST_DEMANDING_SURVIVOR",
+   "required": [
+    "patch_applies.valid"
+   ],
+   "source": {
+    "environment": "observable-source",
+    "repo": "https://github.com/pallets/click.git",
+    "commit": "fbdc9bb39eff05f3e4ad18c89c73fbebe9e50339",
+    "learned": {
+     "stage": "MEASURED",
+     "executions": 5,
+     "boundary_status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+     "survivor_count": 1024,
+     "required": [
+      "patch_applies.valid"
+     ],
+     "successes": 3,
+     "failures": 2,
+     "held_out_accuracy": 1.0,
+     "held_out_states": 8,
+     "trajectory": [
+      {
+       "outcome": false,
+       "status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+       "survivors": 98304
+      },
+      {
+       "outcome": false,
+       "status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+       "survivors": 90112
+      },
+      {
+       "outcome": true,
+       "status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+       "survivors": 4096
+      },
+      {
+       "outcome": true,
+       "status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+       "survivors": 1024
+      },
+      {
+       "stop": "EVERY_REACHABLE_STATE_GIVES_THE_SAME_ANSWER_FOR_ALL_SURVIVORS",
+       "status": "NO_REACHABLE_STATE_SPLITS_THE_SURVIVORS"
+      }
+     ]
+    },
+    "probes": [
+     "archive_valid.absent",
+     "archive_valid.valid",
+     "gzip_valid.absent",
+     "gzip_valid.valid",
+     "patch_applies.absent",
+     "patch_applies.invalid",
+     "patch_applies.valid"
+    ]
+   },
+   "external_model_dependency": false,
+   "task_specific_policy_data": false
   }
  },
- "updated_at": "2026-11-20T14:59:15Z"
+ "updated_at": "2026-11-20T15:25:19Z"
 }
