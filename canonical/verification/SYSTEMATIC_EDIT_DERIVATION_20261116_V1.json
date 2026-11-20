@@ -1097,8 +1097,8 @@
             "wrong": 2
           }
         },
-        "determined": 140,
-        "determined_share": 0.5714,
+        "determined": 141,
+        "determined_share": 0.5755,
         "examples": [
           {
             "demo": "tests/test_specifiers.py",
@@ -1208,17 +1208,17 @@
         "lucky_share": 0.1837,
         "outcomes": {
           "conflict": 0,
-          "constant_differs": 23,
-          "exact": 82,
+          "constant_differs": 19,
+          "exact": 84,
           "mismatch": 13,
-          "rebound_wrong": 24,
+          "rebound_wrong": 26,
           "verbatim": 103
         },
         "pairs": 245,
-        "pairs_where_derivation_fired": 15,
-        "pairs_where_derivation_was_right": 6,
-        "wrong": 60,
-        "wrong_share": 0.2449
+        "pairs_where_derivation_fired": 19,
+        "pairs_where_derivation_was_right": 8,
+        "wrong": 58,
+        "wrong_share": 0.2367
       },
       "derive_arm": {
         "by_demonstration_size": {
@@ -1253,8 +1253,8 @@
             "wrong": 2
           }
         },
-        "determined": 142,
-        "determined_share": 0.5796,
+        "determined": 143,
+        "determined_share": 0.5837,
         "examples": [
           {
             "demo": "tests/test_specifiers.py",
@@ -1364,17 +1364,17 @@
         "lucky_share": 0.1837,
         "outcomes": {
           "conflict": 0,
-          "constant_differs": 12,
-          "exact": 84,
+          "constant_differs": 8,
+          "exact": 86,
           "mismatch": 13,
-          "rebound_wrong": 33,
+          "rebound_wrong": 35,
           "verbatim": 103
         },
         "pairs": 245,
-        "pairs_where_derivation_fired": 42,
-        "pairs_where_derivation_was_right": 9,
-        "wrong": 58,
-        "wrong_share": 0.2367
+        "pairs_where_derivation_fired": 46,
+        "pairs_where_derivation_was_right": 11,
+        "wrong": 56,
+        "wrong_share": 0.2286
       },
       "determined": 134,
       "determined_commit_share": 0.093,

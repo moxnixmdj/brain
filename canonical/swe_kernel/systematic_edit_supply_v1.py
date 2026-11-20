@@ -261,6 +261,52 @@ def _from_context(demo: Site, target: Site, demo_token: str) -> str | None:
     return None
 
 
+def _string_split(a: str, b: str) -> tuple[str, str, str, str]:
+    """Split two strings into (prefix, a_middle, b_middle, suffix).
+
+    ``a`` and ``b`` share ``prefix`` and ``suffix``; only the middle differs.
+    Used to compute the demo→target string transformation on removed literals
+    so the same edit can be applied to the demo's added literal.
+    """
+    i = 0
+    n = min(len(a), len(b))
+    while i < n and a[i] == b[i]:
+        i += 1
+    prefix = a[:i]
+    j = 0
+    while j < n - i and a[-1 - j] == b[-1 - j]:
+        j += 1
+    if j > 0:
+        suffix = a[len(a) - j:]
+        a_middle = a[i:len(a) - j]
+        b_middle = b[i:len(b) - j]
+    else:
+        suffix = ""
+        a_middle = a[i:]
+        b_middle = b[i:]
+    return prefix, a_middle, b_middle, suffix
+
+
+def _apply_string_transform(source: str, demo_removed_str: str,
+                            target_removed_str: str) -> str | None:
+    """Apply the demo→target removed-string transformation to ``source`` (demo's added string).
+
+    Returns the transformed string, or None when the transformation cannot be applied.
+    """
+    prefix, a_middle, b_middle, _suffix = _string_split(demo_removed_str, target_removed_str)
+    if not a_middle and not b_middle:
+        return None
+    if not a_middle:
+        # Insertion: insert b_middle after prefix in source.
+        pos = source.find(prefix)
+        if pos >= 0:
+            return source[:pos + len(prefix)] + b_middle + source[pos + len(prefix):]
+        return None
+    if a_middle in source:
+        return source.replace(a_middle, b_middle, 1)
+    return None
+
+
 def _derive(demo: Site, target: Site, demo_token: str,
             contrast: Site | None = None) -> str | None:
     """A value derived from the target beats a value copied from the demonstration.
@@ -309,6 +355,14 @@ def induce(demo: Site, target: Site, *, derive: bool = False,
             return {"verdict": "conflict", "lines": [], "copied": []}
         mapping[demo_hole[1]] = target_hole[1]
 
+    # String-level transforms: for every STR token position where demo's removed value
+    # differs from target's removed value, record the substitution.  These are applied
+    # to demo's added STR literals that are not bound by the target's own tokens.
+    str_transforms: list[tuple[str, str]] = []
+    for (rk, rv), (tk, tv) in zip(demo.holes_removed, target.holes_removed):
+        if rk == "STR" and tk == "STR" and rv != tv:
+            str_transforms.append((rv, tv))
+
     lines: list[str] = []
     copied_flags: list[list[bool]] = []
     derived_tokens = 0
@@ -331,6 +385,22 @@ def induce(demo: Site, target: Site, *, derive: bool = False,
                     pieces.append(derived)
                     flags.append(False)
                     derived_tokens += 1
+                elif derive and _kind == "STR" and str_transforms:
+                    # String-level derivation: try every demo→target removed-STR
+                    # substitution on this added STR literal.  Use the first that applies.
+                    derived_str = None
+                    for r_val, t_val in str_transforms:
+                        candidate = _apply_string_transform(source, r_val, t_val)
+                        if candidate is not None:
+                            derived_str = candidate
+                            break
+                    if derived_str is not None:
+                        pieces.append(derived_str)
+                        flags.append(False)
+                        derived_tokens += 1
+                    else:
+                        pieces.append(source)
+                        flags.append(True)
                 else:
                     pieces.append(source)
                     flags.append(True)

@@ -137,16 +137,21 @@ def test_a_contrast_only_licenses_the_shift_it_can_reproduce() -> None:
 
 
 def test_derived_values_are_right_only_a_fifth_of_the_time_on_real_history() -> None:
-    """The value layer is the hole: firing on 42 of 142 inductive pairs, right on 9 of them."""
+    """The value layer is the hole: firing on 46 of 142 inductive pairs, right on 11 of them.
+
+    String-level derivation (demo->target removed-STR substitution applied to added STR
+    literals) converts a handful of constant_differs into exact, at the cost of a few more
+    rebound_wrong.  The aggregate barely moves: the value layer remains the binding constraint.
+    """
     loose = _live()["by_rung"]["shape_only"]
-    assert loose["derive_arm"]["pairs_where_derivation_fired"] == 42
-    assert loose["derive_arm"]["pairs_where_derivation_was_right"] == 9
-    assert loose["contrast_arm"]["pairs_where_derivation_fired"] == 15
-    assert loose["contrast_arm"]["pairs_where_derivation_was_right"] == 6
+    assert loose["derive_arm"]["pairs_where_derivation_fired"] == 46
+    assert loose["derive_arm"]["pairs_where_derivation_was_right"] == 11
+    assert loose["contrast_arm"]["pairs_where_derivation_fired"] == 19
+    assert loose["contrast_arm"]["pairs_where_derivation_was_right"] == 8
     # Derivation barely moves the aggregate: the whole gain is a handful of pairs, and it creates
-    # new wrong values (rebound_wrong 20 -> 33) where copying happened to be right.
+    # new wrong values (rebound_wrong 20 -> 35) where copying happened to be right.
     assert loose["outcomes"]["constant_differs"] == 31
-    assert loose["derive_arm"]["outcomes"]["constant_differs"] == 12
+    assert loose["derive_arm"]["outcomes"]["constant_differs"] == 8
     assert loose["derive_arm"]["outcomes"]["rebound_wrong"] > loose["outcomes"]["rebound_wrong"]
     # A second demonstration doubles the precision of a derived value and makes the system abstain
     # more: the contrast is the acquisition unit, and even it leaves the value unidentifiable.
