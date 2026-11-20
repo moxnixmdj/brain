@@ -1,0 +1,336 @@
+{
+ "schema": "BRAIN_INSTANT_CONDITION_STORE_V1",
+ "version": 1,
+ "entries": {
+  "[\"git\",\"stash\",\"pop\"]": {
+   "action_key": "[\"git\",\"stash\",\"pop\"]",
+   "condition_status": "PROVISIONAL__LEAST_DEMANDING_SURVIVOR",
+   "required": [
+    "stash.present"
+   ],
+   "source": {
+    "environment": "source",
+    "repo": "https://github.com/pypa/packaging.git",
+    "commit": "9e74e6e56f6dbd1f286f8d07f8468ecb949aed57",
+    "learned": {
+     "stage": "MEASURED",
+     "executions": 5,
+     "boundary_status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+     "survivor_count": 512,
+     "required": [
+      "stash.present"
+     ],
+     "successes": 4,
+     "failures": 1,
+     "held_out_accuracy": 1.0,
+     "held_out_states": 8,
+     "trajectory": [
+      {
+       "outcome": false,
+       "status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+       "survivors": 32768
+      },
+      {
+       "outcome": true,
+       "status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+       "survivors": 8192
+      },
+      {
+       "outcome": true,
+       "status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+       "survivors": 1024
+      },
+      {
+       "outcome": true,
+       "status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+       "survivors": 512
+      },
+      {
+       "stop": "EVERY_REACHABLE_STATE_GIVES_THE_SAME_ANSWER_FOR_ALL_SURVIVORS",
+       "status": "NO_REACHABLE_STATE_SPLITS_THE_SURVIVORS"
+      }
+     ]
+    }
+   },
+   "external_model_dependency": false,
+   "task_specific_policy_data": false,
+   "program": [
+    "git",
+    "stash",
+    "pop"
+   ]
+  },
+  "[\"git\",\"merge\",\"--abort\"]": {
+   "action_key": "[\"git\",\"merge\",\"--abort\"]",
+   "condition_status": "PROVISIONAL__LEAST_DEMANDING_SURVIVOR",
+   "required": [
+    "merge.in_progress"
+   ],
+   "source": {
+    "environment": "source",
+    "repo": "https://github.com/pypa/packaging.git",
+    "commit": "9e74e6e56f6dbd1f286f8d07f8468ecb949aed57",
+    "learned": {
+     "stage": "MEASURED",
+     "executions": 4,
+     "boundary_status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+     "survivor_count": 768,
+     "required": [
+      "merge.in_progress"
+     ],
+     "successes": 3,
+     "failures": 1,
+     "held_out_accuracy": 1.0,
+     "held_out_states": 8,
+     "trajectory": [
+      {
+       "outcome": true,
+       "status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+       "survivors": 0
+      },
+      {
+       "outcome": true,
+       "status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+       "survivors": 0
+      },
+      {
+       "outcome": false,
+       "status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+       "survivors": 768
+      },
+      {
+       "stop": "EVERY_REACHABLE_STATE_GIVES_THE_SAME_ANSWER_FOR_ALL_SURVIVORS",
+       "status": "NO_REACHABLE_STATE_SPLITS_THE_SURVIVORS"
+      }
+     ]
+    }
+   },
+   "external_model_dependency": false,
+   "task_specific_policy_data": false,
+   "program": [
+    "git",
+    "merge",
+    "--abort"
+   ]
+  },
+  "[\"git\",\"rebase\",\"--abort\"]": {
+   "action_key": "[\"git\",\"rebase\",\"--abort\"]",
+   "condition_status": "PROVISIONAL__LEAST_DEMANDING_SURVIVOR",
+   "required": [
+    "rebase.in_progress"
+   ],
+   "source": {
+    "environment": "source",
+    "repo": "https://github.com/pypa/packaging.git",
+    "commit": "9e74e6e56f6dbd1f286f8d07f8468ecb949aed57",
+    "learned": {
+     "stage": "MEASURED",
+     "executions": 4,
+     "boundary_status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+     "survivor_count": 768,
+     "required": [
+      "rebase.in_progress"
+     ],
+     "successes": 3,
+     "failures": 1,
+     "held_out_accuracy": 1.0,
+     "held_out_states": 8,
+     "trajectory": [
+      {
+       "outcome": true,
+       "status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+       "survivors": 0
+      },
+      {
+       "outcome": false,
+       "status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+       "survivors": 3072
+      },
+      {
+       "outcome": true,
+       "status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+       "survivors": 768
+      },
+      {
+       "stop": "EVERY_REACHABLE_STATE_GIVES_THE_SAME_ANSWER_FOR_ALL_SURVIVORS",
+       "status": "NO_REACHABLE_STATE_SPLITS_THE_SURVIVORS"
+      }
+     ]
+    }
+   },
+   "external_model_dependency": false,
+   "task_specific_policy_data": false,
+   "program": [
+    "git",
+    "rebase",
+    "--abort"
+   ]
+  },
+  "[\"git\",\"checkout\",\"feature\"]": {
+   "action_key": "[\"git\",\"checkout\",\"feature\"]",
+   "condition_status": "PROVISIONAL__LEAST_DEMANDING_SURVIVOR",
+   "required": [
+    "branch.feature.exists"
+   ],
+   "source": {
+    "environment": "source",
+    "repo": "https://github.com/pypa/packaging.git",
+    "commit": "9e74e6e56f6dbd1f286f8d07f8468ecb949aed57",
+    "learned": {
+     "stage": "MEASURED",
+     "executions": 5,
+     "boundary_status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+     "survivor_count": 1536,
+     "required": [
+      "branch.feature.exists"
+     ],
+     "successes": 4,
+     "failures": 1,
+     "held_out_accuracy": 1.0,
+     "held_out_states": 8,
+     "trajectory": [
+      {
+       "outcome": true,
+       "status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+       "survivors": 0
+      },
+      {
+       "outcome": true,
+       "status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+       "survivors": 0
+      },
+      {
+       "outcome": true,
+       "status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+       "survivors": 0
+      },
+      {
+       "outcome": false,
+       "status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+       "survivors": 1536
+      },
+      {
+       "stop": "EVERY_REACHABLE_STATE_GIVES_THE_SAME_ANSWER_FOR_ALL_SURVIVORS",
+       "status": "NO_REACHABLE_STATE_SPLITS_THE_SURVIVORS"
+      }
+     ]
+    }
+   },
+   "external_model_dependency": false,
+   "task_specific_policy_data": false,
+   "program": [
+    "git",
+    "checkout",
+    "feature"
+   ]
+  },
+  "[\"git\",\"branch\",\"-d\",\"feature\"]": {
+   "action_key": "[\"git\",\"branch\",\"-d\",\"feature\"]",
+   "condition_status": "PROVISIONAL__LEAST_DEMANDING_SURVIVOR",
+   "required": [
+    "branch.feature.merged"
+   ],
+   "source": {
+    "environment": "source",
+    "repo": "https://github.com/pypa/packaging.git",
+    "commit": "9e74e6e56f6dbd1f286f8d07f8468ecb949aed57",
+    "learned": {
+     "stage": "MEASURED",
+     "executions": 4,
+     "boundary_status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+     "survivor_count": 1024,
+     "required": [
+      "branch.feature.merged"
+     ],
+     "successes": 3,
+     "failures": 1,
+     "held_out_accuracy": 1.0,
+     "held_out_states": 8,
+     "trajectory": [
+      {
+       "outcome": false,
+       "status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+       "survivors": 24576
+      },
+      {
+       "outcome": true,
+       "status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+       "survivors": 3072
+      },
+      {
+       "outcome": true,
+       "status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+       "survivors": 1024
+      },
+      {
+       "stop": "EVERY_REACHABLE_STATE_GIVES_THE_SAME_ANSWER_FOR_ALL_SURVIVORS",
+       "status": "NO_REACHABLE_STATE_SPLITS_THE_SURVIVORS"
+      }
+     ]
+    }
+   },
+   "external_model_dependency": false,
+   "task_specific_policy_data": false,
+   "program": [
+    "git",
+    "branch",
+    "-d",
+    "feature"
+   ]
+  },
+  "[\"chmod\",\"+x\",\"script.sh\"]": {
+   "action_key": "[\"chmod\",\"+x\",\"script.sh\"]",
+   "condition_status": "PROVISIONAL__LEAST_DEMANDING_SURVIVOR",
+   "required": [
+    "file.script.nonempty"
+   ],
+   "source": {
+    "environment": "source",
+    "repo": "https://github.com/pypa/packaging.git",
+    "commit": "9e74e6e56f6dbd1f286f8d07f8468ecb949aed57",
+    "learned": {
+     "stage": "MEASURED",
+     "executions": 4,
+     "boundary_status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+     "survivor_count": 7168,
+     "required": [
+      "file.script.nonempty"
+     ],
+     "successes": 3,
+     "failures": 1,
+     "held_out_accuracy": 1.0,
+     "held_out_states": 8,
+     "trajectory": [
+      {
+       "outcome": true,
+       "status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+       "survivors": 0
+      },
+      {
+       "outcome": true,
+       "status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+       "survivors": 0
+      },
+      {
+       "outcome": false,
+       "status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+       "survivors": 7168
+      },
+      {
+       "stop": "EVERY_REACHABLE_STATE_GIVES_THE_SAME_ANSWER_FOR_ALL_SURVIVORS",
+       "status": "NO_REACHABLE_STATE_SPLITS_THE_SURVIVORS"
+      }
+     ]
+    }
+   },
+   "external_model_dependency": false,
+   "task_specific_policy_data": false,
+   "program": [
+    "chmod",
+    "+x",
+    "script.sh"
+   ]
+  }
+ },
+ "updated_at": "2026-11-20T14:59:15Z"
+}

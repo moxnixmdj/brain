@@ -1,0 +1,75 @@
+{
+ "schema": "BRAIN_CONDITION_STORE_TRANSFER_GATES_NEW_ENVIRONMENT_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "claim": "A computed applicability requirement bought by contrasts in one real repository transfers through an external editable/deletable JSON store to a second real repository with zero target learning executions; unseen actions fail closed.",
+ "declared_before_the_run": [
+  "reuse applicability_v1 and contrast_selection_v1 unchanged",
+  "one success writes a program with an OPEN condition only",
+  "contrasts may write only the least-demanding survivor unless identified",
+  "target receives the reloaded external store, not source memory",
+  "target learning executions must be zero",
+  "unseen actions must be refused, never guessed",
+  "each program's own exit status is the only oracle",
+  "no model calls, no parameters, no pinned kernel edits"
+ ],
+ "artifacts": {
+  "store": "canonical/astra_runtime/state/INSTANT_CONDITION_STORE_V1.json",
+  "store_digest": "fc8cb29382039776d5fee2f5333f04cfbcd1d1b542cc33e0b58817b34bc94682",
+  "measurement": "canonical/tools/condition_transfer_across_environments_v1.py",
+  "measurement_receipt": "canonical/verification/CONDITION_TRANSFER_ACROSS_ENVIRONMENTS_20261120_V1.json",
+  "runtime": "canonical/runtime/instant_condition_store_v1.py",
+  "tests": "canonical/tests/test_instant_condition_store_v1.py"
+ },
+ "pinned_reused_sha256": {
+  "canonical/runtime/applicability_v1.py": "1e9a2d51bb7efea5b281735d2d709af9aa13d287babc7581c17684bfd9cf8b0d",
+  "canonical/runtime/contrast_selection_v1.py": "35585084207709fa21bf54edb85587ef436e4e312663f262c1235ec8ecf33058",
+  "canonical/runtime/settlement_v1.py": "4a16ede4d0088a9fd1921166d56ae1fa6c268425afdc870331ccd8ef70b84087"
+ },
+ "commands": {
+  "new_suite": ".venv/bin/python -m pytest canonical/tests/test_instant_condition_store_v1.py -q",
+  "transfer": "python3 canonical/tools/condition_transfer_across_environments_v1.py --receipt canonical/verification/CONDITION_TRANSFER_ACROSS_ENVIRONMENTS_20261120_V1.json"
+ },
+ "results": {
+  "new_suite": "5 passed in 0.27s",
+  "source_actions_stored": 6,
+  "source_contrast_executions": 26,
+  "source_exact_identifications": 0,
+  "source_held_out_accuracy_each": 1.0,
+  "target_actions_total": 9,
+  "target_stored_actions": 6,
+  "target_unseen_actions": 3,
+  "target_learning_executions": 0,
+  "target_evaluation_oracles": 144,
+  "target_stored_decisions": "96/96 correct, 0 false applies",
+  "target_unseen_decisions": "48/48 OPEN, 0 false applies"
+ },
+ "criteria": {
+  "A_one_success_buys_no_condition": true,
+  "B_condition_bought_by_contrasts_only": true,
+  "C_external_store_saved_and_reloaded_from_disk": true,
+  "D_target_learning_executions_zero": true,
+  "E_stored_actions_transfer_with_zero_false_applies": true,
+  "F_unseen_actions_refused": true,
+  "G_real_process_exit_status_oracle": true,
+  "H_zero_model_calls_and_parameters": true,
+  "I_pinned_organs_unchanged": true
+ },
+ "met": true,
+ "failed_or_rejected_this_round": [
+  "one-success condition learning killed before build: structurally OPEN in the store",
+  "new learner killed: applicability_v1 and contrast_selection_v1 reused unchanged",
+  "model judge, vector store and weight changes killed before build",
+  "first training/held split accidentally withheld unmerged-branch negatives from teaching, producing 4 target false applies; corrected to split each class first-half/second-half and rerun"
+ ],
+ "limits": [
+  "0 of 6 conditions were exactly identified; all six are PROVISIONAL least-demanding survivors",
+  "no unobservable-condition action was taught",
+  "no third environment, GUI/browser, OSWorld 2.1, SWE-bench Pro or Terminal-Bench run",
+  "no benchmark score, hidden evaluator or independent verification",
+  "no §6 completion"
+ ],
+ "model_calls": 0,
+ "parameters_stored": 0,
+ "incremental_spend_usd": 0,
+ "checked_at_utc": "2026-11-20T14:59:47Z"
+}

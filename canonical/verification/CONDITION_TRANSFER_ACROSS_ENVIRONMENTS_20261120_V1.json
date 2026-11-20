@@ -1,0 +1,407 @@
+{
+ "schema": "BRAIN_CONDITION_TRANSFER_ACROSS_ENVIRONMENTS_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "date": "2026-11-20",
+ "claim": "An applicability requirement bought by contrasts in one real repository transfers through an external JSON store to a second real repository with zero target learning executions, and unseen actions fail closed.",
+ "oracle": "each real program's own exit status; no action label is used for scoring",
+ "summary": {
+  "source_repo": "https://github.com/pypa/packaging.git",
+  "source_commit": "9e74e6e56f6dbd1f286f8d07f8468ecb949aed57",
+  "source_seed": 7,
+  "source_actions": 6,
+  "source_learning_executions": 26,
+  "source_identified": 0,
+  "target_repo": "https://github.com/pallets/click.git",
+  "target_commit": "22debfddd4dd82a063fe5899c81cc9580f57fe25",
+  "target_seed": 19,
+  "target_actions": 9,
+  "target_stored_actions": 6,
+  "target_unseen_actions": 3,
+  "target_learning_executions": 0,
+  "target_evaluation_oracles": 144,
+  "target_stored_accuracy": 1.0,
+  "target_stored_false_applies": 0,
+  "target_unseen_false_applies": 0,
+  "target_unseen_open_states": 48,
+  "target_unseen_states": 48,
+  "store_actions": 6,
+  "store_digest": "fc8cb29382039776d5fee2f5333f04cfbcd1d1b542cc33e0b58817b34bc94682",
+  "model_calls": 0,
+  "parameters_stored": 0,
+  "seconds": 28.1
+ },
+ "source_rows": [
+  {
+   "action": "git_stash_pop",
+   "stage": "MEASURED",
+   "executions": 5,
+   "boundary_status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+   "survivor_count": 512,
+   "required": [
+    "stash.present"
+   ],
+   "successes": 4,
+   "failures": 1,
+   "held_out_accuracy": 1.0,
+   "held_out_states": 8,
+   "trajectory": [
+    {
+     "outcome": false,
+     "status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+     "survivors": 32768
+    },
+    {
+     "outcome": true,
+     "status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+     "survivors": 8192
+    },
+    {
+     "outcome": true,
+     "status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+     "survivors": 1024
+    },
+    {
+     "outcome": true,
+     "status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+     "survivors": 512
+    },
+    {
+     "stop": "EVERY_REACHABLE_STATE_GIVES_THE_SAME_ANSWER_FOR_ALL_SURVIVORS",
+     "status": "NO_REACHABLE_STATE_SPLITS_THE_SURVIVORS"
+    }
+   ]
+  },
+  {
+   "action": "git_merge_abort",
+   "stage": "MEASURED",
+   "executions": 4,
+   "boundary_status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+   "survivor_count": 768,
+   "required": [
+    "merge.in_progress"
+   ],
+   "successes": 3,
+   "failures": 1,
+   "held_out_accuracy": 1.0,
+   "held_out_states": 8,
+   "trajectory": [
+    {
+     "outcome": true,
+     "status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+     "survivors": 0
+    },
+    {
+     "outcome": true,
+     "status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+     "survivors": 0
+    },
+    {
+     "outcome": false,
+     "status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+     "survivors": 768
+    },
+    {
+     "stop": "EVERY_REACHABLE_STATE_GIVES_THE_SAME_ANSWER_FOR_ALL_SURVIVORS",
+     "status": "NO_REACHABLE_STATE_SPLITS_THE_SURVIVORS"
+    }
+   ]
+  },
+  {
+   "action": "git_rebase_abort",
+   "stage": "MEASURED",
+   "executions": 4,
+   "boundary_status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+   "survivor_count": 768,
+   "required": [
+    "rebase.in_progress"
+   ],
+   "successes": 3,
+   "failures": 1,
+   "held_out_accuracy": 1.0,
+   "held_out_states": 8,
+   "trajectory": [
+    {
+     "outcome": true,
+     "status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+     "survivors": 0
+    },
+    {
+     "outcome": false,
+     "status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+     "survivors": 3072
+    },
+    {
+     "outcome": true,
+     "status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+     "survivors": 768
+    },
+    {
+     "stop": "EVERY_REACHABLE_STATE_GIVES_THE_SAME_ANSWER_FOR_ALL_SURVIVORS",
+     "status": "NO_REACHABLE_STATE_SPLITS_THE_SURVIVORS"
+    }
+   ]
+  },
+  {
+   "action": "git_checkout_feature",
+   "stage": "MEASURED",
+   "executions": 5,
+   "boundary_status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+   "survivor_count": 1536,
+   "required": [
+    "branch.feature.exists"
+   ],
+   "successes": 4,
+   "failures": 1,
+   "held_out_accuracy": 1.0,
+   "held_out_states": 8,
+   "trajectory": [
+    {
+     "outcome": true,
+     "status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+     "survivors": 0
+    },
+    {
+     "outcome": true,
+     "status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+     "survivors": 0
+    },
+    {
+     "outcome": true,
+     "status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+     "survivors": 0
+    },
+    {
+     "outcome": false,
+     "status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+     "survivors": 1536
+    },
+    {
+     "stop": "EVERY_REACHABLE_STATE_GIVES_THE_SAME_ANSWER_FOR_ALL_SURVIVORS",
+     "status": "NO_REACHABLE_STATE_SPLITS_THE_SURVIVORS"
+    }
+   ]
+  },
+  {
+   "action": "git_branch_delete_feature",
+   "stage": "MEASURED",
+   "executions": 4,
+   "boundary_status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+   "survivor_count": 1024,
+   "required": [
+    "branch.feature.merged"
+   ],
+   "successes": 3,
+   "failures": 1,
+   "held_out_accuracy": 1.0,
+   "held_out_states": 8,
+   "trajectory": [
+    {
+     "outcome": false,
+     "status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+     "survivors": 24576
+    },
+    {
+     "outcome": true,
+     "status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+     "survivors": 3072
+    },
+    {
+     "outcome": true,
+     "status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+     "survivors": 1024
+    },
+    {
+     "stop": "EVERY_REACHABLE_STATE_GIVES_THE_SAME_ANSWER_FOR_ALL_SURVIVORS",
+     "status": "NO_REACHABLE_STATE_SPLITS_THE_SURVIVORS"
+    }
+   ]
+  },
+  {
+   "action": "chmod_exec",
+   "stage": "MEASURED",
+   "executions": 4,
+   "boundary_status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+   "survivor_count": 7168,
+   "required": [
+    "file.script.nonempty"
+   ],
+   "successes": 3,
+   "failures": 1,
+   "held_out_accuracy": 1.0,
+   "held_out_states": 8,
+   "trajectory": [
+    {
+     "outcome": true,
+     "status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+     "survivors": 0
+    },
+    {
+     "outcome": true,
+     "status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+     "survivors": 0
+    },
+    {
+     "outcome": false,
+     "status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+     "survivors": 7168
+    },
+    {
+     "stop": "EVERY_REACHABLE_STATE_GIVES_THE_SAME_ANSWER_FOR_ALL_SURVIVORS",
+     "status": "NO_REACHABLE_STATE_SPLITS_THE_SURVIVORS"
+    }
+   ]
+  }
+ ],
+ "target_rows": [
+  {
+   "action": "git_stash_pop",
+   "in_store": true,
+   "states": 16,
+   "decisions": {
+    "APPLIES": 8,
+    "DOES_NOT_APPLY": 8
+   },
+   "truth": {
+    "applies": 8,
+    "does_not_apply": 8
+   },
+   "correct": 16,
+   "accuracy": 1.0,
+   "false_applies": 0,
+   "missed_applies": 0
+  },
+  {
+   "action": "git_merge_abort",
+   "in_store": true,
+   "states": 16,
+   "decisions": {
+    "APPLIES": 8,
+    "DOES_NOT_APPLY": 8
+   },
+   "truth": {
+    "applies": 8,
+    "does_not_apply": 8
+   },
+   "correct": 16,
+   "accuracy": 1.0,
+   "false_applies": 0,
+   "missed_applies": 0
+  },
+  {
+   "action": "git_rebase_abort",
+   "in_store": true,
+   "states": 16,
+   "decisions": {
+    "APPLIES": 8,
+    "DOES_NOT_APPLY": 8
+   },
+   "truth": {
+    "applies": 8,
+    "does_not_apply": 8
+   },
+   "correct": 16,
+   "accuracy": 1.0,
+   "false_applies": 0,
+   "missed_applies": 0
+  },
+  {
+   "action": "git_checkout_feature",
+   "in_store": true,
+   "states": 16,
+   "decisions": {
+    "APPLIES": 8,
+    "DOES_NOT_APPLY": 8
+   },
+   "truth": {
+    "applies": 8,
+    "does_not_apply": 8
+   },
+   "correct": 16,
+   "accuracy": 1.0,
+   "false_applies": 0,
+   "missed_applies": 0
+  },
+  {
+   "action": "git_branch_delete_feature",
+   "in_store": true,
+   "states": 16,
+   "decisions": {
+    "APPLIES": 8,
+    "DOES_NOT_APPLY": 8
+   },
+   "truth": {
+    "applies": 8,
+    "does_not_apply": 8
+   },
+   "correct": 16,
+   "accuracy": 1.0,
+   "false_applies": 0,
+   "missed_applies": 0
+  },
+  {
+   "action": "chmod_exec",
+   "in_store": true,
+   "states": 16,
+   "decisions": {
+    "APPLIES": 8,
+    "DOES_NOT_APPLY": 8
+   },
+   "truth": {
+    "applies": 8,
+    "does_not_apply": 8
+   },
+   "correct": 16,
+   "accuracy": 1.0,
+   "false_applies": 0,
+   "missed_applies": 0
+  },
+  {
+   "action": "tar_extract",
+   "in_store": false,
+   "states": 16,
+   "decisions": {
+    "OPEN__NO_USABLE_CONDITION": 16
+   },
+   "truth": {
+    "applies": 8,
+    "does_not_apply": 8
+   },
+   "correct": 0,
+   "accuracy": 0.0,
+   "false_applies": 0,
+   "missed_applies": 0
+  },
+  {
+   "action": "gzip_decompress",
+   "in_store": false,
+   "states": 16,
+   "decisions": {
+    "OPEN__NO_USABLE_CONDITION": 16
+   },
+   "truth": {
+    "applies": 8,
+    "does_not_apply": 8
+   },
+   "correct": 0,
+   "accuracy": 0.0,
+   "false_applies": 0,
+   "missed_applies": 0
+  },
+  {
+   "action": "patch_apply",
+   "in_store": false,
+   "states": 16,
+   "decisions": {
+    "OPEN__NO_USABLE_CONDITION": 16
+   },
+   "truth": {
+    "applies": 8,
+    "does_not_apply": 8
+   },
+   "correct": 0,
+   "accuracy": 0.0,
+   "false_applies": 0,
+   "missed_applies": 0
+  }
+ ]
+}
