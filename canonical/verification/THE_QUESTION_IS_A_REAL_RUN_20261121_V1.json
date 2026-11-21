@@ -1,0 +1,149 @@
+{
+ "schema": "BRAIN_THE_QUESTION_IS_A_REAL_RUN_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "date": "2026-11-21",
+ "mode": "MEMBERSHIP_QUESTIONS_ON_REAL_RUNS_WITH_NEGATED_GROUNDED_LITERALS",
+ "declared_criteria": {
+  "D1": "the question pool is made of real executed runs and both real goals have positive and negative runs",
+  "D2": "the moved goal has no positive-term conjunction of two literals but does have a literal conjunction",
+  "D3": "both goals are identified from user bits on real runs within ceil(log2(class)) questions",
+  "D4": "both identified sentences agree with every verdict on 128 deeper runs never used in the pool",
+  "D5": "a goal outside the class fails closed with a named cause and no chosen sentence",
+  "D6": "zero model calls, zero stored parameters, zero network calls at run time"
+ },
+ "criteria_were_declared_before_the_receipt_run": true,
+ "prototype_note": "a scratch probe over the same pool was run while writing the tool to check that the moved goal needed negation; the criteria above are structural and were fixed before this receipt run",
+ "pool": {
+  "machine": "FILESYSTEM",
+  "depth": 3,
+  "runs": 68,
+  "questions_are_real_runs": true
+ },
+ "held_out": {
+  "machine": "FILESYSTEM",
+  "depth": 4,
+  "runs": 128,
+  "used_by_learner": false
+ },
+ "results": {
+  "portable": {
+   "status": "IDENTIFIED",
+   "sentence": "created_once[probe_new_content]",
+   "behaviour": 10759850109289179809,
+   "questions_asked": 8,
+   "budget": 9,
+   "audit_bits": 68,
+   "pool_audit_mismatches": 0
+  },
+  "moved": {
+   "status": "IDENTIFIED",
+   "sentence": "monotone[probe_seed_content] \u2227 \u00acfinal:has[seed]=probe_seed_content",
+   "behaviour": 37758186285261133828,
+   "questions_asked": 9,
+   "budget": 9,
+   "audit_bits": 68,
+   "pool_audit_mismatches": 0
+  },
+  "outside_class": {
+   "status": "GOAL_OUTSIDE_CLASS",
+   "behaviour": 284379029998271386910,
+   "questions_asked": 9,
+   "budget": 9,
+   "audit_bits": 68,
+   "pool_audit_mismatches": 1,
+   "reason": "POOL_AUDIT_MISMATCH",
+   "mismatch_runs": [
+    30
+   ]
+  }
+ },
+ "first_questions": {
+  "portable": "start: seed holds probe_seed_content, seed2 holds probe_second_content; step 1: probe_seed_content 1\u21920, disappeared from seed=probe_seed_content; step 2: probe_new_content 0\u21921, appeared at seed=probe_new_content; step 3: appeared at backup=probe_new_content, disappeared from seed=probe_new_content. Is the goal already achieved in this situation?",
+  "moved": "start: seed holds probe_seed_content, seed2 holds probe_second_content; step 1: probe_seed_content 1\u21920, disappeared from seed=probe_seed_content; step 2: probe_new_content 0\u21921, appeared at seed=probe_new_content; step 3: appeared at backup=probe_new_content, disappeared from seed=probe_new_content. Is the goal already achieved in this situation?",
+  "outside_class": "start: seed holds probe_seed_content, seed2 holds probe_second_content; step 1: probe_seed_content 1\u21920, disappeared from seed=probe_seed_content; step 2: probe_new_content 0\u21921, appeared at seed=probe_new_content; step 3: appeared at backup=probe_new_content, disappeared from seed=probe_new_content. Is the goal already achieved in this situation?"
+ },
+ "verdict": {
+  "D1_real_pool": {
+   "runs": 68,
+   "literals": 54,
+   "hypotheses": 389,
+   "goal_positives": {
+    "portable": 26,
+    "moved": 11,
+    "outside_class": 34
+   },
+   "MET": true
+  },
+  "D2_negation_is_necessary": {
+   "positive_representations": 0,
+   "literal_representations": 1,
+   "MET": true
+  },
+  "D3_identified_from_user_bits": {
+   "statuses": {
+    "portable": "IDENTIFIED",
+    "moved": "IDENTIFIED",
+    "outside_class": "GOAL_OUTSIDE_CLASS"
+   },
+   "questions": {
+    "portable": 8,
+    "moved": 9,
+    "outside_class": 9
+   },
+   "budgets": {
+    "portable": 9,
+    "moved": 9,
+    "outside_class": 9
+   },
+   "MET": true
+  },
+  "D4_deeper_held_out": {
+   "rows": {
+    "portable": {
+     "chosen": "created_once[probe_new_content]",
+     "runs": 128,
+     "positive_runs": 45,
+     "matches": 128,
+     "agreement": 1.0
+    },
+    "moved": {
+     "chosen": "monotone[probe_seed_content] \u2227 \u00acfinal:has[seed]=probe_seed_content",
+     "runs": 128,
+     "positive_runs": 15,
+     "matches": 128,
+     "agreement": 1.0
+    },
+    "outside_class": {
+     "status": "GOAL_OUTSIDE_CLASS",
+     "chosen": null
+    }
+   },
+   "MET": true
+  },
+  "D5_out_of_class_refuses": {
+   "status": "GOAL_OUTSIDE_CLASS",
+   "questions": 9,
+   "chosen": null,
+   "MET": true
+  },
+  "D6_zero": {
+   "model_calls": 0,
+   "parameters_stored": 0,
+   "network_calls_at_run_time": 0,
+   "MET": true
+  }
+ },
+ "limits": [
+  "the pool and the held-out runs are the same real tool at different depths; a different tool is not tested here",
+  "conjunctions of at most two literals are a stated class; a goal outside it refuses",
+  "the scripted user's bits come from the project's own judges, not from a model",
+  "no edit, no GUI, no SWE-bench or OSWorld task is attempted"
+ ],
+ "cost": {
+  "seconds": 6.2,
+  "model_calls": 0,
+  "parameters_stored": 0,
+  "network_calls_at_run_time": 0,
+  "user_bits": 230
+ }
+}
