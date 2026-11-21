@@ -1,0 +1,145 @@
+{
+ "schema": "BRAIN_THE_ROLE_IS_PORTABLE_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "date": "2026-11-21",
+ "mode": "COMPUTED_ROLE_VOCABULARY_TRANSFERS_A_LEARNED_GOAL_ACROSS_PRIVATE_NAMES",
+ "declared_criteria": {
+  "E1": "the learning vocabulary contains no term that reads a private identity, and adds a computed holder-change role",
+  "E2": "both real goals have a two-literal representation in that role vocabulary on the source runs",
+  "E3": "both goals are identified by user bits on executed source runs, including the goal that needed negation",
+  "E4": "the sentences are groundable and correct on a second real machine whose identities are named differently",
+  "E5": "the old identity-specific sentence is ungrounded on that second machine",
+  "E6": "zero model calls, zero stored parameters, zero network calls at run time"
+ },
+ "criteria_were_declared_before_the_receipt_run": true,
+ "prototype_note": "a scratch probe of the same two machines was run while writing the tool; the criteria are structural and were fixed before this receipt run",
+ "source": {
+  "machine": "FILESYSTEM",
+  "depth": 3,
+  "runs": 68,
+  "identity_example": "probe_seed_content"
+ },
+ "target": {
+  "machine": "RENAMED_FILESYSTEM",
+  "depth": 3,
+  "runs": 68,
+  "seed_name": "origin"
+ },
+ "learned": {
+  "portable": {
+   "status": "IDENTIFIED",
+   "sentence": "created_once[probe_new_content]",
+   "behaviour": 10759850109289179809,
+   "questions_asked": 8,
+   "budget": 9
+  },
+  "moved": {
+   "status": "IDENTIFIED",
+   "sentence": "\u00actwo_copies[probe_seed_content] \u2227 holders_changed[probe_seed_content]",
+   "behaviour": 37758186285261133828,
+   "questions_asked": 8,
+   "budget": 9
+  }
+ },
+ "verification": {
+  "portable": {
+   "rounds": 1,
+   "forced": [],
+   "pool_mismatches_after": 0
+  },
+  "moved": {
+   "rounds": 1,
+   "forced": [],
+   "pool_mismatches_after": 0
+  }
+ },
+ "verdict": {
+  "E1_role_vocabulary": {
+   "terms": 32,
+   "private_identity_terms": [],
+   "role_terms": [
+    "holders_changed[probe_new_content]",
+    "holders_changed[probe_second_content]",
+    "holders_changed[probe_seed_content]"
+   ],
+   "MET": true
+  },
+  "E2_both_goals_expressed": {
+   "representations": {
+    "portable": 1,
+    "moved": 1
+   },
+   "MET": true
+  },
+  "E3_identified_from_user_bits": {
+   "statuses": {
+    "portable": "IDENTIFIED",
+    "moved": "IDENTIFIED"
+   },
+   "questions": {
+    "portable": 8,
+    "moved": 8
+   },
+   "MET": true
+  },
+  "E4_transfer_to_renamed_machine": {
+   "machine": "RENAMED_FILESYSTEM",
+   "source_binding": {
+    "content": "probe_new_content",
+    "old": "probe_seed_content",
+    "name": "seed",
+    "target": "probe_new_content_path"
+   },
+   "target_binding": {
+    "content": "probe_new_content",
+    "old": "probe_seed_content",
+    "name": "origin",
+    "target": "probe_new_content_path"
+   },
+   "rows": {
+    "portable": {
+     "runs": 68,
+     "positive_runs": 26,
+     "matches": 68,
+     "agreement": 1.0,
+     "predicted_positives": 26
+    },
+    "moved": {
+     "runs": 68,
+     "positive_runs": 11,
+     "matches": 68,
+     "agreement": 1.0,
+     "predicted_positives": 11
+    }
+   },
+   "MET": true
+  },
+  "E5_old_sentence_fails_to_ground": {
+   "sentence": "monotone[probe_seed_content] \u2227 \u00acfinal:has[seed]=probe_seed_content",
+   "row": {
+    "status": "UNGROUNDED_ON_SECOND_MACHINE",
+    "error": "UNGROUNDED_LITERAL: final:has[seed]=probe_seed_content"
+   },
+   "MET": true
+  },
+  "E6_zero": {
+   "model_calls": 0,
+   "parameters_stored": 0,
+   "network_calls_at_run_time": 0,
+   "MET": true
+  }
+ },
+ "limits": [
+  "both machines are real filesystems with different private names; a different tool family is not tested here",
+  "the role is one computed generator over contents; a goal needing a different role is refused",
+  "the scripted user's bits come from the project's own judges, not from a model",
+  "no edit, GUI, SWE-bench or OSWorld task is attempted"
+ ],
+ "cost": {
+  "seconds": 1.6,
+  "model_calls": 0,
+  "parameters_stored": 0,
+  "network_calls_at_run_time": 0,
+  "user_bits": 16
+ }
+}

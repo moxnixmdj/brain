@@ -91,11 +91,13 @@ class Literal:
     negated: bool
 
 
-def ground_literals(traces: Sequence[Trace]) -> list[Literal]:
+def ground_literals(traces: Sequence[Trace], *, terms: Sequence | None = None) -> list[Literal]:
+    """Literal masks over executed runs. A caller may supply a different grounded vocabulary."""
     whole, end_only = runs.run_terms(traces)
+    candidates = list(whole) + list(end_only) if terms is None else list(terms)
     full = (1 << len(traces)) - 1
     out: list[Literal] = []
-    for term in list(whole) + list(end_only):
+    for term in candidates:
         mask = sum(1 << index for index, trace in enumerate(traces) if bool(term.holds(trace)))
         if mask in (0, full):
             continue  # a term constant over the pool cannot answer a question
@@ -178,12 +180,20 @@ class User:
 # exact learning by maximum-split membership questions on real runs
 # --------------------------------------------------------------------------------------------------
 
-def learn(space: dict[int, str], traces: Sequence[Trace], user: User) -> dict:
+def learn(space: dict[int, str], traces: Sequence[Trace], user: User,
+          *, forced: dict[int, bool] | None = None) -> dict:
+    """Identify a behaviour from user bits. `forced` carries earlier audit counterexamples."""
     surviving = set(space)
     if not surviving:
         return {"status": "EMPTY_CLASS", "questions": []}
-    budget = math.ceil(math.log2(len(surviving))) if len(surviving) > 1 else 0
+    budget = (math.ceil(math.log2(len(surviving))) if len(surviving) > 1 else 0) + len(forced or {})
     questions: list[dict] = []
+    for index, answer in (forced or {}).items():
+        surviving = {mask for mask in surviving if bool((mask >> index) & 1) == answer}
+        questions.append({"run": index, "question": render_run(traces[index]),
+                          "answer": answer, "source": "prior_audit"})
+        if not surviving:
+            return {"status": "GOAL_OUTSIDE_CLASS", "questions": questions}
     while len(surviving) > 1:
         best: tuple[int, int] | None = None
         for index in range(len(traces)):
