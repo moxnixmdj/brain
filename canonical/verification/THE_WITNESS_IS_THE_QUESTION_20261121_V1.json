@@ -1,0 +1,184 @@
+{
+ "schema": "BRAIN_THE_WITNESS_IS_THE_QUESTION_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "date": "2026-11-21",
+ "mode": "COMPUTED_WITNESS__FALSIFICATION__COUNTEREXAMPLE_REPAIR__FIFTH_MACHINE",
+ "upstream": {
+  "receipt": "canonical/verification/BREADTH_BUYS_WHAT_REPETITION_CANNOT_20261201_V1.json",
+  "runs_fitted": {
+   "TARBALL": 231,
+   "FILESYSTEM": 196,
+   "SQLITE": 128
+  },
+  "residual_texts": [
+   "created_once[probe_new_content]",
+   "monotone[probe_new_content] \u2227 final:count[probe_new_content]==1"
+  ]
+ },
+ "declared_criteria": {
+  "C1": "the residual read from the executed 555-run receipt has two minimal statements",
+  "C2": "a hypothetical situation separates the two statements and is outside the reach of the three fitted machines",
+  "C3": "exactly one user verdict collapses the class to one sentence, at the log2(class) price",
+  "C4": "the one-bit sentence is FALSIFIED by a real fourth machine: it over-accepts at least one run",
+  "C5": "one counterexample question per over-accepted situation conjoins a grounded term and removes every falsifier",
+  "C6": "the repaired sentence agrees with every verdict of a fifth machine never used by either intake stage",
+  "C7": "the intake refuses with a named cause when no witness exists or the answer is not a verdict",
+  "C8": "zero model calls, zero stored parameters, zero network calls at run time"
+ },
+ "criteria_were_declared_before_the_receipt_run": true,
+ "prototype_note": "one exploratory run of the one-bit intake was executed while writing the tool and falsified C4; the criteria above were then rewritten so that the falsification is itself a declared, measurable claim",
+ "intake": {
+  "status": "CLOSED",
+  "class_size": 1,
+  "chosen": "created_once[probe_new_content]",
+  "questions": [
+   {
+    "question": "Situation: at the start there is one copy of the new content. step 1: nothing changes, so 1 copy remains. Is the goal already achieved in this situation?",
+    "counts": [
+     1,
+     1
+    ],
+    "answer": false,
+    "before": 2,
+    "after": 1,
+    "truth_in_class_order": [
+     false,
+     true
+    ]
+   }
+  ],
+  "questions_asked": 1,
+  "budget": 1
+ },
+ "verdict": {
+  "C1_residual_is_two": {
+   "count": 2,
+   "texts": [
+    "created_once[probe_new_content]",
+    "monotone[probe_new_content] \u2227 final:count[probe_new_content]==1"
+   ],
+   "MET": true
+  },
+  "C2_witness_outside_fitted_reach": {
+   "counts": [
+    1,
+    1
+   ],
+   "hypothetical": true,
+   "fitted_machines": {
+    "TARBALL": "reset never seeds the new content; no delete-then-create history",
+    "FILESYSTEM": "reset never seeds the new content",
+    "SQLITE": "reset never seeds the new content"
+   },
+   "MET": true
+  },
+  "C3_one_bit_closes_the_class": {
+   "initial_class": 2,
+   "questions": 1,
+   "budget": 1,
+   "status": "CLOSED",
+   "MET": true
+  },
+  "C4_one_bit_sentence_is_falsified": {
+   "sentence": "created_once[probe_new_content]",
+   "audit_row": {
+    "agreement": 0.5,
+    "matches": 4,
+    "runs": 8
+   },
+   "over_accepted_runs": 4,
+   "rejected": [
+    {
+     "text": "monotone[probe_new_content] \u2227 final:count[probe_new_content]==1",
+     "agreement": 0.75,
+     "matches": 6,
+     "runs": 8
+    }
+   ],
+   "MET": true
+  },
+  "C5_counterexample_repair": {
+   "status": "REPAIRED",
+   "repaired_text": "created_once[probe_new_content] \u2227 final:count[probe_new_content]==1",
+   "questions": [
+    {
+     "question": "Situation: at the start there is one copy of the new content. step 1: one new copy appears, so 2 copies remain. Is the goal already achieved in this situation?",
+     "answer": false,
+     "added_term": "final:count[probe_new_content]==1"
+    }
+   ],
+   "audit_row": {
+    "agreement": 1.0,
+    "matches": 8,
+    "runs": 8
+   },
+   "MET": true
+  },
+  "C6_fifth_machine_prediction": {
+   "machine": "TWO_ATOM_FILESYSTEM",
+   "runs": 14,
+   "positive_labels": 6,
+   "rows": {
+    "chosen": {
+     "agreement": 1.0,
+     "matches": 14,
+     "runs": 14
+    },
+    "rejected": [
+     {
+      "text": "monotone[probe_new_content] \u2227 final:count[probe_new_content]==1",
+      "agreement": 1.0,
+      "matches": 14,
+      "runs": 14
+     }
+    ],
+    "repaired": {
+     "agreement": 1.0,
+     "matches": 14,
+     "runs": 14
+    }
+   },
+   "all_candidates_agree": true,
+   "note": "this machine confirms the repaired sentence but does not discriminate it from the two one-bit candidates; the discriminating machine is the audit one",
+   "MET": true
+  },
+  "C7_fail_closed": {
+   "equivalent_class": "NO_SEPARATING_WITNESS",
+   "invalid_answer": "INVALID_ANSWER",
+   "MET": true
+  },
+  "C8_zero": {
+   "model_calls": 0,
+   "parameters_stored": 0,
+   "network_calls_at_run_time": 0,
+   "MET": true
+  }
+ },
+ "audit_machine": {
+  "name": "PRELOADED_FILESYSTEM",
+  "runs": 8,
+  "positive_labels": 0,
+  "depth": 2
+ },
+ "held_out_machine": {
+  "name": "TWO_ATOM_FILESYSTEM",
+  "runs": 14,
+  "positive_labels": 6,
+  "depth": 3,
+  "used_by": "nothing before its own evaluation"
+ },
+ "user_bits_asked": 10,
+ "limits": [
+  "witness situations are hypothetical and are not runs; the fourth and fifth machines are executed",
+  "the scripted user's bits come from the project's goal judge; a human would supply them",
+  "the repaired conjunction is expressible in this 244-term grammar; goals outside it are refused",
+  "the fifth machine is one environment: agreement there is evidence, not proof of all environments",
+  "no edit is composed and no program is repaired; this prices the sentence an edit is for"
+ ],
+ "cost": {
+  "seconds": 0.2,
+  "model_calls": 0,
+  "parameters_stored": 0,
+  "network_calls_at_run_time": 0
+ }
+}
