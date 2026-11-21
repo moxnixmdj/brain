@@ -1,0 +1,1328 @@
+{
+ "schema": "BRAIN_NEW_OBSERVABLE_MEASUREMENT_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "date": "2026-11-21",
+ "mode": "SEARCH_A_NEW_COMPUTABLE_OBSERVABLE_THAT_SPLITS_A_CELL",
+ "declared_before_the_runs": {
+  "N1": "every candidate observable is computed from the trace alone, not from a label",
+  "N2": "at least one candidate splits a cell of the fitted sufficient table",
+  "N3": "a splitting candidate is verdict-exact on untouched runs: 0 undecided, 0 false accepts, 0 false rejects",
+  "N4": "the exact splitting candidate increases cells and lowers the n-cells worst-case bill",
+  "N5": "zero model calls, zero stored parameters, zero network calls"
+ },
+ "verdict": {
+  "N1_observables_are_trace_computed": {
+   "checked": true,
+   "MET": true
+  },
+  "N2_a_candidate_splits_a_cell": {
+   "base_projection": [
+    "decrements[probe_new_content]",
+    "holders_ever[probe_new_content]"
+   ],
+   "base_cells": 4,
+   "splitting_candidates": 90,
+   "MET": true
+  },
+  "N3_exact_on_untouched_runs": {
+   "exact_candidates": 67,
+   "held_out_runs": 53,
+   "MET": true
+  },
+  "N4_cell_bill_improves": {
+   "observable": "delta_shape[probe_new_contentprobe_new_content]",
+   "split_cells": 4,
+   "base_cells": 4,
+   "refined_cells": 24,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 154,
+   "held_out": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": true,
+   "MET": true
+  },
+  "N5_zeros": {
+   "model_calls": 0,
+   "parameters_stored": 0,
+   "network_calls_at_run_time": 0,
+   "MET": true
+  }
+ },
+ "all_criteria_met": true,
+ "all_candidates": [
+  {
+   "observable": "absent_after_arrival[probe_new_content]",
+   "split_cells": 1,
+   "base_cells": 4,
+   "refined_cells": 6,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 172,
+   "held_out": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": true
+  },
+  {
+   "observable": "absent_after_arrival[probe_new_contentprobe_new_content]",
+   "split_cells": 1,
+   "base_cells": 4,
+   "refined_cells": 6,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 172,
+   "held_out": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": true
+  },
+  {
+   "observable": "absent_after_arrival[probe_new_contentprobe_new_contentprobe_new_content]",
+   "split_cells": 1,
+   "base_cells": 4,
+   "refined_cells": 5,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 173,
+   "held_out": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": true
+  },
+  {
+   "observable": "absent_after_arrival[probe_seed_content]",
+   "split_cells": 3,
+   "base_cells": 4,
+   "refined_cells": 14,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 164,
+   "held_out": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": true
+  },
+  {
+   "observable": "absent_after_arrival[probe_seed_contentprobe_new_content]",
+   "split_cells": 3,
+   "base_cells": 4,
+   "refined_cells": 13,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 165,
+   "held_out": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": true
+  },
+  {
+   "observable": "absent_after_arrival[probe_seed_contentprobe_new_contentprobe_new_content]",
+   "split_cells": 3,
+   "base_cells": 4,
+   "refined_cells": 10,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 168,
+   "held_out": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": true
+  },
+  {
+   "observable": "absent_after_arrival[probe_seed_contentprobe_new_contentprobe_new_contentprobe_new_content]",
+   "split_cells": 1,
+   "base_cells": 4,
+   "refined_cells": 6,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 172,
+   "held_out": {
+    "undecided": 1,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": false
+  },
+  {
+   "observable": "arrival_step[probe_new_content]",
+   "split_cells": 2,
+   "base_cells": 4,
+   "refined_cells": 9,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 169,
+   "held_out": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": true
+  },
+  {
+   "observable": "arrival_step[probe_new_contentprobe_new_content]",
+   "split_cells": 2,
+   "base_cells": 4,
+   "refined_cells": 8,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 170,
+   "held_out": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": true
+  },
+  {
+   "observable": "arrival_step[probe_new_contentprobe_new_contentprobe_new_content]",
+   "split_cells": 1,
+   "base_cells": 4,
+   "refined_cells": 6,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 172,
+   "held_out": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": true
+  },
+  {
+   "observable": "arrival_step[probe_new_contentprobe_new_contentprobe_new_contentprobe_new_content]",
+   "split_cells": 1,
+   "base_cells": 4,
+   "refined_cells": 5,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 173,
+   "held_out": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": true
+  },
+  {
+   "observable": "arrival_step[probe_seed_contentprobe_new_content]",
+   "split_cells": 3,
+   "base_cells": 4,
+   "refined_cells": 13,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 165,
+   "held_out": {
+    "undecided": 1,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": false
+  },
+  {
+   "observable": "arrival_step[probe_seed_contentprobe_new_contentprobe_new_content]",
+   "split_cells": 3,
+   "base_cells": 4,
+   "refined_cells": 11,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 167,
+   "held_out": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": true
+  },
+  {
+   "observable": "arrival_step[probe_seed_contentprobe_new_contentprobe_new_contentprobe_new_content]",
+   "split_cells": 1,
+   "base_cells": 4,
+   "refined_cells": 7,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 171,
+   "held_out": {
+    "undecided": 1,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": false
+  },
+  {
+   "observable": "arrival_step[probe_seed_contentprobe_new_contentprobe_new_contentprobe_new_contentprobe_new_content]",
+   "split_cells": 1,
+   "base_cells": 4,
+   "refined_cells": 6,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 172,
+   "held_out": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": true
+  },
+  {
+   "observable": "change_count[probe_new_content]",
+   "split_cells": 1,
+   "base_cells": 4,
+   "refined_cells": 5,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 173,
+   "held_out": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": true
+  },
+  {
+   "observable": "change_count[probe_new_contentprobe_new_content]",
+   "split_cells": 2,
+   "base_cells": 4,
+   "refined_cells": 7,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 171,
+   "held_out": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": true
+  },
+  {
+   "observable": "change_count[probe_new_contentprobe_new_contentprobe_new_content]",
+   "split_cells": 1,
+   "base_cells": 4,
+   "refined_cells": 6,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 172,
+   "held_out": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": true
+  },
+  {
+   "observable": "change_count[probe_new_contentprobe_new_contentprobe_new_contentprobe_new_content]",
+   "split_cells": 1,
+   "base_cells": 4,
+   "refined_cells": 5,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 173,
+   "held_out": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": true
+  },
+  {
+   "observable": "change_count[probe_seed_content]",
+   "split_cells": 1,
+   "base_cells": 4,
+   "refined_cells": 5,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 173,
+   "held_out": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": true
+  },
+  {
+   "observable": "change_count[probe_seed_contentprobe_new_content]",
+   "split_cells": 3,
+   "base_cells": 4,
+   "refined_cells": 8,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 170,
+   "held_out": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": true
+  },
+  {
+   "observable": "change_count[probe_seed_contentprobe_new_contentprobe_new_content]",
+   "split_cells": 3,
+   "base_cells": 4,
+   "refined_cells": 8,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 170,
+   "held_out": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": true
+  },
+  {
+   "observable": "change_count[probe_seed_contentprobe_new_contentprobe_new_contentprobe_new_content]",
+   "split_cells": 1,
+   "base_cells": 4,
+   "refined_cells": 6,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 172,
+   "held_out": {
+    "undecided": 1,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": false
+  },
+  {
+   "observable": "change_count[probe_seed_contentprobe_new_contentprobe_new_contentprobe_new_contentprobe_new_content]",
+   "split_cells": 1,
+   "base_cells": 4,
+   "refined_cells": 5,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 173,
+   "held_out": {
+    "undecided": 2,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": false
+  },
+  {
+   "observable": "count_at_arrival[probe_new_contentprobe_new_content]",
+   "split_cells": 2,
+   "base_cells": 4,
+   "refined_cells": 6,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 172,
+   "held_out": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": true
+  },
+  {
+   "observable": "count_at_arrival[probe_new_contentprobe_new_contentprobe_new_content]",
+   "split_cells": 1,
+   "base_cells": 4,
+   "refined_cells": 5,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 173,
+   "held_out": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": true
+  },
+  {
+   "observable": "count_at_arrival[probe_new_contentprobe_new_contentprobe_new_contentprobe_new_content]",
+   "split_cells": 1,
+   "base_cells": 4,
+   "refined_cells": 5,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 173,
+   "held_out": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": true
+  },
+  {
+   "observable": "count_at_arrival[probe_seed_contentprobe_new_content]",
+   "split_cells": 3,
+   "base_cells": 4,
+   "refined_cells": 7,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 171,
+   "held_out": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": true
+  },
+  {
+   "observable": "count_at_arrival[probe_seed_contentprobe_new_contentprobe_new_content]",
+   "split_cells": 3,
+   "base_cells": 4,
+   "refined_cells": 7,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 171,
+   "held_out": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": true
+  },
+  {
+   "observable": "count_at_arrival[probe_seed_contentprobe_new_contentprobe_new_contentprobe_new_content]",
+   "split_cells": 1,
+   "base_cells": 4,
+   "refined_cells": 5,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 173,
+   "held_out": {
+    "undecided": 1,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": false
+  },
+  {
+   "observable": "count_at_arrival[probe_seed_contentprobe_new_contentprobe_new_contentprobe_new_contentprobe_new_content]",
+   "split_cells": 1,
+   "base_cells": 4,
+   "refined_cells": 5,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 173,
+   "held_out": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": true
+  },
+  {
+   "observable": "delta_shape[probe_new_content]",
+   "split_cells": 3,
+   "base_cells": 4,
+   "refined_cells": 28,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 150,
+   "held_out": {
+    "undecided": 3,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": false
+  },
+  {
+   "observable": "delta_shape[probe_new_contentprobe_new_content]",
+   "split_cells": 4,
+   "base_cells": 4,
+   "refined_cells": 24,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 154,
+   "held_out": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": true
+  },
+  {
+   "observable": "delta_shape[probe_new_contentprobe_new_contentprobe_new_content]",
+   "split_cells": 3,
+   "base_cells": 4,
+   "refined_cells": 16,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 162,
+   "held_out": {
+    "undecided": 1,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": false
+  },
+  {
+   "observable": "delta_shape[probe_new_contentprobe_new_contentprobe_new_contentprobe_new_content]",
+   "split_cells": 3,
+   "base_cells": 4,
+   "refined_cells": 14,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 164,
+   "held_out": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": true
+  },
+  {
+   "observable": "delta_shape[probe_second_content]",
+   "split_cells": 3,
+   "base_cells": 4,
+   "refined_cells": 13,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 165,
+   "held_out": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": true
+  },
+  {
+   "observable": "delta_shape[probe_seed_content]",
+   "split_cells": 3,
+   "base_cells": 4,
+   "refined_cells": 34,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 144,
+   "held_out": {
+    "undecided": 4,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": false
+  },
+  {
+   "observable": "delta_shape[probe_seed_contentprobe_new_content]",
+   "split_cells": 3,
+   "base_cells": 4,
+   "refined_cells": 54,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 124,
+   "held_out": {
+    "undecided": 9,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": false
+  },
+  {
+   "observable": "delta_shape[probe_seed_contentprobe_new_contentprobe_new_content]",
+   "split_cells": 3,
+   "base_cells": 4,
+   "refined_cells": 36,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 142,
+   "held_out": {
+    "undecided": 2,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": false
+  },
+  {
+   "observable": "delta_shape[probe_seed_contentprobe_new_contentprobe_new_contentprobe_new_content]",
+   "split_cells": 3,
+   "base_cells": 4,
+   "refined_cells": 23,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 155,
+   "held_out": {
+    "undecided": 1,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": false
+  },
+  {
+   "observable": "delta_shape[probe_seed_contentprobe_new_contentprobe_new_contentprobe_new_contentprobe_new_content]",
+   "split_cells": 3,
+   "base_cells": 4,
+   "refined_cells": 16,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 162,
+   "held_out": {
+    "undecided": 2,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": false
+  },
+  {
+   "observable": "departure_step[probe_new_content]",
+   "split_cells": 2,
+   "base_cells": 4,
+   "refined_cells": 10,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 168,
+   "held_out": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": true
+  },
+  {
+   "observable": "departure_step[probe_new_contentprobe_new_content]",
+   "split_cells": 2,
+   "base_cells": 4,
+   "refined_cells": 8,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 170,
+   "held_out": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": true
+  },
+  {
+   "observable": "departure_step[probe_new_contentprobe_new_contentprobe_new_content]",
+   "split_cells": 1,
+   "base_cells": 4,
+   "refined_cells": 6,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 172,
+   "held_out": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": true
+  },
+  {
+   "observable": "departure_step[probe_new_contentprobe_new_contentprobe_new_contentprobe_new_content]",
+   "split_cells": 1,
+   "base_cells": 4,
+   "refined_cells": 5,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 173,
+   "held_out": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": true
+  },
+  {
+   "observable": "departure_step[probe_second_content]",
+   "split_cells": 3,
+   "base_cells": 4,
+   "refined_cells": 13,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 165,
+   "held_out": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": true
+  },
+  {
+   "observable": "departure_step[probe_seed_content]",
+   "split_cells": 3,
+   "base_cells": 4,
+   "refined_cells": 13,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 165,
+   "held_out": {
+    "undecided": 1,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": false
+  },
+  {
+   "observable": "departure_step[probe_seed_contentprobe_new_content]",
+   "split_cells": 3,
+   "base_cells": 4,
+   "refined_cells": 14,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 164,
+   "held_out": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": true
+  },
+  {
+   "observable": "departure_step[probe_seed_contentprobe_new_contentprobe_new_content]",
+   "split_cells": 3,
+   "base_cells": 4,
+   "refined_cells": 11,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 167,
+   "held_out": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": true
+  },
+  {
+   "observable": "departure_step[probe_seed_contentprobe_new_contentprobe_new_contentprobe_new_content]",
+   "split_cells": 1,
+   "base_cells": 4,
+   "refined_cells": 7,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 171,
+   "held_out": {
+    "undecided": 1,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": false
+  },
+  {
+   "observable": "departure_step[probe_seed_contentprobe_new_contentprobe_new_contentprobe_new_contentprobe_new_content]",
+   "split_cells": 1,
+   "base_cells": 4,
+   "refined_cells": 6,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 172,
+   "held_out": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": true
+  },
+  {
+   "observable": "final_cardinality",
+   "split_cells": 3,
+   "base_cells": 4,
+   "refined_cells": 14,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 164,
+   "held_out": {
+    "undecided": 1,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": false
+  },
+  {
+   "observable": "first_change[probe_new_content]",
+   "split_cells": 2,
+   "base_cells": 4,
+   "refined_cells": 9,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 169,
+   "held_out": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": true
+  },
+  {
+   "observable": "first_change[probe_new_contentprobe_new_content]",
+   "split_cells": 2,
+   "base_cells": 4,
+   "refined_cells": 8,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 170,
+   "held_out": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": true
+  },
+  {
+   "observable": "first_change[probe_new_contentprobe_new_contentprobe_new_content]",
+   "split_cells": 1,
+   "base_cells": 4,
+   "refined_cells": 6,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 172,
+   "held_out": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": true
+  },
+  {
+   "observable": "first_change[probe_new_contentprobe_new_contentprobe_new_contentprobe_new_content]",
+   "split_cells": 1,
+   "base_cells": 4,
+   "refined_cells": 5,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 173,
+   "held_out": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": true
+  },
+  {
+   "observable": "first_change[probe_seed_content]",
+   "split_cells": 3,
+   "base_cells": 4,
+   "refined_cells": 12,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 166,
+   "held_out": {
+    "undecided": 3,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": false
+  },
+  {
+   "observable": "first_change[probe_seed_contentprobe_new_content]",
+   "split_cells": 3,
+   "base_cells": 4,
+   "refined_cells": 13,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 165,
+   "held_out": {
+    "undecided": 1,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": false
+  },
+  {
+   "observable": "first_change[probe_seed_contentprobe_new_contentprobe_new_content]",
+   "split_cells": 3,
+   "base_cells": 4,
+   "refined_cells": 11,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 167,
+   "held_out": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": true
+  },
+  {
+   "observable": "first_change[probe_seed_contentprobe_new_contentprobe_new_contentprobe_new_content]",
+   "split_cells": 1,
+   "base_cells": 4,
+   "refined_cells": 7,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 171,
+   "held_out": {
+    "undecided": 1,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": false
+  },
+  {
+   "observable": "first_change[probe_seed_contentprobe_new_contentprobe_new_contentprobe_new_contentprobe_new_content]",
+   "split_cells": 1,
+   "base_cells": 4,
+   "refined_cells": 6,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 172,
+   "held_out": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": true
+  },
+  {
+   "observable": "first_holder[probe_new_contentprobe_new_content]",
+   "split_cells": 2,
+   "base_cells": 4,
+   "refined_cells": 6,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 172,
+   "held_out": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": true
+  },
+  {
+   "observable": "first_holder[probe_new_contentprobe_new_contentprobe_new_content]",
+   "split_cells": 1,
+   "base_cells": 4,
+   "refined_cells": 5,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 173,
+   "held_out": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": true
+  },
+  {
+   "observable": "first_holder[probe_new_contentprobe_new_contentprobe_new_contentprobe_new_content]",
+   "split_cells": 1,
+   "base_cells": 4,
+   "refined_cells": 5,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 173,
+   "held_out": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": true
+  },
+  {
+   "observable": "first_holder[probe_seed_contentprobe_new_content]",
+   "split_cells": 3,
+   "base_cells": 4,
+   "refined_cells": 7,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 171,
+   "held_out": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": true
+  },
+  {
+   "observable": "first_holder[probe_seed_contentprobe_new_contentprobe_new_content]",
+   "split_cells": 3,
+   "base_cells": 4,
+   "refined_cells": 7,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 171,
+   "held_out": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": true
+  },
+  {
+   "observable": "first_holder[probe_seed_contentprobe_new_contentprobe_new_contentprobe_new_content]",
+   "split_cells": 1,
+   "base_cells": 4,
+   "refined_cells": 5,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 173,
+   "held_out": {
+    "undecided": 1,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": false
+  },
+  {
+   "observable": "first_holder[probe_seed_contentprobe_new_contentprobe_new_contentprobe_new_contentprobe_new_content]",
+   "split_cells": 1,
+   "base_cells": 4,
+   "refined_cells": 5,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 173,
+   "held_out": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": true
+  },
+  {
+   "observable": "holders_at_arrival[probe_new_contentprobe_new_content]",
+   "split_cells": 2,
+   "base_cells": 4,
+   "refined_cells": 6,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 172,
+   "held_out": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": true
+  },
+  {
+   "observable": "holders_at_arrival[probe_new_contentprobe_new_contentprobe_new_content]",
+   "split_cells": 1,
+   "base_cells": 4,
+   "refined_cells": 5,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 173,
+   "held_out": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": true
+  },
+  {
+   "observable": "holders_at_arrival[probe_new_contentprobe_new_contentprobe_new_contentprobe_new_content]",
+   "split_cells": 1,
+   "base_cells": 4,
+   "refined_cells": 5,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 173,
+   "held_out": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": true
+  },
+  {
+   "observable": "holders_at_arrival[probe_seed_contentprobe_new_content]",
+   "split_cells": 3,
+   "base_cells": 4,
+   "refined_cells": 7,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 171,
+   "held_out": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": true
+  },
+  {
+   "observable": "holders_at_arrival[probe_seed_contentprobe_new_contentprobe_new_content]",
+   "split_cells": 3,
+   "base_cells": 4,
+   "refined_cells": 7,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 171,
+   "held_out": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": true
+  },
+  {
+   "observable": "holders_at_arrival[probe_seed_contentprobe_new_contentprobe_new_contentprobe_new_content]",
+   "split_cells": 1,
+   "base_cells": 4,
+   "refined_cells": 5,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 173,
+   "held_out": {
+    "undecided": 1,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": false
+  },
+  {
+   "observable": "holders_at_arrival[probe_seed_contentprobe_new_contentprobe_new_contentprobe_new_contentprobe_new_content]",
+   "split_cells": 1,
+   "base_cells": 4,
+   "refined_cells": 5,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 173,
+   "held_out": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": true
+  },
+  {
+   "observable": "last_holder[probe_new_contentprobe_new_content]",
+   "split_cells": 2,
+   "base_cells": 4,
+   "refined_cells": 6,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 172,
+   "held_out": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": true
+  },
+  {
+   "observable": "last_holder[probe_new_contentprobe_new_contentprobe_new_content]",
+   "split_cells": 1,
+   "base_cells": 4,
+   "refined_cells": 5,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 173,
+   "held_out": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": true
+  },
+  {
+   "observable": "last_holder[probe_new_contentprobe_new_contentprobe_new_contentprobe_new_content]",
+   "split_cells": 1,
+   "base_cells": 4,
+   "refined_cells": 5,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 173,
+   "held_out": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": true
+  },
+  {
+   "observable": "last_holder[probe_seed_contentprobe_new_content]",
+   "split_cells": 3,
+   "base_cells": 4,
+   "refined_cells": 7,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 171,
+   "held_out": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": true
+  },
+  {
+   "observable": "last_holder[probe_seed_contentprobe_new_contentprobe_new_content]",
+   "split_cells": 3,
+   "base_cells": 4,
+   "refined_cells": 7,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 171,
+   "held_out": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": true
+  },
+  {
+   "observable": "last_holder[probe_seed_contentprobe_new_contentprobe_new_contentprobe_new_content]",
+   "split_cells": 1,
+   "base_cells": 4,
+   "refined_cells": 5,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 173,
+   "held_out": {
+    "undecided": 1,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": false
+  },
+  {
+   "observable": "last_holder[probe_seed_contentprobe_new_contentprobe_new_contentprobe_new_contentprobe_new_content]",
+   "split_cells": 1,
+   "base_cells": 4,
+   "refined_cells": 5,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 173,
+   "held_out": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": true
+  },
+  {
+   "observable": "max_count[probe_new_contentprobe_new_content]",
+   "split_cells": 2,
+   "base_cells": 4,
+   "refined_cells": 6,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 172,
+   "held_out": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": true
+  },
+  {
+   "observable": "max_count[probe_new_contentprobe_new_contentprobe_new_content]",
+   "split_cells": 1,
+   "base_cells": 4,
+   "refined_cells": 5,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 173,
+   "held_out": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": true
+  },
+  {
+   "observable": "max_count[probe_new_contentprobe_new_contentprobe_new_contentprobe_new_content]",
+   "split_cells": 1,
+   "base_cells": 4,
+   "refined_cells": 5,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 173,
+   "held_out": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": true
+  },
+  {
+   "observable": "max_count[probe_seed_contentprobe_new_content]",
+   "split_cells": 3,
+   "base_cells": 4,
+   "refined_cells": 7,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 171,
+   "held_out": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": true
+  },
+  {
+   "observable": "max_count[probe_seed_contentprobe_new_contentprobe_new_content]",
+   "split_cells": 3,
+   "base_cells": 4,
+   "refined_cells": 7,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 171,
+   "held_out": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": true
+  },
+  {
+   "observable": "max_count[probe_seed_contentprobe_new_contentprobe_new_contentprobe_new_content]",
+   "split_cells": 1,
+   "base_cells": 4,
+   "refined_cells": 5,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 173,
+   "held_out": {
+    "undecided": 1,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": false
+  },
+  {
+   "observable": "max_count[probe_seed_contentprobe_new_contentprobe_new_contentprobe_new_contentprobe_new_content]",
+   "split_cells": 1,
+   "base_cells": 4,
+   "refined_cells": 5,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 173,
+   "held_out": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": true
+  },
+  {
+   "observable": "trace_length",
+   "split_cells": 3,
+   "base_cells": 4,
+   "refined_cells": 13,
+   "worst_case_bill_before": 174,
+   "worst_case_bill_after": 165,
+   "held_out": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "exact": true
+  }
+ ],
+ "cost": {
+  "seconds": 80.9,
+  "model_calls": 0,
+  "parameters_stored": 0,
+  "network_calls_at_run_time": 0
+ },
+ "non_claims": [
+  "the goal label is the project's portable judge, not a human judgment",
+  "a better table is not a repair, a GUI agent, or a benchmark score",
+  "independent verification is not claimed; authority is NONE"
+ ]
+}
