@@ -1,0 +1,71 @@
+{
+ "schema": "BRAIN_CELL_PRICE_MEASUREMENT_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "date": "2026-11-21",
+ "mode": "PRICE_THE_CELLS_OF_A_SUFFICIENT_STATISTIC",
+ "declared_before_the_runs": {
+  "R1": "the depth-5 pool is real and split before fitting, with no held-out label used for fitting",
+  "R2": "a size-3 conjunction search is computed over the same generator family",
+  "R3": "the wider search reports its coarsest sufficient statistic and its cell count",
+  "R4": "each fitted statistic makes zero false accepts on the held-out fifth",
+  "R5": "zero model calls, zero stored parameters, zero network calls"
+ },
+ "verdict": {
+  "R1_real_split_pool": {
+   "distinct_runs": 231,
+   "train": 178,
+   "held_out": 53,
+   "MET": true
+  },
+  "R2_wider_lattice_computed": {
+   "size2": 4465,
+   "size3": 138509,
+   "MET": true
+  },
+  "R3_coarsest_statistics": {
+   "size2_projection": [
+    "decrements[probe_new_content]",
+    "holders_ever[probe_new_content]"
+   ],
+   "size2_cells": 4,
+   "size3_projection": [
+    "decrements[probe_new_content]",
+    "holders_ever[probe_new_content]"
+   ],
+   "size3_cells": 4,
+   "cells_saved": 0,
+   "MET": true
+  },
+  "R4_held_out_soundness": {
+   "size2": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "size3": {
+    "undecided": 0,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "MET": true
+  },
+  "R5_zeros": {
+   "model_calls": 0,
+   "parameters_stored": 0,
+   "network_calls_at_run_time": 0,
+   "MET": true
+  }
+ },
+ "all_criteria_met": true,
+ "cost": {
+  "seconds": 82.0,
+  "model_calls": 0,
+  "parameters_stored": 0,
+  "network_calls_at_run_time": 0
+ },
+ "non_claims": [
+  "one CLI machine at depth five is not computer use",
+  "the goal label is the project's portable judge, not a new human judgment",
+  "independent verification is not claimed; authority is NONE"
+ ]
+}
