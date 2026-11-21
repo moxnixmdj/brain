@@ -56,7 +56,8 @@ def _files(repo,root,tests,failure):
 def _purge(paths):
  for p in paths:_PATCH._purge_source_bytecode(p)
 def _diff(repo,p,a,b):return ''.join(difflib.unified_diff(a.decode().splitlines(True),b.decode().splitlines(True),fromfile='a/'+_rel(repo,p),tofile='b/'+_rel(repo,p)))
-def _best(repo,source,tests,argv,timeout,score,limit,touched,env,focus=None):
+def _best(repo,source,tests,argv,timeout,score,limit,touched,env,focus=None,structural=False,
+          veto_argv=None,veto_counter=None):
  cur=source.read_bytes()
  try:text=cur.decode();tree=ast.parse(text)
  except Exception:return None,0
@@ -67,7 +68,7 @@ def _best(repo,source,tests,argv,timeout,score,limit,touched,env,focus=None):
  # before reaching any line the stack names. Near-focus candidates first.
  fl=set(focus or ())
  specs=[]
- for key,desc,replacer in _PATCH._candidate_specs(tree,nums,strings,source):
+ for key,desc,replacer in _PATCH._candidate_specs(tree,nums,strings,source,structural=structural):
   line=desc.get('lineno') or 0
   near=1 if not fl else 0 if any(abs(line-f)<=3 for f in fl) else 1
   specs.append((near,line,key,desc,replacer))
@@ -77,14 +78,27 @@ def _best(repo,source,tests,argv,timeout,score,limit,touched,env,focus=None):
   cand=renderer.render(key,replacer)
   if not cand or cand==text:continue
   tested+=1
+  rec=None
   try:
    source.write_text(cand);_purge(set(touched)|{source});r=_PATCH._run_tests(repo,argv,timeout,env)
+   s=_score(r)
+   if s is not None and s<score:
+    # CONTRACT VETO. The corpus tests rank candidates; a separate oracle only
+    # has to refuse. It must run WHILE the candidate is still on disk, before
+    # the source is restored below. It never rewards a candidate, so a weak
+    # contract cannot make a wrong program look better -- it can only remove
+    # one from the search.
+    accepted=True
+    if veto_argv:
+     verdict=_PATCH._run_tests(repo,veto_argv,timeout,env)
+     accepted=(verdict.get('returncode')==0 and not verdict.get('timed_out'))
+     if not accepted and veto_counter is not None:
+      veto_counter['rejected']=veto_counter.get('rejected',0)+1
+    if accepted:
+     rec={'source':source,'bytes':cand.encode(),'score':s,'mutation':desc,'sha256':_sha(cand.encode())}
   finally:
    source.write_bytes(cur);_purge(set(touched)|{source})
-  s=_score(r)
-  if s is None or s>=score:continue
-  rec={'source':source,'bytes':cand.encode(),'score':s,'mutation':desc,'sha256':_sha(cand.encode())}
-  return rec,tested
+  if rec is not None:return rec,tested
  return best,tested
 def _source_env(src):
     """Delegate to the shared helper in the patch-search module; one implementation."""
@@ -101,6 +115,10 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
  if not tests:raise RepairLoopError('TEST_PATHS_REQUIRED')
  argv=_PATCH.argv_or_derived(args.get('test_argv'),sys.executable,*tests)
  timeout=max(1,min(int(args.get('timeout_s',30)),300));rounds_max=max(1,min(int(args.get('max_rounds',6)),20));files_max=max(1,min(int(args.get('max_files',12)),100));per=max(1,min(int(args.get('max_candidates_per_file',250)),5000));total_max=max(1,min(int(args.get('max_total_candidates',2000)),50000))
+ structural=bool(args.get('structural_mutations'))
+ veto_tests=[_safe_file(repo,x) for x in (args.get('veto_tests') or []) if str(x).strip()]
+ veto_argv=_PATCH.argv_or_derived(None,sys.executable,*veto_tests) if veto_tests else None
+ veto_counter={}
  out=(repo/str(args.get('output_path') or '')).resolve()
  if out==repo or repo not in out.parents:raise RepairLoopError('OUTPUT_PATH_OUTSIDE_REPOSITORY')
  env=_source_env(src)
@@ -130,12 +148,18 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
  try:
   for ri in range(1,rounds_max+1):
    if not _wall_left():status='OPEN__WALL_DEADLINE_EXHAUSTED';break
-   fs=_files(repo,src,tests,_text(current))[:files_max];best=None;round_tested=0
+   fs=_files(repo,src,tests,_text(current))
+   # FRAME-FIRST FILE ORDER. The traceback names the file that failed; searching
+   # alphabetically first spends the candidate budget on modules the failing run
+   # never entered. Stable within the two groups, so unchanged when nothing is
+   # named.
+   fs=sorted(fs,key=lambda p:0 if _rel(repo,p) in _focus else 1)[:files_max]
+   best=None;round_tested=0
    for source in fs:
     if not _wall_left():status='OPEN__WALL_DEADLINE_EXHAUSTED';break
     rem=total_max-tested_total
     if rem<=0:break
-    cand,n=_best(repo,source,tests,argv,cand_timeout,score,min(per,rem),touched,env,focus=_focus.get(_rel(repo,source)));tested_total+=n;round_tested+=n
+    cand,n=_best(repo,source,tests,argv,cand_timeout,score,min(per,rem),touched,env,focus=_focus.get(_rel(repo,source)),structural=structural,veto_argv=veto_argv,veto_counter=veto_counter);tested_total+=n;round_tested+=n
     if cand is not None:
      best=cand
      break
@@ -153,5 +177,5 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
   for p,b in originals.items():p.write_bytes(b)
   _purge(originals)
  patches=[{'source_path':_rel(repo,p),'original_sha256':_sha(originals[p]),'candidate_sha256':_sha(final_bytes[p]),'unified_diff':_diff(repo,p,originals[p],final_bytes[p])} for p in sorted(final_bytes,key=lambda q:_rel(repo,q))]
- result={'schema':SCHEMA,'status':status,'pass':status.startswith('PASS__'),'baseline_failure_score':_score(base),'rounds':rrecs,'accepted_edit_count':len(accepted),'accepted_edits':accepted,'tested_candidate_count':tested_total,'final_verification_replays':vreplays,'patches':patches,'source_restored':all(p.read_bytes()==b for p,b in originals.items()),'model_dependency_count':0,'external_capability_provider_count':0,'incremental_spend_usd':0,'hard_nonclaims':['NO_UNIVERSAL_SOFTWARE_REPAIR_COMPLETENESS','NO_SYNTACTICALLY_UNIVERSAL_EDIT_BASIS','NO_NON_PYTHON_SUPPORT','NO_HIDDEN_REQUIREMENTS_OR_MERGEABILITY_PROOF','NO_SOURCE_WRITE_OR_PROMOTION_AUTHORITY','NO_FRONTIERCODE_SCORE_OR_ACCEPTANCE_CREDIT']}
+ result={'schema':SCHEMA,'status':status,'pass':status.startswith('PASS__'),'baseline_failure_score':_score(base),'rounds':rrecs,'accepted_edit_count':len(accepted),'accepted_edits':accepted,'tested_candidate_count':tested_total,'contract_veto_rejections':veto_counter.get('rejected',0),'final_verification_replays':vreplays,'patches':patches,'source_restored':all(p.read_bytes()==b for p,b in originals.items()),'model_dependency_count':0,'external_capability_provider_count':0,'incremental_spend_usd':0,'hard_nonclaims':['NO_UNIVERSAL_SOFTWARE_REPAIR_COMPLETENESS','NO_SYNTACTICALLY_UNIVERSAL_EDIT_BASIS','NO_NON_PYTHON_SUPPORT','NO_HIDDEN_REQUIREMENTS_OR_MERGEABILITY_PROOF','NO_SOURCE_WRITE_OR_PROMOTION_AUTHORITY','NO_FRONTIERCODE_SCORE_OR_ACCEPTANCE_CREDIT']}
  out.parent.mkdir(parents=True,exist_ok=True);out.write_text(json.dumps(result,indent=2,sort_keys=True)+'\n');result['output_path']=_rel(repo,out);result['output_sha256']=_sha(out.read_bytes());result['output_verified']=True;return result
