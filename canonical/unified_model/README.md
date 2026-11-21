@@ -5,7 +5,7 @@ compiled into a single model.
 
 ```
 canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json
-model digest: d050fac698df59ab70e251cf2f03f11cb280d702b0edc0c64e1b1dc7bfb9f33e
+model digest: 45f9c0e191d53979bb40d6eb1e66b0cf1716994e00b8b2ce3da9fbe18eda88dd
 ```
 
 This is a **compiled projection**, not a new authority. It is a deterministic
@@ -15,11 +15,11 @@ function of the repository tree: compile it twice and you get the same bytes.
 
 | Layer | Count | What it is |
 |---|---|---|
-| Capabilities | **364** | 69 promoted bound capabilities + 295 receipt-backed capabilities from the live verified registry |
+| Capabilities | **447** | 153 promoted bound capabilities + 294 receipt-backed capabilities from the live verified registry |
 | Engines | **26** | 25 unified-cognitive-fabric modes + 1 meta orchestrator |
 | Skills | **18** | Internalized `SKILL.md` procedures with their operational lines |
-| Knowledge | **168** | 59 laws, 95 documents, 14 structured records — indexed by hash, headings and terms |
-| Routing vocabulary | **1,775** | Tokens compiled from declared triggers, weighted by inverse document frequency |
+| Knowledge | **596** | 59 laws, 523 documents, 14 structured records — indexed by hash, headings and terms |
+| Routing vocabulary | **2,373** | Tokens compiled from declared triggers, weighted by inverse document frequency |
 | Weights | **0** | This artifact contains no trained parameters and never claims any |
 
 Knowledge is *indexed, not embedded*: the model stores each document's path,
