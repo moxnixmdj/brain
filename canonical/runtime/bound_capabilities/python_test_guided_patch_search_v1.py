@@ -258,7 +258,7 @@ def _imported_fields(tree: ast.AST, source_path: Any) -> list[str]:
 
 
 def _candidate_specs(tree: ast.AST, numeric_literals: list[Any], string_literals: list[str],
-                    source_path: Any = None):
+                    source_path: Any = None, structural: bool = False):
     seen=set()
     _fields=_declared_fields(tree)
     for _a in _read_attributes(tree):
@@ -472,6 +472,13 @@ def _candidate_specs(tree: ast.AST, numeric_literals: list[Any], string_literals
                                 yield rkey,_descriptor(rval,"GUARD_PRECONDITION",f"{p0}:{tag}","guard_clause"),(
                                     lambda n,cf=cond_fn,sv=sent: ast.IfExp(test=cf(),body=sv,orelse=n)
                                 )
+    # OPT-IN STRUCTURAL FAMILIES. The implementation lives in its own module so
+    # the legacy grammar parsed by reach_of_the_grammar_v1 stays byte-honest: this
+    # extension is priced in CONTRACT_VETO_REPAIR_20261121_V1, not retrofitted
+    # into an old receipt.
+    if structural:
+        from canonical.runtime.bound_capabilities import structural_mutation_families_v1 as ext
+        yield from ext.candidate_specs(tree)
 
 """Child-side suite execution shared by repair, measurement and tracing.
 

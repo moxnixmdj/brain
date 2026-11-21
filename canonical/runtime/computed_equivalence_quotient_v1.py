@@ -64,6 +64,31 @@ _FINAL_COUNT = re.compile(r"final:count\[(.+)\]==(-?\d+)\Z")
 
 
 @dataclass(frozen=True)
+class Premises:
+    """Computed facts about one content on one executed machine universe.
+
+    These are not learned weights and not beliefs.  Each field is a decision
+    made from the machine's own readings; a machine that violates one refuses
+    the rewrites that depend on it.
+    """
+
+    initial: int
+    maximum: int
+    unit: bool
+    never_restored: bool
+
+    @property
+    def bounded_at_initial_plus_one(self) -> bool:
+        return self.maximum == self.initial + 1
+
+    def as_dict(self) -> dict[str, object]:
+        return {"initial": self.initial, "maximum": self.maximum,
+                "unit_increments": self.unit,
+                "never_restored": self.never_restored,
+                "bounded_at_initial_plus_one": self.bounded_at_initial_plus_one}
+
+
+@dataclass(frozen=True)
 class Alias:
     """Several syntactic statements with one calculated meaning."""
 
@@ -114,6 +139,39 @@ def unit_increments(traces: Sequence[Trace], content: str) -> bool:
             if delta > 1:
                 return False
     return True
+
+
+def _content_counts(trace: Trace, content: str) -> tuple[int, ...]:
+    return tuple(sum(1 for _ident, value in state if value == content) for state in trace)
+
+
+def compute_premises(state: State, traces: Sequence[Trace]) -> dict[str, Premises]:
+    """Compute the finite-trace invariants of every content from executed readings.
+
+    A machine that restores a deleted value, adds two at once, or can hold more
+    than k+1 copies gets a different premise set and cannot borrow another
+    machine's rewrite.
+    """
+    counts = counts_with_absent(state, traces)
+    result: dict[str, Premises] = {}
+    for content, initial in counts.items():
+        maximum = initial
+        unit = True
+        restored = False
+        for trace in traces:
+            sequence = _content_counts(trace, content)
+            maximum = max(maximum, *sequence) if sequence else maximum
+            dropped = False
+            for before, after in zip(sequence, sequence[1:]):
+                if after > before:
+                    if after - before > 1:
+                        unit = False
+                    if dropped:
+                        restored = True
+                elif after < before:
+                    dropped = True
+        result[content] = Premises(initial, maximum, unit, not restored)
+    return result
 
 
 def canonical(combo: Combo, texts: Sequence[str], counts: Mapping[str, int]) -> frozenset[str]:

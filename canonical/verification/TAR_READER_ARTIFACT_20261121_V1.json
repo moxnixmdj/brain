@@ -1,0 +1,200 @@
+{
+ "schema": "BRAIN_TAR_READER_ARTIFACT_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "date": "2026-11-21",
+ "mode": "ONE_READER_CHANGE_ON_THE_SAME_ATOMS_AND_THE_SAME_555_RUNS",
+ "baseline_receipt": "canonical/verification/RESIDUAL_IS_AN_ALIAS_NOT_A_QUESTION_20261121_V1.json",
+ "criteria_were_declared_before_the_receipt_run": true,
+ "declared_acceptance_before_the_receipt_run": {
+  "F1": "the corrected reader yields zero concatenated content literals",
+  "F2": "the corrected union has zero ambiguous classes carrying them",
+  "F3": "the goal class still falls from two to one under the quotient",
+  "F4": "quotienting changes no behaviour mask",
+  "F5": "zero model calls, parameters and network at run time"
+ },
+ "verdict": {
+  "F1_concatenation_is_impossible_by_construction": {
+   "baseline_ambiguous_classes_with_concatenated_literals": 175,
+   "corrected_concatenated_contents": 0,
+   "corrected_terms_with_them": 0,
+   "MET": true
+  },
+  "F2_ambiguous_classes_with_reader_artifacts_are_gone": {
+   "baseline": 175,
+   "corrected": 0,
+   "corrected_clean_ambiguous": 147,
+   "MET": true
+  },
+  "F3_the_calculated_quotient_still_identifies_the_goal": {
+   "before": 2,
+   "after": 1,
+   "texts": [
+    "created_once[probe_new_content]"
+   ],
+   "MET": true
+  },
+  "F4_no_behaviour_mask_changes_under_the_quotient": {
+   "behaviours": 301,
+   "unique_before": 151,
+   "unique_after": 152,
+   "mean_before": 3.3,
+   "mean_after": 3.3,
+   "MET": true
+  },
+  "F5_zero": {
+   "model_calls": 0,
+   "parameters_stored": 0,
+   "network_calls_at_run_time": 0,
+   "MET": true
+  }
+ },
+ "corrected": {
+  "runs": {
+   "TARBALL": 231,
+   "FILESYSTEM": 196,
+   "SQLITE": 128
+  },
+  "terms": 143,
+  "initial_counts": {
+   "probe_seed_content": 1,
+   "probe_second_content": 1,
+   "probe_new_content": 0
+  },
+  "concatenated_contents": [],
+  "terms_with_concatenated_contents": 0,
+  "example_ambiguous_texts_with_concatenated_contents": [],
+  "raw": {
+   "runs": 555,
+   "hypotheses": 10296,
+   "behaviours": 301,
+   "trivial_behaviours_excluded": 2,
+   "behaviours_with_a_unique_statement": 151,
+   "share_unique": 0.505,
+   "mean_class": 3.3,
+   "largest_class": 46,
+   "goal_statements_with_the_behaviour": 10,
+   "goal_minimal_statements": 2,
+   "goal_minimal_texts": [
+    "created_once[probe_new_content]",
+    "monotone[probe_new_content] \u2227 final:count[probe_new_content]==1"
+   ]
+  },
+  "after_quotient": {
+   "behaviours": 301,
+   "behaviours_with_a_unique_statement_before": 151,
+   "behaviours_with_a_unique_statement_after": 152,
+   "mean_class_before": 3.3,
+   "mean_class_after": 3.3,
+   "behaviours_still_ambiguous_after": 147,
+   "ambiguous_with_concatenated_reader_literals": 0,
+   "ambiguous_with_clean_literals": 147,
+   "example_clean_ambiguous_texts": [
+    "created_once[probe_seed_content]",
+    "final:count[probe_seed_content]==2",
+    "monotone[probe_seed_content] \u2227 two_copies[probe_seed_content]",
+    "two_copies[probe_seed_content] \u2227 final:has[seed]=probe_seed_content",
+    "never_together[probe_new_content;probe_second_content] \u2227 final:card==3",
+    "final:card==3 \u2227 final:count[probe_new_content]==0"
+   ],
+   "largest_class_after": 46,
+   "example_ambiguous_texts": [
+    "precedence[has seed; has seed#5]",
+    "precedence[has seed#1; has seed#5]",
+    "precedence[has seed#2; has seed#5]",
+    "precedence[has seed#3; has seed#5]",
+    "precedence[has seed#4; has seed#5]",
+    "precedence[has seed2; has seed#5]"
+   ],
+   "goal_minimal_before": 2,
+   "goal_minimal_after": 1,
+   "goal_texts_before": [
+    "created_once[probe_new_content]",
+    "monotone[probe_new_content] \u2227 final:count[probe_new_content]==1"
+   ],
+   "goal_texts_after": [
+    "created_once[probe_new_content]"
+   ]
+  },
+  "aliases_proposed": 3,
+  "aliases_verified": 3,
+  "hashes": {
+   "first_trace": [
+    [
+     [
+      "seed",
+      "probe_seed_content"
+     ],
+     [
+      "seed2",
+      "probe_second_content"
+     ]
+    ],
+    [
+     [
+      "seed",
+      "probe_seed_content"
+     ],
+     [
+      "seed2",
+      "probe_second_content"
+     ],
+     [
+      "seed#1",
+      "probe_new_content"
+     ]
+    ]
+   ],
+   "a_repeated_member_trace": [
+    [
+     [
+      [
+       "seed",
+       "probe_seed_content"
+      ],
+      [
+       "seed2",
+       "probe_second_content"
+      ]
+     ],
+     [
+      [
+       "seed",
+       "probe_seed_content"
+      ],
+      [
+       "seed2",
+       "probe_second_content"
+      ],
+      [
+       "seed#1",
+       "probe_new_content"
+      ]
+     ]
+    ]
+   ]
+  }
+ },
+ "baseline_residual": {
+  "behaviours": 622,
+  "behaviours_with_a_unique_statement_before": 354,
+  "behaviours_still_ambiguous_after": 265,
+  "ambiguous_with_concatenated_reader_literals": 175,
+  "ambiguous_with_clean_literals": 90,
+  "goal_minimal_after": 1,
+  "mean_class_before": 2.09,
+  "mean_class_after": 2.08,
+  "largest_class_after": 38
+ },
+ "cost": {
+  "seconds": 110.6,
+  "model_calls": 0,
+  "parameters_stored": 0,
+  "network_calls_at_run_time": 0
+ },
+ "limits": [
+  "only the tarball reader changed: the same commands, resets, depths and goal judge were reused",
+  "indexed member identity is a reader choice; a tool that addresses duplicate names by position would need a separate contract",
+  "remaining ambiguous classes are measured, not resolved; no language was asked for",
+  "no prototype run preceded the criteria: F1-F5 are predictive, not confirmatory"
+ ]
+}
