@@ -1803,7 +1803,8 @@ def _with_redirect(argv: list[str], requirement: Mapping[str, Any],
     return {}
 
 
-def plan(requirement: Mapping[str, Any], tree: Mapping[str, Any]) -> dict[str, Any]:
+def plan(requirement: Mapping[str, Any], tree: Mapping[str, Any],
+         *, ask_program: bool = True) -> dict[str, Any]:
     """Ordered candidate readings of (instruction, document), every refusal named.
 
     The order is a statement about what each reading explains, not a claim about the world:
@@ -2021,11 +2022,22 @@ def plan(requirement: Mapping[str, Any], tree: Mapping[str, Any]) -> dict[str, A
             break
 
     # R5 -- the program's own order, both readings the evidence supports
-    spare = [v for v in values if v["kind"] != "path" and v["kind"] != "number"]
-    for reading in _positional_readings(values, picture, root.get("usage") or {}):
-        bound = list(reading)
+    # Two facts belong here, and both are the document's: a value already bound to a flag
+    # travels with that flag rather than being counted again as a plain argument; and the plain
+    # reading is stated by the document the request routed *to*, because a subcommand that
+    # takes its own arguments cannot be invoked without its own name (`plumb bind`).
+    claimed_values = [v for v in values if v.get("value_of")]
+    free_values = [v for v in values if not v.get("value_of")]
+    spare = [v for v in free_values if v["kind"] != "path" and v["kind"] != "number"]
+    deepest = len(nodes) - 1
+    here_options = nodes[deepest].get("options") or []
+    here_picture = positional_grammar(nodes[deepest].get("usage") or {}) or picture
+    for reading in _positional_readings(free_values, here_picture,
+                                        nodes[deepest].get("usage") or {}):
+        bound = list(reading) + [{"role": "value_slot", "option": str(v["value_of"]),
+                                  "value": str(v["value"])} for v in claimed_values]
         for extra in spare:
-            holder = next((o for o in _product_slots(root.get("options") or [])
+            holder = next((o for o in _product_slots(here_options)
                            if slot_kind(o) == "number"), None)
             if holder is not None:
                 bound.append({"role": "value_slot", "option": holder["flag"],
@@ -2033,8 +2045,8 @@ def plan(requirement: Mapping[str, Any], tree: Mapping[str, Any]) -> dict[str, A
             else:
                 bound.append({"role": "unbound", "kind": extra["kind"],
                               "value": extra["value"], "context": extra.get("context", "")})
-        add(_render(tool, [], None, bound), operation=None, bound=bound, depth=0,
-            reason="PLANNED_BY_ARGUMENT_ORDER")
+        add(_render(tool, prefix_of(deepest), None, bound), operation=None, bound=bound,
+            depth=deepest, reason="PLANNED_BY_ARGUMENT_ORDER")
 
     # A plan is only *complete* if it also accounts for every word the request used to name an
     # object. A word silently dropped is the one failure mode a caller cannot see: the plan runs,
@@ -2068,6 +2080,37 @@ def plan(requirement: Mapping[str, Any], tree: Mapping[str, Any]) -> dict[str, A
             candidate["complete"] = False
             candidate.setdefault("refusals", []).append(
                 {"reason": "NO_PLACE_IN_THIS_DOCUMENT_FOR", "words": missing[:8]})
+    # --------------------------------------------------------- asking the program, when it matters
+    # A word the request named that no page and no plan could place is a question, and the
+    # document is silent on it. The program itself is the cheapest source. If it names the
+    # request's word among the values it accepts, the word was a value of that option all
+    # along and one re-plan places it. If it does not, nothing changes and the word stays
+    # named -- which is the whole difference between asking and guessing.
+    asked: list[dict[str, Any]] = []
+    if dropped and plans and ask_program:
+        claimed: list[tuple[str, str]] = []
+        for node in [nodes[-1], nodes[0]]:
+            prefix = prefix_of(nodes.index(node))
+            for option in options_that_take_values(node):
+                choices = ask_an_option(tool, prefix, option, node)
+                if not choices:
+                    continue
+                asked.append({"option": option.get("flag"), "choices": choices})
+                lower = {c.lower() for c in choices}
+                claimed += [(str(option.get("flag")), w) for w in dropped if w.lower() in lower]
+        if claimed:
+            replanned = plan(claim_vocabulary(requirement, claimed), tree, ask_program=False)
+            if replanned["plans"]:
+                plans = replanned["plans"]
+                refusals = replanned["refusals"]
+                dropped = [w for w in dropped if w not in {c[1] for c in claimed}]
+                for candidate in plans:
+                    candidate["dropped_words"] = [
+                        w for w in dropped
+                        if w not in words_of(" ".join(map(str, candidate["argv"])))]
+                    if candidate["dropped_words"] and candidate["complete"]:
+                        candidate["complete"] = False
+
     good = [p for p in plans if p["complete"]]
     if dropped:
         refusals.append({"reason": "NO_PLACE_IN_THIS_DOCUMENT_FOR", "words": dropped[:8]})
@@ -2077,6 +2120,7 @@ def plan(requirement: Mapping[str, Any], tree: Mapping[str, Any]) -> dict[str, A
         "document_usage": (nodes[-1].get("usage") or {}).get("usage"),
         "plans": plans, "complete": bool(good), "refusals": refusals,
         "dropped_words": dropped,
+        "asked_the_program": asked,
         "reason": ("PLANNED" if good else (plans[0]["reason"] if plans
                                            else "NO_OPERATION_IN_THIS_DOCUMENT")),
     }
@@ -2229,3 +2273,70 @@ def main(argv: Sequence[str] | None = None) -> int:
 
 if __name__ == "__main__":
     sys.exit(main())
+
+
+# ------------------------------------------------------------------- asking the program itself
+
+# A program that rejects a value almost always says what it would have accepted:
+#   "plumb: no such net: brass (try one of: copper, fibre, vacuum)"
+#   "error: --level must be one of: low, medium, high"
+# The list is the program's own vocabulary, offered without being documented anywhere. It is the
+# cheapest instant knowledge there is: the environment is the source, the cost is one process,
+# and nothing is stored afterwards.
+_OFFERED_VALUES = re.compile(
+    r"(?:try one of|must be one of|valid values are|expected one of|choose from)"
+    r"\s*[:=]?\s*\[?(?P<list>[A-Za-z0-9_+.-]+(?:\s*[,|/]\s*[A-Za-z0-9_+.-]+){1,16})",
+    re.I)
+
+
+def offered_values(text: str) -> list[str]:
+    """The choices a program named when it rejected a value, in the order it named them."""
+    found = _OFFERED_VALUES.search(str(text or ""))
+    if not found:
+        return []
+    return [w.strip(" .,;'\"()[]") for w in re.split(r"\s*[,|/]\s*", found.group("list"))
+            if w.strip(" .,;'\"()[]")]
+
+
+def ask_the_program(argv: Sequence[str], *, timeout: float = 20.0) -> dict[str, Any]:
+    """Run one command and read back what the program says when it refuses.
+
+    A rejection is the program describing itself. No model, no search, no stored table: the
+    program is asked the question the request raised, and its own sentence is the answer.
+    """
+    import subprocess
+    try:
+        done = subprocess.run(list(argv), capture_output=True, text=True, timeout=timeout,
+                              stdin=subprocess.DEVNULL)
+    except (OSError, subprocess.SubprocessError) as exc:
+        return {"asked": list(argv), "answered": [], "error": f"{type(exc).__name__}: {exc}"}
+    said = ((done.stderr or "") + "\n" + (done.stdout or "")).strip()
+    return {"asked": list(argv), "exit": done.returncode, "said": said[:300],
+            "answered": offered_values(said)}
+
+
+def options_that_take_values(node: Mapping[str, Any]) -> list[Mapping[str, Any]]:
+    return [o for o in node.get("options") or [] if o.get("takes_value")]
+
+
+def ask_an_option(tool: str, prefix: Sequence[str], option: Mapping[str, Any],
+                  node: Mapping[str, Any], *, timeout: float = 20.0) -> list[str]:
+    """Ask one option which values it accepts, by offering it one no program would accept.
+
+    A program checks its options only once its arguments are complete, so the probe supplies as
+    many placeholders as the usage line declares places -- read from the document, not guessed.
+    """
+    spellings = [str(option.get("flag") or "")]
+    spellings += [str(a) for a in (option.get("aliases") or []) if str(a) not in spellings]
+    places = [p for p in (positional_grammar(node.get("usage") or {}) or [])
+              if p and p != "option"]
+    spare = ["@@unknown@@"] * (len(places) + 1)
+    for spelling in spellings:
+        if not spelling:
+            continue
+        probe = [tool] + list(prefix) + [spelling, "@@unknown@@"] + spare
+        answer = ask_the_program(probe, timeout=timeout)
+        choices = answer.get("answered") or []
+        if choices:
+            return choices
+    return []

@@ -439,3 +439,48 @@ the document rather than memorised. That is the boundary the constraints ask for
 reading; the store holds the words.** A9 showed the store closing the loop (a named gap → 5 independent
 sources → a page that places the word → a plan that runs), and A8 showed the mechanism refusing to pretend
 when the store cannot help.
+
+### A11 — asking the program: the environment answers in its own words (`/tmp/sil/bin/plumb`)
+
+A8 names what the plan does not know. A9 showed the *web* reader can resolve a name. A11 is the cheaper
+and more exact source, and it is the one the owner's idea really points at: **the program itself.**
+
+`plumb bind [OPTION]... CHANNEL LINE` documents `-n, --net=NET "the net to bind over"` and never says which
+nets exist. Nothing in this repository, in any seed class, or on the web can say. The program says it, the
+moment it is asked:
+
+```
+$ plumb bind --net brass c hello
+plumb: no such net: brass (try one of: copper, fibre, vacuum)
+```
+
+The planner offers each value-taking option a value no program would accept, reads the list back, and — if
+the request's own word is in it — treats the word as that option's value. One process per option, no model,
+nothing stored.
+
+| request | asked | result |
+|---|---|---|
+| `Bind c to the copper net as hello` | `--net` → `copper, fibre, vacuum` | `bind --net copper c` — **`copper` placed** |
+| `Bind c to the brass net as hello` | `--net` → same list | **`brass` still named, still incomplete** |
+
+The second row is the one that matters. Being *offered* a list is not a licence to use any word in it:
+`brass` is not in the list, so it stays refused. This is the distinction the whole round turns on — **asking
+is not guessing**, and the difference is visible in the result.
+
+**What was rejected, and why it is in this document.** Two attempts to go further were built and then
+deleted, because measurement said no:
+
+* *"a word the program accepted is an argument"* — `plumb` accepts **any** string in a LINE place, so
+  `bind c zzznope` exits 0. Acceptance is therefore not evidence about a word. Worse, the inference placed
+  `brass`, which the program had explicitly refused. Deleted.
+* *"a word fills a free place because the document draws one"* — the document does draw two places
+  (`CHANNEL LINE`), but the same arithmetic silently placed `brass` too when the option probe had failed.
+  Deleted.
+
+Both were caught by running the two cases side by side, which is now the standing test for this feature: a
+value the program names must be placed, and a value it refuses must not be. A9's web reader and A11's program
+reader are complementary and both are held to it — **a source's answer is used only when it distinguishes
+the two cases.**
+
+A5 is unchanged at 0.4464 mean / 0.3546 outcome / 0 refusals, so the capability was added without buying it
+from the bench result.
