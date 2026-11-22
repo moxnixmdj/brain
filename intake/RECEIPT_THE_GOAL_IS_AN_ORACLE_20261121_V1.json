@@ -1,0 +1,1365 @@
+{
+ "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+ "benchmark": {
+  "commit_checked": "depth-1 clone, 2026-11-21",
+  "items": 328,
+  "libraries": 26,
+  "name": "GitChameleon 2.0",
+  "source": "https://github.com/mrcabbage972/GitChameleonBenchmark"
+ },
+ "cohort_results": [
+  {
+   "attempts": [
+    {
+     "hypotheses": [
+      "5)"
+     ],
+     "outcomes": [
+      {
+       "body": "5)",
+       "passed": true,
+       "status": "RAN",
+       "tail": "........                                                                 [100%]\n8 passed in 0.11s"
+      }
+     ],
+     "reason": "closed positional slot with '5' from the problem",
+     "strategy": "close_expression"
+    }
+   ],
+   "body": "5)",
+   "example_id": "27",
+   "hole": "OPEN_CALL",
+   "library": "networkx",
+   "passed": true,
+   "status": "SOLVED",
+   "strategy": "close_expression"
+  },
+  {
+   "attempts": [
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_expression"
+    },
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_with_artifact_signature"
+    },
+    {
+     "hypotheses": [],
+     "reason": "hole is not empty",
+     "strategy": "construct_annotated_type"
+    },
+    {
+     "hypotheses": [],
+     "reason": "hole is not empty",
+     "strategy": "forward_call"
+    }
+   ],
+   "example_id": "29",
+   "hole": "CLOSED_EXPRESSION",
+   "last_tail": "",
+   "library": "networkx",
+   "passed": false,
+   "status": "UNSOLVED"
+  },
+  {
+   "attempts": [
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_expression"
+    },
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_with_artifact_signature"
+    },
+    {
+     "hypotheses": [],
+     "reason": "hole is not empty",
+     "strategy": "construct_annotated_type"
+    },
+    {
+     "hypotheses": [],
+     "reason": "hole is not empty",
+     "strategy": "forward_call"
+    }
+   ],
+   "example_id": "30",
+   "hole": "CLOSED_EXPRESSION",
+   "last_tail": "",
+   "library": "networkx",
+   "passed": false,
+   "status": "UNSOLVED"
+  },
+  {
+   "attempts": [
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_expression"
+    },
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_with_artifact_signature"
+    },
+    {
+     "hypotheses": [],
+     "reason": "hole is not empty",
+     "strategy": "construct_annotated_type"
+    },
+    {
+     "hypotheses": [],
+     "reason": "hole is not empty",
+     "strategy": "forward_call"
+    }
+   ],
+   "example_id": "31",
+   "hole": "CLOSED_EXPRESSION",
+   "last_tail": "",
+   "library": "networkx",
+   "passed": false,
+   "status": "UNSOLVED"
+  },
+  {
+   "attempts": [
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_expression"
+    },
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_with_artifact_signature"
+    },
+    {
+     "hypotheses": [],
+     "reason": "hole is not empty",
+     "strategy": "construct_annotated_type"
+    },
+    {
+     "hypotheses": [],
+     "reason": "hole is not empty",
+     "strategy": "forward_call"
+    }
+   ],
+   "example_id": "32",
+   "hole": "CLOSED_EXPRESSION",
+   "last_tail": "",
+   "library": "networkx",
+   "passed": false,
+   "status": "UNSOLVED"
+  },
+  {
+   "attempts": [
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_expression"
+    },
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_with_artifact_signature"
+    },
+    {
+     "hypotheses": [],
+     "reason": "annotation '' does not name a callable type",
+     "strategy": "construct_annotated_type"
+    },
+    {
+     "hypotheses": [],
+     "reason": "no return annotation to take a symbol from",
+     "strategy": "forward_call"
+    }
+   ],
+   "example_id": "33",
+   "hole": "EMPTY_RETURN",
+   "last_tail": "",
+   "library": "networkx",
+   "passed": false,
+   "status": "UNSOLVED"
+  },
+  {
+   "attempts": [
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_expression"
+    },
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_with_artifact_signature"
+    },
+    {
+     "hypotheses": [],
+     "reason": "annotation 'tuple' does not name a callable type",
+     "strategy": "construct_annotated_type"
+    },
+    {
+     "hypotheses": [],
+     "reason": "annotation 'tuple' is not a known callable form",
+     "strategy": "forward_call"
+    }
+   ],
+   "example_id": "34",
+   "hole": "EMPTY_RETURN",
+   "last_tail": "",
+   "library": "networkx",
+   "passed": false,
+   "status": "UNSOLVED"
+  },
+  {
+   "attempts": [
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_expression"
+    },
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_with_artifact_signature"
+    },
+    {
+     "hypotheses": [],
+     "reason": "hole is not empty",
+     "strategy": "construct_annotated_type"
+    },
+    {
+     "hypotheses": [],
+     "reason": "hole is not empty",
+     "strategy": "forward_call"
+    }
+   ],
+   "example_id": "35",
+   "hole": "CLOSED_EXPRESSION",
+   "last_tail": "",
+   "library": "networkx",
+   "passed": false,
+   "status": "UNSOLVED"
+  },
+  {
+   "attempts": [
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_expression"
+    },
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_with_artifact_signature"
+    },
+    {
+     "hypotheses": [
+      "sympy.ImmutableDenseMatrix(n)",
+      "ImmutableDenseMatrix(n)",
+      "ImmutableDenseMatrix(n)"
+     ],
+     "outcomes": [
+      {
+       "body": "sympy.ImmutableDenseMatrix(n)",
+       "passed": false,
+       "status": "RAN",
+       "tail": "FAILED ../../../tmp/tmpih5c5oww/test_sample_176.py::TestCustomDFT::test_dft_size\nFAILED ../../../tmp/tmpih5c5oww/test_sample_176.py::TestCustomDFT::test_dft_values\n4 failed in 0.82s"
+      },
+      {
+       "body": "ImmutableDenseMatrix(n)",
+       "passed": false,
+       "status": "RAN",
+       "tail": "FAILED ../../../tmp/tmpypyiblc2/test_sample_176.py::TestCustomDFT::test_dft_size\nFAILED ../../../tmp/tmpypyiblc2/test_sample_176.py::TestCustomDFT::test_dft_values\n4 failed in 0.55s"
+      },
+      {
+       "body": "ImmutableDenseMatrix(n)",
+       "passed": false,
+       "status": "RAN",
+       "tail": "FAILED ../../../tmp/tmpk5qyfrke/test_sample_176.py::TestCustomDFT::test_dft_size\nFAILED ../../../tmp/tmpk5qyfrke/test_sample_176.py::TestCustomDFT::test_dft_values\n4 failed in 0.57s"
+      }
+     ],
+     "reason": "annotation 'sympy.ImmutableDenseMatrix' names ImmutableDenseMatrix; 3 call forms, oracle chooses",
+     "strategy": "construct_annotated_type"
+    },
+    {
+     "hypotheses": [],
+     "reason": "annotation 'sympy.ImmutableDenseMatrix' is not a known callable form",
+     "strategy": "forward_call"
+    }
+   ],
+   "example_id": "176",
+   "hole": "EMPTY_RETURN",
+   "last_tail": "",
+   "library": "sympy",
+   "passed": false,
+   "status": "UNSOLVED"
+  },
+  {
+   "attempts": [
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_expression"
+    },
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_with_artifact_signature"
+    },
+    {
+     "hypotheses": [],
+     "reason": "annotation 'Tuple[sympy.Matrix, sympy.Expr, bool]' does not name a callable type",
+     "strategy": "construct_annotated_type"
+    },
+    {
+     "hypotheses": [],
+     "reason": "annotation 'Tuple[sympy.Matrix, sympy.Expr, bool]' is not a known callable form",
+     "strategy": "forward_call"
+    }
+   ],
+   "example_id": "177",
+   "hole": "EMPTY_RETURN",
+   "last_tail": "",
+   "library": "sympy",
+   "passed": false,
+   "status": "UNSOLVED"
+  },
+  {
+   "attempts": [
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_expression"
+    },
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_with_artifact_signature"
+    },
+    {
+     "hypotheses": [
+      "sympy.physics.quantum.trace.Tr(n)",
+      "Tr(n)",
+      "Tr(n)"
+     ],
+     "outcomes": [
+      {
+       "body": "sympy.physics.quantum.trace.Tr(n)",
+       "passed": true,
+       "status": "RAN",
+       "tail": "....                                                                     [100%]\n4 passed in 0.89s"
+      }
+     ],
+     "reason": "annotation 'sympy.physics.quantum.trace.Tr' names Tr; 3 call forms, oracle chooses",
+     "strategy": "construct_annotated_type"
+    }
+   ],
+   "body": "sympy.physics.quantum.trace.Tr(n)",
+   "example_id": "178",
+   "hole": "EMPTY_RETURN",
+   "library": "sympy",
+   "passed": true,
+   "status": "SOLVED",
+   "strategy": "construct_annotated_type"
+  },
+  {
+   "attempts": [
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_expression"
+    },
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_with_artifact_signature"
+    },
+    {
+     "hypotheses": [
+      "sympy.core.basic.preorder_traversal(expr)",
+      "preorder_traversal(expr)",
+      "preorder_traversal(expr)"
+     ],
+     "outcomes": [
+      {
+       "body": "sympy.core.basic.preorder_traversal(expr)",
+       "passed": true,
+       "status": "RAN",
+       "tail": "....                                                                     [100%]\n4 passed, 5 warnings in 0.38s"
+      }
+     ],
+     "reason": "annotation 'sympy.core.basic.preorder_traversal' names preorder_traversal; 3 call forms, oracle chooses",
+     "strategy": "construct_annotated_type"
+    }
+   ],
+   "body": "sympy.core.basic.preorder_traversal(expr)",
+   "example_id": "179",
+   "hole": "EMPTY_RETURN",
+   "library": "sympy",
+   "passed": true,
+   "status": "SOLVED",
+   "strategy": "construct_annotated_type"
+  },
+  {
+   "attempts": [
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_expression"
+    },
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_with_artifact_signature"
+    },
+    {
+     "hypotheses": [],
+     "reason": "annotation 'int' does not name a callable type",
+     "strategy": "construct_annotated_type"
+    },
+    {
+     "hypotheses": [],
+     "reason": "annotation 'int' is not a known callable form",
+     "strategy": "forward_call"
+    }
+   ],
+   "example_id": "180",
+   "hole": "EMPTY_RETURN",
+   "last_tail": "",
+   "library": "sympy",
+   "passed": false,
+   "status": "UNSOLVED"
+  },
+  {
+   "attempts": [
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_expression"
+    },
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_with_artifact_signature"
+    },
+    {
+     "hypotheses": [
+      "PinJoint(parent, child)",
+      "PinJoint(parent, child)"
+     ],
+     "outcomes": [
+      {
+       "body": "PinJoint(parent, child)",
+       "passed": false,
+       "status": "RAN",
+       "tail": "FAILED ../../../tmp/tmpc3snykx1/test_sample_181.py::TestCustomPinJoint::test_custom_pinJoint\nFAILED ../../../tmp/tmpc3snykx1/test_sample_181.py::TestCustomPinJoint::test_with_different_bodies\n2 failed, 4 warnings in 0.63s"
+      },
+      {
+       "body": "PinJoint(parent, child)",
+       "passed": false,
+       "status": "RAN",
+       "tail": "FAILED ../../../tmp/tmptzvw89dc/test_sample_181.py::TestCustomPinJoint::test_custom_pinJoint\nFAILED ../../../tmp/tmptzvw89dc/test_sample_181.py::TestCustomPinJoint::test_with_different_bodies\n2 failed, 4 warnings in 0.58s"
+      }
+     ],
+     "reason": "annotation 'sympy.physics.mechanics.PinJoint' names PinJoint; 2 call forms, oracle chooses",
+     "strategy": "construct_annotated_type"
+    },
+    {
+     "hypotheses": [],
+     "reason": "annotation 'sympy.physics.mechanics.PinJoint' is not a known callable form",
+     "strategy": "forward_call"
+    }
+   ],
+   "example_id": "181",
+   "hole": "EMPTY_RETURN",
+   "last_tail": "",
+   "library": "sympy",
+   "passed": false,
+   "status": "UNSOLVED"
+  },
+  {
+   "attempts": [
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_expression"
+    },
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_with_artifact_signature"
+    },
+    {
+     "hypotheses": [
+      "PinJoint(parent, child)",
+      "PinJoint(parent, child)"
+     ],
+     "outcomes": [
+      {
+       "body": "PinJoint(parent, child)",
+       "passed": false,
+       "status": "RAN",
+       "tail": "=========================== short test summary info ============================\nFAILED ../../../tmp/tmpighqleiq/test_sample_182.py::TestCustomPinJointConnect::test_custom_pinJoint_connect\n1 failed, 2 warnings in 0.55s"
+      },
+      {
+       "body": "PinJoint(parent, child)",
+       "passed": false,
+       "status": "RAN",
+       "tail": "=========================== short test summary info ============================\nFAILED ../../../tmp/tmpe8m63qxd/test_sample_182.py::TestCustomPinJointConnect::test_custom_pinJoint_connect\n1 failed, 2 warnings in 0.57s"
+      }
+     ],
+     "reason": "annotation 'sympy.physics.mechanics.PinJoint' names PinJoint; 2 call forms, oracle chooses",
+     "strategy": "construct_annotated_type"
+    },
+    {
+     "hypotheses": [],
+     "reason": "annotation 'sympy.physics.mechanics.PinJoint' is not a known callable form",
+     "strategy": "forward_call"
+    }
+   ],
+   "example_id": "182",
+   "hole": "EMPTY_RETURN",
+   "last_tail": "",
+   "library": "sympy",
+   "passed": false,
+   "status": "UNSOLVED"
+  },
+  {
+   "attempts": [
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_expression"
+    },
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_with_artifact_signature"
+    },
+    {
+     "hypotheses": [],
+     "reason": "annotation 'bool' does not name a callable type",
+     "strategy": "construct_annotated_type"
+    },
+    {
+     "hypotheses": [],
+     "reason": "annotation 'bool' is not a known callable form",
+     "strategy": "forward_call"
+    }
+   ],
+   "example_id": "183",
+   "hole": "EMPTY_RETURN",
+   "last_tail": "",
+   "library": "sympy",
+   "passed": false,
+   "status": "UNSOLVED"
+  },
+  {
+   "attempts": [
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_expression"
+    },
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_with_artifact_signature"
+    },
+    {
+     "hypotheses": [],
+     "reason": "annotation 'int' does not name a callable type",
+     "strategy": "construct_annotated_type"
+    },
+    {
+     "hypotheses": [],
+     "reason": "annotation 'int' is not a known callable form",
+     "strategy": "forward_call"
+    }
+   ],
+   "example_id": "184",
+   "hole": "EMPTY_RETURN",
+   "last_tail": "",
+   "library": "sympy",
+   "passed": false,
+   "status": "UNSOLVED"
+  },
+  {
+   "attempts": [
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_expression"
+    },
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_with_artifact_signature"
+    },
+    {
+     "hypotheses": [],
+     "reason": "annotation 'int' does not name a callable type",
+     "strategy": "construct_annotated_type"
+    },
+    {
+     "hypotheses": [],
+     "reason": "annotation 'int' is not a known callable form",
+     "strategy": "forward_call"
+    }
+   ],
+   "example_id": "185",
+   "hole": "EMPTY_RETURN",
+   "last_tail": "",
+   "library": "sympy",
+   "passed": false,
+   "status": "UNSOLVED"
+  },
+  {
+   "attempts": [
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_expression"
+    },
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_with_artifact_signature"
+    },
+    {
+     "hypotheses": [],
+     "reason": "annotation '' does not name a callable type",
+     "strategy": "construct_annotated_type"
+    },
+    {
+     "hypotheses": [],
+     "reason": "no return annotation to take a symbol from",
+     "strategy": "forward_call"
+    }
+   ],
+   "example_id": "186",
+   "hole": "NO_RETURN",
+   "last_tail": "",
+   "library": "sympy",
+   "passed": false,
+   "status": "UNSOLVED"
+  },
+  {
+   "attempts": [
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_expression"
+    },
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_with_artifact_signature"
+    },
+    {
+     "hypotheses": [
+      "sympy.Expr(eq)",
+      "Expr(eq)",
+      "Expr(eq)"
+     ],
+     "outcomes": [
+      {
+       "body": "sympy.Expr(eq)",
+       "passed": false,
+       "status": "RAN",
+       "tail": "FAILED ../../../tmp/tmpdysuusps/test_sample_187.py::TestCustomFunction::test_numeric_equations\nFAILED ../../../tmp/tmpdysuusps/test_sample_187.py::TestCustomFunction::test_symbolic_equations\n8 failed in 0.63s"
+      },
+      {
+       "body": "Expr(eq)",
+       "passed": false,
+       "status": "RAN",
+       "tail": "FAILED ../../../tmp/tmpasxmc_ln/test_sample_187.py::TestCustomFunction::test_numeric_equations\nFAILED ../../../tmp/tmpasxmc_ln/test_sample_187.py::TestCustomFunction::test_symbolic_equations\n8 failed in 0.47s"
+      },
+      {
+       "body": "Expr(eq)",
+       "passed": false,
+       "status": "RAN",
+       "tail": "FAILED ../../../tmp/tmpb6wfo1zk/test_sample_187.py::TestCustomFunction::test_numeric_equations\nFAILED ../../../tmp/tmpb6wfo1zk/test_sample_187.py::TestCustomFunction::test_symbolic_equations\n8 failed in 0.67s"
+      }
+     ],
+     "reason": "annotation 'sympy.Expr' names Expr; 3 call forms, oracle chooses",
+     "strategy": "construct_annotated_type"
+    },
+    {
+     "hypotheses": [],
+     "reason": "annotation 'sympy.Expr' is not a known callable form",
+     "strategy": "forward_call"
+    }
+   ],
+   "example_id": "187",
+   "hole": "EMPTY_RETURN",
+   "last_tail": "",
+   "library": "sympy",
+   "passed": false,
+   "status": "UNSOLVED"
+  },
+  {
+   "attempts": [
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_expression"
+    },
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_with_artifact_signature"
+    },
+    {
+     "hypotheses": [],
+     "reason": "annotation 'list[int]' does not name a callable type",
+     "strategy": "construct_annotated_type"
+    },
+    {
+     "hypotheses": [],
+     "reason": "annotation 'list[int]' is not a known callable form",
+     "strategy": "forward_call"
+    }
+   ],
+   "example_id": "188",
+   "hole": "EMPTY_RETURN",
+   "last_tail": "",
+   "library": "sympy",
+   "passed": false,
+   "status": "UNSOLVED"
+  },
+  {
+   "attempts": [
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_expression"
+    },
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_with_artifact_signature"
+    },
+    {
+     "hypotheses": [],
+     "reason": "annotation '' does not name a callable type",
+     "strategy": "construct_annotated_type"
+    },
+    {
+     "hypotheses": [],
+     "reason": "no return annotation to take a symbol from",
+     "strategy": "forward_call"
+    }
+   ],
+   "example_id": "189",
+   "hole": "NO_RETURN",
+   "last_tail": "",
+   "library": "sympy",
+   "passed": false,
+   "status": "UNSOLVED"
+  },
+  {
+   "attempts": [
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_expression"
+    },
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_with_artifact_signature"
+    },
+    {
+     "hypotheses": [],
+     "reason": "annotation 'tuple[sympy.physics.mechanics.RigidBody, sympy.physics.mechanics.Particle]' does not name a callable type",
+     "strategy": "construct_annotated_type"
+    },
+    {
+     "hypotheses": [],
+     "reason": "annotation 'tuple[sympy.physics.mechanics.RigidBody, sympy.physics.mechanics.Particle]' is not a known callable form",
+     "strategy": "forward_call"
+    }
+   ],
+   "example_id": "190",
+   "hole": "EMPTY_RETURN",
+   "last_tail": "",
+   "library": "sympy",
+   "passed": false,
+   "status": "UNSOLVED"
+  },
+  {
+   "attempts": [
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_expression"
+    },
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_with_artifact_signature"
+    },
+    {
+     "hypotheses": [
+      "set[Symbol(index)",
+      "set[Symbol(index)"
+     ],
+     "outcomes": [
+      {
+       "body": "set[Symbol(index)",
+       "passed": false,
+       "status": "RAN",
+       "tail": "ERROR ../../../tmp/tmp3phrikb1/test_sample_191.py\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.26s"
+      },
+      {
+       "body": "set[Symbol(index)",
+       "passed": false,
+       "status": "RAN",
+       "tail": "ERROR ../../../tmp/tmpvztr4mtz/test_sample_191.py\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.28s"
+      }
+     ],
+     "reason": "annotation 'set[Symbol]' names set[Symbol; 2 call forms, oracle chooses",
+     "strategy": "construct_annotated_type"
+    },
+    {
+     "hypotheses": [],
+     "reason": "annotation 'set[Symbol]' is not a known callable form",
+     "strategy": "forward_call"
+    }
+   ],
+   "example_id": "191",
+   "hole": "EMPTY_RETURN",
+   "last_tail": "",
+   "library": "sympy",
+   "passed": false,
+   "status": "UNSOLVED"
+  },
+  {
+   "attempts": [
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_expression"
+    },
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_with_artifact_signature"
+    },
+    {
+     "hypotheses": [],
+     "reason": "annotation 'list[int]' does not name a callable type",
+     "strategy": "construct_annotated_type"
+    },
+    {
+     "hypotheses": [],
+     "reason": "annotation 'list[int]' is not a known callable form",
+     "strategy": "forward_call"
+    }
+   ],
+   "example_id": "192",
+   "hole": "EMPTY_RETURN",
+   "last_tail": "",
+   "library": "sympy",
+   "passed": false,
+   "status": "UNSOLVED"
+  },
+  {
+   "attempts": [
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_expression"
+    },
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_with_artifact_signature"
+    },
+    {
+     "hypotheses": [],
+     "reason": "annotation 'list[int]' does not name a callable type",
+     "strategy": "construct_annotated_type"
+    },
+    {
+     "hypotheses": [],
+     "reason": "annotation 'list[int]' is not a known callable form",
+     "strategy": "forward_call"
+    }
+   ],
+   "example_id": "193",
+   "hole": "EMPTY_RETURN",
+   "last_tail": "",
+   "library": "sympy",
+   "passed": false,
+   "status": "UNSOLVED"
+  },
+  {
+   "attempts": [
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_expression"
+    },
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_with_artifact_signature"
+    },
+    {
+     "hypotheses": [],
+     "reason": "annotation 'list[int]' does not name a callable type",
+     "strategy": "construct_annotated_type"
+    },
+    {
+     "hypotheses": [],
+     "reason": "annotation 'list[int]' is not a known callable form",
+     "strategy": "forward_call"
+    }
+   ],
+   "example_id": "194",
+   "hole": "EMPTY_RETURN",
+   "last_tail": "",
+   "library": "sympy",
+   "passed": false,
+   "status": "UNSOLVED"
+  },
+  {
+   "attempts": [
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_expression"
+    },
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_with_artifact_signature"
+    },
+    {
+     "hypotheses": [],
+     "reason": "annotation 'int' does not name a callable type",
+     "strategy": "construct_annotated_type"
+    },
+    {
+     "hypotheses": [],
+     "reason": "annotation 'int' is not a known callable form",
+     "strategy": "forward_call"
+    }
+   ],
+   "example_id": "195",
+   "hole": "EMPTY_RETURN",
+   "last_tail": "",
+   "library": "sympy",
+   "passed": false,
+   "status": "UNSOLVED"
+  },
+  {
+   "attempts": [
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_expression"
+    },
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_with_artifact_signature"
+    },
+    {
+     "hypotheses": [],
+     "reason": "annotation 'int' does not name a callable type",
+     "strategy": "construct_annotated_type"
+    },
+    {
+     "hypotheses": [],
+     "reason": "annotation 'int' is not a known callable form",
+     "strategy": "forward_call"
+    }
+   ],
+   "example_id": "196",
+   "hole": "EMPTY_RETURN",
+   "last_tail": "",
+   "library": "sympy",
+   "passed": false,
+   "status": "UNSOLVED"
+  },
+  {
+   "attempts": [
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_expression"
+    },
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_with_artifact_signature"
+    },
+    {
+     "hypotheses": [],
+     "reason": "annotation 'bool' does not name a callable type",
+     "strategy": "construct_annotated_type"
+    },
+    {
+     "hypotheses": [],
+     "reason": "annotation 'bool' is not a known callable form",
+     "strategy": "forward_call"
+    }
+   ],
+   "example_id": "197",
+   "hole": "EMPTY_RETURN",
+   "last_tail": "",
+   "library": "sympy",
+   "passed": false,
+   "status": "UNSOLVED"
+  },
+  {
+   "attempts": [
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_expression"
+    },
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_with_artifact_signature"
+    },
+    {
+     "hypotheses": [],
+     "reason": "annotation 'bool' does not name a callable type",
+     "strategy": "construct_annotated_type"
+    },
+    {
+     "hypotheses": [],
+     "reason": "annotation 'bool' is not a known callable form",
+     "strategy": "forward_call"
+    }
+   ],
+   "example_id": "198",
+   "hole": "EMPTY_RETURN",
+   "last_tail": "",
+   "library": "sympy",
+   "passed": false,
+   "status": "UNSOLVED"
+  },
+  {
+   "attempts": [
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_expression"
+    },
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_with_artifact_signature"
+    },
+    {
+     "hypotheses": [],
+     "reason": "annotation 'bool' does not name a callable type",
+     "strategy": "construct_annotated_type"
+    },
+    {
+     "hypotheses": [],
+     "reason": "annotation 'bool' is not a known callable form",
+     "strategy": "forward_call"
+    }
+   ],
+   "example_id": "199",
+   "hole": "EMPTY_RETURN",
+   "last_tail": "",
+   "library": "sympy",
+   "passed": false,
+   "status": "UNSOLVED"
+  },
+  {
+   "attempts": [
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_expression"
+    },
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_with_artifact_signature"
+    },
+    {
+     "hypotheses": [],
+     "reason": "annotation '' does not name a callable type",
+     "strategy": "construct_annotated_type"
+    },
+    {
+     "hypotheses": [],
+     "reason": "no return annotation to take a symbol from",
+     "strategy": "forward_call"
+    }
+   ],
+   "example_id": "200",
+   "hole": "NO_RETURN",
+   "last_tail": "",
+   "library": "sympy",
+   "passed": false,
+   "status": "UNSOLVED"
+  },
+  {
+   "attempts": [
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_expression"
+    },
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_with_artifact_signature"
+    },
+    {
+     "hypotheses": [],
+     "reason": "annotation 'int' does not name a callable type",
+     "strategy": "construct_annotated_type"
+    },
+    {
+     "hypotheses": [],
+     "reason": "annotation 'int' is not a known callable form",
+     "strategy": "forward_call"
+    }
+   ],
+   "example_id": "201",
+   "hole": "EMPTY_RETURN",
+   "last_tail": "",
+   "library": "sympy",
+   "passed": false,
+   "status": "UNSOLVED"
+  },
+  {
+   "attempts": [
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_expression"
+    },
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_with_artifact_signature"
+    },
+    {
+     "hypotheses": [],
+     "reason": "annotation 'int' does not name a callable type",
+     "strategy": "construct_annotated_type"
+    },
+    {
+     "hypotheses": [],
+     "reason": "annotation 'int' is not a known callable form",
+     "strategy": "forward_call"
+    }
+   ],
+   "example_id": "202",
+   "hole": "EMPTY_RETURN",
+   "last_tail": "",
+   "library": "sympy",
+   "passed": false,
+   "status": "UNSOLVED"
+  },
+  {
+   "attempts": [
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_expression"
+    },
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_with_artifact_signature"
+    },
+    {
+     "hypotheses": [],
+     "reason": "annotation 'int' does not name a callable type",
+     "strategy": "construct_annotated_type"
+    },
+    {
+     "hypotheses": [],
+     "reason": "annotation 'int' is not a known callable form",
+     "strategy": "forward_call"
+    }
+   ],
+   "example_id": "203",
+   "hole": "EMPTY_RETURN",
+   "last_tail": "",
+   "library": "sympy",
+   "passed": false,
+   "status": "UNSOLVED"
+  },
+  {
+   "attempts": [
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_expression"
+    },
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_with_artifact_signature"
+    },
+    {
+     "hypotheses": [],
+     "reason": "annotation '' does not name a callable type",
+     "strategy": "construct_annotated_type"
+    },
+    {
+     "hypotheses": [],
+     "reason": "no return annotation to take a symbol from",
+     "strategy": "forward_call"
+    }
+   ],
+   "example_id": "204",
+   "hole": "EMPTY_RETURN",
+   "last_tail": "",
+   "library": "sympy",
+   "passed": false,
+   "status": "UNSOLVED"
+  },
+  {
+   "attempts": [
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_expression"
+    },
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_with_artifact_signature"
+    },
+    {
+     "hypotheses": [],
+     "reason": "annotation 'int' does not name a callable type",
+     "strategy": "construct_annotated_type"
+    },
+    {
+     "hypotheses": [],
+     "reason": "annotation 'int' is not a known callable form",
+     "strategy": "forward_call"
+    }
+   ],
+   "example_id": "205",
+   "hole": "EMPTY_RETURN",
+   "last_tail": "",
+   "library": "sympy",
+   "passed": false,
+   "status": "UNSOLVED"
+  },
+  {
+   "attempts": [
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_expression"
+    },
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_with_artifact_signature"
+    },
+    {
+     "hypotheses": [],
+     "reason": "annotation 'int' does not name a callable type",
+     "strategy": "construct_annotated_type"
+    },
+    {
+     "hypotheses": [],
+     "reason": "annotation 'int' is not a known callable form",
+     "strategy": "forward_call"
+    }
+   ],
+   "example_id": "206",
+   "hole": "EMPTY_RETURN",
+   "last_tail": "",
+   "library": "sympy",
+   "passed": false,
+   "status": "UNSOLVED"
+  },
+  {
+   "attempts": [
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_expression"
+    },
+    {
+     "hypotheses": [],
+     "reason": "not an open call",
+     "strategy": "close_with_artifact_signature"
+    },
+    {
+     "hypotheses": [],
+     "reason": "annotation 'int' does not name a callable type",
+     "strategy": "construct_annotated_type"
+    },
+    {
+     "hypotheses": [],
+     "reason": "annotation 'int' is not a known callable form",
+     "strategy": "forward_call"
+    }
+   ],
+   "example_id": "207",
+   "hole": "EMPTY_RETURN",
+   "last_tail": "",
+   "library": "sympy",
+   "passed": false,
+   "status": "UNSOLVED"
+  }
+ ],
+ "contradiction_resolution": {
+  "new_interface": "a goal is given as an oracle; the system must find a call the oracle accepts",
+  "reason": "in every real benchmark the goal already is an executable check; writing the predicate by hand was the engineer supplying the answer",
+  "removed": "hand-written GOALS dictionary mapping goal words to predicates"
+ },
+ "date": "2026-11-21",
+ "limited_bodies_observed": [
+  "list(G.edges)[0]",
+  "bellman_ford_predecessor_and_distance(G, source)",
+  "PinJoint('pin', parent, child, parent_point=parent.frame.x, child_point=-child.frame.x)"
+ ],
+ "model_calls": 0,
+ "next_bottleneck": "synthesis over the artifact's own surface with the test as oracle; a description-to-call knowledge base is forbidden by the zero-knowledge-house constraint",
+ "oracle_validation": {
+  "cohort": "no-dependency sympy+networkx",
+  "items": 40,
+  "note": "solution read only to validate the oracle, never while scoring",
+  "oracle_discriminates": 37,
+  "reference_solution_fails_on_current_lib": 3
+ },
+ "result": {
+  "by_strategy": {
+   "close_expression": 1,
+   "construct_annotated_type": 2
+  },
+  "cohort": 40,
+  "frontier_on_full_benchmark": {
+   "claude4sonnet_rag": "59.4%",
+   "o1_greedy": "51.2%",
+   "self_debugging_bonus": "+10-20pp"
+  },
+  "rate": "3/40",
+  "solved": 3
+ },
+ "schema": "BRAIN_RECEIPT_THE_GOAL_IS_AN_ORACLE_20261121_V1",
+ "truth": {
+  "achieved": false
+ },
+ "why_it_stops": {
+  "1_stub_describes_instead_of_declaring": "annotations naming list/tuple/int carry no symbol to construct",
+  "2_identical_prose_different_answers": "items 29 and 30 read identically and require extrema_bounding(G,usebounds=True) and extrema_bounding(G,'diameter') -- the call is not a function of the prose, so no set of syntactic strategies can separate them"
+ }
+}
