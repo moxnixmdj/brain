@@ -1,0 +1,1591 @@
+{
+ "schema": "BRAIN_THE_DEMAND_IS_LEARNED_FROM_THE_RUN_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "date": "2026-11-21",
+ "mode": "LEARN_THE_DEMAND_FROM_THE_RUN",
+ "declared_before_the_runs": {
+  "L1": "candidate predicates are computed from probed guard values and pass/fail runs; the human edit is used only as a control on the judge",
+  "L2": "every counted row has a real failing test and an accepted control on its project's own suite",
+  "L3": "at most 4 compiled predicates are judged per row; each is selected by a pass/fail separation score, not by trying it against the hidden suite",
+  "L4": "at least one row missed by the fixed is-not-None engine becomes VERIFIED with exact witness footprint and 0 broken tests",
+  "L5": "zero model calls, zero stored parameters, zero network calls at run time"
+ },
+ "verdict": {
+  "L1_inputs_only": true,
+  "L2_real_witness_and_control": 43,
+  "L3_candidate_cap": true,
+  "L4_new_repair": 0,
+  "L5_zeros": true
+ },
+ "all_criteria_met": false,
+ "rows": [
+  {
+   "repo": "attrs",
+   "commit": "1c962d15a743a3c18401f0c788f0fd0cb3d9acf8",
+   "test": "tests/test_annotations.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_annotations.py::TestAnnotations::test_catches_basic_type_conflict"
+   ],
+   "baseline_verdicts": 47,
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_annotations.py::TestAnnotations::test_catches_basic_type_conflict"
+    ]
+   },
+   "guard_sites": 89,
+   "observations": 7752,
+   "learned": [
+    {
+     "line": 189,
+     "text": "converter",
+     "feature": "truthy",
+     "polarity": false,
+     "gain": 4,
+     "pass_mismatches": 29,
+     "observed_value": "None"
+    }
+   ],
+   "stage": "NO_LEARNED_REPAIR",
+   "attempts": 1,
+   "seconds": 8.88
+  },
+  {
+   "repo": "attrs",
+   "commit": "3b0378dd66d33ebddb52be85b8c4aac6a914b1a2",
+   "test": "tests/test_hooks.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_hooks.py::TestTransformHook::test_hook_generator"
+   ],
+   "baseline_verdicts": 14,
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_hooks.py::TestTransformHook::test_hook_generator"
+    ]
+   },
+   "guard_sites": 89,
+   "observations": 6102,
+   "learned": [],
+   "stage": "NO_SEPARATING_RULE",
+   "attempts": 0,
+   "seconds": 6.56
+  },
+  {
+   "repo": "attrs",
+   "commit": "a08bfb90ef5104675d96b427858063a638774484",
+   "test": "tests/test_packaging.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_packaging.py::TestLegacyMetadataHack::test_version[attr]",
+    "tests/test_packaging.py::TestLegacyMetadataHack::test_version[attrs]"
+   ],
+   "baseline_verdicts": 22,
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_packaging.py::TestLegacyMetadataHack::test_version[attr]",
+     "tests/test_packaging.py::TestLegacyMetadataHack::test_version[attrs]"
+    ]
+   },
+   "guard_sites": 0,
+   "observations": 0,
+   "learned": [],
+   "stage": "NO_SEPARATING_RULE",
+   "attempts": 0,
+   "seconds": 5.67
+  },
+  {
+   "repo": "attrs",
+   "commit": "a572c3a4c558a8b9b48cf989fcd956ab1a279439",
+   "test": "tests/test_setattr.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_setattr.py::TestSetAttr::test_frozen_on_setattr_nops[nop1]"
+   ],
+   "baseline_verdicts": 39,
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_setattr.py::TestSetAttr::test_frozen_on_setattr_nops[nop1]"
+    ]
+   },
+   "guard_sites": 95,
+   "observations": 8905,
+   "learned": [
+    {
+     "line": 722,
+     "text": "props.is_frozen",
+     "feature": "falsey",
+     "polarity": false,
+     "gain": 29,
+     "pass_mismatches": 3,
+     "observed_value": "True"
+    },
+    {
+     "line": 1527,
+     "text": "props.is_hashable",
+     "feature": "falsey",
+     "polarity": false,
+     "gain": 29,
+     "pass_mismatches": 3,
+     "observed_value": "True"
+    },
+    {
+     "line": 1550,
+     "text": "frozen",
+     "feature": "falsey",
+     "polarity": false,
+     "gain": 29,
+     "pass_mismatches": 3,
+     "observed_value": "True"
+    },
+    {
+     "line": 2010,
+     "text": "frozen",
+     "feature": "falsey",
+     "polarity": false,
+     "gain": 27,
+     "pass_mismatches": 3,
+     "observed_value": "True"
+    }
+   ],
+   "stage": "NO_LEARNED_REPAIR",
+   "attempts": 4,
+   "seconds": 14.48
+  },
+  {
+   "repo": "click",
+   "commit": "1b0e19f50595a07957bd96a600c37cd44b7e0cc3",
+   "test": "tests/test_options.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_options.py::test_missing_envvar"
+   ],
+   "baseline_verdicts": 144,
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_options.py::test_missing_envvar"
+    ]
+   },
+   "guard_sites": 141,
+   "observations": 12148,
+   "learned": [
+    {
+     "line": 2679,
+     "text": "self.show_envvar",
+     "feature": "falsey",
+     "polarity": false,
+     "gain": 6,
+     "pass_mismatches": 0,
+     "observed_value": "False"
+    },
+    {
+     "line": 2351,
+     "text": "self.required",
+     "feature": "falsey",
+     "polarity": false,
+     "gain": 69,
+     "pass_mismatches": 4,
+     "observed_value": "False"
+    },
+    {
+     "line": 2919,
+     "text": "self.is_flag",
+     "feature": "truthy",
+     "polarity": false,
+     "gain": 60,
+     "pass_mismatches": 40,
+     "observed_value": "True"
+    },
+    {
+     "line": 2423,
+     "text": "self.expose_value",
+     "feature": "truthy",
+     "polarity": false,
+     "gain": 58,
+     "pass_mismatches": 4,
+     "observed_value": "False"
+    }
+   ],
+   "stage": "NO_LEARNED_REPAIR",
+   "attempts": 4,
+   "seconds": 16.02
+  },
+  {
+   "repo": "click",
+   "commit": "3f91d2154ebc47651f0cd9798250a03821473521",
+   "test": "tests/test_types.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_types.py::test_path_type_with_esc_sequence"
+   ],
+   "baseline_verdicts": 39,
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_types.py::test_path_type_with_esc_sequence"
+    ]
+   },
+   "guard_sites": 27,
+   "observations": 192,
+   "learned": [
+    {
+     "line": 822,
+     "text": "self.dir_okay",
+     "feature": "truthy",
+     "polarity": false,
+     "gain": 6,
+     "pass_mismatches": 0,
+     "observed_value": "False"
+    },
+    {
+     "line": 893,
+     "text": "self.dir_okay",
+     "feature": "truthy",
+     "polarity": false,
+     "gain": 2,
+     "pass_mismatches": 0,
+     "observed_value": "False"
+    },
+    {
+     "line": 865,
+     "text": "self.resolve_path",
+     "feature": "falsey",
+     "polarity": false,
+     "gain": 5,
+     "pass_mismatches": 1,
+     "observed_value": "True"
+    }
+   ],
+   "stage": "NO_LEARNED_REPAIR",
+   "attempts": 3,
+   "seconds": 13.04
+  },
+  {
+   "repo": "click",
+   "commit": "40830087dd9e9023dbcf75befe0ca9056127a064",
+   "test": "tests/test_options.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_options.py::test_missing_required_flag"
+   ],
+   "baseline_verdicts": 109,
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_options.py::test_missing_required_flag"
+    ]
+   },
+   "guard_sites": 132,
+   "observations": 10596,
+   "learned": [
+    {
+     "line": 2292,
+     "text": "self.multiple",
+     "feature": "falsey",
+     "polarity": true,
+     "gain": 1,
+     "pass_mismatches": 0,
+     "observed_value": "False"
+    },
+    {
+     "line": 2300,
+     "text": "self.required",
+     "feature": "falsey",
+     "polarity": false,
+     "gain": 53,
+     "pass_mismatches": 3,
+     "observed_value": "False"
+    },
+    {
+     "line": 1379,
+     "text": "args",
+     "feature": "nonempty_collection",
+     "polarity": false,
+     "gain": 45,
+     "pass_mismatches": 12,
+     "observed_value": "[]"
+    },
+    {
+     "line": 2210,
+     "text": "call",
+     "feature": "falsey",
+     "polarity": false,
+     "gain": 38,
+     "pass_mismatches": 44,
+     "observed_value": "True"
+    }
+   ],
+   "stage": "NO_LEARNED_REPAIR",
+   "attempts": 4,
+   "seconds": 18.67
+  },
+  {
+   "repo": "click",
+   "commit": "42ee8a1f6011e0f4a8a19c34a545f3eb7ae978fa",
+   "test": "tests/test_formatting.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_formatting.py::test_formatting_with_options_metavar_empty"
+   ],
+   "baseline_verdicts": 16,
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_formatting.py::test_formatting_with_options_metavar_empty"
+    ]
+   },
+   "guard_sites": 116,
+   "observations": 1768,
+   "learned": [
+    {
+     "line": 2579,
+     "text": "decls",
+     "feature": "is_tuple",
+     "polarity": false,
+     "gain": 9,
+     "pass_mismatches": 0,
+     "observed_value": "['var']"
+    },
+    {
+     "line": 1221,
+     "text": "self.help",
+     "feature": "is_str",
+     "polarity": false,
+     "gain": 5,
+     "pass_mismatches": 4,
+     "observed_value": "None"
+    },
+    {
+     "line": 1162,
+     "text": "value",
+     "feature": "falsey",
+     "polarity": false,
+     "gain": 5,
+     "pass_mismatches": 8,
+     "observed_value": "True"
+    },
+    {
+     "line": 1253,
+     "text": "args",
+     "feature": "empty_collection",
+     "polarity": false,
+     "gain": 5,
+     "pass_mismatches": 10,
+     "observed_value": "['--help']"
+    }
+   ],
+   "stage": "NO_LEARNED_REPAIR",
+   "attempts": 4,
+   "seconds": 17.19
+  },
+  {
+   "repo": "click",
+   "commit": "4a337ea913515e8e98e425d70701ea4fb091830e",
+   "test": "tests/test_commands.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_commands.py::test_aliased_command_canonical_name"
+   ],
+   "baseline_verdicts": 14,
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_commands.py::test_aliased_command_canonical_name"
+    ]
+   },
+   "guard_sites": 100,
+   "observations": 1841,
+   "learned": [
+    {
+     "line": 982,
+     "text": "value",
+     "feature": "falsey",
+     "polarity": false,
+     "gain": 10,
+     "pass_mismatches": 2,
+     "observed_value": "False"
+    },
+    {
+     "line": 1083,
+     "text": "args",
+     "feature": "empty_collection",
+     "polarity": false,
+     "gain": 9,
+     "pass_mismatches": 1,
+     "observed_value": "['pu', '--help']"
+    },
+    {
+     "line": 1073,
+     "text": "args",
+     "feature": "empty_collection",
+     "polarity": false,
+     "gain": 9,
+     "pass_mismatches": 4,
+     "observed_value": "['pu', '--help']"
+    },
+    {
+     "line": 1676,
+     "text": "self.expose_value",
+     "feature": "truthy",
+     "polarity": false,
+     "gain": 3,
+     "pass_mismatches": 7,
+     "observed_value": "False"
+    }
+   ],
+   "stage": "NO_LEARNED_REPAIR",
+   "attempts": 4,
+   "seconds": 15.49
+  },
+  {
+   "repo": "click",
+   "commit": "bf1e8be90c46428f8bf8b45f295af80cfaf2e188",
+   "test": "tests/test_defaults.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_defaults.py::test_flag_default_map"
+   ],
+   "baseline_verdicts": 5,
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_defaults.py::test_flag_default_map"
+    ]
+   },
+   "guard_sites": 133,
+   "observations": 1173,
+   "learned": [
+    {
+     "line": 1406,
+     "text": "args",
+     "feature": "empty_collection",
+     "polarity": false,
+     "gain": 4,
+     "pass_mismatches": 0,
+     "observed_value": "['foo']"
+    },
+    {
+     "line": 1295,
+     "text": "value",
+     "feature": "falsey",
+     "polarity": false,
+     "gain": 4,
+     "pass_mismatches": 0,
+     "observed_value": "False"
+    },
+    {
+     "line": 2257,
+     "text": "call",
+     "feature": "truthy",
+     "polarity": false,
+     "gain": 4,
+     "pass_mismatches": 0,
+     "observed_value": "True"
+    },
+    {
+     "line": 2397,
+     "text": "self.expose_value",
+     "feature": "truthy",
+     "polarity": false,
+     "gain": 4,
+     "pass_mismatches": 0,
+     "observed_value": "False"
+    }
+   ],
+   "stage": "NO_LEARNED_REPAIR",
+   "attempts": 4,
+   "seconds": 17.38
+  },
+  {
+   "repo": "click",
+   "commit": "d340b0c1202284a1b9d0ca892549208527d586ce",
+   "test": "tests/test_options.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_options.py::test_show_default_with_empty_string[non-string-comparable-object]"
+   ],
+   "baseline_verdicts": 552,
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_options.py::test_show_default_with_empty_string[non-string-comparable-object]"
+    ]
+   },
+   "guard_sites": 145,
+   "observations": 50084,
+   "learned": [
+    {
+     "line": 2793,
+     "text": "is_flag",
+     "feature": "is_bool",
+     "polarity": false,
+     "gain": 417,
+     "pass_mismatches": 41,
+     "observed_value": "None"
+    },
+    {
+     "line": 2857,
+     "text": "self.is_bool_flag",
+     "feature": "truthy",
+     "polarity": false,
+     "gain": 410,
+     "pass_mismatches": 46,
+     "observed_value": "False"
+    },
+    {
+     "line": 2860,
+     "text": "self.is_bool_flag",
+     "feature": "truthy",
+     "polarity": false,
+     "gain": 410,
+     "pass_mismatches": 46,
+     "observed_value": "False"
+    },
+    {
+     "line": 2818,
+     "text": "self.is_bool_flag",
+     "feature": "truthy",
+     "polarity": false,
+     "gain": 410,
+     "pass_mismatches": 48,
+     "observed_value": "False"
+    }
+   ],
+   "stage": "NO_LEARNED_REPAIR",
+   "attempts": 4,
+   "seconds": 22.58
+  },
+  {
+   "repo": "httpx",
+   "commit": "e63b6594f2863b7c8274eb0991ebc6cad63661f7",
+   "test": "tests/test_urlparse.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_urlparse.py::test_urlparse_ipv4_like_host"
+   ],
+   "baseline_verdicts": 36,
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_urlparse.py::test_urlparse_ipv4_like_host"
+    ]
+   },
+   "guard_sites": 8,
+   "observations": 124,
+   "learned": [
+    {
+     "line": 287,
+     "text": "host",
+     "feature": "empty_str",
+     "polarity": false,
+     "gain": 4,
+     "pass_mismatches": 25,
+     "observed_value": "'023b76x43144'"
+    }
+   ],
+   "stage": "NO_LEARNED_REPAIR",
+   "attempts": 1,
+   "seconds": 10.51,
+   "rerun_after_dependency_fix": "httpcore and h11 installed; parent suite then produced real verdicts"
+  },
+  {
+   "repo": "jinja",
+   "commit": "2eb4542cbab101910d220229a8f09c94f76c19d1",
+   "test": "tests/test_filters.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_filters.py::TestFilter::test_int[1e10000-0]"
+   ],
+   "baseline_verdicts": 132,
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_filters.py::TestFilter::test_int[1e10000-0]"
+    ]
+   },
+   "guard_sites": 28,
+   "observations": 169,
+   "learned": [],
+   "stage": "NO_SEPARATING_RULE",
+   "attempts": 0,
+   "seconds": 7.83
+  },
+  {
+   "repo": "jinja",
+   "commit": "d05bd3858c3f4990e91201dae058147caf317462",
+   "test": "tests/test_regression.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_regression.py::TestBug::test_pass_context_with_select"
+   ],
+   "baseline_verdicts": 53,
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_regression.py::TestBug::test_pass_context_with_select"
+    ]
+   },
+   "guard_sites": 28,
+   "observations": 6,
+   "learned": [],
+   "stage": "NO_SEPARATING_RULE",
+   "attempts": 0,
+   "seconds": 7.28
+  },
+  {
+   "repo": "more-itertools",
+   "commit": "62411c1618493f94b16901746c34e72ad415061e",
+   "test": "tests/test_more.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_more.py::SpyTests::test_immutable"
+   ],
+   "baseline_verdicts": 323,
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_more.py::SpyTests::test_immutable"
+    ]
+   },
+   "guard_sites": 20,
+   "observations": 31787,
+   "learned": [],
+   "stage": "NO_SEPARATING_RULE",
+   "attempts": 0,
+   "seconds": 18.52
+  },
+  {
+   "repo": "more-itertools",
+   "commit": "71e070b35d8c136484e91189719c2a4eccd36fc3",
+   "test": "tests/test_more.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_more.py::AllUniqueTests::test_falsey_key_is_honoured"
+   ],
+   "baseline_verdicts": 621,
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_more.py::AllUniqueTests::test_falsey_key_is_honoured"
+    ]
+   },
+   "guard_sites": 51,
+   "observations": 115807,
+   "learned": [],
+   "stage": "NO_SEPARATING_RULE",
+   "attempts": 0,
+   "seconds": 53.46
+  },
+  {
+   "repo": "more-itertools",
+   "commit": "b0aa91efbb452eeb8ffa0447047519c6e84d5292",
+   "test": "tests/test_recipes.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_recipes.py::RandomProductTests::test_list_with_repeat"
+   ],
+   "baseline_verdicts": 137,
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_recipes.py::RandomProductTests::test_list_with_repeat"
+    ]
+   },
+   "guard_sites": 2,
+   "observations": 88,
+   "learned": [],
+   "stage": "NO_SEPARATING_RULE",
+   "attempts": 0,
+   "seconds": 41.92
+  },
+  {
+   "repo": "more-itertools",
+   "commit": "cca32949f12d473fd823e37a5530c30d2faa1332",
+   "test": "tests/test_more.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_more.py::LastTests::test_reversed_is_none"
+   ],
+   "baseline_verdicts": 544,
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_more.py::LastTests::test_reversed_is_none"
+    ]
+   },
+   "guard_sites": 46,
+   "observations": 26946,
+   "learned": [],
+   "stage": "NO_SEPARATING_RULE",
+   "attempts": 0,
+   "seconds": 29.39
+  },
+  {
+   "repo": "more-itertools",
+   "commit": "d3665d6ba2eec8cb95e9744c2085fb40af1e962b",
+   "test": "tests/test_more.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_more.py::SlicedTests::test_numpy_like_array"
+   ],
+   "baseline_verdicts": 315,
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_more.py::SlicedTests::test_numpy_like_array"
+    ]
+   },
+   "guard_sites": 18,
+   "observations": 22527,
+   "learned": [],
+   "stage": "NO_SEPARATING_RULE",
+   "attempts": 0,
+   "seconds": 18.54
+  },
+  {
+   "repo": "packaging",
+   "commit": "0625596e502163179b9a82796aee82c178efc16d",
+   "test": "tests/test_utils.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_utils.py::test_parse_wheel_invalid_filename[foo-1.0-1\\n-py3-none-any.whl]",
+    "tests/test_utils.py::test_parse_wheel_invalid_filename[foo-1.0-1\\nabc-py3-none-any.whl]"
+   ],
+   "baseline_verdicts": 79,
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_utils.py::test_parse_wheel_invalid_filename[foo-1.0-1\\n-py3-none-any.whl]",
+     "tests/test_utils.py::test_parse_wheel_invalid_filename[foo-1.0-1\\nabc-py3-none-any.whl]"
+    ]
+   },
+   "guard_sites": 3,
+   "observations": 58,
+   "learned": [],
+   "stage": "NO_SEPARATING_RULE",
+   "attempts": 0,
+   "seconds": 6.17
+  },
+  {
+   "repo": "packaging",
+   "commit": "08bb047794f4e70b157dacef4538b3a6e3492743",
+   "test": "tests/test_direct_url.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_direct_url.py::test_strip_url[https://user:pa@ss@g.c/user/repo.git-safe_user_passwords2-https://g.c/user/repo.git]",
+    "tests/test_direct_url.py::test_to_dict_strip_url_with_at_in_password"
+   ],
+   "baseline_verdicts": 37,
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_direct_url.py::test_strip_url[https://user:pa@ss@g.c/user/repo.git-safe_user_passwords2-https://g.c/user/repo.git]",
+     "tests/test_direct_url.py::test_to_dict_strip_url_with_at_in_password"
+    ]
+   },
+   "guard_sites": 6,
+   "observations": 51,
+   "learned": [
+    {
+     "line": 319,
+     "text": "generate_legacy_hash",
+     "feature": "truthy",
+     "polarity": false,
+     "gain": 3,
+     "pass_mismatches": 10,
+     "observed_value": "False"
+    },
+    {
+     "line": 322,
+     "text": "strip_user_password",
+     "feature": "falsey",
+     "polarity": false,
+     "gain": 1,
+     "pass_mismatches": 12,
+     "observed_value": "True"
+    }
+   ],
+   "stage": "NO_LEARNED_REPAIR",
+   "attempts": 2,
+   "seconds": 10.62
+  },
+  {
+   "repo": "packaging",
+   "commit": "189a76d54d64899adbca907c2a3efa5b6befdb28",
+   "test": "tests/test_markers.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_markers.py::TestMarker::test_parses_invalid_trailing_line_break[\\n]"
+   ],
+   "baseline_verdicts": 2306,
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_markers.py::TestMarker::test_parses_invalid_trailing_line_break[\\n]"
+    ]
+   },
+   "guard_sites": 1,
+   "observations": 15487,
+   "learned": [],
+   "stage": "NO_SEPARATING_RULE",
+   "attempts": 0,
+   "seconds": 13.85
+  },
+  {
+   "repo": "packaging",
+   "commit": "258202ed7f796bdb8a65252a66c3fbd3e69e97f6",
+   "test": "tests/test_utils.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_utils.py::test_canonicalize_name_invalid[hi\\n-hi\\n]"
+   ],
+   "baseline_verdicts": 60,
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_utils.py::test_canonicalize_name_invalid[hi\\n-hi\\n]"
+    ]
+   },
+   "guard_sites": 2,
+   "observations": 38,
+   "learned": [
+    {
+     "line": 47,
+     "text": "validate",
+     "feature": "falsey",
+     "polarity": false,
+     "gain": 27,
+     "pass_mismatches": 0,
+     "observed_value": "True"
+    }
+   ],
+   "stage": "NO_LEARNED_REPAIR",
+   "attempts": 1,
+   "seconds": 8.6
+  },
+  {
+   "repo": "packaging",
+   "commit": "553582d9162c761e4ab97ccc6cea43ac14ff2a8b",
+   "test": "tests/test_metadata.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_metadata.py::TestMetadata::test_invalid_charset_error_message"
+   ],
+   "baseline_verdicts": 295,
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_metadata.py::TestMetadata::test_invalid_charset_error_message"
+    ]
+   },
+   "guard_sites": 8,
+   "observations": 548,
+   "learned": [
+    {
+     "line": 777,
+     "text": "validate",
+     "feature": "truthy",
+     "polarity": false,
+     "gain": 22,
+     "pass_mismatches": 124,
+     "observed_value": "False"
+    }
+   ],
+   "stage": "NO_LEARNED_REPAIR",
+   "attempts": 1,
+   "seconds": 9.66
+  },
+  {
+   "repo": "packaging",
+   "commit": "8af75907bf1140071a6a706874fcf1d73cc39c71",
+   "test": "tests/test_utils.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_utils.py::test_parse_wheel_invalid_filename[foo\\n-1.0-py3-none-any.whl]"
+   ],
+   "baseline_verdicts": 75,
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_utils.py::test_parse_wheel_invalid_filename[foo\\n-1.0-py3-none-any.whl]"
+    ]
+   },
+   "guard_sites": 3,
+   "observations": 55,
+   "learned": [],
+   "stage": "NO_SEPARATING_RULE",
+   "attempts": 0,
+   "seconds": 6.6
+  },
+  {
+   "repo": "packaging",
+   "commit": "b80e6eb0a6c0f61dcaa9b1587f3aab370263dc65",
+   "test": "tests/test_pylock_select.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_pylock_select.py::test_lock_no_matching_env[environments0]"
+   ],
+   "baseline_verdicts": 29,
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_pylock_select.py::test_lock_no_matching_env[environments0]"
+    ]
+   },
+   "guard_sites": 16,
+   "observations": 358,
+   "learned": [
+    {
+     "line": 839,
+     "text": "self.environments",
+     "feature": "empty_collection",
+     "polarity": true,
+     "gain": 1,
+     "pass_mismatches": 0,
+     "observed_value": "[]"
+    },
+    {
+     "line": 827,
+     "text": "self.requires_python",
+     "feature": "nonempty_collection",
+     "polarity": false,
+     "gain": 3,
+     "pass_mismatches": 25,
+     "observed_value": "None"
+    }
+   ],
+   "stage": "NO_LEARNED_REPAIR",
+   "attempts": 2,
+   "seconds": 12.92
+  },
+  {
+   "repo": "packaging",
+   "commit": "ba17fcea2367a70cba21d6bfb0931ae476ee8583",
+   "test": "tests/test_utils.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_utils.py::test_is_normalized_name[1--1-1-1]",
+    "tests/test_utils.py::test_is_normalized_name[a--b-a-b]"
+   ],
+   "baseline_verdicts": 70,
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_utils.py::test_is_normalized_name[a--b-a-b]",
+     "tests/test_utils.py::test_is_normalized_name[1--1-1-1]"
+    ]
+   },
+   "guard_sites": 2,
+   "observations": 47,
+   "learned": [],
+   "stage": "NO_SEPARATING_RULE",
+   "attempts": 0,
+   "seconds": 6.01
+  },
+  {
+   "repo": "packaging",
+   "commit": "e7ce051e9191c461e0a536a84c4d66a87518de66",
+   "test": "tests/test_requirements.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_requirements.py::TestRequirementParsing::test_error_invalid_marker_notin_without_whitespace",
+    "tests/test_requirements.py::TestRequirementParsing::test_error_invalid_marker_with_invalid_op",
+    "tests/test_requirements.py::TestRequirementParsing::test_error_when_no_word_boundary"
+   ],
+   "baseline_verdicts": 4703,
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_requirements.py::TestRequirementParsing::test_error_invalid_marker_notin_without_whitespace",
+     "tests/test_requirements.py::TestRequirementParsing::test_error_when_no_word_boundary",
+     "tests/test_requirements.py::TestRequirementParsing::test_error_invalid_marker_with_invalid_op"
+    ]
+   },
+   "guard_sites": 0,
+   "observations": 0,
+   "learned": [],
+   "stage": "NO_SEPARATING_RULE",
+   "attempts": 0,
+   "seconds": 25.62
+  },
+  {
+   "repo": "pluggy",
+   "commit": "4326ced299cc37f4abc57c22c6298362b5379602",
+   "test": "testing/test_pluginmanager.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "testing/test_pluginmanager.py::test_set_blocked"
+   ],
+   "baseline_verdicts": 37,
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "testing/test_pluginmanager.py::test_set_blocked"
+    ]
+   },
+   "guard_sites": 12,
+   "observations": 1439,
+   "learned": [
+    {
+     "line": 218,
+     "text": "hookcallers",
+     "feature": "nonempty_collection",
+     "polarity": false,
+     "gain": 2,
+     "pass_mismatches": 2,
+     "observed_value": "[]"
+    }
+   ],
+   "stage": "NO_LEARNED_REPAIR",
+   "attempts": 1,
+   "seconds": 8.33
+  },
+  {
+   "repo": "pluggy",
+   "commit": "6abdcf6ca167f5d61297b5d86e22f3dd058031b3",
+   "test": "testing/test_details.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "testing/test_details.py::test_warn_when_deprecated_args_with_defaults_specified"
+   ],
+   "baseline_verdicts": 16,
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "testing/test_details.py::test_warn_when_deprecated_args_with_defaults_specified"
+    ]
+   },
+   "guard_sites": 14,
+   "observations": 1575,
+   "learned": [
+    {
+     "line": 442,
+     "text": "hook.spec.warn_on_impl_args",
+     "feature": "falsey",
+     "polarity": false,
+     "gain": 2,
+     "pass_mismatches": 1,
+     "observed_value": "{'old': DeprecationWarning('old is deprecated')}"
+    },
+    {
+     "line": 247,
+     "text": "verified",
+     "feature": "falsey",
+     "polarity": false,
+     "gain": 1,
+     "pass_mismatches": 2,
+     "observed_value": "True"
+    },
+    {
+     "line": 426,
+     "text": "hook.spec.warn_on_impl",
+     "feature": "truthy",
+     "polarity": false,
+     "gain": 1,
+     "pass_mismatches": 2,
+     "observed_value": "None"
+    },
+    {
+     "line": 449,
+     "text": "hookimpl.wrapper",
+     "feature": "truthy",
+     "polarity": false,
+     "gain": 1,
+     "pass_mismatches": 2,
+     "observed_value": "False"
+    }
+   ],
+   "stage": "NO_LEARNED_REPAIR",
+   "attempts": 4,
+   "seconds": 10.91
+  },
+  {
+   "repo": "pluggy",
+   "commit": "e108fa4490564b9f252fe7a8a4d1969f6f996641",
+   "test": "testing/test_pluginmanager.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "testing/test_pluginmanager.py::test_load_setuptools_instantiation[bool-raises]",
+    "testing/test_pluginmanager.py::test_load_setuptools_instantiation[falsey]"
+   ],
+   "baseline_verdicts": 75,
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "testing/test_pluginmanager.py::test_load_setuptools_instantiation[falsey]",
+     "testing/test_pluginmanager.py::test_load_setuptools_instantiation[bool-raises]"
+    ]
+   },
+   "guard_sites": 14,
+   "observations": 2183,
+   "learned": [],
+   "stage": "NO_SEPARATING_RULE",
+   "attempts": 0,
+   "seconds": 6.59
+  },
+  {
+   "repo": "starlette",
+   "commit": "20973f2ed31f4fe7faca988f8590fe3eaf70541e",
+   "test": "tests/middleware/test_cors.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/middleware/test_cors.py::test_cors_allow_origin_regex_fullmatch"
+   ],
+   "baseline_verdicts": 9,
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/middleware/test_cors.py::test_cors_allow_origin_regex_fullmatch"
+    ]
+   },
+   "guard_sites": 11,
+   "observations": 88,
+   "learned": [
+    {
+     "line": 157,
+     "text": "self.allow_all_origins",
+     "feature": "truthy",
+     "polarity": false,
+     "gain": 3,
+     "pass_mismatches": 4,
+     "observed_value": "False"
+    },
+    {
+     "line": 51,
+     "text": "allow_headers",
+     "feature": "empty_collection",
+     "polarity": false,
+     "gain": 3,
+     "pass_mismatches": 5,
+     "observed_value": "['X-Example', 'Content-Type']"
+    },
+    {
+     "line": 162,
+     "text": "self.allow_all_origins",
+     "feature": "truthy",
+     "polarity": false,
+     "gain": 2,
+     "pass_mismatches": 4,
+     "observed_value": "False"
+    },
+    {
+     "line": 87,
+     "text": "self.allow_all_origins",
+     "feature": "truthy",
+     "polarity": false,
+     "gain": 1,
+     "pass_mismatches": 5,
+     "observed_value": "False"
+    }
+   ],
+   "stage": "NO_LEARNED_REPAIR",
+   "attempts": 4,
+   "seconds": 15.77
+  },
+  {
+   "repo": "tqdm",
+   "commit": "223561a83bcc0cca961b6b42403424b995c6e916",
+   "test": "tests/py37_asyncio.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/py37_asyncio.py::test_gather"
+   ],
+   "baseline_verdicts": 7,
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/py37_asyncio.py::test_gather"
+    ]
+   },
+   "guard_sites": 1,
+   "observations": 70,
+   "learned": [],
+   "stage": "NO_SEPARATING_RULE",
+   "attempts": 0,
+   "seconds": 9.29
+  },
+  {
+   "repo": "tqdm",
+   "commit": "b38a9221c4b2723a82d8b186c0fd8e7b05771a12",
+   "test": "tests/tests_tqdm.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/tests_tqdm.py::test_format_num"
+   ],
+   "baseline_verdicts": 70,
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/tests_tqdm.py::test_format_num"
+    ]
+   },
+   "guard_sites": 57,
+   "observations": 38593,
+   "learned": [],
+   "stage": "NO_SEPARATING_RULE",
+   "attempts": 0,
+   "seconds": 10.62
+  },
+  {
+   "repo": "urllib3",
+   "commit": "4714836a667eb4837d005eb89d34fae60b9dc6cc",
+   "test": "test/with_dummyserver/test_socketlevel.py",
+   "parameters_stored": 0,
+   "stage": "NO_FAILING_TEST",
+   "seconds": 50.84
+  },
+  {
+   "repo": "urllib3",
+   "commit": "644124ecd0b6e417c527191f866daa05a5a2056d",
+   "test": "test/test_retry.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "test/test_retry.py::TestRetry::test_retry_default_remove_headers_on_redirect"
+   ],
+   "baseline_verdicts": 61,
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "test/test_retry.py::TestRetry::test_retry_default_remove_headers_on_redirect"
+    ]
+   },
+   "guard_sites": 15,
+   "observations": 480,
+   "learned": [],
+   "stage": "NO_SEPARATING_RULE",
+   "attempts": 0,
+   "seconds": 7.35
+  },
+  {
+   "repo": "urllib3",
+   "commit": "77fa67aaf2dc18962fa9234d47400c8a6fc1edf4",
+   "test": "test/test_util.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "test/test_util.py::TestUtil::test_parse_url_remove_leading_zeros"
+   ],
+   "baseline_verdicts": 332,
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "test/test_util.py::TestUtil::test_parse_url_remove_leading_zeros"
+    ]
+   },
+   "guard_sites": 20,
+   "observations": 14694,
+   "learned": [
+    {
+     "line": 421,
+     "text": "scheme",
+     "feature": "falsey",
+     "polarity": false,
+     "gain": 37,
+     "pass_mismatches": 153,
+     "observed_value": "'https'"
+    }
+   ],
+   "stage": "NO_LEARNED_REPAIR",
+   "attempts": 1,
+   "seconds": 10.62
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "285af2c465d0737e77f33bab6d29775fcd53b667",
+   "test": "tests/test_test.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_test.py::test_redirects_are_tracked"
+   ],
+   "baseline_verdicts": 60,
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_test.py::test_redirects_are_tracked"
+    ]
+   },
+   "guard_sites": 14,
+   "observations": 0,
+   "learned": [],
+   "stage": "NO_SEPARATING_RULE",
+   "attempts": 0,
+   "seconds": 6.4
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "351b73196ca30c26ef2a7b492508d89da370c07f",
+   "test": "tests/test_security.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_security.py::test_password_hashing"
+   ],
+   "baseline_verdicts": 4,
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_security.py::test_password_hashing"
+    ]
+   },
+   "guard_sites": 3,
+   "observations": 6,
+   "learned": [],
+   "stage": "NO_SEPARATING_RULE",
+   "attempts": 0,
+   "seconds": 6.84
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "352cd7167984f805daf226966f38f8dfeb991313",
+   "test": "tests/test_local.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_local.py::test_proxy_fallback"
+   ],
+   "baseline_verdicts": 62,
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_local.py::test_proxy_fallback"
+    ]
+   },
+   "guard_sites": 1,
+   "observations": 0,
+   "learned": [],
+   "stage": "NO_SEPARATING_RULE",
+   "attempts": 0,
+   "seconds": 6.81
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "3a408edffde8a006a644d9c2d7bd32973421b924",
+   "test": "tests/test_routing.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_routing.py::test_weighting"
+   ],
+   "baseline_verdicts": 108,
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_routing.py::test_weighting"
+    ]
+   },
+   "guard_sites": 15,
+   "observations": 108027,
+   "learned": [
+    {
+     "line": 687,
+     "text": "is_dynamic",
+     "feature": "falsey",
+     "polarity": false,
+     "gain": 62,
+     "pass_mismatches": 37,
+     "observed_value": "False"
+    },
+    {
+     "line": 684,
+     "text": "is_dynamic",
+     "feature": "falsey",
+     "polarity": false,
+     "gain": 61,
+     "pass_mismatches": 38,
+     "observed_value": "False"
+    },
+    {
+     "line": 608,
+     "text": "convobj.part_isolating",
+     "feature": "falsey",
+     "polarity": false,
+     "gain": 5,
+     "pass_mismatches": 43,
+     "observed_value": "True"
+    },
+    {
+     "line": 482,
+     "text": "defaults",
+     "feature": "is_dict",
+     "polarity": false,
+     "gain": 5,
+     "pass_mismatches": 98,
+     "observed_value": "None"
+    }
+   ],
+   "stage": "NO_LEARNED_REPAIR",
+   "attempts": 4,
+   "seconds": 28.08
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "763609ae21a1d8d649ca19f30c61257fbee670c1",
+   "test": "tests/test_security.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_security.py::test_pbkdf2"
+   ],
+   "baseline_verdicts": 12,
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_security.py::test_pbkdf2"
+    ]
+   },
+   "guard_sites": 2,
+   "observations": 13,
+   "learned": [],
+   "stage": "NO_SEPARATING_RULE",
+   "attempts": 0,
+   "seconds": 9.94
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "8f8507b4623b8a2faba1e69c0da815887a54b810",
+   "test": "tests/test_http.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_http.py::TestHTTPUtility::test_parse_cookie"
+   ],
+   "baseline_verdicts": 55,
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_http.py::TestHTTPUtility::test_parse_cookie"
+    ]
+   },
+   "guard_sites": 15,
+   "observations": 117,
+   "learned": [
+    {
+     "line": 414,
+     "text": "o_match",
+     "feature": "truthy",
+     "polarity": false,
+     "gain": 3,
+     "pass_mismatches": 0,
+     "observed_value": "None"
+    },
+    {
+     "line": 418,
+     "text": "o_match",
+     "feature": "truthy",
+     "polarity": false,
+     "gain": 3,
+     "pass_mismatches": 0,
+     "observed_value": "None"
+    },
+    {
+     "line": 410,
+     "text": "o_match",
+     "feature": "truthy",
+     "polarity": false,
+     "gain": 2,
+     "pass_mismatches": 2,
+     "observed_value": "None"
+    }
+   ],
+   "stage": "NO_LEARNED_REPAIR",
+   "attempts": 3,
+   "seconds": 14.35
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "d03b97779720c614287d2aef0f075ee4a1391c5b",
+   "test": "tests/test_useragents.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_useragents.py::test_edge_browsers[user_agent1-windows-edge-81.0.416.68-None]",
+    "tests/test_useragents.py::test_edge_browsers[user_agent2-windows-edge-84.0.499.0-None]"
+   ],
+   "baseline_verdicts": 3,
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_useragents.py::test_edge_browsers[user_agent1-windows-edge-81.0.416.68-None]",
+     "tests/test_useragents.py::test_edge_browsers[user_agent2-windows-edge-84.0.499.0-None]"
+    ]
+   },
+   "guard_sites": 0,
+   "observations": 0,
+   "learned": [],
+   "stage": "NO_SEPARATING_RULE",
+   "attempts": 0,
+   "seconds": 7.12
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "d0f040a65bfc39c52930f0ea0ca0a9d465bc5043",
+   "test": "tests/test_routing.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_routing.py::test_build_append_unknown_dict[1+2-?v=1%2B2]"
+   ],
+   "baseline_verdicts": 116,
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_routing.py::test_build_append_unknown_dict[1+2-?v=1%2B2]"
+    ]
+   },
+   "guard_sites": 29,
+   "observations": 124,
+   "learned": [],
+   "stage": "NO_SEPARATING_RULE",
+   "attempts": 0,
+   "seconds": 15.03
+  }
+ ],
+ "seconds": 660.2,
+ "cost": {
+  "model_calls": 0,
+  "parameters_stored": 0,
+  "network_calls_at_run_time": 0
+ },
+ "environment_note": "One httpx row was re-measured after installing httpcore/h11; no criterion was changed and the first NO_ORACLE stage is retained in this note rather than hidden."
+}
