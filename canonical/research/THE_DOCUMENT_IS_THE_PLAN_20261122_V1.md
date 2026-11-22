@@ -853,3 +853,39 @@ quoted titles and comments such as `Implement webhook retry logic with exponenti
 ignores rather than one it validates, so removing it costs nothing and gains nothing on this bench. It is
 committed as a correctness fix on that evidence, not presented as an improvement, because the measurement
 says it is not one.
+
+### A20 — the readings are wrong, not their order
+
+A19 fixed the possessive and left one shape of error in plain sight, so it was tested directly. For
+`Find all open GitHub issues in "acme-corp/web-platform" that have the label "priority:critical"`, the
+planner emits two readings and both are wrong in opposite ways:
+
+| reading | what it does |
+|---|---|
+| `gh issue list acme-corp/web-platform priority:critical` | the values, positionally, with **no flags at all** |
+| `gh issue list --repo acme-corp/web-platform priority:critical` | the document's flag for the repo, then the label as a bare word |
+
+The document states the shape — `gh issue list --repo owner/repo --state open --label bug`, with
+`--repo` marked **required** and each flag paired with a value — and neither reading is that. The
+document's own example supplies three flag/value pairs and the planner uses one of them.
+
+**Both orderings of the two available principles were measured, and both lose:**
+
+| order | A5 | up / down |
+|---|---|---|
+| carries the request's values first, then required flags, then complete | **0.4562** | 1 / 5 |
+| required flags first, then complete | **0.4590** | 2 / 4 |
+| the committed order (complete first) | **0.4632** | — |
+
+The failure is legible in single commands. `linear issue update ACM-101 done` keeps the request's value
+`done` and no flag; `linear issue update --id ACM-101` keeps the required flag and **drops `done`**, which
+the request named. `opencli github search "web framework"` becomes `opencli github search --query "web
+framework"`. Each reordering trades one missing thing for another.
+
+**The conclusion, stated flatly: the candidate readings are wrong, not their ranking.** No ordering of a
+set that contains no correct command can produce one. Ranking is a local operation on a list, and this
+list does not contain the answer — the answer requires the *pairing* the demonstration states (this flag
+takes this value), which is the one thing the filler currently guesses. That is the next mechanism to
+build, and every attempt to avoid building it has now been measured and rejected: rank by description
+overlap (A14 follow-up), refuse steps that drop a required flag (A17), suppress bare operations (A18),
+retry the next reading (A18), and both orderings above. Five attempts, none kept, all for the same reason.
