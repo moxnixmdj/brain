@@ -1,27 +1,35 @@
 {
   "docs": {
-    "helped": 2,
-    "last_seen_utc": "2026-11-22T18:15:14Z",
-    "trials": 41
+    "helped": 13,
+    "last_seen_utc": "2026-11-22T18:30:52Z",
+    "relevant": 5,
+    "relevant_trials": 5,
+    "trials": 52
   },
   "github": {
-    "helped": 97,
-    "last_seen_utc": "2026-11-22T18:24:08Z",
-    "trials": 136
+    "helped": 104,
+    "last_seen_utc": "2026-11-22T18:27:15Z",
+    "relevant": 3,
+    "relevant_trials": 3,
+    "trials": 143
   },
   "npm": {
-    "helped": 136,
-    "last_seen_utc": "2026-11-22T18:24:08Z",
-    "trials": 136
+    "helped": 143,
+    "last_seen_utc": "2026-11-22T18:27:15Z",
+    "relevant": 3,
+    "relevant_trials": 3,
+    "trials": 143
   },
   "pypi": {
-    "helped": 138,
-    "last_seen_utc": "2026-11-22T18:24:08Z",
-    "trials": 138
+    "helped": 143,
+    "last_seen_utc": "2026-11-22T18:27:15Z",
+    "relevant": 1,
+    "relevant_trials": 3,
+    "trials": 145
   },
   "web": {
     "helped": 0,
-    "last_seen_utc": "2026-11-22T18:15:07Z",
-    "trials": 41
+    "last_seen_utc": "2026-11-22T18:27:05Z",
+    "trials": 42
   }
 }

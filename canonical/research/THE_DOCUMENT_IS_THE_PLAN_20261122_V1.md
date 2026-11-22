@@ -539,3 +539,40 @@ closed list of **function words only** — the few dozen grammatical words every
 the question of *which* content word is the subject is answered by the fetched documents themselves: the one
 fewest of them mention. Behaviour is byte-identical on all four measured queries, with the list gone. 48
 tests pass, repo-integrity guard 17 rules / 0 violations / PASS.
+
+### A13 — the credit is the thing to save: one experience, a persisted change in behaviour
+
+A12 gave the reader a sharp verdict — *did this source's documents speak to the question* — and nothing
+consumed it. `credit()` was being fed only "the source responded", so a source could be fast at being wrong
+and keep its rank forever. The verdict is now what earns the credit, and it is settled per source, per query.
+
+Measured on an empty ledger (`BRAIN_JIT_KNOWLEDGE_STATE` pointed at a fresh file), three questions, then the
+ordering re-measured:
+
+```
+cold :  npm, pypi, github, docs, web
+after:  npm, pypi, github, web, docs          <- docs fell to last
+
+docs    value=0.104   answered 0/1   relevant 0/0
+npm     value=0.539   answered 5/5   relevant 2/2
+pypi    value=0.441   answered 4/5   relevant 1/2
+github  value=0.375   answered 4/5   relevant 2/2
+```
+
+This is the answer to the owner's question, in numbers:
+
+* **What is saved:** one integer pair per source — `relevant / relevant_trials` — plus the response counts.
+  Nothing about `spreadsheet`, `pdf`, or any program is stored. It is the same order of information as
+  "which shop had what I wanted", not "where I have been".
+* **What is generalised:** nothing is generalised *from* the episode; the episode is discarded and only its
+  verdict survives. That is why the store cannot become a knowledge house: it holds no facts about the
+  world, only a machine-local opinion about where facts were found.
+* **What is removed when it is wrong:** the whole ledger. Delete the file and the ordering returns to its
+  cold state, with no retraining and nothing else touched — the test the constraints ask for.
+
+Two honest notes. First, `pypi` fell behind `npm` on a single irrelevant answer (`relevant 1/2`); the prior
+`(helped + 0.5) / (trials + 1)` means one experience moves a value but does not dominate it, which is the
+right behaviour for a source that is usually good. Second, the suites are network-bound: under heavy
+parallel fetching, `test_jit_knowledge_v1` flaked twice (different tests, both sources returning fewer
+documents) and then passed 42/42 twice in a row and 48/48 together with the non-smuggling suite. That
+flakiness is recorded here as a property of the environment, not smoothed away.

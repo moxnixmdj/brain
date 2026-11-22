@@ -439,12 +439,23 @@ def source_value(name: str) -> float:
     return p / (1.0 + cost)
 
 
-def credit(name: str, helped: bool) -> None:
-    """Did asking here actually produce knowledge? This is what earns the order."""
+def credit(name: str, helped: bool, *, relevant: bool | None = None) -> None:
+    """Did asking here actually produce knowledge? This is what earns the order.
+
+    `helped` is a *defensible* verdict: the source answered, and what it said was about the
+    question. A source that responds with something irrelevant has not helped, and crediting it
+    for responding is how a store learns to prefer a source that is merely fast at being wrong.
+    `relevant` separates the two facts in the ledger so the difference is inspectable rather
+    than folded away: a source can be `answered` often and `relevant` rarely, and that is a
+    fact about the source worth keeping.
+    """
     state = _load_state()
     row = dict(state.get(name) or {})
     row["trials"] = int(row.get("trials", 0) or 0) + 1
     row["helped"] = int(row.get("helped", 0) or 0) + (1 if helped else 0)
+    if relevant is not None:
+        row["relevant_trials"] = int(row.get("relevant_trials", 0) or 0) + 1
+        row["relevant"] = int(row.get("relevant", 0) or 0) + (1 if relevant else 0)
     row["last_seen_utc"] = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
     state[name] = row
     _save_state(state)
@@ -514,6 +525,26 @@ def fetch_source(name: str, query: str, *, limit: int = DEFAULT_LIMIT,
         out["reason"] = reason
     credit(name, ok)
     return out
+
+
+def _settle_credit(query: str, per_source: Mapping[str, Sequence[Mapping[str, Any]]]
+                   ) -> dict[str, bool]:
+    """Re-credit each source by whether its own documents were about the question.
+
+    The fetch already credited "answered". This settles the stronger claim, and it is the only
+    learning in the round that comes from a *single* experience without being the experience:
+    which source, asked this question, said something relevant. What persists is the credit, not
+    the documents.
+    """
+    topics = distinctive_words(query, [d for docs in per_source.values() for d in docs])
+    verdicts: dict[str, bool] = {}
+    for name, docs in per_source.items():
+        if not docs:
+            continue
+        on_topic = any(document_is_about(d, topics) for d in docs)
+        verdicts[name] = on_topic
+        credit(name, on_topic, relevant=on_topic)
+    return verdicts
 
 
 def resolve(query: str, *, min_sources: int = DEFAULT_MIN_SOURCES,
@@ -610,6 +641,11 @@ def resolve(query: str, *, min_sources: int = DEFAULT_MIN_SOURCES,
     irrelevant = [d for d in documents if d not in on_topic]
     documents = on_topic
 
+    per_source: dict[str, list[Mapping[str, Any]]] = {}
+    for d in on_topic:
+        per_source.setdefault(str(d.get("source")), []).append(d)
+    irrelevant_source_verdicts = _settle_credit(q, per_source)
+
     sources_answered = [r["source"] for r in answered]
     kinds = kinds_answered(sources_answered)
     # Counting sources is not enough: three package registries are one kind of
@@ -636,6 +672,7 @@ def resolve(query: str, *, min_sources: int = DEFAULT_MIN_SOURCES,
         "document_count": len(documents),
         "documents_irrelevant": len(irrelevant),
         "topic_words": sorted(topics),
+        "sources_relevant": sorted(n for n, good in irrelevant_source_verdicts.items() if good),
         "sources_asked": names,
         "sources_answered": sources_answered,
         "sources_failed": [r["source"] for r in results if not r.get("ok")],
