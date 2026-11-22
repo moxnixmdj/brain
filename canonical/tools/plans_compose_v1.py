@@ -166,17 +166,28 @@ def _apply(scheme: dict[str, Any], incoming: str) -> list[str]:
             return []
         return [target.replace("_", incoming)]
     if target == "UNWRAP":
-        # a constructor is the inverse of its own wrapper, but only for its own payload
+        # A constructor is the inverse of its own wrapper. `X[P]` unwraps to `P`, always:
+        # the payload is whatever was wrapped. Unwrapping to the bare constructor instead
+        # was wrong for a parameterised type -- `BZCAT[TEXT]` must return to `TEXT`, not to
+        # `BZCAT` -- and that made every inverse search dead-end one hop too early.
         if incoming.startswith(source + "[") and incoming.endswith("]"):
             payload = incoming[len(source) + 1:-1]
             return [payload] if payload else []
+        if incoming == source:
+            return [source]
         return []
     if incoming == source:
         return target if isinstance(target, list) else [target]
     return []
 
 
-def find_path(types: dict[str, dict[str, Any]], source: str, sink: str) -> dict[str, Any]:
+def nesting_depth(type_name: str) -> int:
+    """How many constructors are stacked in a type string."""
+    return type_name.count("[")
+
+
+def find_path(types: dict[str, dict[str, Any]], source: str, sink: str,
+              max_depth: int = 4, max_states: int = 200_000) -> dict[str, Any]:
     """Shortest chain of programs whose type schemes carry `source` to `sink`.
 
     Only schemes are consulted. No program knows its position; the search does.
@@ -195,9 +206,23 @@ def find_path(types: dict[str, dict[str, Any]], source: str, sink: str) -> dict[
     # dropping the key entirely. Both were noise: the global set is complete, and
     # cheapest. Do not "fix" it again without a counterexample where two different
     # routes to one type lead to different futures.
+    #
+    # TWO BOUNDS, and the second one is the one that matters. A chain-length cap is not a
+    # search bound when the types themselves grow: with N wrapping schemes, depth 6 yields
+    # N^6 distinct type strings, and the growing ones (`C[C[C[...]]]`) are all distinct, so
+    # the search never terminates. That hung this instrument for 600 s on a real host.
+    # `max_depth` bounds the NESTING of a type, which is what actually has to be finite,
+    # and `max_states` is a hard ceiling so a pathological host degrades to a refusal
+    # instead of a hang.
     seen: set[str] = {source}
     queue: list[tuple[str, list[str], list[dict[str, str]]]] = [(source, [], [])]
+    states = 0
     while queue:
+        states += 1
+        if states > max_states:
+            return {"found": False, "chain": [], "trace": [],
+                    "reason": f"search exceeded {max_states} states without reaching "
+                              f"{sink!r}; refusing rather than hanging"}
         current, chain, trace = queue.pop(0)
         if current == sink:
             return {"found": True, "chain": chain, "trace": trace,
@@ -208,6 +233,8 @@ def find_path(types: dict[str, dict[str, Any]], source: str, sink: str) -> dict[
             for scheme in row["schemes"]:
                 for produced in _apply(scheme, current):
                     if produced in seen:
+                        continue
+                    if nesting_depth(produced) > max_depth:
                         continue
                     seen.add(produced)
                     queue.append((produced, chain + [name],
@@ -240,7 +267,7 @@ def decode_argv(name: str, types: dict[str, dict[str, Any]]) -> list[str]:
 
 
 def invert(chain: Sequence[str], types: dict[str, dict[str, Any]],
-           sink: str, source: str) -> dict[str, Any]:
+           sink: str, source: str, max_states: int = 2000) -> dict[str, Any]:
     """Search the same graph backwards, from the sink type to the source type.
 
     This is the check that makes composition testable: the forward chain proves a
@@ -248,7 +275,7 @@ def invert(chain: Sequence[str], types: dict[str, dict[str, Any]],
     inverse on the artifact must return the exact original bytes. Both orders are
     found, not written.
     """
-    back = find_path(types, sink, source)
+    back = find_path(types, sink, source, max_states=max_states)
     if not back["found"]:
         return {"found": False, "chain": [], "trace": [],
                 "reason": f"no inverse chain from {sink!r} to {source!r}"}
