@@ -1,0 +1,143 @@
+{
+ "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+ "chain": [
+  [
+   "THE_GOAL_IS_AN_ORACLE",
+   "the goal is an executable check",
+   "3/40"
+  ],
+  [
+   "THE_NAME_IS_A_CONVENTION",
+   "flat surface search",
+   "closed: 15/22 symbols not in the surface"
+  ],
+  [
+   "PURPOSE_IS_IN_THE_ARTIFACT",
+   "rank by the artifact's own docstrings",
+   "7/32"
+  ],
+  [
+   "STRUCTURE_WITHOUT_PURPOSE",
+   "structured space + cheap oracle",
+   "8/32; oracle 9-50x faster"
+  ],
+  [
+   "A_LEARNED_RANKING_TRANSFERS",
+   "fit four weights, measure held-out",
+   "7/13 held-out"
+  ],
+  [
+   "THE_STORE_CARRIES_THE_CONVENTION",
+   "externalise the weights, reproduce without learning",
+   "7/13 from 554 bytes"
+  ]
+ ],
+ "claim_under_test": "knowledge acquired in one session, externalised as data, reproduces the same behaviour in a later process without being re-learned",
+ "date": "2026-11-21",
+ "deletion_verified": [
+  "delete removes the entry; the reloaded store yields all-zero weights",
+  "a store with no weights ranks NOTHING (rank returns []): it fails closed, never silently guesses",
+  "a corrupted store degrades to no weights instead of raising mid-run",
+  "a test asserts the store contains no names and no facts -- only weights and provenance"
+ ],
+ "instrument": "canonical/tools/learned_ranking_store_v1.py",
+ "measurement": [
+  [
+   "session 1: fit on 13 items",
+   "9/13 train"
+  ],
+  [
+   "session 1: save",
+   "554 bytes"
+  ],
+  [
+   "session 1: rank held-out",
+   "7/13 top-10"
+  ],
+  [
+   "session 2: fresh process, load, fit nothing",
+   "7/13 top-10 IDENTICAL"
+  ],
+  [
+   "session 2: solve via benchmark hidden tests",
+   "7/13 SOLVED"
+  ]
+ ],
+ "model_calls": 0,
+ "next_unit": "THE FEEDBACK SIGNAL. Every result above is supervised by the benchmark's hidden tests. In an unseen environment there is no hidden test -- there is an environment that either did what was wanted or did not. The mechanism that converts an environmental outcome into the pass/fail signal the fit needs is the actual missing part, and it is the same part section 6 needs for GUIs, browsers and unseen software.",
+ "schema": "BRAIN_RECEIPT_THE_STORE_CARRIES_THE_CONVENTION_20261121_V1",
+ "solved_from_store_alone": [
+  [
+   "197",
+   "sympy.external.gmpy.is_square(n)"
+  ],
+  [
+   "201",
+   "sympy.functions.jacobi_symbol(a, n)"
+  ],
+  [
+   "202",
+   "sympy.ntheory.npartitions(n)"
+  ],
+  [
+   "204",
+   "sympy.functions.primepi(n)"
+  ],
+  [
+   "205",
+   "sympy.functions.totient(n)"
+  ],
+  [
+   "206",
+   "sympy.functions.mobius(n)"
+  ],
+  [
+   "207",
+   "sympy.functions.legendre_symbol(a, n)"
+  ]
+ ],
+ "store": {
+  "contents": "weights + provenance ONLY; features are recomputed each run from the artifact and the problem text",
+  "format": "plain JSON outside the code",
+  "learned_from": [
+   "176",
+   "177",
+   "178",
+   "179",
+   "180",
+   "181",
+   "182",
+   "183",
+   "184",
+   "185",
+   "188",
+   "190",
+   "192"
+  ],
+  "size_bytes": 554,
+  "weights": {
+   "coverage": 1.0,
+   "depth": 1.0,
+   "doc_overlap": 1.0,
+   "stub_hit": 0.0
+  }
+ },
+ "tests": "canonical/tests/test_learned_ranking_store_v1.py (9 passing)",
+ "truth": {
+  "achieved": false
+ },
+ "verdict": {
+  "not_established": [
+   "7/13 is 53.8% of a 13-item held-out half of a 26-item sympy sub-cohort. NOT a benchmark score and NOT comparable to the 51-59% frontier figures, which are on the full 328-item benchmark",
+   "one library: sympy only; not networkx, not the other 24",
+   "the store persists across PROCESSES, not yet across ENVIRONMENTS in unseen settings",
+   "n=13 fitted / n=13 measured is a small sample; 6 held-out items still fail in the known way (todok has no problem word; prose does not state purpose)"
+  ],
+  "true": [
+   "a convention learned in one session externalises to 554 bytes and reproduces the identical held-out result in a fresh process without re-learning",
+   "it solves 7/13 held-out through the benchmark's own hidden tests",
+   "the stored object contains no names and no world facts",
+   "it is deletable and deletion provably removes the behaviour"
+  ]
+ }
+}

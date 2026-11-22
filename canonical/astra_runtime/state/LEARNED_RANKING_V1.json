@@ -1,0 +1,36 @@
+{
+ "entries": {
+  "weights": {
+   "features": [
+    "coverage",
+    "doc_overlap",
+    "stub_hit",
+    "depth"
+   ],
+   "learned_from": [
+    "176",
+    "177",
+    "178",
+    "179",
+    "180",
+    "181",
+    "182",
+    "183",
+    "184",
+    "185",
+    "188",
+    "190",
+    "192"
+   ],
+   "note": "fitted on 13 sympy items by rank; held-out 7/13 top-10 and 7/13 solved. See RECEIPT_THE_STORE_CARRIES_THE_CONVENTION_20261121_V1",
+   "weights": {
+    "coverage": 1.0,
+    "depth": 1.0,
+    "doc_overlap": 1.0,
+    "stub_hit": 0.0
+   }
+  }
+ },
+ "schema": "BRAIN_LEARNED_RANKING_STORE_V1",
+ "version": 1
+}
