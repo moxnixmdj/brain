@@ -88,6 +88,31 @@ def _repaired_source(starting_code: str) -> str:
     text = starting_code.rstrip()
     depth = text.count("(") - text.count(")")
     text += ")" * max(depth, 0)
+    # A stub may also end in a TRUNCATED EXPRESSION, which is a SyntaxError even after the
+    # brackets are balanced: `    return nx.` and `    from sympy.`. Both silently produced
+    # `parameters() == []` and `annotation_spec() == {}` for items 35, 31, 32, 186 and 200 --
+    # so those five items could never be solved by ANY candidate, whatever the grammar
+    # generated. Measured: `ast.parse` failed on line 3 of the repaired 35.
+    lines0 = text.splitlines()
+    if lines0:
+        last = lines0[-1]
+        stripped_last = last.strip()
+        # `from X.` MUST be tested before the generic trailing-dot rule: a `from` line ending
+        # in a dot is a truncated import and needs one character removed, not a bare name.
+        if re.match(r"^from\s+[A-Za-z_][\w.]*\.$", stripped_last):
+            # `from sympy` alone is NEVER valid Python -- a bare import with no module and no
+            # names. The signature is the only thing needed for parsing, and the real import
+            # is what the body supplies, so the truncated line becomes a placeholder.
+            lines0[-1] = last.rstrip()[:-1] + " import _truncated"
+        elif re.match(r"^return\s*[A-Za-z_][\w.]*\.$", stripped_last):
+            lines0[-1] = last.rstrip()[:-1]
+        elif re.match(r"^from\s+[A-Za-z_][\w.]*\.$", stripped_last):
+            lines0[-1] = last.rstrip()[:-1]
+        elif stripped_last.endswith(",") and "(" in stripped_last:
+            lines0[-1] = last.rstrip() + ")"
+        elif stripped_last.endswith("."):
+            lines0[-1] = last.rstrip()[:-1]
+        text = "\n".join(lines0)
     lines = text.splitlines()
     indent = "    "
     for line in reversed(lines):

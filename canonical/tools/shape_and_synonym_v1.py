@@ -130,6 +130,31 @@ STOP = frozenset("write function custom returns return takes should uses using c
                  "not from accepts accept parameter parameters copy read only each".split())
 
 
+def open_argument_names(*, problem: str = "", corpus: Mapping[str, str] | None = None) -> list[str]:
+    """The keyword a truncated call is missing, when the prose names it.
+
+    Item 27's stub ends `...greedy_modularity_communities(G,` -- an argument list left open.
+    The prose says "with a cutoff value", so `cutoff` is a STATED name, and the signature of
+    the callee states the rest. Nothing here is invented: the word comes from the prose, and
+    the shape (`kw=5)`) comes from the fact that the call is already open.
+
+    Falls back to keyword-like words the prose uses as nouns, longest first, because a
+    truncated call must be closed with something and the prose is the only statement there is.
+    """
+    text = problem or ""
+    found = re.findall(r"\b(?:with|using|a|the)\s+(?:a\s+)?([a-z_][a-z0-9_]*)\s+(?:value|parameter|argument)", text.lower())
+    stop = {"value", "parameter", "argument", "given", "same", "new"}
+    out = [w for w in found if w not in stop]
+    if not out:
+        # any bare word that also appears as a keyword in the artifact's own corpus
+        if corpus:
+            kws = set()
+            for v in corpus.values():
+                kws.update(re.findall(r"\b([a-z_][a-z0-9_]{3,})=[^\s,)]", v or ""))
+            out = [w for w in re.findall(r"\b([a-z_][a-z0-9_]{3,})\b", text.lower()) if w in kws]
+    return list(dict.fromkeys(out))
+
+
 def words_of(text: str) -> set[str]:
     return {w for w in re.findall(r"[a-z]{3,}", (text or "").lower()) if w not in STOP}
 

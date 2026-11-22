@@ -136,20 +136,31 @@ for n in dir(mod):
     except BaseException: pass
 
 names = []
+# Enumerate to a FIXED DEPTH, and record every module found as a name to open.
+# The earlier version collected third-level modules as bare names and never iterated
+# their members, so `sympy.physics.quantum.trace.Tr` and
+# `tensor.array.expressions.from_array_to_matrix` were invisible while their parent
+# modules appeared in the corpus. Measured: `trace` appeared as a module name and `Tr`
+# did not exist anywhere in 14,625 rows.
 try:
-    for info in pkgutil.iter_modules(mod.__path__, prefix=root + "."):
-        names.append(info.name)
-        if info.ispkg:
+    level = [(info.name, info) for info in pkgutil.iter_modules(mod.__path__, prefix=root + ".")]
+    for _depth in range(5):
+        nxt = []
+        for name, info in level:
+            names.append(name)
+            if not info.ispkg:
+                continue
             try:
-                sub = importlib.import_module(info.name)
-                for i2 in pkgutil.iter_modules(sub.__path__, prefix=info.name + "."):
-                    names.append(i2.name)
-            except BaseException: pass
+                sub = importlib.import_module(name)
+                nxt.extend((i.name, i) for i in pkgutil.iter_modules(sub.__path__, prefix=name + "."))
+            except BaseException:
+                pass
+        level = nxt
 except BaseException: pass
 
 imported = 0
 for name in names:
-    if name.count(".") > 3: continue
+    if name.count(".") > 7: continue
     try: sub = importlib.import_module(name)
     except BaseException: continue
     imported += 1
