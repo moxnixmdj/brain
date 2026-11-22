@@ -931,3 +931,35 @@ and assign it to "ops-bob".
     assert dropped["plans"], dropped.get("reason")
     assert dropped["plans"][0]["covered"] is False
     assert "ops-bob" in dropped["plans"][0]["values_unplaced"], dropped["plans"][0]
+
+
+def test_an_ordinal_that_opens_a_clause_is_not_a_count():
+    """Never invent a value. The first law, and a mechanism broke it silently.
+
+    `First, list available artifacts to find the most recent successful build` contains no number.
+    The extractor read `First` as the ordinal `1`, and that `1` was seated in a required flag:
+
+        kforge artifact list --namespace 1
+
+    An invented value looks exactly like an extracted one, which is what made this dangerous. The
+    rule that distinguishes them is local: a clause-opening ordinal is followed by a comma, or
+    stands at the start of the text. `the first 5 files` is not a clause opener and still counts.
+    """
+    opener = R.require("First, list available artifacts to find the most recent build.")
+    assert opener["values"] == [], opener["values"]
+
+    opener_no_comma = R.require("First list the files in the directory.")
+    assert opener_no_comma["values"] == [], opener_no_comma["values"]
+
+    counted = R.require("Delete the first 5 files in the directory.")
+    assert [v["value"] for v in counted["values"]] == ["5"], counted["values"]
+
+    # and the task that exposed it no longer manufactures a namespace
+    plan = R.require_survey_plan_sequence(
+        "/tmp/cb/bin/kforge",
+        'Using the kforge CLI, deploy the latest build artifact for the "web-platform" service to'
+        ' the staging environment. First, list available artifacts to find the most recent'
+        ' successful build. Then trigger a deployment pipeline for staging using that artifact.',
+        probes=14)
+    joined = " ".join(" ".join(c) for c in plan["commands"])
+    assert "--namespace 1" not in joined, joined

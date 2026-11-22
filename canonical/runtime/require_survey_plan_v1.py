@@ -1153,6 +1153,16 @@ def require(text: str) -> dict[str, Any]:
                          unquoted, re.I):
         if re.match(r"\s+\d+\s*[A-Za-z]", unquoted[m.end(): m.end() + 16]):
             continue  # "the first 2 lines": the count is 2, and `first` only selects the end
+        # An ordinal is a count only when it modifies an object -- "the first 5 files". Where it
+        # opens a clause it is the request placing a step: `First, list available artifacts to
+        # find the most recent successful build` is the request's first *instruction*, and there
+        # is no number in it at all. Reading it as `1` invented a value and put it in a required
+        # flag (`artifact list --namespace 1`), which is the one thing the project forbids
+        # outright. The test is local and needs no vocabulary: a clause-opening ordinal is
+        # followed by a comma, or stands at the start of the text.
+        tail = unquoted[m.end():]
+        if re.match(r"\s*,", tail) or not unquoted[: m.start()].strip():
+            continue
         add("number", ORDINALS[m.group(1).lower()],
             unquoted[max(0, m.start() - 90): m.end() + 50], m.start())
 

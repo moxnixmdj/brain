@@ -1686,3 +1686,28 @@ because the newly-planned step then chose a wrong flag (`artifact list --namespa
 plan is now *structurally* the request's plan, which it was not before, and the remaining error is
 a value-binding error rather than a missing step. The mission's claim is that the document is the
 plan; a plan that silently drops the step the request put first is not that, whatever it scores.
+
+### A42 — an ordinal that opens a clause is not a count
+
+Following A41's newly-visible step, the flag error underneath it turned out to be the worst class of
+bug the project has: **an invented value**.
+
+`First, list available artifacts to find the most recent successful build.` contains no number.
+The extractor read the word `First` as the ordinal `1`, and that `1` was then seated in a required
+flag:
+
+    kforge artifact list --namespace 1
+
+`--namespace` is required, the request names no namespace, and the planner filled it with a digit
+it had manufactured from a step marker. Never invent a value is the first law of this project, and
+the mechanism broke it silently, because an invented value looks exactly like an extracted one.
+
+The rule was doing real work: `the first 2 lines` must yield `2`, and `the first 5 files` must yield
+`5`. What distinguishes those from a step marker is local and needs no vocabulary — **a
+clause-opening ordinal is followed by a comma, or stands at the start of the text**. `First,` and
+`First list ...` open a clause; `the first 5 files` does not.
+
+Measured: **0.4696 unchanged**, 47 tests green, zero regressions. The task still does not pass —
+cb-035 wants `--service web-platform` and three real commands — but an invented value is now
+impossible on this path, which matters more than the number: a score that rises on fabricated
+values is worse than a score that does not move.
