@@ -195,3 +195,58 @@ A7's falsifier ("no movement, or movement in the wrong direction") is not met.
 `cli_bench.scoring` package is absent from the published tree, so the published harness cannot be run
 unmodified here). §6's TUA verifier-fidelity arm likewise needs a verifier this sandbox cannot fetch. Those
 three remain open; A1–A3, A6 and A7 now have numbers.
+
+### A5 — CLI-Bench, published tasks and published scoring, model-free (recorded 2026-11-22)
+
+**What was run.** All **60** published tasks (`/tmp/CLI-Bench/data/tasks/*.yaml`, cloned unmodified), the
+bench's own mock backends, the bench's own `Runner` and `Evaluator`, and the bench's own scoring weights
+(0.6 outcome / 0.2 efficiency / 0.2 recovery). The agent is a `BenchAgent` whose `act()` is the planner: it
+reads the tool's document (the bench's own unmodified adapter page, served through a bridge binary that
+answers `--help` with exactly that page), routes to the command the request is about, and emits that one
+command. **No model, no parameters, no network, no answer key** — `optimal_commands` and `expected_state`
+are read by the bench's evaluator and never by the planner (A5's falsifier).
+
+**What was not run.** `cli_bench.scoring.reliability` is absent from the published tree, so
+`BenchmarkRunner` (which imports it) is not used; `Runner` + `Evaluator` are used directly and are the two
+components that produce and score an action. The bench's own unit suite is also partially broken in the
+published tree (20 failed / 399 passed, including two collection errors from that missing module); its
+`test_mock_slack.py` passes 14/14.
+
+**Result, 60 tasks:**
+
+| | value |
+|---|---|
+| tasks scored | **57 / 60** |
+| tasks blocked by a bench-internal defect | **3** (`cb-003`, `cb-022`, `cb-030`: the published task data gives `channels` as a **list**, the published `SlackMockBackend` indexes it as a **dict** — its own unit tests use the dict shape) |
+| refused (no plan) | **5 / 57** |
+| mean score, scored tasks | **0.4325** |
+| mean outcome, scored tasks | **0.3464** |
+| exact outcomes (1.0) | **3** (`cb-009` linear project list, `cb-013` notion page list, `cb-019` google drive list) |
+
+| family | n | mean | outcome | refused |
+|---|---|---|---|---|
+| composite | 19 | 0.360 | 0.196 | 2 |
+| project_mgmt | 11 | 0.495 | 0.447 | 0 |
+| custom_cli_exploration | 9 | 0.418 | 0.435 | 2 |
+| info_retrieval | 5 | 0.560 | 0.500 | 0 |
+| communication | 4 | 0.388 | 0.312 | 0 |
+| data_ops | 4 | 0.675 | 0.667 | 1 |
+| custom_cli | 4 | 0.289 | 0.065 | 0 |
+| project_mgmt_exploration | 1 | 0.400 | 0.500 | 0 |
+
+**What moved, and by what.** Two of this round's readings were added while running this arm, both stated by
+the documents and neither specific to a bench tool: (1) a demonstration is evidence for **one** act, so when
+the instruction numbers its acts as steps, values from a later step are not poured into the earlier act's
+argument list (this alone took `cb-060` from 0.4 to the exact expected command `flowctl workflow get --id
+wf-001`); (2) a generic metavariable (`--id <string>`) carries no meaning, but the option's own description
+("Workflow ID") does, so a request value that uses that description's words fills that option. Refusals fell
+13 → 5 across the two changes.
+
+**The honest reading of this number.** 0.43 mean is not a good score, and the two structural reasons are
+nameable. (a) **19 composite tasks name two or three tools in one instruction**; one command cannot satisfy
+them, and the round's planner produces one act — it refuses rather than inventing the rest. (b) The
+`custom_cli`/`custom_cli_exploration` families require a *state change* (`register a source`, `configure a
+canary`) whose arguments the request gives in prose rather than as values the document's own slots name.
+The families it does well on are the ones where the request is one act against one document —
+`project_mgmt` 0.495, `info_retrieval` 0.560, `data_ops` 0.675. A5's claim is therefore **measured, not
+vindicated**: the seam works on one-act instructions and is refused, correctly, on multi-act ones.

@@ -85,6 +85,7 @@ summarize split join merge copy move rename remove delete create make build appe
 replace edit update add set install download upload start stop run open save export import
 archive unarchive rotate resize reduce enlarge crop trim adjust fill highlight underline
 italicize center align indent number paginate fold wrap dedupe
+get fetch read load send post put view read browse lookup approve reject publish notify message
 """.split())
 
 INVERSE_PREFIXES = ("un", "de")
@@ -227,8 +228,11 @@ OPTION_LINE = re.compile(
     r"(?P<flags>(?:-(?P<short>[A-Za-z0-9?])(?![A-Za-z0-9]))(?:\s*,\s*--[A-Za-z][\w-]*)*"
     r"|--[A-Za-z][\w-]*(?:\s*,\s*--[A-Za-z][\w-]*)*)"
     # the separator is optional because a document may write `--fold[=NUM]`, `--width=NUM`,
-    # `-d exdir` or `--output FILE` -- all four are the same fact about the same slot
-    r"(?:\s*[= ]?\s*(?P<meta>[\[\]=-]*[A-Z][A-Z0-9_<>.|-]*\]?))?"
+    # `-d exdir` or `--output FILE` -- all four are the same fact about the same slot. Angle
+    # brackets are as common as caps for the same fact (`--limit <int>`), and are spelled here.
+    r"(?:\s*[= ]?\s*(?P<meta>(?:<[A-Za-z][A-Za-z0-9_-]*>)|[\[\]=-]*[A-Z][A-Z0-9_<>.|\[-]*\]?))?"
+    # a row may mark itself as required in the same place a description would start
+    r"(?:\s*\((?P<required>required|optional)\))?"
     r"(?P<rest>(?:\s{2,}|\t+).*)?$"
 )
 ALIAS = re.compile(r"--[A-Za-z][\w-]*|(?<![\w-])-[A-Za-z0-9](?![\w-])")
@@ -237,8 +241,10 @@ USAGE_SLOT = re.compile(r"(?P<option>--[A-Za-z][\w-]*|-[A-Za-z0-9])[ =]?(?P<meta
 # a usage statement starts a line, or follows the program naming itself in a sentence
 # (`Zip 3.0 (July 5th 2008). Usage:`). `give a short usage message` is not one.
 USAGE_LINE = re.compile(
-    r"^\s*(?:usage|USAGE|Usage)\s*:?\s*(?P<rest>.+)$"
-    r"|^.{0,60}?\.\s*(?:Usage|usage)\s*:?\s*(?P<after>.*)$")
+    # a usage statement may be the line's own heading in any case (`USAGE:`, `Usage:`, `usage`),
+    # with the grammar on the same line or the next; a heading alone is matched with `rest=None`
+    r"^\s*(?:[Uu][Ss][Aa][Gg][Ee])\s*(?::\s*(?P<rest>.*))?$"
+    r"|^.{0,60}?\.\s*(?:[Uu]sage)\s*:\s*(?P<after>.*)$")
 # a usage statement that names the program on its own line, as Info-ZIP does under its banner
 USAGE_NAME = re.compile(r"^\s*(?P<name>[A-Za-z][A-Za-z0-9_.+-]*)\s+(?P<grammar>\[-.*)$")
 OR_LINE = re.compile(r"^\s*(?:or|OR)\s*:\s*(?P<rest>.+)$")
@@ -337,13 +343,27 @@ def parse_usage(text: str) -> dict[str, Any]:
     """
     variants: list[dict[str, Any]] = []
     first = None
+    upcoming: str | None = None
     for line in text.splitlines():
+        if upcoming is not None:
+            # the usage heading stood alone (`USAGE:`), so the grammar is the line it heads
+            said, upcoming = line.strip(), None
+            variant = _usage_variant(said)
+            if variant["usage"]:
+                variants.append(variant)
+                if first is None:
+                    first = variant
+                continue
         for pattern in (USAGE_LINE, USAGE_NAME, OR_LINE):
             m = pattern.match(line)
             if not m:
                 continue
             fields = m.groupdict()
             said = fields.get("rest") or fields.get("after") or ""
+            if not said.strip():
+                # `USAGE:` alone on its line: the grammar is the very next line
+                upcoming = ""
+                break
             if fields.get("name") and fields.get("grammar"):
                 said = fields["name"] + " " + fields["grammar"]
             variant = _usage_variant(said)
@@ -373,44 +393,6 @@ def parse_usage(text: str) -> dict[str, Any]:
 
 # A tool may put two option rows on one physical line; an option starts a new cell only
 # after two spaces and a dash (never inside `--foo=BAR` or `[-x xlist]`).
-CELL = re.compile(r"\s{2,}(?=-[A-Za-z0-9?])")
-
-# One rule for every option-list layout a real tool uses (GNU, argparse, click, busybox).
-OPTION_LINE = re.compile(
-    r"^(?P<indent>\s*)"
-    r"(?P<flags>(?:-(?P<short>[A-Za-z0-9?])(?![A-Za-z0-9]))(?:\s*,\s*--[A-Za-z][\w-]*)*"
-    r"|--[A-Za-z][\w-]*(?:\s*,\s*--[A-Za-z][\w-]*)*)"
-    # the separator is optional because a document may write `--fold[=NUM]`, `--width=NUM`,
-    # `-d exdir` or `--output FILE` -- all four are the same fact about the same slot
-    r"(?:\s*[= ]?\s*(?P<meta>[\[\]=-]*[A-Z][A-Z0-9_<>.|-]*\]?))?"
-    r"(?P<rest>(?:\s{2,}|\t+).*)?$"
-)
-ALIAS = re.compile(r"--[A-Za-z][\w-]*|(?<![\w-])-[A-Za-z0-9](?![\w-])")
-# In a usage line an option is followed by the word that names its argument, e.g. `[-d exdir]`.
-USAGE_SLOT = re.compile(r"(?P<option>--[A-Za-z][\w-]*|-[A-Za-z0-9])[ =]?(?P<meta>[a-z][a-z0-9_-]*)")
-# a usage statement starts a line, or follows the program naming itself in a sentence
-# (`Zip 3.0 (July 5th 2008). Usage:`). `give a short usage message` is not one.
-USAGE_LINE = re.compile(
-    r"^\s*(?:usage|USAGE|Usage)\s*:?\s*(?P<rest>.+)$"
-    r"|^.{0,60}?\.\s*(?:Usage|usage)\s*:?\s*(?P<after>.*)$")
-# a usage statement that names the program on its own line, as Info-ZIP does under its banner
-USAGE_NAME = re.compile(r"^\s*(?P<name>[A-Za-z][A-Za-z0-9_.+-]*)\s+(?P<grammar>\[-.*)$")
-OR_LINE = re.compile(r"^\s*(?:or|OR)\s*:\s*(?P<rest>.+)$")
-INDEX_LINE = re.compile(r"^\s{2,}(?P<name>[a-z][a-z0-9][a-z0-9_-]{0,29})(?:\s{2,}|\t+)(?P<what>\S.*)$")
-EXAMPLE_HEADER = re.compile(r"^\s*(?:examples?|e\.g\.)\s*:?\s*$", re.I)
-HEADING = re.compile(r"^\s{0,2}(?P<title>[A-Z][^:]{2,60}):\s*$")
-
-# What a program says when it cannot render a page, as opposed to having none.
-NOT_A_DOCUMENT = ("no man viewer", "failed to exec 'man'", "man: not found",
-                  "command not found", "no such file or directory: 'man'",
-                  "cannot find the 'man' command")
-
-# --------------------------------------------------------------------------- document reader
-
-
-
-
-
 def parse_options(text: str) -> list[dict[str, Any]]:
     """Every option the document declares: flag, slots, words, act, section."""
     options: list[dict[str, Any]] = []
@@ -638,7 +620,9 @@ def positional_grammar(usage: Mapping[str, Any]) -> list[str] | None:
                 continue
             joined.append(token)
         for token in joined:
-            if token.startswith("-") or re.match(r"^\[?OPTIONS?\b", token.upper()):
+            # `[OPTION]...` and `[flags]` are the same position: where the program's own
+            # options sit. Both spellings mean "options here", not an operand.
+            if token.startswith("-") or re.match(r"^\[?(?:OPTIONS?|FLAGS?)\b", token.upper()):
                 # `[OPTION]...` in a usage line means the program's options sit here. That is a
                 # position in the grammar, and a picture that drops it silently shifts every
                 # object after it one place to the left.
@@ -801,6 +785,17 @@ def route(tree: Mapping[str, Any], request_words: Iterable[str],
 # --------------------------------------------------------------------------- require
 
 
+def step_of(text: str, position: int) -> int:
+    """Which numbered step a position sits under: the last `N.` marker before it, or 0.
+
+    An instruction that writes its acts as `1. ... 2. ...` states a boundary between them, and a
+    boundary is the only thing that makes one act's values inapplicable to another's. An
+    instruction with no numbering is one step, and this returns 0 for every position in it.
+    """
+    markers = list(re.finditer(r"(?m)^\s*(\d{1,2})[.)]\s", str(text or "")[:position]))
+    return int(markers[-1].group(1)) if markers else 0
+
+
 def require(text: str) -> dict[str, Any]:
     """The instruction as (ACT, VALUES): what to do, in the class, and the objects it names."""
     instruction = str(text or "")
@@ -813,6 +808,7 @@ def require(text: str) -> dict[str, Any]:
             return
         seen.add(key)
         values.append({"kind": kind, "value": value, "position": position,
+                       "step": step_of(instruction, position),
                        "words": sorted(words_of(context))[:24], "context": context.strip()[:240]})
 
     for m in QUOTED.finditer(instruction):
@@ -846,6 +842,7 @@ def require(text: str) -> dict[str, Any]:
                           if i >= 0] or [len(unquoted)])
         clause = unquoted[clause_start:clause_end].strip()
         values.append({"kind": "path", "value": token, "position": start, "role": role,
+                       "step": step_of(unquoted, start),
                        "words": sorted(words_of(clause))[:24],
                        "context": clause[:240]})
         seen.add(("path", token))
@@ -1036,6 +1033,13 @@ def _demo_plan(demo: Mapping[str, Any], requirement: Mapping[str, Any], tool: st
     filled = [str(v["value"]) for v in ordered]
     if len(filled) > len(demo["values"]):
         return None
+    # An instruction may name several acts in numbered steps. The demonstration is evidence for
+    # the act it demonstrates and for no other, so a value the request states for a *different*
+    # step must not be poured into this act's argument list -- that invents a command the
+    # document never showed. The request's own numbered steps are the boundary, and no other.
+    steps = {v.get("step") for v in ordered}
+    if len(steps) > 1:
+        return None
     argv = [tool] + list(prefix) + list(demo["options"]) + filled
     return {"argv": argv, "operation": None,
             "bound": [{"role": "demonstration", "call": demo["call"]}],
@@ -1178,6 +1182,23 @@ def _declared_word_readings(requirement: Mapping[str, Any], usage: Mapping[str, 
                 best = option
         if best is not None:
             out.append([{"role": "value_slot", "option": best["flag"],
+                         "value": str(value["value"])}])
+            continue
+        # A metavariable may be generic (`--id <string>`), so the *usage* line cannot say what
+        # the option is for. The document says it in the option's own description ("Workflow
+        # ID"), and a value whose own words use those words is that option's value.
+        want = set(value.get("words") or [])
+        scored = []
+        for option in usage.get("options") or []:
+            if not option.get("takes_value") or not _accepts(slot_kind(option), kind):
+                continue
+            shared = want & words_of(str(option.get("words") or ""))
+            shared -= set(words_of(str(option.get("flag") or "").replace("-", " ")))
+            if shared:
+                scored.append((len(shared), option))
+        if scored:
+            scored.sort(key=lambda pair: -pair[0])
+            out.append([{"role": "value_slot", "option": scored[0][1]["flag"],
                          "value": str(value["value"])}])
     return out
 
