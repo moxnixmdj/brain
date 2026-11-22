@@ -337,3 +337,52 @@ That is the generalisation the owner asked about, and it is not a summary of an 
 argv, worthless the moment the environment changes. What generalises is the **reading** — *where does this
 document say the thing I was asked for goes* — and it is parameter-free, which is why it transferred to
 `halcyon` and to `lattice` without a single fact about either being stored.
+
+### A9 — the loop: the name of what it lacks is the query (`/tmp/a9.py`)
+
+A8 produces a *name*. A9 asks whether that name is enough to act on, and separates two claims that are
+easily confused:
+
+* **L1 — the name is a usable query.** The project's own just-in-time reader (`jit_knowledge_v1.resolve`,
+  already in the tree) is handed the refusal word and must resolve it from **independent sources** or say
+  honestly that it cannot. Live result for the dropped word `spreadsheet`:
+
+  ```
+  status = PASS__JIT_KNOWLEDGE_RESOLVED   pass = True
+  sources = npm, npm, npm, pypi, github     authority = EXTERNAL_PUBLIC_EVIDENCE_FETCHED
+  ```
+
+  Five documents from three independent sources and two kinds. One source is never a conclusion — the
+  reader's own `min_sources`/`min_kinds` gate is what makes that structural rather than advisory.
+
+* **L2 — the answer changes the plan.** This is the claim that matters, and it is the one that is usually
+  skipped. The fetched text is *not* the program's manual, so it cannot by itself move a word into a
+  document. What does is the program **publishing a page that places the word**. Same instruction, before
+  and after:
+
+  | | route | complete | dropped |
+  |---|---|---|---|
+  | `Tally … as a spreadsheet` (no such page) | — | **False** | **`spreadsheet`** |
+  | same instruction, page `sheet SHEET LEDGER` now exists | `sheet` | **True** | — |
+
+  and the plan `sheet <copy>/sheet.csv <copy>/ledger.txt` ran (exit 0) and produced the artifact.
+
+The honest reading of A9: **the loop closes when the environment can answer**, and the mechanism's
+contribution is the *question* — a named gap, not a paragraph of guessed context. Where the environment
+cannot answer (the manual is fixed), the mechanism still refuses rather than inventing a format. That is
+the difference between "knows what it does not know" and "guesses what it does not know".
+
+### A8/A9 correction — the vocabulary we brought is gone
+
+An earlier draft of `writes_into_a_named_place` recognised a destination by matching against a hand-written
+list (`out|output|dest|archive|veil|store|repository|…`). That list *is* the failure the whole round is
+against: vocabulary carried in from outside, standing in for a reading. Removing it exposed a real case the
+list had been silently covering — `box pack OUTFILE [PATCH]...` with the request `Join one.diff and two.diff
+into all.diff`: `OUTFILE` and `all.diff` share no word, so no name-matching rule, however long its table,
+can bridge them.
+
+The document answers it in its own punctuation. `[PATCH]...` repeats; `OUTFILE` occurs once. A request that
+makes **one** thing therefore belongs in a place that holds **one** thing. `places_that_repeat()` reads the
+`...` marks; the rule is now: *the place's name matches the made thing's words, or the place holds one thing
+and the request makes one thing.* No list. All 22 tests pass without it, and A5 is unchanged (57/60 scored,
+3 refusals, mean 0.4355).

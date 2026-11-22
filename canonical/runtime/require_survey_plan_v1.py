@@ -1607,19 +1607,50 @@ def _composed_readings(requirement: Mapping[str, Any], usage: Mapping[str, Any],
     for value in values:
         if value.get("role") == "product" or is_sink(value):
             product_words |= {str(w) for w in (value.get("words") or [])}
+    # The document's own name for the place is what decides. No list of words we brought:
+    # a place called `OUTFILE` and a made thing called `records.out` share no letter, and no
+    # table can bridge that; a place called `VEILFILE` and a made thing called `records.veil`
+    # share the word `veil`, and that is the document telling us where its product goes.
+    repeating = places_that_repeat(usage)
+    products = [v for v in values if v.get("role") == "product" or is_sink(v)]
+    one_made_thing = len(products) == 1
     writes_into_a_named_place = any(
         item["role"] == "positional"
-        and (re.match(r"^(out|outfile|output|dest|destination|target|archive|result|"
-                      r"veil|store|repository|repo|index|collection|bundle)$",
-                      str(item.get("means") or ""))
-             # or the place's own name is one of the words the request used for the thing made
-             or any(len(str(w)) >= 3 and str(w).startswith(str(item.get("means") or ""))
-                    for w in product_words))
+        and len(str(item.get("means") or "")) >= 3
+        and (
+            # the place's own name is one of the words the request used for the thing made
+            any(len(str(w)) >= 3 and (str(w).startswith(str(item["means"]))
+                                      or str(item["means"]).startswith(str(w)))
+                for w in product_words)
+            # or the place holds one thing and the request makes one thing: the document's own
+            # `...` says which places take many, and a single product is not one of them
+            or (one_made_thing and str(item.get("means")) not in repeating))
         for item in bound)
     if not writes_into_a_named_place and \
             not any(item["role"] in ("redirect", "stdin_from") for item in bound):
         return []
     return [(bound, "PLANNED_BY_A_COMPOSED_READING")]
+
+
+def places_that_repeat(usage: Mapping[str, Any]) -> set[str]:
+    """Which places the document itself marks as repeatable (`[PATCH]...`, `FILE...`).
+
+    This is the document's punctuation, not a vocabulary: a place the program writes with `...`
+    holds many things, and a place it writes once holds exactly one. That is how a document says
+    *where the one thing I make goes* without ever using a word like "output" -- `box pack
+    OUTFILE [PATCH]...` says the patches are many and the out file is one, and nothing else in
+    the line needs to be understood to know which of them the product belongs to.
+    """
+    repeating: set[str] = set()
+    for variant in usage.get("variants") or [usage]:
+        tokens = re.findall(r"\[?[A-Za-z][A-Za-z0-9_.|-]*\]?\.{0,3}", str(variant.get("usage") or ""))
+        for token in tokens:
+            if not token.endswith("."):
+                continue
+            name = token.rstrip(".").rstrip("]").lstrip("[").lower()
+            if name and name not in STOP:
+                repeating.add(name)
+    return repeating
 
 
 def candidate_sink(bound: Sequence[Mapping[str, Any]]) -> str | None:
