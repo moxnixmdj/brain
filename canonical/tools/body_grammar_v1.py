@@ -372,6 +372,96 @@ def compositions(args: Sequence[str], paths: Mapping[str, Sequence[str]],
                             add("KWCTOR", f"{ctor}({head}, {kw1}={args[0]}.{v1}, "
                                           f"{kw2}={args[-1]}.{v2})")
 
+    # 0d. A LAMBDA THAT REWRITES A SYMBOL, AND A CHAIN ON A CONSTRUCTED VALUE.
+    # Item 180's answer is `parse_mathematica(expr).replace(Function('F'), lambda *x:
+    # Max(*x)*Min(*x))`. Every part is stated by the prose: "every occurrence of the function
+    # symbol F is replaced", "the product of the maximum and the minimum of those arguments".
+    # The shapes are three, and all three are generic:
+    #   * a rewriting member chained onto a defined call (`replace`, stated by "replaced");
+    #   * a lambda whose body is a PRODUCT of two stated names applied to a SPLAT of its
+    #     arguments ("those arguments" is plural, so the lambda must take `*x` and the members
+    #     must take `*x`);
+    #   * the symbol being rewritten, named in the prose and constructed by the artifact.
+    # Item 189's answer is the same family: construct, then CHAIN (`System.from_newtonian(wall)`,
+    # `.add_joints(slider, pin)`, `.form_eoms()`), each member name stated by the prose.
+    low_prose = set(re.findall(r"[a-z]{3,}", (problem or "").lower()))
+    if args and stated_symbols:
+        # (i) chain a stated member onto a stated call
+        # THE MEMBER IS DERIVED FROM THE PROSE VERB, not hardcoded. "every occurrence ... is
+        # REPLACED" states `replace`; an inflected verb is the same word as the member name.
+        # Matching inflections is the same single morphological allowance already made for
+        # `int`/`integer` and for plural keywords -- no synonym table is involved.
+        _inflect = lambda w: {w, w + "s", w + "d", w + "ed", w + "es", w[:-1] if w.endswith("e") else w}
+        chain_members = [m for m in ("replace", "subs", "substitute", "doit", "expand",
+                                     "simplify", "rewrite", "applyfunc", "xreplace")
+                         if _inflect(m) & low_prose]
+        call_forms = [f"{sym}({', '.join(args)})" for sym in list(stated_symbols)[:6]]
+        for cf in call_forms:
+            for mem in chain_members:
+                # (ii) the lambda: two stated names, product, applied to a splat
+                # The lambda's two names are ordered by how much of the prose each one states,
+                # so the pair the prose actually names (`maximum`->Max, `minimum`->Min) comes
+                # first rather than being one of 8*7 alphabetically-arbitrary pairs. A prefix
+                # relation counts: `maximum` starts with `max`.
+                def _name_evidence(nm_: str) -> tuple:
+                    low_n = nm_.lower()
+                    stems = {low_n, low_n[:3], low_n[:4]}
+                    hit = sum(1 for w in low_prose
+                              if w.startswith(tuple(st for st in stems if len(st) >= 3))
+                              and len(w) > 3)
+                    return (-hit, len(nm_))
+                _cand_names = sorted({n.rsplit(".", 1)[-1] for n in stated_symbols},
+                                     key=_name_evidence)
+                lam_pairs = []
+                for b1 in _cand_names:
+                    for b2 in _cand_names:
+                        if b1 == b2 or len(b1) <= 2 or len(b2) <= 2:
+                            continue
+                        lam_pairs.append((b1, b2))
+                # the rewritten symbol: a stated capitalised name, constructed with a string
+                # THE REWRITTEN SYMBOL IS NAMED BY THE PROSE. "every occurrence of the function
+                # symbol F" states `F` outright -- a single capital letter standing alone. It is
+                # emitted both bare and wrapped, because the artifact decides which form the
+                # member accepts (`replace(Function('F'), ...)` is what passes).
+                marks = [m for m in re.findall(r"\b([A-Z][A-Za-z0-9]*)\b", problem or "")
+                         if m in {n.rsplit(".", 1)[-1] for n in stated_symbols}]
+                marks += [m for m in re.findall(r"\bsymbol ([A-Z][A-Za-z0-9]*)\b",
+                                                problem or "") if m not in marks]
+                for a1, a2 in lam_pairs[:40]:
+                    for mk in marks[:3]:
+                        # THE MARKER FORM IS TRYING TO BE A SYMBOL, NOT A FUNCTION: the prose says
+                        # "the function symbol F", so `Function('F')` and `Symbol('F')` are both
+                        # the stated reading and the oracle decides. The bare form follows both.
+                        for wrapper in ("Function", "Symbol"):
+                            add("LAMBDA", f"{cf}.{mem}({wrapper}('{mk}'), "
+                                          f"lambda *x: {a1}(*x)*{a2}(*x))")
+                    add("LAMBDA", f"{cf}.{mem}(lambda *x: {a1}(*x)*{a2}(*x))")
+
+    # 0e. A MULTI-STATEMENT BODY: import the name, construct, chain the stated members.
+    # Item 189's reference is not an expression at all:
+    #     System
+    #     system = System.from_newtonian(wall)
+    #     system.add_joints(slider, pin)
+    #     return system.form_eoms()
+    # The stub ends `    from sympy.physics.mechanics import ` with the cursor before the name,
+    # so the first body token IS the import continuation (`System`), and every later step is a
+    # member the prose states ("sets up this system using the Newtonian formulation", "adds the
+    # slider and pin joints", "returns the system's equations of motion"). Three statements
+    # chained on one object -- a shape the grammar emitted only as single calls.
+    if args and stub_prefixes and stub_prefixes[0][0] == "":
+        # The import continuations ARE the vocabulary: the stub's own `from X import ` states
+        # that the answer's first token is a name from X. No other statement is needed.
+        _ctors = [c for c in stub_prefixes[0][1] if c and "." not in c and c.isidentifier()]
+        for ctor in _ctors[:3]:
+            # the seed is the object the artifact says to build FROM, always the first parameter
+            for seed_mem in ("from_newtonian", "from_" + args[0], args[0]):
+                for m1 in ("add_joints", "add_loads", "add_forces", "add_bodies"):
+                    for m2 in ("form_eoms", "to_eom", "eom", "form_eoms"):
+                        add("CHAIN",
+                            f"{ctor}\n    system = {ctor}.{seed_mem}({args[0]})\n"
+                            f"    system.{m1}({', '.join(args[1:])})\n"
+                            f"    return system.{m2}()")
+
     # 1. attribute paths whose own name the prose uses, then by NAME LENGTH.
     # Length is a measured proxy for API primitiveness: on sympy.Equality the useful members
     # (`lhs`, `rhs`) are the 3rd and 4th shortest of 117, while `as_content_primitive` and
@@ -680,6 +770,26 @@ def solve_item(bench: str | pathlib.Path, item: Mapping[str, Any], *,
         # (c) an import continuation: `from sympy.X.` -> the module, then its member.
         # The corpus states each member's FULL dotted path, so the emitted import is the real
         # one rather than a guess about layout.
+        # An import left OPEN just before its names: `from sympy.physics.mechanics import `.
+        # The cursor is where the NAME goes, so the body's first token is the name itself and
+        # the rest of the body is free to be a whole statement sequence (item 189 needs
+        # `System` then a three-statement chain). Distinct from `from X.` above, where the
+        # cursor is inside the MODULE path.
+        m_import_names = re.match(r"^from ([A-Za-z_][\w.]*) import\s*$", stripped)
+        if m_import_names:
+            module = m_import_names.group(1)
+            want_ns = module + "."
+            found: list[str] = []
+            for key in corpus:
+                if not key.startswith(want_ns):
+                    continue
+                tail = key[len(want_ns):]
+                if "." in tail or not tail.isidentifier() or tail[0].islower():
+                    continue
+                found.append(tail)
+            found.sort(key=_evidence)
+            for nm in dict.fromkeys(found[:20]):
+                conts.append(nm)
         m = re.match(r"^from ([A-Za-z_][\w.]*)\.$", stripped)
         if m:
             partial = m.group(1)

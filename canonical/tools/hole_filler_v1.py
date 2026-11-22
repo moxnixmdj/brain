@@ -97,9 +97,16 @@ def _repaired_source(starting_code: str) -> str:
     if lines0:
         last = lines0[-1]
         stripped_last = last.strip()
+        # An import left open just before its NAMES: `from sympy.physics.mechanics import `.
+        # rstrip() removed the trailing space that marks the cursor, so the test cannot require
+        # one; `from X import` with nothing after it is equally truncated. Leaving it unrepaired
+        # kept `parameters() == []` for item 189 -- the same silent empty space that hid
+        # 35/186/200, and the reason its three-statement chain could never be built.
+        if re.match(r"^from\s+[A-Za-z_][\w.]*\s+import\s*$", stripped_last):
+            lines0[-1] = last.rstrip() + " _truncated"
         # `from X.` MUST be tested before the generic trailing-dot rule: a `from` line ending
         # in a dot is a truncated import and needs one character removed, not a bare name.
-        if re.match(r"^from\s+[A-Za-z_][\w.]*\.$", stripped_last):
+        elif re.match(r"^from\s+[A-Za-z_][\w.]*\.$", stripped_last):
             # `from sympy` alone is NEVER valid Python -- a bare import with no module and no
             # names. The signature is the only thing needed for parsing, and the real import
             # is what the body supplies, so the truncated line becomes a placeholder.

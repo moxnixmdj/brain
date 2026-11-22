@@ -201,3 +201,48 @@ def test_keyword_must_not_be_a_parameter_name():
     assert bodies, "no keyword-constructor bodies"
     assert "parent=" not in bodies[0]
     assert "child=" not in bodies[0]
+
+
+def test_open_import_stub_parses_and_recovers_arguments():
+    """189's stub ends `from sympy.physics.mechanics import ` with the cursor before the name.
+    Unrepaired it kept parameters() empty, so its three-statement body could never be built."""
+    stub = ("from sympy import symbols\nfrom sympy.physics.mechanics import (\n"
+            "Particle, PinJoint, PrismaticJoint, RigidBody)\nimport sympy\n\n"
+            "def custom_motion(wall: sympy.physics.mechanics.RigidBody, "
+            "slider: sympy.physics.mechanics.PrismaticJoint, "
+            "pin: sympy.physics.mechanics.PinJoint) -> sympy.Matrix:\n"
+            "    from sympy.physics.mechanics import ")
+    repaired = HF._repaired_source(stub)
+    ast.parse(repaired)
+    assert G.parameters(stub) == ["wall", "slider", "pin"]
+
+
+def test_lambda_rewrite_shape_is_generated():
+    """180: prose says 'every occurrence ... is REPLACED' and 'the product of the maximum and
+    the minimum of those arguments'. The member comes from the inflected verb, the lambda's two
+    names from the stated symbols, and the rewritten symbol from the prose's own `symbol F`."""
+    target = ("parse_mathematica(expr).replace(Function('F'), "
+              "lambda *x: Max(*x)*Min(*x))")
+    cands = G.compositions(
+        ["expr"], {},
+        problem=("modify the resulting expression so that every occurrence of the function "
+                 "symbol F is replaced by a new function that, when evaluated with one or "
+                 "more arguments, returns the product of the maximum and the minimum of "
+                 "those arguments"),
+        stated_symbols=["parse_mathematica", "Function", "Max", "Min"])
+    bodies = [c["body"] for c in cands]
+    assert target in bodies, bodies[:6]
+
+
+def test_multi_statement_chain_is_generated():
+    """189: construct, add the joints, return the equations of motion -- three statements on
+    one object, which the grammar previously emitted only as single calls."""
+    cands = G.compositions(
+        ["wall", "slider", "pin"], {},
+        problem=("sets up this system using the Newtonian formulation, adds the slider and "
+                 "pin joints, and returns the system's equations of motion"),
+        stub_prefixes=[("", ["System", "Inertia"])])
+    bodies = [c["body"] for c in cands]
+    target = ("System\n    system = System.from_newtonian(wall)\n"
+              "    system.add_joints(slider, pin)\n    return system.form_eoms()")
+    assert target in bodies
