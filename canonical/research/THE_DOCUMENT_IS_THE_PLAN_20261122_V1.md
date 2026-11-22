@@ -1521,3 +1521,44 @@ it does not, the document's spelling is.
 argument it assembled itself, entirely from a document's example and a sentence's prose.** Nothing in
 the mechanism knows what a database host or a port is. The document said the shape; the request said
 the values; the binding was word-for-word.
+
+### A37 — the same digits twice: 0.4572 → 0.4655, the best total in the thread
+
+cb-057 is the other *"discover the tool yourself"* task, and it asks for a version-to-weight split:
+
+> configure a canary deployment for "user-service": Route **90%** of traffic to v1 and **10%** to v2
+
+The document states the shape: `--versions <json>  Version-to-weight mapping as JSON (e.g. {"v1": 90,
+"v2": 10})`. **The example and the request contain the same two numbers.** That fact — which looks
+like a convenience — is what stopped the shape from filling at all.
+
+The filler tracked which of the request's numbers were already spent by asking whether each one
+appears in the output built so far. The example's own `90` and `10` are in the output from the
+start, so every candidate was "already present", the loop had nothing to assign, and the shape was
+returned unchanged — the *document's* sample values, silently, which is the one outcome that looks
+like success and is not. Spending is now tracked by **position in the shape**: a key takes the next
+number the request states, in the request's order, that has not already filled a key to its left.
+
+Filling it also fixed the flag that had been wrong all along:
+
+    before   meshctl traffic split --service 90 --versions 10
+    after    meshctl traffic split --versions {"v1": 90, "v2": 10} --service user-service
+
+    cb-057      0.15 -> 0.65   (+0.50, the largest single-task gain in this thread)
+    all sixty   0.4572 -> **0.4655**, three seeds, up 1 / down 0
+    tests       46 green, guard PASS
+
+**Why this is the most important result of the recent rounds, and it is not the number.** cb-054 and
+cb-057 are both tasks that say *"You are not provided with documentation — discover the tool's
+commands yourself."* They are the only tasks in this benchmark that test the mission's central claim
+directly: enter an environment you know nothing about, read what it tells you, and act. Both now
+produce the exact command their expected state requires:
+
+- cb-054 `datapipe source connect --type postgres --config {"host": "db.analytics.internal",
+  "port": 5432, "database": "analytics"} --name analytics-db`
+- cb-057 `meshctl traffic split --versions {"v1": 90, "v2": 10} --service user-service`
+
+Both carry a **structured argument assembled by the system**, whose keys come from the document and
+whose values come from the request's prose, where nothing in the mechanism knows what a port, a
+database, a canary, or a version weight is. The generalisation is not stored anywhere: it is the
+document's example, re-filled from the sentence, every time, at the cost of one scan.

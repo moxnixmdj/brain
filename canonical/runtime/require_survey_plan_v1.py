@@ -1711,7 +1711,13 @@ def _shape_filled(example: str, values: Sequence[Mapping[str, Any]], spent: set[
         written = slot.group(1).strip().strip('"')
         source = None
         if re.match(r"^-?[\d.]+$", written):
-            source = next((n for n in numbers if n not in out), None)
+            # The example's own number sits in the output already, and `{"v1": 90, "v2": 10}` with
+            # a request that also says 90 and 10 gives the same digits twice -- so "a number not
+            # yet in the output" excluded both and the shape was returned unfilled. What is spent
+            # is tracked by position in the shape, not by whether the digits happen to appear.
+            taken = set(re.findall(r'"([^"]+)"\s*:\s*(-?[\d.]+)', out[:slot.start(1)]))
+            used = {n for _, n in taken}
+            source = next((n for n in numbers if n not in used), None)
         else:
             # The value for a key is the request's value whose own words name that key *and* which
             # nothing else has a better claim to. A value's clause is wide -- `named "analytics-db"
