@@ -1069,3 +1069,114 @@ conservative choice and it is the one that cannot mislead.
 planner's remaining loss is the missing flag-to-value *assignment*, seven ordering heuristics have
 been measured and rejected, and the next mechanism must derive the assignment from stated evidence
 plus the flag's declared type. Nothing here changes that.
+
+### A28 — the answer to "goal-directed, or learn everything?": keep the document, not the episode
+
+The owner asked four questions in one, and said outright they did not know the answers:
+
+> *"Should he just be goal-directed and save the important learning? The saving must not be only his
+> action, because his actions probably will never be needed again. Should he learn everything in all
+> environments and generalise? What exactly should we save, and what should we generalise?"*
+
+That is decidable by counting what actually repeats, so it was counted. Over the sixty tasks, split
+every token of every emitted command into **structure** (a word from the program's own document: a
+page name, a flag) and **values** (a word the request supplied):
+
+| | appear in more than one task |
+|---|---|
+| document structure | **51 of 124** tokens |
+| request values | **2 of 26** tokens |
+
+The two repeated values are the bench reusing one repository name eleven times and one wiki name
+three times. The structure repeats because a program is used many times: `list` in 25 tasks, `issue`
+in 22, `--repo` in 10, `create` in 9.
+
+**So the answer is neither "goal-directed" nor "learn everything", and the dichotomy is the error.**
+What is worth keeping is not the episode and not the goal — it is *the document's structure of the
+environment*, which is shared by every goal pursued in that environment. A task's values never
+recur; the commands that consume them do. Saving a trajectory would store the 2 tokens that do not
+repeat; saving the scan stores the 51 that do.
+
+**This agrees with the 2026 literature and against the obvious reading of it**, which matters
+because that literature is about LLM agents and this system is not one. Three findings converge:
+raw episodic memory beats LLM-consolidated abstractions, because a consolidating model rewrites
+away its own preconditions (`2605.12978`: forced consolidation 43.2% against raw trajectories
+76.6%); abstraction transfers better only when it preserves the conditions under which it applied
+(`2604.27003`); and stopping persistence altogether raised held-out success 26.7% → 54.7% in one
+setup. Taken naively that says *store episodes, refuse abstraction*. Here the opposite holds, and
+the reason is precise:
+
+- Those systems store an episode because **the agent that will read it back is the same model that
+  wrote it**, so the episode is the only record of what the model did that survives its own
+  summarisation. That is a fact about lossy self-rewriting.
+- This system's "memory" of an environment is **the environment's own help text, fetched fresh**.
+  It is not a conclusion the system drew about its experience, so there is nothing to overgeneralise
+  from and nothing to rewrite. The document cannot be corrupted by being believed.
+- The literature's failure mode is exactly what A22–A27 found: *derived* pairings (a flag takes this
+  value) are guesses that break tasks. The document's raw statements (`--repo <string> (required)`,
+  `dm send --user alice`) are not guesses.
+
+**The resulting law, and it is a cost law, not a preference.** Persist the environment's structure;
+never persist the agent's conclusion about it. Structure is re-derivable by re-reading the program
+(0.17s for ten pages), so the store is a cache and nothing is lost if it is dropped. A conclusion
+is not re-derivable once its evidence is gone, which is how summarising systems poison themselves.
+
+**And this is why "learn everything" is not even well-formed.** An agent cannot learn "everything in
+an environment" — an environment's help text is already the whole of what it presents, and it costs
+one scan. What it cannot do is know *which part of that structure this goal needs*, and that is a
+retrieval question over the document, which is where A25's evidence weighting and A26's verifier
+now live. The goal directs the lookup; the document supplies the knowledge; neither is stored as
+experience.
+
+**Unverified, stated plainly.** Nothing here tests transfer to a genuinely unseen program: every
+measurement so far uses the same eight CLI programs, so "the structure generalises to a new
+environment" is supported by the scan being document-derived, not by a cross-environment
+measurement in this round. That is the next test and it is named below rather than claimed.
+
+### A29 — an unfilled optional flag is not a reason to discard the reading: 0.4447 → 0.4572
+
+A26's refusal split named five planner gaps, each a required flag the document declares and the
+planner never bound. Chasing the first of them (`entry list`, from the new `lattice` program below)
+found the cause, and it was not the binding at all.
+
+**The demonstration was being thrown away.** `lattice entry list` demonstrates
+`--cluster <x> --limit 20`. The request "List the entries in the cluster session-store" supplies a
+cluster and nothing for `--limit`. The planner bound `--cluster session-store` correctly, reached
+`--limit`, found no value left, and executed `return None` — discarding the whole reading, including
+the flag it had bound. What remained was the demonstration that shows only `[flags]`, whose
+positional fill gives `entry list session-store`: a value where the document puts a flag.
+
+The guard that produced it is right in its own terms — a demonstration whose values share no word
+with the request is evidence about some other act — but "nothing left to give `--limit`" is not that
+condition. It is the ordinary case of an optional flag the goal does not use.
+
+    if not rest:
+        if filled_pairs:      # keep what was filled; omit the flag the request does not use
+            break
+        return None           # a reading that filled nothing is no reading
+
+Measured, all sixty, fixed denominator, three seeds identical:
+
+    0.4447 -> **0.4572**   up 4 (cb-012 +0.15, cb-014 +0.20, cb-015 +0.30, cb-047 +0.10), down 0
+
+The tasks it repairs are the ones the A26 split predicted: cb-014 loses `--parent` and cb-015
+`--project` under exactly this mechanism. Down / up of 0 / 4 is the first movement in this thread
+that costs nothing anywhere.
+
+**The verifier sharpens with it**, because a plan that omits an unused option is usually a plan that
+can run at all: complete n=54 mean 0.4544, incomplete n=6 mean 0.2648, gap +0.190 (was +0.164), AUC
+**0.810** (was 0.769), and **zero false alarms in six** (was one in ten).
+
+**And the new program, which is the point of A28 rather than of this fix.** `lattice` was written for
+this round: a cache-cluster manager, a domain no measurement here has touched, with three required
+flags on one call, a bare integer count (`with 3 nodes`), a quoted value containing `*`
+(`"session:*"`), and a required flag that is the *second* in its demonstration. The mechanism was not
+changed for it and it is not in any tuning set. **Five of five instructions produce the exact
+command**, and both cases are now tests: a program that has never existed is planned from its own
+document alone.
+
+That is the first evidence in this thread for the claim the whole design rests on — that the unit of
+knowledge is the document, not the episode — because it is the first time the document came from an
+environment the system had never seen. It is one small program with five instructions, written by
+the same hand that wrote the mechanism, which is a real limit on what it proves; a second program
+from an unrelated domain, written without looking at the parser, is the honest next test.

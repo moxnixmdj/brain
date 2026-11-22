@@ -13,6 +13,7 @@ Three kinds of test here, deliberately separated:
 from __future__ import annotations
 
 import ast
+import base64
 import json
 import pathlib
 import re
@@ -609,3 +610,109 @@ def test_the_scan_is_not_steered_by_the_guess_it_is_meant_to_test():
     seq = R.require_survey_plan_sequence("/tmp/cb/bin/slack", request, probes=14)
     assert seq["commands"], seq["steps"]
     assert seq["commands"][0][1:3] == ["dm", "send"], seq["commands"][0]
+
+
+# A cache-cluster manager written for the two tests below: no tuning against it, a domain no other
+# measurement used (clusters, node counts, key patterns), and every command shape it exercises also
+# appears in the eight measured programs. It exists so that "the document is enough for a new
+# program" can be checked rather than asserted. Base64 so the help text, which is mostly quotes,
+# needs no escaping here.
+LATTICE_PROGRAM = base64.b64decode(
+    "IyEvdXNyL2Jpbi9lbnYgcHl0aG9uMwoiIiJBIHByb2dyYW0gdGhhdCBoYXMgbmV2ZXIgZXhpc3Rl"
+    "ZDogbGF0dGljZSAtLSBhIGNhY2hlLXNlcnZpY2UgbWFuYWdlci4iIiIKaW1wb3J0IHN5cwpQQUdF"
+    "UyA9IHsKInJvb3QiOiAiIiJsYXR0aWNlIC0gTGF0dGljZSBDTEkgZm9yIG1hbmFnaW5nIGRpc3Ry"
+    "aWJ1dGVkIGNhY2hlIGNsdXN0ZXJzCgpVU0FHRToKICBsYXR0aWNlIDxjb21tYW5kPiBbZmxhZ3Nd"
+    "CgpBVkFJTEFCTEUgQ09NTUFORFM6CiAgY2x1c3RlciAgICAgICAgICAgICBNYW5hZ2UgY2x1c3Rl"
+    "cgogIGVudHJ5ICAgICAgICAgICAgICAgTWFuYWdlIGNhY2hlIGVudHJ5CgpGTEFHUzoKICAtaCwg"
+    "LS1oZWxwICAgICAgICAgIFNob3cgaGVscCBmb3IgYSBjb21tYW5kIiIiLAoKImNsdXN0ZXIiOiAi"
+    "IiJNYW5hZ2UgY2x1c3RlcgoKVVNBR0U6CiAgbGF0dGljZSBjbHVzdGVyIDxjb21tYW5kPiBbZmxh"
+    "Z3NdCgpBVkFJTEFCTEUgQ09NTUFORFM6CiAgY3JlYXRlICAgICAgICAgICAgICBDcmVhdGUgYSBj"
+    "bHVzdGVyCiAgc2NhbGUgICAgICAgICAgICAgICBDaGFuZ2UgdGhlIG5vZGUgY291bnQgb2YgYSBj"
+    "bHVzdGVyCiAgaW5zcGVjdCAgICAgICAgICAgICBTaG93IG9uZSBjbHVzdGVyJ3Mgc3RhdHVzCgpG"
+    "TEFHUzoKICAtaCwgLS1oZWxwICAgICAgICAgIFNob3cgaGVscCBmb3IgYSBjb21tYW5kIiIiLAoK"
+    "ImNsdXN0ZXIgY3JlYXRlIjogIiIiQ3JlYXRlIGEgY2x1c3RlcgoKVVNBR0U6CiAgbGF0dGljZSBj"
+    "bHVzdGVyIGNyZWF0ZSBbZmxhZ3NdCgpGTEFHUzoKICAtLW5hbWUgPHN0cmluZz4gKHJlcXVpcmVk"
+    "KQlDbHVzdGVyIG5hbWUKICAtLW5vZGVzIDxpbnQ+IChyZXF1aXJlZCkJTnVtYmVyIG9mIG5vZGVz"
+    "IHRvIHN0YXJ0CiAgLS1yZWdpb24gPHN0cmluZz4JUmVnaW9uIHRvIHBsYWNlIHRoZSBjbHVzdGVy"
+    "IGluCgogIC1oLCAtLWhlbHAJU2hvdyBoZWxwIGZvciB0aGlzIGNvbW1hbmQKCkVYQU1QTEVTOgog"
+    "IGxhdHRpY2UgY2x1c3RlciBjcmVhdGUgLS1uYW1lIGVkZ2UtY2FjaGUgLS1ub2RlcyAzIC0tcmVn"
+    "aW9uIGV1LXdlc3QtMSIiIiwKCiJjbHVzdGVyIHNjYWxlIjogIiIiQ2hhbmdlIHRoZSBub2RlIGNv"
+    "dW50IG9mIGEgY2x1c3RlcgoKVVNBR0U6CiAgbGF0dGljZSBjbHVzdGVyIHNjYWxlIFtmbGFnc10K"
+    "CkZMQUdTOgogIC0tbmFtZSA8c3RyaW5nPiAocmVxdWlyZWQpCUNsdXN0ZXIgbmFtZQogIC0tbm9k"
+    "ZXMgPGludD4gKHJlcXVpcmVkKQlOZXcgbnVtYmVyIG9mIG5vZGVzCgogIC1oLCAtLWhlbHAJU2hv"
+    "dyBoZWxwIGZvciB0aGlzIGNvbW1hbmQKCkVYQU1QTEVTOgogIGxhdHRpY2UgY2x1c3RlciBzY2Fs"
+    "ZSAtLW5hbWUgZWRnZS1jYWNoZSAtLW5vZGVzIDYiIiIsCgoiY2x1c3RlciBpbnNwZWN0IjogIiIi"
+    "U2hvdyBvbmUgY2x1c3RlcidzIHN0YXR1cwoKVVNBR0U6CiAgbGF0dGljZSBjbHVzdGVyIGluc3Bl"
+    "Y3QgW2ZsYWdzXQoKRkxBR1M6CiAgLS1uYW1lIDxzdHJpbmc+IChyZXF1aXJlZCkJQ2x1c3RlciBu"
+    "YW1lCgogIC1oLCAtLWhlbHAJU2hvdyBoZWxwIGZvciB0aGlzIGNvbW1hbmQKCkVYQU1QTEVTOgog"
+    "IGxhdHRpY2UgY2x1c3RlciBpbnNwZWN0IC0tbmFtZSBlZGdlLWNhY2hlIiIiLAoKImVudHJ5Ijog"
+    "IiIiTWFuYWdlIGNhY2hlIGVudHJ5CgpVU0FHRToKICBsYXR0aWNlIGVudHJ5IDxjb21tYW5kPiBb"
+    "ZmxhZ3NdCgpBVkFJTEFCTEUgQ09NTUFORFM6CiAgcHVyZ2UgICAgICAgICAgICAgICBEZWxldGUg"
+    "ZW50cmllcyBtYXRjaGluZyBhIHBhdHRlcm4KICBsaXN0ICAgICAgICAgICAgICAgIExpc3QgZW50"
+    "cmllcyBpbiBhIGNsdXN0ZXIKCkZMQUdTOgogIC1oLCAtLWhlbHAgICAgICAgICAgU2hvdyBoZWxw"
+    "IGZvciBhIGNvbW1hbmQiIiIsCgoiZW50cnkgcHVyZ2UiOiAiIiJEZWxldGUgZW50cmllcyBtYXRj"
+    "aGluZyBhIHBhdHRlcm4KClVTQUdFOgogIGxhdHRpY2UgZW50cnkgcHVyZ2UgW2ZsYWdzXQoKRkxB"
+    "R1M6CiAgLS1jbHVzdGVyIDxzdHJpbmc+IChyZXF1aXJlZCkJQ2x1c3RlciB0byBwdXJnZQogIC0t"
+    "cGF0dGVybiA8c3RyaW5nPiAocmVxdWlyZWQpCUtleSBwYXR0ZXJuIHRvIG1hdGNoCgogIC1oLCAt"
+    "LWhlbHAJU2hvdyBoZWxwIGZvciB0aGlzIGNvbW1hbmQKCkVYQU1QTEVTOgogIGxhdHRpY2UgZW50"
+    "cnkgcHVyZ2UgLS1jbHVzdGVyIGVkZ2UtY2FjaGUgLS1wYXR0ZXJuICdzZXNzaW9uOionIiIiLAoK"
+    "ImVudHJ5IGxpc3QiOiAiIiJMaXN0IGVudHJpZXMgaW4gYSBjbHVzdGVyCgpVU0FHRToKICBsYXR0"
+    "aWNlIGVudHJ5IGxpc3QgW2ZsYWdzXQoKRkxBR1M6CiAgLS1jbHVzdGVyIDxzdHJpbmc+IChyZXF1"
+    "aXJlZCkJQ2x1c3RlciB0byBsaXN0CiAgLS1saW1pdCA8aW50PglNYXhpbXVtIGVudHJpZXMgdG8g"
+    "cmV0dXJuCgogIC1oLCAtLWhlbHAJU2hvdyBoZWxwIGZvciB0aGlzIGNvbW1hbmQKCkVYQU1QTEVT"
+    "OgogIGxhdHRpY2UgZW50cnkgbGlzdCAtLWNsdXN0ZXIgZWRnZS1jYWNoZSAtLWxpbWl0IDIwIiIi"
+    "LAp9CmFyZ3MgPSBbeCBmb3IgeCBpbiBzeXMuYXJndlsxOl0gaWYgeCBub3QgaW4gKCctLWhlbHAn"
+    "LCctaCcpXQprZXkgPSAnICcuam9pbihhcmdzKQpzeXMuc3Rkb3V0LndyaXRlKFBBR0VTLmdldChr"
+    "ZXkpIG9yIFBBR0VTWydyb290J10pCg=="
+).decode()
+
+
+@pytest.fixture(scope="module")
+def lattice(tmp_path_factory):
+    path = tmp_path_factory.mktemp("lattice") / "lattice"
+    path.write_text(LATTICE_PROGRAM)
+    path.chmod(0o755)
+    return str(path)
+
+
+def test_a_flag_the_request_cannot_fill_does_not_cancel_the_flags_it_can(lattice):
+    """An unfilled optional flag is omitted; it is not a reason to discard the whole reading.
+
+    `lattice entry list` demonstrates `--cluster <x> --limit 20`. The request "List the entries in
+    the cluster session-store" supplies a cluster and nothing for `--limit`, and the planner used
+    to throw the demonstration away at that point -- losing the `--cluster session-store` it had
+    already bound and falling back to a positional `entry list session-store`. The census still
+    reports a *required* flag left empty, so dropping an option cannot hide a contradiction.
+    """
+    out = R.require_survey_plan(lattice,
+                                'List the entries in the cluster "session-store".', probes=20)
+    assert out["plans"][0]["argv"][1:] == ["entry", "list", "--cluster", "session-store"], \
+        out["plans"][0]["argv"]
+    assert not out["plans"][0]["missing_required"], out["plans"][0]["missing_required"]
+
+
+def test_a_program_that_has_never_existed_is_planned_with_no_new_machinery(lattice):
+    """The claim is not "it does well on the bench" but "the document is enough for a new program".
+
+    `lattice` is a cache-cluster manager written for this test: no tuning against it, a domain no
+    other measurement used (clusters, node counts, key patterns), and bare numbers, quoted values
+    containing `*`, and three required flags in one call. Every shape it exercises already appears
+    in the eight programs measured, so this is a test that the *mechanism* is general, not that it
+    generalises by memorising.
+    """
+    cases = [
+        ('Create a new cluster named "edge-cache" with 3 nodes in the "eu-west-1" region.',
+         ["cluster", "create", "--name", "edge-cache", "--nodes", "3", "--region", "eu-west-1"]),
+        ('Scale the cluster "market-cache" to 6 nodes.',
+         ["cluster", "scale", "--name", "market-cache", "--nodes", "6"]),
+        ('Show the status of the cluster "edge-cache".',
+         ["cluster", "inspect", "--name", "edge-cache"]),
+        ('Delete all entries in the cluster "edge-cache" matching the pattern "session:*".',
+         ["entry", "purge", "--cluster", "edge-cache", "--pattern", "session:*"]),
+        ('List the entries in the cluster "session-store".',
+         ["entry", "list", "--cluster", "session-store"]),
+    ]
+    for instruction, want in cases:
+        out = R.require_survey_plan(lattice, instruction, probes=20)
+        assert out["plans"], instruction
+        assert out["plans"][0]["argv"][1:] == want, (instruction, out["plans"][0]["argv"])

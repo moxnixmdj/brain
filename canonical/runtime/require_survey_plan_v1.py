@@ -1330,6 +1330,16 @@ def _demo_plan(demo: Mapping[str, Any], requirement: Mapping[str, Any], tool: st
                 rest = [str(v["value"]) for v in ordered
                         if str(v["value"]) not in spent and not v.get("value_of")]
                 if not rest:
+                    # The example's flag has nothing left to take. Discarding the whole reading
+                    # throws away the flags it *did* fill, which is how `entry list --cluster
+                    # session-store` was lost to a positional `entry list session-store`: the
+                    # page demonstrated `--cluster <x> --limit 20`, the request named only a
+                    # cluster, and the unfilled `--limit` cancelled the filled `--cluster`. A
+                    # flag the request supplies nothing for is a flag the command omits; the
+                    # census still reports any *required* flag left empty. Only a reading that
+                    # filled nothing at all is no reading.
+                    if filled_pairs:
+                        break
                     return None
                 filled_pairs.extend([flag, rest[0]])
                 spent.add(rest[0])
