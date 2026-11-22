@@ -1221,8 +1221,22 @@ def _demo_plan(demo: Mapping[str, Any], requirement: Mapping[str, Any], tool: st
                 spent.update(_tokens_in(example) & {str(v["value"]) for v in ordered})
                 filled_pairs.extend([flag, shaped])
                 continue
-            want = words_of(str((slots.get(flag) or {}).get("words") or ""))
+            slot = slots.get(flag) or {}
+            want = words_of(str(slot.get("words") or ""))
             pick, score = None, 0
+            # A document that lists an option's choices (`--severity (values: critical,
+            # warning, info)`) has said exactly which values belong there. If the request
+            # states one of them, that is this flag's value -- no word matching needed, and an
+            # unrelated value cannot take the place.
+            listed = enum_choices(slot)
+            if listed:
+                listed_lower = {c.lower() for c in listed}
+                pick = next((v for v in ordered if str(v["value"]).lower() in listed_lower
+                             and str(v["value"]) not in spent), None)
+                if pick is not None:
+                    spent.add(str(pick["value"]))
+                    filled_pairs.extend([flag, str(pick["value"])])
+                    continue
             for word in want:
                 for value in by_word.get(word, []):
                     if str(value["value"]) in spent:

@@ -576,3 +576,33 @@ right behaviour for a source that is usually good. Second, the suites are networ
 parallel fetching, `test_jit_knowledge_v1` flaked twice (different tests, both sources returning fewer
 documents) and then passed 42/42 twice in a row and 48/48 together with the non-smuggling suite. That
 flakiness is recorded here as a property of the environment, not smoothed away.
+
+### A14 — a listed option takes a listed value, and a regression found by measuring twice
+
+A5 moved from 0.4464 to **0.4457** between two commits, and the difference was a single task (`cb-037`,
+0.48 → 0.44). It was found only because the two runs were compared per task rather than in aggregate — an
+eleventh of a point of mean score is invisible in a table and is a whole misplaced command.
+
+The task asked for `severity "P1"`, and the document says:
+
+```
+--severity    Incident severity (values: critical, warning, info)
+```
+
+`P1` is not on that list, and the demonstration the plan was re-filled from (`--severity critical`) was
+being filled by word-overlap instead — so `payment-service` landed in `--severity`. The fix is the
+document's own statement, not a heuristic: **when an option lists its choices, the request value that is one
+of those choices is that option's value.** `--severity P1` now, and `cb-037` is back to 0.48, A5 to **0.4464**.
+
+Two things this episode records honestly:
+
+* **A regression is not a rounding error.** The run-to-run comparison by task is now the check, not the mean.
+  (The mean is deterministic here: three consecutive runs gave 0.4457, 0.4457, 0.4450 and 0.4464, so a
+  difference of that size is a real change, not noise.)
+* **Two attempts were built and deleted before this one.** Declining the demonstration entirely, and
+  filtering the pair *after* word-matching, both scored **worse** (0.4450) than the code they replaced,
+  because they removed a candidate that was scoring better than the alternative. The version that survived
+  is the narrower one that reads the document's list. A third attempt — separating two quoted values that
+  share one sentence window (`titled "A" with "B"`) — was abandoned unfinished: the separator search does
+  not handle a line break between them, and chasing string offsets was not buying anything measurable.
+  It is recorded here as an open defect rather than quietly dropped.

@@ -5,19 +5,25 @@
     "trials": 41
   },
   "github": {
-    "helped": 97,
-    "last_seen_utc": "2026-11-22T18:24:08Z",
-    "trials": 136
+    "helped": 101,
+    "last_seen_utc": "2026-11-22T18:43:41Z",
+    "relevant": 2,
+    "relevant_trials": 2,
+    "trials": 140
   },
   "npm": {
-    "helped": 136,
-    "last_seen_utc": "2026-11-22T18:24:08Z",
-    "trials": 136
+    "helped": 140,
+    "last_seen_utc": "2026-11-22T18:43:41Z",
+    "relevant": 2,
+    "relevant_trials": 2,
+    "trials": 140
   },
   "pypi": {
-    "helped": 138,
-    "last_seen_utc": "2026-11-22T18:24:08Z",
-    "trials": 138
+    "helped": 142,
+    "last_seen_utc": "2026-11-22T18:43:41Z",
+    "relevant": 2,
+    "relevant_trials": 2,
+    "trials": 142
   },
   "web": {
     "helped": 0,
