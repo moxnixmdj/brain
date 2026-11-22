@@ -993,3 +993,44 @@ numbers"**, and the documents do not say: `--limit` carries the words "Maximum n
 to return" and declares no type. Whether a flag is numeric is recoverable from a demonstration
 that shows a number, or from the program's own response to a bad value -- not from the description
 text. Whatever produces the pairing must carry that too.
+
+### A23 — eight of the sixty tasks cannot be won by any honest planner, and the documents say why
+
+A22 ended by naming the missing information: not only which flag takes which value, but which flags
+take numbers. Reading the bench's own backends settles the question, and the answer is not a defect
+in this mechanism.
+
+`linear.py` line 170 reads `priority = int(priority_str)`. The documents say the flag is
+`--priority <int>` and that `1=urgent`. So a request saying `set the priority to "urgent"` has two
+available commands, **and both are wrong**: `--priority urgent` raises `ValueError: invalid literal
+for int()`, and `--priority 1` stores the integer `1` where the task's `expected_state` asks for the
+string `"urgent"`. cb-006's expected `command_history` pattern is
+`linear issue create.*--team.*Platform.*--priority.*urgent`, which requires the word *and* a
+`--team` flag that appears nowhere in the program's document — `linear issue create` declares
+`--project`, not `--team`.
+
+Five tasks expect a word-valued `priority` (cb-006, cb-022, cb-023, cb-027, cb-034) and six expect
+`--team` (cb-006, cb-022, cb-024, cb-027, cb-031, cb-032); eight distinct tasks between them, 13% of
+the bench. None can be satisfied by a planner that believes the document, because satisfying them
+requires knowing that this particular bench disagrees with its own CLI.
+
+**This reframes every number in this document.** Reported over all sixty tasks the committed state
+is **0.4401**; over the **52 winnable** tasks it is **0.4579**, and on the eight unwinnable ones it
+is 0.3244 — that residue being the parts of those tasks that do not touch the broken flag. So the
+remaining headroom is smaller than it looked and the denominator was doing part of the work.
+
+**What follows for the work.** Two consequences, both practical:
+
+1. **Measure on the 52.** A change that happens to move an unwinnable task is not measuring the
+   mechanism. From here the reported number is the fixed-denominator mean over all sixty *and* the
+   mean over the winnable set, and the second is the one that says whether the planner improved.
+2. **Stop trying to win the eight.** Three of the experiments in A22 were chasing crashes caused by
+   exactly this class of disagreement — `urgent` into `--priority`, `Blocked` into a limit. They
+   were not pairing failures. That is worth knowing before the next attempt rather than after.
+
+**The honest summary of where this stands.** The mechanism reads real documents, routes to the right
+page, and emits a defensible command for 52 tasks at 0.4579. Its failures are concentrated in the
+missing flag-to-value assignment, and the last three sections' seven experiments have established
+that no ordering heuristic recovers it. The next mechanism must derive the assignment from stated
+evidence — a demonstration's own paired example, an option's declared type or choices — and must
+carry the flag's *declared type*, because that is where the remaining crashes come from.
