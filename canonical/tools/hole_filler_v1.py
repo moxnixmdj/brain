@@ -74,17 +74,28 @@ def _balanced(text: str) -> bool:
 
 
 def _repaired_source(starting_code: str) -> str:
-    """Make a stub with an open call parseable, WITHOUT changing what it states.
+    """Make a stub parseable, WITHOUT changing what it states.
 
-    An open-call stub is deliberately not valid Python (`return f(G,`). To read its own
-    declarations we close the dangling brackets and add a body. This changes nothing about
-    the header, the annotation, or the partial expression -- it only makes the text
-    parseable so the artifact can be read rather than guessed.
+    Two repairs are needed in practice and both are pure formatting:
+
+      * an open-call stub is deliberately not valid Python (`return f(G,`), so dangling
+        brackets are closed;
+      * the body line's indentation is NOT uniform across items -- one uses a single space
+        where another uses four. Appending a 4-space `pass` to a 1-space body is a
+        SyntaxError, which silently produced `target=''` and an argument-less candidate for
+        a whole item. The body indent is therefore read from the stub, not assumed.
     """
     text = starting_code.rstrip()
     depth = text.count("(") - text.count(")")
     text += ")" * max(depth, 0)
-    return text + "\n    pass\n"
+    lines = text.splitlines()
+    indent = "    "
+    for line in reversed(lines):
+        stripped = line.lstrip()
+        if stripped.startswith(("return", "pass", "raise", "yield")):
+            indent = line[: len(line) - len(stripped)]
+            break
+    return text + "\n" + indent + "pass\n"
 
 
 def _target_name(starting_code: str) -> str:

@@ -1,0 +1,110 @@
+{
+ "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+ "bugs_found_and_fixed": [
+  "truncated docstring to 400 chars -> isprime rank 196 instead of 41",
+  "length-normalised score buried isprime at 196; raw shared count put 5 of 7 in top 3",
+  "emitted bare totient(n) instead of sympy.totient(n) -> turned 7 solved into 7 failures",
+  "read body indent as 4 spaces; one stub uses 1 -> SyntaxError -> empty target name"
+ ],
+ "ceiling_measurement": {
+  "examples": [
+   {
+    "body": "sympy.physics.quantum.trace.Tr(n)",
+    "id": "178",
+    "why": "submodule member, not in dir(sympy)"
+   },
+   {
+    "body": "inertia(...)",
+    "id": "186",
+    "why": "reached through sympy.physics.mechanics"
+   },
+   {
+    "body": "eq.lhs - eq.rhs",
+    "id": "187",
+    "why": "attribute path on a parameter"
+   },
+   {
+    "body": "poly.rep.to_list()",
+    "id": "188",
+    "why": "chained attribute on a parameter"
+   },
+   {
+    "body": "index.free_symbols",
+    "id": "191",
+    "why": "property on a parameter"
+   },
+   {
+    "body": "matrix.flat()",
+    "id": "193",
+    "why": "method on a parameter"
+   },
+   {
+    "body": "n % p == 0",
+    "id": "199",
+    "why": "arithmetic over two parameters"
+   },
+   {
+    "body": "PinJoint('pin', parent, child, parent_point=parent.frame.x, ...)",
+    "id": "181",
+    "why": "constructed call with fields read off the parameters"
+   }
+  ],
+  "isprime_best_rank": 52,
+  "primeomega_best_rank": 56,
+  "required_symbol_not_a_top_level_surface_name": "15/22",
+  "required_symbol_reachable_at_any_depth": "7/22"
+ },
+ "chain": [
+  "THE_GOAL_IS_AN_ORACLE (3/40)",
+  "THE_NAME_IS_A_CONVENTION (surface search closed)",
+  "this"
+ ],
+ "constraint_pressure": {
+  "finding": "a frontier model carries the meaning->name convention for every library at every depth; we re-derive it from docstrings at run time and succeed only where the docstring uses the task's own words",
+  "legal_response": "make the search hierarchical and let the oracle prune; the oracle is the only judge requiring no knowledge",
+  "violations": 0
+ },
+ "date": "2026-11-21",
+ "instrument": "canonical/tools/docstring_purpose_search_v1.py",
+ "model_calls": 0,
+ "next_design_rule": "rank by purpose, explore by structure, judge by execution",
+ "results": {
+  "budget_sensitivity": "limit 12 and limit 25 both scored 7/32 -> not a search-depth limit",
+  "docstring_ranking": "7/32 sympy",
+  "hole_filler_only": "3/40",
+  "solved_at_rank_1": [
+   "201 jacobi_symbol",
+   "202 npartitions",
+   "204 primepi",
+   "205 totient",
+   "206 mobius",
+   "183 is_carmichael"
+  ],
+  "solved_other": [
+   "207 legendre_symbol rank 9",
+   "179 preorder_traversal rank 1"
+  ]
+ },
+ "schema": "BRAIN_RECEIPT_PURPOSE_IS_IN_THE_ARTIFACT_20261121_V1",
+ "signal": "the artifact describes its own purpose in __doc__; ranked against the item's own problem text. No network, no model, no stored table.",
+ "truth": {
+  "achieved": false
+ },
+ "verdict": {
+  "bottleneck": "the search space must be everything reachable from the stub's namespace, ranked by purpose and judged by execution; purpose-ranking currently works only where the artifact repeats the task's words",
+  "false": [
+   "scan-and-fetch is a complete solution: the missing thing is a name at depth or an expression, not a fact",
+   "a flat surface search closes the gap: 15/22 required symbols are not in the surface",
+   "more search budget helps: 12 and 25 scored identically"
+  ],
+  "true": [
+   "oracle is real (37/40)",
+   "purpose is recoverable from the artifact and lifts 3/40 to 7/32 with six at rank 1",
+   "every failure in the chain was diagnosable to a mechanical cause"
+  ],
+  "unproven": [
+   "hierarchical surface search (submodules + parameter attributes + call-chain fields) judged by the oracle",
+   "expression synthesis over typed parameters judged by the oracle"
+  ]
+ }
+}
