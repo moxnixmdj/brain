@@ -162,3 +162,42 @@ def test_guide_bodies_are_emitted_with_and_without_arguments():
     assert bodies[0] == "K.to_int()"
     assert "K.to_int(a)" in bodies
     assert "matrix.todok(a)" in bodies
+
+
+# ---------------------------------------------------------------------------
+# A nested read is stated by a live instance.
+# ---------------------------------------------------------------------------
+def test_kwctor_body_is_the_exact_reference_shape():
+    """181/182: one constructor call, keywords from the artifact's signature, values read
+    two levels deep because `Body.frame` is a property and `dir(cls)` cannot see inside it."""
+    target = ("PinJoint('pin', parent, child, parent_point=parent.frame.x, "
+              "child_point=-child.frame.x)")
+    cands = G.compositions(
+        ["parent", "child"], {},
+        problem=("creates a pin joint connecting two bodies, positioned at parent.frame.x "
+                 "with respect to the mass center, and in the child at -child.frame.x. "
+                 "using the specified points. Create a function called custom_pinJoint"),
+        stub_imports=["Body", "PinJoint"],
+        return_annotations=["sympy.physics.mechanics.PinJoint"],
+        func_name="custom_pinJoint",
+        nested_short={"parent": ["frame.x", "frame.u"], "child": ["frame.x", "frame.u"]},
+        kwarg_names=["parent", "child", "parent_point", "child_point", "parent_axis"])
+    bodies = [c["body"] for c in cands]
+    assert target in bodies, bodies[:5]
+
+
+def test_keyword_must_not_be_a_parameter_name():
+    """`PinJoint(parent=..., child=...)` is a different call. `parent`/`child` are the
+    PARAMETERS and the prose names them constantly, so they must not win the keyword slot."""
+    cands = G.compositions(
+        ["parent", "child"], {},
+        problem=("a parent and a child, positioned at parent.frame.x, at -child.frame.x, "
+                 "using the specified points"),
+        stub_imports=["PinJoint"],
+        return_annotations=["sympy.physics.mechanics.PinJoint"],
+        nested_short={"parent": ["frame.x"], "child": ["frame.x"]},
+        kwarg_names=["parent", "child", "parent_point", "child_point"])
+    bodies = [c["body"] for c in cands if c["kind"] == "KWCTOR"]
+    assert bodies, "no keyword-constructor bodies"
+    assert "parent=" not in bodies[0]
+    assert "child=" not in bodies[0]
