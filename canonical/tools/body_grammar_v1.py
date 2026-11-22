@@ -167,7 +167,8 @@ def compositions(args: Sequence[str], paths: Mapping[str, Sequence[str]],
                  property_paths: Sequence[str] = (),
                  imported_names: Sequence[str] = (),
                  stub_prefixes: Sequence[str] = (),
-                 return_annotations: Sequence[str] = ()) -> list[dict]:
+                 return_annotations: Sequence[str] = (),
+                 guide_bodies: Sequence[str] = ()) -> list[dict]:
     """Every body the grammar admits, ordered by how much it ASSERTS.
 
     Ordering is the whole design, and getting it wrong was measured twice. A type can state
@@ -226,6 +227,9 @@ def compositions(args: Sequence[str], paths: Mapping[str, Sequence[str]],
             add("RETANN", f"{a}({joined})")
             if tail != a:
                 add("RETANN", f"{tail}({joined})")
+
+    for gb in guide_bodies:
+        add("GUIDE", gb)
 
     # 1. attribute paths whose own name the prose uses, then by NAME LENGTH.
     # Length is a measured proxy for API primitiveness: on sympy.Equality the useful members
@@ -557,6 +561,22 @@ def solve_item(bench: str | pathlib.Path, item: Mapping[str, Any], *,
                 conts.append(f"{mod_part} import {mem}\n    return {mem}({', '.join(call_args)})")
     stub_prefixes = [("", conts[:400])]
 
+    # THE RETURN TYPE SELECTS WHICH MEMBER'S GUIDE APPLIES.
+    # For 188 ("a list of its coefficients" -> to_list) and 194 ("dictionary-of-keys
+    # representation" -> todok) the prose and the name share NO word, so no ranking over names
+    # can ever reach them. The statement is in the artifact instead: `todok.__doc__` literally
+    # says "Return the matrix as dictionary of keys." Matching the prose against each member's
+    # first-sentence guide, narrowed by the declared return type, ranks both first -- with no
+    # name table and no synonym list.
+    guide_first: list[str] = []
+    if imports and spec:
+        try:
+            import the_return_type_selects_the_guide_v1 as RTG
+            guides = RTG.member_guides(python, imports, spec)
+            guide_first = RTG.guide_bodies(item.get("problem", ""), returns, args, guides)
+        except BaseException:
+            guide_first = []
+
     props = properties_of(python, imports, spec) if imports else {}
     property_paths = [f"{param}.{name}"
                       for param, names in (props or {}).items()
@@ -566,7 +586,8 @@ def solve_item(bench: str | pathlib.Path, item: Mapping[str, Any], *,
                          property_paths=property_paths,
                          imported_names=stub_names,
                          stub_prefixes=stub_prefixes,
-                         return_annotations=[returns] if returns else [])
+                         return_annotations=[returns] if returns else [],
+                         guide_bodies=guide_first)
     # CHEAP BODIES FIRST, AS THEIR OWN CHUNK. A property read, a leaf, a single attribute and
     # a stated-symbol application each cost one trial and cannot hang. Arithmetic over
     # symbolic objects can hang (`index // index.canonical_variables.index` does), and when it

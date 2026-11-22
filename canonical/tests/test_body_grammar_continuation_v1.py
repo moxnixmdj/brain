@@ -86,3 +86,50 @@ def test_stub_prefixes_are_emitted_before_every_grid():
                            stub_prefixes=[("", ["bellman_ford_predecessor_and_distance(G)"])])
     assert cands[0]["kind"] == "PREFIX"
     assert cands[0]["body"] == "bellman_ford_predecessor_and_distance(G)"
+
+
+# ---------------------------------------------------------------------------
+# The return type selects which member's guide applies.
+# ---------------------------------------------------------------------------
+def test_guide_ranking_prefers_the_declared_direction():
+    """188: prose and name share no word; the member's own guide does the matching."""
+    import the_return_type_selects_the_guide_v1 as RTG
+
+    guides = [
+        ("poly.rep.to_list()",
+         "Convert ``f`` to a list representation with native coefficients. "),
+        ("poly.rep.from_list()",
+         "Convert a list representation to a polynomial with native coefficients."),
+        ("poly.rep.to_sympy_list()", "Convert ``f`` to a list representation."),
+    ]
+    bodies = RTG.guide_bodies(
+        "returns a list of its coefficients based on its internal representation",
+        "list[int]", ["poly"], guides)
+    assert bodies[0] == "poly.rep.to_list()", bodies
+
+
+def test_guide_ranking_uses_the_first_sentence_not_the_examples():
+    """194: doctest examples made `tolist` outrank `todok` on incidental overlap."""
+    import the_return_type_selects_the_guide_v1 as RTG
+
+    guides = [
+        ("matrix.todok()",
+         "Return the matrix as dictionary of keys.\n\n        Examples\n"
+         "        ========\n\n        >>> from sympy import Matrix\n"),
+        ("matrix.tolist()",
+         "Return the Matrix as a nested Python list.\n\n        Examples\n"
+         "        ========\n\n        >>> from sympy import Matrix\n"),
+    ]
+    bodies = RTG.guide_bodies(
+        "accepts a Sympy SparseMatrix and returns its dictionary-of-keys representation",
+        "list[int]", ["matrix"], guides)
+    assert bodies[0] == "matrix.todok()", bodies
+
+
+def test_no_type_specific_word_is_a_stopword():
+    # "representation" is the word 194 depends on; a stoplist containing it silently made the
+    # item unsolvable. Structural English only.
+    import the_return_type_selects_the_guide_v1 as RTG
+
+    for w in ("representation", "dictionary", "keys", "coefficient", "list"):
+        assert w not in RTG._STOP, w
