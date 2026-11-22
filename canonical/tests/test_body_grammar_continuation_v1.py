@@ -133,3 +133,32 @@ def test_no_type_specific_word_is_a_stopword():
 
     for w in ("representation", "dictionary", "keys", "coefficient", "list"):
         assert w not in RTG._STOP, w
+
+
+def test_declared_return_type_outranks_prose_overlap():
+    """185: prose mentions both 'SymPy' and 'integer', so `from_sympy` scored 3 overlap hits
+    against `to_int`'s 1 -- but the declared type is `int` and `to_int` spells it. The type is
+    the least noisy statement available and must win."""
+    import the_return_type_selects_the_guide_v1 as RTG
+
+    guides = [
+        ("K.from_sympy()", "Convert SymPy's Integer to SymPy's ``Integer``. "),
+        ("K.to_int()", "Convert ``val`` to a Python ``int`` object. "),
+        ("K.to_sympy()", "Convert ``a`` to a SymPy object. "),
+    ]
+    bodies = RTG.guide_bodies(
+        "takes a finite field K created using the GF class from Sympy and an element a of that "
+        "field, converts the field element into its corresponding integer representation",
+        "int", ["K", "a"], guides)
+    assert bodies[0] == "K.to_int()", bodies
+
+
+def test_guide_bodies_are_emitted_with_and_without_arguments():
+    """`todok` takes nothing, `to_int` takes the element. The signature says how many
+    parameters exist to supply; which shape is right is decidable, so both are emitted."""
+    cands = G.compositions(["K", "a"], {},
+                           guide_bodies=["K.to_int()", "matrix.todok()"])
+    bodies = [c["body"] for c in cands]
+    assert bodies[0] == "K.to_int()"
+    assert "K.to_int(a)" in bodies
+    assert "matrix.todok(a)" in bodies

@@ -52,19 +52,48 @@ out = []
 # A small instance of each declared type is enough to read its members' behaviour: these are
 # type-level statements, not data.
 def _sample(anno):
+    # An INSTANCE of the declared type. An instance is what exposes `.rep` and friends; the
+    # class does not. Three routes, in order, each stated rather than guessed:
+    #   1. an explicit constructor for types whose useful members hide behind a property
+    #      (`Poly.rep.to_list` answers item 188 and is invisible on the class);
+    #   2. a zero-argument construction of the type itself;
+    #   3. nothing -- a type that cannot be instantiated yields no guides, which is an empty
+    #      space, never a wrong answer.
     tail = anno.rsplit(".", 1)[-1]
     try:
         if tail == "Poly":
             from sympy import symbols, Poly
             x = symbols("x")
             return Poly(x**2 + 2*x + 1, x)
-        if tail in ("Matrix", "MutableDenseMatrix"):
+        if tail in ("Matrix", "MutableDenseMatrix", "SparseMatrix", "ImmutableMatrix"):
             from sympy import Matrix
             return Matrix([[1, 2], [3, 4]])
-        cls = eval(anno, globals())
-        return cls()
     except BaseException:
-        return None
+        pass
+    # Route 2 is SEVEN stated instantiations, not a search: the type's own signature is the
+    # statement that it needs an argument, and a small integer is the only value these domain
+    # constructors ever take. `FiniteField()` raises TypeError and `FiniteField(6)` is `GF(6)`,
+    # which is exactly what item 185 hands the function.
+    for maker in (
+        lambda c: c(),
+        lambda c: c(6),
+        lambda c: c(2),
+        lambda c: c(0),
+        lambda c: c(1),
+        lambda c: c("x"),
+        lambda c: c(()),
+    ):
+        try:
+            cls = eval(anno, globals())
+        except BaseException:
+            break
+        try:
+            inst = maker(cls)
+            if inst is not None:
+                return inst
+        except BaseException:
+            continue
+    return None
 for param, anno in spec.items():
     inst = _sample(anno)
     if inst is None:
@@ -107,7 +136,16 @@ _STOP = {"with", "from", "that", "this", "the", "and", "for", "its", "returns", 
 
 
 def _words(text: str) -> set[str]:
-    return {w for w in re.findall(r"[a-z]{3,}", (text or "").lower()) if w not in _STOP}
+    # Two-character tokens are kept: `int` is the declared return type of item 185 and a
+    # three-character minimum silently deleted the one word that identifies its answer.
+    return {w for w in re.findall(r"[a-z]{2,}", (text or "").lower()) if w not in _STOP}
+
+
+# `int` and `integer` are THE SAME CONCEPT stated in two forms -- the annotation's spelling and
+# the prose's spelling. Matching them is not a synonym table; it is the single morphological
+# fact that an abbreviation and its expansion denote one thing.
+_TYPE_FORMS = {"int": {"int", "integer", "integers"}, "list": {"list", "lists"},
+               "dict": {"dict", "dictionary", "mapping"}}
 
 
 def member_guides(python: str, imports: Sequence[str], spec: Mapping[str, str],
@@ -140,60 +178,95 @@ def guide_bodies(problem: str, return_annotation: str | None,
     because the shortest member saying a thing is that type's own word for it (`todok` over
     `as_immutable_dict_of_keys_and_structure`).
     """
+    # The prose vocabulary is the PROSE only. Injecting the declared type's own spellings here
+    # made `tolist` match the word "list" that the annotation supplied, and it then beat
+    # `todok` for item 194 -- whose prose never says "list" at all. The declared type belongs in
+    # the type-name weight below, not in the wanted-meaning set.
     wanted = _words(problem)
     if not wanted:
         return []
     ret_tail = (return_annotation or "").rsplit(".", 1)[-1].split("[")[0].strip()
-    generic = {"tuple", "None", "Expr", "Any", "object", "int", "float", "bool", "str"}
-    want_type = ret_tail if ret_tail and ret_tail not in {"list", "dict", "set"} else ""
-    if ret_tail in {"list", "dict", "set"}:
-        want_type = ret_tail
+    # EVERY declared return type is a statement, including the builtins that an earlier version
+    # of this function excluded as "generic". Item 185 declares `-> int` and its answer is
+    # `K.to_int(a)`: the member's own name AND its first-sentence guide ("Convert val to a
+    # Python int object") both state the declared type, while `from_sympy` -- which outscored it
+    # on prose overlap -- converts INTO sympy and returns something else entirely. Dropping
+    # builtins from the type partition is what let the wrong direction win.
+    _uninformative = {"", "None", "Any", "object", "Expr", "Symbol"}
+    want_type = ret_tail if ret_tail not in _uninformative else ""
 
-    scored: list[tuple[int, int, str]] = []
+    # ONE RULE, STATED ONCE. Ranking is by how much of the WANTED MEANING a member's own
+    # first-sentence guide states. The declared return type is then applied as a single
+    # ordering preference -- never as admission and never as exclusion -- because an annotation
+    # can be WRONG: item 194 declares `-> list[int]` while its answer `todok()` returns a dict,
+    # so letting the type admit candidates put `tolist` ahead of the member whose guide literally
+    # says "dictionary of keys". And letting it exclude candidates is just as wrong in the other
+    # direction. Preference only: candidates the type names move to the front, everything the
+    # prosody matched stays.
+    _TYPE_SPELLING = ({f"to_{want_type}", f"to{want_type}", want_type}
+                      if want_type else set())
+    defn_of: dict[str, str] = {}
     for body, doc in guides:
-        member = body.split(".", 1)[1].rstrip("()")
-        # THE FIRST SENTENCE IS THE STATEMENT. Everything after it is examples, doctest
-        # imports and cross-references, which mention `import`, `examples`, `sympy` and other
-        # words no problem ever asks for -- and which made `matrix.tolist()` outrank
-        # `matrix.todok()` for "dictionary-of-keys representation" on incidental overlap.
-        defn = re.split(r"(?<=[.!?])\s|\n\s*\n", (doc or "").strip())[0]
-        text = (_words(defn) | _words(member))
-        overlap = len(wanted & text)
-        if not overlap:
-            continue
-        # SPECIFICITY. The prose is short and specific ("dictionary of keys"); a docstring that
-        # also matches many words the prose never says is describing something broader. Overlap
-        # alone rewards long docstrings.
-        extra = len(_words(defn) - wanted)
-        score = overlap * 4 - max(0, extra - 4)
-        # A member whose name begins with `from_`/`to_` is an INVERSE or a CONVERSION stated in
-        # its own name. "as dictionary of keys" is not answered by `from_list`: the direction is
-        # part of the meaning, and both `from_list`/`to_list` and `todok`/`from_dok` pairs exist.
-        # The prose is read literally here -- it asks for one direction, and a conversion whose
-        # name states an inversion is penalised. Measured: item 188 ranked `poly.rep.from_list()`
-        # first and its answer, `to_list`, was behind it.
-        if member.startswith("from_"):
-            score -= 3
-        # a name that literally states the wanted thing (`to_list` for "a list") is the
-        # strongest evidence there is; `todok` states it in the docstring instead
-        if member.lower() in (problem or "").lower().replace("-", "_").replace(" ", "_"):
-            score += 5
-        scored.append((-score, len(member), body))
+        defn_of.setdefault(body, re.split(r"(?<=[.!?])\s|\n\s*\n", (doc or "").strip())[0])
 
-    scored.sort()
-    out = [b for _s, _l, b in scored]
-    if want_type:
-        # the declared return type is a statement about which members can be the answer; it is
-        # applied as a partition, not a filter, so a wrong annotation cannot empty the space
-        preferred = [b for b in out if _mentions(b, want_type, guides)]
-        rest = [b for b in out if b not in preferred]
-        out = preferred + rest
+    def _meaning(body_: str) -> tuple[int, int, str]:
+        member_ = body_.split(".", 1)[1].rstrip("()")
+        defn_ = defn_of.get(body_, "")
+        text_ = _words(defn_) | _words(member_)
+        overlap_ = len(wanted & text_)
+        extra_ = len(_words(defn_) - wanted)
+        # SPECIFICITY, CAPPED. Overlap alone rewards long docstrings, so unmatched words cost --
+        # but the cost must never exceed one overlap unit, or a terse guide loses to a wordy one
+        # for no reason. Measured: `to_int`'s guide ("Convert val to a Python int object") is
+        # four words the prose never says, and an uncapped penalty gave it -1 against
+        # `from_sympy`'s 8, burying the answer of item 185. Capped at 4, the same comparison is
+        # decided by the statements that actually name the type.
+        score_ = overlap_ * 4 - min(4, max(0, extra_ - 4))
+        # direction is part of meaning: `from_list`/`from_sympy` state an inversion in the name
+        if member_.startswith("from_"):
+            score_ -= 3
+            # A `from_<X>` member produces something OF X. When the declared return type is not
+            # X, that is a CONTRADICTION stated by the member's own name, and it is a far
+            # stronger signal than the small inversion penalty: `from_sympy` given `-> int`
+            # returns a SymPy object, not an int. `from_list` given `-> list` returns a list, so
+            # it keeps only the small penalty and stays available for 188. This is a stated
+            # type mismatch, not a tuned weight.
+            src_ = member_[len("from_"):]
+            if want_type and src_ and want_type not in {src_, *_TYPE_FORMS.get(src_, set())}:
+                score_ -= 8
+        # the member's own name spelling a whole prose token (`to_list` in "to_list")
+        if member_.lower() in _PROSE_TOKENS:
+            score_ += 6
+        # THE TYPE IS EVIDENCE, NOT A VERDICT, AND IT IS WEAK EVIDENCE. One prose overlap unit
+        # is worth 4; the type contributes at most 6 (name 3 + stated form 3), so a member whose
+        # guide states TWO prose words always beats a member that only matches the annotation.
+        # That ordering is forced by a measured fact: item 194's annotation is WRONG -- it
+        # declares `-> list[int]` while its answer `todok()` returns a dict -- so any rule that
+        # lets the type outrank stated meaning loses 194, and any rule that lets the type add
+        # nothing loses 185 (whose answer `to_int` shares no prose word at all). Weak type
+        # evidence satisfies both.
+        # DECLARED-TYPE EVIDENCE. A member whose own name spells the declared return type is
+        # stating the answer's type, which is independent of the prose: item 185's answer
+        # `to_int` shares no word with "integer representation" and would otherwise be dropped
+        # for zero overlap. This is evidence FOR that member only -- it can never promote a
+        # member by exclusion, and `tolist` does not gain it because 194's real type is a dict
+        # that its annotation misstates.
+        if member_ in _TYPE_SPELLING:
+            score_ += 3
+        if want_type and _words(defn_) & _TYPE_FORMS.get(want_type, set()):
+            score_ += 3
+        return (-score_, len(member_), body_)
+
+    _PROSE_TOKENS = set(re.findall(r"[a-z0-9_]{4,}",
+                                   (problem or "").lower().replace("-", "_").replace(" ", "_")))
+    ranked = sorted((b for b, _d in guides), key=_meaning)
+    keyed = [(_meaning(b), b) for b in ranked]
+    keyed = [k for k in keyed if -k[0][0] > 0]           # at least one stated word
+
+    # NO SECOND SORT. The type weight is already inside _meaning. An earlier version applied a
+    # separate partition here "as a preference" and it silently undid the weighting -- which is
+    # the whole failure mode this file is about: two places deciding one thing.
+    out = [b for _k, b in keyed]
     return out[:limit]
 
 
-def _mentions(body: str, want_type: str, guides: Sequence[tuple[str, str]]) -> bool:
-    """True when this member's own guide mentions the declared return type."""
-    for b, doc in guides:
-        if b == body:
-            return want_type.lower() in (doc or "").lower() or want_type.lower() in b.lower()
-    return False

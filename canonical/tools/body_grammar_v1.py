@@ -228,8 +228,18 @@ def compositions(args: Sequence[str], paths: Mapping[str, Sequence[str]],
             if tail != a:
                 add("RETANN", f"{tail}({joined})")
 
+    # A guide body is emitted in BOTH shapes: as written (`matrix.todok()`, `poly.rep.to_list()`)
+    # and with each OTHER parameter as its argument (`K.to_int(a)`). Which one is right is not
+    # guessable from the name -- `todok` takes nothing, `to_int` takes the element -- but it is
+    # decidable, and the signature states how many parameters exist to supply. This is the same
+    # rule already used for stated symbols: emit the shapes, let the oracle decide.
+    all_args = list(args)
     for gb in guide_bodies:
         add("GUIDE", gb)
+        if all_args:
+            base = gb[:-2] if gb.endswith("()") else gb
+            for other in all_args:
+                add("GUIDE", f"{base}({other})")
 
     # 1. attribute paths whose own name the prose uses, then by NAME LENGTH.
     # Length is a measured proxy for API primitiveness: on sympy.Equality the useful members
