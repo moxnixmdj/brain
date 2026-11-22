@@ -1,0 +1,232 @@
+{
+ "schema": "BRAIN_CONTRACT_VETO_REPAIR_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "date": "2026-11-21",
+ "upstream": "https://github.com/jkoppel/QuixBugs",
+ "mode": "STRUCTURAL_MUTATIONS_WITH_A_CONTRACT_VETO_ON_REAL_PUBLISHED_BUGS",
+ "criteria_were_declared_before_the_receipt_run": true,
+ "declared_acceptance_before_the_receipt_run": {
+  "S1": "structural families are opt-in and contain both needed edits",
+  "S2": "both fresh repairs pass published test and contract with <=100 candidates",
+  "S3": "contract refuses the previously measured published-only patch",
+  "S4": "answer key absent and published test bytes unchanged",
+  "S5": "zero model, parameters and network at run time"
+ },
+ "verdict": {
+  "S1_structural_families_are_opt_in_and_contain_the_edits": {
+   "MET": true
+  },
+  "S2_both_repairs_pass_published_and_contract_on_fresh_copies": {
+   "rows": [
+    {
+     "task": "gcd",
+     "status": "PASS__BOUNDED_MULTI_ROUND_REPAIR_FOUND",
+     "accepted_edit_count": 1,
+     "candidates": 14,
+     "fresh_published_rc": 0,
+     "fresh_contract_rc": 0
+    },
+    {
+     "task": "find_in_sorted",
+     "status": "PASS__BOUNDED_MULTI_ROUND_REPAIR_FOUND",
+     "accepted_edit_count": 1,
+     "candidates": 52,
+     "fresh_published_rc": 0,
+     "fresh_contract_rc": 0
+    }
+   ],
+   "MET": true
+  },
+  "S3_contract_refutes_the_published_only_patch": {
+   "control": {
+    "applied": true,
+    "how": "patch",
+    "published_rc": 0,
+    "contract_rc": 1,
+    "contract_tail": [
+     "FAILED test_find_in_sorted_contract.py::test_index_or_minus_one[arr442-2] - a...",
+     "FAILED test_find_in_sorted_contract.py::test_index_or_minus_one[arr451-3] - a...",
+     "56 failed, 400 passed in 0.63s"
+    ],
+    "MET": true
+   },
+   "MET": true
+  },
+  "S4_no_answer_key_and_no_published_test_bytes_changed": {
+   "derivation": "qb.build_task copies only SOLVER_MAY_SEE and asserts ANSWER_KEY is absent; the published test file is copied byte-for-byte and never written",
+   "MET": true
+  },
+  "S5_zero": {
+   "model_calls": 0,
+   "parameters_stored": 0,
+   "network_calls_at_run_time": 0,
+   "MET": true
+  }
+ },
+ "structural_evidence": {
+  "gcd": {
+   "default_families": [
+    "guard_clause",
+    "legacy"
+   ],
+   "added_families": [
+    "structural_call"
+   ],
+   "added": [
+    [
+     "structural_call",
+     "gcd:args 0<->1"
+    ]
+   ],
+   "default_candidate_count": 13,
+   "structural_candidate_count": 14
+  },
+  "find_in_sorted": {
+   "default_families": [
+    "guard_clause",
+    "legacy",
+    "neighborhood"
+   ],
+   "added_families": [
+    "structural_call",
+    "structural_index"
+   ],
+   "added": [
+    [
+     "structural_index",
+     "mid->mid+1"
+    ],
+    [
+     "structural_index",
+     "mid->mid-1"
+    ],
+    [
+     "structural_call",
+     "binsearch:args 0<->1"
+    ],
+    [
+     "structural_index",
+     "mid->mid+1"
+    ],
+    [
+     "structural_index",
+     "mid->mid-1"
+    ],
+    [
+     "structural_index",
+     "mid->mid+1"
+    ],
+    [
+     "structural_index",
+     "mid->mid-1"
+    ],
+    [
+     "structural_call",
+     "binsearch:args 0<->1"
+    ],
+    [
+     "structural_index",
+     "mid->mid+1"
+    ],
+    [
+     "structural_index",
+     "mid->mid-1"
+    ],
+    [
+     "structural_index",
+     "mid->mid+1"
+    ],
+    [
+     "structural_index",
+     "mid->mid-1"
+    ],
+    [
+     "structural_call",
+     "binsearch:args 0<->1"
+    ]
+   ],
+   "default_candidate_count": 59,
+   "structural_candidate_count": 72
+  }
+ },
+ "rows": [
+  {
+   "task": "gcd",
+   "status": "PASS__BOUNDED_MULTI_ROUND_REPAIR_FOUND",
+   "accepted_edits": [
+    "gcd:args 0<->1"
+   ],
+   "accepted_edit_count": 1,
+   "candidates": 14,
+   "contract_veto_rejections": 2,
+   "patches": [
+    {
+     "source_path": "python_programs/gcd.py",
+     "original_sha256": "d68e155c2af40d787f617f03c596005edabee3d9e33626b9185d83650895636f",
+     "candidate_sha256": "a0ec600c411a124edcda62d627b22aa8ce29c4eda65dbf5927e12e4f3c344213",
+     "unified_diff": "--- a/python_programs/gcd.py\n+++ b/python_programs/gcd.py\n@@ -2,7 +2,7 @@\n     if b == 0:\n         return a\n     else:\n-        return gcd(a % b, b)\n+        return gcd(b, a % b)\n \n \n \"\"\"\n"
+    }
+   ],
+   "seconds": 7.2,
+   "fresh_patch_applied": [
+    {
+     "source_path": "python_programs/gcd.py",
+     "applied": true,
+     "how": "git"
+    }
+   ],
+   "fresh_published_rc": 0,
+   "fresh_contract_rc": 0,
+   "fresh_contract_tail": [
+    "........................................................................ [ 98%]",
+    "........                                                                 [100%]",
+    "440 passed in 0.28s"
+   ]
+  },
+  {
+   "task": "find_in_sorted",
+   "status": "PASS__BOUNDED_MULTI_ROUND_REPAIR_FOUND",
+   "accepted_edits": [
+    "mid->mid+1"
+   ],
+   "accepted_edit_count": 1,
+   "candidates": 52,
+   "contract_veto_rejections": 1,
+   "patches": [
+    {
+     "source_path": "python_programs/find_in_sorted.py",
+     "original_sha256": "b640b4bcb1b2c0f7875de8f13df191f4e61ddf7e6fbdcfc42d477ec60885d3c7",
+     "candidate_sha256": "36b584bf56ae774a500fbfe51e7a473b7819f00723feb4b9c4651aa496f8246e",
+     "unified_diff": "--- a/python_programs/find_in_sorted.py\n+++ b/python_programs/find_in_sorted.py\n@@ -6,7 +6,7 @@\n         if x < arr[mid]:\n             return binsearch(start, mid)\n         elif x > arr[mid]:\n-            return binsearch(mid, end)\n+            return binsearch(mid + 1, end)\n         else:\n             return mid\n \n"
+    }
+   ],
+   "seconds": 16.4,
+   "fresh_patch_applied": [
+    {
+     "source_path": "python_programs/find_in_sorted.py",
+     "applied": true,
+     "how": "git"
+    }
+   ],
+   "fresh_published_rc": 0,
+   "fresh_contract_rc": 0,
+   "fresh_contract_tail": [
+    "........................................................................ [ 94%]",
+    "........................                                                 [100%]",
+    "456 passed in 0.28s"
+   ]
+  }
+ ],
+ "cost": {
+  "seconds": 26.2,
+  "model_calls": 0,
+  "parameters_stored": 0,
+  "network_calls_at_run_time": 0
+ },
+ "limits": [
+  "two contract forms are implemented, selected by the task's own output sentence; a task outside those forms is refused, not guessed",
+  "the contract grid is finite; passing it is evidence, not a proof of total correctness",
+  "the control patch came from an earlier producer run of the same structural search without the veto, not from the answer key",
+  "this is a producer-run sandbox; no independent verifier and no capability credit"
+ ]
+}
