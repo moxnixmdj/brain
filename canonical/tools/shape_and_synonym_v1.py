@@ -224,10 +224,44 @@ def solve_item(bench: str | pathlib.Path, item: Mapping[str, Any], *,
 
     bodies: list[str] = []
     provenance: list[dict] = []
+    # A stub written with `from X import *` binds every public name directly, so the BARE
+    # name is the correct body and `sympy.name(...)` is a NameError. Measured on four items:
+    # `is_carmichael(n)`, `divisor_sigma(n, k)`, `poly.rep.to_list()` and `matrix.todok()`
+    # all pass while their `sympy.`-prefixed forms fail. Both forms are therefore emitted --
+    # the stub's own import line states which are available.
+    star_imported = any(
+        line.strip().startswith("from ") and line.strip().endswith("import *")
+        for line in item["starting_code"].splitlines()
+    )
     for symbol in ordered:
         for body in bodies_for(symbol, args, hints=hints, returns=returns):
             bodies.append(body)
             provenance.append({"symbol": symbol, "body": body})
+            if star_imported:
+                bare = symbol.rsplit(".", 1)[-1]
+                members = re.findall(r"([A-Za-z_]\w*)", bare)
+                if members:
+                    alt = body.replace(symbol, members[0])
+                    if alt != body:
+                        bodies.append(alt)
+                        provenance.append({"symbol": symbol, "body": alt})
+
+    # MEMBER CALLS: the answer may be a method on the PARAMETER (`matrix.todok()`,
+    # `poly.rep.to_list()`), not a module-level symbol. The prose names it ("dictionary-of-keys
+    # representation", "a list of its coefficients") and the parameter's own type states its
+    # members, so both statements are available at run time without any stored table.
+    member_names: list[str] = []
+    if corpus:
+        low = words_of(item.get("problem", ""))
+        for symbol in ordered[:40]:
+            base = symbol.rsplit(".", 1)[-1]
+            if base.lower() in low:
+                member_names.append(base)
+    for member in dict.fromkeys(member_names):
+        for a in args:
+            bodies.append(f"{a}.{member}()")
+            provenance.append({"symbol": member, "body": f"{a}.{member}()"})
+
     if not bodies:
         return {"example_id": item["example_id"], "status": "NO_CANDIDATES",
                 "passed": False, "hints": hints}
