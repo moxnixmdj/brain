@@ -43,6 +43,7 @@ source. Authority NONE__PRODUCER_RUN_SANDBOX; zero model calls; zero parameters;
 from __future__ import annotations
 
 import argparse
+from collections import Counter
 import itertools
 import json
 import os
@@ -1313,6 +1314,16 @@ def _demo_plan(demo: Mapping[str, Any], requirement: Mapping[str, Any], tool: st
         # "record type, one of A, AAAA, CNAME, MX" and the request says "of type CNAME": the
         # document has already said that word belongs to that flag.
         said_text = str(requirement.get("instruction") or "")
+        # A demonstration may legitimately write the same spelling in two slots -- `record add`
+        # demonstrates `--origin=example.org --name=www --type=CNAME --value=example.org`, because
+        # a record's data is very often its own zone. Spending each value once is right in general
+        # and wrong exactly there: the request says "value example.org in the zone example.org",
+        # naming it twice, and the document says it twice. Two independent statements agreeing is
+        # the licence. One repetition in the demonstration is not enough on its own -- a document
+        # repeating a placeholder says nothing about the request -- so both sides must show the
+        # second occurrence.
+        repeated = Counter(v for _, v in pairs)
+        reusable = {v for v, n in repeated.items() if n > 1}
         for flag, _ in pairs:
             if str(flag) in filled_pairs[::2]:
                 continue
@@ -1414,7 +1425,9 @@ def _demo_plan(demo: Mapping[str, Any], requirement: Mapping[str, Any], tool: st
             best: tuple[int, int, int] | None = None
             for rank, word in enumerate(ordered_want):
                 for value in by_word.get(word, []):
-                    if str(value["value"]) in spent:
+                    v_text = str(value["value"])
+                    if v_text in spent and not (v_text in reusable
+                                                and said_text.lower().count(v_text.lower()) > 1):
                         continue
                     # Among words equally able to name the pairing, the one the value actually
                     # follows is the one it belongs to: `titled "X" with severity "P1"` binds P1
@@ -1440,7 +1453,9 @@ def _demo_plan(demo: Mapping[str, Any], requirement: Mapping[str, Any], tool: st
                     if best is None or key < best:
                         best, pick, score = key, value, 1
             if pick is not None and str(pick["value"]) in spent:
-                pick = None
+                if not (str(pick["value"]) in reusable
+                        and said_text.lower().count(str(pick["value"]).lower()) > 1):
+                    pick = None
             if pick is None:
                 # The example's flag has no description to match on. Before using its *shape*,
                 # the example's own values must have something to do with the request's: a
@@ -1461,7 +1476,10 @@ def _demo_plan(demo: Mapping[str, Any], requirement: Mapping[str, Any], tool: st
                     continue
                 # a value the document already assigned to a flag is not a leftover object
                 rest = [str(v["value"]) for v in ordered
-                        if str(v["value"]) not in spent and not v.get("value_of")]
+                        if (str(v["value"]) not in spent
+                            or (str(v["value"]) in reusable
+                                and said_text.lower().count(str(v["value"]).lower()) > 1))
+                        and not v.get("value_of")]
                 if not rest:
                     # The example's flag has nothing left to take. Discarding the whole reading
                     # throws away the flags it *did* fill, which is how `entry list --cluster
@@ -1480,8 +1498,14 @@ def _demo_plan(demo: Mapping[str, Any], requirement: Mapping[str, Any], tool: st
                     return None
                 filled_pairs.extend([flag, rest[0]])
                 spent.add(rest[0])
-                filled_pairs.extend(rest[1:])
-                spent.update(rest[1:])
+                # The rest are *positional* objects for the command as a whole, and a spelling the
+                # demonstration itself gives two flags is not one of them: it is already spoken for
+                # and will be filled where the document puts it. Dumping it here is how
+                # `record add` came out with `--name www example.org --value example.org`.
+                leftover = [v for v in rest[1:]
+                            if not (v in reusable and said_text.lower().count(v.lower()) > 1)]
+                filled_pairs.extend(leftover)
+                spent.update(leftover)
                 # The remaining flags are still the demonstration's, and one of them may be an
                 # option whose own documentation names its choices. Ending the demonstration here
                 # is how `record add` stopped after two of its four flags.

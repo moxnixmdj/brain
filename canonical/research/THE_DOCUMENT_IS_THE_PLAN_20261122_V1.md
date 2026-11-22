@@ -1337,3 +1337,42 @@ is the dangerous kind, and the benchmark's own backend error is what exposed thi
 mentions `example.org` twice (as the origin and as the record's data) and a value is spent once.
 Whether a document can legitimately take the same spelling in two slots is a real question about
 demonstrations that this round did not settle, and it is named rather than papered over.
+
+### A33 — a value is spent once, unless both the document and the request say twice
+
+A32 left one thing open: `record add` could not fill `--value example.org` because `example.org` was
+already spoken for by `--origin`. The design spends each value once, which is right almost always and
+is what stops a stray object landing in an unrelated flag.
+
+Here it is wrong, and the reason is visible in both documents at once:
+
+    demonstration   --origin=example.org --name=www --type=CNAME --value=example.org
+    request         ... with value "example.org" in the zone "example.org"
+
+The document writes `example.org` in two slots. The request writes it twice. **Two independent
+statements agreeing on a second occurrence is the licence**, and neither alone would be: a document
+repeating a placeholder (`--from X --to X`) says nothing about this request, and a request repeating
+a word says nothing about whether the program has two slots for it.
+
+So the rule is now: a spent value may be used again only when the demonstration itself repeated that
+exact spelling **and** the instruction contains it more than once. Applied in all three places a
+value is chosen (the enumerated-vocabulary pass, the word-matched pick, and the leftover branch —
+the last of which was also emitting the repeated value *positionally*, giving
+`--name www example.org --value example.org`).
+
+    all sixty tasks   0.4572, three seeds, up 0 / down 0
+    zonectl           every flag/value pair correct on all four instructions, complete
+    lattice           5/5 exact
+
+**Three rounds, one shape.** A32, A33 and A26 before them are the same lesson from different
+directions: the document is not one statement but several — a path, a type, a vocabulary, a worked
+example, a required marker — and the mechanism's job is to read *all* of them and let them constrain
+each other. Every defect found since A25 has been a place where one of those statements was read and
+another was discarded: the path without the summary, the summary without the path, the vocabulary
+without the type, the type without the demonstration, the demonstration without its repetitions.
+
+**What this does not yet show.** Both unseen programs were written by the same hand that wrote the
+mechanism, and both are small. The claim that survives is narrower and still worth having: the
+mechanism contains no knowledge of either program's domain, and the fixes it needed were all in how
+a document is read, never in what the system knew. A program written by someone else, from a
+captured real `--help`, is the next honest test and is named here rather than claimed.

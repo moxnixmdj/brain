@@ -803,3 +803,23 @@ def test_a_choice_whose_flag_takes_a_number_is_sent_its_number_not_its_label():
     assert R.slot_kind(option) == "number", R.slot_kind(option)
     assert dict(R.enum_pairs(option))["urgent"] == "1", R.enum_pairs(option)
     assert R.enum_choices(option)[:2] == ["none", "urgent"], R.enum_choices(option)
+
+
+def test_one_spelling_may_fill_two_slots_when_the_document_and_the_request_both_say_so(zonectl):
+    """A value is spent once -- except where both sides independently write it twice.
+
+    `zonectl record add` demonstrates `--origin=example.org --name=www --type=CNAME
+    --value=example.org`, because a record's data is very often its own zone, and the request says
+    "value example.org in the zone example.org". Two independent statements agreeing on a second
+    occurrence is the licence. A document repeating a placeholder is not enough by itself, so both
+    sides must show it -- which is why the check is the count in the instruction, not in the demo.
+    """
+    out = R.require_survey_plan(
+        zonectl,
+        'Add a record "www" of type CNAME with value "example.org" in the zone "example.org".',
+        probes=20)
+    argv = out["plans"][0]["argv"][1:]
+    assert argv[:2] == ["record", "add"], argv
+    got = dict(zip(argv[2::2], argv[3::2]))
+    assert got == {"--type": "CNAME", "--origin": "example.org", "--name": "www",
+                   "--value": "example.org"}, argv
