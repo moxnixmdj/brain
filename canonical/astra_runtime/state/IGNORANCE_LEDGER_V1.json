@@ -341,6 +341,17 @@
    "what": "define",
    "why": "unknown_operator rootd1ddcb3ed5cf"
   },
+  "g301e1dbd421a9b2f48b4fdf3233c0b11e75f58bb14a95fe2358a7efcc296e09e": {
+   "cost": 1.0,
+   "created": 1795371651.2900164,
+   "helped": 0,
+   "id": "g301e1dbd421a9b2f48b4fdf3233c0b11e75f58bb14a95fe2358a7efcc296e09e",
+   "last_seen": 1795371717.1419587,
+   "resolved": false,
+   "trials": 0,
+   "what": "transcribe the audio in this recording to text",
+   "why": "raw goal compilation gap (FAIL__RAW_GOAL_COMPILATION_GAP)"
+  },
   "g312ae628b1d6617fd45c18670df163b05974fdb4a45483b1090a83fc57ba0117": {
    "cost": 1.0,
    "created": 1794959885.839464,
@@ -824,6 +835,17 @@
    "trials": 2,
    "what": "probe:--out|positional",
    "why": "empirical cli probe"
+  },
+  "g67c47e5b635abd9b7dd26d30f76d43a83d38b728e7689886a5b83e050fae756d": {
+   "cost": 1.0,
+   "created": 1795371647.0953765,
+   "helped": 0,
+   "id": "g67c47e5b635abd9b7dd26d30f76d43a83d38b728e7689886a5b83e050fae756d",
+   "last_seen": 1795371709.7286756,
+   "resolved": false,
+   "trials": 0,
+   "what": "get the writing out of that there pdf thing",
+   "why": "raw goal compilation gap (FAIL__RAW_GOAL_COMPILATION_GAP)"
   },
   "g699708060680": {
    "cost": 1.0,

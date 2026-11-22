@@ -484,3 +484,49 @@ the two cases.**
 
 A5 is unchanged at 0.4464 mean / 0.3546 outcome / 0 refusals, so the capability was added without buying it
 from the bench result.
+
+### A12 — the real bottleneck in "get it from the web": retrieval was never checked for relevance
+
+A9 reported a live PASS for the dropped word `spreadsheet`. Inspecting what it actually returned is the
+part that matters, and it was bad:
+
+```
+query: gzip command line compress   ->  PASS__JIT_KNOWLEDGE_RESOLVED
+documents: uglify-js 3.19.3 ("JavaScript parser, mangler/compressor")
+           zlibjs 0.3.1
+           Command 0.1.0
+```
+
+Five independent sources, two independent kinds, and **not one document about gzip**. The gate counted
+witnesses and never asked whether a witness said anything about the question. That is the failure the owner
+warned about in a different form: independence is not relevance, and a store that answers confidently with
+the wrong thing is worse than one that says it does not know.
+
+The fix is small and lives in `jit_knowledge_v1`: a document is evidence only if it **mentions the subject**
+of the query, and the subject is the query's *distinctive* word — the one the fewest fetched documents
+mention — not its commonest. Measured:
+
+| query | before | after |
+|---|---|---|
+| `awk print first field` | PASS with `extsprintf`, `@graphql-tools/documents` | **FAIL — answers are not about the query** |
+| `spreadsheet` | PASS (noise mixed in) | PASS, `spreadsheet`, `xlsx`, `react-spreadsheet` |
+| `sed replace text` | PASS (noise) | PASS, **`sed`**, `alecthomas/t` |
+| `gzip compress a file` | PASS with `uglify-js` | PASS, `tarinator-go` — *"compressing and extracting tar and **gzip** files"* |
+| `pdf text extraction` (pypi only) | PASS | PASS, the package named **`pdf`** |
+
+Two honest notes. First, the `gzip` row is not a bug: that repository genuinely says gzip, so it is
+relevant evidence (it is not *the* gzip CLI, which is a different question — see below). Second, my first two
+attempts at the rule were wrong and the existing suite caught both: matching *any* query word let
+`extsprintf` pass on the word `awk` appearing inside a longer string, and requiring *every* query word
+rejected the package literally named `pdf`. The rule that survived is: match a distinct word boundary, any
+one of the query's distinctive words, falling back to all words when no word distinguishes.
+
+**All 42 existing `test_jit_knowledge_v1` tests and 6 non-smuggling tests pass** with the filter in place,
+including the one that already stated this requirement in words: *"The content must relate to the question.
+Not just be present."* The module had the sentence and not the check.
+
+**What this does not fix, stated plainly.** A package registry answers "is there a library that does X",
+not "how do I do X with the program already on this machine". For the planner, the program's own pages and
+the program's own rejections (A10, A11) are exact and cheap; the web is the fallback when neither exists. The
+relevance filter makes the fallback honest. It does not make it a manual, and calling it one would be the
+kind of claim this document exists to avoid.

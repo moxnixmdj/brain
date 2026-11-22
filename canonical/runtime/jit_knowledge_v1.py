@@ -33,6 +33,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 import os
 import time
 import urllib.error
@@ -48,6 +49,7 @@ PASS = "PASS__JIT_KNOWLEDGE_RESOLVED"
 OPEN_THIN = "OPEN__JIT_KNOWLEDGE_INCOMPLETE_DATA"
 FAIL_NO_SOURCE = "FAIL__JIT_KNOWLEDGE_NO_SOURCE_REACHABLE"
 FAIL_EMPTY = "FAIL_CLOSED__JIT_KNOWLEDGE_EMPTY_QUERY"
+FAIL_IRRELEVANT = "FAIL__JIT_KNOWLEDGE_ANSWERS_ARE_NOT_ABOUT_THE_QUERY"
 
 DEFAULT_MIN_SOURCES = 2          # one source cannot conclude anything
 DEFAULT_MIN_KINDS = 2            # and they must be different KINDS of source
@@ -320,6 +322,74 @@ SOURCES: dict[str, dict[str, Any]] = {
 }
 
 
+# Words too common to say anything about whether a document is on topic. Kept tiny on purpose:
+# the test is not "is this document about my subject" (that needs understanding) but the much
+# weaker and checkable "does this document mention my subject at all". A package called
+# `@graphql-tools/documents` is not evidence about `awk`, and no amount of source counting makes
+# it so.
+_TOPIC_STOP = frozenset("""a an the this that these those it its is are was were be been being do
+does did and or but if then than so as at by for from in into of on to with without please
+could would should can may might will shall help me my we our you your i he she they them their
+some any all each every no not only just also very more most less least same other another
+given file files use using used need want wants needed optionally option optional via there
+here what which who whom whose when where why how command command-line cli line line-s tool
+tools program program-s package packages node js javascript python library libraries module
+modules how to howto example examples simple quick""".split())
+
+
+def topic_words(query: str) -> set[str]:
+    """The words of a query that say what it is *about*."""
+    words = re.findall(r"[A-Za-z][A-Za-z0-9_.+-]{1,30}", str(query or "").lower())
+    return {w for w in words if w not in _TOPIC_STOP and len(w) > 1}
+
+
+def document_is_about(doc: Mapping[str, Any], topics: set[str]) -> bool:
+    """Whether a fetched document mentions the *subject* of the question.
+
+    Weak on purpose: this does not judge whether a document answers the question -- that needs a
+    reader far beyond a word test -- it only refuses to call a document evidence when it never
+    mentions what was asked about.
+
+    One refinement matters, and measurement forced it. Matching *any* word of the query lets its
+    commonest words carry a document through: for `awk print first field`, a package whose
+    summary says "the first true value of an iterable" matched on `first`, and one saying
+    "extended POSIX-style sprintf" matched on `awk` because the *word* appeared in a longer
+    string. The subject of a question is its rarest word, not its commonest, so a document has
+    to mention the query's distinctive word(s) -- the ones least used across the fetched set.
+    """
+    if not topics:
+        return True
+    text = " ".join(str(doc.get(k) or "") for k in
+                    ("id", "title", "summary", "description", "name", "url", "path")).lower()
+
+    def says(word: str) -> bool:
+        return bool(re.search(r"(?<![a-z0-9])" + re.escape(word) + r"(?![a-z0-9])", text))
+
+    # any of the subject's words is enough: `pdf text extraction` is answered by a package named
+    # `pdf`, and requiring every word would reject the one document that is exactly on topic
+    return any(says(topic) for topic in topics)
+
+
+def distinctive_words(query: str, documents: Sequence[Mapping[str, Any]]) -> set[str]:
+    """The query's subject words: the ones the fewest fetched documents mention.
+
+    A word every document uses says nothing about which one is on topic; a word only a few use
+    is what the question was about. Ties keep every word, so a one-word query is unchanged.
+    """
+    topics = topic_words(query)
+    if len(topics) < 2:
+        return topics
+    counts = {}
+    for topic in topics:
+        counts[topic] = sum(1 for d in documents if document_is_about(d, {topic}))
+    if all(n == len(documents) for n in counts.values()):
+        # every word is in every document, so none of them says anything about which document
+        # is on topic; then the question is answered by a document that speaks to all of it
+        return topics
+    fewest = min(counts.values())
+    return {t for t, n in counts.items() if n == fewest}
+
+
 def kinds_answered(sources: Sequence[str]) -> list[str]:
     """The distinct KINDS among the sources that answered."""
     out: list[str] = []
@@ -525,6 +595,15 @@ def resolve(query: str, *, min_sources: int = DEFAULT_MIN_SOURCES,
                 "sha256": hashlib.sha256(body.encode("utf-8")).hexdigest()[:16],
             })
 
+    # A document that never mentions the subject is not evidence, however many sources sent it.
+    # Relevance is a *filter*, not a new conclusion: what survives is still only checked against
+    # the independence gate, and a query nothing is about is reported as irrelevant rather than
+    # handed back as knowledge.
+    topics = distinctive_words(q, documents)
+    on_topic = [d for d in documents if document_is_about(d, topics)]
+    irrelevant = [d for d in documents if d not in on_topic]
+    documents = on_topic
+
     sources_answered = [r["source"] for r in answered]
     kinds = kinds_answered(sources_answered)
     # Counting sources is not enough: three package registries are one kind of
@@ -533,8 +612,14 @@ def resolve(query: str, *, min_sources: int = DEFAULT_MIN_SOURCES,
     enough_sources = len(sources_answered) >= max(1, min_sources)
     enough_kinds = len(kinds) >= max(1, min_kinds)
     complete = enough_sources and enough_kinds
-    status = PASS if complete else (
-        OPEN_THIN if answered else FAIL_NO_SOURCE)
+    # an answer whose every document is off-topic is a failure, not thin data: the sources
+    # answered, and what they said was not about the question
+    if complete and topics and not documents:
+        complete = False
+        status = FAIL_IRRELEVANT
+    else:
+        status = PASS if complete else (
+            OPEN_THIN if answered else FAIL_NO_SOURCE)
 
     out = {
         "schema": SCHEMA,
@@ -543,6 +628,8 @@ def resolve(query: str, *, min_sources: int = DEFAULT_MIN_SOURCES,
         "query": q,
         "documents": documents,
         "document_count": len(documents),
+        "documents_irrelevant": len(irrelevant),
+        "topic_words": sorted(topics),
         "sources_asked": names,
         "sources_answered": sources_answered,
         "sources_failed": [r["source"] for r in results if not r.get("ok")],
@@ -555,7 +642,8 @@ def resolve(query: str, *, min_sources: int = DEFAULT_MIN_SOURCES,
                     "reason": r.get("reason"),
                     "duration_s": r.get("duration_s")} for r in results],
         "authority": ("EXTERNAL_PUBLIC_EVIDENCE_FETCHED" if complete else
-                      "INCOMPLETE_DATA_NO_CONCLUSION_DRAWN"),
+                      "INCOMPLETE_DATA_NO_CONCLUSION_DRAWN" if answered else
+                      "NO_SOURCE_ANSWERED"),
         "duration_s": round(time.time() - started, 3),
     }
     out["from_cache"] = False
