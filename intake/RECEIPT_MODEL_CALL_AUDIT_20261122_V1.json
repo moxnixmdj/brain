@@ -3,27 +3,28 @@
  "authority": "NONE__STATIC_ONLY__NO_AUDITED_MODULE_EXECUTED",
  "date": "2026-11-22",
  "branch": "arena/67c67d7e-brain",
- "repo_head_at_audit": "1f079cac7e7cbb946508dbc636f48d16b6c42875",
+ "repo_head_at_audit": "beef8e80051fc5007fef08311bc492952931bf57",
  "instrument": {
   "path": "canonical/tools/model_call_surface_audit_v1.py",
-  "git_blob_sha": "e6b466209321f89d4171d43dd384c65ec7376f68",
+  "git_blob_sha": "e3ce3fd122992d4cf733c54cf0de5b7b30653577",
   "tests": "canonical/tests/test_model_call_surface_audit_v1.py",
   "tests_passed": 8,
   "method": "ast only; no audited module imported or executed",
-  "tests_git_blob_sha": "68a6bdd793314fc5a96b34c8bd134c1b15a64887"
+  "tests_git_blob_sha": "2f4eb28dda89bee97cd35cc474d9f998771353c4",
+  "audited_after_main_merge": true
  },
  "question": "Which files can reach a model-inference endpoint from a named entry module, statically or through the tree's own dynamic loaders?",
  "counts": {
-  "tracked_python_files": 6037,
-  "files_with_inference_endpoint_literal": 21,
-  "files_with_model_artifact_host": 12,
-  "files_with_any_endpoint_literal": 33
+  "tracked_python_files": 6048,
+  "files_with_inference_endpoint_literal": 23,
+  "files_with_model_artifact_host": 14,
+  "files_with_any_endpoint_literal": 35
  },
  "default_entry_closures": {
   "ASTRA_GOAL_RUNTIME": {
    "entry": "canonical/runtime/astra_runtime.py",
-   "static_closure_size": 708,
-   "dynamic_closure_size": 715,
+   "static_closure_size": 709,
+   "dynamic_closure_size": 716,
    "combined_inference_endpoint_files": [
     "canonical/runtime/astra_runtime.py"
    ],
@@ -115,7 +116,7 @@
  "additional_entry_closures": {
   "SKY_IMPACT_EXECUTOR": {
    "entry": "canonical/runtime/one_shot_sky_impact_executor_v1.py",
-   "static_closure_size": 791,
+   "static_closure_size": 792,
    "dynamic_closure_size": 1,
    "combined_inference_endpoint_files": [
     "canonical/runtime/astra_runtime.py"
@@ -171,9 +172,11 @@
   "canonical/runtime/pointwise_jev_probe.py",
   "canonical/runtime/root1_contrastive_semantic_candidate_runner_v1.py",
   "canonical/tests/test_harbor_science_planner_v1.py",
+  "canonical/tests/test_model_call_surface_audit_v1.py",
   "canonical/tests/test_root1_contrastive_semantic_candidate_runner_v1.py",
   "canonical/tests/test_tb_science_zero_exposure_multi_action_preflight_v1.py",
-  "canonical/tests/test_tb_science_zero_exposure_transport_preflight_v1.py"
+  "canonical/tests/test_tb_science_zero_exposure_transport_preflight_v1.py",
+  "canonical/tools/model_call_surface_audit_v1.py"
  ],
  "model_artifact_files_all": [
   "canonical/runtime/gdpval_public_220_imperative_directive_audit_v1.py",
@@ -184,10 +187,12 @@
   "canonical/runtime/retrieval_live_provider_arena_v13.py",
   "canonical/runtime/retrieval_live_provider_arena_v2.py",
   "canonical/runtime/smaug_mini_delta_header_probe_v1.py",
+  "canonical/tests/test_model_call_surface_audit_v1.py",
   "canonical/tests/test_retrieval_live_provider_arena_v1.py",
   "canonical/tests/test_retrieval_live_provider_arena_v2.py",
   "canonical/tests/test_retrieval_v3_adaptive_federation.py",
-  "canonical/tests/test_root2_hle_opus55_tool_adapter_v1.py"
+  "canonical/tests/test_root2_hle_opus55_tool_adapter_v1.py",
+  "canonical/tools/model_call_surface_audit_v1.py"
  ],
  "planner_switch_census": {
   "missions_total": 321,
@@ -217,7 +222,9 @@
   "The V19 OSWorld subject and the V3 submission entrypoint reach no inference endpoint: 50 and 24 modules, zero endpoint files. The same holds for the research source frontend, the environment broker, and the scan/retrieve/fetch tool.",
   "The selected OSWorld route (V19) is not what the committed submission entrypoints import: v1 imports subject v1 and v3 imports subject v3. No entrypoint imports v19. A benchmark claim naming V19 would not be the route the submitted entrypoint runs.",
   "osworld_v21_brain_subject_v19.py does not import in this sandbox: canonical/runtime/osworld_v21_visual_region_grounding_v1.py raises ModuleNotFoundError: No module named PIL. Static reachability is not importability.",
-  "The vendored model clients (stirrup openrouter/slack, minisweagent openrouter/requesty) are unreachable from every audited entry; they are evaluator-side trees, not runtime."
+  "The vendored model clients (stirrup openrouter/slack, minisweagent openrouter/requesty) are unreachable from every audited entry; they are evaluator-side trees, not runtime.",
+  "Two files match their own classifier on purpose: the audit and its test spell endpoint patterns out as literals. They are reported in instrument_self_matches, not skipped, and the test asserts that no other file is exempted.",
+  "After merging current main (5 commits, 6048 tracked Python files), the counts moved by 2 (both self-matches) and no entry closure gained an endpoint. The AUDIT, not the code, changed the number."
  ],
  "not_established": [
   "That any route makes zero model calls at run time. This audit reads source text; it does not observe a process, an environment, or a network.",
@@ -253,7 +260,12 @@
   "STATIC_ONLY: a URL assembled from parts, read from an environment variable, or passed in by a caller is invisible to this audit.",
   "IMPORT_OVER_APPROXIMATION: an import in a branch that never executes still counts.",
   "NO_EXECUTION: nothing audited here ran, so no route is shown to work or to fail.",
-  "ENTRY_SCOPED: absence of an endpoint in one entry closure says nothing about another route, a notebook, a workflow, or a vendored tree loaded by an evaluator."
+  "ENTRY_SCOPED: absence of an endpoint in one entry closure says nothing about another route, a notebook, a workflow, or a vendored tree loaded by an evaluator.",
+  "SELF_REFERENCE: this audit names endpoint patterns in its own source, so it appears in its own findings. Those matches are the classifier's regex text, never a request; instrument_self_matches names the files that do this instead of skipping them, and every other match is a file that could call."
  ],
- "next_required": "A run-time observer, not a source audit: record every outbound model request during one unbounded mission, or enforce the boundary (reject allow_optional_model_planner in the guard) so that a mission cannot enable it."
+ "next_required": "A run-time observer, not a source audit: record every outbound model request during one unbounded mission, or enforce the boundary (reject allow_optional_model_planner in the guard) so that a mission cannot enable it.",
+ "instrument_self_matches": [
+  "canonical/tests/test_model_call_surface_audit_v1.py",
+  "canonical/tools/model_call_surface_audit_v1.py"
+ ]
 }

@@ -147,9 +147,15 @@ def test_report_against_this_tree_names_its_limits_and_its_scope():
     for label in tool.DEFAULT_ENTRIES:
         assert label in report["entries"]
         assert report["entries"][label]["entry_exists"] is True
-    assert len(report["limits"]) >= 4
-    # The audit itself must not name a model endpoint, or it would audit itself in.
+    assert len(report["limits"]) >= 5
     assert report["counts"]["files_with_inference_endpoint_literal"] >= 1
-    assert "canonical/tools/model_call_surface_audit_v1.py" not in report[
-        "inference_endpoint_files"
-    ]
+    # The audit names endpoint patterns in its own source, so it matches itself. The
+    # requirement is that it SAYS so, not that it hides it.
+    assert report["instrument_self_matches"] == [
+        "canonical/tests/test_model_call_surface_audit_v1.py",
+        "canonical/tools/model_call_surface_audit_v1.py",
+    ], report["instrument_self_matches"]
+    assert any("SELF_REFERENCE" in x for x in report["limits"])
+    # No other file may be silently exempted.
+    others = set(report["inference_endpoint_files"]) - set(report["instrument_self_matches"])
+    assert others, "the audit must still find real endpoint-bearing files"

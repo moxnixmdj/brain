@@ -61,6 +61,13 @@ GUARD_PATHS = (
 )
 PLANNER_FLAG = "allow_optional_model_planner"
 MISSIONS_DIR = "canonical/astra_runtime/missions"
+# The instrument and its test both spell endpoint patterns out as literals, because
+# that is how a classifier and its fixtures are written. They are the only two files
+# allowed to say so; both are reported rather than exempted.
+SELF_PATHS = (
+    "canonical/tools/model_call_surface_audit_v1.py",
+    "canonical/tests/test_model_call_surface_audit_v1.py",
+)
 
 
 def git(root: pathlib.Path, *args: str) -> str:
@@ -425,6 +432,13 @@ def audit(root: pathlib.Path, entries: dict[str, str]) -> dict:
             "files_with_any_endpoint_literal": len(hits),
         },
         "entries": report_entries,
+        # This tool's own patterns are string literals in its own source, so it matches
+        # itself. It is listed rather than exempted: an audit that quietly skips its own
+        # text is an audit whose reader cannot tell which matches were suppressed.
+        "instrument_self_matches": sorted(f for f in hits if f in SELF_PATHS),
+        "instrument_self_matches_unexpected": sorted(
+            f for f in SELF_PATHS if f in hits and f not in SELF_PATHS
+        ),
         "inference_endpoint_files": {f: hits[f] for f in inference_files},
         "model_artifact_files": {f: hits[f] for f in artifact_files},
         "planner_flag_census": planner_flag_census(root),
@@ -435,6 +449,10 @@ def audit(root: pathlib.Path, entries: dict[str, str]) -> dict:
             "NO_EXECUTION: nothing audited here ran, so no route is shown to work or to fail.",
             "ENTRY_SCOPED: absence of an endpoint in one entry closure says nothing about "
             "another route, a notebook, a workflow, or a vendored tree loaded by an evaluator.",
+            "SELF_REFERENCE: this audit names endpoint patterns in its own source, so it "
+            "appears in its own findings. Those matches are the classifier's regex text, "
+            "never a request; instrument_self_matches names the files that do this "
+            "instead of skipping them, and every other match is a file that could call.",
         ],
     }
 
