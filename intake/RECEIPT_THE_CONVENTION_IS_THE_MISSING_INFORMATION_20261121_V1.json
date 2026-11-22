@@ -29,6 +29,14 @@
  ],
  "model_calls": 0,
  "next_bottleneck": "recognising which convention an unseen artifact uses, without a recogniser having been written for that layout",
+ "regression_found_after_commit": {
+  "fix": "a binding is admitted only if it is informative on EVERY battery member",
+  "how_found": "a clean end-to-end reproduction run, not the unit tests; the unit tests passed while the claim was false",
+  "lesson": "passing tests did not catch it because the fixture contained no iterable-taking update; the reproduction run did",
+  "new_test": "test_a_binding_informative_on_only_some_members_is_refused",
+  "what": "the binder briefly bound pyrsistent PSet.update as a sorted set",
+  "why": "update() takes an iterable; the string member is absorbed by reconstruction and comes back sorted, while the three numeric members never construct at all -- a bare PASS on 1 of 4 members looked identical to a proof"
+ },
  "results": [
   {
    "agreement": "15/15",
@@ -273,12 +281,14 @@
  ],
  "schema": "BRAIN_RECEIPT_THE_CONVENTION_IS_THE_MISSING_INFORMATION_20261121_V1",
  "tests": {
+  "binder_passed": 14,
   "companion": {
    "passed": 13,
    "path": "canonical/tests/test_effect_predicate_binder_v1.py"
   },
   "passed": 7,
-  "path": "canonical/tests/test_data_map_convention_v1.py"
+  "path": "canonical/tests/test_data_map_convention_v1.py",
+  "total_passed": 21
  },
  "truth": {
   "achieved": false

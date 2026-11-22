@@ -35,8 +35,10 @@ import effect_predicate_binder_v1 as epb  # noqa: E402
 
 FIXTURE = {
     "__init__.py": textwrap.dedent('''
-        from .impl import SortedBag, InsertOrderedSet, HashSet, BrokenBuilder
-        __all__ = ["SortedBag", "InsertOrderedSet", "HashSet", "BrokenBuilder"]
+        from .impl import (SortedBag, InsertOrderedSet, HashSet, BrokenBuilder,
+                          RebuildsOnUpdate)
+        __all__ = ["SortedBag", "InsertOrderedSet", "HashSet", "BrokenBuilder",
+                   "RebuildsOnUpdate"]
     '''),
     "impl.py": textwrap.dedent('''
         class SortedBag:
@@ -68,6 +70,20 @@ FIXTURE = {
                 self._v = set(values)
             def add(self, value):
                 self._v.add(value)
+            def __iter__(self):
+                return iter(self._v)
+
+        class RebuildsOnUpdate:
+            """Order is insertion order, BUT .update() rebuilds the whole container,
+            which for a single iterable argument can incidentally come back sorted.
+            This is the shape that briefly bound PSet.update as a sorted set."""
+            def __init__(self, values=()):
+                self._v = list(values)
+            def update(self, more):
+                self._v = sorted(set(self._v) | set(more))
+            def add(self, value):
+                if value not in self._v:
+                    self._v.append(value)
             def __iter__(self):
                 return iter(self._v)
 
@@ -160,6 +176,25 @@ def test_a_constructor_that_only_constructs_is_not_accepted(libdir):
     for a in broken:
         assert a["verdict"] == "ERROR"
         assert "evolver" in a["teaches"] or "construct_or_call" in a["teaches"]
+
+
+def test_a_binding_informative_on_only_some_members_is_refused(libdir):
+    """The regression that briefly bound PSet.update as a sorted set.
+
+    .update() takes an iterable, so the string member is absorbed by reconstruction and
+    comes back sorted, while the numeric members never construct at all. One pass out of
+    four is a coincidence, not an effect, and must not mint a record.
+    """
+    report = epb.bind(libdir, "sorted_unique", libname="fixture")
+    updates = [a for a in report["attempts"]
+               if a["class"] == "RebuildsOnUpdate" and a["method"] == "update"]
+    assert updates, "the fixture must exercise the iterable-taking update"
+    for a in updates:
+        assert a["verdict"] != "BOUND", "a partial battery must never be admitted"
+        assert a.get("informative_members", 0) < len(a["per_member"]), (
+            "the fixture must actually fail to construct on the numeric members"
+        )
+    assert report["record"] is None
 
 
 def test_an_uncompilable_goal_is_refused_by_name(libdir):

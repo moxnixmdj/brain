@@ -710,9 +710,16 @@ def bind(
     candidates = candidates[:max_candidates]
 
     attempts = [_try_candidate(libdir, c, battery, spec) for c in candidates]
-    # A candidate that errored on every member proved nothing; it is not an effect.
-    passed = [a for a in attempts
-              if a["verdict"] == "BOUND" and a.get("informative_members", 0) > 0]
+    # A candidate earns a record only by satisfying the goal on the WHOLE battery.
+    # `PSet.update` showed why: it takes an iterable, so the string member is absorbed by
+    # reconstruction and comes back sorted -- a bare PASS on 1 of 4 members while the other
+    # three never even constructed. That is a coincidence with a receipt, and it was
+    # briefly bound as a sorted set. Informative on every member, or it is not an effect.
+    whole = len(battery["members"])
+    passed = [
+        a for a in attempts
+        if a["verdict"] == "BOUND" and a.get("informative_members", 0) == whole
+    ]
 
     # Aliases are not ambiguity.  If two candidates produce byte-identical observations on
     # every battery member, they are one effect with two names; collapsing them is a
