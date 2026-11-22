@@ -1034,3 +1034,38 @@ missing flag-to-value assignment, and the last three sections' seven experiments
 that no ordering heuristic recovers it. The next mechanism must derive the assignment from stated
 evidence — a demonstration's own paired example, an option's declared type or choices — and must
 carry the flag's *declared type*, because that is where the remaining crashes come from.
+
+### A24 — a correction to A23, and a check that was measuring itself
+
+A23 claimed eight tasks are unwinnable, on the strength of `linear.py`'s `int(priority_str)` and a
+`--team` flag the document lacks. **The `--team` half of that is wrong and is withdrawn.** The
+`priority` half stands: `linear issue create --priority urgent` genuinely raises
+`ValueError: invalid literal for int()`, and cb-006's expected state genuinely asks for the string
+`"urgent"`, so that task cannot be satisfied both ways.
+
+The `--team` claim came from a check that searched each program's *root* page for the subcommand and
+flags a pattern names. Root pages list only top-level commands, so `issue list` was reported missing
+from `gh` -- which is obviously false, since `gh issue list` plans and scores today. Repeating the
+check against every surveyed page removed most of it, and the residue was still wrong: `survey()`
+fetches lazily, guided by the `want` words it is given, so asking for `["issue","list"]` returns a
+tree that happens to contain that page while asking for `["pr","list"]` on the same program may not.
+**The check was measuring whether the survey had fetched the page, not whether the document
+declares the command.** That is the second instrument in this document to flatter itself (A21 was
+the first), and it is withdrawn rather than left standing.
+
+**What survives, stated narrowly.** Two bench disagreements are established by reading code and
+running it, not by the withdrawn check: `--priority` takes an int while the task expects a word
+(5 tasks), and `cb-007`'s expected pattern is `slack message search` while the `slack` document
+declares `slack search message` and gives `message` only a `send` subcommand. Both are real, both
+are small, and neither supports the "13% unwinnable" figure quoted in A23.
+
+**Consequence for the numbers.** The winnable-set metric introduced in A23 is therefore measuring a
+set I cannot reliably enumerate, so it is **not** adopted as the judging number. The honest report is
+the fixed-denominator mean over all sixty (**0.4401**), with the raw per-task table, and any change
+judged on up/down counts against the committed baseline rather than on a filtered mean. That is the
+conservative choice and it is the one that cannot mislead.
+
+**The real finding of this segment is the one already recorded in A22** and it is unaffected: the
+planner's remaining loss is the missing flag-to-value *assignment*, seven ordering heuristics have
+been measured and rejected, and the next mechanism must derive the assignment from stated evidence
+plus the flag's declared type. Nothing here changes that.
