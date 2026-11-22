@@ -1,0 +1,111 @@
+{
+ "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+ "chain": [
+  "THE_GOAL_IS_AN_ORACLE 3/40",
+  "THE_NAME_IS_A_CONVENTION",
+  "PURPOSE_IS_IN_THE_ARTIFACT 7/32",
+  "STRUCTURE_WITHOUT_PURPOSE 8/32",
+  "this"
+ ],
+ "comparison_note": "7/13 = 53.8% on this sub-cohort. This is a like-for-like comparison ONLY against that sub-cohort and must not be quoted as a benchmark score. Frontier on the full 328: o1 51.2%, agent 55.5%, RAG 59.4%.",
+ "consequence_for_plan": "the next unit is not a bigger space. It is: make the FEATURE SET the thing that is discovered rather than chosen, and persist the weights in the external store so they survive across sessions and environments. Four hand-chosen features with learned weights transferred; the loop now has a signal strong enough to learn from.",
+ "date": "2026-11-21",
+ "features": [
+  "coverage: fraction of the name's own words present in the problem text",
+  "doc_overlap: fraction of the problem's words present in the artifact's docstring",
+  "stub_hit: does the name share a word with the stub's own name",
+  "depth: small penalty for dotted depth"
+ ],
+ "held_out_experiment": {
+  "solved_held_out": [
+   [
+    "197",
+    "sympy.external.gmpy.is_square(n)"
+   ],
+   [
+    "201",
+    "sympy.functions.jacobi_symbol(a, n)"
+   ],
+   [
+    "202",
+    "sympy.ntheory.npartitions(n)"
+   ],
+   [
+    "204",
+    "sympy.functions.primepi(n)"
+   ],
+   [
+    "205",
+    "sympy.functions.totient(n)"
+   ],
+   [
+    "206",
+    "sympy.functions.mobius(n)"
+   ],
+   [
+    "207",
+    "sympy.functions.legendre_symbol(a, n)"
+   ]
+  ],
+  "split_A": {
+   "held_out_solved_via_oracle": "7/13",
+   "held_out_top10": "7/13",
+   "train_top10": "9/13",
+   "weights": [
+    2,
+    2,
+    0,
+    1.0
+   ]
+  },
+  "split_B_reversed": {
+   "held_out_top10": "8/13",
+   "train_top10": "8/13",
+   "weights": [
+    0,
+    6,
+    3,
+    1.0
+   ]
+  }
+ },
+ "limits": [
+  "one benchmark family: same 26 sympy items from the same benchmark; NOT run on networkx or the other 24 libraries",
+  "6/13 held-out still fail: todok (rank inf), partition (157), isprime (86), primeomega (79), flat (40), use (3 but wrong body shape)",
+  "weights are fitted on oracle outcomes -- legal (no model, no stored world facts) but supervised by the benchmark's own tests; an unseen environment must supply the feedback signal",
+  "the two splits chose DIFFERENT weights ([2,2,0,1] vs [0,6,3,1]) and both transferred: the feature set is right, the exact weights are sufficient not identified",
+  "the four features were chosen BY HAND; only their weights were learned"
+ ],
+ "missed_signal": {
+  "examples": {
+   "177": "laplace_transform <- 'laplace','transform'",
+   "179": "preorder_traversal <- 'preorder','traversal'",
+   "183": "is_carmichael <- 'carmichael'",
+   "184": "divisor_sigma <- 'divisor','sigma'",
+   "201": "jacobi_symbol <- 'jacobi','symbol'"
+  },
+  "finding": "17 of 26 required names contain a word literally present in the problem text",
+  "why_the_docstring_ranker_missed_it": "a long docstring sharing common words outscored an exact name match; conversely exact-name alone fails on jacobi_symbol (rank 44) because 'symbol' is noise. The signals are complementary."
+ },
+ "model_calls": 0,
+ "schema": "BRAIN_RECEIPT_LEARNED_RANKING_TRANSFERS_20261121_V1",
+ "truth": {
+  "achieved": false
+ },
+ "verdict": {
+  "false": [
+   "that the ranking problem is closed: 6/13 held-out still fail with the known failure class"
+  ],
+  "true": [
+   "a ranking fitted on 13 items solves 7 of 13 held-out items through the benchmark's own hidden tests; both splits reproduce (7/13, 8/13)",
+   "the learned object is four weights over four computed features: no table, no model, no stored facts",
+   "beats every fixed rule in the previous four receipts (3/40 -> 7/32 -> 8/32 -> 7/13 held-out)"
+  ],
+  "unproven": [
+   "transfer to other libraries, the full 328-item benchmark, and unseen environments",
+   "whether the four features are the right four; they were hand-chosen and only weights learned"
+  ]
+ },
+ "what_is_learned": "FOUR WEIGHTS OVER FOUR COMPUTED FEATURES -- a statement about how this family of artifacts names things. Not a list of names. Computed, four floats, fitted in seconds, applied to 13 unseen items in both directions, externalisable as JSON without retraining.",
+ "why_different": "the previous four fitted nothing and measured on the same items they scored. This fits on half the items and measures on the other half."
+}
