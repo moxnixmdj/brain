@@ -889,3 +889,32 @@ takes this value), which is the one thing the filler currently guesses. That is 
 build, and every attempt to avoid building it has now been measured and rejected: rank by description
 overlap (A14 follow-up), refuse steps that drop a required flag (A17), suppress bare operations (A18),
 retry the next reading (A18), and both orderings above. Five attempts, none kept, all for the same reason.
+
+### A21 — the instrument was flattering, and it nearly certified a regression as a gain
+
+A demo-ordering change measured **0.4674** on the score I had been reporting — the best number of the
+session, up from 0.4632, with outcome rising 0.3749 → 0.3927 and 3 tasks up against 1 down. It was worse.
+
+`scored=53, backend_error=7`. Four tasks had stopped *running* rather than stopped scoring, and the mean
+was computed over the tasks that still ran. The four it broke were worth 0.5, 0.4, 0.7 and 0.63. Scored on
+the same 57 tasks as the baseline, the change is **0.4346**, and on a fixed 60-task denominator **0.4128
+against 0.4401**. The headline improved because the denominator shrank.
+
+**The instrument is fixed: the number is now the mean over all 60 tasks, with a task that fails to run
+counted as zero.** Both figures are printed and the fixed-denominator one is the result. This matters beyond
+one change — every result in this document was reported on the flattering denominator, so the honest figure
+for the committed state is **0.4401, not 0.4632**, and the honest figure for A17's sequencing gain is a rise
+on that same fixed base rather than the 0.4464 → 0.4632 quoted there.
+
+**The demo-ordering idea itself was principled and is still rejected on evidence.** `gh issue list`'s page
+carries both `gh issue list [flags]` and `gh issue list --repo owner/repo --state open --label bug`; a
+demonstration that pairs three flags with three values states the command's shape and one that shows
+`[flags]` states none of it, so ordering by how much shape a demo states is a sound rule. It loses anyway:
+fixed-denominator 0.4128 against 0.4401, 3 tasks up and 5 down. The reason is visible in the pairing — the
+three-pair demo's `--state` lists `open, closed, all`, the request's `open` is the *act*, so `--state` finds
+no value and its fallback then consumes the leftover that `--label` needed, and the command comes out as
+`--repo x priority:critical` with the label unassigned. Making the demo richer moved the failure rather than
+removing it.
+
+Two lessons, both recorded because they cost real time: a metric that can shrink its denominator will
+certify a regression as progress, and a principled rule that loses is still a losing rule.
