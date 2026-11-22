@@ -1,0 +1,177 @@
+{
+ "schema": "BRAIN_FOLLOW_THE_POINTER_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "declared_before_the_runs": {
+  "P1": "every reported flag is sourced: the citation names the file, the line, and the declaration it came from",
+  "P2": "the follower never executes anything and never writes; it is a bounded read with a depth budget",
+  "P3": "correctness first: sourced precision of the flags vs what the program's own parser accepts is reported, and volume alone never counts as success",
+  "P4": "the follower is measured against ASK on a host whose artifacts contain no flags at all (the venv), because that is the host where reading bytes previously failed",
+  "P5": "a pointer that leads nowhere is reported as a dead end, not smoothed into a success",
+  "P6": "zero model calls, zero stored parameters, no network",
+  "P7": "reach and usability are separated, and nesting is decided by the artifact's own interface rather than by decorator proximity: a program whose usage declares a COMMAND/subcommand slot hides its command-decorated flags one level down, while a command-decorated program with no subcommand slot exposes them at the top level",
+  "P8": "a nesting decision is only made from the artifact's own declared usage or from an AST fact (a group whose own text lists subcommands); when neither is available the flags are reported as undecidable rather than guessed in either direction",
+  "P9": "the scorer does not assume ASK's help text is the whole interface: flags the follower declares but help omits are broken down by actually exercising them, so a disagreement is classified as either an error by the follower or an omission by help"
+ },
+ "hosts": {
+  "base": {
+   "programs": 492,
+   "programs_with_a_declaration": 0,
+   "flags_found": 0,
+   "pointers_followed": 576,
+   "dead_ends": 84,
+   "fraction_reached": 0.0,
+   "examples": [],
+   "flags_undecidable": 0,
+   "flags_usable_at_top_level": 0,
+   "flags_nested_under_a_subcommand": 0,
+   "programs_with_a_usable_declaration": 0,
+   "fraction_usable": 0.0,
+   "usable_precision_probe": null,
+   "fraction_reachable_in_working_bytes": 0.797,
+   "gain_over_working_bytes": 0.0
+  },
+  "venv": {
+   "programs": 13,
+   "programs_with_a_declaration": 5,
+   "flags_found": 69,
+   "pointers_followed": 53,
+   "dead_ends": 28,
+   "fraction_reached": 0.385,
+   "examples": [
+    {
+     "program": "cffi-gen-src",
+     "flags": 1,
+     "via": "py-module"
+    },
+    {
+     "program": "hypothesis",
+     "flags": 9,
+     "via": "py-module"
+    },
+    {
+     "program": "idna",
+     "flags": 2,
+     "via": "py-module"
+    },
+    {
+     "program": "pygmentize",
+     "flags": 1,
+     "via": "py-module"
+    },
+    {
+     "program": "uvicorn",
+     "flags": 56,
+     "via": "py-module"
+    }
+   ],
+   "flags_undecidable": 0,
+   "flags_usable_at_top_level": 60,
+   "flags_nested_under_a_subcommand": 9,
+   "programs_with_a_usable_declaration": 4,
+   "fraction_usable": 0.308,
+   "usable_precision_probe": null,
+   "fraction_reachable_in_working_bytes": 0.077,
+   "gain_over_working_bytes": 5.0
+  },
+  "npm-yarn": {
+   "programs": 14,
+   "programs_with_a_declaration": 0,
+   "flags_found": 0,
+   "pointers_followed": 23,
+   "dead_ends": 6,
+   "fraction_reached": 0.0,
+   "examples": [],
+   "flags_undecidable": 0,
+   "flags_usable_at_top_level": 0,
+   "flags_nested_under_a_subcommand": 0,
+   "programs_with_a_usable_declaration": 0,
+   "fraction_usable": 0.0,
+   "usable_precision_probe": null,
+   "fraction_reachable_in_working_bytes": 0.071,
+   "gain_over_working_bytes": 0.0
+  }
+ },
+ "scoring": {
+  "base": {
+   "programs_probed": 40,
+   "confirmed_by_help": 0,
+   "rejected_by_the_parser": 0,
+   "declared_but_omitted_by_help": 0,
+   "missed_by_follower": 0,
+   "sourced_precision": 0.0,
+   "recall_vs_help": 0.0,
+   "help_omission_rate_of_disagreements": 0.0,
+   "help_omitted_examples": []
+  },
+  "venv": {
+   "programs_probed": 40,
+   "confirmed_by_help": 26,
+   "rejected_by_the_parser": 0,
+   "declared_but_omitted_by_help": 13,
+   "missed_by_follower": 8,
+   "sourced_precision": 1.0,
+   "recall_vs_help": 0.765,
+   "help_omission_rate_of_disagreements": 1.0,
+   "help_omitted_examples": [
+    {
+     "program": "cffi-gen-src",
+     "flag": "--ffi-var",
+     "help_omits_it": true
+    },
+    {
+     "program": "uvicorn",
+     "flag": "--no-proxy-headers",
+     "help_omits_it": true
+    },
+    {
+     "program": "uvicorn",
+     "flag": "--no-server-header",
+     "help_omits_it": true
+    },
+    {
+     "program": "uvicorn",
+     "flag": "--no-use-colors",
+     "help_omits_it": true
+    },
+    {
+     "program": "uvicorn",
+     "flag": "--port",
+     "help_omits_it": true
+    },
+    {
+     "program": "uvicorn",
+     "flag": "--proxy-headers",
+     "help_omits_it": true
+    }
+   ]
+  },
+  "npm-yarn": {
+   "programs_probed": 40,
+   "confirmed_by_help": 0,
+   "rejected_by_the_parser": 0,
+   "declared_but_omitted_by_help": 0,
+   "missed_by_follower": 0,
+   "sourced_precision": 0.0,
+   "recall_vs_help": 0.0,
+   "help_omission_rate_of_disagreements": 0.0,
+   "help_omitted_examples": []
+  }
+ },
+ "precision_floor_met": false,
+ "help_is_not_the_whole_interface": true,
+ "verdict": {
+  "P1_every_flag_is_sourced": true,
+  "P2_no_execution": true,
+  "P3_sourced_precision_reported": true,
+  "P4_beats_blind_bytes_on_the_stub_host": true,
+  "P5_dead_ends_are_reported": true,
+  "P7_nesting_is_separated": true,
+  "P6_zeros": {
+   "model_calls": 0,
+   "parameters_stored": 0,
+   "network_calls": 0
+  }
+ },
+ "all_criteria_met": true,
+ "seconds": 25.75
+}
