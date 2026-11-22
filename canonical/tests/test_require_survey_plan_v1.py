@@ -584,3 +584,28 @@ def test_completeness_is_decided_both_ways_and_means_the_pages_own_requirements(
     plans = R.require_survey_plan("/tmp/cb/bin/flowctl", created, probes=16)["plans"]
     assert any(p["complete"] for p in plans), [p.get("missing_required") for p in plans]
     assert any(p["missing_required"] for p in plans), "an incomplete reading must name what it lacks"
+
+
+def test_the_scan_is_not_steered_by_the_guess_it_is_meant_to_test():
+    """A survey spent along the route the request already suggests cannot refute that route.
+
+    `want` ranks pages by the request's words and spends the probe budget depth-first along that
+    ranking, so the survey reaches exactly the pages the guess points at. "Send a direct message
+    to the Slack user alice" was steered into `message send`, and `dm send` -- whose own summary
+    is "Send a direct message to a user" and which declares the `--user` flag the request needs
+    -- was never fetched, although the whole help is ten pages and 0.17 seconds. The plan that
+    came back named `--channel alice`, a flag the request never mentions.
+    """
+    request = ('Send a direct message to the Slack user "alice" with the text: "on my way".')
+    out = R.require_survey_plan("/tmp/cb/bin/slack", request, probes=14)
+    assert out["path"] == ["dm", "send"], out["path"]
+    # The route is what this test is about. Binding `alice` to `--user` is a separate matter --
+    # the flag/value pairing -- and ordering demonstrations by how much shape they state was
+    # measured separately and lost (0.4291, three tasks unable to run), so it is not assumed here.
+    assert "--user" in " ".join(str(t) for p in out["plans"] for t in p["argv"]), \
+        [p["argv"] for p in out["plans"]]
+
+    # and the sequence path -- what the agent actually runs -- agrees with the single one
+    seq = R.require_survey_plan_sequence("/tmp/cb/bin/slack", request, probes=14)
+    assert seq["commands"], seq["steps"]
+    assert seq["commands"][0][1:3] == ["dm", "send"], seq["commands"][0]

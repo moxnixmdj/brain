@@ -2383,7 +2383,14 @@ def require_survey_plan(tool: str, instruction: str, *, read_manual: bool = True
                         **survey_kwargs: Any) -> dict[str, Any]:
     """The one call: require the instruction, survey the tool, route, plan."""
     req = require(instruction)
-    survey_kwargs.setdefault("want", sorted(words_of(instruction)))
+    # The scan is NOT steered by the request's words, and that is the whole correction.
+    # `want` spends the probe budget depth-first along the route the words already suggest, so
+    # the survey reaches exactly the pages the guess points at and the guess is never tested:
+    # "Send a direct message to the Slack user alice" was steered into `message send`, and
+    # `dm send` -- whose own summary is "Send a direct message to a user" and which declares the
+    # `--user` flag the request needs -- was never fetched. The program's whole help is ten
+    # pages and 0.17 seconds, so there is nothing to save by looking narrowly. A scan only as
+    # wide as the hypothesis cannot refute the hypothesis.
     tree = survey(tool, **survey_kwargs)
     result = plan(req, tree, read_manual=read_manual)
     result["instruction"] = instruction
@@ -2514,7 +2521,9 @@ def require_survey_plan_sequence(tool: str, instruction: str, *, read_manual: bo
     visible in the output rather than papered over with a guess.
     """
     req_all = require(instruction)
-    survey_kwargs.setdefault("want", sorted(words_of(instruction)))
+    # Not steered, for the reason given at `require_survey_plan`: a scan spent along the route
+    # the request words already suggest cannot refute that route. `probes` is the honest limit
+    # on how much of a program is read; the request's guess is not.
     tree = survey(tool, **survey_kwargs)
     steps: list[dict[str, Any]] = []
     for sentence in sentences_of(instruction)[:max_steps]:
