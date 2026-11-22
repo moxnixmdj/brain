@@ -1789,3 +1789,38 @@ value. Measured **0.4713 -> 0.4692**: cb-058 lost 0.292 because the downstream `
 was getting to the JSON by way of the shredded literals, and removing the shredding removed the path
 it used. Recorded rather than retried: the structure is correct, the binding that must consume it is
 not yet built.
+
+### A45 — the same structure, said twice, is one argument
+
+A44 rejected reading a balanced `{...}` as one value because it measured 0.4692, and recorded why:
+"the structure is correct, the binding that must consume it is not built." This builds it, in the
+one place it was missing.
+
+`datapipe sink create --help` demonstrates
+
+    --config '{"bucket": "analytics-output", "prefix": "daily/"}'
+
+and cb-058's request says `with config {"bucket": "analytics-output", "prefix": "daily/"}` — the
+**same structure**, key for key and value for value. The extractor had also found `bucket`,
+`analytics-output`, `prefix`, `daily/` as four separate literals. Because every shape token then
+looked "already used", `_shape_filled` returned `None` and the JSON trailed the command as operands:
+
+    sink create --name analytics-lake --type S3 bucket analytics-output prefix daily/
+
+The missing rule is small and needs no new machinery: **a request that spells out every key of the
+shape has named that argument.** Emitting it supplies nothing the request did not state — this is
+the opposite of invention, which is the objection that would otherwise stop it. The test is
+mechanical: every key of the example appears as its own word among the request's values.
+
+Now emitted, in full:
+
+    sink create --name analytics-lake --type S3 --config {"bucket": "analytics-output", "prefix": "daily/"}
+
+Measured: **0.4713 unchanged** across three seeds, 50 tests green, no regressions. The score does
+not move because cb-058's third command (`pipeline create`) is still wrong; two of its three
+commands are now exactly what the document's examples describe. Recorded as a correctness gain with
+its score honestly reported as flat.
+
+**Also verified in the same pass:** cb-054 still emits its full
+`--config {"host": ..., "port": 5432, "database": "analytics"}` after every change this session. The
+two "discover it yourself" tasks — the only ones testing the mission's central claim — remain exact.

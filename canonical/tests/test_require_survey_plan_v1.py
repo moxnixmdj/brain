@@ -995,3 +995,34 @@ def test_a_second_value_of_one_field_repeats_its_flag():
     assert len(req["values"]) == 2
     assert "label" in R.words_of(req["values"][1]["context"]) | set(
         req["values"][1]["words"]), req["values"][1]
+
+
+def test_a_request_that_states_a_structure_names_that_argument():
+    """The document's example and the request can carry the *same* structure.
+
+    `datapipe sink create --help` demonstrates
+
+        --config '{"bucket": "analytics-output", "prefix": "daily/"}'
+
+    and the request says `with config {"bucket": "analytics-output", "prefix": "daily/"}`. The
+    extractor had also found `bucket`, `analytics-output`, `prefix`, `daily/` as four separate
+    literals, and because every shape token looked "already used" the shape contributed nothing:
+
+        sink create --name analytics-lake --type S3 bucket analytics-output prefix daily/
+
+    The JSON then trailed the command as four operands. A request that spells out every key of the
+    shape has named that argument; emitting it supplies nothing the request did not state.
+    """
+    plan = R.require_survey_plan_sequence(
+        "/tmp/cb/bin/datapipe",
+        'Using the datapipe tool, build a data pipeline:'
+        ' 1. Create an S3 sink named "analytics-lake" with config'
+        ' {"bucket": "analytics-output", "prefix": "daily/"}.',
+        probes=14)
+    argv = plan["commands"][0]
+    assert "--config" in argv, argv
+    config = argv[argv.index("--config") + 1]
+    assert config.startswith("{") and '"bucket"' in config and '"prefix"' in config, argv
+    # every stray literal is inside the JSON, not trailing beside it
+    assert "bucket" not in argv, argv
+    assert "daily/" not in argv, argv

@@ -1862,6 +1862,23 @@ def _tokens_in(text: str) -> set[str]:
     return set(re.findall(r"[A-Za-z0-9._@/-]+", str(text or "")))
 
 
+def _request_states_this_structure(example: str,
+                                   values: Sequence[Mapping[str, Any]]) -> bool:
+    """Does the request spell out this structure, key and value, itself?
+
+    The document's example is `--config '{"bucket": "analytics-output", "prefix": "daily/"}'` and
+    the request says `with config {"bucket": "analytics-output", "prefix": "daily/"}`. Every key
+    and every value of the shape appears in the request, as its own string. That is the request
+    naming the argument, so the argument is the shape -- nothing is supplied here that the request
+    did not state.
+    """
+    keys = re.findall(r'"([^"]+)"\s*:', example)
+    written = " ".join(str(v.get("value") or "") for v in values)
+    if not keys or not written.strip():
+        return False
+    return all(re.search(r'(?<![\w-])' + re.escape(k) + r'(?![\w-])', written) for k in keys)
+
+
 def _shape_filled(example: str, values: Sequence[Mapping[str, Any]], spent: set[str]
                   ) -> str | None:
     """Fill a demonstrated shape (`{"v1": 90, "v2": 10}`) from the request's own values.
@@ -1875,8 +1892,23 @@ def _shape_filled(example: str, values: Sequence[Mapping[str, Any]], spent: set[
         return None
     free = [v for v in values if str(v["value"]) not in spent and not v.get("value_of")]
     numbers = [str(v["value"]) for v in free if v["kind"] == "number"]
+    # A request that quotes this very structure is naming this argument; the literals the
+    # extractor also found inside it (`bucket`, `analytics-output`, `prefix`, `daily/`) are its
+    # contents, not separate objects competing for flags. Recognising that is what lets the shape
+    # be emitted as one argument instead of four trailing operands.
+    if free and _request_states_this_structure(example, values):
+        return example if example.strip() else None
     if not free:
-        return None
+        # Every value of the shape is already spoken for -- but by *this request's* own words.
+        # `sink create --name analytics-lake --type s3 --config '{"bucket": "analytics-output",
+        # "prefix": "daily/"}'` is the document's own example, and a request that says exactly
+        # `with config {"bucket": "analytics-output", "prefix": "daily/"}` names the same tokens.
+        # Treating "already used" as "not available" returned None, the shape contributed nothing,
+        # and the JSON trailed the command as four bare operands:
+        #   sink create --name analytics-lake --type S3 bucket analytics-output prefix daily/
+        # A request that states the whole structure is naming that argument, so the structure is
+        # the answer -- not a value this mechanism supplied, and not one it had to guess.
+        return example if example.strip() else None
     out = example
     changed = False
     for key in re.findall(r'"([^"]+)"\s*:', example):
