@@ -1598,3 +1598,31 @@ everything the document and the request state is not sufficient to be right abou
 missing third statement is about the world after the command runs — did the state the task cares
 about actually change — and no reward-free way to make it has been found yet. That is the next
 bottleneck, and it is now named precisely rather than as "the verifier".
+
+### A39 — the flag list is the document's published order
+
+While reading `diff` in the bench to see how `command_history` is matched — regex over the recorded
+command line — the bug was not in the matcher but in what was being matched.
+
+`_demo_plan` fills a demonstration's flags in **three passes**: enumerated choices first, then
+structures, then the demonstration's own walk. The appended order is therefore the **pass order**,
+not the page's order. `gh issue list` demonstrates
+
+    gh issue list --repo owner/repo --state open --label bug
+
+with `pairs` correctly in that order. The enum pass claimed `--state open` before the walk reached
+`--repo`, and the emitted line came out `--state open --repo acme-corp/web-platform` — the page's
+own published order reversed, for no reason.
+
+A flag list is not a set. The order a document prints is the order it publishes, and a reader who
+reorders it has invented a different calling convention. The fix re-sorts the filled pairs by the
+position each flag occupies **in the demonstration**, leaving any flag the demonstration never
+showed where it fell.
+
+Measured: **0.4655 -> 0.4696** (+0.0041), one task moved (cb-054 +0.250), none regressed, three
+seeds identical, 47 tests green. The corrected cb-054 line is
+
+    datapipe source connect --name analytics-db --type postgres --config {"host": ...}
+
+against a pattern of `datapipe source connect.*--name analytics-db.*--type postgres` — previously
+`--type` and `--config` came first and the regex failed on order alone, with every value correct.

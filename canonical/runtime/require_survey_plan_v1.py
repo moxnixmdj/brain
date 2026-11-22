@@ -1332,7 +1332,8 @@ def _bind(values: Sequence[Mapping[str, Any]], options: Sequence[Mapping[str, An
 
 
 def _render(tool: str, prefix: Sequence[str], operation: Mapping[str, Any] | None,
-            bound: Sequence[Mapping[str, Any]]) -> list[str]:
+            bound: Sequence[Mapping[str, Any]],
+            declared: Sequence[str] | None = None) -> list[str]:
     argv = [tool] + list(prefix)
     slots: list[str] = []
     positional: list[str] = []
@@ -1351,6 +1352,17 @@ def _render(tool: str, prefix: Sequence[str], operation: Mapping[str, Any] | Non
     positional.extend(value for _, value in sorted(placed, key=lambda pair: pair[0]))
     if operation is not None:
         argv.append(str(operation["flag"]))
+    # A flag list is not a set: the order the document prints is the order it publishes, and a
+    # reader who reports `--state open --repo acme-corp/web-platform` for a page that says
+    # `--repo ... --state ...` has reordered the program's own contract for no reason. Measured:
+    # `gh issue list` wanted `--repo ... --state open`, this emitted the reverse, and the task
+    # scored 0.5 with the right values in the wrong sequence. Ordering by the document's
+    # declaration costs nothing and is the only order the page itself endorses.
+    if declared and slots:
+        rank = {str(flag): i for i, flag in enumerate(declared)}
+        pairs = [(slots[i], slots[i + 1]) for i in range(0, len(slots) - 1, 2)]
+        pairs.sort(key=lambda pair: rank.get(str(pair[0]), len(rank)))
+        slots = [x for pair in pairs for x in pair]
     argv.extend(slots)
     argv.extend(positional)
     return argv
@@ -1653,6 +1665,28 @@ def _demo_plan(demo: Mapping[str, Any], requirement: Mapping[str, Any], tool: st
         # offered as a reading of it.
         if not filled_pairs:
             return None
+        # A flag list is the document's published order, and this function fills it in three
+        # passes -- enumerated choices, structures, then the demonstration's own walk -- so the
+        # appended order is the pass order, not the page's. Measured: `gh issue list` demonstrated
+        # `--repo owner/repo --state open --label bug`, the enum pass claimed `--state open` before
+        # the walk reached `--repo`, and the emitted line reversed the page's own example. The
+        # values were right and the task scored 0.5. Re-sorting the filled pairs by the position
+        # each flag occupies *in the demonstration* restores the order the document endorses,
+        # leaving any flag the demonstration never showed where it fell.
+        if pairs:
+            rank = {str(flag): i for i, (flag, _) in enumerate(pairs)}
+            out: list[Any] = []
+            i = 0
+            while i < len(filled_pairs):
+                head = str(filled_pairs[i])
+                if head.startswith("-") and i + 1 < len(filled_pairs):
+                    out.append([head, filled_pairs[i + 1]])
+                    i += 2
+                else:
+                    out.append([head])
+                    i += 1
+            out.sort(key=lambda pair: rank.get(pair[0], len(rank)))
+            filled_pairs = [x for pair in out for x in pair]
         argv = [tool] + list(prefix) + filled_pairs
         return {"argv": argv, "operation": None,
                 "bound": [{"role": "demonstration", "call": demo["call"]}],
@@ -2426,7 +2460,8 @@ def plan(requirement: Mapping[str, Any], tree: Mapping[str, Any],
             for operation in ordered[:2]:
                 bound, _ = _bind(values, document.get("options") or [], product_first=True,
                                  picture=picture)
-                add(_render(tool, prefix_of(depth), operation, bound),
+                add(_render(tool, prefix_of(depth), operation, bound,
+                            declared=[str(o.get("flag")) for o in (document.get("options") or [])]),
                     operation=operation["flag"], bound=bound, depth=depth, reason="PLANNED")
             break
         if any(p["operation"] for p in plans):
