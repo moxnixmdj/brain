@@ -1,0 +1,540 @@
+{
+ "acquisition": {
+  "digest_attempted": 22,
+  "digest_verified": 22,
+  "install_used": false,
+  "pip_used": false
+ },
+ "amnesiac_control": {
+  "executed_choice": "SortedSet.add",
+  "note": "surface narrows, execution decides",
+  "present_in_plan": true,
+  "surface_candidates": 10
+ },
+ "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+ "coverage": {
+  "correct_refusals": 9,
+  "packages_tried": 11,
+  "reached_effect_test": 4,
+  "unique_records": 2
+ },
+ "date": "2026-11-21",
+ "goal_inversion": {
+  "sortedcontainers": {
+   "sorted_unique": {
+    "contrast": "SortedList.add NO_EFFECT (keeps duplicate)",
+    "record": {
+     "class": "SortedSet",
+     "method": "add",
+     "module": "sortedcontainers.sortedset"
+    }
+   },
+   "sorted_unique_with_duplicates": {
+    "contrast": "SortedSet.add NO_EFFECT (drops duplicate)",
+    "record": {
+     "class": "SortedKeyList",
+     "method": "add",
+     "module": "sortedcontainers.sortedlist"
+    }
+   }
+  }
+ },
+ "instrument": "canonical/tools/effect_predicate_binder_v1.py",
+ "model_calls": 0,
+ "precision": [
+  {
+   "artifact": "pyrsistent",
+   "class": "PSet",
+   "counter_evidence": [
+    "[3,1,2]+[2] -> [1,2,3]",
+    "[8,3,100]+[7] -> [8,3,100,7]",
+    "['b','a','c']+['b'] -> ['b','c','a']"
+   ],
+   "verdict": "NO_EFFECT"
+  },
+  {
+   "artifact": "pyrsistent",
+   "class": "PBag",
+   "counter_evidence": [
+    "keeps duplicates on all four members"
+   ],
+   "verdict": "NO_EFFECT"
+  },
+  {
+   "artifact": "boltons",
+   "class": "IndexedSet",
+   "counter_evidence": [
+    "insertion-ordered"
+   ],
+   "verdict": "NO_EFFECT"
+  },
+  {
+   "artifact": "sortedcollections",
+   "class": "OrderedSet",
+   "counter_evidence": [
+    "killed by battery"
+   ],
+   "verdict": "NO_EFFECT"
+  },
+  {
+   "artifact": "sortedcollections",
+   "class": "SortedSet",
+   "counter_evidence": [],
+   "verdict": "BOUND"
+  }
+ ],
+ "replay": {
+  "remove_readd_ok": true,
+  "stored_record_ok": true,
+  "tampered_record_ok": false
+ },
+ "runs": [
+  {
+   "bound": 2,
+   "candidates": 10,
+   "closure": [],
+   "digest_verified": true,
+   "distinct_effects": 1,
+   "doctest_census": {
+    "docstrings": 128,
+    "with_examples": 65
+   },
+   "goal": "sorted_unique",
+   "package": "sortedcontainers",
+   "reachable": 6,
+   "record": {
+    "class": "SortedSet",
+    "method": "add",
+    "module": "sortedcontainers.sortedset"
+   },
+   "reuse_key": "effect:2d0dd3d3112e0f85",
+   "seconds": 1.951,
+   "version": "2.4.0"
+  },
+  {
+   "bound": 4,
+   "candidates": 10,
+   "closure": [],
+   "digest_verified": true,
+   "distinct_effects": 1,
+   "doctest_census": {
+    "docstrings": 128,
+    "with_examples": 65
+   },
+   "goal": "sorted_unique_with_duplicates",
+   "package": "sortedcontainers",
+   "reachable": 6,
+   "record": {
+    "class": "SortedKeyList",
+    "method": "add",
+    "module": "sortedcontainers.sortedlist"
+   },
+   "reuse_key": "effect:941b0d35992fcbd0",
+   "seconds": 2.192,
+   "version": "2.4.0"
+  },
+  {
+   "bound": 2,
+   "candidates": 14,
+   "closure": [
+    {
+     "name": "sortedcontainers",
+     "status": "OK"
+    }
+   ],
+   "digest_verified": true,
+   "distinct_effects": 1,
+   "doctest_census": {
+    "docstrings": 183,
+    "with_examples": 72
+   },
+   "goal": "sorted_unique",
+   "package": "sortedcollections",
+   "reachable": 9,
+   "record": {
+    "class": "SortedSet",
+    "method": "add",
+    "module": "sortedcontainers.sortedset"
+   },
+   "reuse_key": "effect:f96b250653479c2b",
+   "seconds": 3.361,
+   "version": "2.1.0"
+  },
+  {
+   "bound": 4,
+   "candidates": 14,
+   "closure": [
+    {
+     "name": "sortedcontainers",
+     "status": "OK"
+    }
+   ],
+   "digest_verified": true,
+   "distinct_effects": 1,
+   "doctest_census": {
+    "docstrings": 183,
+    "with_examples": 72
+   },
+   "goal": "sorted_unique_with_duplicates",
+   "package": "sortedcollections",
+   "reachable": 9,
+   "record": {
+    "class": "SortedKeyList",
+    "method": "add",
+    "module": "sortedcontainers.sortedlist"
+   },
+   "reuse_key": "effect:b1b28685c3b3a7e5",
+   "seconds": 2.86,
+   "version": "2.1.0"
+  },
+  {
+   "bound": 0,
+   "candidates": 13,
+   "closure": [],
+   "digest_verified": true,
+   "distinct_effects": 0,
+   "doctest_census": {
+    "docstrings": 129,
+    "with_examples": 80
+   },
+   "goal": "sorted_unique",
+   "package": "pyrsistent",
+   "reachable": 10,
+   "record": null,
+   "reuse_key": null,
+   "seconds": 3.461,
+   "version": "0.20.0"
+  },
+  {
+   "bound": 0,
+   "candidates": 13,
+   "closure": [],
+   "digest_verified": true,
+   "distinct_effects": 0,
+   "doctest_census": {
+    "docstrings": 129,
+    "with_examples": 80
+   },
+   "goal": "sorted_unique_with_duplicates",
+   "package": "pyrsistent",
+   "reachable": 10,
+   "record": null,
+   "reuse_key": null,
+   "seconds": 4.158,
+   "version": "0.20.0"
+  },
+  {
+   "bound": 0,
+   "candidates": 17,
+   "closure": [],
+   "digest_verified": true,
+   "distinct_effects": 0,
+   "doctest_census": {
+    "docstrings": 453,
+    "with_examples": 156
+   },
+   "goal": "sorted_unique",
+   "package": "boltons",
+   "reachable": 7,
+   "record": null,
+   "reuse_key": null,
+   "seconds": 3.979,
+   "version": "26.2.0"
+  },
+  {
+   "bound": 0,
+   "candidates": 17,
+   "closure": [],
+   "digest_verified": true,
+   "distinct_effects": 0,
+   "doctest_census": {
+    "docstrings": 453,
+    "with_examples": 156
+   },
+   "goal": "sorted_unique_with_duplicates",
+   "package": "boltons",
+   "reachable": 7,
+   "record": null,
+   "reuse_key": null,
+   "seconds": 3.635,
+   "version": "26.2.0"
+  },
+  {
+   "bound": 0,
+   "candidates": 0,
+   "closure": [],
+   "digest_verified": true,
+   "distinct_effects": 0,
+   "doctest_census": {
+    "docstrings": 192,
+    "with_examples": 164
+   },
+   "goal": "sorted_unique",
+   "package": "more-itertools",
+   "reachable": 0,
+   "record": null,
+   "reuse_key": null,
+   "seconds": 0.197,
+   "version": "11.2.1"
+  },
+  {
+   "bound": 0,
+   "candidates": 0,
+   "closure": [],
+   "digest_verified": true,
+   "distinct_effects": 0,
+   "doctest_census": {
+    "docstrings": 192,
+    "with_examples": 164
+   },
+   "goal": "sorted_unique_with_duplicates",
+   "package": "more-itertools",
+   "reachable": 0,
+   "record": null,
+   "reuse_key": null,
+   "seconds": 0.24,
+   "version": "11.2.1"
+  },
+  {
+   "bound": 0,
+   "candidates": 1,
+   "closure": [],
+   "digest_verified": true,
+   "distinct_effects": 0,
+   "doctest_census": {
+    "docstrings": 104,
+    "with_examples": 69
+   },
+   "goal": "sorted_unique",
+   "package": "toolz",
+   "reachable": 0,
+   "record": null,
+   "reuse_key": null,
+   "seconds": 0.709,
+   "version": "1.2.0"
+  },
+  {
+   "bound": 0,
+   "candidates": 1,
+   "closure": [],
+   "digest_verified": true,
+   "distinct_effects": 0,
+   "doctest_census": {
+    "docstrings": 104,
+    "with_examples": 69
+   },
+   "goal": "sorted_unique_with_duplicates",
+   "package": "toolz",
+   "reachable": 0,
+   "record": null,
+   "reuse_key": null,
+   "seconds": 0.694,
+   "version": "1.2.0"
+  },
+  {
+   "bound": 0,
+   "candidates": 0,
+   "closure": [],
+   "digest_verified": true,
+   "distinct_effects": 0,
+   "doctest_census": {
+    "docstrings": 167,
+    "with_examples": 0
+   },
+   "goal": "sorted_unique",
+   "package": "funcy",
+   "reachable": 0,
+   "record": null,
+   "reuse_key": null,
+   "seconds": 0.079,
+   "version": "2.1"
+  },
+  {
+   "bound": 0,
+   "candidates": 0,
+   "closure": [],
+   "digest_verified": true,
+   "distinct_effects": 0,
+   "doctest_census": {
+    "docstrings": 167,
+    "with_examples": 0
+   },
+   "goal": "sorted_unique_with_duplicates",
+   "package": "funcy",
+   "reachable": 0,
+   "record": null,
+   "reuse_key": null,
+   "seconds": 0.133,
+   "version": "2.1"
+  },
+  {
+   "bound": 0,
+   "candidates": 2,
+   "closure": [
+    {
+     "name": "typing-extensions",
+     "status": "OK"
+    }
+   ],
+   "digest_verified": true,
+   "distinct_effects": 0,
+   "doctest_census": {
+    "docstrings": 160,
+    "with_examples": 3
+   },
+   "goal": "sorted_unique",
+   "package": "bidict",
+   "reachable": 0,
+   "record": null,
+   "reuse_key": null,
+   "seconds": 1.174,
+   "version": "0.24.1"
+  },
+  {
+   "bound": 0,
+   "candidates": 2,
+   "closure": [
+    {
+     "name": "typing-extensions",
+     "status": "OK"
+    }
+   ],
+   "digest_verified": true,
+   "distinct_effects": 0,
+   "doctest_census": {
+    "docstrings": 160,
+    "with_examples": 3
+   },
+   "goal": "sorted_unique_with_duplicates",
+   "package": "bidict",
+   "reachable": 0,
+   "record": null,
+   "reuse_key": null,
+   "seconds": 1.165,
+   "version": "0.24.1"
+  },
+  {
+   "bound": 0,
+   "candidates": 0,
+   "closure": [],
+   "digest_verified": true,
+   "distinct_effects": 0,
+   "doctest_census": {
+    "docstrings": 60,
+    "with_examples": 0
+   },
+   "goal": "sorted_unique",
+   "package": "textdistance",
+   "reachable": 0,
+   "record": null,
+   "reuse_key": null,
+   "seconds": 0.129,
+   "version": "4.6.3"
+  },
+  {
+   "bound": 0,
+   "candidates": 0,
+   "closure": [],
+   "digest_verified": true,
+   "distinct_effects": 0,
+   "doctest_census": {
+    "docstrings": 60,
+    "with_examples": 0
+   },
+   "goal": "sorted_unique_with_duplicates",
+   "package": "textdistance",
+   "reachable": 0,
+   "record": null,
+   "reuse_key": null,
+   "seconds": 0.122,
+   "version": "4.6.3"
+  },
+  {
+   "bound": 0,
+   "candidates": 0,
+   "closure": [],
+   "digest_verified": true,
+   "distinct_effects": 0,
+   "doctest_census": {
+    "docstrings": 153,
+    "with_examples": 1
+   },
+   "goal": "sorted_unique",
+   "package": "attrs",
+   "reachable": 0,
+   "record": null,
+   "reuse_key": null,
+   "seconds": 0.129,
+   "version": "26.1.0"
+  },
+  {
+   "bound": 0,
+   "candidates": 0,
+   "closure": [],
+   "digest_verified": true,
+   "distinct_effects": 0,
+   "doctest_census": {
+    "docstrings": 153,
+    "with_examples": 1
+   },
+   "goal": "sorted_unique_with_duplicates",
+   "package": "attrs",
+   "reachable": 0,
+   "record": null,
+   "reuse_key": null,
+   "seconds": 0.21,
+   "version": "26.1.0"
+  },
+  {
+   "bound": 0,
+   "candidates": 0,
+   "closure": [],
+   "digest_verified": true,
+   "distinct_effects": 0,
+   "doctest_census": {
+    "docstrings": 22,
+    "with_examples": 0
+   },
+   "goal": "sorted_unique",
+   "package": "six",
+   "reachable": 0,
+   "record": null,
+   "reuse_key": null,
+   "seconds": 0.058,
+   "version": "1.17.0"
+  },
+  {
+   "bound": 0,
+   "candidates": 0,
+   "closure": [],
+   "digest_verified": true,
+   "distinct_effects": 0,
+   "doctest_census": {
+    "docstrings": 22,
+    "with_examples": 0
+   },
+   "goal": "sorted_unique_with_duplicates",
+   "package": "six",
+   "reachable": 0,
+   "record": null,
+   "reuse_key": null,
+   "seconds": 0.089,
+   "version": "1.17.0"
+  }
+ ],
+ "schema": "BRAIN_RECEIPT_EFFECT_PREDICATE_BINDER_20261121_V1",
+ "speed": {
+  "includes_network_fetch": true,
+  "max_seconds": 4.158,
+  "median_seconds": 0.709
+ },
+ "stored_parameters": 0,
+ "tests": {
+  "failed": 0,
+  "passed": 13,
+  "path": "canonical/tests/test_effect_predicate_binder_v1.py"
+ },
+ "truth": {
+  "achieved": false
+ }
+}
