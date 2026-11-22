@@ -1,0 +1,89 @@
+{
+ "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+ "consequence_for_plan": "the closing mechanism is not a better search over a bigger space. Three attempts bound what search can buy: 3/40 -> 7/32 -> 8/32 at increasing cost, frontier 51-59%. The live question is 'what carries the convention?'. Run-time derivation is now measured to its limit; the external store is the option the instant-knowledge claim actually describes and has not been built.",
+ "date": "2026-11-21",
+ "instruments": [
+  "canonical/tools/structured_surface_space_v1.py",
+  "canonical/tools/batched_oracle_v1.py"
+ ],
+ "model_calls": 0,
+ "result_1_oracle_cost": {
+  "after_ms_per_candidate": "19-110",
+  "agreement_mixed_cases": "7/7",
+  "agreement_reference_solutions": "20/20 across 20 independent items",
+  "before_ms_per_candidate": 950,
+  "bugs_that_produced_silent_wrong_answers": [
+   "test does `from sample_N import f`: module object must exist before the test compiles",
+   "exec'd test source needs __file__ (it computes os.path.dirname(os.path.abspath(__file__)))",
+   "the function must be rebound in the test namespace per candidate"
+  ],
+  "speedup": "9-50x",
+  "why": "0.59s of the 0.95s was `import sympy`, paid again per candidate; the worker imports once and swaps the function per trial"
+ },
+ "result_2_structure_did_not_pay": {
+  "bugs_fixed_with_no_effect_on_total": [
+   "MODULE/SUBMODULE concatenated: submodules began at position 930 of 14629, never reached by a limit of 300",
+   "rank lookup matched bare name against dotted corpus -> every candidate tied -> alphabetical order",
+   "MODULE bodies emitted without the namespace prefix"
+  ],
+  "flat_purpose_ranked": "7/32",
+  "space_size": {
+   "dotted": 14625,
+   "top_level": 928
+  },
+  "structured_budget_2500": "8/32",
+  "structured_budget_300": "6/32",
+  "wins_that_appeared": "sympy.external.gmpy.jacobi / .legendre -- the same functions under a second name, arguably less meaning-bearing"
+ },
+ "result_3_the_precise_failure_mode": {
+  "cause": "purpose ranking scores NAMES against DOCSTRINGS. lhs, rhs, flat, free_symbols appear in no docstring, so every attribute candidate scores 0 and is ordered behind all 14,625 documented names. Purpose lives in prose about functions; attributes are named by convention, not described by prose.",
+  "claim": "every remaining failure is a PLACEMENT failure, not a generation failure",
+  "evidence": [
+   {
+    "id": "187",
+    "in_space": false,
+    "oracle_passes": true,
+    "required": "eq.lhs - eq.rhs"
+   },
+   {
+    "id": "193",
+    "in_space": false,
+    "oracle_passes": true,
+    "required": "matrix.flat()"
+   },
+   {
+    "id": "199",
+    "in_space": false,
+    "oracle_passes": true,
+    "required": "n % p == 0"
+   },
+   {
+    "id": "191",
+    "in_space": true,
+    "oracle_passes": true,
+    "position": 14855,
+    "required": "index.free_symbols"
+   }
+  ]
+ },
+ "schema": "BRAIN_RECEIPT_STRUCTURE_WITHOUT_PURPOSE_20261121_V1",
+ "truth": {
+  "achieved": false
+ },
+ "verdict": {
+  "bottleneck": "every mechanism can generate or reach the required body and cannot RANK it. The missing signal is the meaning->name convention; it is not in the artifact's prose for attributes, not in its surface for submodule members, and not in the problem text for either. Ranking is the whole problem; generation is nearly free.",
+  "false": [
+   "rank-by-purpose + explore-by-structure is sufficient; structure without purpose is enumeration",
+   "a bigger space is progress: 14625 names bought +0.06 solved",
+   "a budget of 2500 (37% of the space) for 2 items is anything but brute force"
+  ],
+  "true": [
+   "oracle is 9-50x cheaper with verified agreement (20/20 reference, 7/7 mixed)",
+   "structured space enumerates correctly and contains missed symbols at shallow rank (is_square 5, inertia 2)",
+   "remaining failures are placement failures, proven item by item"
+  ],
+  "unproven": [
+   "a purpose signal for ATTRIBUTES: docstrings do not describe them. Remaining candidate sources are the problem text's relational phrases and the hidden test's argument shapes; neither attempted."
+  ]
+ }
+}
