@@ -619,3 +619,41 @@ over a value that merely shares the word `incident`. It scored worse, and it bro
 was meant to complement. It is recorded because the pattern is the round's lesson: on this bench the
 plausible general rule and the measured one disagreed, and only the measurement settled it. `cb-037`'s
 `--title`/`--alerts` swap therefore remains an **open defect**, named here rather than hidden.
+
+### A15 — the honest limit of "everything is already on the web"
+
+The owner's premise is that anything on a computer already has a guide. A12/A13 made the web channel honest by
+refusing irrelevant answers; A15 measures what it can therefore actually answer, and the answer is narrower
+than the premise.
+
+**A program's name resolves.** `gzip`, `tar`, `sed`, `gzip compress file` — all PASS with 3–6 on-topic documents
+from `code_host` and `package_registry` kinds.
+
+**An operational question does not.** Asking the way a person would ask:
+
+| query | status | what the sources actually returned |
+|---|---|---|
+| `how to compress a file with gzip from the command line` | **FAIL — answers are not about the query** | — |
+| `gzip command line usage compress file` | **FAIL — answers are not about the query** | `uglify-js`, `terser`, `Command 0.1.0`, `line 0.8.2` |
+| `gzip -c stdin stdout redirect` | OPEN (incomplete) | — |
+
+The reason is structural, not a tuning failure. The reachable sources are a **code host** and **package
+registries**. A registry answers *"is there a library that does X"*; it does not answer *"how do I do X with
+the program already installed here"*. No amount of independence or relevance checking turns a package index
+into a manual. Before A12 this channel answered those questions confidently and wrongly; now it says it does
+not know, which is the only honest option available to it.
+
+**What this means for the mechanism, stated plainly.** The three channels are not interchangeable, and their
+epistemic weight differs by orders of magnitude:
+
+| source | what it answers | cost | relied on |
+|---|---|---|---|
+| the program's own pages (`--help`) | what the program does and what its argument picture is | 1 process | **primary** |
+| the program's own rejection (A11) | which values its options accept | 1 process per option | **primary** |
+| the web (`jit_knowledge_v1`) | whether a *named* thing exists, and what it is for | network, seconds | **fallback only** |
+
+The planner already behaves this way, and that ordering is what produced the results in A8–A11 — including
+the never-seen programs, where the web was never consulted at all. The premise "everything is on the web" is
+true of the *world* and false of *these sources*: a real manual is on the web, and `github.com` search is not
+a way to read it. Closing that gap means a documentation reader (a real manual fetch + parse), which is a
+separate component, not a better word filter. It is named here as the next bottleneck rather than claimed.
