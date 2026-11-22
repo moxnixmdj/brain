@@ -134,3 +134,27 @@ def test_composition_is_at_least_two_stages_away_from_the_source() -> None:
     }
     found = unseen.algebra.find_path(rows, "TEXT", "B[A[TEXT]]")
     assert found["found"] and len(found["chain"]) == 2, found
+
+
+def test_a_chain_writes_nothing_into_the_callers_tree(tmp_path: pathlib.Path) -> None:
+    """17 stray `gz*` files were committed because a chain ran in the repository root.
+
+    A compressor with no output redirection writes a file beside itself. Every stage now
+    runs in a directory the caller owns, so the learner cannot dirty the tree it learns in.
+    """
+    import os
+    fake = tmp_path / "fake" / "compressor"
+    fake.parent.mkdir()
+    fake.write_text("#!/bin/sh\ncat > junk-artifact\necho compressed\n")
+    fake.chmod(0o755)
+    rows = {"compressor": {"program": "compressor", "path": str(fake), "roles": {},
+                           "schemes": [{"from": "ANY", "to": "C[_]", "polymorphic": True}]}}
+    caller = tmp_path / "caller"
+    caller.mkdir()
+    before = set(os.listdir(caller))
+    workdir = tmp_path / "workdir"
+    workdir.mkdir()
+    result = unseen.run_chain(rows, ["compressor"], "forward", b"payload", workdir)
+    assert result["status"] == "OK", result
+    assert set(os.listdir(caller)) == before, "the chain wrote into the caller's tree"
+    assert (workdir / "junk-artifact").exists(), "the junk should land in the workdir"

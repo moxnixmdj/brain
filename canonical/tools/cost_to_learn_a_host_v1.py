@@ -41,17 +41,24 @@ DEFAULT_DEADLINE = 2.0         # seconds before a program is assumed unusable
 
 
 def probe(program: pathlib.Path, budget: int = DEFAULT_BUDGET,
-          deadline: float = DEFAULT_DEADLINE) -> dict[str, Any]:
+          deadline: float = DEFAULT_DEADLINE,
+          cwd: str | None = None) -> dict[str, Any]:
     """One bounded conversation with an executable. Never unbounded, never patient.
 
     Returns what happened, not just the text: a learner that cannot say *why* it failed
     cannot tell a missing program from a hostile one.
+
+    `cwd` exists because probing is not read-only. `gzip --help` on this host writes a
+    zero-byte `gz<pid>` into the CURRENT DIRECTORY, and the first version of this
+    instrument therefore littered the repository root with 17 such files, which were then
+    committed. A learner may not dirty the tree it is learning from.
     """
     started = time.perf_counter()
     try:
         proc = subprocess.Popen([str(program), "--help"],
                                 stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
-                                stdin=subprocess.DEVNULL, start_new_session=True)
+                                stdin=subprocess.DEVNULL, start_new_session=True,
+                                cwd=cwd)
     except (OSError, subprocess.SubprocessError) as exc:
         return {"ok": False, "reason": type(exc).__name__, "text": "",
                 "bytes": 0, "seconds": round(time.perf_counter() - started, 4)}

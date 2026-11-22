@@ -130,9 +130,15 @@ def type_the_host(host: pathlib.Path) -> dict[str, Any]:
     programs = cost.executables(host)
     names = {p.name for p in programs}
 
+    # Probing is not read-only either: `gzip --help` writes `gz<n>` beside itself when the
+    # help path does not short-circuit. The repo root collected 17 of them before this.
+    probe_dir = tempfile.mkdtemp(prefix="probe-host-")
     probes: dict[str, dict[str, Any]] = {}
-    for program in programs:
-        probes[program.name] = cost.probe(program)
+    try:
+        for program in programs:
+            probes[program.name] = cost.probe(program, cwd=probe_dir)
+    finally:
+        shutil.rmtree(probe_dir, ignore_errors=True)
 
     descriptions: dict[str, str] = {}
     transforms: dict[str, str | None] = {}
@@ -210,14 +216,22 @@ def argv_for(name: str, rows: dict[str, Any], direction: str) -> list[str]:
 
 
 def run_chain(rows: dict[str, Any], chain: list[str], direction: str,
-              data: bytes) -> dict[str, Any]:
-    """Run a chain of programs, feeding each stage the previous stage's bytes."""
+              data: bytes, workdir: pathlib.Path | None = None) -> dict[str, Any]:
+    """Run a chain of programs, feeding each stage the previous stage's bytes.
+
+    `workdir` is not optional in spirit. A compressor told to compress with no output
+    redirection writes a FILE beside itself, named after its own temp naming scheme, and
+    the first version of this instrument ran the chain in the repository root. 17 `gz*`
+    artifacts landed in the tree and were committed. Every subprocess now runs in a
+    throwaway directory that the caller owns, and the caller deletes it.
+    """
     stages: list[dict[str, Any]] = []
     current = data
     for name in chain:
         argv = [rows[name]["path"]] + argv_for(name, rows, direction)
         try:
-            run = subprocess.run(argv, input=current, capture_output=True, timeout=30)
+            run = subprocess.run(argv, input=current, capture_output=True, timeout=30,
+                                 cwd=str(workdir) if workdir else tempfile.mkdtemp())
         except subprocess.SubprocessError as exc:
             return {"status": "HARNESS_ERROR", "reason": type(exc).__name__,
                     "stages": stages, "argv": argv}
@@ -234,6 +248,8 @@ def run_chain(rows: dict[str, Any], chain: list[str], direction: str,
 def compose_and_verify(host: pathlib.Path, receipt: pathlib.Path | None = None
                        ) -> dict[str, Any]:
     started = time.perf_counter()
+    # a throwaway directory: nothing this instrument runs may write into the caller's tree
+    workdir = pathlib.Path(tempfile.mkdtemp(prefix="compose-never-seen-"))
     typed = type_the_host(host)
     rows = typed["rows"]
     # A one-stage chain proves almost nothing: it is the program's own help, executed.
@@ -263,12 +279,13 @@ def compose_and_verify(host: pathlib.Path, receipt: pathlib.Path | None = None
             back = algebra.invert(path["chain"], rows, sink, SOURCE_TYPE)
             attempt["inverse_chain"] = back["chain"]
             attempt["inverse_found"] = back["found"]
-            forward = run_chain(rows, path["chain"], "forward", PAYLOAD)
+            forward = run_chain(rows, path["chain"], "forward", PAYLOAD, workdir)
             attempt["forward_status"] = forward["status"]
             attempt["forward_argv"] = [s["argv"][1:] for s in forward["stages"]]
             attempt["sizes"] = [s["bytes_out"] for s in forward["stages"]]
             if forward["status"] == "OK" and back["found"]:
-                backward = run_chain(rows, back["chain"], "back", forward["data"])
+                backward = run_chain(rows, back["chain"], "back", forward["data"],
+                                     workdir)
                 attempt["back_status"] = backward["status"]
                 attempt["back_argv"] = [s["argv"][1:] for s in backward["stages"]]
                 attempt["round_trip_exact"] = (backward["status"] == "OK"
@@ -281,6 +298,8 @@ def compose_and_verify(host: pathlib.Path, receipt: pathlib.Path | None = None
     report["round_trips_verified"] = len(verified)
     report["first_verified"] = verified[0] if verified else None
     report["seconds"] = round(time.perf_counter() - started, 3)
+    report["workdir_was_isolated"] = True
+    shutil.rmtree(workdir, ignore_errors=True)
     report["cost_zeros"] = {
         "model_calls": 0, "parameters_stored": 0, "network_calls": 0,
         "per_host_branches": len(re.findall(

@@ -4,7 +4,7 @@
  "host": "/usr/bin",
  "programs_on_host": 635,
  "programs_typed": 225,
- "seconds_to_type_the_host": 7.509,
+ "seconds_to_type_the_host": 7.357,
  "reachable_sinks": 11,
  "attempts": [
   {
@@ -375,7 +375,8 @@
   "final_bytes": 132,
   "source_bytes": 132
  },
- "seconds": 7.861,
+ "seconds": 7.749,
+ "workdir_was_isolated": true,
  "cost_zeros": {
   "model_calls": 0,
   "parameters_stored": 0,
