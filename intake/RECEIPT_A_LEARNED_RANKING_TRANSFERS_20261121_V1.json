@@ -16,6 +16,23 @@
   "stub_hit: does the name share a word with the stub's own name",
   "depth: small penalty for dotted depth"
  ],
+ "followup_one_feature_test": {
+  "consequence": "feature DISCOVERY is not the win. Training-only forward selection scored by rank reduced eight features to one and lost two items. A discovery loop must be scored by EXECUTED SOLVES on the training half, which is more expensive and has not been done.",
+  "lessons": [
+   "the top-10 metric is NOT the outcome: one feature matched on rank and lost two items on execution (shallow wrong names beat ntheory.primetest.is_square and functions.primepi)",
+   "the extra features are load-bearing but weak: depth and docstring overlap bought is_square and primepi",
+   "defensible claim is 7/13 with the fitted four-feature ranking; one-feature gets 5/13; both held-out, neither a benchmark score"
+  ],
+  "method": "forward selection using ONLY the training half; the test half was never inspected during selection",
+  "question": "can the four-feature combination be reduced (Elon's law: remove before adding)?",
+  "result": {
+   "four_feature_held_out_solved": "7/13",
+   "four_feature_held_out_top10": "7/13",
+   "one_feature_held_out_solved": "5/13",
+   "one_feature_held_out_top10": "7/13"
+  },
+  "selected": "one feature: cov_exact"
+ },
  "held_out_experiment": {
   "solved_held_out": [
    [

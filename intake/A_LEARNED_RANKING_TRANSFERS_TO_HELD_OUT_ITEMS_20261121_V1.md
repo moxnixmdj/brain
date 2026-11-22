@@ -121,6 +121,30 @@ description rather than approximating it.
 - Whether the four features are *the right four*. They were chosen by hand and only their
   weights were learned.
 
+## 5b. Follow-up: is one feature enough? No — and the honest number is 5/13, not 7/13
+
+Elon's law says remove before adding, so the obvious test was whether the four-feature
+combination can be reduced. Feature selection done **purely on the training half** (the test
+half never inspected during selection) selected exactly one feature, `cov_exact`.
+
+| ranking | held-out top-10 | held-out solved |
+|---|---|---|
+| four features, weights fitted | 7/13 | **7/13** |
+| **one feature, `cov_exact`** | 7/13 | **5/13** |
+
+Two lessons, both recorded because the second is uncomfortable:
+
+1. **The top-10 metric is not the outcome.** One feature matched the four-feature score on
+   *rank* and lost two items on *execution* — it put a shallow, wrong name ahead of
+   `ntheory.primetest.is_square` and `functions.primepi`, both of which the depth/overlap
+   terms had ranked higher. Rank-in-top-10 overstates; only the oracle's verdict counts.
+2. **The extra features are load-bearing but weak.** Ties broken by depth and docstring
+   overlap bought `is_square` and `primepi`; they are not noise, but they are not the
+   mechanism either.
+
+So the defensible claim is **7/13 with the fitted four-feature ranking**, and a one-feature
+ranking gets 5/13. Both are held-out. Neither is a benchmark score.
+
 ## 6. What this changes about the plan
 
 The plan's next unit is no longer "search a bigger space". It is:
@@ -128,10 +152,15 @@ The plan's next unit is no longer "search a bigger space". It is:
 > **Make the feature set the thing that is discovered, not chosen, and make the weights
 > persistent in the external store so they survive across sessions and environments.**
 
-Four hand-chosen features with learned weights transferred. The obvious next move is to let
-the mechanism *propose and test its own features* against the oracle — which is a learning
-loop, not a search, and it is the first time in this chain that the loop has a signal strong
-enough to learn from.
+The discovery half has now been tried and it is not the win: training-only forward selection
+reduced eight proposed features to one and *lost* two items, because the selection metric
+(rank in top 10) is not the outcome (the oracle's verdict). The discovery loop must therefore
+be scored by **executed solves on the training half**, not by rank — which is more expensive
+and has not been done.
+
+What has been established is narrower and still useful: **four computed features with fitted
+weights transfer to held-out items at 7/13.** That object — four floats — is what belongs in
+the store.
 
 `truth.achieved` remains `false`. The benchmark frontier is 51–59%; 7/13 held-out is 53.8% on
 this sub-cohort, which is a like-for-like comparison only against that sub-cohort and must not
