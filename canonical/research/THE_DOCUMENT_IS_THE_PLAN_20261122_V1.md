@@ -250,3 +250,34 @@ canary`) whose arguments the request gives in prose rather than as values the do
 The families it does well on are the ones where the request is one act against one document —
 `project_mgmt` 0.495, `info_retrieval` 0.560, `data_ops` 0.675. A5's claim is therefore **measured, not
 vindicated**: the seam works on one-act instructions and is refused, correctly, on multi-act ones.
+
+### A4 — prose fidelity against a verifier this round did not write (`/tmp/a4.py`)
+
+The reference had to be the benchmark's own, not one written here. A4 was therefore run on CLI-Bench's
+published tasks and its published `Evaluator`, by re-running each accepted plan against the *same* fixture
+with the statement perturbed, and requiring the verifier to reject it.
+
+**The result is a negative on the criterion, and it is a defect in the benchmark's verifier, not in this
+round's planner.** `cli_bench/mock_backends/base.py` skips `output_contains` inside `_deep_diff`, with the
+comment *"skip (evaluated elsewhere by runner)"* — but `cli_bench/harness/runner.py` never evaluates it. So
+for every task whose expected state asserts output, the score depends only on the `command_history` pattern.
+Measured on `cb-019`:
+
+| command | backend stdout | score |
+|---|---|---|
+| `google drive list Engineering/Architecture` (the task's expected pattern) | `[]` — the backend's own folder lookup does not match its own fixture shape | **1.0** |
+| `google drive list NOPE` | `[]` | 0.5 |
+
+The correct command and a completely wrong folder are 0.5 apart, and both are accepted as "the files were
+listed" when neither printed a single file. A verifier that accepts an empty result as exact is not reading
+the artifact, and A4's falsifier — *"any false accept"* — is met. **The claim A4 was meant to license is
+withheld.**
+
+**Why it is not repaired here.** The benchmark is the reference. Patching its evaluator and then citing the
+patched evaluator as the reference is exactly the circularity A4 exists to prevent. The finding is recorded
+and the raw run is at `/tmp/a4_results.json`; the trees's own verifiers (the three arms, the 20-task A7 run)
+are where the round's verifier measurements stand.
+
+**What this does not touch.** The planner's own accepted plans are the same either way: on the three tasks
+where the bench reported an exact outcome the command was right (and on `cb-019` the planner emitted the
+task's own expected command). What A4 says is that *the bench could not have told us if it were wrong*.
