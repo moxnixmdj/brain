@@ -156,6 +156,24 @@ for body in bodies:
 '''
 
 
+def _module_name(tests_src: str) -> str:
+    """The module the hidden test imports, however it imports it.
+
+    Two forms occur in the benchmark and both must be handled:
+        from sample_N import f      (sympy items)
+        import sample_N             (networkx items)
+    Only the first was handled, so every networkx item returned worker_failed: the mock
+    module existed but the test called `sample_N.f(...)`, which the mock never had.
+    """
+    m = re.search(r"^\s*from\s+(sample_\w+)\s+import\s+", tests_src, re.M)
+    if m:
+        return m.group(1)
+    m = re.search(r"^\s*import\s+(sample_\w+)", tests_src, re.M)
+    if m:
+        return m.group(1)
+    return ""
+
+
 def judge_many(python: str, starting_code: str, tests_src: str,
                bodies: Sequence[str], *, timeout: float = 900.0,
                test_path: str | None = None,
@@ -170,10 +188,7 @@ def judge_many(python: str, starting_code: str, tests_src: str,
     if bodies:
         allowance = max(1, int(timeout / max(len(bodies), 1)) - 1)
         per_body_seconds = max(1, min(int(per_body_seconds), allowance))
-    modname = ""
-    m = re.search(r"^\s*from\s+(\w+)\s+import\s+", tests_src, re.M)
-    if m:
-        modname = m.group(1)
+    modname = _module_name(tests_src)
     payload = json.dumps({"starting_code": starting_code, "tests_src": tests_src,
                           "bodies": list(bodies), "modname": modname,
                           "test_path": str(test_path or ""),
@@ -220,10 +235,7 @@ def judge_stream(python: str, starting_code: str, tests_src: str,
 
     Reads the worker's output incrementally. Returns the first passing body, or None.
     """
-    modname = ""
-    m = re.search(r"^\s*from\s+(\w+)\s+import\s+", tests_src, re.M)
-    if m:
-        modname = m.group(1)
+    modname = _module_name(tests_src)
     payload = json.dumps({"starting_code": starting_code, "tests_src": tests_src,
                           "bodies": list(bodies), "modname": modname,
                           "test_path": str(test_path or ""),
@@ -264,8 +276,16 @@ def judge_stream(python: str, starting_code: str, tests_src: str,
     thread = threading.Thread(target=_reader, daemon=True)
     thread.start()
     try:
-        while time.time() < deadline and thread.is_alive() and not found:
-            thread.join(timeout=0.2)
+        # Wait for `found` OR for the process to actually EXIT, not merely for the reader
+        # thread to stop being alive: the thread can finish a blocking read, and the loop can
+        # observe `is_alive() == False` for the reader, before the last streamed line has been
+        # consumed. That race made judge_stream return None while the worker had printed
+        # `passed: True` -- a false negative on a correct answer.
+        while time.time() < deadline and not found:
+            if proc.poll() is not None:
+                thread.join(timeout=1.0)
+                break
+            thread.join(timeout=0.1)
     finally:
         try:
             proc.kill()

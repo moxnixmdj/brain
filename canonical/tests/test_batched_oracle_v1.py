@@ -96,3 +96,32 @@ def test_judge_many_never_silently_reports_worker_failed_for_a_valid_run():
                             per_body_seconds=3)
     assert verdicts[0]["passed"] is True
     assert verdicts[0]["why"] == "ok"
+
+
+def test_module_name_handles_both_import_forms():
+    """sympy tests use `from sample_N import f`; networkx tests use `import sample_N`.
+    Only the first was handled, so every networkx item returned worker_failed."""
+    assert B._module_name("from sample_33 import get_nodes\n") == "sample_33"
+    assert B._module_name("import sample_33\n") == "sample_33"
+    assert B._module_name("import os\nimport sample_7\n") == "sample_7"
+    assert B._module_name("import os\n") == ""
+
+NETWORKX_STUB = "import networkx as nx\ndef get_nodes(G:nx.Graph) -> list:\n   return "
+NETWORKX_TESTS = """
+import unittest
+import networkx as nx
+import sample_1
+
+class T(unittest.TestCase):
+    def test_nodes(self):
+        G = nx.path_graph(3)
+        self.assertEqual(sorted(sample_1.get_nodes(G)), [0, 1, 2])
+"""
+
+
+def test_module_attribute_import_style_runs():
+    """The mock module must expose the function for `sample_N.f(...)` as well as `f`."""
+    hit = B.judge_stream(sys.executable, NETWORKX_STUB, NETWORKX_TESTS,
+                         ["list(G.nodes)"], timeout=90,
+                         test_path="/tmp/sample_1/hidden.py", per_body_seconds=3)
+    assert hit is not None and hit["passed"] is True

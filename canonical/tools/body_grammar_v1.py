@@ -203,6 +203,14 @@ def compositions(args: Sequence[str], paths: Mapping[str, Sequence[str]],
             leaf = p.split(".")[-1]
             (stated_paths if leaf.lower() in low else other_paths).append(full)
 
+    # 3f. the parameter's own members, read and wrapped. `list(G.nodes)` is the canonical
+    # way to read a container off a graph and the declared type states `nodes`; no symbol
+    # surface can reach it because it is not a module-level name.
+    for a in args:
+        for p in sorted((paths.get(a) or []), key=lambda x: (len(x), x))[:16]:
+            add("WRAP", f"list({a}.{p})")
+            add("WRAP", f"list({a}.{p})[0]")
+
     for a in args:
         add("LEAF", a)
     for p in stated_paths:
