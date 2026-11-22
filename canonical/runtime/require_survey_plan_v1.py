@@ -3211,10 +3211,32 @@ def require_survey_plan_sequence(tool: str, instruction: str, *, read_manual: bo
                         "alternatives": whole["plans"][:8]}
             steps.append(fallback)
             commands = [fallback["argv"]]
+    # The verdict for the plan as a *whole*, which `complete` on one command cannot give. A
+    # request with three steps can have two perfect commands and one that omits a required flag,
+    # and reporting the first command's `complete` certifies the plan. Measured on the sixty:
+    #
+    #     every command satisfies its own page   n=49   mean 0.5096
+    #     some command omits a required flag     n= 9   mean 0.3677
+    #     separation AUC 0.740
+    #
+    # against 0.599 for the single-command `complete`, which is now true for 57 of 60 plans and
+    # therefore says almost nothing. Both are reported; this one is the one worth reading.
+    unsatisfied: list[dict[str, Any]] = []
+    for step in steps:
+        argv = step.get("argv")
+        if not argv:
+            continue
+        alternatives = step.get("alternatives") or [{}]
+        missing = list(alternatives[0].get("missing_required") or [])
+        if missing:
+            unsatisfied.append({"command": " ".join(str(a) for a in argv),
+                                "missing": missing})
     return {"schema": SCHEMA, "tool": tool, "instruction": instruction,
             "sentences": [s[:200] for s in sentences_of(instruction)],
             "steps": steps,
             "commands": commands,
+            "satisfies_every_page": not unsatisfied,
+            "unsatisfied": unsatisfied,
             "used_the_whole_request": bool(fallback),
             "survey": {k: tree[k] for k in ("documents_ok", "document_bytes", "seconds",
                                             "stored_bytes")},

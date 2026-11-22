@@ -1930,3 +1930,30 @@ refused by the world.
 
 Recorded so this is not chased as a code defect: the mechanism is unchanged, the instrument is.
 Verified third-party evidence now rests on tar (real, executed) and on the six never-seen programs.
+
+### A49 — the verdict belongs to the plan, not to its first command
+
+`complete` has become nearly vacuous. It is true for **57 of 60** plans, so it separates good plans
+from bad ones at AUC 0.599 -- barely above a coin. The reason is structural: `complete` describes
+*one* command, and the field reports it for the plan. A three-step request with two exact commands
+and one that cannot name its flags is certified.
+
+Judging **every** command against its own page instead:
+
+    every command satisfies its page    n=49   mean 0.5096
+    some command omits a required flag  n= 9   mean 0.3677
+    separation AUC 0.740
+
+Both numbers are now returned. `satisfies_every_page` is the conjunction over the commands, and
+`unsatisfied` names each failing command with the required flags it could not supply:
+
+    transform create ... --source prod-db                                  satisfied
+    sink create --name analytics-lake --type S3 --config {"bucket": ...}   satisfied
+    pipeline create --name daily-etl        missing --source --transforms --sink --schedule
+
+That third line is cb-058's third command, and it is now named as unsatisfied rather than passed
+off under the first line's certificate. The verdict is not a new mechanism -- the per-command
+`missing_required` was already computed and thrown away. The change is to *read* it for the plan.
+
+No plan changed: 0.4713 before and after, identical on seeds 0 and 1. The verdict is a report, and
+reporting honestly costs nothing.

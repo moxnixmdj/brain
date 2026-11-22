@@ -1095,3 +1095,141 @@ def test_a_bare_word_the_example_also_writes_is_that_flags_value():
     assert argv[argv.index("--name") + 1] == "www", argv
     assert "--origin" in argv and argv[argv.index("--origin") + 1] == "example.org", argv
     assert out["plans"][0]["complete"] is True, out["plans"][0]
+
+
+
+
+
+# A pipeline program in the dialect the measured bench uses (`USAGE:` / `FLAGS:`, `(required)`),
+# so this test exercises the same reading path rather than a convenience format the planner never
+# meets in the field. The pages live in base64 for the same reason ZONECTL_PROGRAM's do: the
+# program's own quoting must not have to survive the test file's.
+PIPELINE_PAGES = {
+    "": """pipelinectl - build data pipelines
+
+USAGE:
+  pipelinectl <command> [flags]
+
+AVAILABLE COMMANDS:
+  sink                Manage sink
+  transform           Manage transform
+  pipeline            Manage pipeline
+""",
+    "sink": """Manage sink
+
+USAGE:
+  pipelinectl sink <command> [flags]
+
+AVAILABLE COMMANDS:
+  create              Create a sink
+""",
+    "sink create": """Create a sink
+
+USAGE:
+  pipelinectl sink create [flags]
+
+FLAGS:
+  --name <string> (required)\tSink name (unique identifier)
+  --type <enum> (required)\tSink type (values: s3, bigquery, postgres)
+  --config <json> (required)\tSink configuration as JSON
+
+EXAMPLES:
+  pipelinectl sink create --name analytics-lake --type s3 --config '{"bucket": "out", "prefix": "daily/"}'
+""",
+    "transform": """Manage transform
+
+USAGE:
+  pipelinectl transform <command> [flags]
+
+AVAILABLE COMMANDS:
+  create              Create a transform
+""",
+    "transform create": """Create a transform
+
+USAGE:
+  pipelinectl transform create [flags]
+
+FLAGS:
+  --name <string> (required)\tTransform name (unique identifier)
+  --sql <string> (required)\tSQL transformation query
+  --source <string> (required)\tSource name to read data from
+
+EXAMPLES:
+  pipelinectl transform create --name daily-revenue --sql 'SELECT 1' --source prod-db
+""",
+    "pipeline": """Manage pipeline
+
+USAGE:
+  pipelinectl pipeline <command> [flags]
+
+AVAILABLE COMMANDS:
+  create              Create a pipeline
+""",
+    "pipeline create": """Create a pipeline
+
+USAGE:
+  pipelinectl pipeline create [flags]
+
+FLAGS:
+  --name <string> (required)\tPipeline name (unique identifier)
+  --source <string> (required)\tSource name
+  --transforms <string> (required)\tComma-separated list of transform names
+  --sink <string> (required)\tSink name
+  --schedule <string> (required)\tCron expression
+""",
+}
+
+
+def _pipeline_program() -> str:
+    pages = "".join(f"    {json.dumps(k)}: {json.dumps(v)},\n" for k, v in PIPELINE_PAGES.items())
+    return (
+        "#!/usr/bin/env python3\n"
+        "import sys\n"
+        "PAGES = {\n" + pages + "}\n"
+        "args = [x for x in sys.argv[1:] if x not in ('--help', '-h')]\n"
+        "print(PAGES.get(' '.join(args)) or PAGES.get(args[0] if args else '', PAGES['']))\n"
+    )
+
+
+@pytest.fixture(scope="module")
+def pipelinectl(tmp_path_factory):
+    path = tmp_path_factory.mktemp("pipelinectl") / "pipelinectl"
+    path.write_text(_pipeline_program())
+    path.chmod(0o755)
+    return str(path)
+
+
+def test_the_verdict_is_for_the_whole_plan_not_its_first_command(pipelinectl):
+    """A multi-step request can have two exact commands and one that omits required flags.
+
+    Reporting the *first* command's `complete` certifies the whole plan. Measured over the sixty,
+    judging every command separates good plans from bad at AUC 0.740 (0.5096 vs 0.3677) where the
+    single-command `complete` -- true for 57 of 60 -- gives only 0.599. Both are reported;
+    `satisfies_every_page` is the one worth reading.
+
+    The request is built so the first two steps are exactly right and the third is not, which is
+    the only arrangement that can tell "all commands" from "the first command".
+    """
+    asked = (
+        "Build a complete data pipeline:\n"
+        '1. Create a transform named "daily-revenue" with SQL "SELECT 1" using source "prod-db".\n'
+        '2. Create an S3 sink named "analytics-lake" with config {"bucket": "out", "prefix": "daily/"}.\n'
+        '3. Create a pipeline named "daily-etl" with a schedule of "0 2 * * *".\n'
+    )
+    out = R.require_survey_plan_sequence(pipelinectl, asked, probes=12)
+    assert out["commands"], "the request did produce commands"
+
+    first = out["commands"][0]
+    assert first[1:] == ["transform", "create", "--name", "daily-revenue", "--sql", "SELECT 1",
+                         "--source", "prod-db"], first
+
+    # The first command is complete on its own page, so a verdict copied from it would say True.
+    assert out["steps"][0]["alternatives"][0]["missing_required"] == []
+    # The verdict is over all of them, and the last one cannot name what it has no flag for.
+    assert out["satisfies_every_page"] is False
+    assert out["unsatisfied"], "the failing command is named"
+    named = " ".join(gap["command"] for gap in out["unsatisfied"])
+    assert "pipeline create" in named
+    assert "transform create" not in named, "a complete command is not reported as failing"
+    for gap in out["unsatisfied"]:
+        assert gap["missing"], "an unsatisfied command names what it is missing"
