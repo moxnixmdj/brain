@@ -163,7 +163,8 @@ def compositions(args: Sequence[str], paths: Mapping[str, Sequence[str]],
                  *, stated_symbols: Sequence[str] = (),
                  literals: Sequence[str] = (),
                  problem: str = "",
-                 property_paths: Sequence[str] = ()) -> list[dict]:
+                 property_paths: Sequence[str] = (),
+                 imported_names: Sequence[str] = ()) -> list[dict]:
     """Every body the grammar admits, ordered by how much it ASSERTS.
 
     Ordering is the whole design, and getting it wrong was measured twice. A type can state
@@ -244,6 +245,27 @@ def compositions(args: Sequence[str], paths: Mapping[str, Sequence[str]],
             add("PREDICATE", f"{b2} * ({a} // {b2}) == {a}")
             add("PREDICATE", f"{a} % {b2} == 0")
             add("PREDICATE", f"not {a} % {b2}")
+
+    # 3d. IMPORTED NAMES, ONE PER PARAMETER, IN ORDER.
+    # A stub that imports RigidBody and Particle and declares (rigid_body_text, particle_text)
+    # is stating that the first name goes to the first parameter and the second to the second.
+    # `RigidBody(rigid_body_text), Particle(particle_text)` is a comma expression over the
+    # imports in declaration order -- no knowledge, purely positional.
+    # Only CONSTRUCTOR-shaped names: a module path ('sympy.physics.mechanics') and a scalar
+    # annotation ('str') are not things the body can call, and when they led the list the
+    # positional pairing produced `sympy.physics.mechanics(rigid_body_text), ...` instead of
+    # `RigidBody(rigid_body_text), Particle(particle_text)`.
+    constructors = [n for n in dict.fromkeys(imported_names)
+                    if n.isidentifier() and n[0].isupper() and "." not in n]
+    if constructors and len(constructors) >= 2 and len(args) >= 2:
+        n = min(len(constructors), len(args))
+        add("TUPLECALL", ", ".join(f"{constructors[j]}({args[j]})" for j in range(n)))
+        if len(constructors) >= n + 1:
+            rotated = constructors[1:] + constructors[:1]
+            add("TUPLECALL", ", ".join(f"{rotated[j]}({args[j]})" for j in range(n)))
+    for nm in constructors[:6]:
+        for a in args:
+            add("APPLY", f"{nm}({a})")
 
     # 3a-prime. PROPERTIES first. A property is read without a call, so it is the cheapest
     # legal body and needs no shape decision. `index.free_symbols` was at position 136 of 212
@@ -335,6 +357,20 @@ def solve_item(bench: str | pathlib.Path, item: Mapping[str, Any], *,
         tail = anno.rsplit(".", 1)[-1]
         if tail.isidentifier():
             stub_names.append(tail)
+
+    # A stub may import with `*` (item 190 does), in which case the ONLY statement of which
+    # constructors exist is the RETURN ANNOTATION: tuple[RigidBody, Particle] names both, in
+    # the order the function must return them.
+    import shape_and_synonym_v1 as _SS
+
+    returns = _SS.return_annotation(item["starting_code"]) or ""
+    # The annotation may be dotted (`tuple[sympy.physics.mechanics.RigidBody, ...Particle]`),
+    # so a bare isidentifier() check rejects every real name. The tail is what is bound in
+    # the module namespace, and it is what the body must call.
+    for part in re.split(r"[,\[\]()\s]+", returns):
+        tail = part.rsplit(".", 1)[-1]
+        if tail.isidentifier() and tail[0].isupper():
+            stub_names.append(tail)
     declared = []
     for n in stub_names:
         if n in item["starting_code"]:
@@ -349,7 +385,8 @@ def solve_item(bench: str | pathlib.Path, item: Mapping[str, Any], *,
                       for name in (names or [])]
     cands = compositions(args, paths, stated_symbols=ordered_stated, literals=lits,
                          problem=item.get("problem", ""),
-                         property_paths=property_paths)
+                         property_paths=property_paths,
+                         imported_names=stub_names)
     # CHEAP BODIES FIRST, AS THEIR OWN CHUNK. A property read, a leaf, a single attribute and
     # a stated-symbol application each cost one trial and cannot hang. Arithmetic over
     # symbolic objects can hang (`index // index.canonical_variables.index` does), and when it

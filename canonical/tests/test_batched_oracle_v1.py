@@ -77,3 +77,22 @@ def test_allowance_never_exceeds_the_budget():
 def test_empty_body_list_is_handled():
     assert B.judge_stream(sys.executable, STUB, TESTS, [], timeout=30,
                           test_path="/tmp/sample_1/hidden.py") is None
+
+
+def test_judge_many_parses_the_streamed_format():
+    """The worker streams `@@@` lines. The batch parser once looked for `[` and returned
+    worker_failed for EVERY batch -- a silent total failure of the batched path."""
+    verdicts = B.judge_many(sys.executable, STUB, TESTS,
+                            ["n", "sympy.totient(n)", "1"], timeout=60,
+                            test_path="/tmp/sample_1/hidden.py", per_body_seconds=3)
+    assert len(verdicts) == 3
+    assert [v["passed"] for v in verdicts] == [False, True, False]
+    assert all(v["why"] != "worker_failed" for v in verdicts)
+
+
+def test_judge_many_never_silently_reports_worker_failed_for_a_valid_run():
+    verdicts = B.judge_many(sys.executable, STUB, TESTS, ["sympy.totient(n)"],
+                            timeout=60, test_path="/tmp/sample_1/hidden.py",
+                            per_body_seconds=3)
+    assert verdicts[0]["passed"] is True
+    assert verdicts[0]["why"] == "ok"

@@ -183,7 +183,24 @@ def judge_many(python: str, starting_code: str, tests_src: str,
                               text=True, timeout=timeout)
     except (OSError, subprocess.TimeoutExpired):
         return [{"passed": False, "why": "worker_timeout"} for _ in bodies]
-    lines = [l for l in (proc.stdout or "").strip().splitlines() if l.startswith("[")]
+    # The worker emits ONE streamed line per verdict, prefixed `@@@` and flushed. It no longer
+    # emits a single batch array. This parser kept looking for a line starting with `[` and
+    # therefore returned `worker_failed` for EVERY batch after the streaming change -- a
+    # silent total failure of the batched path, which is exactly the class of bug this whole
+    # module exists to avoid. Both formats are accepted so the contract cannot drift again.
+    raw = (proc.stdout or "").strip().splitlines()
+    streamed = []
+    for line in raw:
+        if line.startswith("@@@"):
+            try:
+                streamed.append(json.loads(line[3:]))
+            except json.JSONDecodeError:
+                continue
+    if streamed:
+        while len(streamed) < len(bodies):
+            streamed.append({"passed": False, "why": "not_reached"})
+        return streamed[:len(bodies)]
+    lines = [l for l in raw if l.startswith("[")]
     if not lines:
         return [{"passed": False, "why": "worker_failed"} for _ in bodies]
     try:
