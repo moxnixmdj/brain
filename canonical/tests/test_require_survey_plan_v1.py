@@ -876,3 +876,27 @@ def test_a_wrapped_usage_statement_is_one_grammar():
     picture = R.positional_grammar(init["usage"])
     assert "option" in picture, picture
     assert any("directory" in str(p) for p in picture), picture
+
+
+def test_a_structured_argument_is_filled_from_prose_inside_the_documents_own_shape():
+    """The hardest binding there is: one argument that is a JSON object, values stated in prose.
+
+    `datapipe source connect --config` documents itself as `Connection configuration as JSON
+    (e.g. {"host": ..., "port": 5432, "database": "analytics"})`, and the request states a host, a
+    port and a database as an English list. The document supplies the *structure* and the request
+    supplies every value -- nothing here is invented, and the keys are the document's.
+    """
+    request = ('Using the datapipe tool, register a new PostgreSQL data source named "analytics-db" '
+               'with the connection config: host "db.analytics.internal", port 5432, '
+               'database "analytics".')
+    out = R.require_survey_plan("/tmp/cb/bin/datapipe", request, probes=14)
+    argv = out["plans"][0]["argv"][1:]
+    assert argv[:2] == ["source", "connect"], argv
+    config = argv[argv.index("--config") + 1]
+    assert '"host": "db.analytics.internal"' in config, config
+    assert '"port": 5432' in config, config
+    assert '"database": "analytics"' in config, config
+    assert argv[argv.index("--name") + 1] == "analytics-db", argv
+    # the flag documents its vocabulary as `postgres, mysql, s3, ...` and the request names the
+    # choice by its full name; the document's spelling is what the flag accepts
+    assert argv[argv.index("--type") + 1] == "postgres", argv

@@ -1133,7 +1133,17 @@ def require(text: str) -> dict[str, Any]:
                        "context": clause[:240]})
         seen.add(("path", token))
     for m in re.finditer(r"\b(\d{1,6})\b", unquoted):
-        if not re.match(r"\s+[A-Za-z]", unquoted[m.end(): m.end() + 50]):
+        # A count is a number the request uses, and English puts its name on either side of it:
+        # "with 3 nodes" names it after, and "port 5432", "90% of traffic", "database analytics"
+        # name it before. Requiring a word *after* the number dropped every one of those, which is
+        # why a request naming a port, a percentage split and a host reached the program as a
+        # command with none of them. A bare number with no word on either side is an ordinal in a
+        # list and is still skipped -- that is what the lookahead was protecting against.
+        after = unquoted[m.end(): m.end() + 50]
+        before = unquoted[max(0, m.start() - 50): m.start()]
+        named_after = bool(re.match(r"\s+[A-Za-z]", after))
+        named_before = bool(re.search(r"[A-Za-z][\s\-]+$", before))
+        if not (named_after or named_before):
             continue
         add("number", m.group(1),
             unquoted[max(0, m.start() - 90): m.end() + 90], m.start())
@@ -1429,6 +1439,21 @@ def _demo_plan(demo: Mapping[str, Any], requirement: Mapping[str, Any], tool: st
                 found = re.search(r"(?<![\w.-])" + re.escape(label) + r"(?![\w.-])",
                                   said_text, re.I)
                 if not found:
+                    # The request may name the choice with the spelling the world uses for it.
+                    # `--type` lists `postgres` and the request says "PostgreSQL": the stems are
+                    # `postgr` and `postgresql`, so neither word-matching nor an exact list lookup
+                    # connects them, and `--type` then fell through to taking the hostname. One
+                    # being a prefix of the other, on the last six characters or more, is the
+                    # document's own vocabulary being spoken with its full name.
+                    for word in re.findall(r"[A-Za-z][A-Za-z0-9]*", said_text):
+                        low = word.lower()
+                        if (len(label) >= 4 and (low.startswith(label) or label.startswith(low))
+                                and min(len(low), len(label)) >= 4
+                                and abs(len(low) - len(label)) <= 4):
+                            found = re.search(r"(?<![\w.-])" + re.escape(word) + r"(?![\w.-])",
+                                              said_text, re.I)
+                            break
+                if not found:
                     continue
                 # What the request writes is the *label*; what the flag takes is the spelling the
                 # document paired with it. `--priority <int>` takes `1` for "urgent", and sending
@@ -1437,6 +1462,16 @@ def _demo_plan(demo: Mapping[str, Any], requirement: Mapping[str, Any], tool: st
                 # capitalises for display (`CNAME`) and the request's form is the one it wants.
                 if kind == "number" and re.match(r"-?\d+$", str(spelling)):
                     value = str(spelling)
+                elif said_text[found.start():found.end()].lower() == str(label).lower():
+                    # The request named the choice exactly, case aside. Its own spelling is the one
+                    # to send: a document capitalises for display (`Progress`, `Done`) while its
+                    # parser usually takes the word as written, and the request said `Done`.
+                    value = said_text[found.start():found.end()]
+                elif re.search(r"\benum\b", str(choice_slot.get("meta") or ""), re.I):
+                    # The request named the choice by a longer or shorter form -- "PostgreSQL" for
+                    # a list that says `postgres`. A flag documented `<enum>` accepts only the words
+                    # it lists, so the document's spelling is what goes on the line.
+                    value = str(spelling)
                 else:
                     value = said_text[found.start():found.end()]
                 if value.lower() in {str(x).lower() for x in spent}:
@@ -1444,16 +1479,21 @@ def _demo_plan(demo: Mapping[str, Any], requirement: Mapping[str, Any], tool: st
                 filled_pairs.extend([str(flag), value])
                 spent.add(value.lower())
                 break
-        for _i, (flag, example) in enumerate(pairs):
-            # A demonstration may pair a flag with a *shape* rather than a value (`{"v1": 90,
-            # "v2": 10}`, `{"host": ...}`). The shape is the example's own; what the request
-            # supplies is the values inside it. Filling a shape with the request's own numbers
-            # and words is not inventing -- it is the example's structure with the request's
-            # content, which is exactly what "the document is the plan" claims.
-            shaped = _shape_filled(example, ordered, spent)
+        # A demonstrated value that is a *structure* -- `{"host": ..., "port": 5432}` -- is filled
+        # from the request before any scalar flag competes for the same values. The shape is the
+        # document saying which request word goes where *inside one argument*, and letting a scalar
+        # flag take one of those words first leaves the structure unfillable: a data-source
+        # connection came out with `--type` holding the hostname and no `--config` at all, because
+        # `--name` and `--type` are listed before `--config` in the demonstration.
+        for flag, example in pairs:
+            if not any(ch in str(example) for ch in "{}[]:"):
+                continue
+            shaped = _shape_filled(str(example), ordered, spent)
             if shaped is not None:
-                spent.update(_tokens_in(example) & {str(v["value"]) for v in ordered})
-                filled_pairs.extend([flag, shaped])
+                spent.update(_tokens_in(str(example)) & {str(v["value"]) for v in ordered})
+                filled_pairs.extend([str(flag), shaped])
+        for _i, (flag, example) in enumerate(pairs):
+            if str(flag) in filled_pairs[::2]:
                 continue
             slot = slots.get(flag) or {}
             want = words_of(str(slot.get("words") or ""))
@@ -1651,20 +1691,48 @@ def _shape_filled(example: str, values: Sequence[Mapping[str, Any]], spent: set[
     """
     if not any(ch in example for ch in "{}[]:"):
         return None
-    numbers = [str(v["value"]) for v in values
-               if v["kind"] == "number" and str(v["value"]) not in spent]
-    words = {w for v in values for w in (v.get("words") or [])}
-    filled = dict(zip(re.findall(r'"([^"]+)"\s*:', example), numbers))
-    if not filled:
+    free = [v for v in values if str(v["value"]) not in spent and not v.get("value_of")]
+    numbers = [str(v["value"]) for v in free if v["kind"] == "number"]
+    if not free:
         return None
-    for key in filled:
-        if key.lower() not in words and not any(key.lower() in w for w in words):
-            return None
     out = example
-    for key, number in filled.items():
-        out = re.sub(r'("%s"\s*:\s*)[\d.]+' % re.escape(key), lambda m: m.group(1) + number,
-                     out, count=1)
-    return out if out != example or not numbers else None
+    changed = False
+    for key in re.findall(r'"([^"]+)"\s*:', example):
+        # Each key of the demonstrated shape is filled from the request's own value for that key,
+        # and *what kind* of value goes there is the example's own statement: a key the example
+        # writes with a number takes the request's number (`"port": 5432`), and a key it writes
+        # with a word takes the request's value whose own words name that key (`"database":
+        # "analytics"`). Reading only the numeric keys is why a data source connection needing
+        # `{"host": ..., "port": 5432, "database": "analytics"}` came out as `--type` holding a
+        # hostname: the shape was recognised as a shape and then half of it was thrown away.
+        slot = re.search(r'"%s"\s*:\s*([^,}]+)' % re.escape(key), out)
+        if not slot:
+            continue
+        written = slot.group(1).strip().strip('"')
+        source = None
+        if re.match(r"^-?[\d.]+$", written):
+            source = next((n for n in numbers if n not in out), None)
+        else:
+            # The value for a key is the request's value whose own words name that key *and* which
+            # nothing else has a better claim to. A value's clause is wide -- `named "analytics-db"
+            # with the connection config: host ...` puts `host` and `config` in the name's own
+            # words -- so key overlap alone picked the source's *name* to be its host. The
+            # discriminator is the key that only one value names: `database` is in exactly one
+            # value's words, while `host` and `config` are in several.
+            key_words = words_of(key)
+            candidates = [(str(v["value"]), set(v.get("words") or [])) for v in free
+                          if str(v["value"]) not in out and key_words & set(v.get("words") or [])]
+            if len(candidates) > 1:
+                others = {k for k in re.findall(r'"([^"]+)"\s*:', example) if k != key}
+                other_words = set().union(*[words_of(k) for k in others]) if others else set()
+                candidates.sort(key=lambda c: (-len((key_words - other_words) & c[1]), len(c[1])))
+            source = candidates[0][0] if candidates else None
+        if source is None:
+            continue
+        out = out[:slot.start(1)] + (
+            source if re.match(r"^-?[\d.]+$", written) else '"%s"' % source) + out[slot.end(1):]
+        changed = True
+    return out if changed else None
 
 
 def _product_slots(options: Sequence[Mapping[str, Any]]) -> list[Mapping[str, Any]]:

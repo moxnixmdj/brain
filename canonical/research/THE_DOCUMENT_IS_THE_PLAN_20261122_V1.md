@@ -1464,3 +1464,60 @@ system knew about git, tar, or archives.
 The score did not move because these programs are not in the benchmark. What moved is that a
 mechanism built against eight synthetic CLIs now reads three real ones' documentation and produces
 commands that run.
+
+### A36 — the hardest binding yet: one argument that is a structure, with its values written in prose
+
+cb-054 is a *"You are not provided with documentation — discover the tool's commands yourself"* task.
+Its expected end state is a registered data source, and the command that produces it must carry:
+
+    --name analytics-db --type postgres
+    --config {"host": "db.analytics.internal", "port": 5432, "database": "analytics"}
+
+while the request states all of that as prose:
+
+> register a new **PostgreSQL** data source named "**analytics-db**" with the connection config:
+> host "**db.analytics.internal**", port **5432**, database "**analytics**"
+
+The document, not the request, says what the *shape* of `--config` is:
+
+    --config <json>   Connection configuration as JSON (e.g. {"host": "db.example.com",
+                      "port": 5432, "database": "analytics"})
+
+**Five defects, each found by trying to produce that one command.**
+
+1. **A number with its name in front was not a value.** The extractor required a word *after* a
+   number (`with 3 nodes`). English names a count on either side, and `port 5432,`, `90% of traffic`,
+   `database "analytics"` all name it before. `5432` was invisible; so was every percentage split.
+2. **A shape was only filled for numbers.** `_shape_filled` substituted the request's numbers into
+   the example's numeric keys and ignored the string keys, so `"database": "analytics"` kept the
+   *document's* example value. Half a shape is worse than none: it produces a command that looks
+   filled and carries one of the vendor's sample values.
+3. **The shape competed with scalar flags.** `--config` is listed third in the demonstration, so
+   `--name` and `--type` had already taken two of the request's values before it was reached. A
+   demonstrated structure is now filled *before* any scalar flag competes — it is one argument that
+   claims several of the request's words, and it must claim them first.
+4. **A key's value was chosen by any shared word.** Every value's clause in that request contains
+   `host` and `config`, because the clause spans the whole config list, so the source's *name* was
+   chosen as its host. The discriminator is the key only one value names: `database` appears in
+   exactly one value's words, `host` in several. Measured result:
+   `{"host": "db.analytics.internal", "port": 5432, "database": "analytics"}`.
+5. **`postgres` vs `PostgreSQL`.** The flag documents `<enum>` with `postgres, mysql, s3, ...` and
+   the request says "PostgreSQL". The stems are `postgr` and `postgresql`, so word matching and exact
+   lookup both fail, and `--type` fell through to taking the hostname. A prefix relation of four or
+   more characters with a length difference of four or less connects them; the document's own
+   spelling then goes on the line, because an `<enum>` accepts only its listed words.
+
+**And the distinction that keeps case-only differences honest.** Fix 5 first broke cb-012, which
+then sent `--status Done` where the bench wants `done`: the document capitalises its choices for
+display (`Progress`, `Done`, `Cancelled`) and the request said `Done`. So the rule is ordered — where
+the request's word equals the listed choice *aside from case*, the request's spelling is sent; where
+it does not, the document's spelling is.
+
+    all sixty tasks   0.4572, three seeds, unchanged through every one of the six steps
+    cb-054            the exact command its expected_state requires
+    cb-012            restored
+
+**This is the first task in the thread where the system produces a command carrying a structured
+argument it assembled itself, entirely from a document's example and a sentence's prose.** Nothing in
+the mechanism knows what a database host or a port is. The document said the shape; the request said
+the values; the binding was word-for-word.
