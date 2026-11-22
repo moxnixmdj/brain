@@ -408,61 +408,6 @@ NOT_A_DOCUMENT = ("no man viewer", "failed to exec 'man'", "man: not found",
 # --------------------------------------------------------------------------- document reader
 
 
-def read_document(argv: Sequence[str], *, timeout: float = DEFAULT_DEADLINE,
-                  budget: int = DEFAULT_BUDGET, cwd: str | None = None,
-                  env: Mapping[str, str] | None = None) -> dict[str, Any]:
-    """Ask one program for one document. Bounded in bytes, time, and process group."""
-    started = time.perf_counter()
-    try:
-        proc = subprocess.Popen(list(argv), stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
-                                stdin=subprocess.DEVNULL, cwd=cwd, start_new_session=True,
-                                env=dict(env) if env is not None else None)
-    except (OSError, ValueError) as exc:
-        return {"ok": False, "text": "", "reason": type(exc).__name__, "bytes": 0,
-                "seconds": round(time.perf_counter() - started, 4), "argv": list(argv)}
-    chunks: list[bytes] = []
-    total = 0
-    fd = proc.stdout.fileno()
-    try:
-        while total < budget:
-            remaining = timeout - (time.perf_counter() - started)
-            if remaining <= 0:
-                break
-            try:
-                ready, _, _ = select.select([fd], [], [], remaining)
-            except (OSError, ValueError):
-                break
-            if not ready:
-                break
-            try:
-                block = os.read(fd, min(4096, budget - total))
-            except OSError:
-                break
-            if not block:
-                break
-            chunks.append(block)
-            total += len(block)
-    finally:
-        try:
-            os.killpg(os.getpgid(proc.pid), signal.SIGKILL)
-        except (OSError, ProcessLookupError):
-            pass
-        try:
-            proc.wait(timeout=1.0)
-        except subprocess.SubprocessError:
-            pass
-        try:
-            proc.stdout.close()
-        except OSError:
-            pass
-    text = b"".join(chunks).decode("utf-8", "replace")
-    return {"ok": bool(text.strip()), "text": text, "reason": "OK" if text.strip() else "EMPTY",
-            "bytes": len(text.encode("utf-8", "replace")),
-            "seconds": round(time.perf_counter() - started, 4), "argv": list(argv)}
-
-
-# --------------------------------------------------------------------------- document parsing
-
 
 
 

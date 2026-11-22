@@ -174,8 +174,24 @@ satisfy it would be dishonest:
    correct artifact; the first judge demanded two pieces. `base32` likewise pads (`NBSWY3DPBI======`), and
    the first judge demanded the unpadded prefix.
 
-**What is still not measured.** A4 (prose fidelity against a benchmark verifier), A5 (CLI-Bench: its
+### A7 — the judge, measured on the same 20 tasks (`/tmp/a7.py`)
+
+Each arm is executed as itself and asked for one extra number per task. **blind** executes only the
+planner's *first* candidate in a copy and judges afterwards; **judge** is `verify_plans`, which judges every
+candidate in a copy and takes only an accepted one. Same candidates, same fixtures, same judges — the only
+difference is whether the rejection happens before the act.
+
+| arm | n | blind | judge | lift |
+|---|---|---|---|---|
+| A7, all three arms | 20 | 17/20 = **0.850** | 20/20 = **1.000** | **+0.150** |
+
+The three recoveries are real and named: `unzip` (the first candidate omits `-d`, so it does not extract into
+the named directory), `cp` (the first candidate drops the destination), `split` (the first candidate omits the
+`PREFIX`, writing `aa` into the working directory instead of `parts/aa`). In each case a wrong act in a copy
+was rejected and a later candidate was accepted — the world, not the planner's confidence, decided.
+A7's falsifier ("no movement, or movement in the wrong direction") is not met.
+
+**What is still not measured.** A4 (prose fidelity against a benchmark verifier) and A5 (CLI-Bench: its
 `cli_bench.scoring` package is absent from the published tree, so the published harness cannot be run
-unmodified here), A7 (the judge's lift over blind execution), and §6's TUA verifier-fidelity arm. These are
-the remaining work; the three arms above measure only A1's shape, A2's refusals, A3's zero stored bytes and
-A6's no-model/no-network at run time.
+unmodified here). §6's TUA verifier-fidelity arm likewise needs a verifier this sandbox cannot fetch. Those
+three remain open; A1–A3, A6 and A7 now have numbers.
