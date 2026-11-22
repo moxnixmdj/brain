@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "c6f520c8c2e43f601ec3ff0354cb9688be4dbde872021ba65e5d7d4a047c78f2"
+  "value": "6c76c03220c3c8ac7024631726a428861f8fba0115ddb0d7df36d081fd5b876b"
  },
  "engines": [
   {
@@ -253769,7 +253769,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/PERFECT_ALGORITHM_PRIORS_VERIFY_20261122_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "6ae2b5ea6b678e629c1f9dacdeeead640715206b8f5afcb03faec35fe540a193",
+   "sha256": "8c5fd7c4b57237e6baf76564ad51bd7646fc56fb4d481f0186aa821e3f91e765",
    "status": "PROPOSED__PRODUCER_MEASURED__PERFECT_ALGORITHM_VERIFIED_PRIORS__INDEPENDENT_VERI",
    "terms": {
     "20261122": 1,
@@ -253788,7 +253788,6 @@
     "instance": 4,
     "learned": 1,
     "not": 1,
-    "now": 1,
     "only": 1,
     "perfect": 1,
     "perfect_algorithm_priors_verify_20261122_v1": 1,
@@ -253801,6 +253800,7 @@
     "reports": 1,
     "rest": 1,
     "root": 1,
+    "rows": 1,
     "scan": 2,
     "stored": 2,
     "transitions": 2
