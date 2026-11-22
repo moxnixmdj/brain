@@ -1,0 +1,64 @@
+{
+ "schema": "BRAIN_PURPOSE_GATE_MEASUREMENT_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "date": "2026-11-21",
+ "mode": "COMPOSED_PURPOSE_GATE_TESTED_ON_REAL_EXECUTED_CONTRASTS",
+ "declared_before_the_runs": {
+  "P1": "a residual with no real separating run produces NO_QUESTION",
+  "P2": "one real run in a new action vocabulary separates the residual and gives 0/1 goal mismatches",
+  "P3": "untrusted author, stale digest, wrong kind and unknown candidate are all refused",
+  "P4": "an accepted selection is stored externally, reloads, and deletion restores the question",
+  "P5": "zero model calls, zero stored parameters, zero network calls; every trace executed"
+ },
+ "verdict": {
+  "P1_no_zero_information_question": {
+   "action": "NO_QUESTION",
+   "runs": 18,
+   "distinguishing": 0,
+   "MET": true
+  },
+  "P2_one_real_contrast_pays_the_question": {
+   "runs": 1,
+   "distinguishing": 1,
+   "mismatches": {
+    "0ed7366a9abfc4d5": 1,
+    "2a8d0664944ca0a9": 0
+   },
+   "correct_text": "monotone[probe_new_content] and final:count[probe_new_content]==1",
+   "MET": true
+  },
+  "P3_refusals": {
+   "untrusted": "ANSWER_AUTHOR_NOT_AUTHORIZED",
+   "stale_digest": "ANSWER_INSTRUCTION_DIGEST_STALE",
+   "wrong_kind": "ANSWER_KIND_UNSUPPORTED",
+   "invented_candidate": "CANDIDATE_NOT_IN_COMPUTED_RESIDUAL",
+   "MET": true
+  },
+  "P4_external_deletable_store": {
+   "reloaded_action": "ANSWER_ACCEPTED",
+   "after_delete_action": "ASK_USER",
+   "MET": true
+  },
+  "P5_zeros_and_real_execution": {
+   "git_runs": 18,
+   "bulk_runs": 1,
+   "model_calls": 0,
+   "parameters_stored": 0,
+   "network_calls_at_run_time": 0,
+   "MET": true
+  }
+ },
+ "all_criteria_met": true,
+ "cost": {
+  "seconds": 0.8,
+  "model_calls": 0,
+  "parameters_stored": 0,
+  "network_calls_at_run_time": 0
+ },
+ "non_claims": [
+  "no benchmark score, no OSWorld or SWE-bench run",
+  "no user answered; the selection was typed by this producer",
+  "no claim of live runtime wiring or general natural-language understanding",
+  "independent verification is not claimed; authority is NONE"
+ ]
+}

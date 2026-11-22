@@ -47,6 +47,7 @@ from __future__ import annotations
 
 import argparse
 import ast
+import itertools
 import json
 import pathlib
 import subprocess
@@ -66,6 +67,7 @@ AUTHORITY = "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT"
 ARG_TOKENS: tuple[str, ...] = ("none", "empty_str", "zero", "one", "minus_one", "empty_bytes",
                                "empty_tuple", "empty_list", "empty_dict", "zero_float", "star", "a")
 MAX_ARGS = 3
+OFF_DIAGONAL_CAP = 48
 MAX_CALLABLES = 24
 
 #: a child process, so that no import, no sys.modules entry and no global mutation can leak between states
@@ -351,9 +353,9 @@ def pins_for_commit(clone: pathlib.Path, commit: Mapping[str, Any], work: pathli
             continue
         calls: list[dict[str, Any]] = []
         for item in offered:
-            for token in vocabulary:
+            for args in _argument_tuples(vocabulary, item["required"]):
                 calls.append({"module": module, "function": item["function"],
-                              "args": [token] * item["required"]})
+                              "args": list(args)})
         before = probe(parent_tree, calls)
         after = probe(fixed_tree, calls)
         repeat = after
@@ -439,6 +441,32 @@ def _headline(report: Mapping[str, Any]) -> str:
         "it. That input is the bottleneck."
         % (st.get("commits", 0), st.get("with_tests", 0), st.get("untested", 0), st.get("probed", 0),
            st.get("checkable", 0), 100.0 * share, 100.0 * (1.0 - share)))
+
+
+def _argument_tuples(vocabulary: Sequence[str], required: int) -> list[tuple[str, ...]]:
+    """Candidate argument tuples for a callable taking `required` arguments.
+
+    THE DEFECT THIS REPLACES: `[token] * required` gives every argument the SAME value, so
+    a two-argument callable is only ever probed along the diagonal. `_is_compatible(arch,
+    version)` is then never called with a real (arch, version) pair -- and that is the whole
+    class of function the differential pin was supposed to reach. Measured on the corpus:
+    26 calls per module, 0 of them heterogeneous.
+
+    The fix is the cross-product, bounded. Diagonal tuples are kept (they are cheap and they
+    reach single-argument callables), and the off-diagonal is capped so the probe count stays
+    bounded rather than exploding as |vocabulary| ** required.
+    """
+    if required <= 0:
+        return [()]
+    if required == 1:
+        return [(token,) for token in vocabulary]
+    diagonal = [(token,) * required for token in vocabulary]
+    off_diagonal: list[tuple[str, ...]] = []
+    for left, right in itertools.permutations(vocabulary, 2):
+        off_diagonal.append((left,) + (right,) * (required - 1))
+        if len(off_diagonal) >= OFF_DIAGONAL_CAP:
+            break
+    return diagonal + off_diagonal
 
 
 def measure(corpus: Mapping[str, Any] | None = None) -> dict[str, Any]:

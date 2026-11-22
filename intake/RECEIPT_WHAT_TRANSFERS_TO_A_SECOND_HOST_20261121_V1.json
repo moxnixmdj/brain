@@ -1,0 +1,526 @@
+{
+ "schema": "BRAIN_WHAT_TRANSFERS_TO_A_SECOND_HOST_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "declared_before_the_runs": {
+  "S1": "a shape that a new host needs but the base host never saw is reported as missing; the shapes are not adjusted to fit",
+  "S2": "both keys are reported: the coarse artifact family and the producer named in the executable's own shebang or header",
+  "S3": "the producer key is not assumed better; it is reported better or worse by measured precision and recall on the new hosts",
+  "S4": "the selector reuses memory only when the base host banked that key as reliable (>=90% dominant outcome and >=90% LOOK flag coverage); anything else is asked, and the asking is counted as the correct cost of novelty",
+  "S5": "what is stored is structure -- which statement kinds a producer makes -- never statement text; text transfer is measured separately and its failure is reported",
+  "S6": "zero model calls, zero stored parameters, no network",
+  "S7": "LOOK's discoverability is measured on each target host, not carried over: when the bytes hold no flags, the selector must ask, and that asking is reported as the price of novelty rather than hidden"
+ },
+ "hosts": {
+  "base": {
+   "programs": 492,
+   "path": null,
+   "producers": {
+    "elf": 372,
+    "perl": 57,
+    "sh": 46,
+    "python3": 6,
+    "env:node": 4,
+    "env:python3": 3
+   }
+  },
+  "venv": {
+   "programs": 13,
+   "path": "/tmp/brainvenv/bin",
+   "producers": {
+    "python3": 12,
+    "elf": 1
+   }
+  },
+  "npm-yarn": {
+   "programs": 14,
+   "path": "/opt/yarn-v1.22.22/bin:/usr/local/lib/node_modules/npm/bin",
+   "producers": {
+    "env:node": 5,
+    "other": 4,
+    "env:bash": 2,
+    "env:pwsh": 2,
+    "sh": 1
+   }
+  }
+ },
+ "transfer": {
+  "venv": {
+   "programs": 13,
+   "shapes": [
+    [
+     "FLAG",
+     "ELF"
+    ],
+    [
+     "FLAG",
+     "SCRIPT"
+    ],
+    [
+     "HAZARD",
+     "ELF"
+    ],
+    [
+     "TEXT",
+     "SCRIPT"
+    ],
+    [
+     "USAGE",
+     "ELF"
+    ]
+   ],
+   "missing_shapes": [],
+   "shape_coverage": 1.0,
+   "known_producers": [
+    "elf",
+    "python3"
+   ],
+   "new_producers": []
+  },
+  "npm-yarn": {
+   "programs": 14,
+   "shapes": [
+    [
+     "FLAG",
+     "SCRIPT"
+    ],
+    [
+     "HAZARD",
+     "SCRIPT"
+    ],
+    [
+     "TEXT",
+     "SCRIPT"
+    ]
+   ],
+   "missing_shapes": [],
+   "shape_coverage": 1.0,
+   "known_producers": [
+    "env:node",
+    "sh"
+   ],
+   "new_producers": [
+    "env:bash",
+    "env:pwsh",
+    "other"
+   ]
+  }
+ },
+ "memory": {
+  "keys_seen": 19,
+  "banked": {
+   "perl|HAZARD,USAGE": {
+    "producer": "perl",
+    "look_shape": [
+     "HAZARD",
+     "USAGE"
+    ],
+    "members": 3,
+    "dominant_outcome": [
+     "FLAG",
+     "HAZARD"
+    ],
+    "agreement": 1.0,
+    "flag_coverage": 1.0
+   },
+   "bash|USAGE": {
+    "producer": "bash",
+    "look_shape": [
+     "USAGE"
+    ],
+    "members": 2,
+    "dominant_outcome": [
+     "FLAG"
+    ],
+    "agreement": 1.0,
+    "flag_coverage": 1.0
+   }
+  },
+  "refused": [
+   {
+    "producer": "elf",
+    "look_shape": [
+     "USAGE"
+    ],
+    "members": 186,
+    "dominant_outcome": [
+     "FLAG"
+    ],
+    "agreement": 0.796,
+    "flag_coverage": 1.0,
+    "reason": "BELOW_FLOOR"
+   },
+   {
+    "producer": "elf",
+    "look_shape": [],
+    "members": 124,
+    "dominant_outcome": [
+     "FLAG"
+    ],
+    "agreement": 0.871,
+    "flag_coverage": 1.0,
+    "reason": "BELOW_FLOOR"
+   },
+   {
+    "producer": "sh",
+    "look_shape": [
+     "USAGE"
+    ],
+    "members": 27,
+    "dominant_outcome": [
+     "TEXT"
+    ],
+    "agreement": 0.556,
+    "flag_coverage": 1.0,
+    "reason": "BELOW_FLOOR"
+   },
+   {
+    "producer": "elf",
+    "look_shape": [
+     "HAZARD"
+    ],
+    "members": 15,
+    "dominant_outcome": [
+     "FLAG",
+     "HAZARD"
+    ],
+    "agreement": 0.467,
+    "flag_coverage": 1.0,
+    "reason": "BELOW_FLOOR"
+   },
+   {
+    "producer": "elf",
+    "look_shape": [
+     "HAZARD",
+     "USAGE"
+    ],
+    "members": 47,
+    "dominant_outcome": [
+     "FLAG"
+    ],
+    "agreement": 0.447,
+    "flag_coverage": 1.0,
+    "reason": "BELOW_FLOOR"
+   },
+   {
+    "producer": "sh",
+    "look_shape": [],
+    "members": 16,
+    "dominant_outcome": [
+     "FLAG"
+    ],
+    "agreement": 0.625,
+    "flag_coverage": 0.03,
+    "reason": "BELOW_FLOOR"
+   },
+   {
+    "producer": "perl",
+    "look_shape": [
+     "USAGE"
+    ],
+    "members": 30,
+    "dominant_outcome": [
+     "FLAG"
+    ],
+    "agreement": 0.733,
+    "flag_coverage": 1.0,
+    "reason": "BELOW_FLOOR"
+   },
+   {
+    "producer": "perl",
+    "look_shape": [],
+    "members": 19,
+    "dominant_outcome": [
+     "TEXT"
+    ],
+    "agreement": 0.526,
+    "flag_coverage": 1.0,
+    "reason": "BELOW_FLOOR"
+   },
+   {
+    "producer": "perl5.36-x86_64-linux-gnu",
+    "look_shape": [],
+    "members": 1,
+    "dominant_outcome": [
+     "TEXT"
+    ],
+    "agreement": 1.0,
+    "flag_coverage": 1.0,
+    "reason": "TOO_FEW_WITNESSES"
+   },
+   {
+    "producer": "sh",
+    "look_shape": [
+     "HAZARD",
+     "USAGE"
+    ],
+    "members": 3,
+    "dominant_outcome": [
+     "FLAG",
+     "HAZARD"
+    ],
+    "agreement": 0.667,
+    "flag_coverage": 1.0,
+    "reason": "BELOW_FLOOR"
+   },
+   {
+    "producer": "perl",
+    "look_shape": [
+     "HAZARD"
+    ],
+    "members": 5,
+    "dominant_outcome": [
+     "FLAG",
+     "HAZARD"
+    ],
+    "agreement": 0.4,
+    "flag_coverage": 1.0,
+    "reason": "BELOW_FLOOR"
+   },
+   {
+    "producer": "env:python3",
+    "look_shape": [
+     "HAZARD",
+     "USAGE"
+    ],
+    "members": 1,
+    "dominant_outcome": [
+     "TEXT"
+    ],
+    "agreement": 1.0,
+    "flag_coverage": 1.0,
+    "reason": "TOO_FEW_WITNESSES"
+   }
+  ],
+  "floors": {
+   "outcome_agreement": 0.9,
+   "flag_coverage": 0.9,
+   "min_witnesses": 2
+  }
+ },
+ "scoring": {
+  "venv": {
+   "family_key": {
+    "key": "family",
+    "keys": 2,
+    "precision": 0.25,
+    "recall": 1.0,
+    "true_positive": 13,
+    "false_positive": 39,
+    "false_negative": 0,
+    "unpredicted_examples": []
+   },
+   "producer_key": {
+    "key": "producer",
+    "keys": 19,
+    "precision": 0.75,
+    "recall": 0.923,
+    "true_positive": 12,
+    "false_positive": 4,
+    "false_negative": 1,
+    "unpredicted_examples": [
+     {
+      "program": "ephemeral-port-reserve",
+      "unpredicted": [
+       "TEXT"
+      ],
+      "producer": "python3",
+      "look_shape": []
+     }
+    ]
+   }
+  },
+  "npm-yarn": {
+   "family_key": {
+    "key": "family",
+    "keys": 2,
+    "precision": 0.325,
+    "recall": 1.0,
+    "true_positive": 13,
+    "false_positive": 27,
+    "false_negative": 0,
+    "unpredicted_examples": []
+   },
+   "producer_key": {
+    "key": "producer",
+    "keys": 19,
+    "precision": 0.615,
+    "recall": 0.615,
+    "true_positive": 8,
+    "false_positive": 5,
+    "false_negative": 5,
+    "unpredicted_examples": [
+     {
+      "program": "npm",
+      "unpredicted": [
+       "TEXT"
+      ],
+      "producer": "env:bash",
+      "look_shape": []
+     },
+     {
+      "program": "npm-prefix.js",
+      "unpredicted": [
+       "TEXT"
+      ],
+      "producer": "env:node",
+      "look_shape": []
+     },
+     {
+      "program": "npm.ps1",
+      "unpredicted": [
+       "TEXT"
+      ],
+      "producer": "env:pwsh",
+      "look_shape": []
+     },
+     {
+      "program": "npx",
+      "unpredicted": [
+       "TEXT"
+      ],
+      "producer": "env:bash",
+      "look_shape": []
+     },
+     {
+      "program": "npx.ps1",
+      "unpredicted": [
+       "TEXT"
+      ],
+      "producer": "env:pwsh",
+      "look_shape": []
+     }
+    ]
+   }
+  }
+ },
+ "selection": {
+  "venv": {
+   "decisions": 13,
+   "by_action": {
+    "ASK": 12,
+    "LOOK": 1
+   },
+   "memory_activated": 0,
+   "memory_right": 0,
+   "memory_wrong": 0,
+   "memory_activation_precision": null,
+   "wrong_examples": [],
+   "ask_avoided": 0.077
+  },
+  "npm-yarn": {
+   "decisions": 14,
+   "by_action": {
+    "ASK": 13,
+    "LOOK": 1
+   },
+   "memory_activated": 0,
+   "memory_right": 0,
+   "memory_wrong": 0,
+   "memory_activation_precision": null,
+   "wrong_examples": [],
+   "ask_avoided": 0.071
+  }
+ },
+ "look_discoverability": {
+  "base": {
+   "programs": 492,
+   "programs_with_any_flag_in_bytes": 392,
+   "fraction_discoverable": 0.797,
+   "look_flags": 7847,
+   "ask_flags": 4152,
+   "byte_coverage_of_ask_flags": 1.0,
+   "examples_without_flags": [
+    "animate",
+    "apt",
+    "apt-cache",
+    "apt-config",
+    "apt-get",
+    "apt-mark",
+    "bzcmp",
+    "bzexe"
+   ],
+   "ask_ms_per_program": 4.52
+  },
+  "venv": {
+   "programs": 13,
+   "programs_with_any_flag_in_bytes": 1,
+   "fraction_discoverable": 0.077,
+   "look_flags": 8,
+   "ask_flags": 170,
+   "byte_coverage_of_ask_flags": 0.047,
+   "examples_without_flags": [
+    "cffi-gen-src",
+    "ephemeral-port-reserve",
+    "hypothesis",
+    "idna",
+    "normalizer",
+    "pip",
+    "pip3",
+    "pip3.11"
+   ],
+   "ask_ms_per_program": 31.2
+  },
+  "npm-yarn": {
+   "programs": 14,
+   "programs_with_any_flag_in_bytes": 1,
+   "fraction_discoverable": 0.071,
+   "look_flags": 3,
+   "ask_flags": 78,
+   "byte_coverage_of_ask_flags": 0.038,
+   "examples_without_flags": [
+    "yarn",
+    "yarn.cmd",
+    "yarn.js",
+    "yarnpkg",
+    "yarnpkg.cmd",
+    "npm",
+    "npm-cli.js",
+    "npm-prefix.js"
+   ],
+   "ask_ms_per_program": 204.88
+  }
+ },
+ "replication_on_base": {
+  "checked": 35,
+  "accepted": 31,
+  "rejected": 3,
+  "undecidable": 1,
+  "undecidable_examples": [
+   {
+    "program": "zcat",
+    "verdict": "SKIPPED_DESTRUCTIVE_FLAGS"
+   }
+  ]
+ },
+ "content_transfer": {
+  "venv": {
+   "keys_with_a_bankable_text": 4,
+   "programs_reusing": 0,
+   "predicted_kinds_realised": 0,
+   "text_exactly_right": 0,
+   "verdict": "TEXT_DOES_NOT_TRANSFER"
+  },
+  "npm-yarn": {
+   "keys_with_a_bankable_text": 4,
+   "programs_reusing": 0,
+   "predicted_kinds_realised": 0,
+   "text_exactly_right": 0,
+   "verdict": "TEXT_DOES_NOT_TRANSFER"
+  }
+ },
+ "verdict": {
+  "S1_shapes_transfer": true,
+  "S2_both_keys_reported": true,
+  "S3_producer_key_is_sharper": true,
+  "S4_selector_never_guesses": true,
+  "S7_look_discoverability_is_measured_per_host": true,
+  "S5_structure_not_text": true,
+  "S6_zeros": {
+   "model_calls": 0,
+   "parameters_stored": 0,
+   "network_calls": 0
+  }
+ },
+ "all_criteria_met": true,
+ "seconds": 21.61
+}

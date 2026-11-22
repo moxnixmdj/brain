@@ -1,0 +1,130 @@
+{
+ "schema": "BRAIN_COST_TO_LEARN_A_HOST_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "learn_everything": {
+  "strategy": "LEARN_EVERYTHING",
+  "host": "/usr/bin",
+  "programs_on_host": 635,
+  "programs_probed": 60,
+  "typed": 26,
+  "typed_names": [
+   "addr2line",
+   "apt-key",
+   "arch",
+   "b2sum",
+   "base32",
+   "base64",
+   "basename",
+   "basenc",
+   "bunzip2",
+   "bzcat",
+   "bzegrep",
+   "bzfgrep",
+   "bzgrep",
+   "bzip2",
+   "bzless",
+   "bzmore",
+   "c++",
+   "c89",
+   "c89-gcc",
+   "c99",
+   "c99-gcc",
+   "cat",
+   "cc",
+   "choom",
+   "chrt",
+   "cksum"
+  ],
+  "failures": {
+   "NO_TRANSFORM_VERB": 34
+  },
+  "seconds": 0.206,
+  "seconds_per_program": 0.0034,
+  "extrapolated_seconds_all": 2.18
+ },
+ "goal_directed": [
+  {
+   "strategy": "GOAL_DIRECTED",
+   "host": "/usr/bin",
+   "wanted": "gzip",
+   "programs_on_host": 635,
+   "programs_considered": 1,
+   "programs_probed": 1,
+   "asked": [
+    {
+     "program": "gzip",
+     "ok": true,
+     "reason": "EOF",
+     "transform": "compress"
+    }
+   ],
+   "found": {
+    "program": "gzip",
+    "transform": "compress",
+    "description": "Compress or uncompress FILEs (by default, compress FILES in-place)."
+   },
+   "seconds": 0.0059
+  },
+  {
+   "strategy": "GOAL_DIRECTED",
+   "host": "/usr/bin",
+   "wanted": "bzip2",
+   "programs_on_host": 635,
+   "programs_considered": 2,
+   "programs_probed": 1,
+   "asked": [
+    {
+     "program": "bzip2",
+     "ok": true,
+     "reason": "EOF",
+     "transform": "compress"
+    }
+   ],
+   "found": {
+    "program": "bzip2",
+    "transform": "compress",
+    "description": "bzip2, a block-sorting file compressor.  Version 1.0.8, 13-Jul-2019."
+   },
+   "seconds": 0.0051
+  },
+  {
+   "strategy": "GOAL_DIRECTED",
+   "host": "/usr/bin",
+   "wanted": "xz",
+   "programs_on_host": 635,
+   "programs_considered": 10,
+   "programs_probed": 1,
+   "asked": [
+    {
+     "program": "unxz",
+     "ok": true,
+     "reason": "EOF",
+     "transform": "compress"
+    }
+   ],
+   "found": {
+    "program": "unxz",
+    "transform": "compress",
+    "description": "Compress or decompress FILEs in the .xz format."
+   },
+   "seconds": 0.0065
+  }
+ ],
+ "comparison": {
+  "programs_on_host": 635,
+  "learn_everything_probed": 60,
+  "learn_everything_extrapolated_seconds": 2.18,
+  "goal_directed_probed": [
+   1,
+   1,
+   1
+  ],
+  "goal_directed_seconds": [
+   0.0059,
+   0.0051,
+   0.0065
+  ],
+  "ratio_of_programs_probed": 635.0
+ },
+ "seconds": 0.223
+}

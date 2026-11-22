@@ -1,0 +1,271 @@
+{
+ "schema": "BRAIN_MODEL_CALL_SURFACE_AUDIT_RECEIPT_V1",
+ "authority": "NONE__STATIC_ONLY__NO_AUDITED_MODULE_EXECUTED",
+ "date": "2026-11-22",
+ "branch": "arena/67c67d7e-brain",
+ "repo_head_at_audit": "beef8e80051fc5007fef08311bc492952931bf57",
+ "instrument": {
+  "path": "canonical/tools/model_call_surface_audit_v1.py",
+  "git_blob_sha": "e3ce3fd122992d4cf733c54cf0de5b7b30653577",
+  "tests": "canonical/tests/test_model_call_surface_audit_v1.py",
+  "tests_passed": 8,
+  "method": "ast only; no audited module imported or executed",
+  "tests_git_blob_sha": "2f4eb28dda89bee97cd35cc474d9f998771353c4",
+  "audited_after_main_merge": true
+ },
+ "question": "Which files can reach a model-inference endpoint from a named entry module, statically or through the tree's own dynamic loaders?",
+ "counts": {
+  "tracked_python_files": 6048,
+  "files_with_inference_endpoint_literal": 23,
+  "files_with_model_artifact_host": 14,
+  "files_with_any_endpoint_literal": 35
+ },
+ "default_entry_closures": {
+  "ASTRA_GOAL_RUNTIME": {
+   "entry": "canonical/runtime/astra_runtime.py",
+   "static_closure_size": 709,
+   "dynamic_closure_size": 716,
+   "combined_inference_endpoint_files": [
+    "canonical/runtime/astra_runtime.py"
+   ],
+   "combined_model_artifact_files": [],
+   "dynamic_targets": [
+    "canonical/runtime/auto_capability_acquisition.py",
+    "canonical/runtime/auto_python_source_codec_acquisition.py",
+    "canonical/runtime/bound_capabilities/broad_objective_decompose.py",
+    "canonical/runtime/bound_capabilities/concrete_execution_oracle.py",
+    "canonical/runtime/bound_capabilities/docx_verify_ooxml.py",
+    "canonical/runtime/bound_capabilities/generic_evidence_claim_relation.py",
+    "canonical/runtime/bound_capabilities/objective_claim_operand_binding.py",
+    "canonical/runtime/bound_capabilities/python_source_symbol_index.py",
+    "canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py",
+    "canonical/runtime/bound_capabilities/research_query_focus.py",
+    "canonical/runtime/capability_discovery.py",
+    "canonical/runtime/capability_planner.py",
+    "canonical/runtime/capability_proposal_generators.py",
+    "canonical/runtime/certificate_gated_selected_route_router_v1.py",
+    "canonical/runtime/composition_state_capsule_guard_v2.py",
+    "canonical/runtime/composition_state_capsule_v2.py",
+    "canonical/runtime/continuous_obs_runtime.py",
+    "canonical/runtime/goal_compiler.py",
+    "canonical/runtime/honesty_load_bearing_result_gate_v1.py",
+    "canonical/runtime/npm_package_utils.py",
+    "canonical/runtime/osworld_v21_browser_cdp_v1.py",
+    "canonical/runtime/promote_pending_binding.py",
+    "canonical/runtime/root3_typed_durable_admin_write_v1.py",
+    "canonical/runtime/semantic_authorities.py"
+   ],
+   "dynamic_targets_missing": [
+    "canonical/runtime/.py",
+    "canonical/runtime/cli_command.py",
+    "canonical/runtime/grounded_executable_composition.py",
+    "canonical/runtime/grounded_executable_composition_verify.py",
+    "canonical/runtime/objective_relevance_bm25.py",
+    "canonical/runtime/open_research_source_frontend.py",
+    "canonical/runtime/plain_goal_bound_grounding.py"
+   ]
+  },
+  "OSWORLD_V21_V19_SUBJECT": {
+   "entry": "canonical/runtime/osworld_v21_brain_subject_v19.py",
+   "static_closure_size": 50,
+   "dynamic_closure_size": 1,
+   "combined_inference_endpoint_files": [],
+   "combined_model_artifact_files": [],
+   "dynamic_targets": [],
+   "dynamic_targets_missing": []
+  },
+  "OSWORLD_V21_V3_SUBMISSION_ENTRYPOINT": {
+   "entry": "canonical/runtime/osworld_v21_submission_entrypoint_v3.py",
+   "static_closure_size": 24,
+   "dynamic_closure_size": 1,
+   "combined_inference_endpoint_files": [],
+   "combined_model_artifact_files": [],
+   "dynamic_targets": [],
+   "dynamic_targets_missing": []
+  },
+  "RESEARCH_SOURCE_FRONTEND": {
+   "entry": "canonical/runtime/bound_capabilities/open_research_source_frontend.py",
+   "static_closure_size": 1,
+   "dynamic_closure_size": 1,
+   "combined_inference_endpoint_files": [],
+   "combined_model_artifact_files": [],
+   "dynamic_targets": [],
+   "dynamic_targets_missing": [
+    "canonical/runtime/bound_capabilities/.py"
+   ]
+  },
+  "ENVIRONMENT_BROKER": {
+   "entry": "canonical/swe_kernel/the_environment_broker_v1.py",
+   "static_closure_size": 1,
+   "dynamic_closure_size": 1,
+   "combined_inference_endpoint_files": [],
+   "combined_model_artifact_files": [],
+   "dynamic_targets": [],
+   "dynamic_targets_missing": []
+  },
+  "SCAN_RETRIEVE_FETCH": {
+   "entry": "canonical/tools/scan_retrieve_fetch_v1.py",
+   "static_closure_size": 1,
+   "dynamic_closure_size": 1,
+   "combined_inference_endpoint_files": [],
+   "combined_model_artifact_files": [],
+   "dynamic_targets": [],
+   "dynamic_targets_missing": []
+  }
+ },
+ "additional_entry_closures": {
+  "SKY_IMPACT_EXECUTOR": {
+   "entry": "canonical/runtime/one_shot_sky_impact_executor_v1.py",
+   "static_closure_size": 792,
+   "dynamic_closure_size": 1,
+   "combined_inference_endpoint_files": [
+    "canonical/runtime/astra_runtime.py"
+   ],
+   "combined_model_artifact_files": [],
+   "dynamic_targets": [],
+   "dynamic_targets_missing": []
+  },
+  "OSWORLD_V21_ENTRYPOINT_V1": {
+   "entry": "canonical/runtime/osworld_v21_submission_entrypoint_v1.py",
+   "static_closure_size": 13,
+   "dynamic_closure_size": 1,
+   "combined_inference_endpoint_files": [],
+   "combined_model_artifact_files": [],
+   "dynamic_targets": [],
+   "dynamic_targets_missing": []
+  },
+  "ASRA_MEDIATED": {
+   "entry": "canonical/runtime/astra_mediated_runtime_v1.py",
+   "static_closure_size": 2,
+   "dynamic_closure_size": 1,
+   "combined_inference_endpoint_files": [],
+   "combined_model_artifact_files": [],
+   "dynamic_targets": [],
+   "dynamic_targets_missing": []
+  },
+  "ROOT3_LAUNCHER": {
+   "entry": "canonical/runtime/root3_production_astra_launcher_v1.py",
+   "static_closure_size": 16,
+   "dynamic_closure_size": 1,
+   "combined_inference_endpoint_files": [],
+   "combined_model_artifact_files": [],
+   "dynamic_targets": [],
+   "dynamic_targets_missing": []
+  }
+ },
+ "inference_endpoint_files_all": [
+  "canonical/capabilities/internalized/professional_work/stirrup_247f24d/src/stirrup/clients/chat_completions_client.py",
+  "canonical/capabilities/internalized/professional_work/stirrup_247f24d/src/stirrup/clients/open_responses_client.py",
+  "canonical/capabilities/internalized/professional_work/stirrup_247f24d/src/stirrup/integrations/slack/__init__.py",
+  "canonical/capabilities/internalized/professional_work/stirrup_247f24d/src/stirrup/integrations/slack/__main__.py",
+  "canonical/capabilities/internalized/professional_work/stirrup_247f24d/src/stirrup/integrations/slack/slack.py",
+  "canonical/capabilities/internalized/software_engineering/mini_swe_agent_2_4_6/vendored/src/minisweagent/models/openrouter_model.py",
+  "canonical/capabilities/internalized/software_engineering/mini_swe_agent_2_4_6/vendored/src/minisweagent/models/openrouter_response_model.py",
+  "canonical/capabilities/internalized/software_engineering/mini_swe_agent_2_4_6/vendored/src/minisweagent/models/requesty_model.py",
+  "canonical/runtime/astra_runtime.py",
+  "canonical/runtime/cognitive_decision_kernel.py",
+  "canonical/runtime/harbor_science_planner_v1.py",
+  "canonical/runtime/harbor_science_planner_v5.py",
+  "canonical/runtime/harbor_science_planner_v6.py",
+  "canonical/runtime/harbor_science_planner_v7.py",
+  "canonical/runtime/judge_v1.py",
+  "canonical/runtime/pointwise_jev_probe.py",
+  "canonical/runtime/root1_contrastive_semantic_candidate_runner_v1.py",
+  "canonical/tests/test_harbor_science_planner_v1.py",
+  "canonical/tests/test_model_call_surface_audit_v1.py",
+  "canonical/tests/test_root1_contrastive_semantic_candidate_runner_v1.py",
+  "canonical/tests/test_tb_science_zero_exposure_multi_action_preflight_v1.py",
+  "canonical/tests/test_tb_science_zero_exposure_transport_preflight_v1.py",
+  "canonical/tools/model_call_surface_audit_v1.py"
+ ],
+ "model_artifact_files_all": [
+  "canonical/runtime/gdpval_public_220_imperative_directive_audit_v1.py",
+  "canonical/runtime/gdpval_public_220_list_continuation_replay_v2.py",
+  "canonical/runtime/gdpval_semantic_complement_localizer_v2.py",
+  "canonical/runtime/public_source_federation_v1.py",
+  "canonical/runtime/retrieval_live_provider_arena_v1.py",
+  "canonical/runtime/retrieval_live_provider_arena_v13.py",
+  "canonical/runtime/retrieval_live_provider_arena_v2.py",
+  "canonical/runtime/smaug_mini_delta_header_probe_v1.py",
+  "canonical/tests/test_model_call_surface_audit_v1.py",
+  "canonical/tests/test_retrieval_live_provider_arena_v1.py",
+  "canonical/tests/test_retrieval_live_provider_arena_v2.py",
+  "canonical/tests/test_retrieval_v3_adaptive_federation.py",
+  "canonical/tests/test_root2_hle_opus55_tool_adapter_v1.py",
+  "canonical/tools/model_call_surface_audit_v1.py"
+ ],
+ "planner_switch_census": {
+  "missions_total": 321,
+  "planner_flag_true": 0,
+  "planner_flag_explicit_false": 4,
+  "planner_flag_absent_meaning_false": 317,
+  "missions_with_planner_flag_true": [],
+  "guard_mentions_of_planner_switch_or_MODEL_ASSISTED": [
+   {
+    "path": "canonical/runtime/enforce_goal_hierarchy.py",
+    "mentions": []
+   },
+   {
+    "path": "execution_guard/enforce_load_bearing_primary_pr.py",
+    "mentions": []
+   },
+   {
+    "path": "execution_guard/load_bearing_primary_admission.py",
+    "mentions": []
+   }
+  ],
+  "workflow_mentions": [],
+  "truth": "The switch is a per-step key read at run time. No committed mission sets it true. No guard rejects it. The zero-model boundary of the default route is therefore a property of the committed missions, not an enforced property of the runtime."
+ },
+ "findings": [
+  "A model-inference endpoint is reachable from exactly one file inside those entry closures: astra_runtime.py itself (https://text.pollinations.ai/ used as fallback, and as the labelled planner_source). Its path is gated by allow_optional_model_planner and by ASTRA_DISABLE_MODEL_PLANNER, and it labels its own output MODEL_ASSISTED.",
+  "The V19 OSWorld subject and the V3 submission entrypoint reach no inference endpoint: 50 and 24 modules, zero endpoint files. The same holds for the research source frontend, the environment broker, and the scan/retrieve/fetch tool.",
+  "The selected OSWorld route (V19) is not what the committed submission entrypoints import: v1 imports subject v1 and v3 imports subject v3. No entrypoint imports v19. A benchmark claim naming V19 would not be the route the submitted entrypoint runs.",
+  "osworld_v21_brain_subject_v19.py does not import in this sandbox: canonical/runtime/osworld_v21_visual_region_grounding_v1.py raises ModuleNotFoundError: No module named PIL. Static reachability is not importability.",
+  "The vendored model clients (stirrup openrouter/slack, minisweagent openrouter/requesty) are unreachable from every audited entry; they are evaluator-side trees, not runtime.",
+  "Two files match their own classifier on purpose: the audit and its test spell endpoint patterns out as literals. They are reported in instrument_self_matches, not skipped, and the test asserts that no other file is exempted.",
+  "After merging current main (5 commits, 6048 tracked Python files), the counts moved by 2 (both self-matches) and no entry closure gained an endpoint. The AUDIT, not the code, changed the number."
+ ],
+ "not_established": [
+  "That any route makes zero model calls at run time. This audit reads source text; it does not observe a process, an environment, or a network.",
+  "That the model fallback is unreachable in practice. A mission that sets the flag, or a caller that passes a different step, is not rejected by any guard.",
+  "That a URL built at run time could not name an endpoint: specifically invisible here."
+ ],
+ "observed_defects_not_fixed": [
+  {
+   "path": "canonical/tests/test_open_web_source_candidate_discovery.py",
+   "test": "test_query_is_objective_not_invented_recipe",
+   "why": "Asserts the query equals the raw objective, but research_query_focus deliberately strips framing (\"Assess whether ...\"). Fails at base commit too; the test is stale, not the code.",
+   "fails_at_base": true
+  },
+  {
+   "path": "canonical/tests/test_open_research_source_frontend.py",
+   "test": "test_verified_bounded_relevance_advances_only_to_extraction",
+   "why": "The fake loader map has no 'objective_relevance_bm25' entry, but the frontend loads it. KeyError. Fails at base commit too.",
+   "fails_at_base": true
+  },
+  {
+   "path": "canonical/tests/test_open_research_source_frontend.py and test_open_web_source_candidate_discovery.py",
+   "test": "three live-network tests",
+   "why": "Require live search backends; in this sandbox all three return TLS/SSL EOF. Environment-dependent by construction.",
+   "fails_at_base": true
+  },
+  {
+   "path": "intake/THE_WORLD_IS_A_GUIDE_BUT_THE_GUIDE_IS_NOT_THE_WORLD_20261122_V1.md",
+   "issue": "Cites canonical/verification/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json, a filename dated seven days after the report. The artifact and its .md both exist; the date in the name cannot be a measurement date.",
+   "fails_at_base": false
+  }
+ ],
+ "limits": [
+  "STATIC_ONLY: a URL assembled from parts, read from an environment variable, or passed in by a caller is invisible to this audit.",
+  "IMPORT_OVER_APPROXIMATION: an import in a branch that never executes still counts.",
+  "NO_EXECUTION: nothing audited here ran, so no route is shown to work or to fail.",
+  "ENTRY_SCOPED: absence of an endpoint in one entry closure says nothing about another route, a notebook, a workflow, or a vendored tree loaded by an evaluator.",
+  "SELF_REFERENCE: this audit names endpoint patterns in its own source, so it appears in its own findings. Those matches are the classifier's regex text, never a request; instrument_self_matches names the files that do this instead of skipping them, and every other match is a file that could call."
+ ],
+ "next_required": "A run-time observer, not a source audit: record every outbound model request during one unbounded mission, or enforce the boundary (reject allow_optional_model_planner in the guard) so that a mission cannot enable it.",
+ "instrument_self_matches": [
+  "canonical/tests/test_model_call_surface_audit_v1.py",
+  "canonical/tools/model_call_surface_audit_v1.py"
+ ]
+}

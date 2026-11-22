@@ -1,0 +1,1113 @@
+{
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "blocked_sites": 59,
+ "conversion_rate": 0.678,
+ "converted": [
+  {
+   "blocked_names": [
+    "executable"
+   ],
+   "blocked_positions": [
+    0
+   ],
+   "callee": "_is_linux_armhf",
+   "file": "src/packaging/_manylinux.py",
+   "line": 55,
+   "witnessed": [
+    {
+     "count": 6,
+     "param": "executable",
+     "position": 0,
+     "type": "str",
+     "values": [
+      "/tmp/brainvenv/bin/python",
+      "/tmp/repos/pypa_packaging@24.0/tests/manylinux/hello-world-a"
+     ]
+    }
+   ]
+  },
+  {
+   "blocked_names": [
+    "executable"
+   ],
+   "blocked_positions": [
+    0
+   ],
+   "callee": "_is_linux_i686",
+   "file": "src/packaging/_manylinux.py",
+   "line": 57,
+   "witnessed": [
+    {
+     "count": 4,
+     "param": "executable",
+     "position": 0,
+     "type": "str",
+     "values": [
+      "/tmp/brainvenv/bin/python",
+      "/tmp/repos/pypa_packaging@24.0/tests/manylinux/hello-world-x"
+     ]
+    }
+   ]
+  },
+  {
+   "blocked_names": [
+    "version_str"
+   ],
+   "blocked_positions": [
+    0
+   ],
+   "callee": "_parse_glibc_version",
+   "file": "src/packaging/_manylinux.py",
+   "line": 175,
+   "witnessed": [
+    {
+     "count": 16,
+     "param": "version_str",
+     "position": 0,
+     "type": "str",
+     "values": [
+      "glibc-2.4.5",
+      "2",
+      "2.36",
+      "2.4"
+     ]
+    }
+   ]
+  },
+  {
+   "blocked_names": [
+    "tokenizer"
+   ],
+   "blocked_positions": [
+    0
+   ],
+   "callee": "_parse_extras",
+   "file": "src/packaging/_parser.py",
+   "line": 79,
+   "witnessed": [
+    {
+     "count": 5305,
+     "param": "tokenizer",
+     "position": 0,
+     "type": "Tokenizer",
+     "values": []
+    }
+   ]
+  },
+  {
+   "blocked_names": [
+    "tokenizer"
+   ],
+   "blocked_positions": [
+    0
+   ],
+   "callee": "_parse_requirement_details",
+   "file": "src/packaging/_parser.py",
+   "line": 82,
+   "witnessed": [
+    {
+     "count": 5301,
+     "param": "tokenizer",
+     "position": 0,
+     "type": "Tokenizer",
+     "values": []
+    }
+   ]
+  },
+  {
+   "blocked_names": [
+    "tokenizer"
+   ],
+   "blocked_positions": [
+    0
+   ],
+   "callee": "_parse_specifier",
+   "file": "src/packaging/_parser.py",
+   "line": 120,
+   "witnessed": [
+    {
+     "count": 2690,
+     "param": "tokenizer",
+     "position": 0,
+     "type": "Tokenizer",
+     "values": []
+    }
+   ]
+  },
+  {
+   "blocked_names": [
+    "tokenizer"
+   ],
+   "blocked_positions": [
+    0
+   ],
+   "callee": "_parse_marker",
+   "file": "src/packaging/_parser.py",
+   "line": 153,
+   "witnessed": [
+    {
+     "count": 15307,
+     "param": "tokenizer",
+     "position": 0,
+     "type": "Tokenizer",
+     "values": []
+    }
+   ]
+  },
+  {
+   "blocked_names": [
+    "tokenizer"
+   ],
+   "blocked_positions": [
+    0
+   ],
+   "callee": "_parse_extras_list",
+   "file": "src/packaging/_parser.py",
+   "line": 172,
+   "witnessed": [
+    {
+     "count": 3934,
+     "param": "tokenizer",
+     "position": 0,
+     "type": "Tokenizer",
+     "values": []
+    }
+   ]
+  },
+  {
+   "blocked_names": [
+    "tokenizer"
+   ],
+   "blocked_positions": [
+    0
+   ],
+   "callee": "_parse_version_many",
+   "file": "src/packaging/_parser.py",
+   "line": 216,
+   "witnessed": [
+    {
+     "count": 2690,
+     "param": "tokenizer",
+     "position": 0,
+     "type": "Tokenizer",
+     "values": []
+    }
+   ]
+  },
+  {
+   "blocked_names": [
+    "tokenizer"
+   ],
+   "blocked_positions": [
+    0
+   ],
+   "callee": "_parse_marker",
+   "file": "src/packaging/_parser.py",
+   "line": 259,
+   "witnessed": [
+    {
+     "count": 15307,
+     "param": "tokenizer",
+     "position": 0,
+     "type": "Tokenizer",
+     "values": []
+    }
+   ]
+  },
+  {
+   "blocked_names": [
+    "tokenizer"
+   ],
+   "blocked_positions": [
+    0
+   ],
+   "callee": "_parse_marker_atom",
+   "file": "src/packaging/_parser.py",
+   "line": 268,
+   "witnessed": [
+    {
+     "count": 23151,
+     "param": "tokenizer",
+     "position": 0,
+     "type": "Tokenizer",
+     "values": []
+    }
+   ]
+  },
+  {
+   "blocked_names": [
+    "tokenizer"
+   ],
+   "blocked_positions": [
+    0
+   ],
+   "callee": "_parse_marker_atom",
+   "file": "src/packaging/_parser.py",
+   "line": 271,
+   "witnessed": [
+    {
+     "count": 23151,
+     "param": "tokenizer",
+     "position": 0,
+     "type": "Tokenizer",
+     "values": []
+    }
+   ]
+  },
+  {
+   "blocked_names": [
+    "tokenizer"
+   ],
+   "blocked_positions": [
+    0
+   ],
+   "callee": "_parse_marker_item",
+   "file": "src/packaging/_parser.py",
+   "line": 293,
+   "witnessed": [
+    {
+     "count": 17941,
+     "param": "tokenizer",
+     "position": 0,
+     "type": "Tokenizer",
+     "values": []
+    }
+   ]
+  },
+  {
+   "blocked_names": [
+    "tokenizer"
+   ],
+   "blocked_positions": [
+    0
+   ],
+   "callee": "_parse_marker",
+   "file": "src/packaging/_parser.py",
+   "line": 290,
+   "witnessed": [
+    {
+     "count": 15307,
+     "param": "tokenizer",
+     "position": 0,
+     "type": "Tokenizer",
+     "values": []
+    }
+   ]
+  },
+  {
+   "blocked_names": [
+    "tokenizer"
+   ],
+   "blocked_positions": [
+    0
+   ],
+   "callee": "_parse_marker_var",
+   "file": "src/packaging/_parser.py",
+   "line": 303,
+   "witnessed": [
+    {
+     "count": 35874,
+     "param": "tokenizer",
+     "position": 0,
+     "type": "Tokenizer",
+     "values": []
+    }
+   ]
+  },
+  {
+   "blocked_names": [
+    "tokenizer"
+   ],
+   "blocked_positions": [
+    0
+   ],
+   "callee": "_parse_marker_op",
+   "file": "src/packaging/_parser.py",
+   "line": 305,
+   "witnessed": [
+    {
+     "count": 17939,
+     "param": "tokenizer",
+     "position": 0,
+     "type": "Tokenizer",
+     "values": []
+    }
+   ]
+  },
+  {
+   "blocked_names": [
+    "tokenizer"
+   ],
+   "blocked_positions": [
+    0
+   ],
+   "callee": "_parse_marker_var",
+   "file": "src/packaging/_parser.py",
+   "line": 307,
+   "witnessed": [
+    {
+     "count": 35874,
+     "param": "tokenizer",
+     "position": 0,
+     "type": "Tokenizer",
+     "values": []
+    }
+   ]
+  },
+  {
+   "blocked_names": [
+    "marker",
+    "environment"
+   ],
+   "blocked_positions": [
+    0,
+    1
+   ],
+   "callee": "_evaluate_markers",
+   "file": "src/packaging/markers.py",
+   "line": 144,
+   "witnessed": [
+    {
+     "count": 31,
+     "param": "markers",
+     "position": 0,
+     "type": "list",
+     "values": []
+    },
+    {
+     "count": 31,
+     "param": "environment",
+     "position": 1,
+     "type": "dict",
+     "values": []
+    }
+   ]
+  },
+  {
+   "blocked_names": [
+    "lhs_value",
+    "op",
+    "rhs_value"
+   ],
+   "blocked_positions": [
+    0,
+    1,
+    2
+   ],
+   "callee": "_eval_op",
+   "file": "src/packaging/markers.py",
+   "line": 158,
+   "witnessed": [
+    {
+     "count": 36,
+     "param": "lhs",
+     "position": 0,
+     "type": "str",
+     "values": [
+      "2.7.9",
+      "b",
+      "2.7.0",
+      "3.11.0a5"
+     ]
+    },
+    {
+     "count": 36,
+     "param": "op",
+     "position": 1,
+     "type": "Op",
+     "values": []
+    },
+    {
+     "count": 36,
+     "param": "rhs",
+     "position": 2,
+     "type": "str",
+     "values": [
+      "2.7.10",
+      "a",
+      "posix",
+      "3.6.2"
+     ]
+    }
+   ]
+  },
+  {
+   "blocked_names": [
+    "spec"
+   ],
+   "blocked_positions": [
+    0
+   ],
+   "callee": "_version_split",
+   "file": "src/packaging/specifiers.py",
+   "line": 377,
+   "witnessed": [
+    {
+     "count": 512,
+     "param": "version",
+     "position": 0,
+     "type": "str",
+     "values": [
+      "2.7.0",
+      "2.7",
+      "2.7.6",
+      "2.7.4"
+     ]
+    }
+   ]
+  },
+  {
+   "blocked_names": [
+    "normalized_spec"
+   ],
+   "blocked_positions": [
+    0
+   ],
+   "callee": "_version_split",
+   "file": "src/packaging/specifiers.py",
+   "line": 399,
+   "witnessed": [
+    {
+     "count": 512,
+     "param": "version",
+     "position": 0,
+     "type": "str",
+     "values": [
+      "2.7.0",
+      "2.7",
+      "2.7.6",
+      "2.7.4"
+     ]
+    }
+   ]
+  },
+  {
+   "blocked_names": [
+    "normalized_prospective"
+   ],
+   "blocked_positions": [
+    0
+   ],
+   "callee": "_version_split",
+   "file": "src/packaging/specifiers.py",
+   "line": 404,
+   "witnessed": [
+    {
+     "count": 512,
+     "param": "version",
+     "position": 0,
+     "type": "str",
+     "values": [
+      "2.7.0",
+      "2.7",
+      "2.7.6",
+      "2.7.4"
+     ]
+    }
+   ]
+  },
+  {
+   "blocked_names": [
+    "split_prospective",
+    "split_spec"
+   ],
+   "blocked_positions": [
+    0,
+    1
+   ],
+   "callee": "_pad_version",
+   "file": "src/packaging/specifiers.py",
+   "line": 408,
+   "witnessed": [
+    {
+     "count": 227,
+     "param": "left",
+     "position": 0,
+     "type": "list",
+     "values": []
+    },
+    {
+     "count": 227,
+     "param": "right",
+     "position": 1,
+     "type": "list",
+     "values": []
+    }
+   ]
+  },
+  {
+   "blocked_names": [
+    "warn"
+   ],
+   "blocked_positions": [
+    1
+   ],
+   "callee": "_get_config_var",
+   "file": "src/packaging/tags.py",
+   "line": 159,
+   "witnessed": [
+    {
+     "count": 69,
+     "param": "warn",
+     "position": 1,
+     "type": "bool",
+     "values": [
+      false,
+      true
+     ]
+    }
+   ]
+  },
+  {
+   "blocked_names": [
+    "warn"
+   ],
+   "blocked_positions": [
+    1
+   ],
+   "callee": "_get_config_var",
+   "file": "src/packaging/tags.py",
+   "line": 167,
+   "witnessed": [
+    {
+     "count": 69,
+     "param": "warn",
+     "position": 1,
+     "type": "bool",
+     "values": [
+      false,
+      true
+     ]
+    }
+   ]
+  },
+  {
+   "blocked_names": [
+    "warn"
+   ],
+   "blocked_positions": [
+    1
+   ],
+   "callee": "_get_config_var",
+   "file": "src/packaging/tags.py",
+   "line": 170,
+   "witnessed": [
+    {
+     "count": 69,
+     "param": "warn",
+     "position": 1,
+     "type": "bool",
+     "values": [
+      false,
+      true
+     ]
+    }
+   ]
+  },
+  {
+   "blocked_names": [
+    "warn"
+   ],
+   "blocked_positions": [
+    1
+   ],
+   "callee": "_get_config_var",
+   "file": "src/packaging/tags.py",
+   "line": 174,
+   "witnessed": [
+    {
+     "count": 69,
+     "param": "warn",
+     "position": 1,
+     "type": "bool",
+     "values": [
+      false,
+      true
+     ]
+    }
+   ]
+  },
+  {
+   "blocked_names": [
+    "abis"
+   ],
+   "blocked_positions": [
+    0
+   ],
+   "callee": "_is_threaded_cpython",
+   "file": "src/packaging/tags.py",
+   "line": 232,
+   "witnessed": [
+    {
+     "count": 23,
+     "param": "abis",
+     "position": 0,
+     "type": "list",
+     "values": []
+    }
+   ]
+  },
+  {
+   "blocked_names": [
+    "python_version",
+    "threading"
+   ],
+   "blocked_positions": [
+    0,
+    1
+   ],
+   "callee": "_abi3_applies",
+   "file": "src/packaging/tags.py",
+   "line": 233,
+   "witnessed": [
+    {
+     "count": 23,
+     "param": "python_version",
+     "position": 0,
+     "type": "tuple",
+     "values": []
+    },
+    {
+     "count": 23,
+     "param": "threading",
+     "position": 1,
+     "type": "bool",
+     "values": [
+      false,
+      true
+     ]
+    }
+   ]
+  },
+  {
+   "blocked_names": [
+    "python_version",
+    "warn"
+   ],
+   "blocked_positions": [
+    0,
+    1
+   ],
+   "callee": "_cpython_abis",
+   "file": "src/packaging/tags.py",
+   "line": 216,
+   "witnessed": [
+    {
+     "count": 28,
+     "param": "py_version",
+     "position": 0,
+     "type": "tuple",
+     "values": []
+    },
+    {
+     "count": 28,
+     "param": "warn",
+     "position": 1,
+     "type": "bool",
+     "values": [
+      false
+     ]
+    }
+   ]
+  },
+  {
+   "blocked_names": [
+    "abi"
+   ],
+   "blocked_positions": [
+    0
+   ],
+   "callee": "_normalize_string",
+   "file": "src/packaging/tags.py",
+   "line": 285,
+   "witnessed": [
+    {
+     "count": 56,
+     "param": "string",
+     "position": 0,
+     "type": "str",
+     "values": [
+      "linux-x86_64",
+      "linux-aarch64",
+      "linux_x86_64",
+      "linux_armv7l"
+     ]
+    }
+   ]
+  },
+  {
+   "blocked_names": [
+    "python_version"
+   ],
+   "blocked_positions": [
+    0
+   ],
+   "callee": "_py_interpreter_range",
+   "file": "src/packaging/tags.py",
+   "line": 350,
+   "witnessed": [
+    {
+     "count": 236,
+     "param": "py_version",
+     "position": 0,
+     "type": "tuple",
+     "values": []
+    }
+   ]
+  },
+  {
+   "blocked_names": [
+    "python_version"
+   ],
+   "blocked_positions": [
+    0
+   ],
+   "callee": "_py_interpreter_range",
+   "file": "src/packaging/tags.py",
+   "line": 355,
+   "witnessed": [
+    {
+     "count": 236,
+     "param": "py_version",
+     "position": 0,
+     "type": "tuple",
+     "values": []
+    }
+   ]
+  },
+  {
+   "blocked_names": [
+    "cpu_arch"
+   ],
+   "blocked_positions": [
+    0
+   ],
+   "callee": "_mac_arch",
+   "file": "src/packaging/tags.py",
+   "line": 434,
+   "witnessed": [
+    {
+     "count": 6,
+     "param": "arch",
+     "position": 0,
+     "type": "str",
+     "values": [
+      "i386",
+      "ppc",
+      "x86_64",
+      "ppc64"
+     ]
+    }
+   ]
+  },
+  {
+   "blocked_names": [
+    "compat_version",
+    "arch"
+   ],
+   "blocked_positions": [
+    0,
+    1
+   ],
+   "callee": "_mac_binary_formats",
+   "file": "src/packaging/tags.py",
+   "line": 443,
+   "witnessed": [
+    {
+     "count": 160,
+     "param": "version",
+     "position": 0,
+     "type": "tuple",
+     "values": []
+    },
+    {
+     "count": 160,
+     "param": "cpu_arch",
+     "position": 1,
+     "type": "str",
+     "values": [
+      "x86_64",
+      "i386",
+      "intel",
+      "ppc64"
+     ]
+    }
+   ]
+  },
+  {
+   "blocked_names": [
+    "compat_version",
+    "arch"
+   ],
+   "blocked_positions": [
+    0,
+    1
+   ],
+   "callee": "_mac_binary_formats",
+   "file": "src/packaging/tags.py",
+   "line": 454,
+   "witnessed": [
+    {
+     "count": 160,
+     "param": "version",
+     "position": 0,
+     "type": "tuple",
+     "values": []
+    },
+    {
+     "count": 160,
+     "param": "cpu_arch",
+     "position": 1,
+     "type": "str",
+     "values": [
+      "x86_64",
+      "i386",
+      "intel",
+      "ppc64"
+     ]
+    }
+   ]
+  },
+  {
+   "blocked_names": [
+    "compat_version",
+    "arch"
+   ],
+   "blocked_positions": [
+    0,
+    1
+   ],
+   "callee": "_mac_binary_formats",
+   "file": "src/packaging/tags.py",
+   "line": 471,
+   "witnessed": [
+    {
+     "count": 160,
+     "param": "version",
+     "position": 0,
+     "type": "tuple",
+     "values": []
+    },
+    {
+     "count": 160,
+     "param": "cpu_arch",
+     "position": 1,
+     "type": "str",
+     "values": [
+      "x86_64",
+      "i386",
+      "intel",
+      "ppc64"
+     ]
+    }
+   ]
+  },
+  {
+   "blocked_names": [
+    "name_part"
+   ],
+   "blocked_positions": [
+    0
+   ],
+   "callee": "canonicalize_name",
+   "file": "src/packaging/utils.py",
+   "line": 123,
+   "witnessed": [
+    {
+     "count": 244,
+     "param": "name",
+     "position": 0,
+     "type": "str",
+     "values": [
+      "1.0",
+      "5.6a0",
+      "dog",
+      "freebsd"
+     ]
+    }
+   ]
+  },
+  {
+   "blocked_names": [
+    "name_part"
+   ],
+   "blocked_positions": [
+    0
+   ],
+   "callee": "canonicalize_name",
+   "file": "src/packaging/utils.py",
+   "line": 163,
+   "witnessed": [
+    {
+     "count": 244,
+     "param": "name",
+     "position": 0,
+     "type": "str",
+     "values": [
+      "1.0",
+      "5.6a0",
+      "dog",
+      "freebsd"
+     ]
+    }
+   ]
+  },
+  {
+   "blocked_names": [
+    "name"
+   ],
+   "blocked_positions": [
+    0
+   ],
+   "callee": "mock_interpreter_name",
+   "file": "tests/test_tags.py",
+   "line": 1173,
+   "witnessed": [
+    {
+     "count": 8,
+     "param": "monkeypatch",
+     "position": 0,
+     "type": "MonkeyPatch",
+     "values": []
+    }
+   ]
+  }
+ ],
+ "converted_sites": 40,
+ "distinct_blocked_callees": 36,
+ "interpreter": "/tmp/brainvenv/bin/python",
+ "pytest": "26852 passed, 6 warnings in 36.96s",
+ "schema": "BRAIN_A_NAME_GETS_ITS_VALUE_FROM_THE_RUN_V1",
+ "target_pairs_witnessed": 44,
+ "target_witness_sample": [
+  {
+   "key": "_is_compatible|0",
+   "param": "arch",
+   "types": {
+    "str": 362
+   },
+   "values": {
+    "str": [
+     "x86_64",
+     "any",
+     "i686",
+     "ppc64"
+    ]
+   }
+  },
+  {
+   "key": "_is_compatible|1",
+   "param": "version",
+   "types": {
+    "_GLibCVersion": 347,
+    "tuple": 15
+   },
+   "values": {}
+  },
+  {
+   "key": "_parse_glibc_version|0",
+   "param": "version_str",
+   "types": {
+    "str": 16
+   },
+   "values": {
+    "str": [
+     "glibc-2.4.5",
+     "2",
+     "2.36",
+     "2.4"
+    ]
+   }
+  },
+  {
+   "key": "_parse_elf|0",
+   "param": "path",
+   "types": {
+    "none": 2,
+    "str": 28
+   },
+   "values": {
+    "str": [
+     "/tmp/repos/pypa_packaging@24.0/tests/manylinux/hello-world-i",
+     "/tmp/repos/pypa_packaging@24.0/tests/manylinux/hello-world-t",
+     "/tmp/brainvenv/bin/python",
+     "/tmp/repos/pypa_packaging@24.0/tests/manylinux/hello-world-a"
+    ]
+   }
+  },
+  {
+   "key": "_parse_marker|0",
+   "param": "tokenizer",
+   "types": {
+    "Tokenizer": 15307
+   },
+   "values": {}
+  },
+  {
+   "key": "_parse_marker_atom|0",
+   "param": "tokenizer",
+   "types": {
+    "Tokenizer": 23151
+   },
+   "values": {}
+  },
+  {
+   "key": "_parse_marker_item|0",
+   "param": "tokenizer",
+   "types": {
+    "Tokenizer": 17941
+   },
+   "values": {}
+  },
+  {
+   "key": "_parse_marker_var|0",
+   "param": "tokenizer",
+   "types": {
+    "Tokenizer": 35874
+   },
+   "values": {}
+  },
+  {
+   "key": "_parse_marker_op|0",
+   "param": "tokenizer",
+   "types": {
+    "Tokenizer": 17939
+   },
+   "values": {}
+  },
+  {
+   "key": "_evaluate_markers|0",
+   "param": "markers",
+   "types": {
+    "list": 31
+   },
+   "values": {}
+  },
+  {
+   "key": "_evaluate_markers|1",
+   "param": "environment",
+   "types": {
+    "dict": 31
+   },
+   "values": {}
+  },
+  {
+   "key": "_eval_op|0",
+   "param": "lhs",
+   "types": {
+    "str": 36
+   },
+   "values": {
+    "str": [
+     "2.7.9",
+     "b",
+     "2.7.0",
+     "3.11.0a5"
+    ]
+   }
+  }
+ ],
+ "tree": "/tmp/repos/pypa_packaging@24.0",
+ "witness_reason": "OK",
+ "witnessed_pairs": 44
+}

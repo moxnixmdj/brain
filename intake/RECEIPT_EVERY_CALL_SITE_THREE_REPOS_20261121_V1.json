@@ -1,0 +1,44 @@
+{
+ "pypa/packaging": {
+  "sites": 127,
+  "usable": 0.1732,
+  "counts": {
+   "REFUSED__STARRED_ARGUMENT": 1,
+   "REFUSED__ARITY_OVER_CAP": 3,
+   "REFUSED__NAME_HAS_NO_TYPE": 65,
+   "REFUSED__KEYWORD_VALUE_NOT_ENCODABLE": 6,
+   "REFUSED__ARGUMENT_NOT_ENCODABLE": 30,
+   "USABLE": 22
+  },
+  "name_kinds": {
+   "Name": 29,
+   "Constant": 4
+  }
+ },
+ "pallets/itsdangerous": {
+  "sites": 24,
+  "usable": 0.25,
+  "counts": {
+   "REFUSED__NAME_HAS_NO_TYPE": 11,
+   "USABLE": 6,
+   "REFUSED__KEYWORD_VALUE_NOT_ENCODABLE": 7
+  },
+  "name_kinds": {
+   "Name": 3,
+   "Constant": 4
+  }
+ },
+ "hukkin/tomli": {
+  "sites": 112,
+  "usable": 0.0625,
+  "counts": {
+   "USABLE": 7,
+   "REFUSED__ARITY_OVER_CAP": 66,
+   "REFUSED__NAME_HAS_NO_TYPE": 36,
+   "REFUSED__ARGUMENT_NOT_ENCODABLE": 3
+  },
+  "name_kinds": {
+   "Name": 25
+  }
+ }
+}

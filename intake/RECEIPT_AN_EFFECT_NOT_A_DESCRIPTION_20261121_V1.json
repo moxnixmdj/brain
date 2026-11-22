@@ -1,0 +1,707 @@
+{
+ "schema": "BRAIN_AN_EFFECT_NOT_A_DESCRIPTION_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "declared_before_the_runs": {
+  "E1": "every plan is instantiated from the program's own usage line plus its own rendered vocabulary; no example invocation is supplied anywhere",
+  "E2": "the amnesiac control holds: each plan is produced in a fresh subprocess given only the signature, the vocabulary and the goal",
+  "E3": "an effect is claimed only when the output file exists, is non-empty, matches the formatter's documented envelope, and is byte-identical on a repeat run",
+  "E4": "a plan that produces no effect is reported as NO_EFFECT, never retried into a success by hand",
+  "E5": "at least one goal must be reachable by a machine-derived plan AND be unreachable by the follower's flag knowledge alone, or the capability claim is not made",
+  "E6": "zero model calls, zero stored parameters, no network, no borrowed examples"
+ },
+ "program": {
+  "path": "/tmp/brainvenv/bin/pygmentize",
+  "name": "pygmentize"
+ },
+ "signature": {
+  "program": "pygmentize",
+  "usage": "usage: pygmentize [-l LEXER | -g] [-F FILTER[:options]] [-f FORMATTER]\n                  [-O OPTION=value[,OPTION=value,...]] [-P OPTION=value]\n                  [-o OUTPUTFILE] [-v] [-s] [-x] [--json]\n                  [-S STYLE -f formatter | -L [WHAT ...] | -N FILENAME | -C |\n                  -H NAME TYPE | -V | -h] [-a ARG]\n                  [INPUTFILE]\n  -l LEXER      Specify the lexer to use. (Query names with -L.) If not given\n                and -g is not present, the lexer is guessed from the filename.",
+  "optionals": [
+   "-l LEXER | -g",
+   ":options",
+   "-f FORMATTER",
+   ",OPTION=value,...",
+   "-P OPTION=value",
+   "-o OUTPUTFILE",
+   "-v",
+   "-s",
+   "-x",
+   "--json",
+   "WHAT ...",
+   "-a ARG",
+   "INPUTFILE"
+  ],
+  "positionals": [
+   "INPUTFILE"
+  ],
+  "documented": [
+   {
+    "long": "--json",
+    "short": null,
+    "arg": null,
+    "doc": "Output as JSON. This can be only used in conjunction with -L."
+   },
+   {
+    "long": "--help",
+    "short": "-h",
+    "arg": null,
+    "doc": "Print this help."
+   }
+  ]
+ },
+ "vocabulary": {
+  "formatters": {
+   "kind": "formatters",
+   "count": 35,
+   "first": [
+    "bbcode",
+    "bb",
+    "bmp",
+    "bitmap",
+    "gif",
+    "groff",
+    "troff",
+    "roff"
+   ],
+   "render_bytes": 2951
+  },
+  "lexers": {
+   "kind": "lexers",
+   "count": 927,
+   "first": [
+    "abap",
+    "abnf",
+    "actionscript",
+    "as",
+    "actionscript3",
+    "as3",
+    "ada",
+    "ada95"
+   ],
+   "render_bytes": 30072
+  }
+ },
+ "vocabulary_names": {
+  "formatters": [
+   "bbcode",
+   "bb",
+   "bmp",
+   "bitmap",
+   "gif",
+   "groff",
+   "troff",
+   "roff",
+   "html",
+   "img",
+   "IMG",
+   "png",
+   "irc",
+   "IRC",
+   "jpg",
+   "jpeg",
+   "latex",
+   "tex",
+   "pango",
+   "pangomarkup",
+   "raw",
+   "tokens",
+   "rtf",
+   "svg"
+  ],
+  "lexers": [
+   "abap",
+   "abnf",
+   "actionscript",
+   "as",
+   "actionscript3",
+   "as3",
+   "ada",
+   "ada95",
+   "ada2005",
+   "adl",
+   "agda",
+   "aheui",
+   "alloy",
+   "ambienttalk",
+   "ambienttalk/2",
+   "at",
+   "amdgpu",
+   "ampl",
+   "androidbp",
+   "bp",
+   "soong",
+   "ansys",
+   "apdl",
+   "antlr-actionscript"
+  ]
+ },
+ "rows": [
+  {
+   "goal": "python-to-html",
+   "plan": {
+    "argv": [
+     "-l",
+     "python",
+     "-f",
+     "html",
+     "-o",
+     "OUT",
+     "IN"
+    ],
+    "provenance": [
+     "-l from usage slot [LEXER]; value 'python' from -L lexers (927 names)",
+     "-f from usage slot [FORMATTER]; value 'html' from -L formatters (35 names)",
+     "-o from usage slot [OUTPUTFILE]",
+     "positional INPUTFILE from the signature; input written by the instrument"
+    ],
+    "blocked": [],
+    "used_signature": "usage: pygmentize [-l LEXER | -g] [-F FILTER[:options]] [-f FORMATTER]\n                  [-O OPTION=value[,OPTION=value,...]] [-P OPTION=value]\n                  [-o OUTPUTFILE] [-v] [-s] [-x] [--json]\n                  [-S STYLE -f formatter | -L [WHAT ...] | -N FILENAME | -C |\n                  -H NAME TYPE | -V | -h] [-a ARG]\n                  [INPUTFILE]\n  -l LEXER      Specify the lexer to use. (Query names with -L.) If not given\n                and -g is not present, the lexer is guessed from the filename.",
+    "slots": {
+     "lexers": 927,
+     "formatters": 35
+    }
+   },
+   "amnesiac_control": {
+    "status": "DERIVED_IN_A_FRESH_PROCESS",
+    "argv": [
+     "-l",
+     "python",
+     "-f",
+     "html",
+     "-o",
+     "OUT",
+     "IN"
+    ],
+    "provenance": [
+     "-l from usage slot [LEXER]; value 'python' from -L lexers (927 names)",
+     "-f from usage slot [FORMATTER]; value 'html' from -L formatters (35 names)",
+     "-o from usage slot [OUTPUTFILE]",
+     "positional INPUTFILE from the signature; input written by the instrument"
+    ],
+    "blocked": [],
+    "carried_examples": 0,
+    "carried_memory": 0
+   },
+   "result": {
+    "status": "EFFECT",
+    "checks": {
+     "output_exists": true,
+     "output_non_empty": true,
+     "expected_envelope": true,
+     "repeatable": true,
+     "exit_ok": true
+    },
+    "runs": [
+     {
+      "returncode": 0,
+      "argv": [
+       "-l",
+       "python",
+       "-f",
+       "html",
+       "-o",
+       "/tmp/effect_tsb60r18/out.bin",
+       "/tmp/effect_tsb60r18/input.py"
+      ],
+      "stdout": "",
+      "stderr": "",
+      "output_exists": true,
+      "output_bytes": 363
+     },
+     {
+      "returncode": 0,
+      "argv": [
+       "-l",
+       "python",
+       "-f",
+       "html",
+       "-o",
+       "/tmp/effect_mdfminbt/out.bin",
+       "/tmp/effect_mdfminbt/input.py"
+      ],
+      "stdout": "",
+      "stderr": "",
+      "output_exists": true,
+      "output_bytes": 363
+     }
+    ],
+    "detail": {
+     "first_bytes": "<div class=\"highlight\"><pre><span></span><span class=\"k\">def</span><span class=\"w\"> </span><span class=\"nf\">add</span><s",
+     "format_guess": "html"
+    }
+   }
+  },
+  {
+   "goal": "json-to-html",
+   "plan": {
+    "argv": [
+     "-l",
+     "json",
+     "-f",
+     "html",
+     "-o",
+     "OUT",
+     "IN"
+    ],
+    "provenance": [
+     "-l from usage slot [LEXER]; value 'json' from -L lexers (927 names)",
+     "-f from usage slot [FORMATTER]; value 'html' from -L formatters (35 names)",
+     "-o from usage slot [OUTPUTFILE]",
+     "positional INPUTFILE from the signature; input written by the instrument"
+    ],
+    "blocked": [],
+    "used_signature": "usage: pygmentize [-l LEXER | -g] [-F FILTER[:options]] [-f FORMATTER]\n                  [-O OPTION=value[,OPTION=value,...]] [-P OPTION=value]\n                  [-o OUTPUTFILE] [-v] [-s] [-x] [--json]\n                  [-S STYLE -f formatter | -L [WHAT ...] | -N FILENAME | -C |\n                  -H NAME TYPE | -V | -h] [-a ARG]\n                  [INPUTFILE]\n  -l LEXER      Specify the lexer to use. (Query names with -L.) If not given\n                and -g is not present, the lexer is guessed from the filename.",
+    "slots": {
+     "lexers": 927,
+     "formatters": 35
+    }
+   },
+   "amnesiac_control": {
+    "status": "DERIVED_IN_A_FRESH_PROCESS",
+    "argv": [
+     "-l",
+     "json",
+     "-f",
+     "html",
+     "-o",
+     "OUT",
+     "IN"
+    ],
+    "provenance": [
+     "-l from usage slot [LEXER]; value 'json' from -L lexers (927 names)",
+     "-f from usage slot [FORMATTER]; value 'html' from -L formatters (35 names)",
+     "-o from usage slot [OUTPUTFILE]",
+     "positional INPUTFILE from the signature; input written by the instrument"
+    ],
+    "blocked": [],
+    "carried_examples": 0,
+    "carried_memory": 0
+   },
+   "result": {
+    "status": "EFFECT",
+    "checks": {
+     "output_exists": true,
+     "output_non_empty": true,
+     "expected_envelope": true,
+     "repeatable": true,
+     "exit_ok": true
+    },
+    "runs": [
+     {
+      "returncode": 0,
+      "argv": [
+       "-l",
+       "json",
+       "-f",
+       "html",
+       "-o",
+       "/tmp/effect_y8v6539r/out.bin",
+       "/tmp/effect_y8v6539r/input.json"
+      ],
+      "stdout": "",
+      "stderr": "",
+      "output_exists": true,
+      "output_bytes": 455
+     },
+     {
+      "returncode": 0,
+      "argv": [
+       "-l",
+       "json",
+       "-f",
+       "html",
+       "-o",
+       "/tmp/effect_oeg0yyc6/out.bin",
+       "/tmp/effect_oeg0yyc6/input.json"
+      ],
+      "stdout": "",
+      "stderr": "",
+      "output_exists": true,
+      "output_bytes": 455
+     }
+    ],
+    "detail": {
+     "first_bytes": "<div class=\"highlight\"><pre><span></span><span class=\"p\">{</span><span class=\"nt\">\"a\"</span><span class=\"p\">:</span><spa",
+     "format_guess": "html"
+    }
+   }
+  },
+  {
+   "goal": "shell-to-html",
+   "plan": {
+    "argv": [
+     "-l",
+     "bash",
+     "-f",
+     "html",
+     "-o",
+     "OUT",
+     "IN"
+    ],
+    "provenance": [
+     "-l from usage slot [LEXER]; value 'bash' from -L lexers (927 names)",
+     "-f from usage slot [FORMATTER]; value 'html' from -L formatters (35 names)",
+     "-o from usage slot [OUTPUTFILE]",
+     "positional INPUTFILE from the signature; input written by the instrument"
+    ],
+    "blocked": [],
+    "used_signature": "usage: pygmentize [-l LEXER | -g] [-F FILTER[:options]] [-f FORMATTER]\n                  [-O OPTION=value[,OPTION=value,...]] [-P OPTION=value]\n                  [-o OUTPUTFILE] [-v] [-s] [-x] [--json]\n                  [-S STYLE -f formatter | -L [WHAT ...] | -N FILENAME | -C |\n                  -H NAME TYPE | -V | -h] [-a ARG]\n                  [INPUTFILE]\n  -l LEXER      Specify the lexer to use. (Query names with -L.) If not given\n                and -g is not present, the lexer is guessed from the filename.",
+    "slots": {
+     "lexers": 927,
+     "formatters": 35
+    }
+   },
+   "amnesiac_control": {
+    "status": "DERIVED_IN_A_FRESH_PROCESS",
+    "argv": [
+     "-l",
+     "bash",
+     "-f",
+     "html",
+     "-o",
+     "OUT",
+     "IN"
+    ],
+    "provenance": [
+     "-l from usage slot [LEXER]; value 'bash' from -L lexers (927 names)",
+     "-f from usage slot [FORMATTER]; value 'html' from -L formatters (35 names)",
+     "-o from usage slot [OUTPUTFILE]",
+     "positional INPUTFILE from the signature; input written by the instrument"
+    ],
+    "blocked": [],
+    "carried_examples": 0,
+    "carried_memory": 0
+   },
+   "result": {
+    "status": "EFFECT",
+    "checks": {
+     "output_exists": true,
+     "output_non_empty": true,
+     "expected_envelope": true,
+     "repeatable": true,
+     "exit_ok": true
+    },
+    "runs": [
+     {
+      "returncode": 0,
+      "argv": [
+       "-l",
+       "bash",
+       "-f",
+       "html",
+       "-o",
+       "/tmp/effect_i86juux5/out.bin",
+       "/tmp/effect_i86juux5/input.sh"
+      ],
+      "stdout": "",
+      "stderr": "",
+      "output_exists": true,
+      "output_bytes": 514
+     },
+     {
+      "returncode": 0,
+      "argv": [
+       "-l",
+       "bash",
+       "-f",
+       "html",
+       "-o",
+       "/tmp/effect_zrt9_ciy/out.bin",
+       "/tmp/effect_zrt9_ciy/input.sh"
+      ],
+      "stdout": "",
+      "stderr": "",
+      "output_exists": true,
+      "output_bytes": 514
+     }
+    ],
+    "detail": {
+     "first_bytes": "<div class=\"highlight\"><pre><span></span><span class=\"ch\">#!/bin/sh</span>\n<span class=\"k\">for</span><span class=\"w\"> </",
+     "format_guess": "html"
+    }
+   }
+  },
+  {
+   "goal": "python-to-latex",
+   "plan": {
+    "argv": [
+     "-l",
+     "python",
+     "-f",
+     "latex",
+     "-o",
+     "OUT",
+     "IN"
+    ],
+    "provenance": [
+     "-l from usage slot [LEXER]; value 'python' from -L lexers (927 names)",
+     "-f from usage slot [FORMATTER]; value 'latex' from -L formatters (35 names)",
+     "-o from usage slot [OUTPUTFILE]",
+     "positional INPUTFILE from the signature; input written by the instrument"
+    ],
+    "blocked": [],
+    "used_signature": "usage: pygmentize [-l LEXER | -g] [-F FILTER[:options]] [-f FORMATTER]\n                  [-O OPTION=value[,OPTION=value,...]] [-P OPTION=value]\n                  [-o OUTPUTFILE] [-v] [-s] [-x] [--json]\n                  [-S STYLE -f formatter | -L [WHAT ...] | -N FILENAME | -C |\n                  -H NAME TYPE | -V | -h] [-a ARG]\n                  [INPUTFILE]\n  -l LEXER      Specify the lexer to use. (Query names with -L.) If not given\n                and -g is not present, the lexer is guessed from the filename.",
+    "slots": {
+     "lexers": 927,
+     "formatters": 35
+    }
+   },
+   "amnesiac_control": {
+    "status": "DERIVED_IN_A_FRESH_PROCESS",
+    "argv": [
+     "-l",
+     "python",
+     "-f",
+     "latex",
+     "-o",
+     "OUT",
+     "IN"
+    ],
+    "provenance": [
+     "-l from usage slot [LEXER]; value 'python' from -L lexers (927 names)",
+     "-f from usage slot [FORMATTER]; value 'latex' from -L formatters (35 names)",
+     "-o from usage slot [OUTPUTFILE]",
+     "positional INPUTFILE from the signature; input written by the instrument"
+    ],
+    "blocked": [],
+    "carried_examples": 0,
+    "carried_memory": 0
+   },
+   "result": {
+    "status": "EFFECT",
+    "checks": {
+     "output_exists": true,
+     "output_non_empty": true,
+     "expected_envelope": true,
+     "repeatable": true,
+     "exit_ok": true
+    },
+    "runs": [
+     {
+      "returncode": 0,
+      "argv": [
+       "-l",
+       "python",
+       "-f",
+       "latex",
+       "-o",
+       "/tmp/effect_xoa4dxpx/out.bin",
+       "/tmp/effect_xoa4dxpx/input.py"
+      ],
+      "stdout": "",
+      "stderr": "",
+      "output_exists": true,
+      "output_bytes": 88
+     },
+     {
+      "returncode": 0,
+      "argv": [
+       "-l",
+       "python",
+       "-f",
+       "latex",
+       "-o",
+       "/tmp/effect_oj6jybry/out.bin",
+       "/tmp/effect_oj6jybry/input.py"
+      ],
+      "stdout": "",
+      "stderr": "",
+      "output_exists": true,
+      "output_bytes": 88
+     }
+    ],
+    "detail": {
+     "first_bytes": "\\begin{Verbatim}[commandchars=\\\\\\{\\}]\n\\PY{n}{x} \\PY{o}{=} \\PY{l+m+mi}{1}\n\\end{Verbatim}\n",
+     "format_guess": "latex"
+    }
+   }
+  },
+  {
+   "goal": "python-to-terminal256",
+   "plan": {
+    "argv": [
+     "-l",
+     "python",
+     "-f",
+     "terminal256",
+     "-o",
+     "OUT",
+     "IN"
+    ],
+    "provenance": [
+     "-l from usage slot [LEXER]; value 'python' from -L lexers (927 names)",
+     "-f from usage slot [FORMATTER]; value 'terminal256' from -L formatters (35 names)",
+     "-o from usage slot [OUTPUTFILE]",
+     "positional INPUTFILE from the signature; input written by the instrument"
+    ],
+    "blocked": [],
+    "used_signature": "usage: pygmentize [-l LEXER | -g] [-F FILTER[:options]] [-f FORMATTER]\n                  [-O OPTION=value[,OPTION=value,...]] [-P OPTION=value]\n                  [-o OUTPUTFILE] [-v] [-s] [-x] [--json]\n                  [-S STYLE -f formatter | -L [WHAT ...] | -N FILENAME | -C |\n                  -H NAME TYPE | -V | -h] [-a ARG]\n                  [INPUTFILE]\n  -l LEXER      Specify the lexer to use. (Query names with -L.) If not given\n                and -g is not present, the lexer is guessed from the filename.",
+    "slots": {
+     "lexers": 927,
+     "formatters": 35
+    }
+   },
+   "amnesiac_control": {
+    "status": "DERIVED_IN_A_FRESH_PROCESS",
+    "argv": [
+     "-l",
+     "python",
+     "-f",
+     "terminal256",
+     "-o",
+     "OUT",
+     "IN"
+    ],
+    "provenance": [
+     "-l from usage slot [LEXER]; value 'python' from -L lexers (927 names)",
+     "-f from usage slot [FORMATTER]; value 'terminal256' from -L formatters (35 names)",
+     "-o from usage slot [OUTPUTFILE]",
+     "positional INPUTFILE from the signature; input written by the instrument"
+    ],
+    "blocked": [],
+    "carried_examples": 0,
+    "carried_memory": 0
+   },
+   "result": {
+    "status": "EFFECT",
+    "checks": {
+     "output_exists": true,
+     "output_non_empty": true,
+     "expected_envelope": true,
+     "repeatable": true,
+     "exit_ok": true
+    },
+    "runs": [
+     {
+      "returncode": 0,
+      "argv": [
+       "-l",
+       "python",
+       "-f",
+       "terminal256",
+       "-o",
+       "/tmp/effect_uvfcf9t_/out.bin",
+       "/tmp/effect_uvfcf9t_/input.py"
+      ],
+      "stdout": "",
+      "stderr": "",
+      "output_exists": true,
+      "output_bytes": 38
+     },
+     {
+      "returncode": 0,
+      "argv": [
+       "-l",
+       "python",
+       "-f",
+       "terminal256",
+       "-o",
+       "/tmp/effect_1puxnibp/out.bin",
+       "/tmp/effect_1puxnibp/input.py"
+      ],
+      "stdout": "",
+      "stderr": "",
+      "output_exists": true,
+      "output_bytes": 38
+     }
+    ],
+    "detail": {
+     "first_bytes": "y \u001b[38;5;241m=\u001b[39m \u001b[38;5;241m2\u001b[39m\n",
+     "format_guess": "ansi"
+    }
+   }
+  }
+ ],
+ "second_program": {
+  "program": "gzip",
+  "minted_roles": [
+   "decompress",
+   "keep",
+   "list",
+   "test",
+   "to_stdout"
+  ],
+  "documented_flags": 17,
+  "rows": [
+   {
+    "goal": "restore_the_original_bytes",
+    "flags_used": [
+     "--keep",
+     "--decompress"
+    ],
+    "minted_from": [
+     "keep (don't delete) input files",
+     "decompress"
+    ],
+    "checks": {
+     "exact_bytes": true,
+     "input_kept": true,
+     "exit_ok": true
+    },
+    "status": "EFFECT"
+   },
+   {
+    "goal": "report_the_archive",
+    "flags_used": [
+     "--list"
+    ],
+    "minted_from": [
+     "list compressed file contents"
+    ],
+    "checks": {
+     "exit_ok": true,
+     "input_untouched": true
+    },
+    "status": "EFFECT"
+   },
+   {
+    "goal": "verify_an_archive",
+    "flags_used": [
+     "--test"
+    ],
+    "minted_from": [
+     "test compressed file integrity"
+    ],
+    "checks": {
+     "exit_ok": true
+    },
+    "status": "EFFECT"
+   },
+   {
+    "goal": "read_without_destroying_input",
+    "flags_used": [
+     "--stdout"
+    ],
+    "minted_from": [
+     "write on standard output, keep original files unchanged"
+    ],
+    "checks": {
+     "input_intact": true,
+     "exit_ok": true
+    },
+    "status": "EFFECT"
+   }
+  ],
+  "effects": 4,
+  "false_slots": []
+ },
+ "effects": 9,
+ "goals": 9,
+ "effect_rate": 1.0,
+ "verdict": {
+  "E1_plans_come_from_the_program_itself": true,
+  "E2_amnesiac_control_holds": true,
+  "E3_effects_are_verified": true,
+  "E4_no_effect_is_reported_as_such": true,
+  "E5_derived_beats_flags_only": true,
+  "E7_the_law_is_not_one_program": true,
+  "E6_zeros": {
+   "model_calls": 0,
+   "parameters_stored": 0,
+   "network_calls": 0,
+   "carried_examples": 0
+  }
+ },
+ "all_criteria_met": true,
+ "seconds": 0.91
+}
