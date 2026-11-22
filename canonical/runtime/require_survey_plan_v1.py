@@ -1058,11 +1058,13 @@ def _paths_with_places(values: Sequence[Mapping[str, Any]], picture: Sequence[st
                                            2 if v.get("role") == "source" else 1,
                                            int(v["position"]))) if role_first \
         else sorted(named, key=lambda v: int(v["position"]))
+    # The `option` position is where the program's *flags* sit; it is not an argument, and it
+    # must not consume one. Moving past it is what lets `halcyon tally [OPTION]... LEDGER` take
+    # a ledger at all -- otherwise a single leading option place swallows every object.
+    seat = [place for place in (picture or []) if place != "option"]
     pairs: list[tuple[Mapping[str, Any], str]] = []
     for index, value in enumerate(ordered):
-        means = picture[index] if picture and index < len(picture) else ""
-        if means == "option":
-            continue
+        means = seat[index] if index < len(seat) else ""
         pairs.append((value, means))
     return pairs
 
@@ -1852,7 +1854,11 @@ def plan(requirement: Mapping[str, Any], tree: Mapping[str, Any]) -> dict[str, A
                      if i["name"] == nodes[depth].get("title")), None)
         stated = acts_in((line or {}).get("what") or "")
         if line and stated and stated[0][0] in {a[0] for a in acts}:
-            bound, unbound = _bind(values, [], product_first=False, picture=picture)
+            # the picture belongs to the document the request was routed *to*, not the root:
+            # `halcyon tally [OPTION]... LEDGER` says the ledger has a place, and the root's
+            # `[ARG]...` does not
+            here = positional_grammar(nodes[depth].get("usage") or {}) or picture
+            bound, unbound = _bind(values, [], product_first=False, picture=here)
             add(_render(tool, prefix_of(depth), None, bound), operation=None, bound=bound,
                 depth=depth, reason="PLANNED_BY_THE_SUBCOMMAND")
             break

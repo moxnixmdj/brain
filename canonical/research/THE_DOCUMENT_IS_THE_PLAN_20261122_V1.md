@@ -295,3 +295,45 @@ are where the round's verifier measurements stand.
 **What this does not touch.** The planner's own accepted plans are the same either way: on the three tasks
 where the bench reported an exact outcome the command was right (and on `cb-019` the planner emitted the
 task's own expected command). What A4 says is that *the bench could not have told us if it were wrong*.
+
+### A8 — "does it know what it does not know?" measured in both directions (`/tmp/a8.py`)
+
+The owner's hypothesis, stated as a falsifiable pair. A mechanism that scans an environment and asks what it
+knows is only useful if it is honest **both ways**, and each direction has its own failure:
+
+* **CAN-DO** — a request the document *does* state. A refusal here is a **false negative**: it knew, and said
+  it did not. Each is executed in the world and the artifact is read.
+* **CANNOT** — a request the document does *not* state (a choice outside its own list, an act no page
+  mentions). The failure is **silently doing less**: running a smaller act that looks finished.
+
+The program (`halcyon`: `tally`, `quench`, `rouse`, with its own three-value lists for `--style` and
+`--pressure`) was written for this test from its own pages. The mechanism was never given its name, a flag,
+or a word.
+
+| direction | task | result |
+|---|---|---|
+| CAN-DO | count the records in a ledger | **works, tried=1** |
+| CAN-DO | seal with a stated pressure | **works, tried=2** |
+| CAN-DO | seal, no option named | **works, tried=1** |
+| CANNOT | a `--style` the document does not list (`quantum`) | complete=False, **named `quantum`** |
+| CANNOT | a `--pressure` the document does not list (`volcanic`) | complete=False, **named `volcanic`** |
+| CANNOT | an act no page mentions (`vivify`) | complete=False, **named `vivify`** |
+
+**A8: can-do 3/3, cannot 3/3.**
+
+The mechanism that produces this is small, and it is the answer to "what should be saved". Nothing about
+`halcyon` is saved. What exists is:
+
+1. **a seed verb class** (closed, ~90 words) — and, when it does not cover the request, **the documents are
+   asked** whether they state the act in their own words (`Register a new data source connection` answers
+   *register a PostgreSQL data source*);
+2. **a document's own enumerated choices** (`mode: strict, loose, sealed`) as the only vocabulary that can
+   turn a bare request word into a value — no synonym table, no guess;
+3. **a completeness rule**: a request word that no page uses and no plan places is reported by name
+   (`NO_PLACE_IN_THIS_DOCUMENT_FOR`) and the plan is marked incomplete. A word the pages *do* use (`mode`,
+   `record`) is vocabulary, not a missing object.
+
+That is the generalisation the owner asked about, and it is not a summary of an episode: an episode is an
+argv, worthless the moment the environment changes. What generalises is the **reading** — *where does this
+document say the thing I was asked for goes* — and it is parameter-free, which is why it transferred to
+`halcyon` and to `lattice` without a single fact about either being stored.
