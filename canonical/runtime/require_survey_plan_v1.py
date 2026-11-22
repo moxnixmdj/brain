@@ -799,6 +799,68 @@ def route(tree: Mapping[str, Any], request_words: Iterable[str],
 # --------------------------------------------------------------------------- require
 
 
+# A document spells an argument's own choices as a list after a colon or inside parentheses:
+# `mode: strict, loose, sealed`, `(values: docker, npm, pypi)`, `(0=none, 1=urgent, 2=high)`.
+# The list is the program's own vocabulary, and it is the only place a bare request word can be
+# recognised as a value of a particular option without the request quoting it.
+ENUM_LIST = re.compile(r"(?::|[^(\n]{0,40}\()[^)\n]{0,60}?"
+                       r"(?P<list>[A-Za-z0-9_+-]{1,20}(?:\s*=\s*[A-Za-z0-9_+-]{1,20})?"
+                       r"(?:\s*,\s*[A-Za-z0-9_+-]{1,20}(?:\s*=\s*[A-Za-z0-9_+-]{1,20})?){1,12})"
+                       r"(?:\s*(?:\)|\.|;|$))", re.M)
+
+
+def enum_choices(option: Mapping[str, Any]) -> list[str]:
+    """The choices a document lists for one option, if it lists any."""
+    words = str(option.get("words") or "") + " " + str(option.get("rest") or "")
+    found = ENUM_LIST.search(words)
+    if not found:
+        return []
+    out = []
+    for item in found.group("list").split(","):
+        # `1=urgent` offers `urgent`; the number is the document's own label for it
+        item = item.strip(" .;'\"")
+        out.append(item.split("=", 1)[-1].strip().lower())
+    return [w for w in out if 1 < len(w) < 30]
+
+
+def vocabulary_in(text: str) -> set[str]:
+    """Every word a document offers as a choice somewhere, from its own lines."""
+    out: set[str] = set()
+    for line in str(text or "").splitlines():
+        for match in ENUM_LIST.finditer(line):
+            for item in match.group("list").split(","):
+                out.add(item.strip(" .;'\"").split("=", 1)[-1].strip().lower())
+    return {w for w in out if 1 < len(w) < 30}
+
+
+def claim_vocabulary(requirement: Mapping[str, Any],
+                     vocabulary: Iterable[tuple[str, str]]) -> dict[str, Any]:
+    """Move bare request words that are a document's own choices out of `unclaimed`.
+
+    A value does not have to be quoted. `wrap ... with mode loose` names `loose`, and the
+    document's own list (`strict, loose, sealed`) is what makes that word a value of that
+    option rather than an object of the request. A word the document does **not** list stays
+    unclaimed -- which is the difference between "this program accepts it" and "we hope it does".
+    """
+    known: dict[str, str] = {}
+    for flag, word in vocabulary:
+        known.setdefault(str(word).lower(), str(flag))
+    values = list(requirement.get("values") or [])
+    already = {str(v["value"]).lower() for v in values}
+    added: list[dict[str, Any]] = []
+    left: list[str] = []
+    for word in requirement.get("unclaimed") or []:
+        if word.lower() in known and word.lower() not in already:
+            # the document says which option owns this word: the one whose list it is
+            added.append({"kind": "literal", "value": word, "position": 0,
+                          "step": 0, "words": [word.lower()], "context": word,
+                          "value_of": known[word.lower()], "from_vocabulary": True})
+        else:
+            left.append(word)
+    return {**requirement, "values": values + added, "unclaimed": left,
+            "claimed_vocabulary": [v["value"] for v in added]}
+
+
 def step_of(text: str, position: int) -> int:
     """Which numbered step a position sits under: the last `N.` marker before it, or 0.
 
@@ -991,7 +1053,7 @@ def _paths_with_places(values: Sequence[Mapping[str, Any]], picture: Sequence[st
     place means `option` is not an argument -- the program takes it through an option, or not
     at all -- so it is not pushed into a position where the program would read it as a file.
     """
-    named = [v for v in values if v["kind"] == "path"]
+    named = [v for v in values if v["kind"] == "path" and not v.get("value_of")]
     ordered = sorted(named, key=lambda v: (0 if v.get("role") == "product" else
                                            2 if v.get("role") == "source" else 1,
                                            int(v["position"]))) if role_first \
@@ -1096,9 +1158,10 @@ def _demo_plan(demo: Mapping[str, Any], requirement: Mapping[str, Any], tool: st
     values = list(requirement.get("values") or [])
     if not demo.get("values") or not values:
         return None
-    ordered = sorted(values, key=lambda v: (0 if v.get("role") == "product" else
-                                            2 if v.get("role") == "source" else 1,
-                                            int(v["position"])))
+    ordered = sorted([v for v in values if not v.get("value_of")],
+                     key=lambda v: (0 if v.get("role") == "product" else
+                                    2 if v.get("role") == "source" else 1,
+                                    int(v["position"])))
     # When the example pairs its flags with values, that pairing is the shape to keep: each flag
     # takes the request value whose own words name what the flag's description names, and the
     # values that find no flag are the leftover the example does not cover.
@@ -1136,7 +1199,9 @@ def _demo_plan(demo: Mapping[str, Any], requirement: Mapping[str, Any], tool: st
                 # states is its *shape*: a flag, then the object it names, then the objects that
                 # go in. The request's objects fill that shape in order, and the example's own
                 # flag is kept because the document is where it came from.
-                rest = [str(v["value"]) for v in ordered if str(v["value"]) not in spent]
+                # a value the document already assigned to a flag is not a leftover object
+                rest = [str(v["value"]) for v in ordered
+                        if str(v["value"]) not in spent and not v.get("value_of")]
                 if not rest:
                     return None
                 filled_pairs.extend([flag, rest[0]])
@@ -1207,6 +1272,8 @@ def _product_slots(options: Sequence[Mapping[str, Any]]) -> list[Mapping[str, An
 def _bind_product(values: Sequence[Mapping[str, Any]], options: Sequence[Mapping[str, Any]]
                   ) -> tuple[list[dict[str, Any]], list[dict[str, Any]], list[Mapping[str, Any]]]:
     """The reading that explains 'into Y': the destination takes the slot that means a place."""
+    # a value the document assigned to a flag is that flag's value, never an object in a place
+    values = [v for v in values if not v.get("value_of")]
     products = [v for v in values if v["kind"] == "path" and v.get("role") == "product"]
     sources = [v for v in values if v["kind"] == "path" and v.get("role") != "product"]
     slots = _product_slots(options)
@@ -1451,6 +1518,10 @@ def _composed_readings(requirement: Mapping[str, Any], usage: Mapping[str, Any],
                 reserved[str(value["value"])] = index
 
     for value in values:
+        if value.get("value_of"):
+            bound.append({"role": "value_slot", "option": str(value["value_of"]),
+                          "value": str(value["value"])})
+            continue
         if str(value["value"]) in reserved:
             index = reserved[str(value["value"])]
             bound.append({"role": "positional", "value": str(value["value"]),
@@ -1530,10 +1601,18 @@ def _composed_readings(requirement: Mapping[str, Any], usage: Mapping[str, Any],
     # A reading is complete when every object is placed *and* the result has somewhere to go:
     # either the shell carries it, or the program's own picture names a place for it
     # (`stitch OUTFILE [PATCH]...`) and the thing made is in that place.
+    product_words = set()
+    for value in values:
+        if value.get("role") == "product" or is_sink(value):
+            product_words |= {str(w) for w in (value.get("words") or [])}
     writes_into_a_named_place = any(
         item["role"] == "positional"
-        and re.match(r"^(out|outfile|output|dest|destination|target|archive|result)$",
-                     str(item.get("means") or ""))
+        and (re.match(r"^(out|outfile|output|dest|destination|target|archive|result|"
+                      r"veil|store|repository|repo|index|collection|bundle)$",
+                      str(item.get("means") or ""))
+             # or the place's own name is one of the words the request used for the thing made
+             or any(len(str(w)) >= 3 and str(w).startswith(str(item.get("means") or ""))
+                    for w in product_words))
         for item in bound)
     if not writes_into_a_named_place and \
             not any(item["role"] in ("redirect", "stdin_from") for item in bound):
@@ -1582,6 +1661,14 @@ def plan(requirement: Mapping[str, Any], tree: Mapping[str, Any]) -> dict[str, A
     tool = str(tree.get("tool") or "")
     acts = [tuple(a["act"]) for a in requirement.get("acts") or []]
     values = list(requirement.get("values") or [])
+    # a bare word that is one of the documents' own choices is a value, not an object
+    vocabulary: list[tuple[str, str]] = []
+    for node in [tree.get("root") or {}] + list((tree.get("root") or {}).get("children") or []):
+        for option in node.get("options") or []:
+            vocabulary.extend((str(option.get("flag")), w) for w in enum_choices(option))
+    if vocabulary:
+        requirement = claim_vocabulary(requirement, vocabulary)
+        values = list(requirement.get("values") or [])
     document_acts: list[dict[str, Any]] = []
     if not acts:
         # The request's verb is not in the seed class. Before refusing, ask the documents: an
@@ -1696,9 +1783,16 @@ def plan(requirement: Mapping[str, Any], tree: Mapping[str, Any]) -> dict[str, A
         usage_here = {**(inside.get("usage") or {}), "options": inside.get("options") or []}
         picture_here = positional_grammar(inside.get("usage") or {}) or picture
         for reading in _declared_word_readings(requirement, usage_here, picture_here):
+            # a reading that carries one option's value and *drops* an object the request named
+            # is not a reading of this request: a redirect can put the made thing back, but
+            # nothing puts back a file the program was supposed to read
+            placed = {str(item.get("value")) for item in reading}
+            missing = [v for v in values if v["kind"] == "path" and not v.get("value_of")
+                       and str(v["value"]) not in placed]
+            if missing:
+                continue
             add(_render(tool, prefix_of(depth), None, reading), operation=None, bound=reading,
                 depth=depth, reason="PLANNED_INTO_A_DECLARED_WORD")
-
     # R3 -- the act's own option, opening the words first, product slots last
     for wanted in acts:
         for depth in range(len(nodes) - 1, -1, -1):
@@ -1779,12 +1873,47 @@ def plan(requirement: Mapping[str, Any], tree: Mapping[str, Any]) -> dict[str, A
         add(_render(tool, [], None, bound), operation=None, bound=bound, depth=0,
             reason="PLANNED_BY_ARGUMENT_ORDER")
 
+    # A plan is only *complete* if it also accounts for every word the request used to name an
+    # object. A word silently dropped is the one failure mode a caller cannot see: the plan runs,
+    # the world accepts it, and the request was only partly carried out. So the dropped words are
+    # named, per plan, and a plan with any is not complete -- the caller is told what it does not
+    # know rather than being handed a smaller act that looks finished.
+    # Which leftovers are *objects* is the document's own question: a word the document uses
+    # somewhere (`mode`, `record`, `veil`) is vocabulary, and a word no page mentions is the
+    # thing the request names that nothing here can carry (`quantum`, `transmute`).
+    documented: set[str] = set()
+    for node in [tree.get("root") or {}] + list((tree.get("root") or {}).get("children") or []):
+        documented |= words_of(" ".join([str(node.get("title") or ""),
+                                         str(node.get("summary") or ""),
+                                         str((node.get("usage") or {}).get("usage") or ""),
+                                         " ".join(str(o.get("words") or "") for o in
+                                                  node.get("options") or [])]))
+    documented |= {w for chain in [enum_choices(o) for node in
+                                   [tree.get("root") or {}] + list((tree.get("root") or {}).get("children") or [])
+                                   for o in node.get("options") or []] for w in chain}
+    placed_words: set[str] = set()
+    for candidate in plans:
+        for item in candidate.get("bound") or []:
+            if item.get("value"):
+                placed_words |= set(words_of(str(item["value"])))
+    dropped = sorted(w for w in requirement.get("unclaimed") or []
+                     if w not in placed_words and w not in documented and len(w) > 3)
+    for candidate in plans:
+        missing = [w for w in dropped if w not in words_of(" ".join(map(str, candidate["argv"])))]
+        candidate["dropped_words"] = missing
+        if missing:
+            candidate["complete"] = False
+            candidate.setdefault("refusals", []).append(
+                {"reason": "NO_PLACE_IN_THIS_DOCUMENT_FOR", "words": missing[:8]})
     good = [p for p in plans if p["complete"]]
+    if dropped:
+        refusals.append({"reason": "NO_PLACE_IN_THIS_DOCUMENT_FOR", "words": dropped[:8]})
     return {
         "schema": SCHEMA, "tool": tool, "path": routed["path"],
         "route_scores": routed.get("scores") or [],
         "document_usage": (nodes[-1].get("usage") or {}).get("usage"),
         "plans": plans, "complete": bool(good), "refusals": refusals,
+        "dropped_words": dropped,
         "reason": ("PLANNED" if good else (plans[0]["reason"] if plans
                                            else "NO_OPERATION_IN_THIS_DOCUMENT")),
     }
