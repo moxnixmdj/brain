@@ -1045,6 +1045,37 @@ def require(text: str) -> dict[str, Any]:
     instruction = str(text or "")
     values: list[dict[str, Any]] = []
     seen: set[tuple[str, str]] = set()
+    # A JSON object or array in the request is *one argument*, not a bag of words. `with config
+    # {"bucket": "analytics-output", "prefix": "daily/"}` was read as four literals -- bucket,
+    # analytics-output, prefix, daily/ -- and the program received them as trailing operands
+    # (`sink create --name analytics-lake --type S3 bucket analytics-output prefix daily/`) when
+    # the whole document's argument is a single `--config`. The braces are the request stating
+    # its own boundary, exactly as quotes are, and nothing inside needs re-reading.
+    structures: list[tuple[int, int, str]] = []
+    for open_ch, close_ch in (("{", "}"), ("[", "]")):
+        start = 0
+        while True:
+            at = instruction.find(open_ch, start)
+            if at < 0:
+                break
+            depth, end = 0, -1
+            for cursor in range(at, len(instruction)):
+                char = instruction[cursor]
+                if char == open_ch:
+                    depth += 1
+                elif char == close_ch:
+                    depth -= 1
+                    if depth == 0:
+                        end = cursor
+                        break
+            if end < 0:
+                break
+            blob = instruction[at:end + 1]
+            if len(blob) > 2 and (":" in blob or "," in blob):
+                structures.append((at, end + 1, blob))
+                start = end + 1
+            else:
+                start = at + 1
 
     def add(kind: str, value: str, context: str, position: int) -> None:
         key = (kind, value)
@@ -1055,13 +1086,16 @@ def require(text: str) -> dict[str, Any]:
                        "step": step_of(instruction, position),
                        "words": sorted(words_of(context))[:24], "context": context.strip()[:240]})
 
+    # A structure is blanked out of the text the later passes read, so its own keys and values are
+    # never re-read as separate objects. It is registered as one value below, at its own position.
+    masked_instruction = instruction
     # Where every quoted value sits, so one value's phrase can stop at its neighbour. Two quoted
     # values in one sentence (`titled "Payment Service Degradation" with severity "P1"`) each
     # carry the words of their own phrase and not the other's -- without this, both windows
     # contain `title` and `severity` alike and neither flag can be told from the other. The span
     # is computed from positions, not by searching for a separator, because the text between two
     # values may be a line break or nothing at all.
-    quotes = list(QUOTED.finditer(instruction))
+    quotes = list(QUOTED.finditer(masked_instruction))
     for index, m in enumerate(quotes):
         # A value's own words are the words immediately around it, not the sentence's: in
         # `... team "Platform" with the title "Fix it", set the priority to "urgent"` every
@@ -1080,7 +1114,7 @@ def require(text: str) -> dict[str, Any]:
                    + [len(after)])
         # the phrase is what sits between the two nearest separators, and no further
         add("literal", m.group(1), instruction[start: m.end() + stop], m.start())
-    unquoted = QUOTED.sub(lambda m: " " * len(m.group(0)), instruction)
+    unquoted = QUOTED.sub(lambda m: " " * len(m.group(0)), masked_instruction)
     # A URL is the most recognisable thing a request can name and it contains characters no path
     # pattern expects: `https://example.com/x.git` was read as `//example.com/x.git`, with the
     # scheme silently gone, and a clone then asked for a source that does not exist. Matched whole
@@ -1190,6 +1224,30 @@ def require(text: str) -> dict[str, Any]:
                [act for item in acts for act in [tuple(item["act"])]]} | \
               {stem for _, stem in
                [act for item in acts for act in [tuple(item["act"])]]}
+    # A coordinated value is named by the same words as the value it is coordinated with.
+    # `have the label "priority:critical" or "priority:high"` names two values of one thing: the
+    # second one's own phrase window begins at `or`, so it contains no word that names a flag, and
+    # `--label` -- which names the first -- looked like it named only that one. Carrying the head's
+    # naming words forward is not a synonym guess: the coordinator is the request's own statement
+    # that both values fill the same role, and the words are the ones it already wrote.
+    for index in range(1, len(values)):
+        gap = instruction[int(values[index - 1].get("position") or 0):int(values[index].get("position") or 0)]
+        # Only two *alternatives* share a role. `the label "a" or "b"` names one thing twice;
+        # `the files a.txt and b.txt` names two things, each its own object, and folding their
+        # words together handed `b.txt` to `--catenate` (whose own description mentions files) and
+        # broke the tar plans. A comma or `or`/`plus`/`not` coordinates; a bare `and` between two
+        # paths does not.
+        coordinate = re.search(r"(?:,|\bor\b|\bplus\b|\bnot\b)\s*[\"'\u201c]?\s*$", gap[-24:])
+        coordinate = coordinate or (re.search(r"\band\b\s*[\"'\u201c]?\s*$", gap[-24:])
+                                    and values[index]["kind"] != "path"
+                                    and values[index - 1]["kind"] != "path")
+        if coordinate:
+            inherited = dict(values[index])
+            inherited["words"] = sorted(set(values[index].get("words") or [])
+                                        | set(values[index - 1].get("words") or []))
+            inherited["context"] = (str(values[index - 1].get("context") or "") + " "
+                                    + str(values[index].get("context") or ""))
+            values[index] = inherited
     unclaimed = sorted(w for w in words_of(instruction) if w not in STOP and w not in claimed)
 
     reasons: list[str] = []
@@ -1385,6 +1443,35 @@ def _shape(text: str) -> str:
     if NUMBER_TOKEN.match(text):
         return "number"
     return "literal"
+
+
+def _flag_names_value(value: Mapping[str, Any], slot: Mapping[str, Any]) -> bool:
+    """Does this flag's own description name this value -- by a word, or by one stem?
+
+    A demonstration shows *which* flags travel together; it does not say that whichever flag is
+    being read accepts whatever object the request names next. `--repo` is described "Repository
+    in owner/repo format" and does not name `priority:critical`; `--label` is "Filter by label
+    name" and does. Two spellings of one stem count as one word (`assignee`/`assigned`), because
+    both spellings are printed somewhere in the document or the request -- nothing is added from
+    outside.
+    """
+    words = words_of(str(slot.get("words") or ""))
+    if not words:
+        return False
+    said = words_of(str(value.get("value") or ""))
+    context = words_of(str(value.get("context") or ""))
+    if words & (said | context):
+        return True
+    for a in words:
+        for b in said | context:
+            if a == b:
+                continue
+            short, long = (a, b) if len(a) <= len(b) else (b, a)
+            if len(short) >= 4 and long.startswith(short) and len(long) - len(short) <= 4:
+                return True
+            if len(a) >= 5 and len(b) >= 5 and a[:5] == b[:5]:
+                return True
+    return False
 
 
 def _demo_plan(demo: Mapping[str, Any], requirement: Mapping[str, Any], tool: str,
@@ -1662,6 +1749,57 @@ def _demo_plan(demo: Mapping[str, Any], requirement: Mapping[str, Any], tool: st
                 # `record add` came out with `--name www example.org --value example.org`.
                 leftover = [v for v in rest[1:]
                             if not (v in reusable and said_text.lower().count(v.lower()) > 1)]
+                # A demonstration shows a flag once; a request may name several values for it.
+                # `have the label "priority:critical" or "priority:high"` names two labels, the
+                # example shows `--label bug` once, and the second value trailed the command as a
+                # bare operand (`issue list ... --label priority:critical priority:high`) -- where
+                # a program reads it as a positional and refuses. Repeating the flag is the
+                # idiom every list-valued option uses (`--label a --label b`), and it invents
+                # nothing: the flag and each value are already on the page and in the request.
+                # Only when the demonstration's own flag carries a single value, and only for the
+                # values that have no other flag to take them.
+                # A demonstration shows a flag once; a request may name several values for it.
+                # `have the label "priority:critical" or "priority:high"` names two labels while
+                # the example shows `--label bug` once. The second value then trailed the command
+                # as a bare operand, where the program reads it as a positional and refuses.
+                # Repeating the flag is the idiom every list-valued option uses, and it invents
+                # nothing -- the flag and each value are already on the page and in the request.
+                # The flag is the one whose own description *names* the value, never the flag that
+                # happened to be current: repeating the labels on `--repo` is what produced
+                # `--repo acme-corp/web-platform --repo priority:critical --repo priority:high`.
+                remaining: list[str] = []
+                for value in leftover:
+                    mapped = next((m for m in ordered if str(m["value"]) == str(value)), None)
+                    # A path is an operand, never a repeated flag: `the files a.txt and b.txt`
+                    # names two objects the program positions, and `tar --help` lists
+                    # `--catenate` described with the word "files", so repeating anything on a
+                    # path-named flag turned a correct `tar -cf out.tar a.txt b.txt` into
+                    # `-cf out.tar --catenate a.txt`. Only non-path values repeat.
+                    if mapped is not None and mapped.get("kind") == "path":
+                        remaining.append(value)
+                        continue
+                    target = None
+                    if mapped is not None:
+                        target = next((o for o in (demo.get("_options") or [])
+                                       if o.get("takes_value")
+                                       and not enum_choices(o)
+                                       and _flag_names_value(mapped, o)),
+                                      None)
+                    if target is None:
+                        remaining.append(value)
+                        continue
+                    # A flag the demonstration fills with a *structure* is filled by the structure
+                    # pass, never by repetition: `--config {"bucket": ..., "prefix": ...}` came
+                    # out as `--config bucket --config analytics-output --config prefix --config
+                    # daily/` -- one JSON argument written four times, and wrong each time.
+                    shown = next((str(x) for f, x in pairs if str(f) == str(target.get("flag"))),
+                                 "")
+                    if any(ch in shown for ch in "{}[]:"):
+                        remaining.append(value)
+                        continue
+                    filled_pairs.extend([str(target.get("flag")), str(value)])
+                    spent.add(str(value))
+                leftover = remaining
                 filled_pairs.extend(leftover)
                 spent.update(leftover)
                 # The remaining flags are still the demonstration's, and one of them may be an

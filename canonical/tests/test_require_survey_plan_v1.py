@@ -963,3 +963,35 @@ def test_an_ordinal_that_opens_a_clause_is_not_a_count():
         probes=14)
     joined = " ".join(" ".join(c) for c in plan["commands"])
     assert "--namespace 1" not in joined, joined
+
+
+def test_a_second_value_of_one_field_repeats_its_flag():
+    """A demonstration shows a flag once; a request may name several values for it.
+
+    `have the label "priority:critical" or "priority:high"` names two labels while the example
+    shows `--label bug` once. The second value then trailed the command as a bare operand, where
+    the program reads it as a positional and refuses. Repeating the flag is the idiom every
+    list-valued option uses, and it invents nothing -- the flag is on the page and each value is in
+    the request.
+
+    The two limits are measured, not guessed: a *path* never repeats (tar's `--catenate` is
+    described with the word "files", and repeating a path there turned a correct
+    `tar -cf out.tar a.txt b.txt` into `-cf out.tar --catenate a.txt`), and a flag the
+    demonstration fills with a *structure* never repeats (it came out as the same JSON argument
+    written four times wrong).
+    """
+    plan = R.require_survey_plan_sequence(
+        "/tmp/cb/bin/gh",
+        'Find all open GitHub issues in "acme-corp/web-platform" that have the label'
+        ' "priority:critical" or "priority:high".',
+        probes=14)
+    argv = plan["commands"][0]
+    assert argv.count("--label") == 2, argv
+    assert "priority:critical" in argv and "priority:high" in argv, argv
+    assert argv.count("--repo") == 1, argv
+
+    # a coordinated value inherits the naming words of the value it is coordinated with
+    req = R.require('have the label "priority:critical" or "priority:high"')
+    assert len(req["values"]) == 2
+    assert "label" in R.words_of(req["values"][1]["context"]) | set(
+        req["values"][1]["words"]), req["values"][1]

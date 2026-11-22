@@ -1751,3 +1751,41 @@ for children named after their own parent (0.4570 — it does stop the two waste
 the pages it displaces were worth more than the probes it saved).
 
 **Score stands at 0.4696**, 48 tests green.
+
+### A44 — one field, several values: repeat the flag
+
+Chasing the "bare positionals" cluster (`issue list ... --label priority:critical priority:high`,
+`priority:critical priority:high` trailing as operands on four tasks) found one rule doing the real
+work:
+
+> A demonstration shows a flag once. A request may name several values for it. **Repeat the flag.**
+
+`have the label "priority:critical" or "priority:high"` names two labels; `gh issue list`'s example
+shows `--label bug` once; the second value had nowhere to go and trailed the command as an operand.
+`--label a --label b` is the idiom every list-valued option uses, and it invents nothing -- the flag
+is on the page, each value is in the request.
+
+It needed one more rule to be sound, and the request's own grammar states it: **a coordinated value
+is named by the same words as the value it is coordinated with.** `priority:high`'s phrase window
+begins at `or "priority:high"` and contains no word that names a flag, so no flag looked like it
+named it. The coordinator (`or`, `and`, a comma) is the request saying both values fill one role.
+
+Both limits are measured, not guessed:
+
+- **A path never repeats.** `tar --help` describes `--catenate` with the word "files", and letting a
+  path repeat turned a correct `tar -cf out.tar a.txt b.txt` into `-cf out.tar --catenate a.txt`.
+  Two failing tests recorded it.
+- **A structure-filled flag never repeats.** `--config {"bucket": ..., "prefix": ...}` came out as
+  the same JSON argument written four times, each time wrong.
+
+Measured: **0.4696 -> 0.4713** (+0.0017), up four tasks (cb-026 +0.30, cb-010 +0.10, cb-036 +0.10,
+cb-038 +0.076), down one (cb-058 -0.167, the structure case, now bounded by the rule above). Three
+seeds identical, 49 tests green, guard PASS.
+
+**Rejected in the same pass:** reading a balanced `{...}` in the request as one argument value
+instead of four literals. It is the right model — the braces are the request stating its own
+boundary as quotes do — and it produced a clean `{"bucket": "analytics-output", "prefix": "daily/"}`
+value. Measured **0.4713 -> 0.4692**: cb-058 lost 0.292 because the downstream `--config` binding
+was getting to the JSON by way of the shredded literals, and removing the shredding removed the path
+it used. Recorded rather than retried: the structure is correct, the binding that must consume it is
+not yet built.
