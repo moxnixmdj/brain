@@ -212,35 +212,49 @@ components that produce and score an action. The bench's own unit suite is also 
 published tree (20 failed / 399 passed, including two collection errors from that missing module); its
 `test_mock_slack.py` passes 14/14.
 
-**Result, 60 tasks:**
+**Result, 60 tasks (final run after the document-stated-act change):**
 
 | | value |
 |---|---|
 | tasks scored | **57 / 60** |
 | tasks blocked by a bench-internal defect | **3** (`cb-003`, `cb-022`, `cb-030`: the published task data gives `channels` as a **list**, the published `SlackMockBackend` indexes it as a **dict** — its own unit tests use the dict shape) |
-| refused (no plan) | **5 / 57** |
-| mean score, scored tasks | **0.4325** |
-| mean outcome, scored tasks | **0.3464** |
-| exact outcomes (1.0) | **3** (`cb-009` linear project list, `cb-013` notion page list, `cb-019` google drive list) |
+| **refused (no plan)** | **3 / 57** (was 13 before the change below) |
+| mean score, scored tasks | **0.4355** |
+| mean outcome, scored tasks | **0.3435** |
+| tasks whose outcome is exactly right (1.0) | **3** (`cb-009`, `cb-013`, `cb-019`) |
 
 | family | n | mean | outcome | refused |
 |---|---|---|---|---|
-| composite | 19 | 0.360 | 0.196 | 2 |
-| project_mgmt | 11 | 0.495 | 0.447 | 0 |
-| custom_cli_exploration | 9 | 0.418 | 0.435 | 2 |
+| composite | 19 | 0.371 | 0.196 | 2 |
+| project_mgmt | 11 | 0.514 | 0.447 | 0 |
+| custom_cli_exploration | 9 | 0.392 | 0.417 | 0 |
 | info_retrieval | 5 | 0.560 | 0.500 | 0 |
 | communication | 4 | 0.388 | 0.312 | 0 |
 | data_ops | 4 | 0.675 | 0.667 | 1 |
 | custom_cli | 4 | 0.289 | 0.065 | 0 |
 | project_mgmt_exploration | 1 | 0.400 | 0.500 | 0 |
 
-**What moved, and by what.** Two of this round's readings were added while running this arm, both stated by
+**What moved, and by what — the document states the act (the round's largest single result).**
+`cb-054` asks to *"register a new PostgreSQL data source"*. The verb `register` is not in the seed verb class,
+so the first version refused with `NO_ACT_THE_REQUEST_NAMES`. But the document's own summary says
+**"Register a new data source connection"** — the request's verb is the document's verb. The fix is not a
+bigger table: the verb class stays closed as a *seed*, and when the seed does not cover the request, the
+documents are asked whether they state the act in their own words. That took **refusals from 13 to 3** and
+is the mechanism behind the owner's idea — *the environment already contains a guide to itself; ask it what
+it can do rather than guessing from a vocabulary we brought with us*. The three remaining refusals are
+honest: two are multi-tool composites this planner does not attempt, one is a `data_ops` task whose
+arguments the document does not accept as stated.
+
+Two further readings were added while running this arm, both stated by
 the documents and neither specific to a bench tool: (1) a demonstration is evidence for **one** act, so when
 the instruction numbers its acts as steps, values from a later step are not poured into the earlier act's
 argument list (this alone took `cb-060` from 0.4 to the exact expected command `flowctl workflow get --id
 wf-001`); (2) a generic metavariable (`--id <string>`) carries no meaning, but the option's own description
-("Workflow ID") does, so a request value that uses that description's words fills that option. Refusals fell
-13 → 5 across the two changes.
+("Workflow ID") does, so a request value that uses that description's words fills that option; (3) a demonstration that pairs
+flags with **shapes** (`{"v1": 90, "v2": 10}`) is filled from the request's own numbers, and one that pairs
+them with a bare value keeps the example's flag when it has no description to match on (`tar -cf`); (4) a
+value's own words come from the **phrase** it sits in, never the whole sentence — without this every quoted
+value in a long instruction shared every word with every other, and no option could be told apart.
 
 **The honest reading of this number.** 0.43 mean is not a good score, and the two structural reasons are
 nameable. (a) **19 composite tasks name two or three tools in one instruction**; one command cannot satisfy

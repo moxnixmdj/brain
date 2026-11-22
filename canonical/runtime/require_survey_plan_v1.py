@@ -509,9 +509,23 @@ def parse_demos(text: str, tool: str) -> list[dict[str, Any]]:
                     gloss = (said + " " + gloss).strip()
                     break
             tokens = shlex_split(body)
+            # A demonstration states three separate facts, and the third is the one an argument
+            # list alone does not: which value belongs to which flag (`--type postgres`). Keeping
+            # the pairing is what lets the request's own values fill the same flags.
+            pairs: list[tuple[str, str]] = []
+            valued: list[str] = []
+            previous = ""
+            for token in tokens[1:]:
+                if token.startswith("-") and token != "-":
+                    previous = token
+                    continue
+                if previous:
+                    pairs.append((previous, token))
+                    previous = ""
+                valued.append(token)
             demos.append({"call": " ".join(tokens),
                           "options": [t for t in tokens[1:] if t.startswith("-") and t != "-"],
-                          "values": [t for t in tokens[1:] if not t.startswith("-")],
+                          "values": valued, "pairs": pairs,
                           "gloss": gloss.strip()[:300], "tools": tokens[:1],
                           "source": "examples" if in_block else "line"})
             continue
@@ -812,7 +826,20 @@ def require(text: str) -> dict[str, Any]:
                        "words": sorted(words_of(context))[:24], "context": context.strip()[:240]})
 
     for m in QUOTED.finditer(instruction):
-        add("literal", m.group(1), instruction[max(0, m.start() - 140): m.end() + 140], m.start())
+        # A value's own words are the words immediately around it, not the sentence's: in
+        # `... team "Platform" with the title "Fix it", set the priority to "urgent"` every
+        # quoted value would otherwise carry `title`, `priority` and `team` alike, and no
+        # option could be told apart from any other. The window is the phrase it sits in.
+        before = instruction[:m.start()]
+        cut = max([before.rfind(sep) for sep in (", ", "; ", " and ", " with ", " to ",
+                                                 " in ", " set ")] + [-1])
+        start = cut + 1 if cut >= 0 else max(0, m.start() - 60)
+        after = instruction[m.end(): m.end() + 90]
+        stop = min([i for i in (after.find(", "), after.find("; "), after.find(" and "),
+                                after.find(" with "), after.find(" set "), after.find(" to "))
+                    if i >= 0] + [len(after)])
+        # the phrase is what sits between the two nearest separators, and no further
+        add("literal", m.group(1), instruction[start: m.end() + stop], m.start())
     unquoted = QUOTED.sub(lambda m: " " * len(m.group(0)), instruction)
     marked: list[int] = []
     for m in re.finditer(r"(?:~(?=/)|[./][^\s'\"`,;:)]+|[A-Za-z0-9_.+-]+\.[A-Za-z0-9]{1,8})",
@@ -876,13 +903,23 @@ def require(text: str) -> dict[str, Any]:
                   and i not in marked]:
         values[index]["role"] = ""
 
+    # The closed class is the seed, not the boundary. An instruction may use a verb the class
+    # does not carry (`register`, `configure`, `route`), and a document may use exactly that
+    # verb in its own summary. What is left over is kept so a document can claim it later --
+    # the alternative is to refuse a request the world would have let us carry out.
+    claimed = {form for _, form in
+               [act for item in acts for act in [tuple(item["act"])]]} | \
+              {stem for _, stem in
+               [act for item in acts for act in [tuple(item["act"])]]}
+    unclaimed = sorted(w for w in words_of(instruction) if w not in STOP and w not in claimed)
+
     reasons: list[str] = []
     if not acts:
         reasons.append("NO_ACT_IN_THE_CLOSED_CLASS")
     if not values:
         reasons.append("NO_EXPLICIT_OBJECT_IN_THE_INSTRUCTION")
     return {"schema": SCHEMA, "instruction": instruction, "acts": acts, "values": values,
-            "reasons": reasons}
+            "unclaimed": unclaimed, "reasons": reasons}
 
 
 # --------------------------------------------------------------------------- plan
@@ -907,6 +944,38 @@ def _accepts(kind: str, value_kind: str) -> bool:
     if kind == "literal":
         return value_kind in ("literal", "path", "number")
     return False
+
+
+# Verbs that carry an act but say nothing about which act: they may introduce a sentence
+# ("using datapipe, ...") and never select one. Excluding them is the same discipline as STOP.
+ACT_NOISE = frozenset("use using tool discover yourself provided documentation".split())
+
+
+def _acts_stated_by_documents(tree: Mapping[str, Any], requirement: Mapping[str, Any]
+                             ) -> tuple[list[tuple[str, str]], list[dict[str, Any]]]:
+    """Acts the documents themselves state, named by the request's own leftover words.
+
+    A program's page says what it does in its first sentence: `Register a new data source
+    connection`, `Configure a traffic split`. When the request uses that same verb and the plan
+    the document supports carries out that same act, the document has answered the question the
+    request asked. The document is the authority, and the returned record says which one.
+    """
+    wanted = {w for w in requirement.get("unclaimed") or []
+              if len(w) > 3 and w not in ACT_NOISE}
+    if not wanted:
+        return [], []
+    nodes = [tree.get("root") or {}] + [n for n in (tree.get("root") or {}).get("children") or []]
+    found: list[tuple[str, str]] = []
+    authority: list[dict[str, Any]] = []
+    for node in nodes:
+        said = " ".join([str(node.get("title") or ""), str(node.get("summary") or "")])
+        for word in sorted(wanted & words_of(said)):
+            found.append((word, word))
+            authority.append({"act": word, "document": node.get("title") or "root",
+                              "said": said.strip()[:160]})
+    if not found:
+        return [], []
+    return found[:4], authority[:4]
 
 
 def _act_first(option: Mapping[str, Any], act: tuple[str, str]) -> bool:
@@ -1030,6 +1099,59 @@ def _demo_plan(demo: Mapping[str, Any], requirement: Mapping[str, Any], tool: st
     ordered = sorted(values, key=lambda v: (0 if v.get("role") == "product" else
                                             2 if v.get("role") == "source" else 1,
                                             int(v["position"])))
+    # When the example pairs its flags with values, that pairing is the shape to keep: each flag
+    # takes the request value whose own words name what the flag's description names, and the
+    # values that find no flag are the leftover the example does not cover.
+    pairs = list(demo.get("pairs") or [])
+    if pairs:
+        slots = {str(o.get("flag")): o for o in demo.get("_options") or []}
+        by_word: dict[str, list[Mapping[str, Any]]] = {}
+        for value in ordered:
+            for word in value.get("words") or []:
+                by_word.setdefault(word, []).append(value)
+        spent: set[str] = set()
+        filled_pairs: list[str] = []
+        for flag, example in pairs:
+            # A demonstration may pair a flag with a *shape* rather than a value (`{"v1": 90,
+            # "v2": 10}`, `{"host": ...}`). The shape is the example's own; what the request
+            # supplies is the values inside it. Filling a shape with the request's own numbers
+            # and words is not inventing -- it is the example's structure with the request's
+            # content, which is exactly what "the document is the plan" claims.
+            shaped = _shape_filled(example, ordered, spent)
+            if shaped is not None:
+                spent.update(_tokens_in(example) & {str(v["value"]) for v in ordered})
+                filled_pairs.extend([flag, shaped])
+                continue
+            want = words_of(str((slots.get(flag) or {}).get("words") or ""))
+            pick, score = None, 0
+            for word in want:
+                for value in by_word.get(word, []):
+                    if str(value["value"]) in spent:
+                        continue
+                    if 1 > score:
+                        pick, score = value, 1
+            if pick is None:
+                # The example's flag has no description to match on (`-cf` is a bundle of `-c`
+                # and `-f`, and neither is described in words here). What the example still
+                # states is its *shape*: a flag, then the object it names, then the objects that
+                # go in. The request's objects fill that shape in order, and the example's own
+                # flag is kept because the document is where it came from.
+                rest = [str(v["value"]) for v in ordered if str(v["value"]) not in spent]
+                if not rest:
+                    return None
+                filled_pairs.extend([flag, rest[0]])
+                spent.add(rest[0])
+                filled_pairs.extend(rest[1:])
+                spent.update(rest[1:])
+                break
+            spent.add(str(pick["value"]))
+            filled_pairs.extend([flag, str(pick["value"])])
+        argv = [tool] + list(prefix) + filled_pairs
+        return {"argv": argv, "operation": None,
+                "bound": [{"role": "demonstration", "call": demo["call"]}],
+                "unbound": [], "complete": True,
+                "document": " >> ".join(["root"] + list(prefix)),
+                "reason": "PLANNED_FROM_A_DEMONSTRATION"}
     filled = [str(v["value"]) for v in ordered]
     if len(filled) > len(demo["values"]):
         return None
@@ -1045,6 +1167,37 @@ def _demo_plan(demo: Mapping[str, Any], requirement: Mapping[str, Any], tool: st
             "bound": [{"role": "demonstration", "call": demo["call"]}],
             "unbound": [], "complete": True, "document": " >> ".join(["root"] + list(prefix)),
             "reason": "PLANNED_FROM_A_DEMONSTRATION"}
+
+
+def _tokens_in(text: str) -> set[str]:
+    return set(re.findall(r"[A-Za-z0-9._@/-]+", str(text or "")))
+
+
+def _shape_filled(example: str, values: Sequence[Mapping[str, Any]], spent: set[str]
+                  ) -> str | None:
+    """Fill a demonstrated shape (`{"v1": 90, "v2": 10}`) from the request's own values.
+
+    The example says the *structure*: a mapping from a version word to a number, or an object
+    with named keys. The request says the numbers and the words. A slot is filled when the
+    example's key is a word the request uses; the value is the request's number nearest that
+    word. Nothing here supplies a value the request did not state.
+    """
+    if not any(ch in example for ch in "{}[]:"):
+        return None
+    numbers = [str(v["value"]) for v in values
+               if v["kind"] == "number" and str(v["value"]) not in spent]
+    words = {w for v in values for w in (v.get("words") or [])}
+    filled = dict(zip(re.findall(r'"([^"]+)"\s*:', example), numbers))
+    if not filled:
+        return None
+    for key in filled:
+        if key.lower() not in words and not any(key.lower() in w for w in words):
+            return None
+    out = example
+    for key, number in filled.items():
+        out = re.sub(r'("%s"\s*:\s*)[\d.]+' % re.escape(key), lambda m: m.group(1) + number,
+                     out, count=1)
+    return out if out != example or not numbers else None
 
 
 def _product_slots(options: Sequence[Mapping[str, Any]]) -> list[Mapping[str, Any]]:
@@ -1429,10 +1582,19 @@ def plan(requirement: Mapping[str, Any], tree: Mapping[str, Any]) -> dict[str, A
     tool = str(tree.get("tool") or "")
     acts = [tuple(a["act"]) for a in requirement.get("acts") or []]
     values = list(requirement.get("values") or [])
+    document_acts: list[dict[str, Any]] = []
+    if not acts:
+        # The request's verb is not in the seed class. Before refusing, ask the documents: an
+        # act the *document* uses in its own words is stated by the document, and the request's
+        # word for it is then a legitimate name. This is the difference between "we do not know
+        # this verb" and "this program does not offer this act" -- only the document can say.
+        acts, document_acts = _acts_stated_by_documents(tree, requirement)
     if not acts:
         return {"schema": SCHEMA, "tool": tool, "plans": [], "complete": False,
                 "reason": "NO_ACT_THE_REQUEST_NAMES", "path": [],
                 "refusals": [{"reason": "NO_ACT_IN_THE_CLOSED_CLASS",
+                              "words": [w for w in requirement.get("unclaimed") or []
+                                        if len(w) > 3][:8],
                               "instruction": requirement.get("instruction")}]}
 
     root = tree.get("root") or {}
@@ -1490,6 +1652,8 @@ def plan(requirement: Mapping[str, Any], tree: Mapping[str, Any]) -> dict[str, A
     # R1 -- a worked example, deepest document first: it is the only whole act on offer
     for depth in range(len(nodes) - 1, -1, -1):
         for demo in nodes[depth].get("demos") or []:
+            # the demonstration's flags are paired with values by the node's own option list
+            demo = {**demo, "_options": nodes[depth].get("options") or []}
             candidate = _demo_plan(demo, requirement, tool, prefix_of(depth))
             if candidate:
                 add(candidate["argv"], operation=None, bound=candidate["bound"], depth=depth,
