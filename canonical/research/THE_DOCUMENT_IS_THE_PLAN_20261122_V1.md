@@ -918,3 +918,78 @@ removing it.
 
 Two lessons, both recorded because they cost real time: a metric that can shrink its denominator will
 certify a regression as progress, and a principled rule that loses is still a losing rule.
+
+### A22 — the pairing has no trustworthy ordering signal, and six measurements say so
+
+A20 established that the candidate readings are wrong rather than badly ranked. This section asked
+the next question: *why* wrong, exactly. The answer is now precise and it is not the answer I
+wanted.
+
+**The defect is the value's phrase, and it is real.** A value's words were read from the text
+around it, and that window ignored three boundaries: a sentence ending at a line break, a relative
+pronoun opening a new clause, and an introducer naming the value that follows it. Three mispairings
+followed directly:
+
+| request | leak | consequence |
+|---|---|---|
+| `in "acme-corp/web-platform" that have the label "priority:critical"` | repo carried `label`, `have` | `--repo` and `--label` indistinguishable |
+| `in "acme-corp/infra" titled "Evaluate qdrant"` | repo carried the title's word | `--title` matched from the repo's phrase |
+| `named "deploy-staging" using the flowctl tool.\nThe workflow should have two steps: a "build" step` | `build` carried the previous sentence's `workflow` and `step` | `--name` chose `build` over `deploy-staging` |
+
+Fixing all three makes every value's phrase correct, verified directly on each request. It also
+exposed a fourth defect underneath: `words_of` singularises with one rule, so `named` reduces to
+`nam` while `name` stays `name`, and `--name`'s description ("Workflow name") matched nothing in
+`named "deploy-staging"`. Comparing the *spellings*, bounded by how many letters the rule removes,
+reunites them without a synonym table.
+
+**And the score goes down: 0.4373 against 0.4401, one task down and none up.** The verified-correct
+parse is worth less than the broken one on this bench, because the broken one occasionally lands on
+the right value by accident.
+
+**Six variants of the pairing were then measured against that fixed parse, and every one loses:**
+
+| variant | A5 | up / down |
+|---|---|---|
+| demo swap: a paired demo leads over an empty one | 0.4268 | 7 / 6 |
+| fewer-missing-required tiebreak among incomplete readings | 0.4341 | 5 / 6 |
+| the parse fixes alone | 0.4373 | 0 / 1 |
+| *committed* | **0.4401** | — |
+
+The demo swap is the informative one. It is *right* — `datapipe transform create [flags]` states
+nothing, and the paired demo states `--name`, `--sql`, `--source` — and it gains seven tasks,
+including +0.50 on cb-057 and +0.30 on three others. It loses six, and four of those are **crashes
+not shortfalls**: `ValueError: invalid literal for int()` because a value like `acme-corp/infra`
+was placed in a flag the backend reads as a number. The document does not declare that type
+(`--limit` carries the words "Maximum number of stories to return" and no type at all), so
+avoiding the crash would require guessing which flags take numbers — exactly the world knowledge
+this module may not hold. A richer pairing places more values into more flags, and some of those
+flags are numeric; the information needed to place them safely is not in the document.
+
+**Conclusion, and it is the same conclusion A18 and A20 reached from other directions:** the
+bottleneck is a missing *assignment* between the document's flags and the request's values, and
+every ordering heuristic around that gap has now been measured and rejected — seven attempts
+across A18, A20 and here. The next mechanism must produce the pairing from stated evidence
+(an option's declared type or choices, a demonstration's own paired example) rather than ranking
+candidates after the fact. Until then the committed state stands, and the honest number is
+**0.4401**, not the 0.4632 this document reported before A21.
+
+**Nothing from this section is committed, and that is deliberate.** The window fixes and the
+spelling comparison are correct and are covered by two tests that pass; they are also a measured
+regression (0.4373 against 0.4401, one task down, none up), so they are written up here and left
+out of the tree rather than shipped as a number that went backwards. A further measured detail
+makes the reason concrete and is worth carrying forward:
+
+**The `break` in the pairing loop is load-bearing by accident.** When one flag matched no word,
+the loop took a leftover value for it and *stopped*. Removing the stop lets the later flags get
+their turn -- and fixes cb-058's third flag exactly -- but it also lets non-numeric values into
+numeric flags, and the backend then raises `ValueError: invalid literal for int()`: cb-006 sends
+`urgent` where `--priority` needs a number and cb-026 sends `Blocked` where the limit needs one,
+each losing 0.38. Measured at 0.4276 with five tasks unable to run at all. The same crash appeared
+in the demo-swap variant, from `acme-corp/infra` and `/replies`. Three independent variants have
+now produced it.
+
+So the missing information is not only "which flag takes which value" but **"which flags take
+numbers"**, and the documents do not say: `--limit` carries the words "Maximum number of stories
+to return" and declares no type. Whether a flag is numeric is recoverable from a demonstration
+that shows a number, or from the program's own response to a bad value -- not from the description
+text. Whatever produces the pairing must carry that too.
