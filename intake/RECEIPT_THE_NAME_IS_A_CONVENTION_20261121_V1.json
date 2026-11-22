@@ -1,0 +1,77 @@
+{
+ "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+ "constraint_pressure": {
+  "changed": "nothing; no constraint altered on taste",
+  "finding": "the largest missing ingredient is a meaning->name convention table: not derivable, not in the environment, carried by frontier models in their weights",
+  "option_1": "put the convention table in the external store (letter of the constraint allows it) and MEASURE the instant-knowledge claim rather than assume it",
+  "option_2": "synthesise expressions and lean on the oracle; measure cost"
+ },
+ "date": "2026-11-21",
+ "expressions_not_symbols": [
+  {
+   "body": "n % p == 0",
+   "id": "199",
+   "passes": true
+  },
+  {
+   "body": "eq.lhs - eq.rhs",
+   "id": "187",
+   "passes": true
+  },
+  {
+   "body": "index.free_symbols",
+   "id": "191",
+   "passes": true
+  }
+ ],
+ "instrument": "canonical/tools/surface_search_v1.py",
+ "measured": {
+  "bruteforce_cost": {
+   "37_items": "~5.9 h",
+   "one_item_at_rank_597": "~9.6 min"
+  },
+  "oracle_cost_one_item_seconds": 0.97,
+  "rank_of_required_symbol_by_name_overlap": {
+   "198_isprime": 597,
+   "201_jacobi_symbol": 1,
+   "203_primeomega": 743,
+   "204_primepi": 743,
+   "205_totient": 21,
+   "206_mobius": 5,
+   "207_legendre_symbol": 1
+  },
+  "surface_search_score": "0/3 on the probed subset; type filter cannot rank by purpose",
+  "type_filter_reduction": "928 -> 40 (23x) from stated information",
+  "zero_overlap_items": [
+   "198 isprime",
+   "203 primeomega",
+   "204 primepi"
+  ]
+ },
+ "model_calls": 0,
+ "route_tested": "synthesis over the artifact's own surface with the test as oracle",
+ "schema": "BRAIN_RECEIPT_THE_NAME_IS_A_CONVENTION_20261121_V1",
+ "stages": {
+  "oracle": "the item's hidden test; the only judge",
+  "surface": "dir() of the alias the stub declared -> 928-944 names",
+  "type_filter": "call each with the stub's parameters in one process, keep those whose return satisfies the stub's own annotation -> 928 to 40"
+ },
+ "truth": {
+  "achieved": false
+ },
+ "verdict": {
+  "bottleneck": "a purpose->name convention is not derivable from the description, and some items need an expression rather than a symbol",
+  "false": [
+   "scan-diff-fetch is a complete solution: the missing thing is a name, not a fact",
+   "surface search closes the gap: it cannot rank by purpose"
+  ],
+  "true": [
+   "oracle is real and discriminating (37/40)",
+   "deriving a body from stated declarations works (3/40) with understood win conditions",
+   "type filter is a real 23x reduction"
+  ],
+  "unproven": [
+   "expression-level synthesis over typed parameters with the oracle as judge"
+  ]
+ }
+}
