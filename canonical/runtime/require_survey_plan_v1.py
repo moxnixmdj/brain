@@ -2240,9 +2240,14 @@ def plan(requirement: Mapping[str, Any], tree: Mapping[str, Any],
     for candidate in plans:
         missing = [str(o.get("flag")) for o in (nodes[-1].get("options") or [])
                    if o.get("required") is True and str(o.get("flag")) not in candidate["argv"]]
-        if missing:
-            candidate["complete"] = False
-            candidate["missing_required"] = sorted(set(missing))
+        candidate["missing_required"] = sorted(set(missing))
+        # Completeness is decided HERE, and it is decided both ways. The census used to only
+        # ever clear the flag, so a candidate from a route that never set it stayed incomplete
+        # forever -- `linear project list` declares no required flags and was still reported
+        # incomplete, and 59 of 60 tasks reported incomplete including the ones that scored 0.9.
+        # A reading is complete exactly when it satisfies every flag its own landing page marks
+        # required: nothing more is asked of it, and nothing less will do.
+        candidate["complete"] = not missing
     plans.sort(key=lambda c: (0 if c.get("complete") else 1,))
 
     good = [p for p in plans if p["complete"]]

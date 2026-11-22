@@ -559,3 +559,28 @@ def test_naming_a_thing_outranks_mentioning_it():
     tree = R.survey(exe, want=sorted(R.words_of(request)), probes=16)
     routed = R.route(tree, R.words_of(request), [("list", "list")])
     assert routed["path"] == ["project", "list"], routed["path"]
+
+
+def test_completeness_is_decided_both_ways_and_means_the_pages_own_requirements():
+    """A reading is complete exactly when it satisfies every flag its page marks required.
+
+    The census used to only ever CLEAR this flag, so a candidate from a route that never set it
+    stayed incomplete forever: `linear project list` declares no required flags and was reported
+    incomplete, and 59 of 60 real tasks reported incomplete -- including ones that scored 0.9.
+    A flag that is always false carries no information, and this one is the system's only means
+    of saying what it does not know.
+    """
+    # a page with no required flags: a command that names the page is complete
+    request = "List all projects in the Linear workspace."
+    out = R.require_survey_plan("/tmp/cb/bin/linear", request, probes=16)
+    assert out["plans"][0]["argv"][1:] == ["project", "list"], out["plans"][0]["argv"]
+    assert out["plans"][0]["missing_required"] == []
+    assert out["plans"][0]["complete"] is True
+
+    # a page WITH required flags: a reading that lacks them is incomplete, and says which
+    created = ("Create a new workflow named \"deploy-staging\" using the flowctl tool.\n"
+               "The workflow should have two steps: a \"build\" step with action \"run_pipeline\"\n"
+               "and an \"approve\" step with action \"gate\".")
+    plans = R.require_survey_plan("/tmp/cb/bin/flowctl", created, probes=16)["plans"]
+    assert any(p["complete"] for p in plans), [p.get("missing_required") for p in plans]
+    assert any(p["missing_required"] for p in plans), "an incomplete reading must name what it lacks"
