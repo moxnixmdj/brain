@@ -657,3 +657,77 @@ the never-seen programs, where the web was never consulted at all. The premise "
 true of the *world* and false of *these sources*: a real manual is on the web, and `github.com` search is not
 a way to read it. Closing that gap means a documentation reader (a real manual fetch + parse), which is a
 separate component, not a better word filter. It is named here as the next bottleneck rather than claimed.
+
+### A16 — the manual states the form no usage line can
+
+A15 ended on a named gap: the reachable web cannot answer "how do I do X with the program installed here".
+The program's own `--help` has the same gap from the other side. `sort --help` states that the file is the
+operand and that `-k` takes a key; it does not state that *to sort numerically on the second field* you write
+`--key=2,2n`. That is a property the request names and no usage line contains.
+
+**The manual is a real document at a reachable host.** `api.github.com/repos/coreutils/coreutils/contents/doc/coreutils.texi`
+returns 685,761 bytes. It is fetched, not remembered; nothing about `sort`'s key syntax exists in any weight or
+table in this repository. `section_for` finds a program's section by the only unambiguous boundary the file
+has — `@node <prog> invocation` — after a table-of-contents line matched a looser name regex and returned the
+wrong region. `passages_for` scores sentences against the request's words; `forms_in` keeps only example forms
+whose flag the document itself declares.
+
+**The measurement.** Request: `Sort /tmp/a16/src/data numerically by the second field`. The planner alone, on
+the program's `--help` pages, produces `sort /tmp/a16/src/data` — the file and nothing about the property asked
+for — with `complete=False` and `field`, `numerically`, `second` dropped. It is wrong.
+
+The manual's own text states three forms: `--key=2,2` (*"To sort on the second field, use `--key=2,2`"*),
+`--key=2n`, and `--key=2,2n` (*"If you had written `-k 2n` instead of `-k 2,2n`…"*). Each becomes its own
+candidate. Run against the world:
+
+| form | stdout | correct |
+|---|---|---|
+| `--key=2,2` | `a 100, b 20, c 9` | **no** |
+| `--key=2n` | `c 9, b 20, a 100` | yes |
+| `--key=2,2n` | `c 9, b 20, a 100` | yes |
+
+**2 of 3 forms work.** That number is the point, not a footnote: the manual *proposes*, and the world
+*decides*. A component that read the manual and trusted it would have taken `--key=2,2` — the form the manual
+states first and most explicitly — and been wrong. End to end through `verify_plans`, the first candidate
+(`--key=2,2n`) is accepted on the first try, and the same result holds across hash seeds. Before this
+component the planner had no reading that could succeed at all.
+
+**Coverage, stated honestly.** 15/15 coreutils programs read (`base32 cut sort head tail wc uniq tr cp mv rm
+paste split date seq`). `gzip`, `sed`, `tar` return `NO_CATALOGUE_ENTRY_FOR_THIS_PROGRAM`: their official
+repositories do not exist on any host reachable from here, and a fabricated URL is not a manual. Those three
+are named as unread, not glossed.
+
+**What it costs when it is irrelevant.** The manual is read only when the pages left a named word with no place
+*and* no page already settled the request. Read more eagerly — whenever any word was dropped — it fired on
+`cb-037` and moved `--severity P1` out of its own flag. That widening was measured at A5 0.4457 against 0.4464
+and reverted. The trigger is the narrow one that was measured, not the generous one that seemed natural.
+
+### A16b — the defect the manual work exposed: the same request had two answers
+
+Chasing a 0.4464 → 0.4457 movement on `cb-037` produced something worse than the movement. The same code, the
+same task, and the same document returned **different commands in different processes**. Setting
+`PYTHONHASHSEED` and holding everything else fixed:
+
+| seeds | `--severity` received |
+|---|---|
+| 5 of 12 | `P1` — correct |
+| 7 of 12 | `"Payment Service Degradation"` — the value that belonged to `--title` |
+
+The cause is a tie broken by memory layout. `--severity`'s description names both `severity` and `incident`;
+the request contains both `P1` and `"Payment Service Degradation"`. Both pairings scored exactly 1, and the
+winner was whichever the iteration order of a `set` of words reached first — so the answer depended on the
+process's hash seed. Three of this session's earlier "regressions" and "restorations" were this, not code
+changes: `git checkout` of a state file appeared to change a score because the score was never fixed.
+
+**The fix is stated evidence, not a better tie-break table.** A value belongs to the word it *follows* in the
+request. `…titled "Payment Service Degradation" with severity "P1"…` places `severity` ten characters from
+`P1` and `incident` a hundred and sixty from it. Proximity in the request is evidence the request itself
+supplies; iteration order is not evidence of anything. Among the flag's words, the nearest one wins; the
+description's own word order and the value's position separate exact ties, so no seed can disagree.
+
+**Verified.** Twelve of twelve seeds now produce `--severity P1`. A5 scores **0.4464 on three separate hash
+seeds** (0.4464 / 0.4464 / 0.4464), against 0.4457–0.4464 before. The number did not rise; it became *true*.
+A test pins determinism itself, and A16 holds its 2-of-3 result across seeds.
+
+`--title`/`--alerts` on `cb-037` remain swapped. That is a third, separate defect in the same demonstration
+path, still open, and not claimed as fixed by this one.

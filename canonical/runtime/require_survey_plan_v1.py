@@ -1247,12 +1247,34 @@ def _demo_plan(demo: Mapping[str, Any], requirement: Mapping[str, Any], tool: st
                     spent.add(str(pick["value"]))
                     filled_pairs.extend([flag, str(pick["value"])])
                     continue
-            for word in want:
+            # Which of the flag's own words carries the pairing? Every word here is a word the
+            # flag's description uses, so all of them are candidates and they cannot be ranked
+            # by that. They are ranked by the description's own order -- the flag's name comes
+            # first, its elaboration after -- which is the document's statement of what the flag
+            # is chiefly called. Ordering by that, not by set iteration, is the difference
+            # between a plan that is reproducible and one that changes with the process.
+            description = str(slot.get("words") or "").lower()
+            ordered_want = sorted(want, key=lambda w: (description.find(w), w))
+            best: tuple[int, int, int] | None = None
+            for rank, word in enumerate(ordered_want):
                 for value in by_word.get(word, []):
                     if str(value["value"]) in spent:
                         continue
-                    if 1 > score:
-                        pick, score = value, 1
+                    # Among words equally able to name the pairing, the one the value actually
+                    # follows is the one it belongs to: `titled "X" with severity "P1"` binds P1
+                    # to `severity` at ten characters and to `incident` at a hundred and sixty.
+                    # Proximity in the request is stated evidence; a tie broken by iteration
+                    # order is not evidence at all.
+                    at = str(requirement.get("instruction") or "").lower().find(word)
+                    gap = abs(int(value.get("position") or 0) - at) if at >= 0 else 1 << 30
+                    # proximity first: the value belongs to the word it follows. Description
+                    # order and the value's own position only separate exact ties, so no two
+                    # seed orders can disagree.
+                    key = (gap, rank, int(value.get("position") or 0))
+                    if best is None or key < best:
+                        best, pick, score = key, value, 1
+            if pick is not None and str(pick["value"]) in spent:
+                pick = None
             if pick is None:
                 # The example's flag has no description to match on. Before using its *shape*,
                 # the example's own values must have something to do with the request's: a
@@ -1828,7 +1850,7 @@ def _with_redirect(argv: list[str], requirement: Mapping[str, Any],
 
 
 def plan(requirement: Mapping[str, Any], tree: Mapping[str, Any],
-         *, ask_program: bool = True) -> dict[str, Any]:
+         *, ask_program: bool = True, read_manual: bool = True) -> dict[str, Any]:
     """Ordered candidate readings of (instruction, document), every refusal named.
 
     The order is a statement about what each reading explains, not a claim about the world:
@@ -1882,7 +1904,7 @@ def plan(requirement: Mapping[str, Any], tree: Mapping[str, Any],
         return [nodes[i]["title"] for i in range(1, depth + 1)]
 
     def add(argv: list[str], *, operation: Any, bound: Any, depth: int,
-            reason: str) -> None:
+            reason: str, front: bool = False) -> None:
         if len(plans) >= MAX_CANDIDATES:
             return
         # a candidate is the same candidate only if it also carries the same shell shape:
@@ -1915,7 +1937,10 @@ def plan(requirement: Mapping[str, Any], tree: Mapping[str, Any],
                 bound = list(bound) + [{"role": "redirect", "value": candidate["stdout_to"]}]
                 candidate["bound"] = bound
                 candidate["argv_in_world"] = argv
-        plans.append(candidate)
+        if front:
+            plans.insert(0, candidate)
+        else:
+            plans.append(candidate)
         for item in unbound:
             refusals.append({"reason": "NO_SLOT_ACCEPTS_" + str(item["kind"]).upper(),
                              "value": item["value"], "context": item.get("context", "")[:160]})
@@ -2135,6 +2160,38 @@ def plan(requirement: Mapping[str, Any], tree: Mapping[str, Any],
                     if candidate["dropped_words"] and candidate["complete"]:
                         candidate["complete"] = False
 
+    # ------------------------------------------------------- reading the program's real manual
+    # When a request names a property (`numerically`, `by the second field`) that no usage line
+    # can express, the program's manual states the form: `--key=2,2n`. The manual is fetched, not
+    # remembered, and each form it offers becomes a candidate the world must accept -- the manual
+    # proposes, the run decides. Nothing is added when the pages already settled the request.
+    manual_forms: list[dict[str, Any]] = []
+    # The manual is read only for a request the pages could not settle: a named word left with no
+    # place. A request whose places are all filled is not a question, and consulting a manual for
+    # it displaces a correct reading -- measured: doing so moved `--severity P1` out of its flag.
+    if read_manual and dropped and not any(p["complete"] for p in plans):
+        try:
+            from canonical.runtime import program_manual_v1 as _manual
+            # the base is taken once, before any manual candidate exists -- otherwise each form
+            # would be appended to the previous one and the manual would appear to state a
+            # command it never wrote
+            base = next((c for c in plans if c.get("bound")), None)
+            for form in _manual.planned_forms(tool, requirement,
+                                              [o for node in nodes
+                                               for o in node.get("options") or []]):
+                if base is None:
+                    break
+                argv = list(base["argv"]) + [form["form"]]
+                manual_forms.append({**form, "argv": argv})
+                # A form the manual states for a gap the pages left is the reading most likely to
+                # be right, and it is the only one that can carry the request's own words
+                # (`numerically`) into an argument. It goes first for that reason -- not because
+                # it is trusted: `verify_plans` runs it, and the world decides.
+                add(argv, operation=None, bound=base.get("bound") or [], depth=len(nodes) - 1,
+                    reason="PLANNED_FROM_THE_PROGRAMS_OWN_MANUAL", front=True)
+        except Exception as exc:            # a manual must never break a plan
+            manual_forms.append({"error": f"{type(exc).__name__}: {exc}"})
+
     good = [p for p in plans if p["complete"]]
     if dropped:
         refusals.append({"reason": "NO_PLACE_IN_THIS_DOCUMENT_FOR", "words": dropped[:8]})
@@ -2144,6 +2201,7 @@ def plan(requirement: Mapping[str, Any], tree: Mapping[str, Any],
         "document_usage": (nodes[-1].get("usage") or {}).get("usage"),
         "plans": plans, "complete": bool(good), "refusals": refusals,
         "dropped_words": dropped,
+        "manual_forms": manual_forms,
         "asked_the_program": asked,
         "reason": ("PLANNED" if good else (plans[0]["reason"] if plans
                                            else "NO_OPERATION_IN_THIS_DOCUMENT")),
@@ -2263,12 +2321,13 @@ def redirects(requirement: Mapping[str, Any], world: str | None = None) -> list[
     return out
 
 
-def require_survey_plan(tool: str, instruction: str, **survey_kwargs: Any) -> dict[str, Any]:
+def require_survey_plan(tool: str, instruction: str, *, read_manual: bool = True,
+                        **survey_kwargs: Any) -> dict[str, Any]:
     """The one call: require the instruction, survey the tool, route, plan."""
     req = require(instruction)
     survey_kwargs.setdefault("want", sorted(words_of(instruction)))
     tree = survey(tool, **survey_kwargs)
-    result = plan(req, tree)
+    result = plan(req, tree, read_manual=read_manual)
     result["instruction"] = instruction
     result["acts"] = req["acts"]
     result["values"] = req["values"]

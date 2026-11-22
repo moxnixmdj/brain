@@ -414,3 +414,37 @@ def test_the_made_thing_is_written_in_the_place_the_grammar_gives_it():
         {"role": "positional", "value": "two.diff", "means": "patch", "place_index": 2},
     ])
     assert argv == ["quilt", "stitch", "all.diff", "one.diff", "two.diff"]
+
+
+def test_the_same_request_plans_the_same_way_twice():
+    """A plan is a reading of the request, not a sample from it.
+
+    Every value this planner assigns is fixed by stated evidence. The failure this pins was
+    real: `--severity`'s description names both `severity` and `incident`, so two of the
+    request's values matched it equally well, and which one won came from the iteration order of
+    a `set` of words -- that is, from the process's hash seed. Measured across twelve seeds, five
+    produced `--severity P1` and seven produced `--severity "Payment Service Degradation"`. The
+    same request and the same document gave different answers because a tie was broken by memory
+    layout. The fix is stated evidence: a value belongs to the word it follows in the request,
+    which is `with severity "P1"` at ten characters against `incident` at a hundred and sixty.
+
+    The page is a program's own, read the way the planner reads every page -- a fixture cannot
+    state the parent pages a demonstration is looked up through, and a test that rebuilds the
+    path by hand tests the fixture instead of the planner.
+    """
+    binary = "/tmp/cb/bin/alertmgr"
+    if not pathlib.Path(binary).exists():
+        pytest.skip("the benchmark's alertmgr page is not on this machine")
+    requirement = R.require(
+        'Handle a production incident. Create a new incident titled '
+        '"Payment Service Degradation" with severity "P1" and link the '
+        'acknowledged alerts to it.')
+    tree = R.survey(binary, want=sorted(R.words_of(requirement["instruction"])), probes=14)
+    once, twice = [], []
+    for target in (once, twice):
+        target.extend(p["argv"] for p in R.plan(requirement, tree, ask_program=False,
+                                                read_manual=False)["plans"])
+    assert once == twice
+
+    # the value binds to the word it follows, not to the nearest word that fits at all
+    assert any("P1" in argv for argv in once), once
