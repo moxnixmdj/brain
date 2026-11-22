@@ -48,7 +48,7 @@
   "causal_blocker": "Stored priors (learned environment rows from a DIFFERENT instance) were seeded into a fresh instance's scan without re-execution, so a fresh instance could silently inherit transitions that do not hold there.",
   "date": "2026-11-22",
   "expected_parent_change": "Stored priors are now re-executed on the fresh instance before use: only root transitions that hold survive into the scan seed, the rest are discarded and re-derived, and the receipt honestly reports the verified count and the discarded count.",
-  "expected_parent_frontier_change": "Stored priors are now re-executed on the fresh instance before use: only root transitions that hold survive into the scan seed, the rest are discarded and re-derived, and the receipt honestly reports the verified count and the discarded count.",
+  "expected_parent_frontier_change": "Stored priors are re-executed on the fresh instance before use: only root transitions that hold survive into the scan seed, the rest are discarded and re-derived, and the receipt honestly reports the verified count and the discarded count.",
   "explicit_user_authorization": [
     "What if we make a perfect algorithm and that is basically our model?",
     "All he should do is basically go into any new arbitrary environment in the computer and he doesn't know anything about anything",
@@ -145,7 +145,7 @@
         "a higher success rate on a benchmark",
         "a saved plan rule without fresh-instance evidence"
       ],
-      "real_outcome": "A fresh instance of a goal family no longer silently inherits another instance's learned transitions: only root transitions that re-execute are trusted, the rest are discarded and re-derived.",
+      "real_outcome": "Stored priors are re-executed on the fresh instance before use: only root transitions that hold survive into the scan seed, the rest are discarded and re-derived, and the receipt honestly reports the verified count and the discarded count.",
       "surviving_necessity": "the owner's mission \u2014 one composed loop that works honestly in any new arbitrary environment"
     },
     "obs_inherited_system": {
@@ -253,7 +253,7 @@
           "route": "THE_FAR_INSTANCING_HAS_A_SEPARATE_WALKER"
         }
       ],
-      "checked_at_utc": "2026-11-22T23:05:00+00:00",
+      "checked_at_utc": "2026-11-22T22:40:19+00:00",
       "comparison_dimensions": [
         "CORRECTNESS",
         "CAPABILITY_STRENGTH",
@@ -293,7 +293,7 @@
       "selected_route": "PERFECT_ALGORITHM_VERIFIED_PRIORS_V1",
       "selected_route_preflight": {
         "all_required_dependencies_ready": true,
-        "checked_at_utc": "2026-11-22T23:05:00+00:00",
+        "checked_at_utc": "2026-11-22T22:40:19+00:00",
         "execution_dependencies": [
           {
             "dependency": "local Python 3.11 runtime with unittest",
