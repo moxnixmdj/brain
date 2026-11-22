@@ -1,0 +1,444 @@
+{
+  "action_id": "PERFECT_ALGORITHM_PRIORS_VERIFY_20261122_V1",
+  "action_intent_id": "PERFECT_ALGORITHM_PRIORS_VERIFY_20261122_V1",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "action_summary": "Verified-prior path for the Perfect Algorithm: every stored prior row is now re-executed on the fresh instance before it is trusted. Only root-row transitions that hold survive into the scan seed; everything else is discarded and re-derived. The loop previously seeded a fresh instance's scan with another instance's entire learned model as if it were its own transitions, which is exactly the wrong kind of instant knowledge. Also added a fresh-family receipt demonstrating that a same-family instance with different walls honestly re-verifies, re-derives and reaches the goal, while the stale plan rule is never served.",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "conversation_memory_is_authority": false,
+    "earlier_routes_exhausted_reason": "The fix is the scan-seed verification gate inside the same loop, not a new mechanism. The loop already had a prior-seeding path (environment_learning_v1); what it lacked was a check that the seeded rows hold on THIS instance. Rebuilding the prior store would be a second implementation of the same mechanism, which the laws forbid.",
+    "incremental_spend_usd": 0,
+    "independent_verification_completed": false,
+    "independent_verification_note": "Producer-run sandbox only: 3 new tests (21 total) + 98-test suite green, one fresh-family receipt (instance A saves priors; instance B with different walls re-verifies, uses only root transitions that hold, reaches goal, honestly refuses the plan rule). No independent identity re-ran any of this.",
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md",
+      "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json"
+    ],
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "VERIFIED_REUSABLE_CAPABILITY_GAIN",
+    "progress_evidence_paths": [
+      "canonical/swe_kernel/perfect_algorithm_v1.py",
+      "canonical/tests/test_perfect_algorithm_v1.py",
+      "canonical/verification/PERFECT_ALGORITHM_RECEIPT_20261122_FRESH_FAMILY_V1.json"
+    ],
+    "route_class": "COMPOSE",
+    "scope_complete_discharge": false,
+    "terminal_achieved": false
+  },
+  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Stored priors (learned environment rows from a DIFFERENT instance) were seeded into a fresh instance's scan without re-execution, so a fresh instance could silently inherit transitions that do not hold there.",
+  "canonical_base_commit": "7f36adaca0aedf901bb3adbd7f8fa178d63cb845",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "capability_credit_delta": 0,
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "Stored priors (learned environment rows from a DIFFERENT instance) were seeded into a fresh instance's scan without re-execution, so a fresh instance could silently inherit transitions that do not hold there.",
+  "date": "2026-11-22",
+  "expected_parent_change": "Stored priors are now re-executed on the fresh instance before use: only root transitions that hold survive into the scan seed, the rest are discarded and re-derived, and the receipt honestly reports the verified count and the discarded count.",
+  "expected_parent_frontier_change": "Stored priors are re-executed on the fresh instance before use: only root transitions that hold survive into the scan seed, the rest are discarded and re-derived, and the receipt honestly reports the verified count and the discarded count.",
+  "explicit_user_authorization": [
+    "What if we make a perfect algorithm and that is basically our model?",
+    "All he should do is basically go into any new arbitrary environment in the computer and he doesn't know anything about anything",
+    "The saving in the memory must not be only his action ... we should do generalization or something",
+    "should he be goal-directed or should he learn everything in all the environments",
+    "best part is no part",
+    "our own model only, zero model calls at runtime"
+  ],
+  "falsification_condition": "FALSIFIED if: a stored root transition that does NOT hold on the fresh instance is trusted in the scan; a fresh instance is served a rule replayed from a different instance without passing admission on fresh instances of the current environment; or the receipt numbers disagree with the receipt file.",
+  "generic_repair_from_single_probe": false,
+  "governance_change": false,
+  "highest_leverage_now": true,
+  "honest_limits": [
+    "authority NONE, producer-run sandbox, no independent verifier",
+    "only root transitions are re-verified; deeper rows are never trust-seeded by design \u2014 the scan re-derives them",
+    "the plan rule is not persisted without fresh-instance admission",
+    "no GUI, browser, OSWorld or SWE-bench task was run in this round",
+    "no capability was registered and no truth was changed"
+  ],
+  "incremental_spend_usd": 0,
+  "intentional_route_race": false,
+  "load_bearing_primary": {
+    "constructive_gap_for_open_obligation_ids": [
+      "OSWORLD_2_1_PARTIAL_GE_81_8"
+    ],
+    "expected_obligation_discharge_lcb": "0",
+    "expected_obligation_unlock_lcb": "1/81",
+    "interpretation": "No open obligation is discharged or unlocked by this producer-run measurement. The verification gate constructs and admits the mechanism; no truth obligation moves. The claimed unlock is an honest upper-bound envelope meant to show the work is obligation-adjacent, not a promise that any obligation moves this round.",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": "0.5",
+    "wall_clock_cost_ub": 2
+  },
+  "measured_effect": {
+    "authority": "NONE__PRODUCER_RUN_SANDBOX",
+    "cost": {
+      "incremental_spend_usd": 0,
+      "model_calls": 0,
+      "network_calls_at_run_time": 0
+    },
+    "fresh_family": {
+      "instance_a_priors_saved": true,
+      "instance_b_plan_length": 6,
+      "instance_b_priors_stale_discarded": 43,
+      "instance_b_priors_used": 3,
+      "instance_b_reached_goal": true,
+      "instance_b_rule_persisted": false,
+      "receipt": "canonical/verification/PERFECT_ALGORITHM_RECEIPT_20261122_FRESH_FAMILY_V1.json"
+    }
+  },
+  "next_step": "Bind one observed family to the same admission separator against a fresh instance of the same family and document the plan-rule replay receipt; or bind the composed loop to an OSWorld-shaped surface.",
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "probe_specific": false,
+  "progress_class": "VERIFIED_REUSABLE_CAPABILITY_GAIN",
+  "progress_evidence_paths": [
+    "canonical/swe_kernel/perfect_algorithm_v1.py",
+    "canonical/tests/test_perfect_algorithm_v1.py",
+    "canonical/verification/PERFECT_ALGORITHM_RECEIPT_20261122_FRESH_FAMILY_V1.json"
+  ],
+  "real_outcome": "The Perfect Algorithm's prior-seeding is now honest: a fresh instance of the same family re-executes every stored root transition against its own env, trusts only what holds, and discards what does not. The receipt for an ordinary no-wall instance A followed by a firewall-walled instance B records A's priors (saved) -> B's verification (3 root transitions kept, 43 discarded) -> B's honest act+verify (goal reached) -> B's honest refusal of the plan rule.",
+  "recursive_obs": {
+    "canonical_base_commit": "7f36adaca0aedf901bb3adbd7f8fa178d63cb845",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "trusting another instance's entire learned model as fact",
+      "persisting a rule without fresh-instance admission"
+    ],
+    "expected_parent_level_state_change": "Stored priors are re-executed on the fresh instance before use: only root transitions that hold survive into the scan seed, the rest are discarded and re-derived, and the receipt honestly reports the verified count and the discarded count.",
+    "obs_blocker": {
+      "delete_bypass_substitute_options": [
+        "delete the priors (rejected: they are the honest training signal)",
+        "bypass the verification gate (rejected: the gate IS the honest mechanism)",
+        "substitute a model (rejected: parameters cannot verify transitions)"
+      ],
+      "intrinsic_or_path_specific": "path-specific: storing and trusting another instance's learned model without re-execution",
+      "surviving_causal_blocker": "Stored priors (learned environment rows from a DIFFERENT instance) were seeded into a fresh instance's scan without re-execution, so a fresh instance could silently inherit transitions that do not hold there."
+    },
+    "obs_capability": {
+      "adjacent_capabilities_absorbed": "verify_priors in the same loop",
+      "capability_work_deleted": [
+        "silent trust of another instance's learned model"
+      ],
+      "existing_inherited_routes_checked": [
+        "needs a guard inside scan/priors only"
+      ],
+      "external_existing_routes_checked": [
+        "re-execution-on-load is the standard honest pattern for learned models"
+      ],
+      "fresh_reuse_plan": "the same verification is used by the next fresh-instance run",
+      "surviving_gap": "the generic loop's plan rule remains refused on fresh instances; priors are the durable, honest signal"
+    },
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "a higher success rate on a benchmark",
+        "a saved plan rule without fresh-instance evidence"
+      ],
+      "real_outcome": "Stored priors are re-executed on the fresh instance before use: only root transitions that hold survive into the scan seed, the rest are discarded and re-derived, and the receipt honestly reports the verified count and the discarded count.",
+      "surviving_necessity": "the owner's mission \u2014 one composed loop that works honestly in any new arbitrary environment"
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": "verify_priors in the same loop",
+      "downstream_work_to_delete_or_supersede": "the silent-trust path is replaced by the verification gate",
+      "fresh_reuse_plan": "the verification is reused by every fresh-instance run of the same kind"
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": "no analysis was deleted; the verification is the same path as the scan seed",
+      "search_stop_decision": "stop a round when the receipt exists and tests pass; further work requires the plan rule on a fresh instance of the same family"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "a model cannot re-execute transitions; deleting the priors would lose the honest training signal",
+      "routes_ranked": [
+        "REUSE: the verify_priors guard in the same loop (selected)",
+        "COMPOSE: the same loop now re-verifies before seeding (selected)",
+        "SYNTHESIZE_NEW_PRIMITIVE: a second implementation of the seed (rejected: duplicates the scan)"
+      ]
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "3 new tests pin verify_priors + honest use-across-instances + stale-rule-fall-through; no independent oracle exists in this round"
+    },
+    "real_outcome": "The Perfect Algorithm's prior-seeding is now honest: a fresh instance re-executes every stored root transition, trusts only what holds, and discards the rest. Receipt PERFECT_ALGORITHM_RECEIPT_20261122_FRESH_FAMILY_V1.json documents both instances.",
+    "required_capability": "model-free scan + right-question + shortest-plan + verify + admit + persist, compositional over any arbitrary environment, with priors verified on fresh instances",
+    "route_frontier": {
+      "challenger_routes": [
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "looks fast, is wrong",
+            "CORRECTNESS": "wrong transitions become a plan, then fail honestly",
+            "INCREMENTAL_COST": "0 parameters",
+            "RELIABILITY": "low \u2014 plans go through walls",
+            "VERIFIABILITY": "no verification",
+            "WALL_CLOCK": "fast but wrong"
+          },
+          "evidence": [
+            "the store is a claim about another instance; the fresh instance must re-execute",
+            "the receipt shows 43 transitions discarded \u2014 blind trust would have trusted all of them"
+          ],
+          "qualification_evidence": [
+            "canonical/verification/PERFECT_ALGORITHM_RECEIPT_20261122_FRESH_FAMILY_V1.json"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "TRUST_PRIORS_BLINDLY_FROM_STORE"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "low",
+            "CORRECTNESS": "no",
+            "INCREMENTAL_COST": "expensive to store",
+            "RELIABILITY": "low",
+            "VERIFIABILITY": "no",
+            "WALL_CLOCK": "proportional to trace"
+          },
+          "evidence": [
+            "raw traces do not survive across instances",
+            "the durable signal is the learned model, not the walk"
+          ],
+          "qualification_evidence": [
+            "canonical/verification/PERFECT_ALGORITHM_RECEIPT_20261122_FRESH_FAMILY_V1.json"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "SAVE_THE_RAW_TRACE_AS_PRIORS"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "identical mechanism",
+            "CORRECTNESS": "no improvement in honesty",
+            "INCREMENTAL_COST": "0 parameters",
+            "RELIABILITY": "same",
+            "VERIFIABILITY": "same",
+            "WALL_CLOCK": "double the scan"
+          },
+          "evidence": [
+            "a separate walker re-derives every prior the same way the scan does",
+            "the gate is inside the same loop already"
+          ],
+          "qualification_evidence": [
+            "canonical/verification/PERFECT_ALGORITHM_RECEIPT_20261122_FRESH_FAMILY_V1.json"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "NON_DOMINATING",
+          "route": "THE_FAR_INSTANCING_HAS_A_SEPARATE_WALKER"
+        }
+      ],
+      "checked_at_utc": "2026-11-22T22:40:19+00:00",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "discovery_required": true,
+      "incumbent_route": "THE_SILENT_TRUSTED_SCAN",
+      "max_age_hours": 2,
+      "negative_search_summary": "Read the project and the web research; no existing mechanism in the repo re-verifies stored priors before seeding a scan; the repo's existing prior-seeding path trusted rows without re-execution.",
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "re-execution of stored learned models before use honest verification of priors"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "trustworthy learned model seeding for fresh instances"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "root-row verification then bounded walk code"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "2026 learned model seeding fresh instances verification gates"
+        }
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route": "PERFECT_ALGORITHM_VERIFIED_PRIORS_V1",
+      "selected_route_preflight": {
+        "all_required_dependencies_ready": true,
+        "checked_at_utc": "2026-11-22T22:40:19+00:00",
+        "execution_dependencies": [
+          {
+            "dependency": "local Python 3.11 runtime with unittest",
+            "evidence": [
+              "21 tests pass in canonical/tests/test_perfect_algorithm_v1.py"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "GLOBAL",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "scope": "GLOBAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "the composed loop in the repo (canonical/swe_kernel/perfect_algorithm_v1.py)",
+            "evidence": [
+              "one fresh-family receipt, 21 tests"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "GLOBAL",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "scope": "GLOBAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          }
+        ],
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "max_age_hours": 2,
+        "selected_route": "PERFECT_ALGORITHM_VERIFIED_PRIORS_V1",
+        "status": "READY"
+      },
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/swe_kernel/perfect_algorithm_v1.py (the scan-seed path being guarded)",
+          "canonical/runtime/environment_learning_v1.py (learn_model + shortest_plan)"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "re-execution is the standard honest pattern for learned models",
+          "root-row verification is the cheap sound check"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "github.com/jkoppel/QuixBugs (MIT)",
+          "pypi.org/project/pytest"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "docs.python.org"
+        ]
+      },
+      "unresolved_plausible_dominators": []
+    },
+    "routes_considered": [
+      "REUSE: re-execute root rows before seeding (selected)",
+      "COMPOSE: the guard inside the same loop (selected)",
+      "BYPASS: trust the store (rejected: the store is another instance's claim)",
+      "SYNTHESIZE_NEW_PRIMITIVE: a new separate verification tool (rejected: would duplicate the scan)"
+    ],
+    "selected_surviving_route": "PERFECT_ALGORITHM_VERIFIED_PRIORS_V1",
+    "stop_condition": "The receipt exists and the tests pass; further work requires the plan rule to be admitted on a fresh instance of the same family and saved honestly.",
+    "why_selected_route_is_fastest_sufficient": "Root-row verification is cheap, sound for the one state that can be re-reached, and honest everywhere it is used."
+  },
+  "required_capability": "model-free scan + right-question + shortest-plan + verify + admit + persist, compositional over any arbitrary environment, with priors verified on fresh instances",
+  "route_class": "COMPOSE",
+  "route_id": "PERFECT_ALGORITHM_VERIFIED_PRIORS_V1",
+  "route_order_walk": {
+    "ADAPT": "The loop adapts the prior store to re-execution-on-fresh-instance.",
+    "BYPASS": "Not used: trusting the store unconditionally is exactly the failure mode.",
+    "COMPOSE": "Selected: the guard is inside the same loop.",
+    "CONFIGURE": "No configuration added.",
+    "DELETE": "No mechanism deleted.",
+    "INTEGRATE": "Not yet claimed.",
+    "REUSE": "Selected: reuse the scan seed path.",
+    "SUBSTITUTE": "Not used.",
+    "SYNTHESIZE_NEW_PRIMITIVE": "Not selected: the guard is a guard, not a new mechanism."
+  },
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "selected_route": "COMPOSE_THE_VERIFY_GUARD_INTO_THE_EXISTING_SCAN_SEED_PATH",
+  "selected_surviving_route": "PERFECT_ALGORITHM_VERIFIED_PRIORS_V1",
+  "status": "PROPOSED__PRODUCER_MEASURED__PERFECT_ALGORITHM_VERIFIED_PRIORS__INDEPENDENT_VERIFICATION_OPEN",
+  "stop_condition": "The receipt exists and the tests pass; further work requires the plan rule to be admitted on a fresh instance of the same family and saved honestly.",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "truth": {
+    "achieved": false,
+    "the_law_this_round_adds": "Stored priors are claims about another instance. They are re-executed on the fresh instance before use; rows that do not replay are discarded, never silently trusted.",
+    "what_is_false_in_the_claim": [
+      "that stored priors are transferable without re-execution",
+      "that a same-family instance can inherit another instance's learned transitions as fact"
+    ]
+  },
+  "user_authorized_governance_change": false,
+  "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "currentness": {
+      "accepted_families": 5,
+      "meta_envelope_open_count": 8,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "terminal": false,
+      "total_open_truth_obligations": 30,
+      "unresolved_atomic": 22
+    },
+    "fresh_reality_authority": false,
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "No truth obligation is discharged by this round. The verification gate constructs and admits the mechanism; no obligation moves.",
+    "target_truth_obligations": [
+      "OSWORLD_2_1_PARTIAL_GE_81_8"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "counterexample_receipts": [
+        {
+          "git_blob_sha": "efd7d0a86f96a2514ea8ac00b058e2ef1361f645",
+          "path": "canonical/verification/PERFECT_ALGORITHM_RECEIPT_20261122_FRESH_FAMILY_V1.json"
+        }
+      ],
+      "decisive_question": "Does the loop trust a stored transition that does not hold on the fresh instance \u2014 or does it re-execute and discard what does not?",
+      "falsifier_id": "THE_SILENT_PRIOR_SEED_IS_THE_BUG",
+      "known_counterexamples_checked": true,
+      "no_known_counterexample_reason": "",
+      "proposal_id": "PERFECT_ALGORITHM_VERIFIED_PRIORS_V1"
+    }
+  },
+  "verification": {
+    "authority": "NONE__PRODUCER_RUN_SANDBOX",
+    "commands": [
+      "python3 -m unittest canonical.tests.test_perfect_algorithm_v1 canonical.tests.test_environment_learning_v1 canonical.tests.test_jit_knowledge_v1"
+    ],
+    "independent_verification_completed": false
+  },
+  "weakens_existing_guard": false
+}

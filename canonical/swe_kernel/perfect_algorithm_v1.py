@@ -519,8 +519,16 @@ def run(env: Any, goal: str, actions: Sequence[Any],
                     "fallback": "falls_through_full_loop"}
 
     # ---- SCAN (seeded by priors: the same family's learned model) ----
-    stored_prior_rows = priors_for(memory, kind)
-    prior_rows = prior if prior is not None else stored_prior_rows.get("model")
+    stored_model = (priors_for(memory, kind) or {}).get("model")
+    prior_rows = prior if prior is not None else stored_model
+    # Every stored prior row is a claim about a DIFFERENT instance of the
+    # same family. Only root transitions that survive re-execution on THIS
+    # instance are trusted; everything else is discarded and re-derived.
+    verified_rows = None
+    stale_discarded = 0
+    if prior_rows:
+        verified_rows, stale_discarded = verify_priors(env, prior_rows)
+        prior_rows = verified_rows
     scan_result = scan(env, actions, budget=budget, max_depth=max_depth,
                        heuristic=heuristic, prior=prior_rows, seed=seed)
     learned = scan_result["learned"]
@@ -529,7 +537,8 @@ def run(env: Any, goal: str, actions: Sequence[Any],
         "transitions_seen": scan_result["transition_count"],
         "root": scan_result["root"],
         "duration_s": scan_result["duration_s"],
-        "priors_used": int(len((prior_rows or {}) or {})),
+        "priors_used": int(sum(len(r or {}) for r in (prior_rows or {}).values())),
+        "priors_stale_discarded": int(stale_discarded),
     }
 
     # ---- RIGHT QUESTION: which action, tried next, most shrinks the unknown? ----
@@ -870,3 +879,63 @@ def replay_code_repair(rule: Mapping[str, Any], source: str, oracle: Any,
             "probes_executed": len(probes),
             "disagreements": result["disagreements"],
             "execution_errors": result["execution_errors"]}
+
+
+# --------------------------------------------------------------------------- #
+# 1b. VERIFY PRIORS: every prior row is re-executed on THIS instance before it
+# is trusted. A prior is a claim about a DIFFERENT instance -- a fresh instance
+# must not inherit another instance's transitions as if they were its own.
+# --------------------------------------------------------------------------- #
+
+def verify_priors(env: Any, prior_rows: Mapping[str, Mapping[str, str]],
+                  *, max_checks: int = 256) -> tuple[dict[str, dict[str, str]], int]:
+    """Replay the recorded root row of this prior against ``env`` and keep only
+    the transitions that actually hold here.
+
+    A prior is observed from a DIFFERENT instance of the same environment kind,
+    so a stored row is a hypothesis about this instance, not a fact. The only
+    state that can be re-reached so cheaply and soundly is the root: reset puts
+    the environment back at its standard start. So:
+
+      - every recorded root action is re-executed against the live env;
+        a transition that replays is kept, one that does not is discarded;
+      - every row recorded for any other state is DISCARDED -- it cannot be
+        re-verified cheaply without walking the whole prior model, which is the
+        scan itself. The scan re-derives those rows against this instance.
+
+    Returns ``(verified_rows, discarded_rows)`` where verified_rows is keyed by
+    state key and only ever contains the root state, and discarded_rows counts
+    every recorded transition dropped (root or non-root).
+    """
+    verified: dict[str, dict[str, str]] = {}
+    if not prior_rows:
+        return verified, 0
+    try:
+        env.reset()
+        root_key = el.state_key(env.state())
+    except Exception:
+        # An env we cannot reset trusts nothing. Fail closed, do not proceed.
+        return verified, sum(len(r or {}) for r in prior_rows.values())
+    row = prior_rows.get(root_key) or {}
+    root_row: dict[str, str] = {}
+    dropped = 0
+    for action, next_key in list(row.items()):
+        if not isinstance(next_key, str):
+            dropped += 1
+            continue
+        try:
+            env.reset()
+            env.act(str(action))
+            if el.state_key(env.state()) == next_key:
+                root_row[str(action)] = next_key
+            else:
+                dropped += 1
+        except Exception:
+            dropped += 1
+    if root_row:
+        verified[root_key] = root_row
+    # Non-root rows: recorded behavior from a different instance. The scan
+    # re-derives them; we never trust the store silently.
+    non_root_rows = sum(len(r or {}) for k, r in prior_rows.items() if k != root_key)
+    discarded = dropped + non_root_rows
+    return verified, discarded

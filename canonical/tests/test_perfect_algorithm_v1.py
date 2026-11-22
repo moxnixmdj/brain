@@ -318,6 +318,121 @@ class OneExperienceTests(unittest.TestCase):
         self.assertTrue(out["pass"])  # but the loop DID verify the goal
 
 
+class FreshFamilyTests(unittest.TestCase):
+    """The honest claim: priors from a DIFFERENT instance of the same family
+    must be verified against THIS instance before they are trusted. A fresh
+    instance of the family never inherits unverified transitions silently."""
+
+    def setUp(self):
+        self._tmp = Path(tempfile.mkdtemp(prefix="pa-fresh-"))
+        self._mem_path = self._tmp / "memory.json"
+
+    def tearDown(self):
+        import shutil
+        shutil.rmtree(self._tmp, ignore_errors=True)
+
+    def test_fresh_instance_verifies_priors_against_its_own_walls(self):
+        # instance A: no walls, goal (3,3), plan right x3 down x3
+        env_a = WallGrid(walls=())
+        out_a = pa.run(env_a, "reach the exit",
+                       ["up", "down", "left", "right"],
+                       goal_predicate=_exit_predicate, heuristic=_grid_heuristic,
+                       goal_family="grid_world", env_kind="grid_world",
+                       memory_path_=self._mem_path, budget=40, max_depth=12, seed=0)
+        self.assertEqual(out_a["status"], "PASS__PERFECT_ALGORITHM_RUN")
+
+        # instance B: same family, DIFFERENT walls -> the exact plan differs
+        env_b = WallGrid(walls=((1, 0), (2, 0), (3, 0)))
+        mem = pa.load_memory(self._mem_path)
+        stored_priors = pa.priors_for(mem, "grid_world")
+        # B's scan must not silently trust the whole stored model: at minimum
+        # the root-row transition that is blocked by walls must be discarded
+        self.assertGreater(stored_priors["model"] and len(stored_priors["model"]), 0,
+                           "instance A must have persisted priors")
+
+        out_b = pa.run(env_b, "reach the exit",
+                       ["up", "down", "left", "right"],
+                       goal_predicate=_exit_predicate, heuristic=_grid_heuristic,
+                       goal_family="grid_world", env_kind="grid_world",
+                       memory_path_=self._mem_path, budget=40, max_depth=12, seed=0)
+        self.assertEqual(out_b["status"], "PASS__PERFECT_ALGORITHM_RUN")
+        self.assertTrue(out_b["pass"])
+
+        scan_b = out_b["steps"]["scan"]
+        # the right-next transition at the root is blocked by the firewall;
+        # it must be DISCARDED, not trusted
+        self.assertGreaterEqual(scan_b["priors_stale_discarded"], 1,
+                                "the blocked root transition must not survive")
+        self.assertEqual(
+            scan_b["priors_used"],
+            sum(len(r) for r in (
+                pa.verify_priors(env_b, stored_priors["model"])[0].values())),
+            "the priors seeded into this instance must be exactly what survived verification")
+        # and the goal is reached by re-deriving against THIS instance
+        self.assertTrue(out_b["steps"]["act"]["reached"])
+
+    def test_fresh_instance_with_no_walls_reuses_verified_priors_honestly(self):
+        # A, B with identical walls/shape: priors survive as a genuine seed
+        env = WallGrid(walls=())
+        out_a = pa.run(env, "reach the exit",
+                       ["up", "down", "left", "right"],
+                       goal_predicate=_exit_predicate, heuristic=_grid_heuristic,
+                       goal_family="grid_world", env_kind="grid_world",
+                       memory_path_=self._mem_path, budget=40, max_depth=12, seed=0)
+        self.assertEqual(out_a["status"], "PASS__PERFECT_ALGORITHM_RUN")
+        mem = pa.load_memory(self._mem_path)
+        stored = pa.priors_for(mem, "grid_world")
+        tmp_path = self._tmp / "memory2.json"
+        out_b = pa.run(WallGrid(walls=()), "reach the exit",
+                       ["up", "down", "left", "right"],
+                       goal_predicate=_exit_predicate, heuristic=_grid_heuristic,
+                       goal_family="grid_world", env_kind="grid_world",
+                       memory_path_=tmp_path, budget=40, max_depth=12, seed=0,
+                       prior=stored.get("model"))
+        # two runs of an IDENTICAL family with different memory paths:
+        # the second run IS using priors only through the scan seed, honestly
+        self.assertEqual(out_b["status"], "PASS__PERFECT_ALGORITHM_RUN")
+        self.assertEqual(out_b["steps"]["scan"]["priors_used"], 4)
+
+    def test_stale_plan_rule_is_never_served_from_a_fresh_instance(self):
+        # A stored plan rule from instance A must NOT silently be replayed for
+        # instance B: the receipt must show the replay failed and fall through.
+        env_a = WallGrid(walls=())
+        out_a = pa.run(env_a, "reach the exit",
+                       ["up", "down", "left", "right"],
+                       goal_predicate=_exit_predicate, heuristic=_grid_heuristic,
+                       goal_family="grid_world", env_kind="grid_world",
+                       memory_path_=self._mem_path, budget=40, max_depth=12, seed=0)
+        self.assertEqual(out_a["status"], "PASS__PERFECT_ALGORITHM_RUN")
+
+        # hand-persist A's plan rule directly (documented test-only: only a
+        # truly admitted rule would have been saved)
+        mem = pa.load_memory(self._mem_path)
+        rule = {
+            "rule_id": "ga-stale-grid",
+            "kind": "plan",
+            "goal_family": "grid_world",
+            "env_kind": "grid_world",
+            "scope": {"goal_family": "grid_world", "env_kind": "grid_world"},
+            "plan_sketch": ["right", "right", "right", "down", "down", "down"],
+            "created_at": 0.0,
+        }
+        mem = pa.remember(mem, rule)
+        pa.save_memory(mem, self._mem_path)
+
+        env_b = WallGrid(walls=((1, 0), (2, 0), (3, 0)))
+        out_b = pa.run(env_b, "reach the exit",
+                       ["up", "down", "left", "right"],
+                       goal_predicate=_exit_predicate, heuristic=_grid_heuristic,
+                       goal_family="grid_world", env_kind="grid_world",
+                       memory_path_=self._mem_path, budget=40, max_depth=12, seed=0)
+        # B never silently trusts the stale plan: replay must fail AND fall through
+        self.assertIn(out_b["steps"].get("memory_replay", {}).get("status"),
+                      ("OPEN__REPLAY_FAILED", "OPEN__REPLAY_ERROR"))
+        self.assertEqual(out_b["status"], "PASS__PERFECT_ALGORITHM_RUN")
+        self.assertTrue(out_b["steps"]["act"]["reached"])
+
+
 if __name__ == "__main__":
     unittest.main()
 
