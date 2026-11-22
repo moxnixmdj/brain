@@ -1612,6 +1612,29 @@ def _demo_plan(demo: Mapping[str, Any], requirement: Mapping[str, Any], tool: st
             if shaped is not None:
                 spent.update(_tokens_in(str(example)) & {str(v["value"]) for v in ordered})
                 filled_pairs.extend([str(flag), shaped])
+        # A bare word the request names and the demonstration *also* writes in a flag's place is
+        # that flag's value. `zonectl record remove --help` demonstrates
+        # `--origin=example.org --name=www`, and the request says "Remove the record www from the
+        # zone example.org". `www` is neither quoted, nor a path, nor a number, so the extractor
+        # never saw it, `--name` stayed empty, and a required flag was left out of the command.
+        # The licence here is the strongest the document can offer -- the request and the example
+        # write the same word, and the example states which flag takes it -- so nothing is
+        # inferred from the word's shape or meaning.
+        if pairs:
+            written_words = set(re.findall(r"[A-Za-z0-9][A-Za-z0-9._-]*",
+                                           str(requirement.get("instruction") or "")))
+            for flag, example in pairs:
+                shown = str(example).strip()
+                if (str(flag) in [str(x) for x in filled_pairs[::2]]
+                        or not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._-]*", shown)
+                        or shown.lower() in {"true", "false", "none", "null"}):
+                    continue
+                if shown not in written_words:
+                    continue
+                if any(str(v["value"]) == shown for v in ordered):
+                    continue
+                filled_pairs.extend([str(flag), shown])
+                spent.add(shown)
         for _i, (flag, example) in enumerate(pairs):
             if str(flag) in filled_pairs[::2]:
                 continue

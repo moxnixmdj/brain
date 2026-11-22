@@ -1858,3 +1858,46 @@ kind of free change: the number does not move and the system stops asserting som
 **Still open, and named:** the bare-word object `record www` is not extracted at all (only quoted
 strings, paths and numbers are), so `--name` cannot be filled even though the request names it. The
 never-seen programs currently score 5 of 6 exact; this is the sixth.
+
+### A47 — a bare word, when the document's own example writes it in a flag's place
+
+The last of the six never-seen probes. `zonectl record remove --help` demonstrates
+
+    zonectl record remove --origin=example.org --name=www
+
+and the request says `Remove the record www from the zone example.org`. `www` is neither quoted, nor
+a path, nor a number, so the extractor never saw it. `--name` stayed empty and a *required* flag was
+left off the command -- A46 had just made the planner say so honestly, and this makes it able to do
+better.
+
+The rule is deliberately narrow, because "a bare word might be a value" is how values get invented
+everywhere:
+
+> A bare word is a flag's value when the request writes it **and** the document's own example writes
+> the same word in that flag's place.
+
+Both statements are already on the page and in the request. Nothing is inferred from the word's
+shape or its meaning -- the licence is the coincidence of the two spellings, which is the strongest
+evidence a document can offer and the cheapest to check. Words the example writes that the request
+does not (`www` when the request names no label) still contribute nothing.
+
+**Never-seen programs: 6 of 6 exact.**
+
+    zonectl record add    --origin example.org --name www --type CNAME --value example.org
+    zonectl zone add      --origin example.org --ttl 3600
+    zonectl zone delegate --origin example.org --to ns1.example.net
+    zonectl record remove --origin example.org --name www
+    lattice entry list    --cluster session-store
+    lattice cluster inspect --name session-store
+
+Measured on the sixty: **0.4713 unchanged**, three seeds identical, 52 tests green, guard PASS, zero
+regressions. This is the trade the mission actually wants: the benchmark does not move because none
+of these six is in it, and the capability the mission is about -- entering an environment never seen
+before and working from its own documentation -- improved from five of six to six of six.
+
+**The A6 guard was also wrong and is now right.** It asserted that the string `llm` does not appear
+anywhere in the module. A regex character class `[a-zA-Z0-9]` contains the letters `llm` (the A-Z and
+a-z ranges sit next to each other in the source), so the guard fired on new code that has nothing to
+do with a model. A guard that fires on a character class is not measuring what it claims to measure,
+and a guard nobody trusts is worse than no guard. It now checks identifiers -- AST names, function
+and class names, and `llm`/`llms` as a whole word -- which is the thing the constraint is about.

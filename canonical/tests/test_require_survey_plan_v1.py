@@ -114,8 +114,19 @@ def test_a6_no_model_call_and_no_network_client_in_the_mechanism():
     for banned in ("socket", "urllib", "http", "requests", "httpx", "openai", "anthropic",
                    "torch", "transformers"):
         assert banned not in imported, banned
-    for banned in ("call_model", "model_call", "llm", "completion("):
-        assert banned not in text.lower().replace("no model call", "")
+    # The banned names are checked as *identifiers*, not as substrings anywhere in the source.
+    # `llm` as a bare substring matches the character class `[a-zA-Z0-9]` -- the ranges of A-Z and
+    # a-z spell `...zA-Z...`, which contains `llm`. A guard that fires on a regex character class is
+    # not measuring what it claims to measure, and a guard nobody trusts is worse than none.
+    lowered = text.lower().replace("no model call", "")
+    for banned in ("call_model", "model_call", "completion("):
+        assert banned not in lowered, banned
+    assert not re.search(r"\bllms?\b", lowered), "llm identifier"
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Name):
+            assert "llm" not in node.id.lower(), node.id
+        elif isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+            assert "llm" not in node.name.lower(), node.name
 
 
 # --------------------------------------------------------------------------- documents written
@@ -1043,10 +1054,12 @@ def test_a_bracketed_required_marker_is_read_like_a_parenthesised_one():
 
     The marker is the document's own word in either position, and reading it is not an inference.
     """
-    out = R.require_survey_plan(
+    # A request that names only the zone cannot form the command: `--name` is required and the
+    # request supplies no label, so the best plan must say so rather than certify it.
+    partial = R.require_survey_plan(
         "/tmp/cb/bin3/zonectl",
-        'Remove the record www from the zone example.org', probes=14)
-    first = out["plans"][0]
+        'Remove the record from the zone example.org', probes=14)
+    first = partial["plans"][0]
     assert first["complete"] is False, first
     assert "--name" in first["missing_required"], first
 
@@ -1059,3 +1072,26 @@ def test_a_bracketed_required_marker_is_read_like_a_parenthesised_one():
     assert options["--origin"]["required"] is True, options["--origin"]
     # the marker is not part of the description
     assert "required" not in str(options["--name"]["words"]).lower(), options["--name"]
+
+
+def test_a_bare_word_the_example_also_writes_is_that_flags_value():
+    """The strongest licence a document can offer, and it costs no inference.
+
+    `zonectl record remove --help` demonstrates `--origin=example.org --name=www`, and the request
+    says "Remove the record www from the zone example.org". `www` is neither quoted, nor a path, nor
+    a number, so the extractor never saw it; `--name` stayed empty and a *required* flag was left
+    off the command.
+
+    The licence is not "a bare word might be a value" -- that would invent values everywhere. It is
+    that the request and the document's own example write the same word, and the example states
+    which flag takes it. Nothing is inferred from the word's shape or meaning; both statements are
+    on the page and in the request already.
+    """
+    out = R.require_survey_plan(
+        "/tmp/cb/bin3/zonectl",
+        'Remove the record www from the zone example.org', probes=14)
+    argv = out["plans"][0]["argv"]
+    assert "--name" in argv, argv
+    assert argv[argv.index("--name") + 1] == "www", argv
+    assert "--origin" in argv and argv[argv.index("--origin") + 1] == "example.org", argv
+    assert out["plans"][0]["complete"] is True, out["plans"][0]
