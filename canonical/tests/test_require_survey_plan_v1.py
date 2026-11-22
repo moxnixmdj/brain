@@ -448,3 +448,76 @@ def test_the_same_request_plans_the_same_way_twice():
 
     # the value binds to the word it follows, not to the nearest word that fits at all
     assert any("P1" in argv for argv in once), once
+
+
+def test_a_request_written_as_steps_is_read_as_steps():
+    """The sentence is the boundary the request states, and only where a new act appears.
+
+    A task that names several acts is several acts; reading it as one is how a later step's
+    value ends up in an earlier step's flag. But a sentence that names no act continues the
+    sentence before it -- `Create a workflow named "x". Set the owner to "y".` is one create with
+    two of its own fields, and splitting it cuts `--name` off the command it belongs to.
+    """
+    # a sentence that opens with an act is a step of its own
+    assert R.sentences_of('Create a workflow named "deploy". Approve the gate.') == [
+        'Create a workflow named "deploy".', 'Approve the gate.']
+    # a sentence that names no act continues the step before it
+    assert R.sentences_of(
+        'Create a workflow named "deploy". The workflow should have two steps: '
+        'a "build" step.') == [
+        'Create a workflow named "deploy". The workflow should have two steps: a "build" step.']
+    # guidance about the exercise is not a step of it
+    assert R.sentences_of(
+        'Approve the gate. You are not provided with documentation -- discover the tool.') == [
+        'Approve the gate.']
+
+    numbered = R.sentences_of(
+        'Using the tool:\n1. Get workflow "wf-1".\n2. Approve gate "g-1".\n'
+        'You are not provided with documentation.')
+    assert numbered == ['Get workflow "wf-1".', 'Approve gate "g-1".']
+
+
+def test_a_flag_the_document_calls_required_is_the_reason_to_prefer_a_reading():
+    """`(required)` is the document's own statement, and it decides between readings.
+
+    `flowctl gate approve` marks `--id` required. The flagless reading is available and looks
+    complete, and the document says it is not this command. Before this, the flagless reading
+    was emitted and the world refused it.
+    """
+    binary = "/tmp/cb/bin/flowctl"
+    if not pathlib.Path(binary).exists():
+        pytest.skip("the benchmark's flowctl page is not on this machine")
+    result = R.require_survey_plan(
+        binary, 'Approve gate "gate-001" with comment "LGTM, deploys to production".', probes=14)
+    top = result["plans"][0]["argv"]
+    assert "--id" in top, top
+    assert result["complete"] is True
+
+
+def test_the_required_marker_is_read_from_the_document_and_not_dropped():
+    """The parser matched `(required)` and then discarded it; the planner could not see it."""
+    required = R._option_cell("  --id <string> (required)\tGate ID", "FLAGS")
+    optional = R._option_cell("  --comment <string>\tApproval comment", "FLAGS")
+    assert required["required"] is True
+    assert optional["required"] is None
+
+
+def test_a_sequence_never_runs_the_same_command_twice():
+    """Two steps that plan to one argv said one thing twice; running it twice does nothing."""
+    binary = "/tmp/cb/bin/notion"
+    if not pathlib.Path(binary).exists():
+        pytest.skip("the benchmark's notion page is not on this machine")
+    result = R.require_survey_plan_sequence(
+        binary, 'List all pages in the workspace. Show the page title and parent.', probes=14)
+    assert len(result["commands"]) == len({tuple(c) for c in result["commands"]})
+
+
+def test_a_step_with_no_operation_is_not_emitted_as_a_command():
+    """A bare value is not a command: `set the owner to "devops"` is not `devops`."""
+    binary = "/tmp/cb/bin/flowctl"
+    if not pathlib.Path(binary).exists():
+        pytest.skip("the benchmark's flowctl page is not on this machine")
+    result = R.require_survey_plan_sequence(
+        binary, 'Create a workflow named "deploy". Set the owner to "devops-team".', probes=14)
+    for command in result["commands"]:
+        assert len(command) > 1, command

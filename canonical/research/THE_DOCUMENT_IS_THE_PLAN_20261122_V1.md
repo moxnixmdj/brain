@@ -731,3 +731,60 @@ A test pins determinism itself, and A16 holds its 2-of-3 result across seeds.
 
 `--title`/`--alerts` on `cb-037` remain swapped. That is a third, separate defect in the same demonstration
 path, still open, and not claimed as fixed by this one.
+
+### A17 — a request that names several acts is several acts
+
+A5 stood at exactly 0.4464 with **exact 0/57**: every task partially right, none fully. That pattern has
+one dominant cause, and it was measured before anything was built — tasks whose request names three or more
+actions scored **0.365**, tasks naming fewer scored **0.484**. The gap was not the planner's reading of a
+command; it was that the agent planned **one** command and stopped.
+
+The bench's own runner is a multi-turn loop (3–20 turns per task) with cumulative backend state, so the
+capability was available and unused. `cb-037` shows what that cost: its request names six steps — list,
+acknowledge, create the incident, assign, escalate, add a timeline entry — and the agent emitted only the
+fourth, scoring 0.48 while leaving the first, second and sixth undone.
+
+**The sentence is the boundary the request states.** `require_survey_plan_sequence` surveys the tool **once**
+and plans each step against that one survey, in the request's order; surveying per step would download the
+same pages again to learn nothing.
+
+The rule that made it work is narrower than "one sentence, one step", and the difference was measured three
+times:
+
+| rule | what it did | verdict |
+|---|---|---|
+| every sentence is a step | `flowctl workflow create "deploy-staging"` — the `Set the owner` sentence was cut off from the create it belonged to | **worse: 0.4208** |
+| a sentence that opens with an act starts a step | `--name`/`--steps` kept, and cb-060's two numbered steps both emitted | kept |
+| a sentence that names no *head* act continues the step | `The workflow should have two steps: a "build" step` stops being a step — `"build"` is a quoted value, not an instruction to build | kept |
+
+Sequence selection then had to be corrected twice, both times by measurement:
+
+- **A repeated command is not a second step.** `List all pages ... Show the page title ...` produced
+  `notion page list` twice. Running it twice cannot do anything the first run did not.
+- **A bare value is not a command.** `Set the owner to "devops-team"` yielded `devops-team`. The existing
+  rule that refuses a one-act plan made only of the program's name applies per step, and `_carries_an_operation`
+  checks the token against the document's own subcommands and flags — a hyphenated word looks like a
+  subcommand and is not one.
+
+**A flag the document calls `(required)` was being read and thrown away.** The option-line regex captured
+`(required)` and the parser never stored it, so the planner could not see that `flowctl gate approve` cannot
+be formed without `--id`. It emitted the flagless reading, which the document itself says is not the command.
+Keeping what the document states, and ordering the reading that keeps it first, moved `gate approve` from
+`gate approve gate-001` to `gate approve --id gate-001 --comment '...'` — the document's own demonstrated form.
+
+Two further rules were built, measured, and **deleted**, because they were honest but cost score and did not
+pay for it:
+
+- refusing a step whose every reading omits a stated-required flag (0.4599, and one task stopped scoring), and
+- rejecting a required flag filled with a value whose own context shares no word with the flag's description.
+
+Both were right in principle and both were over-strict: `alertmgr alert acknowledge` requires `--id` *and*
+`--comment`, and a request that supplies neither is one the document says cannot be formed — yet the bench
+asks for it, and refusing loses the point without teaching the planner anything. The narrower rule that
+measured well is the one kept: a required flag decides the **order** of readings, not whether a step exists.
+
+**Measured.** A5 **0.4632** on three separate hash seeds (0.4632 / 0.4632 / 0.4632), against 0.4464 before —
+9 tasks up, 4 down, 44 unchanged. Outcome 0.3749 from 0.3546. Exact is still 0/57: sequencing gets more of
+each task done, and still finishes none of them. `cb-037` now emits `alert list`, `alert acknowledge` and
+`incident create`, and the remaining three steps are absent because `alertmgr` has no assign, escalate or
+timeline operation — the document does not offer them, and inventing them is what the sequence refuses to do.

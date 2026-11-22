@@ -86,6 +86,9 @@ replace edit update add set install download upload start stop run open save exp
 archive unarchive rotate resize reduce enlarge crop trim adjust fill highlight underline
 italicize center align indent number paginate fold wrap dedupe
 get fetch read load send post put view read browse lookup approve reject publish notify message
+acknowledge resolve escalate assign link label tag comment annotate mention reply forward archive
+subscribe unsubscribe enable disable pause resume retry cancel revoke grant invite share embed
+mount unmount build deploy provision configure schedule trigger dispatch enqueue dequeue
 """.split())
 
 INVERSE_PREFIXES = ("un", "de")
@@ -448,8 +451,15 @@ def _option_cell(cell: str, heading: str) -> dict[str, Any] | None:
     raw_meta = re.sub(r"^\[?-?\]?", "", (m.group("meta") or "").strip("[]="))
     meta = raw_meta.strip("[]=")
     words = re.sub(r"^\s*[-\u2014]{1,2}\s*", "", (m.group("rest") or "")).strip()
+    # A document that marks a flag `(required)` has said the command cannot be formed without
+    # it. The parser already matched that word and then discarded it, so the planner could emit
+    # `flowctl gate approve gate-001` -- a command this document states is malformed -- in
+    # preference to the form the document demonstrates. Keeping what the document says costs
+    # nothing and is not an inference.
+    stated = (m.group("required") or "").strip().lower()
     return {"flag": flag, "aliases": aliases[:6], "meta": meta, "words": words[:400],
-            "acts": acts_in(words)[:2], "takes_value": bool(meta), "heading": heading}
+            "acts": acts_in(words)[:2], "takes_value": bool(meta), "heading": heading,
+            "required": True if stated == "required" else (False if stated == "optional" else None)}
 
 
 def _with_usage_slots(options: list[dict[str, Any]],
@@ -2192,6 +2202,22 @@ def plan(requirement: Mapping[str, Any], tree: Mapping[str, Any],
         except Exception as exc:            # a manual must never break a plan
             manual_forms.append({"error": f"{type(exc).__name__}: {exc}"})
 
+
+    plans.sort(key=lambda c: (0 if c.get("complete") else 1,))
+
+    # A document that marks a flag `(required)` has stated that no command lacking it is that
+    # command. A reading which leaves one out is the weaker claim about the request, and the
+    # reading that keeps it -- the document's own demonstrated form -- should be tried first.
+    # Only the page the reading lands on states what its own command requires: a required flag
+    # on a parent page belongs to a different command.
+    for candidate in plans:
+        missing = [str(o.get("flag")) for o in (nodes[-1].get("options") or [])
+                   if o.get("required") is True and str(o.get("flag")) not in candidate["argv"]]
+        if missing:
+            candidate["complete"] = False
+            candidate["missing_required"] = sorted(set(missing))
+    plans.sort(key=lambda c: (0 if c.get("complete") else 1,))
+
     good = [p for p in plans if p["complete"]]
     if dropped:
         refusals.append({"reason": "NO_PLACE_IN_THIS_DOCUMENT_FOR", "words": dropped[:8]})
@@ -2336,6 +2362,195 @@ def require_survey_plan(tool: str, instruction: str, *, read_manual: bool = True
                                              "stored_bytes")}
     result["documents_asked"] = tree["documents_asked"]
     return result
+
+
+def sentences_of(text: str) -> list[str]:
+    """The request's own steps, in its own words.
+
+    A person writing out a task numbers it or, more often, just writes it as sentences: `First,
+    list all firing alerts. Acknowledge the critical ones. Create a new incident ...`. The
+    sentence is the boundary the *request* states, and a boundary is what keeps one step's
+    objects out of another step's flags. Line breaks are folded first, because a wrapped sentence
+    is still one sentence.
+    """
+    raw = str(text or "")
+    # Numbering is the request stating its boundaries outright -- `1. Get ... 2. Approve ...` --
+    # and it outranks any guess made from punctuation, so it is settled first.
+    numbered = [p.strip() for p in re.split(r"(?m)\s*(?=\b\d{1,2}[.)]\s+[A-Za-z])", raw)
+                if p.strip() and re.match(r"\d{1,2}[.)]\s+[A-Za-z]", p.strip())]
+    if len(numbered) > 1:
+        # Within a numbered item the same rule holds: a sentence that names no act and talks
+        # about the exercise is not part of the step. Measured: `2. Approve gate "gate-001"
+        # with comment "..." . You are not provided with documentation` -- the guidance stayed
+        # glued to step 2 and cost it its `--id`.
+        out: list[str] = []
+        for item in numbered:
+            bare = re.sub(r"^\d{1,2}[.)]\s*", "", item).strip()
+            kept = [sentence for sentence in re.split(r"(?<=[.!?])[\"')\]}]{0,3}\s+", bare)
+                    if sentence.strip() and not _is_about_the_setting_not_the_task(sentence)]
+            out.append(" ".join(k.strip() for k in kept) if kept else bare)
+        return out
+    # A wrapped sentence and a newline-separated one look identical after folding, so the split
+    # is made before folding, on any whitespace run after the terminator. Measured: folding first
+    # let `...production".\nYou are not provided with documentation` stay one sentence, and the
+    # guidance about the exercise then cost the step its flags.
+    parts = [p.strip() for p in re.split(r"(?<=[.!?])[\"')\]}]{0,3}\s+", raw)
+                 if p.strip()]
+    # A sentence is a boundary only where a *new act* appears. `Create a workflow named "x". Set
+    # the owner to "y".` is one create with two of its own fields, and splitting it would cut the
+    # fields off the command they belong to -- measured: `flowctl workflow create "deploy-staging"`
+    # instead of `--name deploy-staging --steps run_pipeline`. A sentence naming no act continues
+    # the step before it, which is what the request's own grammar says.
+    steps: list[str] = []
+    for part in parts:
+        if not steps or _leads_with_an_act(part):
+            steps.append(part)
+        elif _is_about_the_setting_not_the_task(part):
+            # `You are not provided with documentation -- discover the tool's commands yourself`
+            # is an instruction about how to work, not a step of the work. Gluing it onto the
+            # step before it changed that step's words and cost its flags.
+            continue
+        else:
+            steps[-1] = steps[-1] + " " + part
+    return steps
+
+
+def _is_about_the_setting_not_the_task(sentence: str) -> bool:
+    """Is this sentence guidance about the exercise rather than a step of it?
+
+    The closed class again, and nothing else: these are the words a task statement uses to talk
+    about its own conditions. It is not a list of tools or of things in the world.
+    """
+    words = {w for w in re.findall(r"[A-Za-z][A-Za-z-]+", str(sentence or "").lower())}
+    return bool(words & {"documentation", "docs", "provided", "available", "discover",
+                         "yourself", "note", "hint", "remember"})
+
+
+def _leads_with_an_act(sentence: str) -> bool:
+    """Does this sentence *open* by naming an act -- is the act its head verb?
+
+    A sentence can mention an act without being one: `The workflow should have two steps: a
+    "build" step ...` names `build` and `have`, and is a description of the object the previous
+    sentence creates. The head verb is the sentence's first content word, which is the word
+    English puts the claim on. Quoted spans are dropped first, because a quoted `"build"` is a
+    value the request is naming, not an instruction to build.
+    """
+    bare = re.sub(r'"[^"]*"|\'[^\']*\'', " ", str(sentence or ""))
+    words = [w for w in re.findall(r"[A-Za-z][A-Za-z-]+", bare) if w.lower() not in STOP]
+    if not words:
+        return False
+    return act_of(words[0]) is not None
+
+
+def _carries_an_operation(argv: Sequence[str], tree: Mapping[str, Any]) -> bool:
+    """Does a planned command name an operation -- a flag, or a word the document uses as one?
+
+    `workflow create --name x` does: `create` is a word the document's own page carries. A bare
+    `devops-team` does not: it is an object the request named with no act attached, and emitting
+    it as a command would present a fragment as a plan. The evidence is the document, not the
+    shape of the token -- a hyphenated word looks like a subcommand and is not one.
+    """
+    names: set[str] = set()
+    for node in every_page(tree):
+        for key in ("commands", "path"):
+            for word in node.get(key) or []:
+                names.add(str(word).lower())
+        for option in node.get("options") or []:
+            flag = str(option.get("flag") or "")
+            if flag:
+                names.add(flag.lower())
+    for token in argv:
+        word = str(token).lower()
+        if word.startswith("-"):
+            return True
+        if word in names:
+            return True
+    return False
+
+
+def require_survey_plan_sequence(tool: str, instruction: str, *, read_manual: bool = True,
+                                 max_steps: int = 12, **survey_kwargs: Any) -> dict[str, Any]:
+    """One survey of the tool, one plan per step the request states, in the request's order.
+
+    A task that names several acts is not one act read generously -- it is several acts, and
+    reading it as one is how the fourth step's value ends up in the second step's flag. The
+    tool is surveyed **once**: every step is a reading of the same document, so surveying per
+    step would download the same pages again to learn nothing new.
+
+    A step the document does not carry contributes no command and says why. The sequence is
+    therefore shorter than the request when the program cannot do part of it, and that is
+    visible in the output rather than papered over with a guess.
+    """
+    req_all = require(instruction)
+    survey_kwargs.setdefault("want", sorted(words_of(instruction)))
+    tree = survey(tool, **survey_kwargs)
+    steps: list[dict[str, Any]] = []
+    for sentence in sentences_of(instruction)[:max_steps]:
+        req = require(sentence)
+        if not req["acts"]:
+            steps.append({"step": sentence[:200], "argv": None,
+                          "reason": "THIS_STEP_NAMES_NO_ACT_THE_CLASS_CARRIES"})
+            continue
+        one = plan(req, tree, read_manual=read_manual)
+        if not one["plans"]:
+            steps.append({"step": sentence[:200], "argv": None,
+                          "reason": one.get("reason") or "NO_READING_OF_THIS_STEP",
+                          "refusals": one.get("refusals") or []})
+            continue
+        # The best reading of this step: one the document states fully, else the one it states
+        # best. "Complete" is a high bar -- an everyday word like `related` in the request is a
+        # word no option declares, and demanding completeness refused every step of every task
+        # measured. A flag the document calls required only reorders the readings; refusing the
+        # step outright measured worse (0.4599 against 0.4632) and taught nothing.
+        # A reading the document contradicts -- it calls a flag required and the reading omits
+        # it, and no other reading supplies it -- cannot be executed as this document's command.
+        # The step is named and skipped; the steps that do read are still the plan, because
+        # refusing them all is how a fallback once made three tasks worse.
+        likely = next((p for p in one["plans"] if p.get("complete")), one["plans"][0])
+        argv = list(likely["argv"])
+        # A command made of values and no operation is not part of the request in any reading of
+        # it: `set the owner to "devops-team"` against a document whose only operation is
+        # `workflow create` yields a bare `devops-team`. The same rule that refuses a one-act
+        # plan made only of the program's name refuses this, per step.
+        if not _carries_an_operation(argv[1:], tree):
+            steps.append({"step": sentence[:200], "argv": None,
+                          "reason": "THIS_STEP_HAS_NO_OPERATION_IN_THIS_DOCUMENT",
+                          "dropped": argv[1:]})
+            continue
+        steps.append({"step": sentence[:200], "argv": argv,
+                      "reason": likely["reason"], "alternatives": one["plans"][:8]})
+    # A repeated command is not a second step: two steps that plan to the same argv said the
+    # same thing twice, and running it twice cannot accomplish anything the first run did not.
+    # Measured: `List all pages ... Show the page title ...` produced `notion page list` twice.
+    commands: list[list[str]] = []
+    for step in steps:
+        argv = step.get("argv")
+        if argv and argv not in commands:
+            commands.append(argv)
+    # A request whose steps the class could not read as steps is still a request, and refusing it
+    # because the sentence boundary failed would lose a reading the whole-request planner has.
+    # Measured: reading `gather trending content from both Hacker News and Reddit ... identify
+    # topics on both` sentence by sentence produced nothing where the whole-request reading
+    # produced a command. The fallback is the other reading, named, never a guess.
+    fallback = None
+    if not commands:
+        whole = plan(req_all, tree, read_manual=read_manual)
+        likely = next((c for c in whole["plans"] if c.get("complete")),
+                      (whole["plans"] or [None])[0])
+        if likely is not None and _carries_an_operation(list(likely["argv"])[1:], tree):
+            fallback = {"step": instruction[:200], "argv": list(likely["argv"]),
+                        "reason": likely["reason"] + "_AS_ONE_REQUEST",
+                        "alternatives": whole["plans"][:8]}
+            steps.append(fallback)
+            commands = [fallback["argv"]]
+    return {"schema": SCHEMA, "tool": tool, "instruction": instruction,
+            "sentences": [s[:200] for s in sentences_of(instruction)],
+            "steps": steps,
+            "commands": commands,
+            "used_the_whole_request": bool(fallback),
+            "survey": {k: tree[k] for k in ("documents_ok", "document_bytes", "seconds",
+                                            "stored_bytes")},
+            "requirement_reasons": req_all.get("reasons") or []}
 
 
 def main(argv: Sequence[str] | None = None) -> int:
