@@ -900,3 +900,34 @@ def test_a_structured_argument_is_filled_from_prose_inside_the_documents_own_sha
     # the flag documents its vocabulary as `postgres, mysql, s3, ...` and the request names the
     # choice by its full name; the document's spelling is what the flag accepts
     assert argv[argv.index("--type") + 1] == "postgres", argv
+
+
+def test_completeness_and_coverage_are_two_different_statements():
+    """`complete` says the command meets its own page's requirements; `covered` says every object
+    the request named reached the line. They fail differently and both are reported.
+
+    Measured over the sixty: complete-and-covered n=41 mean 0.5131, the rest n=16 mean 0.4076 --
+    +0.106 with no reward and no answer key. `complete` alone certifies 54 of 57 and so separates
+    almost nothing, which is why the second statement earns its place.
+    """
+    out = R.require_survey_plan(
+        "/tmp/cb/bin/meshctl",
+        'Using the meshctl tool, configure a canary deployment for "user-service": '
+        'Route 90% of traffic to v1 and 10% to v2.', probes=14)
+    candidate = out["plans"][0]
+    assert candidate["complete"] is True
+    assert candidate["covered"] is True
+    assert candidate["values_unplaced"] == []
+
+    # cb-016's shape: a request naming an object this command has no place for is covered=False
+    # and *says which object* -- the report is the point, not just the flag
+    dropped = R.require_survey_plan(
+        "/tmp/cb/bin/jira",
+        """Create a new Jira issue in the "INFRA" project with summary "Set up
+centralized log aggregation with Loki", type "Task", priority "High",
+and assign it to "ops-bob".
+""",
+        probes=14)
+    assert dropped["plans"], dropped.get("reason")
+    assert dropped["plans"][0]["covered"] is False
+    assert "ops-bob" in dropped["plans"][0]["values_unplaced"], dropped["plans"][0]

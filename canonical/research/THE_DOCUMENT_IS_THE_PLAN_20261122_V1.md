@@ -1562,3 +1562,39 @@ Both carry a **structured argument assembled by the system**, whose keys come fr
 whose values come from the request's prose, where nothing in the mechanism knows what a port, a
 database, a canary, or a version weight is. The generalisation is not stored anywhere: it is the
 document's example, re-filled from the sentence, every time, at the cost of one scan.
+
+### A38 — a second opinion on the same plan, and the two fail differently
+
+A26's verifier says *this command satisfies what its own page requires*. On the current state it
+certifies **54 of 57** tasks, which is close to saying nothing: a statement that is true almost
+everywhere separates almost nothing.
+
+A second statement was measured, and it is independent because it asks a different question:
+
+> **covered** — does every object the request named appear in the command line?
+
+    complete ∧ covered       n=41   mean outcome 0.5131
+    everything else          n=16   mean outcome 0.4076
+    gap                      +0.1055, no reward, no answer key
+
+Coverage fails on exactly the tasks where the request names something the routed command has no
+place for, and it names the object: cb-016 drops `ops-bob`, cb-021 drops
+`acme-corp/web-platform` and `priority:high`, cb-036 drops `qa-signoff` and `2.3.1`, cb-037 drops
+`Payment Service Degradation` and `P1`. Those are legible failures a person could act on, not a
+scalar.
+
+**Reported separately, deliberately.** `complete` alone gives AUC 0.765 but on 54 positives against
+3 negatives — a weight that cannot be checked. The conjunction gives 0.668 on a 41/16 split, which
+is a worse AUC and a *far* more usable statement. Neither replaces the other: a command can name
+every object and omit a required flag, or satisfy every flag and drop the object the request was
+about. Both fields are now on every candidate, `covered` sorts second after `complete`, and the
+score is unchanged at **0.4655** across three seeds with the guard passing.
+
+**Honest status of the verifier, which the project named as its single bottleneck.** It now makes
+two true statements about a plan without any reward signal, and the conjunction separates good
+plans from bad ones with a +0.106 mean gap on a split that has enough of both to mean something. It
+is still weak: 41 of 57 plans pass both checks and their mean is 0.513, so **being right about
+everything the document and the request state is not sufficient to be right about the task**. The
+missing third statement is about the world after the command runs — did the state the task cares
+about actually change — and no reward-free way to make it has been found yet. That is the next
+bottleneck, and it is now named precisely rather than as "the verifier".
