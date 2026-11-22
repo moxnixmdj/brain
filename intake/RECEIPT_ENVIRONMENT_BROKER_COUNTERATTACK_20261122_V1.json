@@ -1,0 +1,28 @@
+{
+ "schema": "BRAIN_ENVIRONMENT_BROKER_COUNTERATTACK_20261122_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "date": "2026-11-22",
+ "target": "hukkin/tomli@2.0.2 (fresh clone at /tmp/fresh_tomli), plus tmp fixture trees in unit tests",
+ "instrument": "canonical/swe_kernel/the_environment_broker_v1.py",
+ "measured": [
+   {"case": "held-out tree, cold cache", "verdict": "ENVIRONMENT_BROKERED", "wall_seconds": 0.54, "suite": "14 passed"},
+   {"case": "same tree, warm cache", "verdict": "ENVIRONMENT_BROKERED_FROM_MEMORY", "wall_seconds": 0.61, "note": "derivation skipped; runner RE-EXECUTED by design"},
+   {"case": "corrupt cache entry (valid digest, runner replaced with exit-3 command)", "verdict": "ENVIRONMENT_BROKERED", "from_memory": false, "recheck_ok": false, "how": "stale record caught by execution, discarded, re-derived to exit-0 pytest"},
+   {"case": "garbage bytes in cache file", "verdict": "ENVIRONMENT_BROKERED", "from_memory": false, "how": "load_memory ignores the file entirely"},
+   {"case": "failing suite (assertion injected into fixture)", "verdict": "REFUSE__NO_RUNNER_EXECUTED_CLEANLY", "cached_written": false, "how": "refusal is pinned by test_a_failed_suite_is_refused_and_nothing_is_cached"},
+   {"case": "requires-python floor above this interpreter", "verdict": "REFUSE__REQUIRES_PYTHON_NOT_MET_LOCALLY", "cached_written": false},
+   {"case": "goal outside declared kinds", "verdict": "REFUSE__GOAL_OUTSIDE_THE_CLOSED_CONTRACTS", "cached_written": false},
+   {"case": "non-Python directory", "verdict": "REFUSE__NOT_A_PYTHON_ENVIRONMENT", "cached_written": false},
+   {"case": "evidence file edited (pyproject floor changed)", "verdict": "from_memory=false on next run", "how": "cache key is a digest of evidence contents, paths hold no authority"}
+  ],
+ "known_self_caught_mistake": {
+   "what": "first counter-attack run used /usr/bin/python3 as sys.executable, so pytest was absent and every runner failed; the refusal was correct for that interpreter and the attack as designed had not isolated its variable",
+   "correction": "re-ran with /tmp/brainvenv/bin/python; the corrupted-record path then behaved as claimed: recheck.ok=false, discard, re-derive, exit 0",
+   "lesson": "an honest zero needs its interpreter identified; the receipt records sys.executable for both runs"
+  },
+ "not_claimed": [
+   "no web retrieval mechanism was run in-tree; one page-read via the research tool (pypi.org/pypi/tomli/2.0.2/json) proved the machine tier parseable, that is all",
+   "no speed advantage of the cache (pytest dominates at this suite size; claim would be fake)",
+   "no claim beyond the closed goal kind run-tests; other contracts are refused, not approximated"
+ ]
+}
