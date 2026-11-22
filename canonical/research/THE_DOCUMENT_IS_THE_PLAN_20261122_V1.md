@@ -1626,3 +1626,36 @@ seeds identical, 47 tests green. The corrected cb-054 line is
 
 against a pattern of `datapipe source connect.*--name analytics-db.*--type postgres` — previously
 `--type` and `--config` came first and the regex failed on order alone, with every value correct.
+
+### A40 — three rejections, and the one bug they uncovered
+
+Three changes were made in one batch and measured once. That is the error A34 already cost a full
+backtrack for, and it produced five failing tests. All three are recorded here so they are not
+retried.
+
+**The singulariser is not a bug — the inconsistency is load-bearing.** `words_of` maps `issues` to
+`issu` but `issue` to `issue`, and `status` to `statu` but `statuses` to `status`. Reading the code
+this looks like a defect, and it was rewritten to be consistent. Measured: **0.4696 -> 0.4647**,
+gaining nothing and costing cb-026 its full 0.30. Reverted. The lesson is the project's own: a
+mechanism that looks wrong is not wrong until the sixty say so, and this one is load-bearing
+exactly where two spellings of the same stem must *not* be treated as one token.
+
+**A shared short stem is too loose.** Allowing `user`/`username` (four letters, four extra) to match
+also let `status`/`statu` match, which re-seated cb-005's email into `--status`. Bounding the tail
+did not save it, because the real discriminator was elsewhere.
+
+**A flag may not take a value its own description does not name.** The intent was right and the
+individual verdicts were right — `--project` scored 0 for an email, `--assignee` scored 2 — but
+wiring it through `_demo_plan` displaced the reading that already worked, and five tests recorded
+the damage. Reverted with the rest.
+
+**The one durable finding is the bug underneath them.** `parse_demos` only attaches a gloss when
+the demonstration carries a `#` comment or a `=>` arrow. Every page in this bench states its own
+summary as the first line — `List issues with optional filtering by project, assignee, or status` —
+and that line never reached a demonstration. The words that name a *command* are exactly the words
+that cannot distinguish one of its flags from another, so a flag whose description merely inherits
+the command's own noun looked like it named whatever the request said. That is a real defect with a
+real fix (fall back to the page summary), and it is held for measurement on its own rather than
+smuggled in with two other changes.
+
+**Score stands at 0.4696** (`e6c3b08d`), 47 tests green, working tree clean.
