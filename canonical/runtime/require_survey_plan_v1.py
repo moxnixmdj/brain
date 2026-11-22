@@ -777,23 +777,41 @@ def route(tree: Mapping[str, Any], request_words: Iterable[str],
     path: list[str] = []
     nodes = [current]
     scores: list[dict[str, Any]] = []
-    while True:
-        best, best_score = None, 0
-        for child in current.get("children") or []:
-            own = words_of(child.get("title", "") + " " + child.get("summary", ""))
-            score = 2 * len(wanted & own)
-            stated = acts_in(child.get("summary") or "")
-            if wanted_acts and stated and stated[0][0] in {a[0] for a in wanted_acts}:
-                score += 1
-            scores.append({"child": child.get("title"), "score": score})
-            if score > best_score:
-                best, best_score = child, score
-        if best is None:
-            return {"document": current, "path": path, "nodes": nodes, "scores": scores,
-                    "root": tree.get("root") or {}}
-        path.append(best["title"])
-        nodes.append(best)
-        current = best
+    # A command can live below a page that says nothing about the request: `wright forge set`
+    # has `forge` in the middle, which the request never mentions. Scoring only the children of
+    # the page we are on would stop at `forge` -- and "no route" reads as "this program has no
+    # such command". So every page is scored, and the path to the best one is walked; a page on
+    # that path may be unremarkable without being wrong.
+    by_path: dict[tuple[str, ...], dict[str, Any]] = {}
+
+    def walk(node: Mapping[str, Any], prefix: tuple[str, ...]) -> None:
+        for child in node.get("children") or []:
+            here = prefix + (str(child.get("title") or ""),)
+            by_path[here] = dict(child)
+            walk(child, here)
+
+    walk(tree.get("root") or {}, ())
+    best_path: tuple[str, ...] = ()
+    best_score = 0
+    for here, page in by_path.items():
+        own = words_of(str(page.get("title") or "") + " " + str(page.get("summary") or ""))
+        score = 2 * len(wanted & own)
+        stated = acts_in(page.get("summary") or "")
+        if wanted_acts and stated and stated[0][0] in {a[0] for a in wanted_acts}:
+            score += 1
+        scores.append({"child": " ".join(here), "score": score})
+        if score > best_score:
+            best_path, best_score = here, score
+    for depth in range(1, len(best_path) + 1):
+        here = best_path[:depth]
+        page = by_path.get(here)
+        if page is None:
+            break
+        path.append(str(page.get("title") or ""))
+        nodes.append(page)
+        current = page
+    return {"document": current, "path": path, "nodes": nodes, "scores": scores,
+            "root": tree.get("root") or {}}
 
 
 # --------------------------------------------------------------------------- require
@@ -1026,7 +1044,7 @@ def _acts_stated_by_documents(tree: Mapping[str, Any], requirement: Mapping[str,
               if len(w) > 3 and w not in ACT_NOISE}
     if not wanted:
         return [], []
-    nodes = [tree.get("root") or {}] + [n for n in (tree.get("root") or {}).get("children") or []]
+    nodes = every_page(tree)
     found: list[tuple[str, str]] = []
     authority: list[dict[str, Any]] = []
     for node in nodes:
@@ -1160,6 +1178,22 @@ def _demo_plan(demo: Mapping[str, Any], requirement: Mapping[str, Any], tool: st
     values = list(requirement.get("values") or [])
     if not demo.get("values") or not values:
         return None
+    # A demonstration whose own gloss says it leaves something *out* is an exclusion example:
+    # `unzip data1 -x joe` is glossed "extract all files except joe". Filling that flag with the
+    # thing the request asked to be made would carry out the opposite of the request. The
+    # document said which flag excludes; nothing here has to know what `-x` means.
+    gloss_words = {w.lower() for w in re.findall(r"[A-Za-z]+", str(demo.get("gloss") or ""))}
+    if gloss_words & _EXCLUSION_WORDS:
+        return None
+    # A gloss names the act it demonstrates by opening with its verb: "Create archive.tar from
+    # files foo and bar", "quietly replace existing ReadMe". The words after that head verb are
+    # nouns `acts_in` also returns (`archive` in "if archive file newer"), and a shared noun is
+    # not a shared act -- only the head verb is the demonstration's claim.
+    stated = [a[0] for a in acts_in(str(demo.get("gloss") or "")) if a[0] not in ACT_NOISE]
+    demo_act = stated[0] if stated else None
+    request_acts = {tuple(a["act"])[0] for a in requirement.get("acts") or []}
+    if demo_act and request_acts and demo_act not in request_acts:
+        return None
     ordered = sorted([v for v in values if not v.get("value_of")],
                      key=lambda v: (0 if v.get("role") == "product" else
                                     2 if v.get("role") == "source" else 1,
@@ -1196,11 +1230,23 @@ def _demo_plan(demo: Mapping[str, Any], requirement: Mapping[str, Any], tool: st
                     if 1 > score:
                         pick, score = value, 1
             if pick is None:
-                # The example's flag has no description to match on (`-cf` is a bundle of `-c`
-                # and `-f`, and neither is described in words here). What the example still
-                # states is its *shape*: a flag, then the object it names, then the objects that
-                # go in. The request's objects fill that shape in order, and the example's own
-                # flag is kept because the document is where it came from.
+                # The example's flag has no description to match on. Before using its *shape*,
+                # the example's own values must have something to do with the request's: a
+                # demonstration of `unzip -p foo | more` is about a pipe to `more`, and if
+                # nothing in it is named in the instruction, its shape is evidence about some
+                # other act. Reusing a shape with no shared word is how a destination ends up in
+                # an exclusion flag.
+                example_text = " ".join([str(demo.get("call") or ""),
+                                         str(demo.get("gloss") or ""),
+                                         " ".join(str(v) for v in demo.get("values") or [])])
+                example_words = {w.lower() for w in re.findall(r"[A-Za-z][A-Za-z0-9_.-]+",
+                                                              example_text)}
+                request_words = words_of(str(requirement.get("instruction") or ""))
+                overlaps = example_words & request_words
+                # the program's own name is not evidence about the act
+                overlaps -= words_of(str(tool.rsplit("/", 1)[-1]))
+                if not overlaps:
+                    continue
                 # a value the document already assigned to a flag is not a leftover object
                 rest = [str(v["value"]) for v in ordered
                         if str(v["value"]) not in spent and not v.get("value_of")]
@@ -1213,6 +1259,11 @@ def _demo_plan(demo: Mapping[str, Any], requirement: Mapping[str, Any], tool: st
                 break
             spent.add(str(pick["value"]))
             filled_pairs.extend([flag, str(pick["value"])])
+        # A demonstration whose every flag was dropped states nothing about this request; a
+        # plan made only of the program's name carries none of the request and must not be
+        # offered as a reading of it.
+        if not filled_pairs:
+            return None
         argv = [tool] + list(prefix) + filled_pairs
         return {"argv": argv, "operation": None,
                 "bound": [{"role": "demonstration", "call": demo["call"]}],
@@ -1268,7 +1319,23 @@ def _shape_filled(example: str, values: Sequence[Mapping[str, Any]], spent: set[
 
 
 def _product_slots(options: Sequence[Mapping[str, Any]]) -> list[Mapping[str, Any]]:
-    return [o for o in options if is_product_slot(o)]
+    """The slots a document draws for a place a result goes, best first.
+
+    Several options can take a DIRECTORY (`cp --parents DIRECTORY` and `cp -t DIRECTORY`), and
+    only the document's own words separate them: `--parents` says "use full **source** file name
+    under DIRECTORY" -- it changes what the source is called, not where the result goes --
+    while `-t` says "copy all SOURCE arguments **into** DIRECTORY". A slot whose description
+    uses a place word or names no source wins; a slot the description ties to the sources loses.
+    """
+    def rank(option: Mapping[str, Any]) -> int:
+        words = {w.lower() for w in re.findall(r"[A-Za-z]+", str(option.get("words") or ""))}
+        if words & _PLACE_WORDS:
+            return 0
+        if "source" in words or "sources" in words:
+            return 2
+        return 1
+    slots = [o for o in options if is_product_slot(o)]
+    return sorted(slots, key=rank)
 
 
 def _bind_product(values: Sequence[Mapping[str, Any]], options: Sequence[Mapping[str, Any]]
@@ -1425,6 +1492,19 @@ def _declared_word_readings(requirement: Mapping[str, Any], usage: Mapping[str, 
     return out
 
 
+# The prepositions a request uses to say where a made thing goes. These are the request's own
+# words, not a table about programs: the matching is against the document's description.
+# Only the directional words that name a container. `in` and `to` are far too common to carry
+# this: `-x` says "exclude files that follow (in xlist)" and `-p` says "extract files to pipe",
+# and neither is a destination. `into` is a word a document uses when it means one.
+_PLACE_WORDS = {"into", "onto", "inside", "within", "underneath"}
+
+# Words with which a document's own gloss says a value is being *left out*. A demonstration
+# glossed this way is not a shape for making anything.
+_EXCLUSION_WORDS = {"except", "excluding", "exclude", "excluded", "but", "omit", "omitting",
+                    "skip", "skipping", "without", "ignore", "ignoring"}
+
+
 def _composed_readings(requirement: Mapping[str, Any], usage: Mapping[str, Any],
                        picture: Sequence[str] | None
                        ) -> list[tuple[list[Mapping[str, Any]], str]]:
@@ -1556,16 +1636,41 @@ def _composed_readings(requirement: Mapping[str, Any], usage: Mapping[str, Any],
         if value["kind"] != "path":
             continue
         if is_sink(value):
+            # The request's own preposition is a word, and the document uses words too: `-d`
+            # says "extract files *into* exdir" and the request says "into /tmp/out", while `-x`
+            # says "exclude". A destination that names the word an option's own description uses
+            # is that option's value -- no table of destination flags, and it works for a
+            # program nobody has seen.
+            # `words_of` drops prepositions as stopwords, and here the preposition IS the signal
+            says_into = {w.lower() for w in re.findall(r"[A-Za-z]+", str(value.get("context") or ""))
+                         } & _PLACE_WORDS
+            def _raw_words(text: Any) -> set[str]:
+                return {w.lower() for w in re.findall(r"[A-Za-z]+", str(text or ""))}
+            candidates = [o for o in options if id(o) not in used_options
+                          and says_into & _raw_words(o.get("words"))]
+            # where the document names a place for the product, that place wins over an option
+            # that merely mentions the word (`-x xlist` says nothing about `into`)
+            candidates.sort(key=lambda o: 0 if is_product_slot(o) else 1)
+            into_option = candidates[0] if candidates else None
+            if into_option is not None and says_into:
+                used_options.add(id(into_option))
+                bound.append({"role": "value_slot", "option": into_option["flag"],
+                              "value": str(value["value"])})
+                continue
             # a place in the program's own picture named for the product is where it goes:
             # `stitch OUTFILE [PATCH]...` says so, and a picture with no such place means the
             # shell carries the result instead. The place is named either by the request's own
             # words about it (`bundle.zip` and `zipfile` share `zip`) or by what it means.
             index = place_named_by(value)
-            if index is None:
+            if index is None and len(paths) > 1:
+                # No word of the request names this place, but the document draws a place the
+                # other objects do not claim: `wright forge set SETTING PIECE` -- the piece is
+                # the piece, and the one thing made takes the place left over. That is the
+                # picture's own arithmetic, not a list of words for "output".
+                claimed = {place_named_by(other) for other in paths if other is not value}
                 index = next((i for i, place in enumerate(places)
-                              if place and i not in taken
-                              and re.match(r"^(out|output|outfile|dest|destination|target|"
-                                           r"archive|result)$", place)), None)
+                              if place and i not in taken and place not in repeatable
+                              and i not in claimed), None)
             if index is not None:
                 taken.add(index)
                 bound.append({"role": "positional", "value": str(value["value"]),
@@ -1632,6 +1737,27 @@ def _composed_readings(requirement: Mapping[str, Any], usage: Mapping[str, Any],
     return [(bound, "PLANNED_BY_A_COMPOSED_READING")]
 
 
+def every_page(tree: Mapping[str, Any], limit: int = 64) -> list[dict[str, Any]]:
+    """Every page the survey reached, at any depth, root first.
+
+    A document is a tree -- `git remote add`, `cargo +toolchain clippy` -- and reading only the
+    first level makes every command below it invisible, which reads as "this program has no such
+    command" rather than "we did not look". The walk is breadth-first so the shallow pages stay
+    first (they are the likelier routing target), and it is bounded and cycle-safe.
+    """
+    seen: set[int] = set()
+    pages: list[dict[str, Any]] = []
+    queue = [tree.get("root") or {}]
+    while queue and len(pages) < limit:
+        node = queue.pop(0)
+        if id(node) in seen:
+            continue
+        seen.add(id(node))
+        pages.append(node)
+        queue.extend(node.get("children") or [])
+    return pages
+
+
 def places_that_repeat(usage: Mapping[str, Any]) -> set[str]:
     """Which places the document itself marks as repeatable (`[PATCH]...`, `FILE...`).
 
@@ -1696,7 +1822,7 @@ def plan(requirement: Mapping[str, Any], tree: Mapping[str, Any]) -> dict[str, A
     values = list(requirement.get("values") or [])
     # a bare word that is one of the documents' own choices is a value, not an object
     vocabulary: list[tuple[str, str]] = []
-    for node in [tree.get("root") or {}] + list((tree.get("root") or {}).get("children") or []):
+    for node in every_page(tree):
         for option in node.get("options") or []:
             vocabulary.extend((str(option.get("flag")), w) for w in enum_choices(option))
     if vocabulary:
@@ -1919,14 +2045,14 @@ def plan(requirement: Mapping[str, Any], tree: Mapping[str, Any]) -> dict[str, A
     # somewhere (`mode`, `record`, `veil`) is vocabulary, and a word no page mentions is the
     # thing the request names that nothing here can carry (`quantum`, `transmute`).
     documented: set[str] = set()
-    for node in [tree.get("root") or {}] + list((tree.get("root") or {}).get("children") or []):
+    pages = every_page(tree)
+    for node in pages:
         documented |= words_of(" ".join([str(node.get("title") or ""),
                                          str(node.get("summary") or ""),
                                          str((node.get("usage") or {}).get("usage") or ""),
                                          " ".join(str(o.get("words") or "") for o in
                                                   node.get("options") or [])]))
-    documented |= {w for chain in [enum_choices(o) for node in
-                                   [tree.get("root") or {}] + list((tree.get("root") or {}).get("children") or [])
+    documented |= {w for chain in [enum_choices(o) for node in pages
                                    for o in node.get("options") or []] for w in chain}
     placed_words: set[str] = set()
     for candidate in plans:
