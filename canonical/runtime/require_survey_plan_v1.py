@@ -905,19 +905,29 @@ def require(text: str) -> dict[str, Any]:
                        "step": step_of(instruction, position),
                        "words": sorted(words_of(context))[:24], "context": context.strip()[:240]})
 
-    for m in QUOTED.finditer(instruction):
+    # Where every quoted value sits, so one value's phrase can stop at its neighbour. Two quoted
+    # values in one sentence (`titled "Payment Service Degradation" with severity "P1"`) each
+    # carry the words of their own phrase and not the other's -- without this, both windows
+    # contain `title` and `severity` alike and neither flag can be told from the other. The span
+    # is computed from positions, not by searching for a separator, because the text between two
+    # values may be a line break or nothing at all.
+    quotes = list(QUOTED.finditer(instruction))
+    for index, m in enumerate(quotes):
         # A value's own words are the words immediately around it, not the sentence's: in
         # `... team "Platform" with the title "Fix it", set the priority to "urgent"` every
         # quoted value would otherwise carry `title`, `priority` and `team` alike, and no
         # option could be told apart from any other. The window is the phrase it sits in.
-        before = instruction[:m.start()]
-        cut = max([before.rfind(sep) for sep in (", ", "; ", " and ", " with ", " to ",
+        previous_end = quotes[index - 1].end() if index else 0
+        next_start = quotes[index + 1].start() if index + 1 < len(quotes) else len(instruction)
+        before = instruction[previous_end:m.start()]
+        cut = max([before.rfind(sep) for sep in (", ", "; ", ". ", " and ", " with ", " to ",
                                                  " in ", " set ")] + [-1])
-        start = cut + 1 if cut >= 0 else max(0, m.start() - 60)
-        after = instruction[m.end(): m.end() + 90]
-        stop = min([i for i in (after.find(", "), after.find("; "), after.find(" and "),
-                                after.find(" with "), after.find(" set "), after.find(" to "))
-                    if i >= 0] + [len(after)])
+        start = previous_end + (cut + 1 if cut >= 0 else max(0, len(before) - 60))
+        after = instruction[m.end():next_start]
+        stop = min([i for i in (after.find(", "), after.find("; "), after.find(". "),
+                                after.find(" and "), after.find(" with "),
+                                after.find(" set "), after.find(" to ")) if i >= 0]
+                   + [len(after)])
         # the phrase is what sits between the two nearest separators, and no further
         add("literal", m.group(1), instruction[start: m.end() + stop], m.start())
     unquoted = QUOTED.sub(lambda m: " " * len(m.group(0)), instruction)

@@ -606,3 +606,16 @@ Two things this episode records honestly:
   share one sentence window (`titled "A" with "B"`) — was abandoned unfinished: the separator search does
   not handle a line break between them, and chasing string offsets was not buying anything measurable.
   It is recorded here as an open defect rather than quietly dropped.
+
+**A14, follow-up — the open defect closed, and the fix that is not claimed.** Each quoted value's phrase is
+now bounded by its neighbours' own spans rather than by a string search, so `titled "Payment Service
+Degradation" with severity "P1"` gives each value only its own words, and a line break between two values is
+no longer a case at all. Correctness fix, **no change to the measured score** (A5 still 0.4464, A7 +0.150,
+arms 6/6 7/7 7/7) — it is committed on that basis and not presented as an improvement.
+
+The same episode produced a fix that **failed and was deleted**: ranking a flag's candidate values by how
+many description words they share, so that `--title` would prefer the value the instruction actually titled
+over a value that merely shares the word `incident`. It scored worse, and it broke the severity enum path it
+was meant to complement. It is recorded because the pattern is the round's lesson: on this bench the
+plausible general rule and the measured one disagreed, and only the measurement settled it. `cb-037`'s
+`--title`/`--alerts` swap therefore remains an **open defect**, named here rather than hidden.
