@@ -813,13 +813,27 @@ def route(tree: Mapping[str, Any], request_words: Iterable[str],
     best_path: tuple[str, ...] = ()
     best_score = 0
     for here, page in by_path.items():
-        own = words_of(str(page.get("title") or "") + " " + str(page.get("summary") or ""))
-        score = 2 * len(wanted & own)
+        # The page's own name is what the page *is*; its summary says what the page can be told
+        # about. Both are evidence, and they are not equal: `issue list` summarises itself as
+        # "List issues with optional filtering by project, assignee, or status", so the word
+        # `project` -- a filter this command accepts -- scored as highly as the title of
+        # `project list`, and a request to "list all projects" routed to `issue list` (7 to 5).
+        # Naming a thing outranks mentioning it, because a parameter is not the subject.
+        # A page's name is its whole path, not its last title: `issue list` and `project list`
+        # are both titled `list`, and only the path says which one the request means.
+        named = words_of(" ".join(here))
+        mentioned = words_of(str(page.get("summary") or ""))
+        score = 4 * len(wanted & named) + 2 * len(wanted & (mentioned - named))
         stated = acts_in(page.get("summary") or "")
         if wanted_acts and stated and stated[0][0] in {a[0] for a in wanted_acts}:
             score += 1
         scores.append({"child": " ".join(here), "score": score})
-        if score > best_score:
+        # Ties are broken by the shorter path, which is the document's own statement that
+        # nothing further was needed: `project list` and `issue list` both score 9 for "list all
+        # projects", and only insertion order separated them before -- a property of how the
+        # document happened to be written, not evidence. The shorter path is named by fewer
+        # words the request did not ask for.
+        if (score, -len(here)) > (best_score, -len(best_path)):
             best_path, best_score = here, score
     for depth in range(1, len(best_path) + 1):
         here = best_path[:depth]
@@ -2087,7 +2101,11 @@ def plan(requirement: Mapping[str, Any], tree: Mapping[str, Any],
             bound, unbound = _bind(values, [], product_first=False, picture=here)
             add(_render(tool, prefix_of(depth), None, bound), operation=None, bound=bound,
                 depth=depth, reason="PLANNED_BY_THE_SUBCOMMAND")
-            break
+            # Do not stop here. The break ended the search at the first subcommand whose index
+            # line happened to state the act, so a deeper page carrying the flags was never
+            # reached: cb-009 planned bare `issue list` while the request named an assignee the
+            # deeper page accepts. Continuing costs nothing -- the candidate is already made.
+            continue
 
     # R5 -- the program's own order, both readings the evidence supports
     # Two facts belong here, and both are the document's: a value already bound to a flag

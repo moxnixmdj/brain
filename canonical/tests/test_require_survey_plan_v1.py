@@ -539,3 +539,23 @@ def test_a_possessive_apostrophe_does_not_open_a_quoted_value():
 
     single = R.require("Set the label 'bug' on the issue")
     assert [v["value"] for v in single["values"]] == ["bug"]
+
+
+def test_naming_a_thing_outranks_mentioning_it():
+    """A page's path names what it is; its summary says what it can be told about.
+
+    Probed on the real `linear` document: `issue list` summarises itself "List issues with
+    optional filtering by project, assignee, or status", so the word `project` -- a filter this
+    command accepts -- scored as highly as the title of `project list`, and "list all projects"
+    routed to `issue list`. A parameter is not the subject. The fix weights the path above the
+    summary, and breaks ties by the shorter path, because a longer path is named by words the
+    request did not ask for.
+    """
+    import shutil
+    exe = "/tmp/cb/bin/linear"
+    if not shutil.which(exe) and not pathlib.Path(exe).exists():
+        pytest.skip("the linear program is not on this host")
+    request = "List all projects in the Linear workspace."
+    tree = R.survey(exe, want=sorted(R.words_of(request)), probes=16)
+    routed = R.route(tree, R.words_of(request), [("list", "list")])
+    assert routed["path"] == ["project", "list"], routed["path"]
