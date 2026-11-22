@@ -1901,3 +1901,32 @@ a-z ranges sit next to each other in the source), so the guard fired on new code
 do with a model. A guard that fires on a character class is not measuring what it claims to measure,
 and a guard nobody trusts is worse than no guard. It now checks identifiers -- AST names, function
 and class names, and `llm`/`llms` as a whole word -- which is the thing the constraint is about.
+
+### A48 — real-tool status: tar verified by execution, git no longer readable here
+
+**tar: 3 of 3 exact, and executed, not just planned.** Against the real `/usr/bin/tar`:
+
+    /usr/bin/tar -cf  /tmp/h/out2.tar /tmp/h/a.txt /tmp/h/b.txt      create   -- ran, archive made
+    /usr/bin/tar -tvf /tmp/h/out.tar                                  list     -- ran, two members
+    /usr/bin/tar -xf  /tmp/h/out.tar   /tmp/h/dest                    extract  -- ran
+
+The create and list were carried out on the real binary in `/tmp/h/tst`; the archive contains the
+two files by name. (`-xf` into a directory needs `-C` as well -- the plan states the shape, not the
+full idiom, and that is a known gap rather than a claim.)
+
+**git is no longer readable in this sandbox, and that is an environment change, not a regression.**
+Every subcommand page fails identically:
+
+    $ git init --help
+    warning: failed to exec 'man': No such file or directory
+    fatal: no man viewer handled the request
+
+`git --help` at the root still works (`usage: git [-v | --version] ...`), because git handles that
+itself. Earlier in this project git contributed 4 of 4 exact plans (`init`, `add`, `clone`, `mv`)
+against five readable pages; those pages are not readable now, and a planner told nothing about a
+subcommand cannot plan it. The next-read fallback (`PLANNED_BY_ARGUMENT_ORDER`) then emits
+`git clone /tmp/h/repo3` for "Initialize a new git repository", which is wrong and is *correctly*
+refused by the world.
+
+Recorded so this is not chased as a code defect: the mechanism is unchanged, the instrument is.
+Verified third-party evidence now rests on tar (real, executed) and on the six never-seen programs.
