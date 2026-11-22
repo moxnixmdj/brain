@@ -1711,3 +1711,43 @@ Measured: **0.4696 unchanged**, 47 tests green, zero regressions. The task still
 cb-035 wants `--service web-platform` and three real commands — but an invented value is now
 impossible on this path, which matters more than the number: a score that rises on fabricated
 values is worse than a score that does not move.
+
+### A43 — a fifth of the bench cannot be solved, and that is measurable
+
+Chasing the four worst tasks led to a routing improvement that measured **worse** (0.4696 ->
+0.4520 with an act weight of 8; 0.4570 with the probe-saving change alone), so both were reverted.
+What the chase produced instead is a fact about the instrument:
+
+**11 of the 60 tasks state an expected command path that does not exist in the tool's own
+documentation.** Verified by asking each program for the page:
+
+    slack message search    -> slack message <command> [flags]   (only `send`)
+    kforge deploy trigger   -> kforge <command> [flags]          (no `deploy`)
+    linear project update   -> linear project <command> [flags]  (only `list`)
+    meshctl traffic shift   -> meshctl traffic <command> [flags]
+    meshctl service health  -> meshctl service <command> [flags]
+    alertmgr alert ack      -> alertmgr alert <command> [flags]
+    datapipe source create  -> datapipe source <command> [flags]
+    flowctl workflow        -> flowctl workflow <command> [flags]
+    google calendar list    -> google calendar <command> [flags]
+    opencli reddit          -> opencli reddit <command> [flags]   (needs `reddit hot`)
+
+The affected tasks are cb-007, cb-018, cb-022, cb-033, cb-035, cb-036, cb-037, cb-038, cb-039,
+cb-040, cb-047 — eighteen percent of the set. Their combined score today is 3.266 of 27.120, and
+the reason it cannot be much higher is not a defect in the planner: **a command that no document
+describes cannot be discovered by reading the documents.** The mission's premise is that anything
+on a computer has a guide; where the guide does not describe the command the task expects, no
+amount of correct reading reaches it.
+
+This bounds the honest ceiling of this benchmark well below 1.0. It does not excuse anything --
+cb-035's `artifact list` step, cb-019's, every satisfiable task is still fair game -- but a score
+quoted against this set must be read as "of what the instrument can ask", not "of what a person
+could do".
+
+**Rejected, with numbers, so they are not retried:** weighting a page's stated act at 8 instead of
+1 (0.4520: up 1, down 3 — the act is a weaker signal than the nouns, measured); and skipping probes
+for children named after their own parent (0.4570 — it does stop the two wasted
+`channel channel` / `message message` probes, but it also changes which pages fit in the budget, and
+the pages it displaces were worth more than the probes it saved).
+
+**Score stands at 0.4696**, 48 tests green.
