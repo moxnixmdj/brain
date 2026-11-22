@@ -85,8 +85,30 @@ def compile_tests():
     except BaseException as _exc:
         compile_error = f"{type(_exc).__name__}: {_exc}"
 
+import signal
+
+class _Hang(Exception):
+    pass
+
+def _alarm(signum, frame):
+    raise _Hang()
+
+try:
+    signal.signal(signal.SIGALRM, _alarm)
+except BaseException:
+    pass
+
+per_body_seconds = int(payload.get("per_body_seconds") or 5)
+
 results = []
 for body in bodies:
+    # A single candidate that never returns (an infinite generator, a huge prime search) must
+    # not consume the whole item's budget. It is bounded here and reported as a timeout for
+    # THAT candidate only; the rest of the list still gets judged.
+    try:
+        signal.alarm(per_body_seconds)
+    except BaseException:
+        pass
     ns = dict(ns_base)
     try:
         build(body, ns)
@@ -114,10 +136,16 @@ for body in bodies:
         runner = unittest.TextTestRunner(stream=io.StringIO(), verbosity=0)
         try:
             res = runner.run(suite)
+        except _Hang:
+            ok = False; why = "candidate_timeout"; break
         except BaseException:
             ok = False; why = "runner_error"; break
         if res.failures or res.errors:
             ok = False; why = "failed"; break
+    try:
+        signal.alarm(0)
+    except BaseException:
+        pass
     results.append({"passed": ok, "why": why})
 
 print(json.dumps(results))
@@ -126,15 +154,26 @@ print(json.dumps(results))
 
 def judge_many(python: str, starting_code: str, tests_src: str,
                bodies: Sequence[str], *, timeout: float = 900.0,
-               test_path: str | None = None) -> list[dict]:
-    """Judge every body against the item's hidden test, importing the library once."""
+               test_path: str | None = None,
+               per_body_seconds: int = 3) -> list[dict]:
+    """Judge every body against the item's hidden test, importing the library once.
+
+    The per-candidate limit and the worker budget must be consistent: 60 candidates at 5 s
+    each is 300 s of allowance, which exceeds any sane worker timeout, so the whole item
+    returns `worker_timeout` and EVERY verdict is lost -- including the correct one. The
+    allowance is therefore capped by the budget rather than chosen independently.
+    """
+    if bodies:
+        allowance = max(1, int(timeout / max(len(bodies), 1)) - 1)
+        per_body_seconds = max(1, min(int(per_body_seconds), allowance))
     modname = ""
     m = re.search(r"^\s*from\s+(\w+)\s+import\s+", tests_src, re.M)
     if m:
         modname = m.group(1)
     payload = json.dumps({"starting_code": starting_code, "tests_src": tests_src,
                           "bodies": list(bodies), "modname": modname,
-                          "test_path": str(test_path or "")})
+                          "test_path": str(test_path or ""),
+                          "per_body_seconds": int(per_body_seconds)})
     try:
         proc = subprocess.run([python, "-c", _WORKER], input=payload, capture_output=True,
                               text=True, timeout=timeout)

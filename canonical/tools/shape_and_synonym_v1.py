@@ -43,6 +43,13 @@ SHAPE_TRIGGERS: tuple[tuple[str, str], ...] = (
     (r"\bflat,? read-only\b", "member_call"),
     (r"\bflat\b", "member_call"),
     (r"\bdictionary-of-keys\b", "member_call"),
+    # "every subexpression is evaluated" describes a traversal that CALLS something on each
+    # node. That is a higher-order call whether or not the word "lambda" appears, and item
+    # 196 says exactly this ("traverses ... so that every subexpression is evaluated") while
+    # never using the word. Requiring the literal word lost it.
+    (r"\bevery subexpression\b", "lambda"),
+    (r"\bon each node\b", "lambda"),
+    (r"\bapplies? .* to each\b", "lambda"),
 )
 
 # Prose words that name a type the stub already declares, so they cannot discriminate.
@@ -127,6 +134,49 @@ def words_of(text: str) -> set[str]:
     return {w for w in re.findall(r"[a-z]{3,}", (text or "").lower()) if w not in STOP}
 
 
+def compound_names(corpus: Mapping[str, str]) -> dict[str, str]:
+    """A squashed name whose two halves are both words the prose could use.
+
+    `isprime` is `is` + `prime`. The prose says "check if the input is prime" and never says
+    the token `isprime`, so neither exact-name matching nor snake/camel splitting reaches it.
+    A name is split at every interior position and indexed by both halves; the caller decides
+    whether those halves are words it asked about. Nothing is stored and nothing is guessed.
+    """
+    index: dict[str, str] = {}
+    for dotted in corpus:
+        base = dotted.rsplit(".", 1)[-1]
+        if len(base) < 6 or not base.islower():
+            continue
+        for cut in range(3, len(base) - 2):
+            left, right = base[:cut], base[cut:]
+            if left.isalpha() and right.isalpha():
+                index.setdefault(f"{left}+{right}", dotted)
+    return index
+
+
+def squash_matches(problem: str, corpus: Mapping[str, str]) -> list[str]:
+    """Corpus names whose two halves are BOTH words the problem uses.
+
+    Kept deliberately strict: both halves must be problem words of length >= 3, so `isprime`
+    is reachable from "check if the input is prime" and unrelated names are not.
+    """
+    # RAW words, not stopword-filtered: `isprime` is `is` + `prime`, and `is` is exactly the
+    # kind of function word that gets stripped -- which silently made this match nothing.
+    low = set(re.findall(r"[a-z]{2,}", (problem or "").lower()))
+    out = []
+    for dotted in corpus:
+        base = dotted.rsplit(".", 1)[-1]
+        if len(base) < 6 or not base.islower():
+            continue
+        for cut in range(2, len(base) - 2):
+            left, right = base[:cut], base[cut:]
+            if left in low and right in low:
+                out.append(dotted)
+                break
+    out.sort(key=lambda d: (d.count("."), d))
+    return out
+
+
 def stated_symbols(problem: str, corpus: Mapping[str, str]) -> list[str]:
     """Symbols whose name is stated outright in the prose, offered ahead of any ranking.
 
@@ -162,6 +212,10 @@ def solve_item(bench: str | pathlib.Path, item: Mapping[str, Any], *,
     returns = return_annotation(item["starting_code"])
 
     stated = stated_symbols(item.get("problem", ""), corpus) if corpus else []
+    if corpus:
+        # squashed names whose halves are both problem words: `isprime` from "...is prime"
+        squash = squash_matches(item.get("problem", ""), corpus)
+        stated = stated + [s for s in squash if s not in stated]
     # stated symbols are a statement, not a ranking: they all get tried. The ranking only
     # spends the remaining budget. Capping both by the same limit dropped `bottom_up` for
     # 195, whose canonical path is sympy.core.bottom_up and which never entered the top 60.
