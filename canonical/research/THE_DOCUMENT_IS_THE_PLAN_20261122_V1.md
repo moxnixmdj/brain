@@ -1428,3 +1428,39 @@ arbiter and it says the fix has not been found.
 points and repaired three genuine defects in reading real documentation plus the URL mangling that
 cost a clone its scheme. It also produced the first measurements of this thread on programs nobody
 here wrote, in a dialect nobody here chose.
+
+### A35 — the act-weight was not the problem; a summary's *first* act was
+
+A34 recorded two changes the bench refused and left `git mv` open, guessing that weighting a stated
+act harder amplified a noisy signal. That guess was wrong, and the diagnosis took three measurements
+to get right.
+
+`acts_in("Move or rename a file, a directory, or a symlink")` returns `['move', 'rename']`. The
+bonus checked `stated[0][0]`, so a request saying "rename" never matched: the page that answers the
+request contributed nothing **for saying so**. The fix is one line — match *any* act the summary
+states, not the first — and it is **free**: 0.4572 unchanged, three seeds.
+
+That surfaced the rest. With `mv` finally credited, `git init` still won 4 to 3, because
+"in the **git** repository" matched init's summary words `git` and `repository`. The program's own
+name is in its pages' summaries because those summaries are about it, so it says nothing about which
+command is wanted. Removing **only the program's name** — not the wider genre list A34 measured —
+is free, and `mv` then routes correctly.
+
+Then the ordering, `mv c.txt a.txt`, needed two things A34 had already found and reverted as part of
+the same batch: `[<options>]` read as the options position, and a bare metavariable read as a place.
+Restored on their own, both are free.
+
+    all sixty tasks   0.4572, three seeds, unchanged through every step of this round
+    real git          4/4 exact: init, add, clone (URL intact), mv (source then destination)
+    real tar          3/3 exact, from a single page of 162 options with no command tree
+
+**The lesson is about batching, and it cost this round a full backtrack.** A34 changed five things
+and measured once, so a 0.4488 reading could not say which of them cost the points. Taking them one
+at a time showed exactly one was expensive (the act weight, +1 → +4), one was mildly expensive (the
+genre-word list, −0.005), and the other three were free. **Measure each change, or plan to unbundle
+it later** — and the four genuine defects that survived were all in *reading*, none in what the
+system knew about git, tar, or archives.
+
+The score did not move because these programs are not in the benchmark. What moved is that a
+mechanism built against eight synthetic CLIs now reads three real ones' documentation and produces
+commands that run.

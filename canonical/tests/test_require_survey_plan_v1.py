@@ -823,3 +823,56 @@ def test_one_spelling_may_fill_two_slots_when_the_document_and_the_request_both_
     got = dict(zip(argv[2::2], argv[3::2]))
     assert got == {"--type": "CNAME", "--origin": "example.org", "--name": "www",
                    "--value": "example.org"}, argv
+
+
+@pytest.mark.parametrize("instruction,want", [
+    ("Create an empty git repository in the directory /tmp/h/repo.",
+     ["init", "/tmp/h/repo"]),
+    ("Add the file /tmp/h/a.txt to the git staging area.",
+     ["add", "/tmp/h/a.txt"]),
+    ("Clone the repository https://example.com/x.git into /tmp/h/cl",
+     ["clone", "https://example.com/x.git", "/tmp/h/cl"]),
+    ("Rename the file /tmp/h/a.txt to /tmp/h/c.txt in the git repository.",
+     ["mv", "/tmp/h/a.txt", "/tmp/h/c.txt"]),
+])
+def test_gits_own_help_is_enough_for_gits_own_commands(instruction, want):
+    """Real help text from a program nobody here wrote, on a machine, read as a document.
+
+    Each of these was executed against the real `git` afterwards. Four separate defects in reading
+    a document came out of them and each is represented here: `git init -h` writes `[<directory>]`
+    on the fifth line of a wrapped usage statement; `git clone` writes one positional bracketed and
+    one bare; `[<options>]` appears in every git usage line and is not an operand; and `git mv`
+    states its act as "Move or rename", so only checking a summary's *first* act misses the request
+    that says "rename".
+    """
+    out = R.require_survey_plan("git", instruction, probes=24)
+    assert out["plans"], instruction
+    assert out["plans"][0]["argv"][1:] == want, out["plans"][0]["argv"]
+
+
+@pytest.mark.parametrize("instruction,want", [
+    ("Create an archive file /tmp/h/out.tar containing the files /tmp/h/a.txt and /tmp/h/b.txt.",
+     ["-cf", "/tmp/h/out.tar", "/tmp/h/a.txt", "/tmp/h/b.txt"]),
+    ("List the contents of the archive /tmp/h/out.tar.", ["-tvf", "/tmp/h/out.tar"]),
+    ("Extract all files from the archive /tmp/h/out.tar into the directory /tmp/h/dest.",
+     ["-xf", "/tmp/h/out.tar", "/tmp/h/dest"]),
+])
+def test_one_page_with_a_hundred_and_sixty_options_and_no_command_tree(instruction, want):
+    """GNU tar: a single page, 162 option lines, no subcommands, an `Examples:` block.
+
+    Nothing about this shape was designed for, and every command below came from tar's own examples
+    and was executed against the real binary.
+    """
+    out = R.require_survey_plan("tar", instruction, probes=24)
+    assert out["plans"], instruction
+    assert out["plans"][0]["argv"][1:] == want, out["plans"][0]["argv"]
+
+
+def test_a_wrapped_usage_statement_is_one_grammar():
+    """`git init -h` puts `[<directory>]`, its only positional, on the fifth line."""
+    out = R.survey("git", want=[], probes=24)
+    init = next(n for n in R.every_page(out)
+                if "git init" in str((n.get("usage") or {}).get("usage") or "")[:20])
+    picture = R.positional_grammar(init["usage"])
+    assert "option" in picture, picture
+    assert any("directory" in str(p) for p in picture), picture

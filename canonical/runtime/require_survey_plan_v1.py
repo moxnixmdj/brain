@@ -723,6 +723,12 @@ def positional_grammar(usage: Mapping[str, Any]) -> list[str] | None:
                     if word.lower() not in STOP:
                         picture.append(word.lower())
                 continue
+            if re.match(r"^\[?<\s*(?:OPTIONS?|FLAGS?|ARGS?|ARGUMENTS?)\s*>\]?\.*$", token, re.I):
+                # `[<options>]` is the position `[OPTION]...` already means: where the program's own
+                # options sit, not an operand. Read as a bracketed word it took the first object in
+                # the request and shifted every real place one to the left.
+                picture.append("option")
+                continue
             if token.startswith("[") or token.endswith(("]", "...")):
                 # a bracketed word is still a place: `[FILE]`, `[list]`, `[FILE]...` -- the
                 # bracket means optional, not absent, and the ellipsis can live outside it
@@ -737,6 +743,11 @@ def positional_grammar(usage: Mapping[str, Any]) -> list[str] | None:
                     picture.append(inner.lower())
                 continue
             if token.startswith("<") or token.startswith("{"):
+                # A bare metavariable is a place: the flag-owned ones were removed with their
+                # flags. `git mv ... <source>... <destination>` lost `<destination>` here.
+                inner = token.strip("<{}>").strip()
+                if inner and not re.match(r"^[A-Z_]+$", inner):
+                    picture.append(token.lower())
                 continue
             if re.match(r"^[A-Za-z]", token) and not token.startswith("%"):
                 bare = token.rstrip(".")
@@ -847,6 +858,12 @@ def route(tree: Mapping[str, Any], request_words: Iterable[str],
           acts: Iterable[tuple[str, str]] = (), *, said: str = "") -> dict[str, Any]:
     """The document the request is about: by the words it spends, then by the act it states."""
     wanted = set(request_words)
+    # The program's own name is in its pages' summaries because those summaries are about it, so
+    # "in the **git** repository" scores `git init`, whose summary says "Create an empty Git
+    # repository", for a request about renaming a file. The caller named the program by invoking
+    # it; the word says nothing about which of its commands is wanted. Only the name is removed --
+    # the wider genre list (`repository`, `project`) was measured and costs more than it returns.
+    wanted = wanted - words_of(str(tree.get("tool") or "").rsplit("/", 1)[-1])
     wanted_acts = [tuple(a) for a in acts]
     current = tree.get("root") or {}
     path: list[str] = []
@@ -889,8 +906,13 @@ def route(tree: Mapping[str, Any], request_words: Iterable[str],
         # the requested act is stating the thing the request is *doing*, where a shared noun states
         # only its subject. Worth as much as naming the noun, and only when it is the page's own
         # first act rather than a verb buried in its description.
+        # Any act the summary states, not only its first. "Move or rename a file" states two, and a
+        # request saying "rename" matches the second; testing only `stated[0]` meant the page that
+        # answers the request contributed nothing for saying so. This is the difference between
+        # reading what a document states and reading the first word of it, and it costs nothing
+        # where the act already matched.
         stated = acts_in(page.get("summary") or "")
-        if wanted_acts and stated and stated[0][0] in {a[0] for a in wanted_acts}:
+        if wanted_acts and any(s[0] in {a[0] for a in wanted_acts} for s in stated):
             score += 1
         scores.append({"child": " ".join(here), "score": score})
         # Ties are broken by how close the candidate's *distinguishing* word sits to the act word
@@ -1235,10 +1257,17 @@ def _paths_with_places(values: Sequence[Mapping[str, Any]], picture: Sequence[st
     # into `mv c.txt a.txt` -- a command that renames the destination onto the source. So role
     # ordering only applies where the picture does not name the roles; where it does, the request's
     # own order is mapped onto the places it describes.
-    ordered = sorted(named, key=lambda v: (0 if v.get("role") == "product" else
-                                           2 if v.get("role") == "source" else 1,
-                                           int(v["position"]))) if role_first \
-        else sorted(named, key=lambda v: int(v["position"]))
+    # When the picture itself names the roles -- `<source>... <destination>` -- it has already said
+    # which object goes where, and reordering products to the front fights it: `git mv a.txt c.txt`
+    # became `mv c.txt a.txt`, which renames the destination onto the source. Role ordering is for
+    # pictures that say nothing about roles (`FILE DEST`); where the picture speaks, it decides.
+    picture_names_roles = any(re.search(r"source|dest|target|output|input|orig|from|to\b",
+                                        str(place), re.I) for place in (picture or []))
+    ordered = sorted(named, key=lambda v: int(v["position"])) \
+        if (not role_first or picture_names_roles) \
+        else sorted(named, key=lambda v: (0 if v.get("role") == "product" else
+                                          2 if v.get("role") == "source" else 1,
+                                          int(v["position"])))
     # The `option` position is where the program's *flags* sit; it is not an argument, and it
     # must not consume one. Moving past it is what lets `halcyon tally [OPTION]... LEDGER` take
     # a ledger at all -- otherwise a single leading option place swallows every object.
