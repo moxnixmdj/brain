@@ -1,0 +1,79 @@
+#!/usr/bin/env python3
+"""Tests for the batched/streaming oracle judge.
+
+Everything here was found by a failure in a real run. Each test pins the property that
+failure violated:
+
+  * a batched verdict must agree with pytest;
+  * a candidate that hangs must not cost the item its correct answer;
+  * streaming must return a pass that occurred BEFORE a later hang;
+  * the per-candidate allowance must never exceed the worker budget.
+"""
+from __future__ import annotations
+
+import pathlib
+import sys
+
+import pytest
+
+ROOT = pathlib.Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT / "tools"))
+
+import batched_oracle_v1 as B  # noqa: E402
+
+STUB = "import sympy\n\ndef custom_totient(n: int) -> int:\n    return "
+TESTS = """
+import unittest
+from sample_1 import custom_totient
+
+class T(unittest.TestCase):
+    def test_phi(self):
+        self.assertEqual(custom_totient(12), 4)
+"""
+
+
+@pytest.mark.parametrize("body,expected", [
+    ("sympy.totient(n)", True),
+    ("n", False),
+    ("1", False),
+    ("sympy.primepi(n)", False),
+])
+def test_stream_verdicts(body, expected):
+    hit = B.judge_stream(sys.executable, STUB, TESTS, [body], timeout=60,
+                         test_path="/tmp/sample_1/hidden.py", per_body_seconds=3)
+    if expected:
+        assert hit is not None and hit["passed"] is True
+        assert hit["body"] == body
+    else:
+        assert hit is None
+
+
+def test_stream_finds_the_pass_at_the_right_index():
+    bodies = ["n", "1", "sympy.totient(n)", "sympy.primepi(n)"]
+    hit = B.judge_stream(sys.executable, STUB, TESTS, bodies, timeout=60,
+                         test_path="/tmp/sample_1/hidden.py", per_body_seconds=3)
+    assert hit is not None
+    assert hit["index"] == 2
+    assert hit["body"] == "sympy.totient(n)"
+
+
+def test_a_hanging_candidate_does_not_cost_the_item():
+    """`sympy.prime(10**9)` does not return; the good candidate after it still must."""
+    bodies = ["sympy.prime(10**9)", "sympy.totient(n)"]
+    hit = B.judge_stream(sys.executable, STUB, TESTS, bodies, timeout=90,
+                         test_path="/tmp/sample_1/hidden.py", per_body_seconds=1)
+    assert hit is not None, "a hang before the answer destroyed the item"
+    assert hit["body"] == "sympy.totient(n)"
+
+
+def test_allowance_never_exceeds_the_budget():
+    """60 candidates at 5s each is 300s of allowance; it must be bounded by the budget."""
+    import inspect
+    src = inspect.getsource(B.judge_many)
+    assert "allowance" in src
+    assert "min(int(per_body_seconds), allowance)" in src
+
+
+def test_empty_body_list_is_handled():
+    assert B.judge_stream(sys.executable, STUB, TESTS, [], timeout=30,
+                          test_path="/tmp/sample_1/hidden.py") is None

@@ -26,6 +26,7 @@ import pathlib
 import re
 import subprocess
 import sys
+import time
 from typing import Any, Iterable, Mapping, Sequence
 
 SCHEMA = "BRAIN_BATCHED_ORACLE_V1"
@@ -147,8 +148,11 @@ for body in bodies:
     except BaseException:
         pass
     results.append({"passed": ok, "why": why})
-
-print(json.dumps(results))
+    # STREAMED, and flushed. A batch result that only arrives at the end is lost entirely
+    # when any later candidate hangs the worker -- and it did: index.free_symbols sits at
+    # position 8 of a chunk of 25 and passes in 0.4s, but a hang at position 12 killed the
+    # worker and with it the correct verdict. Streaming makes a pass survive any later hang.
+    print("@@@" + json.dumps({"passed": ok, "why": why}), flush=True)
 '''
 
 
@@ -188,6 +192,100 @@ def judge_many(python: str, starting_code: str, tests_src: str,
         return [{"passed": False, "why": "worker_bad_json"} for _ in bodies]
     if len(out) != len(bodies):
         return [{"passed": False, "why": "worker_short"} for _ in bodies]
+    return out
+
+
+def judge_stream(python: str, starting_code: str, tests_src: str,
+                 bodies: Sequence[str], *, timeout: float = 120.0,
+                 test_path: str | None = None,
+                 per_body_seconds: int = 2) -> dict | None:
+    """Stop the moment any candidate passes, even if the worker later hangs.
+
+    Reads the worker's output incrementally. Returns the first passing body, or None.
+    """
+    modname = ""
+    m = re.search(r"^\s*from\s+(\w+)\s+import\s+", tests_src, re.M)
+    if m:
+        modname = m.group(1)
+    payload = json.dumps({"starting_code": starting_code, "tests_src": tests_src,
+                          "bodies": list(bodies), "modname": modname,
+                          "test_path": str(test_path or ""),
+                          "per_body_seconds": int(per_body_seconds)})
+    proc = subprocess.Popen([python, "-c", _WORKER], stdin=subprocess.PIPE,
+                            stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, text=True)
+    try:
+        proc.stdin.write(payload)
+        proc.stdin.close()
+    except (BrokenPipeError, OSError):
+        return None
+    deadline = time.time() + timeout
+    found: list[dict] = []
+
+    # A blocking readline cannot be interrupted by a deadline, so reading happens on a
+    # daemon thread and the main thread polls. Without this the caller waits for the worker
+    # to finish -- which is exactly the hang the streaming was added to survive.
+    import threading
+
+    def _reader() -> None:
+        index = 0
+        try:
+            for line in proc.stdout:
+                if not line.startswith("@@@"):
+                    continue
+                try:
+                    verdict = json.loads(line[3:])
+                except json.JSONDecodeError:
+                    continue
+                if verdict.get("passed"):
+                    found.append({"passed": True, "index": index,
+                                  "body": bodies[index] if index < len(bodies) else ""})
+                    return
+                index += 1
+        except (ValueError, OSError):
+            return
+
+    thread = threading.Thread(target=_reader, daemon=True)
+    thread.start()
+    try:
+        while time.time() < deadline and thread.is_alive() and not found:
+            thread.join(timeout=0.2)
+    finally:
+        try:
+            proc.kill()
+        except OSError:
+            pass
+    return found[0] if found else None
+    return None
+
+
+def judge_in_chunks(python: str, starting_code: str, tests_src: str,
+                    bodies: Sequence[str], *, chunk: int = 40,
+                    timeout_per_chunk: float = 120.0,
+                    test_path: str | None = None,
+                    per_body_seconds: int = 2) -> list[dict]:
+    """Judge a long candidate list in bounded chunks, stopping at the first pass.
+
+    A 600-entry candidate list in one worker call either exceeds the budget and returns
+    `worker_timeout` for every entry, or forces a per-candidate allowance so small that the
+    real answer is scored as a failure. Neither is acceptable, and both were observed.
+    Chunking bounds each call independently: a pathological block of candidates costs one
+    chunk, not the item.
+    """
+    out: list[dict] = []
+    for start in range(0, len(bodies), max(1, chunk)):
+        part = list(bodies[start:start + max(1, chunk)])
+        verdicts = judge_many(python, starting_code, tests_src, part,
+                              timeout=timeout_per_chunk, test_path=test_path,
+                              per_body_seconds=per_body_seconds)
+        out.extend(verdicts)
+        if any(v.get("passed") for v in verdicts):
+            # everything after this point is irrelevant; keep lengths aligned
+            out.extend({"passed": False, "why": "not_run"} for _ in bodies[len(out):])
+            return out
+        if all(v.get("why") in ("worker_timeout", "worker_failed", "worker_bad_json",
+                                "worker_short") for v in verdicts):
+            # the whole chunk died: report it, but do not abandon the remaining chunks
+            continue
     return out
 
 

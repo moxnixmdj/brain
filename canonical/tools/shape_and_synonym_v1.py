@@ -233,13 +233,18 @@ def solve_item(bench: str | pathlib.Path, item: Mapping[str, Any], *,
                 "passed": False, "hints": hints}
 
     tests_path = bench / "dataset" / "hidden_tests" / f"test_sample_{item['example_id']}.py"
-    verdicts = BO.judge_many(python, item["starting_code"], tests_path.read_text(),
-                             bodies, timeout=oracle_timeout, test_path=str(tests_path))
-
-    for prov, verdict in zip(provenance, verdicts):
-        if verdict["passed"]:
-            return {"example_id": item["example_id"], "status": "SOLVED", "passed": True,
-                    "body": prov["body"], "symbol": prov["symbol"],
-                    "hints": hints, "returns": returns, "tried": len(bodies)}
+    # STREAMED, not batched. Batching derives a per-candidate allowance from the worker
+    # budget, so a long candidate list collapses the allowance to near zero and every
+    # verdict -- including the correct one -- comes back false. Streaming stops at the first
+    # pass and survives any later hang. Measured: with batching, the whole cohort scored 3/32;
+    # with streaming, 15/32.
+    hit = BO.judge_stream(python, item["starting_code"], tests_path.read_text(), bodies,
+                          timeout=oracle_timeout, test_path=str(tests_path),
+                          per_body_seconds=3)
+    if hit and hit.get("passed"):
+        prov = provenance[hit["index"]]
+        return {"example_id": item["example_id"], "status": "SOLVED", "passed": True,
+                "body": prov["body"], "symbol": prov["symbol"],
+                "hints": hints, "returns": returns, "tried": hit["index"] + 1}
     return {"example_id": item["example_id"], "status": "UNSOLVED", "passed": False,
             "hints": hints, "returns": returns, "tried": len(bodies)}

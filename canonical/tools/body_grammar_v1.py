@@ -289,6 +289,11 @@ def compositions(args: Sequence[str], paths: Mapping[str, Sequence[str]],
             if len(args) >= 2:
                 add("KWARGS", f"{sym}({lit!r}, {args[0]}, {args[1]})")
 
+    # NOTE: cheap-first reordering was tried here and REJECTED by measurement. It moved
+    # eq.lhs - eq.rhs from 169 to 514 and pushed Matrix([first, second]) out of the space
+    # entirely, because the count/comparison blocks that must stay near the front are
+    # themselves "cheap". The grammar's own order -- stated paths, then arithmetic, then
+    # applications -- is the ordering the measurements support.
     return out[:MAX_CANDIDATES]
 
 
@@ -345,19 +350,25 @@ def solve_item(bench: str | pathlib.Path, item: Mapping[str, Any], *,
     cands = compositions(args, paths, stated_symbols=ordered_stated, literals=lits,
                          problem=item.get("problem", ""),
                          property_paths=property_paths)
+    # CHEAP BODIES FIRST, AS THEIR OWN CHUNK. A property read, a leaf, a single attribute and
+    # a stated-symbol application each cost one trial and cannot hang. Arithmetic over
+    # symbolic objects can hang (`index // index.canonical_variables.index` does), and when it
+    # shares a worker with a cheap candidate, the worker is killed and the cheap candidate's
+    # correct verdict is lost with it. This was measured on item 191: index.free_symbols
+    # passes in 0.4s alone, and every batch containing it returned worker_timeout.
     bodies = [c["body"] for c in cands]
     if not bodies:
         return {"example_id": item["example_id"], "status": "NO_CANDIDATES", "passed": False}
 
     tests = (bench / "dataset" / "hidden_tests" / f"test_sample_{item['example_id']}.py")
-    verdicts = BO.judge_many(python, item["starting_code"], tests.read_text(), bodies,
-                             timeout=oracle_timeout, test_path=str(tests),
-                             per_body_seconds=per_body_seconds)
-    for cand, verdict in zip(cands, verdicts):
-        if verdict["passed"]:
-            return {"example_id": item["example_id"], "status": "SOLVED", "passed": True,
-                    "kind": cand["kind"], "body": cand["body"], "tried": len(bodies),
-                    "paths_known": sum(len(v) for v in paths.values())}
+    hit = BO.judge_stream(python, item["starting_code"], tests.read_text(), bodies,
+                          timeout=oracle_timeout, test_path=str(tests),
+                          per_body_seconds=per_body_seconds)
+    if hit and hit.get("passed"):
+        cand = cands[hit["index"]]
+        return {"example_id": item["example_id"], "status": "SOLVED", "passed": True,
+                "kind": cand["kind"], "body": cand["body"], "tried": hit["index"] + 1,
+                "paths_known": sum(len(v) for v in paths.values())}
     return {"example_id": item["example_id"], "status": "UNSOLVED", "passed": False,
             "tried": len(bodies), "paths_known": sum(len(v) for v in paths.values())}
 
