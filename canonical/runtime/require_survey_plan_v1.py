@@ -348,9 +348,27 @@ def _usage_variant(text: str) -> dict[str, Any]:
             commands.append(token)
         else:
             break
-    positional = [t for t in tokens
-                  if t.startswith(("[", "<", "{")) or (t.isupper() and t not in
-                                                       ("OPTION", "OPTIONS", "USAGE"))]
+    # A positional is whatever the grammar leaves over once every option and its metavariable are
+    # taken: `[<directory>]` at the end of `git init` is a directory, while `<template-directory>`
+    # two words after `--template=` is that option's value and not an argument at all. Reading
+    # every bracketed token as positional made `git init` look like a command that takes no
+    # directory, and the plan dropped the one thing the request named.
+    without_options = re.sub(r"(?<![\w-])-{1,2}[A-Za-z0-9][\w-]*(?:=\S+)?\s*(<[^>]+>)?",
+                             " ", rest)
+    # Brackets come in glued to the metavariable (`[<directory>]`), so compare on the token with
+    # its punctuation removed rather than on its first character.
+    # `[<options>]` is where the options go, not an argument: git writes it in every usage line
+    # and the option list is the real statement of what it holds. Keeping it makes every command
+    # look like it takes an object it does not take, and a plan then fills it.
+    placeholder = {"options", "option", "flags", "flag", "args", "arguments", "arg"}
+    positional: list[str] = []
+    for token in without_options.split():
+        bare = token.strip("[()]<>").rstrip(".")
+        if token.lstrip("[(").startswith(("<", "{")):
+            if bare.lower() not in placeholder:
+                positional.append(token)
+        elif token.isupper() and token not in ("OPTION", "OPTIONS", "USAGE"):
+            positional.append(token)
     return {"usage": rest[:400], "commands": commands, "positional": positional[:8]}
 
 
@@ -364,7 +382,24 @@ def parse_usage(text: str) -> dict[str, Any]:
     variants: list[dict[str, Any]] = []
     first = None
     upcoming: str | None = None
-    for line in text.splitlines():
+    # A usage statement is often wider than the terminal and is printed over several lines, with
+    # the continuation indented under the first. GNU git is the plain case: `git init -h` puts
+    # `[<directory>]` -- the only positional it has -- on the fifth line, so a parser that reads one
+    # line at a time sees a command that takes no directory at all and quietly drops it. Joining a
+    # run of continuation lines whose indentation exceeds the `usage:` label's turns the wrapped
+    # statement back into the one grammar the program wrote.
+    lines = text.splitlines()
+    joined: list[str] = []
+    for line in lines:
+        if joined and re.match(r"^\s{2,}\S", line) and re.match(
+                r"^\s*(usage|usages?|usage:|or):", joined[-1], re.I):
+            joined[-1] = joined[-1].rstrip() + " " + line.strip()
+            continue
+        if joined and re.match(r"^\s{2,}\S", line) and joined[-1] == "__USAGE_CONT__":
+            joined[-1] = line.strip()
+            continue
+        joined.append(line)
+    for line in joined:
         if upcoming is not None:
             # the usage heading stood alone (`USAGE:`), so the grammar is the line it heads
             said, upcoming = line.strip(), None
@@ -847,6 +882,13 @@ def route(tree: Mapping[str, Any], request_words: Iterable[str],
         named = words_of(" ".join(here))
         mentioned = words_of(str(page.get("summary") or ""))
         score = 4 * len(wanted & named) + 2 * len(wanted & (mentioned - named))
+        # The act the page says it performs is the strongest single statement available: `Move or
+        # rename a file`, against a request that says "Rename the file". It was worth +1 against a
+        # noun worth 4, so `git init` -- whose summary contains `repository`, a word every request
+        # about git uses -- outscored `git mv` for "rename the file a.txt to c.txt". A page stating
+        # the requested act is stating the thing the request is *doing*, where a shared noun states
+        # only its subject. Worth as much as naming the noun, and only when it is the page's own
+        # first act rather than a verb buried in its description.
         stated = acts_in(page.get("summary") or "")
         if wanted_acts and stated and stated[0][0] in {a[0] for a in wanted_acts}:
             score += 1
@@ -1017,6 +1059,25 @@ def require(text: str) -> dict[str, Any]:
         # the phrase is what sits between the two nearest separators, and no further
         add("literal", m.group(1), instruction[start: m.end() + stop], m.start())
     unquoted = QUOTED.sub(lambda m: " " * len(m.group(0)), instruction)
+    # A URL is the most recognisable thing a request can name and it contains characters no path
+    # pattern expects: `https://example.com/x.git` was read as `//example.com/x.git`, with the
+    # scheme silently gone, and a clone then asked for a source that does not exist. Matched whole
+    # and before anything else, and blanked so the path pattern cannot report a second, mangled
+    # copy of the same object.
+    url_span = [(m.start(), m.end(), m.group(0)) for m in
+                re.finditer(r"(?:[a-zA-Z][a-zA-Z0-9+.\-]*://|git@)[^\s'\"`,;]*[^\s'\"`,;.)]", instruction)]
+    for start, end, url in url_span:
+        role = "source"
+        before = instruction[max(0, start - 40): start].lower()
+        if re.search(r"\b(" + "|".join(DEST_MARKERS) + r")\s+[\"\'`]?$", before):
+            role = "product"
+        clause_start = max([-1] + [unquoted.rfind(sep, 0, start)
+                                   for sep in (". ", " from ", " into ", " and ", " with ", ", ")]) + 1
+        clause = unquoted[clause_start:start].strip()
+        add("path", url, clause or instruction[start: end], start)
+        if values and values[-1]["value"] == url:
+            values[-1]["role"] = role
+        unquoted = unquoted[:start] + " " * (end - start) + unquoted[end:]
     marked: list[int] = []
     for m in re.finditer(r"(?:~(?=/)|[./][^\s'\"`,;:)]+|[A-Za-z0-9_.+-]+\.[A-Za-z0-9]{1,8})",
                          unquoted):
@@ -1168,6 +1229,12 @@ def _paths_with_places(values: Sequence[Mapping[str, Any]], picture: Sequence[st
     at all -- so it is not pushed into a position where the program would read it as a file.
     """
     named = [v for v in values if v["kind"] == "path" and not v.get("value_of")]
+    # The picture is the grammar, and when it says what each place *is* it has already said which
+    # object goes where: `git mv <source>... <destination>` puts the source first whatever the
+    # request's own phrasing was, and reordering products to the front turned `mv a.txt c.txt`
+    # into `mv c.txt a.txt` -- a command that renames the destination onto the source. So role
+    # ordering only applies where the picture does not name the roles; where it does, the request's
+    # own order is mapped onto the places it describes.
     ordered = sorted(named, key=lambda v: (0 if v.get("role") == "product" else
                                            2 if v.get("role") == "source" else 1,
                                            int(v["position"]))) if role_first \
@@ -1922,8 +1989,8 @@ def _composed_readings(requirement: Mapping[str, Any], usage: Mapping[str, Any],
                 # picture's own arithmetic, not a list of words for "output".
                 claimed = {place_named_by(other) for other in paths if other is not value}
                 index = next((i for i, place in enumerate(places)
-                              if place and i not in taken and place not in repeatable
-                              and i not in claimed), None)
+                              if place and place != "option" and i not in taken
+                              and place not in repeatable and i not in claimed), None)
             if index is not None:
                 taken.add(index)
                 bound.append({"role": "positional", "value": str(value["value"]),

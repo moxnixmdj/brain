@@ -1376,3 +1376,55 @@ mechanism, and both are small. The claim that survives is narrower and still wor
 mechanism contains no knowledge of either program's domain, and the fixes it needed were all in how
 a document is read, never in what the system knew. A program written by someone else, from a
 captured real `--help`, is the next honest test and is named here rather than claimed.
+
+### A34 — real programs, real help text, and the two fixes the bench refused
+
+A33 named the next honest test: a program from a captured real `--help`, written by someone else.
+Three were available on this machine — `tar`, `git`, `openssl` — none authored for this repo, all
+shipping their own documentation.
+
+**What the mechanism now gets right, unmodified, on real help text.**
+
+    tar -cf /tmp/h/out.tar /tmp/h/a.txt /tmp/h/b.txt     (from "create an archive ... containing ...")
+    tar -tvf /tmp/h/out.tar                              (from "list the contents of the archive")
+    tar -xf /tmp/h/out.tar /tmp/h/dest                   (from "extract ... into the directory ...")
+    git init /tmp/h/repo
+    git add /tmp/h/a.txt
+    git clone https://example.com/x.git /tmp/h/cl
+
+Every one was executed against the real binaries on real files. GNU tar's help is a single page
+with **162 option lines**, no subcommand tree, and an `Examples:` block — the format this mechanism
+was never designed against — and the three commands above come straight out of those examples.
+
+**Three real defects it exposed, all in reading a document, none in world knowledge:**
+
+1. **Wrapped usage lines.** `git init -h` prints its grammar across five lines and puts `[<directory>]`
+   — its only positional — on the last one. Reading one line at a time saw a command that takes no
+   directory, and the plan dropped the one thing the request named. Continuation lines are joined.
+2. **Bare metavariables were skipped.** The picture parser took `[<dir>]` (bracketed) and dropped
+   `<repo>` (bare), so `git clone` seated the directory where the repository belongs. A metavariable
+   with no flag before it is a place.
+3. **`[<options>]` was read as a place.** git writes it in every usage line; as a place it took the
+   first object and shifted every real place one left, turning `git mv a.txt c.txt` into
+   `mv c.txt a.txt` — a command that renames the wrong thing onto the wrong thing. It is the same
+   position `[OPTION]...` already had a meaning for.
+
+**And two fixes the bench refused, recorded because the refusal is the finding.**
+
+| change | why it looked right | measured |
+|---|---|---|
+| the act a page states, +1 → +4 | a page saying "Move or rename a file" for a request that says "rename" is the strongest statement on offer | **0.4572 → 0.4488**, three tasks down |
+| drop the program's own name and genre words (`repository`, `repo`, `project`) from routing | `repository` appears in several git summaries, so it discriminates nothing | **0.4572 → 0.4521** |
+
+Both were reverted. The first is a direct contradiction of A25's own principle — *naming outranks
+mentioning* — and it loses, which says the +1 was load-bearing in a way the principle does not
+explain. The honest reading: `acts_in` returns the first verb it finds in a summary, and a summary's
+first verb is not reliably the command's act, so weighting it harder amplifies a noisy signal.
+"Rename the file a.txt to c.txt in the git repository" therefore still routes to `git init` and
+binds wrongly, and that defect is **open**. It is one instruction on one program; the bench is the
+arbiter and it says the fix has not been found.
+
+**The score is unchanged at 0.4572 across all of this**, three seeds. The round added no bench
+points and repaired three genuine defects in reading real documentation plus the URL mangling that
+cost a clone its scheme. It also produced the first measurements of this thread on programs nobody
+here wrote, in a dialect nobody here chose.
