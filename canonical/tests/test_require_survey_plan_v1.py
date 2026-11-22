@@ -521,3 +521,21 @@ def test_a_step_with_no_operation_is_not_emitted_as_a_command():
         binary, 'Create a workflow named "deploy". Set the owner to "devops-team".', probes=14)
     for command in result["commands"]:
         assert len(command) > 1, command
+
+
+def test_a_possessive_apostrophe_does_not_open_a_quoted_value():
+    """`the project's target date` contains one quote, and it is not a quotation mark.
+
+    Reading it as one made `s target date to match the milestone` a value of the request, which
+    the planner then filled into a flag and the world refused. A straight quote opens a value only
+    where it is not preceded by a letter; the closing side needs no condition, because a
+    possessive has no partner and the two plain quotes of a real quotation balance each other.
+    """
+    possessives = R.require("Update the Linear project's target date to match the milestone")
+    assert [v["value"] for v in possessives["values"]] == []
+
+    quoted = R.require('Create a page titled "Project Tracking" here')
+    assert [v["value"] for v in quoted["values"]] == ["Project Tracking"]
+
+    single = R.require("Set the label 'bug' on the issue")
+    assert [v["value"] for v in single["values"]] == ["bug"]

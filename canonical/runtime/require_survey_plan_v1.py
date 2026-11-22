@@ -219,7 +219,16 @@ STARTS = ("first", "leading", "head")
 ORDINALS = {"first": "1", "second": "2", "third": "3", "fourth": "4", "fifth": "5",
             "sixth": "6", "seventh": "7", "eighth": "8", "ninth": "9", "tenth": "10"}
 
-QUOTED = re.compile(r"[\"'`\u201c\u2018]([^\"'`\u201c\u201d\u2018\u2019]{1,200})[\"'`\u201d\u2019]")
+# A quote opens a quoted value. An apostrophe inside a word does not: in `the Linear project's
+# target date`, the `'` is the possessive, and reading it as an opening quote made
+# `s target date to match the milestone` a value of the request -- which the planner then put in
+# a flag and the world refused. A straight quote therefore opens a value only where it is not
+# preceded by a letter. The closing quote is whichever of the three forms comes next, with no
+# such condition: a possessive apostrophe has no matching partner, so it cannot become a value on
+# its own, and the next two plain quotes in a sentence balance each other.
+QUOTED = re.compile(r"(?:(?<![A-Za-z])[\"'`\u201c\u2018])"
+                    r"([^\"'`\u201c\u201d\u2018\u2019]{1,200})"
+                    r"[\"'`\u201d\u2019]")
 
 # A tool may put two option rows on one physical line; an option starts a new cell only
 # after two spaces and a dash (never inside `--foo=BAR` or `[-x xlist]`).

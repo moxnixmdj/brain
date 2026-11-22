@@ -828,3 +828,28 @@ mechanism, and it is the thing to fix next. Three attempts to patch around it (r
 refuse steps that drop required flags, suppress bare operations) were each measured and each lost more than
 it gained, so none of them was kept. They are recorded because the pattern is the round's lesson: the
 plausible local patch to a value-placement defect is worse than the defect's true fix.
+
+### A19 — the possessive that was read as a quotation mark
+
+A18 named the demonstration filler as the bottleneck and said three patches around it had each failed.
+Looking at the worst example end to end found the defect one level below the filler.
+
+`the Linear project's target date to match the milestone` contains one straight quote, and it is the
+possessive. The value regex accepted `'` as an *opening* quote, so everything from that apostrophe to the
+next one 35 characters later became a value of the request: `s target date to match the milestone`. That is
+not a value; it is a fragment of the sentence. The planner then treated it as an object to place, put it in
+`--repo`, and emitted `gh issue create --repo 1 's target date to match the milestone' ...` — a command
+whose argument is prose.
+
+**The fix is a boundary, not a table**: a straight quote opens a value only where it is not preceded by a
+letter. The closing side needs no condition, because a possessive has no partner and the two plain quotes of
+a real quotation balance each other. Verified three ways in one test: `project's target date` yields no
+value, `"Project Tracking"` yields one, `'bug'` yields one.
+
+**What it changed, stated exactly.** Across all 60 bench tasks, fragments of the form `s ...` went from
+several to **zero**, and a sweep for prose-shaped literals found only five remaining, all legitimate (real
+quoted titles and comments such as `Implement webhook retry logic with exponential backoff`). A5 is
+**0.4632 on three seeds** — **unchanged**. The fabricated value was landing in a flag the mock backend
+ignores rather than one it validates, so removing it costs nothing and gains nothing on this bench. It is
+committed as a correctness fix on that evidence, not presented as an improvement, because the measurement
+says it is not one.
