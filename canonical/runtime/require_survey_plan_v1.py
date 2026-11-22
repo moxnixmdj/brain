@@ -2799,6 +2799,23 @@ def require_survey_plan(tool: str, instruction: str, *, read_manual: bool = True
     return result
 
 
+# The request marking its own step boundaries in words rather than digits. `First, list available
+# artifacts ... Then trigger a deployment` states two steps and says so; the ordering word is the
+# request's own statement of a boundary, the same class of evidence as `1.` and `2.`, and it must
+# outrank the guess that a sentence without a leading verb continues the one before it. Measured:
+# `Using the kforge CLI, deploy ... First, list available artifacts to find the most recent
+# successful build. Then trigger ...` planned `artifact inspect` and `pipeline trigger` -- the
+# first step, the one the request put first, was silently folded away and never planned at all.
+_ORDERING_OPENERS = ("first", "then", "next", "finally", "afterwards", "secondly", "thirdly",
+                     "lastly", "subsequently")
+
+
+def _announces_its_own_order(part: str) -> bool:
+    """Does this sentence open by placing itself in the request's own sequence?"""
+    head = re.match(r"[\s\"'(*-]*([A-Za-z]+)", str(part or ""))
+    return bool(head) and head.group(1).lower() in _ORDERING_OPENERS
+
+
 def sentences_of(text: str) -> list[str]:
     """The request's own steps, in its own words.
 
@@ -2838,7 +2855,7 @@ def sentences_of(text: str) -> list[str]:
     # the step before it, which is what the request's own grammar says.
     steps: list[str] = []
     for part in parts:
-        if not steps or _leads_with_an_act(part):
+        if not steps or _leads_with_an_act(part) or _announces_its_own_order(part):
             steps.append(part)
         elif _is_about_the_setting_not_the_task(part):
             # `You are not provided with documentation -- discover the tool's commands yourself`

@@ -1659,3 +1659,30 @@ real fix (fall back to the page summary), and it is held for measurement on its 
 smuggled in with two other changes.
 
 **Score stands at 0.4696** (`e6c3b08d`), 47 tests green, working tree clean.
+
+### A41 — the request's own ordering words are step boundaries
+
+The clearest instance yet of the mission's central claim failing, found by looking at the four
+worst-scoring tasks together rather than one at a time. All four were picking the wrong **verb**,
+and cb-035 showed why:
+
+    Using the kforge CLI, deploy the latest build artifact for "web-platform" service to the
+    staging environment. First, list available artifacts to find the most recent successful
+    build. Then trigger a deployment pipeline for staging using that artifact.
+
+`sentences_of` was planned as two steps, `deploy` and `trigger`. The sentence the request put
+**first** -- "First, list available artifacts" -- was folded into the deploy sentence and never
+planned at all, because the rule is "a sentence is a boundary only where a new act appears" and
+`First, list ...` does not *lead* with a verb.
+
+That rule was right for the case it was written for (`Create a workflow named "x". Set the owner to
+"y".` is one create with two fields). It is wrong here, because the request **said** it was a new
+step: an ordering word is the request stating its own sequence in words instead of digits, the same
+class of evidence as `1.` and `2.`. `First`, `Then`, `Next`, `Finally` and their kin now always open
+a step.
+
+Measured: **0.4696 unchanged**, 47 tests green, zero regressions up or down. The score did not move
+because the newly-planned step then chose a wrong flag (`artifact list --namespace 1`) -- but the
+plan is now *structurally* the request's plan, which it was not before, and the remaining error is
+a value-binding error rather than a missing step. The mission's claim is that the document is the
+plan; a plan that silently drops the step the request put first is not that, whatever it scores.
