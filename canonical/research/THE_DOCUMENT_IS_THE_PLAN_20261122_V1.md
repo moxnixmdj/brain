@@ -1231,3 +1231,56 @@ statement about the demonstration rather than another guess at ordering.
 `zonectl` instructions produce commands whose flag/value pairs are all correct. The mechanism needed
 no new concept for either program: the fixes are in how a demonstration is *read*, which is the
 document, not in what the system knows.
+
+### A31 — a demonstration's shape is evidence about form, and form does not carry meaning
+
+A30 ended by proposing that "the demonstrated positions are the missing evidence": a demonstration
+writing `--name=www` is saying a one-word label goes to `--name`, whatever the prose around it
+shares with the request. That was implemented and it is **wrong**. Recording it because the reason
+is general and the failure is instructive.
+
+The mechanism was shape agreement: classify a demonstrated value and a request value on the same
+crude axes — does it contain `.` `/` `:` `@`, does it start with a digit, is it all upper case, is it
+all letters — and prefer the value whose shape matches the flag's demonstrated example.
+
+It fixes the intended case. `record add` then produces `--origin example.org --name www`, which is
+correct. And it costs **0.4572 → 0.4497**, two tasks down, no tasks up:
+
+| task | what the mechanism did |
+|---|---|
+| cb-012 | −0.15 |
+| cb-026 | −0.30, `--assignee 3` |
+
+cb-026 is the one that matters, and it is not a coincidence. The request is
+
+> *Search the Jira project "INFRA" for issues with status "Blocked" that have been in that status for
+> **more than 3 days**.*
+
+`3` is a duration. It is also a bare integer, and a demonstration somewhere showed `--assignee 3`,
+so shape agreement handed a day count to an assignee field. That is not a shape error — `3` has the
+shape of every integer there has ever been. **Shape is a property of form, and form does not carry
+meaning.** The number three is a duration, an assignee, a priority, and a retry count, and only the
+words around it say which.
+
+Three repairs were tried before the idea was abandoned, each measured:
+
+1. *Shape as the first key, ahead of proximity* — 0.4497, same two losses. Proximity is load-bearing.
+2. *Shape as a tiebreak behind proximity* — identical to baseline, and it no longer fixes zonectl,
+   because gap and rank almost never tie and shape never gets to decide.
+3. *Shape, refused when the value's words name a different flag on the page* — 0.4572 restored, but
+   it stops fixing zonectl too: every value there carries `record`, which is in every description,
+   so the refusal fires on all of them.
+
+There is no version of "a shape match decides which flag" that survives contact with cb-026, because
+cb-026 is a counterexample to the principle and not to the tuning. **A demonstration states which
+positions are filled, not what kind of thing belongs in each** — `--assignee 3` says that `--assignee`
+takes a value, not that it takes numbers.
+
+**What survives, and it is what A30 already had.** Route by the request's grammar (the noun after the
+verb), parse `--flag=value` as a pairing, and let description words do the binding. That is 0.4572,
+and on the two unseen programs it produces every flag/value pair correctly for four of five lattice
+instructions and three of four zonectl ones. The remaining zonectl miss — `--type CNAME` dropped
+entirely — is a **coverage** failure, not a wrong pairing: `CNAME` shares no word with "record type,
+one of A, AAAA, CNAME, MX" once the description's words are stemmed, and it is dropped rather than
+misfiled. Dropping a flag the document lists as optional is the error mode the system is designed to
+have; misfiling a value is the one this round spent four measurements proving it should not cause.
