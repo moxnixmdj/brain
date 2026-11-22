@@ -1284,3 +1284,56 @@ entirely — is a **coverage** failure, not a wrong pairing: `CNAME` shares no w
 one of A, AAAA, CNAME, MX" once the description's words are stemmed, and it is dropped rather than
 misfiled. Dropping a flag the document lists as optional is the error mode the system is designed to
 have; misfiling a value is the one this round spent four measurements proving it should not cause.
+
+### A32 — a choice has two spellings, and the flag's own type says which one goes on the line
+
+A31 left one zonectl instruction wrong: `--type CNAME` was dropped. Chasing it found a defect big
+enough to have cost a task its run, and it is the same shape as every other finding here — the
+document already said the answer, in two forms, and the mechanism collapsed them into one.
+
+**What `--priority` actually documents.** Linear's help reads
+
+    --priority <int>    Priority level (0=none, 1=urgent, 2=high, 3=medium, 4=low)
+
+Two different facts are in that line and `enum_choices` kept one of them. It split each item on `=`
+and threw the left side away, on the reasoning in its own comment that "`1=urgent` offers `urgent`".
+For a flag documented as `<int>` that is backwards: the *label* is `urgent`, the *value the flag
+accepts* is `1`. The request "set the priority to urgent" was therefore answered with
+`--priority urgent`, the program did `int("urgent")`, and **cb-006 died** — 0.4572 → 0.4509 with
+that task a backend error, the first crash this thread has caused.
+
+The repair is one function and one table entry:
+
+- `enum_pairs(option)` returns `(label, value)` instead of dropping half of every item:
+  `--priority` → `[('none','0'), ('urgent','1'), ('high','2'), ...]`, and `--type` →
+  `[('cname','CNAME'), ...]`.
+- `slot_kind` decides which spelling goes on the line: a `number` flag gets the document's number, a
+  `literal` flag gets the request's own spelling (the document capitalises for display; the
+  request's form is the one being asked for).
+- `INT`, `INTEGER`, `UINT`, `LONG`, `FLOAT`, `DECIMAL`, `INT32`, `INT64` were **missing from
+  `META_KINDS`**, so `--priority <int>` was "untyped" and accepted a word. That is not a judgement
+  call, it is an omission — a flag that says it takes an integer takes an integer.
+
+**And the choice list is now applied before any word matching, as a pass over every flag.** The
+zonectl reading stopped after two of four flags because the "leftover object" fallback ended the
+demonstration with `break`. That branch is right to consume an object, but ending the demonstration
+there discards flags the document still lists. It `continue`s now, and the enumerated-vocabulary pass
+runs first, over all flags, so a choice cannot be lost to whichever flag happened to be listed
+earlier.
+
+    all sixty tasks   0.4572 (unchanged), three seeds, up 0 / down 0
+    cb-006            crash -> 0.375, running with `--priority 1`
+    verifier          complete n=53 0.4560 / incomplete n=7 0.2799, gap +0.176, AUC 0.791,
+                      zero false alarms in seven
+    unseen programs   lattice 5/5 exact; zonectl every flag/value pair correct, 4/4
+
+**The general statement, which is the third time this has been the answer.** A document states a
+flag's type and a flag's vocabulary separately, and the two together determine the value. Reading
+either alone produces a *plausible* command that the program cannot run. A32 is the first case where
+the wrong reading died loudly instead of scoring badly, and that is worth noting: silent wrongness
+is the dangerous kind, and the benchmark's own backend error is what exposed this one.
+
+**Still true, and not yet fixed:** `record add` drops `--value example.org`, because the request
+mentions `example.org` twice (as the origin and as the record's data) and a value is spent once.
+Whether a document can legitimately take the same spelling in two slots is a real question about
+demonstrations that this round did not settle, and it is named rather than papered over.

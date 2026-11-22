@@ -150,6 +150,13 @@ META_KINDS: dict[str, str] = {
     "TXT": "path", "CSV": "path", "EXDIR": "path", "ZIPFILE": "path", "BACKUP": "path",
     "FILENAME": "path", "OUTFILE": "path", "INFILE": "path", "IMAGE": "path", "VIDEO": "path",
     "NUM": "number", "N": "number", "COUNT": "number", "LINES": "number", "BYTES": "number",
+    # `<int>` and its spellings were missing, so `--priority <int>` -- whose own documentation is
+    # `(0=none, 1=urgent, 2=high, ...)` -- was "untyped" and accepted the *label* `urgent`. The
+    # program does `int(priority)` and raised: cb-006 could not run at all. A flag that says it
+    # takes an integer takes an integer, and the document already said which integer means
+    # "urgent".
+    "INT": "number", "INTEGER": "number", "UINT": "number", "LONG": "number", "FLOAT": "number",
+    "DECIMAL": "number", "POSITIVE_INT": "number", "INT32": "number", "INT64": "number",
     "WIDTH": "number", "HEIGHT": "number", "LEVEL": "number", "SIZE": "number",
     "PORT": "number", "AMOUNT": "number", "TIME": "number", "SECONDS": "number",
     "NUMBER": "number", "PERCENT": "number", "DEGREES": "number",
@@ -875,27 +882,48 @@ def route(tree: Mapping[str, Any], request_words: Iterable[str],
 
 
 # A document spells an argument's own choices as a list after a colon or inside parentheses:
-# `mode: strict, loose, sealed`, `(values: docker, npm, pypi)`, `(0=none, 1=urgent, 2=high)`.
-# The list is the program's own vocabulary, and it is the only place a bare request word can be
-# recognised as a value of a particular option without the request quoting it.
-ENUM_LIST = re.compile(r"(?::|[^(\n]{0,40}\()[^)\n]{0,60}?"
+# `mode: strict, loose, sealed`, `(values: docker, npm, pypi)`, `(0=none, 1=urgent, 2=high)`,
+# `record type, one of A, AAAA, CNAME, MX`. The list is the program's own vocabulary, and it is the
+# only place a bare request word can be recognised as a value of a particular option without the
+# request quoting it -- so the ways a document introduces one are worth spelling out. `one of` is
+# as common as `values:` and writes its list without a bracket or a colon, and reading only the
+# bracketed forms lost `--type` entirely on a program whose documentation is otherwise complete.
+ENUM_LIST = re.compile(r"(?::|\bone of|[^(\n]{0,40}\()[^)\n]{0,60}?"
                        r"(?P<list>[A-Za-z0-9_+-]{1,20}(?:\s*=\s*[A-Za-z0-9_+-]{1,20})?"
                        r"(?:\s*,\s*[A-Za-z0-9_+-]{1,20}(?:\s*=\s*[A-Za-z0-9_+-]{1,20})?){1,12})"
                        r"(?:\s*(?:\)|\.|;|$))", re.M)
 
 
-def enum_choices(option: Mapping[str, Any]) -> list[str]:
-    """The choices a document lists for one option, if it lists any."""
+def enum_pairs(option: Mapping[str, Any]) -> list[tuple[str, str]]:
+    """The choices a document lists for one option, each with the value the flag wants.
+
+    `--priority <int>` documents itself as `Priority level (0=none, 1=urgent, 2=high, 3=medium,
+    4=low)`. Two different things are being said there, and treating them as one is a bug with a
+    measured cost: the *label* is `urgent`, and the *value* the flag accepts is `1`. Feeding the
+    label to a flag whose documented type is `<int>` makes the program raise, which is how
+    cb-006 stopped running at all (0.4572 -> 0.4509, that task a backend error).
+
+    So a choice is kept as a pair -- the label, and the spelling the flag will actually take -- and
+    the label is only offered where the flag's own type accepts a word.
+    """
     words = str(option.get("words") or "") + " " + str(option.get("rest") or "")
     found = ENUM_LIST.search(words)
     if not found:
         return []
-    out = []
+    out: list[tuple[str, str]] = []
     for item in found.group("list").split(","):
-        # `1=urgent` offers `urgent`; the number is the document's own label for it
         item = item.strip(" .;'\"")
-        out.append(item.split("=", 1)[-1].strip().lower())
-    return [w for w in out if 1 < len(w) < 30]
+        left, eq, right = item.partition("=")
+        if eq and left.strip() and right.strip():
+            out.append((right.strip().lower(), left.strip()))      # label, value
+        elif item:
+            out.append((item.lower(), item.strip()))
+    return [(w, v) for w, v in out if 1 < len(w) < 30]
+
+
+def enum_choices(option: Mapping[str, Any]) -> list[str]:
+    """The labels a document lists for one option, if it lists any."""
+    return [label for label, _ in enum_pairs(option)]
 
 
 def vocabulary_in(text: str) -> set[str]:
@@ -1277,7 +1305,39 @@ def _demo_plan(demo: Mapping[str, Any], requirement: Mapping[str, Any], tool: st
                 by_word.setdefault(word, []).append(value)
         spent: set[str] = set()
         filled_pairs: list[str] = []
-        for flag, example in pairs:
+        # The strongest evidence a document offers about a flag's value is the list of choices it
+        # writes for that flag, and it is evidence about the *flag*, not about the order the
+        # demonstration happens to list things in. Applied here as a pass over every flag before
+        # any word matching, so a choice cannot be lost because an earlier flag took the value, or
+        # because the reading ended before reaching it. `record add` documents `--type` as
+        # "record type, one of A, AAAA, CNAME, MX" and the request says "of type CNAME": the
+        # document has already said that word belongs to that flag.
+        said_text = str(requirement.get("instruction") or "")
+        for flag, _ in pairs:
+            if str(flag) in filled_pairs[::2]:
+                continue
+            choice_slot = slots.get(str(flag)) or {}
+            kind = slot_kind(choice_slot)
+            for label, spelling in enum_pairs(choice_slot):
+                found = re.search(r"(?<![\w.-])" + re.escape(label) + r"(?![\w.-])",
+                                  said_text, re.I)
+                if not found:
+                    continue
+                # What the request writes is the *label*; what the flag takes is the spelling the
+                # document paired with it. `--priority <int>` takes `1` for "urgent", and sending
+                # the word is what made the program raise. Where the flag accepts a word, the
+                # request's own spelling is kept rather than the document's, because the document
+                # capitalises for display (`CNAME`) and the request's form is the one it wants.
+                if kind == "number" and re.match(r"-?\d+$", str(spelling)):
+                    value = str(spelling)
+                else:
+                    value = said_text[found.start():found.end()]
+                if value.lower() in {str(x).lower() for x in spent}:
+                    continue
+                filled_pairs.extend([str(flag), value])
+                spent.add(value.lower())
+                break
+        for _i, (flag, example) in enumerate(pairs):
             # A demonstration may pair a flag with a *shape* rather than a value (`{"v1": 90,
             # "v2": 10}`, `{"host": ...}`). The shape is the example's own; what the request
             # supplies is the values inside it. Filling a shape with the request's own numbers
@@ -1300,6 +1360,26 @@ def _demo_plan(demo: Mapping[str, Any], requirement: Mapping[str, Any], tool: st
                 listed_lower = {c.lower() for c in listed}
                 pick = next((v for v in ordered if str(v["value"]).lower() in listed_lower
                              and str(v["value"]) not in spent), None)
+                if pick is None:
+                    # The request may state a choice without the value extractor having kept it.
+                    # `zonectl record add` documents `--type` as "record type, one of A, AAAA,
+                    # CNAME, MX", and `Add a record "www" of type CNAME ...` names one of them --
+                    # but `CNAME` is an all-caps bare word, which the extractor deliberately does
+                    # not treat as a value, because an all-caps word is usually a program or a
+                    # placeholder. Here the document has already said this exact word belongs to
+                    # this exact flag, which is the identification, and it costs no matching to
+                    # use it. Only words the option itself lists are admitted, and only when they
+                    # appear in the instruction as whole words.
+                    said = str(requirement.get("instruction") or "")
+                    for choice in listed:
+                        found = re.search(r"(?<![\w.-])" + re.escape(choice) + r"(?![\w.-])",
+                                          said, re.I)
+                        if found and choice.lower() not in {str(x).lower() for x in spent}:
+                            filled_pairs.extend([flag, said[found.start():found.end()]])
+                            spent.add(choice.lower())
+                            break
+                    if any(str(f).lower() == flag.lower() for f in filled_pairs[::2]):
+                        continue
                 if pick is not None:
                     spent.add(str(pick["value"]))
                     filled_pairs.extend([flag, str(pick["value"])])
@@ -1310,6 +1390,25 @@ def _demo_plan(demo: Mapping[str, Any], requirement: Mapping[str, Any], tool: st
             # first, its elaboration after -- which is the document's statement of what the flag
             # is chiefly called. Ordering by that, not by set iteration, is the difference
             # between a plan that is reproducible and one that changes with the process.
+            # A word that names *every* flag on the page distinguishes none of them. `record add`
+            # describes `--origin` as "zone the record lives in", `--name` as "record label",
+            # `--type` as "record type, one of ...", `--value` as "record data": the word `record`
+            # is in all four, so it can never say which one a value belongs to, yet under
+            # description-order ranking it is the first candidate for each. Dropping words the
+            # other flags also use leaves `zone`, `label`, `type`, `data` -- each true of exactly
+            # one flag, which is what a discriminator is.
+            # "Also used by another flag", not "used by all of them": `--help` explains itself
+            # with words no other flag shares, so requiring the intersection of *every* sibling
+            # removes nothing and the filter silently does nothing. A word two flags both claim
+            # already fails to distinguish them, which is the whole property being asked for.
+            counts: dict[str, int] = {}
+            for other in demo.get("_options") or []:
+                if str(other.get("flag")) == flag:
+                    continue
+                for word in words_of(str(other.get("words") or "")):
+                    counts[word] = counts.get(word, 0) + 1
+            ambiguous = {w for w, n in counts.items() if n >= 2} if len(counts) else set()
+            want = {w for w in want if w not in ambiguous} or want
             description = str(slot.get("words") or "").lower()
             ordered_want = sorted(want, key=lambda w: (description.find(w), w))
             best: tuple[int, int, int] | None = None
@@ -1322,7 +1421,17 @@ def _demo_plan(demo: Mapping[str, Any], requirement: Mapping[str, Any], tool: st
                     # to `severity` at ten characters and to `incident` at a hundred and sixty.
                     # Proximity in the request is stated evidence; a tie broken by iteration
                     # order is not evidence at all.
-                    at = str(requirement.get("instruction") or "").lower().find(word)
+                    # The word that names a value is the one the request puts *immediately before*
+                    # it, not the nearest occurrence anywhere. `Add a record "www" of type CNAME
+                    # with value "example.org"` has `record` at 6 and `www` at 13; `type` at 22 and
+                    # `value` at 38 sit just ahead of `example.org` at 44. Reading only the first
+                    # occurrence of each word, or an unsigned distance, lets `--type` -- whose
+                    # description lists CNAME, a word that appears in `www`'s own context -- take
+                    # the record's name. A label follows the noun, a field follows its field name.
+                    said_text = str(requirement.get("instruction") or "").lower()
+                    at = said_text.rfind(word, 0, int(value.get("position") or 0))
+                    if at < 0:
+                        at = said_text.find(word)
                     gap = abs(int(value.get("position") or 0) - at) if at >= 0 else 1 << 30
                     # proximity first: the value belongs to the word it follows. Description
                     # order and the value's own position only separate exact ties, so no two
@@ -1362,14 +1471,21 @@ def _demo_plan(demo: Mapping[str, Any], requirement: Mapping[str, Any], tool: st
                     # flag the request supplies nothing for is a flag the command omits; the
                     # census still reports any *required* flag left empty. Only a reading that
                     # filled nothing at all is no reading.
+                    # Skipping to the *next* flag, not out of the loop: `record add` demonstrates
+                    # four flags and the request fills three, and leaving on the first unfilled
+                    # one dropped `--value` as well as `--type`. A flag with nothing to take is
+                    # omitted; the flags after it are still the demonstration's.
                     if filled_pairs:
-                        break
+                        continue
                     return None
                 filled_pairs.extend([flag, rest[0]])
                 spent.add(rest[0])
                 filled_pairs.extend(rest[1:])
                 spent.update(rest[1:])
-                break
+                # The remaining flags are still the demonstration's, and one of them may be an
+                # option whose own documentation names its choices. Ending the demonstration here
+                # is how `record add` stopped after two of its four flags.
+                continue
             spent.add(str(pick["value"]))
             filled_pairs.extend([flag, str(pick["value"])])
         # A demonstration whose every flag was dropped states nothing about this request; a

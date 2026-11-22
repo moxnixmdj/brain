@@ -716,3 +716,90 @@ def test_a_program_that_has_never_existed_is_planned_with_no_new_machinery(latti
         out = R.require_survey_plan(lattice, instruction, probes=20)
         assert out["plans"], instruction
         assert out["plans"][0]["argv"][1:] == want, (instruction, out["plans"][0]["argv"])
+
+
+# A second program from an unrelated domain, in a help style no measured program uses: GNU
+# `--flag=VALUE` spellings, an `Options:` heading, no `USAGE:` line, and `[required]` as a
+# trailing marker. Written to test whether the mechanism reads a document or a dialect.
+ZONECTL_PROGRAM = base64.b64decode(
+    "IyEvdXNyL2Jpbi9lbnYgcHl0aG9uMwoiIiJ6b25lY3RsIC0tIEROUyB6b25lIGFkbWluaXN0cmF0"
+    "aW9uLiBEZWxpYmVyYXRlbHkgYSBkaWZmZXJlbnQgaGVscCBzdHlsZToKR05VIGAtLWZsYWc9VkFM"
+    "VUVgIHNwZWxsaW5ncywgYE9wdGlvbnM6YCBsb3dlcmNhc2UgaGVhZGluZywgbm8gVVNBR0UgbGlu"
+    "ZS4iIiIKaW1wb3J0IHN5cwoKUEFHRVMgPSB7CiIiOiAiIiJ6b25lY3RsIC0gYWRtaW5pc3RlciBE"
+    "TlMgem9uZXMKClVzYWdlIHN1bW1hcnkgaXMgaW50ZW50aW9uYWxseSBzdHlsZWQgZGlmZmVyZW50"
+    "bHkgZnJvbSBvdGhlciBwcm9ncmFtcy4KCkNvbW1hbmRzCiAgICB6b25lICAgICAgICB3b3JrIHdp"
+    "dGggYSB6b25lCiAgICByZWNvcmQgICAgICB3b3JrIHdpdGggYSByZWNvcmQKCk9wdGlvbnM6CiAg"
+    "ICAtaCwgLS1oZWxwICBwcmludCBoZWxwCiIiIiwKCiJ6b25lIjogIiIid29yayB3aXRoIGEgem9u"
+    "ZQoKQ29tbWFuZHMKICAgIGFkZCAgICAgICAgIGNyZWF0ZSBhIHpvbmUKICAgIGRlbGVnYXRlICAg"
+    "IGhhbmQgYSB6b25lIHRvIGFub3RoZXIgbmFtZXNlcnZlcgoKT3B0aW9uczoKICAgIC1oLCAtLWhl"
+    "bHAgIHByaW50IGhlbHAKIiIiLAoKInpvbmUgYWRkIjogIiIiY3JlYXRlIGEgem9uZQoKQ3JlYXRl"
+    "cyBhIG5ldyBhdXRob3JpdGF0aXZlIHpvbmUuCgpPcHRpb25zOgogICAgLS1vcmlnaW49VEVYVCAg"
+    "ICB6b25lIG9yaWdpbiwgZS5nLiBleGFtcGxlLm9yZyAgICAgIFtyZXF1aXJlZF0KICAgIC0tdHRs"
+    "PUlOVCAgICAgICAgZGVmYXVsdCBUVEwgaW4gc2Vjb25kcwogICAgLWgsIC0taGVscCAgICAgICBw"
+    "cmludCBoZWxwCgpFeGFtcGxlczoKICAgIHpvbmVjdGwgem9uZSBhZGQgLS1vcmlnaW49ZXhhbXBs"
+    "ZS5vcmcgLS10dGw9MzYwMAoiIiIsCgoiem9uZSBkZWxlZ2F0ZSI6ICIiImhhbmQgYSB6b25lIHRv"
+    "IGFub3RoZXIgbmFtZXNlcnZlcgoKT3B0aW9uczoKICAgIC0tb3JpZ2luPVRFWFQgICAgem9uZSBv"
+    "cmlnaW4gICAgICAgICAgICAgICAgICAgICAgICAgW3JlcXVpcmVkXQogICAgLS10bz1URVhUICAg"
+    "ICAgICBuYW1lc2VydmVyIHRvIGRlbGVnYXRlIHRvICAgICAgICAgICAgW3JlcXVpcmVkXQogICAg"
+    "LWgsIC0taGVscCAgICAgICBwcmludCBoZWxwCgpFeGFtcGxlczoKICAgIHpvbmVjdGwgem9uZSBk"
+    "ZWxlZ2F0ZSAtLW9yaWdpbj1leGFtcGxlLm9yZyAtLXRvPW5zMS5leGFtcGxlLm5ldAoiIiIsCgoi"
+    "cmVjb3JkIjogIiIid29yayB3aXRoIGEgcmVjb3JkCgpDb21tYW5kcwogICAgYWRkICAgICAgICAg"
+    "Y3JlYXRlIGEgcmVjb3JkCiAgICByZW1vdmUgICAgICBkZWxldGUgYSByZWNvcmQKCk9wdGlvbnM6"
+    "CiAgICAtaCwgLS1oZWxwICBwcmludCBoZWxwCiIiIiwKCiJyZWNvcmQgYWRkIjogIiIiY3JlYXRl"
+    "IGEgcmVjb3JkCgpPcHRpb25zOgogICAgLS1vcmlnaW49VEVYVCAgICB6b25lIHRoZSByZWNvcmQg"
+    "bGl2ZXMgaW4gICAgICAgICAgICAgIFtyZXF1aXJlZF0KICAgIC0tbmFtZT1URVhUICAgICAgcmVj"
+    "b3JkIGxhYmVsCiAgICAtLXR5cGU9VEVYVCAgICAgIHJlY29yZCB0eXBlLCBvbmUgb2YgQSwgQUFB"
+    "QSwgQ05BTUUsIE1YCiAgICAtLXZhbHVlPVRFWFQgICAgIHJlY29yZCBkYXRhICAgICAgICAgICAg"
+    "ICAgICAgICAgICAgICAgW3JlcXVpcmVkXQogICAgLWgsIC0taGVscCAgICAgICBwcmludCBoZWxw"
+    "CgpFeGFtcGxlczoKICAgIHpvbmVjdGwgcmVjb3JkIGFkZCAtLW9yaWdpbj1leGFtcGxlLm9yZyAt"
+    "LW5hbWU9d3d3IC0tdHlwZT1DTkFNRSAtLXZhbHVlPWV4YW1wbGUub3JnCiIiIiwKCiJyZWNvcmQg"
+    "cmVtb3ZlIjogIiIiZGVsZXRlIGEgcmVjb3JkCgpPcHRpb25zOgogICAgLS1vcmlnaW49VEVYVCAg"
+    "ICB6b25lIHRoZSByZWNvcmQgbGl2ZXMgaW4gICAgICAgICAgICAgIFtyZXF1aXJlZF0KICAgIC0t"
+    "bmFtZT1URVhUICAgICAgcmVjb3JkIGxhYmVsICAgICAgICAgICAgICAgICAgICAgICAgICBbcmVx"
+    "dWlyZWRdCiAgICAtaCwgLS1oZWxwICAgICAgIHByaW50IGhlbHAKCkV4YW1wbGVzOgogICAgem9u"
+    "ZWN0bCByZWNvcmQgcmVtb3ZlIC0tb3JpZ2luPWV4YW1wbGUub3JnIC0tbmFtZT13d3cKIiIiLAp9"
+    "CmFyZ3YgPSBbYSBmb3IgYSBpbiBzeXMuYXJndlsxOl0gaWYgYSBub3QgaW4gKCItaCIsICItLWhl"
+    "bHAiKV0Ka2V5ID0gIiAiLmpvaW4oYXJndikKc3lzLnN0ZG91dC53cml0ZShQQUdFUy5nZXQoa2V5"
+    "LCBQQUdFU1siIl0pKQo="
+).decode()
+
+
+@pytest.fixture(scope="module")
+def zonectl(tmp_path_factory):
+    path = tmp_path_factory.mktemp("zonectl") / "zonectl"
+    path.write_text(ZONECTL_PROGRAM)
+    path.chmod(0o755)
+    return str(path)
+
+
+def test_a_documents_choice_list_is_applied_before_any_word_matching(zonectl):
+    """The document writes a flag's vocabulary itself, and that is the strongest evidence.
+
+    `zonectl record add` documents `--type` as "record type, one of A, AAAA, CNAME, MX" and the
+    request says "of type CNAME". Applied as a pass over every flag first, because the reading
+    used to end at the first flag with nothing to take -- which dropped `--value` along with
+    any flag after the gap.
+    """
+    out = R.require_survey_plan(
+        zonectl,
+        'Add a record "www" of type CNAME with value "example.org" in the zone "example.org".',
+        probes=20)
+    argv = out["plans"][0]["argv"][1:]
+    assert argv[:2] == ["record", "add"], argv
+    assert "--type" in argv and argv[argv.index("--type") + 1] == "CNAME", argv
+    assert argv[argv.index("--name") + 1] == "www", argv
+    assert argv[argv.index("--origin") + 1] == "example.org", argv
+
+
+def test_a_choice_whose_flag_takes_a_number_is_sent_its_number_not_its_label():
+    """`--priority <int>` documents `(0=none, 1=urgent, 2=high, ...)`; the request says "urgent".
+
+    The label is what the request writes and the number is what the flag accepts. Sending the
+    word raised inside the program -- cb-006 stopped running entirely -- so the enum is kept as a
+    label/value pair and the flag's own documented type decides which spelling goes on the line.
+    """
+    option = {"flag": "--priority", "meta": "<int>",
+              "words": "Priority level (0=none, 1=urgent, 2=high, 3=medium, 4=low)"}
+    assert R.slot_kind(option) == "number", R.slot_kind(option)
+    assert dict(R.enum_pairs(option))["urgent"] == "1", R.enum_pairs(option)
+    assert R.enum_choices(option)[:2] == ["none", "urgent"], R.enum_choices(option)
