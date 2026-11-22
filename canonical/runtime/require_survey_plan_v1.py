@@ -1261,6 +1261,7 @@ def require(text: str) -> dict[str, Any]:
             values[index] = inherited
     unclaimed = sorted(w for w in words_of(instruction) if w not in STOP and w not in claimed)
 
+
     reasons: list[str] = []
     if not acts:
         reasons.append("NO_ACT_IN_THE_CLOSED_CLASS")
@@ -1483,6 +1484,173 @@ def _flag_names_value(value: Mapping[str, Any], slot: Mapping[str, Any]) -> bool
             if len(a) >= 5 and len(b) >= 5 and a[:5] == b[:5]:
                 return True
     return False
+
+
+# Flags whose value is a whole piece of prose rather than a name. Their clauses may contain
+# commas; a list of field names after any other flag may not.
+PROSE_FLAG_WORDS = ("body", "content", "description", "summary", "comment", "message",
+                    "note", "text", "details", "reason")
+
+
+def _labelled_prose(requirement: Mapping[str, Any], tree: Mapping[str, Any]) -> dict[str, Any]:
+    """Prose the request labels with an option's own name becomes a value of that option.
+
+    `Create an issue with the title "X" and a body that describes the need to prevent abuse`
+    names two things: a quoted title, and a body whose content is a clause rather than a quote.
+    The quote becomes a value by itself; the clause is prose, and it stayed in `unclaimed`, so
+    `--body` was dropped from a command whose page says it takes one, and the issue was created
+    with no body at all.
+
+    The request did state the association: the option's own name appears, and content words
+    follow it that nothing else claimed. That is evidence of the same order as a quote -- the
+    request said which option and said what goes in it -- so it becomes a value of that option.
+    The clause ends at a sentence end or at the next option the request names, takes two or more
+    words (`a body` alone is a mention, not content), and is refused if any of its words is
+    already inside another value: then the prose belongs to something already placed.
+    """
+    by_name: dict[str, dict[str, Any]] = {}
+    for node in every_page(tree):
+        for option in node.get("options") or []:
+            flag = str(option.get("flag") or "").lstrip("-")
+            if flag and flag not in by_name:
+                by_name[flag] = option
+    if not by_name:
+        return dict(requirement)
+    instruction = str(requirement.get("instruction") or "")
+    words = [str(v.get("value") or "") for v in requirement.get("values") or []]
+    spent: set[str] = set()
+    for value in words:
+        spent |= set(words_of(value))
+    # words that are printed inside a value's own text, which no clause may repeat
+    in_a_value: list[set[str]] = [set(words_of(str(v.get("value") or "")))
+                                  for v in requirement.get("values") or []]
+    # The page's own vocabulary. A clause made of these is a *field list* -- `lead, and target
+    # date` names two options, it does not say what either one contains -- and binding it as a
+    # value replaces a demo that was already right. Prose is made of words the document does not
+    # use: `describes the need to prevent abuse` is a sentence, `target date` is a form.
+    documented_words: set[str] = set()
+    for node in every_page(tree):
+        documented_words |= words_of(" ".join([
+            str(node.get("title") or ""), str(node.get("summary") or ""),
+            str((node.get("usage") or {}).get("usage") or ""),
+            " ".join(str(o.get("words") or "") for o in node.get("options") or [])]))
+        documented_words |= {w for o in node.get("options") or [] for w in enum_choices(o)}
+        documented_words |= {str(o.get("flag") or "").lstrip("-").lower()
+                             for o in node.get("options") or []}
+    sequence = list(re.finditer(r"[A-Za-z][A-Za-z'-]*", instruction))
+    added: list[dict[str, Any]] = []
+    spans: list[tuple[int, int]] = []
+    for index, hit in enumerate(sequence):
+        option = by_name.get(hit.group(0).lower())
+        if option is None:
+            continue
+        # The clause is the run of words after the name, up to a sentence end or up to the next
+        # option the request names. Stop words inside it are ordinary words: `describes the need
+        # to prevent abuse` loses everything but three words if `the` and `to` end it.
+        tail: list[int] = []
+        j = index + 1
+        while j < len(sequence):
+            gap = instruction[sequence[j - 1].end():sequence[j].start()]
+            if "." in gap or ";" in gap or ":" in gap and sequence[j].group(0).lower() in by_name:
+                break
+            word = sequence[j].group(0).lower()
+            if word in by_name:
+                break
+            tail.append(j)
+            j += 1
+        # trailing stop words are not part of the content
+        while tail and sequence[tail[-1]].group(0).lower() in STOP:
+            tail.pop()
+        if len([w for w in tail if sequence[w].group(0).lower() not in STOP]) < 2:
+            continue
+        span = (sequence[tail[0]].start(), sequence[tail[-1]].end())
+        if any(span[0] < b and a < span[1] for a, b in spans):
+            continue
+        clause = instruction[span[0]:span[1]].strip()
+        content = words_of(clause)
+        if len(content) < 2:
+            continue
+        # A comma inside the clause usually makes it a list of *fields*, not a statement of
+        # content: `sender, timestamp, and message` names three things to display, where `that
+        # describes the need to prevent abuse` says what one thing contains. The exception is a
+        # flag that carries a whole document -- `--content`, `--body`, `--description`. Its value
+        # is prose by nature and prose has commas: `total issues, completed vs in-progress ... ,
+        # and lists any blocked items` is exactly a body, and refusing it dropped the only word
+        # the Notion page was checked for.
+        prose_flag = str(option.get("flag") or "").lstrip("-").lower()
+        if "," in clause and not any(w in prose_flag for w in PROSE_FLAG_WORDS):
+            continue
+        # A field list is not prose: if the document already uses these words, the request is
+        # naming the page's own options rather than saying what goes inside one. A flag that
+        # carries a whole document is exempt -- its prose legitimately reuses the program's
+        # vocabulary (`total issues, completed vs in-progress` is a body written in the words of
+        # the things being counted), and it is the flag itself that says a document goes here.
+        is_prose = any(w in prose_flag for w in PROSE_FLAG_WORDS)
+        if not is_prose and len(content & documented_words) * 2 >= len(content):
+            continue
+        # Refused only when a word already *inside another value* -- its own quoted text, not
+        # every word of its wider phrase. `Add rate limiting to public API endpoints` shares
+        # `api` with the body's clause `unauthenticated API routes`; the title's own words are
+        # what must not be re-spoken, or the title swallows the body it is merely adjacent to.
+        # Refused when the clause is *mostly* words already printed inside one value -- a
+        # second phrasing of the same object. One shared word is not that: `Add rate limiting to
+        # public API endpoints` and `unauthenticated API routes` are two different objects that
+        # happen to share `api`, and refusing on any shared word loses the second one.
+        if any(len(content & set(one)) * 2 >= len(content) for one in in_a_value):
+            continue
+        # The page's own description must be *silent* about the content for a clause to belong
+        # there. `--status` is documented "Filter by issue status (values: ...)", so a clause
+        # after the word `status` is a field list, not the status's content; `--body` is
+        # documented only "Issue body text", so a clause after `body` can only be the body.
+        # Without this, an unbound value leaks into the sequence planner as a positional noun and
+        # the plan grows a step that runs the clause as an argument (measured: cb-009 0.90->0.70).
+        if enum_choices(option):
+            continue
+        added.append({"kind": "literal", "labelled": True, "value": clause, "position": span[0],
+                      "step": str(requirement.get("step") or 0),
+                      "words": sorted(content)[:24], "context": clause[:240],
+                      "of": str(option.get("flag") or "")})
+        spans.append(span)
+    if not added:
+        return dict(requirement)
+    settled = set(spent)
+    for item in added:
+        settled |= set(words_of(str(item["value"])))
+    unclaimed = [w for w in (requirement.get("unclaimed") or []) if w not in settled]
+    return {**requirement, "values": list(requirement.get("values") or []) + added,
+            "unclaimed": unclaimed, "labelled": added}
+
+
+def _only_names_documented_nouns(argv: Sequence[str], tree: Mapping[str, Any]) -> bool:
+    """Is this command nothing but a routing word and words the pages already use?
+
+    `linear project lead, and target date` has no flag and no value the request supplied by
+    quotation -- every word after the route is vocabulary the document prints somewhere. A
+    command like that is a field list read as an argument, and running it does nothing. A
+    command with any quoted, numeric, or path value carries an object and is left alone.
+    """
+    if not argv:
+        return False
+    documented: set[str] = set()
+    for node in every_page(tree):
+        documented |= words_of(" ".join([str(node.get("title") or ""),
+                                         str(node.get("summary") or "")]))
+        documented |= {w for o in node.get("options") or [] for w in enum_choices(o)}
+    # every word must be one the pages print, and none may be a flag or a number
+    words = [str(a) for a in argv]
+    if any(w.startswith("-") for w in words):
+        return False
+    if any(w.replace(".", "").isdigit() for w in words):
+        return False
+    spoken = [w for w in words if w not in {str(n.get("command") or "") for n in every_page(tree)}]
+    if not spoken:
+        return False
+    content = words_of(" ".join(spoken))
+    # A comma list of nouns the pages print is a field list, whether or not every single word is
+    # documented: `the channel, sender, timestamp, and message text` is four fields and no object.
+    if len(content) >= 3 and len(content & documented) * 2 >= len(content):
+        return True
+    return all(w.lower() in documented for w in content)
 
 
 def _demo_plan(demo: Mapping[str, Any], requirement: Mapping[str, Any], tool: str,
@@ -2500,6 +2668,9 @@ def plan(requirement: Mapping[str, Any], tree: Mapping[str, Any],
     if vocabulary:
         requirement = claim_vocabulary(requirement, vocabulary)
         values = list(requirement.get("values") or [])
+    # prose the request labels with an option's own name is a value of that option
+    requirement = _labelled_prose(requirement, tree)
+    values = list(requirement.get("values") or [])
     document_acts: list[dict[str, Any]] = []
     if not acts:
         # The request's verb is not in the seed class. Before refusing, ask the documents: an
@@ -3155,6 +3326,11 @@ def require_survey_plan_sequence(tool: str, instruction: str, *, read_manual: bo
     steps: list[dict[str, Any]] = []
     for sentence in sentences_of(instruction)[:max_steps]:
         req = require(sentence)
+        # A sentence that states no act is a *description*, not a step: `Show the project name,
+        # status, lead, and target date for each project` says what to display, and the sentence
+        # before it already said to list. Planning it as a step turns its field list into a
+        # command argument (`linear project lead, and target date`), which is not a command at
+        # all. The words still reach the first step, which reads the whole request.
         if not req["acts"]:
             steps.append({"step": sentence[:200], "argv": None,
                           "reason": "THIS_STEP_NAMES_NO_ACT_THE_CLASS_CARRIES"})
@@ -3183,6 +3359,17 @@ def require_survey_plan_sequence(tool: str, instruction: str, *, read_manual: bo
         if not _carries_an_operation(argv[1:], tree):
             steps.append({"step": sentence[:200], "argv": None,
                           "reason": "THIS_STEP_HAS_NO_OPERATION_IN_THIS_DOCUMENT",
+                          "dropped": argv[1:]})
+            continue
+        # A step whose only content is a bare noun the document itself uses is not a step: the
+        # sentence is saying which *fields* to display, not naming a new act. `Show the project
+        # name, status, lead, and target date for each project` plans to `linear project
+        # lead, and target date` -- a command made of the fields. The act is real (`show` is in
+        # the class) and the fields are the page's own words, which is exactly what a sentence
+        # about a display does not turn into an operation.
+        if _only_names_documented_nouns(argv[1:], tree):
+            steps.append({"step": sentence[:200], "argv": None,
+                          "reason": "THIS_STEP_ONLY_NAMES_FIELDS_TO_DISPLAY",
                           "dropped": argv[1:]})
             continue
         steps.append({"step": sentence[:200], "argv": argv,

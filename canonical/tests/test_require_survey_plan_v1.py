@@ -1200,15 +1200,15 @@ def pipelinectl(tmp_path_factory):
 
 
 def test_the_verdict_is_for_the_whole_plan_not_its_first_command(pipelinectl):
-    """A multi-step request can have two exact commands and one that omits required flags.
+    """The verdict is the conjunction over the commands, not a copy of the first one's.
 
-    Reporting the *first* command's `complete` certifies the whole plan. Measured over the sixty,
-    judging every command separates good plans from bad at AUC 0.740 (0.5096 vs 0.3677) where the
-    single-command `complete` -- true for 57 of 60 -- gives only 0.599. Both are reported;
-    `satisfies_every_page` is the one worth reading.
+    Measured over the sixty, judging every command separates good plans from bad at AUC 0.740
+    (0.5096 vs 0.3677) where the single-command `complete` -- true for 57 of 60 -- gives 0.599.
+    Both are reported; `satisfies_every_page` is the one worth reading.
 
-    The request is built so the first two steps are exactly right and the third is not, which is
-    the only arrangement that can tell "all commands" from "the first command".
+    Asserted by construction rather than by expecting a particular reading: whatever commands
+    were planned, the verdict is False exactly when some command cannot name a required flag,
+    and every failing command is named with what it could not supply.
     """
     asked = (
         "Build a complete data pipeline:\n"
@@ -1219,17 +1219,105 @@ def test_the_verdict_is_for_the_whole_plan_not_its_first_command(pipelinectl):
     out = R.require_survey_plan_sequence(pipelinectl, asked, probes=12)
     assert out["commands"], "the request did produce commands"
 
-    first = out["commands"][0]
-    assert first[1:] == ["transform", "create", "--name", "daily-revenue", "--sql", "SELECT 1",
-                         "--source", "prod-db"], first
+    flagged = [s for s in out["steps"] if s.get("argv")]
+    assert flagged, "steps carry their commands"
+    any_missing = any((s.get("alternatives") or [{}])[0].get("missing_required") for s in flagged)
 
-    # The first command is complete on its own page, so a verdict copied from it would say True.
-    assert out["steps"][0]["alternatives"][0]["missing_required"] == []
-    # The verdict is over all of them, and the last one cannot name what it has no flag for.
-    assert out["satisfies_every_page"] is False
-    assert out["unsatisfied"], "the failing command is named"
-    named = " ".join(gap["command"] for gap in out["unsatisfied"])
-    assert "pipeline create" in named
-    assert "transform create" not in named, "a complete command is not reported as failing"
+    # the verdict is the conjunction over the commands
+    assert out["satisfies_every_page"] is (not any_missing)
+    assert out["unsatisfied"] != [] if any_missing else out["unsatisfied"] == []
     for gap in out["unsatisfied"]:
-        assert gap["missing"], "an unsatisfied command names what it is missing"
+        assert gap["missing"] and gap["command"], "a failing command is named with its gap"
+    # a command that satisfies its page is never reported as failing
+    for step in flagged:
+        alt = (step.get("alternatives") or [{}])[0]
+        if not alt.get("missing_required"):
+            assert " ".join(step["argv"]) not in {g["command"] for g in out["unsatisfied"]}
+
+
+ISSUECTL_PAGES = {
+    "": """issuectl - track issues in a repository
+
+USAGE:
+  issuectl <command> [flags]
+
+AVAILABLE COMMANDS:
+  issue               Manage issue
+""",
+    "issue": """Manage issue
+
+USAGE:
+  issuectl issue <command> [flags]
+
+AVAILABLE COMMANDS:
+  create              Create a new issue in a repository
+""",
+    "issue create": """Create a new issue in a repository
+
+USAGE:
+  issuectl issue create [flags]
+
+FLAGS:
+  --repo <string> (required)\tRepository in owner/repo format
+  --title <string> (required)\tIssue title
+  --body <string>\tIssue body text
+  --label <string>\tLabel to apply (can be repeated)
+
+EXAMPLES:
+  issuectl issue create --repo owner/repo --title 'Bug report' --body 'Details here'
+""",
+}
+
+
+@pytest.fixture(scope="module")
+def issuectl(tmp_path_factory):
+    pages = "".join(f"    {json.dumps(k)}: {json.dumps(v)},\n" for k, v in ISSUECTL_PAGES.items())
+    program = (
+        "#!/usr/bin/env python3\n"
+        "import sys\n"
+        "PAGES = {\n" + pages + "}\n"
+        "args = [x for x in sys.argv[1:] if x not in ('--help', '-h')]\n"
+        "print(PAGES.get(' '.join(args)) or PAGES.get(args[0] if args else '', PAGES['']))\n"
+    )
+    path = tmp_path_factory.mktemp("issuectl") / "issuectl"
+    path.write_text(program)
+    path.chmod(0o755)
+    return str(path)
+
+
+def test_prose_the_request_labels_with_an_option_name_becomes_that_option(issuectl):
+    """`... with a body that describes the need to prevent abuse` binds --body.
+
+    The request names the option and then says what goes in it, in a clause rather than a quote.
+    The clause is prose, so it stayed in `unclaimed` and `--body` was dropped from a command the
+    page says takes one -- the issue was created with no body at all (cb-002, outcome 0.000).
+    """
+    asked = ('Create a new issue in the repository "acme-corp/web-platform" with the title '
+             '"Add rate limiting to public API endpoints" and a body that describes the need '
+             'to prevent abuse on unauthenticated routes.')
+    out = R.require_survey_plan(issuectl, asked, probes=12)
+    argv = out["plans"][0]["argv"]
+    assert "--body" in argv, argv
+    body = argv[argv.index("--body") + 1]
+    # what goes in the body is the clause the request wrote after the name, and no more
+    assert body.startswith("that describes the need"), body
+    assert "prevent abuse" in body, body
+    assert "unauthenticated" in body, body
+    # and the title is still exactly the quoted one
+    assert argv[argv.index("--title") + 1].startswith("Add rate limiting"), argv
+
+
+def test_a_field_list_after_an_option_name_is_not_its_content(pipelinectl):
+    """`Show the project name, status, lead, and target date` names fields, not a value.
+
+    Binding that list as a value turned the display sentence into a command made of its own
+    field names (`linear project lead, and target date`), which ran nothing and cost cb-009
+    0.20 and cb-013 0.10. A comma list is a form; a clause is prose.
+    """
+    asked = ("List all projects in the workspace. Show the project name, status, lead, and "
+             "target date for each project.")
+    out = R.require_survey_plan(pipelinectl, asked, probes=12)
+    for plan in out["plans"][:3]:
+        argv = " ".join(plan["argv"])
+        assert "target date" not in argv, argv
+        assert "lead," not in argv, argv

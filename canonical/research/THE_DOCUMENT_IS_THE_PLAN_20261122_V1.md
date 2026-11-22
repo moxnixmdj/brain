@@ -1957,3 +1957,38 @@ off under the first line's certificate. The verdict is not a new mechanism -- th
 
 No plan changed: 0.4713 before and after, identical on seeds 0 and 1. The verdict is a report, and
 reporting honestly costs nothing.
+
+### A50 — prose the request labels with an option's own name
+
+`cb-002` asked for `a body that describes the need to prevent abuse on unauthenticated API
+routes`. The title was quoted, so it became a value; the body was a clause, so it stayed in
+`unclaimed`, `--body` was dropped from a command whose page documents it, and the issue was
+created with no body at all — outcome 0.000.
+
+The request had said which option and said what goes in it. That is evidence of the same order as
+a quote, and it now becomes a value of that option:
+
+    --body "that describes the need to prevent abuse on unauthenticated API routes"
+
+Four guards, each paid for by a measured regression rather than imagined:
+
+1. **A field list is not prose.** `Show the project name, status, lead, and target date` names
+   fields. Binding it as a value made the display sentence a command of its own field names
+   (`linear project lead, and target date`), which ran nothing: cb-009 0.90 -> 0.70, cb-013
+   0.90 -> 0.80. A comma ends the clause unless the flag carries a document.
+2. **A flag that carries a document is exempt** from both guards — `--content`, `--body`,
+   `--description`, `--message`, `--text`. Its value is prose by nature, prose has commas, and
+   prose reuses the program's own words: `total issues, completed vs in-progress, and lists any
+   blocked items` is a body written in the words of the things it counts.
+3. **Words already printed inside another value refuse the clause**, but only *mostly*: the title
+   `Add rate limiting to public API endpoints` shares `api` with the body's `unauthenticated API
+   routes`, and refusing on any shared word loses the second object.
+4. **A clause of the page's own vocabulary is a form, not a sentence.** `lead, and target date`
+   is made of option names; `describes the need to prevent abuse` is not.
+
+The first version of the rule, without guard 1, **cost more than it gained** and was measured that
+way: cb-025 +0.30, cb-053 +0.25, cb-014 +0.10 against cb-009 -0.20, cb-013 -0.10, cb-007 -0.10,
+cb-002 unchanged at 0.000. The guards are what turned +0.0042-with-regressions into 0.4738 with
+none.
+
+**0.4713 -> 0.4738.** 55 tests.
