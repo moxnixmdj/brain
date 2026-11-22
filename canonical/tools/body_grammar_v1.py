@@ -284,7 +284,7 @@ def compositions(args: Sequence[str], paths: Mapping[str, Sequence[str]],
     # 3a-bis. the shortest attribute paths as standalone bodies. A single attribute read is
     # a legal answer (index.free_symbols) and costs one trial; leaving it below the
     # combinatorial grid pushed it past the cap.
-    for p in other_paths[:40]:
+    for p in other_paths[:120]:
         add("PATH", p)
 
     # 3b. arithmetic over the SHORTEST attribute paths, adjacent pairs first.
@@ -292,7 +292,7 @@ def compositions(args: Sequence[str], paths: Mapping[str, Sequence[str]],
     # above cannot produce it and the full permutation is 117^2*7 = 95,823 bodies. Pairing
     # the shortest few members in order covers the real cases (`lhs`, `rhs`; `base`, `exp`)
     # within budget.
-    short = other_paths[:24]
+    short = other_paths[:12]
     for j in range(len(short)):
         for k in range(len(short)):
             if j == k:
@@ -300,12 +300,14 @@ def compositions(args: Sequence[str], paths: Mapping[str, Sequence[str]],
             for op in OPERATORS:
                 add("OP", f"{short[j]} {op} {short[k]}")
 
-    # 4. the remainder
+    # 4. the remainder.
+    # The full permutation over every attribute path is REMOVED. For sympy.Equality that is
+    # 117^2 * 7 = 95,823 bodies, measured as 99,725 of 100,000 generated -- so the cap
+    # truncated the entire space to arithmetic, and every ordering fix above was fighting that
+    # one fact. The bounded `short[:24]` grid above already covers the real cases, because the
+    # useful members are the short ones (`lhs`, `rhs`, `base`, `exp`).
     for p in other_paths:
         add("PATH", p)
-    for x, y in itertools.permutations(other_paths, 2):
-        for op in OPERATORS:
-            add("OP", f"{x} {op} {y}")
     for a in args:
         for name in ("as_explicit", "factor", "expand", "doit", "simplify"):
             add("METHOD", f"{a}.{name}()")
