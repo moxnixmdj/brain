@@ -1026,3 +1026,36 @@ def test_a_request_that_states_a_structure_names_that_argument():
     # every stray literal is inside the JSON, not trailing beside it
     assert "bucket" not in argv, argv
     assert "daily/" not in argv, argv
+
+
+def test_a_bracketed_required_marker_is_read_like_a_parenthesised_one():
+    """Two spellings of the same statement, and only one was read.
+
+    `zonectl record remove --help` writes its options as
+
+        --origin=TEXT    zone the record lives in              [required]
+        --name=TEXT      record label                          [required]
+
+    The parser matched `(required)` where a description begins and had no rule for `[required]`
+    where one ends, so both flags came back `required: None` and a command missing `--name` was
+    reported `complete: True`. **The verifier lying is worse than the command being wrong**: a
+    caller who trusts `complete` ships a malformed command with a certificate.
+
+    The marker is the document's own word in either position, and reading it is not an inference.
+    """
+    out = R.require_survey_plan(
+        "/tmp/cb/bin3/zonectl",
+        'Remove the record www from the zone example.org', probes=14)
+    first = out["plans"][0]
+    assert first["complete"] is False, first
+    assert "--name" in first["missing_required"], first
+
+    # and the flags themselves are known to be required
+    import subprocess
+    page = subprocess.run(["/tmp/cb/bin3/zonectl", "record", "remove", "--help"],
+                          capture_output=True, text=True).stdout
+    options = {o["flag"]: o for o in R.parse_options(page)}
+    assert options["--name"]["required"] is True, options["--name"]
+    assert options["--origin"]["required"] is True, options["--origin"]
+    # the marker is not part of the description
+    assert "required" not in str(options["--name"]["words"]).lower(), options["--name"]

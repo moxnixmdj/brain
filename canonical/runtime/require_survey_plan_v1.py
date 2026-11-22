@@ -251,7 +251,12 @@ OPTION_LINE = re.compile(
     # `-d exdir` or `--output FILE` -- all four are the same fact about the same slot. Angle
     # brackets are as common as caps for the same fact (`--limit <int>`), and are spelled here.
     r"(?:\s*[= ]?\s*(?P<meta>(?:<[A-Za-z][A-Za-z0-9_-]*>)|[\[\]=-]*[A-Z][A-Z0-9_<>.|\[-]*\]?))?"
-    # a row may mark itself as required in the same place a description would start
+    # a row may mark itself as required in the same place a description would start, and two
+    # spellings are in use: `(required)` where the description begins, and `[required]` where it
+    # ends -- `--name=TEXT  record label  [required]`. Only the parenthesised form was read, so
+    # `zonectl record remove`, whose page marks both of its flags `[required]`, reported a command
+    # missing a required flag as `complete: True`. That is the verifier lying, which is worse than
+    # the command being wrong. The marker is the document's own word either way.
     r"(?:\s*\((?P<required>required|optional)\))?"
     r"(?P<rest>(?:\s{2,}|\t+).*)?$"
 )
@@ -509,6 +514,12 @@ def _option_cell(cell: str, heading: str) -> dict[str, Any] | None:
     # preference to the form the document demonstrates. Keeping what the document says costs
     # nothing and is not an inference.
     stated = (m.group("required") or "").strip().lower()
+    if not stated:
+        # the trailing bracketed marker, if the description ends with one
+        tail = re.search(r"\[(required|optional)\]\s*$", words, re.I)
+        if tail:
+            stated = tail.group(1).lower()
+            words = words[:tail.start()].strip()
     return {"flag": flag, "aliases": aliases[:6], "meta": meta, "words": words[:400],
             "acts": acts_in(words)[:2], "takes_value": bool(meta), "heading": heading,
             "required": True if stated == "required" else (False if stated == "optional" else None)}

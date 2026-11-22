@@ -1824,3 +1824,37 @@ its score honestly reported as flat.
 **Also verified in the same pass:** cb-054 still emits its full
 `--config {"host": ..., "port": 5432, "database": "analytics"}` after every change this session. The
 two "discover it yourself" tasks — the only ones testing the mission's central claim — remain exact.
+
+### A46 — a verifier that certifies a malformed command
+
+Checking the never-seen programs again found the worst kind of failure this project can have, and it
+was not a wrong command: it was a wrong certificate.
+
+`zonectl record remove --help` writes its options in the `[required]` form:
+
+    --origin=TEXT    zone the record lives in              [required]
+    --name=TEXT      record label                          [required]
+
+The parser read `(required)` where a description *begins* and had no rule for `[required]` where one
+*ends*. Both flags came back `required: None`, so a plan that omitted `--name` reported
+
+    record remove --origin example.org    complete: True
+
+A caller who trusts `complete` ships a malformed command with a certificate attached. **The verifier
+lying is worse than the command being wrong**, because the wrong command is visible and the
+certificate is what everything downstream relies on. A26's whole contribution was that
+completeness is decided from the page's own statements; a spelling the page uses that the parser
+does not read silently disables it.
+
+Fixed: the trailing bracketed marker is read, and is removed from the description so it cannot be
+mistaken for a word the flag is described by. Now:
+
+    record remove --origin example.org    complete: False    missing: ['--name']
+
+Measured: **0.4713 unchanged**, three seeds identical, 51 tests green, guard PASS, zero regressions.
+Free, because no plan changed -- only the honesty of what is reported about it. That is the correct
+kind of free change: the number does not move and the system stops asserting something false.
+
+**Still open, and named:** the bare-word object `record www` is not extracted at all (only quoted
+strings, paths and numbers are), so `--name` cannot be filled even though the request names it. The
+never-seen programs currently score 5 of 6 exact; this is the sixth.
