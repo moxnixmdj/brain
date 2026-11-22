@@ -1,0 +1,78 @@
+{
+ "artifact": {
+  "behaviour_in_readable_surface": false,
+  "digest_verified": true,
+  "implementation": "21 lines indexing an opaque data.bin",
+  "name": "text-unidecode",
+  "version": "1.3"
+ },
+ "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+ "candidate_directions": [
+  "separate by disagreement not description",
+  "index the artifact's own data then verify by execution",
+  "accept principled refusal"
+ ],
+ "conclusion": {
+  "binder_scope": "effect-as-predicate binding verified for structural invariants where a separating input exists",
+  "bottleneck": "goal -> predicate that the artifact satisfies and its lookalikes do not",
+  "missing_information": "the artifact's data, obtainable only by execution on inputs the goal failed to choose",
+  "not_a_language_problem": "the artifact's own docs ('ascii transliteration') are satisfied by both the artifact and the impostor"
+ },
+ "date": "2026-11-21",
+ "model_calls": 0,
+ "open_problem": "derive a discriminating predicate for data-driven maps using only goal, surface, and goal-chosen executions",
+ "predicate_attempts": [
+  {
+   "falsified_by": [
+    "\u0416->Zh",
+    "\u00c6sir->AEsir",
+    "\u65e5\u672c\u8a9e->Ri Ben Yu"
+   ],
+   "holds_on_probes": "9/13",
+   "id": "P1_exact",
+   "statement": "output is ascii and equals the base letter of the input",
+   "verdict": "FALSIFIED_BY_ARTIFACT"
+  },
+  {
+   "holds_on_probes": "13/13",
+   "id": "P2_loose",
+   "satisfied_by_naive_stripper": "13/13",
+   "statement": "output is ascii and alphanumerically equals the base, ignoring case and spacers",
+   "verdict": "NON_DISCRIMINATING"
+  }
+ ],
+ "schema": "BRAIN_RECEIPT_THE_PREDICATE_IS_THE_BOTTLENECK_20261121_V1",
+ "separation_evidence": {
+  "differ_only_on": [
+   [
+    "\u0416",
+    "Zh",
+    ""
+   ],
+   [
+    "\u65e5\u672c\u8a9e",
+    "Ri Ben Yu ",
+    ""
+   ],
+   [
+    "\u2014",
+    "--",
+    ""
+   ]
+  ],
+  "identical_on": [
+   "\u00c5->A",
+   "\u00f6->o",
+   "\u00f1->n"
+  ]
+ },
+ "table_learning": {
+  "discriminates_artifact_from_stripper": false,
+  "held_out_decidable_accuracy": "3/4",
+  "method": "partial transcription table from single-character probes, abstain when unobserved",
+  "sound": true
+ },
+ "truth": {
+  "achieved": false
+ }
+}
