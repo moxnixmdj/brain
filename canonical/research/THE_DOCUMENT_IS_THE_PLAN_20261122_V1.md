@@ -788,3 +788,43 @@ measured well is the one kept: a required flag decides the **order** of readings
 each task done, and still finishes none of them. `cb-037` now emits `alert list`, `alert acknowledge` and
 `incident create`, and the remaining three steps are absent because `alertmgr` has no assign, escalate or
 timeline operation — the document does not offer them, and inventing them is what the sequence refuses to do.
+
+### A18 — what the field's own numbers say, and three fixes that did not pay
+
+A5 is 0.4632. Asking where the remaining score is, with the evaluator read rather than assumed, gives an
+answer that changes what the next component should be.
+
+**A flawless run scores 0.9 here, not 1.0.** `_score_recovery` returns **0.5 when no error occurs** and 1.0
+only when an error is followed by a recovery, and it carries weight 0.2. So 0.6·1.0 + 0.2·1.0 + 0.2·0.5 = 0.9.
+`exact 0/57` is therefore partly the bench's own arithmetic, not only our failure: four tasks already reach
+**outcome 1.0**. What remains is outcome, and outcome is concentrated: 19 multi-tool tasks average **0.1965**
+against 0.4520 for the 38 single-tool tasks.
+
+**Cross-tool routing was built, worked, and measured worse.** A request that names several programs is now
+step-routed to each program, using only the names each program's *own document* gives itself
+(`gh --help` → `gh - GitHub CLI for managing repositories ...`, so `github` and `repo` are names it answers to;
+`google` → `calendar drive gmail`). No table of tools was written — an earlier version keyed on tool names was
+deleted because it was exactly the warehouse of world knowledge this module may not hold, and the repo's own
+guard test caught it. Routing is correct on cb-021/cb-027/cb-028/cb-046. It scored **0.4533 against 0.4632**,
+and on the multi-tool subset **0.3610 against 0.3925**.
+
+**Retrying a refused command changes nothing at all.** The runner hands the agent `stdout` and `stderr` every
+turn and the planner returns ordered readings, so an agent that reads a refusal and tries the next reading is
+the obvious capability. Measured: 18 tasks executed more than one command, and **exactly zero tasks changed
+score** — up 0, down 0. The reason is in the alternatives themselves: for cb-033 the ranked readings after the
+first are `issue create --repo 1 ...`, `... 's target date to match the milestone' ...`, `... /closed`. They
+are not alternative readings of the request; they are the demonstration filler misplacing values. Retrying
+garbage is not a capability, and the code was not kept.
+
+**A bare operation is not a plan, and removing one is worth almost nothing.** `gh issue create
+acme-corp/infra` names the act, supplies none of the fields the document marks required, and the backend
+refuses it — with no working command after it, recovery scores 0.0. Suppressing such commands measured
+**0.4523**, so the diagnosis was right and the cost was elsewhere.
+
+**The bottleneck, stated as the evidence states it.** Not routing, not sequencing, not retry: the
+**demonstration filler corrupts values**. The same defect appears in every experiment above — `--title 1`,
+`--alerts "Payment Service Degradation"`, `--repo 1`, `'s target date to match the milestone'`. It is one
+mechanism, and it is the thing to fix next. Three attempts to patch around it (rank by description overlap,
+refuse steps that drop required flags, suppress bare operations) were each measured and each lost more than
+it gained, so none of them was kept. They are recorded because the pattern is the round's lesson: the
+plausible local patch to a value-placement defect is worse than the defect's true fix.
