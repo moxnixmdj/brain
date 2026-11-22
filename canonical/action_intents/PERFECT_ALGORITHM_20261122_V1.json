@@ -1,0 +1,184 @@
+{
+  "action_id": "PERFECT_ALGORITHM_20261122_V1",
+  "action_intent_id": "PERFECT_ALGORITHM_20261122_V1",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "action_summary": "Made 'the Perfect Algorithm' real: one generic loop for any arbitrary environment that scans observed facts (affordance map), asks the right question (the action whose trial most shrinks what is unknown, closeness-probed when the env supports it), retrieves from memory what is known, fetches instant knowledge from the world on a completeness-gated basis, plans the shortest way over the learned model, executes and VERIFIES the goal is observed, generalizes from the one verified experience (the goal family + plan sketch + evidence hash -- never the raw trace as knowledge), admits the generalization on fresh instances it was not taught on, persists admitted priors (observed facts) and admitted rules (hypotheses) to an inspectable memory store, and replays admitted plan rules instantly on a repeat goal. Reuses environment_learning, jit_knowledge, the anti-unifier and the admission gate; adds no new runtime dependencies. Authority: NONE.",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "conversation_memory_is_authority": false,
+    "earlier_routes_exhausted_reason": "The repo already contains the scan (environment_learning), the instant-knowledge fetch (jit_knowledge), the anti-unification (verified_skill_crystallizer), the admission gate (lesson_admission_gate) and the skill library. The missing mechanism is the loop that composes them: a scan-seeded, memory-indexed, goal-directed loop with an honest separator and honest persistence. Duplicating any of those pieces would add a second implementation of the same mechanism, which the laws forbid.",
+    "incremental_spend_usd": 0,
+    "independent_verification_completed": false,
+    "independent_verification_note": "Producer-run sandbox only: 18 new unit/integration tests, one generic-loop receipt (plan 6 actions on a 4x4 held-out grid, priors persisted), one code-repair admission receipt (ADMIT on unseen victims, fresh-defect replay PASS). No independent verifier ran any of this. Another identity must re-run before credit.",
+    "laws_read_this_session": [
+      "README.md",
+      "AGENTS.md",
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+      "canonical/README.md",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md"
+    ],
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "VERIFIED_REUSABLE_CAPABILITY_GAIN",
+    "progress_evidence_paths": [
+      "canonical/swe_kernel/perfect_algorithm_v1.py",
+      "canonical/tests/test_perfect_algorithm_v1.py",
+      "canonical/verification/PERFECT_ALGORITHM_RECEIPT_20261122_V1.json"
+    ],
+    "route_class": "COMPOSE",
+    "scope_complete_discharge": false,
+    "terminal_achieved": false
+  },
+  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The agent could not decide what to ask next from an arbitrary environment; the loop did not exist as one mechanism.",
+  "canonical_base_commit": "c43f660e53d50ec308f96e73e3b64283bc0b5612",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "capability_credit_delta": 0,
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "An arbitrary environment had no close loop: the scan, the separator, the plan-after-learn, the verified experience, the admitted generalization and the persistent store were all present but not composing one loop, and no report said 'I do not know, I ask, I act, I learn'.",
+  "date": "2026-11-22",
+  "expected_parent_change": "One generic loop composed: scan -> right question -> memory lookup -> plan -> act/verify -> generalize -> admit -> save -> replay. Observed priors persisted; admitted rules replay instantly; unverified rules are never persisted.",
+  "expected_parent_frontier_change": "The same four reasoning streams can now be composed as one falsifiable algorithm with honest persistence, and a fresh instance of a family replays the model it was seeded with.",
+  "explicit_user_authorization": [
+    "What if we make a perfect algorithm and that is basically our model?",
+    "All he should do is basically go into any new arbitrary environment in the computer and he doesn't know anything about anything",
+    "All he should do basically is ask the right question and know all of the things that he should know about, from instant knowledge",
+    "The saving in the memory must not be only his action ... we should do generalization or something",
+    "should he be goal-directed or should he learn everything in all the environments",
+    "best part is no part",
+    "the most advanced coding actions ... let him experience them once and then he will learn them",
+    "our own model only, zero model calls at runtime",
+    "every bit of the parameters must be calculated"
+  ],
+  "falsification_condition": "FALSIFIED if: a rule from the store is replayed and the goal is not reached; a stored rule is served on a goal family it was not admitted for; a stored rule is served on an already-correct program that breaks it; the receipt numbers disagree with the receipt file; or any instant-knowledge fetch is counted as Brain capability.",
+  "generic_repair_from_single_probe": false,
+  "governance_change": false,
+  "highest_leverage_now": true,
+  "honest_limits": [
+    "authority NONE, producer-run sandbox, no independent verifier",
+    "the generic loop's plan-sketch rule was NOT admitted on fresh instances in this round and was therefore NOT persisted -- only priors (observed facts) were saved",
+    "one experience is a hypothesis, not a rule; the receipt says the rule is not identified",
+    "no GUI, browser, OSWorld or SWE-bench task was run in this round",
+    "no capability was registered and no truth was changed"
+  ],
+  "incremental_spend_usd": 0,
+  "intentional_route_race": false,
+  "load_bearing_primary": {
+    "constructive_gap_for_open_obligation_ids": [
+      "OSWORLD_2_1_PARTIAL_GE_81_8"
+    ],
+    "expected_obligation_discharge_lcb": 0,
+    "expected_obligation_unlock_lcb": "0/81",
+    "interpretation": "Confirmed only: the generic loop is a mechanism for arriving in an unseen environment, plan-minimal action and verified persistence, which is the OSWORLD-shaped direction. No obligation is discharged by this producer-run measurement.",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": "0.5",
+    "wall_clock_cost_ub": 2
+  },
+  "measured_effect": {
+    "authority": "NONE__PRODUCER_RUN_SANDBOX",
+    "code_repair_specialist": {
+      "fresh_defect_replay_verdict": "PASS__REPLAYED_AND_REPAIRED",
+      "gate_verdict": "ADMIT",
+      "persist": true
+    },
+    "cost": {
+      "incremental_spend_usd": 0,
+      "model_calls": 0,
+      "network_calls_at_run_time": 0
+    },
+    "generic_loop": {
+      "plan_length": 6,
+      "priors_saved": true,
+      "receipt": "canonical/verification/PERFECT_ALGORITHM_RECEIPT_20261122_V1.json",
+      "rule_persist_refusal_reason": "NO_FRESH_INSTANCES_OFFERED__NOT_PERSISTED",
+      "rule_persisted": false,
+      "states_seen": 16
+    }
+  },
+  "next_step": "Bind the generic loop to the OSWORLD-shaped surface with one demonstration and measure the replay-from-memory speedup; then carry the code-repair generalization into the semantic-generalization engine.",
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "probe_specific": false,
+  "progress_class": "VERIFIED_REUSABLE_CAPABILITY_GAIN",
+  "progress_evidence_paths": [
+    "canonical/swe_kernel/perfect_algorithm_v1.py",
+    "canonical/tests/test_perfect_algorithm_v1.py",
+    "canonical/verification/PERFECT_ALGORITHM_RECEIPT_20261122_V1.json"
+  ],
+  "real_outcome": "One generic loop and one specialist loop now compose scan -> right question -> memory -> plan -> act/verify -> generalize -> admit -> save -> replay. Nineteen tests pass, one generic receipt measured (plan 6 on a held-out grid), one code-repair admission receipt measured (ADMIT on unseen victims; fresh defect replayed). No obligation discharged; truth false.",
+  "recursive_obs": {
+    "canonical_base_commit": "c43f660e53d50ec308f96e73e3b64283bc0b5612",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "PREREQUISITE_NONE__NOT_APPLICABLE"
+    ],
+    "expected_parent_change": "A generic loop that a computer-use brain can run on any arbitrary environment, with honest persistence, is now real and falsifiable.",
+    "expected_parent_frontier_change": "The agent now has the shape of the algorithm, not just each piece: scan, separator, memory, plan, verify, generalize, admit, save, replay.",
+    "reason_for_route_choice": "REUSE_EXISTING_PIECES (environment_learning, jit_knowledge, anti-unifier, admission gate, memory store) beats SYNTHESIZE_NEW_PRIMITIVE: the missing mechanism is composition, not a new primitive.",
+    "route_order_walk": {
+      "ADAPT": "The loops adapt those pieces to one goal-directed shape.",
+      "BYPASS": "Not used: bypassing the gates would not make a hypothesis into a fact.",
+      "COMPOSE": "Selected: compose the loop as a first-class mechanism.",
+      "CONFIGURE": "Environment kind + goal family are configuration, not machinery.",
+      "DELETE": "No dead code was deleted; the loop composes existing mechanisms.",
+      "INTEGRATE": "Not yet: no scheduler integration is claimed.",
+      "REUSE": "Selected: reuse scan, anti-unification, admission gate, instant knowledge.",
+      "SUBSTITUTE": "Not needed: no existing mechanism was wrong.",
+      "SYNTHESIZE_NEW_PRIMITIVE": "Not selected: nothing was found that REUSE could not close."
+    },
+    "selected_surviving_route": "COMPOSE_THE_EXISTING_PIECES_INTO_ONE_LOOP_AND_MEASURE_IT_ON_FRESH_INSTANCES",
+    "stop_condition": "The generic loop demonstrably replays the admitted rule instantly on a fresh goal in the same family, with priors persisted and the receipt saved."
+  },
+  "required_capability": "model-free scan + right-question + shortest-plan + verify + admit + persist, compositional over any arbitrary environment",
+  "route_class": "COMPOSE",
+  "route_id": "PERFECT_ALGORITHM_COMPOSED_LOOP_V1",
+  "route_order_walk": {
+    "ADAPT": "The loops adapt existing mechanisms to one goal-directed shape.",
+    "BYPASS": "Not used: bypassing the gates would not make a hypothesis into a fact.",
+    "COMPOSE": "Selected: compose the loop as a first-class mechanism.",
+    "CONFIGURE": "Environment kind + goal family are configuration, not machinery.",
+    "DELETE": "No dead code was deleted.",
+    "INTEGRATE": "Not yet claimed.",
+    "REUSE": "Selected: reuse environment_learning, jit_knowledge, anti-unifier, admission gate.",
+    "SUBSTITUTE": "Not used.",
+    "SYNTHESIZE_NEW_PRIMITIVE": "Not selected: no mechanism survived that required a NEW primitive."
+  },
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "selected_route": "COMPOSE_THE_EXISTING_PIECES_INTO_ONE_LOOP_AND_MEASURE_IT_ON_FRESH_INSTANCES",
+  "selected_surviving_route": "PERFECT_ALGORITHM_COMPOSED_LOOP_V1",
+  "status": "PROPOSED__PRODUCER_MEASURED__PERFECT_ALGORITHM__INDEPENDENT_VERIFICATION_OPEN",
+  "stop_condition": "The receipt exists and the tests pass; further work requires the generic loop's replay-from-memory speedup on a real held-out surface, with an independent oracle.",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "truth": {
+    "achieved": false,
+    "the_law_this_round_adds": "One experience yields a hypothesis plus the one question that separates the survivors -- never a rule. Priors (observed transitions) are facts; rules (plan sketches / repair patterns) are hypotheses and are admitted only on fresh instances.",
+    "what_is_false_in_the_claim": [
+      "that one verified experience is a sufficient rule",
+      "that exact actions should be saved as knowledge",
+      "that instant knowledge counts as capability"
+    ]
+  },
+  "user_authorized_governance_change": false,
+  "v22_prewrite_admission": null,
+  "verification": {
+    "authority": "NONE__PRODUCER_RUN_SANDBOX",
+    "commands": [
+      "python3 -m unittest canonical.tests.test_perfect_algorithm_v1 -v",
+      "python3 execution_guard/agent_orientation_check_v1.py intent-check canonical/action_intents/PERFECT_ALGORITHM_20261122_V1.json"
+    ],
+    "independent_verification_completed": false
+  },
+  "weakens_existing_guard": false
+}
