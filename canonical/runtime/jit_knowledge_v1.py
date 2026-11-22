@@ -327,20 +327,26 @@ SOURCES: dict[str, dict[str, Any]] = {
 # weaker and checkable "does this document mention my subject at all". A package called
 # `@graphql-tools/documents` is not evidence about `awk`, and no amount of source counting makes
 # it so.
-_TOPIC_STOP = frozenset("""a an the this that these those it its is are was were be been being do
-does did and or but if then than so as at by for from in into of on to with without please
-could would should can may might will shall help me my we our you your i he she they them their
+# Function words only -- a closed grammatical class, the same few dozen in every English
+# sentence. This is not a vocabulary of subjects and makes no claim about any domain: a word not
+# in it is a candidate subject, and which candidate matters is decided by the fetched documents
+# themselves (see distinctive_words), never by a list we brought.
+_FUNCTION_WORDS = frozenset("""a an the this that these those it its is are was were be been being
+do does did and or but if then than so as at by for from in into of on to with without please
+could would should can may might will shall me my we our you your i he she they them their
 some any all each every no not only just also very more most less least same other another
-given file files use using used need want wants needed optionally option optional via there
-here what which who whom whose when where why how command command-line cli line line-s tool
-tools program program-s package packages node js javascript python library libraries module
-modules how to howto example examples simple quick""".split())
+there here what which who whom whose when where why how""".split())
 
 
 def topic_words(query: str) -> set[str]:
-    """The words of a query that say what it is *about*."""
+    """The content words of a query: everything that is not a function word.
+
+    Deliberately not a subject vocabulary. `file`, `tool`, `command` are content words here even
+    though they are common in this domain, because the *documents* decide which of the query's
+    words is its subject -- the one fewest of them mention.
+    """
     words = re.findall(r"[A-Za-z][A-Za-z0-9_.+-]{1,30}", str(query or "").lower())
-    return {w for w in words if w not in _TOPIC_STOP and len(w) > 1}
+    return {w for w in words if w not in _FUNCTION_WORDS and len(w) > 1}
 
 
 def document_is_about(doc: Mapping[str, Any], topics: set[str]) -> bool:

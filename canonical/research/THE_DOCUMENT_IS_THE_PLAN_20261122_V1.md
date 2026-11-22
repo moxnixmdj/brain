@@ -530,3 +530,12 @@ not "how do I do X with the program already on this machine". For the planner, t
 the program's own rejections (A10, A11) are exact and cheap; the web is the fallback when neither exists. The
 relevance filter makes the fallback honest. It does not make it a manual, and calling it one would be the
 kind of claim this document exists to avoid.
+
+**A12, correction — the subject list was the same offence.** The first version of the relevance filter
+carried a hand-written `_TOPIC_STOP` of domain words (`file`, `tool`, `command`, `package`, `library`, …) to
+say which query words were "just noise". That is a vocabulary brought from outside, on the third appearance
+of exactly the mistake this round already removed twice (destination flags, then place names). It is now a
+closed list of **function words only** — the few dozen grammatical words every English sentence shares — and
+the question of *which* content word is the subject is answered by the fetched documents themselves: the one
+fewest of them mention. Behaviour is byte-identical on all four measured queries, with the list gone. 48
+tests pass, repo-integrity guard 17 rules / 0 violations / PASS.
