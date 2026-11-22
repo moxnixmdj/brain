@@ -1,6 +1,7 @@
 # The world is a guide, but the guide is not the world — what the owner's new idea is really proposing, measured against the tree and the frontier
 
 **2026-11-22 · branch `arena/67c67d7e-brain` · Authority NONE__PRODUCER_RUN_SANDBOX · model calls 0 · network 0 at measure time (the one live read below is marked as such)**
+**Correction pass 2026-11-22: §2.3, §6 item ⑥ and §7 were amended after the original commit. The correction pass did use the network (one blocked discovery attempt and one allowlisted PyPI read); the measurements above were not re-run, and every number in §2.1–§2.2 and §5 is the original one.**
 **Code: `canonical/swe_kernel/the_environment_broker_v1.py` · tests `canonical/tests/test_the_environment_broker_v1.py` (9 passed) · receipts `intake/RECEIPT_WORLD_BROKER_{COLD,WARM}_20261122_V1.json`**
 
 Requirement restated: own model; zero runtime model calls; parameters never a fact warehouse; knowledge in an
@@ -54,7 +55,27 @@ parameters), and "learn the world first, generalise later" is not a candidate de
 ### 2.3 The web channel — measured, and deferred on evidence
 From the 2026-11-21 instruments: asking the host costs **6.78 ms** vs **255.2 ms** for the web; of the
 7,432 man-page citations on this host, zero resolve to files present locally. The web is strictly the
-fallback. **No web retrieval mechanism has ever been run in this tree.** This document does not claim one.
+fallback.
+
+**Correction (2026-11-22).** An earlier version of this section said *"No web retrieval mechanism has ever
+been run in this tree."* That sentence was false, and it is corrected here rather than deleted:
+
+- **A fetcher exists.** `canonical/runtime/bound_capabilities/open_research_source_frontend.py` composes
+  `open_web_source_candidate_discovery.py` (Bing RSS, DuckDuckGo HTML, Crossref), provenance verification,
+  BM25 relevance, evidence extraction and claim/relation binding. `astra_runtime` calls it on broad
+  objectives (`_run_open_research_source_frontend`). `canonical/runtime/auto_pypi_library_acquisition.py`
+  fetches `https://pypi.org/pypi/<name>/<version>/json` and checks a wheel against the published digest;
+  the committed evidence `ASTRA-RUNTIME-PYPI-ACQUIRE-BSON-002__AUTO_PYPI_LIBRARY_ACQUISITION.json`
+  records a real `metadata_url` of that shape.
+- **A live attempt was made and blocked.** Re-run in this sandbox on 2026-11-22, the discovery module
+  returned `DISCOVERY_UNAVAILABLE` in 0.18 s with all three backends failing on
+  `TLS/SSL connection has been closed (EOF)`. The sandbox's egress allowlist permits only `pypi.org`,
+  `files.pythonhosted.org`, `registry.npmjs.org`, `github.com`, `codeload.github.com` and `api.github.com`
+  (a direct PyPI read in the same session succeeded in 0.06 s). The block is the **network**, not the code.
+- **What remains true.** No end-to-end run of discovery → provenance → extraction → decision has produced a
+  verified decision. "A fetcher exists; live open-web discovery was blocked here; completed
+  decision-quality research is unestablished" is the accurate statement. See
+  `intake/RECEIPT_OPEN_WEB_FRONTEND_BLOCKED_20261122_V1.json`.
 
 ### 2.4 The verdict docs that already exist on the user's exact question
 - `INSTANT_LEARNING_IS_RETENTION_NOT_IDENTIFICATION_20261118_V1.md` — instant learning is retention; it is
@@ -225,8 +246,10 @@ never *authority*. ③ Zero new parts that fail either test: it reuses the resol
 no new parameters, no new store type. ④ Discipline: host→local→machine-registry web→(prose: refuse), all
 bounded, all version-pinned to the environment's declared floor. ⑤ Constraints hold: zero model calls; zero
 parameters-as-facts; the record survives removal of the web URL (provenance is data, not a dependency).
-⑥ Verified where honestly verifiable: the live read happened once (this file); the fetcher does not exist in-tree,
-so **no runtime claim is made** — it is deferred with this receipt as its blocker, not smuggled in.
+⑥ Verified where honestly verifiable: the fetcher **does** exist in-tree (corrected — see §2.3), and its live
+discovery arm was attempted and blocked by this sandbox's network allowlist, not by missing code. So **no
+runtime claim is made**: what is deferred is a verified end-to-end run, not a missing part. See
+`intake/RECEIPT_OPEN_WEB_FRONTEND_BLOCKED_20261122_V1.json`.
 
 ---
 
@@ -238,10 +261,18 @@ so **no runtime claim is made** — it is deferred with this receipt as its bloc
 - The owner's other instinct — *maybe it should just learn everything and generalise later* — is **refuted by
   measurement** (OOM; negative transfer; 0/164).
 - The idea as an architecture is real and minimal: **orient → contract → locate → derive → verify → cache →
-  re-check**. Each arrow exists in code in this tree as of today. What does not exist is the web arm (machine
-  tier) wired into the resolver, and the identification problem it cannot dissolve: **an ambiguous goal has no
-  environment answer.** Every environment question here dies unless the goal arrives as a checkable contract,
-  which is to say the world can be asked only what a machine can check.
+  re-check**. Each arrow exists in code in this tree as of today. What does not exist is a **verified end-to-end
+  run** of the web arm (machine tier) — the modules are wired, but every live discovery call made here was
+  blocked by the sandbox's network allowlist (§2.3) — and the identification problem it cannot dissolve:
+  **an ambiguous goal has no environment answer.** Every environment question here dies unless the goal
+  arrives as a checkable contract, which is to say the world can be asked only what a machine can check.
+- **One more boundary this document did not previously state, now measured elsewhere.** A static audit
+  (`canonical/tools/model_call_surface_audit_v1.py`, receipt `intake/RECEIPT_MODEL_CALL_AUDIT_20261122_V1.json`)
+  finds a model-inference endpoint reachable from exactly one file in the goal runtime's closure —
+  `astra_runtime.py` itself — behind the per-step switch `allow_optional_model_planner`. No committed mission
+  sets it, and **no guard rejects it**: the zero-model boundary is a convention of the committed missions, not
+  an enforced property. That is a weaker guarantee than this document's premise assumes, and it is stated here
+  rather than left implicit.
 - **The single next bottleneck: make `GOAL` a measured object.** Close the loop from "the suite passed" to
   "the goal happened" for one more goal kind beyond `run-tests`, with the same re-check discipline, on trees
   this project has never seen; then refuse everything else with the same honesty as now. Until then §6 is not
