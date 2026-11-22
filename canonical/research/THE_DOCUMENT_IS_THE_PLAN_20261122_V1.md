@@ -1180,3 +1180,54 @@ knowledge is the document, not the episode — because it is the first time the 
 environment the system had never seen. It is one small program with five instructions, written by
 the same hand that wrote the mechanism, which is a real limit on what it proves; a second program
 from an unrelated domain, written without looking at the parser, is the honest next test.
+
+### A30 — the second program, and what it says: two conventions the parser only knew in one spelling
+
+A29 ended by naming the honest next test: a program from an unrelated domain, in a *different help
+style*, written without looking at the parser. `zonectl`, a DNS zone administrator, is that
+program. It differs from all eight measured ones in three ways at once — GNU `--flag=VALUE`
+spellings, an `Options:` heading in mixed case with no `USAGE:` line, and `[required]` written as a
+trailing marker rather than after the type.
+
+It found two defects and confirmed one limit.
+
+**(1) `--flag=value` parsed as neither a flag nor a value, and both were lost.** `parse_demos` split
+a demonstration on whitespace, so `--origin=example.org` was one token that starts with `-`, became
+`previous`, and was then overwritten by the next token. Every `zonectl` demonstration yielded
+**`pairs: []`**. With no pairing the request's values were emitted *positionally alongside* the
+flags already filled — `zone add --origin example.org --ttl 3600 example.org 3600`, each value
+stated twice. The `=` is the document naming which value belongs to which flag, which is the entire
+reason to keep a demonstration, so it is now read as a pairing.
+
+**(2) Routing tied at 8 and insertion order answered it wrong.** `Add a record "www" ... in the zone
+"example.org"` scores `zone add` and `record add` identically: both have two request words in their
+path. Document order chose `zone add` — the wrong command — and the request had said otherwise.
+`record` sits at character 6, right after the verb; `zone` at 65, inside a prepositional phrase.
+Ties are now broken by how close the candidate's distinguishing word sits to the act word, which is
+a fact about the request's grammar rather than about the order a vendor printed its pages. The
+shorter-path tie-break survives beneath it, so A25's `project list` result is unchanged.
+
+**Measured on the sixty: 0.4572, identical, three seeds, up 0 / down 0.** Neither fix costs anything
+anywhere; both are needed for a program in a help style the repo had never parsed.
+
+**(3) A limit, stated rather than papered over: one value, several flags, and no mechanical winner.**
+`record add` demonstrates `--origin --name --type --value`, and the request names `www`, `CNAME` and
+`example.org` while its descriptions all contain the word `record`. Which value goes to `--name` and
+which to `--type` cannot be decided from the words alone: `--origin` says "zone the record lives in",
+which is true of every value in the request, so it wins whichever flag is asked first. Both orderings
+were tried and both break the other program:
+
+| ordering flags by | `record add` | `lattice entry list` |
+|---|---|---|
+| fewest request words named | `--name www` ✅ | `--limit session-store` ❌ |
+| most request words named | `--type www` ❌ | `--cluster session-store` ✅ |
+
+Neither is kept. The demonstrated *positions* are the missing evidence — a demonstration that writes
+`--name=www` is saying that a one-word label goes to `--name`, and that has nothing to do with how
+many request words the description happens to share. That is the next correction, and it is a
+statement about the demonstration rather than another guess at ordering.
+
+**What the round does establish.** Two of two unseen programs route correctly and three of four
+`zonectl` instructions produce commands whose flag/value pairs are all correct. The mechanism needed
+no new concept for either program: the fixes are in how a demonstration is *read*, which is the
+document, not in what the system knows.

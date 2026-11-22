@@ -535,6 +535,19 @@ def parse_demos(text: str, tool: str) -> list[dict[str, Any]]:
             valued: list[str] = []
             previous = ""
             for token in tokens[1:]:
+                # `--flag=value` states the pairing in the token itself, and it is the spelling
+                # most modern CLIs use. Read as one word it became neither a flag nor a value:
+                # `zonectl zone add --origin=example.org --ttl=3600` produced no pairs at all, so
+                # the demonstration contributed nothing and the request's values were then emitted
+                # positionally beside the flags they had already filled. The `=` is the document
+                # saying which value belongs to which flag, which is the whole reason to keep a
+                # demonstration.
+                head, eq, tail = token.partition("=")
+                if eq and head.startswith("-") and head != "-" and tail:
+                    pairs.append((head, tail))
+                    valued.append(tail)
+                    previous = ""
+                    continue
                 if token.startswith("-") and token != "-":
                     previous = token
                     continue
@@ -788,7 +801,7 @@ def survey(tool: str, *, want: Iterable[str] = (), probes: int = DEFAULT_PROBES,
 
 
 def route(tree: Mapping[str, Any], request_words: Iterable[str],
-          acts: Iterable[tuple[str, str]] = ()) -> dict[str, Any]:
+          acts: Iterable[tuple[str, str]] = (), *, said: str = "") -> dict[str, Any]:
     """The document the request is about: by the words it spends, then by the act it states."""
     wanted = set(request_words)
     wanted_acts = [tuple(a) for a in acts]
@@ -812,6 +825,8 @@ def route(tree: Mapping[str, Any], request_words: Iterable[str],
     walk(tree.get("root") or {}, ())
     best_path: tuple[str, ...] = ()
     best_score = 0
+    best_near = 1 << 20
+    wanted_acts_words = {w for a in wanted_acts for w in words_of(" ".join(a))}
     for here, page in by_path.items():
         # The page's own name is what the page *is*; its summary says what the page can be told
         # about. Both are evidence, and they are not equal: `issue list` summarises itself as
@@ -828,13 +843,22 @@ def route(tree: Mapping[str, Any], request_words: Iterable[str],
         if wanted_acts and stated and stated[0][0] in {a[0] for a in wanted_acts}:
             score += 1
         scores.append({"child": " ".join(here), "score": score})
-        # Ties are broken by the shorter path, which is the document's own statement that
-        # nothing further was needed: `project list` and `issue list` both score 9 for "list all
-        # projects", and only insertion order separated them before -- a property of how the
-        # document happened to be written, not evidence. The shorter path is named by fewer
-        # words the request did not ask for.
-        if (score, -len(here)) > (best_score, -len(best_path)):
-            best_path, best_score = here, score
+        # Ties are broken by how close the candidate's *distinguishing* word sits to the act word
+        # in the request. `Add a record "www" ... in the zone "example.org"` scores `zone add` and
+        # `record add` identically at 8, and insertion order picked `zone add` -- the wrong command,
+        # answered from a prepositional phrase. The request names its object right after its verb:
+        # `record` at character 6, `zone` at 65. English puts the thing acted on before the
+        # circumstance, so proximity to the verb is stated evidence about which noun is the
+        # subject, where insertion order is a property of how the document happened to be written.
+        # The shorter path remains the last tie-break, unchanged, and `project list` vs `issue
+        # list` is decided earlier by A25's weighting (9 to 7) so it is not affected.
+        low = said.lower()
+        act_at = min([low.find(w) for w in wanted_acts_words] or [0])
+        apart = [abs(low.find(w) - act_at) if w in low else 1 << 20
+                 for w in (named - wanted_acts_words)]
+        near = min(apart) if apart else 1 << 20
+        if (score, -near, -len(here)) > (best_score, -best_near, -len(best_path)):
+            best_path, best_score, best_near = here, score, near
     for depth in range(1, len(best_path) + 1):
         here = best_path[:depth]
         page = by_path.get(here)
@@ -1935,7 +1959,8 @@ def plan(requirement: Mapping[str, Any], tree: Mapping[str, Any],
 
     root = tree.get("root") or {}
     picture = positional_grammar((root.get("usage") or {}))
-    routed = route(tree, words_of(requirement.get("instruction") or ""), acts) \
+    routed = route(tree, words_of(requirement.get("instruction") or ""), acts,
+                   said=str(requirement.get("instruction") or "")) \
         if root.get("children") else {"path": [], "nodes": [root], "scores": []}
     nodes: list[dict[str, Any]] = routed["nodes"]
     plans: list[dict[str, Any]] = []
