@@ -5133,3 +5133,71 @@ is a decision about the caller's intent, not a fact the environment stated, and 
 the confabulation §A91 and §A92 each spent a test removing. The honest end-state of this thread is:
 **the environment supplies the precondition, the mechanism derives the shape of the act, and the caller
 supplies the intent.**
+
+## §A94 — the loop that had nothing to decide with, and now does
+
+### The bottleneck was a hole in the shape of a function
+
+`solve_v1` is the whole system reduced to observe/act/judge. Its docstring says the model "is a callable,
+not a dependency" — correct, and it left the callable unbuilt. Its own text is explicit that judgement
+"belongs to a model … it is the reason the design is small."
+
+Every run of that loop with nothing supplied is a run that cannot act. Asked "what stops us now", the
+honest answer was: **the part that decides what to do.** Not the model call constraint, not knowledge, not
+the store — there was no `act`.
+
+`mechanism_act_v1` supplies it from what the tree already has, and measures how far that reaches:
+
+    documentation -> a command      require_survey_plan_v1
+    a refusal     -> a condition    stated_precondition_v1
+    a condition   -> an act         stated_precondition_v1.acts_for
+    what exists   -> re-read        never cached
+
+### Measured, on three unrelated programs with three state conventions
+
+| program | goal | verdict | steps | state written |
+|---|---|---|---|---|
+| `ledgerctl` | `add a record named "alpha" with amount "4"` | **DONE** | 1 | `{"record":[{"amount":4,"name":"alpha"}]}` |
+| `stockctl` | `set qty "8" for sku "B2"` | **DONE** | 1 | `{"item":{"B2":8}}` |
+| `linear` | `create an issue in the team "Ops" titled "fix"` | **DONE** | 1 | `{"issue":[{"team":"Ops","title":"fix"}]}` |
+
+Zero model calls. `confine_v1` unmodified. `solve_v1` unmodified. The state read from disk, not from the
+run's own account of itself.
+
+### Four designs tried, three wrong, and why each failed
+
+Keeping these because each cost a cycle and each is a trap that looks like progress:
+
+1. **Return a shell command line.** `solve_v1.act` runs *Python source*. Every step died with
+   `SyntaxError` and empty stderr, so the loop re-planned four times and reported nothing.
+2. **Assume the sandbox mounts the project at `/work`.** It mounts it at `/project`, read-only, with a
+   tmpfs at `/work`. Three identical tracebacks, no refusal stated, no repair possible.
+3. **Override the program's state path into `/work`.** `/work` is a tmpfs discarded after every action, so
+   three steps succeeded, the state was written into a discard, and the loop reported `GAVE_UP`. Then,
+   pointing it at `/project` fixed `ledgerctl` and **broke a program that had been working** — `stockctl`
+   ships a default state file beside itself, `confine_v1` makes `/project` writable precisely so that
+   works, and the override replaced a working default with a path the sandbox did not have.
+4. **Leave the program's own default alone** — correct. A program's default state path is part of the
+   environment it ships with. Guessing one is the harness inventing an environment.
+
+### What the caller must still supply, and why that is right
+
+* **The goal** — a program and a request. Nothing here invents what to want.
+* **The judgement of success** — `expect=[...]`, substrings the caller believes the finished world
+  contains. `solve_v1` is explicit that judgement belongs to whoever owns the goal, and a harness that
+  decided it would be deciding when someone else's task is finished. This is the honest remaining gap:
+  a caller who cannot state success in the world's own terms still needs a judge.
+
+### Two refusals that are the point, not a bug
+
+* A goal naming no program: `GOAL_NAMES_NO_PROGRAM`.
+* A failed step whose failure names nothing: `REFUSAL_STATES_NO_SUBJECT`, and the loop **stops**. A loop
+  that retries the same plan against the same refusal is the behaviour §A87 spent a section replacing.
+
+### Honest limits
+
+Three fixtures are not a benchmark, and each task took one step because each was one action. This
+establishes that the observe/act loop closes **without a model** on documented, stateful programs. It does
+not establish multi-step planning, and it does not touch a GUI, a browser, or an environment whose
+documentation is absent. Those remain the open work, and the first of them is now testable in the same
+harness rather than in prose.

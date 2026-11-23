@@ -1,0 +1,18 @@
+{
+ "conditions": {
+  "name_already_taken": {
+   "code": "NAME_ALREADY_TAKEN",
+   "predicate": {
+    "because": "NAME_ALREADY_TAKEN",
+    "property": "unique",
+    "test": "is_absent"
+   },
+   "refusals": 1,
+   "seen_at": [],
+   "values": [
+    "alpha"
+   ]
+  }
+ },
+ "schema": "PROJECT_BRAIN_STATED_PRECONDITION_V1"
+}
