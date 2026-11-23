@@ -1,0 +1,18 @@
+#!/usr/bin/env python3
+import sys
+PAGES = {
+    "": "linear - Linear CLI for issues, projects, and teams\n\nUSAGE:\n  linear <command> [flags]\n\nAVAILABLE COMMANDS:\n  issue               Manage issue\n  project             Manage project\n  team                Manage team\n\nFLAGS:\n  -h, --help          Show help for a command\n\nUse \"linear <command> --help\" for more information.",
+    "issue": "Manage issue\n\nUSAGE:\n  linear issue <command> [flags]\n\nAVAILABLE COMMANDS:\n  list                List issues\n  create              Create an issue\n  update              Update an issue\n\nFLAGS:\n  -h, --help          Show help for a command\n\nUse \"linear <command> --help\" for more information.",
+    "issue list": "List issues\n\nUSAGE:\n  linear issue list [flags]\n\nFLAGS:\n  --team <string>\tFilter by team\n  --project <string>\tFilter by project\n  --status <enum>\tFilter by issue status (values: Todo, In Progress, Done, Cancelled)\n  --assignee <string>\tFilter by assignee username\n  --limit <int>\tMaximum number of issues\n\n  -h, --help\tShow help for this command\n\nEXAMPLES:\n  linear issue list --team Platform",
+    "issue create": "Create an issue\n\nUSAGE:\n  linear issue create [flags]\n\nFLAGS:\n  --team <string> (required)\tTeam name\n  --title <string> (required)\tIssue title\n  --description <string>\tIssue description\n  --priority <int>\tPriority level (0=none, 1=urgent, 2=high)\n  --assignee <string>\tUsername to assign\n\n  -h, --help\tShow help for this command\n\nEXAMPLES:\n  linear issue create --team Platform --title 'Add retries'",
+    "issue update": "Update an issue\n\nUSAGE:\n  linear issue update [flags]\n\nFLAGS:\n  --id <string> (required)\tIssue identifier\n  --status <enum>\tNew status (values: Todo, In Progress, Done, Cancelled)\n  --assignee <string>\tNew assignee username\n  --title <string>\tNew title\n\n  -h, --help\tShow help for this command\n\nEXAMPLES:\n  linear issue update --id ISS-42 --status Done",
+    "project": "Manage project\n\nUSAGE:\n  linear project <command> [flags]\n\nAVAILABLE COMMANDS:\n  list                List projects\n  view                View a project\n\nFLAGS:\n  -h, --help          Show help for a command\n\nUse \"linear <command> --help\" for more information.",
+    "project list": "List projects\n\nUSAGE:\n  linear project list [flags]\n\nFLAGS:\n  --team <string>\tFilter by team\n  --status <enum>\tFilter by project status (values: Planned, Started, Done)\n\n  -h, --help\tShow help for this command\n\nEXAMPLES:\n  linear project list",
+    "project view": "View a project\n\nUSAGE:\n  linear project view [flags]\n\nFLAGS:\n  --name <string> (required)\tProject name\n\n  -h, --help\tShow help for this command\n\nEXAMPLES:\n  linear project view --name 'Q1 Migration'",
+    "team": "Manage team\n\nUSAGE:\n  linear team <command> [flags]\n\nAVAILABLE COMMANDS:\n  list                List teams\n\nFLAGS:\n  -h, --help          Show help for a command\n\nUse \"linear <command> --help\" for more information.",
+    "team list": "List teams\n\nUSAGE:\n  linear team list [flags]\n\nFLAGS:\n\n  -h, --help\tShow help for this command\n\nEXAMPLES:\n  linear team list",
+}
+
+args = [x for x in sys.argv[1:] if x not in ("--help", "-h")]
+key = " ".join(args)
+sys.stdout.write(PAGES.get(key) or PAGES.get(args[0] if args else "", PAGES[""]))

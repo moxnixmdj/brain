@@ -24,6 +24,13 @@ import pytest
 
 from canonical.runtime import require_survey_plan_v1 as R
 
+# The bench programs live in this repository, under `programs/`. They are the documents these
+# tests read, and a test that cannot be re-run on a clean checkout is not evidence: before this,
+# eight of them read a scratch directory and silently skipped -- or failed -- anywhere else.
+_HERE = pathlib.Path(__file__).resolve()
+CB_BIN = _HERE.parent / "programs" / "bin"
+CB_BIN3 = _HERE.parent / "programs" / "bin3"
+
 MODULE = pathlib.Path(R.__file__)
 
 # Tool and flag names that must never appear as data in the mechanism. This is the A1 list,
@@ -444,7 +451,7 @@ def test_the_same_request_plans_the_same_way_twice():
     state the parent pages a demonstration is looked up through, and a test that rebuilds the
     path by hand tests the fixture instead of the planner.
     """
-    binary = "/tmp/cb/bin/alertmgr"
+    binary = str(CB_BIN / "alertmgr")
     if not pathlib.Path(binary).exists():
         pytest.skip("the benchmark's alertmgr page is not on this machine")
     requirement = R.require(
@@ -496,7 +503,7 @@ def test_a_flag_the_document_calls_required_is_the_reason_to_prefer_a_reading():
     complete, and the document says it is not this command. Before this, the flagless reading
     was emitted and the world refused it.
     """
-    binary = "/tmp/cb/bin/flowctl"
+    binary = str(CB_BIN / "flowctl")
     if not pathlib.Path(binary).exists():
         pytest.skip("the benchmark's flowctl page is not on this machine")
     result = R.require_survey_plan(
@@ -516,7 +523,7 @@ def test_the_required_marker_is_read_from_the_document_and_not_dropped():
 
 def test_a_sequence_never_runs_the_same_command_twice():
     """Two steps that plan to one argv said one thing twice; running it twice does nothing."""
-    binary = "/tmp/cb/bin/notion"
+    binary = str(CB_BIN / "notion")
     if not pathlib.Path(binary).exists():
         pytest.skip("the benchmark's notion page is not on this machine")
     result = R.require_survey_plan_sequence(
@@ -526,7 +533,7 @@ def test_a_sequence_never_runs_the_same_command_twice():
 
 def test_a_step_with_no_operation_is_not_emitted_as_a_command():
     """A bare value is not a command: `set the owner to "devops"` is not `devops`."""
-    binary = "/tmp/cb/bin/flowctl"
+    binary = str(CB_BIN / "flowctl")
     if not pathlib.Path(binary).exists():
         pytest.skip("the benchmark's flowctl page is not on this machine")
     result = R.require_survey_plan_sequence(
@@ -564,7 +571,7 @@ def test_naming_a_thing_outranks_mentioning_it():
     request did not ask for.
     """
     import shutil
-    exe = "/tmp/cb/bin/linear"
+    exe = str(CB_BIN / "linear")
     if not shutil.which(exe) and not pathlib.Path(exe).exists():
         pytest.skip("the linear program is not on this host")
     request = "List all projects in the Linear workspace."
@@ -584,7 +591,7 @@ def test_completeness_is_decided_both_ways_and_means_the_pages_own_requirements(
     """
     # a page with no required flags: a command that names the page is complete
     request = "List all projects in the Linear workspace."
-    out = R.require_survey_plan("/tmp/cb/bin/linear", request, probes=16)
+    out = R.require_survey_plan(str(CB_BIN / "linear"), request, probes=16)
     assert out["plans"][0]["argv"][1:] == ["project", "list"], out["plans"][0]["argv"]
     assert out["plans"][0]["missing_required"] == []
     assert out["plans"][0]["complete"] is True
@@ -593,7 +600,7 @@ def test_completeness_is_decided_both_ways_and_means_the_pages_own_requirements(
     created = ("Create a new workflow named \"deploy-staging\" using the flowctl tool.\n"
                "The workflow should have two steps: a \"build\" step with action \"run_pipeline\"\n"
                "and an \"approve\" step with action \"gate\".")
-    plans = R.require_survey_plan("/tmp/cb/bin/flowctl", created, probes=16)["plans"]
+    plans = R.require_survey_plan(str(CB_BIN / "flowctl"), created, probes=16)["plans"]
     assert any(p["complete"] for p in plans), [p.get("missing_required") for p in plans]
     assert any(p["missing_required"] for p in plans), "an incomplete reading must name what it lacks"
 
@@ -609,7 +616,7 @@ def test_the_scan_is_not_steered_by_the_guess_it_is_meant_to_test():
     came back named `--channel alice`, a flag the request never mentions.
     """
     request = ('Send a direct message to the Slack user "alice" with the text: "on my way".')
-    out = R.require_survey_plan("/tmp/cb/bin/slack", request, probes=14)
+    out = R.require_survey_plan(str(CB_BIN / "slack"), request, probes=14)
     assert out["path"] == ["dm", "send"], out["path"]
     # The route is what this test is about. Binding `alice` to `--user` is a separate matter --
     # the flag/value pairing -- and ordering demonstrations by how much shape they state was
@@ -618,7 +625,7 @@ def test_the_scan_is_not_steered_by_the_guess_it_is_meant_to_test():
         [p["argv"] for p in out["plans"]]
 
     # and the sequence path -- what the agent actually runs -- agrees with the single one
-    seq = R.require_survey_plan_sequence("/tmp/cb/bin/slack", request, probes=14)
+    seq = R.require_survey_plan_sequence(str(CB_BIN / "slack"), request, probes=14)
     assert seq["commands"], seq["steps"]
     assert seq["commands"][0][1:3] == ["dm", "send"], seq["commands"][0]
 
@@ -900,7 +907,7 @@ def test_a_structured_argument_is_filled_from_prose_inside_the_documents_own_sha
     request = ('Using the datapipe tool, register a new PostgreSQL data source named "analytics-db" '
                'with the connection config: host "db.analytics.internal", port 5432, '
                'database "analytics".')
-    out = R.require_survey_plan("/tmp/cb/bin/datapipe", request, probes=14)
+    out = R.require_survey_plan(str(CB_BIN / "datapipe"), request, probes=14)
     argv = out["plans"][0]["argv"][1:]
     assert argv[:2] == ["source", "connect"], argv
     config = argv[argv.index("--config") + 1]
@@ -922,7 +929,7 @@ def test_completeness_and_coverage_are_two_different_statements():
     almost nothing, which is why the second statement earns its place.
     """
     out = R.require_survey_plan(
-        "/tmp/cb/bin/meshctl",
+        str(CB_BIN / "meshctl"),
         'Using the meshctl tool, configure a canary deployment for "user-service": '
         'Route 90% of traffic to v1 and 10% to v2.', probes=14)
     candidate = out["plans"][0]
@@ -933,7 +940,7 @@ def test_completeness_and_coverage_are_two_different_statements():
     # cb-016's shape: a request naming an object this command has no place for is covered=False
     # and *says which object* -- the report is the point, not just the flag
     dropped = R.require_survey_plan(
-        "/tmp/cb/bin/jira",
+        str(CB_BIN / "jira"),
         """Create a new Jira issue in the "INFRA" project with summary "Set up
 centralized log aggregation with Loki", type "Task", priority "High",
 and assign it to "ops-bob".
@@ -967,7 +974,7 @@ def test_an_ordinal_that_opens_a_clause_is_not_a_count():
 
     # and the task that exposed it no longer manufactures a namespace
     plan = R.require_survey_plan_sequence(
-        "/tmp/cb/bin/kforge",
+        str(CB_BIN / "kforge"),
         'Using the kforge CLI, deploy the latest build artifact for the "web-platform" service to'
         ' the staging environment. First, list available artifacts to find the most recent'
         ' successful build. Then trigger a deployment pipeline for staging using that artifact.',
@@ -992,7 +999,7 @@ def test_a_second_value_of_one_field_repeats_its_flag():
     written four times wrong).
     """
     plan = R.require_survey_plan_sequence(
-        "/tmp/cb/bin/gh",
+        str(CB_BIN / "gh"),
         'Find all open GitHub issues in "acme-corp/web-platform" that have the label'
         ' "priority:critical" or "priority:high".',
         probes=14)
@@ -1025,7 +1032,7 @@ def test_a_request_that_states_a_structure_names_that_argument():
     shape has named that argument; emitting it supplies nothing the request did not state.
     """
     plan = R.require_survey_plan_sequence(
-        "/tmp/cb/bin/datapipe",
+        str(CB_BIN / "datapipe"),
         'Using the datapipe tool, build a data pipeline:'
         ' 1. Create an S3 sink named "analytics-lake" with config'
         ' {"bucket": "analytics-output", "prefix": "daily/"}.',
@@ -1057,7 +1064,7 @@ def test_a_bracketed_required_marker_is_read_like_a_parenthesised_one():
     # A request that names only the zone cannot form the command: `--name` is required and the
     # request supplies no label, so the best plan must say so rather than certify it.
     partial = R.require_survey_plan(
-        "/tmp/cb/bin3/zonectl",
+        str(CB_BIN3 / "zonectl"),
         'Remove the record from the zone example.org', probes=14)
     first = partial["plans"][0]
     assert first["complete"] is False, first
@@ -1065,7 +1072,7 @@ def test_a_bracketed_required_marker_is_read_like_a_parenthesised_one():
 
     # and the flags themselves are known to be required
     import subprocess
-    page = subprocess.run(["/tmp/cb/bin3/zonectl", "record", "remove", "--help"],
+    page = subprocess.run([str(CB_BIN3 / "zonectl"), "record", "remove", "--help"],
                           capture_output=True, text=True).stdout
     options = {o["flag"]: o for o in R.parse_options(page)}
     assert options["--name"]["required"] is True, options["--name"]
@@ -1088,7 +1095,7 @@ def test_a_bare_word_the_example_also_writes_is_that_flags_value():
     on the page and in the request already.
     """
     out = R.require_survey_plan(
-        "/tmp/cb/bin3/zonectl",
+        str(CB_BIN3 / "zonectl"),
         'Remove the record www from the zone example.org', probes=14)
     argv = out["plans"][0]["argv"]
     assert "--name" in argv, argv

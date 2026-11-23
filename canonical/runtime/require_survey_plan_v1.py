@@ -782,6 +782,18 @@ def _node(argv: list[str], text: str, tool: str, title: str, summary: str,
             "bytes": len(text.encode("utf-8", "replace")), "children": []}
 
 
+def resolve_tool(tool: str) -> str:
+    """The program's absolute path, or the name unchanged when it is on PATH.
+
+    A path with a separator is located now, against the caller's directory; a bare name is left
+    for the probe to find on PATH, because that is how it was meant.
+    """
+    text = str(tool)
+    if os.sep in text or (os.altsep and os.altsep in text):
+        return os.path.abspath(text)
+    return text
+
+
 def survey(tool: str, *, want: Iterable[str] = (), probes: int = DEFAULT_PROBES,
            timeout: float = DEFAULT_DEADLINE, budget: int = DEFAULT_BUDGET,
            depth: int = 3, breadth_per_level: int = 4, visit: int = 12,
@@ -795,6 +807,12 @@ def survey(tool: str, *, want: Iterable[str] = (), probes: int = DEFAULT_PROBES,
     change the world, and this host proved that a `--help` can write a file. Nothing is
     persisted between calls -- this is a cost, not a store.
     """
+    # The program is located once, absolutely. Every probe runs in a throwaway directory, so a
+    # relative path names nothing there and the survey reads one page and reports that the
+    # program has no subcommands -- measured: `canonical/tests/programs/bin/flowctl` read 1 page
+    # and the same file by absolute path read 11. Resolving here costs one call and makes the
+    # reading independent of the caller's working directory.
+    tool = resolve_tool(tool)
     started = time.perf_counter()
     asked: list[dict[str, Any]] = []
     wanted = set(want)

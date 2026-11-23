@@ -1,0 +1,21 @@
+#!/usr/bin/env python3
+import sys
+PAGES = {
+    "": "slack - Slack CLI for managing channels, messages, direct messages, and users\n\nUSAGE:\n  slack <command> [flags]\n\nAVAILABLE COMMANDS:\n  channel             Manage channel\n  message             Manage message\n  dm                  Manage dm\n  search              Manage search\n  user                Manage user\n\nFLAGS:\n  -h, --help          Show help for a command\n\nUse \"slack <command> --help\" for more information.",
+    "channel": "Manage channel\n\nUSAGE:\n  slack channel <command> [flags]\n\nAVAILABLE COMMANDS:\n  list                List channels\n  info                Show channel information\n  message             List messages in a channel\n\nFLAGS:\n  -h, --help          Show help for a command\n\nUse \"slack <command> --help\" for more information.",
+    "channel list": "List channels\n\nUSAGE:\n  slack channel list [flags]\n\nFLAGS:\n  --limit <int>\tMaximum number of channels\n\n  -h, --help\tShow help for this command\n\nEXAMPLES:\n  slack channel list",
+    "channel info": "Show channel information\n\nUSAGE:\n  slack channel info [flags]\n\nFLAGS:\n  --channel <string> (required)\tChannel name\n\n  -h, --help\tShow help for this command\n\nEXAMPLES:\n  slack channel info --channel engineering",
+    "channel message": "List messages in a channel\n\nUSAGE:\n  slack channel message [flags]\n\nFLAGS:\n  --channel <string> (required)\tChannel name\n  --limit <int>\tMaximum number of messages\n\n  -h, --help\tShow help for this command\n\nEXAMPLES:\n  slack channel message --channel engineering --limit 10",
+    "message": "Manage message\n\nUSAGE:\n  slack message <command> [flags]\n\nAVAILABLE COMMANDS:\n  send                Post a message to a channel\n\nFLAGS:\n  -h, --help          Show help for a command\n\nUse \"slack <command> --help\" for more information.",
+    "message send": "Post a message to a channel\n\nUSAGE:\n  slack message send [flags]\n\nFLAGS:\n  --channel <string> (required)\tChannel name\n  --text <string> (required)\tMessage text content\n\n  -h, --help\tShow help for this command\n\nEXAMPLES:\n  slack message send --channel engineering --text 'Deploy complete'",
+    "dm": "Manage dm\n\nUSAGE:\n  slack dm <command> [flags]\n\nAVAILABLE COMMANDS:\n  send                Send a direct message to a user\n\nFLAGS:\n  -h, --help          Show help for a command\n\nUse \"slack <command> --help\" for more information.",
+    "dm send": "Send a direct message to a user\n\nUSAGE:\n  slack dm send [flags]\n\nFLAGS:\n  --user <string> (required)\tUsername of the recipient\n  --text <string> (required)\tMessage text content\n\n  -h, --help\tShow help for this command\n\nEXAMPLES:\n  slack dm send --user alice --text 'on my way'",
+    "search": "Manage search\n\nUSAGE:\n  slack search <command> [flags]\n\nAVAILABLE COMMANDS:\n  message             Search messages\n\nFLAGS:\n  -h, --help          Show help for a command\n\nUse \"slack <command> --help\" for more information.",
+    "search message": "Search messages\n\nUSAGE:\n  slack search message [flags]\n\nFLAGS:\n  --query <string> (required)\tSearch query\n  --channel <string>\tLimit to a channel\n\n  -h, --help\tShow help for this command\n\nEXAMPLES:\n  slack search message --query outage",
+    "user": "Manage user\n\nUSAGE:\n  slack user <command> [flags]\n\nAVAILABLE COMMANDS:\n  list                List users\n\nFLAGS:\n  -h, --help          Show help for a command\n\nUse \"slack <command> --help\" for more information.",
+    "user list": "List users\n\nUSAGE:\n  slack user list [flags]\n\nFLAGS:\n\n  -h, --help\tShow help for this command\n\nEXAMPLES:\n  slack user list",
+}
+
+args = [x for x in sys.argv[1:] if x not in ("--help", "-h")]
+key = " ".join(args)
+sys.stdout.write(PAGES.get(key) or PAGES.get(args[0] if args else "", PAGES[""]))

@@ -1,0 +1,19 @@
+#!/usr/bin/env python3
+import sys
+PAGES = {
+    "": "gh - GitHub CLI for issues, pull requests, and repositories\n\nUSAGE:\n  gh <command> [flags]\n\nAVAILABLE COMMANDS:\n  issue               Manage issue\n  pr                  Manage pull request\n  repo                Manage repository\n\nFLAGS:\n  -h, --help          Show help for a command\n\nUse \"gh <command> --help\" for more information.",
+    "issue": "Manage issue\n\nUSAGE:\n  gh issue <command> [flags]\n\nAVAILABLE COMMANDS:\n  list                List issues\n  create              Create a new issue in a repository\n  view                View an issue\n\nFLAGS:\n  -h, --help          Show help for a command\n\nUse \"gh <command> --help\" for more information.",
+    "issue list": "List issues\n\nUSAGE:\n  gh issue list [flags]\n\nFLAGS:\n  --repo <string> (required)\tRepository in owner/repo format\n  --state <enum>\tFilter by state (values: open, closed, all)\n  --label <string>\tFilter by label\n  --limit <int>\tMaximum number of issues\n\n  -h, --help\tShow help for this command\n\nEXAMPLES:\n  gh issue list --repo owner/repo --state open",
+    "issue create": "Create a new issue in a repository\n\nUSAGE:\n  gh issue create [flags]\n\nFLAGS:\n  --repo <string> (required)\tRepository in owner/repo format\n  --title <string> (required)\tIssue title\n  --body <string>\tIssue body text\n  --label <string>\tLabel to apply (can be repeated)\n  --assignee <string>\tUsername to assign\n\n  -h, --help\tShow help for this command\n\nEXAMPLES:\n  gh issue create --repo owner/repo --title 'Bug report' --body 'Details here'",
+    "issue view": "View an issue\n\nUSAGE:\n  gh issue view [flags]\n\nFLAGS:\n  --repo <string> (required)\tRepository in owner/repo format\n  --id <int> (required)\tIssue number\n\n  -h, --help\tShow help for this command\n\nEXAMPLES:\n  gh issue view --repo owner/repo --id 12",
+    "pr": "Manage pull request\n\nUSAGE:\n  gh pr <command> [flags]\n\nAVAILABLE COMMANDS:\n  list                List pull requests\n  create              Create a pull request\n\nFLAGS:\n  -h, --help          Show help for a command\n\nUse \"gh <command> --help\" for more information.",
+    "pr list": "List pull requests\n\nUSAGE:\n  gh pr list [flags]\n\nFLAGS:\n  --repo <string> (required)\tRepository in owner/repo format\n  --state <enum>\tFilter by state (values: open, closed, merged)\n\n  -h, --help\tShow help for this command\n\nEXAMPLES:\n  gh pr list --repo owner/repo --state open",
+    "pr create": "Create a pull request\n\nUSAGE:\n  gh pr create [flags]\n\nFLAGS:\n  --repo <string> (required)\tRepository in owner/repo format\n  --title <string> (required)\tPull request title\n  --body <string>\tPull request body\n  --base <string>\tBase branch\n\n  -h, --help\tShow help for this command\n\nEXAMPLES:\n  gh pr create --repo owner/repo --title 'Add tests'",
+    "repo": "Manage repository\n\nUSAGE:\n  gh repo <command> [flags]\n\nAVAILABLE COMMANDS:\n  list                List repositories\n  view                View a repository\n\nFLAGS:\n  -h, --help          Show help for a command\n\nUse \"gh <command> --help\" for more information.",
+    "repo list": "List repositories\n\nUSAGE:\n  gh repo list [flags]\n\nFLAGS:\n  --limit <int>\tMaximum number of repositories\n\n  -h, --help\tShow help for this command\n\nEXAMPLES:\n  gh repo list",
+    "repo view": "View a repository\n\nUSAGE:\n  gh repo view [flags]\n\nFLAGS:\n  --repo <string> (required)\tRepository in owner/repo format\n\n  -h, --help\tShow help for this command\n\nEXAMPLES:\n  gh repo view --repo owner/repo",
+}
+
+args = [x for x in sys.argv[1:] if x not in ("--help", "-h")]
+key = " ".join(args)
+sys.stdout.write(PAGES.get(key) or PAGES.get(args[0] if args else "", PAGES[""]))

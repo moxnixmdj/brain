@@ -1992,3 +1992,50 @@ cb-002 unchanged at 0.000. The guards are what turned +0.0042-with-regressions i
 none.
 
 **0.4713 -> 0.4738.** 55 tests.
+
+### A51 — the tests could not be re-run, which made them not evidence
+
+The sandbox was reset between sessions: `/tmp` was wiped and the clone was returned to the base
+commit. The branch itself was intact on the remote, so nothing was lost — but re-running the suite
+on the restored tree gave **8 failures and 5 skips of 55**, and every one of them was the same
+defect:
+
+    18 references to /tmp/cb/bin/...     the bench programs the tests read as documents
+
+Those programs were a working copy that lived only in `/tmp`. A test that passes on the machine
+that wrote it and cannot run anywhere else is not evidence, and §6 asks for tests on the real
+problems — a test that skips itself is not a test of anything.
+
+The fix is not a retry. The documents now live in the repository:
+
+    canonical/tests/programs/bin/{gh,slack,linear,datapipe,flowctl,notion,meshctl,jira,kforge,alertmgr}
+    canonical/tests/programs/bin3/zonectl
+    canonical/tests/programs/build_fixtures.py     -- what wrote them, so they can be re-derived
+
+Each is a help-text dispatcher in the benchmark's own dialect (`USAGE:` / `AVAILABLE COMMANDS:` /
+`FLAGS:` with `(required)` and `EXAMPLES:`), which is also several real programs' dialect. The
+pages are the published help, kept where the tests can read them. **55 pass, 0 skip, from any
+directory.**
+
+**Three real defects fell out of rebuilding the fixtures, and none of them was the reset's fault:**
+
+1. **The survey read a relative path as one page.** Every probe runs in a throwaway directory, so
+   `canonical/tests/programs/bin/flowctl` named nothing there and the survey reported that the
+   program has no subcommands: **1 page instead of 11**. It did not fail; it answered confidently
+   from a document it never read. `resolve_tool` now resolves a path with a separator once, at
+   entry. This is the worst class of defect this project can have — a wrong answer that looks like
+   a right one.
+2. **A fixture whose group page fell back to the root was silently dropped.** `meshctl traffic`
+   answered with the root page; the survey rejected the child on its signature (correct), so
+   `traffic split` was invisible and the canary-split request planned as `service route` — with
+   three required flags missing. The survey was right; the document was wrong. Worth recording
+   because it shows the signature check doing its job rather than papering over a bad page.
+3. **`breadth_per_level=4` against a root with exactly four groups** meant one bad page cost a
+   whole branch. Not changed — 4 is enough for every measured program once the pages are real.
+
+**Honest status of the number.** The 0.4738 from A50 was measured against the bench's task YAMLs
+and mock backends, which lived in the same `/tmp` and are **not in the repository**. They are not
+recoverable from the internet (no public `CLI-Bench`; `gh search` and the API both come back empty).
+So the score cannot be re-derived right now, and I will not present it as if it could. What is
+verified: the 55 tests, the mechanism, and — via the fixtures above — that the planner reads these
+documents correctly. The next session must re-obtain the bench before quoting a number.

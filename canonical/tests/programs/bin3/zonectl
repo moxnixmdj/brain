@@ -1,0 +1,89 @@
+#!/usr/bin/env python3
+"""zonectl -- DNS zone administration. Deliberately a different help style:
+GNU `--flag=VALUE` spellings, `Options:` lowercase heading, no USAGE line."""
+import sys
+
+PAGES = {
+"": """zonectl - administer DNS zones
+
+Usage summary is intentionally styled differently from other programs.
+
+Commands
+    zone        work with a zone
+    record      work with a record
+
+Options:
+    -h, --help  print help
+""",
+
+"zone": """work with a zone
+
+Commands
+    add         create a zone
+    delegate    hand a zone to another nameserver
+
+Options:
+    -h, --help  print help
+""",
+
+"zone add": """create a zone
+
+Creates a new authoritative zone.
+
+Options:
+    --origin=TEXT    zone origin, e.g. example.org      [required]
+    --ttl=INT        default TTL in seconds
+    -h, --help       print help
+
+Examples:
+    zonectl zone add --origin=example.org --ttl=3600
+""",
+
+"zone delegate": """hand a zone to another nameserver
+
+Options:
+    --origin=TEXT    zone origin                         [required]
+    --to=TEXT        nameserver to delegate to            [required]
+    -h, --help       print help
+
+Examples:
+    zonectl zone delegate --origin=example.org --to=ns1.example.net
+""",
+
+"record": """work with a record
+
+Commands
+    add         create a record
+    remove      delete a record
+
+Options:
+    -h, --help  print help
+""",
+
+"record add": """create a record
+
+Options:
+    --origin=TEXT    zone the record lives in              [required]
+    --name=TEXT      record label
+    --type=TEXT      record type, one of A, AAAA, CNAME, MX
+    --value=TEXT     record data                           [required]
+    -h, --help       print help
+
+Examples:
+    zonectl record add --origin=example.org --name=www --type=CNAME --value=example.org
+""",
+
+"record remove": """delete a record
+
+Options:
+    --origin=TEXT    zone the record lives in              [required]
+    --name=TEXT      record label                          [required]
+    -h, --help       print help
+
+Examples:
+    zonectl record remove --origin=example.org --name=www
+""",
+}
+argv = [a for a in sys.argv[1:] if a not in ("-h", "--help")]
+key = " ".join(argv)
+sys.stdout.write(PAGES.get(key, PAGES[""]))

@@ -1,0 +1,19 @@
+#!/usr/bin/env python3
+import sys
+PAGES = {
+    "": "flowctl - Workflow engine CLI for pipelines, gates, and runs\n\nUSAGE:\n  flowctl <command> [flags]\n\nAVAILABLE COMMANDS:\n  workflow            Manage workflow\n  gate                Manage gate\n  run                 Manage run\n\nFLAGS:\n  -h, --help          Show help for a command\n\nUse \"flowctl <command> --help\" for more information.",
+    "workflow": "Manage workflow\n\nUSAGE:\n  flowctl workflow <command> [flags]\n\nAVAILABLE COMMANDS:\n  create              Create a workflow\n  get                 Get a workflow\n  list                List workflows\n\nFLAGS:\n  -h, --help          Show help for a command\n\nUse \"flowctl <command> --help\" for more information.",
+    "workflow create": "Create a workflow\n\nUSAGE:\n  flowctl workflow create [flags]\n\nFLAGS:\n  --name <string> (required)\tWorkflow name (unique identifier)\n  --steps <json> (required)\tWorkflow steps as JSON array\n  --description <string>\tHuman-readable description\n\n  -h, --help\tShow help for this command\n\nEXAMPLES:\n  flowctl workflow create --name deploy-staging --steps '[{\"name\": \"build\"}]'",
+    "workflow get": "Get a workflow\n\nUSAGE:\n  flowctl workflow get [flags]\n\nFLAGS:\n  --id <string> (required)\tWorkflow ID or name\n\n  -h, --help\tShow help for this command\n\nEXAMPLES:\n  flowctl workflow get --id wf-001",
+    "workflow list": "List workflows\n\nUSAGE:\n  flowctl workflow list [flags]\n\nFLAGS:\n  --status <enum>\tFilter by status (values: active, paused, archived)\n\n  -h, --help\tShow help for this command\n\nEXAMPLES:\n  flowctl workflow list",
+    "gate": "Manage gate\n\nUSAGE:\n  flowctl gate <command> [flags]\n\nAVAILABLE COMMANDS:\n  approve             Approve a gate\n  reject              Reject a gate\n\nFLAGS:\n  -h, --help          Show help for a command\n\nUse \"flowctl <command> --help\" for more information.",
+    "gate approve": "Approve a gate\n\nUSAGE:\n  flowctl gate approve [flags]\n\nFLAGS:\n  --id <string> (required)\tGate ID\n  --comment <string>\tApproval comment\n\n  -h, --help\tShow help for this command\n\nEXAMPLES:\n  flowctl gate approve --id gate-001 --comment 'LGTM'",
+    "gate reject": "Reject a gate\n\nUSAGE:\n  flowctl gate reject [flags]\n\nFLAGS:\n  --id <string> (required)\tGate ID\n  --reason <string>\tRejection reason\n\n  -h, --help\tShow help for this command\n\nEXAMPLES:\n  flowctl gate reject --id gate-001 --reason 'failing tests'",
+    "run": "Manage run\n\nUSAGE:\n  flowctl run <command> [flags]\n\nAVAILABLE COMMANDS:\n  start               Start a run\n  status              Check run status\n\nFLAGS:\n  -h, --help          Show help for a command\n\nUse \"flowctl <command> --help\" for more information.",
+    "run start": "Start a run\n\nUSAGE:\n  flowctl run start [flags]\n\nFLAGS:\n  --workflow <string> (required)\tWorkflow name\n  --inputs <json>\tRun inputs as JSON object\n\n  -h, --help\tShow help for this command\n\nEXAMPLES:\n  flowctl run start --workflow deploy-staging",
+    "run status": "Check run status\n\nUSAGE:\n  flowctl run status [flags]\n\nFLAGS:\n  --id <string> (required)\tRun ID\n\n  -h, --help\tShow help for this command\n\nEXAMPLES:\n  flowctl run status --id run-001",
+}
+
+args = [x for x in sys.argv[1:] if x not in ("--help", "-h")]
+key = " ".join(args)
+sys.stdout.write(PAGES.get(key) or PAGES.get(args[0] if args else "", PAGES[""]))

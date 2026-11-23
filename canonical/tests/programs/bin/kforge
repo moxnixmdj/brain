@@ -1,0 +1,16 @@
+#!/usr/bin/env python3
+import sys
+PAGES = {
+    "": "kforge - Knowledge forge CLI for corpora, embeddings, and indexes\n\nUSAGE:\n  kforge <command> [flags]\n\nAVAILABLE COMMANDS:\n  corpus              Manage corpus\n  index               Manage index\n\nFLAGS:\n  -h, --help          Show help for a command\n\nUse \"kforge <command> --help\" for more information.",
+    "corpus": "Manage corpus\n\nUSAGE:\n  kforge corpus <command> [flags]\n\nAVAILABLE COMMANDS:\n  list                List corpora\n  create              Create a corpus\n  add                 Add documents to a corpus\n\nFLAGS:\n  -h, --help          Show help for a command\n\nUse \"kforge <command> --help\" for more information.",
+    "corpus list": "List corpora\n\nUSAGE:\n  kforge corpus list [flags]\n\nFLAGS:\n\n  -h, --help\tShow help for this command\n\nEXAMPLES:\n  kforge corpus list",
+    "corpus create": "Create a corpus\n\nUSAGE:\n  kforge corpus create [flags]\n\nFLAGS:\n  --name <string> (required)\tCorpus name\n  --description <string>\tCorpus description\n\n  -h, --help\tShow help for this command\n\nEXAMPLES:\n  kforge corpus create --name handbooks",
+    "corpus add": "Add documents to a corpus\n\nUSAGE:\n  kforge corpus add [flags]\n\nFLAGS:\n  --corpus <string> (required)\tCorpus name\n  --path <path> (required)\tPath to a document or directory\n\n  -h, --help\tShow help for this command\n\nEXAMPLES:\n  kforge corpus add --corpus handbooks --path ./docs",
+    "index": "Manage index\n\nUSAGE:\n  kforge index <command> [flags]\n\nAVAILABLE COMMANDS:\n  build               Build an index for a corpus\n  list                List indexes\n\nFLAGS:\n  -h, --help          Show help for a command\n\nUse \"kforge <command> --help\" for more information.",
+    "index build": "Build an index for a corpus\n\nUSAGE:\n  kforge index build [flags]\n\nFLAGS:\n  --corpus <string> (required)\tCorpus name\n  --dimensions <int>\tEmbedding dimensions\n\n  -h, --help\tShow help for this command\n\nEXAMPLES:\n  kforge index build --corpus handbooks",
+    "index list": "List indexes\n\nUSAGE:\n  kforge index list [flags]\n\nFLAGS:\n\n  -h, --help\tShow help for this command\n\nEXAMPLES:\n  kforge index list",
+}
+
+args = [x for x in sys.argv[1:] if x not in ("--help", "-h")]
+key = " ".join(args)
+sys.stdout.write(PAGES.get(key) or PAGES.get(args[0] if args else "", PAGES[""]))
