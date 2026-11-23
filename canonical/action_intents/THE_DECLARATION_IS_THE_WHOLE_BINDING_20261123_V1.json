@@ -60,7 +60,7 @@
   "falsification_condition": "if reading the declaration had not moved doors on programs whose help text was already parsed, the hypothesis that the unknown is a reading defect would be false; measured, doors moved 33 -> 57 with no program down, and the one program that documents itself most heavily moved 0 -> 24",
   "generic_repair_from_single_probe": true,
   "governance_change": null,
-  "highest_leverage_now": "read the declaration for the SLOT ROLE (input/output), because `-in infile  input file` and `-out outfile  output file` are two lines of one help text and only the second was being read",
+  "highest_leverage_now": true,
   "honest_limits": [
     "the remaining 676 unbound operations on the 20-program fleet are 654 DROVE_IT_WRONG and 14 SLOT_UNSUPPLIED; openssl's largest remaining cluster is a real PRECONDITION (an offset into a DER stream, a certificate to verify against), which binding cannot supply",
     "the composition that reads an input flag AND an output flag pays only with a type-matched seed: printable text moved nothing, a real DER certificate moved openssl 12 -> 14, so the standard trial understates it",
