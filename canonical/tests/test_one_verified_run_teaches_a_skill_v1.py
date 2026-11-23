@@ -274,3 +274,36 @@ def test_a_taught_skill_outranks_a_derivation():
         state = _EXP._load()
         state["procedures"] = json.loads(saved)
         _EXP._save(state)
+
+
+# --------------------------------------------------------------------------------------------
+# WHAT THE PROGRAM SAYS ABOUT ITSELF EXPLAINS THE REQUEST.
+#
+# A third way a sentence can be answered that nothing had to teach: the derivation names the
+# program, the program runs, and its own `--help` contains the word the sentence used.
+# --------------------------------------------------------------------------------------------
+def test_a_programs_own_documentation_explains_the_words_of_the_request():
+    """Measured 2026-11-22: `date --help` says "Display date and time" — so "the time" is date's word.
+
+    Nothing was taught, nothing was stored: the request "use date to tell the time" answered with the
+    real clock, and the count matched. The alternative was refusing a request the machine can plainly
+    answer because `shell.command.run`'s keyword list is about shells rather than about time.
+    """
+    from canonical.runtime import machine_purpose_index_v1 as machine
+    derived = machine.derive_argv("use date to tell the time")
+    assert derived.get("ok") is True, derived.get("reason")
+    assert derived["argv"] == ["date"]
+    documentation = str(derived.get("documentation") or "").lower()
+    assert "time" in documentation, "date's own help text is the evidence this test relies on"
+
+
+def test_the_derived_answer_is_the_real_clock():
+    from canonical.runtime import live_brain_route_admission_v1 as ra
+    result = ra.solve({"task_id": "clock", "goal": "use date to tell the time"})
+    assert result.get("pass") is True, result.get("status")
+    execution = result["execution"]
+    step = execution[0] if isinstance(execution, list) else execution
+    assert step["argv"] == ["date"]
+    # The program printed a real timestamp: the current year is in it.
+    import datetime
+    assert str(datetime.datetime.now().year) in step["stdout"]

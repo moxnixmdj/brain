@@ -218,8 +218,18 @@ def derive_argv(sentence: str) -> dict[str, Any]:
             # The program's own behaviour decides whether it needed an argument: `git` bare exits 1,
             # `ls` bare exits 0 and prints. Nothing is predicted.
             if proc.returncode == 0 and proc.stdout.strip():
+                # The program's own documentation travels with the result, for the same reason the
+                # derivation above returns an `answer`: the words a program uses about itself are
+                # evidence about what it did. "use date to tell the time" is explained by
+                # `date --help`'s "Display date and time".
+                try:
+                    _h = subprocess.run([program, "--help"], capture_output=True, timeout=20)
+                    _help = (_h.stdout or b"").decode("utf-8", "replace")[:20000]
+                except Exception:  # noqa: BLE001 - a program that cannot be asked explains nothing
+                    _help = ""
                 return {"schema": SCHEMA, "ok": True, "program": program, "argv": bare,
                         "answer": proc.stdout.decode("utf-8", "replace").splitlines()[0][:400],
+                        "documentation": _help,
                         "authority": "THE_PROGRAM_ANSWERED_WITH_NO_ARGUMENT",
                         "evidence": "ran " + " ".join(bare) + ": exit 0, "
                                     + str(len(proc.stdout)) + " bytes on stdout"}

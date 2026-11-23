@@ -3781,3 +3781,84 @@ route accept a derived bare command is the next piece of work, and it is a diffe
 The description→program case is still open: "list the files in this folder" names no program at all,
 and nothing above helps it. What does help is that a person would say `using ls` if they wanted to be
 specific — and the machine now understands that sentence.
+
+---
+
+## §A78 — THE PROGRAM'S OWN TEXT EXPLAINS THE REQUEST (2026-11-22)
+
+A77 made the machine bind a bare command for a sentence naming a program as an instrument, and then
+that sentence still failed one gate later. This round closed that gate, and in doing so found the
+cleanest answer yet to "where does a machine get the right to act on a sentence it was never taught".
+
+**Measured before the fix:**
+
+```
+use date to tell the time  -> FAIL_CLOSED__MOST_OF_THE_REQUEST_IS_NOT_EXPLAINED_BY_CAPABILITY
+                              :shell.command.run:explained=date:unexplained=use,time
+```
+
+The row had bound `['date']`, `date` is on this machine, and the command works. It was refused
+because **"time" was not in `shell.command.run`'s word list** — a list about shells and processes.
+The row was being asked to justify a request by a vocabulary that has nothing to do with what the
+request is about.
+
+**The evidence was already on the machine.** `date --help` says:
+
+```
+Display date and time in the given FORMAT.
+```
+
+*Time* is `date`'s own word for what it does. This is the same authority the existing
+derivation-vocabulary rule already trusts — the machine's documentation of itself — read from
+`--help` rather than from the answer to a query. The derivation now carries the program's help text
+back with its result, and the word-accounting gate reads it. Nothing is added unless the program's
+own text contains the word, and the sentence is never re-parsed to find it.
+
+### The defect that made the first attempt do nothing
+
+The first fix was placed in an `elif` branch for a derivation that returned
+`NO_UNIVERSAL_QUERY_ANSWERS_THE_WORDS`. That branch never ran, because after A77 the derivation
+**succeeds** (`ok: True`, `argv: ['date']`). The code was right and unreachable. Confirmed by
+printing the derivation's own result rather than reasoning about which branch should have fired:
+
+```
+{'ok': True, 'reason': None, 'program': 'date'}
+```
+
+The documentation is now carried on the success path, where the derivation actually goes.
+
+### The result
+
+| sentence | memory | result |
+|---|---|---|
+| `use date to tell the time` | **empty** | **PASS**, `['date']`, `Mon Nov 23 12:47:42 UTC 2026` |
+
+The printed time matched `date -u` to the second. A sentence that names no command, with nothing
+taught and nothing stored, was answered correctly because the program itself says it does that.
+
+So the machine now has **three honest ways to reach a command**, and they are distinguishable:
+
+| how | evidence | example |
+|---|---|---|
+| the sentence states it | the sentence | `wc -l README.md` |
+| a verified run taught it | a receipt for a run that passed | `use wc on AGENTS.md` → `wc -l …` |
+| the program documents it | the program's own `--help` | `use date to tell the time` → `date` |
+
+None of the three guesses. Each can be read back out of the machine.
+
+### Verified
+
+| check | result |
+|---|---|
+| suite `test_one_verified_run_teaches_a_skill_v1.py` | **24 passed** (was 22) |
+| 7 suites together | **138 passed, 1 failed** (was 128/1) |
+| the 1 failure | `test_every_unexpressible_task_is_ambiguous_not_routeless` — **re-run at HEAD: identical, pre-existing** |
+| `tasks_v1` / `unseen_program_v1` | **13/13** / **6/6** |
+| the printed clock | matches `date -u` to the second |
+
+### Still open
+
+`list the files using ls` binds `['ls']` and still fails `STATED_ANSWER_NOT_PROVIDED`. That is the
+pre-execution answer gate asking the row what it will have TOLD the caller, and for a directory
+listing it has no answer of the shape it expects. Different gate, different reason; it is the next
+one to measure rather than guess at.

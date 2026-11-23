@@ -2744,6 +2744,30 @@ def request_words_explained_by_row(sentence: str, admission: Mapping[str, Any], 
             vocabulary.add(_word_stem(token))
         for token in _WORD_RE.findall(str(_derived.get("query") or "").lower()):
             vocabulary.add(_word_stem(token))
+        # THE PROGRAM'S OWN DOCUMENTATION, WHEN THE DERIVATION CARRIED IT. Read for the same reason
+        # as the answer above -- the words a program uses about itself are evidence about what it did
+        # -- and only when the derivation itself returned them, never by asking again here.
+        for token in _WORD_RE.findall(str(_derived.get("documentation") or "").lower()):
+            vocabulary.add(_word_stem(token))
+    elif _derived.get("reason") == "NO_UNIVERSAL_QUERY_ANSWERS_THE_WORDS" and _derived.get("program"):
+        # A PROGRAM THE DERIVATION NAMED, WHOSE OWN TEXT EXPLAINS THE REQUEST.
+        #
+        # Measured 2026-11-22: "use date to tell the time" derived bare `['date']` -- a command that
+        # works, exit 0, prints the time -- and was then refused because "time" was not in
+        # `shell.command.run`'s vocabulary. But `date --help` says "Display date and time in the given
+        # FORMAT": the word the sentence asked for is the program's own word for what it does. This is
+        # the same authority the rule above already trusts -- the machine's documentation of itself --
+        # read from `--help` instead of from the answer. Nothing is added unless the program's own text
+        # contains the word, and only the program's documentation is read, never the sentence again.
+        try:
+            import subprocess as _sp
+            _help = _sp.run([str(_derived["program"]), "--help"], capture_output=True, timeout=20)
+            _help_text = (_help.stdout or b"").decode("utf-8", "replace")[:20000]
+        except Exception:  # noqa: BLE001 - a program that cannot be asked explains nothing
+            _help_text = ""
+        vocabulary.add(_word_stem(str(_derived.get("program") or "").lower()))
+        for token in _WORD_RE.findall(_help_text.lower()):
+            vocabulary.add(_word_stem(token))
     bound_as_data = _words_in(inputs if isinstance(inputs, Mapping) else {}, set())
     explained: list[str] = []
     unexplained: list[str] = []
