@@ -131,3 +131,24 @@ Honest statement: **the §6-class hard tests are NOT done.** This document is th
 - The plan rule remains instance-invariant only for goals whose plans do not depend on a specific layout; grid-world-style goals refuse honestly. The generic plan rule is admitted on identical-shape instances only (existing tests). No fresh-family admission of a generic plan rule is claimed yet.
 - Priors are saved unconditionally but are only re-verified for the root; deeper rows are always re-derived by the scan. This is the honest trade, not a gap in the implementation.
 - Next §5 bottleneck: carry the same discipline to a genuinely new environment class — an OSWorld-shaped surface where the local guide is XML/DOM/GUI rather than Markdown docs — and measure the local tier there rather than assuming it. Priors remain root-only verified by design; deeper rows are always re-derived by the scan.
+
+## 6. The archive (.tar.gz) goal — honest status, 2026-11-23
+
+A new task surfaced after the above verdict: an `.tar.gz` goal ("archive data.txt into data.tar.gz") was narrowed by the same machinery and found nothing to act with. The goal was never reachable: no goal state was ever observed, although tar (2nd of 8 programs by narrowing) can do it.
+
+What was false or missing, and what is now fixed:
+
+- **False: the file existence check was the success condition.** `tar --append --file data.tar.gz data.txt` creates a plain, uncompressed tar named data.tar.gz and the old action loop declared it success. An archive with the right name is not an archive. The action now holds itself to the goal's own predicate over the observed tree (the same predicate the scan applies), and only then returns success. The recorded recipe is the exact argv that made the predicate true.
+- **Missing: a file-valued flag whose manual line carries no output-ish keyword was dropped**, so `--file` — whose manual says `=ARCHIVE use archive file or device ARCHIVE` — never appeared in `output_flags`, and no shape like `[tar, --create, --file, data.tar.gz, data.txt]` was ever generated. `--file` now follows the manual for the argument family itself.
+- **Missing: goal-flag and output-flag combinations.** The shapes that answered the goal (create an archive, with an auto-compress filter, and name the archive) needed three flags in one argv; the generator only built one goal flag with one output flag. It now combines each output flag with all single and pair combinations of goal flags, both manual-derived. `tar --auto-compress --create --file data.tar.gz data.txt` is generated and is the one that works.
+- **The predicate itself is .tar.gz-exact** (this turn's fix): the archive must open as gz, contain the source file by basename, and hold its bytes exactly. Plain (uncompressed) tar named `.tar.gz`, a gz archive holding the wrong bytes, and a gz archive holding the source under another name are all refused.
+
+Measured, not claimed:
+- Cold run: `archive data.txt into data.tar.gz` → plan `["run_tar"]`, plan_length 1, `act` status PASS, reached True, goal_states_observed 24, `status` PASS, `pass` True, `outcome` VERIFIED_NOT_PERSISTED (admit REFUSED — no fresh instances offered, correctly not persisted). Recipe recorded: `[tar, --auto-compress, --create, --file, data.tar.gz, {input}]`.
+- Two honest tests added (`ArchiveGoalTests`): the predicate refuses uncompressed tar / wrong bytes / wrong name, and `run_tar` reaches the verified goal with a recipe naming the archive.
+- Tests: AskingTests (7), EnvironmentTests (15), test_perfect_algorithm_computer_env_v1 (5) — all OK. test_computer_env_v1 82 tests: 3 failures, all pre-existing (confirmed identical with these edits stashed) — the explore channel's `FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT`.
+
+Not done, honestly:
+- No fresh-family admission for the archive rule; the receipt is VERIFIED_NOT_PERSISTED. No rule is admitted.
+- The scan takes ~46 s (budget 150, 27 states, 270 transitions) dominated by the cheap-but-numerous failed action attempts; this is the cost of learning without hand-written stripes, not a defect.
+- The narrowing still offers junk programs (dpkg-architecture, ld.bfd) above tar; the narrowing is limit-8 and manual-word-derived, not a scored relevance model. This is pre-existing and honest.
