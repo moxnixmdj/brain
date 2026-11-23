@@ -6858,3 +6858,70 @@ says which of those two situations the caller is in instead of implying the bett
     VERIFIED   the honesty test fails when the fix is reverted
     VERIFIED   170 passed, 2 skipped across eleven suites
     BOUNDARY   no real-world program in the sample was decided; this is a narrow, honest mechanism
+
+## §A120 — refuse, or ask? The literature had already answered, and the answer was "ask"
+
+### The boundary that prompted the search
+
+§A119 left this: every real-world program in the sample — config files, environment variables, stdin, HTTP —
+came back `THIS_WALK_COULD_NOT_DECIDE`. Honest, and useless.
+
+### What the frontier said
+
+    EnvTrustBench (arXiv 2605.08828)  the defect: treating an observed environment-facing claim as sufficient
+                                      ground for action "without resolving it against available current
+                                      evidence" -- an EVIDENCE-GROUNDING DEFECT
+    EnvProbe (arXiv 2606.31422)       the remedy: query the one belief field before acting, pay one interaction
+                                      step
+
+Neither paper is about constant propagation, and both bear directly on the decision this project had just made.
+A refusal to decide is not neutral: it is the same failure as trusting stale evidence, wearing caution's clothes.
+
+### The build, and the rule it has to obey
+
+`ask_the_world_v1.probe(expression, world=…)` runs the program's **imports**, then **one expression**, in a fresh
+interpreter, in the program's directory. Partial execution — the smallest possible piece of the program.
+
+    static   os.environ['A_NAME_THAT_CANNOT_EXIST_ZZ']   THIS_WALK_COULD_NOT_DECIDE
+    probed   os.environ['A_NAME_THAT_CANNOT_EXIST_ZZ']   DECIDED_FROM_PROBED_EVIDENCE, key_not_found
+
+**A probe may not change the world it measures** — §A112 in miniature. `open('x','w')`, `os.system`,
+`__import__`, `eval`, `exec` are all refused as `CALL_MAY_HAVE_AN_EFFECT`, and the test asserts the directory is
+byte-identical afterwards.
+
+### Three defects found by measuring, not by reading
+
+1. **The probe could not see the world.** The first guard allowed only pure builtins, so it refused
+   `os.path.exists`, `os.listdir` and `os.getcwd` — *the three things a probe exists to observe*. The probe could
+   not detect a changing world, so it could not detect staleness, which is EnvTrustBench's entire subject.
+   Fixed by separating **reads** (`exists`, `listdir`, `getcwd`, `getenv`, …) from **actions** (`open`, `system`,
+   `remove`, `mkdir`, …), with the action list taking precedence over any name collision.
+
+2. **A raised exception was thrown away.** `os.environ['NOPE']` raises when asked — the most useful answer
+   available — and the walk discarded it, then reported "undecidable". A raise is a proof the program dies here.
+
+3. **A side channel instead of an interface.** The walk read the prober's answer from `self.prober.last`, which a
+   callable object binds on a *different* object than the walk holds. The evidence was silently dropped. The
+   prober now returns its own record; an interface that depends on where a caller stores state is not one.
+
+### What a probed answer is, and is not
+
+    it is   evidence with an expression, a value, and a MOMENT
+    it is   recorded in the result, so the verdict says what it rested on
+    it is   never stored, never cached, never a constant in the walk
+
+The verdict names it: `DECIDED_FROM_PROBED_EVIDENCE` or `EVIDENCE_PROBED_NOTHING_PROVED`. `still_true()` re-asks
+the same question and reports whether the answer moved — tested by making a file appear and watching
+`changed: False → True`. That test is real: the same question, asked twice, in a world that changed between.
+
+`os.path.exists('flag.txt')` is not a fact about the world; it is a fact about the world **at the moment it was
+asked**, which is why the moment travels with it.
+
+### Verified / not verified
+
+    VERIFIED   the §A119 boundary closes: static refuses, probing decides, and the fault is named
+    VERIFIED   a probe cannot write to the world it measures (directory compared before and after)
+    VERIFIED   a raised exception becomes a proved fault rather than a discarded answer
+    VERIFIED   freshness is observable: unchanged -> False, file appears -> True
+    VERIFIED   176 passed, 2 skipped across twelve suites
+    UNPROVEN   whether probing a whole program's worth of unknowns is cheap enough to be worth it

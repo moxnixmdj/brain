@@ -163,6 +163,13 @@ class _Evaluator:
         self.guarded: int = 0
         #: Definitions seen so far, so a call can be inlined with its arguments bound.
         self.functions: dict[str, ast.AST] = {}
+        #: THE PROBE (§A120). A walk that cannot follow an effect can ASK THE WORLD instead of refusing -- but a
+        #: probed value is a claim about a MOMENT, so every probe is recorded with its expression, its value and
+        #: whether it raised, and it is never stored as knowledge.
+        self.prober: Any = None
+        self.probes: list[dict[str, Any]] = []
+        #: Import statements the program performed, so a probe can run them first.
+        self.imports: list[str] = []
 
     def _tick(self) -> None:
         self.steps += 1
@@ -238,6 +245,13 @@ class _Evaluator:
         if isinstance(node, ast.Subscript):
             container = self.value(node.value, state)
             index = self.value(node.slice, state)
+            if container is UNKNOWN and self.prober is not None:
+                # ASK THE WHOLE EXPRESSION, not its parts: a subscript on an unfollowable container is ONE
+                # question with ONE answer, and asking the container alone yields a non-literal that cannot be
+                # used -- which is why a raised KeyError was dropped while the walk reported "undecidable".
+                whole = self._ask_or_fault(node, state)
+                if whole is not UNKNOWN:
+                    return whole
             if container is UNKNOWN:
                 # THE DANGEROUS SILENCE. `os.environ["NOPE"]` will raise KeyError, and the walk has no idea
                 # what `os.environ` holds. Returning UNKNOWN with no note produced the verdict
@@ -260,6 +274,10 @@ class _Evaluator:
             except TypeError:
                 return UNKNOWN
         if isinstance(node, ast.Attribute):
+            if self.prober is not None:
+                whole = self._ask_or_fault(node, state)
+                if whole is not UNKNOWN:
+                    return whole
             # an attribute of anything is a value this walk does not model. Noted rather than silently
             # UNKNOWN, for the same reason as the subscript above.
             self.unknowns.append("ATTRIBUTE_NOT_MODELLED line %s" % getattr(node, "lineno", "?"))
@@ -326,6 +344,44 @@ class _Evaluator:
             return UNKNOWN
         # anything else (comprehensions, awaits, yields) is not followed
         return UNKNOWN
+
+    def _ask_or_fault(self, node: ast.AST, state: _State) -> Any:
+        """Probe ONE expression; a RAISED exception is the strongest answer there is.
+
+        `os.environ["NOPE"]` raises KeyError when asked. That is not a failed question -- it is the answer, and
+        the most useful one this module can produce: the program dies here. Discarding it was a real defect:
+        measured 2026-11-23, the walk asked, received `raised: True`, and went on to report "undecidable".
+
+        EnvProbe (arXiv 2606.31422) is the operator: query the one belief field before acting, pay one step.
+        EnvTrustBench (arXiv 2605.08828) is the reason every answer carries its moment: an evidence-grounding
+        defect is treating an observed claim as sufficient ground without resolving it against current evidence,
+        so a probe result is EVIDENCE with a timestamp, never a constant and never stored.
+        """
+        if self.prober is None:
+            return UNKNOWN
+        try:
+            expression = ast.unparse(node)
+        except Exception:
+            return UNKNOWN
+        if not expression or len(expression) > 200:
+            return UNKNOWN
+        answer = self.prober(expression)
+        record = answer if isinstance(answer, dict) else None
+        if record is not None:
+            answer = None if record.get("raised") or not record.get("literal") else record.get("value")
+        self.probes.append({"expression": expression, "line": getattr(node, "lineno", None),
+                            "value": repr(answer)[:120] if answer is not None else None,
+                            "answered": answer is not None,
+                            "raised": bool(record and record.get("raised")),
+                            "said": (record or {}).get("said")})
+        if record and record.get("raised"):
+            said = str(record.get("said") or "")
+            kind = ("key_not_found" if said.startswith("KeyError") else
+                    "index_out_of_range" if said.startswith("IndexError") else
+                    "zero_division" if said.startswith("ZeroDivisionError") else "probe_raised")
+            self._certain(kind, node, "PROBED: " + said[:160])
+            raise _Stop("PROBE_RAISED")
+        return UNKNOWN if answer is None else answer
 
     def _invalidate(self, node: ast.Call, state: _State) -> None:
         """A MUTATING OR UNMODELLED CALL MAKES PREVIOUSLY-KNOWN VALUES UNKNOWN.
@@ -465,6 +521,14 @@ class _Evaluator:
                 return getattr(target, func.attr)(*args)
             except Exception:
                 return UNKNOWN
+        # NO CALL MAY BE SILENTLY UNDECIDED, and this is the single point every undecided call reaches.
+        # Measured 2026-11-23, twice: `import os; print(os.getcwd())` first returned
+        # NO_FAULT_FOUND_IN_WHAT_COULD_BE_FOLLOWED -- the strongest claim from the weakest evidence -- and the
+        # first fix over-corrected by recording a refusal for EVERY call, turning `print(1+1)` into "could not
+        # decide". `print` is exempt because its value is `None`: decided, and harmless.
+        if not (isinstance(func, ast.Name) and func.id == "print"):
+            self.unknowns.append("CALL_VALUE_NOT_MODELLED line %s (%s)" % (
+                getattr(node, "lineno", "?"), getattr(func, "attr", getattr(func, "id", "?"))))
         return UNKNOWN
 
     # -- statements -----------------------------------------------------------------------------------
@@ -595,6 +659,18 @@ class _Evaluator:
         if isinstance(node, ast.Assert):
             self.value(node.test, state)
             return
+        if isinstance(node, ast.Import):
+            # REMEMBERED so a probe can run them first: `os.environ` means nothing in an interpreter where `os`
+            # was never imported, and a probe failing for that reason would be a FALSE refusal.
+            for alias in node.names:
+                self.imports.append("import %s%s" % (alias.name,
+                                                     " as %s" % alias.asname if alias.asname else ""))
+            return
+        if isinstance(node, ast.ImportFrom):
+            if node.module and not node.level:
+                self.imports.append("from %s import %s" % (node.module, ", ".join(
+                    alias.name + (" as %s" % alias.asname if alias.asname else "") for alias in node.names)))
+            return
         if isinstance(node, ast.Raise):
             self.value(node.exc, state)
             return
@@ -649,7 +725,7 @@ class _Evaluator:
         # attributes and subscripts are not tracked
 
 
-def evaluate(source: str) -> dict[str, Any]:
+def evaluate(source: str, *, prober: Any = None) -> dict[str, Any]:
     """Faults this program will certainly raise, decided from the literals it contains.
 
     Returns `certain` (faults the walk proved), `unknowns` (why parts could not be decided), and `covers`. An
@@ -662,6 +738,10 @@ def evaluate(source: str) -> dict[str, Any]:
         return {"schema": SCHEMA, "certain": [], "unknowns": ["SYNTAX_ERROR"],
                 "detail": str(broken)[:200], "verdict": "CANNOT_READ"}
     evaluator = _Evaluator()
+    # THE PROBE IS OPT-IN AND ITS ANSWERS ARE EVIDENCE, NOT CONSTANTS (§A120). With no prober the walk behaves
+    # exactly as before; with one, an expression it cannot follow is ASKED instead of refused, and every answer
+    # travels with the result together with the moment it was taken.
+    evaluator.prober = prober
     try:
         evaluator.block(tree.body, _State())
     except _Stop as stop:
@@ -671,7 +751,11 @@ def evaluate(source: str) -> dict[str, Any]:
         evaluator.unknowns.append("RECURSION_LIMIT")
 
     certain = evaluator.faults
-    if certain:
+    if evaluator.probes:
+        # EVIDENCE HAS A MOMENT. A verdict resting on a probe says so in the verdict itself, and the probes
+        # travel with the result. A caller that ignores them is ignoring a stated fact, not a hidden one.
+        verdict = "DECIDED_FROM_PROBED_EVIDENCE" if certain else "EVIDENCE_PROBED_NOTHING_PROVED"
+    elif certain:
         verdict = "THE_PROGRAM_WILL_RAISE"
     elif evaluator.unknowns:
         # ANYTHING THE WALK REFUSED MAKES "CLEAN" THE WRONG WORD, even when the rest was followed perfectly.
@@ -687,7 +771,7 @@ def evaluate(source: str) -> dict[str, Any]:
         # the verdict itself is cheaper than a caveat nobody reads.
         verdict = "NO_FAULT_FOUND_IN_WHAT_COULD_BE_FOLLOWED"
     return {"schema": SCHEMA, "certain": certain, "unknowns": evaluator.unknowns,
-            "steps": evaluator.steps, "verdict": verdict}
+            "steps": evaluator.steps, "probes": evaluator.probes, "verdict": verdict}
 
 
 def main(argv: list[str] | None = None) -> int:
