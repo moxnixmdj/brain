@@ -82,8 +82,12 @@ REFUSALS, ALL BY NAME
     REFUSE__NOT_A_PYTHON_ENVIRONMENT   no pyproject/setup/requirements evidence found
     REFUSE__GOAL_OUTSIDE_THE_CLOSED_CONTRACTS  the goal is not one of the declared contracts
     REFUSE__REQUIRES_PYTHON_NOT_MET_LOCALLY     the declared floor excludes this interpreter
-    REFUSE__NO_RUNNER_EXECUTED_CLEANLY          every candidate check command failed; the
-                                                environment will not be believed
+    REFUSE__NO_RUNNER_EXECUTED_CLEANLY          no candidate check command ran at all (no
+                                                runner, or it could not import/collect)
+    REFUSE__VERIFICATION_FAILED                 the suite RAN in the armed environment and
+                                                did not exit cleanly: a result about the
+                                                project, reported separately from any claim
+                                                about the environment
     REFUSE__VERIFICATION_FAILED                 the suite (or the check) does not pass;
                                                 nothing is cached, nothing is claimed
     REFUSE__DECLARATION_NOT_UNDERSTOOD          a declaration is not a plain registry
@@ -114,6 +118,7 @@ import json
 import os
 import pathlib
 import re
+import shlex
 import subprocess
 import sys
 import time
@@ -128,7 +133,10 @@ DEFAULT_MEMORY = pathlib.Path("/tmp/brain_memory/world_broker.json")
 EVIDENCE_NAMES = ("pyproject.toml", "setup.py", "setup.cfg", "tox.ini", "Makefile",
                   "requirements.txt")
 GOAL_KINDS = ("run-tests", "env-ready")
-TIMEOUT = 180.0
+# A runner bound, not a verdict: tox's own suite takes ~175 s on this host, so a 180 s cap
+# turned "still running" into "no runner executed cleanly" (measured, twice). Long enough
+# that only a hung suite hits it, and a timeout is then reported as a timeout.
+TIMEOUT = 600.0
 REGISTRY_JSON = "https://pypi.org/pypi/{name}/json"
 TIME_BUDGET = 900.0
 
@@ -153,31 +161,61 @@ def evidence_digest(tree: pathlib.Path) -> tuple[str, list[str]]:
             seen.add(extra.name)
             parts.append(extra.name.encode() + b"\0" + hashlib.sha256(extra.read_bytes()).hexdigest().encode())
             names.append(extra.name)
+    # History is evidence, not context: a project whose version is derived from its git tags
+    # produces a different environment from the same tree without them (measured -- tox
+    # cannot even import itself, attrs' own metadata tests disagree with it). So the tag and
+    # commit state enters the digest; a clone that later gains its tags is a different
+    # environment and is re-derived instead of being answered from a record about the old one.
+    git_head = tree / ".git"
+    if git_head.exists():
+        try:
+            import subprocess as _sp
+            commit = _sp.run(["git", "-C", str(tree), "rev-parse", "HEAD"],
+                             capture_output=True, text=True, timeout=30).stdout.strip()
+            tags = _sp.run(["git", "-C", str(tree), "describe", "--tags", "--abbrev=0"],
+                           capture_output=True, text=True, timeout=30).stdout.strip()
+            state = f"{commit}\0{tags}".encode()
+            parts.append(b".git-state\0" + hashlib.sha256(state).hexdigest().encode())
+            names.append(".git-state")
+        except Exception:
+            parts.append(b".git-state\0unreadable")
+            names.append(".git-state")
     return hashlib.sha256(b"\n".join(parts)).hexdigest(), names
 
 
+def declared_table(pyproject: pathlib.Path | None) -> dict[str, Any] | None:
+    """The project's manifest as a table, or None when nothing here can read it.
+
+    This used to be a regex, and the regex was the bug rather than the environments: real
+    declarations contain `python_version<'3.13'` (a single quote inside a double-quoted
+    string) and arrays that span lines with trailing commas, and quote-alternation cannot
+    survive either. Python 3.11 ships tomllib, so the honest reader is the standard one --
+    and a tree whose parser is missing is told so rather than guessed at.
+    """
+    if pyproject is None or not pyproject.is_file():
+        return None
+    try:
+        import tomllib
+        return tomllib.loads(pyproject.read_text(encoding="utf-8", errors="replace"))
+    except Exception:
+        return None
+
+
 def read_toml_project(pyproject: pathlib.Path) -> dict[str, Any]:
-    """Claim-minimal parsing. The broker needs three flat keys, not a TOML engine, and a
-    wrong parse must be inert rather than clever."""
-    text = pyproject.read_text(encoding="utf-8", errors="replace")
+    """The flat keys the broker needs, read by the standard parser. A tree read by the
+    fallback reports nothing rather than guessing: an invented dependency is an invented
+    environment."""
     out: dict[str, Any] = {"present": True, "requires_python": None, "declared_deps": [],
-                           "build_backend": None, "build_requires": []}
-    m = re.search(r"^\s*requires-python\s*=\s*[\"']([^\"']+)[\"']", text, re.MULTILINE)
-    if m:
-        out["requires_python"] = m.group(1).strip()
-    m = re.search(r"^\s*build-backend\s*=\s*[\"']([^\"']+)[\"']", text, re.MULTILINE)
-    if m:
-        out["build_backend"] = m.group(1).strip()
-    m = re.search(r"^\[build-system\].*?(?=^\[|\Z)", text, re.MULTILINE | re.DOTALL)
-    if m:
-        req = re.search(r"requires\s*=\s*\[(.*?)\]", m.group(0), re.DOTALL)
-        if req:
-            out["build_requires"] = re.findall(r"[\"']([^\"']+)[\"']", req.group(1))
-    m = re.search(r"^\[project\].*?(?=^\[|\Z)", text, re.MULTILINE | re.DOTALL)
-    if m:
-        deps = re.search(r"dependencies\s*=\s*\[(.*?)\]", m.group(0), re.DOTALL)
-        if deps:
-            out["declared_deps"] = re.findall(r"[\"']([^\"']+)[\"']", deps.group(1))
+                           "build_backend": None, "build_requires": [], "project_name": None}
+    table = declared_table(pyproject)
+    if table is not None:
+        project = table.get("project") or {}
+        build = table.get("build-system") or {}
+        out["requires_python"] = project.get("requires-python")
+        out["declared_deps"] = [d for d in project.get("dependencies") or [] if isinstance(d, str)]
+        out["build_backend"] = build.get("build-backend")
+        out["build_requires"] = [d for d in build.get("requires") or [] if isinstance(d, str)]
+        out["project_name"] = project.get("name")
     return out
 
 
@@ -196,9 +234,104 @@ def detect_layout(tree: pathlib.Path) -> dict[str, Any]:
     return {"kind": "unknown", "packages": []}
 
 
-def runner_candidates(tree: pathlib.Path) -> list[list[str]]:
-    """The declared order of preference. Execution, not parsing, decides between them."""
-    return [[sys.executable, "-m", "pytest", "-q"]]
+_RUNNER_TOKENS = re.compile(r"^(pytest|python3?|tox|nox|make|hatch|uv|poetry)\b")
+
+
+def declared_test_commands(tree: pathlib.Path,
+                           pyproject: pathlib.Path | None = None) -> list[list[str]]:
+    """The command the project says runs its tests, read from the project.
+
+    `run-tests` used to assume pytest. That is the same mistake `env-ready` was built to
+    delete one layer down: a guess standing where a declaration exists. An environment
+    states its test command in pytest's testpaths, in a Makefile target, in a tox
+    `commands =` block, or in a noxfile -- so those are read here as CLAIMS to execute,
+    never as truth. A target whose first token is not a known runner (a README check, a docs
+    build) is not this environment's suite and is left alone.
+    """
+    found: list[dict[str, str]] = []
+
+    def add(text: str, what: str) -> None:
+        text = (text or "").strip()
+        if not text or not _RUNNER_TOKENS.match(text):
+            return
+        argv = [a for a in shlex.split(text, comments=False)
+                if a not in ("{posargs:tests}", "{posargs}")]
+        if not argv:
+            return
+        found.append({"argv": argv, "declared_by": what})
+
+    table = declared_table(pyproject)
+    if table is not None:
+        tool = (table.get("tool") or {}).get("pytest") or {}
+        ini = tool.get("ini_options") or {}
+        paths = [p for p in (ini.get("testpaths") or []) if isinstance(p, str)]
+        if paths:
+            add("pytest -q " + " ".join(paths),
+                "pyproject.toml:[tool.pytest.ini_options].testpaths")
+        tox_tool = (table.get("tool") or {}).get("tox") or {}
+        for section in ("testenv",):
+            commands = ((tox_tool.get(section) or {}).get("commands") or [])
+            for entry in commands:
+                if isinstance(entry, list) and entry:
+                    add(str(entry[0]).split("--")[0], f"pyproject.toml:[tool.tox.{section}]")
+
+    makefile = next((tree / n for n in ("Makefile", "makefile", "GNUmakefile")
+                     if (tree / n).is_file()), None)
+    if makefile is not None:
+        text = makefile.read_text(encoding="utf-8", errors="replace")
+        for name in ("test", "tests", "pytest", "unit", "check"):
+            m = re.search(r"^" + name + r"\s*:(?!=)(.*)$((?:\n\t.*)*)", text, re.MULTILINE)
+            if not m:
+                continue
+            body = m.group(2) or ""
+            first = next((ln.strip().lstrip("@-").strip() for ln in body.splitlines()
+                          if ln.strip() and not ln.strip().startswith("#")), "")
+            if first:
+                add(first, f"Makefile:{name}")
+            break
+
+    tox_ini = tree / "tox.ini"
+    if tox_ini.is_file():
+        text = tox_ini.read_text(encoding="utf-8", errors="replace")
+        m = re.search(r"^commands\s*=\s*((?:\n[ \t]+.*)*)", text, re.MULTILINE)
+        if m:
+            for line in m.group(1).splitlines():
+                add(line.split("--")[0], "tox.ini:commands")
+
+    noxfile = tree / "noxfile.py"
+    if noxfile.is_file():
+        m = re.search(r"session\.run\(\s*\"([^\"]+)\"",
+                      noxfile.read_text(encoding="utf-8", errors="replace"))
+        if m:
+            add(m.group(1), "noxfile.py:session.run")
+
+    # an interpreter running pytest is always a legitimate last claim to execute: a project
+    # that declares no command and ships tests is not refused for want of a sentence.
+    add("python -m pytest -q", "default")
+
+    seen: set[tuple[str, ...]] = set()
+    out: list[list[str]] = []
+    for item in found:
+        argv = list(item["argv"])
+        if argv[0] in ("python", "python3"):
+            argv[0] = sys.executable
+        elif argv[0] == "pytest":
+            argv = [sys.executable, "-m"] + argv
+            if "-q" not in argv:
+                argv = argv + ["-q"]
+        if argv[0] == sys.executable and "-m" not in argv:
+            continue          # a python script that is not a test runner; not our claim
+        key = tuple(argv)
+        if key not in seen:
+            seen.add(key)
+            out.append(argv)
+    return out
+
+
+def runner_candidates(tree: pathlib.Path,
+                      pyproject: pathlib.Path | None = None) -> list[list[str]]:
+    """The declared commands first, then the default. Execution decides which is the suite."""
+    return declared_test_commands(tree, pyproject)
 
 
 def python_floor_ok(requirement: str | None) -> tuple[bool, str]:
@@ -214,7 +347,30 @@ def python_floor_ok(requirement: str | None) -> tuple[bool, str]:
 
 def run_check(tree: pathlib.Path, argv: Sequence[str]) -> dict[str, Any]:
     """One bounded execution of the candidate runner. The verifier is the environment."""
-    env = {"PYTHONPATH": ":".join([str(tree), str(tree / "src"), str(tree / "tests")]),
+    # The isolated interpreter is the oracle now, so the tree must NOT be put in front of
+    # site-packages: a build can GENERATE files into the installed copy that do not exist in
+    # the checkout (measured -- hatch-vcs writes `tox/version.py` at build time, and putting
+    # the repo's own src/ first made the suite fail with `No module named tox.version` while
+    # the isolation imported it fine). Only conftest/test-helpers paths are added.
+    # When nothing has been installed, the tree IS the only place its package lives, so
+    # src/ and the root go on the path (a bare checkout must still be runnable). When the
+    # suite is being asked of an installed copy, they must not: the installed copy is the
+    # thing being verified, generated files included.
+    # "installed" means argv[0] is THIS tree's own isolation -- the interpreter the tree was
+    # armed in. Not "any venv" (the broker commonly runs inside one, measured: that probe
+    # wrongly dropped src/ for a plain checkout and its package stopped importing), and not
+    # "differs from sys.executable" (same failure).
+    interpreter = pathlib.Path(argv[0])
+    own_isolation = existing_isolation_python(tree)
+    installed = bool(own_isolation) and \
+        interpreter.resolve() == pathlib.Path(own_isolation).resolve()
+    paths = [str(tree / "tests")] if (tree / "tests").is_dir() else []
+    if installed:
+        if (tree / "src" / "conftest.py").is_file():
+            paths.append(str(tree / "src"))
+    else:
+        paths = [str(tree)] + ([str(tree / "src")] if (tree / "src").is_dir() else []) + paths
+    env = {"PYTHONPATH": ":".join(paths),
            "PATH": os.environ.get("PATH", "/usr/local/bin:/usr/bin:/bin"),
            "HOME": str(tree), "PYTHONDONTWRITEBYTECODE": "1"}
     started = time.perf_counter()
@@ -265,7 +421,7 @@ _VERSION_RE = re.compile(
     r"^\s*v?(?:(?P<epoch>\d+)!)?(?P<release>\d+(?:\.\d+)*)"
     r"(?:[-_.]?(?P<pre_l>a|b|c|rc|alpha|beta|pre|preview)[-_.]?(?P<pre_n>\d+)?)?"
     r"(?:-(?P<post_n1>\d+)|[-_.]?(?:post|rev|r)[-_.]?(?P<post_n2>\d+))?"
-    r"(?:[-_.]?dev[-_.]?(?P<dev_n>\d+))?"
+    r"(?:[-_.]?dev(?:[-_.]?(?P<dev_n>\d+))?)?"
     r"(?:\+(?P<local>[a-z0-9]+(?:[-_.][a-z0-9]+)*))?\s*$",
     re.IGNORECASE)
 
@@ -293,7 +449,12 @@ def version_key(text: str) -> tuple | None:
         pre = (_PRE_ORDER_SIZE, 0)  # no pre-release sorts after every pre-release
     post = int(m.group("post_n1") or m.group("post_n2") or 0) if (
         m.group("post_n1") or m.group("post_n2")) else -1
-    dev = int(m.group("dev_n") or 0) if m.group("dev_n") else float("inf")
+    # `4dev` and `4.0.dev1` are dev releases (no dev number means .dev0 in PEP 440), and a
+    # dev release sorts BELOW its release. `m.group("dev_n")` is None both when no `dev`
+    # appears at all and when it appears without a number, so the two are distinguished by
+    # the text, not by the group.
+    has_dev = "dev" in m.group(0).lower()
+    dev = (int(m.group("dev_n") or 0)) if has_dev else float("inf")
     return (epoch, tuple(trimmed), pre, post, dev)
 
 
@@ -440,6 +601,7 @@ def read_declarations(tree: pathlib.Path,
     required: list[dict[str, Any]] = []
     seen: set[tuple[str, str]] = set()
     extras: list[str] = []
+    skipped: list[str] = []
     for raw in raw_deps:
         parsed = parse_requirement(raw)
         if not parsed:
@@ -453,32 +615,156 @@ def read_declarations(tree: pathlib.Path,
             parsed["self"] = True
             required.append(parsed)
             continue
+        if marker_ok(parsed.get("marker", "")) is False:
+            # a declaration whose marker excludes this interpreter is not a dependency here.
+            # Measured: black's uvloop extra declares winloop for win32, and refusing the
+            # whole environment because a Windows wheel has no linux tag would be the broker
+            # blaming the environment for stating itself correctly.
+            skipped.append(parsed["raw"])
+            continue
         marker = (parsed["normalized"], parsed["specifier"])
         if marker in seen:
             continue
         seen.add(marker)
         required.append(parsed)
+    extras.extend(group_own_extras(pyproject, project_name))
+    declared_installs = declared_extras_in(tree, pyproject)
+    extras.extend(declared_installs)
+    if declared_installs:
+        sources.append("project-declared self-install extras: " + ",".join(declared_installs))
+    extras = list(dict.fromkeys(extras))
     if extras:
         for raw in own_extras(pyproject, extras) if pyproject is not None else []:
             parsed = parse_requirement(raw)
-            if parsed:
-                required.append(parsed)
+            if not parsed:
+                continue
+            if marker_ok(parsed.get("marker", "")) is False:
+                skipped.append(parsed["raw"])
+                continue
+            if (parsed["normalized"], parsed["specifier"]) in seen:
+                continue
+            seen.add((parsed["normalized"], parsed["specifier"]))
+            required.append(parsed)
         sources.append("pyproject.toml:[project.optional-dependencies]:"
                        + ",".join(sorted(set(extras))))
-    return {"sources": sources, "required": required, "project_name": project_name}
+    return {"sources": sources, "required": required, "project_name": project_name,
+            "self_extras": extras, "skipped_for_this_interpreter": skipped}
 
 
 def own_extras(pyproject: pathlib.Path, extras: Sequence[str]) -> list[str]:
-    """The requirements a project lists for its own named extras, read from the same
-    section a resolver would read."""
-    text = pyproject.read_text(encoding="utf-8", errors="replace")
+    """The requirements a project lists for its own named extras, read the standard way."""
+    table = declared_table(pyproject)
+    if table is None:
+        return []
+    optional = ((table.get("project") or {}).get("optional-dependencies") or {})
     out: list[str] = []
     for extra in dict.fromkeys(extras):
-        pattern = (r"^\s*" + re.escape(extra) + r"\s*=\s*\[(.*?)\]")
-        m = re.search(pattern, text, re.MULTILINE | re.DOTALL)
-        if m:
-            out.extend(re.findall(r"[\"']([^\"']+)[\"']", m.group(1)))
+        out.extend(d for d in (optional.get(extra) or []) if isinstance(d, str))
     return out
+
+
+def group_own_extras(pyproject: pathlib.Path | None, project_name: str | None) -> list[str]:
+    """Own extras referenced by any test-ish dependency group, including groups reached
+    through an `{include-group = ...}` reference. A declaration can sit one indirection
+    away, and black's own suite reaches its extras exactly that way."""
+    if pyproject is None or not project_name:
+        return []
+    table = declared_table(pyproject) or {}
+    groups = table.get("dependency-groups") or {}
+    own = normalize_name(project_name)
+    seen: set[str] = set()
+    out: list[str] = []
+
+    def walk(name: str, depth: int = 0) -> None:
+        if depth > 6 or name in seen:
+            return
+        seen.add(name)
+        for entry in groups.get(name) or []:
+            if isinstance(entry, dict):
+                inner = entry.get("include-group")
+                if isinstance(inner, str):
+                    walk(inner, depth + 1)
+                continue
+            m = re.match(r"^([A-Za-z0-9][A-Za-z0-9._-]*)\[([^\]]+)\]", str(entry).strip())
+            if m and normalize_name(m.group(1)) == own:
+                out.extend(e.strip() for e in m.group(2).split(",") if e.strip())
+
+    for name in groups:
+        if re.search(r"test", str(name), re.I):
+            walk(str(name))
+    return out
+
+
+def declared_extras_in(tree: pathlib.Path, pyproject: pathlib.Path | None) -> list[str]:
+    """Extras the project's own test environment says to install, e.g. tox's
+    `commands = pip install -e .[d]`.
+
+    A declaration, not an inference: black's unit-test environment installs `.[d]` because
+    its suite needs aiohttp, and nothing else in the manifest says so. Reading the
+    environment's own command honours the claim instead of guessing at it. Only extras this
+    manifest actually declares are returned: a CI matrix fragment is not an extra, and
+    installing an undeclared name would be inventing a package.
+    """
+    if pyproject is None or not pyproject.is_file():
+        return []
+    table = declared_table(pyproject) or {}
+    declared_names = set(((table.get("project") or {}).get("optional-dependencies") or {}))
+    if not declared_names:
+        return []
+    extras: list[str] = []
+
+    def absorb(text: str) -> None:
+        for m in re.finditer(
+                r"(?:-e\s+)?(?:\.|\$\{toxinidir\})\[([A-Za-z0-9_,\s.-]+)\]", text):
+            extras.extend(e.strip() for e in m.group(1).split(",") if e.strip())
+
+    for entry in ((((table.get("tool") or {}).get("tox") or {}).get("testenv") or {})
+                  .get("commands") or []):
+        if isinstance(entry, list):
+            absorb(" ".join(str(x) for x in entry))
+    # tox's modern config is TOML, and it names extras as data rather than inside a
+    # command string: `extras = [ "completion" ]`. Measured on tox-dev/tox, whose suite
+    # imports argcomplete only because its own tox.toml installs the `completion` extra --
+    # a reader that only scanned command strings missed it and the suite could not collect.
+    for name in ("tox.toml",):
+        config = tree / name
+        if not config.is_file():
+            continue
+        config_table = declared_table(config) or {}
+        for env_table in (config_table.get("env") or {}).values():
+            if not isinstance(env_table, dict):
+                continue
+            listed = env_table.get("extras")
+            if isinstance(listed, list):
+                extras.extend(x.strip() for x in listed
+                              if isinstance(x, str) and x.strip())
+    # tox's modern config is TOML, and it names extras as data rather than inside a
+    # command string: `extras = [ "completion" ]`. Measured on tox-dev/tox, whose suite
+    # imports argcomplete only because its own tox.toml installs the `completion` extra --
+    # a reader that only scanned command strings missed it and the suite could not collect.
+    for name in ("tox.toml",):
+        config = tree / name
+        if not config.is_file():
+            continue
+        config_table = declared_table(config) or {}
+        for env_table in (config_table.get("env") or {}).values():
+            if not isinstance(env_table, dict):
+                continue
+            listed = env_table.get("extras")
+            if isinstance(listed, list):
+                extras.extend(x.strip() for x in listed
+                              if isinstance(x, str) and x.strip())
+    tox_ini = tree / "tox.ini"
+    if tox_ini.is_file():
+        absorb(tox_ini.read_text(encoding="utf-8", errors="replace"))
+    for name in ("Makefile", "makefile", "GNUmakefile"):
+        if (tree / name).is_file():
+            absorb((tree / name).read_text(encoding="utf-8", errors="replace"))
+    workflows = tree / ".github" / "workflows"
+    if workflows.is_dir():
+        for path in sorted(workflows.glob("*.y*ml")):
+            absorb(path.read_text(encoding="utf-8", errors="replace"))
+    return [e for e in dict.fromkeys(extras) if e in declared_names]
 
 
 def _test_group_declarations(pyproject: pathlib.Path) -> list[str]:
@@ -724,6 +1010,64 @@ _PROBE = ("import json,sys,importlib\n"
           "print(json.dumps(out))\n")
 
 
+_HOST_HOOKS = {
+    "pytest": re.compile(r"^def\s+pytest_\w+\s*\(", re.MULTILINE),
+    "pytest_plugins": re.compile(r"^pytest_plugins\s*=", re.MULTILINE),
+    "nox": re.compile(r"@nox\.", re.MULTILINE),
+}
+
+
+def declared_entry_point_hosts(wheel_path: pathlib.Path) -> list[str]:
+    """Entry-point groups this wheel registers, other than scripts. Each group name is a
+    host that loads the artifact itself (`matplotlib.backend`, `pytest11`)."""
+    import zipfile
+    groups: list[str] = []
+    try:
+        with zipfile.ZipFile(wheel_path) as zf:
+            for member in zf.namelist():
+                if member.endswith(".dist-info/entry_points.txt"):
+                    for line in zf.read(member).decode("utf-8", "replace").splitlines():
+                        m = re.match(r"^\[([^\]]+)\]\s*$", line)
+                        if m and m.group(1) not in ("console_scripts", "gui_scripts"):
+                            groups.append(m.group(1))
+    except (OSError, zipfile.BadZipFile):
+        return []
+    return groups
+
+
+def plugin_host(wheel_path: pathlib.Path) -> str | None:
+    """Which host application loads this artifact as a plugin, if any -- read from the
+    artifact's own source, which is inside the hash we verified.
+
+    A plugin is not a module the project imports: it is a module its HOST imports, and the
+    plugin contract means the host must NOT be declared as a dependency. So "does it import
+    standalone" is the wrong question for one, and asking it refused correct environments
+    twice in the live trials (`matplotlib-inline`, `detect-test-pollution`, both plugins that
+    import their host at module level and declare it nowhere). Two pieces of evidence inside
+    the verified bytes answer it: the host hooks the plugin registers in its own source, and
+    the entry-point group it declares (which IS a host saying "load me").
+    """
+    import zipfile
+    try:
+        with zipfile.ZipFile(wheel_path) as zf:
+            for member in zf.namelist():
+                if not member.endswith(".py"):
+                    continue
+                try:
+                    source = zf.read(member).decode("utf-8", "replace")
+                except (OSError, KeyError):
+                    continue
+                for host, pattern in _HOST_HOOKS.items():
+                    if pattern.search(source):
+                        return host
+    except (OSError, zipfile.BadZipFile):
+        return None
+    declared = declared_entry_point_hosts(wheel_path)
+    if declared:
+        return declared[0]
+    return None
+
+
 def top_level_modules(wheel_path: pathlib.Path) -> list[str]:
     """The module names this artifact actually provides, read from inside the bytes we
     hash-checked. A wheel's file list is the package's own statement about itself."""
@@ -880,6 +1224,8 @@ def arm(tree: pathlib.Path, memory_path: pathlib.Path,
 
     declarations = read_declarations(tree, pyproject)
     result["declarations"] = {"sources": declarations["sources"],
+                              "skipped_for_this_interpreter":
+                                  declarations.get("skipped_for_this_interpreter") or [],
                               "required": [{k: r.get(k) for k in
                                             ("name", "specifier", "marker", "extras", "self")}
                                            for r in declarations["required"]]}
@@ -989,6 +1335,7 @@ def arm(tree: pathlib.Path, memory_path: pathlib.Path,
         if declared_modules:
             modules[name] = declared_modules  # the bytes say what they provide, before
                                               # anything is asked to import
+        host = plugin_host(wheel_path)
         after = probe_imports(python, [name], tree, modules=modules).get(name) or {}
         if not after.get("version") or not specifier_satisfied(after["version"], specifier):
             raise Refusal("REFUSE__VERSION_CHECK_FAILED",
@@ -996,6 +1343,7 @@ def arm(tree: pathlib.Path, memory_path: pathlib.Path,
                           f"reads {after.get('version')!r}")
         record = {"name": name, "specifier": specifier, "version": after["version"],
                   "status": "ACQUIRED_VERIFIED", "source": "registry",
+                  "plugin_host": host,
                   "artifact": artifact["filename"], "size": len(blob),
                   "sha256_registry": artifact["sha256"], "sha256_observed": observed,
                   "import": None, "verified_by_execution": False}
@@ -1009,6 +1357,13 @@ def arm(tree: pathlib.Path, memory_path: pathlib.Path,
                 continue
             acquire(child, depth + 1)
         settled = probe_imports(python, [name], tree, modules=modules).get(name) or {}
+        if settled.get("import") != "ok" and host:
+            record["status"] = "PLUGIN_ARMED_IMPORTED_BY_HOST"
+            record["plugin_host"] = host
+            record["import"] = "deferred-to-host"
+            record["detail"] = (f"a plugin for {host}: that host imports it, so its import is "
+                                f"verified when the suite runs, not in isolation")
+            return
         if settled.get("import") != "ok":
             raise Refusal("REFUSE__VERSION_CHECK_FAILED",
                           f"{name} {after['version']} installed but does not import: "
@@ -1039,9 +1394,21 @@ def arm(tree: pathlib.Path, memory_path: pathlib.Path,
             return refuse(refusal.verdict, refusal.detail)
     project_install = None
     if project_name and sets_up_a_distribution(tree, pyproject):
-        project_install = install_project(python, tree, project_name, backend=build_backend)
+        project_install = install_project(python, tree, project_name, backend=build_backend,
+                                          extras=declarations.get("self_extras") or [])
         seen_version = probe_imports(python, [project_name], tree,
                                      modules=modules).get(project_name) or {}
+        # Version-from-history is a real limit: a shallow clone carries no tags, so
+        # hatch-vcs/setuptools-scm fall back to 0.1.devN for a project whose version is
+        # DYNAMIC. That is recorded rather than hidden, because the project's own metadata
+        # then disagrees with itself and some of its tests will say so.
+        version_source = "git-history"
+        if "dev" in str(seen_version.get("version") or ""):
+            # `4.67.16.dev4+g794908a7f` is a CORRECT git-derived version (four commits past
+            # tag 4.67.15 at that commit). A wrong label here once sent a whole trial
+            # chasing a cache bug that did not exist; the version was right all along.
+            version_source = ("git-history (dev version derived from tags and commit count, "
+                              "as the project's own build hook intends)")
         # A project that cannot build itself is a fact about the project, not evidence that
         # its dependencies are missing. Both facts are recorded; neither is inflated into
         # the other. (Refusing here would report an unarmed environment when the
@@ -1051,15 +1418,20 @@ def arm(tree: pathlib.Path, memory_path: pathlib.Path,
                         "status": "PROJECT_INSTALLED" if project_install["ok"]
                                   else "PROJECT_NOT_INSTALLABLE",
                         "artifact": "<staged copy of the tree>",
+                        "version_source": version_source,
                         "verified_by_execution": bool(seen_version.get("version")),
                         "detail": None if project_install["ok"]
                                   else (project_install.get("tail") or "")[-200:]})
     result["project_install"] = project_install
 
     final = probe_imports(python, [r["name"] for r in required], tree, modules=modules)
+    deferred = {rec["name"] for rec in records
+                if rec.get("status") == "PLUGIN_ARMED_IMPORTED_BY_HOST"}
     unmet = [name for name in [r["name"] for r in required]
              if not (final.get(name) or {}).get("version")
-             or (final.get(name) or {}).get("import") != "ok"
+             # a plugin's import is its HOST's job: it is verified when the suite runs, so
+             # this final gate must not demand what the plugin contract forbids
+             or ((final.get(name) or {}).get("import") != "ok" and name not in deferred)
              or not specifier_satisfied((final.get(name) or {}).get("version") or "0",
                                         next(r["specifier"] for r in required
                                              if r["name"] == name))]
@@ -1139,7 +1511,8 @@ def build_with_wheel_package(backend: str | None) -> bool:
 
 
 def install_project(python: str, tree: pathlib.Path, name: str,
-                    backend: str | None = None, timeout: float = TIME_BUDGET) -> dict[str, Any]:
+                    backend: str | None = None, extras: Sequence[str] | None = None,
+                    timeout: float = max(TIME_BUDGET, 900.0)) -> dict[str, Any]:
     """Make the project's OWN distribution metadata present, without writing into the tree.
 
     The third live trial is why this exists: 246 of flask's tests passed in a correctly
@@ -1154,15 +1527,18 @@ def install_project(python: str, tree: pathlib.Path, name: str,
     copied = staging / "src"
     try:
         shutil.copytree(tree, copied, symlinks=True,
-                        ignore=shutil.ignore_patterns(".git", "*.egg-info", "build", "dist",
+                        ignore=shutil.ignore_patterns("*.egg-info", "build", "dist",
                                                       "__pycache__", ".venv", "node_modules"))
     except OSError as exc:
         return {"ok": False, "detail": f"could not stage the project: {exc}"[:200]}
     env = {"PATH": os.environ.get("PATH", "/usr/bin:/bin"), "HOME": str(staging),
            "PYTHONDONTWRITEBYTECODE": "1", "PYTHONNOUSERSITE": "1"}
     started = time.perf_counter()
+    target = str(copied)
+    if extras:
+        target = f"{copied}[{','.join(extras)}]"
     argv = [python, "-m", "pip", "install", "--no-deps", "--no-build-isolation",
-            "--disable-pip-version-check", "--no-cache-dir", "--quiet", str(copied)]
+            "--disable-pip-version-check", "--no-cache-dir", "--quiet", target]
     try:
         done = subprocess.run(argv, capture_output=True, text=True, timeout=timeout,
                               env=env, cwd=str(staging))
@@ -1268,7 +1644,25 @@ def broker(tree: pathlib.Path, goal: str, memory_path: pathlib.Path = DEFAULT_ME
     # the runner asks the isolation the environment was armed in first, then the host.
     # Only an isolation that already exists is asked: run-tests must never install.
     isolated = existing_isolation_python(tree)
-    candidates = ([[isolated, "-m", "pytest", "-q"]] if isolated else []) + runner_candidates(tree)
+    # Every declared command, asked with the isolation's interpreter first: the project's
+    # own test command is a declaration, and re-pointing it at the isolated interpreter is
+    # the whole point of arming. A command that names a tool the isolation does not have
+    # (tox, nox, make) is asked as declared -- and fails honestly if it is not there.
+    declared_argv = runner_candidates(tree, pyproject)
+    candidates: list[list[str]] = []
+    if isolated:
+        # The armed isolation IS the environment being judged. Falling back to the host
+        # interpreter when the isolation's suite fails would answer a different question --
+        # the host python simply has no pytest, so every such fallback failed for a reason
+        # that says nothing about the arming, and its tail (measured) was the only thing a
+        # refusal reported.
+        for argv in declared_argv:
+            if argv[:1] == [sys.executable]:
+                candidates.append([isolated] + argv[1:])
+            else:
+                candidates.append([isolated, "-m"] + argv)
+    else:
+        candidates.extend(declared_argv)
 
     # the cache is re-verified, never trusted: the runner is re-executed, the derivation is skipped
     if cached is not None:
@@ -1284,14 +1678,34 @@ def broker(tree: pathlib.Path, goal: str, memory_path: pathlib.Path = DEFAULT_ME
 
     result["from_memory"] = False
     outcome = None
+    attempts: list[dict[str, Any]] = []
     for candidate in candidates:
         outcome = run_check(tree, candidate)
+        attempts.append({k: outcome.get(k) for k in ("command", "exit_code", "ok")})
         if outcome["ok"]:
             break
+    result["runner_attempts"] = attempts
     result["runner"] = outcome or {"ok": False, "detail": "NO_CANDIDATE_RUNNER"}
     result["runner_candidates"] = candidates
     if not (outcome and outcome["ok"]):
-        result["verdict"] = "REFUSE__NO_RUNNER_EXECUTED_CLEANLY"
+        # Two different facts, and collapsing them would hide the more useful one:
+        # "the suite ran and some tests failed" is a statement about the PROJECT, while
+        # "no runner could run" is a statement about the ENVIRONMENT. Measured on attrs
+        # (1408 passed, 1 failed -- an upstream py3.11 failure) and tox (4253 passed, 3
+        # man-page errors), both of which used to report the same environment refusal.
+        ran_any = bool((outcome or {}).get("reported_passed"))
+        timed_out = (outcome or {}).get("detail") == "TIMEOUT"
+        result["verdict"] = ("REFUSE__VERIFICATION_FAILED" if ran_any
+                            else "REFUSE__NO_RUNNER_EXECUTED_CLEANLY")
+        result["detail"] = (
+            f"the suite exceeded the {TIMEOUT:.0f} s runner bound and was stopped: a bound of "
+            f"ours, so it says nothing about the environment or the project"
+            if timed_out else
+            (f"the suite ran in the armed environment: "
+             f"{(outcome or {}).get('reported_passed')} passed, and did not "
+             f"exit cleanly -- this is a result about the project, not a "
+             f"refusal about the environment") if ran_any else
+            "no candidate check command ran to completion")
         result["seconds"] = round(time.perf_counter() - started, 4)
         return result  # NOTE: nothing is cached -- a failure is not an environment
 
