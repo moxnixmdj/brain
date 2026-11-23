@@ -5920,3 +5920,70 @@ not answer.
   the zero is claimed.
 
 140 tests pass, eight of them live against a real HeadlessChrome.
+
+## §A107 — success as a relationship, read from structure
+
+### The claim I set out to break
+
+§A106 said the gap was zero *"where success is a value on the page"*, and named the unsolved case: **"the
+row moved to Done"** — success as a **relationship** rather than a string. I tried three ways to defeat the
+text judge and the first two failed for a reason worth recording:
+
+| attempt | outcome |
+|---|---|
+| a board where a click moves a card between columns | text **changed** — `Todo fix login Doing Done` → `Todo Doing Done fix login` |
+| a CSS-grid board where visual and DOM order disagree | text **changed** again — `appendChild` reorders the DOM |
+
+Word **order** was carrying the relationship, almost by accident. That is the most dangerous kind of
+evidence: it produces the right answer on the pages I happened to build, and it is not measuring the thing
+I claim it measures. A judge relying on it would pass every board whose columns happen to be adjacent to
+their headings and fail the first one that is not.
+
+### What was actually missing
+
+Measured on a board of two identical cards: moving one changes **no word** and need change **no order**, and
+`elements: []` — because neither the card nor its column is interactive. **Structure was invisible.** The
+question *"is the card in Done"* is about containment, and containment cannot be read from a string.
+
+The fix is one added field: a **region tree**. Each container a person would name — landmark, section under
+a heading, list, anything labelled — reports the words it holds.
+
+| | before | after |
+|---|---|---|
+| `Todo` | `Todo fix login` | `Todo` |
+| `Done` | `Done` | `Done fix login fix login` |
+
+Membership is now a fact rather than an ordering coincidence.
+
+### The bug that made a correct move report as unconfirmed
+
+The innermost region holding `fix login` is **the card itself** — which has no label. So `was_in` and
+`now_in` were both `None` on a page where the move had plainly happened, and a correct action was judged
+`PLACEMENT_NOT_CONFIRMED`.
+
+**A thing cannot be its own container.** The container is the nearest *named* ancestor. After that fix:
+
+    was_in: Todo      now_in: Done      verdict: PLACEMENT_CONFIRMED
+
+### The two refusals, same principle as every judge here
+
+    the distance was already true  ->  THE_THING_WAS_ALREADY_THERE      (not evidence)
+    the destination is not on the page  -> judged: False, with the labels that ARE there
+
+A placement judge that cannot find the destination has no question to ask, and inventing one would confirm
+whatever the page happened to look like.
+
+### Honest status of the GUI surface
+
+| | |
+|---|---|
+| observe a page | rendered text + controls + **regions** |
+| act | fill, click by the name a person uses, press, select |
+| judge a value | **yes** — by the goal's stated values, before/after |
+| judge a placement | **yes** — `thing` inside `container`, before/after, structure-read |
+| judge anything else | **no** — ordering, counts, absence, and visual state are unjudged |
+
+The last row is the honest edge. `Todo` and `Done` must be **named in words the goal also uses**; a column
+labelled "Completed" and a goal saying "Done" is the synonym gap from §A99, unchanged and unsolved.
+
+144 tests pass, twelve live against a real HeadlessChrome.

@@ -43,6 +43,90 @@ SCHEMA = "PROJECT_BRAIN_BROWSER_OBSERVER_V1"
 _READ_OPS = frozenset({"NAVIGATE", "WAIT", "SCROLL"})
 
 
+def regions_of(seen: Mapping[str, Any]) -> list[dict[str, Any]]:
+    """The containers on a page, as `observe` reported them, innermost last.
+
+    A region is what a person would point at: a landmark, a section under a heading, a list, anything
+    labelled. `label` is the name they would use and `text` is what it holds. Keeping both is what makes
+    membership answerable -- `Done` holding `fix login` is a statement about containment, which word order
+    can imitate and cannot establish.
+    """
+    return list(seen.get("regions") or [])
+
+
+def _smallest_region_holding(regions: Sequence[Mapping[str, Any]],
+                            text: str) -> Mapping[str, Any] | None:
+    """The innermost **NAMED** region whose text contains `text`.
+
+    TWO CORRECTIONS IN ONE FUNCTION, and the first version got both wrong.
+
+    1. INNERMOST, because every ancestor of a region also contains its text: the page's words contain
+       everything, so the outermost match is always the whole page and says nothing about where anything is.
+    2. NAMED, because the innermost match at all is the thing ITSELF -- a card `<div>` holding `fix login`
+       has that exact text, is the smallest match, and carries no label. Measured 2026-11-23: that returned
+       an empty label for both `was_in` and `now_in`, so a placement judge reported "not confirmed" on a
+       page where the move had plainly happened. **A thing cannot be its own container**, and the container
+       is the nearest ancestor a person could NAME -- which is exactly what `label` records.
+    """
+    matches = [r for r in regions
+               if text and text in str(r.get("text") or "") and str(r.get("label") or "").strip()
+               and str(r.get("text") or "").strip() != str(text).strip()]
+    if not matches:
+        return None
+    return min(matches, key=lambda r: (len(str(r.get("text") or "")), -int(r.get("depth") or 0)))
+
+
+def judge_placement(browser: Any, operations: Sequence[Mapping[str, Any]],
+                    thing: str, container: str) -> dict[str, Any]:
+    """Judge a goal whose success is a RELATIONSHIP: `thing` must end up inside `container`.
+
+    WHY TEXT WAS NOT ENOUGH. Measured 2026-11-23 on a board holding two identical cards: moving one from
+    Todo to Done changes no word and can change no word order, so every judge in §A105 is blind to it. The
+    question a person asks -- *is the card in Done* -- is about containment, and containment has to be read
+    from structure or it cannot be read at all.
+
+    The verdict requires the relationship to be TRUE AFTER and FALSE BEFORE: a card already in Done is not
+    evidence that the act moved it there, exactly as §A105 refuses to confirm a value that was already on
+    the page.
+
+    Refuses rather than guesses when the container cannot be found -- a placement judge that cannot locate
+    the destination has no question to ask, and inventing one would confirm whatever the page happened to
+    look like.
+    """
+    before = observe(browser)
+    if not before.get("ok"):
+        return {"schema": SCHEMA, "judged": False, "why": before.get("why") or "THE_PAGE_COULD_NOT_BE_READ"}
+    if not regions_of(before):
+        return {"schema": SCHEMA, "judged": False,
+                "why": "THE_PAGE_REPORTS_NO_REGIONS", "detail": "this driver cannot answer membership"}
+    if not any(str(container) == str(r.get("label") or "") for r in regions_of(before)):
+        return {"schema": SCHEMA, "judged": False, "why": "THE_CONTAINER_NAMED_IS_NOT_ON_THE_PAGE",
+                "container": container,
+                "labels": [r.get("label") for r in regions_of(before)][:20]}
+
+    outcomes = run(browser, operations)
+    after = observe(browser)
+
+    def where(seen: Mapping[str, Any]) -> Mapping[str, Any] | None:
+        return _smallest_region_holding(regions_of(seen), str(thing))
+
+    was, now = where(before), where(after)
+    inside_before = bool(was) and str(was.get("label") or "") == str(container)
+    inside_now = bool(now) and str(now.get("label") or "") == str(container)
+    if inside_now and not inside_before:
+        verdict = "PLACEMENT_CONFIRMED"
+    elif inside_now and inside_before:
+        verdict = "THE_THING_WAS_ALREADY_THERE"
+    else:
+        verdict = "PLACEMENT_NOT_CONFIRMED"
+    return {"schema": SCHEMA, "judged": True, "verdict": verdict,
+            "thing": str(thing)[:200], "container": str(container)[:120],
+            "was_in": (was or {}).get("label") if was else None,
+            "now_in": (now or {}).get("label") if now else None,
+            "operations": outcomes,
+            "ops_all_passed": all(o.get("status") == "PASS" for o in outcomes)}
+
+
 def observe(browser: Any, *, max_text: int = 8000) -> dict[str, Any]:
     """The page as it is, with no navigation.
 
@@ -68,7 +152,7 @@ def observe(browser: Any, *, max_text: int = 8000) -> dict[str, Any]:
         sense = "RENDERED_TEXT"
     return {"schema": SCHEMA, "ok": True, "url": page.get("url") or "",
             "title": page.get("title") or "", "text": text[:max_text],
-            "elements": elements, "sense": sense,
+            "elements": elements, "regions": page.get("regions") or [], "sense": sense,
             "page_count": snapshot.get("page_count", len(pages))}
 
 

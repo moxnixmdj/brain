@@ -244,3 +244,102 @@ def test_a_field_word_is_never_taken_as_its_own_value() -> None:
     assert BO.stated_values("set qty 8 for sku B2") == ["8"]        # B2 is lost: the stated limitation
     assert "amount" not in BO.stated_values("with amount 4")
     assert "sku" not in BO.stated_values("for sku B2")
+
+
+# ----------------------------------------------------------------------------------------------------
+# Success as a RELATIONSHIP, not a value.
+# ----------------------------------------------------------------------------------------------------
+
+_BOARD = """<!doctype html><html><head><title>Board</title></head><body>
+<div id="board">
+  <div id="todo"><h2>Todo</h2><div class="card" id="card">fix login</div></div>
+  <div id="done"><h2>Done</h2></div>
+</div>
+<script>
+document.getElementById('card').onclick = () => {
+  document.getElementById('done').appendChild(document.getElementById('card'));
+};
+</script></body></html>
+"""
+
+
+@pytest.fixture(scope="module")
+def board_url():
+    directory = tempfile.mkdtemp(prefix="board_")
+    (pathlib.Path(directory) / "board.html").write_text(_BOARD)
+    handler = lambda *args, **kwargs: http.server.SimpleHTTPRequestHandler(
+        *args, directory=directory, **kwargs)
+    with socket.socket() as probe:
+        probe.bind(("127.0.0.1", 0))
+        port = probe.getsockname()[1]
+    server = http.server.ThreadingHTTPServer(("127.0.0.1", port), handler)
+    threading.Thread(target=server.serve_forever, daemon=True).start()
+    try:
+        yield "http://127.0.0.1:%d/board.html" % port
+    finally:
+        server.shutdown()
+        shutil.rmtree(directory, ignore_errors=True)
+
+
+def test_a_page_reports_where_its_words_are_not_only_what_they_are(board_url: str) -> None:
+    """`elements` reports what can be pressed. A card and its column are neither, so without `regions` a
+    board is invisible: measured, `elements: []` for a page holding a card and two columns."""
+    browser = browser_v1.bind()
+    browser.act({"type": "NAVIGATE", "url": board_url})
+    seen = BO.observe(browser)
+
+    labels = [r.get("label") for r in seen["regions"]]
+    assert "Todo" in labels and "Done" in labels, labels
+    todo = next(r for r in seen["regions"] if r.get("label") == "Todo")
+    assert "fix login" in todo["text"]
+
+
+def test_a_goal_whose_success_is_containment_is_judged_from_structure(board_url: str) -> None:
+    """THE CASE §A105 SAID WAS UNSOLVED, and it could not be solved with text.
+
+    "move the task to Done" is a statement about CONTAINMENT. Every text judge in this module is blind to
+    it: the words on the board do not change in any way that identifies which column holds the card. Read
+    from regions, the answer is a fact -- Todo holds it before, Done holds it after.
+    """
+    browser = browser_v1.bind()
+    verdict = BO.judge_placement(browser, [{"type": "CLICK_TEXT", "text": "fix login"}],
+                                 "fix login", "Done")
+
+    assert verdict["judged"] is True, verdict
+    assert verdict["verdict"] == "PLACEMENT_CONFIRMED", verdict
+    assert verdict["was_in"] == "Todo", verdict
+    assert verdict["now_in"] == "Done", verdict
+    assert verdict["ops_all_passed"] is True
+
+
+def test_a_thing_cannot_be_its_own_container(board_url: str) -> None:
+    """THE BUG THAT MADE A CORRECT MOVE REPORT AS UNCONFIRMED.
+
+    The innermost region holding `fix login` is the CARD, whose label is empty -- so `was_in` and `now_in`
+    were both `None` on a page where the move had plainly happened, and the verdict was
+    `PLACEMENT_NOT_CONFIRMED`. A thing cannot be its own container; the container is the nearest ancestor a
+    person could NAME.
+    """
+    browser = browser_v1.bind()
+    browser.act({"type": "NAVIGATE", "url": board_url})
+    seen = BO.observe(browser)
+
+    where = BO._smallest_region_holding(BO.regions_of(seen), "fix login")
+    assert where is not None
+    assert where.get("label") == "Todo", where          # named ancestor, not the unlabelled card
+    assert where.get("text", "").strip() != "fix login"
+
+
+def test_a_placement_already_true_is_not_evidence_and_a_missing_container_refuses(board_url: str) -> None:
+    """The two refusals a placement judge needs, and both are the same principle as §A105's."""
+    browser = browser_v1.bind()
+    browser.act({"type": "NAVIGATE", "url": board_url})
+    browser.act({"type": "CLICK_TEXT", "text": "fix login"})
+
+    repeated = BO.judge_placement(browser, [], "fix login", "Done")
+    assert repeated["verdict"] == "THE_THING_WAS_ALREADY_THERE", repeated
+
+    absent = BO.judge_placement(browser, [], "fix login", "Archive")
+    assert absent["judged"] is False
+    assert absent["why"] == "THE_CONTAINER_NAMED_IS_NOT_ON_THE_PAGE", absent
+    assert "Done" in absent["labels"]

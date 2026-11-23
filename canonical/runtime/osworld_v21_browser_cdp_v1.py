@@ -118,12 +118,53 @@ class BrowserCDP:
                         ".trim().slice(0, 8000)")
                 except Exception:
                     body_text = ""
+                # WHERE THE WORDS ARE, not only what they are.
+                # Measured 2026-11-23 on a board with two identical cards: moving one card from Todo to
+                # Done changes NO word and can change NO word ORDER, and the element index reports none of
+                # them because neither the card nor its column is interactive. So `text` alone cannot
+                # answer "is the card in Done" -- the question a goal like "move the task to Done" asks.
+                #
+                # A region is a container a person would name: a landmark, a heading's section, a list, or
+                # anything carrying a role/label. Each reports the words it holds, so membership becomes
+                # answerable without reading pixels: `Done` holding `fix login` is a fact, not an ordering
+                # coincidencence. Bounded like everything else here.
+                try:
+                    regions = page.evaluate(
+                        """() => {
+                          const pick = 'section,article,aside,main,nav,header,footer,table,ul,ol,form,'
+                            + 'fieldset,[role],[aria-label],[data-region],[id],[class]';
+                          const seen = new Set(); const out = [];
+                          for (const r of document.querySelectorAll(pick)) {
+                            if (seen.has(r)) continue; seen.add(r);
+                            const box = r.getBoundingClientRect();
+                            if (box.width <= 0 || box.height <= 0) continue;
+                            const own = (r.innerText || '').replace(/\\s+/g, ' ').trim();
+                            if (!own) continue;
+                            // the nearest heading inside it, which is what a person calls it
+                            const h = r.querySelector('h1,h2,h3,h4,[role=heading]');
+                            const label = (r.getAttribute('aria-label') || r.getAttribute('data-region')
+                              || (h && (h.innerText || '').trim()) || r.id || '').slice(0, 80);
+                            out.push({
+                              label: label,
+                              tag: (r.tagName || '').toLowerCase(),
+                              role: r.getAttribute('role') || '',
+                              text: own.slice(0, 400),
+                              depth: (() => { let d = 0, n = r; while (n && n !== document.body) { d++; n = n.parentElement; } return d; })()
+                            });
+                            if (out.length >= 120) break;
+                          }
+                          return out;
+                        }"""
+                    )
+                except Exception:
+                    regions = []
                 out_pages.append({
                     "page_index": page_index,
                     "url": page.url,
                     "title": page.title(),
                     "elements": elements[:MAX_ELEMENTS],
                     "text": body_text,
+                    "regions": regions,
                 })
             return {
                 "schema": SCHEMA,
