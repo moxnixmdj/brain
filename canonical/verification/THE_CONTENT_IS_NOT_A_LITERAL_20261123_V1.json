@@ -1,0 +1,364 @@
+{
+ "schema": "BRAIN_THE_CONTENT_IS_NOT_A_LITERAL_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "date": "2026-11-23",
+ "branch": "arena/6f8ac9ce-brain",
+ "mode": "COMPUTE_THE_CONTENT_POINTER_FROM_THE_EXECUTOR_CALL_LOG",
+ "declared_before_the_run": {
+  "C1": "the prior literal-content store refuses and the computed term texts contain zero fit identity or content literals",
+  "C2": "three minimal pointer-relative statements are exact on fit, separated by two real delayed-content judgments within the ceil(log2(3)) budget",
+  "C3": "new-literal OVERWRITE held-out prediction is exact with zero abstentions and a recomputed content pointer",
+  "C4": "a third new-identity/new-content machine is exact with zero abstentions and the store has no machine literals",
+  "C5": "pointerless machine refuses, deletion refuses, restore predicts, raw traces abstain, old store refuses",
+  "C6": "naive initial pointer, raw traces and the prior canonical table are measured as killed designs",
+  "C7": "zeros and real executions with an executor call log"
+ },
+ "content_pointer": {
+  "text": "content:first_relocation_source",
+  "definition": "the content of the first mv/cp source operand in the executor call log, read from the initial state when that operand existed there, otherwise from the state immediately before that command",
+  "source": "executor_call_log_and_machine_readings"
+ },
+ "computed_grammar": {
+  "term_family": "computed_deictic_holder_shape_v1",
+  "terms": 16,
+  "feature_order": [
+   "initial_nonempty",
+   "final_nonempty",
+   "first_nonempty",
+   "initial_final_different",
+   "first_final_different",
+   "initial_final_same",
+   "max_holders<=1",
+   "max_holders<=2",
+   "never_empty",
+   "some_empty",
+   "holder_set_changed",
+   "cardinality_changed",
+   "initial_singleton",
+   "final_singleton",
+   "first_singleton",
+   "two_copies"
+  ],
+  "minimal_statements": [
+   "holder_shape:initial_final_different[content:first_relocation_source] and holder_shape:max_holders<=1[content:first_relocation_source]",
+   "holder_shape:first_final_different[content:first_relocation_source] and holder_shape:max_holders<=1[content:first_relocation_source]",
+   "holder_shape:max_holders<=1[content:first_relocation_source] and holder_shape:holder_set_changed[content:first_relocation_source]"
+  ]
+ },
+ "fit": {
+  "machines": [
+   "MOVE_ALPHA",
+   "EXTRA_BETA"
+  ],
+  "runs": 516,
+  "truth_mask_popcount": 204,
+  "pointer_counts": {
+   "MOVE_ALPHA": {
+    "runs": 258,
+    "pointer_failures": 0,
+    "pointer_contents": [
+     "alpha_content"
+    ]
+   },
+   "EXTRA_BETA": {
+    "runs": 258,
+    "pointer_failures": 0,
+    "pointer_contents": [
+     "beta_content"
+    ]
+   },
+   "DELAY_GAMMA": {
+    "runs": 258,
+    "pointer_failures": 0,
+    "pointer_contents": [
+     "gamma_content"
+    ]
+   },
+   "OVERWRITE_DELTA": {
+    "runs": 258,
+    "pointer_failures": 0,
+    "pointer_contents": [
+     "delta_content"
+    ]
+   },
+   "THIRD_EPSILON": {
+    "runs": 258,
+    "pointer_failures": 0,
+    "pointer_contents": [
+     "epsilon_content"
+    ]
+   },
+   "NO_RELOCATION_SOURCE": {
+    "runs": 39,
+    "pointer_failures": 39,
+    "pointer_contents": []
+   }
+  }
+ },
+ "question": {
+  "environment": "DELAY_GAMMA",
+  "separating_runs": 9,
+  "judgment_budget_ceil_log2_class": 2,
+  "judgments": [
+   {
+    "run_index": 0,
+    "run_steps": 2,
+    "judgment_on_the_run": true,
+    "class_before": 3,
+    "class_after": 2,
+    "surviving_texts": [
+     "holder_shape:first_final_different[content:first_relocation_source] and holder_shape:max_holders<=1[content:first_relocation_source]",
+     "holder_shape:max_holders<=1[content:first_relocation_source] and holder_shape:holder_set_changed[content:first_relocation_source]"
+    ]
+   },
+   {
+    "run_index": 5,
+    "run_steps": 2,
+    "judgment_on_the_run": false,
+    "class_before": 2,
+    "class_after": 1,
+    "surviving_texts": [
+     "holder_shape:first_final_different[content:first_relocation_source] and holder_shape:max_holders<=1[content:first_relocation_source]"
+    ]
+   }
+  ],
+  "judgments_on_runs": 2,
+  "questions_about_statements": 0,
+  "survivor": "holder_shape:first_final_different[content:first_relocation_source] and holder_shape:max_holders<=1[content:first_relocation_source]",
+  "last_chosen_pointer_content": "gamma_content"
+ },
+ "store": {
+  "path": "canonical/astra_runtime/state/COMPUTED_CONTENT_POINTER_RELATION_V1.json",
+  "schema": "BRAIN_COMPUTED_CONTENT_POINTER_RELATION_V1",
+  "texts": [
+   "holder_shape:first_final_different[content:first_relocation_source]",
+   "holder_shape:max_holders<=1[content:first_relocation_source]"
+  ],
+  "sha256": "bed99689fc6825d0",
+  "identity_literal_leaks": [],
+  "content_literal_leaks": []
+ },
+ "verdict": {
+  "C1_prior_literal_store_refuses_and_terms_are_literal_free": {
+   "old_store": {
+    "status": "REFUSED__GOAL_CONTENT_OR_TERMS_NOT_RECOMPUTED",
+    "missing": [
+     "holder_shape:first_final_different[probe_seed_content]",
+     "holder_shape:max_holders<=1[probe_seed_content]"
+    ],
+    "abstentions": 258
+   },
+   "computed_terms": 16,
+   "term_identity_literal_leaks": [],
+   "term_content_literal_leaks": [],
+   "MET": true
+  },
+  "C2_three_pointer_statements_and_two_real_delayed_judgments": {
+   "fit_runs": 516,
+   "minimal_statements": [
+    "holder_shape:initial_final_different[content:first_relocation_source] and holder_shape:max_holders<=1[content:first_relocation_source]",
+    "holder_shape:first_final_different[content:first_relocation_source] and holder_shape:max_holders<=1[content:first_relocation_source]",
+    "holder_shape:max_holders<=1[content:first_relocation_source] and holder_shape:holder_set_changed[content:first_relocation_source]"
+   ],
+   "fit_exact": true,
+   "select_runs": 258,
+   "select_pointer_failures": 0,
+   "separating_runs": 9,
+   "judgment_budget_ceil_log2_class": 2,
+   "judgments": [
+    {
+     "run_index": 0,
+     "run_steps": 2,
+     "judgment_on_the_run": true,
+     "class_before": 3,
+     "class_after": 2,
+     "surviving_texts": [
+      "holder_shape:first_final_different[content:first_relocation_source] and holder_shape:max_holders<=1[content:first_relocation_source]",
+      "holder_shape:max_holders<=1[content:first_relocation_source] and holder_shape:holder_set_changed[content:first_relocation_source]"
+     ]
+    },
+    {
+     "run_index": 5,
+     "run_steps": 2,
+     "judgment_on_the_run": false,
+     "class_before": 2,
+     "class_after": 1,
+     "surviving_texts": [
+      "holder_shape:first_final_different[content:first_relocation_source] and holder_shape:max_holders<=1[content:first_relocation_source]"
+     ]
+    }
+   ],
+   "judgments_on_runs": 2,
+   "questions_about_statements": 0,
+   "survivor": "holder_shape:first_final_different[content:first_relocation_source] and holder_shape:max_holders<=1[content:first_relocation_source]",
+   "class_after": 1,
+   "MET": true
+  },
+  "C3_exact_new_content_held_out_prediction": {
+   "prediction": {
+    "status": "PREDICTED",
+    "runs": 258,
+    "abstentions": 0,
+    "false_accepts": 0,
+    "false_rejects": 0,
+    "texts": [
+     "holder_shape:first_final_different[content:first_relocation_source]",
+     "holder_shape:max_holders<=1[content:first_relocation_source]"
+    ],
+    "pointer_contents_recomputed_from_this_machine": [
+     "delta_content"
+    ],
+    "terms_recomputed_from_this_machine": 16
+   },
+   "MET": true
+  },
+  "C4_third_new_names_and_no_literals_in_store": {
+   "prediction": {
+    "status": "PREDICTED",
+    "runs": 258,
+    "abstentions": 0,
+    "false_accepts": 0,
+    "false_rejects": 0,
+    "texts": [
+     "holder_shape:first_final_different[content:first_relocation_source]",
+     "holder_shape:max_holders<=1[content:first_relocation_source]"
+    ],
+    "pointer_contents_recomputed_from_this_machine": [
+     "epsilon_content"
+    ],
+    "terms_recomputed_from_this_machine": 16
+   },
+   "identity_literals_in_store": [],
+   "content_literals_in_store": [],
+   "store": "canonical/astra_runtime/state/COMPUTED_CONTENT_POINTER_RELATION_V1.json",
+   "MET": true
+  },
+  "C5_fail_closed_deletion_restore_raw_and_old_store": {
+   "pointerless_machine": {
+    "status": "REFUSED__CONTENT_POINTER_NOT_RECOMPUTED",
+    "runs": 39,
+    "abstentions": 39,
+    "pointer_failures": 39
+   },
+   "deleted_store": {
+    "status": "REFUSED__NO_RELATION",
+    "abstentions": 258
+   },
+   "restored_store": {
+    "status": "PREDICTED",
+    "runs": 258,
+    "abstentions": 0,
+    "false_accepts": 0,
+    "false_rejects": 0,
+    "texts": [
+     "holder_shape:first_final_different[content:first_relocation_source]",
+     "holder_shape:max_holders<=1[content:first_relocation_source]"
+    ],
+    "pointer_contents_recomputed_from_this_machine": [
+     "delta_content"
+    ],
+    "terms_recomputed_from_this_machine": 16
+   },
+   "copy_before_deletion": {
+    "status": "PREDICTED",
+    "runs": 258,
+    "abstentions": 0,
+    "false_accepts": 0,
+    "false_rejects": 0,
+    "texts": [
+     "holder_shape:first_final_different[content:first_relocation_source]",
+     "holder_shape:max_holders<=1[content:first_relocation_source]"
+    ],
+    "pointer_contents_recomputed_from_this_machine": [
+     "delta_content"
+    ],
+    "terms_recomputed_from_this_machine": 16
+   },
+   "raw_exact_experience": {
+    "fit_runs": 516,
+    "held_out_runs": 258,
+    "abstentions": 258
+   },
+   "relation_abstentions": 0,
+   "MET": true
+  },
+  "C6_killed_designs_are_measured": {
+   "naive_initial_content_pointer": {
+    "definition": "lexically first content in the initial state",
+    "runs": 258,
+    "errors": 6,
+    "pointer_contents_tried": [
+     "iota_content"
+    ]
+   },
+   "raw_exact_experience": {
+    "fit_runs": 516,
+    "held_out_runs": 258,
+    "abstentions": 258
+   },
+   "prior_full_canonical_trace_table": {
+    "overwrite_abstentions": 43,
+    "third_name_abstentions": 69
+   },
+   "model_proposed_pointer": "forbidden and not used",
+   "MET": true
+  },
+  "C7_zeros_and_real_execution": {
+   "model_calls": 0,
+   "parameters_stored": 0,
+   "network_calls_at_run_time": 0,
+   "real_runs": {
+    "MOVE_ALPHA": 258,
+    "EXTRA_BETA": 258,
+    "DELAY_GAMMA": 258,
+    "OVERWRITE_DELTA": 258,
+    "THIRD_EPSILON": 258,
+    "NO_RELOCATION_SOURCE": 39
+   },
+   "MET": true
+  }
+ },
+ "all_criteria_met": true,
+ "killed_designs": {
+  "literal_content_store": {
+   "status": "REFUSED__GOAL_CONTENT_OR_TERMS_NOT_RECOMPUTED",
+   "missing": [
+    "holder_shape:first_final_different[probe_seed_content]",
+    "holder_shape:max_holders<=1[probe_seed_content]"
+   ],
+   "abstentions": 258
+  },
+  "naive_initial_content_pointer": {
+   "definition": "lexically first content in the initial state",
+   "runs": 258,
+   "errors": 6,
+   "pointer_contents_tried": [
+    "iota_content"
+   ]
+  },
+  "raw_exact_experience": {
+   "fit_runs": 516,
+   "held_out_runs": 258,
+   "abstentions": 258
+  },
+  "full_canonical_trace_table": {
+   "receipt": "canonical/verification/THE_HOLDER_IS_NOT_THE_IDENTITY_20261123_V1.json",
+   "overwrite_abstentions": 43,
+   "third_name_abstentions": 69
+  },
+  "model_proposed_pointer": "forbidden runtime dependency; not used"
+ },
+ "limits": [
+  "the pointer requires an executor call log with a relocation source; a machine without one refuses",
+  "this is a typed deictic pointer, not free-form natural-language instruction understanding",
+  "no GUI, browser, OSWorld 2.1, SWE-bench Pro / Pro V2 or Terminal-Bench task was run",
+  "producer-run sandbox; no independent identity re-ran this receipt",
+  "no capability registered and no truth achieved"
+ ],
+ "cost": {
+  "seconds": 11.27,
+  "model_calls": 0,
+  "parameters_stored": 0,
+  "network_calls_at_run_time": 0
+ }
+}

@@ -1,0 +1,44 @@
+{
+ "schema": "BRAIN_COMPUTED_CONTENT_POINTER_RELATION_V1",
+ "relation": {
+  "texts": [
+   "holder_shape:first_final_different[content:first_relocation_source]",
+   "holder_shape:max_holders<=1[content:first_relocation_source]"
+  ],
+  "operator": "and"
+ },
+ "term_family": "computed_deictic_holder_shape_v1",
+ "content_pointer": {
+  "text": "content:first_relocation_source",
+  "definition": "the content of the first mv/cp source operand in the executor call log, read from the initial state when that operand existed there, otherwise from the state immediately before that command",
+  "source": "executor_call_log_and_machine_readings"
+ },
+ "feature_order": [
+  "initial_nonempty",
+  "final_nonempty",
+  "first_nonempty",
+  "initial_final_different",
+  "first_final_different",
+  "initial_final_same",
+  "max_holders<=1",
+  "max_holders<=2",
+  "never_empty",
+  "some_empty",
+  "holder_set_changed",
+  "cardinality_changed",
+  "initial_singleton",
+  "final_singleton",
+  "first_singleton",
+  "two_copies"
+ ],
+ "evidence": {
+  "term_sha256": "c6b641aa1d0a71d7",
+  "judgment_on_the_run": false,
+  "chosen_run_steps": 2,
+  "judgments_on_runs": 2,
+  "judgment_budget_ceil_log2_class": 2,
+  "fit_runs": 516
+ },
+ "identity_literals": [],
+ "content_literals": []
+}
