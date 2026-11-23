@@ -1652,6 +1652,18 @@ def _bind(values: Sequence[Mapping[str, Any]], options: Sequence[Mapping[str, An
     return bound, unbound
 
 
+def _place_rank(picture: Sequence[str] | None, name: str) -> int | None:
+    """A place's position among the argument places, with the flags' place removed.
+
+    `grep [OPTION]... PATTERNS [FILE]...` is ['option','patterns','file'], and `patterns` must rank
+    before `file` -- raw `.index()` does that by accident here and fails wherever the flags' place
+    sits elsewhere in the line. Both sides are asking the same question, so there is one function.
+    """
+    rest = [str(p).strip() for p in (picture or [])
+            if str(p).strip().lower() not in ("option", "options", "")]
+    return rest.index(str(name).strip()) if str(name).strip() in rest else None
+
+
 def _render(tool: str, prefix: Sequence[str], operation: Mapping[str, Any] | None,
             bound: Sequence[Mapping[str, Any]],
             declared: Sequence[str] | None = None) -> list[str]:
@@ -1677,6 +1689,11 @@ def _render(tool: str, prefix: Sequence[str], operation: Mapping[str, Any] | Non
             index = item.get("place_index")
             placed.append((len(positional) if index is None else int(index),
                            str(item["value"])))
+            # The *document's* order, when both items name a place. `grep PATTERNS [FILE]` prints
+            # the pattern before the file; rendering them in the order the request mentioned them
+            # produced `grep /etc/hosts localhost` -- which searches for a pattern named
+            # `/etc/hosts` inside a file called `localhost`. A place's position in the usage line
+            # is the program's own statement about argument order, so it outranks the sentence.
     positional.extend(value for _, value in sorted(placed, key=lambda pair: pair[0]))
     if operation is not None:
         argv.append(str(operation["flag"]))
@@ -2547,7 +2564,35 @@ def _positional_readings(values: Sequence[Mapping[str, Any]],
         rest = [p for p in picture if str(p).strip().lower() not in ("option", "options")]
         return str(rest[i]) if i < len(rest) else ""
 
+    def place_for(value: Mapping[str, Any]) -> str:
+        """Which named place this value fills, when the place's own name settles it.
+
+        `grep [OPTION]... PATTERNS [FILE]...` has two places and a request supplies one path and
+        one bare noun. Indexing put the path in `patterns` and the noun in `file` -- the reverse of
+        what the usage line says, where `FILE` is the place for a file and `PATTERNS` is the place
+        for a pattern. A place whose name is the value's own kind takes it: `file` for a path,
+        `pattern`/`word`/`name`/`text` for a noun. Where no place name settles it, the order the
+        request wrote them decides, as before.
+        """
+        kind = str(value.get("kind") or "")
+        rest = [str(p).strip() for p in (picture or [])
+                if str(p).strip().lower() not in ("option", "options", "")]
+        if kind == "path":
+            for place in rest:
+                if re.search(r"file|path|dir|source|dest|target|archive", place, re.I):
+                    return place
+        else:
+            for place in rest:
+                if re.search(r"pattern|word|string|name|text|regex|expr", place, re.I):
+                    return place
+        return ""
+
     if named:
+        # A place the value's own kind names is that value's place, whatever order it arrived in.
+        if all(place_for(v) for v in named) and len({place_for(v) for v in named}) == len(named):
+            readings.append([{"role": "positional", "value": str(v["value"]),
+                              "means": place_for(v), "place_index": _place_rank(picture, place_for(v))}
+                             for v in named])
         by_role = sorted(named, key=lambda v: (0 if v.get("role") == "product" else
                                                2 if v.get("role") == "source" else 1,
                                                int(v["position"])))
@@ -3223,12 +3268,52 @@ def plan(requirement: Mapping[str, Any], tree: Mapping[str, Any],
         # The licence is the document's: the place is printed and named, and it is the only
         # unfilled place. When more than one named place is free there is a choice, and a choice
         # made by guessing is what this project refuses.
+        # A bare noun can be an argument, and the licence is narrow enough to state.
+        #
+        # `grep [OPTION]... PATTERNS [FILE]...` declares two named places. A request supplies the
+        # path for one and leaves a bare noun behind: "the lines of /etc/hosts that **contain**
+        # localhost". The noun is not quoted, not a path and not a number, so the extractor never
+        # made a value of it; but it is grammatically the object of a verb the request itself uses,
+        # and exactly one declared place is open. Those three facts -- the page names the place,
+        # the request puts the noun in a verb's object position, and there is exactly one place it
+        # can go -- are all printed by one side or the other.
+        #
+        # It fires only when ONE place is open and ONE noun follows a verb. Two candidates or two
+        # places is a choice, and a choice made by guessing is what this project refuses.
+        open_places = [str(place).strip() for place in (here_picture or [])
+                       if str(place).strip().lower() not in ("option", "options", "")]
+        taken = {str(item.get("means")).strip() for item in reading
+                 if item.get("role") == "positional"}
+        still_open = [place for place in open_places if place not in taken]
+        spoken = str(requirement.get("instruction") or "")
+        # The verb need not be a *known* act: "the lines that **contain** localhost" -- `contain`
+        # is not in the act class, and requiring it to be would exclude the very word that puts
+        # `localhost` in an object position. What matters is that the request prints a word there
+        # and the noun follows it.
+        verbs = {w for w in words_of(spoken)
+                 if re.search(r"\b" + re.escape(w) + r"(s|ed|ing)?\b", spoken, re.I)}
+        candidates = []
+        for word in requirement.get("unclaimed") or []:
+            hit = re.search("\\b([A-Za-z]+)\\s+[\"']?" + re.escape(word) + "\\b", spoken)
+            if hit and len(word) > 2 and words_of(hit.group(1)) & verbs:
+                candidates.append(word)
+        if len(still_open) == 1 and len(set(candidates)) == 1:
+            spare = list(spare) + [{"kind": "literal", "value": candidates[0], "context": ""}]
+            _filled_here = still_open[0]
         for extra in spare:
             holder = next((o for o in _product_slots(here_options)
                            if slot_kind(o) == "number"), None)
             if holder is not None:
                 bound.append({"role": "value_slot", "option": holder["flag"],
                               "value": str(extra["value"])})
+            elif locals().get("_filled_here") and extra.get("context") == "":
+                # The open place is this noun's, and the page named it. It goes where the *usage
+                # line* puts it, not where the request happened to mention it: `grep PATTERNS
+                # [FILE]` prints the pattern first, and a command with the two swapped searches
+                # the pattern for the filename.
+                bound.append({"role": "positional", "value": str(extra["value"]),
+                              "means": locals()["_filled_here"],
+                              "place_index": _place_rank(here_picture, locals()["_filled_here"])})
             else:
                 bound.append({"role": "unbound", "kind": extra["kind"],
                               "value": extra["value"], "context": extra.get("context", "")})
@@ -3429,6 +3514,13 @@ def plan(requirement: Mapping[str, Any], tree: Mapping[str, Any],
             if printed & asked_acts:
                 states_the_act = True
                 break
+    # A third fact joins the conjunction: the plan must also fail to account for the request.
+    # `grep` has no page named for "show", so `states_the_act` is false and no page routes -- but
+    # the plan places every value the request brings, in the places the usage line names
+    # (`grep localhost /etc/hosts`). Saying "this program has no command for that" there would
+    # deny a reading the document fully supports, which is the opposite of the honesty this rule
+    # exists for. The rule is for the case where *nothing* holds: no page, no stated act, and a
+    # plan that cannot house what was asked.
     no_command = bool(asked_acts) and not (routed.get("path") or []) and not states_the_act
     good = [p for p in plans if p["complete"] and p.get("covered")]
     if plans and no_command:

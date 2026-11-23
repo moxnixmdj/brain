@@ -2497,3 +2497,52 @@ place the usage line names. The document does declare the place; it does not dec
 **Verified:** 75 tests; 12 effect tasks by effect under `PYTHONHASHSEED` 7/99/default; the unseen
 `vaultctl` 6/6; and on real programs `ls /tmp`, `sort /tmp/compose/a.txt`,
 `tar -cf backup.tgz /tmp/data` all still complete.
+
+### A62 — the bare-noun gap closed by the usage line, and the order the document prints
+
+A61 left three shapes of one gap: an unquoted noun that no place is licensed to take (`localhost`,
+`alpha`, `alice`). The licence was in the usage line all along.
+
+**The mechanism.** `grep [OPTION]... PATTERNS [FILE]...` declares two argument places by name. A
+request supplies a path for one and leaves a bare noun over: "the lines of /etc/hosts that
+**contain** localhost". `localhost` is not quoted, not a path, not a number, so the extractor never
+made a value of it — but it *is* grammatically the object of a verb the request prints. Three facts,
+each printed by one side, license the binding:
+
+* the page **names** the place (`PATTERNS`);
+* the request puts the noun **in a verb's object position** (`contain localhost`);
+* **exactly one** place is open.
+
+Two candidates or two open places is a choice, and a choice made by guessing is what this project
+refuses. The verb need not be in the act class — `contain` is not, and requiring that excluded the
+very word that licenses the binding. That was the first bug: the filter `w not in unclaimed`
+removed `contain` because the act class had also left it over.
+
+**And the order is the document's, not the sentence's.** Two independent defects conspired here:
+
+* `positional_grammar` reports `grep`'s picture as `['option', 'patterns', 'file']`, and a lone path
+  was placed at index 0 — `means: "option"`, the place where *the flags go*, leaving both real
+  places empty. A place that takes no argument is now skipped for indexing, never occupied.
+* Placing by arrival order produced `grep /etc/hosts localhost`: the pattern searched for `/etc/hosts`
+  inside a file called `localhost`. A value whose own kind matches a place's name now takes that
+  place (`file` for a path, `pattern`/`word`/`name`/`text` for a noun), and `_render` sorts
+  positionals by the place's rank in the usage line. The result is `grep localhost /etc/hosts` —
+  the command a person would type.
+
+**What is still conservative, stated rather than hidden.** That command is right and is reported
+`complete: false`, because `grep` has no page named for "show", no page routes, and A60's
+conjunction therefore declares no command. The command is offered with its refusal beside it. That
+is the safe direction — a caller who reads the flag gets "I could not ground this"; a caller who
+reads the plan gets a correct command — but it is not yet right, and closing it means teaching the
+conjunction to see that a *named place* is as good a statement of grounding as a named page.
+
+**Attempted and reverted this round.** A fourth conjunct, "every value sits in a place the page
+named". It looked exactly right — `grep`'s operands sit in `file`/`patterns`, `tar`'s in an unnamed
+position — and it failed because `tar --block-number b a` puts its operands in `file` too, and
+`--block-number` is a real documented tar flag. The reading is grounded in the document's terms and
+wrong about the world: `tar` has no copy command. No per-plan test can see that, which is why A60's
+conjunction (no page **and** no stated act) remains the criterion, with the cost stated above.
+
+**Verified:** 75 tests; 12 effect tasks under `PYTHONHASHSEED` 7/99/default; unseen `vaultctl` 6/6;
+real programs `ls /tmp`, `sort /tmp/compose/a.txt`, `tar -cf backup.tgz /tmp/data`,
+`grep localhost /etc/hosts`.
