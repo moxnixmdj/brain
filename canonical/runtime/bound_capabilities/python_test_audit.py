@@ -31,7 +31,7 @@ def _safe_dir(root, raw):
     root=pathlib.Path(root).resolve()
     p=(root/str(raw or "")).resolve()
     if p != root and root not in p.parents:
-        raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
+        raise RuntimeError("PATH_OUTSIDE_REPOSITORY:" + str(p))
     if not p.is_dir():
         raise RuntimeError("TEST_AUDIT_ROOT_MISSING")
     return p
@@ -119,7 +119,7 @@ def run(args, root):
     audit_deadline=time.monotonic()+total_budget_s
     output=(repo/str(args.get("output_path") or "")).resolve()
     if output == repo or repo not in output.parents:
-        raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
+        raise RuntimeError("PATH_OUTSIDE_REPOSITORY:" + str(output))
     files=sorted(p for p in source_root.glob(pattern) if p.is_file())
     if not files:
         raise RuntimeError("TEST_AUDIT_EMPTY")

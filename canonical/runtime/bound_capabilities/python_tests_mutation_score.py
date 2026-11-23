@@ -168,7 +168,7 @@ def _safe_path(repo: pathlib.Path, raw: str, *, allow_root: bool = False) -> pat
     if allow_root and p == repo:
         return p
     if p == repo or repo not in p.parents:
-        raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
+        raise RuntimeError("PATH_OUTSIDE_REPOSITORY:" + str(p))
     return p
 
 
@@ -331,7 +331,7 @@ def run(args: dict[str, Any], root: Any) -> dict[str, Any]:
     repo = pathlib.Path(root).resolve()
     src = _safe_path(repo, str(args.get("source_root") or ""), allow_root=False)
     if not src.exists():
-        raise RuntimeError("SOURCE_ROOT_MISSING")
+        raise RuntimeError("SOURCE_ROOT_MISSING:" + str(src))
     out = _safe_path(repo, str(args.get("output_path") or ""), allow_root=False)
 
     proj_root, test_dir, prod_files = _resolve_project_and_tests(src, repo)

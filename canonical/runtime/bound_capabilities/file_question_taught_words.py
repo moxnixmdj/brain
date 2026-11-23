@@ -22,7 +22,7 @@ def _safe(root: pathlib.Path, raw: str) -> pathlib.Path:
     """Resolve inside the repository, refusing anything that escapes it."""
     p = (root / str(raw or "")).resolve()
     if p != root and root not in p.parents:
-        raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
+        raise RuntimeError("PATH_OUTSIDE_REPOSITORY:" + str(p))
     return p
 
 

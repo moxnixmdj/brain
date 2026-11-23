@@ -27,7 +27,7 @@ REPO = pathlib.Path(__file__).resolve().parents[3]
 def _safe_output(root: pathlib.Path, raw: str | None) -> pathlib.Path:
     p = (root / str(raw or "canonical/tmp_grid_induction.json")).resolve()
     if p == root or root not in p.parents:
-        raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
+        raise RuntimeError("PATH_OUTSIDE_REPOSITORY:" + str(p))
     p.parent.mkdir(parents=True, exist_ok=True)
     return p
 
@@ -46,7 +46,7 @@ def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
     if training_pairs is None and args.get("training_pairs_path"):
         p = (repo / str(args["training_pairs_path"])).resolve()
         if p == repo or repo not in p.parents:
-            raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
+            raise RuntimeError("PATH_OUTSIDE_REPOSITORY:" + str(p))
         training_pairs = json.loads(p.read_text(encoding="utf-8")).get("training_pairs", [])
 
     # Default deterministic demo: transpose pattern (works with DEFAULT_OPERATORS)

@@ -69,9 +69,9 @@ def _count_stmts(stmts: list[ast.stmt]) -> tuple[int, int]:
 def _safe_root(repo: pathlib.Path, raw) -> pathlib.Path:
     p = (repo / str(raw or "")).resolve()
     if p != repo and repo not in p.parents:
-        raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
+        raise RuntimeError("PATH_OUTSIDE_REPOSITORY:" + str(p))
     if not p.exists():
-        raise RuntimeError("SOURCE_ROOT_MISSING")
+        raise RuntimeError("SOURCE_ROOT_MISSING:" + str(p))
     return p
 
 
@@ -94,7 +94,7 @@ def run(args, root):
     source_root = _safe_root(repo, args.get("source_root"))
     output = (repo / str(args.get("output_path") or "")).resolve()
     if output == repo or repo not in output.parents:
-        raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
+        raise RuntimeError("PATH_OUTSIDE_REPOSITORY:" + str(output))
 
     functions = 0
     classes = 0

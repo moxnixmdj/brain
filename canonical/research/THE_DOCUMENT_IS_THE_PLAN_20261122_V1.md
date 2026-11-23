@@ -4619,3 +4619,82 @@ next bottleneck, and it is now a named one with counts behind it rather than a h
 | `test_require_survey_plan_v1.py` | **62 passed** |
 | `test_the_machine_can_run_its_own_claims_v1.py` | **22 passed** |
 | `test_a_claim_about_a_tool_is_a_fact_about_this_machine_v1.py` | **10 passed** |
+
+---
+
+# §A87 — A refusal is the knowledge, and 76% of this machine's refusals say nothing
+
+A86 left a named join: take an `UNTYPED` row and close its gap by fetching what is missing. The plan was to
+read a tool's documentation. Measurement changed the plan.
+
+## What the environment actually teaches
+
+`python.refactor.move_function.v1` — one of the 14 UNTYPED rows — was driven by hand, then by a loop:
+
+| call | refused with | what it taught |
+|---|---|---|
+| guessed values | `TEST_ROOT_MISSING` | it needs a tests directory |
+| added one in the wrong place | `TEST_ROOT_MISSING` (again) | it did not say **where** |
+| after locating the refusal | `MODULE_NOT_FOUND:file_survey` | a bare module name is not a path |
+| passed a path | `NAME_COLLISION_TARGET_MODULE:archive_tarfile.py:run` | the target already defines `run` |
+| chose a free target | `SUITE_FAILED_AFTER_MOVE: Start directory is not importable` | the tests dir needs `__init__.py` |
+| added `__init__.py` | **`verified: true`, `suite_passed: true`** | — |
+
+**Six refusals, each naming the exact fact that was missing.** That is a better knowledge source than a
+document: it is about *this* environment and it cannot be out of date. `knowledge_repair_v1` implements it —
+call, read the refusal, answer it, call again, bounded at 8 turns, in a copy of the tree, verifying at the
+end. Measured on that row: **verified in 1.8s from two repairs**, no model, no human.
+
+## The defect the loop found in the machine
+
+The first loop failed twice on the *same* refusal because `TEST_ROOT_MISSING` named the missing kind and not
+its location, so the loop guessed wrong twice. **A refusal that does not locate itself cannot be repaired.**
+That is a property of the message, so it is measurable across every adapter:
+
+| measure | value |
+|---|---|
+| `raise` sites in `bound_capabilities/` | **1,314** |
+| that locate themselves (`CODE:value`) | **385 — 29.3%** |
+| that are bare (`CODE`) | **929 — 70.7%** |
+| distinct bare codes | **619** |
+| most common bare | `PATH_OUTSIDE_REPOSITORY` 118 → **58** after the fix |
+
+`refusal_location_v1` measures it lexically (it does not import 330 adapters to read their text) and says so.
+
+## The repair applied, mechanically and reversibly
+
+73 bare refusals in 44 files now carry the value they were withholding. The variable is read from each
+file's own guard line, not assumed: a first attempt assumed `p`, and three files use `path` — that would have
+introduced a `NameError` in exactly the error path nobody exercises. All 44 files compile; 16 suites pass.
+
+**Located fraction: 23.7% → 29.3%.** That is the honest size of the first step, not a solution. 929 bare
+refusals remain, and until a client can read *which* thing is missing, "learn from what the environment
+tells you" has a ceiling set by how much the environment says.
+
+## Two test defects found and fixed on the way (both pre-existing, both proven on a pristine HEAD clone)
+
+- `test_science_closure_exact_14` pinned `closure_file_count == 14`. The closure is **15** because
+  `bounded_task_directive_semantics_v1.py` is reached transitively from two science roots. **0 files were
+  missing from `EXPECTED`; only the new one was absent from it.** The count is now derived from the set
+  instead of asserted independently of it.
+- `test_rank8_four_file_overlay_fails_closed` pinned `len(missing_paths) == 10`; it is 11. The property under
+  test is that an incomplete carrier has **no authority**, which is what it now asserts.
+
+A test that pins a measurement of the tree asserts that the tree has not changed — a claim no test can keep
+true, and one that fails on correct changes.
+
+## Green
+
+| run | result |
+|---|---|
+| 16 suites | **258 passed, 0 failed** |
+| `test_a_refusal_is_the_knowledge_v1.py` (new) | **6 passed** |
+| `tasks_v1` / `unseen_program_v1` | **13/13** / **6/6** |
+| census | host untouched, 10 WROTE, 19 SELF_ATTESTING |
+
+## Next bottleneck
+
+**929 bare refusals across 619 codes.** The two highest-frequency ones are located; the rest are the
+machine's blindness, one `raise` at a time. The next step is to make location a *convention enforced by a
+test* rather than a cleanup that has to be repeated, and to locate the next tier (`TEST_PATHS_REQUIRED` 17,
+`ARGS_NOT_OBJECT` 13, `NO_TEST_FILES_UNDER_SOURCE_ROOT` 13) the same measured way.

@@ -27,7 +27,7 @@ def _safe_path(root: pathlib.Path, raw: Any) -> pathlib.Path:
     root = pathlib.Path(root).resolve()
     path = (root / str(raw or "")).resolve()
     if path == root or root not in path.parents:
-        raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
+        raise RuntimeError("PATH_OUTSIDE_REPOSITORY:" + str(path))
     return path
 
 

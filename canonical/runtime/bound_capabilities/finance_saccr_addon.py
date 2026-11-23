@@ -32,7 +32,7 @@ def _safe(root, raw, require_file=False):
     root = pathlib.Path(root).resolve()
     p = (root / str(raw or "")).resolve()
     if p == root or root not in p.parents:
-        raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
+        raise RuntimeError("PATH_OUTSIDE_REPOSITORY:" + str(p))
     if require_file and not p.is_file():
         raise RuntimeError("SACCR_TRADES_INPUT_MISSING")
     return p

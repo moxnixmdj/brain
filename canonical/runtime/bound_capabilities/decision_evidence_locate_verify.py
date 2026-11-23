@@ -45,7 +45,7 @@ def _safe(root, raw, require_file=False):
     root = pathlib.Path(root).resolve()
     p = (root / str(raw or "")).resolve()
     if p != root and root not in p.parents:
-        raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
+        raise RuntimeError("PATH_OUTSIDE_REPOSITORY:" + str(p))
     if require_file and not p.is_file():
         raise RuntimeError("INPUT_FILE_MISSING:" + str(raw))
     return p

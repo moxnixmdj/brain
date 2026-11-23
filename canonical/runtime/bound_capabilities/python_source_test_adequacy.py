@@ -72,9 +72,9 @@ sys.stdout.write("__ADEQUACY_TRACE__" + json.dumps({
 def _safe_root(repo: pathlib.Path, raw) -> pathlib.Path:
     p = (repo / str(raw or "")).resolve()
     if p != repo and repo not in p.parents:
-        raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
+        raise RuntimeError("PATH_OUTSIDE_REPOSITORY:" + str(p))
     if not p.exists():
-        raise RuntimeError("SOURCE_ROOT_MISSING")
+        raise RuntimeError("SOURCE_ROOT_MISSING:" + str(p))
     return p
 
 
@@ -98,7 +98,7 @@ def run(args, root):
     source_root = _safe_root(repo, args.get("source_root"))
     output = (repo / str(args.get("output_path") or "")).resolve()
     if output == repo or repo not in output.parents:
-        raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
+        raise RuntimeError("PATH_OUTSIDE_REPOSITORY:" + str(output))
     # The tests are the WITNESS beside the subject: every Python project layout
     # puts them under a sibling `tests`, and the sentence says "the tests in X".
     # Only used when no explicit root is bound, and the report names the root it
@@ -117,7 +117,7 @@ def run(args, root):
     if tests is None:
         raise RuntimeError("TEST_ROOT_MISSING")
     if tests != repo and repo not in tests.parents:
-        raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
+        raise RuntimeError("PATH_OUTSIDE_REPOSITORY:" + str(tests))
     timeout_s = int(args.get("timeout_s") or 120)
 
     # The subject and the witness are two halves of one project, so the sibling

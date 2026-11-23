@@ -71,7 +71,7 @@ _IMPORT_PATTERNS: dict[str, re.Pattern[str]] = {
 def _safe_output(root: pathlib.Path, raw: str | None) -> pathlib.Path:
     p = (root / str(raw or "canonical/tmp_tree_sitter.json")).resolve()
     if p == root or root not in p.parents:
-        raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
+        raise RuntimeError("PATH_OUTSIDE_REPOSITORY:" + str(p))
     p.parent.mkdir(parents=True, exist_ok=True)
     return p
 
@@ -219,9 +219,9 @@ def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
     source_root_raw = "canonical/runtime" if (not raw_sr or "${input." in raw_sr) else raw_sr
     source_root = (repo / str(source_root_raw)).resolve()
     if source_root != repo and repo not in source_root.parents:
-        raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
+        raise RuntimeError("PATH_OUTSIDE_REPOSITORY:" + str(source_root))
     if not (source_root.is_dir() or source_root.is_file()):
-        raise RuntimeError("SOURCE_ROOT_MISSING")
+        raise RuntimeError("SOURCE_ROOT_MISSING:" + str(source_root))
 
     tree_sitter_available = False
     ts_get_language = None

@@ -7,7 +7,7 @@ def _safe_root(root, raw):
     root=pathlib.Path(root).resolve()
     p=(root/str(raw or "")).resolve()
     if p != root and root not in p.parents:
-        raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
+        raise RuntimeError("PATH_OUTSIDE_REPOSITORY:" + str(p))
     if p.is_dir():
         return p
     # "Audit the python file F" and "audit the python source root D" are one
@@ -43,7 +43,7 @@ def run(args, root):
     source_root=_safe_root(repo,args.get("source_root","canonical/runtime"))
     output=(repo/str(args.get("output_path") or "")).resolve()
     if output == repo or repo not in output.parents:
-        raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
+        raise RuntimeError("PATH_OUTSIDE_REPOSITORY:" + str(output))
     files=[]
     unparseable=[]
     imports=set()

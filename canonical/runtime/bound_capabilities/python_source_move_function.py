@@ -49,9 +49,9 @@ REQUIRES = ["python.source.symbols.index.ast"]
 def _safe_root(repo: pathlib.Path, raw) -> pathlib.Path:
     p = (repo / str(raw or "")).resolve()
     if p != repo and repo not in p.parents:
-        raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
+        raise RuntimeError("PATH_OUTSIDE_REPOSITORY:" + str(p))
     if not p.exists():
-        raise RuntimeError("SOURCE_ROOT_MISSING")
+        raise RuntimeError("SOURCE_ROOT_MISSING:" + str(p))
     return p
 
 
@@ -124,7 +124,7 @@ def run(args, root):
     source_root = _safe_root(repo, args.get("source_root"))
     output = (repo / str(args.get("output_path") or "")).resolve()
     if output == repo or repo not in output.parents:
-        raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
+        raise RuntimeError("PATH_OUTSIDE_REPOSITORY:" + str(output))
     timeout_s = int(args.get("timeout_s") or 60)
     name = str(args.get("symbol") or "").strip()
     from_module = str(args.get("module") or "").strip()
@@ -135,7 +135,13 @@ def run(args, root):
                     else source_root)
     tests = project_root / "tests"
     if not tests.is_dir():
-        raise RuntimeError("TEST_ROOT_MISSING")
+        # A REFUSAL THAT DOES NOT SAY WHERE CANNOT BE REPAIRED.
+        #
+        # Measured 2026-11-23: a repair loop read `TEST_ROOT_MISSING`, created `<env>/pkg/tests`, and the
+        # call refused identically -- because the row wants `<env>/tests` (source_root.parent). The loop
+        # had no way to know: the code named the missing thing but not its location, so an honest reader
+        # could only guess. Naming the path costs one f-string and turns the refusal into a fact.
+        raise RuntimeError("TEST_ROOT_MISSING:" + str(tests))
 
     # The subject is the whole PROJECT: a caller can live outside the named tree.
     parsed: dict[pathlib.Path, tuple[str, ast.Module, str]] = {}

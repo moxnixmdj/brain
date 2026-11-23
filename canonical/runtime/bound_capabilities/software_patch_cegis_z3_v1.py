@@ -24,9 +24,9 @@ REPO = pathlib.Path(__file__).resolve().parents[3]
 def _safe_dir(root: pathlib.Path, raw: str) -> pathlib.Path:
     p = (root / raw).resolve()
     if p != root and root not in p.parents:
-        raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
+        raise RuntimeError("PATH_OUTSIDE_REPOSITORY:" + str(p))
     if not p.is_dir():
-        raise RuntimeError("SOURCE_ROOT_MISSING")
+        raise RuntimeError("SOURCE_ROOT_MISSING:" + str(p))
     return p
 
 

@@ -80,7 +80,7 @@ def _source(args, root: pathlib.Path) -> tuple[pathlib.Path, bytes, str]:
         raise RuntimeError("PATH_REQUIRED")
     path = (root / str(raw)).resolve()
     if path != root and root not in path.parents:
-        raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
+        raise RuntimeError("PATH_OUTSIDE_REPOSITORY:" + str(path))
     if not path.is_file():
         raise RuntimeError("PATH_NOT_A_REGULAR_FILE")
     if path.suffix.lower() in _SOURCE_SUFFIXES:

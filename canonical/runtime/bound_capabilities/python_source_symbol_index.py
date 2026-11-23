@@ -28,7 +28,7 @@ def _safe_root(root, raw):
     root = pathlib.Path(root).resolve()
     p = (root / str(raw or "")).resolve()
     if p != root and root not in p.parents:
-        raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
+        raise RuntimeError("PATH_OUTSIDE_REPOSITORY:" + str(p))
     if p.is_dir():
         return p
     # Same law as python_source_audit: "the call graph of the python file F" and
@@ -697,7 +697,7 @@ def run(args, root):
     source_root = _safe_root(repo, args.get("source_root", "canonical/runtime"))
     output = (repo / str(args.get("output_path") or "")).resolve()
     if output == repo or repo not in output.parents:
-        raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
+        raise RuntimeError("PATH_OUTSIDE_REPOSITORY:" + str(output))
 
     source_root_rel = source_root.relative_to(repo).as_posix()
     report, reused = _collect_index_parts(

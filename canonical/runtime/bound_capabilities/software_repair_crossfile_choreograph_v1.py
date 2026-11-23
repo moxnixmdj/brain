@@ -284,7 +284,7 @@ def _safe_path(repo: pathlib.Path, raw: str, *, allow_root: bool = False) -> pat
     if allow_root and p == repo:
         return p
     if p == repo or repo not in p.parents:
-        raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
+        raise RuntimeError("PATH_OUTSIDE_REPOSITORY:" + str(p))
     return p
 
 

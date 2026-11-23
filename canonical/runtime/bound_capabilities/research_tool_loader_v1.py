@@ -103,7 +103,7 @@ def safe_repo_path(root: Any, raw: Any) -> pathlib.Path:
         raise RuntimeError("PATH_REQUIRED")
     path = (base / text).resolve()
     if path != base and base not in path.parents:
-        raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
+        raise RuntimeError("PATH_OUTSIDE_REPOSITORY:" + str(path))
     return path
 
 

@@ -39,7 +39,7 @@ REPO = pathlib.Path(__file__).resolve().parents[3]
 def _safe_output(root: pathlib.Path, raw: str | None) -> pathlib.Path:
     p = (root / str(raw or "canonical/tmp_hardcore_kernel.json")).resolve()
     if p == root or root not in p.parents:
-        raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
+        raise RuntimeError("PATH_OUTSIDE_REPOSITORY:" + str(p))
     p.parent.mkdir(parents=True, exist_ok=True)
     return p
 

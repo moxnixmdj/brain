@@ -31,7 +31,7 @@ def _safe_path(root: Any, raw: Any) -> pathlib.Path:
     base = pathlib.Path(root).resolve()
     p = (base / str(raw or "")).resolve()
     if p != base and base not in p.parents:
-        raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
+        raise RuntimeError("PATH_OUTSIDE_REPOSITORY:" + str(p))
     return p
 
 

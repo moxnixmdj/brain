@@ -25,7 +25,7 @@ def _safe_path(root, raw):
     root = pathlib.Path(root).resolve()
     p = (root / str(raw or "")).resolve()
     if p != root and root not in p.parents:
-        raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
+        raise RuntimeError("PATH_OUTSIDE_REPOSITORY:" + str(p))
     return p
 
 
@@ -225,7 +225,7 @@ def run(args, root):
     out_rel = str(args.get("output_path") or "")
     output = (repo / out_rel).resolve()
     if output == repo or repo not in output.parents:
-        raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
+        raise RuntimeError("PATH_OUTSIDE_REPOSITORY:" + str(output))
 
     # Refuse source/report aliases before parsing inputs or creating scratch.
     # Reuse the existing symlink/hardlink-aware authority boundary. The index

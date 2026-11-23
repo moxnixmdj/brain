@@ -50,7 +50,7 @@ def _safe_path(
         tmp_root = pathlib.Path(tempfile.gettempdir()).resolve()
         if p == tmp_root or tmp_root in p.parents:
             return p
-    raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
+    raise RuntimeError("PATH_OUTSIDE_REPOSITORY:" + str(p))
 
 
 def _git(cwd: pathlib.Path, *args: str, timeout: int = 20) -> subprocess.CompletedProcess[str]:
@@ -374,7 +374,7 @@ def run(args: dict[str, Any], root: Any) -> dict[str, Any]:
     repo = pathlib.Path(root).resolve()
     src = _safe_path(repo, str(args.get("source_root") or "."), allow_root=True, allow_temp_read=True)
     if not src.exists():
-        raise RuntimeError("SOURCE_ROOT_MISSING")
+        raise RuntimeError("SOURCE_ROOT_MISSING:" + str(src))
     out = _safe_path(repo, str(args.get("output_path") or ""), allow_root=False)
     git_root = _find_git_root(src, repo)
 
