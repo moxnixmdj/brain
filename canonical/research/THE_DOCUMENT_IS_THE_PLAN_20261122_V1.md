@@ -4557,3 +4557,65 @@ The machine can now say, per claim, whether it can *do* the thing. It still cann
 know** about an environment it has never seen: the census answers questions about the machine, not about
 the world. The 6 `NO_NAME_IN_THE_ROW` rows are the smallest instance of the bigger pattern — a row that
 names nothing cannot be checked, and naming is the first act of understanding.
+
+---
+
+# §A86 — "What do I know and what don't I" had two half-answers that disagreed
+
+The owner's sentence: *scan everything in the environment, retrieve from memory what you know and what you
+don't, get what you don't know instantly.* Two modules already answered half of it and **nothing connected
+them**:
+
+- `capability_type_surface_v1.unknowns()` — slots whose **type** could not be derived. Its only caller in
+  the whole tree was a test asserting it returns `{}`. Dead code.
+- `reachability_v2` — slots that could not be **filled** from real values here.
+
+Measured, four rows disagree outright. `git.repository.operate.v1`: the surface reports five untyped slots;
+the census also needs `repo_root` and `limit`, and `repo_root` is typed `PATH_DIR` — not unknown, simply
+unfilled. **A reader of `unknowns()` concludes the machine knows more than it does.** Two answers
+implemented twice drift; this project has recorded that lesson before and met it again.
+
+## The composed answer (`known_and_unknown_v1`)
+
+| state | count | what it means | what would close it |
+|---|---|---|---|
+| `DO` | **10** | ran here, produced something readable | — |
+| `SELF_ATTESTING` | **19** | ran, took no input, restated the registry | a real input and a real measurement |
+| `REFUSES` | **19** | code answered and declined (reason named) | a different request, not a different build |
+| `TYPED_OUT` | **37** | needs a value not in this tree | go and find the value |
+| `UNTYPED` | **14** | needs a value **and** a way to recognise one | learn what the slot means |
+| `UNDECLARED` | **52** | names nothing that can be looked up | a binding (A85 resolved these) |
+| `UNREACHABLE` | **3** | cannot load or call | fix the file |
+
+154 claims, one state each, `host_untouched: true`.
+
+**`SELF_ATTESTING` is its own state on purpose.** Folding it into `DO` would count a restatement of the
+registry as knowledge — the exact defect A84 found in 19 rows, reappearing at the layer that reports what
+the machine knows.
+
+## What else was already real, measured rather than assumed
+
+- **`environment_learning_v1.drive()` learns an unseen environment and plans the shortest way.** On a
+  two-bit environment: `['flip_b','flip_a']`, 2 steps, `PASS`. On three bits: 3 steps. Given an action that
+  sets all bits at once, it returns `['tap']` — **the shortcut, in one step**. This is the core of the
+  owner's hypothesis and it works. My first probe called `shortest_plan` with a predicate over state KEYS
+  and got `None`; the keys are content hashes, and `drive()` correctly tests `is_goal` against
+  *observations*. The defect was in the probe.
+- **`require_survey_plan_v1` reads a tool's own guide and binds a request to it** — route, require,
+  demonstrate, compose, execute-in-a-copy. 62 tests pass. No tool name is hardcoded; a test enforces it.
+
+## Honest status of the owner's idea
+
+The pieces exist and are measured. What is **not** true is that they are joined end to end: nothing yet
+takes `UNTYPED`/`TYPED_OUT` from this report and drives `require_survey_plan_v1` to fetch the missing
+knowledge from a tool's own documentation, then re-runs the census to prove the gap closed. That join is the
+next bottleneck, and it is now a named one with counts behind it rather than a hypothesis.
+
+## Green
+
+| run | result |
+|---|---|
+| `test_the_machine_can_say_what_it_does_not_know_v1.py` (new) | **8 passed** |
+| `test_require_survey_plan_v1.py` | **62 passed** |
+| `test_the_machine_can_run_its_own_claims_v1.py` | **22 passed** |
+| `test_a_claim_about_a_tool_is_a_fact_about_this_machine_v1.py` | **10 passed** |
