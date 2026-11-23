@@ -5371,3 +5371,85 @@ which is the only way a lesson like this survives.
 `solve_v1` + `mechanism_act_v1`, no model: documented programs, single and multi-act requests, effects
 confirmed by the environment, refusals classified into satisfied / repairable / unreadable. **Untouched:
 GUI, browser, and any environment whose effect is not a file in the tree.** 116 tests green.
+
+## §A98 — the program is its own documentation, if you can ask it questions
+
+### Why this is the right next thing
+
+Everything in §A90–A97 assumes the program describes itself. Agent-Diff (arXiv 2602.11224, Feb 2026)
+benchmarks the other case — **no-docs**, where the agent is given a service name and must discover the
+interface by exploration — and reports the frontier's failure there is not silence. It is **hallucinated
+task completion**: given null responses, agents "attempt Collections API, receives null responses, and
+hallucinate task completion." The same paper finds a genuinely novel interface scores **54.1** against
+**73.1** for familiar ones, which says part of the with-docs score is memory rather than skill.
+
+That is the cleanest external confirmation of two things this project already believes: that a system
+should refuse rather than guess, and that a benchmark built on well-known tools measures memorization.
+It also names exactly what we could not do: act at all without documents.
+
+Measured before building: given a program that prints only its name, `plan_from_documents` returns
+`THE_DOCUMENTS_STATE_NO_COMMAND`. Honest, and useless.
+
+### The idea
+
+**A program is its own documentation if you can ask it questions.** Every undocumented interface still
+answers, and its answers separate two cases that matter:
+
+    probe 'add'     -> NAME_REQUIRED          the VERB IS RIGHT; an argument is missing
+    probe 'add x'   -> exit 0, world changed  arity is two, and it worked
+    probe 'bogus'   -> UNKNOWN_VERB:bogus     the verb is NOT the program's
+
+`NAME_REQUIRED` is a membership test that came back **positive**. `UNKNOWN_VERB` is one that came back
+**negative**. Nothing interprets English; it reads whether the program accepted the shape offered.
+
+### The failure that taught the real mechanism
+
+Built against `mystery` (which refuses with `NAME_REQUIRED`), the module then met `ticketer` (which
+refuses with `MISSING_ARGUMENT`) and reported both of its real verbs `unreadable`. I had written the first
+program's vocabulary into a regex — a lookup wearing a mechanism's clothes, the same error §A93 records.
+
+The fix is not a bigger pattern. It is a **differential reading**: probe a verb that cannot exist, learn
+what *this* program says to "no such verb", and treat any refusal whose shape **differs** from that
+signature as evidence the verb is real. The denominator is measured, not listed.
+
+| | before | after |
+|---|---|---|
+| `open` / `show` on `ticketer` | **unreadable** | **arity 2 / 1** |
+| `delete` | rejected (correctly) | rejected (correctly) |
+| new vocabulary in future programs | breaks the module | calibrates automatically |
+
+### The safety bug, caught by testing rather than reasoning
+
+A probe of a mutating program mutates it. So the probe ran against a **copy** of the world. It was still
+writing to the **original**: the program path was resolved from the source tree, so the copy was never
+executed. Measured: `.tix.json` appeared in the caller's directory while the copy stayed clean.
+
+A copy that is never executed is not a sandbox — it is a decoration that makes the code *read* safe while
+it is not. Now the program is resolved into the copy and the copy is what runs.
+
+### End to end, no documentation, no model
+
+    learn   ticketer: open(2, mutating), show(1), delete(rejected)     <- from the program's own answers
+    act     ticketer open T-1 "printer is jammed"     -> exit 0, "opened T-1"
+    read    ticketer show T-1                         -> "printer is jammed"
+
+The read verb was learned too. Nothing was consulted.
+
+### What this is not — stated where the success is, not in a footnote
+
+It learns **shape**, never **meaning**. `act_hint` is a command that will run; whether `open` is the act a
+goal wants is a question this module cannot answer, and `not_learnt` says so in the same result that
+reports success. A caller who reads `verbs_learned` as understanding has been misled by omission, so the
+omission is not allowed. **The interface is enough to ACT, not enough to CHOOSE. Choosing is what the goal
+supplies** — and a goal that requires understanding a program's semantics is still beyond this.
+
+`NO_DISCRIMINATION` is the honest refusal: a program that answers nothing to every input reports that it
+cannot be learnt, rather than being modelled by guesswork. That is precisely the behaviour Agent-Diff
+found missing in the frontier.
+
+### Regression note
+
+`test_jit_knowledge_v1.py::LivePathRealTests::test_a_goal_that_compiles_does_not_go_looking` fails, and
+**it is not mine**: it fails identically in a pristine clone at `c6d258fc`, twelve commits before this
+branch's base, and independently of the runtime state files. Recorded rather than hidden or "fixed" by
+loosening it.

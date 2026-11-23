@@ -1,0 +1,51 @@
+#!/usr/bin/env python3
+"""A small ticketing CLI that documents nothing. Refusal vocabulary deliberately unlike ledgerctl's."""
+import json
+import os
+import sys
+
+STATE = os.path.join(os.path.dirname(os.path.abspath(__file__)), ".tix.json")
+
+
+def load():
+    try:
+        with open(STATE) as handle:
+            return json.load(handle)
+    except Exception:
+        return {"tickets": {}}
+
+
+def save(data):
+    with open(STATE, "w") as handle:
+        json.dump(data, handle)
+
+
+args = sys.argv[1:]
+if not args:
+    sys.stderr.write("usage: ticketer <command> [args]\n")
+    sys.exit(2)
+
+command = args[0]
+if command == "open":
+    if len(args) < 3:
+        sys.stderr.write("MISSING_ARGUMENT\n")
+        sys.exit(2)
+    state = load()
+    state["tickets"][args[1]] = args[2]
+    save(state)
+    print("opened " + args[1])
+    sys.exit(0)
+
+if command == "show":
+    if len(args) < 2:
+        sys.stderr.write("MISSING_ARGUMENT\n")
+        sys.exit(2)
+    print(load()["tickets"].get(args[1], "none"))
+    sys.exit(0)
+
+if command == "shutdown":
+    print("bye")
+    sys.exit(0)
+
+sys.stderr.write("INVALID_COMMAND\n")
+sys.exit(2)
