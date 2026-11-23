@@ -4032,3 +4032,91 @@ That is a capability gap, not a language gap, and it is the honest frontier:
 
 Suite **145 passed, 1 pre-existing failure**; `tasks_v1` **13/13**; `unseen_program_v1` **6/6**. No
 code changed: this round established a fact before acting on it.
+
+---
+
+## §A81 — THE MISSING ADAPTER, WRITTEN AND VERIFIED (2026-11-22)
+
+A80 found that `file.directory_listing.v1` had never existed: the adapter it declares raised
+`BOUND_CAPABILITY_ADAPTER_MISSING`. This round wrote that adapter and made the verification check
+that could never run pass — then stopped short of the promotion it does not earn.
+
+### What was written
+
+`canonical/runtime/bound_capabilities/file_survey.py` — it reads one directory inside the root the
+caller allows and reports its entries. It reads; it never writes, renames or deletes. Refusals are
+raised, never returned as an empty folder, because **an empty folder and a folder that is not there
+are different facts**:
+
+| input | result |
+|---|---|
+| `/etc`, `..`, `../..` | `PATH_OUTSIDE_ROOT` |
+| the root itself | `REFUSES_THE_REPOSITORY_ROOT` |
+| a file | `PATH_NOT_DIRECTORY` |
+| a command it does not implement | `COMMAND_NOT_SUPPORTED:<name>` |
+| `canonical/runtime` | **2247 entries**, 5 dirs, 2242 files |
+
+It returns `entries` (with `is_dir`, `is_file`, `is_symlink`, `size_bytes`), `names`, **`files`**,
+`entry_count`, and `answer` as the listing text. `files` is there because the answer-shape gate was
+written against this row and looks for exactly that name — it is the difference between "the command
+ran" and "the caller got the list".
+
+### The verification now runs, and here is what makes that true
+
+```
+verification ok: True
+  True  names every entry this file created
+  True  distinguishes the directory from the files
+  True  delivers an entry the answer-shape gate can project onto `files`
+  True  refuses a file where a directory is required  (PATH_NOT_DIRECTORY)
+```
+
+The receipt (`ASTRA-VERIFY-FILE-DIRECTORY-LISTING-001__RECEIPT.json`) is **generated from that run**,
+with the adapter's SHA-256 computed from its bytes and the replay command recorded. It is not written
+by hand, and its `independence` field says plainly what it is:
+
+> *code-level only: a world is built with known names and the listing is compared to os.listdir. NOT
+> independent-personnel verification.*
+
+The new suite (`test_the_directory_survey_lists_what_is_there_v1.py`, **14 tests**) deliberately does
+**not** call that verifying function for its main assertions: it recomputes the listing from the
+filesystem, so a change that broke the adapter and the verifier together would still be caught.
+
+### What is NOT done, and why it was not faked
+
+**The row is still not in the registry.** `file.directory_listing.v1` is absent, so
+`list the files in this folder` still compiles to `source.candidates.enumerate.stdlib` and is still
+refused. Confirmed after the receipt was written:
+
+```
+row in registry: False
+sentence status: FAIL_CLOSED__ROUTE_ADMISSION_REJECTED
+```
+
+A receipt is **evidence, not a promotion** — the lane that would carry it into the registry
+(`capability_receipt_lane_v1`) derives a row's keywords from the module FILENAME, which for
+`file_survey.py` yields `["survey"]` and nothing a person would type. Wiring the row properly needs
+keywords that are the words people use ("list the files", "what is in this folder"), and that is a
+design decision about the registry, not a line to slip in at the end of a long round. Writing the row
+by hand with a receipt that never mentioned it would be the same defect A80 reported, one layer up.
+
+So the honest state: **the capability is now real, verified, and unreachable.** The gap that remains
+is one of *joining* — a verified adapter to a sentence — not of the machine being unable to do it.
+
+### Verified
+
+| check | result |
+|---|---|
+| new suite `test_the_directory_survey_lists_what_is_there_v1.py` | **14 passed** |
+| 8 suites together | **159 passed, 1 failed** (was 145/1) |
+| the 1 failure | pre-existing, identical at HEAD |
+| `tasks_v1` / `unseen_program_v1` | **13/13** / **6/6** |
+| the declared verification | runs for the first time; **4/4 checks pass** |
+| the front door on "list the files in this folder" | still refused — correctly, no false capability |
+
+### A note on the test fixtures
+
+The first version of the suite failed four tests, and the cause was the test, not the adapter: the
+fixture put its contents in the root and asked for `"."`, which the adapter refuses **on purpose**.
+The fix was to give the fixture a named directory. A refusal that breaks your tests is worth reading
+before it is worth relaxing.
