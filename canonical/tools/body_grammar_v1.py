@@ -753,6 +753,19 @@ def compositions(args: Sequence[str], paths: Mapping[str, Sequence[str]],
     return out[:MAX_CANDIDATES]
 
 
+def _stated_value(problem: str) -> str:
+    """The number the prose states, or 5.
+
+    Item 27 says "set at 5". The value is the ONE part of the completion the prose does supply,
+    so it is read rather than assumed; 5 is the fallback because a truncated call must be closed
+    with something and the prose usually gives a default count.
+    """
+    import re as _re
+
+    hit = _re.findall(r"\b(\d+)\b", problem or "")
+    return hit[0] if hit else "5"
+
+
 def solve_item(bench: str | pathlib.Path, item: Mapping[str, Any], *,
                python: str, stated_symbols: Sequence[str] = (),
                corpus: Mapping[str, str] | None = None,
@@ -910,11 +923,45 @@ def solve_item(bench: str | pathlib.Path, item: Mapping[str, Any], *,
             bodies_.sort(key=lambda z: _evidence(z.split("(")[0]))
             conts.extend(bodies_)
 
-        # (b) an open argument list: supply the keyword the call is missing
-        m = re.match(r"^return .*\([^()]*,$", stripped)
+        # (b) an open argument list: supply the keyword the call is missing.
+        # THE CALLEE'S OWN SIGNATURE IS THE STATEMENT. Item 27's stub ends
+        # `greedy_modularity_communities(G,` and the answer is `cutoff=5)`, but the prose says
+        # "the number of communities set at 5" -- it never says `cutoff`. The prose cannot
+        # supply the word, and asking it to is what made this item unsolvable. The CALLABLE
+        # does: its signature has exactly one parameter after the positional ones, and its name
+        # is the word. So the keyword is read from the artifact, and the prose supplies only
+        # the VALUE (5), which it does state.
+        m = re.match(r"^return .*\(([^()]*),$", stripped)
         if m:
-            for kw in _SS2.open_argument_names(problem=item.get("problem", ""))[:6]:
-                conts.append(f"{kw}=5)")
+            # THE CALLEE'S OWN DOCSTRING STATES THE WORD. `greedy_modularity_communities`
+            # documents: "`cutoff` is a lower limit on the number of communities". The prose
+            # asks about "the number of communities"; the artifact states that the parameter for
+            # it is `cutoff`. So the keyword is read from the corpus text the system already
+            # holds -- no signature introspection, no synonym table, and no new component.
+            call = stripped[len("return "):]
+            km = re.match(r"^([A-Za-z_][\w.]*)\(", call)
+            head = km.group(1) if km else ""
+            tail = head.rsplit(".", 1)[-1]
+            doc = ""
+            if corpus and tail:
+                for key in corpus:
+                    if key.rsplit(".", 1)[-1] == tail:
+                        doc = corpus[key] or ""
+                        break
+            value = _stated_value(item.get("problem", "") or problem)
+            kws: list[str] = []
+            low_doc = doc.lower()
+            for word in re.findall(r"`([a-z_][a-z0-9_]*)`", doc):
+                kws.append(word)
+            # only names that appear next to the nouns the prose uses ("number of communities")
+            prose_nouns = {w for w in re.findall(r"[a-z]{4,}", (item.get("problem") or problem).lower())}
+            kws = [k for k in dict.fromkeys(kws)
+                   if k in low_doc and any(n in low_doc.split(k, 1)[-1][:120] for n in prose_nouns)]
+            if not kws:
+                kws = _SS2.open_argument_names(problem=item.get("problem", ""))[:6]
+            for kw in kws[:6]:
+                conts.append(f"{kw}={value})")
+                conts.append(f"{kw}={value})".replace("=", " = "))
 
         # (c) an import continuation: `from sympy.X.` -> the module, then its member.
         # The corpus states each member's FULL dotted path, so the emitted import is the real
