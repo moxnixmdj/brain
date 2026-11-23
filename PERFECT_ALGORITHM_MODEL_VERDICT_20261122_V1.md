@@ -275,3 +275,47 @@ persisted. The `.xz` goal reached the goal via `lzcat` (a stdout-capture
 path that is honest — the predicate verifies the `.xz` content); `xz` is
 still tier-1 narrowing-first. No warm/carried-model evidence is claimed for
 these goals; that extends the same §3 limitation that pervades the env.
+
+## 10. Zip/bzip2 single-experience learning + carried-model walk (2026-11-23, measured)
+
+The archive unseen-content probe (§7, `.tar.gz` content A→B) was extended to the
+newly-reachable formats via `unseen_zip_bzip2_computer_probe_20261123.py`
+(receipt `/tmp/unseen_zip_bzip2_probe_result.json`). Each case: TEACH on
+content A with 2 fresh instances offered (→ ADMIT), COLD on content B with an
+empty store, WARM on content B seeded by TEACH, CONTROL re-running content A.
+Plus a priors-only case: TEACH with no fresh instances offered (admit REFUSED,
+priors still persisted), run content B against that memory — the honest
+carried-model walk.
+
+**zip (file-writing path)** — goal: `zip data.txt into data.zip`
+- TEACH: PASS, LEARNED_AND_VERIFIED, admit ADMIT 2/2, persist True, plan `[run_zip]`, 0.05 s.
+- COLD (B): PASS, VERIFIED_NOT_PERSISTED, 0.044 s (scan 0.034 s).
+- WARM (B): PASS, INSTANT_RECALL — memory_replay `PASS__REPLAY_REACHED_GOAL` rule `ga-f18207ed0c435d79`, 0.003 s (0.044 s cold → 0.003 s warm, ~15x).
+- CONTROL (A): PASS, INSTANT_RECALL, 0.004 s.
+- Carried-model (B, priors-only memory): warm_walk `OPEN__CARRIED_WALK_FAILED` (1 act call, 0 edges, priors_used 18) then full scan re-derived content B cold (pass, 0.046 s).
+
+**bzip2 (stdout-capture path)** — goal: `make a bzip2 archive out.bz2`
+- TEACH: PASS, LEARNED_AND_VERIFIED, admit ADMIT 2/2, persist True, plan `[run_bzip2]`, 15.4 s.
+- COLD (B): PASS, VERIFIED_NOT_PERSISTED, 13.99 s (scan 12.0 s).
+- WARM (B): PASS, INSTANT_RECALL — memory_replay `PASS__REPLAY_REACHED_GOAL` rule `ga-c029aec7cd7b07c7`, 0.004 s (14.0 s cold → 0.004 s warm, ~3500x).
+- CONTROL (A): PASS, INSTANT_RECALL, 0.004 s.
+- Carried-model (B, priors-only memory): warm_walk `OPEN__CARRIED_WALK_FAILED` (1 act call, 0 edges, priors_used 60, cap 120) then full scan re-derived content B cold (pass, 13.1 s).
+
+**The carried-model question, answered honestly.** The consumer of the archive
+warm-replay path never exercised `warm_walk` before this probe. It now does, and
+the answer is precise: the carried model does **not** generalize across content.
+The carried model's keys are content-derived (`state_key` hashes the observed
+tree), so content B's true root is absent from content A's model; the walk
+never leaves the root state (0 edges explored, all priors discarded as stale)
+and the full scan re-derives from scratch. Only the content-free plan rule
+generalizes (admitted on content A by replaying the 2 fresh variants, then
+replayed in 0.003–0.004 s on content B). This is exactly the §3 statement,
+now evidenced on a second and third format: the generalization that persists is
+the content-free plan rule, never the transition model.
+
+Honest status: §6-class claim (one experience on content A replays on content B,
+verified, instant) is now evidenced for three formats — `.tar.gz` (§7), `.zip`,
+`.bz2` — at identical fidelity (admit 2/2, memory_replay PASS, 0.003–0.004 s warm,
+0.044–14 s cold). No cross-kind transfer is claimed (both goals run under
+`computer_file_ops`). The admit stays honest about what persists: a plan rule
+(the trace stays hashed evidence inside it, never served).
