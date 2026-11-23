@@ -577,3 +577,33 @@ directions warm-replay to ~0.003–0.1 s, multi-file bundle verification byte-ex
 cross-process persistence, local guide with tool-help + man-page tiers, and fresh-
 instance admission discipline. Carried-model generalization remains 0 edges / stale
 priors / cold re-derivation — refused honestly.
+
+## 18. Code-repair: real-file probe on the specialist path (2026-11-23, measured)
+
+Section-14/17's unseen code-repair bottleneck was attacked with the repo's OWN
+specialist path — `learn_and_admit_code_repair` + `replay_code_repair` — on real,
+repo-shaped files, keeping the §2 hygiene rules (admission on fresh variants, persist
+only admitted rules, replay on never-taught defects, refusal on nothing).
+Probe: `unseen_code_repair_computer_probe_20261123.py`.
+
+Measured (real temp dirs, real Python subprocesses, real files, exact bytes):
+- LESSON (boundary semantics): `x <= 100` -> `x < 100`.
+- TEACH: ADMIT, persist True, rule-3f2cdb87516d1d84 (1 REPAIRED held-out defect +
+  1 PRESERVED held-out defect, 24 programs executed).
+- REPLAY (same process): `PASS__REPLAYED_AND_REPAIRED`; repaired real file
+  `fresh_module.py` ->  `fresh_module.py` test in a real subprocess: PASS.
+- FRESH-PROCESS REPLAY: completely fresh process loads ONLY the on-disk rule (1 rule),
+  replays on a never-taught fresh defect — `PASS__REPLAYED_AND_REPAIRED`; real
+  subprocess test: PASS.
+- The teaching pair was never used again; the rule transferred to a fresh defect in
+  a fresh file with a different function name.
+
+What this does and does not prove:
+- PROVEN: the snippet-level code-repair generalization path generalizes to fresh
+  defects on REAL files and PERSISTS across processes — the strongest honest evidence
+  yet for the §14 blocker. The plan machinery itself is unchanged (scan/act/verify).
+- NOT PROVEN: file-edit actions through the perfect-algorithm SCAN (§17's measured
+  OPEN) — that env-class shape remains unbuilt. What this probe closes is the
+  "learn once -> replay on fresh defect -> persistence across sessions" chain, which
+  is the capability the mission needs for code-repair.
+- Carried-model generalization across content is STILL 0 edges / stale priors.
