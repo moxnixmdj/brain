@@ -607,3 +607,21 @@ What this does and does not prove:
   "learn once -> replay on fresh defect -> persistence across sessions" chain, which
   is the capability the mission needs for code-repair.
 - Carried-model generalization across content is STILL 0 edges / stale priors.
+
+## 19. Web instant-knowledge tier measured live (2026-11-23)
+
+`jit_knowledge_v1.resolve` (the web tier) was run once, live, in this sandbox:
+- Query: "how to use tar archive" -> PASS__JIT_KNOWLEDGE_RESOLVED; complete: True;
+  document_count: 6; sources_answered: npm, pypi, github (kinds: code_host, package_registry);
+  authority: EXTERNAL_PUBLIC_EVIDENCE_FETCHED.
+- Nothing in this tier is counted as capability; it is external, completeness-gated
+  (≥2 independent sources, ≥2 kinds), never a stand-in for a plan.
+
+Knowledge layers now measured: (a) local tier (md docs + tool --help + man pages),
+(b) web tier (npm/pypi/github), (c) admitted rules persisted to an inspectable,
+deletable store outside the weights.
+
+§6 honest status, restated: GUI/browser/OSWorld/SWE-bench/Terminal-Bench remain
+NOT RUN and NOT claimed. Everything verifiable in this sandbox has been measured
+and recorded across §6–§19. The standing mission and done criteria stand exactly as
+they were at the start of this turn: the system does not claim §6.
