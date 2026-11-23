@@ -2584,3 +2584,38 @@ still refuses `tar` for copy, whose help names no such act) and not evidence of 
 **Verified:** 75 tests; 12 effect tasks under `PYTHONHASHSEED` 7/99/default; unseen `vaultctl` 6/6;
 `tar -cf backup.tgz /tmp/data` complete; `tar` copy refused; `grep localhost /etc/hosts` correct
 with the page's own verb accepted and synonyms honestly marked ungrounded.
+
+### A64 — "the best part is no part" answered by ablation, not by opinion
+
+The law says remove before adding. Taken literally it says the four scoring terms in `route()` should
+go, since accounting was supposed to replace them. That is a belief until it is measured, so it was
+measured — each term removed on its own, everything else held.
+
+| removed | effect tasks | unseen program |
+|---|---|---|
+| nothing (baseline) | **12/12** | **6/6** |
+| `4 ×` request word in the page's name | 10/12 | 6/6 |
+| `2 ×` request word only in the page's summary | 10/12 | 6/6 |
+| `3 ×` request word equal to a flag the page documents | 11/12 | 6/6 |
+| `6` page's own last word is the requested act | 12/12 | 6/6 |
+| **all of them at once** | **1/12** | **3/6** |
+
+**Every term is load-bearing except one, and the one that is not is worth keeping.** Removing the
+act-name term alone changes nothing on the fixture programs — but it was added for
+`vaultctl secret get` against `policy allow`, whose summary *says* "read a secret" while `secret get`
+says "print the value". The unseen program scores 6/6 either way because that case is now caught by
+accounting instead. So it is a redundant safety net: it costs one comparison and it catches a shape
+the fixtures do not contain. Kept and labelled as such rather than removed on principle.
+
+**The literal reading of the law was wrong here, and that is the useful finding.** "The best part is
+no part" is a rule about parts that do not work. A part that is the difference between 12/12 and
+10/12 is not a part to remove; removing it is exactly the wasted effort the law is trying to
+prevent. The test for a part is what the ablation table says, not how clever the part looks.
+
+**What this changes about the design.** Routing is now two layers with different jobs, and both are
+needed: the weighted score *proposes* a page, and accounting *disposes* among proposals. A pure
+accounting router has no way to prefer `issue list` over `project list` when both can house the
+request; a pure weighted router cannot tell `issue create` from `issue list` when the request names
+a title only one of them has. Neither layer is decoration.
+
+**Verified after restoring:** 77 tests; 12/12 effect tasks; unseen `vaultctl` 6/6.
