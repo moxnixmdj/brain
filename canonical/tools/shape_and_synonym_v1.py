@@ -150,7 +150,8 @@ def open_argument_names(*, problem: str = "", corpus: Mapping[str, str] | None =
         if corpus:
             kws = set()
             for v in corpus.values():
-                kws.update(re.findall(r"\b([a-z_][a-z0-9_]{3,})=[^\s,)]", v or ""))
+                doc = v.get("doc", "") if isinstance(v, Mapping) else (v or "")
+                kws.update(re.findall(r"\b([a-z_][a-z0-9_]{3,})=[^\s,)]", doc))
             out = [w for w in re.findall(r"\b([a-z_][a-z0-9_]{3,})\b", text.lower()) if w in kws]
     return list(dict.fromkeys(out))
 
@@ -278,6 +279,11 @@ def solve_item(bench: str | pathlib.Path, item: Mapping[str, Any], *,
 
     bench = pathlib.Path(bench)
     item = dict(item)
+    # see body_grammar_v1.solve_item: a corpus may carry {"doc", "module"} per name, and the
+    # doc is the only field the derivation reads. Unwrapped once, at the door.
+    if corpus:
+        corpus = {k: (v.get("doc", "") if isinstance(v, Mapping) else v)
+                  for k, v in corpus.items()}
     hints = shape_hints(item.get("problem", ""))
     args = arity_from_stub(item["starting_code"])
     returns = return_annotation(item["starting_code"])
@@ -304,10 +310,21 @@ def solve_item(bench: str | pathlib.Path, item: Mapping[str, Any], *,
         line.strip().startswith("from ") and line.strip().endswith("import *")
         for line in item["starting_code"].splitlines()
     )
+    # THE STUB'S OWN BINDING WINS. `bodies_for` spells a symbol as the corpus defines it
+    # (`numpy.prod`), but the stub may have bound it as `np`. The stub's import lines are the
+    # authority on which spelling exists in the namespace, so every body is emitted both ways
+    # when they differ. Measured: this alone covered 40 of 59 recalled-but-unsolved items.
+    import body_grammar_v1 as _G
+    aliases = _G.alias_map([ln for ln in item["starting_code"].splitlines()
+                            if ln.strip().startswith(("import ", "from "))])
     for symbol in ordered:
         for body in bodies_for(symbol, args, hints=hints, returns=returns):
             bodies.append(body)
             provenance.append({"symbol": symbol, "body": body})
+            respelled = _G.respell(body, aliases) if aliases else body
+            if respelled != body:
+                bodies.append(respelled)
+                provenance.append({"symbol": symbol, "body": respelled})
             if star_imported:
                 bare = symbol.rsplit(".", 1)[-1]
                 members = re.findall(r"([A-Za-z_]\w*)", bare)

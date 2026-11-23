@@ -71,6 +71,110 @@ def literals_in(problem: str, starting_code: str) -> list[str]:
     return re.findall(r"'([^']{1,24})'", problem or "") or []
 
 
+def alias_map(stub_imports: Sequence[str]) -> dict[str, str]:
+    """Which spelling the stub actually bound each module to.
+
+    THE BUG THIS FIXES, measured on 40 of 59 recalled-but-unsolved items. The corpus records a
+    name's DEFINING module -- `numpy.prod` lives in `numpy.core.fromnumeric` -- so the grammar
+    emitted `numpy.prod(arr)`. But the stub's own line is `import numpy as np`, which binds the
+    name `np` and NOT `numpy`, so the body raised NameError and the item failed with the right
+    answer in its hands. Same for `from scipy import linalg` (binds `linalg`), `import numpy`
+    (binds `numpy`), and `from scipy.spatial import distance` (binds `distance`).
+
+    Three shapes, all read from the stub's own text:
+        import a.b as c        -> {"a.b": "c", "a": "c"}      (only the bound name c is legal)
+        import a.b             -> {"a.b": "a.b", "a": "a"}
+        from a import b        -> {"a.b": "b", "a": "b"}
+    """
+    out: dict[str, str] = {}
+    for line in stub_imports or ():
+        t = line.strip()
+        if t.startswith("import "):
+            for part in t[len("import "):].split(","):
+                bits = part.strip().split(" as ")
+                mod = bits[0].strip()
+                if not mod:
+                    continue
+                bound = bits[1].strip() if len(bits) > 1 else mod
+                out[mod] = bound
+                out.setdefault(mod.split(".")[0], bound if "." not in mod else mod.split(".")[0])
+        elif t.startswith("from ") and " import " in t:
+            head, _, names = t.partition(" import ")
+            mod = head[len("from "):].strip()
+            for part in names.split(","):
+                bits = part.strip().split(" as ")
+                nm = bits[0].strip()
+                if not nm or nm == "*":
+                    continue
+                bound = bits[1].strip() if len(bits) > 1 else nm
+                out[f"{mod}.{nm}"] = bound
+    return out
+
+
+def bound_spelling(dotted: str, aliases: Mapping[str, str]) -> str | None:
+    """The shortest legal spelling of `dotted` under the stub's own bindings.
+
+    Returns None when the stub binds no prefix of the path, because emitting a name the stub
+    never introduced is exactly the NameError this exists to prevent.
+    """
+    if not dotted:
+        return None
+    parts = dotted.split(".")
+    # longest bound prefix first: `scipy.linalg.expm` with `from scipy import linalg` binds
+    # `scipy.linalg` -> `linalg`, which is shorter and legal.
+    for i in range(len(parts) - 1, 0, -1):
+        prefix = ".".join(parts[:i])
+        if prefix in aliases:
+            bound = aliases[prefix]
+            rest = ".".join(parts[i:])
+            return f"{bound}.{rest}" if bound else rest
+    if parts[0] in aliases:
+        return aliases[parts[0]] + "." + ".".join(parts[1:]) if len(parts) > 1 else aliases[parts[0]]
+    return None
+
+
+def respell(body: str, aliases: Mapping[str, str]) -> str:
+    """Rewrite every dotted path in `body` to the spelling the stub actually bound.
+
+    Only touches identifier runs that are followed by a dot, so string literals and bare
+    parameter names are untouched. `np.prod(arr)` is already legal and comes back unchanged.
+    """
+    def _one(m: re.Match) -> str:
+        dotted = m.group(1)
+        root = dotted.split(".")[0]
+        if root in aliases and aliases[root] != root:
+            return aliases[root] + dotted[len(root):]
+        return dotted
+    return re.sub(r"\b([A-Za-z_]\w*(?:\.[A-Za-z_]\w*)*)\b(?=\s*[.(])", _one, body)
+
+
+def qualified_spellings(names: Sequence[str], modules: Mapping[str, str],
+                        aliases: Mapping[str, str]) -> list[str]:
+    """The spellings of each stated name that the stub's own imports make legal.
+
+    THE MISSING LINK, measured on item 72. The corpus knows `prod` lives in module `numpy`,
+    and the stub wrote `import numpy as np`. The bare body `prod(arr)` is a NameError because
+    the stub never bound `prod`; the corpus spelling `numpy.prod(arr)` is also a NameError
+    because the stub bound the name to `np`. The only body that runs is `np.prod(arr)` -- and
+    nothing in the pipeline was computing the module-qualified-then-aliased form.
+
+    So: for every name, join it to its defining module, then respell that dotted path under the
+    stub's bindings. Only spellings the stub actually introduced are returned.
+    """
+    out: list[str] = []
+    for nm in names:
+        if not nm or "." in nm:
+            continue
+        mod = modules.get(nm) or ""
+        if not mod:
+            continue
+        dotted = f"{mod}.{nm}"
+        spelled = bound_spelling(dotted, aliases)
+        if spelled and spelled != nm:
+            out.append(spelled)
+    return list(dict.fromkeys(out))
+
+
 def properties_of(python: str, imports: Sequence[str], spec: Mapping[str, str],
                   *, timeout: float = 300.0) -> dict[str, list[str]]:
     """Which members are plain properties? Those are readable without a call."""
@@ -170,6 +274,7 @@ def compositions(args: Sequence[str], paths: Mapping[str, Sequence[str]],
                  return_annotations: Sequence[str] = (),
                  guide_bodies: Sequence[str] = (),
                  stub_imports: Sequence[str] = (),
+                 modules_in_scope: Mapping[str, str] = None,
                  nested_short: Mapping[str, Sequence[str]] | None = None,
                  kwarg_names: Sequence[str] = (),
                  func_name: str = "",
@@ -191,11 +296,41 @@ def compositions(args: Sequence[str], paths: Mapping[str, Sequence[str]],
     out: list[dict] = []
     seen: set[str] = set()
 
+    # THE STUB'S OWN BINDING WINS OVER THE CORPUS'S DEFINING MODULE. Measured: 40 of the 59
+    # recalled-but-unsolved items failed this way. The corpus knows `numpy.prod` is defined in
+    # `numpy.core.fromnumeric`, but the stub wrote `import numpy as np`, which binds `np` and
+    # NOT `numpy` -- so the correct answer in corpus spelling raises NameError. Every body is
+    # therefore respelled to the name the stub actually bound before it is considered.
+    _aliases = alias_map(stub_imports)
+
+    # A BARE NAME THAT LIVES IN A MODULE THE STUB IMPORTED MUST BE QUALIFIED. `respell` can
+    # only rewrite a name that is ALREADY dotted, so `any(arr)` came back untouched and the
+    # legal `np.any(arr)` was never built -- measured on items 71-74, where the corpus knows
+    # `any` lives in `numpy` and the stub bound `np`. The module is not a guess: it is what
+    # the corpus recorded at build time from the artifact's own `__all__`.
+    def _qualify(body: str) -> str:
+        if not _aliases or not modules_in_scope:
+            return body
+        def _one(m: re.Match) -> str:
+            root = m.group(1)
+            mod = modules_in_scope.get(root)
+            if not mod:
+                return root
+            spelled = bound_spelling(f"{mod}.{root}", _aliases)
+            return spelled or root
+        return re.sub(r"(?<![\w.])([A-Za-z_]\w*)(?=\s*\()", _one, body)
+
     def add(kind: str, body: str) -> None:
         if body in seen or len(body) >= 400:
             return
         seen.add(body)
         out.append({"kind": kind, "body": body})
+        if _aliases:
+            for alt, tag in ((respell(body, _aliases), "+alias"),
+                             (_qualify(body), "+qualified")):
+                if alt and alt != body and alt not in seen and len(alt) < 400:
+                    seen.add(alt)
+                    out.append({"kind": kind + tag, "body": alt})
 
     low = set(re.findall(r"[a-z]{2,}", (problem or "").lower()))
 
@@ -776,6 +911,20 @@ def solve_item(bench: str | pathlib.Path, item: Mapping[str, Any], *,
 
     bench = pathlib.Path(bench)
     item = dict(item)
+    # NORMALISE THE CORPUS SHAPE AT THE DOOR. A corpus may be {name: doc} or
+    # {name: {"doc": ..., "module": ...}}. The MODULE is what makes a qualified body
+    # (`scipy.linalg.expm`) constructible at all, but 30 call sites only want the doc, so
+    # the shape is unwrapped once here instead of guarded at every read. Measured: dropping
+    # the module silently zeroed scipy (0/34) while networkx stayed 7/8.
+    modules: dict[str, str] = {}
+    if corpus:
+        # keep the DEFINING MODULE aside before the doc is kept: the module is what makes a
+        # qualified spelling (`np.prod`) constructible, and it is not derivable from the doc.
+        for _k, _v in corpus.items():
+            if isinstance(_v, Mapping) and _v.get("module"):
+                modules[_k] = _v["module"]
+        corpus = {k: (v.get("doc", "") if isinstance(v, Mapping) else v)
+                  for k, v in corpus.items()}
     imports, alias = S._imports_and_alias(item["starting_code"])
     args = parameters(item["starting_code"])
     # The function's own name: it states the name argument a constructor needs
@@ -845,7 +994,14 @@ def solve_item(bench: str | pathlib.Path, item: Mapping[str, Any], *,
         # the shallowest occurrence only: the entry point, not every namespace duplicate
         hit.sort(key=lambda d: (d.count("."), len(d)))
         declared.extend(hit[:1])
-    ordered_stated = list(dict.fromkeys(list(stated_symbols) + declared))
+    # THE QUALIFIED SPELLING OF EVERY STATED NAME, FIRST. `prod` is stated and lives in module
+    # `numpy`; the stub bound `np`. Neither the bare `prod(arr)` nor the corpus spelling
+    # `numpy.prod(arr)` runs -- only `np.prod(arr)` does. Measured: this is the difference
+    # between a body that raises NameError and one that passes, on 40 of 59 recalled failures.
+    _aliases_here = alias_map([ln for ln in item["starting_code"].splitlines()
+                               if ln.strip().startswith(("import ", "from "))])
+    _qualified = qualified_spellings(list(stated_symbols) + declared, modules, _aliases_here)
+    ordered_stated = list(dict.fromkeys(_qualified + list(stated_symbols) + declared))
 
     # DERIVE THE STATED CONTINUATION. A stub may end mid-statement, and that incomplete line
     # STATES WHICH KIND OF CONTINUATION IS MISSING:
@@ -946,7 +1102,8 @@ def solve_item(bench: str | pathlib.Path, item: Mapping[str, Any], *,
             if corpus and tail:
                 for key in corpus:
                     if key.rsplit(".", 1)[-1] == tail:
-                        doc = corpus[key] or ""
+                        _v = corpus[key]
+                        doc = (_v.get("doc", "") if isinstance(_v, Mapping) else _v) or ""
                         break
             value = _stated_value(item.get("problem", "") or problem)
             kws: list[str] = []
@@ -1083,6 +1240,7 @@ def solve_item(bench: str | pathlib.Path, item: Mapping[str, Any], *,
                          property_paths=property_paths,
                          imported_names=stub_names,
                          stub_prefixes=stub_prefixes,
+                         modules_in_scope=modules,
                          return_annotations=[returns] if returns else [],
                          guide_bodies=guide_first,
                          # THE LINES, not the parsed names. `stub_names` is a list of
