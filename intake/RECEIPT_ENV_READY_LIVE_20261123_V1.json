@@ -1,0 +1,2081 @@
+{
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "date": "2026-11-23",
+ "measured": [
+  {
+   "artifacts": 32,
+   "bytes": 10586020,
+   "cold_seconds": 27.8663,
+   "cold_verdict": "ENVIRONMENT_BROKERED",
+   "commit": "3c7baaa05ab4",
+   "records": 34,
+   "repo": "psf/requests",
+   "run_tests_passed": 619,
+   "run_tests_verdict": "ENVIRONMENT_BROKERED",
+   "tamper_from_memory": false,
+   "tamper_recheck_ok": false,
+   "tamper_verdict": "ENVIRONMENT_BROKERED",
+   "warm_from_memory": true,
+   "warm_registry_requests": 0,
+   "warm_seconds": 0.7827,
+   "warm_verdict": "ENVIRONMENT_BROKERED_FROM_MEMORY"
+  },
+  {
+   "artifacts": 14,
+   "bytes": 2460381,
+   "cold_seconds": 11.2159,
+   "cold_verdict": "ENVIRONMENT_BROKERED",
+   "commit": "49943b5a9441",
+   "records": 16,
+   "repo": "pallets/flask",
+   "run_tests_passed": 494,
+   "run_tests_verdict": "ENVIRONMENT_BROKERED",
+   "tamper_from_memory": false,
+   "tamper_recheck_ok": false,
+   "tamper_verdict": "ENVIRONMENT_BROKERED",
+   "warm_from_memory": true,
+   "warm_registry_requests": 0,
+   "warm_seconds": 0.3334,
+   "warm_verdict": "ENVIRONMENT_BROKERED_FROM_MEMORY"
+  }
+ ],
+ "model_calls": 0,
+ "python": "3.11.2",
+ "schema": "BRAIN_ENV_READY_LIVE_TRIAL_V1",
+ "seconds": 134.29,
+ "trials": [
+  {
+   "clean_isolation": "/tmp/brain_envs/e5f4192e8cd09975/venv/bin/python",
+   "clone": {
+    "error": null,
+    "head": "3c7baaa05ab4aa49cc819ce3a819d260de19c157",
+    "ok": true,
+    "seconds": 0.701
+   },
+   "cold": {
+    "authority": "NONE__PRODUCER_RUN_SANDBOX",
+    "declarations": {
+     "required": [
+      {
+       "extras": [],
+       "marker": "",
+       "name": "charset_normalizer",
+       "self": null,
+       "specifier": ">=2,<4"
+      },
+      {
+       "extras": [],
+       "marker": "",
+       "name": "idna",
+       "self": null,
+       "specifier": ">=2.5,<4"
+      },
+      {
+       "extras": [],
+       "marker": "",
+       "name": "urllib3",
+       "self": null,
+       "specifier": ">=1.26,<3"
+      },
+      {
+       "extras": [],
+       "marker": "",
+       "name": "certifi",
+       "self": null,
+       "specifier": ">=2023.5.7"
+      },
+      {
+       "extras": [],
+       "marker": "",
+       "name": "pytest",
+       "self": null,
+       "specifier": ">=2.8.0,<10"
+      },
+      {
+       "extras": [],
+       "marker": "",
+       "name": "pytest-cov",
+       "self": null,
+       "specifier": ""
+      },
+      {
+       "extras": [],
+       "marker": "",
+       "name": "pytest-httpbin",
+       "self": null,
+       "specifier": "==2.1.0"
+      },
+      {
+       "extras": [],
+       "marker": "",
+       "name": "httpbin",
+       "self": null,
+       "specifier": "~=0.10.0"
+      },
+      {
+       "extras": [],
+       "marker": "",
+       "name": "trustme",
+       "self": null,
+       "specifier": ""
+      },
+      {
+       "extras": [],
+       "marker": "",
+       "name": "wheel",
+       "self": null,
+       "specifier": ""
+      },
+      {
+       "extras": [
+        "socks"
+       ],
+       "marker": "",
+       "name": "requests",
+       "self": true,
+       "specifier": ""
+      },
+      {
+       "extras": [],
+       "marker": "",
+       "name": "pytest-mock",
+       "self": null,
+       "specifier": ""
+      },
+      {
+       "extras": [],
+       "marker": "",
+       "name": "pytest-xdist",
+       "self": null,
+       "specifier": ""
+      },
+      {
+       "extras": [],
+       "marker": "",
+       "name": "pytest",
+       "self": null,
+       "specifier": ">=3"
+      },
+      {
+       "extras": [],
+       "marker": "",
+       "name": "PySocks",
+       "self": null,
+       "specifier": ">=1.5.6, !=1.5.7"
+      }
+     ],
+     "sources": [
+      "pyproject.toml:[project].dependencies",
+      "requirements-dev.txt",
+      "setup.py",
+      "pyproject.toml:test-groups",
+      "pyproject.toml:[project.optional-dependencies]:socks"
+     ]
+    },
+    "evidence": [
+     "pyproject.toml",
+     "setup.py",
+     "tox.ini",
+     "Makefile",
+     "requirements-dev.txt"
+    ],
+    "evidence_digest": "c96f77f304e234c454bb24af47b4908282908371dc08e3dc6a515acc4103ed04",
+    "from_host_before_arming": {
+     "PySocks": null,
+     "certifi": null,
+     "charset_normalizer": null,
+     "httpbin": null,
+     "idna": null,
+     "pytest": null,
+     "pytest-cov": null,
+     "pytest-httpbin": null,
+     "pytest-mock": null,
+     "pytest-xdist": null,
+     "trustme": null,
+     "urllib3": null,
+     "wheel": null
+    },
+    "from_memory": false,
+    "goal": "env-ready",
+    "interpreter": {
+     "check": "requires-python '>=3.10' vs this interpreter 3.11",
+     "ok": true,
+     "version": "3.11.2"
+    },
+    "isolation": {
+     "created": false,
+     "python": "/tmp/brain_envs/e5f4192e8cd09975/venv/bin/python"
+    },
+    "network": {
+     "artifact_downloads": 32,
+     "bytes": 10586020,
+     "json_requests": 32
+    },
+    "project_install": {
+     "command": [
+      "/tmp/brain_envs/e5f4192e8cd09975/venv/bin/python",
+      "-m",
+      "pip",
+      "install",
+      "--no-deps",
+      "--no-build-isolation",
+      "--disable-pip-version-check",
+      "--no-cache-dir",
+      "--quiet",
+      "<staged copy of the tree>"
+     ],
+     "exit_code": 0,
+     "ok": true,
+     "seconds": 0.9805,
+     "tail": ""
+    },
+    "records": [
+     {
+      "artifact": "charset_normalizer-3.5.3-cp311-cp311-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl",
+      "import": "ok",
+      "name": "charset_normalizer",
+      "sha256_observed": "2a6f937e0b70133d1f826d0a253331b6fe1a4c874808cc12e16f2fb8177042f4",
+      "sha256_registry": "2a6f937e0b70133d1f826d0a253331b6fe1a4c874808cc12e16f2fb8177042f4",
+      "size": 263382,
+      "source": "registry",
+      "specifier": ">=2,<4",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "3.5.3"
+     },
+     {
+      "artifact": "idna-3.20-py3-none-any.whl",
+      "import": "ok",
+      "name": "idna",
+      "sha256_observed": "ab7ae7122974553370f0bdb919e1a960b2cd1bc1ef0276416d896db81c14582c",
+      "sha256_registry": "ab7ae7122974553370f0bdb919e1a960b2cd1bc1ef0276416d896db81c14582c",
+      "size": 69583,
+      "source": "registry",
+      "specifier": ">=2.5,<4",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "3.20"
+     },
+     {
+      "artifact": "urllib3-2.8.0-py3-none-any.whl",
+      "import": "ok",
+      "name": "urllib3",
+      "sha256_observed": "0cf3cae568d36aa9576b28dfb35f11328f1cb974ca7647d9475ebb86c75ac6e3",
+      "sha256_registry": "0cf3cae568d36aa9576b28dfb35f11328f1cb974ca7647d9475ebb86c75ac6e3",
+      "size": 135717,
+      "source": "registry",
+      "specifier": ">=1.26,<3",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "2.8.0"
+     },
+     {
+      "artifact": "certifi-2026.11.20-py3-none-any.whl",
+      "import": "ok",
+      "name": "certifi",
+      "sha256_observed": "7422df25243767b9877031a2248cb14d09ddac9beee846f4cef3d5c9191d488f",
+      "sha256_registry": "7422df25243767b9877031a2248cb14d09ddac9beee846f4cef3d5c9191d488f",
+      "size": 127913,
+      "source": "registry",
+      "specifier": ">=2023.5.7",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "2026.11.20"
+     },
+     {
+      "artifact": "pytest-9.2.0-py3-none-any.whl",
+      "import": "ok",
+      "name": "pytest",
+      "sha256_observed": "07acdcf88ec174f907dc01af70bf52d49b014bbab03faeeade31c96b18c2e588",
+      "sha256_registry": "07acdcf88ec174f907dc01af70bf52d49b014bbab03faeeade31c96b18c2e588",
+      "size": 411776,
+      "source": "registry",
+      "specifier": ">=2.8.0,<10",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "9.2.0"
+     },
+     {
+      "artifact": "iniconfig-2.3.1-py3-none-any.whl",
+      "import": "ok",
+      "name": "iniconfig",
+      "sha256_observed": "9121e2c1fdb355232495be3194c8dfe87ccc2d5dee45947b78e68f499790d7a7",
+      "sha256_registry": "9121e2c1fdb355232495be3194c8dfe87ccc2d5dee45947b78e68f499790d7a7",
+      "size": 7552,
+      "source": "registry",
+      "specifier": ">=2",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "2.3.1"
+     },
+     {
+      "artifact": "packaging-26.3-py3-none-any.whl",
+      "import": "ok",
+      "name": "packaging",
+      "sha256_observed": "d7193f7c8e4e93f444fde0262bf90af30e16fa0ad0ad44cb553c87339b23cd1c",
+      "sha256_registry": "d7193f7c8e4e93f444fde0262bf90af30e16fa0ad0ad44cb553c87339b23cd1c",
+      "size": 129956,
+      "source": "registry",
+      "specifier": ">=24",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "26.3"
+     },
+     {
+      "artifact": "pluggy-1.7.0-py3-none-any.whl",
+      "import": "ok",
+      "name": "pluggy",
+      "sha256_observed": "7dd7b0d8832ba3cb632c306926ded123429211b83641b35dc5c41ad2d34f9bec",
+      "sha256_registry": "7dd7b0d8832ba3cb632c306926ded123429211b83641b35dc5c41ad2d34f9bec",
+      "size": 27082,
+      "source": "registry",
+      "specifier": "<2,>=1.6",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "1.7.0"
+     },
+     {
+      "artifact": "pygments-2.21.0-py3-none-any.whl",
+      "import": "ok",
+      "name": "pygments",
+      "sha256_observed": "2363c69b61c4a97c838da3b130dcd6468f4848992b21a82f2a63ec34377137d9",
+      "sha256_registry": "2363c69b61c4a97c838da3b130dcd6468f4848992b21a82f2a63ec34377137d9",
+      "size": 1250147,
+      "source": "registry",
+      "specifier": ">=2.15",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "2.21.0"
+     },
+     {
+      "artifact": "pytest_cov-7.1.0-py3-none-any.whl",
+      "import": "ok",
+      "name": "pytest-cov",
+      "sha256_observed": "a0461110b7865f9a271aa1b51e516c9a95de9d696734a2f71e3e78f46e1d4678",
+      "sha256_registry": "a0461110b7865f9a271aa1b51e516c9a95de9d696734a2f71e3e78f46e1d4678",
+      "size": 22876,
+      "source": "registry",
+      "specifier": "",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "7.1.0"
+     },
+     {
+      "artifact": "pytest_httpbin-2.1.0-py3-none-any.whl",
+      "import": "ok",
+      "name": "pytest-httpbin",
+      "sha256_observed": "b3bf7346cc2ad231447189cd85b458e341056684a7a69d69533dd29692209cdd",
+      "sha256_registry": "b3bf7346cc2ad231447189cd85b458e341056684a7a69d69533dd29692209cdd",
+      "size": 8309,
+      "source": "registry",
+      "specifier": "==2.1.0",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "2.1.0"
+     },
+     {
+      "artifact": "httpbin-0.10.4-py2.py3-none-any.whl",
+      "import": "ok",
+      "name": "httpbin",
+      "sha256_observed": "71862093f371c3a39cfcdcd2f073aaf610b6433f9d4c0130248e676453fca65d",
+      "sha256_registry": "71862093f371c3a39cfcdcd2f073aaf610b6433f9d4c0130248e676453fca65d",
+      "size": 100765,
+      "source": "registry",
+      "specifier": "",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "0.10.4"
+     },
+     {
+      "artifact": "brotlicffi-1.2.1.0-cp39-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+      "import": "ok",
+      "name": "brotlicffi",
+      "sha256_observed": "0a7281a39de91432e90c27ab9c4f9feb3a9cf33fda3873534c2a88270d9f60a2",
+      "sha256_registry": "0a7281a39de91432e90c27ab9c4f9feb3a9cf33fda3873534c2a88270d9f60a2",
+      "size": 1538171,
+      "source": "registry",
+      "specifier": "",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "1.2.1.0"
+     },
+     {
+      "artifact": "cffi-2.1.1-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+      "import": "ok",
+      "name": "cffi",
+      "sha256_observed": "34e261f78cb6ceaaa36f42f2613f4380d94d9c759a9c73c769ee6e0247364632",
+      "sha256_registry": "34e261f78cb6ceaaa36f42f2613f4380d94d9c759a9c73c769ee6e0247364632",
+      "size": 217807,
+      "source": "registry",
+      "specifier": ">=1.0.0",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "2.1.1"
+     },
+     {
+      "artifact": "pycparser-3.12-py3-none-any.whl",
+      "import": "ok",
+      "name": "pycparser",
+      "sha256_observed": "a076f3f489b39b43ed13563a1dafe42447445bec2e294154ec5c57fcdda4c85e",
+      "sha256_registry": "a076f3f489b39b43ed13563a1dafe42447445bec2e294154ec5c57fcdda4c85e",
+      "size": 62600,
+      "source": "registry",
+      "specifier": "",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "3.12"
+     },
+     {
+      "artifact": "decorator-5.3.2-py3-none-any.whl",
+      "import": "ok",
+      "name": "decorator",
+      "sha256_observed": "d3fb2a434ac31e231d14175ecbda823d83f26b7e45270cd7cd4d0350264b79e2",
+      "sha256_registry": "d3fb2a434ac31e231d14175ecbda823d83f26b7e45270cd7cd4d0350264b79e2",
+      "size": 11830,
+      "source": "registry",
+      "specifier": "",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "5.3.2"
+     },
+     {
+      "artifact": "flask-3.1.3-py3-none-any.whl",
+      "import": "ok",
+      "name": "flask",
+      "sha256_observed": "f4bcbefc124291925f1a26446da31a5178f9483862233b23c0c96a20701f670c",
+      "sha256_registry": "f4bcbefc124291925f1a26446da31a5178f9483862233b23c0c96a20701f670c",
+      "size": 103424,
+      "source": "registry",
+      "specifier": ">=2.2.4",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "3.1.3"
+     },
+     {
+      "artifact": "blinker-1.9.0-py3-none-any.whl",
+      "import": "ok",
+      "name": "blinker",
+      "sha256_observed": "ba0efaa9080b619ff2f3459d1d500c57bddea4a6b424b60a91141db6fd2f08bc",
+      "sha256_registry": "ba0efaa9080b619ff2f3459d1d500c57bddea4a6b424b60a91141db6fd2f08bc",
+      "size": 8458,
+      "source": "registry",
+      "specifier": ">=1.9.0",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "1.9.0"
+     },
+     {
+      "artifact": "click-8.5.1-py3-none-any.whl",
+      "import": "ok",
+      "name": "click",
+      "sha256_observed": "8bb5376d2006950386f8c6427613334a2acadc5f559cb80e638d00b4df957e37",
+      "sha256_registry": "8bb5376d2006950386f8c6427613334a2acadc5f559cb80e638d00b4df957e37",
+      "size": 126163,
+      "source": "registry",
+      "specifier": ">=8.1.3",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "8.5.1"
+     },
+     {
+      "artifact": "itsdangerous-2.2.0-py3-none-any.whl",
+      "import": "ok",
+      "name": "itsdangerous",
+      "sha256_observed": "c6242fc49e35958c8b15141343aa660db5fc54d4f13a1db01a3f5891b98700ef",
+      "sha256_registry": "c6242fc49e35958c8b15141343aa660db5fc54d4f13a1db01a3f5891b98700ef",
+      "size": 16234,
+      "source": "registry",
+      "specifier": ">=2.2.0",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "2.2.0"
+     },
+     {
+      "artifact": "jinja2-3.1.6-py3-none-any.whl",
+      "import": "ok",
+      "name": "jinja2",
+      "sha256_observed": "85ece4451f492d0c13c5dd7c13a64681a86afae63a5f347908daf103ce6d2f67",
+      "sha256_registry": "85ece4451f492d0c13c5dd7c13a64681a86afae63a5f347908daf103ce6d2f67",
+      "size": 134899,
+      "source": "registry",
+      "specifier": ">=3.1.2",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "3.1.6"
+     },
+     {
+      "artifact": "markupsafe-3.0.4-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+      "import": "ok",
+      "name": "MarkupSafe",
+      "sha256_observed": "6da83a088f8ef93b2d483a8232a4dbf4d69d3d8496b568a03c56becac43e1808",
+      "sha256_registry": "6da83a088f8ef93b2d483a8232a4dbf4d69d3d8496b568a03c56becac43e1808",
+      "size": 22961,
+      "source": "registry",
+      "specifier": ">=2.0",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "3.0.4"
+     },
+     {
+      "artifact": "werkzeug-3.1.9-py3-none-any.whl",
+      "import": "ok",
+      "name": "werkzeug",
+      "sha256_observed": "6392e50c78460ba618e5b21f08a71f59c99ce99cdc6cf6e3dd7e6ccca8754fab",
+      "sha256_registry": "6392e50c78460ba618e5b21f08a71f59c99ce99cdc6cf6e3dd7e6ccca8754fab",
+      "size": 228700,
+      "source": "registry",
+      "specifier": ">=3.1.0",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "3.1.9"
+     },
+     {
+      "artifact": "greenlet-3.0.0rc3-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+      "import": "ok",
+      "name": "greenlet",
+      "sha256_observed": "ef9789aea735004eba559c7919a73a3b475d0c28e2c1e9de464c6bc761bf69f4",
+      "sha256_registry": "ef9789aea735004eba559c7919a73a3b475d0c28e2c1e9de464c6bc761bf69f4",
+      "size": 663897,
+      "source": "registry",
+      "specifier": "<3.0",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "3.0.0rc3"
+     },
+     {
+      "artifact": "six-1.17.0-py2.py3-none-any.whl",
+      "import": "ok",
+      "name": "six",
+      "sha256_observed": "4721f391ed90541fddacab5acf947aa0d3dc7d27b2e1e8eda2be8970586c3274",
+      "sha256_registry": "4721f391ed90541fddacab5acf947aa0d3dc7d27b2e1e8eda2be8970586c3274",
+      "size": 11050,
+      "source": "registry",
+      "specifier": "",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "1.17.0"
+     },
+     {
+      "artifact": "trustme-1.2.1-py3-none-any.whl",
+      "import": "ok",
+      "name": "trustme",
+      "sha256_observed": "d768e5fc57c86dfc5ec9365102e9b092541cd6954b35d8c1eea01a84f35a762a",
+      "sha256_registry": "d768e5fc57c86dfc5ec9365102e9b092541cd6954b35d8c1eea01a84f35a762a",
+      "size": 16530,
+      "source": "registry",
+      "specifier": "",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "1.2.1"
+     },
+     {
+      "artifact": "cryptography-50.0.2-cp311-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+      "import": "ok",
+      "name": "cryptography",
+      "sha256_observed": "630ebfea3bf689d075f82316324ff7433dc447fe6bc1bfc76524b74b4a9567d2",
+      "sha256_registry": "630ebfea3bf689d075f82316324ff7433dc447fe6bc1bfc76524b74b4a9567d2",
+      "size": 4719841,
+      "source": "registry",
+      "specifier": ">=3.1",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "50.0.2"
+     },
+     {
+      "artifact": "wheel-0.48.0-py3-none-any.whl",
+      "import": "ok",
+      "name": "wheel",
+      "sha256_observed": "3217dcc807155e45db462d7ef2431f5ddda0d7273b700d05a67b271ceb1287ab",
+      "sha256_registry": "3217dcc807155e45db462d7ef2431f5ddda0d7273b700d05a67b271ceb1287ab",
+      "size": 33320,
+      "source": "registry",
+      "specifier": "",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "0.48.0"
+     },
+     {
+      "artifact": "pytest_mock-3.17.0-py3-none-any.whl",
+      "import": "ok",
+      "name": "pytest-mock",
+      "sha256_observed": "1b82aa4b37137248bd687055e109723debeb07b489de1565297dc9589c5f2d6b",
+      "sha256_registry": "1b82aa4b37137248bd687055e109723debeb07b489de1565297dc9589c5f2d6b",
+      "size": 11248,
+      "source": "registry",
+      "specifier": "",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "3.17.0"
+     },
+     {
+      "artifact": "pytest_xdist-3.8.0-py3-none-any.whl",
+      "import": "ok",
+      "name": "pytest-xdist",
+      "sha256_observed": "202ca578cfeb7370784a8c33d6d05bc6e13b4f25b5053c30a152269fd10f0b88",
+      "sha256_registry": "202ca578cfeb7370784a8c33d6d05bc6e13b4f25b5053c30a152269fd10f0b88",
+      "size": 46396,
+      "source": "registry",
+      "specifier": "",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "3.8.0"
+     },
+     {
+      "artifact": "execnet-2.1.2-py3-none-any.whl",
+      "import": "ok",
+      "name": "execnet",
+      "sha256_observed": "67fba928dd5a544b783f6056f449e5e3931a5c378b128bc18501f7ea79e296ec",
+      "sha256_registry": "67fba928dd5a544b783f6056f449e5e3931a5c378b128bc18501f7ea79e296ec",
+      "size": 40708,
+      "source": "registry",
+      "specifier": ">=2.1",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "2.1.2"
+     },
+     {
+      "artifact": "PySocks-1.7.1-py3-none-any.whl",
+      "import": "ok",
+      "name": "PySocks",
+      "sha256_observed": "2725bd0a9925919b9b51739eea5f9e2bae91e83288108a9ad338b2e3a4435ee5",
+      "sha256_registry": "2725bd0a9925919b9b51739eea5f9e2bae91e83288108a9ad338b2e3a4435ee5",
+      "size": 16725,
+      "source": "registry",
+      "specifier": ">=1.5.6, !=1.5.7",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "1.7.1"
+     },
+     {
+      "import": "ok",
+      "name": "setuptools",
+      "source": "isolation",
+      "specifier": ">=61.0",
+      "status": "SATISFIED_BY_HOST",
+      "verified_by_execution": true,
+      "version": "66.1.1"
+     },
+     {
+      "artifact": "<staged copy of the tree>",
+      "detail": null,
+      "name": "requests",
+      "specifier": "the project itself",
+      "status": "PROJECT_INSTALLED",
+      "verified_by_execution": true,
+      "version": "2.34.2"
+     }
+    ],
+    "schema": "BRAIN_THE_ENVIRONMENT_BROKER_V1",
+    "seconds": 27.8663,
+    "tree": "/tmp/brain_trials/env_ready/psf__requests",
+    "verdict": "ENVIRONMENT_BROKERED",
+    "verified_versions": {
+     "PySocks": "1.7.1",
+     "certifi": "2026.11.20",
+     "charset_normalizer": "3.5.3",
+     "httpbin": "0.10.4",
+     "idna": "3.20",
+     "pytest": "9.2.0",
+     "pytest-cov": "7.1.0",
+     "pytest-httpbin": "2.1.0",
+     "pytest-mock": "3.17.0",
+     "pytest-xdist": "3.8.0",
+     "trustme": "1.2.1",
+     "urllib3": "2.8.0",
+     "wheel": "0.48.0"
+    }
+   },
+   "repo": "psf/requests",
+   "run_tests_after_arming": {
+    "exit_code": 0,
+    "reported_passed": 619,
+    "runner": [
+     "/tmp/brain_envs/e5f4192e8cd09975/venv/bin/python",
+     "-m",
+     "pytest",
+     "-q"
+    ],
+    "seconds": 79.7944,
+    "tail": "36:30] \"GET /digest-auth/auth/user/pass/SHA-512 HTTP/1.1\" 200 46\n127.0.0.1 - - [23/Nov/2026 13:36:30] \"GET /get HTTP/1.1\" 200 272\n127.0.0.1 - - [23/Nov/2026 13:37:00] \"GET /status/200 HTTP/1.1\" 200 0\n",
+    "verdict": "ENVIRONMENT_BROKERED"
+   },
+   "tamper": {
+    "detail": null,
+    "from_memory": false,
+    "recheck": {
+     "observed": {
+      "MarkupSafe": "3.0.4",
+      "PySocks": "1.7.1",
+      "blinker": "1.9.0",
+      "brotlicffi": "1.2.1.0",
+      "certifi": "2026.11.20",
+      "cffi": "2.1.1",
+      "charset_normalizer": "3.5.3",
+      "click": "8.5.1",
+      "cryptography": "50.0.2",
+      "decorator": "5.3.2",
+      "execnet": "2.1.2",
+      "flask": "3.1.3",
+      "greenlet": "3.0.0rc3",
+      "httpbin": "0.10.4",
+      "idna": "3.20",
+      "iniconfig": "2.3.1",
+      "itsdangerous": "2.2.0",
+      "jinja2": "3.1.6",
+      "packaging": "26.3",
+      "pluggy": "1.7.0",
+      "pycparser": "3.12",
+      "pygments": "2.21.0",
+      "pytest": "9.2.0",
+      "pytest-cov": "7.1.0",
+      "pytest-httpbin": "2.1.0",
+      "pytest-mock": "3.17.0",
+      "pytest-xdist": "3.8.0",
+      "setuptools": "66.1.1",
+      "six": "1.17.0",
+      "trustme": "1.2.1",
+      "urllib3": "2.8.0",
+      "werkzeug": "3.1.9",
+      "wheel": "0.48.0"
+     },
+     "ok": false
+    },
+    "verdict": "ENVIRONMENT_BROKERED"
+   },
+   "url": "https://github.com/psf/requests",
+   "warm": {
+    "authority": "NONE__PRODUCER_RUN_SANDBOX",
+    "declarations": {
+     "required": [
+      {
+       "extras": [],
+       "marker": "",
+       "name": "charset_normalizer",
+       "self": null,
+       "specifier": ">=2,<4"
+      },
+      {
+       "extras": [],
+       "marker": "",
+       "name": "idna",
+       "self": null,
+       "specifier": ">=2.5,<4"
+      },
+      {
+       "extras": [],
+       "marker": "",
+       "name": "urllib3",
+       "self": null,
+       "specifier": ">=1.26,<3"
+      },
+      {
+       "extras": [],
+       "marker": "",
+       "name": "certifi",
+       "self": null,
+       "specifier": ">=2023.5.7"
+      },
+      {
+       "extras": [],
+       "marker": "",
+       "name": "pytest",
+       "self": null,
+       "specifier": ">=2.8.0,<10"
+      },
+      {
+       "extras": [],
+       "marker": "",
+       "name": "pytest-cov",
+       "self": null,
+       "specifier": ""
+      },
+      {
+       "extras": [],
+       "marker": "",
+       "name": "pytest-httpbin",
+       "self": null,
+       "specifier": "==2.1.0"
+      },
+      {
+       "extras": [],
+       "marker": "",
+       "name": "httpbin",
+       "self": null,
+       "specifier": "~=0.10.0"
+      },
+      {
+       "extras": [],
+       "marker": "",
+       "name": "trustme",
+       "self": null,
+       "specifier": ""
+      },
+      {
+       "extras": [],
+       "marker": "",
+       "name": "wheel",
+       "self": null,
+       "specifier": ""
+      },
+      {
+       "extras": [
+        "socks"
+       ],
+       "marker": "",
+       "name": "requests",
+       "self": true,
+       "specifier": ""
+      },
+      {
+       "extras": [],
+       "marker": "",
+       "name": "pytest-mock",
+       "self": null,
+       "specifier": ""
+      },
+      {
+       "extras": [],
+       "marker": "",
+       "name": "pytest-xdist",
+       "self": null,
+       "specifier": ""
+      },
+      {
+       "extras": [],
+       "marker": "",
+       "name": "pytest",
+       "self": null,
+       "specifier": ">=3"
+      },
+      {
+       "extras": [],
+       "marker": "",
+       "name": "PySocks",
+       "self": null,
+       "specifier": ">=1.5.6, !=1.5.7"
+      }
+     ],
+     "sources": [
+      "pyproject.toml:[project].dependencies",
+      "requirements-dev.txt",
+      "setup.py",
+      "pyproject.toml:test-groups",
+      "pyproject.toml:[project.optional-dependencies]:socks"
+     ]
+    },
+    "evidence": [
+     "pyproject.toml",
+     "setup.py",
+     "tox.ini",
+     "Makefile",
+     "requirements-dev.txt"
+    ],
+    "evidence_digest": "c96f77f304e234c454bb24af47b4908282908371dc08e3dc6a515acc4103ed04",
+    "from_memory": true,
+    "goal": "env-ready",
+    "interpreter": {
+     "check": "requires-python '>=3.10' vs this interpreter 3.11",
+     "ok": true,
+     "version": "3.11.2"
+    },
+    "isolation": {
+     "created": false,
+     "python": "/tmp/brain_envs/e5f4192e8cd09975/venv/bin/python"
+    },
+    "network": {
+     "artifact_downloads": 0,
+     "bytes": 0,
+     "json_requests": 0
+    },
+    "recheck": {
+     "observed": {
+      "MarkupSafe": "3.0.4",
+      "PySocks": "1.7.1",
+      "blinker": "1.9.0",
+      "brotlicffi": "1.2.1.0",
+      "certifi": "2026.11.20",
+      "cffi": "2.1.1",
+      "charset_normalizer": "3.5.3",
+      "click": "8.5.1",
+      "cryptography": "50.0.2",
+      "decorator": "5.3.2",
+      "execnet": "2.1.2",
+      "flask": "3.1.3",
+      "greenlet": "3.0.0rc3",
+      "httpbin": "0.10.4",
+      "idna": "3.20",
+      "iniconfig": "2.3.1",
+      "itsdangerous": "2.2.0",
+      "jinja2": "3.1.6",
+      "packaging": "26.3",
+      "pluggy": "1.7.0",
+      "pycparser": "3.12",
+      "pygments": "2.21.0",
+      "pytest": "9.2.0",
+      "pytest-cov": "7.1.0",
+      "pytest-httpbin": "2.1.0",
+      "pytest-mock": "3.17.0",
+      "pytest-xdist": "3.8.0",
+      "setuptools": "66.1.1",
+      "six": "1.17.0",
+      "trustme": "1.2.1",
+      "urllib3": "2.8.0",
+      "werkzeug": "3.1.9",
+      "wheel": "0.48.0"
+     },
+     "ok": true
+    },
+    "records": [
+     {
+      "artifact": "charset_normalizer-3.5.3-cp311-cp311-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl",
+      "import": "ok",
+      "name": "charset_normalizer",
+      "sha256_observed": "2a6f937e0b70133d1f826d0a253331b6fe1a4c874808cc12e16f2fb8177042f4",
+      "sha256_registry": "2a6f937e0b70133d1f826d0a253331b6fe1a4c874808cc12e16f2fb8177042f4",
+      "size": 263382,
+      "source": "registry",
+      "specifier": ">=2,<4",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "3.5.3"
+     },
+     {
+      "artifact": "idna-3.20-py3-none-any.whl",
+      "import": "ok",
+      "name": "idna",
+      "sha256_observed": "ab7ae7122974553370f0bdb919e1a960b2cd1bc1ef0276416d896db81c14582c",
+      "sha256_registry": "ab7ae7122974553370f0bdb919e1a960b2cd1bc1ef0276416d896db81c14582c",
+      "size": 69583,
+      "source": "registry",
+      "specifier": ">=2.5,<4",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "3.20"
+     },
+     {
+      "artifact": "urllib3-2.8.0-py3-none-any.whl",
+      "import": "ok",
+      "name": "urllib3",
+      "sha256_observed": "0cf3cae568d36aa9576b28dfb35f11328f1cb974ca7647d9475ebb86c75ac6e3",
+      "sha256_registry": "0cf3cae568d36aa9576b28dfb35f11328f1cb974ca7647d9475ebb86c75ac6e3",
+      "size": 135717,
+      "source": "registry",
+      "specifier": ">=1.26,<3",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "2.8.0"
+     },
+     {
+      "artifact": "certifi-2026.11.20-py3-none-any.whl",
+      "import": "ok",
+      "name": "certifi",
+      "sha256_observed": "7422df25243767b9877031a2248cb14d09ddac9beee846f4cef3d5c9191d488f",
+      "sha256_registry": "7422df25243767b9877031a2248cb14d09ddac9beee846f4cef3d5c9191d488f",
+      "size": 127913,
+      "source": "registry",
+      "specifier": ">=2023.5.7",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "2026.11.20"
+     },
+     {
+      "artifact": "pytest-9.2.0-py3-none-any.whl",
+      "import": "ok",
+      "name": "pytest",
+      "sha256_observed": "07acdcf88ec174f907dc01af70bf52d49b014bbab03faeeade31c96b18c2e588",
+      "sha256_registry": "07acdcf88ec174f907dc01af70bf52d49b014bbab03faeeade31c96b18c2e588",
+      "size": 411776,
+      "source": "registry",
+      "specifier": ">=2.8.0,<10",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "9.2.0"
+     },
+     {
+      "artifact": "iniconfig-2.3.1-py3-none-any.whl",
+      "import": "ok",
+      "name": "iniconfig",
+      "sha256_observed": "9121e2c1fdb355232495be3194c8dfe87ccc2d5dee45947b78e68f499790d7a7",
+      "sha256_registry": "9121e2c1fdb355232495be3194c8dfe87ccc2d5dee45947b78e68f499790d7a7",
+      "size": 7552,
+      "source": "registry",
+      "specifier": ">=2",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "2.3.1"
+     },
+     {
+      "artifact": "packaging-26.3-py3-none-any.whl",
+      "import": "ok",
+      "name": "packaging",
+      "sha256_observed": "d7193f7c8e4e93f444fde0262bf90af30e16fa0ad0ad44cb553c87339b23cd1c",
+      "sha256_registry": "d7193f7c8e4e93f444fde0262bf90af30e16fa0ad0ad44cb553c87339b23cd1c",
+      "size": 129956,
+      "source": "registry",
+      "specifier": ">=24",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "26.3"
+     },
+     {
+      "artifact": "pluggy-1.7.0-py3-none-any.whl",
+      "import": "ok",
+      "name": "pluggy",
+      "sha256_observed": "7dd7b0d8832ba3cb632c306926ded123429211b83641b35dc5c41ad2d34f9bec",
+      "sha256_registry": "7dd7b0d8832ba3cb632c306926ded123429211b83641b35dc5c41ad2d34f9bec",
+      "size": 27082,
+      "source": "registry",
+      "specifier": "<2,>=1.6",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "1.7.0"
+     },
+     {
+      "artifact": "pygments-2.21.0-py3-none-any.whl",
+      "import": "ok",
+      "name": "pygments",
+      "sha256_observed": "2363c69b61c4a97c838da3b130dcd6468f4848992b21a82f2a63ec34377137d9",
+      "sha256_registry": "2363c69b61c4a97c838da3b130dcd6468f4848992b21a82f2a63ec34377137d9",
+      "size": 1250147,
+      "source": "registry",
+      "specifier": ">=2.15",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "2.21.0"
+     },
+     {
+      "artifact": "pytest_cov-7.1.0-py3-none-any.whl",
+      "import": "ok",
+      "name": "pytest-cov",
+      "sha256_observed": "a0461110b7865f9a271aa1b51e516c9a95de9d696734a2f71e3e78f46e1d4678",
+      "sha256_registry": "a0461110b7865f9a271aa1b51e516c9a95de9d696734a2f71e3e78f46e1d4678",
+      "size": 22876,
+      "source": "registry",
+      "specifier": "",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "7.1.0"
+     },
+     {
+      "artifact": "pytest_httpbin-2.1.0-py3-none-any.whl",
+      "import": "ok",
+      "name": "pytest-httpbin",
+      "sha256_observed": "b3bf7346cc2ad231447189cd85b458e341056684a7a69d69533dd29692209cdd",
+      "sha256_registry": "b3bf7346cc2ad231447189cd85b458e341056684a7a69d69533dd29692209cdd",
+      "size": 8309,
+      "source": "registry",
+      "specifier": "==2.1.0",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "2.1.0"
+     },
+     {
+      "artifact": "httpbin-0.10.4-py2.py3-none-any.whl",
+      "import": "ok",
+      "name": "httpbin",
+      "sha256_observed": "71862093f371c3a39cfcdcd2f073aaf610b6433f9d4c0130248e676453fca65d",
+      "sha256_registry": "71862093f371c3a39cfcdcd2f073aaf610b6433f9d4c0130248e676453fca65d",
+      "size": 100765,
+      "source": "registry",
+      "specifier": "",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "0.10.4"
+     },
+     {
+      "artifact": "brotlicffi-1.2.1.0-cp39-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+      "import": "ok",
+      "name": "brotlicffi",
+      "sha256_observed": "0a7281a39de91432e90c27ab9c4f9feb3a9cf33fda3873534c2a88270d9f60a2",
+      "sha256_registry": "0a7281a39de91432e90c27ab9c4f9feb3a9cf33fda3873534c2a88270d9f60a2",
+      "size": 1538171,
+      "source": "registry",
+      "specifier": "",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "1.2.1.0"
+     },
+     {
+      "artifact": "cffi-2.1.1-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+      "import": "ok",
+      "name": "cffi",
+      "sha256_observed": "34e261f78cb6ceaaa36f42f2613f4380d94d9c759a9c73c769ee6e0247364632",
+      "sha256_registry": "34e261f78cb6ceaaa36f42f2613f4380d94d9c759a9c73c769ee6e0247364632",
+      "size": 217807,
+      "source": "registry",
+      "specifier": ">=1.0.0",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "2.1.1"
+     },
+     {
+      "artifact": "pycparser-3.12-py3-none-any.whl",
+      "import": "ok",
+      "name": "pycparser",
+      "sha256_observed": "a076f3f489b39b43ed13563a1dafe42447445bec2e294154ec5c57fcdda4c85e",
+      "sha256_registry": "a076f3f489b39b43ed13563a1dafe42447445bec2e294154ec5c57fcdda4c85e",
+      "size": 62600,
+      "source": "registry",
+      "specifier": "",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "3.12"
+     },
+     {
+      "artifact": "decorator-5.3.2-py3-none-any.whl",
+      "import": "ok",
+      "name": "decorator",
+      "sha256_observed": "d3fb2a434ac31e231d14175ecbda823d83f26b7e45270cd7cd4d0350264b79e2",
+      "sha256_registry": "d3fb2a434ac31e231d14175ecbda823d83f26b7e45270cd7cd4d0350264b79e2",
+      "size": 11830,
+      "source": "registry",
+      "specifier": "",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "5.3.2"
+     },
+     {
+      "artifact": "flask-3.1.3-py3-none-any.whl",
+      "import": "ok",
+      "name": "flask",
+      "sha256_observed": "f4bcbefc124291925f1a26446da31a5178f9483862233b23c0c96a20701f670c",
+      "sha256_registry": "f4bcbefc124291925f1a26446da31a5178f9483862233b23c0c96a20701f670c",
+      "size": 103424,
+      "source": "registry",
+      "specifier": ">=2.2.4",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "3.1.3"
+     },
+     {
+      "artifact": "blinker-1.9.0-py3-none-any.whl",
+      "import": "ok",
+      "name": "blinker",
+      "sha256_observed": "ba0efaa9080b619ff2f3459d1d500c57bddea4a6b424b60a91141db6fd2f08bc",
+      "sha256_registry": "ba0efaa9080b619ff2f3459d1d500c57bddea4a6b424b60a91141db6fd2f08bc",
+      "size": 8458,
+      "source": "registry",
+      "specifier": ">=1.9.0",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "1.9.0"
+     },
+     {
+      "artifact": "click-8.5.1-py3-none-any.whl",
+      "import": "ok",
+      "name": "click",
+      "sha256_observed": "8bb5376d2006950386f8c6427613334a2acadc5f559cb80e638d00b4df957e37",
+      "sha256_registry": "8bb5376d2006950386f8c6427613334a2acadc5f559cb80e638d00b4df957e37",
+      "size": 126163,
+      "source": "registry",
+      "specifier": ">=8.1.3",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "8.5.1"
+     },
+     {
+      "artifact": "itsdangerous-2.2.0-py3-none-any.whl",
+      "import": "ok",
+      "name": "itsdangerous",
+      "sha256_observed": "c6242fc49e35958c8b15141343aa660db5fc54d4f13a1db01a3f5891b98700ef",
+      "sha256_registry": "c6242fc49e35958c8b15141343aa660db5fc54d4f13a1db01a3f5891b98700ef",
+      "size": 16234,
+      "source": "registry",
+      "specifier": ">=2.2.0",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "2.2.0"
+     },
+     {
+      "artifact": "jinja2-3.1.6-py3-none-any.whl",
+      "import": "ok",
+      "name": "jinja2",
+      "sha256_observed": "85ece4451f492d0c13c5dd7c13a64681a86afae63a5f347908daf103ce6d2f67",
+      "sha256_registry": "85ece4451f492d0c13c5dd7c13a64681a86afae63a5f347908daf103ce6d2f67",
+      "size": 134899,
+      "source": "registry",
+      "specifier": ">=3.1.2",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "3.1.6"
+     },
+     {
+      "artifact": "markupsafe-3.0.4-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+      "import": "ok",
+      "name": "MarkupSafe",
+      "sha256_observed": "6da83a088f8ef93b2d483a8232a4dbf4d69d3d8496b568a03c56becac43e1808",
+      "sha256_registry": "6da83a088f8ef93b2d483a8232a4dbf4d69d3d8496b568a03c56becac43e1808",
+      "size": 22961,
+      "source": "registry",
+      "specifier": ">=2.0",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "3.0.4"
+     },
+     {
+      "artifact": "werkzeug-3.1.9-py3-none-any.whl",
+      "import": "ok",
+      "name": "werkzeug",
+      "sha256_observed": "6392e50c78460ba618e5b21f08a71f59c99ce99cdc6cf6e3dd7e6ccca8754fab",
+      "sha256_registry": "6392e50c78460ba618e5b21f08a71f59c99ce99cdc6cf6e3dd7e6ccca8754fab",
+      "size": 228700,
+      "source": "registry",
+      "specifier": ">=3.1.0",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "3.1.9"
+     },
+     {
+      "artifact": "greenlet-3.0.0rc3-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+      "import": "ok",
+      "name": "greenlet",
+      "sha256_observed": "ef9789aea735004eba559c7919a73a3b475d0c28e2c1e9de464c6bc761bf69f4",
+      "sha256_registry": "ef9789aea735004eba559c7919a73a3b475d0c28e2c1e9de464c6bc761bf69f4",
+      "size": 663897,
+      "source": "registry",
+      "specifier": "<3.0",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "3.0.0rc3"
+     },
+     {
+      "artifact": "six-1.17.0-py2.py3-none-any.whl",
+      "import": "ok",
+      "name": "six",
+      "sha256_observed": "4721f391ed90541fddacab5acf947aa0d3dc7d27b2e1e8eda2be8970586c3274",
+      "sha256_registry": "4721f391ed90541fddacab5acf947aa0d3dc7d27b2e1e8eda2be8970586c3274",
+      "size": 11050,
+      "source": "registry",
+      "specifier": "",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "1.17.0"
+     },
+     {
+      "artifact": "trustme-1.2.1-py3-none-any.whl",
+      "import": "ok",
+      "name": "trustme",
+      "sha256_observed": "d768e5fc57c86dfc5ec9365102e9b092541cd6954b35d8c1eea01a84f35a762a",
+      "sha256_registry": "d768e5fc57c86dfc5ec9365102e9b092541cd6954b35d8c1eea01a84f35a762a",
+      "size": 16530,
+      "source": "registry",
+      "specifier": "",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "1.2.1"
+     },
+     {
+      "artifact": "cryptography-50.0.2-cp311-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+      "import": "ok",
+      "name": "cryptography",
+      "sha256_observed": "630ebfea3bf689d075f82316324ff7433dc447fe6bc1bfc76524b74b4a9567d2",
+      "sha256_registry": "630ebfea3bf689d075f82316324ff7433dc447fe6bc1bfc76524b74b4a9567d2",
+      "size": 4719841,
+      "source": "registry",
+      "specifier": ">=3.1",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "50.0.2"
+     },
+     {
+      "artifact": "wheel-0.48.0-py3-none-any.whl",
+      "import": "ok",
+      "name": "wheel",
+      "sha256_observed": "3217dcc807155e45db462d7ef2431f5ddda0d7273b700d05a67b271ceb1287ab",
+      "sha256_registry": "3217dcc807155e45db462d7ef2431f5ddda0d7273b700d05a67b271ceb1287ab",
+      "size": 33320,
+      "source": "registry",
+      "specifier": "",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "0.48.0"
+     },
+     {
+      "artifact": "pytest_mock-3.17.0-py3-none-any.whl",
+      "import": "ok",
+      "name": "pytest-mock",
+      "sha256_observed": "1b82aa4b37137248bd687055e109723debeb07b489de1565297dc9589c5f2d6b",
+      "sha256_registry": "1b82aa4b37137248bd687055e109723debeb07b489de1565297dc9589c5f2d6b",
+      "size": 11248,
+      "source": "registry",
+      "specifier": "",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "3.17.0"
+     },
+     {
+      "artifact": "pytest_xdist-3.8.0-py3-none-any.whl",
+      "import": "ok",
+      "name": "pytest-xdist",
+      "sha256_observed": "202ca578cfeb7370784a8c33d6d05bc6e13b4f25b5053c30a152269fd10f0b88",
+      "sha256_registry": "202ca578cfeb7370784a8c33d6d05bc6e13b4f25b5053c30a152269fd10f0b88",
+      "size": 46396,
+      "source": "registry",
+      "specifier": "",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "3.8.0"
+     },
+     {
+      "artifact": "execnet-2.1.2-py3-none-any.whl",
+      "import": "ok",
+      "name": "execnet",
+      "sha256_observed": "67fba928dd5a544b783f6056f449e5e3931a5c378b128bc18501f7ea79e296ec",
+      "sha256_registry": "67fba928dd5a544b783f6056f449e5e3931a5c378b128bc18501f7ea79e296ec",
+      "size": 40708,
+      "source": "registry",
+      "specifier": ">=2.1",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "2.1.2"
+     },
+     {
+      "artifact": "PySocks-1.7.1-py3-none-any.whl",
+      "import": "ok",
+      "name": "PySocks",
+      "sha256_observed": "2725bd0a9925919b9b51739eea5f9e2bae91e83288108a9ad338b2e3a4435ee5",
+      "sha256_registry": "2725bd0a9925919b9b51739eea5f9e2bae91e83288108a9ad338b2e3a4435ee5",
+      "size": 16725,
+      "source": "registry",
+      "specifier": ">=1.5.6, !=1.5.7",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "1.7.1"
+     },
+     {
+      "import": "ok",
+      "name": "setuptools",
+      "source": "isolation",
+      "specifier": ">=61.0",
+      "status": "SATISFIED_BY_HOST",
+      "verified_by_execution": true,
+      "version": "66.1.1"
+     },
+     {
+      "artifact": "<staged copy of the tree>",
+      "detail": null,
+      "name": "requests",
+      "specifier": "the project itself",
+      "status": "PROJECT_INSTALLED",
+      "verified_by_execution": true,
+      "version": "2.34.2"
+     }
+    ],
+    "schema": "BRAIN_THE_ENVIRONMENT_BROKER_V1",
+    "seconds": 0.7827,
+    "tree": "/tmp/brain_trials/env_ready/psf__requests",
+    "verdict": "ENVIRONMENT_BROKERED_FROM_MEMORY"
+   }
+  },
+  {
+   "clean_isolation": "/tmp/brain_envs/1c40cee77347f166/venv/bin/python",
+   "clone": {
+    "error": null,
+    "head": "49943b5a94413a530761350f04e896f76e8d620e",
+    "ok": true,
+    "seconds": 0.651
+   },
+   "cold": {
+    "authority": "NONE__PRODUCER_RUN_SANDBOX",
+    "declarations": {
+     "required": [
+      {
+       "extras": [],
+       "marker": "",
+       "name": "blinker",
+       "self": null,
+       "specifier": ">=1.9.0"
+      },
+      {
+       "extras": [],
+       "marker": "",
+       "name": "click",
+       "self": null,
+       "specifier": ">=8.1.3"
+      },
+      {
+       "extras": [],
+       "marker": "",
+       "name": "itsdangerous",
+       "self": null,
+       "specifier": ">=2.2.0"
+      },
+      {
+       "extras": [],
+       "marker": "",
+       "name": "jinja2",
+       "self": null,
+       "specifier": ">=3.1.2"
+      },
+      {
+       "extras": [],
+       "marker": "",
+       "name": "markupsafe",
+       "self": null,
+       "specifier": ">=2.1.1"
+      },
+      {
+       "extras": [],
+       "marker": "",
+       "name": "werkzeug",
+       "self": null,
+       "specifier": ">=3.1.0"
+      },
+      {
+       "extras": [],
+       "marker": "",
+       "name": "asgiref",
+       "self": null,
+       "specifier": ""
+      },
+      {
+       "extras": [],
+       "marker": "",
+       "name": "pytest",
+       "self": null,
+       "specifier": ""
+      },
+      {
+       "extras": [],
+       "marker": "",
+       "name": "python-dotenv",
+       "self": null,
+       "specifier": ""
+      }
+     ],
+     "sources": [
+      "pyproject.toml:[project].dependencies",
+      "pyproject.toml:test-groups"
+     ]
+    },
+    "evidence": [
+     "pyproject.toml"
+    ],
+    "evidence_digest": "28b2a110f540c9b016230a0cb046e1378af6c4a2febef8012e727c31346c0bd7",
+    "from_host_before_arming": {
+     "asgiref": null,
+     "blinker": null,
+     "click": null,
+     "itsdangerous": null,
+     "jinja2": null,
+     "markupsafe": null,
+     "pytest": null,
+     "python-dotenv": null,
+     "werkzeug": null
+    },
+    "from_memory": false,
+    "goal": "env-ready",
+    "interpreter": {
+     "check": "requires-python '>=3.11' vs this interpreter 3.11",
+     "ok": true,
+     "version": "3.11.2"
+    },
+    "isolation": {
+     "created": false,
+     "python": "/tmp/brain_envs/1c40cee77347f166/venv/bin/python"
+    },
+    "network": {
+     "artifact_downloads": 14,
+     "bytes": 2460381,
+     "json_requests": 14
+    },
+    "project_install": {
+     "command": [
+      "/tmp/brain_envs/1c40cee77347f166/venv/bin/python",
+      "-m",
+      "pip",
+      "install",
+      "--no-deps",
+      "--no-build-isolation",
+      "--disable-pip-version-check",
+      "--no-cache-dir",
+      "--quiet",
+      "<staged copy of the tree>"
+     ],
+     "exit_code": 0,
+     "ok": true,
+     "seconds": 0.5529,
+     "tail": ""
+    },
+    "records": [
+     {
+      "artifact": "blinker-1.9.0-py3-none-any.whl",
+      "import": "ok",
+      "name": "blinker",
+      "sha256_observed": "ba0efaa9080b619ff2f3459d1d500c57bddea4a6b424b60a91141db6fd2f08bc",
+      "sha256_registry": "ba0efaa9080b619ff2f3459d1d500c57bddea4a6b424b60a91141db6fd2f08bc",
+      "size": 8458,
+      "source": "registry",
+      "specifier": ">=1.9.0",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "1.9.0"
+     },
+     {
+      "artifact": "click-8.5.1-py3-none-any.whl",
+      "import": "ok",
+      "name": "click",
+      "sha256_observed": "8bb5376d2006950386f8c6427613334a2acadc5f559cb80e638d00b4df957e37",
+      "sha256_registry": "8bb5376d2006950386f8c6427613334a2acadc5f559cb80e638d00b4df957e37",
+      "size": 126163,
+      "source": "registry",
+      "specifier": ">=8.1.3",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "8.5.1"
+     },
+     {
+      "artifact": "itsdangerous-2.2.0-py3-none-any.whl",
+      "import": "ok",
+      "name": "itsdangerous",
+      "sha256_observed": "c6242fc49e35958c8b15141343aa660db5fc54d4f13a1db01a3f5891b98700ef",
+      "sha256_registry": "c6242fc49e35958c8b15141343aa660db5fc54d4f13a1db01a3f5891b98700ef",
+      "size": 16234,
+      "source": "registry",
+      "specifier": ">=2.2.0",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "2.2.0"
+     },
+     {
+      "artifact": "jinja2-3.1.6-py3-none-any.whl",
+      "import": "ok",
+      "name": "jinja2",
+      "sha256_observed": "85ece4451f492d0c13c5dd7c13a64681a86afae63a5f347908daf103ce6d2f67",
+      "sha256_registry": "85ece4451f492d0c13c5dd7c13a64681a86afae63a5f347908daf103ce6d2f67",
+      "size": 134899,
+      "source": "registry",
+      "specifier": ">=3.1.2",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "3.1.6"
+     },
+     {
+      "artifact": "markupsafe-3.0.4-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+      "import": "ok",
+      "name": "MarkupSafe",
+      "sha256_observed": "6da83a088f8ef93b2d483a8232a4dbf4d69d3d8496b568a03c56becac43e1808",
+      "sha256_registry": "6da83a088f8ef93b2d483a8232a4dbf4d69d3d8496b568a03c56becac43e1808",
+      "size": 22961,
+      "source": "registry",
+      "specifier": ">=2.0",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "3.0.4"
+     },
+     {
+      "import": "ok",
+      "name": "markupsafe",
+      "source": "isolation",
+      "specifier": ">=2.1.1",
+      "status": "SATISFIED_BY_HOST",
+      "verified_by_execution": true,
+      "version": "3.0.4"
+     },
+     {
+      "artifact": "werkzeug-3.1.9-py3-none-any.whl",
+      "import": "ok",
+      "name": "werkzeug",
+      "sha256_observed": "6392e50c78460ba618e5b21f08a71f59c99ce99cdc6cf6e3dd7e6ccca8754fab",
+      "sha256_registry": "6392e50c78460ba618e5b21f08a71f59c99ce99cdc6cf6e3dd7e6ccca8754fab",
+      "size": 228700,
+      "source": "registry",
+      "specifier": ">=3.1.0",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "3.1.9"
+     },
+     {
+      "artifact": "asgiref-3.13.0-py3-none-any.whl",
+      "import": "ok",
+      "name": "asgiref",
+      "sha256_observed": "f9596a2434512686473d50f96ff6207fbba49ae1a785dfac614df4aeb085674d",
+      "sha256_registry": "f9596a2434512686473d50f96ff6207fbba49ae1a785dfac614df4aeb085674d",
+      "size": 27593,
+      "source": "registry",
+      "specifier": "",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "3.13.0"
+     },
+     {
+      "artifact": "pytest-9.2.0-py3-none-any.whl",
+      "import": "ok",
+      "name": "pytest",
+      "sha256_observed": "07acdcf88ec174f907dc01af70bf52d49b014bbab03faeeade31c96b18c2e588",
+      "sha256_registry": "07acdcf88ec174f907dc01af70bf52d49b014bbab03faeeade31c96b18c2e588",
+      "size": 411776,
+      "source": "registry",
+      "specifier": "",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "9.2.0"
+     },
+     {
+      "artifact": "iniconfig-2.3.1-py3-none-any.whl",
+      "import": "ok",
+      "name": "iniconfig",
+      "sha256_observed": "9121e2c1fdb355232495be3194c8dfe87ccc2d5dee45947b78e68f499790d7a7",
+      "sha256_registry": "9121e2c1fdb355232495be3194c8dfe87ccc2d5dee45947b78e68f499790d7a7",
+      "size": 7552,
+      "source": "registry",
+      "specifier": ">=2",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "2.3.1"
+     },
+     {
+      "artifact": "packaging-26.3-py3-none-any.whl",
+      "import": "ok",
+      "name": "packaging",
+      "sha256_observed": "d7193f7c8e4e93f444fde0262bf90af30e16fa0ad0ad44cb553c87339b23cd1c",
+      "sha256_registry": "d7193f7c8e4e93f444fde0262bf90af30e16fa0ad0ad44cb553c87339b23cd1c",
+      "size": 129956,
+      "source": "registry",
+      "specifier": ">=24",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "26.3"
+     },
+     {
+      "artifact": "pluggy-1.7.0-py3-none-any.whl",
+      "import": "ok",
+      "name": "pluggy",
+      "sha256_observed": "7dd7b0d8832ba3cb632c306926ded123429211b83641b35dc5c41ad2d34f9bec",
+      "sha256_registry": "7dd7b0d8832ba3cb632c306926ded123429211b83641b35dc5c41ad2d34f9bec",
+      "size": 27082,
+      "source": "registry",
+      "specifier": "<2,>=1.6",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "1.7.0"
+     },
+     {
+      "artifact": "pygments-2.21.0-py3-none-any.whl",
+      "import": "ok",
+      "name": "pygments",
+      "sha256_observed": "2363c69b61c4a97c838da3b130dcd6468f4848992b21a82f2a63ec34377137d9",
+      "sha256_registry": "2363c69b61c4a97c838da3b130dcd6468f4848992b21a82f2a63ec34377137d9",
+      "size": 1250147,
+      "source": "registry",
+      "specifier": ">=2.15",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "2.21.0"
+     },
+     {
+      "artifact": "python_dotenv-1.2.4-py3-none-any.whl",
+      "import": "ok",
+      "name": "python-dotenv",
+      "sha256_observed": "42269a8a5b3fd54ffa6f3d84b18abed50064717576b4ecf03dc4a55d8aa04fdc",
+      "sha256_registry": "42269a8a5b3fd54ffa6f3d84b18abed50064717576b4ecf03dc4a55d8aa04fdc",
+      "size": 23266,
+      "source": "registry",
+      "specifier": "",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "1.2.4"
+     },
+     {
+      "artifact": "flit_core-3.12.0-py3-none-any.whl",
+      "import": "ok",
+      "name": "flit_core",
+      "sha256_observed": "e7a0304069ea895172e3c7bb703292e992c5d1555dd1233ab7b5621b5b69e62c",
+      "sha256_registry": "e7a0304069ea895172e3c7bb703292e992c5d1555dd1233ab7b5621b5b69e62c",
+      "size": 45594,
+      "source": "registry",
+      "specifier": ">=3.11,<4",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "3.12.0"
+     },
+     {
+      "artifact": "<staged copy of the tree>",
+      "detail": null,
+      "name": "Flask",
+      "specifier": "the project itself",
+      "status": "PROJECT_INSTALLED",
+      "verified_by_execution": true,
+      "version": "3.2.0.dev0"
+     }
+    ],
+    "schema": "BRAIN_THE_ENVIRONMENT_BROKER_V1",
+    "seconds": 11.2159,
+    "tree": "/tmp/brain_trials/env_ready/pallets__flask",
+    "verdict": "ENVIRONMENT_BROKERED",
+    "verified_versions": {
+     "asgiref": "3.13.0",
+     "blinker": "1.9.0",
+     "click": "8.5.1",
+     "itsdangerous": "2.2.0",
+     "jinja2": "3.1.6",
+     "markupsafe": "3.0.4",
+     "pytest": "9.2.0",
+     "python-dotenv": "1.2.4",
+     "werkzeug": "3.1.9"
+    }
+   },
+   "repo": "pallets/flask",
+   "run_tests_after_arming": {
+    "exit_code": 0,
+    "reported_passed": 494,
+    "runner": [
+     "/tmp/brain_envs/1c40cee77347f166/venv/bin/python",
+     "-m",
+     "pytest",
+     "-q"
+    ],
+    "seconds": 2.0353,
+    "tail": "............ [ 72%]\n........................................................................ [ 87%]\n..............................................................           [100%]\n494 passed in 1.70s\n",
+    "verdict": "ENVIRONMENT_BROKERED"
+   },
+   "tamper": {
+    "detail": null,
+    "from_memory": false,
+    "recheck": {
+     "observed": {
+      "MarkupSafe": "3.0.4",
+      "asgiref": "3.13.0",
+      "blinker": "1.9.0",
+      "click": "8.5.1",
+      "flit_core": "3.12.0",
+      "iniconfig": "2.3.1",
+      "itsdangerous": "2.2.0",
+      "jinja2": "3.1.6",
+      "markupsafe": "3.0.4",
+      "packaging": "26.3",
+      "pluggy": "1.7.0",
+      "pygments": "2.21.0",
+      "pytest": "9.2.0",
+      "python-dotenv": "1.2.4",
+      "werkzeug": "3.1.9"
+     },
+     "ok": false
+    },
+    "verdict": "ENVIRONMENT_BROKERED"
+   },
+   "url": "https://github.com/pallets/flask",
+   "warm": {
+    "authority": "NONE__PRODUCER_RUN_SANDBOX",
+    "declarations": {
+     "required": [
+      {
+       "extras": [],
+       "marker": "",
+       "name": "blinker",
+       "self": null,
+       "specifier": ">=1.9.0"
+      },
+      {
+       "extras": [],
+       "marker": "",
+       "name": "click",
+       "self": null,
+       "specifier": ">=8.1.3"
+      },
+      {
+       "extras": [],
+       "marker": "",
+       "name": "itsdangerous",
+       "self": null,
+       "specifier": ">=2.2.0"
+      },
+      {
+       "extras": [],
+       "marker": "",
+       "name": "jinja2",
+       "self": null,
+       "specifier": ">=3.1.2"
+      },
+      {
+       "extras": [],
+       "marker": "",
+       "name": "markupsafe",
+       "self": null,
+       "specifier": ">=2.1.1"
+      },
+      {
+       "extras": [],
+       "marker": "",
+       "name": "werkzeug",
+       "self": null,
+       "specifier": ">=3.1.0"
+      },
+      {
+       "extras": [],
+       "marker": "",
+       "name": "asgiref",
+       "self": null,
+       "specifier": ""
+      },
+      {
+       "extras": [],
+       "marker": "",
+       "name": "pytest",
+       "self": null,
+       "specifier": ""
+      },
+      {
+       "extras": [],
+       "marker": "",
+       "name": "python-dotenv",
+       "self": null,
+       "specifier": ""
+      }
+     ],
+     "sources": [
+      "pyproject.toml:[project].dependencies",
+      "pyproject.toml:test-groups"
+     ]
+    },
+    "evidence": [
+     "pyproject.toml"
+    ],
+    "evidence_digest": "28b2a110f540c9b016230a0cb046e1378af6c4a2febef8012e727c31346c0bd7",
+    "from_memory": true,
+    "goal": "env-ready",
+    "interpreter": {
+     "check": "requires-python '>=3.11' vs this interpreter 3.11",
+     "ok": true,
+     "version": "3.11.2"
+    },
+    "isolation": {
+     "created": false,
+     "python": "/tmp/brain_envs/1c40cee77347f166/venv/bin/python"
+    },
+    "network": {
+     "artifact_downloads": 0,
+     "bytes": 0,
+     "json_requests": 0
+    },
+    "recheck": {
+     "observed": {
+      "MarkupSafe": "3.0.4",
+      "asgiref": "3.13.0",
+      "blinker": "1.9.0",
+      "click": "8.5.1",
+      "flit_core": "3.12.0",
+      "iniconfig": "2.3.1",
+      "itsdangerous": "2.2.0",
+      "jinja2": "3.1.6",
+      "markupsafe": "3.0.4",
+      "packaging": "26.3",
+      "pluggy": "1.7.0",
+      "pygments": "2.21.0",
+      "pytest": "9.2.0",
+      "python-dotenv": "1.2.4",
+      "werkzeug": "3.1.9"
+     },
+     "ok": true
+    },
+    "records": [
+     {
+      "artifact": "blinker-1.9.0-py3-none-any.whl",
+      "import": "ok",
+      "name": "blinker",
+      "sha256_observed": "ba0efaa9080b619ff2f3459d1d500c57bddea4a6b424b60a91141db6fd2f08bc",
+      "sha256_registry": "ba0efaa9080b619ff2f3459d1d500c57bddea4a6b424b60a91141db6fd2f08bc",
+      "size": 8458,
+      "source": "registry",
+      "specifier": ">=1.9.0",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "1.9.0"
+     },
+     {
+      "artifact": "click-8.5.1-py3-none-any.whl",
+      "import": "ok",
+      "name": "click",
+      "sha256_observed": "8bb5376d2006950386f8c6427613334a2acadc5f559cb80e638d00b4df957e37",
+      "sha256_registry": "8bb5376d2006950386f8c6427613334a2acadc5f559cb80e638d00b4df957e37",
+      "size": 126163,
+      "source": "registry",
+      "specifier": ">=8.1.3",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "8.5.1"
+     },
+     {
+      "artifact": "itsdangerous-2.2.0-py3-none-any.whl",
+      "import": "ok",
+      "name": "itsdangerous",
+      "sha256_observed": "c6242fc49e35958c8b15141343aa660db5fc54d4f13a1db01a3f5891b98700ef",
+      "sha256_registry": "c6242fc49e35958c8b15141343aa660db5fc54d4f13a1db01a3f5891b98700ef",
+      "size": 16234,
+      "source": "registry",
+      "specifier": ">=2.2.0",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "2.2.0"
+     },
+     {
+      "artifact": "jinja2-3.1.6-py3-none-any.whl",
+      "import": "ok",
+      "name": "jinja2",
+      "sha256_observed": "85ece4451f492d0c13c5dd7c13a64681a86afae63a5f347908daf103ce6d2f67",
+      "sha256_registry": "85ece4451f492d0c13c5dd7c13a64681a86afae63a5f347908daf103ce6d2f67",
+      "size": 134899,
+      "source": "registry",
+      "specifier": ">=3.1.2",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "3.1.6"
+     },
+     {
+      "artifact": "markupsafe-3.0.4-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+      "import": "ok",
+      "name": "MarkupSafe",
+      "sha256_observed": "6da83a088f8ef93b2d483a8232a4dbf4d69d3d8496b568a03c56becac43e1808",
+      "sha256_registry": "6da83a088f8ef93b2d483a8232a4dbf4d69d3d8496b568a03c56becac43e1808",
+      "size": 22961,
+      "source": "registry",
+      "specifier": ">=2.0",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "3.0.4"
+     },
+     {
+      "import": "ok",
+      "name": "markupsafe",
+      "source": "isolation",
+      "specifier": ">=2.1.1",
+      "status": "SATISFIED_BY_HOST",
+      "verified_by_execution": true,
+      "version": "3.0.4"
+     },
+     {
+      "artifact": "werkzeug-3.1.9-py3-none-any.whl",
+      "import": "ok",
+      "name": "werkzeug",
+      "sha256_observed": "6392e50c78460ba618e5b21f08a71f59c99ce99cdc6cf6e3dd7e6ccca8754fab",
+      "sha256_registry": "6392e50c78460ba618e5b21f08a71f59c99ce99cdc6cf6e3dd7e6ccca8754fab",
+      "size": 228700,
+      "source": "registry",
+      "specifier": ">=3.1.0",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "3.1.9"
+     },
+     {
+      "artifact": "asgiref-3.13.0-py3-none-any.whl",
+      "import": "ok",
+      "name": "asgiref",
+      "sha256_observed": "f9596a2434512686473d50f96ff6207fbba49ae1a785dfac614df4aeb085674d",
+      "sha256_registry": "f9596a2434512686473d50f96ff6207fbba49ae1a785dfac614df4aeb085674d",
+      "size": 27593,
+      "source": "registry",
+      "specifier": "",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "3.13.0"
+     },
+     {
+      "artifact": "pytest-9.2.0-py3-none-any.whl",
+      "import": "ok",
+      "name": "pytest",
+      "sha256_observed": "07acdcf88ec174f907dc01af70bf52d49b014bbab03faeeade31c96b18c2e588",
+      "sha256_registry": "07acdcf88ec174f907dc01af70bf52d49b014bbab03faeeade31c96b18c2e588",
+      "size": 411776,
+      "source": "registry",
+      "specifier": "",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "9.2.0"
+     },
+     {
+      "artifact": "iniconfig-2.3.1-py3-none-any.whl",
+      "import": "ok",
+      "name": "iniconfig",
+      "sha256_observed": "9121e2c1fdb355232495be3194c8dfe87ccc2d5dee45947b78e68f499790d7a7",
+      "sha256_registry": "9121e2c1fdb355232495be3194c8dfe87ccc2d5dee45947b78e68f499790d7a7",
+      "size": 7552,
+      "source": "registry",
+      "specifier": ">=2",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "2.3.1"
+     },
+     {
+      "artifact": "packaging-26.3-py3-none-any.whl",
+      "import": "ok",
+      "name": "packaging",
+      "sha256_observed": "d7193f7c8e4e93f444fde0262bf90af30e16fa0ad0ad44cb553c87339b23cd1c",
+      "sha256_registry": "d7193f7c8e4e93f444fde0262bf90af30e16fa0ad0ad44cb553c87339b23cd1c",
+      "size": 129956,
+      "source": "registry",
+      "specifier": ">=24",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "26.3"
+     },
+     {
+      "artifact": "pluggy-1.7.0-py3-none-any.whl",
+      "import": "ok",
+      "name": "pluggy",
+      "sha256_observed": "7dd7b0d8832ba3cb632c306926ded123429211b83641b35dc5c41ad2d34f9bec",
+      "sha256_registry": "7dd7b0d8832ba3cb632c306926ded123429211b83641b35dc5c41ad2d34f9bec",
+      "size": 27082,
+      "source": "registry",
+      "specifier": "<2,>=1.6",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "1.7.0"
+     },
+     {
+      "artifact": "pygments-2.21.0-py3-none-any.whl",
+      "import": "ok",
+      "name": "pygments",
+      "sha256_observed": "2363c69b61c4a97c838da3b130dcd6468f4848992b21a82f2a63ec34377137d9",
+      "sha256_registry": "2363c69b61c4a97c838da3b130dcd6468f4848992b21a82f2a63ec34377137d9",
+      "size": 1250147,
+      "source": "registry",
+      "specifier": ">=2.15",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "2.21.0"
+     },
+     {
+      "artifact": "python_dotenv-1.2.4-py3-none-any.whl",
+      "import": "ok",
+      "name": "python-dotenv",
+      "sha256_observed": "42269a8a5b3fd54ffa6f3d84b18abed50064717576b4ecf03dc4a55d8aa04fdc",
+      "sha256_registry": "42269a8a5b3fd54ffa6f3d84b18abed50064717576b4ecf03dc4a55d8aa04fdc",
+      "size": 23266,
+      "source": "registry",
+      "specifier": "",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "1.2.4"
+     },
+     {
+      "artifact": "flit_core-3.12.0-py3-none-any.whl",
+      "import": "ok",
+      "name": "flit_core",
+      "sha256_observed": "e7a0304069ea895172e3c7bb703292e992c5d1555dd1233ab7b5621b5b69e62c",
+      "sha256_registry": "e7a0304069ea895172e3c7bb703292e992c5d1555dd1233ab7b5621b5b69e62c",
+      "size": 45594,
+      "source": "registry",
+      "specifier": ">=3.11,<4",
+      "status": "ACQUIRED_VERIFIED",
+      "verified_by_execution": true,
+      "version": "3.12.0"
+     },
+     {
+      "artifact": "<staged copy of the tree>",
+      "detail": null,
+      "name": "Flask",
+      "specifier": "the project itself",
+      "status": "PROJECT_INSTALLED",
+      "verified_by_execution": true,
+      "version": "3.2.0.dev0"
+     }
+    ],
+    "schema": "BRAIN_THE_ENVIRONMENT_BROKER_V1",
+    "seconds": 0.3334,
+    "tree": "/tmp/brain_trials/env_ready/pallets__flask",
+    "verdict": "ENVIRONMENT_BROKERED_FROM_MEMORY"
+   }
+  }
+ ],
+ "what_this_is": "two unseen repositories, armed cold by declared-dependency resolution against the pypi.org JSON registry, verified by execution, then re-armed warm and tampered"
+}
