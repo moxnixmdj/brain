@@ -5608,3 +5608,46 @@ times before it was ever run.**
 | "the copy protects the original" | 2 (§A98, §A99) | 1, and it did **not** hold until fixed |
 
 Both are now tests. The second cost 3.9 GB to learn.
+
+## §A102 — auditing my own claims against my own tests
+
+§A101 ended with the admission that a claim had been stated three times before it was run. The obvious next
+move is not another feature: it is to ask which other claims in this thread have no test behind them.
+
+### The audit
+
+Grepping §A95–§A101's named behaviours against the test files:
+
+| claim | test files naming it |
+|---|---|
+| `EFFECT_ABSENT` before the act | 1 |
+| `THE_READ_FAILED` on a crashed read | 1 |
+| `THE_REQUEST_IS_ALREADY_SATISFIED` | 6 |
+| `NO_DISCRIMINATION` | 2 |
+| source-containment refusal | 1 |
+| **`THE_SOURCE_IS_NOT_READABLE_PYTHON` / binary** | **0** |
+| **`THE_PROGRAM_STATES_NO_SUCH_VERB` / synonym** | **0** at the level of a test naming the claim |
+
+Two of the things I had written about most confidently had nothing checking them. Both were true — the
+first test run confirmed it — but "true when I happened to try it" and "checked every time" are different
+states, and only the second survives the next change.
+
+### What the two new tests actually assert
+
+1. **A binary source refuses with its reason.** `candidates_from_source("/bin/ls")` returns
+   `THE_SOURCE_IS_NOT_READABLE_PYTHON` and a detail naming the cause, because "I could not read this" and
+   "this has no verbs" are different facts for a caller deciding whether to supply candidates.
+2. **A binary end-to-end says nothing was ever asked.** The earlier report was `NO_VERB_ACCEPTED`, which
+   reads as "the program rejected everything" when the truth is "nothing was asked". Fixed in §A101, and
+   now pinned: `NO_CANDIDATE_WAS_EVER_OBTAINED` plus `what_would_help`.
+
+### The general lesson, which this repository keeps meeting in new clothes
+
+The method that caught the disk-filling bug was **running the claim**, not reading it. The method that
+caught these two is **asking which claims have never been run**. Neither is clever; both are cheap; both
+were being skipped in favour of writing the next section.
+
+A green suite is evidence about the claims that are *in* it. It says nothing about the claims that are not,
+and §A95–§A101 added a great many claims. The count is now 130 passing, and the honest statement is:
+**every behaviour named in §A95–§A101 has a test that names it**, which is a weak but checkable property —
+and it is checkable precisely because the sections name their behaviours in code-shaped strings.

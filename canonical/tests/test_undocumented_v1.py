@@ -362,3 +362,41 @@ def test_probing_the_temp_root_is_refused_instead_of_filling_the_disk() -> None:
     assert "copy the probe into itself" in result["detail"]
     # and nothing was created to leak
     assert not list(pathlib.Path(root).glob("brain_probe_*")) or True  # pre-existing dirs allowed
+
+
+# ----------------------------------------------------------------------------------------------------
+# Claims I made in writing with no test behind them.
+# ----------------------------------------------------------------------------------------------------
+
+def test_a_binary_source_is_refused_with_the_reason_not_an_empty_list() -> None:
+    """The claim, stated three times in §A100 before it was ever run: a stripped binary gives nothing.
+
+    "I could not read this" and "this has no verbs" are different facts, and a caller deciding whether to
+    supply candidates needs to know which one they have. An empty candidate list with no reason reads as
+    the second when the truth is the first.
+    """
+    result = U.candidates_from_source("/bin/ls")
+
+    assert result["why"] == "THE_SOURCE_IS_NOT_READABLE_PYTHON", result
+    assert result["candidates"] == []
+    assert "null bytes" in result["detail"] or "code" in result["detail"]
+
+
+def test_a_binary_end_to_end_says_nothing_was_ever_asked() -> None:
+    """And the consequence: with no candidate obtained, the probe learns nothing and must SAY that.
+
+    The earlier report was `NO_VERB_ACCEPTED`, which reads as "the program rejected everything" when the
+    truth is "nothing was asked". Those are different facts and only one of them suggests the caller should
+    supply candidates.
+    """
+    world = tempfile.mkdtemp(prefix="binsrc_")
+    try:
+        shutil.copy("/bin/ls", pathlib.Path(world) / "ls")
+        learned = U.learn_interface(str(pathlib.Path(world) / "ls"), world)
+
+        assert learned["enough_to_act"] is False
+        assert learned["why"] == "NO_CANDIDATE_WAS_EVER_OBTAINED", learned
+        assert learned["verbs_learned"] == []
+        assert "candidates" in learned["what_would_help"]
+    finally:
+        shutil.rmtree(world, ignore_errors=True)
