@@ -2191,3 +2191,112 @@ that says *read* where the page says *get* — is exactly the kind where the sin
 the program's own refusal: a `secret put` with no `--value` is refused, and the refusal is evidence
 the reading was wrong. It cannot be reached by weights fitted to one example, and the two attempts
 at that were reverted.
+
+### A56 — four things tried, three removed, and the repository made honest
+
+Chasing A54's synonymy gap produced four candidate mechanisms. **Three were removed**, and saying
+which and why is more useful than the one that stayed.
+
+**Removed — a required-flag confidence score in `route()`.** A page whose required flags the request
+names is a better route than one whose required flags it cannot fill. `dm send` needs `--user`,
+`message send` needs `--channel`, the request says "to alice" and names no channel. Adding
+`+3 × supplied − 3 × unsupplied` broke `t03-enum-choice` in the effect suite: the request's own
+words made `--status` look supplied when the value belonged elsewhere. Narrowing it to the flag's
+own name stopped breaking the effect suite but broke
+`test_a_program_that_has_never_existed_is_planned_with_no_new_machinery`. **Deleted.** A scorer that
+needs two corrections to stop breaking things is a scorer fitted to one sentence.
+
+**Removed — R6b, "fill a required flag from a leftover word".** The licence was the flag's own
+description naming the kind of thing the word is. It produced `message send --channel "on my way"
+--text text`: matching an unquoted word to a *description* is one step from matching on shape,
+which this project refuses. **Deleted.**
+
+**Kept — the stemming rule from A54.** `named` → `name` is a spelling fact, true of every English
+word ending in `-e` + `-d`, and it fixed a real miss (`--name` could never match "named") without
+any list. One rule, no parameter.
+
+**Kept — an unknown route is a refusal.** See A55.
+
+**And the repository itself was lying.** Eight `canonical/tests/programs/bin/.*-state.json` files
+were **committed**, so every test run dirtied the working tree with the fixtures' own state. Real
+edits became invisible in `git status` beside them, and 720 lines of generated state sat in the
+history. They are now untracked and ignored: state is an effect of *running*, not source.
+
+**What this leaves as the open problem, stated exactly.** `Send a direct message to alice` reaches
+`message send --channel "on my way"` rather than `dm send --user alice`. The document says `dm send`
+takes `--user` described *"Username of the recipient"*; it does not say that `alice` is a user. The
+request says `alice` and does not say it is a user either. **Neither side states the link, so no
+mechanism that reads only these two can find it** — that is a fact about the evidence, not a
+shortfall of effort. The same sentence with the link stated (*"to the Slack user alice"*) plans
+correctly: `dm send --user alice --text "on my way"`.
+
+The three routes out, in order of how much they respect the constraints: the **world's refusal**
+(`message send` with no valid channel is refused, `dm send` is not — and A55 now makes refusal
+possible); the **object's kind** where a page states one (`--user  Username of the recipient` is a
+*person*, `--channel` is a *place*); and **acquisition**, which the project already mandates — the
+unknown is fetched rather than guessed. Guessing at scoring weights has now failed four times and is
+not to be tried a fifth.
+
+### A57 — routing by *accounting*, measured with no weights, and real programs
+
+Three requests over `linear` were measured against the pages that must serve them. The result was
+not a tuning problem; it was the wrong question being asked.
+
+**What routing actually does now.** It scores every page by word overlap: 4 per request word in the
+page's name, 2 in its summary, 3 per flag the request names, 6 if the page's own last word is the
+requested act. Every term was added to repair one sentence and every one of them can be beaten by
+another sentence.
+
+**What a page must do instead, stated as a fact:** account for the request. Every value the request
+states must fit a slot the page documents, and every flag the page *requires* must be supplied by
+something the request states. A page that leaves a stated value homeless is not the page — it is a
+page about the same noun.
+
+Measured with **no weights at all** — a plain lexicographic count:
+
+| request | page | values placed | required supplied |
+|---|---|---|---|
+| Add an issue to the **project** E for the **team** P **titled** F | `issue create` | 2/3 | **2/2** |
+| | `issue list` | 2/3 | 0/0 |
+| Show all issues for the **team** P | `issue list` | **1/1** | 0/0 |
+| | `issue create` | 1/1 | **1/2** |
+| Create an issue **titled** F in the **team** P | `issue create` | **2/2** | **2/2** |
+
+Each time the right page is the one that supplies what the request brings *and* needs nothing the
+request withholds. That is accounting, and it is what the overlap score is a poor proxy for.
+
+**The label is the mechanism, and both sides already state it.** A value's `context` says
+"to the **project** \"Engineering\"", "for the **team** \"Platform\"". The page says
+`--project  Project name`, `--team  Team name`. The noun the request puts before a value and the
+first word of the flag's description are *the same word*, printed by both parties. No synonym
+table, no world knowledge, nothing read off the value's spelling.
+
+**Two things I got wrong, recorded because they will recur.**
+
+1. I wrote expected commands by hand for those requests and one of them demanded
+   `issue create --project Engineering` — a flag `issue create` **does not document**. A hand-written
+   answer is not a test; it is a guess wearing a test's clothes. Both cases were rewritten as
+   *effect* tasks (`t11`, `t12`) where the world decides: create a page under a named parent with a
+   named title, and the store must hold exactly that page.
+2. I added a `+2` route term for label/kind agreement. It fixed one sentence and broke
+   `git mv` (routing a rename to `git clone`), because my label extraction intersected the whole
+   sentence with its tail, so nearly every value appeared labelled. **Reverted.** The measured
+   accounting above is the replacement, and it is not yet built.
+
+**Real programs, not fixtures — the hardest honest check.** The planner was pointed at real
+`/usr/bin/tar`, whose help is a dense wall of option prose:
+
+    "Create a gzipped archive named backup.tgz from the directory /tmp/data."
+      -> tar -cf backup.tgz /tmp/data
+    "Extract the archive backup.tgz into /tmp/out."
+      -> tar -xf /tmp/out backup.tgz
+    "List the contents of the archive backup.tgz."
+      -> tar -tvf backup.tgz
+
+Correct on a program it was never designed against, with no fixtures and no examples. The same run
+also planned `tar --block-number /tmp/b.txt /tmp/a.txt` for "Copy /tmp/a.txt to /tmp/b.txt" —
+copying is not tar's job, and the right answer there is **refusal**, not a command. That is the
+accounting gap again: no page of `tar` can place both paths in a copy, and the planner should say
+so.
+
+**State of the suite: 70 tests, 12 effect tasks passing by effect.**

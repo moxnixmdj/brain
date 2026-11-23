@@ -113,6 +113,24 @@ TASKS: list[dict] = [
         "expect_command_contains": [["sink", "create"], ["--name", "analytics-lake"]],
         "expect_json_flag": ["--config", {"bucket": "analytics-output", "prefix": "daily/"}],
     },
+    # ---- two required flags whose *kinds* the request labels, named in the opposite order to
+    #      the document's declaration. Whichever value is paired with whichever flag, the world
+    #      must end up holding the page the request described under the parent it named.
+    {
+        "id": "t11-two-labelled-values",
+        "tool": "notion",
+        "instruction": 'Create a page under the parent "Docs" titled "Weekly Report".',
+        "expect_collection": "page",
+        "expect": [{"title": "Weekly Report", "parent": "Docs"}],
+    },
+    # ---- the same two values with the labels the other way round in the sentence.
+    {
+        "id": "t12-two-labelled-values-reversed",
+        "tool": "notion",
+        "instruction": 'Create a page titled "Quarterly Review" under the parent "Archive".',
+        "expect_collection": "page",
+        "expect": [{"title": "Quarterly Review", "parent": "Archive"}],
+    },
 ]
 
 
