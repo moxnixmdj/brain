@@ -3947,3 +3947,88 @@ Four ways to a command, each readable back out of the machine, none guessed:
 The thing that is *still* not possible is the plainest sentence of all: **"list the files in this
 folder"**, which names no program and was never taught. That remains the honest frontier, and A74's
 measurement says it will not be closed by a similarity threshold.
+
+---
+
+## §A80 — THE LISTING ROW NEVER EXISTED (2026-11-22, measurement only)
+
+A79 left one sentence unanswered: **"list the files in this folder"**. This round went looking for the
+row that should answer it and found something worse than a gap.
+
+### What the route does today
+
+```
+list the files in this folder  -> FAIL_CLOSED__ROUTE_ADMISSION_REJECTED
+                                  compiled: source.candidates.enumerate.stdlib
+list the files                 -> same
+show me the files here         -> same
+```
+
+The compiler reads "files" and selects `source.candidates.enumerate.stdlib`, a **source-code corpus
+enumerator** whose keywords include `files`, `source`, `corpus`, `bm25`. It is not a directory listing
+and cannot answer the sentence. Nothing else competes for the words, because **there is no directory
+listing row in the verified registry at all** (`file.*` rows are: `file.question.taught_words.v1`,
+`file.copy.v1`, `file.line.appended.v1`, `file.rename.v1`).
+
+### What is claimed, and what is true
+
+`file.directory_listing.v1` is named in four runtime modules, and `live_brain_route_admission_v1`
+cites it as **the** authority for a rule:
+
+> *"Measured 2026-11-02: 'What files are in <D>?' settles `ls -A <D>`, `file.directory_listing.v1`
+> declares exactly that argv, and the route was refused R13_DECLARED_INPUT_UNBINDABLE:path…"*
+
+A verifying row exists in `verify_file_facts_provenance_v1.ROWS` with a full check suite, including
+"delivers an entry the answer-shape gate can project onto `files`". `file_observation_expectation_v1`
+implements the `directory_listing` mode and returns `names`, `entries` and **`files`**.
+
+**None of it has ever run.** Running the check that is supposed to prove the row:
+
+```
+_run_survey("directory_list", ...)
+  -> LocalExecutionFailure: BOUND_CAPABILITY_ADAPTER_MISSING:
+     canonical/runtime/bound_capabilities/file_survey.py
+```
+
+`canonical/runtime/bound_capabilities/file_survey.py` **does not exist.** There is no receipt for
+`ASTRA-VERIFY-FILE-DIRECTORY-LISTING-001` in `canonical/astra_runtime/evidence/`. The verification
+function cannot return `ok=True`; it raises before it can report anything. So:
+
+* the row is **not in the registry**, correctly — nothing verified it;
+* a comment in the admission layer cites that row as settled authority for a rule it justifies;
+* four modules reference a capability that has never executed once.
+
+This is the same defect class as everything else in this session, one level up: **a claim of
+verification that was never run, read by later code as though it had been.** The instructions are
+explicit — never invent a value, and `/tmp` fixtures are not evidence. The honest state is that the
+directory-listing capability is *specified* and *partly implemented* (the observation function is
+real) and *not verified*, because its adapter was never written.
+
+### Why this was not fixed in this round
+
+Writing `file_survey.py` is easy. Making `file.directory_listing.v1` **true** is not a five-minute
+edit: it needs the adapter, a run of the full check suite, and a receipt written from that run — the
+same standard every other row in the registry met. Building the row and citing the unrun check as its
+proof would add one more reference to a phantom, which is the defect being reported.
+
+### What this means for the mission
+
+The plainest sentence a person can say to a computer — *"list the files in this folder"* — has no
+capability behind it. Not because the machine cannot list files (`ls` works, A79 shows it running and
+delivering 65 real names), and not because the words are unparseable, but because **no verified row
+claims that sentence.** The machine can do the thing and cannot say that it can.
+
+That is a capability gap, not a language gap, and it is the honest frontier:
+
+| sentence | answerable | why |
+|---|---|---|
+| `ls -la` | yes | the sentence is the command line |
+| `use wc on AGENTS.md` | yes, after one run | a verified run taught the skill |
+| `use date to tell the time` | yes | the program documents it |
+| `list the files using ls` | yes | the sentence names the instrument |
+| **`list the files in this folder`** | **no** | nothing verified declares it |
+
+### Verified counts, unchanged this round
+
+Suite **145 passed, 1 pre-existing failure**; `tasks_v1` **13/13**; `unseen_program_v1` **6/6**. No
+code changed: this round established a fact before acting on it.
