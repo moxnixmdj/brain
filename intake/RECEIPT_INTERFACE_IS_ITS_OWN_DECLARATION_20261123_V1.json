@@ -1,0 +1,98 @@
+{
+ "schema": "PROJECT_BRAIN_INTERFACE_IS_ITS_OWN_DECLARATION_RECEIPT_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+ "date": "2026-11-23",
+ "branch": "arena/eac85348-brain",
+ "model_calls": 0,
+ "weights": "unchanged",
+ "network_during_run": 0,
+ "the_blocker_this_removed": {
+  "prior_claim": "GUI/DOM arming is blocked: this sandbox has no display",
+  "measurement": "FALSE. Headless Chromium runs here. Obtained from the reachable npm registry (@sparticuz/chromium ships chromium.br inside the package) via the repository's own canonical/runtime/browser_launch_v1.sh, which already did exactly this. Two real obstacles existed and both were small: (1) browser_v1.ensure() demanded an SPKI pin for every host, which is a category error for a loopback HTTP page and made every local app unreachable -- fixed by a host list; (2) the CDP snapshot reported the placeholder as the accessible name, so 1 of 11 apps was unaddressable and the other 10 were addressable only by luck."
+ },
+ "what_was_built": {
+  "one_new_organ": "canonical/runtime/interface_is_its_own_declaration_v1.py",
+  "two_seam_changes": [
+   "canonical/runtime/browser_v1.py -- _is_local(): a loopback page has no TLS peer, so it has nothing to pin; ensure([]) means no pins and already existed",
+   "canonical/runtime/osworld_v21_browser_cdp_v1.py -- four NAME-addressed ops (FILL_NAME, PRESS_NAME, CLICK_NAME, TOGGLE_NAME) and an aria_name field in the snapshot; every other op on that surface takes a CSS selector, which is a guess at internal structure"
+  ],
+  "no_new_driver": true,
+  "no_new_browser": true,
+  "no_new_dependency_at_runtime": true
+ },
+ "benchmark": {
+  "family": "TodoMVC, the prebuilt implementations of a published interface specification",
+  "apps_self_contained_found": 11,
+  "authored_by_this_system": 0,
+  "app_frameworks": [
+   "Backbone",
+   "vanilla ES5",
+   "vanilla ES6",
+   "jQuery",
+   "Lit",
+   "Preact",
+   "React+Redux",
+   "React",
+   "Svelte",
+   "Vue",
+   "Web Components"
+  ],
+  "task_single_step": {
+   "goal": "add a todo named 'buy milk'",
+   "result": "11/11 GOAL_DECLARED",
+   "steps_each": 1,
+   "seconds_each": "1.81-2.07"
+  },
+  "task_multi_step": {
+   "goal": "add a todo, mark it complete, then filter to Completed",
+   "result": "11/11 PASS",
+   "verification": "the URL is the postcondition: 11/11 moved to #/completed",
+   "seconds_total": 67.8
+  },
+  "address_read_not_assumed": {
+   "backbone": "What needs to be done?",
+   "react-redux": "New todo",
+   "react": "New Todo Input",
+   "web-components": "Enter a new todo."
+  }
+ },
+ "the_three_findings": [
+  {
+   "finding": "A declaration beats a description",
+   "evidence": "aria snapshot 253 bytes / 123 ms vs screenshot 9,601 bytes / 1280x720; and the tree published the postcondition after the action ('text: buy milk', 'strong: \"1\"', 'text: item left') with nothing in this module knowing what those mean"
+  },
+  {
+   "finding": "The interface has no single name, and assuming one costs real apps",
+   "evidence": "preferring aria_name emptied backbone's address and broke 8 of 11 that had been passing; preferring placeholder broke the 3 with real labels. The address must be the ordered list the interface publishes. Net effect measured: 3/11 then 11/11 after the fix."
+  },
+  {
+   "finding": "Goal-directed is 5.9x cheaper than learn-everything, and the names are not the knowledge",
+   "evidence": "learn every app's declaration: 13.49 s, 27 controls, 1,194 bytes. One goal-directed run: 2.30 s. Every app re-declares its names in 1.24 s, so a name cache buys exactly nothing: cold 2.15 s vs warm 2.17 s, 1.0 steps either way. 7 of 11 apps have a unique name set, which is why caching names is remembering the app rather than learning the interface."
+  }
+ ],
+ "what_survives_deletion": {
+  "invariant": "roles every app declares = ['link','textbox']; checkboxes and the all/active/completed filters appear only after work exists (0 of 11 declare them cold). That shape is the transferable fact.",
+  "refusals": "an address that resolved to nothing, and when -- cheap to keep, expensive to rediscover",
+  "not_kept": [
+   "names (re-declared in 1.24 s by the app itself)",
+   "coordinates (layout, breaks on resize)",
+   "step sequence (a search over facts already held)",
+   "pixels (rendering, not meaning)"
+  ]
+ },
+ "honest_limits": [
+  "11 apps of ONE specification. This is breadth within a family, not generalisation across families. A desktop application, a native GUI, or a browser-based IDE has a different declaration surface and none was tested.",
+  "The goal is supplied as strings the interface must declare. Turning a natural-language task into those strings is the organ this PR did NOT build, and it is the next bottleneck.",
+  "Single-step and three-step tasks only. Nothing here is long-horizon; OSWorld 2.1 tasks run beyond 250 agent steps and the constraint-tracking failure mode named by the benchmark is not exercised.",
+  "The postcondition check is 'the strings appear in the declaration'. That is exact and weak: it can be satisfied by a page that prints the string without doing the work, which is why the multi-step test also checks the URL.",
+  "Every number is producer-measured on one host, one browser build, no repeat trials. truth.achieved remains false.",
+  "The SWE-bench generation gap (1.4% search ceiling vs 78.80% top agent) is untouched by this work. A GUI organ does not fix an edit-synthesis gap."
+ ],
+ "tests": {
+  "new": "canonical/tests/test_interface_is_its_own_declaration_v1.py",
+  "count": 17,
+  "with_interrogation": "60 passed in 6.36 s",
+  "browser_suites_regression": "24 passed",
+  "audit": "canonical/tools/model_call_surface_audit_v1.py -> inference_endpoint_files=0 for all three modules"
+ }
+}

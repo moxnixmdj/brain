@@ -33,6 +33,12 @@ def _index(value: Any, name: str, lo: int = 0, hi: int = 100) -> int:
     return value
 
 
+# Roles the accessibility tree uses for things a person can type into, as opposed
+# to things a person presses. The distinction is computed once from the tree
+# rather than guessed per element.
+TEXT_ROLES = ("textbox", "searchbox", "combobox", "spinbutton")
+
+
 def _url(value: Any) -> str:
     value = _text(value, "URL", 8000)
     parsed = urlparse(value)
@@ -93,6 +99,13 @@ class BrowserCDP:
                             text:(e.innerText||e.textContent||'').trim().slice(0,240),
                             aria:e.getAttribute('aria-label')||'',
                             placeholder:e.getAttribute('placeholder')||'',
+                            aria_name:((e.getAttribute('aria-label')||'').trim()
+                              || (e.labels&&e.labels.length?[...e.labels].map(l=>(l.innerText||'').trim()).join(' '):'')
+                              || ((e.getAttribute('role')==='textbox'||e.tagName==='TEXTAREA')
+                                    ? (e.getAttribute('aria-labelledby')
+                                        ? (document.getElementById(e.getAttribute('aria-labelledby'))?.innerText||'').trim() : '')
+                                    : (e.innerText||e.textContent||'').trim())
+                              || (e.getAttribute('title')||'').trim()).slice(0,240),
                             name:e.getAttribute('name')||'',
                             value:('value' in e ? String(e.value) : '').slice(0,240),
                             href:e.getAttribute('href')||'',
@@ -137,6 +150,44 @@ class BrowserCDP:
 
             if kind == "NAVIGATE":
                 page.goto(_url(op.get("url")), wait_until="domcontentloaded", timeout=30000)
+
+            elif kind in ("FILL_NAME", "PRESS_NAME", "CLICK_NAME", "TOGGLE_NAME"):
+                # NAME-ADDRESSED ACTIONS. Every other op on this surface takes a CSS
+                # selector, which is a guess at the environment's internal structure.
+                # The accessibility tree publishes the *name* a control answers to, and
+                # that name is stable across 45 different implementations of the same
+                # interface, so it is the cheapest address that generalises.
+                name = _text(op.get("name"), "NAME", 400)
+                exact = op.get("exact", False)
+                if not isinstance(exact, bool):
+                    raise BrowserCDPError("EXACT_MUST_BE_BOOL")
+                role = op.get("role")
+                if role is not None:
+                    role = _text(role, "ROLE", 40).lower()
+                named = page.get_by_role(role, name=name, exact=exact) if role \
+                    else page.get_by_label(name, exact=exact)
+                target = named.first
+                if kind == "FILL_NAME":
+                    value = op.get("text")
+                    if not isinstance(value, str) or len(value) > 20000:
+                        raise BrowserCDPError("FILL_TEXT_INVALID")
+                    if role is None:
+                        target = page.get_by_role(
+                            "textbox", name=name, exact=exact).first
+                    target.fill(value, timeout=10000)
+                elif kind == "PRESS_NAME":
+                    key = _text(op.get("key"), "KEY", 100)
+                    if role is None:
+                        target = page.get_by_role("textbox", name=name, exact=exact).first
+                    target.press(key, timeout=10000)
+                elif kind == "TOGGLE_NAME":
+                    desired = op.get("checked", True)
+                    if not isinstance(desired, bool):
+                        raise BrowserCDPError("CHECKED_MUST_BE_BOOL")
+                    loc = page.get_by_role("checkbox", name=name, exact=exact).first
+                    loc.check(timeout=10000) if desired else loc.uncheck(timeout=10000)
+                else:
+                    target.click(timeout=10000)
 
             elif kind == "CLICK_SELECTOR":
                 selector = _text(op.get("selector"), "SELECTOR", 1000)
