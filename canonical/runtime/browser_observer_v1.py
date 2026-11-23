@@ -150,10 +150,22 @@ def observe(browser: Any, *, max_text: int = 8000) -> dict[str, Any]:
         sense = "ELEMENT_WORDS_ONLY"
     else:
         sense = "RENDERED_TEXT"
+    # A TRUNCATED READ IS NOT A WHOLE READ, AND THE CALLER COULD NOT TELL (§A125). Measured 2026-11-23: `text`
+    # was silently cut at `max_text`, so a page of 12,000 characters arrived as 8,000 with `ok: True` and no
+    # record that 4,000 were never seen. A searcher would then report "not on the page" about text it had
+    # never looked at -- the exact dishonest verdict §A119 found in the code walker, in a different organ.
+    #
+    # The fix is the same one: record the refusal instead of hiding it. `text_truncated` says the read was
+    # partial, `text_total` says how much there was, and `not_seen` says how much was missed.
+    total = len(text)
+    cut = total > max_text
     return {"schema": SCHEMA, "ok": True, "url": page.get("url") or "",
             "title": page.get("title") or "", "text": text[:max_text],
             "elements": elements, "regions": page.get("regions") or [], "sense": sense,
-            "page_count": snapshot.get("page_count", len(pages))}
+            "page_count": snapshot.get("page_count", len(pages)),
+            "text_truncated": cut, "text_total": total,
+            "text_not_seen": max(0, total - max_text) if cut else 0,
+            "eye": ("PARTIAL_READ" if cut else "WHOLE_READ")}
 
 
 def run(browser: Any, operations: Sequence[Mapping[str, Any]]) -> list[dict[str, Any]]:

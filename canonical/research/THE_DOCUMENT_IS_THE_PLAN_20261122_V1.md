@@ -7144,3 +7144,56 @@ What was built, in order, each step forced by a measurement rather than a plan:
 The gap between this and the mission is not effort, it is **reach**: everything in this thread reasons about
 Python source, and the mission is arbitrary environments. That is the honest position, and the next round should
 attack reach rather than depth in the same mechanism.
+
+## §A125 — the browser had the same defect, and it transferred
+
+### Reach, not depth
+
+§A124 concluded the gap is **reach**: every mechanism in §A113–§A124 reasons about Python source, and the mission
+is arbitrary environments. So the next step was to find whether the §A119 defect — *a refusal masquerading as
+safety* — exists in another organ.
+
+It does, and the search took one `inspect` call:
+
+```python
+return {"schema": SCHEMA, "ok": True, ..., "text": text[:max_text], ...}
+```
+
+`observe()` cut the page's text at 8000 characters and returned **`ok: True`** with no record of the cut.
+
+    page of 12,000 chars  ->  arrived as 8,000, ok=True
+    could the caller tell  ->  no
+    4,000 characters were never seen, and the record did not say so
+
+A searcher would then report *"not on the page"* about text it had never looked at. That is the exact dishonest
+verdict §A119 found in the code walker, in the organ that reads the most.
+
+### The same fix, because it is the same rule
+
+    text_truncated   was this read partial?
+    text_total       how much was there
+    text_not_seen    how much was missed
+    eye              PARTIAL_READ | WHOLE_READ
+
+Measured: a 12,000-character page reports `text_not_seen: 4000`, `eye: PARTIAL_READ`, length 8000; a short page
+reports `WHOLE_READ` with nothing missed. **All 12 existing browser tests still pass**, including the live
+HeadlessChrome ones.
+
+### Why this is worth more than another depth round
+
+The rule is now stated twice, in two organs, from two different measurements:
+
+> **A limited observation must report its limit, or its silence will be read as a finding.**
+
+In §A119 the limited observation was a static walk that could not see `os.environ`; in §A125 it is a page read
+that stopped at 8000 characters. Same defect, same fix, and the fix transfers without modification — which is
+the first evidence in this thread that a lesson learned in one organ is **reachable** from another.
+
+### What is still not proven
+
+    TRANSFERRED    the honesty rule (§A119 -> §A125), verified by measurement in both
+    NOT BUILT      asking the browser before refusing, the way §A120 asks the interpreter
+    NOT BUILT      any equivalent of the literal walk for a DOM
+    NOT MEASURED   whether these rules change behaviour on an OSWorld-style task
+
+The first line is the honest gain. The next three are the reach work, and none of it has been done yet.
