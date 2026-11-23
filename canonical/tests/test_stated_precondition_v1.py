@@ -356,3 +356,35 @@ def test_it_derives_the_act_that_actually_fixed_a_real_capability(tmp_path: path
     assert derived["acts"] == ["file_survey.py"], derived
     # and it is a HYPOTHESIS: the file it names is the one that exists, which is why it survived
     assert (package / derived["acts"][0]).is_file()
+
+
+def test_a_refusal_that_names_two_things_keeps_both(store: pathlib.Path) -> None:
+    """`NAME_COLLISION_TARGET_MODULE:archive_tarfile.py:run` locates a DESTINATION and a NAME.
+
+    Taking only the last part kept the module and threw `run` away, so the fact described a collision
+    without saying what collided. The repair needs both, and they are different answers.
+    """
+    parsed = S.parse("NAME_COLLISION_TARGET_MODULE:archive_tarfile.py:run")
+    assert parsed["parts"] == ["archive_tarfile.py", "run"]
+    assert parsed["value"] == "archive_tarfile.py:run"
+
+
+def test_a_collision_needs_a_different_name_not_a_different_place(store: pathlib.Path) -> None:
+    """The act for a collision is a free name IN THE SAME DESTINATION.
+
+    Measured 2026-11-23: the previous answer offered `service.py`, a different module, when the only thing
+    wrong was the name. Moving a function somewhere the request never asked for is a worse failure than
+    making no progress, because it succeeds.
+    """
+    parsed = S.parse("NAME_COLLISION_TARGET_MODULE:archive_tarfile.py:run")
+    derived = S.acts_for({"test": "is_absent"}, parsed["value"], world=["service.py"],
+                         parts=parsed["parts"])
+    assert derived["acts"] == [], "a collision must not be repaired by moving"
+    assert derived["destination"] == "archive_tarfile.py"
+    assert derived["collided_name"] == "run"
+    assert derived["why"] == "NEEDS_A_DIFFERENT_NAME_IN_THIS_DESTINATION"
+
+    # a one-part unique refusal keeps the old reading: for a CREATE the requirement is already met
+    single = S.parse("NAME_ALREADY_TAKEN:top")
+    assert S.acts_for({"test": "is_absent"}, "top", world=["top"],
+                      parts=single["parts"])["why"] == "ALREADY_SATISFIED"

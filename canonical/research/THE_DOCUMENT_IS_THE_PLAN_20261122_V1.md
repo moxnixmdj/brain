@@ -5081,3 +5081,55 @@ and wrong for a name *collision*. That contrast is the next bottleneck and it is
 
 **Not claimed:** this is not a benchmark score. It is one derivation, checked against the one case in this
 repository where the correct answer is known from a verified run.
+
+## §A93 — a refusal that names two things, and the act that depends on both
+
+§A92 ended by flagging its own error: after the `file_survey` repair, the next refusal in the same
+verified run was `NAME_COLLISION_TARGET_MODULE:archive_tarfile.py:run`, a `unique` violation answered with
+`ALREADY_SATISFIED` — right for a name already taken, wrong for a collision. Two defects were behind it,
+and both were found by reading the refusal against the code that emits it.
+
+### Defect 1: the parser kept one part of a two-part subject
+
+`NAME_COLLISION_TARGET_MODULE:archive_tarfile.py:run` locates a **destination** and a **name**. The
+parser kept only the last part, so the stored fact said a collision happened without saying what
+collided. A one-part refusal is a fact about one thing; a two-part refusal is a fact about
+the relation between two, and the repair needs both.
+
+### Defect 2: the act was the wrong kind of act
+
+With the parts preserved, the act is derivable and it is **not** "do nothing" and **not** "move
+elsewhere":
+
+| reading | act | when |
+|---|---|---|
+| `NAME_ALREADY_TAKEN:top` (one part) | `ALREADY_SATISFIED` | the caller is *creating*; the goal is already true |
+| `NAME_COLLISION_TARGET_MODULE:m:run` (two parts) | `NEEDS_A_DIFFERENT_NAME_IN_THIS_DESTINATION` | the caller is *moving into* m; the destination is right and the name is not free |
+
+Offering a different module — which the previous version did — **moves a function somewhere the request
+never asked for.** That is a worse failure than making no progress, because it succeeds: the command runs,
+the state changes, and the change is wrong.
+
+### The rule this establishes
+
+A `unique` requirement is two different requirements sharing a spelling, and **what the requirement is
+about decides the act.** The refusal says which: one part means a name the caller chose, two parts mean a
+name inside a place the caller chose. Nothing is looked up; the parts *are* the evidence.
+
+### Measured
+
+| | |
+|---|---|
+| parse `NAME_COLLISION_TARGET_MODULE:archive_tarfile.py:run` | `parts = ['archive_tarfile.py', 'run']` |
+| act for the collision | `acts: []`, `destination: archive_tarfile.py`, `collided_name: run` |
+| act for `NAME_ALREADY_TAKEN:top` | `ALREADY_SATISFIED` (unchanged) |
+| suites | **100 passed**, long_horizon **6/6** |
+
+### What is still not derived
+
+The module can say *what is wrong* and *which kind of act is needed*. It cannot yet *make the name free*:
+that requires knowing that a rename is available, that the request permits one, and what to call it. That
+is a decision about the caller's intent, not a fact the environment stated, and inventing it here would be
+the confabulation §A91 and §A92 each spent a test removing. The honest end-state of this thread is:
+**the environment supplies the precondition, the mechanism derives the shape of the act, and the caller
+supplies the intent.**

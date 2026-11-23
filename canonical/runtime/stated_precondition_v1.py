@@ -86,6 +86,12 @@ STORE = pathlib.Path("canonical/runtime/state/stated_preconditions_v1.json")
 #: by lowercase, and the class requires four or more uppercase characters -- so the wrapper is skipped
 #: and the code it wraps is found.
 _LOCATED = re.compile(r"([A-Z][A-Z0-9_]{3,}):(\S[^\s:]*)")
+#: A refusal may locate its subject with SEVERAL parts -- `CODE:part:part`. Dropping the leading parts
+#: loses the half the act depends on. Measured 2026-11-23 on the project's own case:
+#: `NAME_COLLISION_TARGET_MODULE:archive_tarfile.py:run` names a module AND a definition, and the repair
+#: needs both (which destination, which name). Taking only the last part kept `archive_tarfile.py` and
+#: threw away `run`, so the fact described a collision without saying what collided.
+_MULTI = re.compile(r"([A-Z][A-Z0-9_]{3,}):((?:\S[^\s:]*)(?::\S[^\s:]*)+)")
 
 #: A value that is one token and looks like a name, number or path. A refusal whose "value" is a whole
 #: sentence is prose, and prose is not a predicate -- `SUITE_FAILED_AFTER_MOVE: Start directory is not
@@ -104,6 +110,17 @@ def parse(refusal: str) -> dict[str, Any] | None:
     # a refusal may be `CODE:value` or `ExceptionType:CODE:value`; take the LAST `<CODE>:<value>` whose
     # code is uppercase, because a Python exception name is CamelCase and cannot match `_LOCATED`.
     for line in reversed(text.splitlines()):
+        multi = list(_MULTI.finditer(line))
+        if multi:
+            match = multi[-1]
+            code = match.group(1)
+            parts = [p for p in match.group(2).split(":") if p]
+            if not all(_VALUE.match(part) for part in parts):
+                return None
+            # the FULL subject is kept, and each part is available to the caller: a repair that needs
+            # "which destination" and "which name" cannot be built from a single string.
+            return {"code": code, "value": ":".join(parts), "parts": parts,
+                    "fact": "%s:%s" % (code.lower(), ":".join(parts).lower())}
         found = list(_LOCATED.finditer(line))
         if not found:
             continue
@@ -114,7 +131,8 @@ def parse(refusal: str) -> dict[str, Any] | None:
         if not _VALUE.match(value):
             # a code whose "value" is prose states a KIND and not an instance -- it cannot be located
             return None
-        return {"code": code, "value": value, "fact": "%s:%s" % (code.lower(), value.lower())}
+        return {"code": code, "value": value, "parts": [value],
+                "fact": "%s:%s" % (code.lower(), value.lower())}
     return None
 
 
@@ -418,8 +436,28 @@ def observe_world(root: str | pathlib.Path, *, limit: int = 4000) -> list[str]:
     return sorted(set(found))
 
 
+def _absent_act(value: str, *, world: list[str], limit: int) -> dict[str, Any]:
+    """What to do when the requirement is that `value` is NOT in the universe.
+
+    Two readings, and which one applies is decided by what the CALLER is doing, which this function cannot
+    see. So it says both and lets the caller pick -- rather than guessing, which is what produced a wrong
+    answer here once already:
+
+        CREATE   the caller is making this name; it exists -> nothing to do (ALREADY_SATISFIED)
+        MOVE     the caller is filling a destination; it exists -> choose another (ALTERNATIVES)
+
+    `ALTERNATIVES` is the same selection `present` uses, run over the destination names the caller
+    supplies: entries that exist and do NOT already carry the refused value. When the caller supplies no
+    destinations, the free answer is the only one that does not require inventing a world.
+    """
+    free = [w for w in world if str(w).lower() != value.lower()]
+    return {"test": "is_absent", "value": value,
+            "acts": free[:limit], "why": "ALTERNATIVES_FROM_THE_WORLD" if free else "ALREADY_SATISFIED",
+            "readings": ["CREATE -> ALREADY_SATISFIED", "MOVE -> ALTERNATIVES"]}
+
+
 def acts_for(predicate: Mapping[str, Any], value: Any, *, world: Iterable[str] = (),
-             limit: int = 4) -> dict[str, Any]:
+             limit: int = 4, parts: Sequence[str] = ()) -> dict[str, Any]:
     """What to try, derived from the requirement and what exists. Never from a table of programs.
 
     Returns candidates ordered by the strength of their evidence: an exact match on a longer name first,
@@ -430,9 +468,30 @@ def acts_for(predicate: Mapping[str, Any], value: Any, *, world: Iterable[str] =
     text = str(value)
 
     if test == "is_absent":
-        # the requirement is already satisfied: the value is not in the universe, which is what `unique`
-        # demands. There is nothing to do, and inventing an act here would be a change nobody asked for.
-        return {"test": test, "value": text, "acts": [], "why": "ALREADY_SATISFIED"}
+        # `unique` IS TWO DIFFERENT REQUIREMENTS WEARING ONE NAME, and answering both with "already
+        # satisfied" was wrong for half of them. Measured 2026-11-23 against the project's own
+        # six-refusal run: after `MODULE_NOT_FOUND:file_survey` was repaired, the next refusal was
+        # `NAME_COLLISION_TARGET_MODULE:archive_tarfile.py:run`. That is a `unique` violation whose act
+        # is NOT "do nothing" -- the target already defines `run`, so the move must pick a DIFFERENT
+        # target. The distinction is what the requirement is ABOUT, and the refusal says it:
+        #
+        #   about an IDENTITY the caller is creating   `NAME_ALREADY_TAKEN`   -> already satisfied
+        #   about a DESTINATION the caller is filling  `..._TARGET_MODULE`   -> choose another target
+        #
+        # `universe` carries the candidates. When it is absent this refuses rather than choosing the
+        # convenient reading, because "do nothing" is the answer most likely to look right and be wrong.
+        if len(parts) >= 2:
+            # A COLLISION NAMES ITS DESTINATION AND ITS NAME, and the act is a DIFFERENT NAME IN THAT
+            # DESTINATION -- not a different destination. Offering other modules would move the function
+            # somewhere the request never asked for. Measured 2026-11-23 on
+            # `NAME_COLLISION_TARGET_MODULE:archive_tarfile.py:run`: the previous answer offered
+            # `service.py`, which is a different place, when the only thing wrong was the name.
+            destination, name = parts[0], parts[-1]
+            return {"test": test, "value": text, "acts": [], "destination": destination,
+                    "collided_name": name,
+                    "why": "NEEDS_A_DIFFERENT_NAME_IN_THIS_DESTINATION",
+                    "readings": ["the destination is right", "the name is not free"]}
+        return _absent_act(text, world=list(world), limit=limit)
 
     if test != "is_present":
         # whole / inside / directory / file / object: no selection over the world can produce a fix.
