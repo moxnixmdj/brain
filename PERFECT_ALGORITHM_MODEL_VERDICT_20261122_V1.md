@@ -1277,3 +1277,40 @@ NOT §6: no benchmark, no new mechanism — the carried-walk path is the same
 code, same honesty, same 0-edge refusal as §30, now proven durable across
 the process boundary. §6 remains OPEN; this is honest §3 evidence, not a §6
 claim.
+
+## 37. Multi-page carried-walk durability across the process boundary — measured (2026-11-23)
+
+§36 closed the single-page cell (TEACH in process A -> disk priors-only
+memory -> fresh processes B/C replay from disk). §33/§34 measured RULE REPLAY
+durability for the redirect shape. §37 closes the redirect-shape cell: §31's
+honest priors-only construction over the two-page workflow (fill page A ->
+redirect -> verify page B), with the WARM arms running in FRESH processes
+reading only the disk file.
+
+Probe: `unseen_browser_walkxcr_multipage_probe_20261123.py` (live page, parent-owned
+HTTP fixtures, children never own servers, wait_s=0.7).
+
+  CHILD_A (process A): TEACH-NO-FRESH on fixture A's page A -> REFUSED
+           admission (no fresh instances) -> priors persisted to disk
+           (schema PROJECT_BRAIN_PA_MEMORY_V1, rules=0, 8 priors rows) — 173.4 s.
+  CHILD_B (fresh process): WALK-D on fresh fixture D (different content) ->
+           walk_status OPEN__CARRIED_WALK_FAILED, walk_edges 0 (content-derived
+           keys do not carry), priors_used 8, full scan re-derived
+           (scan_states 4) -> PASS, outcome VERIFIED_NOT_PERSISTED, 191.8 s.
+  CHILD_C (fresh process): WALK-A on fixture A (same content) ->
+           walk_status PASS__CARRIED_WALK_REACHED_GOAL, outcome
+           CARRIED_MODEL_WALK_REACHED, walk_edges 5, walk_act_calls 8,
+           scan_states None (zero re-scan) — across the cross-page redirect —
+           35.1 s.
+
+Honest disk check: schema PROJECT_BRAIN_PA_MEMORY_V1, 0 rules (no admission
+without fresh instances), 8 priors rows (browser_page). The fresh processes
+re-read the disk file — no in-memory copy. The redirect is a live page
+navigation: the warm walk re-verifies each edge by live page state, never
+trusts the stored row as fact (§27 honesty, unchanged).
+
+NOT §6: no benchmark, no new mechanism. The carried-walk durability matrix is
+now complete in both shapes: single-page (§36) and multi-page redirect (§37),
+fresh process replays of the disk-loaded priors, same-content walk reaches the
+goal, different-content honestly refuses and re-scans. §6 remains OPEN; this is
+honest §3 evidence, not a §6 claim.
