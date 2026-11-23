@@ -145,6 +145,35 @@ goal on the target. Measured across the 12-case mass run: total warm wall 0.01 s
     environments today (no computer-use harness; the mission's zero model calls is a standing law). Recorded
     honestly as not-reached, not claimed.
 
+## Real-computer follow-up (this round, recorded honestly)
+
+The three mission-embedded questions were resolved on constructed toys. This round the same question — does
+one lesson on a source instance carry to a new instance of the same kind — was ALSO measured on a REAL
+computer environment: real programs (gzip) found on PATH, real files, real subprocess, real artifact
+(`canonical/swe_kernel/perfect_algorithm_computer_env_v1.py`, `unseen_real_computer_probe_20261123.py`,
+receipts in `/tmp/unseen_real_computer_probe_result.json`).
+
+- COLD: `compress seed.txt into seed.txt.gz` over an empty store — **PASS** — run_gzip executes, the target
+  artifact decompresses == source (verified by execution), outcome `VERIFIED_NOT_PERSISTED`, ~3.2 s wall,
+  plan length 1 (`run_gzip`).
+- TEACH: cold solve + admission on 2 fresh CONTENT-variant instances (same goal path, different bytes) —
+  **ADMIT 2/2**; the rule (`run_gzip` — the action, not bytes) persists to a disposable memory store.
+- WARM: the rule replay on content-unseen instances — **PASS, INSTANT_RECALL, 0.004 s, 0 scan steps.** The
+  admitted rule carries across content variants on the real computer env. The carried-model-walk path is
+  the fall-through for when the rule cannot carry; it is not the mission-critical leg here because the
+  plan is content-independent.
+- CONTROL (same content): **INSTANT_RECALL, 0.004 s**.
+
+The companion narrowing bug is recorded in `UNSEEEN_ENVIRONMENT_MEASUREMENT_20261123_V1.md`: gzip was DROPPED
+for the compression goal (decompressor `gunzip` won the alphabetical tie-break for the same binary). The
+fix (dedup aliases by identity, not just resolved binary path) is committed this round; the compress query
+now correctly returns gzip and gunzip as distinct programs.
+
+**Non-claim (honest):** one compression goal over one file in a temp sandbox is NOT a standing
+OSWorld/Terminal-Bench/ARC-AGI-3 claim. The real-computer result establishes that the perfect algorithm's
+full loop closes on a REAL computer environment cold, and that the admitted rule carries to content-unseen
+instances of the same goal family — nothing more.
+
 ## Standing non-claims
 
 - These are 3-peg-stack measurements on a constructed env. They say nothing about GUI/browser environments, larger
