@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "4df742cc5e91a78725f130b9af55befecc3dc0de7790e40019fcce3486647fbd"
+  "value": "c7aed0fe9ede85d1a9400793e3a7794e65581ae8b66c3efb8df3aff43ba4b28d"
  },
  "engines": [
   {
@@ -249502,7 +249502,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/ENVIRONMENT_BROKER_ENV_READY_CONTRACT_20261123_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "bee1caf0855cac86d804318d679ae569c691ce38781515acf0d85ba3c66c3f35",
+   "sha256": "6d8b694d6ba4c40275fffd0d1e73e3c67193d9ba1d88d4ad6d85f53c57522c0d",
    "status": "PROPOSED__PRODUCER_MEASURED__ENVIRONMENT_BROKER_ENV_READY__INDEPENDENT_VERIFICAT",
    "terms": {
     "20261123": 1,

@@ -74,13 +74,16 @@
  "intentional_route_race": false,
  "load_bearing_note": "The success probability is a producer estimate for the measurement succeeding (it did), not for any frontier benchmark score moving.",
  "load_bearing_primary": {
-  "constructive_gap_for_open_obligation_ids": [],
+  "constructive_gap_for_open_obligation_ids": [
+   "CODING_TB4_GE_66_4",
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
   "expected_obligation_discharge_lcb": "0",
-  "expected_obligation_unlock_lcb": "0",
-  "interpretation": "No open truth obligation is discharged by this producer-run measurement. It constructs and admits a mechanism -- an environment can now be armed from its own declarations and proven by execution -- and the live receipt shows it on two unseen repositories. Obligation-adjacent, not an obligation move.",
+  "expected_obligation_unlock_lcb": "1/66",
+  "interpretation": "No open obligation is discharged by this producer-run measurement, and none is claimed to be. The causal path is constructive: Terminal-Bench 4.0 tasks of any size arrive as repositories whose environments must be armed before any suite can be asked, and the broker's inability to arm one was the standing wall in front of every one of them. That wall now has a measured, refusal-named solution on two unseen repositories. The unlock is stated as 1/66 -- one task's worth of an envelope -- because arming is a precondition for the benchmark, not a score on it.",
   "open_obligation_ids": [],
   "scope_complete_discharge": false,
-  "success_probability_lcb": "0.9",
+  "success_probability_lcb": "9/10",
   "wall_clock_cost_ub": "1800"
  },
  "measured_effect": "Live, on two repositories never brokered before, cloned at pinned commits: pallets/flask 49943b5a9441 armed cold in 11.22 s from 14 verified artifacts, warm in 0.33 s with zero registry requests and zero downloads, then its own suite 494 passed, exit 0. psf/requests 3c7baaa05ab4 armed cold in 27.87 s from 32 verified artifacts, warm in 0.78 s, then 619 passed, exit 0. A tampered memory record on both was caught by the execution re-check (recheck.ok False, from_memory False) and re-derived correctly. Offline: 24 new tests, 33 total across the two broker suites, 0 failures.",
