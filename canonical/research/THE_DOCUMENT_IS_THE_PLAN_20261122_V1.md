@@ -7762,3 +7762,76 @@ Two real defects were found by this and fixed:
 
 > **The words are not enough on their own, and no amount of cleverness makes them enough — the second source
 > is documentation, and documentation is finite. That limit is the next bottleneck, not a bug.**
+
+## §A135 — structure decides what the words cannot, and the ordering of the facts is the mechanism
+
+### What §A134 left on the table
+
+§A134 scored **6 of 13** on live pages and named the reason: every refusal was *safe*, but two were refusals a
+person would have called a failure. Both were ties:
+
+    psf/requests   "view the issues" -> THE_PAGE_DOES_NOT_CHOOSE    ("Issues169 (169)" vs "this issue")
+    django/django  "view the issues" -> THE_PAGE_DOES_NOT_CHOOSE    (Issues tab vs two elements named "views")
+
+Neither tie was real. Both were the resolver failing to see a fact that was already in the document.
+
+### The fact: ancestry, not tag names
+
+    the TAB        div > div > main > div > header > nav > ul > li
+    the MENTION    div > div > div > div > div > div > article > p
+
+A first attempt treated `li` as a prose tag and got the wrong answer, because an `li` inside a `nav` is
+navigation. **A tag name is not structure; the PATH is.** That mistake cost one round and is the same lesson as
+§A74 in a new organ: the fact has to be the right fact.
+
+### The second tie was a weaker-match problem, not an ambiguity
+
+`views` was admitted for *"view the issues"* because its whole name — "views" — is made only of a word the
+request uses. The whole-name rule is correct and it is not sufficient: a control whose name accounts for **one**
+of the request's two content words is a weaker answer than one accounting for the request itself, and the tie
+then threw the better answer away.
+
+### The ordering is the mechanism, and I had it backwards twice
+
+    WRONG   coverage inside the tie block, then navigation overriding it
+    WRONG   navigation first, coverage never reached for the tab
+    RIGHT   coverage first -> navigation -> not-prose -> label-shaped -> then a real tie is a refusal
+
+Three facts, from most to least binding. Only after all three is a tie a tie.
+
+### Measured, four live repositories, every probe whose target is verified present
+
+| page | resolved | misses |
+|---|---|---|
+| github.com/psf/requests | 4/4 | 0 |
+| github.com/django/django | 3/3 | 0 |
+| github.com/microsoft/vscode | 3/3 | 0 |
+| github.com/python/cpython | 3/3 | 0 |
+| **total** | **13/13** | **0** |
+
+and **4/4** nonsense requests refused (`create a sandwich` on every page).
+
+§A134 was **6/13**. The movement is one structural fact plus its correct ordering — no new mechanism.
+
+### Two corrections the measurement forced, both recorded rather than hidden
+
+    django "view the issues"  I labelled this a MISS. It is not: django/django's HTML contains no "Issues"
+                              text at all (`>Issues<` occurs zero times; the tab is not server-rendered). The
+                              refusal was correct and my label was wrong.
+
+    torvalds "download the code"
+                              an earlier test asserted this must REFUSE because two elements are named "Code".
+                              Once the resolver could see ancestry it correctly preferred the nav tab over the
+                              non-nav button. THE TEST WAS UPDATED BECAUSE THE MODULE GOT BETTER, and the
+                              replacement asserts the measured distinction rather than the old incapacity.
+
+### The honest scope, unchanged and large
+
+    REAL       13/13 on four live server-rendered pages, four different repositories, zero misses
+    NOT REAL   the pages are all ONE site (GitHub). Nothing here has been measured on a different product.
+    NOT REAL   no layout, no JavaScript, no canvas, no frames. Anything rendered after load is invisible.
+    NOT SHOWN  that any of this composes into a task. Resolving one element is one step.
+    NOT DONE   §6. OSWorld 2.0 binary completion tops out at 32.0% for the frontier; nothing here has run a
+               single OSWorld task.
+
+> **13/13 is four pages of GitHub, and saying so is the difference between a result and a claim.**

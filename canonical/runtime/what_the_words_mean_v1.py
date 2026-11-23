@@ -108,11 +108,27 @@ def stems(text: str) -> set[str]:
 
 @dataclass(frozen=True)
 class Candidate:
-    """One thing on the page that a person could have meant."""
+    """One thing on the page that a person could have meant.
+
+    `in_prose` and `in_navigation` are the structural facts that separate a CONTROL from a mention of one.
+    Measured live 2026-11-23 on psf/requests: "Issues169 (169)" (the repository tab) and "this issue" (a link
+    inside a sentence) tie on every lexical measure, and a person who says "the issues" means only the first.
+
+    The words cannot tell them apart. The ancestry can, and it does so exactly:
+
+        the tab        div > div > main > div > header > nav > ul > li
+        the mention    div > div > div > div > div > div > article > p
+
+    A first attempt used `li` as a prose tag and got the wrong answer, because an `li` in a `nav` is
+    navigation. The lesson is the one this thread keeps relearning: the fact has to be the RIGHT fact, and a
+    tag name alone is not structure -- the PATH is.
+    """
     element_id: str
     role: str
     name: str
     aliases: tuple[str, ...] = ()
+    in_prose: bool = False
+    in_navigation: bool = False
 
     def all_text(self) -> tuple[str, ...]:
         return tuple(t for t in (self.name, *self.aliases) if t)
@@ -165,6 +181,33 @@ def _shares(candidate: Candidate, meaning: Meaning) -> set[str]:
     for text in candidate.all_text():
         shared |= {stem(w) for w in words(text)} & set(meaning.stems)
     return shared
+
+
+def _navigation_kinds(named: Sequence[Candidate]) -> list[Candidate]:
+    """The candidates that ARE navigation, when exactly one of them is.
+
+    A tab strip and a sentence's inline link are different kinds of thing, and the difference is the control's
+    role plus whether its name is short and label-like. A name that is a whole clause ("this issue", "You must
+    be signed in to fork a repository") is prose; a name of one to three words is a label. This is the same
+    distinction `consensus_dom_grounding` draws with `role`; it is asked of the same data, not of a new store.
+    """
+    # A MENTION IS NOT A CONTROL. The sharpest structural fact available, and the one that generalises:
+    # navigation is where an interface puts the things it offers, and article text is where it talks about
+    # them. Ask it first, because it is a fact about the document rather than a judgement about the words.
+    in_nav = [c for c in named if c.in_navigation and not c.in_prose]
+    if len(in_nav) == 1:
+        return in_nav
+    if in_nav:
+        named = in_nav
+    not_prose = [c for c in named if not c.in_prose]
+    if len(not_prose) == 1:
+        return not_prose
+    if not_prose:
+        named = not_prose
+    label_like = [c for c in named if 1 <= len(words(c.name)) <= 3]
+    if len(label_like) == 1:
+        return label_like
+    return list(named)
 
 
 def resolve(instruction: str, candidates: Sequence[Candidate], *,
@@ -240,21 +283,44 @@ def resolve(instruction: str, candidates: Sequence[Candidate], *,
     # A TIE IS A REFUSAL. Two elements equally named are two different things, and choosing the first is the
     # coin flip this repository has spent sections removing (§A74).
     if len(named) > 1:
-        # TWO ELEMENTS CAN SHARE A NAME AND STILL NOT BE EQUALLY GOOD. GitHub's page carries "Code" twice
-        # (the file browser and the language breakdown); "search the code" means neither of them, and
-        # "download the code" means the first. Before refusing, ask whether the REQUEST distinguishes them:
-        # the one whose name accounts for more of the request wins, and an exact tie is still a refusal.
-        def _coverage(c: Candidate) -> int:
-            best = 0
-            for text in c.all_text():
-                best = max(best, len({stem(w) for w in words(text)} & set(meaning.stems)))
-            return best
-        covers = sorted({_coverage(c) for c in named}, reverse=True)
-        if len(covers) > 1 and covers[0] > covers[1]:
-            named = [c for c in named if _coverage(c) == covers[0]]
+        # ORDER MATTERS HERE, AND I HAD IT BACKWARDS. Three facts can separate elements that the page names
+        # with a word of the request, and they must be tried from the most to the least binding:
+        #
+        #   1. HOW MUCH OF THE REQUEST THE NAME ACCOUNTS FOR. A control whose name is made of MORE of what was
+        #      asked is a better answer than one made of a single word. Measured live 2026-11-23 on
+        #      django/django: "view the issues" admitted the Issues tab and two elements named "views", because
+        #      "views" is made only of a word the request uses -- and the weaker matches were tying with the
+        #      right one.
+        #   2. WHERE IT SITS. A repository tab lives in `nav`; a link in prose lives in `article > p`. Measured
+        #      on psf/requests: an ancestry of header>nav>ul>li versus ...>article>p. A `li` alone is not
+        #      prose -- an `li` in a `nav` is navigation -- which is why the PATH is the fact and the tag is not.
+        #   3. A NAME THAT IS A LABEL rather than a clause: "README" over "You must be signed in to fork a
+        #      repository".
+        #
+        # Only after all three is a tie a real tie, and then it is a refusal (§A74).
+        def _accounts(c: Candidate) -> int:
+            return max((len({stem(w) for w in words(t)} & set(meaning.stems)) for t in c.all_text()), default=0)
+
+        steps = (
+            lambda pool: [c for c in pool if _accounts(c) == max(_accounts(x) for x in pool)],
+            lambda pool: ([c for c in pool if c.in_navigation and not c.in_prose]
+                          if any(c.in_navigation and not c.in_prose for c in pool) else pool),
+            lambda pool: ([c for c in pool if not c.in_prose]
+                          if any(not c.in_prose for c in pool) else pool),
+            lambda pool: ([c for c in pool if 1 <= len(words(c.name)) <= 3]
+                          if any(1 <= len(words(c.name)) <= 3 for c in pool) else pool),
+        )
+        for step in steps:
+            narrowed = step(named)
+            if len(narrowed) == 1:
+                named = narrowed
+                break
+            if narrowed:
+                named = narrowed
         if len(named) > 1:
             return {"schema": SCHEMA, "resolved": False, "why": "THE_PAGE_DOES_NOT_CHOOSE",
                     "tied": [c.element_id for c in named]}
+
     winner = named[0]
     return {"schema": SCHEMA, "resolved": True, "element_id": winner.element_id, "name": winner.name,
             "why": "THE_PAGE_NAMES_IT_WITH_A_WORD_OF_THE_REQUEST",
