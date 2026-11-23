@@ -5719,3 +5719,88 @@ the refusing one, and that is how a false verdict gets made a second time.
 fits the program, and it does not yet know how to find or build one.** Diagnosing `THE_WORLD_DOES_NOT_FIT_THE_PROGRAM`
 is the first half. Knowing what world to try instead is the next bottleneck, and it is the same problem as
 OSWorld's implicit state.
+
+## §A104 — a real browser, and the two blindnesses that made it useless
+
+### The browser exists now
+
+The project has carried `browser_v1` and `osworld_v21_browser_cdp_v1` for months, unable to run: "registered
+long ago and unable to run until a browser existed." It exists now —
+
+    $ sh canonical/runtime/browser_launch_v1.sh
+    Chromium ready on port 9222
+    HeadlessChrome/153.0.8010.0
+
+and it loads pages, fills fields, presses buttons. This is the first time in this thread that any GUI
+surface has been driven by the system rather than described by it.
+
+### The first defect: a check applied to the wrong population
+
+`browser_v1.ensure()` read an SPKI public key for **every** host before allowing a page. That is correct for
+HTTPS and meaningless for plain HTTP: a pin proves which certificate a TLS server presented, and where there
+is no TLS there is no certificate to prove. Measured —
+
+    state("http://127.0.0.1:8801/")  ->  ok: False
+    reason: could not read a public key for 127.0.0.1
+
+Every local page was unreachable, which is to say **all OSWorld-style fixtures and every page served for
+testing**. Refusing to load a page because a security mechanism does not apply to it is not caution; it is a
+check applied to the wrong population. `ensure` now takes the scheme alongside the host and skips pinning
+for anything that is not `https`. A caller that names no scheme keeps the old behaviour, so no HTTPS caller
+can silently lose a pin.
+
+### The second defect, and the interesting one: the browser was a blind actuator
+
+With the page loading, the loop filled two fields and pressed a button:
+
+    FILL        PASS
+    FILL        PASS
+    CLICK_TEXT  PASS
+    page text   "Record manager Name Amount Save record"     <- no effect
+
+**Every operation reported PASS and the effect was not there.** Two independent causes, both found by asking
+the page instead of trusting the driver:
+
+1. **The index carried only controls.** `snapshot()` selected `a,button,input,textarea,select,[role=…]`, so
+   the `<div>` the click handler writes into was never reported. The act succeeded and its consequence was
+   invisible. Fixed by reporting the page's **rendered text** (`document.body.innerText`) beside the
+   elements: the sense a person uses, one evaluate per page, bounded like the element list.
+2. **Re-navigating to observe destroys the state being observed.** `state(url)` loads the page and then
+   reports it, so using it as the *read* step reloads the page and discards exactly the form state the act
+   produced. Judged that way a **successful** act returns `effect_present: False`. A judge that reloads the
+   page before asking what happened is not judging; it is resetting the experiment.
+
+### The judge, and what `PASS` means
+
+`browser_observer_v1` separates three things the seam had been confusing:
+
+    observe   the page as it IS -- rendered text plus controls, no navigation
+    run       perform operations; report what each returned
+    judge     ask the SAME page, without reloading, whether the goal's words are now on it
+
+    PASS means the driver completed an operation.
+    PASS is not evidence that the world changed.
+
+The verdict requires the expectation to be present **after** and absent **before**: an effect that was
+already there is not evidence that the act produced it (`THE_EFFECT_WAS_ALREADY_THERE`).
+
+| case | verdict |
+|---|---|
+| fill two fields, press Save, look for `saved alpha = 4` | **`EFFECT_CONFIRMED`** |
+| fill a field, look for the same | **`EFFECT_ABSENT`** — though every op passed |
+| look for words already on the page | **`THE_EFFECT_WAS_ALREADY_THERE`** |
+| a goal stating nothing | **refused**, not guessed |
+
+Five live tests drive a real HeadlessChrome over CDP; they skip cleanly when no browser is running, because
+a browser test that mocks the browser tests the mock.
+
+### What this is not
+
+This is one local page with two buttons. It is **not** OSWorld: no task suite, no GUI applications, no
+coordinate-level interaction, no multi-page state, no login flows, no dynamic pages that fight back. It is
+the smallest honest demonstration that the GUI surface can be *observed and judged*, which the project could
+not previously do at all.
+
+The sharper limit: **the judge needs the goal's words to appear on the page.** `saved alpha = 4` is directly
+visible. A GUI where success looks like "the row moved into the Done column" requires the system to connect
+a goal's phrasing to a page's rendering — that is naming, not judging, and it is unsolved here.

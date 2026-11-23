@@ -125,21 +125,47 @@ def stop() -> None:
     _ACTIVE_PINS.clear()
 
 
-def ensure(hosts: list[str], port: str = PORT, timeout: int = 180) -> tuple[bool, str]:
-    """A browser running that is pinned to every host named.
+def ensure(hosts: list[str], port: str = PORT, timeout: int = 180,
+           schemes: list[str] = ()) -> tuple[bool, str]:
+    """A browser running that is pinned to every HTTPS host named.
 
     Pins can only be set at launch, so a new host costs one restart. Without
-    the right pins a page cannot load at all, so this is what makes HTTPS
-    work, not a security extra bolted on.
+    the right pins an HTTPS page cannot load at all, so this is what makes
+    HTTPS work, not a security extra bolted on.
+
+    PLAIN HTTP NEEDS NO PIN, and requiring one refused every local page.
+    Measured 2026-11-23: a page served on 127.0.0.1:8801 was unreachable
+    because `ensure` tried to read an SPKI key from a host serving no TLS,
+    and returned "could not read a public key for 127.0.0.1". The pin exists
+    to prove which certificate a TLS server presented; where there is no TLS
+    there is no certificate to prove and nothing to pin. Treating the absence
+    of TLS as a failure is not caution, it is a check applied to the wrong
+    population -- and it blocked every OSWorld-style local fixture, which is
+    to say all of them.
+
+    `schemes` is positionally parallel to `hosts`; anything that is not
+    https is skipped for pinning. A caller that names no scheme keeps the old
+    behaviour, so an HTTPS caller cannot silently lose a pin.
     """
     hosts = [h for h in hosts if h]
     if not hosts:
         return start(port=port)
     pins = set(_ACTIVE_PINS)
-    for h in hosts:
+    unpinned = 0
+    for index, h in enumerate(hosts):
+        scheme = (schemes[index] if index < len(schemes) else "https") or "https"
+        if scheme.lower() != "https":
+            # no certificate is presented, so there is nothing to pin
+            unpinned += 1
+            continue
         pins |= set(spki_pins(h))
-    if not pins:
+    if not pins and not unpinned:
         return False, f"could not read a public key for {', '.join(hosts)}"
+    if not pins and unpinned:
+        # every host is plain HTTP: a browser with no pins is exactly right
+        if running(port):
+            return True, "already running; no pins needed for plain HTTP"
+        return start(port=port)
     if running(port) and pins <= _ACTIVE_PINS:
         return True, "already running with these pins"
     stop()
@@ -220,7 +246,7 @@ def state(url: str, timeout: int = 180) -> dict:
 
     Choosing between those elements is the loop's job, not ours.
     """
-    ok, why = ensure([host_of(url)])
+    ok, why = ensure([host_of(url)], schemes=[urlparse(url).scheme or "https"])
     if not ok:
         return {"schema": SCHEMA, "ok": False, "reason": why, "url": url}
     b = bind()
@@ -230,7 +256,13 @@ def state(url: str, timeout: int = 180) -> dict:
     elements = page.get("elements") or []
     # The words actually on the page: the title plus the text of every
     # control and link. Enough to judge whether the page is about the goal.
-    blob = " ".join([page.get("title") or ""] +
+    # THE PAGE'S RENDERED TEXT FIRST, because a control list is not a page.
+    # Measured 2026-11-23: a click reported PASS and its effect went into a <div>, which the element index
+    # does not carry, so `state()` reported a page whose visible result was missing. The driver now reads
+    # innerText; this is where it becomes the loop's observation. Falling back to the element words keeps
+    # older drivers working, so a caller is never made worse by this.
+    page_text = page.get("text") or ""
+    blob = " ".join([page.get("title") or "", page_text] +
                     [(e.get("text") or "") + " " + (e.get("aria") or "") + " " +
                      (e.get("name") or "") + " " + (e.get("placeholder") or "")
                      for e in elements])
@@ -238,6 +270,7 @@ def state(url: str, timeout: int = 180) -> dict:
     return {"schema": SCHEMA, "ok": True, "url": url,
             "data": {"url": page.get("url") or url, "title": page.get("title") or "",
                      "chars": len(text), "text": text[:8000], "elements": elements,
+                     "rendered_text": page_text[:8000],
                      "page_count": snap.get("page_count", 0)}}
 
 

@@ -102,11 +102,28 @@ class BrowserCDP:
                     )
                 except Exception:
                     elements = []
+                # THE PAGE'S OWN WORDS, not only its controls.
+                # Measured 2026-11-23: a form was filled and its Save button clicked, the click reported
+                # PASS, and the handler wrote its result into a <div>. That div is not in the interactive
+                # selector list, so nothing it contained was ever reported -- the act succeeded and the
+                # effect was invisible. A browser that can act and cannot see the consequence is a blind
+                # actuator, and every self-judging loop built on it (§A95) would confirm nothing or, worse,
+                # confirm on whatever the controls happened to say.
+                #
+                # Reading innerText is not a new sense: it is the sense a person uses. It costs one
+                # evaluate per page and it is bounded the same way the element list is.
+                try:
+                    body_text = page.evaluate(
+                        "() => (document.body && document.body.innerText || '').replace(/\\s+/g,' ')"
+                        ".trim().slice(0, 8000)")
+                except Exception:
+                    body_text = ""
                 out_pages.append({
                     "page_index": page_index,
                     "url": page.url,
                     "title": page.title(),
                     "elements": elements[:MAX_ELEMENTS],
+                    "text": body_text,
                 })
             return {
                 "schema": SCHEMA,
