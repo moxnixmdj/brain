@@ -1,0 +1,873 @@
+{
+ "all_criteria_met": true,
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "branch": "arena/6f8ac9ce-brain",
+ "cost": {
+  "fresh_process_runs": 13,
+  "model_calls": 0,
+  "network_calls_at_run_time": 0,
+  "parameters_stored": 0,
+  "seconds": 25.34
+ },
+ "date": "2026-11-23",
+ "declared_before_the_run": {
+  "D1": "a different goal and term family are measured; the iteration-6 holder-shape store false-rejects >0 copy-goal runs and the iteration-5 literal store refuses",
+  "D2": "a declarative hashed grammar descriptor travels through a fresh isolated process with disjoint imports; twelve hard unseen CLI failures (including stored expected labels and missing controls) fail closed and no machine literal leaks",
+  "D3": "798 real fit runs yield truth popcount 240, 16 recomputable terms and four exact minimal statements",
+  "D4": "584 usable delayed runs separate the class; two real judgments within ceil(log2(4))=2 collapse four statements to one with zero sentence questions",
+  "D5": "held-out basic and delayed machines with different literals predict with zero false accepts, false rejects and abstentions",
+  "D6": "pointerless, deleted, restored, raw exact experience and both old stores are measured fail-closed controls",
+  "D7": "killed prototypes and the old holder grammar on the copy fit are preserved with numbers",
+  "D8": "zero model calls, parameters and runtime network calls; no independent verifier, capability registration, truth or section-6 credit"
+ },
+ "fit": {
+  "machines": [
+   "FIT_ALPHA",
+   "FIT_BETA"
+  ],
+  "minimal_statements": [
+   "copy:final_count==1[content:first_relocation_source] and copy:monotone[content:first_relocation_source]",
+   "copy:final_count==1[content:first_relocation_source] and copy:max_count<=1[content:first_relocation_source]",
+   "copy:monotone[content:first_relocation_source] and copy:max_count<=1[content:first_relocation_source]",
+   "copy:max_count<=1[content:first_relocation_source] and copy:never_removed[content:first_relocation_source]"
+  ],
+  "runs": 798,
+  "truth_mask_popcount": 240
+ },
+ "fresh_process": {
+  "authority": "NONE__PRODUCER_RUN_SANDBOX_FRESH_PROCESS_NOT_INDEPENDENT_IDENTITY",
+  "hard_cli_failures": [
+   {
+    "case": "unknown_argument",
+    "exit_code": 2,
+    "expected_status": "HARD_CLI_FAILURE__UNKNOWN_ARGUMENT",
+    "status": "HARD_CLI_FAILURE__UNKNOWN_ARGUMENT",
+    "stderr_tail": "usage: recomputed_relation_grammar_v1.py [-h] --store STORE --raw-log RAW_LOG\nrecomputed_relation_grammar_v1.py: error: unrecognized arguments: --this-flag-does-not-exist",
+    "stdout_status": null
+   },
+   {
+    "case": "missing_store",
+    "exit_code": 2,
+    "expected_status": "REFUSED__NO_STORE",
+    "status": "REFUSED__NO_STORE",
+    "stderr_tail": "",
+    "stdout_status": "REFUSED__NO_STORE"
+   },
+   {
+    "case": "missing_raw_log",
+    "exit_code": 2,
+    "expected_status": "REFUSED__NO_RAW_LOG",
+    "status": "REFUSED__NO_RAW_LOG",
+    "stderr_tail": "",
+    "stdout_status": "REFUSED__NO_RAW_LOG"
+   },
+   {
+    "case": "malformed_store",
+    "exit_code": 2,
+    "expected_status": "REFUSED__MALFORMED_JSON",
+    "status": "REFUSED__MALFORMED_JSON",
+    "stderr_tail": "",
+    "stdout_status": "REFUSED__MALFORMED_JSON"
+   },
+   {
+    "case": "malformed_raw_log",
+    "exit_code": 2,
+    "expected_status": "REFUSED__MALFORMED_RAW_LOG",
+    "status": "REFUSED__MALFORMED_RAW_LOG",
+    "stderr_tail": "",
+    "stdout_status": "REFUSED__MALFORMED_RAW_LOG"
+   },
+   {
+    "case": "mutated_grammar_hash",
+    "exit_code": 2,
+    "expected_status": "REFUSED__GRAMMAR_DESCRIPTOR_HASH_MISMATCH",
+    "status": "REFUSED__GRAMMAR_DESCRIPTOR_HASH_MISMATCH",
+    "stderr_tail": "",
+    "stdout_status": "REFUSED__GRAMMAR_DESCRIPTOR_HASH_MISMATCH"
+   },
+   {
+    "case": "unseen_primitive",
+    "exit_code": 2,
+    "expected_status": "REFUSED__UNKNOWN_GRAMMAR_PRIMITIVE",
+    "status": "REFUSED__UNKNOWN_GRAMMAR_PRIMITIVE",
+    "stderr_tail": "",
+    "stdout_status": "REFUSED__UNKNOWN_GRAMMAR_PRIMITIVE"
+   },
+   {
+    "case": "mutated_raw_log_hash",
+    "exit_code": 2,
+    "expected_status": "REFUSED__RAW_LOG_HASH_MISMATCH",
+    "status": "REFUSED__RAW_LOG_HASH_MISMATCH",
+    "stderr_tail": "",
+    "stdout_status": "REFUSED__RAW_LOG_HASH_MISMATCH"
+   },
+   {
+    "case": "stored_expected_labels",
+    "exit_code": 2,
+    "expected_status": "REFUSED__RAW_LOG_HAS_STORED_VERDICTS",
+    "status": "REFUSED__RAW_LOG_HAS_STORED_VERDICTS",
+    "stderr_tail": "",
+    "stdout_status": "REFUSED__RAW_LOG_HAS_STORED_VERDICTS"
+   },
+   {
+    "case": "no_normal_machine",
+    "exit_code": 2,
+    "expected_status": "REFUSED__NO_NORMAL_MACHINE",
+    "status": "REFUSED__NO_NORMAL_MACHINE",
+    "stderr_tail": "",
+    "stdout_status": "REFUSED__NO_NORMAL_MACHINE"
+   },
+   {
+    "case": "no_pointerless_control",
+    "exit_code": 2,
+    "expected_status": "REFUSED__NO_POINTERLESS_CONTROL",
+    "status": "REFUSED__NO_POINTERLESS_CONTROL",
+    "stderr_tail": "",
+    "stdout_status": "REFUSED__NO_POINTERLESS_CONTROL"
+   },
+   {
+    "case": "iteration_6_store_schema",
+    "exit_code": 2,
+    "expected_status": "REFUSED__STORE_SCHEMA_MISMATCH",
+    "status": "REFUSED__STORE_SCHEMA_MISMATCH",
+    "stderr_tail": "",
+    "stdout_status": "REFUSED__STORE_SCHEMA_MISMATCH"
+   }
+  ],
+  "path": "canonical/tools/recomputed_relation_grammar_v1.py",
+  "result": {
+   "command": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/home/user/brain/canonical/tools/recomputed_relation_grammar_v1.py",
+    "--store",
+    "/home/user/brain/canonical/astra_runtime/state/COMPUTED_COPY_GRAMMAR_RELATION_V1.json",
+    "--raw-log",
+    "/home/user/brain/canonical/verification/GRAMMAR_TRANSPORT_RAW_LOG_20261123_V1.json"
+   ],
+   "exit_code": 0,
+   "parsed": {
+    "authority": "NONE__PRODUCER_RUN_SANDBOX_FRESH_PROCESS",
+    "false_accepts": 0,
+    "false_rejects": 0,
+    "grammar_family": "computed_copy_cardinality_v1",
+    "grammar_sha256": "a0f73fe04a84fddec85c23ff2ff1d5b5b5ee88d0535361a4e5d2e401a3ef1d6b",
+    "independent_verification_completed": false,
+    "machines": [
+     {
+      "abstentions": 0,
+      "false_accepts": 0,
+      "false_rejects": 0,
+      "name": "FIT_ALPHA",
+      "pointer_contents_recomputed_from_this_machine": [
+       "alpha_content"
+      ],
+      "runs": 399,
+      "status": "PREDICTED",
+      "term_evaluations": 6384,
+      "terms_recomputed_from_this_machine": 16
+     },
+     {
+      "abstentions": 0,
+      "false_accepts": 0,
+      "false_rejects": 0,
+      "name": "FIT_BETA",
+      "pointer_contents_recomputed_from_this_machine": [
+       "beta_content"
+      ],
+      "runs": 399,
+      "status": "PREDICTED",
+      "term_evaluations": 6384,
+      "terms_recomputed_from_this_machine": 16
+     },
+     {
+      "abstentions": 0,
+      "false_accepts": 0,
+      "false_rejects": 0,
+      "name": "SELECT_GAMMA",
+      "pointer_contents_recomputed_from_this_machine": [
+       "gamma_content"
+      ],
+      "runs": 584,
+      "status": "PREDICTED",
+      "term_evaluations": 9344,
+      "terms_recomputed_from_this_machine": 16
+     },
+     {
+      "abstentions": 0,
+      "false_accepts": 0,
+      "false_rejects": 0,
+      "name": "HELD_DELTA",
+      "pointer_contents_recomputed_from_this_machine": [
+       "delta_content"
+      ],
+      "runs": 399,
+      "status": "PREDICTED",
+      "term_evaluations": 6384,
+      "terms_recomputed_from_this_machine": 16
+     },
+     {
+      "abstentions": 0,
+      "false_accepts": 0,
+      "false_rejects": 0,
+      "name": "THIRD_EPSILON",
+      "pointer_contents_recomputed_from_this_machine": [
+       "epsilon_content"
+      ],
+      "runs": 584,
+      "status": "PREDICTED",
+      "term_evaluations": 9344,
+      "terms_recomputed_from_this_machine": 16
+     },
+     {
+      "abstentions": 39,
+      "control": "POINTERLESS",
+      "name": "NO_RELOCATION_SOURCE",
+      "pointer_contents_recomputed_from_this_machine": [],
+      "pointer_failures": 39,
+      "runs": 39,
+      "status": "REFUSED__CONTENT_POINTER_NOT_RECOMPUTED",
+      "terms_recomputed_from_this_machine": 0
+     }
+    ],
+    "normal_machines": 5,
+    "pointerless_controls": 1,
+    "python_isolated_mode": true,
+    "python_pid": 191912,
+    "raw_log_sha256": "930632765a99249dd2aa40e3e7e72e32de314f83e374bd6f6cd17f15ef1789f7",
+    "schema": "BRAIN_RECOMPUTED_RELATION_GRAMMAR_V1",
+    "status": "PASS",
+    "terms_recomputed_per_machine": 16
+   },
+   "python_isolated_mode": true,
+   "status": "PASS",
+   "stderr_tail": "",
+   "stdout_status": "PASS"
+  },
+  "separate_identity_probe": {
+   "command": "setpriv --reuid=65534 --regid=65534 --clear-groups python3 -I -B -c ...",
+   "exit_code": 127,
+   "independent_verification_completed": false,
+   "status": "UNAVAILABLE__SEPARATE_UID_DENIED",
+   "stderr_tail": "setpriv: setresuid failed: Operation not permitted"
+  },
+  "sha256": "72d532e038eca40aa5cb54db57b299470138bb973b6b0f14388b7a20f2b99333"
+ },
+ "grammar": {
+  "executable_predicates_in_store": 0,
+  "family": "computed_copy_cardinality_v1",
+  "goal": {
+   "final_eq": 1,
+   "kind": "pointer_count_final_eq_and_max_le",
+   "max_le": 1
+  },
+  "pointer": {
+   "definition": "the content of the first mv/cp source operand in the executor call log, read from the initial state when that operand existed there, otherwise from the state immediately before that command",
+   "source": "executor_call_log_and_machine_readings",
+   "text": "content:first_relocation_source"
+  },
+  "schema": "BRAIN_DECLARATIVE_RELATION_GRAMMAR_V1",
+  "sha256": "a0f73fe04a84fddec85c23ff2ff1d5b5b5ee88d0535361a4e5d2e401a3ef1d6b",
+  "term_prefix": "copy",
+  "terms": 16
+ },
+ "killed_designs": {
+  "iteration_5_literal_store_on_copy_goal": {
+   "abstentions": 399,
+   "status": "REFUSED__GOAL_CONTENT_OR_TERMS_NOT_RECOMPUTED"
+  },
+  "iteration_6_content_pointer_store_on_copy_goal": {
+   "abstentions": 0,
+   "false_accepts": 0,
+   "false_rejects": 3,
+   "pointer_contents_recomputed_from_this_machine": [
+    "delta_content"
+   ],
+   "runs": 399,
+   "status": "PREDICTED",
+   "terms_recomputed_from_this_machine": 16,
+   "texts": [
+    "holder_shape:first_final_different[content:first_relocation_source]",
+    "holder_shape:max_holders<=1[content:first_relocation_source]"
+   ]
+  },
+  "model_proposed_predicate": "forbidden runtime dependency; not used",
+  "old_holder_grammar_on_copy_fit": {
+   "exact_on_copy_goal_fit": true,
+   "minimal_statements": [
+    "holder_shape:final_nonempty[content:first_relocation_source] and holder_shape:max_holders<=1[content:first_relocation_source]",
+    "holder_shape:max_holders<=1[content:first_relocation_source] and holder_shape:never_empty[content:first_relocation_source]",
+    "holder_shape:max_holders<=1[content:first_relocation_source] and holder_shape:final_singleton[content:first_relocation_source]"
+   ],
+   "term_family": "computed_deictic_holder_shape_v1",
+   "terms": 16,
+   "why_killed": "the old grammar also fits this goal, so grammar transport must be measured, not asserted by a unique survivor"
+  },
+  "raw_exact_experience": {
+   "abstentions": 399,
+   "fit_runs": 798,
+   "held_out_runs": 399
+  },
+  "unsaved_producer_prototypes": [
+   {
+    "cause": "no real delayed run separated the grammar class",
+    "design": "shallow copy grammar on the original basic/delayed builders",
+    "fit_runs": 516,
+    "judgment_budget": 1,
+    "minimal_statements": 2,
+    "path": "/tmp/iter7_proto.py",
+    "separating_runs": 0,
+    "truth_popcount": 210,
+    "usable_delayed_runs": 258
+   },
+   {
+    "cause": "all separating verdicts were True with votes [True,True,True,False]; class only 4->3",
+    "design": "copy grammar with MV_DELETE and RECREATE but no delete/recreate contrasts",
+    "fit_runs": 798,
+    "judgment_budget": 2,
+    "minimal_statements": 4,
+    "path": "/tmp/iter7_proto2.py",
+    "separating_runs": 9,
+    "truth_popcount": 240,
+    "usable_delayed_runs": 399
+   },
+   {
+    "cause": "succeeded as an unsaved producer-run measurement; promoted here only after adding the committed descriptor, fresh-process verifier, store, receipt and tests",
+    "design": "copy grammar with DELETE_RECREATE_MV and RECREATE_CP",
+    "fit_runs": 798,
+    "judgment_budget": 2,
+    "minimal_statements": 4,
+    "path": "/tmp/iter7_proto3.py",
+    "separating_runs": 28,
+    "truth_popcount": 240,
+    "usable_delayed_runs": 584
+   }
+  ]
+ },
+ "limits": [
+  "fresh isolated process is a transport check, not independent identity verification",
+  "a separate OS uid was unavailable; AGENTS.md requires a different verifier for an independent claim",
+  "the descriptor is a finite typed grammar, not free-form natural-language purpose understanding",
+  "no authored repair content or GUI/browser machine was executed",
+  "no OSWorld 2.1, SWE-bench Pro / Pro V2 / HARD-51 or Terminal-Bench 2.1 / 4.1 task was run",
+  "no capability registered, no truth achieved and no merge made"
+ ],
+ "mode": "TRANSPORT_A_HASHED_DECLARATIVE_RELATION_GRAMMAR_AND_RECOMPUTE_IT_IN_A_FRESH_PROCESS",
+ "question": {
+  "environment": "SELECT_GAMMA",
+  "judgment_budget_ceil_log2_class": 2,
+  "judgments": [
+   {
+    "class_after": 3,
+    "class_before": 4,
+    "judgment_on_the_run": true,
+    "run_index": 0,
+    "run_steps": 2,
+    "surviving_texts": [
+     "copy:final_count==1[content:first_relocation_source] and copy:monotone[content:first_relocation_source]",
+     "copy:final_count==1[content:first_relocation_source] and copy:max_count<=1[content:first_relocation_source]",
+     "copy:monotone[content:first_relocation_source] and copy:max_count<=1[content:first_relocation_source]"
+    ]
+   },
+   {
+    "class_after": 1,
+    "class_before": 3,
+    "judgment_on_the_run": true,
+    "run_index": 6,
+    "run_steps": 4,
+    "surviving_texts": [
+     "copy:final_count==1[content:first_relocation_source] and copy:max_count<=1[content:first_relocation_source]"
+    ]
+   }
+  ],
+  "questions_about_statements": 0,
+  "separating_runs": 28,
+  "survivor": "copy:final_count==1[content:first_relocation_source] and copy:max_count<=1[content:first_relocation_source]",
+  "usable_runs": 584
+ },
+ "raw_log": {
+  "bytes": 5127137,
+  "expected_verdicts_stored": 0,
+  "machines": 6,
+  "path": "canonical/verification/GRAMMAR_TRANSPORT_RAW_LOG_20261123_V1.json",
+  "records": 2404,
+  "sha256": "930632765a99249dd2aa40e3e7e72e32de314f83e374bd6f6cd17f15ef1789f7"
+ },
+ "schema": "BRAIN_THE_GRAMMAR_IS_NOT_A_LITERAL_V1",
+ "store": {
+  "content_literal_leaks": [],
+  "identity_literal_leaks": [],
+  "path": "canonical/astra_runtime/state/COMPUTED_COPY_GRAMMAR_RELATION_V1.json",
+  "schema": "BRAIN_DECLARATIVE_GRAMMAR_RELATION_STORE_V1",
+  "sha256": "3f7a7c79adbb2bd233310765a295a62a11e58d0b37d01ecf274a8f643d1a24b2",
+  "texts": [
+   "copy:final_count==1[content:first_relocation_source]",
+   "copy:max_count<=1[content:first_relocation_source]"
+  ]
+ },
+ "truth": {
+  "achieved": false,
+  "independent_verification_completed": false,
+  "section_6": "NOT_MET"
+ },
+ "verdict": {
+  "D1_goal_and_grammar_family_changed": {
+   "MET": true,
+   "iteration_5_literal_store_on_copy_goal": {
+    "abstentions": 399,
+    "status": "REFUSED__GOAL_CONTENT_OR_TERMS_NOT_RECOMPUTED"
+   },
+   "iteration_6_content_pointer_store_on_copy_goal": {
+    "abstentions": 0,
+    "false_accepts": 0,
+    "false_rejects": 3,
+    "pointer_contents_recomputed_from_this_machine": [
+     "delta_content"
+    ],
+    "runs": 399,
+    "status": "PREDICTED",
+    "terms_recomputed_from_this_machine": 16,
+    "texts": [
+     "holder_shape:first_final_different[content:first_relocation_source]",
+     "holder_shape:max_holders<=1[content:first_relocation_source]"
+    ]
+   },
+   "new_goal": {
+    "final_eq": 1,
+    "kind": "pointer_count_final_eq_and_max_le",
+    "max_le": 1
+   },
+   "new_relation_texts": [
+    "copy:final_count==1[content:first_relocation_source]",
+    "copy:max_count<=1[content:first_relocation_source]"
+   ],
+   "new_term_family": "computed_copy_cardinality_v1",
+   "old_term_family": "computed_deictic_holder_shape_v1"
+  },
+  "D2_fresh_process_descriptor_and_hard_cli_failures": {
+   "MET": true,
+   "content_literal_leaks_in_grammar": [],
+   "content_literal_leaks_in_store": [],
+   "fresh_process": {
+    "command": [
+     "/usr/bin/python3",
+     "-I",
+     "-B",
+     "/home/user/brain/canonical/tools/recomputed_relation_grammar_v1.py",
+     "--store",
+     "/home/user/brain/canonical/astra_runtime/state/COMPUTED_COPY_GRAMMAR_RELATION_V1.json",
+     "--raw-log",
+     "/home/user/brain/canonical/verification/GRAMMAR_TRANSPORT_RAW_LOG_20261123_V1.json"
+    ],
+    "exit_code": 0,
+    "python_isolated_mode": true,
+    "status": "PASS",
+    "stderr_tail": "",
+    "stdout_status": "PASS"
+   },
+   "fresh_process_machines": [
+    {
+     "abstentions": 0,
+     "false_accepts": 0,
+     "false_rejects": 0,
+     "name": "FIT_ALPHA",
+     "pointer_contents_recomputed_from_this_machine": [
+      "alpha_content"
+     ],
+     "runs": 399,
+     "status": "PREDICTED",
+     "term_evaluations": 6384,
+     "terms_recomputed_from_this_machine": 16
+    },
+    {
+     "abstentions": 0,
+     "false_accepts": 0,
+     "false_rejects": 0,
+     "name": "FIT_BETA",
+     "pointer_contents_recomputed_from_this_machine": [
+      "beta_content"
+     ],
+     "runs": 399,
+     "status": "PREDICTED",
+     "term_evaluations": 6384,
+     "terms_recomputed_from_this_machine": 16
+    },
+    {
+     "abstentions": 0,
+     "false_accepts": 0,
+     "false_rejects": 0,
+     "name": "SELECT_GAMMA",
+     "pointer_contents_recomputed_from_this_machine": [
+      "gamma_content"
+     ],
+     "runs": 584,
+     "status": "PREDICTED",
+     "term_evaluations": 9344,
+     "terms_recomputed_from_this_machine": 16
+    },
+    {
+     "abstentions": 0,
+     "false_accepts": 0,
+     "false_rejects": 0,
+     "name": "HELD_DELTA",
+     "pointer_contents_recomputed_from_this_machine": [
+      "delta_content"
+     ],
+     "runs": 399,
+     "status": "PREDICTED",
+     "term_evaluations": 6384,
+     "terms_recomputed_from_this_machine": 16
+    },
+    {
+     "abstentions": 0,
+     "false_accepts": 0,
+     "false_rejects": 0,
+     "name": "THIRD_EPSILON",
+     "pointer_contents_recomputed_from_this_machine": [
+      "epsilon_content"
+     ],
+     "runs": 584,
+     "status": "PREDICTED",
+     "term_evaluations": 9344,
+     "terms_recomputed_from_this_machine": 16
+    },
+    {
+     "abstentions": 39,
+     "control": "POINTERLESS",
+     "name": "NO_RELOCATION_SOURCE",
+     "pointer_contents_recomputed_from_this_machine": [],
+     "pointer_failures": 39,
+     "runs": 39,
+     "status": "REFUSED__CONTENT_POINTER_NOT_RECOMPUTED",
+     "terms_recomputed_from_this_machine": 0
+    }
+   ],
+   "grammar_sha256": "a0f73fe04a84fddec85c23ff2ff1d5b5b5ee88d0535361a4e5d2e401a3ef1d6b",
+   "hard_cli_failures": [
+    {
+     "case": "unknown_argument",
+     "exit_code": 2,
+     "expected_status": "HARD_CLI_FAILURE__UNKNOWN_ARGUMENT",
+     "status": "HARD_CLI_FAILURE__UNKNOWN_ARGUMENT",
+     "stderr_tail": "usage: recomputed_relation_grammar_v1.py [-h] --store STORE --raw-log RAW_LOG\nrecomputed_relation_grammar_v1.py: error: unrecognized arguments: --this-flag-does-not-exist",
+     "stdout_status": null
+    },
+    {
+     "case": "missing_store",
+     "exit_code": 2,
+     "expected_status": "REFUSED__NO_STORE",
+     "status": "REFUSED__NO_STORE",
+     "stderr_tail": "",
+     "stdout_status": "REFUSED__NO_STORE"
+    },
+    {
+     "case": "missing_raw_log",
+     "exit_code": 2,
+     "expected_status": "REFUSED__NO_RAW_LOG",
+     "status": "REFUSED__NO_RAW_LOG",
+     "stderr_tail": "",
+     "stdout_status": "REFUSED__NO_RAW_LOG"
+    },
+    {
+     "case": "malformed_store",
+     "exit_code": 2,
+     "expected_status": "REFUSED__MALFORMED_JSON",
+     "status": "REFUSED__MALFORMED_JSON",
+     "stderr_tail": "",
+     "stdout_status": "REFUSED__MALFORMED_JSON"
+    },
+    {
+     "case": "malformed_raw_log",
+     "exit_code": 2,
+     "expected_status": "REFUSED__MALFORMED_RAW_LOG",
+     "status": "REFUSED__MALFORMED_RAW_LOG",
+     "stderr_tail": "",
+     "stdout_status": "REFUSED__MALFORMED_RAW_LOG"
+    },
+    {
+     "case": "mutated_grammar_hash",
+     "exit_code": 2,
+     "expected_status": "REFUSED__GRAMMAR_DESCRIPTOR_HASH_MISMATCH",
+     "status": "REFUSED__GRAMMAR_DESCRIPTOR_HASH_MISMATCH",
+     "stderr_tail": "",
+     "stdout_status": "REFUSED__GRAMMAR_DESCRIPTOR_HASH_MISMATCH"
+    },
+    {
+     "case": "unseen_primitive",
+     "exit_code": 2,
+     "expected_status": "REFUSED__UNKNOWN_GRAMMAR_PRIMITIVE",
+     "status": "REFUSED__UNKNOWN_GRAMMAR_PRIMITIVE",
+     "stderr_tail": "",
+     "stdout_status": "REFUSED__UNKNOWN_GRAMMAR_PRIMITIVE"
+    },
+    {
+     "case": "mutated_raw_log_hash",
+     "exit_code": 2,
+     "expected_status": "REFUSED__RAW_LOG_HASH_MISMATCH",
+     "status": "REFUSED__RAW_LOG_HASH_MISMATCH",
+     "stderr_tail": "",
+     "stdout_status": "REFUSED__RAW_LOG_HASH_MISMATCH"
+    },
+    {
+     "case": "stored_expected_labels",
+     "exit_code": 2,
+     "expected_status": "REFUSED__RAW_LOG_HAS_STORED_VERDICTS",
+     "status": "REFUSED__RAW_LOG_HAS_STORED_VERDICTS",
+     "stderr_tail": "",
+     "stdout_status": "REFUSED__RAW_LOG_HAS_STORED_VERDICTS"
+    },
+    {
+     "case": "no_normal_machine",
+     "exit_code": 2,
+     "expected_status": "REFUSED__NO_NORMAL_MACHINE",
+     "status": "REFUSED__NO_NORMAL_MACHINE",
+     "stderr_tail": "",
+     "stdout_status": "REFUSED__NO_NORMAL_MACHINE"
+    },
+    {
+     "case": "no_pointerless_control",
+     "exit_code": 2,
+     "expected_status": "REFUSED__NO_POINTERLESS_CONTROL",
+     "status": "REFUSED__NO_POINTERLESS_CONTROL",
+     "stderr_tail": "",
+     "stdout_status": "REFUSED__NO_POINTERLESS_CONTROL"
+    },
+    {
+     "case": "iteration_6_store_schema",
+     "exit_code": 2,
+     "expected_status": "REFUSED__STORE_SCHEMA_MISMATCH",
+     "status": "REFUSED__STORE_SCHEMA_MISMATCH",
+     "stderr_tail": "",
+     "stdout_status": "REFUSED__STORE_SCHEMA_MISMATCH"
+    }
+   ],
+   "identity_literal_leaks_in_grammar": [],
+   "identity_literal_leaks_in_store": [],
+   "independent_verification_completed": false,
+   "raw_log_sha256": "930632765a99249dd2aa40e3e7e72e32de314f83e374bd6f6cd17f15ef1789f7",
+   "separate_identity_probe": {
+    "command": "setpriv --reuid=65534 --regid=65534 --clear-groups python3 -I -B -c ...",
+    "exit_code": 127,
+    "independent_verification_completed": false,
+    "status": "UNAVAILABLE__SEPARATE_UID_DENIED",
+    "stderr_tail": "setpriv: setresuid failed: Operation not permitted"
+   },
+   "store_schema": "BRAIN_DECLARATIVE_GRAMMAR_RELATION_STORE_V1"
+  },
+  "D3_fit_is_four_exact_minimal_statements": {
+   "MET": true,
+   "fit_exact": true,
+   "fit_runs": 798,
+   "minimal_statements": [
+    "copy:final_count==1[content:first_relocation_source] and copy:monotone[content:first_relocation_source]",
+    "copy:final_count==1[content:first_relocation_source] and copy:max_count<=1[content:first_relocation_source]",
+    "copy:monotone[content:first_relocation_source] and copy:max_count<=1[content:first_relocation_source]",
+    "copy:max_count<=1[content:first_relocation_source] and copy:never_removed[content:first_relocation_source]"
+   ],
+   "terms": 16,
+   "truth_popcount": 240
+  },
+  "D4_two_real_judgments_collapse_the_class": {
+   "MET": true,
+   "class_after": 1,
+   "judgment_budget_ceil_log2_class": 2,
+   "judgments": [
+    {
+     "class_after": 3,
+     "class_before": 4,
+     "judgment_on_the_run": true,
+     "run_index": 0,
+     "run_steps": 2,
+     "surviving_texts": [
+      "copy:final_count==1[content:first_relocation_source] and copy:monotone[content:first_relocation_source]",
+      "copy:final_count==1[content:first_relocation_source] and copy:max_count<=1[content:first_relocation_source]",
+      "copy:monotone[content:first_relocation_source] and copy:max_count<=1[content:first_relocation_source]"
+     ]
+    },
+    {
+     "class_after": 1,
+     "class_before": 3,
+     "judgment_on_the_run": true,
+     "run_index": 6,
+     "run_steps": 4,
+     "surviving_texts": [
+      "copy:final_count==1[content:first_relocation_source] and copy:max_count<=1[content:first_relocation_source]"
+     ]
+    }
+   ],
+   "judgments_on_runs": 2,
+   "last_chosen_pointer_content": "gamma_content",
+   "questions_about_statements": 0,
+   "separating_runs": 28,
+   "survivor": "copy:final_count==1[content:first_relocation_source] and copy:max_count<=1[content:first_relocation_source]",
+   "usable_delayed_runs": 584
+  },
+  "D5_held_out_grammar_transport": {
+   "MET": true,
+   "held_delta": {
+    "abstentions": 0,
+    "false_accepts": 0,
+    "false_rejects": 0,
+    "pointer_contents_recomputed_from_this_machine": [
+     "delta_content"
+    ],
+    "runs": 399,
+    "status": "PREDICTED",
+    "term_evaluations": 6384,
+    "terms_recomputed_from_this_machine": 16,
+    "texts": [
+     "copy:final_count==1[content:first_relocation_source]",
+     "copy:max_count<=1[content:first_relocation_source]"
+    ]
+   },
+   "third_epsilon": {
+    "abstentions": 0,
+    "false_accepts": 0,
+    "false_rejects": 0,
+    "pointer_contents_recomputed_from_this_machine": [
+     "epsilon_content"
+    ],
+    "runs": 584,
+    "status": "PREDICTED",
+    "term_evaluations": 9344,
+    "terms_recomputed_from_this_machine": 16,
+    "texts": [
+     "copy:final_count==1[content:first_relocation_source]",
+     "copy:max_count<=1[content:first_relocation_source]"
+    ]
+   }
+  },
+  "D6_fail_closed_controls": {
+   "MET": true,
+   "copy_before_deletion": {
+    "abstentions": 0,
+    "false_accepts": 0,
+    "false_rejects": 0,
+    "pointer_contents_recomputed_from_this_machine": [
+     "delta_content"
+    ],
+    "runs": 399,
+    "status": "PREDICTED",
+    "term_evaluations": 6384,
+    "terms_recomputed_from_this_machine": 16,
+    "texts": [
+     "copy:final_count==1[content:first_relocation_source]",
+     "copy:max_count<=1[content:first_relocation_source]"
+    ]
+   },
+   "deleted_store": {
+    "abstentions": 399,
+    "status": "REFUSED__NO_RELATION"
+   },
+   "iteration_5_literal_store": {
+    "abstentions": 399,
+    "status": "REFUSED__GOAL_CONTENT_OR_TERMS_NOT_RECOMPUTED"
+   },
+   "iteration_6_content_pointer_store": {
+    "abstentions": 0,
+    "false_accepts": 0,
+    "false_rejects": 3,
+    "pointer_contents_recomputed_from_this_machine": [
+     "delta_content"
+    ],
+    "runs": 399,
+    "status": "PREDICTED",
+    "terms_recomputed_from_this_machine": 16,
+    "texts": [
+     "holder_shape:first_final_different[content:first_relocation_source]",
+     "holder_shape:max_holders<=1[content:first_relocation_source]"
+    ]
+   },
+   "pointerless_machine": {
+    "abstentions": 39,
+    "first_failure_index": 0,
+    "pointer_failures": 39,
+    "runs": 39,
+    "status": "REFUSED__CONTENT_POINTER_NOT_RECOMPUTED"
+   },
+   "raw_exact_experience": {
+    "abstentions": 399,
+    "fit_runs": 798,
+    "held_out_runs": 399
+   },
+   "restored_store": {
+    "abstentions": 0,
+    "false_accepts": 0,
+    "false_rejects": 0,
+    "pointer_contents_recomputed_from_this_machine": [
+     "delta_content"
+    ],
+    "runs": 399,
+    "status": "PREDICTED",
+    "term_evaluations": 6384,
+    "terms_recomputed_from_this_machine": 16,
+    "texts": [
+     "copy:final_count==1[content:first_relocation_source]",
+     "copy:max_count<=1[content:first_relocation_source]"
+    ]
+   }
+  },
+  "D7_killed_designs_are_preserved": {
+   "MET": true,
+   "model_proposed_predicate": "forbidden and not used",
+   "old_holder_grammar_on_copy_fit": {
+    "exact_on_copy_goal_fit": true,
+    "minimal_statements": [
+     "holder_shape:final_nonempty[content:first_relocation_source] and holder_shape:max_holders<=1[content:first_relocation_source]",
+     "holder_shape:max_holders<=1[content:first_relocation_source] and holder_shape:never_empty[content:first_relocation_source]",
+     "holder_shape:max_holders<=1[content:first_relocation_source] and holder_shape:final_singleton[content:first_relocation_source]"
+    ],
+    "term_family": "computed_deictic_holder_shape_v1",
+    "terms": 16,
+    "why_killed": "the old grammar also fits this goal, so grammar transport must be measured, not asserted by a unique survivor"
+   },
+   "unsaved_producer_prototypes": [
+    {
+     "cause": "no real delayed run separated the grammar class",
+     "design": "shallow copy grammar on the original basic/delayed builders",
+     "fit_runs": 516,
+     "judgment_budget": 1,
+     "minimal_statements": 2,
+     "path": "/tmp/iter7_proto.py",
+     "separating_runs": 0,
+     "truth_popcount": 210,
+     "usable_delayed_runs": 258
+    },
+    {
+     "cause": "all separating verdicts were True with votes [True,True,True,False]; class only 4->3",
+     "design": "copy grammar with MV_DELETE and RECREATE but no delete/recreate contrasts",
+     "fit_runs": 798,
+     "judgment_budget": 2,
+     "minimal_statements": 4,
+     "path": "/tmp/iter7_proto2.py",
+     "separating_runs": 9,
+     "truth_popcount": 240,
+     "usable_delayed_runs": 399
+    },
+    {
+     "cause": "succeeded as an unsaved producer-run measurement; promoted here only after adding the committed descriptor, fresh-process verifier, store, receipt and tests",
+     "design": "copy grammar with DELETE_RECREATE_MV and RECREATE_CP",
+     "fit_runs": 798,
+     "judgment_budget": 2,
+     "minimal_statements": 4,
+     "path": "/tmp/iter7_proto3.py",
+     "separating_runs": 28,
+     "truth_popcount": 240,
+     "usable_delayed_runs": 584
+    }
+   ]
+  },
+  "D8_zeros_and_limits": {
+   "MET": true,
+   "capability_registration": false,
+   "fresh_process_runs": 13,
+   "independent_verification_completed": false,
+   "model_calls": 0,
+   "network_calls_at_run_time": 0,
+   "parameters_stored": 0,
+   "section_6": "NOT_MET",
+   "truth_achieved": false
+  }
+ }
+}

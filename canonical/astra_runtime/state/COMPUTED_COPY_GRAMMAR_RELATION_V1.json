@@ -1,0 +1,140 @@
+{
+ "content_literals": [],
+ "content_pointer": {
+  "definition": "the content of the first mv/cp source operand in the executor call log, read from the initial state when that operand existed there, otherwise from the state immediately before that command",
+  "source": "executor_call_log_and_machine_readings",
+  "text": "content:first_relocation_source"
+ },
+ "cost": {
+  "model_calls": 0,
+  "network_calls_at_run_time": 0,
+  "parameters_stored": 0
+ },
+ "evidence": {
+  "fit_runs": 798,
+  "fresh_process_command": "python3 -I -B canonical/tools/recomputed_relation_grammar_v1.py --store canonical/astra_runtime/state/COMPUTED_COPY_GRAMMAR_RELATION_V1.json --raw-log canonical/verification/GRAMMAR_TRANSPORT_RAW_LOG_20261123_V1.json",
+  "grammar_sha256": "a0f73fe04a84fddec85c23ff2ff1d5b5b5ee88d0535361a4e5d2e401a3ef1d6b",
+  "independent_verification_completed": false,
+  "judgment_budget_ceil_log2_class": 2,
+  "judgments_on_runs": 2,
+  "raw_log_path": "canonical/verification/GRAMMAR_TRANSPORT_RAW_LOG_20261123_V1.json",
+  "raw_log_sha256": "930632765a99249dd2aa40e3e7e72e32de314f83e374bd6f6cd17f15ef1789f7",
+  "separate_identity_probe": {
+   "command": "setpriv --reuid=65534 --regid=65534 --clear-groups python3 -I -B -c ...",
+   "exit_code": 127,
+   "independent_verification_completed": false,
+   "status": "UNAVAILABLE__SEPARATE_UID_DENIED",
+   "stderr_tail": "setpriv: setresuid failed: Operation not permitted"
+  },
+  "truth_popcount": 240,
+  "verifier_path": "canonical/tools/recomputed_relation_grammar_v1.py",
+  "verifier_sha256": "72d532e038eca40aa5cb54db57b299470138bb973b6b0f14388b7a20f2b99333"
+ },
+ "grammar": {
+  "family": "computed_copy_cardinality_v1",
+  "goal": {
+   "final_eq": 1,
+   "kind": "pointer_count_final_eq_and_max_le",
+   "max_le": 1
+  },
+  "pointer": {
+   "definition": "the content of the first mv/cp source operand in the executor call log, read from the initial state when that operand existed there, otherwise from the state immediately before that command",
+   "source": "executor_call_log_and_machine_readings",
+   "text": "content:first_relocation_source"
+  },
+  "schema": "BRAIN_DECLARATIVE_RELATION_GRAMMAR_V1",
+  "term_prefix": "copy",
+  "terms": [
+   {
+    "kind": "pointer_count_initial_ge",
+    "name": "initial_present",
+    "value": 1
+   },
+   {
+    "kind": "pointer_count_final_eq",
+    "name": "final_count==1",
+    "value": 1
+   },
+   {
+    "kind": "pointer_count_final_eq",
+    "name": "final_count==0",
+    "value": 0
+   },
+   {
+    "kind": "pointer_count_series_monotone",
+    "name": "monotone",
+    "value": 0
+   },
+   {
+    "kind": "pointer_count_max_le",
+    "name": "max_count<=1",
+    "value": 1
+   },
+   {
+    "kind": "pointer_count_max_le",
+    "name": "max_count<=2",
+    "value": 2
+   },
+   {
+    "kind": "pointer_count_increases_eq",
+    "name": "created_once",
+    "value": 1
+   },
+   {
+    "kind": "pointer_count_all_ge",
+    "name": "never_removed",
+    "value": 1
+   },
+   {
+    "kind": "pointer_count_any_ge",
+    "name": "at_least_once",
+    "value": 1
+   },
+   {
+    "kind": "pointer_count_any_ge",
+    "name": "two_copies",
+    "value": 2
+   },
+   {
+    "kind": "state_cardinality_series_monotone",
+    "name": "no_decrease",
+    "value": 0
+   },
+   {
+    "kind": "state_cardinality_final_eq",
+    "name": "final_card==2",
+    "value": 2
+   },
+   {
+    "kind": "state_cardinality_final_eq",
+    "name": "final_card==3",
+    "value": 3
+   },
+   {
+    "kind": "state_cardinality_final_eq",
+    "name": "final_card==4",
+    "value": 4
+   },
+   {
+    "kind": "state_cardinality_initial_eq",
+    "name": "initial_card==2",
+    "value": 2
+   },
+   {
+    "kind": "state_cardinality_initial_eq",
+    "name": "initial_card==3",
+    "value": 3
+   }
+  ]
+ },
+ "identity_literals": [],
+ "relation": {
+  "operator": "and",
+  "texts": [
+   "copy:final_count==1[content:first_relocation_source]",
+   "copy:max_count<=1[content:first_relocation_source]"
+  ]
+ },
+ "schema": "BRAIN_DECLARATIVE_GRAMMAR_RELATION_STORE_V1",
+ "term_family": "computed_copy_cardinality_v1"
+}
