@@ -185,21 +185,27 @@ def goal_predicate_for(seed: Mapping[str, bytes], target_name: str) -> Callable[
     """A predicate over the OBSERVED file-tree state.
 
     Each format is checked exactly as the goal claims it:
-      - .tar.gz / .tgz: the target is a real tar archive that contains the
-        source file, and the contained file's bytes are the source's bytes.
-      - .gz: the target decompresses to the source the goal named.
+      - tar-family archives (.tar, .tar.gz/.tgz, .tar.bz2/.tbz2, .tar.xz/.txz):
+        the target is a real tar archive that contains the source file,
+        and the contained file's bytes are the source's bytes.
+      - .zip: the target is a real zip archive that contains the source file
+        by basename, and its bytes are the source's bytes.
+      - .gz / .bz2 / .xz: the target decompresses to the source the goal named.
       - anything else (plain file): the target exists and is non-empty.
     """
     import io as _io
     import tarfile as _tarfile
+    import bz2 as _bz2
+    import lzma as _lzma
+    import zipfile as _zipfile
 
     src_names = sorted(seed)
     src_name = src_names[0] if src_names else None
 
-    def _tar_gz_members(tgt: bytes) -> dict[str, bytes]:
+    def _tar_members(tgt: bytes, mode: str) -> dict[str, bytes]:
         out: dict[str, bytes] = {}
         try:
-            with _tarfile.open(fileobj=_io.BytesIO(tgt), mode="r:gz") as tf:
+            with _tarfile.open(fileobj=_io.BytesIO(tgt), mode=mode) as tf:
                 for member in tf.getmembers():
                     if member.isfile():
                         fobj = tf.extractfile(member)
@@ -209,23 +215,67 @@ def goal_predicate_for(seed: Mapping[str, bytes], target_name: str) -> Callable[
             return {}
         return out
 
+    def _zip_members(tgt: bytes) -> dict[str, bytes]:
+        out: dict[str, bytes] = {}
+        try:
+            with _zipfile.ZipFile(_io.BytesIO(tgt)) as zf:
+                for info in zf.infolist():
+                    if not info.is_dir():
+                        try:
+                            out[info.filename] = zf.read(info)
+                        except Exception:  # noqa: BLE001
+                            continue
+        except Exception:
+            return {}
+        return out
+
+    def _in_archive(members: dict[str, bytes], src: bytes) -> bool:
+        # the archive is the claim: the source file is IN it, unchanged
+        for m_name, m_bytes in members.items():
+            path_part = m_name.rstrip("/").rsplit("/", 1)[-1]
+            if path_part == src_name and m_bytes == src:
+                return True
+        return False
+
+    _TAR_MODES = {
+        ".tar": "r:",
+        ".tar.gz": "r:gz",
+        ".tgz": "r:gz",
+        ".tar.bz2": "r:bz2",
+        ".tbz2": "r:bz2",
+        ".tar.xz": "r:xz",
+        ".txz": "r:xz",
+    }
+
     def is_goal(state) -> bool:
         files = dict(state or ())
         src = files.get(src_name)
         tgt = files.get(target_name, b"")
         if src is None or not tgt:
             return False
-        if target_name.endswith((".tar.gz", ".tgz")):
-            members = _tar_gz_members(tgt)
-            # the archive is the claim: the source file is IN it, unchanged
-            for m_name, m_bytes in members.items():
-                path_part = m_name.rstrip("/").rsplit("/", 1)[-1]
-                if path_part == src_name and m_bytes == src:
-                    return True
-            return False
+
+        for suffix in sorted(_TAR_MODES, key=lambda s: -len(s)):
+            if target_name.endswith(suffix):
+                members = _tar_members(tgt, _TAR_MODES[suffix])
+                return _in_archive(members, src)
+
+        if target_name.endswith(".zip"):
+            members = _zip_members(tgt)
+            return _in_archive(members, src)
+
         if target_name.endswith(".gz"):
             try:
                 return gzip.decompress(tgt) == src
+            except Exception:
+                return False
+        if target_name.endswith(".bz2"):
+            try:
+                return _bz2.decompress(tgt) == src
+            except Exception:
+                return False
+        if target_name.endswith(".xz"):
+            try:
+                return _lzma.decompress(tgt) == src
             except Exception:
                 return False
         return True

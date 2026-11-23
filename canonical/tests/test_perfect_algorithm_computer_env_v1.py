@@ -155,6 +155,77 @@ class ArchiveGoalTests(unittest.TestCase):
         self.assertFalse(is_goal({"data.txt": src, "data.tar.gz": wrong_name.read_bytes()}),
                          "an archive holding the source under another name is not the goal")
 
+    def test_archive_predicate_verifies_each_format_as_the_goal_claims_it(self):
+        """The claim is 'the target file is that format and holds the source'.
+        A file CALLED out.zip is not a zip; an archive holding wrong bytes
+        is not the goal."""
+        import bz2 as _bz2
+        import io
+        import lzma as _lzma
+        import tarfile
+        import zipfile
+
+        from canonical.swe_kernel.perfect_algorithm_computer_env_v1 import (
+            goal_predicate_for,
+        )
+
+        seed = {"data.txt": b"alpha\nbeta\ngamma\n"}
+        src = seed["data.txt"]
+
+        def _tar(mode):
+            b = io.BytesIO()
+            with tarfile.open(fileobj=b, mode=mode) as tf:
+                info = tarfile.TarInfo("data.txt")
+                info.size = len(src)
+                tf.addfile(info, io.BytesIO(src))
+            return b.getvalue()
+
+        def _zip():
+            b = io.BytesIO()
+            with zipfile.ZipFile(b, mode="w") as zf:
+                zf.writestr("data.txt", src)
+            return b.getvalue()
+
+        good = [
+            (".tar", _tar("w")),
+            (".tar.gz", _tar("w:gz")),
+            (".tar.bz2", _tar("w:bz2")),
+            (".tar.xz", _tar("w:xz")),
+            (".zip", _zip()),
+            (".gz", gzip.compress(src)),
+            (".bz2", _bz2.compress(src)),
+            (".xz", _lzma.compress(src)),
+        ]
+        for suffix, payload in good:
+            with self.subTest(suffix=suffix):
+                pred = goal_predicate_for(seed, f"out{suffix}")
+                self.assertTrue(pred({"data.txt": src, f"out{suffix}": payload}),
+                                f"{suffix} archive holding the source bytes is the goal")
+
+        # wrong-format decoys: a gzipped file named .bz2, a plain tar named .zip,
+        # an archive holding different bytes named .zip
+        import gzip as _gzip
+        decoys = [
+            (".bz2", _gzip.compress(src)),   # gzip bytes named .bz2
+            (".zip", _tar("w:gz")),          # tar bytes named .zip
+            (".tar.xz", _tar("w")),          # plain tar named .tar.xz
+        ]
+        for suffix, payload in decoys:
+            with self.subTest(decoy=suffix):
+                pred = goal_predicate_for(seed, f"out{suffix}")
+                self.assertFalse(pred({"data.txt": src, f"out{suffix}": payload}),
+                                 f"{suffix} holding the wrong format is not the goal")
+
+        def _zip_wrong_bytes():
+            b = io.BytesIO()
+            with zipfile.ZipFile(b, mode="w") as zf:
+                zf.writestr("data.txt", b"wrong bytes\n")
+            return b.getvalue()
+
+        pred = goal_predicate_for(seed, "out.zip")
+        self.assertFalse(pred({"data.txt": src, "out.zip": _zip_wrong_bytes()}),
+                         "a zip holding wrong bytes is not the goal")
+
     def test_drive_reaches_the_goal_and_recipe_asserts_the_real_shape(self):
         if shutil.which("tar") is None:
             self.skipTest("tar not available")
