@@ -7968,3 +7968,82 @@ A plan can "pass" a goal check by creating an empty file. §A130's lesson, appli
 
 > **318 steps is not a search problem. It is a problem of reading what each step already declares — and then
 > choosing which steps to declare.**
+
+## §A138 — a program states its purpose at the top of its own manual
+
+### The bottleneck §A137 named
+
+> *It does not CHOOSE actions. It orders a given set; deciding which set to give it is unsolved.*
+
+Measured on the module that was supposed to do the choosing, `computer_env_v1.programs_for_goal`:
+
+| goal | programs kept by the name filter | answer returned |
+|---|---|---|
+| "compress this into a single archive" | 43 of 603 — **`tar` not among them** | `['as','c89','chcon','compare']` |
+| "gzip the report" | 43 — `gzip` in, `tar` out | `['convert','diff','docker-entrypoint','gold']` |
+| "find lines with localhost" | 53 — neither `gzip` nor `tar` | `['cat','chrt','diff','dnsdomainname']` |
+
+The filter keeps a program only when its **name** shares a three-character stretch with a goal word. `gzip` does
+not contain the letters of "compress". `tar` does not contain the letters of "archive". **The correct program is
+excluded before any manual is read**, and what comes back is alphabetical noise.
+
+### The fact
+
+A program states its purpose in the first lines of its own manual, before its options begin:
+
+    gzip   176 chars in:  "Compress or uncompress FILEs (by default, compress FILES in-place)."
+    tar    408 chars in:  "GNU 'tar' saves many files together into a single tape or disk archive"
+    as      43 chars, and NOTHING about compressing -- its only mention is the flag
+                          `--compress-debug-sections`
+
+So the question is not *"does the manual contain the word"* (a 16 KB manual contains most words) but *"does the
+manual STATE it, before the options start, in a plain sentence"*.
+
+### Four defects the measurements forced, in order
+
+    word counting        `git` and `apt-get` outranked `gzip` — long manuals mention more words. The words were
+                         never the signal.
+    error messages       `sensible-browser --help` prints "Couldn't find a suitable web browser!" and that
+                         became its "purpose", matching the goal word "find".
+    command lists        `git --help` lists 32 subcommands; a synopsis of many statements is a menu, not a
+                         purpose, so more than twelve statements is treated as stating none.
+    grammar              58% of the words in grep's own statement ("Search for PATTERNS in each FILE") are
+                         grammar. Counting them let a program that says "that" outscore one that says "archive".
+                         A closed grammar class is removed; nothing else is.
+
+### Measured — the goals the code was built against
+
+| goal | top answer |
+|---|---|
+| compress this into a single archive | **tar** (17.0) |
+| list the files in a directory | **dir / ls** |
+| sort these lines in reverse order | **rev** |
+| search for a pattern in text | **zipgrep** |
+| copy a file to another name | **tee**, then **cp** |
+
+### Measured — held-out goals, written after the code was finished
+
+| goal | expected | got | |
+|---|---|---|---|
+| change permissions on a file | chmod | chcon, chgrp, **chmod** | ✓ in top 3 |
+| create a hard link | ln | link, **ln**, readlink | ✓ |
+| split a large file into pieces | split | csplit, **split** | ✓ |
+| translate characters | tr | **tr** | ✓ top 1 |
+| count words in a document | wc | ptx, vmstat | ✗ |
+| show the end of a file | tail | df, lzmainfo, chrt | ✗ |
+
+**4 of 6, and both misses are the same wall:** `wc`'s own statement is *"print newline, word, and byte counts"*
+— it never says "count". `tail` says *"output the last part of files"* — it never says "end". The manual uses
+different words from the person, and no rule about position or frequency closes that.
+
+### What this establishes, and what it does not
+
+    VERIFIED  the machine's whole manual set indexes in 3.0 s (626 programs, 1 s timeout each, once)
+    VERIFIED  `tar` is found for "archive" on a machine where it has no letters in common with the goal word
+    VERIFIED  a program that states nothing (`as`) claims nothing; a command list is not a purpose
+    NOT TRUE  4/6 on held-out goals. The wall is vocabulary, not structure, and it needs a means-relation --
+              the same second source §A134 needed for "write a new email" -> Compose.
+    NOT DONE  §6.
+
+> **The manual is an honest index and a partial one: it answers the goals that share a word with it, and the
+> other half of the language has to come from somewhere that relates words to each other.**
