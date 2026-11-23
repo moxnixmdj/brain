@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "87c1c3a2e1648db3252ec018be0a08f4a229028b4710dcedd6ef88057fc00cec"
+  "value": "7e0ad77c0772880d8e1b15081a158a8412869e21f42e4d6f720fd836e9d96ce7"
  },
  "engines": [
   {
@@ -249502,7 +249502,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/ENVIRONMENT_BROKER_ENV_READY_CONTRACT_20261123_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "79476f0c2d9f455081bdab8346525a85125e04ba4ab669b4bc66b7df0574bccf",
+   "sha256": "6b6c1c9292d9d1102e32f0aa1cf906370bb4a3781efbd576fbc80b2e03ca74cb",
    "status": "ROUND_2_CLOSED_BOTTLENECK_MEASURED_ON_FIVE_UNSEEN_REPOSITORIES",
    "terms": {
     "20261123": 1,

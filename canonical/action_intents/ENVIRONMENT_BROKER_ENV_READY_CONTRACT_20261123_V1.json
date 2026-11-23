@@ -42,7 +42,7 @@
  },
  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The measured wall between this project and every real repository: an unarmed environment makes the agent's first honest answer 'I cannot ask this environment anything', and the environment's own declarations were never turned into a resolved, verified state. That gap is what made the web arm unexercised and GOAL unmeasured at the same time.",
- "canonical_base_commit": "d2c31c22d15e67da269ed4f5361c47303c118687",
+ "canonical_base_commit": "68bf040064452b740701dd81ad081d6f41f89b57",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -105,7 +105,7 @@
  ],
  "real_outcome": "An environment the system has never seen is now armed from the environment's own declarations with two-reader digest agreement, proven by execution, remembered by evidence, and re-checked on every reuse -- and the other goal can then be asked in it.",
  "recursive_obs": {
-  "canonical_base_commit": "d2c31c22d15e67da269ed4f5361c47303c118687",
+  "canonical_base_commit": "68bf040064452b740701dd81ad081d6f41f89b57",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "second provisioning organ",
@@ -194,7 +194,7 @@
    "existing_oracle_note": "the interpreter itself (import + importlib.metadata) and the registry's published sha256 for the exact bytes",
    "synthetic_verification_necessity": "none for the live claims; stubs exist only to produce refusals the network cannot produce on demand"
   },
-  "observed_at_utc": "2026-11-23T13:47:35+00:00",
+  "observed_at_utc": "2026-11-23T16:49:22+00:00",
   "real_outcome": "flask 494 passed and requests 619 passed, exit 0, in isolations armed from their own declarations with zero model calls",
   "required_capability": "resolve an environment's declared dependencies to digest-verified, importable state",
   "route_frontier": {
@@ -328,12 +328,12 @@
    "selected_route": "EXTEND_THE_EXISTING_WORLD_BROKER_WITH_A_SECOND_CLOSED_CONTRACT_ARMED_FROM_THE_ENVIRONMENTS_OWN_DECLARATIONS",
    "selected_route_preflight": {
     "all_required_dependencies_ready": true,
-    "checked_at_utc": "2026-11-23T13:47:35+00:00",
+    "checked_at_utc": "2026-11-23T16:49:22+00:00",
     "execution_dependencies": [
      {
       "dependency": "local Python 3.11 runtime, venv and ensurepip",
       "evidence": [
-       "python3 -m venv creates an isolated interpreter in this sandbox; 33 broker tests pass"
+       "this round: 40 broker tests pass in a local venv, and five isolated interpreters were created and armed (python 3.11)"
       ],
       "evidence_classes": [
        "DIRECT_PROBE"
@@ -348,7 +348,7 @@
      {
       "dependency": "pypi.org JSON registry",
       "evidence": [
-       "live JSON read for requests 2.34.2 and 32 artifact resolves during the trial"
+       "re-probed for this round: pypi.org/pypi/requests/json answered, requests 2.34.2"
       ],
       "evidence_classes": [
        "DIRECT_PROBE",
@@ -356,7 +356,7 @@
       ],
       "evidence_scope": "GLOBAL",
       "kind": "NETWORK_ENDPOINT",
-      "observed_at_utc": "2026-11-23T13:47:35+00:00",
+      "observed_at_utc": "2026-11-23T16:49:22+00:00",
       "required": true,
       "scope": "GLOBAL",
       "status": "READY",
@@ -365,14 +365,14 @@
      {
       "dependency": "files.pythonhosted.org artifact CDN",
       "evidence": [
-       "10.59 MB of real wheels downloaded and sha256-agreed during the live trial"
+       "re-probed for this round: artifact CDN reachable; every wheel in the five-repository trial was downloaded from it and its sha256 agreed with the registry's published digest"
       ],
       "evidence_classes": [
        "DIRECT_PROBE"
       ],
       "evidence_scope": "GLOBAL",
       "kind": "NETWORK_ENDPOINT",
-      "observed_at_utc": "2026-11-23T13:47:35+00:00",
+      "observed_at_utc": "2026-11-23T16:49:22+00:00",
       "required": true,
       "scope": "GLOBAL",
       "status": "READY",
@@ -381,14 +381,14 @@
      {
       "dependency": "github.com for the trials' fresh clones",
       "evidence": [
-       "git clone --depth 1 of pallets/flask and psf/requests succeeded at pinned commits"
+       "re-probed for this round: five full-history clones (--filter=blob:none) of requests, flask, black, attrs and tox succeeded"
       ],
       "evidence_classes": [
        "DIRECT_PROBE"
       ],
       "evidence_scope": "GLOBAL",
       "kind": "NETWORK_ENDPOINT",
-      "observed_at_utc": "2026-11-23T13:47:35+00:00",
+      "observed_at_utc": "2026-11-23T16:49:22+00:00",
       "required": true,
       "scope": "GLOBAL",
       "status": "READY",
@@ -397,7 +397,7 @@
      {
       "dependency": "the broker module this round extends",
       "evidence": [
-       "canonical/swe_kernel/the_environment_broker_v1.py with 33 passing tests"
+       "canonical/swe_kernel/the_environment_broker_v1.py, exercised by 31 offline tests and five live repositories this round"
       ],
       "evidence_classes": [
        "DIRECT_PROBE"
