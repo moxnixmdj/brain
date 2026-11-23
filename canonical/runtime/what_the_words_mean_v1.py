@@ -322,6 +322,18 @@ def resolve(instruction: str, candidates: Sequence[Candidate], *,
                     "tied": [c.element_id for c in named]}
 
     winner = named[0]
-    return {"schema": SCHEMA, "resolved": True, "element_id": winner.element_id, "name": winner.name,
+    # A NAME THAT IS A SENTENCE IS NOT THE NAME A PERSON POINTS AT. Measured on pypi.org 2026-11-23: the tab's
+    # accessible name is the instruction for screen-reader users -- "Project description. Focus will be moved
+    # to the description." -- while the visible label is "Project description". The match is right and the
+    # answer is one dot too literal: what a person calls this control is the label, not the narration.
+    #
+    # This does not change WHICH element is chosen. It changes what is reported as its name, and it only
+    # shortens at a sentence boundary where the remainder is an instruction about focus -- never at an
+    # arbitrary punctuation mark, because "README.md, (File)" must survive intact.
+    readable = winner.name
+    head, _, tail = readable.partition(". ")
+    if head and tail and re.search(r"\b(focus|click|use|press|select|open|navigat)", tail, re.I):
+        readable = head
+    return {"schema": SCHEMA, "resolved": True, "element_id": winner.element_id, "name": readable,
             "why": "THE_PAGE_NAMES_IT_WITH_A_WORD_OF_THE_REQUEST",
             "shared": sorted(_shares(winner, meaning))}

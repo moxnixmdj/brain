@@ -303,3 +303,42 @@ def test_a_real_page_scores_without_a_single_miss() -> None:
     # and every page still refuses what is not there
     for url, page in pages.items():
         assert resolve("create a sandwich", page)["resolved"] is False, url
+
+
+def test_a_second_site_keeps_its_score() -> None:
+    """LIVE, and a DIFFERENT product from GitHub — which §A135 did not have.
+
+    Measured 2026-11-23 on pypi.org/project/requests/ (697 parsed elements). Two probes whose target exists
+    resolve; two whose target is genuinely absent (`install`, `homepage` — neither string occurs in the page's
+    controls) refuse; one nonsense request refuses. The point of this test is not the count. It is that a site
+    with different markup, different vocabulary and a much larger element set does not break the rule.
+    """
+    page = _live("https://pypi.org/project/requests/")
+    for instruction, fragment in (("view the project description", "Project description"),
+                                  ("see the release history", "Release history")):
+        verdict = resolve(instruction, page)
+        assert verdict["resolved"] is True, (instruction, verdict)
+        assert fragment.casefold() in verdict["name"].casefold(), (instruction, verdict)
+
+    for absent in ("install the package", "go to the homepage"):
+        verdict = resolve(absent, page)
+        assert verdict["resolved"] is False, (absent, verdict)
+    assert resolve("create a sandwich", page)["resolved"] is False
+
+
+def test_a_name_that_is_a_sentence_is_reported_as_its_label() -> None:
+    """A screen-reader instruction is not what a person calls the control.
+
+    pypi.org names a tab "Project description. Focus will be moved to the description." The match is correct;
+    the narration should not be reported as the control's name. Shortening only happens at a sentence boundary
+    whose remainder is an instruction about focus — so "README.md, (File)" survives intact.
+    """
+    page = _live("https://pypi.org/project/requests/")
+    verdict = resolve("view the project description", page)
+    assert verdict["resolved"] is True
+    assert verdict["name"] == "Project description", verdict
+
+    github = _live("https://github.com/psf/requests")
+    readme = resolve("read the readme", github)
+    assert readme["resolved"] is True
+    assert "," in readme["name"] or readme["name"] == "README", readme

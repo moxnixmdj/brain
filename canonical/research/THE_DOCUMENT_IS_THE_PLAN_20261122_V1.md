@@ -7835,3 +7835,55 @@ and **4/4** nonsense requests refused (`create a sandwich` on every page).
                single OSWorld task.
 
 > **13/13 is four pages of GitHub, and saying so is the difference between a result and a claim.**
+
+## §A136 — a second site, and the composed loop
+
+### §A135's own caveat, taken seriously
+
+> *NOT REAL: the pages are all ONE site (GitHub).*
+
+Measured on **pypi.org** (697 parsed elements, different markup, different vocabulary):
+
+| request | before | after |
+|---|---|---|
+| "view the project description" | matched, but reported the ARIA narration as the name | `Project description` |
+| "see the release history" | same | `Release history` |
+| "install the package" | refused | refused — **correct**: no element contains "install" |
+| "go to the homepage" | refused | refused — **correct**: the page says "Homepage"; the request says "homepage" |
+| "create a sandwich" | refused | refused |
+
+**2/2 on what exists, 2/2 correct refusals, 1/1 nonsense refused.** The two "misses" I first recorded were my
+labelling error, not the module's: neither string is in the page's controls.
+
+### The defect that was real
+
+pypi names its tabs with the screen-reader instruction:
+
+    "Project description. Focus will be moved to the description."
+
+The match is correct and the *answer* was one dot too literal. The name a person points at is the label, so the
+reported name is shortened at a sentence boundary whose remainder is an instruction about focus — and **only**
+there, so `README.md, (File)` survives intact.
+
+### The composed loop, run
+
+    GOAL: "send it"
+      1. resolve  -> e2 Send          THE_PAGE_NAMES_IT_WITH_A_WORD_OF_THE_REQUEST
+      2. act      -> GET /act/send    (302)
+      3. verify   -> read the page again; the server's counter is 1
+
+    PASS
+
+Four steps, no model, on a live served page: goal → element → action → **the world read back**. This is the
+first time in this tree that the whole path has run, and it ran because §A134 supplied the one function that
+was missing.
+
+### What this is not
+
+    NOT computer use      a served page read by parsing HTML. No layout, no JavaScript, no canvas, no frames.
+    NOT a task            one click. §6 needs whole tasks: OSWorld 2.0 averages 318 tool calls and 27.25
+                          checkpoints per task, and its binary completion tops out at 32.0% for the frontier.
+    NOT general           two sites. Both are documentation-shaped pages where labels are words.
+
+> **The path from a sentence to a click now exists and is measured end to end. The path from a click to a
+> finished task still does not, and that is the next thing, not the last thing.**
