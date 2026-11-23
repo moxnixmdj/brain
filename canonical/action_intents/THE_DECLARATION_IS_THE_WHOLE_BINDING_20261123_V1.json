@@ -71,7 +71,18 @@
   "incremental_spend_usd": 0,
   "intentional_route_race": false,
   "live_challenger_frontier_discovery_required": false,
-  "load_bearing_primary": true,
+  "load_bearing_primary": {
+    "constructive_gap_for_open_obligation_ids": [
+      "OSWORLD_2_1_PARTIAL_GE_81_8"
+    ],
+    "expected_obligation_discharge_lcb": "0",
+    "expected_obligation_unlock_lcb": "1/81",
+    "interpretation": "OSWorld 2.0's authors diagnose frontier failure as weak recovery and maintenance of hidden state. A computer-use agent's action is only as good as the invocation it can compose from what the environment declares. Round 7 measured that the composition was wrong for reasons the environment had already published: the same 20 programs yield 33 doors when their declarations are misread and 57 when they are read, with no new knowledge acquired. No benchmark task was run; no discharge is claimed.",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": "0.5",
+    "wall_clock_cost_ub": 1
+  },
   "measured_effect": "15 programs, same script and seeds, BEFORE by checking out bbbe6af2's module on the same machine: DOOR 33 -> 57, FAILED_NO_EFFECT 759 -> 641, LITTER 1 -> 9 (all nine verified as refused requests that leave a file). openssl 0 -> 24 doors. ZERO programs went down. On the round-6 20-program fleet: DOOR 33 -> 57, UNBOUND 786 -> 676, SENSOR 568 -> 284.",
   "next_step": "separate PRECONDITION from BINDING in the failure taxonomy, because the binder is now reading what the program declared and the next mass is state that has to exist first",
   "parent_capability": "tool_census_v1 as shipped in bbbe6af2",
