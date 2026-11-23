@@ -459,6 +459,46 @@ def conditions(store: pathlib.Path | None = None) -> dict[str, Any]:
     return _load(store)["conditions"]
 
 
+def names_in(observation: Mapping[str, Any]) -> list[str]:
+    """What exists in a PAGE, as names -- the same question `observe_world` answers for a directory.
+
+    §A132 discovered the universe for a filesystem and stopped there: `observe_world` takes a path, and a page is
+    not a path. Measured 2026-11-23, the loop that closed for directories had no way to close for a web world, so
+    the universe had to be handed in by the caller -- the exact gap §A131 left open, in a new world.
+
+    The bridge needs no new machinery because an observation ALREADY names what exists: regions have labels,
+    elements have ids and texts. This reads those names out of the record the observer produced. It stores
+    nothing and asks nothing, so a page read now is the only thing it describes.
+
+    Names are drawn from what a person would point at -- a region's label, an element's id, its visible text, its
+    aria label. A page's own state files, its CSS classes and its URLs are not things an instruction names.
+    """
+    names: list[str] = []
+    for region in observation.get("regions") or []:
+        label = str(region.get("label") or "").strip()
+        if label:
+            names.append(label)
+        ident = str(region.get("id") or "").strip()
+        if ident:
+            names.append(ident)
+    for element in observation.get("elements") or []:
+        for key in ("id", "text", "aria", "name"):
+            value = str(element.get(key) or "").strip()
+            if value:
+                names.append(value)
+    # the page's own words, so a value that appears as prose is not counted absent. The split is punctuation,
+    # which is the only tokenizer this module needs -- no new import, no cross-organ dependency.
+    names.extend(re.findall(r"[A-Za-z0-9][A-Za-z0-9_.-]*", str(observation.get("text") or "")))
+    seen: set[str] = set()
+    out: list[str] = []
+    for name in names:
+        key = name.lower()
+        if key not in seen:
+            seen.add(key)
+            out.append(name)
+    return out
+
+
 def would_refuse(value: Any, *, code: str, universe: Iterable[Any] = (),
                  store: pathlib.Path | None = None,
                  world: str | pathlib.Path | None = None) -> dict[str, Any]:

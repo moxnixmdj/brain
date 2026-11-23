@@ -7622,3 +7622,68 @@ Every step ran, on a world the system had never seen, with **zero model calls** 
     NOT TRUE   nothing here has competed on OSWorld, SWE-bench or any published benchmark. §6 is not met.
 
 > **The machinery is real and measured. The reach is still one kind of world.**
+
+## §A133 — the loop closes in a second kind of world
+
+### What §A132 said it could not do
+
+> *NOT TRUE: the environments this has run in are DIRECTORIES OF PYTHON FILES. "Arbitrary environment" means a
+> GUI, a browser, a running program with its own state. The loop is closed for one kind of world and has never
+> been closed for another.*
+
+This section moves **one step** toward that, and states exactly how far.
+
+### The gap, located
+
+`observe_world(root)` takes a **directory**. A page is not a directory. So §A132's discovery had no meaning in a
+web world, and the universe had to be handed in by the caller — §A131's gap, one world over:
+
+    no universe, no directory  ->  refuse: None
+    page observed              ->  regions, elements, text ... and nothing connects them to a rule
+
+### The bridge needed no new machinery
+
+An observation **already names what exists**: regions carry labels, elements carry ids and texts. So:
+
+    names_in(observation)  ->  ['inbox', 'done', 'Ticket 47: printer offline', ...]
+
+That is the same question `observe_world` answers for a directory, asked of a page. Nothing is stored, nothing is
+cached, and the page read now is the only thing it describes.
+
+### Measured: the loop, in a served web world, nothing handed in but the page
+
+    a served HTTP board with regions "inbox" and "done"
+    ONE refusal learned:  COLUMN_NOT_FOUND:archive  ->  predicate present / is_present
+    the universe: names_in(observe(page))
+
+| name | on the page | predicted refuse | |
+|---|---|---|---|
+| inbox | yes | False | ✓ |
+| done | yes | False | ✓ |
+| archive | no | True | ✓ |
+| todo | no | True | ✓ |
+
+**4/4**, and the honesty carried through: the page reports `eye: WHOLE_READ`, so §A125's rule travels with it.
+
+### What is real here and what is not — the honest line
+
+    REAL      a served HTTP application, read over the network, state on a server, text/regions/elements
+              parsed from the served document with the standard library
+    NOT REAL  no browser engine. No layout, no JavaScript, no pixels, no CDP. A page rendered by a real
+              browser differs from its source in ways this parser cannot see.
+
+So this is a **web-page world, not a GUI world.** The distance from "directory of files" to "served page" is
+small; the distance from "served page" to "a real browser session on OSWorld" is the one that has never been
+crossed, and no amount of work here has crossed it.
+
+### The loop, now stated once, in three worlds
+
+    drop in and observe        observe_world(dir)     | names_in(observe(page))
+    learn once, from one refusal                          learn(refusal) -> a predicate
+    predict against what is here                      would_refuse(..., universe=...)
+
+    filesystem   §A132   5/5
+    served page  §A133   4/4
+    GUI / OSWorld         never run. §6 not met.
+
+> **The machinery transfers between kinds of world. The measurement has not reached the hard one.**
