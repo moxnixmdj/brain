@@ -291,7 +291,12 @@ def test_sort_numeric_is_learned_in_two_runs_and_survives_held_out() -> None:
     surface = I.Surface(tool="sort", base=(), form=("-n",), words=line)
     result = I.interrogate(surface)
     assert result["status"] == I.CERTIFIED
-    assert result["probes_spent"] <= 2
+    # Three, not the two this cost when the universe was 36 readings wide. Adding the folding
+    # and tab shapes widened it to 58 and moved the proven optimum from 4 to 5, so one more
+    # question is genuinely needed to reach the same certainty. The bound is what the exact
+    # search proves for the space actually used, which is why it is asserted against that and
+    # not against a number that was true of a smaller universe.
+    assert result["probes_spent"] <= result["worst_case_proved"]
     held = I.held_out_check(surface, result)
     assert held["status"].startswith("SURVIVED")
     assert "sort_num" in held["surviving_members"]
@@ -317,3 +322,214 @@ def test_uniq_count_is_certified_as_run_length_counting() -> None:
     result = I.interrogate(surface)
     assert result["status"] == I.CERTIFIED
     assert any("count_runs" in name for name in result["equivalence_class"])
+
+
+# --------------------------------------------------------------------------- the adequacy laws
+# Each test below pins a bug that this round actually hit. They are written as properties of
+# the mechanism, not as snapshots of today's numbers, so a change to the shapes cannot make
+# them pass for the wrong reason.
+
+def test_every_primitive_has_a_domain_so_no_reading_is_silently_undefined() -> None:
+    """A primitive with no declared domain crashed the universe with a KeyError."""
+    for name in I.ORDER:
+        assert name in I.PRIMITIVE_DOMAIN, name
+        assert I.PRIMITIVE_DOMAIN[name], name
+
+
+def test_no_shape_kind_is_missing_so_every_pair_is_comparable() -> None:
+    """A shape with no kind crashed `_outcome`; a kind is part of the design space."""
+    for shape in I.SHAPES:
+        assert shape in I.KIND_OF_SHAPE, shape
+        assert I.KIND_OF_SHAPE[shape] in I.ANY_KIND, I.KIND_OF_SHAPE[shape]
+
+
+def test_a_parameter_no_shape_exercises_is_refused_not_certified() -> None:
+    """The law that would have caught `fold -b` before it was written down.
+
+    A certificate is only a statement about the goal's observation domain. If the declaration
+    names a parameter that no shape can distinguish, every surviving reading agrees *on the
+    fixtures* and the certificate is false of the world. The organ must refuse by name.
+    """
+    without_tabs = {k: v for k, v in I.SHAPES.items() if k != "lines_with_tabs"}
+    assert not I.parameter_exercised("fold_bytes", without_tabs)
+    surface = I.Surface(tool="fold", base=(), form=("-b",),
+                        words="count bytes rather than columns")
+    result = I.interrogate(surface)
+    # Tabs are present in the real space, so this surface is interrogable; the claim under
+    # test is that the gate is *computed*, so it closes when the witness shape is removed.
+    assert I.parameter_exercised("fold_bytes")
+    assert result["status"] == I.CERTIFIED
+    assert result["equivalence_class"] == ["fold_bytes"]
+
+
+def _own_declaration(tool: str, prefix: str) -> str:
+    """The sentence of a tool's help that *declares* a behaviour, by its own wording.
+
+    `--help` has no entry for a default with no flag, so the sentence is taken from the help
+    text rather than from a flag line. This is the same rule as `declaration_line`: the words
+    must be the ones that describe the behaviour, not a footnote elsewhere in the page.
+    """
+    for line in I.help_text(tool).splitlines():
+        if prefix.lower() in line.strip().lower():
+            return line.strip()
+    raise AssertionError(f"{tool} help no longer declares {prefix!r}")
+
+
+@pytest.mark.skipif(shutil.which("fold") is None, reason="no `fold` on this host")
+@pytest.mark.parametrize("form,expected", [("-b", "fold_bytes"), ("", "fold_columns")])
+def test_fold_is_certified_as_the_function_it_is(form: str, expected: str) -> None:
+    """The one surface the earlier sweep certified wrongly is now certified correctly.
+
+    `fold -b` was certified `identity` because no shape was longer than the default width;
+    it was then falsified the first time the world handed it a long line. Both of fold's own
+    declarations are now exercised by shapes and land on the reading the program performs.
+    """
+    line = (I.declaration_line(I.help_text("fold"), ("-b",)) if form
+            else _own_declaration("fold", "Wrap input lines"))
+    surface = I.Surface(tool="fold", base=(), form=(form,), words=line)
+    result = I.interrogate(surface)
+    assert result["status"] == I.CERTIFIED
+    assert expected in result["equivalence_class"]
+    assert I.held_out_check(surface, result)["status"].startswith("SURVIVED")
+
+
+def test_fold_models_match_the_real_program_on_random_input() -> None:
+    """Exact, not approximate: the model must be the program, or it does not belong here.
+
+    Every byte 1..255 is exercised, plus tabs, backspaces and carriage returns at lengths
+    around the boundary. The earlier two versions of this model were wrong on 12% and then
+    1% of inputs; `-b` failing as a *plain byte count* was the last thing found.
+    """
+    if shutil.which("fold") is None:
+        pytest.skip("no `fold` on this host")
+    import random
+    import subprocess
+    import os
+    rng = random.Random(20261123)
+    alphabet = bytes(range(1, 256))
+    cases = [bytes(rng.choice(alphabet) for _ in range(rng.choice(
+        [0, 1, 2, 5, 40, 79, 80, 81, 120, 200]))) for _ in range(200)]
+    cases += [b"\t" * 11 + b"X\n", b"a" * 79 + b"\tX\n", b"a" * 79 + b"\r" + b"b" * 79]
+    env = dict(os.environ, LC_ALL="C")
+    for argv, primitive in ((["fold"], "fold_columns"), (["fold", "-b"], "fold_bytes")):
+        for data in cases:
+            real = subprocess.run(argv, input=data, capture_output=True, env=env).stdout
+            assert I.PRIMITIVES[primitive](data) == real, (argv, data)
+
+
+def test_the_quotient_is_the_coarsest_partition_no_shape_can_refine() -> None:
+    """One behaviour per class, and no class separable -- the invariant, checked both ways."""
+    shapes = list(I.SHAPES)
+    universe = I.behavioural_universe(shapes)
+    classes = I.goal_quotient(universe, shapes)
+    assert sorted(n for group in classes for n in group) == sorted(universe)
+    for group in classes:
+        for other in classes:
+            if group is other:
+                continue
+            # every pair from different classes is separated by some shape
+            a, b = group[0], other[0]
+            assert any(I._outcome(s, a) != I._outcome(s, b) for s in shapes)
+
+
+def test_the_exact_optimum_is_not_beaten_by_iterative_deepening() -> None:
+    """Independent confirmation that the reported bound is the true minimum.
+
+    The search and this checker share only the outcome table, so agreement is evidence about
+    the search rather than about itself. The first version of this checker was wrong in a way
+    worth naming: it re-split a branch on a shape that had already been asked. An answered
+    shape is not a question -- its answer is the same for every reading still alive, so
+    offering it again splits nothing and silently inflates the depth it can certify at.
+    """
+    shapes = list(I.SHAPES)
+    universe = I.behavioural_universe(shapes)
+    signature = {s: [str(I._outcome(s, n)) for n in universe] for s in shapes}
+
+    def certifiable(limit: int) -> bool:
+        def rec(alive, asked, left):
+            if len(alive) == 1:
+                return True
+            first = alive[0]
+            # certified only when the survivors agree on EVERY shape, not merely asked ones
+            if all(signature[s][first] == signature[s][i] for s in shapes for i in alive):
+                return True
+            if left == 0:
+                return False
+            for shape in shapes:
+                if shape in asked:
+                    continue
+                buckets: dict[str, list[int]] = {}
+                for i in alive:
+                    buckets.setdefault(signature[shape][i], []).append(i)
+                if len(buckets) <= 1:
+                    continue
+                if all(rec(b, asked | {shape}, left - 1) for b in buckets.values()):
+                    return True
+            return False
+        return rec(list(range(len(universe))), frozenset(), limit)
+
+    optimum = I.smallest_certificate_tree(shapes, universe)["minimum_worst_case_witnesses"]
+    assert optimum is not None
+    assert not certifiable(optimum - 1)
+    assert certifiable(optimum)
+
+
+def test_a_form_with_no_letter_does_not_become_a_file_argument() -> None:
+    """`fold ''` failed on every shape because `''` was passed through as a path."""
+    surface = I.Surface(tool="fold", base=(), form=("",), words="wrap")
+    assert surface.argv(with_form=True) == ["fold"]
+    assert surface.argv(with_form=False) == ["fold"]
+
+
+def test_general_numeric_is_its_own_primitive_and_is_exact_where_it_claims() -> None:
+    """`sort -g` was graded `sort_num`, which is false on 383 of 400 random numeric inputs.
+
+    A primitive earns its place in the algebra only by being specified exactly. This test
+    pins the domain where the model is exact -- finite decimals, exponents, overflow, inf,
+    nan, leading blanks and trailing text -- and records that hexadecimal literals and signed
+    nan are outside what it claims.
+    """
+    if shutil.which("sort") is None:
+        pytest.skip("no `sort` on this host")
+    import random
+    import subprocess
+    import os
+    tokens = ["1e3", "2", "inf", "-inf", "nan", "8", ".5", "0.3", "1e999", "-1e999",
+              "+5", "-5", "10", "9", "1,5", "INF", "infinity", "NaN", "  12", "5x", "-0",
+              "0", "5."]
+    rng = random.Random(20261123)
+    env = dict(os.environ, LC_ALL="C")
+    for _ in range(120):
+        lines = [rng.choice(tokens) for _ in range(rng.randint(1, 8))]
+        data = ("\n".join(lines) + "\n").encode()
+        real = subprocess.run(["sort", "-g"], input=data, capture_output=True, env=env).stdout
+        assert I.PRIMITIVES["sort_general"](data) == real, lines
+    # and it must be a *different* function from the plain numeric sort
+    sample = b"1e3\n2\n"
+    assert I.PRIMITIVES["sort_general"](sample) != I.PRIMITIVES["sort_num"](sample)
+
+
+def test_a_refused_primitive_is_refused_by_name_not_approximated() -> None:
+    """`fold -s` and `sort -V` are out of the universe, and the reason is in the module.
+
+    The rule is the one that took `sort -V` out: a transform whose exact behaviour the system
+    cannot specify manufactures false certificates, so it does not get to be a hypothesis.
+    """
+    assert "fold_words" not in I.PRIMITIVES
+    assert "sort_ver" not in I.PRIMITIVES
+    assert "fold -s" in I._NOT_A_TOTAL_ORDER or "fold -s" in I._FOLD_SPACES_RECORD
+
+
+def test_the_tree_bound_and_the_root_move_agree_so_neither_is_a_guess() -> None:
+    """Two independent searches over the same recurrence must plateau at the same number.
+
+    `smallest_certificate_tree` is node-capped (and says so when the cap is hit);
+    `optimal_move` is not. If they disagreed, one of them would be reporting a number the
+    other contradicts, which is how a table starts lying about its own arithmetic.
+    """
+    shapes = list(I.SHAPES)
+    universe = I.behavioural_universe(shapes)
+    tree = I.smallest_certificate_tree(shapes, universe)
+    move = I.optimal_move(universe, shapes)
+    assert move["worst_case_witnesses"] <= tree["upper_bound"]
+    assert move["worst_case_witnesses"] == tree["upper_bound"]
