@@ -7197,3 +7197,60 @@ the first evidence in this thread that a lesson learned in one organ is **reacha
     NOT MEASURED   whether these rules change behaviour on an OSWorld-style task
 
 The first line is the honest gain. The next three are the reach work, and none of it has been done yet.
+
+## §A126 — recording the limit is not honouring it
+
+### The defect §A125 left behind
+
+§A125 made `observe()` **admit** that a read was partial. One commit later the admission was already useless,
+because nothing consumed it:
+
+```python
+present_now = all(value in after_text for value in stated)   # after_text is truncated
+```
+
+`in` over a truncated string answers **"not there"** for everything past the cutoff. Measured 2026-11-23: a
+value at character 9000 of a 12,000-character page read as **absent** because the read stopped at 8000.
+
+    a completed save   ->  reported as a FAILURE
+    the system         ->  redoes work it has already done, again and again
+
+This is the **mirror of §A119**. A119 was a false *clean*; this is a false *failure*. Both are the same lie —
+a verdict about the whole page derived from part of it — and both cost more the longer they go unnoticed.
+
+### The fix: ask again before concluding absence
+
+When the evidence is not found **and** the read was partial, re-read with no limit. One re-read, on the
+negative path only, so a first-read proof pays nothing.
+
+| case | before | after |
+|---|---|---|
+| evidence past the cutoff | `EFFECT_ABSENT` (wrong) | `EFFECT_CONFIRMED`, `REREAD_OF_WHOLE_PAGE` |
+| evidence on a short page | `EFFECT_CONFIRMED` | `EFFECT_CONFIRMED`, `FIRST_READ` |
+| evidence truly nowhere | `EFFECT_ABSENT` on part of the page | `EFFECT_ABSENT` on the **whole** page |
+
+`max_text=None` now means *no limit*, so the re-read is a first-class read rather than a special case.
+
+### Said out loud
+
+A verdict rescued by a second look is **weaker** than one proved by the first, so `evidence_rests_on` says
+which it was. Reporting both as `judged: True` with no distinction would have reintroduced the defect at the
+level of the verdict itself.
+
+### A test that never runs is not a test
+
+The two new tests were first placed in `test_browser_observer_v1.py`, whose whole module is
+`skipif`-no-Chromium. Measured: **14 skipped, 0 run**. They need no browser — they build a fake snapshot — so
+they were moved to `test_browser_observer_honesty_v1.py`, which runs anywhere.
+
+The test was then **mutation-checked** rather than trusted: disabling the re-read
+(`if before.get("text_truncated") ... -> if False:`) makes it fail, and restoring the fix makes it pass. A test
+that has never been seen to fail is a decoration.
+
+### What is still not proven
+
+    VERIFIED      the re-read, by measurement and by mutation
+    VERIFIED      the honesty rule now transfers across two organs (§A119 -> §A125 -> §A126)
+    NOT MEASURED  any of this on a live page — no Chromium in this environment, 12 tests skip by design
+    NOT BUILT     the browser equivalent of A120's *asking*: so far the browser only re-reads, it never probes
+    NOT BUILT     any OSWorld-style task where these verdicts decide a score

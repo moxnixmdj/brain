@@ -343,38 +343,3 @@ def test_a_placement_already_true_is_not_evidence_and_a_missing_container_refuse
     assert absent["judged"] is False
     assert absent["why"] == "THE_CONTAINER_NAMED_IS_NOT_ON_THE_PAGE", absent
     assert "Done" in absent["labels"]
-
-
-def test_a_truncated_read_is_reported_as_partial_and_never_as_the_whole_page() -> None:
-    """§A125: THE BROWSER HAD THE SAME DEFECT §A119 FOUND IN THE CODE WALKER, and this is the transfer.
-
-    `observe()` cut `text` at `max_text` and returned `ok: True` with no record of the cut. On a page of 12,000
-    characters the caller received 8,000 and could not tell whether it had seen the page or only part of it — so a
-    searcher could report "not on the page" about text it had never looked at. That is the dishonest verdict, in
-    the one organ that reads the most.
-
-    The fix is the same as §A119's: record the refusal. `text_truncated`, `text_total`, `text_not_seen` and `eye`
-    travel with the observation, so a caller that ignores them ignores a stated fact rather than a hidden one.
-    """
-
-    class _Page:
-        def __init__(self, text: str) -> None:
-            self.text = text
-
-        def snapshot(self) -> dict:
-            return {"pages": [{"url": "u", "title": "t", "text": self.text,
-                               "elements": [], "regions": []}], "page_count": 1}
-
-    long_page = BO.observe(_Page("A" * 12000), max_text=8000)
-    assert long_page["ok"] is True
-    assert len(long_page["text"]) == 8000
-    assert long_page["text_truncated"] is True
-    assert long_page["text_total"] == 12000
-    assert long_page["text_not_seen"] == 4000
-    assert long_page["eye"] == "PARTIAL_READ"
-
-    short_page = BO.observe(_Page("short"), max_text=8000)
-    assert short_page["text_truncated"] is False
-    assert short_page["text_not_seen"] == 0
-    assert short_page["eye"] == "WHOLE_READ"
-    assert short_page["text"] == "short"

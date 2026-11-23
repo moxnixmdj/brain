@@ -127,7 +127,7 @@ def judge_placement(browser: Any, operations: Sequence[Mapping[str, Any]],
             "ops_all_passed": all(o.get("status") == "PASS" for o in outcomes)}
 
 
-def observe(browser: Any, *, max_text: int = 8000) -> dict[str, Any]:
+def observe(browser: Any, *, max_text: int | None = 8000) -> dict[str, Any]:
     """The page as it is, with no navigation.
 
     `rendered_text` is the sense a person uses: the words on the page. `elements` is the sense a person uses
@@ -158,13 +158,16 @@ def observe(browser: Any, *, max_text: int = 8000) -> dict[str, Any]:
     # The fix is the same one: record the refusal instead of hiding it. `text_truncated` says the read was
     # partial, `text_total` says how much there was, and `not_seen` says how much was missed.
     total = len(text)
-    cut = total > max_text
+    # `max_text=None` means no limit -- the read a caller asks for when a negative finding is about to be
+    # reported and the evidence may lie past the cut. A limit is a courtesy to the caller, never a verdict.
+    limit = total if max_text is None else max_text
+    cut = total > limit
     return {"schema": SCHEMA, "ok": True, "url": page.get("url") or "",
-            "title": page.get("title") or "", "text": text[:max_text],
+            "title": page.get("title") or "", "text": text[:limit],
             "elements": elements, "regions": page.get("regions") or [], "sense": sense,
             "page_count": snapshot.get("page_count", len(pages)),
             "text_truncated": cut, "text_total": total,
-            "text_not_seen": max(0, total - max_text) if cut else 0,
+            "text_not_seen": max(0, total - limit) if cut else 0,
             "eye": ("PARTIAL_READ" if cut else "WHOLE_READ")}
 
 
@@ -281,6 +284,24 @@ def judge(browser: Any, operations: Sequence[Mapping[str, Any]],
         return {"schema": SCHEMA, "judged": False, "operations": outcomes,
                 "why": "THE_GOAL_STATES_NOTHING_TO_LOOK_FOR"}
     before_text, after_text = before["text"], after["text"]
+    # §A126: A NEGATIVE FINDING FROM A PARTIAL READ IS NOT A FINDING. `in` over a truncated string answers
+    # "not there" for anything past the cutoff -- a false FAILURE, the mirror of §A119's false clean, and it
+    # would make the system redo work it had already done. Measured 2026-11-23: a value at char 9000 of a
+    # 12,000-char page read as absent because the read stopped at 8000. So when the evidence is not found and
+    # the read was partial, ask again with no limit before concluding absence. One re-read, negative path only.
+    if before.get("text_truncated") or after.get("text_truncated"):
+        def _found_now() -> bool:
+            if stated:
+                return all(value in after_text for value in stated)
+            return wanted in after_text
+        if not _found_now():
+            try:
+                wide = observe(browser, max_text=None)
+            except Exception:
+                wide = {}
+            if wide.get("ok") and not wide.get("text_truncated"):
+                after = dict(wide, re_read=True)
+                after_text = after["text"]
     if stated:
         present_now = all(value in after_text for value in stated)
         present_before = all(value in before_text for value in stated)
@@ -300,7 +321,11 @@ def judge(browser: Any, operations: Sequence[Mapping[str, Any]],
             "before": before_text[:400], "after": after_text[:400],
             "operations": outcomes,
             "ops_all_passed": all(o.get("status") == "PASS" for o in outcomes),
-            "sense": before.get("sense")}
+            "sense": before.get("sense"),
+            # §A126: SAID OUT LOUD. A verdict reached only because a negative finding was re-checked against
+            # the whole page is a weaker verdict than one proved on the first read, and the caller is told
+            # which it received. Silence here would be the same dishonesty the re-read exists to prevent.
+            "evidence_rests_on": "REREAD_OF_WHOLE_PAGE" if after.get("re_read") else "FIRST_READ"}
 
 
 def main(argv: Sequence[str] | None = None) -> int:
