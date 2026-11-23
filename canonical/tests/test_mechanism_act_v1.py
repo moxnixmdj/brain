@@ -321,3 +321,56 @@ def test_and_splits_two_acts_but_not_two_fields_of_one_act() -> None:
     # of the create, and splitting it would cut a field off the command it belongs to
     one = R.sentences_of('create a workflow named "x" and with the owner set to "y"')
     assert len(one) == 1, one
+
+
+# ----------------------------------------------------------------------------------------------------
+# A refusal is not always a failure, and a stale file is not the world.
+# ----------------------------------------------------------------------------------------------------
+
+def test_a_request_already_true_is_recognised_as_satisfied_not_failed(tmp_path: pathlib.Path) -> None:
+    """`NAME_ALREADY_TAKEN` on a CREATE means the goal is already met.
+
+    The first version reported `GAVE_UP` on a request it had already satisfied -- the system claiming to
+    have failed at something it accomplished, which is as misleading as the opposite error.
+
+    `solve_v1` still returns `GAVE_UP`, and that is left alone deliberately: its rule is that stopping is
+    only success if nothing failed on the way, and this act did fail. The planner's own report says
+    `THE_REQUEST_IS_ALREADY_SATISFIED`; the two statements are both true and are not merged by faking
+    either one.
+    """
+    world, program = _sandbox(tmp_path, "ledgerctl")
+    (world / "bin" / ".ledgerctl-state.json").write_text(
+        '{"record": [{"name": "beta", "amount": 1}]}')
+    goal = program + ': add a record named "beta" with amount "5"'
+    model = M.as_solve_model(root=str(world), self_judge=True)
+
+    out = S.solve(goal, str(world), model=model, steps=3, learn=False)
+
+    reasons = [call.get("why") for call in M.report(model)["calls"]]
+    assert "THE_REQUEST_IS_ALREADY_SATISFIED" in reasons, reasons
+    # and the store was not silently rewritten: the refusal was obeyed, not overridden
+    state = (world / "bin" / ".ledgerctl-state.json").read_text()
+    assert '"amount": 1' in state, state
+
+
+def test_the_state_file_is_where_the_program_puts_it_not_where_i_guessed(tmp_path: pathlib.Path) -> None:
+    """A MEASUREMENT ERROR THAT COST THREE WRONG CONCLUSIONS.
+
+    `ledgerctl` resolves its default state file from `os.path.dirname(os.path.abspath(__file__))`, so a
+    program at `/project/bin/ledgerctl` writes `/project/bin/.ledgerctl-state.json`. Three of my probes
+    wrote a file at the world ROOT instead, read it back, found it unchanged, and each time concluded the
+    system was broken. The system was fine; the probe was looking somewhere the program never writes.
+
+    The lesson is the one this repository keeps relearning in new layers: **read the world, not the
+    artifact you made of it.** This test pins the location so the next probe starts from the truth.
+    """
+    world, program = _sandbox(tmp_path, "ledgerctl")
+    goal = program + ': add a record named "gamma" with amount "2"'
+    model = M.as_solve_model(root=str(world), self_judge=True)
+    S.solve(goal, str(world), model=model, steps=2, learn=False)
+
+    beside_program = world / "bin" / ".ledgerctl-state.json"
+    assert beside_program.is_file(), sorted(p.name for p in world.rglob("*") if p.is_file())
+    assert "gamma" in beside_program.read_text()
+    # and NOT at the root, which is where a guess puts it
+    assert not (world / ".ledgerctl-state.json").exists()

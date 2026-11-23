@@ -5320,3 +5320,54 @@ does not re-plan when the world contradicts an earlier step. §A88's `mutated-be
 exactly that shape and passes — but through a different path, not this queue. Joining them is the next
 bottleneck, and the honest statement of where this stands is: **a documented program, a request of several
 acts, no model, effects confirmed by the environment.** Anything with a GUI is still untouched.
+
+## §A97 — three wrong conclusions from reading my own artifact instead of the world
+
+This section exists because I had already written "the system reports DONE while the state says amount 1"
+into a commit message in my head, and it was **false**. The system was right; my probe was looking
+somewhere the program never writes.
+
+### What happened
+
+`ledgerctl` resolves its default state file as `os.path.dirname(os.path.abspath(__file__)) + '/.ledgerctl-state.json'`.
+A program at `/project/bin/ledgerctl` therefore writes **`/project/bin/.ledgerctl-state.json`**. Three
+probes wrote a file at the world ROOT, ran the action, read the root file back, found it unchanged, and
+concluded:
+
+1. "the loop reports DONE with the wrong state" — false, the loop's action was correct;
+2. "the fixture's uniqueness guard is missing" — false, it refuses with `NAME_ALREADY_TAKEN:beta`;
+3. "sandbox writes do not persist" — false, a write to `/project` is visible on the host immediately.
+
+Each conclusion was reached by reading an artifact I had made (a file at a path I guessed) rather than the
+world (the file the program actually writes). This is the same error the project has now made at four
+layers — a receipt beside a truncated stdout, a test asserting a pinned count, a scanner that could not see
+the change, and now a probe inventing a path.
+
+**The rule, restated because it keeps recurring: verify the location before you verify the claim.** A
+measurement taken at the wrong address is not a weak measurement, it is a different measurement.
+
+### Two real findings that survived the correction
+
+**1. `NAME_ALREADY_TAKEN` on a create means the goal is already met.** The loop reported `GAVE_UP` on a
+request it had fulfilled, which is as misleading as the opposite error. The planner now reports
+`THE_REQUEST_IS_ALREADY_SATISFIED`. `solve_v1` still returns `GAVE_UP`, and that is left alone
+deliberately: its own rule is that stopping counts as success only if nothing failed on the way, and an
+act did fail. Both statements are true, and merging them by faking either would be the dishonesty this
+project is built to avoid.
+
+**2. A refusal that states a satisfiable requirement is not a dead end.** Combined with §A93's `unique`
+split — one part means "the name was taken", two parts mean "this destination collides" — the loop now
+distinguishes a satisfied request from a collision from an unreadable refusal, and stops in each case for
+a *different* stated reason.
+
+### Test that pins the correction
+
+`test_the_state_file_is_where_the_program_puts_it_not_where_i_guessed` asserts the state file is beside
+the program, contains the value, and is **not** at the root. It fails if a future probe repeats my mistake,
+which is the only way a lesson like this survives.
+
+### Honest status
+
+`solve_v1` + `mechanism_act_v1`, no model: documented programs, single and multi-act requests, effects
+confirmed by the environment, refusals classified into satisfied / repairable / unreadable. **Untouched:
+GUI, browser, and any environment whose effect is not a file in the tree.** 116 tests green.

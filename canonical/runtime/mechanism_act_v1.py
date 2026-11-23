@@ -85,6 +85,14 @@ def _from_a_refusal(seeing: Mapping[str, Any], goal: str) -> dict[str, Any] | No
         learned = STATED.conditions().get(parsed["code"].lower())
     predicate = (learned or {}).get("predicate") or {}
     act = STATED.acts_for(predicate, parsed["value"], parts=parsed.get("parts") or [])
+    # `ALREADY_SATISFIED` IS A SUCCESS, NOT A FAILURE. A create refused with NAME_ALREADY_TAKEN means the
+    # thing the request asked for is already true -- the goal is met, and reporting GAVE_UP says the system
+    # failed at something it accomplished. Measured 2026-11-23: a store already holding `beta` was asked
+    # for `beta`, refused, and the loop gave up on a request that was already satisfied.
+    if act.get("why") == "ALREADY_SATISFIED":
+        return {"schema": SCHEMA, "act": None, "why": "THE_REQUEST_IS_ALREADY_SATISFIED",
+                "refusal": text[:200], "parsed": parsed, "predicate": predicate,
+                "derived": act, "need": act.get("why"), "satisfied": True}
     return {"schema": SCHEMA, "act": None, "why": "LEARNED_FROM_THE_REFUSAL",
             "refusal": text[:200], "parsed": parsed, "predicate": predicate,
             "derived": act, "need": act.get("why")}
@@ -207,7 +215,10 @@ def as_solve_model(*, probes: int = 16, expect: Sequence[str] = (),
             refused = _from_a_refusal(seeing, goal)
             if refused is not None:
                 calls.append({**refused, "step": number})
-                return None  # a refusal that cannot be turned into an act stops the loop honestly
+                # a request already satisfied is finished, not failed; anything else stops honestly
+                if refused.get("satisfied"):
+                    return None
+                return None
 
             # 2. if the caller said what success looks like, and it is true, propose done
             tree = list(seeing.get("tree") or [])
