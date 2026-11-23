@@ -1,0 +1,849 @@
+{
+ "all_restored": true,
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "change_kinds": {
+  "CREATES": 97,
+  "DELETES": 6,
+  "RENAMES": 19,
+  "REWRITES": 17,
+  "REWRITES_BINARY": 12,
+  "REWRITES_TEXT": 1
+ },
+ "depth": 2,
+ "model_calls": 0,
+ "parameters": 0,
+ "programs_absent": [
+  "ruff"
+ ],
+ "programs_present": 36,
+ "rows": [
+  {
+   "all_restored": true,
+   "change_kinds": {
+    "CREATES": 6
+   },
+   "construction_needed": null,
+   "declared": 157,
+   "door_examples": [
+    {
+     "invoked_as": [
+      "tar",
+      "--catenate",
+      "--file=out.bin",
+      "in.txt"
+     ],
+     "kind": "CREATES"
+    },
+    {
+     "invoked_as": [
+      "tar",
+      "--create",
+      "--file=out.bin",
+      "in.txt"
+     ],
+     "kind": "CREATES"
+    },
+    {
+     "invoked_as": [
+      "tar",
+      "--append",
+      "--file=out.bin",
+      "in.txt"
+     ],
+     "kind": "CREATES"
+    },
+    {
+     "invoked_as": [
+      "tar",
+      "--update",
+      "--file=out.bin",
+      "in.txt"
+     ],
+     "kind": "CREATES"
+    }
+   ],
+   "doors": 4,
+   "program": "tar",
+   "room": "PLAIN",
+   "seconds": 2.84,
+   "sensors": 151,
+   "subcommands_admitted": 0,
+   "subcommands_refused": 23,
+   "unbound": 2
+  },
+  {
+   "all_restored": true,
+   "change_kinds": {},
+   "construction_needed": null,
+   "declared": 13,
+   "door_examples": [],
+   "doors": 0,
+   "program": "jq",
+   "room": "PLAIN",
+   "seconds": 1.108,
+   "sensors": 13,
+   "subcommands_admitted": 0,
+   "subcommands_refused": 0,
+   "unbound": 0
+  },
+  {
+   "all_restored": true,
+   "change_kinds": {
+    "CREATES": 1,
+    "RENAMES": 11
+   },
+   "construction_needed": null,
+   "declared": 19,
+   "door_examples": [
+    {
+     "invoked_as": [
+      "gzip",
+      "--decompress",
+      "in.gz"
+     ],
+     "kind": "RENAMES"
+    },
+    {
+     "invoked_as": [
+      "gzip",
+      "--force",
+      "in.txt"
+     ],
+     "kind": "RENAMES"
+    },
+    {
+     "invoked_as": [
+      "gzip",
+      "--keep",
+      "in.txt"
+     ],
+     "kind": "CREATES"
+    },
+    {
+     "invoked_as": [
+      "gzip",
+      "--no-name",
+      "in.txt"
+     ],
+     "kind": "RENAMES"
+    },
+    {
+     "invoked_as": [
+      "gzip",
+      "--name",
+      "in.txt"
+     ],
+     "kind": "RENAMES"
+    }
+   ],
+   "doors": 12,
+   "program": "gzip",
+   "room": "PLAIN",
+   "seconds": 0.139,
+   "sensors": 7,
+   "subcommands_admitted": 0,
+   "subcommands_refused": 0,
+   "unbound": 0
+  },
+  {
+   "all_restored": true,
+   "change_kinds": {},
+   "construction_needed": "the program documents no usage line, so the shape of its invocation is unknown",
+   "declared": 13,
+   "door_examples": [],
+   "doors": 0,
+   "program": "zip",
+   "room": "PLAIN",
+   "seconds": 0.063,
+   "sensors": 0,
+   "subcommands_admitted": 0,
+   "subcommands_refused": 0,
+   "unbound": 13
+  },
+  {
+   "all_restored": true,
+   "change_kinds": {},
+   "construction_needed": null,
+   "declared": 10,
+   "door_examples": [],
+   "doors": 0,
+   "program": "unzip",
+   "room": "PLAIN",
+   "seconds": 0.17,
+   "sensors": 10,
+   "subcommands_admitted": 0,
+   "subcommands_refused": 0,
+   "unbound": 0
+  },
+  {
+   "all_restored": true,
+   "change_kinds": {
+    "CREATES": 1,
+    "RENAMES": 6
+   },
+   "construction_needed": null,
+   "declared": 15,
+   "door_examples": [
+    {
+     "invoked_as": [
+      "xz",
+      "--compress",
+      "in.txt"
+     ],
+     "kind": "RENAMES"
+    },
+    {
+     "invoked_as": [
+      "xz",
+      "--keep",
+      "in.txt"
+     ],
+     "kind": "CREATES"
+    },
+    {
+     "invoked_as": [
+      "xz",
+      "--force",
+      "in.txt"
+     ],
+     "kind": "RENAMES"
+    },
+    {
+     "invoked_as": [
+      "xz",
+      "-0",
+      "in.txt"
+     ],
+     "kind": "RENAMES"
+    },
+    {
+     "invoked_as": [
+      "xz",
+      "--extreme",
+      "in.txt"
+     ],
+     "kind": "RENAMES"
+    }
+   ],
+   "doors": 7,
+   "program": "xz",
+   "room": "PLAIN",
+   "seconds": 0.152,
+   "sensors": 8,
+   "subcommands_admitted": 0,
+   "subcommands_refused": 0,
+   "unbound": 0
+  },
+  {
+   "all_restored": true,
+   "change_kinds": {},
+   "construction_needed": "the program documents no usage line, so the shape of its invocation is unknown",
+   "declared": 765,
+   "door_examples": [],
+   "doors": 0,
+   "program": "openssl",
+   "room": "PLAIN",
+   "seconds": 13.62,
+   "sensors": 0,
+   "subcommands_admitted": 24,
+   "subcommands_refused": 0,
+   "unbound": 765
+  },
+  {
+   "all_restored": true,
+   "change_kinds": {
+    "CREATES": 1
+   },
+   "construction_needed": null,
+   "declared": 30,
+   "door_examples": [
+    {
+     "invoked_as": [
+      "sort",
+      "--output=out.bin",
+      "in.txt"
+     ],
+     "kind": "CREATES"
+    }
+   ],
+   "doors": 1,
+   "program": "sort",
+   "room": "PLAIN",
+   "seconds": 0.432,
+   "sensors": 29,
+   "subcommands_admitted": 0,
+   "subcommands_refused": 0,
+   "unbound": 0
+  },
+  {
+   "all_restored": true,
+   "change_kinds": {},
+   "construction_needed": "the usage line requires PATTERNS: Usage: grep [OPTION]... PATTERNS [FILE]...",
+   "declared": 49,
+   "door_examples": [],
+   "doors": 0,
+   "program": "grep",
+   "room": "PLAIN",
+   "seconds": 0.808,
+   "sensors": 0,
+   "subcommands_admitted": 0,
+   "subcommands_refused": 0,
+   "unbound": 49
+  },
+  {
+   "all_restored": true,
+   "change_kinds": {
+    "REWRITES_TEXT": 1
+   },
+   "construction_needed": null,
+   "declared": 15,
+   "door_examples": [
+    {
+     "invoked_as": [
+      "sed",
+      "--in-place",
+      "--expression=s/a/A/",
+      "in.txt"
+     ],
+     "kind": "REWRITES_TEXT"
+    }
+   ],
+   "doors": 1,
+   "program": "sed",
+   "room": "PLAIN",
+   "seconds": 0.207,
+   "sensors": 14,
+   "subcommands_admitted": 0,
+   "subcommands_refused": 0,
+   "unbound": 0
+  },
+  {
+   "all_restored": true,
+   "change_kinds": {
+    "REWRITES": 1
+   },
+   "construction_needed": null,
+   "declared": 17,
+   "door_examples": [
+    {
+     "invoked_as": [
+      "find",
+      "-fprint0",
+      "in.txt"
+     ],
+     "kind": "REWRITES"
+    }
+   ],
+   "doors": 1,
+   "program": "find",
+   "room": "PLAIN",
+   "seconds": 0.306,
+   "sensors": 16,
+   "subcommands_admitted": 0,
+   "subcommands_refused": 0,
+   "unbound": 0
+  },
+  {
+   "all_restored": true,
+   "change_kinds": {},
+   "construction_needed": "the usage line requires FILE: Usage: stat [OPTION]... FILE...",
+   "declared": 8,
+   "door_examples": [],
+   "doors": 0,
+   "program": "stat",
+   "room": "PLAIN",
+   "seconds": 0.047,
+   "sensors": 0,
+   "subcommands_admitted": 0,
+   "subcommands_refused": 0,
+   "unbound": 8
+  },
+  {
+   "all_restored": true,
+   "change_kinds": {},
+   "construction_needed": null,
+   "declared": 7,
+   "door_examples": [],
+   "doors": 0,
+   "program": "tr",
+   "room": "PLAIN",
+   "seconds": 0.105,
+   "sensors": 7,
+   "subcommands_admitted": 0,
+   "subcommands_refused": 0,
+   "unbound": 0
+  },
+  {
+   "all_restored": true,
+   "change_kinds": {},
+   "construction_needed": null,
+   "declared": 12,
+   "door_examples": [],
+   "doors": 0,
+   "program": "cut",
+   "room": "PLAIN",
+   "seconds": 0.167,
+   "sensors": 12,
+   "subcommands_admitted": 0,
+   "subcommands_refused": 0,
+   "unbound": 0
+  },
+  {
+   "all_restored": true,
+   "change_kinds": {},
+   "construction_needed": null,
+   "declared": 10,
+   "door_examples": [],
+   "doors": 0,
+   "program": "comm",
+   "room": "PLAIN",
+   "seconds": 0.043,
+   "sensors": 10,
+   "subcommands_admitted": 0,
+   "subcommands_refused": 0,
+   "unbound": 0
+  },
+  {
+   "all_restored": true,
+   "change_kinds": {},
+   "construction_needed": null,
+   "declared": 15,
+   "door_examples": [],
+   "doors": 0,
+   "program": "join",
+   "room": "PLAIN",
+   "seconds": 0.064,
+   "sensors": 15,
+   "subcommands_admitted": 0,
+   "subcommands_refused": 0,
+   "unbound": 0
+  },
+  {
+   "all_restored": true,
+   "change_kinds": {},
+   "construction_needed": null,
+   "declared": 5,
+   "door_examples": [],
+   "doors": 0,
+   "program": "paste",
+   "room": "PLAIN",
+   "seconds": 0.069,
+   "sensors": 5,
+   "subcommands_admitted": 0,
+   "subcommands_refused": 0,
+   "unbound": 0
+  },
+  {
+   "all_restored": true,
+   "change_kinds": {},
+   "construction_needed": null,
+   "declared": 13,
+   "door_examples": [],
+   "doors": 0,
+   "program": "nl",
+   "room": "PLAIN",
+   "seconds": 0.148,
+   "sensors": 13,
+   "subcommands_admitted": 0,
+   "subcommands_refused": 3,
+   "unbound": 0
+  },
+  {
+   "all_restored": true,
+   "change_kinds": {},
+   "construction_needed": null,
+   "declared": 5,
+   "door_examples": [],
+   "doors": 0,
+   "program": "fold",
+   "room": "PLAIN",
+   "seconds": 0.065,
+   "sensors": 5,
+   "subcommands_admitted": 0,
+   "subcommands_refused": 0,
+   "unbound": 0
+  },
+  {
+   "all_restored": true,
+   "change_kinds": {},
+   "construction_needed": null,
+   "declared": 4,
+   "door_examples": [],
+   "doors": 0,
+   "program": "expand",
+   "room": "PLAIN",
+   "seconds": 0.054,
+   "sensors": 4,
+   "subcommands_admitted": 0,
+   "subcommands_refused": 0,
+   "unbound": 0
+  },
+  {
+   "all_restored": true,
+   "change_kinds": {},
+   "construction_needed": null,
+   "declared": 8,
+   "door_examples": [],
+   "doors": 0,
+   "program": "wc",
+   "room": "PLAIN",
+   "seconds": 0.121,
+   "sensors": 8,
+   "subcommands_admitted": 0,
+   "subcommands_refused": 0,
+   "unbound": 0
+  },
+  {
+   "all_restored": true,
+   "change_kinds": {},
+   "construction_needed": "the usage line requires FILES: Usage: diff [OPTION]... FILES",
+   "declared": 50,
+   "door_examples": [],
+   "doors": 0,
+   "program": "diff",
+   "room": "PLAIN",
+   "seconds": 0.239,
+   "sensors": 0,
+   "subcommands_admitted": 0,
+   "subcommands_refused": 0,
+   "unbound": 50
+  },
+  {
+   "all_restored": true,
+   "change_kinds": {
+    "CREATES": 1
+   },
+   "construction_needed": null,
+   "declared": 29,
+   "door_examples": [
+    {
+     "invoked_as": [
+      "patch",
+      "-o=out.bin",
+      "in.txt"
+     ],
+     "kind": "CREATES"
+    }
+   ],
+   "doors": 1,
+   "program": "patch",
+   "room": "PLAIN",
+   "seconds": 0.46,
+   "sensors": 28,
+   "subcommands_admitted": 0,
+   "subcommands_refused": 0,
+   "unbound": 0
+  },
+  {
+   "all_restored": true,
+   "change_kinds": {},
+   "construction_needed": null,
+   "declared": 5,
+   "door_examples": [],
+   "doors": 0,
+   "program": "base64",
+   "room": "PLAIN",
+   "seconds": 0.077,
+   "sensors": 5,
+   "subcommands_admitted": 0,
+   "subcommands_refused": 0,
+   "unbound": 0
+  },
+  {
+   "all_restored": true,
+   "change_kinds": {},
+   "construction_needed": null,
+   "declared": 12,
+   "door_examples": [],
+   "doors": 0,
+   "program": "md5sum",
+   "room": "PLAIN",
+   "seconds": 0.185,
+   "sensors": 12,
+   "subcommands_admitted": 0,
+   "subcommands_refused": 0,
+   "unbound": 0
+  },
+  {
+   "all_restored": true,
+   "change_kinds": {},
+   "construction_needed": null,
+   "declared": 12,
+   "door_examples": [],
+   "doors": 0,
+   "program": "sha256sum",
+   "room": "PLAIN",
+   "seconds": 0.174,
+   "sensors": 12,
+   "subcommands_admitted": 0,
+   "subcommands_refused": 0,
+   "unbound": 0
+  },
+  {
+   "all_restored": true,
+   "change_kinds": {
+    "CREATES": 8
+   },
+   "construction_needed": null,
+   "declared": 17,
+   "door_examples": [
+    {
+     "invoked_as": [
+      "split",
+      "--additional-suffix=out.bin",
+      "in.txt"
+     ],
+     "kind": "CREATES"
+    },
+    {
+     "invoked_as": [
+      "split",
+      "-d",
+      "in.txt"
+     ],
+     "kind": "CREATES"
+    },
+    {
+     "invoked_as": [
+      "split",
+      "--numeric-suffixes",
+      "in.txt"
+     ],
+     "kind": "CREATES"
+    },
+    {
+     "invoked_as": [
+      "split",
+      "-x",
+      "in.txt"
+     ],
+     "kind": "CREATES"
+    },
+    {
+     "invoked_as": [
+      "split",
+      "--hex-suffixes",
+      "in.txt"
+     ],
+     "kind": "CREATES"
+    }
+   ],
+   "doors": 8,
+   "program": "split",
+   "room": "PLAIN",
+   "seconds": 0.122,
+   "sensors": 9,
+   "subcommands_admitted": 0,
+   "subcommands_refused": 0,
+   "unbound": 0
+  },
+  {
+   "all_restored": true,
+   "change_kinds": {},
+   "construction_needed": null,
+   "declared": 14,
+   "door_examples": [],
+   "doors": 0,
+   "program": "cksum",
+   "room": "PLAIN",
+   "seconds": 0.259,
+   "sensors": 14,
+   "subcommands_admitted": 0,
+   "subcommands_refused": 11,
+   "unbound": 0
+  },
+  {
+   "all_restored": true,
+   "change_kinds": {},
+   "construction_needed": null,
+   "declared": 5,
+   "door_examples": [],
+   "doors": 0,
+   "program": "seq",
+   "room": "PLAIN",
+   "seconds": 0.026,
+   "sensors": 5,
+   "subcommands_admitted": 0,
+   "subcommands_refused": 0,
+   "unbound": 0
+  },
+  {
+   "all_restored": true,
+   "change_kinds": {},
+   "construction_needed": null,
+   "declared": 2,
+   "door_examples": [],
+   "doors": 0,
+   "program": "yes",
+   "room": "PLAIN",
+   "seconds": 0.013,
+   "sensors": 2,
+   "subcommands_admitted": 0,
+   "subcommands_refused": 0,
+   "unbound": 0
+  },
+  {
+   "all_restored": true,
+   "change_kinds": {},
+   "construction_needed": null,
+   "declared": 7,
+   "door_examples": [],
+   "doors": 0,
+   "program": "timeout",
+   "room": "PLAIN",
+   "seconds": 0.099,
+   "sensors": 7,
+   "subcommands_admitted": 0,
+   "subcommands_refused": 0,
+   "unbound": 0
+  },
+  {
+   "all_restored": true,
+   "change_kinds": {},
+   "construction_needed": null,
+   "declared": 27,
+   "door_examples": [],
+   "doors": 0,
+   "program": "pr",
+   "room": "PLAIN",
+   "seconds": 0.402,
+   "sensors": 27,
+   "subcommands_admitted": 0,
+   "subcommands_refused": 0,
+   "unbound": 0
+  },
+  {
+   "all_restored": true,
+   "change_kinds": {},
+   "construction_needed": null,
+   "declared": 9,
+   "door_examples": [],
+   "doors": 0,
+   "program": "fmt",
+   "room": "PLAIN",
+   "seconds": 0.121,
+   "sensors": 9,
+   "subcommands_admitted": 0,
+   "subcommands_refused": 0,
+   "unbound": 0
+  },
+  {
+   "all_restored": true,
+   "change_kinds": {},
+   "construction_needed": null,
+   "declared": 21,
+   "door_examples": [],
+   "doors": 0,
+   "program": "od",
+   "room": "PLAIN",
+   "seconds": 0.345,
+   "sensors": 21,
+   "subcommands_admitted": 0,
+   "subcommands_refused": 0,
+   "unbound": 0
+  },
+  {
+   "all_restored": true,
+   "change_kinds": {},
+   "construction_needed": null,
+   "declared": 251,
+   "door_examples": [],
+   "doors": 0,
+   "program": "convert",
+   "room": "PLAIN",
+   "seconds": 2.892,
+   "sensors": 251,
+   "subcommands_admitted": 0,
+   "subcommands_refused": 3,
+   "unbound": 0
+  },
+  {
+   "all_restored": true,
+   "change_kinds": {
+    "CREATES": 79,
+    "DELETES": 6,
+    "RENAMES": 2,
+    "REWRITES": 16,
+    "REWRITES_BINARY": 12
+   },
+   "construction_needed": null,
+   "declared": 483,
+   "door_examples": [
+    {
+     "invoked_as": [
+      "git",
+      "clone",
+      "--bare",
+      "in.txt"
+     ],
+     "kind": "CREATES"
+    },
+    {
+     "invoked_as": [
+      "git",
+      "clone",
+      "--mirror",
+      "in.txt"
+     ],
+     "kind": "CREATES"
+    },
+    {
+     "invoked_as": [
+      "git",
+      "add",
+      "--verbose",
+      "in.txt"
+     ],
+     "kind": "REWRITES_BINARY"
+    },
+    {
+     "invoked_as": [
+      "git",
+      "add",
+      "--force",
+      "in.txt"
+     ],
+     "kind": "REWRITES_BINARY"
+    },
+    {
+     "invoked_as": [
+      "git",
+      "add",
+      "--update",
+      "in.txt"
+     ],
+     "kind": "REWRITES_BINARY"
+    }
+   ],
+   "doors": 42,
+   "program": "git",
+   "room": "GIT",
+   "seconds": 28.724,
+   "sensors": 368,
+   "subcommands_admitted": 22,
+   "subcommands_refused": 0,
+   "unbound": 73
+  }
+ ],
+ "scan_proof": {
+  "action_list_written_by_a_person": false,
+  "affordance_rows": 5,
+  "declared": 19,
+  "doors_discovered": 12,
+  "program": "gzip",
+  "seconds": 0.0314,
+  "states_seen": 5,
+  "transitions": 12
+ },
+ "schema": "BRAIN_THE_MACHINE_PUBLISHES_ITS_OWN_DOORS_V1",
+ "seconds": 54.872,
+ "totals": {
+  "declared": 2134,
+  "doors": 77,
+  "sensors": 1097,
+  "subcommands_admitted": 46,
+  "subcommands_refused": 40,
+  "unbound": 960
+ },
+ "what_this_is": "every operation the machine's own programs declare about themselves, classified by what running each one did to a real tree, with the tree restored after every trial"
+}
