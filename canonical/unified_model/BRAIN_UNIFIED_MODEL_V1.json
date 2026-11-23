@@ -31228,7 +31228,7 @@
   "engines": 26,
   "knowledge_documents": 600,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 7225,
+  "research_index_records": 7227,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 452,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "89d864a95405d0790b29f931d9cdd3b11997fd30e89da9c73c0d734ca82d590d"
+  "value": "775caf192caa679bc0afa398900690c5738b38aef95ae6cac6b009e70130d5d8"
  },
  "engines": [
   {
@@ -184384,6 +184384,28 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "2026-11-23",
+   "id": "research:canonical/verification/LOCAL_GUIDE_RECEIPT_20261123_TOOL_MAN_TIER_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/LOCAL_GUIDE_RECEIPT_20261123_TOOL_MAN_TIER_V1.json",
+   "schema": "PROJECT_BRAIN_LOCAL_GUIDE_TOOL_MAN_TIER_RECEIPT_V1",
+   "sha256": "a8c958a9f7f8c25c193bbaba5a081599b0554a8050fc982c9e22977bb11f38fb",
+   "status": "PASS__TOOL_MAN_TIER_MEASURED",
+   "terms": {
+    "20261123": 1,
+    "guide": 1,
+    "local": 1,
+    "man": 1,
+    "pass__tool_man_tier_measured": 1,
+    "receipt": 1,
+    "tier": 1,
+    "tool": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-09",
    "id": "research:canonical/verification/LOSS_ABSORBING_CUSHION_REGCAP_GROUNDING_VERIFY_20261009_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -253924,6 +253946,51 @@
     "perfect": 2,
     "perfect_algorithm_local_guide_20261122_v1": 1,
     "tier": 4
+   }
+  },
+  {
+   "action_id": "PERFECT_ALGORITHM_LOCAL_GUIDE_TOOL_MAN_TIER_20261123_V1",
+   "capability": false,
+   "date": "2026-11-23",
+   "id": "research:canonical/action_intents/PERFECT_ALGORITHM_LOCAL_GUIDE_TOOL_MAN_TIER_20261123_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/PERFECT_ALGORITHM_LOCAL_GUIDE_TOOL_MAN_TIER_20261123_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "73d44eda0302f3619b09692c6d963fddfe2831f4f42c0b5dc33c2e3b0f725d95",
+   "status": "PROPOSED__PRODUCER_MEASURED__PERFECT_ALGORITHM_LOCAL_GUIDE_TOOL_MAN_TIER__INDEPE",
+   "terms": {
+    "20261123": 1,
+    "60": 1,
+    "algorithm": 1,
+    "all": 2,
+    "allow_instant_knowledge": 1,
+    "answers": 1,
+    "asked": 1,
+    "between": 1,
+    "caller": 1,
+    "carry": 1,
+    "compose_the_local_tier_tool_man_guides_into_the_existing_local_guide_path": 1,
+    "computer": 1,
+    "content": 2,
+    "guide": 2,
+    "guides": 3,
+    "help": 2,
+    "instant-knowledge": 2,
+    "least": 2,
+    "local": 4,
+    "man": 4,
+    "md": 4,
+    "named": 2,
+    "only": 3,
+    "output": 2,
+    "own": 3,
+    "page": 2,
+    "read": 2,
+    "repo": 3,
+    "small": 2,
+    "tier": 5,
+    "tokens": 2,
+    "tool": 8
    }
   },
   {
