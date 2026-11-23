@@ -128,6 +128,96 @@ def _flatten(value, out=None):
     return out
 
 
+def _remembered_argv(goal):
+    """A command a VERIFIED run taught for a question like this one, or None.
+
+    The skill is the generalised argv (program, fixed flags, operand positions); the operands come
+    from the sentence that is being answered now. Only a skill that fits exactly is offered.
+    """
+    try:
+        from canonical.runtime import procedure_memory_v1 as _PM
+        from canonical.runtime.composer_route_v1 import extract_argv
+    except Exception:  # noqa: BLE001 - no memory, nothing offered
+        return None
+    try:
+        hit = _PM.recall(goal)
+    except Exception:  # noqa: BLE001 - a store that cannot be read offers nothing
+        hit = None
+    # A similarity miss is not the end of the search: a sentence that NAMES the program a skill was
+    # taught for has said the one thing needed to join them, whatever its wording. Both are tried,
+    # in that order, and neither can produce a command the sentence does not fit.
+    skill = (hit or {}).get("command_skill") or {}
+    if not skill:
+        # Older entries carry no skill. Recall them as before -- the capability is still a
+        # candidate, it simply brings no command with it.
+        try:
+            for candidate in _PM.recall_many(goal):
+                if candidate.get("capability_id") == hit.get("capability_id"):
+                    skill = candidate.get("command_skill") or skill
+                    if skill:
+                        break
+        except Exception:  # noqa: BLE001
+            pass
+    if not skill:
+        # A SENTENCE MAY NAME THE PROGRAM WITHOUT REPEATING THE PHRASING IT WAS TAUGHT WITH.
+        #
+        # The signature is built from the sentence's own words, so a skill taught by `ls -la` is
+        # recalled by "ls" at 0.5 and not at all by "list the files in this folder" -- measured
+        # 2026-11-22. But the skill itself records WHICH PROGRAM it is (`ls`), and a sentence that
+        # names that program has said the one thing needed to join them. That is a lookup on a fact
+        # the memory already holds, not a similarity guess, and it is checked before use: the skill
+        # still has to apply exactly, with the right number of operands.
+        skill = _skill_for_a_program_named_in(goal) or {}
+    if not skill:
+        return None
+    operands = _operands_stated_in(goal)
+    return _PM.apply_command_skill(skill, operands)
+
+
+def _skill_for_a_program_named_in(goal):
+    """The learned skill whose program this sentence names, or None.
+
+    `shutil.which` decides what is a program -- the same authority the rest of the machine uses --
+    and only skills whose recorded program appears in the sentence are offered.
+    """
+    try:
+        from canonical.runtime import procedure_memory_v1 as _PM
+        import shutil as _shutil
+        import re as _re
+    except Exception:  # noqa: BLE001
+        return None
+    names = {str(w).lower() for w in _re.findall(r"[A-Za-z][A-Za-z0-9_.+-]{1,}", str(goal or ""))}
+    for _sig, entry in _PM._procedures().items():
+        skill = entry.get("command_skill") or {}
+        program = str(skill.get("program") or "").lower()
+        if not program or program not in names:
+            continue
+        if _shutil.which(program):
+            return skill
+    return None
+
+
+def _operands_stated_in(goal):
+    """The values a sentence names that could fill a command's operand positions.
+
+    A stated command line supplies its own operands; otherwise they are the file paths the sentence
+    names, in order. Nothing is invented: no paths and no stated command means no operands.
+    """
+    stated = None
+    try:
+        from canonical.runtime.composer_route_v1 import extract_argv
+        stated = extract_argv(str(goal or ""))
+    except Exception:  # noqa: BLE001
+        stated = None
+    if stated:
+        return list(stated[1:])
+    try:
+        from canonical.runtime import goal_compiler as _gc
+        return [str(p[0]) for p in _gc._repo_paths(goal, ROOT)]
+    except Exception:  # noqa: BLE001
+        return []
+
+
 def _argv_stated_in(goal):
     """The command line the sentence states, or None. Never a guess.
 
@@ -940,6 +1030,21 @@ def complete_inputs(goal, root, entry, compiler=None, goal_paths=None):
             # something the sentence does not contain is an invention, and an invention
             # executes.
             value = _argv_stated_in(goal)
+            # A REMEMBERED SKILL ANSWERS WHAT THE SENTENCE DOES NOT SPELL OUT.
+            #
+            # The rule above is that an unstated argv is never invented -- and it still holds. This
+            # is not invention: the command came from a run that VERIFIED, and it is re-checked here
+            # before it is offered. What it supplies is the part the sentence leaves implicit
+            # (which program, which flag), with the operands the NEW sentence states. Measured
+            # 2026-11-22: "list the files in this folder" recalled `shell.command.run` at
+            # similarity 1.0 and was refused anyway, because nothing could put a command in the
+            # slot; the command that had worked was stored nowhere.
+            #
+            # A sentence that states a command is unaffected -- `_argv_stated_in` wins above. And a
+            # skill whose operand count does not match what the sentence supplies returns None, so
+            # a half-fitting skill changes nothing.
+            if value is None:
+                value = _remembered_argv(goal)
         elif _is_url_slot(low):
             # A URL IN THE SENTENCE MUST NOT BE READ AS A FILE PATH.
             #

@@ -3605,3 +3605,95 @@ mechanism built on that scores would invent a program on almost every sentence.
 | recall placement | before the survivor loop — a candidate, not a tie-break |
 | similarity behaviour | 1.0 exact, 0.5 paraphrase, None synonym-miss, None correct-reject |
 | `experience_v1.json` | restored byte-for-byte after the experiment (`git status` clean for it) |
+
+---
+
+## §A76 — THE LOOP IS CLOSED: ONE RUN TEACHES A SKILL THAT GENERALISES (2026-11-22)
+
+**A75 measured where the single-experience loop broke. This round closed it, and the proof is the
+mission's own hypothesis, tested rather than asserted.**
+
+### The two open joints A75 found
+
+1. **The stored procedure had no command.** It remembered *which capability* answered, not *what made
+   it work*. `shell.command.run` with `['ls','-la']` is a solved task; with no argv it is not a task
+   at all — so a request could be recalled at similarity 1.0 and still be refused, because the
+   recalled candidate had an ARGV slot and nothing to put in it.
+2. **The front door never learned.** The store was written only by `grounded_action_v1.act`, and
+   `ra.solve` does not call it. A command could be executed here a hundred times and the next
+   identical request still arrived at an empty store. The machine could learn, and the door people
+   use told it nothing.
+
+### What was built, and why it is a skill rather than a replay
+
+Storing `['ls','-la']` verbatim would work in one directory and nowhere else — the "saving the exact
+experience in a dumb way" the mission warns against. The split needs no knowledge of any program:
+
+```
+    token 0             -> the PROGRAM      (which program did this)
+    token starting '-'  -> a FLAG           (how the program was told what to do: part of the skill)
+    anything else       -> an OPERAND       (a value the SENTENCE supplied, by position)
+```
+
+`['wc','-l','README.md']` becomes program `wc`, flags `['-l']`, operand at position 2 — and a new
+sentence supplies its own operand there. `['ls','-la']` has no operand and is runnable anywhere.
+
+**The same rule had to be taught at five sites**, which is itself the finding: the scorer, the ranked
+candidate admission, the pinned binder, the typed admission gate, and the "does this row explain the
+sentence" gate each independently refused the request *after* the memory had supplied a correct
+command. Each was a place that knew how to read a command out of a sentence and had no way to read
+one out of what the machine had learned.
+
+### The three properties that make recall safe
+
+| property | test |
+|---|---|
+| only a VERIFIED run teaches | `learn(..., verified=False)` records nothing |
+| a skill must fit **exactly** | `wc` alone → None; two operands → None; `compress the folder` → None |
+| the recalled command is still executed and verified | it is compiled, bound and run as any other route |
+
+### The proof
+
+| step | result |
+|---|---|
+| `use wc on AGENTS.md`, nothing taught | **FAIL** (refused) |
+| `wc -l README.md` — **done once** | **PASS**, `['wc','-l','README.md']` |
+| `use wc on AGENTS.md` — never taught, different file, different wording | **PASS**, `['wc','-l','AGENTS.md']`, **`61 AGENTS.md`** |
+
+`ls -la` → taught `['ls','-la']` → `ls` now resolves to it. A fresh process reads the skill from disk,
+so the learning is permanent, not per-session.
+
+### A test that passed vacuously, caught and fixed
+
+The first version of the end-to-end test asserted "refused before teaching" and **passed** — because a
+previous run had taught the skill into the machine's real store, so "before teaching" was already
+after teaching. It now clears the store to a saved baseline, and restores it in `finally`. This is the
+same defect class as everything above: **a check that reads state it did not control is not a check.**
+
+### A process error worth recording
+
+While probing whether A70's compress flow still worked, I used `git stash push` mid-experiment; the
+pop reported "entry is kept" and the working tree briefly held only one modified file. I checked
+`git stash list` before continuing rather than assuming the pop had worked, restored from
+`stash@{0}`, and confirmed all nine modified files were back. **The lesson: never verify a hypothesis
+by moving the whole working tree when a single import would do** — and always read the stash result.
+
+### Verified
+
+| check | result |
+|---|---|
+| new suite `test_one_verified_run_teaches_a_skill_v1.py` | **12 passed** (incl. the end-to-end proof) |
+| 7 suites together | **128 passed, 1 failed** |
+| the 1 failure | the pre-existing `tar.gz` pair, identical at HEAD |
+| `tasks_v1` / `unseen_program_v1` | **13/13** / **6/6** |
+| A70's `compress the input into out.gz` | fails **at HEAD too** — pre-existing, not this round |
+| `experience_v1.json` | restored to its baseline after the tests |
+
+### Honest limits
+
+The **synthesis** gap remains and is now the top bottleneck: a skill taught by `ls -la` is recalled by
+`ls` (program named) but **not** by "list the files in this folder", because the signature is built
+from the sentence's words and a description shares none with the command. Closing that is not a
+similarity threshold — A74 measured description→program matching as dead (right program 11th, absent,
+66th). It needs the program name to come from somewhere honest: either the sentence states it, or the
+skill was taught *from a description* in the first place, which is what a person does.

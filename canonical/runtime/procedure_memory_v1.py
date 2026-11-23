@@ -47,6 +47,7 @@ the whole thing is a tokenizer, an ordered-pair detector, and a sorted-tuple com
 from __future__ import annotations
 
 import re
+from typing import Mapping
 
 SCHEMA = "PROCEDURE_MEMORY_V1"
 
@@ -235,7 +236,7 @@ def agrees_on_direction(a: str, b: str) -> bool:
 # Storage. A second section in the SAME file, so an existing state file is not migrated or
 # invalidated and the exact-recall path keeps working exactly as it did.
 # ------------------------------------------------------------------------------------------
-def learn(goal: str, capability_id: str, verified: bool, path=None, root=None,
+def learn(goal: str, capability_id: str, verified: bool, path=None, root=None, inputs=None,
           verifier=None) -> dict:
     """Record a procedure, but only from a receipt that VERIFIED.
 
@@ -261,12 +262,87 @@ def learn(goal: str, capability_id: str, verified: bool, path=None, root=None,
         "first_taught": __import__("time").time(), "uses": 0, "examples": [],
     })
     entry["capability_id"] = str(capability_id)
+    # THE COMMAND THAT MADE IT WORK IS PART OF THE LESSON.
+    #
+    # `inputs` is the binding the verified run used. When it carries an argv, the generalised form
+    # of that argv is remembered beside the capability, so a later sentence that asks the same thing
+    # in different words can be answered -- which is the whole point of remembering at all.
+    _argv = (inputs or {}).get("argv") if isinstance(inputs, Mapping) else None
+    if isinstance(_argv, list) and _argv:
+        _skill = command_skill(_argv)
+        if _skill:
+            entry["command_skill"] = _skill
     if str(goal) not in entry["examples"]:
         entry["examples"] = (entry["examples"] + [str(goal)])[-8:]
     entry["last_taught"] = __import__("time").time()
     EXP._save(state, path)
     return {"schema": SCHEMA, "learned": True, "signature": sig,
             "capability_id": str(capability_id), "examples": len(entry["examples"])}
+
+
+# ---------------------------------------------------------------------------------------------
+# THE COMMAND IS PART OF WHAT WAS LEARNED.
+# ---------------------------------------------------------------------------------------------
+#
+# Measured 2026-11-22 (A75): "list the files in this folder" was taught once, recalled at
+# similarity 1.0, and STILL refused -- because the procedure stored WHICH capability answered and
+# not WHAT MADE IT WORK. The candidate it contributed was `shell.command.run` with an ARGV slot and
+# nothing to put in it, so it failed binding exactly as it would have with no memory at all.
+# `shell.command.run` with ['ls','-la'] is a solved task; `shell.command.run` with no argv is not a
+# task at all. That row's content IS the command, so a procedure memory that drops the command can
+# never rescue anything for it.
+#
+# WHAT IS STORED IS A SKILL, NOT A REPLAY. Storing ['ls','-la'] verbatim would be "saving the exact
+# experience in a dumb way" -- it works in this directory and nowhere else. The split is structural
+# and needs no knowledge of any program:
+#
+#     token 0            -> the PROGRAM      (which program did this)
+#     token starting '-'  -> a FLAG          (part of the skill: it is how the program was told what to do)
+#     anything else       -> an OPERAND      (a value the SENTENCE supplied, by position)
+#
+# So ['wc','-l','README.md'] becomes program `wc`, flags ['-l'], operand at position 2; a new
+# sentence supplies its own operand for that position. ['ls','-la'] has no operands and is directly
+# runnable anywhere, which is exactly the case A75 measured as unreachable.
+_OPERAND = "\x00OPERAND\x00"
+
+
+def command_skill(argv) -> dict:
+    """The generalised form of an argv that ran: program, fixed flags, operand positions."""
+    tokens = [str(t) for t in (argv or []) if str(t)]
+    if not tokens:
+        return {}
+    template = []
+    operand_positions = []
+    for index, token in enumerate(tokens):
+        if index > 0 and not token.startswith("-"):
+            template.append(_OPERAND)
+            operand_positions.append(index)
+        else:
+            template.append(token)
+    return {"program": tokens[0], "template": template,
+            "operand_positions": operand_positions, "learned_from": list(tokens)}
+
+
+def apply_command_skill(skill, operands):
+    """A concrete argv from a stored skill and the operands a new sentence supplies, or None.
+
+    Returns None -- never a guess -- when the sentence does not supply every operand the skill
+    needs, or supplies a different number of them. A skill that half-fits is not applicable.
+    """
+    template = list((skill or {}).get("template") or [])
+    if not template:
+        return None
+    need = sum(1 for token in template if token == _OPERAND)
+    values = [str(v) for v in (operands or []) if str(v)]
+    if need != len(values):
+        return None
+    out, cursor = [], 0
+    for token in template:
+        if token == _OPERAND:
+            out.append(values[cursor]); cursor += 1
+        else:
+            out.append(token)
+    return out
 
 
 def _procedures(path=None):

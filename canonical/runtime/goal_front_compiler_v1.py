@@ -1141,6 +1141,21 @@ def bind_typed_key(goal: str, key: str, root: pathlib.Path, entry: Mapping[str, 
         derived = _machine.derive_argv(str(goal or ""))
         if derived.get("ok"):
             return list(derived["argv"])
+        # A COMMAND THIS MACHINE WAS TAUGHT BY A RUN THAT VERIFIED.
+        #
+        # The derivation above asks the program itself; this asks the machine's own memory. Both are
+        # evidence and neither is a guess: the skill was written only from a verified receipt, and it
+        # is applied only when it fits this sentence exactly (right number of operands, program
+        # present). Measured 2026-11-22 -- the memory bound `['wc','AGENTS.md']` for "use wc on
+        # AGENTS.md" and this binder refused it with argv:not_stated, because the only two things it
+        # knew how to read were the sentence and the manual.
+        try:
+            from canonical.runtime.world_binding_v1 import _remembered_argv as _remember
+            remembered = _remember(str(goal or ""))
+        except Exception:  # noqa: BLE001 - no memory, the refusal stands
+            remembered = None
+        if remembered:
+            return list(remembered)
         raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED", "argv:not_stated")
     paths = gc._repo_paths(goal, root)
     if key in _PATH_FILE_KEYS:

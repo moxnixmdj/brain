@@ -1968,6 +1968,34 @@ def _dag_result(task_id: str, goal: str, compiled: Mapping[str, Any], raw_contra
     if reason is not None:
         out["failure_class"] = "LIVE_CONTROLLER_EXECUTION_OR_VERIFICATION_FAILURE"
         out["reason"] = str(reason)[:1600]
+    # A VERIFIED RUN THROUGH THIS DOOR TEACHES A PROCEDURE.
+    #
+    # Measured 2026-11-22 (A75): `ra.solve` never learned anything. The single-experience memory is
+    # written by `grounded_action_v1.act`, and this front door does not call it -- so a command could
+    # be executed here a hundred times and the next identical request still arrived at an empty
+    # store. The loop the mission is built on was open at the last joint: the machine could learn,
+    # and the door people use did not tell it anything.
+    #
+    # This is the one place every passing route returns through, so the lesson is recorded once,
+    # from the receipt, whichever executor produced it. `verified` is this result's own verdict --
+    # a failure teaches nothing -- and what is stored is the capability PLUS the command that made
+    # it work, without which `shell.command.run` can never be recalled into a bindable state.
+    if passed:
+        try:
+            from canonical.runtime import procedure_memory_v1 as _PM
+            _first = rows[0] if rows and isinstance(rows[0], Mapping) else {}
+            _inputs = {}
+            for _step in ((compiled.get("capability_dag") or {}).get("steps") or []):
+                if isinstance(_step, Mapping):
+                    _inputs.update(_step.get("inputs") or {})
+            if not _inputs and isinstance(_first.get("argv"), list):
+                _inputs = {"argv": _first["argv"]}
+            _cid = _first.get("capability_id") or (cids[0] if cids else None)
+            if _cid:
+                out["procedure_learned"] = _PM.learn(str(goal), str(_cid), verified=True,
+                                                     inputs=_inputs)
+        except Exception as _exc:  # noqa: BLE001 - learning must never fail a verified run
+            out["procedure_learned"] = {"learned": False, "error": type(_exc).__name__}
     return out
 
 
@@ -2691,6 +2719,22 @@ def request_words_explained_by_row(sentence: str, admission: Mapping[str, Any], 
         _derived = _machine.derive_argv(sentence)
     except Exception:  # noqa: BLE001 - no derivation, the existing vocabulary stands
         _derived = {}
+    # A COMMAND THIS MACHINE WAS TAUGHT IS ALSO A WORD THE ROW EXPLAINS.
+    #
+    # `shell.command.run`'s declared vocabulary is about shells and processes. A sentence that names
+    # a program and an operand ("use wc on AGENTS.md") shares no keyword with it, so every content
+    # word read as unexplained and a row that had BOUND THE RIGHT COMMAND FROM MEMORY was refused
+    # for not explaining the sentence that asked for it. The skill is the row's own evidence, so it
+    # is part of what the row accounts for -- the program's name and the operands it will run on.
+    try:
+        from canonical.runtime.world_binding_v1 import _remembered_argv as _remember
+        _learned_argv = _remember(sentence)
+    except Exception:  # noqa: BLE001 - no memory, the existing vocabulary stands
+        _learned_argv = None
+    if _learned_argv:
+        for _token in _learned_argv:
+            if not str(_token).startswith("-"):
+                vocabulary.add(_word_stem(str(_token).lower()))
     if _derived.get("ok"):
         # The program is part of what the row accounts for, and so is the ANSWER the program gave
         # when asked here -- `--version` replied "Python 3.11.2", which is the word the sentence

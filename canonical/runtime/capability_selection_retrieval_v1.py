@@ -1071,7 +1071,25 @@ def admit(goal: str, cid: str, entry: Mapping[str, Any], root: Any,
     # Words inside its quoted message must not demand a second argv contract.
     operation_bound = (cid.startswith("git.") and "op" in required
                        and _derived_values.get("op") is not None)
-    if _states_a_command_the_sentence_maps_to(goal) and not operation_bound:
+    # A REMEMBERED SKILL IS A STATED CONTRACT, ONE STEP LATER.
+    #
+    # The rule just below trusts a sentence that STATES a command. This is the same trust extended
+    # to what the machine has already been taught: a procedure memory entry whose command skill fits
+    # this sentence exactly, written by a run that VERIFIED. Measured 2026-11-22 -- "use wc on
+    # AGENTS.md" bound `['wc','AGENTS.md']` from memory and was still refused here with
+    # R13_DECLARED_INPUT_UNBINDABLE:argv, because the only command evidence this gate knew about was
+    # a command stated in the sentence.
+    #
+    # It adds no new authority: the skill can only come from the store, the store is only written on
+    # a verified receipt, and the argv is re-derived and re-bound by the same pinned binder below.
+    _remembered = None
+    if not _states_a_command_the_sentence_maps_to(goal):
+        try:
+            from canonical.runtime.world_binding_v1 import _remembered_argv as _remember
+            _remembered = _remember(goal)
+        except Exception:  # noqa: BLE001 - no memory, the refusal stands
+            _remembered = None
+    if (_states_a_command_the_sentence_maps_to(goal) or _remembered) and not operation_bound:
         # Imported privately and locally: `admit` imports the type surface under
         # the name _TS further down, which makes _TS a local for the WHOLE
         # function.  Naming it here raised UnboundLocalError on every capability

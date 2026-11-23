@@ -1571,6 +1571,30 @@ def _score(goal, cid, entry):
                 "stated_argv": list(_stated),
                 "rule": "THE_SENTENCE_IS_THE_COMMAND_LINE",
             }
+        # A REMEMBERED SKILL ANSWERS A SENTENCE THAT STATES NO COMMAND.
+        #
+        # The two rules above cover what the SENTENCE says. This covers what the machine already
+        # learned: a procedure memory entry whose command skill fits this sentence exactly. Measured
+        # 2026-11-22 -- "use wc on AGENTS.md", never taught, was bindable from memory but never
+        # reached binding, because this scorer gave the row zero and the row was therefore not a
+        # candidate at all. The binding worked and nothing asked it to.
+        #
+        # It cannot manufacture a match: the skill must exist in the procedure store, which is only
+        # written by a run that VERIFIED, and the plan is still compiled, bound and executed like
+        # any other. A sentence no skill fits scores exactly as it did.
+        try:
+            from canonical.runtime.world_binding_v1 import _remembered_argv as _remember
+            _learned = _remember(goal)
+        except Exception:  # noqa: BLE001 - no memory, the lexical score stands
+            _learned = None
+        if _learned:
+            return 1, 0, {
+                "goal_tokens": sorted(_tokens(goal)),
+                "matched_provides": [], "matched_requires": [], "matched_identity": [],
+                "matched_keywords": [],
+                "remembered_argv": list(_learned),
+                "rule": "A_VERIFIED_RUN_TAUGHT_A_COMMAND_FOR_THIS",
+            }
         try:
             from canonical.runtime import machine_purpose_index_v1 as _machine
             _derived = _machine.derive_argv(goal)

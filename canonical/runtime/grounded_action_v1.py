@@ -971,7 +971,8 @@ def act(goal, root=None, registry=None, verbose=False, memory=True,
         try:
             from canonical.runtime import procedure_memory_v1 as _PM
             out["procedure_learned"] = _PM.learn(
-                goal, chosen["capability_id"], verified=bool(verified))
+                goal, chosen["capability_id"], verified=bool(verified),
+                inputs=chosen.get("inputs"))
         except Exception as exc:
             out["procedure_learned"] = {"learned": False,
                                         "error": type(exc).__name__ + ":" + str(exc)}
