@@ -223,39 +223,69 @@
    "challenger_routes": [
     {
      "comparison": {
-      "CAPABILITY_STRENGTH": "same mechanism, more help shapes",
+      "CAPABILITY_STRENGTH": "equal: same mechanism over more shapes",
       "CORRECTNESS": "equal",
       "INCREMENTAL_COST": "a second parser to keep correct",
       "RELIABILITY": "equal",
-      "VERDICT": "REJECTED__REDUNDANT",
       "VERIFIABILITY": "equal",
-      "WALL_CLOCK": "slightly slower"
+      "WALL_CLOCK": "slightly slower, one more parser per census"
      },
-     "route_id": "A_SECOND_DECLARATION_READER"
+     "evidence": [
+      "the 36 censused programs already yielded five distinct help shapes handled by one reader",
+      "a second reader would parse the same declarations with the same judgement"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_MACHINE_PUBLISHES_ITS_OWN_DOORS_20261123_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "NON_DOMINATING",
+     "route": "A_SECOND_DECLARATION_READER_FOR_MORE_HELP_SHAPES"
     },
     {
      "comparison": {
-      "CAPABILITY_STRENGTH": "reaches programs with no help text",
-      "CORRECTNESS": "unmeasured: no display on this host",
-      "INCREMENTAL_COST": "a whole second vocabulary",
+      "CAPABILITY_STRENGTH": "wider reach, but nothing measured",
+      "CORRECTNESS": "unmeasured on this host",
+      "INCREMENTAL_COST": "large: a second primitive",
       "RELIABILITY": "unknown",
-      "VERDICT": "DEFERRED__RECORDED_AS_A_LIMIT",
-      "VERIFIABILITY": "lower",
-      "WALL_CLOCK": "slower"
+      "VERIFIABILITY": "lower: no display to verify against",
+      "WALL_CLOCK": "slower: a whole second vocabulary"
      },
-     "route_id": "A_GUI_TIER_FROM_THE_ACCESSIBILITY_TREE"
+     "evidence": [
+      "GUI programs publish no help text, so the declaration tier cannot reach them",
+      "this host has no display; the tier cannot be measured here"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_MACHINE_PUBLISHES_ITS_OWN_DOORS_20261123_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "A_GUI_TIER_FROM_THE_ACCESSIBILITY_TREE"
     },
     {
      "comparison": {
       "CAPABILITY_STRENGTH": "fewer stated inputs",
-      "CORRECTNESS": "lower: guessing where the census can state",
+      "CORRECTNESS": "lower: guesses where the census can state",
       "INCREMENTAL_COST": "none",
       "RELIABILITY": "lower",
-      "VERDICT": "REJECTED__NOT_HONEST",
-      "VERIFIABILITY": "lower",
+      "VERIFIABILITY": "lower: an inference has no artifact",
       "WALL_CLOCK": "equal"
      },
-     "route_id": "INFER_THE_ROOM_FROM_A_FAILURE_MESSAGE"
+     "evidence": [
+      "git's failure text is the only place some operands appear",
+      "reading a failure as a declaration is a guess the census must not make"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_MACHINE_PUBLISHES_ITS_OWN_DOORS_20261123_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "INFER_THE_ROOM_FROM_A_FAILURE_MESSAGE"
     }
    ],
    "checked_at_utc": "2026-11-23T17:47:52+00:00",
