@@ -1013,3 +1013,66 @@ the honest multi-page browser loop: the agent now navigates across pages with th
 same loop and replays its admitted rule instantly (9 s) on a fresh same-shape
 workflow — the browser-half of OSWorld-class tasks, measured, honestly, without
 claiming the OSWorld verdict.
+
+## 30. The carried-model walk on live pages — measured honestly, zero-scan warm path (2026-11-23)
+
+§28/§29 measured the Perfect-Algorithm loop on live pages — and its WARM and
+CONTROL arms both passed via instant RULE REPLAY (the stored plan executes on
+the fresh fixture, the goal is observed). The carried-model WALK — the
+within-kind transfer mechanism that §27 measured on the 3-peg stack (6/12 warm
+arms reached the goal through it) and that the archives measured honestly
+(§10: refused 0 edges across content — state_key keys are content-derived) —
+has never been measured on a live page. This turn is that measurement.
+
+Design (the §10 priors-only construction, honestly): TEACH on fixture A with no
+fresh instances offered — admission MUST REFUSE (no fresh to replay), so no
+rule is persisted; the learned PRIORS (transition model) are persisted, which
+is the durable form of one experience. The two warm arms each run against their
+own read-only copy of that memory:
+
+  WALK-D   fresh fixture D (different text/h1/title) — honest expectation: the
+           carried model refuses (0 edges, content-derived keys) -> full scan
+           re-derives -> PASS.
+  WALK-A   fixture A (same content) — honest expectation: the carried walk
+           reaches the goal edge-by-edge, verified by execution -> PASS.
+
+A probe defect found by measuring, fixed before this verdict: the walk arms
+originally shared one memory file. WALK-D's full-scan path (which it falls
+through to after the honest walk refusal) SAVES ITS OWN PRIORS — the arm's
+full scan silently overwrote the shared memory's priors, so the carried walk
+in the NEXT arm no longer had the TEACH model and explored 0 edges even on
+the same content. The honest fix: each warm arm receives its own read-only
+copy of the TEACH memory (shutil.copyfile per arm). The design is also true
+of §10/§27: the walk arm's full-scan priors-save goes to the arm's own file,
+never back to the teach store.
+
+Measured (probe `unseen_browser_walk_probe_20261123.py`, fixture A/D same DOM
+structure, different text content; cold scan budget 6; same discipline as
+§28 — content-exact predicate, live page read every time):
+
+  TEACH-NO-FRESH   PASS__PERFECT_ALGORITHM_RUN, LEARNED_AND_VERIFIED,
+                  admit REFUSED, persist False, plan [fill:#txt:abc, click:go],
+                  4 states / 8 transitions learned, 110.9 s.
+  WALK-D (content B)  OPEN__CARRIED_WALK_FAILED honestly — 0 edges, 1 act call,
+                  priors_used 8, cap 96 — then the full scan re-derived the
+                  plan (same plan) and the run PASSED (VERIFIED_NOT_PERSISTED,
+                  admission refused — no fresh instances offered), 124.2 s. Net: the carried walk does
+                  NOT carry across content on a live page, exactly as §10
+                  showed on the archives — the durable partner is the plan
+                  rule, never the transition model.
+  WALK-A (content A, CONTROL)  PASS__CARRIED_WALK_REACHED_GOAL — the carried
+                  model re-verified 5 edges against the live page (8 act
+                  calls, 2 resets), reached the goal, plan
+                  [fill:#txt:abc, click:go], outcome CARRIED_MODEL_WALK_REACHED,
+                  17.7 s — zero rule replay, zero scan, zero admission.
+
+Honest status: the carried walk on a live page is a REAL zero-scan path — it
+reaches the goal in 17.7 s vs. 110.9 s for TEACH cold and 124.2 s for WALK-D,
+and it is a HYPOTHESIS CHECKED BY EXECUTION, never trusted: every edge it
+explored was re-verified against the live page, and the walk returned nothing
+but what the page said. It carries within identical content only; across
+content it refuses honestly (0 edges), and the scan re-derives. That is the
+same split §10/§12/§13 measured for archives and towers: the plan rule
+generalizes (admitted on fresh variants), the transition model does not.
+NOT §6: no benchmark, no cross-kind transfer, no GUI close-out. Same honest
+boundary.
