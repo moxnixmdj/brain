@@ -197,6 +197,59 @@ class BrowserPageEnv:
     def action_names(self) -> list[str]:
         return list(self.actions)
 
+    def discover_affordances(self) -> dict[str, Any]:
+        """Read the live page's interactive surface and DERIVE the affordances.
+
+        Honestly:
+          - CLICKS are minted from the live DOM -- every visible button/link/
+            [role=button]/[role=link] with a non-empty label produces a
+            "click:<label>" action. Value-free: the label IS the text the env
+            would click, exactly the recon layer's convention. No inventory is
+            assumed -- every element is re-read live on every call.
+          - VALUE-BEARING inputs (form fields) are surfaced as observation-only
+            entries (tag/sel/placeholder/type), NEVER as fill actions: the
+            value is goal-specific and a discovered env cannot honestly mint
+            it. Minting one would be fabrication.
+        The return is the honest receipt; whether a caller acts on it is the
+        caller's choice.
+        """
+        state = self.state()
+        elements = (state or {}).get("elements") or []
+        clicks: list[str] = []
+        inputs: list[dict[str, Any]] = []
+        for el in elements[:80]:
+            tag = str((el or {}).get("tag") or "").lower()
+            role = str((el or {}).get("role") or "").lower()
+            label = str((el or {}).get("text") or (el or {}).get("aria") or "").strip()
+            is_clickable = tag in ("button", "a") or role in ("button", "link")
+            if is_clickable and label and not (el or {}).get("disabled"):
+                text = " ".join(label.split())[:200]
+                if text and f"click:{text}" not in clicks:
+                    clicks.append(f"click:{text}")
+            elif tag in ("input", "textarea", "select"):
+                # observation-only: the value is goal-specific, and the
+                # selector is caller-declared (the live read does not carry
+                # ids) — nothing here is minted as a fill action.
+                placeholder = str((el or {}).get("placeholder") or "").strip()
+                inputs.append({
+                    "tag": tag,
+                    "type": str((el or {}).get("type") or ""),
+                    "placeholder": placeholder,
+                    "name": str((el or {}).get("name") or "").strip(),
+                    "aria": str((el or {}).get("aria") or "").strip(),
+                })
+        return {
+            "schema": SCHEMA,
+            "authority": AUTHORITY,
+            "kind": self.kind,
+            "url": (state or {}).get("url"),
+            "title": (state or {}).get("title"),
+            "clicks": clicks,
+            "inputs": inputs,
+            "note": "discovered live; fill actions are caller-declared "
+                    "(their value is goal-specific and is never minted here)",
+        }
+
 
 def _live_elements(page) -> list[dict[str, Any]]:
     try:

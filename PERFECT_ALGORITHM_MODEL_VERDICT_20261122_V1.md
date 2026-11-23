@@ -1203,3 +1203,38 @@ redirect, in the fresh process.
 
 NOT §6: no benchmark, no new mechanism. The browser direction is now
 measured end-to-end in both shapes (single-page §33, multi-page §34).
+
+## 35. Affordance discovery on the live page — honest derivation, not fabrication (2026-11-23)
+
+§22/§25 doctrine: "scan everything in the environment." The loop itself still
+used a caller-declared action surface (the fill value is goal-specific). The
+recon layer (environment_scan_know_v1) already reads the DOM and reports
+affordances as a receipt — but nothing in the loop discovered the surface.
+§35 adds exactly one piece, and nothing more:
+
+  BrowserPageEnv.discover_affordances() — re-reads the live DOM on every
+  call and derives an honest receipt:
+    - clicks: "click:<label>" for every visible button/link/[role=button]/
+      [role=link] with a non-empty label — value-free; the label IS the text
+      the env would click (the exact CLICK_TEXT op).
+    - inputs: observation-only entries (tag/type/placeholder/name/aria) —
+      the value is goal-specific and is NEVER minted as a fill action here;
+      the selector is caller-declared (the live read does not carry ids).
+
+Measured (probe `unseen_browser_affordance_probe_20261123.py`, live page):
+
+  Fixture A: clicks ["click:click me", "click:go"], 1 input observed
+           (placeholder "your name", tag input, type text; no value/sel
+           minted), title "Discover A".
+  Fixture D (different content): same clicks (content-invariant structure),
+           title "Discover D" — the discovery tracks the live DOM, never a
+           stored fixture.
+  Empty page: clicks [], inputs [] — honest, not fabricated.
+  Declared action surface: unchanged (action_names() intact).
+
+Honest boundary: discovery is a receipt, not an authority. Fill actions
+remain caller-declared (the value is goal-specific and is never minted);
+the env still acts only on caller-declared actions. The honest §25 split
+(scan = affordance map; act = caller-declared) is unchanged — this turn only
+makes the affordance map derivable at runtime. NOT §6: no benchmark, no
+cross-kind transfer.
