@@ -764,3 +764,49 @@ building a plan rule admitted on fresh instances and replayed instantly. It is N
 the §18/§21 specialist twin (which gates on the demonstrated pair); it is the
 scan-level engine §17 found missing. §6 stays open and unclaimed: no GUI/browser,
 no hard benchmarks, no carried-model claim.
+
+## 24. The browser surface: bring-up and live-interaction probe (2026-11-23, measured)
+
+§23 closed the scan-level code-repair class. The verdict doc still owed an
+honest answer for the GUI/browser surface. This is that answer: the surface
+is **brought up and driven**, not packaged, not benchmarked, not §6-claimed.
+
+What was built/fixed this turn:
+
+- Chromium build: `sh canonical/runtime/browser_launch_v1.sh 9222` — npm
+  install `@sparticuz/chromium` + `ws`, decompress the bundled chromium from
+  `bin/chromium.br` (brotli) + the al2023/sw tarballs, swiftshader ICD file,
+  nohup headless=new on `--remote-debugging-port`. Chromium is live on 9222.
+- Fixture page served over localhost (`canonical/runtime/browser_probe_v1.html`,
+  served at `http://127.0.0.1:8791/probe.html`). The driver refuses `file://`
+  (allowlist http/https/chrome), so a real HTTP server is required.
+- Honest defect (uncommitted at first): `browser_v1.ensure()` refused loopback
+  hosts — SPKI key-pinning is meaningless for plain-HTTP localhost, and the
+  fixture could not be driven. Fixed with a loopback exception in `ensure()`:
+  if every host is in {127.0.0.1, localhost, ::1}, take the plain start path.
+- The repo's own CDP driver (`osworld_v21_browser_cdp_v1`) drives the page;
+  `browser_v1.state()` reports it (title/text/elements).
+
+Measured (probe: `browser_probe_20261123.py`, live Chromium + fixture, 17 s,
+zero model calls, zero network beyond localhost):
+
+  - browser_up: already running (ensure → start)
+  - load_page: ok (3 interactive elements — click me / input#txt / go)
+  - click_increments_counter: CLICK_TEXT "click me" → counter 0 → 1 (live DOM)
+  - fill_reverses_output: FILL input#txt "abc" → reversed output "cba"
+  - submit_reports_submitted_text: CLICK_TEXT "go" → done span "submitted:abc"
+  - late_element_appears: the 800 ms timeout element appears (APPEARED_LATER)
+  - refusal_is_honest: an op for a nonexistent element raises (Locator click
+    timeout) — no silent success
+
+  All 8 checks PASS. State()'s re-NAVIGATE resets the page (documented), so
+  live-page verification reads the DOM directly (fresh CDP connection), never
+  via state() after an op.
+
+Honesty: the browser is **interfaced and live-tested**: navigate + click +
+fill + submit + a post-timeout element, driven by the repo's own CDP driver
+through `browser_v1.act()`, verified by execution against the live page.
+This is NOT §6: no hard benchmark, no video generation, no CLI coding-agent
+prompts, no on-mission-pass, no GUI-history close-out. The §6 gate stays
+OPEN and unclaimed. It is the browser-half of the §0/§6 enumeration
+("about machine-used web", "over ") — nothing beyond that is claimed.

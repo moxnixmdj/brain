@@ -131,9 +131,17 @@ def ensure(hosts: list[str], port: str = PORT, timeout: int = 180) -> tuple[bool
     Pins can only be set at launch, so a new host costs one restart. Without
     the right pins a page cannot load at all, so this is what makes HTTPS
     work, not a security extra bolted on.
+
+    Loopback is a different case: the host is ON this machine, plain HTTP,
+    and pinning a key has no meaning (there is no trust gap to close). A
+    fixture page the loop must probe must not be refused as if it were an
+    untrusted TLS host.
     """
     hosts = [h for h in hosts if h]
     if not hosts:
+        return start(port=port)
+    loopback = {"127.0.0.1", "localhost", "::1"}
+    if all(h in loopback for h in hosts):
         return start(port=port)
     pins = set(_ACTIVE_PINS)
     for h in hosts:
