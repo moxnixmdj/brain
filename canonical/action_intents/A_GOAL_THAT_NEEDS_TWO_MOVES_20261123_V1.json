@@ -1,0 +1,476 @@
+{
+ "action_id": "A_GOAL_THAT_NEEDS_TWO_MOVES_20261123_V1",
+ "action_intent_id": "A_GOAL_THAT_NEEDS_TWO_MOVES_20261123_V1",
+ "action_kind": "REAL_CAPABILITY_ACQUISITION",
+ "action_summary": "Round 4 answered which door serves ONE move and named its own wall: a goal needing several moves IN ORDER was unanswered. The obvious plan was to call the search the tree already has, and it is wrong for a reason that was measured, not argued. `capability_planner` is a correct A* whose transition is ADD-ONLY (`facts | provides`), so no move can take anything away. Handed initial=plain:a, gzip requires plain:a provides archived:a, cp requires plain:a provides copy:a, goal=archived:a and copy:a, it returns ['gzip','cp'] -- and running that for real fails, because gzip consumed the file cp needed. The plan was IMPOSSIBLE, not suboptimal. The tree's other planner, `consequence_table_v1`, plans over whole states and is correct, and reports its own price: 0 of 52 solved with zero prior experience, because whole states do not transfer to a world with different filenames in it. So neither existing piece does the round-5 job. What does: the round-4 row is a CLASS of move, and one relation in it (LOT) is already a PRECONDITION -- 'RETAINED' says content could be read afterwards, so content was there to begin with. That makes a signature both a delta and a small set of conditions on a state, and conditions generalise where states do not. The plan is over four relation dimensions (NAMES, READABLE, CONTENTS, REMOVED), each owned by exactly one relation, with a real delete list. Measured: 23 doors collapse to 4 classes; the goal 'remove the subject and lose nothing' is met by NO single door in any of three unrelated worlds; one two-class plan (an adder then a remover) is found in all three; executed for real the forward order holds and the reverse cannot even run; and a goal outside the moves' reach is refused naming the missing fact. Nine designs were measured and killed on the way, each named in the receipt.",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "earlier_routes_exhausted_reason": "A second declaration reader, a GUI/DOM tier, and a room-inference search were each considered and rejected this round: the reader is one mechanism over shapes, the GUI tier needs a display this sandbox does not have, and inferring a room from a failure would be guessing where the measurement can state.",
+  "incremental_spend_usd": 0,
+  "independent_verification_completed": false,
+  "independent_verification_note": "Producer-run sandbox only: 15 new tests, 111 across the relevant surface; one join receipt (62 rows, 18/18 stable across 3 worlds, 60/60 held out, 61/62 leave-one-out) with its coverage control reported. No independent identity re-ran it.",
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md",
+   "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "VERIFIED_REUSABLE_CAPABILITY_GAIN",
+  "progress_evidence_paths": [
+   "canonical/runtime/goal_to_door_v1.py",
+   "canonical/tools/the_goal_picks_the_door_v1.py",
+   "canonical/tests/test_goal_to_door_v1.py",
+   "canonical/verification/THE_GOAL_PICKS_THE_DOOR_20261123_V1.json",
+   "intake/THE_GOAL_PICKS_THE_DOOR_20261123_V1.md"
+  ],
+  "route_class": "COMPOSE",
+  "scope_complete_discharge": false,
+  "terminal_achieved": false
+ },
+ "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::a goal and a door were recorded in different vocabularies, so nothing could say which of 76 measured doors served a request",
+ "canonical_base_commit": "866e778f0490c586853e15cb467a7f7a6036f836",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": {
+  "claim": "a sequence of measured move classes, with a delete list, reaching a goal no single door reaches",
+  "unlocks": "a request that needs two steps can be planned in an environment nobody prepared"
+ },
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "a move was a DELTA, and a delta does not say what a state was, so a second move's precondition could not be checked against the first move's result",
+ "date": "2026-11-23",
+ "expected_parent_change": "a goal needing several moves IN ORDER is answered by a plan whose every step is a measured class of move.",
+ "expected_parent_frontier_change": "A goal that no single door satisfies is planned as a SEQUENCE of measured move classes, over relation dimensions rather than filenames, and the plan is refuted against the real tree in both orders. The classes transfer across worlds because the unit is a class of move, not a state.",
+ "explicit_user_authorization": [
+  "What if we make a perfect algorithm and that is basically our model?",
+  "All he should do is basically go into any new arbitrary environment in the computer and he doesn't know anything about anything",
+  "All he should do basically is ask the right question and know all of the things that he should know about, from instant knowledge",
+  "The saving in the memory must not be only his action ... we should do generalization or something",
+  "should he be goal-directed or should he learn everything in all the environments",
+  "best part is no part",
+  "the most advanced coding actions ... let him experience them once and then he will learn them",
+  "our own model only, zero model calls at runtime"
+ ],
+ "falsification_condition": "The claim is false if a planned sequence fails when executed on the tree it was planned for, OR if the reverse order also satisfies the goal, OR if a single measured door satisfies the goal in some world, OR if the same class sequence is not found across worlds.",
+ "generic_repair_from_single_probe": false,
+ "governance_change": false,
+ "highest_leverage_now": true,
+ "honest_limits": [
+  "The plan is shortest in MOVE COUNT, not in cost: no wall-clock or money model is applied to a step.",
+  "The classes come from four programs. A move class no program here implements cannot be planned with; the planner refuses rather than inventing it.",
+  "CONTENTS and READABLE are clamped by NAMES, so a world where a name outlives its content must be stated with `world(readable=...)`; the planner will not discover that state by itself.",
+  "A `touch`-shaped operation shares the copy's signature (CARD INCREASED, LOT RETAINED), so it is mis-modelled as a copy. No signature over the six relations separates them, and the limit is stated rather than patched with a tool name.",
+  "A goal is still stated BY THE CALLER as dimensions. Nothing here reads a request in words and produces that statement; doing so is the next wall, not a solved problem.",
+  "Producer-run sandbox only. No independent identity has re-run any of it."
+ ],
+ "incremental_spend_usd": 0,
+ "intentional_route_race": false,
+ "live_challenger_frontier_discovery_required": true,
+ "load_bearing_primary": {
+  "constructive_gap_for_open_obligation_ids": [
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "expected_obligation_discharge_lcb": "0",
+  "expected_obligation_unlock_lcb": "1/81",
+  "interpretation": "OSWorld 2.0's authors diagnose frontier failure as weak recovery and maintenance of hidden state. A join that reads a goal as a demanded move of named relations, and knows which measured door produces that move, is the mechanism for choosing an action from state rather than guessing one. No benchmark task was run; no discharge is claimed.",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "0.5",
+  "wall_clock_cost_ub": 1
+ },
+ "measured_effect": {
+  "all_trees_restored": true,
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "doors_measured": 23,
+  "forward_holds_all_worlds": true,
+  "model_calls": 0,
+  "move_classes": 4,
+  "parameters": 0,
+  "refusals_measured": 1,
+  "reverse_holds_any_world": false,
+  "seconds": 1.08,
+  "single_door_answers": 0,
+  "worlds": 3
+ },
+ "next_step": "The plan is shortest in MOVE COUNT and is over classes measured on four programs; a class no program here implements cannot be planned with, and the planner refuses rather than inventing it. The next wall is that a goal is still stated by the caller as dimensions (NAMES/READABLE/CONTENTS/REMOVED); nothing yet reads a request in words and produces that statement without a model, and the honest test is a goal whose wording the vocabulary cannot express at all.",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "probe_specific": false,
+ "progress_class": "VERIFIED_REUSABLE_CAPABILITY_GAIN",
+ "progress_evidence_paths": [
+  "canonical/runtime/a_goal_that_needs_two_moves_v1.py",
+  "canonical/tools/a_goal_that_needs_two_moves_v1.py",
+  "canonical/tests/test_a_goal_that_needs_two_moves_v1.py",
+  "canonical/verification/A_GOAL_THAT_NEEDS_TWO_MOVES_20261123_V1.json",
+  "intake/A_GOAL_THAT_NEEDS_TWO_MOVES_20261123_V1.md"
+ ],
+ "real_outcome": "23 census doors measured into 4 move classes; no single door satisfies the goal in any of 3 unrelated worlds; one 2-class plan found in all 3 and identical across them; executed on disk the forward order holds (a name removed, no content lost) and the reverse order fails because the delete left nothing to copy; an unreachable goal refused with the missing fact named; 0 model calls, 0 parameters, 1.1 s. Found and measured a round-4 defect on the way: the round-4 seed omitted in.json, the file the census binds cp and mv to, so those two doors aborted on a missing operand and produced ZERO rows -- round 4 reported 4 programs and measured 2.",
+ "recursive_obs": {
+  "canonical_base_commit": "866e778f0490c586853e15cb467a7f7a6036f836",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "ranking doors by per-content conditions (measured 0.4677 precision, replaced)",
+   "the five relations alone (commutative; could not separate a rename from a compression)"
+  ],
+  "expected_parent_level_state_change": "A goal stated as a move of the project's relations can be joined to a door by measurement alone: the door's saved row is its relation signature, stable across three unrelated worlds, and it answers another program's requests.",
+  "obs_blocker": {
+   "delete_bypass_substitute_options": [
+    "delete the signature and store traces (rejected: exact experiences are the user's stated objection)",
+    "bypass by trusting the goal's words (rejected: that is a model call)",
+    "substitute a sixth observable (rejected: LOT needs no new observation)"
+   ],
+   "intrinsic_or_path_specific": "INTRINSIC: the five relations are functions of a SET, so they cannot express the order of a transition",
+   "surviving_causal_blocker": "no relation expressed what a STEP did, only what a STATE is"
+  },
+  "obs_capability": {
+   "capability_work_deleted": [
+    "content-level matching",
+    "any ranking by identity or name"
+   ],
+   "existing_inherited_routes_checked": "relation_value, effect(), the five relations, perfect_algorithm_v1.plan and environment_learning_v1.shortest_plan were all read; the planner was NOT rebuilt, and is named as the next wall",
+   "external_existing_routes_checked": "affordance-prediction work in 2026 (DynAfford/ADAPT, CreativityBench) predicts affordances with a VLM; prediction is what we can avoid, because every door here was already RUN",
+   "surviving_gap": "sequences of moves, and any goal about meaning"
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "a higher answer rate",
+    "a larger number of doors"
+   ],
+   "real_outcome": "a request is joined to a door whose measured move produces it",
+   "surviving_necessity": "the agent must know which door serves a goal before it can act"
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "signature, join, selectivity and held-out scoring in one module",
+   "downstream_work_to_delete_or_supersede": "the census's coarse change_kind is kept for reporting; the join reads the relation signature instead",
+   "fresh_reuse_plan": "the signature rides on the census's existing rows; nothing re-runs"
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": "no cache: 62 rows re-measured in 1.8 s",
+   "search_stop_decision": "stopped at one invented relation because a second would have been fitted to these four programs"
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "each either failed a measurement or needed parameters or a model",
+   "routes_ranked": [
+    {
+     "rank": 1,
+     "route": "SIGNATURE_OVER_THE_PROJECTS_RELATIONS_PLUS_ONE_NON_COMMUTATIVE_RELATION",
+     "why": "set membership over a world-stable signature"
+    },
+    {
+     "rank": 2,
+     "route": "PER_CONTENT_CONDITIONS",
+     "why": "measured: 0.4677 precision"
+    },
+    {
+     "rank": 3,
+     "route": "A_LEARNED_SCORER_OVER_DOORS",
+     "why": "parameters fitted to 62 rows"
+    },
+    {
+     "rank": 4,
+     "route": "A_MODEL_TO_READ_THE_REQUEST",
+     "why": "forbidden and unnecessary"
+    }
+   ]
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "the oracle is the program's own two attested states; the 15 tests re-derive the relations on fixtures, and the receipt persists the run"
+  },
+  "real_outcome": "62 measured rows over 4 real programs and 4 project machines; 18/18 signatures stable across 3 worlds; 60/60 held-out requests answered from other programs; 61/62 leave-one-out.",
+  "required_capability": "state a goal as a demanded move of relations and match it to a door measured to make that move",
+  "route_frontier": {
+   "canonical_base_commit": "5abc439a361cf180422ba804d938c8f054f2fd9b",
+   "challenger_routes": [
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "cannot transfer across contents",
+      "CORRECTNESS": "0.4677 precision, measured",
+      "INCREMENTAL_COST": "none",
+      "RELIABILITY": "low",
+      "VERIFIABILITY": "equal",
+      "WALL_CLOCK": "equal"
+     },
+     "evidence": [
+      "measured leave-one-out precision 0.4677 on 62 rows",
+      "0.0 on the held-out mv requests"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_GOAL_PICKS_THE_DOOR_20261123_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "PER_CONTENT_CONDITION_MATCHING"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "coarse",
+      "CORRECTNESS": "cannot separate a rename from a delete",
+      "INCREMENTAL_COST": "none",
+      "RELIABILITY": "low",
+      "VERIFIABILITY": "equal",
+      "WALL_CLOCK": "equal"
+     },
+     "evidence": [
+      "all five are commutative, so mv and rm of one file read identically",
+      "measured: 3 distinct move classes over 62 rows"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_GOAL_PICKS_THE_DOOR_20261123_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "THE_FIVE_RELATIONS_ALONE"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "no more than membership",
+      "CORRECTNESS": "unverifiable on 62 rows",
+      "INCREMENTAL_COST": "fitted parameters",
+      "RELIABILITY": "unknown",
+      "VERIFIABILITY": "lower",
+      "WALL_CLOCK": "slower"
+     },
+     "evidence": [
+      "62 rows would fit any scorer perfectly and prove nothing",
+      "the constraints forbid a parameter fitted to the measurement"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_GOAL_PICKS_THE_DOOR_20261123_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "A_LEARNED_SCORER_OVER_DOORS"
+    }
+   ],
+   "checked_at_utc": "2026-11-23T21:37:05+00:00",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "NO_JOIN_AT_ALL__76_DOORS_AND_NO_WAY_TO_CHOOSE",
+   "max_age_hours": 2,
+   "negative_search_summary": "no existing mechanism joins a goal to a door using a relation signature measured by execution; the 2026 affordance literature predicts with a VLM, and the project's own planner assumes the goal state was already observed",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "goal conditioned affordance selection from measured transition effects"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "tool effect prediction from help text and execution"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "state change classification relations for filesystem actions"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "2026 agent affordance benchmark unspecified preconditions ADAPT"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "selected_route": "SIGNATURE_OVER_THE_PROJECTS_RELATIONS_PLUS_ONE_NON_COMMUTATIVE_RELATION",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-11-23T21:37:05+00:00",
+    "execution_dependencies": [
+     {
+      "dependency": "local Python 3 runtime",
+      "evidence": [
+       "111 tests pass across the relevant surface on this host"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "the four programs whose doors are joined",
+      "evidence": [
+       "cp, mv, rm and gzip present; 54 census door rows measured"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "no network at join time",
+      "evidence": [
+       "the join made zero network calls"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "NETWORK_ENDPOINT",
+      "observed_at_utc": "2026-11-23T21:37:05+00:00",
+      "required": false,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "VOLATILE"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "max_age_hours": 2,
+    "selected_route": "SIGNATURE_OVER_THE_PROJECTS_RELATIONS_PLUS_ONE_NON_COMMUTATIVE_RELATION",
+    "status": "READY"
+   },
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/tools/the_vocabulary_is_the_artifact_v1.py (relation_value, five relations)",
+     "canonical/runtime/tool_census_v1.py (the 76 doors)",
+     "canonical/runtime/environment_learning_v1.py (shortest_plan, reused-not-rebuilt)"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "DynAfford/ADAPT (ACL 2026): affordance prediction via a VLM",
+     "CreativityBench (2026): affordance reasoning is model-mediated"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "no package provides a goal-to-door join over measured effects"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "the programs' own --help declarations on this host",
+     "the project's A1-A5 verdict on the five relations"
+    ]
+   },
+   "unresolved_plausible_dominators": []
+  },
+  "routes_considered": [
+   "REUSE: the project's relation_value for five relations (selected)",
+   "COMPOSE: five relations plus one derived from the step (selected)",
+   "per-content conditions (measured and rejected: 0.4677)",
+   "a learned scorer over doors (rejected: a parameter fitted to 62 rows)",
+   "a model to read the request (forbidden and unnecessary)"
+  ],
+  "selected_surviving_route": "SIGNATURE_OVER_THE_PROJECTS_RELATIONS_PLUS_ONE_NON_COMMUTATIVE_RELATION",
+  "stop_condition": "A planned sequence is executed and reaches its goal in a world the classes were never measured in, re-run by an independent identity; until then the producer measurement stands alone.",
+  "why_selected_route_is_fastest_sufficient": "the match is set membership over a signature that is stable across worlds, so no fitting, no parameters and no model call is involved"
+ },
+ "required_capability": "a sequence of measured moves that reaches a goal no single move reaches",
+ "route_class": "COMPOSE",
+ "route_id": "MEASURE_THE_CLASS_THEN_SEQUENCE_THE_CLASSES",
+ "route_order_walk": {
+  "ADAPT": "The state a plan carries is a relation vector, so it adapts to any world size without being re-measured.",
+  "BYPASS": "Not used. Bypassing the delete list is what made the existing planner return impossible plans.",
+  "COMPOSE": "Selected: the round-4 signature is reused as the move class, and one relation in it (LOT) is read as a precondition so the class has a requires() at all.",
+  "INVENT": "Not used. A class nothing was measured for is refused, not synthesised."
+ },
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "selected_route": "PLAN_OVER_RELATION_DIMENSIONS_WITH_A_DELETE_LIST",
+ "selected_surviving_route": "PLAN_OVER_RELATION_DIMENSIONS_WITH_A_DELETE_LIST",
+ "selectivity_note": "the control that keeps this honest is the REVERSE order: a two-step answer that both orders satisfied would not be a sequence at all",
+ "status": "PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
+ "stop_condition": "A planned sequence is executed and reaches its goal in a world the classes were never measured in, re-run by an independent identity; until then the producer measurement stands alone.",
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "truth": {
+  "achieved": false,
+  "what_is_not": "reading a request in words; any goal about meaning; cost-aware planning; any benchmark score; independent verification",
+  "what_is_real": "a goal no single door satisfies is planned as a sequence of measured move classes and refuted against the real tree in both orders, in three unrelated worlds"
+ },
+ "user_authorized_governance_change": false,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "currentness": {
+   "accepted_families": 5,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "No truth obligation is discharged by this round. The loop is a mechanism \u2014 scan, right question, plan, verify, generalize, admit, persist, replay \u2014 which is obligation-adjacent; the honest statement is that this changes the existence of an honest goal-directed loop, not any open obligation.",
+  "target_truth_obligations": [
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [
+    {
+     "git_blob_sha": "478f3cdef55518cfec98104ca6ce9c9e7e490b1d",
+     "path": "canonical/verification/PERFECT_ALGORITHM_RECEIPT_20261122_V1.json"
+    }
+   ],
+   "decisive_question": "Does the loop actually persist a generalization from fresh evidence \u2014 or does it claim to when it only shows one goal-reaching trace?",
+   "falsifier_id": "THE_LOOP_PERSISTED_A_RULE_FROM_ONE_EXPERIENCE",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "",
+   "proposal_id": "PERFECT_ALGORITHM_COMPOSED_LOOP_V1"
+  }
+ },
+ "verification": {
+  "independent_verification": "OPEN",
+  "model_calls": 0,
+  "parameters": 0,
+  "receipt": "canonical/verification/A_GOAL_THAT_NEEDS_TWO_MOVES_20261123_V1.json",
+  "tests": "canonical/tests/test_a_goal_that_needs_two_moves_v1.py"
+ },
+ "weakens_existing_guard": false
+}
