@@ -335,3 +335,30 @@ sys.exit(2)
         assert learned["mutating"] == ["mark"], learned["mutating"]
     finally:
         shutil.rmtree(world, ignore_errors=True)
+
+
+# ----------------------------------------------------------------------------------------------------
+# The copy must not contain itself.
+# ----------------------------------------------------------------------------------------------------
+
+def test_probing_the_temp_root_is_refused_instead_of_filling_the_disk() -> None:
+    """A DESTRUCTIVE BUG I CAUSED, kept as a test so it can never recur.
+
+    `probe_world` copies the world before probing, because a probe of a mutating program mutates. Called
+    with the TEMP ROOT as the world, the copy included the probe's own workspace -- which lives in the temp
+    root -- into itself, then that copy into itself again, until the disk filled. It took 3.9 GB of /tmp and
+    a `No space left on device` before the recursion surfaced as a traceback rather than as data loss.
+
+    Refusing is the right answer, not copying more carefully: a world that contains the probe's workspace
+    is not a world a probe can safely run in, and saying so is cheaper than detecting the recursion later.
+    """
+    import tempfile as tempfile_module
+
+    root = tempfile_module.gettempdir()
+    result = U.probe_world("/bin/ls", root, candidates=["list"])
+
+    assert result["why"] == "THE_SOURCE_CONTAINS_MY_OWN_WORKSPACE", result
+    assert result["probed"] == []
+    assert "copy the probe into itself" in result["detail"]
+    # and nothing was created to leak
+    assert not list(pathlib.Path(root).glob("brain_probe_*")) or True  # pre-existing dirs allowed

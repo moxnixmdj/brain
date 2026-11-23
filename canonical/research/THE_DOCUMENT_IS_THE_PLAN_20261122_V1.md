@@ -5559,3 +5559,52 @@ no candidates and learned nothing. The failure was correct behaviour discovered 
 
 The third row is real and untested: everything here assumes the program's dispatch is readable text.
 A stripped binary is not, and this module says so rather than pretending `ast` covers it.
+
+## §A101 — I filled the disk, and the reason is worth more than the fix
+
+### What I did
+
+§A100 claimed, three times, that "a stripped binary gives nothing". I finally tested it. `/bin/ls` yielded
+`THE_SOURCE_IS_NOT_READABLE_PYTHON` — the claim was true. Then I used `/tmp` as the *world*, and
+`probe_world` copied it. `/tmp` contains the probe's own workspace. The copy contained itself, then
+contained that copy, and so on until the disk was full: **3.9 GB of `/tmp`**, failing with
+`No space left on device` from inside `shutil.copytree`.
+
+### Why the bug was possible
+
+Two separate mistakes, and the second is the interesting one.
+
+1. **A test that reached outside its fixture.** Every other test uses a `tempfile.mkdtemp()` world. This
+   one used `/tmp` itself — a directory that is not mine, contains everything, and (critically) contains
+   the probe's own scratch space. A test that uses the real world as a fixture is not a bigger test; it is
+   an unowned one.
+2. **A copy with no notion of what it must not copy.** `copytree` was given a source and a destination and
+   never asked whether one contained the other. The recursion is not a subtle bug: it is the direct
+   consequence of copying a tree into a place inside itself, and it will do that every time it is asked.
+
+### The fix, and why refusing beats copying more carefully
+
+    if source_path == probe_root or source_path in work.parents:
+        return ... THE_SOURCE_CONTAINS_MY_OWN_WORKSPACE ...
+
+Plus a second, independent protection inside the ignore callback: skip the destination and any
+`brain_probe_*` directory. Two guards because they fail differently — the first refuses the *intent*, the
+second survives a symlink or a path I did not anticipate.
+
+Refusing is right rather than "copying more carefully": **a world that contains the probe's workspace is
+not a world a probe can safely run in.** Detecting the recursion later means detecting it after the damage,
+which is what happened.
+
+### The honest part
+
+This is the first defect in this thread that damaged the machine rather than merely reporting something
+wrong. It was found by testing a claim I had repeated without testing, which is exactly the discipline the
+project asks for and exactly the discipline I had been skipping: **§A100's central claim was asserted three
+times before it was ever run.**
+
+| claim | times stated | times tested |
+|---|---|---|
+| "a stripped binary gives nothing" | 3 | 1, and it held |
+| "the copy protects the original" | 2 (§A98, §A99) | 1, and it did **not** hold until fixed |
+
+Both are now tests. The second cost 3.9 GB to learn.

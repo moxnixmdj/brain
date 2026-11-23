@@ -198,7 +198,35 @@ def probe_world(program: str, source: str | pathlib.Path, *,
     work = pathlib.Path(tempfile.mkdtemp(prefix="brain_probe_"))
     world = work / "world"
     source_path = pathlib.Path(source).resolve()
-    shutil.copytree(source, world, dirs_exist_ok=True, ignore=shutil.ignore_patterns("__pycache__"))
+
+    # THE COPY MUST NOT CONTAIN ITSELF. Measured 2026-11-23: called with `/tmp` as the world, this copied
+    # /tmp -- including the probe's OWN temp directory, which is inside /tmp -- into itself, then that copy
+    # into itself again, until the disk filled. Two protections, both cheap:
+    #   1. refuse a source that contains the temp area this function creates in
+    #   2. skip any directory that is the destination or already a probe workspace, so a recursive copy
+    #      cannot recurse
+    probe_root = pathlib.Path(tempfile.gettempdir()).resolve()
+    if source_path == probe_root or source_path in work.parents:
+        shutil.rmtree(work, ignore_errors=True)
+        return {"schema": SCHEMA, "program": str(program), "probed": [],
+                "why": "THE_SOURCE_CONTAINS_MY_OWN_WORKSPACE",
+                "detail": "probing %s would copy the probe into itself; use a directory that does not "
+                          "contain temporary workspaces" % (source_path,),
+                "verbs_learned": [], "arity": {}, "mutating": [], "unknown": [],
+                "unreadable": [], "skipped_candidates": []}
+
+    def _skip(directory: str, names: list[str]) -> set[str]:
+        ignored = {"__pycache__"}
+        for name in list(names):
+            candidate = pathlib.Path(directory) / name
+            try:
+                if candidate.resolve() == work or candidate.name.startswith("brain_probe_"):
+                    ignored.add(name)
+            except OSError:
+                ignored.add(name)
+        return ignored
+
+    shutil.copytree(source, world, dirs_exist_ok=True, symlinks=True, ignore=_skip)
 
     # THE COPY MUST CONTAIN THE PROGRAM, AND THE PROBE MUST RUN THAT ONE.
     # Measured 2026-11-23: the program was resolved from the ORIGINAL tree, so probing executed the real
@@ -256,8 +284,12 @@ def probe_world(program: str, source: str | pathlib.Path, *,
     signature = unknown_verb_signature(program, world=world, env=env, timeout=timeout)
     before = state()
     results: list[dict[str, Any]] = []
+    #: candidates the caller offered that were skipped before probing, and why -- so a caller who supplies
+    #: `--version -l` is told the list was filtered rather than told nothing was obtained
+    skipped: list[str] = []
     for verb in candidates:
         if _FLAGLIKE.match(str(verb)):
+            skipped.append(str(verb))
             continue
         learned = probe_verb(program, str(verb), world=world, env=env, signature=signature,
                              timeout=timeout)
@@ -266,6 +298,7 @@ def probe_world(program: str, source: str | pathlib.Path, *,
         results.append(learned)
     known = [r for r in results if r.get("known") is True]
     return {"schema": SCHEMA, "program": reported_program, "probed": results,
+            "skipped_candidates": skipped,
             "no_such_verb_signature": {"exit": signature.get("exit"),
                                        "said": ((signature.get("err") or signature.get("out")) or "")
                                                .strip()[:80]},
@@ -307,7 +340,20 @@ def learn_interface(program: str, source: str | pathlib.Path, *,
         result["why"] = "VERBS_LEARNED_NONE_CHANGED_THE_WORLD"
     else:
         result["enough_to_act"] = False
-        result["why"] = "NO_DISCRIMINATION" if result["unreadable"] else "NO_VERB_ACCEPTED"
+        if not result.get("probed"):
+            # NOTHING WAS EVER TRIED. Measured 2026-11-23 on /bin/ls: the source is not readable Python,
+            # so no candidate was obtained, and the report said `NO_VERB_ACCEPTED` -- which reads as "the
+            # program rejected everything" when the truth is "nothing was asked". Two different facts, and
+            # a caller deciding whether to supply candidates needs the right one.
+            result["why"] = "NO_CANDIDATE_WAS_EVER_OBTAINED"
+            result["detail"] = origin.get("detail") or origin.get("why")
+            if result.get("skipped_candidates"):
+                result["why"] = "EVERY_CANDIDATE_WAS_A_FLAG"
+                result["detail"] = ("a verb is a bare word; flags were offered: %s"
+                                    % result["skipped_candidates"][:6])
+            result["what_would_help"] = "supply candidates=, or a program whose dispatch is readable text"
+        else:
+            result["why"] = "NO_DISCRIMINATION" if result["unreadable"] else "NO_VERB_ACCEPTED"
     return result
 
 
