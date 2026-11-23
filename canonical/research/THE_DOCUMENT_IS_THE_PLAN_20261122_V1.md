@@ -2451,3 +2451,49 @@ case come out right.
 untested is a request that needs **two programs in sequence** — find the file, then archive it —
 where the output of one page's command is the input of another's. Nothing in the mechanism forbids
 it; `grep`'s help documents `-l` and `tar`'s documents `-T`, and neither page says they compose.
+
+### A61 — two real defects found by pointing the planner at `grep`
+
+A60 named the next bottleneck as two programs in sequence. Reaching for it exposed something more
+basic and worse, on a single program. Both defects were found on **real `/usr/bin/grep`**, not a
+fixture, and neither is about composition.
+
+**Defect 1 — an `unbound` value was printed into the command line.** The composed plan for
+
+    Find every file in /tmp/compose whose contents mention alpha
+
+was `grep /tmp/compose "in /tmp/compose whose contents mention alpha"`. The second argument is the
+sentence's own tail, passed as a search pattern. The same plan object carried that item with
+`"role": "unbound"` — the plan recorded that the value had no place and then placed it. `_render`
+treated every role that was not a slot as a positional, and `unbound` fell through that gap.
+
+Whatever a plan cannot place, it does not print. A command that says less than the request is
+honest; one that puts the request's prose into a flag's mouth is not. Now `unbound` is skipped in
+`_render` like `redirect` and `stdin_from`, and a test pins the invariant against the real program.
+
+**Defect 2 — a path was placed in the flags' slot.** `grep [OPTION]... PATTERNS [FILE]...` is
+reported by `positional_grammar` as `['option', 'patterns', 'file']`, and a single path was placed
+at index 0 — `means: "option"`, the place where *the flags go*. Both real places stayed empty, and
+the plan was `grep /etc/hosts`: a search for a pattern literally named `/etc/hosts` in whatever
+arrives on stdin. A place that takes no argument is now skipped, never occupied.
+
+**Attempted and reverted, twice, on the way — both were guesses.**
+
+* Extending `spare` with leftover `unclaimed` words so that `localhost` could fill `PATTERNS`.
+  It bound `etc` (a fragment of `/etc/hosts`) and, on the other sentence, put the prose back. A
+  word list of connectives (`contain`, `whose`, …) is exactly the kind of table this project
+  forbids, and it did not work anyway.
+* The same idea with an `open_places` guard, which left a dangling reference and a crash.
+
+**The real gap, stated exactly.** `localhost` and `alpha` are unquoted nouns. The extractor makes
+values of quoted words, paths and numbers — not of bare nouns — so no value exists to fill
+`PATTERNS`, and the plan drops the pattern and reports incomplete. That report is honest, which is
+why nothing is broken: `grep /etc/hosts` with `complete: False` says "I could not place
+`localhost`". What is missing is the licence to treat a bare leftover noun as an argument in a
+place the usage line names. The document does declare the place; it does not declare that
+`localhost` belongs in it. That is the same shape as A54's `alice`/`--user` and A58's
+`deployment`/`--service`, and it will not be closed by a fourth attempt at weights.
+
+**Verified:** 75 tests; 12 effect tasks by effect under `PYTHONHASHSEED` 7/99/default; the unseen
+`vaultctl` 6/6; and on real programs `ls /tmp`, `sort /tmp/compose/a.txt`,
+`tar -cf backup.tgz /tmp/data` all still complete.

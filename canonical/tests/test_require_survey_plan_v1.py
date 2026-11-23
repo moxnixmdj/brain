@@ -1436,3 +1436,30 @@ def test_a_program_with_no_command_for_the_act_says_so_instead_of_improvising():
                     "List the contents of the archive backup.tgz."):
         plan = R.require_survey_plan("tar", request, probes=10)
         assert plan["complete"] is True, (request, plan["refusals"])
+
+
+def test_a_value_the_planner_could_not_place_is_never_written_into_the_command():
+    """An `unbound` item is the plan saying "this value has no place here" -- and it was printed.
+
+    Measured on real `grep`: "Find every file in /tmp/compose whose contents mention alpha"
+    produced `grep /tmp/compose "in /tmp/compose whose contents mention alpha"`. The second
+    argument is the sentence's own tail, taken as a search pattern. The same plan carried the item
+    with `"role": "unbound"`, so the plan contradicted itself in a single line: it recorded that
+    the value could not be placed and then placed it.
+
+    This is the invariant: whatever a plan cannot place, it does not print. A command that says
+    less than the request is honest; one that puts the request's prose into a flag's mouth is not.
+    """
+    probe = R.require_survey_plan(
+        "grep", "Find every file in /tmp/compose whose contents mention alpha.", probes=10)
+    for candidate in probe["plans"]:
+        for item in candidate.get("bound") or []:
+            if item.get("role") == "unbound":
+                assert str(item.get("value")) not in " ".join(candidate["argv"]), \
+                    f"an unplaceable value was printed: {candidate['argv']}"
+        # No argument may be a fragment of the instruction itself.
+        for argument in candidate["argv"][1:]:
+            assert not (len(str(argument).split()) > 3
+                        and str(argument) in "Find every file in /tmp/compose whose contents "
+                                             "mention alpha."), \
+                f"the request's own prose became an argument: {candidate['argv']}"

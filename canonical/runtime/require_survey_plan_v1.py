@@ -1664,8 +1664,15 @@ def _render(tool: str, prefix: Sequence[str], operation: Mapping[str, Any] | Non
     for item in bound:
         if item["role"] in ("path_slot", "value_slot"):
             slots.extend([str(item["option"]), str(item["value"])])
-        elif item["role"] in ("redirect", "stdin_from"):
-            continue  # the shell carries these, never the program's argument list
+        elif item["role"] in ("redirect", "stdin_from", "unbound"):
+            # `unbound` is the planner saying, in the same breath, "this value has no place in
+            # this command". Writing it out as an argument contradicts that statement and makes
+            # the command mean something the request never asked for. Measured on real `grep`:
+            # "Find every file in /tmp/compose whose contents mention alpha" rendered as
+            # `grep /tmp/compose "in /tmp/compose whose contents mention alpha"` -- a whole prose
+            # fragment, the sentence's own tail, passed as a search pattern. The value was marked
+            # unbound by the very plan that then printed it.
+            continue
         else:
             index = item.get("place_index")
             placed.append((len(positional) if index is None else int(index),
@@ -2530,7 +2537,15 @@ def _positional_readings(values: Sequence[Mapping[str, Any]],
     readings: list[list[Mapping[str, Any]]] = []
 
     def place(i: int) -> str:
-        return picture[i] if picture and i < len(picture) else ""
+        # `option` is where the *flags* go, never an argument. Indexing the picture directly put a
+        # lone path in it: `grep [OPTION]... PATTERNS [FILE]...` arrives as ['option','patterns',
+        # 'file'], so the first object landed at 'option', both real places stayed empty, and the
+        # plan was `grep /etc/hosts` -- a search for a pattern named /etc/hosts in the files on
+        # stdin. A place that takes no argument is skipped rather than occupied.
+        if not picture:
+            return ""
+        rest = [p for p in picture if str(p).strip().lower() not in ("option", "options")]
+        return str(rest[i]) if i < len(rest) else ""
 
     if named:
         by_role = sorted(named, key=lambda v: (0 if v.get("role") == "product" else
@@ -3198,6 +3213,16 @@ def plan(requirement: Mapping[str, Any], tree: Mapping[str, Any],
                                         nodes[deepest].get("usage") or {}):
         bound = list(reading) + [{"role": "value_slot", "option": str(v["value_of"]),
                                   "value": str(v["value"])} for v in claimed_values]
+        # A bare word the request leaves over can still be an argument, and the *usage line*
+        # says so. `grep [OPTION]... PATTERNS [FILE]...` declares three places, one of them
+        # named PATTERNS; a request saying "show the lines of /etc/hosts that contain
+        # localhost" supplies the FILE and leaves `localhost` over. Nothing quoted it and it is
+        # not a path, so no value was ever made of it, and the plan dropped the pattern -- a
+        # command that searches for nothing.
+        #
+        # The licence is the document's: the place is printed and named, and it is the only
+        # unfilled place. When more than one named place is free there is a choice, and a choice
+        # made by guessing is what this project refuses.
         for extra in spare:
             holder = next((o for o in _product_slots(here_options)
                            if slot_kind(o) == "number"), None)
