@@ -1,0 +1,83 @@
+{
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "date": "2026-11-22",
+  "honest_notes": [
+    "the admitted rule replays instantly on a repeat goal of the same family",
+    "the instant replay does NOT touch the scan: it never learned anything new",
+    "priors are STILL saved \u2014 they are observed facts from THIS run",
+    "identical-shape instance is the one where the plan is instance-invariant; grid-world-style goals refuse honestly"
+  ],
+  "instance_a": {
+    "admit_rows": [
+      {
+        "instance_id": 0,
+        "verdict": "REACHED"
+      },
+      {
+        "instance_id": 1,
+        "verdict": "REACHED"
+      }
+    ],
+    "admit_verdict": "ADMIT",
+    "outcome": "LEARNED_AND_VERIFIED",
+    "plan_sketch": [
+      "d1",
+      "d2",
+      "d1",
+      "d2",
+      "d0",
+      "d2",
+      "d0",
+      "d2",
+      "d0",
+      "d0",
+      "d2",
+      "d0",
+      "d2",
+      "d0",
+      "d2",
+      "d2",
+      "d0",
+      "d2"
+    ],
+    "priors_saved": "PASS__PRIORS_SAVED",
+    "priors_used": 0,
+    "rule_id": "ga-815d396565016cfb",
+    "rule_persisted": "PASS__SAVED_TO_MEMORY",
+    "status": "PASS__PERFECT_ALGORITHM_RUN"
+  },
+  "instance_b_repeat_goal": {
+    "memory_replay": {
+      "plan_length": [
+        "d1",
+        "d2",
+        "d1",
+        "d2",
+        "d0",
+        "d2",
+        "d0",
+        "d2",
+        "d0",
+        "d0",
+        "d2",
+        "d0",
+        "d2",
+        "d0",
+        "d2",
+        "d2",
+        "d0",
+        "d2"
+      ],
+      "rule_id": "ga-815d396565016cfb",
+      "status": "PASS__REPLAY_REACHED_GOAL"
+    },
+    "outcome": "INSTANT_RECALL",
+    "rule_id_served": "ga-815d396565016cfb",
+    "scan_ran": false,
+    "status": "PASS__REPLAY_FROM_MEMORY"
+  },
+  "schema": "PROJECT_BRAIN_PA_REPLAY_RECEIPT_V1",
+  "stored_rules_after": [
+    "ga-815d396565016cfb"
+  ]
+}

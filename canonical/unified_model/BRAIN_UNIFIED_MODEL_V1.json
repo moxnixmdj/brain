@@ -31226,18 +31226,18 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 599,
+  "knowledge_documents": 600,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 7222,
+  "research_index_records": 7225,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 452,
-  "source_index_modules": 2005
+  "source_index_modules": 2006
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "6c76c03220c3c8ac7024631726a428861f8fba0115ddb0d7df36d081fd5b876b"
+  "value": "faf5f7ddb0cb09f8d8be64c0898ebc180756800a10951a621773217b6656a6bb"
  },
  "engines": [
   {
@@ -59416,6 +59416,89 @@
     "loop",
     "one",
     "perfect"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 17146,
+   "headings": [
+    "The Perfect Algorithm as the model — §3 verdict and ultimate plan — 2026-11-22",
+    "0. Requirements confirmed",
+    "1. Research findings",
+    "Project (exhaustive, non-obvious names included)",
+    "Web / frontier (inputs only, no capability credit)",
+    "2. §3 verdict",
+    "Q1 — Goal-directed generalization vs broad learning-of-everything",
+    "Q2 — What exactly is saved, and what is never saved",
+    "Q3 — What to admit and what to persist",
+    "Q4 — §2 confirmation as an engineering statement",
+    "3. Single ultimate plan and design kill",
+    "4. Build and hard tests",
+    "5. Honest limits and next bottleneck"
+   ],
+   "kind": "DOCUMENT",
+   "path": "PERFECT_ALGORITHM_MODEL_VERDICT_20261122_V1.md",
+   "sha256": "2a9a539d5df1b0b9c39e0d1a55143758f0849105637c8533c5990a3523a1da0d",
+   "summary": "Authority: `NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT`. This is the owner's question, measured honestly against the Perfect Algorithm loop as it exists on main and as it was re-built on this branch: **goal-directed generalization or broad learning-of-everything; what exactly is saved and what is never saved; what to admit and what to persist.** It is not a benchmark score, a GUI/browser success, an O",
+   "terms": {
+    "admission": 10,
+    "admit": 7,
+    "admitted": 7,
+    "algorithm": 9,
+    "already": 9,
+    "canonical": 11,
+    "computer": 9,
+    "content": 8,
+    "docs": 7,
+    "environment": 8,
+    "evidence": 8,
+    "family": 7,
+    "fresh": 8,
+    "goal": 14,
+    "guide": 8,
+    "honest": 9,
+    "honestly": 13,
+    "instance": 19,
+    "instances": 9,
+    "instant-knowledge": 11,
+    "knowledge": 9,
+    "local": 19,
+    "model": 9,
+    "never": 20,
+    "new": 12,
+    "no": 25,
+    "not": 42,
+    "observed": 10,
+    "one": 20,
+    "only": 22,
+    "own": 10,
+    "perfect": 9,
+    "plan": 29,
+    "priors": 13,
+    "receipt": 8,
+    "rejected": 8,
+    "round": 9,
+    "rows": 10,
+    "rule": 22,
+    "run": 8,
+    "saved": 12,
+    "scan": 13,
+    "source": 13,
+    "tests": 10,
+    "tier": 17,
+    "trace": 8,
+    "verdict": 9,
+    "web": 10
+   },
+   "title": "The Perfect Algorithm as the model — §3 verdict and ultimate plan — 2026-11-22",
+   "title_terms": [
+    "2026-11-22",
+    "algorithm",
+    "model",
+    "perfect",
+    "plan",
+    "ultimate",
+    "verdict"
    ]
   },
   {
@@ -91672,10 +91755,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1401,
+  "included_source_count": 1402,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "5d9247f27cce21ec302f40efb1de76947a485167380305f506bfe07ce80f2aaf"
+  "source_tree_digest": "ed74d64d448521a55eeadc089cbf602057de1efbb257a5a70bff27df4d3e4fb2"
  },
  "research_index": [
   {
@@ -184283,6 +184366,24 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "2026-11-22",
+   "id": "research:canonical/verification/LOCAL_GUIDE_RECEIPT_20261122_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/LOCAL_GUIDE_RECEIPT_20261122_V1.json",
+   "schema": "PROJECT_BRAIN_LOCAL_GUIDE_RECEIPT_V1",
+   "sha256": "bdf0a1e8f59ca42b2b5a4688997bbb27516bdebf09ef2700842ffd2309ccefeb",
+   "status": "",
+   "terms": {
+    "20261122": 1,
+    "guide": 1,
+    "local": 1,
+    "receipt": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-09",
    "id": "research:canonical/verification/LOSS_ABSORBING_CUSHION_REGCAP_GROUNDING_VERIFY_20261009_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -191627,6 +191728,25 @@
     "fresh": 1,
     "perfect": 1,
     "receipt": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "2026-11-22",
+   "id": "research:canonical/verification/PERFECT_ALGORITHM_RECEIPT_20261122_REPLAY_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/PERFECT_ALGORITHM_RECEIPT_20261122_REPLAY_V1.json",
+   "schema": "PROJECT_BRAIN_PA_REPLAY_RECEIPT_V1",
+   "sha256": "f72ef6c81b193aab899853c80dd7d2b9ea44ecb12bdb0cebfed7ee357ad7f9db",
+   "status": "",
+   "terms": {
+    "20261122": 1,
+    "algorithm": 1,
+    "perfect": 1,
+    "receipt": 1,
+    "replay": 1,
     "v1": 1
    }
   },
@@ -253762,6 +253882,51 @@
    }
   },
   {
+   "action_id": "PERFECT_ALGORITHM_LOCAL_GUIDE_20261122_V1",
+   "capability": false,
+   "date": "2026-11-22",
+   "id": "research:canonical/action_intents/PERFECT_ALGORITHM_LOCAL_GUIDE_20261122_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/PERFECT_ALGORITHM_LOCAL_GUIDE_20261122_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "79723a654afa5dac00948e7e97806f32680a95442d2d98171a4450113e3768cc",
+   "status": "PROPOSED__PRODUCER_MEASURED__PERFECT_ALGORITHM_LOCAL_GUIDE__INDEPENDENT_VERIFICA",
+   "terms": {
+    "20261122": 1,
+    "algorithm": 2,
+    "allow_instant_knowledge": 1,
+    "already": 2,
+    "answered": 1,
+    "asked": 2,
+    "but": 1,
+    "caller": 1,
+    "completeness-gated": 1,
+    "compose_the_local_tier_into_the_existing_instant_knowledge_path": 1,
+    "computer": 2,
+    "conclude": 1,
+    "either": 1,
+    "fabricates": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "guide": 1,
+    "guides": 2,
+    "instant": 2,
+    "knowledge": 2,
+    "local": 3,
+    "machine": 1,
+    "misses": 1,
+    "never": 3,
+    "now": 1,
+    "offline": 1,
+    "one": 1,
+    "only": 1,
+    "own": 2,
+    "passes": 1,
+    "perfect": 2,
+    "perfect_algorithm_local_guide_20261122_v1": 1,
+    "tier": 4
+   }
+  },
+  {
    "action_id": "PERFECT_ALGORITHM_PRIORS_VERIFY_20261122_V1",
    "capability": false,
    "date": "2026-11-22",
@@ -303114,6 +303279,42 @@
     "visible": 1,
     "visible-prompt": 1,
     "visiblepointwisesolvererror": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/local_guide_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/local_guide_v1.py",
+   "sha256": "7d98d7364433c8e9684b6a129c89d4cd7e864843db7d40a5c73f7ccda16fa6b5",
+   "summary": "Local instant-knowledge source: the computer's own guides.",
+   "symbol_count": 6,
+   "symbols": [
+    "_best_paragraph",
+    "_content_hits",
+    "_default_root",
+    "_local_guide_files",
+    "_query_tokens",
+    "lookup"
+   ],
+   "terms": {
+    "best_paragraph": 1,
+    "computer": 1,
+    "content_hits": 1,
+    "default_root": 1,
+    "guide": 1,
+    "guides": 1,
+    "instant-knowledge": 1,
+    "local": 2,
+    "local_guide_files": 1,
+    "lookup": 1,
+    "own": 1,
+    "query_tokens": 1,
+    "source": 1,
+    "v1": 1
    }
   },
   {
