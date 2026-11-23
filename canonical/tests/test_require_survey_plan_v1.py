@@ -1403,3 +1403,36 @@ def test_complete_means_the_request_was_answered_not_merely_runnable():
         str(CB_BIN / "linear"),
         'Create an issue titled "Fix login" in the team "Platform".', probes=16)
     assert ok["complete"] is True, ok.get("refusals")
+
+
+def test_a_program_with_no_command_for_the_act_says_so_instead_of_improvising():
+    """"This program has no command for that" is an answer, and it is decidable without a weight.
+
+    `/usr/bin/tar` has no copy operation. A request to copy one file to another has no reading in
+    its help -- the old behaviour planned `tar --block-number /tmp/b.txt /tmp/a.txt`, which has both
+    paths in it and means something else entirely, and called it complete because every value
+    appeared somewhere in the argument list.
+
+    The test uses the real program, because that is where the failure was found: `tar`'s help is
+    a dense wall of option prose, and copying is never stated as an operation. The word appears
+    once, inside `-u, --update  only append files newer than copy in archive`.
+
+    The same program's real operations must still plan, so the rule cannot be "refuse when the help
+    is hard to read".
+    """
+    import shutil
+    if shutil.which("tar") is None:
+        import pytest
+        pytest.skip("no tar on this host")
+
+    missing = R.require_survey_plan(
+        "tar", "Copy /tmp/a.txt to /tmp/b.txt.", probes=10)
+    assert missing["complete"] is False, missing["plans"][:1]
+    assert "NO_COMMAND_OF_THIS_PROGRAM_IS_ABOUT_THE_REQUEST" in [
+        r["reason"] for r in missing["refusals"]], missing["refusals"]
+
+    for request in ("Create a gzipped archive named backup.tgz from the directory /tmp/data.",
+                    "Extract the archive backup.tgz into /tmp/out.",
+                    "List the contents of the archive backup.tgz."):
+        plan = R.require_survey_plan("tar", request, probes=10)
+        assert plan["complete"] is True, (request, plan["refusals"])

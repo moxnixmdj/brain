@@ -3371,7 +3371,45 @@ def plan(requirement: Mapping[str, Any], tree: Mapping[str, Any],
     # a partial reading is often the useful next step (`issue list --project Engineering` is a real
     # thing to run). What changes is the claim: the top level says complete only when a reading
     # places every value the request names and satisfies its page's requirements.
+    # "This program has no command for that" is a different answer from "here is my best
+    # reading", and it is decidable without a weight. It is true exactly when BOTH hold:
+    #
+    #   * routing found no page at all -- the request about `ls` over a file tree, `tar` with
+    #     "copy", both land on the root because no subcommand is about them; and
+    #   * no page of the program states the asked-for act, by naming it or by demonstrating it.
+    #
+    # `tar` with "copy" is refused by this: its help never states copying as an operation, and the
+    # word appears once inside `-u, --update  only append files newer than copy in archive`.
+    # `linear` with "show" is NOT refused, because routing found `issue list` -- the request names
+    # its object and the page is about that object. The conjunction is what keeps a synonym from
+    # being read as a missing command: a synonym is unknown, not absent, and only the absence of
+    # every trace of the act in both routing and the documents makes it absent.
+    asked_acts = {a[0] for a in acts if a and a[0]}
+    states_the_act = False
+    if asked_acts:
+        for other in every_page(tree):
+            printed = set()
+            for word in [x for x in (other.get("argv") or [])[1:]
+                         if x not in ("--help", "-h")]:
+                printed |= words_of(word)
+            for demo in other.get("demos") or []:
+                printed |= words_of(str(demo.get("call") or ""))
+            # A flag's own name states an operation too. `flow --help` documents
+            # `-f, --fold[=NUM]  join lines after NUM characters`, and a request saying "fold the
+            # file" asks for exactly that. Reading only the argv and the demonstrations said the
+            # program had no such command -- the opposite of what the page says, because the page
+            # prints `fold` as a flag name.
+            for option in other.get("options") or []:
+                printed |= words_of(str(option.get("flag") or "").lstrip("-"))
+            if printed & asked_acts:
+                states_the_act = True
+                break
+    no_command = bool(asked_acts) and not (routed.get("path") or []) and not states_the_act
     good = [p for p in plans if p["complete"] and p.get("covered")]
+    if plans and no_command:
+        good = []
+        refusals.append({"reason": "NO_COMMAND_OF_THIS_PROGRAM_IS_ABOUT_THE_REQUEST",
+                         "words": sorted(asked_acts)[:8]})
     if plans and not good:
         refusals.append({"reason": "NO_SINGLE_READING_ACCOUNTS_FOR_THE_WHOLE_REQUEST",
                          "words": [str(v) for p in plans[:1]

@@ -2400,3 +2400,54 @@ incomplete too. Determining "this program has no command for this act" needs the
 *stated* as an operation by some page, and distinguishing a stated operation from an incidental
 mention of the word is a fifth weight. Four have been removed already; this one waits for a
 criterion, not a weight.
+
+### A60 — the criterion arrived, and it is a conjunction, not a weight
+
+A59 said telling a stated operation from an incidental mention of the word was a fifth weight, and
+waited. It is not a weight. It is two facts, and neither is a number.
+
+**"This program has no command for that" is true exactly when both hold:**
+
+1. **routing found no page** — nothing in the program is about the request, and
+2. **no page states the asked-for act** — not by naming it in its argv, not by demonstrating it in
+   an EXAMPLES line, and **not by printing it as a flag's own name**.
+
+`tar` with "Copy /tmp/a.txt to /tmp/b.txt" satisfies both: its help states copying nowhere, and the
+word appears once inside `-u, --update  only append files newer than copy in archive`. Refused now,
+with `NO_COMMAND_OF_THIS_PROGRAM_IS_ABOUT_THE_REQUEST`.
+
+`linear` with "**Show** me all the issues for the team Platform" satisfies neither: routing finds
+`issue list` because the request names its object. So a synonym stays *unknown* and is planned for,
+which is right — a synonym is not an absent command, and treating it as one would refuse the very
+requests this system is best at.
+
+**The conjunction is the whole mechanism.** Either half alone is wrong:
+
+* "No page routed" alone refuses `tar -cf backup.tgz` — `tar` has no subcommands, so every request
+  routes to the root, including the ones it answers correctly. That rule was drafted and deleted
+  before it was tried; the draft is in A59.
+* "The act is stated nowhere" alone refuses `flow` asked to "fold the file": the page documents
+  `-f, --fold[=NUM]  join lines after NUM characters`, so `fold` **is** printed — as a flag name.
+  Reading only argv and demonstrations said the opposite of what the page says. A flag's name is
+  the tool stating an operation; that gap cost one test and was found by it.
+
+**Verified now, on real programs, not fixtures.** 74 tests; 12 effect tasks by effect under
+`PYTHONHASHSEED` 7/99/default; the never-seen `vaultctl` 6/6; and `/usr/bin/tar` — a program with
+no subcommands and a wall of option prose — refuses copy while planning create, extract and list
+correctly:
+
+    tar -cf backup.tgz /tmp/data              complete
+    tar -xf /tmp/out backup.tgz               complete
+    tar -tvf backup.tgz                       complete
+    Copy /tmp/a.txt to /tmp/b.txt             refused: no command of this program is about it
+
+**Survived five proposals this session: two spelling facts (stemming, possessives), one
+accounting criterion, one label-binding rule, one refusal conjunction. Removed: five weights and
+two criteria.** The pattern is consistent enough to state as a working rule: when a case fails, the
+answer has been a *fact about what the document or the word says*, never a number that makes the
+case come out right.
+
+**Next bottleneck.** Everything here is one request against one program's help. The case that is
+untested is a request that needs **two programs in sequence** — find the file, then archive it —
+where the output of one page's command is the input of another's. Nothing in the mechanism forbids
+it; `grep`'s help documents `-l` and `tar`'s documents `-T`, and neither page says they compose.
