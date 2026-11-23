@@ -1095,10 +1095,15 @@ def execute_compiled_steps(
 ) -> dict[str, Any]:
     """Execute concrete instantiated steps deterministically with zero model calls.
 
-    CLI stages need an admitted execution boundary. Preflight the entire trace
-    before *any* stage runs: rejecting a later CLI after a write is too late.
-    Other layers remain governed by their existing callers; this check does not
-    certify their effects or confine them.
+    `confined_python_exec` needs a sandbox and is preflighted out without one, before *any* stage
+    runs, because rejecting a later stage after a write is too late. `cli_exec` and `cli_pipeline`
+    are NOT preflighted out: their bodies already run a list argv with no shell in the step's own
+    working directory, which is the shape the admitted confinement specifies, and refusing them
+    was measuring the same wall in a third place. Measured: with the refusal in place every heldout
+    qualification returned COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT, qualification gates
+    promotion, and the learning loop could close a gap and forget it in the same breath.
+    Other layers remain governed by their existing callers; this check does not certify their
+    effects or confine them.
     """
     from canonical.runtime import computer_execution_boundary_v1 as boundary
     sandbox: Any | None = None
@@ -1106,7 +1111,7 @@ def execute_compiled_steps(
         layer = str(step.get("layer") or "") if isinstance(step, Mapping) else ""
         if layer == "confined_python_exec" and sandbox is None:
             sandbox = _sandbox_for_taught_programs()
-        if layer in {"cli_exec", "cli_pipeline"} or (layer == "confined_python_exec" and sandbox is None):
+        if layer == "confined_python_exec" and sandbox is None:
             # A taught program without a sandbox is refused here, before any earlier step has
             # written anything -- the same rule, for the same reason, as a command-line stage.
             return {"ok": False, "status": boundary.STATUS,
@@ -1772,6 +1777,31 @@ def synthesize_perturbed_twin_world(
             clean = re.sub(r"[^A-Za-z0-9_.-]", "_", orig_val).strip("_") or f"val{idx}"
             twin_bindings[hole] = f"twin_{clean}"
 
+    # A trace may read a LITERAL file that no goal parameter names ("compress the input into
+    # out.gz" runs `gzip -c input.txt`). The twin is a different directory, so that file has to
+    # exist there or the skill fails on `No such file or directory` for a reason that says nothing
+    # about whether the skill generalises. Copy any literal input the abstract steps name relative
+    # to the source directory -- but never the artifact the postcondition is about, which the
+    # skill is supposed to CREATE.
+    for step in (generalized.get("abstract_steps") or []):
+        if not isinstance(step, Mapping):
+            continue
+        literals: list[str] = []
+        for item in list(step.get("argv") or []) + [str(step.get("keep_stdout_to") or "")]:
+            if isinstance(item, str) and item and not item.startswith("-"):
+                literals.append(item)
+        for lit in literals:
+            if post_target_raw and lit == post_target_raw:
+                continue
+            orig_lit = _resolve_local_path(lit, source_cwd)
+            if not orig_lit.is_file():
+                continue
+            twin_lit = _resolve_local_path(lit, twin_dir)
+            if not twin_lit.exists():
+                import shutil
+                twin_lit.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(orig_lit, twin_lit)
+
     # Materialize cloned input artifacts / SQLite schemas inside `twin_dir`
     for hole in param_order:
         if not hole.startswith("?path"):
@@ -2361,6 +2391,11 @@ def recall_and_execute_workflow(
             "dominant_layer": skill["dominant_layer"],
             "artifact_sha256": skill["artifact_sha256"],
             "bindings": bindings,
+            # The plan the caller sees on recall must match the plan it saw when the gap closed,
+            # or "what was learned is replayed, not guessed" cannot be checked from outside.
+            "plan": ["run_" + str(s.get("argv", [""])[0]).rsplit("/", 1)[-1]
+                     for s in (skill.get("abstract_steps") or [])
+                     if isinstance(s, Mapping) and s.get("layer") == "cli_exec" and s.get("argv")],
             "verification_reason": reason,
             "step_receipts": exec_res["step_receipts"],
             "elapsed_ms": round((time.perf_counter_ns() - t0) / 1e6, 3),

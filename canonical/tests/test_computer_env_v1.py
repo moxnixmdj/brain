@@ -43,11 +43,21 @@ class EnvCase(unittest.TestCase):
                        transfer_learning_v1.STATE_PATH)
         curriculum_v1.STATE_PATH = os.path.join(self.tmp, "curriculum.json")
         transfer_learning_v1.STATE_PATH = os.path.join(self.tmp, "transfer.json")
+        # The compiled-workflow DB is where a closed lesson becomes a replayable skill, and it is
+        # resolved from the environment at call time. Without isolating it these tests either
+        # wrote into the repository's real DB or, worse, PASSED by recalling a skill promoted by
+        # an earlier run -- a test for "the first time learns" that succeeds because it did not.
+        self._saved_db = os.environ.get("BRAIN_COMPILED_WORKFLOW_DB")
+        os.environ["BRAIN_COMPILED_WORKFLOW_DB"] = os.path.join(self.tmp, "workflows.sqlite")
 
     def tearDown(self) -> None:
         from canonical.runtime import curriculum_v1
         from canonical.runtime import transfer_learning_v1
         curriculum_v1.STATE_PATH, transfer_learning_v1.STATE_PATH = self._saved
+        if self._saved_db is None:
+            os.environ.pop("BRAIN_COMPILED_WORKFLOW_DB", None)
+        else:
+            os.environ["BRAIN_COMPILED_WORKFLOW_DB"] = self._saved_db
         shutil.rmtree(self.tmp, ignore_errors=True)
 
     def env(self, **kw) -> cenv.ComputerEnv:

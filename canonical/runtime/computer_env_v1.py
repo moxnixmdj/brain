@@ -1382,6 +1382,12 @@ def _perform_impl(gap: str, cwd: str | pathlib.Path | None = None,
     done["plan"] = found.get("plan")
     done["learned_by"] = found.get("status")
     done["from_memory"] = found.get("from_memory")
+    # The caller asked what the machine DID, so report the evidence the discovery gathered: which
+    # recipe it used, how many actions it had to try, and what it verified. Without these a caller
+    # can see that the file exists but not that the machine learned anything to put it there.
+    done["recipe"] = recipe
+    done["actions_tried"] = found.get("actions_tried")
+    done["verification"] = found.get("verification")
     return done
 
 

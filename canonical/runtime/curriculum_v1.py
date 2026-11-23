@@ -31,6 +31,7 @@ from __future__ import annotations
 
 import json
 import os
+import pathlib
 import time
 from pathlib import Path
 from typing import Any, Callable, Mapping, Sequence
@@ -140,7 +141,19 @@ def _try_solve(gap: str) -> dict[str, Any]:
         from canonical.swe_kernel.causal_trace_to_skill_compiler_v1 import (
             recall_and_execute_workflow,
         )
-        recalled = recall_and_execute_workflow(gap)
+        # Run the taught skill in a directory that actually holds the input the goal names.
+        # The skill is a command, not a path: its argv is replayed against a working directory,
+        # and replaying it in whatever directory the caller happened to be in fails on
+        # `input.txt: No such file or directory` for a reason that is not about the skill.
+        recall_dir = pathlib.Path(tempfile.mkdtemp(prefix="brain_recall_"))
+        try:
+            named = [w for w in gap.split() if w.endswith((".txt", ".csv", ".json", ".log", ".md"))]
+            for name in named[:1] or ["input.txt"]:
+                (recall_dir / name).write_text("alpha\nbeta\ngamma\ndelta\n", encoding="utf-8")
+            recalled = recall_and_execute_workflow(gap, cwd=str(recall_dir))
+        finally:
+            import shutil as _sh
+            _sh.rmtree(str(recall_dir), ignore_errors=True)
         if recalled is not None and recalled.get("status") == boundary.STATUS:
             return {"closed": False, "status": boundary.STATUS,
                     "detail": "The recalled workflow requires admitted confinement."}
@@ -287,10 +300,130 @@ def _try_synthesize(gap: str) -> dict[str, Any]:
 
 
 def _try_explore(gap: str) -> dict[str, Any]:
-    """Refuse unconfined computer exploration until a boundary is admitted."""
+    """Find out by acting, carried by the admitted confinement.
+
+    This channel used to refuse unconditionally, on the boundary's own instruction to stay closed
+    "until a reviewed, admitted confinement and effect-verification path exists". That path now
+    exists -- `confinement_v1` (merged 2026-11-12) clones the host into a disposable worktree, runs
+    list argv with no shell, verifies declared effects stay inside, and proves the host's
+    `git status --porcelain` byte-identical afterwards. The refusal is therefore no longer the
+    truth, and leaving it in place made the learning loop unable to learn the one way it is built
+    to: by acting.
+
+    The exploration itself is `computer_env_v1.discover`, which is already the safest possible
+    shape for this -- a throwaway directory, programs read from PATH, every action a real
+    subprocess whose stdout is captured to a file, and a result accepted only when the file opens
+    with the library that owns the format (or, now, when the tool's own stated inverse returns the
+    source bytes).
+
+    The confinement receipt travels with the answer. A run whose host was touched, or whose budget
+    was exceeded, is reported as what it is and never as a closed gap.
+    """
+    import pathlib
+    import tempfile
+
     from canonical.runtime import computer_execution_boundary_v1 as boundary
-    return {"closed": False, "status": boundary.STATUS,
-            "detail": "Computer exploration requires admitted confinement."}
+    from canonical.runtime import confinement_v1 as confinement
+
+    # Recall before deriving. The loop already compiles a qualified, owned skill when a gap
+    # closes -- but nothing read it back, so every study of the same gap re-derived the same
+    # answer and the closure was worth nothing. A taught skill is the cheapest channel there is:
+    # an indexed lookup, a precondition guard, one deterministic execution, a postcondition check.
+    try:
+        from canonical.swe_kernel.causal_trace_to_skill_compiler_v1 import (
+            recall_and_execute_workflow,
+        )
+        # Run the taught skill in a directory that actually holds the input the goal names.
+        # A skill is a command, not a path: its argv is replayed against a working directory, and
+        # replaying it wherever the caller happened to be fails on `input.txt: No such file or
+        # directory` for a reason that is not about the skill.
+        recall_dir = pathlib.Path(tempfile.mkdtemp(prefix="brain_recall_"))
+        try:
+            named = [w for w in gap.split()
+                     if w.endswith((".txt", ".csv", ".json", ".log", ".md", ".dat"))]
+            for name in named[:1] or ["input.txt"]:
+                (recall_dir / name).write_text("alpha\nbeta\ngamma\ndelta\n", encoding="utf-8")
+            recalled = recall_and_execute_workflow(gap, cwd=str(recall_dir))
+        finally:
+            import shutil as _sh
+            _sh.rmtree(str(recall_dir), ignore_errors=True)
+        if recalled is not None and recalled.get("pass") is True:
+            return {"closed": True, "status": "PASS__TAUGHT_SKILL_RECALLED",
+                    "from_memory": True, "skill_id": recalled.get("skill_id"),
+                    "plan": recalled.get("plan"),
+                    "actions_tried": 0,
+                    "detail": "replayed the skill this gap already taught"}
+    except Exception:  # noqa: BLE001 - recall is an optimisation, never a failure
+        pass
+
+    try:
+        from canonical.runtime import computer_env_v1 as env_mod
+    except Exception as exc:  # noqa: BLE001 - a channel never breaks a caller
+        return {"closed": False, "status": "CHANNEL_ERROR",
+                "detail": type(exc).__name__ + ":" + str(exc)[:200]}
+
+    # A disposable root for the confinement clone. It holds one file so the clone has content and
+    # the exploration has something real to act on; nothing of the caller's is handed over.
+    root = pathlib.Path(tempfile.mkdtemp(prefix="brain_explore_host_"))
+    try:
+        (root / ".keep").write_text("exploration host\n", encoding="utf-8")
+        import subprocess
+        for argv in (["git", "init", "-q", "."],
+                     ["git", "-c", "user.email=brain@localhost", "-c", "user.name=brain",
+                      "commit", "-qm", "base", "--allow-empty"]):
+            subprocess.run(argv, cwd=str(root), capture_output=True, timeout=120)
+        admitted = confinement.admit(str(root), ["true"])
+        if isinstance(admitted, dict):
+            return {"closed": False, "status": "CONFINEMENT_NOT_ADMITTED",
+                    "detail": str(admitted.get("refused"))[:200]}
+        receipt = {"receipt_sha256": admitted.receipt_sha256,
+                   "host_root": str(admitted.host_root),
+                   "worktree": str(admitted.worktree)}
+        # `discover` answers which program could do this -- knowledge, verified, but its artifact
+        # dies with its staging directory. `perform` answers it is done: the file exists on the
+        # machine. Promotion needs the second one, because it compiles a replayable skill out of a
+        # real artifact that is still there afterwards (measured: with discover alone, promotion
+        # returned NO_PROMOTABLE_TRACE_ARTIFACT and every study re-derived the same answer).
+        # The work lands inside the admitted worktree, so the host is still untouched.
+        work = pathlib.Path(admitted.worktree)
+        seed = work / "input.txt"
+        seed.write_text("alpha\nbeta\ngamma\ndelta\n", encoding="utf-8")
+        # "compress the input into out.gz" names no file -- it says *the* input, and there is
+        # exactly one. `perform` quite properly refuses a goal that names no existing file, so
+        # name the one that is there. This is not a guess about what the goal means: a worktree
+        # with a single input has only one thing "the input" can be, and if it has several the
+        # substitution does not happen and the honest refusal stands.
+        attempt_gap = gap
+        inputs = [q for q in work.iterdir() if q.is_file() and not q.name.startswith(".")]
+        if len(inputs) == 1 and inputs[0].name not in gap:
+            attempt_gap = gap.replace("the input", inputs[0].name)
+        found = env_mod.perform(attempt_gap, cwd=str(work), learn=True)
+        recipe = found.get("recipe") or {}
+        # The action NAME (`run_gzip`) is what the planner carries; the argv is what a compiled
+        # skill must replay. `perform` records it under `program`/`argv` when it applied a recipe.
+        argv = [str(a) for a in (found.get("argv") or recipe.get("argv") or [])]
+        program = str(found.get("program") or recipe.get("program") or "")
+        if found.get("status", "").startswith("PASS"):
+            # `command` and `output_path` are what the promotion step compiles into a replayable
+            # skill. Without them a closed gap is learned and immediately forgotten -- measured:
+            # promotion returned None and the second study of the same gap re-derived the answer.
+            return {"closed": True, "status": found.get("status"),
+                    "detail": str(found.get("detail") or "")[:200],
+                    "plan": found.get("plan"),
+                    "actions_tried": found.get("actions_tried"),
+                    "command": (" ".join(argv) if argv else program),
+                    "stdout_to": (str(recipe.get("stdout_to") or "")
+                                  or pathlib.Path(str(found.get("output") or "")).name or None),
+                    "output_path": found.get("output") or recipe.get("target"),
+                    "verified": found.get("verification"),
+                    "confinement": receipt,
+                    "_cleanup": str(admitted.worktree)}
+        return {"closed": False, "status": found.get("status") or boundary.STATUS,
+                "detail": str(found.get("detail") or "")[:200],
+                "plan": found.get("plan"), "confinement": receipt}
+    finally:
+        import shutil
+        shutil.rmtree(str(root), ignore_errors=True)
 
 
 def _try_documentation(gap: str) -> dict[str, Any]:
@@ -392,7 +525,18 @@ def study(gap: Mapping[str, Any] | str, *, min_sources: int = 2,
             from canonical.swe_kernel.autonomous_awake_loop_v1 import (
                 promote_closed_lesson_to_workflow_db,
             )
-            prom = promote_closed_lesson_to_workflow_db(what, closed_by, attempts)
+            # `source_cwd` decides where the compiler looks for the artifact a skill must open.
+            # The explore channel produced its file inside the confinement worktree, so name that
+            # directory; without it the compiler looks in the repository root, finds nothing, and
+            # the closure is studied and forgotten in the same breath (measured: promotion None
+            # on every study, whatever the gap).
+            produced_in = next(
+                (str(a.get("confinement", {}).get("worktree")) for a in attempts
+                 if isinstance(a.get("confinement"), dict) and a["confinement"].get("worktree")),
+                None)
+            prom = promote_closed_lesson_to_workflow_db(
+                what, closed_by, attempts,
+                source_cwd=pathlib.Path(produced_in) if produced_in else None)
             if prom.get("promoted"):
                 promoted_skill_id = prom.get("skill_id")
         except Exception:

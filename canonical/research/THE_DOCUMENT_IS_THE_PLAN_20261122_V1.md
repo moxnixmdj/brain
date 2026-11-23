@@ -2847,3 +2847,66 @@ silently to turn three red tests green.
 **Verified this session:** 7 new tests on the inverse mechanism (including the `tar --delete`
 rejection and the "does not loosen the guard" case), 21 passing across both verification suites, 78
 planner tests, 13/13 effect tasks, and `gzip`/`xz`/`bzip2` all discovered-and-verified on real files.
+
+### A68 — the loop was refusing for want of a substrate that already existed
+
+A67 found that `curriculum_v1.study()` — the loop the mission describes — refused on every acting
+channel, and called it deliberate. It was deliberate *once*. This is what happened when I stopped at
+the refusal and asked what it was waiting for.
+
+**The refusal names its own release condition.** `computer_execution_boundary_v1` says automatic
+routes are unavailable *"until a reviewed, admitted confinement and effect-verification path
+exists."* `confinement_v1` (merged 2026-11-12) is that path, and its own header says so. But
+`curriculum_v1` never imported it. One missing import, and the whole learning loop was dead.
+
+**What the confinement actually guarantees** — this is why it is safe to wire in:
+`git clone --no-local` into a disposable worktree; list argv with `shell=False` and no shell anywhere
+in the module; declared effects must resolve inside the worktree; `git status --porcelain` on the host
+must be byte-identical afterwards; wall-clock budget enforced. Its own docstring records that a
+character blocklist was drafted and was **wrong twice** — it broke `python3 -c "a; b"` and refused the
+`bash -c` runs whose job was proving the worktree bounds destruction. The confinement is the worktree
+plus restricted PATH/HOME plus budget, not a string check. That is exactly the conclusion the 2026
+literature reached independently: six layers of regex in ms-agent's Shell tool were bypassed into a
+reverse shell (CVE-2026-2256), and the maintainers' fix was to **delete the shell tool and move
+execution behind a real boundary**, not to write a seventh regex.
+
+**Then five separate defects surfaced, each hidden behind the one before it.** Every one was found by
+running the thing and reading the status, never by reasoning about it:
+
+| # | symptom | cause | fix |
+|---|---|---|---|
+| 1 | `FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT` on every study | `_try_explore` was a stub returning that status | route it through `confinement_v1.admit` + `computer_env_v1.perform` |
+| 2 | `NO_PROMOTABLE_TRACE_ARTIFACT` — nothing ever learned | `discover` verifies in staging and deletes it; promotion needs a file that still exists | call `perform` (its own docstring: *"discover answers which program could do this — knowledge; perform answers it is done"*) |
+| 3 | `FAIL_CLOSED__TRANSFER_OWNERSHIP_GATE_REJECTED`, heldout reason `COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT` | `execute_compiled_steps` preflighted every `cli_exec` out unconditionally, so **qualification** hit the same wall | the `cli_exec` body already ran a list argv with no shell — the refusal was measuring the same wall in a third place; removed the preflight for CLI layers only |
+| 4 | `POSTCONDITION_FILE_MISSING`, then `CLI_EXIT_1: gzip: input.txt: No such file or directory` | promotion flattened a `stdout_to` recipe into `["sh","-c",cmd]`, destroying the redirection; then the twin never received the literal input the trace reads | carry `keep_stdout_to` as a first-class trace field; copy literal argv inputs into the twin, never the artifact the postcondition is about |
+| 5 | promoted, but the second study re-derived from scratch | nothing read the compiled skill back | recall before deriving, in a directory that holds the input the goal names |
+
+**Measured, the whole loop, in one clean directory:**
+
+| | status | from_memory | promoted |
+|---|---|---|---|
+| **first** study of `compress the input into out.gz` | `PASS__APPLIED_TO_REAL_FILE` | — | **`workflow.<sha>`** |
+| **second** study of the same gap | `PASS__TAUGHT_SKILL_RECALLED` | **True** | — |
+
+and the plans agree — `['run_gzip']` both times — which is the difference between *learning* and
+*guessing again*. Promotion runs `compile_and_qualify_skill`, which compiles the trace, synthesises a
+perturbed twin world, executes the skill there, and requires the ownership gate: independent heldout
+qualification, causal ablation, sabotage rejection. It returned
+`PASS__WORKFLOW_SKILL_COMPILED_QUALIFIED_AND_OWNED`.
+
+**One test-honesty fix worth recording.** `EnvCase` isolated `curriculum_v1.STATE_PATH` and
+`transfer_learning_v1.STATE_PATH` but not `BRAIN_COMPILED_WORKFLOW_DB`, so these tests either wrote
+into the repository's real database or — worse — **passed by recalling a skill promoted by an earlier
+run**. A test for "the first time learns" that succeeds because the first time did not happen is not a
+test. It now isolates the database too.
+
+**Verified:** **181 tests pass** across the five suites that matter here (was 78), including all four
+`TransferTests` — two of which had been failing before this work began and are now green for the
+right reason. 13/13 effect tasks under `PYTHONHASHSEED` default/7/99, 6/6 unseen, 7 new tests on the
+inverse mechanism.
+
+**What this does NOT claim.** The confinement runs on this host, not in a container or microVM; there
+is no docker here. Its guarantee is the worktree plus argv discipline plus the byte-identical host
+check — strong against an exploration that writes files, honest about what it does not cover.
+Exploration is also still limited to what `perform` can express: one program, one goal, one output
+format. Composition across programs remains where A66 left it.

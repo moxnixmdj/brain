@@ -166,11 +166,30 @@ def promote_closed_lesson_to_workflow_db(
         if not p_abs.is_absolute():
             p_abs = (cwd / p_abs).resolve()
         if p_abs.is_file():
-            rel_or_abs = str(out_path)
-            argv = cmd if isinstance(cmd, list) else ["sh", "-c", str(cmd)]
+            # A `stdout_to` recipe is NOT a shell command: the program was run with no shell and
+            # its stdout was written to the output file. Flattening it into `["sh", "-c", cmd]`
+            # throws that away -- `gzip -c input.txt` writes compressed bytes to stdout and creates
+            # no file, so every qualification returned POSTCONDITION_FILE_MISSING. The trace layer
+            # already carries the redirection as a first-class field, so say it there.
+            stdout_to = winning.get("stdout_to") or winning.get("output_name")
+            # The postcondition must name the file the way the goal names it, relative to the
+            # working directory, so the twin world can resolve it against ITS directory. An
+            # absolute path from the acquisition run points at a directory the twin does not have,
+            # and the heldout then fails POSTCONDITION_FILE_MISSING for a reason that has nothing
+            # to do with the skill.
+            rel_or_abs = str(stdout_to) if stdout_to else str(out_path)
+            step: dict[str, Any] = {}
+            if isinstance(cmd, str) and stdout_to:
+                # split on whitespace only when the recipe is a plain argv, which is what the
+                # explorer records; anything else stays a shell command for the compiler to judge
+                argv = cmd.split()
+                step = {"keep_stdout_to": str(stdout_to)}
+            else:
+                argv = cmd if isinstance(cmd, list) else ["sh", "-c", str(cmd)]
+            step = {"layer": "cli_exec", "argv": list(argv), "returncode": 0, **step}
             qual = compile_and_qualify_skill(
                 goal=gap_text,
-                trace=[{"layer": "cli_exec", "argv": list(argv), "returncode": 0}],
+                trace=[step],
                 postcondition={"kind": "file_nonempty", "path": rel_or_abs},
                 auto_synthesize_twin=True,
                 source_cwd=cwd,

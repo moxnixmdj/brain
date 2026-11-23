@@ -119,5 +119,66 @@
     "trials": 1,
     "successes": 1,
     "last_used_utc": "2026-11-23T06:06:37Z"
+  },
+  {
+    "fingerprint": {
+      "actions": [
+        "copy_input",
+        "copy_to_out",
+        "run_addpart",
+        "run_addr2line",
+        "run_animate",
+        "run_animate-im6",
+        "run_animate-im6.q16",
+        "run_apt",
+        "run_apt-cache",
+        "run_apt-cdrom",
+        "run_apt-config",
+        "run_apt-get",
+        "run_as",
+        "run_compare",
+        "run_composite",
+        "run_convert",
+        "run_dpkg",
+        "run_dpkg-buildpackage",
+        "run_dpkg-deb",
+        "run_dpkg-mergechangelogs",
+        "run_dpkg-source",
+        "run_gold",
+        "run_gunzip",
+        "run_gzexe",
+        "run_gzip",
+        "run_ld",
+        "run_lzcat",
+        "run_montage",
+        "run_objcopy",
+        "run_readelf",
+        "run_rg",
+        "run_savelog",
+        "run_sort",
+        "run_tar",
+        "run_wdctl",
+        "run_wget",
+        "run_x86_64-linux-gnu-size",
+        "run_znew"
+      ],
+      "shapes": [
+        "str"
+      ],
+      "growth": 0.597,
+      "revisits": 6,
+      "probes": 6
+    },
+    "fp_key": "b6ea9af4823bcd0bce7b",
+    "goal_key": "effect|target=out.gz|suffix=.gz",
+    "plan": [
+      "run_gzip"
+    ],
+    "reached": true,
+    "model": null,
+    "model_schema": null,
+    "trials": 1,
+    "successes": 1,
+    "last_used_utc": "2026-11-23T06:09:03Z"
   }
 ]
