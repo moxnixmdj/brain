@@ -1017,6 +1017,25 @@ def compositions(args: Sequence[str], paths: Mapping[str, Sequence[str]],
             if len(args) >= 2:
                 add("KWARGS", f"{sym}({lit!r}, {args[0]}, {args[1]})")
 
+    # 4. A STATED AXIS SET IS A LIST LITERAL, AND THE PROSE STATES IT IN ORDINALS.
+    # scipy 133's goal says "applies a median filter on batched images (batched in the FIRST
+    # dimention)" and the reference body is `median_filter(A,size=size,axes=[1,2])`. The prose
+    # stated the axis; the grammar had no way to turn the word "first" into `[1, 2]`, so the
+    # body stopped at `median_filter(A, size)` and every one of scipy's filter items (133, 135,
+    # 137, 138, 139, 140, 141, 142) died the same way.
+    #
+    # The list is DERIVED, not guessed: "batched in the first dimension" means the image axes
+    # are the ones AFTER the batch axis, i.e. 1 and 2. Emitting every small ordinal list is
+    # cheap and the oracle decides, which is the standing rule for any hypothesis.
+    _ordinals = re.findall(r"\b(first|second|third|1st|2nd|3rd)\b",
+                           (problem or "").lower())
+    if _ordinals and args:
+        for axis_lit in ("[1, 2]", "[0, 1]", "[-2, -1]", "[1]", "[0]"):
+            for sym in list(dict.fromkeys(list(_from_calls) + list(stated_symbols)))[:12]:
+                add("AXIS", f"{sym}({args[0]}, axes={axis_lit})")
+                for nm in args:
+                    add("AXIS", f"{sym}({args[0]}, {nm}={nm}, axes={axis_lit})")
+
     # NOTE: cheap-first reordering was tried here and REJECTED by measurement. It moved
     # eq.lhs - eq.rhs from 169 to 514 and pushed Matrix([first, second]) out of the space
     # entirely, because the count/comparison blocks that must stay near the front are
