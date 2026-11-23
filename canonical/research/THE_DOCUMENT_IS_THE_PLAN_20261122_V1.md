@@ -2359,3 +2359,44 @@ hold, and it reports the title unplaced rather than refusing. The page that coul
 `issue create`, cannot house the project. So neither page accounts for the whole request, and the
 honest answer is that this program has no single command for it — which the mechanism does not yet
 say. Closing that means turning "no page houses everything" into a refusal rather than a best effort.
+
+### A59 — `complete` was a lie in the one case that mattered
+
+The top-level flag said `complete: True` for
+
+    Add an issue to the project "Engineering" for the team "Platform" titled "Fix login"
+
+while `Engineering` and `Fix login` were both reported unplaced. Two thirds of the request
+discarded, and a caller reading only the top-level flag would run `issue list --team Platform` and
+believe the request had been carried out.
+
+The cause is that two different questions shared one name. `candidate["complete"]` means *this
+command satisfies the required flags on its own page* — a true and useful statement. Callers read
+the **top-level** `complete` as *the request was answered*. Those came apart exactly when the
+program had no single command for the request.
+
+They are now separated and both kept, because they fail differently and both are worth reporting:
+
+* `candidate["complete"]` — the page's own required flags are satisfied.
+* `candidate["covered"]` — every value the request names reached the command line.
+* **top-level `complete`** — a plan exists that is both. Otherwise
+  `NO_SINGLE_READING_ACCOUNTS_FOR_THE_WHOLE_REQUEST` is refused and the flag is false.
+
+The partial plans are still returned, best first. `issue list --project Engineering` is a genuine
+next step and hiding it would be worse. What changed is the *claim*, which is the only thing a
+caller should ever act on.
+
+**Measured now:** the unsatisfiable request reports `complete: False` with that reason; the two
+satisfiable ones stay `True`. 73 tests, 12 effect tasks, the unseen program 6/6.
+
+**One thing that is still not right, stated rather than buried.** Pointed at real `tar` with
+"Copy /tmp/a.txt to /tmp/b.txt", it plans `tar --block-number /tmp/b.txt /tmp/a.txt` and reports
+complete, because both paths do reach the argument list — in slots meaning the wrong thing. `tar`
+has no copy command and its help never states one; the word "copy" appears once, inside
+`-u, --update  only append files newer than copy in archive`. A rule was drafted and **removed
+before it was tried**: "refuse when routing produced no page" — but `tar` routes to its root page
+for every request, including the ones it answers correctly, so that rule marked `-cf backup.tgz`
+incomplete too. Determining "this program has no command for this act" needs the act to be
+*stated* as an operation by some page, and distinguishing a stated operation from an incidental
+mention of the word is a fifth weight. Four have been removed already; this one waits for a
+criterion, not a weight.

@@ -3360,7 +3360,22 @@ def plan(requirement: Mapping[str, Any], tree: Mapping[str, Any],
         candidate["covered"] = not unplaced
     plans.sort(key=lambda c: (0 if c.get("complete") else 1, 0 if c.get("covered") else 1))
 
-    good = [p for p in plans if p["complete"]]
+    # `complete` at the top means *the request was answered*, not "some command satisfies its own
+    # page's required flags". Those came apart in a way that mattered: `Add an issue to the project
+    # "Engineering" for the team "Platform" titled "Fix login"` reported complete=True while
+    # `Engineering` and `Fix login` were both unplaced -- two thirds of the request discarded, and
+    # a caller reading only the top-level flag would run a command that filters a list by a project
+    # and silently forgets the title. A reading that drops part of the request is not an answer.
+    #
+    # The plans are still returned, best first, with their own two statements kept separate, because
+    # a partial reading is often the useful next step (`issue list --project Engineering` is a real
+    # thing to run). What changes is the claim: the top level says complete only when a reading
+    # places every value the request names and satisfies its page's requirements.
+    good = [p for p in plans if p["complete"] and p.get("covered")]
+    if plans and not good:
+        refusals.append({"reason": "NO_SINGLE_READING_ACCOUNTS_FOR_THE_WHOLE_REQUEST",
+                         "words": [str(v) for p in plans[:1]
+                                   for v in (p.get("values_unplaced") or [])][:8]})
     if dropped:
         refusals.append({"reason": "NO_PLACE_IN_THIS_DOCUMENT_FOR", "words": dropped[:8]})
     return {

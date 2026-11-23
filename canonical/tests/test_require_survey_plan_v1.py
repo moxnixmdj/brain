@@ -1375,3 +1375,31 @@ def test_a_labelled_value_lands_in_the_flag_that_names_it_not_the_first_free_one
     argv = out["plans"][0]["argv"]
     assert argv[argv.index("--title") + 1] == "Fix login", argv
     assert argv[argv.index("--team") + 1] == "Platform", argv
+
+
+def test_complete_means_the_request_was_answered_not_merely_runnable():
+    """A plan that discards part of the request is not an answer, however well it runs.
+
+    `Add an issue to the project "Engineering" for the team "Platform" titled "Fix login"` has no
+    single reading here: `issue list` houses the project and the team but has no `--title`, and
+    `issue create` houses the title but documents no `--project`. The reading offered is
+    `issue list --team Platform`, which reports `complete` at both levels and quietly drops two of
+    the three values -- a caller reading only the top flag would run it and believe the request
+    was carried out.
+
+    The plans stay: a partial reading is a real next step. What must not stand is the claim.
+    """
+    out = R.require_survey_plan(
+        str(CB_BIN / "linear"),
+        'Add an issue to the project "Engineering" for the team "Platform" titled "Fix login".',
+        probes=16)
+    assert out["plans"], out.get("reason")
+    assert out["complete"] is False, "a reading that discards the request must not claim completeness"
+    reasons = [r["reason"] for r in out["refusals"]]
+    assert "NO_SINGLE_READING_ACCOUNTS_FOR_THE_WHOLE_REQUEST" in reasons, reasons
+
+    # The same shape where the program does have one command for it stays complete.
+    ok = R.require_survey_plan(
+        str(CB_BIN / "linear"),
+        'Create an issue titled "Fix login" in the team "Platform".', probes=16)
+    assert ok["complete"] is True, ok.get("refusals")
