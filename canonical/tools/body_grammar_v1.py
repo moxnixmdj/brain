@@ -358,7 +358,7 @@ def compositions(args: Sequence[str], paths: Mapping[str, Sequence[str]],
                                              prose_raw)))
                 hit = 1 if head_.lower() in low_p else 0
                 return (-(spelled * 2 + hit), len(path_))
-            for _k in list(nested_short):
+            for _k in list(nested_short or ()):
                 nested_short[_k] = sorted(nested_short[_k], key=_nestscore)[:4]
             emitted = 0
             for nm in dict.fromkeys(n for n in names if n and n.isidentifier()):
@@ -443,12 +443,18 @@ def compositions(args: Sequence[str], paths: Mapping[str, Sequence[str]],
         # Ordering by "is it callable" put `Max` in tier 0 and every lambda grew on the wrong
         # head, which is how a correct body came to sit outside the space entirely.
         _ctor = {n.rsplit(".", 1)[-1] for n in (imported_names or ())}
+        # A HEAD MUST BE A FUNCTION, NOT A CONSTRUCTOR. The stub binds `Function`, `Max` and
+        # `Min` too, and ranking every stub-bound name as a head gave three of the six head
+        # slots to names that can never be the thing being rewritten -- `Max(expr).replace(...)`
+        # is not a candidate anyone would write. Capitalised names are the lambda's two
+        # operand names (`Max(*x)*Min(*x)`), which the lambda builder already reads from
+        # `stated_symbols`; they are not heads. So: lowercase + stub-bound = tier 0.
         def _head_tier(n: str) -> int:
             tail = n.rsplit(".", 1)[-1]
-            if tail in _stub_bound:
-                return 0
             if tail[:1].isupper():
                 return 2
+            if tail in _stub_bound:
+                return 0
             return 1
         _callable_first = sorted(list(stated_symbols), key=_head_tier)[:6]
         # BARE AND QUALIFIED. A stub that does `from sympy.parsing.mathematica import
@@ -1032,7 +1038,13 @@ def solve_item(bench: str | pathlib.Path, item: Mapping[str, Any], *,
                          stub_prefixes=stub_prefixes,
                          return_annotations=[returns] if returns else [],
                          guide_bodies=guide_first,
-                         stub_imports=stub_names,
+                         # THE LINES, not the parsed names. `stub_names` is a list of
+                         # identifiers with the `import` keyword stripped, so a module root
+                         # could never be recognised as a module and every stated symbol was
+                         # ranked as if the stub had bound it directly. The raw import lines
+                         # are what state which NAME is a module and which is a callable.
+                         stub_imports=[ln for ln in item["starting_code"].splitlines()
+                                       if ln.strip().startswith(("import ", "from "))],
                          nested_short=nested_short,
                          kwarg_names=kwarg_names,
                          func_name=func_name,
