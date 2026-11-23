@@ -11,10 +11,12 @@ name: Independent grammar transport replay
 #
 # This workflow re-runs ONLY iteration 7's stdlib zero-model grammar transport
 # on exact pinned blobs, from /tmp under `python3 -I -B`, plus five adversarial
-# fail-closed controls. It uploads the resulting receipt as an artifact. It does
-# not run a benchmark, register a capability, edit terminal truth, commit, push,
-# merge, or claim section 6. Artifact attestations and OIDC provenance are
-# build-time verification evidence, never runtime dependencies of Brain.
+# fail-closed controls. It uploads the resulting receipt as an artifact. Because
+# artifact hosts may be unreachable from a restricted sandbox, the push run also
+# commits the runner-owned receipt to the same active branch; the local producer
+# never writes that file. It does not run a benchmark, register a capability,
+# edit terminal truth, merge, or claim section 6. OIDC provenance is build-time
+# verification evidence, never a runtime dependency of Brain.
 
 on:
   push:
@@ -44,7 +46,7 @@ concurrency:
   cancel-in-progress: false
 
 permissions:
-  contents: read
+  contents: write
   id-token: write
 
 env:
@@ -58,7 +60,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 1
-          persist-credentials: false
+          persist-credentials: true
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
@@ -408,6 +410,28 @@ jobs:
           print("INDEPENDENT_TRANSPORT_RECEIPT_SHA256", hashlib.sha256(data).hexdigest())
           print(json.dumps({"status": receipt["status"], "scope": receipt["scope"], "truth": receipt["truth"]}, sort_keys=True))
           PY
+          cat "${WORKSPACE}/out/GRAMMAR_TRANSPORT_INDEPENDENT_VERIFICATION_20261123_V1.json"
+      - name: Land runner-owned receipt on the active branch
+        if: success() && github.event_name == 'push' && github.ref == 'refs/heads/arena/6f8ac9ce-brain' && github.repository == 'moxnixmdj/brain'
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd "${WORKSPACE}"
+          cp "out/GRAMMAR_TRANSPORT_INDEPENDENT_VERIFICATION_20261123_V1.json" \
+             "canonical/verification/GRAMMAR_TRANSPORT_INDEPENDENT_VERIFICATION_20261123_V1.json"
+          cp "out/GRAMMAR_TRANSPORT_INDEPENDENT_VERIFICATION_20261123_V1.sha256" \
+             "canonical/verification/GRAMMAR_TRANSPORT_INDEPENDENT_VERIFICATION_20261123_V1.sha256"
+          git config user.name "project-brain-independent-grammar-transport-replay"
+          git config user.email "project-brain-independent-grammar-transport-replay@users.noreply.github.com"
+          git add "canonical/verification/GRAMMAR_TRANSPORT_INDEPENDENT_VERIFICATION_20261123_V1.json" \
+                  "canonical/verification/GRAMMAR_TRANSPORT_INDEPENDENT_VERIFICATION_20261123_V1.sha256"
+          if git diff --cached --quiet; then
+            echo "NO_RUNNER_RECEIPT_CHANGE"
+            exit 0
+          fi
+          git commit -m "Record OIDC-attested independent grammar transport replay"
+          git pull --rebase origin arena/6f8ac9ce-brain
+          git push origin HEAD:arena/6f8ac9ce-brain
       - name: Upload runner-owned independent replay artifact
         if: always()
         uses: actions/upload-artifact@v4
