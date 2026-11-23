@@ -316,7 +316,7 @@ def _try_multistep_closed_loop_patches(
 
 def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
     if not isinstance(args,Mapping):
-        raise RepairApplyError("ARGS_NOT_OBJECT")
+        raise RepairApplyError("ARGS_NOT_OBJECT" + ":" + type(args).__name__)
     repo=pathlib.Path(root).resolve()
     source_root=_safe_dir(repo,args.get("source_root","."))
     if "test_paths" not in args or args.get("test_paths") is None:

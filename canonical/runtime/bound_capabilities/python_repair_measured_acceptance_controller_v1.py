@@ -345,7 +345,7 @@ def _run_search(args, repair_args, repo, source_root, scratch):
 
 def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
     if not isinstance(args,Mapping):
-        raise RepairAcceptanceError("ARGS_NOT_OBJECT")
+        raise RepairAcceptanceError("ARGS_NOT_OBJECT" + ":" + type(args).__name__)
     strategy = args.get("repair_strategy", "guided")
     if strategy not in ("guided", "iterative_then_guided"):
         raise RepairAcceptanceError("REPAIR_STRATEGY_UNSUPPORTED")

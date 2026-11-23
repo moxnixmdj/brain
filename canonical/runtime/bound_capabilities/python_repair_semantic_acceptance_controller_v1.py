@@ -28,7 +28,7 @@ def _manifest(root:pathlib.Path)->tuple[list[dict[str,Any]],str]:
 
 def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
     if not isinstance(args,Mapping):
-        raise SemanticRepairError("ARGS_NOT_OBJECT")
+        raise SemanticRepairError("ARGS_NOT_OBJECT" + ":" + type(args).__name__)
     repo=pathlib.Path(root).resolve()
     source_root=v8._safe_dir(repo,args.get("source_root","."))
     test_paths=[v8._safe_file(repo,x) for x in (args.get("test_paths") or []) if str(x).strip()]

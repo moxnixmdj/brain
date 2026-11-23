@@ -1134,7 +1134,7 @@ def _run_one(argv: list[str], root: pathlib.Path, env: dict[str, str],
 def run(args: Mapping[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]:
     repo = pathlib.Path(root).resolve()
     if not isinstance(args, Mapping):
-        raise CounterfactualSpecError("ARGS_NOT_OBJECT")
+        raise CounterfactualSpecError("ARGS_NOT_OBJECT" + ":" + type(args).__name__)
     source = _PATCH._safe_file(repo, args.get("source_path"), suffix=".py")
     tests_raw = [x for x in (args.get("test_paths") or []) if str(x).strip()]
     if not tests_raw:

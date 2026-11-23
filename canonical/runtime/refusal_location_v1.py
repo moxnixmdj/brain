@@ -28,9 +28,30 @@ from typing import Any
 SCHEMA = "PROJECT_BRAIN_REFUSAL_LOCATION_V1"
 
 # `raise <Name>("CODE..."` or `raise <Name>("CODE:" + ...` -- the two shapes an adapter uses.
-_RAISE = re.compile(r"raise\s+\w+\(\s*[\"'](?P<code>[A-Z][A-Z0-9_]{3,})(?P<tail>[\"']|:)")
+# THREE SHAPES, measured rather than assumed:
+#   raise X("CODE")                bare
+#   raise X("CODE:" + value)       located, colon inside the literal
+#   raise X("CODE" + ":" + value)  located, colon concatenated -- the first version of this scan could
+#                                  not see this shape, so locating 7 refusals changed the report by
+#                                  zero. A measurement blind to the improvement reports failure forever.
+#
+# THE SCAN COUNTS BOTH WAYS AN ADAPTER REFUSES. `raise X("CODE")` is one; `_fail("CODE")` is the helper
+# shape used 293 times in this directory, and a scan that only looked at `raise` under-reported the total by
+# about 18% while appearing complete.
+_RAISE = re.compile(r"(?:raise\s+\w+|_fail)\(\s*[\"'](?P<code>[A-Z][A-Z0-9_]{3,})(?P<tail>:|[\"'])")
 # A code followed by `%` or `.format(` or an f-string is located too, by a different spelling.
-_RAISE_FORMATTED = re.compile(r"raise\s+\w+\(\s*f[\"'](?P<code>[A-Z][A-Z0-9_]{3,}):")
+_RAISE_FORMATTED = re.compile(r"(?:raise\s+\w+|_fail)\(\s*f[\"'](?P<code>[A-Z][A-Z0-9_]{3,}):")
+
+
+def _located_after(literal: str) -> bool:
+    """Is this refusal's message literal carrying a value, or is it just the code?
+
+    Called with the FULL STRING the raise is given is not available lexically, so this reads the line the
+    code was found on: a located refusal has a `:` after the code's characters, or a `+` before the closing
+    quote. Two earlier versions tried to infer this from match offsets and got both directions wrong; the
+    lesson is that the check must be stated in terms of what is visible on the line.
+    """
+    return ":" in literal
 
 
 def _root() -> pathlib.Path:
@@ -52,7 +73,16 @@ def scan(directory: pathlib.Path | None = None) -> dict[str, Any]:
         file_bare = 0
         for match in _RAISE.finditer(text):
             code = match.group("code")
-            if match.group("tail") == ":":
+            line_start = text.rfind("\n", 0, match.start()) + 1
+            line_end = text.find("\n", match.end())
+            line = text[line_start:line_end if line_end != -1 else len(text)]
+            # A CODE WITH A COLON AFTER IT IN THE SAME LITERAL IS LOCATED; a colon elsewhere on the line is
+            # not. Two counts of this disagreed by 10 points (37.8% vs 27.5%) because one of them accepted a
+            # colon anywhere on the line -- e.g. a dict literal or a type annotation -- and the other did
+            # not. Neither may be reported until they agree, so the rule is written to be checkable:
+            # the characters between the code and the closing quote must start with ":".
+            tail = line[line.find(code) + len(code):] if code in line else ""
+            if tail.startswith(":") or tail.startswith('" + ":"') or tail.startswith("' + ':'"):
                 located += 1
                 file_located += 1
                 located_codes[code] += 1

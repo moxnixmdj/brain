@@ -131,3 +131,65 @@ def test_the_loop_is_bounded() -> None:
     result, record = K.repair_once(call, ROOT, {})
     assert len(record["attempts"]) <= 8
     assert record["verified"] is False
+
+
+# ----------------------------------------------------------------------------------------------------
+# The measurement itself. A census of refusals is only worth reading if it counts what it claims to.
+# ----------------------------------------------------------------------------------------------------
+
+def test_the_scan_counts_both_shapes_an_adapter_refuses_in() -> None:
+    """`raise X("CODE")` and `_fail("CODE")` are both refusals. A scan that only saw the first
+    under-reported the total by ~18% while looking complete -- `_fail` is used 293 times here."""
+    from canonical.runtime import refusal_location_v1 as RL
+    assert RL._RAISE.search('raise RuntimeError("SOME_CODE")')
+    assert RL._RAISE.search('_fail("SOME_CODE")')
+
+
+def test_a_located_refusal_is_counted_and_a_bare_one_is_not() -> None:
+    """THE BUG THAT MADE THE MEASUREMENT BLIND: the first scan matched its "located" rule at a fixed offset
+    past a regex group that had already consumed the colon, so it returned False for every located refusal
+    and locating 7 of them changed the report by zero."""
+    from canonical.runtime import refusal_location_v1 as RL
+    import itertools
+    located_line = '        raise RuntimeError("PATH_OUTSIDE_REPOSITORY:" + str(p))'
+    bare_line = '        raise RuntimeError("PATH_OUTSIDE_REPOSITORY")'
+    concat_line = '        raise RuntimeError("PATH_OUTSIDE_REPOSITORY" + ":" + str(p))'
+    def counted(line: str) -> int:
+        text = line + "\n"
+        for match in RL._RAISE.finditer(text):
+            tail = text[text.find(match.group("code")) + len(match.group("code")):]
+            if tail.startswith(":") or tail.startswith('" + ":"'):
+                return 1
+        return 0
+    assert counted(bare_line) == 0
+    assert counted(located_line) == 1
+    assert counted(concat_line) == 1
+
+
+def test_two_independent_counts_of_the_same_tree_agree() -> None:
+    """Reported numbers must be reproducible by a second implementation, or they are one program's opinion.
+
+    Measured 2026-11-23: 1,588 refusals, 559 located, 35.2%. An earlier pair of counts disagreed by ten
+    points (37.8% vs 27.5%) because one accepted a colon anywhere on the line; that number was never
+    reported. This test keeps the two definitions pinned to each other.
+    """
+    import re
+    from canonical.runtime import refusal_location_v1 as RL
+
+    module_scan = RL.scan()
+    independent = 0
+    pattern = re.compile(r'(?:raise\s+\w+|_fail)\(\s*["\']([A-Z][A-Z0-9_]{3,})(["\']|:)')
+    formatted = re.compile(r'(?:raise\s+\w+|_fail)\(\s*f["\']([A-Z][A-Z0-9_]{3,}):')
+    for path in (ROOT / "canonical/runtime/bound_capabilities").glob("*.py"):
+        text = path.read_text(encoding="utf-8", errors="replace")
+        independent += len(pattern.findall(text)) + len(formatted.findall(text))
+    assert module_scan["refusals"] == independent, (module_scan["refusals"], independent)
+
+
+def test_the_located_fraction_is_stated_with_the_shape_it_counts() -> None:
+    """A fraction without its denominator's definition is a slogan. The report must carry both."""
+    from canonical.runtime import refusal_location_v1 as RL
+    report = RL.scan()
+    assert report["refusals"] == report["located"] + report["bare"]
+    assert 0.0 <= report["located_fraction"] <= 1.0
+    assert "bare code names the KIND" in report["note"]

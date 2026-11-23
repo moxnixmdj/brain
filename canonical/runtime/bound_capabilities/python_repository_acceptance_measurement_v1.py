@@ -292,7 +292,7 @@ def _copy_source(source_root: pathlib.Path, workspace: pathlib.Path) -> None:
 
 def run(args: Mapping[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]:
     if not isinstance(args, Mapping):
-        raise MeasurementError("ARGS_NOT_OBJECT")
+        raise MeasurementError("ARGS_NOT_OBJECT" + ":" + type(args).__name__)
     repo = pathlib.Path(root).resolve()
     source_root = _safe_dir(repo, args.get("source_root", "."))
     output = _safe_output(repo, args.get("output_path"))

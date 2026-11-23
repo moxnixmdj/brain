@@ -594,7 +594,7 @@ _READERS = {
 def run(args: Mapping[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
     repo = pathlib.Path(root).resolve()
     if not isinstance(args, Mapping):
-        _fail("ARGS_NOT_OBJECT")
+        _fail("ARGS_NOT_OBJECT" + ":" + type(args).__name__)
     op = str(args.get("op") or "").strip().lower()
     if op not in OPS:
         _fail("OP_NOT_DECLARED:" + (op or "<empty>") + ":declared=" + ",".join(OPS))

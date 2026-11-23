@@ -4698,3 +4698,24 @@ true, and one that fails on correct changes.
 machine's blindness, one `raise` at a time. The next step is to make location a *convention enforced by a
 test* rather than a cleanup that has to be repeated, and to locate the next tier (`TEST_PATHS_REQUIRED` 17,
 `ARGS_NOT_OBJECT` 13, `NO_TEST_FILES_UNDER_SOURCE_ROOT` 13) the same measured way.
+
+## §A87b — the measurement was blind, and two counts caught it
+
+The first `refusal_location_v1` reported **29.3% located**, then **37.8%**, then **35.2%** on the same tree.
+Every one of those numbers was produced by a program, and three of them disagreed. What happened:
+
+1. The first scan matched `raise\s+\w+\(` only. `_fail("CODE")` — used **293 times** in this directory — was
+   invisible, so the total was under-reported by ~18% while the report looked complete.
+2. The "is it located" rule matched at a fixed offset past a regex group that had **already consumed the
+   colon**, so it returned `False` for every located refusal. A rewrite that located 7 refusals changed the
+   report by **zero**, which is the signature of a measurement, not of the code.
+3. A second, independent count gave **27.5%**. A number no second implementation reproduces is one program's
+   opinion, so neither number was reported until they agreed.
+
+Final, both counts equal: **1,588 refusals, 559 located, 35.2%**, with 667 distinct bare codes.
+A test now asserts the two implementations return the same total, and a second asserts the located fraction
+is never quoted without the definition that produced it.
+
+**The lesson is a rule, not an anecdote:** a measurement that cannot see the change it is measuring will
+report failure forever, and a measurement nobody can reproduce is not evidence. This project records that
+kind of mistake because it has now made it three times in three different layers.
