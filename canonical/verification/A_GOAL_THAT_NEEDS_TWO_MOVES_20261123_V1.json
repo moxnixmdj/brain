@@ -1,0 +1,539 @@
+{
+ "all_forward_hold": true,
+ "authority": "NONE__PRODUCER_RUN_SANDBOX_ONLY",
+ "class_moves": [
+  {
+   "delta": {
+    "NAMES": 1,
+    "READABLE": 1
+   },
+   "id": "cp:cp_backup",
+   "needs": [
+    "READABLE"
+   ],
+   "sets": {},
+   "signature": {
+    "CARD": "INCREASED",
+    "IDENT": "CHANGED",
+    "LOT": "RETAINED",
+    "MULTISET": "CHANGED",
+    "ORDER": "CHANGED",
+    "PAIRING": "CHANGED"
+   },
+   "tool": "cp"
+  },
+  {
+   "delta": {
+    "NAMES": 0
+   },
+   "id": "mv:mv_backup",
+   "needs": [
+    "READABLE"
+   ],
+   "sets": {},
+   "signature": {
+    "CARD": "SAME",
+    "IDENT": "CHANGED",
+    "LOT": "RETAINED",
+    "MULTISET": "SAME",
+    "ORDER": "CHANGED",
+    "PAIRING": "CHANGED"
+   },
+   "tool": "mv"
+  },
+  {
+   "delta": {
+    "NAMES": -1,
+    "READABLE": -1,
+    "REMOVED": 1
+   },
+   "id": "rm:rm_force",
+   "needs": [
+    "READABLE"
+   ],
+   "sets": {},
+   "signature": {
+    "CARD": "DECREASED",
+    "IDENT": "CHANGED",
+    "LOT": "PARTIAL",
+    "MULTISET": "CHANGED",
+    "ORDER": "CHANGED",
+    "PAIRING": "CHANGED"
+   },
+   "tool": "rm"
+  },
+  {
+   "delta": {
+    "NAMES": 0
+   },
+   "id": "gzip:gzip_decompress",
+   "needs": [
+    "READABLE"
+   ],
+   "sets": {},
+   "signature": {
+    "CARD": "SAME",
+    "IDENT": "CHANGED",
+    "LOT": "RETAINED",
+    "MULTISET": "CHANGED",
+    "ORDER": "CHANGED",
+    "PAIRING": "CHANGED"
+   },
+   "tool": "gzip"
+  }
+ ],
+ "copies_do_they_exist": {
+  "cp_rows": 2,
+  "mv_rows": 2,
+  "note": "round 4 seeded only in.txt/in.gz, so cp and mv aborted on their own bound operand and produced zero rows; this receipt seeds in.json and they appear"
+ },
+ "distinct_classes": {
+  "by_class": [
+   {
+    "doors": [
+     "cp:cp_backup",
+     "cp:cp_suffix",
+     "gzip:gzip_keep"
+    ],
+    "signature": {
+     "CARD": "INCREASED",
+     "IDENT": "CHANGED",
+     "LOT": "RETAINED",
+     "MULTISET": "CHANGED",
+     "ORDER": "CHANGED",
+     "PAIRING": "CHANGED"
+    }
+   },
+   {
+    "doors": [
+     "mv:mv_backup",
+     "mv:mv_suffix"
+    ],
+    "signature": {
+     "CARD": "SAME",
+     "IDENT": "CHANGED",
+     "LOT": "RETAINED",
+     "MULTISET": "SAME",
+     "ORDER": "CHANGED",
+     "PAIRING": "CHANGED"
+    }
+   },
+   {
+    "doors": [
+     "rm:rm_force",
+     "rm:rm_one_file_system",
+     "rm:rm_no_preserve_root",
+     "rm:rm_preserve_root",
+     "rm:rm_recursive",
+     "rm:rm_dir",
+     "rm:rm_verbose"
+    ],
+    "signature": {
+     "CARD": "DECREASED",
+     "IDENT": "CHANGED",
+     "LOT": "PARTIAL",
+     "MULTISET": "CHANGED",
+     "ORDER": "CHANGED",
+     "PAIRING": "CHANGED"
+    }
+   },
+   {
+    "doors": [
+     "gzip:gzip_decompress",
+     "gzip:gzip_force",
+     "gzip:gzip_no_name",
+     "gzip:gzip_name",
+     "gzip:gzip_quiet",
+     "gzip:gzip_recursive",
+     "gzip:gzip_rsyncable",
+     "gzip:gzip_synchronous",
+     "gzip:gzip_verbose",
+     "gzip:gzip_fast",
+     "gzip:gzip_best"
+    ],
+    "signature": {
+     "CARD": "SAME",
+     "IDENT": "CHANGED",
+     "LOT": "RETAINED",
+     "MULTISET": "CHANGED",
+     "ORDER": "CHANGED",
+     "PAIRING": "CHANGED"
+    }
+   }
+  ],
+  "classes": 4,
+  "doors": 23
+ },
+ "doors_measured": 23,
+ "goal": {
+  "at_least": {
+   "NAMES": 3,
+   "READABLE": 3,
+   "REMOVED": 1
+  },
+  "at_most": {},
+  "desc": "the subject's name removed, still 3 readable names -- nothing lost"
+ },
+ "honest_limits": [
+  "the classes come from 4 programs (cp, gzip, mv, rm); a move class no program here implements cannot be planned with, and the planner refuses rather than inventing it",
+  "CONTENTS and READABLE are clamped by NAMES, so a world where a name outlives its content must be stated with `world(readable=...)`; the planner will not discover that state by itself",
+  "an operation that raises CARD while writing nothing readable (`touch`) shares the copy's signature, so it is mis-modelled as a copy -- no signature over these six relations separates them",
+  "the plan is shortest in MOVE COUNT, not in cost; no wall-clock or money model is applied to a step"
+ ],
+ "model_calls": 0,
+ "network_calls": 0,
+ "no_world_had_a_single_door": true,
+ "order_experiment": {
+  "adder": "cp:cp_backup",
+  "copy_then_delete": {
+   "applied": [
+    "cp",
+    "rm"
+   ],
+   "holds": true,
+   "refused_because": null,
+   "state": {
+    "CONTENTS": 1,
+    "NAMES": 1,
+    "READABLE": 1,
+    "REMOVED": 1
+   }
+  },
+  "delete_then_copy": {
+   "applied": [
+    "rm"
+   ],
+   "holds": false,
+   "refused_because": "cp needs ['READABLE'] and the world has {'READABLE': 0}",
+   "state": {
+    "CONTENTS": 0,
+    "NAMES": 0,
+    "READABLE": 0,
+    "REMOVED": 1
+   }
+  },
+  "goal": {
+   "at_least": {
+    "NAMES": 1,
+    "READABLE": 1,
+    "REMOVED": 1
+   },
+   "at_most": {},
+   "desc": "a name was removed and nothing readable was lost"
+  },
+  "measured": true,
+  "order_decides": true,
+  "remover": "rm:rm_force"
+ },
+ "parameters": 0,
+ "refusal_control": {
+  "because": "NAMES <= 0 (is 2)",
+  "code": "REFUSED__NO_SEQUENCE_OF_MEASURED_MOVES_REACHES_THE_GOAL",
+  "refused": true
+ },
+ "schema": "PROJECT_BRAIN_A_GOAL_THAT_NEEDS_TWO_MOVES_RECEIPT_V1",
+ "seconds": 0.98,
+ "sequence_necessary_in_every_world": true,
+ "the_round_4_measurement_defect": {
+  "claimed_programs": 4,
+  "round_4_distinct_programs_with_rows": 2,
+  "round_4_seed_rows_by_tool": {
+   "gzip": 33,
+   "rm": 21
+  },
+  "verdict": "cp and mv produced zero rows, so the round-4 join was measured on two programs while reporting four"
+ },
+ "the_unit": "a move CLASS, derived from the six relations its own signature moved; the plan is over relation dimensions, never over filenames",
+ "what_was_wrong_first": [
+  "an add-only plan: `capability_planner` returned ['gzip','cp'] for a goal needing both, and running it failed because gzip consumed the file cp needed -- the plan was IMPOSSIBLE, not merely suboptimal, because the planner has no delete list",
+  "the moved() subset as input: it drops `LOT: RETAINED` as 'unchanged', which deleted the precondition, so a rename was applicable to an empty world",
+  "CARD alone as the state: `cp` and `touch` both raise the count by one and only one leaves a readable second name",
+  "a delete subtracting BOTH READABLE and CONTENTS for one loss: `cp; rm` then reported zero readable names while the content sat readable in the copy",
+  "a goal of {REMOVED>=1, READABLE>=1}: `rm` met it outright in a world holding a duplicate content, so no sequence was needed and the experiment proved nothing",
+  "a goal of {REMOVED>=1, READABLE>=1, NAMES>=3}: still met by `rm` in a world already holding four names -- the same escape one world over",
+  "two doors executed as recorded against DIFFERENT files: the census binds `cp` to in.json and `rm` to in.txt, so the sequence copied one file and deleted another and the content looked lost",
+  "`len(after) < len(before)` as the removal test: a copy adds a name and a delete removes one, so a net count of zero hid a real removal",
+  "a refusal control of 'three readable names', which is reachable by cp twice -- the planner rightly planned it and the control proved nothing"
+ ],
+ "worlds": [
+  {
+   "forward": {
+    "after": [
+     "COPY",
+     "in.gz",
+     "in.json"
+    ],
+    "before": [
+     "in.gz",
+     "in.json",
+     "in.txt"
+    ],
+    "contents_lost": 0,
+    "goal_holds": true,
+    "names_after": 3,
+    "names_before": 3,
+    "names_vanished": 1,
+    "ran": true,
+    "steps": [
+     {
+      "door": "cp:cp_backup",
+      "exit": 0,
+      "invoked_as": [
+       "cp",
+       "--backup",
+       "in.txt",
+       "COPY"
+      ]
+     },
+     {
+      "door": "rm:rm_force",
+      "exit": 0,
+      "invoked_as": [
+       "rm",
+       "--force",
+       "in.txt"
+      ]
+     }
+    ]
+   },
+   "forward_holds": true,
+   "names": 3,
+   "no_single_door": true,
+   "one_move_answers": [],
+   "plan": [
+    {
+     "move": "cp:cp_backup",
+     "tool": "cp"
+    },
+    {
+     "move": "rm:rm_force",
+     "tool": "rm"
+    }
+   ],
+   "reverse": {
+    "after": [
+     "in.gz",
+     "in.json"
+    ],
+    "ran": false,
+    "reason": "cp:cp_backup exited 1",
+    "steps": [
+     {
+      "door": "rm:rm_force",
+      "exit": 0,
+      "invoked_as": [
+       "rm",
+       "--force",
+       "in.txt"
+      ]
+     },
+     {
+      "door": "cp:cp_backup",
+      "exit": 1,
+      "invoked_as": [
+       "cp",
+       "--backup",
+       "in.txt",
+       "COPY"
+      ]
+     }
+    ]
+   },
+   "reverse_holds": false,
+   "sequence_was_necessary": true,
+   "start": {
+    "CONTENTS": 3,
+    "NAMES": 3,
+    "READABLE": 3,
+    "REMOVED": 0
+   },
+   "world": "TWO_NAMES_ONE_CONTENT"
+  },
+  {
+   "forward": {
+    "after": [
+     "COPY",
+     "extra.txt",
+     "in.gz",
+     "in.json"
+    ],
+    "before": [
+     "extra.txt",
+     "in.gz",
+     "in.json",
+     "in.txt"
+    ],
+    "contents_lost": 0,
+    "goal_holds": true,
+    "names_after": 4,
+    "names_before": 4,
+    "names_vanished": 1,
+    "ran": true,
+    "steps": [
+     {
+      "door": "cp:cp_backup",
+      "exit": 0,
+      "invoked_as": [
+       "cp",
+       "--backup",
+       "in.txt",
+       "COPY"
+      ]
+     },
+     {
+      "door": "rm:rm_force",
+      "exit": 0,
+      "invoked_as": [
+       "rm",
+       "--force",
+       "in.txt"
+      ]
+     }
+    ]
+   },
+   "forward_holds": true,
+   "names": 4,
+   "no_single_door": true,
+   "one_move_answers": [],
+   "plan": [
+    {
+     "move": "cp:cp_backup",
+     "tool": "cp"
+    },
+    {
+     "move": "rm:rm_force",
+     "tool": "rm"
+    }
+   ],
+   "reverse": {
+    "after": [
+     "extra.txt",
+     "in.gz",
+     "in.json"
+    ],
+    "ran": false,
+    "reason": "cp:cp_backup exited 1",
+    "steps": [
+     {
+      "door": "rm:rm_force",
+      "exit": 0,
+      "invoked_as": [
+       "rm",
+       "--force",
+       "in.txt"
+      ]
+     },
+     {
+      "door": "cp:cp_backup",
+      "exit": 1,
+      "invoked_as": [
+       "cp",
+       "--backup",
+       "in.txt",
+       "COPY"
+      ]
+     }
+    ]
+   },
+   "reverse_holds": false,
+   "sequence_was_necessary": true,
+   "start": {
+    "CONTENTS": 4,
+    "NAMES": 4,
+    "READABLE": 4,
+    "REMOVED": 0
+   },
+   "world": "THREE_NAMES"
+  },
+  {
+   "forward": {
+    "after": [
+     "COPY",
+     "in.json"
+    ],
+    "before": [
+     "in.json",
+     "in.txt"
+    ],
+    "contents_lost": 0,
+    "goal_holds": true,
+    "names_after": 2,
+    "names_before": 2,
+    "names_vanished": 1,
+    "ran": true,
+    "steps": [
+     {
+      "door": "cp:cp_backup",
+      "exit": 0,
+      "invoked_as": [
+       "cp",
+       "--backup",
+       "in.txt",
+       "COPY"
+      ]
+     },
+     {
+      "door": "rm:rm_force",
+      "exit": 0,
+      "invoked_as": [
+       "rm",
+       "--force",
+       "in.txt"
+      ]
+     }
+    ]
+   },
+   "forward_holds": true,
+   "names": 2,
+   "no_single_door": true,
+   "one_move_answers": [],
+   "plan": [
+    {
+     "move": "cp:cp_backup",
+     "tool": "cp"
+    },
+    {
+     "move": "rm:rm_force",
+     "tool": "rm"
+    }
+   ],
+   "reverse": {
+    "after": [
+     "in.json"
+    ],
+    "ran": false,
+    "reason": "cp:cp_backup exited 1",
+    "steps": [
+     {
+      "door": "rm:rm_force",
+      "exit": 0,
+      "invoked_as": [
+       "rm",
+       "--force",
+       "in.txt"
+      ]
+     },
+     {
+      "door": "cp:cp_backup",
+      "exit": 1,
+      "invoked_as": [
+       "cp",
+       "--backup",
+       "in.txt",
+       "COPY"
+      ]
+     }
+    ]
+   },
+   "reverse_holds": false,
+   "sequence_was_necessary": true,
+   "start": {
+    "CONTENTS": 2,
+    "NAMES": 2,
+    "READABLE": 2,
+    "REMOVED": 0
+   },
+   "world": "ONE_CONTENT_ONLY"
+  }
+ ]
+}

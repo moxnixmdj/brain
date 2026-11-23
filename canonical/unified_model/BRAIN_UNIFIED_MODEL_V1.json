@@ -31228,16 +31228,16 @@
   "engines": 26,
   "knowledge_documents": 600,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 7233,
+  "research_index_records": 7235,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 453,
-  "source_index_modules": 2008
+  "source_index_modules": 2009
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "2ab3d4139220a24688e7405ae7baff1cfca13ab3d3f8ac3dd3d3cb132ea86203"
+  "value": "f6512df5f38797c9e8025b8ed9d1ae4ac956f89176b65f8893395d99b4009463"
  },
  "engines": [
   {
@@ -162218,6 +162218,25 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/A_GOAL_THAT_NEEDS_TWO_MOVES_20261123_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/A_GOAL_THAT_NEEDS_TWO_MOVES_20261123_V1.json",
+   "schema": "PROJECT_BRAIN_A_GOAL_THAT_NEEDS_TWO_MOVES_RECEIPT_V1",
+   "sha256": "cd3e77b2372b2959a9e8303e1e6ff95376f817c8828916df246c74adecb82520",
+   "status": "",
+   "terms": {
+    "20261123": 1,
+    "goal": 1,
+    "moves": 1,
+    "needs": 1,
+    "two": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-11-19",
    "id": "research:canonical/verification/A_NEW_LITERAL_IN_AN_EXISTING_CONSTRUCT_20261119_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -243219,6 +243238,51 @@
    }
   },
   {
+   "action_id": "A_GOAL_THAT_NEEDS_TWO_MOVES_20261123_V1",
+   "capability": false,
+   "date": "2026-11-23",
+   "id": "research:canonical/action_intents/A_GOAL_THAT_NEEDS_TWO_MOVES_20261123_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_GOAL_THAT_NEEDS_TWO_MOVES_20261123_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "e9f6e2753b69a94f21f47857675357987be61cac43eedb97524067ef1c5433d7",
+   "status": "PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
+   "terms": {
+    "20261123": 1,
+    "a_goal_that_needs_two_moves_20261123_v1": 1,
+    "across": 1,
+    "against": 2,
+    "because": 1,
+    "both": 1,
+    "checked": 1,
+    "class": 1,
+    "classes": 2,
+    "delta": 2,
+    "dimensions": 1,
+    "door": 1,
+    "filenames": 1,
+    "first": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "goal": 2,
+    "measured": 1,
+    "move": 5,
+    "moves": 1,
+    "needs": 1,
+    "no": 1,
+    "not": 3,
+    "orders": 1,
+    "over": 1,
+    "plan": 1,
+    "plan_over_relation_dimensions_with_a_delete_list": 1,
+    "planned": 1,
+    "precondition": 1,
+    "producer_measured__independent_verification_open": 1,
+    "rather": 1,
+    "real": 1,
+    "state": 2
+   }
+  },
+  {
    "action_id": "A_KEPT_LESSON_STAYS_USABLE_HOWEVER_MANY_FOLLOW_IT_20261111_V1",
    "capability": false,
    "date": "2026-11-11",
@@ -266841,6 +266905,52 @@
   }
  ],
  "source_index": [
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/a_goal_that_needs_two_moves_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/a_goal_that_needs_two_moves_v1.py",
+   "sha256": "b05e93958a800a1dd20bd9dd0bfc268aefbb28513967e7458c66649f6c250db5",
+   "summary": "A goal that needs TWO moves, planned over the CLASS of each move.",
+   "symbol_count": 11,
+   "symbols": [
+    "Goal",
+    "Move",
+    "Refusal",
+    "_from_signature",
+    "_key",
+    "_try",
+    "move_of",
+    "one_move_answers",
+    "plan",
+    "why_order_matters",
+    "world"
+   ],
+   "terms": {
+    "class": 1,
+    "each": 1,
+    "from_signature": 1,
+    "goal": 3,
+    "key": 1,
+    "move": 2,
+    "move_of": 1,
+    "moves": 2,
+    "needs": 2,
+    "one_move_answers": 1,
+    "over": 1,
+    "plan": 1,
+    "planned": 1,
+    "refusal": 1,
+    "try": 1,
+    "two": 2,
+    "v1": 1,
+    "why_order_matters": 1,
+    "world": 1
+   }
+  },
   {
    "capability": false,
    "classification": "ORPHAN",
