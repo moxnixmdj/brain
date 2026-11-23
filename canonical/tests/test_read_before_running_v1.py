@@ -255,3 +255,50 @@ def test_the_rule_says_ask_and_the_probe_answers_so_a_healthy_module_is_left_alo
     warm_raising = RB.apply_memory((raising / "app.py").read_text(), store=store, world=raising)
     assert [m["fault"]["class"] for m in warm_raising["rules_matched"]] == ["module_fails_to_import"]
     assert warm_raising["rules_matched"][0]["observed"]["importable"] is False
+
+
+def test_knowledge_persists_across_processes_and_is_removable_without_retraining() -> None:
+    """§2's TEST, LITERALLY. Knowledge lives outside the weights, is addable and removable, and no parameter
+    changes -- because there are no parameters. What accumulates is a JSON file a person can read and edit.
+
+    Three separate claims, each checked in its own process where it matters:
+      persistence  a fact learned by one process is seen by the NEXT one
+      effect       the fact changes behaviour, or it is not knowledge
+      removal      deleting it restores the cold behaviour, with no retraining
+    """
+    store = pathlib.Path(tempfile.mkdtemp()) / "knowledge.json"
+    world = pathlib.Path(tempfile.mkdtemp(prefix="persist_"))
+    (world / "gamma.py").write_text("raise RuntimeError('broken')\n")
+    (world / "app.py").write_text("import gamma\nprint(1)\n")
+    source = (world / "app.py").read_text()
+
+    def matched() -> list[str]:
+        return [m["fault"]["class"] for m in RB.apply_memory(source, store=store, world=world)["rules_matched"]]
+
+    assert matched() == [], "cold: nothing known"
+
+    # PERSISTENCE: learn in a SEPARATE process, then read it back in another one
+    taught = subprocess.run(
+        [sys.executable, "-c",
+         "import sys; sys.path.insert(0, %r)\n"
+         "from canonical.runtime import read_before_running_v1 as RB\n"
+         "print(RB.absorb('MODULE_NOT_IMPORTABLE:alpha', at='program_A', store=%r)['learned'])"
+         % (str(pathlib.Path(RB.__file__).resolve().parents[2]), str(store))],
+        capture_output=True, text=True)
+    assert taught.stdout.strip() == "True", taught.stderr[-400:]
+
+    read_back = subprocess.run(
+        [sys.executable, "-c",
+         "import sys; sys.path.insert(0, %r)\n"
+         "from canonical.runtime import stated_precondition_v1 as S\n"
+         "print(sorted(S.conditions(store=%r)))"
+         % (str(pathlib.Path(RB.__file__).resolve().parents[2]), str(store))],
+        capture_output=True, text=True)
+    assert "module_not_importable" in read_back.stdout, read_back.stderr[-400:]
+
+    # EFFECT
+    assert matched() == ["module_fails_to_import"]
+
+    # REMOVAL, with no retraining
+    STATED.forget("module_not_importable", store=store)
+    assert matched() == []

@@ -6609,3 +6609,67 @@ Both had to change because the design got better. A test that never needs revisi
     VERIFIED   145 passed, 2 skipped across ten suites
     STILL UNPROVEN  whether this ordering helps on faults that are neither readable nor probeable in isolation
                    -- the next bottleneck, and the honest boundary of everything in §A113-A115
+
+## §A116 — the boundary measured, and §2's test passed literally
+
+### The UNPROVEN item, closed as a negative
+
+§A115 left open: *does read-first help on faults that are neither readable nor probeable in isolation?*
+
+Measured against five runtime-state faults — a division by zero, an `IndexError` past the end, a `KeyError` for
+a missing key, a loop that breaks on its third iteration, a function that would fail only on large input:
+
+    all five   predicted = False    faults = []
+
+**Static reading finds none of them**, and there is nothing to probe in isolation, because the fault exists
+only once the program runs. For this class read-first has **no advantage over the blind loop** — it degenerates
+to it. That is recorded as a negative result rather than glossed: the gain in §A114 is real for statically
+visible faults and **zero** for runtime-state faults, which are the majority of what actually breaks programs.
+
+This is the honest shape of the current capability: it reads what can be read, probes what can be probed, and
+for everything else it is the same run-and-look loop as before.
+
+### §2's test, passed literally
+
+The mission's §2 boundary says knowledge must live outside the weights, be addable and removable without
+retraining, and the weights must hold only computed mechanisms. There are no weights in this path at all —
+there is a JSON file — so the test can be run rather than argued:
+
+    COLD    (empty store)          matched = []
+    WARM    (one experience)       matched = ['module_fails_to_import']
+    FORGOT  (entry deleted)        matched = []
+
+No retraining step exists between those three lines, and nothing is cached in a process. Persistence was
+checked across **real process boundaries**, not by re-reading a variable in one interpreter:
+
+    process 1   absorb('MODULE_NOT_IMPORTABLE:alpha')  -> True
+    process 2   conditions(store)                      -> ['module_not_importable']
+
+### Tests proven to fail
+
+Every claim above is pinned by a test, and the two that matter were made to fail on purpose:
+
+    fix reverted            -> test_a_repair_that_worked_on_the_last_attempt...  FAIL (assert False is True)
+    persistence disabled    -> test_knowledge_persists_across_processes...        FAIL
+
+A test is only evidence once it has been seen to fail for the right reason. Both were caught this way, and the
+first was caught only because the earlier version of it had silently proved nothing.
+
+### Where this leaves the mission claim
+
+| claim | status |
+|---|---|
+| a program's statically-visible faults are known before it runs | **VERIFIED** |
+| one experience teaches a rule that applies to a different program | **VERIFIED** for import faults |
+| the rule asks a question rather than carrying a conviction | **VERIFIED** (§A115) |
+| knowledge persists across processes, addable and removable | **VERIFIED** (§2 test) |
+| this helps on runtime-state faults | **FALSE** — measured, five cases, no advantage |
+| this solves arbitrary computer use | **NOT CLAIMED.** Python import and name faults are a narrow slice |
+
+### The next bottleneck, named
+
+The system can now (a) read a program for what is statically knowable, (b) probe what is decidable in
+isolation, and (c) remember a rule from one experience. What it **cannot** do is decide *before running* whether
+a program is correct — and for runtime-state faults that is the only thing that would help. The remaining lever
+is not more reading; it is a way to observe behaviour without paying for the whole program, which is a different
+problem and is where the next round starts.
