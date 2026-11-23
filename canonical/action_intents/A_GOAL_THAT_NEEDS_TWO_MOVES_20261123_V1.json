@@ -8,10 +8,10 @@
   "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
   "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
   "conversation_memory_is_authority": false,
-  "earlier_routes_exhausted_reason": "A second declaration reader, a GUI/DOM tier, and a room-inference search were each considered and rejected this round: the reader is one mechanism over shapes, the GUI tier needs a display this sandbox does not have, and inferring a room from a failure would be guessing where the measurement can state.",
+  "earlier_routes_exhausted_reason": "Three routes were measured and rejected this round rather than argued about. (1) Call `capability_planner`: its transition is add-only, so it returned ['gzip','cp'] for a goal needing both and running that failed on disk -- an impossible plan, not a suboptimal one. (2) Call `consequence_table_v1`: correct, but it plans over whole states and reports 0 of 52 solved with zero prior experience, so nothing transfers to a world with different filenames. (3) Sequence the round-4 saved rows as they are: the row is a delta and a delta does not say what a state was, so a second move's precondition cannot be checked -- which is why the full signature, not the moved() subset, is the input to a plan.",
   "incremental_spend_usd": 0,
   "independent_verification_completed": false,
-  "independent_verification_note": "Producer-run sandbox only: 15 new tests, 111 across the relevant surface; one join receipt (62 rows, 18/18 stable across 3 worlds, 60/60 held out, 61/62 leave-one-out) with its coverage control reported. No independent identity re-ran it.",
+  "independent_verification_note": "Producer-run sandbox only: 14 new tests, 50 across the relevant surface; one receipt (23 doors -> 4 move classes; 0 single-door answers in 3 worlds; one 2-class plan identical across them; forward holds and reverse fails on disk in 3/3; one refused goal naming the missing fact). No independent identity has re-run any of it.",
   "laws_read_this_session": [
    "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
    "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
@@ -31,11 +31,11 @@
   "producer_cognition_model_dependency_count": 0,
   "progress_class": "VERIFIED_REUSABLE_CAPABILITY_GAIN",
   "progress_evidence_paths": [
-   "canonical/runtime/goal_to_door_v1.py",
-   "canonical/tools/the_goal_picks_the_door_v1.py",
-   "canonical/tests/test_goal_to_door_v1.py",
-   "canonical/verification/THE_GOAL_PICKS_THE_DOOR_20261123_V1.json",
-   "intake/THE_GOAL_PICKS_THE_DOOR_20261123_V1.md"
+   "canonical/runtime/a_goal_that_needs_two_moves_v1.py",
+   "canonical/tools/a_goal_that_needs_two_moves_v1.py",
+   "canonical/tests/test_a_goal_that_needs_two_moves_v1.py",
+   "canonical/verification/A_GOAL_THAT_NEEDS_TWO_MOVES_20261123_V1.json",
+   "intake/A_GOAL_THAT_NEEDS_TWO_MOVES_20261123_V1.md"
   ],
   "route_class": "COMPOSE",
   "scope_complete_discharge": false,
