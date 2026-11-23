@@ -726,3 +726,41 @@ persist narrowly, re-verify at use, get the gap from the right source.
 
 Honesty: this is reconnaissance, not the scan-level code-repair env (§17
 remains open), not a GUI/browser flow, not §6.
+
+## 23. Scan-level code repair: the §17 gap, closed on the generic loop (2026-11-23, measured)
+
+The §17 verdict named the honest gap: the generic scan loop honestly refused
+code-repair goals (OPEN__NO_PLAN_AFTER_SCAN) because the file-transform world
+has no file-edit actions and no test-verified oracle. This turn builds the
+env that closes it, reusing the SAME generic machinery (`perfect_algorithm_v1.run`),
+not the specialist twin.
+
+Built: `canonical/swe_kernel/code_repair_scan_env_v1.py` — `CodeRepairEnv`:
+  - real temp directory, real broken module, real failing test subprocess;
+  - content-invariant textual edit actions (`fix_op:<old>|<new>` replaces every
+    occurrence of <old> with <new>, wherever it appears) — a rule learned on one
+    broken file transfers to any same-shape fresh file;
+  - state = {content, passes} where `passes` is the REAL subprocess test verdict;
+  - snapshot/restore round-trip the state observation (the same contract the
+    file-transform env follows);
+  - the same plan/admit/persist chain as every other goal family.
+
+Measured (probe: `unseen_code_repair_scan_probe_20261123.py`):
+
+  TEACH  PASS, LEARNED_AND_VERIFIED, ADMIT on 2 fresh variants (REACHED /
+         NOT_REACHED — honest: the rule repaired the same-shape fresh defect
+         and correctly did not break the correctly-guarded one), persisted
+         rule ga-9f6b073481ad6a1c (plan [fix_op:-|+]), 6.3 s.
+  COLD   PASS, VERIFIED_NOT_PERSISTED (fresh content, empty store), 6.2 s.
+  WARM   INSTANT_RECALL, PASS__REPLAY_REACHED_GOAL, 0.011 s.
+  CONTROL INSTANT_RECALL, 0.011 s.
+
+Tests: 8/8 (env protocol, refusals, every-occurrence rewrite, snapshot/restore
+round-trip, reset, meta hooks, content-invariant action space, and the full
+teach→admit→persist→warm-replay chain on an unseen broken file).
+
+Honesty: this is the generic scan closing the code-repair CLASS — one experience
+building a plan rule admitted on fresh instances and replayed instantly. It is NOT
+the §18/§21 specialist twin (which gates on the demonstrated pair); it is the
+scan-level engine §17 found missing. §6 stays open and unclaimed: no GUI/browser,
+no hard benchmarks, no carried-model claim.
