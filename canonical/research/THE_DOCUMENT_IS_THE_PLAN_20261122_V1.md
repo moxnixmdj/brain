@@ -2659,3 +2659,50 @@ output of one program's command to be the input of another's, and no page says t
 compose. That remains the bottleneck, now with the one-program case separated out and working.
 
 **Verified:** 78 tests; 13 effect tasks under `PYTHONHASHSEED` 7/99; unseen `vaultctl` 6/6.
+
+### A66 — a sixth mechanism tried and removed, and the ambiguity that made it impossible
+
+The composition bottleneck's first step is derivable and the second is not; the attempt to close the
+first produced the sharpest negative result of the session.
+
+**The case.** "List the **names** of the **files** in /tmp/compose that contain alpha" plans
+`grep alpha /tmp/compose`, which prints every matching *line*. The request asked for names, and the
+page documents `-l, --files-with-matches   print only names of FILEs with selected lines`. Both sides
+print `names` and `files`. It looked like a two-word licence — the same shape as the label matching
+that works everywhere else.
+
+**Why it cannot be done, stated exactly.** `grep --help` also documents
+
+    --files-without-match   print only names of FILEs with no selected lines
+
+which shares `names`, `files`, `print`, `only` and `selected` — *every* word the right answer shares
+— and means the opposite. The two descriptions differ by `no`. From the document alone there is no
+evidence which one a request saying "the names of the files" wants, and choosing between them on a
+word count is exactly the guessing this project refuses.
+
+I tried three narrowings before accepting that, and each failed for its own reason:
+
+1. **Two shared words.** Matched `--only-matching` ("show only the parts of matching lines") for
+   "Show the **lines** … that **contain** localhost" — generic page vocabulary, not evidence.
+2. **Rarity across the page's flags**, counting all flags. `names` counted 2, because
+   `--files-with-matches` supplies it twice — once in the description, once in its own long name.
+   The flag was being counted as evidence for itself.
+3. **Rarity excluding the flag itself.** Then `names` was unique — and the ambiguity above is what
+   remained, which no count can resolve.
+
+**Removed entirely** — the helper, both call sites, and the `switch` role's inclusion logic. The
+suite went from one failure to 78 passing with no behaviour lost. The `switch` role remains
+renderable (a bare flag is a real shape) but nothing produces it.
+
+**The composed request is not claimed.** "Find the files that contain alpha, then archive them"
+needs `grep -l` output to become `tar -T` input, and:
+
+* neither page mentions the other — checked, zero occurrences either way;
+* neither page says that one program's standard output can be another's standard input;
+* the fact that they compose belongs to the *shell*, and the shell has no page here.
+
+That is the honest boundary of "the document is the plan". A request spanning two programs needs one
+fact no document in the environment states, and inventing it from a shared word is how the wrong
+flag gets chosen — twice, in this section alone.
+
+**Verified after removal:** 78 tests; 13 effect tasks; unseen `vaultctl` 6/6.

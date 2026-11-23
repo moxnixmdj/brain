@@ -1712,6 +1712,9 @@ def _render(tool: str, prefix: Sequence[str], operation: Mapping[str, Any] | Non
     for item in bound:
         if item["role"] in ("path_slot", "value_slot"):
             slots.extend([str(item["option"]), str(item["value"])])
+        elif item["role"] == "switch":
+            # a switch takes no value: it is the whole statement it makes
+            slots.append(str(item["option"]))
         elif item["role"] in ("redirect", "stdin_from", "unbound"):
             # `unbound` is the planner saying, in the same breath, "this value has no place in
             # this command". Writing it out as an argument contradicts that statement and makes
