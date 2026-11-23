@@ -31228,7 +31228,7 @@
   "engines": 26,
   "knowledge_documents": 600,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 7227,
+  "research_index_records": 7229,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 452,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "775caf192caa679bc0afa398900690c5738b38aef95ae6cac6b009e70130d5d8"
+  "value": "4df742cc5e91a78725f130b9af55befecc3dc0de7790e40019fcce3486647fbd"
  },
  "engines": [
   {
@@ -185302,6 +185302,26 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/MODEL_CALL_AUDIT_ENV_READY_20261123_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/MODEL_CALL_AUDIT_ENV_READY_20261123_V1.json",
+   "schema": "BRAIN_MODEL_CALL_SURFACE_AUDIT_V1",
+   "sha256": "ff9dba68c96f48de0e469562c9057db1e0f790b6dd849b3e744a1a776075c819",
+   "status": "",
+   "terms": {
+    "20261123": 1,
+    "audit": 1,
+    "call": 1,
+    "env": 1,
+    "model": 1,
+    "ready": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-07",
    "id": "research:canonical/verification/MONOTONE_PROOF_CARRYING_SEMANTIC_REFINEMENT_WOLFRAM_VERIFICATION_20261007_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -249472,6 +249492,51 @@
     "the_vocabulary_hypothesis_is_killed_by_measurement_and_the_evidence_hypothesis_is_sized__sixteen_of_seventeen_refuse_before_a_term_is_named_and_112_templates_add_nothing__so_the_next_organ_is_not_a_synthesizer_and_not_a_learner_but_a_verifier_acquisition_loop__demonstration_as_state_delta_plus_intervention_as_evidence_plus_the_discriminating_question_when_the_check_cannot_decide": 1,
     "v1": 1,
     "verifier": 1
+   }
+  },
+  {
+   "action_id": "ENVIRONMENT_BROKER_ENV_READY_CONTRACT_20261123_V1",
+   "capability": false,
+   "date": "2026-11-23",
+   "id": "research:canonical/action_intents/ENVIRONMENT_BROKER_ENV_READY_CONTRACT_20261123_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/ENVIRONMENT_BROKER_ENV_READY_CONTRACT_20261123_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "bee1caf0855cac86d804318d679ae569c691ce38781515acf0d85ba3c66c3f35",
+   "status": "PROPOSED__PRODUCER_MEASURED__ENVIRONMENT_BROKER_ENV_READY__INDEPENDENT_VERIFICAT",
+   "terms": {
+    "20261123": 1,
+    "60": 1,
+    "agent": 1,
+    "all": 2,
+    "allow_instant_knowledge": 1,
+    "answer": 1,
+    "answers": 1,
+    "anything": 1,
+    "arm": 1,
+    "ask": 1,
+    "asked": 1,
+    "between": 1,
+    "broker": 1,
+    "caller": 1,
+    "cannot": 1,
+    "carry": 1,
+    "compose_the_local_tier_tool_man_guides_into_the_existing_local_guide_path": 1,
+    "content": 2,
+    "environment": 4,
+    "least": 2,
+    "local": 2,
+    "man": 2,
+    "md": 3,
+    "named": 2,
+    "only": 2,
+    "own": 3,
+    "repo": 2,
+    "small": 2,
+    "tier": 3,
+    "tokens": 2,
+    "tool": 4,
+    "web": 2
    }
   },
   {
