@@ -6355,3 +6355,119 @@ Every remaining claim in this thread — "it acts in an environment it has never
 experience", "it repairs its own failure" — is a claim about acting on a world. From here they are measured
 under a harness that reports what the acting did, so a result can no longer be an artifact of the world the
 previous result left behind.
+
+## §A113 — the hypothesis was false, and saying so is the finding
+
+### What I measured before building anything
+
+The owner's core hypothesis: *"the agent only needs to do something once ... and it learns it permanently."*
+
+    the same misspelling, repaired in three successive fresh worlds
+    trial 1  probes=1  credited=False
+    trial 2  probes=1  credited=False
+    trial 3  probes=1  credited=False
+
+**The second occurrence was never cheaper than the first.** Nothing consulted anything. The hypothesis was not
+merely unproven in this repo — it was **false of the loop that had just been built in §A111**, and reporting
+the intent as the result would have been exactly the dishonesty this project exists to avoid.
+
+A second measurement, of the cost: repairing **one** fault took **four** executions of the program. `diagnose`
+is a pure regex parse and costs nothing. The expense is *discovering* the fault by running and reading a
+traceback.
+
+### The elimination: for these classes the failure never needs to happen
+
+A missing module and an undefined name are both visible in the **source**. CPython learns them by executing;
+they do not require execution. `look_before_v1` already argued the principle — *"a command is not opaque. It
+names files that are sitting right there"* — applied here to a Python program.
+
+Measured: both faults predicted from source, **zero executions**. But then the honest question, which nearly
+killed the whole design:
+
+> if the reader already finds the fault for free, **what did the memory add?**
+
+For the missing-module class: **nothing.** `predict` found it alone. The "verified learning" I had a moment
+earlier was measuring a mechanism that did not need to exist. It is recorded here because it was caught, not
+because it was avoided.
+
+### Where memory is actually load-bearing
+
+There is a class the source genuinely cannot see: **a module that exists but raises while being imported.**
+
+    app.py        import broken_mod
+    broken_mod.py raise RuntimeError("broken at import")
+
+`broken_mod` is *present*, so a static reader says clean. The program dies. And the traceback states the
+location precisely — in its **frames**:
+
+    File ".../app.py",        line 1, in <module>   import broken_mod
+    File ".../broken_mod.py", line 1, in <module>   raise RuntimeError(...)
+
+**Every reader in this project took the last line and threw the frames away.** `stated.parse` → None,
+`fix.classify` → `THE_FAILURE_STATES_NO_CORRECTION`. Both were *correct* about prose, and both discarded the
+exact location sitting three lines above.
+
+### The build, in three parts
+
+| part | what it does | what it refuses |
+|---|---|---|
+| `frames_in` + `_imported_at` | reads a traceback's frames; an import frame names its module, parsed with `ast` | a frame that does not parse as an import |
+| `_PY_DIALECTS` | reads CPython's two sentences into this module's convention | a value that is not one token |
+| `read_before_running_v1` | predicts a program's faults from source; separates *rule* from *fact* | star imports, syntax errors, prose |
+
+**What to generalise, answered by measurement rather than taste** — the owner's open question:
+
+    MODULE_NOT_FOUND:pyjokes       learned=True   {'property':'present','test':'is_present'}
+    MODULE_NOT_IMPORTABLE:alpha    learned=True   {'property':'importable','test':'is_importable'}
+    NAME_NOT_DEFINED:totl          learned=False  CODE_NAMES_NO_DECIDABLE_PROPERTY
+
+The first two are rules about the **world**: they transfer to any program that imports *that module*, and they
+are decided by asking an inspectable external store (is it installed? does it import?), never a trained
+parameter. §2's test holds literally — `pip install X` stops the rule firing, `pip uninstall X` starts it
+again, and no weight changes.
+
+An undefined name is a fact about **one file's symbol table**. `totl` in one program says nothing about
+another. Storing it would be a transcript wearing the word "knowledge", which the owner warned against
+directly.
+
+### The hypothesis, re-measured after the build
+
+    program A (run once)  fails importing alpha_mod
+      A predicted:  static reader -> nothing, and says alpha_mod is UNKNOWABLE (not "missing")
+      A learned:    MODULE_NOT_IMPORTABLE, property=importable, at=program_A
+
+    program B (NEVER RUN)  a different program importing beta_mod
+      cold:  static reader -> nothing; beta_mod UNKNOWABLE
+      warm:  rules_matched -> MODULE_NOT_IMPORTABLE, seen_at=['program_A']
+
+**B's fault is flagged before `beta_mod.py` is ever executed**, because the rule A taught is about
+importability in general and not about `alpha_mod`. That is single-experience generalisation, and it is the
+first time in this thread the measurement supports the hypothesis instead of refuting it.
+
+### Defects caught by trying to kill the design
+
+1. **Cry wolf.** `predict` called a neighbouring `alpha_mod.py` a *missing* module, because `find_spec` only
+   knows what is installed. A false accusation is worse than a miss: the derived act — *install it* — would be
+   wrong. Fixed with a third bucket, `unknowable`, which is where memory earns its place.
+2. **A guard on the wrong condition.** `FAILED_WHILE_IMPORTING` was refused because `failed` is a
+   **postcondition** word in this module's vocabulary. The guard was right; my code name was wrong. Renamed to
+   `MODULE_NOT_IMPORTABLE` rather than weakening the reader.
+3. **A clause that could never run.** Placed after the negation guard, so it was dead code — and a test that
+   checked only `parse` would have passed while the learner silently learned nothing.
+4. **A tautology in a test** (`... is None or True`), asserting nothing. Removed.
+
+### Verified / not verified
+
+    VERIFIED   both fault classes predicted from source, 0 executions
+    VERIFIED   frames locate a subject the message does not mention
+    VERIFIED   one experience -> a rule -> a DIFFERENT unseen program flagged before it runs
+    VERIFIED   142 passed, 2 skipped across ten suites
+    FAILED     the "learns permanently" claim FOR THE MISSING-MODULE CLASS: the reader finds it alone, so
+               memory adds nothing there. Recorded as a failure of the hypothesis, not smoothed over.
+    UNPROVEN   whether this ordering generalises beyond Python import faults
+
+### Pre-existing failure, recorded not hidden
+
+`test_root3_subprocess_mediator_v2` and 22 other files fail at **collection**, with
+`LEGACY_VERIFIED_SITE_DISAPPEARED` pointing at `astra_runtime.py` line numbers. Reproduced at the pristine
+`c6d258fc` checkout and in files this change never touched: **pre-existing registry drift**, not a regression.

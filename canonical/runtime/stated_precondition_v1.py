@@ -66,6 +66,7 @@ Authority NONE. Pure function of what the environment printed. Zero model calls,
 """
 from __future__ import annotations
 
+import ast
 import json
 import pathlib
 import re
@@ -99,6 +100,100 @@ _MULTI = re.compile(r"([A-Z][A-Z0-9_]{3,}):((?:\S[^\s:]*)(?::\S[^\s:]*)+)")
 _VALUE = re.compile(r"^[A-Za-z0-9_./\\-]{1,64}$")
 
 
+#: CPYTHON SPEAKS A SECOND DIALECT, AND REFUSING IT WAS A REAL GAP (§A113). Measured 2026-11-23: both
+#: failure classes this project can already REPAIR were rejected by `parse` with
+#: `REFUSAL_DOES_NOT_LOCATE_ITS_SUBJECT`:
+#:
+#:     ModuleNotFoundError: No module named 'pyjokes'
+#:     NameError: name 'totl' is not defined. Did you mean: 'total'?
+#:
+#: The traceback located its subject in both cases. It simply spelled it in sentences rather than in
+#: `CODE:value`. That meant the one learner built to generalise a STATED condition could not read the only
+#: environment this project actually runs programs in -- so every repair stayed a per-file edit and nothing
+#: accumulated. The repair path (fix_from_the_failure_v1) already reads these sentences to EDIT A FILE;
+#: nothing read them to FORM A RULE.
+#:
+#: THE TRANSLATION IS A READING, NOT A LOOKUP. Each pattern below is CPython's fixed wording, and the code
+#: it is translated into is in this module's own convention so the EXISTING predicate reader derives the
+#: meaning. `No module named` becomes `MODULE_NOT_FOUND`, which this module already reads as "the thing must
+#: be present" -- the same demand, one spelling apart. Nothing about a particular program is assumed.
+_PY_DIALECTS = (
+    # `No module named 'X'` -> the module must exist. Existing code word: NOT_FOUND.
+    (re.compile(r"No module named '(?P<value>[^']+)'"), "MODULE_NOT_FOUND"),
+    # `name 'X' is not defined` -> X must be DEFINED. A name that exists nowhere in the program cannot be
+    # repaired by substituting another name, which is why the repair path refuses it too (§A109's rule).
+    (re.compile(r"name '(?P<value>[^']+)' is not defined"), "NAME_NOT_DEFINED"),
+)
+
+
+#: THE FRAMES ARE WHERE A TRACEBACK PUTS ITS LOCATION, AND THIS PROJECT WAS THROWING THEM AWAY (§A113).
+#: Measured 2026-11-23: a program importing a module that exists but raises while being imported fails with a
+#: traceback whose LAST line states only prose --
+#:
+#:     RuntimeError: this module is broken at import
+#:
+#: and BOTH readers in this project refused it (`stated.parse` -> None, `fix.classify` ->
+#: THE_FAILURE_STATES_NO_CORRECTION), correctly, because prose locates nothing.
+#:
+#: But the frames above it named the module and the file it died in, exactly:
+#:
+#:     File ".../app.py", line 1, in <module>          import broken_mod
+#:     File ".../broken_mod.py", line 1, in <module>   raise RuntimeError(...)
+#:
+#: The information was there and was discarded, because every reader took the last line. A frame is a
+#: STRUCTURED statement of where execution was; reading it is parsing, not guessing. So when the message
+#: states no `CODE:value` and no CPython sentence, the frames are consulted -- and they can locate a subject
+#: the message never mentions.
+_FRAME = re.compile(r'File "(?P<path>[^"]+)", line (?P<line>\d+), in (?P<func>[^\n]+)')
+#: The source line echoed under a frame, when the traceback carries it.
+_FRAME_SOURCE = re.compile(r"^\s{4}(?P<code>\S.*)$")
+
+
+def frames_in(refusal: str) -> list[dict[str, Any]]:
+    """Every frame a traceback states, innermost last -- the order the interpreter printed them in.
+
+    Kept as a list rather than a single "place" because the halves answer different questions: the OUTERMOST
+    frame names what the program was doing (`import broken_mod`), and the INNERMOST names where it actually
+    died. A repair needs the first to know what to change and the second to know what went wrong.
+    """
+    lines = str(refusal or "").splitlines()
+    found: list[dict[str, Any]] = []
+    for position, line in enumerate(lines):
+        match = _FRAME.search(line)
+        if not match:
+            continue
+        entry: dict[str, Any] = {"path": match.group("path"), "line": int(match.group("line")),
+                                 "func": match.group("func").strip()}
+        # the echoed source line, if the traceback carries one
+        if position + 1 < len(lines):
+            echo = _FRAME_SOURCE.match(lines[position + 1])
+            if echo and not _FRAME.search(lines[position + 1]):
+                entry["code"] = echo.group("code").strip()
+        found.append(entry)
+    return found
+
+
+def _imported_at(frame: Any) -> str | None:
+    """The module named by a frame whose source line is an import, if it is one.
+
+    Read with `ast`, not with a string search: `import x` and `from x import y` are two different statements
+    and the module name is in a different place in each. A line that does not parse as an import is not one.
+    """
+    code = str((frame or {}).get("code") or "")
+    if not code:
+        return None
+    try:
+        tree = ast.parse(code)
+    except SyntaxError:
+        return None
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Import) and node.names:
+            return node.names[0].name.split(".")[0]
+        if isinstance(node, ast.ImportFrom) and node.module and not node.level:
+            return node.module.split(".")[0]
+    return None
+
+
 def parse(refusal: str) -> dict[str, Any] | None:
     """Read one refusal. Return the condition it states, or None when it states none.
 
@@ -107,6 +202,21 @@ def parse(refusal: str) -> dict[str, Any] | None:
     be inventing the very knowledge it claims to have acquired.
     """
     text = str(refusal or "").strip()
+    # CPython's sentences are read BEFORE the CODE:value scan, because a traceback line can contain neither
+    # and a wrapped one can contain both. Read last-first for the same reason the scan below does: the
+    # innermost frame is the line that failed.
+    for line in reversed(text.splitlines()):
+        for pattern, code in _PY_DIALECTS:
+            dialect = pattern.search(line)
+            if not dialect:
+                continue
+            value = dialect.group("value").strip()
+            # A module name may carry a dotted path (`a.b`); a value with whitespace or a quote is not one.
+            if not _VALUE.match(value):
+                return None
+            return {"code": code, "value": value, "parts": [value],
+                    "fact": "%s:%s" % (code.lower(), value.lower()),
+                    "dialect": "cpython"}
     # a refusal may be `CODE:value` or `ExceptionType:CODE:value`; take the LAST `<CODE>:<value>` whose
     # code is uppercase, because a Python exception name is CamelCase and cannot match `_LOCATED`.
     for line in reversed(text.splitlines()):
@@ -133,6 +243,27 @@ def parse(refusal: str) -> dict[str, Any] | None:
             return None
         return {"code": code, "value": value, "parts": [value],
                 "fact": "%s:%s" % (code.lower(), value.lower())}
+    # NEITHER A `CODE:value` NOR A CPYTHON SENTENCE. The frames are the last thing that can locate the subject,
+    # and they are consulted only now so that nothing above changes behaviour: a refusal that already located
+    # itself must never be re-read through a coarser channel.
+    #
+    # `MODULE_NOT_IMPORTABLE:<module>` is the demand the frames state: the named module cannot be imported
+    # (further). It is deliberately NOT `MODULE_NOT_FOUND` -- the module EXISTS, and telling anyone to install
+    # it would install something already present and leave the program broken, which is the same false advice
+    # the postcondition guard refuses.
+    #
+    # The name avoids the word `FAILED` on purpose, and that was measured rather than preferred: my first
+    # spelling was `FAILED_WHILE_IMPORTING`, and `_predicate` correctly refused it because `failed` is a
+    # POSTCONDITION word in this module's vocabulary -- it describes an outcome, not a requirement on an input.
+    # The guard was right and the name was wrong, so the name changed. A code is a sentence; writing it badly
+    # should not be repaired by weakening the reader.
+    for frame in reversed(frames_in(text)):
+        module = _imported_at(frame)
+        if module and _VALUE.match(module):
+            return {"code": "MODULE_NOT_IMPORTABLE", "value": module, "parts": [module],
+                    "fact": "%s:%s" % ("module_not_importable", module.lower()),
+                    "dialect": "cpython_frames",
+                    "frame": frame}
     return None
 
 
@@ -170,6 +301,15 @@ def _predicate(code: str, seen: str) -> dict[str, Any] | None:
     # negation is not scoped over the demand. `NO_..._ALLOWED` has no such reading.
     if "no" in tokens and ("in" in tokens or "under" in tokens or "within" in tokens):
         return {"property": "present", "test": "is_present", "because": code}
+    # `MODULE_NOT_IMPORTABLE:<module>` -- the module must IMPORT CLEANLY. A POSITIVE demand written with a
+    # negation, the same shape as `X_NOT_FOUND`: the negation is of the failure, not of the requirement. It is
+    # decided here, BEFORE the general negation guard, for the same reason `NO_RECORDS_IN` is: the guard's job
+    # is to refuse negations it cannot scope, and this one is already scoped by the code's own words.
+    #
+    # Measured 2026-11-23, twice: placed after the guard it could never run, and a unit test that only checked
+    # `parse` would have passed while the learner silently learned nothing.
+    if "not" in tokens and tokens & {"importable", "import"}:
+        return {"property": "importable", "test": "is_importable", "because": code}
     if "not" in tokens or "never" in tokens or "no" in tokens:
         # the two negations whose demand IS decidable: absence is forbidden, or presence is optional
         if tokens & {"found", "exists", "present"} and not tokens & {"required", "must"}:
@@ -186,6 +326,13 @@ def _predicate(code: str, seen: str) -> dict[str, Any] | None:
     # Property names the convention can express. Each is derived from the code's own words, not from a
     # list of tools: `must_be_a_whole_number` -> whole; `must_not_exist` -> fresh; `already_taken` ->
     # unique. A code that names none of these is not readable here.
+    #
+    # `FAILED_WHILE_IMPORTING` IS NOT `MODULE_NOT_FOUND`, and conflating them gives the wrong act. A module
+    # that fails while importing is PRESENT -- telling anyone to install it would install something that is
+    # already there and leave the program broken. Measured 2026-11-23 from a traceback whose frames named
+    # `import broken_mod` while `broken_mod.py` raised. The demand the frames state is that the module must be
+    # IMPORTABLE, so that is the property, and its act comes from the failing file's own frame rather than
+    # from a package index.
     if "whole" in tokens and "number" in tokens:
         return {"property": "whole", "test": "is_whole", "because": code}
     if tokens & {"already", "taken", "exists", "duplicate"}:
