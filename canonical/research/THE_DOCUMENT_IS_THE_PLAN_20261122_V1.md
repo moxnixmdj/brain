@@ -2546,3 +2546,41 @@ conjunction (no page **and** no stated act) remains the criterion, with the cost
 **Verified:** 75 tests; 12 effect tasks under `PYTHONHASHSEED` 7/99/default; unseen `vaultctl` 6/6;
 real programs `ls /tmp`, `sort /tmp/compose/a.txt`, `tar -cf backup.tgz /tmp/data`,
 `grep localhost /etc/hosts`.
+
+### A63 — every root page's own sentence was being thrown away
+
+`_node(root_argv, root_text, tool, "root", "", 0)`. The summary argument was a hard-coded empty
+string for the root page of **every program**. So the one page that says what the program is for
+contributed nothing.
+
+What was lost, from the two programs this session leaned on:
+
+    grep --help        Search for PATTERNS in each FILE.
+    tar --help         GNU 'tar' saves many files together into a single tape or disk archive,
+                       and can restore individual files from the archive.
+
+`grep`'s sentence names the act (**search**) and both places (**PATTERNS**, **FILE**) in nine
+words. `tar`'s names its acts (saves, restore) and its subject (files) and — importantly — does
+**not** name copying, which is the fact that decides A60's refusal. Both were discarded.
+
+The parser is the document's own shape, not any program's: the first non-empty line after the usage
+block that is a sentence rather than a flag listing or a section heading. No word list.
+
+**Measured effect, on real `grep`, with the same command every time:**
+
+| request verb | plan | complete |
+|---|---|---|
+| **Search** (the page's own word) | `grep localhost /etc/hosts` | **true** |
+| Show | `grep localhost /etc/hosts` | false |
+| Find | `grep localhost /etc/hosts` | false |
+| List | `grep localhost /etc/hosts` | false |
+
+This is the cleanest statement of the synonymy boundary the whole session has produced. The command
+is right in all four cases — the places, the values and the order all come from the usage line. The
+*claim* is made only when the request uses the verb the program uses, because that is the only
+grounding the documents actually provide. A synonym is not evidence of absence (A60's conjunction
+still refuses `tar` for copy, whose help names no such act) and not evidence of presence either.
+
+**Verified:** 75 tests; 12 effect tasks under `PYTHONHASHSEED` 7/99/default; unseen `vaultctl` 6/6;
+`tar -cf backup.tgz /tmp/data` complete; `tar` copy refused; `grep localhost /etc/hosts` correct
+with the page's own verb accepted and synonyms honestly marked ungrounded.

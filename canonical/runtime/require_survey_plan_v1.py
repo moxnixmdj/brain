@@ -798,6 +798,41 @@ def positional_grammar(usage: Mapping[str, Any]) -> list[str] | None:
     return best or None
 
 
+def _first_sentence_after_usage(text: str) -> str:
+    """The program's own one-line statement of what it does, from its root help.
+
+    `grep --help` prints, under the usage line:
+
+        Search for PATTERNS in each FILE.
+        Example: grep -i 'hello world' menu.h main.c
+
+    That sentence names the act ("search") *and* the places ("PATTERNS", "FILE"), and the root page
+    threw it away: every root was built with an empty summary, so the one page that says what the
+    program is for contributed nothing to routing or to deciding whether the program has a command
+    for the act at all. `tar`'s equivalent says "saves many files together into a single tape or
+    disk archive" -- files, saves, restore, and no copy, which is exactly the fact that has to be
+    visible.
+
+    The rule is the document's own shape: the first non-empty line after the usage block that is a
+    sentence rather than a flag listing. Nothing about a particular program is assumed.
+    """
+    lines = [line.strip() for line in str(text or "").splitlines()]
+    seen_usage = False
+    for line in lines:
+        if not line:
+            continue
+        if line.lower().startswith(("usage:", "use:", "synopsis")):
+            seen_usage = True
+            continue
+        if not seen_usage:
+            continue
+        if line.startswith("-") or re.match(r"^[A-Z][A-Z ]+:", line):
+            continue
+        if len(line.split()) >= 3:
+            return line
+    return ""
+
+
 def _node(argv: list[str], text: str, tool: str, title: str, summary: str,
           level: int) -> dict[str, Any]:
     """One document of the tree, parsed into the four things a plan needs from it."""
@@ -892,7 +927,8 @@ def survey(tool: str, *, want: Iterable[str] = (), probes: int = DEFAULT_PROBES,
         root_text, root_argv, root_signature = _probe_ladder(tool, [], read)
         if asked:
             asked[-1]["signature"] = root_signature
-        root = _node(root_argv, root_text, tool, "root", "", 0)
+        root = _node(root_argv, root_text, tool, "root",
+                     _first_sentence_after_usage(root_text), 0)
         frontier = [root]
         for _ in range(depth):
             nxt: list[dict[str, Any]] = []
@@ -3497,7 +3533,14 @@ def plan(requirement: Mapping[str, Any], tree: Mapping[str, Any],
     asked_acts = {a[0] for a in acts if a and a[0]}
     states_the_act = False
     if asked_acts:
+        # The root page's own sentence counts too. `grep --help` says "Search for PATTERNS in each
+        # FILE" before it lists a single flag; that is the program stating its operation in prose,
+        # and it was being ignored because the check only looked at argument lists and flag names.
+        if words_of(str((tree.get("root") or {}).get("summary") or "")) & asked_acts:
+            states_the_act = True
         for other in every_page(tree):
+            if states_the_act:
+                break
             printed = set()
             for word in [x for x in (other.get("argv") or [])[1:]
                          if x not in ("--help", "-h")]:
