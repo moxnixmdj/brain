@@ -5866,3 +5866,57 @@ The last row is the real remaining bottleneck, and it is not a promise: success 
 between elements* rather than a *value in text* is unjudged here.
 
 139 tests pass, seven live against a real HeadlessChrome.
+
+## §A106 — the 41-point gap, measured here, with the opposite sign
+
+### What the frontier measured
+
+**WebPageBench (arXiv 2609.35026, Sept 2026)** verifies web-agent tasks from the interface's **own event
+log** — "no judge model and no scraping of rendered pages" — and reports:
+
+> the gap between what agents declare finished and what the log confirms reaches **41 points** … one
+> configuration declares every task finished and satisfies the conditions on 59%.
+
+The gap exists because **"the loop stopped" and "the world agrees" are different events.** That is precisely
+the bug §A96 fixed on the CLI (a goal is not an act) and §A104 fixed in the browser (a passing op is not an
+effect). A benchmark has now measured it at scale, which makes it testable here rather than merely believed.
+
+### The measurement, and the harness error that came first
+
+First run said the gap was 40 points **with the opposite sign** — the system never over-claimed and
+under-claimed twice. Both "failures" were my harness: I judged once to act and again to read, so the second
+judge saw words already present and correctly returned `THE_EFFECT_WAS_ALREADY_THERE`. **`judge()` reads
+before and after in ONE call for exactly this reason**, and my loop had bypassed it.
+
+Corrected, on cases chosen for the ways a page can look finished without being finished:
+
+| case | says done | really done |
+|---|---|---|
+| fill both fields, press Save | **yes** | yes |
+| fill both, never press Save | no | no |
+| press Save, then Clear | no | no |
+| wrong value, then Save | no | no |
+| one field only, then Save | no | no |
+
+**Five of five agree. Gap: zero.**
+
+### Why it is zero, stated as a structural fact and not a virtue
+
+Every stop but one is a refusal. The loop can only say done by having read the goal's words on the page
+after the act and not before it — so there is no *path* by which it over-claims. The frontier's 41 points
+come from agents whose stop condition is their own confidence; ours is a read.
+
+This is the same reason §A95's judge was built to refuse when it *cannot* ask: a judge that cannot ask must
+not answer.
+
+### What this does NOT show
+
+- Five cases on one local page is not 152 tasks on six instrumented sites. The **number** is small; the
+  **mechanism** is what generalises, and the mechanism is that no read means no claim.
+- It says nothing about a goal whose success is not a value on the page. Zero gap on cases where success is
+  a string is not zero gap on "the row moved to Done".
+- The gap is zero **by refusing**, and refusing has a cost the frontier does not pay: on a task the system
+  cannot read, it will report nothing rather than something plausible. That trade must be stated wherever
+  the zero is claimed.
+
+140 tests pass, eight of them live against a real HeadlessChrome.

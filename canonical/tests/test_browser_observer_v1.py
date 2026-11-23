@@ -143,6 +143,44 @@ def test_an_effect_that_was_already_there_is_not_evidence(page_url: str) -> None
     assert second["verdict"] == "THE_EFFECT_WAS_ALREADY_THERE", second
 
 
+def test_the_completion_verification_gap_is_zero_on_cases_that_discriminate(page_url: str) -> None:
+    """WebPageBench (arXiv 2609.35026, Sept 2026) measures the gap between what agents DECLARE finished and
+    what the interface confirms: on their 152-task leaderboard it reaches **41 points**, and one
+    configuration declares every task finished while satisfying the conditions on 59%.
+
+    That gap exists because "the loop stopped" and "the world agrees" are different events. This test
+    measures ours, on cases chosen to include the ways a page can look finished without being finished:
+    a fill with no submit, a success followed by an undo, a wrong value, a missing field.
+
+    RESULT: five of five agree, gap zero. The reason is structural rather than clever -- every stop but one
+    is a refusal, so there is no path by which the loop says done without having read the words -- and the
+    test exists so that a future change that reintroduces over-claiming fails HERE rather than on a
+    leaderboard.
+    """
+    fill = [{"type": "FILL", "selector": "#name", "text": "alpha"},
+            {"type": "FILL", "selector": "#amount", "text": "4"}]
+    save = {"type": "CLICK_TEXT", "text": "Save record"}
+    clear = {"type": "CLICK_TEXT", "text": "Clear all"}
+    cases = [
+        ("fill both and save", fill + [save], True),
+        ("fill but never save", fill, False),
+        ("save then undo it", fill + [save, clear], False),
+        ("wrong value then save", [{"type": "FILL", "selector": "#name", "text": "beta"}, save], False),
+        ("one field only then save", [{"type": "FILL", "selector": "#amount", "text": "4"}, save], False),
+    ]
+
+    browser = browser_v1.bind()
+    browser.act({"type": "NAVIGATE", "url": page_url})
+    disagreements = []
+    for name, operations, is_really_successful in cases:
+        verdict = BO.judge(browser, operations, "saved alpha = 4")
+        says_done = verdict.get("verdict") == "EFFECT_CONFIRMED"
+        if says_done != is_really_successful:
+            disagreements.append((name, says_done, verdict))
+
+    assert not disagreements, disagreements
+
+
 def test_a_goal_that_states_nothing_to_look_for_is_refused(page_url: str) -> None:
     """The judge cannot invent its expectation; a goal that states none gets a refusal, not a guess."""
     browser = browser_v1.bind()
