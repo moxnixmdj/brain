@@ -1238,3 +1238,42 @@ the env still acts only on caller-declared actions. The honest §25 split
 (scan = affordance map; act = caller-declared) is unchanged — this turn only
 makes the affordance map derivable at runtime. NOT §6: no benchmark, no
 cross-kind transfer.
+
+## 36. Carried-walk durability across the process boundary — measured (2026-11-23)
+
+§30 measured the carried-model walk in ONE process (TEACH-NO-FRESH -> disk
+priors-only memory -> WALK-D refuses honestly across content -> full scan
+re-derives -> PASS; WALK-A walks the carried model -> PASS). §33/§34 measured
+cross-process durability for RULE REPLAY (single-page and multi-page
+redirect). The carried-walk path — the within-kind transfer mechanism itself —
+had never been measured across the process boundary. §36 closes exactly that
+gap: same TEACH-NO-FRESH protocol, same honest refusal/walk expectations, but
+the WARM arms now run in a FRESH process reading only the disk file.
+
+Probe: `unseen_browser_walkxcr_probe_20261123.py` (live page, parent-owned
+HTTP fixtures, children never own servers).
+
+  CHILD_A (process A): TEACH-NO-FRESH on fixture A -> REFUSED admission
+           (no fresh instances) -> priors persisted to disk
+           (schema PROJECT_BRAIN_PA_MEMORY_V1, rules=0, 8 priors rows) — 138.3 s.
+  CHILD_B (fresh process): WALK-D on fresh fixture D (different content) ->
+           honest expectation met: walk_status OPEN__CARRIED_WALK_FAILED,
+           walk_edges 0 (content-derived keys do not carry), priors_used 8,
+           full scan re-derived (scan_states 4) -> PASS,
+           outcome VERIFIED_NOT_PERSISTED, 149.4 s.
+  CHILD_C (fresh process): WALK-A on fresh fixture A (same content) ->
+           walk_status PASS__CARRIED_WALK_REACHED_GOAL, outcome
+           CARRIED_MODEL_WALK_REACHED, walk_edges 5, walk_act_calls 8,
+           scan_states None (zero re-scan) -> PASS, 25.1 s.
+
+Honest disk check: the store holds schema PROJECT_BRAIN_PA_MEMORY_V1, 0 rules
+(no admission without fresh instances), 8 priors rows (browser_page). The
+warm arms re-read the disk file — no in-memory copy. The carried model is
+the one thing that survives the boundary without a rule: the page's
+transition keys are content-derived, so the same-content instance still walks,
+the different-content instance honestly refuses and re-scans.
+
+NOT §6: no benchmark, no new mechanism — the carried-walk path is the same
+code, same honesty, same 0-edge refusal as §30, now proven durable across
+the process boundary. §6 remains OPEN; this is honest §3 evidence, not a §6
+claim.
