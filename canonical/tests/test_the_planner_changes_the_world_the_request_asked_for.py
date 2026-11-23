@@ -40,3 +40,41 @@ def test_every_task_is_a_goal_and_an_effect_and_names_no_command():
         assert "expect_command_contains" in task or "expect_collection" in task, task["id"]
         # the request itself must never spell a flag: it is what a person would say
         assert "--" not in task["instruction"], task["id"]
+
+
+def test_a_wrong_reading_is_refused_by_the_program(tmp_path):
+    """The world is the arbiter, so the world must be able to say no.
+
+    A fixture that answers every invocation with its root help cannot distinguish a right reading
+    from a wrong one, and then an effect test proves nothing: the wrong command "succeeds". An
+    unknown route exits non-zero with a reason on stderr.
+    """
+    import os
+    import subprocess
+
+    program = str(tasks_v1.BIN / "linear")
+    env = {**os.environ, "LINEAR_STATE": str(tmp_path / "state.json")}
+
+    right = subprocess.run([program, "issue", "list"], capture_output=True, text=True, env=env)
+    assert right.returncode == 0, right.stderr
+    assert right.stdout.strip() == "[]", "an empty store lists as an empty list, not as help"
+
+    wrong = subprocess.run([program, "issue", "sing"], capture_output=True, text=True, env=env)
+    assert wrong.returncode != 0, "an unknown action must be refused"
+    assert "unknown" in wrong.stderr.lower(), wrong.stderr
+
+
+def test_a_mutation_is_visible_to_the_list_that_should_show_it(tmp_path):
+    """A store keyed per verb would hide every create from the very list that should show it."""
+    import os
+    import subprocess
+
+    program = str(tasks_v1.BIN / "linear")
+    env = {**os.environ, "LINEAR_STATE": str(tmp_path / "state.json")}
+    subprocess.run([program, "issue", "create", "--team", "Platform", "--title", "A"],
+                   capture_output=True, text=True, env=env, check=True)
+    listed = subprocess.run([program, "issue", "list"], capture_output=True, text=True, env=env)
+    assert "Platform" in listed.stdout and "A" in listed.stdout, listed.stdout
+    filtered = subprocess.run([program, "issue", "list", "--team", "Web"],
+                              capture_output=True, text=True, env=env)
+    assert filtered.stdout.strip() == "[]", filtered.stdout

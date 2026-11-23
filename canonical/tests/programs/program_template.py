@@ -84,8 +84,11 @@ def main(argv):
             route = candidate
             break
     if not route:
-        sys.stdout.write(PAGES.get("", ""))
-        return 0
+        # An unknown route is a refusal, not a help page. A program that answers every
+        # invocation with its root help cannot tell a right reading from a wrong one, and the
+        # one arbiter this project trusts -- what the world does when asked -- is then silent.
+        sys.stderr.write("unknown command: " + " ".join(bare) + "\n")
+        return 2
     action = route.split()[-1]
     state = load()
     # The store belongs to the *resource*, not to the verb: `issue create` and `issue list` are
@@ -123,6 +126,9 @@ def main(argv):
         save(state)
         sys.stdout.write(json.dumps({"ok": True, "item": item}))
         return 0
+    if action not in ("list", "get", "show", "view", "status", "inspect"):
+        sys.stderr.write("unknown action: " + action + "\n")
+        return 2
     sys.stdout.write(json.dumps(
         [item for item in store if all(str(item.get(k, "")) == v for k, v in wanted)]))
     return 0

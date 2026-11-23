@@ -2174,3 +2174,20 @@ may read"; (b) the page whose documented flags accept **every** value the reques
 `secret get` does and `secret put` does not without inventing one; (c) the *world's* refusal, which
 this project already treats as the final arbiter — a `put` with no `--value` is refused by the
 program, and that refusal is evidence the reading was wrong.
+
+### A55 — the world must be able to say no, or an effect test proves nothing
+
+The fixture programs answered **every** invocation with their root help page, including
+`linear issue sing`. So in an effect test a wrong command "succeeded", an empty store listed as
+`[]` rather than as help, and the one arbiter this project trusts — what the program does when
+asked — was silent.
+
+An unknown route now exits non-zero with `unknown command: ...` on stderr, and an unknown action on
+a known resource exits non-zero with `unknown action: ...`. Two tests pin it, because this is not a
+detail of the fixtures: **an effect test whose world cannot refuse is testing the fixture.**
+
+That also settles how the next question should be approached. The open problem from A54 — a request
+that says *read* where the page says *get* — is exactly the kind where the single right arbiter is
+the program's own refusal: a `secret put` with no `--value` is refused, and the refusal is evidence
+the reading was wrong. It cannot be reached by weights fitted to one example, and the two attempts
+at that were reverted.
