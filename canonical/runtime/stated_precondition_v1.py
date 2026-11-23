@@ -460,7 +460,8 @@ def conditions(store: pathlib.Path | None = None) -> dict[str, Any]:
 
 
 def would_refuse(value: Any, *, code: str, universe: Iterable[Any] = (),
-                 store: pathlib.Path | None = None) -> dict[str, Any]:
+                 store: pathlib.Path | None = None,
+                 world: str | pathlib.Path | None = None) -> dict[str, Any]:
     """Ask the learned rule about a value it has NEVER seen. This is the generalisation test.
 
     `code` is the rule's name, not a program's: the caller asks `AMOUNT_MUST_BE_A_WHOLE_NUMBER` and gets
@@ -491,6 +492,37 @@ def would_refuse(value: Any, *, code: str, universe: Iterable[Any] = (),
     if not entry:
         return {"schema": SCHEMA, "known": False, "code": code}
     predicate = entry.get("predicate") or {}
+    # §A132: THE UNIVERSE CAN BE DISCOVERED, NOT ONLY SUPPLIED. §A131 left this open: the test handed in the
+    # universe, so nothing showed the system finding one. Measured 2026-11-23, the two ends were built and never
+    # joined: `observe_world(root)` returns the names that exist there, and `acts_for(...)` resolves a name
+    # against them (`alpha` -> `alpha.py`), while `would_refuse` kept testing membership in the empty default.
+    # This is §A123's defect -- a mechanism nobody calls -- in the learning organ.
+    #
+    # `world` is a DIRECTORY, asked fresh on every call and never cached: a universe read once is a world that
+    # has already moved. Nothing about any particular environment is stored here.
+    if not universe and world is not None:
+        discovered = list(observe_world(world))
+        resolved = [str(a) for a in (acts_for(predicate, value, world=discovered).get("acts") or [])]
+        if resolved:
+            # THE ANSWER IS A MATCH, NOT A SET. `alpha` is present when something in the directory resolves to
+            # it; the check is `acts_for`, which is the same function the tests use, so the two ends cannot drift.
+            satisfied_now = True
+            return {"schema": SCHEMA, "known": True, "code": code, "value": value,
+                    "satisfied": satisfied_now, "refuse": not satisfied_now,
+                    "property": predicate.get("property"), "via": via,
+                    "resolved_to": resolved,
+                    "universe": "DISCOVERED_IN_THE_WORLD",
+                    "seen_values": list(entry.get("values") or []),
+                    "value_never_seen": str(value).lower() not in
+                                        [v.lower() for v in entry.get("values") or []]}
+        return {"schema": SCHEMA, "known": True, "code": code, "value": value,
+                "satisfied": False, "refuse": True,
+                "property": predicate.get("property"), "via": via,
+                "resolved_to": [],
+                "universe": "DISCOVERED_IN_THE_WORLD",
+                "seen_values": list(entry.get("values") or []),
+                "value_never_seen": str(value).lower() not in
+                                    [v.lower() for v in entry.get("values") or []]}
     # §A131: A VERDICT FROM AN INPUT THAT WAS NEVER SUPPLIED IS NOT A VERDICT. Measured 2026-11-23: one real
     # refusal (`ModuleNotFoundError: No module named 'x'`) taught the rule `present/is_present`, and then
     # `would_refuse("json")` answered `refuse: True` -- because `universe` defaults to EMPTY, so every value

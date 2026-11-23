@@ -7558,3 +7558,67 @@ instead of a guess dressed as a conclusion. That is the same ruling as three ear
     NOT SHOWN  that the system FINDS the universe in an arbitrary environment. Here the universe was supplied
                by the test. Discovering it -- from the filesystem, the package index, the tool itself -- is the
                next bottleneck, and it is the one the mission's "drop into an unknown environment" describes
+
+## §A132 — the universe is discovered, and the loop closes
+
+### §A131's open item, in its own words
+
+> *NOT SHOWN: that the system FINDS the universe in an arbitrary environment. Here the universe was supplied by
+> the test. Discovering it — from the filesystem, the package index, the tool itself — is the next bottleneck.*
+
+Both ends of that were already built and **never joined**:
+
+    observe_world(root)                -> ['alpha.py', 'beta.py', 'notes.txt']    (re-read every call, never cached)
+    acts_for(predicate, 'alpha', world) -> ['alpha.py']                            (NONE when absent)
+
+and `would_refuse` still tested membership in the **empty default**. §A123's defect — *a mechanism nobody calls*
+— one organ over, in the learning system itself.
+
+### The fix is a join, not a mechanism
+
+`would_refuse(value, code=…, world=<directory>)` now reads the directory, resolves the name through `acts_for`,
+and answers. Nothing about any environment is stored; nothing is cached; the universe is asked afresh each call.
+
+### Measured: discover → learn once → predict
+
+    a directory holding alpha.py, beta.py, gamma.py
+    ONE refusal from OUTSIDE that world:  ModuleNotFoundError: No module named 'delta'
+    learned once:                          predicate present / is_present
+    nothing else handed in.
+
+| name | in the world | predicted refuse | |
+|---|---|---|---|
+| alpha | yes | False | ✓ |
+| beta | yes | False | ✓ |
+| gamma | yes | False | ✓ |
+| delta | no | True | ✓ |
+| epsilon | no | True | ✓ |
+
+**5/5.** And the honesty is preserved in both directions:
+
+    no universe, no world   ->  refuse: None       (the honest refusal §A131 added)
+    with a world            ->  refuse: 5/5 against what is actually there
+    epsilon.py appears      ->  refuse: False      immediately, with NO new experience
+
+That last line is the one that matters most. §macro_v1 recorded five sightings of caching a world and being
+burned by it; here a universe read once *is* a world that has already moved, and the test requires the answer to
+change without relearning.
+
+### This is the loop the mission describes, closed
+
+    drop into an environment you know nothing about     observe_world(root)
+    learn once, from a single refusal                   learn(refusal) -> a predicate
+    ask what you know against what is actually here     would_refuse(..., world=root)
+
+Every step ran, on a world the system had never seen, with **zero model calls** and no stored facts about it.
+
+### What is still not true — and it is the honest limit
+
+    VERIFIED   discovery + one-experience learning + prediction, end to end, 5/5
+    VERIFIED   no caching: a file appearing changes the answer with no new experience
+    NOT TRUE   the environments this has run in are DIRECTORIES OF PYTHON FILES. "Arbitrary environment" means
+               a GUI, a browser, a running program with its own state. The loop is closed for one kind of
+               world and has never been closed for another.
+    NOT TRUE   nothing here has competed on OSWorld, SWE-bench or any published benchmark. §6 is not met.
+
+> **The machinery is real and measured. The reach is still one kind of world.**

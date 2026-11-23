@@ -433,3 +433,47 @@ def test_a_membership_test_with_no_set_refuses_to_answer(tmp_path) -> None:
         truth = finder.find_spec(module) is not None
         verdict = S.would_refuse(module, code="MODULE_NOT_FOUND", universe=universe, store=store)
         assert bool(verdict["refuse"]) == (not truth), (module, truth, verdict)
+
+
+def test_the_universe_is_discovered_not_only_supplied(tmp_path) -> None:
+    """§A132 — the two ends existed and were never joined.
+
+    §A131 left this open in writing: *"NOT SHOWN: that the system FINDS the universe in an arbitrary
+    environment. Here the universe was supplied by the test."* Measured now, both ends were already built:
+
+        observe_world(root)              -> the names that exist there, re-read every call, never cached
+        acts_for(predicate, name, world) -> resolves `alpha` to `alpha.py`
+
+    and `would_refuse` tested membership in the EMPTY default regardless. That is §A123's defect — a mechanism
+    nobody calls — in the learning organ.
+
+    The test below hands in nothing but a directory. One refusal from OUTSIDE that world, learned once, must
+    predict which names inside it exist. And because a universe read once is a world that has already moved, the
+    test adds a file afterwards and requires the answer to change without any relearning.
+    """
+    import subprocess
+    import sys
+
+    world = tmp_path / "world"
+    world.mkdir()
+    for name in ("alpha", "beta", "gamma"):
+        (world / ("%s.py" % name)).write_text("X = 1\n")
+
+    store = tmp_path / "preconditions.json"
+    store.write_text("{}")
+    refusal = subprocess.run([sys.executable, "-c", "import delta"], capture_output=True, text=True).stderr
+    assert S.learn(refusal, at="python", store=store)["learned"] is True
+
+    # nothing handed in: still honest
+    assert S.would_refuse("alpha", code="MODULE_NOT_FOUND", store=store)["refuse"] is None
+
+    # a directory is enough: the universe is discovered
+    for name in ("alpha", "beta", "gamma", "delta", "epsilon"):
+        verdict = S.would_refuse(name, code="MODULE_NOT_FOUND", world=world, store=store)
+        truth = (world / ("%s.py" % name)).exists()
+        assert verdict["universe"] == "DISCOVERED_IN_THE_WORLD", verdict
+        assert bool(verdict["refuse"]) == (not truth), (name, truth, verdict)
+
+    # and it is asked afresh: a file appearing changes the answer with no new experience
+    (world / "epsilon.py").write_text("X = 1\n")
+    assert S.would_refuse("epsilon", code="MODULE_NOT_FOUND", world=world, store=store)["refuse"] is False
