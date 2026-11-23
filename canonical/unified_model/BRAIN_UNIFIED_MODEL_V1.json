@@ -31228,16 +31228,16 @@
   "engines": 26,
   "knowledge_documents": 600,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 7235,
+  "research_index_records": 7237,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 453,
-  "source_index_modules": 2009
+  "source_index_modules": 2010
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "f6512df5f38797c9e8025b8ed9d1ae4ac956f89176b65f8893395d99b4009463"
+  "value": "fb18cdb90cdfb261692af480477dd8d245f02512c5f5fa10c956da422f32fcca"
  },
  "engines": [
   {
@@ -161874,6 +161874,23 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/ASK_THE_SUBCOMMAND_20261123_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/ASK_THE_SUBCOMMAND_20261123_V1.json",
+   "schema": "PROJECT_BRAIN_ASK_THE_SUBCOMMAND_RECEIPT_V1",
+   "sha256": "3e929ff1f9ebd8b652a1808e6dc5a5b091cfde00f629d5203c30f0b9327aba1c",
+   "status": "",
+   "terms": {
+    "20261123": 1,
+    "ask": 1,
+    "subcommand": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-09",
    "id": "research:canonical/verification/ASSURANCE_MISSION_TERMINAL_POINTER_CHAIN_VERIFY_20261009_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -240922,6 +240939,51 @@
    }
   },
   {
+   "action_id": "ASK_THE_SUBCOMMAND_20261123_V1",
+   "capability": false,
+   "date": "2026-11-23",
+   "id": "research:canonical/action_intents/ASK_THE_SUBCOMMAND_20261123_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/ASK_THE_SUBCOMMAND_20261123_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "9c22d7cf66ebcb06390ce2b762f876f7910e8825f6d021cc4307c0898c1f0d1a",
+   "status": "PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
+   "terms": {
+    "20261123": 1,
+    "682": 1,
+    "ask": 1,
+    "ask_the_narrowest_scope_and_price_the_doubt_by_what_it_decides": 1,
+    "ask_the_subcommand_20261123_v1": 1,
+    "becomes": 1,
+    "capability": 1,
+    "certified": 1,
+    "closed": 1,
+    "credits": 1,
+    "decides": 1,
+    "defend": 1,
+    "did": 1,
+    "doubt": 2,
+    "down": 1,
+    "each": 3,
+    "every": 1,
+    "evidence-backed": 1,
+    "exhausted": 1,
+    "false": 1,
+    "figure": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "gone": 1,
+    "ignorance": 1,
+    "joined": 1,
+    "kind": 1,
+    "know": 1,
+    "machine": 1,
+    "marked": 1,
+    "measured": 1,
+    "never": 2,
+    "so": 2
+   }
+  },
+  {
    "action_id": "ASSEMBLE_AND_RUN_THE_CREATURE_V1_20261102",
    "capability": false,
    "date": "2026-11-01",
@@ -269117,6 +269179,48 @@
     "sentence_bounds": 1,
     "sha": 1,
     "v1": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/ask_the_subcommand_before_you_call_it_unbound_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/ask_the_subcommand_before_you_call_it_unbound_v1.py",
+   "sha256": "b3b264b09f69572fbde5e3ce1200d74b7c05f3bfa0d1d8842a5eb3af97e6b849",
+   "summary": "Ask the subcommand before you call it unbound.",
+   "symbol_count": 10,
+   "symbols": [
+    "classify_at_scope",
+    "contracts_by_scope",
+    "kind_of",
+    "kinds_of_ignorance",
+    "measure",
+    "note_to_ledger",
+    "own_text_here",
+    "scope_text",
+    "subcommands_of",
+    "what_to_ask"
+   ],
+   "terms": {
+    "ask": 2,
+    "before": 2,
+    "call": 2,
+    "classify_at_scope": 1,
+    "contracts_by_scope": 1,
+    "kind_of": 1,
+    "kinds_of_ignorance": 1,
+    "measure": 1,
+    "note_to_ledger": 1,
+    "own_text_here": 1,
+    "scope_text": 1,
+    "subcommand": 2,
+    "subcommands_of": 1,
+    "unbound": 2,
+    "v1": 1,
+    "what_to_ask": 1
    }
   },
   {
@@ -336857,7 +336961,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/tool_census_v1.py",
-   "sha256": "63a4d5e117ce0c1523b860d810dd0ac5ba488d17e327042149562c7067135e1b",
+   "sha256": "2eaeec6a5b37497f7dfe7033acab7742fbea824eaaceebdba8df084c48c4ab20",
    "summary": "The action list is read off the machine, not handed to the agent.",
    "symbol_count": 44,
    "symbols": [
