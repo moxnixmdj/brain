@@ -269,11 +269,17 @@ def predict_imports(source: str, *, installed: Iterable[str] | None = None,
 
 def predict(source: str, *, installed: Iterable[str] | None = None,
             world: str | pathlib.Path | None = None,
-            interpreter: str | None = None) -> dict[str, Any]:
+            interpreter: str | None = None,
+            values: bool = True) -> dict[str, Any]:
     """Everything that can be known about how this program will fail, without running it.
 
     `interpreter` is the python that will run it, when that is not the one asking. Omitting it means the
     prediction is about THIS process, which is only the same question when they are the same interpreter.
+
+    `values` adds §A117's literal walk, which decides RUNTIME faults (division by a known zero, an index past a
+    known list, a key missing from a known dict) that no import or name analysis can see. It is on by default
+    because a caller reading "no fault" would otherwise be told the program is safe when the walker had not been
+    asked -- and those faults are, in §A116's measurement, the majority of what actually breaks programs.
     """
     imports = predict_imports(source, installed=installed, world=world, interpreter=interpreter)
     names = predict_names(source)
@@ -284,7 +290,19 @@ def predict(source: str, *, installed: Iterable[str] | None = None,
     for name in names.get("undefined") or []:
         faults.append({"class": "undefined_name", "name": name,
                        "line": (names.get("lines") or {}).get(name), "detected_by": "ast"})
+    # THE RUNTIME FAULTS, from §A117's literal walk. Kept as a separate key as well as folded into `faults`, so
+    # that a caller can tell a fault that was PROVED from one that was inferred by name analysis.
+    decided: dict[str, Any] = {"certain": [], "verdict": "NOT_RUN", "unknowns": []}
+    if values:
+        from canonical.runtime import evaluate_literals_v1 as EVALUATE
+        decided = EVALUATE.evaluate(source)
+        for fault in decided.get("certain") or []:
+            faults.append({"class": fault["class"], "line": fault.get("line"),
+                           "detail": fault.get("detail"), "detected_by": "literal_walk",
+                           "proved": True})
     return {"schema": SCHEMA, "faults": faults, "will_fail": bool(faults),
+            "values_verdict": decided.get("verdict"),
+            "values_unknowns": decided.get("unknowns") or [],
             "imports_predictable": imports.get("predictable"),
             "names_predictable": names.get("predictable"),
             "unknowable_imports": [item["module"] for item in imports.get("local") or []],

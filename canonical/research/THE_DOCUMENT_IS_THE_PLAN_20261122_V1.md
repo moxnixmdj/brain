@@ -6673,3 +6673,77 @@ isolation, and (c) remember a rule from one experience. What it **cannot** do is
 a program is correct — and for runtime-state faults that is the only thing that would help. The remaining lever
 is not more reading; it is a way to observe behaviour without paying for the whole program, which is a different
 problem and is where the next round starts.
+
+## §A117 — the research said symbolic execution; the literals said no solver
+
+### What the literature offered, and what it costs
+
+§A116 named the bottleneck: decide *before running* whether a program is correct. The literature's answer is
+symbolic/concolic execution — and its own surveys state the price: **path explosion**, an SMT solver in the
+inner loop, and *"usually reveal shallow bugs only."* A large machine with a known wall.
+
+### First principles, on my own five failures
+
+    a = 10; b = 0; print(a / b)              every value is a literal
+    xs = [1, 2]; print(xs[5])                every value is a literal
+    d = {"a": 1}; print(d["b"])              every value is a literal
+    for n in [1,2,3]: total / (n - 2)        every value is a literal
+
+**No input is symbolic. There is nothing to solve.** What is needed is to *follow the literals* — bind `a` to
+10 and `b` to 0, and `a / b` is decided. That is constant propagation: no solver, no path forking, no wall. The
+expensive machine was solving a problem this class of fault does not have.
+
+### Measured, against real execution
+
+    systematic grid (containers x index x divisor, 26 programs)   26 / 26 agree, 0 false alarms
+    adversarial set (mutation, subscript assignment, try/except)  false alarms found and fixed; 0 remain
+
+Prediction cost: **0 executions.** Detection that took a run now takes an `ast` walk.
+
+### The five defects, all found by trying to break it
+
+Every one was a **false alarm** — the fatal direction, because it "repairs" working code:
+
+1. **A fault inside a call's arguments was invisible.** `print(a/b)` returned UNKNOWN without ever evaluating
+   `a/b`, which is exactly where the program dies. Arguments are evaluated before the call, always.
+2. **A caught fault reported as fatal.** `try/except ZeroDivisionError` around a division is a correct program.
+3. **The first guard over-corrected, and lied the other way.** Suppressing every fault inside a `try` reported
+   `try/except KeyError` around a division as *safe* — and that program **crashes**. Both directions were wrong
+   before the guard knew which handlers were in scope.
+4. **Mutation left stale beliefs.** `xs=[]; xs.append(1); print(xs[0])` was accused. Unmodelled effects now
+   **drop** what was believed instead of keeping it.
+5. **Subscript assignment ignored.** `d={}; d["k"]=1; print(d["k"])` was accused. Building the structure you
+   later index is the ordinary way programs work.
+
+> **An evaluator that cannot follow an effect must forget, not keep believing.** Keeping a stale value is how a
+> safe program gets "repaired".
+
+### What it refuses, and why the refusal is visible
+
+| refused | why |
+|---|---|
+| `math.sqrt(-1)` | modelling library domains needs a table per library — the knowledge house in miniature |
+| `range(10**9)` | trip count checked *before* the list is materialised (it was allocating a billion entries) |
+| unknown input | `UNKNOWN` propagates; nothing is overwritten with a guess |
+
+`NO_FAULT_FOUND_IN_WHAT_COULD_BE_FOLLOWED` and `THIS_WALK_COULD_NOT_DECIDE` are different verdicts and are
+never merged. A caller reading only "no fault" would otherwise conclude a program is safe when the walk never saw it.
+
+### The honest limit, and it is the same one as §A109
+
+    IndexError   "list index out of range"    states WHAT is wrong
+    KeyError     "'b'"                        states WHAT is wrong
+    NameError    "Did you mean: 'total'?"     states WHAT TO WRITE INSTEAD
+
+**Detection is free; repair is not.** These runtime faults locate the failure but do not state a correction, so
+this round buys early *knowledge*, not automatic fixing. That distinction is measured, not asserted, and it is
+why the claim below is worded the way it is.
+
+### Verified / not verified
+
+    VERIFIED   26/26 systematic grid, 0 false alarms, checked against real execution
+    VERIFIED   verdicts agree with actual runs on 18 hand-written and 15 adversarial programs
+    VERIFIED   detection costs 0 executions where it previously cost 1
+    VERIFIED   166 passed, 2 skipped across eleven suites
+    NOT CLAIMED  automatic repair of runtime faults -- the failure locates, it does not correct
+    UNPROVEN    coverage on faults whose values come from input, files, or calls the walk refuses
