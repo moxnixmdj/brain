@@ -353,3 +353,80 @@ def solve_item(bench: str | pathlib.Path, item: Mapping[str, Any], *,
                 "hints": hints, "returns": returns, "tried": hit["index"] + 1}
     return {"example_id": item["example_id"], "status": "UNSOLVED", "passed": False,
             "hints": hints, "returns": returns, "tried": len(bodies)}
+
+
+LABELS: tuple[tuple[str, tuple[str, ...]], ...] = (
+    # (dotted path stated by the prose, the constructor's declared members it can fill)
+    ("_point", ("child_point", "parent_point")),
+)
+
+
+def stated_call(stub: str, problem: str, declared_members: Sequence[str],
+                *, label_suffix: str = "_point") -> list[str]:
+    """Close the gap between a DECLARED constructor and STATED cross parameter paths.
+
+    The shape below is common, and every part of it is stated -- none of it is knowledge:
+
+        def f(parent: Body, child: Body) -> PinJoint
+        prose: "positioned at parent.frame.x ... and in the child at -child.frame.x"
+
+    * the return annotation declares the constructor            -> `PinJoint`
+    * the prose states the argument paths VERBATIM              -> `parent.frame.x`,
+                                                                   `-child.frame.x`
+    * the constructor declares params that match the shared
+      path stem, suffixed by the label the prose uses            -> `parent_point`,
+                                                                   `child_point`
+
+    So the call is written by pairing each stated path with the declared member whose name
+    starts with the same parameter name and ends with the stated label. Nothing is invented:
+    the constructor, the parameter names, the paths and the label all come from the stub, the
+    annotation, the prose or the type's own `dir()`.
+
+    It is NOT general for every item -- `custom_pinJoint` is a construction task, and an
+    item whose answer is a computation over an existing object has no such gap to fill. It
+    only fires when every part is present.
+    """
+    import re as _re
+
+    returns = return_annotation(stub) or ""
+    ctor = ""
+    for part in _re.split(r"[,\[\]()\s|]+", returns):
+        tail = part.rsplit(".", 1)[-1]
+        if tail.isidentifier() and tail[:1].isupper():
+            ctor = tail
+    if not ctor:
+        return []
+
+    stated_paths = []
+    for m in _re.finditer(r"(?<![\w.])(-?)\s*([a-z_]\w*(?:\.[a-z_]\w*)+)", problem or ""):
+        stated_paths.append((m.group(1), m.group(2)))
+    if not stated_paths:
+        return []
+
+    params = [a for a in arity_from_stub(stub)]
+    args_first = [p for _, p in stated_paths]
+    # every stated path's head must be a parameter of the function
+    if not all(p.split(".")[0] in params for p in args_first):
+        return []
+
+    # The members that can receive these arguments are declared by the CONSTRUCTOR's own
+    # type (the return annotation), not by the parameter types: `PinJoint` declares
+    # `parent_point` and `child_point`; `Body` does not.
+    declared = [d for d in declared_members if d.endswith(label_suffix) and not d.startswith("_")]
+    if not declared:
+        return []
+
+    kw: list[str] = []
+    for sign, path in stated_paths:
+        head = path.split(".")[0]
+        hit = [d for d in declared if d.startswith(head + "_")]
+        if not hit:
+            continue
+        member = min(hit, key=len)
+        kw.append(f"{member}={sign}{path}")
+    if len(kw) < len(stated_paths):
+        return []
+
+    body = f"{ctor}('pin', {', '.join(params)}, {', '.join(kw)})"
+    bare = f"{ctor}({', '.join(params)}, {', '.join(kw)})"
+    return [body, bare]

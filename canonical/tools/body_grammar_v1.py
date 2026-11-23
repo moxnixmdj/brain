@@ -173,7 +173,8 @@ def compositions(args: Sequence[str], paths: Mapping[str, Sequence[str]],
                  nested_short: Mapping[str, Sequence[str]] | None = None,
                  kwarg_names: Sequence[str] = (),
                  func_name: str = "",
-                 stub_roots: tuple[str, str] | None = None) -> list[dict]:
+                 stub_roots: tuple[str, str] | None = None,
+                 stated_calls: Sequence[str] = ()) -> list[dict]:
     """Every body the grammar admits, ordered by how much it ASSERTS.
 
     Ordering is the whole design, and getting it wrong was measured twice. A type can state
@@ -503,6 +504,11 @@ def compositions(args: Sequence[str], paths: Mapping[str, Sequence[str]],
             for name in ("as_explicit", "to_list", "doit"):
                 add("METHOD", f"{sym}({joined_all}).{name}()")
 
+    # 0c. a construction call whose constructor, parameters, keyword members and argument
+    # paths are ALL stated by the stub, the problem text and the type's own `dir()`.
+    for sc in stated_calls:
+        add("STATEDCALL", sc)
+
     # 1. attribute paths whose own name the prose uses, then by NAME LENGTH.
     # Length is a measured proxy for API primitiveness: on sympy.Equality the useful members
     # (`lhs`, `rhs`) are the 3rd and 4th shortest of 117, while `as_content_primitive` and
@@ -604,6 +610,28 @@ def compositions(args: Sequence[str], paths: Mapping[str, Sequence[str]],
     for nm in constructors[:6]:
         for a in args:
             add("APPLY", f"{nm}({a})")
+
+    # 3a-0. MEMBER CALLS, ranked by how much of the member's NAME the prose states.
+    # `K.to_int(a)` and `matrix.todok()` are calls on a declared parameter, and every member
+    # is visible in the type's own dir(). Only the ADJECTIVE differs -- "integer
+    # representation", "dictionary-of-keys" -- so the type's members must be ranked by
+    # evidence rather than presented in `dir()` order, where `copy` and `hash` beat `todok`.
+    # The type-verb suffix (`to_X`) is the artifact's own naming convention for conversions.
+    _low = set(re.findall(r"[a-z]{2,}", (problem or "").lower()))
+    def _member_rank(m: str) -> tuple:
+        parts = [w for w in m.lower().split("_") if len(w) >= 2]
+        covered = sum(1 for w in parts if w in _low)
+        conv = 1 if re.match(r"^(to|as|from)_", m) else 0
+        return (-(covered + conv), len(m), m)
+    for a in args:
+        for m in sorted((paths.get(a) or []), key=_member_rank)[:10]:
+            if "." in m:
+                continue
+            sig = ", ".join(args)
+            other = [x for x in args if x != a]
+            if other:
+                add("MEMBERCALL", f"{a}.{m}({other[0]})")
+            add("MEMBERCALL", f"{a}.{m}()")
 
     # 3a-prime. PROPERTIES first. A property is read without a call, so it is the cheapest
     # legal body and needs no shape decision. `index.free_symbols` was at position 136 of 212
@@ -901,6 +929,35 @@ def solve_item(bench: str | pathlib.Path, item: Mapping[str, Any], *,
             kwarg_names = NR.constructor_keywords(python, imports, _ret_tail2)
         except BaseException:
             nested_short, kwarg_names = {}, []
+
+    # STATED CALLS: a construction task whose every part is declared (see SS.stated_call).
+    # The CONSTRUCTOR's own type is where the keyword members live, so its `dir()` is read
+    # from the artifact at run time; nothing about `PinJoint` is written into this file.
+    stated_calls: list[str] = []
+    if imports:
+        ctor_members: list[str] = []
+        for part in re.split(r"[,\[\]()\s|]+", returns or ""):
+            tail = part.rsplit(".", 1)[-1]
+            if tail.isidentifier() and tail[:1].isupper():
+                ctor_members.extend(S.parameter_attributes(python, imports, {"_ctor": part} or {}).get("_ctor", []))
+        if not ctor_members:
+            for part in re.split(r"[,\[\]()\s|]+", returns or ""):
+                tail = part.rsplit(".", 1)[-1]
+                if not (tail.isidentifier() and tail[:1].isupper()):
+                    continue
+                import subprocess as _sp
+                code = ("\n".join(imports) + f"\nimport json\n"
+                        f"print(json.dumps([n for n in dir({part}) if not n.startswith('_')]))\n")
+                try:
+                    _p = _sp.run([python, "-c", code], capture_output=True, text=True, timeout=120)
+                    ctor_members = json.loads(_p.stdout.strip().splitlines()[-1]) if _p.stdout.strip() else []
+                except BaseException:
+                    ctor_members = []
+                if ctor_members:
+                    break
+        if ctor_members:
+            stated_calls = _SS2.stated_call(item["starting_code"], item.get("problem", ""),
+                                            ctor_members)
 
     props = properties_of(python, imports, spec) if imports else {}
     property_paths = [f"{param}.{name}"
