@@ -5987,3 +5987,66 @@ The last row is the honest edge. `Todo` and `Done` must be **named in words the 
 labelled "Completed" and a goal saying "Done" is the synonym gap from §A99, unchanged and unsolved.
 
 144 tests pass, twelve live against a real HeadlessChrome.
+
+## §A108 — a repair loop that could not repair
+
+### Why this was the right thing to check
+
+The mission's first target is advanced software engineering, and this thread had spent its whole length on
+the CLI and the browser. The repository already holds **103 SE-related modules** (`repair_v1`, `fix_shape_v1`,
+`repair_proposal_v1`, `edit_kind_choice_v1`, …) and the rule is never to rebuild what exists. All five
+import cleanly — and §A83 already established that **importing is not running** (61 of 154 "verified"
+capabilities could not run).
+
+### The measurement
+
+A program that imports a package which is not installed:
+
+    $ /tmp/venv/bin/python app.py
+    ModuleNotFoundError: No module named 'fasteners'
+
+`diagnose()` classified it correctly — `class: missing_python_module`, `what: fasteners` — and produced a
+repair command. **The repair command was `python3 -m pip install --quiet fasteners`.**
+
+    programme's interpreter : /tmp/venv/bin/python
+    repair's target          : system python3
+
+A module installed into an interpreter the program never uses cannot fix that program. Measured, `attempt()`
+returned `ok: False` and the program still failed — after the loop had **silently swallowed** the install's
+own failure (`PEP 668`, externally-managed-environment) and retried `max_attempts` times against an
+environment that had not changed.
+
+**The trace showed a `setup` on every attempt**, which reads as "we tried three repairs" when the truth is
+"we tried none".
+
+### Three faults, and the fix for each
+
+| fault | fix |
+|---|---|
+| the install targeted `python3` regardless of the command | read the interpreter from the command (`_interpreter_of`), which is the one whose site-packages the import was looking in |
+| the install's failure was swallowed by `except Exception: pass` | record `setup_ok` and `setup_said`; **retry only if the environment actually changed** |
+| the loop retried regardless, so a dead end looked like progress | stop at the first unapplied repair and **name the obstruction** in `reason` |
+
+### Verified in both directions
+
+    a missing module that exists   -> ok: True,  exit 0, program prints "started six"
+    a module that exists nowhere   -> ok: False, ONE attempt, names
+                                      "No matching distribution found for …"
+
+The second is the direction that matters for honesty: the loop no longer converts "I could not repair this"
+into "I tried several times."
+
+### The pattern this thread keeps meeting
+
+Every layer has had the same defect in a different costume:
+
+- a receipt is not a result (§A94)
+- a passing operation is not an effect (§A104)
+- a declared completion is not a confirmation (§A106)
+- **a diagnosis is not a repair** (§A108)
+
+In each case the mechanism existed, produced a plausible artifact, and the artifact was not the thing it
+stood for. The correction is always the same: **read the world, not the artifact the system made about the
+world.**
+
+146 tests pass, 1 skipped, 12 live against a real HeadlessChrome.

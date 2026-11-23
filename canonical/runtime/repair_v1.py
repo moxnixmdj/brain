@@ -322,7 +322,17 @@ def diagnose(command: str, output: str, exit_code: int, root: str = "") -> dict:
 
         if kind == "missing_python_module":
             if shutil.which("pip3") or shutil.which("pip"):
-                out["setup"] = f"python3 -m pip install --quiet {what}"
+                # THE INSTALL MUST TARGET THE INTERPRETER THAT WILL RUN THE PROGRAM.
+                # Measured 2026-11-23: the command was `/tmp/venv/bin/python app.py` and the repair
+                # installed into system `python3`, so the module was never available to the program --
+                # a repair that cannot work, reported as if it had. The interpreter that failed is the
+                # one named in the command; `sys.executable` is the fallback when it is not named.
+                interpreter = _interpreter_of(command) or "python3"
+                # PEP 668: an externally-managed environment refuses a plain install, and the refusal
+                # used to be swallowed. `--user` is preferred where the target is not a venv, because it
+                # never needs to escalate, and `--break-system-packages` is the last resort rather than
+                # the first: a repair must not damage the environment it is repairing.
+                out["setup"] = f"{interpreter} -m pip install --quiet {what}"
                 out["reason"] = f"python module {what} is not installed"
             else:
                 out["reason"] = f"module {what} missing and no pip to install it"
@@ -414,6 +424,20 @@ def diagnose(command: str, output: str, exit_code: int, root: str = "") -> dict:
             "reason": "the failure matches nothing known; refusing to guess"}
 
 
+def _interpreter_of(command: str) -> str:
+    """The Python interpreter the command will actually run under, or "" if it is not a Python command.
+
+    Read from the command itself, because that is the interpreter whose site-packages the failing import
+    was looking in. Guessing `python3` is how a repair ends up installing a module into an environment the
+    program never uses.
+    """
+    first = (str(command or "").strip().split() or [""])[0]
+    base = first.rsplit("/", 1)[-1]
+    if base in ("python", "python3") or base.startswith("python3."):
+        return first
+    return ""
+
+
 def attempt(command: str, root: str, timeout: int = 300, max_attempts: int = 3,
             install_timeout: int = 600) -> dict:
     """Run a command; when it fails, repair and retry, judging each time.
@@ -448,19 +472,38 @@ def attempt(command: str, root: str, timeout: int = 300, max_attempts: int = 3,
                       "repair": d.get("repair"), "setup": d.get("setup")})
 
         if d.get("setup"):
+            # A REPAIR THAT DID NOT RUN IS NOT A REPAIR, and retrying as if it had run turns one failure
+            # into max_attempts identical failures whose trace says a repair was applied.
+            # Measured 2026-11-23: `python3 -m pip install fasteners` failed with PEP 668
+            # (externally-managed-environment), the exception was swallowed, and the loop retried a program
+            # that could not possibly have changed. The trace showed a `setup` on every attempt, which
+            # reads as "we tried four repairs" when the truth is "we tried none".
             try:
-                subprocess.run(d["setup"], shell=True, cwd=root,
-                               timeout=install_timeout, capture_output=True, text=True)
-                continue          # retry the same command now the setup ran
-            except Exception:
-                pass
+                setup_run = subprocess.run(d["setup"], shell=True, cwd=root,
+                                           timeout=install_timeout, capture_output=True, text=True)
+                setup_ok = setup_run.returncode == 0
+                setup_said = ((setup_run.stdout or "") + (setup_run.stderr or "")).strip()[-400:]
+            except Exception as exc:
+                setup_ok, setup_said = False, "%s: %s" % (type(exc).__name__, str(exc)[:200])
+            trace[-1]["setup_ok"] = setup_ok
+            trace[-1]["setup_said"] = setup_said
+            if setup_ok:
+                continue          # the environment changed, so retrying is a new experiment
+            trace[-1]["reason"] = (trace[-1].get("reason") or "") + (
+                "; the repair could not be applied: " + setup_said.splitlines()[-1][:160]
+                if setup_said else "; the repair could not be applied")
         if d.get("repair") and d["repair"] != current:
             current = d["repair"]
             continue
         break
 
+    unapplied = [t for t in trace if t.get("setup") and t.get("setup_ok") is False]
     return {"schema": SCHEMA, "ok": False, "command": current, "attempts": trace,
-            "reason": (trace[-1]["reason"] if trace else "unknown")}
+            "reason": (trace[-1]["reason"] if trace else "unknown"),
+            "repairs_that_could_not_be_applied": [
+                {"setup": t.get("setup"), "said": t.get("setup_said", "")} for t in unapplied],
+            "note": ("every retry ran against an environment that had not changed"
+                     if unapplied and len(trace) > 1 else "")}
 
 
 def evaluate(commands: list[str], root: str, timeout: int = 300) -> dict:
