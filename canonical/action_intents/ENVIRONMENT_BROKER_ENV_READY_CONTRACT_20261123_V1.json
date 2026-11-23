@@ -8,10 +8,10 @@
   "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
   "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
   "conversation_memory_is_authority": false,
-  "earlier_routes_exhausted_reason": "The tool/man tiers extend the existing local-guide tier inside the same composed path; they are not a second mechanism. The scan, right-question, plan and verification stay unchanged. A separate local-knowledge engine is rejected for the same reason as the .md tier: it would duplicate the scan and the gate.",
+  "earlier_routes_exhausted_reason": "env-ready is not a new organ: it is the second closed contract on the existing world broker and it composes the existing isolation organ (environment_fit_v1) rather than re-implementing provisioning. A standalone fetch tool, an open-web search tier, npm support and sdist builds were each considered and rejected for this round.",
   "incremental_spend_usd": 0,
   "independent_verification_completed": false,
-  "independent_verification_note": "Producer-run sandbox only: local_guide_v1 extended with tool/man tiers and wired into the Perfect Algorithm loop with 13 local-guide tests (5 new) plus 23 perfect-algorithm tests (no new integration tests needed -- the receipt records the integration posture) + direct tool/man measurements in LOCAL_GUIDE_RECEIPT_20261123_TOOL_MAN_TIER_V1.json. No independent identity re-ran any of this.",
+  "independent_verification_note": "Producer-run sandbox only: the broker gained a second closed goal contract and was exercised live on two unseen repositories (flask 494 passed, requests 619 passed in the armed isolation). No independent identity re-ran any of it.",
   "laws_read_this_session": [
    "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
    "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
@@ -30,10 +30,11 @@
   "producer_cognition_model_dependency_count": 0,
   "progress_class": "VERIFIED_REUSABLE_CAPABILITY_GAIN",
   "progress_evidence_paths": [
-   "canonical/runtime/local_guide_v1.py",
-   "canonical/swe_kernel/perfect_algorithm_v1.py",
-   "canonical/tests/test_local_guide_v1.py",
-   "canonical/verification/LOCAL_GUIDE_RECEIPT_20261123_TOOL_MAN_TIER_V1.json"
+   "canonical/swe_kernel/the_environment_broker_v1.py",
+   "canonical/tests/test_broker_env_ready_v1.py",
+   "canonical/tools/env_ready_live_trial_v1.py",
+   "intake/RECEIPT_ENV_READY_LIVE_20261123_V1.json",
+   "intake/THE_GUIDE_IS_THE_ENVIRONMENTS_OWN_DECLARATION_20261123_V1.md"
   ],
   "route_class": "COMPOSE",
   "scope_complete_discharge": false,
@@ -59,7 +60,8 @@
  "falsification_condition": "Falsified if any warm arm returns a version or import state the interpreter contradicts, if any artifact's bytes disagree with the registry's published digest and installation proceeds anyway, or if a repository whose suite passes after arming shows a declared dependency absent. All three are tested; the live tamper case is the standing control.",
  "generic_repair_from_single_probe": false,
  "governance_change": false,
- "highest_leverage_now": "The broker now has two closed contracts either side of a real task: env-ready (is this environment the one the project expects) and run-tests (does its suite pass). The next leverage is the same discipline where the guide is not a manifest at all -- GUI/DOM -- blocked in this sandbox (no display) and therefore to be measured elsewhere, not claimed.",
+ "highest_leverage_note": "Two closed contracts either side of a real task now exist in one broker. The next leverage is the same contract shape where the guide is not a manifest at all -- GUI/DOM -- which is blocked in this sandbox (no display) and must be measured elsewhere, not claimed.",
+ "highest_leverage_now": true,
  "honest_limits": [
   "Python only. npm/Node arming is not implemented and is not claimed.",
   "Wheels only: an sdist-only release is refused by name; nothing is built from source.",
@@ -70,17 +72,16 @@
  ],
  "incremental_spend_usd": 0,
  "intentional_route_race": false,
+ "load_bearing_note": "The success probability is a producer estimate for the measurement succeeding (it did), not for any frontier benchmark score moving.",
  "load_bearing_primary": {
-  "constructive_gap_for_open_obligation_ids": [
-   "OSWORLD_2_1_PARTIAL_GE_81_8"
-  ],
+  "constructive_gap_for_open_obligation_ids": [],
   "expected_obligation_discharge_lcb": "0",
-  "expected_obligation_unlock_lcb": "1/81",
-  "interpretation": "No open obligation is discharged or unlocked by this producer-run measurement. The tool/man tier constructs and admits the mechanism; no truth obligation moves. The claimed unlock is an honest upper-bound envelope meant to show the work is obligation-adjacent, not a promise that any obligation moves this round.",
+  "expected_obligation_unlock_lcb": "0",
+  "interpretation": "No open truth obligation is discharged by this producer-run measurement. It constructs and admits a mechanism -- an environment can now be armed from its own declarations and proven by execution -- and the live receipt shows it on two unseen repositories. Obligation-adjacent, not an obligation move.",
   "open_obligation_ids": [],
   "scope_complete_discharge": false,
-  "success_probability_lcb": "0.5",
-  "wall_clock_cost_ub": 3
+  "success_probability_lcb": "0.9",
+  "wall_clock_cost_ub": "1800"
  },
  "measured_effect": "Live, on two repositories never brokered before, cloned at pinned commits: pallets/flask 49943b5a9441 armed cold in 11.22 s from 14 verified artifacts, warm in 0.33 s with zero registry requests and zero downloads, then its own suite 494 passed, exit 0. psf/requests 3c7baaa05ab4 armed cold in 27.87 s from 32 verified artifacts, warm in 0.78 s, then 619 passed, exit 0. A tampered memory record on both was caught by the execution re-check (recheck.ok False, from_memory False) and re-derived correctly. Offline: 24 new tests, 33 total across the two broker suites, 0 failures.",
  "next_step": "Exercise the same contract shape where nothing declares itself in a manifest: a GUI/DOM surface (OSWorld-shaped), where the environment's declarations must be DERIVED from observation rather than read from pyproject.toml. Blocked in this sandbox: no display, so it routes through a GitHub Actions workflow rather than a local claim.",
