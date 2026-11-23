@@ -444,7 +444,7 @@
  "selected_route": "SIGNATURE_OVER_THE_PROJECTS_RELATIONS_PLUS_ONE_NON_COMMUTATIVE_RELATION",
  "selected_surviving_route": "SIGNATURE_OVER_THE_PROJECTS_RELATIONS_PLUS_ONE_NON_COMMUTATIVE_RELATION",
  "status": "PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
- "stop_condition": "The census reproduces on a second machine with an independent identity re-running it, and the goal-to-door join is measured on the same 36 programs.",
+ "stop_condition": "The join reproduces on a second machine with an independent identity re-running it, and a held-out program on a machine whose doors the join never saw is answered from other programs' measurements alone.",
  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
  "truth": {
   "achieved": false,
