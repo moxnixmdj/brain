@@ -1152,3 +1152,28 @@ designed. §2's add/remove-without-retraining test now also holds against
 the persistence path: a corrupt or legacy store is never silently rewritten.
 NOT §6: no benchmark, no cross-kind transfer (still honestly absent), no
 GUI close-out.
+
+## 33. Browser-kind cross-process persistence (2026-11-23, measured)
+
+§15 measured cross-process persistence for a filesystem kind: TEACH in one
+process writes the store, a fresh process reads only the disk file and gets
+INSTANT_RECALL. The browser kind was never measured across the process
+boundary. §33 is that measurement — same pattern as §15, fixtures/servers
+parent-owned so the children share them:
+
+  Parent: fixtures A, B, C, D (shared HTTP servers, parent-owned).
+  CHILD_A: TEACH on fixture A, admission on fresh B,C (admit ADMIT) ->
+           rule ga-70024af2f8f0851d persisted to disk (155 s).
+  CHILD_B (fresh process): fresh fixture D (different content) ->
+           INSTANT_RECALL, PASS__REPLAY_FROM_MEMORY, replay rule
+           ga-70024af2f8f0851d, scan_states None (zero re-scan), 12.6 s.
+
+Honest disk check: the store holds schema PROJECT_BRAIN_PA_MEMORY_V1, 1 rule
+(scope env_kind=browser_page, goal_family=generic) and 1 kind of priors
+(browser_page). The warm phase never re-scans or re-derives: the disk-backed
+store is the durable, cross-process carrier, exactly as §15 measured for the
+filesystem kind.
+
+NOT §6: no benchmark, no new mechanism, no cross-kind transfer. The browser
+direction's durability half is now measured end-to-end: learn once (page) ->
+persist to disk -> fresh process replays instantly, content observed live.
