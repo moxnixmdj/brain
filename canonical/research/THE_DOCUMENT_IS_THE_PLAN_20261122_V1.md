@@ -2619,3 +2619,43 @@ request; a pure weighted router cannot tell `issue create` from `issue list` whe
 a title only one of them has. Neither layer is decoration.
 
 **Verified after restoring:** 77 tests; 12/12 effect tasks; unseen `vaultctl` 6/6.
+
+### A65 — two steps in one sentence, and the boundary the request states
+
+A60 named composition as the next bottleneck. Reaching for cross-program piping exposed something
+closer and worse: **two steps of one sentence were being read as one step.**
+
+    Create an issue titled "A" and then create an issue titled "B".
+
+planned `issue create --team A --title B` — one command, the first step's title in `--team`, the
+second step's title in `--title`, and no indication anything was lost. The step splitter knew about
+periods and about numbering (`1. … 2. …`) and about nothing else.
+
+**The fix is the request's own words, not a heuristic.** A sequential connective *is* the request
+stating a boundary, exactly as numbering is: `and then`, `then`, `after that`, `finally`, `next`,
+`afterwards`. They split on the same licence, and the existing rule still governs whether a piece
+starts a new step: a piece that leads with an act does, a piece that names no act continues the one
+before it. So
+
+    Create a workflow named "x" and then set the owner to "y".
+
+does **not** become two commands — its second half leads with `set`, which is an act, but the rule
+that already existed decides that, not the connective. The connective only says "a boundary may be
+here"; whether it *is* one is still decided by whether an act follows.
+
+**Verified by effect, not by string.** The new task `t13` asks for two issues in one sentence and
+asserts the store afterwards holds both:
+
+    Create an issue in the team "Platform" titled "Digest retries", then create an issue in the
+    team "Platform" titled "Digest metrics".
+
+      -> issue create --team Platform --title "Digest retries"
+         issue create --team Platform --title "Digest metrics"
+      -> store: [{team: Platform, title: Digest retries}, {team: Platform, title: Digest metrics}]
+
+**13 of 13 effect tasks pass.** The case that started this — cross-program piping, "find the files
+that contain X, then archive them" — is *not* solved by this and is not claimed to be. It needs the
+output of one program's command to be the input of another's, and no page says two programs
+compose. That remains the bottleneck, now with the one-program case separated out and working.
+
+**Verified:** 78 tests; 13 effect tasks under `PYTHONHASHSEED` 7/99; unseen `vaultctl` 6/6.

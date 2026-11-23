@@ -123,6 +123,17 @@ TASKS: list[dict] = [
         "expect_collection": "page",
         "expect": [{"title": "Weekly Report", "parent": "Docs"}],
     },
+    # ---- TWO steps in one sentence, joined by a sequential connective. The request states two
+    #      boundaries and must get two commands; read as one step it gave `--team A --title B`.
+    {
+        "id": "t13-two-stated-steps",
+        "tool": "linear",
+        "instruction": 'Create an issue in the team "Platform" titled "Digest retries", '
+                       'then create an issue in the team "Platform" titled "Digest metrics".',
+        "expect_collection": "issue",
+        "expect": [{"title": "Digest retries", "team": "Platform"},
+                   {"title": "Digest metrics", "team": "Platform"}],
+    },
     # ---- the same two values with the labels the other way round in the sentence.
     {
         "id": "t12-two-labelled-values-reversed",

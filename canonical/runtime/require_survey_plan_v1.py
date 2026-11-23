@@ -3780,8 +3780,24 @@ def sentences_of(text: str) -> list[str]:
     # fields off the command they belong to -- measured: `flowctl workflow create "deploy-staging"`
     # instead of `--name deploy-staging --steps run_pipeline`. A sentence naming no act continues
     # the step before it, which is what the request's own grammar says.
-    steps: list[str] = []
+    # The request states its own boundaries in more than one way. Numbering is the explicit one;
+    # a sequential connective inside a single sentence is the other: `Create an issue titled "A"
+    # **and then** create an issue titled "B"` is two steps of one sentence, and reading it as one
+    # step gave `issue create --team A --title B` -- the first step's title in `--team`, the second
+    # step's title in `--title`, and one command where two were asked for. `then`, `and then`,
+    # `after that`, `finally` and `next` are the words a request uses to say "the next one follows",
+    # the same statement numbering makes, so they split on the same licence. A connective that
+    # names no act continues the step, as before: `Create a workflow named "x" and then set the
+    # owner to "y"` stays one command, because its second half leads with no act of its own.
+    stated = []
     for part in parts:
+        for piece in re.split(r"\s*(?:,?\s*(?:and\s+then|and\s+finally|after\s+that|"
+                              r"then|next|finally|afterwards)\b)\s*,?\s*", part,
+                              flags=re.I):
+            if piece.strip():
+                stated.append(piece.strip())
+    steps: list[str] = []
+    for part in stated:
         if not steps or _leads_with_an_act(part) or _announces_its_own_order(part):
             steps.append(part)
         elif _is_about_the_setting_not_the_task(part):
