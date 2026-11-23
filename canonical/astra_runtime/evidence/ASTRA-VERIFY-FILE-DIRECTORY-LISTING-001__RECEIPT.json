@@ -1,6 +1,6 @@
 {
  "adapter_path": "canonical/runtime/bound_capabilities/file_survey.py",
- "adapter_sha256": "e9624df1bd6f7ed14dc133cc1eb79e797167b2b4939b89bcd85bda33a83e022f",
+ "adapter_sha256": "faafd5b6bda43385202cfcfe16b8503ff5728a435b654984d6965f246eb944ff",
  "capability_id": "file.directory_listing.v1",
  "checks": [
   {

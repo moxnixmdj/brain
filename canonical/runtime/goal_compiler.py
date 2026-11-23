@@ -218,6 +218,15 @@ _REPO_PATHS_CACHE: dict[tuple[str, str], list] = {}
 _REPO_PATHS_CACHE_MAX = 1024
 
 
+# The forms that POINT at the working root instead of naming it. Kept as one expression so the rule
+# is readable and so it can be widened only by someone who has looked at what would newly match.
+_DEICTIC_FOLDER = (
+    r"(?:\bin\s+)?\bthis\s+(?:folder|directory)\b"
+    r"|\bthe\s+(?:current|working)\s+(?:folder|directory)\b"
+    r"|(?<![A-Za-z0-9_.-])\bhere\b(?!\s+(?:is|are)\b)"
+)
+
+
 def _repo_paths(goal, root):
     key=(str(goal or ""), str(root or ""))
     hit=_REPO_PATHS_CACHE.get(key)
@@ -289,6 +298,44 @@ def _repo_paths_uncached(goal, root):
         p = (rr / raw).resolve()
         if p != rr and rr in p.parents:
             candidates.append((raw, p))
+    # A BARE DIRECTORY NAME IS A PATH TOO -- the mirror of the rule above, and it was missing.
+    #
+    # The pattern at the top of this function requires a "/", so `canonical`, `tests`, `deploy` --
+    # the way a person names a folder they are already standing in -- matched nothing. Measured
+    # 2026-11-22: "list the files in canonical" bound no path and was refused, while "list the
+    # files in canonical/tests" bound fine. The sentence was not ambiguous; the reader needed a
+    # slash to believe it.
+    #
+    # The test for "is a directory" is the FILESYSTEM, not a guess: a token only counts when it
+    # names an existing directory inside the root. That is why nothing is invented here -- a word
+    # that is not a real folder in this tree stays a word. Same rule as every path above: outside
+    # the tree is not bound at all.
+    for m in re.finditer(r"(?<![A-Za-z0-9_./-])([A-Za-z0-9_.-]+)(?![A-Za-z0-9_./-])", path_text):
+        raw = m.group(1)
+        if not raw or any(raw == c for c, _ in candidates):
+            continue
+        p = (rr / raw).resolve()
+        if p == rr or rr not in p.parents or not p.is_dir():
+            continue
+        candidates.append((raw, p))
+    # "THIS FOLDER", "HERE" AND "THE CURRENT DIRECTORY" NAME THE ROOT, WHICH IS A KNOWN FACT.
+    #
+    # There is no word to look up. The reference is to the place the request is being served from,
+    # and this function is holding it: `rr` is the root the caller allowed. So the binding is not a
+    # guess about which folder -- it is the only folder this compiler is permitted to read.
+    #
+    # Measured 2026-11-22: `file.directory_listing.v1` existed, verified, scoring 22 against a
+    # competitor's 4, and "list the files in this folder" still refused, because no path could be
+    # bound from a sentence that points instead of names. The capability was never the problem.
+    #
+    # Only the DEICTIC forms are matched -- a word that actually points at the here-and-now. A
+    # sentence that names a folder is unaffected, and "here" inside a longer phrase is not read as
+    # a location unless it stands as one ("here" or "in/from this folder/directory").
+    if not any(c == "." for c, _ in candidates):
+        deictic = re.search(
+            r"(?:" + _DEICTIC_FOLDER + r")", path_text, re.I)
+        if deictic:
+            candidates.append((".", rr))
     return candidates
 
 

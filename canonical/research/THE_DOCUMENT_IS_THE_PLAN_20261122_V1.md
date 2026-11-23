@@ -4120,3 +4120,105 @@ The first version of the suite failed four tests, and the cause was the test, no
 fixture put its contents in the root and asked for `"."`, which the adapter refuses **on purpose**.
 The fix was to give the fixture a named directory. A refusal that breaks your tests is worth reading
 before it is worth relaxing.
+
+---
+
+## §A82 — THE PLAINEST SENTENCE IS ANSWERED, AND A FALSE PASS DIES (2026-11-22)
+
+A81 left the capability *verified and unreachable*. This round joined it, and answering
+**"list the files in this folder"** took three separate readers learning something — each one a real
+block, each one found by measurement rather than by reading code:
+
+### 1. A bare directory name was not a path
+
+`goal_compiler._repo_paths` required a `/` in the token, so `canonical`, `tests`, `deploy` — how a
+person names a folder they are already standing in — matched nothing. `canonical/tests` bound;
+`canonical` did not. The mirror of the existing "a bare filename is a path too" rule was missing.
+The test for "is a path" is the **filesystem**: a token counts only when it names an existing
+directory inside the root, so `deploy` stays a word.
+
+### 2. A deictic phrase names the root, which is a fact
+
+`this folder`, `here`, `the current directory` contain no path to look up. They point at **the place
+the request is being served from** — and `_repo_paths` is holding exactly that in `rr`. The binding
+is not a guess about which folder; it is the only folder the compiler is permitted to read. Nothing
+in the machine handled this before.
+
+### 3. The row declared a DIRECTORY in the machine's FILE slot
+
+`path` is `_PATH_FILE_KEYS` (files only — it filtered on `is_file()` and refused with
+`0_existing_files_named`). The directory slot is **`source_root`**. The row was wrong, not the
+binder. Also removed: a `goal` slot the adapter never read — an input that takes the whole sentence
+is the catch-all shape, and it lets a row "bind" anything while hiding whether the sentence was about
+a folder at all.
+
+### The result
+
+| sentence | result |
+|---|---|
+| `list the files in this folder` | **PASS**, `noun: file`, count **530** |
+| `show me the files here` | **PASS**, 530 |
+| `list the files in the current directory` | **PASS**, 530 |
+| `list the files in canonical` | **PASS**, **55** |
+| `list the files in canonical/runtime` | **PASS**, **2247** |
+
+Every count equals `ls | wc -l` at call time, and the delivered names equal `os.listdir`.
+
+### The finding that matters most: a false pass was removed
+
+Adding the row changed one corpus verdict, and the receipt is damning. Temporarily removing only the
+registry row (every code change left in place) restored:
+
+```
+"list the installed packages" -> VERIFIED_ACTION
+    result: {"adapter": "archive_tarfile",
+             "output_path": ".../brain_out__archive_tar_gz_create_from_manifest__*.tar.gz",
+             "output_bytes": 21863, ...}
+```
+
+**It had been answering "list the installed packages" by building a tar archive**, and the honesty
+census was counting that on the right side of the line. With the row present the sentence fails
+closed as `AMBIGUOUS` instead. So:
+
+* `verified` 3 → 2: one false pass removed (`expressible` 14 → 13 for the same reason);
+* the pinned counts were updated **with the receipt quoted in the test**, not just changed.
+
+### A test that had to be corrected, twice, for the right reason
+
+* `test_every_unexpressible_task_is_ambiguous_not_routeless` asserted `routeless == 0` while treating
+  two deliberate `REFUSED__GOAL_KIND_CONTRADICTS_NAMED_FILE` rows as routeless. **A refusal is not a
+  void** — one is a decision with a reason, the other is the machine having nothing to say. Verified
+  present with *and* without this round's row, so the assertion was already failing before the change
+  that exposed it.
+* An assertion I wrote as `... or True` asserted **nothing** while reading as if it did. Replaced with
+  a real one. That is the same defect class as the unrun verification in A80.
+
+### Keyword scope is a measured decision, not taste
+
+The scorer turns keywords into a **bag of words**, so any keyword containing `files`, `list`,
+`directory` or `folder` lends that word to the row regardless of the phrase it came from. The first
+draft claimed **8 of 30** corpus tasks; narrowing on content words (`contents`, `inside`) and removing
+an unused whole-request slot brought it to the sentences that are genuinely about a folder.
+
+Where a folder name belongs to another capability, **the other capability keeps it**: "list the files
+in tests" scores 11 for `python.tests.audit.unittest` and 4 for the listing row, and it is left that
+way. A listing row that claims every folder name would take sentences from the rows that understand
+them. Honest scope beats coverage.
+
+### Verified
+
+| check | result |
+|---|---|
+| 8 suites together | **173 passed, 0 failed** — first fully green run of this session |
+| the previously pre-existing failure | **now fixed**: it was a stale count, not a machine defect |
+| `tasks_v1` / `unseen_program_v1` | **13/13** / **6/6** |
+| suite `test_the_directory_survey_lists_what_is_there_v1.py` | **27 passed** |
+
+### A process rule earned twice
+
+I verified two hypotheses by `git stash push`-ing the whole working tree. **Both pops failed** —
+"the stash entry is kept" — leaving the tree with one modified file and all the work stranded in
+`stash@{0}`. Both times I caught it by reading `git stash list` before continuing, and restored. The
+rule, now recorded: **never bisect a hypothesis by moving the whole tree.** Remove the one file or
+remove the one dict key; a `stash` that half-applies is indistinguishable from a clean tree until you
+look.

@@ -59,8 +59,15 @@ def test_only_half_of_ordinary_computer_tasks_are_expressible(report):
     count the thing asked for, so the task is honestly unexpressible. The number
     going DOWN is the measurement improving: coverage was never 15.
     """
-    assert report["expressible"] == 14, report["expressible"]
-    assert report["unexpressible"] == 16
+    # 14 -> 13 on 2026-11-22 (A82): the same story a third time, and the receipt proves it.
+    #
+    # "list the installed packages" used to route: `archive.tar_gz.create_from_manifest` took it and
+    # produced a 21,863-byte tarball, and the row was counted as expressible because a wrong answer
+    # in the right shape reads exactly like a right one. It now fails closed as AMBIGUOUS, so it has
+    # no `routed_to` and is not counted. Removing the new registry row restores 14 and restores the
+    # tarball -- which is how the change was attributed. Fewer routes is fewer false routes.
+    assert report["expressible"] == 13, report["expressible"]
+    assert report["unexpressible"] == 17
 
 
 def test_every_unexpressible_task_is_ambiguous_not_routeless(report):
@@ -74,12 +81,30 @@ def test_every_unexpressible_task_is_ambiguous_not_routeless(report):
     """
     rows = report["rows"]
     ambiguous = [r for r in rows if r["status"] == "AMBIGUOUS"]
-    routeless = [r for r in rows if r["status"] != "AMBIGUOUS" and not r["routed_to"]]
+    # A REFUSAL IS NOT A VOID.
+    #
+    # This counted every non-AMBIGUOUS row with no route as "routeless", which swept up the two
+    # tar tasks that are explicitly REFUSED__GOAL_KIND_CONTRADICTS_NAMED_FILE -- the machine saying,
+    # on purpose, that a request to compress the folder contradicts the file it named. That is a
+    # decision with a reason; a routeless task is the machine having nothing at all to say. They are
+    # not the same defect and must not share a bucket.
+    #
+    # Measured 2026-11-22: the two refusals are present with and without this round's registry row,
+    # so the old `== 0` assertion was already failing before the change that exposed it.
+    refused = [r for r in rows
+               if r["status"] != "AMBIGUOUS" and not r["routed_to"]
+               and str(r["status"]).startswith("REFUSED")]
+    routeless = [r for r in rows
+                 if r["status"] != "AMBIGUOUS" and not r["routed_to"]
+                 and not str(r["status"]).startswith("REFUSED")]
     assert len(ambiguous) == report["ambiguous"] > 0
     assert len(routeless) == 0, [r["task"] for r in routeless]
-    # "unexpressible" is the sum of the two, not one of them -- they overlap only in
-    # having no capability_id, which is exactly why counting them as one number hides the split.
-    assert len(ambiguous) + len(routeless) == report["unexpressible"] == 16
+    # Every refusal names its reason. `... or True` here would assert nothing and read as if it did:
+    # the point is that a REFUSED status carries the file it contradicted, which is what makes the
+    # refusal checkable rather than a bare "no".
+    assert all("CONTRADICTS_NAMED_FILE" in str(r.get("status")) for r in refused), refused
+    # "unexpressible" is the sum of all three, which is why one number hides the split.
+    assert len(ambiguous) + len(refused) + len(routeless) == report["unexpressible"] == 17
     assert all(r.get("survivor_scores") for r in ambiguous)
 
 
@@ -118,7 +143,24 @@ def test_verified_action_is_not_the_same_claim_as_answered(honest):
     # different question. A row that refuses to claim a success it did not achieve is not a
     # verified action, so it leaves this count -- and the count going DOWN here means one fewer
     # false pass exists to audit, which is what this test measures.
-    assert honest["verified"] == 3, honest["verified"]
+    # 3 -> 2 on 2026-11-22 (A82), and this one is a FALSE PASS REMOVED, not a capability lost.
+    #
+    # `file.directory_listing.v1` became routable this round, and one corpus task changed verdict:
+    # "list the installed packages" went VERIFIED_ACTION -> AMBIGUOUS. Read the receipt that used to
+    # back it (by temporarily removing only the new registry row, every code change left in place):
+    #
+    #     status: VERIFIED_ACTION   result: {"adapter": "archive_tarfile",
+    #         "output_path": ".../brain_out__archive_tar_gz_create_from_manifest__*.tar.gz",
+    #         "output_bytes": 21863, ...}
+    #
+    # It had been answering "list the installed packages" by BUILDING A TAR ARCHIVE. That is exactly
+    # the defect this file exists to count, and it was being counted on the right side of the line.
+    # The new row scored 4 on the word "list", won the tier, could not bind a directory, and the
+    # sentence now fails closed instead of packing a tarball and calling it a package list.
+    #
+    # So `verified` going down here is the instrument agreeing with reality a second time; the
+    # assertion below (verified > honest + not_an_answer - 1) still holds at 2 > 1 + 1 - 1.
+    assert honest["verified"] == 2, honest["verified"]
     assert honest["not_an_answer"] == 1, honest["not_an_answer"]
     assert honest["honest"] == 1, honest["honest"]
     assert honest["verified"] > honest["honest"] + honest["not_an_answer"] - 1

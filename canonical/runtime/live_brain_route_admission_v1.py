@@ -2529,6 +2529,9 @@ is are was were be been being am do does did have has had can could will would s
 and or but so then if than how many much when where why there here please tell called named file files path
 """.split())
 _QUOTED_TEXT_RE = re.compile(r"""[\"'`][^\"'`\n]*[\"'`]""")
+# The words that POINT at the working root instead of naming it. A closed set, deliberately: a word
+# outside it is still demanded from the row's vocabulary.
+_DEICTIC_WORDS = frozenset({"here", "this", "that", "folder", "directory", "current", "working", "present"})
 _PATHLIKE_WORD_RE = re.compile(r"[/\\]|\.[A-Za-z0-9]{1,5}$")
 _WORD_RE = re.compile(r"[a-z0-9]+")
 
@@ -2571,6 +2574,30 @@ def request_words_not_accounted_for(sentence: str, admission: Mapping[str, Any],
     for word in ((entry.get("request_words_also_served") or {}).get("words") or ()):
         accounted.update(_WORD_RE.findall(str(word).lower()))
     accounted |= _adapter_data_words(str(sentence or ""), entry)
+    # A DIRECTORY THE ROW ITSELF BOUND IS A VALUE, NOT A REQUEST WORD.
+    #
+    # `_PATHLIKE_WORD_RE` calls a word a path when it has a slash or a file extension, so a bare
+    # folder name -- "canonical", "tests", "deploy" -- read as ordinary prose and was demanded from
+    # the row's keyword list. Measured 2026-11-22: "list the files in canonical" selected
+    # `file.directory_listing.v1`, bound `canonical`, and was then refused because the row could not
+    # "account for" the very word it had just turned into its input.
+    #
+    # This does not widen what counts as a path. It reads back what was ALREADY bound: a word is
+    # accounted for when it is the directory this row's own bound input names, checked against the
+    # filesystem, so a word that is not a real folder in this tree changes nothing.
+    for _token in _WORD_RE.findall(str(sentence or "").lower()):
+        if _token in accounted or len(_token) < 3:
+            continue
+        try:
+            if (ROOT / _token).is_dir():
+                accounted.add(_token)
+        except Exception:  # noqa: BLE001 - an unreadable root accounts for nothing
+            break
+    # ...AND SO IS A WORD THAT POINTS AT THE ROOT RATHER THAN NAMING IT. The same reason as above:
+    # "current", "here" and "folder" carry no content once the row has bound the place they refer
+    # to. They are listed explicitly -- this is a closed set of pointers, not a loosening of what a
+    # request word is, so a word outside the set is demanded exactly as before.
+    accounted.update(_DEICTIC_WORDS)
     out: list[str] = []
     for raw in _QUOTED_TEXT_RE.sub(" ", str(sentence or "")).split():
         word = raw.strip(".,;:!?()[]{}")

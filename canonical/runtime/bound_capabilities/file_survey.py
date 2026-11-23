@@ -90,9 +90,21 @@ def run(args: Mapping[str, Any], root: Any = None) -> dict[str, Any]:
     target = _resolve_inside(root, args.get("path"))
     if not target.is_dir():
         raise ValueError("PATH_NOT_DIRECTORY")
-    if target == root:
-        # The repository root is refused for the same reason every other binder refuses it: a
-        # listing of everything is not an answer to a question about a folder.
+    if target == root and str(args.get("path") or "").strip() not in (".", "./"):
+        # THE ROOT IS REFUSED UNLESS IT WAS NAMED.
+        #
+        # A81 refused the root outright, on the reasoning that "a listing of everything is not an
+        # answer to a question about a folder". That was drawn in the wrong place, and the evidence
+        # is the sentence "list the files in this folder": it points at the working folder, which IS
+        # this root, and refusing it means the plainest question a person can ask about a directory
+        # cannot be answered by the capability built for it.
+        #
+        # The danger the rule was protecting against is real but narrower: SILENTLY defaulting to
+        # the root, so the machine answers about a folder nobody named. A path that is empty or
+        # that only resolves here by accident is still refused. An explicit "." -- which is what a
+        # deictic phrase binds to -- is the caller naming the root, and that is answered.
+        raise ValueError("REFUSES_THE_REPOSITORY_ROOT")
+    if target == root and not str(args.get("path") or "").strip():
         raise ValueError("REFUSES_THE_REPOSITORY_ROOT")
 
     entries = _entries_of(target)
