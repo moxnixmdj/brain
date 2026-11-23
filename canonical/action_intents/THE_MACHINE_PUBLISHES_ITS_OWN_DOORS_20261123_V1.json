@@ -40,7 +40,7 @@
   "terminal_achieved": false
  },
  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
- "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The agent could not compose the existing pieces into one goal-directed loop; every mechanism existed but the loop that steers by the right question, generalizes only on fresh evidence, and persists honestly did not.",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::the action list was an input: scan(env, actions) enumerates what a caller passes, and on every measured machine the caller was a person",
  "canonical_base_commit": "b4fdd79eea027b5ccf85988e2eb46b5a2e596f90",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": {
@@ -51,7 +51,7 @@
  "causal_blocker": "the action list was an input: scan(env, actions) enumerates what a caller passes, and on every measured machine the caller was a person",
  "date": "2026-11-23",
  "expected_parent_change": "36 programs' doors are computed instead of hand-written.",
- "expected_parent_frontier_change": "The first step of the loop no longer depends on a human: a real program's own declaration yields doors that the tree confirms by execution, and those doors drive scan(). Before this round the loop could not take a first step in an environment nobody had prepared for it.",
+ "expected_parent_frontier_change": "The loop's first step no longer requires a person: a real program's own declaration yields doors that the tree confirms by execution, and those doors drive scan().",
  "explicit_user_authorization": [
   "What if we make a perfect algorithm and that is basically our model?",
   "All he should do is basically go into any new arbitrary environment in the computer and he doesn't know anything about anything",
@@ -76,26 +76,6 @@
  ],
  "incremental_spend_usd": 0,
  "intentional_route_race": false,
- "live_challenger_frontier_discovery": {
-  "found_and_reused": [
-   "scan()",
-   "learn_model()",
-   "state_key()",
-   "the vocabulary's relation-change judgement",
-   "operation_trial_v1's trial discipline"
-  ],
-  "not_rebuilt": [
-   "cli_contract_inference.py",
-   "operation_trial_v1.py",
-   "value_enumeration_v1.py"
-  ],
-  "performed": true,
-  "required": true,
-  "searched": [
-   "the project's own runtime for existing declaration readers",
-   "literature on man-page/help parsing and shell-completion generation"
-  ]
- },
  "live_challenger_frontier_discovery_required": true,
  "load_bearing_primary": {
   "constructive_gap_for_open_obligation_ids": [
@@ -154,62 +134,176 @@
  "recursive_obs": {
   "canonical_base_commit": "b4fdd79eea027b5ccf85988e2eb46b5a2e596f90",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
-  "deleted_or_bypassed_paths": [],
-  "expected_parent_level_state_change": "the loop's first step no longer requires a human",
-  "obs_blocker": "an action vocabulary supplied by a caller",
-  "obs_capability": "a vocabulary read from the machine and verified by execution",
-  "obs_goal": "remove the human from the first step of the loop",
-  "obs_inherited_system": "perfect_algorithm_v1, environment_learning_v1, the_vocabulary_is_the_artifact_v1",
-  "obs_obs": "scan(env, actions) takes the action list as an argument; every measured machine's list was hand-written",
-  "obs_solution": "read each program's own declaration, run each declared operation on a restored tree, classify by what moved",
-  "obs_verification": "canonical/verification/THE_MACHINE_PUBLISHES_ITS_OWN_DOORS_20261123_V1.json",
-  "observed_at_utc": "2026-11-23T18:10:00+00:00",
-  "real_outcome": "76 doors, 1098 sensors, 960 unbound from 2134 declarations",
-  "required_capability": "read a declaration, run it, believe the tree",
+  "deleted_or_bypassed_paths": [
+   "the caller-supplied action list as the precondition of scan()",
+   "hand-declared Atom tuples per machine in the_vocabulary_is_the_artifact_v1"
+  ],
+  "expected_parent_level_state_change": "The loop's first step no longer requires a person: a real program's own declaration yields doors that the tree confirms by execution, and those doors drive scan().",
+  "obs_blocker": {
+   "delete_bypass_substitute_options": [
+    "delete scan()'s action argument (rejected: scan() is reused everywhere)",
+    "bypass the tree and trust the declaration (rejected: that is the guessing the frontier already fails at, 24.1% of Terminal-Bench failures)",
+    "substitute a static capability table (rejected: it is exactly what this round removes)"
+   ],
+   "intrinsic_or_path_specific": "INTRINSIC: any caller-supplied action list is a label, and a label can always be wrong about an environment nobody has seen",
+   "surviving_causal_blocker": "the vocabulary had to come from outside the environment, so a human stood between the machine and the loop"
+  },
+  "obs_capability": {
+   "capability_work_deleted": [
+    "guessing whether a flag is an action: the tree answers",
+    "one door per spelling: aliases collapse into one Operation"
+   ],
+   "existing_inherited_routes_checked": "cli_contract_inference.py and operation_trial_v1.py were read and reused in discipline, not rebuilt; value_enumeration_v1.py was read and judged too narrow to generalise",
+   "external_existing_routes_checked": "shell-completion generation (bash/zsh) derives flags from the same declarations but describes only names, never whether a name moves a tree; man is absent on this host",
+   "surviving_gap": "knowing 76 doors is not knowing which door a request wants; the census answers what can be done here, not what should be done"
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "a larger catalog of censused tools",
+    "a larger door count: 76 doors is a measurement, not a capability"
+   ],
+   "real_outcome": "The action vocabulary for an unprepared machine is computed from each program's own declaration and confirmed by running it.",
+   "surviving_necessity": "the loop still needs a vocabulary to start from; the only question was who supplies it, and now the machine does"
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "declaration reading, execution as judge, and change-kind classification in one module",
+   "downstream_work_to_delete_or_supersede": "the hand-written Atom tuples are no longer required to start the loop; they remain valid as a fast path",
+   "fresh_reuse_plan": "the discovered doors feed perfect_algorithm_v1.scan() unchanged; the receipt's scan_proof is that reuse, run on gzip"
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": "nothing cached: a full census re-executes 2,134 operations in 54 s, fast enough that a cache would be a second mechanism to keep correct",
+   "search_stop_decision": "stopped at one reader plus one judge; a second reader is the same mechanism over more shapes and a GUI tier needs a display this host lacks, both recorded as limits"
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "each losing route either duplicates the mechanism, cannot be measured on this host, or trades a measurement for an inference",
+   "routes_ranked": [
+    {
+     "rank": 1,
+     "route": "COMPOSE_ONE_READER_OVER_DECLARATION_SHAPES_WITH_EXECUTION_AS_THE_JUDGE",
+     "why": "one reader plus one judge measures the answer instead of inferring it"
+    },
+    {
+     "rank": 2,
+     "route": "A_SECOND_DECLARATION_READER",
+     "why": "same mechanism over more shapes; more code for the same answer"
+    },
+    {
+     "rank": 3,
+     "route": "A_GUI_TIER_FROM_THE_ACCESSIBILITY_TREE",
+     "why": "reaches programs with no help text, but no display exists here to measure it"
+    },
+    {
+     "rank": 4,
+     "route": "INFER_THE_ROOM_FROM_A_FAILURE_MESSAGE",
+     "why": "fewer stated inputs at the cost of honesty: the census can state a room"
+    }
+   ]
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "no synthetic oracle is used for a door: the disposable tree IS the oracle, and the 23 tests only re-derive classification on fixtures; the receipt persists the run's numbers"
+  },
+  "real_outcome": "36 programs' declarations yield 76 doors, 1,098 sensors and 960 unbound in 54 s with the tree restored exactly after every trial; scan() then walks gzip's discovered doors -- 5 states, 12 transitions, 0.028 s.",
+  "required_capability": "read a program's own declaration, execute it on a restored tree, and believe the tree over the declaration",
   "route_frontier": {
    "canonical_base_commit": "b4fdd79eea027b5ccf85988e2eb46b5a2e596f90",
    "challenger_routes": [
     {
      "comparison": {
-      "CAPABILITY_STRENGTH": "the same mechanism over more help shapes",
+      "CAPABILITY_STRENGTH": "same mechanism, more help shapes",
       "CORRECTNESS": "equal",
-      "COST": "a second parser to keep correct",
-      "SPEED": "equal",
-      "VERDICT": "REJECTED__REDUNDANT"
+      "INCREMENTAL_COST": "a second parser to keep correct",
+      "RELIABILITY": "equal",
+      "VERDICT": "REJECTED__REDUNDANT",
+      "VERIFIABILITY": "equal",
+      "WALL_CLOCK": "slightly slower"
      },
      "route_id": "A_SECOND_DECLARATION_READER"
     },
     {
      "comparison": {
-      "CAPABILITY_STRENGTH": "reaches programs with no --help",
-      "CORRECTNESS": "unmeasured: no display exists in this sandbox",
-      "COST": "a whole second vocabulary",
-      "SPEED": "slower",
-      "VERDICT": "DEFERRED__RECORDED_AS_A_LIMIT"
+      "CAPABILITY_STRENGTH": "reaches programs with no help text",
+      "CORRECTNESS": "unmeasured: no display on this host",
+      "INCREMENTAL_COST": "a whole second vocabulary",
+      "RELIABILITY": "unknown",
+      "VERDICT": "DEFERRED__RECORDED_AS_A_LIMIT",
+      "VERIFIABILITY": "lower",
+      "WALL_CLOCK": "slower"
      },
      "route_id": "A_GUI_TIER_FROM_THE_ACCESSIBILITY_TREE"
     },
     {
      "comparison": {
-      "CAPABILITY_STRENGTH": "fewer stated rooms",
-      "CORRECTNESS": "lower: it is guessing where the census can state",
-      "COST": "none",
-      "SPEED": "equal",
-      "VERDICT": "REJECTED__NOT_HONEST"
+      "CAPABILITY_STRENGTH": "fewer stated inputs",
+      "CORRECTNESS": "lower: guessing where the census can state",
+      "INCREMENTAL_COST": "none",
+      "RELIABILITY": "lower",
+      "VERDICT": "REJECTED__NOT_HONEST",
+      "VERIFIABILITY": "lower",
+      "WALL_CLOCK": "equal"
      },
      "route_id": "INFER_THE_ROOM_FROM_A_FAILURE_MESSAGE"
     }
    ],
-   "max_age_hours": 1,
+   "checked_at_utc": "2026-11-23T17:47:52+00:00",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "A_HAND_WRITTEN_ACTION_LIST_PER_MACHINE",
+   "max_age_hours": 2,
+   "negative_search_summary": "no existing mechanism reads a program's own declaration AND executes each declared operation on a restored tree to classify it; completion generators stop at names, and the project's own inference module is hand-targeted",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "infer command line tool capabilities from help text and verify by execution"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "shell completion generators deriving options from program declarations"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "classify command line operations as mutating or read only by running them"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "2026 agent benchmarks command not found failure share terminal bench"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
    "selected_route": "COMPOSE_ONE_READER_OVER_DECLARATION_SHAPES_WITH_EXECUTION_AS_THE_JUDGE",
    "selected_route_preflight": {
     "all_required_dependencies_ready": true,
-    "checked_at_utc": "2026-11-23T18:10:00+00:00",
+    "checked_at_utc": "2026-11-23T17:47:52+00:00",
     "execution_dependencies": [
      {
       "dependency": "local Python 3 runtime",
       "evidence": [
-       "138 tests pass across the relevant surface on this machine"
+       "138 tests pass across the relevant surface on this host"
       ],
       "evidence_classes": [
        "DIRECT_PROBE"
@@ -224,7 +318,7 @@
      {
       "dependency": "the programs whose declarations are read",
       "evidence": [
-       "36 programs present; all 2,134 declared operations executed"
+       "36 programs censused; all 2,134 declared operations executed"
       ],
       "evidence_classes": [
        "DIRECT_PROBE"
@@ -237,7 +331,7 @@
       "volatility": "STATIC"
      },
      {
-      "dependency": "no network at run time",
+      "dependency": "no network access at census time",
       "evidence": [
        "the census made zero network calls; it reads local binaries only"
       ],
@@ -246,7 +340,7 @@
       ],
       "evidence_scope": "GLOBAL",
       "kind": "NETWORK_ENDPOINT",
-      "observed_at_utc": "2026-11-23T18:10:00+00:00",
+      "observed_at_utc": "2026-11-23T17:47:52+00:00",
       "required": false,
       "scope": "GLOBAL",
       "status": "READY",
@@ -255,19 +349,46 @@
     ],
     "execution_dependencies_complete": true,
     "failed_dependencies": [],
-    "max_age_hours": 1,
-    "status": "READY",
-    "stop_condition": "the census reproduces on a second machine"
-   }
+    "max_age_hours": 2,
+    "selected_route": "COMPOSE_ONE_READER_OVER_DECLARATION_SHAPES_WITH_EXECUTION_AS_THE_JUDGE",
+    "status": "READY"
+   },
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/runtime/cli_contract_inference.py (narrow, hand-targeted; reused in discipline)",
+     "canonical/runtime/operation_trial_v1.py (trial discipline reused)",
+     "canonical/swe_kernel/perfect_algorithm_v1.py (scan; reused unchanged)"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "Terminal-Bench 2.0 error analysis: command not found is 24.1% of all failures",
+     "agent failure taxonomies: invocation errors 35.1%"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "argcomplete / click / clap conventions: a declaration plus completion, no effect claim"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "the programs' own --help output on this host: 36 present, 2,134 declared operations",
+     "GNU Coreutils and GNU tar manuals' option conventions as read from --help"
+    ]
+   },
+   "unresolved_plausible_dominators": []
   },
   "routes_considered": [
-   "A second declaration reader",
-   "a GUI/DOM tier",
-   "room inference from failure"
+   "REUSE: reuse scan(), learn_model(), state_key() and the vocabulary relations (selected)",
+   "COMPOSE: one reader over declaration shapes, execution as the judge (selected)",
+   "a second declaration reader for more help shapes (rejected: same mechanism)",
+   "a GUI/DOM tier (rejected: no display exists in this sandbox; recorded as a limit)",
+   "infer a room from a failure message (rejected: guessing where the census can state)"
   ],
   "selected_surviving_route": "COMPOSE_ONE_READER_OVER_DECLARATION_SHAPES_WITH_EXECUTION_AS_THE_JUDGE",
-  "stop_condition": "the census reproduces on a second machine and an independent identity re-runs it",
-  "why_selected_route_is_fastest_sufficient": "the door count is a measurement, not an inference; the same mechanism spans every program without naming one"
+  "stop_condition": "The census reproduces on a second machine with an independent identity re-running it, and the goal-to-door join is measured on the same 36 programs.",
+  "why_selected_route_is_fastest_sufficient": "the door count becomes a measurement rather than an inference, and one mechanism spans every program without naming any of them"
  },
  "required_capability": "a verified action vocabulary for an unprepared environment",
  "route_class": "COMPOSE",
@@ -287,7 +408,7 @@
  "selected_route": "COMPOSE_ONE_READER_OVER_DECLARATION_SHAPES_WITH_EXECUTION_AS_THE_JUDGE",
  "selected_surviving_route": "COMPOSE_ONE_READER_OVER_DECLARATION_SHAPES_WITH_EXECUTION_AS_THE_JUDGE",
  "status": "PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
- "stop_condition": "The census reproduces on a second machine, with an independent identity re-running it, and the goal-to-door join is measured on the same 36 programs.",
+ "stop_condition": "The census reproduces on a second machine with an independent identity re-running it, and the goal-to-door join is measured on the same 36 programs.",
  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
  "truth": {
   "achieved": false,
