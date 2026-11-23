@@ -6,7 +6,7 @@
   "DELETES": 6,
   "RENAMES": 19,
   "REWRITES": 17,
-  "REWRITES_BINARY": 11,
+  "REWRITES_BINARY": 12,
   "REWRITES_TEXT": 1
  },
  "depth": 2,
@@ -26,7 +26,7 @@
    "declared": 157,
    "door_examples": [
     {
-     "argv": [
+     "invoked_as": [
       "tar",
       "--catenate",
       "--file=out.bin",
@@ -35,7 +35,7 @@
      "kind": "CREATES"
     },
     {
-     "argv": [
+     "invoked_as": [
       "tar",
       "--create",
       "--file=out.bin",
@@ -44,7 +44,7 @@
      "kind": "CREATES"
     },
     {
-     "argv": [
+     "invoked_as": [
       "tar",
       "--append",
       "--file=out.bin",
@@ -53,7 +53,7 @@
      "kind": "CREATES"
     },
     {
-     "argv": [
+     "invoked_as": [
       "tar",
       "--update",
       "--file=out.bin",
@@ -65,7 +65,7 @@
    "doors": 4,
    "program": "tar",
    "room": "PLAIN",
-   "seconds": 2.972,
+   "seconds": 2.84,
    "sensors": 151,
    "subcommands_admitted": 0,
    "subcommands_refused": 23,
@@ -80,7 +80,7 @@
    "doors": 0,
    "program": "jq",
    "room": "PLAIN",
-   "seconds": 1.117,
+   "seconds": 1.108,
    "sensors": 13,
    "subcommands_admitted": 0,
    "subcommands_refused": 0,
@@ -96,7 +96,7 @@
    "declared": 19,
    "door_examples": [
     {
-     "argv": [
+     "invoked_as": [
       "gzip",
       "--decompress",
       "in.gz"
@@ -104,7 +104,7 @@
      "kind": "RENAMES"
     },
     {
-     "argv": [
+     "invoked_as": [
       "gzip",
       "--force",
       "in.txt"
@@ -112,7 +112,7 @@
      "kind": "RENAMES"
     },
     {
-     "argv": [
+     "invoked_as": [
       "gzip",
       "--keep",
       "in.txt"
@@ -120,7 +120,7 @@
      "kind": "CREATES"
     },
     {
-     "argv": [
+     "invoked_as": [
       "gzip",
       "--no-name",
       "in.txt"
@@ -128,7 +128,7 @@
      "kind": "RENAMES"
     },
     {
-     "argv": [
+     "invoked_as": [
       "gzip",
       "--name",
       "in.txt"
@@ -139,7 +139,7 @@
    "doors": 12,
    "program": "gzip",
    "room": "PLAIN",
-   "seconds": 0.152,
+   "seconds": 0.139,
    "sensors": 7,
    "subcommands_admitted": 0,
    "subcommands_refused": 0,
@@ -154,7 +154,7 @@
    "doors": 0,
    "program": "zip",
    "room": "PLAIN",
-   "seconds": 0.072,
+   "seconds": 0.063,
    "sensors": 0,
    "subcommands_admitted": 0,
    "subcommands_refused": 0,
@@ -169,7 +169,7 @@
    "doors": 0,
    "program": "unzip",
    "room": "PLAIN",
-   "seconds": 0.233,
+   "seconds": 0.17,
    "sensors": 10,
    "subcommands_admitted": 0,
    "subcommands_refused": 0,
@@ -185,7 +185,7 @@
    "declared": 15,
    "door_examples": [
     {
-     "argv": [
+     "invoked_as": [
       "xz",
       "--compress",
       "in.txt"
@@ -193,7 +193,7 @@
      "kind": "RENAMES"
     },
     {
-     "argv": [
+     "invoked_as": [
       "xz",
       "--keep",
       "in.txt"
@@ -201,7 +201,7 @@
      "kind": "CREATES"
     },
     {
-     "argv": [
+     "invoked_as": [
       "xz",
       "--force",
       "in.txt"
@@ -209,7 +209,7 @@
      "kind": "RENAMES"
     },
     {
-     "argv": [
+     "invoked_as": [
       "xz",
       "-0",
       "in.txt"
@@ -217,7 +217,7 @@
      "kind": "RENAMES"
     },
     {
-     "argv": [
+     "invoked_as": [
       "xz",
       "--extreme",
       "in.txt"
@@ -228,7 +228,7 @@
    "doors": 7,
    "program": "xz",
    "room": "PLAIN",
-   "seconds": 0.189,
+   "seconds": 0.152,
    "sensors": 8,
    "subcommands_admitted": 0,
    "subcommands_refused": 0,
@@ -243,7 +243,7 @@
    "doors": 0,
    "program": "openssl",
    "room": "PLAIN",
-   "seconds": 14.244,
+   "seconds": 13.62,
    "sensors": 0,
    "subcommands_admitted": 24,
    "subcommands_refused": 0,
@@ -258,7 +258,7 @@
    "declared": 30,
    "door_examples": [
     {
-     "argv": [
+     "invoked_as": [
       "sort",
       "--output=out.bin",
       "in.txt"
@@ -269,7 +269,7 @@
    "doors": 1,
    "program": "sort",
    "room": "PLAIN",
-   "seconds": 0.415,
+   "seconds": 0.432,
    "sensors": 29,
    "subcommands_admitted": 0,
    "subcommands_refused": 0,
@@ -284,7 +284,7 @@
    "doors": 0,
    "program": "grep",
    "room": "PLAIN",
-   "seconds": 0.788,
+   "seconds": 0.808,
    "sensors": 0,
    "subcommands_admitted": 0,
    "subcommands_refused": 0,
@@ -299,7 +299,7 @@
    "declared": 15,
    "door_examples": [
     {
-     "argv": [
+     "invoked_as": [
       "sed",
       "--in-place",
       "--expression=s/a/A/",
@@ -311,7 +311,7 @@
    "doors": 1,
    "program": "sed",
    "room": "PLAIN",
-   "seconds": 0.188,
+   "seconds": 0.207,
    "sensors": 14,
    "subcommands_admitted": 0,
    "subcommands_refused": 0,
@@ -326,7 +326,7 @@
    "declared": 17,
    "door_examples": [
     {
-     "argv": [
+     "invoked_as": [
       "find",
       "-fprint0",
       "in.txt"
@@ -337,7 +337,7 @@
    "doors": 1,
    "program": "find",
    "room": "PLAIN",
-   "seconds": 0.307,
+   "seconds": 0.306,
    "sensors": 16,
    "subcommands_admitted": 0,
    "subcommands_refused": 0,
@@ -352,7 +352,7 @@
    "doors": 0,
    "program": "stat",
    "room": "PLAIN",
-   "seconds": 0.044,
+   "seconds": 0.047,
    "sensors": 0,
    "subcommands_admitted": 0,
    "subcommands_refused": 0,
@@ -367,7 +367,7 @@
    "doors": 0,
    "program": "tr",
    "room": "PLAIN",
-   "seconds": 0.115,
+   "seconds": 0.105,
    "sensors": 7,
    "subcommands_admitted": 0,
    "subcommands_refused": 0,
@@ -382,7 +382,7 @@
    "doors": 0,
    "program": "cut",
    "room": "PLAIN",
-   "seconds": 0.156,
+   "seconds": 0.167,
    "sensors": 12,
    "subcommands_admitted": 0,
    "subcommands_refused": 0,
@@ -397,7 +397,7 @@
    "doors": 0,
    "program": "comm",
    "room": "PLAIN",
-   "seconds": 0.044,
+   "seconds": 0.043,
    "sensors": 10,
    "subcommands_admitted": 0,
    "subcommands_refused": 0,
@@ -412,7 +412,7 @@
    "doors": 0,
    "program": "join",
    "room": "PLAIN",
-   "seconds": 0.069,
+   "seconds": 0.064,
    "sensors": 15,
    "subcommands_admitted": 0,
    "subcommands_refused": 0,
@@ -427,7 +427,7 @@
    "doors": 0,
    "program": "paste",
    "room": "PLAIN",
-   "seconds": 0.08,
+   "seconds": 0.069,
    "sensors": 5,
    "subcommands_admitted": 0,
    "subcommands_refused": 0,
@@ -442,7 +442,7 @@
    "doors": 0,
    "program": "nl",
    "room": "PLAIN",
-   "seconds": 0.132,
+   "seconds": 0.148,
    "sensors": 13,
    "subcommands_admitted": 0,
    "subcommands_refused": 3,
@@ -457,7 +457,7 @@
    "doors": 0,
    "program": "fold",
    "room": "PLAIN",
-   "seconds": 0.059,
+   "seconds": 0.065,
    "sensors": 5,
    "subcommands_admitted": 0,
    "subcommands_refused": 0,
@@ -472,7 +472,7 @@
    "doors": 0,
    "program": "expand",
    "room": "PLAIN",
-   "seconds": 0.06,
+   "seconds": 0.054,
    "sensors": 4,
    "subcommands_admitted": 0,
    "subcommands_refused": 0,
@@ -487,7 +487,7 @@
    "doors": 0,
    "program": "wc",
    "room": "PLAIN",
-   "seconds": 0.119,
+   "seconds": 0.121,
    "sensors": 8,
    "subcommands_admitted": 0,
    "subcommands_refused": 0,
@@ -502,7 +502,7 @@
    "doors": 0,
    "program": "diff",
    "room": "PLAIN",
-   "seconds": 0.183,
+   "seconds": 0.239,
    "sensors": 0,
    "subcommands_admitted": 0,
    "subcommands_refused": 0,
@@ -517,7 +517,7 @@
    "declared": 29,
    "door_examples": [
     {
-     "argv": [
+     "invoked_as": [
       "patch",
       "-o=out.bin",
       "in.txt"
@@ -528,7 +528,7 @@
    "doors": 1,
    "program": "patch",
    "room": "PLAIN",
-   "seconds": 0.349,
+   "seconds": 0.46,
    "sensors": 28,
    "subcommands_admitted": 0,
    "subcommands_refused": 0,
@@ -543,7 +543,7 @@
    "doors": 0,
    "program": "base64",
    "room": "PLAIN",
-   "seconds": 0.057,
+   "seconds": 0.077,
    "sensors": 5,
    "subcommands_admitted": 0,
    "subcommands_refused": 0,
@@ -558,7 +558,7 @@
    "doors": 0,
    "program": "md5sum",
    "room": "PLAIN",
-   "seconds": 0.168,
+   "seconds": 0.185,
    "sensors": 12,
    "subcommands_admitted": 0,
    "subcommands_refused": 0,
@@ -573,7 +573,7 @@
    "doors": 0,
    "program": "sha256sum",
    "room": "PLAIN",
-   "seconds": 0.168,
+   "seconds": 0.174,
    "sensors": 12,
    "subcommands_admitted": 0,
    "subcommands_refused": 0,
@@ -588,7 +588,7 @@
    "declared": 17,
    "door_examples": [
     {
-     "argv": [
+     "invoked_as": [
       "split",
       "--additional-suffix=out.bin",
       "in.txt"
@@ -596,7 +596,7 @@
      "kind": "CREATES"
     },
     {
-     "argv": [
+     "invoked_as": [
       "split",
       "-d",
       "in.txt"
@@ -604,7 +604,7 @@
      "kind": "CREATES"
     },
     {
-     "argv": [
+     "invoked_as": [
       "split",
       "--numeric-suffixes",
       "in.txt"
@@ -612,7 +612,7 @@
      "kind": "CREATES"
     },
     {
-     "argv": [
+     "invoked_as": [
       "split",
       "-x",
       "in.txt"
@@ -620,7 +620,7 @@
      "kind": "CREATES"
     },
     {
-     "argv": [
+     "invoked_as": [
       "split",
       "--hex-suffixes",
       "in.txt"
@@ -631,7 +631,7 @@
    "doors": 8,
    "program": "split",
    "room": "PLAIN",
-   "seconds": 0.12,
+   "seconds": 0.122,
    "sensors": 9,
    "subcommands_admitted": 0,
    "subcommands_refused": 0,
@@ -646,7 +646,7 @@
    "doors": 0,
    "program": "cksum",
    "room": "PLAIN",
-   "seconds": 0.237,
+   "seconds": 0.259,
    "sensors": 14,
    "subcommands_admitted": 0,
    "subcommands_refused": 11,
@@ -676,7 +676,7 @@
    "doors": 0,
    "program": "yes",
    "room": "PLAIN",
-   "seconds": 0.014,
+   "seconds": 0.013,
    "sensors": 2,
    "subcommands_admitted": 0,
    "subcommands_refused": 0,
@@ -691,7 +691,7 @@
    "doors": 0,
    "program": "timeout",
    "room": "PLAIN",
-   "seconds": 0.102,
+   "seconds": 0.099,
    "sensors": 7,
    "subcommands_admitted": 0,
    "subcommands_refused": 0,
@@ -706,7 +706,7 @@
    "doors": 0,
    "program": "pr",
    "room": "PLAIN",
-   "seconds": 0.35,
+   "seconds": 0.402,
    "sensors": 27,
    "subcommands_admitted": 0,
    "subcommands_refused": 0,
@@ -721,7 +721,7 @@
    "doors": 0,
    "program": "fmt",
    "room": "PLAIN",
-   "seconds": 0.105,
+   "seconds": 0.121,
    "sensors": 9,
    "subcommands_admitted": 0,
    "subcommands_refused": 0,
@@ -736,7 +736,7 @@
    "doors": 0,
    "program": "od",
    "room": "PLAIN",
-   "seconds": 0.3,
+   "seconds": 0.345,
    "sensors": 21,
    "subcommands_admitted": 0,
    "subcommands_refused": 0,
@@ -751,7 +751,7 @@
    "doors": 0,
    "program": "convert",
    "room": "PLAIN",
-   "seconds": 2.193,
+   "seconds": 2.892,
    "sensors": 251,
    "subcommands_admitted": 0,
    "subcommands_refused": 3,
@@ -764,13 +764,13 @@
     "DELETES": 6,
     "RENAMES": 2,
     "REWRITES": 16,
-    "REWRITES_BINARY": 11
+    "REWRITES_BINARY": 12
    },
    "construction_needed": null,
    "declared": 483,
    "door_examples": [
     {
-     "argv": [
+     "invoked_as": [
       "git",
       "clone",
       "--bare",
@@ -779,7 +779,7 @@
      "kind": "CREATES"
     },
     {
-     "argv": [
+     "invoked_as": [
       "git",
       "clone",
       "--mirror",
@@ -788,7 +788,7 @@
      "kind": "CREATES"
     },
     {
-     "argv": [
+     "invoked_as": [
       "git",
       "add",
       "--verbose",
@@ -797,7 +797,7 @@
      "kind": "REWRITES_BINARY"
     },
     {
-     "argv": [
+     "invoked_as": [
       "git",
       "add",
       "--force",
@@ -806,7 +806,7 @@
      "kind": "REWRITES_BINARY"
     },
     {
-     "argv": [
+     "invoked_as": [
       "git",
       "add",
       "--update",
@@ -815,11 +815,11 @@
      "kind": "REWRITES_BINARY"
     }
    ],
-   "doors": 41,
+   "doors": 42,
    "program": "git",
    "room": "GIT",
-   "seconds": 28.125,
-   "sensors": 369,
+   "seconds": 28.724,
+   "sensors": 368,
    "subcommands_admitted": 22,
    "subcommands_refused": 0,
    "unbound": 73
@@ -831,16 +831,16 @@
   "declared": 19,
   "doors_discovered": 12,
   "program": "gzip",
-  "seconds": 0.0278,
+  "seconds": 0.0314,
   "states_seen": 5,
   "transitions": 12
  },
  "schema": "BRAIN_THE_MACHINE_PUBLISHES_ITS_OWN_DOORS_V1",
- "seconds": 54.056,
+ "seconds": 54.872,
  "totals": {
   "declared": 2134,
-  "doors": 76,
-  "sensors": 1098,
+  "doors": 77,
+  "sensors": 1097,
   "subcommands_admitted": 46,
   "subcommands_refused": 40,
   "unbound": 960

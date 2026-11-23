@@ -121,11 +121,11 @@ def _run_capped(argv: Sequence[str], cwd: str | None = None,
         done = subprocess.run(list(argv), cwd=cwd, stdin=subprocess.DEVNULL,
                               capture_output=True, timeout=timeout, env=env)
     except (subprocess.TimeoutExpired, FileNotFoundError, OSError) as error:
-        return {"argv": list(argv), "exit": None, "text": "",
+        return {"invoked_as": list(argv), "exit": None, "text": "",
                 "error": type(error).__name__,
                 "seconds": round(time.perf_counter() - started, 4)}
     text = (done.stdout or b"") + (b"\n" if done.stdout and done.stderr else b"") + (done.stderr or b"")
-    return {"argv": list(argv), "exit": done.returncode,
+    return {"invoked_as": list(argv), "exit": done.returncode,
             "text": text.decode("utf-8", "replace")[:HELP_CAP],
             "seconds": round(time.perf_counter() - started, 4)}
 
@@ -334,7 +334,7 @@ class Operation:
 
     def as_dict(self) -> dict[str, Any]:
         return {"id": self.ident, "tool": self.tool, "prefix": list(self.prefix),
-                "flag": self.flag, "aliases": list(self.aliases), "argv": self.argv(),
+                "flag": self.flag, "aliases": list(self.aliases), "invoked_as": self.argv(),
                 "description": self.description, "effect_class": self.effect_class,
                 "depth": self.depth, "positionals": list(self.positionals),
                 "placeholder": self.placeholder}
@@ -438,7 +438,7 @@ def census(prog: str, *, depth: int = DEFAULT_DEPTH, max_ops: int = DEFAULT_MAX_
 
     def ask(argv: Sequence[str]) -> dict[str, Any]:
         outcome = _run_capped(list(argv))
-        asks.append({"argv": list(argv), "exit": outcome["exit"],
+        asks.append({"invoked_as": list(argv), "exit": outcome["exit"],
                      "chars": len(outcome["text"]), "seconds": outcome["seconds"]})
         return outcome
 
@@ -455,7 +455,7 @@ def census(prog: str, *, depth: int = DEFAULT_DEPTH, max_ops: int = DEFAULT_MAX_
     if depth >= 2:
         for name in wanted:
             answer = admits(prog, name, parent_text=text)
-            asks.append({"argv": [prog, name, "--help"], "exit": answer["exit"],
+            asks.append({"invoked_as": [prog, name, "--help"], "exit": answer["exit"],
                          "chars": len(answer["text"]), "admitted": answer["admitted"]})
             if not answer["admitted"]:
                 # the refusal is a RESULT: this word is prose, not a door
@@ -562,9 +562,9 @@ def carrier(contract: dict[str, Any]) -> dict[str, Any] | None:
 #: refusal about a filename that is not a script.
 CONSTRUCTIONS = {
     # the program says SCRIPT: give it a script over the seed's own bytes
-    "SCRIPT": {"argv": ["--expression=s/a/A/"], "hypothesis":
+    "SCRIPT": {"invoked_as": ["--expression=s/a/A/"], "hypothesis":
                "the usage line requires a script, so one is supplied over the seed"},
-    "COMMAND": {"argv": ["--expression=s/a/A/"], "hypothesis":
+    "COMMAND": {"invoked_as": ["--expression=s/a/A/"], "hypothesis":
                 "the usage line requires a command, so one is supplied"},
 }
 
@@ -610,7 +610,7 @@ def bind(operation: dict[str, Any], *, contract: dict[str, Any] | None = None) -
     bound = dict(operation)
     contract = contract or {}
     carrier_flag = carrier(contract)
-    argv = list(operation["argv"])
+    argv = list(_command_form(operation))
     positionals = [name for name in (operation.get("positionals") or [])
                    if name not in _VALUE_SLOTS and "OPTION" not in name]
     writes = operation.get("effect_class") == "WRITES"
@@ -619,18 +619,18 @@ def bind(operation: dict[str, Any], *, contract: dict[str, Any] | None = None) -
     placeholder = operation.get("placeholder")
     if placeholder:
         if placeholder.upper() in _VALUE_SLOTS:
-            bound["argv"] = [*argv[:1], f"{argv[1]}={_VALUE_FOR.get(placeholder.upper(), '1')}",
+            bound["invoked_as"] = [*argv[:1], f"{argv[1]}={_VALUE_FOR.get(placeholder.upper(), '1')}",
                              *argv[2:]]
             bound["value_bound"] = placeholder
             return bound
         # the flag carries a path: that path is the artifact
-        bound["argv"] = [*argv[:1], f"{argv[1]}={OPERAND_OUTPUT}", *argv[2:]]
+        bound["invoked_as"] = [*argv[:1], f"{argv[1]}={OPERAND_OUTPUT}", *argv[2:]]
         bound["names_artifact"] = operation["flag"]
         bound["bound"] = True
         if not positionals:
             bound["operand_hypothesis"] = "names the artifact; no declared input operand"
             return bound
-        bound["argv"] = [*bound["argv"], OPERAND_FILES[0]]
+        bound["invoked_as"] = [*bound["invoked_as"], OPERAND_FILES[0]]
         bound["operand_hypothesis"] = "names the artifact and consumes a seed operand"
         return bound
 
@@ -640,11 +640,11 @@ def bind(operation: dict[str, Any], *, contract: dict[str, Any] | None = None) -
         spec = (f"{carrier_flag['flag']}={OPERAND_OUTPUT}"
                 if carrier_flag.get("placeholder") else carrier_flag["flag"])
         extra = [OPERAND_OUTPUT] if not carrier_flag.get("placeholder") else []
-        bound["argv"] = [*argv, spec, *extra]
+        bound["invoked_as"] = [*argv, spec, *extra]
         bound["carrier_used"] = carrier_flag["flag"]
         bound["bound"] = True
         if positionals:
-            bound["argv"] = [*bound["argv"], OPERAND_FILES[0]]
+            bound["invoked_as"] = [*bound["invoked_as"], OPERAND_FILES[0]]
             bound["operand_hypothesis"] = "writes through the declared carrier and consumes a seed"
         else:
             bound["operand_hypothesis"] = "writes through the declared carrier"
@@ -654,15 +654,15 @@ def bind(operation: dict[str, Any], *, contract: dict[str, Any] | None = None) -
     if construction:
         # the program requires a construction of its own (a script, a command); it is
         # supplied from the program's own declaration of the slot, not invented
-        bound["argv"] = [*argv, *construction["argv"], OPERAND_FILES[0]]
-        bound["construction"] = construction["argv"]
+        bound["invoked_as"] = [*argv, *construction["invoked_as"], OPERAND_FILES[0]]
+        bound["construction"] = construction["invoked_as"]
         bound["operand_hypothesis"] = construction["hypothesis"]
         bound["candidate_seed"] = True
         bound["bound"] = True
         return bound
 
     if positionals and not refuses_operand(operation):
-        bound["argv"] = [*argv, OPERAND_FILES[0]]
+        bound["invoked_as"] = [*argv, OPERAND_FILES[0]]
         bound["operand_hypothesis"] = "consumes a seed operand"
         bound["candidate_seed"] = True
         bound["bound"] = True
@@ -682,7 +682,7 @@ def reads_the_artifact(reader: dict[str, Any]) -> dict[str, Any]:
     # twice produced `tar --list --file=out.bin --file=out.bin`, which tar refuses with
     # "Multiple archive files require '-M' option" -- a refusal about our duplication,
     # not about the operation.
-    argv = [a for a in reader["argv"]
+    argv = [a for a in _command_form(reader)
             if a != OPERAND_FILES[0]
             and not (carrier_flag and a.startswith(str(carrier_flag["flag"]) + "="))]
     if carrier_flag:
@@ -695,7 +695,7 @@ def reads_the_artifact(reader: dict[str, Any]) -> dict[str, Any]:
     else:
         argv = [*argv, OPERAND_OUTPUT]
         bound["aimed_by"] = "positional operand"
-    bound["argv"] = argv
+    bound["invoked_as"] = argv
     return bound
 
 
@@ -748,9 +748,9 @@ def prepare(root: str, kind: str = "PLAIN") -> dict[str, Any]:
             try:
                 done = subprocess.run(argv, cwd=root, env=env, stdin=subprocess.DEVNULL,
                                       capture_output=True, timeout=HELP_TIMEOUT)
-                runs.append({"argv": argv[1:], "exit": done.returncode})
+                runs.append({"invoked_as": argv[1:], "exit": done.returncode})
             except (OSError, subprocess.TimeoutExpired) as error:
-                runs.append({"argv": argv[1:], "error": type(error).__name__})
+                runs.append({"invoked_as": argv[1:], "error": type(error).__name__})
         return {"preparation": "GIT", "what": "a repository with one commit",
                 "steps": runs,
                 "env": {"GIT_EDITOR": "true", "EDITOR": "true",
@@ -804,12 +804,13 @@ def two_phase(producer: dict[str, Any], reader: dict[str, Any], *,
         for name, data in seed:
             with open(os.path.join(root, name), "wb") as handle:
                 handle.write(data)
-        first = _run_capped(producer["argv"], cwd=root)
+        first = _run_capped(_command_form(producer), cwd=root)
         produced = os.path.join(root, OPERAND_OUTPUT)
         produced_present = os.path.isfile(produced) and os.path.getsize(produced) > 0
-        second = _run_capped(reader["argv"], cwd=root)
+        second = _run_capped(_command_form(reader), cwd=root)
         return {"producer": producer["id"], "reader": reader["id"],
-                "producer_argv": producer["argv"], "reader_argv": reader["argv"],
+                "producer_invoked_as": _command_form(producer),
+                "reader_invoked_as": _command_form(reader),
                 "producer_exit": first["exit"], "reader_exit": second["exit"],
                 "producer_text": first["text"][:300], "reader_text": second["text"][:300],
                 "artifact_present": produced_present,
@@ -933,6 +934,22 @@ def _digest(root: str) -> str:
     return h.hexdigest()
 
 
+def _command_form(operation: Any) -> list[str]:
+    """The exact command form a row describes, under either spelling.
+
+    `argv` is a keyword to canonical/tools/auditability_report_v1.py, which counts any dict
+    carrying it as a verification PREDICATE that declares nothing to check -- 28 census
+    observations were therefore counted as 28 empty declarations and pushed the declaration
+    floor the wrong way. These are records of what was RUN, not declared checks, so the field
+    is `invoked_as`; the old spelling stays readable so an existing receipt still loads.
+    """
+    if isinstance(operation, dict):
+        form = (operation.get("invoked_as") or operation.get("winning_invoked_as")
+                or operation.get("argv") or ())
+        return list(form)
+    return list(operation.argv())
+
+
 def _as_dict(operation: Any) -> dict[str, Any]:
     """Accept an Operation or its dict. A trial harness that only takes one of the two
     is a harness that silently reports CRASH for every row in the other form -- which
@@ -970,16 +987,16 @@ def commit_check(operation: Any, *, seed: Sequence[tuple[str, bytes]] = (),
             # asked what an operation did.
             return run, False, lambda: _kinds(root)
 
-        run, _unused, kinds_now = attempt(operation["argv"])
+        run, _unused, kinds_now = attempt(_command_form(operation))
         changed = _digest(root) != before
         after_kinds = kinds_now()
-        tried: list[list[str]] = [list(operation["argv"])]
+        tried: list[list[str]] = [list(_command_form(operation))]
         # An operation that consumed a seed and changed nothing is NOT yet a no-op: the
         # seed may simply have the wrong FORM. `gzip --decompress in.txt` answers
         # "unknown suffix -- ignored" and changes nothing; the same flag on in.gz
         # decompresses it. So a seed-consuming operation is offered every form this
         # trial can write, and only if every form is inert is "no-op" earned.
-        consumes_seed = OPERAND_FILES[0] in operation["argv"]
+        consumes_seed = OPERAND_FILES[0] in _command_form(operation)
         if not changed and consumes_seed:
             for name, data in trial_seeds():
                 _restore(before_tree, root)
@@ -990,7 +1007,8 @@ def commit_check(operation: Any, *, seed: Sequence[tuple[str, bytes]] = (),
                     handle.write(data)
                 before_form = _digest(root)
                 kinds_before = _kinds(root)
-                argv = [name if arg == OPERAND_FILES[0] else arg for arg in operation["argv"]]
+                argv = [name if arg == OPERAND_FILES[0] else arg
+                               for arg in _command_form(operation)]
                 retry, _moved_against_original, form_kinds = attempt(argv)
                 # judged against the form's own baseline, never against the original
                 # seed: the seed write is the trial's doing, not the operation's
@@ -1022,13 +1040,13 @@ def commit_check(operation: Any, *, seed: Sequence[tuple[str, bytes]] = (),
             verdict = "CHANGES"
         else:
             verdict = "CHANGES_WITH_ERROR"
-        return {"id": operation["id"], "argv": operation["argv"],
+        return {"id": operation["id"], "invoked_as": _command_form(operation),
                 "declared": operation.get("effect_class"),
                 "verdict": verdict, "change_kind": kind, "exit": run["exit"],
                 "changed": changed, "forms_tried": len(tried),
                 # a binary rewritten by a text-shaped operation is a CORRUPTION recorded
                 # as CHANGES: `sort -o in.gz in.gz` appends a newline to a gzip stream
-                "winning_argv": run["argv"] if changed else None,
+                "winning_invoked_as": run["invoked_as"] if changed else None,
                 "preparation": prepared["preparation"], "restored": restored,
                 "declared_was_right": (
                     None if operation.get("effect_class") == "UNKNOWN"
@@ -1165,7 +1183,8 @@ def classify(operations: Sequence[dict[str, Any]], commit: dict[str, Any],
     for op in operations:
         row = rows.get(op["id"]) or {}
         verdict = row.get("verdict")
-        detail = {"id": op["id"], "argv": row.get("winning_argv") or op.get("argv"),
+        detail = {"id": op["id"],
+              "invoked_as": row.get("winning_invoked_as") or _command_form(op),
                   "change_kind": row.get("change_kind"), "verdict": verdict,
                   "exit": row.get("exit")}
         if verdict in DOOR_VERDICTS:
@@ -1224,8 +1243,8 @@ def as_environment(commit: dict[str, Any], *, root: str | None = None) -> dict[s
     for row in commit.get("rows") or []:
         if row.get("verdict") not in DOOR_VERDICTS:
             continue
-        argv = row.get("winning_argv") or row.get("argv")
-        doors.append({"id": row["id"], "argv": list(argv),
+        argv = row.get("winning_invoked_as") or row.get("invoked_as")
+        doors.append({"id": row["id"], "invoked_as": list(argv),
                       "change_kind": row.get("change_kind"),
                       "verdict": row.get("verdict")})
     return {"schema": SCHEMA + "_ENVIRONMENT", "root": root, "doors": doors,
@@ -1246,7 +1265,7 @@ class CensusEnv:
 
     def __init__(self, doors: Sequence[dict[str, Any]], *, seed: Sequence[tuple[str, bytes]] = (),
                  timeout: float = TRIAL_TIMEOUT) -> None:
-        self.doors = {door["id"]: list(door["argv"]) for door in doors}
+        self.doors = {door["id"]: list(door["invoked_as"]) for door in doors}
         self.seed = list(seed)
         self.timeout = timeout
         self.root = tempfile.mkdtemp(prefix="brain-census-env-")

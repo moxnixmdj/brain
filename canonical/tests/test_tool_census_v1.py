@@ -76,7 +76,7 @@ def test_a_flag_with_aliases_is_one_operation_not_three():
     assert len(ids) == len(set(ids)), "an id that repeats identifies nothing"
     create = next(op for op in census["operations"] if op["id"] == "tar_create")
     assert create["flag"] == "--create" and "-c" in create["aliases"]
-    assert create["argv"] == ["tar", "--create"]
+    assert create["invoked_as"] == ["tar", "--create"]
 
 
 @pytest.mark.skipif(not HAVE["base64"], reason="base64 is the counter-example machine")
@@ -158,7 +158,7 @@ def test_a_flag_alone_is_not_a_door_and_the_carrier_makes_it_one():
     assert carrier["placeholder"] == "ARCHIVE"
     census = C.census("tar", depth=1)
     bound = {op["id"]: C.bind(op, contract=contract) for op in census["operations"]}
-    assert bound["tar_create"]["argv"] == ["tar", "--create", "--file=out.bin", "in.txt"]
+    assert bound["tar_create"]["invoked_as"] == ["tar", "--create", "--file=out.bin", "in.txt"]
     result = C.commit_check(bound["tar_create"], seed=C.trial_seeds())
     assert result["verdict"] == "CHANGES"
     assert result["change_kind"] == "CREATES"
@@ -186,11 +186,11 @@ def test_a_wrong_seed_form_is_not_a_no_op_until_every_form_is_tried():
     nothing. The operation is not inert; the seed was not a gzip stream. The trial
     offers every form it can write and records which one worked."""
     result = C.commit_check({"id": "gzip_decompress", "effect_class": None,
-                             "argv": ["gzip", "--decompress", "in.txt"]},
+                             "invoked_as": ["gzip", "--decompress", "in.txt"]},
                             seed=C.trial_seeds())
     assert result["verdict"] == "CHANGES"
     assert result["forms_tried"] > 1
-    assert result["winning_argv"] == ["gzip", "--decompress", "in.gz"]
+    assert result["winning_invoked_as"] == ["gzip", "--decompress", "in.gz"]
     assert result["restored"] is True
 
 
@@ -200,17 +200,17 @@ def test_a_change_is_classified_not_merely_counted():
     file changed and nothing was sorted. A census that recorded CHANGES would be
     recording a corruption as a capability."""
     result = C.commit_check({"id": "sort_o", "effect_class": None,
-                             "argv": ["sort", "-o", "in.txt", "in.txt"]},
+                             "invoked_as": ["sort", "-o", "in.txt", "in.txt"]},
                             seed=C.trial_seeds())
     assert result["verdict"] == "CHANGES"
     assert result["change_kind"] == "REWRITES_BINARY"
-    assert result["winning_argv"] == ["sort", "-o", "in.gz", "in.gz"]
+    assert result["winning_invoked_as"] == ["sort", "-o", "in.gz", "in.gz"]
 
 
 @pytest.mark.skipif(not HAVE["sed"], reason="sed is the in-place machine")
 def test_an_in_place_text_rewrite_is_named_as_such_and_the_tree_is_restored():
     result = C.commit_check({"id": "sed_i", "effect_class": None,
-                             "argv": ["sed", "-i", "s/a/A/", "in.txt"]},
+                             "invoked_as": ["sed", "-i", "s/a/A/", "in.txt"]},
                             seed=C.trial_seeds())
     assert result["verdict"] == "CHANGES"
     assert result["change_kind"] == "REWRITES_TEXT"
@@ -221,7 +221,7 @@ def test_an_operation_that_changed_nothing_is_the_answer_worth_having():
     """The point of the no-op verdict is that the agent stops trying a door that
     cannot be aimed. It must be reachable, and never confused with CRASH."""
     result = C.commit_check({"id": "help", "effect_class": "READ_ONLY",
-                             "argv": [sys.executable, "-c", "print('ok')"]},
+                             "invoked_as": [sys.executable, "-c", "print('ok')"]},
                             seed=C.trial_seeds())
     assert result["verdict"] == "NO_EFFECT"
     assert result["declared_was_right"] is True
@@ -261,11 +261,11 @@ def test_a_door_that_moved_nothing_is_never_offered_to_the_scan():
     """`NO_EFFECT` is excluded by construction, so the scan's budget cannot be spent
     on a door painted on a wall."""
     commit = {"rows": [
-        {"id": "real", "argv": ["x", "--does"], "verdict": "CHANGES",
-         "change_kind": "CREATES", "winning_argv": None},
-        {"id": "fake", "argv": ["x", "--nothing"], "verdict": "NO_EFFECT",
-         "change_kind": "NOTHING", "winning_argv": None},
-        {"id": "broken", "argv": ["x", "--crash"], "verdict": "CRASH"},
+        {"id": "real", "invoked_as": ["x", "--does"], "verdict": "CHANGES",
+         "change_kind": "CREATES"},
+        {"id": "fake", "invoked_as": ["x", "--nothing"], "verdict": "NO_EFFECT",
+         "change_kind": "NOTHING"},
+        {"id": "broken", "invoked_as": ["x", "--crash"], "verdict": "CRASH"},
     ]}
     environment = C.as_environment(commit)
     assert environment["action_names"] == ["real"]
@@ -316,11 +316,11 @@ def test_a_required_construction_is_supplied_from_the_usage_line():
     really rewrites the seed."""
     contract = C.parse_contract(C._own_text("sed"), "sed")
     construction = C.construction_for(contract)
-    assert construction is not None and "--expression=" in " ".join(construction["argv"])
+    assert construction is not None and "--expression=" in " ".join(construction["invoked_as"])
     census = C.census("sed", depth=1)
     bound = {op["id"]: C.bind(op, contract=contract) for op in census["operations"]}
     in_place = bound["sed_in_place"]
-    assert in_place["argv"] == ["sed", "--in-place", "--expression=s/a/A/", "in.txt"]
+    assert in_place["invoked_as"] == ["sed", "--in-place", "--expression=s/a/A/", "in.txt"]
     result = C.commit_check(in_place, seed=C.trial_seeds())
     assert result["verdict"] == "CHANGES"
     assert result["change_kind"] == "REWRITES_TEXT"
@@ -335,7 +335,7 @@ def test_a_program_that_names_no_artifact_is_not_given_one():
     census = C.census("base64", depth=1)
     wrap = next(op for op in census["operations"] if op["id"] == "base64_wrap")
     bound = C.bind(wrap, contract=base64_contract)
-    assert bound["argv"] == ["base64", "--wrap=1"], "a value slot was given a filename"
+    assert bound["invoked_as"] == ["base64", "--wrap=1"], "a value slot was given a filename"
 
 
 # --------------------------------------------------------------------------- #
@@ -386,5 +386,5 @@ def test_the_tool_reports_every_door_with_the_kind_of_move_it_made():
     assert row["change_kinds"].get("CREATES", 0) >= 4
     for example in row["door_examples"]:
         assert example["kind"] in ("CREATES", "RENAMES", "REWRITES_TEXT", "REWRITES")
-        assert "--file=out.bin" in " ".join(example["argv"])
+        assert "--file=out.bin" in " ".join(example["invoked_as"])
     assert row["all_restored"] is True

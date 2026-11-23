@@ -117,7 +117,7 @@ def one(program: str, *, depth: int = 2) -> dict[str, Any]:
             "unbound": classes["counts"][C.UNBOUND],
             "change_kinds": {kind: count for kind, count in commit["change_kinds"].items()
                              if kind != "NOTHING"},
-            "door_examples": [{"argv": row["argv"], "kind": row["change_kind"]}
+            "door_examples": [{"invoked_as": row["invoked_as"], "kind": row["change_kind"]}
                               for row in classes["doors"][:5]],
             "construction_needed": classes["construction_needed"],
             "all_restored": commit["all_restored"],

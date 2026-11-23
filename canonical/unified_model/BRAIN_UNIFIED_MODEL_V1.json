@@ -31228,7 +31228,7 @@
   "engines": 26,
   "knowledge_documents": 600,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 7230,
+  "research_index_records": 7231,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 453,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "64f9fb0c4a6e336b73e41a6514c0a1e7307c8fe50604130b960c7ee28ef3ca04"
+  "value": "a784d3e18dda4d0787fb5f3a64e9f96be54623554f516cd16ed54ef2223f7ce6"
  },
  "engines": [
   {
@@ -221324,7 +221324,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/THE_MACHINE_PUBLISHES_ITS_OWN_DOORS_20261123_V1.json",
    "schema": "BRAIN_THE_MACHINE_PUBLISHES_ITS_OWN_DOORS_V1",
-   "sha256": "00706d8907483e5d8810a4a08c180658366e20d25d5597ade3c6af337e804f45",
+   "sha256": "1705b7c9fdaf30a68c04ffd3df605e9d3b6502f0e165b0aed7a5e82e8c9a5d1c",
    "status": "",
    "terms": {
     "20261123": 1,
@@ -259631,6 +259631,51 @@
     "ten-row": 2,
     "unique": 5,
     "wrong": 3
+   }
+  },
+  {
+   "action_id": "THE_MACHINE_PUBLISHES_ITS_OWN_DOORS_20261123_V1",
+   "capability": false,
+   "date": "2026-11-23",
+   "id": "research:canonical/action_intents/THE_MACHINE_PUBLISHES_ITS_OWN_DOORS_20261123_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/THE_MACHINE_PUBLISHES_ITS_OWN_DOORS_20261123_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "066b99af0899bb05fff19c2e07a7af822f279e898a2bc0fa0a8cdf0f74f7225a",
+   "status": "PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
+   "terms": {
+    "20261123": 1,
+    "action": 1,
+    "actions": 1,
+    "caller": 2,
+    "compose_one_reader_over_declaration_shapes_with_execution_as_the_judge": 1,
+    "confirms": 1,
+    "declaration": 1,
+    "doors": 3,
+    "drive": 1,
+    "enumerates": 1,
+    "env": 1,
+    "every": 1,
+    "execution": 1,
+    "first": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "input": 1,
+    "list": 1,
+    "longer": 1,
+    "loop": 1,
+    "machine": 2,
+    "measured": 1,
+    "no": 1,
+    "own": 2,
+    "passes": 1,
+    "person": 2,
+    "producer_measured__independent_verification_open": 1,
+    "program": 1,
+    "publishes": 1,
+    "real": 1,
+    "requires": 1,
+    "scan": 2,
+    "step": 1
    }
   },
   {
@@ -336577,14 +336622,15 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/tool_census_v1.py",
-   "sha256": "ad9f030b12edec1bc5e2a9b678891e9ddd4586dab6c7fad617ed4c43948b1c2f",
+   "sha256": "8c3677cdd7c8b56426c09244c90e23e0e494e9b62dc45f139888cc0461fac138",
    "summary": "The action list is read off the machine, not handed to the agent.",
-   "symbol_count": 40,
+   "symbol_count": 41,
    "symbols": [
     "CensusEnv",
     "Operation",
     "_as_dict",
     "_columns",
+    "_command_form",
     "_digest",
     "_kinds",
     "_needs_a_subcommand",
@@ -336603,8 +336649,7 @@
     "carrier",
     "census",
     "census_many",
-    "change_kind",
-    "classify"
+    "change_kind"
    ],
    "terms": {
     "action": 1,
