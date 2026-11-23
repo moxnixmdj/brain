@@ -6050,3 +6050,93 @@ stood for. The correction is always the same: **read the world, not the artifact
 world.**
 
 146 tests pass, 1 skipped, 12 live against a real HeadlessChrome.
+
+## §A109 — the core hypothesis, measured, and the SE bottleneck it exposes
+
+### The measurement the user's question actually asks for
+
+*"Saving his exact experience must be in a very sufficient way … maybe we should do generalization."*
+
+Two failures of the SAME class, in different programs, different directories, different modules:
+
+| | |
+|---|---|
+| experience 1 | `ModuleNotFoundError: … 'toml'` → `pip install toml` |
+| experience 2 | `ModuleNotFoundError: … 'yaml'` → `pip install yaml` |
+| same class | yes |
+| each repair names **its own** instance | yes |
+| identical repair string (pure memory) | **no** |
+
+**The class decided the repair; the instance only supplied the argument.** No second experience was needed —
+the second case was answered by the first one's *lesson*, not its *record*. That is generalization, and it is
+the mechanism the mission's core hypothesis requires.
+
+### And then the ratio, which is the part that matters
+
+Having established the mechanism works, the honest next question is **how much of the real failure surface it
+reaches**. Twelve ordinary failures, in a world that fits them:
+
+| | first measurement | corrected |
+|---|---|---|
+| failures with an actionable repair | **1 of 12 (8%)** | **3 of 12 (25%)** |
+
+The first number was **my error, not the system's**: I gave every failure a bare `/tmp` root, so
+`missing_node_module` had no `package.json`, `no_such_file` had no project to write into, and
+`missing_binary` had no test sources. Those repairs are *conditional on the world*, and I had measured them
+with the world stripped away. **This is §A103's error repeating at a new layer** — a measurement reports the
+world it was given, and blaming the system for my choice of world is the failure mode this thread has made
+most often.
+
+### The six that remain are not environment faults at all
+
+    syntax error · name not defined · type mismatch · key absent · port in use · python not found
+      -> "the failure matches nothing known; refusing to guess"
+
+`repair_v1` is *right* to refuse: these are not environment faults, they are **bugs in the code**, and their
+repair is an **edit**, not an install. `fix_shape_v1` can describe an edit's shape but needs both the buggy
+and the fixed program — which a real task never provides.
+
+### The new module, and the criterion that keeps it honest
+
+`fix_from_the_failure_v1` attacks the narrowest defensible case:
+
+> **The failure must STATE the correction, and the world must CONFIRM it.**
+
+Measured across four ordinary bugs, the failure locates the line **exactly** every time (4 of 4). But only
+one states a correction:
+
+| bug | located | correction stated |
+|---|---|---|
+| `NameError` | line 4 | **yes** — `Did you mean: 'total'?` |
+| `TypeError` | line 2 | no |
+| `KeyError` | line 2 | no |
+| `IndexError` | line 2 | no |
+
+So: **one of four is repairable this way**, and that ratio is stated in the module's own docstring rather than
+in a footnote. A 1-in-4 mechanism reported as "the system fixes its own programs" would be exactly the
+dishonesty this project exists to avoid.
+
+The four checks that make it a derivation and not a guess:
+
+1. the failure states a correction — else refuse, naming the classes it *can* handle
+2. the correction is a name **the program already uses** — else it trades one `NameError` for another
+3. the failing name appears in the file — else the failure belongs to another file
+4. **the program exits 0 after the edit** — else the edit is **reverted**
+
+Check 4 is the judge, and reversion is the safety property: *a plausible edit left in place is worse than the
+original bug, because the original at least fails the same way twice.*
+
+### Honest status of the SE surface
+
+| | |
+|---|---|
+| environment faults (missing module/binary/path) | **repaired**, verified end to end (§A108) |
+| a bug whose failure states its correction | **repaired**, 1 of 4 ordinary bugs |
+| a bug whose failure states only a symptom | **refused**, with the class list |
+| writing a fix that changes behaviour | **not attempted** |
+
+The last row is the real gap and it is not a small one: a `TypeError` where a string must become an integer
+requires understanding what the program *meant*. Nothing in this system can do that yet, and no amount of
+pattern matching over tracebacks will produce it.
+
+150 tests pass, 1 skipped.
