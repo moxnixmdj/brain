@@ -3215,3 +3215,127 @@ command whose stdout differs between clone and host (`--version` of a differentl
 report the clone's bytes. And the two pre-existing failures above mean a sentence can still bind a
 capability through an invented `source_root` — the opposite direction of defect, and the next one
 to close.
+
+---
+
+## §A72 — THE MACHINE IS ASKED, NOT MODELLED (2026-11-22)
+
+**A71 ended with a derivation that read a flag out of a program's manual. A72 measured it and deleted
+it, because it invented a command three times in one round.** That is the whole finding, and it
+generalises further than the bug.
+
+### What was wrong
+
+`_flag_for` matched the sentence's content words against the flag glosses in a program's `--help`
+text, and returned the best-scoring flag. A gloss is one short clause; a sentence is long. Matching
+words between them almost always finds *a* coincidence, and a coincidence that is returned as an
+argv is an invention that executes:
+
+| sentence | derived | the gloss it matched | what the request actually asked |
+|---|---|---|---|
+| `Audit python source structure …` | `python -I` | "isolate … from the user's ENVIRONMENT" | to audit code |
+| `Check the python version and write it to v.txt.` | `python -B` | "don't WRITE .pyc files" | the version |
+| `Check the python version …` | `python -q` | "don't PRINT VERSION and copyright" | the version |
+
+The third one is the clearest: a first fix made `-V` and `-q` tie, and a tie broken by document
+order answered *"check the version"* with *"do not print the version"*. Each fix I applied was a
+better heuristic, and each better heuristic moved the coincidence rather than removing it. **A
+derivation that answers a different question is worse than no derivation, because it is an invention
+that runs.**
+
+### What replaced it, and why it cannot be wrong
+
+The machine does not have to be modelled, because it can be **asked**. `--version` answers for 44 of
+the first 60 programs on this machine; `--help` answers for essentially all of them. So:
+
+1. **What is a program** — only `shutil.which`, on this machine, at this moment. Nothing is assumed
+   installed because it usually is.
+2. **What to ask it** — the sentence's own words pick between the two *universal* queries every
+   program answers the same way, plus the closed English idioms for asking for instructions
+   (`how to use tar` asks for tar's help although no word in it says "help").
+3. **Whether that worked** — the argv is **run before it is returned**. `ok` is true only because the
+   program exited 0 and printed something *here*. The program's own first line comes back as
+   `answer`.
+
+Nothing is predicted, so nothing can be predicted wrongly. A wrong guess does not survive step 3,
+**because a wrong guess does not answer.** The result is that the module refuses far more often than
+it answers, and every answer it gives is a sentence the machine actually replied to:
+
+| sentence | result |
+|---|---|
+| `Check the python version and write it to v.txt.` | **`python --version` → `Python 3.11.2`** |
+| `check the git version` | **`git --version` → `git version 2.39.5`** |
+| `what version of python is this` | **`python --version`** (A71 gave `python -h`) |
+| `show me how to use tar` | **`tar --help` → `Usage: tar [OPTION...] [FILE]...`** |
+| `Audit python source structure …` | refused `NO_UNIVERSAL_QUERY_ANSWERS_THE_WORDS` |
+| `Fix it.` / `Run the thing.` / `how many files are in this folder` | refused `NO_PROGRAM_NAMED_IN_THE_SENTENCE` |
+
+### The part that is more important than the bug
+
+**Word-matching prose to decide an action is the pattern-matching trap in miniature.** It looks like
+understanding ("the program's own words named the sentence's words!") and it is statistics over
+substrings. What worked instead was noticing that the *machine can be interrogated*, so the answer is
+**evidence rather than inference**. That is the same move as A71's `shutil.which` (the machine says
+what is installed) applied one layer up (the machine says what it answers). The general principle
+worth keeping: **when a fact can be obtained by asking, do not predict it — predicting is only ever
+cheaper than asking when it is right, and it is not right.**
+
+### Dead weight removed (Elon's law)
+
+The purpose index — 856 programs, 638 "stated a purpose", 24.5 s, coverage 0.7453 — was measured
+wrong for `dpkg`, `python3`, `git` and `pip3`, fed nothing on the working path, and has been deleted
+along with `lookup()`/`summary()`. `machine_purpose_index_v1.py` is now 124 lines with one job.
+`program_manual_v1.py` is untouched and `local_manual()` has no remaining caller.
+
+### The regression that was not one
+
+The 3-suite sweep went 10 failed / 64 passed after A71's work. Bisected to `world_binding_v1._pick_path`
+by reverting one edit at a time — **the same-named `_world_path_for` guard was innocent**, which is
+why assuming a suspect is the cause is not measurement. Then the expressibility pins moved:
+
+`show me the last five git commits` went `VERIFIED_ACTION → ACTION_FAILED`. It had been answered by
+`git.history.bisect_regression.v1` with `source_root` filled as `'.'` — **a bisect answering "show me
+the last five commits"**, one of the three false passes that suite's own docstring condemns. The
+inventory of `source_root` is now refused instead of invented, so the row cannot bind and stops
+claiming a verified action it did not perform. The pins moved `verified 4 → 3` and
+`not_an_answer 2 → 1`, with the reason recorded at the pin; the docstring asks for exactly this.
+
+### The rule for `'.'`, finally (this is the generalisable result)
+
+Both of A72's `world_binding` edits were wrong for opposite reasons, and the correct rule is one
+sentence:
+
+> **The world may fill a slot only where the sentence gave evidence that the slot exists — and a
+> relative path IS that evidence, because a relative path cannot resolve without a working
+> directory.**
+
+* `write it to v.txt` — a bare relative path. `.` is a **consequence** of the sentence, not a guess.
+* `write it to /tmp/x.txt` — absolute; the sentence carries its own location; no root needed.
+* `Audit python source structure …` — states a goal, gives no path. No evidence, so no root.
+* `Fix it.` — states nothing. No evidence, so no root. This was the fabrication that selected a
+  **cross-file writer** whose `source_root` was an accident of the checkout.
+
+So the empty case is not "never" and not "always": it is **derived from whether the sentence's own
+path reference needs a working directory**. The first two attempts (always refuse / refuse unless an
+extension or identity word appears) were both guesses about the sentence; this one reads it.
+
+### Verified
+
+| check | result |
+|---|---|
+| `ra.solve("Check the python version and write it to v.txt.")` | **PASS**, `v.txt = 'Python 3.11.2\n'` |
+| `ra.solve("Run the shell command python3 --version and write its output to out.txt.")` | **PASS**, `out.txt = 'Python 3.11.2\n'` |
+| `ra.solve("Run the shell command ls -la and write its output to listing.txt.")` | **PASS**, 543 lines |
+| 3-suite sweep (world_binding + naming_rule + stated_command) | **74 passed** (was 10 failed / 64 passed) |
+| + `test_the_machine_answers_or_refuses_v1.py` + expressibility | **91 passed, 1 failed** |
+| the 1 failure | the pre-existing `tar.gz` pair, identical at HEAD |
+| `tasks_v1` / `unseen_program_v1` | **13/13** / **6/6** |
+| expressibility coverage | **14** unchanged; the two moved pins are honest improvements |
+
+**Honest limits.** Only two queries are derived, and a sentence asking for something neither
+`--version` nor `--help` answers is refused even when a flag exists for it — that is the price of
+having no way to be wrong, and it is the right price until a mechanism exists that is evidence rather
+than inference. The idiom list is closed English; a request phrased another way is refused rather
+than guessed. And `derive_argv` runs a subprocess, so it is only safe because the program is chosen
+by `shutil.which` and the query is one of two constants — that constraint must not be relaxed to let
+a sentence's own words become argv words.

@@ -2673,6 +2673,33 @@ def request_words_explained_by_row(sentence: str, admission: Mapping[str, Any], 
     """``(explained, unexplained)`` content words of ``sentence`` for the selected row, in sentence order."""
     vocabulary = _row_declared_vocabulary(capability_id, entry)
     vocabulary.update(_word_stem(str(token).lower()) for token in (admission.get("matched_tokens") or ()))
+    # THE WORD A DERIVED COMMAND WAS READ FROM IS A WORD THE ROW EXPLAINS.
+    #
+    # This asks whether the row accounts for the sentence's content words. It looked at the row's
+    # declared vocabulary, its matched tokens, and its bound values -- and a command derived from
+    # the machine's own manual is none of those: `shell.command.run`'s vocabulary is about shell and
+    # processes, so "check" and "version" were counted as UNexplained for a sentence whose whole
+    # content is the command `python3 -V`, read from python3's own line
+    # "-V : print the Python version number and exit". Measured 2026-11-22: the row bound the right
+    # argv, was selected on documented evidence, and was then refused because its declared
+    # keywords are about shells rather than about Python.
+    #
+    # The words the derivation matched are therefore part of what the row accounts for -- no more
+    # than that, so a sentence the derivation says nothing about is unchanged.
+    try:
+        from canonical.runtime import machine_purpose_index_v1 as _machine
+        _derived = _machine.derive_argv(sentence)
+    except Exception:  # noqa: BLE001 - no derivation, the existing vocabulary stands
+        _derived = {}
+    if _derived.get("ok"):
+        # The program is part of what the row accounts for, and so is the ANSWER the program gave
+        # when asked here -- `--version` replied "Python 3.11.2", which is the word the sentence
+        # asked for. Nothing is added for a sentence the derivation refuses.
+        vocabulary.add(_word_stem(str(_derived.get("program") or "").lower()))
+        for token in _WORD_RE.findall(str(_derived.get("answer") or "").lower()):
+            vocabulary.add(_word_stem(token))
+        for token in _WORD_RE.findall(str(_derived.get("query") or "").lower()):
+            vocabulary.add(_word_stem(token))
     bound_as_data = _words_in(inputs if isinstance(inputs, Mapping) else {}, set())
     explained: list[str] = []
     unexplained: list[str] = []

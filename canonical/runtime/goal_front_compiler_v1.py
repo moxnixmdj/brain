@@ -1124,9 +1124,24 @@ def bind_typed_key(goal: str, key: str, root: pathlib.Path, entry: Mapping[str, 
         from canonical.runtime import composer_route_v1 as _composer_route
 
         argv = _composer_route.extract_argv(str(goal or ""))
-        if not argv:
-            raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED", "argv:not_stated")
-        return list(argv)
+        if argv:
+            return list(argv)
+        # THE SENTENCE MAY STATE A GOAL THE MACHINE HAS A DOCUMENTED COMMAND FOR.
+        #
+        # "check the python version" states no argv, so the bind above refuses -- correctly. But
+        # this machine's own `python3` documents "-V : print the Python version number and exit",
+        # and a person asking that question means that command. The derivation is not a mapping
+        # table: `shutil.which` decides which word is a program, and the flag is chosen because the
+        # program's OWN text names the words the sentence used. Nothing is stored and nothing is
+        # guessed; the evidence line is returned with the argv so the choice can be checked.
+        #
+        # It runs ONLY where the sentence states no command, so no command that a sentence spells
+        # out can be displaced by a derivation.
+        from canonical.runtime import machine_purpose_index_v1 as _machine
+        derived = _machine.derive_argv(str(goal or ""))
+        if derived.get("ok"):
+            return list(derived["argv"])
+        raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED", "argv:not_stated")
     paths = gc._repo_paths(goal, root)
     if key in _PATH_FILE_KEYS:
         # A DESTINATION IS NOT A CANDIDATE SOURCE.
@@ -2530,6 +2545,58 @@ def ranked_candidates(goal: str, registry: Mapping[str, Mapping[str, Any]],
         score, specificity, evidence = score_capability(goal, cid, entry)
         if score > 0:
             out.append((score, specificity, cid, evidence))
+    # THE ROW THE MACHINE DOCUMENTS A COMMAND FOR IS A CANDIDATE ON THAT EVIDENCE.
+    #
+    # A sentence can ask for work the machine has a documented command for and share no keyword
+    # with the row that runs commands. Measured 2026-11-22: "Check the python version and write it
+    # to v.txt." ranked python.source.add_function.v1 first at 16 on the word "python" and put
+    # shell.command.run NOWHERE, so the derivation this module can now perform was never reached --
+    # and yet `python3 --help` states "-V : print the Python version number and exit", which is the
+    # request exactly.
+    #
+    # The evidence is structural and derived from the machine, not lexical: the sentence names no
+    # command (so nothing the sentence spells out is displaced), and the machine documents one for
+    # it. It is admitted at the score of the words the DERIVED ARGV itself accounts for, so a row
+    # that would have won lexically still wins whenever its evidence is stronger -- and a sentence
+    # the machine documents nothing for changes nothing at all.
+    try:
+        from canonical.runtime import capability_selection_retrieval_v1 as _sel
+        _states_a_command = _sel._states_a_command_the_sentence_maps_to(goal)
+    except Exception:  # noqa: BLE001 - no test available, no candidate added
+        _states_a_command = True
+    if not _states_a_command:
+        try:
+            from canonical.runtime import machine_purpose_index_v1 as _machine
+            _derived_argv = _machine.derive_argv(goal)
+        except Exception:  # noqa: BLE001 - no derivation, no candidate
+            _derived_argv = {}
+        if _derived_argv.get("ok"):
+            for _cid, _entry in sorted(registry.items()):
+                if not isinstance(_entry, Mapping):
+                    continue
+                if _entry.get("status") != "VERIFIED_BOUND_CAPABILITY":
+                    continue
+                if "argv" not in input_keys(_entry):
+                    continue
+                # THE EVIDENCE IS THAT THE MACHINE DOCUMENTS A COMPLETE COMMAND, AND THAT IS
+                # STRONGER THAN A KEYWORD OVERLAP.
+                #
+                # An arbitrary floor was the wrong mechanism: it made this row win some lexical
+                # ties and lose others by a constant nobody derived. What the machine's own manual
+                # establishes is that this row can be CALLED -- the sentence's words are the
+                # program's own words for the flag. So it is admitted above every row whose
+                # evidence is a shared word, and below nothing: a sentence that states a command
+                # never reaches this branch, and a sentence the machine documents nothing for
+                # adds no candidate. `_base` keeps any lexical score the row already had.
+                _base = next((sc for sc, _sp, cc, _ev in out if cc == _cid), 0)
+                _top = max((sc for sc, _sp, cc, _ev in out if cc != _cid), default=0)
+                _score = max(int(_base), int(_top) + 1)
+                if _score > 0:
+                    out = [row for row in out if row[2] != _cid]
+                    out.append((_score, 99, _cid,
+                                {"derived_argv": list(_derived_argv["argv"]),
+                                 "derived_from": _derived_argv.get("evidence"),
+                                 "rule": "THE_MACHINE_DOCUMENTS_A_COMMAND_FOR_THIS_REQUEST"}))
     out.sort(key=lambda x: (-x[0], -x[1], x[2]))
     if out:
         return out
@@ -2743,6 +2810,48 @@ def _unserved_stated_file_paths(text: str, inputs: Mapping[str, Any], root: path
                                for directory in directories)})
 
 
+def _documented_command_row(goal: str, admissible: Mapping[str, Mapping[str, Any]],
+                            root: pathlib.Path) -> dict[str, Any] | None:
+    """The row that runs the command this machine documents for the sentence, fully bound.
+
+    Offered only when the sentence states NO command of its own and exactly one admissible row
+    declares an `argv` slot -- so nothing a sentence spells out is displaced, and a tie between two
+    command-running rows is no evidence about which was meant. The binding is the pinned binder's
+    own, and the row must bind every input it declares or nothing is returned.
+    """
+    try:
+        from canonical.runtime import composer_route_v1 as _composer_route
+        from canonical.runtime import machine_purpose_index_v1 as _machine
+    except Exception:  # noqa: BLE001 - no derivation available, no offer
+        return None
+    if _composer_route.extract_argv(str(goal or "")):
+        return None  # the sentence states its own command; nothing to derive
+    derived = _machine.derive_argv(str(goal or ""))
+    if not derived.get("ok"):
+        return None
+    rows = [cid for cid, entry in (admissible or {}).items()
+            if isinstance(entry, Mapping) and "argv" in input_keys(entry)
+            and entry.get("status") == "VERIFIED_BOUND_CAPABILITY"]
+    if len(rows) != 1:
+        return None
+    cid = rows[0]
+    entry = admissible[cid]
+    try:
+        inputs = bind_all_inputs(str(goal or ""), entry, root, cycle=0, spool=set())
+    except GoalCompilationFailure:
+        return None
+    except Exception:  # noqa: BLE001 - a binder fault is not a selection
+        return None
+    if "argv" not in inputs:
+        return None
+    return _single(cid, entry, inputs, 0, {
+        "rule": "F32D_THE_MACHINE_DOCUMENTS_A_COMMAND_FOR_THIS_REQUEST",
+        "derived_argv": list(derived["argv"]),
+        "derived_from": derived.get("evidence"),
+        "authority": derived.get("authority"),
+    }, [])
+
+
 def _retrieval_first_selection(goal: str, admissible: Mapping[str, Mapping[str, Any]],
                                root: pathlib.Path, rules: list[str]) -> dict[str, Any] | None:
     """F17: retrieval proposes k=3, typed admission disposes.  Returns None to keep the failure.
@@ -2752,6 +2861,20 @@ def _retrieval_first_selection(goal: str, admissible: Mapping[str, Mapping[str, 
     therefore bounded by admission, not by the ranker: a lexical near-miss whose declared inputs
     the sentence does not state is refused, and an ambiguous shortlist selects nothing at all.
     """
+    # A COMMAND THIS MACHINE DOCUMENTS NEEDS NO RETRIEVAL AT ALL.
+    #
+    # This hook is the last thing asked before a compile failure is reported, by BOTH failing
+    # branches. A sentence that states no command, and for which a program on this machine
+    # documents one, has already been decided by evidence stronger than any embedding: measured
+    # 2026-11-22, "Check the python version and write it to v.txt." -- `python3` says
+    # "-V : print the Python version number and exit", and `shell.command.run` binds that argv.
+    # So the row is offered here, through the SAME pinned binder and the SAME `_single` shape every
+    # other return uses; a sentence the machine documents nothing for goes on to retrieval unchanged.
+    _documented = _documented_command_row(goal, admissible, root)
+    if _documented is not None:
+        rules.append("F32D_THE_MACHINE_DOCUMENTS_A_COMMAND_FOR_THIS_REQUEST")
+        return _documented
+
     from canonical.runtime import capability_selection_retrieval_v1 as selection
 
     decision = selection.select(goal, admissible, root, selection.DEFAULT_K)
@@ -3172,6 +3295,10 @@ def _ranked_by_the_command_the_sentence_states(
         from canonical.runtime import declared_command_equivalence_v1 as _declared
 
         argv = _composer_route.extract_argv(str(goal or ""))
+        # A derived command is deliberately NOT passed to this matcher. `matched_template` asks
+        # whether a row DECLARES the exact argv, and `shell.command.run` declares none -- it takes
+        # whatever argv it is given -- so a derived command belongs to the ranking above, which
+        # admits that row on the machine's own documentation, and not to this declaration test.
         if not argv:
             return []
         matches = []
@@ -3321,7 +3448,50 @@ def _compile_goal_body(goal: str, admissible: Mapping[str, Mapping[str, Any]], r
     # the row it substitutes is compiled by the SAME pinned compiler against a
     # registry holding nothing else, so no new binder and no new scoring is
     # introduced.  If that compile also fails, the original failure stands.
+    # A PICK THAT CANNOT BE CALLED IS NOT A PICK, AND THE MACHINE'S OWN MANUAL OUTRANKS A
+    # VOCABULARY SCORE.
+    #
+    # The ranking above admits the row that runs commands when a program on this machine documents
+    # the sentence's own words, and puts it first on that evidence. The pinned compiler below has
+    # its own lexical scorer, which shares no word with such a sentence -- measured 2026-11-22,
+    # "Check the python version and write it to v.txt." ranked `shell.command.run` FIRST at 17 and
+    # then selected `python.source.add_function.v1` at 16, a row whose `body` slot the sentence
+    # never states, so the request died on a row that could not be called.
+    #
+    # The rule is F32b's, unchanged: the ONE row the evidence chose, compiled by the SAME pinned
+    # compiler against a registry holding nothing else. It fires only for a row whose slot is
+    # `argv` -- i.e. only when the ranking admitted it on documented evidence -- and only when that
+    # compile actually selects it. No binder, no scorer and no fallback is introduced.
+    _top_row = ranked[0] if ranked else None
+    if _top_row is not None and "argv" in input_keys(registry.get(_top_row[2]) or {}):
+        try:
+            _solo = dict(gc.compile_goal(selection_text, {_top_row[2]: registry[_top_row[2]]}, root))
+        except GoalCompilationFailure:
+            _solo = None
+        except Exception:  # noqa: BLE001 - a substitution that raises is no substitution
+            _solo = None
+        if _solo and _solo.get("selected_capability") == _top_row[2]:
+            compiled = _solo
+            pinned_failure = None
+            best_cid = _top_row[2]
+            rules.append("F32C_THE_MACHINE_DOCUMENTS_A_COMMAND_AND_THE_PINNED_PICK_COULD_NOT_BIND")
+
     if compiled is None:
+
+        #
+        # The ranking above admits the row that runs commands when a program on this machine
+        # documents the sentence's own words, and puts it first on that evidence. But the pinned
+        # compiler below has its own scorer, which knows nothing of the derivation and selects on
+        # vocabulary alone -- measured 2026-11-22, "Check the python version and write it to v.txt."
+        # ranked `shell.command.run` FIRST at 17 and then failed on
+        # `python.source.add_function.v1:body:not_stated`, a row that could not be called.
+        #
+        # This is F32b's own rule applied to the derivation: a pick that cannot fill its own
+        # contract is not a pick. It is the same narrow substitution -- the ONE row the ranking
+        # chose, compiled by the SAME pinned compiler against a registry holding nothing else --
+        # so no binder, no scorer and no fallback is introduced. It fires only when that row
+        # binds every input it declares, and only when it was chosen on documented evidence.
+
         _declared_rows = _ranked_by_the_command_the_sentence_states(selection_text, registry)
         if _declared_rows:
             _cid = _declared_rows[0][2]

@@ -1529,6 +1529,35 @@ def _score(goal, cid, entry):
           "matched_keywords":[],
           "format_rejection":format_evidence,
         }
+    # A ROW THE MACHINE DOCUMENTS A COMMAND FOR IS NOT A ZERO-SCORE ROW.
+    #
+    # Scoring is lexical: it asks which words a capability and a sentence share, and a row that
+    # shares none scores 0 and is discarded. That is right for choosing between capabilities by
+    # vocabulary, and it is blind to the one thing that decides this case -- whether the row can be
+    # CALLED at all. Measured 2026-11-22: "Check the python version and write it to v.txt." shares
+    # no distinctive word with `shell.command.run`, so it scored 0 and was dropped, even though
+    # `_bind_inputs` fills that row's only slot from this machine's own `python3` manual
+    # ("-V : print the Python version number and exit").
+    #
+    # So the zero is checked once, in the one place that computes it, against the same derivation
+    # the front compiler uses. It cannot manufacture a match: the derivation returns nothing unless
+    # a program on this machine documents the sentence's own words, and a sentence that states a
+    # command never reaches it. Every capability that scores above zero today is untouched.
+    if "argv" in _placeholders(entry.get("action_template") or {}):
+        try:
+            from canonical.runtime import machine_purpose_index_v1 as _machine
+            _derived = _machine.derive_argv(goal)
+        except Exception:  # noqa: BLE001 - no derivation, the lexical score stands
+            _derived = {}
+        if _derived.get("ok"):
+            return 1, 0, {
+                "goal_tokens": sorted(_tokens(goal)),
+                "matched_provides": [], "matched_requires": [], "matched_identity": [],
+                "matched_keywords": [],
+                "derived_argv": list(_derived["argv"]),
+                "derived_from": _derived.get("evidence"),
+                "rule": "THE_MACHINE_DOCUMENTS_A_COMMAND_FOR_THIS_SENTENCE",
+            }
     gt, gt_effect, _distinctive_goal, sorted_gt = _goal_score_features(goal)
     provides, requires, identity, keywords = _entry_cached_tokens(cid, entry)
     effect_matches=(gt_effect & provides) | (gt_effect & identity) | (gt_effect & keywords)

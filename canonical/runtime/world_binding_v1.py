@@ -457,12 +457,49 @@ def _world_path_for(name, cid, root):
     return None
 
 
-def _pick_path(name, cid, paths, root):
+def _names_a_relative_path(goal: str) -> bool:
+    """True when the sentence names a file by a path that RESOLVES against a working directory."""
+    for token in re.findall(r"[\w./-]*\w+\.\w{1,8}\b|(?:[\w-]+/)+[\w.-]+", str(goal or "")):
+        cleaned = token.strip(".,;:!?()[]{}\"'")
+        if not cleaned:
+            continue
+        if cleaned.startswith("/") or cleaned.startswith("~") or "://" in cleaned:
+            continue
+        return True
+    return False
+
+
+def _pick_path(name, cid, paths, root, goal=""):
     """Choose the goal path that fits what this placeholder is for."""
     lowered = str(name).lower()
     want_dir = ("root" in lowered) or ("dir" in lowered) or ("corpus" in lowered)
     if not paths:
-        return "." if want_dir else None
+        # A SLOT THE SENTENCE SAYS NOTHING ABOUT IS NOT FILLED BY THE WORLD.
+        #
+        # This used to answer `.` for every directory-shaped slot when the goal named no path at
+        # all -- "the one step the goal did not take".  It is not a step the goal left implicit; it
+        # is a repository root chosen on a sentence that chose nothing.  Measured 2026-11-22 over
+        # ten sentences that state no directory: FOUR selected a real capability and invented
+        # `source_root: '.'` to do it --
+        #
+        #   "Run the thing."  -> python.repository.acceptance.measure.v1  (a whole-suite run)
+        #   "Run the tests."  -> python.repository.acceptance.measure.v1
+        #   "Fix it."         -> software.repair.choreograph.crossfile.v1 (a WRITER, editing
+        #                        files selected by a guess)
+        #   "Run it."         -> python.repository.acceptance.measure.v1
+        #
+        # A refusal is visible; a substitution is not.  A sentence that names no directory has
+        # stated no evidence that a directory slot exists, so the slot stays unbound --
+        #
+        # UNLESS IT NAMES A RELATIVE PATH, IN WHICH CASE THE DIRECTORY IS NOT A GUESS BUT A
+        # CONSEQUENCE. "write it to v.txt" is a statement about a file that resolves against some
+        # working directory, and the only working directory the sentence has given is the one the
+        # request is made in. `.` is therefore derived from the sentence's own path reference, the
+        # same way `to` gives a destination. A sentence that names an ABSOLUTE path has said where
+        # its file lives and needs no root; a sentence that names no path at all has said nothing.
+        if _names_a_relative_path(goal):
+            return "."
+        return None
     if want_dir:
         for rel in paths:
             if (root / rel).is_dir():
@@ -934,7 +971,7 @@ def complete_inputs(goal, root, entry, compiler=None, goal_paths=None):
                 scope_paths = [(raw, root / raw) for raw in goal_paths if raw != destination]
                 value = compiler._declared_exact_file_scope(entry, key, scope_paths, goal)
             if value is None:
-                value = _pick_path(key, cid, goal_paths, root)
+                value = _pick_path(key, cid, goal_paths, root, goal)
             # SLOTS OF ONE CAPABILITY DESCRIBE ONE JOB AND ARE BOUND JOINTLY.
             #
             # Binding each slot independently handed `archive_path` the

@@ -717,7 +717,17 @@ def _is_executable(entry: Mapping[str, Any]) -> bool:
 # Slot kinds that can hold a payload a sentence states.  A capability whose
 # declared contract has none of them has NOWHERE to put the text, so it cannot
 # be the capability a write request meant -- whatever its keywords matched.
-_PAYLOAD_SLOT_KINDS = frozenset({"STRING", "JSON_TEXT", "UNKNOWN"})
+# A PAYLOAD-BEARING SLOT INCLUDES THE COMMAND VECTOR.
+#
+# `ARGV` is the type surface's own name for "general command vector -- the universal" slot, and the
+# payload a request states can BE a command: "write its output to v.txt" is a delivery, and
+# `shell.command.run` is the row that can deliver it. Leaving ARGV out of this set made the most
+# payload-capable row on the machine look payload-incapable, so admission refused
+# `BINDING_REFUSED:NO_SLOT_FOR_THE_STATED_PAYLOAD:ARGV` on a sentence whose whole point was to run
+# a command and place its output. Measured 2026-11-22: "Check the python version and write it to
+# v.txt." selected the right row, bound {'argv': ['python','-V']}, and was then refused for a slot
+# it was holding.
+_PAYLOAD_SLOT_KINDS = frozenset({"STRING", "JSON_TEXT", "UNKNOWN", "ARGV"})
 
 
 _AST_CODE_EDIT_RE = re.compile(
