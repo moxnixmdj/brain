@@ -966,6 +966,20 @@ def route(tree: Mapping[str, Any], request_words: Iterable[str],
                       for o in page.get("options") or []}
         if flags_here:
             score += 3 * len(wanted & flags_here)
+        # The page's *own last word* is the act it performs, and it is a different statement from
+        # anything in its prose. `vaultctl secret get` is the act "read a secret"; `policy allow`
+        # says in its summary "permit a principal to read a secret", so the word `read` matched
+        # and `policy allow` scored 11 against `secret get`'s 7 -- the request wanted the value,
+        # and the plan granted a permission instead, reporting complete=True. A subcommand named
+        # for the act is stating the act; a summary that uses the word is stating an object of
+        # some other act. Weighted above prose and below nothing.
+        if here and wanted_acts:
+            last = str(here[-1]).lower()
+            if act_of(last) and act_of(last)[0] in {a[0] for a in wanted_acts}:
+                score += 6
+            elif last in {a[1] for a in wanted_acts} or last in {a[0] for a in wanted_acts}:
+                score += 6
+
         scores.append({"child": " ".join(here), "score": score})
         # Ties are broken by how close the candidate's *distinguishing* word sits to the act word
         # in the request. `Add a record "www" ... in the zone "example.org"` scores `zone add` and
@@ -1434,7 +1448,27 @@ def _bind(values: Sequence[Mapping[str, Any]], options: Sequence[Mapping[str, An
     """
     paths = [v for v, _ in _paths_with_places(values, picture, role_first=True)]
     others = [v for v in values if v["kind"] != "path"]
-    typed = [o for o in options if o.get("takes_value")]
+    # A control flag is listed beside the data flags and takes no data. `--help` printed
+    # `-h, --help  show this text` among `--name`, `--namespace`, `--prefix`, and a request for
+    # the `staging` namespace bound it to `--help`: the plan was `secret list --help staging`,
+    # which asks for the help and names nothing. Reading a manual is a question, never a value.
+    #
+    # The set is not a list of invented flag names -- that would be the knowledge table this
+    # mechanism exists to replace. It is exactly the spellings the *asking convention* already
+    # uses to read a document (`ASK_CONVENTION`), plus any flag the document itself documents as
+    # asking for help: a page that prints `-h, --help  Show help for this command` has said which
+    # of its own flags is the question and not a value.
+    control: set[str] = set()
+    for rung in ASK_CONVENTION:
+        control.update(str(a).lower() for a in rung)
+    for other in options:
+        flag = str(other.get("flag") or "").lower()
+        said = str(other.get("words") or "").lower()
+        if flag and ("help" in said.split() or said.startswith("show this")
+                     or "show help" in said):
+            control.add(flag)
+    typed = [o for o in options
+             if o.get("takes_value") and str(o.get("flag") or "").lower() not in control]
     typed_paths = [o for o in typed if slot_kind(o) == "path" or is_product_slot(o)]
     typed_paths.sort(key=lambda o: 0 if is_product_slot(o) else 1)
     bound: list[dict[str, Any]] = []
@@ -3021,6 +3055,24 @@ def plan(requirement: Mapping[str, Any], tree: Mapping[str, Any],
         add(_render(tool, prefix_of(deepest), None, bound), operation=None, bound=bound,
             depth=deepest, reason="PLANNED_BY_ARGUMENT_ORDER")
 
+    # R6 -- the routed page's own flags, when it states no argument picture at all
+    # A page that prints a title, a one-line summary and a flag list is the ordinary shape of a
+    # real subcommand help (`vaultctl secret get` prints exactly that, and so does most of the
+    # world). It has no `USAGE:` line, so `positional_grammar` finds no picture, R5's readings
+    # are empty, and the page yielded **no candidate at all** -- "no operation in this document"
+    # for a page documenting three flags. A flag is an operation. When the routed page documents
+    # options and nothing else, each request value is bound to the option whose description
+    # names it, and the rest are reported unbound rather than invented into slots.
+    if here_options and not (nodes[deepest].get("usage") or {}).get("positional"):
+        bound, unbound = _bind(values, here_options, product_first=False, picture={})
+        if bound:
+            add(_render(tool, prefix_of(deepest), None, bound), operation=None, bound=bound,
+                depth=deepest, reason="PLANNED_BY_THE_ROUTED_PAGES_FLAGS")
+            for item in unbound:
+                refusals.append({"reason": "NO_SLOT_ACCEPTS_" + str(item["kind"]).upper(),
+                                 "value": item["value"],
+                                 "context": str(item.get("context", ""))[:160]})
+
     # A plan is only *complete* if it also accounts for every word the request used to name an
     # object. A word silently dropped is the one failure mode a caller cannot see: the plan runs,
     # the world accepts it, and the request was only partly carried out. So the dropped words are
@@ -3414,6 +3466,14 @@ def _carries_an_operation(argv: Sequence[str], tree: Mapping[str, Any]) -> bool:
         for key in ("commands", "path"):
             for word in node.get(key) or []:
                 names.add(str(word).lower())
+        # The route this page *is*: its own argv, minus the program and the help flag. A page
+        # whose help omits a `USAGE:` line -- `vaultctl secret get` prints a title, a one-line
+        # summary and a flag list, which is common -- otherwise contributed no operation at all,
+        # and `vaultctl secret get --name x` was refused as "no operation in this document"
+        # although the page documents `--name`. The page was reached by those exact words.
+        route = [str(a).lower() for a in (node.get("argv") or [])[1:]
+                 if not str(a).startswith("-") and str(a) != "help"]
+        names.update(route)
         for option in node.get("options") or []:
             flag = str(option.get("flag") or "")
             if flag:

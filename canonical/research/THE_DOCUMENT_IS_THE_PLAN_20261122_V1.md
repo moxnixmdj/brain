@@ -2079,3 +2079,52 @@ length from 2 to 1 admits `A` -- a real DNS record type -- but it also makes the
 label, and `Add a record "www" of type CNAME` then bound `--type a`: the sentence's own grammar
 beat the document's vocabulary. Two tests caught it. The rule stands at two characters; a
 one-letter label is not worth a wrong answer on the common case.
+
+### A53 — a program the planner has never seen: 0/6, then 5/6
+
+Everything measured so far was a program whose dialect the fixtures imitated. That is exactly the
+wrong test. A new program was written in a style **no fixture uses**:
+
+* `SUBCOMMANDS` instead of `AVAILABLE COMMANDS:`
+* no `USAGE:` line at all on the leaf pages
+* flags under a bare `-h, --help   show this text` heading, not `FLAGS:`
+* `REQUIRED` as a trailing word rather than `(required)`
+* **no EXAMPLES on any page** — the ordinary shape of a real subcommand help
+
+**First result: 0 of 6.** Not one request planned a usable command. Two defects, both invisible
+on the covered surface:
+
+1. **A page with flags but no `USAGE:` line produced no candidate at all.** R5's readings come
+   from `positional_grammar`, which is empty without a usage line, so the page yielded nothing and
+   the planner answered `NO_OPERATION_IN_THIS_DOCUMENT` for a page that documents three flags. A
+   flag *is* an operation. R6 now binds the routed page's own flags when the page states no
+   argument picture, and reports what it cannot place instead of inventing a slot.
+2. **A control flag was bound to data.** `--help` is printed beside `--name` and `--namespace`, so
+   a request for the `staging` namespace produced `secret list --help staging`: the plan asks for
+   the help and names nothing. The exclusion set is **derived, not invented** — the spellings the
+   ask-convention already uses, plus any flag the document itself glosses as asking for help. A
+   hand-written list of `--verbose`, `--quiet`, `--json` was the first attempt and the A1 guard
+   rejected it on sight: that is precisely the knowledge table this mechanism exists to replace.
+
+**Result after both: 5 of 6.**
+
+The one that remains is honest and important. `Read the secret named "db-password"` routes to
+`policy allow`, which summarises itself *"permit a principal to read a secret"* and documents
+`--principal`, `--secret`, `--namespace` — three flags the request's words touch. `secret get`
+documents `--name`, `--namespace` and summarises itself *"print the value of one secret"*.
+From the document alone, `policy allow` scores 12 against `secret get`'s 5, and the plan grants a
+permission instead of reading a value.
+
+**Why the mechanism cannot settle it, stated plainly:** the act class canonicalises *morphology*
+(`un`/`re` prefixes, inflection) and knows nothing of synonymy. `get` and `read` are distinct
+tokens; `allow` is not in the class at all. Nothing in the pages links "read" to "get" — that
+link is world knowledge, and a table of such links would be the knowledge warehouse the project
+forbids. Two wrong attempts were made and reverted: weighting a summary mention of the act from
++1 to +2, and penalising a route word that names a different act. Both are me guessing at weights
+to fit one case; neither generalises, and the effect suite would not have caught either.
+
+**What would settle it without a table:** the *asked-for object's kind*. The request says "the
+secret named X" and asks to read it; `secret get` is reached by the same noun `secret`, and its
+`--name` is documented "the secret's name". `policy allow`'s `--secret` is documented "the secret
+they may read" — a permission's object, not a value's. That distinction is available in the
+documents and is the next thing to try.
