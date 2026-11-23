@@ -1,13 +1,16 @@
-# One mechanism, five items — 29/40 → 35/40
+# One mechanism, five items — 29/40 → 37/40
 
 **Authority:** NONE · `truth.achieved` stays `false` · **$0**, 0 model calls · 54 tests pass
 
-| | before | after |
-|---|---|---|
-| sympy | 23/32 | **29/32** |
-| networkx | 6/8 | 6/8 |
-| total | 29/40 | **35/40** |
-| cohort time | 253 s | **222 s** |
+| | before | after this mechanism | whole cohort now |
+|---|---|---|---|
+| sympy | 23/32 | 29/32 | **30/32** |
+| networkx | 5/8 | 6/8 | **7/8** |
+| total | 28/40 | 35/40 | **37/40** |
+| cohort time | 253 s | 222 s | **221 s** |
+
+The middle column is what *this document's* one mechanism bought. The right-hand column is the
+cohort as of the latest run and includes three later items solved by other means.
 
 New: 181, 182, 185, 188, 194. **Faster as well as better** (196 s sympy, 26 s networkx).
 
@@ -79,5 +82,11 @@ Two rules, both pure derivation, no stored facts:
 missing function, and two are prose that does not name what it means. Only 180 is a shape the
 grammar genuinely cannot yet express.
 
-**35/40 is 87.5% of a 40-item two-library no-dependency subset, not a benchmark score.** The
+**37/40 is 92.5% of a 40-item two-library no-dependency subset, not a benchmark score.**
+
+> **Corrected 2026-11-21.** This document was written at 35/40. Three further items were closed
+> afterwards and none of them by a new mechanism: **180** by ranking a constructor out of the head
+> position (see `THE_CALLEE_DOCUMENTS_THE_WORD_20261121_V1.md`), **189** by a harness budget fix,
+> and **27** by reading the keyword from the callee's own docstring. The mechanism described below
+> still accounts for the same five items; the table above counts the whole cohort. The
 published 51–59% figures are on all 328 items across 26 libraries. `truth.achieved` remains `false`.
