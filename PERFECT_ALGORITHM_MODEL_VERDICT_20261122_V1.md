@@ -915,3 +915,52 @@ What IS adopted: the same store, the same flow, the same rule schema across
 kinds. The store is the ONE reusable object; the rule is the ONE generalization
 format; the receipt discipline (scan → memory → gap → report) is the same on
 every environment class. That is the honest claim.
+
+## 28. The Perfect-Algorithm loop on a live page: plan→act→verify→admit→persist→warm replay (2026-11-23, measured)
+
+The browser surface (§24) and the scan→remember→report flow (§25) prove the page is
+bring-up-able and scannable. This turn proves the LOOP itself on a page: the same
+generic chain every env uses — cold scan -> plan -> act -> verify -> admit on fresh
+variants -> persist -> warm replay — over a live page.
+
+Built: `canonical/swe_kernel/browser_page_env_v1.py` — `BrowserPageEnv`:
+  same env protocol as the scan env (reset/act/state/snapshot/restore/action_names),
+  same flat-heuristic honesty, same generic loop (`pa.run`).
+
+Honesty contract (and one defect found by measuring):
+  - state() reads the live page through a FRESH CDP connection — never a
+    re-navigation (which would discard the clicks/fills the env performed).
+  - reset/restore = navigate fresh, then RE-APPLY THE RECORDED INPUT VALUES
+    (the form fields are the one genuinely replayable piece of page state;
+    everything derived — the counter, the done line — is re-derived by the
+    same actions, never trusted). An earlier version of this env restored
+    by blind navigation, which made the fill step invisible to the scan and
+    forced the honest cold path to re-derive everything — caught by
+    measuring, fixed by recording the form's live values in state.
+  - actions are the caller's declared surface: "click:<text>", "fill:<sel>:<value>",
+    "press:<sel>:<key>" — nothing invented.
+  - The goal predicate is caller-provided; default refuses.
+  - Page kind is "browser_page"; priors keyed by kind, like every other env.
+
+Measured (probe `unseen_browser_page_probe_20261123.py`, four ephemeral localhost
+fixtures with the SAME DOM structure and DIFFERENT content — title/h1/intro differ,
+affordance labels and selectors are invariant; the goal: fill #txt with "abc" and
+submit the form — content-exact predicate over the live page, never a re-read):
+
+  TEACH   LEARNED_AND_VERIFIED, ADMIT 2/2 (both fresh variants REACHED),
+          persist True — rule ga-70024af2f8f0851d, plan
+          ["fill:#txt:abc", "click:go"], 85 s.
+  COLD    VERIFIED_NOT_PERSISTED — fresh fixture page D, empty store — PASS,
+          plan ["fill:#txt:abc", "click:go"], 72.6 s.
+  WARM    same fixture D, memory seeded by TEACH — INSTANT_RECALL,
+          PASS__REPLAY_FROM_MEMORY (rule replay, 5.0 s; verified by execution;
+          nothing trusted).
+  CONTROL fixture A, same memory — INSTANT_RECALL, PASS__REPLAY_FROM_MEMORY,
+          5.0 s.
+
+The 0.3-0.4 s/step and ~70-85 s cold/teach cost is the honest price of live page
+loads (restore = fresh navigation + input-value replay, state = fresh CDP read);
+warm replay is 5 s with all evidence verified by execution inside pa.run.
+NOT §6: no benchmark, no video capture, no cross-kind transfer, no GUI-history
+close-out. Cross-kind (filesystem <-> page) remains the §27 open question and
+is untouched by this turn.
