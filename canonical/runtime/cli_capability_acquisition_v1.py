@@ -63,14 +63,17 @@ def _candidate_output_flags(help_text: str) -> list[str]:
     is entitled to hold until it has run them.
     """
     flags: list[str] = []
-    for m in re.finditer(r"(-{1,2}[A-Za-z0-9][\w-]*)\s*(?:[= ]\s*)?(FILE|OUTPUT|OUTFILE|PATH|TARGET)?",
+    for m in re.finditer(r"(-{1,2}[A-Za-z0-9][\w-]*)\s*(?:[= ]\s*)?(FILE|OUTPUT|OUTFILE|PATH|TARGET|ARCHIVE)?",
                          help_text):
         flag = m.group(1)
         kind = (m.group(2) or "").upper()
         line_start = help_text.rfind("\n", 0, m.start()) + 1
         line_end = help_text.find("\n", m.end())
         line = help_text[line_start: line_end if line_end > 0 else len(help_text)]
-        if not re.search(r"output|write|save|out\s*file|\bto\b", line, re.I):
+        # A flag that documents a file-valued argument is output-bearing by
+        # its own manual, not only by keyword. The gate requires a keyword
+        # only when the flag documents no file-ish value at all.
+        if not kind and not re.search(r"output|write|save|out\s*file|\bto\b", line, re.I):
             continue
         if kind or re.search(r"output|outfile", line, re.I):
             if flag not in flags:
@@ -412,3 +415,32 @@ def register(acquired: Mapping[str, Any], capability_id: str, *,
     tmp.replace(path)
     return {"registered": True, "capability_id": capability_id,
             "count": len(caps)}
+
+def _flag_kind_from_help(flag: str, help_text: str) -> str | None:
+    """The kind of value the manual says the flag carries (FILE / ARCHIVE /
+    OUTPUT / OUTFILE / PATH / TARGET), or None.
+
+    The manual is the authority for the argument family; this only extracts
+    it back out.
+    """
+    for m in re.finditer(
+            r"(-{1,2}[A-Za-z0-9][\w-]*)\s*(?:[= ]\s*)?(FILE|OUTPUT|OUTFILE|PATH|TARGET|ARCHIVE)",
+            help_text):
+        if m.group(1) == flag:
+            return m.group(2)
+    return None
+
+
+def _flag_takes_file_arg(flag: str, help_text: str) -> bool:
+    """True when the program's own manual gives the flag a file-ish argument.
+
+    The manual is the authority: '--file=ARCHIVE         use archive file or
+    device ARCHIVE' says the --file flag carries an ARCHIVE value. Exactly the
+    family of value the goal can fill in.
+    """
+    for m in re.finditer(
+            r"(-{1,2}[A-Za-z0-9][\w-]*)\s*(?:[= ]\s*)?(FILE|OUTPUT|OUTFILE|PATH|TARGET|ARCHIVE)",
+            help_text):
+        if m.group(1) == flag:
+            return True
+    return False

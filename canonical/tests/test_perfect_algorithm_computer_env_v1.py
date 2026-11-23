@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import gzip
 import json
+import shutil
 import tempfile
 import time
 import unittest
@@ -102,6 +103,79 @@ class RealComputerAdapterTests(unittest.TestCase):
                 e.close()
             except Exception:
                 pass
+
+
+class ArchiveGoalTests(unittest.TestCase):
+    """The archive goal's predicate: the claim is 'the named archive really
+    contains the source, byte for byte'. A file is not its format."""
+
+    def test_predicate_requires_the_source_inside_as_bytes(self):
+        import io
+        import tarfile
+
+        from canonical.swe_kernel.perfect_algorithm_computer_env_v1 import (
+            goal_predicate_for,
+        )
+
+        seed = {"data.txt": b"alpha\nbeta\ngamma\n"}
+        src = seed["data.txt"]
+
+        def _archive(mode, entries, uncompressed=None):
+            # build a real archive on the CPU; the predicate's job is to
+            # judge exactly this
+            import tempfile, pathlib
+            root = pathlib.Path(tempfile.mkdtemp(prefix="pa-archive-test-"))
+            tgt = root / "data.tar.gz"
+            with tarfile.open(tgt, mode) as tf:
+                for name, data in entries:
+                    info = tarfile.TarInfo(name)
+                    info.size = len(data)
+                    tf.addfile(info, io.BytesIO(data))
+            return root, tgt
+
+        # good: gz archive containing data.txt with the seed bytes
+        root, good = _archive("w:gz", [("data.txt", src)])
+        is_goal = goal_predicate_for(seed, "data.tar.gz")
+        self.assertTrue(is_goal({"data.txt": src, "data.tar.gz": good.read_bytes()}),
+                        "the archive holding the source byte for byte is the goal")
+        self.assertFalse(is_goal({"data.txt": src}), "no archive yet is not the goal")
+
+        # wrong: plain (uncompressed) tar named .tar.gz -- not a gzip archive
+        root, plain = _archive("w", [("data.txt", src)])
+        self.assertFalse(is_goal({"data.txt": src, "data.tar.gz": plain.read_bytes()}),
+                         "a plain tar named data.tar.gz is not a tar.gz")
+
+        # wrong: gz archive holding different bytes
+        root, bad_bytes = _archive("w:gz", [("data.txt", b"WRONG\n")])
+        self.assertFalse(is_goal({"data.txt": src, "data.tar.gz": bad_bytes.read_bytes()}),
+                         "an archive holding different text is not the goal")
+
+        # wrong: gz archive holding the source under a different name
+        root, wrong_name = _archive("w:gz", [("other.txt", src)])
+        self.assertFalse(is_goal({"data.txt": src, "data.tar.gz": wrong_name.read_bytes()}),
+                         "an archive holding the source under another name is not the goal")
+
+    def test_drive_reaches_the_goal_and_recipe_asserts_the_real_shape(self):
+        if shutil.which("tar") is None:
+            self.skipTest("tar not available")
+        seed = {"data.txt": b"alpha\nbeta\ngamma\ndelta\n"}
+        env, meta = build_env("archive data.txt into data.tar.gz",
+                              seed_contents=seed, limit=8)
+        self.assertIn("tar", meta["programs"])
+        tree_before = env.tree()
+        self.assertIn("run_tar", env.action_names())
+        ok = env.act("run_tar")
+        self.assertTrue(ok, "run_tar did not create the target")
+        target_bytes = env.tree().get("data.tar.gz") or b""
+        self.assertTrue(target_bytes, "the archive was not written")
+        self.assertTrue(meta["is_goal"](env.state()),
+                        "the archive predicate did not hold after run_tar")
+        # the recipe is the honest record of the exact argv that worked
+        recipe = env.wrapped.recipes.get("run_tar")
+        self.assertIsNotNone(recipe, "the recipe was not recorded")
+        self.assertIn("--file", recipe.get("argv") or [],
+                      "the recipe argv must name the archive file")
+        env.close()
 
 
 if __name__ == "__main__":

@@ -340,24 +340,46 @@ def help_text(prog: str, timeout: float = 3.0) -> str:
     return text
 
 
-def output_flags(prog: str, limit: int = 6) -> list[str]:
+def output_flags(prog: str, limit: int = 12) -> list[str]:
     """Flags the program's own help suggests for naming an output.
 
     Reused from the brain rather than rewritten: cli_capability_acquisition
     already reads help for exactly this. They are hypotheses, not facts --
     the help for cp offers --version, which is not how you name an output --
     so every one is tried and only the one that works is believed.
+
+    Ranked by what the manual says the flag is FOR: an =ARCHIVE flag (the
+    one that names the archive itself) comes first, then flags whose own
+    description carries an output-ish word, then file-argument flags.
+    Every one is still tried; only the one that works is believed.
     """
     try:
         from canonical.runtime.cli_capability_acquisition_v1 import (
-            _candidate_output_flags)
+            _candidate_output_flags, _flag_kind_from_help)
     except Exception:  # noqa: BLE001
         return []
     text = help_text(prog)
     if not text:
         return []
+
+    def _rank(flag: str) -> int:
+        kind = _flag_kind_from_help(flag, text)
+        if kind == "ARCHIVE":
+            return 0
+        # a flag whose own description says the output goes to a file, to
+        # stdout, or is written out -- the help is the authority for what
+        # the flag is FOR, not for the argument family it takes
+        desc = dict(flag_descriptions(prog)).get(flag, "")
+        if re.search(r"stdout|output|write|save|to[- ](?:a[- ])?file|out", desc, re.I):
+            return 1
+        if kind in ("FILE", "PATH", "TARGET", "OUTPUT", "OUTFILE"):
+            return 2
+        return 3
+
     try:
-        return list(_candidate_output_flags(text))[:limit]
+        flags = list(_candidate_output_flags(text))
+        flags.sort(key=_rank)
+        return flags[:limit]
     except Exception:  # noqa: BLE001
         return []
 
@@ -537,7 +559,7 @@ def invocation_shapes(prog: str, src: str, target: str,
         [prog, src],
         [prog, src, "-k"],
     ]
-    for flag in output_flags(prog):
+    for flag in output_flags(prog)[:4]:
         for shape in ([prog, flag, target, src], [prog, flag, src]):
             if shape not in shapes:
                 shapes.append(shape)
@@ -565,13 +587,33 @@ def invocation_shapes(prog: str, src: str, target: str,
     # The shapes that USE the goal's value go first. Left in their usual
     # place, 'convert in.png' wins by dumping the image to stdout into
     # out.png -- a file that exists, is called .png, and was never resized.
-    return extra + shapes if values else shapes + extra
+    # A program that wants the output named AND a mode flag that says what
+    # to do (create an archive, with an auto-compress filter, and name the
+    # archive) is called with the combination -- the manual for the flag that
+    # takes the archive file says how to pass it, and the goal flags say what
+    # to do. Only the rank-0 (target-carrying) output flag is combinable here;
+    # the rest already appear as plain output-flag shapes.
+    goal_flags = flags_for_goal(prog, goal)
+    oflags = output_flags(prog)[:2]
+    subsets: list[list[str]] = [[g] for g in goal_flags]
+    for i in range(len(goal_flags)):
+        for j in range(i + 1, len(goal_flags)):
+            subsets.append([goal_flags[i], goal_flags[j]])
+    combined: list[list[str]] = []
+    for oflag in oflags:
+        for subset in subsets:
+            shape = [prog] + subset + [oflag, target, src]
+            if shape not in combined:
+                combined.append(shape)
+    return combined + (extra + shapes if values else shapes + extra)
 
 
 def program_actions(env: ComputerEnv,
                     programs: Sequence[str] | None = None,
                     target: str = "out.bin",
-                    goal: str | None = None) -> list[tuple[str, Callable[[ComputerEnv], bool]]]:
+                    goal: str | None = None,
+                    verify: Callable[[dict], bool] | None = None
+                    ) -> list[tuple[str, Callable[[ComputerEnv], bool]]]:
     """One action per program on this machine: run it and keep what it wrote.
 
     The learner is not told which program compresses. It is given all of them
@@ -581,6 +623,30 @@ def program_actions(env: ComputerEnv,
     src = next(iter(env.seed), "input.txt")
 
     def make(prog: str) -> Callable[[ComputerEnv], bool]:
+        def _tree() -> dict:
+            out: dict[str, bytes] = {}
+            for path in sorted(env.root.rglob("*")):
+                if path.is_file():
+                    try:
+                        out[path.relative_to(env.root).as_posix()] = path.read_bytes()
+                    except OSError:
+                        out[path.relative_to(env.root).as_posix()] = b""
+            return out
+
+        def _ok() -> bool:
+            # Success is not merely the file the goal named appearing. A
+            # plain tar named data.tar.gz, or a chatter file called out.tar.gz,
+            # is not an archive whatever the name says -- the predicate the
+            # goal relies on decides.
+            if (env.root / target).is_file() is False:
+                return False
+            if verify is None:
+                return True
+            try:
+                return bool(verify(_tree()))
+            except Exception:  # noqa: BLE001 - a broken verifier is a failure
+                return False
+
         def run(env: ComputerEnv) -> bool:
             # Success is the file the goal named actually appearing. Counting
             # ANY new file as success let 'gzip out.gz input.txt' pass by
@@ -630,7 +696,7 @@ def program_actions(env: ComputerEnv,
                 captured = bool(proc.stdout) and not made(before)
                 if captured:
                     (env.root / target).write_bytes(proc.stdout)
-                if made(before):
+                if made(before) and _ok():
                     # Learning that stays in the sandbox is a party trick.
                     # The exact argv that worked is the difference between
                     # "gzip can do this" and a command that can be run on a

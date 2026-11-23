@@ -89,8 +89,21 @@ class RealComputerEnv:
         target = target_name
         # one action per goal-narrowed program; same construction the
         # environment's own search uses (argv + kept-or-discarded verification)
+        is_goal = goal_predicate_for(self._seed, target)
+
+        # the action must satisfy the goal's own claim -- an archive with the
+        # right name is not an archive unless its bytes verify. the same
+        # predicate the scan applies as the success condition is the one the
+        # action holds itself to.
+        def _verify(tree):
+            try:
+                return bool(is_goal(tree))
+            except Exception:  # noqa: BLE001
+                return False
+
         self._env.register(program_actions(self._env, list(programs),
-                                           target=target, goal=goal))
+                                           target=target, goal=goal,
+                                           verify=_verify))
         self._env.reset()
 
     # -- the computer it wraps --------------------------------------------- #
@@ -171,18 +184,44 @@ def tree_of(env) -> dict[str, bytes]:
 def goal_predicate_for(seed: Mapping[str, bytes], target_name: str) -> Callable[[tuple], bool]:
     """A predicate over the OBSERVED file-tree state.
 
-    For a .gz goal it verifies the exact claim the scan makes: the target
-    exists and decompresses to the source the goal named. For a plain file
-    goal it requires the target to exist and be non-empty.
+    Each format is checked exactly as the goal claims it:
+      - .tar.gz / .tgz: the target is a real tar archive that contains the
+        source file, and the contained file's bytes are the source's bytes.
+      - .gz: the target decompresses to the source the goal named.
+      - anything else (plain file): the target exists and is non-empty.
     """
+    import io as _io
+    import tarfile as _tarfile
+
     src_names = sorted(seed)
     src_name = src_names[0] if src_names else None
+
+    def _tar_gz_members(tgt: bytes) -> dict[str, bytes]:
+        out: dict[str, bytes] = {}
+        try:
+            with _tarfile.open(fileobj=_io.BytesIO(tgt), mode="r:gz") as tf:
+                for member in tf.getmembers():
+                    if member.isfile():
+                        fobj = tf.extractfile(member)
+                        if fobj is not None:
+                            out[member.name] = fobj.read()
+        except Exception:
+            return {}
+        return out
 
     def is_goal(state) -> bool:
         files = dict(state or ())
         src = files.get(src_name)
         tgt = files.get(target_name, b"")
         if src is None or not tgt:
+            return False
+        if target_name.endswith((".tar.gz", ".tgz")):
+            members = _tar_gz_members(tgt)
+            # the archive is the claim: the source file is IN it, unchanged
+            for m_name, m_bytes in members.items():
+                path_part = m_name.rstrip("/").rsplit("/", 1)[-1]
+                if path_part == src_name and m_bytes == src:
+                    return True
             return False
         if target_name.endswith(".gz"):
             try:
