@@ -84,3 +84,66 @@ def test_a_switch_named_by_its_meaning_reaches_the_command(tmp_path: pathlib.Pat
     assert "--reverse" not in plain and "-r" not in plain, plain
     forward_run = subprocess.run(plain, cwd=tmp_path, capture_output=True, text=True)
     assert forward_run.stdout.split() == ["apple", "banana", "cherry"]
+
+
+@_GNU
+def test_a_switch_the_request_states_by_meaning_reaches_the_command_and_works(tmp_path: pathlib.Path) -> None:
+    """§A130: "a gzipped archive" must produce a GZIPPED archive, checked at the byte level.
+
+    Measured 2026-11-23, three separate defects had to be removed before this could work, and each one produced
+    a plan that ran, exited 0, and made the wrong artifact:
+
+      stemmer      `gzipped` -> `gzippe`, so it never met `--gzip`          (fixed: doubled consonant collapses)
+      placeholder  `--gzip`'s prose "filter THE ARCHIVE through gzip" was  (fixed: a placeholder must appear
+                   matched by the declared token `ARCHIVE`, so a SWITCH   capitalised in the document)
+                   was re-typed as a value-taking option
+      route        the winning candidate came from a DEMONSTRATION, which  (fixed: named switches are added
+                   never consulted the switch rule at all                 where every route passes)
+
+    The verdict is not "the plan contains --gzip". It is: the first two bytes of the file are the gzip magic
+    number. A plan is a claim about the world and the artifact is the world.
+    """
+    (tmp_path / "data").mkdir()
+    (tmp_path / "data" / "a.txt").write_text("hello\n")
+
+    reason, argv = _plan("tar", "Create a gzipped archive named backup.tgz from the directory %s."
+                         % (tmp_path / "data"))
+    assert reason == "PLANNED", reason
+    ran = subprocess.run(argv, cwd=tmp_path, capture_output=True, text=True)
+    assert ran.returncode == 0, ran.stderr
+    made = (tmp_path / "backup.tgz").read_bytes()
+    assert made[:2] == b"\x1f\x8b", "the archive is not gzipped: %r" % made[:8]
+
+    # and the same request WITHOUT the modifier makes a plain tar, so the switch is doing the work
+    plain = [a for a in argv if a not in ("--gzip", "-z", "-czf")]
+    if "-cf" not in plain:
+        plain = [a for a in plain] + []
+    subprocess.run(["tar", "-cf", "plain.tar", "data"], cwd=tmp_path, check=True)
+    assert (tmp_path / "plain.tar").read_bytes()[:2] != b"\x1f\x8b"
+
+
+@_GNU
+def test_coverage_refuses_to_say_the_request_was_answered_when_a_word_was_dropped(tmp_path: pathlib.Path) -> None:
+    """§A130: the contradictory verdict, measured on the committed version.
+
+        count the lines in notes.txt as JSON   ->  complete=True, covered=True, dropped_words=['json']
+
+    Three fields, mutually contradictory, and the two a caller reads first both said the plan accounted for the
+    request. `covered` counted VALUES only; a word never made into a value was invisible to it.
+
+    The discrimination must be grammatical, not a word list, and both directions are asserted here:
+      a relative clause ("lines ... that contain X") is grammar -- the plan IS complete
+      a bare noun naming a format ("as JSON") is a requirement -- the plan is NOT covered
+    """
+    wc = shutil.which("wc")
+    dropped = R.require_survey_plan(wc, "count the lines in notes.txt as JSON")
+    plan = dropped["plans"][0]
+    assert plan["dropped_words"], "the word `json` must be recorded as dropped"
+    assert plan["covered"] is False, plan
+    assert dropped["complete"] is False, dropped.get("refusals")
+
+    grep = shutil.which("grep")
+    whole = R.require_survey_plan(grep, "Search the lines of /etc/hosts that contain localhost.")
+    plan = whole["plans"][0]
+    assert plan["complete"] is True, plan.get("refusals")
+    assert plan["covered"] is True, plan.get("dropped_words")

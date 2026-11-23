@@ -7412,3 +7412,77 @@ The third line is the next bottleneck, and it is the same one §A119, §A125 and
 organ:
 
 > **A verdict must account for every part of the request, or say which part it could not.**
+
+## §A130 — the verdict that contradicted itself
+
+### The defect, measured on the committed version
+
+```python
+count the lines in notes.txt as JSON
+    complete           True
+    covered            True
+    dropped_words      ['json']
+```
+
+Three fields, mutually contradictory, and **the two a caller reads first both said the plan accounted for the
+request.** `covered` counted *values* only. A word that was never made into a value — a format, a column, a
+modifier — was invisible to it.
+
+This is §A125 and §A126 one organ further on:
+
+> **A recorded fact that nothing honours is not a fact the caller has.**
+
+### Six defects on the road to one working command
+
+The trigger was `Create a gzipped archive named backup.tgz from the directory /tmp/data.` Each defect below
+produced a plan that **ran, exited 0, and made the wrong artifact** — the class of failure no gate catches.
+
+| defect | evidence |
+|---|---|
+| `gzipped` stemmed to `gzippe` | so it never met `tar`'s `--gzip` |
+| `named`→`name` rule applied to `gzipped` | `word[-2]=='e'` fires for `gzipp|ed` too |
+| a placeholder matched plain prose | `--gzip`'s words *"filter **the archive** through gzip"* matched the token `ARCHIVE`, re-typing a **switch** as a value-taking option |
+| the act rule matched 35 switches | `acts_in` returns `['create','archive']` for that sentence — `gzip` is not a verb, so every option mentioning "archive" matched |
+| the winning route was a demonstration | `tar -cf archive.tar foo bar` never consulted the switch rule |
+| the operation's own name matched | `--create` matched the word "create"; with `--gzip` that made two matches, and the rule then returned nothing |
+
+### The rulings that resolved them
+
+1. **A placeholder is a capitalised word.** The document prints `--file=ARCHIVE` in capitals and *"the archive"*
+   in prose. Only a capitalised occurrence can be a declaration.
+2. **The flag's own name states the act.** `gzip` is in `--gzip`, not in its description. For `tar`, the name is
+   the *only* place it appears.
+3. **The operation's word is not a modifier.** `sort ... in reverse order` → operation `sort`, modifier
+   `reverse`. The first act in sentence order is what to do; the rest qualify it.
+4. **A rule that returns 35 answers is not a rule.** When more than one switch matches, return none — a choice
+   made by guessing is refused, not taken.
+5. **A mechanism reachable from one route and not another is the §A123 defect.** The switch is now added where
+   *every* route passes, before `complete` is decided.
+6. **A verb is grammar; a bare noun is a requirement.** This is the line that separates a false alarm from a
+   true one, and both directions are now asserted:
+
+       "the lines of /etc/hosts that contain localhost"   complete ✓ covered ✓   (relative clause = grammar)
+       "count the lines in notes.txt as JSON"            covered ✗              (bare noun = requirement)
+
+   A relative pronoun (`that`/`which`/`who`) introduces a clause describing an object already carried. No word
+   list, no fact about either program — the sentence prints its own structure.
+
+### Result, scored against execution
+
+    tar "Create a gzipped archive ..."  ->  tar --gzip -cf backup.tgz /tmp/data
+        first two bytes of the artifact: 1f 8b      (gzip magic)
+        the same request without the modifier: da   (plain tar)
+
+Not "the plan contains `--gzip`". **The file is actually gzipped**, and the unmodified request is not.
+
+**144 passed** across nine suites. Both fixes mutation-checked: reverting `covered` to values-only fails the
+coverage test; reverting the stemmer fails the gzip test.
+
+### What is still not true
+
+    VERIFIED   a modifier named by meaning reaches the command, proved at the byte level
+    VERIFIED   coverage can no longer contradict dropped_words
+    VERIFIED   grammar vs requirement is decided by sentence structure, asserted in both directions
+    NOT DONE   the modifier rule is a name match. A modifier whose word appears in NO flag name is still
+               dropped, and now reported as dropped rather than silently -- reported, not solved
+    NOT DONE   no GUI, no browser, no OSWorld task: still a command-line organ

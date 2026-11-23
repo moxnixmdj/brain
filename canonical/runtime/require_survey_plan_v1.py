@@ -150,8 +150,23 @@ def words_of(text: str) -> set[str]:
                 # original's final `e` is the wrong stem -- `named`/`name`, `sized`/`size`,
                 # `moved`/`move`, `timed`/`time`. One rule, no word list: an `e` before the
                 # suffix is part of the stem, not part of the suffix.
-                if suffix == "ed" and len(word) >= 4 and word[-2] == "e":
+                # `named` -> `name`: the `e` before the suffix belongs to the stem. BUT `gzipped` also has an
+                # `e` before its suffix, and there the `e` belongs to the DOUBLED consonant, not to a stem --
+                # `gzipp` + `ed`. Measured 2026-11-23: applying the `named` rule to `gzipped` returned
+                # `gzippe`, so a request for "a gzipped archive" never met tar's own `--gzip`, the `-z` switch
+                # was dropped, and the plan was complete-and-wrong. The two cases are told apart by the letter
+                # BEFORE the `e`: doubled means the `e` is not the stem's.
+                doubled = len(word) >= 5 and word[-3] == word[-4] and word[-3] not in "aeiou"
+                if suffix == "ed" and len(word) >= 4 and word[-2] == "e" and not doubled:
                     stem = word[:-1]
+                # §A130: A DOUBLED FINAL CONSONANT BEFORE THE SUFFIX IS ONE LETTER, NOT TWO. Measured 2026-11-23
+                # on real `tar`: the request said "a gzipped archive" and tar's own page says
+                # `-z, --gzip  filter the archive through gzip`. The stemmer produced `gzippe` from `gzipped`,
+                # so the request word never met the flag that answers it, the switch `-z` was dropped, and the
+                # resulting archive was not gzipped at all. This is a spelling rule, not a word list:
+                # `stopped`->`stop`, `planned`->`plan`, `gzipped`->`gzip` are the same transformation.
+                if len(stem) >= 3 and stem[-1] == stem[-2] and stem[-1] not in "aeiou":
+                    stem = stem[:-1]
                 word = stem
                 break
         out.add(word)
@@ -569,6 +584,16 @@ def _with_usage_slots(options: list[dict[str, Any]],
             continue
         words = str(option.get("words") or "").upper()
         for token in sorted(claimed):
+            # §A130: A PLACEHOLDER IS A CAPITALISED WORD THAT IS NOT ORDINARY PROSE. Measured 2026-11-23 on real
+            # `tar`: `-z, --gzip` is described "filter the archive through gzip", and the word `archive` -- plain
+            # English, lowercase in the document -- matched the declared placeholder `ARCHIVE` from
+            # `--file=ARCHIVE`. So a SWITCH was re-typed as a value-taking option, the `-z` that "a gzipped
+            # archive" needs was never bound, and the plan produced an UNCOMPRESSED archive while reporting
+            # complete. The document itself distinguishes the two: a placeholder is printed in capitals, prose is
+            # not. Only a capitalised occurrence can be a declaration.
+            printed = str(option.get("words") or "")
+            if not re.search(r"(?<![A-Za-z])" + re.escape(token) + r"(?![A-Za-z])", printed):
+                continue
             if token and re.search(r"(?<![A-Z])" + re.escape(token) + r"(?![A-Z])", words):
                 option.update(meta=token, takes_value=True, meta_from="usage-word")
                 break
@@ -3196,6 +3221,38 @@ def _flags_the_request_names_by_meaning(requirement: Mapping[str, Any],
     carried_words = set()
     for value in carried:
         carried_words |= set(words_of(value))
+    # RULE 1 IS THE NAME, AND IT IS THE SHARP ONE. Measured 2026-11-23 on real `tar`: the request says "a
+    # gzipped archive" and tar offers `-z, --gzip  filter the archive through gzip`. `gzip` is not a verb in the
+    # act class -- it is the tool's name -- so an act-based match saw only "archive" and found THIRTY-FIVE
+    # switches, every one of which mentions an archive. A rule that returns 35 answers is not a rule. The word
+    # `gzipped` stems to `gzip` and the flag is `--gzip`: one request word, one switch, no choice to guess.
+    # AND THE OPERATION'S OWN WORD IS NOT A SWITCH. Measured the same minute: "Create a gzipped archive ..."
+    # names `--create` (the operation, already carried by the plan's own act) and `--gzip` (a modifier). Only the
+    # modifier can be a switch this rule adds; including the operation's word made the rule see two matches and
+    # therefore guess -- which is the failure mode it exists to avoid. The first act word is removed here for the
+    # same reason it was removed from the act rule.
+    # THE OPERATION'S OWN WORD, TAKEN IN THE REQUEST'S ORDER. Iterating `words_of` (a SET) picked an arbitrary
+    # act: measured 2026-11-23, "List the contents of the archive ..." sometimes excluded `list` and sometimes
+    # `archive`, so `--list` was added to a plan that already carried it and a correct command was rewritten.
+    # The operation is the FIRST act word as the sentence prints them, which is what `acts_in` is for.
+    ordered_acts = acts_in(instruction)
+    operation_words: set[str] = {ordered_acts[0][0]} if ordered_acts else set()
+    instruction_words = set(words_of(instruction)) - operation_words
+    by_name: list[str] = []
+    for node in every_page(tree):
+        for option in node.get("options") or []:
+            flag = str(option.get("flag") or "")
+            if not flag or option.get("meta"):
+                continue
+            names = {str(a).lstrip("-").lower() for a in [flag] + list(option.get("aliases") or [])}
+            if len(names & instruction_words) == 1:
+                by_name.append(flag)
+    if len(by_name) == 1:
+        return by_name
+    if len(by_name) > 1:
+        # several switches are named; that is a choice, and a choice made by guessing is what this project
+        # refuses. The callers see the ambiguity rather than a confident wrong answer.
+        return []
     found: list[str] = []
     for node in every_page(tree):
         for option in node.get("options") or []:
@@ -3204,13 +3261,20 @@ def _flags_the_request_names_by_meaning(requirement: Mapping[str, Any],
                 # an option that takes a value is a place for a value, decided elsewhere; this rule is for
                 # switches, which is what a bare modifier can be
                 continue
+            # THE FLAG'S OWN NAME STATES THE ACT, and for `--gzip` it is the ONLY place that does: tar's
+            # description of it says "filter the archive through gzip", whose act words are `filter` and
+            # `archive` -- `gzip` appears only as the flag's name. Measured 2026-11-23: relying on `acts` alone
+            # meant "a gzipped archive" could never match `-z`, and the plan made an uncompressed archive.
             states = {str(a[0]) for a in option.get("acts") or []}
-            if not states:
-                states = {a[0] for a in acts_in(str(option.get("words") or ""))}
+            states |= {a[0] for a in acts_in(str(option.get("words") or ""))}
+            states |= {a[0] for a in acts_in(flag)}
             shared = (states & requested) - carried_words
             if shared and flag not in found:
                 found.append(flag)
-    return found
+    # RULE 2 IS THE ACT, AND IT MAY NOT GUESS. When several switches state the request's modifier, the
+    # evidence does not choose between them -- so it returns nothing rather than the first, which would be a
+    # confident wrong answer of exactly the kind §A129 exists to remove.
+    return found if len(found) == 1 else []
 
 
 def plan(requirement: Mapping[str, Any], tree: Mapping[str, Any],
@@ -3573,13 +3637,70 @@ def plan(requirement: Mapping[str, Any], tree: Mapping[str, Any],
                                                   node.get("options") or [])]))
     documented |= {w for chain in [enum_choices(o) for node in pages
                                    for o in node.get("options") or []] for w in chain}
+    # §A129/A130: A SWITCH THE REQUEST NAMED BY ITS MEANING, ADDED WHERE EVERY ROUTE PASSES. Measured
+    # 2026-11-23: the rule found `--gzip` correctly and the tarball was still uncompressed, because the winning
+    # candidate came from a DEMONSTRATION (`tar -cf archive.tar foo bar`) and that route never consulted the
+    # switch rule at all. A mechanism reachable from one route and not another is §A123's defect in a new organ:
+    # the entry point must not be able to skip it. So the named switches are added to every candidate that does
+    # not already carry them, before `complete` is decided.
+    named_now = _flags_the_request_names_by_meaning(requirement, tree)
+    if named_now:
+        for candidate in plans:
+            already = {str(item.get("option")) for item in candidate.get("bound") or []}
+            additions = [flag for flag in named_now if flag not in already]
+            if not additions:
+                continue
+            extra = [{"role": "switch", "option": flag, "value": flag, "means": "switch"}
+                     for flag in additions]
+            candidate["bound"] = list(candidate.get("bound") or []) + extra
+            # the switches sit with the other flags: after the tool and its subcommand prefix, before the
+            # positionals. `depth` is not stored on every candidate, so the prefix length is the same one the
+            # renderer used when the candidate was built.
+            head = 1 + len(prefix_of(len(nodes) - 1))
+            candidate["argv"] = (list(candidate["argv"][:head])
+                                 + [flag for flag in additions]
+                                 + list(candidate["argv"][head:]))
     placed_words: set[str] = set()
     for candidate in plans:
         for item in candidate.get("bound") or []:
             if item.get("value"):
                 placed_words |= set(words_of(str(item["value"])))
+    # §A130: THE INSTRUMENT IS NOT PART OF THE REQUEST. Measured 2026-11-23: `Using the meshctl tool,
+    # configure a canary deployment ...` dropped the word `tool` and so reported covered=False for a plan that
+    # carried every object the request named. `ACT_NOISE` -- the module's own closed list of instrument words --
+    # already exists and the dropped-word filter was not consulting it. A word that names the tool you are
+    # holding is not a requirement the tool must satisfy. Still a closed grammar class, not a fact about any
+    # program: `use`, `using`, `tool`, `documentation`, `provided` are how an instruction frames its instrument.
+    # §A130: A VERB IS GRAMMAR; A BARE NOUN IS A REQUIREMENT. Measured 2026-11-23, two requests that differ in
+    # exactly this way:
+    #   "Search the lines of /etc/hosts that contain localhost"   -> dropped ['contain'], plan grep localhost /etc/hosts
+    #   "count the lines in notes.txt as JSON"                    -> dropped ['json'],    plan wc notes.txt
+    # The first is complete: `contain` restates the operation grep performs, in a relative clause that governs an
+    # object already carried. The second is not: `json` names a format the command has no place for, and a caller
+    # who asks for JSON must not silently receive plain text. Telling them apart needs no word list and no fact
+    # about either program -- one is a VERB and the other is a NOUN, and the sentence already says which.
+    #
+    # The test for "is a verb here" is the sentence's own morphology: it is written with an -s, -ed or -ing form
+    # somewhere, or it is a known act. `contain` is not in the act class, which is why the earlier filter missed
+    # it; it is still a verb by its own spelling.
+    # A RELATIVE CLAUSE IS GRAMMAR. "the lines of /etc/hosts THAT CONTAIN localhost" -- a word introduced by
+    # `that`/`which`/`who` after an object already placed is describing that object, not asking the program for
+    # something new. It needs no morphology and no word list: the sentence prints the relative pronoun.
+    instruction_text = str(requirement.get("instruction") or "")
+    relative_words = set(re.findall(
+        r"\b(?:that|which|who)\s+([a-z][a-z-]*)\b", instruction_text, re.I))
+    relative_words = {w.lower() for w in relative_words}
+
+    def _is_verb_here(word: str) -> bool:
+        if act_of(word) is not None:
+            return True
+        if word.lower() in relative_words:
+            return True
+        return re.search(r"\b" + re.escape(word) + r"(s|ed|ing)\b", instruction_text, re.I) is not None
+
     dropped = sorted(w for w in requirement.get("unclaimed") or []
-                     if w not in placed_words and w not in documented and len(w) > 3)
+                     if w not in placed_words and w not in documented and len(w) > 3
+                     and w not in ACT_NOISE and not _is_verb_here(w))
     for candidate in plans:
         missing = [w for w in dropped if w not in words_of(" ".join(map(str, candidate["argv"])))]
         candidate["dropped_words"] = missing
@@ -3668,7 +3789,18 @@ def plan(requirement: Mapping[str, Any], tree: Mapping[str, Any],
         # incomplete, and 59 of 60 tasks reported incomplete including the ones that scored 0.9.
         # A reading is complete exactly when it satisfies every flag its own landing page marks
         # required: nothing more is asked of it, and nothing less will do.
+        # §A130: TWO QUESTIONS, TWO FIELDS. This line used to be `candidate["complete"] = not missing`,
+        # which OVERWROTE the earlier verdict ("no word of the request was dropped") with a different question
+        # ("every flag the page marks required is present"). Measured 2026-11-23: the candidate carried
+        # `dropped_words: ['json']` and `complete: True` at the same time -- the honest answer computed forty
+        # lines above was destroyed by this assignment, and the caller saw a plan that claimed to account for a
+        # request it had silently shortened. §A125/A126 one organ further on: a recorded fact that nothing
+        # honours is not a fact the caller has.
+        # The project's own definition, restored after an experiment proved it right: `complete` asks whether the
+        # command satisfies every flag its page marks REQUIRED. It is not a statement about the whole request --
+        # that is `covered`, and `covered` was the field that lied (see below).
         candidate["complete"] = not missing
+        candidate["satisfies_required_flags"] = candidate["complete"]
         # A second, independent statement, and it asks a different question. `complete` says the
         # command satisfies what its own page requires; this says every object the request named
         # actually reached the command line. Measured over the sixty: among candidates that are
@@ -3684,7 +3816,13 @@ def plan(requirement: Mapping[str, Any], tree: Mapping[str, Any],
         unplaced = [v for v in named if v not in written]
         candidate["values_named"] = len(named)
         candidate["values_unplaced"] = unplaced[:8]
-        candidate["covered"] = not unplaced
+        # §A130: COVERAGE MEANS THE WHOLE REQUEST, NOT ONLY ITS VALUES. Measured 2026-11-23 on the committed
+        # version: `count the lines in notes.txt as JSON` produced complete=True, covered=True AND
+        # dropped_words=['json'] at the same time. Three fields, mutually contradictory, and the two a caller
+        # reads first both said the plan accounted for the request. `unplaced` only ever counted VALUES; a word
+        # that was never made into a value -- a modifier, a format name, a column -- was invisible here.
+        # This is §A125/A126 one organ on: the record existed and nothing honoured it.
+        candidate["covered"] = not unplaced and not candidate.get("dropped_words")
         # THE PAGE'S OWN GRAMMAR SAYS WHETHER A BARE OPERAND IS LEGAL. `linear issue create [flags]`
         # declares no positional at all, so a bare operand after that prefix is not something the
         # command accepts -- it is a value that found no flag and was appended to the end of the
