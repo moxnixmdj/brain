@@ -269,3 +269,90 @@ def test_a_postcondition_is_not_read_as_a_precondition(store: pathlib.Path) -> N
                           "BASELINE_TEST_SUITE_FAILED_OR_EMPTY"):
         assert S.would_refuse("x", code=postcondition, store=store)["known"] is False, \
             "read a postcondition as an input requirement: %r" % (postcondition,)
+
+
+# ----------------------------------------------------------------------------------------------------
+# The other half: from a requirement to an act, derived and not tabulated.
+# ----------------------------------------------------------------------------------------------------
+
+def test_the_act_is_selected_from_what_exists_not_from_a_table() -> None:
+    """THE GAP §A91 NAMED. A `present` requirement says the offered value is not in the world; what IS in
+    the world is observable, so the act is selected rather than invented.
+
+    The case is the project's own, recorded in `knowledge_repair_v1`: `MODULE_NOT_FOUND:file_survey` was
+    fixed by passing `file_survey.py` instead of a bare name. Nothing here knows that program or that
+    language. The rule is that `file_survey` is a stem of `file_survey.py`, which is a fact about strings.
+    """
+    predicate = {"test": "is_present", "property": "present"}
+    world = ["file_survey.py", "archive_tarfile.py", "README.md", "tests", "__pycache__"]
+
+    derived = S.acts_for(predicate, "file_survey", world=world)
+    assert derived["acts"] == ["file_survey.py"], derived
+    assert derived["why"] == "SELECTED_FROM_WHAT_EXISTS"
+    assert "__pycache__" not in derived["acts"]
+
+    # the same rule, a world it has never been shown: CSV not Python, no change to the mechanism
+    other = S.acts_for(predicate, "orders", world=["orders.csv", "orders.json", "customers.csv"])
+    assert other["acts"] == ["orders.csv", "orders.json"], other
+
+
+def test_the_derivation_refuses_where_none_exists() -> None:
+    """Four of the five properties have no derivation from a requirement, and each says so.
+
+    `whole` is arithmetic, not selection: no world entry can turn 12.50 into a whole number. `unique` is
+    already satisfied, so the right act is NO ACT -- inventing one would be a change nobody asked for.
+    A guessed act costs a round trip and teaches a wrong rule, so the refusal is the cheaper answer.
+    """
+    assert S.acts_for({"test": "is_whole"}, "12.50")["acts"] == []
+    assert S.acts_for({"test": "is_whole"}, "12.50")["why"] == "NO_DERIVATION_FROM_A_REQUIREMENT_ALONE"
+
+    already = S.acts_for({"test": "is_absent"}, "top", world=["top"])
+    assert already["acts"] == []
+    assert already["why"] == "ALREADY_SATISFIED"
+
+    nothing = S.acts_for({"test": "is_present"}, "ghost", world=["a.py", "b.py"])
+    assert nothing["acts"] == []
+    assert nothing["why"] == "NOTHING_IN_THE_WORLD_CONTAINS_IT"
+
+
+def test_the_world_is_re_read_and_never_stored(tmp_path: pathlib.Path) -> None:
+    """A cached world is a stale world, and §macro_v1 records five times where that cost knowledge.
+
+    `observe_world` is a function of the directory at the moment it is called. Adding a file must change
+    the answer, with no cache to invalidate.
+    """
+    (tmp_path / "alpha.py").write_text("")
+    assert "alpha.py" in S.observe_world(tmp_path)
+    assert S.acts_for({"test": "is_present"}, "alpha", world=S.observe_world(tmp_path))["acts"] == ["alpha.py"]
+
+    (tmp_path / "alphabet.txt").write_text("")
+    now = S.acts_for({"test": "is_present"}, "alpha", world=S.observe_world(tmp_path))
+    assert "alphabet.txt" in now["acts"], "a file added after the first read was not seen"
+
+
+def test_it_derives_the_act_that_actually_fixed_a_real_capability(tmp_path: pathlib.Path) -> None:
+    """CLOSING THE LOOP ON §A87. `python.refactor.move_function.v1` cost SIX refusals and TWO wrong guesses
+    before it verified. One of those guesses was `MODULE_NOT_FOUND:file_survey`: the loop passed a bare
+    module name, and the capability wanted a path.
+
+    Here the environment, the refusal, and one rule produce `file_survey.py` -- the value that worked --
+    without naming the capability, without a per-capability table, and without knowing Python. The
+    derivation sees only: the refused value, the requirement it violates, and what exists nearby.
+    """
+    package = tmp_path / "pkg"
+    package.mkdir()
+    (package / "file_survey.py").write_text("def run(x):\n    return x\n")
+    (package / "archive_tarfile.py").write_text("def run(x):\n    return x\n")
+
+    store = tmp_path / "stated.json"
+    # the refusal the capability actually printed, wrapped by the exception that carried it
+    learned = S.learn("RuntimeError: MODULE_NOT_FOUND:file_survey",
+                      at="python.refactor.move_function.v1", store=store)
+    assert learned["learned"] is True
+
+    predicate = S.conditions(store)["module_not_found"]["predicate"]
+    derived = S.acts_for(predicate, "file_survey", world=S.observe_world(package))
+
+    assert derived["acts"] == ["file_survey.py"], derived
+    # and it is a HYPOTHESIS: the file it names is the one that exists, which is why it survived
+    assert (package / derived["acts"][0]).is_file()

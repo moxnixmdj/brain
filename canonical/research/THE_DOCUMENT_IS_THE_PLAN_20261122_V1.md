@@ -5016,3 +5016,68 @@ gap `knowledge_repair_v1` filled with a hand-written table.
 
 **Not claimed:** 24% is not a benchmark result. It is the fraction of this tree's refusal vocabulary the
 learner can speak to, measured against the tree it lives in.
+
+## §A92 — from "what must be true" to "what to try", derived on the project's own six-refusal case
+
+§A91 ended by naming the gap honestly: the learner knows a requirement, not the act that satisfies it, and
+`present` tells an agent *what* is missing without saying how to get it.
+
+### Why the obvious fix was rejected before it was written
+
+The obvious fix is a table: `MODULE_NOT_FOUND` -> "append .py". It is rejected for the same reason §A87
+rejected `:test_paths` — a table is the knowledge house in miniature, needs an entry per program, and goes
+stale. The project already has that table, in `knowledge_repair_v1`, hand-written, and it is exactly the
+part that does not generalise.
+
+### What can be derived instead
+
+A `present` requirement asserts that the offered value is not in the world. **What is in the world is
+observable.** So the act is not invented — it is *selected* from what exists, using the evidence the
+refusal already gave. No program is named, no language is known.
+
+The project's own worst case, recorded in `knowledge_repair_v1`, is the test:
+
+| | |
+|---|---|
+| refusal | `MODULE_NOT_FOUND:file_survey` |
+| what cost A87 two guesses | passing a bare name where a path was wanted |
+| world | `file_survey.py`, `archive_tarfile.py` |
+| **derived** | **`file_survey.py`** |
+| §A87's hand-written table gave | the same value, after a human wrote it |
+
+The derivation sees only the refused value, the requirement it violates, and what exists nearby. Same
+answer, no table, no capability named. `tests/test_stated_precondition_v1.py` asserts it.
+
+### Four of five properties refuse, and each says which refusal it is
+
+| property | derivation | why |
+|---|---|---|
+| `present` | try world entries whose name contains the refused value | selection over what exists |
+| `unique` | **no act** — `ALREADY_SATISFIED` | the requirement is already met; inventing an act is a change nobody asked for |
+| `whole` | `NO_DERIVATION_FROM_A_REQUIREMENT_ALONE` | arithmetic, not selection |
+| `inside` | same | the world does not say which root was meant |
+| `directory`/`file` | same | not decidable from a string |
+
+Refusing four of five is the honest ratio. A guessed act costs a round trip **and teaches a wrong rule**,
+which is the failure §A91 spent two tests removing.
+
+### The world is re-read, never stored
+
+`observe_world(root)` is a function of the directory at the moment it is called. A test adds a file after
+the first read and asserts the second read sees it. Caching a world is how `macro_v1` lost knowledge five
+times; this is the same rule applied one layer down.
+
+### What is verified and what is not
+
+**Verified:** the act for the project's real `MODULE_NOT_FOUND` case is *derived* and equals the value
+§A87 found by hand; the same mechanism works on CSV names it has never been shown; the four
+underivable properties refuse rather than guess; the world is never cached.
+
+**Not verified:** that a derived act *succeeds*. The derivation narrows; the environment decides. In
+`knowledge_repair_v1` the next refusal after `file_survey.py` was
+`NAME_COLLISION_TARGET_MODULE:archive_tarfile.py:run`, which is a different property (`unique`) and needs a
+different act — one this module answers with `ALREADY_SATISFIED`, which is right for a `unique` violation
+and wrong for a name *collision*. That contrast is the next bottleneck and it is stated rather than hidden.
+
+**Not claimed:** this is not a benchmark score. It is one derivation, checked against the one case in this
+repository where the correct answer is known from a verified run.

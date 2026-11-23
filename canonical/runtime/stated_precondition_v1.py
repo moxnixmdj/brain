@@ -358,3 +358,100 @@ def main(argv: Sequence[str] | None = None) -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
+
+# ----------------------------------------------------------------------------------------------------
+# THE OTHER HALF: from "what must be true" to "what to try".
+#
+# §A91 ended on the gap: the learner knows a requirement, not the act that satisfies it. There is no
+# table of acts here and there cannot be one -- a table is the knowledge house in miniature, and it would
+# need an entry per program, which is the patch this project keeps replacing.
+#
+# What can be DERIVED instead: a `present` requirement says the offered value is not in the world. The
+# candidates that ARE in the world are observable. So the act is not invented -- it is SELECTED from what
+# exists, by the evidence the refusal already gave. The project's own recorded case proves the derivation:
+#
+#     refused     MODULE_NOT_FOUND:file_survey
+#     world       file_survey.py, archive_tarfile.py, tests
+#     derived     file_survey.py          <- the value that actually made the capability verify (§A87)
+#
+# and the rule is not "append .py". It is: among the things that exist, choose those whose name CONTAINS
+# the refused value. `file_survey` is a stem of `file_survey.py`; that is a fact about strings, not about
+# Python, and it holds for `orders` -> `orders.csv`, `main` -> `main.go`, `config` -> `config.yaml`.
+#
+# The other four properties derive differently, and where no derivation exists this refuses:
+#
+#     present    the value is absent  -> try world entries that contain it
+#     unique     the value is taken   -> the requirement is ALREADY MET; no act needed
+#     inside     the value escaped    -> no derivation: the world does not say which root was meant
+#     whole      the value is not an integer -> no derivation: arithmetic, not selection
+#     directory  the value is not a dir      -> no derivation from a string alone
+#
+# "No derivation" is an answer, not a gap. It says the act must come from somewhere else -- the program's
+# documentation, or a person -- and saying so is cheaper and safer than guessing.
+# ----------------------------------------------------------------------------------------------------
+
+#: Directories that are never candidates: a fix that offers `__pycache__` is worse than no fix.
+_NOISE = frozenset({"__pycache__", ".git", ".venv", "node_modules", ".mypy_cache", ".pytest_cache"})
+
+
+def observe_world(root: str | pathlib.Path, *, limit: int = 4000) -> list[str]:
+    """What exists here, as names. This is the only input the derivation needs.
+
+    Names, not facts: a `present` requirement is about whether something exists, and every candidate is
+    checked by the environment itself on the next call. The list is not knowledge and is never stored --
+    caching a world is how this project got burned (§macro_v1's fifth sighting). It is re-read each time.
+    """
+    base = pathlib.Path(root)
+    found: list[str] = []
+    if not base.exists():
+        return found
+    try:
+        for path in base.rglob("*"):
+            if len(found) >= limit:
+                break
+            if any(part in _NOISE for part in path.parts):
+                continue
+            found.append(path.name)
+    except OSError:
+        return found
+    return sorted(set(found))
+
+
+def acts_for(predicate: Mapping[str, Any], value: Any, *, world: Iterable[str] = (),
+             limit: int = 4) -> dict[str, Any]:
+    """What to try, derived from the requirement and what exists. Never from a table of programs.
+
+    Returns candidates ordered by the strength of their evidence: an exact match on a longer name first,
+    then the shortest, because a shorter name collides more often. Every candidate is a HYPOTHESIS the
+    environment decides -- nothing here claims one is right.
+    """
+    test = str(predicate.get("test") or "")
+    text = str(value)
+
+    if test == "is_absent":
+        # the requirement is already satisfied: the value is not in the universe, which is what `unique`
+        # demands. There is nothing to do, and inventing an act here would be a change nobody asked for.
+        return {"test": test, "value": text, "acts": [], "why": "ALREADY_SATISFIED"}
+
+    if test != "is_present":
+        # whole / inside / directory / file / object: no selection over the world can produce a fix.
+        # Saying so is the honest answer; a guess here costs a round trip and teaches the wrong rule.
+        return {"test": test, "value": text, "acts": [],
+                "why": "NO_DERIVATION_FROM_A_REQUIREMENT_ALONE"}
+
+    lowered = text.lower()
+    stem = lowered.rsplit("/", 1)[-1]
+    if stem.endswith(".py"):
+        stem = stem[: -len(".py")]
+    candidates = [w for w in world
+                  if stem and stem in str(w).lower() and str(w).lower() != lowered
+                  and str(w) not in _NOISE]
+    # prefer the entry that begins with the stem (a real sibling) over one that merely contains it
+    candidates.sort(key=lambda w: (0 if str(w).lower().startswith(stem) else 1, len(str(w)), str(w)))
+    seen: list[str] = []
+    for candidate in candidates:
+        if candidate not in seen:
+            seen.append(candidate)
+    return {"test": test, "value": text, "acts": seen[:limit],
+            "why": "SELECTED_FROM_WHAT_EXISTS" if seen else "NOTHING_IN_THE_WORLD_CONTAINS_IT"}
