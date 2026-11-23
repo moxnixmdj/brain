@@ -643,3 +643,25 @@ price, not a defect.)
 Archive-class warm INSTANT_RECALL evidence now covers: .tar.gz (§7), .zip (§10),
 .bz2 compressed target (§10), multi-file .tar.gz bundle (§13), .tar.bz2 (§20),
 and decompress (§12); the hash direction §11; the cross-process persistence chain §15/§18.
+
+## 21. Code-repair drive: one honest one-call flow (2026-11-23, measured)
+
+The code-repair specialist path existed as direct calls (§18 probe). It is now a
+one-call drive: `canonical/swe_kernel/code_repair_env_v1.py` —
+`drive_code_repair(goal, demo, victims, fresh_source, fresh_oracle, fresh_probes,
+fresh_test_files=None, memory_path_)` — that runs the full honest chain:
+
+  one demonstrated (broken, fixed) lesson -> gate verdict on held-out fresh
+  defects (REPAIRED + PRESERVED required) -> persist admitted rule -> replay on a
+  fresh never-taught defect -> materialize the repaired file -> run the real
+  failing test in a subprocess. One honest reward: if the fresh test passes, the
+  receipt's authority is the specialist path's own gate; otherwise the receipt
+  says so honestly.
+
+Tests: 3/3 (real-file ADMIT + replay + real-test PASS; harmful lesson refused;
+no-victims refused).
+
+Honest statement of the §14-§18 chain: file-transform goals are closed by the
+generic scan; code-repair-class goals are closed by the specialist twin with real
+files, fresh-defect admission, persistence, and real-test replay verification.
+The scan-level code-repair env remains unbuilt (§17's measured OPEN). §6 stays open.
