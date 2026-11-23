@@ -119,27 +119,46 @@ def unknown_verb_signature(program: str, *, world: pathlib.Path, env: Mapping[st
     """
     name = "qzxvbnmprobe"
     answer = _run(program, [name], world, env, timeout)
+    answer["_verb"] = name
     return {"probe": name, "exit": answer.get("exit"), "out": answer.get("out") or "",
             "err": answer.get("err") or ""}
 
 
-def _resembles(answer: Mapping[str, Any], signature: Mapping[str, Any]) -> bool:
+def _resembles(answer: Mapping[str, Any], signature: Mapping[str, Any],
+               argv: Sequence[str] = ()) -> bool:
     """Does this refusal look like the program's own no-such-verb answer?
 
-    Compared on the part that identifies the objection: the stderr text with any echoed verb name removed,
-    and the exit code. `UNKNOWN_VERB:add` and `UNKNOWN_VERB:qzxvbnmprobe` are the SAME objection with a
-    different subject, so the subject is stripped before comparing -- otherwise every unknown verb would
-    look novel.
+    NORMALISE EXACTLY ONE THING: THE ECHOED SUBJECT. `git bogusverb` says `git: 'bogusverb' is not a git
+    command`; the calibration probe said `git: 'qzxvbnmprobe' is not a git command`. Those are the SAME
+    objection with a different subject, so the subject is removed and the rest is compared exactly.
+
+    Nothing else is normalised, and that restriction is the whole correctness of this function. A first
+    version also collapsed every long word to `<w>`, which made `MISSING_ARGUMENT` and `INVALID_COMMAND`
+    identical -- so a real verb was reported unknown, and eight tests failed at once. Over-normalising is
+    not a weaker comparison, it is a different and wrong one: it erases precisely the distinction the
+    comparison exists to make.
+
+    Both the exit code and the remaining text must match. `git status` exits 128 with "not a git
+    repository" while `git bogusverb` exits 1 with "is not a git command" -- two independent signals
+    agreeing, which is why the discrimination survives even when one of them is uninformative.
     """
     if answer.get("exit") != signature.get("exit"):
         return False
 
     def shape(resp: Mapping[str, Any]) -> str:
         text = "%s %s" % (resp.get("err") or "", resp.get("out") or "")
-        text = text.replace(str(signature.get("probe") or ""), "<verb>")
-        return re.sub(r"[\w./-]{6,}", "<w>", text.strip())[:200]
+        # every token actually passed as an argument is a possible echoed subject
+        subjects = {str(signature.get("probe") or ""), str(resp.get("_verb") or "")}
+        subjects.update(str(a) for a in argv if str(a))
+        for subject in sorted(subjects, key=len, reverse=True):
+            if subject:
+                text = text.replace(subject, "\x00SUBJECT\x00")
+        return text.strip()
 
-    return bool(shape(answer)) and shape(answer) == shape(signature)
+    left, right = shape(answer), shape(signature)
+    # an empty answer cannot resemble anything: silence is not an objection, and a program that says
+    # nothing to everything must not have its silence match a signature by accident
+    return bool(left) and left == right
 
 
 def probe_verb(program: str, verb: str, *, world: pathlib.Path, env: Mapping[str, str],
@@ -156,6 +175,17 @@ def probe_verb(program: str, verb: str, *, world: pathlib.Path, env: Mapping[str
     for count in range(0, 4):
         argv = [verb] + ["probe%d" % index for index in range(count)]
         last = _run(program, argv, world, env, timeout)
+        last["_verb"] = verb
+        # THE MEMBERSHIP TEST COMES FIRST, ON EVERY PROBE, BEFORE ANY INTERPRETATION.
+        # Measured 2026-11-23 on `git`: `git status` says "not a git repository" and `git bogusverb` says
+        # "is not a git command" -- a PERFECT discrimination that the arity search never saw, because it
+        # exhausted the arity bound at count 3 and reported ARITY_NOT_FOUND_WITHIN_BOUND first. The
+        # differential was there the whole time; the loop looked in the wrong order.
+        if signature is not None and _resembles(last, signature, argv):
+            return {"verb": verb, "known": False,
+                    "why": "THE_PROGRAM_REPORTED_THIS_VERB_AS_UNKNOWN",
+                    "evidence": ("%s %s" % (last.get("err") or "", last.get("out") or ""))[:160],
+                    "arity": None, "missing_codes": said_more}
         if last.get("timed_out"):
             return {"verb": verb, "known": False, "why": "TIMED_OUT", "arity": None}
         if last.get("exit") == 0:
@@ -174,7 +204,7 @@ def probe_verb(program: str, verb: str, *, world: pathlib.Path, env: Mapping[str
             continue
         # THE DIFFERENTIAL READING: the program refused, and said something that is NOT its own
         # no-such-verb answer. That is a refusal of the SHAPE, which means the VERB exists.
-        if signature is not None and not _resembles(last, signature):
+        if signature is not None and not _resembles(last, signature, argv):
             said_more.append("REFUSED_THE_SHAPE_NOT_THE_VERB")
             continue
         # a refusal that names neither: the verb may be right, but the shape is wrong in a way this
@@ -182,7 +212,22 @@ def probe_verb(program: str, verb: str, *, world: pathlib.Path, env: Mapping[str
         return {"verb": verb, "known": None, "why": "REFUSAL_DID_NOT_LOCATE_ITS_SUBJECT",
                 "evidence": ("%s %s" % (last.get("err") or "", last.get("out") or ""))[:160],
                 "arity": None, "missing_codes": said_more}
-    return {"verb": verb, "known": None, "why": "ARITY_NOT_FOUND_WITHIN_BOUND",
+    # THE DISTINCTION THAT MATTERS AND THAT `known: None` ERASES.
+    # Measured 2026-11-23, the same program in two worlds. `git` in an empty temp dir: every verb refused
+    # with "not a git repository". `git` in a real repo: `status` and `log` accepted at arity 0. The
+    # program never changed; the WORLD did.
+    #
+    # So "not accepted" has two causes and they need different responses from a caller:
+    #   - the program said this is not my verb      -> do not try it again        (known: False)
+    #   - the program refused the SHAPE every time  -> the verb EXISTS, the world did not let it run
+    #                                                  (known: None, world_refused: True)
+    # Reporting the second as the first would send a caller looking for another verb when the answer is
+    # another world. That is OSWorld 2.0's implicit-state bottleneck stated as a return value.
+    world_refused = bool(said_more) and all(code == "REFUSED_THE_SHAPE_NOT_THE_VERB" for code in said_more)
+    return {"verb": verb, "known": None,
+            "why": "THE_VERB_EXISTS_BUT_THE_WORLD_REFUSED_IT" if world_refused
+                   else "ARITY_NOT_FOUND_WITHIN_BOUND",
+            "world_refused": world_refused,
             "missing_codes": said_more, "arity": None}
 
 
@@ -307,6 +352,7 @@ def probe_world(program: str, source: str | pathlib.Path, *,
             "mutating": [r["verb"] for r in known if r.get("changed_the_world")],
             "unknown": [r["verb"] for r in results if r.get("known") is False],
             "unreadable": [r["verb"] for r in results if r.get("known") is None],
+            "world_refused": [r["verb"] for r in results if r.get("world_refused")],
             "world_was_copied_to": str(world)}
 
 
@@ -352,6 +398,17 @@ def learn_interface(program: str, source: str | pathlib.Path, *,
                 result["detail"] = ("a verb is a bare word; flags were offered: %s"
                                     % result["skipped_candidates"][:6])
             result["what_would_help"] = "supply candidates=, or a program whose dispatch is readable text"
+        elif result.get("world_refused") and not result["verbs_learned"]:
+            # EVERY VERB EXISTS AND NONE COULD RUN. The program is not inscrutable -- it answered each
+            # verb distinctly -- so the suspect is the WORLD the probe was handed, and saying
+            # NO_DISCRIMINATION would blame the program for the caller's choice of world.
+            result["why"] = "THE_WORLD_DOES_NOT_FIT_THE_PROGRAM"
+            result["detail"] = ("these verbs exist and each was refused for the same reason: %s "
+                                "(rejected as unknown: %s)"
+                                % (result["world_refused"][:5], result["unknown"][:5]))
+            result["what_would_help"] = ("probe in a world this program is for -- measured 2026-11-23: the "
+                                         "same `git` gave NO_DISCRIMINATION in an empty temp dir and full "
+                                         "discrimination inside a real repo")
         else:
             result["why"] = "NO_DISCRIMINATION" if result["unreadable"] else "NO_VERB_ACCEPTED"
     return result

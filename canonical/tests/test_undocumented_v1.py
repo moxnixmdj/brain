@@ -400,3 +400,85 @@ def test_a_binary_end_to_end_says_nothing_was_ever_asked() -> None:
         assert "candidates" in learned["what_would_help"]
     finally:
         shutil.rmtree(world, ignore_errors=True)
+
+
+# ----------------------------------------------------------------------------------------------------
+# The world, not the program, is the limiting factor.
+# ----------------------------------------------------------------------------------------------------
+
+def _git_repo() -> str:
+    """A world that FITS `git`: initialised, and with one commit.
+
+    The commit matters and cost a failed test. `git log` in a repo with no commits fails with "your current
+    branch has no commits yet"; with one commit it succeeds at arity 0. A world that half-fits is its own
+    kind of wrong -- it produces a result that is neither the fitting world nor the refusing one, and a
+    fixture that only half-fits the program it tests is how a false verdict gets made.
+    """
+    import subprocess
+
+    world = tempfile.mkdtemp(prefix="gitworld_")
+    environment = {"GIT_AUTHOR_NAME": "p", "GIT_AUTHOR_EMAIL": "p@example.invalid",
+                   "GIT_COMMITTER_NAME": "p", "GIT_COMMITTER_EMAIL": "p@example.invalid",
+                   "HOME": world, "PATH": "/usr/bin:/bin"}
+    subprocess.run(["/usr/bin/git", "init", "-q", "."], cwd=world, capture_output=True, env=environment)
+    (pathlib.Path(world) / "a.txt").write_text("hello\n")
+    subprocess.run(["/usr/bin/git", "add", "a.txt"], cwd=world, capture_output=True, env=environment)
+    subprocess.run(["/usr/bin/git", "commit", "-q", "-m", "first"], cwd=world,
+                   capture_output=True, env=environment)
+    return world
+
+
+@pytest.mark.skipif(not pathlib.Path("/usr/bin/git").is_file(), reason="git not present")
+def test_the_same_program_learns_in_a_world_that_fits_and_refuses_to_blame_it_otherwise() -> None:
+    """THE FINDING OF THIS THREAD, AND THE ONE THAT WOULD HAVE BEEN A FALSE VERDICT.
+
+    I concluded "real binaries cannot be probed" from `git` in an empty temp dir, where every verb is
+    refused with "not a git repository". Measured in a real repo, the same `git` reports `status` and `log`
+    accepted at arity 0 and rejects `bogusverb`. The program never changed; the WORLD did.
+
+    That is OSWorld 2.0's implicit-state bottleneck as a return value: whether an action is possible depends
+    on state the action does not carry. Reporting the empty-dir result as `NO_DISCRIMINATION` would blame
+    the program for my choice of world, and send a caller hunting a different verb when the answer is a
+    different world.
+    """
+    empty = tempfile.mkdtemp(prefix="empty_")
+    repo = _git_repo()
+    try:
+        denied = U.learn_interface("/usr/bin/git", empty, candidates=["status", "log", "bogusverb"])
+        assert denied["enough_to_act"] is False
+        assert denied["why"] == "THE_WORLD_DOES_NOT_FIT_THE_PROGRAM", denied
+        assert set(denied["world_refused"]) == {"status", "log"}, denied["world_refused"]
+        assert denied["unknown"] == ["bogusverb"], denied["unknown"]
+
+        fitted = U.learn_interface("/usr/bin/git", repo, candidates=["status", "log", "bogusverb"])
+        assert fitted["arity"]["status"] == 0, fitted["probed"]
+        assert fitted["arity"]["log"] == 0, fitted["probed"]
+        assert fitted["unknown"] == ["bogusverb"], fitted["unknown"]
+        assert fitted["world_refused"] == [], fitted["world_refused"]
+    finally:
+        shutil.rmtree(empty, ignore_errors=True)
+        shutil.rmtree(repo, ignore_errors=True)
+
+
+def test_over_normalising_a_refusal_erases_the_distinction_it_exists_to_make() -> None:
+    """THE REGRESSION I INTRODUCED AND WHAT IT TAUGHT.
+
+    To make `UNKNOWN_VERB:a` match `UNKNOWN_VERB:b`, I first normalised every long word -- which made
+    `MISSING_ARGUMENT` and `INVALID_COMMAND` the same shape, so a real verb was read as unknown and eight
+    tests failed at once.
+
+    Exactly one thing may be normalised: the token that was passed as an argument (the echoed subject).
+    Everything else is compared literally. Over-normalising is not a weaker comparison, it is a different
+    and wrong one -- it erases precisely the distinction the comparison exists to draw.
+    """
+    signature = {"exit": 1, "probe": "qzxvbnmprobe", "err": "UNKNOWN_VERB:qzxvbnmprobe\n", "out": ""}
+
+    same_objection = {"exit": 1, "_verb": "bogus", "err": "UNKNOWN_VERB:bogus\n", "out": ""}
+    assert U._resembles(same_objection, signature, ["bogus"]) is True
+
+    different_objection = {"exit": 1, "_verb": "open", "err": "NAME_REQUIRED\n", "out": ""}
+    assert U._resembles(different_objection, signature, ["open"]) is False
+
+    # a silent program must never match an objection by accident
+    silent = {"exit": 1, "_verb": "x", "err": "", "out": ""}
+    assert U._resembles(silent, {"exit": 1, "probe": "", "err": "", "out": ""}, ["x"]) is False

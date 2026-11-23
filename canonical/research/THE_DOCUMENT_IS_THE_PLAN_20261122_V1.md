@@ -5651,3 +5651,71 @@ A green suite is evidence about the claims that are *in* it. It says nothing abo
 and §A95–§A101 added a great many claims. The count is now 130 passing, and the honest statement is:
 **every behaviour named in §A95–§A101 has a test that names it**, which is a weak but checkable property —
 and it is checkable precisely because the sections name their behaviours in code-shaped strings.
+
+## §A103 — the world, not the program, is the limiting factor
+
+### The false verdict I nearly published
+
+§A102's audit sent me to real binaries. I probed `git` in a temp directory, got `NO_DISCRIMINATION` on every
+verb, and concluded: *"my mechanism only works on Python scripts — which is to say, on fixtures I wrote."*
+That is a damning conclusion about the work, and it was **wrong**.
+
+The same program, the same candidates, two worlds:
+
+| world | result |
+|---|---|
+| an empty temp dir | `NO_DISCRIMINATION` — `status` and `bogusverb` look alike |
+| a real git repo, one commit | **`status` arity 0, `log` arity 0, `bogusverb` rejected** |
+
+`git status` in an empty directory says *"fatal: not a git repository."* `git status` in a repo says *"On
+branch master"* and exits 0. **The program never changed. The world did.**
+
+This is OSWorld 2.0's named **implicit-state bottleneck** — whether an action is possible depends on state
+the action does not carry — appearing as a return value in a probe. A probe that hands a program a world it
+was never meant to run in and then reports the program inscrutable has not measured the program; it has
+measured its own choice of world and blamed the program for it.
+
+### Three defects this exposed, in the order they were found
+
+1. **The arity search exhausted its bound before doing the membership test at all.** `git` discriminates
+   perfectly, and the loop never looked: it counted to three, gave up, and reported
+   `ARITY_NOT_FOUND_WITHIN_BOUND` for both a real verb and a nonsense one. *The differential was available
+   on the first probe.* The membership test is now the first thing every probe does.
+2. **The signature comparison normalised the wrong token.** It removed the *calibration probe's* name, so
+   `UNKNOWN_VERB:qzxvbnmprobe` and `UNKNOWN_VERB:bogusverb` were judged **different**, and every unknown verb
+   looked novel. The fix is to normalise the token that was actually passed — the echoed subject — and
+   nothing else.
+3. **I over-corrected, and broke eight tests.** To make `a` match `b` I normalised *every long word*, which
+   made `MISSING_ARGUMENT` and `INVALID_COMMAND` the same shape. A real verb was then read as unknown.
+   Over-normalising is not a weaker comparison; it is a different and wrong one, because it erases exactly
+   the distinction the comparison exists to draw.
+
+### The distinction now in the return value
+
+    THE_PROGRAM_REPORTED_THIS_VERB_AS_UNKNOWN   do not try it again        (known: False)
+    THE_VERB_EXISTS_BUT_THE_WORLD_REFUSED_IT    the answer is another world (known: None)
+    THE_WORLD_DOES_NOT_FIT_THE_PROGRAM          every verb existed, none could run
+
+Collapsing the second into the first sends a caller hunting a different verb when the answer is a different
+world. That is the difference between a system that reads its environment and one that memorises a verdict.
+
+### A fixture that only half-fits is its own kind of wrong
+
+The first version of the test built a repo with **no commits**. `git log` there fails with "your current
+branch has no commits yet" — so the world half-fit, and the test failed for a reason neither world would
+produce. A world that partially satisfies a program yields a result belonging to neither the fitting case nor
+the refusing one, and that is how a false verdict gets made a second time.
+
+### Honest status, corrected
+
+| claim from §A102 | status |
+|---|---|
+| "real binaries cannot be probed" | **FALSE**, withdrawn. `git` learns fully in a fitting world. |
+| "the mechanism only works on fixtures I wrote" | **FALSE**, withdrawn. |
+| "the probe learns shape, not meaning" | **still true** |
+| "a world that does not fit the program is diagnosed as such" | **now true and tested** |
+
+132 tests pass. The remaining real limit is sharper than the one I invented: **the probe needs a world that
+fits the program, and it does not yet know how to find or build one.** Diagnosing `THE_WORLD_DOES_NOT_FIT_THE_PROGRAM`
+is the first half. Knowing what world to try instead is the next bottleneck, and it is the same problem as
+OSWorld's implicit state.
