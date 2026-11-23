@@ -239,6 +239,12 @@ class _Evaluator:
             container = self.value(node.value, state)
             index = self.value(node.slice, state)
             if container is UNKNOWN:
+                # THE DANGEROUS SILENCE. `os.environ["NOPE"]` will raise KeyError, and the walk has no idea
+                # what `os.environ` holds. Returning UNKNOWN with no note produced the verdict
+                # NO_FAULT_FOUND_IN_WHAT_COULD_BE_FOLLOWED -- which reads as "the program is safe" about a
+                # program that will certainly crash. Measured 2026-11-23. The verdict must never be able to
+                # mean "clean" when the walk simply had nothing to follow.
+                self.unknowns.append("SUBSCRIPT_ON_UNKNOWN_CONTAINER line %s" % getattr(node, "lineno", "?"))
                 return UNKNOWN
             if index is UNKNOWN:
                 self.unknowns.append("SUBSCRIPT_WITH_UNKNOWN_INDEX line %s" % getattr(node, "lineno", "?"))
@@ -254,6 +260,9 @@ class _Evaluator:
             except TypeError:
                 return UNKNOWN
         if isinstance(node, ast.Attribute):
+            # an attribute of anything is a value this walk does not model. Noted rather than silently
+            # UNKNOWN, for the same reason as the subscript above.
+            self.unknowns.append("ATTRIBUTE_NOT_MODELLED line %s" % getattr(node, "lineno", "?"))
             return UNKNOWN
         if isinstance(node, ast.Call):
             return self._call(node, state)
@@ -665,6 +674,12 @@ def evaluate(source: str) -> dict[str, Any]:
     if certain:
         verdict = "THE_PROGRAM_WILL_RAISE"
     elif evaluator.unknowns:
+        # ANYTHING THE WALK REFUSED MAKES "CLEAN" THE WRONG WORD, even when the rest was followed perfectly.
+        # The two verdicts are different claims:
+        #     NO_FAULT_FOUND...  nothing the walk could follow goes wrong
+        #     THIS_WALK_COULD_NOT_DECIDE  parts of the program were never seen
+        # The second is the true one whenever a refusal was recorded, and reporting the first instead is how a
+        # checker lies without ever being wrong about a value.
         verdict = "THIS_WALK_COULD_NOT_DECIDE"
     else:
         # THIS WORDING IS DELIBERATE. "No fault found" is not "no fault exists": this walk follows literals

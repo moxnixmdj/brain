@@ -6798,3 +6798,63 @@ writing an assertion is not the same as making one.
     VERIFIED   closures work, contrary to my expectation, and the safe variant stays silent
     VERIFIED   168 passed, 2 skipped across eleven suites
     REFUSED    repairing a runtime fault from the failure alone -- three plausible repairs, none stated by it
+
+## §A119 — the module that lied about being safe
+
+### The defect, found by pointing the module at real programs
+
+§A118 ended with a comfortable claim. So I aimed §A117's walker at the kind of program people actually write —
+values from files, environment variables, the network — and it produced this:
+
+    import os; print(os.environ["NOPE"])       NO_FAULT_FOUND_IN_WHAT_COULD_BE_FOLLOWED
+    import json; d=json.load(open("c.json")); print(d["key"])   NO_FAULT_FOUND_IN_WHAT_COULD_BE_FOLLOWED
+
+`os.environ["NOPE"]` **will certainly raise KeyError.** The module called it clean.
+
+Worse, it contradicted its own written rule, three lines away in the same file:
+
+> *"this walk not seeing a fault is not the same as the program being safe."*
+
+The verdict said otherwise, `unknowns` was **empty**, and nothing anywhere recorded that the walk had refused to
+look. A reader — or a planner choosing which program to run — would have taken the strongest possible claim from
+the weakest possible evidence.
+
+### The cause, and it was two silences
+
+    ``os.environ``  ->  Attribute      -> return UNKNOWN, recorded nowhere
+    ``[...]``       ->  Subscript on an UNKNOWN container -> return UNKNOWN, recorded nowhere
+
+Both are honest *values* and dishonest *verdicts*. UNKNOWN propagated correctly; the report threw away the fact
+that anything had been unknown.
+
+### The fix
+
+Every refusal is now recorded, and the final verdict can no longer claim cleanliness when anything was refused:
+
+| situation | verdict |
+|---|---|
+| a fault was proved | `THE_PROGRAM_WILL_RAISE` |
+| anything was refused, nothing proved | `THIS_WALK_COULD_NOT_DECIDE` |
+| nothing refused, nothing proved | `NO_FAULT_FOUND_IN_WHAT_COULD_BE_FOLLOWED` |
+
+Both directions are pinned by tests: `os.environ` and `json.load` **must** produce the "could not decide" verdict
+with a recorded reason, and a fully-followed program **must still** get the clean one. The second matters as much
+as the first — otherwise the fix would just be a blanket refusal wearing honesty's clothes.
+
+Proven to fail: reverting the two `unknowns.append` lines turns
+`test_a_refusal_can_never_masquerade_as_safety` red.
+
+### The boundary this exposes, stated plainly
+
+    real-world programs (config files, env vars, stdin, HTTP)   ALL refused, none decided
+
+Every one of them takes its values from the world, and the walk has nothing to hold. **The literal walker covers
+literal-driven faults in small programs. It does not cover arbitrary computer use**, and the honest verdict now
+says which of those two situations the caller is in instead of implying the better one.
+
+### Verified
+
+    VERIFIED   24 tests, including both directions of the verdict
+    VERIFIED   the honesty test fails when the fix is reverted
+    VERIFIED   170 passed, 2 skipped across eleven suites
+    BOUNDARY   no real-world program in the sample was decided; this is a narrow, honest mechanism

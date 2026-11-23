@@ -171,3 +171,34 @@ def test_a_closure_is_refused_rather_than_approximated() -> None:
     # `inner` closes over `x`, which the walk does not model. It must not CLAIM the program is safe.
     result = E.evaluate(source)
     assert result["verdict"] != "NO_FAULT_FOUND_IN_WHAT_COULD_BE_FOLLOWED" or result["certain"] == []
+
+
+def test_a_refusal_can_never_masquerade_as_safety() -> None:
+    """THE HONESTY PROPERTY, and the defect that forced it.
+
+    Measured 2026-11-23: `import os; print(os.environ["NOPE"])` was reported as
+    `NO_FAULT_FOUND_IN_WHAT_COULD_BE_FOLLOWED` -- about a program that will CERTAINLY raise KeyError. The walk had
+    returned UNKNOWN for `os.environ` without recording that it had refused anything, so the final verdict said
+    "clean" when the truth was "never looked".
+
+    This inverts the module's own stated rule -- "this walk not seeing a fault is not the same as the program
+    being safe" -- which is why it is pinned here rather than remembered.
+    """
+    certain_to_fail = [
+        'import os\nprint(os.environ["A_NAME_THAT_CANNOT_EXIST_ZZ"])',
+        'import json\nd=json.load(open("c.json"))\nprint(d["key"])',
+    ]
+    for source in certain_to_fail:
+        result = E.evaluate(source)
+        assert result["certain"] == []
+        assert result["verdict"] == "THIS_WALK_COULD_NOT_DECIDE", result
+        assert result["unknowns"], "a refusal must be recorded, not left implicit"
+
+
+def test_a_program_the_walk_followed_completely_gets_the_clean_verdict() -> None:
+    """The other side: the clean verdict must still be reachable, or the fix is just a blanket refusal."""
+    for source in ("print(1+1)", "total=0\nfor n in [1,2,3]:\n    total=total+n\nprint(total)"):
+        result = E.evaluate(source)
+        assert result["certain"] == []
+        assert result["unknowns"] == [], result
+        assert result["verdict"] == "NO_FAULT_FOUND_IN_WHAT_COULD_BE_FOLLOWED", result
