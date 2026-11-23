@@ -141,3 +141,77 @@ def test_a_rule_from_program_a_flags_program_b_before_b_ever_runs() -> None:
     # Proven by the fact that running B would have changed nothing about the answer: the rule was applied to a
     # program whose only observed history is its SOURCE. Nothing in this test runs app.py in world B.
     assert not (world_b / "__pycache__").exists()
+
+
+def test_the_prediction_asks_the_interpreter_that_will_run_the_program() -> None:
+    """ASKING THE WRONG INTERPRETER IS A CONFIDENT ANSWER ABOUT THE WRONG THING.
+
+    Measured 2026-11-23: a prediction made in the harness's own process reported a module present while the
+    program was going to run under an interpreter where it was absent -- the same class of error as §A110's
+    guard watching the wrong tree. A virtualenv created here is the cleanest available witness: it exists, it is
+    real, and the module is provably absent from it.
+    """
+    import venv
+
+    store = pathlib.Path(tempfile.mkdtemp()) / "venv"
+    venv.EnvBuilder(with_pip=False, clear=True).create(store)
+    other = str(store / "bin" / "python")
+    assert pathlib.Path(other).exists(), other
+
+    source = "import cowsay\nprint(1)\n"
+    asked_here = RB.predict(source)
+    asked_other = RB.predict(source, interpreter=other)
+
+    # `cowsay` may or may not be installed here, but it is certainly NOT in a fresh venv without pip
+    assert asked_other["faults"], "a fresh venv cannot have cowsay"
+    assert asked_other["faults"][0]["module"] == "cowsay"
+    # the two questions are genuinely different questions: if this process also lacks cowsay the test still
+    # holds (both report it), so the assertion that matters is that the OTHER interpreter's answer is used and
+    # is not silently replaced by this one's.
+    assert asked_other["imports_predictable"] is True
+    assert asked_here["schema"] == asked_other["schema"]
+
+
+def test_a_repair_that_worked_on_the_last_attempt_is_not_reported_as_a_failure() -> None:
+    """§A113's most consequential defect: a VERIFIED-GOOD REPAIR REPORTED AS A FAILURE.
+
+    `repair_v1.attempt(max_attempts=1)` installed the module correctly -- `setup_ok=True`, and the module was
+    importable afterwards -- and still returned `ok: False` with the reason "python module cowsay is not
+    installed". The loop's final iteration applied the setup and then `continue`d into an exhausted range, so
+    the success was never observed and the stale diagnosis was returned instead.
+
+    The damage is not cosmetic: every caller reads `ok`, so a caller re-attempts a fault that is gone, and a
+    report can say a repairable world was unrepairable. The module's own docstring already states the rule
+    that was broken -- "success is whatever actually exited zero -- never an assumption that the repair
+    helped" -- so the fix runs the program once more and looks, rather than assuming.
+    """
+    import venv
+
+    from canonical.runtime import repair_v1 as R
+
+    base = pathlib.Path(tempfile.mkdtemp())
+    # WITH PIP, and that is the whole point. The first version of this test built the venv WITHOUT pip, so the
+    # install could never succeed, the test always took the "nothing was repaired" branch, and it PASSED with
+    # the fix reverted. A test that cannot fail is not a test -- it was caught by deliberately reverting the
+    # fix and watching it stay green.
+    venv.EnvBuilder(with_pip=True, clear=True).create(base / "venv")
+    python = str(base / "venv" / "bin" / "python")
+    assert pathlib.Path(python).exists()
+    if subprocess.run([python, "-m", "pip", "--version"], capture_output=True).returncode != 0:
+        import pytest
+        pytest.skip("this venv has no pip, so no repair can be attempted honestly")
+
+    world = base / "world"
+    world.mkdir()
+    (world / "app.py").write_text("import cowsay\nprint(1)\n")
+
+    result = R.attempt("%s app.py" % python, str(world), timeout=300, max_attempts=1)
+    importable = subprocess.run([python, "-c", "import cowsay"], capture_output=True).returncode == 0
+
+    if not importable:
+        # pip could not reach an index in this sandbox: nothing was repaired, and `ok=False` is then correct.
+        assert result["ok"] is False, result
+        return
+    # the repair demonstrably worked, so the report must say so
+    assert result["ok"] is True, result
+    assert result["attempts"][-1]["class"] == "after_setup"

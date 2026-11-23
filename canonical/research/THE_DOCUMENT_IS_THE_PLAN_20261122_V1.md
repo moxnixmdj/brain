@@ -6471,3 +6471,78 @@ first time in this thread the measurement supports the hypothesis instead of ref
 `test_root3_subprocess_mediator_v2` and 22 other files fail at **collection**, with
 `LEGACY_VERIFIED_SITE_DISAPPEARED` pointing at `astra_runtime.py` line numbers. Reproduced at the pristine
 `c6d258fc` checkout and in files this change never touched: **pre-existing registry drift**, not a regression.
+
+## §A114 — the measurement caught me twice, and the audit found a false negative worse than the thing measured
+
+### The comparison, and the two times it lied
+
+Goal: does acting on a prediction cost less than discovering by running? Two arms, same two-fault program
+(`import cowsay` + `print(totl)`), each in its own fresh interpreter.
+
+**First lie.** Both arms shared one clean venv. The blind arm's `pip install` is machine-wide, so the read-first
+arm ran in a world the blind arm had already repaired — and read-first was reported as the winner for that
+reason. This is §A112's error, caught by the harness built in §A112, in my own comparison. Fixed by building
+**one venv per arm**.
+
+**Second lie, and I nearly published it.** With the arms separated, blind reported *stuck at round 1* and
+read-first reported *fixed*. I was about to record "the blind loop cannot repair the module fault at all" — a
+claim about `repair_v1`. It was false. The truth was a real defect, but not the one I was about to report.
+
+### The defect under the false report
+
+    repair_v1.attempt(max_attempts=1) on `import cowsay`
+      diagnose          missing_python_module, setup targeting the right interpreter
+      setup_ok          True
+      module importable afterwards   True
+      ok                False        reason: "python module cowsay is not installed"
+
+**A verified-good repair reported as a failure.** The final iteration applied the setup and then `continue`d
+into an exhausted `range`, so the success was never observed and the stale diagnosis was returned.
+
+Why this matters more than the measurement: `ok` is what every caller reads. A caller that sees `False`
+re-attempts a fault that is gone, and a report can describe a repairable world as unrepairable. It also
+**falsified my own comparison** — the blind arm was being scored on a repair that had worked.
+
+The module's docstring already stated the rule that was broken — *"Success is whatever actually exited zero —
+never an assumption that the repair helped."* So the fix does not assume success: it **runs the program once
+more and looks**.
+
+    after the fix, same call
+      ok        True
+      trace     [('missing_python_module', setup_ok=True), ('after_setup', exit=0)]
+
+### The honest comparison, after both corrections
+
+    BLIND      fixed=True  rounds=2  executions=2  out='6'
+    READ-FIRST fixed=True  rounds=1  executions=1  out='6'
+
+Read-first halves the executions, because it never runs the program to *discover* a fault it can read. On a
+two-fault program that is one saved execution. **This is a real but modest gain, and it is reported as modest**
+— the larger result of this round is the repairer fix, not the speed.
+
+### A test that could not fail, and how it was caught
+
+The first version of the regression test built its venv **without pip**, so the install could never succeed,
+the test always took the "nothing was repaired" branch, and it **passed with the fix reverted**. It was caught
+by deliberately reverting the fix and watching it stay green. Rebuilt with `with_pip=True`:
+
+    with the fix      PASS
+    fix reverted      FAIL  assert False is True
+
+A test is only evidence once it has been seen to fail for the right reason.
+
+### Second interpreter, second question
+
+A prediction made in the harness's process reported a module present while the program was to run under an
+interpreter where it was absent — §A110's "guard watching the wrong tree" in a new place. `predict` now takes
+`interpreter=` and asks **the python that will run the program**. Asking the wrong one is a confident answer
+about the wrong thing.
+
+### Verified / not verified
+
+    VERIFIED   blind and read-first both repair a two-fault program in separate clean interpreters
+    VERIFIED   read-first uses 1 execution where blind uses 2
+    VERIFIED   repair_v1 no longer reports a successful repair as a failure (test proven to fail when reverted)
+    VERIFIED   a prediction asks the interpreter that will run the program
+    MODEST     the speed gain is one execution on this case; it scales with the number of statically-visible faults
+    UNPROVEN   whether the gain survives on faults that are NOT statically visible

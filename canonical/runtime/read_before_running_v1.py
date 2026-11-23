@@ -55,6 +55,7 @@ import ast
 import builtins
 import importlib.util
 import pathlib
+import subprocess
 from collections.abc import Iterable, Mapping
 from typing import Any
 
@@ -179,13 +180,26 @@ def predict_names(source: str) -> dict[str, Any]:
             "will_fail": bool(loaded)}
 
 
-def _installed(name: str) -> bool:
-    """Is this module importable HERE? An inspectable fact about the machine, not a parameter.
+def _installed(name: str, *, interpreter: str | None = None) -> bool:
+    """Is this module importable by the interpreter that will RUN the program? An inspectable fact, not a
+    parameter.
 
     §2's test in its most literal form: `pip install X` makes the rule stop firing, `pip uninstall X` makes it
     fire again, and nothing in any weight changed. This is the knowledge store the mission allows, and it is
     the interpreter's own answer rather than this project's opinion of the world.
+
+    `interpreter` is not a nicety. Measured 2026-11-23: a prediction made in the harness's process said a
+    module was present, while the program was going to run under an interpreter where it was absent. Asking the
+    wrong interpreter is the same class of error as §A110's guard watching the wrong tree -- the answer is
+    confident and about the wrong thing.
     """
+    if interpreter:
+        try:
+            probe = subprocess.run([interpreter, "-c", "import " + name],
+                                   capture_output=True, timeout=120)
+            return probe.returncode == 0
+        except (OSError, subprocess.SubprocessError):
+            return False
     try:
         return importlib.util.find_spec(name) is not None
     except (ImportError, ValueError):
@@ -215,7 +229,8 @@ def local_modules(world: str | pathlib.Path | None) -> set[str]:
 
 
 def predict_imports(source: str, *, installed: Iterable[str] | None = None,
-                    world: str | pathlib.Path | None = None) -> dict[str, Any]:
+                    world: str | pathlib.Path | None = None,
+                    interpreter: str | None = None) -> dict[str, Any]:
     """Imports the interpreter would refuse.
 
     `installed` lets a caller supply the answer instead of asking this process -- the same discipline
@@ -239,7 +254,8 @@ def predict_imports(source: str, *, installed: Iterable[str] | None = None,
                    and item["module"] not in local]
     else:
         missing = [item for item in imports
-                   if item["module"] not in local and not _installed(item["module"])]
+                   if item["module"] not in local
+                   and not _installed(item["module"], interpreter=interpreter)]
     # a module provided by a neighbouring file: present, and unknowable
     nearby = [item for item in imports if item["module"] in local]
     return {"schema": SCHEMA, "kind": "imports", "predictable": True,
@@ -250,9 +266,14 @@ def predict_imports(source: str, *, installed: Iterable[str] | None = None,
 
 
 def predict(source: str, *, installed: Iterable[str] | None = None,
-            world: str | pathlib.Path | None = None) -> dict[str, Any]:
-    """Everything that can be known about how this program will fail, without running it."""
-    imports = predict_imports(source, installed=installed, world=world)
+            world: str | pathlib.Path | None = None,
+            interpreter: str | None = None) -> dict[str, Any]:
+    """Everything that can be known about how this program will fail, without running it.
+
+    `interpreter` is the python that will run it, when that is not the one asking. Omitting it means the
+    prediction is about THIS process, which is only the same question when they are the same interpreter.
+    """
+    imports = predict_imports(source, installed=installed, world=world, interpreter=interpreter)
     names = predict_names(source)
     faults = []
     for item in imports.get("missing") or []:
@@ -292,14 +313,15 @@ def absorb(failure: str, *, at: str = "", store: pathlib.Path | None = None) -> 
 
 
 def apply_memory(source: str, *, store: pathlib.Path | None = None,
-                 world: str | pathlib.Path | None = None) -> dict[str, Any]:
+                 world: str | pathlib.Path | None = None,
+                 interpreter: str | None = None) -> dict[str, Any]:
     """Which of this program's predicted faults are ALREADY KNOWN, and what the known rule says to do.
 
     This is where one experience changes the next program. The prediction comes from the source; the rule comes
     from the store; the two are matched by the code the failure states, not by program name. A rule learned from
     program A is offered to program B, which is the entire point of storing a condition instead of an action.
     """
-    seen = predict(source, world=world)
+    seen = predict(source, world=world, interpreter=interpreter)
     known: dict[str, Any] = STATED.conditions(store)
     matched = []
     # A LOCAL MODULE IS NOT A PREDICTED FAULT AND IT IS THE CASE MEMORY IS FOR: the reader cannot tell whether

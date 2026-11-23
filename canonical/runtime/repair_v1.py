@@ -488,7 +488,28 @@ def attempt(command: str, root: str, timeout: int = 300, max_attempts: int = 3,
             trace[-1]["setup_ok"] = setup_ok
             trace[-1]["setup_said"] = setup_said
             if setup_ok:
-                continue          # the environment changed, so retrying is a new experiment
+                # THE ENVIRONMENT CHANGED, SO RETRYING IS A NEW EXPERIMENT -- AND ON THE LAST ATTEMPT THERE IS
+                # NO RETRY LEFT. Measured 2026-11-23: with `max_attempts=1`, `repair_v1` installed the module
+                # correctly (`setup_ok=True`, and `import cowsay` then succeeded) and still returned
+                # `ok: False` with the reason "python module cowsay is not installed". The repair had worked
+                # and the report said it had not.
+                #
+                # The docstring above already states the rule this broke: "Success is whatever actually exited
+                # zero -- never an assumption that the repair helped." So the fix is not to assume success: it
+                # is to RUN THE PROGRAM ONE MORE TIME AND LOOK. An extra execution is cheap; a repair that
+                # silently reports failure is not, because every caller then retries a fault that is gone.
+                retry = subprocess.run(current, shell=True, cwd=root, timeout=timeout,
+                                       capture_output=True, text=True)
+                trace.append({"attempt": n, "class": "after_setup", "setup": None,
+                              "exit": retry.returncode,
+                              "output": ((retry.stdout or "") + (retry.stderr or "")).strip()[-400:],
+                              "note": "the repair was applied on the final attempt, so the program was run "
+                                      "once more to see whether it helped"})
+                return {"schema": SCHEMA, "ok": retry.returncode == 0,
+                        "command": command, "attempts": trace,
+                        "reason": "" if retry.returncode == 0 else
+                                  ((retry.stdout or "") + (retry.stderr or "")).strip()[-300:],
+                        "repairs_that_could_not_be_applied": []}
             trace[-1]["reason"] = (trace[-1].get("reason") or "") + (
                 "; the repair could not be applied: " + setup_said.splitlines()[-1][:160]
                 if setup_said else "; the repair could not be applied")
