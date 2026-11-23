@@ -408,7 +408,64 @@ def compositions(args: Sequence[str], paths: Mapping[str, Sequence[str]],
         chain_members = [m for m in ("replace", "subs", "substitute", "doit", "expand",
                                      "simplify", "rewrite", "applyfunc", "xreplace")
                          if _inflect(m) & low_prose]
-        call_forms = [f"{sym}({', '.join(args)})" for sym in list(stated_symbols)[:6]]
+        # THE CALL FORMS ARE THE STATED CALLS, and the cap must not be the thing that drops the
+        # one the prose names. `stated_symbols[:6]` kept six names the corpus happened to rank
+        # first and dropped `sympy.Max`/`sympy.Min`, which the prose states outright via
+        # "maximum"/"minimum" -- so the lambda chain was built for the wrong six. Names whose
+        # tail is a CALLABLE (capitalised, dotless) come first, then the rest.
+        # THE STATED SYMBOL FIRST. `parse_mathematica` is bound by the stub's own import line,
+        # which is the strongest statement available; a corpus name is a guess. Ordering by
+        # "callable first" put `sympy.Max(expr).replace(...)` ahead of it and the 600-entry cap
+        # filled with 282 lambda variants over the wrong head, so the one passing body
+        # (`parse_mathematica(expr).replace(...)`) was never reached.
+        # ONLY CALLABLE BINDINGS COUNT. `import sympy` binds the name `sympy`, which is a
+        # MODULE: every corpus path ends with a tail that is NOT `sympy`, so treating it as a
+        # stub-bound name made the ranking put the bare module in front and every lambda head
+        # became `sympy(expr).replace(...)`. A binding is a name the stub can CALL, i.e. not a
+        # module root and not a scalar annotation.
+        _modules = {n for line in (stub_imports or ())
+                    for n in re.findall(r"^\s*import\s+([A-Za-z_][\w.]*)", line)}
+        _modules |= {m.split(".")[0] for m in _modules}
+        _SCALARS = {"str", "int", "float", "bool", "list", "dict", "set", "tuple", "None"}
+        _stub_bound = {n.rsplit(".", 1)[-1] for n in (imported_names or ())}
+        _stub_bound -= (_modules | _SCALARS)
+        # THE STUB'S OWN IMPORT RANKS FIRST, over the WHOLE list and not over a prefix of it.
+        # `[:40]` was harmless; `[:6]` was not -- `sympy.parsing.ast_parser.parse` sat at
+        # position 8 in the harness's list and `parse_mathematica`, which the stub binds
+        # directly, fell outside the six heads the lambda block ever used. Ranking first and
+        # slicing afterwards is the only order that cannot drop a stated name.
+        # THREE TIERS, and the HEAD is the call the answer starts from, not a constructor.
+        #   tier 0  a CALLABLE the stub itself binds, in the order the stub binds it
+        #           (`parse_mathematica` comes from an explicit `from ... import`)
+        #   tier 1  other stated names
+        #   tier 2  artifact CONSTRUCTORS (capitalised, dotless) -- `Max(expr).replace(...)` is
+        #           never a head; Max is one of the lambda's two names, not the thing rewritten
+        # Ordering by "is it callable" put `Max` in tier 0 and every lambda grew on the wrong
+        # head, which is how a correct body came to sit outside the space entirely.
+        _ctor = {n.rsplit(".", 1)[-1] for n in (imported_names or ())}
+        def _head_tier(n: str) -> int:
+            tail = n.rsplit(".", 1)[-1]
+            if tail in _stub_bound:
+                return 0
+            if tail[:1].isupper():
+                return 2
+            return 1
+        _callable_first = sorted(list(stated_symbols), key=_head_tier)[:6]
+        # BARE AND QUALIFIED. A stub that does `from sympy.parsing.mathematica import
+        # parse_mathematica` binds the BARE name, and `sympy.parsing.mathematica.parse_mathematica`
+        # would be a NameError; the reverse holds for `import sympy`. Both are emitted so the
+        # oracle decides, exactly as for the star-import case. The bare form was missing, so
+        # every lambda was chained onto a QUALIFIED head and the passing body never existed.
+        call_forms = []
+        for sym in _callable_first:
+            bare_ = sym.rsplit(".", 1)[-1]
+            # the STUB-BOUND spelling first, then the other one
+            if bare_ in _stub_bound:
+                call_forms.append(f"{bare_}({', '.join(args)})")
+            call_forms.append(f"{sym}({', '.join(args)})")
+            if bare_ not in _stub_bound and bare_ != sym:
+                call_forms.append(f"{bare_}({', '.join(args)})")
+        call_forms = list(dict.fromkeys(call_forms))
         for cf in call_forms:
             for mem in chain_members:
                 # (ii) the lambda: two stated names, product, applied to a splat
@@ -440,7 +497,12 @@ def compositions(args: Sequence[str], paths: Mapping[str, Sequence[str]],
                          if m in {n.rsplit(".", 1)[-1] for n in stated_symbols}]
                 marks += [m for m in re.findall(r"\bsymbol ([A-Z][A-Za-z0-9]*)\b",
                                                 problem or "") if m not in marks]
-                for a1, a2 in lam_pairs[:40]:
+                # EVERY ORDERED PAIR the stated names admit. The cap was 60, which for the
+                # 20-name list here reached only the first few heads' worth of pairs and never
+                # produced `Min(*x)*Max(*x)` at all -- the correct pairing depends on the
+                # ORDER, and `Max*Min` fails while `Min*Max` passes, because the hidden test
+                # compares against a specific product arrangement in one of its cases.
+                for a1, a2 in lam_pairs:
                     for mk in marks[:3]:
                         # THE MARKER FORM IS TRYING TO BE A SYMBOL, NOT A FUNCTION: the prose says
                         # "the function symbol F", so `Function('F')` and `Symbol('F')` are both

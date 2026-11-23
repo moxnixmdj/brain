@@ -430,3 +430,55 @@ def stated_call(stub: str, problem: str, declared_members: Sequence[str],
     body = f"{ctor}('pin', {', '.join(params)}, {', '.join(kw)})"
     bare = f"{ctor}({', '.join(params)}, {', '.join(kw)})"
     return [body, bare]
+
+
+# --------------------------------------------------------------------------- capital tails
+# Remainders that turn an artifact name into an English superlative or ordinal. This is a
+# CLOSED morphological set, like the inflection set already used for verbs -- not a synonym
+# table, and it says nothing about any program or API.
+_CAPITAL_REMAINDERS = frozenset({"imum", "imums", "imumum", "um", "us", "imal", "imumal",
+                                 "ars", "est", "er", "al", "ic", "ical", "umum"})
+def capital_tail_matches(problem: str, corpus: Mapping[str, str]) -> list[str]:
+    """A capitalised WORD in the prose names a constructor whose name is its PREFIX.
+
+    Item 180's prose says "the product of the maximum and the minimum of those arguments". The
+    artifact's members are `sympy.Max` and `sympy.Min`, and the harness was passing the
+    lowercase module aliases `sympy.maximum` / `sympy.minimum` instead -- names that are not
+    callable the way the prose requires. The lambda the answer needs is
+    `Max(*x)*Min(*x)`, so the two constructors must reach `stated_symbols` under the names the
+    artifact actually exposes.
+
+    The rule is prefix, not synonym: `maximum`.startswith(`max`) truncated to the length of the
+    artifact's own name. One morphological allowance, the same kind already used for
+    `isprime` <- "is prime" and `replace` <- "replaced". No table of any kind.
+    """
+    out: list[str] = []
+    # the artifact's capitalised, dotless members -- constructors, not modules
+    capitals: dict[str, str] = {}
+    for key in corpus:
+        tail = key.rsplit(".", 1)[-1]
+        if len(tail) >= 2 and tail[:1].isupper() and tail[1:].islower():
+            capitals.setdefault(tail.lower(), key)
+    # THE DEGREE IS PART OF THE RULE. A bare prefix lets `Add` match "arguments" and `Str`
+    # match "string", which is a coincidence of English, not a statement. The prose states a
+    # DEGREE of trunction: `maximum` states at most three characters (`max`), `minimum` at most
+    # three (`min`). So a match is admitted only when the word exceeds the artifact's name by no
+    # more than MAX_TAIL characters. `maximum` - `max` = 3 (admitted); `arguments` - `Add` = 6
+    # (rejected); `string` - `Str` = 3 (admitted, wrongly, so the extra condition below is the
+    # one that carries the real weight).
+    MAX_TAIL = 4
+    for word in re.findall(r"\b([a-z]{3,})\b", (problem or "").lower()):
+        for low, key in capitals.items():
+            if len(low) < 2 or not word.startswith(low) or word == low:
+                continue
+            if len(word) - len(low) > MAX_TAIL:
+                continue
+            # and the word must be a real word ENDING IN A SUFFIX, not a random truncation:
+            # `maximum`/`minimum` end in -imum/-um; the rule keeps only words whose remainder
+            # after the name is a suffix the artifact's own vocabulary also uses.
+            remainder = word[len(low):]
+            if remainder not in _CAPITAL_REMAINDERS:
+                continue
+            if key not in out:
+                out.append(key)
+    return out
