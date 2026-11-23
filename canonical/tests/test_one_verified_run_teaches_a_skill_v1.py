@@ -200,3 +200,77 @@ def test_teach_once_then_a_new_file_is_answered_from_memory():
         state = _EXP._load()
         state["procedures"] = json.loads(saved)
         _EXP._save(state)
+
+
+# --------------------------------------------------------------------------------------------
+# A PROGRAM THE SENTENCE NAMES AS AN INSTRUMENT, WHEN THAT PROGRAM NEEDS NO ARGUMENT.
+#
+# This is the SYNTHESIS half: not everything has to be taught. "list the files using ls" says which
+# program, and bare `ls` is a complete command. It is also the DANGEROUS half -- answering "what does
+# ls do" by running `ls` answers a question nobody asked -- so the guard is measured, not guessed.
+# --------------------------------------------------------------------------------------------
+@pytest.mark.parametrize("sentence,program", [
+    ("list the files using ls", "ls"),
+    ("use date to tell the time", "date"),
+])
+def test_a_program_named_as_an_instrument_is_derived_when_it_needs_no_argument(sentence, program):
+    from canonical.runtime import machine_purpose_index_v1 as machine
+    derived = machine.derive_argv(sentence)
+    assert derived.get("ok") is True, derived.get("reason")
+    assert derived["argv"] == [program]
+    assert derived["authority"] == "THE_PROGRAM_ANSWERED_WITH_NO_ARGUMENT"
+
+
+@pytest.mark.parametrize("sentence", [
+    "what does ls do",
+    "explain how ls works",
+    "is ls dangerous",
+    "tell me about ls",
+    "what is wc",
+    "how does git work",
+])
+def test_a_sentence_ABOUT_a_program_is_never_answered_by_running_it(sentence):
+    """Measured 2026-11-22: 7 of 11 program-naming probes were sentences ABOUT the program."""
+    from canonical.runtime import machine_purpose_index_v1 as machine
+    assert machine.derive_argv(sentence).get("ok") is False
+
+
+def test_a_bare_command_never_stands_in_for_a_path_the_sentence_named():
+    """THE DEFECT THIS RULE WAS WRITTEN FOR, kept as a test.
+
+    With nothing in memory, "use wc on AGENTS.md" derived bare `['wc']`. That is a complete command --
+    it reads stdin and exits 0 -- so the request PASSED and answered "0 0 0" about no file at all. The
+    sentence said which file; the command could not see it. A pass whose answer is about something
+    else is worse than a refusal.
+    """
+    from canonical.runtime import machine_purpose_index_v1 as machine
+    assert machine._a_path_the_bare_command_would_ignore("use wc on AGENTS.md") is True
+    assert machine.derive_argv("use wc on AGENTS.md").get("ok") is False
+    # A sentence that names no path is still derivable.
+    assert machine._a_path_the_bare_command_would_ignore("list the files using ls") is False
+
+
+def test_a_taught_skill_outranks_a_derivation():
+    """`wc` with no file reads stdin; the learned `wc -l <file>` must not be shadowed by bare `wc`."""
+    from canonical.runtime import live_brain_route_admission_v1 as ra
+    from canonical.runtime import experience_v1 as _EXP
+    target = ROOT / "AGENTS.md"
+    if not target.is_file():
+        pytest.skip("AGENTS.md is not present in this checkout")
+    saved = json.dumps(_EXP._load().get("procedures") or {})
+    try:
+        state = _EXP._load()
+        state["procedures"] = {}
+        _EXP._save(state)
+        assert ra.solve({"task_id": "teach", "goal": "wc -l README.md"}).get("pass") is True
+        after = ra.solve({"task_id": "post", "goal": "use wc on AGENTS.md"})
+        assert after.get("pass") is True, after.get("status")
+        execution = after["execution"]
+        step = execution[0] if isinstance(execution, list) else execution
+        # The skill, not the derivation: the operand is back, and the count is real.
+        assert step["argv"] == ["wc", "-l", "AGENTS.md"]
+        assert int(step["stdout"].split()[0]) == len(target.read_text(errors="replace").splitlines())
+    finally:
+        state = _EXP._load()
+        state["procedures"] = json.loads(saved)
+        _EXP._save(state)

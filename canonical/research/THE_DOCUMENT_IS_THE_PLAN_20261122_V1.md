@@ -3697,3 +3697,87 @@ from the sentence's words and a description shares none with the command. Closin
 similarity threshold — A74 measured description→program matching as dead (right program 11th, absent,
 66th). It needs the program name to come from somewhere honest: either the sentence states it, or the
 skill was taught *from a description* in the first place, which is what a person does.
+
+---
+
+## §A77 — SYNTHESIS: A PROGRAM NAMED AS AN INSTRUMENT (2026-11-22)
+
+A76 closed the LOOP — one verified run teaches a skill that generalises, when the sentence names the
+program (`use wc on AGENTS.md`). It left the SYNTHESIS gap: "list the files in this folder" names no
+program, and the skill's signature is built from the command's words, so a description recalls nothing.
+A74 had already measured description→program matching as dead (right program 11th, absent, 66th), so
+the answer cannot be a similarity threshold.
+
+**The turn: the program does not have to be guessed from the description. It can be NAMED as the
+instrument.** `list the files using ls` says which program, in a sentence that is not a command line.
+`derive_argv` already extracted `program: 'ls'` from it and refused only because no *flag* was
+justified — `NO_UNIVERSAL_QUERY_ANSWERS_THE_WORDS`. But bare `ls` is a complete command: measured
+2026-11-22, it exits 0 and prints 23958 bytes. The refusal was asking for an argument the program
+does not need.
+
+### The guard is measured, not guessed
+
+This is the dangerous shape: answering "what does ls do" by running `ls` answers a question nobody
+asked. 11 program-naming probes were written down and classified by hand before any code changed:
+
+| sentence | about the program? | instrument marker |
+|---|---|---|
+| what does ls do | yes | none |
+| explain how ls works | yes | none |
+| is ls dangerous | yes | none |
+| tell me about ls | yes | none |
+| what is wc | yes | none |
+| how does git work | yes | none |
+| show me the date | yes | none |
+| list the files using ls | no | **using ls** |
+| use date to tell the time | no | **use date to** |
+| use wc on AGENTS.md | no | **use wc on** |
+
+**7 of 11 name a program to DISCUSS it.** Every one of those carries no instrument marker and every
+genuinely instrumental sentence does, so the marker is the entire guard: the program must be named as
+the thing to USE (`using X`, `with X`, `use X to`, `use X on|against|in|for`), never merely mentioned.
+The program's own behaviour then decides whether it needed an argument — `ls` bare exits 0, `git`
+bare exits 1 — so nothing is predicted.
+
+### The defect this rule produced, found by the suite, and the fix
+
+With empty memory, `use wc on AGENTS.md` derived bare `['wc']`. That is a complete command — it reads
+**stdin** and exits 0 — so the request **PASSED** and answered `0 0 0`: a pass whose answer is about
+no file at all, when the sentence had named one. The A76 end-to-end test caught it on the next run,
+failing at exactly the assertion that says the request must be REFUSED before anything is taught.
+
+    A program run with no argument has no way to address a path the sentence named, so if the
+    sentence named one, the derivation does not apply and the refusal stands.
+
+`wc -l AGENTS.md` is unaffected (it states its own command); `use wc on AGENTS.md` refuses until the
+skill is taught, which is A76 doing its job.
+
+### A second ordering defect, also caught
+
+Deriving bare `['wc']` **shadowed the learned skill**: the request that had been answering
+`61 AGENTS.md` began answering `0 0 0` *with the skill in memory*, because the derivation ran first.
+A derivation is the machine's guess about what a sentence means; a skill is a command a verified run
+proved works. **The proved one now goes first** and must still fit exactly.
+
+### Verified
+
+| check | result |
+|---|---|
+| new suite `test_one_verified_run_teaches_a_skill_v1.py` | **22 passed** (was 12) |
+| 7 suites together | **128 passed, 1 failed** |
+| the 1 failure | the pre-existing `tar.gz` pair, identical at HEAD |
+| `tasks_v1` / `unseen_program_v1` | **13/13** / **6/6** |
+| A76 proof re-run | refused → `wc -l README.md` once → `use wc on AGENTS.md` = **`61 AGENTS.md`** |
+| `derive_argv` | `['ls']`, `['date']`; refuses all 6 "about the program" phrasings and any sentence naming a path |
+
+### Honest limits
+
+Deriving `['ls']` for "list the files using ls" makes the BINDING right, but that sentence still fails
+downstream (`STATED_ANSWER_NOT_PROVIDED`; "use date to tell the time" fails
+`MOST_OF_THE_REQUEST_IS_NOT_EXPLAINED_BY_CAPABILITY`). Those are later gates reading a sentence that is
+prose, not a command line. This round fixed what the sentence can be BOUND to; making the rest of the
+route accept a derived bare command is the next piece of work, and it is a different one.
+
+The description→program case is still open: "list the files in this folder" names no program at all,
+and nothing above helps it. What does help is that a person would say `using ls` if they wanted to be
+specific — and the machine now understands that sentence.

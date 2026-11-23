@@ -133,6 +133,43 @@ def documents_a_nonzero_exit_as_a_result(program: str) -> bool:
     return False
 
 
+_INSTRUMENT_MARKERS = (
+    r"\busing\s+{p}\b",
+    r"\bwith\s+{p}\b",
+    r"\b(?:use|run)\s+{p}\s+to\b",
+    r"\b(?:use|run)\s+{p}\s+(?:on|against|in|for)\b",
+)
+
+
+def _named_as_an_instrument(sentence: str, program: str) -> bool:
+    """True when the sentence names the program as the thing to USE, not as the thing to DISCUSS.
+
+    "use ls to list the files" -> True.  "what does ls do" -> False.  The distinction is carried by
+    the marker; a bare mention is never enough, because answering a question about a program by
+    running it is a different answer from the one that was asked for.
+    """
+    text = str(sentence or "")
+    needle = re.escape(str(program or ""))
+    if not needle:
+        return False
+    return any(re.search(pattern.format(p=needle), text, re.I) for pattern in _INSTRUMENT_MARKERS)
+
+
+def _a_path_the_bare_command_would_ignore(sentence: str) -> bool:
+    """True when the sentence names a file or directory that `[program]` could not be given.
+
+    Read from the checkout this module is part of -- the same roots every other binder uses -- so a
+    name is only "a path" when it actually is one here.
+    """
+    try:
+        from pathlib import Path as _Path
+        from canonical.runtime import goal_compiler as _gc
+        root = _Path(__file__).resolve().parents[3]
+        return bool(_gc._repo_paths(str(sentence or ""), root))
+    except Exception:  # noqa: BLE001 - unreadable roots mean no evidence, so no derivation
+        return True
+
+
 def derive_argv(sentence: str) -> dict[str, Any]:
     """The command this machine ANSWERS for the request, or the reason there is none.
 
@@ -147,6 +184,45 @@ def derive_argv(sentence: str) -> dict[str, Any]:
                 "authority": "shutil.which"}
     query = _universal_query_for(sentence)
     if query is None:
+        # SOME PROGRAMS ANSWER WITH NO ARGUMENT AT ALL, AND THE SENTENCE MAY HAVE ASKED FOR ONE.
+        #
+        # "list the files using ls" names `ls` as the INSTRUMENT, and bare `ls` is a complete command
+        # on this machine -- it exits 0 and prints. Measured 2026-11-22. Refusing here for want of a
+        # flag leaves a request the machine can plainly answer with no route.
+        #
+        # THIS IS THE DANGEROUS SHAPE, SO THE MARKER IS MEASURED, NOT GUESSED. 11 probes that name a
+        # program were written down and classified by hand: 7 are sentences ABOUT the program
+        # ("what does ls do", "explain how ls works", "is ls dangerous", "tell me about ls"), and
+        # running the program to answer those is a regression -- it answers a question nobody asked.
+        # All 7 carry no instrument marker and all 3 genuinely instrumental ones do, so the marker is
+        # the whole guard: the program must be named as the thing to USE ("using X", "with X",
+        # "use X to", "use X on"), never merely mentioned.
+        # AND THE SENTENCE MUST NOT HAVE NAMED SOMETHING THE BARE COMMAND WOULD IGNORE.
+        #
+        # Measured minutes after the rule above was written, and it was a real defect: with nothing
+        # in memory, "use wc on AGENTS.md" derived bare `['wc']`, which is a complete command --
+        # it reads stdin and exits 0 -- so the request PASSED and answered "0 0 0". The sentence said
+        # which file; the command could not see it. That is a pass whose answer is about something
+        # else, which is worse than a refusal.
+        #
+        # A program run with no argument has no way to address a path the sentence named, so if the
+        # sentence named one, this derivation does not apply and the refusal stands.
+        if _named_as_an_instrument(sentence, program) and not _a_path_the_bare_command_would_ignore(sentence):
+            bare = [program]
+            try:
+                proc = subprocess.run(bare, capture_output=True, timeout=20)
+            except Exception as exc:  # noqa: BLE001 - a program that cannot be asked has no answer
+                return {"schema": SCHEMA, "ok": False,
+                        "reason": "THE_PROGRAM_DID_NOT_RUN:" + type(exc).__name__,
+                        "program": program, "argv": bare}
+            # The program's own behaviour decides whether it needed an argument: `git` bare exits 1,
+            # `ls` bare exits 0 and prints. Nothing is predicted.
+            if proc.returncode == 0 and proc.stdout.strip():
+                return {"schema": SCHEMA, "ok": True, "program": program, "argv": bare,
+                        "answer": proc.stdout.decode("utf-8", "replace").splitlines()[0][:400],
+                        "authority": "THE_PROGRAM_ANSWERED_WITH_NO_ARGUMENT",
+                        "evidence": "ran " + " ".join(bare) + ": exit 0, "
+                                    + str(len(proc.stdout)) + " bytes on stdout"}
         return {"schema": SCHEMA, "ok": False, "reason": "NO_UNIVERSAL_QUERY_ANSWERS_THE_WORDS",
                 "program": program, "authority": "THE_SENTENCE_ITSELF"}
     argv = [program, query]

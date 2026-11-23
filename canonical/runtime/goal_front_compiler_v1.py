@@ -1137,6 +1137,22 @@ def bind_typed_key(goal: str, key: str, root: pathlib.Path, entry: Mapping[str, 
         #
         # It runs ONLY where the sentence states no command, so no command that a sentence spells
         # out can be displaced by a derivation.
+        # WHAT THE MACHINE WAS TAUGHT OUTRANKS WHAT IT DERIVED.
+        #
+        # Measured 2026-11-22, and it is the reason this order is not arbitrary: `use wc on AGENTS.md`
+        # with the learned skill `['wc','-l','<operand>']` in memory derived bare `['wc']` -- a
+        # complete command, so the derivation succeeded -- and that SHADOWED the skill. `wc` with no
+        # file reads stdin, so the request that had been answering "61 AGENTS.md" began answering
+        # "0 0 0". A derivation is the machine's guess about what a sentence means; a skill is a
+        # command a verified run proved works. The proved one goes first, and it still has to fit the
+        # sentence exactly.
+        from canonical.runtime.world_binding_v1 import _remembered_argv as _remember
+        try:
+            remembered = _remember(str(goal or ""))
+        except Exception:  # noqa: BLE001 - no memory, the derivation stands
+            remembered = None
+        if remembered:
+            return list(remembered)
         from canonical.runtime import machine_purpose_index_v1 as _machine
         derived = _machine.derive_argv(str(goal or ""))
         if derived.get("ok"):
