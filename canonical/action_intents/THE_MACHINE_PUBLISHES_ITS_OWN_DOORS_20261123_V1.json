@@ -11,7 +11,7 @@
   "earlier_routes_exhausted_reason": "A second declaration reader, a GUI/DOM tier, and a room-inference search were each considered and rejected this round: the reader is one mechanism over shapes, the GUI tier needs a display this sandbox does not have, and inferring a room from a failure would be guessing where the measurement can state.",
   "incremental_spend_usd": 0,
   "independent_verification_completed": false,
-  "independent_verification_note": "Producer-run sandbox only: 18 tests (unit + integration, 3 code-repair specialist tests), one generic-loop receipt (plan 6 on a held-out 4x4 grid, priors persisted, rule refused honestly), one code-repair admission receipt (ADMIT on unseen victims, fresh-defect replay PASS). No independent identity re-ran any of this.",
+  "independent_verification_note": "Producer-run sandbox only: 23 new tests, 85 green with the prior suites, 138 across the relevant surface; one fleet census receipt (36 programs, 2,134 declared operations, 76 doors, 1,098 sensors, 960 unbound, every tree restored) and one scan proof on gzip's discovered doors. No independent identity re-ran any of it; truth.achieved stays false.",
   "laws_read_this_session": [
    "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
    "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
@@ -31,9 +31,11 @@
   "producer_cognition_model_dependency_count": 0,
   "progress_class": "VERIFIED_REUSABLE_CAPABILITY_GAIN",
   "progress_evidence_paths": [
-   "canonical/swe_kernel/perfect_algorithm_v1.py",
-   "canonical/tests/test_perfect_algorithm_v1.py",
-   "canonical/verification/PERFECT_ALGORITHM_RECEIPT_20261122_V1.json"
+   "canonical/runtime/tool_census_v1.py",
+   "canonical/tools/the_machine_publishes_its_own_doors_v1.py",
+   "canonical/tests/test_tool_census_v1.py",
+   "canonical/verification/THE_MACHINE_PUBLISHES_ITS_OWN_DOORS_20261123_V1.json",
+   "intake/THE_MACHINE_PUBLISHES_ITS_OWN_DOORS_20261123_V1.md"
   ],
   "route_class": "COMPOSE",
   "scope_complete_discharge": false,
@@ -83,7 +85,11 @@
   ],
   "expected_obligation_discharge_lcb": "0",
   "expected_obligation_unlock_lcb": "1/66",
-  "interpretation": "Terminal-Bench's own error analysis attributes 24.1% of all failures to 'command not found' -- an agent guessing what exists. A vocabulary read from the machine and confirmed by execution is the mechanism that removes that guess; no benchmark task was run, so no discharge is claimed."
+  "interpretation": "Terminal-Bench's own error analysis attributes 24.1% of all failures to 'command not found' -- an agent guessing what exists. A vocabulary read from the machine and confirmed by execution is the mechanism that removes that guess; no benchmark task was run, so no discharge is claimed.",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "0.5",
+  "wall_clock_cost_ub": 1
  },
  "measured_effect": {
   "all_trees_restored": true,
