@@ -5257,3 +5257,66 @@ remote service, or a GUI shows nothing in the tree, and `judge_from_seeing` then
 `EFFECT_NOT_OBSERVED` rather than guessing — the caller needs the read-based judge, which runs the
 program's own list. That distinction is the next bottleneck and it is a real one: **a self-judging loop
 assumes the effect is observable, and on a GUI the observation is pixels, not files.**
+
+## §A96 — the bug that looked like success: a goal is not an act
+
+§A94 and §A95 both recorded "multi-step planning is not shown" as a limit. It is now shown, and getting
+there exposed the most expensive shape of bug this project has met.
+
+### The measurement that started it
+
+Asked the loop for a two-record goal:
+
+    add a record named "alpha" with amount "3" and add a record named "alpha.beta" with amount "5"
+
+    verdict: DONE, 1 step
+    state:   {"record": [{"amount": 3, "name": "alpha"}]}      <- ONE record, not two
+
+The loop reported **success** while completing half the request. Its own judge confirmed the act it ran,
+and the act it ran was correct. Nothing anywhere in the trace was wrong except the conclusion.
+
+### Three defects, each hidden by the one before
+
+1. **`and` was not a step boundary.** `sentences_of` split on sentence punctuation and on a closed list of
+   connectives (`and then`, `after that`, `next`, …) but not on plain `and`. So a two-act request was read
+   as ONE step, and the planner produced ONE command with the second record's values as **stray operands**
+   — `--amount 3 alpha.beta 5`. The grammar check added in §A88 did not fire because the *plan* it was
+   handed was the clean single-act one.
+2. **The planner returned the first command forever.** It cached the plan and handed back `commands[0]`
+   every step, so even once two steps existed, step 2 would have re-run step 1.
+3. **The self-judge confirmed one act and called the goal complete.** This is the deep one. `judge`
+   answers "did this act take effect", which is a different question from "is the request satisfied". The
+   loop treated the first as the second.
+
+### The fixes, and why splitting on `and` is safe
+
+Splitting on bare `and` looks dangerous — `create "x" and set the owner to "y"` is one command with two
+fields. It is safe **because the split is not what decides**: every piece is re-joined unless it
+`_leads_with_an_act`, and that guard is pre-existing. Verified at pristine HEAD before changing anything:
+`set` is in the act class, so both readings split, and a second half naming no act is what gets re-joined.
+
+The third fix is the one worth keeping. The self-judge now asks two things:
+
+    did the environment confirm the last act?      judge_from_seeing
+    are any of the request's commands still unrun?  len(queue)
+
+An act is finished when both hold. **Confirmation of an act is not completion of a goal**, and a harness
+that conflates them reports success on half the work — which is worse than reporting failure, because
+failure is visible.
+
+### Result
+
+| | |
+|---|---|
+| verdict | **DONE, 2 steps** |
+| commands run | `record add --name alpha --amount 3`, then `record add --name alpha.beta --amount 5` |
+| state on disk | both records present |
+
+### Honest limits, unchanged in kind
+
+Two acts in one request is not long-horizon planning. The queue is linear: it does not choose a next act
+from what happened, does not back out of a step that fails for a reason that invalidates a later one, and
+does not re-plan when the world contradicts an earlier step. §A88's `mutated-between-steps` task tests
+exactly that shape and passes — but through a different path, not this queue. Joining them is the next
+bottleneck, and the honest statement of where this stands is: **a documented program, a request of several
+acts, no model, effects confirmed by the environment.** Anything with a GUI is still untouched.

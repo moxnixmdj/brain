@@ -3897,8 +3897,18 @@ def sentences_of(text: str) -> list[str]:
     # owner to "y"` stays one command, because its second half leads with no act of its own.
     stated = []
     for part in parts:
+        # AND NOTHING MORE. `and` is the commonest sequential connective there is, and leaving it out
+        # meant a two-act request stayed one step: `add a record named "alpha" ... and add a record named
+        # "alpha.beta" ...` planned ONE command and the loop judged it confirmed and reported DONE while
+        # the second record was never created. Measured 2026-11-23, found by asking the loop for a
+        # two-record goal -- the failure was invisible because the first half succeeded.
+        #
+        # Splitting on bare `and` is safe HERE because the split is not what decides: every piece is
+        # re-joined below unless it `_leads_with_an_act`, so `create "x" and set the owner to "y"` stays
+        # one command, and `... and add a record ...` becomes two. The guard this list feeds is the
+        # safety, not the list.
         for piece in re.split(r"\s*(?:,?\s*(?:and\s+then|and\s+finally|after\s+that|"
-                              r"then|next|finally|afterwards)\b)\s*,?\s*", part,
+                              r"then|next|finally|afterwards|and)\b)\s*,?\s*", part,
                               flags=re.I):
             if piece.strip():
                 stated.append(piece.strip())

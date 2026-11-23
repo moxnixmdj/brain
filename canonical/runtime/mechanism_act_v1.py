@@ -181,6 +181,19 @@ def as_solve_model(*, probes: int = 16, expect: Sequence[str] = (),
     #: The act this run attempted, kept so the self-judge knows what to verify. One entry, because a run
     #: that needs two is multi-step and this planner is deliberately single-act (§A94's stated limit).
     attempted: list[list[str]] = []
+    #: Commands the documents state, in the request's order. The loop runs ONE per step, so the planner
+    #: advances through this list instead of returning the first command forever -- measured 2026-11-23,
+    #: a two-record goal planned two commands and executed the first twice.
+    queue: list[list[str]] = []
+
+    def next_command(goal: str) -> list[str] | None:
+        if not queue:
+            planned = plan_from_documents(goal, probes=probes)
+            if planned.get("act") is None:
+                return None
+            queue.extend([list(c) for c in (planned.get("commands") or [planned["act"]])])
+        return queue.pop(0) if queue else None
+
     if root:
         # the sandbox mounts the project at /project; a planned host path must be translated or every
         # step fails on a file the sandbox does have, under a name the plan did not use
@@ -208,9 +221,20 @@ def as_solve_model(*, probes: int = 16, expect: Sequence[str] = (),
             # caller who cannot state success in the world's terms still finish.
             if self_judge and attempted:
                 verdict = judge_from_seeing(str(goal), attempted[-1], seeing)
+                # CONFIRMING ONE ACT IS NOT COMPLETING THE GOAL. Measured 2026-11-23: a request for two
+                # records planned two commands, the first ran, the judge confirmed it, and the loop
+                # reported DONE with the second record never created. The failure was invisible because
+                # the half that ran had succeeded -- the most expensive shape a bug can have.
+                #
+                # So the question asked here is not "did the last act take effect" but "is anything the
+                # request stated still missing". An act is finished when the environment confirms it AND
+                # no stated command remains unrun.
+                remaining = len(queue)
+                confirmed = verdict.get("verdict") == "EFFECT_CONFIRMED"
                 calls.append({"step": number, "why": "ASKED_THE_ENVIRONMENT",
-                              "verdict": verdict.get("verdict") or verdict.get("why")})
-                if verdict.get("verdict") == "EFFECT_CONFIRMED":
+                              "verdict": verdict.get("verdict") or verdict.get("why"),
+                              "commands_still_unrun": remaining})
+                if confirmed and not remaining:
                     return None
 
             # 3. plan from the documentation, unless a learned rule already rejects a value
@@ -218,7 +242,10 @@ def as_solve_model(*, probes: int = 16, expect: Sequence[str] = (),
             if planned.get("act") is None:
                 calls.append({**planned, "step": number})
                 return None
-            argv = planned["act"]
+            argv = next_command(goal)
+            if argv is None:
+                calls.append({"step": number, "why": "NO_COMMAND_LEFT_TO_RUN"})
+                return None
             for token in argv[1:]:
                 rejected = _check_the_value(str(token), str(argv[0]))
                 if rejected is not None:
@@ -227,7 +254,10 @@ def as_solve_model(*, probes: int = 16, expect: Sequence[str] = (),
                     calls.append({**rejected, "step": number})
                     return None
             attempted.append(list(argv))
-            calls.append({**planned, "step": number})
+            # report the command ACTUALLY chosen, not the first one in the cached plan -- the queue
+            # advances, and a log that shows the first command every time cannot be audited
+            calls.append({**planned, "step": number, "act": list(argv),
+                          "commands": [[str(a) for a in argv]]})
             # `solve_v1.act` RUNS PYTHON SOURCE. Measured 2026-11-23: returning a shell command line
             # produced `SyntaxError: invalid syntax` on every step, four times, with empty stderr --
             # the planner re-planned the same command because the failure it was shown named nothing.

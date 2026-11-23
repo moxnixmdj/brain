@@ -270,3 +270,54 @@ def test_the_caller_can_omit_the_judgement_entirely(tmp_path: pathlib.Path) -> N
     assert "ASKED_THE_ENVIRONMENT" in reasons, reasons
     written = [p for p in world.rglob("*") if p.is_file() and ".ledgerctl-state" in p.name]
     assert written and "zed" in written[0].read_text()
+
+
+# ----------------------------------------------------------------------------------------------------
+# Multi-step: the hole flagged twice and closed once.
+# ----------------------------------------------------------------------------------------------------
+
+def test_a_two_act_request_completes_BOTH_acts(tmp_path: pathlib.Path) -> None:
+    """THE DEFECT THAT LOOKED LIKE SUCCESS. A request for two records planned two commands, the first
+    ran, the judge confirmed it, and the loop reported DONE with the second record never created.
+
+    Three separate bugs had to be fixed to see this, and the first hid the other two:
+      1. `and` was not a step boundary, so the request was read as ONE step and planned one command with
+         the second record's values as stray operands.
+      2. the planner returned the first command forever instead of advancing through the request's order.
+      3. the self-judge confirmed ONE act and called the GOAL complete.
+
+    Every one of them was invisible, because the half that ran had succeeded.
+    """
+    world, program = _sandbox(tmp_path, "ledgerctl")
+    goal = (program + ': add a record named "alpha" with amount "3"'
+            ' and add a record named "alpha.beta" with amount "5"')
+    model = M.as_solve_model(root=str(world), self_judge=True)
+
+    out = S.solve(goal, str(world), model=model, steps=6, learn=False)
+
+    assert out.get("verdict") == S.DONE, out.get("trace")
+    # BOTH records, read from disk
+    written = [p for p in world.rglob("*") if p.is_file() and ".ledgerctl-state" in p.name]
+    assert written, "no state was written"
+    state = written[0].read_text()
+    assert "alpha.beta" in state, state
+    assert '"amount": 5' in state, state
+
+
+def test_and_splits_two_acts_but_not_two_fields_of_one_act() -> None:
+    """The guard, not the connective, is what makes splitting on `and` safe.
+
+    The guard is `_leads_with_an_act`, and it is a closed class of verbs. `add` and `set` are both in it,
+    so BOTH of these split -- that is the pre-existing behaviour, confirmed unchanged at pristine HEAD
+    before `and` was added, and this test records it rather than wishing it different. A half that leads
+    with no act at all is what gets re-joined, and that is the case asserted here.
+    """
+    from canonical.runtime import require_survey_plan_v1 as R
+
+    two = R.sentences_of('add a record named "a" with amount "1" and add a record named "b" with amount "2"')
+    assert len(two) == 2, two
+
+    # a second half that names no act continues the step -- `with the owner set to "y"` is a field
+    # of the create, and splitting it would cut a field off the command it belongs to
+    one = R.sentences_of('create a workflow named "x" and with the owner set to "y"')
+    assert len(one) == 1, one
