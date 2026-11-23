@@ -31228,7 +31228,7 @@
   "engines": 26,
   "knowledge_documents": 600,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 7224,
+  "research_index_records": 7225,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 452,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "e8a12b9b4fb1d5d3e79b846f5ac75b42eaec9bf6c7829d00af1907bc74e2fe8e"
+  "value": "faf5f7ddb0cb09f8d8be64c0898ebc180756800a10951a621773217b6656a6bb"
  },
  "engines": [
   {
@@ -59420,7 +59420,7 @@
   },
   {
    "authority": "NOT_A_LAW",
-   "bytes": 17135,
+   "bytes": 17146,
    "headings": [
     "The Perfect Algorithm as the model — §3 verdict and ultimate plan — 2026-11-22",
     "0. Requirements confirmed",
@@ -59438,7 +59438,7 @@
    ],
    "kind": "DOCUMENT",
    "path": "PERFECT_ALGORITHM_MODEL_VERDICT_20261122_V1.md",
-   "sha256": "cebbc633d8346bd4f32610682b86c361a28a07799d44899d5fcb5211a13e1761",
+   "sha256": "2a9a539d5df1b0b9c39e0d1a55143758f0849105637c8533c5990a3523a1da0d",
    "summary": "Authority: `NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT`. This is the owner's question, measured honestly against the Perfect Algorithm loop as it exists on main and as it was re-built on this branch: **goal-directed generalization or broad learning-of-everything; what exactly is saved and what is never saved; what to admit and what to persist.** It is not a benchmark score, a GUI/browser success, an O",
    "terms": {
     "admission": 10,
@@ -91758,7 +91758,7 @@
   "included_source_count": 1402,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "d66f5cdeb2f8965cbdf3e873df6e54a8aa78f8fc06693de6408d5c2ab1b01a5a"
+  "source_tree_digest": "ed74d64d448521a55eeadc089cbf602057de1efbb257a5a70bff27df4d3e4fb2"
  },
  "research_index": [
   {
@@ -253879,6 +253879,51 @@
     "question": 2,
     "replay": 2,
     "right": 2
+   }
+  },
+  {
+   "action_id": "PERFECT_ALGORITHM_LOCAL_GUIDE_20261122_V1",
+   "capability": false,
+   "date": "2026-11-22",
+   "id": "research:canonical/action_intents/PERFECT_ALGORITHM_LOCAL_GUIDE_20261122_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/PERFECT_ALGORITHM_LOCAL_GUIDE_20261122_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "79723a654afa5dac00948e7e97806f32680a95442d2d98171a4450113e3768cc",
+   "status": "PROPOSED__PRODUCER_MEASURED__PERFECT_ALGORITHM_LOCAL_GUIDE__INDEPENDENT_VERIFICA",
+   "terms": {
+    "20261122": 1,
+    "algorithm": 2,
+    "allow_instant_knowledge": 1,
+    "already": 2,
+    "answered": 1,
+    "asked": 2,
+    "but": 1,
+    "caller": 1,
+    "completeness-gated": 1,
+    "compose_the_local_tier_into_the_existing_instant_knowledge_path": 1,
+    "computer": 2,
+    "conclude": 1,
+    "either": 1,
+    "fabricates": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "guide": 1,
+    "guides": 2,
+    "instant": 2,
+    "knowledge": 2,
+    "local": 3,
+    "machine": 1,
+    "misses": 1,
+    "never": 3,
+    "now": 1,
+    "offline": 1,
+    "one": 1,
+    "only": 1,
+    "own": 2,
+    "passes": 1,
+    "perfect": 2,
+    "perfect_algorithm_local_guide_20261122_v1": 1,
+    "tier": 4
    }
   },
   {
