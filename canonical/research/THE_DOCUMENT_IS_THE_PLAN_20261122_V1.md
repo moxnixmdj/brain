@@ -4791,3 +4791,61 @@ honest step is the same one OSWorld 2.0 measures and this does not: **horizon un
 fights back** — a store that rejects a command for a reason the documentation does not state, so the
 agent must repair from the refusal and continue. A87 built the repair loop and proved it works on a
 capability. It has not been joined to the long-horizon driver.
+
+## §A89 — the documentation permits it; the environment refuses it
+
+§A88 ended by naming the gap: A87 built a repair loop and proved it on a brain-native capability, and
+nothing had joined it to a long-horizon task. This closes it.
+
+### The fixture had to be built, because the others are too honest
+
+Every existing fixture documents what it enforces. `linear issue create -h` lists `--team` and `--title`
+as required and the program enforces exactly that. A test built on it proves nothing about repair: the
+documentation never permits anything the program refuses, so there is nothing to repair.
+
+`canonical/tests/programs/bin/ledgerctl` is the opposite. Its pages list `--name` and `--amount` and say
+nothing about three rules it enforces anyway:
+
+    AMOUNT_MUST_BE_A_WHOLE_NUMBER:<value>   an amount carries no decimal point
+    NAME_ALREADY_TAKEN:<name>               two records cannot share a name
+    NO_RECORDS_IN:<prefix>                  a prefix may not be opened until an ancestor exists
+
+The documentation is not lying. It is incomplete, which is the ordinary condition of real software and
+the reason a document reader alone will always lose to an environment that answers.
+
+### What the task measures, and the result that surprised
+
+The task adds `alpha` and `alpha.beta` totalling 13, with the request stating `12.50`. **6/6 long-horizon
+tasks pass.**
+
+The part worth keeping is the repair ORDER. The same argv —
+
+    ledgerctl record add --name alpha.beta --amount 12.50
+
+— is refused **twice, for two different reasons**, and the second reason is invisible until the first is
+fixed:
+
+| attempt | refusal | what it proves |
+|---|---|---|
+| 1 | `AMOUNT_MUST_BE_A_WHOLE_NUMBER:12.50` | the decimal point is checked before the nesting |
+| 2 | `NO_RECORDS_IN:alpha` | only now is the missing parent mentioned |
+| 3 | accepted | the same argv, refused twice, now runs |
+
+A repair loop that applied a fix it thought of first — "create the parent, then retry" — would have
+burned a call on an unrelated guess, because the refusal had not yet named the parent. **Only the program
+decides what is wrong first.** That is the argument for driving repair from the refusal string rather
+than from a theory of the tool, and it is now a test.
+
+### Tests that pin it
+
+* `test_a_refusal_that_names_the_fact_is_enough_to_repair` — the two-refusal sequence above, asserting
+  the exact `CODE:detail` at each step and the final total.
+* `test_an_unlocated_refusal_would_not_be_repairable` — the contrast: a refusal without a colon has
+  nothing in it to act on.
+
+### What this is not
+
+Six tasks cannot estimate a rate, and the fixture is a JSON file, not a GUI. The honest claim is narrow:
+**a refusal that locates its subject is sufficient to repair a long-horizon task without a model, without
+a value invented, and without the documentation being right.** The 929 bare refusals still in this tree
+are the size of the work that remains, and §A87's census is how that number is known.

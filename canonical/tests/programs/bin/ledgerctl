@@ -1,0 +1,216 @@
+#!/usr/bin/env python3
+"""ledgerctl -- a program whose DOCUMENTATION IS INCOMPLETE ON PURPOSE.
+
+Every other fixture in this directory documents what it enforces. This one does not. Its help pages say
+which flags exist and what they mean, and say nothing about the three rules below, which it enforces
+anyway:
+
+    AMOUNT_MUST_BE_A_WHOLE_NUMBER:<value>   an amount carries no decimal point
+    NAME_ALREADY_TAKEN:<name>               two records cannot share a name
+    NO_RECORDS_IN:<prefix>                  a prefix may not be opened until an ancestor exists
+
+That is the situation OSWorld 2.0 measures and this repository had never tested: a command that the
+documentation permits and the environment refuses. The refusal names the exact fact that was missing, so
+an agent can repair from it -- but only if it reads the refusal instead of re-running its plan.
+
+State lives in `$LEDGER_STATE`, so a test can give each run its own file.
+
+    ledgerctl --help
+    ledgerctl record add --name a.b --amount 5
+"""
+import json
+import os
+import sys
+
+PAGES = {
+    "": """ledgerctl -- a hierarchical ledger
+
+USAGE:
+  ledgerctl <command> [flags]
+
+AVAILABLE COMMANDS:
+  record              Manage records
+  report              Read a report
+
+FLAGS:
+  -h, --help          Show help for a command
+""",
+    "record": """Manage records
+
+USAGE:
+  ledgerctl record <command> [flags]
+
+AVAILABLE COMMANDS:
+  add                 Add a record
+  list                List records
+
+FLAGS:
+  -h, --help          Show help for a command
+""",
+    "record add": """Add a record
+
+USAGE:
+  ledgerctl record add [flags]
+
+FLAGS:
+  --name <string> (required)	Record name
+  --amount <string> (required)	Amount to record
+
+  -h, --help	Show help for this command
+""",
+    "record list": """List records
+
+USAGE:
+  ledgerctl record list [flags]
+
+FLAGS:
+  --name <string>	Filter by record name
+
+  -h, --help	Show help for this command
+""",
+    "report": """Read a report
+
+USAGE:
+  ledgerctl report <command> [flags]
+
+AVAILABLE COMMANDS:
+  totals              Totals for a prefix
+
+FLAGS:
+  -h, --help          Show help for a command
+""",
+    "report totals": """Totals for a prefix
+
+USAGE:
+  ledgerctl report totals [flags]
+
+FLAGS:
+  --prefix <string> (required)	Prefix to total
+
+  -h, --help	Show help for this command
+""",
+}
+
+STATE = os.environ.get("LEDGER_STATE") or os.path.join(
+    os.path.dirname(os.path.abspath(__file__)), ".ledgerctl-state.json")
+HELP = ("--help", "-h", "help")
+
+
+def load():
+    try:
+        with open(STATE) as handle:
+            return json.load(handle)
+    except (OSError, ValueError):
+        return {}
+
+
+def save(state):
+    with open(STATE, "w") as handle:
+        json.dump(state, handle, indent=1, sort_keys=True)
+
+
+def parse(args):
+    flags, bare, index = {}, [], 0
+    while index < len(args):
+        word = args[index]
+        if word.startswith("--"):
+            name = word[2:]
+            if "=" in name:
+                name, _, value = name.partition("=")
+                flags[name] = value
+            elif index + 1 < len(args) and not args[index + 1].startswith("--"):
+                flags[name] = args[index + 1]
+                index += 1
+            else:
+                flags[name] = ""
+        else:
+            bare.append(word)
+        index += 1
+    return flags, bare
+
+
+def refuse(code, detail=""):
+    """A refusal that LOCATES itself. The code says what kind of fact is missing and the detail says
+    which value it is about, so a reader can act without guessing. This is the convention A87 made
+    enforceable: an unlocated refusal teaches nothing and costs the repair loop two wrong guesses."""
+    sys.stderr.write(code + (":" + detail if detail else "") + "\n")
+    return 1
+
+
+def main(argv):
+    asked_for_help = "--help" in argv or "-h" in argv or "help" in argv
+    args = [a for a in argv if a not in HELP]
+    if asked_for_help:
+        key = " ".join(args)
+        if key in PAGES:
+            sys.stdout.write(PAGES[key])
+            return 0
+        sys.stdout.write(PAGES.get("", ""))
+        return 0
+    if not args:
+        sys.stdout.write(PAGES.get("", ""))
+        return 0
+
+    flags, bare = parse(args)
+    route = ""
+    for count in range(len(bare), 0, -1):
+        candidate = " ".join(bare[:count])
+        if candidate in PAGES and candidate:
+            route = candidate
+            break
+    if not route:
+        return refuse("UNKNOWN_ROUTE", " ".join(bare))
+
+    state = load()
+    records = state.setdefault("record", [])
+
+    if route == "record add":
+        name = str(flags.get("name") or "")
+        amount = str(flags.get("amount") or "")
+        if not name:
+            return refuse("NAME_REQUIRED")
+        if not amount:
+            return refuse("AMOUNT_REQUIRED")
+        # RULE 1, undocumented: a whole number carries no decimal point.
+        if "." in amount:
+            return refuse("AMOUNT_MUST_BE_A_WHOLE_NUMBER", amount)
+        try:
+            int(amount)
+        except ValueError:
+            return refuse("AMOUNT_MUST_BE_A_WHOLE_NUMBER", amount)
+        # RULE 2, undocumented: names are unique.
+        if any(str(r.get("name")) == name for r in records):
+            return refuse("NAME_ALREADY_TAKEN", name)
+        # RULE 3, undocumented: a dotted name needs its parent to exist first.
+        if "." in name:
+            prefix = name.rsplit(".", 1)[0]
+            if not any(str(r.get("name")) == prefix for r in records):
+                return refuse("NO_RECORDS_IN", prefix)
+        records.append({"name": name, "amount": int(amount)})
+        save(state)
+        sys.stdout.write(json.dumps({"ok": True, "name": name, "amount": int(amount)}) + "\n")
+        return 0
+
+    if route == "record list":
+        wanted = str(flags.get("name") or "")
+        shown = [r for r in records if not wanted or str(r.get("name")) == wanted]
+        sys.stdout.write(json.dumps(shown) + "\n")
+        return 0
+
+    if route == "report totals":
+        prefix = str(flags.get("prefix") or "")
+        if not prefix:
+            return refuse("PREFIX_REQUIRED")
+        matched = [r for r in records
+                   if str(r.get("name")) == prefix or str(r.get("name")).startswith(prefix + ".")]
+        if not matched:
+            return refuse("NO_RECORDS_IN", prefix)
+        sys.stdout.write(json.dumps({"prefix": prefix,
+                                     "total": sum(int(r.get("amount") or 0) for r in matched)}) + "\n")
+        return 0
+
+    return refuse("UNKNOWN_ROUTE", route)
+
+
+if __name__ == "__main__":
+    raise SystemExit(main(sys.argv[1:]))

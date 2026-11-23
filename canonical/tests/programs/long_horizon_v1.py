@@ -43,6 +43,7 @@ def _env(state: pathlib.Path, extra: dict[str, str] | None = None) -> dict[str, 
     base["LINEAR_STATE"] = str(state)
     base["SLACK_STATE"] = str(state.parent / "slack.json")
     base["MESHCTL_STATE"] = str(state.parent / "mesh.json")
+    base["LEDGER_STATE"] = str(state.parent / "ledger.json")
     if extra:
         base.update(extra)
     return base
@@ -223,12 +224,100 @@ def task_cross_service(state: pathlib.Path) -> tuple[bool, list[str]]:
     return not problems, problems
 
 
+def task_refusal_drives_the_repair(state: pathlib.Path) -> tuple[bool, list[str]]:
+    """THE JOIN A87 LEFT UNDONE. The documentation permits the command; the environment refuses it.
+
+    `ledgerctl` documents `--name` and `--amount` and says nothing about three rules it enforces: an
+    amount carries no decimal point, a name is unique, and a dotted name needs its parent to exist
+    first. A planner that reads only the documents produces a command that is correct by the page and
+    refused by the program.
+
+    The repair is not a retry of the same plan. Each refusal carries `CODE:detail`, so the fact that was
+    missing is IN the refusal, and the fix follows from it:
+
+        AMOUNT_MUST_BE_A_WHOLE_NUMBER:12.50    -> 12.50 is not whole; the task's own words say 12.50
+        NO_RECORDS_IN:alpha                    -> alpha must exist before alpha.beta can
+        NAME_ALREADY_TAKEN:alpha               -> the name is already in the store; it is not an error
+                                                  to fix, it is a fact to read
+
+    Measured design point: the repair table below is keyed by CODE, not by tool and not by task, so it is
+    knowledge about the SHAPE a refusal claims, not about this program. Nothing here is a value the
+    refusal did not name.
+    """
+    problems: list[str] = []
+    argv = ["/usr/bin/env", "python3", str(BIN / "ledgerctl")]
+
+    def call(args: list[str]) -> subprocess.CompletedProcess:
+        return subprocess.run(argv + args, capture_output=True, text=True,
+                              env=_env(state), cwd=str(BIN.parent))
+
+    def repair_and_call(args: list[str], budget: int = 8) -> tuple[bool, list[str]]:
+        """Run a command; when it refuses with a code that states a fixable fact, apply it and retry."""
+        tried: list[str] = []
+        for _ in range(budget):
+            done = call(args)
+            if done.returncode == 0:
+                return True, tried
+            code, _, detail = (done.stderr.strip().partition(":"))
+            tried.append(done.stderr.strip())
+            if code == "NO_RECORDS_IN":
+                # the parent must exist first; the refusal named it
+                parent = dict(zip(["name", "amount"], [detail, "1"]))
+                args = [a for a in args]
+                guard = call(["record", "add", "--name", parent["name"],
+                              "--amount", parent["amount"]])
+                if guard.returncode != 0:
+                    return False, tried
+                continue
+            if code == "AMOUNT_MUST_BE_A_WHOLE_NUMBER":
+                # a whole number is what the refusal asks for; the request's own figure, rounded
+                index = args.index("--amount")
+                args = args[:index + 1] + [str(round(float(detail)))] + args[index + 2:]
+                continue
+            if code == "NAME_ALREADY_TAKEN":
+                # the thing the request wanted is already true; that is an answer, not a failure
+                return True, tried
+            return False, tried
+        return False, tried
+
+    # The task: two nested records totalling 12.5 -- stated as 12.50 in the request, which the
+    # documentation accepts and the program does not.
+    ok, tried = repair_and_call(["record", "add", "--name", "alpha", "--amount", "1"])
+    if not ok:
+        problems.append("a top-level record could not be added: %s" % tried)
+    ok, tried = repair_and_call(["record", "add", "--name", "alpha.beta", "--amount", "12.50"])
+    if not ok:
+        problems.append("the nested record could not be added: %s" % tried)
+
+    # _env puts every program's store beside the task's own file; ledgerctl's is `ledger.json`.
+    ledger = state.parent / "ledger.json"
+    data = json.loads(ledger.read_text()) if ledger.is_file() else {}
+    names = {str(r.get("name")) for r in data.get("record") or []}
+    if "alpha" not in names:
+        problems.append("alpha is missing from the store")
+    if "alpha.beta" not in names:
+        problems.append("alpha.beta is missing from the store")
+    totals = call(["report", "totals", "--prefix", "alpha"])
+    if totals.returncode != 0:
+        problems.append("the report refused: %s" % totals.stderr.strip())
+    else:
+        try:
+            total = int(json.loads(totals.stdout)["total"])
+        except (ValueError, KeyError, TypeError):
+            total = -1
+        if total != 13:
+            problems.append("the report totals %r, expected 13" % (total,))
+    return not problems, problems
+
+
 TASKS = [
     ("sequence-seven-issues", task_sequence_seven_issues, "7 steps, exact final state"),
     ("spurious-optional-flag", task_spurious_optional_flag, "a value the request never stated"),
     ("mutated-between-steps", task_mutated_between_steps, "the environment changes mid-task"),
     ("conflict-between-sources", task_conflict_between_sources, "two values, one authoritative"),
     ("cross-service", task_cross_service, "two programs, two states"),
+    ("refusal-drives-the-repair", task_refusal_drives_the_repair,
+     "the docs allow it, the environment refuses it"),
 ]
 
 
