@@ -279,3 +279,42 @@ def test_a_local_module_is_reported_unknown_rather_than_probed_into_a_false_answ
     result = RB.predict((world / "app.py").read_text(), world=world)
     assert result["faults"] == [], "a local module is not a missing module"
     assert result["unknowable_imports"] == ["alpha_mod"]
+
+
+#: Unseen, realistic programs. Each entry is (name, source, config-file-contents-or-None).
+REALISTIC = [
+    ("config missing key", 'import json\ncfg=json.load(open("c.json"))\nprint(cfg["nope"])', '{"a": 1}'),
+    ("config ok", 'import json\ncfg=json.load(open("c.json"))\nprint(cfg["a"])', '{"a": 1}'),
+    ("env missing", 'import os\nprint(os.environ["NOPE_ZZ"])', None),
+    ("env present", 'import os\nprint(os.environ["HOME"])', None),
+    ("file exists", 'import os\nprint(os.path.exists("c.json"))', None),
+    ("list index", "xs=[1,2]\nprint(xs[5])", None),
+    ("div zero", "a=10\nb=0\nprint(a/b)", None),
+    ("clean loop", "t=0\nfor i in [1,2,3]:\n    t=t+i\nprint(t)", None),
+    ("config value as index", 'import json\nxs=[1,2]\nprint(xs[json.load(open("c.json"))["i"]])', '{"i": 9}'),
+    ("config nested", 'import json\nd=json.load(open("c.json"))\nprint(1/d["z"])', '{"z": 0}'),
+]
+
+
+def test_predictions_agree_with_real_execution_on_realistic_programs() -> None:
+    """THE CAPABILITY MEASURE, checked against the only ground truth there is: running the program.
+
+    Every case here is a shape a person actually writes -- a config file, an environment variable, a list index,
+    a division. The assertion is agreement, not detection: a program predicted clean that then crashes is as
+    much a failure as a correct program accused, and for this system the second is worse.
+    """
+    from canonical.runtime import read_before_running_v1 as RB
+
+    disagreements = []
+    for name, source, config in REALISTIC:
+        world = pathlib.Path(_world())
+        if config is not None:
+            (world / "c.json").write_text(config)
+        (world / "app.py").write_text(source)
+
+        actual = subprocess.run([sys.executable, "app.py"], cwd=world,
+                                capture_output=True, text=True).returncode != 0
+        predicted = bool(RB.predict(source, world=world)["faults"])
+        if predicted != actual:
+            disagreements.append((name, "predicted", predicted, "actual", actual))
+    assert disagreements == [], disagreements

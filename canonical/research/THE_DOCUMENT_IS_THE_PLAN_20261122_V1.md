@@ -7085,3 +7085,62 @@ question, answered in §A115 by importing it alone and only when a learned rule 
     VERIFIED   the evidence (`values_probes`) travels with the prediction
     VERIFIED   a local module stays unknowable rather than being probed into a false answer
     VERIFIED   181 passed, 2 skipped across twelve suites
+
+## §A124 — the capability, measured against execution on ten realistic programs
+
+### The measure that matters
+
+Every previous section measured one mechanism. This one measured the **whole prediction path** against the only
+ground truth there is: running the program. Ten shapes a person actually writes.
+
+| program | predicted | actual | |
+|---|---|---|---|
+| config missing key | fail | fail | ok |
+| config ok | clean | clean | ok |
+| env missing | fail | fail | ok |
+| env present | clean | clean | ok |
+| file exists | clean | clean | ok |
+| list index past end | fail | fail | ok |
+| division by zero | fail | fail | ok |
+| clean loop | clean | clean | ok |
+| config value used as an index | fail | fail | ok |
+| config value used as a divisor | fail | fail | ok |
+
+**10 / 10 agreement.** The assertion is agreement, not detection: a program predicted clean that then crashes is
+as much a failure as a correct program accused — and for this system the second is worse.
+
+Now a pinned test, so the capability cannot erode silently.
+
+### The honest summary of §A113–§A124
+
+Where this thread started: the same fault cost the same number of executions every time, forever, and nothing was
+ever cheaper the second time — the owner's hypothesis was **false of the implementation**.
+
+What was built, in order, each step forced by a measurement rather than a plan:
+
+| step | what changed | the evidence |
+|---|---|---|
+| §A113 | CPython's sentences and traceback FRAMES are read | every reader had discarded the frames |
+| §A114 | `repair_v1` no longer reports a successful repair as a failure | test failed when the fix was reverted |
+| §A115 | a learned rule says *ask*, not *guilty* | the rule convicted a healthy module |
+| §A116 | §2's test passed literally | cold → warm → forgotten, across processes |
+| §A117 | runtime faults decided from literals, no solver | 26/26 grid vs real execution |
+| §A118 | inlining; a repair refused because none is stated | 9/9 vs real execution |
+| §A119 | a refusal can never masquerade as safety | `os.environ` was called "clean" |
+| §A120 | probing instead of refusing, with provenance | the §A119 boundary closed |
+| §A122 | `open`'s MODE decides, not its name | a config-file program decided |
+| §A123 | one entry point, so the mechanism is actually used | `predict` ignored the prober |
+| §A124 | 10/10 against execution on realistic programs | this table |
+
+### What is still not true
+
+    NOT DONE   arbitrary computer use. This is Python source, read and probed. A GUI, a browser, a binary --
+               none of it is touched by any mechanism in §A113-A124.
+    NOT DONE   repair of runtime faults: they are DETECTED, and §A118 established that no correction is stated
+               by the failure, so none is invented.
+    NOT DONE   values from stdin or the network: a probe there would be an ACTION, not a question.
+    NOT DONE   the mission's §6 bar. Nothing here has been run against OSWorld 2.0 or any SE benchmark.
+
+The gap between this and the mission is not effort, it is **reach**: everything in this thread reasons about
+Python source, and the mission is arbitrary environments. That is the honest position, and the next round should
+attack reach rather than depth in the same mechanism.
