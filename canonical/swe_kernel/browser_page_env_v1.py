@@ -172,13 +172,14 @@ class BrowserPageEnv:
         return self.state()
 
     def restore(self, token: Mapping[str, Any]) -> None:
-        # honest "restore" for a page: fresh load, then re-apply the recorded
-        # form-field values. Everything else derived from the form (the
-        # reversed span, the done line) is NOT restored -- it is re-derived by
-        # the same actions that produced it, never trusted.
-        url = (token or {}).get("url") or self._url
+        # honest "restore" for a page: fresh load of the env ROOT (the URL the
+        # env was constructed for), then re-apply the recorded form-field
+        # values. Everything else derived from the form (the reversed span,
+        # the done line, a redirect to another page) is NOT restored -- it is
+        # re-derived by the same actions that produced it, never trusted.
+        # The token's url is NOT honored: an env's identity is the fixture it
+        # was built with, never where a probe last left the page.
         values = (token or {}).get("inputs") or {}
-        self._url = url
         self.reset()
         if values:
             try:
