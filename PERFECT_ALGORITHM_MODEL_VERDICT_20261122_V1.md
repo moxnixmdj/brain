@@ -1076,3 +1076,32 @@ same split §10/§12/§13 measured for archives and towers: the plan rule
 generalizes (admitted on fresh variants), the transition model does not.
 NOT §6: no benchmark, no cross-kind transfer, no GUI close-out. Same honest
 boundary.
+
+## 31. The carried-model walk over a two-page workflow (2026-11-23, measured)
+
+§30 measured the carried walk on a single live page. §31 extends the same
+honest priors-only construction (§10/§30) to the §29 multi-page fixture — a
+real cross-page carry: fill page A, submit, redirect to page B, verify
+"submitted:abc" in the live page text after landing.
+
+  TEACH-NO-FRESH  PASS__PERFECT_ALGORITHM_RUN, admission REFUSED (no fresh
+                 instances offered), persist False, 4 states / 8 transitions,
+                 145.7 s.
+  WALK-D (content B)  OPEN__CARRIED_WALK_FAILED honestly — 0 edges, 1 act call,
+                 priors_used 8, cap 96 — then the full scan re-derived the
+                 plan (same plan) and the run PASSED (VERIFIED_NOT_PERSISTED),
+                 155.8 s.
+  WALK-A (content A, CONTROL)  PASS__CARRIED_WALK_REACHED_GOAL — the carried
+                 model re-verified 5 edges against the live page (8 act
+                 calls, 2 resets), reached the goal across the redirect
+                 (browser navigated a.html -> b.html?name=abc), plan
+                 [fill:#txt:abc, click:go], outcome CARRIED_MODEL_WALK_REACHED,
+                 24.5 s — zero rule replay, zero scan, zero admission.
+
+Same honest split as §30 and §10: the carried walk reaches the goal within
+identical content (24.5 s, no scan, no admission), refuses honestly across
+content (0 edges, full-scan fallback). The redirect does not break the walk:
+the cross-page carry rides the same live-page verification (every edge
+re-executed against the live page; the redirect is a page navigation, not a
+trusted transition).
+NOT §6: no benchmark, no cross-kind transfer, no GUI close-out.
