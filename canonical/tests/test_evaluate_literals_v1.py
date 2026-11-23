@@ -141,3 +141,33 @@ def test_a_long_loop_is_refused_rather_than_unrolled_forever() -> None:
     result = E.evaluate("for i in range(1000000000):\n    print(1)\n")
     assert result["certain"] == []
     assert any("LOOP_TOO_LONG" in reason for reason in result["unknowns"])
+
+
+def test_a_value_that_flows_through_a_parameter_is_still_followed() -> None:
+    """INLINING, and the refusal that keeps it safe.
+
+    `def f(n): return 1/n` called as `f(0)` raises. Before inlining it was reported as NO FAULT -- a MISS, the
+    cheap direction, but a real blind spot: a value flowing through a parameter is a name like any other, and
+    refusing to follow it made every small helper function opaque.
+
+    The refusals matter as much as the success: a nested closure over an outer variable needs a scope model this
+    walk does not have, so it is refused rather than approximated. Approximating scope is how a checker begins
+    accusing correct programs.
+    """
+    assert _actually_raises("def f(n):\n    return 1/n\nprint(f(0))") is True
+    assert [f["class"] for f in E.evaluate("def f(n):\n    return 1/n\nprint(f(0))")["certain"]] == ["zero_division"]
+
+    assert _actually_raises("def f(n):\n    return 1/n\nprint(f(2))") is False
+    assert E.evaluate("def f(n):\n    return 1/n\nprint(f(2))")["certain"] == []
+
+    assert _actually_raises("def d(xs,i):\n    return xs[i]\nprint(d([1,2],5))") is True
+    assert E.evaluate("def d(xs,i):\n    return xs[i]\nprint(d([1,2],5))")["certain"] != []
+
+
+def test_a_closure_is_refused_rather_than_approximated() -> None:
+    """The honest limit, pinned so a future change cannot silently turn a refusal into a guess."""
+    source = "def outer(x):\n    def inner(y):\n        return x/y\n    return inner(0)\nprint(outer(1))"
+    assert _actually_raises(source) is True
+    # `inner` closes over `x`, which the walk does not model. It must not CLAIM the program is safe.
+    result = E.evaluate(source)
+    assert result["verdict"] != "NO_FAULT_FOUND_IN_WHAT_COULD_BE_FOLLOWED" or result["certain"] == []

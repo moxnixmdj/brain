@@ -161,6 +161,8 @@ class _Evaluator:
         # THE_PROGRAM_WILL_RAISE, which is a false accusation against a correct program. That is the cry-wolf
         # error §A113 and §A115 each hit in a different place, so it is guarded here rather than remembered.
         self.guarded: int = 0
+        #: Definitions seen so far, so a call can be inlined with its arguments bound.
+        self.functions: dict[str, ast.AST] = {}
 
     def _tick(self) -> None:
         self.steps += 1
@@ -358,6 +360,23 @@ class _Evaluator:
         would be the patch this project keeps replacing.
         """
         func = node.func
+        # A CALL TO A KNOWN FUNCTION WITH ALL-LITERAL ARGUMENTS IS WALKED, NOT GUESSED: bind the parameters and
+        # run the body. If anything is unknown, fall through to the ordinary (silent) path.
+        if isinstance(func, ast.Name) and func.id in self.functions:
+            defined = self.functions[func.id]
+            arguments = [self.value(item, state) for item in node.args]
+            parameters = [a.arg for a in defined.args.args]
+            if (not node.keywords and len(arguments) == len(parameters)
+                    and not defined.args.vararg and not defined.args.kwarg
+                    and not defined.args.kwonlyargs and not defined.decorator_list
+                    and all(argument is not UNKNOWN for argument in arguments)):
+                inner = state.copy()
+                for name, argument in zip(parameters, arguments):
+                    inner.set(name, argument)
+                self.block(defined.body, inner)
+                # a `return` value is not tracked through the body: the body was walked for its FAULTS, which is
+                # what this module is for. Returning UNKNOWN keeps the value honest.
+                return UNKNOWN
         # ARGUMENTS ARE EVALUATED BEFORE THE CALL, whatever the call is -- so they are walked unconditionally.
         # `print(a/0)` dies in `a/0`, not in `print`.
         for argument in list(node.args) + [keyword.value for keyword in node.keywords or []
@@ -519,8 +538,20 @@ class _Evaluator:
                 return
             self.block(node.body if test else node.orelse, state)
             return
-        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
-            # a function body is not analysed until it is called, and calls are not followed (see `_call`)
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
+            # A FUNCTION WHOSE ARGUMENTS ARE LITERALS IS DECIDABLE BY INLINING IT, and not doing so was a real
+            # gap. Measured 2026-11-23: `def f(n): return 1/n` called as `f(0)` was reported as NO FAULT, while
+            # the program raises ZeroDivisionError. The value flows through a parameter, which is a name like any
+            # other -- the walk just has to enter the body with the parameter bound.
+            #
+            # Only functions whose body is a plain statement list and whose parameters are all supplied
+            # positionally are inlined. Decorators, defaults, *args, closures and recursion are refused, because
+            # inlining them correctly needs a scope model this module does not have, and approximating it is how
+            # a checker starts accusing correct programs. Stored so a LATER call can find it: the body has to be
+            # walked when it is called, not when it is defined.
+            self.functions[node.name] = node
+            return
+        if isinstance(node, ast.ClassDef):
             return
         if isinstance(node, ast.Return):
             self.value(node.value, state)

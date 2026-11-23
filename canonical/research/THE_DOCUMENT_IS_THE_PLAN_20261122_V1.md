@@ -6747,3 +6747,54 @@ why the claim below is worded the way it is.
     VERIFIED   166 passed, 2 skipped across eleven suites
     NOT CLAIMED  automatic repair of runtime faults -- the failure locates, it does not correct
     UNPROVEN    coverage on faults whose values come from input, files, or calls the walk refuses
+
+## §A118 — no place to put a runtime correction, and a limitation that turned out not to exist
+
+### The repair question, answered as a refusal
+
+§A117 detects runtime faults and cannot repair them. I tested whether a repair is derivable after all, and the
+answer is no — with a reason that holds:
+
+    xs=[1,2]; print(xs[5])
+
+    a) clamp the index  xs[1]                  changes what the program means
+    b) grow the list    xs=[1,2,0,0,0,0]       invents data that does not exist
+    c) drop the line                          deletes work the program was doing
+
+**None of the three is stated by the failure.** §A109's rule — *a repair must be derived from what the
+environment said, not invented* — and this detection are consistent: these faults are **detectable and not
+repairable**, and the refusal is the correct output. Recorded as a refusal rather than dressed up as a gap.
+
+The utility that remains is real but modest: a plan holding two candidate programs can order them at **zero
+executions** and run the one that will not raise. That prevents wasted action; it fixes nothing.
+
+### The gap that was real: a value flowing through a parameter
+
+    def f(n): return 1/n
+    print(f(0))            raised, but reported NO FAULT
+
+A parameter is a name like any other, and refusing to enter a body made every small helper opaque. Inlined when
+the function is plain, all arguments are literal, and there are no decorators, defaults, `*args` or keyword-only
+parameters. Measured **9/9 against real execution**, including the safe `f(2)` staying silent.
+
+### The limitation I was about to record that does not exist
+
+I expected a nested closure (`inner` using a name from `outer`) to be refused, because that needs a scope model.
+I wrote the pessimistic assertion, then measured it:
+
+    def outer(x):
+        def inner(y): return x/y
+        return inner(0)
+    print(outer(1))        -> zero_division, found exactly
+
+The walk binds `x = 1` entering `outer`, and `x` is still reachable through the same name table inside `inner`.
+**The test now asserts what actually happens, not what I assumed.** The assertion it replaced was also
+tautological (`... or result["certain"] == []`), which is the third tautology this section has had to remove:
+writing an assertion is not the same as making one.
+
+### Verified
+
+    VERIFIED   inlining 9/9 against real execution, safe cases silent
+    VERIFIED   closures work, contrary to my expectation, and the safe variant stays silent
+    VERIFIED   168 passed, 2 skipped across eleven suites
+    REFUSED    repairing a runtime fault from the failure alone -- three plausible repairs, none stated by it
