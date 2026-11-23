@@ -87,6 +87,8 @@ def alias_map(stub_imports: Sequence[str]) -> dict[str, str]:
         from a import b        -> {"a.b": "b", "a": "b"}
     """
     out: dict[str, str] = {}
+    from_bound: set[str] = set()
+    _FROM_BOUND.clear()
     for line in stub_imports or ():
         t = line.strip()
         if t.startswith("import "):
@@ -108,7 +110,12 @@ def alias_map(stub_imports: Sequence[str]) -> dict[str, str]:
                     continue
                 bound = bits[1].strip() if len(bits) > 1 else nm
                 out[f"{mod}.{nm}"] = bound
+                from_bound.add(f"{mod}.{nm}")
+    _FROM_BOUND.update(from_bound)
     return out
+
+
+_FROM_BOUND: set[str] = set()
 
 
 def bound_spelling(dotted: str, aliases: Mapping[str, str]) -> str | None:
@@ -122,12 +129,22 @@ def bound_spelling(dotted: str, aliases: Mapping[str, str]) -> str | None:
     parts = dotted.split(".")
     # longest bound prefix first: `scipy.linalg.expm` with `from scipy import linalg` binds
     # `scipy.linalg` -> `linalg`, which is shorter and legal.
-    for i in range(len(parts) - 1, 0, -1):
+    for i in range(len(parts), 0, -1):
         prefix = ".".join(parts[:i])
         if prefix in aliases:
             bound = aliases[prefix]
             rest = ".".join(parts[i:])
+            # the FULL path bound by a `from X import y` line IS the namespace name; nothing
+            # is appended to it, or `gaussian_filter1d.gaussian_filter1d` is emitted.
+            if not rest:
+                return bound
             return f"{bound}.{rest}" if bound else rest
+        # `from scipy.ndimage import gaussian_filter1d` binds the FULL path and puts nothing in
+        # `aliases` for the MODULE `scipy.ndimage` alone. The name then exists in the namespace
+        # under its own last component, so the legal spelling is just that component -- and
+        # without this the walk returned None and the whole scipy keyword family was dropped.
+        if prefix in _FROM_BOUND:
+            return ".".join(parts[i:])
     if parts[0] in aliases:
         return aliases[parts[0]] + "." + ".".join(parts[1:]) if len(parts) > 1 else aliases[parts[0]]
     return None
@@ -146,6 +163,61 @@ def respell(body: str, aliases: Mapping[str, str]) -> str:
             return aliases[root] + dotted[len(root):]
         return dotted
     return re.sub(r"\b([A-Za-z_]\w*(?:\.[A-Za-z_]\w*)*)\b(?=\s*[.(])", _one, body)
+
+
+def _looks_expression(body: str) -> bool:
+    """True when `body` is an expression a `return` can be put in front of.
+
+    An assignment, a loop, an import or an already-returned body cannot take a prefix; adding
+    one would emit a SyntaxError that costs a trial and teaches nothing.
+    """
+    t = (body or "").strip()
+    if not t or t.startswith(("return ", "import ", "from ", "for ", "while ", "if ", "with ")):
+        return False
+    if re.match(r"^[A-Za-z_]\w*(\[[^\]]*\])?\s*(=|\+=|-=|\*=|/=|//=)", t):
+        return False
+    return True
+
+
+def keyword_call(body: str, keywords: Sequence[str]) -> str | None:
+    """Rewrite `f(a, b, c)` as `f(a, b=b, c=c)` for every keyword the callee declares.
+
+    THE WHOLE scipy GAP IN ONE RULE, measured. Of scipy's 22 reference-solvable items, 15 pass
+    a stub parameter as a KEYWORD: `gaussian_filter1d(x, radius=radius, sigma=sigma)`. The
+    grammar emitted the positional `gaussian_filter1d(x, radius, sigma)` -- the right name with
+    the wrong calling convention -- and the artifact rejected it. Positional order is not
+    derivable from a docstring, but "a parameter of mine named `radius` goes to a slot named
+    `radius`" is, once the artifact is asked for its own signature.
+    """
+    m = re.match(r"^([A-Za-z_][\w.]*)\(([^()]*)\)$", body.strip())
+    if not m:
+        return None
+    callee, inner = m.group(1), m.group(2)
+    parts = [p.strip() for p in inner.split(",") if p.strip()]
+    if len(parts) < 2:
+        return None
+    # only rewrite an argument whose text IS a declared keyword: a literal, a path or an
+    # operator expression cannot be renamed into a slot and must stay positional.
+    # A POSITIONAL SLOT IS FILLED IN ORDER. The nth positional argument lands in the callee's
+    # nth declared parameter, so `gaussian_filter1d(x, radius, sigma)` already satisfies
+    # parameters 0..2 by name. Rewriting those as keywords is `x=x, radius=radius`, which is
+    # noise the oracle would spend trials on. What positional order CANNOT reach is a slot
+    # whose declared name matches a LATER argument -- `rank_filter(A, rank, size)` against
+    # `(input, rank, size)` happens to line up, but `moment(a, n)` against `(a, moment, order)`
+    # does not, and only the keyword form says which name goes where.
+    renamed = []
+    for i, p in enumerate(parts):
+        if not re.fullmatch(r"[A-Za-z_]\w*", p):
+            renamed.append(p)
+            continue
+        if p not in keywords:
+            renamed.append(p)
+            continue
+        pos = keywords.index(p)
+        # keep positional if this argument's own position already fills the slot of that name
+        renamed.append(p if pos == i else f"{p}={p}")
+    out = f"{callee}({', '.join(renamed)})"
+    return out if out != body.strip() else None
 
 
 def qualified_spellings(names: Sequence[str], modules: Mapping[str, str],
@@ -275,6 +347,8 @@ def compositions(args: Sequence[str], paths: Mapping[str, Sequence[str]],
                  guide_bodies: Sequence[str] = (),
                  stub_imports: Sequence[str] = (),
                  modules_in_scope: Mapping[str, str] = None,
+                 python: str = "",
+                 stub_source: str = "",
                  nested_short: Mapping[str, Sequence[str]] | None = None,
                  kwarg_names: Sequence[str] = (),
                  func_name: str = "",
@@ -302,6 +376,30 @@ def compositions(args: Sequence[str], paths: Mapping[str, Sequence[str]],
     # NOT `numpy` -- so the correct answer in corpus spelling raises NameError. Every body is
     # therefore respelled to the name the stub actually bound before it is considered.
     _aliases = alias_map(stub_imports)
+    _ask = stub_source
+
+    # A CALLABLE THE STUB IMPORTED FROM A SUBMODULE IS A STATED ANSWER. `from scipy.ndimage
+    # import gaussian_filter1d` names the answer in the stub's own first line while the prose
+    # says only "a 1D gaussian filter" -- the prose states the CONCEPT and the import states
+    # the SYMBOL, and only the two together decide the body. Measured on scipy item 127, where
+    # `gaussian` (the prose word) was tried and `gaussian_filter1d` (the imported callable) was
+    # never in the space at all.
+    _from_calls: list[str] = []
+    if _ask:
+        for _ln in _ask.splitlines():
+            _ln = _ln.strip()
+            if not (_ln.startswith("from ") and " import " in _ln and not _ln.endswith("*")):
+                continue
+            _mod, _, _names = _ln.partition(" import ")
+            if "." not in _mod[len("from "):].strip():
+                continue          # `from scipy import linalg` binds a MODULE, handled below
+            for _n in _names.split(","):
+                _n = _n.strip().split(" as ")[-1].strip()
+                if _n.isidentifier() and len(_n) > 2:
+                    _from_calls.append(_n)
+
+    # the callables the stub imported from a submodule lead: the stub's own line states them
+    _from_calls = list(dict.fromkeys(_from_calls))
 
     # A BARE NAME THAT LIVES IN A MODULE THE STUB IMPORTED MUST BE QUALIFIED. `respell` can
     # only rewrite a name that is ALREADY dotted, so `any(arr)` came back untouched and the
@@ -320,17 +418,56 @@ def compositions(args: Sequence[str], paths: Mapping[str, Sequence[str]],
             return spelled or root
         return re.sub(r"(?<![\w.])([A-Za-z_]\w*)(?=\s*\()", _one, body)
 
+    # THE CALLEE'S OWN SIGNATURE DECIDES WHICH ARGUMENT BECOMES `name=name`. Asked once per
+    # distinct callee, cached, and only for callees the stub already imported -- so this is an
+    # introspection of the artifact, not a search over it.
+    _sig_cache: dict[str, list[str]] = {}
+
+    def _keywords_of(callee: str) -> list[str]:
+        if callee in _sig_cache:
+            return _sig_cache[callee]
+        kws: list[str] = []
+        if python and _ask:
+            try:
+                import hole_filler_v1 as _HF
+                kws = _HF._signature_keywords(python, callee, _ask)
+            except BaseException:
+                kws = []
+        _sig_cache[callee] = kws
+        return kws
+
+    # A STUB THAT ENDS WITH `:` NEEDS `return`. `def f(x):` and then a bare expression appended
+    # is a no-op statement: the function returns None. Measured on scipy 127, where the body
+    # `gaussian_filter1d(x, radius=radius, sigma=sigma)` is exactly right and scores zero
+    # because the statement is evaluated and discarded. The stub's own last line decides, so
+    # nothing is assumed: `return ` is emitted when the stub ends in a colon.
+    _needs_return = bool(re.search(r":\s*$", stub_source or ""))
+
     def add(kind: str, body: str) -> None:
         if body in seen or len(body) >= 400:
             return
         seen.add(body)
         out.append({"kind": kind, "body": body})
+        if _needs_return and _looks_expression(body):
+            ret = "return " + body
+            if ret not in seen:
+                seen.add(ret)
+                out.append({"kind": kind + "+return", "body": ret})
         if _aliases:
             for alt, tag in ((respell(body, _aliases), "+alias"),
                              (_qualify(body), "+qualified")):
                 if alt and alt != body and alt not in seen and len(alt) < 400:
                     seen.add(alt)
                     out.append({"kind": kind + tag, "body": alt})
+        # KEYWORD FORM, derived from the callee's own signature. Emitted for every call the
+        # grammar produces, because positional order is not derivable from prose but slot
+        # names are readable from the artifact.
+        _callee = re.match(r"^([A-Za-z_][\w.]*)\(", body)
+        if _callee and python and _ask:
+            _kw = keyword_call(body, _keywords_of(_callee.group(1)))
+            if _kw and _kw not in seen and len(_kw) < 400:
+                seen.add(_kw)
+                out.append({"kind": kind + "+kwarg", "body": _kw})
 
     low = set(re.findall(r"[a-z]{2,}", (problem or "").lower()))
 
@@ -702,7 +839,7 @@ def compositions(args: Sequence[str], paths: Mapping[str, Sequence[str]],
     # the answer, sat 20 lines from the end, and never entered the space.
     if args:
         joined_all = ", ".join(args)
-        for sym in list(stated_symbols)[:20]:
+        for sym in list(dict.fromkeys(list(_from_calls) + list(stated_symbols)))[:20]:
             add("APPLY", f"{sym}({joined_all})")
             for name in ("as_explicit", "to_list", "doit"):
                 add("METHOD", f"{sym}({joined_all}).{name}()")
@@ -802,7 +939,7 @@ def compositions(args: Sequence[str], paths: Mapping[str, Sequence[str]],
     # annotation ('str') are not things the body can call, and when they led the list the
     # positional pairing produced `sympy.physics.mechanics(rigid_body_text), ...` instead of
     # `RigidBody(rigid_body_text), Particle(particle_text)`.
-    constructors = [n for n in dict.fromkeys(imported_names)
+    constructors = [n for n in dict.fromkeys(list(_from_calls) + list(imported_names))
                     if n.isidentifier() and n[0].isupper() and "." not in n]
     if constructors and len(constructors) >= 2 and len(args) >= 2:
         n = min(len(constructors), len(args))
@@ -1241,6 +1378,8 @@ def solve_item(bench: str | pathlib.Path, item: Mapping[str, Any], *,
                          imported_names=stub_names,
                          stub_prefixes=stub_prefixes,
                          modules_in_scope=modules,
+                         python=python,
+                         stub_source=item["starting_code"],
                          return_annotations=[returns] if returns else [],
                          guide_bodies=guide_first,
                          # THE LINES, not the parsed names. `stub_names` is a list of
