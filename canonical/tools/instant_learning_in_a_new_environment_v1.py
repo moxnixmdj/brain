@@ -95,7 +95,8 @@ if str(REPO) not in sys.path:
 from canonical.runtime import attested_state_v1 as attested  # noqa: E402
 
 SCHEMA = "BRAIN_INSTANT_LEARNING_IN_A_NEW_ENVIRONMENT_V1"
-PERSIST, REMOVE, REPLACE, INERT, UNCLASSIFIED = "PERSIST", "REMOVE", "REPLACE", "INERT", "UNCLASSIFIED"
+PERSIST, REMOVE, REPLACE, APPEND, INERT, UNCLASSIFIED = (
+    "PERSIST", "REMOVE", "REPLACE", "APPEND", "INERT", "UNCLASSIFIED")
 EFFECT_VOCABULARY = (PERSIST, REMOVE, REPLACE)
 TOP = 40
 PROBE_NEW = "probe_new_content"
@@ -287,9 +288,22 @@ def contents_of(state: Sequence[tuple[str, str]]) -> collections.Counter:
 
 
 def classify(change: int, arrived: int, departed: int) -> str:
+    """Five shapes, and the fifth was missing.
+
+    `(1, 2, 1)` -- one more entity, one arrived, one departed -- was UNCLASSIFIED, and the one
+    atom that produced it was `tar -rf` run against a name that already existed: a copy is made
+    into the archive and the ORIGINAL stays, so the archive GAINS an entity while the target is
+    not consumed. That is an append, and it is the shape every append-only store produces
+    (an archive, a log, an event table, a commit history). Leaving it unclassified made a real,
+    portable, repeatable effect look like a measurement failure -- the atom was then counted in
+    `unclassified_atoms` and could not be asked for.
+    """
     shape = (change, arrived, departed)
-    return {(0, 0, 0): INERT, (1, 1, 0): PERSIST, (-1, 0, 1): REMOVE, (0, 1, 1): REPLACE}.get(
-        shape, UNCLASSIFIED)
+    return {(0, 0, 0): INERT,
+            (1, 1, 0): PERSIST,
+            (-1, 0, 1): REMOVE,
+            (0, 1, 1): REPLACE,
+            (1, 2, 1): APPEND}.get(shape, UNCLASSIFIED)
 
 
 def effect_of(before: Sequence[tuple[str, str]], after: Sequence[tuple[str, str]],
@@ -622,10 +636,32 @@ def main(argv: Sequence[str] | None = None) -> int:
             sum(row["atoms_whose_only_effect_moves_identity"] for row in rows),
         "unclassified_atoms": sum(len(row["unclassified_atoms"]) for row in rows),
     }
+    # THE CROSSOVER IS A PER-MACHINE NUMBER AND WAS COMPUTED FROM AGGREGATES.
+    #
+    # `theirs` and `adaptation` are summed over every machine, but `requests_n` counts FOUR
+    # requests in TOTAL (one per machine), so `theirs / requests_n` was a per-machine trials
+    # figure divided by a global request count -- 38 / 4 = 9.5 "trials per request".
+    # `adaptation / (per_request - 1)` then reported 25.78. The honest quantity is computed
+    # per machine and pooled: for each machine, how many requests must it answer before
+    # adapting once has spent fewer trials than demonstrating each one.
+    REQUESTS_PER_MACHINE = 4
+    per_machine_crossover = []
+    for row in rows:
+        per_req = (row["learn_each_trials"] / REQUESTS_PER_MACHINE
+                   if REQUESTS_PER_MACHINE else 0)
+        if per_req > 1:
+            per_machine_crossover.append(row["adaptation_trials_active"] / (per_req - 1))
     per_request = theirs / requests_n if requests_n else 0
-    summary["learn_each_trials_per_request"] = round(per_request, 3)
-    summary["crossover_requests"] = (round(adaptation / (per_request - 1), 2)
-                                     if per_request > 1 else None)
+    summary["learn_each_trials_per_request_AGGREGATE_WRONG"] = round(per_request, 3)
+    summary["crossover_requests"] = (round(sum(per_machine_crossover) / len(per_machine_crossover), 2)
+                                     if per_machine_crossover else None)
+    summary["crossover_requests_per_machine"] = [
+        round(x, 2) for x in per_machine_crossover]
+    # the question the user actually asks: is adapting once cheaper for THIS FEW requests?
+    summary["adaptation_total_vs_demonstration_total"] = {
+        "adaptation": adaptation, "demonstration": theirs,
+        "adaptation_is_cheaper_within_four_requests":
+            bool(adaptation < theirs)}
     receipt = {
         "schema": SCHEMA,
         "authority": "NONE__PRODUCER_RUN_SANDBOX",
