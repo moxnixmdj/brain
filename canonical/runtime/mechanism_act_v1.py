@@ -166,7 +166,7 @@ def plan_from_documents(goal: str, *, probes: int = 16) -> dict[str, Any]:
 
 
 def as_solve_model(*, probes: int = 16, expect: Sequence[str] = (),
-                   root: str | None = None):
+                   root: str | None = None, self_judge: bool = False):
     """Return a callable that satisfies `solve_v1`'s model contract, with no model in it.
 
     `expect` is what the caller believes success looks like, as substrings of the world. It is the caller's
@@ -178,6 +178,9 @@ def as_solve_model(*, probes: int = 16, expect: Sequence[str] = (),
     and the loop's own error handling then reports a failure of the harness rather than of the plan.
     """
     calls: list[dict[str, Any]] = []
+    #: The act this run attempted, kept so the self-judge knows what to verify. One entry, because a run
+    #: that needs two is multi-step and this planner is deliberately single-act (§A94's stated limit).
+    attempted: list[list[str]] = []
     if root:
         # the sandbox mounts the project at /project; a planned host path must be translated or every
         # step fails on a file the sandbox does have, under a name the plan did not use
@@ -199,6 +202,17 @@ def as_solve_model(*, probes: int = 16, expect: Sequence[str] = (),
                 calls.append({"step": number, "why": "THE_CALLER_SAID_THIS_IS_SUCCESS"})
                 return None
 
+            # 2b. SELF-JUDGEMENT: the caller said nothing about success, so ask the environment.
+            # Measured 2026-11-23: the program documents a read as well as a write, so the effect of an
+            # act is a question with an answer in the environment's own interface. This is what lets a
+            # caller who cannot state success in the world's terms still finish.
+            if self_judge and attempted:
+                verdict = judge_from_seeing(str(goal), attempted[-1], seeing)
+                calls.append({"step": number, "why": "ASKED_THE_ENVIRONMENT",
+                              "verdict": verdict.get("verdict") or verdict.get("why")})
+                if verdict.get("verdict") == "EFFECT_CONFIRMED":
+                    return None
+
             # 3. plan from the documentation, unless a learned rule already rejects a value
             planned = plan_from_documents(goal, probes=probes)
             if planned.get("act") is None:
@@ -212,6 +226,7 @@ def as_solve_model(*, probes: int = 16, expect: Sequence[str] = (),
                     # "must be whole" asks for, and the rule says so in the same words
                     calls.append({**rejected, "step": number})
                     return None
+            attempted.append(list(argv))
             calls.append({**planned, "step": number})
             # `solve_v1.act` RUNS PYTHON SOURCE. Measured 2026-11-23: returning a shell command line
             # produced `SyntaxError: invalid syntax` on every step, four times, with empty stderr --
@@ -312,6 +327,35 @@ def _as_program(argv: Sequence[Any], root: str | None = None) -> str:
     )
 
 
+def judge_from_seeing(goal: str, act: Sequence[Any],
+                      seeing: Mapping[str, Any]) -> dict[str, Any]:
+    """Judge the last act by READING the world, using the machine's own previous observation.
+
+    No extra process is started: `solve_v1` has already observed the tree after the act, and a program
+    whose store is a file writes it inside the tree. So the question "did the act take effect" can be
+    answered from what was already read -- which is why this is cheap enough to run every step.
+
+    When the store is not a file in the tree (a database, a remote service), the tree cannot answer and
+    this says `judged: False` rather than guessing. The caller then needs the read-based judge, which
+    runs the program's own `list`.
+    """
+    values = _stated_values(act)
+    if not values:
+        return {"judged": False, "why": "THE_ACT_STATES_NO_CONTENT_VALUE_TO_LOOK_FOR"}
+    program, _ = _program_and_request(goal)
+    read = _read_plan(program, act)
+    if read is None:
+        return {"judged": False, "why": "NO_READ_THE_DOCUMENTS_STATE"}
+    # the tree as the loop observed it, plus what the last step printed
+    blob = " ".join(str(x) for x in (seeing.get("tree") or []))
+    last = seeing.get("last") or {}
+    blob += " " + str(last.get("out") or "") + " " + str(last.get("err") or "")
+    missing = [v for v in values if v not in blob]
+    return {"judged": True, "looked_for": values,
+            "verdict": "EFFECT_CONFIRMED" if not missing else "EFFECT_NOT_OBSERVED",
+            "missing": missing, "read": read}
+
+
 def report(model: Any) -> dict[str, Any]:
     """What the planner decided, step by step. The evidence for a run, not a summary of it."""
     return {"schema": SCHEMA, "calls": list(getattr(model, "calls", []))}
@@ -330,3 +374,124 @@ def main(argv: Sequence[str] | None = None) -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
+
+# ----------------------------------------------------------------------------------------------------
+# A JUDGE THE CALLER DOES NOT HAVE TO SUPPLY.
+#
+# §A94 left one thing to the caller: "is it done". That is a real burden -- a caller who cannot state
+# success in the world's own terms gets a loop that never stops. And it is avoidable, because the program
+# already documents how to READ what it stores:
+#
+#     ledgerctl record add --name alpha --amount 4      the act, planned from the documents
+#     ledgerctl record list                             the read, planned from the SAME documents
+#
+# So success is not a claim to be believed. It is a question to be asked of the environment, in the
+# environment's own interface, after the act. What must appear in the answer is exactly the values the
+# request stated -- which the planner already extracted to build the command.
+#
+# That is the whole judge: no model, no caller vocabulary, nothing specific to any program. It works
+# because a program that can write can almost always say what it wrote, and a program that cannot is
+# caught by `NO_READ_THE_DOCUMENTS_STATE` rather than being declared successful.
+# ----------------------------------------------------------------------------------------------------
+
+#: The verbs a document uses to list. This is NOT a table about programs -- it is the vocabulary a page
+#: needs in order to be asking to show its store, and it is deliberately short. A program whose read verb
+#: is outside it loses the self-judge and is reported as such; it is not guessed at.
+_READ_VERBS = ("list", "show", "get", "read", "view", "status", "query", "ls")
+
+#: Fields whose value names WHERE something goes rather than WHAT was asked for. They are still judged --
+#: a record named `alpha` must be readable as `alpha` -- but they are judged too, not instead: measured
+#: 2026-11-23, a plan for `--name alpha --amount 4` yielded `looked_for: ['4']`, so a store containing
+#: only the amount and no name would have confirmed.
+_ADDRESS = ("--id", "--name", "--key", "--sku", "--team", "--project", "--namespace", "--file",
+            "--path", "--repo", "--prefix")
+
+
+def _stated_values(argv: Sequence[Any]) -> list[str]:
+    """The values the request put in the command, which are what the read must return.
+
+    An address-like flag (`--name`, `--id`) is excluded: `--name alpha` on a write is the address of the
+    thing being created, and on some reads it is a FILTER, so a read that returns `alpha` is ambiguous --
+    it could mean the record exists or that the filter echoed. Content values (`4` for an amount, `fix`
+    for a title) are unambiguous: they can only be there because the write put them there.
+    """
+    values: list[str] = []
+    words = [str(a) for a in argv]
+    for index, word in enumerate(words):
+        if word in _ADDRESS:
+            # the value that FOLLOWS an address flag is a value the request stated, and the read must
+            # return it; what is excluded is the flag itself
+            if index + 1 < len(words) and not words[index + 1].startswith("-"):
+                values.append(words[index + 1])
+            continue
+        if word.startswith("-"):
+            continue
+        # the program and its subcommands are not values the request stated
+        if index == 0 or word in {"add", "create", "set", "update", "new"}:
+            continue
+        if index < 3 and not any(ch.isdigit() for ch in word) and len(word) < 12:
+            # a subcommand word (`record`, `issue`, `item`) rather than a value
+            if word.isalpha() and word.islower():
+                continue
+        if word and word not in values:
+            values.append(word)
+    return values
+
+
+def _read_plan(program: str, act: Sequence[Any], *, probes: int = 16) -> list[str] | None:
+    """The command that shows what the act wrote, planned from the same documents.
+
+    Derived, not tabulated: the resource is the act's own first subcommand (`record add` -> `record`), and
+    the verb is discovered by asking the documents for each read verb in turn. A document that states no
+    read is reported by the caller as `NO_READ_THE_DOCUMENTS_STATE`, which is a fact about the program and
+    not a failure of the act.
+    """
+    words = [str(a) for a in act]
+    resource = ""
+    for word in words[1:]:
+        if not word.startswith("-"):
+            resource = word
+            break
+    for verb in _READ_VERBS:
+        goal = "%s: %s %s" % (program, verb, resource)
+        planned = plan_from_documents(goal, probes=probes)
+        if planned.get("act"):
+            return [str(a) for a in planned["act"]]
+    return None
+
+
+def judge(program: str, act: Sequence[Any], output: str, *, run=None) -> dict[str, Any]:
+    """Ask the environment whether the act took effect, in the environment's own words.
+
+    `run` is the executor (a callable taking a command line and returning `{"exit", "out", "err"}`). It is
+    passed in so this function makes no claim about confinement -- the caller decides where code runs, as
+    `solve_v1` already requires.
+
+    Returns `judged: False` with a named reason when it cannot answer. It never returns "success" for a
+    question it did not ask: the three outcomes are `EFFECT_CONFIRMED`, `EFFECT_ABSENT`, and a refusal.
+    """
+    values = _stated_values(act)
+    if not values:
+        return {"judged": False, "why": "THE_ACT_STATES_NO_CONTENT_VALUE_TO_LOOK_FOR",
+                "act": [str(a) for a in act]}
+    read = _read_plan(program, act)
+    if read is None:
+        return {"judged": False, "why": "NO_READ_THE_DOCUMENTS_STATE", "act": [str(a) for a in act]}
+    if run is None:
+        return {"judged": False, "why": "NO_EXECUTOR", "read": read}
+    answer = run(" ".join(str(a) for a in read)) or {}
+    if answer.get("exit") not in (0, None):
+        # A READ THAT FAILED CANNOT CONFIRM ANYTHING. Measured 2026-11-23: the read crashed with a
+        # traceback, the traceback did not contain the value, and the verdict came back
+        # EFFECT_CONFIRMED -- because an empty `missing` list was read as success without ever asking
+        # whether the question had been answered. Confirming on a crash is the worst failure this module
+        # can have, because everything downstream then believes a thing that never happened.
+        return {"judged": False, "why": "THE_READ_FAILED", "read": read,
+                "exit": answer.get("exit"),
+                "detail": ("%s %s" % (answer.get("out") or "", answer.get("err") or ""))[:300]}
+    text = "%s %s" % (answer.get("out") or "", answer.get("err") or "")
+    missing = [v for v in values if v not in text]
+    return {"judged": True, "read": read, "looked_for": values, "found_in": text[:300],
+            "verdict": "EFFECT_CONFIRMED" if not missing else "EFFECT_ABSENT",
+            "missing": missing}

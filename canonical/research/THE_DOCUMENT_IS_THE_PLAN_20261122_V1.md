@@ -5201,3 +5201,59 @@ establishes that the observe/act loop closes **without a model** on documented, 
 not establish multi-step planning, and it does not touch a GUI, a browser, or an environment whose
 documentation is absent. Those remain the open work, and the first of them is now testable in the same
 harness rather than in prose.
+
+## §A95 — the environment judges its own effect
+
+### The burden §A94 left
+
+§A94 gave the loop an `act` and named the remaining gap: the caller must supply `expect=[...]`, a
+statement of what a finished world contains. That is a burden for anyone who cannot say it, and it makes
+the harness the thing that decides when someone else's task is done — which `solve_v1` explicitly refuses.
+
+### Why it is avoidable
+
+A program that can WRITE can nearly always say what it wrote. `ledgerctl` documents `record add` and
+`record list` on the same page. So the effect of an act is not a claim to be believed; it is a question
+with an answer in the environment's own interface:
+
+    act   ledgerctl record add --name alpha --amount 4     planned from the documents
+    read  ledgerctl record list                            planned from the SAME documents
+    judge `{"amount": 4, "name": "alpha"}` contains what the request stated
+
+The read command is **derived**, not tabulated: the resource is the act's own first subcommand
+(`record add` → `record`), and the verb is found by asking the documents for each of a short list in turn.
+The values to look for are the ones the planner already extracted to build the command. Nothing is
+specific to any program, and a program whose documents state no read is reported as
+`NO_READ_THE_DOCUMENTS_STATE` rather than declared successful.
+
+### The negative test is the one that matters
+
+| | verdict |
+|---|---|
+| command judged BEFORE it ran | **`EFFECT_ABSENT`**, missing `['ghost','99']` |
+| the same command after it ran | **`EFFECT_CONFIRMED`**, found in `[{"amount":99,"name":"ghost"}]` |
+
+Same command, same read, different answers — because the world differs. That is the difference between a
+judge and a belief.
+
+### Two defects found in my own judge, both by attacking it
+
+1. **It confirmed on a crash.** A failing read produced a traceback, the traceback lacked the value, and an
+   empty `missing` list was read as success — `EFFECT_CONFIRMED` on a program that never ran. Now a read
+   with a nonzero exit returns `judged: False`, `THE_READ_FAILED`, and no verdict at all. Confirming on a
+   crash is worse than having no judge: everything downstream then believes something that did not happen.
+2. **It judged the amount and not the name.** The first extractor excluded address-like flags wholesale,
+   so `--name alpha --amount 4` yielded `looked_for: ['4']`, and a store holding only the amount would
+   have confirmed. The address's VALUE is a value the request stated; only the flag is excluded.
+
+### Result
+
+`solve_v1` reaches **`DONE` in 1 step with no `expect` supplied**, on the environment's own confirmation.
+
+### What this is not
+
+A tree observation is enough only when the program's store is a file inside the world. A database, a
+remote service, or a GUI shows nothing in the tree, and `judge_from_seeing` then returns
+`EFFECT_NOT_OBSERVED` rather than guessing — the caller needs the read-based judge, which runs the
+program's own list. That distinction is the next bottleneck and it is a real one: **a self-judging loop
+assumes the effect is observable, and on a GUI the observation is pixels, not files.**

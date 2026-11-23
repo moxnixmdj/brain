@@ -196,3 +196,77 @@ def test_a_goal_that_states_no_value_does_not_invent_one(tmp_path: pathlib.Path)
     plan = M.plan_from_documents('./bin/stockctl: set the qty for sku "B2"')
     assert plan["act"] is not None, plan
     assert "--qty" not in [str(a) for a in plan["act"]], plan["act"]
+
+
+# ----------------------------------------------------------------------------------------------------
+# The judge the caller does not have to supply.
+# ----------------------------------------------------------------------------------------------------
+
+def test_the_environment_confirms_its_own_effect(tmp_path: pathlib.Path) -> None:
+    """§A94 left one burden: "is it done". It is avoidable, because a program that writes can nearly
+    always say what it wrote. `judge()` plans the program's own read and asks.
+
+    The same command is judged twice, before and after it runs, and the two answers differ only because
+    the world differs. That is what makes it a judge rather than a belief.
+    """
+    world, program = _sandbox(tmp_path, "ledgerctl")
+    plan = M.plan_from_documents(program + ': add a record named "ghost" with amount "99"')
+    assert plan["act"] is not None, plan
+
+    def run(command: str) -> dict:
+        argv = [M._to_sandbox(part, str(world)) for part in command.split()]
+        source = ("import subprocess, sys\n"
+                  "_r = subprocess.run(%r, capture_output=True, text=True)\n"
+                  "sys.stdout.write(_r.stdout)\nsys.stderr.write(_r.stderr)\n"
+                  "raise SystemExit(_r.returncode)\n" % (argv,))
+        result = S.act(str(world), source)
+        return {"exit": result.get("exit"), "out": result.get("out") or "",
+                "err": result.get("err") or ""}
+
+    before = M.judge(program, plan["act"], "", run=run)
+    assert before["verdict"] == "EFFECT_ABSENT", before
+    assert before["read"][1:] == ["record", "list"], before["read"]
+
+    run(" ".join(str(a) for a in plan["act"]))
+
+    after = M.judge(program, plan["act"], "", run=run)
+    assert after["verdict"] == "EFFECT_CONFIRMED", after
+    assert "ghost" in after["found_in"] and "99" in after["found_in"]
+
+
+def test_a_failed_read_never_confirms_anything(tmp_path: pathlib.Path) -> None:
+    """THE WORST BUG THIS MODULE HAD, kept as a test.
+
+    A read that crashed produced a traceback that did not contain the value, an empty `missing` list was
+    read as success, and the verdict came back `EFFECT_CONFIRMED` on a program that never ran. Confirming
+    on a crash is worse than no judge: everything downstream believes a thing that never happened.
+    """
+    world, program = _sandbox(tmp_path, "ledgerctl")
+    plan = M.plan_from_documents(program + ': add a record named "alpha" with amount "4"')
+
+    def failing_read(command: str) -> dict:
+        return {"exit": 1, "out": "Traceback (most recent call last): boom", "err": "boom"}
+
+    answer = M.judge(program, plan["act"], "", run=failing_read)
+    assert answer["judged"] is False, answer
+    assert answer["why"] == "THE_READ_FAILED"
+    assert "verdict" not in answer
+
+
+def test_the_caller_can_omit_the_judgement_entirely(tmp_path: pathlib.Path) -> None:
+    """`solve_v1` to `DONE` with NO `expect`: the loop asks the environment instead of the caller.
+
+    With `expect` the caller states success in the world's terms, which §A94 noted is a burden for anyone
+    who cannot. With `self_judge` the same run finishes on the environment's own answer.
+    """
+    world, program = _sandbox(tmp_path, "ledgerctl")
+    goal = program + ': add a record named "zed" with amount "6"'
+    model = M.as_solve_model(root=str(world), self_judge=True)  # no expect=
+
+    out = S.solve(goal, str(world), model=model, steps=3, learn=False)
+
+    assert out.get("verdict") == S.DONE, out
+    reasons = [call.get("why") for call in M.report(model)["calls"]]
+    assert "ASKED_THE_ENVIRONMENT" in reasons, reasons
+    written = [p for p in world.rglob("*") if p.is_file() and ".ledgerctl-state" in p.name]
+    assert written and "zed" in written[0].read_text()
