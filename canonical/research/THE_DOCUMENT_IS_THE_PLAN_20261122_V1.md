@@ -2706,3 +2706,54 @@ fact no document in the environment states, and inventing it from a shared word 
 flag gets chosen — twice, in this section alone.
 
 **Verified after removal:** 78 tests; 13 effect tasks; unseen `vaultctl` 6/6.
+
+---
+
+## Session summary — A53 to A66
+
+Fourteen sections, and the useful record is not the features but the **hit rate of guesses versus
+facts**. Six mechanisms were proposed to fix failing cases. Two were kept. Four were removed, and
+every one of the four was a weight or a proxy tuned to make one sentence come out right.
+
+**Kept — facts about words and documents:**
+
+1. **Stemming.** `named` → `name`, not `nam`: an `e` immediately before `-d` is part of the stem.
+2. **Possessives.** `the secret's name` → `secret`, not `secret'`: an apostrophe is punctuation.
+3. **Accounting.** A page must be able to house every value the request states, and its flags'
+   descriptions are what house them. Compared lexicographically — no weights.
+4. **Labelled binding.** A value goes in the flag that names it, not the first free slot; a value
+   whose label nothing on the page names is reported unplaced rather than forced in.
+5. **The refusal conjunction.** "No command for that" is true only when no page routes *and* no page
+   states the act — by argv, by demonstration, or by a flag's own name.
+6. **`complete` means answered.** A plan that discards part of the request does not claim otherwise.
+7. **The root page's own sentence.** Every root summary was hard-coded empty, discarding
+   "Search for PATTERNS in each FILE" for every program.
+8. **Sequential connectives** are boundaries the request states, like numbering.
+
+**Removed — five weights and four criteria:**
+
+| proposal | why removed |
+|---|---|
+| `+2` label/kind route score | fixed one sentence, broke `git mv` → `git clone` |
+| required-flag confidence score | broke two tests, needed two corrections to stop breaking things |
+| `starved` (all required flags supplied) | penalised the correct page; every page equally starved |
+| "refuse when no page routed" (alone) | `tar` has no subcommands, so it refused correct answers |
+| switch flags from shared description words | two opposite flags share every word — unresolvable |
+
+**The pattern, stated as a working rule:** when a case fails, the answer has consistently been a
+*fact about what the document or the word says*, never a number that makes the case come out right.
+Five weights failed; eight facts held.
+
+**Measured state:** 78 tests · 13 effect tasks passing by effect, identical under `PYTHONHASHSEED`
+7/99/default · the never-seen `vaultctl` 6/6 · real `/usr/bin/tar` and `/usr/bin/grep` planning
+correct commands from their own dense help text.
+
+**Two capabilities added and verified by effect, not by string:** a labelled value lands in the flag
+that names it (t11, t12), and one sentence stating two steps produces two commands that leave two
+issues in the store (t13).
+
+**The honest boundary, now proven:** a request spanning two programs needs one fact no document
+states — that one program's standard output can be another's standard input. Neither page mentions
+the other, and the shell has no page here. Inventing that fact from a shared word chose the wrong
+flag twice. This is where instant knowledge would have to supply something, and the project's own
+claim is that it must come from the store or the web, not from a parameter or a guess.
