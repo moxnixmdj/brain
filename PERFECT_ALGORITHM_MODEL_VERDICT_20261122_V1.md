@@ -357,3 +357,47 @@ pipeline (`.tar.gz`, `.tar.bz2`, `.zip`, `.bz2`, `.xz`, `.sha256`) with warm-rep
 evidence for four families (`.tar.gz` §7, `.zip`/`.bz2` §10, `.sha256` §11). Never
 reached: a GUI/browser/OSWorld surface — the second env KIND — and the §6 verdict
 stays honest about it.
+
+## 12. Decompress-into-plain-file direction — predicate + stdout-shape fix, end-to-end (2026-11-23, measured)
+
+The decompress direction was largely untested: the §8 decompress predicates covered the
+".gz target" (compress direction), and the plain target (`out.txt`) over the tar/zip/.gz
+source fell through to "exists and non-empty" — a false-PASS generator for the
+"decompress X into out.txt" goal. The invocation shapes also passed the target as a
+positional argument to stdout-producing output flags (`gzip -c out.txt data.gz` tries to
+decompress a file named out.txt and fails).
+
+**Fix 1 — predicate (content-exact).** A plain target over a compressed/archive source
+must equal the decompressed content of that source:
+- .gz source: target == gzip.decompress(source); .bz2/.xz: same.
+- tar-family single-member source: target == the member's bytes (longest-first suffix
+  match so `.tar.gz` never reads as uncompressed `.tar`).
+- zip single-member source: target == the member's bytes.
+- Garbage / multiple-member archive: REFUSED (cannot claim what the goal asks), never
+  passed. Plain source + plain target keeps the non-empty tail.
+
+**Fix 2 — stdout-shape hygiene.** `invocation_shapes` combined + plain output-flag
+shapes that carry a stdout-producing flag (`-c`/`--stdout`, derived from the manual's own
+description) no longer pass the target as a positional argument; stdout is the channel
+and the existing `captured` branch writes the target. Non-stdout output flags (e.g.
+tar's `--file`) still pass the target by position.
+
+Measured:
+- `decompress data.gz into out.txt` cold drive: PASS, plan [run_gzip], content
+  verified equal to the decompressed source, 4.9 s; recipe `gzip --decompress -c
+  {input}` → stdout → out.txt; data.gz kept.
+- 17/17 tests in test_perfect_algorithm_computer_env_v1 (5 new: gz/bz2/xz/tar-single-member
+  predicate + tar garbage/multiple-member refusal + plain-tail; stdout-shape anti-target
+  + file-flag shape preservation).
+- test_computer_env_v1: same 3 pre-existing TransferTests failures (verified identical at
+  d77701ab); nothing else regressed.
+- Unseen-content probe (`unseen_decompress_computer_probe_20261123.py`), same TEACH→COLD→
+  WARM→CONTROL discipline: TEACH ADMIT 2/2 (dur 4.6 s); COLD (B) 4.7 s, content verified;
+  WARM (B) **INSTANT_RECALL** 0.003 s, content verified; CONTROL (A) 0.003 s, content verified.
+- Effects verified by execution against the live target env, not by names.
+
+Honest status: the decompress direction now reaches the goal through the same full
+pipeline as the archive/hash/compression families — and INSTANT_RECALL evidence now
+covers five capability directions (archive, .zip, .bz2, decompress, .sha256). Still not
+done: §6 (GUI/browser/OSWorld/SWE-bench/Terminal-Bench) remains open and unclaimed; the
+carried-model walk still fails honestly (no priors trusted across content).

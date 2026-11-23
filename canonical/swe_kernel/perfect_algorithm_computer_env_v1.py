@@ -191,6 +191,10 @@ def goal_predicate_for(seed: Mapping[str, bytes], target_name: str) -> Callable[
       - .zip: the target is a real zip archive that contains the source file
         by basename, and its bytes are the source's bytes.
       - .gz / .bz2 / .xz: the target decompresses to the source the goal named.
+      - plain target, compressed/archive source ("decompress X into out.txt"):
+        the target must equal the decompressed content of that source --
+        the member's bytes for a single-member archive, the decompressed bytes
+        for a single-file format.
       - anything else (plain file): the target exists and is non-empty.
     """
     import io as _io
@@ -301,6 +305,39 @@ def goal_predicate_for(seed: Mapping[str, bytes], target_name: str) -> Callable[
         for suffix, algo in sorted(_HASH_SUFFIXES.items(), key=lambda kv: -len(kv[0])):
             if target_name.endswith(suffix):
                 return _hash_line_matches(tgt, src, algo)
+
+        # Plain target over a compressed/archive source: the claim is that the
+        # target is the decompressed content of the source, not merely a
+        # non-empty file. A source shape we cannot verify is refused, never
+        # passed.
+        src_suffix = next((s for s in sorted(_TAR_MODES, key=lambda s: -len(s))
+                          if src_name.endswith(s)), None)
+        if src_suffix is not None:
+            members = _tar_members(src, _TAR_MODES[src_suffix])
+            if len(members) == 1:
+                return tgt == next(iter(members.values()))
+            return False  # multiple/garbage members: cannot claim content
+        if src_name.endswith(".zip"):
+            members = _zip_members(src)
+            if len(members) == 1:
+                return tgt == next(iter(members.values()))
+            return False  # cannot claim content
+        if src_name.endswith(".gz"):
+            try:
+                return gzip.decompress(src) == tgt
+            except Exception:
+                return False
+        if src_name.endswith(".bz2"):
+            try:
+                return _bz2.decompress(src) == tgt
+            except Exception:
+                return False
+        if src_name.endswith(".xz"):
+            try:
+                return _lzma.decompress(src) == tgt
+            except Exception:
+                return False
+
         return True
 
     return is_goal

@@ -329,3 +329,107 @@ class HashFormatPredicateTests(unittest.TestCase):
                          "empty target must be refused")
         self.assertFalse(pred({"input.txt": src_bytes, "out.sha256": None}),
                          "missing target must be refused")
+
+
+class DecompressPredicateTests(unittest.TestCase):
+    """A plain target over a compressed/archive source must be the DECOMPRESSED
+    content, never merely a non-empty file."""
+
+    def test_gz_source_target_must_be_the_decompressed_content(self):
+        from canonical.swe_kernel.perfect_algorithm_computer_env_v1 import goal_predicate_for
+        import gzip as _gzip
+
+        src_bytes = b"decompress predicate source\nsecond line\n"
+        gz = _gzip.compress(src_bytes)
+        pred = goal_predicate_for({"data.gz": gz}, "out.txt")
+        self.assertTrue(pred({"data.gz": gz, "out.txt": src_bytes}))
+        self.assertFalse(pred({"data.gz": gz, "out.txt": b"wrong content"}))
+        self.assertFalse(pred({"data.gz": gz, "out.txt": b""}))
+
+    def test_bz2_and_xz_sources_must_be_the_decompressed_content(self):
+        from canonical.swe_kernel.perfect_algorithm_computer_env_v1 import goal_predicate_for
+        import bz2 as _bz2
+        import lzma as _lzma
+
+        src_bytes = b"more decompress source\n"
+        bz2_src = _bz2.compress(src_bytes)
+        xz_src = _lzma.compress(src_bytes)
+        self.assertTrue(goal_predicate_for({"d.bz2": bz2_src}, "out.txt")(
+            {"d.bz2": bz2_src, "out.txt": src_bytes}))
+        self.assertTrue(goal_predicate_for({"d.xz": xz_src}, "out.txt")(
+            {"d.xz": xz_src, "out.txt": src_bytes}))
+        self.assertFalse(goal_predicate_for({"d.xz": xz_src}, "out.txt")(
+            {"d.xz": xz_src, "out.txt": b"nope"}))
+
+    def test_tar_family_single_member_must_be_the_member_bytes(self):
+        from canonical.swe_kernel.perfect_algorithm_computer_env_v1 import goal_predicate_for
+        import io as _io
+        import tarfile as _tarfile
+
+        src_bytes = b"tar single member content\n"
+        buf = _io.BytesIO()
+        with _tarfile.open(fileobj=buf, mode="w:gz") as tf:
+            info = _tarfile.TarInfo("member.txt")
+            info.size = len(src_bytes)
+            tf.addfile(info, _io.BytesIO(src_bytes))
+        tar_gz = buf.getvalue()
+        pred = goal_predicate_for({"data.tar.gz": tar_gz}, "out.txt")
+        self.assertTrue(pred({"data.tar.gz": tar_gz, "out.txt": src_bytes}))
+        self.assertFalse(pred({"data.tar.gz": tar_gz, "out.txt": b"wrong"}))
+
+    def test_tar_family_garbage_or_multiple_members_are_refused(self):
+        from canonical.swe_kernel.perfect_algorithm_computer_env_v1 import goal_predicate_for
+
+        # Garbage source: unparseable -> refuse, never pass.
+        pred = goal_predicate_for({"data.tar.gz": b"not a tar archive"},
+                                  "out.txt")
+        self.assertFalse(pred({"data.tar.gz": b"not a tar archive",
+                                "out.txt": b"anything"}))
+
+        # Multi-member archive: content cannot be claimed -> refuse.
+        import io as _io
+        import tarfile as _tarfile
+        buf = _io.BytesIO()
+        with _tarfile.open(fileobj=buf, mode="w:gz") as tf:
+            for i in range(2):
+                data = f"member {i} bytes\n".encode()
+                info = _tarfile.TarInfo(f"member{i}.txt")
+                info.size = len(data)
+                tf.addfile(info, _io.BytesIO(data))
+        buf.seek(0)
+        multi_gz = buf.read()
+        pred2 = goal_predicate_for({"data.tar.gz": multi_gz}, "out.txt")
+        self.assertFalse(pred2({"data.tar.gz": multi_gz,
+                                "out.txt": b"member 0 bytes\n"}))
+
+    def test_plain_source_plain_target_keeps_the_nonempty_tail(self):
+        from canonical.swe_kernel.perfect_algorithm_computer_env_v1 import goal_predicate_for
+
+        pred = goal_predicate_for({"data.txt": b"some bytes\n"}, "out.txt")
+        self.assertTrue(pred({"data.txt": b"some bytes\n",
+                                "out.txt": b"whatever"}))
+
+
+class StdoutShapeTests(unittest.TestCase):
+    """stdout-producing output flags must never receive the target as a
+    positional argument -- stdout is the channel, and the capture writes it."""
+
+    def test_stdout_flag_shapes_do_not_pass_the_target(self):
+        from canonical.runtime.computer_env_v1 import invocation_shapes
+
+        shapes = invocation_shapes("gzip", "data.gz", "out.txt",
+                                   "decompress data.gz into out.txt")
+        for s in shapes:
+            if "-c" in s or "--stdout" in s:
+                self.assertNotIn("out.txt", s,
+                                 f"stdout-flag shape passed the target: {s}")
+
+    def test_target_carrying_combined_shapes_pass_the_target_to_file_flags(self):
+        from canonical.runtime.computer_env_v1 import invocation_shapes
+
+        shapes = invocation_shapes("tar", "data.txt", "data.tar.gz",
+                                   "make an archive data.tar.gz")
+        # tar's --file takes the archive as a file argument
+        self.assertTrue(any(
+            s[0] == "tar" and "--file" in s and "data.tar.gz" in s for s in shapes),
+            "file-argument shape lost the target")

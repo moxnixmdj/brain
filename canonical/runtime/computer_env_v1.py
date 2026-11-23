@@ -578,7 +578,16 @@ def invocation_shapes(prog: str, src: str, target: str,
         [prog, src],
         [prog, src, "-k"],
     ]
+    _flag_desc_early = dict(flag_descriptions(prog))
     for flag in output_flags(prog)[:4]:
+        # A stdout-producing flag never takes the target as a positional
+        # argument: stdout is the channel and the capture writes the target.
+        if re.search(r"stdout|standard output|to standard out",
+                     _flag_desc_early.get(flag, ""), re.I):
+            shape = [prog, flag, src]
+            if shape not in shapes:
+                shapes.append(shape)
+            continue
         for shape in ([prog, flag, target, src], [prog, flag, src]):
             if shape not in shapes:
                 shapes.append(shape)
@@ -614,6 +623,14 @@ def invocation_shapes(prog: str, src: str, target: str,
     # the rest already appear as plain output-flag shapes.
     goal_flags = flags_for_goal(prog, goal)
     oflags = output_flags(prog)[:2]
+    oflag_desc = dict(flag_descriptions(prog))
+    # A flag whose own manual says the output goes to stdout is
+    # stdout-producing: the target is NEVER passed as a positional argument
+    # ('gzip -c out.txt data.gz' tries to decompress a file named out.txt and
+    # fails; stdout is the channel and the capture writes the target).
+    stdout_flags = {f for f in oflags
+                    if re.search(r"stdout|standard output|to standard out",
+                                 oflag_desc.get(f, ""), re.I)}
     subsets: list[list[str]] = [[g] for g in goal_flags]
     for i in range(len(goal_flags)):
         for j in range(i + 1, len(goal_flags)):
@@ -621,7 +638,10 @@ def invocation_shapes(prog: str, src: str, target: str,
     combined: list[list[str]] = []
     for oflag in oflags:
         for subset in subsets:
-            shape = [prog] + subset + [oflag, target, src]
+            if oflag in stdout_flags:
+                shape = [prog] + subset + [oflag, src]
+            else:
+                shape = [prog] + subset + [oflag, target, src]
             if shape not in combined:
                 combined.append(shape)
     return combined + (extra + shapes if values else shapes + extra)
