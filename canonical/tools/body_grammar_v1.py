@@ -843,6 +843,56 @@ def compositions(args: Sequence[str], paths: Mapping[str, Sequence[str]],
             add("APPLY", f"{sym}({joined_all})")
             for name in ("as_explicit", "to_list", "doit"):
                 add("METHOD", f"{sym}({joined_all}).{name}()")
+        # A STATED AXIS IS A LIST LITERAL, AND IT BELONGS HERE, NOT AT THE END.
+        # The prose says "batched in the FIRST dimention" and the reference body is
+        # `median_filter(A,size=size,axes=[1,2])`. Emitting the axis form correctly is not
+        # enough: the oracle's budget is a DEADLINE shared across 25-body chunks, so at
+        # ~125 s per chunk only the first ~50 candidates are ever tried. Measured on scipy 133,
+        # where this body was provably correct and sat at index 247 of 600 -- inside the cap and
+        # never executed. Position is part of the mechanism.
+        if re.search(r"\b(first|second|third|1st|2nd|3rd)\b", (problem or "").lower()):
+            for axis_lit in ("[1, 2]", "[0, 1]", "[-2, -1]", "[1]", "[0]"):
+                for sym in list(dict.fromkeys(list(_from_calls) + list(stated_symbols)))[:6]:
+                    for nm in args:
+                        add("AXIS", f"{sym}({args[0]}, {nm}={nm}, axes={axis_lit})")
+                    add("AXIS", f"{sym}({args[0]}, axes={axis_lit})")
+
+    # 0b. THE STUB MAY END MID-DEFINITION, AND THEN THE BODY IS THE REST OF THE SIGNATURE.
+    # pytest items 228-232 are `@pytest.hookimpl()` followed by `def pytest_ignore_collect(` and
+    # nothing else. The reference body is
+    #     `collection_path:pathlib.Path):\n    pass`
+    # which is the parameter declaration, the closing paren and an empty body. The prose states
+    # the parameter name ("takes a single parameter (representing a filesystem path)") and the
+    # stub's own imports state the type (`import pathlib`). Both halves are stated; nothing is
+    # guessed, and `pass` is what an empty implementation means.
+    _open_def = re.search(r"def\s+([A-Za-z_]\w*)\s*\(\s*$", stub_source or "")
+    if _open_def and stub_source:
+        # the type the stub itself imported, preferring one the prose also names
+        _mods = [ln.split(" as ")[0].replace("import ", "").strip()
+                 for ln in (stub_source or "").splitlines() if ln.strip().startswith("import ")]
+        _lo = (problem or "").lower()
+        _typed = [m for m in _mods if m.lower() in _lo] or _mods
+        # THE PARAMETER NAME THE PROSE STATES. "representing a filesystem collection path"
+        # names a PATH, and the hook's parameter is `collection_path`. The prose supplies the
+        # NOUN; the stub supplies the TYPE; the `<noun>_path` spelling is the artifact's own
+        # convention, so the candidate set is (stated noun)+"_path" first, then the noun.
+        # Emitting the bare noun (`filesystem`) also passed, but only because pytest's hook
+        # accepts any parameter name -- that is a coincidence of this artifact, not a reading,
+        # and a test that pins a coincidence pins nothing.
+        _stated = re.findall(r"representing an? ([a-z_][\w]*)", _lo)
+        _pathish = [w for w in re.findall(r"\b([a-z_][\w]*)_path\b", _lo)]
+        _names = [f"{w}_path" for w in _stated] + _pathish
+        _names += _stated
+        _names = list(dict.fromkeys(_names)) or ["path"]
+        for _nm in _names[:6]:
+            for _t in (_typed or [""])[:3]:
+                ann = f":{_t}.Path" if _t and _t.lower() != "pathlib" else (
+                    f":{_t}.Path" if _t else "")
+                if _t == "pathlib":
+                    ann = ":pathlib.Path"
+                add("SIG", f"{_nm}{ann}):\n    pass")
+                add("SIG", f"{_nm}{ann}):\n        pass")
+            add("SIG", f"{_nm}):\n    pass")
 
     # 0c. a construction call whose constructor, parameters, keyword members and argument
     # paths are ALL stated by the stub, the problem text and the type's own `dir()`.
@@ -1027,14 +1077,8 @@ def compositions(args: Sequence[str], paths: Mapping[str, Sequence[str]],
     # The list is DERIVED, not guessed: "batched in the first dimension" means the image axes
     # are the ones AFTER the batch axis, i.e. 1 and 2. Emitting every small ordinal list is
     # cheap and the oracle decides, which is the standing rule for any hypothesis.
-    _ordinals = re.findall(r"\b(first|second|third|1st|2nd|3rd)\b",
-                           (problem or "").lower())
-    if _ordinals and args:
-        for axis_lit in ("[1, 2]", "[0, 1]", "[-2, -1]", "[1]", "[0]"):
-            for sym in list(dict.fromkeys(list(_from_calls) + list(stated_symbols)))[:12]:
-                add("AXIS", f"{sym}({args[0]}, axes={axis_lit})")
-                for nm in args:
-                    add("AXIS", f"{sym}({args[0]}, {nm}={nm}, axes={axis_lit})")
+    # (moved above, into the cheap-first block, because placement decides whether the oracle
+    # ever reaches it -- see the note there)
 
     # NOTE: cheap-first reordering was tried here and REJECTED by measurement. It moved
     # eq.lhs - eq.rhs from 169 to 514 and pushed Matrix([first, second]) out of the space
@@ -1440,8 +1484,20 @@ def solve_item(bench: str | pathlib.Path, item: Mapping[str, Any], *,
         if left <= 1.0:
             break
         part = bodies[start:start + chunk]
+        # THE CHUNK'S ALLOWANCE MUST NOT BE GRANTED FROM THE WHOLE DEADLINE, and this is the
+        # difference between reaching candidate 50 and candidate 250. Each chunk was given
+        # `per_body_seconds * chunk` = 125 s out of a 180 s budget, so the SECOND chunk already
+        # exhausted the deadline and every candidate past ~50 was unreachable however correct.
+        # Measured on scipy 133: the passing body sat at index 247 of 600 -- inside the cap, in
+        # the space, and never executed.
+        #
+        # The allowance is now the chunk's FAIR SHARE of the remaining budget, capped by what a
+        # chunk of 25 cheap bodies can actually need. A hanging chunk still cannot eat the run,
+        # because its share is bounded and the remaining chunks keep their own.
+        n_left = max(1, (len(bodies) - start + chunk - 1) // chunk)
+        fair = max(2.0, left / n_left)
         got = BO.judge_stream(python, item["starting_code"], tests.read_text(), part,
-                              timeout=min(left, float(per_body_seconds) * chunk),
+                              timeout=min(left, fair, float(per_body_seconds) * chunk),
                               test_path=str(tests), per_body_seconds=per_body_seconds)
         if got and got.get("passed"):
             got["index"] = start + int(got["index"])
