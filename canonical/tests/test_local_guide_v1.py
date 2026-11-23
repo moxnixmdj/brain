@@ -52,12 +52,12 @@ class LocalGuideTests(unittest.TestCase):
         self.assertEqual(out["status"], "FAIL_CLOSED__LOCAL_GUIDE_EMPTY_QUERY")
 
     def test_thin_match_is_not_a_conclusion(self):
-        # a single matching token is not a conclusion
+        # a single matching token among a big query is not a conclusion
         (self._tmp / "README.md").write_text(
-            "dial lock cadence: the dial lock is not the goal here\n",
+            "something in the README\n",
             encoding="utf-8")
-        out = guide.lookup("how to use something entirely different",
-                           root=self._tmp, min_tokens=2)
+        out = guide.lookup("how to use something entirely different about the world",
+                           root=self._tmp)
         self.assertFalse(out["pass"], out)
 
     def test_skipped_directories_are_never_scanned(self):
@@ -80,6 +80,68 @@ class LocalGuideTests(unittest.TestCase):
         # bound is 500; a pass must still come from real evidence, not fabricated
         self.assertLessEqual(out["documents_scanned"], 500)
         self.assertLessEqual(len(out["documents"]), 5)
+
+
+class ToolGuideTierTests(unittest.TestCase):
+    """The tool-help/man-page tier: the standardized offline contract between a
+    tool and its user -- offline, version-matched, completeness-gated."""
+
+    def setUp(self):
+        self._tmp = Path(tempfile.mkdtemp(prefix="local-guide-tool-"))
+
+    def tearDown(self):
+        import shutil
+        shutil.rmtree(self._tmp, ignore_errors=True)
+
+    def test_help_tier_answers_for_a_real_short_tool_name(self):
+        # jq is a real tool whose own --help output is a real guide. Short tool
+        # names (2 chars) must survive the query tokenizer -- the honest bug
+        # this pins.
+        out = guide.lookup("how to use jq", tools=["jq"])
+        self.assertTrue(out["pass"], out)
+        self.assertIn("tool_help", out["sources_answered"])
+        self.assertTrue(any(d["source"] == "tool_help" for d in out["documents"]))
+
+    def test_help_tier_missing_tool_fails_closed(self):
+        out = guide.lookup("how to use nosuchxyz", tools=["nosuchxyz"])
+        self.assertFalse(out["pass"], out)
+        self.assertEqual(out["documents"], [])
+
+    def test_help_tier_missing_output_falls_back_to_man_page(self):
+        # a stub tool with no --help output honestly falls through to the man page
+        stub = self._tmp / "nohelp-tool"
+        stub.write_text("#!/bin/sh\nexit 0\n", encoding="utf-8")
+        stub.chmod(0o755)
+        man1 = self._tmp / "man1"
+        man1.mkdir()
+        (man1 / "nohelp-tool.1").write_text(
+            ".TH NOHELP-TOOL 1 2026\n.SH NAME\n"
+            "nohelp-tool - a stub with no help text\n.SH SYNOPSIS\n"
+            "nohelp-tool <args>\n.SH DESCRIPTION\n"
+            "nohelp-tool does the useful thing. Use nohelp-tool to run the job.\n",
+            encoding="utf-8")
+        out = guide.lookup("how to use nohelp-tool", tools=[str(stub)],
+                           man_root=self._tmp)
+        self.assertTrue(out["pass"], out)
+        self.assertIn("man_page", out["sources_answered"])
+        self.assertTrue(any(d["source"] == "man_page" for d in out["documents"]))
+
+    def test_help_tier_tool_without_any_guide_fails_closed(self):
+        # a genuinely broken tool still produces an honest OPEN (no help, no man page)
+        stub = self._tmp / "ghost-tool"
+        stub.write_text("#!/bin/sh\nexit 0\n", encoding="utf-8")
+        stub.chmod(0o755)
+        out = guide.lookup("how to use ghost-tool", tools=[str(stub)],
+                           man_root=self._tmp)
+        # the help tier found nothing and the man tier found nothing -> no evidence
+        self.assertFalse(out["pass"], out)
+
+    def test_tool_help_never_fabricates_a_plan(self):
+        # the tool-guide tier orients; it must not itself become a plan
+        out = guide.lookup("how to use jq", tools=["jq"])
+        self.assertTrue(out["pass"], out)
+        for d in out["documents"]:
+            self.assertIn(d["source"], ("tool_help", "man_page", "local_md"))
 
 
 class LocalGuideIntegrationTests(unittest.TestCase):

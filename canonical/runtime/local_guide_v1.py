@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 """Local instant-knowledge source: the computer's own guides.
 
-The Perfect Algorithm's instant-knowledge tier reads the web as a fallback,
-but every component on this computer already has a guide: README, AGENTS.md,
-the man pages that ship with installed tools, and the repo's own documentation.
-Local guides are offline, version-matched with the install, and cheap to read
--- they are the first tier of instant knowledge, not the last.
+The Perfect Algorithm's instant-knowledge tier reads the web as an explicit
+fallback, but every component on this computer already has a guide: README,
+AGENTS.md, man pages for the tools that ship with installed packages, and
+the repo's own documentation. Local guides are offline, version-matched with
+the install, and cheap to read -- they are the first tier of instant
+knowledge, not the last.
 
 This module is honest about what it IS:
 
@@ -14,18 +15,28 @@ This module is honest about what it IS:
   - It is "last known state", not ground truth. A local guide tells the agent
     HOW to orient; the environment's own verification still decides.
   - It is completeness-gated. One isolated keyword hit is not a conclusion:
-    a document answers only if a single paragraph shares two or more of the
-    query's content tokens. One content token anywhere in a document is a
-    thin hit, not a guide -- it is an OPEN result, never a confident guess.
+      - the md tier requires ONE paragraph with at least two of the query's
+        content tokens (a big query wants at least 60%);
+      - the tool --help/man-page tier is the direct guide for the tool named
+        in the query and is gated by proportion only -- a tool's own guide
+        answering the question names it, so it needs at least 60% of the
+        query's content tokens, all when the query is small.
+    Function words are dropped before scoring -- one keyword anywhere in a
+    document is a thin hit, not a guide -- and it is an OPEN result, never
+    a confident guess.
 
-The default root is the repository root. It is bounded: at most 500 ``.md``
-files, never ``.git``/``node_modules``/build output.
+The md default root is the repository root. It is bounded: at most 500
+``.md`` files, never ``.git``/``node_modules``/build output. Tool help and
+man pages are only read for the tools the caller names.
 
 Model calls: 0. Network calls: 0. Spend: $0.
 """
 from __future__ import annotations
 
+import gzip
+import math
 import re
+import subprocess
 import sys
 import time
 from pathlib import Path
@@ -41,7 +52,9 @@ FAIL_EMPTY = "FAIL_CLOSED__LOCAL_GUIDE_EMPTY_QUERY"
 _SKIP = {".git", "node_modules", "build", "dist", "out", ".next", ".venv",
          "__pycache__", ".pytest_cache", ".mypy_cache", ".ruff_cache"}
 _MAX_FILES = 500
-_MAX_SNIPPET_LINES = 3
+_MAX_SNIPPETS = 5
+_MAN_SECTIONS = (1, 2, 3, 4, 5, 6, 7, 8)
+_DEFAULT_MAN_ROOT = "/usr/share/man"
 
 # Function words carry no content. A document that merely contains "how" or
 # "use" has not answered anything. They are dropped from the query before
@@ -59,8 +72,8 @@ _STOPWORDS = frozenset({
     "any", "some", "each", "every", "both", "few", "more", "most", "other",
     "such", "only", "also", "just", "very", "too", "like", "well", "get",
     "got", "make", "made", "take", "took", "go", "goes", "went", "whether",
-    "given", "give", "back", "tell", "tell me", "show", "see", "ask", "know",
-    "want", "wants", "needed", "need", "needs", "want", "asked",
+    "given", "give", "back", "tell", "show", "see", "ask", "know", "want",
+    "wants", "needed", "asked",
 })
 
 
@@ -70,7 +83,7 @@ def _default_root() -> Path:
 
 def _query_tokens(query: str) -> list[str]:
     text = str(query or "").lower()
-    tokens = re.findall(r"[a-z0-9][a-z0-9_\-]{2,}", text)
+    tokens = re.findall(r"[a-z0-9][a-z0-9_\-]{1,}", text)
     seen: set[str] = set()
     out: list[str] = []
     for t in tokens:
@@ -107,27 +120,97 @@ def _content_hits(text: str, tokens: Sequence[str]) -> list[str]:
 
 def _best_paragraph(text: str, tokens: Sequence[str]) -> tuple[int, str] | None:
     """The single paragraph sharing the most content tokens with the query.
-    One isolated keyword in a doc is a thin hit; the same passage answering
-    the question is what a guide means."""
+    The paragraph is the candidate guide; whether the candidate is enough is
+    decided by the completeness gate, not by this function."""
     best: tuple[int, str] | None = None
     for para in re.split(r"\n\s*\n", text):
         hits = _content_hits(para, tokens)
-        if len(hits) < 2:
+        if not hits:
             continue
         if best is None or len(hits) > best[0]:
             best = (len(hits), para.strip()[:600])
     return best
 
 
+# --------------------------------------------------------------------------- #
+# tool / man-page guides: the standardized offline contract between a tool and
+# its user. These are also "last known state" -- never ground truth.
+# --------------------------------------------------------------------------- #
+
+def _tool_help_text(tool: str, timeout_s: float) -> dict[str, Any] | None:
+    """The tool's own ``--help`` text (offline, version-matched). Returns None
+    when the tool is absent or produces no output -- an honest no-evidence."""
+    try:
+        proc = subprocess.run([tool, "--help"], capture_output=True,
+                              text=True, timeout=timeout_s)
+    except FileNotFoundError:
+        return None
+    except subprocess.TimeoutExpired:
+        return None
+    except Exception:  # noqa: BLE001
+        return None
+    text = (proc.stdout or "") + "\n" + (proc.stderr or "")
+    if not text.strip():
+        return None
+    return {"source": "tool_help", "tool": tool, "text": text,
+            "exit_code": proc.returncode}
+
+
+def _man_page_files(tool: str, root: Path) -> list[tuple[Path, int]]:
+    found: list[tuple[Path, int]] = []
+    for section in _MAN_SECTIONS:
+        base = root / f"man{section}" / f"{tool}.{section}"
+        for candidate in (base.with_suffix(".gz"), base):
+            if candidate.is_file():
+                found.append((candidate, section))
+                break
+    return found
+
+
+def _man_page_text(tool: str, root: Path) -> dict[str, Any] | None:
+    """A rough but honest man-page read: gunzip if needed, drop nroff control
+    sequences, keep the plain text. Heavier parsing (troff semantics) is out
+    of scope -- the receipt labels this an honest, rough parse."""
+    files = _man_page_files(tool, root)
+    if not files:
+        return None
+    path, section = files[0]
+    try:
+        raw = (gzip.open(path, "rt", encoding="utf-8", errors="replace").read()
+               if path.suffix == ".gz" else Path(path).read_text(encoding="utf-8", errors="replace"))
+    except Exception:  # noqa: BLE001
+        return None
+    lines = []
+    for line in raw.splitlines():
+        if line.startswith("."):
+            continue
+        line = re.sub(r"\\s*\.\s*", " ", line)
+        if line.strip():
+            lines.append(line.strip())
+    text = "\n".join(lines)
+    if not text.strip():
+        return None
+    return {"source": "man_page", "tool": tool, "text": text,
+            "path": str(path), "sections": [section]}
+
+
 def lookup(query: str, *, root: Path | str | None = None,
-           max_snippets: int = 5, min_tokens: int = 2,
+           tools: Sequence[str] | None = None,
+           man_root: Path | str | None = None,
+           timeout_s: float = 5.0,
+           max_snippets: int = _MAX_SNIPPETS,
            deadline_s: float = 30.0) -> dict[str, Any]:
     """Search the local guides on this computer for what a query asks.
 
-    Returns evidence (path, score, matched tokens, paragraph snippet) or an
-    honest OPEN. Completeness means at least one local document has a single
-    paragraph sharing two or more of the query's content tokens -- one
-    content token anywhere in a document is NOT a conclusion.
+    Returns evidence (path, score, matched tokens, paragraph snippet, source)
+    or an honest OPEN. Completeness means at least one candidate answered:
+      - tool --help/man-page documents (when ``tools`` is named) are the
+        direct guide for the named tool: a paragraph sharing at least 60% of
+        the query's content tokens, or all of them when the query is small;
+      - md documents are the repo's broader is-a-guide: a paragraph sharing
+        at least two content tokens (or all of them when the query is small).
+    Function words are dropped before scoring. One isolated keyword anywhere
+    in a document is a thin hit, not a conclusion -- OPEN.
     """
     started = time.time()
     q = str(query or "").strip()
@@ -137,13 +220,11 @@ def lookup(query: str, *, root: Path | str | None = None,
                 "authority": "NONE"}
 
     tokens = _query_tokens(q)
-    # A guide answers the question, not a word of it. The bar is content-token
-    # proportional: with few content tokens it wants all of them, with many it
-    # refuses to conclude on thin overlap (60%, minimum 2).
-    import math
-    needed = max(2, math.ceil(len(tokens) * 0.6)) if tokens else 2
+    tool_needed = max(1, math.ceil(len(tokens) * 0.6)) if tokens else 1
+    md_needed = max(2, math.ceil(len(tokens) * 0.6)) if tokens else 2
     root_path = Path(root) if root is not None else _default_root()
-    docs: list[dict[str, Any]] = []
+
+    md_docs: list[dict[str, Any]] = []
     try:
         for p in _local_guide_files(root_path):
             if time.time() - started > deadline_s:
@@ -153,15 +234,16 @@ def lookup(query: str, *, root: Path | str | None = None,
             except Exception:
                 continue
             best = _best_paragraph(text, tokens)
-            if best is None:
+            if best is None or best[0] < md_needed:
                 continue
             score, snippet = best
             try:
                 rel = str(p.relative_to(root_path))
             except ValueError:
                 rel = str(p)
-            docs.append({
+            md_docs.append({
                 "path": rel,
+                "source": "local_md",
                 "score": float(score),
                 "matched_terms": score,
                 "snippet": snippet,
@@ -169,22 +251,68 @@ def lookup(query: str, *, root: Path | str | None = None,
     except Exception as e:  # noqa: BLE001
         return {"schema": SCHEMA, "status": OPEN_NOT_FOUND, "pass": False,
                 "query": q, "score": 0.0, "documents": [],
-                "error": str(e)[:200], "authority": "NONE__LOCAL_GUIDE_UNAVAILABLE"}
+                "error": str(e)[:200],
+                "authority": "NONE__LOCAL_GUIDE_UNAVAILABLE"}
 
-    docs.sort(key=lambda d: d["score"], reverse=True)
-    docs = docs[:max_snippets]
+    tool_docs: list[dict[str, Any]] = []
+    if tools:
+        tool_list = list(tools)
+        for tool in tool_list:
+            if time.time() - started > deadline_s:
+                break
+            tool_name = str(tool).rsplit("/", 1)[-1]
+            help_out = _tool_help_text(tool, timeout_s=timeout_s)
+            if help_out is not None:
+                best = _best_paragraph(help_out["text"], tokens)
+                if best is not None and best[0] >= tool_needed:
+                    score, snippet = best
+                    tool_docs.append({
+                        "path": f"{tool_name} --help",
+                        "source": "tool_help",
+                        "tool": tool_name,
+                        "score": float(score),
+                        "matched_terms": score,
+                        "snippet": snippet,
+                        "exit_code": help_out.get("exit_code"),
+                    })
+                    continue
+            man_out = _man_page_text(tool_name, Path(man_root) if man_root is not None else Path(_DEFAULT_MAN_ROOT))
+            if man_out is not None:
+                best = _best_paragraph(man_out["text"], tokens)
+                if best is not None and best[0] >= tool_needed:
+                    score, snippet = best
+                    tool_docs.append({
+                        "path": f"{tool} man page ({man_out.get('path')})",
+                        "source": "man_page",
+                        "tool": tool,
+                        "score": float(score),
+                        "matched_terms": score,
+                        "snippet": snippet,
+                        "sections": man_out.get("sections"),
+                    })
+
+    # tool-guide documents are the direct answer for a named tool; they outrank
+    # md documents, which are a broader is-a-guide. Honest precedence, not
+    # invention.
+    tool_docs.sort(key=lambda d: d["score"], reverse=True)
+    md_docs.sort(key=lambda d: d["score"], reverse=True)
+    tool_preferred = bool(tool_docs)
+    docs = (tool_docs or md_docs)[:max_snippets]
+
     best = docs[0]["score"] if docs else 0.0
-    enough = bool(docs) and best >= max(min_tokens, needed)
+    enough = bool(docs)
     return {
         "schema": SCHEMA,
         "status": PASS if enough else OPEN_NOT_FOUND,
         "pass": enough,
         "query": q,
         "score": best,
-        "min_tokens_required": min_tokens,
+        "min_tokens_required": tool_needed if tool_preferred else md_needed,
         "documents": docs,
         "tokens": tokens,
         "documents_scanned": len(_local_guide_files(root_path)),
         "duration_s": round(time.time() - started, 4),
         "authority": "EXTERNAL_LOCAL_DOCS_RETRIEVED" if enough else "NONE__LOCAL_GUIDE_UNANSWERED",
+        "sources_answered": sorted({d.get("source") for d in docs if d.get("source")}),
+        "tool_preferred": tool_preferred,
     }

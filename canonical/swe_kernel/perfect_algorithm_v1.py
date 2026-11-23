@@ -454,7 +454,9 @@ def run(env: Any, goal: str, actions: Sequence[Any],
         allow_instant_knowledge: bool = False,
         seed: int | None = None,
         prior: Mapping[str, Any] | None = None,
-        local_root: str | pathlib.Path | None = None) -> dict[str, Any]:
+        local_root: str | pathlib.Path | None = None,
+        tools: Sequence[str] | None = None,
+        man_root: str | pathlib.Path | None = None) -> dict[str, Any]:
     """The Perfect Algorithm: scan, remember-or-learn, PLAN, ACT, VERIFY,
     LEARN, ADMIT, SAVE, REPORT.
 
@@ -576,12 +578,15 @@ def run(env: Any, goal: str, actions: Sequence[Any],
         try:
             query = _instant_knowledge_query(goal, kind)
             from canonical.runtime import local_guide_v1 as local_guide
-            local = local_guide.lookup(query, root=local_root)
+            local = local_guide.lookup(query, root=local_root,
+                                       tools=tools, man_root=man_root)
             instant["local_guide"] = {
                 "status": local.get("status"),
                 "score": local.get("score"),
                 "documents": list(local.get("documents") or []),
                 "authority": local.get("authority"),
+                "sources_answered": list(local.get("sources_answered") or []),
+                "tool_preferred": bool(local.get("tool_preferred")),
             }
             if local.get("pass"):
                 instant["status"] = "PASS__LOCAL_GUIDE_FOUND"
@@ -590,6 +595,8 @@ def run(env: Any, goal: str, actions: Sequence[Any],
                 instant["complete"] = True
                 instant["authority"] = "EXTERNAL_LOCAL_DOCS_RETRIEVED"
                 instant["tier"] = "local"
+                instant["sources_answered"] = list(local.get("sources_answered") or [])
+                instant["tool_preferred"] = bool(local.get("tool_preferred"))
             elif allow_instant_knowledge:
                 # Tier 2: the web. Completeness-gated -- one source cannot
                 # conclude anything. Never counted as capability.
