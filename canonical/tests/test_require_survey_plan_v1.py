@@ -1328,3 +1328,50 @@ def test_a_field_list_after_an_option_name_is_not_its_content(pipelinectl):
         argv = " ".join(plan["argv"])
         assert "target date" not in argv, argv
         assert "lead," not in argv, argv
+
+
+def test_a_value_the_page_has_no_slot_for_is_reported_rather_than_forced_into_one():
+    """A value's label is the request saying what kind of thing it is.
+
+    `issue list` documents `--team` and `--project`; it has no `--title`. A request that names a
+    project, a team *and* a title therefore states something this page cannot carry. The reading
+    that puts the title in `--assignee` is not "the best available slot" -- it silently changes the
+    request's meaning to "filter by an assigned person called Fix login", and reports complete.
+
+    The correct reading places what the page documents and reports the rest by its own word.
+    """
+    out = R.require_survey_plan(
+        str(CB_BIN / "linear"),
+        'Add an issue to the project "Engineering" for the team "Platform" titled "Fix login".',
+        probes=16)
+    assert out["plans"], out.get("reason")
+    # No reading may put the title in a flag that means a person or a project.
+    for candidate in out["plans"]:
+        argv = candidate["argv"]
+        assert "--assignee" not in argv, f"a title was read as a person: {argv}"
+        if "Fix login" in argv:
+            assert argv[argv.index("Fix login") - 1] == "--title", argv
+    # At least one reading places both labelled values the page does document.
+    assert any("Engineering" in p["argv"] and "Platform" in p["argv"] for p in out["plans"]), \
+        [p["argv"] for p in out["plans"]]
+    # And the value with no home is reported by its own word rather than silently dropped --
+    # in whichever of the two fields the plan carries it: `unbound` (a slot was wanted and refused)
+    # or `values_unplaced` (the reading never found a slot to want).
+    reported = [p for p in out["plans"]
+                for item in (p.get("unbound") or []) + (p.get("values_unplaced") or [])
+                if "Fix login" in str(item.get("value") if isinstance(item, dict) else item)]
+    assert reported, "the unplaceable value must be reported, not silently dropped"
+
+
+def test_a_labelled_value_lands_in_the_flag_that_names_it_not_the_first_free_one():
+    """`--team` is declared first; the request says "the **title**".
+
+    Binding by declaration order puts whatever comes first in the document into whichever value
+    comes first in the request. The page prints the word that decides it.
+    """
+    out = R.require_survey_plan(
+        str(CB_BIN / "linear"),
+        'Create an issue titled "Fix login" in the team "Platform".', probes=16)
+    argv = out["plans"][0]["argv"]
+    assert argv[argv.index("--title") + 1] == "Fix login", argv
+    assert argv[argv.index("--team") + 1] == "Platform", argv

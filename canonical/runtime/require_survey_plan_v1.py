@@ -133,6 +133,12 @@ def words_of(text: str) -> set[str]:
     """Content words, singularised by one spelling rule (no synonym table)."""
     out: set[str] = set()
     for word in re.findall(r"[A-Za-z][A-Za-z0-9_'-]*", str(text or "").lower()):
+        # A possessive is punctuation, not part of the word. `--name  the secret's name` stemmed
+        # to `secret'`, which is a different token from `secret` -- so a request saying "Rotate the
+        # **secret** \"api-token\"" could not match the flag whose own description names a secret,
+        # and the route fell to a page that documents `--principal`. Nothing about the word's
+        # meaning is involved: the apostrophe-s is stripped because it is not a letter.
+        word = re.sub(r"['\u2019]s$", "", word)
         if word in STOP or len(word) < 2:
             continue
         for suffix in ("ing", "ed", "es", "s"):
@@ -906,7 +912,8 @@ def survey(tool: str, *, want: Iterable[str] = (), probes: int = DEFAULT_PROBES,
 
 
 def route(tree: Mapping[str, Any], request_words: Iterable[str],
-          acts: Iterable[tuple[str, str]] = (), *, said: str = "") -> dict[str, Any]:
+          acts: Iterable[tuple[str, str]] = (), *, said: str = "",
+          values: Iterable[Mapping[str, Any]] = ()) -> dict[str, Any]:
     """The document the request is about: by the words it spends, then by the act it states."""
     wanted = set(request_words)
     # The program's own name is in its pages' summaries because those summaries are about it, so
@@ -935,9 +942,16 @@ def route(tree: Mapping[str, Any], request_words: Iterable[str],
 
     walk(tree.get("root") or {}, ())
     best_path: tuple[str, ...] = ()
+    best_accounted = (0,)
     best_score = 0
     best_near = 1 << 20
     wanted_acts_words = {w for a in wanted_acts for w in words_of(" ".join(a))}
+    asked_values = [v for v in values if str(v.get("value") or "").strip()]
+    # The spellings the asking convention already uses to read a document. A flag that prints
+    # the help is a question, never a value, so it is not a slot the request can fill.
+    control_flags: set[str] = set()
+    for rung in ASK_CONVENTION:
+        control_flags.update(str(a).lower() for a in rung)
     for here, page in by_path.items():
         # The page's own name is what the page *is*; its summary says what the page can be told
         # about. Both are evidence, and they are not equal: `issue list` summarises itself as
@@ -999,20 +1013,72 @@ def route(tree: Mapping[str, Any], request_words: Iterable[str],
         # subject, where insertion order is a property of how the document happened to be written.
         # The shorter path remains the last tie-break, unchanged, and `project list` vs `issue
         # list` is decided earlier by A25's weighting (9 to 7) so it is not affected.
-        # A page whose documented flags the request *cannot* supply is worse than one it can.
-        # `Send a direct message to alice` scores `dm send` and `message send` identically at 18,
-        # and insertion order picked `message send`, which needs `--channel` -- a channel the
-        # request never names -- so the text was bound to `--channel` and the message went
-        # nowhere. `dm send` needs `--user`, and the request names one. This is the document's own
-        # statement about what the command cannot run without, checked against what the request
-        # actually says, so it is evidence rather than a preference for one page over another.
+        # ---- ACCOUNTING ------------------------------------------------------------------
+        # Word overlap asks "how much do these two texts talk about the same thing". That is a
+        # proxy, and every weight above is a patch on the proxy. The fact that decides the route
+        # is smaller and exact: **a page must be able to account for the request.**
+        #
+        #   places   -- every value the request states fits a slot the page documents
+        #   whole    -- every flag the page *requires* is supplied by something the request states
+        #
+        # A page that leaves a stated value homeless is a page about the same noun, not the page
+        # that answers. `Add an issue to the project E for the team P titled F` states three
+        # values; `issue list` has no slot for the title, so it cannot be the page, however many
+        # of the request's words it shares. A page that requires what the request withholds is
+        # asking for information the person did not give, which no plan may invent.
+        #
+        # Matching is by the word both parties print: the noun the request puts immediately before
+        # a value ("the **project** E") and the first word of the flag's description
+        # (`--project  Project name`). Where the request gives no label, the flag's own name is
+        # matched the same way. Nothing is read off the value's spelling or meaning.
+        if asked_values:
+            page_slots = [o for o in page.get("options") or []
+                          if o.get("takes_value") and str(o.get("flag") or "").lower()
+                          not in control_flags]
+            # A page's *grammar* is a slot as well as its flags. `git init [<directory>]`
+            # documents one positional and no data flag at all, so counting only flags says every
+            # value the request brings is homeless there -- and the plan fell back to the root
+            # page, which then issued the bare path as a command. The usage picture is the tool
+            # stating where an argument goes; a page that has one can carry an argument.
+            room_for_positionals = bool(positional_grammar(page.get("usage") or {}))
+            houseless = 0
+            for value in asked_values:
+                before = str(value.get("context") or "").split(str(value.get("value")), 1)[0]
+                labels = {w for w in words_of(before)
+                          if re.search(r"\b" + re.escape(w) + r"\w*\s*[\"']?$", before, re.I)}
+                if not labels:
+                    labels = wanted
+                if room_for_positionals:
+                    continue
+                # The whole description counts, not only its first word. `--service  Service
+                # name to split traffic for` is where a request that says "a canary
+                # **deployment** for user-service" puts that value: the page prints both words.
+                # Restricting the match to the description's head made the right page look
+                # unable to take a value the request plainly brings, and routing fell to
+                # `traffic` -- a page that documents nothing.
+                if not any(labels & (words_of(str(o.get("flag") or "").lstrip("-"))
+                                     | words_of(str(o.get("words") or "")))
+                           for o in page_slots):
+                    houseless += 1
+            # Only ONE statement is used, and the other was measured and removed. "Every flag
+            # the page requires is supplied" sounds right and is wrong: `traffic split` documents
+            # `--versions  Version-to-weight mapping as JSON` and a request says "90% to v1, 10%
+            # to v2" -- it brings the mapping without ever saying the word "versions". Every other
+            # page is equally starved, so the term could not tell them apart; all it did was rank
+            # the one correct page below a page that documents nothing. Removed rather than
+            # reweighted: a criterion that penalises the right answer is not a criterion.
+            accounted = (-houseless,)
+        else:
+            accounted = (0,)
         low = said.lower()
         act_at = min([low.find(w) for w in wanted_acts_words] or [0])
         apart = [abs(low.find(w) - act_at) if w in low else 1 << 20
                  for w in (named - wanted_acts_words)]
         near = min(apart) if apart else 1 << 20
-        if (score, -near, -len(here)) > (best_score, -best_near, -len(best_path)):
+        if (accounted, score, -near, -len(here)) > (best_accounted, best_score, -best_near,
+                                                    -len(best_path)):
             best_path, best_score, best_near = here, score, near
+            best_accounted = accounted
     for depth in range(1, len(best_path) + 1):
         here = best_path[:depth]
         page = by_path.get(here)
@@ -1451,6 +1517,40 @@ def _paths_with_places(values: Sequence[Mapping[str, Any]], picture: Sequence[st
     return pairs
 
 
+def _labels_the_value(value: Mapping[str, Any]) -> bool:
+    """Does the request put a noun immediately before this value?
+
+    "the **project** \"Engineering\"", "for the **team** \"Platform\"", "**titled** \"Fix login\"".
+    A label is the request stating what kind of thing the value is. When it states one and no free
+    flag on the page names that kind, the value has no place here -- and the honest reading is to
+    report it unplaced, not to drop it into whichever flag happens to be free. `issue list`
+    documents `--team` and `--project` and has no `--title`, so a request naming a title asks for
+    something this page cannot do; putting the title in `--assignee` would silently filter the
+    list by an assigned person named "Fix login".
+    """
+    before = str(value.get("context") or "").split(str(value.get("value")), 1)[0]
+    return bool({w for w in words_of(before)
+                 if re.search(r"\b" + re.escape(w) + r"\w*\s*[\"']?$", before, re.I)})
+
+
+def _names_the_value(slot: Mapping[str, Any], value: Mapping[str, Any]) -> bool:
+    """Does the flag's own description name this value, by the word the request labels it with?
+
+    `--project  Project name` against a request saying "the **project** \"Engineering\"" -- both
+    parties print `project`. `--assignee  Username to assign` does not. Nothing is inferred from
+    the value itself; the only words used are ones the page printed in the flag's description and
+    the request printed immediately before the value.
+    """
+    described = words_of(str(slot.get("words") or "")) | words_of(
+        str(slot.get("flag") or "").lstrip("-"))
+    if not described:
+        return False
+    before = str(value.get("context") or "").split(str(value.get("value")), 1)[0]
+    labels = {w for w in words_of(before)
+              if re.search(r"\b" + re.escape(w) + r"\w*\s*[\"']?$", before, re.I)}
+    return bool(labels & described)
+
+
 def _bind(values: Sequence[Mapping[str, Any]], options: Sequence[Mapping[str, Any]],
           *, product_first: bool, picture: Sequence[str] | None = None
           ) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
@@ -1489,6 +1589,7 @@ def _bind(values: Sequence[Mapping[str, Any]], options: Sequence[Mapping[str, An
     typed_paths.sort(key=lambda o: 0 if is_product_slot(o) else 1)
     bound: list[dict[str, Any]] = []
     used: set[int] = set()
+    used_values: set[int] = set()
     rest_paths = list(paths)
     if product_first:
         for option in typed_paths:
@@ -1501,9 +1602,47 @@ def _bind(values: Sequence[Mapping[str, Any]], options: Sequence[Mapping[str, An
     for value in rest_paths:
         bound.append({"role": "positional", "value": value["value"]})
     unbound: list[dict[str, Any]] = []
+    # The slot a value goes in is the slot whose description names it, before the slot that
+    # merely accepts its kind. Every `literal` accepts every word, so "first unused flag that
+    # accepts a string" is a fact about the document's layout, not about the request:
+    # `issue create` printed `--team` first, so `--team Engineering` came out for a request that
+    # said "the **project** Engineering" and `--assignee Fix login` for one that said "**titled**
+    # Fix login". The page prints the word that says which flag takes which value; using it is
+    # reading the document rather than reading its flag order.
+    free = [o for o in typed if id(o) not in used]
+    for option in list(free):
+        if len(free) < 1:
+            break
+        labelled = [v for v in others if id(v) not in used_values
+                    and _names_the_value(option, v)]
+        if len(labelled) == 1:
+            value = labelled[0]
+            used.add(id(option))
+            used_values.add(id(value))
+            bound.append({"role": "value_slot", "option": option["flag"],
+                          "value": value["value"]})
+            free.remove(option)
+    others = [v for v in others if id(v) not in used_values]
     for value in others:
         holder = next((o for o in typed if id(o) not in used
                        and _accepts(slot_kind(o), value["kind"])), None)
+        # Falling back to "any slot that accepts a string" put `Fix login` in `--assignee` because
+        # `--assignee` was the next unused flag. The request said "**titled** Fix login" and the
+        # page says `--title  Issue title` on a *different* page; nothing on this page names it.
+        # A value the request labels must land in a slot that names it, and when no free slot does,
+        # the value is unplaced. An unplaced value is reported by its own word -- the honest
+        # answer that this page cannot carry it -- rather than pushed into a flag that would
+        # silently change its meaning.
+        if holder is not None:
+            named = next((o for o in typed if id(o) not in used
+                          and _accepts(slot_kind(o), value["kind"])
+                          and _names_the_value(o, value)), None)
+            if named is not None:
+                holder = named
+            elif _labels_the_value(value):
+                unbound.append({"kind": value["kind"], "value": value["value"],
+                                "context": value.get("context", "")})
+                continue
         if holder is None:
             unbound.append({"kind": value["kind"], "value": value["value"],
                             "context": value.get("context", "")})
@@ -2861,7 +3000,7 @@ def plan(requirement: Mapping[str, Any], tree: Mapping[str, Any],
     root = tree.get("root") or {}
     picture = positional_grammar((root.get("usage") or {}))
     routed = route(tree, words_of(requirement.get("instruction") or ""), acts,
-                   said=str(requirement.get("instruction") or "")) \
+                   said=str(requirement.get("instruction") or ""), values=values) \
         if root.get("children") else {"path": [], "nodes": [root], "scores": []}
     nodes: list[dict[str, Any]] = routed["nodes"]
     plans: list[dict[str, Any]] = []

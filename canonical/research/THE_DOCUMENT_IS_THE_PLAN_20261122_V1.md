@@ -2300,3 +2300,62 @@ accounting gap again: no page of `tar` can place both paths in a copy, and the p
 so.
 
 **State of the suite: 70 tests, 12 effect tasks passing by effect.**
+
+### A58 — built: accounting and labelled binding. Three criteria tested, one survived.
+
+A57 stated the criterion and measured it by hand. This is it built, and the record of the two
+companion criteria that measurement killed.
+
+**Survived — a page must be able to house every value the request states.** A value's *label* is the
+noun the request puts immediately before it ("the **project** \"Engineering\"", "for the **team**
+\"Platform\"", "**titled** \"Fix login\""). A page's slot is named either by its flag or by words in
+its own description. `issue list` documents `--project  Filter by project` and `--team  Filter by
+team`, so both of those values have a home and the page can serve the request. `houseless` counts
+the values with no home, and it is compared **lexicographically, with no weight**: a page that can
+house the request outranks a page that scores better on word overlap.
+
+Two details were wrong on the first attempt and are recorded because they will recur:
+
+* **The description's first word only** made `traffic split` look unable to take "user-service",
+  because its flag reads `--service  Service name to split traffic for` and the request calls it a
+  *deployment*. The page prints both words; restricting to the first threw one away, and routing
+  fell to `traffic`, a page that documents nothing at all.
+* **A page's positional grammar is a slot too.** `git init [<directory>]` documents one positional
+  and no data flag. Counting only flags said every value was homeless, the route fell back to the
+  root page, and the plan was the bare path as a command.
+
+**Killed — "every flag the page requires must be supplied."** It sounds like the right test of a
+route and it is not. `traffic split` documents `--versions  Version-to-weight mapping as JSON`, and
+a request saying "route 90% to v1 and 10% to v2" brings exactly that mapping **without ever saying
+the word `versions`**. Every other page was equally starved, so the term could not separate them;
+its only effect was to rank the one correct page below a page that documents nothing. A criterion
+that penalises the right answer is not a criterion. **Removed, not reweighted.**
+
+**Killed — a `+2` score for label/kind agreement.** Fixed one sentence, broke `git mv` into
+`git clone`. Removed in A57; the accounting above is what replaced it.
+
+**Built — a labelled value goes in the flag that names it, not the first free one.** This was a real
+defect independent of routing. `_bind` took "the first unused typed option that accepts the kind",
+and every `literal` accepts every string, so flag *declaration order* decided the meaning:
+request "the **project** Engineering … **titled** Fix login" produced `--team Engineering` and
+`--assignee Fix login`. `--assignee  Username to assign` does not name a title. Binding now prefers
+the slot whose own description names the value's label, and — this is the part that matters — a
+value whose label nothing on the page names is **reported unplaced instead of forced into a slot**.
+The old reading silently turned a title into an assigned person and reported `complete: True`.
+
+**A third spelling fact, found by the fix rather than by looking for it.** `--name  the secret's
+name` stemmed to `secret'`, a different token from `secret`. So a request saying "Rotate the
+**secret** \"api-token\"" could not match the flag whose own description names a secret, and routing
+fell to a page documenting `--principal` on a program the planner had never seen. The apostrophe is
+punctuation, not part of a word. Fixing it put the unseen program back to **6/6** without touching
+a weight.
+
+**Verified now.** 72 tests; 12 effect tasks passing by effect, identical under
+`PYTHONHASHSEED` 7/99/default; the unseen `vaultctl` 6/6; real `/usr/bin/tar` planning
+`-cf backup.tgz /tmp/data` and `-tvf backup.tgz` from its own dense help text.
+
+**Next bottleneck, stated:** `issue list` is *chosen* for a request that also names a title it cannot
+hold, and it reports the title unplaced rather than refusing. The page that could hold a title,
+`issue create`, cannot house the project. So neither page accounts for the whole request, and the
+honest answer is that this program has no single command for it — which the mechanism does not yet
+say. Closing that means turning "no page houses everything" into a refusal rather than a best effort.
