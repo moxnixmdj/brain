@@ -7687,3 +7687,78 @@ crossed, and no amount of work here has crossed it.
     GUI / OSWorld         never run. §6 not met.
 
 > **The machinery transfers between kinds of world. The measurement has not reached the hard one.**
+
+## §A134 — the organ that was missing, and what it actually scores
+
+### The verdict on the hypothesis, stated before the work
+
+The owner's hypothesis: *we already solved instant learning and instant learning in new arbitrary environments;
+the agent needs only to do something once and it learns it permanently.*
+
+**Three of four parts are built and measured. One was not, and it was the load-bearing one.**
+
+| organ the hypothesis needs | status | evidence |
+|---|---|---|
+| instant knowledge fetched from the web | **built** | `jit_knowledge_v1`, `program_manual_v1`, `documentation_mining_v1` |
+| probe an undocumented interface | **built** | `undocumented_v1` — a refusal separates verb from arity |
+| inventory a new environment | **built** | `observe_world` / `names_in`; §A132 5/5, §A133 4/4 |
+| learn a rule from one refusal | **built** | `stated_precondition_v1`; §A131 5/5 |
+| **instruction words → one element on the screen** | **ABSENT** | measured below |
+
+### The measured gap
+
+    ground_consensus_action(action="click", role="button", name="Compose")        -> SELECT   (works)
+    ground_consensus_action(action="click", role="button", name="write a new email")
+                                                                                 -> ESCALATE
+                                                                                    NO_CONSENSUS_MATCH
+
+`consensus_dom_grounding` states of itself, correctly: it "does not infer a target from a goal". It answers *is
+this target unambiguous* — never *which element did they mean*. So no agent in this tree could locate anything
+unless a human pre-specified the target, and that is why **every computer-use number here is unmeasured.**
+
+This is why the browser binary was never the bottleneck. The binary is plumbing. The missing thing was a
+function from an instruction to an element.
+
+### The mechanism, and what it refuses to be
+
+Two honest sources, in order:
+
+    1. the PAGE'S OWN WORDS     an element named with a word the request uses  ("check my inbox" -> Inbox)
+    2. a STATED MEANS-RELATION  somebody wrote it down, with a source         ("write a new email" -> Compose)
+
+Both are containment tests, not similarity scores. A similarity score is a judgement; containment is a fact
+about two strings. No synonym is ever invented: `Archive` is not `Delete` because they share a toolbar.
+
+### Measured on two LIVE pages the module was not written against
+
+| page | resolved | correct refusal | refusal a person would call a failure |
+|---|---|---|---|
+| github.com/torvalds/linux (161 elements) | 2 | 3 | 1 (`fork` — two identical "66.7k forks" counters) |
+| github.com/python/cpython (225 elements) | 4 | 2 | 1 (`fork it` — the control is named "You must be signed in to fork a repository") |
+
+**6 of 13 resolved; every refusal was safe; 2 were refusals where a human would have succeeded.**
+
+Two real defects were found by this and fixed:
+
+    tokenizer   "Issues5k+" was ONE token, so the word people say was unrecognisable
+                "36.6k forks" left a bare "k" in the name, failing the whole-name test
+                fixed by removing counter shapes whole before splitting -- a count is not a name
+
+    short name in a long sentence
+                a fork control's accessible name is "You must be signed in to fork a repository"; a
+                whole-name test can never pass, so a second pass requires the element to contain EVERY
+                word the request names the thing with
+
+### The honest limits, which are large
+
+    NOT TRUE   this is not solved. 6/13 on real pages, and the pages are two variants of ONE site.
+    NOT TRUE   there is no synonymy. "write a new email" needs a stated relation; without one it refuses.
+               That is the right behaviour and it is also a real ceiling: a user who does not know the
+               product's own vocabulary cannot be helped without source 2.
+    NOT TRUE   a rendered page differs from its source. No layout, no JavaScript, no canvas, no frames.
+               An element that only exists after a script runs is invisible to this.
+    NOT SHOWN  that any of it composes into a task. Resolving an element is one step; §6 needs whole tasks
+               on OSWorld 2.0, whose binary completion tops out at 32.0% for the frontier.
+
+> **The words are not enough on their own, and no amount of cleverness makes them enough — the second source
+> is documentation, and documentation is finite. That limit is the next bottleneck, not a bug.**
