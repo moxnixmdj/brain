@@ -12,6 +12,8 @@ Three kinds of test here, deliberately separated:
 """
 from __future__ import annotations
 
+import re
+
 import ast
 import base64
 import json
@@ -1463,3 +1465,57 @@ def test_a_value_the_planner_could_not_place_is_never_written_into_the_command()
                         and str(argument) in "Find every file in /tmp/compose whose contents "
                                              "mention alpha."), \
                 f"the request's own prose became an argument: {candidate['argv']}"
+
+
+def test_the_root_page_keeps_the_sentence_that_says_what_the_program_is_for():
+    """The root help's first sentence names the act and the places, and it was discarded.
+
+    Every root node was built with an empty summary, so `grep --help`'s "Search for PATTERNS in each
+    FILE." -- nine words naming the operation and both argument places -- contributed nothing to
+    routing or to deciding whether the program has a command for the act at all.
+
+    Checked on a real program, because the sentence is only there in a real help text.
+    """
+    import shutil
+    if shutil.which("grep") is None:
+        import pytest
+        pytest.skip("no grep on this host")
+
+    tree = R.survey("grep", probes=10)
+    summary = str((tree.get("root") or {}).get("summary") or "")
+    assert summary, "the root page kept no sentence"
+    assert R.words_of(summary) & {"search"}, summary
+    # and the places the usage line declares are named in that same sentence. Read the words the
+    # page printed, not the stems: `PATTERNS` stemmed to `pattern` and `each`/`in` are stop words,
+    # so `words_of` on this sentence returns {pattern, search} and silently loses FILE.
+    printed = set(re.findall(r"[A-Za-z]+", summary))
+    assert {"PATTERNS", "FILE"} <= printed, summary
+
+
+def test_only_the_pages_own_verb_is_grounding_and_synonyms_are_not():
+    """The command is the same either way; only the claim differs.
+
+    On real `grep`: "Search the lines of /etc/hosts that contain localhost" plans
+    `grep localhost /etc/hosts` and is complete, because `Search` is the verb the page uses. The
+    same sentence with `Show`, `Find` or `List` plans the same correct command and reports
+    incomplete, because no document connects those words to what grep does.
+
+    That asymmetry is the honest one: the plan is the document's, and the claim is only made when
+    both sides say the same word.
+    """
+    import shutil
+    if shutil.which("grep") is None:
+        import pytest
+        pytest.skip("no grep on this host")
+
+    plans = {}
+    for verb in ("Search", "Show", "Find", "List"):
+        out = R.require_survey_plan(
+            "grep", f"{verb} the lines of /etc/hosts that contain localhost.", probes=10)
+        plans[verb] = out
+        assert out["plans"], (verb, out.get("reason"))
+        assert out["plans"][0]["argv"][1:] == ["localhost", "/etc/hosts"], (verb, out["plans"][0])
+
+    assert plans["Search"]["complete"] is True, plans["Search"].get("refusals")
+    for synonym in ("Show", "Find", "List"):
+        assert plans[synonym]["complete"] is False, synonym
