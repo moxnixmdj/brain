@@ -7486,3 +7486,75 @@ coverage test; reverting the stemmer fails the gzip test.
     NOT DONE   the modifier rule is a name match. A modifier whose word appears in NO flag name is still
                dropped, and now reported as dropped rather than silently -- reported, not solved
     NOT DONE   no GUI, no browser, no OSWorld task: still a command-line organ
+
+## §A131 — the generalisation test, scored against ground truth
+
+### The claim under test
+
+The project's central claim is **single-experience learning**: see something once, and know it. §A113 argued the
+honest form of it is `stated_precondition_v1` — one refusal, turned into a predicate, predicting values never
+seen. That claim had never been scored against reality. So it was.
+
+### The experiment
+
+```python
+refusal = run("import definitely_missing_module_xyz").stderr
+#   ModuleNotFoundError: No module named 'definitely_missing_module_xyz'
+
+learn(refusal, at="python")      ->  predicate: present / is_present   (learned: True)
+```
+
+Then five modules, **none of them the one that taught the rule**, scored against `importlib.util.find_spec`:
+
+| module | exists | predicted refuse | agree |
+|---|---|---|---|
+| `definitely_missing_module_xyz` | no | True | ✓ |
+| `json` | **yes** | True | ✗ |
+| `os` | **yes** | True | ✗ |
+| `sys` | **yes** | True | ✗ |
+| `another_fake_one_abc` | no | True | ✓ |
+
+**3/6.** Right about everything missing, wrong about everything present — which is the worst possible shape for a
+learner, because it looks conservative and is actually blind.
+
+### The diagnosis, and why it is not a learning failure
+
+```python
+def would_refuse(value, *, code, universe: Iterable[Any] = (), store=None):
+    satisfied = is_satisfied(predicate, value, universe)
+```
+
+`universe` defaults to **empty**, so `is_satisfied` tests membership in nothing and every value is "absent".
+With a universe supplied, the same rule scores **5/5**:
+
+    json, os, sys           -> refuse False   (they exist)
+    another_fake_one_abc    -> refuse True
+    numpy_xyz               -> refuse True
+
+**The learning was correct the whole time. The default was the liar.**
+
+### The fix is the one this thread keeps rediscovering
+
+A membership test with no set is not a test. With no universe, `would_refuse` now returns
+
+    refuse: None
+    why:    NO_UNIVERSE_TO_TEST_AGAINST
+
+instead of a guess dressed as a conclusion. That is the same ruling as three earlier organs:
+
+| organ | the unsupplied input | the lie it produced |
+|---|---|---|
+| `browser_observer.judge` (§A126) | the whole page | `EFFECT_ABSENT` on a partial read |
+| `ask_the_world.probe` (§A127) | PYTHONPATH (`-I` ate it) | `ModuleNotFoundError` blamed on the program |
+| `stated_precondition.would_refuse` (§A131) | the universe | `refuse` on every value alive |
+
+> **A CONFIDENT ANSWER ABOUT AN INPUT THAT WAS NEVER SUPPLIED IS THE SAME DEFECT EVERY TIME.**
+
+### What this does and does not establish
+
+    VERIFIED   one real refusal -> a predicate that generalises to unseen values, 5/5 against ground truth
+    VERIFIED   the rule transfers by PROPERTY, not by spelling, so it is not a per-tool patch
+    VERIFIED   with no universe it now refuses to answer rather than answering wrongly
+    NOT SHOWN  that the system FINDS the universe in an arbitrary environment. Here the universe was supplied
+               by the test. Discovering it -- from the filesystem, the package index, the tool itself -- is the
+               next bottleneck, and it is the one the mission's "drop into an unknown environment" describes

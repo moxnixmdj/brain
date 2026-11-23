@@ -388,3 +388,48 @@ def test_a_collision_needs_a_different_name_not_a_different_place(store: pathlib
     single = S.parse("NAME_ALREADY_TAKEN:top")
     assert S.acts_for({"test": "is_absent"}, "top", world=["top"],
                       parts=single["parts"])["why"] == "ALREADY_SATISFIED"
+
+
+def test_a_membership_test_with_no_set_refuses_to_answer(tmp_path) -> None:
+    """§A131 — the generalisation test, scored against ground truth, and the default that lied.
+
+    ONE real refusal teaches the rule `present/is_present`:
+
+        ModuleNotFoundError: No module named 'definitely_missing_module_xyz'
+
+    Then `would_refuse("json")` answered `refuse: True` — because `universe` defaults to EMPTY, so every value
+    looks absent, including modules that plainly exist. Scored against `importlib.util.find_spec`:
+
+        without a universe   3/6   (right about the missing ones, WRONG about json, os, sys)
+        with a universe      5/5
+
+    The learning was never the problem. A membership test with no set is not a test, and answering anyway is the
+    same defect as §A126's truncated read and §A127's `-I` discarding PYTHONPATH: a confident answer about an
+    input that was never supplied.
+    """
+    import importlib.util as finder
+    import subprocess
+    import sys
+
+    store = tmp_path / "preconditions.json"
+    store.write_text("{}")
+
+    refusal = subprocess.run([sys.executable, "-c", "import definitely_missing_module_xyz"],
+                             capture_output=True, text=True).stderr
+    learned = S.learn(refusal, at="python", store=store)
+    assert learned["learned"] is True, learned
+    assert learned["predicate"]["property"] == "present"
+
+    # no universe: the record says it cannot answer, rather than guessing
+    blind = S.would_refuse("json", code="MODULE_NOT_FOUND", store=store)
+    assert blind["known"] is True
+    assert blind["refuse"] is None, blind
+    assert blind["why"] == "NO_UNIVERSE_TO_TEST_AGAINST"
+    assert blind["value_never_seen"] is True
+
+    # with the world supplied, the same one-experience rule agrees with reality on values it never saw
+    universe = [m for m in sys.builtin_module_names] + ["json", "os", "sys"]
+    for module in ("json", "os", "sys", "another_fake_one_abc", "numpy_xyz"):
+        truth = finder.find_spec(module) is not None
+        verdict = S.would_refuse(module, code="MODULE_NOT_FOUND", universe=universe, store=store)
+        assert bool(verdict["refuse"]) == (not truth), (module, truth, verdict)

@@ -491,6 +491,23 @@ def would_refuse(value: Any, *, code: str, universe: Iterable[Any] = (),
     if not entry:
         return {"schema": SCHEMA, "known": False, "code": code}
     predicate = entry.get("predicate") or {}
+    # §A131: A VERDICT FROM AN INPUT THAT WAS NEVER SUPPLIED IS NOT A VERDICT. Measured 2026-11-23: one real
+    # refusal (`ModuleNotFoundError: No module named 'x'`) taught the rule `present/is_present`, and then
+    # `would_refuse("json")` answered `refuse: True` -- because `universe` defaults to EMPTY, so every value
+    # looks absent, including `json`, `os` and `sys`. Scored against ground truth that is 3/6: correct on the
+    # three values that really are missing, WRONG on the three that exist. With a universe supplied it is 3/3.
+    #
+    # The learning was never the problem; the default was. A membership test with no set is not a test, and
+    # answering anyway is the same defect as A126's truncated read and A127's `-I` discarding PYTHONPATH:
+    # a confident answer about an input that was never there. So with no universe the record says what it does
+    # not know, and `refuse` is None rather than a guess dressed as a conclusion.
+    if predicate.get("property") == "present" and not universe:
+        return {"schema": SCHEMA, "known": True, "code": code, "value": value,
+                "satisfied": None, "refuse": None,
+                "why": "NO_UNIVERSE_TO_TEST_AGAINST",
+                "property": predicate.get("property"), "via": via,
+                "seen_values": list(entry.get("values") or []),
+                "value_never_seen": str(value).lower() not in [v.lower() for v in entry.get("values") or []]}
     satisfied = is_satisfied(predicate, value, universe)
     return {"schema": SCHEMA, "known": True, "code": code, "value": value,
             "satisfied": satisfied, "refuse": not satisfied,
