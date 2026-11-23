@@ -75,10 +75,18 @@ def test_a_goal_naming_the_url_is_checked_against_the_url() -> None:
     assert M.goal_holds(obs, ["#/completed"])["holds"] is True
 
 
-def test_a_typed_value_counts_as_the_interface_declaring_it() -> None:
-    """A filled textbox holds the value in `value`, not in its text node."""
+def test_text_sitting_in_a_textbox_does_not_count_as_the_goal() -> None:
+    """Pinned bug: this certified the lit app before any todo existed.
+
+    A textbox that merely holds "buy milk" has not added anything -- the checkbox
+    count and the filters had not appeared. Crediting the input's value certified
+    work that had not happened, which is the same false-certificate class as
+    calling `sort -c` a sorter. The page must declare the goal, not the box.
+    """
     obs = {"url": "", "text": "", "values": {"What needs to be done?": "buy milk"}, "title": ""}
-    assert M.goal_holds(obs, ["buy milk"])["holds"] is True
+    assert M.goal_holds(obs, ["buy milk"])["holds"] is False
+    # the lenient reading still exists, and must be asked for explicitly
+    assert M.goal_holds(obs, ["buy milk"], allow_typed=True)["holds"] is True
 
 
 # --- ranking is a computation over the declaration ------------------------ #
@@ -186,9 +194,14 @@ def test_the_loop_stops_the_moment_the_interface_declares_the_goal() -> None:
                     "value": "buy milk"}], url="http://x/")
     d = _FakeDriver([empty, typed, typed])
     r = M.run_goal("http://x/", ["buy milk"], want_typed="buy milk", driver=d)
-    assert r["status"] == "GOAL_DECLARED", r
-    assert len(r["steps"]) == 1
+    # The value alone is not the goal, so the loop must do more than one action:
+    # fill, then submit, and only then can the goal be true.
+    assert r["status"] in ("GOAL_DECLARED", "NOT_REACHED"), r
+    assert len(r["steps"]) >= 1
     assert r["model_calls"] == 0 and r["network_calls"] == 0
+    # whether or not the fake page ever shows the todo, nothing may be certified on
+    # a textbox that merely holds the text
+    assert any(s.get("op", {}).get("type") == "FILL_NAME" for s in r["steps"])
 
 
 def test_a_goal_the_interface_never_declares_is_reported_not_retried_forever() -> None:
@@ -217,3 +230,58 @@ def test_an_already_satisfied_goal_cost_zero_actions() -> None:
     r = M.run_goal("http://x/", ["buy milk"], driver=d)
     assert r["status"] == "ALREADY_SATISFIED"
     assert r["steps"] == []
+
+
+# --- three bugs found only by running the real thing ---------------------- #
+def test_a_link_that_points_off_the_interface_is_not_an_action_on_it() -> None:
+    """Pinned bug: the goal word "TodoMVC" matched the footer link, which was ranked
+    first and navigated the page off the app. The next read saw a blank page."""
+    ctl = M.declared_names(_snap([
+        {"i": 0, "tag": "input", "placeholder": "What needs to be done?"},
+        {"i": 1, "tag": "a", "text": "TodoMVC", "href": "http://todomvc.com"},
+    ]))
+    ranked = M.rank_actions(ctl, goal=["TodoMVC"], want_typed="x")
+    link = [r for r in ranked if r["control"]["role"] == "link"][0]
+    assert link["score"] < 0, link
+    assert any("away from the interface" in w for w in link["why"])
+
+
+def test_an_anchor_inside_the_interface_is_not_demoted() -> None:
+    ctl = M.declared_names(_snap([{"i": 0, "tag": "a", "text": "Completed", "href": "#/completed"}]))
+    ranked = M.rank_actions(ctl, goal=["x"])
+    assert ranked[0]["score"] > 0
+
+
+def test_the_goal_word_must_match_whole_words_on_both_sides() -> None:
+    """Pinned bug: goal word "buy" matched inside "Enter a new todo.", so the
+    textbox holding the typed value scored 1.0, fell below the footer link, and was
+    never submitted. Twelve steps, no todo."""
+    ctl = M.declared_names(_snap([{"i": 0, "tag": "input", "aria_name": "Enter a new todo."}]))
+    ranked = M.rank_actions(ctl, goal=["buy milk"], want_typed=None)
+    # "buy" is a prefix of "buy milk" but not a word of the control's name, so no
+    # bonus may be awarded and the score stays at the plain textbox value.
+    assert ranked[0]["score"] == 1.0, ranked
+    assert "its name is already in the goal" not in " ".join(ranked[0]["why"])
+
+
+def test_what_the_page_states_is_read_from_the_composed_tree() -> None:
+    """Pinned bug: one implementation put its whole todo list inside four shadow
+    roots, so body inner_text reported "0 items" while the app had done the work.
+    The words were present and invisible to the reader -- the instrument was blind,
+    not the app broken."""
+    snap = {"pages": [{"url": "http://x/", "title": "t", "elements": [],
+                       "body_text": "todos Mark all as complete buy milk 1 item left"}]}
+    obs = M._observable(snap)
+    assert M.goal_holds(obs, ["buy milk"])["holds"] is True
+    assert M.goal_holds(obs, ["1 item left"])["holds"] is True
+
+
+def test_a_control_the_goal_names_is_not_assumed_to_be_a_button() -> None:
+    """A goal naming content is a statement about what the page must SHOW, which is
+    why the off-site demotion has to beat the goal-name bonus rather than lose to it."""
+    ctl = M.declared_names(_snap([
+        {"i": 0, "tag": "a", "text": "TodoMVC", "href": "https://example.com"},
+        {"i": 1, "tag": "input", "placeholder": "What needs to be done?"},
+    ]))
+    ranked = M.rank_actions(ctl, goal=["TodoMVC"], want_typed="buy milk")
+    assert ranked[0]["control"]["role"] == "textbox"

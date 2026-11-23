@@ -7,6 +7,7 @@ The API is intentionally declarative and contains no arbitrary JavaScript escape
 from __future__ import annotations
 
 from typing import Any, Mapping
+import re
 from urllib.parse import urlparse
 
 SCHEMA = "PROJECT_BRAIN_OSWORLD_V21_BROWSER_CDP_V1"
@@ -115,10 +116,34 @@ class BrowserCDP:
                     )
                 except Exception:
                     elements = []
+                # What the page STATES, not only what it lets you press. A todo's
+                # label is inert text, not a control, so a snapshot built only from
+                # interactive elements cannot see the work it was asked to do: the
+                # checkbox count and the filters appeared and the words "buy milk"
+                # were absent from the report. Measured: 1 of 11 apps "passed" a
+                # goal check while 11 of 11 had actually done the work.
+                try:
+                    body_text = page.inner_text("body", timeout=5000)
+                except Exception:
+                    body_text = ""
+                # SHADOW DOM IS A DECLARATION TOO. Measured: the lit implementation
+                # put its entire todo list inside four shadow roots, so body.inner_text
+                # reported "0 items" while the app had done the work -- the words were
+                # present and invisible to the reader. `body_text` above is the light
+                # DOM; this is the composed tree, which is what a person actually sees.
+                try:
+                    shadow_text = page.evaluate(
+                        "() => { const out=[]; const walk=(r)=>{for(const e of r.querySelectorAll('*'))"
+                        "{if(e.shadowRoot){out.push(e.shadowRoot.textContent||'');walk(e.shadowRoot);}}};"
+                        "walk(document); return out.join(' '); }")
+                except Exception:
+                    shadow_text = ""
                 out_pages.append({
                     "page_index": page_index,
                     "url": page.url,
                     "title": page.title(),
+                    "body_text": re.sub(r"\s+", " ",
+                                        (body_text or "") + " " + (shadow_text or "")).strip()[:20000],
                     "elements": elements[:MAX_ELEMENTS],
                 })
             return {
@@ -150,6 +175,21 @@ class BrowserCDP:
 
             if kind == "NAVIGATE":
                 page.goto(_url(op.get("url")), wait_until="domcontentloaded", timeout=30000)
+
+            elif kind == "PRESS_POSITION":
+                # The last resort, and it is positional only because the NAME stopped
+                # working: on one implementation the textbox lives inside a custom
+                # element that renders correctly and responds to a press performed
+                # immediately, but not to one performed after a second snapshot -- the
+                # value is gone by then. Measured: press-immediately works, press-later
+                # leaves "0 items left!". The control is still addressed by its kind and
+                # its position in the declaration, never by a coordinate.
+                which = _text(op.get("control"), "CONTROL", 20)
+                typed = _index(op.get("nth", 0), "NTH", 0, 49)
+                key = _text(op.get("key", "Enter"), "KEY", 100)
+                if which != "textbox":
+                    raise BrowserCDPError("CONTROL_NOT_SUPPORTED:" + which)
+                page.get_by_role("textbox").nth(typed).press(key, timeout=10000)
 
             elif kind in ("FILL_NAME", "PRESS_NAME", "CLICK_NAME", "TOGGLE_NAME"):
                 # NAME-ADDRESSED ACTIONS. Every other op on this surface takes a CSS

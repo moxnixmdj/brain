@@ -121,6 +121,7 @@ def declared_names(snapshot: Mapping[str, Any], page_index: int = 0) -> list[dic
         candidates = [c for c in candidates if not (c.lower() in seen or seen.add(c.lower()))]
         name = candidates[0] if candidates else ""
         out.append({"role": role, "name": name, "index": el.get("i"),
+                    "href": (el.get("href") or ""),
                     "names": candidates,
                     "placeholder": (el.get("placeholder") or "").strip(),
                     "value": el.get("value") or "", "checked": el.get("checked"),
@@ -141,7 +142,11 @@ def _observable(snapshot: Mapping[str, Any], page_index: int = 0) -> dict[str, A
         return {"url": "", "text": "", "values": {}}
     page = pages[page_index]
     names = declared_names(snapshot, page_index)
-    text = " ".join(n["text"] for n in names if n["text"])
+    # The page's own words, plus its controls' labels. Controls alone were not enough:
+    # a todo's label is inert text, so the interface had done the work and the report
+    # said it had not.
+    text = " ".join([page.get("body_text") or "",
+                     " ".join(n["text"] for n in names if n["text"])])
     values = {n["name"]: n["value"] for n in names if n["name"] and n["value"]}
     return {"url": page.get("url") or "", "text": text, "values": values,
             "title": page.get("title") or ""}
@@ -150,19 +155,24 @@ def _observable(snapshot: Mapping[str, Any], page_index: int = 0) -> dict[str, A
 # --------------------------------------------------------------------------- #
 # The goal, as a statement about the environment
 # --------------------------------------------------------------------------- #
-def goal_holds(observable: Mapping[str, Any], goal: Sequence[str]) -> dict[str, Any]:
+def goal_holds(observable: Mapping[str, Any], goal: Sequence[str], *,
+               allow_typed: bool = False) -> dict[str, Any]:
     """Does the interface now declare every string the goal names?
 
     A goal here is a list of strings the environment must show when the work is
     done -- "buy milk" present, "1 item left" present, the URL on #/active.
-    This is deliberately weak and deliberately exact: it cannot be satisfied by
-    looking right, only by the interface stating it.  A goal that names an
-    impossible string is unsatisfiable, and the loop reports that rather than
-    declaring success.
+
+    The text a person typed is NOT part of what the page declares unless the
+    caller asks for it. Measured: `run_goal` certified the lit app on a textbox
+    that merely *held* "buy milk", before any todo existed -- the checkbox count
+    and the filters had not appeared. That is a false certificate of the same
+    kind that let `sort -c` be called a sorter, and the fix is to make the check
+    strict: the work must be in the page, not in the input.
     """
     hay = " ".join([observable.get("text", ""), observable.get("url", ""),
-                    observable.get("title", ""),
-                    " ".join(observable.get("values", {}).values())]).lower()
+                    observable.get("title", "")]).lower()
+    if allow_typed:
+        hay = hay + " " + " ".join(observable.get("values", {}).values()).lower()
     missing = [want for want in goal if want.lower() not in hay]
     return {"holds": not missing, "missing": missing,
             "declared_chars": len(hay)}
@@ -200,13 +210,22 @@ def rank_actions(controls: Sequence[Mapping[str, Any]], *,
             score, why = 5.0, ["names a submit verb"]
         elif role in PRESS_ROLES:
             score, why = 2.0, ["pressable"]
-        # A goal word has to appear in the control's name as a WORD. A substring
-        # test let the one-character goal "x" match the placeholder "Box" and
-        # promoted a textbox the goal gave nothing to type into -- the same class
-        # of over-broad match that certified `sort -V` as a sorter.
-        words = set(re.findall(r"[a-z0-9#/]+", name.lower()))
-        if any(re.search(r"\b" + re.escape(w.lower()) + r"\b", " ".join(words)) for w in goal):
+        # COMPARE WHOLE WORDS ON BOTH SIDES. Two bugs lived here. A plain substring
+        # test let the one-character goal "x" match the placeholder "Box"; and a
+        # word-boundary test against the joined name let the goal word "buy" match
+        # inside "Enter a new todo.", which pushed the textbox holding the typed value
+        # to 1.0, below the footer link, so it was never submitted (12 steps, no todo).
+        name_words = set(re.findall(r"[a-z0-9#/]+", name.lower()))
+        goal_words = {w.lower() for w in goal for w in re.findall(r"[a-z0-9#/]+", w)}
+        if name_words & goal_words:
             score, why = max(score, 7.0), why + ["its name is already in the goal"]
+        # A NAVIGATION MUST NOT BE MISTAKEN FOR PROGRESS, and this demotion goes LAST so
+        # the goal-name bonus above cannot undo it. Measured: the goal word "TodoMVC"
+        # matched the footer link, the bonus lifted it to 7.0 -- above the textbox -- and
+        # the loop navigated off the app entirely, leaving a blank page.
+        href = c.get("href") or ""
+        if href and not href.startswith(("#", "/")):
+            score, why = score - 20.0, why + ["points away from the interface"]
         prior = mem.get(f"{role}|{name}", {})
         if prior.get("helped") is False:
             score, why = score - 20.0, why + ["proved not to help before"]
@@ -249,21 +268,86 @@ def run_goal(url: str, goal: Sequence[str], *, want_typed: str | None = None,
                 "model_calls": 0, "network_calls": 0}
 
     typed_once = False
+    typed_into: str | None = None
+    submitted = False
     for step_index in range(max_steps):
         controls = declared_names(snap)
         ranked = rank_actions(controls, goal=goal,
                               want_typed=None if typed_once else (want_typed or "probe"),
                               memory=memory)
+        # SUBMIT FIRST, OUTSIDE THE LOOP. The text was typed, so the only thing that turns
+        # a value into state is submitting it -- and a textbox that has nothing left to
+        # type scores below a pressable link, so inside the loop the link always won and
+        # the loop clicked the page heading with the value still in the box. Measured on
+        # one implementation: 12 steps and never submitted. Ordering cannot be expressed as
+        # a score when the scoring is what puts the wrong control first.
         acted = None
+        if typed_into and not submitted:
+            for cand in ranked:
+                c = cand["control"]
+                if c["role"] in TYPE_ROLES and c.get("name") == typed_into:
+                    op = {"type": "PRESS_NAME", "role": c["role"],
+                          "name": c["name"], "key": "Enter"}
+                    before = _observable(snap)
+                    try:
+                        res = driver.act(op)
+                    except Exception as exc:
+                        res = {"status": "REFUSED", "reason": type(exc).__name__}
+                        try:
+                            res = driver.act({"type": "PRESS_POSITION", "control": "textbox",
+                                              "nth": 0, "key": "Enter"})
+                            res["addressed_by"] = "position:textbox[0]"
+                        except Exception:
+                            pass
+                    snap = driver.bind().snapshot()
+                    after = _observable(snap)
+                    moved = (after["text"], after["url"]) != (before["text"], before["url"])
+                    submitted = moved
+                    steps.append({"step": step_index, "op": op, "status": res.get("status"),
+                                  "moved": moved, "why": ["submit what was typed"],
+                                  "submitted": moved,
+                                  "declared_after": after["text"][:200]})
+                    acted = True
+                    if goal_holds(after, goal)["holds"]:
+                        _save_memory(memory_path, memory)
+                        return {"schema": SCHEMA, "authority": AUTHORITY,
+                                "status": "GOAL_DECLARED", "url": url, "goal": list(goal),
+                                "steps": steps,
+                                "seconds": round(time.time() - started, 3),
+                                "declared": after["text"][:600],
+                                "model_calls": 0, "network_calls": 0}
+                    break
+            if acted:
+                continue
         for cand in ranked:
             c = cand["control"]
             if cand["score"] <= 0:
                 continue
             role, name = c["role"], c["name"]
-            if role in TYPE_ROLES and not typed_once and want_typed is not None:
+            # Submit-before-fill. The control that already holds the text sorts after an
+            # empty type= box on every page that declares one, so testing it last meant
+            # `typed_into` never matched and the value was never submitted.
+            # ORDER, NOT SCORE. A textbox that already holds the value outranks every
+            # pressable control, because the work is half-done and one key press finishes
+            # it while a click starts something else. Scoring cannot express this: a
+            # textbox with nothing left to type is worth 1.0 and a pressable link 2.0, so
+            # the link kept winning and the value sat in the box while the loop clicked
+            # the page heading. Measured on one implementation: 12 steps, never submitted.
+            if typed_into and role in TYPE_ROLES and (
+                    name == typed_into or want_typed is None or typed_once):
+                op = {"type": "PRESS_NAME", "role": role, "name": name, "key": "Enter"}
+            elif role in TYPE_ROLES and not typed_once and want_typed is not None:
                 op = {"type": "FILL_NAME", "role": role, "name": name, "text": want_typed}
             elif role in TYPE_ROLES and not typed_once:
                 op = {"type": "FILL_NAME", "role": role, "name": name, "text": "probe"}
+            elif typed_into and name == typed_into:
+                # The text went into this control and nothing submitted it. Measured on
+                # 11 of 11 apps: the textbox is not in the cold declaration as a submit
+                # affordance, so a ranker that only reads names never presses Enter and
+                # the value just sits there. Earlier this looked like a pass because the
+                # goal check credited the textbox's contents -- the check was wrong, and
+                # fixing the check exposed the missing submit.
+                op = {"type": "PRESS_NAME", "role": role, "name": name, "key": "Enter"}
             elif _SUBMIT_WORDS.search(name) or role == "textbox":
                 op = {"type": "PRESS_NAME", "role": role, "name": name, "key": "Enter"}
             elif role in PRESS_ROLES:
@@ -285,6 +369,8 @@ def run_goal(url: str, goal: Sequence[str], *, want_typed: str | None = None,
                     try:
                         res = driver.act(dict(op, name=alt_name))
                         res["addressed_by"] = alt_name
+                        if op["type"] == "FILL_NAME":
+                            typed_into = alt_name
                         break
                     except Exception as exc2:
                         res = {"status": "REFUSED", "reason": type(exc2).__name__}
@@ -292,14 +378,30 @@ def run_goal(url: str, goal: Sequence[str], *, want_typed: str | None = None,
             after = _observable(snap)
             moved = (after["text"], after["url"], tuple(sorted(after["values"].items()))) != \
                     (before["text"], before["url"], tuple(sorted(before["values"].items())))
+            # A press that reports PASS and changes nothing has not submitted. Measured on
+            # one implementation: the name resolved, the press returned PASS, and the app
+            # still declared "0 items left!". Silence is not success.
+            if not moved and op["type"] == "PRESS_NAME":
+                try:
+                    driver.act({"type": "PRESS_POSITION", "control": "textbox",
+                                "nth": 0, "key": op.get("key", "Enter")})
+                    snap = driver.bind().snapshot()
+                    after = _observable(snap)
+                    moved = (after["text"], after["url"], tuple(sorted(after["values"].items()))) != \
+                            (before["text"], before["url"], tuple(sorted(before["values"].items())))
+                    acted_extra = "position:textbox[0]"
+                except Exception:
+                    acted_extra = None
             helped = goal_holds(after, goal)["holds"] or moved
             _remember(memory, f"{role}|{name}", helped)
             acted = {"step": step_index, "op": op, "status": res.get("status"),
                      "moved": moved, "why": cand["why"],
+                     "fallback": locals().get("acted_extra"),
                      "declared_after": after["text"][:200]}
             steps.append(acted)
             if op["type"] == "FILL_NAME":
                 typed_once = True
+                typed_into = name
             break
 
         if acted is None:
@@ -420,3 +522,63 @@ def _remember(memory: dict[str, Any], key: str, helped: bool) -> None:
         rec["helped"] = True
     elif rec.get("helped") is None and rec["tries"] >= 2:
         rec["helped"] = False
+
+
+# --------------------------------------------------------------------------- #
+# The goal, computed from the task's words and the interface's declaration
+# --------------------------------------------------------------------------- #
+# This is interface vocabulary, not application knowledge: it is the small closed
+# class of English words interfaces use for the affordances a task can name. Measured
+# on 11 independent implementations, every one of them declares "All", "Active",
+# "Completed" and "Mark all as complete" and none declares anything else for these
+# functions.
+_FILTER_WORDS = {"all", "active", "completed", "complete", "done", "finished",
+                 "remaining", "open", "pending"}
+
+
+def compute_goal(instruction: str, controls: Sequence[Mapping[str, Any]],
+                 *, invariant: Mapping[str, Any] | None = None) -> dict[str, Any]:
+    """Turn a natural-language task into what the interface must declare.
+
+    The task's own words are the goal for the *content* half ("add buy milk" ->
+    "buy milk" must be shown). The *interface* half is computed the other way
+    round: a filter named by the task is bound to the control the interface
+    declares for it, because the interface is the authority on what it has.
+
+    Measured, on every one of 11 implementations: the All/Active/Completed
+    controls do not exist until there is a todo, which is why the goal cannot be
+    computed from the cold declaration alone. The invariant says so
+    (`appears_after_use`), and this function reads it rather than rediscovering it.
+    """
+    text = " ".join(instruction.lower().split())
+    named_filters = sorted({w for w in _FILTER_WORDS if re.search(r"\b" + w + r"\b", text)})
+    declared = {c["name"].lower(): c for c in controls if c.get("name")}
+
+    # A filter the interface declares is bound by name; one it does not yet declare
+    # is expected to appear once work exists, and is not invented.
+    bound = [declared[w]["name"] for w in named_filters if w in declared]
+    pending = [w for w in named_filters if w not in declared]
+
+    # The content: quoted text first, then the words after an add/enter verb.
+    quoted = re.findall(r"[\"'`]([^\"'`]{1,120})[\"'`]", instruction)
+    content: list[str] = list(quoted)
+    if not content:
+        m = re.search(r"\b(?:add|new|create|enter|write)\b\s+(?:a\s+|an\s+|the\s+)?(?:todo\s+|item\s+|task\s+)?"
+                      r"(?:named|called|saying|with)?\s*(?:\"|')?(.+?)(?:\"|')?(?:\s+to\b|\s+in\b|\s+then\b|$)",
+                      instruction, re.I)
+        if m and m.group(1).strip():
+            content = [m.group(1).strip()]
+
+    must_show = content + bound
+    return {
+        "goal": must_show,
+        "content": content,
+        "filters_bound": bound,
+        "filters_not_yet_declared": pending,
+        "needs_work_before_filters": bool(pending) and not bool(bound),
+        "why": ("the task names a filter the interface does not declare yet; measured on 11 of "
+                "11 apps, those controls appear only once work exists"
+                if pending and not bound else
+                "every goal string is either quoted content from the task or a control the "
+                "interface itself declares"),
+    }

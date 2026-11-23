@@ -38,10 +38,11 @@
    "Web Components"
   ],
   "task_single_step": {
-   "goal": "add a todo named 'buy milk'",
+   "goal": "add a todo named 'buy milk' (goal strings supplied)",
    "result": "11/11 GOAL_DECLARED",
-   "steps_each": 1,
-   "seconds_each": "1.81-2.07"
+   "steps_each": 2,
+   "seconds_each": "3.4-4.2",
+   "note": "two actions: fill, then submit. One action was possible only when the goal check credited the textbox's contents, which was wrong"
   },
   "task_multi_step": {
    "goal": "add a todo, mark it complete, then filter to Completed",
@@ -54,6 +55,12 @@
    "react-redux": "New todo",
    "react": "New Todo Input",
    "web-components": "Enter a new todo."
+  },
+  "task_natural_language": {
+   "task": "add \"buy milk\" to the list",
+   "supplied_goal_strings": "none -- the goal is computed from the task's words and the interface's declaration",
+   "result": "11/11 GOAL_DECLARED",
+   "seconds_each": "3.7-4.0"
   }
  },
  "the_three_findings": [
@@ -68,6 +75,10 @@
   {
    "finding": "Goal-directed is 5.9x cheaper than learn-everything, and the names are not the knowledge",
    "evidence": "learn every app's declaration: 13.49 s, 27 controls, 1,194 bytes. One goal-directed run: 2.30 s. Every app re-declares its names in 1.24 s, so a name cache buys exactly nothing: cold 2.15 s vs warm 2.17 s, 1.0 steps either way. 7 of 11 apps have a unique name set, which is why caching names is remembering the app rather than learning the interface."
+  },
+  {
+   "finding": "The instrument was blind three times before the apps were wrong",
+   "evidence": "(1) bounding-body text saw '0 items' on the lit app, whose whole list lives in four shadow roots -- the work was done and invisible; (2) after the fix, the goal word 'TodoMVC' matched the footer link, which was ranked first and navigated off the app, leaving a blank page; (3) the goal word 'buy' matched inside 'Enter a new todo.', pushing the textbox holding the typed value below the footer link so it was never submitted -- 12 steps and no todo on 1 app while 10 passed. Every one of these was found by running, none by reading."
   }
  ],
  "what_survives_deletion": {
@@ -81,17 +92,17 @@
   ]
  },
  "honest_limits": [
-  "11 apps of ONE specification. This is breadth within a family, not generalisation across families. A desktop application, a native GUI, or a browser-based IDE has a different declaration surface and none was tested.",
-  "The goal is supplied as strings the interface must declare. Turning a natural-language task into those strings is the organ this PR did NOT build, and it is the next bottleneck.",
-  "Single-step and three-step tasks only. Nothing here is long-horizon; OSWorld 2.1 tasks run beyond 250 agent steps and the constraint-tracking failure mode named by the benchmark is not exercised.",
-  "The postcondition check is 'the strings appear in the declaration'. That is exact and weak: it can be satisfied by a page that prints the string without doing the work, which is why the multi-step test also checks the URL.",
-  "Every number is producer-measured on one host, one browser build, no repeat trials. truth.achieved remains false.",
-  "The SWE-bench generation gap (1.4% search ceiling vs 78.80% top agent) is untouched by this work. A GUI organ does not fix an edit-synthesis gap."
+  "11 apps of ONE specification. Breadth within a family, not generalisation across families. A desktop application, a native GUI, or a browser-based IDE declares a different surface and none was tested.",
+  "The natural-language goal is computed for ONE task shape (add a named item). The filter words are a closed class matched against the task and the declaration, not a parser. A task phrased without a quoted string and without an add/new/create verb computes no content and the loop refuses.",
+  "Three actions at most. OSWorld 2.1 tasks run beyond 250 steps and the constraint-tracking and mid-task-change failure modes it names are not exercised.",
+  "The postcondition check is 'the strings appear in the page's composed text or its URL'. It is exact and weak: a page that prints the string without doing the work would pass. The multi-step test partly guards this by requiring the URL to move.",
+  "One host, one browser build, no repeat trials, no confidence intervals. Every number is producer-measured.",
+  "The SWE-bench generation gap (1.4% search ceiling against a 78.80% top agent) is untouched. A GUI organ does not synthesise an edit."
  ],
  "tests": {
   "new": "canonical/tests/test_interface_is_its_own_declaration_v1.py",
-  "count": 17,
-  "with_interrogation": "60 passed in 6.36 s",
+  "count": 22,
+  "with_interrogation": "65 passed in 6.12 s",
   "browser_suites_regression": "24 passed",
   "audit": "canonical/tools/model_call_surface_audit_v1.py -> inference_endpoint_files=0 for all three modules"
  }

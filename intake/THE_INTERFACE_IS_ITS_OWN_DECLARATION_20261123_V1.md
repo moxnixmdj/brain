@@ -84,9 +84,14 @@ for: hard, real, unseen environments.
 | | result |
 |---|---|
 | apps declaring the goal | **11 / 11** |
-| steps per app | **1** |
-| seconds per app | 1.81 – 2.07 |
+| steps per app | **2** (fill, then submit) |
+| seconds per app | 3.4 – 4.2 |
 | model calls | 0 |
+
+An earlier version of this table said **one** step, and it was wrong. It passed because
+`goal_holds` credited the text an input merely *held*, so typing the value scored as success
+before anything had been added. On the lit app that certified a todo that did not exist. The
+check is now strict — the page must declare the goal — and the honest number is two actions.
 
 ### Multi-step — add, complete, filter
 
@@ -95,6 +100,16 @@ for: hard, real, unseen environments.
 | apps passing | **11 / 11** |
 | verification | **the URL is the postcondition**: 11/11 moved to `#/completed` |
 | total | 67.8 s |
+
+### Natural language only — no goal strings supplied
+
+The task `add "buy milk" to the list` is the **only** input; the goal is computed from its words
+plus what the interface declares.
+
+| | result |
+|---|---|
+| apps passing | **11 / 11** |
+| seconds per app | 3.7 – 4.0 |
 
 And the addresses were **read, never assumed** — which is the entire point:
 
@@ -113,7 +128,7 @@ app named, no coordinates, no selectors, no model.
 
 ---
 
-## 3. Three findings, including two I got wrong first
+## 3. Four findings, including three I got wrong first
 
 ### 3.1 A control has no single name, and assuming one costs real apps
 
@@ -156,7 +171,25 @@ re-declares its names in 1.24 s, because it must — the declaration is how the 
 addresses itself. So caching names is not learning the interface; it is memorising the app,
 which is the knowledge house the constraints forbid, and it is *also* useless.
 
-### 3.3 The generalisation is a shape, and it is computed
+### 3.3 The instrument was blind three times before the apps were wrong
+
+Each of these looked like an app failure and was a reader failure:
+
+1. **Shadow DOM.** One implementation put its whole todo list inside four shadow roots.
+   `body.inner_text` reported "0 items left" while the todo existed — the work was done and
+   invisible. The composed tree is what a person sees, so the observation now reads it.
+2. **A navigation counted as progress.** After the goal check was made strict, the goal word
+   `TodoMVC` matched the footer link of the same name. The bonus lifted it above the textbox and
+   the loop clicked it, leaving the app for `todomvc.com`; the next read saw a blank page.
+3. **A substring match on the goal.** Even then, the goal word `buy` matched inside
+   `Enter a new todo.`, which pushed the textbox *holding the typed value* to 1.0 — below the
+   footer link — so it was never submitted. Twelve steps and no todo on that app while ten
+   passed.
+
+All three were found by running; none by reading. That is now the standing argument in this
+project for why reading is not verification.
+
+### 3.4 The generalisation is a shape, and it is computed
 
 What is true of **every** interface in the family, read cold from each app's own tree:
 
@@ -217,9 +250,10 @@ why "save the generalised learning" is not a slogan here but a specific, short l
 - **11 apps of one specification.** Breadth within a family, not generalisation across families.
   A desktop application, a native GUI, or a browser-based IDE has a different declaration
   surface; none was tested.
-- **The goal is supplied as strings.** Converting a natural-language task into "what must the
-  environment declare" is **not built**, and that is the largest remaining gap in the GUI path.
-  Pretending otherwise would be the hand-holding the integrity rules forbid.
+- **The natural-language goal covers one task shape.** `add "buy milk" to the list` computes its
+  content from a quoted string or an add/new/create verb, and binds a filter only when the task
+  names one and the interface declares it. A task phrased without either computes no content and
+  the loop refuses rather than guesses. This is a closed word class, not a parser.
 - **Three steps, not 250.** OSWorld 2.1 tasks run beyond 250 agent steps and the benchmark names
   constraint-tracking and mid-task change detection as the failure modes. Neither is exercised.
 - **The postcondition check is exact and weak.** "The strings appear in the declaration" can be
