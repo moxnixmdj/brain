@@ -38,6 +38,8 @@ from __future__ import annotations
 
 import ast
 import subprocess
+import os
+import pathlib
 import sys
 import time
 from collections.abc import Iterable, Sequence
@@ -61,7 +63,13 @@ _PURE_CALLS = frozenset({"len", "str", "int", "float", "bool", "list", "tuple", 
 _READ_CALLS = frozenset({"exists", "isdir", "isfile", "islink", "listdir", "scandir", "stat", "getcwd",
                          "getenv", "getpid", "getsize", "abspath", "basename", "dirname", "join", "split",
                          "splitext", "normpath", "realpath", "expanduser", "walk", "access", "read",
-                         "readlines", "readline", "glob", "loads", "load", "safe_load", "safe_load_all"})
+                         "readlines", "readline", "glob", "loads", "load", "safe_load", "safe_load_all",
+                         # §A127: `dict.get`, `os.environ.get`, `mapping.get` -- the mapping read every real
+                         # program uses, refused as CALL_MAY_HAVE_AN_EFFECT:get because the refusal is by bare
+                         # name and `get` was not on any list. Measured 2026-11-23: `os.environ.get('HOME')`
+                         # answered False, so the walk reported PROBED_NOTHING for a question one dict lookup
+                         # settles. A `.get` whose default is a literal cannot change the world.
+                         "get", "keys", "values", "items", "getenv"})
 
 #: Names that are actions even when a module provides them, so a name collision cannot smuggle one through.
 _ACTION_CALLS = frozenset({"open", "system", "popen", "remove", "unlink", "rmdir", "mkdir", "makedirs", "rename",
@@ -159,9 +167,40 @@ def probe(expression: str, *, world: str, imports: Sequence[str] = (),
                                  "import json as __pb_json",
                                  "print(__pb_json.dumps(repr(__pb_value)))"]
     script = "\n".join(body)
+    # §A127: THE PROBER MUST NOT STAND INSIDE THE PROGRAM'S DIRECTORY. Measured 2026-11-23 on `click`, the
+    # first third-party code this system ever probed: running with `cwd=<package>` put the package's own
+    # `types.py` on `sys.path[0]`, where it SHADOWED the standard library's `types` module. The probe then died
+    # of `ImportError: cannot import name 'GenericAlias' from partially initialized module 'types' (most likely
+    # due to a circular import)` -- and the walk recorded that as `proved: True`, an accusation against a
+    # working file MANUFACTURED BY WHERE THE PROBER WAS STANDING.
+    #
+    # `-P` keeps `sys.path[0]` away from the program's directory, which is what stops a package's own
+    # `types.py` from shadowing the standard library.
+    #
+    # `-I` WOULD HAVE BEEN WRONG, and the suite caught it: `-I` also discards PYTHONPATH, so a world that is
+    # reachable only through the environment became invisible and three tests that need a readable config file
+    # went from DECIDED to EVIDENCE_PROBED_NOTHING_PROVED. Measured 2026-11-23: `python3 -I -P -c ...` reports
+    # PYTHONPATH-visible directories as absent. The isolation wanted here is one line of `sys.path`, not the
+    # whole environment -- a probe must see everything the program will see, or its silence is a lie.
+    # THE PROGRAM'S OWN PACKAGE MUST BE IMPORTABLE BY THE NAME THE PROGRAM USES. Measured 2026-11-23: with
+    # `-P` and cwd inside `click/`, the probe died of `ModuleNotFoundError: No module named 'click'` -- the
+    # program's own deferred `from click.shell_completion import ...` could not resolve, though it resolves
+    # perfectly when the package is installed. `-P` removes the SHADOWING (cwd on sys.path[0]) but also removes
+    # the RESOLUTION. The honest fix gives the prober what a real installation gives it: the DIRECTORY THE
+    # PACKAGE SITS IN, on PYTHONPATH. Then `click` resolves by name and `click/types.py` is still not `types`.
+    env = dict(os.environ)
+    extra: list[str] = []
+    probe_dir = pathlib.Path(world)
+    while (probe_dir / "__init__.py").is_file():
+        extra.append(str(probe_dir.parent))
+        if probe_dir.parent == probe_dir:
+            break
+        probe_dir = probe_dir.parent
+    if extra:
+        env["PYTHONPATH"] = os.pathsep.join(extra + ([env["PYTHONPATH"]] if env.get("PYTHONPATH") else []))
     try:
-        run = subprocess.run([python, "-c", script], cwd=str(world), capture_output=True,
-                             text=True, timeout=timeout)
+        run = subprocess.run([python, "-P", "-c", script], cwd=str(world), capture_output=True,
+                             text=True, timeout=timeout, env=env)
     except (OSError, subprocess.SubprocessError) as exc:
         return {**record, "answered": False, "why": "PROBE_FAILED_TO_RUN",
                 "detail": "%s: %s" % (type(exc).__name__, str(exc)[:160])}

@@ -56,6 +56,7 @@ import builtins
 import importlib.util
 import pathlib
 import subprocess
+import os
 import sys
 from collections.abc import Iterable, Mapping
 from typing import Any
@@ -72,16 +73,89 @@ SCHEMA = "PROJECT_BRAIN_READ_BEFORE_RUNNING_V1"
 _STAR_IMPORT = "STAR_IMPORT_MAKES_NAMES_UNKNOWABLE"
 
 
+def _type_checking_only(tree: ast.AST) -> set[int]:
+    """Line numbers of imports that sit under `if TYPE_CHECKING:` and therefore NEVER RUN.
+
+    §A127. Measured 2026-11-23 on `click` -- the first third-party code this reader had ever seen -- it accused
+    10 of 17 files of importing a module that is not installed (`typing_extensions`). Every one of those imports
+    lives under `if t.TYPE_CHECKING:` (17 occurrences in one package). That block is FALSE at runtime; the import
+    exists for a type checker and no interpreter ever executes it. So the file runs perfectly and the reader
+    called it broken: a false accusation, which is the failure mode this module's own comment says is worse than
+    no predictor, because it would "repair" a working program.
+
+    The rule is the same honesty rule as everywhere else in this thread, pointed at the walker itself: AN IMPORT
+    THAT NEVER EXECUTES IS NOT AN IMPORT. Only the reading of that one name matters -- no model, no world fact.
+    """
+    guarded: set[int] = set()
+    for node in ast.walk(tree):
+        if not isinstance(node, ast.If):
+            continue
+        test = node.test
+        names = {n.attr for n in ast.walk(test) if isinstance(n, ast.Attribute)}
+        names |= {n.id for n in ast.walk(test) if isinstance(n, ast.Name)}
+        if "TYPE_CHECKING" not in names and "typing" not in names:
+            continue
+        # `if TYPE_CHECKING:` and `if not TYPE_CHECKING:` are the two spellings; the body of the first is
+        # never executed, and for the second the BODY runs while the ELSE never does.
+        never_runs = node.body
+        for inner in never_runs:
+            for sub in ast.walk(inner):
+                if isinstance(sub, (ast.Import, ast.ImportFrom)) and getattr(sub, "lineno", None):
+                    guarded.add(sub.lineno)
+    return guarded
+
+
+def _platform_guard(tree: ast.AST, module: str, *, world: Any, interpreter: str | None) -> bool:
+    """True when `module` is imported under a guard the interpreter itself says is FALSE.
+
+    §A127. Measured 2026-11-23 on `click/_termui_impl.py`:
+        if sys.platform == "win32":
+            import msvcrt
+    The reader called `msvcrt` missing and flagged the file -- while the file runs perfectly here, because the
+    guard is false on this machine. The fix is not a rule about Windows; it is §A120's rule applied to the
+    reader itself: THE GUARD TEST IS THE PROGRAM'S OWN QUESTION, SO ASK THE INTERPRETER instead of assuming.
+    `sys.platform` is a fact about the machine, the machine answers it, and its answer is the only one that
+    decides whether the import runs. Nothing about Windows is stored here -- the word `"win32"` is the program's.
+    """
+    from canonical.runtime import ask_the_world_v1 as ASK
+    for node in ast.walk(tree):
+        if not isinstance(node, ast.If):
+            continue
+        names = {n.attr for n in ast.walk(node.test) if isinstance(n, ast.Attribute)}
+        if "platform" not in names and not any(
+                isinstance(n, ast.Name) and n.id == "platform" for n in ast.walk(node.test)):
+            continue
+        imported = {(alias.name or "").split(".")[0]
+                    for inner in node.body for sub in ast.walk(inner)
+                    if isinstance(sub, (ast.Import, ast.ImportFrom))
+                    for alias in sub.names}
+        if module not in imported:
+            continue
+        try:
+            answer = ASK.probe(ast.unparse(node.test), world=str(world) if world is not None else ".",
+                               imports=["import sys", "import platform"], interpreter=interpreter)
+        except Exception:
+            continue
+        if answer.get("answered") and not answer.get("raised"):
+            return bool(answer.get("literal")) and answer.get("value") is False
+    return False
+
+
 def _imported_modules(tree: ast.AST) -> list[dict[str, Any]]:
     """Top-level module names the program imports, with the line the import is on."""
     found: list[dict[str, Any]] = []
+    never_runs = _type_checking_only(tree)
     for node in ast.walk(tree):
         if isinstance(node, ast.Import):
+            if node.lineno in never_runs:
+                continue
             for alias in node.names:
                 found.append({"module": alias.name.split(".")[0], "line": node.lineno,
                               "statement": "import %s" % alias.name})
         elif isinstance(node, ast.ImportFrom):
             if node.level:      # a relative import needs the package context, which a bare file does not have
+                continue
+            if node.lineno in never_runs:
                 continue
             if node.module:
                 found.append({"module": node.module.split(".")[0], "line": node.lineno,
@@ -181,7 +255,7 @@ def predict_names(source: str) -> dict[str, Any]:
             "will_fail": bool(loaded)}
 
 
-def _installed(name: str, *, interpreter: str | None = None) -> bool:
+def _installed(name: str, *, interpreter: str | None = None, world: Any = None) -> bool:
     """Is this module importable by the interpreter that will RUN the program? An inspectable fact, not a
     parameter.
 
@@ -197,14 +271,49 @@ def _installed(name: str, *, interpreter: str | None = None) -> bool:
     if interpreter:
         try:
             probe = subprocess.run([interpreter, "-c", "import " + name],
-                                   capture_output=True, timeout=120)
+                                   capture_output=True, timeout=120, env=_probe_env(world))
             return probe.returncode == 0
         except (OSError, subprocess.SubprocessError):
             return False
+    # §A128: THE WORLD'S OWN PACKAGES. Measured 2026-11-23 on `jinja2`: the package sat in `/tmp/tp5` beside
+    # its dependency `markupsafe`, and every file that imported `markupsafe` was accused of a missing module --
+    # because this function asks THIS PROCESS, where /tmp/tp5 is not on the path. But the program will run with
+    # that directory importable, so to the program the module IS present. The world is not only its files; it is
+    # its importable packages too, and the answer must come from the interpreter that will import them.
+    if world is not None:
+        try:
+            probe = subprocess.run([interpreter or sys.executable, "-c", "import " + name],
+                                   capture_output=True, timeout=120, env=_probe_env(world))
+            if probe.returncode == 0:
+                return True
+        except (OSError, subprocess.SubprocessError):
+            pass
     try:
         return importlib.util.find_spec(name) is not None
     except (ImportError, ValueError):
         return False
+
+
+def _probe_env(world: Any) -> dict[str, str]:
+    """The environment a program in `world` will import under: the world on PYTHONPATH, plus its packages' home.
+
+    The same rule as the prober's prelude (§A127): an interpreter that cannot see what the program sees answers a
+    different question. `world` itself and every enclosing directory that holds packages are made importable.
+    """
+    env = dict(os.environ)
+    extra: list[str] = []
+    if world is not None:
+        d = pathlib.Path(world)
+        extra.append(str(d))
+        while (d / "__init__.py").is_file():
+            extra.append(str(d.parent))
+            if d.parent == d:
+                break
+            d = d.parent
+    if extra:
+        env["PYTHONPATH"] = os.pathsep.join(
+            extra + ([env["PYTHONPATH"]] if env.get("PYTHONPATH") else []))
+    return env
 
 
 def local_modules(world: str | pathlib.Path | None) -> set[str]:
@@ -232,6 +341,7 @@ def local_modules(world: str | pathlib.Path | None) -> set[str]:
 def predict_imports(source: str, *, installed: Iterable[str] | None = None,
                     world: str | pathlib.Path | None = None,
                     interpreter: str | None = None,
+                    own_package: str | None = None,
                  probe: bool = True) -> dict[str, Any]:
     """Imports the interpreter would refuse.
 
@@ -249,7 +359,42 @@ def predict_imports(source: str, *, installed: Iterable[str] | None = None,
         return {"schema": SCHEMA, "kind": "imports", "predictable": False,
                 "why": "SYNTAX_ERROR", "detail": str(broken)[:200]}
     imports = _imported_modules(tree)
-    local = local_modules(world)
+    # §A127: A PACKAGE IMPORTING ITSELF IS NOT A MISSING MODULE. Measured on `click`: `core.py` does
+    # `from click.shell_completion import CompletionItem` inside functions, and the reader accused it of
+    # importing a module that is not installed -- while the file was the very package it named. A bare file
+    # cannot see its own package, so the caller says which one it belongs to; when the world is the package
+    # directory, its own name is derived from it. Deferring the guess to the caller is what keeps this
+    # inspectable instead of magical.
+    own = own_package
+    if own is None and world is not None:
+        # THE FILE MAY BE A SUBPACKAGE MEMBER, so walk UP to the outermost package. Measured 2026-11-23 on
+        # `charset_normalizer/cli/__main__.py`: it does `import charset_normalizer.md as md_module` and
+        # `from charset_normalizer import from_fp`. Its immediate directory `cli/` IS a package, so the first
+        # derivation named the package `cli` -- and the file's own imports were accused as missing. The package
+        # a file belongs to is the OUTERMOST directory above it that is still a package, and every such name is
+        # its own prefix: `charset_normalizer.cli.__main__` belongs to both `cli` and `charset_normalizer`.
+        parents: list[str] = []
+        parent = pathlib.Path(world)
+        while (parent / "__init__.py").is_file():
+            parents.append(parent.name)
+            if parent.parent == parent:
+                break
+            parent = parent.parent
+        if parents:
+            own = parents[0]
+    if own:
+        own_names = {own}
+        # every enclosing package name is the file's own
+        probe_dir = pathlib.Path(world)
+        while (probe_dir / "__init__.py").is_file():
+            own_names.add(probe_dir.name)
+            if probe_dir.parent == probe_dir:
+                break
+            probe_dir = probe_dir.parent
+        imports = [item for item in imports if item["module"] not in own_names]
+        local = local_modules(world) | own_names
+    else:
+        local = local_modules(world)
     if installed is not None:
         known = {str(item).lower() for item in installed}
         missing = [item for item in imports if item["module"].lower() not in known
@@ -257,7 +402,17 @@ def predict_imports(source: str, *, installed: Iterable[str] | None = None,
     else:
         missing = [item for item in imports
                    if item["module"] not in local
-                   and not _installed(item["module"], interpreter=interpreter)]
+                   and not _installed(item["module"], interpreter=interpreter, world=world)]
+    # ASK THE INTERPRETER BEFORE ACCUSING (§A127). A missing module imported under a guard that is false on the
+    # machine that will run the program is not missing from that program's point of view -- the import never
+    # executes. Asked only for the modules already suspected, so a clean file pays nothing.
+    if missing:
+        still_missing = []
+        for item in missing:
+            if _platform_guard(tree, item["module"], world=world, interpreter=interpreter):
+                continue
+            still_missing.append(item)
+        missing = still_missing
     # a module provided by a neighbouring file: present, and unknowable
     nearby = [item for item in imports if item["module"] in local]
     return {"schema": SCHEMA, "kind": "imports", "predictable": True,
@@ -267,7 +422,21 @@ def predict_imports(source: str, *, installed: Iterable[str] | None = None,
             "unknowable": bool(nearby)}
 
 
-def _imports_of(source: str) -> list[str]:
+def _package_of(world: Any) -> list[str]:
+    """The importable package path the file belongs to, outermost first: `/x/pkg` -> ['pkg']."""
+    names: list[str] = []
+    if world is None:
+        return names
+    d = pathlib.Path(world)
+    while (d / "__init__.py").is_file():
+        names.append(d.name)
+        if d.parent == d:
+            break
+        d = d.parent
+    return list(reversed(names))
+
+
+def _imports_of(source: str, world: Any = None, interpreter: str | None = None) -> list[str]:
     """The program's own import statements, so a probe runs in an interpreter that can resolve its names.
 
     `os.environ` means nothing where `os` was never imported, and a probe that fails for that reason would be a
@@ -278,14 +447,83 @@ def _imports_of(source: str) -> list[str]:
     except SyntaxError:
         return []
     statements: list[str] = []
+    # §A127: THE PRELUDE MUST NOT CONTAIN AN IMPORT THAT NEVER RUNS. Measured on `click/testing.py`: the prober
+    # was handed `from _typeshed import ReadableBuffer` from inside `if t.TYPE_CHECKING:`. `_typeshed` does not
+    # exist at runtime by design, so every probe in that file died at SETUP and the failure was recorded as a
+    # fault in the program. The probe was answering a question about the prelude, not about the world.
+    never_runs = _type_checking_only(tree)
+    _swallowed: list[str] = []
+    # §A127: AND NEITHER MAY A PLATFORM BRANCH THIS MACHINE WILL NOT TAKE. Measured 2026-11-23 on
+    # `click/_termui_impl.py`: `import msvcrt` sits under `if sys.platform == "win32":`, the machine answers
+    # linux, yet the prelude still ran `import msvcrt` and EVERY probe in the file died of ModuleNotFoundError --
+    # recorded as a proved fault. The prelude is the program's STARTUP on this machine; an import the machine
+    # will never execute is not part of it. Asked of the interpreter, never assumed from the module name.
     for node in ast.walk(tree):
+        if not isinstance(node, ast.If):
+            continue
+        branch_imports = [(inner, alias) for inner in node.body for sub in ast.walk(inner)
+                          if isinstance(sub, (ast.Import, ast.ImportFrom))
+                          for alias in sub.names]
+        if not branch_imports:
+            continue
+        names = {n.attr for n in ast.walk(node.test) if isinstance(n, ast.Attribute)}
+        if "platform" not in names and "name" not in names:
+            continue
+        try:
+            from canonical.runtime import ask_the_world_v1 as _ASK
+            answer = _ASK.probe(ast.unparse(node.test), world=str(world) if world is not None else ".",
+                                imports=["import sys", "import os"], interpreter=interpreter)
+        except Exception as exc:
+            # A SWALLOWED EXCEPTION IS A SILENT NO-OP, AND THAT IS HOW THIS BLOCK STAYED DEAD. Measured
+            # 2026-11-23: `interpreter` was not a parameter of this function, so the probe line raised NameError,
+            # the bare `except` swallowed it, and the platform exclusion silently did nothing -- the fault I
+            # thought I had fixed was untouched while every check said "no error". It is recorded here rather
+            # than re-raised because a probe may legitimately fail; but it is no longer silent.
+            _swallowed.append("%s: %s" % (type(exc).__name__, str(exc)[:80]))
+            continue
+        if answer.get("answered") and not answer.get("raised") and answer.get("literal"):
+            if answer.get("value") is False:
+                for inner, _alias in branch_imports:
+                    if getattr(inner, "lineno", None):
+                        never_runs.add(inner.lineno)
+    for node in ast.walk(tree):
+        if getattr(node, "lineno", None) in never_runs:
+            continue
         if isinstance(node, ast.Import):
             for alias in node.names:
                 statements.append("import %s%s" % (alias.name,
                                                    " as %s" % alias.asname if alias.asname else ""))
-        elif isinstance(node, ast.ImportFrom) and node.module and not node.level:
+        elif isinstance(node, ast.ImportFrom) and not node.level and node.module:
             statements.append("from %s import %s" % (node.module, ", ".join(
                 alias.name + (" as %s" % alias.asname if alias.asname else "") for alias in node.names)))
+        elif isinstance(node, ast.ImportFrom) and node.level:
+            # §A127: A RELATIVE IMPORT IS THE FILE'S MOST IMPORTANT IMPORT. Measured 2026-11-23 on
+            # `charset_normalizer/api.py`: `from .constant import _KNOWN_MB_DECODERS` was SKIPPED by the prelude
+            # (a bare file "has no package context"), so every probe touching that name died of NameError and the
+            # walk recorded it as a PROVED fault. The package context is not unknown -- it is `world`. Resolving
+            # `.constant` to `<package>.constant` is one string join away, and without it the prelude is a lie
+            # about what the program imported.
+            parts = _package_of(world)
+            if not parts:
+                continue
+            drop = node.level - 1
+            base = parts[:len(parts) - drop] if drop else parts
+            if node.module:
+                module = ".".join(base + [node.module])
+                statements.append("from %s import %s" % (module, ", ".join(
+                    alias.name + (" as %s" % alias.asname if alias.asname else "") for alias in node.names)))
+            else:
+                names = [alias.name for alias in node.names]
+                if len(base) and names:
+                    module = ".".join(base)
+                    statements.append("from %s import %s" % (module, ", ".join(names)))
+                elif names:
+                    statements.append("from %s import %s" % (".".join(base), ", ".join(names)))
+    if _swallowed:
+        # the prelude is still returned, but the fact that a question could not be asked is carried with it
+        _imports_of.last_swallowed = _swallowed
+    else:
+        _imports_of.last_swallowed = []
     return statements[:40]
 
 
@@ -331,7 +569,7 @@ def predict(source: str, *, installed: Iterable[str] | None = None,
             from canonical.runtime import ask_the_world_v1 as ASK
 
             def prober(expression: str, _world=world, _interpreter=interpreter) -> dict[str, Any]:
-                return ASK.probe(expression, world=str(_world), imports=_imports_of(source),
+                return ASK.probe(expression, world=str(_world), imports=_imports_of(source, world=_world, interpreter=interpreter),
                                  interpreter=_interpreter)
 
         decided = EVALUATE.evaluate(source, prober=prober)

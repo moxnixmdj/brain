@@ -84,6 +84,28 @@ def _literal(node: ast.AST | None) -> Any:
         return UNKNOWN
 
 
+def _substitute(node: ast.AST, state: "_State") -> ast.AST:
+    """Return a copy of `node` with every Name the walk has bound replaced by its literal value.
+
+    Only literals are ever in the state (§A117), so the replacement is always expressible in source and the
+    resulting expression is a question about the WORLD rather than about the program's own symbols.
+    """
+    class _Fill(ast.NodeTransformer):
+        def visit_Name(self, inner: ast.Name) -> ast.AST:
+            if isinstance(inner.ctx, ast.Load) and inner.id in state.names:
+                value = state.names[inner.id]
+                if value is not UNKNOWN:
+                    try:
+                        return ast.parse(repr(value), mode="eval").body
+                    except Exception:
+                        return inner
+            return inner
+    try:
+        return ast.fix_missing_locations(_Fill().visit(ast.parse(ast.unparse(node), mode="eval").body))
+    except Exception:
+        return node
+
+
 class _State:
     """Name -> value. Only literals are ever bound; everything else is UNKNOWN and never overwritten with a
     guess, so one unknown never silently poisons a name that was previously known."""
@@ -168,6 +190,13 @@ class _Evaluator:
         #: whether it raised, and it is never stored as knowledge.
         self.prober: Any = None
         self.probes: list[dict[str, Any]] = []
+        #: §A127: NAMES DEFINED IN THE PROGRAM ITSELF. The world cannot answer a question about them -- asking
+        #: an interpreter that never saw the file returns `NameError: name 'Sentinel' is not defined`, and that
+        #: NameError is not a fact about the program, it is a fact about the question. Measured 2026-11-23 on
+        #: `click/_utils.py`: line 31 defines `UNSET: t.Literal[Sentinel.UNSET] = Sentinel.UNSET`, `Sentinel`
+        #: is defined three lines above, and the probe's NameError was recorded as PROVED. So a probe is only
+        #: asked when the question is about things the WORLD can see: the program's own definitions are not.
+        self.local_names: set[str] = set()
         #: Import statements the program performed, so a probe can run them first.
         self.imports: list[str] = []
 
@@ -373,10 +402,31 @@ class _Evaluator:
         if self.prober is None:
             return UNKNOWN
         try:
-            expression = ast.unparse(node)
+            # §A127: SUBSTITUTE WHAT THE WALK ALREADY KNOWS BEFORE ASKING. Measured 2026-11-23: the walk asked
+            # `os.environ.get(k)` for `for k in ['HOME','PATH',...]`, and every probe came back answered=False --
+            # not because the world could not answer, but because the QUESTION still contained a symbol. The
+            # walk had `k = 'HOME'` in hand; asking the world to guess a name the walk already bound is the same
+            # defect as refusing before asking, one level down. Substitution makes the question concrete, which
+            # also raises the chance it can be matched to a literal answer.
+            expression = ast.unparse(_substitute(node, state))
         except Exception:
             return UNKNOWN
         if not expression or len(expression) > 200:
+            return UNKNOWN
+        # ONLY ASK WHAT THE WORLD CAN ANSWER (§A127). The names in this expression that the PROGRAM defines are
+        # invisible to an interpreter that never saw the file; probing anyway produces a NameError that is a fact
+        # about the question, not about the program -- and the walk recorded it as PROVED. If the expression
+        # rests on anything the program made, the honest answer here is that this walk cannot follow it.
+        # A NAME IS UNANSWERABLE WHEN THE WORLD ALREADY FAILED ON IT. Classes and module-level assignments are
+        # invisible to an interpreter that never saw the file; but a loop variable, or a name the walk itself has
+        # already bound from a literal, is ANSWERABLE and must be asked. Measured three ways in one hour:
+        #   gate on every Store   -> `for k in ['HOME',...]` declined: 0 probes, the walk had `k` already
+        #   gate on imports too   -> `json`/`open` declined: 3 DECIDED verdicts became PROBED_NOTHING
+        #   gate on def/class only -> `_KNOWN_MB_DECODERS` asked: NameError, 4 false faults in real code
+        # So the gate is both halves: bound by THIS FILE and not already carried by the walk.
+        referenced = {n.id for n in ast.walk(node) if isinstance(n, ast.Name)}
+        if (referenced & self.local_names) and any(state.get(n) is UNKNOWN for n in referenced & self.local_names):
+            self.unknowns.append("PROBE_WOULD_ASK_ABOUT_A_NAME_THE_PROGRAM_DEFINES:" + expression[:80])
             return UNKNOWN
         answer = self.prober(expression)
         record = answer if isinstance(answer, dict) else None
@@ -765,6 +815,32 @@ def evaluate(source: str, *, prober: Any = None) -> dict[str, Any]:
     # exactly as before; with one, an expression it cannot follow is ASKED instead of refused, and every answer
     # travels with the result together with the moment it was taken.
     evaluator.prober = prober
+    # EVERY NAME THE PROGRAM ITSELF BINDS (§A127): module-level and nested assignments, functions, classes and
+    # imports. An expression resting on any of these is a question about THIS FILE, which the world cannot
+    # answer -- so the walk declines it rather than manufacturing a NameError and calling it proof.
+    # ONLY WHAT THE WORLD CANNOT RESOLVE. Imports are deliberately NOT here: the prober runs the program's own
+    # import statements first (§A120), so `json` and `open` ARE answerable and gating on them would refuse the
+    # very questions that make a config file decidable. Measured 2026-11-23: including them turned three
+    # DECIDED_FROM_PROBED_EVIDENCE verdicts into EVIDENCE_PROBED_NOTHING_PROVED -- the gate swallowed the
+    # mechanism it was meant to protect. What no interpreter can see is what THIS FILE binds for itself.
+    # AND THE LINE IS EXACTLY: CLASSES AND FUNCTIONS. Measured three ways in one hour, so the boundary is stated
+    # with its evidence rather than guessed:
+    #   too wide  (every stored Name)  -> `k` in `for k in ['HOME', ...]` is a Store, so the probe was declined
+    #                                    and the cheapness test saw 0 probes: the walk had already substituted `k`
+    #                                    with a literal, and the gate refused a question it could answer itself
+    #   too wide  (+ imports)          -> `json` and `open` declined, turning three DECIDED verdicts into
+    #                                    EVIDENCE_PROBED_NOTHING_PROVED
+    #   right     (def/class only)     -> `Sentinel` is a class defined three lines above the line that uses it,
+    #                                    which is the one case no interpreter but this file can resolve
+    # A loop variable, an assignment the walk followed, and an import it ran first are all answerable; a class
+    # body the walk has not entered is not.
+    bound: set[str] = set()
+    for node in ast.walk(tree):
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+            bound.add(node.name)
+        elif isinstance(node, ast.Name) and isinstance(node.ctx, ast.Store):
+            bound.add(node.id)
+    evaluator.local_names = bound
     try:
         evaluator.block(tree.body, _State())
     except _Stop as stop:

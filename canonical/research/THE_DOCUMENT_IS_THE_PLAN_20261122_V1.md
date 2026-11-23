@@ -7254,3 +7254,78 @@ that has never been seen to fail is a decoration.
     NOT MEASURED  any of this on a live page — no Chromium in this environment, 12 tests skip by design
     NOT BUILT     the browser equivalent of A120's *asking*: so far the browser only re-reads, it never probes
     NOT BUILT     any OSWorld-style task where these verdicts decide a score
+
+## §A127–A128 — the reader meets real code, and was wrong about most of it
+
+### Why this section is the most important one since §A113
+
+Every test from §A113 to §A126 used programs written **in this repository, by the same hand that wrote the
+reader**. That is the weakest test that exists: reader and program share assumptions, so agreement is free and
+proves nothing. §A124's "10/10 against real execution" was honest but small — ten programs, all ours.
+
+So this round brought in code written by strangers, from PyPI, and scored the reader against `import` itself.
+
+**MEASURED, BEFORE ANY FIX:**
+
+    package: click | files: 17 | agreement with a real import: 5 / 17
+
+A **71% false-alarm rate** on the first third-party code this system ever saw.
+
+### The nine defects are one defect
+
+Every one of them is the reader answering a question **about its own standing** instead of about the program:
+
+| what the reader did | why it was wrong |
+|---|---|
+| `if TYPE_CHECKING: import x` counted | the block is false at runtime; no interpreter runs it |
+| `if sys.platform == "win32": import msvcrt` counted | the machine answers `linux`; the import never runs |
+| `from .constant import y` skipped | a relative import is the file's *most important* import |
+| `from click.x import y` called missing | the package importing itself is not a missing module |
+| prober run with `cwd=<package>` | the package's `types.py` **shadowed the standard library** |
+| asked about `Sentinel` | a name the file defines is invisible to the world; the `NameError` was recorded as `proved` |
+| `os.environ.get(...)` refused | a mapping read was classed as a world-changing call |
+| prelude included `import msvcrt` | the probe died at **setup**, and the failure was reported as a program fault |
+| `_installed` asked *this* process | the world's own packages were invisible, so real dependencies read as missing |
+
+### The one that matters most
+
+```python
+except Exception:
+    continue          # the platform-guard exclusion
+```
+
+`interpreter` was not a parameter of `_imports_of`. The probe line raised `NameError`, the bare `except`
+swallowed it, and the exclusion silently did nothing — **while every check said "no error."** I "fixed" a defect
+and the defect was untouched. That is §A119's false clean, this time in my own fix.
+
+The swallow is now recorded (`_imports_of.last_swallowed`) rather than discarded.
+
+### Result
+
+| package | before | after |
+|---|---|---|
+| `click` (17 files) | 5/17 | **17/17** |
+| `charset_normalizer` (12 files) | — | **12/12** |
+| `jinja2` (27 files) | — | **27/27** |
+| **total, 56 files of strangers' code** | — | **56/56** |
+
+And the mirror is intact: a program that genuinely cannot import is **still caught**
+(`missing_python_module: definitely_not_a_real_module_xyz`). A predictor that agreed with everything would score
+56/56 and be worthless; that test is in the file, next to the agreement test.
+
+### What this is, stated honestly
+
+    VERIFIED   the reader agrees with a real import on 56 files of third-party code from three packages
+    VERIFIED   it still catches a real missing module (the mirror test)
+    VERIFIED   the test has teeth: disabling BOTH `never_runs` call sites makes click fail
+    NOT DONE   the failures found are failures of IMPORT analysis only -- nothing here decides runtime values
+    NOT DONE   no OSWorld task, no GUI, no browser session: this is still the Python organ
+
+### The lesson, which is about tests and not about code
+
+**A test built from your own programs tests your own assumptions.** The moment real code arrived, 71% of the
+verdicts were wrong — and every one of those errors had been invisible for twelve sessions because the fixtures
+and the reader were written by the same person. The first external test cost one `pip install` and found nine
+defects.
+
+    THE CHEAPEST TEST YOU HAVE NEVER RUN IS A PROGRAM YOU DID NOT WRITE.
