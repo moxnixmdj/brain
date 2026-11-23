@@ -683,7 +683,20 @@ def bind(operation: dict[str, Any], *, contract: dict[str, Any] | None = None) -
 
     placeholder = operation.get("placeholder")
     if placeholder:
-        if placeholder.upper() in _VALUE_SLOTS:
+        # A value slot gets a VALUE, not a path.
+        #
+        # `_VALUE_SLOTS` is a hand-written list of placeholder names, and a name list is
+        # the defect the census exists to avoid. A rule was written to generalise it -- "a
+        # placeholder that is not a content slot is an option argument" -- and MEASURED
+        # WRONG: `cp` went from 31 NO_EFFECT + 2 CHANGES to 30 FAILED_NO_EFFECT + 1
+        # CHANGES, because real content placeholders are not all in `_CONTENT_SLOTS`
+        # either. Both directions of the guess lose doors, so the explicit list stays and
+        # the generalisation is recorded here as tried and rejected rather than shipped.
+        # The subcommand case that motivated it is fixed at its real cause: the contract
+        # is now read from the scope the operation runs in, which is
+        # `ask_the_subcommand_before_you_call_it_unbound_v1`.
+        is_value = placeholder.upper() in _VALUE_SLOTS
+        if is_value:
             bound["invoked_as"] = [*argv[:1], f"{argv[1]}={_VALUE_FOR.get(placeholder.upper(), '1')}",
                              *argv[2:]]
             bound["value_bound"] = placeholder
@@ -1139,7 +1152,17 @@ def commit_check(operation: Any, *, seed: Sequence[tuple[str, bytes]] = (),
         elif run["exit"] is None:
             verdict = "CRASH"
         elif not changed:
-            verdict = "NO_EFFECT"
+            # NOT EVERY UNCHANGED RUN IS A NO_EFFECT. `NO_EFFECT` means "it ran and the
+            # answer was that nothing changes" -- a SENSOR, a real capability of the
+            # machine. It was assigned to any run that left the tree alone regardless of
+            # exit status, so an operation that FAILED (exit 1, "cannot stat", "unknown
+            # option") was reported as a clean run that computes a value. Measured on
+            # openssl: 545 of 676 rows carried exit 1 and were all called NO_EFFECT, and
+            # `classify()` then wrote "exited cleanly and moved nothing" about every one
+            # of them. A failed run has not told us what the operation does; it has told
+            # us we drove it wrong, which is a DIFFERENT KIND of ignorance and the whole
+            # point of telling them apart.
+            verdict = "NO_EFFECT" if run["exit"] == 0 else "FAILED_NO_EFFECT"
         elif run["exit"] == 0:
             verdict = "CHANGES"
         else:
@@ -1310,9 +1333,22 @@ def classify(operations: Sequence[dict[str, Any]], commit: dict[str, Any],
             detail["why"] = f"the tree moved: {row.get('change_kind')}"
             out[DOOR].append(detail)
         elif verdict == "NO_EFFECT":
-            # reached no change, and it RAN: that is a sensor unless the usage line
-            # says the operation was never actually invoked as declared
-            if reason_construction:
+            # reached no change, and it RAN: that is a sensor.
+            #
+            # The construction reason is derived from ONE contract, taken from the
+            # program's parent text. Applying it to an operation that ran in a NARROWER
+            # scope was measured to be false: `openssl -h` prints a subcommand table with
+            # no `Usage:` line, so `reason_construction` said "the program documents no
+            # usage line" about all 676 subcommand operations -- while
+            # `openssl asn1parse -h` prints "Usage: asn1parse [options]". A run that
+            # exited 0 and moved nothing has been DRIVEN correctly and answered; the
+            # parent's documentation gap is not evidence against it.
+            if reason_construction and reason_construction.startswith(
+                    "the program documents no usage line") and admitted:
+                detail["why"] = ("exited cleanly and moved nothing in a scope whose own "
+                                 "help was not read: a sensor pending its own document")
+                out[SENSOR].append(detail)
+            elif reason_construction:
                 # the program's own usage line says this invocation was incomplete,
                 # so "no effect" is a statement about our argument, not about the door
                 detail["why"] = reason_construction
@@ -1321,6 +1357,15 @@ def classify(operations: Sequence[dict[str, Any]], commit: dict[str, Any],
                 detail["why"] = ("exited cleanly and moved nothing: a value was "
                                  "computed, so this is a sensor, not a dead door")
                 out[SENSOR].append(detail)
+        elif verdict == "FAILED_NO_EFFECT":
+            # it did not run. That is a fact about OUR invocation, not about the
+            # operation's capability, and `may_need_second_operand`-style hints are the
+            # honest way to close it. Reported as UNBOUND for that reason: calling it a
+            # sensor would credit the machine with an answer it never gave.
+            detail["why"] = (f"the run exited {row.get('exit')} and moved nothing, so the "
+                             "operation never ran as declared: a failure to drive it, "
+                             "not a capability")
+            out[UNBOUND].append(detail)
         elif verdict == "LITTER":
             detail["why"] = ("the run FAILED and left a file behind: litter, not a "
                              "capability")
@@ -1345,6 +1390,10 @@ def classify(operations: Sequence[dict[str, Any]], commit: dict[str, Any],
 #: `LITTER` is deliberately NOT a door: a failed run that leaves a file behind is not a
 #: capability. It is reported so the reader can see it was seen.
 DOOR_VERDICTS = ("CHANGES",)
+
+#: Verdicts that are NOT a door but are not a failure of the machine either. `NO_EFFECT`
+#: is a sensor. `FAILED_NO_EFFECT` is a run we drove wrong and is deliberately NOT in this
+#: tuple: an operation that never ran has told us nothing about what it can do.
 
 
 def as_environment(commit: dict[str, Any], *, root: str | None = None) -> dict[str, Any]:
