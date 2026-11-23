@@ -254,10 +254,15 @@ The gate catches an unexercised parameter *inside* the algebra. It cannot catch 
 **missing from the algebra**. So I read the 85 declarations still refused as "names nothing in
 the algebra" instead of quoting the number.
 
-**What they actually are.** Fourteen examined; the majority name a parameter that is invisible
-at the default width (`sort -b` ignore leading blanks, `sort -i` ignore non-printing — both
-produce identical output on every input I could construct, so their absence costs nothing).
-Four named a transform the algebra genuinely lacked.
+**What they actually are.** Fourteen examined. Four named a transform the algebra genuinely
+lacked. The rest named parameters I could not construct an input for, and I wrote that down as
+"invisible at the default width" — naming `sort -b` and `sort -i` as examples.
+
+**CORRECTION (V4).** That sentence was false. Both parameters are visible; I had not looked
+hard enough. A searched witness finds `b" ab\nAB\n"` for `sort -b` and `b"\tab\nAB\n"` for
+`sort -i`, and both are now certified in 4 witnesses each and survive held-out. The error is
+the one this document is about: I reported a failure of my search as a property of the
+program. "No witness was found" is the only claim a failed search supports.
 
 **Added, each verified exactly against the host before it entered:**
 
@@ -310,8 +315,15 @@ measured or claimed.
 
 **Next bottleneck, sharper than last time.** The law "a parameter is exercised only if two
 settings of it disagree on some shape" is computable *because I supply the two settings*.
-That is the residual weakness: `sort -b` may be invisible not because it does nothing but
-because I constructed no input where leading blanks change the order. The measurable next step
-is to **search for a witness input** for each refused parameter rather than declaring it
-invisible — and where a witness is found, the parameter was a primitive all along and the
-refusal was wrong.
+That is the residual weakness, and it was real: `sort -b` was invisible not because it does
+nothing but because I constructed no input where leading blanks change the order.
+
+**DONE IN V4, and it cost me two false certificates to learn why it was not enough.** Searching
+for a witness input does find them — `sort -b` and `sort -i` are primitives after all. But the
+search also found a third case nobody had asked about: a witness can EXIST and still not be in
+the design space, which is `fold -b`'s failure mode one level down. The gate now refuses in
+that case and attaches the witness. And then the reverse: a shape can split the design space
+while the declaration that named it describes something else entirely, so `sort -V` ("natural
+sort of version numbers") and `sort -c` ("check for sorted input; do not sort") were certified
+as transforms they are not. A positive vocabulary alone cannot refuse; the refusal has to be
+keyed to the surface's own words.

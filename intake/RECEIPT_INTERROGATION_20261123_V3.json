@@ -1363,7 +1363,7 @@
   "sort -f is refused although its *ranking* over printable ASCII was measured exactly. The ranking is not the behaviour: two lines that fold equal are ordered in a way eight candidate keys did not reproduce.",
   "sort_general remains exact only on the numeric domain; hex literals and signed nan are outside its claim.",
   "fold -s and sort -V remain removed.",
-  "85 of 158 declarations still name nothing in the algebra. Some of those (sort -b, sort -i) are invisible on every input I could construct at the default width; others are genuinely outside a text-filter algebra (jq's slurp and raw verbs).",
+  "CORRECTED IN V4. This entry originally read: 'Some of those (sort -b, sort -i) are invisible on every input I could construct at the default width.' That was false, and it was false in the specific way this file exists to catch: it reported a FAILURE OF MY SEARCH as a property of the program. A searched witness found that sort -b is sort_leading_blanks (witness b' ab\\nAB\\n') and sort -i is sort_printable (witness b'\\tab\\nAB\\n'), each certified with 4 witnesses and surviving held-out. 85 of 158 declarations still name nothing in the algebra; that count stands, but the reason for any individual one is only 'no witness was found', never 'it is invisible'.",
   "Shapes are still hand-chosen: two were added this round because a refused declaration named the missing witness, which is evidence of progress but not proof the set is adequate.",
   "Text filters on one host. No GUI, browser, image or frontier benchmark is measured or claimed."
  ]

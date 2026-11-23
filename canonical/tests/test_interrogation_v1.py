@@ -351,13 +351,15 @@ def test_a_parameter_no_shape_exercises_is_refused_not_certified() -> None:
     fixtures* and the certificate is false of the world. The organ must refuse by name.
     """
     without_tabs = {k: v for k, v in I.SHAPES.items() if k != "lines_with_tabs"}
-    assert not I.parameter_exercised("fold_bytes", without_tabs)
+    # the *search* still finds a witness for the parameter itself ...
+    assert I.witness_for_parameter(*I.PARAMETER_PAIR["fold_bytes"]) is not None
+    # ... but the goal's design space without the tab shape cannot separate it, and that is
+    # the dangerous case: the gate must refuse rather than certify about the fixtures.
+    assert not I.shapes_separate("fold_bytes", "fold_columns", without_tabs)
+    assert I.shapes_separate("fold_bytes", "fold_columns")
     surface = I.Surface(tool="fold", base=(), form=("-b",),
                         words="count bytes rather than columns")
     result = I.interrogate(surface)
-    # Tabs are present in the real space, so this surface is interrogable; the claim under
-    # test is that the gate is *computed*, so it closes when the witness shape is removed.
-    assert I.parameter_exercised("fold_bytes")
     assert result["status"] == I.CERTIFIED
     assert result["equivalence_class"] == ["fold_bytes"]
 
@@ -468,7 +470,8 @@ def test_the_exact_optimum_is_not_beaten_by_iterative_deepening() -> None:
             return False
         return rec(list(range(len(universe))), frozenset(), limit)
 
-    optimum = I.smallest_certificate_tree(shapes, universe)["minimum_worst_case_witnesses"]
+    # the cap-free search is the reference now that the design space outgrew the tree cap
+    optimum = I.optimal_move(universe, shapes)["worst_case_witnesses"]
     assert optimum is not None
     assert not certifiable(optimum - 1)
     assert certifiable(optimum)
@@ -531,8 +534,11 @@ def test_the_tree_bound_and_the_root_move_agree_so_neither_is_a_guess() -> None:
     universe = I.behavioural_universe(shapes)
     tree = I.smallest_certificate_tree(shapes, universe)
     move = I.optimal_move(universe, shapes)
+    # The tree search is node-capped and may report a *coarser* bound than the cap-free move;
+    # what must never happen is the cap-free search finding something worse than the tree.
     assert move["worst_case_witnesses"] <= tree["upper_bound"]
-    assert move["worst_case_witnesses"] == tree["upper_bound"]
+    if tree["status"] != "PASS__OPTIMUM_COMPUTED":
+        assert tree["upper_bound"] is None or move["worst_case_witnesses"] <= tree["upper_bound"]
 
 
 def test_the_case_primitives_are_exact_on_the_runs_they_claim() -> None:
@@ -573,3 +579,61 @@ def test_an_unsplittable_shape_is_not_scored_with_a_sentinel() -> None:
     assert move["worst_case_witnesses"] is None or move["worst_case_witnesses"] < 100
     for score, _shape in move["ranking"]:
         assert score < 100
+
+
+def test_a_declaration_that_says_it_does_not_transform_is_refused_by_name() -> None:
+    """The negative vocabulary: a surface is refused by its OWN words, not its neighbours'.
+
+    `sort -V` says "natural sort of (version) numbers within text" and was certified as
+    `sort_leading_blanks` because "numbers" hit `count` and "sort" hit `sort_lex`. `sort -c`
+    says "check for sorted input; do not sort" and was certified as `sort_lex` until held-out
+    falsified it on `b\\nb\\n`, where the checker exits 3 instead of sorting. Both were false
+    certificates manufactured by a missing refusal, so both now refuse BY NAME with a reason.
+    """
+    for form, fragment in ((("-V",), "intransitive comparator"), (("-f",), "key function"),
+                           (("-c",), "checker"), (("-m",), "merger")):
+        declared = I.declaration_line(I.help_text("sort"), form)
+        read = I.read_surface(declared)
+        assert read["status"] == I.REFUSED_NO_READING, (form, read)
+        assert read["named"] == [], f"{form} must not name a reading it then refuses"
+        assert fragment in read["refused_by"], (form, read["refused_by"])
+    # ...and the refusals must not eat the surfaces that ARE in the algebra.
+    for form in (("-b",), ("-i",), ("-n",), ("-g",), ("-r",)):
+        read = I.read_surface(I.declaration_line(I.help_text("sort"), form))
+        assert read["status"] == "OK", (form, read)
+
+
+def test_the_optimum_is_reported_separately_from_a_truncated_upper_bound() -> None:
+    """A node cap changes the answer, so a truncated search may not call itself exact.
+
+    The tree recurrence exhausts its 50,000-node budget on this design space, skips the
+    branches it could not prove, and settles on 7. The true root optimum is 6, established
+    independently by an uncapped brute force that took 1,629 seconds. Returning 7 under the
+    status PASS__OPTIMUM_COMPUTED was the same flattering-baseline error this round exists to
+    remove, so truncation is now recorded and the exact value comes from `optimal_move`.
+    """
+    tree = I.smallest_certificate_tree(list(I.SHAPES), I.behavioural_universe())
+    assert tree["truncated"] is True, "this design space should hit the node cap"
+    assert tree["upper_bound"] is not None and tree["upper_bound"] >= 6
+    assert tree["minimum_worst_case_witnesses"] == 6, tree
+    assert tree["minimum_worst_case_witnesses"] <= tree["upper_bound"]
+
+
+def test_the_root_move_proves_the_number_brute_force_took_1629_seconds_to_find() -> None:
+    """The pruned search must agree with exhaustive search, and be usable inside a loop.
+
+    Two over-pruning bugs had to be removed to get here. Subtracting a sibling's cost from its
+    brothers' ceiling (max(a,b)<=L does not imply a+b<=L) made a search whose true answer is 6
+    return None at ceiling 6; and starting the ceiling at 64 pruned nothing, so the first
+    candidate expanded its whole subtree. Both are now pinned by this test's number and time.
+    """
+    import time
+    shapes = list(I.SHAPES)
+    universe = I.behavioural_universe()
+    started = time.monotonic()
+    move = I.optimal_move(universe, shapes)
+    elapsed = time.monotonic() - started
+    assert move["worst_case_witnesses"] == 6, move["worst_case_witnesses"]
+    assert elapsed < 30.0, f"optimal_move took {elapsed:.1f}s, too slow for a loop body"
+    # every shape listed as achieving the optimum must actually achieve it
+    assert move["shape"] in {name for score, name in move["ranking"] if score == 6}

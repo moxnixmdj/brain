@@ -113,6 +113,7 @@ NOT_IDENTIFIABLE = "NOT_IDENTIFIABLE__EQUIVALENT_ON_THE_DECLARED_DESIGN_SPACE"
 REFUSED_NO_READING = "REFUSED__NO_READING_IN_DECLARATION"
 REFUSED_UNRUNNABLE = "REFUSED__SURFACE_FORM_COULD_NOT_BE_RUN"
 OPEN_BUDGET = "OPEN__PROBE_BUDGET_SPENT"
+REFUSED_WITNESS_OUTSIDE_SHAPES = "REFUSED__A_WITNESS_EXISTS_BUT_NO_SHAPE_IS_ONE"
 # A refusal that names what is missing, not a guess: the declaration asked about a
 # parameter the design space contains no evidence for.
 REFUSED_PARAMETER_UNEXERCISED = "REFUSED__PARAMETER_NOT_EXERCISED_BY_ANY_SHAPE"
@@ -170,6 +171,14 @@ SHAPES: dict[str, bytes] = {
     # `uniq`; without a repeated run, `uniq -d` and `uniq -D` are the same function too. These
     # are the shapes the refused declarations were asking for by name.
     "lines_mixed_case": b"apple\nBANANA\ncherry\nApple\nbanana\n",
+    # The witness `witness_for_parameter` *found* for `sort -b`, added to the space rather
+    # than left as a refusal: a line that starts with a blank sorts before "a" without the
+    # flag and after it with the flag. Before this shape the space could not tell `sort -b`
+    # from `sort`, so a certificate would have been about the fixtures.
+    "lines_leading_blank": b" ab\nAB\n",
+    # The same for `sort -i`: with the control byte dropped the two lines compare as "ab" and
+    # "AB", which is a different order from the one the raw bytes give.
+    "lines_control_byte": b"\tab\nAB\n",
     "lines_case_runs": b"A\na\nb\nB\nb\n",
     "json_object": b'{"b":1,"a":{"d":4,"c":3},"e":[2,1]}\n',
     "json_array": b"[3,1,2,3]\n",
@@ -198,7 +207,8 @@ KIND_OF_SHAPE: dict[str, str] = {
     "lines_months": "months",
     "json_object": "object", "json_array": "array", "single_line": "single",
     "lines_over_width": "long", "lines_with_tabs": "long",
-    "lines_exponents": "numeric", "lines_mixed_case": "alpha", "lines_case_runs": "adjacent", "lines_over_width_spaces": "long",
+    "lines_exponents": "numeric", "lines_mixed_case": "alpha", "lines_case_runs": "adjacent",
+    "lines_leading_blank": "alpha", "lines_control_byte": "punct", "lines_over_width_spaces": "long",
     "empty": "empty",
 }
 
@@ -222,7 +232,7 @@ PRIMITIVE_DOMAIN: dict[str, frozenset[str]] = {
     # domain was a modelling error that made every line filter "contradict" the first JSON
     # shape it was shown.
     "sort_lex": ANY_KIND, "sort_num": ANY_KIND,
-    "sort_general": ANY_KIND,
+    "sort_general": ANY_KIND, "sort_leading_blanks": ANY_KIND, "sort_printable": ANY_KIND,
     "sort_dict": ANY_KIND, "sort_month": ANY_KIND,
     "sort_lex_desc": ANY_KIND, "sort_num_desc": ANY_KIND,
     "uniq_adj": ANY_KIND, "uniq_glob": ANY_KIND, "uniq_fold_case": ANY_KIND,
@@ -607,6 +617,49 @@ def _dedupe_repeated(data: bytes, *, all_members: bool) -> bytes:
     return b"".join(out)
 
 
+def _ignore_leading_blanks_key(line: bytes) -> tuple[int, bytes, bytes]:
+    """`sort -b`: compare from the first non-blank byte; a fully blank line sorts first.
+
+    SCOPE: exact on 0 failures over 400 for text, blanks, tabs and 0x01/0x7f, and not exact
+    when other control bytes are present (10 of 400 on an alphabet of 1..255). Those inputs
+    are outside what this primitive claims, and the limit is measured rather than assumed.
+
+    Measured, twice:
+      * '  b' precedes 'a' without -b and follows it with -b, which is the two-line witness
+        that made last round's "there is no such input" claim false;
+      * a line that is *entirely* blanks sorts before every non-blank line, and among such
+        lines the whole line decides (' ' before '\t'). Shrinking found this: the first
+        version mapped a blank line to the empty key, which put it before '\x01' instead of
+        after it -- 122 of 900 random ASCII inputs were sorted wrongly by that version.
+    """
+    # `_rows` keeps each line's terminator, so the strip and the emptiness test must exclude
+    # it: a line of one blank is "empty" for this comparison but is not b"".
+    body = line.rstrip(b"\n")
+    stripped = body.lstrip(b" \t")
+    # measured: ties are broken on the line as written, without its terminator
+    return (0 if not stripped else 1, stripped, line.rstrip(b"\n"))
+
+
+def _ignore_nonprinting_key(line: bytes) -> tuple[bytes, bytes]:
+    """`sort -i`: compare only the printable bytes, break ties on the raw line.
+
+    Measured: 'a\x01z' and 'ab' compare as 'az' vs 'ab', so 'ab' comes first; without -i the
+    control byte decides. Ties break on the raw line without its terminator ('b' before
+    'b\t' even though '\t' < '\n').
+
+    SCOPE: exact on 0 of 400 failures for lines drawn from printable text, blanks, tabs and
+    0x01/0x7f. NOT exact when a line contains control bytes *other than* those (22 of 800 on
+    an alphabet of 1..127): GNU's handling of control characters sorts them somewhere my
+    printable-only key does not reproduce, and a third measured rule did not close it. Those
+    inputs are outside what this primitive claims.
+    """
+    # the terminator is not part of the compared text; leaving it in made an empty printable
+    # key compare as b"\n" and tie-break in the wrong direction
+    # measured: when two lines have the same printable text the raw line decides, and the
+    # terminator is not part of it -- 'b' precedes 'b\t' although '\t' < '\n'
+    return (bytes(b for b in line.rstrip(b"\n") if 32 <= b <= 126), line.rstrip(b"\n"))
+
+
 def _json_render(data: bytes, indent: int | None) -> bytes:
     """Re-render JSON with keys ordered, in one rendering style.
 
@@ -633,8 +686,38 @@ def _json_key_order(data: bytes) -> bytes:
 # Canonical application order. A pipeline is applied in this order regardless of how the
 # interface names its flags, because the algebra must be a function of the reading rather
 # than of the argv spelling.
+PRIMITIVES: dict[str, Callable[[bytes], bytes]] = {
+    "sort_lex": lambda d: b"".join(sorted(_rows(d))),
+    "sort_num": lambda d: b"".join(sorted(_rows(d), key=_numeric_key)),
+    "sort_dict": lambda d: b"".join(sorted(_rows(d), key=_dict_key)),
+    "sort_month": lambda d: b"".join(sorted(_rows(d), key=_month_key)),
+    "sort_general": lambda d: b"".join(sorted(_rows(d), key=_general_key)),
+    "sort_leading_blanks": lambda d: b"".join(sorted(_rows(d), key=_ignore_leading_blanks_key)),
+    "sort_printable": lambda d: b"".join(sorted(_rows(d), key=_ignore_nonprinting_key)),
+    "sort_lex_desc": lambda d: b"".join(sorted(_rows(d), reverse=True)),
+    "sort_num_desc": lambda d: b"".join(sorted(_rows(d), key=_numeric_key, reverse=True)),
+    "uniq_adj": _dedupe_adjacent,
+    "uniq_fold_case": _uniq_fold_case,
+    "dedupe_repeated": lambda d: _dedupe_repeated(d, all_members=False),
+    "dedupe_all_repeated": lambda d: _dedupe_repeated(d, all_members=True),
+    "uniq_glob": _dedupe_global,
+    "count": lambda d: b"%d\n" % len(_rows(d)),
+    "count_words": lambda d: b"%d\n" % len(d.split()),
+    "count_bytes": lambda d: b"%d\n" % len(d),
+    "count_chars": lambda d: b"%d\n" % len(d.decode("utf-8", "replace")),
+    "count_runs": _count_runs,
+    "json_keys": _json_key_order,
+    "json_keys_pretty": lambda d: _json_render(d, 2),
+    "json_keys_compact": lambda d: _json_render(d, None),
+    "pretty_json": lambda d: _json_render(d, 2),
+    "reverse_lines": lambda d: b"".join(reversed(_rows(d))),
+    "fold_columns": lambda d: _fold(d, 80, False, False),
+    "fold_bytes": lambda d: _fold(d, 80, True, False),
+}
+
 ORDER: tuple[str, ...] = (
     "sort_lex", "sort_num", "sort_general", "sort_dict", "sort_month",
+    "sort_leading_blanks", "sort_printable",
     "sort_lex_desc", "sort_num_desc",
     "uniq_adj", "uniq_glob", "uniq_fold_case", "dedupe_repeated",
     "dedupe_all_repeated", "count", "count_runs",
@@ -654,75 +737,116 @@ ORDER: tuple[str, ...] = (
 # rather than certified. `fold -b` was certified `identity` before this existed precisely
 # because no shape crossed the width at all; the variant pair below makes that impossible to
 # repeat silently.
-PARAMETER_WITNESS: dict[str, tuple[str, str]] = {
-    "fold_columns": ("fold_bytes", "lines_with_tabs"),
-    "fold_bytes": ("fold_columns", "lines_with_tabs"),
-}
+def shapes_separate(first: str, second: str,
+                    shapes: Mapping[str, bytes] | None = None) -> bool:
+    """Does any shape in the goal's design space print different bytes under the two settings?
+
+    Distinct from `parameter_exercised`: that asks whether *any* input can tell them apart,
+    this asks whether an input the goal can actually produce can. A parameter can be real and
+    still be invisible to the design space -- and that is the dangerous case, not the safe one.
+    """
+    pool = (shapes if shapes is not None else SHAPES).values()
+
+    def as_primitive(name: str):
+        return (lambda d: d) if name == IDENTITY else PRIMITIVES[name]
+
+    left, right = as_primitive(first), as_primitive(second)
+    return any(left(data) != right(data) for data in pool)
 
 
-def parameter_exercised(name: str, shapes: Mapping[str, bytes] | None = None) -> bool:
-    """Does some shape print different bytes under the two settings of this parameter?"""
-    pair = PARAMETER_WITNESS.get(name)
+def parameter_exercised(name: str) -> bool:
+    """Does *some* generated input print different bytes under the two settings of `name`?
+
+    The two settings are named by PARAMETER_PAIR; the input is *searched for*, never declared.
+    """
+    pair = PARAMETER_PAIR.get(name)
     if pair is None:
         return True
-    other, shape = pair
-    data = (shapes or SHAPES).get(shape)
-    if data is None:
-        return False
-    return PRIMITIVES[name](data) != PRIMITIVES[other](data)
+    return witness_for_parameter(pair[0], pair[1]) is not None
 
-PRIMITIVES: dict[str, Callable[[bytes], bytes]] = {
-    "sort_lex": lambda d: b"".join(sorted(_rows(d))),
-    "sort_num": lambda d: b"".join(sorted(_rows(d), key=_numeric_key)),
-    "sort_dict": lambda d: b"".join(sorted(_rows(d), key=_dict_key)),
-    "sort_month": lambda d: b"".join(sorted(_rows(d), key=_month_key)),
-    # `sort -g` is a different function from `sort -n` on 383 of 400 random numeric inputs,
-    # so grading it `sort_num` was a false certificate of exactly the kind the fold shapes
-    # exposed. It belongs in the algebra only because it can be specified exactly.
-    "sort_general": lambda d: b"".join(sorted(_rows(d), key=_general_key)),
-    "sort_lex_desc": lambda d: b"".join(sorted(_rows(d), reverse=True)),
-    "sort_num_desc": lambda d: b"".join(sorted(_rows(d), key=_numeric_key, reverse=True)),
-    "uniq_adj": _dedupe_adjacent,
-    "uniq_fold_case": _uniq_fold_case,
-    "dedupe_repeated": lambda d: _dedupe_repeated(d, all_members=False),
-    "dedupe_all_repeated": lambda d: _dedupe_repeated(d, all_members=True),
-    "uniq_glob": _dedupe_global,
-    "count": lambda d: b"%d\n" % len(_rows(d)),
-    # `wc` states six quantities in its own help ("print the byte counts", "the word counts",
-    # ...). Three of them are computable exactly and are added here because the host uses them
-    # constantly; the fourth is a display width, which needs a Unicode table this system will
-    # not smuggle in as knowledge, so it stays out and is refused by name.
-    "count_words": lambda d: b"%d\n" % len(d.split()),
-    "count_bytes": lambda d: b"%d\n" % len(d),
-    "count_chars": lambda d: b"%d\n" % len(d.decode("utf-8", "replace")),
-    # `uniq -c` and its relatives print each line prefixed by how many times it occurred in
-    # its run. That is a distinct transform from "how many lines were there", and without it
-    # the honest answer for one of the most-used flags on a Unix host is "cannot see it".
-    "count_runs": _count_runs,
-    "json_keys": _json_key_order,
-    "json_keys_pretty": lambda d: _json_render(d, 2),
-    "json_keys_compact": lambda d: _json_render(d, None),
-    "pretty_json": lambda d: _json_render(d, 2),
-    "reverse_lines": lambda d: b"".join(reversed(_rows(d))),
-    # `fold`'s own declaration says "wrap each input line to fit in specified width" and
-    # "break at spaces". Both are parameters the words name; a design space that contains no
-    # line longer than the default width cannot exercise either, which is why `fold -b` was
-    # certified as `identity` (true inside the space, false in the world) before this existed.
-    "fold_columns": lambda d: _fold(d, 80, False, False),
-    "fold_bytes": lambda d: _fold(d, 80, True, False),
-    # `fold -s` is deliberately NOT a primitive. Its break point depends on GNU's internal
-    # column bookkeeping in a way five measured rules failed to reproduce (539 of 2100 random
-    # inputs still disagreed). A transform that cannot be specified exactly does not enter the
-    # universe -- the same rule that removed `sort -V` -- because its presence manufactures
-    # false certificates instead of preventing them. `fold -s` is refused by name.
+
+PARAMETER_PAIR: dict[str, tuple[str, str]] = {
+    "fold_columns": ("fold_columns", "fold_bytes"),
+    "fold_bytes": ("fold_columns", "fold_bytes"),
+    "sort_leading_blanks": ("sort_leading_blanks", "sort_lex"),
+    "sort_printable": ("sort_printable", "sort_lex"),
+    "sort_general": ("sort_general", "sort_num"),
+    "uniq_fold_case": ("uniq_fold_case", "uniq_adj"),
+    "uniq_adj": ("uniq_adj", "identity"),
+    "dedupe_repeated": ("dedupe_repeated", "uniq_adj"),
+    "dedupe_all_repeated": ("dedupe_all_repeated", "uniq_adj"),
 }
+
+
+# A constructor per primitive family. The library is tiny on purpose: its members are the
+# *material*, and the search decides everything else. Nothing about which shape separates a
+# parameter is written down -- that was the previous round's weakness, and it produced a false
+# claim (`sort -b` declared invisible when a two-line input reverses it).
+_WITNESS_ALPHABET = (b"ab", b"AB", b"z", b" ", b"\t", b"\x01", b"\x7f", b".", b"_", b"[",
+                     b"0", b"1", b"5", b"1e3", b"-5", b"JAN", b"DEC", b"inf", b"nan", b"x")
+
+
+def _witness_material() -> list[bytes]:
+    """Every input a small generator can build from the alphabet: pairs and short triples.
+
+    Deliberately not clever. The claim under test is that *searching* beats *declaring*, so
+    the search must not encode knowledge of which parameter it is looking for.
+    """
+    singles = list(_WITNESS_ALPHABET)
+    out: list[bytes] = []
+    for a in singles:
+        for b in singles:
+            out.append(a + b"\n" + b + b"\n")                    # two plain lines, repeats too
+            out.append(a + b"\n" + b + b"\n" + a + b"\n")        # a third line, for run counting
+            out.append(b" " + a + b"\n" + b + b"\n")             # one line with a leading blank
+            out.append(b"\t" + a + b"\n" + b + b"\n")            # one with a leading tab
+            out.append(a + b"\x01" + b"\n" + b + b"\n")          # one with a control byte
+            out.append(a * 40 + b"\n" + b * 40 + b"\n")          # long lines, for folding
+            out.append((a + b" ") * 30 + b"\n" + (b + b" ") * 30 + b"\n")
+    return out
+
+
+_WITNESS_MATERIAL: list[bytes] = _witness_material()
+_WITNESS_CACHE: dict[tuple[str, str], str | None] = {}
+
+
+def witness_for_parameter(first: str, second: str,
+                          material: Sequence[bytes] | None = None) -> str | None:
+    """Search the generated material for an input where two settings of a parameter disagree.
+
+    Returns the input as text, or ``None`` only after the whole library has been tried. The
+    search is repeated on demand, so a parameter cannot be called unexercised because of a
+    choice made when the module was written: the previous round refused `sort -b` and
+    `sort -i` as "invisible" for exactly that reason, and both have two-line witnesses.
+
+    O(material) primitive applications, all pure functions, no subprocess. Measured cost for
+    the whole library is milliseconds, which is why it runs inside the gate rather than in a
+    batch job.
+    """
+    key = (first, second)
+    if key in _WITNESS_CACHE:
+        return _WITNESS_CACHE[key]
+    pool = material if material is not None else _WITNESS_MATERIAL
+    def as_primitive(name: str):
+        # `identity` is the empty pipeline, not an entry in the table
+        return (lambda d: d) if name == IDENTITY else PRIMITIVES[name]
+
+    left, right = as_primitive(first), as_primitive(second)
+    found: str | None = None
+    for data in pool:
+        if left(data) != right(data):
+            found = data.decode("latin-1")
+            break
+    _WITNESS_CACHE[key] = found
+    return found
+
 
 REJECT = "reject"
 IDENTITY = "identity"
 
 # The candidate universe: every pipeline of at most two primitives, in canonical order, plus
 # "this form refuses the input" and "this form does nothing". It is the same for every
-# surface. 56 readings, computed once.
+# surface. Computed once.
 READINGS: tuple[tuple[str, ...], ...] = tuple(
     [()]
     + [(name,) for name in ORDER]
@@ -769,6 +893,8 @@ def predict(reading: str, data: bytes) -> bytes | str:
 # of the 56 readings stays in play until a run removes it. What the words do decide is
 # whether the surface can be interrogated at all.
 _WORDS: tuple[tuple[str, str], ...] = (
+    (r"\bignore leading blanks\b", "sort_leading_blanks"),
+    (r"\bconsider only printable\b|\bignore non-?printing\b", "sort_printable"),
     (r"\bgeneral[- ]numeric[- ]sort\b|\bgeneral numeric\b|\bsort according to general numeric\b",
      "sort_general"),
     (r"\bnumeric(?:al)?[- ]sort\b|\bnumeric\b|\bsort according to (?:string )?numerical\b",
@@ -794,6 +920,23 @@ _WORDS: tuple[tuple[str, str], ...] = (
 )
 
 
+_REFUSED_WORDS: tuple[tuple[str, str], ...] = (
+    (r"\bversion[- ]sort\b|\bnatural sort\b", "sort -V: intransitive comparator, removed"),
+    (r"\bbreak at (?:spaces?|blanks?)\b", "fold -s: no key reproduces it, removed"),
+    (r"\bignore case\b|\bfold lower case to upper case\b|\bignore[- ]case\b",
+     "sort -f: not a key function, removed"),
+    # `sort -c`'s own words are "check for sorted input; do not sort". The positive vocabulary
+    # read that as `sort_lex`, so the sweep certified a checker as a sorter and held-out
+    # falsified it on `b\nb\n` -- the check exits 3 and prints a disorder message. A surface
+    # whose declaration says it does not transform must not be certified as one; the words
+    # "do not sort" were sitting in the declaration the whole time.
+    # Order matters: `-m`'s declaration mentions checking order too, so the merger pattern has
+    # to precede the checker pattern or the record names the wrong reason.
+    (r"\bmerge already sorted\b|\bmerge the given files\b", "sort -m: a merger, not a transform"),
+    (r"\bdo not sort\b|\bcheck for sorted input\b", "sort -c: a checker, not a transform"),
+)
+
+
 def read_surface(words: str) -> dict[str, Any]:
     """Which readings the surface's own sentence names -- and refusal when it names none.
 
@@ -802,6 +945,16 @@ def read_surface(words: str) -> dict[str, Any]:
     "attach the separator before instead of after" as some sort of ordering.
     """
     low = " ".join((words or "").lower().split())
+    # A NEGATIVE VOCABULARY. Three transforms were removed from the algebra by measurement
+    # (`sort -V`, `fold -s`, `sort -f`) and one more is known not to be a key function. Left to
+    # the positive vocabulary alone, `sort -V`'s own words -- "natural sort of (version) numbers
+    # within text" -- read as `sort_lex` plus `count`, and the sweep certified `sort -V` as
+    # `sort_leading_blanks`: a false certificate manufactured by a missing refusal. A surface
+    # that names an excluded transform must be refused BY NAME, with the reason on the record.
+    for pattern, reason in _REFUSED_WORDS:
+        if re.search(pattern, low):
+            return {"schema": SCHEMA, "status": REFUSED_NO_READING, "words": low,
+                    "named": [], "sources": {}, "refused_by": reason}
     named: list[str] = []
     sources: dict[str, str] = {}
     for pattern, primitive in _WORDS:
@@ -1285,12 +1438,18 @@ def smallest_certificate_tree(shapes: Sequence[str], pool: Sequence[str],
         signature[shape] = [str(_outcome(shape, group[0])) for group in classes]
     members = [set(group) for group in classes]
     nodes = 0
+    # A node budget that runs out does not merely slow this down, it changes the answer: an
+    # exhausted branch returns None, the caller skips that shape, and the search settles for
+    # whatever plan it happened to prove. The result was 7 where the true optimum is 6, and it
+    # was labelled PASS__OPTIMUM_COMPUTED. Record the truncation and report it.
+    truncated = False
 
     @lru_cache(maxsize=None)
     def depth(state: frozenset[int], used: frozenset[str]) -> int | None:
-        nonlocal nodes
+        nonlocal nodes, truncated
         nodes += 1
         if nodes > node_budget:
+            truncated = True
             return None
         if len(state) <= 1:
             return 0
@@ -1318,14 +1477,25 @@ def smallest_certificate_tree(shapes: Sequence[str], pool: Sequence[str],
         return best
 
     optimum = depth(frozenset(range(len(classes))), frozenset())
-    # `optimum` is a proven upper bound for the root move (the tree is always a legal plan).
-    # Whether the true root optimum is lower is answered by `optimal_move`, which explores the
-    # same recurrence without a node cap; the two agree on this design space, and a test pins
-    # that they do, so a budget-exhausted `None` can never pass for a proof.
+    # The tree this recurrence grows is always a legal plan, so `optimum` is a true upper bound
+    # even when the search was truncated. It is NOT the optimum unless nothing was truncated,
+    # and on this design space a truncated run reports 7 where the answer is 6. The exact root
+    # value comes from `optimal_move`, which is cheap because it prunes with a tight ceiling.
+    exact = None
+    if not truncated:
+        exact = optimum
+    else:
+        try:
+            move = optimal_move(list(pool), list(shapes))
+            exact = move.get("worst_case_witnesses")
+        except Exception:
+            exact = None
     answer = {"schema": SCHEMA,
-              "status": ("PASS__OPTIMUM_COMPUTED" if optimum is not None
+              "status": ("PASS__OPTIMUM_COMPUTED" if exact is not None
                          else "UPPER_BOUND_ONLY__NODE_BUDGET_EXHAUSTED"),
-              "minimum_worst_case_witnesses": optimum, "upper_bound": optimum,
+              "minimum_worst_case_witnesses": exact,
+              "upper_bound": optimum, "lower_bound": exact,
+              "truncated": truncated,
               "nodes_explored": nodes, "classes": len(classes), "readings": len(pool)}
     _OPTIMUM_CACHE[cache_key] = answer
     return answer
@@ -1396,60 +1566,109 @@ def optimal_move(alive: Sequence[str], shapes: Sequence[str],
     ordered_shapes = list(shapes)
     classes = goal_quotient(alive, ordered_shapes)
     signature = {s: [str(_outcome(s, group[0])) for group in classes] for s in ordered_shapes}
+    # Explore the strongest splitters first. The search is exact either way -- the order only
+    # decides how much of the tree the ceiling can prune -- but a shape that cuts 96 classes
+    # into 24 buckets establishes a good bound immediately, and one that cuts them into 2
+    # establishes nothing until the end.
+    #
+    # The order has to be carried into the recursion as a TUPLE. `remaining` is a frozenset, so
+    # iterating it yields hash order, and a sort applied only at the root is a comment that
+    # lies about what the code does: the first version of this claimed to reorder the search
+    # and reordered nothing.
+    priority = {s: i for i, s in enumerate(
+        sorted(ordered_shapes, key=lambda s: -len(set(signature[s]))))}
     nodes = 0
 
     @lru_cache(maxsize=None)
-    def depth(state: frozenset[int], remaining: frozenset[str]) -> int | None:
+    def depth(state: frozenset[int], remaining: frozenset[str],
+              ceiling: int) -> int | None:
+        """Exact worst-case depth, with a ceiling that prunes branches that cannot win.
+
+        The ceiling is what makes this affordable at 96 behaviours. Without it the search
+        walked 400,000 nodes and gave up, which meant the loop silently fell back to greedy
+        while the certificate still printed an exact-looking bound. A pruned search that
+        *proves* its number is worth more than an exhaustive one that returns None.
+        """
         nonlocal nodes
         nodes += 1
         if nodes > node_budget:
             return None
         if len(state) <= 1:
             return 0
+        if ceiling <= 0:
+            return None                     # cannot certify within what the parent allows
         best: int | None = None
-        for shape in remaining:
+        for shape in sorted(remaining, key=lambda s: priority[s]):
             buckets: dict[str, list[int]] = {}
             for ci in state:
                 buckets.setdefault(signature[shape][ci], []).append(ci)
             if len(buckets) <= 1:
                 continue
+            # The ceiling applies INDEPENDENTLY to each sibling: max(a, b) <= L iff a <= L
+            # and b <= L. The first version of this subtracted the cost of the sibling before
+            # it, so a branch that cost 4 left its brothers a ceiling of 0, and a search with
+            # a true answer of 6 returned None at ceiling 6. Over-pruning is not a speed
+            # trade-off; it silently changes the answer.
+            limit = (best - 2) if best is not None else (ceiling - 1)
+            if limit < 0:
+                continue
             worst = 0
+            unproved = False
             for bucket in buckets.values():
-                sub = depth(frozenset(bucket), remaining - {shape})
-                if sub is None:
-                    worst = None
+                sub = depth(frozenset(bucket), remaining - {shape}, limit)
+                if sub is None or sub > limit:
+                    unproved = True
                     break
-                worst = max(worst, sub)
-            if worst is None:
+                if sub > worst:
+                    worst = sub
+            if unproved:
                 continue
             candidate = 1 + worst
             if best is None or candidate < best:
                 best = candidate
+                if best == 1:               # cannot do better than one more question
+                    break
         return best
 
     full = frozenset(range(len(classes)))
     left = frozenset(ordered_shapes)
+    # One call at the root proves the minimum AND every candidate's value, because a shape
+    # whose sub-branches cost more than the optimum was pruned rather than explored. Asking
+    # each candidate separately (the earlier structure) quadrupled the work and changed no
+    # answer: 227,148 nodes against 60,000 for the same six.
+    # Search DOWNWARD from a tight ceiling. Starting at 64 prunes nothing -- every branch is
+    # affordable at 63 -- so the first candidate shape expands its whole subtree before the
+    # bound is known. Starting at the smallest plausible value and widening only on failure
+    # makes the ceiling do the work it exists to do.
+    root = None
+    known = 0
+    for ceiling in range(1, 12):
+        nodes = 0
+        depth.cache_clear()
+        root = depth(full, left, ceiling)
+        if root is not None:
+            known = root
+            break
+    known = known or 12
     scored: list[tuple[int, str]] = []
     for shape in ordered_shapes:
         buckets: dict[str, list[int]] = {}
         for ci in full:
             buckets.setdefault(signature[shape][ci], []).append(ci)
         if len(buckets) <= 1:
-            # A shape no survivor class can split is not a witness. It is kept out of the
-            # ranking rather than scored with a sentinel, because a sentinel leaked into the
-            # reported bound and printed 1073741825 as a "worst case" for eleven surfaces.
             continue
+        limit = known - 1
         worst = 0
-        unproved = False
-        for bucket in buckets.values():
-            sub = depth(frozenset(bucket), left - {shape})
-            if sub is None:
-                unproved = True
-                break
-            worst = max(worst, sub)
+        unproved = limit < 0
+        if not unproved:
+            for bucket in buckets.values():
+                sub = depth(frozenset(bucket), left - {shape}, limit)
+                if sub is None or sub > limit:
+                    unproved = True
+                    break
+                if sub > worst:
+                    worst = sub
         if unproved:
-            # the node cap was reached on this branch: the shape is not ranked at all rather
-            # than scored with a sentinel, which twice leaked out as a reported worst case
             continue
         scored.append((1 + worst, shape))
     scored.sort()
@@ -1530,14 +1749,35 @@ def interrogate(surface: Surface, *, runner=run_bounded, max_probes: int = 6,
     # reading and the certificate would be true of the fixtures and false of the world. That
     # is exactly how `fold -b` came to be certified `identity`. Refusing by name is the only
     # honest answer, and it is computed rather than promised.
-    unexercised = [name for name in declared["named"]
-                   if name in PARAMETER_WITNESS and not parameter_exercised(name)]
-    if unexercised:
-        return {"schema": SCHEMA, "status": REFUSED_PARAMETER_UNEXERCISED,
+    # Two failures, both computed, both fatal to a certificate:
+    #   (a) no input can separate the parameter at all -- it does nothing observable here;
+    #   (b) an input *does* separate it, but no shape in the goal's design space is such an
+    #       input. Case (b) is the dangerous one: the space merges the parameter with its
+    #       neighbour and the certificate comes out true of the fixtures and false of the
+    #       world, which is exactly how `fold -b` was certified `identity`.
+    unexercised, unreachable = [], []
+    for name in declared["named"]:
+        pair = PARAMETER_PAIR.get(name)
+        if pair is None:
+            continue
+        if not parameter_exercised(name):
+            unexercised.append(name)
+            continue
+        if not shapes_separate(pair[0], pair[1]):
+            unreachable.append({"parameter": name, "witness": witness_for_parameter(*pair)})
+    if unexercised or unreachable:
+        return {"schema": SCHEMA,
+                "status": (REFUSED_PARAMETER_UNEXERCISED if unexercised
+                           else REFUSED_WITNESS_OUTSIDE_SHAPES),
                 "surface": list(surface.form), "declaration": declared,
-                "unexercised": unexercised,
-                "detail": {"what": "the declaration names a parameter no shape exercises",
-                           "why": "a certificate would be about the fixtures, not the surface"}}
+                "unexercised": unexercised, "witness_outside_shapes": unreachable,
+                "detail": {
+                    "what": "a parameter the declaration names cannot be separated here",
+                    "why": ("no input separates it" if unexercised else
+                            "an input separates it, but no shape in the goal's design space "
+                            "is such an input: certifying would be about the fixtures"),
+                    "fix": ("add the found witness to SHAPES" if unreachable else
+                            "refuse by name")}}
     scan_result = dict(scanned) if scanned is not None else scan(surface, runner=runner)
     if not scan_result.get("askable"):
         return {"schema": SCHEMA, "status": REFUSED_UNRUNNABLE,
@@ -1570,9 +1810,14 @@ def interrogate(surface: Surface, *, runner=run_bounded, max_probes: int = 6,
             # earlier version priced this from the *whole* universe with the *remaining*
             # shapes, which answers a different and harder question than the one the loop
             # faced -- hence a "4" printed against a run that spent 2.
+            # The bound reported is the one proved from the state the run STARTED in. Taking
+            # the minimum over later moves looks better and is wrong: the loop's last state is
+            # nearly solved, so it "proves" 2 next to a run that spent 5 -- the same error as
+            # printing a bound computed from a different state, which this file already fixed
+            # once. The cap-free root optimum is reported separately in `optimum_exact`.
             optimum = ({"minimum_worst_case_witnesses": _first_bound,
                         "nodes_explored": _nodes_spent}
-                       if _moves_spent is not None else
+                       if _first_bound is not None else
                        smallest_certificate_tree(scan_result["askable"], candidates))
             return {"schema": SCHEMA, "status": CERTIFIED, "surface": list(surface.form),
                     "declaration": declared, "scan": scan_result, "witnesses": asked,
@@ -1582,6 +1827,8 @@ def interrogate(surface: Surface, *, runner=run_bounded, max_probes: int = 6,
                                               if _family(name) & set(declared["named"])}),
                     "probes_spent": len([w for w in asked if w.get("status") == "OBSERVED"]),
                     "worst_case_proved": optimum["minimum_worst_case_witnesses"],
+                    "optimum_exact": optimal_move(scan_result["askable"], candidates)
+                                     .get("worst_case_witnesses"),
                     "optimum_nodes": optimum["nodes_explored"],
                     "greedy_worst_case_witnesses":
                         greedy_worst_case(scan_result["askable"], candidates),
