@@ -244,3 +244,74 @@ in the algebra", does verb-derived primitive generation produce a candidate that
 held-out on at least some of them?* If yes, the algebra stops being the ceiling. If no, the
 honest conclusion is that most declared surfaces are not parameterised transforms at all, and
 the refusal was already correct.
+
+
+---
+
+## 9. Round 3 — the refusal class was the next bottleneck, and it was not what I assumed
+
+The gate catches an unexercised parameter *inside* the algebra. It cannot catch a primitive
+**missing from the algebra**. So I read the 85 declarations still refused as "names nothing in
+the algebra" instead of quoting the number.
+
+**What they actually are.** Fourteen examined; the majority name a parameter that is invisible
+at the default width (`sort -b` ignore leading blanks, `sort -i` ignore non-printing — both
+produce identical output on every input I could construct, so their absence costs nothing).
+Four named a transform the algebra genuinely lacked.
+
+**Added, each verified exactly against the host before it entered:**
+
+| primitive | behaviour | exactness |
+|---|---|---|
+| `uniq -i` → `uniq_fold_case` | a case-folded run keeps its **first** member | 0 / 700 |
+| `uniq -d` → `dedupe_repeated` | one line per repeated run | 0 / 700 |
+| `uniq -D` → `dedupe_all_repeated` | every member of a repeated run | 0 / 700 |
+
+**Refused by name, with the measurement recorded: `sort -f`.** This one cost me eight
+candidate keys, each falsified against the host:
+
+1. `bytes.lower()` as the key — wrong on `_` and `[`;
+2. a hand-built rank table over printable ASCII — wrong on `"aA"` vs `"AB"`;
+3. the same with a low-cased tie-break — still wrong on that pair;
+4. five variants between them.
+
+Its *ranking* over printable ASCII is measurable and I measured it exactly
+(` !"#$...@AaBbCc...Zz[\]^_`{|}~`). The ranking turns out not to be the behaviour: two lines
+that fold equal are ordered by something no folded key reproduced. That is the **same
+structural finding as `sort -V`**, so the same rule applies and the record says why:
+
+> A comparator that is not a key function cannot be a member of a hypothesis space whose
+> members are key functions.
+
+**A bug in my own reporting, found by a test I wrote for something else.** `optimal_move`
+scored unsplittable shapes with a `1 << 30` sentinel, and that sentinel leaked out as a
+*reported worst-case bound* — `1073741825` printed next to eleven certificates. Fixed in two
+places; a test now asserts no score in the ranking can be a sentinel. This is the second time
+in two rounds that a number I printed described something other than what its name claimed.
+
+**Measured, final:**
+
+| | v1 | v2 | **v3** |
+|---|---|---|---|
+| certified **and** held-out survived | 10 | 11 | **14** |
+| certified and falsified | **1** | 0 | **0** |
+| shapes / behaviours / primitives | 12 / 36 / 17 | 16 / 63 / 21 | **18 / 86 / 24** |
+| optimum vs greedy | 4 vs 4 | 5 vs 6 | **5 vs 6** |
+| witnesses spent (naive) | 25 (132) | 37 (176) | **60 (252)** |
+| sweep wall clock | 61.8 s | 5.2 s | **11.1 s** |
+| tests | 25 | 37 | **40, in 14.5 s** |
+
+**Honest state.** 85 declarations remain refused; some are genuinely outside a text-filter
+algebra (`jq`'s slurp and raw verbs), some are invisible at default width, and I have not
+classified all 85. Shapes are still hand-chosen — two were added this round because a refused
+declaration *named* the missing witness, which is better than guessing but is not a proof of
+adequacy. `truth.achieved` remains **false**. No GUI, browser, image or frontier benchmark is
+measured or claimed.
+
+**Next bottleneck, sharper than last time.** The law "a parameter is exercised only if two
+settings of it disagree on some shape" is computable *because I supply the two settings*.
+That is the residual weakness: `sort -b` may be invisible not because it does nothing but
+because I constructed no input where leading blanks change the order. The measurable next step
+is to **search for a witness input** for each refused parameter rather than declaring it
+invisible — and where a witness is found, the parameter was a primitive all along and the
+refusal was wrong.
