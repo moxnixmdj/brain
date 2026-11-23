@@ -999,6 +999,13 @@ def route(tree: Mapping[str, Any], request_words: Iterable[str],
         # subject, where insertion order is a property of how the document happened to be written.
         # The shorter path remains the last tie-break, unchanged, and `project list` vs `issue
         # list` is decided earlier by A25's weighting (9 to 7) so it is not affected.
+        # A page whose documented flags the request *cannot* supply is worse than one it can.
+        # `Send a direct message to alice` scores `dm send` and `message send` identically at 18,
+        # and insertion order picked `message send`, which needs `--channel` -- a channel the
+        # request never names -- so the text was bound to `--channel` and the message went
+        # nowhere. `dm send` needs `--user`, and the request names one. This is the document's own
+        # statement about what the command cannot run without, checked against what the request
+        # actually says, so it is evidence rather than a preference for one page over another.
         low = said.lower()
         act_at = min([low.find(w) for w in wanted_acts_words] or [0])
         apart = [abs(low.find(w) - act_at) if w in low else 1 << 20
