@@ -152,3 +152,30 @@ Not done, honestly:
 - No fresh-family admission for the archive rule; the receipt is VERIFIED_NOT_PERSISTED. No rule is admitted.
 - The scan takes ~46 s (budget 150, 27 states, 270 transitions) dominated by the cheap-but-numerous failed action attempts; this is the cost of learning without hand-written stripes, not a defect.
 - The narrowing still offers junk programs (dpkg-architecture, ld.bfd) above tar; the narrowing is limit-8 and manual-word-derived, not a scored relevance model. This is pre-existing and honest.
+
+## 7. The archive goal on unseen content (2026-11-23, measured)
+
+Recorded from the unseen-content probe (`unseen_archive_computer_probe_20261123.py`, receipt
+`/tmp/unseen_archive_probe_result.json`) — the same single-experience discipline the gzip
+probe records, re-run for the archive goal. Content A (`alpha beta gamma ...`) taught; content
+B (`probe probe probe ...`) tested. Zero model calls, zero network, $0, producer-run.
+
+- **TEACH** (cold scan + act + verify + admission on 2 fresh variants): `pass` True, status
+  `PASS__PERFECT_ALGORITHM_RUN`, outcome `LEARNED_AND_VERIFIED`, **admit ADMIT 2/2**, persist
+  True, plan `["run_tar"]`, 55.2 s.
+- **COLD** (fresh target, empty store): `pass` True, status `PASS__PERFECT_ALGORITHM_RUN`,
+  outcome `VERIFIED_NOT_PERSISTED`, 56.2 s.
+- **WARM** (same fresh target, teach memory seeded from the TEACH run): `pass` True, status
+  `PASS__REPLAY_FROM_MEMORY`, outcome **INSTANT_RECALL**, memory_replay
+  `PASS__REPLAY_REACHED_GOAL`, plan `["run_tar"]`, **0.098 s** (56.2 s cold → 0.098 s warm,
+  ~570x).
+- **CONTROL** (identical content A, same memory): `PASS__REPLAY_FROM_MEMORY`, INSTANT_RECALL,
+  0.126 s.
+- All effects verified by execution against the live target env; the archive predicate holds
+  after every replay.
+
+Honest statement: the single-experience learning claim is now evidenced for the archive goal —
+one lesson on content A replays in 0.1 s on content B, verified by bytes, not by names. Not a
+cross-kind generalization claim (both goals run under `computer_file_ops`). No capability is
+registered: the receipts stay VERIFIED / LEARNED_AND_VERIFIED, and the admit stays honest about
+what is persisted (an admitted rule; the raw trace stays hashed evidence).
