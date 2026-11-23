@@ -476,7 +476,17 @@ def _stem(word: str) -> set[str]:
     return out
 
 
-def _goal_token_info(goal: str) -> tuple[list[str], set[str]]:
+def _goal_token_info(goal: str) -> tuple[list[str], set[str], set[str]]:
+    """(signal words, noise (basename stems), extension stems).
+
+    Signal = the goal's own words plus the target's extension stems: the goal
+    hands its format to the extension, and that is a signal at the same level
+    as the goal's own words, not a filename. Noise = the basenames, never a
+    signal. The extension stems are returned separately so callers can keep
+    them exact (exact token match) instead of expanding them into a fuzzy
+    containment fan-out -- a word like `zips` must not pull in gzip/gunzip/
+    lzip, which merely contain it.
+    """
     text = str(goal or "")
     noise: set[str] = set()
     ext_stems: set[str] = set()
@@ -490,11 +500,9 @@ def _goal_token_info(goal: str) -> tuple[list[str], set[str]]:
         # the goal's own words, not a filename.
         for part in parts[1:]:
             ext_stems |= _stem(part)
-    # Everything that is not a stop word, basename or extension is the goal's
-    # own words; the extensions ride along as signal.
     raw_toks = [tok for tok in _WORD_RE.findall(text.lower())
                 if len(tok) > 2 and tok not in _STOP and tok not in noise]
-    return sorted(set(raw_toks) | ext_stems), noise
+    return sorted(set(raw_toks) | ext_stems), noise, ext_stems
 
 
 def _flags_for_goal_preparsed(prog: str, raw_toks: list[str], base_noise: set[str], limit: int = 8) -> list[str]:
@@ -531,7 +539,7 @@ def flags_for_goal(prog: str, goal: str, limit: int = 8) -> list[str]:
     'print the newline counts'. The machine is reading the manual and looking
     for the words it was given -- not reciting a table of what -l does.
     """
-    raw_toks, base_noise = _goal_token_info(goal)
+    raw_toks, base_noise, _ext_stems = _goal_token_info(goal)
     return _flags_for_goal_preparsed(prog, raw_toks, base_noise, limit=limit)
 
 
@@ -907,9 +915,10 @@ def programs_for_goal(goal: str, limit: int = 24) -> list[str]:
             list(pool.map(_warm_help, missing))
         _help_flush(force=True)
 
-    raw_toks, base_noise = _goal_token_info(goal)
+    raw_toks, base_noise, ext_stems = _goal_token_info(goal)
     if not raw_toks:
         return []
+    prose_toks = [tok for tok in raw_toks if tok not in ext_stems]
     inv_key = (len(progs), len(_HELP_CACHE))
     inv_entry = _GLOBAL_MANUAL_INV_CACHE.get(inv_key)
     if inv_entry is None:
@@ -932,11 +941,14 @@ def programs_for_goal(goal: str, limit: int = 24) -> list[str]:
         _GLOBAL_MANUAL_INV_CACHE[inv_key] = inv_entry
 
     tok_to_progs_map, long_vocab_tup = inv_entry
+    # Prose words may expand (a goal word >= 4 letters matches any manual
+    # vocab word it contains). Extension tokens are exact: a format word like
+    # `zips` must never fan out into gzip/gunzip/lzip just for containing it.
     superset_words: set[str] = set()
-    for tok in raw_toks:
+    for tok in prose_toks:
         if tok not in base_noise:
             superset_words |= _stem(tok)
-    if not superset_words:
+    if not superset_words and not ext_stems:
         return []
     superset_long = [w for w in superset_words if len(w) >= 4]
     matched_tokens = set(superset_words)
@@ -946,6 +958,7 @@ def programs_for_goal(goal: str, limit: int = 24) -> list[str]:
             ws = frozenset(t for t in long_vocab_tup if w in t or t in w)
             sub_sets_by_w[w] = ws
             matched_tokens.update(ws)
+    matched_tokens |= ext_stems
     candidate_progs: set[str] = set()
     for t in matched_tokens:
         ps_tup = tok_to_progs_map.get(t)

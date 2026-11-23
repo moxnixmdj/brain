@@ -73,7 +73,7 @@ def test_phase1_external_workspace_bound_execution_and_sub6ms_inverted_manual_in
 
     for q in queries:
         fast_out = cenv.programs_for_goal(q, limit=24)
-        raw_toks, base_noise = cenv._goal_token_info(q)
+        raw_toks, base_noise, _ext = cenv._goal_token_info(q)
         linear_hits = []
         for p in all_progs:
             n = len(cenv._flags_for_goal_preparsed(p, raw_toks, base_noise))
