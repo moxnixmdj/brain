@@ -172,7 +172,8 @@ def compositions(args: Sequence[str], paths: Mapping[str, Sequence[str]],
                  stub_imports: Sequence[str] = (),
                  nested_short: Mapping[str, Sequence[str]] | None = None,
                  kwarg_names: Sequence[str] = (),
-                 func_name: str = "") -> list[dict]:
+                 func_name: str = "",
+                 stub_roots: tuple[str, str] | None = None) -> list[dict]:
     """Every body the grammar admits, ordered by how much it ASSERTS.
 
     Ordering is the whole design, and getting it wrong was measured twice. A type can state
@@ -385,6 +386,17 @@ def compositions(args: Sequence[str], paths: Mapping[str, Sequence[str]],
     # Item 189's answer is the same family: construct, then CHAIN (`System.from_newtonian(wall)`,
     # `.add_joints(slider, pin)`, `.form_eoms()`), each member name stated by the prose.
     low_prose = set(re.findall(r"[a-z]{3,}", (problem or "").lower()))
+    # THE STUB'S OWN ALIAS IS THE NAME TO USE. `import numpy as np` makes `np.prod` legal and
+    # `numpy.prod` a NameError; the same rule already applied to networkx's `nx.`. The root of
+    # each stated symbol is rewritten to whatever the stub bound, so both spellings are emitted
+    # and the oracle decides -- `np.prod(arr)` passes where `numpy.prod(arr)` fails.
+    if stated_symbols and stub_roots:
+        _root, _alias = stub_roots
+        aliased = [(s if s.startswith(_alias + ".") else _alias + s[len(_root):])
+                   for s in stated_symbols if s.startswith(_root + ".")]
+        if aliased:
+            stated_symbols = list(dict.fromkeys(list(stated_symbols) + aliased))
+
     if args and stated_symbols:
         # (i) chain a stated member onto a stated call
         # THE MEMBER IS DERIVED FROM THE PROSE VERB, not hardcoded. "every occurrence ... is
@@ -461,6 +473,35 @@ def compositions(args: Sequence[str], paths: Mapping[str, Sequence[str]],
                             f"{ctor}\n    system = {ctor}.{seed_mem}({args[0]})\n"
                             f"    system.{m1}({', '.join(args[1:])})\n"
                             f"    return system.{m2}()")
+
+    # 0f. A KEYWORD WHOSE VALUE IS A STRING THE PROSE QUOTES.
+    # numpy's convolution takes `mode="full"`, and the prose says "with the mode set to full".
+    # The keyword name is stated ("the mode"), the value is stated ("full"), and the fact that
+    # it is a string is stated by the value being a word rather than a number. numpy alone has
+    # nine such items in this dataset, and none of them is reachable from a bare application.
+    if args and stated_symbols:
+        _kw = [w for w in re.findall(r"\b(?:the|with the|set to)\s+([a-z_]{3,})\s+(?:set )?to\b",
+                                     (problem or "").lower())]
+        # the value: a word the prose names as the setting, in quotes
+        _vals = re.findall(r"\bto\s+([a-z_]{3,})\b", (problem or "").lower())
+        for sym_ in list(stated_symbols)[:6]:
+            base_sym = sym_.rsplit(".", 1)[-1]
+            for kwname in list(dict.fromkeys(_kw))[:4]:
+                for val in list(dict.fromkeys(_vals))[:4]:
+                    add("KWLIT", f"{base_sym}({', '.join(args)}, {kwname}=\"{val}\")")
+                    add("KWLIT", f"{sym_}({', '.join(args)}, {kwname}=\"{val}\")")
+
+    # 0g. STATED-SYMBOL APPLICATIONS, AT THE FRONT.
+    # A symbol the PROSE names is a statement, not a ranking guess, and a cap must never
+    # truncate it. These lived at the end of the space and the 600 budget was routinely
+    # exhausted long before reaching them -- measured on numpy item 72, where `np.prod(arr)` was
+    # the answer, sat 20 lines from the end, and never entered the space.
+    if args:
+        joined_all = ", ".join(args)
+        for sym in list(stated_symbols)[:20]:
+            add("APPLY", f"{sym}({joined_all})")
+            for name in ("as_explicit", "to_list", "doit"):
+                add("METHOD", f"{sym}({joined_all}).{name}()")
 
     # 1. attribute paths whose own name the prose uses, then by NAME LENGTH.
     # Length is a measured proxy for API primitiveness: on sympy.Equality the useful members
@@ -603,11 +644,6 @@ def compositions(args: Sequence[str], paths: Mapping[str, Sequence[str]],
     for a in args:
         for name in ("as_explicit", "factor", "expand", "doit", "simplify"):
             add("METHOD", f"{a}.{name}()")
-    for sym in stated_symbols[:20]:
-        joined = ", ".join(args)
-        add("APPLY", f"{sym}({joined})")
-        for name in ("as_explicit", "to_list", "doit"):
-            add("METHOD", f"{sym}({joined}).{name}()")
     for lit in literals:
         for sym in stated_symbols[:10]:
             if len(args) >= 2:
@@ -637,6 +673,13 @@ def solve_item(bench: str | pathlib.Path, item: Mapping[str, Any], *,
     # (`custom_pinJoint` -> 'pin'), and it is boilerplate-stripped, not guessed.
     _m = re.search(r"def\s+([A-Za-z_]\w*)\s*\(", item["starting_code"])
     func_name = _m.group(1) if _m else ""
+    # `import numpy as np` states BOTH names: the root the corpus keys use and the alias the
+    # stub bound. Either may be the correct spelling in a body, so both are emitted.
+    stub_roots: tuple[str, str] | None = None
+    _mi = re.search(r"^\s*import\s+([A-Za-z_][\w.]*)\s+as\s+([A-Za-z_]\w*)",
+                    item["starting_code"], re.M)
+    if _mi and _mi.group(1) != _mi.group(2):
+        stub_roots = (_mi.group(1).split(".")[0], _mi.group(2))
     spec = S.annotation_spec(item["starting_code"])
     paths = attribute_paths(python, imports, spec) if imports else {}
     lits = literals_in(item.get("problem", ""), item["starting_code"])
@@ -677,13 +720,23 @@ def solve_item(bench: str | pathlib.Path, item: Mapping[str, Any], *,
         tail = part.rsplit(".", 1)[-1]
         if tail.isidentifier() and tail[0].isupper():
             stub_names.append(tail)
+    # ONLY NAMES A BODY CAN CALL. `stub_names` includes the module ALIAS (`np`, from
+    # `import numpy as np`) and the ANNOTATION type (`ndarray`), and each was expanded to two
+    # corpus names -- `numpy.matlib.np`, `numpy._core.ndarray` -- which filled the stated budget
+    # with things no body can ever call. A two-character alias is never an answer, and a type
+    # that is not constructible is not a body either.
+    _ALIAS_BASES = {a for a in stub_names if len(a) <= 2}
     declared = []
     for n in stub_names:
-        if n in item["starting_code"]:
+        if len(n) <= 2 or n in _ALIAS_BASES:
+            continue
+        if n in item["starting_code"] and n[0].isupper():
             declared.append(n)
         hit = [d for d in corpus if d.rsplit(".", 1)[-1] == n] if corpus else []
-        declared.extend(hit[:2])
-    ordered_stated = list(dict.fromkeys(declared + list(stated_symbols)))
+        # the shallowest occurrence only: the entry point, not every namespace duplicate
+        hit.sort(key=lambda d: (d.count("."), len(d)))
+        declared.extend(hit[:1])
+    ordered_stated = list(dict.fromkeys(list(stated_symbols) + declared))
 
     # DERIVE THE STATED CONTINUATION. A stub may end mid-statement, and that incomplete line
     # STATES WHICH KIND OF CONTINUATION IS MISSING:
@@ -863,7 +916,8 @@ def solve_item(bench: str | pathlib.Path, item: Mapping[str, Any], *,
                          stub_imports=stub_names,
                          nested_short=nested_short,
                          kwarg_names=kwarg_names,
-                         func_name=func_name)
+                         func_name=func_name,
+                         stub_roots=stub_roots)
     # CHEAP BODIES FIRST, AS THEIR OWN CHUNK. A property read, a leaf, a single attribute and
     # a stated-symbol application each cost one trial and cannot hang. Arithmetic over
     # symbolic objects can hang (`index // index.canonical_variables.index` does), and when it

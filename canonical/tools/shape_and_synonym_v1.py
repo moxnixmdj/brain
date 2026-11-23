@@ -198,28 +198,74 @@ def squash_matches(problem: str, corpus: Mapping[str, str]) -> list[str]:
             if left in low and right in low:
                 out.append(dotted)
                 break
-    out.sort(key=lambda d: (d.count("."), d))
+    # ORDER: exact-name statements before abbreviations, then by depth. A top-level name
+    # (`numpy.prod`) is the artifact's own entry point; its submodule duplicates
+    # (`numpy._core.prod`) are implementation detail. Without the exact/abbreviation split,
+    # `numpy.array` (an exact prose word, appearing in four namespaces) filled the whole
+    # stated budget ahead of `numpy.prod`, which is the answer to item 72.
+    exact = [d for d in out if d.rsplit(".", 1)[-1].lower() in low]
+    abbrev = [d for d in out if d not in exact]
+    exact.sort(key=lambda d: (d.count("."), len(d), d))
+    abbrev.sort(key=lambda d: (d.count("."), len(d), d))
+    out = exact + abbrev
+    # ONE NAME PER BASE. `array` appears in six namespaces and `ndarray` in three; keeping all of
+    # them spent the entire stated budget on one word. The shallowest occurrence is the artifact's
+    # own entry point, so it is the one kept. A two-letter member (`np`, `ma`) is an ALIAS, never
+    # an answer, so it is dropped outright.
+    seen_base: set[str] = set()
+    deduped: list[str] = []
+    for d in out:
+        base = d.rsplit(".", 1)[-1].lower()
+        if len(base) <= 2 or base in seen_base:
+            continue
+        seen_base.add(base)
+        deduped.append(d)
+    out = deduped
+    return out
     return out
 
 
 def stated_symbols(problem: str, corpus: Mapping[str, str]) -> list[str]:
-    """Symbols whose name is stated outright in the prose, offered ahead of any ranking.
+    """Symbols whose name the prose states, offered ahead of any ranking.
 
-    Item 193's problem says "returns a flat, read-only copy"; the symbol is `flat`. The
-    ranking never reached it because 40 names tie at full coverage. A word the prose uses
-    which is ALSO the exact name of a member is not a tie, it is a statement.
+    Three statements, in this order, and each is a fact about words rather than a synonym table:
+
+      1. EXACT -- the prose uses a word that IS a member's name (`flat`, `array`).
+      2. ABBREVIATION -- a member's name is a PREFIX of a prose noun and keeps most of it
+         (`prod`/product, `cum`/cumulative). numpy's product function is `prod`; without this
+         the exact word `array` filled the budget and `prod` was never named.
+      3. ORDER -- exact before abbreviation, then shallowest first, because `numpy.prod` is the
+         artifact's entry point while `numpy._core.prod` is implementation detail.
+      4. ONE NAME PER BASE -- `array` lives in six namespaces; keeping all six spent the whole
+         stated budget on one word. The shallowest is kept.
     """
     low = words_of(problem)
-    out = []
+    exact: list[str] = []
+    abbrev: list[str] = []
     for dotted in corpus:
         base = dotted.rsplit(".", 1)[-1]
-        # The word must be the EXACT member name. Splitting the problem into tokens and
-        # asking "is this token a member name" pulled in Expr, Lambda and traversal for
-        # item 193 -- the prose's nouns, not its calls. A stated symbol is a member whose
-        # own name the prose uses as a word.
-        if base.lower() in low and len(base) >= 3 and not base[0].isupper():
-            out.append(dotted)
-    out.sort(key=lambda d: (d.count("."), d))
+        bl = base.lower()
+        if len(base) < 3 or base[0].isupper():
+            continue
+        if bl in low:
+            exact.append(dotted)
+        # `prod` keeps 4 of `product`'s 7 characters -- 57%. The bound is HALF the prose word and
+        # at most 5 characters short of it, which admits prod/product (4/7), cum/cumulative,
+        # var/variance, std/standard, dot/dotproduct, and still rejects 2-3 letter coincidences
+        # because the member must also be at least 3 characters.
+        elif any(w.startswith(bl) and len(bl) >= 0.5 * len(w) and len(w) - len(bl) <= 5
+                 for w in low):
+            abbrev.append(dotted)
+    exact.sort(key=lambda d: (d.count("."), len(d), d))
+    abbrev.sort(key=lambda d: (d.count("."), len(d), d))
+    seen_base: set[str] = set()
+    out: list[str] = []
+    for d in exact + abbrev:
+        base = d.rsplit(".", 1)[-1].lower()
+        if base in seen_base:
+            continue
+        seen_base.add(base)
+        out.append(d)
     return out
 
 
