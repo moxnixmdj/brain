@@ -437,3 +437,59 @@ capability directions now warm-replay evidenced; one more multi-source direction
 cold-VERIFIED (multi-source archive). Still not done: §6 (GUI/browser/OSWorld/
 SWE-bench/Terminal-Bench) remains open and unclaimed; the carried-model walk still fails
 honestly (0 edges, priors stale).
+
+## 14. §3 verdict — "let the agent experience the most advanced coding action once and have it learn it": what is real, what is not, measured (2026-11-23)
+
+**The mission's question:** why can't we just make the model experience the most advanced
+coding actions once, and have it learn them permanently, natively — and what stops us now?
+
+**What is real, with evidence (this machine, single-file/multi-file file-transform goals):**
+- One experience on content A replays on content B in 0.003–0.1 s with content-verified
+  output (archive, .zip, .bz2, .gz/.xz compression, .sha256 hash, decompress, multi-file
+  bundle). Warm replay is genuine INSTANT_RECALL — no scan, rule served — not a re-learn.
+- Fresh-instance admission stays honest: a rule is persisted only after fresh instances
+  reach the goal; stale priors are discarded at use, never trusted blindly.
+- The plan that survives admission is a generalization (family + sketch + evidence),
+  not a trace. The raw trace is never served as knowledge.
+
+**What is not real / not claimed:**
+- The carried-model walk does NOT generalize across content: 0 verified edges on
+  fresh targets, N stale priors discarded, cold re-derivation (~13–60 s). Honest answer,
+  not a bug we hide.
+- GUI/browser/OSWorld surfaces: never reached. The computer env here is ~8 goal-narrowed
+  file-transform programs over a temp directory — a real computer, but not a desktop.
+  The second env KIND (per the mission's "code_repair/search" families) is not run.
+- Multi-step/multi-file repo work (edit files across a repository, run the build, run
+  the test): never attempted. The one honestly-hard unseen case run today (multi-file
+  archive) required two genuine predicate/argv fixes — false-PASS was found and fixed.
+  That is the shape of the whole generalization gap: today's machinery closes only goals
+  whose reach/verify structure is one file transform at a time.
+- Cross-kind generalization: no evidence. Same-family, same-kind only.
+
+**Why we can't just experience-and-learn today — the first-principles answer:**
+The Perfect Algorithm learns the *plan* that worked, admitted on fresh instances.
+That is sound for ONE-STEP, predicate-verifiable goals: the action space is narrowed
+from the goal's words, the predicate verifies the end state, and fresh instances
+probe whether the plan is a generalization. The three things a real coding task needs
+are missing, and the scans structurally cannot supply them without touching the scan:
+1. **Action space.** The environment offers ~8 file-transform programs. A real coding
+   task needs text edits, git, a build, a test — a multi-action space over a real repo.
+2. **Verification.** The predicate is file-content equality / hash / decompress.
+   A real coding task needs tests, type checks, build artifacts — a different
+   verification structure entirely, not a better file format.
+3. **Environment.** A temp directory with ~8 actions, not a repository. Everything
+   beyond the temp directory is precisely the "arbitrary new environment" the mission
+   names.
+
+**What stops us now — the honest list:** the scan enumerates actions but is narrowed by
+`programs_for_goal` (a bounded, order-only filter); the predicates only cover the
+formats reached in this branch (archive/zip/gz/bz2/xz/hash/decompress); multi-file
+argmax/code work is unreached and untested; and the mission's hard tests (OSWorld,
+SWE-bench Pro, Terminal-Bench) are not run — §6 remains open, and will remain open until
+they are actually run under the own-weights + zero-model-call + zero-knowledge-house
+constraints, which this sandbox cannot honestly satisfy.
+
+**What the right next bottleneck is:** extend the predicate + argv to a real multi-file
+repo task — a minimal code-repair goal ("fix the bug in this file so the test passes"),
+with the predicate reading the receipt/oracle, is the single best test of the claim.
+That is the first unseen env class after this turn's work.
