@@ -1,0 +1,112 @@
+{
+  "schema": "PROJECT_BRAIN_LOCAL_GUIDE_TOOL_MAN_TIER_RECEIPT_V1",
+  "date": "2026-11-23",
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "purpose": "Direct + fixture measurements for the tool --help / man-page tier of the local instant-knowledge source.",
+  "measurements": {
+    "jq_help_tier": {
+      "status": "PASS__LOCAL_GUIDE_FOUND",
+      "pass": true,
+      "score": 1.0,
+      "sources_answered": [
+        "tool_help"
+      ],
+      "documents": [
+        {
+          "source": "tool_help",
+          "path": "jq --help",
+          "score": 1.0
+        }
+      ]
+    },
+    "true_help_tier": {
+      "status": "PASS__LOCAL_GUIDE_FOUND",
+      "pass": true,
+      "score": 1.0,
+      "sources_answered": [
+        "tool_help"
+      ],
+      "documents": [
+        {
+          "source": "tool_help",
+          "path": "true --help",
+          "score": 1.0
+        }
+      ]
+    },
+    "missing_tool": {
+      "status": "OPEN__LOCAL_GUIDE_NOT_FOUND",
+      "pass": false,
+      "score": 0.0,
+      "sources_answered": [],
+      "documents": []
+    },
+    "grid_world_no_tools": {
+      "status": "OPEN__LOCAL_GUIDE_NOT_FOUND",
+      "pass": false,
+      "score": 0.0,
+      "sources_answered": [],
+      "documents": []
+    },
+    "dial_lock_local_md": {
+      "status": "PASS__LOCAL_GUIDE_FOUND",
+      "pass": true,
+      "score": 3.0,
+      "sources_answered": [
+        "local_md"
+      ],
+      "documents": [
+        {
+          "source": "local_md",
+          "path": "PERFECT_ALGORITHM_MODEL_VERDICT_20261122_V1.md",
+          "score": 3.0
+        },
+        {
+          "source": "local_md",
+          "path": "INSTANT_LEARNING_SCOPE_20261101_V1.md",
+          "score": 2.0
+        },
+        {
+          "source": "local_md",
+          "path": "ONE_DEMONSTRATION_AND_THE_SIX_THINGS_THAT_ARE_TRUE_20261112_V1.md",
+          "score": 2.0
+        },
+        {
+          "source": "local_md",
+          "path": "README.md",
+          "score": 2.0
+        },
+        {
+          "source": "local_md",
+          "path": "RIGHT_ABOUT_THE_MECHANISM_WRONG_ABOUT_SOLVED_20261113_V1.md",
+          "score": 2.0
+        }
+      ]
+    },
+    "man_page_fixture_no_help": {
+      "status": "PASS__LOCAL_GUIDE_FOUND",
+      "pass": true,
+      "score": 1.0,
+      "sources_answered": [
+        "man_page"
+      ],
+      "documents": [
+        {
+          "source": "man_page",
+          "path": "ghost-tool man page (fixture man root, no help output)",
+          "score": 1.0,
+          "note": "fixture: a tool with no --help output falls through to its man page; path normalized (random tempdir)"
+        }
+      ]
+    }
+  },
+  "honest_notes": [
+    "jq --help text is a real, version-matched guide read at decision time (subprocess, 0 network).",
+    "The man tier is fixture-tested only on this box: /usr/share/man contains 0 man pages, so no real man page was exercised.",
+    "A stub tool with no --help output honestly falls through to the man-page tier (fixture).",
+    "A tool whose --help output does not match the query does not answer; it is not rubber-stamped.",
+    "A tool that prints no help and has no man page honestly returns OPEN with 0 documents.",
+    "Instant knowledge orients the plan; the environment's own verification still decides."
+  ],
+  "status": "PASS__TOOL_MAN_TIER_MEASURED"
+}
