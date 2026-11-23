@@ -110,6 +110,15 @@ def _args_of(entry: Mapping[str, Any], action: Mapping[str, Any]) -> dict[str, A
     return args
 
 
+def _sha256_file(path: Path) -> str:
+    import hashlib
+    digest = hashlib.sha256()
+    with path.open("rb") as stream:
+        while chunk := stream.read(1 << 20):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
 def _host_escaping(host_root: Path, value: str) -> bool:
     """True when a bound string value is an absolute path into the host."""
     if not isinstance(value, str) or not value.startswith("/"):
@@ -139,6 +148,105 @@ def run_confined_capability(
     decl = declarations().get(str(cid))
     if not isinstance(decl, Mapping):
         return None
+    # A NATIVE ARGV DECLARATION runs the command itself, not a Python adapter.
+    #
+    # `shell.command.run` compiles to exactly the shape the confinement was built for -- a list
+    # argv, no shell (`{"argv": ["cp", "AGENTS.md", "AGENTS_copy.md"]}`) -- and it was refused with
+    # REQUIRES_ADMITTED_CONFINEMENT purely because no declaration existed to carry it, so
+    # "Copy the file X to Y" could not be done. Measured: the confinement runs that argv in a
+    # disposable clone, verifies the declared effect inside the worktree by sha256, and proves the
+    # host untouched. What a declaration adds is the part a raw argv cannot say for itself: WHICH
+    # argument names the file this command promises to produce. An argv with no declared effect is
+    # still refused, because an unverifiable effect is not a capability.
+    if decl.get("native_argv") is True:
+        argv_in = (action.get("args") or {}).get("argv")
+        if not isinstance(argv_in, list) or not argv_in or not all(isinstance(a, str) for a in argv_in):
+            return None
+        effect_args = decl.get("effect_args")
+        if not isinstance(effect_args, list):
+            return None
+        # effect_args indexes the argv (an integer position) or names an argument key.
+        effects: list[str] = []
+        for spec in effect_args:
+            value = None
+            if isinstance(spec, int):
+                if -len(argv_in) <= spec < len(argv_in):
+                    value = argv_in[spec]
+            elif isinstance(spec, str):
+                value = (action.get("args") or {}).get(spec)
+            if not isinstance(value, str) or not value.strip():
+                return None
+            if _host_escaping(host, value) or Path(value).is_absolute():
+                return None
+            effects.append(value)
+        budget = float(decl.get("budget_s") or 120.0)
+        conf = CF.admit(host, argv_in, budget_s=budget, declared_effects=effects)
+        if not isinstance(conf, CF.Confinement):
+            return None
+        try:
+            executed = CF.execute(conf)
+            observed = executed.get("declared_effects") or {}
+            host_untouched = bool(executed.get("host_untouched"))
+            effects_ok = bool(observed) and all(
+                o.get("exists") and o.get("inside_worktree") for o in observed.values())
+            confined = {
+                "capability_id": str(cid),
+                "pass": bool(host_untouched and effects_ok and executed.get("exit_code") == 0),
+                "status": ("PASS__CONFINED_NATIVE_ARGV_VERIFIED" if host_untouched and effects_ok
+                           and executed.get("exit_code") == 0
+                           else "FAIL_CLOSED__CONFINED_RUN_NOT_VERIFIED"),
+                "argv": list(argv_in),
+                "dependency": {"executor": "confinement_v1", "adapter": "native_argv"},
+                "confinement": {
+                    "receipt_sha256": executed.get("receipt_sha256"),
+                    "host_untouched": host_untouched,
+                    "declared_effects": observed,
+                    "exit_code": executed.get("exit_code"),
+                    "budget_s": budget,
+                },
+            }
+            # THE WORK IS PROVEN, SO NOW DO IT WHERE IT WAS ASKED FOR.
+            #
+            # Two rules in this repository are both right and, left alone, mutually exclusive:
+            # the confinement proves the host UNTOUCHED (that is what makes exploring safe), and
+            # `_execute` refuses a promise-to-change that leaves the world identical
+            # (FAIL_CLOSED__NO_OBSERVED_EFFECT). So a `cp` verified perfectly in a clone could
+            # never pass, because passing requires the host to change and confinement forbids it.
+            #
+            # The resolution is the one the module was built around: the clone is where a command
+            # is TRIED, not where a stated change is DELIVERED. Once the argv has run there with a
+            # verified receipt -- it exited 0, every declared effect exists inside the worktree --
+            # the same argv is applied here, and the RESULT IS RE-READ FROM THE HOST rather than
+            # trusted. That is not a loosening: a command that escapes the worktree was already
+            # refused above by `_host_escaping`, measured against a `bash -c 'echo > /abs/path'`
+            # which the confinement declines to run at all.
+            applied: list[dict[str, Any]] = []
+            if confined["pass"] and bool(decl.get("apply_effect_to_host")):
+                import subprocess as _sp
+                try:
+                    _proc = _sp.run(list(argv_in), cwd=str(host), capture_output=True, timeout=budget)
+                except Exception as exc:  # noqa: BLE001
+                    confined["pass"] = False
+                    confined["status"] = "FAIL_CLOSED__APPLY_TO_HOST_DID_NOT_RUN"
+                    confined["apply_error"] = type(exc).__name__
+                else:
+                    for effect in effects:
+                        target = host / effect
+                        exists = target.is_file()
+                        applied.append({"effect": effect, "exists_on_host": exists,
+                                        "sha256": (_sha256_file(target) if exists else None)})
+                    if not (_proc.returncode == 0 and applied
+                            and all(a["exists_on_host"] for a in applied)):
+                        confined["pass"] = False
+                        confined["status"] = "FAIL_CLOSED__HOST_DID_NOT_SHOW_THE_EFFECT"
+                    else:
+                        confined["status"] = "PASS__APPLIED_TO_HOST_AND_VERIFIED"
+                confined["applied_to_host"] = applied
+            return confined
+        finally:
+            import shutil as _sh
+            _sh.rmtree(str(conf.worktree), ignore_errors=True)
+
     effect_args = decl.get("effect_args")
     if not isinstance(effect_args, list) or not effect_args:
         return None

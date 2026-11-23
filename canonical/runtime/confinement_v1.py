@@ -69,6 +69,7 @@ Authority NONE. Zero model dependency. Standard library only.
 from __future__ import annotations
 
 import hashlib
+import re
 import json
 import shutil
 import subprocess
@@ -83,6 +84,7 @@ SCHEMA = "PROJECT_BRAIN_ADMITTED_CONFINEMENT_V1"
 REFUSE_SHELL_STRING = "SHELL_STRING_REFUSED"
 REFUSE_EMPTY_ARGV = "EMPTY_ARGV_REFUSED"
 REFUSE_PROGRAM_UNRESOLVED = "PROGRAM_UNRESOLVED_REFUSED"
+REFUSE_ARGV_ESCAPES_CONFINEMENT = "ARGV_NAMES_AN_ABSOLUTE_PATH"
 REFUSE_EFFECT_ESCAPES = "EFFECT_ESCAPES_CONFINEMENT"
 REFUSE_BUDGET_INVALID = "BUDGET_INVALID_REFUSED"
 
@@ -108,6 +110,9 @@ class Confinement:
     host_head: str
     host_status_before: str
     receipt_sha256: str = ""
+    # The one declared effect the program writes to STDOUT rather than to a file it opens itself
+    # (`gzip -c input` versus `tar -cf`). Empty means the program writes its own output files.
+    stdout_to: str = ""
     notes: list[str] = field(default_factory=list)
 
     def receipt_basis(self) -> dict[str, Any]:
@@ -122,15 +127,41 @@ class Confinement:
 
 
 def _host_status(root: Path) -> str:
+    """A fingerprint of the host tree, measured before and after the run.
+
+    `git status --porcelain` is the cheapest and most precise form when the directory IS a
+    repository, and it is what the receipt has always carried. A directory that is not a repository
+    has no fewer claims to make about being untouched, so it gets the same guarantee by a different
+    measurement: a digest of every path, size and mtime under it. Both are taken twice, so
+    "host_untouched" is a comparison rather than an assertion either way.
+    """
     out = subprocess.run(["git", "status", "--porcelain"], cwd=str(root),
                          capture_output=True, text=True, timeout=60)
-    return out.stdout
+    if out.returncode == 0:
+        return out.stdout
+    return _tree_digest(root)
+
+
+def _tree_digest(root: Path) -> str:
+    digest = hashlib.sha256()
+    root = Path(root)
+    for path in sorted(root.rglob("*")):
+        if ".git" in path.parts:
+            continue
+        try:
+            st = path.lstat()
+        except OSError:
+            continue
+        digest.update(str(path.relative_to(root)).encode("utf-8"))
+        digest.update(b"\0" + str(st.st_size).encode("ascii"))
+        digest.update(b"\0" + str(st.st_mtime_ns).encode("ascii") + b"\n")
+    return "TREE:" + digest.hexdigest()
 
 
 def _host_head(root: Path) -> str:
     out = subprocess.run(["git", "rev-parse", "HEAD"], cwd=str(root),
                          capture_output=True, text=True, timeout=60)
-    return out.stdout.strip()
+    return out.stdout.strip() if out.returncode == 0 else ""
 
 
 def _inside(worktree: Path, declared: str) -> bool:
@@ -146,6 +177,25 @@ def _inside(worktree: Path, declared: str) -> bool:
     return resolved == worktree_resolved or worktree_resolved in resolved.parents
 
 
+def _names_absolute_path(value: str) -> bool:
+    """True when this argument can address a file outside the worktree.
+
+    Two forms, both measured to escape a clone: a bare absolute path, and an absolute path embedded
+    in a command string (`bash -c "echo x > /tmp/p"`). A relative path is fine -- it resolves inside
+    the copy. `/dev/null` is allowed because it is a device, not a place a program can leave
+    evidence the host did not ask for, and every well-formed command uses it.
+    """
+    if value == "/dev/null":
+        return False
+    if value.startswith("/"):
+        return True
+    for match in re.finditer(r"(?<![\w.-])/(?:[A-Za-z0-9_.-]+/)*[A-Za-z0-9_.-]+", value):
+        if match.group(0) != "/dev/null":
+            return True
+    return False
+
+
+
 def admit(
     host_root: str | Path,
     argv: Sequence[str],
@@ -153,6 +203,7 @@ def admit(
     budget_s: float = DEFAULT_BUDGET_S,
     declared_effects: Sequence[str] = (),
     allow_network: bool = False,
+    stdout_to: str = "",
 ) -> Confinement | dict[str, Any]:
     """Admit one run: clone the host, check the declared shape, return the machine.
 
@@ -174,15 +225,48 @@ def admit(
         return {"admitted": False, "refused": REFUSE_PROGRAM_UNRESOLVED}
 
     root = Path(host_root).resolve()
-    effects = [str(e) for e in (declared_effects or [])]
+    # AN ARGV THAT NAMES AN ABSOLUTE PATH IS NOT CONFINED BY A CLONE.
+    #
+    # The clone bounds relative work: a program that opens "out.gz" writes it inside the copy.
+    # It does NOT bound a program that opens "/tmp/x/proof.txt" -- that path is absolute, so it
+    # resolves to the same file from inside the copy as from outside it. Measured: `bash -c
+    # "echo PWNED > /tmp/hole/proof.txt"` was admitted, ran, and CREATED THE HOST FILE, with
+    # `host_untouched: False` reported only afterwards -- a receipt for damage already done.
+    #
+    # So an argument carrying an absolute path is refused at admission, unless it points into this
+    # very worktree-relative tree (which it cannot, since the worktree does not exist yet). This is
+    # the same rule `_host_escaping` already applies to declared effects, applied to the argv where
+    # it actually belongs: a blocklist of dangerous words would be the wrong fix (ms-agent tried
+    # six regex layers and was bypassed), and a list of arguments that can reach outside the copy
+    # is a property, not a spelling.
+    for arg in argv:
+        if _names_absolute_path(str(arg)):
+            return {"admitted": False, "refused": REFUSE_ARGV_ESCAPES_CONFINEMENT,
+                    "detail": str(arg)[:200]}
+    effects = [str(e) for e in (declared_effects or ())]
     worktree = Path(tempfile.mkdtemp(prefix="brain_confinement_"))
     clone = subprocess.run(
         ["git", "clone", "--quiet", "--no-local", str(root), str(worktree)],
         capture_output=True, text=True, timeout=600)
     if clone.returncode != 0:
+        # A DIRECTORY THAT IS NOT A GIT REPOSITORY IS STILL A COMPUTER.
+        #
+        # Requiring `git clone` to run `gzip` made the confinement usable only inside a repository
+        # checkout, so a recalled skill replayed in the user's own working directory was refused
+        # with CLONE_FAILED -- "fatal: repository '/tmp/...' does not exist" -- for a reason that
+        # has nothing to do with the command. Copy the tree instead; the three guarantees the
+        # clone provided are kept exactly: the host is never handed over (the capability runs in
+        # the copy), declared effects must land inside the copy, and the host's fingerprint is
+        # taken before and compared after, so "untouched" is still measured rather than assumed.
         shutil.rmtree(worktree, ignore_errors=True)
-        return {"admitted": False, "refused": "CLONE_FAILED",
-                "detail": clone.stderr[-300:]}
+        worktree = Path(tempfile.mkdtemp(prefix="brain_confinement_"))
+        try:
+            shutil.copytree(root, worktree, dirs_exist_ok=True,
+                            ignore=shutil.ignore_patterns(".git"), symlinks=True)
+        except Exception as exc:  # noqa: BLE001
+            shutil.rmtree(worktree, ignore_errors=True)
+            return {"admitted": False, "refused": "CLONE_FAILED",
+                    "detail": (type(exc).__name__ + ":" + str(exc))[:300]}
     for effect in effects:
         if not _inside(worktree, effect):
             shutil.rmtree(worktree, ignore_errors=True)
@@ -196,6 +280,7 @@ def admit(
         budget_s=float(budget_s),
         declared_effects=effects,
         allow_network=bool(allow_network),
+        stdout_to=str(stdout_to or ""),
         host_head=host_head,
         host_status_before=_host_status(root),
     )
@@ -215,10 +300,28 @@ def execute(conf: Confinement) -> dict[str, Any]:
     }
     outcome = OUTCOME_RAN
     try:
+        # BYTES, NOT TEXT.
+        #
+        # `text=True` decoded the program's output as UTF-8, which silently destroys every binary
+        # result -- a compressed file piped to stdout came back mangled, so a `stdout_to` recipe
+        # could never produce a valid artifact through the confinement. Output is captured as
+        # bytes and only decoded for the human-readable tail.
         proc = subprocess.run(
             conf.argv, cwd=str(conf.worktree), env=env, shell=False,
-            capture_output=True, text=True, timeout=conf.budget_s)
-        stdout, stderr, code = proc.stdout, proc.stderr, proc.returncode
+            capture_output=True, timeout=conf.budget_s)
+        stdout_b = proc.stdout or b""
+        stderr = (proc.stderr or b"").decode("utf-8", "replace")
+        stdout = stdout_b.decode("utf-8", "replace")
+        code = proc.returncode
+        # A recipe whose product is stdout has to be given its file; otherwise the effect it
+        # declared can never exist and the run is honest but useless.
+        for effect in conf.declared_effects:
+            if getattr(conf, "stdout_to", None) and effect == conf.stdout_to and stdout_b:
+                target = Path(effect)
+                if not target.is_absolute():
+                    target = conf.worktree / target
+                target.parent.mkdir(parents=True, exist_ok=True)
+                target.write_bytes(stdout_b)
         if code != 0:
             outcome = OUTCOME_NONZERO_EXIT
     except subprocess.TimeoutExpired as exc:

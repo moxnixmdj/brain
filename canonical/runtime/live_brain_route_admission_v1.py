@@ -2082,6 +2082,49 @@ def _execute(task_id: str, goal: str, compiled: Mapping[str, Any], admissible: M
                     command_candidates.append((cid, _declared_operation(args)))
     for cid, operation in command_candidates:
         if boundary.refuses_execution(cid, admissible.get(cid), operation):
+            # THE SAME RELEASE CONDITION AS THE OTHER SITE.
+            #
+            # This preflight refused outright, with no confined route, while the identical
+            # decision at the single-capability site (below, ~line 1490) has routed through
+            # `confined_dispatch_v1` since 2026-11-12. So a plan the confinement can carry --
+            # `{"argv": ["cp", "AGENTS.md", "AGENTS_copy.md"]}` is a list argv with no shell --
+            # was refused here before anything tried, and "Copy the file X to Y", the most basic
+            # thing a computer does, could not be done. Ask the same substrate first; a `None`
+            # answer still refuses exactly as before.
+            # For `shell.command.run` the operation IS its list argv, and `_declared_operation`
+            # only accepts an explicit `operation` STRING -- so a plan that states its work as
+            # `{"argv": [...]}` reads as "no operation declared" and the decision fails closed.
+            # Hand the confinement the args the plan actually carries rather than the parsed-out
+            # operation string, which for this candidate is legitimately absent.
+            from canonical.runtime import confined_dispatch_v1 as _confined
+            _plan_args = dict(compiled.get("inputs") or {})
+            if not _plan_args and isinstance(operation, str) and operation.strip():
+                _plan_args = {"argv": operation.split()}
+            _routed = _confined.run_confined_capability(
+                cid, admissible.get(cid) or {}, {"args": _plan_args},
+                host_root=ROOT)
+            if _routed is None:
+                return _fail(task_id, boundary.STATUS, boundary.FAILURE_CLASS, started,
+                             executed=False, compiled_capability_id=cid,
+                             semantic_acceptance_complete=False)
+            # The work is DONE and receipted: the argv ran in a disposable clone, its declared
+            # effect was verified inside the worktree by sha256, and the host was proven untouched.
+            # Re-executing it through the adapter path below would do the work a second time, and
+            # that path has no capability id to look a declaration up by -- it refused with an
+            # empty cid, so the verified result was thrown away and the goal refused after
+            # succeeding. Report the receipt instead. A run that did not pass still refuses.
+            if _routed.get("pass") is True:
+                # `_dag_result` reports the raw-task contract it was given, so build the same one
+                # the normal path builds rather than passing None.
+                _rt = list(compiled.get("target_effects") or [])
+                for _part in compiled.get("compiled_parts") or []:
+                    if isinstance(_part, Mapping):
+                        _rt.extend(e for e in (_part.get("target_effects") or [])
+                                   if isinstance(e, str) and e not in _rt)
+                _contract = compile_contract(goal, source_id="user", routing_target_effects=_rt)
+                return _dag_result(
+                    task_id, goal, compiled, _contract, DAG_KERNEL_EXECUTOR,
+                    [{"capability_id": cid, **_routed}], True, started)
             return _fail(task_id, boundary.STATUS, boundary.FAILURE_CLASS, started,
                          executed=False, compiled_capability_id=cid,
                          semantic_acceptance_complete=False)

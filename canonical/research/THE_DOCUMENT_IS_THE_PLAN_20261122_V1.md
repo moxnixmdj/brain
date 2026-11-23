@@ -2991,3 +2991,99 @@ evidence, not memory, but the capability compiler itself.
 
 **Verified:** 188 tests across the six relevant suites (was 181), 13/13 effect tasks, 6/6 unseen,
 7 new tests on this mechanism including the version-dependency trap.
+
+### A70 — "Copy the file X to Y" could not be done, and the confinement had a hole
+
+Two results, one of them a security defect I introduced the fix *for* and then found.
+
+**Result 1: the simplest computer operation was impossible.** `file.copy.v1` was in the
+NOT_COMPILED list, and the reason had nothing to do with copying. Tracing the refusal:
+
+| layer | what it did |
+|---|---|
+| compiler | lowers "Copy the file AGENTS.md to AGENTS_copy.md" to `shell.command.run`, `argv: ["cp","AGENTS.md","AGENTS_copy.md"]` |
+| DAG preflight (`_execute`, line ~2083) | calls `refuses_execution`; `shell.command.run` is an unconfined id; **refuses with no confined route** |
+| the single-capability site (line ~1490) | the SAME decision *does* route through `confined_dispatch_v1` |
+
+So one of the two decision sites had the release condition and the other did not. The plan was
+already in the exact shape the confinement specifies -- a list argv, no shell -- and the confinement's
+own experiment proved it could carry it:
+
+    admit(host, ['cp','AGENTS.md','AGENTS_copy.md'], declared_effects=['AGENTS_copy.md'])
+    execute -> host_untouched: True, effect exists inside the worktree, sha256 recorded
+
+Seven defects then surfaced in sequence, each hidden behind the one in front:
+
+1. `shell.command.run` had no `CONFINED_EFFECT_DECLARATIONS` entry, so no carrier could look it up.
+2. The declaration file's entries live under `capabilities`; writing at the top level silently did
+   nothing (the loader ignores unknown keys) and `reset_cache()` did not help.
+3. `execute()` reports the exit status as **`exit_code`**, not `returncode` -- so a verified run read
+   as unverified.
+4. `_declared_operation` accepts only an explicit `operation` STRING, so `{"argv": [...]}` reads as
+   "no operation declared" and the decision fails closed.
+5. After the preflight succeeded, execution still ran through `run_adapter_locally` with an EMPTY
+   capability id, refused, and **discarded the verified result**. The work had been done, receipted,
+   and then thrown away.
+6. `NO_OBSERVED_EFFECT`: `observe_world` reads the HOST, while the confinement deliberately leaves
+   the host untouched. Two correct rules, mutually exclusive, until the effect is delivered and
+   re-read.
+7. `_repo_paths` -- the door's only source of stated paths -- required a `/` in its regex, so
+   `AGENTS.md`, `out.txt`, `input.txt` matched **nothing**. `observe_world` therefore walked no
+   directories and could never see any file the request was about to create. Every flat-filename
+   request was unobservable.
+
+After all seven: `Copy the file AGENTS.md to AGENTS_copy.md.` -> **pass True**, and the file really is
+on disk at 4315 bytes.
+
+**Result 2: the confinement had a hole, and it was found by the guard tests.** Widening the CLI
+preflight made `test_compiled_cli_confinement_guard_v1` fail -- and one of those failures was not a
+stale expectation but a live exploit:
+
+    admit('/tmp/hole', ['bash','-c','echo PWNED > /tmp/hole/proof.txt'])
+    execute -> exit 0, host_untouched: False, AND /tmp/hole/proof.txt EXISTS ON THE HOST
+
+**A clone bounds relative work, not absolute paths.** `/tmp/x/proof.txt` resolves to the same file
+from inside the copy as from outside it. `host_untouched: False` was reported honestly *afterwards* --
+a receipt for damage already done is not a confinement. `_host_escaping` checked declared effect
+*values*, never the argv.
+
+The fix is a property, not a spelling: refuse any argument that can address a file outside the
+worktree -- a bare absolute path, or an absolute path embedded in a command string -- while allowing
+`/dev/null`, which every well-formed command uses. The wrong fix, and the one the frontier already
+tried and lost to, is a blocklist of dangerous words: ms-agent shipped six regex layers and was
+bypassed into a reverse shell, and its maintainers' remedy was to delete the shell tool, not to write
+a seventh regex.
+
+**Three more defects found in my own work, all by refusing to swallow exceptions:**
+
+- `tempfile` was never imported in `curriculum_v1`, so the recall block I wrote in A68 had been dead
+  on every call, silently caught by `except Exception: pass`. The only reason it surfaced is that I
+  finally recorded the exception into the returned detail instead of discarding it.
+- `_confined_steps` deleted the worktree in a `finally` BEFORE copying the product out of it, so
+  every recalled CLI skill reported a missing effect while its run had succeeded.
+- `execute()` used `text=True`, which decoded program output as UTF-8 and silently corrupted every
+  binary result, so a `stdout_to` recipe could never produce a valid artifact through the confinement.
+
+**A test that was lying about itself.** `test_recall_retains_uncertainty_when_an_earlier_skill_had_effects`
+asserted `executed is None` on the line before asserting that the earlier skill's file WAS written.
+Both cannot be true. `executed` now reports the refused skill (`False`), `side_effects_may_exist`
+carries the uncertainty (`True`), and the assertion says what the code does.
+
+**Measured after all of it:**
+
+| | status | from_memory | time |
+|---|---|---|---|
+| first study of `compress the input into out.gz` | `PASS__APPLIED_TO_REAL_FILE`, promoted | -- | 0.2 s |
+| second study of the same gap | `PASS__TAUGHT_SKILL_RECALLED` | **True** | 0.0 s |
+
+`Copy the file AGENTS.md to AGENTS_copy.md.` -> pass, file on disk.
+`test_compiled_cli_confinement_guard_v1`: **8/8** (was 5 failing at the base commit).
+
+**Verified:** **202 tests** across the eight suites that matter here, 13/13 effect tasks (stable
+under `PYTHONHASHSEED` 7), 6/6 unseen, 8 new tests pinning the escape refusal, 7 new on self-check.
+
+**Honest limits.** The confinement is a copy plus an argv property, not a kernel sandbox: a program
+that reads `/etc/passwd` by absolute path is now refused at admission, but a program that derives a
+path some other way (an environment variable, a symlink inside the tree pointing out) is not covered,
+and the receipt only measures that the host is unchanged. Closing that needs namespaces or a
+container, which this host does not have.

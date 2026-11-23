@@ -272,6 +272,23 @@ def _repo_paths_uncached(goal, root):
         p=(rr/raw).resolve()
         if p==rr or rr in p.parents:
             candidates.append((raw,p))
+    # A BARE FILENAME IS A PATH TOO.
+    #
+    # The pattern above requires at least one "/", so `AGENTS.md`, `out.txt`, `input.txt` -- the
+    # way people actually name files in an instruction -- matched nothing at all.  Measured: "Copy
+    # the file AGENTS.md to AGENTS_copy.md" yielded NO stated paths, so the world-observer walked
+    # no directories and could not see the copy appear, and every request about a file at the top
+    # level of the tree was reported FAIL_CLOSED__NO_OBSERVED_EFFECT however correctly it ran.
+    #
+    # These are matched separately, and they are still only accepted when they resolve INSIDE the
+    # root, with the same rule as above: a token outside the tree is not bound at all.
+    for m in re.finditer(r"(?<![A-Za-z0-9_./-])([A-Za-z0-9_.-]+\.[A-Za-z0-9]{1,12})", path_text):
+        raw = m.group(1)
+        if any(raw == c for c, _ in candidates):
+            continue
+        p = (rr / raw).resolve()
+        if p != rr and rr in p.parents:
+            candidates.append((raw, p))
     return candidates
 
 

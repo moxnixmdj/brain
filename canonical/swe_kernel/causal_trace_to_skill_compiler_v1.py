@@ -1092,6 +1092,7 @@ def execute_compiled_steps(
     steps: Sequence[Mapping[str, Any]],
     *,
     cwd: str | pathlib.Path | None = None,
+    confined: bool = False,
 ) -> dict[str, Any]:
     """Execute concrete instantiated steps deterministically with zero model calls.
 
@@ -1114,6 +1115,47 @@ def execute_compiled_steps(
         if layer == "confined_python_exec" and sandbox is None:
             # A taught program without a sandbox is refused here, before any earlier step has
             # written anything -- the same rule, for the same reason, as a command-line stage.
+            return {"ok": False, "status": boundary.STATUS,
+                    "failure_class": boundary.FAILURE_CLASS,
+                    "reason": boundary.FAILURE_CLASS, "failed_step": index,
+                    "step_receipts": []}
+        if layer == "cli_pipeline":
+            # A PIPELINE HAS NO CONFINED CARRIER, so it is refused, always.
+            #
+            # `cli_exec` runs one list argv, which is the shape the admitted confinement specifies
+            # and can therefore be carried. A `cli_pipeline` runs several stages with stdout
+            # piped between them inside this process, and no admitted route carries that yet --
+            # so refusing it is the honest answer, not an oversight. Refusing it here also keeps
+            # the earlier-write guarantee below.
+            return {"ok": False, "status": boundary.STATUS,
+                    "failure_class": boundary.FAILURE_CLASS,
+                    "reason": boundary.FAILURE_CLASS, "failed_step": index,
+                    "step_receipts": []}
+        if layer in {"cli_exec"} and not confined:
+            # A CLI stage runs only when the CALLER states that an admitted carrier is in place
+            # for it. Qualification says so (it runs inside the ownership gate, whose heldout is
+            # the carrier's own check), and the confined dispatch path says so because it has
+            # already run the argv on a disposable clone with a verified receipt. Recall does NOT
+            # say so, and keeps the fail-closed refusal it has always had -- measured: relaxing
+            # this without the opt-in made recall execute an unconfined `cli_exec` skill, which
+            # `test_recall_propagates_boundary_refusal_without_executing_or_trying_more_skills`
+            # exists to prevent.
+            return {"ok": False, "status": boundary.STATUS,
+                    "failure_class": boundary.FAILURE_CLASS,
+                    "reason": boundary.FAILURE_CLASS, "failed_step": index,
+                    "step_receipts": []}
+        if layer == "cli_exec" and index > 0:
+            # ORDER, NOT PROHIBITION.
+            #
+            # A CLI stage in the MIDDLE of a trace is refused before anything runs, because
+            # rejecting it after an earlier step has already written is too late -- that is what
+            # `test_preflight_refuses_cli_before_any_earlier_file_step` protects, and it is right.
+            # (Measured: dropping the preflight entirely to let a confined CLI run broke that
+            # guard immediately, so this is narrowed to the case that actually needs it.)
+            #
+            # What the preflight must NOT do is refuse a trace whose ONLY stage is the command.
+            # There is no earlier write to protect there, and refusing it made every qualified
+            # CLI skill unverifiable while the confinement able to carry it already existed.
             return {"ok": False, "status": boundary.STATUS,
                     "failure_class": boundary.FAILURE_CLASS,
                     "reason": boundary.FAILURE_CLASS, "failed_step": index,
@@ -1265,6 +1307,16 @@ def execute_compiled_steps(
             step_receipts.append({
                 "step": idx, "layer": layer, "ok": True,
                 "stdout": proc.stdout.decode("utf-8", "replace")[:400],
+                "elapsed_us": (time.perf_counter_ns() - t0) // 1000,
+            })
+
+        elif layer == "python_noop":
+            # A step that already ran, confined, on a clone. It is replaced by its receipt so it
+            # cannot execute a second time here; the receipt travels with the result.
+            step_receipts.append({
+                "step": idx, "layer": layer, "ok": True, "confined": True,
+                "argv": list(step.get("argv") or []),
+                "receipt_sha256": step.get("confined_receipt"),
                 "elapsed_us": (time.perf_counter_ns() - t0) // 1000,
             })
 
@@ -2037,7 +2089,7 @@ def compile_and_qualify_skill(
         # function, so a caller could not tell "this skill does not transfer" from "this function
         # is broken".
         try:
-            exec_res = execute_compiled_steps(inst_steps, cwd=work_dir)
+            exec_res = execute_compiled_steps(inst_steps, cwd=work_dir, confined=True)
         except Exception as exc:  # noqa: BLE001 - any execution failure is a failed qualification
             return {
                 "schema": SCHEMA,
@@ -2348,6 +2400,28 @@ def recall_and_execute_workflow(
         pre_ok, _ = check_step_preconditions(inst_steps, cwd=cwd)
         if not pre_ok:
             continue
+        # A RECALLED SKILL RUNS UNDER THE SAME CARRIER AS ANY OTHER.
+        #
+        # `execute_compiled_steps` refuses a `cli_exec` stage unless the caller says a carrier is
+        # in place, and recall used to say nothing -- so a skill that had been compiled, qualified
+        # on a held-out world and owned could never be replayed, and every repeat of a learned gap
+        # re-derived it (measured: recall returned the boundary status for a skill the store
+        # plainly held). The carrier is the admitted confinement: each CLI step is run on a
+        # disposable clone of `cwd` with its effect verified there. `_confined_steps` returns the
+        # steps unchanged when the confinement is unavailable, and then the old refusal stands.
+        _carried = _confined_steps(inst_steps, cwd)
+        if _carried is None:
+            # The carrier declined. That is a REFUSAL, not "no skill matched", and the caller must
+            # be able to tell the two apart -- returning silently here made recall answer `None`,
+            # which reads as "nothing was taught for this" when in fact something was taught and
+            # could not be run. Report the boundary status the same way an unconfined CLI stage
+            # does.
+            return {"schema": SCHEMA, "pass": False, "status": boundary.STATUS,
+                    "failure_class": boundary.FAILURE_CLASS,
+                    "executed": None if not previous_attempt else False,
+                    "side_effects_may_exist": previous_attempt,
+                    "skill_id": skill.get("skill_id"), "step_receipts": []}
+        inst_steps = _carried
         if content_a_generalized_write_would_destroy(skill["abstract_steps"], inst_steps, cwd=cwd) is not None:
             continue
         inst_post = _instantiate_obj(skill["abstract_postcondition"], bindings)
@@ -2612,3 +2686,62 @@ def prune_non_causal_steps_counterfactually(
         "k3_external_llm_calls": 0,
     }
 
+
+def _confined_steps(steps: "Sequence[Mapping[str, Any]]", cwd: str | pathlib.Path | None
+                    ) -> "list[Mapping[str, Any]] | None":
+    """Run a recalled trace's CLI stages on an admitted clone, or None if that is not possible.
+
+    Two honest answers and no third: either every CLI step was executed on a disposable copy with
+    its declared effect verified there and delivered back, in which case the step is replaced by
+    the receipt of that run and cannot execute again -- or the carrier is unavailable and the
+    caller keeps its refusal. There is no path here that runs a CLI stage unconfined.
+    """
+    import shutil as _sh
+
+    cli = [i for i, s in enumerate(steps)
+           if isinstance(s, Mapping) and s.get("layer") == "cli_exec"]
+    if not cli:
+        return list(steps)
+    try:
+        from canonical.runtime import confinement_v1 as confinement
+    except Exception:  # noqa: BLE001 - no substrate means no carrier
+        return None
+    base = pathlib.Path(str(cwd or ".")).resolve()
+    out = list(steps)
+    for index in cli:
+        step = dict(steps[index])
+        argv = [str(a) for a in (step.get("argv") or [])]
+        if not argv:
+            return None
+        effects = [str(step["keep_stdout_to"])] if step.get("keep_stdout_to") else []
+        conf = confinement.admit(str(base), argv, declared_effects=effects,
+                                 stdout_to=(effects[0] if effects else ""))
+        if not isinstance(conf, confinement.Confinement):
+            return None
+        try:
+            executed = confinement.execute(conf)
+            if executed.get("exit_code") != 0:
+                return None
+            for effect in effects:
+                if not (executed.get("declared_effects") or {}).get(effect, {}).get("exists"):
+                    return None
+            # THE CLONE PROVED IT; THE CALLER'S DIRECTORY IS WHERE IT BELONGS.
+            #
+            # The step ran on a disposable copy, so its output exists there and not in `base` --
+            # and a postcondition checked against `base` would fail for a reason that says nothing
+            # about the skill. Deliver the effect, then RE-READ it from `base` rather than trusting
+            # the copy. A command escaping the worktree was already refused at admission.
+            for effect in effects:
+                source = conf.worktree / effect
+                target = base / effect
+                if source.is_file() and not target.exists():
+                    target.parent.mkdir(parents=True, exist_ok=True)
+                    _sh.copy2(source, target)
+                if not target.is_file():
+                    return None
+            # The step is replaced by a receipt: it already ran, confined, on the copy.
+            out[index] = {"layer": "python_noop", "argv": argv, "effects": effects,
+                          "confined_receipt": executed.get("receipt_sha256")}
+        finally:
+            _sh.rmtree(str(conf.worktree), ignore_errors=True)
+    return out

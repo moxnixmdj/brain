@@ -32,6 +32,9 @@ from __future__ import annotations
 import json
 import os
 import pathlib
+import tempfile
+from typing import Any
+from collections.abc import Mapping
 import time
 from pathlib import Path
 from typing import Any, Callable, Mapping, Sequence
@@ -137,6 +140,8 @@ def _try_solve(gap: str) -> dict[str, Any]:
     if out.get("status") == boundary.STATUS or out.get("failure_class") == boundary.FAILURE_CLASS:
         return {"closed": False, "status": boundary.STATUS,
                 "detail": "Computer execution requires admitted confinement."}
+    recalled: Any = None
+    recall_error: str = ""
     try:
         from canonical.swe_kernel.causal_trace_to_skill_compiler_v1 import (
             recall_and_execute_workflow,
@@ -161,10 +166,26 @@ def _try_solve(gap: str) -> dict[str, Any]:
             return {"closed": True, "status": "PASS__COMPILED_SKILL_RECALL",
                     "from_memory": True, "skill_id": recalled.get("skill_id"),
                     "detail": "executed qualified workflow skill from memory"}
-    except Exception:
-        pass
+    except Exception as exc:  # noqa: BLE001 - recall is an optimisation, never a failure
+        # NOT SILENT. Swallowing this hid a real defect through several rounds of this work: the
+        # block never ran, the status was reported as the door's, and nothing said why. A channel
+        # that fails must leave a mark the caller can read.
+        recall_error = type(exc).__name__ + ":" + str(exc)[:200]
+    # A REFUSAL THAT HAPPENED MUST BE THE ONE REPORTED.
+    #
+    # The door's own status is what this returns, and that is right when the door is the last word.
+    # It is NOT right when recall ran and was refused by the boundary: reporting `OTHER` (or
+    # whatever the door happened to say) hides a real refusal behind a vaguer one, and the caller
+    # then cannot tell "nothing was taught for this" from "it was taught and execution was
+    # refused". Measured at the base commit: this exact case returned `OTHER` while the recalled
+    # skill had been refused with the boundary status, which is the lie
+    # `test_door_and_curriculum_do_not_hide_recalled_workflow_refusal` exists to catch.
+    recovered = recalled if isinstance(recalled, Mapping) else None
+    if recovered is not None and recovered.get("status") == boundary.STATUS:
+        return {"closed": False, "status": boundary.STATUS,
+                "detail": "The recalled workflow requires admitted confinement."}
     return {"closed": False, "status": out.get("status"),
-            "detail": "the goal still fails"}
+            "detail": "the goal still fails" + ((" (recall: " + recall_error + ")") if recall_error else "")}
 
 
 # filler that carries no search meaning. A gap is phrased as an instruction

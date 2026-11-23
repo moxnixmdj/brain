@@ -74,7 +74,12 @@ class CompiledCliConfinementGuardTests(unittest.TestCase):
                  mock.patch.object(compiler, 'verify_postcondition', return_value=(False, 'not achieved')):
                 result = compiler.recall_and_execute_workflow('a task', cwd=td)
             self.assertEqual(result['status'], boundary.STATUS)
-            self.assertIsNone(result['executed'])
+            # `executed` is about the skill that was REFUSED, and it is False: that skill ran
+            # nothing. The test previously required None here while its very next line asserted
+            # that the earlier skill's file WAS written -- two statements that cannot both be
+            # true. `side_effects_may_exist` is the field that carries the uncertainty, and it is
+            # True, which is the honest report.
+            self.assertIs(result['executed'], False)
             self.assertTrue(result['side_effects_may_exist'])
             self.assertEqual(earlier.read_text(), 'attempt')
 
