@@ -5453,3 +5453,59 @@ found missing in the frontier.
 **it is not mine**: it fails identically in a pristine clone at `c6d258fc`, twelve commits before this
 branch's base, and independently of the runtime state files. Recorded rather than hidden or "fixed" by
 loosening it.
+
+## §A99 — the join, and the line it does not cross
+
+§A98 learned an interface but never used one: the probe produced a table and a human assembled the command.
+The join closes that, and the interesting part is where it refuses.
+
+### What the join does
+
+The learned interface states **which verbs exist** and **how many arguments each wants**. The goal states
+**which verb it means** and **supplies the values**. A command follows:
+
+    learned   ticketer: open(2, mutating), show(1), delete(rejected)     from the program's own answers
+    goal      open a ticket "T-1" describing "printer is jammed"
+    join      ticketer open T-1 "printer is jammed"                     JOINED_FROM_THE_MEASURED_INTERFACE
+    act       exit 0, "opened T-1"
+    read      ticketer show T-1  ->  "printer is jammed"                the READ was learned too
+
+Nothing was consulted and no model was called at any of the five steps.
+
+### Where it refuses, and why that is the design
+
+    goal      create a ticket titled "T-9" with body "wifi down"
+    join      THE_PROGRAM_STATES_NO_SUCH_VERB
+
+`create` is not one of `ticketer`'s verbs. Making `create` mean `open` requires knowing those words are
+**synonyms** — knowledge about English, not about the program. A synonym table would be a lookup I invented,
+would work on the three goals I happened to think of, and would fail silently on the fourth. So the join
+refuses and reports what the program actually has.
+
+**A goal has to name a verb the program has. Nothing in this project can bridge a vocabulary gap, and the
+join says so rather than bridging it with a guess.** That is the same distinction §A93 drew between a name
+that collides and a name that is synonymous: one is a fact about the program, the other is a fact about
+language.
+
+### Three defects found by using my own module
+
+1. **The recorded program was the copy's path.** The probe runs a copy and deletes it, so `act_hint`
+   pointed at `/tmp/brain_probe_.../world/bin/ticketer`, which no longer existed. An interface a caller
+   cannot act on is not an interface. The reported path is now the caller's own.
+2. **`mutating` watched one guessed file.** `ticketer` takes no environment variable and writes a dotfile
+   beside itself, so watching a single expected path reported `mutating: []` for a program that had
+   obviously mutated. The fingerprint is now every file in the world.
+3. **A regex group renumbering from added alternation** (`match.group(1)` on a group that no longer
+   existed), caught immediately because the test ran rather than the code being read.
+
+### Honest status
+
+| | |
+|---|---|
+| undocumented program, goal names a verb it has | **solved**, 2 acts, no model, effect read back |
+| undocumented program, goal names none of its verbs | **refused** with the verb list; not bridgeable here |
+| GUI / browser | **untouched** — no display in this environment, so no honest claim is possible |
+
+The middle row is the honest bottleneck and it is not a bug. It is the boundary between a system that
+reads its environment and a system that understands language, and the mission's "zero knowledge house"
+forbids closing it with a synonym dictionary.

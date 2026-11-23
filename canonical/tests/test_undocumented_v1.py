@@ -175,3 +175,89 @@ def test_an_unreadable_program_is_reported_not_guessed() -> None:
         assert learned["why"] == "VERBS_LEARNED_NONE_CHANGED_THE_WORLD", learned
     finally:
         shutil.rmtree(world, ignore_errors=True)
+
+
+# ----------------------------------------------------------------------------------------------------
+# The join: a goal in ordinary words drives a program nobody documented.
+# ----------------------------------------------------------------------------------------------------
+
+def _ticketer_world() -> tuple[str, str]:
+    world = tempfile.mkdtemp(prefix="tix_")
+    shutil.copy(_BIN / "ticketer", pathlib.Path(world) / "ticketer")
+    return world, str(pathlib.Path(world) / "ticketer")
+
+
+def test_the_join_runs_end_to_end_with_no_documentation() -> None:
+    """Learn, act, read back -- all three from the program's own answers.
+
+    This is the whole point of the module assembled: the interface is measured, the command comes from the
+    goal's own words, and the effect is confirmed by a read verb that was also learned. At no step was any
+    documentation consulted, and at no step was a model called.
+    """
+    from canonical.runtime import mechanism_act_v1 as M
+    from canonical.runtime import solve_v1 as S
+
+    world, program = _ticketer_world()
+    try:
+        learned = U.learn_interface(program, world, candidates=["open", "show", "delete"])
+        join = U.act_for_goal('open a ticket "T-1" describing "printer jammed"', learned)
+        assert join["why"] == "JOINED_FROM_THE_MEASURED_INTERFACE", join
+        assert join["act"][1:] == ["open", "T-1", "printer jammed"], join["act"]
+
+        result = S.act(world, M._as_program(join["act"], world))
+        assert result.get("exit") == 0, result
+
+        # the READ was learned too -- no documentation says which verb reads
+        read = U.act_for_goal('show ticket "T-1"', learned)
+        assert read["act"][1:] == ["show", "T-1"], read["act"]
+        back = S.act(world, M._as_program(read["act"], world))
+        assert "printer jammed" in (back.get("out") or ""), back
+    finally:
+        shutil.rmtree(world, ignore_errors=True)
+
+
+def test_the_join_refuses_a_goal_that_names_no_verb_of_the_program() -> None:
+    """THE LINE THE JOIN DOES NOT CROSS, and the reason it is not a synonym table.
+
+    `create a ticket ...` names nothing `ticketer` has. Making `create` mean `open` requires knowing that
+    those words are synonyms -- knowledge about English, not about the program. A module with no such
+    knowledge must refuse, because the alternative is a synonym list I invent, which would work on the
+    three goals I thought of and fail silently on the fourth.
+    """
+    world, program = _ticketer_world()
+    try:
+        learned = U.learn_interface(program, world, candidates=["open", "show"])
+        join = U.act_for_goal('create a ticket titled "T-9" with body "wifi down"', learned)
+        assert join["act"] is None, join
+        assert join["why"] == "THE_PROGRAM_STATES_NO_SUCH_VERB", join
+        assert "open" in join["the_program_has"]
+        assert "synonym" in join["detail"]
+    finally:
+        shutil.rmtree(world, ignore_errors=True)
+
+
+def test_a_goal_with_too_few_values_is_refused_not_padded() -> None:
+    """A positional argument cannot be filled from nothing, so a short goal is refused with the count."""
+    world, program = _ticketer_world()
+    try:
+        learned = U.learn_interface(program, world, candidates=["open"])
+        join = U.act_for_goal('open a ticket "T-1"', learned)
+        assert join["act"] is None, join
+        assert join["why"] == "THE_GOAL_STATES_TOO_FEW_VALUES", join
+        assert join["wanted"] == 2 and join["stated"] == ["T-1"]
+    finally:
+        shutil.rmtree(world, ignore_errors=True)
+
+
+def test_the_learned_interface_points_at_a_file_that_still_exists() -> None:
+    """The probe runs a COPY, and the copy is deleted. Reporting the copy's path made the learned interface
+    unusable: `act_hint` named `/tmp/brain_probe_.../world/bin/ticketer`, which was gone by the time anyone
+    tried to run it. The interface a caller gets back must be one they can act on."""
+    world, program = _ticketer_world()
+    try:
+        learned = U.learn_interface(program, world, candidates=["open"])
+        assert pathlib.Path(learned["program"]).is_file(), learned["program"]
+        assert "brain_probe_" not in learned["program"]
+        assert pathlib.Path(learned["act_hint"].split()[0]).is_file()
+    finally:
+        shutil.rmtree(world, ignore_errors=True)

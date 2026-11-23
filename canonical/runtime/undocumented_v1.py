@@ -204,6 +204,11 @@ def probe_world(program: str, source: str | pathlib.Path, *,
     # binary and every write landed in the world I had promised not to touch -- `.tix.json` appeared in
     # the caller's directory while the copy stayed clean. A copy that is never executed is not a sandbox;
     # it is a decoration that makes the code READ safe while it is not.
+    #: the program as the CALLER named it -- the copy exists only for the duration of the probe, so
+    #: recording the copy's path would hand back an interface pointing at a deleted file. Measured
+    #: 2026-11-23: act_hint was `/tmp/brain_probe_.../world/bin/ticketer`, which no longer existed by the
+    #: time the interface was used.
+    reported_program = str(pathlib.Path(program).resolve())
     program_path = pathlib.Path(program).resolve()
     try:
         inside = program_path.relative_to(source_path)
@@ -259,7 +264,7 @@ def probe_world(program: str, source: str | pathlib.Path, *,
         before = state()
         results.append(learned)
     known = [r for r in results if r.get("known") is True]
-    return {"schema": SCHEMA, "program": program, "probed": results,
+    return {"schema": SCHEMA, "program": reported_program, "probed": results,
             "no_such_verb_signature": {"exit": signature.get("exit"),
                                        "said": ((signature.get("err") or signature.get("out")) or "")
                                                .strip()[:80]},
@@ -284,7 +289,7 @@ def learn_interface(program: str, source: str | pathlib.Path, *,
     mutating = [v for v in result["mutating"] if result["arity"].get(v) is not None]
     if mutating:
         result["enough_to_act"] = True
-        result["act_hint"] = "%s %s<arg>" % (program, mutating[0])
+        result["act_hint"] = "%s %s<arg>" % (result["program"], mutating[0])
         result["not_learnt"] = "what the verb MEANS, or whether it is the verb the goal wants"
     elif result["verbs_learned"]:
         result["enough_to_act"] = False
@@ -293,6 +298,55 @@ def learn_interface(program: str, source: str | pathlib.Path, *,
         result["enough_to_act"] = False
         result["why"] = "NO_DISCRIMINATION" if result["unreadable"] else "NO_VERB_ACCEPTED"
     return result
+
+
+def act_for_goal(goal: str, learned: Mapping[str, Any], *,
+                 root: str | pathlib.Path | None = None) -> dict[str, Any]:
+    """Build a command for a goal, using ONLY an interface that was measured from the program.
+
+    THE JOIN, AND THE LINE IT DOES NOT CROSS. The learned interface says which verbs exist and how many
+    arguments each wants. The goal says what it wants and supplies the values. A command follows when the
+    goal NAMES a verb the program has: the values between quotes are the arguments, in the order stated.
+
+    When the goal names no such verb, this refuses -- `THE_PROGRAM_STATES_NO_SUCH_VERB` -- and does not try
+    to pick the "closest" one. Measured 2026-11-23: `open a ticket "T-1" describing "printer jammed"` names
+    `open` and joins cleanly; `create a ticket titled "T-9" with body "wifi down"` names nothing the
+    program has, and NO amount of syntax makes `create` mean `open`. Synonymy is knowledge about English,
+    not about the program, and this module has none -- so it says so instead of guessing. That is the
+    difference between a join and a lookup table of synonyms I would have to invent.
+
+    Values are taken from the goal in quoted spans, in order, which is the request's own statement of what
+    the arguments are. Nothing is invented; a goal that quotes fewer values than the arity is refused with
+    the count, because a positional argument cannot be filled from nothing.
+    """
+    verbs = list(learned.get("verbs_learned") or [])
+    arity = dict(learned.get("arity") or {})
+    words = set(re.findall(r"[a-z]+", str(goal).lower()))
+    named = [v for v in verbs if str(v).lower() in words]
+    if not named:
+        # a verb named by a longer form of the goal's word: `open` for `opened`. Bounded to a prefix of at
+        # least four characters so `a` or `to` cannot match by accident.
+        named = [v for v in verbs
+                 if any(w.startswith(str(v).lower()) and len(w) >= 4 for w in words)]
+    if len(named) != 1:
+        return {"schema": SCHEMA, "act": None,
+                "why": "THE_PROGRAM_STATES_NO_SUCH_VERB" if not named else "THE_GOAL_NAMES_SEVERAL_VERBS",
+                "the_program_has": verbs, "goal": str(goal)[:200],
+                "detail": "synonymy is knowledge about English, which this module does not have"
+                if not named else "the goal names more than one of the program's verbs"}
+    verb = named[0]
+    want = arity.get(verb)
+    values = [v for v in re.findall(r'"([^"]*)"|\u201c([^\u201d]*)\u201d', str(goal)) for v in v if v]
+    if want is None:
+        return {"schema": SCHEMA, "act": None, "why": "THE_LEARNED_ARITY_IS_UNKNOWN",
+                "verb": verb, "the_program_has": verbs}
+    if len(values) < want:
+        return {"schema": SCHEMA, "act": None, "why": "THE_GOAL_STATES_TOO_FEW_VALUES",
+                "verb": verb, "wanted": want, "stated": values}
+    program = str(learned.get("program") or "")
+    return {"schema": SCHEMA, "act": [program, verb] + list(values[:want]),
+            "verb": verb, "arity": want, "values_from_the_goal": list(values[:want]),
+            "why": "JOINED_FROM_THE_MEASURED_INTERFACE"}
 
 
 def main(argv: Sequence[str] | None = None) -> int:
