@@ -88,8 +88,75 @@ def run(browser: Any, operations: Sequence[Mapping[str, Any]]) -> list[dict[str,
     return outcomes
 
 
+#: The words a goal uses to name a value rather than to describe an action. Quoted spans are the primary
+#: source and are read first; these patterns catch the unquoted case. Closed class, and it is about GRAMMAR
+#: (this word introduces a value) not about any program or page.
+#: A word that introduces a value, and the value itself.
+#:
+#: `amount`, `value`, `text` and `label` are NOT here any more, and that correction matters. Measured
+#: 2026-11-23: `save a record named alpha with amount 4` yielded `['alpha', 'amount']` -- the word `amount`
+#: captured AS the value and the real value `4` never extracted. A judge fed that would have confirmed a page
+#: containing the word "amount" while the amount itself was wrong, which is worse than refusing: it is a
+#: false confirmation wearing the costume of a real one.
+#:
+#: They were in the list because they appear where a value goes (`amount 4`). But they are NOUNS naming the
+#: field, not prepositions introducing the value, and a closed class of introductions must contain only the
+#: latter. `with amount 4` is caught by `with`, which is why the removal costs nothing.
+_VALUE_INTRO = re.compile(
+    r"\b(?:named|called|titled|as|to|into|for|describing|described|labelled|labeled)\s+"
+    r"(?P<value>[^\s,;.\"']+)", re.I)
+
+#: Words that NAME a field rather than being one of its values.
+_NOT_A_VALUE = frozenset({
+    "the", "a", "an", "this", "that", "and", "with", "for", "to", "in", "on", "of", "it",
+    "amount", "value", "qty", "quantity", "count", "number", "size", "price",
+    "name", "title", "label", "text", "sku", "id", "key", "record", "row", "item",
+})
+
+#: A field word followed by a bare value -- `with amount 4`, `qty 8`. The field word is skipped and the
+#: token after it is the value. Kept separate from the introductions above because it needs the extra token:
+#: `with amount` alone states no value at all, and taking `amount` as the value is the false confirmation
+#: this project already caught once.
+_FIELD_THEN_VALUE = re.compile(
+    r"\b(?:amount|value|qty|quantity|count|number|size|price|name|title|label|text)\s+"
+    r"(?P<value>\d+(?:\.\d+)?|[^\s,;.\"']{1,40})", re.I)
+
+
+def stated_values(goal: str) -> list[str]:
+    """The values a goal states, in the order it states them -- the load-bearing part of a request.
+
+    WHY THIS AND NOT THE GOAL'S SENTENCE. Measured 2026-11-23: the goal `save a record named "alpha" with
+    amount "4"` has NO verbatim substring in common with the page that fulfils it (`saved alpha = 4`). A
+    judge that looked for the goal's words would refuse a page that had done exactly what was asked.
+
+    What a person checks is not whether the page repeats their sentence. It is whether THEIR VALUES landed.
+    The quoted spans are the goal's own statement of what those values are, which is why they are read
+    first; nothing is inferred and nothing is invented.
+
+    This is the same extraction `mechanism_act_v1._stated_values` performs on a CLI request, applied to a
+    page. It does not know what `save` means, and it does not need to: it knows which words the request
+    said were the values, and asks the page whether they arrived.
+    """
+    quoted = [a or b for a, b in re.findall(r'"([^"]*)"|\u201c([^\u201d]*)\u201d', str(goal))]
+    if quoted:
+        return quoted
+    found: list[str] = []
+    for pattern in (_VALUE_INTRO, _FIELD_THEN_VALUE):
+        for match in pattern.finditer(str(goal)):
+            candidate = match.group("value").strip()
+            # a FIELD NOUN IS NOT A VALUE. `set qty 8 for sku B2` yielded `['sku','8']` -- `sku` captured
+            # as a value because it follows `for`. It names a field, exactly like `amount` did before.
+            # A value that is one of these words would be a page/field literally called "sku", which is
+            # not worth a false confirmation to support.
+            if candidate.lower() in _NOT_A_VALUE or not candidate:
+                continue
+            if candidate not in found:
+                found.append(candidate)
+    return found
+
+
 def judge(browser: Any, operations: Sequence[Mapping[str, Any]],
-          expectation: str) -> dict[str, Any]:
+          expectation: str, *, values: Sequence[str] = ()) -> dict[str, Any]:
     """Act, then ask the page -- WITHOUT reloading -- whether the goal's own words are now on it.
 
     `before` and `after` are the page's rendered text. The verdict is `EFFECT_CONFIRMED` only when the
@@ -110,12 +177,21 @@ def judge(browser: Any, operations: Sequence[Mapping[str, Any]],
                 "operations": outcomes}
 
     wanted = str(expectation or "")
-    if not wanted.strip():
+    # THE VERBATIM EXPECTATION IS ONE WAY TO ASK; THE GOAL'S VALUES ARE THE OTHER AND OFTEN THE ONLY ONE.
+    # With `values`, the question becomes "did every value the request stated arrive on the page" -- which
+    # a page can answer even when it shares no wording with the goal.
+    stated = [str(v) for v in values if str(v)]
+    if not wanted.strip() and not stated:
         return {"schema": SCHEMA, "judged": False, "operations": outcomes,
                 "why": "THE_GOAL_STATES_NOTHING_TO_LOOK_FOR"}
     before_text, after_text = before["text"], after["text"]
-    present_now = wanted in after_text
-    present_before = wanted in before_text
+    if stated:
+        present_now = all(value in after_text for value in stated)
+        present_before = all(value in before_text for value in stated)
+        wanted = " AND ".join(stated)
+    else:
+        present_now = wanted in after_text
+        present_before = wanted in before_text
     if present_now and not present_before:
         verdict = "EFFECT_CONFIRMED"
     elif present_now and present_before:
@@ -123,7 +199,8 @@ def judge(browser: Any, operations: Sequence[Mapping[str, Any]],
     else:
         verdict = "EFFECT_ABSENT"
     return {"schema": SCHEMA, "judged": True, "verdict": verdict,
-            "looked_for": wanted[:200],
+            "looked_for": wanted[:200], "values": stated,
+            "missing_after": [v for v in stated if v not in after_text],
             "before": before_text[:400], "after": after_text[:400],
             "operations": outcomes,
             "ops_all_passed": all(o.get("status") == "PASS" for o in outcomes),

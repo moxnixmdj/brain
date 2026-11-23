@@ -5804,3 +5804,65 @@ not previously do at all.
 The sharper limit: **the judge needs the goal's words to appear on the page.** `saved alpha = 4` is directly
 visible. A GUI where success looks like "the row moved into the Done column" requires the system to connect
 a goal's phrasing to a page's rendering — that is naming, not judging, and it is unsolved here.
+
+## §A105 — the goal does not have to be on the page; its values do
+
+### The limit §A104 named, and why it was not a limit
+
+§A104 ended: *"the judge needs the goal's words to appear on the page."* Measured, they never will. A goal
+phrased the way a person phrases it:
+
+    goal : save a record named "alpha" with amount "4"
+    page : saved alpha = 4
+
+**No verbatim substring in common.** A judge doing string containment refuses a page that did exactly what
+was asked — the mirror image of confirming a page that did nothing.
+
+### The question a person actually asks
+
+Not *"did the page repeat my sentence"* but *"did MY VALUES land."* The values are the goal's own quoted
+spans; nothing is inferred, and `save` never has to mean anything.
+
+| | |
+|---|---|
+| values the goal states | `['alpha', '4']` |
+| present before the act | **False** |
+| present after | **True** |
+| verdict | **`EFFECT_CONFIRMED`**, `looked_for: alpha AND 4`, `missing_after: []` |
+
+This is the same extraction `mechanism_act_v1._stated_values` performs on a CLI request, applied to a page.
+The join needs no synonym table and no model, because it never touches the verb.
+
+### The false confirmation I built and caught in one minute
+
+The first version captured **`amount` as the value** in `with amount 4`, because `amount` is where a value
+goes. A judge fed that would confirm any page containing the **word** "amount" while the amount itself was
+wrong — a false confirmation wearing the costume of a real one, which is strictly worse than a refusal.
+Then `set qty 8 for sku B2` yielded `['sku', '8']` for the same reason: a field noun captured as its own
+value.
+
+Both are fixed by a closed list of nouns that name a field rather than being one. That list is about
+**grammar** — these words introduce or label values — not about any program or page.
+
+### The limit that remains, stated in the test that could hide it
+
+    stated_values("set qty 8 for sku B2")  ->  ['8']      # B2 is LOST
+
+The check is therefore **weaker than the request**: it verifies fewer values than the goal named, so it can
+confirm on less evidence than it claims. That is the safe direction — under-extraction refuses,
+over-extraction falsely confirms — but it is still an error, and it is recorded in
+`test_a_field_word_is_never_taken_as_its_own_value` rather than left to be discovered as a false pass later.
+
+### Where this leaves the GUI surface
+
+| | |
+|---|---|
+| observe a real page | **yes** — rendered text + controls, live |
+| act on it | **yes** — fill, click by the name a person uses, press, select |
+| judge the effect | **yes** — by the goal's values, no reload, before/after |
+| a goal whose success is not a value on the page | **no** — "the row moved to Done" has no value to check |
+
+The last row is the real remaining bottleneck, and it is not a promise: success expressed as a *relationship
+between elements* rather than a *value in text* is unjudged here.
+
+139 tests pass, seven live against a real HeadlessChrome.

@@ -150,3 +150,59 @@ def test_a_goal_that_states_nothing_to_look_for_is_refused(page_url: str) -> Non
     verdict = BO.judge(browser, [], "   ")
     assert verdict["judged"] is False
     assert verdict["why"] == "THE_GOAL_STATES_NOTHING_TO_LOOK_FOR", verdict
+
+
+# ----------------------------------------------------------------------------------------------------
+# A goal phrased like a person, against a page that never repeats it.
+# ----------------------------------------------------------------------------------------------------
+
+def test_a_goal_with_no_words_in_common_with_the_page_is_still_judged(page_url: str) -> None:
+    """THE LIMIT §A104 NAMED AS UNSOLVED, solved by asking a different question.
+
+    `save a record named "alpha" with amount "4"` shares NO verbatim substring with the page that fulfils
+    it (`saved alpha = 4`). Judged by string containment the answer is a refusal, and a refusal on a page
+    that did exactly what was asked is the mirror of the bug this module exists to prevent.
+
+    What a person checks is not whether the page repeats their sentence -- it is whether THEIR VALUES
+    landed. The values come from the goal's own quoted spans. Nothing is inferred and no synonym is needed:
+    `save` never has to mean anything.
+    """
+    browser = browser_v1.bind()
+    browser.act({"type": "NAVIGATE", "url": page_url})
+
+    goal = 'save a record named "alpha" with amount "4"'
+    values = BO.stated_values(goal)
+    assert values == ["alpha", "4"], values
+
+    verdict = BO.judge(browser, [
+        {"type": "FILL", "selector": "#name", "text": "alpha"},
+        {"type": "FILL", "selector": "#amount", "text": "4"},
+        {"type": "CLICK_TEXT", "text": "Save record"},
+    ], "", values=values)
+
+    assert verdict["judged"] is True, verdict
+    assert verdict["verdict"] == "EFFECT_CONFIRMED", verdict
+    assert verdict["looked_for"] == "alpha AND 4"
+    assert verdict["missing_after"] == []
+
+
+def test_a_field_word_is_never_taken_as_its_own_value() -> None:
+    """THE FALSE CONFIRMATION I BUILT AND CAUGHT IN THE SAME MINUTE.
+
+    The first version captured `amount` as the value in `with amount 4` -- because `amount` is where a value
+    goes. A judge fed that would confirm any page containing the WORD "amount" while the amount itself was
+    wrong, which is worse than refusing: it is a false confirmation wearing the costume of a real one.
+
+    `set qty 8 for sku B2` then yielded `['sku', '8']` for the same reason. Field nouns are excluded now.
+
+    THE HONEST LIMIT THIS TEST ALSO PINS: `sku B2` drops `B2`, so the check is weaker than the request. A
+    judge that checks fewer values than the goal stated can confirm on less evidence than it claims. That is
+    the safe direction of error -- under-extraction refuses, over-extraction falsely confirms -- but it is
+    still an error and it is recorded here rather than left to be discovered as a false pass.
+    """
+    assert BO.stated_values('save a record named alpha with amount 4') == ["alpha", "4"]
+    assert BO.stated_values('save a record named "alpha" with amount "4"') == ["alpha", "4"]
+    assert BO.stated_values("set the owner to alice") == ["alice"]
+    assert BO.stated_values("set qty 8 for sku B2") == ["8"]        # B2 is lost: the stated limitation
+    assert "amount" not in BO.stated_values("with amount 4")
+    assert "sku" not in BO.stated_values("for sku B2")
