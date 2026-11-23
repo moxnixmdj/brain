@@ -202,20 +202,81 @@ def parse_flags(text: str) -> list[dict[str, Any]]:
     return out
 
 
-def parse_usage_positionals(text: str) -> list[str]:
+def parse_usage_positionals(text: str, name_of_program: str = "") -> list[str]:
     """The positional slots the usage line declares, e.g. `[FILE]...` -> ['FILE']."""
     for line in text.splitlines():
         m = _USAGE.match(line)
         if not m:
             continue
+        # A continuation was tried and REVERTED: git's usage line wraps, so reading
+        # all of it declares eleven slots (`-C <path>`, `-c <name>=<value>`, ...), and
+        # that made every git subcommand "may need a second operand". Measured: git
+        # went 42 doors -> 7 with 57 litter, because a failed `git commit tree ref
+        # in.txt out.bin` writes a tree. The first line is the declaration; a wrapped
+        # one is read as the first line only, and the number is re-measured after any
+        # change here rather than trusted.
         slots: list[str] = []
         for token in m.group(1).split():
-            for inner in re.findall(r"[<\[]([A-Za-z0-9_.|-]+)[>\]]", token):
-                inner = inner.upper()
-                if inner not in slots:
-                    slots.append(inner)
+            bracketed = re.findall(r"[<\[](?:-([A-Za-z0-9_.|]+)|([A-Za-z0-9_.|-]+))[>\]]",
+                                   token)
+            if bracketed:
+                # the bracketed word is a NAME only when it is not a flag. `[-T]` is an
+                # option and `[OPTION]` is the options themselves, but `[FILE]` is a slot.
+                for short, long_name in bracketed:
+                    if short:
+                        continue
+                    name = long_name.upper()
+                    if name == "OPTION" or name in slots:
+                        continue
+                    slots.append(name)
+                continue
+            # A BARE word in a usage line is a required operand: `cp [OPTION]... [-T]
+            # SOURCE DEST` declares exactly two, and the old parser read only the
+            # bracketed words, so it returned ['OPTION', '-T'] and bound one filename
+            # to a command that needs two. Measured: 33/33 cp and 14/14 mv operations
+            # came back inert, which made every real copy and move door invisible.
+            if token.startswith("-") or token in ("|", "||", "...", "[", "]"):
+                continue
+            if not re.match(r"^[A-Za-z][A-Za-z0-9_.|-]*$", token):
+                continue
+            name = token.upper()
+            if name not in slots:
+                slots.append(name)
+        # The usage line begins with the program's own name (`cp [OPTION]... ...`).
+        # It is the program, not an operand, and counting it made cp look like it
+        # declared three slots.
+        if slots and name_of_program and slots[0] == name_of_program.upper():
+            slots = slots[1:]
         return slots
     return []
+
+
+#: A usage-line slot that names a PLACE, as opposed to a mode word. `DEST`,
+#: `DESTINATION`, `DIRECTORY`, `TARGET`, `FILE`, `PATH` name places; `PATH` is
+#: excluded because git spells an option argument that way (`[-C <path>]`).
+_CONTENT_SLOTS = ("SOURCE", "SRC", "DEST", "DESTINATION", "DIRECTORY", "TARGET",
+                  "FILE", "ORIGIN")
+
+
+def _is_content_slot(slot: str) -> bool:
+    """A slot that names something the program acts ON, not an option argument."""
+    word = slot.rstrip(".").upper()
+    return word in _CONTENT_SLOTS
+
+
+def _declares_two_places(slots: Sequence[str]) -> bool:
+    """Does the usage line declare a SOURCE and a PLACE for it?
+
+    Both ends must be content. git's first usage line is `PATH NAME VALUE`, which is
+    `[-C <path>] [-c <name>=<value>]` -- an option argument and an assignment, not
+    two places. Requiring only the SECOND slot to look like a place flagged all 483
+    git operations and produced 74 litter rows, because a failed `git commit tree ref
+    in.txt out.bin` still writes a tree. Requiring the FIRST to be a place as well
+    leaves exactly the programs that copy or move something.
+    """
+    if len(slots) < 2:
+        return False
+    return _is_content_slot(slots[0]) and _is_content_slot(slots[1])
 
 
 def parse_subcommand_candidates(text: str) -> list[str]:
@@ -281,7 +342,7 @@ def parse_contract(text: str, name: str = "") -> dict[str, Any]:
     return {"tool": name,
             "usage_line": usage,
             "flags": parse_flags(text),
-            "positionals": parse_usage_positionals(text),
+            "positionals": parse_usage_positionals(text, name),
             "subcommand_candidates": parse_subcommand_candidates(text),
             "has_usage": bool(re.search(r"^\s*usage:", text, re.IGNORECASE | re.MULTILINE)),
             "in_place": [word for word in _IN_PLACE if word in text.lower()]}
@@ -446,6 +507,10 @@ def census(prog: str, *, depth: int = DEFAULT_DEPTH, max_ops: int = DEFAULT_MAX_
     text = root["text"] or ask([prog, "-h"])["text"]
     contract = parse_contract(text, prog)
     ops = operations_from(contract, tool=prog, max_ops=max_ops)
+    # Each operation carries the slot list it was declared under, so `bind` can tell
+    # whether a second place is available without being handed the contract: the
+    # census returns operations, and callers bind them later.
+    _slots = list(contract.get("positionals") or ())
     admitted: list[dict[str, Any]] = []
     refused: list[dict[str, Any]] = []
     walked = 1
@@ -472,7 +537,7 @@ def census(prog: str, *, depth: int = DEFAULT_DEPTH, max_ops: int = DEFAULT_MAX_
                              "positionals": sub["positionals"]})
 
     return {"schema": SCHEMA, "tool": prog, "depth": depth,
-            "operations": [op.as_dict() for op in ops],
+            "operations": [_with_slots(op, _slots) for op in ops],
             "operation_count": len(ops),
             "subcommands_admitted": admitted, "subcommands_refused": refused,
             "positionals": contract["positionals"],
@@ -662,8 +727,21 @@ def bind(operation: dict[str, Any], *, contract: dict[str, Any] | None = None) -
         return bound
 
     if positionals and not refuses_operand(operation):
+        # ONE operand is supplied first, always. A usage line that declares two
+        # slots (`cp SOURCE DEST`) looks like it wants two, but appending two to
+        # every operation was measured and it is wrong: git fell from 42 doors to 7
+        # and litter rose from 0 to 57, because `git commit tree ref in.txt out.bin`
+        # is a failed command that still writes a tree. Whether a second operand is
+        # needed is decided by the RETRY loop below, which is the only thing that
+        # knows whether the first attempt did anything.
         bound["invoked_as"] = [*argv, OPERAND_FILES[0]]
         bound["operand_hypothesis"] = "consumes a seed operand"
+        # The hint was set at the top of `bind` (see there) and is only honoured when
+        # the one-operand form did nothing. git's first usage line yields
+        # `PATH NAME VALUE` from `[-C <path>] [-c <name>=<value>]`, and treating those
+        # as operands took git from 42 doors to 7 with 57 litter; `cp`'s second slot
+        # is `DEST`, a bare place the usage line requires, which is the shape that
+        # matters.
         bound["candidate_seed"] = True
         bound["bound"] = True
         return bound
@@ -1018,12 +1096,38 @@ def commit_check(operation: Any, *, seed: Sequence[tuple[str, bytes]] = (),
                     run, changed = retry, True
                     before_kinds, after_kinds = kinds_before, form_kinds()
                     break
+        # A usage line that declares a SECOND positional slot is reporting that the
+        # operation may need a destination. It must not be supplied up front -- doing
+        # that to every operation took git from 42 doors to 7 and raised litter from 0
+        # to 57, because a failed `git commit tree ref in.txt out.bin` still writes a
+        # tree. It is supplied only when the one-operand form did NOTHING, which is the
+        # exact condition `cp --force in.txt` is in ("missing destination file
+        # operand"), and `git mv --force in.txt` is not.
+        if not changed and operation.get("may_need_second_operand"):
+            _restore(before_tree, root)
+            before_form = _digest(root)
+            kinds_before = _kinds(root)
+            argv = [*_command_form(operation), OPERAND_OUTPUT]
+            argv = [name if arg == OPERAND_FILES[0] else arg for arg in argv]
+            retry, _moved, form_kinds = attempt(argv)
+            moved = _digest(root) != before_form
+            tried.append(list(argv))
+            if moved:
+                run, changed = retry, True
+                before_kinds, after_kinds = kinds_before, form_kinds()
         kind = change_kind(before_kinds, after_kinds) if changed else "NOTHING"
         # A failed run is not a door, even when it moved the tree. `tar --delete
         # --file=out.bin in.txt` exits 2 with "in.txt: Not found in archive" and,
         # in failing, contains an empty out.bin. Counting that as CREATES credits the
         # census with a capability the program refused to perform -- measured, and it
         # inflated tar from 6 real doors to 98.
+        # LITTER is a failed run that left a NEW THING, which is what "litter" means
+        # and what the round-3 measurement of tar established. It is deliberately not
+        # any failed run that moved the tree: generalising it to every change kind made
+        # git report 73 litter rows for failures that only rewrite the room's index,
+        # and reclassifying a working room's state as litter is not a finding. Doors
+        # require a clean exit anyway (DOOR_VERDICTS), so this rule only decides
+        # whether a failed row is labelled LITTER or CHANGES_WITH_ERROR.
         if changed and run["exit"] not in (0, None) and kind == "CREATES":
             verdict_forced = "LITTER"
         else:
@@ -1076,6 +1180,21 @@ def commit_check_many(operations: Sequence[Any], *,
             "no_effect": [row["id"] for row in rows if row["verdict"] == "NO_EFFECT"],
             "all_restored": all(row["restored"] for row in rows),
             "model_calls": 0, "parameters": 0}
+
+
+def _with_slots(operation: "Operation", slots: Sequence[str]) -> dict[str, Any]:
+    """The operation's row, plus the usage-line slots it was declared under.
+
+    Carried on the row because the census RETURNS rows and callers bind them later:
+    without the slots, `bind` cannot tell a program with one place from a program
+    with two, and `cp` bound a single filename to a command that needs a
+    destination -- measured, 33 of 33 cp operations came back inert and its real
+    door was invisible.
+    """
+    row = operation.as_dict()
+    row["slots"] = list(slots)
+    row["may_need_second_operand"] = _declares_two_places(slots)
+    return row
 
 
 def main(argv: Sequence[str] | None = None) -> int:
