@@ -665,3 +665,64 @@ Honest statement of the §14-§18 chain: file-transform goals are closed by the
 generic scan; code-repair-class goals are closed by the specialist twin with real
 files, fresh-defect admission, persistence, and real-test replay verification.
 The scan-level code-repair env remains unbuilt (§17's measured OPEN). §6 stays open.
+
+## 22. Scan → known/unknown → gap → receipt: the one-call new-environment flow (2026-11-23, measured)
+
+The owner's brilliant idea, taken literally: "scan everything in the environment,
+retrieve from memory what is known and what is not, get the gap from instant
+knowledge, and save only the important learning." §14–§21 built the pieces; this
+turn builds the flow that actually carries the idea.
+
+Built: `canonical/swe_kernel/environment_scan_know_v1.py` — `scan_and_know(root,
+goal, ...)` — one call, no plan, no persist, no model, no network at decision
+time (except allow_web=True, which is opt-in, gated, and labeled EXTERNAL).
+
+What it does, in the order the idea demands:
+
+  1. SCAN — bounded filesystem walk (file count, kind by manifest, layout,
+     docs), never executes anything except the broker's declared runner.
+  2. REMEMBER — consults the two stores read-only: the Perfect Algorithm's
+     admitted rules + priors for this env family/kind, and the broker's
+     evidence-keyed cache (Python run-tests contract), which re-executes to
+     verify before use. Nothing is trusted blindly.
+  3. FILL THE GAP — remaining questions are asked of the instant-knowledge
+     tiers: local guides first (offline, completeness-gated), then the web,
+     only when the caller opts in, only when the completeness gate passes.
+     External knowledge is labeled EXTERNAL_PUBLIC_EVIDENCE_FETCHED and never
+     counted as capability.
+  4. REPORT — a checkpoint packet (goal + environment + checkpoint evidence +
+     what remains unknown + the decision), in the shape the frontier research
+     (EnvProbe, exploration checkpoints, selective memory, proactive retrieval)
+     asks for: selective and goal-directed, not "learn everything".
+
+What it refuses to do — and does all four honestly:
+  - It does not plan or pick actions (Planning is the Perfect Algorithm's job).
+  - It does not persist anything. The stores are written by their owners; this
+    flow only reads them. The Perfect Algorithm's memory file is never touched.
+  - It does not count the web tier as capability (gate refusal leaves the gap
+    UNKNOWN by name).
+  - It does not guess the contract. A missing answer stays UNKNOWN, named.
+
+Tests: 10/10 (refusals by name; generic environment: scan, kind, docs,
+local-guide answer, no-fabrication; Python broker path cold/warm in a child
+process with a pytest-capable interpreter; honest refusal with no pytest).
+
+Measured:
+  - Cold: broker-verified, 2 passed, ENVIRONMENT_BROKERED, from_memory False.
+  - Warm: re-verified by execution, ENVIRONMENT_BROKERED_FROM_MEMORY,
+    from_memory True. The broker is never trusted blindly.
+  - Web fill path: exercised once (allow_web=True). The gate REFUSED the thin
+    external evidence (2 sources of one kind) — the question was left UNKNOWN
+    by name, not filled with a confident guess. Wiring verified, gate held.
+
+Design records (frontier inputs, never capability credit): EnvProbe (arXiv
+2606.31422, Jul 2026) — probe only the critical belief fields, structural
+terms > uncertainty; exploration checkpoints (2026) — separate exploration
+from execution, require checkpoint evidence, gate on remaining unknowns;
+selective memory (2026) — remember what matters, retrieve what is relevant,
+trust the right source; proactive retrieval (arXiv 2604.20572, Apr 2026) —
+identify the gap, retrieve when needed. All agree with §2: explore broadly,
+persist narrowly, re-verify at use, get the gap from the right source.
+
+Honesty: this is reconnaissance, not the scan-level code-repair env (§17
+remains open), not a GUI/browser flow, not §6.
