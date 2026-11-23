@@ -249,13 +249,17 @@ def goal_predicate_for(seed: Mapping[str, bytes], target_name: str) -> Callable[
             return {}
         return out
 
-    def _in_archive(members: dict[str, bytes], src: bytes) -> bool:
-        # the archive is the claim: the source file is IN it, unchanged
+    def _in_archive(members: dict[str, bytes], src_map: Mapping[str, bytes]) -> bool:
+        # the archive is the claim: EVERY seed file is IN it, unchanged.
+        # A bundle that holds only some of them is not the bundle the goal
+        # asked for.
+        found = set()
         for m_name, m_bytes in members.items():
             path_part = m_name.rstrip("/").rsplit("/", 1)[-1]
-            if path_part == src_name and m_bytes == src:
-                return True
-        return False
+            want = src_map.get(path_part)
+            if want is not None and m_bytes == want:
+                found.add(path_part)
+        return found == set(src_map)
 
     _TAR_MODES = {
         ".tar": "r:",
@@ -269,47 +273,64 @@ def goal_predicate_for(seed: Mapping[str, bytes], target_name: str) -> Callable[
 
     def is_goal(state) -> bool:
         files = dict(state or ())
-        src = files.get(src_name)
+        # every seed file must still be present in the observed tree
+        src_map = {n: files[n] for n in seed if n in files}
+        if len(src_map) != len(seed):
+            return False
+        src = files[src_name]
         tgt = files.get(target_name, b"")
-        if src is None or not tgt:
+        if not tgt:
             return False
 
         for suffix in sorted(_TAR_MODES, key=lambda s: -len(s)):
             if target_name.endswith(suffix):
                 members = _tar_members(tgt, _TAR_MODES[suffix])
-                return _in_archive(members, src)
+                return _in_archive(members, src_map)
 
         if target_name.endswith(".zip"):
             members = _zip_members(tgt)
-            return _in_archive(members, src)
+            return _in_archive(members, src_map)
 
-        if target_name.endswith(".gz"):
-            try:
-                return gzip.decompress(tgt) == src
-            except Exception:
-                return False
-        if target_name.endswith(".bz2"):
-            try:
-                return _bz2.decompress(tgt) == src
-            except Exception:
-                return False
-        if target_name.endswith(".xz"):
-            try:
-                return _lzma.decompress(tgt) == src
-            except Exception:
-                return False
-        # Hash-format targets: the target must carry the hash OF THE SOURCE.
-        # The honest claim -- "hash input.txt into out.sha256": the file is a
-        # checksum of that exact file, not of a different source, not of a
-        # plausible-looking checksum the machine wrote from thin air.
-        for suffix, algo in sorted(_HASH_SUFFIXES.items(), key=lambda kv: -len(kv[0])):
-            if target_name.endswith(suffix):
-                return _hash_line_matches(tgt, src, algo)
+        # Single-file compression targets: the target decompresses to the
+        # source the goal named. Multi-file seeds cannot claim a single
+        # .gz file -- refuse rather than half-claim.
+        if len(src_map) == 1:
+            if target_name.endswith(".gz"):
+                try:
+                    return gzip.decompress(tgt) == src
+                except Exception:
+                    return False
+            if target_name.endswith(".bz2"):
+                try:
+                    return _bz2.decompress(tgt) == src
+                except Exception:
+                    return False
+            if target_name.endswith(".xz"):
+                try:
+                    return _lzma.decompress(tgt) == src
+                except Exception:
+                    return False
+            # Hash-format targets: the target must carry the hash OF THE SOURCE.
+            # The honest claim -- "hash input.txt into out.sha256": the file is a
+            # checksum of that exact file, not of a different source, not of a
+            # plausible-looking checksum the machine wrote from thin air.
+            for suffix, algo in sorted(_HASH_SUFFIXES.items(), key=lambda kv: -len(kv[0])):
+                if target_name.endswith(suffix):
+                    return _hash_line_matches(tgt, src, algo)
+        else:
+            # Multi-file seed over a compression/hash target: refuse -- the
+            # claim is ambiguous, and ambiguity is never resolved by guessing.
+            for suffix in sorted(_HASH_SUFFIXES | {".gz": "", ".bz2": "", ".xz": ""}, key=lambda s: -len(s)):
+                if target_name.endswith(suffix):
+                    return False
 
         # Plain target over a compressed/archive source: the claim is that the
         # target is the decompressed content of the source, not merely a
         # non-empty file. A source shape we cannot verify is refused, never
-        # passed.
+        # passed. Multi-source seeds refuse here too: the goal cannot claim
+        # one plain file for several sources.
+        if len(src_map) != 1:
+            return False
         src_suffix = next((s for s in sorted(_TAR_MODES, key=lambda s: -len(s))
                           if src_name.endswith(s)), None)
         if src_suffix is not None:

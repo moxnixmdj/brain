@@ -433,3 +433,64 @@ class StdoutShapeTests(unittest.TestCase):
         self.assertTrue(any(
             s[0] == "tar" and "--file" in s and "data.tar.gz" in s for s in shapes),
             "file-argument shape lost the target")
+
+
+class MultiSourceArchivePredicateTests(unittest.TestCase):
+    """A multi-file archive goal must require EVERY seed file, by basename,
+    with its exact bytes -- a bundle holding only some of them is not the
+    bundle the goal asked for."""
+
+    def _bundle(self, members):
+        import io as _io
+        import tarfile as _tarfile
+
+        buf = _io.BytesIO()
+        with _tarfile.open(fileobj=buf, mode="w:gz") as tf:
+            for name, data in members.items():
+                info = _tarfile.TarInfo(name)
+                info.size = len(data)
+                tf.addfile(info, _io.BytesIO(data))
+        return buf.getvalue()
+
+    def test_bundle_must_contain_every_seed_file(self):
+        from canonical.swe_kernel.perfect_algorithm_computer_env_v1 import goal_predicate_for
+
+        seed = {"data.txt": b"data content\n", "extra.txt": b"extra content\n"}
+        pred = goal_predicate_for(seed, "bundle.tar.gz")
+
+        full = self._bundle(seed)
+        self.assertTrue(pred({**seed, "bundle.tar.gz": full}))
+
+        partial = self._bundle({"data.txt": seed["data.txt"]})
+        self.assertFalse(pred({**seed, "bundle.tar.gz": partial}))
+
+        wrong_bytes = {"data.txt": b"WRONG\n", "extra.txt": seed["extra.txt"]}
+        wrong = self._bundle(wrong_bytes)
+        self.assertFalse(pred({**seed, "bundle.tar.gz": wrong}))
+
+    def test_multi_source_compression_target_is_refused(self):
+        from canonical.swe_kernel.perfect_algorithm_computer_env_v1 import goal_predicate_for
+
+        seed = {"a.txt": b"aaaa\n", "b.txt": b"bbbb\n"}
+        pred = goal_predicate_for(seed, "out.gz")
+        # multi-file → .gz target: no claim is honest
+        self.assertFalse(pred({**seed, "out.gz": b"anything"}))
+
+
+class MultiSourceShapeTests(unittest.TestCase):
+    """A multi-source goal is answered by passing all sources, in seed order."""
+
+    def test_all_sources_appear_as_positional_args(self):
+        from canonical.runtime.computer_env_v1 import invocation_shapes
+
+        shapes = invocation_shapes(
+            "tar", ["data.txt", "extra.txt"], "bundle.tar.gz",
+            "archive data.txt and extra.txt into bundle.tar.gz")
+        multi = [s for s in shapes
+                 if s and s[0] == "tar" and "bundle.tar.gz" in s]
+        self.assertTrue(multi, "no target-carrying shape")
+        for s in multi:
+            for src_name in ("data.txt", "extra.txt"):
+                if "bundle.tar.gz" in s:
+                    self.assertIn(src_name, s,
+                                  f"missing source in {s}")

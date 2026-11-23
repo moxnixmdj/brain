@@ -561,7 +561,7 @@ def goal_values(goal: str, limit: int = 6) -> list[str]:
     return out[:limit]
 
 
-def invocation_shapes(prog: str, src: str, target: str,
+def invocation_shapes(prog: str, src: str | Sequence[str], target: str,
                       goal: str | None = None) -> list[list[str]]:
     """How to try calling this program, in the order worth trying.
 
@@ -570,13 +570,20 @@ def invocation_shapes(prog: str, src: str, target: str,
     ones that let the output be named, and then whatever the program's own
     help proposes -- so a program that wants -o, or --stdout, or -O, says so
     itself and is called the way it asked.
+
+    `src` may be a single file name or a sequence: a goal naming multiple
+    sources is answered by passing all of them, in seed order.
     """
+    if isinstance(src, (str, bytes)):
+        srcs = [src]
+    else:
+        srcs = [str(s) for s in src if s]
     shapes: list[list[str]] = [
-        [prog, target, src],
-        [prog, src, target],
-        [prog, "-c", src],
-        [prog, src],
-        [prog, src, "-k"],
+        [prog, target, *srcs],
+        [prog, *srcs, target],
+        [prog, "-c", *srcs],
+        [prog, *srcs],
+        [prog, *srcs, "-k"],
     ]
     _flag_desc_early = dict(flag_descriptions(prog))
     for flag in output_flags(prog)[:4]:
@@ -584,11 +591,11 @@ def invocation_shapes(prog: str, src: str, target: str,
         # argument: stdout is the channel and the capture writes the target.
         if re.search(r"stdout|standard output|to standard out",
                      _flag_desc_early.get(flag, ""), re.I):
-            shape = [prog, flag, src]
+            shape = [prog, flag, *srcs]
             if shape not in shapes:
                 shapes.append(shape)
             continue
-        for shape in ([prog, flag, target, src], [prog, flag, src]):
+        for shape in ([prog, flag, target, *srcs], [prog, flag, *srcs]):
             if shape not in shapes:
                 shapes.append(shape)
     # flags the goal itself asked for, by meaning. 'count the lines' needs
@@ -603,13 +610,13 @@ def invocation_shapes(prog: str, src: str, target: str,
         # it: '-resize 50%' is only a command once the 50% is supplied
         for flag in flags:
             for v in values[:3]:
-                for shape in ([prog, flag, v, src, target],
-                              [prog, src, flag, v, target],
-                              [prog, flag, v, src]):
+                for shape in ([prog, flag, v, *srcs, target],
+                              [prog, *srcs, flag, v, target],
+                              [prog, flag, v, *srcs]):
                     if shape not in extra:
                         extra.append(shape)
     for flag in flags:
-        for shape in ([prog, flag, src], [prog, flag, target, src]):
+        for shape in ([prog, flag, *srcs], [prog, flag, target, *srcs]):
             if shape not in extra:
                 extra.append(shape)
     # The shapes that USE the goal's value go first. Left in their usual
@@ -639,9 +646,9 @@ def invocation_shapes(prog: str, src: str, target: str,
     for oflag in oflags:
         for subset in subsets:
             if oflag in stdout_flags:
-                shape = [prog] + subset + [oflag, src]
+                shape = [prog] + subset + [oflag, *srcs]
             else:
-                shape = [prog] + subset + [oflag, target, src]
+                shape = [prog] + subset + [oflag, target, *srcs]
             if shape not in combined:
                 combined.append(shape)
     return combined + (extra + shapes if values else shapes + extra)
@@ -659,7 +666,8 @@ def program_actions(env: ComputerEnv,
     and finds out by trying.
     """
     actions: list[tuple[str, Callable[[ComputerEnv], bool]]] = []
-    src = next(iter(env.seed), "input.txt")
+    src_names = list(env.seed) if env.seed else ["input.txt"]
+    src = src_names[0]
 
     def make(prog: str) -> Callable[[ComputerEnv], bool]:
         def _tree() -> dict:
@@ -711,7 +719,7 @@ def program_actions(env: ComputerEnv,
             # "move a.txt to b.txt" there is no gentler way and refusing
             # outright would be its own kind of failure.
             fallback: dict[str, Any] | None = None
-            for argv in invocation_shapes(prog, src, target, goal):
+            for argv in invocation_shapes(prog, src_names, target, goal):
                 # Every form starts from the seed. Without this the first
                 # form consumes the input -- 'gzip out.gz input.txt'
                 # compresses input.txt into input.txt.gz and deletes it --
@@ -742,7 +750,8 @@ def program_actions(env: ComputerEnv,
                     # real file, so it is recorded rather than thrown away.
                     recipe = {
                         "program": prog,
-                        "argv": ["{input}" if a == src else a for a in argv],
+                        "argv": ["{input}" if a in set(env.seed) else a
+                                 for a in argv],
                         "stdout_to": target if captured else None,
                         "target": target,
                     }

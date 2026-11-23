@@ -401,3 +401,39 @@ pipeline as the archive/hash/compression families — and INSTANT_RECALL evidenc
 covers five capability directions (archive, .zip, .bz2, decompress, .sha256). Still not
 done: §6 (GUI/browser/OSWorld/SWE-bench/Terminal-Bench) remains open and unclaimed; the
 carried-model walk still fails honestly (no priors trusted across content).
+
+## 13. Multi-source archive goals — false-PASS found, fixed, measured (2026-11-23)
+
+The first honestly-hard unseen case: "archive data.txt and extra.txt into
+bundle.tar.gz". Measured before the fix — the drive reached PASS, the archive
+predicate verified ONLY the first seed file (`data.txt`), and `extra.txt` was
+absent from the bundle. A bundle holding some of the sources is not the bundle
+the goal asked for. Three honest fixes:
+
+- **Predicate** (`goal_predicate_for`): archive targets (.tar/.tar.gz/.tgz/.tar.bz2/
+  .tbz2/.tar.xz/.txz) and .zip verify EVERY seed file by basename with exact bytes.
+  Multi-file seeds over .gz/.bz2/.xz/hash targets are refused (the claim is
+  ambiguous), never half-claimed. Plain targets over compressed/archive sources
+  refuse multi-file seeds (one plain file cannot be the decompressed claim of
+  several sources).
+- **Shapes** (`invocation_shapes`): `src` accepts a sequence; every positional
+  argument carries ALL seed files in seed order. A multi-file archive is answered
+  by passing all sources to tar/gzip/zip, never just the first.
+- **program_actions**: `src` -> `src_names = list(env.seed)`; the recipe template
+  records every seed name as `{input}`.
+
+Measured:
+- Cold drive: PASS, plan [run_tar], both members byte-exact, sources kept, 49.0 s.
+- Unseen-content probe (`unseen_multi_archive_computer_probe_20261123.py`, same
+  TEACH→COLD→WARM→CONTROL discipline): TEACH ADMIT 2/2 (52.1 s); COLD (B) 57.5 s,
+  both files byte-verified; WARM (B) **INSTANT_RECALL** 0.098 s, both files verified;
+  CONTROL (A) 0.106 s, both files verified.
+- 20/20 tests in test_perfect_algorithm_computer_env_v1 (+3 new: archive requires
+  every seed file; multi-file compression target refused; multi-source shapes).
+- test_computer_env_v1: same 3 pre-existing TransferTests failures only.
+
+Honest status: multi-source archive goals now reach the goal with full evidence. 5
+capability directions now warm-replay evidenced; one more multi-source direction now
+cold-VERIFIED (multi-source archive). Still not done: §6 (GUI/browser/OSWorld/
+SWE-bench/Terminal-Bench) remains open and unclaimed; the carried-model walk still fails
+honestly (0 edges, priors stale).
