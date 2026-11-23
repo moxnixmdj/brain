@@ -6272,3 +6272,86 @@ A world that cannot be repaired is reported as such rather than flailed at.
 | a fault whose repair changes program meaning | **not attempted** |
 
 112 tests pass across the seven suites touched.
+
+## §A112 — a probe cannot measure a mechanism that changes the world it is measuring
+
+### The counted cost
+
+§A111 recorded one error behind five invalid probes: **the mechanism under test changes the world, and the
+probe then measured it again.** Five probes, five wrong answers, and one of them — the belief that
+`repair_v1` could not classify `ModuleNotFoundError` — was false and cost more probes to disprove, each of
+which changed the world again.
+
+That is not a discipline problem. **Acting in an unseen environment is the product.** Any honest measurement
+of it will install, write and delete, and the next observation lands in the world the previous action left
+behind. A measurement protocol that only works if nobody changes anything is not a protocol for this system.
+
+### Three things people call "isolation", and only one of them is cheap
+
+    the WORLD      a directory the mechanism reads and writes     copyable — this module does it
+    the PROCESS    environment variables, cwd, imported modules   copyable via a subprocess
+    the MACHINE    installed packages, system state               NOT copyable here
+
+The first is cheap and honest. The second is cheap and was left alone here. **The third is where I got hurt**
+and where a directory copy cannot help: `pip install` is a machine-wide fact, so a probe that repaired an
+environment and then asked "is it still absent?" was asking about a different machine.
+
+### The design: do not claim it, record it
+
+`world_isolation_v1.isolated(world)` yields a **copy** to act in and watches three things:
+
+| watched | how | reported as |
+|---|---|---|
+| the source world | sha256 of every file, before and after | `source_unchanged` |
+| the installed packages | site-packages **enumerated**, before and after | `machine_drift.packages` |
+| the tools on PATH | resolved path, before and after | `machine_drift.tools` |
+
+    verdict THE_ORIGINAL_WORLD_AND_THE_MACHINE_ARE_BOTH_UNCHANGED
+    verdict THE_WORLD_WAS_PROTECTED_BUT_THE_MACHINE_CHANGED
+    verdict THE_PROBE_CHANGED_THE_WORLD_IT_WAS_MEANT_TO_LEAVE_ALONE
+    verdict THE_MEASUREMENT_DID_NOT_FINISH
+
+The second verdict is the whole point: it is **§A111's five-probe failure, detected and named** instead of
+silently shaping a conclusion.
+
+### The bug inside the fix, found by its own test
+
+The first version probed a **fixed list** of module names — pip, pytest, PIL, toml — and reported *no drift*
+after `pyjokes` had been installed, because `pyjokes` was not on the list.
+
+> **A snapshot of the names I thought to check is a snapshot of my imagination, not of the machine.**
+
+It fails silently in exactly the direction that matters — it says nothing changed. So the packages are now
+**enumerated** from site-packages and digested: any install, removal or upgrade of anything is visible,
+including packages nobody thought to name. Re-measured: `43 → 45` on a real install, verdict
+`THE_WORLD_WAS_PROTECTED_BUT_THE_MACHINE_CHANGED`.
+
+### Two more probes that were wrong, inside the new harness
+
+Running the loop inside isolation reproduced the SAME class of error twice more, both caught because the
+harness now reports the world it actually saw:
+
+1. `pyjokes` was already installed by an earlier probe, so the "environment fault" did not exist and the loop
+   honestly stopped on the misspelling;
+2. a two-line fixture of mine put `totl` where `total` never existed, so `fix_from_the_failure_v1` **correctly
+   refused** — the suggested name is not in the program (§A109's rule). The fixture was wrong, not the repair.
+
+Both are the same lesson a fourth and fifth time, which is the argument for the harness rather than for
+trying harder.
+
+### Verified
+
+    loop inside isolation   NameError -> 'totl' -> 'total' -> exit 0, prints 6
+    source world            byte-identical afterwards
+    machine                 0 packages changed
+    a real install          detected, verdict says the machine changed
+    source containing the workspace   REFUSED (THE_SOURCE_CONTAINS_THE_ISOLATION_WORKSPACE)
+
+6 new tests. **118 passed, 2 skipped** across the eight suites touched.
+
+### What this is for
+
+Every remaining claim in this thread — "it acts in an environment it has never seen", "it learns from one
+experience", "it repairs its own failure" — is a claim about acting on a world. From here they are measured
+under a harness that reports what the acting did, so a result can no longer be an artifact of the world the
+previous result left behind.
