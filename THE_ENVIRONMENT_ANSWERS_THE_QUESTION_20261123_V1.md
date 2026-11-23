@@ -2,7 +2,7 @@
 
 **Date:** 2026-11-23 · **Branch:** `arena/6f8ac9ce-brain` (branched from `68bf0400`) · **Authority:** `NONE__PRODUCER_RUN_SANDBOX`
 **Receipts:** `canonical/verification/THE_ENVIRONMENT_ANSWERS_THE_QUESTION_20261123_V1.json`, `THE_MINIMUM_EXPERIENCE_20261123_V1.json` (+ `_V0_SUPERSEDED_M4_MISDESIGNED.json`), `THE_RELATION_REFUSES_THE_UNSTATABLE_20261123_V1.json`, `THE_LOOP_REPEATS_ON_A_SECOND_GOAL_20261123_V1.json`, `THE_HOLDER_IS_NOT_THE_IDENTITY_20261123_V1.json`, `THE_CONTENT_IS_NOT_A_LITERAL_20261123_V1.json`, `THE_GRAMMAR_IS_NOT_A_LITERAL_20261123_V1.json`
-**Research ledger:** `PRIMARY_SOURCE_RESEARCH_20261123_V1.md` (44 unique primary pages; 166 distinct `(URL, chunkIndex)` reads and 172 invocations; key passages, selected methodological/result chunks, declared final chunks and conflicts recorded)
+**Research ledger:** `PRIMARY_SOURCE_RESEARCH_20261123_V1.md` (52 unique primary pages; 182 distinct `(URL, chunkIndex)` reads and 188 invocations; key passages, selected methodological/result chunks, declared final chunks and conflicts recorded; the 13-chunk GitHub events page is explicitly non-exhaustive)
 **Status:** seven measured iterations (five all-criteria-met, two honestly failed, with a superseded V0 run inside iteration 2); grammar transport is measured in a fresh same-identity process, **not** by an independent verifier. **§6 is NOT met. Done is not claimed.** No PR, no merge, no capability registration, `truth.achieved` remains `false`.
 
 ---
@@ -86,6 +86,27 @@ Everything above is an input to evaluate. Every one of them either uses a model 
 **Unproven:** that a general natural-language instruction can be compiled into a checkable purpose without an authorized typed answer; that one finite declarative grammar descriptor generalizes to arbitrary new relation grammars without a new fit; that fresh-process transport is independent verification; that any of this transfers to real GUI/browser computer use; that the relation survives SWE-bench Pro-class multi-file repair; that a learned proposer would beat 0.7% on real fixes without becoming a knowledge house.
 
 **Missing:** an independent zero-model verifier; the *content of a repair* (the author's decision is written nowhere in the environment — seven oracle sources returned 0 new pins); a hypothesis grammar with more than one production (8/30 real fixes are compositions); a reachable-contrast producer for real repositories; live wiring of this loop into the shipped agent; any run of OSWorld 2.1 / SWE-bench Pro V2 / Terminal-Bench 4.1 by our zero-model system.
+
+### 2.1 The new "perfect algorithm" idea, evaluated before building
+
+The user's new idea is a **decision procedure**, not a bigger fact warehouse: enter an arbitrary new environment, ask the right question, obtain instant knowledge, decide what is worth learning, compare known/unknown, save sufficient generalization rather than exact actions, stay insanely fast, and invent new solutions on hard problems. Treated as a hypothesis, its useful core is **authority over the undecided**, not "scan everything". First principles:
+
+| User phrase | Minimal interpretation | Consequence |
+|---|---|---|
+| arbitrary new environment, no prior knowledge | do not assume a world model; copy the environment's own executable state and let its atoms answer | zero weights, zero runtime model calls, external store only |
+| ask the right question | choose the reachable executed contrast that maximally partitions the current undecided relation class | one run and one judgment beat word questions and exhaustive breadth |
+| instant knowledge / perfect web research | acquire and verify knowledge at build time; at runtime use only the project's inspectable/deletable store | web papers/benchmarks are inputs, never producer cognition or runtime dependencies |
+| goal-directed important learning vs learning everything | delete all observations that cannot change the current decision | "learn everything" is killed by the 81× faster strong-rung measurement |
+| scan everything and retrieve known/unknown | scan only decision-relevant `(identity, content, command)` rows until the class is decidable | unbounded scan cannot be "insanely fast"; exact traces are not knowledge |
+| what to save / what to generalize | save hashed grammar descriptors and relation texts whose terms recompute from the new machine; delete exact actions and expected labels | deletion-to-unlearn is the whole unlearning operation |
+| actions rarely reusable | carry the relation the action served, not the action | 43/43 stale rows and 31/31 raw-trace abstentions already falsified exact saving |
+| think like me / create new perfect solutions | kill the conventional frame first, then compose the smallest existing mechanisms that change the measured bottleneck | no whole model, no whole benchmark scaffold, no new knowledge house |
+
+**Single limiting factor now:** not missing facts, but missing **distinct verifier authority**. The November-2026 hard harnesses hide evaluator details, require clean-container replay, unprivileged verifier workers, gated assets, and maintainer-run or pinned evaluation protocols [OSWorld 2.1](https://snorkel.ai/osworld-2-1-long-horizon-computer-use-evaluation/), [SWE-bench Pro V2 PR #119](https://github.com/scaleapi/SWE-bench_Pro-os/pull/119), [Terminal-Bench v4.1.0](https://github.com/harbor-framework/terminal-bench/releases/tag/v4.1.0). A producer sandbox can compute, but it cannot certify its own result. The project already has a non-obvious OIDC public-runner mechanism, so the smartest least-engineering next step is to reuse it, not add a scanner, parser, model, second knowledge store, or new capability primitive.
+
+**Rejected iteration-8 ideas:** (1) make the web a runtime "perfect researcher" — killed by zero model calls / zero knowledge house and by gated benchmark assets; (2) scan everything — killed by unbounded cost and decision irrelevance; (3) save all environment experiences — killed by measured abstentions and stale rows; (4) add a universal natural-language purpose parser — killed by forbidden runtime model and authored-content problem; (5) create a second verification repository branch — killed by the one-branch constraint; (6) self-write an `INDEPENDENT_PASS` receipt locally — killed by `AGENTS.md` rule 4 and `VERIFICATION_IS_SOMEONE_ELSE`; (7) claim OSWorld / SWE-bench Pro / Terminal-Bench completion from fetched scores — killed by honesty law. What survives: one push-triggered, OIDC-attested replay of exact frozen bytes, with §6 explicitly still NOT MET.
+
+
 
 ### Why we cannot just let the model experience the most advanced coding actions once and have it learn them
 

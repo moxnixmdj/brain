@@ -1,0 +1,418 @@
+name: Independent grammar transport replay
+
+# WHY THIS WORKFLOW EXISTS
+#
+# AGENTS.md rule 4 and README's VERIFICATION_IS_SOMEONE_ELSE prohibition say that
+# independent verification is not a local label: a distinct verifier must re-run
+# frozen bytes and the receipt must carry a run reference. The existing
+# capability-receipt-verification.yml establishes the project's mechanism: a
+# GitHub Actions OIDC token binds repository, workflow_ref, run_id, run_attempt,
+# actor and jti to the runner, and a local process cannot mint those claims.
+#
+# This workflow re-runs ONLY iteration 7's stdlib zero-model grammar transport
+# on exact pinned blobs, from /tmp under `python3 -I -B`, plus five adversarial
+# fail-closed controls. It uploads the resulting receipt as an artifact. It does
+# not run a benchmark, register a capability, edit terminal truth, commit, push,
+# merge, or claim section 6. Artifact attestations and OIDC provenance are
+# build-time verification evidence, never runtime dependencies of Brain.
+
+on:
+  push:
+    branches: [arena/6f8ac9ce-brain]
+    paths:
+      - ".github/workflows/independent-grammar-transport-replay-v1.yml"
+      - "canonical/tools/recomputed_relation_grammar_v1.py"
+      - "canonical/tools/the_grammar_is_not_a_literal_v1.py"
+      - "canonical/tests/test_the_grammar_is_not_a_literal_v1.py"
+      - "canonical/astra_runtime/state/COMPUTED_COPY_GRAMMAR_RELATION_V1.json"
+      - "canonical/verification/GRAMMAR_TRANSPORT_RAW_LOG_20261123_V1.json"
+      - "canonical/verification/THE_GRAMMAR_IS_NOT_A_LITERAL_20261123_V1.json"
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/independent-grammar-transport-replay-v1.yml"
+      - "canonical/tools/recomputed_relation_grammar_v1.py"
+      - "canonical/tools/the_grammar_is_not_a_literal_v1.py"
+      - "canonical/tests/test_the_grammar_is_not_a_literal_v1.py"
+      - "canonical/astra_runtime/state/COMPUTED_COPY_GRAMMAR_RELATION_V1.json"
+      - "canonical/verification/GRAMMAR_TRANSPORT_RAW_LOG_20261123_V1.json"
+      - "canonical/verification/THE_GRAMMAR_IS_NOT_A_LITERAL_20261123_V1.json"
+  workflow_dispatch:
+
+concurrency:
+  group: independent-grammar-transport-replay-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  id-token: write
+
+env:
+  WORKSPACE: ${{ github.workspace }}
+
+jobs:
+  replay:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Bind exact frozen blobs and static import surface
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "${WORKSPACE}/out"
+          python3 - <<'PY'
+          import ast, json, os, pathlib, subprocess
+          root = pathlib.Path(os.environ["WORKSPACE"])
+          expected = {
+              "canonical/tools/recomputed_relation_grammar_v1.py": "6f62be9cc11b6c7e1413a9c04c5e494d5913a830",
+              "canonical/tools/the_grammar_is_not_a_literal_v1.py": "8dde6090e373fdfa69d789fcd7bdab2479800f8a",
+              "canonical/tests/test_the_grammar_is_not_a_literal_v1.py": "b39eabac4e6793b1e915c9ece96f26f70dafb537",
+              "canonical/astra_runtime/state/COMPUTED_COPY_GRAMMAR_RELATION_V1.json": "d3c3edd50f82f9521c3335c64b054112db87e12a",
+              "canonical/verification/GRAMMAR_TRANSPORT_RAW_LOG_20261123_V1.json": "97622874716358f62c4a4068f98827188af5ed3b",
+              "canonical/verification/THE_GRAMMAR_IS_NOT_A_LITERAL_20261123_V1.json": "00017bed9f3a1ffd23951dbd0ea00d6f62843a90",
+          }
+          observed = {
+              p: subprocess.check_output(["git", "hash-object", p], cwd=root, text=True).strip()
+              for p in expected
+          }
+          if observed != expected:
+              raise SystemExit("EXACT_BLOB_BINDING_FAIL " + json.dumps({"expected": expected, "observed": observed}, sort_keys=True))
+          source = (root / "canonical/tools/recomputed_relation_grammar_v1.py").read_text(encoding="utf-8")
+          tree = ast.parse(source)
+          mods = set()
+          for node in ast.walk(tree):
+              if isinstance(node, ast.Import):
+                  mods.update(a.name for a in node.names)
+              elif isinstance(node, ast.ImportFrom) and node.module:
+                  mods.add(node.module)
+          forbidden = {"urllib", "requests", "httpx", "socket", "http", "openai", "anthropic", "transformers", "torch", "tensorflow", "boto3", "canonical", "intake", "subprocess"}
+          marked = sorted(m for m in mods if m.split(".")[0] in forbidden)
+          if marked:
+              raise SystemExit("FORBIDDEN_IMPORT_IN_FROZEN_INTERPRETER " + repr(marked))
+          binding = {"expected": expected, "observed": observed, "equal": True, "imports": sorted(mods), "marked_imports": marked}
+          (root / "out" / "blob_bindings.json").write_text(json.dumps(binding, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+          print("EXACT_BLOB_BINDING_PASS", len(expected), "marked_imports", marked)
+          PY
+      - name: Replay frozen grammar transport from a different working directory
+        shell: bash
+        working-directory: /tmp
+        run: |
+          set -euo pipefail
+          python3 -I -B "${WORKSPACE}/canonical/tools/recomputed_relation_grammar_v1.py" \
+            --store "${WORKSPACE}/canonical/astra_runtime/state/COMPUTED_COPY_GRAMMAR_RELATION_V1.json" \
+            --raw-log "${WORKSPACE}/canonical/verification/GRAMMAR_TRANSPORT_RAW_LOG_20261123_V1.json" \
+            | tee "${WORKSPACE}/out/replay.json"
+          python3 - <<'PY'
+          import hashlib, json, os, pathlib
+          root = pathlib.Path(os.environ["WORKSPACE"])
+          d = json.loads((root / "out" / "replay.json").read_text(encoding="utf-8"))
+          p = json.loads((root / "canonical/verification/THE_GRAMMAR_IS_NOT_A_LITERAL_20261123_V1.json").read_text(encoding="utf-8"))
+          store_bytes = (root / "canonical/astra_runtime/state/COMPUTED_COPY_GRAMMAR_RELATION_V1.json").read_bytes()
+          raw_bytes = (root / "canonical/verification/GRAMMAR_TRANSPORT_RAW_LOG_20261123_V1.json").read_bytes()
+          checks = {
+              "status_PASS": d.get("status") == "PASS",
+              "schema": d.get("schema") == "BRAIN_RECOMPUTED_RELATION_GRAMMAR_V1",
+              "python_isolated_mode": d.get("python_isolated_mode") is True,
+              "independent_flag_not_claimed_by_interpreter": d.get("independent_verification_completed") is False,
+              "grammar_family": d.get("grammar_family") == "computed_copy_cardinality_v1",
+              "grammar_sha": d.get("grammar_sha256") == p["grammar"]["sha256"],
+              "raw_log_sha": d.get("raw_log_sha256") == p["raw_log"]["sha256"] == hashlib.sha256(raw_bytes).hexdigest(),
+              "store_sha": hashlib.sha256(store_bytes).hexdigest() == p["store"]["sha256"],
+              "raw_log_bytes": len(raw_bytes) == p["raw_log"]["bytes"] == 5127137,
+              "raw_log_records": p["raw_log"]["records"] == 2404,
+              "raw_log_machines": p["raw_log"]["machines"] == 6,
+              "normal_machines": d.get("normal_machines") == 5,
+              "pointerless_controls": d.get("pointerless_controls") == 1,
+              "terms_per_machine": d.get("terms_recomputed_per_machine") == 16,
+              "false_accepts": d.get("false_accepts") == 0,
+              "false_rejects": d.get("false_rejects") == 0,
+              "total_runs": sum(m.get("runs", 0) for m in d.get("machines", [])) == 2404,
+              "normal_runs": sum(m.get("runs", 0) for m in d.get("machines", []) if m.get("control") != "POINTERLESS") == 2365,
+              "term_evaluations": sum(m.get("term_evaluations", 0) for m in d.get("machines", [])) == 37840,
+              "pointerless_refusals": sum(m.get("pointer_failures", 0) for m in d.get("machines", []) if m.get("control") == "POINTERLESS") == 39,
+              "hard_cli_cases_in_producer_receipt": len(p["fresh_process"]["hard_cli_failures"]) == 12,
+              "all_D_criteria": all(v.get("MET") is True for v in p["verdict"].values()),
+              "producer_all_criteria_met": p.get("all_criteria_met") is True,
+              "producer_truth_false": p["truth"]["achieved"] is False,
+              "producer_section_6": p["truth"]["section_6"] == "NOT_MET",
+              "zero_models": p["cost"]["model_calls"] == 0,
+              "zero_parameters": p["cost"]["parameters_stored"] == 0,
+              "zero_runtime_network": p["cost"]["network_calls_at_run_time"] == 0,
+          }
+          failed = sorted(k for k, v in checks.items() if not v)
+          if failed:
+              raise SystemExit("FROZEN_REPLAY_MEASUREMENTS_FAIL " + repr(failed))
+          (root / "out" / "measurement_checks.json").write_text(json.dumps(checks, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+          print("FROZEN_REPLAY_MEASUREMENTS_PASS", len(checks))
+          PY
+      - name: Re-run five adversarial fail-closed controls
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib, json, os, pathlib, subprocess, tempfile
+          root = pathlib.Path(os.environ["WORKSPACE"])
+          out = root / "out"
+          interp = root / "canonical/tools/recomputed_relation_grammar_v1.py"
+          store_path = root / "canonical/astra_runtime/state/COMPUTED_COPY_GRAMMAR_RELATION_V1.json"
+          raw_path = root / "canonical/verification/GRAMMAR_TRANSPORT_RAW_LOG_20261123_V1.json"
+          store = json.loads(store_path.read_text(encoding="utf-8"))
+          raw = json.loads(raw_path.read_text(encoding="utf-8"))
+          tmp = pathlib.Path(tempfile.mkdtemp(prefix="grammar-controls-"))
+
+          def write_json(path, obj):
+              data = json.dumps(obj, indent=1, sort_keys=True, ensure_ascii=False).encode("utf-8") + b"\n"
+              path.write_bytes(data)
+              return hashlib.sha256(data).hexdigest()
+
+          def run_cli(store_file, raw_file, extra=()):
+              proc = subprocess.run(
+                  ["python3", "-I", "-B", str(interp), "--store", str(store_file), "--raw-log", str(raw_file), *extra],
+                  cwd="/tmp", capture_output=True, text=True,
+              )
+              status = None
+              try:
+                  status = json.loads(proc.stdout).get("status")
+              except Exception:
+                  pass
+              return {"exit_code": proc.returncode, "stdout_status": status, "stderr_tail": proc.stderr[-240:]}
+
+          def rebound_store(raw_sha, name):
+              obj = json.loads(json.dumps(store))
+              obj["evidence"]["raw_log_sha256"] = raw_sha
+              path = tmp / name
+              write_json(path, obj)
+              return path
+
+          controls = []
+          controls.append({
+              "case": "unknown_argument",
+              "expected": "HARD_CLI_FAILURE__UNKNOWN_ARGUMENT",
+              **run_cli(store_path, raw_path, ("--no-such-flag",)),
+          })
+          bad_grammar = json.loads(json.dumps(store))
+          bad_grammar["evidence"]["grammar_sha256"] = "0" * 64
+          bad_grammar_path = tmp / "mutated_grammar_store.json"
+          write_json(bad_grammar_path, bad_grammar)
+          controls.append({
+              "case": "mutated_grammar_hash",
+              "expected": "REFUSED__GRAMMAR_DESCRIPTOR_HASH_MISMATCH",
+              **run_cli(bad_grammar_path, raw_path),
+          })
+          labelled = json.loads(json.dumps(raw))
+          labelled["machines"][0]["records"][0]["expected"] = True
+          labelled_raw = tmp / "stored_expected_raw_log.json"
+          labelled_sha = write_json(labelled_raw, labelled)
+          controls.append({
+              "case": "stored_expected_labels",
+              "expected": "REFUSED__RAW_LOG_HAS_STORED_VERDICTS",
+              **run_cli(rebound_store(labelled_sha, "stored_expected_store.json"), labelled_raw),
+          })
+          no_pointerless = json.loads(json.dumps(raw))
+          no_pointerless["machines"] = [m for m in no_pointerless["machines"] if m.get("control") != "POINTERLESS"]
+          no_pointerless_raw = tmp / "no_pointerless_raw_log.json"
+          no_pointerless_sha = write_json(no_pointerless_raw, no_pointerless)
+          controls.append({
+              "case": "no_pointerless_control",
+              "expected": "REFUSED__NO_POINTERLESS_CONTROL",
+              **run_cli(rebound_store(no_pointerless_sha, "no_pointerless_store.json"), no_pointerless_raw),
+          })
+          no_normal = json.loads(json.dumps(raw))
+          no_normal["machines"] = [m for m in no_normal["machines"] if m.get("control") == "POINTERLESS"]
+          no_normal_raw = tmp / "no_normal_raw_log.json"
+          no_normal_sha = write_json(no_normal_raw, no_normal)
+          controls.append({
+              "case": "no_normal_machine",
+              "expected": "REFUSED__NO_NORMAL_MACHINE",
+              **run_cli(rebound_store(no_normal_sha, "no_normal_store.json"), no_normal_raw),
+          })
+          for row in controls:
+              if row["exit_code"] != 2:
+                  raise SystemExit("CONTROL_DID_NOT_FAIL_CLOSED " + json.dumps(row, sort_keys=True))
+              if row["case"] == "unknown_argument":
+                  if "unrecognized arguments" not in row["stderr_tail"]:
+                      raise SystemExit("UNKNOWN_ARGUMENT_CONTROL_MISSING_ARGPARSE_REFUSAL " + json.dumps(row, sort_keys=True))
+              elif row["stdout_status"] != row["expected"]:
+                  raise SystemExit("UNEXPECTED_CONTROL_STATUS " + json.dumps(row, sort_keys=True))
+          (out / "adversarial_controls.json").write_text(json.dumps(controls, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+          print("ADVERSARIAL_CONTROLS_PASS", len(controls))
+          PY
+      - name: Bind GitHub Actions OIDC run reference and emit independent receipt
+        if: success()
+        shell: bash
+        env:
+          OIDC_AUDIENCE: https://github.com/${{ github.repository }}
+          TOKEN_JSON: /tmp/oidc_token.json
+        run: |
+          set -euo pipefail
+          curl -fsS -H "Authorization: bearer ${ACTIONS_ID_TOKEN_REQUEST_TOKEN}" \
+            "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=${OIDC_AUDIENCE}" > "${TOKEN_JSON}"
+          python3 - <<'PY'
+          import base64, hashlib, json, os, pathlib, subprocess
+          root = pathlib.Path(os.environ["WORKSPACE"])
+          out = root / "out"
+          token = json.loads(pathlib.Path(os.environ["TOKEN_JSON"]).read_text(encoding="utf-8"))["value"]
+          part = token.split(".")[1]
+          part += "=" * (-len(part) % 4)
+          claims = json.loads(base64.urlsafe_b64decode(part))
+          audience = os.environ["OIDC_AUDIENCE"]
+          run_id = int(os.environ["GITHUB_RUN_ID"])
+          run_attempt = int(os.environ["GITHUB_RUN_ATTEMPT"])
+          checks = {
+              "issuer": str(claims.get("iss")) == "https://token.actions.githubusercontent.com",
+              "audience": str(claims.get("aud")) == audience,
+              "repository": str(claims.get("repository")) == os.environ["GITHUB_REPOSITORY"],
+              "run_id": int(claims.get("run_id", -1)) == run_id,
+              "event_name": str(claims.get("event_name")) in {"push", "workflow_dispatch", "pull_request"},
+              "workflow_path": ".github/workflows/independent-grammar-transport-replay-v1.yml" in str(claims.get("workflow_ref")),
+              "github_hosted": str(claims.get("runner_environment")) == "github-hosted",
+          }
+          if "run_attempt" in claims:
+              checks["run_attempt"] = int(claims["run_attempt"]) == run_attempt
+          if "sha" in claims:
+              checks["sha"] = str(claims["sha"]) == os.environ["GITHUB_SHA"]
+          if "ref" in claims:
+              checks["ref"] = str(claims["ref"]) == os.environ["GITHUB_REF"]
+          failed = sorted(k for k, v in checks.items() if not v)
+          if failed:
+              raise SystemExit("OIDC_RUN_REFERENCE_BINDING_FAIL " + repr(failed))
+          keep = (
+              "iss", "aud", "repository", "repository_id", "workflow_ref", "job_workflow_ref",
+              "run_id", "run_attempt", "event_name", "head_ref", "ref", "sha", "actor",
+              "actor_id", "jti", "runner_environment",
+          )
+          oidc_claims = {k: claims.get(k) for k in keep}
+          replay = json.loads((out / "replay.json").read_text(encoding="utf-8"))
+          bindings = json.loads((out / "blob_bindings.json").read_text(encoding="utf-8"))
+          controls = json.loads((out / "adversarial_controls.json").read_text(encoding="utf-8"))
+          measurement_checks = json.loads((out / "measurement_checks.json").read_text(encoding="utf-8"))
+          producer_path = root / "canonical/verification/THE_GRAMMAR_IS_NOT_A_LITERAL_20261123_V1.json"
+          producer = json.loads(producer_path.read_text(encoding="utf-8"))
+          producer_bytes = producer_path.read_bytes()
+          producer_blob = subprocess.check_output(["git", "hash-object", str(producer_path)], cwd=root, text=True).strip()
+          normal_runs = sum(m.get("runs", 0) for m in replay.get("machines", []) if m.get("control") != "POINTERLESS")
+          total_runs = sum(m.get("runs", 0) for m in replay.get("machines", []))
+          term_evaluations = sum(m.get("term_evaluations", 0) for m in replay.get("machines", []))
+          pointerless_refusals = sum(m.get("pointer_failures", 0) for m in replay.get("machines", []) if m.get("control") == "POINTERLESS")
+          run_url = f"https://github.com/{os.environ['GITHUB_REPOSITORY']}/actions/runs/{run_id}"
+          verifier_identity = "github-actions-oidc:" + str(claims.get("workflow_ref")) + "#run-" + str(run_id)
+          receipt = {
+              "schema": "BRAIN_INDEPENDENT_GRAMMAR_TRANSPORT_VERIFICATION_20261123_V1",
+              "date": "2026-11-23",
+              "status": "INDEPENDENT_GITHUB_ACTIONS_PASS__OIDC_ATTESTED_TRANSPORT_REPLAY__ZERO_CREDIT",
+              "authority": "GITHUB_ACTIONS_OIDC_ATTESTED_TRANSPORT_REPLAY__NO_CAPABILITY_OR_TERMINAL_CREDIT",
+              "scope": "ITERATION_7_FINITE_GRAMMAR_TRANSPORT_ONLY",
+              "independent_verified": True,
+              "producer_id": "arena-agent:arena/6f8ac9ce-brain",
+              "producer_identity": "arena-agent:arena/6f8ac9ce-brain",
+              "verifier_id": verifier_identity,
+              "verifier_identity": verifier_identity,
+              "workflow_run_id": run_id,
+              "workflow_run_attempt": run_attempt,
+              "workflow_run_url": run_url,
+              "workflow_job": os.environ.get("GITHUB_JOB"),
+              "workflow_name": os.environ.get("GITHUB_WORKFLOW"),
+              "workflow_ref": os.environ.get("GITHUB_REF"),
+              "head_sha": os.environ.get("GITHUB_SHA"),
+              "event_name": os.environ.get("GITHUB_EVENT_NAME"),
+              "runner_os": os.environ.get("RUNNER_OS"),
+              "runner_arch": os.environ.get("RUNNER_ARCH"),
+              "runner_environment": claims.get("runner_environment"),
+              "github_repository": os.environ.get("GITHUB_REPOSITORY"),
+              "github_actor": os.environ.get("GITHUB_ACTOR"),
+              "oidc_claims": oidc_claims,
+              "run_reference": {
+                  "workflow_run_id": run_id,
+                  "workflow_run_attempt": run_attempt,
+                  "workflow_run_url": run_url,
+                  "oidc_jti": claims.get("jti"),
+                  "runner_attestation": "github-actions-oidc-token",
+              },
+              "producer_receipt": {
+                  "path": "canonical/verification/THE_GRAMMAR_IS_NOT_A_LITERAL_20261123_V1.json",
+                  "sha256": hashlib.sha256(producer_bytes).hexdigest(),
+                  "git_blob_sha": producer_blob,
+                  "authority": producer.get("authority"),
+                  "truth": producer.get("truth"),
+              },
+              "pinned_blob_binding": bindings,
+              "measurement_checks": measurement_checks,
+              "adversarial_controls": controls,
+              "replayed_status": replay.get("status"),
+              "replayed_schema": replay.get("schema"),
+              "python_isolated_mode": replay.get("python_isolated_mode"),
+              "independent_verification_completed_in_interpreter": replay.get("independent_verification_completed"),
+              "numeric_measurements": {
+                  "pinned_blobs": len(bindings["expected"]),
+                  "measurement_checks": len(measurement_checks),
+                  "adversarial_controls": len(controls),
+                  "normal_machines": replay.get("normal_machines"),
+                  "pointerless_controls": replay.get("pointerless_controls"),
+                  "normal_runs": normal_runs,
+                  "total_runs": total_runs,
+                  "terms_recomputed_per_machine": replay.get("terms_recomputed_per_machine"),
+                  "term_evaluations": term_evaluations,
+                  "false_accepts": replay.get("false_accepts"),
+                  "false_rejects": replay.get("false_rejects"),
+                  "pointerless_refusals": pointerless_refusals,
+                  "hard_cli_cases_in_producer_receipt": len(producer["fresh_process"]["hard_cli_failures"]),
+                  "model_calls": producer["cost"]["model_calls"],
+                  "parameters_stored": producer["cost"]["parameters_stored"],
+                  "runtime_network_calls": producer["cost"]["network_calls_at_run_time"],
+                  "hard_benchmark_tasks_consumed": 0,
+              },
+              "verified": [
+                  "EXACT_PINNED_BLOBS_BOUND",
+                  "FROZEN_ZERO_MODEL_GRAMMAR_TRANSPORT_REPLAY_PASS",
+                  "PYTHON_ISOLATED_MODE_TRUE_FROM_TMP",
+                  "FIVE_NORMAL_MACHINES_AND_ONE_POINTERLESS_CONTROL",
+                  "ZERO_FALSE_ACCEPTS_AND_ZERO_FALSE_REJECTS",
+                  "FIVE_ADVERSARIAL_CONTROLS_FAIL_CLOSED",
+                  "OIDC_RUN_REFERENCE_BOUND",
+                  "NO_CAPABILITY_OR_TERMINAL_CREDIT",
+              ],
+              "not_verified": [
+                  "OSWorld 2.1 tasks",
+                  "SWE-bench Pro V2 or HARD-51 tasks",
+                  "Terminal-Bench 4.1 tasks",
+                  "arbitrary natural-language purpose understanding",
+                  "authored repair content",
+                  "GUI or browser computer use",
+                  "shipped-agent integration",
+              ],
+              "capability_credit_delta": 0,
+              "family_credit_delta": 0,
+              "terminal_credit_delta": 0,
+              "new_reality_units_consumed": 0,
+              "incremental_spend_usd": 0,
+              "benchmark_score_authority": False,
+              "execution_authority": False,
+              "promotion_authority": False,
+              "truth": {"achieved": False, "section_6": "NOT_MET"},
+              "rule": "VERIFICATION_APPLIES_ONLY_TO_EXACT_LISTED_BLOBS__ANY_SEMANTIC_BYTE_CHANGE_REQUIRES_REVERIFICATION",
+          }
+          receipt_path = out / "GRAMMAR_TRANSPORT_INDEPENDENT_VERIFICATION_20261123_V1.json"
+          data = json.dumps(receipt, indent=2, sort_keys=True, ensure_ascii=False).encode("utf-8") + b"\n"
+          receipt_path.write_bytes(data)
+          (out / "GRAMMAR_TRANSPORT_INDEPENDENT_VERIFICATION_20261123_V1.sha256").write_text(
+              hashlib.sha256(data).hexdigest() + "\n", encoding="utf-8"
+          )
+          print("OIDC_RUN_REFERENCE_BOUND", run_id, run_attempt)
+          print("INDEPENDENT_TRANSPORT_RECEIPT_SHA256", hashlib.sha256(data).hexdigest())
+          print(json.dumps({"status": receipt["status"], "scope": receipt["scope"], "truth": receipt["truth"]}, sort_keys=True))
+          PY
+      - name: Upload runner-owned independent replay artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: independent-grammar-transport-replay
+          path: out/
+          if-no-files-found: warn
+          retention-days: 90
