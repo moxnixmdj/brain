@@ -7329,3 +7329,86 @@ and the reader were written by the same person. The first external test cost one
 defects.
 
     THE CHEAPEST TEST YOU HAVE NEVER RUN IS A PROGRAM YOU DID NOT WRITE.
+
+## §A129 — the planner meets real GNU tools
+
+### The same lesson, one organ over
+
+§A127 found the reader scored **5/17** on code it did not write. The obvious next question was whether anything
+else had the same blind spot. The planner had only ever been tested on `canonical/tests/programs/bin/` — tools
+written in this repository, by the same hand.
+
+Real GNU tools do not look like our fixtures:
+
+```
+Usage: wc [OPTION]... [FILE]...
+  or:  wc [OPTION]... --files0-from=F
+Print newline, word, and byte counts for each FILE, ...
+```
+
+**Measured, before any fix:**
+
+    wc    "count the lines in notes.txt"   -> NO_OPERATION_IN_THE_DOCUMENT
+    sort  "sort notes.txt in reverse order" -> NO_OPERATION_IN_THE_DOCUMENT
+    gzip  "compress notes.txt"              -> NO_OPERATION_IN_THE_DOCUMENT
+    tar   "create an archive ..."           -> PLANNED  (tar has no `or:` line)
+
+The `or:` line is a **second usage form**. The description extractor returned it as the program's *description*.
+So `wc` never stated the act `count` — the only place it says so was never read. The refusal was honest about the
+reader's state and wrong about the program: the worst kind, because it looks like caution.
+
+### Three defects, and one that was worse than a defect
+
+| defect | evidence |
+|---|---|
+| an alternate usage line read as a description | `lc` returned `or:  wc [OPTION]... --files0-from=F` as `wc`'s summary |
+| a switch named by its **meaning** never connected | `sort ... in reverse order` planned `sort notes.txt`, `complete=True`, `dropped_words=[]` |
+| a switch rendered as a value slot | produced `--reverse ''` — a command that runs and does the wrong thing |
+
+The second is the dangerous one. The plan was **complete and wrong**:
+
+    reason      PLANNED_BY_ARGUMENT_ORDER
+    complete    True
+    dropped     []
+    refusals    []
+    argv        ['/usr/bin/sort', 'notes.txt']      <- "reverse" was simply gone
+
+Every honesty field this project built said the plan accounted for the request. None of them noticed that a
+request word had been dropped, because a modifier is not a *value* and the value machinery never saw it.
+
+### The fix, and why it is not a table of facts
+
+The rule is the document's own evidence: **an option states an act in its own words; the request uses that act to
+qualify the operation.** `-r, --reverse  reverse the result of comparisons` and *"in reverse order"* share the
+word `reverse`. Nothing about sorting is stored — the word and its meaning both come from the document in hand.
+
+The first attempt matched **five** switches (`--reverse`, `--version-sort`, `--debug`, `--merge`, `--stable`),
+because every one of them mentions *"sort"* — the request's own **operation** verb. Narrowed to the request's
+**modifiers** (everything after the first act), exactly one matched. That is not a fact about `sort`; it is the
+grammar of an instruction: the first act says what to do, the rest qualify it.
+
+### Result
+
+| request | before | after | verified |
+|---|---|---|---|
+| `wc` count the lines | refused | `wc notes.txt` | real run |
+| `sort` notes | planned | `sort notes.txt` | real run |
+| `sort` in **reverse** order | planned, **wrong**, called complete | `sort --reverse notes.txt` | real run: `cherry banana apple` vs `apple banana cherry` |
+| `gzip` compress | refused | `gzip notes.txt` | real run |
+| `tar` create archive | planned | `tar -cf backup.tar notes.txt` | real run |
+
+**142 passed** across nine suites, including §A127's external reader test. Both fixes were mutation-checked:
+restoring the `or:` bug fails two tests; rendering the switch as a value slot fails the execution test.
+
+### What is still not true
+
+    VERIFIED   four real GNU tools planned correctly from their own --help, scored against execution
+    VERIFIED   the honesty fields no longer say "complete" about a dropped modifier in this case
+    NOT FIXED  the general case: a dropped modifier still does not force a refusal. The switch is now FOUND,
+               but nothing guarantees the next unrecognised modifier is reported rather than ignored
+    NOT DONE   no GUI, no browser, no OSWorld task -- this is still a command-line organ
+
+The third line is the next bottleneck, and it is the same one §A119, §A125 and §A126 each met in a different
+organ:
+
+> **A verdict must account for every part of the request, or say which part it could not.**

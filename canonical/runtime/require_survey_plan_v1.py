@@ -864,6 +864,16 @@ def _first_sentence_after_usage(text: str) -> str:
         if line.lower().startswith(("usage:", "use:", "synopsis")):
             seen_usage = True
             continue
+        # §A129: AN ALTERNATE USAGE LINE IS STILL USAGE, NOT A DESCRIPTION. Measured 2026-11-23 on real GNU
+        # tools: `wc --help` and `sort --help` print a second usage form on the next line
+        #   Usage: wc [OPTION]... [FILE]...
+        #   or:    wc [OPTION]... --files0-from=F
+        # and this function returned THAT line as the program's description. So the sentence "...Print newline,
+        # word, and byte counts" -- the only place `wc` says what it does -- was never read, `count` was never an
+        # act of the document, and every request to count lines was refused with NO_OPERATION_IN_THE_DOCUMENT.
+        # The refusal was honest about the reader's state and wrong about the program.
+        if re.match(r"^(or|and)\s*:", line.lower()) or re.match(r"^[a-z_./\[][^\s]*(\.[a-z]+)?\s", line):
+            continue
         if not seen_usage:
             continue
         if line.startswith("-") or re.match(r"^[A-Z][A-Z ]+:", line):
@@ -1640,6 +1650,11 @@ def _names_the_value(slot: Mapping[str, Any], value: Mapping[str, Any]) -> bool:
     the value itself; the only words used are ones the page printed in the flag's description and
     the request printed immediately before the value.
     """
+    # §A129: A SWITCH HAS NO VALUE, so it cannot name one. `str.split("")` raises ValueError, and it did:
+    # `Compress ... into ...` on real `zip` crashed the planner with `empty separator` because the request
+    # named a switch and this function tried to split a context around a value that is empty by definition.
+    if value.get("kind") == "switch" or not str(value.get("value") or ""):
+        return False
     described = words_of(str(slot.get("words") or "")) | words_of(
         str(slot.get("flag") or "").lstrip("-"))
     if not described:
@@ -1781,11 +1796,10 @@ def _render(tool: str, prefix: Sequence[str], operation: Mapping[str, Any] | Non
     # them in: `stitch OUTFILE [PATCH]...` is a grammar, and the thing made comes first
     placed: list[tuple[int, str]] = []
     for item in bound:
-        if item["role"] in ("path_slot", "value_slot"):
-            slots.extend([str(item["option"]), str(item["value"])])
-        elif item["role"] == "switch":
-            # a switch takes no value: it is the whole statement it makes
+        if item["role"] == "switch":
             slots.append(str(item["option"]))
+        elif item["role"] in ("path_slot", "value_slot"):
+            slots.extend([str(item["option"]), str(item["value"])])
         elif item["role"] in ("redirect", "stdin_from", "unbound"):
             # `unbound` is the planner saying, in the same breath, "this value has no place in
             # this command". Writing it out as an argument contradicts that statement and makes
@@ -1814,10 +1828,19 @@ def _render(tool: str, prefix: Sequence[str], operation: Mapping[str, Any] | Non
     # scored 0.5 with the right values in the wrong sequence. Ordering by the document's
     # declaration costs nothing and is the only order the page itself endorses.
     if declared and slots:
+        # §A129: A SWITCH IS NOT A PAIR. Sorting pairs assumed every two slots are (flag, value), which is false
+        # the moment a switch is present -- `-r notes.txt` would have been reordered as if `notes.txt` were the
+        # value of `-r`. Group by "a slot that is a flag" instead, so a switch sorts as a group of one.
         rank = {str(flag): i for i, flag in enumerate(declared)}
-        pairs = [(slots[i], slots[i + 1]) for i in range(0, len(slots) - 1, 2)]
-        pairs.sort(key=lambda pair: rank.get(str(pair[0]), len(rank)))
-        slots = [x for pair in pairs for x in pair]
+        groups: list[list[str]] = []
+        for slot in slots:
+            text = str(slot)
+            if groups and not (text.startswith("-") and len(text) > 1):
+                groups[-1].append(text)
+            else:
+                groups.append([text])
+        groups.sort(key=lambda group: rank.get(group[0], len(rank)))
+        slots = [x for group in groups for x in group]
     argv.extend(slots)
     argv.extend(positional)
     return argv
@@ -2930,6 +2953,12 @@ def _composed_readings(requirement: Mapping[str, Any], usage: Mapping[str, Any],
                 reserved[str(value["value"])] = index
 
     for value in values:
+        if value.get("kind") == "switch" and value.get("value_of"):
+            # §A129: A SWITCH THE REQUEST NAMED BY ITS MEANING. It carries no argument; the flag is the whole
+            # of the statement. `role: switch` is already understood by _render, which until now had no producer.
+            bound.append({"role": "switch", "option": str(value["value_of"]),
+                          "value": str(value["value_of"]), "means": "switch"})
+            continue
         if value.get("value_of"):
             bound.append({"role": "value_slot", "option": str(value["value_of"]),
                           "value": str(value["value"])})
@@ -3133,6 +3162,57 @@ def _with_redirect(argv: list[str], requirement: Mapping[str, Any],
     return {}
 
 
+def _flags_the_request_names_by_meaning(requirement: Mapping[str, Any],
+                                       tree: Mapping[str, Any]) -> list[str]:
+    """Flags whose own documented meaning the request repeats as a modifier.
+
+    §A129. Measured 2026-11-23 on real GNU `sort`:
+        document:  -r, --reverse   reverse the result of comparisons
+        request:   sort notes.txt in reverse order
+        planned:   sort notes.txt            <- complete=True, dropped_words=[], refusal=[]
+    The document states the act `reverse`, the request states the act `reverse`, and nothing connected them:
+    the matcher only routed *flags the request spells literally* (`--reverse`, `-r`). So a correct request was
+    silently answered with a different command, and every honesty field said the plan was complete.
+
+    THE RULE IS THE DOCUMENT'S OWN EVIDENCE, NOT A TABLE: an option names an ACT in its own words, and the
+    request uses that same act to modify the tool's operation. It is not a value (no flag takes `reverse` here),
+    so it can only be a flag -- and the only flag that states it is that one. Nothing about sorting is stored;
+    the word and its meaning both come from the document in hand.
+    """
+    instruction = str(requirement.get("instruction") or "")
+    if not instruction:
+        return []
+    # ONLY THE REQUEST'S MODIFIERS CAN NAME A SWITCH. Measured 2026-11-23: taking every act in the request
+    # matched FIVE options of real `sort` (--reverse, --version-sort, --debug, --merge, --stable), because each
+    # one mentions "sort" -- the request's own OPERATION verb -- somewhere in its description. The first act is
+    # what the request says to DO; the acts after it are qualifications of that doing. `sort ... in reverse
+    # order` -> operation "sort", modifier "reverse" -> exactly --reverse. Matching on the operation is matching
+    # on the tool's own name, which every page states.
+    ordered = [a[0] for a in acts_in(instruction)]
+    requested = set(ordered[1:])
+    if not requested:
+        return []
+    carried = {str(v.get("value") or "") for v in requirement.get("values") or []}
+    carried_words = set()
+    for value in carried:
+        carried_words |= set(words_of(value))
+    found: list[str] = []
+    for node in every_page(tree):
+        for option in node.get("options") or []:
+            flag = str(option.get("flag") or "")
+            if not flag or option.get("meta"):
+                # an option that takes a value is a place for a value, decided elsewhere; this rule is for
+                # switches, which is what a bare modifier can be
+                continue
+            states = {str(a[0]) for a in option.get("acts") or []}
+            if not states:
+                states = {a[0] for a in acts_in(str(option.get("words") or ""))}
+            shared = (states & requested) - carried_words
+            if shared and flag not in found:
+                found.append(flag)
+    return found
+
+
 def plan(requirement: Mapping[str, Any], tree: Mapping[str, Any],
          *, ask_program: bool = True, read_manual: bool = True) -> dict[str, Any]:
     """Ordered candidate readings of (instruction, document), every refusal named.
@@ -3162,6 +3242,17 @@ def plan(requirement: Mapping[str, Any], tree: Mapping[str, Any],
     # prose the request labels with an option's own name is a value of that option
     requirement = _labelled_prose(requirement, tree)
     values = list(requirement.get("values") or [])
+    # §A129: a switch the request names by its MEANING rather than by its spelling. Without this the plan is
+    # complete and wrong -- see _flags_the_request_names_by_meaning for the measurement.
+    named_switches = _flags_the_request_names_by_meaning(requirement, tree)
+    requirement = dict(requirement)
+    # carried as values of a switch: the flag with no argument. `bound` already knows how to render a switch.
+    # `value_of` is how a value says which flag carries it; for a switch the "value" is empty and the flag is
+    # the whole statement, so it rides the existing slot mechanism instead of inventing a parallel one.
+    requirement["values"] = list(values) + [
+        {"kind": "switch", "value": "", "value_of": flag, "means": "switch", "step": 0}
+        for flag in named_switches]
+    values = list(requirement["values"])
     document_acts: list[dict[str, Any]] = []
     if not acts:
         # The request's verb is not in the seed class. Before refusing, ask the documents: an
@@ -3376,8 +3467,14 @@ def plan(requirement: Mapping[str, Any], tree: Mapping[str, Any],
     here_picture = positional_grammar(nodes[deepest].get("usage") or {}) or picture
     for reading in _positional_readings(free_values, here_picture,
                                         nodes[deepest].get("usage") or {}):
-        bound = list(reading) + [{"role": "value_slot", "option": str(v["value_of"]),
-                                  "value": str(v["value"])} for v in claimed_values]
+        # §A129: a claimed value whose kind is `switch` carries no argument -- the flag is the whole statement.
+        # Without this branch the switch arrives as a value_slot and renders as `--reverse ''`, a command that
+        # is wrong in a way no gate catches: it runs, and it sorts in reverse of nothing.
+        bound = list(reading) + [
+            ({"role": "switch", "option": str(v["value_of"]), "value": str(v["value_of"]), "means": "switch"}
+             if v.get("kind") == "switch" else
+             {"role": "value_slot", "option": str(v["value_of"]), "value": str(v["value"])})
+            for v in claimed_values]
         # A bare word the request leaves over can still be an argument, and the *usage line*
         # says so. `grep [OPTION]... PATTERNS [FILE]...` declares three places, one of them
         # named PATTERNS; a request saying "show the lines of /etc/hosts that contain
