@@ -3339,3 +3339,108 @@ than inference. The idiom list is closed English; a request phrased another way 
 than guessed. And `derive_argv` runs a subprocess, so it is only safe because the program is chosen
 by `shutil.which` and the query is one of two constants — that constraint must not be relaxed to let
 a sentence's own words become argv words.
+
+---
+
+## §A73 — THE SENTENCE THAT IS A COMMAND LINE (2026-11-22)
+
+**A72 ended with a machine that could answer "check the python version" but could not run `ls -la`.**
+The most ordinary request a person can make at a computer was unreachable, and finding out why took
+four separate gates, each of which was individually defensible.
+
+### The measurement that started it
+
+| sentence | before A73 |
+|---|---|
+| `ls -la` | `FAIL__RAW_GOAL_COMPILATION_GAP` |
+| `git log` | `FAIL__RAW_GOAL_COMPILATION_GAP` |
+| `df -h` | `FAIL__RAW_GOAL_COMPILATION_GAP` |
+| `Run the shell command ls -la and write its output to listing.txt.` | PASS |
+
+The machine could run `ls` only if you asked for it in a magic English sentence. That is
+hand-holding, and it hid four independent defects, each of which blocked the next:
+
+1. **`extract_argv` needed the sentence to FRAME its command** — the word "command", the word
+   "argv", a quoting, or prose of the shape "Copy the file a to b". A bare command line matched no
+   pattern, so the ARGV slot was never filled.
+2. **`_score` gave the row zero** — the lexical scorer looks for the row's own vocabulary
+   (shell, command, process); the words of a command line are the program's name and its flags.
+   Zero score means the row is not a candidate at all, so `GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH`.
+3. **`confined_dispatch_v1` refused an argv run with no declared file effect** unless its tail was
+   in `stdout_effect_argv` — a hand-written list (`--version`, `-V`, `--help`, `-h`) of commands
+   someone had expected to talk. `ls -la` bound its argv, reached the gate, and was refused, while
+   `ls -la --version` would have passed.
+4. **`applied` had to be non-empty** — the step that delivers a verified clone run to the host
+   demanded a list of FILES, so an observation (`ls -la` writes no file) failed
+   `FAIL_CLOSED__HOST_DID_NOT_SHOW_THE_EFFECT` after succeeding twice.
+
+Fixing any one alone changes nothing; that is why this looked like one hard problem and was really
+four small ones. **The lesson is the same as A72's: each gate was guarding a real property, and in
+each case the property was already tested directly a few lines away.** The whitelist guarded "don't
+pass on a command that proved nothing", which `stdout_tail.strip()` already tests. The file list
+guarded "the host run really happened", which the host run's own exit code already tests.
+
+### The rule, and the evidence for it
+
+> **A command line contains no English function words. Prose does.**
+
+Not "does it start with a program name" — `sort` and `find` are programs, and "sort the lines of a
+file" and "find all files larger than one megabyte" both start with one. A person writing prose needs
+"the", "of", "all", "larger than"; a person writing a command line does not, because the program's
+own flags carry the grammar. Measured over twelve sentences, this separates all twelve, and both
+halves are now pinned by tests — including the two prose sentences that begin with a real program
+name, because reading either as a command line would be an invention executed on a claim nobody made.
+
+### What works now
+
+| sentence | result |
+|---|---|
+| `ls -la` | **PASS**, `PASS__OBSERVATION_RAN_AND_VERIFIED`, `receipt_sha256` present, **the listing comes back in `stdout`** |
+| `df -h` | **PASS**, same shape |
+| `true` | **refused** — exits 0 and prints nothing, so there is no receipt to read |
+| `ls \| head -5` | **refused** — the adapter runs argv with no shell; this machine cannot honour it |
+| `du -sh .` | `['du','-sh','.']` — the operand is kept |
+
+### The bug I introduced and caught
+
+My first version stripped a trailing full stop to remove sentence punctuation, which turned
+`du -sh .` into `du -sh`: **the command still runs and answers about the wrong thing.** The test
+`test_a_trailing_stop_is_removed_from_a_sentence_but_never_from_an_operand` exists because of it, and
+it is the same shape as every other defect in this document — a value removed from a sentence the
+sentence did not give permission to remove.
+
+### A verdict stored about the machine is the same defect as a fact stored about the world
+
+The expressibility instrument holds `WRONG_ON_INSPECTION`, a table of tasks judged wrong. It applied
+that verdict to the **task**, permanently, so a task could never recover. When bare command lines
+became routable, `show me the last five git commits` changed route — and the table still called it
+wrong without looking. The fix is not to delete the table but to **consult it only while the machine
+still takes the route it criticised**; when the route changes, the verdict is re-derived from the
+receipt.
+
+That mattered immediately: re-derived, the count went back to **4 verified / 2 wrong**, because the
+*probe* still asks `git.history.bisect_regression.v1` for a five-commit log and still gets
+`answer: ranked_candidates, mode: perf_regression`. **A change that made one path better did not make
+that row honest, and an instrument that trusted the improvement instead of the receipt would have
+reported progress that did not exist.** (The other front door, `ra.solve`, does answer it correctly
+via `git.repository.operate.v1` with `op: log` and five real commits — two entry points, one
+re-measured gap.)
+
+### Verified
+
+| check | result |
+|---|---|
+| `ra.solve("ls -la")` | **PASS** 5.4 s, receipt `host_untouched: true`, listing returned |
+| `ra.solve("df -h")` | **PASS** 5.1 s |
+| the four A71/A72 flows | **all PASS** (~5 s each, dominated by clone creation) |
+| 6 test suites | **113 passed, 1 failed** |
+| the 1 failure | the pre-existing `tar.gz` pair, identical at HEAD |
+| `tasks_v1` / `unseen_program_v1` | **13/13** / **6/6** |
+| new tests | 22, pinning both halves of the rule and the receipt |
+
+**Honest limits.** `git log` compiles to `git.repository.operate.v1` (which scores 18 and even
+matches `log` as a keyword) but that row cannot bind its inputs from a two-word sentence, so the
+request is refused; refusal is honest, and it is the next gap. A command whose stdout is huge is
+truncated to the receipt's 2000-byte tail. And the function-word list is closed English: a command
+line containing a word like `all` (`grep --all ...`) is read as prose and refused rather than
+guessed at — the same trade A72 made, for the same reason.

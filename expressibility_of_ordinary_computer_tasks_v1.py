@@ -188,7 +188,26 @@ def honesty(report=None, markers=None):
         wanted = markers.get(row["task"])
         payload = json.dumps(row.get("result") or {}).lower()
         audited = WRONG_ON_INSPECTION.get(row["task"])
-        if audited is not None:
+        # A RECORDED VERDICT IS ABOUT THE ROUTE THAT PRODUCED IT, NOT ABOUT THE TASK FOR EVER.
+        #
+        # This table says which rows answered these tasks wrongly and why. It was being applied as
+        # a permanent verdict on the TASK, so a task could never recover: measured 2026-11-22,
+        # "show me the last five git commits" is now answered by `git.repository.operate.v1` with
+        # `op: "log"` and five real commits -- sha, author, date and subject for each -- and the
+        # table still called it NOT_AN_ANSWER because it had been wrong once, through
+        # `git.history.bisect_regression.v1`.
+        #
+        # A verdict stored about the machine is the same defect as a fact stored about the world:
+        # it stops being checked. So the record is consulted only while the machine is STILL taking
+        # that route. When the route has changed, the verdict is re-derived from the receipt, which
+        # is what this function exists to do.
+        # The row that actually answered is `capability_id`; `routed_to` is not always populated
+        # (measured: the probe leaves it None and reports the capability under its own key), and
+        # comparing a None against a recorded id would call every route "changed".
+        _answered_by = row.get("capability_id") or row.get("routed_to")
+        still_the_same_route = (audited is not None
+                               and audited.get("routed_to") == _answered_by)
+        if still_the_same_route:
             verdict = "NOT_AN_ANSWER"
         elif not wanted:
             verdict = "UNJUDGED"

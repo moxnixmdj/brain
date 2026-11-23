@@ -764,6 +764,69 @@ def stated_command_refusal(text: str) -> str | None:
               " produces only the first, so nothing was executed")
 
 
+# A SENTENCE THAT **IS** A COMMAND LINE, RATHER THAN ONE THAT MENTIONS ONE.
+#
+# Every route above needs the sentence to FRAME its command: the word "command", the word "argv", a
+# quoting, or English prose of the form "Copy the file a to b". Measured 2026-11-22: that left the
+# single most ordinary request there is -- a person typing the command itself -- completely
+# unreachable. `ls -la`, `git log`, `python3 --version`, `df -h` all returned None and the whole
+# request died at GOAL_COMPILATION_BEST_MATCH_UNBINDABLE, even though `shell.command.run` was
+# sitting there verified with nothing to bind.
+#
+# The distinction that makes this safe is not "does it start with a program name" -- `sort` and
+# `find` are programs, and "sort the lines of a file" and "find all files larger than one megabyte"
+# both start with one. It is that a COMMAND LINE CONTAINS NO ENGLISH FUNCTION WORDS. A person
+# writing prose needs "the", "of", "in", "all", "larger than"; a person writing a command line does
+# not, because the program's own flags carry the grammar. Measured over twelve sentences, this
+# separates all twelve: every command line is one, and every prose sentence -- including the two
+# that begin with a real program name -- is not.
+_FUNCTION_WORDS = frozenset({
+    "the", "a", "an", "of", "in", "on", "at", "to", "for", "with", "by", "from", "into", "onto",
+    "and", "or", "but", "that", "this", "these", "those", "all", "any", "some", "than", "then",
+    "is", "are", "was", "were", "be", "been", "being", "it", "its", "my", "our", "your", "their",
+    "what", "which", "how", "when", "where", "who", "whom", "whose", "me", "you", "we", "they",
+    "i", "he", "she", "them", "us", "as", "if", "so", "such", "each", "every", "both", "either",
+    "not", "no", "do", "does", "did", "can", "could", "would", "should", "will", "shall", "may",
+    "might", "must", "please", "want", "need", "help", "make", "get", "give", "show", "tell",
+})
+
+
+def _is_a_bare_command_line(sentence: str) -> list[str] | None:
+    """The argv when the whole sentence IS a command line, else None.
+
+    A command line is a program this machine has, followed by arguments, and containing no English
+    function word. Shell syntax is refused exactly as it is everywhere else -- the adapter runs argv
+    with no shell, so a pipeline or redirection is a command this machine cannot honour.
+    """
+    text = str(sentence or "").strip()
+    if not text or len(text) > 2000:
+        return None
+    # A trailing full stop is punctuation on a SENTENCE, not part of an operand -- but `.` alone is
+    # the current directory, and a command whose last argument is a path ending in `.` (`.`,
+    # `./`, `src/.`) must keep it. Stripping it unconditionally turned "du -sh ." into "du -sh",
+    # which silently drops an argument: the command still runs, and answers about the wrong thing.
+    # So the stop is removed only when there is a word in front of it.
+    if text.endswith(".") and not text.endswith("..") and len(text.split()) and len(text) > 1:
+        _head, _sep, _last = text.rpartition(" ")
+        if _last not in (".", "./", "../") and not _last.endswith("/."):
+            text = text[:-1].rstrip()
+    if not text:
+        return None
+    try:
+        parts = shlex.split(text)
+    except ValueError:
+        return None
+    if not parts or not all(isinstance(part, str) and part for part in parts):
+        return None
+    if _SHELL_SYNTAX.search(text):
+        return None
+    if not _is_a_program(parts[0], _known_programs()):
+        return None
+    if any(token.lower() in _FUNCTION_WORDS for token in parts):
+        return None
+    return parts
+
+
 def extract_argv(text: str) -> list[str] | None:
     """The command line the sentence states, token by token, or None.
 
@@ -795,6 +858,14 @@ def extract_argv(text: str) -> list[str] | None:
     ``['cat','a','>','b']``, which prints both files instead of writing one.
     """
     sentence = str(text or "")
+    # THE SENTENCE MAY BE THE COMMAND LINE ITSELF.
+    #
+    # This is checked FIRST because it is the strongest statement a sentence can make about what to
+    # run -- it is not describing a command, it is one -- and because every rule below is about
+    # reading a command OUT of surrounding English, which is work this case does not need.
+    bare = _is_a_bare_command_line(sentence)
+    if bare:
+        return bare
     # A QUOTED command line ends at its closing quote.  The patterns below run to
     # the end of the sentence, which is right for "the command cp a b" and wrong for
     # every sentence that says anything after the command -- and real requests do:

@@ -1544,6 +1544,33 @@ def _score(goal, cid, entry):
     # a program on this machine documents the sentence's own words, and a sentence that states a
     # command never reaches it. Every capability that scores above zero today is untouched.
     if "argv" in _placeholders(entry.get("action_template") or {}):
+        # A SENTENCE THAT STATES A COMMAND LINE HAS ALREADY SUPPLIED THIS ROW'S ONLY INPUT.
+        #
+        # `shell.command.run` takes an ARGV and nothing else, so a sentence that IS a command line
+        # ("ls -la", "git log", "df -h") has stated everything the row needs -- and yet it scored
+        # ZERO, because the lexical scorer looks for the row's own vocabulary (shell, command,
+        # process) and the words of a command line are the program's name and its flags. The most
+        # ordinary request a person can make was unroutable while the row that runs it sat verified
+        # with nothing to bind.
+        #
+        # This is the same evidence the derivation path below uses, one step earlier: not "the
+        # machine documents a command for these words" but "these words ARE a command". Nothing is
+        # inferred -- `extract_argv` already proves the first token is a program on this machine and
+        # refuses shell syntax -- and no other row can be displaced, because no other row takes an
+        # argv. A sentence that is NOT a command line scores exactly as it did.
+        try:
+            from canonical.runtime import composer_route_v1 as _composer
+            _stated = _composer._is_a_bare_command_line(goal)
+        except Exception:  # noqa: BLE001 - no reader, the lexical score stands
+            _stated = None
+        if _stated:
+            return 1, 0, {
+                "goal_tokens": sorted(_tokens(goal)),
+                "matched_provides": [], "matched_requires": [], "matched_identity": [],
+                "matched_keywords": [],
+                "stated_argv": list(_stated),
+                "rule": "THE_SENTENCE_IS_THE_COMMAND_LINE",
+            }
         try:
             from canonical.runtime import machine_purpose_index_v1 as _machine
             _derived = _machine.derive_argv(goal)

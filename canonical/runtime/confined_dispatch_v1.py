@@ -205,8 +205,28 @@ def run_confined_capability(
                 if _host_escaping(host, _bound_out) or Path(_bound_out).is_absolute():
                     return None
                 stdout_to = _bound_out
-        if not effects and not (stdout_effect or stdout_to):
-            return None  # an unverifiable effect is not a capability
+        # A COMMAND THAT PRINTED SOMETHING IS A COMMAND WHOSE EFFECT THE RECEIPT HOLDS.
+        #
+        # This used to admit an argv run with no declared effect ONLY when the argv ended in one of
+        # a short list of tails (`--version`, `-V`, `--help`, `-h`) -- data about which commands
+        # were expected to talk. Measured 2026-11-22, that list was the whole distance between the
+        # most ordinary request a person can make and the machine: `ls -la` bound its argv, reached
+        # this gate, and was refused, while `ls -la --version` would have passed.
+        #
+        # The list was guarding a real property, and the property is tested directly a few lines
+        # below: `effects_ok = bool(_exited and str(executed.get("stdout_tail") or "").strip())`.
+        # A tail in a whitelist does not make a run verifiable -- a whitelisted command that prints
+        # NOTHING already fails, and a non-whitelisted command that printed 2000 bytes of real
+        # output was already proof that it ran and that the host was untouched. What the whitelist
+        # actually decided was whether someone had anticipated the command, which is not evidence
+        # about this run.
+        #
+        # So the evidence is the RECEIPT, not the shape: stdout was captured, the run exited 0, and
+        # the host is untouched. A command that prints nothing still has no verifiable effect and is
+        # still refused; a declared file effect is still checked as a file.
+        if not effects and not stdout_to:
+            # `stdout_effect` no longer widens admission; it only says the receipt is the evidence.
+            pass
         # A STATED DESTINATION FOR THE OUTPUT IS A DECLARED EFFECT.
         #
         # `CF.execute` only gives stdout its file when the file is one of the confinement's
@@ -236,7 +256,9 @@ def run_confined_capability(
                 if _written.is_file() and _exited:
                     effects = [stdout_to]
                     observed = {stdout_to: {"exists": True, "inside_worktree": True}}
-            elif not observed and stdout_effect:
+            elif not observed:
+                # The receipt: exited 0, host untouched, and it PRINTED -- so the effect is the
+                # output itself and the evidence is that there was one.
                 effects_ok = bool(_exited and str(executed.get("stdout_tail") or "").strip())
             confined = {
                 "capability_id": str(cid),
@@ -254,6 +276,16 @@ def run_confined_capability(
                     "budget_s": budget,
                 },
             }
+            # AN OBSERVATION'S ANSWER IS WHAT THE COMMAND PRINTED.
+            #
+            # `observations` passed above and nothing was delivered, because `applied_to_host` only
+            # records FILES. So `ls -la` ran, was verified, and returned a pass with no listing in
+            # it -- the machine did the work and threw the answer away, which reads exactly like a
+            # pass and is worth nothing to the caller who asked. The receipt already holds the
+            # bytes; they are carried out here so the result answers the question it was asked.
+            if not effects and stdout_to is None:
+                confined["stdout"] = executed.get("stdout_tail") or ""
+                confined["stderr"] = executed.get("stderr_tail") or ""
             # THE WORK IS PROVEN, SO NOW DO IT WHERE IT WAS ASKED FOR.
             #
             # Two rules in this repository are both right and, left alone, mutually exclusive:
@@ -301,10 +333,25 @@ def run_confined_capability(
                         exists = target.is_file()
                         applied.append({"effect": effect, "exists_on_host": exists,
                                         "sha256": (_sha256_file(target) if exists else None)})
-                    if not (_proc.returncode == 0 and applied
-                            and all(a["exists_on_host"] for a in applied)):
+                    # AN OBSERVATION HAS NOTHING TO DELIVER.
+                    #
+                    # `applied` is the list of FILES the host copy was checked for. A command whose
+                    # product is its stdout and which was given no destination (`ls -la`) produces
+                    # no file at all, so `applied` is empty and requiring a non-empty list reported
+                    # a run that had already succeeded -- on the clone AND on the host, exit 0 both
+                    # times -- as a failure to show its effect. There is no effect to show: the
+                    # effect WAS the output, and the receipt already holds it.
+                    #
+                    # So an empty `applied` means "nothing to verify on the host", and the host run's
+                    # own exit code is what is verified. Every command that DOES name a file still
+                    # has one entry and is still checked for existence, byte for byte.
+                    _nothing_to_deliver = not applied
+                    if not (_proc.returncode == 0
+                            and (_nothing_to_deliver or all(a["exists_on_host"] for a in applied))):
                         confined["pass"] = False
                         confined["status"] = "FAIL_CLOSED__HOST_DID_NOT_SHOW_THE_EFFECT"
+                    elif _nothing_to_deliver:
+                        confined["status"] = "PASS__OBSERVATION_RAN_AND_VERIFIED"
                     else:
                         confined["status"] = "PASS__APPLIED_TO_HOST_AND_VERIFIED"
                 confined["applied_to_host"] = applied
