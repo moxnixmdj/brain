@@ -1,0 +1,24 @@
+{
+ "schema": "BRAIN_CARRIED_RELATION_V1",
+ "relation": {
+  "texts": [
+   "monotone[probe_new_content]",
+   "final:count[probe_new_content]==1"
+  ],
+  "operator": "and"
+ },
+ "fit": {
+  "machines": [
+   "TARBALL",
+   "FILESYSTEM",
+   "SQLITE"
+  ],
+  "runs": 555,
+  "grammar_sha256": "4a772cbdff5f8a11"
+ },
+ "evidence": {
+  "evidence_sha256": "36eaaa7fa3512f46",
+  "judgment_on_the_run": false,
+  "chosen_run_steps": 1
+ }
+}

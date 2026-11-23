@@ -1,0 +1,86 @@
+{
+ "schema": "BRAIN_THE_RELATION_REFUSES_THE_UNSTATABLE_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "date": "2026-11-23",
+ "branch": "arena/6f8ac9ce-brain",
+ "mode": "A_GOAL_OUTSIDE_THE_GRAMMAR_IS_REFUSED_NOT_APPROXIMATED",
+ "declared_before_the_run": {
+  "N1": "the carried relation is not recomputable or is wrong on the MOVE machine",
+  "N2": "the loop emits no false accept when the goal is unstatable",
+  "N3": "the same 2-conjunction grammar has no minimal statement for moved_judge on MOVE runs, and the refusal names the missing vocabulary",
+  "N4": "a move and a copy-then-delete have identical final states on real executions",
+  "N5": "0 model calls, 0 stored parameters, 0 network calls at run time; every run executed"
+ },
+ "evaluated_after_the_run": "N3 was FALSIFIED (2 minimal statements exist) and N2's precondition was VOID; neither was relaxed. A measurement defect in the first version of N2 (a zero set without evaluation) was fixed and the whole tool re-run before this receipt.",
+ "verdict": {
+  "N1_carried_relation_does_not_travel_here": {
+   "carried": {
+    "status": "REFUSED__VOCABULARY_NOT_RECOMPUTED",
+    "missing": [
+     "monotone[probe_new_content]",
+     "final:count[probe_new_content]==1"
+    ],
+    "abstentions": 25
+   },
+   "wrong_predictions": 0,
+   "MET": true
+  },
+  "N2_no_false_accept_when_unstatable": {
+   "action": "VERIFIED_SURVIVORS",
+   "admissible_statements": [
+    "monotone[probe_seed_content] and present_then_absent[seed]",
+    "no_decrease and present_then_absent[seed]"
+   ],
+   "false_accepts": 0,
+   "false_rejects": 0,
+   "verdict": "VOID__THE_GOAL_WAS_STATABLE",
+   "reason": "N2's precondition (an unstatable goal) is false; the intersection was evaluated on every real run anyway and is reported, not asserted",
+   "MET": false
+  },
+  "N3_grammar_cannot_state_the_goal": {
+   "terms": 31,
+   "hypotheses": 496,
+   "behaviours": 17,
+   "goal_minimal_statements": 2,
+   "expected": "0 minimal statements: the count grammar cannot name holder histories",
+   "observed": "2 minimal statements",
+   "reason": "FALSIFIED: `run_terms` already produces present_then_absent[ident] and precedence[has a; has b] terms, so the run grammar CAN state a holder-history goal. The missing part is not the grammar; it is that a relation learned for a different goal cannot be carried into this machine without re-fitting.",
+   "MET": false
+  },
+  "N4_same_final_state_real_runs": {
+   "pairs": [
+    {
+     "move_steps": 1,
+     "copy_then_delete_steps": 3,
+     "identical_final_state": true,
+     "move_judged": true,
+     "copy_judged": false
+    }
+   ],
+   "MET": true
+  },
+  "N5_zeros_and_real_execution": {
+   "model_calls": 0,
+   "parameters_stored": 0,
+   "network_calls_at_run_time": 0,
+   "runs": 25,
+   "sequences": 84,
+   "accepted_by_moved_judge": 6,
+   "MET": true
+  }
+ },
+ "all_criteria_met": false,
+ "falsified_expectation": "the grammar CAN state a holder-history goal; what does not travel is a relation fitted for a different goal in a different machine",
+ "next_bottleneck": "a carried relation is refused whenever its term texts do not recompute from the new machine's own executed runs; the agent must re-fit in the new environment (25 real runs here), so 'learn once, keep forever' is still false for goals whose vocabulary is environment-specific",
+ "cost": {
+  "seconds": 0.54,
+  "model_calls": 0,
+  "parameters_stored": 0,
+  "network_calls_at_run_time": 0
+ },
+ "limits": [
+  "one real CLI machine (mv/cp/rm/ls), no GUI, browser or repository repair",
+  "the judge is the project's deterministic moved_judge, not a human",
+  "a grammar that CAN state the goal would be verified on real runs, not trusted"
+ ]
+}

@@ -1,0 +1,122 @@
+{
+ "schema": "BRAIN_THE_LOOP_REPEATS_ON_A_SECOND_GOAL_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "date": "2026-11-23",
+ "branch": "arena/6f8ac9ce-brain",
+ "mode": "THE_SAME_LOOP_ON_A_SECOND_GOAL_AND_A_SECOND_RESIDUAL",
+ "declared_before_the_run": {
+  "P1": "the second goal has its own residual class greater than one",
+  "P2": "one executed run in a new environment separates the carried relations; one judgment collapses the class to one with zero questions about statements",
+  "P3": "the collapsed relation is exact on held-out runs and the discarded relation is wrong there at least once",
+  "P4": "exact saved runs abstain on held-out; the relation does not",
+  "P5": "zeros, all runs executed, and the iteration-1 relation still refuses on this goal"
+ },
+ "fit": {
+  "goal": "moved_judge",
+  "runs": 25,
+  "class": 2,
+  "texts": [
+   "monotone[probe_seed_content] and present_then_absent[seed]",
+   "no_decrease and present_then_absent[seed]"
+  ]
+ },
+ "question": {
+  "separating_runs": 8,
+  "chosen_run_steps": 2,
+  "judgment_on_the_run": true,
+  "survivor": "monotone[probe_seed_content] and present_then_absent[seed]",
+  "discarded": [
+   "no_decrease and present_then_absent[seed]"
+  ]
+ },
+ "verdict": {
+  "P1_second_goal_has_a_residual": {
+   "class": 2,
+   "texts": [
+    "monotone[probe_seed_content] and present_then_absent[seed]",
+    "no_decrease and present_then_absent[seed]"
+   ],
+   "MET": true
+  },
+  "P2_one_run_collapses_it": {
+   "separating_runs": 8,
+   "chosen_run_steps": 2,
+   "judgments_on_runs": 1,
+   "questions_about_statements": 0,
+   "class_after": 1,
+   "MET": true
+  },
+  "P3_exact_on_held_out": {
+   "prediction": {
+    "status": "PREDICTED",
+    "runs": 68,
+    "abstentions": 0,
+    "false_accepts": 0,
+    "false_rejects": 4,
+    "texts": [
+     "monotone[probe_seed_content]",
+     "present_then_absent[seed]"
+    ],
+    "terms_recomputed_from_this_machine": 60
+   },
+   "discarded_wrong": 9,
+   "MET": false
+  },
+  "P4_what_to_save": {
+   "raw_abstentions": 43,
+   "relation_abstentions": 0,
+   "MET": true
+  },
+  "P5_zeros_and_no_cross_goal_smuggling": {
+   "model_calls": 0,
+   "parameters_stored": 0,
+   "network_calls_at_run_time": 0,
+   "old_relation_status": "REFUSED__VOCABULARY_NOT_RECOMPUTED",
+   "fit_runs": 25,
+   "select_runs": 58,
+   "held_runs": 68,
+   "MET": true
+  }
+ },
+ "diagnostics_of_the_p3_failure": {
+  "false_reject_witnesses": 4,
+  "witnesses_with_seed_recreated_under_different_content": 4,
+  "named_cause": "the grammar has no term for `the holder of THIS content changed`; present_then_absent[seed] is falsified when the identity seed is re-created with different content after a real move",
+  "first_witness": [
+   {
+    "state": [
+     "extra",
+     "other",
+     "seed"
+    ]
+   },
+   {
+    "state": [
+     "copy",
+     "extra",
+     "other"
+    ]
+   },
+   {
+    "state": [
+     "copy",
+     "extra",
+     "other",
+     "seed"
+    ]
+   }
+  ]
+ },
+ "all_criteria_met": false,
+ "cost": {
+  "seconds": 2.39,
+  "model_calls": 0,
+  "parameters_stored": 0,
+  "network_calls_at_run_time": 0
+ },
+ "limits": [
+  "three real CLI machines (mv/cp/rm/ls/sh), no GUI, browser or code repair",
+  "the judge is the project's deterministic moved_judge, not a human",
+  "literal names seed/other/extra are shared so terms recompute; iteration 3 measured the honest refusal when they are not"
+ ]
+}

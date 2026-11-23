@@ -1,0 +1,198 @@
+{
+ "schema": "BRAIN_THE_ENVIRONMENT_ANSWERS_THE_QUESTION_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "date": "2026-11-23",
+ "branch": "arena/6f8ac9ce-brain",
+ "mode": "ONE_NEW_ENVIRONMENT_PAYS_THE_RESIDUAL_WITH_AN_EXECUTED_RUN",
+ "declared_before_the_run": {
+  "H1": "the fitted residual class is greater than one",
+  "H2": "a new environment's executed runs contain a separating run; one judgment on a run collapses the class to one within ceil(log2(class)) judgments and zero questions about statements",
+  "H3": "the collapsed relation has zero false accepts and zero false rejects on a held-out environment, which contains at least one run where the discarded statement is wrong",
+  "H4": "no separating run implies zero questions, intersection action, zero false accepts",
+  "H5": "the relation is externally stored, replays with zero re-fit, and deleting the store restores the residual class",
+  "H6": "exact saved runs/actions abstain on the held-out environment; the relation does not",
+  "H7": "zero model calls, zero stored parameters, zero network calls at run time; every run executed; the local instant-knowledge tier does not decide the choice"
+ },
+ "question": {
+  "schema": "BRAIN_THE_ENVIRONMENT_ANSWERS_THE_QUESTION_V1",
+  "action": "COLLAPSED",
+  "separating_runs": 10,
+  "chosen_run_index": 2,
+  "chosen_run_steps": 1,
+  "judgment_on_the_run": false,
+  "judgments_on_runs": 1,
+  "questions_about_statements": 0,
+  "survivors": [
+   "monotone[probe_new_content] and final:count[probe_new_content]==1"
+  ],
+  "class": 1,
+  "discarded": [
+   "created_once[probe_new_content]"
+  ],
+  "evidence_sha256": "36eaaa7fa3512f46"
+ },
+ "fit": {
+  "machines": [
+   "TARBALL",
+   "FILESYSTEM",
+   "SQLITE"
+  ],
+  "depths": {
+   "TARBALL": 5,
+   "FILESYSTEM": 4,
+   "SQLITE": 4
+  },
+  "runs": 555,
+  "terms": 244,
+  "hypotheses": 29890,
+  "behaviours": 622,
+  "residual_class": 2,
+  "residual_texts": [
+   "created_once[probe_new_content]",
+   "monotone[probe_new_content] and final:count[probe_new_content]==1"
+  ],
+  "seconds": 148.99
+ },
+ "scan": {
+  "select": {
+   "machine": "COPY_TWO",
+   "traces": 48,
+   "sequences": 84
+  },
+  "held_out": {
+   "machine": "TEE_COPY",
+   "traces": 31,
+   "sequences": 84
+  },
+  "no_contrast": {
+   "machine": "GIT",
+   "traces": 73,
+   "sequences": 155
+  }
+ },
+ "carried_relation": {
+  "schema": "BRAIN_CARRIED_RELATION_V1",
+  "relation": {
+   "texts": [
+    "monotone[probe_new_content]",
+    "final:count[probe_new_content]==1"
+   ],
+   "operator": "and"
+  },
+  "fit": {
+   "machines": [
+    "TARBALL",
+    "FILESYSTEM",
+    "SQLITE"
+   ],
+   "runs": 555,
+   "grammar_sha256": "4a772cbdff5f8a11"
+  },
+  "evidence": {
+   "evidence_sha256": "36eaaa7fa3512f46",
+   "judgment_on_the_run": false,
+   "chosen_run_steps": 1
+  }
+ },
+ "verdict": {
+  "H1_residual_is_a_class": {
+   "class": 2,
+   "texts": [
+    "created_once[probe_new_content]",
+    "monotone[probe_new_content] and final:count[probe_new_content]==1"
+   ],
+   "MET": true
+  },
+  "H2_one_run_collapses_it": {
+   "separating_runs": 10,
+   "judgments_on_runs": 1,
+   "questions_about_statements": 0,
+   "price_ceiling": 1,
+   "class_after": 1,
+   "chosen_run_steps": 1,
+   "MET": true
+  },
+  "H3_held_out_prediction": {
+   "prediction": {
+    "status": "PREDICTED",
+    "runs": 31,
+    "abstentions": 0,
+    "false_accepts": 0,
+    "false_rejects": 0,
+    "texts": [
+     "monotone[probe_new_content]",
+     "final:count[probe_new_content]==1"
+    ],
+    "terms_recomputed_from_this_machine": 66
+   },
+   "discarded_statement_wrong_on": 6,
+   "MET": true
+  },
+  "H4_no_contrast_refuses": {
+   "gate_action": "NO_QUESTION",
+   "distinguishing_runs": 0,
+   "questions": 0,
+   "intersection": {
+    "runs": 73,
+    "survivors": 2,
+    "false_accepts": 0,
+    "false_rejects": 0
+   },
+   "MET": true
+  },
+  "H5_external_deletable_relation": {
+   "stored": true,
+   "replay_status": "PREDICTED",
+   "after_delete_status": "REFUSED__NO_CARRIED_RELATION",
+   "MET": true
+  },
+  "H6_what_to_save": {
+   "raw_experience": {
+    "status": "LOOKUP_OVER_EXACT_RUNS",
+    "memorised_runs": 48,
+    "held_out_runs": 31,
+    "abstentions": 31,
+    "errors_on_answered": 0,
+    "false_accepts": 0,
+    "exact_action_transfer": "NOT_APPLICABLE__ACTION_VOCABULARY_DIFFERS"
+   },
+   "relation_abstentions": 0,
+   "MET": true
+  },
+  "H7_zeros_and_real_execution": {
+   "model_calls": 0,
+   "parameters_stored": 0,
+   "network_calls_at_run_time": 0,
+   "fit_runs": 555,
+   "fit_seconds": 148.99,
+   "select_sequences": 84,
+   "select_atoms": 4,
+   "held_out_sequences": 84,
+   "held_out_atoms": 4,
+   "no_contrast_sequences": 155,
+   "no_contrast_atoms": 5,
+   "guide": {
+    "status": "OPEN__LOCAL_GUIDE_NOT_FOUND",
+    "pass": false,
+    "documents": 0,
+    "decided_the_choice": false,
+    "reason": "a guide is K1 information; only an executed run's judgment decides"
+   },
+   "MET": true
+  }
+ },
+ "all_criteria_met": true,
+ "cost": {
+  "seconds": 155.62,
+  "model_calls": 0,
+  "parameters_stored": 0,
+  "network_calls_at_run_time": 0
+ },
+ "limits": [
+  "three CLI machines for the fit at depths 5/4/4; two more CLI machines and real git for the tests",
+  "the judge is the project's deterministic stand-in for the user's verdict on a run; it never sees a statement",
+  "the local instant-knowledge tier is asked but never decides; the web tier is not called",
+  "not OSWorld 2.1, SWE-bench Pro, Terminal-Bench 2.0, GUI or browser; no independent verifier",
+  "the carried relation's vocabulary must be recomputed from the new machine or replay refuses"
+ ]
+}

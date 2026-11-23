@@ -1,0 +1,454 @@
+{
+ "schema": "BRAIN_THE_MINIMUM_EXPERIENCE_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "date": "2026-11-23",
+ "branch": "arena/6f8ac9ce-brain",
+ "mode": "DEPTH_LADDER_PRICES_THE_EXPERIENCE_A_PORTABLE_GOAL_NEEDS",
+ "declared_before_the_run": {
+  "M1": "a shallow rung's carried relation is wrong on the held-out machine (false accepts > 0)",
+  "M2": "some rung with strictly fewer executed fit sequences than the full fit yields the strong residual",
+  "M3": "the first strong rung predicts the held-out machine with 0 false accepts, 0 false rejects, 0 abstentions and at least one run where the discarded statement is wrong",
+  "M4": "nested supersets beyond the first strong rung buy no additional predictive correctness on held-out",
+  "M5": "0 model calls, 0 stored parameters, 0 network calls at run time; every run executed; judgments bounded by ceil(log2(class)) at every rung"
+ },
+ "criteria_declared_after_a_first_run_for_M4": true,
+ "criterion_correction": "M4's first phrasing used ladder order; the first run falsified it (M4 false) and is preserved in the V0 receipt. M4 now measures nested supersets, declared in this tool before this receipt run.",
+ "full_fit_cited_not_re_run": {
+  "receipt": "canonical/verification/THE_ENVIRONMENT_ANSWERS_THE_QUESTION_20261123_V1.json",
+  "runs": 555,
+  "sequences": 2484,
+  "seconds": 148.99,
+  "held_out": {
+   "status": "PREDICTED",
+   "runs": 31,
+   "abstentions": 0,
+   "false_accepts": 0,
+   "false_rejects": 0,
+   "texts": [
+    "monotone[probe_new_content]",
+    "final:count[probe_new_content]==1"
+   ],
+   "terms_recomputed_from_this_machine": 66
+  }
+ },
+ "ladder": [
+  {
+   "depths": {
+    "TARBALL": 1,
+    "FILESYSTEM": 1,
+    "SQLITE": 1
+   },
+   "status": "MEASURED",
+   "fit_runs": 12,
+   "fit_sequences": 13,
+   "terms": 83,
+   "hypotheses": 3486,
+   "behaviours": 55,
+   "residual_class": 3,
+   "residual_texts": [
+    "at_least_once[probe_new_content]",
+    "created_once[probe_new_content]",
+    "final:count[probe_new_content]==1"
+   ],
+   "strong_residual": false,
+   "question": {
+    "action": "COLLAPSED",
+    "class": 1,
+    "judgments": 1,
+    "budget": 2
+   },
+   "seconds": 0.82,
+   "held_out": {
+    "status": "PREDICTED",
+    "runs": 31,
+    "abstentions": 0,
+    "false_accepts": 6,
+    "false_rejects": 0,
+    "texts": [
+     "final:count[probe_new_content]==1"
+    ],
+    "terms_recomputed_from_this_machine": 66
+   },
+   "discarded_wrong_on_held_out": 28
+  },
+  {
+   "depths": {
+    "TARBALL": 2,
+    "FILESYSTEM": 1,
+    "SQLITE": 1
+   },
+   "status": "MEASURED",
+   "fit_runs": 20,
+   "fit_sequences": 29,
+   "terms": 96,
+   "hypotheses": 4656,
+   "behaviours": 84,
+   "residual_class": 3,
+   "residual_texts": [
+    "at_least_once[probe_new_content]",
+    "created_once[probe_new_content]",
+    "final:count[probe_new_content]==1"
+   ],
+   "strong_residual": false,
+   "question": {
+    "action": "COLLAPSED",
+    "class": 1,
+    "judgments": 1,
+    "budget": 2
+   },
+   "seconds": 1.36,
+   "held_out": {
+    "status": "PREDICTED",
+    "runs": 31,
+    "abstentions": 0,
+    "false_accepts": 6,
+    "false_rejects": 0,
+    "texts": [
+     "final:count[probe_new_content]==1"
+    ],
+    "terms_recomputed_from_this_machine": 66
+   },
+   "discarded_wrong_on_held_out": 28
+  },
+  {
+   "depths": {
+    "TARBALL": 3,
+    "FILESYSTEM": 1,
+    "SQLITE": 1
+   },
+   "status": "MEASURED",
+   "fit_runs": 41,
+   "fit_sequences": 93,
+   "terms": 124,
+   "hypotheses": 7750,
+   "behaviours": 169,
+   "residual_class": 3,
+   "residual_texts": [
+    "created_once[probe_new_content]",
+    "final:count[probe_new_content]==1",
+    "at_least_once[probe_new_content] and monotone[probe_new_content]"
+   ],
+   "strong_residual": false,
+   "question": {
+    "action": "COLLAPSED",
+    "class": 1,
+    "judgments": 1,
+    "budget": 2
+   },
+   "seconds": 4.25,
+   "held_out": {
+    "status": "PREDICTED",
+    "runs": 31,
+    "abstentions": 0,
+    "false_accepts": 6,
+    "false_rejects": 0,
+    "texts": [
+     "final:count[probe_new_content]==1"
+    ],
+    "terms_recomputed_from_this_machine": 66
+   },
+   "discarded_wrong_on_held_out": 16
+  },
+  {
+   "depths": {
+    "TARBALL": 1,
+    "FILESYSTEM": 2,
+    "SQLITE": 1
+   },
+   "status": "MEASURED",
+   "fit_runs": 28,
+   "fit_sequences": 38,
+   "terms": 85,
+   "hypotheses": 3655,
+   "behaviours": 125,
+   "residual_class": 2,
+   "residual_texts": [
+    "created_once[probe_new_content]",
+    "final:count[probe_new_content]==1"
+   ],
+   "strong_residual": false,
+   "question": {
+    "action": "COLLAPSED",
+    "class": 1,
+    "judgments": 1,
+    "budget": 1
+   },
+   "seconds": 0.85,
+   "held_out": {
+    "status": "PREDICTED",
+    "runs": 31,
+    "abstentions": 0,
+    "false_accepts": 6,
+    "false_rejects": 0,
+    "texts": [
+     "final:count[probe_new_content]==1"
+    ],
+    "terms_recomputed_from_this_machine": 66
+   },
+   "discarded_wrong_on_held_out": 6
+  },
+  {
+   "depths": {
+    "TARBALL": 1,
+    "FILESYSTEM": 3,
+    "SQLITE": 1
+   },
+   "status": "MEASURED",
+   "fit_runs": 75,
+   "fit_sequences": 163,
+   "terms": 85,
+   "hypotheses": 3655,
+   "behaviours": 172,
+   "residual_class": 2,
+   "residual_texts": [
+    "created_once[probe_new_content]",
+    "monotone[probe_new_content] and final:count[probe_new_content]==1"
+   ],
+   "strong_residual": true,
+   "question": {
+    "action": "COLLAPSED",
+    "class": 1,
+    "judgments": 1,
+    "budget": 1
+   },
+   "seconds": 1.84,
+   "held_out": {
+    "status": "PREDICTED",
+    "runs": 31,
+    "abstentions": 0,
+    "false_accepts": 0,
+    "false_rejects": 0,
+    "texts": [
+     "monotone[probe_new_content]",
+     "final:count[probe_new_content]==1"
+    ],
+    "terms_recomputed_from_this_machine": 66
+   },
+   "discarded_wrong_on_held_out": 6
+  },
+  {
+   "depths": {
+    "TARBALL": 1,
+    "FILESYSTEM": 1,
+    "SQLITE": 2
+   },
+   "status": "MEASURED",
+   "fit_runs": 24,
+   "fit_sequences": 29,
+   "terms": 99,
+   "hypotheses": 4950,
+   "behaviours": 84,
+   "residual_class": 2,
+   "residual_texts": [
+    "created_once[probe_new_content]",
+    "final:count[probe_new_content]==1"
+   ],
+   "strong_residual": false,
+   "question": {
+    "action": "COLLAPSED",
+    "class": 1,
+    "judgments": 1,
+    "budget": 1
+   },
+   "seconds": 3.66,
+   "held_out": {
+    "status": "PREDICTED",
+    "runs": 31,
+    "abstentions": 0,
+    "false_accepts": 6,
+    "false_rejects": 0,
+    "texts": [
+     "final:count[probe_new_content]==1"
+    ],
+    "terms_recomputed_from_this_machine": 66
+   },
+   "discarded_wrong_on_held_out": 6
+  },
+  {
+   "depths": {
+    "TARBALL": 1,
+    "FILESYSTEM": 1,
+    "SQLITE": 3
+   },
+   "status": "MEASURED",
+   "fit_runs": 56,
+   "fit_sequences": 93,
+   "terms": 117,
+   "hypotheses": 6903,
+   "behaviours": 105,
+   "residual_class": 2,
+   "residual_texts": [
+    "created_once[probe_new_content]",
+    "final:count[probe_new_content]==1"
+   ],
+   "strong_residual": false,
+   "question": {
+    "action": "COLLAPSED",
+    "class": 1,
+    "judgments": 1,
+    "budget": 1
+   },
+   "seconds": 17.45,
+   "held_out": {
+    "status": "PREDICTED",
+    "runs": 31,
+    "abstentions": 0,
+    "false_accepts": 6,
+    "false_rejects": 0,
+    "texts": [
+     "final:count[probe_new_content]==1"
+    ],
+    "terms_recomputed_from_this_machine": 66
+   },
+   "discarded_wrong_on_held_out": 6
+  },
+  {
+   "depths": {
+    "TARBALL": 3,
+    "FILESYSTEM": 3,
+    "SQLITE": 3
+   },
+   "status": "MEASURED",
+   "fit_runs": 148,
+   "fit_sequences": 323,
+   "terms": 157,
+   "hypotheses": 12403,
+   "behaviours": 306,
+   "residual_class": 2,
+   "residual_texts": [
+    "created_once[probe_new_content]",
+    "monotone[probe_new_content] and final:count[probe_new_content]==1"
+   ],
+   "strong_residual": true,
+   "question": {
+    "action": "COLLAPSED",
+    "class": 1,
+    "judgments": 1,
+    "budget": 1
+   },
+   "seconds": 19.87,
+   "held_out": {
+    "status": "PREDICTED",
+    "runs": 31,
+    "abstentions": 0,
+    "false_accepts": 0,
+    "false_rejects": 0,
+    "texts": [
+     "monotone[probe_new_content]",
+     "final:count[probe_new_content]==1"
+    ],
+    "terms_recomputed_from_this_machine": 66
+   },
+   "discarded_wrong_on_held_out": 6
+  }
+ ],
+ "verdict": {
+  "M1_a_shallow_fit_is_not_enough": {
+   "weak_rungs": [
+    {
+     "TARBALL": 1,
+     "FILESYSTEM": 1,
+     "SQLITE": 1
+    },
+    {
+     "TARBALL": 2,
+     "FILESYSTEM": 1,
+     "SQLITE": 1
+    },
+    {
+     "TARBALL": 3,
+     "FILESYSTEM": 1,
+     "SQLITE": 1
+    },
+    {
+     "TARBALL": 1,
+     "FILESYSTEM": 2,
+     "SQLITE": 1
+    },
+    {
+     "TARBALL": 1,
+     "FILESYSTEM": 1,
+     "SQLITE": 2
+    },
+    {
+     "TARBALL": 1,
+     "FILESYSTEM": 1,
+     "SQLITE": 3
+    }
+   ],
+   "MET": true
+  },
+  "M2_a_cheap_rung_buys_the_strong_residual": {
+   "first_strong": {
+    "TARBALL": 1,
+    "FILESYSTEM": 3,
+    "SQLITE": 1
+   },
+   "first_strong_fit_sequences": 163,
+   "full_fit_sequences": 2484,
+   "MET": true
+  },
+  "M3_the_cheap_relation_travels": {
+   "first_exact": {
+    "TARBALL": 1,
+    "FILESYSTEM": 3,
+    "SQLITE": 1
+   },
+   "held_out": {
+    "status": "PREDICTED",
+    "runs": 31,
+    "abstentions": 0,
+    "false_accepts": 0,
+    "false_rejects": 0,
+    "texts": [
+     "monotone[probe_new_content]",
+     "final:count[probe_new_content]==1"
+    ],
+    "terms_recomputed_from_this_machine": 66
+   },
+   "discarded_wrong": 6,
+   "MET": true
+  },
+  "M4_more_breadth_buys_no_extra_correctness": {
+   "supersets_of_first_strong": [
+    {
+     "TARBALL": 1,
+     "FILESYSTEM": 3,
+     "SQLITE": 1
+    },
+    {
+     "TARBALL": 3,
+     "FILESYSTEM": 3,
+     "SQLITE": 3
+    }
+   ],
+   "supersets_all_exact": true,
+   "full_fit_is_nested": true,
+   "full_fit_exact": true,
+   "superseded_first_run": "canonical/verification/THE_MINIMUM_EXPERIENCE_20261123_V0_SUPERSEDED_M4_MISDESIGNED.json",
+   "MET": true
+  },
+  "M5_zeros_and_bounded_questions": {
+   "model_calls": 0,
+   "parameters_stored": 0,
+   "network_calls_at_run_time": 0,
+   "questions_within_budget": true,
+   "select_sequences": 84,
+   "held_out_sequences": 84,
+   "MET": true
+  }
+ },
+ "all_criteria_met": true,
+ "cost": {
+  "seconds": 51.24,
+  "model_calls": 0,
+  "parameters_stored": 0,
+  "network_calls_at_run_time": 0
+ },
+ "limits": [
+  "the full 555-run fit is cited from iteration 1's receipt, not re-executed here",
+  "the check is the project's deterministic stand-in for the user's verdict on a run",
+  "the grammar is the existing 2-conjunction run grammar; a goal outside it is refused",
+  "three CLI fit machines, two further CLI machines; no GUI, browser or SWE-bench Pro"
+ ]
+}

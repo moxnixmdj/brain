@@ -1,0 +1,36 @@
+{
+ "schema": "BRAIN_COMPUTED_HOLDER_RELATION_V1",
+ "relation": {
+  "texts": [
+   "holder_shape:first_final_different[probe_seed_content]",
+   "holder_shape:max_holders<=1[probe_seed_content]"
+  ],
+  "operator": "and"
+ },
+ "term_family": "computed_deictic_holder_shape_v1",
+ "feature_order": [
+  "initial_nonempty",
+  "final_nonempty",
+  "first_nonempty",
+  "initial_final_different",
+  "first_final_different",
+  "initial_final_same",
+  "max_holders<=1",
+  "max_holders<=2",
+  "never_empty",
+  "some_empty",
+  "holder_set_changed",
+  "cardinality_changed",
+  "initial_singleton",
+  "final_singleton",
+  "first_singleton",
+  "two_copies"
+ ],
+ "evidence": {
+  "term_sha256": "2b7b2c5465ea65a0",
+  "judgment_on_the_run": true,
+  "chosen_run_steps": 2,
+  "fit_runs": 83
+ },
+ "identity_literals": []
+}
