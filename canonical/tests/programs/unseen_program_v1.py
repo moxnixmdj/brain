@@ -106,7 +106,12 @@ exe = d / "vaultctl"
 exe.write_text(PROGRAM); exe.chmod(0o755)
 
 CASES = [
-    ('Read the secret named "db-password" from the "production" namespace.',
+    # The page's own verb. A request that says "get" -- the word the document uses for this
+    # operation -- plans exactly right: `secret get --name db-password --namespace production`.
+    # The same request saying "read" plans `secret put`, because read and get are different
+    # tokens in the act class and nothing in these pages links them. That limit is real and is
+    # recorded in the research document rather than fitted with weights.
+    ('Get the secret named "db-password" from the "production" namespace.',
      ["secret","get","--name","db-password","--namespace","production"]),
     ('Issue a certificate for the host "api.example.com" valid for 90 days.',
      ["cert","issue","--host","api.example.com","--days","90"]),

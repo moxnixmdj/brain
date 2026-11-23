@@ -137,7 +137,16 @@ def words_of(text: str) -> set[str]:
             continue
         for suffix in ("ing", "ed", "es", "s"):
             if len(word) > 4 and word.endswith(suffix) and not word.endswith("ss"):
-                word = word[: -len(suffix)]
+                stem = word[: -len(suffix)]
+                # Stripping `ed` from `named` gives `nam`, and the flag is `--name`: the request
+                # said "the secret *named* X" and the page said `--name`, and the two never met.
+                # A stem that would end in a bare consonant cluster with no vowel after the
+                # original's final `e` is the wrong stem -- `named`/`name`, `sized`/`size`,
+                # `moved`/`move`, `timed`/`time`. One rule, no word list: an `e` before the
+                # suffix is part of the stem, not part of the suffix.
+                if suffix == "ed" and len(word) >= 4 and word[-2] == "e":
+                    stem = word[:-1]
+                word = stem
                 break
         out.add(word)
     return out

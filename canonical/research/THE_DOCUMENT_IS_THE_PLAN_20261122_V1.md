@@ -2128,3 +2128,49 @@ secret named X" and asks to read it; `secret get` is reached by the same noun `s
 `--name` is documented "the secret's name". `policy allow`'s `--secret` is documented "the secret
 they may read" — a permission's object, not a value's. That distinction is available in the
 documents and is the next thing to try.
+
+### A54 — the one that cannot be settled from the page, and the stemming bug found on the way
+
+The request in A53 said **"Read** the secret named X". The page that performs it is **`secret get`**.
+No page in that program is named `read`, and no page says that `get` means read:
+
+    secret get       print the value of one secret          --name  --namespace  --reveal
+    secret put       store a new value under a name         --name  --namespace  --from-file  --value
+    policy allow     permit a principal to read a secret    --principal  --secret  --namespace
+
+So the mechanism routes to whichever page shares the most words, and `put` or `allow` can win.
+**This is not a weighting problem and I stopped treating it as one.** Two weight changes were tried
+and reverted; both would have fit this case and generalised to nothing.
+
+What *is* settled, and it is the important part: when the request uses **the page's own verb**, the
+plan is exactly right on the first try —
+
+    "Get the secret named "db-password" from the "production" namespace."
+      -> secret get --name db-password --namespace production          exact
+    "Issue a certificate for the host "api.example.com" valid for 90 days."
+      -> cert issue --host api.example.com --days 90                   exact
+    "List every secret name in the "staging" namespace."
+      -> secret list --namespace staging                               exact
+    "Allow the principal "analytics-svc" to read the secret "warehouse-key" in the "data" namespace."
+      -> policy allow --principal analytics-svc --secret warehouse-key --namespace data   exact
+    "Inspect the certificate for "api.example.com"."
+      -> cert inspect --host api.example.com                           exact
+    "Rotate the secret "api-token" in the "production" namespace."
+      -> secret rotate --name api-token --namespace production         exact
+
+**6 of 6**, on a program written in a dialect no fixture uses, with no EXAMPLES on any page.
+
+**A real bug fell out of chasing this: stemming.** `words_of` stripped `ed` from `named` and got
+`nam`, so the request's word "named" could never match the page's `--name`. The same rule broke
+`created`/`create`, `sized`/`size`, `moved`/`move`, `timed`/`time`. Fixed with one rule and no word
+list: when an `e` sits immediately before the suffix, the `e` is part of the stem. `--name` now
+matches "named", and `secret get` rose from 5 to 10 on that route.
+
+**What remains, stated as the next problem rather than hidden:** connecting a request's verb to a
+page's different verb for the same operation. Candidates, in order of how much the documents
+already support them — (a) the *object's kind*: "the secret named X" names a value, and
+`--name`'s own gloss is "the secret's name", where `policy allow`'s `--secret` is "the secret they
+may read"; (b) the page whose documented flags accept **every** value the request states, which
+`secret get` does and `secret put` does not without inventing one; (c) the *world's* refusal, which
+this project already treats as the final arbiter — a `put` with no `--value` is refused by the
+program, and that refusal is evidence the reading was wrong.
