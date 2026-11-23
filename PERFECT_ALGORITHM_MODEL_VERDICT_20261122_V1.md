@@ -493,3 +493,29 @@ constraints, which this sandbox cannot honestly satisfy.
 repo task — a minimal code-repair goal ("fix the bug in this file so the test passes"),
 with the predicate reading the receipt/oracle, is the single best test of the claim.
 That is the first unseen env class after this turn's work.
+
+## 15. "Instant learning permanently" — cross-process persistence, measured (2026-11-23)
+
+The §2 default says knowledge lives outside the weights and persists across
+sessions; the warm-replay probes proved the store re-read in-process. This probe
+(`cross_process_memory_probe_20261123.py`) runs TEACH in a subprocess (memory
+written to an on-disk store), then runs a COMPLETELY FRESH process against fresh
+content B, loading ONLY that file.
+
+Measured:
+- Phase A (process 1): TEACH on content A, ADMIT, memory file on disk (7920 bytes).
+- Phase B (fresh process, process 2): COLD on content B (unseen), loads only the disk
+  file — INSTANT_RECALL (`PASS__REPLAY_REACHED_GOAL`, rule `ga-28425ca74abd6331`),
+  0.6 s, `out.txt` matches the decompressed content byte-for-byte.
+- Zero model calls, zero network, $0.
+
+What this does and does not prove:
+- PROVEN: the store persists to an external, inspectable file; a process that has
+  never run the goal replays an admitted rule in <1 s with content verified. The
+  "permanently" half of the §2 contradiction is now measured, not assumed.
+- NOT PROVEN: the carried model, the plan rule, and the full learning semantics are
+  identical across session kinds (e.g. after a system restart or with priors from a
+  different directory layout). Same-instance, same-shape only.
+- The store is a JSON file at `canonical/astra_runtime/state/PERFECT_ALGORITHM_MEMORY_V1.json`
+  (or the caller's `memory_path_`), atomic write, schema-checked on load, refused on
+  schema mismatch — never a silent reset.
