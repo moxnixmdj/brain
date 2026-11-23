@@ -307,3 +307,56 @@ def test_the_derived_answer_is_the_real_clock():
     # The program printed a real timestamp: the current year is in it.
     import datetime
     assert str(datetime.datetime.now().year) in step["stdout"]
+
+
+# --------------------------------------------------------------------------------------------
+# A QUESTION ABOUT FILES ANSWERED BY A READER, AND DELIVERED AS FILES.
+#
+# Two gates stood between the bound command and the caller, and both were about CLASSIFICATION, not
+# about the command. Neither is visible unless you look at what the caller actually received.
+# --------------------------------------------------------------------------------------------
+def test_a_reader_answering_a_question_is_not_refused_as_a_writer():
+    """`shell.command.run` CAN write, so the rule must ask about the COMMAND, not the row.
+
+    "list the files using ls" derived `['ls']`, `ls` is in the machine's own `_READ_ONLY_COMMANDS`
+    table, and the request was refused as READ_ONLY_QUESTION_ANSWERED_BY_A_WRITER before it ran.
+    """
+    from canonical.runtime import live_brain_route_admission_v1 as gate
+    from canonical.runtime import live_integrated_brain_v1 as lb
+    entry = lb.load_verified_registry()["shell.command.run"]
+    assert gate._the_bound_command_is_a_reader("list the files using ls", entry) is True
+    # A program outside the reader table is not excused.
+    assert gate._the_bound_command_is_a_reader("list the files using rm", entry) is False
+
+
+@pytest.mark.parametrize("argv", [["sort", "-o", "out.txt"], ["sed", "-i", "s/a/b/", "f.txt"]])
+def test_a_reader_given_a_writing_flag_is_not_a_reader(argv):
+    """The exemption is about the command that will run, so a side-effecting flag cancels it."""
+    from canonical.runtime.answer_shape_v1 import _a_reader_stdout_as_files
+    assert _a_reader_stdout_as_files({"argv": argv, "stdout": "x\n"}) is None
+
+
+def test_a_rows_stdout_is_delivered_as_the_files_it_lists():
+    """The refusal was ANSWER_SHAPE_UNSERVED:file on a run that printed a real listing.
+
+    `shell.command.run` reports `stdout` at the top level of its execution row with no nested
+    `result`, so the projection skipped the row and refused an answer it was holding.
+    """
+    from canonical.runtime.answer_shape_v1 import _a_reader_stdout_as_files
+    assert _a_reader_stdout_as_files({"argv": ["ls"], "stdout": "a.txt\nb.txt\n"}) == (
+        "files", ["a.txt", "b.txt"])
+    # A program that is not a certified reader is never projected.
+    assert _a_reader_stdout_as_files({"argv": ["rm"], "stdout": "a.txt\n"}) is None
+
+
+def test_the_whole_sentence_is_answered_and_delivered():
+    """End to end, with nothing taught: prose in, a real file list out."""
+    from canonical.runtime import live_brain_route_admission_v1 as ra
+    result = ra.solve({"task_id": "files", "goal": "list the files using ls"})
+    assert result.get("pass") is True, result.get("status")
+    answer = result.get("answer") or {}
+    assert answer.get("noun") == "file"
+    assert answer.get("count", 0) > 0
+    # What it says is there really is there.
+    named = answer["value"][0]
+    assert (ROOT / named).exists() or (ROOT / "canonical" / named).exists()

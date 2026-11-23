@@ -644,6 +644,40 @@ def lift_named_answer(result: "dict[str, Any]", goal: str = "") -> bool:
     return False
 
 
+def _a_reader_stdout_as_files(row: Mapping[str, Any]) -> tuple[str, Any] | None:
+    """``("files", [...])`` from a read-only program's stdout, or None.
+
+    Which programs are readers is not decided here: `raw_goal_trace_acceptance_v1._READ_ONLY_COMMANDS`
+    already holds the table of programs whose re-run proves a read, and it is the same table the
+    writer-for-a-question gate consults. A name that is not in it is not projected.
+    """
+    try:
+        from canonical.runtime import raw_goal_trace_acceptance_v1 as _accept
+        argv = row.get("argv") or (row.get("inputs") or {}).get("argv") or []
+        program = str(list(argv)[0]) if argv else ""
+        if program not in frozenset(getattr(_accept, "_READ_ONLY_COMMANDS", ())):
+            return None
+        text = str(row.get("stdout") or "")
+        # A READER WITH A WRITING FLAG IS NOT A READER, and this is the same rule the gate that
+        # allowed the run applies -- checked here too rather than twice differently. `sort -o FILE`
+        # writes FILE; `sed -i` rewrites it in place.
+        side_flags = tuple(getattr(_accept, "_SIDE_EFFECTING_FLAGS", ()) or ())
+        by_program = dict(getattr(_accept, "_SIDE_EFFECTING_FLAGS_BY_PROGRAM", {}) or {})
+        for token in list(argv)[1:]:
+            token = str(token)
+            if token in side_flags:
+                return None
+            if any(token == flag or token.startswith(flag + "=")
+                   for flag in by_program.get(program, ())):
+                return None
+    except Exception:  # noqa: BLE001 - no table, no projection
+        return None
+    lines = [line for line in text.splitlines() if line.strip()]
+    if not lines:
+        return None
+    return "files", lines
+
+
 def deliver(goal: str, result: Mapping[str, Any], root: pathlib.Path | None = None) -> list[str]:
     """Deliver the answer the sentence asked for, or say why it cannot be delivered.
 
@@ -670,10 +704,31 @@ def deliver(goal: str, result: Mapping[str, Any], root: pathlib.Path | None = No
     for row in rows:
         inner = row.get("result") if isinstance(row.get("result"), Mapping) else None
         if inner is None:
-            continue
+            # A ROW MAY CARRY ITS OWN FIELDS.
+            #
+            # `shell.command.run` reports `stdout` (and `argv`, `exit_code`) at the top level of its
+            # execution row, with no nested `result` mapping. Every such row was skipped here, so its
+            # answer was refused as unserved even when the bytes were in hand -- measured 2026-11-22
+            # on "list the files using ls", where the command ran and printed 65 real lines.
+            inner = row
         cid = str(row.get("capability_id") or inner.get("capability_id") or "")
         hit = _project(inner, shape)
         source = "result"
+        # A READER'S STDOUT IS ITS ENUMERATION.
+        #
+        # `shell.command.run` reports `stdout` and has no `paths` field, so "list the files using ls"
+        # -- which the machine bound and RAN, producing 65 real lines -- was refused
+        # ANSWER_SHAPE_UNSERVED:file. The bytes that answer the sentence were on the row already;
+        # the projection simply had no name to look for.
+        #
+        # It is offered only for a program the machine's own acceptance table certifies as a reader
+        # (`ls`, `cat`, `find`, ...), so a program that mutates is never projected as an enumeration,
+        # and only for the `file` noun, which is what those programs enumerate. The lines are the
+        # program's own output, untouched.
+        if hit is None and str(shape.get("noun") or "") == "file":
+            hit = _a_reader_stdout_as_files(inner)
+            if hit is not None:
+                source = "result.stdout"
         artifact_reason: str | None = None
         if hit is None:
             path = _artifact_path(inner)

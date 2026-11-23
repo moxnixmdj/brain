@@ -3862,3 +3862,88 @@ None of the three guesses. Each can be read back out of the machine.
 pre-execution answer gate asking the row what it will have TOLD the caller, and for a directory
 listing it has no answer of the shape it expects. Different gate, different reason; it is the next
 one to measure rather than guess at.
+
+---
+
+## §A79 — A QUESTION ABOUT FILES, ANSWERED AND DELIVERED (2026-11-22)
+
+A78 left one measured gap: `list the files using ls` bound `['ls']` and was refused. Two gates stood
+between the bound command and the caller, and **both were about classification, not about the
+command.** Neither was visible from the outside until the caller's receipt was read.
+
+### Gate 1 — "a writer cannot answer a question"
+
+```
+STATED_ANSWER_NOT_PROVIDED:STATED_READ_ONLY_QUESTION_ANSWERED_BY_A_WRITER:shell.command.run
+```
+
+`shell.command.run` really can write, so the rule is right to be suspicious of the ROW. But it will
+only ever run the argv that was bound, and whether *that command* writes is not a matter of opinion:
+the machine already keeps `raw_goal_trace_acceptance_v1._READ_ONLY_COMMANDS` (ls, cat, wc, grep,
+find, …) plus the flags that make one of them write (`sort -o FILE`, `sed -i`). **`ls` is in that
+table; `rm` is not.** The rule now asks about the command instead of the row, reading the argv from
+the same three sources everything else uses — stated, remembered, derived.
+
+### Gate 2 — the answer was refused while being held
+
+```
+STATED_ANSWER_NOT_PROVIDED → ANSWER_SHAPE_UNSERVED:file
+```
+
+The command had already **run and passed**, printing 65 real filenames. `deliver` then refused it
+because `shell.command.run` reports `stdout` at the **top level** of its execution row, with no
+nested `result` mapping — and the projection loop began `if inner is None: continue`, so the row was
+skipped and the refusal fell through to `return reasons or ["ANSWER_SHAPE_UNSERVED:file"]`.
+
+A row with no nested result is now its own payload, and a **certified reader's stdout is its
+enumeration**: for the `file` noun only, and only for a program in the read-only table, with the same
+writing-flag rule applied — one rule, not two that drift. (The first draft applied the flag rule in
+the gate and *not* in the projection; two tests written for exactly that caught it.)
+
+### The result
+
+| sentence | memory | result |
+|---|---|---|
+| `list the files using ls` | **empty** | **PASS**, `argv ['ls']`, `noun: file`, **count 65**, the real filenames |
+
+### A process error worth recording, because it cost four wrong diagnoses
+
+Two edits landed in the **wrong function**: `answer_shape_v1` has `deliver_observation` and `deliver`
+with near-identical `rows`/`inner` loops, and a `str.replace` on a shared paragraph edited the first
+one. The symptom was maddening and specific — a debug line that never printed, a helper that worked
+perfectly when called directly, and a refusal string with **two parts where the format has four**. That
+last detail is what identified the producer. Reads to keep:
+
+* **A trace that never prints is evidence about WHERE you are, not about what happened.** I had put it
+  in the wrong function and spent three runs interpreting its silence as a fact about the data.
+* **Count the parts of a formatted string.** `ANSWER_SHAPE_UNSERVED:file` could not have come from
+  `"%s:%s:%s" % (cid, noun, detail)`; that mismatch located the fault faster than any trace.
+* `grep -n "^def "` before editing a paragraph that may appear in more than one function.
+
+One such edit was kept where it was harmless and **reverted where it changed nothing** — a change
+that is not needed for the fix does not belong in the commit.
+
+### Verified
+
+| check | result |
+|---|---|
+| suite `test_one_verified_run_teaches_a_skill_v1.py` | **29 passed** (was 24) |
+| 7 suites together | **145 passed, 1 failed** (was 138/1) |
+| the 1 failure | `test_every_unexpressible_task_is_ambiguous_not_routeless` — pre-existing, identical at HEAD |
+| `tasks_v1` / `unseen_program_v1` | **13/13** / **6/6** |
+| all four command paths | `list the files using ls`, `use date to tell the time`, `ls -la`, `wc -l README.md` — **all PASS** |
+
+### The state of the machine after A76–A79
+
+Four ways to a command, each readable back out of the machine, none guessed:
+
+| how | evidence | example |
+|---|---|---|
+| the sentence states it | the sentence | `wc -l README.md` |
+| a verified run taught it | a passing receipt | `use wc on AGENTS.md` → `wc -l …` |
+| the program documents it | the program's `--help` | `use date to tell the time` → `date` |
+| a description names the program as an instrument | the sentence's marker + the reader table | `list the files using ls` → `ls`, 65 files |
+
+The thing that is *still* not possible is the plainest sentence of all: **"list the files in this
+folder"**, which names no program and was never taught. That remains the honest frontier, and A74's
+measurement says it will not be closed by a similarity threshold.

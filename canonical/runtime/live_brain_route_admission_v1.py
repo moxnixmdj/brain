@@ -3496,6 +3496,55 @@ def _declares_it_does_not_write(entry: Mapping[str, Any]) -> bool:
         or "no mutation" in text or "read-only" in text)
 
 
+def _the_bound_command_is_a_reader(sentence: str, entry: Mapping[str, Any]) -> bool:
+    """Is the command this row would actually run one the machine's own table calls a READER?
+
+    The writer-for-a-question rule asks whether the ROW can write; `shell.command.run` can, so for
+    that row the question has to be about the COMMAND. It is answered from
+    `raw_goal_trace_acceptance_v1`, which is the machine's existing table of programs whose re-run
+    proves a read, together with the flags that make one of them write (`sort -o FILE`, `sed -i`).
+    A program outside that table is not excused, and neither is a reader given a writing flag.
+
+    The argv is the one that was BOUND -- remembered, stated or derived -- so this asks about what
+    will execute, not about what the sentence mentioned.
+    """
+    try:
+        from canonical.runtime import raw_goal_trace_acceptance_v1 as _accept
+        from canonical.runtime import world_binding_v1 as _WB
+        from canonical.runtime.composer_route_v1 import extract_argv as _stated
+    except Exception:  # noqa: BLE001 - no table, no exemption
+        return False
+    argv = _stated(str(sentence or ""))
+    if not argv:
+        try:
+            argv = _WB._remembered_argv(str(sentence or ""))
+        except Exception:  # noqa: BLE001
+            argv = None
+    if not argv:
+        # The third source, and the one this rule was written for: what the machine can derive from
+        # the sentence and its own documentation.
+        try:
+            from canonical.runtime import machine_purpose_index_v1 as _machine
+            _derived = _machine.derive_argv(str(sentence or ""))
+            argv = list(_derived["argv"]) if _derived.get("ok") else None
+        except Exception:  # noqa: BLE001
+            argv = None
+    if not argv:
+        return False
+    program = str(argv[0] or "")
+    if program not in frozenset(getattr(_accept, "_READ_ONLY_COMMANDS", ())):
+        return False
+    side_flags = tuple(getattr(_accept, "_SIDE_EFFECTING_FLAGS", ()) or ())
+    by_program = dict(getattr(_accept, "_SIDE_EFFECTING_FLAGS_BY_PROGRAM", {}) or {})
+    for token in argv[1:]:
+        token = str(token)
+        if token in side_flags or token == "-i" and "i" in by_program.get(program, ()):
+            return False
+        if any(token == flag or token.startswith(flag + "=") for flag in by_program.get(program, ())):
+            return False
+    return True
+
+
 def _declares_no_source_write_authority(entry: Mapping[str, Any]) -> bool:
     """Does the row's own registry declaration say it will not write the source?
 
@@ -3602,9 +3651,21 @@ def _shape_errors(text: str, cid: str, entry: Mapping[str, Any], surface: str) -
     # declaration, and the wording of a keyword is not.  Rows that read for a living keep the
     # escape, because the escape is what puts a read row in front of a question.
     _declares_edits = bool(front.capability_edits_source(entry))
+    # A ROW WHOSE COMMAND IS A READER IS A READER FOR THIS SENTENCE.
+    #
+    # `shell.command.run` can write, so the rule above is right to be suspicious of it in general.
+    # But what it will run is known here, and whether that command writes is not a matter of opinion:
+    # the machine already keeps the table of programs a re-run can prove are reads (ls, cat, wc,
+    # grep, ...) and the flags that would make one of them write (`sort -o`, `sed -i`). Measured
+    # 2026-11-22: "list the files using ls" derived `['ls']`, `ls` is in that table, and the request
+    # was refused as READ_ONLY_QUESTION_ANSWERED_BY_A_WRITER before anything ran.
+    #
+    # The exemption is read from the argv that will actually execute, so a writing command is not
+    # excused by it: `rm` is not in the table, and a side-effecting flag removes the exemption.
     if (_read_only_request
             and _writes
             and not _declares_it_does_not_write(entry)
+            and not _the_bound_command_is_a_reader(text, entry)
             and not (_READ_SURFACE_RE.search(provides) and not _declares_edits)):
         out.append("STATED_READ_ONLY_QUESTION_ANSWERED_BY_A_WRITER:" + (cid or "UNNAMED"))
     # A plan-only row is not a general reader. Its no-write limitation must
