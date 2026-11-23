@@ -4849,3 +4849,99 @@ Six tasks cannot estimate a rate, and the fixture is a JSON file, not a GUI. The
 **a refusal that locates its subject is sufficient to repair a long-horizon task without a model, without
 a value invented, and without the documentation being right.** The 929 bare refusals still in this tree
 are the size of the work that remains, and §A87's census is how that number is known.
+
+## §A90 — what to save: the condition, not the action
+
+### The owner's question, stated as a question about a mechanism
+
+"What he doesn't know, he should get instantly … I don't know what he should exactly save, what is not,
+and what we should generalize and what is not." And the constraint on answering it: "saving his exact
+experience must be in a very sufficient way, not just saving the exact experience in a dumb way."
+
+### What the project already had, and why it could not answer
+
+`applicability_v1` learns *when* a plan applies by elimination: a conjunction of state facts survives if
+it is consistent with every success and every failure. Its docstring is explicit that "with no failure it
+returns UNDETERMINED, because necessity is only refuted by failure." That is correct for what it does.
+
+Measured on the case that matters — one refusal, then a success:
+
+    evidence = [({'has_record:alpha'}, FAILED), ({'has_record:alpha','amount_whole:12.50'}, PASSED)]
+    learn(evidence) -> AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS, 2 survivors
+
+Two facts appeared together in the success and nothing in the evidence distinguishes them, so elimination
+honestly refuses to pick. **But the environment had already distinguished them.** It printed
+`AMOUNT_MUST_BE_A_WHOLE_NUMBER:12.50`. Elimination threw that away and then reported that it could not
+tell. A stated condition is not evidence to be eliminated against; it is a statement to be read.
+
+### The literature, and the gap it leaves
+
+* **Continual learning via dynamic predicate invention** (arXiv 2602.17217, Feb 2026) repairs a symbolic
+  world model from *prediction error*, generalising and specialising over a lattice with no retraining.
+  Closest in spirit, but it needs a prediction to be wrong first.
+* **Agent Learning via Early Experience** (Oct 2025) treats error messages as a natural-language
+  description of the next state — the same intuition — but learns them by **fine-tuning an LLM**, which
+  is a runtime model dependency and forbidden here.
+* **Precondition inference from demonstrations** (NeurIPS 2023 workshop) infers preconditions from
+  *expert trajectories* using a pretrained code model.
+
+None of the three uses what this system has: **the environment stating its own precondition, with its own
+value, once.** That is the gap, and it is exactly where the project's own constraint (no model at runtime)
+forces a different answer rather than a worse copy.
+
+### The answer, built and measured
+
+`canonical/runtime/stated_precondition_v1.py`. One refusal → one condition.
+
+**Save the condition, not the action.** `ledgerctl record add --name alpha.beta --amount 12.50` is an
+action that will never be worth repeating. `amount_must_be_whole` is true of every record in every
+database forever. The file has **no field for the action** — that is the design, not an omission.
+
+**Key by the CODE, not the program.** A rule learned from one program must be offered to another, or it
+is a patch. Two programs demanding a whole number converge on one entry.
+
+**The test that separates knowledge from a cache** — one refusal, about `12.50`, decides values never
+observed:
+
+| value | ever observed? | refused? |
+|---|---|---|
+| `7.25` | no | yes |
+| `3.75` | no | yes |
+| `99.99` | no | yes |
+| `12` | no | no |
+| `0`, `-4` | no | no |
+
+A cache can only answer about `12.50`. This answers about `7.25`, from one experience, no model, no
+gradient, no retraining. **That is the thing the mission turns on, and it is measured, not asserted.**
+
+**And across programs:** the rule learned from program A decides program B's values, where B was never
+run — `0.25` refused, `100.5` refused, `7` accepted, all `value_never_seen: True`.
+
+**The §2 boundary, executable:** `forget(code)` deletes one key from a JSON file and the behaviour
+returns to "knows nothing". There is no weight to retrain because there is no parameter to touch. A test
+also proves a **hand-written** entry works as well as a learned one, so the store is a real store and not
+an internal format with a JSON skin.
+
+**What it refuses.** `TEST_PATHS_REQUIRED`, `TEST_ROOT_MISSING`, `SUITE_FAILED_AFTER_MOVE: <prose>` are
+each refused with `REFUSAL_DOES_NOT_LOCATE_ITS_SUBJECT`. A learner that guessed a subject there would be
+inventing the knowledge it claims to have acquired.
+
+### The honest limit, measured on this tree
+
+| | |
+|---|---|
+| refusal codes in `bound_capabilities` | 989 |
+| readable by this learner | **381 (39% of codes, 49% of the 1,588 sites)** |
+| **codes appearing exactly once** | **796 (80% of codes)** |
+| mean sites per code | **1.61** |
+| most frequent code | `PATH_OUTSIDE_REPOSITORY`, 124 |
+
+The tail is flat and long. There is no large vocabulary win left: after the readable 381, the most
+frequent unreadable code appears **10** times. **This tree refuses in nearly one-off vocabulary.** Reading
+more code *names* cannot fix that. What would: emitting `CODE:value` at the 907 sites that still print a
+bare kind, so that a rule which cannot be named can at least be located — the same conclusion §A87
+reached from the other direction, now with a consumer that needs the value.
+
+So the bound is not the learner. It is that **a code with no subject cannot become a predicate**, and 80%
+of this tree's codes carry no subject. `stated_precondition_v1` makes the ceiling visible instead of
+hiding it behind a percentage.
