@@ -3087,3 +3087,131 @@ that reads `/etc/passwd` by absolute path is now refused at admission, but a pro
 path some other way (an environment variable, a symlink inside the tree pointing out) is not covered,
 and the receipt only measures that the host is unchanged. Closing that needs namespaces or a
 container, which this host does not have.
+
+---
+
+## A71 — "anything on the computer already has a guide": the shell command was never run
+
+`shell.command.run` is a verified bound capability, and it is the core of computer use: almost
+every guide on a machine is a command. On 2026-11-22 it could not be reached from the front door
+at all.
+
+```
+ra.solve("Run the shell command python3 --version and write its output to out.txt.")
+  -> FAIL__RAW_GOAL_COMPILATION_GAP
+     shell.command.run:contract_not_stated:argv
+```
+
+A refusal naming a missing `argv` for a sentence that states its command plainly, and that goes on
+to say where the output should go. **Nine defects** sat between the sentence and the file. Each was
+measured, and each is pinned by `test_a_stated_command_runs_and_its_output_lands_v1.py`.
+
+**1. `python3` was not a program.** Recognition asked a 35-entry hand-written table
+(`_known_programs()`). `python3` — the most useful program on any machine — was not in it. That is
+the knowledge-house problem in miniature: a stored fact about the world standing where an
+observation of the world belongs. `_is_a_program()` now asks `shutil.which`, and `/`-qualified
+paths through `os.access`. The tables keep their real job: whether a *result* can be verified.
+
+**2. The command swallowed the rest of the English.** The unquoted `_ARGV` pattern runs to the end
+of the sentence, so `ls -la and write its output to listing.txt` became
+`['ls','-la','and','write','its','output','to','listing.txt']` — the sentence's tail executed as
+operands. A first cut required a pronoun ("and write ITS output"); that left
+`ls -la and save nothing` whole. The cut now needs the two signals the grammar actually supplies: a
+conjunction and, immediately after, a **verb** that starts a new clause. `cp a and b c` survives
+(`b` is not a verb) and `"cp a and b c"` is untouched — the quotes are the sentence saying where the
+command ends.
+
+**3. `argv` was not a slot any binder could fill.** `_ARGV_KEYS = {"test_argv"}`, and
+`bind_all_inputs` had no `argv` rule. `extract_argv` was consulted only in the zero-candidate
+fallback, which never runs when lexical ranking produces something. One rule now lives in
+`bind_typed_key` and `goal_compiler._bind_inputs` defers to it, so both binders read the same rule.
+
+**4. There are TWO binders, and only one of them was taught.** `goal_compiler._bind_inputs` ranks
+by binding; `bind_all_inputs` pins the winner. Teaching only the second left the first refusing the
+row with `argv` — and since shell ranked **first** at score 28 and was the first candidate dropped,
+the sentence compiled to nothing while a diagnostic reported the row as bindable. The seam is now
+explicit: one rule, two callers.
+
+**5. A bound LIST can never satisfy a str test.** "Did the sentence state this?" was asked in two
+places, and both answered `value.strip() in text`. `argv` is a list, so a perfectly stated command
+was reported first as invented (`_inputs_not_stated_by`) and then as missing
+(`_contract_gaps_for`). Both now call one predicate, `_stated_by_the_sentence`, which is a token
+test for a list and a string test for a string — because it is the same question.
+
+**6. The F17 gate could not see a command.** `_retrieval_first_selection` admits a retrieved row
+only when it is *derived evidence*, and counted only `declared_input_derivation_v1`'s report —
+which is populated for SWE rows and answers `{"adapter_defaulted": {}}` for every other row. So
+`derived_count` was structurally 0 outside that prefix. Shell bound
+`{'argv': ['python3','--version']}` — the sentence's own command — and F17 returned `None`. The
+first attempt at a fix ("some slot bound") was too weak and admitted
+`python.repository.acceptance.measure.v1` for **"Run the thing."**; the gate now asks the
+structural question, *does this admitted row hold the command the sentence states*, and a sentence
+that states no command keeps the original refusal.
+
+**7. A refusal invented its own reason.** With every declared slot bound, `_contract_gaps_for`
+returned `[]` and the code still raised `contract_not_stated:inputs` — a placeholder standing in
+for a finding that was never made. Measured: the body had failed on a *different* row
+(`software.analysis.diagnose_and_architect.v1:target_path:0_…`). A refusal now raises the failure
+that actually happened rather than a fabricated gap.
+
+**8. The effect declaration named a flag as a file.** `CONFINED_EFFECT_DECLARATIONS_V1.json`
+declared `effect_args: [-1]` — the last token of the command line — as the file the command
+promises. For `cp A B` that is the destination and works; for `python3 --version` it is `--version`.
+The clone ran the argv perfectly (exit 0, stdout `Python 3.11.2\n`, host untouched) and the run was
+reported unverified. A command produces **one of two kinds of result**, and the sentence says which:
+
+| kind | declared | verified by |
+|---|---|---|
+| writes a file | `effect_args` | the file exists inside the worktree |
+| only reports | `stdout_effect_argv` | exit 0 and non-empty stdout |
+| reports, destination stated | `stdout_to_effect_arg` | the file the sentence named holds the output |
+
+`CF.execute` only gives stdout its file when the file is a **declared effect** — so the stated
+destination is now added to that list, and the host copy is written from the verified bytes of the
+clone run rather than re-derived. That last one is the design law of A70 in practice: *the clone is
+where a command is tried; the host is where a stated change is delivered.*
+
+**9. An optional slot the sentence fills is not optional.** `optional` means the *adapter* can
+synthesize a value, so the binder passes `None`. But `shell.command.run` declares
+`"optional": ["output_path"]` and the sentence said "write its output to **out.txt**" — so passing
+`None` threw away the only thing that made the run verifiable. An optional **output** slot now takes
+the destination the sentence states (`_path_named_after_output_verb`), and only that.
+
+### Measured
+
+| | before | after |
+|---|---|---|
+| `ra.solve(<the sentence above>)` | `FAIL__RAW_GOAL_COMPILATION_GAP` | **`PASS__CAPABILITY_DAG_EXECUTED_AND_VERIFIED`** |
+| `out.txt` on the host | absent | **`'Python 3.11.2\n'`** — the program's own bytes |
+| `extract_argv("…ls -la and save nothing.")` | `['ls','-la','and','save','nothing']` | `['ls','-la']` |
+| `bind_typed_key('argv')` | raised | `['python3','--version']` |
+
+| suite | result |
+|---|---|
+| new `test_a_stated_command_runs_and_its_output_lands_v1` | **16 passed** |
+| guard + escape suites | **14 passed, 2 subtests** |
+| 8-suite regression (computer_env, confined_dispatch, admitted_confinement, unchecked_format, cap-naming) | **172 passed, 13 subtests** |
+| `tasks_v1.py` by effect, and under `PYTHONHASHSEED=7` | **13/13** both |
+| `unseen_program_v1.py` | **6/6** |
+| reach probe | EXECUTED **8** / ROUTED 8 / NOT_COMPILED 21 / SELF 1 — unchanged, its 38 goals contain no shell sentence |
+
+**Two failures that are NOT this release, proved by running them at `e0f02292` under `git stash`:**
+`test_capability_naming_rule_v1::test_f29_a_request_that_names_nothing_fails_closed` (a sentence
+that states nothing binds `python.repository.acceptance.measure.v1` with an **invented**
+`source_root: '.'`), and the two archive sentences in the expressibility suite. Both are the
+bare-filename/world-binding class and belong to the next round.
+
+**Security, re-measured with the new declaration in place.** `bash -c 'echo PWNED > /tmp/…/proof.txt'`
+and `python3 /tmp/…/evil.py` → `FAIL_CLOSED__STATED_PATH_OUTSIDE_THE_WORKSPACE`;
+`cp /etc/passwd pwn.txt` → `FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT`; no host
+file exists in any case. `Copy the file AGENTS.md to AGENTS_copy.md` still passes. The declaration
+widened what the confinement accepts; the confinement refused every escape anyway — which is the
+whole argument for refusing over filtering.
+
+**Honest limits.** The `stdout_effect_argv` tails are declared data, not inferred semantics, but
+they are still a list of shapes (`--version`, `--help`): a command that reports its result some
+other way is refused until a row says so. The host delivery writes the clone's verified bytes, so a
+command whose stdout differs between clone and host (`--version` of a differently-built tool) would
+report the clone's bytes. And the two pre-existing failures above mean a sentence can still bind a
+capability through an invented `source_root` — the opposite direction of defect, and the next one
+to close.

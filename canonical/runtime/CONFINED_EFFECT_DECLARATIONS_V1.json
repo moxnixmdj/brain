@@ -69,12 +69,25 @@
    ]
   },
   "shell.command.run": {
-   "apply_effect_to_host": true,
+   "native_argv": true,
    "budget_s": 120,
-   "effect_args": [
-    -1
+   "apply_effect_to_host": true,
+   "effect_args": [],
+   "stdout_effect_argv": [
+    [
+     "--version"
+    ],
+    [
+     "-V"
+    ],
+    [
+     "--help"
+    ],
+    [
+     "-h"
+    ]
    ],
-   "native_argv": true
+   "stdout_to_effect_arg": "output_path"
   },
   "software.repair.choreograph.crossfile.v1": {
    "budget_s": 600,

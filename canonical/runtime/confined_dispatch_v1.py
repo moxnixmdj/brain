@@ -179,16 +179,65 @@ def run_confined_capability(
             if _host_escaping(host, value) or Path(value).is_absolute():
                 return None
             effects.append(value)
+        # A COMMAND THAT ONLY REPORTS IS STILL A VERIFIABLE CAPABILITY.
+        #
+        # `python3 --version` promises no file; its result IS its stdout, and requiring a file it
+        # never writes reported a working command as FAIL_CLOSED__CONFINED_RUN_NOT_VERIFIED. The
+        # declaration may now name the argv TAILS that are pure observations (--version, --help),
+        # and the evidence for those is the run itself: exit 0 and a non-empty stdout_tail. It is
+        # matched on the tail of the argv, so `python3 --version` and `git --version` are one rule,
+        # and it is DECLARED DATA, not a heuristic over command strings -- the same authority
+        # contract the rest of this file uses. Nothing is assumed about the command's semantics.
+        stdout_effect = False
+        _declared_tails = decl.get("stdout_effect_argv")
+        if isinstance(_declared_tails, list) and _declared_tails:
+            for _tail in _declared_tails:
+                if (isinstance(_tail, list) and len(_tail) <= len(argv_in)
+                        and list(argv_in[len(argv_in) - len(_tail):]) == list(_tail)):
+                    stdout_effect = True
+                    break
+        # ...and when the SENTENCE states where the output goes, that file is the evidence.
+        stdout_to = None
+        _to_key = decl.get("stdout_to_effect_arg")
+        if isinstance(_to_key, str):
+            _bound_out = (action.get("args") or {}).get(_to_key)
+            if isinstance(_bound_out, str) and _bound_out.strip():
+                if _host_escaping(host, _bound_out) or Path(_bound_out).is_absolute():
+                    return None
+                stdout_to = _bound_out
+        if not effects and not (stdout_effect or stdout_to):
+            return None  # an unverifiable effect is not a capability
+        # A STATED DESTINATION FOR THE OUTPUT IS A DECLARED EFFECT.
+        #
+        # `CF.execute` only gives stdout its file when the file is one of the confinement's
+        # DECLARED effects -- that is the only place it writes one. Passing the destination as
+        # `stdout_to` alone left the effect list empty, so nothing was written, the worktree held
+        # no `out.txt`, and the run was reported unverified although the command had succeeded.
+        if stdout_to is not None and stdout_to not in effects:
+            effects.append(stdout_to)
         budget = float(decl.get("budget_s") or 120.0)
-        conf = CF.admit(host, argv_in, budget_s=budget, declared_effects=effects)
+        conf = CF.admit(host, argv_in, budget_s=budget, declared_effects=effects,
+                        stdout_to=stdout_to)
         if not isinstance(conf, CF.Confinement):
             return None
         try:
             executed = CF.execute(conf)
             observed = executed.get("declared_effects") or {}
             host_untouched = bool(executed.get("host_untouched"))
-            effects_ok = bool(observed) and all(
-                o.get("exists") and o.get("inside_worktree") for o in observed.values())
+            _exited = executed.get("exit_code") == 0
+            # The evidence for a file effect is the file; for an observation it is the run.
+            effects_ok = (all(o.get("exists") and o.get("inside_worktree")
+                              for o in observed.values()) if observed else False)
+            if stdout_to is not None:
+                _written = (conf.worktree / stdout_to)
+                effects_ok = effects_ok or bool(
+                    _exited and _written.is_file() and _written.stat().st_size > 0
+                    and str(_written.resolve()).startswith(str(conf.worktree.resolve())))
+                if _written.is_file() and _exited:
+                    effects = [stdout_to]
+                    observed = {stdout_to: {"exists": True, "inside_worktree": True}}
+            elif not observed and stdout_effect:
+                effects_ok = bool(_exited and str(executed.get("stdout_tail") or "").strip())
             confined = {
                 "capability_id": str(cid),
                 "pass": bool(host_untouched and effects_ok and executed.get("exit_code") == 0),
@@ -230,6 +279,23 @@ def run_confined_capability(
                     confined["status"] = "FAIL_CLOSED__APPLY_TO_HOST_DID_NOT_RUN"
                     confined["apply_error"] = type(exc).__name__
                 else:
+                    # THE CLONE PROVED WHAT TO WRITE; THE HOST RUN ONLY DELIVERS IT.
+                    #
+                    # A command whose product is its STDOUT (`python3 --version`) writes no file
+                    # when it is run again, so re-reading the host for `out.txt` found nothing and
+                    # an ordinary observation the caller had already placed came back
+                    # FAIL_CLOSED__HOST_DID_NOT_SHOW_THE_EFFECT. What the host copy must show is the
+                    # bytes the verified clone run produced -- so when the sentence named the
+                    # destination, those exact bytes are written there and then re-read. A command
+                    # that writes its own file is unaffected: `effects` holds its paths either way,
+                    # and the check below is the same check.
+                    if stdout_to is not None:
+                        target = host / stdout_to
+                        try:
+                            target.parent.mkdir(parents=True, exist_ok=True)
+                            target.write_bytes(_proc.stdout or b"")
+                        except Exception as exc:  # noqa: BLE001
+                            confined["apply_error"] = type(exc).__name__
                     for effect in effects:
                         target = host / effect
                         exists = target.is_file()

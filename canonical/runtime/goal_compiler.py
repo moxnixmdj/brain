@@ -781,6 +781,26 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
             paths=[(raw,p) for raw,p in paths
                    if raw!=_writer_destination and p.as_posix()!=_writer_destination]
     result={}
+    # THE COMMAND LINE IS A SLOT THIS BINDER NEVER LEARNED, AND IT IS THE ONLY SLOT
+    # `shell.command.run` HAS.
+    #
+    # There are TWO binders in the route: this one ranks by binding (it decides which
+    # candidates survive), and `goal_front_compiler_v1.bind_all_inputs` pins values for the
+    # row that won.  Teaching only the second one left the first one refusing the row with
+    # `argv`, so `shell.command.run` -- the highest-scoring candidate in the sentence, at
+    # 28 -- was dropped from the ranking altogether and the sentence compiled to nothing.
+    # Measured: "Run the shell command python3 --version and write its output to out.txt."
+    # ranked shell FIRST, bound it LAST, and never executed it.
+    #
+    # One rule, two callers: the sentence's own command line is read by the front
+    # compiler's `argv` rule, so this binder defers to it rather than growing a second
+    # reading of the same sentence.
+    if "argv" in keys:
+        from canonical.runtime import goal_front_compiler_v1 as _front_argv
+        try:
+            result["argv"]=_front_argv.bind_typed_key(goal,"argv",root,entry)
+        except Exception:  # noqa: BLE001 - an unbound slot is a refusal, not a guess
+            raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED","argv:not_stated")
     # A ROW WITH TWO FILE SLOTS TAKES THE TWO FILES THE SENTENCE NAMED.
     #
     # Every key below is bound on its own, so a two-path contract sees "2 existing

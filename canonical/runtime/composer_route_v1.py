@@ -654,6 +654,72 @@ _ARGV = [
 ]
 
 
+# Words that begin a NEW clause rather than continue a command line. A program's own flags never
+# look like these, and a filename in a command line is introduced by a preposition ("to out.txt"),
+# never by "and ... its".
+_TAIL_WORDS: frozenset[str] = frozenset({"and", "then", "saving", "saving_to", "writing"})
+
+# THE VERBS THAT SAY A NEW CLAUSE HAS STARTED.
+#
+# A conjunction alone is not enough evidence that the command is over: `cp a and b c` passes a
+# file literally called `and`, and cutting there would drop real operands.  The tail of an
+# imperative sentence, though, is a VERB -- "and write its output to out.txt", "and save the
+# listing".  So the cut needs a conjunction followed by a verb in this set, which is the
+# sentence's own grammar saying the work has moved on.  Measured: without this, "ls -la and save
+# nothing" ran with argv ['ls','-la','and','save','nothing'] -- listing a file called `and`.
+_TAIL_VERBS: frozenset[str] = frozenset({
+    "write", "writes", "save", "saves", "store", "stores", "put", "puts", "record", "records",
+    "append", "appends", "create", "creates", "make", "makes", "print", "prints", "show", "shows",
+    "report", "reports", "tell", "tells", "give", "gives", "return", "returns", "send", "sends",
+    "copy", "copies", "move", "moves", "add", "adds", "run", "runs", "check", "checks",
+})
+
+
+def _cut_at_the_sentence_tail(parts: "list[str]") -> "list[str]":
+    """Drop the English that follows the command, keeping the command itself.
+
+    A cut needs TWO signals, so an operand is never eaten: a conjunction from `_TAIL_WORDS` and,
+    immediately after it, a verb that starts a new clause.  "and write its output" cuts; "cp a and
+    b c" does not, because `b` is not a verb.  Only the tail of an imperative sentence reads this
+    way -- a command line that continues with plain operands carries no verb after its `and`.
+    """
+    for index, token in enumerate(parts[1:], start=1):
+        if token.lower() not in _TAIL_WORDS:
+            continue
+        following = parts[index + 1].lower() if index + 1 < len(parts) else ""
+        if following in _TAIL_VERBS:
+            return parts[:index]
+    return parts
+
+
+def _is_a_program(token: str, known: frozenset[str]) -> bool:
+    """Whether this token names a program, asked of the machine rather than of a list.
+
+    The list above (`_known_programs`) answers a different question -- "can a verifier judge this
+    program's result" -- and it has 35 entries. Using it to decide what IS a program meant
+    `python3` was not a program: "Run the shell command python3 --version and write its output to
+    out.txt" was refused with `shell.command.run:contract_not_stated:argv`, so /usr/bin/python3 --
+    installed on every one of these machines, and the single most useful program for computer use --
+    could not be run at all. A hand-written list of world facts is exactly what this tree does not
+    allow, and the replacement costs a `which`.
+
+    So recognition asks PATH, and the tables keep their real job: deciding whether a RESULT can be
+    verified. Those are different questions, and conflating them is what put a 35-entry list in
+    front of every command anybody wanted to run.
+    """
+    import shutil as _shutil
+
+    name = str(token or "").strip()
+    if not name:
+        return False
+    if name in known:
+        return True
+    # A path-qualified program is a program if that path is executable.
+    if "/" in name:
+        return pathlib.Path(name).is_file() and os.access(name, os.X_OK)
+    return _shutil.which(name) is not None
+
+
 def _known_programs() -> frozenset[str]:
     """Every program the acceptance layer is willing to judge.
 
@@ -790,8 +856,20 @@ def extract_argv(text: str) -> list[str] | None:
         # reached.  Refuse here rather than return a guess: a slot filled from
         # something the sentence does not contain is an invention, and an
         # invention executes.
-        if parts[0] not in known:
+        if not _is_a_program(parts[0], known):
             continue
+        # THE COMMAND ENDS WHERE THE SENTENCE STOPS TALKING ABOUT IT.
+        #
+        # `_ARGV` runs to the end of the sentence, so "Run the shell command ls -la and write its
+        # output to listing.txt" produced `['ls','-la','and','write','its','output','to',
+        # 'listing.txt']` -- the rest of the ENGLISH becoming arguments to `ls`. That is an
+        # invention executed: `ls` would list a file called `and`, and the output file would never
+        # be written. Measured on `python3 --version and write its output to out.txt` too.
+        #
+        # The cut is at the first conjunction that introduces a new clause naming a new action, and
+        # only where removing it still leaves a program followed by arguments. A quoted command is
+        # not affected -- the quotes already say where it ends, and they are checked above.
+        parts = _cut_at_the_sentence_tail(parts)
         if _SHELL_SYNTAX.search(body):
             continue
         return parts

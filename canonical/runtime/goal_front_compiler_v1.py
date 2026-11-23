@@ -1106,6 +1106,27 @@ _INFERRED_REFERENT_RULES = frozenset({
 
 def bind_typed_key(goal: str, key: str, root: pathlib.Path, entry: Mapping[str, Any] | None = None):
     """Bind one input key the pinned binder cannot. Raises GoalCompilationFailure when absent."""
+    if key == "argv":
+        # THE COMMAND LINE IS IN THE SENTENCE, AND NOTHING HERE WAS READING IT.
+        #
+        # `shell.command.run` is a verified bound capability whose only input is an ARGV, and this
+        # binder had no rule for that key -- so every sentence naming a command was refused with
+        # `shell.commandrun:contract_not_stated:argv` and the whole capability was unreachable from
+        # the front door.  Measured: "Run the shell command python3 --version and write its output
+        # to out.txt." never ran anything, while `composer_route.extract_argv` -- which exists, and
+        # is what the DECLARED-COMMAND fallback already uses -- parsed it correctly in one call.
+        #
+        # The reader is that one, reused rather than reimplemented: it already refuses a sentence
+        # that states no command, refuses shell syntax the adapter cannot honour (no pipeline, no
+        # redirection, since the adapter runs a list argv with no shell), and refuses a first token
+        # that is not a program. Filling this slot any other way would be an invention, and an
+        # invention executes.
+        from canonical.runtime import composer_route_v1 as _composer_route
+
+        argv = _composer_route.extract_argv(str(goal or ""))
+        if not argv:
+            raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED", "argv:not_stated")
+        return list(argv)
     paths = gc._repo_paths(goal, root)
     if key in _PATH_FILE_KEYS:
         # A DESTINATION IS NOT A CANDIDATE SOURCE.
@@ -1898,6 +1919,35 @@ def bind_all_inputs(goal: str, entry: Mapping[str, Any], root: pathlib.Path, con
     named_destinations = _named_output_destinations(goal, entry, keys, root)
     taken: set[str] = set(named_destinations)
     pending_input_paths: list[str] = []
+    # AN OPTIONAL SLOT THE SENTENCE FILLS IS NOT AN OPTIONAL SLOT.
+    #
+    # `optional` means the ADAPTER can supply a value when the caller names none -- so the binder
+    # passes None and moves on.  But when the sentence DOES name where the output goes, passing
+    # None throws away the only thing that makes the run verifiable.  Measured 2026-11-22:
+    # `shell.command.run` declares `"optional": ["output_path"]`, the sentence said "write its
+    # output to out.txt", and `output_path` was never bound -- so the confined run had no file to
+    # verify and answered FAIL_CLOSED for a command whose result the caller had already placed.
+    # Only an output-shaped slot takes the destination the sentence states, and only when it is
+    # declared optional: a required slot keeps the pinned binder's own rules.
+    optional_keys = declared_optional_inputs(entry)
+    for _opt_key in sorted(optional_keys):
+        # An OPTIONAL key is by definition absent from `keys` (it carries no placeholder), so a
+        # `in keys` guard here would make the whole rule dead code -- which is what it was for one
+        # iteration. Inputs already bound are left alone.
+        if _opt_key in inputs:
+            continue
+        _is_output_slot = (_opt_key in _OWNED_OUTPUT_ROLES
+                           or _opt_key.endswith("_output_path")
+                           or _opt_key.endswith("_result_path")
+                           or _opt_key == "output_path")
+        if not _is_output_slot:
+            continue
+        # The sentence states exactly one destination, and the compiler's own detector is what
+        # reads it: "write its output to out.txt" names a destination whatever the file is
+        # called and whether or not an earlier run already created it.
+        _dest = gc._path_named_after_output_verb(goal, root)
+        if _dest:
+            inputs[_opt_key] = _dest
     # A ROW THAT DECLARES TWO FILE SLOTS BINDS THE TWO FILES THE SENTENCE NAMED.
     #
     # Each key below is bound through a SHADOW contract carrying only that key, so
@@ -2731,10 +2781,34 @@ def _retrieval_first_selection(goal: str, admissible: Mapping[str, Mapping[str, 
     # derived_count 0 and is still refused here, which is what keeps this from
     # displacing a capability's own signature sentence.
     _derived = 0
+    _bound_from_sentence = 0
     for row in decision.get("admissions") or []:
         if row.get("capability_id") == cid:
             _derived = int(((row.get("derivation") or {}).get("derived_count")) or 0)
-    if entry.get("capability_source") != "receipt_projection" and _derived <= 0:
+            # A COMMAND THE SENTENCE STATES AND THIS ROW IS THE ONLY ONE THAT CAN HOLD IT.
+            #
+            # This gate was written to admit rows the pinned scorer cannot propose, and it
+            # counted only `declared_input_derivation_v1`'s report -- which is populated for
+            # SWE rows and answers `{"adapter_defaulted": {}}` for every other row.  So for
+            # everything outside that prefix `derived_count` was structurally 0, and the gate
+            # refused the whole registry rather than the lexical near-misses it was built to
+            # refuse.  Measured 2026-11-22: "Run the shell command python3 --version and write
+            # its output to out.txt." retrieved `shell.command.run`, admitted it with
+            # `{'argv': ['python3','--version']}` -- the sentence's own command line -- and F17
+            # answered None because the argv rule is a BINDER and reports into no derivation.
+            #
+            # The evidence is not "some slot bound": measured the same day, a first attempt at
+            # that test admitted `python.repository.acceptance.measure.v1` for "Run the thing.",
+            # which states nothing at all.  What makes a row derived evidence here is the
+            # sentence STATING A COMMAND and this row being the one that can carry it -- the
+            # same structural rule `admit()` already applies.  A sentence that states no command
+            # keeps the original refusal, so no near-miss is admitted by this change.
+            _holds_the_stated_command = bool(
+                row.get("admitted")
+                and "argv" in (row.get("inputs") or {})
+                and row.get("inputs", {}).get("argv"))
+    if (entry.get("capability_source") != "receipt_projection"
+            and _derived <= 0 and not _holds_the_stated_command):
         return None
     proposals = decision.get("proposals") or []
     score = int(round(float((proposals[0] if proposals else {}).get("lexical_relevance_score") or 0)))
@@ -3612,6 +3686,25 @@ def _compile_goal_body(goal: str, admissible: Mapping[str, Mapping[str, Any]], r
 _OWNED_OUTPUT_ROLES = ("output_path", "result_path")
 
 
+def _stated_by_the_sentence(value: Any, text: str) -> bool:
+    """True when every part of a BOUND value was read off the caller's own words.
+
+    The question "did the sentence state this?" was asked in two places and both answered it with
+    a str test: ``value.strip() in text``.  A value the binder reads as a LIST was therefore
+    always unstated -- `argv` is the one slot of that shape, and it carries a command line -- so a
+    perfectly stated command was reported as an invented input, and later as a missing one.  A
+    list is stated exactly when every token it holds appears in the sentence; that is a token
+    test, and it is the same rule for both readers because it is the same question.
+    """
+    if isinstance(value, str):
+        stated = value.strip()
+        return bool(stated) and (stated in text or text.strip().startswith(stated))
+    if isinstance(value, (list, tuple)):
+        tokens = [str(item) for item in value if str(item).strip()]
+        return bool(tokens) and all(item in text for item in tokens)
+    return False
+
+
 def _inputs_not_stated_by(text: str, inputs: Mapping[str, Any]) -> list[str]:
     """Every bound input that is neither an output we own nor the caller's own words.
 
@@ -3638,10 +3731,8 @@ def _inputs_not_stated_by(text: str, inputs: Mapping[str, Any]) -> list[str]:
                 or role.endswith("_output_path")
                 or role.endswith("_result_path")):
             continue
-        if isinstance(value, str):
-            stated = value.strip()
-            if stated and (stated in text or text.strip().startswith(stated)):
-                continue
+        if _stated_by_the_sentence(value, text):
+            continue
         unstated.append(role)
     return unstated
 
@@ -3674,11 +3765,8 @@ def _contract_gaps_for(text: str, entry: Mapping[str, Any], root: pathlib.Path) 
                 or role.endswith("_output_path")
                 or role.endswith("_result_path")):
             continue
-        value = bound.get(role)
-        if isinstance(value, str) and value.strip():
-            stated = value.strip()
-            if stated in text or text.strip().startswith(stated):
-                continue
+        if _stated_by_the_sentence(bound.get(role), text):
+            continue
         gaps.append(role)
     return gaps
 
@@ -3743,9 +3831,22 @@ def compile_goal(goal: str, admissible: Mapping[str, Mapping[str, Any]], root: p
         if expected is not None and expected not in str(failure.detail or ""):
             named_entry = (admissible or {}).get(expected) or {}
             gaps = _contract_gaps_for(goal, named_entry, root)
+            if not gaps:
+                # A REFUSAL MUST NOT INVENT ITS REASON.
+                #
+                # When the named capability can bind every input it declares, there is nothing
+                # missing from the sentence, and `"inputs"` was a placeholder standing in for a
+                # finding that was never made.  Measured 2026-11-22: "Run the shell command
+                # python3 --version and write its output to out.txt." NAMES shell.command.run,
+                # whose only declared input is argv and whose argv the sentence states -- gaps
+                # was [], and the front door still refused with
+                # `shell.command.run:contract_not_stated:inputs`, sending the reader to look for
+                # a missing input that does not exist.  The honest report is the failure that
+                # actually happened, so it is raised unchanged and the caller can read it.
+                raise failure
             raise GoalCompilationFailure(
                 "GOAL_INPUT_BINDING_REQUIRED",
-                "%s:contract_not_stated:%s" % (expected, ",".join(gaps) or "inputs"))
+                "%s:contract_not_stated:%s" % (expected, ",".join(gaps)))
         raise failure
     if expected is None:
         return compiled
