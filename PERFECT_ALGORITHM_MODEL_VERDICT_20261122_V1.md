@@ -236,3 +236,42 @@ Not done, honestly:
 - Tier-1 leads with the format-name program, but tier-2 behind it remains the pre-existing
   flag-description junk (dpkg-architecture, ld.bfd). The narrowing is a ranking, not a
   scored relevance model; this is honest.
+
+## 9. Zip/bzip2/xz goals reach the goal through the full drive (2026-11-23, measured)
+
+The narrowing fix from §8 exposed a second residual: the long-word expansion
+expanded extension tokens (`zips` → every manual vocab token containing it,
+including `gunzips`/`gzips`), which pulled tar/wget/savelog into the narrow —
+and `run_wget` alone costs ~15 s per action, inflating the zip-goal cold scan
+from ~54 s-class to >7.5 min (the scan did not finish in 300 s before this fix).
+
+The fix: extension tokens are exact signal, never expanded; only the goal's
+own prose words (`archive`, `make`, `compress`) keep the >= 4-letter fuzzy
+expansion. Extension tokens also stay separate from prose so they cannot
+fan out. Verified:
+
+- Scan cost, `zip the files into out.zip`: >300 s (not finished) → **0.0 s**
+  (6 states, 18 transitions). The gap is not a mystery: the candidate list for
+  a `.zip` goal collapsed to exactly `[zip]`.
+- Scan cost, `make a bzip2 archive out.bz2`: **11.6 s** (6 states, 60
+  transitions).
+- `test_perfect_algorithm_computer_env_v1`: 8/8 OK (60.4 s).
+
+End-to-end drives (cold, no priors, `limit=8, budget=60, max_depth=4`):
+
+| goal | status | plan | verify | time |
+|---|---|---|---|---|
+| `zip the files into out.zip` | PASS, VERIFIED_NOT_PERSISTED | `run_zip` | zip member `input.txt` == source bytes | **0.2 s** |
+| `make a bzip2 archive out.bz2` | PASS, VERIFIED_NOT_PERSISTED | `run_bzip2` | `.bz2` decompresses to source bytes | **13.3 s** |
+| `compress the input into out.xz` | PASS, VERIFIED_NOT_PERSISTED | `run_lzcat` (a valid stdout-capture path) | `.xz` decompresses to source bytes | **10.6 s** |
+| `make an archive out.tar.bz2` | PASS, VERIFIED_NOT_PERSISTED | `run_tar` | real `.tar.bz2`, `input.txt` member == source | **61.3 s** |
+
+Honest status: `.zip`/`.bz2` goals now reach the goal through the actual
+perfect-algorithm drive — narrowing, scan, plan, act, verify — with recipes
+the recorded `apply` path can replay (the zip recipe is a file-writing argv;
+the bzip2 recipe rides `stdout_to`, which `apply()` handles and re-verifies).
+Admit stays correctly refused (no fresh instances offered), so no rule is
+persisted. The `.xz` goal reached the goal via `lzcat` (a stdout-capture
+path that is honest — the predicate verifies the `.xz` content); `xz` is
+still tier-1 narrowing-first. No warm/carried-model evidence is claimed for
+these goals; that extends the same §3 limitation that pervades the env.
