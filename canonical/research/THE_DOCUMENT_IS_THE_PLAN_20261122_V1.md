@@ -4222,3 +4222,160 @@ I verified two hypotheses by `git stash push`-ing the whole working tree. **Both
 rule, now recorded: **never bisect a hypothesis by moving the whole tree.** Remove the one file or
 remove the one dict key; a `stash` that half-applies is indistinguishable from a clean tree until you
 look.
+
+---
+
+## §A83 — WHY THE AGENT CANNOT LEARN ITS WAY OUT OF THIS (2026-11-22)
+
+The mission's hypothesis is that computer use is solved by an agent that enters any environment,
+finds out what it does not know, and learns it instantly from the source of all knowledge. This round
+tested the premise that the machine knows what it knows. It does not. That is the blocker, and it is
+upstream of every learning mechanism in the project.
+
+### What the registry says, and what is true
+
+| measure | count |
+|---|---|
+| rows in the registry | 448 |
+| rows whose own status says `VERIFIED_BOUND_CAPABILITY` | **154** |
+| …whose adapter file does not exist at all | **52** |
+| …whose adapter file exists but fails to import (missing `PIL`, …) | **9** |
+| …whose adapter imports cleanly with its declared entrypoint | **93** |
+| …verified but not even ROUTABLE by the compiler | **19** |
+
+So **61 of 154 — 40% — of the capabilities the machine calls verified cannot run.** Not "run
+wrongly": cannot be loaded. The status field is a declaration about a file, not a fact about the
+machine.
+
+### The declared verification cannot run either
+
+`verify_file_facts_provenance_v1.ROWS` holds 17 claims with real checks that re-read the world rather
+than trusting an adapter's success bit. Running **all fifteen** of them:
+
+```
+rows: 17 | verified ok: 4 | failed: 0 | crashed: 13
+```
+
+| outcome | rows |
+|---|---|
+| passes its own check | **4** (`file.copy`, `file.directory_listing`, `file.line.appended`, `file.rename`) |
+| `BOUND_CAPABILITY_ADAPTER_MISSING` | 6 — the adapter was never written |
+| `COMMAND_NOT_SUPPORTED` | 2 — the adapter exists but does not implement the operation |
+| `KeyError: '<its own capability id>'` | 5 — the check cannot find the row it is checking |
+
+**Not one of the 13 reports a wrong answer.** They all die before they can be wrong, which is why
+nobody noticed: a verification that crashes looks exactly like a verification that was never run.
+A80 found one instance of this. There are thirteen.
+
+### Why this blocks the mission's hypothesis, specifically
+
+The proposed loop is: enter an environment → find out what you know and do not know → learn the gaps
+instantly. **The second step is the one that is missing, and it is not a learning problem.** Measured
+on the 30-sentence corpus of ordinary computer tasks:
+
+```
+tasks tried              30
+routed                   13
+fails closed, ambiguous  15
+refuses with a reason     2
+of the 13 routed: VERIFIED 2 -> honest 1, NOT an answer 1
+```
+
+The machine reports **two** verified successes out of thirty, and its own audit says **one** of them
+answered the question. Meanwhile it calls 154 capabilities verified. **The gap between what it claims
+and what it can do is the whole problem**, and no amount of instant learning closes it: an agent that
+cannot tell a working capability from a missing file will "learn" a route to a file that is not there,
+and will report success from a crash it did not read.
+
+This is the same defect as the entire session, at the top of the stack:
+
+> **A claim about the machine is stored, and then read as though it were a fact about the machine.**
+
+`VERIFIED_BOUND_CAPABILITY` is a row in a JSON file. It is not a measurement. Three rounds of this
+session were spent finding places where a stored claim was believed instead of re-derived — a
+procedure that stored a capability but not a command (A75), a verification that raised before it
+could report (A80), a test that asserted `or True` (A82), a census that counted a tarball as a package
+list (A82). **This is that defect at the level of the registry itself**, and it is why the mission's
+"know what you know" step does not work today.
+
+### The resolution, and it costs no new part
+
+The machine already has the right mechanism — it is simply not applied to its own inventory:
+`verify_file_facts_provenance_v1.ROWS` re-reads the world instead of trusting a success bit. That idea,
+applied once, at boot, to the registry:
+
+* a capability is **REACHABLE** only when its adapter imports, its entrypoint is callable, and a
+  one-call smoke test of its declared operation does not raise;
+* the answer to "what do I know" is computed **from that**, never read off `status`;
+* anything that fails is named — `ADAPTER_MISSING`, `IMPORT_FAILED:<module>`, `NO_ENTRYPOINT`,
+  `COMMAND_NOT_SUPPORTED` — so the gap is a list to close, not a mystery.
+
+That is one function and one ledger. It removes 61 false rows from the machine's self-image, and it
+turns "learn what you do not know" from a wish into a query with an answer.
+
+**The best part is no part:** this adds no model, no training, no new store. It deletes a lie.
+
+### What is verified here and what is not
+
+* **Verified:** the 154/52/9/93 counts, the 4/13 split across the declared checks, the 13/15/2 corpus
+  split, and the 2/1 honesty count — all re-derived on this tree, today.
+* **Not verified:** that a smoke test can be written for all 93 importable rows without executing
+  something dangerous. Two contain confirmed writer authority; a smoke test must not run a writer.
+  That distinction is the next thing to measure, not assume.
+* **Not attempted:** any claim that this closes computer use. It removes the largest obstacle between
+  the machine and an honest self-inventory, which is the precondition for the loop the mission states.
+
+### §A83b — the audit, built
+
+`canonical/runtime/reachability_v1.py` — one pass, no new store, no model. For every row claiming
+`VERIFIED_BOUND_CAPABILITY` it answers *can this machine do this, here, now* by loading and (where it
+is safe) calling the declared adapter. Running it:
+
+```
+claims: 154
+counts: {'EXECUTABLE': 0, 'READABLE': 93, 'UNREACHABLE': 61}
+
+  70  DECLARES_WRITE_AUTHORITY_NOT_EXECUTED   -- takes an output path; not run, by policy
+  52  NO_ADAPTER_DECLARED                     -- nothing to run
+  22  NO_HONEST_SMOKE_ARGUMENTS               -- a real input this audit cannot honestly invent
+   9  IMPORT_FAILED:ModuleNotFoundError       -- no PIL, etc.
+   1  SMOKE_REFUSED:...                       -- lib imports, runs, and refuses correctly
+```
+
+**Two findings, and the second is the important one.**
+
+1. The classification independently reproduces the manual count (61 unreachable, 93 loadable) — the
+   number is not an artefact of one script.
+2. **`EXECUTABLE` is 0, and that is not a bug in the audit.** Of 154 claimed capabilities, 70 take an
+   output path, which is write authority, and this audit will not prove reachability by mutating the
+   tree. Of the remainder, almost every one needs a specific input (`changed_paths`, `input_path`,
+   `json_path`) that cannot be invented honestly. **Exactly one row in the whole registry can be
+   self-checked by executing it.**
+
+That single number is the answer to the mission's question, stated precisely:
+
+> The machine cannot ask "what do I not know yet", because **it cannot check what it does know without
+> writing to the disk**, and when it does write, the result is a claim no one re-reads — which is how
+> 52 rows came to declare adapters that were never written.
+
+The fix is not more learning. It is that a capability must be reachable — importable, callable, and
+smoke-tested — **before** its status may say verified, and that the smoke test for a writer is a test
+in a disposable world rather than a refusal to test at all. This round stops at the measurement and at
+the refusal to fake it; the disposable-world harness is the next piece, and it is the one that unlocks
+every other count on this page.
+
+### Verified
+
+| check | result |
+|---|---|
+| 9 suites together | **180 passed, 0 failed** |
+| new suite `test_what_the_machine_can_actually_do_v1.py` | **7 passed** |
+| the audit's counts vs the manual probe | 61 / 93 — **identical, independently derived** |
+| a regression guard | `chart.raster.scene_graph.v1` still `IMPORT_FAILED`; ≥40 rows still declare nothing |
+
+### Honest limits
+
+`EXECUTABLE: 0` is a **lower bound**, and the report says so in its own `note`. It does not mean no
+capability works — A82 watched the listing row deliver 530 real filenames, and `tasks_v1` passes 13/13
+through rows this audit marks READABLE. It means **this audit cannot prove a capability works by
+running it**, which is exactly the gap named above.
