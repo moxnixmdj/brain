@@ -420,6 +420,19 @@ def reachability(reg: dict[str, dict[str, Any]] | None = None,
     for cell in report["cells"].values():
         counts[cell["state"]] = counts.get(cell["state"], 0) + 1
     report["counts"] = counts
+    # THE OTHER HALF OF THE ANSWER. `UNREACHABLE` lumps together a broken file, a tool that is not
+    # installed, and a wheel built for another Python. `tool_claims_v1` separates them by looking at this
+    # machine, so one call answers both "what can I do" and "what am I only claiming".
+    from canonical.runtime import tool_claims_v1 as tools
+    tool_report = tools.tool_claims(reg)
+    report["tool_claims"] = {"counts": tool_report["counts"], "claims": tool_report["claims"]}
+    for cid, row in tool_report["rows"].items():
+        if cid in cells and cells[cid].get("why") == "NO_ADAPTER_DECLARED":
+            cells[cid]["why"] = "NO_ADAPTER_DECLARED:" + row["state"]
+            cells[cid]["tool"] = {k: row.get(k) for k in
+                                  ("state", "declared_module", "declared_program", "declared_wheel",
+                                   "wheel_fits_this_interpreter", "acquirable", "why")
+                                  if row.get(k) is not None}
     report["note"] = ("SELF_ATTESTING rows take no input: their verdict is a restatement of the "
                       "registry, not a measurement. They are counted apart from RAN/WROTE.")
     return report

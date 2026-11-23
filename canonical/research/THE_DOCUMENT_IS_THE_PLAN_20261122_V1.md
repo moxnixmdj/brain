@@ -4487,3 +4487,73 @@ for the user's instant-knowledge loop, and still not the loop itself.
 **Next bottleneck:** 52 rows claim `VERIFIED_BOUND_CAPABILITY` with no adapter file. Either they are
 fabricated claims to delete, or their adapters exist under other names. A registry that cannot be
 reconciled with the tree is the same defect one layer down.
+
+---
+
+# §A85 — A claim about a tool is not a fact about this machine
+
+A84's next bottleneck: 52 rows say `VERIFIED_BOUND_CAPABILITY` and declare no adapter. The audit could
+only say `NO_ADAPTER_DECLARED` for all 52 — true, and useless. Building `tool_claims_v1` separated them,
+and each separation found a different defect.
+
+## The 52, resolved against the machine
+
+| state | count | what it means | next action |
+|---|---|---|---|
+| `PRESENT` | 19 | the tool it names is here | bind an adapter to it |
+| `ABSENT` | 22 | the tool it names is not installed | acquire it, verified, or delete the row |
+| `WHEEL_FOR_ANOTHER_PYTHON` | **1** | the exact file it pins cannot install here | the row cannot run on this machine at all |
+| `NO_NAME_IN_THE_ROW` | 6 | nothing in the row can be looked up | the row names nothing |
+| `NOT_A_TOOL` | 4 | an unrecognised `source.type` | declare what it is |
+
+## Four defects, each invisible under a single category
+
+1. **A `module` field holding PROSE.** 13 rows store sentences: `"python stdlib ast/tokenize"`,
+   `"python stdlib ast/pytest + git"`, `"stdlib"`. A field that cannot be looked up is a description, and a
+   description cannot be checked. Parsing the names moved 13 rows into `PRESENT`.
+2. **`git` is not importable.** An import-only check called git missing on a machine that has git. A name is
+   present if it imports **or** runs **or** is a file in this tree.
+3. **A project file counted as a missing package.** `software.synthesis.grid_induction.v1` declares
+   `module: "finite_grid_program_inducer"`; `canonical/runtime/finite_grid_program_inducer_v1.py` exists. It
+   was an absent external tool for an entire audit.
+4. **THE PUREST CASE: `auto.pypi.msgpack` pins
+   `msgpack-1.2.2-cp312-cp312-manylinux2014_x86_64...whl` with its sha256 — and this machine is cp311.**
+   A specific, hash-verified, entirely unusable memory of a different computer. pip refuses the file; no
+   amount of verification turns it into a run. This is the knowledge-house defect stated exactly: the
+   registry was right about a machine, and wrong about *which* machine it is describing.
+
+## Acquisition is real, and now proven end to end
+
+`auto_pypi_library_acquisition.py` already downloads wheels and verifies them against official PyPI
+metadata. Measured today: `msgpack==1.2.4` installed into a clean interpreter under `--require-hashes` with
+the digest PyPI published, and `auto.pypi.msgpack` moved **ABSENT → PRESENT**. So an absent row is not a
+dead end — it is a work item with a named door.
+
+That is also why **nothing was auto-installed to make the count look better.** 22 packages installed by an
+audit would be the machine describing itself from a network, at 22× the surface area, for capabilities
+nobody asked for. The finding names the door and the verification; acquisition happens when a request
+needs the tool.
+
+## Measured
+
+    reachability_v2.reachability()   32.4s, host_untouched: true
+      census  {UNREACHABLE: 106, SELF_ATTESTING: 19, LOADED: 18, WROTE: 11}
+      tools   {PRESENT: 19, ABSENT: 22, NO_NAME_IN_THE_ROW: 6, NOT_A_TOOL: 4,
+               WHEEL_FOR_ANOTHER_PYTHON: 1}
+
+`NO_ADAPTER_DECLARED` is gone from the report. Every one of the 52 now carries the reason it cannot run.
+
+## Green
+
+| run | result |
+|---|---|
+| `test_a_claim_about_a_tool_is_a_fact_about_this_machine_v1.py` (new) | **10 passed** |
+| `test_the_machine_can_run_its_own_claims_v1.py` | **22 passed** |
+| `tasks_v1` / `unseen_program_v1` | **13/13** / **6/6** |
+
+## Next bottleneck
+
+The machine can now say, per claim, whether it can *do* the thing. It still cannot say what it **does not
+know** about an environment it has never seen: the census answers questions about the machine, not about
+the world. The 6 `NO_NAME_IN_THE_ROW` rows are the smallest instance of the bigger pattern — a row that
+names nothing cannot be checked, and naming is the first act of understanding.
