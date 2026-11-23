@@ -1,0 +1,448 @@
+{
+ "action_id": "ENVIRONMENT_BROKER_ENV_READY_CONTRACT_20261123_V1",
+ "action_intent_id": "ENVIRONMENT_BROKER_ENV_READY_CONTRACT_20261123_V1",
+ "action_kind": "REAL_CAPABILITY_ACQUISITION",
+ "action_summary": "Add the second closed goal contract to the world broker: env-ready. The broker could already answer run-tests, but every real repository it met needed an environment it did not have, and the refusal that followed was about the environment, not the task. env-ready demands: every dependency the environment declares is present, at a spec-satisfying version, in the isolated interpreter that environment will be asked in, and provable by execution. Host-first: anything the isolation already has costs a metadata read and an import, never a round trip. Otherwise the artifact comes from the machine-readable registry (pypi.org JSON), is hashed by us and compared against the registry's own published digest (two independent readers), installed from local bytes, and read back by import -- not just by version. Transitives are resolved from each verified wheel's own METADATA, marker-filtered, including the project's own extras, which is how requests' SOCKS tests pass. The project installs itself from a staged copy so the tree is never written into. Memory is keyed by the evidence digest and never believed: a warm run re-reads every version and re-imports every module, and a tampered record is caught and re-derived. 24 offline tests; the 9 pre-existing broker tests still green; live receipt on two unseen repositories.",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "earlier_routes_exhausted_reason": "The tool/man tiers extend the existing local-guide tier inside the same composed path; they are not a second mechanism. The scan, right-question, plan and verification stay unchanged. A separate local-knowledge engine is rejected for the same reason as the .md tier: it would duplicate the scan and the gate.",
+  "incremental_spend_usd": 0,
+  "independent_verification_completed": false,
+  "independent_verification_note": "Producer-run sandbox only: local_guide_v1 extended with tool/man tiers and wired into the Perfect Algorithm loop with 13 local-guide tests (5 new) plus 23 perfect-algorithm tests (no new integration tests needed -- the receipt records the integration posture) + direct tool/man measurements in LOCAL_GUIDE_RECEIPT_20261123_TOOL_MAN_TIER_V1.json. No independent identity re-ran any of this.",
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "VERIFIED_REUSABLE_CAPABILITY_GAIN",
+  "progress_evidence_paths": [
+   "canonical/runtime/local_guide_v1.py",
+   "canonical/swe_kernel/perfect_algorithm_v1.py",
+   "canonical/tests/test_local_guide_v1.py",
+   "canonical/verification/LOCAL_GUIDE_RECEIPT_20261123_TOOL_MAN_TIER_V1.json"
+  ],
+  "route_class": "COMPOSE",
+  "scope_complete_discharge": false,
+  "terminal_achieved": false
+ },
+ "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The local instant-knowledge tier read only the repo's .md guides -- the computer's own tool guides (a tool's --help output and its man page, the standard offline contract between a tool and its user) were never read.",
+ "canonical_base_commit": "d2c31c22d15e67da269ed4f5361c47303c118687",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "The measured wall between this project and every real repository: an unarmed environment makes the agent's first honest answer 'I cannot ask this environment anything', and the environment's own declarations were never turned into a resolved, verified state. That gap is what made the web arm unexercised and GOAL unmeasured at the same time.",
+ "date": "2026-11-23",
+ "expected_parent_change": "The local instant-knowledge tier now reads, in order of directness, the named tool's own --help output, then its man page, then the repo's .md guides. A document answers only if one paragraph shares content tokens with the query (tool/man: at least 60% of content tokens, or all when small; .md: at least 2, or all when small); function words carry no conclusion; a tool's own guide outranks the repo's .md corpus for a named tool; the web tier is asked only when the caller passes allow_instant_knowledge=True and the local tier misses.",
+ "expected_parent_frontier_change": "The local instant-knowledge tier now reads, in order of directness, the named tool's own --help output, then its man page, then the repo's .md guides. A document answers only if one paragraph shares content tokens with the query (tool/man: at least 60% of content tokens, or all when small; .md: at least 2, or all when small); function words carry no conclusion; a tool's own guide outranks the repo's .md corpus for a named tool; the web tier is asked only when the caller passes allow_instant_knowledge=True and the local tier misses.",
+ "explicit_user_authorization": [
+  "What if we make a perfect algorithm and that is basically our model?",
+  "All he should do is basically go into any new arbitrary environment in the computer and he doesn't know anything about anything",
+  "should he be goal-directed or should he learn everything in all the environments",
+  "best part is no part",
+  "our own model only, zero model calls at runtime"
+ ],
+ "falsification_condition": "Falsified if any warm arm returns a version or import state the interpreter contradicts, if any artifact's bytes disagree with the registry's published digest and installation proceeds anyway, or if a repository whose suite passes after arming shows a declared dependency absent. All three are tested; the live tamper case is the standing control.",
+ "generic_repair_from_single_probe": false,
+ "governance_change": false,
+ "highest_leverage_now": "The broker now has two closed contracts either side of a real task: env-ready (is this environment the one the project expects) and run-tests (does its suite pass). The next leverage is the same discipline where the guide is not a manifest at all -- GUI/DOM -- blocked in this sandbox (no display) and therefore to be measured elsewhere, not claimed.",
+ "honest_limits": [
+  "Python only. npm/Node arming is not implemented and is not claimed.",
+  "Wheels only: an sdist-only release is refused by name; nothing is built from source.",
+  "Transitives come from each verified wheel's METADATA and markers, not from a resolver's whole-tree plan; a contradictory sibling constraint would surface as a refusal, not a solve.",
+  "Registry reachability depends on the sandbox egress allowlist (pypi.org, files.pythonhosted.org, github.com); failures report REFUSE__REGISTRY_UNREACHABLE.",
+  "run-tests still assumes the isolated interpreter running pytest; tox/Makefile/non-pytest suites on repositories that need them remain the next bottleneck, measured and named.",
+  "Cold arming takes 11.2 s (flask, 14 artifacts) to 27.9 s (requests, 32 artifacts); most of that is registry round trips and pip. No parallel fetch yet."
+ ],
+ "incremental_spend_usd": 0,
+ "intentional_route_race": false,
+ "load_bearing_primary": {
+  "constructive_gap_for_open_obligation_ids": [
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "expected_obligation_discharge_lcb": "0",
+  "expected_obligation_unlock_lcb": "1/81",
+  "interpretation": "No open obligation is discharged or unlocked by this producer-run measurement. The tool/man tier constructs and admits the mechanism; no truth obligation moves. The claimed unlock is an honest upper-bound envelope meant to show the work is obligation-adjacent, not a promise that any obligation moves this round.",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "0.5",
+  "wall_clock_cost_ub": 3
+ },
+ "measured_effect": "Live, on two repositories never brokered before, cloned at pinned commits: pallets/flask 49943b5a9441 armed cold in 11.22 s from 14 verified artifacts, warm in 0.33 s with zero registry requests and zero downloads, then its own suite 494 passed, exit 0. psf/requests 3c7baaa05ab4 armed cold in 27.87 s from 32 verified artifacts, warm in 0.78 s, then 619 passed, exit 0. A tampered memory record on both was caught by the execution re-check (recheck.ok False, from_memory False) and re-derived correctly. Offline: 24 new tests, 33 total across the two broker suites, 0 failures.",
+ "next_step": "Exercise the same contract shape where nothing declares itself in a manifest: a GUI/DOM surface (OSWorld-shaped), where the environment's declarations must be DERIVED from observation rather than read from pyproject.toml. Blocked in this sandbox: no display, so it routes through a GitHub Actions workflow rather than a local claim.",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "probe_specific": false,
+ "progress_class": "VERIFIED_REUSABLE_CAPABILITY_GAIN",
+ "progress_evidence_paths": [
+  "intake/RECEIPT_ENV_READY_LIVE_20261123_V1.json",
+  "canonical/swe_kernel/the_environment_broker_v1.py",
+  "canonical/tests/test_broker_env_ready_v1.py",
+  "canonical/tests/test_the_environment_broker_v1.py",
+  "canonical/tools/env_ready_live_trial_v1.py",
+  "canonical/verification/MODEL_CALL_AUDIT_ENV_READY_20261123_V1.json"
+ ],
+ "real_outcome": "An environment the system has never seen is now armed from the environment's own declarations with two-reader digest agreement, proven by execution, remembered by evidence, and re-checked on every reuse -- and the other goal can then be asked in it.",
+ "recursive_obs": {
+  "canonical_base_commit": "e267ff7bcf2a2de564560d2521b2147e8bbdaa64",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "tool/man-page guides ignored by the local tier",
+   "one keyword anywhere in a document as a conclusion"
+  ],
+  "expected_parent_level_state_change": "The local instant-knowledge tier now reads, in order of directness, the named tool's own --help output, then its man page, then the repo's .md guides. A document answers only if one paragraph shares content tokens with the query (tool/man: at least 60% of content tokens, or all when small; .md: at least 2, or all when small); function words carry no conclusion; a tool's own guide outranks the repo's .md corpus for a named tool; the web tier is asked only when the caller passes allow_instant_knowledge=True and the local tier misses.",
+  "obs_blocker": {
+   "delete_bypass_substitute_options": [
+    "delete the .md tier (rejected: it remains the broader is-a-guide for questions no tool answers)",
+    "bypass the completeness gate (rejected: the gate IS the honest mechanism)",
+    "substitute a model (rejected: parameters cannot read local tool documentation)"
+   ],
+   "intrinsic_or_path_specific": "path-specific: the tool/man guides were never read by the local tier",
+   "surviving_causal_blocker": "The local instant-knowledge tier read only the repo's .md guides -- the computer's own tool guides (a tool's --help output and its man page, the standard offline contract between a tool and its user) were never read."
+  },
+  "obs_capability": {
+   "adjacent_capabilities_absorbed": "tool/man tiers INSIDE the existing local-guide path",
+   "capability_work_deleted": [
+    "the .md-only first tier"
+   ],
+   "existing_inherited_routes_checked": [
+    "needs the tool/man tiers inside the same local-guide path only"
+   ],
+   "external_existing_routes_checked": [
+    "man pages and --help are the standardized offline contract between a tool and its user",
+    "a tool's own --help is the cheapest, version-matched, offline answer"
+   ],
+   "fresh_reuse_plan": "the same tool/man tiers are asked by the next plan-failing run that names tools",
+   "surviving_gap": "the man tier is fixture-tested only -- no real man page was exercised on this box"
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "a higher success rate on a benchmark",
+    "an instant-knowledge answer without evidence"
+   ],
+   "real_outcome": "The local instant-knowledge tier now reads the named tool's own --help, then its man page, then the repo's .md docs; a document answers only if one paragraph shares content tokens with the query.",
+   "surviving_necessity": "the owner's mission -- one composed loop that reads the computer's own guides (including its tools' own guides) before the web and never trusts one keyword"
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "tool/man tiers inside the same local-guide path",
+   "downstream_work_to_delete_or_supersede": "the .md-only first tier is superseded by local-first, tool/man-first within it",
+   "fresh_reuse_plan": "the tool/man tiers are reused by every plan-failing run that names a tool"
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": "no analysis was deleted; the tool/man tiers are the same path as the local-guide request",
+   "search_stop_decision": "stop a round when the tool/man tiers ship and the honest receipts and tests exist"
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "a model cannot read a tool's own --help or man page; deleting the tool/man tiers would lose the direct, version-matched offline contract between a tool and its user",
+   "routes_ranked": [
+    "REUSE: read the computer's own guides, now including tool help and man pages (selected)",
+    "COMPOSE: the tool/man tiers inside the existing local-guide path (selected)",
+    "SYNTHESIZE_NEW_PRIMITIVE: a second local-knowledge engine (rejected: duplicates the scan)"
+   ]
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "5 new local-guide tests + 13 local-guide tests + 23 perfect-algorithm tests pin the completeness gate, the honest fallback (help missing -> man), the honest OPEN (no help, no man), the honest precedence (tool beats .md) and the tokenizer fix for 2-char tool names; no independent oracle exists in this round"
+  },
+  "real_outcome": "The local instant-knowledge tier now reads the named tool's own --help, then its man page, then the repo's .md docs. A document answers only if one paragraph shares content tokens with the query; function words carry no conclusion. The web tier is asked only when the caller passes allow_instant_knowledge=True and the local tier misses. Receipt LOCAL_GUIDE_RECEIPT_20261123_TOOL_MAN_TIER_V1.json records the direct and fixture measurements.",
+  "required_capability": "model-free scan + right-question + shortest-plan + verify + admit + persist, compositional over any arbitrary environment, with local guides (README, tool --help, man pages, .md docs) read first and web as fallback",
+  "route_frontier": {
+   "challenger_routes": [
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "looks fast, is wrong",
+      "CORRECTNESS": "one keyword match becomes a plan, then fails honestly",
+      "INCREMENTAL_COST": "0 parameters",
+      "RELIABILITY": "low -- the agent acts on a weak answer",
+      "VERIFIABILITY": "no verification",
+      "WALL_CLOCK": "fast but wrong"
+     },
+     "evidence": [
+      "the gate IS the honesty mechanism -- a keyword anywhere is a thin hit, not a guide",
+      "the receipt shows the grid-world query honestly returns OPEN -- a keyword match would have fabricated an answer"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/LOCAL_GUIDE_RECEIPT_20261123_TOOL_MAN_TIER_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "ANSWER_FROM_ANY_KEYWORD_MATCH"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "identical mechanism",
+      "CORRECTNESS": "no improvement in honesty",
+      "INCREMENTAL_COST": "0 parameters",
+      "RELIABILITY": "same",
+      "VERIFIABILITY": "same",
+      "WALL_CLOCK": "double the scan (a separate engine)"
+     },
+     "evidence": [
+      "a separate local-guide engine re-reads the same guides the existing path already reads",
+      "the tool/man tiers are inside the existing local-guide path already"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/LOCAL_GUIDE_RECEIPT_20261123_TOOL_MAN_TIER_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "NON_DOMINATING",
+     "route": "THE_SEPARATE_LOCAL_GUIDE_ENGINE"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "same source",
+      "CORRECTNESS": "wrong for the named tool -- a broad .md corpus is not the tool's guide",
+      "INCREMENTAL_COST": "0 parameters",
+      "RELIABILITY": "low for tools with --help; same for .md",
+      "VERIFIABILITY": "the tool's own --help is the direct offline artifact",
+      "WALL_CLOCK": "slower than tool-first"
+     },
+     "evidence": [
+      "the tool's --help is the standard offline contract between a tool and its user",
+      "the .md corpus is a broader is-a-guide, not the tool's guide"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/LOCAL_GUIDE_RECEIPT_20261123_TOOL_MAN_TIER_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "MD_ONLY_FIRST_TIER_NO_TOOL_GUIDE"
+    }
+   ],
+   "checked_at_utc": "2026-11-23T05:31:14+00:00",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "MD_ONLY_FIRST_TIER",
+   "max_age_hours": 2,
+   "negative_search_summary": "No existing mechanism in the repo reads a named tool's --help or man page as the first instant-knowledge tier; local_guide_v1 read only the repo's .md docs. The tool's --help and man page are the standardized offline contract between a tool and its user, all already on this machine.",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "tool help man page offline instant knowledge"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "man page reader for agents"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "subprocess --help reader completeness gated"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "2026 tool help for agents completeness gated"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "routes_considered": [
+    "REUSE: read the computer's own guides, now including tool help and man pages (selected)",
+    "COMPOSE: the tool/man tiers inside the existing local-guide path (selected)",
+    "BYPASS: trust the web first (rejected: the tool's own --help is offline, version-matched, and local)",
+    "SYNTHESIZE_NEW_PRIMITIVE: a new local-guide engine (rejected: the existing path is sufficient)"
+   ],
+   "selected_route": "PERFECT_ALGORITHM_LOCAL_GUIDE_TOOL_MAN_TIER_V1",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-11-23T05:31:14+00:00",
+    "execution_dependencies": [
+     {
+      "dependency": "local Python 3.11+ runtime with unittest",
+      "evidence": [
+       "13 local-guide tests pass in canonical/tests/test_local_guide_v1.py"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "the composed loop in the repo (canonical/swe_kernel/perfect_algorithm_v1.py)",
+      "evidence": [
+       "23 perfect-algorithm tests + direct tool/man-tier measurements"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "max_age_hours": 2,
+    "selected_route": "PERFECT_ALGORITHM_LOCAL_GUIDE_TOOL_MAN_TIER_V1",
+    "status": "READY"
+   },
+   "selected_surviving_route": "PERFECT_ALGORITHM_LOCAL_GUIDE_TOOL_MAN_TIER_V1",
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/runtime/local_guide_v1.py (extended this round)",
+     "canonical/runtime/jit_knowledge_v1.py (existing web tier)"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "man pages and --help are the standardized offline contract between a tool and its user",
+     "a tool's own --help is the cheapest, version-matched, offline answer"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "github.com/mwunsch/mansplain (man pages for agents)"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "man(7) and --help(1) conventions"
+    ]
+   },
+   "stop_condition": "The tool/man tiers ship, the honest receipts and tests exist, and the web fallback stays behind the allow_instant_knowledge gate.",
+   "unresolved_plausible_dominators": [],
+   "why_selected_route_is_fastest_sufficient": "A subprocess --help read and a nroff-stripped man-page read are cheap, sound (never concludes from a keyword), version-matched, and reuse the same local-guide path unchanged."
+  },
+  "routes_considered": [
+   "REUSE: read the computer's own guides, now including tool help and man pages (selected)",
+   "COMPOSE: the tool/man tiers inside the existing local-guide path (selected)",
+   "BYPASS: trust the web first (rejected: the tool's own --help is offline, version-matched, and local)",
+   "SYNTHESIZE_NEW_PRIMITIVE: a new local-guide engine (rejected: the existing loop is sufficient)"
+  ],
+  "selected_surviving_route": "PERFECT_ALGORITHM_LOCAL_GUIDE_TOOL_MAN_TIER_V1",
+  "stop_condition": "The tool/man tiers ship, the honest receipts and tests exist, and the web fallback stays behind the allow_instant_knowledge gate.",
+  "why_selected_route_is_fastest_sufficient": "A subprocess --help read and a nroff-stripped man-page read are cheap, sound (never concludes from a keyword), version-matched, and reuse the same local-guide path unchanged."
+ },
+ "required_capability": "model-free scan + right-question + shortest-plan + verify + admit + persist, compositional over any arbitrary environment, with local guides (README, tool --help, man pages, .md docs) read first and web as fallback",
+ "route_class": "COMPOSE",
+ "route_id": "PERFECT_ALGORITHM_LOCAL_GUIDE_TOOL_MAN_TIER_V1",
+ "route_order_walk": {
+  "ADAPT": "The local tier now reads tool help and man pages first.",
+  "BYPASS": "Not used: trusting the web first is the failure mode.",
+  "COMPOSE": "Selected: the tool/man tiers are inside the existing local-guide path.",
+  "CONFIGURE": "No configuration added beyond tools/man_root/timeout_s parameters.",
+  "DELETE": "No mechanism deleted.",
+  "INTEGRATE": "Not yet claimed.",
+  "REUSE": "Selected: reuse the local-guide path.",
+  "SUBSTITUTE": "Not used.",
+  "SYNTHESIZE_NEW_PRIMITIVE": "Not selected: the tool/man tiers are a source, not a new engine."
+ },
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "selected_route": "COMPOSE_THE_LOCAL_TIER_TOOL_MAN_GUIDES_INTO_THE_EXISTING_LOCAL_GUIDE_PATH",
+ "selected_surviving_route": "PERFECT_ALGORITHM_LOCAL_GUIDE_TOOL_MAN_TIER_V1",
+ "status": "PROPOSED__PRODUCER_MEASURED__ENVIRONMENT_BROKER_ENV_READY__INDEPENDENT_VERIFICATION_OPEN",
+ "stop_condition": "The tool/man tiers ship, the honest receipts and tests exist, and the web fallback stays behind the allow_instant_knowledge gate.",
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "truth": {
+  "achieved": false,
+  "the_law_this_round_adds": "Local instant knowledge reads, in order of directness, the named tool's own --help, then its man page, then the repo's .md guides -- offline, version-matched, completeness-gated; the web tier is asked only when the caller passes allow_instant_knowledge=True and the local tier misses.",
+  "what_is_false_in_the_claim": [
+   "that the local tier reads only the repo's .md guides",
+   "that a keyword match anywhere in a tool's --help or man page is a conclusion"
+  ]
+ },
+ "user_authorized_governance_change": false,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "currentness": {
+   "accepted_families": 5,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "No truth obligation is discharged by this round. The tool/man tiers construct and admit the mechanism; no obligation moves.",
+  "target_truth_obligations": [
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [
+    {
+     "git_blob_sha": "b10a317daf1161e7f36d87618fb0470600a1a205",
+     "path": "canonical/verification/LOCAL_GUIDE_RECEIPT_20261123_TOOL_MAN_TIER_V1.json"
+    }
+   ],
+   "decisive_question": "Does the tool/man tier answer from evidence, or from keyword matches?",
+   "falsifier_id": "THE_TOOL_MAN_TIER_IS_A_KEYWORD_MATCHER_NOT_A_GUIDE",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "",
+   "proposal_id": "PERFECT_ALGORITHM_LOCAL_GUIDE_TOOL_MAN_TIER_V1"
+  }
+ },
+ "verification": {
+  "existing_suite": {
+   "count": 9,
+   "file": "canonical/tests/test_the_environment_broker_v1.py",
+   "result": "9 passed"
+  },
+  "independent_verification": "OPEN",
+  "live_trial": "intake/RECEIPT_ENV_READY_LIVE_20261123_V1.json",
+  "model_call_audit": "canonical/verification/MODEL_CALL_AUDIT_ENV_READY_20261123_V1.json (ENVIRONMENT_BROKER static=3 dynamic=1 inference_endpoint_files=0)",
+  "offline_tests": {
+   "count": 24,
+   "file": "canonical/tests/test_broker_env_ready_v1.py",
+   "result": "24 passed"
+  }
+ },
+ "weakens_existing_guard": false
+}
