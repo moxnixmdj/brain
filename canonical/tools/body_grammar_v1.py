@@ -445,8 +445,17 @@ def compositions(args: Sequence[str], paths: Mapping[str, Sequence[str]],
             if not (_ln.startswith("from ") and " import " in _ln and not _ln.endswith("*")):
                 continue
             _mod, _, _names = _ln.partition(" import ")
+            # A CAPITALISED NAME IMPORTED FROM ANYWHERE IS A CONSTRUCTOR. `from sympy import
+            # Matrix` imports from a TOP-LEVEL module, which the earlier dot-requirement
+            # excluded -- so sympy 192's `Matrix([first, second])` was never constructible
+            # while `from scipy.ndimage import gaussian_filter1d` was. The distinction that
+            # matters is not how deep the module is; it is whether the stub bound the name.
+            for _n in _names.split(","):
+                _n = _n.strip().split(" as ")[-1].strip()
+                if _n.isidentifier() and len(_n) > 2 and _n[0].isupper():
+                    _from_calls.append(_n)
             if "." not in _mod[len("from "):].strip():
-                continue          # `from scipy import linalg` binds a MODULE, handled below
+                continue          # only a DOTTED module's lowercase names are callables
             for _n in _names.split(","):
                 _n = _n.strip().split(" as ")[-1].strip()
                 if _n.isidentifier() and len(_n) > 2:
@@ -912,6 +921,14 @@ def compositions(args: Sequence[str], paths: Mapping[str, Sequence[str]],
         joined_all = ", ".join(args)
         for sym in list(dict.fromkeys(list(_from_calls) + list(stated_symbols)))[:20]:
             add("APPLY", f"{sym}({joined_all})")
+            # THE WHOLE ARGUMENT LIST AS ONE LITERAL. sympy 192 is
+            #     def custom_create_matrix(first, second) -> ...: return
+            #     ref: Matrix([first, second])
+            # and the grammar only ever emitted ONE argument, so a constructor that takes the
+            # parameters as a single sequence was unconstructible. This is the `sympy.Matrix`
+            # shape, which is common enough to be worth its own production.
+            add("LISTCALL", f"{sym}([{joined_all}])")
+            # and a constructor of the FIRST argument with the rest folded in by position
             for name in ("as_explicit", "to_list", "doit"):
                 add("METHOD", f"{sym}({joined_all}).{name}()")
         # A STATED AXIS IS A LIST LITERAL, AND IT BELONGS HERE, NOT AT THE END.
