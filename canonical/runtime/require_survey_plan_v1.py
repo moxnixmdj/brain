@@ -609,6 +609,19 @@ def parse_demos(text: str, tool: str) -> list[dict[str, Any]]:
                     pairs.append((previous, token))
                     previous = ""
                 valued.append(token)
+            # A USAGE line is a *shape*, not a demonstration: `meshctl service list [flags]` and
+            # `git log [<options>] [<revision-range>]` name no object at all. Read as a
+            # demonstration it contributed one value, `[flags]`, and that candidate outranked the
+            # page's own EXAMPLES line -- the request's values then filled nothing and the plan
+            # came out as a bare positional (`meshctl service list production`, complete=True,
+            # --status healthy lost). A bracketed token or a metavariable is not an object.
+            metavariable = (
+                lambda t: (t.startswith("[") or t.startswith("<") or t.endswith("]")
+                           or t.endswith(">") or t.startswith("(") or "..." in t
+                           or t.lower() in ("options", "flags", "args", "arguments"))
+            )
+            if not in_block and any(metavariable(t) for t in tokens[1:]):
+                continue
             demos.append({"call": " ".join(tokens),
                           "options": [t for t in tokens[1:] if t.startswith("-") and t != "-"],
                           "values": valued, "pairs": pairs,
@@ -943,6 +956,16 @@ def route(tree: Mapping[str, Any], request_words: Iterable[str],
         stated = acts_in(page.get("summary") or "")
         if wanted_acts and any(s[0] in {a[0] for a in wanted_acts} for s in stated):
             score += 1
+        # A page that *documents a flag the request names* is a page the request is written in.
+        # `List all issues in the "Platform" team with status "Todo"` names `--team` and `--status`
+        # only on `issue list`; `team list` has neither, and scoring the request's words alone put
+        # `team list` first (9 to 7) because `team` is a noun the page is named after. Naming a
+        # flag is not naming a subject -- it is the request stating which page's grammar it is
+        # written in, which is the strongest routing evidence there is.
+        flags_here = {str(o.get("flag") or "").lstrip("-").lower()
+                      for o in page.get("options") or []}
+        if flags_here:
+            score += 3 * len(wanted & flags_here)
         scores.append({"child": " ".join(here), "score": score})
         # Ties are broken by how close the candidate's *distinguishing* word sits to the act word
         # in the request. `Add a record "www" ... in the zone "example.org"` scores `zone add` and
@@ -982,9 +1005,14 @@ def route(tree: Mapping[str, Any], request_words: Iterable[str],
 # request quoting it -- so the ways a document introduces one are worth spelling out. `one of` is
 # as common as `values:` and writes its list without a bracket or a colon, and reading only the
 # bracketed forms lost `--type` entirely on a program whose documentation is otherwise complete.
+# A choice may be several words: `(values: Todo, In Progress, Done, Cancelled)` is four
+# choices and one of them has a space in it. Allowing only single tokens made the match start
+# after the first multi-word choice -- the list read `Progress, Done, Cancelled`, `Todo` was lost,
+# and a request saying `status "Todo"` had nothing to bind to. A choice is a run of words with no
+# comma in it, at most four of them, optionally `label=value`.
+ENUM_ITEM = r"[A-Za-z0-9_+-]{1,20}(?:\s+[A-Za-z0-9_+-]{1,20}){0,3}(?:\s*=\s*[A-Za-z0-9_+-]{1,20})?"
 ENUM_LIST = re.compile(r"(?::|\bone of|[^(\n]{0,40}\()[^)\n]{0,60}?"
-                       r"(?P<list>[A-Za-z0-9_+-]{1,20}(?:\s*=\s*[A-Za-z0-9_+-]{1,20})?"
-                       r"(?:\s*,\s*[A-Za-z0-9_+-]{1,20}(?:\s*=\s*[A-Za-z0-9_+-]{1,20})?){1,12})"
+                       r"(?P<list>" + ENUM_ITEM + r"(?:\s*,\s*" + ENUM_ITEM + r"){1,12})"
                        r"(?:\s*(?:\)|\.|;|$))", re.M)
 
 
@@ -1012,6 +1040,12 @@ def enum_pairs(option: Mapping[str, Any]) -> list[tuple[str, str]]:
             out.append((right.strip().lower(), left.strip()))      # label, value
         elif item:
             out.append((item.lower(), item.strip()))
+    # Two characters or more. A one-letter choice sounds harmless -- a DNS record's `--type` is
+    # documented `one of A, AAAA, CNAME, MX` -- but admitting it made the *article* `a` a label,
+    # and `Add a record "www" of type CNAME` then bound `--type a`: the sentence's own grammar
+    # beat the document's vocabulary. Measured: cb-style record creation dropped from correct to
+    # `--type a` when this was loosened. A one-letter label is not worth that trade; a request
+    # that truly means it can say so in a spelling the flag's own list still matches.
     return [(w, v) for w, v in out if 1 < len(w) < 30]
 
 
@@ -1821,6 +1855,50 @@ def _demo_plan(demo: Mapping[str, Any], requirement: Mapping[str, Any], tool: st
                     continue
                 filled_pairs.extend([str(flag), shown])
                 spent.add(shown)
+        # A flag the demonstration does not name but the page documents, whose *vocabulary* the
+        # request states, takes that value. `linear issue list` demonstrates only `--team
+        # Platform`; the request also says `status "Todo"`, and `--status` lists Todo among its
+        # choices. Nothing here is inferred from the word: the page says Todo belongs to
+        # `--status`, the request says Todo, and the demonstration had no place for it. Without
+        # this the value was reported unplaced and silently dropped from a command the page
+        # documents the flag on.
+        for other in demo.get("_options") or []:
+            other_flag = str(other.get("flag") or "")
+            if not other_flag or other_flag in {str(f) for f in filled_pairs[::2]}:
+                continue
+            choices = enum_choices(other)
+            if not choices:
+                continue
+            said = str(requirement.get("instruction") or "")
+            for choice in choices:
+                found = re.search(r"(?<![\w.-])" + re.escape(choice) + r"(?![\w.-])", said, re.I)
+                if not found:
+                    continue
+                placed = said[found.start():found.end()]
+                if str(choice).lower() in {str(x).lower() for x in spent}:
+                    continue
+                if str(choice) in spent:
+                    continue
+                filled_pairs.extend([other_flag, placed])
+                spent.add(str(choice))
+                break
+        # The request states a value the demonstration already writes: that pairing is settled.
+        # `notion page create` demonstrates `--title Weekly Report --parent Engineering Wiki`; a
+        # request saying `titled "Weekly Report" under "Engineering Wiki"` names both values, so
+        # both flags keep what the document put there. Without this the second pairing was
+        # dropped -- `--parent` vanished and `Engineering Wiki` was emitted as a bare positional,
+        # because a two-word example value is split by the tokeniser and never matches one value.
+        said_now = str(requirement.get("instruction") or "")
+        for flag, example in pairs:
+            if str(flag) in filled_pairs[::2]:
+                continue
+            shown = str(example).strip()
+            if not shown or shown.startswith("-"):
+                continue
+            if re.search(r"(?<![\w.-])" + re.escape(shown) + r"(?![\w.-])", said_now):
+                filled_pairs.extend([str(flag), shown])
+                spent.update(words_of(shown))
+                spent.add(shown)
         for _i, (flag, example) in enumerate(pairs):
             if str(flag) in filled_pairs[::2]:
                 continue
@@ -1847,12 +1925,38 @@ def _demo_plan(demo: Mapping[str, Any], requirement: Mapping[str, Any], tool: st
                     # use it. Only words the option itself lists are admitted, and only when they
                     # appear in the instruction as whole words.
                     said = str(requirement.get("instruction") or "")
-                    for choice in listed:
-                        found = re.search(r"(?<![\w.-])" + re.escape(choice) + r"(?![\w.-])",
-                                          said, re.I)
-                        if found and choice.lower() not in {str(x).lower() for x in spent}:
-                            filled_pairs.extend([flag, said[found.start():found.end()]])
-                            spent.add(choice.lower())
+                    # A choice is taken by the spelling the request uses, and a longer choice
+                    # wins over one of its letters: the list `A, AAAA, CNAME, MX` contains both
+                    # `A` and `CNAME`, and a request saying "of type CNAME" matched `A` first
+                    # (case-insensitively, inside "Add a record") and wrote `--type a`. Ordering
+                    # by length and then taking the first spelling actually present is the
+                    # document's own ordering of what a word *is*: the longest label that occurs
+                    # is the one the sentence used.
+                    # Exact spelling first, longest first: the request wrote `CNAME` in the
+                    # document's own capitals, so a case-sensitive search finds it and `A` -- the
+                    # article in "Add a record" -- is not even a candidate. The case-insensitive
+                    # pass is the fallback for a document that capitalises for display and a
+                    # request that does not (`--type` lists `postgres`, the request says
+                    # "PostgreSQL").
+                    # The *spelling* the document prints, not the lowercased label: `enum_pairs`
+                    # returns ("a", "A") and ("cname", "CNAME"), and searching for the label broke
+                    # on a request that wrote the display form. Longest first, exact first.
+                    spellings = [(label, shown) for label, shown in enum_pairs(choice_slot)]
+                    for exact in (True, False):
+                        for label, shown in sorted(spellings, key=lambda p: (-len(p[1]), p[1])):
+                            for needle in (shown, label):
+                                pattern = (r"(?<![\w.-])" + re.escape(needle) + r"(?![\w.-])")
+                                found = re.search(pattern, said, 0 if exact else re.I)
+                                if not found:
+                                    continue
+                                if label.lower() in {str(x).lower() for x in spent}:
+                                    continue
+                                filled_pairs.extend([flag, said[found.start():found.end()]])
+                                spent.add(label.lower())
+                                break
+                            if any(str(f).lower() == flag.lower() for f in filled_pairs[::2]):
+                                break
+                        if any(str(f).lower() == flag.lower() for f in filled_pairs[::2]):
                             break
                     if any(str(f).lower() == flag.lower() for f in filled_pairs[::2]):
                         continue

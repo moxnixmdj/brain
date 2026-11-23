@@ -1,0 +1,132 @@
+#!/usr/bin/env python3
+"""__NAME__ -- a program that documents itself and also acts.
+
+The help pages are the benchmark's published text. Execution is a small generic store, so a plan
+can be judged by *what it left behind* rather than by the string it printed: every `--flag value`
+pair is applied to the state, `list` filters by those pairs, and the mutating verbs append or
+address an item by `--id`/`--name`/`--key`.
+
+State lives in `$__NAME___STATE` or a dotfile beside the program, so a test can
+give each run a fresh file. Nothing here is a knowledge table: the store starts empty and holds
+only what commands put in it.
+"""
+import json
+import os
+import sys
+
+PAGES = {}
+STATE = os.environ.get("__NAME___STATE") or os.path.join(
+    os.path.dirname(os.path.abspath(__file__)), "." + "__NAME__" + "-state.json")
+HELP = ("--help", "-h", "help")
+MUTATING = {"create", "add", "register", "connect", "send", "apply", "approve", "reject",
+            "start", "route", "split", "build", "append", "silence", "transition", "update",
+            "resolve", "remove", "delete", "create_issue", "create_page"}
+
+
+def load():
+    try:
+        with open(STATE) as handle:
+            return json.load(handle)
+    except (OSError, ValueError):
+        return {}
+
+
+def save(state):
+    with open(STATE, "w") as handle:
+        json.dump(state, handle, indent=1, sort_keys=True)
+
+
+def parse(args):
+    flags, bare, index = {}, [], 0
+    while index < len(args):
+        word = args[index]
+        if word.startswith("--"):
+            name = word[2:]
+            if "=" in name:
+                name, _, value = name.partition("=")
+                flags.setdefault(name, []).append(value)
+            elif index + 1 < len(args) and not args[index + 1].startswith("--"):
+                flags.setdefault(name, []).append(args[index + 1])
+                index += 1
+            else:
+                flags.setdefault(name, []).append("")
+        else:
+            bare.append(word)
+        index += 1
+    return flags, bare
+
+
+def main(argv):
+    # A page is shown when help is asked for, and only then. Answering *any* invocation that
+    # happens to spell a route with that route's help text makes every command a no-op, and a
+    # plan could never be judged by what it left behind.
+    asked_for_help = "--help" in argv or "-h" in argv or "help" in argv
+    args = [a for a in argv if a not in HELP]
+    if asked_for_help:
+        key = " ".join(args)
+        if key in PAGES:
+            sys.stdout.write(PAGES[key])
+            return 0
+        if args and args[0] in PAGES:
+            sys.stdout.write(PAGES[args[0]])
+            return 0
+        sys.stdout.write(PAGES.get("", ""))
+        return 0
+    if not args:
+        sys.stdout.write(PAGES.get("", ""))
+        return 0
+    flags, bare = parse(args)
+    # the document's own route is the longest leading run of bare words that has a page
+    route = ""
+    for count in range(len(bare), 0, -1):
+        candidate = " ".join(bare[:count])
+        if candidate in PAGES:
+            route = candidate
+            break
+    if not route:
+        sys.stdout.write(PAGES.get("", ""))
+        return 0
+    action = route.split()[-1]
+    state = load()
+    # The store belongs to the *resource*, not to the verb: `issue create` and `issue list` are
+    # two ways of addressing one collection. Keying on the whole route gives every verb its own
+    # list, so a create is invisible to the very list that should show it.
+    resource = route.rsplit(" ", 1)[0] if " " in route else route
+    store = state.setdefault(resource, [])
+    if not isinstance(store, list):
+        store = state[resource] = []
+    wanted = [(k, v[-1]) for k, v in flags.items() if v]
+    if action == "list":
+        sys.stdout.write(json.dumps(
+            [item for item in store if all(str(item.get(k, "")) == v for k, v in wanted)]))
+        return 0
+    if action in MUTATING:
+        item = {k: v[-1] for k, v in flags.items() if v}
+        spare = [w for w in bare[len(route.split()):] if w]
+        if spare and "name" not in item:
+            item["name"] = spare[0]
+        address = item.get("id") or item.get("name") or item.get("key")
+        if action in ("update", "remove", "delete", "resolve"):
+            for existing in store:
+                if address and address in (existing.get("id"), existing.get("name"),
+                                           existing.get("key")):
+                    if action in ("remove", "delete"):
+                        store.remove(existing)
+                    else:
+                        existing.update({k: v for k, v in item.items()
+                                         if k not in ("id", "name", "key")})
+                    break
+            else:
+                store.append(item)
+        else:
+            store.append(item)
+        save(state)
+        sys.stdout.write(json.dumps({"ok": True, "item": item}))
+        return 0
+    sys.stdout.write(json.dumps(
+        [item for item in store if all(str(item.get(k, "")) == v for k, v in wanted)]))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main(sys.argv[1:]))

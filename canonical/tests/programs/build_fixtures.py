@@ -16,20 +16,20 @@ import pathlib
 
 HERE = pathlib.Path(__file__).resolve().parent
 
-RUN = """#!/usr/bin/env python3
-import sys
-PAGES = {pages}
-args = [x for x in sys.argv[1:] if x not in ("--help", "-h")]
-key = " ".join(args)
-sys.stdout.write(PAGES.get(key) or PAGES.get(args[0] if args else "", PAGES[""]))
-"""
+TEMPLATE = (HERE / "program_template.py").read_text()
 
 
 def write(directory: pathlib.Path, name: str, pages: dict[str, str]) -> None:
+    """One program: the shared executor with this program's own pages baked in."""
     directory.mkdir(parents=True, exist_ok=True)
+    rendered = "{\n" + "".join(
+        f"    {json.dumps(k)}: {json.dumps(v)},\n" for k, v in pages.items()) + "}"
+    text = (TEMPLATE.replace("PAGES = {}", f"PAGES = {rendered}")
+            .replace("__UPPER___STATE", f"{name.upper()}_STATE")
+            .replace("__NAME___STATE", f"{name.upper()}_STATE")
+            .replace("__NAME__", name))
     path = directory / name
-    path.write_text(RUN.format(pages="{\n" + "".join(
-        f"    {json.dumps(k)}: {json.dumps(v)},\n" for k, v in pages.items()) + "}\n"))
+    path.write_text(text)
     path.chmod(0o755)
 
 

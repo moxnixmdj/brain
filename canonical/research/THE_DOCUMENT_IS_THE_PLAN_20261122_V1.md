@@ -2039,3 +2039,43 @@ recoverable from the internet (no public `CLI-Bench`; `gh search` and the API bo
 So the score cannot be re-derived right now, and I will not present it as if it could. What is
 verified: the 55 tests, the mechanism, and — via the fixtures above — that the planner reads these
 documents correctly. The next session must re-obtain the bench before quoting a number.
+
+### A52 — the plan is judged by what it left behind
+
+The external bench is gone and cannot be re-derived, so the question is asked in a form that lives
+in the repository. Each of eleven tasks states a **goal and an effect**, never a command:
+
+    t02  "List all Linear issues in the "Platform" team with status "Todo"."
+         -> the command must carry --team Platform and --status Todo
+    t09  "Create a Notion page titled "Weekly Report" under "Engineering Wiki"."
+         -> the page store must afterwards hold {title: Weekly Report, parent: Engineering Wiki}
+    t10  "Create an S3 sink named "analytics-lake" with config {"bucket": ..., "prefix": "daily/"}"
+         -> the --config argument must parse to exactly that object
+
+The plan is produced by the planner alone, run against the real program, and the world is read
+back. **10/10 pass, identical across three hash seeds, and the suite is 55 + 11 tests.**
+
+Getting there found four defects, each confirmed by a task failing before it and passing after:
+
+1. **A USAGE line was read as a demonstration.** `meshctl service list [flags]` contributed one
+   value, `[flags]`, and that candidate *outranked the page's own EXAMPLES line*. The request's
+   values then filled nothing and the plan came out as a bare positional:
+   `meshctl service list production`, reported `complete: True`, with `--status healthy` lost.
+   `[flags]`, `<arg>`, `options`, `...` are metavariables, not objects.
+2. **A page that documents a flag the request names was outranked by a page named after the
+   request's noun.** "issues in the Platform **team** with status Todo" routed to `team list`
+   (9) over `issue list` (7), because `team` is the page's name. `issue list` is the page that
+   documents `--team` and `--status` -- the request is written in its grammar. Naming a *flag* is
+   stronger evidence than naming a subject.
+3. **`enum_choices` split only on commas**, so `(values: Todo, In Progress, Done, Cancelled)` read
+   as `Progress, Done, Cancelled` -- the first multi-word choice was lost and `"Todo"` had nothing
+   to bind to. Choices may be several words.
+4. **A demonstration's multi-word value was split by the tokeniser** and never re-matched:
+   `--parent Engineering Wiki` vanished, leaving `Engineering Wiki` as a bare positional. When the
+   request states a value the demonstration already writes, the demonstration's pairing stands.
+
+**One rejected change, recorded because it looked obviously right.** Loosening the minimum label
+length from 2 to 1 admits `A` -- a real DNS record type -- but it also makes the article `a` a
+label, and `Add a record "www" of type CNAME` then bound `--type a`: the sentence's own grammar
+beat the document's vocabulary. Two tests caught it. The rule stands at two characters; a
+one-letter label is not worth a wrong answer on the common case.
