@@ -226,15 +226,40 @@ def _signature(node: ast.AST) -> str:
         return ""
 
 
-def _first_paragraph(doc: str | None) -> str:
+# A DOCSTRING IS NOT A SENTENCE. This function used to cut every docstring at the first
+# sentence boundary within 220 characters, which measured as a real loss: `librosa.resample`
+# states 3093 characters across Parameters, Returns, Examples, Raises, See Also and Notes, and
+# the whole ranking pipeline was seeing the first line only. The sections are where a docstring
+# says what a thing takes, gives back, and is used FOR -- the exact information a goal needs --
+# so truncating there discards the most useful half of the artifact's self-description.
+#
+# What survives truncation is a hard ceiling at `MAX_DOC` for cost, and the SUMMARY is kept
+# separately because it is the highest-density statement per byte.
+MAX_DOC = 1400
+SUMMARY_CHARS = 220
+
+
+def doc_summary(doc: str | None) -> str:
+    """The first sentence -- the artifact's one-line statement of what it is for."""
     if not doc:
         return ""
     text = " ".join(doc.split())
     for stop in (". ", ".\n", ": "):
         i = text.find(stop)
-        if 0 < i < 220:
+        if 0 < i < SUMMARY_CHARS:
             return text[:i].strip()
-    return text[:220].strip()
+    return text[:SUMMARY_CHARS].strip()
+
+
+def _first_paragraph(doc: str | None) -> str:
+    """The full statement, capped, not the first sentence.
+
+    Name kept so every caller is unchanged; behaviour is what changed, and the reason is above.
+    """
+    if not doc:
+        return ""
+    text = " ".join((doc or "").split())
+    return text[:MAX_DOC].strip()
 
 
 def units_from_source(src: Mapping[str, str], module: str) -> list[dict[str, Any]]:
@@ -267,6 +292,7 @@ def units_from_source(src: Mapping[str, str], module: str) -> list[dict[str, Any
                 "kind": "class" if isinstance(node, ast.ClassDef) else "function",
                 "signature": _signature(node),
                 "doc": doc,
+                "summary": doc_summary(ast.get_docstring(node)),
             })
     # ONE NAME, ONE UNIT. A package may define `retry` in `_utils.py` and re-export it from
     # `__init__.py`; the re-export is a module-level `ImportFrom`, so the SAME public name can
