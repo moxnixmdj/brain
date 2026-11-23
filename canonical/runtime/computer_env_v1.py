@@ -911,15 +911,23 @@ def programs_for_goal(goal: str, limit: int = 24) -> list[str]:
             continue
     hits.sort(key=lambda x: (-x[0], x[1]))
     out_progs: list[str] = []
-    seen_real: set[str] = set()
+    seen_help: dict[str, str] = {}
     for _, p in hits:
         real = _INSTRUMENT_MEM_CACHE.get(p)
         if real is None:
             real = _instrument(p)
             _INSTRUMENT_MEM_CACHE[p] = real
-        if real in seen_real:
+        ht = help_text(p)
+        # Dedup aliases whose whole identity is shared: egrep/fgrep/rgrep are
+        # the same exec script three times, and counting them as three
+        # independent programs that agree is how one opinion gets called a
+        # consensus. A program that is the same binary but a DIFFERENT
+        # manual -- gzip versus gunzip, same binary, different intended
+        # function, different flags -- is a different program and must not
+        # be silently dropped in favor of its longer-spelled sibling.
+        if seen_help.get(real) == ht:
             continue
-        seen_real.add(real)
+        seen_help[real] = ht
         out_progs.append(p)
         if len(out_progs) >= limit:
             break

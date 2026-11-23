@@ -81,14 +81,19 @@ def test_phase1_external_workspace_bound_execution_and_sub6ms_inverted_manual_in
                 linear_hits.append((n, p))
         linear_hits.sort(key=lambda x: (-x[0], x[1]))
         linear_out = []
-        seen = set()
+        seen_help = {}
         for _, p in linear_hits:
             real = cenv._instrument(p)
-            if real not in seen:
-                seen.add(real)
-                linear_out.append(p)
-                if len(linear_out) >= 24:
-                    break
+            ht = cenv.help_text(p)
+            # Same dedup rule the fast path applies: collapse aliases with
+            # the same binary AND the same manual; a different manual is a
+            # different program.
+            if seen_help.get(real) == ht:
+                continue
+            seen_help[real] = ht
+            linear_out.append(p)
+            if len(linear_out) >= 24:
+                break
         assert fast_out == linear_out, f"Manual shortlist mismatch on {q!r}: {fast_out} != {linear_out}"
 
     t1 = time.perf_counter_ns()

@@ -521,6 +521,64 @@ def run(env: Any, goal: str, actions: Sequence[Any],
                     "error": str(e)[:200],
                     "fallback": "falls_through_full_loop"}
 
+    # ---- WARM WALK (carried model, verified edge-by-edge) ----
+    # The admitted rule replay above covers the identical-shape instance. For
+    # a DIFFERENT instance of the same kind, the replay fails honestly; what is
+    # still true is the carried transition model -- it encodes how these actions
+    # change this kind of state. Walk it from the true root, validating every
+    # edge against the live environment as we go (the walk never trusts the
+    # stored row as fact: each reach is verified by ob-server). If the walk
+    # reaches the goal, the full scan is skipped: the carried model did the
+    # work, the goal is observed, nothing new is claimed. If it does not, we
+    # fall through to the full scan exactly as before.
+    replay_served = (receipts.get("steps", {}).get("memory_replay") or {}).get("status") == "PASS__REPLAY_REACHED_GOAL"
+    stored_model_walk = (priors_for(memory, kind) or {}).get("model")
+    prior_walk = prior if prior is not None else stored_model_walk
+    if not replay_served and prior_walk:
+        # The BFS over the carried model walks edges and re-verifies each as
+        # it goes; its cost scales with the model size. The default cap of 96
+        # (drive's toy-scale default, 2026-11-03) is too tight for larger
+        # carried models, so the cap scales with the number of transitions
+        # while staying bounded -- the pure-loss path is still a real cap.
+        transitions = sum(len(r or {}) for r in (prior_walk or {}).values())
+        cap = max(96, 2 * transitions)
+        priors_used = transitions
+        try:
+            from canonical.runtime import transfer_learning_v1 as _tl
+            warm_walk = _tl.walk_carried_model(env, prior_walk, goal_predicate,
+                                               prior_schema=el.STATE_KEY_SCHEMA,
+                                               max_act_calls=cap)
+        except Exception as e:  # noqa: BLE001
+            warm_walk = None
+            receipts["steps"]["warm_walk"] = {"status": "OPEN__CARRIED_WALK_ERROR",
+                                              "error": str(e)[:200]}
+        if warm_walk is not None and warm_walk.get("reached"):
+            plan_walk = [str(a) for a in (warm_walk.get("plan") or [])]
+            receipts["steps"]["warm_walk"] = {
+                "status": "PASS__CARRIED_WALK_REACHED_GOAL",
+                "reached": True,
+                "plan": plan_walk,
+                "plan_length": len(plan_walk),
+                "counters": dict(warm_walk.get("counters") or {}),
+                "priors_used": priors_used,
+                "max_act_calls": cap,
+                "authority": "NONE__CARRIED_MODEL_WALK_VERIFIED_BY_EXECUTION",
+            }
+            receipts["status"] = "PASS__CARRIED_WALK_REACHED_GOAL"
+            receipts["pass"] = True
+            receipts["outcome"] = "CARRIED_MODEL_WALK_REACHED"
+            receipts["authority"] = "NONE__CARRIED_MODEL_WALK_VERIFIED_BY_EXECUTION"
+            receipts["duration_s"] = round(time.time() - started, 4)
+            return receipts
+        receipts["steps"]["warm_walk"] = {
+            "status": "OPEN__CARRIED_WALK_FAILED",
+            "reached": False,
+            "counters": dict((warm_walk or {}).get("counters") or {}),
+            "priors_used": priors_used,
+            "max_act_calls": cap,
+            "authority": "NONE__CARRIED_MODEL_WALK_DID_NOT_REACH",
+        }
+
     # ---- SCAN (seeded by priors: the same family's learned model) ----
     stored_model = (priors_for(memory, kind) or {}).get("model")
     prior_rows = prior if prior is not None else stored_model
