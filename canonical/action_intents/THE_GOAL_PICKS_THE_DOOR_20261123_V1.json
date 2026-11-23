@@ -1,0 +1,503 @@
+{
+ "action_id": "THE_GOAL_PICKS_THE_DOOR_20261123_V1",
+ "action_intent_id": "THE_GOAL_PICKS_THE_DOOR_20261123_V1",
+ "action_kind": "REAL_CAPABILITY_ACQUISITION",
+ "action_summary": "Round 3 discovered 76 doors and named its own next wall: nothing connected a GOAL to a door. This round joins them by measurement, and it took three designs because the first two were measured and found wrong. (1) Per-content conditions scored precision 0.4677 leave-one-out and 0.0 on the held-out tool: 33 gzip requests produced 33 different contents, so a join over identities had nothing to transfer. (2) The project's own five relations collapsed the surface into three move classes: they are all COMMUTATIVE, functions of a SET of pairs, so `mv a b` and `rm a` read identically. (3) The five relations plus LOT -- a function of the STEP, not of a state: can every readable content still be recovered afterwards -- separate retention from destruction without adding an observable, because the order of the two states was already recorded and `effect()` threw it away. Measured: 18 of 18 doors report an identical signature across three unrelated worlds (different filenames, different contents, different sizes), 60 of 60 held-out requests are answered from OTHER programs' rows, and 61 of 62 leave-one-out. The control that keeps that honest is reported alongside: `mv`'s move was matched by 59 of 59 candidates, so its answer carries no information, while `rm`'s was matched by 3 of 47. The saved row is (tool, relation signature, artifact span): no path, no argv, no content, no example -- which is the user's own objection answered, since exact experiences are never needed again but a relation shape is.",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "earlier_routes_exhausted_reason": "A second declaration reader, a GUI/DOM tier, and a room-inference search were each considered and rejected this round: the reader is one mechanism over shapes, the GUI tier needs a display this sandbox does not have, and inferring a room from a failure would be guessing where the measurement can state.",
+  "incremental_spend_usd": 0,
+  "independent_verification_completed": false,
+  "independent_verification_note": "Producer-run sandbox only: 15 new tests, 111 across the relevant surface; one join receipt (62 rows, 18/18 stable across 3 worlds, 60/60 held out, 61/62 leave-one-out) with its coverage control reported. No independent identity re-ran it.",
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md",
+   "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "VERIFIED_REUSABLE_CAPABILITY_GAIN",
+  "progress_evidence_paths": [
+   "canonical/runtime/goal_to_door_v1.py",
+   "canonical/tools/the_goal_picks_the_door_v1.py",
+   "canonical/tests/test_goal_to_door_v1.py",
+   "canonical/verification/THE_GOAL_PICKS_THE_DOOR_20261123_V1.json",
+   "intake/THE_GOAL_PICKS_THE_DOOR_20261123_V1.md"
+  ],
+  "route_class": "COMPOSE",
+  "scope_complete_discharge": false,
+  "terminal_achieved": false
+ },
+ "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::a goal and a door were recorded in different vocabularies, so nothing could say which of 76 measured doors served a request",
+ "canonical_base_commit": "5abc439a361cf180422ba804d938c8f054f2fd9b",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": {
+  "claim": "an action vocabulary read from the machine itself, verified by execution",
+  "unlocks": "scan() can start in an environment nobody prepared"
+ },
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "a goal and a door were recorded in different vocabularies, so nothing could say which of 76 measured doors served a request",
+ "date": "2026-11-23",
+ "expected_parent_change": "a request can be joined to a door whose measured move produces it.",
+ "expected_parent_frontier_change": "A goal stated as a move of the project's relations can be joined to a door by measurement alone: the door's saved row is its relation signature, stable across three unrelated worlds, and it answers another program's requests.",
+ "explicit_user_authorization": [
+  "What if we make a perfect algorithm and that is basically our model?",
+  "All he should do is basically go into any new arbitrary environment in the computer and he doesn't know anything about anything",
+  "All he should do basically is ask the right question and know all of the things that he should know about, from instant knowledge",
+  "The saving in the memory must not be only his action ... we should do generalization or something",
+  "should he be goal-directed or should he learn everything in all the environments",
+  "best part is no part",
+  "the most advanced coding actions ... let him experience them once and then he will learn them",
+  "our own model only, zero model calls at runtime"
+ ],
+ "falsification_condition": "The claim is false if a tool whose declaration is well-formed yields doors the tree does not confirm, or if a NO_EFFECT operation turns out to be a door under any constructible room, or if any trial leaves the tree altered. Each of those is a reported defect, not a tolerated one -- six such defects are recorded in the receipt.",
+ "generic_repair_from_single_probe": false,
+ "governance_change": false,
+ "highest_leverage_now": true,
+ "honest_limits": [
+  "This is not competence. Knowing 76 doors is not knowing which one a request wants; the census answers 'what can be done here', not 'what should be done'.",
+  "960 operations are UNCHARACTERISED, not dead. The census supplies what a usage line declares; a room with two files, a genuine patch, or a committed change is a stated decision it does not yet make.",
+  "git commit --all is knowingly mis-bound: git says 'paths with -a does not make sense' only in its ERROR, not its description, so the binder cannot read it without inventing a word list.",
+  "A room is a decision. git is judged inside a repository the census builds; changing which rooms exist changes the door count, so the room is stated per tool rather than hidden.",
+  "A GUI has no --help; that tier needs the accessibility tree or the DOM, and this sandbox has no display. man is also absent, so --help is the only declaration tier measured.",
+  "Producer-run sandbox only; no independent identity re-ran any of it; truth.achieved stays false."
+ ],
+ "incremental_spend_usd": 0,
+ "intentional_route_race": false,
+ "live_challenger_frontier_discovery_required": true,
+ "load_bearing_primary": {
+  "constructive_gap_for_open_obligation_ids": [
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "expected_obligation_discharge_lcb": "0",
+  "expected_obligation_unlock_lcb": "1/81",
+  "interpretation": "OSWorld 2.0's authors diagnose frontier failure as weak recovery and maintenance of hidden state. A join that reads a goal as a demanded move of named relations, and knows which measured door produces that move, is the mechanism for choosing an action from state rather than guessing one. No benchmark task was run; no discharge is claimed.",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "0.5",
+  "wall_clock_cost_ub": 1
+ },
+ "measured_effect": {
+  "all_trees_restored": true,
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "change_kinds": {
+   "CREATES": 97,
+   "DELETES": 6,
+   "RENAMES": 19,
+   "REWRITES": 17,
+   "REWRITES_BINARY": 11,
+   "REWRITES_TEXT": 1
+  },
+  "declared_operations": 2134,
+  "defects_found_and_fixed": 8,
+  "doors": 76,
+  "programs": 36,
+  "scan_proof": {
+   "action_list_written_by_a_person": false,
+   "doors_discovered": 12,
+   "program": "gzip",
+   "seconds": 0.0278,
+   "states_seen": 5,
+   "transitions": 12
+  },
+  "seconds": 54.056,
+  "sensors": 1098,
+  "subcommands_admitted": 46,
+  "subcommands_refused": 40,
+  "tests": {
+   "green_with_prior_suites": 85,
+   "new": 23,
+   "relevant_surface": 138
+  },
+  "unbound": 960
+ },
+ "next_step": "The join answers WHICH door for a goal, not WHICH SEQUENCE for a goal that needs several moves. The pieces exist and are unjoined: perfect_algorithm_v1.plan() searches the learned model for a shortest path, and the census's environment can now carry a signature per transition, so a goal stated as a conjunction of moves is the next wall.",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "probe_specific": false,
+ "progress_class": "VERIFIED_REUSABLE_CAPABILITY_GAIN",
+ "progress_evidence_paths": [
+  "canonical/runtime/goal_to_door_v1.py",
+  "canonical/tools/the_goal_picks_the_door_v1.py",
+  "canonical/tests/test_goal_to_door_v1.py",
+  "canonical/verification/THE_GOAL_PICKS_THE_DOOR_20261123_V1.json",
+  "intake/THE_GOAL_PICKS_THE_DOOR_20261123_V1.md"
+ ],
+ "real_outcome": "62 measured rows over 4 real programs and 4 project machines; 18/18 signatures stable across 3 worlds; 60/60 held-out requests answered from other programs; 61/62 leave-one-out.",
+ "recursive_obs": {
+  "canonical_base_commit": "5abc439a361cf180422ba804d938c8f054f2fd9b",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "ranking doors by per-content conditions (measured 0.4677 precision, replaced)",
+   "the five relations alone (commutative; could not separate a rename from a compression)"
+  ],
+  "expected_parent_level_state_change": "A goal stated as a move of the project's relations can be joined to a door by measurement alone: the door's saved row is its relation signature, stable across three unrelated worlds, and it answers another program's requests.",
+  "obs_blocker": {
+   "delete_bypass_substitute_options": [
+    "delete the signature and store traces (rejected: exact experiences are the user's stated objection)",
+    "bypass by trusting the goal's words (rejected: that is a model call)",
+    "substitute a sixth observable (rejected: LOT needs no new observation)"
+   ],
+   "intrinsic_or_path_specific": "INTRINSIC: the five relations are functions of a SET, so they cannot express the order of a transition",
+   "surviving_causal_blocker": "no relation expressed what a STEP did, only what a STATE is"
+  },
+  "obs_capability": {
+   "capability_work_deleted": [
+    "content-level matching",
+    "any ranking by identity or name"
+   ],
+   "existing_inherited_routes_checked": "relation_value, effect(), the five relations, perfect_algorithm_v1.plan and environment_learning_v1.shortest_plan were all read; the planner was NOT rebuilt, and is named as the next wall",
+   "external_existing_routes_checked": "affordance-prediction work in 2026 (DynAfford/ADAPT, CreativityBench) predicts affordances with a VLM; prediction is what we can avoid, because every door here was already RUN",
+   "surviving_gap": "sequences of moves, and any goal about meaning"
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "a higher answer rate",
+    "a larger number of doors"
+   ],
+   "real_outcome": "a request is joined to a door whose measured move produces it",
+   "surviving_necessity": "the agent must know which door serves a goal before it can act"
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "signature, join, selectivity and held-out scoring in one module",
+   "downstream_work_to_delete_or_supersede": "the census's coarse change_kind is kept for reporting; the join reads the relation signature instead",
+   "fresh_reuse_plan": "the signature rides on the census's existing rows; nothing re-runs"
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": "no cache: 62 rows re-measured in 1.8 s",
+   "search_stop_decision": "stopped at one invented relation because a second would have been fitted to these four programs"
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "each either failed a measurement or needed parameters or a model",
+   "routes_ranked": [
+    {
+     "rank": 1,
+     "route": "SIGNATURE_OVER_THE_PROJECTS_RELATIONS_PLUS_ONE_NON_COMMUTATIVE_RELATION",
+     "why": "set membership over a world-stable signature"
+    },
+    {
+     "rank": 2,
+     "route": "PER_CONTENT_CONDITIONS",
+     "why": "measured: 0.4677 precision"
+    },
+    {
+     "rank": 3,
+     "route": "A_LEARNED_SCORER_OVER_DOORS",
+     "why": "parameters fitted to 62 rows"
+    },
+    {
+     "rank": 4,
+     "route": "A_MODEL_TO_READ_THE_REQUEST",
+     "why": "forbidden and unnecessary"
+    }
+   ]
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "the oracle is the program's own two attested states; the 15 tests re-derive the relations on fixtures, and the receipt persists the run"
+  },
+  "real_outcome": "62 measured rows over 4 real programs and 4 project machines; 18/18 signatures stable across 3 worlds; 60/60 held-out requests answered from other programs; 61/62 leave-one-out.",
+  "required_capability": "state a goal as a demanded move of relations and match it to a door measured to make that move",
+  "route_frontier": {
+   "canonical_base_commit": "5abc439a361cf180422ba804d938c8f054f2fd9b",
+   "challenger_routes": [
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "cannot transfer across contents",
+      "CORRECTNESS": "0.4677 precision, measured",
+      "INCREMENTAL_COST": "none",
+      "RELIABILITY": "low",
+      "VERIFIABILITY": "equal",
+      "WALL_CLOCK": "equal"
+     },
+     "evidence": [
+      "measured leave-one-out precision 0.4677 on 62 rows",
+      "0.0 on the held-out mv requests"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_GOAL_PICKS_THE_DOOR_20261123_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "PER_CONTENT_CONDITION_MATCHING"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "coarse",
+      "CORRECTNESS": "cannot separate a rename from a delete",
+      "INCREMENTAL_COST": "none",
+      "RELIABILITY": "low",
+      "VERIFIABILITY": "equal",
+      "WALL_CLOCK": "equal"
+     },
+     "evidence": [
+      "all five are commutative, so mv and rm of one file read identically",
+      "measured: 3 distinct move classes over 62 rows"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_GOAL_PICKS_THE_DOOR_20261123_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "THE_FIVE_RELATIONS_ALONE"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "no more than membership",
+      "CORRECTNESS": "unverifiable on 62 rows",
+      "INCREMENTAL_COST": "fitted parameters",
+      "RELIABILITY": "unknown",
+      "VERIFIABILITY": "lower",
+      "WALL_CLOCK": "slower"
+     },
+     "evidence": [
+      "62 rows would fit any scorer perfectly and prove nothing",
+      "the constraints forbid a parameter fitted to the measurement"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_GOAL_PICKS_THE_DOOR_20261123_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "A_LEARNED_SCORER_OVER_DOORS"
+    }
+   ],
+   "checked_at_utc": "2026-11-23T21:37:05+00:00",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "NO_JOIN_AT_ALL__76_DOORS_AND_NO_WAY_TO_CHOOSE",
+   "max_age_hours": 2,
+   "negative_search_summary": "no existing mechanism joins a goal to a door using a relation signature measured by execution; the 2026 affordance literature predicts with a VLM, and the project's own planner assumes the goal state was already observed",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "goal conditioned affordance selection from measured transition effects"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "tool effect prediction from help text and execution"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "state change classification relations for filesystem actions"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "2026 agent affordance benchmark unspecified preconditions ADAPT"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "selected_route": "SIGNATURE_OVER_THE_PROJECTS_RELATIONS_PLUS_ONE_NON_COMMUTATIVE_RELATION",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-11-23T21:37:05+00:00",
+    "execution_dependencies": [
+     {
+      "dependency": "local Python 3 runtime",
+      "evidence": [
+       "111 tests pass across the relevant surface on this host"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "the four programs whose doors are joined",
+      "evidence": [
+       "cp, mv, rm and gzip present; 54 census door rows measured"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "no network at join time",
+      "evidence": [
+       "the join made zero network calls"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "NETWORK_ENDPOINT",
+      "observed_at_utc": "2026-11-23T21:37:05+00:00",
+      "required": false,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "VOLATILE"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "max_age_hours": 2,
+    "selected_route": "SIGNATURE_OVER_THE_PROJECTS_RELATIONS_PLUS_ONE_NON_COMMUTATIVE_RELATION",
+    "status": "READY"
+   },
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/tools/the_vocabulary_is_the_artifact_v1.py (relation_value, five relations)",
+     "canonical/runtime/tool_census_v1.py (the 76 doors)",
+     "canonical/runtime/environment_learning_v1.py (shortest_plan, reused-not-rebuilt)"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "DynAfford/ADAPT (ACL 2026): affordance prediction via a VLM",
+     "CreativityBench (2026): affordance reasoning is model-mediated"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "no package provides a goal-to-door join over measured effects"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "the programs' own --help declarations on this host",
+     "the project's A1-A5 verdict on the five relations"
+    ]
+   },
+   "unresolved_plausible_dominators": []
+  },
+  "routes_considered": [
+   "REUSE: the project's relation_value for five relations (selected)",
+   "COMPOSE: five relations plus one derived from the step (selected)",
+   "per-content conditions (measured and rejected: 0.4677)",
+   "a learned scorer over doors (rejected: a parameter fitted to 62 rows)",
+   "a model to read the request (forbidden and unnecessary)"
+  ],
+  "selected_surviving_route": "SIGNATURE_OVER_THE_PROJECTS_RELATIONS_PLUS_ONE_NON_COMMUTATIVE_RELATION",
+  "stop_condition": "The join reproduces on a second machine with an independent identity re-running it, and a held-out program on a machine whose doors the join never saw is answered from other programs' measurements alone.",
+  "why_selected_route_is_fastest_sufficient": "the match is set membership over a signature that is stable across worlds, so no fitting, no parameters and no model call is involved"
+ },
+ "required_capability": "a verified action vocabulary for an unprepared environment",
+ "route_class": "COMPOSE",
+ "route_id": "READ_DECLARATIONS_AND_LET_EXECUTION_JUDGE",
+ "route_order_walk": {
+  "ADAPT": "The reader adapts to each program's own help shape.",
+  "BYPASS": "Not used: assuming an action list is the failure mode.",
+  "COMPOSE": "Selected: one reader over declaration shapes, execution as the judge.",
+  "CONFIGURE": "Rooms are stated per tool, never inferred.",
+  "DELETE": "The hand-written Atom lists are no longer required to start the loop.",
+  "INTEGRATE": "Not yet claimed.",
+  "REUSE": "Selected: reuses scan(), learn_model(), state_key(), the vocabulary relations.",
+  "SUBSTITUTE": "Not used.",
+  "SYNTHESIZE_NEW_PRIMITIVE": "Not selected: no new learner, no new gate."
+ },
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "selected_route": "SIGNATURE_OVER_THE_PROJECTS_RELATIONS_PLUS_ONE_NON_COMMUTATIVE_RELATION",
+ "selected_surviving_route": "SIGNATURE_OVER_THE_PROJECTS_RELATIONS_PLUS_ONE_NON_COMMUTATIVE_RELATION",
+ "status": "PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
+ "stop_condition": "The census reproduces on a second machine with an independent identity re-running it, and the goal-to-door join is measured on the same 36 programs.",
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "truth": {
+  "achieved": false,
+  "what_is_not": "planning a SEQUENCE of doors; any goal about meaning; any benchmark score",
+  "what_is_real": "a goal stated over the project's relations is joined to a door by measurement, and the row generalizes across worlds and programs"
+ },
+ "user_authorized_governance_change": false,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "currentness": {
+   "accepted_families": 5,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "No truth obligation is discharged by this round. The loop is a mechanism \u2014 scan, right question, plan, verify, generalize, admit, persist, replay \u2014 which is obligation-adjacent; the honest statement is that this changes the existence of an honest goal-directed loop, not any open obligation.",
+  "target_truth_obligations": [
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [
+    {
+     "git_blob_sha": "478f3cdef55518cfec98104ca6ce9c9e7e490b1d",
+     "path": "canonical/verification/PERFECT_ALGORITHM_RECEIPT_20261122_V1.json"
+    }
+   ],
+   "decisive_question": "Does the loop actually persist a generalization from fresh evidence \u2014 or does it claim to when it only shows one goal-reaching trace?",
+   "falsifier_id": "THE_LOOP_PERSISTED_A_RULE_FROM_ONE_EXPERIENCE",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "",
+   "proposal_id": "PERFECT_ALGORITHM_COMPOSED_LOOP_V1"
+  }
+ },
+ "verification": {
+  "independent_verification": "OPEN",
+  "model_calls": 0,
+  "parameters": 0,
+  "receipt": "canonical/verification/THE_GOAL_PICKS_THE_DOOR_20261123_V1.json",
+  "tests": {
+   "green_with_prior_suites": "111 passed, 2 skipped",
+   "new": "canonical/tests/test_goal_to_door_v1.py (15)"
+  }
+ },
+ "weakens_existing_guard": false
+}
