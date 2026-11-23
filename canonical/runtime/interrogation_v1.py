@@ -166,6 +166,11 @@ SHAPES: dict[str, bytes] = {
     # difference. Found by the sweep, not by design -- the certificate `{sort_num,
     # sort_general}` for `sort -g` was the same false certificate as `fold -b` in a new place.
     "lines_exponents": b"1e3\n2\n0.5\n1e-2\n",
+    # Without mixed case, `sort -f` and `sort` are the same function, and so are `uniq -i` and
+    # `uniq`; without a repeated run, `uniq -d` and `uniq -D` are the same function too. These
+    # are the shapes the refused declarations were asking for by name.
+    "lines_mixed_case": b"apple\nBANANA\ncherry\nApple\nbanana\n",
+    "lines_case_runs": b"A\na\nb\nB\nb\n",
     "json_object": b'{"b":1,"a":{"d":4,"c":3},"e":[2,1]}\n',
     "json_array": b"[3,1,2,3]\n",
     "single_line": b"only\n",
@@ -193,7 +198,7 @@ KIND_OF_SHAPE: dict[str, str] = {
     "lines_months": "months",
     "json_object": "object", "json_array": "array", "single_line": "single",
     "lines_over_width": "long", "lines_with_tabs": "long",
-    "lines_exponents": "numeric", "lines_over_width_spaces": "long",
+    "lines_exponents": "numeric", "lines_mixed_case": "alpha", "lines_case_runs": "adjacent", "lines_over_width_spaces": "long",
     "empty": "empty",
 }
 
@@ -220,7 +225,8 @@ PRIMITIVE_DOMAIN: dict[str, frozenset[str]] = {
     "sort_general": ANY_KIND,
     "sort_dict": ANY_KIND, "sort_month": ANY_KIND,
     "sort_lex_desc": ANY_KIND, "sort_num_desc": ANY_KIND,
-    "uniq_adj": ANY_KIND, "uniq_glob": ANY_KIND,
+    "uniq_adj": ANY_KIND, "uniq_glob": ANY_KIND, "uniq_fold_case": ANY_KIND,
+    "dedupe_repeated": ANY_KIND, "dedupe_all_repeated": ANY_KIND,
     "count": ANY_KIND, "count_runs": ANY_KIND,
     "count_words": ANY_KIND, "count_bytes": ANY_KIND, "count_chars": ANY_KIND,
     # A JSON primitive is the reverse: it is defined only where its input parses.
@@ -553,6 +559,54 @@ def _general_key(line: bytes) -> tuple[int, Any, bytes]:
     return (1, sign * Decimal(core), line)
 
 
+# REMOVED BY NAME, not approximated: `sort -f / --ignore-case`.
+# Its ranking over printable ASCII is measurable (and was measured: `A a B b ... Z z` with the
+# punctuation block moved after `z`), but no single key reproduces it. Eight successive
+# candidates were each falsified: bytes.lower() (wrong on '_' and '['), a hand-built rank
+# table with a raw tie-break (wrong on "aA" vs "AB"), the same with a low-cased tie-break
+# (still wrong on the same pair), and five variants between them. Two lines that fold equal
+# are ordered in a way that depends on more than a folded key, which is the same structural
+# finding that removed `sort -V`: the comparator is not a key function, so it cannot sit in a
+# hypothesis space whose members are key functions.
+_SORT_FOLD_CASE_RECORD = (
+    "sort -f / --ignore-case: eight candidate keys were each falsified against the host; two "
+    "lines equal under a case fold are ordered by something a folded key does not capture. "
+    "Refused by name rather than approximated."
+)
+
+def _uniq_fold_case(data: bytes) -> bytes:
+    """`uniq -i`: a run collapses when its members are equal ignoring case, keeping the first.
+
+    Measured: "A a a" keeps "A"; "a A a" keeps "a"; "Aa aA" keeps "Aa".
+    """
+    out: list[bytes] = []
+    previous: bytes | None = None
+    for line in _rows(data):
+        if previous is not None and line.lower() == previous.lower():
+            continue
+        out.append(line)
+        previous = line
+    return b"".join(out)
+
+
+def _dedupe_repeated(data: bytes, *, all_members: bool) -> bytes:
+    """`uniq -d` (one line per run that repeats) and `uniq -D` (every member of such a run).
+
+    Measured: on "a a b", -d prints one "a" and -D prints both.
+    """
+    out: list[bytes] = []
+    rows = _rows(data)
+    start = 0
+    while start < len(rows):
+        end = start + 1
+        while end < len(rows) and rows[end] == rows[start]:
+            end += 1
+        if end - start > 1:
+            out.extend(rows[start:end] if all_members else rows[start:start + 1])
+        start = end
+    return b"".join(out)
+
+
 def _json_render(data: bytes, indent: int | None) -> bytes:
     """Re-render JSON with keys ordered, in one rendering style.
 
@@ -582,7 +636,8 @@ def _json_key_order(data: bytes) -> bytes:
 ORDER: tuple[str, ...] = (
     "sort_lex", "sort_num", "sort_general", "sort_dict", "sort_month",
     "sort_lex_desc", "sort_num_desc",
-    "uniq_adj", "uniq_glob", "count", "count_runs",
+    "uniq_adj", "uniq_glob", "uniq_fold_case", "dedupe_repeated",
+    "dedupe_all_repeated", "count", "count_runs",
     "count_words", "count_bytes", "count_chars",
     "json_keys", "json_keys_pretty", "json_keys_compact", "pretty_json",
     "reverse_lines", "fold_columns", "fold_bytes",
@@ -628,6 +683,9 @@ PRIMITIVES: dict[str, Callable[[bytes], bytes]] = {
     "sort_lex_desc": lambda d: b"".join(sorted(_rows(d), reverse=True)),
     "sort_num_desc": lambda d: b"".join(sorted(_rows(d), key=_numeric_key, reverse=True)),
     "uniq_adj": _dedupe_adjacent,
+    "uniq_fold_case": _uniq_fold_case,
+    "dedupe_repeated": lambda d: _dedupe_repeated(d, all_members=False),
+    "dedupe_all_repeated": lambda d: _dedupe_repeated(d, all_members=True),
     "uniq_glob": _dedupe_global,
     "count": lambda d: b"%d\n" % len(_rows(d)),
     # `wc` states six quantities in its own help ("print the byte counts", "the word counts",
@@ -717,6 +775,9 @@ _WORDS: tuple[tuple[str, str], ...] = (
      "sort_num"),
     (r"\breverse the result of comparisons\b|\breverse sort\b", "sort_lex_desc"),
     (r"\breverse\b|\blast line first\b|\bbackwards?\b", "reverse_lines"),
+    (r"\bonly print duplicate lines\b", "dedupe_repeated"),
+    (r"\bprint all duplicate lines\b", "dedupe_all_repeated"),
+    (r"\bignore differences in case when comparing\b", "uniq_fold_case"),
     (r"\bunique\b|\buniq\b", "uniq_glob"),
     (r"\bsorts?\b|\borders?\b|\bsorted\b|\bsorting\b", "sort_lex"),
     (r"\bthe number of (?:newlines|lines)\b|\bline count\b", "count"),
@@ -1374,15 +1435,26 @@ def optimal_move(alive: Sequence[str], shapes: Sequence[str],
         for ci in full:
             buckets.setdefault(signature[shape][ci], []).append(ci)
         if len(buckets) <= 1:
-            scored.append((1 << 30, shape))
+            # A shape no survivor class can split is not a witness. It is kept out of the
+            # ranking rather than scored with a sentinel, because a sentinel leaked into the
+            # reported bound and printed 1073741825 as a "worst case" for eleven surfaces.
             continue
         worst = 0
+        unproved = False
         for bucket in buckets.values():
             sub = depth(frozenset(bucket), left - {shape})
-            worst = 1 << 30 if sub is None else max(worst, sub)
+            if sub is None:
+                unproved = True
+                break
+            worst = max(worst, sub)
+        if unproved:
+            # the node cap was reached on this branch: the shape is not ranked at all rather
+            # than scored with a sentinel, which twice leaked out as a reported worst case
+            continue
         scored.append((1 + worst, shape))
     scored.sort()
     best_depth, best_shape = scored[0] if scored else (None, None)
+
     answer = {"schema": SCHEMA, "shape": best_shape, "worst_case_witnesses": best_depth,
               "nodes_explored": nodes, "ranking": scored, "classes": len(classes),
               "honest_note": "chosen by exact minimax over the partition lattice, not by gain"}

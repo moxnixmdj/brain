@@ -533,3 +533,43 @@ def test_the_tree_bound_and_the_root_move_agree_so_neither_is_a_guess() -> None:
     move = I.optimal_move(universe, shapes)
     assert move["worst_case_witnesses"] <= tree["upper_bound"]
     assert move["worst_case_witnesses"] == tree["upper_bound"]
+
+
+def test_the_case_primitives_are_exact_on_the_runs_they_claim() -> None:
+    """`uniq -i`, `-d` and `-D` each keep or drop a *different* member of a run."""
+    if shutil.which("uniq") is None:
+        pytest.skip("no `uniq` on this host")
+    import subprocess
+    import os
+    env = dict(os.environ, LC_ALL="C")
+    cases = [b"A\na\na\n", b"a\nA\na\n", b"a\na\nb\n", b"a\na\nb\nb\nb\n", b"", b"x\n"]
+    for argv, primitive in ((["uniq", "-i"], "uniq_fold_case"),
+                            (["uniq", "-d"], "dedupe_repeated"),
+                            (["uniq", "-D"], "dedupe_all_repeated")):
+        for data in cases:
+            real = subprocess.run(argv, input=data, capture_output=True, env=env).stdout
+            assert I.PRIMITIVES[primitive](data) == real, (argv, data)
+
+
+def test_a_comparator_that_is_not_a_key_function_stays_out_of_the_algebra() -> None:
+    """`sort -f` is measured, refused by name, and recorded -- not approximated.
+
+    Its ranking over printable ASCII was measured exactly and its own ranking is not enough
+    to reproduce its behaviour: two lines that fold equal are ordered by something no folded
+    key reproduced across eight candidates. This is the same finding as `sort -V`, and the
+    same rule applies: a comparator that is not a key function cannot be a member of a
+    hypothesis space whose members are key functions.
+    """
+    assert "sort_fold_case" not in I.PRIMITIVES
+    assert "sort -f" in I._SORT_FOLD_CASE_RECORD
+    assert I.read_surface("fold lower case to upper case characters")["status"] != "OK"
+
+
+def test_an_unsplittable_shape_is_not_scored_with_a_sentinel() -> None:
+    """A 2**30 sentinel once leaked out as a reported worst-case bound."""
+    shapes = list(I.SHAPES)
+    universe = I.behavioural_universe(shapes)
+    move = I.optimal_move(universe, shapes)
+    assert move["worst_case_witnesses"] is None or move["worst_case_witnesses"] < 100
+    for score, _shape in move["ranking"]:
+        assert score < 100
