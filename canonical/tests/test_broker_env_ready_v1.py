@@ -467,3 +467,130 @@ def test_the_cli_exit_code_accepts_a_ready_environment(tmp_path):
     tree = make_tree(tmp_path, [])
     memory = tmp_path / "memory.json"
     assert B.main([str(tree), "--goal", "env-ready", "--memory", str(memory)]) == 0
+
+
+# ------------------------------------------------------------------ the sixth to ninth trials
+def test_a_dev_bound_is_a_version_and_sorts_below_its_release():
+    """tox 4 declares `pytest<4dev`; a comparator that cannot read a PEP 440 dev shorthand
+    refuses a correct environment."""
+    assert B.version_key("4dev") is not None
+    assert B.version_key("4.0") > B.version_key("4dev")
+    assert B.version_key("2.0") > B.version_key("2.0.dev1")
+    assert B.specifier_satisfied("3.0", "<4dev")
+    assert not B.specifier_satisfied("8.0", "<4dev")
+
+
+def test_a_declaration_whose_marker_excludes_this_interpreter_is_not_a_dependency(tmp_path):
+    """black's uvloop extra declares winloop for win32. Refusing the whole environment
+    because a Windows wheel has no linux tag would blame the project for being correct."""
+    tree = make_tree(tmp_path, [])
+    (tree / "pyproject.toml").write_text(
+        "[project]\nname = \"toypkg\"\nversion = \"0.1.0\"\n"
+        "dependencies = [\n"
+        "  \"pip>=20\",\n"
+        "  \"winloop>=0.5.0; sys_platform == 'win32'\",\n"
+        "  \"typing-extensions>=4.15; python_version<'3.13'\",\n"
+        "]\n")
+    # typing-extensions DOES apply to this interpreter, so it is fetched; winloop does not
+    wheel = build_wheel(tmp_path, "typing_extensions", "4.15.0")
+    registry = Registry({"typing-extensions": rich_payload(wheel)})
+    got = B.broker(tree, "env-ready", tmp_path / "memory.json",
+                   fetch_json=registry.fetch_json, fetch_bytes=registry.fetch_bytes,
+                   work_dir=tmp_path / "wheelcache")
+    assert got["verdict"] == "ENVIRONMENT_BROKERED", got
+    assert any("winloop" in s for s in got["declarations"]["skipped_for_this_interpreter"])
+    assert not any(r["name"] == "winloop" for r in got["records"])
+    assert any(r["name"] == "typing-extensions" for r in got["records"])
+
+
+def test_a_plugin_is_armed_when_its_host_is_armed_not_in_isolation(tmp_path):
+    """A plugin imports its host at module level and correctly does NOT declare it.
+    Measured twice live: matplotlib-inline and detect-test-pollution."""
+    wheels = tmp_path / "w"
+    wheels.mkdir()
+    plug = build_wheel(wheels, "toyplug", "1.0")
+    # rewrite the wheel with a pytest hook, so it looks like what a real plugin is
+    with zipfile.ZipFile(plug, "w") as zf:
+        zf.writestr("toyplug.py", "import pytest\n\ndef pytest_configure(config):\n    pass\n")
+        zf.writestr("toyplug-1.0.dist-info/METADATA",
+                    "Metadata-Version: 2.1\nName: toyplug\nVersion: 1.0\n")
+        zf.writestr("toyplug-1.0.dist-info/WHEEL",
+                    "Wheel-Version: 1.0\nRoot-Is-Purelib: true\nTag: py3-none-any\n")
+        zf.writestr("toyplug-1.0.dist-info/top_level.txt", "toyplug\n")
+        zf.writestr("toyplug-1.0.dist-info/RECORD", "toyplug.py,,\n")
+    registry = Registry({"toyplug": rich_payload(plug)})
+    tree = make_tree(tmp_path, ["toyplug>=1"])
+    got = B.broker(tree, "env-ready", tmp_path / "memory.json",
+                   fetch_json=registry.fetch_json, fetch_bytes=registry.fetch_bytes,
+                   work_dir=tmp_path / "wheelcache")
+    assert got["verdict"] == "ENVIRONMENT_BROKERED", got
+    record = got["records"][0]
+    assert record["plugin_host"] == "pytest"
+    assert record["status"] == "PLUGIN_ARMED_IMPORTED_BY_HOST"
+    assert record["import"] == "deferred-to-host"
+
+
+def test_a_manifest_is_read_by_the_standard_parser_not_by_quoting_rules(tmp_path):
+    """A single quote inside a double-quoted requirement is valid TOML and broke a regex
+    reader on a real repository (tox)."""
+    tree = make_tree(tmp_path, [])
+    (tree / "pyproject.toml").write_text(
+        "[project]\nname = \"toypkg\"\nversion = \"0.1.0\"\n"
+        "dependencies = [\n"
+        "  \"pip>=20\",\n"
+        "  \"winloop>=0.5.0; sys_platform == 'win32'\",\n"
+        "  \"typing-extensions>=4.15; python_version<'3.13'\",\n"
+        "]\n")
+    # typing-extensions applies here, so it is one registry read; the point of the test is
+    # that a quoted inner comparison parses and a win32 marker is skipped, not fetched
+    te = build_wheel(tmp_path, "typing_extensions", "4.15.0")
+    registry = Registry({"typing-extensions": rich_payload(te)})
+    got = B.broker(tree, "env-ready", tmp_path / "memory.json",
+                   fetch_json=registry.fetch_json, fetch_bytes=registry.fetch_bytes,
+                   work_dir=tmp_path / "wheelcache")
+    # the quoted inner comparison is read as a requirement under a marker, not as text,
+    # and a declaration whose marker excludes this interpreter is skipped, not fetched
+    parsed = {r["name"]: r for r in got["declarations"]["required"]}
+    assert parsed["typing-extensions"]["marker"] == "python_version<'3.13'"
+    assert any("winloop" in s for s in got["declarations"]["skipped_for_this_interpreter"])
+
+
+def test_the_test_command_is_read_from_the_project(tmp_path):
+    """run-tests must read the command the project declares, not assume pytest."""
+    tree = make_tree(tmp_path, [])
+    (tree / "Makefile").write_text("test:\n\tpython -m pytest tests\n")
+    commands = B.declared_test_commands(tree, tree / "pyproject.toml")
+    assert commands[0][-1] == "tests"
+    (tree / "Makefile").write_text("test:\n\tcat README.md\n")   # not a test runner
+    again = B.declared_test_commands(tree, tree / "pyproject.toml")
+    assert all("README" not in " ".join(c) for c in again)
+
+
+def test_extras_the_projects_own_test_environment_installs_are_read(tmp_path):
+    """black's unit-test env installs `.[d]`; nothing else in its manifest says so."""
+    tree = make_tree(tmp_path, [])
+    (tree / "pyproject.toml").write_text(
+        "[project]\nname = \"toypkg\"\nversion = \"0.1.0\"\ndependencies = []\n"
+        "\n[project.optional-dependencies]\nd = [\"aiohttp>=3.10\"]\n"
+        "\n[tool.tox.testenv]\ncommands = [[\"pip install -e .[d]\"], [\"pytest tests\"]]\n")
+    extras = B.declared_extras_in(tree, tree / "pyproject.toml")
+    assert extras == ["d"]
+    # an extra the manifest does not declare is never installed
+    (tree / "Makefile").write_text("test:\n\tpip install -e .[not-declared]\n")
+    assert "not-declared" not in B.declared_extras_in(tree, tree / "pyproject.toml")
+
+def test_extras_declared_as_data_in_tox_toml_are_read(tmp_path):
+    """tox-dev/tox declares `extras = [ "completion" ]` in tox.toml, and its suite imports
+    argcomplete only because of that. A reader that scans command strings alone misses it,
+    and the suite then cannot even be collected -- measured on tox, not hypothetical."""
+    tree = make_tree(tmp_path, [])
+    (tree / "pyproject.toml").write_text(
+        '[project]\nname = "toypkg"\nversion = "0.1.0"\n'
+        'dependencies = []\n'
+        '[project.optional-dependencies]\ncompletion = ["argcomplete>=3.6.3"]\n')
+    (tree / "tox.toml").write_text(
+        '[env.type]\nextras = [ "completion" ]\n'
+        '[env.py]\nextras = [ "completion", "not-declared" ]\n')
+    got = B.declared_extras_in(tree, tree / "pyproject.toml")
+    # the declared extra is read; the undeclared name is not invented into an install
+    assert got == ["completion"]

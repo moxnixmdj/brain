@@ -29,6 +29,13 @@ from canonical.swe_kernel import the_environment_broker_v1 as B  # noqa: E402
 REPOS = (
     ("psf/requests", "https://github.com/psf/requests"),
     ("pallets/flask", "https://github.com/pallets/flask"),
+    # three shapes the broker had never met: a formatter with a heavy declared build
+    # frontend, extras its own tox env installs, and a testpaths declaration; a library
+    # whose tests live only in dependency groups; and a tool whose declarations include a
+    # PEP 508 marker with a quoted inner comparison.
+    ("psf/black", "https://github.com/psf/black"),
+    ("python-attrs/attrs", "https://github.com/python-attrs/attrs"),
+    ("tox-dev/tox", "https://github.com/tox-dev/tox"),
 )
 
 
@@ -37,11 +44,18 @@ def clone(url: str, dest: pathlib.Path) -> dict:
         shutil.rmtree(dest)
     dest.parent.mkdir(parents=True, exist_ok=True)
     started = time.perf_counter()
-    done = subprocess.run(["git", "clone", "--depth", "1", "--quiet", url, str(dest)],
-                          capture_output=True, text=True, timeout=300)
+    # Full history, no blobs: a shallow clone carries no tags, and a project whose version
+    # is derived from its history (hatch-vcs, setuptools-scm) then cannot even produce its
+    # own version module -- measured on tox, whose suite then cannot import itself. The
+    # clone is the trial's choice, so it must not handicap the thing being measured.
+    done = subprocess.run(["git", "clone", "--filter=blob:none", "--quiet", url, str(dest)],
+                          capture_output=True, text=True, timeout=600)
+    tags = subprocess.run(["git", "-C", str(dest), "describe", "--tags", "--abbrev=0"],
+                          capture_output=True, text=True).stdout.strip()
     return {"ok": done.returncode == 0, "seconds": round(time.perf_counter() - started, 3),
             "head": subprocess.run(["git", "-C", str(dest), "rev-parse", "HEAD"],
                                    capture_output=True, text=True).stdout.strip(),
+            "tags_present": bool(tags), "nearest_tag": tags or None,
             "error": (done.stderr or "")[:300] if done.returncode else None}
 
 
@@ -86,7 +100,10 @@ def trial(name: str, url: str, root: pathlib.Path) -> dict:
         "runner": (ran.get("runner") or {}).get("command"),
         "exit_code": (ran.get("runner") or {}).get("exit_code"),
         "reported_passed": (ran.get("runner") or {}).get("reported_passed"),
-        "tail": (ran.get("runner") or {}).get("tail", "")[-200:],
+        # every command that was tried, kept: a refusal that names no attempt is not
+        # diagnosable, and a receipt that hides the attempts invites the reader to guess
+        "runner_attempts": ran.get("runner_attempts"),
+        "tail": (ran.get("runner") or {}).get("tail", "")[-600:],
         "seconds": ran.get("seconds"),
     }
     return out

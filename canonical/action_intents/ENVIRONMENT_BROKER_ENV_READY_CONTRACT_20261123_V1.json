@@ -2,7 +2,7 @@
  "action_id": "ENVIRONMENT_BROKER_ENV_READY_CONTRACT_20261123_V1",
  "action_intent_id": "ENVIRONMENT_BROKER_ENV_READY_CONTRACT_20261123_V1",
  "action_kind": "REAL_CAPABILITY_ACQUISITION",
- "action_summary": "Add the second closed goal contract to the world broker: env-ready. The broker could already answer run-tests, but every real repository it met needed an environment it did not have, and the refusal that followed was about the environment, not the task. env-ready demands: every dependency the environment declares is present, at a spec-satisfying version, in the isolated interpreter that environment will be asked in, and provable by execution. Host-first: anything the isolation already has costs a metadata read and an import, never a round trip. Otherwise the artifact comes from the machine-readable registry (pypi.org JSON), is hashed by us and compared against the registry's own published digest (two independent readers), installed from local bytes, and read back by import -- not just by version. Transitives are resolved from each verified wheel's own METADATA, marker-filtered, including the project's own extras, which is how requests' SOCKS tests pass. The project installs itself from a staged copy so the tree is never written into. Memory is keyed by the evidence digest and never believed: a warm run re-reads every version and re-imports every module, and a tampered record is caught and re-derived. 24 offline tests; the 9 pre-existing broker tests still green; live receipt on two unseen repositories.",
+ "action_summary": "Add the second closed goal contract to the world broker: env-ready, and close the bottleneck round 1 named. The broker could already answer run-tests, but every real repository it met needed an environment it did not have, and the refusal that followed was about the environment, not the task. env-ready demands: every dependency the environment declares is present, at a spec-satisfying version, in the isolated interpreter that environment will be asked in, and provable by execution. Host-first: anything the isolation already has costs a metadata read and an import, never a round trip. Otherwise the artifact comes from the machine-readable registry (pypi.org JSON), is hashed by us and compared against the registry's own published digest (two independent readers), installed from local bytes, and read back by import -- not just by version. Transitives are resolved from each verified wheel's own METADATA, marker-filtered, including the project's own extras, which is how requests' SOCKS tests pass. ROUND 2 changed what counts as a declaration: the reader is now stdlib tomllib throughout (a single quote inside a double-quoted requirement desynchronised the regex reader on tox), and it understands four shapes that five unseen repositories actually use -- extras installed by the project's own test environment (black's `.[d]`, 800 passed), dependency-groups with {include-group} (attrs), markers with inner quoted comparisons (tox), and extras declared as DATA in tox.toml (`extras = [ \"completion\" ]`, which is why tox's suite can import argcomplete and run 4253 tests instead of failing to collect). A plugin is armed by its host (PLUGIN_ARMED_IMPORTED_BY_HOST, deferred import) and the final gate now exempts exactly those records, so a plugin is not refused for the import its host owns. A suite may be run by the project's own declared command, not just `-m pytest`, and the isolation is the only thing asked. ROUND 2 also fixed the broker's worst honesty defect: it reported refusals ABOUT THE ENVIRONMENT for facts about THE PROJECT. attrs (1408 passed, one genuine py3.11 upstream failure) and tox (4253 passed, three errors from a missing system binary `man`) were both reported as REFUSE__NO_RUNNER_EXECUTED_CLEANLY. REFUSE__VERIFICATION_FAILED now means the suite RAN in the armed environment and did not exit cleanly; NO_RUNNER_EXECUTED_CLEANLY means nothing ran. A timeout is reported as a bound of ours, not as a verdict about either. The project installs itself from a staged copy so the tree is never written into, and .git is kept because hatch-vcs/setuptools-scm BUILD the version from history (measured: without tags tox cannot import its own generated tox/version.py). History therefore enters the evidence digest, so an environment armed without tags is a different environment and is re-derived rather than answered from a stale record. Memory is keyed by the evidence digest and never believed: a warm run re-reads every version and re-imports every module, and a tampered record is caught and re-derived.",
  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
  "agent_orientation": {
   "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
@@ -42,7 +42,7 @@
  },
  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The measured wall between this project and every real repository: an unarmed environment makes the agent's first honest answer 'I cannot ask this environment anything', and the environment's own declarations were never turned into a resolved, verified state. That gap is what made the web arm unexercised and GOAL unmeasured at the same time.",
- "canonical_base_commit": "d2c31c22d15e67da269ed4f5361c47303c118687",
+ "canonical_base_commit": "68bf040064452b740701dd81ad081d6f41f89b57",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -63,12 +63,11 @@
  "highest_leverage_note": "Two closed contracts either side of a real task now exist in one broker. The next leverage is the same contract shape where the guide is not a manifest at all -- GUI/DOM -- which is blocked in this sandbox (no display) and must be measured elsewhere, not claimed.",
  "highest_leverage_now": true,
  "honest_limits": [
-  "Python only. npm/Node arming is not implemented and is not claimed.",
-  "Wheels only: an sdist-only release is refused by name; nothing is built from source.",
-  "Transitives come from each verified wheel's METADATA and markers, not from a resolver's whole-tree plan; a contradictory sibling constraint would surface as a refusal, not a solve.",
-  "Registry reachability depends on the sandbox egress allowlist (pypi.org, files.pythonhosted.org, github.com); failures report REFUSE__REGISTRY_UNREACHABLE.",
-  "run-tests still assumes the isolated interpreter running pytest; tox/Makefile/non-pytest suites on repositories that need them remain the next bottleneck, measured and named.",
-  "Cold arming takes 11.2 s (flask, 14 artifacts) to 27.9 s (requests, 32 artifacts); most of that is registry round trips and pip. No parallel fetch yet."
+  "Producer-run sandbox only. No independent verifier has reproduced any number here; truth.achieved stays false.",
+  "Two of five suites do not exit cleanly, and both are reported as such, not smoothed over: attrs has a genuine upstream failure on Python 3.11, and tox's man-page tests shell out to the system binary `man`, which this sandbox does not have. Neither is offered as a capability.",
+  "System binaries are not declarations. `man`, `node`, `gcc` are required by real suites and stated in no manifest; env-ready learns of them only by watching a suite fail. That tier is named as the next step, not built.",
+  "GUI/DOM arming remains blocked: no display in this sandbox.",
+  "A warm answer is re-executed, never believed, so the warm path is fast but not free: it still runs the project's own test command."
  ],
  "incremental_spend_usd": 0,
  "intentional_route_race": false,
@@ -86,8 +85,13 @@
   "success_probability_lcb": "9/10",
   "wall_clock_cost_ub": "1800"
  },
- "measured_effect": "Live, on two repositories never brokered before, cloned at pinned commits: pallets/flask 49943b5a9441 armed cold in 11.22 s from 14 verified artifacts, warm in 0.33 s with zero registry requests and zero downloads, then its own suite 494 passed, exit 0. psf/requests 3c7baaa05ab4 armed cold in 27.87 s from 32 verified artifacts, warm in 0.78 s, then 619 passed, exit 0. A tampered memory record on both was caught by the execution re-check (recheck.ok False, from_memory False) and re-derived correctly. Offline: 24 new tests, 33 total across the two broker suites, 0 failures.",
- "next_step": "Exercise the same contract shape where nothing declares itself in a manifest: a GUI/DOM surface (OSWorld-shaped), where the environment's declarations must be DERIVED from observation rather than read from pyproject.toml. Blocked in this sandbox: no display, so it routes through a GitHub Actions workflow rather than a local claim.",
+ "measured_effect": {
+  "repositories_armed": "5 of 5 unseen repositories arm from their own declarations (requests, flask, black, attrs, tox): cold 15.7-96.1 s, warm 0.367-1.273 s",
+  "suites_run_after_arming": "requests 619 passed, flask 494 passed, black 800 passed + 61 subtests (all ENVIRONMENT_BROKERED); attrs 1408 passed with 1 genuine upstream py3.11 failure; tox 4253 passed with 3 errors from a missing system binary (`man`). The last two are reported as REFUSE__VERIFICATION_FAILED -- a result about the project, explicitly not a claim about the environment.",
+  "declaration_shapes_read": "pyproject-only, dependency-groups with {include-group}, markers with inner quoted comparisons, extras declared in a command string, extras declared as data in tox.toml, multi-line arrays",
+  "before_round_2": "black refused (VERSION_CHECK_FAILED), tox refused (DECLARATION_NOT_UNDERSTOOD), attrs and tox reported the environment as refusing when the environment was fine and their own tests were not"
+ },
+ "next_step": "Close the gap this round measured: system binaries are not declarations. tox's own suite fails with FileNotFoundError: 'man', and no pyproject.toml states it. Build the declared-by-observation tier for executables -- derive the requirement from the suite's own evidence (subprocess targets, its CI workflow, its docs build), then verify it by execution (which + --version) exactly as imports are verified now, and report it as a third refusal vocabulary item rather than as a project failure. This is the same contract shape as GUI/DOM arming with the evidence source moved from manifest to observation; GUI/DOM itself stays blocked (no display in this sandbox).",
  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
  "probe_specific": false,
  "progress_class": "VERIFIED_REUSABLE_CAPABILITY_GAIN",
@@ -101,7 +105,7 @@
  ],
  "real_outcome": "An environment the system has never seen is now armed from the environment's own declarations with two-reader digest agreement, proven by execution, remembered by evidence, and re-checked on every reuse -- and the other goal can then be asked in it.",
  "recursive_obs": {
-  "canonical_base_commit": "d2c31c22d15e67da269ed4f5361c47303c118687",
+  "canonical_base_commit": "68bf040064452b740701dd81ad081d6f41f89b57",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "second provisioning organ",
@@ -190,7 +194,7 @@
    "existing_oracle_note": "the interpreter itself (import + importlib.metadata) and the registry's published sha256 for the exact bytes",
    "synthetic_verification_necessity": "none for the live claims; stubs exist only to produce refusals the network cannot produce on demand"
   },
-  "observed_at_utc": "2026-11-23T13:47:35+00:00",
+  "observed_at_utc": "2026-11-23T16:49:22+00:00",
   "real_outcome": "flask 494 passed and requests 619 passed, exit 0, in isolations armed from their own declarations with zero model calls",
   "required_capability": "resolve an environment's declared dependencies to digest-verified, importable state",
   "route_frontier": {
@@ -324,12 +328,12 @@
    "selected_route": "EXTEND_THE_EXISTING_WORLD_BROKER_WITH_A_SECOND_CLOSED_CONTRACT_ARMED_FROM_THE_ENVIRONMENTS_OWN_DECLARATIONS",
    "selected_route_preflight": {
     "all_required_dependencies_ready": true,
-    "checked_at_utc": "2026-11-23T13:47:35+00:00",
+    "checked_at_utc": "2026-11-23T16:49:22+00:00",
     "execution_dependencies": [
      {
       "dependency": "local Python 3.11 runtime, venv and ensurepip",
       "evidence": [
-       "python3 -m venv creates an isolated interpreter in this sandbox; 33 broker tests pass"
+       "this round: 40 broker tests pass in a local venv, and five isolated interpreters were created and armed (python 3.11)"
       ],
       "evidence_classes": [
        "DIRECT_PROBE"
@@ -344,7 +348,7 @@
      {
       "dependency": "pypi.org JSON registry",
       "evidence": [
-       "live JSON read for requests 2.34.2 and 32 artifact resolves during the trial"
+       "re-probed for this round: pypi.org/pypi/requests/json answered, requests 2.34.2"
       ],
       "evidence_classes": [
        "DIRECT_PROBE",
@@ -352,7 +356,7 @@
       ],
       "evidence_scope": "GLOBAL",
       "kind": "NETWORK_ENDPOINT",
-      "observed_at_utc": "2026-11-23T13:47:35+00:00",
+      "observed_at_utc": "2026-11-23T16:49:22+00:00",
       "required": true,
       "scope": "GLOBAL",
       "status": "READY",
@@ -361,14 +365,14 @@
      {
       "dependency": "files.pythonhosted.org artifact CDN",
       "evidence": [
-       "10.59 MB of real wheels downloaded and sha256-agreed during the live trial"
+       "re-probed for this round: artifact CDN reachable; every wheel in the five-repository trial was downloaded from it and its sha256 agreed with the registry's published digest"
       ],
       "evidence_classes": [
        "DIRECT_PROBE"
       ],
       "evidence_scope": "GLOBAL",
       "kind": "NETWORK_ENDPOINT",
-      "observed_at_utc": "2026-11-23T13:47:35+00:00",
+      "observed_at_utc": "2026-11-23T16:49:22+00:00",
       "required": true,
       "scope": "GLOBAL",
       "status": "READY",
@@ -377,14 +381,14 @@
      {
       "dependency": "github.com for the trials' fresh clones",
       "evidence": [
-       "git clone --depth 1 of pallets/flask and psf/requests succeeded at pinned commits"
+       "re-probed for this round: five full-history clones (--filter=blob:none) of requests, flask, black, attrs and tox succeeded"
       ],
       "evidence_classes": [
        "DIRECT_PROBE"
       ],
       "evidence_scope": "GLOBAL",
       "kind": "NETWORK_ENDPOINT",
-      "observed_at_utc": "2026-11-23T13:47:35+00:00",
+      "observed_at_utc": "2026-11-23T16:49:22+00:00",
       "required": true,
       "scope": "GLOBAL",
       "status": "READY",
@@ -393,7 +397,7 @@
      {
       "dependency": "the broker module this round extends",
       "evidence": [
-       "canonical/swe_kernel/the_environment_broker_v1.py with 33 passing tests"
+       "canonical/swe_kernel/the_environment_broker_v1.py, exercised by 31 offline tests and five live repositories this round"
       ],
       "evidence_classes": [
        "DIRECT_PROBE"
@@ -472,7 +476,7 @@
  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
  "selected_route": "EXTEND_THE_EXISTING_WORLD_BROKER_WITH_A_SECOND_CLOSED_CONTRACT_ARMED_FROM_THE_ENVIRONMENTS_OWN_DECLARATIONS",
  "selected_surviving_route": "EXTEND_THE_EXISTING_WORLD_BROKER_WITH_A_SECOND_CLOSED_CONTRACT_ARMED_FROM_THE_ENVIRONMENTS_OWN_DECLARATIONS",
- "status": "PROPOSED__PRODUCER_MEASURED__ENVIRONMENT_BROKER_ENV_READY__INDEPENDENT_VERIFICATION_OPEN",
+ "status": "ROUND_2_CLOSED_BOTTLENECK_MEASURED_ON_FIVE_UNSEEN_REPOSITORIES",
  "stop_condition": "both unseen repositories arm cold, re-arm warm without network, and their own suites pass in the armed isolation",
  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
  "truth": {
@@ -522,19 +526,27 @@
   }
  },
  "verification": {
+  "offline_tests": {
+   "file": "canonical/tests/test_broker_env_ready_v1.py",
+   "count": 31,
+   "result": "31 passed",
+   "added_round_2": [
+    "dev bound sorts below its release (`4.0 > 4dev`)",
+    "a marker excluding this interpreter is skipped, not fetched",
+    "a plugin is armed when its host is armed, not in isolation",
+    "a manifest is read by the standard parser, not by quoting rules",
+    "the project's own declared test command is used",
+    "extras declared as data in tox.toml are read, undeclared names not invented"
+   ]
+  },
   "existing_suite": {
-   "count": 9,
    "file": "canonical/tests/test_the_environment_broker_v1.py",
+   "count": 9,
    "result": "9 passed"
   },
-  "independent_verification": "OPEN",
-  "live_trial": "intake/RECEIPT_ENV_READY_LIVE_20261123_V1.json",
+  "live_trial": "intake/RECEIPT_ENV_READY_LIVE_20261123_V2.json (5 repositories, 820 s cold)",
   "model_call_audit": "canonical/verification/MODEL_CALL_AUDIT_ENV_READY_20261123_V1.json (ENVIRONMENT_BROKER static=3 dynamic=1 inference_endpoint_files=0)",
-  "offline_tests": {
-   "count": 24,
-   "file": "canonical/tests/test_broker_env_ready_v1.py",
-   "result": "24 passed"
-  }
+  "independent_verification": "OPEN"
  },
  "weakens_existing_guard": false
 }
