@@ -7040,3 +7040,48 @@ without consuming them, so a probe would be an ACTION rather than a question.
     VERIFIED   reading the file leaves it byte-identical
     VERIFIED   mode decides: writes refused, reads permitted, unknown modes refused
     VERIFIED   179 passed, 2 skipped across twelve suites
+
+## §A123 — a mechanism nobody calls is not a mechanism
+
+### The defect: two entry points that disagreed
+
+§A122 showed `evaluate(source, prober=…)` deciding the config-file `KeyError`. Then the same program through the
+**prediction** entry point:
+
+    evaluate(source, prober=prober)   key_not_found  "{'count': 3}['divisor'] does not exist"
+    predict(source, world=world)      NO faults
+
+The prober was never threaded through `predict`. **A prediction entry point that silently ignores the only
+mechanism able to reach the fault is worse than one with no such parameter**, because the caller reads "no
+faults" and believes it — the same failure as §A119, in a different place.
+
+### The fix, and the design rule behind it
+
+Two changes:
+
+1. `predict` takes `prober=` and threads it into the literal walk, carrying `values_probes` out so the evidence
+   travels with the verdict.
+2. When a caller supplies a **world** and no prober, `predict` builds one itself, from the program's own import
+   statements and the world it was given.
+
+The second is the one that matters. Requiring every caller to know how to construct a prober — which imports,
+which interpreter, which directory — is how a mechanism ends up unused, and all three of those facts are already
+known inside `predict`.
+
+    predict(source, world=world)    key_not_found  "{'count': 3}['divisor'] does not exist"
+
+One argument. The caller now has to know only the thing it actually knows: where the program will run.
+
+### What auto-probing must not do
+
+With probing now automatic, a neighbouring file could become an accusation. `import alpha_mod` beside an
+`alpha_mod.py` is **not** an expression a probe can be asked about — whether it imports cleanly is a different
+question, answered in §A115 by importing it alone and only when a learned rule says to ask. Pinned: it stays
+`unknowable`, with no fault claimed.
+
+### Verified
+
+    VERIFIED   one entry point decides a config-file program from the world alone
+    VERIFIED   the evidence (`values_probes`) travels with the prediction
+    VERIFIED   a local module stays unknowable rather than being probed into a false answer
+    VERIFIED   181 passed, 2 skipped across twelve suites

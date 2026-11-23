@@ -267,10 +267,33 @@ def predict_imports(source: str, *, installed: Iterable[str] | None = None,
             "unknowable": bool(nearby)}
 
 
+def _imports_of(source: str) -> list[str]:
+    """The program's own import statements, so a probe runs in an interpreter that can resolve its names.
+
+    `os.environ` means nothing where `os` was never imported, and a probe that fails for that reason would be a
+    FALSE refusal -- the module would report the world unknowable when the question was merely mis-asked.
+    """
+    try:
+        tree = ast.parse(str(source))
+    except SyntaxError:
+        return []
+    statements: list[str] = []
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Import):
+            for alias in node.names:
+                statements.append("import %s%s" % (alias.name,
+                                                   " as %s" % alias.asname if alias.asname else ""))
+        elif isinstance(node, ast.ImportFrom) and node.module and not node.level:
+            statements.append("from %s import %s" % (node.module, ", ".join(
+                alias.name + (" as %s" % alias.asname if alias.asname else "") for alias in node.names)))
+    return statements[:40]
+
+
 def predict(source: str, *, installed: Iterable[str] | None = None,
             world: str | pathlib.Path | None = None,
             interpreter: str | None = None,
-            values: bool = True) -> dict[str, Any]:
+            values: bool = True,
+            prober: Any = None) -> dict[str, Any]:
     """Everything that can be known about how this program will fail, without running it.
 
     `interpreter` is the python that will run it, when that is not the one asking. Omitting it means the
@@ -280,6 +303,12 @@ def predict(source: str, *, installed: Iterable[str] | None = None,
     known list, a key missing from a known dict) that no import or name analysis can see. It is on by default
     because a caller reading "no fault" would otherwise be told the program is safe when the walker had not been
     asked -- and those faults are, in §A116's measurement, the majority of what actually breaks programs.
+
+    `prober` (§A120) lets the literal walk ASK THE WORLD instead of refusing when a value is not in the source.
+    Measured 2026-11-23: for `cfg = json.load(open("config.json")); print(cfg["divisor"])` this function returned
+    NO faults while `evaluate(source, prober=...)` decided the exact KeyError -- because the prober was not
+    threaded through. A prediction entry point that silently ignores the only mechanism able to reach the fault
+    is worse than one that has no such parameter.
     """
     imports = predict_imports(source, installed=installed, world=world, interpreter=interpreter)
     names = predict_names(source)
@@ -295,7 +324,17 @@ def predict(source: str, *, installed: Iterable[str] | None = None,
     decided: dict[str, Any] = {"certain": [], "verdict": "NOT_RUN", "unknowns": []}
     if values:
         from canonical.runtime import evaluate_literals_v1 as EVALUATE
-        decided = EVALUATE.evaluate(source)
+        # A CALLER THAT GIVES A WORLD AND NO PROBER GETS ONE BUILT FOR IT. Requiring every caller to know how to
+        # construct a prober (which imports? which interpreter? which directory?) is how a mechanism ends up
+        # unused -- and the imports and the world are already known here.
+        if prober is None and world is not None:
+            from canonical.runtime import ask_the_world_v1 as ASK
+
+            def prober(expression: str, _world=world, _interpreter=interpreter) -> dict[str, Any]:
+                return ASK.probe(expression, world=str(_world), imports=_imports_of(source),
+                                 interpreter=_interpreter)
+
+        decided = EVALUATE.evaluate(source, prober=prober)
         for fault in decided.get("certain") or []:
             faults.append({"class": fault["class"], "line": fault.get("line"),
                            "detail": fault.get("detail"), "detected_by": "literal_walk",
@@ -303,6 +342,7 @@ def predict(source: str, *, installed: Iterable[str] | None = None,
     return {"schema": SCHEMA, "faults": faults, "will_fail": bool(faults),
             "values_verdict": decided.get("verdict"),
             "values_unknowns": decided.get("unknowns") or [],
+            "values_probes": decided.get("probes") or [],
             "imports_predictable": imports.get("predictable"),
             "names_predictable": names.get("predictable"),
             "unknowable_imports": [item["module"] for item in imports.get("local") or []],

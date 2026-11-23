@@ -230,3 +230,52 @@ def test_a_program_that_reads_a_config_file_is_decided_before_it_runs() -> None:
     assert any(probe["value"] == "{'name': 'demo', 'count': 3}" for probe in result["probes"])
     # and reading it did not change it
     assert before == after
+
+
+def test_one_entry_point_decides_a_config_file_without_the_caller_knowing_how_to_probe() -> None:
+    """THE WIRING DEFECT, and why the default matters.
+
+    Measured 2026-11-23: `predict(source, world=…)` returned NO faults for the config-file program while
+    `evaluate(source, prober=…)` decided the exact KeyError — the prober was not threaded through. A prediction
+    entry point that silently ignores the only mechanism able to reach the fault is worse than one with no such
+    parameter at all, because the caller reads "no faults" and believes it.
+
+    Requiring every caller to construct a prober by hand — which imports, which interpreter, which directory —
+    is also how a mechanism ends up unused. The world and the imports are already known inside `predict`, so it
+    builds the prober itself.
+    """
+    from canonical.runtime import read_before_running_v1 as RB
+
+    world = pathlib.Path(_world())
+    (world / "config.json").write_text('{"count": 3}')
+    source = ("import json\n"
+              "cfg = json.load(open(\"config.json\"))\n"
+              "print(cfg[\"divisor\"])\n")
+    (world / "app.py").write_text(source)
+
+    # NO prober argument: only the world, which is all a caller should have to know
+    result = RB.predict(source, world=world)
+
+    assert result["values_verdict"] == "DECIDED_FROM_PROBED_EVIDENCE", result
+    assert [fault["class"] for fault in result["faults"]] == ["key_not_found"]
+    assert "divisor" in result["faults"][0]["detail"]
+    # the evidence travels with the prediction
+    assert any("config.json" in probe["expression"] for probe in result["values_probes"])
+
+
+def test_a_local_module_is_reported_unknown_rather_than_probed_into_a_false_answer() -> None:
+    """Auto-probing must not turn a neighbouring FILE into an accusation it cannot support.
+
+    `import alpha_mod` where `alpha_mod.py` sits beside the program is not an expression the probe can be asked
+    about — it is a local module, and whether it imports cleanly is a different question (answered in §A115 by
+    importing it alone, and only when a learned rule says to ask).
+    """
+    from canonical.runtime import read_before_running_v1 as RB
+
+    world = pathlib.Path(_world())
+    (world / "alpha_mod.py").write_text("raise RuntimeError('broken')\n")
+    (world / "app.py").write_text("import alpha_mod\n")
+
+    result = RB.predict((world / "app.py").read_text(), world=world)
+    assert result["faults"] == [], "a local module is not a missing module"
+    assert result["unknowable_imports"] == ["alpha_mod"]
