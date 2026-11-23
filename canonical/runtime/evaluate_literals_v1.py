@@ -243,7 +243,12 @@ class _Evaluator:
         if isinstance(node, ast.UnaryOp):
             return _binary(node.op, self.value(node.operand, state), 0)
         if isinstance(node, ast.Subscript):
-            container = self.value(node.value, state)
+            previous = getattr(self, "_reaching_subscript", False)
+            self._reaching_subscript = True
+            try:
+                container = self.value(node.value, state)
+            finally:
+                self._reaching_subscript = previous
             index = self.value(node.slice, state)
             if container is UNKNOWN and self.prober is not None:
                 # ASK THE WHOLE EXPRESSION, not its parts: a subscript on an unfollowable container is ONE
@@ -278,8 +283,16 @@ class _Evaluator:
                 whole = self._ask_or_fault(node, state)
                 if whole is not UNKNOWN:
                     return whole
-            # an attribute of anything is a value this walk does not model. Noted rather than silently
-            # UNKNOWN, for the same reason as the subscript above.
+            # AN ATTRIBUTE THAT IS ONLY THE BASE OF A SUBSCRIPT IS NOT A REFUSAL. Measured 2026-11-23:
+            # `os.environ["HOME"]` was probed successfully -- the value `/home/user` came back -- and the walk
+            # still recorded `ATTRIBUTE_NOT_MODELLED` for `os.environ`, because it evaluated the base before the
+            # subscript and noted a refusal on the way. The subscript then decided the whole expression, but the
+            # note remained and turned a decided program into "could not decide".
+            #
+            # The distinction is whether the value is USED or merely TRAVERSED. This records nothing when the
+            # parent is a Subscript that will ask the whole expression; a genuine attribute read still refuses.
+            if getattr(self, "_reaching_subscript", False):
+                return UNKNOWN
             self.unknowns.append("ATTRIBUTE_NOT_MODELLED line %s" % getattr(node, "lineno", "?"))
             return UNKNOWN
         if isinstance(node, ast.Call):
@@ -502,6 +515,16 @@ class _Evaluator:
                 return list(range(*args))
             except Exception:
                 return UNKNOWN
+        # ASK BEFORE REFUSING. A call this walk cannot model is exactly the case EnvProbe's operator is for:
+        # `os.getcwd()` has one answer and a probe can fetch it. Measured 2026-11-23: the refusal was recorded
+        # BEFORE any probe was attempted, so a perfectly answerable call was reported undecidable.
+        if self.prober is not None:
+            if isinstance(func, ast.Name) and func.id in ("print",):
+                pass
+            else:
+                asked = self._ask_or_fault(node, state)
+                if asked is not UNKNOWN:
+                    return asked
         # A LIBRARY CALL WHOSE FAILURE DEPENDS ON MATHEMATICS IS NOT DECIDED HERE, AND SAYING SO IS THE ANSWER.
         # `math.sqrt(-1)` raises ValueError. Modelling every library's domain would be a table of libraries --
         # the knowledge house in miniature -- so it is refused by name, which is honest, rather than reported as

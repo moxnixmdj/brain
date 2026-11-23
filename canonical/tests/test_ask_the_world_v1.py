@@ -130,3 +130,56 @@ def test_evidence_can_be_re_asked_and_is_reported_as_changing() -> None:
     stable = A.probe("2 ** 8", world=str(world))
     again = A.still_true(stable, world=str(world))
     assert again["changed"] is False and again["before"] == again["after"] == 256
+
+
+def test_an_answerable_call_is_asked_before_it_is_refused() -> None:
+    """THE ORDER WAS WRONG, twice, and both times it produced a false "undecidable".
+
+    Measured 2026-11-23:
+      * `os.environ["HOME"]` was probed successfully -- `/home/user` came back -- and the walk still recorded a
+        refusal for the ATTRIBUTE it traversed on the way, turning a decided program into "could not decide";
+      * `os.getcwd()` had its refusal recorded BEFORE any probe was attempted, so an answerable call was reported
+        undecidable without ever being asked.
+
+    Both were fixed by separating TRAVERSAL from USE (an attribute that is merely the base of a subscript is not
+    a value the program relies on) and by asking before refusing.
+    """
+    world = _world()
+
+    def prober(expression: str) -> dict:
+        return A.probe(expression, world=world, imports=["import os", "import sys"])
+
+    decided = E.evaluate("import os\nprint(os.environ['HOME'])", prober=prober)
+    assert decided["unknowns"] == [], decided
+    assert decided["verdict"] == "EVIDENCE_PROBED_NOTHING_PROVED"
+
+    call = E.evaluate("import os\nprint(os.getcwd())", prober=prober)
+    assert call["unknowns"] == [], call
+    assert call["verdict"] == "EVIDENCE_PROBED_NOTHING_PROVED"
+
+    # AND A PROVED FAULT STILL WINS over evidence that proved nothing
+    proved = E.evaluate("a=10\nb=0\nprint(a/b)", prober=prober)
+    assert proved["verdict"] == "THE_PROGRAM_WILL_RAISE"
+
+
+def test_probing_is_cheap_enough_to_be_worth_it() -> None:
+    """§A120 left this UNPROVEN. Measured: a program's worth of unknowns costs milliseconds, not seconds.
+
+    The bound is deliberately loose -- this test is about the ORDER of magnitude, because a timing test that
+    fails on a loaded machine teaches nothing. What it rules out is a scheme where each probe costs a program
+    run, which would make the whole approach pointless.
+    """
+    import time
+
+    world = _world()
+
+    def prober(expression: str) -> dict:
+        return A.probe(expression, world=world, imports=["import os"])
+
+    source = "import os\nfor k in ['HOME', 'PATH', 'SHELL', 'USER', 'LANG']:\n    print(os.environ.get(k))"
+    started = time.time()
+    result = E.evaluate(source, prober=prober)
+    elapsed = time.time() - started
+
+    assert len(result["probes"]) >= 5, result["probes"]
+    assert elapsed < 10.0, "probing %d expressions took %.2fs" % (len(result["probes"]), elapsed)

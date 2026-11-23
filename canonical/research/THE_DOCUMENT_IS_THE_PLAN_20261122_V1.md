@@ -6925,3 +6925,47 @@ asked**, which is why the moment travels with it.
     VERIFIED   freshness is observable: unchanged -> False, file appears -> True
     VERIFIED   176 passed, 2 skipped across twelve suites
     UNPROVEN   whether probing a whole program's worth of unknowns is cheap enough to be worth it
+
+## §A121 — asking before refusing, and the cost question answered
+
+### The UNPROVEN item from §A120, measured
+
+    one env read     2 probes    0.053 s
+    ten env reads   10 probes    0.001 s
+    mixed reads      5 probes    0.107 s
+
+**A program's worth of unknowns costs milliseconds.** The scheme is worth its cost, and the bound is now a test
+(with a deliberately loose threshold, because a timing test that fails on a loaded machine teaches nothing; what
+it rules out is a scheme where each probe costs a program run).
+
+### Two more false "undecidable" verdicts, same cause
+
+Both were ORDER defects, and both made a decided program look undecidable:
+
+1. **Traversal counted as use.** `os.environ["HOME"]` was probed successfully — `/home/user` came back — and the
+   walk still recorded `ATTRIBUTE_NOT_MODELLED` for `os.environ`, because it evaluated the base *before* the
+   subscript and noted a refusal on the way. The subscript then decided the whole expression, but the note stayed.
+   Fixed by distinguishing **traversal** from **use**: an attribute that is merely the base of a subscript is not
+   a value the program relies on.
+2. **Refusal recorded before the question was asked.** `os.getcwd()` had `CALL_VALUE_NOT_MODELLED` recorded
+   *before* any probe was attempted, so an answerable call was reported undecidable without ever being asked.
+   Fixed by asking first.
+
+    os.environ["HOME"]   EVIDENCE_PROBED_NOTHING_PROVED   0 unknowns
+    os.getcwd()          EVIDENCE_PROBED_NOTHING_PROVED   0 unknowns
+    a=10; b=0; print(a/b)  THE_PROGRAM_WILL_RAISE          (a proved fault still outranks evidence)
+
+### Why this matters beyond the bug
+
+Both defects are the same mistake in different clothes: **a refusal is only honest if it is earned.** Recording
+"could not decide" for something the system then went on to decide in the next line is not caution — it is noise
+that buries the real refusals. The rule that came out of it:
+
+> Ask first. Record a refusal only for what is still unanswered after asking.
+
+### Verified
+
+    VERIFIED   10 probes cost ~1 ms; a program's worth of unknowns is milliseconds
+    VERIFIED   an answerable call is asked before it is refused, with zero residual unknowns
+    VERIFIED   a proved fault still outranks evidence that proved nothing
+    VERIFIED   178 passed, 2 skipped across twelve suites
