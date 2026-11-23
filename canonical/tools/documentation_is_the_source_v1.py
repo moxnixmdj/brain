@@ -347,8 +347,13 @@ def declared_surface(src: Mapping[str, str], module: str) -> dict[str, int]:
             n = n.split(" as ")[-1].strip()
             if n.isidentifier():
                 tier.setdefault(n, 1)
-    # `a = x.y` style aliases and names bound by assignment in __init__
+    # `a = x.y` style aliases and names bound by assignment in __init__.
+    # `__all__` itself is a declaration, not a member: it was being listed as a re-exported
+    # public name (measured: {'command': 0, '__all__': 1}) which would put a dunder into the
+    # candidate set and let it win a tie against a real name.
     for n in re.findall(r"^([A-Za-z_][\w]*)\s*=", init, re.M):
+        if n.startswith("_"):
+            continue
         tier.setdefault(n, 1)
     return tier
 
