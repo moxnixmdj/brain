@@ -6546,3 +6546,66 @@ about the wrong thing.
     VERIFIED   a prediction asks the interpreter that will run the program
     MODEST     the speed gain is one execution on this case; it scales with the number of statically-visible faults
     UNPROVEN   whether the gain survives on faults that are NOT statically visible
+
+## §A115 — the rule must say *ask*, not *guilty*
+
+### The defect I went looking for, and found
+
+§A114 left one claim UNPROVEN: *whether the gain survives on faults that are NOT statically visible.* The
+`MODULE_NOT_IMPORTABLE` rule exists for exactly that class, so I tried to break it — teach it from one broken
+module, then offer it a healthy one.
+
+    teach:   alpha.py raises on import; program A fails; rule absorbed
+    apply:   program importing beta.py, which is FINE
+
+    matched: [('MODULE_NOT_IMPORTABLE', 'beta')]      <- FALSE ALARM
+
+**The rule convicted a healthy module.** This is the cry-wolf failure the module's own docstring warns about,
+and it would be worse than having no rule: the "repair" it triggers would change something that was never
+broken.
+
+### The resolution: separate the question from the answer
+
+A local module's importability is **decidable** — by importing that module and nothing else:
+
+    import beta      (beta.py is fine)        rc=0
+    import alpha     (alpha.py raises)        rc=1
+
+Neither probe runs the *program*. So the division of labour becomes exact, and neither half overclaims:
+
+| half | what it knows | from where |
+|---|---|---|
+| the **rule** | this class of fault is worth asking about | one experience, any program |
+| the **probe** | whether *this* module imports | the module itself, right now |
+
+The rule never says a module is broken. The probe never guesses. Re-measured:
+
+    beta   (healthy) -> rules_matched = []                          <- no accusation
+    gamma  (raises)  -> module_fails_to_import, observed.importable=False
+
+### What this changes about "memory" in this system
+
+A rule learned from one experience does not carry the answer. **It carries the question.** That is a weaker
+claim than "it knows", and it is the one the evidence supports: the environment answers, the rule only says
+where to look. It also makes the rule safe to apply to programs it was never taught from, which a stored
+conviction would not be.
+
+### Two tests that had to change, and why that is the point
+
+1. `test_a_rule_from_program_a_flags_program_b_before_b_ever_runs` **failed** after the fix — correctly. It had
+   pinned the conviction behaviour. Rewritten to assert the stronger claim: the flag is a *fact* obtained by
+   probe (`observed.importable is False`), not a repeated accusation.
+2. Its "B was never run" proof used `__pycache__` existing, which now legitimately exists because the **probe**
+   imports `beta_mod`. The assertion was made precise: no `app.*.pyc` (the program did not run), and
+   `beta_mod.*.pyc` present (the probe did). A directory-level assertion would have failed for a reason
+   unrelated to the claim.
+
+Both had to change because the design got better. A test that never needs revising is a test about nothing.
+
+### Verified / not verified
+
+    VERIFIED   one experience teaches a rule; a healthy module is left alone; a raising one is flagged
+    VERIFIED   the flag is a probe result, not a stored conviction
+    VERIFIED   145 passed, 2 skipped across ten suites
+    STILL UNPROVEN  whether this ordering helps on faults that are neither readable nor probeable in isolation
+                   -- the next bottleneck, and the honest boundary of everything in §A113-A115

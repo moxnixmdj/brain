@@ -56,6 +56,7 @@ import builtins
 import importlib.util
 import pathlib
 import subprocess
+import sys
 from collections.abc import Iterable, Mapping
 from typing import Any
 
@@ -230,7 +231,8 @@ def local_modules(world: str | pathlib.Path | None) -> set[str]:
 
 def predict_imports(source: str, *, installed: Iterable[str] | None = None,
                     world: str | pathlib.Path | None = None,
-                    interpreter: str | None = None) -> dict[str, Any]:
+                    interpreter: str | None = None,
+                 probe: bool = True) -> dict[str, Any]:
     """Imports the interpreter would refuse.
 
     `installed` lets a caller supply the answer instead of asking this process -- the same discipline
@@ -312,9 +314,40 @@ def absorb(failure: str, *, at: str = "", store: pathlib.Path | None = None) -> 
     return STATED.learn(failure, at=at, store=store)
 
 
+def probe_importable(module: str, *, world: str | pathlib.Path,
+                     interpreter: str | None = None, timeout: int = 120) -> dict[str, Any]:
+    """Import `module` ALONE, in the program's directory, with the program's interpreter, and report what happened.
+
+    WHY THIS IS THE RIGHT QUESTION AND NOT A WORKAROUND. A module sitting beside the program might import
+    cleanly or might raise; the importing file cannot tell. §A113 stored that as `unknowable`, which is honest
+    and useless on its own. But the question "does this module import?" is DECIDABLE in one cheap probe that
+    imports the module and nothing else -- measured 2026-11-23: a healthy `beta.py` returned 0, a raising
+    `alpha.py` returned 1, neither of which required running the program that imports them.
+
+    So the division of labour is exact:
+        the learned RULE says this class of fault is worth asking about   (one experience, any program)
+        this PROBE decides the answer for the program in front of you     (a fact, not a guess)
+    Neither the rule nor the probe ever claims a specific module is broken; the probe observes.
+    """
+    base = pathlib.Path(world)
+    python = interpreter or sys.executable
+    try:
+        run = subprocess.run([python, "-c", "import " + module], cwd=str(base),
+                             capture_output=True, text=True, timeout=timeout)
+    except (OSError, subprocess.SubprocessError) as exc:
+        return {"module": module, "importable": None, "why": "%s: %s" % (type(exc).__name__, str(exc)[:160])}
+    if run.returncode == 0:
+        return {"module": module, "importable": True, "exit": 0}
+    tail = ((run.stdout or "") + (run.stderr or "")).strip().splitlines()
+    return {"module": module, "importable": False, "exit": run.returncode,
+            "said": tail[-1][:200] if tail else "",
+            "traceback": ((run.stdout or "") + (run.stderr or "")).strip()[-600:]}
+
+
 def apply_memory(source: str, *, store: pathlib.Path | None = None,
                  world: str | pathlib.Path | None = None,
-                 interpreter: str | None = None) -> dict[str, Any]:
+                 interpreter: str | None = None,
+                 probe: bool = True) -> dict[str, Any]:
     """Which of this program's predicted faults are ALREADY KNOWN, and what the known rule says to do.
 
     This is where one experience changes the next program. The prediction comes from the source; the rule comes
@@ -331,13 +364,26 @@ def apply_memory(source: str, *, store: pathlib.Path | None = None,
     # as "module beta_mod is broken".
     for module in seen.get("unknowable_imports") or []:
         rule = known.get("module_not_importable")
-        if rule:
-            matched.append({"fault": {"class": "module_may_fail_to_import", "module": module,
-                                      "detected_by": "learned_rule"},
-                            "code": "MODULE_NOT_IMPORTABLE",
-                            "rule": rule.get("predicate"), "seen_at": rule.get("seen_at"),
-                            "values_seen": rule.get("values"),
-                            "act": STATED.acts_for(rule.get("predicate") or {}, module)})
+        if not rule:
+            continue
+        # THE RULE SAYS ASK; THE PROBE ANSWERS. Without a world to probe in there is nothing to ask, and the
+        # entry stays `unknowable` rather than becoming an accusation -- measured 2026-11-23, the first version
+        # of this block reported a HEALTHY neighbouring module as a fault, which is the cry-wolf error the
+        # module's own docstring warns about.
+        observed = probe_importable(module, world=world, interpreter=interpreter) if (probe and world) else None
+        if observed is not None and observed.get("importable") is True:
+            # asked and answered: this module is fine, so there is no fault and nothing to record
+            continue
+        matched.append({"fault": {"class": ("module_fails_to_import" if observed and observed.get("importable") is False
+                                           else "module_may_fail_to_import"),
+                                  "module": module,
+                                  "detected_by": ("learned_rule+probe" if observed is not None
+                                                  else "learned_rule")},
+                        "code": "MODULE_NOT_IMPORTABLE",
+                        "rule": rule.get("predicate"), "seen_at": rule.get("seen_at"),
+                        "values_seen": rule.get("values"),
+                        "observed": observed,
+                        "act": STATED.acts_for(rule.get("predicate") or {}, module)})
     for fault in seen.get("faults") or []:
         code = "MODULE_NOT_FOUND" if fault["class"] == "missing_python_module" else "NAME_NOT_DEFINED"
         rule = known.get(code.lower())

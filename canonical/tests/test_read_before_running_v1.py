@@ -136,11 +136,20 @@ def test_a_rule_from_program_a_flags_program_b_before_b_ever_runs() -> None:
     assert [m["code"] for m in warm["rules_matched"]] == ["MODULE_NOT_IMPORTABLE"]
     assert [m["fault"]["module"] for m in warm["rules_matched"]] == ["beta_mod"]
     assert warm["rules_matched"][0]["seen_at"] == ["program_A"]
+    # AND THE ANSWER IS A FACT, NOT A REPEATED ACCUSATION: beta_mod.py raises on import, so a one-line probe
+    # of the module alone establishes that without running the program that imports it.
+    assert warm["rules_matched"][0]["fault"]["class"] == "module_fails_to_import"
+    assert warm["rules_matched"][0]["observed"]["importable"] is False
 
-    # B was never executed, and the flag was still raised -- that is the whole claim.
-    # Proven by the fact that running B would have changed nothing about the answer: the rule was applied to a
-    # program whose only observed history is its SOURCE. Nothing in this test runs app.py in world B.
-    assert not (world_b / "__pycache__").exists()
+    # B WAS NEVER RUN, and the flag was still raised -- that is the whole claim. The proof must be about
+    # `app.py`, not about the directory: the PROBE imports `beta_mod` alone (which legitimately writes a
+    # __pycache__ for that module), so a directory-level assertion would fail for a reason that has nothing to
+    # do with the claim. What must not exist is any trace of the program itself having been executed.
+    cached = [p.name for p in (world_b / "__pycache__").glob("*.pyc")]
+    assert not any(name.startswith("app.") for name in cached), \
+        "the program must not have been executed: %s" % cached
+    assert any(name.startswith("beta_mod.") for name in cached), \
+        "the PROBE did run, which is how the fact was established: %s" % cached
 
 
 def test_the_prediction_asks_the_interpreter_that_will_run_the_program() -> None:
@@ -215,3 +224,34 @@ def test_a_repair_that_worked_on_the_last_attempt_is_not_reported_as_a_failure()
     # the repair demonstrably worked, so the report must say so
     assert result["ok"] is True, result
     assert result["attempts"][-1]["class"] == "after_setup"
+
+
+def test_the_rule_says_ask_and_the_probe_answers_so_a_healthy_module_is_left_alone() -> None:
+    """THE CRY-WOLF TEST. A rule learned from ONE broken module must not accuse the next, healthy one.
+
+    Measured 2026-11-23, and this is what made the design right: the first version matched `MODULE_NOT_IMPORTABLE`
+    against every local import and reported a perfectly good `beta.py` as a fault. The rule's knowledge is that
+    IMPORTABILITY IS WORTH ASKING ABOUT -- not that any particular module is broken. The question is decidable
+    in one cheap probe that imports the module and nothing else, so the rule triggers the question and the
+    probe supplies the fact.
+    """
+    store = pathlib.Path(tempfile.mkdtemp()) / "rules.json"
+
+    broken = pathlib.Path(tempfile.mkdtemp(prefix="teach_"))
+    (broken / "alpha.py").write_text("raise RuntimeError('broken')\n")
+    (broken / "app.py").write_text("import alpha\n")
+    result = _run(broken)
+    assert RB.absorb(result.stderr, at="program_A", store=store)["learned"] is True
+
+    healthy = pathlib.Path(tempfile.mkdtemp(prefix="healthy_"))
+    (healthy / "beta.py").write_text("VALUE = 42\n")
+    (healthy / "app.py").write_text("import beta\nprint(beta.VALUE)\n")
+    warm_healthy = RB.apply_memory((healthy / "app.py").read_text(), store=store, world=healthy)
+    assert warm_healthy["rules_matched"] == [], "a healthy module must never be reported as a fault"
+
+    raising = pathlib.Path(tempfile.mkdtemp(prefix="raising_"))
+    (raising / "gamma.py").write_text("raise RuntimeError('boom')\n")
+    (raising / "app.py").write_text("import gamma\n")
+    warm_raising = RB.apply_memory((raising / "app.py").read_text(), store=store, world=raising)
+    assert [m["fault"]["class"] for m in warm_raising["rules_matched"]] == ["module_fails_to_import"]
+    assert warm_raising["rules_matched"][0]["observed"]["importable"] is False
