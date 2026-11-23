@@ -6140,3 +6140,70 @@ requires understanding what the program *meant*. Nothing in this system can do t
 pattern matching over tracebacks will produce it.
 
 150 tests pass, 1 skipped.
+
+## §A110 — a real failure in a real codebase, and what it actually was
+
+### Correcting a weakness in my own testing
+
+Every mechanism in this thread was tested on fixtures I wrote. The mission says tests use the hardest open
+problems, not synthetic data. The repository has carried a genuine failure since before this branch:
+`test_jit_knowledge_v1::test_a_goal_that_compiles_does_not_go_looking`. That is not synthetic, so it was the
+right thing to investigate.
+
+### Three wrong suspicions, in the order they were eliminated
+
+1. **"The goal does not compile."** Wrong — and my first probe of it was wrong too: I called
+   `execute_chain(chain, goal)` with the arguments reversed, so every character of the goal became a
+   capability name (`capability_id: 'V'`). `route()` finds the chain correctly:
+   `archive.tar_gz.create_from_manifest` → `archive.verify.tar_gz.gnu`.
+2. **"The chain raises."** True, but for a reason that moved each time I fixed something. With no inputs
+   named it was `MANIFEST_INPUT_REQUIRED`; with inputs named it was `PATH_OUTSIDE_REPOSITORY`.
+3. **"The composer can only act in its own repository."** This was **true**, and it is the one real defect
+   found here.
+
+### The real defect, fixed
+
+`astra_runtime._invoke_bound_capability` was given an `execution_root`, and its docstring states what the
+absence cost:
+
+> "The system could not act in any environment but its own. That is fatal for learning where a plan applies.
+> Every 'new environment' was the same environment, so no real contrast could ever be produced, so every
+> applicability boundary stayed UNDETERMINED however many runs happened."
+
+That fix stopped at the runtime call. `execute_chain` still ran every step against the repository, so a
+correctly compiled chain for a goal naming files in a caller's directory died **before doing any work**.
+
+The fix is `root=` on `execute_chain`, and the *how* matters more than the *what*. `run_adapter_locally`
+hands its adapter `fn(call_args, ROOT)`, runs the write-authority check against `ROOT`, and captures and
+restores transition preimages under `ROOT`. Threading a world into only the adapter's argument would let it
+write to one place while the guard watched another — **a guard watching the wrong tree does not fail, it
+approves.** So the step is wrapped in the existing `_with_workspace_root`, which moves every one of those
+references at once. The world a step is planned in and the world it is judged in are then the same by
+construction rather than by discipline.
+
+    before:  FAIL__COMPOSER_STEP_RAISED  RuntimeError:PATH_OUTSIDE_REPOSITORY
+    after :  PASS__COMPOSER_CHAIN_EXECUTED   x.tar.gz created in the caller's world
+
+`root=None` preserves every existing caller exactly, including the repository-only refusal.
+
+### Why the original test still fails, and why I did not "fix" it
+
+With its inputs named, the goal now reaches `FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT`.
+That is `computer_execution_boundary_v1.refuses_execution` — the module that says of itself "the single
+decision every execution site must use", failing closed when a capability's operation is not in the audited
+static table.
+
+**That is a safety boundary working correctly.** The test's goal names no files, so its archive capability
+has nothing to bind and the operation cannot be audited. Weakening the gate to make a test pass would be the
+exact dishonesty this project is built against. The honest statement is: the test asserts something the
+safety architecture deliberately forbids, and the test — not the boundary — is what should change. That is a
+decision for whoever owns that intent, and it is recorded rather than taken unilaterally.
+
+### One more measurement worth keeping
+
+Running the full `test_jit_knowledge_v1` suite after my probing produced a **second** failure that pristine
+HEAD does not have. Reverting my change did not remove it; **resetting the three runtime state JSONs did.**
+The suite mutates persistent state, so running it twice in a row is not the same experiment twice. Verified
+against a pristine clone at `c6d258fc`: 1 failed, 41 passed — the same as here once state is clean.
+
+128 tests pass across the seven suites touched, 1 skipped.

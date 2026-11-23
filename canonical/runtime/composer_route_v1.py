@@ -4287,8 +4287,30 @@ def _chain_refuses(cid: str, entry: Any) -> bool:
 
 def execute_chain(chain: Sequence[str], goal: str,
                   inputs: Mapping[str, Any] | None = None,
-                  registry: Mapping[str, Any] | None = None) -> dict[str, Any]:
-    """Run the chain, step by step, and report what each step actually did."""
+                  registry: Mapping[str, Any] | None = None,
+                  root: str | pathlib.Path | None = None) -> dict[str, Any]:
+    """Run the chain, step by step, and report what each step actually did.
+
+    `root` is the WORLD to act in, and it exists because without it this function could only ever act in
+    the repository.
+
+    THE DEFECT, AND WHY IT IS THE SAME DEFECT AS A DOCUMENTED ONE. `astra_runtime._invoke_bound_capability`
+    was fixed to take an `execution_root`, and its docstring states the consequence of not having it:
+
+        "The system could not act in any environment but its own. That is fatal for learning where a plan
+         applies. Every 'new environment' was the same environment, so no real contrast could ever be
+         produced, so every applicability boundary stayed UNDETERMINED however many runs happened."
+
+    That fix stopped at the runtime call. Measured 2026-11-23: a correctly compiled chain for "Verify the
+    tar.gz archive <world>/x.tar.gz against the manifest <world>/M.json" failed with
+    `PATH_OUTSIDE_REPOSITORY` before doing any work, and the same two capabilities run directly against
+    that world with `root=` produce the archive and verify it. The capability could act anywhere; only this
+    function never asked it to.
+
+    ADDITIVE BY DESIGN. `root=None` preserves every existing caller exactly. The adapter's own CODE is still
+    resolved from this repository -- only the world changes -- because executable code must never be sourced
+    from the environment being acted on.
+    """
     from canonical.runtime import capability_composer_v1 as composer
     from canonical.runtime import capability_type_surface_v1 as TS
     from canonical.runtime import live_brain_route_admission_v1 as ra
@@ -4353,7 +4375,21 @@ def execute_chain(chain: Sequence[str], goal: str,
                                     "missing_slots": missing},
                     "steps": steps}
         try:
-            result = ra.run_adapter_locally(entry, {"args": dict(args)})
+            # THE WORLD IS BOUND FOR THE WHOLE STEP, not threaded as one more argument.
+            #
+            # `run_adapter_locally` hands its adapter `fn(call_args, ROOT)`, runs the write-authority check
+            # against ROOT, captures transition preimages under ROOT and restores them under ROOT. A fix
+            # that changed only the adapter's second argument would let the adapter write to one place
+            # while the guard watched another -- worse than the original refusal, because a guard that
+            # watches the wrong tree does not fail, it approves.
+            #
+            # `_with_workspace_root` already moves every one of those references at once, and it moves
+            # `composer_route._ACTIVE_REPO_ROOT` with them. Reusing it means the world a step is planned in
+            # and the world it is judged in are the same by construction rather than by discipline.
+            #
+            # ADDITIVE: `root=None` yields the current root and changes nothing for any existing caller.
+            with ra._with_workspace_root(root):
+                result = ra.run_adapter_locally(entry, {"args": dict(args)})
         # ``SystemExit`` too: an adapter that refuses with ``raise SystemExit(1)`` has still
         # refused, and the record this branch writes ("side_effect_landed": UNKNOWN) is exactly
         # the truth about it.  Without this the step killed the caller instead (measured
