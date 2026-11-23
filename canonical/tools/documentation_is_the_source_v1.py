@@ -90,7 +90,15 @@ UA = "brain-instant-knowledge/1"
 
 # The whole network surface of this file is these two hosts, and both are plain JSON/tar.gz.
 GH_API = "https://api.github.com"
+CODELOAD = "https://codeload.github.com"
 PYPI_FILES = "https://files.pythonhosted.org"
+# THE CHANNEL THAT DOES NOT RUN OUT. The contents API is a nice protocol and it has a
+# measured ceiling: 5000 requests/hour for an unauthenticated caller, and a full run of four
+# libraries cost ~5000 of them. Measured at the end of one session: {"limit": 5000, "used":
+# 5000, "remaining": 0}, after which every fetch is a 403. An "instant" channel that stops
+# answering after one library is not instant, so the primary is `codeload`, which serves a
+# whole repository as one tar.gz with no API quota at all -- strictly fewer requests and
+# strictly more data per request. The contents API stays as the pinned-commit path.
 
 
 # ---------------------------------------------------------------------------------------------
@@ -131,6 +139,48 @@ def fetch_source(repo: str, path: str = "", ref: str | None = None,
             continue
         blob = json.loads(_get(e["url"]))
         out[e["name"]] = base64.b64decode(blob["content"]).decode("utf8", "replace")
+    return out
+
+
+def fetch_tarball(repo: str, ref: str | None = None, subdir: str = "",
+                  suffix: str = ".py", max_files: int = 400,
+                  keep: Any = None) -> dict[str, str]:
+    """A whole repository as one request, no API quota, no pagination.
+
+    `codeload.github.com/<repo>/tar.gz/<ref>`. One HTTP request returns every file, which is
+    the smallest possible number of round trips for a corpus -- and round trips, not bytes,
+    are what an unauthenticated channel bills for.
+
+    `ref` defaults to the repository's default branch; pass a commit for a repeatable corpus.
+    """
+    ref = ref or "refs/heads/main"
+    if not ref.startswith("refs/"):
+        ref = f"refs/heads/{ref}"
+    raw = _get(f"{CODELOAD}/{repo}/tar.gz/{ref}")
+    out: dict[str, str] = {}
+    with tarfile.open(fileobj=io.BytesIO(raw), mode="r:gz") as tf:
+        for m in tf.getmembers():
+            if not m.isfile() or not m.name.endswith(suffix):
+                continue
+            parts = m.name.split("/", 1)
+            rel = parts[1] if len(parts) > 1 else parts[0]
+            if subdir and not rel.startswith(subdir.rstrip("/") + "/"):
+                continue
+            if subdir:
+                rel = rel[len(subdir.rstrip("/")) + 1:]
+            # TESTS ARE A DIFFERENT ROLE, NOT NOISE. An earlier version dropped every path
+            # containing "test", which silently made the corpus unusable for any measurement
+            # whose ground truth comes from the project's own tests -- rich went from 212
+            # fetched files to 145 and every row count was 0. Keep them; the caller says which
+            # role it wants.
+            if keep is not None and not keep(rel):
+                continue
+            if len(out) >= max_files:
+                break
+            f = tf.extractfile(m)
+            if f is None:
+                continue
+            out[rel] = f.read().decode("utf8", "replace")
     return out
 
 
@@ -359,7 +409,10 @@ def measure(packages: Mapping[str, Mapping[str, Any]], goals: Sequence[Mapping[s
         t0 = time.time()
         try:
             if spec.get("repo"):
-                src = fetch_source(spec["repo"], spec.get("path", ""), spec.get("ref"))
+                try:
+                    src = fetch_tarball(spec["repo"], spec.get("ref"), spec.get("path", ""))
+                except Exception:
+                    src = fetch_source(spec["repo"], spec.get("path", ""), spec.get("ref"))
             else:
                 src = fetch_from_pypi(pkg, spec.get("version"))
             bytes_n = sum(len(v) for v in src.values())
