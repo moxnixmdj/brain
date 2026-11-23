@@ -5509,3 +5509,53 @@ language.
 The middle row is the honest bottleneck and it is not a bug. It is the boundary between a system that
 reads its environment and a system that understands language, and the mission's "zero knowledge house"
 forbids closing it with a synonym dictionary.
+
+## §A100 — nobody supplies the vocabulary either
+
+### The gap §A99 left honest but open
+
+§A99's join needs a list of verbs to probe. I supplied that list by hand. That is the harness doing the
+work the system is supposed to do, and it is the same shape of dishonesty as a pinned count.
+
+The obvious place to look is the program, and the obvious thing to ask it is wrong: measured,
+`ticketer` refuses `help`, `--help` **and** `commands`. A program that will not document itself will not
+enumerate itself either.
+
+### What the program does say
+
+It says it in its **dispatch**. A CLI compares its first argument against the words it accepts, and those
+comparisons are in its source. Measured on `ticketer`: the string literals it compares against are
+**exactly** `open`, `show`, `shutdown` — its three verbs, no noise. On a fixture built with a flag in a
+comparison too, the flag appears in the literals and the bare-word filter drops it before it is ever probed.
+
+**This is not "read the documentation".** Documentation *describes*; a source *dispatches*, and a
+comparison is a statement the program makes about itself while deciding what to do. But a literal in a
+comparison is still only a **claim** — so every candidate is a hypothesis and `probe_world` decides. The
+division is exactly the one §A92 established: the document proposes, the environment disposes.
+
+| | |
+|---|---|
+| caller supplies | a program and a world. Nothing else. |
+| source supplies | `open`, `show`, `shutdown` — hypotheses |
+| probe supplies | arity 2 / 1 / 0, `open` mutating, all three real, none rejected |
+
+When the source is not readable Python the reader **refuses** (`THE_SOURCE_IS_NOT_READABLE_PYTHON`) rather
+than returning an empty candidate list, because "I could not read this" and "this has no verbs" are
+different facts and the caller needs to know which one it has.
+
+### The test that proved the refusal, by accident
+
+My own fixture had a stray indent, so `ast.parse` raised, the source reader refused, and the probe ran with
+no candidates and learned nothing. The failure was correct behaviour discovered by writing a broken fixture
+— which is the cheapest possible way to verify that a refusal path actually fires.
+
+### Honest position
+
+| case | status |
+|---|---|
+| program has a definition, goal names a verb it has | **solved**, no model, no vocabulary supplied |
+| program has a definition, goal uses a synonym | **refused**; a synonym table would be a fact about English I invented |
+| program is a compiled binary with no readable source | **caller must supply candidates**, or nothing can be learnt |
+
+The third row is real and untested: everything here assumes the program's dispatch is readable text.
+A stripped binary is not, and this module says so rather than pretending `ast` covers it.

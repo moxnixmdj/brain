@@ -42,6 +42,7 @@ that the program itself printed.
 """
 from __future__ import annotations
 
+import ast
 import json
 import pathlib
 import re
@@ -278,14 +279,24 @@ def probe_world(program: str, source: str | pathlib.Path, *,
 
 def learn_interface(program: str, source: str | pathlib.Path, *,
                     candidates: Sequence[str] = (), env_key: str | None = None,
-                    timeout: int = 20) -> dict[str, Any]:
+                    timeout: int = 20, read_source: bool = True) -> dict[str, Any]:
     """Probe, then say whether the result is enough to ACT with -- and if not, why not.
 
     `enough_to_act` is deliberately narrow: a learned mutating verb with a known arity is enough to build a
     command. It is NOT enough to know why anyone would want to run it, and this module says so rather than
     letting a caller read `verbs_learned` as understanding.
     """
+    if not candidates and read_source:
+        # the caller supplied nothing, so ask the program's own bytes for hypotheses instead of asking the
+        # caller to guess. A rejected candidate costs one probe and is reported `unknown`.
+        found = candidates_from_source(program)
+        candidates = found.get("candidates") or []
+        origin = found
+    else:
+        origin = {"schema": SCHEMA, "candidates": list(candidates),
+                  "why": "THE_CALLER_STATED_THESE"}
     result = probe_world(program, source, candidates=candidates, env_key=env_key, timeout=timeout)
+    result["candidates_from"] = origin.get("why")
     mutating = [v for v in result["mutating"] if result["arity"].get(v) is not None]
     if mutating:
         result["enough_to_act"] = True
@@ -298,6 +309,46 @@ def learn_interface(program: str, source: str | pathlib.Path, *,
         result["enough_to_act"] = False
         result["why"] = "NO_DISCRIMINATION" if result["unreadable"] else "NO_VERB_ACCEPTED"
     return result
+
+
+def candidates_from_source(program: str) -> dict[str, Any]:
+    """Read a program's own bytes for the words it compares against -- hypotheses, never truth.
+
+    THE PROBLEM THIS SOLVES: probing needs a list of verbs to try, and a caller should not have to supply
+    one. `ticketer` refuses `help`, `--help` and `commands`, so it will never enumerate itself; a program
+    that does not document itself will not volunteer its vocabulary either.
+
+    But the program is not silent -- it is RIGHT THERE. A dispatch compares the first argument against the
+    words it accepts, and those comparisons are in its source. Measured 2026-11-23 on `ticketer`: the string
+    literals it compares against are exactly `open`, `show`, `shutdown` -- its three verbs, no noise.
+
+    THIS IS NOT "READ THE DOCUMENTATION". The documentation describes; the source DISPATCHES, and a
+    comparison is a statement the program makes about itself. Still, a literal in a comparison is only a
+    claim: `--fix` appears in a condition too. So everything here is a HYPOTHESIS and `probe_world` decides
+    which are real. A candidate the program rejects costs one probe and is reported `unknown`.
+
+    Refuses rather than guesses when the source is not parseable as Python -- in that case the caller must
+    supply candidates, and a probe with no candidates learns nothing and says so.
+    """
+    try:
+        source = pathlib.Path(program).read_text(errors="replace")
+        tree = ast.parse(source)
+    except (OSError, SyntaxError, ValueError) as exc:
+        return {"schema": SCHEMA, "candidates": [], "why": "THE_SOURCE_IS_NOT_READABLE_PYTHON",
+                "detail": "%s: %s" % (type(exc).__name__, exc)}
+
+    compared: set[str] = set()
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Compare):
+            for operand in [node.left] + list(node.comparators):
+                if isinstance(operand, ast.Constant) and isinstance(operand.value, str):
+                    compared.add(operand.value)
+    #: a verb is a bare lowercase word; flags (`--fix`), paths and messages are not, and are cheap to skip
+    candidates = sorted(v for v in compared if re.fullmatch(r"[a-z][a-z0-9_-]{1,20}", v))
+    return {"schema": SCHEMA, "candidates": candidates,
+            "why": "THE_PROGRAM_STATES_THESE_IN_ITS_OWN_DISPATCH",
+            "note": "hypotheses; probe_world decides which are real",
+            "all_compared_literals": sorted(compared)[:60]}
 
 
 def act_for_goal(goal: str, learned: Mapping[str, Any], *,

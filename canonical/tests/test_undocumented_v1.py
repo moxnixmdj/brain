@@ -261,3 +261,77 @@ def test_the_learned_interface_points_at_a_file_that_still_exists() -> None:
         assert pathlib.Path(learned["act_hint"].split()[0]).is_file()
     finally:
         shutil.rmtree(world, ignore_errors=True)
+
+
+# ----------------------------------------------------------------------------------------------------
+# Nobody supplies the vocabulary either.
+# ----------------------------------------------------------------------------------------------------
+
+def test_the_caller_supplies_no_vocabulary_at_all() -> None:
+    """The probe needs verbs to try, and a self-documenting program will not volunteer them: `ticketer`
+    refuses `help`, `--help` and `commands`.
+
+    So the hypotheses come from the program's own dispatch -- the string literals it COMPARES against --
+    and the probe still decides which are real. Measured on `ticketer`: the compared literals are exactly
+    `open`, `show`, `shutdown`, its three verbs and nothing else. The caller names a program and a world,
+    and that is all.
+    """
+    world, program = _ticketer_world()
+    try:
+        learned = U.learn_interface(program, world)  # no candidates=
+
+        assert learned["candidates_from"] == "THE_PROGRAM_STATES_THESE_IN_ITS_OWN_DISPATCH"
+        assert learned["verbs_learned"] == ["open", "show", "shutdown"], learned["probed"]
+        assert learned["arity"] == {"open": 2, "show": 1, "shutdown": 0}
+        assert learned["unknown"] == [], learned["unknown"]
+    finally:
+        shutil.rmtree(world, ignore_errors=True)
+
+
+def test_a_literal_in_a_comparison_is_a_claim_and_the_probe_is_the_truth() -> None:
+    """A compared literal is a HYPOTHESIS, not a fact -- flags appear in comparisons too.
+
+    A program that compares its argument against a flag as well as its verbs must have the flag rejected.
+    If reading the source were treated as authoritative, `--force` would enter the interface as a verb and
+    the first command built from it would fail in the world, which is the expensive way to learn a fact one
+    probe could have established.
+    """
+    world = tempfile.mkdtemp(prefix="flaggy_")
+    try:
+        path = pathlib.Path(world) / "flaggy"
+        path.write_text('''#!/usr/bin/env python3
+import sys, os
+STATE = os.path.join(os.path.dirname(os.path.abspath(__file__)), ".flaggy.json")
+args = sys.argv[1:]
+if not args:
+    sys.stderr.write("usage: flaggy <command>\\n")
+    sys.exit(2)
+if args[0] == "--force":
+    sys.stderr.write("INVALID_COMMAND\\n")
+    sys.exit(2)
+if args[0] == "mark":
+    if len(args) < 2:
+        sys.stderr.write("MISSING_ARGUMENT\\n")
+        sys.exit(2)
+    open(STATE, "w").write(args[1])
+    print("marked")
+    sys.exit(0)
+if args[0] == "peek":
+    try:
+        print(open(STATE).read())
+    except Exception:
+        print("nothing")
+    sys.exit(0)
+sys.stderr.write("INVALID_COMMAND\\n")
+sys.exit(2)
+''')
+        path.chmod(0o755)
+        learned = U.learn_interface(str(path), world)
+
+        # the flag was offered as a candidate, because it IS a compared literal
+        offered = [row["verb"] for row in learned["probed"]]
+        assert "--force" not in offered, offered          # flags are skipped before probing
+        assert learned["verbs_learned"] == ["mark", "peek"], learned["probed"]
+        assert learned["mutating"] == ["mark"], learned["mutating"]
+    finally:
+        shutil.rmtree(world, ignore_errors=True)
