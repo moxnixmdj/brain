@@ -453,7 +453,8 @@ def run(env: Any, goal: str, actions: Sequence[Any],
         fresh_reset: Callable[[Any], None] | None = None,
         allow_instant_knowledge: bool = False,
         seed: int | None = None,
-        prior: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        prior: Mapping[str, Any] | None = None,
+        local_root: str | pathlib.Path | None = None) -> dict[str, Any]:
     """The Perfect Algorithm: scan, remember-or-learn, PLAN, ACT, VERIFY,
     LEARN, ADMIT, SAVE, REPORT.
 
@@ -568,27 +569,54 @@ def run(env: Any, goal: str, actions: Sequence[Any],
             "documents_returned": 0,
             "complete": False,
         }
-        if allow_instant_knowledge:
-            try:
+        # Tier 1: the computer's own guides -- offline, version-matched,
+        # already on this machine. This is the READ tier (man pages, README,
+        # AGENTS.md, .md docs). It is always asked when the plan fails; it is
+        # free (no network, $0) and it never concludes from one keyword.
+        try:
+            query = _instant_knowledge_query(goal, kind)
+            from canonical.runtime import local_guide_v1 as local_guide
+            local = local_guide.lookup(query, root=local_root)
+            instant["local_guide"] = {
+                "status": local.get("status"),
+                "score": local.get("score"),
+                "documents": list(local.get("documents") or []),
+                "authority": local.get("authority"),
+            }
+            if local.get("pass"):
+                instant["status"] = "PASS__LOCAL_GUIDE_FOUND"
+                instant["query"] = query
+                instant["documents_returned"] = int(len(local.get("documents") or []))
+                instant["complete"] = True
+                instant["authority"] = "EXTERNAL_LOCAL_DOCS_RETRIEVED"
+                instant["tier"] = "local"
+            elif allow_instant_knowledge:
+                # Tier 2: the web. Completeness-gated -- one source cannot
+                # conclude anything. Never counted as capability.
                 from canonical.runtime import jit_knowledge_v1 as jit
-
-                query = _instant_knowledge_query(goal, kind)
                 fetched = jit.resolve(query, min_sources=2, min_kinds=2)
-                instant = {
-                    "status": "PASS__INSTANT_KNOWLEDGE_FETCHED" if fetched.get("pass")
-                    else "OPEN__INSTANT_KNOWLEDGE_INCOMPLETE",
-                    "query": query,
-                    "documents_returned": int(fetched.get("document_count") or 0),
-                    "complete": bool(fetched.get("complete")),
-                    "sources_answered": list(fetched.get("sources_answered") or []),
-                    "kinds_answered": list(fetched.get("kinds_answered") or []),
-                    "gap": fetched.get("gap"),
-                    "authority": "EXTERNAL_PUBLIC_EVIDENCE_FETCHED",
-                }
-            except Exception as e:  # noqa: BLE001
-                instant = {"status": "OPEN__INSTANT_KNOWLEDGE_UNAVAILABLE",
-                           "query": None, "error": str(e)[:200],
-                           "documents_returned": 0, "complete": False}
+                instant["status"] = ("PASS__INSTANT_KNOWLEDGE_FETCHED"
+                                    if fetched.get("pass")
+                                    else "OPEN__INSTANT_KNOWLEDGE_INCOMPLETE")
+                instant["query"] = query
+                instant["documents_returned"] = int(fetched.get("document_count") or 0)
+                instant["complete"] = bool(fetched.get("complete"))
+                instant["sources_answered"] = list(fetched.get("sources_answered") or [])
+                instant["kinds_answered"] = list(fetched.get("kinds_answered") or [])
+                instant["gap"] = fetched.get("gap")
+                instant["authority"] = "EXTERNAL_PUBLIC_EVIDENCE_FETCHED"
+                instant["tier"] = "web"
+            else:
+                instant["status"] = "OPEN__LOCAL_GUIDE_MISSED"
+                instant["query"] = query
+                instant["documents_returned"] = 0
+                instant["complete"] = False
+                instant["authority"] = "NONE__LOCAL_GUIDE_MISSED"
+                instant["tier"] = "local"
+        except Exception as e:  # noqa: BLE001
+            instant = {"status": "OPEN__INSTANT_KNOWLEDGE_UNAVAILABLE",
+                       "query": None, "error": str(e)[:200],
+                       "documents_returned": 0, "complete": False}
         receipts["steps"]["instant_knowledge"] = instant
         receipts["status"] = "OPEN__NO_PLAN_AFTER_SCAN"
         receipts["pass"] = False

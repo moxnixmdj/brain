@@ -318,6 +318,81 @@ class OneExperienceTests(unittest.TestCase):
         self.assertTrue(out["pass"])  # but the loop DID verify the goal
 
 
+class ReplayFromMemoryTests(unittest.TestCase):
+    """The repeat-goal replay path: an admitted rule in the store is replayed
+    instantly on a repeat goal. The scan never runs; the receipt shows
+    INSTANT_RECALL. A stale rule must NOT be served."""
+
+    def setUp(self):
+        self._tmp = Path(tempfile.mkdtemp(prefix="pa-replay-"))
+        self._mem_path = self._tmp / "memory.json"
+
+    def tearDown(self):
+        import shutil
+        shutil.rmtree(self._tmp, ignore_errors=True)
+
+    def test_admitted_rule_is_served_instantly_on_repeat_goal(self):
+        target = (7, 2, 9)
+        env = Lock(target=target)
+        goal_pred = lambda obs: obs == target
+        fresh = [Lock(target=target) for _ in range(2)]
+
+        out_a = pa.run(env, "open dial lock", ["d0", "d1", "d2"],
+                       goal_predicate=goal_pred,
+                       heuristic=lambda obs: _lock_heuristic(obs, target),
+                       goal_family="dial_lock", env_kind="dial_lock",
+                       memory_path_=self._mem_path, budget=40, max_depth=24, seed=0,
+                       unseen_instances=fresh,
+                       fresh_reset=lambda e: e.reset(),
+                       fresh_act=lambda e, a: e.act(a),
+                       fresh_state=lambda e: e.state())
+        self.assertEqual(out_a["steps"]["save"]["status"], "PASS__SAVED_TO_MEMORY")
+        self.assertEqual(out_a["steps"]["admit"]["verdict"], "ADMIT")
+        mem = pa.load_memory(self._mem_path)
+        self.assertEqual(len(mem.get("rules", [])), 1)
+
+        # repeat goal: the same family, the SAME instance shape, no instances offered
+        out_b = pa.run(Lock(target=target), "open dial lock",
+                       ["d0", "d1", "d2"],
+                       goal_predicate=goal_pred,
+                       heuristic=lambda obs: _lock_heuristic(obs, target),
+                       goal_family="dial_lock", env_kind="dial_lock",
+                       memory_path_=self._mem_path, budget=40, max_depth=24, seed=0)
+        self.assertEqual(out_b["status"], "PASS__REPLAY_FROM_MEMORY")
+        self.assertEqual(out_b["outcome"], "INSTANT_RECALL")
+        self.assertEqual(out_b["steps"]["memory_replay"]["status"],
+                         "PASS__REPLAY_REACHED_GOAL")
+        # instant recall means NO scan ever happened
+        self.assertNotIn("scan", out_b["steps"])
+
+    def test_stale_rule_is_never_served_even_when_persisted(self):
+        # hand-persist a rule that FAILS on the fresh instance (different goal
+        # shape of the same family -- the test is honest about what it means).
+        target = (7, 2, 9)
+        env = Lock(target=target)
+        mem = pa.load_memory(self._mem_path)
+        mem = pa.remember(mem, {
+            "rule_id": "ga-stale-repeat",
+            "kind": "plan",
+            "goal_family": "dial_lock",
+            "env_kind": "dial_lock",
+            "scope": {"goal_family": "dial_lock", "env_kind": "dial_lock"},
+            "plan_sketch": ["d0"],   # wrong for this goal -- will fail replay honestly
+            "created_at": 0.0,
+        })
+        pa.save_memory(mem, self._mem_path)
+
+        out = pa.run(env, "open dial lock", ["d0", "d1", "d2"],
+                     goal_predicate=lambda obs: obs == target,
+                     heuristic=lambda obs: _lock_heuristic(obs, target),
+                     goal_family="dial_lock", env_kind="dial_lock",
+                     memory_path_=self._mem_path, budget=40, max_depth=24, seed=0)
+        self.assertIn(out["steps"].get("memory_replay", {}).get("status"),
+                      ("OPEN__REPLAY_FAILED", "OPEN__REPLAY_ERROR"))
+        # the loop fell through and completed honestly
+        self.assertEqual(out["status"], "PASS__PERFECT_ALGORITHM_RUN")
+
+
 class FreshFamilyTests(unittest.TestCase):
     """The honest claim: priors from a DIFFERENT instance of the same family
     must be verified against THIS instance before they are trusted. A fresh
