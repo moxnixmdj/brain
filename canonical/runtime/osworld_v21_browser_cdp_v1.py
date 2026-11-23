@@ -83,6 +83,32 @@ class BrowserCDP:
             pages = self._pages(browser)
             out_pages = []
             for page_index, page in enumerate(pages[:20]):
+                # Row membership is stamped on the element BEFORE the element list is
+                # read. The two passes used to run in the wrong order -- the reader ran
+                # first and the stamper second -- so every control came back untagged
+                # even though the stamping code was correct. Ordering is a correctness
+                # property here, not a style choice.
+                try:
+                    page.evaluate(
+                        """() => {
+                          const roots=[document];
+                          const push=(r)=>{for(const e of r.querySelectorAll('*'))
+                            {if(e.shadowRoot){roots.push(e.shadowRoot);push(e.shadowRoot);}}};
+                          push(document);
+                          const sel='li,tr,[role=listitem],[role=row],.todo-list>li';
+                          for (const root of roots)
+                            for (const r of root.querySelectorAll(sel)) {
+                              const t=(r.innerText||r.textContent||'').trim()
+                                        .replace(/\s+/g,' ');
+                              if (!t) continue;
+                              for (const c of r.querySelectorAll(
+                                  'input,button,a,[role=button],[role=link],[role=checkbox]'))
+                                if (!c.hasAttribute('data-brain-row'))
+                                  c.setAttribute('data-brain-row', t.slice(0,200));
+                            }
+                        }""")
+                except Exception:
+                    pass
                 try:
                     elements = page.locator(
                         "a,button,input,textarea,select,[role=button],[role=link],"
@@ -110,6 +136,7 @@ class BrowserCDP:
                             name:e.getAttribute('name')||'',
                             value:('value' in e ? String(e.value) : '').slice(0,240),
                             href:e.getAttribute('href')||'',
+                            brain_row:e.getAttribute('data-brain-row')||'',
                             checked:('checked' in e ? Boolean(e.checked) : null),
                             disabled:Boolean(e.disabled)
                         }))"""
@@ -131,6 +158,85 @@ class BrowserCDP:
                 # reported "0 items" while the app had done the work -- the words were
                 # present and invisible to the reader. `body_text` above is the light
                 # DOM; this is the composed tree, which is what a person actually sees.
+                # ROWS: a container that declares a text AND holds a control. This is
+                # how a person identifies a silent checkbox -- by the text beside it --
+                # and the relation is in the DOM, so it costs one traversal instead of
+                # being remembered per app.
+                try:
+                    rows = page.evaluate(
+                        """() => {
+                          const roots=[document];
+                          const push=(r)=>{for(const e of r.querySelectorAll('*'))
+                            {if(e.shadowRoot){roots.push(e.shadowRoot);push(e.shadowRoot);}}};
+                          push(document);
+                          const sel='li,tr,[role=listitem],[role=row],.todo-list>li';
+                          const out=[]; const seen=new Set();
+                          for (const root of roots)
+                            for (const r of root.querySelectorAll(sel)) {
+                              if (seen.has(r)) continue;
+                              const t=(r.innerText||r.textContent||'').trim()
+                                        .replace(/\s+/g,' ');
+                              if (!t) continue;
+                              const ctl=r.querySelector(
+                                'input[type=checkbox],[role=checkbox],input[type=radio]');
+                              if (!ctl) continue;
+                              seen.add(r);
+                              out.push({index: out.length, role: r.tagName.toLowerCase(),
+                                        text: t.slice(0,200),
+                                        control_role: (ctl.getAttribute('role')||'checkbox')
+                                          .toLowerCase(),
+                                        control_checked: Boolean(ctl.checked),
+                                        control_name: (ctl.getAttribute('aria-label')||'').trim()});
+                            }
+                          return out.slice(0,60);
+                        }""")
+                except Exception:
+                    rows = []
+                try:
+                    row_of = page.evaluate(
+                        """() => {
+                          const SEL = 'a,button,input,textarea,select,[role=button],[role=link],'
+                            +'[role=checkbox],[contenteditable=true],[tabindex]';
+                          const roots=[document];
+                          const push=(r)=>{for(const e of r.querySelectorAll('*'))
+                            {if(e.shadowRoot){roots.push(e.shadowRoot);push(e.shadowRoot);}}};
+                          push(document);
+                          const map=new Map();
+
+                          const all=[];
+                          // Filtered EXACTLY as `elements` is filtered. Pairing a filtered
+                          // list with an unfiltered one by index is how every control came
+                          // back holding the wrong row's text.
+                          for (const root of roots)
+                            for (const e of root.querySelectorAll(SEL)) {
+                              const r=e.getBoundingClientRect();
+                              const st=getComputedStyle(e);
+                              if (r.width>0 && r.height>0 && st.visibility!=='hidden'
+                                  && st.display!=='none') all.push(e);
+                            }
+                          const sel='li,tr,[role=listitem],[role=row],.todo-list>li';
+                          for (const root of roots)
+                            for (const r of root.querySelectorAll(sel)) {
+                              const t=(r.innerText||r.textContent||'').trim().replace(/\s+/g,' ');
+                              if (!t) continue;
+                              for (const c of r.querySelectorAll(
+                                  'input,button,a,[role=button],[role=link],[role=checkbox]'))
+                                if (!map.has(c)) {
+                                  map.set(c, t.slice(0,200));
+                                  try { c.setAttribute('data-brain-row', t.slice(0,200)); } catch {}
+                                }
+                            }
+                          return all.map(e => {
+                            try { return e.getAttribute('data-brain-row'); } catch { return null; }
+                          });
+                        }""")
+                except Exception:
+                    row_of = []
+                # The marker is authoritative. Pairing two lists by index was the bug:
+                # the row map and the element list are built by different traversals and
+                # a filtered list cannot be aligned with an unfiltered one.
+                for el in elements:
+                    el["row_text"] = el.get("brain_row") or None
                 try:
                     shadow_text = page.evaluate(
                         "() => { const out=[]; const walk=(r)=>{for(const e of r.querySelectorAll('*'))"
@@ -142,6 +248,7 @@ class BrowserCDP:
                     "page_index": page_index,
                     "url": page.url,
                     "title": page.title(),
+                    "rows": rows,
                     "body_text": re.sub(r"\s+", " ",
                                         (body_text or "") + " " + (shadow_text or "")).strip()[:20000],
                     "elements": elements[:MAX_ELEMENTS],
@@ -175,6 +282,40 @@ class BrowserCDP:
 
             if kind == "NAVIGATE":
                 page.goto(_url(op.get("url")), wait_until="domcontentloaded", timeout=30000)
+
+            elif kind == "CHECK_IN_ROW":
+                # A control that declares no name is still addressable: the row it
+                # sits in declares one, and that is where a person looks too.
+                row_text = _text(op.get("row_text"), "ROW_TEXT", 400)
+                desired = op.get("checked", True)
+                if not isinstance(desired, bool):
+                    raise BrowserCDPError("CHECKED_MUST_BE_BOOL")
+                # The container that holds a row is not always a listitem: implementations
+                # use li, tr, a custom element, or a div with a role. Try the roles the
+                # accessibility tree actually uses, then the plain tags, then whatever
+                # element owns this text -- and only then give up.
+                loc = None
+                for probe in (
+                    page.get_by_role("listitem").filter(has_text=row_text),
+                    page.get_by_role("row").filter(has_text=row_text),
+                    page.locator("li,tr,[role=listitem],[role=row]").filter(has_text=row_text),
+                ):
+                    try:
+                        if probe.count() == 0:
+                            continue
+                        cand = probe.first.get_by_role("checkbox")
+                        if cand.count() == 0:
+                            cand = probe.first.locator(
+                                "input[type=checkbox],[role=checkbox]")
+                        if cand.count() == 0:
+                            continue
+                        loc = cand.first
+                        break
+                    except Exception:
+                        continue
+                if loc is None:
+                    raise BrowserCDPError("ROW_CONTROL_NOT_FOUND")
+                loc.check(timeout=10000) if desired else loc.uncheck(timeout=10000)
 
             elif kind == "PRESS_POSITION":
                 # The last resort, and it is positional only because the NAME stopped
