@@ -717,6 +717,46 @@ def repeatable_places(usage: Mapping[str, Any]) -> set[str]:
     return out
 
 
+def _stray_operands(argv: Sequence[Any], page: Mapping[str, Any],
+                    takes_no_positional: bool,
+                    path_words: Sequence[str] = ()) -> list[str]:
+    """Bare operands on a command whose own `USAGE:` line declares no positional.
+
+    Every element after the command's own words is either a flag the page printed, the value of a
+    flag that takes one, or a bare operand. A value is never called stray: whether an option takes a
+    value is the page's statement (`takes_value`), not something guessed from the spelling. What
+    remains after those two are removed is what the program would read as a positional, and the page
+    has already said there is none.
+
+    `argv[0]` is the program and the words after it are the subcommands that reached the landing
+    page. Those are `path_words` -- every title on the route, not only the landing page's -- plus the
+    program name itself.
+    """
+    command_words = ({str(w) for w in path_words} | {str(page.get("title") or "")}) - {""}
+    if not takes_no_positional:
+        return []
+    flags = {str(o.get("flag")) for o in page.get("options") or []}
+    takes = {str(o.get("flag")) for o in page.get("options") or [] if o.get("takes_value")}
+    words = [str(a) for a in argv]
+    stray: list[str] = []
+    index = 0
+    while index < len(words):
+        item = words[index]
+        if item in takes and index + 1 < len(words):
+            index += 2
+            continue
+        if item in flags:
+            index += 1
+            continue
+        # the command's own words: the program and the subcommands that reached this page
+        if index == 0 or item in command_words:
+            index += 1
+            continue
+        stray.append(item)
+        index += 1
+    return stray
+
+
 def positional_grammar(usage: Mapping[str, Any]) -> list[str] | None:
     """The argument picture a usage line draws: FILE SOURCE DEST, SOURCE... DIRECTORY, ...
 
@@ -1569,6 +1609,29 @@ def _labels_the_value(value: Mapping[str, Any]) -> bool:
                  if re.search(r"\b" + re.escape(w) + r"\w*\s*[\"']?$", before, re.I)})
 
 
+def _named_by_the_request(slot: Mapping[str, Any], value: Mapping[str, Any]) -> bool:
+    """Did the request itself name THIS flag as the one that takes this value?
+
+    `_names_the_value` asks whether a flag's *description* names the value's phrase. It cannot answer
+    for prose, because prose carries the words it will become and not the words that introduced it.
+    `_labelled_prose` already records the association the request stated: for
+    `titled "X" with a description that explains the outage` it adds the clause with
+    `of: "--description"`, because the request printed `description` immediately before it.
+
+    That field was written and never read (measured 2026-11-23: `grep '"of"'` found the writer at
+    line 1926 and no reader), so the clause was placed by description-matching instead and landed in
+    the first free string slot: the plan was `--team "that explains the outage"`, putting the outage
+    text in the team field. The command exits 0 and a wrong field holds the value, which no gate sees.
+
+    Only an explicit label counts, and only when it equals this flag's spelling. A value with no label
+    returns False, leaving every existing behaviour untouched.
+    """
+    said = str(value.get("of") or "").strip().lstrip("-").lower()
+    if not said:
+        return False
+    return said == str(slot.get("flag") or "").strip().lstrip("-").lower()
+
+
 def _names_the_value(slot: Mapping[str, Any], value: Mapping[str, Any]) -> bool:
     """Does the flag's own description name this value, by the word the request labels it with?
 
@@ -1649,8 +1712,12 @@ def _bind(values: Sequence[Mapping[str, Any]], options: Sequence[Mapping[str, An
     for option in list(free):
         if len(free) < 1:
             break
+        # An explicit label the request stated outranks a resemblance in the flag's description.
         labelled = [v for v in others if id(v) not in used_values
-                    and _names_the_value(option, v)]
+                    and _named_by_the_request(option, v)]
+        if not labelled:
+            labelled = [v for v in others if id(v) not in used_values
+                        and _names_the_value(option, v)]
         if len(labelled) == 1:
             value = labelled[0]
             used.add(id(option))
@@ -1672,7 +1739,11 @@ def _bind(values: Sequence[Mapping[str, Any]], options: Sequence[Mapping[str, An
         if holder is not None:
             named = next((o for o in typed if id(o) not in used
                           and _accepts(slot_kind(o), value["kind"])
-                          and _names_the_value(o, value)), None)
+                          and _named_by_the_request(o, value)), None)
+            if named is None:
+                named = next((o for o in typed if id(o) not in used
+                              and _accepts(slot_kind(o), value["kind"])
+                              and _names_the_value(o, value)), None)
             if named is not None:
                 holder = named
             elif _labels_the_value(value):
@@ -1870,7 +1941,17 @@ def _labelled_prose(requirement: Mapping[str, Any], tree: Mapping[str, Any]) -> 
         span = (sequence[tail[0]].start(), sequence[tail[-1]].end())
         if any(span[0] < b and a < span[1] for a, b in spans):
             continue
+        # A CLAUSE IS UNQUOTED PROSE. Quoted text is already a value and was registered as one above;
+        # a clause that reaches into it is not prose, it is a value with the request's punctuation
+        # stuck to it. Measured 2026-11-23: `linear: create an issue in the team "Platform" titled
+        # "alpha"` planned `--title 'Platform" titled "alpha'` -- the `--team` clause ran from
+        # `Platform` through the closing quote and past `titled` into the second value, because the
+        # tail stops only at a sentence end (`:`, `;`, `.`) and the request happens to start with
+        # `linear:` so none survives in the gap. The command exited 0 and wrote a wrong title, so no
+        # gate saw it: the flag was filled, only with the wrong text.
         clause = instruction[span[0]:span[1]].strip()
+        if '"' in clause or "'" in clause:
+            continue
         content = words_of(clause)
         if len(content) < 2:
             continue
@@ -3507,7 +3588,29 @@ def plan(requirement: Mapping[str, Any], tree: Mapping[str, Any],
         candidate["values_named"] = len(named)
         candidate["values_unplaced"] = unplaced[:8]
         candidate["covered"] = not unplaced
-    plans.sort(key=lambda c: (0 if c.get("complete") else 1, 0 if c.get("covered") else 1))
+        # THE PAGE'S OWN GRAMMAR SAYS WHETHER A BARE OPERAND IS LEGAL. `linear issue create [flags]`
+        # declares no positional at all, so a bare operand after that prefix is not something the
+        # command accepts -- it is a value that found no flag and was appended to the end of the
+        # line. Measured 2026-11-23: `linear: create an issue titled "X" with a description that
+        # explains the outage` ranked `issue create --team X 'that explains the outage'` FIRST --
+        # replaying a demonstration, `--title` dropped as already spent, and the prose appended as a
+        # stray operand -- above the correct `--title X --description '...'` candidate that ranked
+        # second. Both were incomplete, so the completeness key could not separate them. The valid
+        # reading existed and lost to a command the document says cannot be spelled.
+        #
+        # Only the landing page's own picture decides this, and only when it states the command
+        # takes no positional: `picture` is derived from the `USAGE:` line the page printed, so
+        # this is reading the document, not a rule about flags.
+        page_picture = positional_grammar((nodes[-1].get("usage") or {}) if nodes else {})
+        takes_no_positional = bool(page_picture) and "positional" not in page_picture
+        route_words = [str(n.get("title") or "") for n in nodes[:-1]] if nodes else []
+        stray = _stray_operands(candidate["argv"], nodes[-1] if nodes else {},
+                                takes_no_positional,
+                                path_words=route_words) if takes_no_positional else []
+        candidate["stray_operands"] = stray[:8]
+        candidate["grammatical"] = not stray
+    plans.sort(key=lambda c: (0 if c.get("grammatical", True) else 1,
+                              0 if c.get("complete") else 1, 0 if c.get("covered") else 1))
 
     # `complete` at the top means *the request was answered*, not "some command satisfies its own
     # page's required flags". Those came apart in a way that mattered: `Add an issue to the project

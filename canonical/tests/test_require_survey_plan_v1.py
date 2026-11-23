@@ -1519,3 +1519,82 @@ def test_only_the_pages_own_verb_is_grounding_and_synonyms_are_not():
     assert plans["Search"]["complete"] is True, plans["Search"].get("refusals")
     for synonym in ("Show", "Find", "List"):
         assert plans[synonym]["complete"] is False, synonym
+
+
+
+# ----------------------------------------------------------------------------------------------------
+# Three defects found by asking the planner for a long-horizon task, 2026-11-23. Each was silent: the
+# command exited 0 and wrote a plausible wrong value, so no gate and no exit code noticed.
+# ----------------------------------------------------------------------------------------------------
+
+def test_a_clause_never_reaches_into_a_quote() -> None:
+    """The clause scanner read a flag name and let its prose tail run THROUGH a quoted value.
+
+    `... the team "Platform" titled "alpha"` planned `--title 'Platform" titled "alpha'`. The tail
+    stops at `:`, `;` or `.`, and the request began `linear:` -- so no sentence end survived in the
+    gap and the `--team` clause swallowed the next value's own text. The command exited 0, which is
+    why this needs a test and not a gate.
+    """
+    requirement = R.require('linear: create an issue in the team "Platform" titled "alpha"')
+    for value in requirement.get("values") or []:
+        assert '"' not in str(value.get("value") or ""), \
+            "a value carries a raw quote: %r" % (value.get("value"),)
+
+
+def test_genuine_prose_still_becomes_a_value() -> None:
+    """The fix refuses only clauses that reach into a quote; unquoted prose must still bind.
+
+    A refusal here would trade one defect for a worse one -- the body would never be planned, and
+    the page documents `--description` as exactly where prose goes.
+    """
+    tree = R.survey(str(_HERE.parent / "programs/bin/linear"))
+    requirement = R.require(
+        'linear: create an issue titled "X" with a description that explains the outage')
+    labelled = R._labelled_prose(requirement, tree)
+    values = [(v.get("value"), v.get("of")) for v in labelled.get("values") or []]
+    assert ("that explains the outage", "--description") in values
+
+
+def test_the_valid_plan_outranks_the_malformed_one() -> None:
+    """`linear issue create [flags]` declares no positional, so a trailing operand cannot run.
+
+    The correct reading existed and ranked SECOND behind a command the page cannot spell: `_demo_plan`
+    appends a value that finds no flag as a bare operand. Both candidates were incomplete, so the
+    completeness key could not separate them; the page's own `USAGE:` grammar can.
+    """
+    tree = R.survey(str(_HERE.parent / "programs/bin/linear"))
+    requirement = R.require(
+        'linear: create an issue titled "X" with a description that explains the outage')
+    plans = (R.plan(requirement, tree).get("plans") or [])
+    assert plans
+    assert plans[0].get("stray_operands") == [], \
+        "the first plan carries an operand its page cannot spell: %r" % (plans[0].get("argv"),)
+    assert plans[0].get("grammatical")
+
+
+def test_a_page_that_declares_a_positional_keeps_its_operands() -> None:
+    """The rule must not fire on a page whose usage line HAS a positional."""
+    argv = ["tool", "copy", "source.txt", "dest.txt"]
+    page = {"title": "copy",
+            "usage": {"usage": "tool copy SOURCE DEST", "positional": ["SOURCE"]},
+            "options": []}
+    assert R._stray_operands(argv, page, False, path_words=[]) == []
+
+
+def test_the_requested_label_is_what_the_bind_reads() -> None:
+    """`_labelled_prose` recorded `of: --description` and nothing ever read it."""
+    value = {"kind": "literal", "labelled": True, "value": "the outage text", "of": "--description"}
+    assert R._named_by_the_request({"flag": "--description"}, value)
+    assert not R._named_by_the_request({"flag": "--team"}, value)
+
+
+def test_an_unlabelled_value_is_left_alone() -> None:
+    """No label means no opinion: every existing behaviour must be untouched."""
+    assert not R._named_by_the_request({"flag": "--description"},
+                                       {"kind": "literal", "value": "x"})
+
+
+def test_a_page_that_declares_a_positional_is_still_ranked_by_grammar() -> None:
+    """`takes_no_positional` is decided by the page, and only a page stating none is checked."""
+    assert R._stray_operands(["t", "copy", "a"], {"title": "copy", "options": []},
+                             False, path_words=[]) == []

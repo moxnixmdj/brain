@@ -215,7 +215,13 @@ def run_task(task: dict, planner, root: pathlib.Path) -> dict:
             if not hit:
                 problems.append(f"{task['expect_collection']} never held {want}")
 
-    return {"id": task["id"], "ok": not problems, "problems": problems,
+    # WHAT THE ASSERTION ACTUALLY WAS. "pass by effect" was one phrase over two different tests: some
+    # tasks assert the STATE changed, and some assert only that a command with the right SHAPE was
+    # produced. A shape is not an effect -- a planner that emits the correct argv and a program that
+    # ignores it both pass the second kind. Measured 2026-11-23: 5 tasks assert state, 8 assert shape,
+    # and NONE assert both. The report says which, per task, instead of implying the stronger claim.
+    kind = "STATE" if task.get("expect_collection") else "SHAPE"
+    return {"id": task["id"], "ok": not problems, "problems": problems, "kind": kind,
             "commands": [e["argv"] for e in ran], "after": after}
 
 
@@ -232,12 +238,17 @@ def main(argv: list[str] | None = None) -> int:
     passed = sum(1 for row in rows if row["ok"])
     for row in rows:
         mark = "ok  " if row["ok"] else "FAIL"
-        print(f"{mark} {row['id']}")
+        print(f"{mark} [{row['kind']:5s}] {row['id']}")
         if not row["ok"]:
             for problem in row["problems"]:
                 print(f"       {problem}")
             print(f"       ran: {row['commands']}")
-    print(f"\n{passed}/{len(rows)} tasks pass by effect")
+    state = sum(1 for r in rows if r["kind"] == "STATE" and r["ok"])
+    shape = sum(1 for r in rows if r["kind"] == "SHAPE" and r["ok"])
+    state_total = sum(1 for r in rows if r["kind"] == "STATE")
+    print(f"\n{passed}/{len(rows)} tasks pass")
+    print(f"  {state}/{state_total} assert the STATE changed; {shape}/{len(rows) - state_total} assert "
+          f"the command SHAPE was produced")
     return 0 if passed == len(rows) else 1
 
 

@@ -4719,3 +4719,75 @@ is never quoted without the definition that produced it.
 **The lesson is a rule, not an anecdote:** a measurement that cannot see the change it is measuring will
 report failure forever, and a measurement nobody can reproduce is not evidence. This project records that
 kind of mistake because it has now made it three times in three different layers.
+
+## §A88 — the test the frontier fails, and three defects it found in an hour
+
+### What the research says the hard part is
+
+OSWorld 2.0 (arXiv 2606.29537, June 2026) is the hardest open computer-use benchmark. Its best agent
+scores **20.6% strict completion**; agents go from ~80% on OSWorld 1.0 to ~20% here. The paper does not
+blame perception or software proficiency. It blames **the inability to maintain a coherent long-horizon
+state model, detect and repair errors, and handle implicit state and a dynamic environment**, and its
+own task table weights "Dynamic Environment" at 10/108. Success also collapses with horizon: 20–24% below
+45 minutes, near-zero above 2 hours.
+
+That is a precise statement of what to test, and it was not what this repository tested. `tasks_v1`
+tested one-step planning. `unseen_program_v1` tested reading an unfamiliar tool's documentation. Neither
+tests state carried across steps, an environment that changes underneath the agent, or two sources that
+disagree.
+
+### The suite: five tasks, judged on final state alone
+
+`canonical/tests/programs/long_horizon_v1.py`, run by pytest via `test_long_horizon_v1.py`. No task
+states an argv; the judge reads the resulting store, so a correct command that changed nothing fails and
+an odd command that produced the right state passes.
+
+| task | what it isolates | result |
+|---|---|---|
+| `sequence-seven-issues` | 7 steps, exact final state, no duplicates or misses | pass |
+| `spurious-optional-flag` | a value the request never stated | pass |
+| `mutated-between-steps` | the environment is renamed underneath the agent mid-task | pass |
+| `conflict-between-sources` | a pre-existing P1 and an authoritative message saying P0 | pass |
+| `cross-service` | two programs, two state files, one task | pass |
+
+**5/5.** It was **0/4** before the three defects below were fixed, and the 0 was almost dismissed as a
+harness bug — which it was, twice, and then it was not.
+
+### Three defects, each silent, each found by this suite
+
+1. **A clause reached into a quoted value.** `... the team "Platform" titled "alpha"` planned
+   `--title 'Platform" titled "alpha'`. The prose tail stops at `:`, `;` or `.`; the request began
+   `linear:`, so no sentence end survived in the gap and the `--team` clause swallowed the next value's
+   text. Exit code 0. Fixed: a clause containing a quote is not prose, because quoted text is already a
+   value.
+2. **A demonstration replay appended a stray operand.** `linear issue create [flags]` declares no
+   positional, yet the plan was `issue create --team X 'that explains the outage'` — a value that found
+   no flag, appended to the end of the line. The correct `--title X --description '...'` candidate
+   existed and ranked **second**, and both were "incomplete", so the completeness key could not separate
+   them. Fixed: the landing page's own `USAGE:` grammar decides whether a bare operand is legal, and a
+   plan the page cannot spell loses to one it can.
+3. **`of:` was written and never read.** `_labelled_prose` records which flag the request named —
+   `of: "--description"` — and `grep` found the writer and no reader. So prose was placed by
+   description-matching and landed in the first free string slot: `--team 'that explains the outage'`.
+   Fixed: an explicit label the request stated outranks a resemblance.
+
+None of the three would have been caught by an exit code, a test that asserts a command's shape, or a
+gate. Each produced a command that ran and wrote a plausible wrong value. That is the failure mode this
+project keeps rediscovering: **success is not evidence, and a shape is not an effect.**
+
+### The old suite was overclaiming, and now says so
+
+`tasks_v1` printed "13/13 tasks pass by effect". Measured: **5 assert the state changed, 8 assert only
+that a command with the right shape was produced, and 0 assert both.** A planner that emits the correct
+argv and a program that ignores it both pass the second kind. The report now prints
+`5/5 assert the STATE changed; 8/8 assert the command SHAPE was produced` and labels each row. The tasks
+were not changed — only the claim about them.
+
+### What remains
+
+The five tasks are a floor, not a benchmark: five tasks cannot estimate a rate, and all five run against
+fixture programs whose state is a JSON file rather than a GUI, a browser, or a real filesystem. The next
+honest step is the same one OSWorld 2.0 measures and this does not: **horizon under an environment that
+fights back** — a store that rejects a command for a reason the documentation does not state, so the
+agent must repair from the refusal and continue. A87 built the repair loop and proved it works on a
+capability. It has not been joined to the long-horizon driver.
