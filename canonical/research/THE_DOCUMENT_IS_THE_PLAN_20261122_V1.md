@@ -3522,3 +3522,86 @@ sentence that describes an outcome is refused.** The next round's question is th
 we match descriptions better" — that is measured dead — but **where a description→program mapping can
 come from that is not pattern matching**: the same place a person gets it, which is having done it
 before, once. That is the acquisition loop, and it is the next bottleneck.
+
+---
+
+## §A75 — WHERE THE SINGLE-EXPERIENCE LOOP ACTUALLY BREAKS (2026-11-22, measurement only)
+
+A74 closed with the honest boundary: **a sentence that names its program runs; one that describes an
+outcome is refused.** This round asked where a description→program mapping could come from, and
+measured rather than guessed. No code was changed; the finding is the deliverable.
+
+### What I checked first (exhausting the project before building, as required)
+
+`procedure_memory_v1` is the single-experience mechanism and it is **already right**:
+
+* it records only from a VERIFIED receipt (`learn(..., verified=False)` records nothing);
+* a remembered procedure is a CANDIDATE, never a decision — it is injected into `merged` at
+  `grounded_action_v1` line ~628, **before** the survivor loop, so it passes the same precondition
+  probe, the same kind-contradiction check and the same binding as anything the grounder proposed;
+* its own docstring already names the defect it was built to fix: *"`recall_resolution` can only
+  choose among survivors the router has already narrowed to, so it can never reach a task the router
+  missed."*
+
+So the mechanism the mission hypothesises — learn once, apply later — **is built, wired, and
+constraint-clean.** What follows is what is actually missing.
+
+### The measurement
+
+Taught one procedure and probed it:
+
+| probe | similarity | verdict |
+|---|---|---|
+| `list the files in this folder` (exactly what was taught) | **1.0** | hit |
+| `list files` | **0.5** | generalises — "the / in this folder" drop out |
+| `show me the files here` | **None** | miss — different words for the same task |
+| `compress the folder` | **None** | correct — a different task |
+
+Then ran the real front door with that memory in place:
+
+```
+ra.solve("list the files in this folder")
+  -> FAIL_CLOSED__ROUTE_ADMISSION_REJECTED
+     compiled_capability_id: source.candidates.enumerate.stdlib
+```
+
+**The memory was recalled (similarity 1.0) and it still did not rescue the request.** That is the
+precise failure, and it is not a matching problem.
+
+### The real bottleneck
+
+> **A remembered procedure stores WHICH CAPABILITY answered. It does not store WHAT COMMAND made it
+> work. `shell.command.run` with `['ls','-la']` is a solved task; `shell.command.run` with no argv is
+> not a task at all.**
+
+So the candidate the memory contributes is `shell.command.run` — a row with an ARGV slot and nothing
+to put in it. It fails binding, exactly as it would have with no memory. Meanwhile
+`source.candidates.enumerate.stdlib` survives admission because it can bind, and the request is
+refused by *that* row's weak evidence. Recall did its job and could not help, because what it
+recalled was incomplete.
+
+This also explains A70's success without contradicting it: the archive procedure stored
+`archive.tar_gz.create_from_manifest`, whose inputs are all derivable from the sentence. It worked
+because the capability was self-sufficient. `shell.command.run` is the one row that **is not
+self-sufficient** — its content is the command — and that is exactly the row an everyday request
+needs.
+
+### What the next round must add, and what it must not
+
+The stored form must include the **generalised command**: not the literal `ls -la` (an environment
+changes, and a literal replay is the "saving the exact experience in a dumb way" the mission warns
+against), but the argv with the *slots* identified — program and flag shape — so a new operand can be
+bound to it. That is the difference between remembering an action and learning a skill.
+
+Not to be built: a description→program index. Measured dead in A74 — the right program ranks 11th,
+absent, and 66th when the sentence's words are searched against every program's `--help`. Any
+mechanism built on that scores would invent a program on almost every sentence.
+
+### Verified (this round changed nothing, so nothing needed re-verifying)
+
+| check | result |
+|---|---|
+| `procedure_memory_v1.learn` with `verified=False` | records nothing (`ONLY_A_VERIFIED_RECEIPT_MAY_TEACH_A_PROCEDURE`) |
+| recall placement | before the survivor loop — a candidate, not a tie-break |
+| similarity behaviour | 1.0 exact, 0.5 paraphrase, None synonym-miss, None correct-reject |
+| `experience_v1.json` | restored byte-for-byte after the experiment (`git status` clean for it) |
