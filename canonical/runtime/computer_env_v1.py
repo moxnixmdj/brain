@@ -1121,7 +1121,14 @@ def apply(recipe: Mapping[str, Any], src: str | pathlib.Path,
                     or _file_sha256(source) != original_hash):
                 return {"pass": False, "status": "OPEN__INPUT_CHANGED_DURING_APPLICATION"}
             suffix = ps.suffix_for_name(name)
-            good, why = ps.verify_round_trip(staged_output, suffix)
+            # The recipe that made this file is in hand, so the tool that made it can be asked for
+            # its own inverse when the suffix names nothing the format table knows. See
+            # program_synthesis_v1.verify_by_inverse: the tool states a reversing flag in its own
+            # help, and the bytes decide whether it really was that transform.
+            good, why = ps.verify_round_trip(staged_output, suffix,
+                                             recipe={**recipe, "argv": argv,
+                                                     "program": str(argv[0])},
+                                             source=staged_source)
             if not good:
                 return {"pass": False, "status": "OPEN__OUTPUT_NOT_REALLY_THAT_FORMAT",
                         "verification": why, "argv": argv}

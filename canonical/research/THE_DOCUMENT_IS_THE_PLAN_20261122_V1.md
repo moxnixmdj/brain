@@ -2757,3 +2757,93 @@ states — that one program's standard output can be another's standard input. N
 the other, and the shell has no page here. Inventing that fact from a shared word chose the wrong
 flag twice. This is where instant knowledge would have to supply something, and the project's own
 claim is that it must come from the store or the web, not from a parameter or a guess.
+
+### A67 — the inverse is in the tool's own help, and the loop above it is gated
+
+Last session closed with a boundary: cross-program composition needs a fact no document states. This
+session went looking for where such a fact is supposed to come from, and found three things — one
+working, one newly built, one deliberately closed.
+
+**Found working — the environment is already the knowledge source.** `computer_env_v1` reads the
+programs on PATH at runtime and turns each into an action; `program_actions` records the argv and the
+redirection in `env.recipes`. Nothing in it knows that `gzip` compresses:
+
+    ComputerEnv(seed={'input.txt': ...}); register(program_actions(env, ['gzip','tar','cat','bzip2']))
+      run_gzip  ->  {'program': 'gzip',  'argv': ['gzip','-c','{input}'], 'stdout_to': 'out.bin'}
+      run_tar   ->  {'program': 'tar',   'argv': ['tar','-c','{input}'],  'stdout_to': 'out.bin'}
+
+and the learner **tells them apart by what the world shows**. Compressing 3000 bytes of text:
+
+| action | out.bin |
+|---|---|
+| `run_gzip` | 57 bytes |
+| `run_bzip2` | 56 bytes |
+| `run_cat` | **3000 bytes** |
+
+No model call, no table, no world knowledge. `discover()` then returns
+`PASS__SINGLE_ACTION_FOUND_AND_VERIFIED` with plan `["run_gzip"]`, and refuses rot13 and AES with
+`OPEN__FORMAT_CARRIES_NO_EVIDENCE` rather than inventing something.
+
+**Built — verification derived from the tool instead of a format table.** `_ROUND_TRIP` in
+`program_synthesis_v1` was a hand-grown table of ~20 suffixes, each with a snippet that opens the
+file with the library that owns the format. That is a knowledge house in miniature, and the cost was
+visible: "encode this as base64" came back `NO_VERIFIER_FOR_FORMAT` with `base64` on PATH.
+
+The table is unnecessary for the largest class, because every such tool states its own inverse:
+
+    gzip    -d, --decompress  decompress
+    xz      -d, --decompress  force decompression
+    bzip2   -d --decompress   force decompression
+    base64  -d, --decode      decode data
+
+So `inverse_flag_for` reads the tool's help for a flag whose **name** carries a reversing prefix, and
+`verify_by_inverse` runs it on the output and compares bytes with the source. Spelling proposes; the
+bytes dispose. Measured gain, unknown suffix, tool that states an inverse:
+
+| tool | table | inverse |
+|---|---|---|
+| `xz` output, `.unknownext` | `CONTAINER_MISMATCH` | **verified** |
+| `bzip2` output, `.unknownext` | `CONTAINER_MISMATCH` | **verified** |
+| `base64` | `NO_VERIFIER_FOR_FORMAT` | **verified** |
+| `base32` | `NO_VERIFIER_FOR_FORMAT` | **verified** |
+
+and it does **not** loosen the guard: `cat` (no stated inverse) still refuses, and
+`openssl enc` still refuses — encryption's undo is `-d` with the same cipher, which the help never
+states as a reversing *name*, so the mechanism correctly declines rather than guessing.
+
+**The case that shows it is reading rather than matching.** `tar --help` prints `--delete`,
+`--dereference`, `--delay-directory-restore` — all carrying the same `de` prefix, none an inverse.
+`inverse_flag_for` proposes `--delete`; `verify_by_inverse` runs it and gets
+`INVERSE_RETURNED_DIFFERENT_BYTES`. Rejected, with no word list and no exception.
+
+**Found closed — the learning loop above all this is gated, and correctly.** `curriculum_v1.study()`
+is the loop the mission describes: try the cheapest channel, stop when the gap closes. Every channel
+that can act is stubbed:
+
+    _try_explore        -> refuse unconfined computer exploration until a boundary is admitted
+    _try_documentation  -> refuse unconfined automatic execution until a boundary is admitted
+    _try_compose        -> refuse
+
+and `computer_execution_boundary_v1` says in its own header: *"No request flag, process environment
+or caller can use it to grant execution authority."* So every gap returns
+`FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT`. Three tests in
+`test_computer_env_v1.py` (`TransferTests`) fail for exactly this reason and fail identically without
+this session's changes — verified by stashing. They are not regressions; they are tests of a channel
+that was closed on purpose.
+
+`confined_dispatch_v1` is the admitted path, and it declares **13 capabilities, all static analysis**
+(`python.source.taint_flow.v1`, `python.vcs.merge_conflict.resolve.v1`, …). Nothing that runs an
+arbitrary program. That is a deliberate posture, not an oversight, and bypassing it to make a demo
+pass would be the exact shortcut the laws forbid.
+
+**So the real bottleneck is now precisely named, and it is not knowledge and not verification.** The
+machine can discover what a program does, verify it honestly, and record it. It cannot *act* on that
+discovery outside the four static-analysis capabilities, because no reviewed confinement carrying
+effect-declaration admits arbitrary exploration. The confinement that exists is real — worktree
+clone, byte-identical host guarantee, per-effect sha256 receipt — but it is scoped to declared
+capabilities. Widening it is a security decision with a review, not a code change I should make
+silently to turn three red tests green.
+
+**Verified this session:** 7 new tests on the inverse mechanism (including the `tar --delete`
+rejection and the "does not loosen the guard" case), 21 passing across both verification suites, 78
+planner tests, 13/13 effect tasks, and `gzip`/`xz`/`bzip2` all discovered-and-verified on real files.

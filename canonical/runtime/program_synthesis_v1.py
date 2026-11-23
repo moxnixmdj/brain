@@ -374,8 +374,115 @@ def verifier_version() -> str:
     return hashlib.sha256(blob.encode("utf-8")).hexdigest()[:12]
 
 
-def verify_round_trip(out: pathlib.Path, suffix: str,
-                      timeout: float = 15.0) -> tuple[bool, str]:
+# --------------------------------------------------------------------------- #
+# THE INVERSE IS IN THE TOOL'S OWN HELP
+# --------------------------------------------------------------------------- #
+# `_ROUND_TRIP` above is a table of formats, one hand-derived entry at a time. That is a knowledge
+# house in miniature, and it is the one place in this machine where a format the author never
+# thought of is *unverifiable* rather than merely unknown -- "encrypt f.txt with aes256" came back
+# OPEN__FORMAT_CARRIES_NO_EVIDENCE while `openssl` sat on PATH able to do exactly that.
+#
+# The table is not needed for the largest class of transformations, because the tool states its own
+# inverse in its own help text:
+#
+#     gzip --help      -d, --decompress  decompress
+#     xz --help        -d, --decompress  force decompression
+#     base64 --help    -d, --decode      decode data
+#
+# Both directions are the same flag with a `de` prefix, and the recipe that produced the file is
+# already recorded (`gzip -c {input}`, `base64 {input}`). So the round trip is derivable: take the
+# recipe's program, ask it for the flag whose name is the inverse of the flag it used, run it on the
+# output, and compare with the input's bytes. No table, no suffix, and the check is exact -- a
+# compressor that did not actually compress fails on the bytes, not on a guess about the suffix.
+_INVERSE_PREFIXES = ("de", "un", "dec", "un")
+
+
+def inverse_flag_for(program: str, used: Sequence[str], *, timeout: float = 10.0
+                     ) -> str | None:
+    """The flag this program states as the inverse of the one it was run with, or None.
+
+    Read from the program's own help, not from a table. One fact only, and it is spelling: the
+    inverse's *name* carries a reversing prefix (`compress`/`decompress`, `encode`/`decode`,
+    `base32`/`debase32`). The name must carry it -- not the sentence around it, because
+    `-c, --stdout  write on standard output ... decompress` merely mentions the word and would
+    otherwise return the flag the recipe already used.
+
+    This proposes; it does not decide. `tar --delete` also carries a `de` prefix and is not an
+    inverse of `tar -c`, so the caller runs the flag and compares bytes -- see
+    `verify_by_inverse`. Spelling narrows the search to a handful of candidates; the world picks.
+    """
+    import subprocess
+    for args in ((program, "--help"), (program, "-h"), (program, "--usage")):
+        try:
+            proc = subprocess.run(args, capture_output=True, text=True, timeout=timeout)
+        except Exception:  # noqa: BLE001 - a program that cannot be asked has no help
+            continue
+        text = (proc.stdout or "") + (proc.stderr or "")
+        if not text.strip():
+            continue
+        # One help line per flag: `  -d, --decompress  decompress` or `  -d, --decode  decode data`.
+        # The flags are whatever the line prints before the description; the description is what
+        # the tool says the flag does. A flag whose *description* is the reversing form of a word
+        # the recipe used is the inverse -- `decompress` of `compress`, `decode` of `encode`. The
+        # short form is included because `gzip -d` is how it is actually written.
+        for line in text.splitlines():
+            # The flag's own NAME carries the inverse, not the sentence around it. `-d,
+            # --decompress` names the reversing direction; `-c, --stdout  write on standard
+            # output ... decompress` merely mentions it in its description, and matching the whole
+            # line returned `-c` -- the flag the recipe already used, i.e. the transform run twice.
+            names = [m.group(1) for m in
+                     re.finditer(r"(?<![\w-])(--[A-Za-z][A-Za-z0-9_-]+)", line)]
+            for name in names:
+                stem = name.lstrip("-").lower()
+                for prefix in _INVERSE_PREFIXES:
+                    if stem.startswith(prefix) and len(stem) > len(prefix) + 3:
+                        short = re.match(r"^\s*(-[A-Za-z])\b", line)
+                        return short.group(1) if short else name
+        return None
+    return None
+
+
+def words_of_inverse(text: str) -> list[str]:
+    """Words of a help line, lowercased, no stop words -- the tool's own vocabulary."""
+    return re.findall(r"[a-z]{3,}", str(text or "").lower())
+
+
+def verify_by_inverse(out: pathlib.Path, recipe: Mapping[str, Any], source: pathlib.Path,
+                      *, timeout: float = 20.0) -> tuple[bool, str]:
+    """Run the recorded tool's own stated inverse on the output and compare to the source.
+
+    The strongest check available, because it uses nothing but what the tool printed and what the
+    files contain: if `gzip -d out.bin` gives back the source bytes, the transformation really was
+    a compression of that source, whatever the file is called. If it gives back anything else, or
+    the program has no stated inverse, this says so and the caller decides.
+    """
+    import subprocess
+    argv = [str(a) for a in (recipe.get("argv") or [])]
+    if not argv:
+        return False, "NO_RECIPE_TO_INVERT"
+    program = str(recipe.get("program") or argv[0])
+    back = inverse_flag_for(program, argv[1:], timeout=timeout)
+    if not back:
+        return False, "PROGRAM_STATES_NO_INVERSE"
+    if not out.is_file():
+        return False, "NO_OUTPUT_TO_INVERT"
+    try:
+        proc = subprocess.run([program, back], input=out.read_bytes(),
+                              capture_output=True, timeout=timeout)
+    except Exception as exc:  # noqa: BLE001
+        return False, "INVERSE_RUN_FAILED:" + type(exc).__name__
+    if proc.returncode != 0:
+        return False, "INVERSE_REFUSED:" + back
+    original = pathlib.Path(source).read_bytes() if pathlib.Path(source).is_file() else b""
+    if not original:
+        return False, "NO_SOURCE_TO_COMPARE"
+    return (proc.stdout == original), ("INVERSE_RETURNED_THE_SOURCE" if proc.stdout == original
+                                       else "INVERSE_RETURNED_DIFFERENT_BYTES")
+
+
+def verify_round_trip(out: pathlib.Path, suffix: str, *, timeout: float = 15.0,
+                      recipe: Mapping[str, Any] | None = None,
+                      source: pathlib.Path | None = None) -> tuple[bool, str]:
     """Open it with the library that owns the format. If it will not open,
     it is not that format, however many bytes it has."""
     import subprocess
@@ -389,6 +496,15 @@ def verify_round_trip(out: pathlib.Path, suffix: str,
         if wrong:
             return False, "CONTAINER_MISMATCH:" + wrong
     snippet = _ROUND_TRIP.get(key)
+    if not snippet and recipe:
+        # The suffix names no format this table knows. The tool that made the file may still state
+        # its own inverse in its own help, and if it does the round trip is exact -- the source
+        # bytes come back or they do not. Measured on suffixes the table has never seen:
+        # `base64`, `base32`, and any unknown extension over `xz`/`bzip2` output all verify here
+        # and were NO_VERIFIER_FOR_FORMAT / CONTAINER_MISMATCH before.
+        ok, why = verify_by_inverse(out, recipe, source) if source is not None else (False, "")
+        if ok:
+            return True, why
     if not snippet:
         # AN UNCHECKED FORMAT IS NOT A VERIFIED ONE.
         #
