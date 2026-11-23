@@ -1177,3 +1177,29 @@ filesystem kind.
 NOT §6: no benchmark, no new mechanism, no cross-kind transfer. The browser
 direction's durability half is now measured end-to-end: learn once (page) ->
 persist to disk -> fresh process replays instantly, content observed live.
+
+## 34. Multi-page cross-process persistence (2026-11-23, measured)
+
+§33 measured cross-process persistence for the single-page browser kind.
+§34 is the multi-page cell: TEACH on fixture A (a real cross-page carry —
+form on page A redirects to page B via `b.html?name=abc`) in one process;
+a fresh process B then replays the admitted rule against a different-content
+workflow — the mission's literal "learns it permanently" claim for the
+redirect shape.
+
+  CHILD_A (process A): TEACH on fixture A, admission on fresh B,C ->
+           ADMIT, rule ga-70024af2f8f0851d persisted to disk
+           (schema PROJECT_BRAIN_PA_MEMORY_V1, 2423 bytes) — 194.1 s.
+  CHILD_B (process B, fresh): fresh fixture D (different content) ->
+           INSTANT_RECALL, PASS__REPLAY_FROM_MEMORY, rule
+           ga-70024af2f8f0851d, scan_states None (zero re-scan), 17.6 s.
+
+Honest disk check: the store holds 1 rule (scope env_kind=browser_page,
+goal_family=generic) and 1 kind of priors (browser_page). The warm phase
+never re-scans or re-derives. The redirect is a live page navigation, not a
+trusted transition: the warm phase's "PASS__REPLAY_REACHED_GOAL" is
+observed by execution — the predicate re-reads the live page after the
+redirect, in the fresh process.
+
+NOT §6: no benchmark, no new mechanism. The browser direction is now
+measured end-to-end in both shapes (single-page §33, multi-page §34).
