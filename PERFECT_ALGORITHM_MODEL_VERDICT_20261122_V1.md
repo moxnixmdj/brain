@@ -519,3 +519,30 @@ What this does and does not prove:
 - The store is a JSON file at `canonical/astra_runtime/state/PERFECT_ALGORITHM_MEMORY_V1.json`
   (or the caller's `memory_path_`), atomic write, schema-checked on load, refused on
   schema mismatch — never a silent reset.
+
+## 16. Local-guide tier measured; stale §5 claims corrected; §3 bounded honestly (2026-11-23)
+
+The §5 verdict record claimed man pages / --help were "not yet part of the tier".
+Measured against the current tree: the local instant-knowledge tier reads all three
+tiers — README/.md docs, the named tool's own `--help` output, and the tool's man page
+(gunzip + rough nroff parse, honestly labeled rough, never ground truth). 13/13 local
+guide tests pass (help tier, man-page fallback, thin-match refusal, missing-tool refusal).
+Measured live: `how to use gzip` (tools=[gzip]) -> PASS via tool_help; `how to use
+tar archive` (tools=[tar]) -> PASS via tool_help; thin queries refuse.
+The local tier is therefore the completeness-gated "ask the right question" layer it
+was built to be — offline, version-matched, honest about what it refuses.
+
+Carried-model honest answer, unchanged: 0 verified edges on fresh instances; fresh
+re-derivation (0.1 s warm for same-shape, 10–60 s cold); stale priors refused. This is
+not a bug to fix by trust — it is the honest ceiling of one experience to give a
+different instance: one admitted GENERALIZED RULE, never one instance's trace.
+
+§3 honest summary for the mission, having recorded §15–16:
+- REAL: per-goal file-transform learning with INSTANT_RECALL warm replay (5+ directions),
+  multi-file bundle verification, cross-process persistence of admitted rules,
+  completeness-gated local instant-knowledge tier, fresh-instance admission, refusal
+  hygiene throughout.
+- UNSUPPORTED, measured: carried-model generalization across content.
+- UNREACHED / UNCLAIMED: real repo/code-repair envs (snippet anti-unifier exists and is
+  tested — `learn_and_admit_code_repair` + fresh-defect `replay_code_repair` — but the
+  repo env does not); GUI/browser/OSWorld/SWE-bench/Terminal-Bench (§6 open).
