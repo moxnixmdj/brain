@@ -91,6 +91,48 @@ def _universal_query_for(sentence: str) -> str | None:
     return None
 
 
+# A NONZERO EXIT IS NOT ALWAYS A FAILURE, AND THE PROGRAM SAYS WHICH IT IS.
+#
+# `grep -n TODO README.md` on a file with no TODO prints nothing and exits 1. That is grep
+# reporting NO MATCH -- a true and useful answer -- and the receipt read it as a failed run:
+# FAIL_CLOSED__CONFINED_RUN_NOT_VERIFIED for a command that had worked correctly. Measured
+# 2026-11-22; `grep --help` states the rule itself:
+#
+#     Exit status is 0 if any line is selected, 1 otherwise;
+#     if any error occurs and -q is not given, the exit status is 2.
+#
+# So the meaning of a nonzero exit is READ FROM THE PROGRAM, not assumed, exactly as `derive_argv`
+# reads which query to ask. A program that documents no exit status anywhere in its help text has
+# documented no exception, and a nonzero exit from it stays a failure. Nothing is hard-coded: `ls`
+# documents "0 if OK" and `df`, `wc` and `find` document nothing, so only the programs that say so
+# get the benefit of the doubt, and the check is per program, per machine.
+_EXIT_STATUS_LINE = re.compile(r"exit\s+status", re.IGNORECASE)
+
+
+def documents_a_nonzero_exit_as_a_result(program: str) -> bool:
+    """True when the program's OWN help text says a nonzero exit can be a result, not an error."""
+    import shutil as _shutil
+    resolved = _shutil.which(str(program or ""))
+    if not resolved:
+        return False
+    try:
+        proc = subprocess.run([resolved, "--help"], capture_output=True, timeout=10)
+    except Exception:  # noqa: BLE001 - a program that cannot be asked documents nothing
+        return False
+    text = ((proc.stdout or b"") + (proc.stderr or b"")).decode("utf-8", "replace")
+    lines = text.splitlines()
+    for index, line in enumerate(lines):
+        if not _EXIT_STATUS_LINE.search(line):
+            continue
+        # The rule is stated on this line and the one or two that continue it.
+        block = " ".join(lines[index:index + 3]).lower()
+        # "1 otherwise", "nonzero", "non-zero", "1 if", ">0" -- the program saying a non-success
+        # outcome is one of its normal answers.
+        if re.search(r"(\b1\s+otherwise|nonzero|non-zero|\b1\s+if\b|\b2\s+if\b|>\s*0)", block):
+            return True
+    return False
+
+
 def derive_argv(sentence: str) -> dict[str, Any]:
     """The command this machine ANSWERS for the request, or the reason there is none.
 

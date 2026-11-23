@@ -124,3 +124,41 @@ def test_a_command_that_prints_nothing_is_not_a_verifiable_effect():
     routed = confined.run_confined_capability(
         "shell.command.run", entry, {"args": {"argv": ["true"]}}, host_root=str(ROOT))
     assert routed is None or routed.get("pass") is not True, routed
+
+
+# --------------------------------------------------------------------------------------------
+# A NONZERO EXIT IS NOT ALWAYS A FAILURE, AND THE PROGRAM SAYS WHICH IT IS.
+# --------------------------------------------------------------------------------------------
+def test_a_program_that_documents_its_exit_status_is_read_not_assumed():
+    """`grep --help`: "Exit status is 0 if any line is selected, 1 otherwise".
+
+    Reading that from the program is the same move as `derive_argv`: ask, don't guess. `df`, `wc`
+    and `find` document no exit status at all, so a nonzero exit from them stays a failure.
+    """
+    from canonical.runtime import machine_purpose_index_v1 as machine
+    assert machine.documents_a_nonzero_exit_as_a_result("grep") is True
+    assert machine.documents_a_nonzero_exit_as_a_result("ls") is True
+    for silent in ("df", "wc", "find", "true"):
+        assert machine.documents_a_nonzero_exit_as_a_result(silent) is False, silent
+
+
+def test_no_match_is_a_real_answer_and_reaches_the_caller():
+    """grep exits 1 and prints nothing when it finds nothing. That is the answer "no match"."""
+    from canonical.runtime import live_brain_route_admission_v1 as ra
+    result = ra.solve({"task_id": "grep-none",
+                       "goal": "grep -n zzznotpresent AGENTS.md"})
+    assert result["pass"] is True, result.get("status")
+    execution = result["execution"]
+    step = execution[0] if isinstance(execution, list) else execution
+    assert step["exit_code_documented_as_a_result"] is True, step
+    assert step["confinement"]["exit_code"] == 1
+
+
+def test_a_command_that_prints_nothing_and_documents_nothing_still_proves_nothing():
+    """`true` documents no exit status. Its empty output is not evidence, and it is refused."""
+    from canonical.runtime import confined_dispatch_v1 as confined
+    from canonical.runtime import live_integrated_brain_v1 as live
+    entry = live.load_verified_registry()["shell.command.run"]
+    routed = confined.run_confined_capability(
+        "shell.command.run", entry, {"args": {"argv": ["true"]}}, host_root=str(ROOT))
+    assert routed is None or routed.get("pass") is not True, routed

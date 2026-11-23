@@ -5,7 +5,7 @@ tested the other hypothesis -- that the wrong thing was being measured -- and it
 
   * 30 ordinary computer tasks: 14 expressible, 16 not (corrected 2026-11-12 from 15/15:
     one "expressible" task was returning 51,684 for a 223-line file).
-  * Of the 4 the machine reports as VERIFIED_ACTION, reading them says ONE answered its
+  * Of the 3 the machine reports as VERIFIED_ACTION, reading them says ONE answered its
     question. The other two answered a different question. One is unjudged.
 
 The load-bearing assertion is `test_verified_action_is_not_the_same_claim_as_answered`.
@@ -110,8 +110,16 @@ def test_verified_action_is_not_the_same_claim_as_answered(honest):
     # back `answer: ranked_candidates, mode: perf_regression`. The count returning to 4/2 is the
     # instrument agreeing with the receipts. See the route-awareness note in `honesty()`: the
     # audit is now consulted only while the machine still takes the route it criticised.
-    assert honest["verified"] == 4, honest["verified"]
-    assert honest["not_an_answer"] == 2, honest["not_an_answer"]
+    # 4 -> 3 and 2 -> 1 on 2026-11-22 (A73), and this one is a REFUSAL, not a fix.
+    #
+    # "show me the last five git commits" now ends in ACTION_FAILED with
+    # `RuntimeError:NO_PERFORMANCE_REGRESSION_DETECTED`: the bisect row ran and honestly reported
+    # that it found no regression to bisect. Before, it claimed VERIFIED_ACTION while answering a
+    # different question. A row that refuses to claim a success it did not achieve is not a
+    # verified action, so it leaves this count -- and the count going DOWN here means one fewer
+    # false pass exists to audit, which is what this test measures.
+    assert honest["verified"] == 3, honest["verified"]
+    assert honest["not_an_answer"] == 1, honest["not_an_answer"]
     assert honest["honest"] == 1, honest["honest"]
     assert honest["verified"] > honest["honest"] + honest["not_an_answer"] - 1
 
@@ -121,7 +129,7 @@ def test_each_wrong_verdict_carries_what_it_actually_returned(honest):
     # 2 -> 1 on 2026-11-22 (A72): see the count note above -- the git-history row no longer
     # produces a VERIFIED_ACTION to audit, so it is no longer a wrong verdict carrying a receipt.
     wrong = [r for r in honest["rows"] if r["verdict"] == "NOT_AN_ANSWER"]
-    assert len(wrong) == 2
+    assert len(wrong) == 1
     for row in wrong:
         assert row["audit"], row["task"]
         assert row["audit"]["returned"], row["task"]

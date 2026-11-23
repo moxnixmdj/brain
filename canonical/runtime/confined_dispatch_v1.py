@@ -257,15 +257,43 @@ def run_confined_capability(
                     effects = [stdout_to]
                     observed = {stdout_to: {"exists": True, "inside_worktree": True}}
             elif not observed:
-                # The receipt: exited 0, host untouched, and it PRINTED -- so the effect is the
-                # output itself and the evidence is that there was one.
-                effects_ok = bool(_exited and str(executed.get("stdout_tail") or "").strip())
+                # The receipt: the host is untouched and the run produced an OUTCOME. "Exited 0 and
+                # printed" is the strict form. But a program may DOCUMENT that a nonzero exit is one
+                # of its normal answers -- `grep --help`: "Exit status is 0 if any line is selected,
+                # 1 otherwise" -- and then "no match" is the result, not a failure. Which
+                # programs those are is read from the programs, per machine, never listed here.
+                _printed = bool(str(executed.get("stdout_tail") or "").strip())
+                _documented_negative = False
+                if not _exited and argv_in:
+                    try:
+                        from canonical.runtime import machine_purpose_index_v1 as _machine
+                        _documented_negative = _machine.documents_a_nonzero_exit_as_a_result(
+                            str(argv_in[0]))
+                    except Exception:  # noqa: BLE001 - no reader, no benefit of the doubt
+                        _documented_negative = False
+                # TWO KINDS OF EVIDENCE, AND THE PROGRAM DECIDES WHICH ONE APPLIES.
+                #
+                #   * It printed. The output is the effect, and the exit code must be the success
+                #     the program documents.
+                #   * It printed NOTHING and exited with a code the program documents as a RESULT.
+                #     For grep that is "1 otherwise" -- no match -- and "no match" is a complete,
+                #     true answer to "is TODO in this file". Requiring bytes here would make a
+                #     correct answer unrepresentable.
+                #
+                # `true` still fails both: it documents no exit status and prints nothing, so its
+                # empty output is not evidence of anything. Nothing is listed here; the exception
+                # exists only for programs that state it in their own help text.
+                effects_ok = bool((_printed and _exited)
+                                  or (_documented_negative and not _printed))
             confined = {
                 "capability_id": str(cid),
-                "pass": bool(host_untouched and effects_ok and executed.get("exit_code") == 0),
-                "status": ("PASS__CONFINED_NATIVE_ARGV_VERIFIED" if host_untouched and effects_ok
-                           and executed.get("exit_code") == 0
+                "pass": bool(host_untouched and effects_ok),
+                "status": (("PASS__CONFINED_NATIVE_ARGV_VERIFIED" if _exited
+                            else "PASS__CONFINED_DOCUMENTED_NONZERO_RESULT")
+                           if host_untouched and effects_ok
                            else "FAIL_CLOSED__CONFINED_RUN_NOT_VERIFIED"),
+                "exit_code_documented_as_a_result": bool(
+                    executed.get("exit_code") and _documented_negative),
                 "argv": list(argv_in),
                 "dependency": {"executor": "confinement_v1", "adapter": "native_argv"},
                 "confinement": {
@@ -346,7 +374,10 @@ def run_confined_capability(
                     # own exit code is what is verified. Every command that DOES name a file still
                     # has one entry and is still checked for existence, byte for byte.
                     _nothing_to_deliver = not applied
-                    if not (_proc.returncode == 0
+                    # The host run is judged by the same rule as the clone run: the program's own
+                    # documented exit status decides whether a nonzero code is a failure.
+                    _host_negative_ok = bool(_proc.returncode != 0 and _documented_negative)
+                    if not ((_proc.returncode == 0 or _host_negative_ok)
                             and (_nothing_to_deliver or all(a["exists_on_host"] for a in applied))):
                         confined["pass"] = False
                         confined["status"] = "FAIL_CLOSED__HOST_DID_NOT_SHOW_THE_EFFECT"

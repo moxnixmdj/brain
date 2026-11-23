@@ -3444,3 +3444,81 @@ request is refused; refusal is honest, and it is the next gap. A command whose s
 truncated to the receipt's 2000-byte tail. And the function-word list is closed English: a command
 line containing a word like `all` (`grep --all ...`) is read as prose and refused rather than
 guessed at — the same trade A72 made, for the same reason.
+
+---
+
+## §A74 — THE PROGRAM DECIDES WHAT ITS EXIT MEANS (2026-11-22)
+
+**A73 made a sentence that is a command line run. A74 found that two of the six everyday commands
+still failed, and that the failure was honest but the reading was wrong.**
+
+### The measurement
+
+| command | before A74 | why |
+|---|---|---|
+| `grep -n zzznotpresent AGENTS.md` | `FAIL_CLOSED__CONFINED_RUN_NOT_VERIFIED` | grep found nothing and exited 1 |
+| `grep -c import AGENTS.md` | PASS | exit 0 |
+| `find . -name AGENTS.md` | `FAIL_CLOSED__STATED_ANSWER_NOT_PROVIDED` | separate |
+| `true` | `FAIL_CLOSED__CONFINED_RUN_NOT_VERIFIED` | correct |
+
+The first row is a real answer being thrown away. **"No match" is a complete, true answer to "is
+TODO in this file"**, and the machine could not represent it: the receipt requires exit 0, and grep
+exits 1 when it finds nothing.
+
+### Where the rule comes from
+
+Not from me. From grep:
+
+```
+$ grep --help | grep -A2 -i "exit status"
+Exit status is 0 if any line is selected, 1 otherwise;
+if any error occurs and -q is not given, the exit status is 2.
+```
+
+So `documents_a_nonzero_exit_as_a_result(program)` reads the program's own help text and answers
+whether that program states a nonzero exit as a normal result. Measured on this machine: `grep` and
+`ls` say yes; **`df`, `wc`, `find` and `true` document no exit status at all**, so a nonzero exit from
+them remains a failure. Nothing is hard-coded and nothing is listed — the same move as `derive_argv`:
+**ask the program, don't guess.**
+
+### The two kinds of evidence
+
+```
+evidence = it printed, and exited with the success it documents
+         OR it printed nothing and exited with a code the program documents as a result
+```
+
+`true` satisfies neither: it documents no exit status and prints nothing, so its empty output is not
+evidence of anything and it stays refused. That is the line between "the answer is empty" and "there
+is no answer", and only the program can draw it.
+
+*(The same rule had to be applied a second time at host delivery, which ran the argv again and judged
+`returncode == 0` on its own. Two independent copies of one policy is how they drift apart.)*
+
+### Verified
+
+| check | result |
+|---|---|
+| `grep -n zzznotpresent AGENTS.md` | **PASS**, `exit_code_documented_as_a_result: true`, exit 1, empty output |
+| `grep -c import AGENTS.md` | **PASS**, count returned |
+| `wc -l README.md`, `ls -la`, `df -h`, `du -sh .` | **PASS** |
+| `true` | **refused** — no documented exit status, no output, no evidence |
+| 6 suites | **116 passed, 1 failed** (the pre-existing tar.gz pair) |
+| `tasks_v1` / `unseen_program_v1` | **13/13** / **6/6** |
+| new tests | 3, pinning the reader on all six programs and both evidence kinds |
+
+### The bottleneck, now stated precisely
+
+**Six of seven named commands run. The machine still cannot go from a DESCRIPTION to a PROGRAM.**
+"list the files in this folder", "show the disk space used", "find all files larger than one
+megabyte" all fail, and I measured why rather than assuming it: searching the sentence's words
+against every program's `--help` text ranks the right program **11th** (`wc` for "count the lines",
+behind `gcov`), **absent** (`df` for "show the disk space"), and **66th** (`find` for "find files
+larger than one megabyte", behind `rg`). At that accuracy the mechanism would invent a program on
+almost every sentence.
+
+So the honest boundary this round establishes is: **a sentence that names its program runs; a
+sentence that describes an outcome is refused.** The next round's question is therefore not "how do
+we match descriptions better" — that is measured dead — but **where a description→program mapping can
+come from that is not pattern matching**: the same place a person gets it, which is having done it
+before, once. That is the acquisition loop, and it is the next bottleneck.
