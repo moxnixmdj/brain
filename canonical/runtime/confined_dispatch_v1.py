@@ -312,7 +312,11 @@ def run_confined_capability(
             # pass and is worth nothing to the caller who asked. The receipt already holds the
             # bytes; they are carried out here so the result answers the question it was asked.
             if not effects and stdout_to is None:
-                confined["stdout"] = executed.get("stdout_tail") or ""
+                # THE ROW CARRIES THE WHOLE STDOUT WHEN THE RUN CAPTURED IT. Downstream,
+                # `answer_shape_v1._a_reader_stdout_as_files` turns these lines into the answer to
+                # "list the files", so a 2000-character tail there is an answer that drops most of the
+                # files and calls the remainder a count. The tail stays as `stdout_tail` for logs.
+                confined["stdout"] = (executed.get("stdout") or executed.get("stdout_tail") or "")
                 confined["stderr"] = executed.get("stderr_tail") or ""
             # THE WORK IS PROVEN, SO NOW DO IT WHERE IT WAS ASKED FOR.
             #

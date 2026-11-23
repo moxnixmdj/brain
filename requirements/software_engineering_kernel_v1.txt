@@ -145,6 +145,12 @@ mypy-extensions==1.1.0 \
     --hash=sha256:1be4cccdb0f2482337c4743e60421de3a356cd97508abadd57d47403e94f5505
 packaging==26.3 \
     --hash=sha256:d7193f7c8e4e93f444fde0262bf90af30e16fa0ad0ad44cb553c87339b23cd1c
+# Pillow was missing from this manifest while NINE VERIFIED_BOUND_CAPABILITY adapters import it
+# (chart.raster.*, chart.read.*, professional.artifact.visual_observer.v1). Measured 2026-11-23: those
+# rows could not import in an environment built from this file, so they were counted UNREACHABLE for a
+# reason this file created. A manifest that cannot rebuild the machine is a claim about the machine.
+pillow==13.0.0 \
+    --hash=sha256:a625df9a2a5597fa5e5266e01aefc82604bb85d291e3547981e863560d75da6c
 pygls==2.1.1 \
     --hash=sha256:510a6dea2476177230c7d851125e5948efdf3fdb9ebfd8543fc434972f8faed4
 setuptools==80.9.0 \

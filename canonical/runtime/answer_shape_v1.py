@@ -644,7 +644,8 @@ def lift_named_answer(result: "dict[str, Any]", goal: str = "") -> bool:
     return False
 
 
-def _a_reader_stdout_as_files(row: Mapping[str, Any]) -> tuple[str, Any] | None:
+def _a_reader_stdout_as_files(row: Mapping[str, Any],
+                              root: pathlib.Path | None = None) -> tuple[str, Any] | None:
     """``("files", [...])`` from a read-only program's stdout, or None.
 
     Which programs are readers is not decided here: `raw_goal_trace_acceptance_v1._READ_ONLY_COMMANDS`
@@ -675,7 +676,45 @@ def _a_reader_stdout_as_files(row: Mapping[str, Any]) -> tuple[str, Any] | None:
     lines = [line for line in text.splitlines() if line.strip()]
     if not lines:
         return None
+    lines = _filenames_from_reader_output(lines, root)
+    if not lines:
+        return None
     return "files", lines
+
+
+# `ls -l` and friends print a permissions string or a byte total per line; those are not names. A field
+# called "files" whose first value is `drwxr-xr-x 18 user user ...` is a count of BYTES mistaken for a
+# count of FILES. Measured 2026-11-23: `list the files using ls` bound `ls -la` and answered `count: 531`
+# against 525 real entries, with `total 8033` as the first filename.
+_NOT_A_NAME = re.compile(r"^(?:[-dlcbps][rwxsStT-]{9}[.+]?\s)")
+# `total 8033` is the BLOCK COUNT of the listing, not an entry in it. It was kept because a two-token
+# line looked like a name; it then took its final field, `8033`, and that became the first filename.
+_NOT_A_NAME_TOTAL = re.compile(r"^total\s+\d+$")
+
+
+def _filenames_from_reader_output(lines: list[str], root: pathlib.Path | None) -> list[str]:
+    """Keep the lines that ARE names, and when the output is long-format, take its last field.
+
+    The rule is not "guess the format". A listing line is a name when the line is one token, or when it
+    names something that exists here; anything else is a description of a file rather than the file.
+    """
+    named: list[str] = []
+    for line in lines:
+        if _NOT_A_NAME_TOTAL.match(line):
+            continue
+        if _NOT_A_NAME.match(line):
+            # Long format: the name is the final field. A symlink shows `name -> target`.
+            candidate = line.split()[-1]
+            if " -> " in line:
+                candidate = line.split(" -> ")[0].split()[-1]
+            if candidate not in (".", ".."):
+                named.append(candidate)
+            continue
+        if len(line.split()) == 1:
+            named.append(line)
+        elif root is not None and (root / line.strip()).exists():
+            named.append(line.strip())
+    return named
 
 
 def deliver(goal: str, result: Mapping[str, Any], root: pathlib.Path | None = None) -> list[str]:
@@ -726,7 +765,7 @@ def deliver(goal: str, result: Mapping[str, Any], root: pathlib.Path | None = No
         # and only for the `file` noun, which is what those programs enumerate. The lines are the
         # program's own output, untouched.
         if hit is None and str(shape.get("noun") or "") == "file":
-            hit = _a_reader_stdout_as_files(inner)
+            hit = _a_reader_stdout_as_files(inner, root)
             if hit is not None:
                 source = "result.stdout"
         artifact_reason: str | None = None

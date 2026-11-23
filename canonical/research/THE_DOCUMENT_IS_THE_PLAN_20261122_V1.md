@@ -4379,3 +4379,111 @@ every other count on this page.
 capability works — A82 watched the listing row deliver 530 real filenames, and `tasks_v1` passes 13/13
 through rows this audit marks READABLE. It means **this audit cannot prove a capability works by
 running it**, which is exactly the gap named above.
+
+---
+
+# §A84 — The census moves inside the world, and the answer stops being a tail
+
+A83 ended with a blocking sentence: the machine cannot ask "what do I not know yet" because it cannot
+check what it does know without writing to disk. The fix is not new machinery — `confinement_v1` already
+built a disposable world with a byte-identical host proof. It is to move the whole audit **inside** that
+world and judge every claim by what the call DID.
+
+## The measurement
+
+`reachability_v2.reachability()` — one clone, every claim called once inside it:
+
+| state | meaning | count |
+|---|---|---|
+| `WROTE` | ran and left a readable artifact whose reported sha256 **matches its bytes** | 10 |
+| `SELF_ATTESTING` | ran, took **no input at all** — its verdict is a restatement of the registry | 19 |
+| `LOADED` | imported, callable, and the call refused or raised (reason named) | 19 |
+| `UNREACHABLE` | cannot load or cannot be called, reason named per row | 106 |
+
+Runtime: **33.6s** for 154 claims (was 482s). `host_untouched: true`, `verified: true`, receipt carried.
+
+## The knowledge-house finding, now executable
+
+`software_review_synthesis_supercomposer_v1.py` line 29:
+
+    verified = all(found.values()) and (_static_check is None or _static_check["sound"]) and all(prod_found.values())
+
+`found` is `{token: token in all_provides}` — the set built from the registry's own `provides` fields.
+**19 rows declare no inputs and report `verified: true`.** A capability that takes no input cannot measure
+anything about the world; its answer is the machine's opinion of itself. They are reachable, and they are
+counted apart, because "reachable" and "informative" are different questions.
+
+## Eight defects the audit found in itself (each one was the audit accusing a capability)
+
+1. **A writer was executed against the host.** Probing `python.evidence.contract.supercomposer.v1` by hand
+   wrote `canonical/tmp_evidence_contract_supercomposer.json` into the live tree. Its declared inputs are
+   `{capability_id}` alone — so "declares write authority" was never a safe classifier.
+2. **`NO_HONEST_SMOKE_ARGUMENTS` invented a limitation.** 15 rows take nothing but `capability_id` and v1
+   refused to call them. A no-input row is callable with `{}`.
+3. **The `command` literal was discarded.** Templates carry `command: "copy"`; three working rows raised
+   `COMMAND_NOT_IMPLEMENTED:<none>` for the audit's omission.
+4. **`capability_id` was blank for every planned row** — read from the entry, stored on the template.
+5. **`json_path` was bound as an output.** `sqlite.table.create_from_json_records` was told to read the
+   file it was supposed to write.
+6. **Whole-tree scanners were pointed at the whole tree.** `python.source.taint_flow.v1` took **307.87s**
+   of a 482s audit on 22,365 files. A smoke test is a witness, not a workload: the smallest real directory
+   is used, and every call is bounded at 25s.
+7. **All rows shared one output path**, so the first write satisfied every later row's check and six rows
+   were accused of lying. **Then it happened again** after the plan widened — `OUTPUT_ALREADY_EXISTS` on
+   rows that were merely late. Caught by a uniqueness test after a hand check missed it; the fallback is
+   now the row's registry key, never a constant.
+8. **The world ran the wrong interpreter.** `confinement_v1.execute` fixes `PATH`, so a bare `python3` in
+   the world is `/usr/bin/python3` — not the caller's. Three capabilities were reported dead because the
+   world's Python had no Pillow while the caller's did. The census now runs `sys.executable` and reports
+   `interpreter` in its own output. This also required a real fix in `confinement_v1`: `argv[0]` was
+   checked for existence and then scanned as an escape, so an absolute interpreter was refused as a
+   dangerous argument. The program is not an argument; arguments are scanned from `argv[1:]`.
+
+## The manifest could not rebuild the machine
+
+`requirements/software_engineering_kernel_v1.txt` pins 23 packages with digests and did **not** name
+Pillow, which **9 `VERIFIED_BOUND_CAPABILITY` adapters import**. Installing the project's own declared
+requirements leaves every one of them dead. Pillow 13.0.0 is now pinned with its digest, and a test
+asserts the manifest names what the adapters import.
+
+## A false answer, delivered as an answer
+
+Chasing a failing test found something worse than the failing test. `confinement_v1.execute` kept
+`stdout[-2000:]` and `confined_dispatch_v1` stored that tail as the row's `stdout`. A 524-entry `ls` is
+23,946 bytes, so:
+
+- the delivered answer was the **last 65 lines**, cut mid-word, one per 2000 characters;
+- its first "filename" was the fragment `r_probe_20261112.py` — actually the tail of
+  `gate_accepts_a_failed_repair_probe_20261112.py` — and **does not exist**;
+- **459 real entries were gone**, and `count: 65` was reported as if it were the count.
+
+Fixed at the source: the full capture is carried, `stdout_tail` stays for logs. Then a second defect
+surfaced in the same answer: the plan binds `ls -la`, whose `total 8033` line and `drwxr-xr-x` rows were
+being handed out as "files" (`count: 531` against 525 real names, a byte total as the first filename).
+`answer_shape_v1` now keeps the lines that *are* names and takes the last field of long-format rows.
+Measured after: `count 528` = the world's 528 entries exactly, **zero ghosts**.
+
+## Green, and what is still not
+
+| run | result |
+|---|---|
+| `test_the_machine_can_run_its_own_claims_v1.py` (new) | **21 passed** |
+| 10 pre-existing suites + the new one | **165 passed, 0 failed** |
+| `tasks_v1` | **13/13 by effect** |
+| `unseen_program_v1` | **6/6 on a program never seen** |
+
+**Two tests fail here and the reason is the environment, measured, not assumed:**
+`test_confined_crossfile_qualification_v1.py::...[issue|task]` fail because
+`unshare --mount --pid --fork` returns `Operation not permitted` in this sandbox, so
+`zero_ambient_namespace_launcher_v1` cannot build a namespace and the qualifier refuses. It fails closed,
+which is correct. A test records the distinction rather than hiding it.
+
+**The new blocking conclusion.** The census now knows, per row, whether the machine *did* the thing. What
+it still cannot do is answer a question it has never been asked: 51 rows are blocked with a **named**
+missing input (`NEEDS_INPUT:label,x_value`), and 52 rows declare **no adapter at all**. The machine's
+"what I don't know" is now a list of named slots instead of a status string — which is the precondition
+for the user's instant-knowledge loop, and still not the loop itself.
+
+**Next bottleneck:** 52 rows claim `VERIFIED_BOUND_CAPABILITY` with no adapter file. Either they are
+fabricated claims to delete, or their adapters exist under other names. A registry that cannot be
+reconciled with the tree is the same defect one layer down.

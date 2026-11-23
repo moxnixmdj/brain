@@ -239,7 +239,13 @@ def admit(
     # it actually belongs: a blocklist of dangerous words would be the wrong fix (ms-agent tried
     # six regex layers and was bypassed), and a list of arguments that can reach outside the copy
     # is a property, not a spelling.
-    for arg in argv:
+    # THE PROGRAM IS NOT AN ARGUMENT. `argv[0]` was already checked above, and an absolute interpreter
+    # path (`/tmp/venv/bin/python`) is how the machine is run, not a file it can write: the danger below
+    # is an argument that addresses the HOST, and the program's own path is not one. Measured: refusing
+    # it here made the only honest repair -- run the probe with the SAME interpreter the caller used --
+    # impossible, so the census silently ran a different Python and reported 3 capabilities dead for a
+    # reason the audit had invented. Arguments are scanned from argv[1:].
+    for arg in argv[1:]:
         if _names_absolute_path(str(arg)):
             return {"admitted": False, "refused": REFUSE_ARGV_ESCAPES_CONFINEMENT,
                     "detail": str(arg)[:200]}
@@ -362,6 +368,15 @@ def execute(conf: Confinement) -> dict[str, Any]:
         "exit_code": code,
         "elapsed_s": round(elapsed, 3),
         "budget_s": conf.budget_s,
+        # THE WHOLE OUTPUT, NOT A TAIL. `stdout[-2000:]` is a DISPLAY budget, and it was being used as
+        # the answer to "list the files here": a 524-entry listing is 23,946 bytes, so the delivered
+        # answer was the last 65 lines -- alphabetically cut mid-word, beginning with a fragment of
+        # `gate_accepts_a_failed_repair_probe_20261112.py`. Measured 2026-11-23, that
+        # fragment was read as a filename that does not exist, and the "answer" omitted 481 real
+        # entries while reporting `count: 65` as if it were the count. A tail is for a human reading a
+        # log. The full text is what the run produced, and it is already in memory.
+        "stdout": stdout,
+        "stderr": stderr,
         "stdout_tail": stdout[-2000:],
         "stderr_tail": stderr[-2000:],
         "declared_effects": observed,
