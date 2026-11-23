@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "faf5f7ddb0cb09f8d8be64c0898ebc180756800a10951a621773217b6656a6bb"
+  "value": "89d864a95405d0790b29f931d9cdd3b11997fd30e89da9c73c0d734ca82d590d"
  },
  "engines": [
   {
@@ -303289,15 +303289,18 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/local_guide_v1.py",
-   "sha256": "7d98d7364433c8e9684b6a129c89d4cd7e864843db7d40a5c73f7ccda16fa6b5",
+   "sha256": "56e821db0076e558ee670f651f91208fbf3ac10e95ebada00c1ccefe0766bd4b",
    "summary": "Local instant-knowledge source: the computer's own guides.",
-   "symbol_count": 6,
+   "symbol_count": 9,
    "symbols": [
     "_best_paragraph",
     "_content_hits",
     "_default_root",
     "_local_guide_files",
+    "_man_page_files",
+    "_man_page_text",
     "_query_tokens",
+    "_tool_help_text",
     "lookup"
    ],
    "terms": {
@@ -303311,9 +303314,12 @@
     "local": 2,
     "local_guide_files": 1,
     "lookup": 1,
+    "man_page_files": 1,
+    "man_page_text": 1,
     "own": 1,
     "query_tokens": 1,
     "source": 1,
+    "tool_help_text": 1,
     "v1": 1
    }
   },
