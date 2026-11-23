@@ -810,3 +810,108 @@ This is NOT §6: no hard benchmark, no video generation, no CLI coding-agent
 prompts, no on-mission-pass, no GUI-history close-out. The §6 gate stays
 OPEN and unclaimed. It is the browser-half of the §0/§6 enumeration
 ("about machine-used web", "over ") — nothing beyond that is claimed.
+
+## 25. The §22 flow on a live page — scan → remember → report (2026-11-23, measured)
+
+The owner's brilliant idea, taken literally end to end: "scan everything in the
+environment, retrieve from his memory what he knows and what he doesn't know,
+get the gap filled instantly, save only the important learning." §22 built that
+flow for filesystem environments. This turn extends it to the environment class
+that was still unreached — a live page — and records it honestly.
+
+Built (minimal: one shared flow, one new branch, no new learner/store/planner):
+
+- `environment_scan_know_v1.scan_and_know(..., page_url=...)` — when page_url is
+  given, the flow REUSES the same validation → scan → memory → questions →
+  gap-fill → receipt spine. The filesystem path is byte-for-byte unchanged
+  (10/10 filesystem tests stay green; 15/15 total).
+- Page-mode refusals (by name, never fabricated):
+  REFUSE__PAGE_SCHEME_UNSUPPORTED (file://, chrome://, garbage — before any
+  browser work), REFUSE__PAGE_UNLOADABLE (a page that does not load — the
+  reason is recorded, no page evidence is recorded).
+- Page-mode questions:
+  Q1 (what is this thing) — KNOWN_SCAN: title, URL, text chars, element count.
+  Q2 (declared requirements) — KNOWN_SCAN: a page declares no manifest; the
+  affordances ARE the declared surface, and are reported as such.
+  Q3 (what runs/checks it) — KNOWN_SCAN: a page has no runner contract; the
+  affordances are its only declared execution surface, reported by label.
+  Q4 (what counts as success) — UNKNOWN by name: a page declares no contract.
+  Menu READ from the page's own declared surface; never invented.
+- The flow never persists (persist reported NONE), never re-plans, never
+  counts the web tier as capability. Memory is read-only (rules + priors for
+  the goal family / browser_page), exactly as in filesystem mode.
+
+Measured (probe `browser_scan_know_probe_20261123.py`, self-contained ephemeral
+localhost fixture, live Chromium, 12/12 PASS, ~4 s, zero model calls):
+
+- COLD (empty store): verdict OPEN__GAP_REMAINS; root = the page URL; title
+  "Browser Scan Probe" (content-exact against the live fixture); affordances
+  ["click me", "your name", "go"] (element labels match the fixture); Q4
+  unknown by name; memory empty.
+- WARM (memory seeded through the real generalize/remember/save_memory path):
+  rule recalled (ga-d9c97c401e1eb43b, scope browser_page/generic) — the flow
+  REMEMBERS, nothing re-trusted (scan evidence identical to cold).
+- REFUSALS: unroutable page → REFUSE__PAGE_UNLOADABLE with reason
+  (never-fabricated); no page evidence recorded (page is None); empty goal
+  → REFUSE__EMPTY_GOAL before any scan.
+
+Honest statement: the scan→remember→report flow now works on BOTH environment
+classes (filesystem §22; live page §25), and the page is the first environment
+class where Q4 (success contract) is honestly nameable as NOT DECLARED by the
+environment — the flow must then be handed a contract by the caller (or the
+frontier instant-knowledge tier) rather than fabricating one. This is not
+§6: no benchmark, no GUI-automated close-out, no carried-model claim.
+
+## 26. The three mission questions, adjudicated with this record (2026-11-23)
+
+The mission statement embeds three questions. They are RE-ADJUDICATED here with
+the new page-scan evidence, closing the record in the same sense §1–§3 do —
+not restating as a capability claim.
+
+Q1 — Per-env scan + instant-knowledge recall vs goal-directed narrow persistence.
+
+  ANSWER: BOTH, layered — the broad scan, the narrow persistence. The scan
+  learns broadly (filesystem walk: kind/layout/manifests/docs, plus the §22
+  checkpoint packet; browser page: title/affordances), the persistence is
+  narrow (the admitted generalized rule + priors, never the raw trace — §2 of
+  the mass probe). Instant knowledge is never counted as capability: it is
+  read-only and gated.
+
+Q2 — Save exact instance actions vs generalizations.
+
+  ANSWER: GENERALIZATIONS ONLY. Never the raw trace. The admitted rule is a
+  generalization over the plan sketch + goal family + evidence hash (§2,
+  Q-Q2 in the mission doc, mass probe: rule replay + carried-model walk across
+  starts; the raw trace is hashed as evidence only). A raw trace of a page is
+  nothing — pages change; a raw trace cannot be replayed. The page-mode
+  flow inherits this discipline unchanged: the scan REPORTS; admission persists
+  the generalization; nothing raw is saved or served.
+
+Q3 — Learn everything per-environment and eventually generalize vs only the goal.
+
+  ANSWER: BROADLY LEARN, NARROWLY PERSIST, TRANSFER WITHIN KIND ONLY. The
+  per-env scan learns the full reachable frontier (or page affordances);
+  the admitted rule (goal-directed, narrow) is the only narrow persistent
+  slice; the broadly-learned model is REUSED by same-kind transfer (the
+  carried walk). Cross-kind: 0 + 0 priors carried, by design (priors keyed by
+  env_kind — that is the designed refusal, not a bug).
+
+  Non-claim: the carried-model walk is KIND-scoped. "Eventually generalize
+  everywhere" is NOT claimed or evidenced; it remains the open mission question
+  the §6 gate is built for.
+
+## 27. Cross-kind transfer is the standing OPEN question (2026-11-23)
+
+The one place the agent does NOT yet generalize across environments: priors
+are keyed by env_kind. Towers→grid and grid→towers both carried 0 priors
+(recorded §1 of the mass probe). The chain of evidence that §25 adds: a page
+environment exposes NO reusable transition model — a page's affordances are
+NOT a kind-invariant state graph — so a browser rule is honestly NOT
+replayable on filesystem environments and a filesystem rule is honestly NOT
+replayable on a page. Cross-kind transfer is not a refusal bug; it is the
+designed boundary of what "learn" means here.
+
+What IS adopted: the same store, the same flow, the same rule schema across
+kinds. The store is the ONE reusable object; the rule is the ONE generalization
+format; the receipt discipline (scan → memory → gap → report) is the same on
+every environment class. That is the honest claim.

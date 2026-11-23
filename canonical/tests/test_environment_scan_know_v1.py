@@ -199,3 +199,33 @@ class ScanAndKnowPythonBrokerTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class PageModeTests(unittest.TestCase):
+    """Page-mode refusal contract. Live page scans are probe territory
+    (see browser_scan_know_probe_20261123.py); unit tests cover the deterministic
+    refusals only."""
+
+    def test_file_scheme_refuses_by_name(self):
+        out = es.scan_and_know(None, "read the page", page_url="file:///tmp/secret.html")
+        self.assertEqual(out["verdict"], "REFUSE__PAGE_SCHEME_UNSUPPORTED")
+        self.assertEqual(out["questions"], [])
+
+    def test_chrome_scheme_refuses_by_name(self):
+        out = es.scan_and_know(None, "read the page", page_url="chrome://favicon-picker")
+        self.assertEqual(out["verdict"], "REFUSE__PAGE_SCHEME_UNSUPPORTED")
+
+    def test_unnamed_scheme_refuses_by_name(self):
+        out = es.scan_and_know(None, "read the page", page_url="garbage-url")
+        self.assertEqual(out["verdict"], "REFUSE__PAGE_SCHEME_UNSUPPORTED")
+
+    def test_empty_goal_refuses_before_page_scan(self):
+        out = es.scan_and_know(None, "", page_url="http://127.0.0.1:8791/probe.html")
+        self.assertEqual(out["verdict"], "REFUSE__EMPTY_GOAL")
+        self.assertEqual(out["questions"], [])
+
+    def test_scheme_refusal_never_looks_at_filesystem(self):
+        # file:// must NOT be treated as a directory (never a bogus scan)
+        out = es.scan_and_know(None, "read the page", page_url="file:///tmp/x.html")
+        self.assertNotEqual(out["verdict"], "REFUSE__NOT_A_DIRECTORY")
+        self.assertEqual(out["scanned"], None)

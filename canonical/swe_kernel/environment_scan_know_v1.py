@@ -27,6 +27,14 @@ that sits under all three:
      checkpoint evidence + what remains unknown + a decision. Known items are
      labeled by their source; unknown items are named, never fabricated.
 
+A page environment (page_url=) follows the same contract:
+  - SCAN loads the page through the repo's own browser driver and records the
+    title, URL, and every interactive affordance with the name a person would
+    call it. A page declares no manifest, so the affordances ARE the declared
+    surface -- they are reported as such, and nothing else is fabricated.
+  - It never persists, never re-plans, never counts the web tier as
+    capability. Refusals refuse by name.
+
 What this flow REFUSES to do:
   - It does not plan or pick actions. Planning is the Perfect Algorithm's job;
     this is reconnaissance.
@@ -73,6 +81,8 @@ OPEN_GAP = "OPEN__GAP_REMAINS"
 REFUSE_EMPTY_GOAL = "REFUSE__EMPTY_GOAL"
 REFUSE_NOT_A_DIRECTORY = "REFUSE__NOT_A_DIRECTORY"
 REFUSE_NO_EVIDENCE = "REFUSE__NO_EVIDENCE"
+REFUSE_PAGE_SCHEME = "REFUSE__PAGE_SCHEME_UNSUPPORTED"
+REFUSE_PAGE_UNLOADABLE = "REFUSE__PAGE_UNLOADABLE"
 
 _MANIFEST_NAMES = ("pyproject.toml", "setup.py", "setup.cfg", "requirements.txt",
                    "package.json", "cargo.toml", "go.mod", "Makefile")
@@ -189,10 +199,53 @@ def _guide_answer(goal: str, root: pathlib.Path, query: str, *,
         return None
 
 
+def _scan_page_url(url: str) -> dict[str, Any]:
+    """Load a page through the repo's own browser driver. Never fabricates.
+
+    Returns the page's declared surface: title, URL, text sample, and the
+    interactive affordances with a label a person would use. Any failure is
+    honest and named -- the page is NOT recorded as scanned on refusal.
+    """
+    try:
+        from canonical.runtime import browser_v1 as browser
+    except Exception as e:
+        return {"ok": False, "reason": f"REFUSE__BROWSER_IMPORT:{e}", "url": url}
+    try:
+        state = browser.state(url)
+    except Exception as e:
+        return {"ok": False, "reason": f"REFUSE__PAGE_LOAD_EXCEPTION:{e}", "url": url}
+    if not (state or {}).get("ok"):
+        return {"ok": False, "reason": (state or {}).get("reason") or "REFUSE__PAGE_LOAD_FAILED",
+                "url": url}
+    data = state.get("data") or {}
+    elements = data.get("elements") or []
+    affordances = []
+    for e in elements[:80]:
+        label = (e.get("text") or e.get("aria") or e.get("name") or e.get("placeholder") or "").strip()
+        affordances.append({
+            "tag": e.get("tag"),
+            "type": e.get("type"),
+            "label": label[:200],
+            "disabled": bool(e.get("disabled")),
+            "href": e.get("href") or "",
+        })
+    return {
+        "ok": True,
+        "url": data.get("url") or url,
+        "title": data.get("title") or "",
+        "text": (data.get("text") or "")[:8000],
+        "text_chars": len(data.get("text") or ""),
+        "elements": elements,
+        "affordances": affordances,
+        "element_count": len(elements),
+    }
+
+
 def scan_and_know(
-    root: str | pathlib.Path,
+    root: str | pathlib.Path | None,
     goal: str,
     *,
+    page_url: str | None = None,
     memory_path_: str | pathlib.Path | None = None,
     broker_memory_path_: str | pathlib.Path | None = None,
     allow_web: bool = False,
@@ -214,11 +267,17 @@ def scan_and_know(
     Returns a checkpoint packet.
     """
     started = time.perf_counter()
-    root_path = pathlib.Path(root).resolve()
+    page_mode = page_url is not None
+    if page_mode:
+        root_path: pathlib.Path | None = None
+        receipt_root = str(page_url)
+    else:
+        root_path = pathlib.Path(root).resolve() if root else None
+        receipt_root = str(root_path)
     receipt: dict[str, Any] = {
         "schema": SCHEMA,
         "authority": AUTHORITY,
-        "root": str(root_path),
+        "root": receipt_root,
         "goal": str(goal or ""),
         "verdict": None,
         "scanned": None,
@@ -247,35 +306,74 @@ def scan_and_know(
     if not str(goal or "").strip():
         receipt["verdict"] = REFUSE_EMPTY_GOAL
         return _finish()
-    if not root_path.is_dir():
-        receipt["verdict"] = REFUSE_NOT_A_DIRECTORY
-        return _finish()
+    if page_mode:
+        from urllib.parse import urlparse
+        scheme = urlparse(str(page_url)).scheme.lower()
+        if scheme not in {"http", "https"}:
+            receipt["verdict"] = REFUSE_PAGE_SCHEME
+            return _finish()
+    else:
+        if root_path is None or not root_path.is_dir():
+            receipt["verdict"] = REFUSE_NOT_A_DIRECTORY
+            return _finish()
 
     # ---- 1. scan ---------------------------------------------------
-    files, truncated = _walk(root_path, max_files, max_depth)
-    kind = _detect_kind(files)
-    manifest_rels = [f for f in files
-                     if os.path.basename(f).lower() in {n.lower() for n in _MANIFEST_NAMES}]
-    docs = _docs_in(files)
+    page: dict[str, Any] | None = None
+    files: list[str] = []
+    truncated = False
+    kind = "unknown"
+    layout = "flat"
     manifests: dict[str, Any] = {}
-    for rel in manifest_rels:
-        parsed = _read_manifest(root_path, rel)
-        if parsed.get("present"):
-            manifests[os.path.basename(rel)] = parsed
-    layout = _layout(root_path, files)
-    receipt["scanned"] = {
-        "file_count": len(files),
-        "truncated": truncated,
-        "kind": kind,
-        "layout": layout,
-        "manifests": sorted(manifests),
-        "docs": docs[:16],
-        "manifest_details": manifests,
-    }
+    docs: list[str] = []
+    if page_mode:
+        page = _scan_page_url(str(page_url))
+        if not page.get("ok"):
+            receipt["verdict"] = REFUSE_PAGE_UNLOADABLE
+            receipt["scanned"] = {"kind": "browser_page", "layout": "page",
+                                 "reason": page.get("reason", "REFUSE__PAGE_UNLOADABLE")}
+            return _finish()
+        kind = "browser_page"
+        layout = "page"
+        receipt["scanned"] = {
+            "file_count": 0,
+            "truncated": False,
+            "kind": kind,
+            "layout": layout,
+            "manifests": [],
+            "docs": [],
+            "manifest_details": {},
+            "page": {
+                "title": page["title"],
+                "url": page["url"],
+                "text_chars": page["text_chars"],
+                "element_count": page["element_count"],
+                "affordances": page["affordances"],
+            },
+        }
+    else:
+        files, truncated = _walk(root_path, max_files, max_depth)
+        kind = _detect_kind(files)
+        manifest_rels = [f for f in files
+                         if os.path.basename(f).lower() in {n.lower() for n in _MANIFEST_NAMES}]
+        docs = _docs_in(files)
+        for rel in manifest_rels:
+            parsed = _read_manifest(root_path, rel)
+            if parsed.get("present"):
+                manifests[os.path.basename(rel)] = parsed
+        layout = _layout(root_path, files)
+        receipt["scanned"] = {
+            "file_count": len(files),
+            "truncated": truncated,
+            "kind": kind,
+            "layout": layout,
+            "manifests": sorted(manifests),
+            "docs": docs[:16],
+            "manifest_details": manifests,
+        }
 
-    if not files:
-        receipt["verdict"] = REFUSE_NO_EVIDENCE
-        return _finish()
+        if not files:
+            receipt["verdict"] = REFUSE_NO_EVIDENCE
+            return _finish()
 
     # ---- 2. memory (read-only) -------------------------------------
     fam = goal_family or pa._default_family(goal)
@@ -304,25 +402,53 @@ def scan_and_know(
                           "source": source, "detail": detail})
 
     # Q1: what IS this thing?
-    _q("what is this thing", KNOWN_SCAN, "scan",
-       {"kind": kind, "layout": layout, "file_count": len(files),
-        "truncated": truncated, "manifests": sorted(manifests),
-        "docs": docs[:16]})
+    if page_mode:
+        _q("what is this thing", KNOWN_SCAN, "scan",
+           {"kind": kind, "layout": layout, "title": page["title"],
+            "url": page["url"], "text_chars": page["text_chars"],
+            "element_count": page["element_count"]})
+    else:
+        _q("what is this thing", KNOWN_SCAN, "scan",
+           {"kind": kind, "layout": layout, "file_count": len(files),
+            "truncated": truncated, "manifests": sorted(manifests),
+            "docs": docs[:16]})
 
     # Q2: what is DECLARED to be needed?
-    declared: dict[str, Any] = {}
-    for name, parsed in manifests.items():
-        for key in ("requires_python", "declared_deps", "engines", "scripts"):
-            if parsed.get(key):
-                declared[f"{name}:{key}"] = parsed[key]
-    _q("what are the declared requirements",
-       KNOWN_SCAN if declared else KNOWN_SCAN,
-       "scan",
-       declared if declared else {"reason": "no manifest declares requirements"})
+    if page_mode:
+        # a page declares no manifest; the affordances ARE its declared surface.
+        affordances = page["affordances"]
+        labels = [a["label"] for a in affordances if a["label"]][:40]
+        _q("what are the declared requirements", KNOWN_SCAN, "scan",
+           {"title": page["title"], "url": page["url"],
+            "affordances": affordances[:40],
+            "note": "a page declares no manifest; the affordances are the "
+                    "only declared surface"})
+    else:
+        declared: dict[str, Any] = {}
+        for name, parsed in manifests.items():
+            for key in ("requires_python", "declared_deps", "engines", "scripts"):
+                if parsed.get(key):
+                    declared[f"{name}:{key}"] = parsed[key]
+        _q("what are the declared requirements",
+           KNOWN_SCAN if declared else KNOWN_SCAN,
+           "scan",
+           declared if declared else {"reason": "no manifest declares requirements"})
 
     # Q3: what RUNS/CHECKS it?
     runner_verdict: dict[str, Any] | None = None
-    if kind == "python" and _run_tests_goal_requested(goal):
+    if page_mode:
+        # a page has no runner contract; the affordances are its only declared
+        # execution surface -- report them as what CAN be done here.
+        affordances = page["affordances"]
+        labels = [a["label"] for a in affordances if a["label"]][:40]
+        _q("what runs/checks it", KNOWN_SCAN, "scan",
+           {"affordances": labels,
+            "note": "a page has no runner contract; affordances are its "
+                    "only declared execution surface"})
+        # Q4: a page declares no success contract beyond its affordances.
+        _q("what counts as success", UNKNOWN, "page",
+           {"reason": "a page declares no contract; success is not declared here"})
+    elif kind == "python" and _run_tests_goal_requested(goal):
         try:
             # the broker's cache is a DIFFERENT store with a different schema;
             # never let it overwrite the Perfect Algorithm's memory file
@@ -354,14 +480,16 @@ def scan_and_know(
                {"reason": "no broker in contract and no guide answered"})
 
     # Q4: what counts as success / the contract?
-    contract_seen = _guide_answer(goal, root_path, "what counts as success in this environment",
-                                  tools=tools, deadline_s=local_guide_deadline_s)
-    if contract_seen and contract_seen.get("status") == "PASS__LOCAL_GUIDE_FOUND":
-        _q("what counts as success", KNOWN_LOCAL_GUIDE, "local_guide",
-           {"documents": contract_seen.get("documents", [])[:3]})
-    else:
-        _q("what counts as success", UNKNOWN, "local_guide",
-           {"reason": "no guide answered the contract question"})
+    # (page mode already answered Q4 in the Q3 branch)
+    if not page_mode:
+        contract_seen = _guide_answer(goal, root_path, "what counts as success in this environment",
+                                      tools=tools, deadline_s=local_guide_deadline_s)
+        if contract_seen and contract_seen.get("status") == "PASS__LOCAL_GUIDE_FOUND":
+            _q("what counts as success", KNOWN_LOCAL_GUIDE, "local_guide",
+               {"documents": contract_seen.get("documents", [])[:3]})
+        else:
+            _q("what counts as success", UNKNOWN, "local_guide",
+               {"reason": "no guide answered the contract question"})
 
     # ---- 4. gap-fill with web only when the caller opts in ----------
     if allow_web:
@@ -399,7 +527,9 @@ def scan_and_know(
 
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("root", type=pathlib.Path)
+    parser.add_argument("root", nargs="?", default=None,
+                        help="Environment directory to scan. Ignored when "
+                             "--page-url is given.")
     parser.add_argument("--goal", required=True)
     parser.add_argument("--json", type=pathlib.Path, default=None)
     parser.add_argument("--allow-web", action="store_true",
@@ -410,8 +540,11 @@ def main(argv: Sequence[str] | None = None) -> int:
                         help="Broker cache path (Python run-tests contract only)")
     parser.add_argument("--tools", nargs="*", default=None,
                         help="Tools whose --help is read as guide (offline)")
+    parser.add_argument("--page-url", default=None,
+                        help="URL of a live page to scan instead of a filesystem "
+                             "environment (http/https only)")
     args = parser.parse_args(argv)
-    out = scan_and_know(args.root, args.goal,
+    out = scan_and_know(args.root, args.goal, page_url=args.page_url,
                         memory_path_=args.memory,
                         broker_memory_path_=args.broker_memory,
                         allow_web=args.allow_web, tools=args.tools)
