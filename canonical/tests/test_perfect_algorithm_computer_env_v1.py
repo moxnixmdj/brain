@@ -251,3 +251,41 @@ class ArchiveGoalTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class FormatNameNarrowingTests(unittest.TestCase):
+    """The target's extension names the format the goal hands it.
+
+    'zip the files into out.zip' must surface the program literally called
+    `zip`; 'make a bzip2 archive out.bz2' must surface `bzip2`; 'archive
+    data.txt into data.tar.gz' must surface `tar`. A format-name program is
+    the goal's own first candidate, not a program inferred from flag
+    descriptions.
+    """
+
+    def test_format_goal_surfaces_the_format_name_program(self):
+        from canonical.runtime.computer_env_v1 import programs_for_goal
+
+        cases = [
+            ("zip the files into out.zip", "zip"),
+            ("make a zip archive out.zip", "zip"),
+            ("make a bzip2 archive out.bz2", "bzip2"),
+            ("make an archive out.tar.gz", "tar"),
+            ("archive data.txt into data.tar.gz", "tar"),
+            ("make an archive out.tar", "tar"),
+        ]
+        for goal, expected in cases:
+            with self.subTest(goal=goal):
+                progs = programs_for_goal(goal, limit=8)
+                self.assertIn(expected, progs,
+                              f"{goal!r} must surface {expected!r}")
+                self.assertEqual(progs[0], expected,
+                                 f"{goal!r}: {expected!r} must lead the candidates")
+
+    def test_basenames_are_noise_and_not_candidates(self):
+        from canonical.runtime.computer_env_v1 import programs_for_goal
+
+        # A goal whose basename happens to be the name of a program: the
+        # basename is the file the goal is FOR, never a signal.
+        progs = programs_for_goal("zip data.zip into out.zip", limit=8)
+        self.assertNotIn("data", progs)

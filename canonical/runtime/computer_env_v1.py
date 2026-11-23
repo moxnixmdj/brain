@@ -479,11 +479,22 @@ def _stem(word: str) -> set[str]:
 def _goal_token_info(goal: str) -> tuple[list[str], set[str]]:
     text = str(goal or "")
     noise: set[str] = set()
+    ext_stems: set[str] = set()
     for name in _FILENAME.findall(text):
-        for tok in _WORD_RE.findall(name.lower()):
-            noise |= _stem(tok)
-    raw_toks = [tok for tok in _WORD_RE.findall(text.lower()) if len(tok) > 2 and tok not in _STOP]
-    return raw_toks, noise
+        parts = _WORD_RE.findall(name.lower())
+        if not parts:
+            continue
+        # The basename is the file the goal is for: never a signal.
+        noise |= _stem(parts[0])
+        # The extension IS the format word -- a signal at the same level as
+        # the goal's own words, not a filename.
+        for part in parts[1:]:
+            ext_stems |= _stem(part)
+    # Everything that is not a stop word, basename or extension is the goal's
+    # own words; the extensions ride along as signal.
+    raw_toks = [tok for tok in _WORD_RE.findall(text.lower())
+                if len(tok) > 2 and tok not in _STOP and tok not in noise]
+    return sorted(set(raw_toks) | ext_stems), noise
 
 
 def _flags_for_goal_preparsed(prog: str, raw_toks: list[str], base_noise: set[str], limit: int = 8) -> list[str]:
@@ -976,9 +987,35 @@ def programs_for_goal(goal: str, limit: int = 24) -> list[str]:
         except Exception:  # noqa: BLE001
             continue
     hits.sort(key=lambda x: (-x[0], x[1]))
+
+    # Tier 1: programs whose own name IS in the goal's words. The goal
+    # either names what it wants produced -- "zip the files into out.zip",
+    # "make a bzip2 archive out.bz2" -- and that names the program. A program
+    # named by the goal is the only honest first candidate; every other
+    # candidate is inferred from flag descriptions. Meta-verbs like "make"
+    # are not program names and never count as evidence. Name matches
+    # lead, and flag-matched programs follow as the supporting evidence.
+    meta_words = {"make", "do", "create", "build", "generate", "produce",
+                  "write", "output", "run", "make"}
+    name_set = set(raw_toks) - meta_words
+    name_hits: list[tuple[int, str]] = []
+    for _p in progs:
+        try:
+            _stems = _stem(_p)
+        except Exception:  # noqa: BLE001
+            continue
+        _m = _stems & name_set
+        if _m:
+            name_hits.append((len(_m), _p))
+    name_hits.sort(key=lambda x: (-x[0], x[1]))
+
     out_progs: list[str] = []
+    seen_name_dedup: set[str] = set()
     seen_help: dict[str, str] = {}
-    for _, p in hits:
+    for _, p in name_hits + hits:
+        if p in seen_name_dedup:
+            continue
+        seen_name_dedup.add(p)
         real = _INSTRUMENT_MEM_CACHE.get(p)
         if real is None:
             real = _instrument(p)
