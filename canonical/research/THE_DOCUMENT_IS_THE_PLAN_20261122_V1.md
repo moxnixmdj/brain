@@ -2910,3 +2910,84 @@ is no docker here. Its guarantee is the worktree plus argv discipline plus the b
 check — strong against an exploration that writes files, honest about what it does not cover.
 Exploration is also still limited to what `perform` can express: one program, one goal, one output
 format. Composition across programs remains where A66 left it.
+
+### A69 — the program can attest its own effect, and a stale refusal can outlive its cause
+
+A68 made the loop able to learn. This asks what it still cannot do, and the answer turned out to be
+two different things: one about evidence, one about memory, and the second was more dangerous.
+
+**The evidence gap.** Measured on real programs, learning on, honest input:
+
+| goal | status | verdict |
+|---|---|---|
+| `sort input.txt into out.txt` | `OPEN__FORMAT_CARRIES_NO_EVIDENCE` | **false negative** — `sort` is installed and did it |
+| `reverse input.txt into out.txt` | `OPEN__FORMAT_CARRIES_NO_EVIDENCE` | honest — `rev` states no checker |
+| `encrypt input.txt into out.enc` | `OPEN__NO_USABLE_PRIOR_EXPERIENCE` | honest — a cipher needs a key the goal never gave |
+| `convert input.txt into out.pdf` | `OPEN__NO_USABLE_PRIOR_EXPERIENCE` | honest — no converter on this machine |
+
+`_FORMAT_ONLY = {".txt", ".md"}` refuses a text output because opening it as text proves nothing
+about *being sorted*. That reasoning is sound and the conclusion was still wrong, because the check
+does not have to come from the bytes. `sort --help` prints:
+
+    -c, --check, --check=diagnose-first   check for sorted input; do not sort
+
+and `sort -c ours.txt` exits 0 only for sorted input. **A program that states a checker can attest
+the very property it was asked to produce.** This is the same principle as A67 — the environment is
+the source — applied to a different question: A67 read the tool's inverse (is this the same bytes),
+this reads the tool's own predicate (does this have the property).
+
+Two refusals make it honest, and both are load-bearing:
+
+* a flag that accepts **everything** proves nothing, so the caller must supply a control the flag
+  rejects — `SELF_CHECK_NOT_SHOWN_TO_DISCRIMINATE`;
+* if the control is also accepted, the property was already there and the action cannot be credited
+  with producing it — `SELF_CHECK_ACCEPTED_THE_INPUT_SO_NOTHING_WAS_PRODUCED`.
+
+That second one fired for real: "sort input.txt" on an already-sorted `input.txt` is correctly
+refused, because nothing about the world changed. I mistook that for a bug twice before reading it.
+
+**Three defects found on the way, each a different kind:**
+
+1. **Candidate selection was by output suffix, not by what the goal asked.** `programs_for('.txt')`
+   returned `gp-display-text`, `pod2text`, `pygettext3` and **never `sort`**, so the one program on
+   the machine that does what was asked was never tried. The goal's own verb is very often the
+   program's own name, and matching that costs a dict lookup: "sort input.txt" → `sort`, instantly,
+   with no help read. Suffix matching now runs second and the 603-page manual sweep only when the
+   free passes found nothing.
+2. **The manual sweep cost 41–48 s** to answer "can anything sort a text file", because it read the
+   help of every installed program. Bounded to programs whose name shares a three-letter stretch
+   with a goal word: 48 s → 1.3 s, same verdicts. The law here is that everything is fast.
+3. **A stale refusal outlived the fix that made it wrong** — see below. This is the important one.
+
+**The memory defect, and why the design already knew about it.** After the fix, `sort input.txt into
+out.txt` passed in a fresh directory and refused in one where it had failed before, with
+`OPEN__NO_USABLE_PRIOR_EXPERIENCE`. `remember_miss` had stored the refusal, and its own docstring
+says:
+
+> It is keyed on the fingerprint AND the verifier's version: **a better verifier can make a shape
+> solvable that was not**, which is exactly what happened when six false closures were removed.
+
+The design was right and I had not honoured it. `verifier_version()` hashes the checking rules —
+`_ROUND_TRIP`, `_CONTAINER_SIGNS`, `_CONTAINER_OWNER`, `_FORMAT_ONLY` — precisely so a refusal dies
+when the rules change. Adding a third kind of evidence is a change to the rules, and it was not in
+the hash, so every refusal made under the old rules survived the fix. **A false negative, once
+learned, becomes permanent unless the rule that produced it is part of the identity of the memory.**
+The fix is one line — `"self_check": list(_CHECK_WORDS)` — and it is the difference between a
+mechanism that can improve and one that can only calcify.
+
+The test for this does not read the constant back. It mutates `_CHECK_WORDS` and requires the
+version to move, because a test that would pass whatever the code did is not a test.
+
+**Measured after both fixes:** `sort input.txt into out.txt` → `PASS__APPLIED_TO_REAL_FILE` in
+**0.15 s**, verification `THE_PROGRAM_ATTESTED_ITS_OWN_OUTPUT`, output `apple banana mango zebra`.
+`compress`/`pack` unchanged at 0.3–2.3 s. The honest refusals above still refuse.
+
+**The SWE probe, run for the first time this session** (`realistic_goal_reach_probe_v1`, 38
+material-aware goals, pre-registered predictions): **6 EXECUTED, 1 COMPILED_TO_SELF by the census,
+11 ROUTED_ELSEWHERE, 20 NOT_COMPILED.** The executed set is real work — symbol index, tree-sitter
+incremental index, git operate, refactor rename, change-impact test selection, review synthesis. The
+20 not-compiled are the next bottleneck and they are a *different layer* from everything above: not
+evidence, not memory, but the capability compiler itself.
+
+**Verified:** 188 tests across the six relevant suites (was 181), 13/13 effect tasks, 6/6 unseen,
+7 new tests on this mechanism including the version-dependency trap.

@@ -662,6 +662,7 @@ def program_actions(env: ComputerEnv,
 # --------------------------------------------------------------------------- #
 _MAX_RETRIES = 6
 
+_WORD = re.compile(r"[a-z]+")
 _FILENAME = re.compile(r"[A-Za-z0-9_][A-Za-z0-9_./-]*\.[A-Za-z0-9_]{1,8}")
 
 
@@ -816,7 +817,16 @@ def programs_for_goal(goal: str, limit: int = 24) -> list[str]:
     """
     _help_load()
     progs = installed_programs()
-    missing = [p for p in progs if p not in _HELP_CACHE]
+    # Reading the help of all 603 installed programs cost a measured 41-48 s for goals the free
+    # passes could not name -- paid in full to answer "is there anything at all", which is the same
+    # answer as "nothing documents the goal's own words". Bound the sweep to programs whose NAME
+    # shares at least three characters of a goal word: that keeps every plausible candidate
+    # (`convert` for "resize", `pdftoppm` for "pdf") and drops the rest. A program whose name has
+    # no three-letter stretch in common with any word the goal used is not going to be the one.
+    goal_grams = {w[i:i + 3] for w in _WORD.findall(str(goal or "").lower())
+                  for i in range(max(0, len(w) - 2))}
+    missing = [p for p in progs if p not in _HELP_CACHE
+               and any(g in p.lower() for g in goal_grams)]
     if missing:
         from concurrent.futures import ThreadPoolExecutor
 
@@ -967,7 +977,19 @@ def _single_step(programs: Sequence[str], suffix: str, target: str,
                 continue
             good, why = ps.verify_round_trip(out, suffix)
             if good and not ps.carries_content_evidence(suffix):
-                good, why = False, "FORMAT_CARRIES_NO_EVIDENCE:" + suffix
+                # A text output is not evidence merely because it opens as text -- the format
+                # carries nothing. But the PROGRAM may carry it: `sort -c` exits 0 only for sorted
+                # input, which is an executable predicate about the very property that was asked
+                # for, and it is checked against a control the flag must reject so that a flag
+                # accepting everything can never produce a pass.
+                # The input is the natural control: it must be REJECTED by the same check.
+                attested, attest_why = ps.verify_by_self_check(
+                    out, env.recipes.get("run_" + prog) or {},
+                    must_fail=env.root / src_name if src_name else None)
+                if attested:
+                    good, why = True, attest_why
+                else:
+                    good, why = False, "FORMAT_CARRIES_NO_EVIDENCE:" + suffix + ":" + attest_why
             if good and not _uses_goal_value(
                     env.recipes.get("run_" + prog) or {}, goal):
                 good, why = False, "GOAL_VALUE_UNUSED"
@@ -1481,11 +1503,33 @@ def _discover_impl(gap: str, budget: int = 120, seed: int = 11,
     # the verdict was decided by the format before the first program ran.
     from canonical.runtime import program_synthesis_v1 as _ps
     if not _ps.carries_content_evidence(suffix):
-        return {"closed": False, "suffix": suffix,
-                "status": "OPEN__FORMAT_CARRIES_NO_EVIDENCE",
-                "detail": ("%s is any text; nothing in the bytes says it is the "
-                           "thing the goal named, so no verifier here can close it"
-                           % suffix)}
+        # The refusals above assumed the verdict was decided by the FORMAT before any program
+        # ran, so searching was wasted. That was true when the only text check was "it opens as
+        # text". It is not true when a program can ATTEST the property: `sort -c` exits 0 only
+        # for sorted input, and the input is the control it must reject. So ask the programs on
+        # PATH whether any of them can check its own output, and only refuse when none can.
+        # The search is bounded by the same program list the caller offered, so this costs one
+        # help read per candidate, not an open-ended hunt.
+        # WHICH programs to ask is free: a program that can check its own output must be the
+        # program that PRODUCES it, and the goal says what it wants in plain words ("sort ...",
+        # "reverse ..."). So intersect the goal's words with the installed program NAMES, which
+        # costs a dict lookup, and read help only for those. Measured: 603 programs installed,
+        # `programs_for_goal` misses `sort` for "sort input.txt into out.txt", so it cannot be
+        # the gate -- but the word `sort` is the program's own name.
+        can_attest = False
+        words = {w for w in _WORD.findall(gap.lower()) if len(w) >= 3}
+        for _prog in installed_programs():
+            if _prog.lower() not in words:
+                continue
+            if _ps._tools_check_flag(_prog):
+                can_attest = True
+                break
+        if not can_attest:
+            return {"closed": False, "suffix": suffix,
+                    "status": "OPEN__FORMAT_CARRIES_NO_EVIDENCE",
+                    "detail": ("%s is any text; nothing in the bytes says it is the "
+                               "thing the goal named, and no program offered can attest it"
+                               % suffix)}
 
     # A COMPOUND FORMAT NEEDS TWO STEPS, AND THIS CHANNEL RESETS BETWEEN THEM.
     #
@@ -1530,11 +1574,35 @@ def _discover_impl(gap: str, budget: int = 120, seed: int = 11,
                            "already there, so no action it runs can be credited with "
                            "producing it" % named),
                 "suffix": suffix, "target": named}
-    # candidates by NAME (gzip for .gz) and by MEANING (convert for resize)
-    progs = programs_for(suffix)
-    for _p in programs_for_goal(gap):
+    # CANDIDATES, CHEAPEST AND MOST EXACT FIRST.
+    #
+    # A goal is phrased as an instruction, and an instruction's own verb is very often the name of
+    # the program that does it: "sort input.txt into out.txt" -> `sort`, "reverse ..." -> `rev` is
+    # not a name match but "gzip ..." and "bzip2 ..." are. Selecting by the output's SUFFIX misses
+    # this completely -- `programs_for('.txt')` returned `gp-display-text`, `pod2text`, `pygettext3`
+    # and never `sort`, so the one program on the machine that does what was asked was never tried
+    # and the goal refused with EFFECT_NOT_VERIFIED. Selecting by the manual (below) is thorough but
+    # reads the help of all 603 installed programs: measured 41 s to answer "can anything sort a
+    # text file".
+    #
+    # So: a program whose NAME is a word the goal used goes first, for the price of a dict lookup.
+    # This is not a table of what programs do -- it is the goal read against `PATH`, and whatever it
+    # proposes is still proved by acting or by the program's own checker.
+    progs: list[str] = []
+    goal_words = {w for w in _WORD.findall(str(gap or "").lower()) if len(w) >= 3}
+    for _p in installed_programs():
+        if _p.lower() in goal_words and _p not in progs:
+            progs.append(_p)
+    for _p in programs_for(suffix):
         if _p not in progs:
             progs.append(_p)
+    # Only now pay for man-page reading, and only when the free passes found nothing exact. The
+    # name match is the strongest signal available without reading anything, so when it fires the
+    # 603-page sweep adds nothing worth 41 s -- and the law here is that everything must be fast.
+    if not progs:
+        for _p in programs_for_goal(gap):
+            if _p not in progs:
+                progs.append(_p)
     is_goal = lambda snap: target in str(snap)
     # WHAT THE MEMORY IS A MEMORY OF.
     #

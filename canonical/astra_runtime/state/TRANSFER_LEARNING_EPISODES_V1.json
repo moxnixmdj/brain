@@ -180,5 +180,1855 @@
     "trials": 1,
     "successes": 1,
     "last_used_utc": "2026-11-23T06:09:03Z"
+  },
+  {
+    "fingerprint": {
+      "actions": [
+        "copy_input",
+        "copy_to_out",
+        "run_addpart",
+        "run_addr2line",
+        "run_animate",
+        "run_basenc",
+        "run_debconf-communicate",
+        "run_debconf-copydb",
+        "run_debconf-escape",
+        "run_debconf-set-selections",
+        "run_dpkg-genchanges",
+        "run_dpkg-gencontrol",
+        "run_enc2xs",
+        "run_encguess",
+        "run_gencat",
+        "run_renice",
+        "run_systemd-creds",
+        "run_systemd-repart",
+        "run_zip",
+        "run_zipcloak"
+      ],
+      "shapes": [
+        "str"
+      ],
+      "growth": 0.722,
+      "revisits": 6,
+      "probes": 6
+    },
+    "fp_key": "d724193b163a434aee82",
+    "goal_key": "<lambda>|'out.enc'|FFFFFFFFFFFFFFF",
+    "plan": [
+      "run_gencat"
+    ],
+    "reached": true,
+    "model": {
+      "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79": {
+        "run_systemd-repart": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_gencat": "el-state-v2:f728020cf63ee82e3dc1724718f012415ce3977ad069e6e4704417a3e9f84a7e",
+        "run_debconf-communicate": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_basenc": "el-state-v2:00f3a4976d6c077f099b27755e1137c222365ba956e6b609ede3e99e1ca4d6b1",
+        "run_renice": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_zipcloak": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_addr2line": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_animate": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_addpart": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "copy_to_out": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_enc2xs": "el-state-v2:1dfe3840b098cedd2d050cd93ccfe7d5642205568d41c8cfdfb99e99cd8b7c90",
+        "copy_input": "el-state-v2:7c56d7423a2ab5b7f06d497c291420387dc653067e2f655b7b1f858578997aa2",
+        "run_debconf-copydb": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79"
+      },
+      "el-state-v2:f728020cf63ee82e3dc1724718f012415ce3977ad069e6e4704417a3e9f84a7e": {
+        "run_gencat": "el-state-v2:f728020cf63ee82e3dc1724718f012415ce3977ad069e6e4704417a3e9f84a7e",
+        "run_systemd-creds": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_zipcloak": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79"
+      },
+      "el-state-v2:00f3a4976d6c077f099b27755e1137c222365ba956e6b609ede3e99e1ca4d6b1": {
+        "run_systemd-creds": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79"
+      },
+      "el-state-v2:1dfe3840b098cedd2d050cd93ccfe7d5642205568d41c8cfdfb99e99cd8b7c90": {
+        "run_gencat": "el-state-v2:f728020cf63ee82e3dc1724718f012415ce3977ad069e6e4704417a3e9f84a7e"
+      },
+      "el-state-v2:7c56d7423a2ab5b7f06d497c291420387dc653067e2f655b7b1f858578997aa2": {
+        "run_systemd-creds": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79"
+      }
+    },
+    "model_schema": "PROJECT_BRAIN_ENVIRONMENT_STATE_KEY_V2",
+    "trials": 1,
+    "successes": 1,
+    "last_used_utc": "2026-11-23T06:34:45Z"
+  },
+  {
+    "fingerprint": {
+      "actions": [
+        "copy_input",
+        "copy_to_out",
+        "run_addpart",
+        "run_addr2line",
+        "run_animate",
+        "run_basenc",
+        "run_debconf-communicate",
+        "run_debconf-copydb",
+        "run_debconf-escape",
+        "run_debconf-set-selections",
+        "run_dpkg-genchanges",
+        "run_dpkg-gencontrol",
+        "run_enc2xs",
+        "run_encguess",
+        "run_renice",
+        "run_systemd-creds",
+        "run_systemd-repart",
+        "run_zip",
+        "run_zipcloak"
+      ],
+      "shapes": [
+        "str"
+      ],
+      "growth": 0.958,
+      "revisits": 5,
+      "probes": 6
+    },
+    "fp_key": "c357f1cc20cac56f2c21",
+    "goal_key": "<lambda>|'out.enc'|FFFFFFFFFFFFFFF",
+    "plan": [
+      "run_zip"
+    ],
+    "reached": true,
+    "model": {
+      "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79": {
+        "run_zip": "el-state-v2:689c93fb322a3dba2ce768c1d72885d9ebe0f13f93a104e12b64d629443f542f",
+        "run_renice": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_systemd-repart": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_debconf-communicate": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_basenc": "el-state-v2:00f3a4976d6c077f099b27755e1137c222365ba956e6b609ede3e99e1ca4d6b1",
+        "run_systemd-creds": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_animate": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_addpart": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "copy_to_out": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_enc2xs": "el-state-v2:1dfe3840b098cedd2d050cd93ccfe7d5642205568d41c8cfdfb99e99cd8b7c90",
+        "copy_input": "el-state-v2:7c56d7423a2ab5b7f06d497c291420387dc653067e2f655b7b1f858578997aa2"
+      },
+      "el-state-v2:7b82773dd127c137bfbc14c14fbec91d02c51851ce6b5a9dfe6320ed39232a2d": {
+        "run_renice": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79"
+      },
+      "el-state-v2:00f3a4976d6c077f099b27755e1137c222365ba956e6b609ede3e99e1ca4d6b1": {
+        "run_systemd-repart": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "copy_input": "el-state-v2:e5a54c0d4020836d19ea6237df4d0bc55540b27135d4bcb1be6c72fc3fe37b61"
+      },
+      "el-state-v2:689c93fb322a3dba2ce768c1d72885d9ebe0f13f93a104e12b64d629443f542f": {},
+      "el-state-v2:1dfe3840b098cedd2d050cd93ccfe7d5642205568d41c8cfdfb99e99cd8b7c90": {
+        "run_renice": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79"
+      },
+      "el-state-v2:e5a54c0d4020836d19ea6237df4d0bc55540b27135d4bcb1be6c72fc3fe37b61": {
+        "run_systemd-repart": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79"
+      },
+      "el-state-v2:7c56d7423a2ab5b7f06d497c291420387dc653067e2f655b7b1f858578997aa2": {
+        "run_renice": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79"
+      }
+    },
+    "model_schema": "PROJECT_BRAIN_ENVIRONMENT_STATE_KEY_V2",
+    "trials": 1,
+    "successes": 1,
+    "last_used_utc": "2026-11-23T06:34:47Z"
+  },
+  {
+    "fingerprint": {
+      "actions": [
+        "copy_input",
+        "copy_to_out",
+        "run_addpart",
+        "run_addr2line",
+        "run_animate",
+        "run_basenc",
+        "run_debconf-communicate",
+        "run_debconf-copydb",
+        "run_debconf-escape",
+        "run_debconf-set-selections",
+        "run_dpkg-genchanges",
+        "run_dpkg-gencontrol",
+        "run_enc2xs",
+        "run_encguess",
+        "run_renice",
+        "run_systemd-creds",
+        "run_systemd-repart",
+        "run_zipcloak"
+      ],
+      "shapes": [
+        "str"
+      ],
+      "growth": 0.833,
+      "revisits": 5,
+      "probes": 6
+    },
+    "fp_key": "22d6ae1626c675d9c815",
+    "goal_key": "<lambda>|'out.enc'|FFFFFFFFFFFFFFF",
+    "plan": [
+      "run_basenc"
+    ],
+    "reached": true,
+    "model": {
+      "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79": {
+        "run_zipcloak": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_renice": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_systemd-repart": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_debconf-communicate": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_basenc": "el-state-v2:00f3a4976d6c077f099b27755e1137c222365ba956e6b609ede3e99e1ca4d6b1",
+        "run_systemd-creds": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_animate": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_addpart": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "copy_to_out": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_enc2xs": "el-state-v2:1dfe3840b098cedd2d050cd93ccfe7d5642205568d41c8cfdfb99e99cd8b7c90",
+        "copy_input": "el-state-v2:7c56d7423a2ab5b7f06d497c291420387dc653067e2f655b7b1f858578997aa2"
+      },
+      "el-state-v2:00f3a4976d6c077f099b27755e1137c222365ba956e6b609ede3e99e1ca4d6b1": {
+        "run_systemd-repart": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "copy_input": "el-state-v2:e5a54c0d4020836d19ea6237df4d0bc55540b27135d4bcb1be6c72fc3fe37b61"
+      },
+      "el-state-v2:1dfe3840b098cedd2d050cd93ccfe7d5642205568d41c8cfdfb99e99cd8b7c90": {
+        "run_renice": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79"
+      },
+      "el-state-v2:e5a54c0d4020836d19ea6237df4d0bc55540b27135d4bcb1be6c72fc3fe37b61": {
+        "run_systemd-repart": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79"
+      },
+      "el-state-v2:7c56d7423a2ab5b7f06d497c291420387dc653067e2f655b7b1f858578997aa2": {
+        "run_renice": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79"
+      }
+    },
+    "model_schema": "PROJECT_BRAIN_ENVIRONMENT_STATE_KEY_V2",
+    "trials": 1,
+    "successes": 1,
+    "last_used_utc": "2026-11-23T06:34:50Z"
+  },
+  {
+    "fingerprint": {
+      "actions": [
+        "copy_input",
+        "copy_to_out",
+        "run_addpart",
+        "run_addr2line",
+        "run_animate",
+        "run_debconf-communicate",
+        "run_debconf-copydb",
+        "run_debconf-escape",
+        "run_debconf-set-selections",
+        "run_dpkg-genchanges",
+        "run_dpkg-gencontrol",
+        "run_enc2xs",
+        "run_encguess",
+        "run_renice",
+        "run_systemd-creds",
+        "run_systemd-repart",
+        "run_zipcloak"
+      ],
+      "shapes": [
+        "str"
+      ],
+      "growth": 0.514,
+      "revisits": 6,
+      "probes": 6
+    },
+    "fp_key": "4961d92209bc9f388b3c",
+    "goal_key": "<lambda>|'out.enc'|FFFFFFFFFFFFFFF",
+    "plan": [
+      "run_encguess"
+    ],
+    "reached": true,
+    "model": {
+      "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79": {
+        "run_systemd-creds": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_zipcloak": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_debconf-copydb": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_systemd-repart": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_debconf-communicate": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_addr2line": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_dpkg-genchanges": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_animate": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_addpart": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "copy_to_out": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_encguess": "el-state-v2:b61cb0bc8894ed0a6c8317e77dff535bfae6b5b41f6d39366373c1ed7c16b39b",
+        "copy_input": "el-state-v2:7c56d7423a2ab5b7f06d497c291420387dc653067e2f655b7b1f858578997aa2",
+        "run_debconf-escape": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_dpkg-gencontrol": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_debconf-set-selections": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_renice": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79"
+      },
+      "el-state-v2:b61cb0bc8894ed0a6c8317e77dff535bfae6b5b41f6d39366373c1ed7c16b39b": {
+        "run_systemd-creds": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79"
+      },
+      "el-state-v2:7c56d7423a2ab5b7f06d497c291420387dc653067e2f655b7b1f858578997aa2": {
+        "run_systemd-creds": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_addpart": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79"
+      }
+    },
+    "model_schema": "PROJECT_BRAIN_ENVIRONMENT_STATE_KEY_V2",
+    "trials": 1,
+    "successes": 1,
+    "last_used_utc": "2026-11-23T06:35:01Z"
+  },
+  {
+    "fingerprint": {
+      "actions": [
+        "copy_input",
+        "copy_to_out",
+        "run_addpart",
+        "run_addr2line",
+        "run_animate",
+        "run_debconf-communicate",
+        "run_debconf-copydb",
+        "run_debconf-escape",
+        "run_debconf-set-selections",
+        "run_dpkg-genchanges",
+        "run_dpkg-gencontrol",
+        "run_enc2xs",
+        "run_renice",
+        "run_systemd-creds",
+        "run_systemd-repart",
+        "run_zipcloak"
+      ],
+      "shapes": [
+        "str"
+      ],
+      "growth": 0.583,
+      "revisits": 6,
+      "probes": 6
+    },
+    "fp_key": "ec05a5ab71af865f7d36",
+    "goal_key": "<lambda>|'out.enc'|FFFFFFFFFFFFFFF",
+    "plan": [
+      "run_enc2xs"
+    ],
+    "reached": true,
+    "model": {
+      "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79": {
+        "run_systemd-repart": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_debconf-copydb": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_debconf-communicate": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_zipcloak": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_addr2line": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_dpkg-genchanges": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_addpart": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "copy_to_out": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_renice": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "copy_input": "el-state-v2:7c56d7423a2ab5b7f06d497c291420387dc653067e2f655b7b1f858578997aa2",
+        "run_debconf-escape": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_dpkg-gencontrol": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_debconf-set-selections": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_enc2xs": "el-state-v2:1dfe3840b098cedd2d050cd93ccfe7d5642205568d41c8cfdfb99e99cd8b7c90",
+        "run_animate": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_systemd-creds": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79"
+      },
+      "el-state-v2:7c56d7423a2ab5b7f06d497c291420387dc653067e2f655b7b1f858578997aa2": {
+        "run_addpart": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_debconf-copydb": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79"
+      },
+      "el-state-v2:1dfe3840b098cedd2d050cd93ccfe7d5642205568d41c8cfdfb99e99cd8b7c90": {
+        "run_dpkg-genchanges": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79"
+      }
+    },
+    "model_schema": "PROJECT_BRAIN_ENVIRONMENT_STATE_KEY_V2",
+    "trials": 1,
+    "successes": 1,
+    "last_used_utc": "2026-11-23T06:35:11Z"
+  },
+  {
+    "fingerprint": {
+      "actions": [
+        "copy_input",
+        "copy_to_out",
+        "run_addpart",
+        "run_addr2line",
+        "run_animate",
+        "run_animate-im6",
+        "run_animate-im6.q16",
+        "run_apt",
+        "run_apt-cache",
+        "run_apt-cdrom",
+        "run_apt-config",
+        "run_compare",
+        "run_composite",
+        "run_convert-im6",
+        "run_cvtsudoers",
+        "run_dpkg-buildflags",
+        "run_dpkg-distaddfile",
+        "run_dpkg-genbuildinfo",
+        "run_expand",
+        "run_findmnt",
+        "run_gold",
+        "run_localectl",
+        "run_lto-dump",
+        "run_numfmt",
+        "run_objcopy",
+        "run_pidof",
+        "run_ptardiff",
+        "run_unexpand",
+        "run_unzip",
+        "run_wget"
+      ],
+      "shapes": [
+        "str"
+      ],
+      "growth": 0.722,
+      "revisits": 5,
+      "probes": 6
+    },
+    "fp_key": "f361528cd44dfde3dd9e",
+    "goal_key": "<lambda>|'out.pdf'|FFFFFFFFFFFFFFF",
+    "plan": [
+      "run_unexpand"
+    ],
+    "reached": true,
+    "model": {
+      "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79": {
+        "run_unexpand": "el-state-v2:98954c71f05fe79f0e612054db2f0a1b7b974bdebead12822f502af41087309c",
+        "run_cvtsudoers": "el-state-v2:941cd032ccc2d9fc46bc6aa7377f03f329ad36384fdec0e67d8c0b5cae36a503",
+        "run_animate-im6": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_pidof": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_dpkg-buildflags": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_gold": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_findmnt": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_animate": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_addpart": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_dpkg-genbuildinfo": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "copy_to_out": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_composite": "el-state-v2:9b96a9c869762980d8363d3cfdb3d5181c79caafb385a7604bef75b1a7642670",
+        "copy_input": "el-state-v2:7c56d7423a2ab5b7f06d497c291420387dc653067e2f655b7b1f858578997aa2"
+      },
+      "el-state-v2:98954c71f05fe79f0e612054db2f0a1b7b974bdebead12822f502af41087309c": {
+        "run_dpkg-genbuildinfo": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_wget": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_expand": "el-state-v2:98954c71f05fe79f0e612054db2f0a1b7b974bdebead12822f502af41087309c"
+      },
+      "el-state-v2:941cd032ccc2d9fc46bc6aa7377f03f329ad36384fdec0e67d8c0b5cae36a503": {
+        "run_dpkg-distaddfile": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_gold": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79"
+      },
+      "el-state-v2:9b96a9c869762980d8363d3cfdb3d5181c79caafb385a7604bef75b1a7642670": {
+        "run_cvtsudoers": "el-state-v2:941cd032ccc2d9fc46bc6aa7377f03f329ad36384fdec0e67d8c0b5cae36a503"
+      },
+      "el-state-v2:7c56d7423a2ab5b7f06d497c291420387dc653067e2f655b7b1f858578997aa2": {
+        "run_ptardiff": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79"
+      }
+    },
+    "model_schema": "PROJECT_BRAIN_ENVIRONMENT_STATE_KEY_V2",
+    "trials": 1,
+    "successes": 1,
+    "last_used_utc": "2026-11-23T06:36:32Z"
+  },
+  {
+    "fingerprint": {
+      "actions": [
+        "copy_input",
+        "copy_to_out",
+        "run_addpart",
+        "run_addr2line",
+        "run_animate",
+        "run_animate-im6",
+        "run_animate-im6.q16",
+        "run_apt",
+        "run_apt-cache",
+        "run_apt-cdrom",
+        "run_apt-config",
+        "run_compare",
+        "run_composite",
+        "run_convert-im6",
+        "run_cvtsudoers",
+        "run_dpkg-buildflags",
+        "run_dpkg-distaddfile",
+        "run_dpkg-genbuildinfo",
+        "run_expand",
+        "run_findmnt",
+        "run_gold",
+        "run_localectl",
+        "run_lto-dump",
+        "run_numfmt",
+        "run_objcopy",
+        "run_pidof",
+        "run_ptardiff",
+        "run_unzip",
+        "run_wget"
+      ],
+      "shapes": [
+        "str"
+      ],
+      "growth": 0.681,
+      "revisits": 5,
+      "probes": 6
+    },
+    "fp_key": "53cad33a2cea4ebbc6f0",
+    "goal_key": "<lambda>|'out.pdf'|FFFFFFFFFFFFFFF",
+    "plan": [
+      "run_cvtsudoers"
+    ],
+    "reached": true,
+    "model": {
+      "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79": {
+        "run_unzip": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_dpkg-genbuildinfo": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_objcopy": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_cvtsudoers": "el-state-v2:941cd032ccc2d9fc46bc6aa7377f03f329ad36384fdec0e67d8c0b5cae36a503",
+        "run_expand": "el-state-v2:98954c71f05fe79f0e612054db2f0a1b7b974bdebead12822f502af41087309c",
+        "run_animate-im6": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_pidof": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_dpkg-buildflags": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_gold": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_findmnt": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_animate": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_addpart": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "copy_to_out": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_composite": "el-state-v2:9b96a9c869762980d8363d3cfdb3d5181c79caafb385a7604bef75b1a7642670",
+        "copy_input": "el-state-v2:7c56d7423a2ab5b7f06d497c291420387dc653067e2f655b7b1f858578997aa2"
+      },
+      "el-state-v2:941cd032ccc2d9fc46bc6aa7377f03f329ad36384fdec0e67d8c0b5cae36a503": {
+        "run_dpkg-distaddfile": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_gold": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79"
+      },
+      "el-state-v2:98954c71f05fe79f0e612054db2f0a1b7b974bdebead12822f502af41087309c": {},
+      "el-state-v2:9b96a9c869762980d8363d3cfdb3d5181c79caafb385a7604bef75b1a7642670": {
+        "run_cvtsudoers": "el-state-v2:941cd032ccc2d9fc46bc6aa7377f03f329ad36384fdec0e67d8c0b5cae36a503"
+      },
+      "el-state-v2:7c56d7423a2ab5b7f06d497c291420387dc653067e2f655b7b1f858578997aa2": {
+        "run_ptardiff": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79"
+      }
+    },
+    "model_schema": "PROJECT_BRAIN_ENVIRONMENT_STATE_KEY_V2",
+    "trials": 1,
+    "successes": 1,
+    "last_used_utc": "2026-11-23T06:36:43Z"
+  },
+  {
+    "fingerprint": {
+      "actions": [
+        "copy_input",
+        "copy_to_out",
+        "run_addpart",
+        "run_addr2line",
+        "run_animate",
+        "run_animate-im6",
+        "run_animate-im6.q16",
+        "run_apt",
+        "run_apt-cache",
+        "run_apt-cdrom",
+        "run_apt-config",
+        "run_compare",
+        "run_composite",
+        "run_convert-im6",
+        "run_dpkg-buildflags",
+        "run_dpkg-distaddfile",
+        "run_dpkg-genbuildinfo",
+        "run_expand",
+        "run_findmnt",
+        "run_gold",
+        "run_localectl",
+        "run_lto-dump",
+        "run_numfmt",
+        "run_objcopy",
+        "run_pidof",
+        "run_ptardiff",
+        "run_unzip",
+        "run_wget"
+      ],
+      "shapes": [
+        "str"
+      ],
+      "growth": 0.528,
+      "revisits": 6,
+      "probes": 6
+    },
+    "fp_key": "52c9b2980878a684e196",
+    "goal_key": "<lambda>|'out.pdf'|FFFFFFFFFFFFFFF",
+    "plan": [
+      "run_expand"
+    ],
+    "reached": true,
+    "model": {
+      "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79": {
+        "run_wget": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_expand": "el-state-v2:98954c71f05fe79f0e612054db2f0a1b7b974bdebead12822f502af41087309c",
+        "run_pidof": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_dpkg-buildflags": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_dpkg-genbuildinfo": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_findmnt": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_animate-im6": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_ptardiff": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_dpkg-distaddfile": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_localectl": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_gold": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_animate": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_addpart": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "copy_to_out": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_composite": "el-state-v2:9b96a9c869762980d8363d3cfdb3d5181c79caafb385a7604bef75b1a7642670",
+        "copy_input": "el-state-v2:7c56d7423a2ab5b7f06d497c291420387dc653067e2f655b7b1f858578997aa2"
+      },
+      "el-state-v2:98954c71f05fe79f0e612054db2f0a1b7b974bdebead12822f502af41087309c": {
+        "run_wget": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79"
+      },
+      "el-state-v2:9b96a9c869762980d8363d3cfdb3d5181c79caafb385a7604bef75b1a7642670": {
+        "run_dpkg-buildflags": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79"
+      },
+      "el-state-v2:7c56d7423a2ab5b7f06d497c291420387dc653067e2f655b7b1f858578997aa2": {
+        "run_unzip": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79"
+      }
+    },
+    "model_schema": "PROJECT_BRAIN_ENVIRONMENT_STATE_KEY_V2",
+    "trials": 1,
+    "successes": 1,
+    "last_used_utc": "2026-11-23T06:36:53Z"
+  },
+  {
+    "fingerprint": {
+      "actions": [
+        "copy_input",
+        "copy_to_out",
+        "run_addpart",
+        "run_addr2line",
+        "run_animate",
+        "run_animate-im6",
+        "run_animate-im6.q16",
+        "run_apt",
+        "run_apt-cache",
+        "run_apt-cdrom",
+        "run_apt-config",
+        "run_compare",
+        "run_composite",
+        "run_convert-im6",
+        "run_dpkg-buildflags",
+        "run_dpkg-distaddfile",
+        "run_dpkg-genbuildinfo",
+        "run_findmnt",
+        "run_gold",
+        "run_localectl",
+        "run_lto-dump",
+        "run_numfmt",
+        "run_objcopy",
+        "run_pidof",
+        "run_ptardiff",
+        "run_unzip",
+        "run_wget"
+      ],
+      "shapes": [
+        "str"
+      ],
+      "growth": 0.556,
+      "revisits": 6,
+      "probes": 6
+    },
+    "fp_key": "7b7e20efe550dd8a1eb1",
+    "goal_key": "<lambda>|'out.pdf'|FFFFFFFFFFFFFFF",
+    "plan": [
+      "run_composite"
+    ],
+    "reached": true,
+    "model": {
+      "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79": {
+        "run_findmnt": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_ptardiff": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_dpkg-buildflags": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_gold": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_animate-im6.q16": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_animate-im6": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_unzip": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_dpkg-genbuildinfo": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_lto-dump": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_localectl": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_animate": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_addpart": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "copy_to_out": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_composite": "el-state-v2:9b96a9c869762980d8363d3cfdb3d5181c79caafb385a7604bef75b1a7642670",
+        "copy_input": "el-state-v2:7c56d7423a2ab5b7f06d497c291420387dc653067e2f655b7b1f858578997aa2",
+        "run_apt": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79"
+      },
+      "el-state-v2:9b96a9c869762980d8363d3cfdb3d5181c79caafb385a7604bef75b1a7642670": {
+        "run_dpkg-buildflags": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79"
+      },
+      "el-state-v2:7c56d7423a2ab5b7f06d497c291420387dc653067e2f655b7b1f858578997aa2": {
+        "run_wget": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79"
+      }
+    },
+    "model_schema": "PROJECT_BRAIN_ENVIRONMENT_STATE_KEY_V2",
+    "trials": 1,
+    "successes": 1,
+    "last_used_utc": "2026-11-23T06:37:00Z"
+  },
+  {
+    "fingerprint": {
+      "actions": [
+        "copy_input",
+        "copy_to_out",
+        "run_addpart",
+        "run_addr2line",
+        "run_animate",
+        "run_animate-im6",
+        "run_animate-im6.q16",
+        "run_apt",
+        "run_apt-cache",
+        "run_apt-cdrom",
+        "run_apt-config",
+        "run_compare",
+        "run_convert-im6",
+        "run_dpkg-buildflags",
+        "run_dpkg-distaddfile",
+        "run_dpkg-genbuildinfo",
+        "run_findmnt",
+        "run_gold",
+        "run_localectl",
+        "run_lto-dump",
+        "run_numfmt",
+        "run_objcopy",
+        "run_pidof",
+        "run_ptardiff",
+        "run_unzip",
+        "run_wget"
+      ],
+      "shapes": [
+        "str"
+      ],
+      "growth": 0.597,
+      "revisits": 6,
+      "probes": 6
+    },
+    "fp_key": "570f4e22f4a516a7703e",
+    "goal_key": "<lambda>|'out.pdf'|FFFFFFFFFFFFFFF",
+    "plan": [
+      "run_numfmt"
+    ],
+    "reached": true,
+    "model": {
+      "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79": {
+        "run_gold": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_unzip": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_dpkg-distaddfile": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_localectl": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_animate-im6.q16": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_animate-im6": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_wget": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_findmnt": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_numfmt": "el-state-v2:662d60327aa7f4c937a6d0c0ff7522609745dd42ee18fd4ddb07001f88019a82",
+        "run_animate": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_addpart": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_convert-im6": "el-state-v2:121eb38d67e3ec560e1aaff60f054faf890625dc07139d46db84872d75238e91",
+        "run_lto-dump": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "copy_input": "el-state-v2:7c56d7423a2ab5b7f06d497c291420387dc653067e2f655b7b1f858578997aa2",
+        "copy_to_out": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79"
+      },
+      "el-state-v2:662d60327aa7f4c937a6d0c0ff7522609745dd42ee18fd4ddb07001f88019a82": {
+        "run_lto-dump": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "copy_to_out": "el-state-v2:662d60327aa7f4c937a6d0c0ff7522609745dd42ee18fd4ddb07001f88019a82",
+        "run_animate-im6": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79"
+      },
+      "el-state-v2:121eb38d67e3ec560e1aaff60f054faf890625dc07139d46db84872d75238e91": {
+        "run_dpkg-distaddfile": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79"
+      },
+      "el-state-v2:7c56d7423a2ab5b7f06d497c291420387dc653067e2f655b7b1f858578997aa2": {
+        "run_findmnt": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79"
+      }
+    },
+    "model_schema": "PROJECT_BRAIN_ENVIRONMENT_STATE_KEY_V2",
+    "trials": 1,
+    "successes": 1,
+    "last_used_utc": "2026-11-23T06:37:05Z"
+  },
+  {
+    "fingerprint": {
+      "actions": [
+        "copy_input",
+        "copy_to_out",
+        "run_addpart",
+        "run_addr2line",
+        "run_animate",
+        "run_animate-im6",
+        "run_animate-im6.q16",
+        "run_apt",
+        "run_apt-cache",
+        "run_apt-cdrom",
+        "run_apt-config",
+        "run_compare",
+        "run_convert-im6",
+        "run_dpkg-buildflags",
+        "run_dpkg-distaddfile",
+        "run_dpkg-genbuildinfo",
+        "run_findmnt",
+        "run_gold",
+        "run_localectl",
+        "run_lto-dump",
+        "run_objcopy",
+        "run_pidof",
+        "run_ptardiff",
+        "run_unzip",
+        "run_wget"
+      ],
+      "shapes": [
+        "str"
+      ],
+      "growth": 0.417,
+      "revisits": 6,
+      "probes": 6
+    },
+    "fp_key": "da00ae8ea5c1866374c2",
+    "goal_key": "<lambda>|'out.pdf'|FFFFFFFFFFFFFFF",
+    "plan": [
+      "run_convert-im6"
+    ],
+    "reached": true,
+    "model": {
+      "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79": {
+        "run_gold": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_wget": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_dpkg-distaddfile": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_localectl": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_animate-im6.q16": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_animate-im6": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_findmnt": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_dpkg-genbuildinfo": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_lto-dump": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_addr2line": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_apt-cdrom": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_animate": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_objcopy": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "copy_to_out": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_convert-im6": "el-state-v2:121eb38d67e3ec560e1aaff60f054faf890625dc07139d46db84872d75238e91",
+        "copy_input": "el-state-v2:7c56d7423a2ab5b7f06d497c291420387dc653067e2f655b7b1f858578997aa2"
+      },
+      "el-state-v2:121eb38d67e3ec560e1aaff60f054faf890625dc07139d46db84872d75238e91": {
+        "run_dpkg-distaddfile": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79"
+      },
+      "el-state-v2:7c56d7423a2ab5b7f06d497c291420387dc653067e2f655b7b1f858578997aa2": {
+        "run_findmnt": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79"
+      }
+    },
+    "model_schema": "PROJECT_BRAIN_ENVIRONMENT_STATE_KEY_V2",
+    "trials": 1,
+    "successes": 1,
+    "last_used_utc": "2026-11-23T06:37:11Z"
+  },
+  {
+    "fingerprint": {
+      "actions": [
+        "copy_input",
+        "copy_to_out",
+        "run_addpart",
+        "run_addr2line",
+        "run_animate",
+        "run_animate-im6",
+        "run_animate-im6.q16",
+        "run_apt",
+        "run_apt-cache",
+        "run_apt-cdrom",
+        "run_comm",
+        "run_dir",
+        "run_dpkg-scansources",
+        "run_gcc-nm",
+        "run_gold",
+        "run_gp-display-text",
+        "run_join",
+        "run_jq",
+        "run_ld",
+        "run_ls",
+        "run_lsblk",
+        "run_lsirq",
+        "run_lto-dump",
+        "run_md5sum.textutils",
+        "run_nm",
+        "run_pod2text",
+        "run_ptx",
+        "run_pygettext3",
+        "run_pygettext3.11",
+        "run_rg",
+        "run_slabtop",
+        "run_systemd-sysext",
+        "run_tar",
+        "run_top",
+        "run_tree",
+        "run_vdir",
+        "run_zipinfo"
+      ],
+      "shapes": [
+        "str"
+      ],
+      "growth": 0.958,
+      "revisits": 5,
+      "probes": 6
+    },
+    "fp_key": "3527855143722ce99157",
+    "goal_key": "<lambda>|'out.txt'|FFFFFFFFFFFFFFF",
+    "plan": [
+      "run_vdir"
+    ],
+    "reached": true,
+    "model": {
+      "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79": {
+        "run_vdir": "el-state-v2:1c85c9b3b20046b819e753c9153c32ec34deab788abdc62d62755a5d087ad183",
+        "run_pygettext3.11": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_tar": "el-state-v2:0fc3537e39ea230eefe56d91de032c8c4c7db0f546b33d8ff6d53ece02ebc856",
+        "run_dpkg-scansources": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_dir": "el-state-v2:83b36876842958f0ea2ae1e7b80f30df2a64e7423adb386233502df38bbb15a7",
+        "run_apt-cdrom": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_animate-im6": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_tree": "el-state-v2:58501e6c58c6f5f9747c5c226e71ae816eb8473c3727440b8dcfbfbc4a89ebf3",
+        "run_addpart": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_pod2text": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_comm": "el-state-v2:2cd2b4057bd6da02fbc288e71048c9d71f0239fdd3cb053a715e9cf28a725e6a",
+        "run_addr2line": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "copy_to_out": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_rg": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79"
+      },
+      "el-state-v2:1c85c9b3b20046b819e753c9153c32ec34deab788abdc62d62755a5d087ad183": {
+        "run_rg": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79"
+      },
+      "el-state-v2:0fc3537e39ea230eefe56d91de032c8c4c7db0f546b33d8ff6d53ece02ebc856": {},
+      "el-state-v2:83b36876842958f0ea2ae1e7b80f30df2a64e7423adb386233502df38bbb15a7": {
+        "run_tar": "el-state-v2:11238375348a4b19511fe05c6c88a5c56496831b2f8107ac50f81ddb30f00650"
+      },
+      "el-state-v2:11238375348a4b19511fe05c6c88a5c56496831b2f8107ac50f81ddb30f00650": {
+        "run_slabtop": "el-state-v2:8375c64ebc1963e2b7909008b8b9749f07b8b8890f1fd5cc4297c7c4ea073c52"
+      },
+      "el-state-v2:8375c64ebc1963e2b7909008b8b9749f07b8b8890f1fd5cc4297c7c4ea073c52": {
+        "run_dir": "el-state-v2:83b36876842958f0ea2ae1e7b80f30df2a64e7423adb386233502df38bbb15a7"
+      },
+      "el-state-v2:58501e6c58c6f5f9747c5c226e71ae816eb8473c3727440b8dcfbfbc4a89ebf3": {},
+      "el-state-v2:2cd2b4057bd6da02fbc288e71048c9d71f0239fdd3cb053a715e9cf28a725e6a": {
+        "copy_input": "el-state-v2:85683eaee0dadcf85db1c075e0ad55aa80431d218be78c4367112d8bb24e3ffc"
+      },
+      "el-state-v2:85683eaee0dadcf85db1c075e0ad55aa80431d218be78c4367112d8bb24e3ffc": {
+        "run_top": "el-state-v2:e8a5c8d1fde6530f5c4a2e89e147b2e4d968ee1132e9db7a220704f67eb1399d"
+      },
+      "el-state-v2:e8a5c8d1fde6530f5c4a2e89e147b2e4d968ee1132e9db7a220704f67eb1399d": {}
+    },
+    "model_schema": "PROJECT_BRAIN_ENVIRONMENT_STATE_KEY_V2",
+    "trials": 1,
+    "successes": 1,
+    "last_used_utc": "2026-11-23T06:38:29Z"
+  },
+  {
+    "fingerprint": {
+      "actions": [
+        "copy_input",
+        "copy_to_out",
+        "run_addpart",
+        "run_addr2line",
+        "run_animate",
+        "run_animate-im6",
+        "run_animate-im6.q16",
+        "run_apt",
+        "run_apt-cache",
+        "run_apt-cdrom",
+        "run_comm",
+        "run_dir",
+        "run_dpkg-scansources",
+        "run_gcc-nm",
+        "run_gold",
+        "run_gp-display-text",
+        "run_join",
+        "run_jq",
+        "run_ld",
+        "run_ls",
+        "run_lsblk",
+        "run_lsirq",
+        "run_lto-dump",
+        "run_md5sum.textutils",
+        "run_nm",
+        "run_pod2text",
+        "run_ptx",
+        "run_pygettext3",
+        "run_pygettext3.11",
+        "run_rg",
+        "run_slabtop",
+        "run_systemd-sysext",
+        "run_tar",
+        "run_top",
+        "run_tree",
+        "run_zipinfo"
+      ],
+      "shapes": [
+        "str"
+      ],
+      "growth": 0.917,
+      "revisits": 5,
+      "probes": 6
+    },
+    "fp_key": "d45550a5bc1a6b0dab9f",
+    "goal_key": "<lambda>|'out.txt'|FFFFFFFFFFFFFFF",
+    "plan": [
+      "run_tar"
+    ],
+    "reached": true,
+    "model": {
+      "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79": {
+        "run_zipinfo": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_rg": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_pygettext3.11": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_tar": "el-state-v2:867c5b0bbf67ab4a96fb759bac032192d5b38c539e9c7603324e4743261ed78c",
+        "run_dpkg-scansources": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_dir": "el-state-v2:83b36876842958f0ea2ae1e7b80f30df2a64e7423adb386233502df38bbb15a7",
+        "run_apt-cdrom": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_animate-im6": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_tree": "el-state-v2:58501e6c58c6f5f9747c5c226e71ae816eb8473c3727440b8dcfbfbc4a89ebf3",
+        "run_addpart": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_pod2text": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_comm": "el-state-v2:2cd2b4057bd6da02fbc288e71048c9d71f0239fdd3cb053a715e9cf28a725e6a",
+        "run_addr2line": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "copy_to_out": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79"
+      },
+      "el-state-v2:867c5b0bbf67ab4a96fb759bac032192d5b38c539e9c7603324e4743261ed78c": {},
+      "el-state-v2:83b36876842958f0ea2ae1e7b80f30df2a64e7423adb386233502df38bbb15a7": {
+        "run_tar": "el-state-v2:dc349b6392aab8dafeb22700891381047a03fd6575a8cbe9f95a718b1563e686"
+      },
+      "el-state-v2:dc349b6392aab8dafeb22700891381047a03fd6575a8cbe9f95a718b1563e686": {
+        "run_slabtop": "el-state-v2:8375c64ebc1963e2b7909008b8b9749f07b8b8890f1fd5cc4297c7c4ea073c52"
+      },
+      "el-state-v2:8375c64ebc1963e2b7909008b8b9749f07b8b8890f1fd5cc4297c7c4ea073c52": {
+        "run_dir": "el-state-v2:83b36876842958f0ea2ae1e7b80f30df2a64e7423adb386233502df38bbb15a7"
+      },
+      "el-state-v2:58501e6c58c6f5f9747c5c226e71ae816eb8473c3727440b8dcfbfbc4a89ebf3": {},
+      "el-state-v2:2cd2b4057bd6da02fbc288e71048c9d71f0239fdd3cb053a715e9cf28a725e6a": {
+        "copy_input": "el-state-v2:85683eaee0dadcf85db1c075e0ad55aa80431d218be78c4367112d8bb24e3ffc"
+      },
+      "el-state-v2:85683eaee0dadcf85db1c075e0ad55aa80431d218be78c4367112d8bb24e3ffc": {
+        "run_top": "el-state-v2:e8a5c8d1fde6530f5c4a2e89e147b2e4d968ee1132e9db7a220704f67eb1399d"
+      },
+      "el-state-v2:e8a5c8d1fde6530f5c4a2e89e147b2e4d968ee1132e9db7a220704f67eb1399d": {}
+    },
+    "model_schema": "PROJECT_BRAIN_ENVIRONMENT_STATE_KEY_V2",
+    "trials": 1,
+    "successes": 1,
+    "last_used_utc": "2026-11-23T06:38:34Z"
+  },
+  {
+    "fingerprint": {
+      "actions": [
+        "copy_input",
+        "copy_to_out",
+        "run_addpart",
+        "run_addr2line",
+        "run_animate",
+        "run_animate-im6",
+        "run_animate-im6.q16",
+        "run_apt",
+        "run_apt-cache",
+        "run_apt-cdrom",
+        "run_comm",
+        "run_dir",
+        "run_dpkg-scansources",
+        "run_gcc-nm",
+        "run_gold",
+        "run_gp-display-text",
+        "run_join",
+        "run_jq",
+        "run_ld",
+        "run_ls",
+        "run_lsblk",
+        "run_lsirq",
+        "run_lto-dump",
+        "run_md5sum.textutils",
+        "run_nm",
+        "run_pod2text",
+        "run_ptx",
+        "run_pygettext3",
+        "run_pygettext3.11",
+        "run_rg",
+        "run_slabtop",
+        "run_systemd-sysext",
+        "run_top",
+        "run_tree",
+        "run_zipinfo"
+      ],
+      "shapes": [
+        "str"
+      ],
+      "growth": 0.806,
+      "revisits": 5,
+      "probes": 6
+    },
+    "fp_key": "2e44077b4fc9b894d13f",
+    "goal_key": "<lambda>|'out.txt'|FFFFFFFFFFFFFFF",
+    "plan": [
+      "run_top"
+    ],
+    "reached": true,
+    "model": {
+      "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79": {
+        "run_rg": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_pygettext3.11": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_top": "el-state-v2:e8a5c8d1fde6530f5c4a2e89e147b2e4d968ee1132e9db7a220704f67eb1399d",
+        "run_dir": "el-state-v2:83b36876842958f0ea2ae1e7b80f30df2a64e7423adb386233502df38bbb15a7",
+        "run_ls": "el-state-v2:83b36876842958f0ea2ae1e7b80f30df2a64e7423adb386233502df38bbb15a7",
+        "run_animate-im6": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_addpart": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_pod2text": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_comm": "el-state-v2:2cd2b4057bd6da02fbc288e71048c9d71f0239fdd3cb053a715e9cf28a725e6a",
+        "run_animate": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_addr2line": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_dpkg-scansources": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_gp-display-text": "el-state-v2:8d8ff1bd83d7f9da3a582ea45dbc9a1bba0132567644b25af61bc017f4ca1285",
+        "copy_to_out": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_lsblk": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_gold": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_ld": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_systemd-sysext": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "copy_input": "el-state-v2:7c56d7423a2ab5b7f06d497c291420387dc653067e2f655b7b1f858578997aa2",
+        "run_jq": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_ptx": "el-state-v2:b47419307a6fdd625826fc9ed05d1d8d6582a949cd268ab7644e81c99866e309",
+        "run_join": "el-state-v2:7f63680be7020768e6fdd1bcd4cda67162959ce7ac57acc20217d88f1717d3b1"
+      },
+      "el-state-v2:e8a5c8d1fde6530f5c4a2e89e147b2e4d968ee1132e9db7a220704f67eb1399d": {
+        "run_dpkg-scansources": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_slabtop": "el-state-v2:8375c64ebc1963e2b7909008b8b9749f07b8b8890f1fd5cc4297c7c4ea073c52"
+      },
+      "el-state-v2:8375c64ebc1963e2b7909008b8b9749f07b8b8890f1fd5cc4297c7c4ea073c52": {},
+      "el-state-v2:83b36876842958f0ea2ae1e7b80f30df2a64e7423adb386233502df38bbb15a7": {
+        "run_animate-im6.q16": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_apt-cdrom": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79"
+      },
+      "el-state-v2:2cd2b4057bd6da02fbc288e71048c9d71f0239fdd3cb053a715e9cf28a725e6a": {
+        "copy_input": "el-state-v2:85683eaee0dadcf85db1c075e0ad55aa80431d218be78c4367112d8bb24e3ffc"
+      },
+      "el-state-v2:85683eaee0dadcf85db1c075e0ad55aa80431d218be78c4367112d8bb24e3ffc": {},
+      "el-state-v2:8d8ff1bd83d7f9da3a582ea45dbc9a1bba0132567644b25af61bc017f4ca1285": {},
+      "el-state-v2:7c56d7423a2ab5b7f06d497c291420387dc653067e2f655b7b1f858578997aa2": {
+        "run_animate-im6": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79"
+      },
+      "el-state-v2:b47419307a6fdd625826fc9ed05d1d8d6582a949cd268ab7644e81c99866e309": {
+        "run_animate-im6": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79"
+      },
+      "el-state-v2:7f63680be7020768e6fdd1bcd4cda67162959ce7ac57acc20217d88f1717d3b1": {}
+    },
+    "model_schema": "PROJECT_BRAIN_ENVIRONMENT_STATE_KEY_V2",
+    "trials": 1,
+    "successes": 1,
+    "last_used_utc": "2026-11-23T06:38:42Z"
+  },
+  {
+    "fingerprint": {
+      "actions": [
+        "copy_input",
+        "copy_to_out",
+        "run_addpart",
+        "run_addr2line",
+        "run_animate",
+        "run_animate-im6",
+        "run_animate-im6.q16",
+        "run_apt",
+        "run_apt-cache",
+        "run_apt-cdrom",
+        "run_comm",
+        "run_dir",
+        "run_dpkg-scansources",
+        "run_gcc-nm",
+        "run_gold",
+        "run_gp-display-text",
+        "run_join",
+        "run_jq",
+        "run_ld",
+        "run_ls",
+        "run_lsblk",
+        "run_lsirq",
+        "run_lto-dump",
+        "run_md5sum.textutils",
+        "run_nm",
+        "run_pod2text",
+        "run_ptx",
+        "run_pygettext3",
+        "run_pygettext3.11",
+        "run_rg",
+        "run_slabtop",
+        "run_systemd-sysext",
+        "run_tree",
+        "run_zipinfo"
+      ],
+      "shapes": [
+        "str"
+      ],
+      "growth": 0.764,
+      "revisits": 5,
+      "probes": 6
+    },
+    "fp_key": "7d0ed965a1a7465d3055",
+    "goal_key": "<lambda>|'out.txt'|FFFFFFFFFFFFFFF",
+    "plan": [
+      "run_tree"
+    ],
+    "reached": true,
+    "model": {
+      "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79": {
+        "run_rg": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_pygettext3.11": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_tree": "el-state-v2:58501e6c58c6f5f9747c5c226e71ae816eb8473c3727440b8dcfbfbc4a89ebf3",
+        "run_dir": "el-state-v2:83b36876842958f0ea2ae1e7b80f30df2a64e7423adb386233502df38bbb15a7",
+        "run_ls": "el-state-v2:83b36876842958f0ea2ae1e7b80f30df2a64e7423adb386233502df38bbb15a7",
+        "run_animate-im6": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_addpart": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_pod2text": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_comm": "el-state-v2:2cd2b4057bd6da02fbc288e71048c9d71f0239fdd3cb053a715e9cf28a725e6a",
+        "run_animate": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_addr2line": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_dpkg-scansources": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_gp-display-text": "el-state-v2:8d8ff1bd83d7f9da3a582ea45dbc9a1bba0132567644b25af61bc017f4ca1285",
+        "copy_to_out": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_lsblk": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_gold": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_ld": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_systemd-sysext": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "copy_input": "el-state-v2:7c56d7423a2ab5b7f06d497c291420387dc653067e2f655b7b1f858578997aa2",
+        "run_jq": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_ptx": "el-state-v2:b47419307a6fdd625826fc9ed05d1d8d6582a949cd268ab7644e81c99866e309",
+        "run_join": "el-state-v2:7f63680be7020768e6fdd1bcd4cda67162959ce7ac57acc20217d88f1717d3b1"
+      },
+      "el-state-v2:58501e6c58c6f5f9747c5c226e71ae816eb8473c3727440b8dcfbfbc4a89ebf3": {
+        "run_dpkg-scansources": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_slabtop": "el-state-v2:8375c64ebc1963e2b7909008b8b9749f07b8b8890f1fd5cc4297c7c4ea073c52"
+      },
+      "el-state-v2:8375c64ebc1963e2b7909008b8b9749f07b8b8890f1fd5cc4297c7c4ea073c52": {},
+      "el-state-v2:83b36876842958f0ea2ae1e7b80f30df2a64e7423adb386233502df38bbb15a7": {
+        "run_animate-im6.q16": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_apt-cdrom": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79"
+      },
+      "el-state-v2:2cd2b4057bd6da02fbc288e71048c9d71f0239fdd3cb053a715e9cf28a725e6a": {
+        "copy_input": "el-state-v2:85683eaee0dadcf85db1c075e0ad55aa80431d218be78c4367112d8bb24e3ffc"
+      },
+      "el-state-v2:85683eaee0dadcf85db1c075e0ad55aa80431d218be78c4367112d8bb24e3ffc": {},
+      "el-state-v2:8d8ff1bd83d7f9da3a582ea45dbc9a1bba0132567644b25af61bc017f4ca1285": {},
+      "el-state-v2:7c56d7423a2ab5b7f06d497c291420387dc653067e2f655b7b1f858578997aa2": {
+        "run_animate-im6": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79"
+      },
+      "el-state-v2:b47419307a6fdd625826fc9ed05d1d8d6582a949cd268ab7644e81c99866e309": {
+        "run_animate-im6": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79"
+      },
+      "el-state-v2:7f63680be7020768e6fdd1bcd4cda67162959ce7ac57acc20217d88f1717d3b1": {}
+    },
+    "model_schema": "PROJECT_BRAIN_ENVIRONMENT_STATE_KEY_V2",
+    "trials": 1,
+    "successes": 1,
+    "last_used_utc": "2026-11-23T06:38:48Z"
+  },
+  {
+    "fingerprint": {
+      "actions": [
+        "copy_input",
+        "copy_to_out",
+        "run_addpart",
+        "run_addr2line",
+        "run_animate",
+        "run_animate-im6",
+        "run_animate-im6.q16",
+        "run_apt",
+        "run_apt-cache",
+        "run_apt-cdrom",
+        "run_comm",
+        "run_dir",
+        "run_dpkg-scansources",
+        "run_gcc-nm",
+        "run_gold",
+        "run_gp-display-text",
+        "run_join",
+        "run_jq",
+        "run_ld",
+        "run_ls",
+        "run_lsblk",
+        "run_lsirq",
+        "run_lto-dump",
+        "run_md5sum.textutils",
+        "run_nm",
+        "run_pod2text",
+        "run_ptx",
+        "run_pygettext3",
+        "run_pygettext3.11",
+        "run_rg",
+        "run_slabtop",
+        "run_systemd-sysext",
+        "run_zipinfo"
+      ],
+      "shapes": [
+        "str"
+      ],
+      "growth": 0.639,
+      "revisits": 6,
+      "probes": 6
+    },
+    "fp_key": "ec6ff8af76aaa2a59807",
+    "goal_key": "<lambda>|'out.txt'|FFFFFFFFFFFFFFF",
+    "plan": [
+      "run_slabtop"
+    ],
+    "reached": true,
+    "model": {
+      "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79": {
+        "run_rg": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_pygettext3.11": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_zipinfo": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_dpkg-scansources": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_slabtop": "el-state-v2:8375c64ebc1963e2b7909008b8b9749f07b8b8890f1fd5cc4297c7c4ea073c52",
+        "run_dir": "el-state-v2:83b36876842958f0ea2ae1e7b80f30df2a64e7423adb386233502df38bbb15a7",
+        "run_ls": "el-state-v2:83b36876842958f0ea2ae1e7b80f30df2a64e7423adb386233502df38bbb15a7",
+        "run_animate-im6": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_addpart": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_pod2text": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_comm": "el-state-v2:2cd2b4057bd6da02fbc288e71048c9d71f0239fdd3cb053a715e9cf28a725e6a",
+        "run_animate": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_addr2line": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_gp-display-text": "el-state-v2:8d8ff1bd83d7f9da3a582ea45dbc9a1bba0132567644b25af61bc017f4ca1285",
+        "copy_to_out": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_lsblk": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_gold": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_ld": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_systemd-sysext": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "copy_input": "el-state-v2:7c56d7423a2ab5b7f06d497c291420387dc653067e2f655b7b1f858578997aa2",
+        "run_jq": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_ptx": "el-state-v2:b47419307a6fdd625826fc9ed05d1d8d6582a949cd268ab7644e81c99866e309",
+        "run_join": "el-state-v2:7f63680be7020768e6fdd1bcd4cda67162959ce7ac57acc20217d88f1717d3b1"
+      },
+      "el-state-v2:8375c64ebc1963e2b7909008b8b9749f07b8b8890f1fd5cc4297c7c4ea073c52": {},
+      "el-state-v2:83b36876842958f0ea2ae1e7b80f30df2a64e7423adb386233502df38bbb15a7": {
+        "run_animate-im6.q16": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_apt-cdrom": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79"
+      },
+      "el-state-v2:2cd2b4057bd6da02fbc288e71048c9d71f0239fdd3cb053a715e9cf28a725e6a": {
+        "copy_input": "el-state-v2:85683eaee0dadcf85db1c075e0ad55aa80431d218be78c4367112d8bb24e3ffc"
+      },
+      "el-state-v2:85683eaee0dadcf85db1c075e0ad55aa80431d218be78c4367112d8bb24e3ffc": {},
+      "el-state-v2:8d8ff1bd83d7f9da3a582ea45dbc9a1bba0132567644b25af61bc017f4ca1285": {},
+      "el-state-v2:7c56d7423a2ab5b7f06d497c291420387dc653067e2f655b7b1f858578997aa2": {
+        "run_animate-im6": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79"
+      },
+      "el-state-v2:b47419307a6fdd625826fc9ed05d1d8d6582a949cd268ab7644e81c99866e309": {
+        "run_animate-im6": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79"
+      },
+      "el-state-v2:7f63680be7020768e6fdd1bcd4cda67162959ce7ac57acc20217d88f1717d3b1": {}
+    },
+    "model_schema": "PROJECT_BRAIN_ENVIRONMENT_STATE_KEY_V2",
+    "trials": 1,
+    "successes": 1,
+    "last_used_utc": "2026-11-23T06:38:55Z"
+  },
+  {
+    "fingerprint": {
+      "actions": [
+        "copy_input",
+        "copy_to_out",
+        "run_addpart",
+        "run_addr2line",
+        "run_animate",
+        "run_animate-im6",
+        "run_animate-im6.q16",
+        "run_apt",
+        "run_apt-cache",
+        "run_apt-cdrom",
+        "run_comm",
+        "run_dir",
+        "run_dpkg-scansources",
+        "run_gcc-nm",
+        "run_gold",
+        "run_gp-display-text",
+        "run_join",
+        "run_jq",
+        "run_ld",
+        "run_ls",
+        "run_lsblk",
+        "run_lsirq",
+        "run_lto-dump",
+        "run_md5sum.textutils",
+        "run_nm",
+        "run_pod2text",
+        "run_ptx",
+        "run_pygettext3",
+        "run_pygettext3.11",
+        "run_rg",
+        "run_systemd-sysext",
+        "run_zipinfo"
+      ],
+      "shapes": [
+        "str"
+      ],
+      "growth": 0.708,
+      "revisits": 6,
+      "probes": 6
+    },
+    "fp_key": "ab88b73d6057c3653045",
+    "goal_key": "<lambda>|'out.txt'|FFFFFFFFFFFFFFF",
+    "plan": [
+      "run_dir"
+    ],
+    "reached": true,
+    "model": {
+      "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79": {
+        "run_rg": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_pygettext3.11": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_dpkg-scansources": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_dir": "el-state-v2:83b36876842958f0ea2ae1e7b80f30df2a64e7423adb386233502df38bbb15a7",
+        "run_systemd-sysext": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_ls": "el-state-v2:83b36876842958f0ea2ae1e7b80f30df2a64e7423adb386233502df38bbb15a7",
+        "run_animate-im6": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_addpart": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_pod2text": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_comm": "el-state-v2:2cd2b4057bd6da02fbc288e71048c9d71f0239fdd3cb053a715e9cf28a725e6a",
+        "run_gp-display-text": "el-state-v2:8d8ff1bd83d7f9da3a582ea45dbc9a1bba0132567644b25af61bc017f4ca1285",
+        "run_lsblk": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_gold": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_ld": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_zipinfo": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "copy_input": "el-state-v2:7c56d7423a2ab5b7f06d497c291420387dc653067e2f655b7b1f858578997aa2",
+        "run_jq": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79"
+      },
+      "el-state-v2:83b36876842958f0ea2ae1e7b80f30df2a64e7423adb386233502df38bbb15a7": {
+        "run_animate-im6.q16": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79"
+      },
+      "el-state-v2:2cd2b4057bd6da02fbc288e71048c9d71f0239fdd3cb053a715e9cf28a725e6a": {
+        "copy_input": "el-state-v2:85683eaee0dadcf85db1c075e0ad55aa80431d218be78c4367112d8bb24e3ffc"
+      },
+      "el-state-v2:85683eaee0dadcf85db1c075e0ad55aa80431d218be78c4367112d8bb24e3ffc": {
+        "run_animate": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79"
+      },
+      "el-state-v2:8d8ff1bd83d7f9da3a582ea45dbc9a1bba0132567644b25af61bc017f4ca1285": {
+        "copy_to_out": "el-state-v2:8d8ff1bd83d7f9da3a582ea45dbc9a1bba0132567644b25af61bc017f4ca1285"
+      },
+      "el-state-v2:7c56d7423a2ab5b7f06d497c291420387dc653067e2f655b7b1f858578997aa2": {
+        "run_animate-im6": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79"
+      }
+    },
+    "model_schema": "PROJECT_BRAIN_ENVIRONMENT_STATE_KEY_V2",
+    "trials": 1,
+    "successes": 1,
+    "last_used_utc": "2026-11-23T06:39:00Z"
+  },
+  {
+    "fingerprint": {
+      "actions": [
+        "copy_input",
+        "copy_to_out",
+        "run_addpart",
+        "run_addr2line",
+        "run_animate",
+        "run_animate-im6",
+        "run_animate-im6.q16",
+        "run_apt",
+        "run_apt-cache",
+        "run_apt-cdrom",
+        "run_gp-display-text",
+        "run_md5sum.textutils",
+        "run_pod2text",
+        "run_pygettext3",
+        "run_pygettext3.11",
+        "run_sort",
+        "run_systemd-sysext"
+      ],
+      "shapes": [
+        "str"
+      ],
+      "growth": 0.722,
+      "revisits": 5,
+      "probes": 6
+    },
+    "fp_key": "bf610dd615f89f04d346",
+    "goal_key": "effect|target=out.txt|suffix=.txt",
+    "plan": [
+      "run_sort"
+    ],
+    "reached": true,
+    "model": null,
+    "model_schema": null,
+    "trials": 3,
+    "successes": 3,
+    "last_used_utc": "2026-11-23T06:45:03Z"
+  },
+  {
+    "fingerprint": {
+      "actions": [
+        "copy_input",
+        "copy_to_out",
+        "run_addpart",
+        "run_addr2line",
+        "run_animate",
+        "run_animate-im6",
+        "run_animate-im6.q16",
+        "run_apt",
+        "run_apt-cache",
+        "run_apt-cdrom",
+        "run_apt-config",
+        "run_convert",
+        "run_dpkg-buildflags",
+        "run_dpkg-distaddfile",
+        "run_dpkg-genbuildinfo",
+        "run_pidof",
+        "run_ptardiff"
+      ],
+      "shapes": [
+        "str"
+      ],
+      "growth": 0.514,
+      "revisits": 6,
+      "probes": 6
+    },
+    "fp_key": "61c5234816a009084a41",
+    "goal_key": "<lambda>|'out.pdf'|FFFFFFFFFFFFFFF",
+    "plan": [
+      "run_convert"
+    ],
+    "reached": true,
+    "model": {
+      "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79": {
+        "run_wget": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_expand": "el-state-v2:98954c71f05fe79f0e612054db2f0a1b7b974bdebead12822f502af41087309c",
+        "run_pidof": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_dpkg-buildflags": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_dpkg-genbuildinfo": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_findmnt": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_animate-im6": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_ptardiff": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_dpkg-distaddfile": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_localectl": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_gold": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_animate": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_addpart": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "copy_to_out": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_composite": "el-state-v2:9b96a9c869762980d8363d3cfdb3d5181c79caafb385a7604bef75b1a7642670",
+        "copy_input": "el-state-v2:7c56d7423a2ab5b7f06d497c291420387dc653067e2f655b7b1f858578997aa2",
+        "run_animate-im6.q16": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_addr2line": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_apt-cdrom": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_apt": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_apt-config": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_apt-cache": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_convert": "el-state-v2:121eb38d67e3ec560e1aaff60f054faf890625dc07139d46db84872d75238e91"
+      },
+      "el-state-v2:98954c71f05fe79f0e612054db2f0a1b7b974bdebead12822f502af41087309c": {
+        "run_wget": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79"
+      },
+      "el-state-v2:9b96a9c869762980d8363d3cfdb3d5181c79caafb385a7604bef75b1a7642670": {
+        "run_dpkg-buildflags": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79"
+      },
+      "el-state-v2:7c56d7423a2ab5b7f06d497c291420387dc653067e2f655b7b1f858578997aa2": {
+        "run_unzip": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_dpkg-genbuildinfo": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_addpart": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79"
+      },
+      "el-state-v2:121eb38d67e3ec560e1aaff60f054faf890625dc07139d46db84872d75238e91": {}
+    },
+    "model_schema": "PROJECT_BRAIN_ENVIRONMENT_STATE_KEY_V2",
+    "trials": 1,
+    "successes": 1,
+    "last_used_utc": "2026-11-23T06:40:09Z"
+  },
+  {
+    "fingerprint": {
+      "actions": [
+        "copy_input",
+        "copy_to_out",
+        "run_addpart",
+        "run_addr2line",
+        "run_animate",
+        "run_unxz",
+        "run_x86_64-linux-gnu-size",
+        "run_xz",
+        "run_xzcat",
+        "run_xzcmp",
+        "run_xzdiff",
+        "run_xzegrep",
+        "run_xzfgrep",
+        "run_xzgrep",
+        "run_xzless",
+        "run_xzmore"
+      ],
+      "shapes": [
+        "str"
+      ],
+      "growth": 0.875,
+      "revisits": 5,
+      "probes": 6
+    },
+    "fp_key": "067877a40d7979839801",
+    "goal_key": "effect|target=out.xz|suffix=.xz",
+    "plan": [
+      "run_xz"
+    ],
+    "reached": true,
+    "model": null,
+    "model_schema": null,
+    "trials": 1,
+    "successes": 1,
+    "last_used_utc": "2026-11-23T06:43:30Z"
+  },
+  {
+    "fingerprint": {
+      "actions": [
+        "copy_input",
+        "copy_to_out",
+        "run_addpart",
+        "run_addr2line",
+        "run_animate",
+        "run_animate-im6",
+        "run_animate-im6.q16",
+        "run_apt",
+        "run_apt-cache",
+        "run_apt-cdrom",
+        "run_apt-config",
+        "run_apt-get",
+        "run_apt-key",
+        "run_bunzip2",
+        "run_bzip2",
+        "run_bzip2recover"
+      ],
+      "shapes": [
+        "str"
+      ],
+      "growth": 0.583,
+      "revisits": 6,
+      "probes": 6
+    },
+    "fp_key": "18119de3d470d6b37312",
+    "goal_key": "effect|target=out.bz2|suffix=.bz2",
+    "plan": [
+      "run_bzip2"
+    ],
+    "reached": true,
+    "model": null,
+    "model_schema": null,
+    "trials": 1,
+    "successes": 1,
+    "last_used_utc": "2026-11-23T06:43:30Z"
+  },
+  {
+    "fingerprint": {
+      "actions": [
+        "copy_input",
+        "copy_to_out",
+        "run_addpart",
+        "run_addr2line",
+        "run_animate",
+        "run_animate-im6",
+        "run_animate-im6.q16",
+        "run_apt",
+        "run_apt-cache",
+        "run_apt-cdrom",
+        "run_gp-display-text",
+        "run_md5sum.textutils",
+        "run_pod2text",
+        "run_pygettext3",
+        "run_pygettext3.11",
+        "run_sort",
+        "run_systemd-sysext"
+      ],
+      "shapes": [
+        "str"
+      ],
+      "growth": 0.597,
+      "revisits": 6,
+      "probes": 6
+    },
+    "fp_key": "9b97a6d49bf12e084a5c",
+    "goal_key": "<lambda>|'out.txt'|FFFFFFFFFFFFFFF",
+    "plan": [
+      "run_gp-display-text"
+    ],
+    "reached": true,
+    "model": {
+      "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79": {
+        "run_rg": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_pygettext3.11": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_zipinfo": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_dpkg-scansources": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_slabtop": "el-state-v2:8375c64ebc1963e2b7909008b8b9749f07b8b8890f1fd5cc4297c7c4ea073c52",
+        "run_dir": "el-state-v2:83b36876842958f0ea2ae1e7b80f30df2a64e7423adb386233502df38bbb15a7",
+        "run_ls": "el-state-v2:83b36876842958f0ea2ae1e7b80f30df2a64e7423adb386233502df38bbb15a7",
+        "run_animate-im6": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_addpart": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_pod2text": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_comm": "el-state-v2:2cd2b4057bd6da02fbc288e71048c9d71f0239fdd3cb053a715e9cf28a725e6a",
+        "run_animate": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_addr2line": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_gp-display-text": "el-state-v2:8d8ff1bd83d7f9da3a582ea45dbc9a1bba0132567644b25af61bc017f4ca1285",
+        "copy_to_out": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_lsblk": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_gold": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_ld": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_systemd-sysext": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "copy_input": "el-state-v2:7c56d7423a2ab5b7f06d497c291420387dc653067e2f655b7b1f858578997aa2",
+        "run_jq": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_ptx": "el-state-v2:b47419307a6fdd625826fc9ed05d1d8d6582a949cd268ab7644e81c99866e309",
+        "run_join": "el-state-v2:7f63680be7020768e6fdd1bcd4cda67162959ce7ac57acc20217d88f1717d3b1"
+      },
+      "el-state-v2:8375c64ebc1963e2b7909008b8b9749f07b8b8890f1fd5cc4297c7c4ea073c52": {},
+      "el-state-v2:83b36876842958f0ea2ae1e7b80f30df2a64e7423adb386233502df38bbb15a7": {
+        "run_animate-im6.q16": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_apt-cdrom": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79"
+      },
+      "el-state-v2:2cd2b4057bd6da02fbc288e71048c9d71f0239fdd3cb053a715e9cf28a725e6a": {
+        "copy_input": "el-state-v2:85683eaee0dadcf85db1c075e0ad55aa80431d218be78c4367112d8bb24e3ffc"
+      },
+      "el-state-v2:85683eaee0dadcf85db1c075e0ad55aa80431d218be78c4367112d8bb24e3ffc": {},
+      "el-state-v2:8d8ff1bd83d7f9da3a582ea45dbc9a1bba0132567644b25af61bc017f4ca1285": {},
+      "el-state-v2:7c56d7423a2ab5b7f06d497c291420387dc653067e2f655b7b1f858578997aa2": {
+        "run_animate-im6": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79"
+      },
+      "el-state-v2:b47419307a6fdd625826fc9ed05d1d8d6582a949cd268ab7644e81c99866e309": {
+        "run_animate-im6": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79"
+      },
+      "el-state-v2:7f63680be7020768e6fdd1bcd4cda67162959ce7ac57acc20217d88f1717d3b1": {}
+    },
+    "model_schema": "PROJECT_BRAIN_ENVIRONMENT_STATE_KEY_V2",
+    "trials": 1,
+    "successes": 1,
+    "last_used_utc": "2026-11-23T06:43:34Z"
+  },
+  {
+    "fingerprint": {
+      "actions": [
+        "copy_input",
+        "copy_to_out",
+        "run_addpart",
+        "run_addr2line",
+        "run_animate",
+        "run_animate-im6",
+        "run_animate-im6.q16",
+        "run_apt",
+        "run_apt-cache",
+        "run_apt-cdrom",
+        "run_md5sum.textutils",
+        "run_pod2text",
+        "run_pygettext3",
+        "run_pygettext3.11",
+        "run_sort",
+        "run_systemd-sysext"
+      ],
+      "shapes": [
+        "str"
+      ],
+      "growth": 0.708,
+      "revisits": 6,
+      "probes": 6
+    },
+    "fp_key": "061a1699c906d566430d",
+    "goal_key": "<lambda>|'out.txt'|FFFFFFFFFFFFFFF",
+    "plan": [
+      "run_sort"
+    ],
+    "reached": true,
+    "model": {
+      "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79": {
+        "run_sort": "el-state-v2:f6d006a72c35c2c1d954654dd16887ad90f1cba0452ecf54d780d2df3d9d4e0b",
+        "run_animate-im6": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_systemd-sysext": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_addr2line": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_addpart": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "copy_to_out": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_pygettext3": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "copy_input": "el-state-v2:7c56d7423a2ab5b7f06d497c291420387dc653067e2f655b7b1f858578997aa2",
+        "run_apt": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_md5sum.textutils": "el-state-v2:d5e1cc9468a28b4e45e56304c948171c1a0cd1573126f5480f10dbea2c97b3b1",
+        "run_apt-cdrom": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79"
+      },
+      "el-state-v2:f6d006a72c35c2c1d954654dd16887ad90f1cba0452ecf54d780d2df3d9d4e0b": {
+        "run_sort": "el-state-v2:f6d006a72c35c2c1d954654dd16887ad90f1cba0452ecf54d780d2df3d9d4e0b",
+        "run_animate-im6.q16": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_apt-cdrom": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_animate-im6": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_apt-cache": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79"
+      },
+      "el-state-v2:7c56d7423a2ab5b7f06d497c291420387dc653067e2f655b7b1f858578997aa2": {
+        "run_addpart": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79"
+      },
+      "el-state-v2:d5e1cc9468a28b4e45e56304c948171c1a0cd1573126f5480f10dbea2c97b3b1": {
+        "run_sort": "el-state-v2:f6d006a72c35c2c1d954654dd16887ad90f1cba0452ecf54d780d2df3d9d4e0b"
+      }
+    },
+    "model_schema": "PROJECT_BRAIN_ENVIRONMENT_STATE_KEY_V2",
+    "trials": 1,
+    "successes": 1,
+    "last_used_utc": "2026-11-23T06:43:35Z"
+  },
+  {
+    "fingerprint": {
+      "actions": [
+        "copy_input",
+        "copy_to_out",
+        "run_addpart",
+        "run_addr2line",
+        "run_animate",
+        "run_animate-im6",
+        "run_animate-im6.q16",
+        "run_apt",
+        "run_apt-cache",
+        "run_apt-cdrom",
+        "run_md5sum.textutils",
+        "run_pod2text",
+        "run_pygettext3",
+        "run_pygettext3.11",
+        "run_systemd-sysext"
+      ],
+      "shapes": [
+        "str"
+      ],
+      "growth": 0.472,
+      "revisits": 6,
+      "probes": 6
+    },
+    "fp_key": "0d09de0c082ddd772b79",
+    "goal_key": "<lambda>|'out.txt'|FFFFFFFFFFFFFFF",
+    "plan": [
+      "run_md5sum.textutils"
+    ],
+    "reached": true,
+    "model": {
+      "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79": {
+        "run_pygettext3.11": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_apt-cache": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_systemd-sysext": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_apt": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_apt-cdrom": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_addpart": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_pygettext3": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_md5sum.textutils": "el-state-v2:d5e1cc9468a28b4e45e56304c948171c1a0cd1573126f5480f10dbea2c97b3b1",
+        "copy_to_out": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "run_animate-im6.q16": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "copy_input": "el-state-v2:7c56d7423a2ab5b7f06d497c291420387dc653067e2f655b7b1f858578997aa2"
+      },
+      "el-state-v2:d5e1cc9468a28b4e45e56304c948171c1a0cd1573126f5480f10dbea2c97b3b1": {
+        "run_apt-cdrom": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+        "copy_input": "el-state-v2:6e4ff50f33d0bb1a84d5bb597270f3255b06c9a6e8ea2e974ef732d5198f3211",
+        "run_addpart": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79"
+      },
+      "el-state-v2:6e4ff50f33d0bb1a84d5bb597270f3255b06c9a6e8ea2e974ef732d5198f3211": {
+        "run_apt-cdrom": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79"
+      },
+      "el-state-v2:7c56d7423a2ab5b7f06d497c291420387dc653067e2f655b7b1f858578997aa2": {
+        "run_pygettext3.11": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79"
+      }
+    },
+    "model_schema": "PROJECT_BRAIN_ENVIRONMENT_STATE_KEY_V2",
+    "trials": 1,
+    "successes": 1,
+    "last_used_utc": "2026-11-23T06:43:37Z"
+  },
+  {
+    "fingerprint": {
+      "actions": [
+        "copy_input",
+        "copy_to_out",
+        "run_addpart",
+        "run_addr2line",
+        "run_animate",
+        "run_apt-mark",
+        "run_dpkg-statoverride",
+        "run_git-upload-archive",
+        "run_ptar",
+        "run_ptardiff",
+        "run_ptargrep",
+        "run_setarch",
+        "run_systemd-ask-password",
+        "run_systemd-repart",
+        "run_tar",
+        "run_update-alternatives"
+      ],
+      "shapes": [
+        "str"
+      ],
+      "growth": 0.583,
+      "revisits": 6,
+      "probes": 6
+    },
+    "fp_key": "dec7628a7023acd1cef8",
+    "goal_key": "effect|target=out.tar|suffix=.tar",
+    "plan": [
+      "run_tar"
+    ],
+    "reached": true,
+    "model": null,
+    "model_schema": null,
+    "trials": 1,
+    "successes": 1,
+    "last_used_utc": "2026-11-23T06:44:24Z"
   }
 ]

@@ -291,6 +291,11 @@ _CONTAINER_OWNER: dict[str, set[str]] = {
 # `carries_content_evidence` before it books a win.
 _FORMAT_ONLY: frozenset[str] = frozenset({".txt", ".md"})
 
+# A program that can CHECK its own output says so on the flag line: `check for sorted input`,
+# `test whether ...`, `validate ...`. Only the flag's own NAME is trusted to carry the sense.
+_CHECK_WORDS: tuple[str, ...] = ("check for", "check whether", "verify", "test whether",
+                                 "validate", "diagnose")
+
 
 def carries_content_evidence(suffix: str) -> bool:
     """Can a file of this format be checked for being the thing asked for?
@@ -370,6 +375,12 @@ def verifier_version() -> str:
         "containers": sorted((n, o, s.hex()) for n, o, s in _CONTAINER_SIGNS),
         "owner": {k: sorted(v) for k, v in _CONTAINER_OWNER.items()},
         "format_only": sorted(_FORMAT_ONLY),
+        # The third kind of evidence: a program's own checker (`sort -c`). Adding it CHANGED what
+        # can be proved, so every refusal recorded under the older rules is now suspect and must
+        # die with them -- which is the whole point of hashing the rules instead of naming a
+        # version. Measured: without this, a `.txt` goal refused before the checker existed stayed
+        # refused forever, so the fix could not reach the machine that learned the wrong answer.
+        "self_check": list(_CHECK_WORDS),
     }, sort_keys=True, default=str)
     return hashlib.sha256(blob.encode("utf-8")).hexdigest()[:12]
 
@@ -478,6 +489,82 @@ def verify_by_inverse(out: pathlib.Path, recipe: Mapping[str, Any], source: path
         return False, "NO_SOURCE_TO_COMPARE"
     return (proc.stdout == original), ("INVERSE_RETURNED_THE_SOURCE" if proc.stdout == original
                                        else "INVERSE_RETURNED_DIFFERENT_BYTES")
+
+
+def _tools_check_flag(program: str, timeout: float = 10.0) -> str | None:
+    """The flag this program prints for CHECKING its own output, if it prints one.
+
+    Some programs can attest the very property they produce: `sort -c, --check  check for sorted
+    input` exits 0 only when the input really is sorted. That is not a claim in a document, it is
+    an executable predicate, and it is the only kind of evidence that can verify a property of a
+    TEXT file -- where "it opens as text" proves nothing, which is why a text output used to be
+    refused with FORMAT_CARRIES_NO_EVIDENCE no matter what the tool could prove.
+
+    Read, never assumed: the flag must be printed by the program with a checking word in its
+    description, and the caller must confirm it discriminates before believing it (a positive
+    control the flag accepts and a negative it rejects). A program that prints no such flag has
+    no self-check, and the honest refusal stands.
+    """
+    import subprocess
+    for args in ((program, "--help"), (program, "-h")):
+        try:
+            proc = subprocess.run(args, capture_output=True, text=True, timeout=timeout)
+        except Exception:  # noqa: BLE001 - a program that cannot be asked has no help
+            continue
+        text = (proc.stdout or "") + (proc.stderr or "")
+        for line in text.splitlines():
+            low = line.lower()
+            if not any(word in low for word in _CHECK_WORDS):
+                continue
+            # The flag's own NAME carries the checking sense; a description that merely mentions
+            # the word is not an invitation to run it.
+            for m in re.finditer(r"(?<![\w-])(--[A-Za-z][A-Za-z0-9_-]+)", line):
+                stem = m.group(1).lstrip("-").lower()
+                if stem.startswith(("check", "test", "verify", "validate")):
+                    short = re.match(r"^\s*(-[A-Za-z])\b", line.strip())
+                    return short.group(1) if short else m.group(1)
+    return None
+
+
+def verify_by_self_check(out: pathlib.Path, recipe: Mapping[str, Any], *,
+                         must_fail: pathlib.Path | None = None,
+                         timeout: float = 15.0) -> tuple[bool, str]:
+    """Let the tool that made the file attest the property it was asked to produce.
+
+    `sort` prints `-c, --check  check for sorted input` and exits nonzero on unsorted input. So
+    "is this file sorted" is answerable by running the program against it -- zero world knowledge,
+    one process, and the answer is the program's own exit status.
+
+    A flag that accepts everything proves nothing, so the caller must supply a control the flag
+    is expected to reject. The natural control is the INPUT: if the check rejects the input and
+    accepts the output, then the check discriminates AND the action produced the property. If the
+    check accepts the input too, the property was already there and the action cannot be credited
+    for it -- which is the honest answer, not a failure of the mechanism.
+    """
+    import subprocess
+    program = str(recipe.get("program") or "")
+    if not program or not out.is_file():
+        return False, "NO_SELF_CHECK_AVAILABLE"
+    flag = _tools_check_flag(program)
+    if not flag:
+        return False, "PROGRAM_STATES_NO_SELF_CHECK"
+    try:
+        attest = subprocess.run([program, flag, str(out)], capture_output=True, timeout=timeout)
+    except Exception:  # noqa: BLE001
+        return False, "SELF_CHECK_DID_NOT_RUN"
+    if attest.returncode != 0:
+        return False, "THE_PROGRAM_REJECTED_ITS_OWN_OUTPUT"
+    if must_fail is None or not pathlib.Path(must_fail).is_file():
+        # A flag that returns 0 for everything is not a check. Refuse rather than believe it.
+        return False, "SELF_CHECK_NOT_SHOWN_TO_DISCRIMINATE"
+    try:
+        control = subprocess.run([program, flag, str(must_fail)],
+                                 capture_output=True, timeout=timeout)
+    except Exception:  # noqa: BLE001
+        return False, "SELF_CHECK_DID_NOT_RUN"
+    if control.returncode == 0:
+        return False, "SELF_CHECK_ACCEPTED_THE_INPUT_SO_NOTHING_WAS_PRODUCED"
+    return True, "THE_PROGRAM_ATTESTED_ITS_OWN_OUTPUT"
 
 
 def verify_round_trip(out: pathlib.Path, suffix: str, *, timeout: float = 15.0,
