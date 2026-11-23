@@ -6207,3 +6207,68 @@ The suite mutates persistent state, so running it twice in a row is not the same
 against a pristine clone at `c6d258fc`: 1 failed, 41 passed — the same as here once state is clean.
 
 128 tests pass across the seven suites touched, 1 skipped.
+
+## §A111 — two faults, no scheduler, and five probes that measured their own side effects
+
+### The question
+
+§A110 made `execute_chain` able to act in a foreign world. §A109 made a code repair derivable from a
+failure. §A108 made an environment repair actually install where the program runs. Each is true alone.
+Nothing joined them, and the mission's hardest case is a **world never seen, holding a program with more
+than one fault**.
+
+### The design that needed no part
+
+The obvious build is a scheduler. It is not needed, and the reason is exact:
+
+> **the refusal is the dispatch.**
+
+`repair_v1` refuses a code bug with *"the failure matches nothing known"*; `fix_from_the_failure_v1` refuses a
+symptom-only failure with `THE_FAILURE_STATES_NO_CORRECTION`. Because both refusals are **precise**, a plain
+loop can offer every failure to every repairer and needs no ordering rule and no planner. The only thing that
+makes this safe is that the refusals are *exact* — which is why the test asserts the refusals and not only
+the successes.
+
+    round 1  ModuleNotFoundError: No module named 'pyjokes'   -> installed into the running interpreter
+    round 2  NameError: name 'totl' is not defined            -> 'totl' -> 'total'
+    final    exit 0, prints 6
+
+Two successive, different faults, two different mechanisms, no component that knows about the other.
+
+### The five invalid probes, and the single error behind all of them
+
+I ran this measurement five times and got a different wrong answer each time. The cause was **one** error:
+
+> **the mechanism under test changes the world, and the probe then measured it again.**
+
+`pip install` in round 1 makes round 2's "is it absent?" check a question about a *different world*. Each
+time, the mechanism had worked and the probe reported a failure — and once it made me believe `repair_v1`
+could not classify `ModuleNotFoundError` at all, which was false: `diagnose()` classified it correctly for
+every command form I tried.
+
+The correction is procedural, not clever: **capture the failing output once and hand that exact text
+downstream.** Never re-run the program to decide whether there is anything to repair.
+
+This is §A101's lesson (*verify the location before the claim*) and §A103's (*a measurement reports the world
+it was given*) arriving a third time in a new costume. The pattern is now unmistakable: **this system is
+full of mechanisms whose effects are the thing a naive probe destroys.**
+
+### The honest dead end, also verified
+
+    import zq_never_exists_zz
+      pip returns non-zero           -> the repair is reported as not applied
+      the code repairer refuses      -> "the failure states no correction"
+      the loop stops                 -> both reasons recorded, no retry
+
+A world that cannot be repaired is reported as such rather than flailed at.
+
+### Status
+
+| | |
+|---|---|
+| a world never seen, one repairable fault | **repaired**, §A109 |
+| a world never seen, two successive faults | **repaired**, by a loop with no scheduler |
+| a fault whose failure states only a symptom | **refused** with the class list |
+| a fault whose repair changes program meaning | **not attempted** |
+
+112 tests pass across the seven suites touched.
