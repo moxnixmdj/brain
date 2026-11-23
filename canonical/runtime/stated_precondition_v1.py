@@ -130,6 +130,41 @@ def _predicate(code: str, seen: str) -> dict[str, Any] | None:
     """
     lowered = code.lower()
     tokens = set(lowered.split("_"))
+    # NEGATION IS PART OF THE MEANING, AND IGNORING IT INVERTS THE RULE. Measured 2026-11-23 by asking
+    # this function for adversarial codes: `MUST_NOT_BE_A_WHOLE_NUMBER` was read as "must be whole" --
+    # the exact opposite demand -- and `AMOUNT_NOT_REQUIRED` as "must be present". A wrong rule is worse
+    # than no rule: it would refuse valid input and accept invalid input while claiming knowledge.
+    #
+    # Only the SAFE negations are read, and each is read as what it actually demands. `NOT_REQUIRED`
+    # demands nothing, so no predicate is derived. A `NOT` that this function cannot interpret stops the
+    # derivation entirely rather than being dropped.
+    # A PRECONDITION IS ABOUT INPUT; A POSTCONDITION IS ABOUT OUTPUT, AND THEY ARE NOT THE SAME ADVICE.
+    # Measured 2026-11-23: an `ARTIFACT_MISSING` code reads as "present", so a rule learned from
+    # `MODULE_NOT_FOUND` would tell the agent to SUPPLY the artifact -- when the true fix is to PRODUCE
+    # it. 17 of the 255 present-reading codes in this tree carry a postcondition word (7%). A rule that
+    # gives the wrong advice while sounding confident is worse than no rule, so these are refused here
+    # rather than being silently folded into the input-reading 238.
+    if tokens & {"artifact", "output", "result", "produced", "generated", "after", "remain",
+                 "failed", "red", "post", "disagree", "disagrees", "mismatch"}:
+        return None
+    # `NO_RECORDS_IN:<prefix>` is a POSITIVE demand -- the prefix must exist -- written with a negative
+    # word. It is decided before the negation guard below, because its meaning is decidable and its
+    # negation is not scoped over the demand. `NO_..._ALLOWED` has no such reading.
+    if "no" in tokens and ("in" in tokens or "under" in tokens or "within" in tokens):
+        return {"property": "present", "test": "is_present", "because": code}
+    if "not" in tokens or "never" in tokens or "no" in tokens:
+        # the two negations whose demand IS decidable: absence is forbidden, or presence is optional
+        if tokens & {"found", "exists", "present"} and not tokens & {"required", "must"}:
+            # `X_NOT_FOUND` / `X_NOT_EXIST` demands that X exist -- the negation is of the failure, and
+            # the demand is positive. This is the ONE shape where `not` inverts to a positive predicate.
+            return {"property": "present", "test": "is_present", "because": code}
+        if tokens & {"required", "needed", "necessary"}:
+            # `NOT_REQUIRED` demands nothing at all. It is not a predicate; recording one would turn a
+            # permission into an obligation.
+            return None
+        # any other negation (`MUST_NOT_BE_...`, `NO_..._ALLOWED`) cannot be read as its positive
+        # counterpart without knowing what the negation scopes over
+        return None
     # Property names the convention can express. Each is derived from the code's own words, not from a
     # list of tools: `must_be_a_whole_number` -> whole; `must_not_exist` -> fresh; `already_taken` ->
     # unique. A code that names none of these is not readable here.
@@ -142,9 +177,7 @@ def _predicate(code: str, seen: str) -> dict[str, Any] | None:
         return {"property": "present", "test": "is_present", "because": code}
     if tokens & {"missing", "required", "absent", "not_found"}:
         return {"property": "present", "test": "is_present", "because": code}
-    # `NO_RECORDS_IN:<prefix>` says the prefix holds nothing, so the fact it demands is that the prefix
-    # EXISTS. Read from the code's own words: `no ... in X` is a statement about X's contents.
-    if "no" in tokens or "empty" in tokens:
+    if "empty" in tokens:
         return {"property": "present", "test": "is_present", "because": code}
     if tokens & {"outside", "escape", "escapes", "escaped", "traversal", "beneath", "contained"}:
         return {"property": "inside", "test": "is_inside", "because": code}
@@ -267,15 +300,36 @@ def would_refuse(value: Any, *, code: str, universe: Iterable[Any] = (),
 
     `code` is the rule's name, not a program's: the caller asks `AMOUNT_MUST_BE_A_WHOLE_NUMBER` and gets
     an answer about `7.25` although the only value ever observed was `12.50`.
+
+    TRANSFER BY PROPERTY, NOT BY SPELLING. If this exact code was never learned, but a learned rule
+    demands the same property, that rule answers. Two programs that agree on a rule rarely agree on its
+    name -- `ledgerctl` says `AMOUNT_MUST_BE_A_WHOLE_NUMBER` and `stockctl` says
+    `QTY_MUST_BE_A_WHOLE_NUMBER` for the same demand -- so keying strictly by the code would make
+    knowledge usable only in the program that taught it, which is a patch and not knowledge.
+
+    The transfer is safe because the property is DERIVED from the new code by the same reader that
+    derived it from the old one. Nothing is assumed about the program; the code itself says what it
+    demands, and a rule about that demand already exists. `via` names the rule that answered, so a reader
+    can see the chain rather than trust it.
     """
     entry = conditions(store).get(str(code).lower())
+    via = None
+    if not entry:
+        requested = _predicate(str(code), "x")
+        property_ = (requested or {}).get("property")
+        if property_:
+            for other in conditions(store).values():
+                if (other.get("predicate") or {}).get("property") == property_:
+                    entry = other
+                    via = other.get("code")
+                    break
     if not entry:
         return {"schema": SCHEMA, "known": False, "code": code}
     predicate = entry.get("predicate") or {}
     satisfied = is_satisfied(predicate, value, universe)
     return {"schema": SCHEMA, "known": True, "code": code, "value": value,
             "satisfied": satisfied, "refuse": not satisfied,
-            "property": predicate.get("property"),
+            "property": predicate.get("property"), "via": via,
             "seen_values": list(entry.get("values") or []),
             "value_never_seen": str(value).lower() not in [v.lower() for v in entry.get("values") or []]}
 

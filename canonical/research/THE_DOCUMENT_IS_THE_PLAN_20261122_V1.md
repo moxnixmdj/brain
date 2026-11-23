@@ -4945,3 +4945,74 @@ reached from the other direction, now with a consumer that needs the value.
 So the bound is not the learner. It is that **a code with no subject cannot become a predicate**, and 80%
 of this tree's codes carry no subject. `stated_precondition_v1` makes the ceiling visible instead of
 hiding it behind a percentage.
+
+## §A91 — one experience, 240 codes: transfer by demand, not by name
+
+§A90 left a bound: 381 of 989 codes readable, 80% appearing exactly once. The next question was whether
+that bound was the learner's or the tree's. It is the tree's — but not for the reason §A90 gave, and the
+correction matters.
+
+### The transfer the mission actually needs
+
+Keying knowledge strictly by the code makes it usable only in the program that taught it, which is a
+patch. Two programs that agree on a rule rarely agree on its spelling:
+
+    ledgerctl   AMOUNT_MUST_BE_A_WHOLE_NUMBER:12.50
+    stockctl    QTY_MUST_BE_A_WHOLE_NUMBER:2.5
+
+Same demand, different words. So the lookup now falls back to the **property** when the exact code is
+unseen: the new code is read by the same reader that read the old one, so nothing is assumed about the
+new program — its own words state the demand, and an existing rule about that demand answers. `via`
+reports which rule answered, so the chain is visible rather than trusted.
+
+Taught only `AMOUNT_MUST_BE_A_WHOLE_NUMBER`, it answers `QTY_...` and `COUNT_...`, and still answers
+`known: False` for `SPAN_INTEGRITY`. Measured, not asserted.
+
+### The measurement that changes the picture
+
+| experiences | codes answerable | refusal sites |
+|---|---|---|
+| 0 | 0 | 0 |
+| 1 — `MODULE_NOT_FOUND:file_survey` | **240 of 989 (24%)** | **405** |
+| 2 — plus `NAME_ALREADY_TAKEN:top` | 269 | 456 |
+| 3 — plus `PATH_OUTSIDE_REPOSITORY:…` | 300 | 648 |
+
+**One refusal in one program makes 24% of this tree's refusal vocabulary answerable.** That is the
+"learn it once, in one environment, and it is learned" claim arriving with a number attached — and §A90's
+"the tail is one-off vocabulary" was true of the *names* and false of the *demands*. 255 codes spell
+"something is missing" in 255 different ways; one rule answers all of them.
+
+### Two unsound readings found by attacking my own mechanism
+
+Neither was found by a test I designed to pass. Both were found by asking for codes the reader should
+not be able to handle.
+
+**1. Negation inverted the rule.** `MUST_NOT_BE_A_WHOLE_NUMBER` was read as "must be whole" — the exact
+opposite — and `AMOUNT_NOT_REQUIRED` as "must be present". A wrong rule refuses valid input and accepts
+invalid input while claiming knowledge. The reader now refuses every negation whose scope it cannot see,
+and reads only the three whose demand is visible in the code:
+
+    FILE_NOT_FOUND      the negation is of the FAILURE; the demand is positive  -> present
+    NO_RECORDS_IN       a positive demand written with a negative word          -> present
+    NOT_REQUIRED        demands nothing; a predicate here turns permission into obligation -> refused
+
+**2. A postcondition was read as a precondition.** `ARTIFACT_MISSING` reads as "present", so a rule
+learned from `MODULE_NOT_FOUND` would advise *supply* the artifact when the true fix is *produce* it.
+Measured: **17 of 255** present-reading codes in this tree carry a postcondition word. They are now
+refused. Confident wrong advice is worse than an honest "I do not know" — the same rule §A87 applied when
+it refused to invent `:test_paths`.
+
+### What is verified, and what is not
+
+**Verified:** one located refusal → a predicate that decides unseen values; transfer across codes by
+demand; 240 codes answerable from one experience; `forget()` restores ignorance; a hand-written store
+entry works; negation and postcondition traps refused.
+
+**Not verified:** that the advice is *sufficient*. `present` tells an agent what is missing, not how to
+get it — for `MODULE_NOT_FOUND:file_survey` the correct action was to pass a path instead of a name,
+which the refusal named and the `present` rule alone does not derive. The learner knows **what must be
+true**; it does not yet know **how to make it true**. That gap is the next bottleneck, and it is the same
+gap `knowledge_repair_v1` filled with a hand-written table.
+
+**Not claimed:** 24% is not a benchmark result. It is the fraction of this tree's refusal vocabulary the
+learner can speak to, measured against the tree it lives in.

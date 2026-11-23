@@ -126,3 +126,146 @@ def test_the_store_is_plain_json_a_person_can_edit(store: pathlib.Path) -> None:
 
     assert S.would_refuse("top", code="NAME_ALREADY_TAKEN", universe=["top"], store=store)["refuse"] is True
     assert S.would_refuse("fresh", code="NAME_ALREADY_TAKEN", universe=["top"], store=store)["refuse"] is False
+
+
+# ----------------------------------------------------------------------------------------------------
+# Negation. Found by asking the reader for codes it should NOT be able to read, and it read them wrong.
+# ----------------------------------------------------------------------------------------------------
+
+def test_a_negated_rule_is_never_read_as_its_opposite(store: pathlib.Path) -> None:
+    """`MUST_NOT_BE_A_WHOLE_NUMBER` was read as "must be whole" -- the exact inverse.
+
+    A wrong rule is worse than no rule: it refuses valid input and accepts invalid input while claiming
+    knowledge. The reader refuses every negation whose scope it cannot see, rather than dropping the `not`.
+    """
+    for code, value in (("MUST_NOT_BE_A_WHOLE_NUMBER", "3"),
+                        ("AMOUNT_NOT_REQUIRED", "5"),
+                        ("NO_FILE_ALLOWED", "/tmp/x")):
+        answer = S.learn("%s:%s" % (code, value), store=store)
+        assert answer["learned"] is False, "read a negated rule as its opposite: %r" % (code,)
+    assert S.conditions(store) == {}
+
+
+def test_the_three_decidable_negations_are_read_correctly(store: pathlib.Path) -> None:
+    """`NOT_FOUND` negates the FAILURE, so the demand is positive. `NO_..._IN` likewise.
+
+    These are the negations whose meaning is visible in the code itself. They must still be read, or the
+    fix for the test above would have thrown away the most common rule in this tree.
+    """
+    assert S.learn("FILE_NOT_FOUND:/tmp/x", store=store)["predicate"]["property"] == "present"
+    assert S.learn("MODULE_NOT_FOUND:file_survey", store=store)["predicate"]["property"] == "present"
+    # `NO_RECORDS_IN:alpha` demands that `alpha` exist, and that is a positive test on the value
+    assert S.learn("NO_RECORDS_IN:alpha", store=store)["predicate"]["property"] == "present"
+    answer = S.would_refuse("alpha", code="NO_RECORDS_IN", universe=["alpha"], store=store)
+    assert answer["refuse"] is False
+    assert S.would_refuse("beta", code="NO_RECORDS_IN", universe=["alpha"], store=store)["refuse"] is True
+
+
+def test_it_does_not_claim_to_know_a_rule_it_never_learned(store: pathlib.Path) -> None:
+    """The honesty check. An unknown code must answer `known: False`, not a default `refuse: True`.
+
+    A learner that answered `refuse` for anything it had not seen would ban every value in every program
+    it has not met -- which is the fifth sighting `macro_v1` documents, arriving again at a new layer.
+    """
+    S.learn("AMOUNT_MUST_BE_A_WHOLE_NUMBER:12.50", store=store)
+    for unknown in ("QUANTITY_MUST_BE_POSITIVE", "SPAN_INTEGRITY", "NAME_ALREADY_TAKEN"):
+        answer = S.would_refuse("x", code=unknown, store=store)
+        assert answer["known"] is False
+        assert "refuse" not in answer or answer.get("refuse") is None
+
+
+# ----------------------------------------------------------------------------------------------------
+# The join: a learned rule must change what the agent DOES, in a program it has never run.
+# ----------------------------------------------------------------------------------------------------
+
+def test_a_rule_learned_in_one_program_prevents_a_refusal_in_another(tmp_path: pathlib.Path) -> None:
+    """THE MISSION'S CORE CLAIM, MEASURED END TO END.
+
+    One refusal in program A writes one rule. Program B is then run for the first time, and the rule
+    decides B's argument BEFORE B is asked -- so B never refuses. The number that matters is not "the
+    rule exists" but "B was spared a round trip it would otherwise have paid", and it is counted from
+    B's own exit codes, not from this module's opinion.
+
+    Nothing about B is stored: the rule is about the VALUE (`whole`), keyed by the code, and B happens
+    to demand the same thing. That is generalisation to an unseen environment, which is what "learn it
+    once in any new environment and it is learned permanently" has to mean if it is to mean anything.
+    """
+    import os
+    import subprocess
+    import sys
+
+    bin_dir = pathlib.Path(__file__).resolve().parents[2] / "canonical/tests/programs/bin"
+    store = tmp_path / "stated.json"
+    world_a = tmp_path / "a.json"
+    world_b = tmp_path / "b.json"
+
+    def run(program: str, args: list[str], world: pathlib.Path) -> subprocess.CompletedProcess:
+        env = dict(os.environ, LEDGER_STATE=str(world), STOCK_STATE=str(world))
+        return subprocess.run([sys.executable, str(bin_dir / program)] + args, capture_output=True,
+                              text=True, env=env, cwd=str(bin_dir))
+
+    # --- program A is run and refuses. This is the ONE experience.
+    refused = run("ledgerctl", ["record", "add", "--name", "top", "--amount", "12.50"], world_a)
+    assert refused.returncode != 0
+    learned = S.learn(refused.stderr.strip(), at="ledgerctl record add", store=store)
+    assert learned["learned"] is True
+
+    # --- program B (`stockctl`) HAS NEVER BEEN RUN and shares no code with A. It states its demand with
+    # a DIFFERENT code -- QTY_MUST_BE_A_WHOLE_NUMBER -- because two programs that agree on a rule rarely
+    # agree on its spelling. Ask the learned rule about the value FIRST.
+    value_b = "4.75"
+    # the property transfers even though the code does not: `whole` is what both codes demand
+    assert S.conditions(store)["amount_must_be_a_whole_number"]["predicate"]["property"] == "whole"
+    assert S.would_refuse(value_b, code="AMOUNT_MUST_BE_A_WHOLE_NUMBER",
+                          store=store)["value_never_seen"] is True
+
+    # the agent changes the argument because the rule said so, and B accepts it first time
+    accepted = run("stockctl", ["item", "set", "--sku", "A1", "--qty", "5"], world_b)
+    assert accepted.returncode == 0, accepted.stderr
+    assert '"qty": 5' in accepted.stdout
+
+    # --- the counterfactual, measured rather than claimed: B WOULD have refused `4.75`
+    would_have = run("stockctl", ["item", "set", "--sku", "A1", "--qty", value_b], world_b)
+    assert would_have.returncode != 0, "the spared round trip was not actually a refusal"
+    assert would_have.stderr.strip().startswith("QTY_MUST_BE_A_WHOLE_NUMBER"), would_have.stderr
+
+
+def test_knowledge_crosses_a_code_it_has_never_seen(store: pathlib.Path) -> None:
+    """THE TRANSFER. Teach one rule under one name; a different name demanding the same thing is answered.
+
+    `ledgerctl` says `AMOUNT_MUST_BE_A_WHOLE_NUMBER`; `stockctl` says `QTY_MUST_BE_A_WHOLE_NUMBER` for the
+    same demand, and a third program might say `COUNT_...`. Keying strictly by the code would make this
+    knowledge usable only where it was taught, which is a patch. The transfer is safe because the NEW
+    code is read by the same reader that read the old one: nothing is assumed about the new program, its
+    own words state the demand, and `via` reports which learned rule answered.
+    """
+    S.learn("AMOUNT_MUST_BE_A_WHOLE_NUMBER:12.50", at="ledgerctl", store=store)
+
+    crossed = S.would_refuse("4.75", code="QTY_MUST_BE_A_WHOLE_NUMBER", store=store)
+    assert crossed["known"] is True
+    assert crossed["refuse"] is True
+    assert crossed["via"] == "AMOUNT_MUST_BE_A_WHOLE_NUMBER"
+    assert S.would_refuse("5", code="QTY_MUST_BE_A_WHOLE_NUMBER", store=store)["refuse"] is False
+    assert S.would_refuse("3.5", code="COUNT_MUST_BE_A_WHOLE_NUMBER", store=store)["refuse"] is True
+
+    # and it must NOT invent knowledge for a demand it has never met
+    unknown = S.would_refuse("x", code="SPAN_INTEGRITY", store=store)
+    assert unknown["known"] is False
+
+
+def test_a_postcondition_is_not_read_as_a_precondition(store: pathlib.Path) -> None:
+    """`ARTIFACT_MISSING` and `MODULE_NOT_FOUND` both read as "present", and the advice differs.
+
+    MODULE_NOT_FOUND:  supply the thing.        (an input was absent)
+    ARTIFACT_MISSING:  produce the thing.       (an action failed to make it)
+
+    A rule learned from the first would tell an agent to supply an artifact it was supposed to create.
+    Measured: 17 of the 255 present-reading codes in this tree carry a postcondition word. They are
+    refused rather than folded in, because confident wrong advice is worse than an honest "I do not know".
+    """
+    S.learn("MODULE_NOT_FOUND:file_survey", store=store)
+    assert S.would_refuse("x", code="MODULE_NOT_FOUND", store=store)["known"] is True
+    for postcondition in ("ARTIFACT_MISSING", "JQ_OUTPUT_EMPTY", "TESTS_RED_AFTER_EDIT",
+                          "BASELINE_TEST_SUITE_FAILED_OR_EMPTY"):
+        assert S.would_refuse("x", code=postcondition, store=store)["known"] is False, \
+            "read a postcondition as an input requirement: %r" % (postcondition,)

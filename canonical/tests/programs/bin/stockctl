@@ -1,0 +1,110 @@
+#!/usr/bin/env python3
+"""stockctl -- a SECOND program that happens to demand one rule ledgerctl also demands.
+
+It shares no code with ledgerctl and its help says nothing about the rule. It exists so a cross-program
+generalisation claim can be measured on two genuinely different programs rather than asserted on one.
+
+Undocumented rules:
+    QTY_MUST_BE_A_WHOLE_NUMBER:<value>    stock is counted, not weighed
+"""
+import json
+import os
+import sys
+
+PAGES = {
+    "": """stockctl -- stock levels
+
+USAGE:
+  stockctl <command> [flags]
+
+AVAILABLE COMMANDS:
+  item                Manage items
+
+FLAGS:
+  -h, --help          Show help for a command
+""",
+    "item": """Manage items
+
+USAGE:
+  stockctl item <command> [flags]
+
+AVAILABLE COMMANDS:
+  set                 Set a quantity
+
+FLAGS:
+  -h, --help          Show help for a command
+""",
+    "item set": """Set a quantity
+
+USAGE:
+  stockctl item set [flags]
+
+FLAGS:
+  --sku <string> (required)	Item SKU
+  --qty <string> (required)	Quantity in stock
+
+  -h, --help	Show help for this command
+""",
+}
+
+STATE = os.environ.get("STOCK_STATE") or os.path.join(
+    os.path.dirname(os.path.abspath(__file__)), ".stockctl-state.json")
+HELP = ("--help", "-h", "help")
+
+
+def load():
+    try:
+        with open(STATE) as handle:
+            return json.load(handle)
+    except (OSError, ValueError):
+        return {}
+
+
+def main(argv):
+    if any(a in HELP for a in argv):
+        args = [a for a in argv if a not in HELP]
+        sys.stdout.write(PAGES.get(" ".join(args), PAGES[""]))
+        return 0
+    args = list(argv)
+    if not args:
+        sys.stdout.write(PAGES[""])
+        return 0
+    flags, bare, index = {}, [], 0
+    while index < len(args):
+        word = args[index]
+        if word.startswith("--"):
+            name = word[2:]
+            if index + 1 < len(args) and not args[index + 1].startswith("--"):
+                flags[name] = args[index + 1]
+                index += 1
+            else:
+                flags[name] = ""
+        else:
+            bare.append(word)
+        index += 1
+    route = ""
+    for count in range(len(bare), 0, -1):
+        if " ".join(bare[:count]) in PAGES and " ".join(bare[:count]):
+            route = " ".join(bare[:count])
+            break
+    if route != "item set":
+        sys.stderr.write("UNKNOWN_ROUTE:" + " ".join(bare) + "\n")
+        return 1
+    qty = str(flags.get("qty") or "")
+    sku = str(flags.get("sku") or "")
+    if not sku:
+        sys.stderr.write("SKU_REQUIRED\n")
+        return 1
+    if qty and "." in qty:
+        sys.stderr.write("QTY_MUST_BE_A_WHOLE_NUMBER:" + qty + "\n")
+        return 1
+    state = load()
+    state.setdefault("item", {})[sku] = int(qty or 0)
+    with open(STATE, "w") as handle:
+        json.dump(state, handle, sort_keys=True)
+    sys.stdout.write(json.dumps({"ok": True, "sku": sku, "qty": int(qty or 0)}) + "\n")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main(sys.argv[1:]))
