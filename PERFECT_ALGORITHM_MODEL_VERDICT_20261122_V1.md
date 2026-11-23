@@ -179,3 +179,60 @@ one lesson on content A replays in 0.1 s on content B, verified by bytes, not by
 cross-kind generalization claim (both goals run under `computer_file_ops`). No capability is
 registered: the receipts stay VERIFIED / LEARNED_AND_VERIFIED, and the admit stays honest about
 what is persisted (an admitted rule; the raw trace stays hashed evidence).
+
+## 8. Tar-family + zip + decompress predicate extension, and the narrowing fix (2026-11-23, measured)
+
+Extended the §6 predicate to verify each archive/compression format exactly as the goal
+claims it, and fixed the narrowing that the §6 residual left behind (junk-head above the
+format-name program).
+
+**Predicate** (`goal_predicate_for`, `canonical/swe_kernel/perfect_algorithm_computer_env_v1.py`):
+- tar-family archives (`.tar`, `.tar.gz`/`.tgz`, `.tar.bz2`/`.tbz2`, `.tar.xz`/`.txz`): the
+  target is a real tar archive that contains the source file by basename and holds its
+  bytes exactly; the suffix is dispatched by longest-first match so `.tar.gz` never falls
+  through to the plain `.tar` reader.
+- `.zip`: the target is a real zip archive that contains the source file by basename and
+  holds its bytes exactly.
+- `.gz` / `.bz2` / `.xz`: the target decompresses to exactly the source bytes the goal
+  named.
+- plain (no suffix): the target exists and is non-empty.
+- Plain tar named `.tar.gz` stays refused; gzip bytes named `.bz2` stay refused; tar named
+  `.zip` stays refused; a zip holding wrong bytes stays refused.
+
+Measured: `ArchiveGoalTests` 3/3 (`test_archive_predicate_verifies_each_format_as_the_goal_claims_it`
+in 8 cases + 3 wrong-format decoys + zip-with-wrong-bytes); all positives probe-tested by hand,
+total `test_perfect_algorithm_computer_env_v1` = 8 tests OK.
+
+**Narrowing** (`_goal_token_info`, `programs_for_goal`, `canonical/runtime/computer_env_v1.py`):
+- The filename basename is noise (never a signal, never a candidate); the extension is the
+  format word — kept as signal at the same level as the goal's own words (not noised away as
+  it was before, which is why `.tar`/`.gz` goals reached tar/gzip and everything else
+  (`.zip`, `.bz2`) reached nothing).
+- `programs_for_goal` gains tier-1: a program whose own name IS a signal token leads, with
+  flag-description hits as the supporting evidence behind it. Meta-verbs like `make` never
+  count as a name. Previously the name-match branch existed but was still gated on flag
+  description hits; a program whose manual says nothing in the format word (zip, bzip2)
+  never reached the candidate set.
+
+Measured, not claimed:
+- `zip the files into out.zip` → `zip` leads (was: `streamzip`/junk).
+- `make a zip archive out.zip` → `zip` leads (was: `dpkg-architecture`/`tar`).
+- `make a bzip2 archive out.bz2` → `bzip2` leads (was: tar-head junk).
+- `make an archive out.tar.gz` / `archive data.txt into data.tar.gz` / `make an archive out.tar`
+  → `tar` leads (was: junk-head; tar was already 2nd).
+- `compress the input into out.gz` → `[gunzip, gzip, …]` (unchanged, still honest).
+- `count the lines in notes.txt` → `cat` leads (unchanged).
+- `FormatNameNarrowingTests` (new, 2 tests): the six archive/format goals surface the
+  format-name program as `progs[0]`; a goal whose basename is `data` does not produce `data`.
+- Before this turn's narrowing change: `test_computer_env_v1` 82 tests / 3 pre-existing FAIL_CLOSED
+  failures (all three pre-existing, unchanged); all 8 `test_perfect_algorithm_computer_env_v1`
+  tests OK (107 s).
+
+Not done, honestly:
+- The zip/bzip2 paths still cannot reach a verified goal by single-step actions today: the
+  archive runtime's recipes are tar.gz/gzip-shaped only, and `zip` has no recipe whose argv
+  is validated against `.zip` existing. Reaching `.zip`/`.bz2` is blocked at the recipe/action
+  level, not the narrowing level. That is the §6 residual, not a narrowing residual.
+- Tier-1 leads with the format-name program, but tier-2 behind it remains the pre-existing
+  flag-description junk (dpkg-architecture, ld.bfd). The narrowing is a ranking, not a
+  scored relevance model; this is honest.
