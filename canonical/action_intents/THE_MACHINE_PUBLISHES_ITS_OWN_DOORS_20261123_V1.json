@@ -76,6 +76,27 @@
  ],
  "incremental_spend_usd": 0,
  "intentional_route_race": false,
+ "live_challenger_frontier_discovery": {
+  "found_and_reused": [
+   "scan()",
+   "learn_model()",
+   "state_key()",
+   "the vocabulary's relation-change judgement",
+   "operation_trial_v1's trial discipline"
+  ],
+  "not_rebuilt": [
+   "cli_contract_inference.py",
+   "operation_trial_v1.py",
+   "value_enumeration_v1.py"
+  ],
+  "performed": true,
+  "required": true,
+  "searched": [
+   "the project's own runtime for existing declaration readers",
+   "literature on man-page/help parsing and shell-completion generation"
+  ]
+ },
+ "live_challenger_frontier_discovery_required": true,
  "load_bearing_primary": {
   "constructive_gap_for_open_obligation_ids": [
    "CODING_TB4_GE_66_4"
@@ -147,6 +168,38 @@
   "required_capability": "read a declaration, run it, believe the tree",
   "route_frontier": {
    "canonical_base_commit": "b4fdd79eea027b5ccf85988e2eb46b5a2e596f90",
+   "challenger_routes": [
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "the same mechanism over more help shapes",
+      "CORRECTNESS": "equal",
+      "COST": "a second parser to keep correct",
+      "SPEED": "equal",
+      "VERDICT": "REJECTED__REDUNDANT"
+     },
+     "route_id": "A_SECOND_DECLARATION_READER"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "reaches programs with no --help",
+      "CORRECTNESS": "unmeasured: no display exists in this sandbox",
+      "COST": "a whole second vocabulary",
+      "SPEED": "slower",
+      "VERDICT": "DEFERRED__RECORDED_AS_A_LIMIT"
+     },
+     "route_id": "A_GUI_TIER_FROM_THE_ACCESSIBILITY_TREE"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "fewer stated rooms",
+      "CORRECTNESS": "lower: it is guessing where the census can state",
+      "COST": "none",
+      "SPEED": "equal",
+      "VERDICT": "REJECTED__NOT_HONEST"
+     },
+     "route_id": "INFER_THE_ROOM_FROM_A_FAILURE_MESSAGE"
+    }
+   ],
    "max_age_hours": 1,
    "selected_route": "COMPOSE_ONE_READER_OVER_DECLARATION_SHAPES_WITH_EXECUTION_AS_THE_JUDGE",
    "selected_route_preflight": {
@@ -154,7 +207,7 @@
     "checked_at_utc": "2026-11-23T18:10:00+00:00",
     "execution_dependencies": [
      {
-      "dependency": "local Python 3.11 runtime",
+      "dependency": "local Python 3 runtime",
       "evidence": [
        "138 tests pass across the relevant surface on this machine"
       ],
@@ -171,7 +224,7 @@
      {
       "dependency": "the programs whose declarations are read",
       "evidence": [
-       "36 programs present and censused; all 2134 operations executed"
+       "36 programs present; all 2,134 declared operations executed"
       ],
       "evidence_classes": [
        "DIRECT_PROBE"
