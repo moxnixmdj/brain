@@ -183,3 +183,50 @@ def test_probing_is_cheap_enough_to_be_worth_it() -> None:
 
     assert len(result["probes"]) >= 5, result["probes"]
     assert elapsed < 10.0, "probing %d expressions took %.2fs" % (len(result["probes"]), elapsed)
+
+
+def test_a_program_that_reads_a_config_file_is_decided_before_it_runs() -> None:
+    """THE A119 BOUNDARY, CLOSED. This was the case the whole module existed for and could not reach.
+
+    §A119 measured that every real-world program came back "could not decide" because its values lived in the
+    world. A config file is the commonest form of that, and reaching it needs `open()` -- which an earlier version
+    of the probe refused outright as an ACTION, on the reasoning that `open` can write. It CAN, and the mode is an
+    ARGUMENT, so the mode decides instead of the name:
+
+        open(path)            read        permitted
+        open(path, "r"/"rb")  read        permitted
+        open(path, "w"/"a"/"x"/"r+")  write  refused
+        open(path, <unknown>) unknown mode  refused
+
+    With that, the walk binds the file's ACTUAL contents and decides the program against them. Nothing is guessed
+    and nothing is cached: the values are evidence with a moment, and the verdict says so.
+    """
+    world = pathlib.Path(_world())
+    (world / "config.json").write_text('{"name": "demo", "count": 3}')
+    source = ('import json\n'
+              'cfg = json.load(open("config.json"))\n'
+              'total = 0\n'
+              'for i in range(cfg["count"]):\n'
+              '    total = total + i\n'
+              'print(total / cfg["divisor"])\n')
+    (world / "app.py").write_text(source)
+
+    def prober(expression: str) -> dict:
+        return A.probe(expression, world=str(world), imports=["import json"])
+
+    # GROUND TRUTH: the program really does die, and on exactly the key the walk names
+    actual = subprocess.run([sys.executable, "app.py"], cwd=world, capture_output=True, text=True)
+    assert actual.returncode != 0
+    assert "KeyError: 'divisor'" in actual.stderr
+
+    before = (world / "config.json").read_bytes()
+    result = E.evaluate(source, prober=prober)
+    after = (world / "config.json").read_bytes()
+
+    assert result["verdict"] == "DECIDED_FROM_PROBED_EVIDENCE"
+    assert [fault["class"] for fault in result["certain"]] == ["key_not_found"]
+    assert "divisor" in result["certain"][0]["detail"]
+    # the evidence is the file's real contents, carried as a value
+    assert any(probe["value"] == "{'name': 'demo', 'count': 3}" for probe in result["probes"])
+    # and reading it did not change it
+    assert before == after

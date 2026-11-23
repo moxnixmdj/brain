@@ -61,7 +61,7 @@ _PURE_CALLS = frozenset({"len", "str", "int", "float", "bool", "list", "tuple", 
 _READ_CALLS = frozenset({"exists", "isdir", "isfile", "islink", "listdir", "scandir", "stat", "getcwd",
                          "getenv", "getpid", "getsize", "abspath", "basename", "dirname", "join", "split",
                          "splitext", "normpath", "realpath", "expanduser", "walk", "access", "read",
-                         "readlines", "readline", "glob"})
+                         "readlines", "readline", "glob", "loads", "load", "safe_load", "safe_load_all"})
 
 #: Names that are actions even when a module provides them, so a name collision cannot smuggle one through.
 _ACTION_CALLS = frozenset({"open", "system", "popen", "remove", "unlink", "rmdir", "mkdir", "makedirs", "rename",
@@ -94,14 +94,38 @@ def _refuse_reason(tree: ast.AST) -> str | None:
         if isinstance(node, ast.Call):
             func = node.func
             name = func.id if isinstance(func, ast.Name) else (func.attr if isinstance(func, ast.Attribute) else "")
-            # THE ACTION LIST WINS OVER EVERYTHING: `open` must be refused even though `io.open` exists and the
-            # name `read` is on the read list.
-            if name in _ACTION_CALLS:
+            # `open` IS TWO DIFFERENT OPERATIONS WEARING ONE NAME, and refusing both made the probe unable to
+            # read the one thing real programs most often depend on: a config file. Measured 2026-11-23: a script
+            # whose behaviour hinges on `json.load(open("config.json"))` could not be probed at all, so its
+            # runtime faults stayed undecidable -- the §A119 boundary reappearing inside §A120's remedy.
+            #
+            # The mode is an ARGUMENT, so it is read rather than assumed: no mode, "r", "rb", "rt" are reads;
+            # anything containing w/a/x/+ can write and is refused. A mode that is not a literal cannot be
+            # checked, so it is refused too -- the safe default for an unknown is that it acts.
+            if name == "open":
+                mode = None
+                if len(node.args) >= 2:
+                    mode = node.args[1]
+                for keyword in node.keywords or []:
+                    if keyword.arg == "mode":
+                        mode = keyword.value
+                if not (isinstance(mode, ast.Constant) and isinstance(mode.value, str)
+                        and set(mode.value) <= set("rbt") and mode.value):
+                    if mode is not None:
+                        return "CALL_MAY_HAVE_AN_EFFECT:open-with-that-mode"
+                    # no mode at all is the default "r", which is a read
+            # THE ACTION LIST WINS OVER EVERYTHING ELSE: `system`, `remove`, `mkdir` are refused by name.
+            if name in _ACTION_CALLS and name != "open":
                 return "CALL_MAY_HAVE_AN_EFFECT:" + str(name)[:40]
-            if name not in _PURE_CALLS and name not in _READ_CALLS:
+            # `open` was already decided by its MODE above; every other name must be recognised as a read.
+            if name != "open" and name not in _PURE_CALLS and name not in _READ_CALLS:
                 return "CALL_MAY_HAVE_AN_EFFECT:" + str(name)[:40]
-        if isinstance(node, ast.Name) and node.id in ("__import__", "eval", "exec", "compile", "open",
+        if isinstance(node, ast.Name) and node.id in ("__import__", "eval", "exec", "compile",
                                                       "input", "breakpoint"):
+            # `open` IS DELIBERATELY NOT IN THIS LIST ANY MORE, and the reason is the same one that made it
+            # un-probeable: this check fires on the NAME wherever it appears, including as the function of a
+            # call whose mode was already vetted. `open(path)` in read mode is a read; `open(path, "w")` is
+            # caught by the mode check above, and `open` reached any other way is caught by the effect check.
             return "EXPRESSION_CAN_CHANGE_THE_WORLD:" + node.id
     return None
 

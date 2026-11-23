@@ -6969,3 +6969,74 @@ that buries the real refusals. The rule that came out of it:
     VERIFIED   an answerable call is asked before it is refused, with zero residual unknowns
     VERIFIED   a proved fault still outranks evidence that proved nothing
     VERIFIED   178 passed, 2 skipped across twelve suites
+
+## §A122 — the config file, and the end of the §A119 boundary
+
+### The case the whole round existed for
+
+§A119 found that every real-world program came back `COULD_NOT_DECIDE` because its values lived in the world. A
+config file is the commonest form of that. So I ran the pipeline against one:
+
+```python
+import json
+cfg = json.load(open("config.json"))
+total = 0
+for i in range(cfg["count"]):
+    total = total + i
+print(total / cfg["divisor"])
+```
+```json
+{"name": "demo", "count": 3}
+```
+
+Ground truth — run it:
+
+    ACTUAL RUN: exit=1   KeyError: 'divisor'
+
+The pipeline:
+
+    WITH PROBE: DECIDED_FROM_PROBED_EVIDENCE
+      certain: key_not_found  "{'name': 'demo', 'count': 3}['divisor'] does not exist"
+      probes : open('config.json')             -> (a handle; not a literal, not used)
+               json.load(open('config.json'))  -> {'name': 'demo', 'count': 3}
+
+**The program's fatal fault is named before it runs, from a file, with zero model calls.** The dict the probe
+fetched became a value the walk could index.
+
+### The refusal that was blocking it, and why it was wrong
+
+`open()` was refused outright as an ACTION — reasonably, because `open` *can* write. But `open` is two
+operations wearing one name, and **the mode is an argument**:
+
+| expression | verdict |
+|---|---|
+| `open(path)` · `open(path, "r")` · `"rb"` · `"rt"` | **read — permitted** |
+| `open(path, "w")` · `"a"` · `"x"` · `"r+"` | write — refused |
+| `open(path, some_variable)` | unknown mode — refused |
+
+Refusing all of them made the probe unable to read the one thing real programs most often depend on. Reading the
+mode is parsing, not guessing, and the safe default for a mode that is not a literal is still refusal.
+
+A second, subtler block: a check that fired on the **name** `open` wherever it appeared — including as the
+function of a call whose mode had already been vetted. A name-level rule cannot see that an argument was checked,
+so `open` is now handled in exactly one place.
+
+### Where this leaves the honest position
+
+| case | status |
+|---|---|
+| literal faults (`a/0`, `xs[5]`, `d["b"]`) | **decided**, 0 executions |
+| values from the environment (`os.environ`) | **decided**, by probe, with provenance |
+| values from a config file | **decided**, by probe + literal walk |
+| values from stdin / network / user input | **still refused** — and now says so |
+
+The last row is the remaining boundary, and it is the right one to have: stdin and the network are not readable
+without consuming them, so a probe would be an ACTION rather than a question.
+
+### Verified
+
+    VERIFIED   a config-file-driven program's fatal fault is named before it runs
+    VERIFIED   the probe's dict becomes a value the walk indexes, and the detail names the real contents
+    VERIFIED   reading the file leaves it byte-identical
+    VERIFIED   mode decides: writes refused, reads permitted, unknown modes refused
+    VERIFIED   179 passed, 2 skipped across twelve suites
