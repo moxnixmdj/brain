@@ -625,3 +625,21 @@ deletable store outside the weights.
 NOT RUN and NOT claimed. Everything verifiable in this sandbox has been measured
 and recorded across §6–§19. The standing mission and done criteria stand exactly as
 they were at the start of this turn: the system does not claim §6.
+
+## 20. .tar.bz2 archive goal — warm INSTANT_RECALL evidence added (2026-11-23, measured)
+
+The last archive-class format without warm-replay evidence was `.tar.bz2`. Measured with
+`unseen_tar_bz2_computer_probe_20261123.py`, same discipline:
+
+- TEACH: pass, status PASS__PERFECT_ALGORITHM_RUN, **admit ADMIT 2/2**, persist True,
+  77.7 s, content verified.
+- COLD (B): pass, VERIFIED_NOT_PERSISTED, 80.4 s, content verified.
+- WARM (B): **INSTANT_RECALL**, PASS__REPLAY_REACHED_GOAL, 0.113 s, content verified.
+- CONTROL (A): INSTANT_RECALL, 0.116 s, content verified.
+
+(bzip2's scan budget is a little slower than gzip's — compression cost is the honest
+price, not a defect.)
+
+Archive-class warm INSTANT_RECALL evidence now covers: .tar.gz (§7), .zip (§10),
+.bz2 compressed target (§10), multi-file .tar.gz bundle (§13), .tar.bz2 (§20),
+and decompress (§12); the hash direction §11; the cross-process persistence chain §15/§18.
