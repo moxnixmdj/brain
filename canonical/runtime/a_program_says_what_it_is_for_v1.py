@@ -85,9 +85,10 @@ def _words(text: str) -> list[str]:
 class Claim:
     """A program, and the sentence in which it says it does the goal's kind of thing."""
     program: str
-    score: int
+    score: float
     stated: tuple[str, ...]
     sentence: str
+    source: str = "OWN_MANUAL"
 
 
 _USAGE = re.compile(r"^(?:usage|or|try)\b", re.I)
@@ -105,9 +106,32 @@ one ones i you he she we they them their our your his her my me us
 """.split())
 
 
+def _root(word: str) -> str:
+    """One suffix rule, checked in both directions, so `count`/`counts` and `word`/`words` meet.
+
+    Measured 2026-11-23: "count words in a document" scored ZERO against `wc`, whose own description says
+    "Print newline, word, and byte counts". `count` and `counts` are the same word to a reader and were two
+    different words to a matcher, and that single character was the entire gap.
+
+    §A130 recorded the trap: a stemmer's special case can swallow another word (`named` -> `name` turned
+    `gzipped` into `gzippe`). So the rule here removes a suffix only when the word can afford to lose it, and
+    never rewrites the stem to a different one. `cross`->`cros`, `class`->`clas`: both still meet their own
+    plurals, which is all this is for.
+    """
+    w = word.casefold()
+    for suffix, floor in (("ies", 4), ("es", 4), ("s", 3)):
+        if w.endswith(suffix) and len(w) - len(suffix) >= floor:
+            return w[: -len(suffix)]
+    return w
+
+
 def _content_words(text: str) -> list[str]:
     """The words that can name a thing, in order. Grammar is removed; nothing else is."""
     return [w for w in _words(text) if w not in _GRAMMAR]
+
+
+def _content_roots(text: str) -> set[str]:
+    return {_root(w) for w in _content_words(text)}
 
 
 def statement(text: str) -> str:
@@ -144,7 +168,12 @@ def statement(text: str) -> str:
         # "Couldn't find a suitable web browser!", which became its statement and matched the goal word
         # "find". A program describing itself does not apologise, does not address the reader, and does not
         # ask a question.
-        if re.search(r"\b(couldn't|cannot|can't|unable|error|failed|sorry|try '|install|no such)\b", line, re.I):
+        # "Permission denied" is a denial, not a purpose. Measured 2026-11-23: `debconf-communicate --help`
+        # fails with a cache-permission error, and that error became its statement -- then matched the goal
+        # "change permissions on a file" and outranked `chmod`. A program that could not even print its help
+        # has said nothing about itself.
+        if re.search(r"\b(couldn't|cannot|can't|unable|error|failed|sorry|try '|install|no such|denied|"
+                     r"not found|warning|invalid|unknown|usage error)\b", line, re.I):
             continue
         if line.endswith("?") or line.endswith("!"):
             continue
@@ -152,18 +181,42 @@ def statement(text: str) -> str:
     if not plain or len(plain) > 12:
         # a synopsis of many statements is a command list, not a description
         return ""
-    return plain[0]
+    # THE PURPOSE IS THE WHOLE DESCRIPTION, NOT ITS FIRST LINE. Measured 2026-11-23: `wc` says
+    # "Print newline, word, and byte counts for each FILE" and keeping only the first line made the word
+    # "counts" -- the word a person uses -- invisible to the matcher, so "count words in a document" missed
+    # `wc` and was answered by `ptx`. `tail` says "Print the last 10 lines", and "last" was invisible the
+    # same way. A description is a paragraph; truncating it to one sentence throws away the noun.
+    #
+    # The lines before the first blank line after the description begins are one block, and everything in it
+    # is the program speaking about itself.
+    block: list[str] = [plain[0]]
+    for line in lines[lines.index(plain[0]) + 1:]:
+        if line in plain and len(block) < 6:
+            block.append(line)
+        elif line not in plain:
+            break
+    return " ".join(block)
 
 
 def what_does(goal: str, *, programs: Sequence[str] | None = None,
               helps: Mapping[str, str] | None = None,
+              also_says: Mapping[str, Sequence[str]] | None = None,
               limit: int = 6) -> dict[str, Any]:
     """Which installed programs state, in their own manual, that they do what the goal asks.
 
     `helps` supplies already-read manuals (name -> text); any program missing from it is read here. That
     separation is deliberate: the reading is mechanical and cacheable, the judgement is this function.
+
+    `also_says` carries the words the program's PROJECT MANUAL uses that its own help does not --
+    `the_manual_and_the_help_disagree_v1` derives those from two authoritative documents about the same
+    program. Measured 2026-11-23: `chmod --help` says "Change the mode", the GNU manual says "Change access
+    permissions", and "change permissions on a file" matched neither, because nothing in either text relates
+    mode to permission. With the bridge, `chmod` carries "permission" and the goal finds it.
+
+    These words are weaker evidence than the program's own statement, and are weighted as such: a word the
+    manual had to supply is a word the program itself did not use.
     """
-    asked = set(_content_words(goal))
+    asked = _content_roots(goal)
     if not asked:
         return {"schema": SCHEMA, "goal": goal, "claims": [], "why": "GOAL_HAS_NO_CONTENT_WORD"}
 
@@ -177,7 +230,7 @@ def what_does(goal: str, *, programs: Sequence[str] | None = None,
     # which is right, because then the word would not distinguish anything either.
     document_frequency: dict[str, int] = {}
     for text in (helps or {}).values():
-        for word in set(_content_words(statement(synopsis(text)))):
+        for word in _content_roots(statement(synopsis(text))):
             document_frequency[word] = document_frequency.get(word, 0) + 1
     total = max(1, len(helps or {}))
 
@@ -194,16 +247,34 @@ def what_does(goal: str, *, programs: Sequence[str] | None = None,
         if not sentence:
             # a program that never states a purpose cannot be claiming one, however long its manual
             continue
-        said = set(_content_words(sentence))
+        said = _content_roots(sentence)
+        bridged = {_root(w) for w in (also_says or {}).get(program, ())}
         shared = asked & said
         if not shared:
             continue
         # each shared word contributes what it can distinguish: a word every program says contributes nothing
         weight = sum(math.log2(total / max(1, document_frequency.get(w, 1))) for w in shared)
+        # THE BRIDGE IS CONSULTED WITH THE PROGRAM'S OWN WORDS, NOT ONLY WHEN THEY FAIL. Measured: `chmod`
+        # shares "change" and "file" with "change permissions on a file", so it always matched and the manual's
+        # "permission" was never reached -- while `debconf-communicate` matched "permission" outright and won.
+        # A word the project manual supplies counts at HALF, because the program itself did not use it, and
+        # half is enough to break a tie between programs that say the same generic things.
+        bonus = sum(math.log2(total / max(1, document_frequency.get(w, 1))) * 0.5
+                    for w in (asked & bridged) - shared)
+        # THE THRESHOLD MUST BE APPLIED AFTER THE BRIDGE, NOT BEFORE. Measured 2026-11-23: a small program set
+        # gave `chmod` only "change" and "file" -- words every one of them says -- so it fell below
+        # _MIN_EVIDENCE and was DISCARDED before the manual's "permission" could be added. A program was being
+        # rejected for being uninformative on its own while holding exactly the evidence that made it right.
+        if bonus:
+            shared |= (asked & bridged)
+            weight += bonus
+            source = "OWN_MANUAL_AND_PROJECT_MANUAL"
+        else:
+            source = "OWN_MANUAL"
         if weight < _MIN_EVIDENCE:
             continue
         claims.append(Claim(program, round(weight, 3), tuple(sorted(shared)),
-                            " ".join(sentence.split())))
+                            " ".join(sentence.split()), source))
 
     # MORE OF THE GOAL STATED IS BETTER; a tie is broken by who said it EARLIER in their own synopsis, because
     # a program that leads with the purpose is more likely to be the purpose. An exact tie stays a tie and is
@@ -214,7 +285,7 @@ def what_does(goal: str, *, programs: Sequence[str] | None = None,
         "schema": SCHEMA,
         "goal": goal,
         "claims": [{"program": c.program, "score": c.score, "stated": list(c.stated),
-                    "says": c.sentence[:180]} for c in claims[:limit]],
+                    "says": c.sentence[:180], "source": c.source} for c in claims[:limit]],
         "best": [c.program for c in top],
         "asked_words": sorted(asked),
         "why": "STATED_IN_THEIR_OWN_SYNOPSIS" if claims else "NO_PROGRAM_STATES_IT",

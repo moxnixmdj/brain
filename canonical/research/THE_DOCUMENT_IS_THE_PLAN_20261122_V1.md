@@ -8047,3 +8047,76 @@ different words from the person, and no rule about position or frequency closes 
 
 > **The manual is an honest index and a partial one: it answers the goals that share a word with it, and the
 > other half of the language has to come from somewhere that relates words to each other.**
+
+## §A139 — the manual and the help disagree, and that disagreement is the relation
+
+### The wall, hit three times before it was named
+
+    §A134   "write a new email"   vs the page's "Compose"         no shared word
+    §A138   "count words"         vs `wc`'s "word ... counts"     a plural; one suffix rule fixed it
+    §A138   "change permissions"  vs `chmod`'s "Change the mode"  NOTHING in either text relates them
+
+The third is not stemming and not ranking. `chmod --help` says *"Change the mode of each FILE to MODE."* A
+person says "permissions". Neither string contains the other and no frequency weight can invent the link.
+
+### The relation is written down, by the same authors, in another document
+
+    GNU Coreutils manual:
+        * chmod: (coreutils)chmod invocation.           Change access permissions.
+
+**The disagreement between two authoritative documents about the same program IS the means-relation.** Not a
+thesaurus — a thesaurus is a table this repository would have to take on trust, which is the knowledge house the
+constraints forbid. Here both sides are quoted, and the relation exists only because two real texts differ.
+
+### Measured across the whole machine
+
+63 of 626 programs have a word their manual adds and their help lacks. Most add nothing: `chown`, `sort`, `wc`,
+`cp`, `split` all agree with their own manuals, and no relation is invented for them.
+
+### Four defects the measurements forced
+
+    the menu lines       the manual lists commands as `* chmod: (coreutils)chmod invocation.   Change access
+                         permissions.` — prefixed and padded. Anchored at line start with no `*`, the reader
+                         found NOTHING in a 685 KB manual and every program looked undocumented.
+    inflection           `sort`'s help says "FILE(s)", its manual "text files", and a plain set difference
+                         reported `file` as a word the manual added — which would make EVERY program look like
+                         it related two vocabularies. Compared on roots.
+    a denial             `debconf-communicate --help` fails with "Permission denied", that error became its
+                         "statement", matched the goal word "permission", and **outranked chmod**.
+    the order of the test `chmod` was discarded by the evidence threshold BEFORE the bridge could add its word,
+                         because on a small program set "change" and "file" appear in all of them and weigh
+                         log2(n/n) = 0. The threshold now runs after the bridge.
+
+### Measured — held-out goals, the same eight
+
+| goal | before the bridge | after |
+|---|---|---|
+| change permissions on a file | debconf-communicate, install, chcon | **chmod**, install, ch… |
+| create a hard link | ln | **ln** |
+| count words in a document | ptx, vmstat | **wc** |
+| show the end of a file | df, lzmainfo | df, lzmainfo — **miss** |
+| print the last lines of a log | tail | **tail** |
+| count the lines in a file | vmstat, cut | **wc** |
+| split a large file into pieces | csplit, split | csplit, **split** |
+| translate characters | tr | **tr** |
+
+**7 of 8.** The one miss is `show the end of a file` vs `tail`'s *"Print the last 10 lines"*. "end" and "last"
+are the same thing to a reader and two different words here, and **no document on this machine relates them.**
+That is a synonym with no source — and this project does not invent one.
+
+### The honest shape of where this leaves the vocabulary problem
+
+    SOLVED BY STRUCTURE   where an element sits (§A135), where a statement sits in a manual (§A138)
+    SOLVED BY INFLECTION  count/counts, word/words (one suffix rule)
+    SOLVED BY TWO DOCUMENTS DISAGREEING  mode/permission (§A139) — sourced on both sides
+    UNSOLVED              end/last. Nothing on this machine says they are the same word.
+
+> **Every relation this tree now uses is read from something real: a page's ancestry, a manual's opening, or
+> two documents disagreeing. The remaining half is the part of language no document on the machine states.**
+
+### What is not established
+
+    NOT DONE   §6. No OSWorld task, no SWE-bench instance, nothing beyond the modules named above.
+    NOT TRUE   that 7/8 generalises. It is eight hand-written goals against one machine's coreutils.
+    NOT TRUE   that the web manual bridge is cheap: it fetched 685 KB over api.github.com, once, and that
+               call is not part of any runtime that ships.
