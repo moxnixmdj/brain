@@ -546,3 +546,34 @@ different instance: one admitted GENERALIZED RULE, never one instance's trace.
 - UNREACHED / UNCLAIMED: real repo/code-repair envs (snippet anti-unifier exists and is
   tested — `learn_and_admit_code_repair` + fresh-defect `replay_code_repair` — but the
   repo env does not); GUI/browser/OSWorld/SWE-bench/Terminal-Bench (§6 open).
+
+## 17. Code-repair goal: honestly measured, honestly refused (2026-11-23)
+
+Section-14's named next bottleneck — the first code-repair-class goal — was attempted
+against the live perfect-algorithm drive. Honest measurement:
+
+- Seed: a real broken Python file (`add(a,b) = a - b`) plus its failing test, in a
+  real temp directory, real verification by subprocess.
+- Narrowing: the goal ("make module.py pass its test") yields the interpreter
+  programs (`['test', 'python', 'python3', 'python3.11', 'py3clean', ...]`) — this IS
+  the goal's own question. All file-transform goals work this way; that is not the miss.
+- Drive result: **OPEN__NO_PLAN_AFTER_SCAN** (6.0 s, 30s budget, max_depth 2). The
+  scan never finds a plan: the narrowed programs (interpreters, linters) have no
+  action that edits the broken file, and the file-content predicate machinery has no
+  idea that goal is "test passes" — the triple for this world is file-existence and
+  content, not tests/build/artifacts. The predicate is the honest answer too: a
+  multi-file seed with target = an INPUT file correctly refuses the plain-target
+  branch rather than claiming done.
+- The drive never lies on this goal: it refuses.
+
+What this confirms (§14's claim, now with a live measurement): the file-transform-shaped
+perfect-algorithm machinery closes file-transform goals and skills those goals; it
+does NOT close code-repair goals. The honest fix is a different env kind — a code-
+repair env with a test-verified oracle, file-edit actions, and admission on fresh
+defect variants — not more narrowing/predicate tuning of THIS machinery.
+
+§6, honestly: remains open and unclaimed. What is real today (§14–§17): 5+ file-transform
+directions warm-replay to ~0.003–0.1 s, multi-file bundle verification byte-exact,
+cross-process persistence, local guide with tool-help + man-page tiers, and fresh-
+instance admission discipline. Carried-model generalization remains 0 edges / stale
+priors / cold re-derivation — refused honestly.
