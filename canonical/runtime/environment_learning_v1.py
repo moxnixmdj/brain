@@ -241,7 +241,7 @@ def learn_model(env: Any, actions: Sequence[Any], *, budget: int = 60,
 
 def _choose_action(env: Any, actions: Sequence[Any], rng: Any,
                    heuristic: Callable[[Any], float] | None,
-                   epsilon: float = 0.25) -> str:
+                   epsilon: float = 0.25) -> Any:
     """Pick an action, preferring ones that look like progress when we can tell.
 
     Random exploration almost never reaches a rare state: 18 precise
@@ -252,7 +252,7 @@ def _choose_action(env: Any, actions: Sequence[Any], rng: Any,
     """
     order = list(actions)
     if heuristic is None or rng.random() < epsilon:
-        return str(rng.choice(order))
+        return rng.choice(order)
     # Looking ahead requires TRYING an action, which changes the world. Without
     # a way back, every probe leaves the environment somewhere else and the
     # ranking is computed over states that no longer hold -- which produced a
@@ -260,9 +260,9 @@ def _choose_action(env: Any, actions: Sequence[Any], rng: Any,
     # we do not guess; we wander.
     can_undo = hasattr(env, "snapshot") and hasattr(env, "restore")
     if not can_undo:
-        return str(rng.choice(order))
+        return rng.choice(order)
 
-    scored: list[tuple[float, str]] = []
+    scored: list[tuple[float, Any]] = []
     for action in order:
         try:
             saved = env.snapshot()
@@ -271,13 +271,13 @@ def _choose_action(env: Any, actions: Sequence[Any], rng: Any,
             env.restore(saved)
         except Exception:
             score = float("inf")
-        scored.append((score, str(action)))
+        scored.append((score, action))
     finite = [(s_, a) for s_, a in scored if s_ != float("inf")]
     if not finite:
-        return str(rng.choice(order))
+        return rng.choice(order)
     best_score = min(s_ for s_, _ in finite)
     best_actions = [a for s_, a in finite if s_ == best_score]
-    return str(rng.choice(best_actions))
+    return rng.choice(best_actions)
 
 
 def _path_to(model: Mapping[str, Mapping[str, str]], root: str,
@@ -334,7 +334,7 @@ def shortest_plan(learned: Mapping[str, Any], is_goal: Callable[[str], bool],
             if nxt in seen:
                 continue
             seen.add(nxt)
-            prev[nxt] = (node, str(action))
+            prev[nxt] = (node, action)
             if is_goal(nxt):
                 out: list[Any] = []
                 cur = nxt
@@ -411,8 +411,8 @@ def drive(env: Any, actions: Sequence[Any], *,
     env.reset()
     executed: list[Any] = []
     for action in plan:
-        env.act(str(action))
-        executed.append(str(action))
+        env.act(action)
+        executed.append(action)
 
     reached = bool(is_goal(env.state()))
     return {
@@ -420,7 +420,11 @@ def drive(env: Any, actions: Sequence[Any], *,
         "status": PASS if reached else OPEN_UNREACHED,
         "pass": reached,
         "learned": learned,
-        "plan": [str(a) for a in plan],
+        # THE PLAN IS RETURNED AS ACTIONS, NOT AS THEIR STRINGS. Measured 2026-11-23 on a real three-step
+        # task: the plan was executed correctly and REPORTED as `["('gzip', '-k', 'data.txt')", ...]`, which a
+        # caller cannot act on again. A plan is the thing this module exists to produce; producing it in a form
+        # nobody can use is the same defect as an answer that cannot be checked.
+        "plan": list(plan),
         "plan_length": len(plan),
         "executed": executed,
         "reached": reached,

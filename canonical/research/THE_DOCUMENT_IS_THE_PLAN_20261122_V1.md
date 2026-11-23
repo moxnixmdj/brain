@@ -7887,3 +7887,84 @@ was missing.
 
 > **The path from a sentence to a click now exists and is measured end to end. The path from a click to a
 > finished task still does not, and that is the next thing, not the last thing.**
+
+## §A137 — the dependency graph was already written down, in the command line
+
+### The defect found in the project's own learner, measured first
+
+`environment_learning_v1` is the general multi-step learner: `reset/act/state` in, shortest plan out. It was
+written to work in *any* environment, and it could only ever work in toy ones. Two defects, both silent:
+
+    EVERY ACTION WAS STRINGIFIED. `_choose_action` returned `str(rng.choice(order))`, `drive` called
+    `env.act(str(action))`, and the returned plan was `[str(a) for a in plan]`. An action that is a tuple —
+    i.e. every real command — became the STRING `"('gzip', '-k', 'data.txt')"`. Measured: the first
+    `act()` call raised `FileNotFoundError: ... "('"`.
+
+    They survived because ALL 75 existing tests use string actions (increment dials, `+0`, `inc`). A test that
+    only ever hands the learner a str can never notice that it destroys everything else.
+
+Both are fixed. The plan now comes back as actions a caller can run, and the same three-step gzip task executes.
+
+### The ceiling, measured
+
+With that fixed, the walk still could not do real work:
+
+| task depth | budget 60 | budget 150 | budget 400 |
+|---|---|---|---|
+| 5 ordered steps | FAIL | FAIL | FAIL |
+
+Random walking finds an n-step chain by collision; the odds fall exponentially in n. **OSWorld 2.0 averages 318
+steps per task.** More budget is not a plan, and this is the arithmetic reason the frontier's step counts hurt.
+
+### The fact that replaces the search
+
+Every real action states its precondition in its own arguments:
+
+    ('cp', 'a.txt', 's1')   needs a.txt,  produces s1
+    ('cp', 's1',    's2')   needs s1,     which the line above produces
+
+At the start of a five-step chain, **exactly one** of the five is possible. The graph was written in the command
+line. Nothing learns it and nothing needs to know what `cp` is.
+
+| | random walk + distance heuristic | arguments read |
+|---|---|---|
+| 5 steps | FAIL (budget 80) | **PASS**, plan 5 |
+| 20 steps | FAIL (23.8 s) | **PASS, 0.03 s** |
+| 20 steps, shuffled action list | — | **PASS**, 20 actions |
+
+### Three defects the honest tests found in my own new module
+
+    tar -cf x.tar dir    read `dir` as the output and `x.tar` as an input — BACKWARDS. The rule is positional:
+                         a flag marks the operand AFTER it.
+    mkdir -p scratch     one word after a flag. `mkdir` MAKES it; `rm -f notes.txt` needs it to EXIST. The
+                         arguments cannot tell these apart, so the module returns no output and keeps the word
+                         as a need — the reading that is safe for both. Guessing "made" would have had `rm`
+                         demand a file that must not exist.
+    gzip -k report.csv   writes `report.csv.gz`, and NOTHING in the command says so. A plan through it cannot
+                         be derived, and the module REFUSES rather than inventing the name.
+
+The third is the method's real boundary and it is stated rather than patched: **the reader reads what actions
+declare. A program that names its output by convention declares nothing, and the plan that needs it is not
+derivable from the arguments — it needs the program's documentation (`program_manual_v1`), which is the next
+join, not a workaround.**
+
+### Byte-verified, not asserted
+
+    tar -czf report.tar.gz report.csv  ->  mv  ->  cp  ->  final.tgz
+    final.tgz first two bytes: 1f 8b     (gzip magic)
+    members: ['report.csv']
+
+A plan can "pass" a goal check by creating an empty file. §A130's lesson, applied here.
+
+### What this does and does not establish
+
+    VERIFIED  20 dependent real steps, derived in 0.002 s and executed in 0.03 s, from a shuffled action list
+    VERIFIED  honest refusal when no chain exists, when the start material is absent, and when an output is
+              not named by its arguments
+    VERIFIED  the project's own learner no longer destroys non-string actions; 75 prior tests still pass
+    NOT TRUE  this is not computer use. The actions are filesystem programs chosen by the test author.
+    NOT TRUE  it does not CHOOSE actions. It orders a given set; deciding which set to give it is unsolved.
+    NOT DONE  §6.
+
+> **318 steps is not a search problem. It is a problem of reading what each step already declares — and then
+> choosing which steps to declare.**
