@@ -164,7 +164,12 @@ def _split_specs(spec: str) -> tuple[list[str], str | None]:
         if tail:
             tail = tail.lstrip("=").strip()
             tail = tail.strip("<>")
-            if tail and re.match(r"^[A-Za-z0-9_|]+$", tail):
+            # `+` IS HALF THE DECLARATION. `-offset +int` and `-length +int` say "a signed
+            # integer", and the character class excluded `+`, so the spec parsed to
+            # placeholder None -- the program's own declaration was silently dropped, the
+            # binder supplied a filename, and openssl answered "Can't parse \"in.txt\" as a
+            # number". Accepting `+` keeps a declaration the program actually made.
+            if tail and re.match(r"^[+]?[A-Za-z0-9_|]+$", tail):
                 placeholder = placeholder or tail
         if _OPT.match(name):
             spellings.append(name)
@@ -216,7 +221,16 @@ def parse_usage_positionals(text: str, name_of_program: str = "") -> list[str]:
         # one is read as the first line only, and the number is re-measured after any
         # change here rather than trusted.
         slots: list[str] = []
+        # REQUIRED OR OPTIONAL IS THE USAGE LINE'S OWN STATEMENT, and it decides whether
+        # an operand has to be supplied. `cp [OPTION]... SOURCE DEST` names two REQUIRED
+        # operands; `base64 [OPTION]... [FILE]` names one the program will do without.
+        # Supplying an operand the line marked optional is inventing an argument: measured,
+        # `base64 --wrap=1 in.txt` is a different command from `base64 --wrap=1`, and the
+        # pinned test is right that a value slot gets a value and nothing else. Supplying
+        # one the line marked required is the whole door.
+        required: list[str] = []
         for token in m.group(1).split():
+            bracketed_token = bool(re.search(r"[<\[]", token))
             bracketed = re.findall(r"[<\[](?:-([A-Za-z0-9_.|]+)|([A-Za-z0-9_.|-]+))[>\]]",
                                    token)
             if bracketed:
@@ -226,7 +240,7 @@ def parse_usage_positionals(text: str, name_of_program: str = "") -> list[str]:
                     if short:
                         continue
                     name = long_name.upper()
-                    if name == "OPTION" or name in slots:
+                    if name.strip(".") in ("OPTION", "OPTIONS") or name in slots:
                         continue
                     slots.append(name)
                 continue
@@ -240,22 +254,76 @@ def parse_usage_positionals(text: str, name_of_program: str = "") -> list[str]:
             if not re.match(r"^[A-Za-z][A-Za-z0-9_.|-]*$", token):
                 continue
             name = token.upper()
-            if name not in slots:
-                slots.append(name)
-        # The usage line begins with the program's own name (`cp [OPTION]... ...`).
-        # It is the program, not an operand, and counting it made cp look like it
-        # declared three slots.
-        if slots and name_of_program and slots[0] == name_of_program.upper():
+            if not bracketed_token:
+                required.append(name)
+            # `OPTIONS` in a usage line is the options themselves, spelled out -- openssl
+            # writes `asn1parse [options]`, `x509 [options]`, `ecparam [options]`; tar
+            # writes `[OPTION...]`. Read as a slot it declared a phantom operand on every
+            # openssl subcommand, and the binder duly appended a seed filename, which
+            # openssl refuses with "Use -help for summary." Measured: that one word
+            # accounted for 143 of 258 sampled subcommand failures. The bracketed path
+            # skipped `OPTION`; the bare path did not, and trailing punctuation made
+            # `OPTION...` miss even that, so the same declaration was read three ways.
+            if name.strip(".") in ("OPTION", "OPTIONS") or name in slots:
+                continue
+            slots.append(name)
+        # A USAGE LINE ALWAYS BEGINS WITH THE COMMAND IT DESCRIBES, and that word is the
+        # program, never an operand: `cp [OPTION]... SOURCE DEST`, `tar [OPTION...] [FILE]`,
+        # `asn1parse [options]` read from `openssl asn1parse -h`. The old test only dropped
+        # it when it happened to equal the parent program's name, so every openssl
+        # subcommand kept its own name as a "slot" and the binder appended a seed filename
+        # to `openssl x509 -in in.txt`, which the program refuses with "Use -help for
+        # summary." Measured: 143 of 258 sampled subcommand failures came from this and the
+        # `OPTIONS` spelling together. Dropping the leading token is not a heuristic about
+        # the name; it is the one token whose meaning the form of a usage line fixes.
+        if slots:
             slots = slots[1:]
         return slots
+    return []
+
+
+def parse_required_positionals(text: str) -> list[str]:
+    """The usage-line slots the program does NOT bracket, i.e. the ones it requires.
+
+    `cp [OPTION]... SOURCE DEST` declares two required operands; `base64
+    [OPTION]... [FILE]` declares none. Supplying an operand the line bracketed is
+    inventing an argument -- `base64 --wrap=1 in.txt` is a different command from
+    `base64 --wrap=1`, and a pinned test is right to refuse it. Supplying one the line
+    left bare is the whole door: without it `cp --suffix txt` copies nothing.
+
+    Kept separate from `parse_usage_positionals` so that function stays a pure reader
+    of ONE list; census parses many contracts and module-level state would leak between
+    them.
+    """
+    for line in text.splitlines():
+        m = _USAGE.match(line)
+        if not m:
+            continue
+        required: list[str] = []
+        for token in m.group(1).split():
+            if re.search(r"[<\[]", token):
+                continue
+            if token.startswith("-") or token in ("|", "||", "...", "[", "]"):
+                continue
+            if not re.match(r"^[A-Za-z][A-Za-z0-9_.|-]*$", token):
+                continue
+            required.append(token.upper())
+        # the first bare word is the command, not an operand
+        return required[1:]
     return []
 
 
 #: A usage-line slot that names a PLACE, as opposed to a mode word. `DEST`,
 #: `DESTINATION`, `DIRECTORY`, `TARGET`, `FILE`, `PATH` name places; `PATH` is
 #: excluded because git spells an option argument that way (`[-C <path>]`).
+#: Placeholders that name something the program acts ON. The coreutils names were here
+#: first; `INFILE`/`OUTFILE`/`PATH` were added because openssl writes `-in infile` and
+#: `-out outfile`, which are exactly this shape, and their absence made a path slot look
+#: like an option argument -- so a filename was refused with "Can't parse ... as a number".
+#: This is the list's stated purpose, extended by evidence, not a new table.
 _CONTENT_SLOTS = ("SOURCE", "SRC", "DEST", "DESTINATION", "DIRECTORY", "TARGET",
-                  "FILE", "ORIGIN")
+                  "FILE", "ORIGIN", "INFILE", "OUTFILE", "INPATH", "OUTPATH",
+                  "PATH", "ARCHIVE", "CERT", "KEY", "INPUT", "OUTPUT", "DATAFILE")
 
 
 def _is_content_slot(slot: str) -> bool:
@@ -343,6 +411,7 @@ def parse_contract(text: str, name: str = "") -> dict[str, Any]:
             "usage_line": usage,
             "flags": parse_flags(text),
             "positionals": parse_usage_positionals(text, name),
+            "required_positionals": parse_required_positionals(text),
             "subcommand_candidates": parse_subcommand_candidates(text),
             "has_usage": bool(re.search(r"^\s*usage:", text, re.IGNORECASE | re.MULTILINE)),
             "in_place": [word for word in _IN_PLACE if word in text.lower()]}
@@ -506,11 +575,11 @@ def census(prog: str, *, depth: int = DEFAULT_DEPTH, max_ops: int = DEFAULT_MAX_
     root = ask([prog, "--help"])
     text = root["text"] or ask([prog, "-h"])["text"]
     contract = parse_contract(text, prog)
-    ops = operations_from(contract, tool=prog, max_ops=max_ops)
-    # Each operation carries the slot list it was declared under, so `bind` can tell
-    # whether a second place is available without being handed the contract: the
+    # Each operation carries the slots AND the flags of the scope that declared it, so
+    # `bind` can tell what the program asked for without being handed a contract: the
     # census returns operations, and callers bind them later.
-    _slots = list(contract.get("positionals") or ())
+    ops = [_with_declaration(op, contract.get("positionals") or (), contract)
+           for op in operations_from(contract, tool=prog, max_ops=max_ops)]
     admitted: list[dict[str, Any]] = []
     refused: list[dict[str, Any]] = []
     walked = 1
@@ -531,13 +600,14 @@ def census(prog: str, *, depth: int = DEFAULT_DEPTH, max_ops: int = DEFAULT_MAX_
             sub = parse_contract(answer["text"], f"{prog} {name}")
             sub_ops = operations_from(sub, tool=prog, prefix=(prog, name), depth=2,
                                       max_ops=max_ops)
-            ops.extend(sub_ops)
+            ops.extend(_with_declaration(op, sub.get("positionals") or (), sub)
+                       for op in sub_ops)
             admitted.append({"subcommand": name, "operations": len(sub_ops),
                              "flags": len(sub["flags"]),
                              "positionals": sub["positionals"]})
 
     return {"schema": SCHEMA, "tool": prog, "depth": depth,
-            "operations": [_with_slots(op, _slots) for op in ops],
+            "operations": ops,
             "operation_count": len(ops),
             "subcommands_admitted": admitted, "subcommands_refused": refused,
             "positionals": contract["positionals"],
@@ -579,6 +649,110 @@ OPERAND_FILES = ("in.txt", "seed.txt", "data.txt", "a.txt")
 #: The artifact a producing operation is asked to write.
 OPERAND_OUTPUT = "out.bin"
 
+
+def _names_an_output(placeholder: str) -> bool:
+    """Does this declaration say the flag's argument is WRITTEN, not read?
+
+    Direction is declared, not guessed: openssl prints `-out outfile`, `-in infile`,
+    `-keyout outfile`. Handing `out.bin` to a flag declared `infile` produced
+    `Can't open "out.bin" for reading, No such file or directory` -- a refusal about
+    our argument, which is our error and not the program's. Only the OUT prefix and a
+    whole word count; `INPUT` must not match, or the input flag would be fed the
+    artifact.
+    """
+    if _NUMERIC_SPEC.match(placeholder) or "|" in placeholder:
+        return False
+    head = placeholder.lstrip("+").upper()
+    return head.startswith("OUT") or head in _OUTPUT_SLOTS
+
+
+#: Words with which a program declares that a flag carries a PASSPHRASE. openssl prints
+#: `-k val  Passphrase` and `-passin val  Private key and cert file pass-phrase source`.
+#: Without one of these the operation blocks on a prompt the trial cannot answer --
+#: measured: 108 of openssl's failures were the program asking
+#: "enter AES-128-CBC encryption password:" and waiting.
+_PASSPHRASE_STEMS = ("passphrase", "pass-phrase", "pass phrase")
+
+
+def _declared_passphrase(operation: dict[str, Any]) -> tuple[str, str] | None:
+    """The flag this program declares for its passphrase, and the form it wants.
+
+    The VALUE'S FORM is also declared: `-k val  Passphrase` takes the passphrase
+    itself, while `-passin val  ... pass-phrase SOURCE` takes a source SPEC, which is
+    why one is bound `txt` and the other `pass:txt`. That distinction is the word
+    "source" in the program's own description, not a rule about openssl.
+    """
+    for flag in operation.get("declared_flags") or ():
+        words = (flag.get("description") or "").lower()
+        if not any(stem in words for stem in _PASSPHRASE_STEMS):
+            continue
+        spellings = [s for s in (flag.get("flags") or ()) if not s.startswith("-no")]
+        if not spellings:
+            continue
+        longs = [s for s in spellings if s.startswith("--")]
+        value = "pass:txt" if "source" in words else "txt"
+        return (longs[0] if longs else spellings[0]), value
+    return None
+
+
+#: Words with which a program declares that a flag names the thing it READS. Taken
+#: from the programs themselves: `-in infile  input file`. Deliberately not "file with
+#: signature" -- that is a precondition of verification, not the operand.
+_INPUT_STEMS = ("input file", "input filename", "input path", "input data",
+                "file to read", "read from", "input file name")
+
+
+def _declared_input_flag(operation: dict[str, Any]) -> str | None:
+    """The flag this program declares for READING its input, if it declares one.
+
+    `openssl x509 -h` lists `-in infile`; `openssl asn1parse -h` lists `-in infile`
+    too. That is the program stating where its input comes from, which is the half of
+    the action the binder never supplied: it named the artifact and left the input to
+    standard input, which under a trial has nothing in it. The flag is taken from the
+    operation's OWN scope (`declared_flags`), so a subcommand is read from the text
+    that describes it.
+    """
+    for flag in operation.get("declared_flags") or ():
+        spellings = [s for s in (flag.get("flags") or ()) if not s.startswith("-no")]
+        if not spellings:
+            continue
+        # THE DESCRIPTION SAYS THE ROLE; THE PLACEHOLDER ONLY SAYS THE TYPE. openssl
+        # prints `-in infile  input file` and `-oid infile  file of extra oid
+        # definitions` -- the same type, opposite roles. Reading the type alone picked
+        # `-oid` as the input and bound `openssl asn1parse -oid in.txt -out out.bin`,
+        # and `-signature infile` ("File with signature to verify") for the digest
+        # commands. So the role is read from the words the program itself used, the
+        # same way `carrier` reads the artifact role.
+        words = (flag.get("description") or "").lower()
+        if flag.get("placeholder") and _names_an_input(flag["placeholder"]) \
+                and any(stem in words for stem in _INPUT_STEMS):
+            longs = [s for s in spellings if s.startswith("--")]
+            return longs[0] if longs else spellings[0]
+    return None
+
+
+def _names_an_input(placeholder: str) -> bool:
+    """Does this declaration say the flag's argument is READ?
+
+    `-in infile` is read and `-inform PEM|DER` is the FORMAT of what is read, so the
+    format must not be handed a path -- `INFORM` is the one flag in openssl's family
+    whose spec begins with IN and is not a file. Everything else with an IN head
+    (`infile`, `inpath`, `input`) is a place to read from.
+    """
+    head = placeholder.lstrip("+").upper()
+    # `+int` is a TYPE, and upper-cased it begins with IN -- the first version of this
+    # rule read it as a place and bound `-offset in.txt`, re-creating the exact failure
+    # ("Can't parse \"in.txt\" as a number") the scope join had just fixed. A declared
+    # quantity (`+int`, `COLS`) and a declared domain (`PEM|DER`) are values, never places.
+    if _NUMERIC_SPEC.match(placeholder) or "|" in placeholder:
+        return False
+    return head.startswith("IN") and head != "INFORM" and head not in _VALUE_SLOTS
+
+
+#: Whole words that mean "written". `-inform`'s `INFORM` is deliberately absent, and
+#: `INPUT` is absent for the same reason it must not match: it is read.
+_OUTPUT_SLOTS = ("FILEOUT", "DESTFILE", "OUTPUT", "DEST", "TARGET")
+
 #: The positional slots that are an option's own carrier, not a file. `--wrap=COLS`
 #: takes a count, and handing it a filename produced "extra operand 'in.txt'" -- a
 #: refusal about our argument, not about the operation.
@@ -586,7 +760,115 @@ _VALUE_SLOTS = ("SUF", "COLS", "MODE", "NUMBER", "LEVEL", "TYPE", "COMMAND",
                 "STRING", "SEP", "WIDTH", "FORMAT", "SECONDS")
 _VALUE_FOR = {"COLS": "1", "NUMBER": "1", "LEVEL": "1", "WIDTH": "1", "SECONDS": "1"}
 
-#: A flag whose own documentation says it NAMES the artifact. This is the program's
+#: A spec that declares a quantity rather than a word: `+int`, `NUMBITS`, `COLS`.
+_NUMERIC_SPEC = re.compile(r"^[+]?(int|num|n|count)$|NUM|COUNT|WIDTH|COLS|LEVEL|SECONDS",
+                           re.IGNORECASE)
+
+def _placeholder_in(contract: Mapping[str, Any], flag: str | None) -> str | None:
+    """What the contract says this flag's own argument is called, if anything.
+
+    Only a flag that was DECLARED with a slot has one; `-keyid` takes nothing and returns
+    None, which is the difference between "no argument" and "an argument nobody named".
+    """
+    want = str(flag or "")
+    if not want:
+        return None
+    for row in contract.get("flags") or []:
+        if want in (row.get("flags") or []):
+            return row.get("placeholder")
+    return None
+
+
+def _flag_index(argv: Sequence[str], flag: str | None) -> int:
+    """Where this operation's own flag actually sits in its argv.
+
+    `bind` assumed `argv[1]` in four separate branches. That is right for `cp --backup`
+    and wrong for `openssl asn1parse -in`, and the wrongness was not cosmetic: the
+    SUBCOMMAND was treated as the flag and given a value, producing
+    `openssl asn1parse=out.bin` -- "Invalid command". A flag is identified by being the
+    flag, never by its position, so it is looked up.
+    """
+    want = str(flag or "")
+    for i, token in enumerate(argv):
+        if want and str(token) == want:
+            return i
+    # a long flag may be present as `--flag=value` already; the slot is then already
+    # filled and there is nothing to bind, which the caller must know about
+    for i, token in enumerate(argv):
+        if want and str(token).startswith(want + "="):
+            return i
+    return 1 if len(argv) > 1 else 0
+
+
+def _with_slot_value(argv: Sequence[str], at: int, value: str) -> list[str]:
+    """`-in` -> `-in=<value>`: one flag, one value, in the form every program takes.
+
+    GLUED, ALWAYS, and that is measured rather than assumed. Round 6 bound values as
+    `--wrap=1` and a pinned test holds it; the first version of this helper split them
+    into `--wrap 1`, changing the command a pinned door was measured on. Both spellings
+    were then tried against the programs that introduced the need: openssl's
+    `getopt_long` accepts `-in=c.pem`, `-offset=1` and `-out=out.bin`, and base64
+    accepts `--wrap=1`. One form covers both, so there is no second form to carry.
+    """
+    out = list(argv)
+    if not out:
+        return out
+    token = str(out[at]) if at < len(out) else ""
+    if token.startswith("-"):
+        out[at] = f"{token.split('=', 1)[0]}={value}"
+        return out
+    return [*out[:at + 1], str(value), *out[at + 1:]]
+
+
+def is_declared_domain(placeholder: str | None) -> bool:
+    """Does the program's own spec say this slot takes ONE OF SEVERAL WORDS?
+
+    `-inform PEM|DER` is the program declaring a value domain. `_split_specs` already
+    keeps that as the placeholder, so no parser and no table are needed: an alternation
+    in the spec IS the declaration. This is what `_VALUE_FOR` was guessing at for every
+    placeholder it did not recognise -- `INFORM` above all, which is why openssl was told
+    its input format was "in.txt".
+    """
+    return bool(placeholder) and "|" in str(placeholder)
+
+
+def declared_domain(placeholder: str | None) -> str | None:
+    """The first value the program's own spec says the slot accepts, or None."""
+    if not is_declared_domain(placeholder):
+        return None
+    for word in str(placeholder).split("|"):
+        word = word.strip()
+        if re.match(r"^[A-Za-z0-9_.+-]+$", word):
+            return word
+    return None
+
+
+#: Spec words that name a QUANTITY the program parses, not a thing it acts on. Handing one
+#: of these a filename is what produced "Can't parse \"in.txt\" as a number". Numeric and
+#: enumerated specs are the two shapes that are genuinely an option's own argument.
+_NUMERIC_OR_ENUM = re.compile(
+    r"^[+]?(int|num|n|count|size|len|bytes|value|val)$|NUM|COUNT|WIDTH|COLS|LEVEL|SECONDS|"
+    r"\|", re.IGNORECASE)
+
+
+def is_option_word(placeholder: str | None) -> bool:
+    """Does the spec say the slot takes a QUANTITY rather than something to act on?
+
+    `_is_content_slot` was the first version of this test and it is the wrong predicate:
+    `-writerand outfile` says `outfile`, which IS a content-slot name, and its description
+    says "write random data to the specified file" -- an artifact carrier that takes a
+    path. Treating it as a value gave it the literal `txt`, openssl created a file, exited
+    1, and the row became LITTER: a failed run leaving a file behind, which is the one
+    shape the census must never credit. The same held for `-secretkey val`.
+
+    So the test is not "is the name unknown to me" but "does the spec declare a quantity":
+    a numeric type, or an alternation (a declared domain). Everything else takes a path,
+    which is what a program that acts on files overwhelmingly means.
+    """
+    return bool(placeholder) and bool(_NUMERIC_OR_ENUM.search(str(placeholder)))
+
+
+#: A flag whose own documentation says it NAMES the artifact.#: A flag whose own documentation says it NAMES the artifact. This is the program's
 #: threshold, read from the program's words: `tar --file=ARCHIVE   use archive file or
 #: device ARCHIVE` and `gzip --stdout` are both statements about where the bytes go.
 #: The flag NAMES the artifact; it does not merely mention one. `gzip --force` says
@@ -679,9 +961,97 @@ def bind(operation: dict[str, Any], *, contract: dict[str, Any] | None = None) -
     positionals = [name for name in (operation.get("positionals") or [])
                    if name not in _VALUE_SLOTS and "OPTION" not in name]
     writes = operation.get("effect_class") == "WRITES"
+    # A REQUIRED OPERAND IS THE USAGE LINE'S OWN STATEMENT, not a guess: `cp [OPTION]...
+    # SOURCE DEST` leaves two slots bare and needs both; `base64 [OPTION]... [FILE]`
+    # brackets its one slot and runs without it. Appending a seed to the bracketed case
+    # invents an argument the program did not ask for, and round 6 pinned that refusal
+    # as correct. Appending it to the bare case is the entire door.
+    needs_operand = bool(operation.get("required_slots")) and not refuses_operand(operation)
     bound["bound"] = False
 
-    placeholder = operation.get("placeholder")
+    # THE PLACEHOLDER CAN COME FROM THE CONTRACT WHEN THE OPERATION CARRIES NONE.
+    #
+    # A subcommand's operations are declared from its own help text, so `-offset +int`
+    # arrives with `placeholder=None` while the CONTRACT knows the flag needs a value.
+    # Binding then supplied a filename and openssl refused it: "Can't parse \"in.txt\" as
+    # a number". Reading the slot from the contract is not a new rule -- `_split_specs`
+    # already recorded it -- and it is the same join round 6 made for the *document*: an
+    # operation is bound against the declaration that actually describes it.
+    flag_carries = _placeholder_in(
+        operation.get("declared_flags") and {"flags": operation["declared_flags"]}
+        or contract, operation.get("flag"))
+    if flag_carries and _names_an_input(flag_carries):
+        # THE MIRROR OF THE OUTPUT CASE, and the reason `-in` was handed `out.bin`:
+        # a flag declared `infile` is READ, so it wants the seed the trial wrote. The
+        # refusal it produced -- `Can't open "out.bin" for reading, No such file or
+        # directory` -- was about our argument, not the program's capability.
+        bound["invoked_as"] = _with_slot_value(argv, _flag_index(argv,
+                                                                  operation["flag"]),
+                                              OPERAND_FILES[0])
+        bound["artifact_slot"] = flag_carries
+        bound["operand_hypothesis"] = "reads the input its own declaration names"
+        bound["candidate_seed"] = True
+        bound["bound"] = True
+        if needs_operand:
+            # the flag says where the input is READ from; a declared operand says the
+            # command still acts on something (`openssl rmd160 -out out.bin in.txt`)
+            bound["invoked_as"] = [*bound["invoked_as"], OPERAND_FILES[0]]
+        return bound
+
+    if flag_carries and _names_an_output(flag_carries):
+        # THE ARTIFACT IS THE WHOLE DOOR: `openssl asn1parse -out out.bin` writes the
+        # parsed dump through the flag the program says names it, and nothing else is
+        # needed -- it takes no positional at all (`asn1parse [options]`). Falling
+        # through to the value path bound a NUMBER where a path belongs, and falling
+        # through to the operand path appended a filename the program refuses with
+        # "Use -help for summary". Measured: 108 openssl cryptography operations were
+        # unbound for want of this one branch.
+        bound["invoked_as"] = _with_slot_value(argv, _flag_index(argv,
+                                                                  operation["flag"]),
+                                              OPERAND_OUTPUT)
+        bound["artifact_slot"] = flag_carries
+        bound["names_artifact"] = operation["flag"]
+        # A DOOR HAS A PLACE TO READ FROM AND A PLACE TO WRITE TO, and until now the
+        # binder supplied at most one of them. `openssl x509 -out out.bin` reads
+        # standard input, finds no certificate, and writes nothing; `openssl x509 -in
+        # <cert> -out out.bin` writes the certificate. Both halves are declared by the
+        # same help text -- `-in infile`, `-out outfile` -- so composing them invents
+        # nothing: it reads two lines of the declaration instead of one.
+        partner = _declared_input_flag(operation)
+        argv = _with_slot_value(argv, _flag_index(argv, operation["flag"]),
+                                OPERAND_OUTPUT)
+        passphrase = _declared_passphrase(operation)
+        if passphrase and passphrase[0] not in argv:
+            # A DECLARED PASSPHRASE IS A DECLARED PRECONDITION. The cipher operations
+            # read their key from a prompt when none is given, and a prompt is the one
+            # thing a trial cannot answer; with the flag the same command produces. The
+            # flag and its value's form both come from the declaration, so nothing here
+            # is specific to openssl.
+            argv = [*argv, f"{passphrase[0]}={passphrase[1]}"]
+            bound["passphrase_from"] = passphrase[0]
+        if partner:
+            at = _flag_index(argv, operation["flag"])
+            argv = [*argv[:at], partner, OPERAND_FILES[0], *argv[at:]]
+            bound["reads_from"] = partner
+            bound["candidate_seed"] = True
+            bound["operand_hypothesis"] = ("reads through its declared input flag and "
+                                           "writes through its declared artifact flag")
+        else:
+            bound["operand_hypothesis"] = "names the artifact through its own declared flag"
+            if needs_operand:
+                argv = [*argv, OPERAND_FILES[0]]
+        bound["invoked_as"] = argv
+        bound["bound"] = True
+        return bound
+
+    # THE SCOPE THAT DECLARED THIS OPERATION IS THE ONE THAT BINDS IT. A subcommand
+    # prints its own option arguments (`asn1parse -h` states `-offset +int`); the parent
+    # prints none of them. `census` now carries that scope's flags on the row, so this
+    # reads the declaration the row was actually declared under, and falls back to the
+    # contract argument only when a caller bound a hand-made row.
+    placeholder = operation.get("placeholder") or _placeholder_in(
+        operation.get("declared_flags") and {"flags": operation["declared_flags"]}
+        or contract, operation.get("flag"))
     if placeholder:
         # A value slot gets a VALUE, not a path.
         #
@@ -695,14 +1065,55 @@ def bind(operation: dict[str, Any], *, contract: dict[str, Any] | None = None) -
         # The subcommand case that motivated it is fixed at its real cause: the contract
         # is now read from the scope the operation runs in, which is
         # `ask_the_subcommand_before_you_call_it_unbound_v1`.
-        is_value = placeholder.upper() in _VALUE_SLOTS
+        # A DECLARED DOMAIN OUTRANKS THE TABLE, AND REVEALS A MISSING ENTRY.
+        #
+        # `_VALUE_SLOTS` is a hand-written list of placeholder names and `_VALUE_FOR` is a
+        # hand-written list of literals for them. Both are guesses at something the
+        # program already states: `-inform PEM|DER` says the slot takes one of two words.
+        # A placeholder the usage line gives an alternation is a VALUE slot with its
+        # domain known, so it no longer needs to be guessed at -- which is how `INFORM`,
+        # absent from both tables, stops being handed a filename.
+        domain = declared_domain(placeholder)
+        is_value = (placeholder.upper() in _VALUE_SLOTS or domain is not None
+                    or is_option_word(placeholder))
+        # WHERE IS THE FLAG? Every branch below used to assume `argv[1]`, which is true
+        # for `cp --backup` and false for `openssl asn1parse -in`, where the flag is last.
+        # Measured: `openssl asn1parse -in` bound to `openssl asn1parse=out.bin -in` -- the
+        # SUBCOMMAND was given a value and the flag got nothing, and openssl answered
+        # "Invalid command 'asn1parse=out.bin'". 62 of 120 sampled failures were this one
+        # mistake. The flag's own index is the only position that can be right.
+        at = _flag_index(argv, operation.get("flag"))
         if is_value:
-            bound["invoked_as"] = [*argv[:1], f"{argv[1]}={_VALUE_FOR.get(placeholder.upper(), '1')}",
-                             *argv[2:]]
+            value = domain or _VALUE_FOR.get(placeholder.upper())
+            if value is None:
+                value = "1" if _NUMERIC_SPEC.match(str(placeholder)) else "txt"
+            # THE FORM OF A PASSPHRASE VALUE IS DECLARED TOO, and the same helper reads it
+            # here as in the artifact branch: `-passin val ... pass-phrase SOURCE` wants a
+            # source spec, so the value is `pass:txt`, not `txt`. One declaration read by
+            # one function, rather than two branches spelling the same slot differently.
+            own = _declared_passphrase(operation)
+            if own and own[0] in argv:
+                value = own[1]
+            bound["invoked_as"] = _with_slot_value(argv, at, value)
             bound["value_bound"] = placeholder
+            if domain is not None:
+                bound["domain_declared"] = domain
+            # THE OPERAND STILL HAS TO BE SUPPLIED. Returning here without it dropped the
+            # file entirely -- measured: `cp --suffix txt` with no operand at all, which
+            # turned a working door into a failure and cost `cp` one of its two doors.
+            # A value slot says what the OPTION wants; it says nothing about what the
+            # command acts on, and `cp_backup` (no placeholder) appends the seed for
+            # exactly that reason.
+            if needs_operand:
+                bound["invoked_as"] = [*bound["invoked_as"], OPERAND_FILES[0]]
+                bound["operand_hypothesis"] = ("fills the option's own value and consumes "
+                                               "a seed operand")
+                bound["candidate_seed"] = True
+            bound["bound"] = True
             return bound
         # the flag carries a path: that path is the artifact
-        bound["invoked_as"] = [*argv[:1], f"{argv[1]}={OPERAND_OUTPUT}", *argv[2:]]
+        bound["invoked_as"] = _with_slot_value(argv, at, OPERAND_OUTPUT)
+        bound["artifact_slot"] = placeholder
         bound["names_artifact"] = operation["flag"]
         bound["bound"] = True
         if not positionals:
@@ -711,6 +1122,7 @@ def bind(operation: dict[str, Any], *, contract: dict[str, Any] | None = None) -
         bound["invoked_as"] = [*bound["invoked_as"], OPERAND_FILES[0]]
         bound["operand_hypothesis"] = "names the artifact and consumes a seed operand"
         return bound
+
 
     # the flag does not carry a path; if the program names its artifact elsewhere,
     # that flag writes the artifact and this one is an operand-taking operation
@@ -1205,7 +1617,32 @@ def commit_check_many(operations: Sequence[Any], *,
             "model_calls": 0, "parameters": 0}
 
 
-def _with_slots(operation: "Operation", slots: Sequence[str]) -> dict[str, Any]:
+def _with_declaration(operation: "Operation", slots: Sequence[str],
+                      contract: dict[str, Any] | None) -> dict[str, Any]:
+    """The operation's row, plus the flags of the scope that DECLARED it.
+
+    A subcommand declares its own option arguments: `asn1parse -h` prints
+    `-offset +int`, so `-offset` takes a number, and the parent `openssl -h` prints no
+    `-offset` at all. The census parsed the subcommand's contract and then dropped it,
+    handing every sub-operation the parent's flags -- so the binder could not see the
+    declaration, fell through to a seed filename, and openssl answered "Can't parse
+    \"in.txt\" as a number". The declaration was in hand the whole time.
+
+    The whole flag list is carried, not a lookup of one placeholder, because the
+    caller binds one operation and the carrier test needs to see the neighbours.
+    """
+    row = _with_slots(operation, slots, (contract or {}).get("required_positionals"))
+    if contract is not None:
+        row["declared_flags"] = [
+            {k: f.get(k) for k in ("flags", "placeholder", "domain", "takes_value",
+                                   "description")}
+            for f in contract.get("flags") or ()
+        ]
+    return row
+
+
+def _with_slots(operation: "Operation", slots: Sequence[str],
+                required: Sequence[str] = ()) -> dict[str, Any]:
     """The operation's row, plus the usage-line slots it was declared under.
 
     Carried on the row because the census RETURNS rows and callers bind them later:
@@ -1216,6 +1653,7 @@ def _with_slots(operation: "Operation", slots: Sequence[str]) -> dict[str, Any]:
     """
     row = operation.as_dict()
     row["slots"] = list(slots)
+    row["required_slots"] = list(required or ())
     row["may_need_second_operand"] = _declares_two_places(slots)
     return row
 
