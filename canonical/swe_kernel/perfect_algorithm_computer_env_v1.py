@@ -198,6 +198,22 @@ def goal_predicate_for(seed: Mapping[str, bytes], target_name: str) -> Callable[
     import bz2 as _bz2
     import lzma as _lzma
     import zipfile as _zipfile
+    import hashlib as _hashlib
+
+    _HASH_SUFFIXES = {
+        ".sha256": "sha256",
+        ".sha512": "sha512",
+        ".sha1": "sha1",
+        ".md5": "md5",
+    }
+
+    def _hash_line_matches(tgt: bytes, src: bytes, algo: str) -> bool:
+        # GNU "hash  filename", BSD "SHA256 (name) = hash", or a bare digest:
+        # the file is the checksum of the source iff the digest of the source
+        # appears in it -- the digest cannot be produced for the wrong source.
+        expected = _hashlib.new(algo, src).hexdigest()
+        text = tgt.decode("utf-8", "ignore")
+        return bool(text.strip()) and expected in text
 
     src_names = sorted(seed)
     src_name = src_names[0] if src_names else None
@@ -278,6 +294,13 @@ def goal_predicate_for(seed: Mapping[str, bytes], target_name: str) -> Callable[
                 return _lzma.decompress(tgt) == src
             except Exception:
                 return False
+        # Hash-format targets: the target must carry the hash OF THE SOURCE.
+        # The honest claim -- "hash input.txt into out.sha256": the file is a
+        # checksum of that exact file, not of a different source, not of a
+        # plausible-looking checksum the machine wrote from thin air.
+        for suffix, algo in sorted(_HASH_SUFFIXES.items(), key=lambda kv: -len(kv[0])):
+            if target_name.endswith(suffix):
+                return _hash_line_matches(tgt, src, algo)
         return True
 
     return is_goal

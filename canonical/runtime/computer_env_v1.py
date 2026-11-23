@@ -1011,21 +1011,37 @@ def programs_for_goal(goal: str, limit: int = 24) -> list[str]:
     meta_words = {"make", "do", "create", "build", "generate", "produce",
                   "write", "output", "run", "make"}
     name_set = set(raw_toks) - meta_words
-    name_hits: list[tuple[int, str]] = []
+    ext_tokens = set(ext_stems)
+    flags_map = {p: n for n, p in hits}
+    exact_hits: list[tuple[int, str]] = []
+    prefix_hits: list[tuple[int, str]] = []
     for _p in progs:
         try:
             _stems = _stem(_p)
         except Exception:  # noqa: BLE001
             continue
         _m = _stems & name_set
+        # The extension names the format family: `sha256` -> sha256sum. A
+        # name that STARTS with the format word is the format family's own
+        # program -- the same one-level-up rule as the goal's own words,
+        # applied to the target's extension. Exact stem matches dominate
+        # prefix matches (a program literally named by the goal outranks
+        # every other name that merely starts with the format word).
+        _ext_hit = any(_p.lower().startswith(t) for t in ext_tokens)
         if _m:
-            name_hits.append((len(_m), _p))
-    name_hits.sort(key=lambda x: (-x[0], x[1]))
+            exact_hits.append((len(_m), _p))
+        elif _ext_hit:
+            # Prefix matches keep the flag-match evidence they already have
+            # (gzip has 8, gzexe has 1), so a pure-name program that the
+            # flag evidence also reaches never outranks the manual.
+            prefix_hits.append((flags_map.get(_p, 0), _p))
+    exact_hits.sort(key=lambda x: (-x[0], x[1]))
+    prefix_hits.sort(key=lambda x: (-x[0], x[1]))
 
     out_progs: list[str] = []
     seen_name_dedup: set[str] = set()
     seen_help: dict[str, str] = {}
-    for _, p in name_hits + hits:
+    for _, p in exact_hits + prefix_hits + hits:
         if p in seen_name_dedup:
             continue
         seen_name_dedup.add(p)

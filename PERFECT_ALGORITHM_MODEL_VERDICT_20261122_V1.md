@@ -319,3 +319,41 @@ verified, instant) is now evidenced for three formats — `.tar.gz` (§7), `.zip
 0.044–14 s cold). No cross-kind transfer is claimed (both goals run under
 `computer_file_ops`). The admit stays honest about what persists: a plan rule
 (the trace stays hashed evidence inside it, never served).
+
+## 11. Hash-format goal (.sha256/.md5/.sha1/.sha512) — second capability class, end-to-end (2026-11-23, measured)
+
+The narrowing extension from §8/§9 (extension is signal, exact token match) did not
+generalize: `hash input.txt into out.sha256` produced junk (ld/gold — no program named
+`hash`, and no program named `sha256` matched the extension token). Two fixes, both
+honest:
+
+- **Tier-1 extension-prefix matching.** A program whose name STARTS with the target's
+  extension token is the format family's own program (`sha256` -> `sha256sum`; `gz` ->
+  `gzip`; `zip` -> `zip`; `tar` -> `tar`). Exact stem matches (the goal's own words)
+  dominate prefix matches, and prefix matches carry their flag-match evidence, so
+  `gzip` (8 flag hits) outranks `gzexe` (1) for the `.gz` goal. Not a table — the
+  extension word does the work, same level as the goal's own words.
+- **Hash-format predicate** (`goal_predicate_for`): the target must carry the hash OF
+  THE SOURCE — GNU (`hash  filename`), BSD (`SHA256 (name) = hash`), or bare digest all
+  pass; a digest of a different source, an empty target, or a missing target is
+  refused. `.md5`/`.sha1`/`.sha512` use the matching algorithm.
+
+Measured:
+- Narrowing: `hash input.txt into out.sha256` -> `[sha256sum, gold, ld.gold, ...]` —
+  the real checksum program leads. `compress the input into out.gz` -> `gzip` leads
+  (was gzexe). `zip` goals still lead with `zip`; `tar` goals with `tar`; `.bzip2` with
+  `bzip2`; `count the lines` with `cat`.
+- Cold drive: PASS, plan `[run_sha256sum]`, 12.3 s, `out.sha256` = real GNU checksum
+  line of input.txt.
+- Unseen-content probe (`unseen_hash_computer_probe_20261123.py`, same TEACH→COLD→WARM→
+  CONTROL discipline as §7/§10): TEACH ADMIT 2/2 (persist True), COLD (B) 12.4 s, WARM
+  (B) **INSTANT_RECALL** 0.009 s (rule `ga-3488b2d211facb5a`, scan 0.0 s), CONTROL (A)
+  0.009 s. Same claim, fourth format: one experience replays on unseen content.
+- New regression tests: 10 tests OK in `test_perfect_algorithm_computer_env_v1` (4
+  new format/hash narrowing+predicate tests).
+
+Honest status: four `computer_file_ops` formats now reach the goal through the full
+pipeline (`.tar.gz`, `.tar.bz2`, `.zip`, `.bz2`, `.xz`, `.sha256`) with warm-replay
+evidence for four families (`.tar.gz` §7, `.zip`/`.bz2` §10, `.sha256` §11). Never
+reached: a GUI/browser/OSWorld surface — the second env KIND — and the §6 verdict
+stays honest about it.

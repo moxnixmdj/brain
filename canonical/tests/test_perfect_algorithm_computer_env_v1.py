@@ -273,6 +273,8 @@ class FormatNameNarrowingTests(unittest.TestCase):
             ("make an archive out.tar.gz", "tar"),
             ("archive data.txt into data.tar.gz", "tar"),
             ("make an archive out.tar", "tar"),
+            ("hash input.txt into out.sha256", "sha256sum"),
+            ("compress the input into out.gz", "gzip"),
         ]
         for goal, expected in cases:
             with self.subTest(goal=goal):
@@ -289,3 +291,41 @@ class FormatNameNarrowingTests(unittest.TestCase):
         # basename is the file the goal is FOR, never a signal.
         progs = programs_for_goal("zip data.zip into out.zip", limit=8)
         self.assertNotIn("data", progs)
+
+
+class HashFormatPredicateTests(unittest.TestCase):
+    """The target must carry the hash OF THE SOURCE, in GNU / BSD / bare form."""
+
+    def test_hash_format_predicate_accepts_digest_line_of_the_source(self):
+        from canonical.swe_kernel.perfect_algorithm_computer_env_v1 import goal_predicate_for
+        import hashlib
+
+        src_bytes = b"alpha beta gamma\ndelta epsilon\n"
+        digest = hashlib.sha256(src_bytes).hexdigest()
+        pred = goal_predicate_for({"input.txt": src_bytes}, "out.sha256")
+
+        self.assertTrue(pred({"input.txt": src_bytes,
+                              "out.sha256": f"{digest}  input.txt\n".encode()}),
+                        "GNU 'hash  filename' line")
+        self.assertTrue(pred({"input.txt": src_bytes,
+                              "out.sha256": f"SHA256 (input.txt) = {digest}\n".encode()}),
+                        "BSD '(name) = hash' line")
+        self.assertTrue(pred({"input.txt": src_bytes,
+                              "out.sha256": f"{digest}\n".encode()}),
+                        "bare digest line")
+
+    def test_hash_format_predicate_refuses_wrong_digest_and_empty(self):
+        from canonical.swe_kernel.perfect_algorithm_computer_env_v1 import goal_predicate_for
+        import hashlib
+
+        src_bytes = b"alpha beta gamma\ndelta epsilon\n"
+        bad_digest = hashlib.sha256(b"different source\n").hexdigest()
+        pred = goal_predicate_for({"input.txt": src_bytes}, "out.sha256")
+
+        self.assertFalse(pred({"input.txt": src_bytes,
+                               "out.sha256": f"{bad_digest}  input.txt\n".encode()}),
+                         "digest of a different source must be refused")
+        self.assertFalse(pred({"input.txt": src_bytes, "out.sha256": b""}),
+                         "empty target must be refused")
+        self.assertFalse(pred({"input.txt": src_bytes, "out.sha256": None}),
+                         "missing target must be refused")
