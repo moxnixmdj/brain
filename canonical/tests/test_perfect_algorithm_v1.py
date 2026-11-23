@@ -147,6 +147,35 @@ class MemoryTests(unittest.TestCase):
         out = pa.remember(mem, {"rule_id": "", "goal_family": "x"})
         self.assertEqual(out.get("rules", []), [])
 
+    def test_save_memory_refuses_corrupt_store_on_disk(self):
+        # a store that FAILED TO LOAD must never be silently overwritten:
+        # the bytes on disk are preserved and the receipt names the refusal.
+        self._path.write_text("legacy store {{{ not json", encoding="utf-8")
+        before = self._path.read_bytes()
+        ref = pa.load_memory(self._path)
+        out = pa.save_memory(ref, self._path)
+        self.assertEqual(out.get("status"), "REFUSED__MEMORY_REFUSED")
+        self.assertEqual(self._path.read_bytes(), before)
+
+    def test_full_loop_refuses_to_overwrite_corrupt_store_on_disk(self):
+        # the honest fix (measured by the §32 cross-kind probe): a run over a
+        # store that failed to load must not write to that store.
+        self._path.write_text('{"priors": {"legacy_kind": {"model": {"s0": {"a": "s1"}}}}}}',
+                             encoding="utf-8")
+        before = self._path.read_bytes()
+        env = WallGrid(walls=())
+        out = pa.run(env, "reach the exit",
+                     ["up", "down", "left", "right"],
+                     goal_predicate=_exit_predicate, heuristic=_grid_heuristic,
+                     goal_family="grid_world", env_kind="grid_world",
+                     memory_path_=self._path, budget=40, max_depth=12, seed=0)
+        self.assertEqual(out["status"], "PASS__PERFECT_ALGORITHM_RUN")
+        self.assertTrue(out["pass"])
+        self.assertEqual(out["outcome"], "VERIFIED_NOT_PERSISTED")
+        self.assertEqual(out["steps"]["save_priors"]["status"],
+                         "REFUSED__MEMORY_REFUSED")
+        self.assertEqual(self._path.read_bytes(), before)
+
 
 class ScanTests(unittest.TestCase):
     def test_scan_records_affordances(self):

@@ -1105,3 +1105,50 @@ the cross-page carry rides the same live-page verification (every edge
 re-executed against the live page; the redirect is a page navigation, not a
 trusted transition).
 NOT §6: no benchmark, no cross-kind transfer, no GUI close-out.
+
+## 32. Cross-kind refusal on the live page — honest measurement + honest save-path defect (2026-11-23)
+
+§27/§26 verdict: transfer is within-kind only — priors and rules are keyed
+by env_kind. That verdict had never been measured against a REAL store on the
+page side. §32 does it: the page arm reads the persistent
+`computer_file_ops` store (canonical/astra_runtime/state/
+PERFECT_ALGORITHM_MEMORY_V1.json — a real learned transition model written
+by the real archive probes, 0 rules, 1 kind of priors) and runs a fresh
+browser_page fixture against it.
+
+Measured (probe `unseen_browser_crosskind_probe_20261123.py`, fresh fixture
+D, copied store, honest bytes-vs-bytes integrity check):
+
+  memory_lookup matches: 0 (fs store never matches the page kind).
+  warm_walk: absent (no priors recorded for browser_page).
+  scan priors adopted: 0.
+  fs store bytes: preserved exactly (no overwrite, no rewrite).
+  Run outcome: PASS__PERFECT_ALGORITHM_RUN, VERIFIED_NOT_PERSISTED (126 s,
+  4 states, cold scan) — honest admission (no fresh instances offered).
+
+Honest defect found by measuring, fixed before this verdict:
+
+1. LOAD side was already honest (a corrupt/legacy-schema store is refused,
+   never silently rewritten by load_memory).
+2. SAVE side was NOT: the §32 run loaded the legacy fs store
+   (missing `schema`), load_memory refused it, and the full loop then
+   persisted a fresh browser_page memory into the file — DROPPING the fs
+   store's own priors (the bytes on disk were silently replaced). That is
+   exactly the §2 honesty rule — a corrupt store is a refusal, never a
+   reset — violated by the persist path.
+
+Fix (canonical/swe_kernel/perfect_algorithm_v1.py):
+  - save_memory: a refused memory is NEVER overwritten; the bytes on disk
+    are preserved; the receipt names the refusal.
+  - run() SAVE section: if the loaded memory reports refused, the run
+    records save_priors + save as REFUSED__MEMORY_REFUSED and returns
+    without touching the file (no rule, no priors, no rewrite).
+Behavior on the fixed path: the §32 probe's fs store stays byte-identical
+(measured: PASS), and the honest receipt names the refusal — a store that
+failed to load can never be silently destroyed by a full run.
+
+Honest status: cross-kind refusal is now MEASURED on a live page, not just
+designed. §2's add/remove-without-retraining test now also holds against
+the persistence path: a corrupt or legacy store is never silently rewritten.
+NOT §6: no benchmark, no cross-kind transfer (still honestly absent), no
+GUI close-out.

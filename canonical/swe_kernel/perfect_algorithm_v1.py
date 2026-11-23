@@ -108,7 +108,19 @@ def load_memory(path: str | pathlib.Path | None = None) -> dict[str, Any]:
 
 
 def save_memory(memory: Mapping[str, Any], path: str | pathlib.Path | None = None) -> dict[str, Any]:
-    """Atomic write: the store is replaced whole, never appended in place."""
+    """Atomic write: the store is replaced whole, never appended in place.
+
+    A refused memory (corrupt, legacy-schema, or structurally inconsistent
+    store) is NEVER overwritten: the bytes on disk are preserved, so a
+    previous honestly-identified store is not silently destroyed by a
+    run that refused to load it. The return receipt names the refusal.
+    """
+    if isinstance(memory, Mapping) and memory.get("refused"):
+        return {"schema": MEMORY_SCHEMA,
+                "status": "REFUSED__MEMORY_REFUSED",
+                "path": str(path) if path else None,
+                "rule_count": len(memory.get("rules") or []),
+                "refused": memory.get("refused")}
     path = pathlib.Path(path) if path else memory_path()
     path.parent.mkdir(parents=True, exist_ok=True)
     tmp = path.with_suffix(path.suffix + ".tmp")
@@ -772,9 +784,39 @@ def run(env: Any, goal: str, actions: Sequence[Any],
     # They are saved whenever the scan + execution verified, never "admitted".
     # The RULE (plan sketch for a goal) is a hypothesis -- it is saved only if
     # admitted on fresh instances.
+    # A store that FAILED TO LOAD is a refusal, not a reset: it is never
+    # silently overwritten, and nothing may be claimed to persist into it.
+    if memory.get("refused"):
+        receipts["steps"]["save_priors"] = {
+            "status": "REFUSED__MEMORY_REFUSED",
+            "reason": memory.get("refused"),
+            "authority": "NONE__NO_OVERWRITE_OF_A_CORRUPT_OR_LEGACY_STORE",
+        }
+        if persist and gen is not None:
+            receipts["steps"]["save"] = {
+                "status": "REFUSED__MEMORY_REFUSED",
+                "reason": memory.get("refused"),
+                "authority": "NONE",
+            }
+        else:
+            receipts["steps"]["save"] = {
+                "status": "REFUSED__NOT_PERSISTED",
+                "reason": admission.get("reason"),
+                "memory_refused": memory.get("refused"),
+            }
+        receipts["memory"] = memory
+        receipts["outcome"] = "VERIFIED_NOT_PERSISTED"
+        receipts["status"] = "PASS__PERFECT_ALGORITHM_RUN"
+        receipts["pass"] = True
+        receipts["authority"] = "NONE__REAL_EXECUTION_WITH_REFUSED_SAVE"
+        receipts["duration_s"] = round(time.time() - started, 4)
+        return receipts
+
     new_memory = remember_priors(memory, kind, learned["model"])
     try:
-        save_memory(new_memory, memory_path_)
+        _save_priors_out = save_memory(new_memory, memory_path_)
+        if _save_priors_out.get("status") == "REFUSED__MEMORY_REFUSED":
+            raise RuntimeError(str(_save_priors_out.get("refused") or "refused"))
         receipts["steps"]["save_priors"] = {"status": "PASS__PRIORS_SAVED",
                                             "env_kind": kind,
                                             "states": scan_result["state_count"]}
@@ -786,7 +828,9 @@ def run(env: Any, goal: str, actions: Sequence[Any],
     if persist and gen is not None:
         new_memory = remember(new_memory, gen)
         try:
-            save_memory(new_memory, memory_path_)
+            _save_out = save_memory(new_memory, memory_path_)
+            if _save_out.get("status") == "REFUSED__MEMORY_REFUSED":
+                raise RuntimeError(str(_save_out.get("refused") or "refused"))
             receipts["steps"]["save"] = {"status": "PASS__SAVED_TO_MEMORY",
                                          "rule_id": gen.get("rule_id")}
             receipts["memory"] = new_memory
