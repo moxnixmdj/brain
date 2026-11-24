@@ -2,6 +2,14 @@
   "action_id": "HARBOR_EXECUTION_BOUNDARY_REVIEW_20261124_V1",
   "action_kind": "GOVERNANCE_GUARD",
   "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "additional_scope_20261124": {
+    "alternatives": "Delete or disable heuristic probes forfeits existing functionality; adding a new planner does not fix restoration; adapt the existing probe and retain explicit failure.",
+    "baseline_reproduction": "two failed heuristic calls left the state at 2 rather than 0",
+    "causal_blocker": "Both right_question and the scan action selector leave the environment mutated when act or heuristic raises, and may continue after restore failure",
+    "no_credit": "producer-run regression only; no independent or frontier capability claim",
+    "real_outcome": "restore after every attempted probe and stop before additional probing or planning when restoration fails",
+    "route": "REUSE_AND_ADAPT_SHARED_REVERSIBLE_PROBE"
+  },
   "agent_orientation": {
     "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
     "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
@@ -25,7 +33,9 @@
     "producer_cognition_model_dependency_count": 0,
     "progress_class": "GOVERNANCE_GUARD_NO_PROGRESS_CLAIM",
     "progress_evidence_paths": [
-      "canonical/tests/test_harbor_container_boundary_v1.py"
+      "canonical/tests/test_harbor_container_boundary_v1.py",
+      "canonical/tests/test_perfect_algorithm_v1.py",
+      "canonical/tests/test_perfect_algorithm_probe_restore_v1.py"
     ],
     "route_class": "REUSE"
   },
@@ -35,7 +45,7 @@
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "causal_blocker": "HARBOR_SOLVER_EXECUTION_LOCUS_AND_FRESH_VERIFIER_NOT_YET_BOUND",
-  "expected_parent_frontier_change": "Preserve the execution boundary and expose the host-solver and verifier-protocol gaps without claiming verified integration.",
+  "expected_parent_frontier_change": "Preserve the execution boundary and expose the host-solver and verifier-protocol gaps without claiming verified integration. Also fail closed on reversible-probe restoration failures in the existing environment learner.",
   "governance_change": false,
   "highest_leverage_now": true,
   "incremental_spend_usd": 0,
@@ -74,7 +84,9 @@
       ],
       "existing_inherited_routes_checked": [
         "canonical/runtime/harbor_epistemic_agent_v1.py",
-        "canonical/runtime/harbor_environment_transport_v2.py"
+        "canonical/runtime/harbor_environment_transport_v2.py",
+        "canonical/swe_kernel/perfect_algorithm_v1.py",
+        "canonical/runtime/environment_learning_v1.py"
       ],
       "external_existing_routes_checked": [
         "Harbor DockerEnvironment",
@@ -128,7 +140,7 @@
     "obs_verification": {
       "direct_real_effect_verification_considered": true,
       "existing_oracle_considered": true,
-      "synthetic_verification_necessity": "Local regression tests are a guard only; a separately executed Docker contract test and the benchmark-specific fresh verifier remain necessary."
+      "synthetic_verification_necessity": "Local regression tests are a guard only; a separately executed Docker contract test and the benchmark-specific fresh verifier remain necessary. Probe restoration regression uses a constructed stateful environment, not a real-computer safety or capability claim."
     },
     "real_outcome": "Protect the host from a task-triggered solver while preparing Harbor integration.",
     "required_capability": "Confined execution and independent verification of agent effects",
