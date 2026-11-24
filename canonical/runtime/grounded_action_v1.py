@@ -180,6 +180,21 @@ def _check_expect(expect, result):
     field = str(expect.get("field") or "")
     kind = str(expect.get("type") or "")
     value = _lookup(result, field) if isinstance(result, dict) else None
+    # A RUN THAT SAYS IT FAILED DID NOT SATISFY ANY POSTCONDITION.
+    #
+    # MEASURED 2026-11-23. `forged.tally.total_by` declares
+    # `{"field": "adapter", "type": "field_nonempty"}` -- and the forged invoker
+    # sets `adapter: "forged_invoker"` on EVERY return path, including its error
+    # envelope. So the postcondition held for a run whose own result was
+    # `{"ok": false, "error": "FileNotFoundError: ..."}`, and the front door
+    # reported VERIFIED_ACTION for arithmetic that never ran.
+    #
+    # This is not only about forged rows: any adapter that echoes its own name
+    # can satisfy `field_nonempty:<its own name>`. The check that has to come
+    # first is the result's own verdict about itself.
+    if isinstance(result, dict) and result.get("ok") is False:
+        reason = str(result.get("error") or result.get("why") or "UNSTATED")
+        return False, "RESULT_REPORTS_FAILURE:" + reason[:120]
     if kind == "field_nonempty":
         ok = value is not None and str(value).strip() != ""
         return ok, f"{kind}:{field}"
@@ -204,6 +219,14 @@ _GOAL_STOPWORDS = frozenset({
 # of arithmetic words a person uses when no prose answer would satisfy them.
 _WANTS_A_COMPUTED_NUMBER = ("total", "totals", "sum", "sums", "average", "mean", "median", "count")
 # A REPORT ABOUT SOMETHING IS NOT THAT SOMETHING. These are the words a scan, audit or analysis answers with.
+# WHAT A RESULT SAYS ABOUT ITSELF RATHER THAN ABOUT THE QUESTION. These keys are the adapter's own
+# bookkeeping -- they name the adapter, the file it wrote and whether it thinks it succeeded. They are
+# evidence about the RUN and never part of the ANSWER, so they must not be delivered into a file the
+# user named as the destination.
+_RESULT_PLUMBING = frozenset({"adapter", "capability_id", "function", "dependency", "ok",
+                              "output_path", "output_sha256", "output_bytes", "output_verified"})
+
+
 _REPORT_WORDS = ("analysis_model", "finding", "finding_count", "findings", "is_security_proof",
                  "violation", "violations", "diagnostic", "diagnostics", "audit_trail")
 
@@ -550,6 +573,46 @@ def _try_bridge(goal, root, goal_paths, started):
     return None
 
 
+def _resolve_goal_relative_paths(args, root):
+    """A bare filename in a goal belongs to the goal's world, not to the repo root.
+
+    MEASURED 2026-11-23: asking "total the amounts by region in data.csv ..." in a
+    directory that CONTAINS `data.csv` bound the input as the bare string `"data.csv"`,
+    and the adapter joined it to the REPOSITORY root -- where no such file exists -- and
+    died on `FileNotFoundError`. Binding had already read the file successfully; the
+    path was then thrown away and re-derived somewhere else.
+
+    Only names that are (a) relative, (b) not found from the repo root, and (c) found
+    under the goal's root are rewritten, so an absolute path and a repository path both
+    behave exactly as before.
+    """
+    if not isinstance(args, dict) or root is None:
+        return args
+    out = dict(args)
+    try:
+        here = pathlib.Path(root)
+    except Exception:
+        return out
+    for key, val in list(out.items()):
+        if not isinstance(val, str) or not val.strip():
+            continue
+        if "://" in val or val.startswith(("/", "~")):
+            continue
+        cand = here / val
+        try:
+            if not cand.is_file():
+                continue
+        except Exception:
+            continue
+        try:
+            if (ROOT / val).is_file():
+                continue
+        except Exception:
+            pass
+        out[key] = str(cand)
+    return out
+
+
 def act(goal, root=None, registry=None, verbose=False, memory=True,
         established_effects=(), extra_paths=(), bridge=True,
         computer_use=True, prefer=None):
@@ -723,8 +786,43 @@ def act(goal, root=None, registry=None, verbose=False, memory=True,
         have = {str(c.get("capability_id"))
                 for cl in merged for c in (cl.get("candidates") or [])}
         goal_low = str(goal or "").lower()
-        pending = [{"capability_id": cid,
-                    "combined_score": 100.0 if cid.lower() in goal_low else 0.0}
+        # A CAPABILITY ID CANNOT BE UTTERED. The score below used to be
+        # `100.0 if cid.lower() in goal_low else 0.0`, and an id is
+        # `forged.tally.total_by` -- dotted, underscored, and containing a
+        # path. No sentence a person writes contains that string, so EVERY
+        # forged row scored 0.0 and the zero-score filter then dropped it
+        # from the survivor set. Measured 2026-11-23: `forged.tally.total_by`
+        # bound to the real `data.csv` (`missing: []`) and still lost to a
+        # security taint analyser because its score was 0.000.
+        #
+        # A capability declares its own keywords. Those ARE utterable, and
+        # they are what the row says it is for -- so read them instead of
+        # asking whether a dotted identifier appears in a sentence.
+        def _forged_score(cid: str) -> float:
+            entry = admissible.get(cid)
+            if not isinstance(entry, dict):
+                return 0.0
+            # ONE COMMON WORD IS NOT EVIDENCE, AND A PATH SEGMENT IS NOT A WORD.
+            #
+            # Measured 2026-11-23: "find all files larger than one megabyte" matched
+            # `forged.tally.total_by` on the single keyword `by` -- a stopword, and part of
+            # "larger than" -- giving an unrelated csv tool an 11.1 score, which then won a task
+            # about file sizes. A forged row's keywords include the path it was discovered in
+            # (`astra`, `canonical`, `discover1`, `py`, `runtime`, `tmp`), and those say where the
+            # file lives, not what it does.
+            _STOP = {"by", "a", "an", "the", "of", "to", "in", "on", "for", "and", "or", "with",
+                     "from", "is", "it", "this", "that", "as", "at", "be"}
+            _PLACE = {"astra", "canonical", "runtime", "tmp", "py", "v1", "brain", "src",
+                      "tests", "test", "discover1", "code"}
+            words = [str(w).lower() for w in (entry.get("keywords") or []) if w]
+            words = [w for w in words if w not in _STOP and w not in _PLACE and len(w) > 2]
+            if not words:
+                return 0.0
+            hits = sum(1 for w in words if w in goal_low)
+            if hits < 2:
+                return 0.0
+            return round(100.0 * hits / float(len(words)), 4)
+        pending = [{"capability_id": cid, "combined_score": _forged_score(cid)}
                    for cid in forged_ids if cid not in have]
         if pending:
             merged = merged + [{"candidates": pending}]
@@ -921,7 +1019,33 @@ def act(goal, root=None, registry=None, verbose=False, memory=True,
         # proposed when nothing else fits. It must not survive INTO the ambiguity
         # gate, where its mere presence turns a decisive match into AMBIGUOUS.
         _positive = [s for s in survivors if (s.get("score") or 0.0) > 0.0]
-        if _positive: survivors = _positive
+        if _positive:
+            survivors = _positive
+        else:
+            # A ROW THAT SCORED ZERO HAS SAID IT MATCHES NOTHING IN THIS SENTENCE.
+            #
+            # Measured 2026-11-23, after forged rows became scoreable: asked to "count the lines in
+            # README.md", every legitimate candidate was correctly refused
+            # (INPUT_KIND_CONTRADICTS_GOAL_FILE -- they are Python auditors, not line counters) and
+            # `forged.tally.total_by` was the only survivor left, at 0.0. `len(survivors) == 1` then
+            # chose it as UNIQUE_SURVIVOR, it was handed a README as if it were a csv, and the run
+            # reported ACTION_FAILED with the ARITHMETIC credited to a tool that had already denied
+            # being relevant. A zero score is a refusal, not a tie to be broken.
+            return {
+                "schema": SCHEMA,
+                "ok": False,
+                "status": "UNRESOLVED",
+                "goal": goal,
+                "survivors": [{k: v for k, v in s2.items() if k != "entry"}
+                              for s2 in survivors],
+                "rejected": rejected,
+                "why": "EVERY_SURVIVOR_SCORED_ZERO__NONE_MATCHES_THIS_SENTENCE",
+                "margin": margin,
+                "decisive_margin_ratio": DECISIVE_MARGIN_RATIO,
+                "executed": False,
+                "verified": False,
+                "total_ms": round((time.perf_counter() - started) * 1000.0, 2),
+            }
         if len(survivors) == 1:
             # BEING THE ONLY SURVIVOR IS NOT A REASON TO BE BELIEVED -- but it is not a reason to be refused
             # either, and this round tried three times to build a scorer that could tell the difference.
@@ -1010,7 +1134,8 @@ def act(goal, root=None, registry=None, verbose=False, memory=True,
     if str(chosen["capability_id"]).startswith("CAP_"):
         from canonical.runtime import h100_computer_use_registry_v1 as CU
         try:
-            call = _WB.render_args(chosen["entry"], chosen["inputs"])
+            call = _resolve_goal_relative_paths(
+                _WB.render_args(chosen["entry"], chosen["inputs"]), root)
         except KeyError as exc:
             call, error = None, "TEMPLATE_ARGUMENT_UNBOUND:" + str(exc)
             result, invoked = None, False
@@ -1054,7 +1179,8 @@ def act(goal, root=None, registry=None, verbose=False, memory=True,
         }
     from canonical.runtime.astra_runtime import _invoke_bound_capability
     try:
-        args = _WB.render_args(chosen["entry"], chosen["inputs"])
+        args = _resolve_goal_relative_paths(
+            _WB.render_args(chosen["entry"], chosen["inputs"]), root)
     except KeyError as exc:
         return {
             "schema": SCHEMA, "ok": False,
@@ -1089,6 +1215,48 @@ def act(goal, root=None, registry=None, verbose=False, memory=True,
             expect_note = independent[1]
         else:
             expect_note = "%s+%s" % (expect_note, independent[1])
+
+    # THE SENTENCE NAMED WHERE THE ANSWER GOES. DELIVER IT THERE, OR SAY IT WAS NOT DELIVERED.
+    #
+    # MEASURED 2026-11-23. "total the amounts by region in data.csv and write it to summary.txt"
+    # computed the correct totals -- {north: 15.0, south: 20.0} -- and reported VERIFIED_ACTION
+    # while `summary.txt` did not exist. The totals went into
+    # `canonical/astra_runtime/tmp/forged_out__...json`, a path the user never mentioned. The
+    # computation was right and the request was not carried out.
+    #
+    # `world_binding_v1.named_destination` has read this exact phrase since the previous round and
+    # `act` never called it -- the third mechanism found today that exists, works, and is unwired.
+    if invoked and verified:
+        try:
+            _dest = _WB.named_destination(goal)
+        except Exception:
+            _dest = None
+        if _dest:
+            # A DESTINATION IS ONLY DELIVERED IF THE BYTES ARE THERE AFTERWARDS, and the check is
+            # a re-read from disk -- the same independence `_independent_artifact_check` insists on.
+            # THE FILE SHOULD HOLD THE ANSWER, NOT THE ADAPTER'S BOOKKEEPING. Writing the whole
+            # result dict put `adapter`, `output_path`, `output_sha256` and `capability_id` into the
+            # user's summary.txt next to the totals they asked for. What belongs in the destination
+            # is the part of the result the capability does not merely assert about itself.
+            _PLUMBING = _RESULT_PLUMBING
+            if isinstance(result, dict):
+                _answer = {k: v for k, v in result.items() if k not in _PLUMBING}
+                _body = json.dumps(_answer, indent=2, sort_keys=True, default=str)
+            else:
+                _body = str(result)
+            try:
+                _target = Path(root or ROOT) / _dest
+                _target.parent.mkdir(parents=True, exist_ok=True)
+                _target.write_text(_body if _body.endswith("\n") else _body + "\n",
+                                   encoding="utf-8")
+                _back = _target.read_text(encoding="utf-8")
+                if not _back.strip():
+                    raise IOError("EMPTY_AFTER_WRITE")
+                expect_note = "%s+DELIVERED_TO:%s" % (expect_note, _dest)
+            except Exception as _exc:
+                verified = False
+                expect_note = "%s+NOT_DELIVERED_TO:%s(%s)" % (
+                    expect_note, _dest, type(_exc).__name__)
 
     out = {
         "schema": SCHEMA,

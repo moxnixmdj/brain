@@ -394,7 +394,13 @@ def register(module: str, contract: dict, cases: list[dict],
             "args": dict({"_forged_id": cid},
                          **{p: "${input.%s}" % p
                             for p in contract.get("parameters") or []}),
-            "expect": {"field": "adapter", "type": "field_nonempty", "value": None},
+            # A POSTCONDITION THAT THE ADAPTER ITSELF ALWAYS SATISFIES IS NOT A POSTCONDITION.
+            # This used to be `{"field": "adapter", "type": "field_nonempty"}`, and the forged
+            # invoker sets `adapter` on every return path -- including the envelope where it
+            # reports the run FAILED. Measured 2026-11-23: a FileNotFoundError verified as
+            # VERIFIED_ACTION because the error dict had an `adapter` key. The only field the
+            # adapter cannot fake is the work's own output, so that is what is asserted.
+            "expect": {"field": "output_sha256", "type": "field_nonempty", "value": None},
         },
         "source": {"origin": "brain_inventory"},
         # The values that made this run. Carried so the binder can accept

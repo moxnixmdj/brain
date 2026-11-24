@@ -446,6 +446,45 @@ def _text_marked_in(goal):
 _PAYLOAD_SLOT_WORDS = ("table", "text", "records", "sample", "content", "payload", "body", "data", "rows")
 
 
+_FILE_SLOT_WORDS = ("path", "file", "filepath", "filename", "src", "source", "target",
+                    "input", "infile", "archive", "sheet", "workbook", "document", "doc",
+                    "image", "photo", "pdf", "csv", "xlsx", "docx", "json", "txt", "dir",
+                    "folder", "directory")
+
+
+def _is_file_slot(name):
+    """Does this slot name a FILE rather than the bytes inside one?
+
+    A demonstrated value for a file slot is a path that made the function run once; it is not
+    evidence about which file this request means.
+    """
+    low = str(name or "").lower()
+    if _is_payload_slot(low):
+        return False
+    return any(w in low for w in _FILE_SLOT_WORDS)
+
+
+def _goal_names_a_different_file(goal, demo_value, slot):
+    """Did the SENTENCE state its own value for this file slot?
+
+    The question is NOT "is the demonstrated value mentioned" -- it almost never is, which is why
+    asking that let the substitution through. The question is whether the request already SAID which
+    file it means. If it named any file and that file is not the demonstrated one, the demonstration
+    is answering about a different piece of the world.
+    """
+    text = str(demo_value or "").strip()
+    if not text:
+        return False
+    low = str(goal or "").lower()
+    demo_base = text.replace("\\", "/").rsplit("/", 1)[-1].lower()
+    # every file-looking token the sentence contains
+    named = [m.group(0) for m in re.finditer(r"[\w.\-/]+\.(?:csv|tsv|json|txt|md|log|yaml|yml|xlsx|docx|pdf|py|html|xml|db|sqlite)\b", low)]
+    if not named:
+        return False
+    # a file IS named; if the demonstrated one is not among them, the sentence means another file
+    return all(str(n).rsplit("/", 1)[-1] != demo_base for n in named)
+
+
 def _is_payload_slot(name):
     """True when a slot's value IS the data being worked on, rather than a reference to it."""
     low = str(name or "").lower()
@@ -1362,7 +1401,32 @@ def complete_inputs(goal, root, entry, compiler=None, goal_paths=None):
             # legitimately stand in for: a slot whose value the person would recognise as an example. A slot
             # named like data (`csv_table`, `text`, `records`, `sample`) is never filled this way; it is left
             # missing, which makes the capability unbindable rather than confidently wrong.
-            if isinstance(demo, dict) and demo.get(key) is not None and not _is_payload_slot(key):
+            # AND IT MUST NEVER STAND IN FOR SOMETHING THE SENTENCE ITSELF NAMED.
+            #
+            # The guard above only protects payload slots. Measured 2026-11-23, one step later: asked
+            # "total the spend by city in fresh.csv and write it to report.txt", with a `tally.py` that
+            # had been demonstrated on `data.csv`, the forge default `data.csv` was substituted for the
+            # `fresh.csv` the goal named -- and the run reported VERIFIED_ACTION while writing
+            # {north: 15.0, south: 20.0} into `report.txt`. The answer was true of a file nobody asked
+            # about. A path the goal names is the one piece of the request the binder never had to guess,
+            # so it is exactly the piece a demonstration must not overwrite.
+            # AND WHEN THE SENTENCE NAMES NO FILE AT ALL, A DEMONSTRATED ONE IS STILL A GUESS.
+            #
+            # Measured 2026-11-23, one probe after the guard above: "sum a column of numbers in a csv"
+            # names no file, so `_goal_names_a_different_file` was false and the demonstration filled
+            # the slot with `canonical/astra_runtime/tmp/USER_POST_COUNTS.xlsx` -- a workbook from the
+            # forge's own test case. The run reported VERIFIED_ACTION, sum 55.0, for a spreadsheet the
+            # person never mentioned. A number can be TRUE and still be an answer to nothing.
+            #
+            # A demonstrated PATH is a trace: it names one file that once made the function run. What
+            # generalises is the SHAPE the slot accepts, not the path. So a file-shaped slot is left
+            # MISSING until the request names a file, which makes the capability unbindable rather
+            # than confidently wrong -- the same trade §A141 made for payload slots.
+            _file_shaped = _is_file_slot(key)
+            if (isinstance(demo, dict) and demo.get(key) is not None
+                    and not _is_payload_slot(key)
+                    and not _file_shaped
+                    and not _goal_names_a_different_file(goal, demo[key], key)):
                 value = demo[key]
                 from_demonstrated[key] = value
         if value:

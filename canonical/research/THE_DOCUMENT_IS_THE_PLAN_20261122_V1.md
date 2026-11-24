@@ -8400,3 +8400,123 @@ can call, verify once, and reuse.
     NEXT       Reading an unfamiliar directory for callable tools and admitting one from a single verified
                run -- the forge's five checks already exist for exactly that, and nothing yet points them at
                a file the machine has just discovered.
+
+---
+
+## §A143 — why one demonstration does not teach, measured to the bottom
+
+### The question, and the answer
+
+The user asked why the machine cannot do something once and then know it. §A142 ended with a measured claim:
+"the forge's five checks already exist for exactly that, and nothing yet points them at a file the machine
+has just discovered." That was the hypothesis. This section points them at it and reports what happened.
+
+### What now works
+
+A `tally.py` was placed in a directory the machine had never seen:
+
+    import csv
+    def total_by(path, key="region", value="amount"):
+        rows = list(csv.DictReader(open(path)))
+        out = {}
+        for r in rows:
+            out[r[key]] = out.get(r[key], 0) + float(r[value])
+        return {"totals": out}
+
+    "total the amounts by region in data.csv and write it to summary.txt"
+    -> VERIFIED_ACTION, capability forged.tally.total_by
+    -> summary.txt:  {"totals": {"north": 15.0, "south": 20.0}}
+
+15.0 = 10 + 5 (north), 20.0 = south. The arithmetic is correct and it was written to the named file.
+
+Getting there took five separate defects, each of which had been silently making the earlier result true:
+
+    1. `forged.*` scored 0.0 for EVERY row. grounded_action_v1 scored a forged row
+       `100.0 if cid.lower() in goal_low else 0.0`, and the id is `forged.tally.total_by` -- dotted,
+       underscored, carrying a path. No sentence contains it. Every forged capability was therefore
+       filtered out by the positive-score rule, whatever it did. Now scored by its own declared
+       keywords, with stopwords and path segments dropped and a floor of two matching content words:
+       one shared word ("by", out of "larger than") had given an unrelated csv tool an 11.1 score.
+
+    2. The postcondition was a tautology. Forged rows declared `field_nonempty: "adapter"`, and the
+       forged invoker sets `adapter` on every return path -- including the envelope where it reports
+       the run FAILED. A `FileNotFoundError` verified as VERIFIED_ACTION. `_check_expect` now refuses
+       any result whose own `ok` is false, before it looks at the declared field, and the forge now
+       asserts `output_sha256`, which the adapter cannot fake.
+
+    3. A bare `data.csv` in the goal was resolved against the repository root, not the goal's world,
+       so the adapter opened a path that did not exist even though binding had just read it.
+
+    4. The answer was delivered nowhere. `world_binding_v1.named_destination` has read "write it to
+       summary.txt" since the previous round and `act` never called it -- the third unwired mechanism
+       found in one day, after `answer_shape_v1` and the forge itself. The totals were correct in
+       `canonical/astra_runtime/tmp/forged_out__....json` and `summary.txt` did not exist. Wiring it
+       also strips the adapter's bookkeeping (`adapter`, `output_sha256`, `capability_id`) so the file
+       holds the ANSWER and not the receipt.
+
+    5. A zero-scored row could still win. Asked to "count the lines in README.md", every legitimate
+       candidate was correctly refused (`INPUT_KIND_CONTRADICTS_GOAL_FILE` -- Python auditors are not
+       line counters), which left `forged.tally.total_by` as the only survivor at 0.0. `len(survivors)
+       == 1` chose it as UNIQUE_SURVIVOR and handed it a README as if it were a csv. A zero score is a
+       REFUSAL, not a tie to break: those rows now return UNRESOLVED with
+       EVERY_SURVIVOR_SCORED_ZERO__NONE_MATCHES_THIS_SENTENCE.
+
+### What still does not work, and it is the answer to the question
+
+After all five fixes, this is what "learned from a demonstration" turns out to have been worth:
+
+    task                                            teach_status   task_rescued
+    sum a column of numbers in a csv                AMBIGUOUS      False
+    make a zip archive of a directory               AMBIGUOUS      False
+    read a spreadsheet and sum a column             AMBIGUOUS      False
+    convert a docx to text                          AMBIGUOUS      False
+    diff two files                                  VERIFIED_ACTION False   (answerable with NO teaching)
+    sort the lines of a file                        VERIFIED_ACTION False   (answerable with NO teaching)
+
+    tasks_rescued = 0
+
+**The number was 6, then 5, then 4. It is 0, and every earlier value was the machine reading its own
+fixture.** `capability_forge_v1` records `_forged_defaults = dict(cases[0])` -- the first test case it
+happened to run the module on -- and the binder filled whatever slot the goal left empty with it. The
+"rescued" spreadsheet task was answered with `canonical/astra_runtime/tmp/USER_POST_COUNTS.xlsx`, a
+workbook left behind by a previous forge run, reporting `sum: 55.0, VERIFIED_ACTION` for a file the
+person never mentioned.
+
+§A141 stopped this for PAYLOAD slots (the fixture's bytes). §A143 stops it for FILE slots (the fixture's
+path). A slot is file-shaped when its name says so -- `path`, `xlsx_sheet`, `docx_path`, `archive` -- and
+a demonstrated path is then left MISSING until the request names a file of its own. The capability
+becomes unbindable instead of confidently wrong.
+
+A new false pass surfaced the moment the goal named a DIFFERENT file: asking for `fresh.csv` written to
+`report.txt` produced `{north: 15.0, south: 20.0}` in `report.txt` -- the answer to the PREVIOUS task,
+about a file that was not `fresh.csv`. `_goal_names_a_different_file` now refuses a demonstrated value
+when the sentence already said which file it means.
+
+### Laws
+
+    (112) A demonstrated value is a TRACE of one run. Saving it as an argument makes every later answer
+          true of the file that happened to be in the test case, and the machine has no way to notice.
+    (113) A capability id cannot be uttered. Scoring a capability by whether its dotted, path-bearing id
+          appears in a sentence scores every such row zero, and a zero-score filter then hides it.
+    (114) A postcondition the adapter satisfies about ITSELF -- its own name, its own output path -- is
+          not a postcondition. It holds for the error envelope too.
+    (115) Zero is not a tie. A row that scored zero has said it matches nothing in this sentence; making
+          it the unique survivor because everything else was correctly refused is the machine choosing
+          the one candidate that admitted it was irrelevant.
+
+### The real reason one demonstration does not teach
+
+Not the forge's bar (it requires two independent successes, and two demonstrations DO admit the tool).
+Not reachability (once admitted, `tally` ranked and bound). The reason is that what gets SAVED is the
+case -- the arguments that worked -- and what gets GENERALISED is nothing. A rule is "this slot accepts
+a csv path"; what the forge stores is `{"path": ".../data.csv", "key": "region", "value": "amount"}`.
+The first transfers, and is what makes `tally.py` usable on `fresh.csv` once that file is named. The
+second is a sentence about 2026-11-23 that gets replayed into November forever.
+
+That is why the count is 0 rather than 6: the six were six replays, and a replay that lands on the
+wrong file is indistinguishable from a lie.
+
+    NOT DONE   §6. No OSWorld task, no SWE-bench instance.
+    NEXT       The rule, not the trace: derive from a demonstration which SLOT accepts which KIND of
+               value, and store that, so an empty slot can be filled only by something the world
+               supplies and never by a value the demonstration happened to contain.

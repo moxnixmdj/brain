@@ -68,49 +68,56 @@ class TestProblem2MemoryRescueAndForgedCeiling(unittest.TestCase):
         self.assertEqual(report["forged_total"], 6)
         self.assertEqual(report["forged_admitted"], 6, report)
         self.assertEqual(report["tasks_total"], 6)
-        # 6 -> 5 on 2026-11-23 (A140), AND THE ONE THAT LEFT WAS NEVER RESCUED.
+        # 6 -> 5 -> 4 -> 0. EVERY COUNT BEFORE THIS ONE WAS MEASURING THE FORGE'S OWN FIXTURES.
         #
-        # `sum a column of numbers in a csv` reached VERIFIED_ACTION only because the forged capability's
-        # `_forged_defaults` -- the first fixture `capability_forge_v1` happened to run the module on -- were
-        # substituted for the slot the goal never supplied. The number it produced was a true sum of
-        #     item,amount\nalpha,12.5\nbeta,27.5\ngamma,10.0
-        # which is the FORGE'S OWN TEST DATA, presented as the answer about the person's file. Teaching that
-        # receipt then recorded a procedure for a task the machine had not done.
+        # The history, because the sequence IS the finding:
+        #   * A140 measured 6/6 rescued on `_forged_defaults` -- the first fixture the forge happened
+        #     to run each module on, substituted for a slot the goal never supplied.
+        #   * A141 refused to fill a PAYLOAD slot from a demonstration (the fixture's bytes), giving 4.
+        #   * A142, measuring why a discovered `tally.py` was still invisible, found that every forged
+        #     row scored 0.0 because its id (`forged.tally.total_by`) can never appear in a sentence.
+        #     Scoring the row by its own declared keywords exposed what the zero had been hiding.
+        #   * A143 refused to fill a FILE slot from a demonstration either. The count fell to 0.
         #
-        # `world_binding_v1` now refuses to fill a payload slot from a demonstration, so the capability is
-        # unbindable until something actually names the data -- which is the honest state. The other five are
-        # unaffected, and both counts are asserted separately below rather than hidden in one number.
-        # MEASURED, NOT ROUNDED. Four tasks are now rescued by memory, one is not rescued but no longer needs
-        # to be, and one cannot be done at all:
+        # MEASURED 2026-11-23, after that last guard: `teach_status` is AMBIGUOUS for four of the six
+        # tasks, so nothing was ever taught and nothing could be remembered. The earlier "rescues" were
+        # not single-experience transfer; they were the machine answering a question about a file the
+        # person never named, with a file the forge left in `canonical/astra_runtime/tmp/`:
         #
-        #   rescued (4)          zip, spreadsheet, docx, sort -- each taught once, then remembered for a
-        #                        paraphrase. This is the single-experience transfer working.
-        #   already answerable   "diff two files" is VERIFIED_ACTION before any teaching, so it is not a
-        #                        rescue. That is the machine getting better, not the memory failing.
-        #   not answerable (1)   "sum a column of numbers in a csv" names no data. It used to reach
-        #                        VERIFIED_ACTION by summing the FORGE'S OWN FIXTURE, which was a true number
-        #                        about a file nobody mentioned.
+        #     sum a column of numbers in a csv   -> USER_POST_COUNTS.xlsx   (sum 55.0, VERIFIED_ACTION)
+        #     read a spreadsheet and sum a column-> the same workbook
+        #     make a zip archive of a directory  -> a forge fixture directory
+        #     convert a docx to text             -> a forge fixture docx
         #
-        # Asserting 6 would claim a rescue that never happened; asserting 5 would bury the distinction.
-        self.assertEqual(report["tasks_rescued"], 4, report["rows"])
+        # The two that still verify, `diff two files` and `sort the lines of a file`, do so WITHOUT
+        # memory and on files that really exist: their binding comes from the repository itself
+        # (`procedure_memory_v1.py` vs `experience_v1.py`), not from a demonstration. They are
+        # `VERIFIED_ACTION` BEFORE any teaching, so they are correctly not counted as rescues.
+        #
+        # ZERO IS THE HONEST NUMBER. The lesson this whole sequence teaches is the one the user asked
+        # about: a demonstration is a trace of one run, and saving the trace is not learning. What
+        # generalises is the RULE the run evidences -- which slot accepts what -- and that has to be
+        # written down as a rule, not inferred from the values that happened to be lying around.
+        self.assertEqual(report["tasks_rescued"], 0, report["rows"])
         self.assertEqual(report["paraphrases_total"], 6)
-        self.assertEqual(report["paraphrases_rescued"], 5, report["rows"])
+        self.assertEqual(report["paraphrases_rescued"], 0, report["rows"])
+        _ANSWERABLE_WITHOUT_TEACHING = {"diff two files", "sort the lines of a file"}
         for row in report["rows"]:
+            if row["task"] in _ANSWERABLE_WITHOUT_TEACHING:
+                # answerable before teaching -- a rescue is not needed and must not be claimed
+                self.assertEqual(row["before_task_status"], "VERIFIED_ACTION", row)
+                self.assertFalse(row["task_rescued"], row)
+                continue
             if row["task"] == "sum a column of numbers in a csv":
                 # no data was named, so nothing was done; assert THAT rather than a success
                 self.assertEqual(row["teach_status"], "AMBIGUOUS", row)
                 continue
-            if row["task"] == "diff two files":
-                # answerable before teaching -- a rescue is not needed and must not be claimed
-                self.assertEqual(row["before_task_status"], "VERIFIED_ACTION", row)
-                continue
+            # THE REST NAME NO FILE, SO NOTHING CAN BE BOUND AND NOTHING IS CLAIMED.
             self.assertEqual(row["before_task_status"], "AMBIGUOUS", row)
-            self.assertEqual(row["before_paraphrase_status"], "AMBIGUOUS", row)
-            self.assertEqual(row["teach_status"], "VERIFIED_ACTION", row)
-            self.assertEqual(row["after_task_status"], "VERIFIED_ACTION", row)
-            self.assertEqual(row["after_task_selected_because"], "REMEMBERED_PROCEDURE", row)
-            self.assertEqual(row["after_paraphrase_status"], "VERIFIED_ACTION", row)
-            self.assertEqual(row["after_paraphrase_selected_because"], "REMEMBERED_PROCEDURE", row)
+            self.assertEqual(row["teach_status"], "AMBIGUOUS",
+                             (row["task"], "a demonstrated path was used as the input again"))
+            self.assertFalse(row["task_rescued"], row)
+            self.assertFalse(row["paraphrase_rescued"], row)
 
     def test_ordinary_capabilities_refuse_corrupted_inputs(self) -> None:
         for fn in (

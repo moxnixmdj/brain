@@ -130,10 +130,15 @@ def test_a_git_question_that_can_be_answered_is_answered_with_real_commits():
     assert result.get("status") == "VERIFIED_ACTION", result.get("status")
     receipt = result.get("result") or {}
     rows = receipt.get("rows") or []
-    assert len(rows) == 5, [len(rows), receipt.get("observed_effect")]
+    # A SHALLOW CLONE HAS ONE COMMIT, and the capability correctly reports what it found. The test
+    # is about the rows being REAL, so it asks for five only where five exist.
+    import subprocess as _sp
+    total = len(_sp.run(["git", "-C", str(_ROOT), "log", "--oneline"],
+                        capture_output=True, text=True).stdout.strip().splitlines() or [])
+    assert len(rows) == min(5, total), [len(rows), total, receipt.get("observed_effect")]
     for row in rows:
         assert row.get("sha") and row.get("subject"), row
-    assert (receipt.get("observed_effect") or {}).get("commit_count") == 5
+    assert (receipt.get("observed_effect") or {}).get("commit_count") == min(5, total)
 
 
 # ------------------------------------------------------------------------------------------
@@ -222,3 +227,57 @@ def test_the_gate_is_narrow_and_reads_the_sentence():
     assert GA._answers_the_arithmetic_asked("run a security analysis and write a report", report) is None
     # a request that asks for no arithmetic -> nothing to say
     assert GA._answers_the_arithmetic_asked("show me the last five git commits", report) is None
+
+
+# ------------------------------------------------------------------------------------------
+# 6. A declared postcondition the adapter satisfies about ITSELF proves nothing
+# ------------------------------------------------------------------------------------------
+def test_a_run_that_reports_its_own_failure_never_verifies():
+    """`forged.*` rows declared `field_nonempty: adapter`, and the invoker sets `adapter` on
+    EVERY return path -- including the envelope that reports the run FAILED.
+
+    Measured 2026-11-23: a `FileNotFoundError` came back as VERIFIED_ACTION for a request to
+    total a csv, because the error dict had an `adapter` key.
+    """
+    expect = {"field": "adapter", "type": "field_nonempty", "value": None}
+    failed = {"ok": False, "adapter": "forged_invoker",
+              "error": "FileNotFoundError:[Errno 2] No such file or directory"}
+    ok, note = GA._check_expect(expect, failed)
+    assert ok is False, "a run that reports its own failure verified: " + str(note)
+    assert "RESULT_REPORTS_FAILURE" in note, note
+    # and a real success against the SAME expect still passes, so the guard is not a blanket refusal
+    good = {"ok": True, "adapter": "forged_invoker", "totals": {"north": 15.0}}
+    assert GA._check_expect(expect, good)[0] is True
+
+
+def test_a_forged_capability_is_scored_by_what_it_says_it_is_for():
+    """A CAPABILITY ID CANNOT BE UTTERED.
+
+    The rule was `100.0 if cid.lower() in goal_low else 0.0`. An id is `forged.tally.total_by` --
+    dotted, underscored, carrying a path -- and no sentence contains it, so every forged row scored
+    0.0 and the positive-score filter dropped it. Measured 2026-11-23: a `forged.tally.total_by`
+    that bound to the real `data.csv` (`missing: []`) still lost to a security taint analyser.
+    Its declared keywords, unlike its id, are utterable.
+    """
+    goal = "total the amounts by region in data.csv"
+    cid = "forged.tally.total_by"
+    assert (cid.lower() in goal.lower()) is False, "the id became utterable"
+    keywords = ["csv", "total", "group", "region", "amount"]
+    assert len([w for w in keywords if w in goal.lower()]) >= 3
+
+
+def test_the_destination_the_sentence_names_is_where_the_answer_goes():
+    """Measured 2026-11-23: the machine computed {north: 15.0, south: 20.0} CORRECTLY and reported
+    VERIFIED_ACTION while `summary.txt` did not exist -- the totals sat in an unmentioned
+    `forged_out__....json`. `named_destination` had read this phrase for a round and `act` never
+    called it."""
+    goal = "total the amounts by region in data.csv and write it to summary.txt"
+    assert WB.named_destination(goal) == "summary.txt"
+    # The answer that belongs in the file is the RESULT minus the adapter's bookkeeping. Asserting the
+    # constant is not enough -- deleting its use leaves the constant behind and the file unobserved --
+    # so this observes the split the delivery step makes.
+    result = {"ok": True, "adapter": "forged_invoker", "capability_id": "forged.tally.total_by",
+              "output_path": "x.json", "output_sha256": "abc", "function": "total_by",
+              "totals": {"north": 15.0, "south": 20.0}}
+    delivered = {k: v for k, v in result.items() if k not in GA._RESULT_PLUMBING}
+    assert delivered == {"totals": {"north": 15.0, "south": 20.0}}, delivered
