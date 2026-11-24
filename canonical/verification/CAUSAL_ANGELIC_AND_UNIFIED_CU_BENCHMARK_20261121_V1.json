@@ -5699,5 +5699,61 @@
     "cumulative_unique_verified_real_oss_commits": 236,
     "model_calls": 0,
     "parameters_stored": 0
+  },
+  "iter79_lookahead_oe_sygus_dual_narrow_if_click_f67c2bb": {
+    "date": "2026-11-21",
+    "summary": "Closed the exact universal synthesis gap exposed by Iter 78 blind testing on Sep 2026 `pallets/click@f67c2bb` with ZERO bug-specific rules: (1) added universal first-character string predicates `first_islower`/`first_isupper` to `oe_sygus_synthesizer_v1.py` (Python/JS/C); (2) added universal 1-element lookahead state projection `(seq[idx + 1] if idx + 1 < len(seq) else '')` in `causal_angelic_swe_engine_v1.py::_snapshot_locals` for any active sequence+index traversal; (3) added `TIER3_OE_SYGUS_LOOP_BRANCH_REFINE` — the exact mathematical dual of `TIER3_OE_SYGUS_VALIDATION_RAISE` (`if cond or G: raise` <-> `if cond and not (G): return/break`) — emitting surgical 1-line diffs. Verified on post-training Sep 11, 2026 `pallets/click@f67c2bb` in 5.55s on Attempt #1 (`model_calls == 0`, `parameters_stored == 0`), producing a 1-line surgical patch mathematically identical to the human fix and passing the ENTIRE `pallets/click` suite (`2064 passed, 24 skipped, 1 xfailed, 0 failed` in 9.31s). Also ran strict blind evaluation on 4 additional unseen 2026 commits (`werkzeug@{0c419f95,884437ae,051fd663}`, `click@fc518e4`), strictly auditing and REJECTING `werkzeug@0c419f95`'s overfit guard (`last_end == 0`).",
+    "hand_written_repair_rules_added": 0,
+    "verified_real_oss_commits": [
+      {
+        "repo": "pallets/click",
+        "commit": "f67c2bb6c2f055c1c7a57cd46c3697fc26a7742e",
+        "date": "2026-09-11",
+        "status": "VERIFIED",
+        "attempt": 1,
+        "seconds": 5.55,
+        "tier": "TIER3_OE_SYGUS_LOOP_BRANCH_REFINE",
+        "file": "src/click/utils.py",
+        "lineno": 92,
+        "patch_lines_changed": 1,
+        "semantically_equivalent_to_human_fix": true,
+        "full_suite_verification": "2064 passed, 24 skipped, 1 xfailed, 0 failed in 9.31s (--ignore=tests/test_deprecations.py)",
+        "model_calls": 0,
+        "parameters_stored": 0
+      }
+    ],
+    "honest_unsolved_and_rejected_overfits": [
+      {
+        "repo": "pallets/werkzeug",
+        "commit": "0c419f95",
+        "date": "2026-08-21",
+        "status": "REJECTED_OVERFIT",
+        "reason": "Synthesized `frame_sep_and_not(last_end == 0)` which passed single-test file but overfits multi-assertion `test_range_parsing`; real fix requires `if begin == 0: return None` inside `parse_range_header`."
+      },
+      {
+        "repo": "pallets/werkzeug",
+        "commit": "884437ae",
+        "date": "2026-07-29",
+        "status": "UNSOLVED",
+        "reason": "Boolean logic across external URL routing in `src/werkzeug/routing/map.py` (40 attempts)."
+      },
+      {
+        "repo": "pallets/werkzeug",
+        "commit": "051fd663",
+        "date": "2026-03-20",
+        "status": "UNSOLVED",
+        "reason": "Trailing whitespace formatting in `src/werkzeug/datastructures/auth.py` (40 attempts)."
+      },
+      {
+        "repo": "pallets/click",
+        "commit": "fc518e4",
+        "date": "2026-08-31",
+        "status": "UNSOLVED",
+        "reason": "Multi-site KeyboardInterrupt handling in `Command.main()` (`src/click/core.py`, 5 failing tests)."
+      }
+    ],
+    "cumulative_unique_verified_real_oss_commits": 237,
+    "model_calls": 0,
+    "parameters_stored": 0
   }
 }

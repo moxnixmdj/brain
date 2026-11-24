@@ -163,6 +163,12 @@ def _eval_expr(expr: Expr, env: Mapping[str, Any]) -> Any:
         if op == "is_digits":
             v = _eval_expr(a[0], env)
             return (len(v) > 0 and v.isdigit()) if isinstance(v, str) else _SENTINEL_ERR
+        if op == "first_islower":
+            v = _eval_expr(a[0], env)
+            return (len(v) > 0 and v[0].islower()) if isinstance(v, str) else _SENTINEL_ERR
+        if op == "first_isupper":
+            v = _eval_expr(a[0], env)
+            return (len(v) > 0 and v[0].isupper()) if isinstance(v, str) else _SENTINEL_ERR
         if op == "has_char_range":
             v = _eval_expr(a[0], env)
             lo_c, hi_c = int(a[1]), int(a[2])
@@ -482,6 +488,20 @@ def emit_expr(expr: Expr, lang: str = "python") -> str:
         if lg == "js":
             return f"/^[0-9]+$/.test({s})"
         return "0"
+    if op == "first_islower":
+        s = emit_expr(a[0], lg)
+        if lg == "python":
+            return f"(len({s}) > 0 and {s}[0].islower())"
+        if lg == "js":
+            return f"/^[a-z]/.test({s})"
+        return "0"
+    if op == "first_isupper":
+        s = emit_expr(a[0], lg)
+        if lg == "python":
+            return f"(len({s}) > 0 and {s}[0].isupper())"
+        if lg == "js":
+            return f"/^[A-Z]/.test({s})"
+        return "0"
     if op == "has_char_range":
         s = emit_expr(a[0], lg)
         lo_c, hi_c = int(a[1]), int(a[2])
@@ -757,6 +777,8 @@ def synthesize_separating_predicates(
                 "has_digit",
                 "has_upper",
                 "is_digits",
+                "first_islower",
+                "first_isupper",
             ):
                 _add_pred(Expr(sop, (vexpr,), 2, 0))
             # Data-driven codepoint-interval separation (strict MDL: requires >=2 distinct failing strings!)

@@ -253,6 +253,8 @@ def _snapshot_locals(frame):
         items = list(frame.f_locals.items())[:18]
     except Exception:
         return snap
+    _seqs = []
+    _idxs = []
     for k, v in items:
         if k.startswith("__") or (callable(v) and k != "self"):
             continue
@@ -260,6 +262,23 @@ def _snapshot_locals(frame):
             snap[k] = _summarize_value(v)
         except Exception:
             continue
+        if isinstance(v, (list, tuple)) and 1 <= len(v) <= 512 and isinstance(v[0], str):
+            _seqs.append((k, v))
+        elif type(v) is int and 0 <= v < 512:
+            _idxs.append((k, v))
+    # Universal 1-element lookahead projection for indexed sequence traversal (parsers/tokenizers/loops).
+    for _sk, _sv in _seqs[:2]:
+        _added_lk = 0
+        for _ik, _iv in _idxs:
+            if _iv < len(_sv) and _added_lk < 3:
+                _nxt = _sv[_iv + 1] if (_iv + 1) < len(_sv) else ""
+                if isinstance(_nxt, str):
+                    _lk = f"({_sk}[{_ik} + 1] if {_ik} + 1 < len({_sk}) else '')"
+                    try:
+                        snap[_lk] = _summarize_value(_nxt)
+                        _added_lk += 1
+                    except Exception:
+                        pass
     return snap
 
 
@@ -4450,6 +4469,137 @@ def _synthesize_static_cone_and_truthiness_repairs(
                                 _dnr_cands_added += 1
                         except Exception:
                             pass
+
+    # 12b-dual. Dual Conjunctive Narrowing of Over-Broad Early-Exit `If`-Branches
+    # (`TIER3_OE_SYGUS_LOOP_BRANCH_REFINE`):
+    # Dual of `if cond or G: raise` — when an existing `if cond: return/break` fires
+    # falsely on failing tests AND legitimately on passing tests, collect the live runtime
+    # frames inside the `If` body (including 1-element lookahead neighbors), synthesize
+    # a minimal separating predicate `G` (True on false-positive failing entries, False on
+    # legitimate passing entries) via OE-SyGuS, and narrow `if cond:` -> `if cond and not (G):`.
+    _lbr_cands_added = 0
+    _lbr_seen_if: set[tuple[str, int]] = set()
+    _lbr_site_map = {f"{st.file}:{st.lineno}": st for st in loc.sites}
+    for s in loc.sites[:16]:
+        if _lbr_cands_added >= 10:
+            break
+        loaded_lbr = load_file(s.file)
+        if loaded_lbr is None:
+            continue
+        _src_lbr, _tree_lbr = loaded_lbr
+        for _if_node in ast.walk(_tree_lbr):
+            if _lbr_cands_added >= 10:
+                break
+            if not isinstance(_if_node, ast.If):
+                continue
+            _if_ln = getattr(_if_node, "lineno", 0)
+            _if_end = getattr(_if_node, "end_lineno", _if_ln)
+            if not (_if_ln <= s.lineno <= _if_end):
+                continue
+            _if_key = (s.file, _if_ln)
+            if _if_key in _lbr_seen_if:
+                continue
+            _lbr_seen_if.add(_if_key)
+            _has_early_exit = any(
+                isinstance(_st, (ast.Return, ast.Break)) for _st in _if_node.body
+            )
+            if not _has_early_exit:
+                continue
+            _body_lns = {
+                getattr(_st, "lineno", 0)
+                for _st in _if_node.body
+                if getattr(_st, "lineno", 0) > _if_ln
+            }
+            _bf_envs: list[dict[str, Any]] = []
+            _bp_envs: list[dict[str, Any]] = []
+            for _bln in sorted(_body_lns):
+                _bsite = _lbr_site_map.get(f"{s.file}:{_bln}")
+                if _bsite is None:
+                    continue
+                _bf = [_frame_to_oe_env(f) for f in _bsite.failing_frames]
+                _bp = [_frame_to_oe_env(f) for f in _bsite.passing_frames]
+                _bf_envs.extend(e for e in _bf if e)
+                _bp_envs.extend(e for e in _bp if e)
+            if len(_bf_envs) < 2 or len(_bp_envs) < 2:
+                continue
+            try:
+                _lbr_preds = OESYGUS.synthesize_separating_predicates(
+                    _bf_envs,
+                    _bp_envs,
+                    lang="python",
+                    max_results=4,
+                )
+            except Exception:
+                _lbr_preds = []
+            for _pr in _lbr_preds[:4]:
+                _gcode = str(
+                    (_pr.get("code") if isinstance(_pr, Mapping) else getattr(_pr, "code", "")) or ""
+                ).strip()
+                if not _gcode:
+                    continue
+                try:
+                    _g_expr = ast.parse(_gcode, mode="eval").body
+                except Exception:
+                    continue
+                try:
+                    _src_lines = _src_lbr.splitlines(keepends=True)
+                    _hdr_line = _src_lines[_if_ln - 1] if 1 <= _if_ln <= len(_src_lines) else ""
+                    _stripped = _hdr_line.lstrip()
+                    _indent = _hdr_line[: len(_hdr_line) - len(_stripped)]
+                    _test_end_ln = getattr(_if_node.test, "end_lineno", _if_ln)
+                    if (
+                        _test_end_ln == _if_ln
+                        and _stripped.startswith("if ")
+                        and ":" in _stripped
+                    ):
+                        _orig_test_src = ast.get_source_segment(_src_lbr, _if_node.test)
+                        if _orig_test_src:
+                            _eol = "\n" if _hdr_line.endswith("\n") else ""
+                            _new_hdr = f"{_indent}if ({_orig_test_src}) and not ({_gcode}):{_eol}"
+                            _nc_lbr = (
+                                "".join(_src_lines[: _if_ln - 1])
+                                + _new_hdr
+                                + "".join(_src_lines[_if_ln:])
+                            )
+                            ast.parse(_nc_lbr)
+                            add_cand(
+                                s.file,
+                                _if_ln,
+                                "TIER3_OE_SYGUS_LOOP_BRANCH_REFINE",
+                                f"oe_sygus_narrow_if(L{_if_ln}:and not ({_gcode}))",
+                                _nc_lbr,
+                            )
+                            _lbr_cands_added += 1
+                            continue
+                    _nt_lbr = copy.deepcopy(_tree_lbr)
+                    _patched_lbr = False
+                    for _cand_if in ast.walk(_nt_lbr):
+                        if isinstance(_cand_if, ast.If) and getattr(_cand_if, "lineno", 0) == _if_ln:
+                            _orig_test = _cand_if.test
+                            _cand_if.test = ast.BoolOp(
+                                op=ast.And(),
+                                values=[
+                                    _orig_test,
+                                    ast.UnaryOp(op=ast.Not(), operand=copy.deepcopy(_g_expr)),
+                                ],
+                            )
+                            _patched_lbr = True
+                            break
+                    if not _patched_lbr:
+                        continue
+                    ast.fix_missing_locations(_nt_lbr)
+                    _nc_lbr = ast.unparse(_nt_lbr) + "\n"
+                    ast.parse(_nc_lbr)
+                    add_cand(
+                        s.file,
+                        _if_ln,
+                        "TIER3_OE_SYGUS_LOOP_BRANCH_REFINE",
+                        f"oe_sygus_narrow_if(L{_if_ln}:and not ({_gcode}))",
+                        _nc_lbr,
+                    )
+                    _lbr_cands_added += 1
+                except Exception:
+                    pass
 
     # 12c. Python Builtin Exception-Hierarchy Widening + Subprocess-Resilient Sibling Repair
     # (`TIER3_EXCEPTION_HIERARCHY_WIDEN`):
@@ -10084,6 +10234,7 @@ def synthesize_candidates(
         "TIER3_PICKLE_FACTORY_REDUCE_IDENTITY",
         "TIER3_STRICT_ASCII_DIGIT_INT_GUARD",
         "TIER3_OE_SYGUS_VALIDATION_RAISE",
+        "TIER3_OE_SYGUS_LOOP_BRANCH_REFINE",
         "TIER3_SIBLING_GUARD_CONJUNCT",
         "TIER3_MAP_REPEAT_COMMUTE",
         "TIER3_STATIC_REGEX_FULLMATCH",

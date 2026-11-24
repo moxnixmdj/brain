@@ -407,3 +407,64 @@ def test_05_one_front_door_differential_state_tomography() -> None:
         assert app.state["batch_count"] == 300
         assert app.state["committed"] is True
 
+
+def test_06_lookahead_oe_sygus_narrow_if_branch_and_first_case_predicates() -> None:
+    """Proves Iter 79 universal 1-element lookahead state projection + `first_islower`/`first_isupper`
+    + Dual Conjunctive Narrowing of Over-Broad Early-Exit `If`-Branches (`TIER3_OE_SYGUS_LOOP_BRANCH_REFINE`)."""
+    from canonical.runtime import causal_angelic_swe_engine_v1 as SWE
+    from canonical.runtime import oe_sygus_synthesizer_v1 as OESYGUS
+
+    # 1. Universal `first_islower` / `first_isupper` OE-SyGuS predicates
+    preds = OESYGUS.synthesize_separating_predicates(
+        [{"nxt": "alpha"}, {"nxt": "beta"}],
+        [{"nxt": "Gamma"}, {"nxt": "3"}, {"nxt": ""}],
+        lang="python",
+        max_results=4,
+    )
+    assert preds and any("islower()" in p["code"] for p in preds), preds
+
+    # 2. Live SWE solve of an early-exit loop branch bug using 1-element lookahead projection
+    with tempfile.TemporaryDirectory() as td:
+        root = pathlib.Path(td)
+        (root / "summarizer.py").write_text(
+            "def first_sentence(text: str) -> str:\n"
+            "    tokens = text.split()\n"
+            "    for idx, tok in enumerate(tokens):\n"
+            "        if tok[-1] == '.':\n"
+            "            return ' '.join(tokens[: idx + 1])\n"
+            "    return ' '.join(tokens)\n",
+            encoding="utf-8",
+        )
+        (root / "test_summarizer.py").write_text(
+            "import summarizer\n\n"
+            "def test_sentence_end_upper():\n"
+            "    assert summarizer.first_sentence('Hello world. Next line.') == 'Hello world.'\n\n"
+            "def test_sentence_end_digit():\n"
+            "    assert summarizer.first_sentence('Pick one. 3 remain.') == 'Pick one.'\n\n"
+            "def test_sentence_end_eof():\n"
+            "    assert summarizer.first_sentence('Done now.') == 'Done now.'\n\n"
+            "def test_abbrev_mid_sentence_1():\n"
+            "    assert summarizer.first_sentence('Compare apples vs. pears.') == 'Compare apples vs. pears.'\n\n"
+            "def test_abbrev_mid_sentence_2():\n"
+            "    assert summarizer.first_sentence('Use e.g. python.') == 'Use e.g. python.'\n",
+            encoding="utf-8",
+        )
+        res = SWE.solve_repository(
+            root,
+            ["test_summarizer.py"],
+            python_exe=sys.executable,
+            max_candidates=20,
+        )
+        assert res["status"] == "VERIFIED", res
+        assert res["model_calls"] == 0
+        assert res["parameters_stored"] == 0
+        w = res["winner"]
+        assert w["tier"] == "TIER3_OE_SYGUS_LOOP_BRANCH_REFINE", w
+        assert w["attempt"] == 1
+        assert "islower()" in w["diff"]
+        # Surgical 1-line edit: only 1 removed line and 1 added line!
+        removed = [ln for ln in w["diff"].splitlines() if ln.startswith("-") and not ln.startswith("---")]
+        added = [ln for ln in w["diff"].splitlines() if ln.startswith("+") and not ln.startswith("+++")]
+        assert len(removed) == 1 and len(added) == 1, w["diff"]
+
+
