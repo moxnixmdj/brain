@@ -1,0 +1,1043 @@
+{
+ "schema": "BRAIN_THE_GUIDE_IS_A_KEY_TABLE_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "date": "2026-11-24",
+ "geometry": "TERM=dumb;24x80",
+ "machine": {
+  "programs_present": [
+   "bash",
+   "less",
+   "more",
+   "node",
+   "pdb",
+   "python3",
+   "sh"
+  ],
+  "prices_ms": {
+   "batch": 2.0,
+   "page": 3.0,
+   "live": 600.0
+  }
+ },
+ "hypothesis_space": {
+  "shapes": [
+   "KEY",
+   "TOKEN",
+   "SUBCOMMAND",
+   "OPTION_LANGUAGE",
+   "NONE"
+  ],
+  "counters": [
+   "COMMANDS",
+   "BUILTINS",
+   "PATH",
+   "OPTIONS"
+  ],
+  "cells": [
+   [
+    "KEY",
+    "COMMANDS"
+   ],
+   [
+    "NONE",
+    "OPTIONS"
+   ],
+   [
+    "OPTION_LANGUAGE",
+    "COMMANDS"
+   ],
+   [
+    "SUBCOMMAND",
+    "BUILTINS"
+   ],
+   [
+    "TOKEN",
+    "COMMANDS"
+   ]
+  ],
+  "parameters": 5
+ },
+ "rooms": {
+  "less": {
+   "program": "less",
+   "family": "PAGER",
+   "channels": {
+    "batch": {
+     "channel": "batch",
+     "ms": 2.055,
+     "words": 1407,
+     "rows": 60,
+     "tokens": [
+      "q",
+      "q",
+      "ZZ",
+      "e",
+      "j",
+      "CR",
+      "*",
+      "one",
+      "f",
+      "SPACE"
+     ],
+     "prose_rows": 19
+    },
+    "page": {
+     "channel": "page",
+     "ms": 2.508,
+     "words": 1407,
+     "rows": 60,
+     "tokens": [
+      "q",
+      "q",
+      "ZZ",
+      "e",
+      "j",
+      "CR",
+      "*",
+      "one",
+      "f",
+      "SPACE"
+     ],
+     "prose_rows": 19
+    },
+    "live": {
+     "channel": "live",
+     "ms": 4.47,
+     "words": 12,
+     "rows": 0,
+     "tokens": [],
+     "prose_rows": 0
+    }
+   },
+   "ms_per_channel": {
+    "batch": 2.06,
+    "page": 2.51,
+    "live": 4.47
+   },
+   "cheap_cell": [
+    "KEY",
+    "COMMANDS"
+   ],
+   "cheap_survivors": [
+    [
+     "KEY",
+     "COMMANDS"
+    ]
+   ],
+   "live_cell": null,
+   "live_survivors": [
+    [
+     "TOKEN",
+     "COMMANDS"
+    ],
+    [
+     "KEY",
+     "COMMANDS"
+    ],
+    [
+     "SUBCOMMAND",
+     "BUILTINS"
+    ],
+    [
+     "OPTION_LANGUAGE",
+     "COMMANDS"
+    ],
+    [
+     "NONE",
+     "OPTIONS"
+    ]
+   ],
+   "cheap_published_a_listing": true,
+   "live_published_a_listing": false,
+   "alphabet_overlap": 0.0,
+   "agree": false,
+   "deciding_channels": [],
+   "tokens": [
+    "h",
+    "q",
+    "ZZ",
+    "e",
+    "j",
+    "CR",
+    "*",
+    "one",
+    "y",
+    "k",
+    "f",
+    "SPACE",
+    "b",
+    "z",
+    "w",
+    "d",
+    "u",
+    "r",
+    "n",
+    "g",
+    "<",
+    "p",
+    "%",
+    "t",
+    "{",
+    "(",
+    "[",
+    "}",
+    ")",
+    "]",
+    "^",
+    "means",
+    "beginning",
+    "s",
+    "v",
+    "-?",
+    "-a",
+    "-A",
+    "-b",
+    "-B",
+    "-c",
+    "-d",
+    "-D",
+    "-e",
+    "-E",
+    "-f",
+    "-F",
+    "-g",
+    "-G",
+    "-h",
+    "-i",
+    "-I",
+    "-j",
+    "-J",
+    "-k",
+    "-K",
+    "-L",
+    "-m",
+    "-M",
+    "-n",
+    "-N",
+    "-o",
+    "-O",
+    "-p"
+   ],
+   "cheap_ms": 4.56,
+   "live_ms": 4.47
+  },
+  "more": {
+   "program": "more",
+   "family": "PAGER",
+   "channels": {
+    "batch": {
+     "channel": "batch",
+     "ms": 2.237,
+     "words": 116,
+     "rows": 0,
+     "tokens": [],
+     "prose_rows": 0
+    },
+    "page": {
+     "channel": "page",
+     "ms": 1.58,
+     "words": 116,
+     "rows": 0,
+     "tokens": [],
+     "prose_rows": 0
+    },
+    "live": {
+     "channel": "live",
+     "ms": 3.137,
+     "words": 11,
+     "rows": 0,
+     "tokens": [],
+     "prose_rows": 0
+    }
+   },
+   "ms_per_channel": {
+    "batch": 2.24,
+    "page": 1.58,
+    "live": 3.14
+   },
+   "cheap_cell": [
+    "OPTION_LANGUAGE",
+    "COMMANDS"
+   ],
+   "cheap_survivors": [
+    [
+     "OPTION_LANGUAGE",
+     "COMMANDS"
+    ]
+   ],
+   "live_cell": null,
+   "live_survivors": [
+    [
+     "TOKEN",
+     "COMMANDS"
+    ],
+    [
+     "KEY",
+     "COMMANDS"
+    ],
+    [
+     "SUBCOMMAND",
+     "BUILTINS"
+    ],
+    [
+     "OPTION_LANGUAGE",
+     "COMMANDS"
+    ],
+    [
+     "NONE",
+     "OPTIONS"
+    ]
+   ],
+   "cheap_published_a_listing": false,
+   "live_published_a_listing": false,
+   "alphabet_overlap": 1.0,
+   "agree": true,
+   "deciding_channels": [],
+   "tokens": [],
+   "cheap_ms": 3.82,
+   "live_ms": 3.14
+  },
+  "node": {
+   "program": "node",
+   "family": "JAVASCRIPT_REPL",
+   "channels": {
+    "batch": {
+     "channel": "batch",
+     "ms": 70.376,
+     "words": 22,
+     "rows": 0,
+     "tokens": [],
+     "prose_rows": 0
+    },
+    "page": {
+     "channel": "page",
+     "ms": 45.668,
+     "words": 1948,
+     "rows": 2,
+     "tokens": [
+      "-",
+      "script",
+      "TZ",
+      "specify"
+     ],
+     "prose_rows": 2
+    },
+    "live": {
+     "channel": "live",
+     "ms": 991.166,
+     "words": 72,
+     "rows": 7,
+     "tokens": [
+      ".break",
+      ".clear",
+      ".editor",
+      ".exit",
+      ".help",
+      ".load",
+      ".save"
+     ],
+     "prose_rows": 7
+    }
+   },
+   "ms_per_channel": {
+    "batch": 70.38,
+    "page": 45.67,
+    "live": 991.17
+   },
+   "cheap_cell": null,
+   "cheap_survivors": [
+    [
+     "TOKEN",
+     "COMMANDS"
+    ],
+    [
+     "KEY",
+     "COMMANDS"
+    ],
+    [
+     "SUBCOMMAND",
+     "BUILTINS"
+    ],
+    [
+     "OPTION_LANGUAGE",
+     "COMMANDS"
+    ],
+    [
+     "NONE",
+     "OPTIONS"
+    ]
+   ],
+   "live_cell": null,
+   "live_survivors": [
+    [
+     "TOKEN",
+     "COMMANDS"
+    ],
+    [
+     "OPTION_LANGUAGE",
+     "COMMANDS"
+    ]
+   ],
+   "cheap_published_a_listing": true,
+   "live_published_a_listing": true,
+   "alphabet_overlap": 0.0,
+   "agree": false,
+   "deciding_channels": [],
+   "tokens": [
+    "-",
+    "script",
+    "TZ",
+    "specify"
+   ],
+   "cheap_ms": 116.04,
+   "live_ms": 991.17
+  },
+  "python3": {
+   "program": "python3",
+   "family": "PYTHON_PROMPT",
+   "channels": {
+    "batch": {
+     "channel": "batch",
+     "ms": 14.934,
+     "words": 0,
+     "rows": 0,
+     "tokens": [],
+     "prose_rows": 0
+    },
+    "page": {
+     "channel": "page",
+     "ms": 2.265,
+     "words": 359,
+     "rows": 19,
+     "tokens": [
+      "-b",
+      "issue",
+      "-d",
+      "turn",
+      "-E",
+      "ignore",
+      "-h",
+      "print",
+      "-i",
+      "inspect"
+     ],
+     "prose_rows": 18
+    },
+    "live": {
+     "channel": "live",
+     "ms": 1427.423,
+     "words": 14,
+     "rows": 0,
+     "tokens": [],
+     "prose_rows": 0
+    }
+   },
+   "ms_per_channel": {
+    "batch": 14.93,
+    "page": 2.27,
+    "live": 1427.42
+   },
+   "cheap_cell": null,
+   "cheap_survivors": [
+    [
+     "TOKEN",
+     "COMMANDS"
+    ],
+    [
+     "KEY",
+     "COMMANDS"
+    ],
+    [
+     "SUBCOMMAND",
+     "BUILTINS"
+    ],
+    [
+     "OPTION_LANGUAGE",
+     "COMMANDS"
+    ],
+    [
+     "NONE",
+     "OPTIONS"
+    ]
+   ],
+   "live_cell": null,
+   "live_survivors": [
+    [
+     "TOKEN",
+     "COMMANDS"
+    ],
+    [
+     "KEY",
+     "COMMANDS"
+    ],
+    [
+     "SUBCOMMAND",
+     "BUILTINS"
+    ],
+    [
+     "OPTION_LANGUAGE",
+     "COMMANDS"
+    ],
+    [
+     "NONE",
+     "OPTIONS"
+    ]
+   ],
+   "cheap_published_a_listing": true,
+   "live_published_a_listing": false,
+   "alphabet_overlap": 0.0,
+   "agree": false,
+   "deciding_channels": [],
+   "tokens": [
+    "-b",
+    "issue",
+    "-B",
+    "-d",
+    "turn",
+    "-E",
+    "ignore",
+    "-h",
+    "print",
+    "-i",
+    "inspect",
+    "-I",
+    "isolate",
+    "-O",
+    "remove",
+    "-OO",
+    "do",
+    "-P",
+    "-q",
+    "-s",
+    "-S",
+    "-u",
+    "force",
+    "-v",
+    "verbose",
+    "-V",
+    "-x",
+    "skip",
+    "file",
+    "program",
+    "-"
+   ],
+   "cheap_ms": 17.2,
+   "live_ms": 1427.42
+  },
+  "bash": {
+   "program": "bash",
+   "family": "SHELL",
+   "channels": {
+    "batch": {
+     "channel": "batch",
+     "ms": 3.138,
+     "words": 411,
+     "rows": 35,
+     "tokens": [
+      "job_spec",
+      "history",
+      ".",
+      "jobs",
+      "kill",
+      "[",
+      "let",
+      "alias",
+      "logout",
+      "bg"
+     ],
+     "prose_rows": 3
+    },
+    "page": {
+     "channel": "page",
+     "ms": 1.843,
+     "words": 91,
+     "rows": 1,
+     "tokens": [],
+     "prose_rows": 1
+    },
+    "live": {
+     "channel": "live",
+     "ms": 938.768,
+     "words": 416,
+     "rows": 35,
+     "tokens": [
+      "job_spec",
+      "history",
+      ".",
+      "jobs",
+      "kill",
+      "[",
+      "let",
+      "alias",
+      "logout",
+      "bg"
+     ],
+     "prose_rows": 3
+    }
+   },
+   "ms_per_channel": {
+    "batch": 3.14,
+    "page": 1.84,
+    "live": 938.77
+   },
+   "cheap_cell": null,
+   "cheap_survivors": [
+    [
+     "TOKEN",
+     "COMMANDS"
+    ],
+    [
+     "SUBCOMMAND",
+     "BUILTINS"
+    ]
+   ],
+   "live_cell": null,
+   "live_survivors": [
+    [
+     "TOKEN",
+     "COMMANDS"
+    ],
+    [
+     "SUBCOMMAND",
+     "BUILTINS"
+    ]
+   ],
+   "cheap_published_a_listing": true,
+   "live_published_a_listing": true,
+   "alphabet_overlap": 0.984,
+   "agree": false,
+   "deciding_channels": [
+    "batch"
+   ],
+   "tokens": [
+    "job_spec",
+    "history",
+    ".",
+    "jobs",
+    "kill",
+    "[",
+    "let",
+    "alias",
+    "logout",
+    "bg",
+    "mapfile",
+    "popd",
+    "break",
+    "printf",
+    "builtin",
+    "pushd",
+    "caller",
+    "pwd",
+    "case",
+    "read",
+    "cd",
+    "readarray",
+    "compgen",
+    "return",
+    "complete",
+    "select",
+    "compopt",
+    "continue",
+    "shift",
+    "coproc",
+    "shopt",
+    "source",
+    "dirs",
+    "suspend",
+    "disown",
+    "test",
+    "time",
+    "enable",
+    "times",
+    "eval",
+    "trap",
+    "exec",
+    "true",
+    "exit",
+    "export",
+    "false",
+    "fc",
+    "umask",
+    "fg",
+    "unalias",
+    "for",
+    "unset",
+    "until",
+    "function",
+    "variables",
+    "getopts",
+    "wait",
+    "hash",
+    "while",
+    "help",
+    "{",
+    "-ilrsD"
+   ],
+   "cheap_ms": 4.98,
+   "live_ms": 938.77
+  },
+  "sh": {
+   "program": "sh",
+   "family": "SHELL",
+   "channels": {
+    "batch": {
+     "channel": "batch",
+     "ms": 2.248,
+     "words": 5,
+     "rows": 0,
+     "tokens": [],
+     "prose_rows": 0
+    },
+    "page": {
+     "channel": "page",
+     "ms": 1.461,
+     "words": 5,
+     "rows": 0,
+     "tokens": [],
+     "prose_rows": 0
+    },
+    "live": {
+     "channel": "live",
+     "ms": 934.014,
+     "words": 9,
+     "rows": 0,
+     "tokens": [],
+     "prose_rows": 0
+    }
+   },
+   "ms_per_channel": {
+    "batch": 2.25,
+    "page": 1.46,
+    "live": 934.01
+   },
+   "cheap_cell": null,
+   "cheap_survivors": [
+    [
+     "TOKEN",
+     "COMMANDS"
+    ],
+    [
+     "KEY",
+     "COMMANDS"
+    ],
+    [
+     "SUBCOMMAND",
+     "BUILTINS"
+    ],
+    [
+     "OPTION_LANGUAGE",
+     "COMMANDS"
+    ],
+    [
+     "NONE",
+     "OPTIONS"
+    ]
+   ],
+   "live_cell": null,
+   "live_survivors": [
+    [
+     "TOKEN",
+     "COMMANDS"
+    ],
+    [
+     "KEY",
+     "COMMANDS"
+    ],
+    [
+     "SUBCOMMAND",
+     "BUILTINS"
+    ],
+    [
+     "OPTION_LANGUAGE",
+     "COMMANDS"
+    ],
+    [
+     "NONE",
+     "OPTIONS"
+    ]
+   ],
+   "cheap_published_a_listing": false,
+   "live_published_a_listing": false,
+   "alphabet_overlap": 1.0,
+   "agree": false,
+   "deciding_channels": [],
+   "tokens": [],
+   "cheap_ms": 3.71,
+   "live_ms": 934.01
+  },
+  "pdb": {
+   "program": "pdb",
+   "family": "PYTHON_DEBUGGER",
+   "channels": {
+    "batch": {
+     "channel": "batch",
+     "ms": 77.292,
+     "words": 68,
+     "rows": 8,
+     "tokens": [
+      "EOF",
+      "c",
+      "d",
+      "h",
+      "list",
+      "q",
+      "rv",
+      "undisplay",
+      "a",
+      "cl"
+     ],
+     "prose_rows": 0
+    },
+    "page": {
+     "channel": "page",
+     "ms": 72.594,
+     "words": 94,
+     "rows": 0,
+     "tokens": [],
+     "prose_rows": 0
+    },
+    "live": {
+     "channel": "live",
+     "ms": 984.492,
+     "words": 78,
+     "rows": 8,
+     "tokens": [
+      "EOF",
+      "c",
+      "d",
+      "h",
+      "list",
+      "q",
+      "rv",
+      "undisplay",
+      "a",
+      "cl"
+     ],
+     "prose_rows": 0
+    }
+   },
+   "ms_per_channel": {
+    "batch": 77.29,
+    "page": 72.59,
+    "live": 984.49
+   },
+   "cheap_cell": [
+    "TOKEN",
+    "COMMANDS"
+   ],
+   "cheap_survivors": [
+    [
+     "TOKEN",
+     "COMMANDS"
+    ]
+   ],
+   "live_cell": [
+    "TOKEN",
+    "COMMANDS"
+   ],
+   "live_survivors": [
+    [
+     "TOKEN",
+     "COMMANDS"
+    ]
+   ],
+   "cheap_published_a_listing": true,
+   "live_published_a_listing": true,
+   "alphabet_overlap": 1.0,
+   "agree": true,
+   "deciding_channels": [
+    "batch"
+   ],
+   "tokens": [
+    "EOF",
+    "c",
+    "d",
+    "h",
+    "list",
+    "q",
+    "rv",
+    "undisplay",
+    "a",
+    "cl",
+    "debug",
+    "help",
+    "ll",
+    "quit",
+    "s",
+    "unt",
+    "alias",
+    "clear",
+    "disable",
+    "ignore",
+    "longlist",
+    "r",
+    "source",
+    "until",
+    "args",
+    "commands",
+    "display",
+    "interact",
+    "n",
+    "restart",
+    "step",
+    "up",
+    "b",
+    "condition",
+    "down",
+    "j",
+    "next",
+    "return",
+    "tbreak",
+    "w",
+    "break",
+    "cont",
+    "enable",
+    "jump",
+    "p",
+    "retval",
+    "u",
+    "whatis",
+    "bt",
+    "continue",
+    "exit",
+    "l",
+    "pp",
+    "run",
+    "unalias",
+    "where",
+    "exec",
+    "pdb"
+   ],
+   "cheap_ms": 149.89,
+   "live_ms": 984.49
+  }
+ },
+ "learned_cells": {
+  "PAGER": {
+   "shape": "OPTION_LANGUAGE",
+   "counter": "COMMANDS",
+   "learned_from": "more"
+  },
+  "PYTHON_DEBUGGER": {
+   "shape": "TOKEN",
+   "counter": "COMMANDS",
+   "learned_from": "pdb"
+  }
+ },
+ "measured": {
+  "rooms": 7,
+  "alphabet_recovered": {
+   "less": 64,
+   "more": 0,
+   "node": 4,
+   "python3": 31,
+   "bash": 62,
+   "sh": 0,
+   "pdb": 58
+  },
+  "alphabet_from_cheap_channels_only": false,
+  "cheap_agrees_with_live": 2,
+  "where_the_cheap_answer_was_wrong_or_silent": [
+   "bash",
+   "less",
+   "node",
+   "python3",
+   "sh"
+  ],
+  "deciding_channel_histogram": {
+   "none": 5,
+   "batch": 2
+  },
+  "cheap_ms_total": 300.2,
+  "live_ms_total": 5283.5,
+  "seconds": 5.7
+ },
+ "counterfactual": {
+  "what_it_counts": "questions about COMMANDS, then a description of each",
+  "round_four_first_visit_questions": 32,
+  "round_four_debugger_descriptions": 26,
+  "round_four_debugger_ms_at_24ms": 624,
+  "this_round_questions_per_room": 3,
+  "debugger_alphabet_size": 58,
+  "why_not_the_same_quantity": "round 4 asked which COMMANDS exist and what each DOES -- a cost that grows with the program. This round asks HOW TO ASK and stops at the alphabet: a cost that is constant, and the alphabet is safe to enumerate because its size is a fact about help text, not a search"
+ },
+ "removed_parts": {
+  "the_help_x_channel": {
+   "what_it_was": "one `help <token>` per listed token, 24 ms each, 26 of them for the debugger in round 4",
+   "why_deleted": "a description arrives free in the answer that lists the token, and where it does not, the alphabet is still the whole answer"
+  },
+  "the_hand_written_needles": {
+   "what_it_was": "four proof strings recalled from these programs' manuals",
+   "what_it_measured": "two of four were wrong on the first run, and two of four shape claims with them",
+   "why_deleted": "a recalled needle is memorised knowledge wearing a test's clothes"
+  },
+  "the_strings_channel": {
+   "what_it_was": "read the binary's own words, 0.2-260 ms, as the cheapest channel",
+   "what_it_measured": "decided no cell in any room; a pager's 31,336 words of strings parsed into 13,000 'tokens' of prose and symbols",
+   "why_deleted": "a channel that decides nothing on any room is a part that does not pay for itself"
+  },
+  "the_tuned_admissibility_rules": {
+   "what_it_was": "three drafts of clauses tuned until each program landed in the cell I expected",
+   "what_it_measured": "the shell reported as a pager, the REPL as a pager, the interpreter as a debugger -- every number a rule I had just written",
+   "why_deleted": "hand-solving with extra steps; replaced by an OPERATIONAL oracle that costs 600 ms and cannot be argued with"
+  }
+ },
+ "model_calls": 0,
+ "parameters_stored": 0,
+ "network_calls_at_run_time": 0,
+ "disagreements": [
+  {
+   "program": "less",
+   "family": "PAGER",
+   "cheap_cell": [
+    "KEY",
+    "COMMANDS"
+   ],
+   "live_cell": null,
+   "cheap_published": true,
+   "live_published": false,
+   "alphabet_overlap": 0.0,
+   "why": "the live window refused before publishing: the room was mis-defined (no file)"
+  },
+  {
+   "program": "node",
+   "family": "JAVASCRIPT_REPL",
+   "cheap_cell": null,
+   "live_cell": null,
+   "cheap_published": true,
+   "live_published": true,
+   "alphabet_overlap": 0.0,
+   "why": "the cheap answers left more than one cell: no single shape is proved"
+  },
+  {
+   "program": "python3",
+   "family": "PYTHON_PROMPT",
+   "cheap_cell": null,
+   "live_cell": null,
+   "cheap_published": true,
+   "live_published": false,
+   "alphabet_overlap": 0.0,
+   "why": "the cheap answers left more than one cell: no single shape is proved"
+  },
+  {
+   "program": "bash",
+   "family": "SHELL",
+   "cheap_cell": null,
+   "live_cell": null,
+   "cheap_published": true,
+   "live_published": true,
+   "alphabet_overlap": 0.984,
+   "why": "the cheap answers left more than one cell: no single shape is proved"
+  },
+  {
+   "program": "sh",
+   "family": "SHELL",
+   "cheap_cell": null,
+   "live_cell": null,
+   "cheap_published": false,
+   "live_published": false,
+   "alphabet_overlap": 1.0,
+   "why": "the cheap answers left more than one cell: no single shape is proved"
+  }
+ ]
+}
