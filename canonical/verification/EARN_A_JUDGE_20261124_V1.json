@@ -1,0 +1,84 @@
+{
+  "schema": "PROJECT_BRAIN_EARN_A_JUDGE_RECEIPT_V1",
+  "action_id": "EARN_A_JUDGE_20261124_V1",
+  "authority": "NONE__SANDBOX_MEASUREMENT",
+  "date": "2026-11-24",
+  "canonical_base_commit": "62223e4080c062fed080ba84df973954ae732b12",
+  "the_bottleneck_named_last_round": "the validator set is the ceiling",
+  "the_observation": {
+    "already_in_the_project": [
+      "a_refusal_is_a_specification_v1: a refusal NAMES A KIND -- 601 on the enlarged openssl census yielding certificate, key, parameters, shared library, crl",
+      "a program's verdict on a file IS a judgement about that kind: gzip -t rejects what is not gzip, unzip -t what is not zip",
+      "round 10 excluded `cat` for accepting everything, which is the property a fake judge has"
+    ],
+    "conclusion": "a judge does not need to be typed; it needs to be MEASURED against a probe pair"
+  },
+  "the_loop": {
+    "admission_conditions": [
+      "DISCRIMINATION: exit 0 on a real file of the kind and non-zero on a decoy",
+      "DETERMINISM: the same file judged twice gives the same verdict",
+      "NO SIDE EFFECTS: the tree must be unchanged after judging"
+    ],
+    "probe_source": "the real member of every pair is written by the library or archiver that defines the kind (zipfile, gzip, json.dump, tar -cf, the interpreter), never typed by me",
+    "authority": "the probe pair, not the candidate table"
+  },
+  "measured": {
+    "earned_of_candidates": "7 of 8",
+    "earned_kinds": [
+      "gzip",
+      "json",
+      "png",
+      "python",
+      "tar",
+      "utf8_text",
+      "zip"
+    ],
+    "refused": [
+      {
+        "kind": "gzip_lazy_WRONG",
+        "why": "python -c 'gzip.open(p,\"rb\")' is LAZY: it reads nothing and returns a handle for any file, exit 0 on real AND 0 on decoy -- this is `cat`",
+        "status": "REFUSED__ACCEPTED_THE_DECOY_TOO_THIS_IS_cat"
+      }
+    ],
+    "earned_set_equals_round_10_hand_typed_set": true,
+    "agreement_with_hand_typed_on_real_files": "210 judgements across 30 real files, 0 disagreements",
+    "the_ceiling_moves": "bz2 and xz: unreadable () under the typed set, readable ('bz2',)/( 'xz',) after one earn call each, with zero new validator code and no change to the four other files",
+    "bad_guesses_refused": "lazy bz2.open -> 0/0 refused; bzip2 -d (decompresses, wrong direction) -> 0/2 refused; cat -> 1/0 refused"
+  },
+  "defects_found_by_measuring": [
+    {
+      "defect": "the probe decoy was bytes(range(0,64))",
+      "why": "that is perfectly valid UTF-8, so utf8_text accepted it and was reported as `cat`. The refusal was CORRECT and my probe was wrong: a decoy one kind accepts turns that kind's judge into a false positive",
+      "fix": "decoy is 0xFF bytes, which cannot begin a UTF-8 sequence and is not any other kind",
+      "pinned_by": "test_the_decoy_is_illegal_for_every_kind"
+    },
+    {
+      "defect": "python and utf8_text were absent from CANDIDATES",
+      "why": "I assumed they were not earnable; measured, both separate the pair cleanly. The omission was mine, not a limit of the loop",
+      "fix": "both added and earned"
+    }
+  ],
+  "a_defect_in_round_10_found_while_auditing_it": {
+    "defect": "census() collapsed two different statements into UNKNOWN",
+    "evidence": "all 13 files round 10 called UNKNOWN in intake/ were accepted by utf8_text -- they were unknown only because memory had never recorded that exact SUBSET of validators, which is memory's bookkeeping, not the file's problem",
+    "harm": "it aimed the next round's learning at markdown the machine could already read, and inflated the unknown count",
+    "fix": "three verdicts: KNOWN (signature recorded), UNDERSTOOD (a declared validator reads it, subset is new), UNREAD (nothing accepts it). Only UNREAD is queued for learning",
+    "measured_after": "intake/: 27 KNOWN, 13 UNDERSTOOD, 0 UNREAD, learn queue empty (correctly)",
+    "pinned_by": [
+      "test_a_readable_file_is_understood_not_unknown",
+      "test_only_unread_files_reach_the_learning_queue"
+    ]
+  },
+  "honest_limits": [
+    "a candidate argv is still supplied by me; the loop decides WHETHER it is a judge, not which program to try. Choosing the program automatically is the next step and is NOT done",
+    "the probe pair needs a producer for the kind, so a kind with neither a producer nor a library on this machine cannot be earned here",
+    "seven is still small; the point is that adding the eighth is one probe pair rather than new code",
+    "the scan uses earned judges through earned_validators() but still falls back to the typed table when a program is absent",
+    "no benchmark task was run; this is a mechanism measurement",
+    "authority NONE, sandbox only, independent verification OPEN"
+  ],
+  "next_bottleneck": "choosing WHICH program to try as a judge, without me naming it: the environment declares its own judges the same way it declared its own producers in round 9, and the probe pair decides whether the declaration was honest",
+  "model_calls": 0,
+  "network_calls": 0,
+  "parameters": 0
+}

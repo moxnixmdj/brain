@@ -31228,16 +31228,16 @@
   "engines": 26,
   "knowledge_documents": 601,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 7246,
+  "research_index_records": 7248,
   "routing_tokens": 2373,
   "skills": 18,
-  "source_index_entry_points": 456,
-  "source_index_modules": 2013
+  "source_index_entry_points": 457,
+  "source_index_modules": 2014
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "657d299195d9ddbb5c7b9ecb09b52749bfff8c4b323bd11568d66d679eebacb2"
+  "value": "b3e5008df067c9405fd600188787ef0bcd1e26a8a992468640433345e15d5a58"
  },
  "engines": [
   {
@@ -174168,6 +174168,24 @@
    }
   },
   {
+   "action_id": "EARN_A_JUDGE_20261124_V1",
+   "capability": false,
+   "date": "2026-11-24",
+   "id": "research:canonical/verification/EARN_A_JUDGE_20261124_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/EARN_A_JUDGE_20261124_V1.json",
+   "schema": "PROJECT_BRAIN_EARN_A_JUDGE_RECEIPT_V1",
+   "sha256": "130caac7014304e57a13aa99fd6ba7fd2a531e5b5bfe34d15a1b7f6f2bbea587",
+   "status": "",
+   "terms": {
+    "20261124": 1,
+    "earn": 1,
+    "earn_a_judge_20261124_v1": 1,
+    "judge": 1,
+    "v1": 1
+   }
+  },
+  {
    "action_id": "",
    "capability": false,
    "date": "",
@@ -249726,6 +249744,51 @@
    }
   },
   {
+   "action_id": "EARN_A_JUDGE_20261124_V1",
+   "capability": false,
+   "date": "2026-11-24",
+   "id": "research:canonical/action_intents/EARN_A_JUDGE_20261124_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/EARN_A_JUDGE_20261124_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "8a00d0e1a5b4b1e7e35416d7c287731823a6f14fe0eadd44d8d361e344c54113",
+   "status": "SHIPPED",
+   "terms": {
+    "20261124": 1,
+    "accepts": 1,
+    "actually": 1,
+    "adding": 1,
+    "ask_the_narrowest_scope_and_price_the_doubt_by_what_it_decides": 1,
+    "candidate": 2,
+    "choosing": 1,
+    "declared": 1,
+    "declares": 1,
+    "discriminated": 1,
+    "earn": 1,
+    "earn_a_judge_20261124_v1": 1,
+    "environment": 1,
+    "everything": 1,
+    "frontier": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "hand-typed": 1,
+    "human": 1,
+    "identical": 1,
+    "judge": 4,
+    "judges": 1,
+    "kind": 1,
+    "lazy": 1,
+    "looks": 1,
+    "moves": 1,
+    "name": 1,
+    "naming": 1,
+    "nothing": 1,
+    "one": 1,
+    "own": 2,
+    "producers": 1,
+    "set": 2
+   }
+  },
+  {
    "action_id": "EFFECT_RESULT_PRODUCER_MAP_AS_SECOND_PASS_ON_THE_SINGLE_CLAUSE_PATH_V1_20261021_V1",
    "capability": false,
    "date": "2026-10-21",
@@ -288633,6 +288696,50 @@
     "gate": 2,
     "string_set": 1,
     "v1": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ENTRY_POINT",
+   "executable_entry_point": true,
+   "id": "source:canonical/runtime/earn_a_judge_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/earn_a_judge_v1.py",
+   "sha256": "5b925f816a84e2ecc47776334def9e8cd93e805bcfaa4a6a3f0a11e8360a0329",
+   "summary": "A judge is not written; it is EARNED, by being shown one file of the kind and one that is not.",
+   "symbol_count": 9,
+   "symbols": [
+    "Candidate",
+    "_digest",
+    "_py",
+    "_run",
+    "earn",
+    "earn_set",
+    "judges_from",
+    "main",
+    "probe_pairs"
+   ],
+   "terms": {
+    "being": 1,
+    "candidate": 1,
+    "digest": 1,
+    "earn": 2,
+    "earn_set": 1,
+    "earned": 1,
+    "file": 1,
+    "judge": 2,
+    "judges_from": 1,
+    "kind": 1,
+    "main": 1,
+    "not": 2,
+    "one": 2,
+    "probe_pairs": 1,
+    "py": 1,
+    "run": 1,
+    "shown": 1,
+    "v1": 1,
+    "written": 1
    }
   },
   {
@@ -329899,9 +330006,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/scan_and_diff_against_memory_v1.py",
-   "sha256": "c1fdb0bc35ce277b63a7f38512e4c1d2fc58b0a7c5892606de88dad1c3e0f04a",
+   "sha256": "9501591c77ea8bbb0f7620bf9a78e0b794ca3819613b5854c1de21508ff1a62d",
    "summary": "Scan an environment, and say which parts of it the machine has never met.",
-   "symbol_count": 13,
+   "symbol_count": 14,
    "symbols": [
     "Item",
     "Memory",
@@ -329910,6 +330017,7 @@
     "_py_test",
     "_rc",
     "census",
+    "earned_validators",
     "judge_all",
     "main",
     "scan",
@@ -329921,6 +330029,7 @@
     "against": 1,
     "census": 1,
     "diff": 1,
+    "earned_validators": 1,
     "environment": 1,
     "histogram": 1,
     "item": 1,
