@@ -1,0 +1,403 @@
+{
+ "schema": "BRAIN_ROOM_WITNESS_GRAMMAR_REGRESSION_20261124_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "date": "2026-11-24",
+ "what_was_compared": "the shipped 446-page action-grammar instrument on this machine, before and after wiring room_witness_v1 into execute_path; both runs are producer-run, same wall budget, same deterministic draw",
+ "command_before": "python3 canonical/tools/the_guide_is_an_action_grammar_v1.py --receipt <before.json>",
+ "command_after": "python3 canonical/tools/the_guide_is_an_action_grammar_v1.py --receipt <after.json>",
+ "baseline": {
+  "summary": {
+   "programs_read": 446,
+   "edges": 87,
+   "needs": 13,
+   "needs_served_by_a_machine": 11,
+   "goals_held": 11,
+   "held_out_refused": 2,
+   "paths_of_two_or_more_edges": 3
+  },
+  "verdict": {
+   "G1_a_usage_line_is_a_grammar": true,
+   "G2_the_grammar_moves_state": true,
+   "G3_a_path_of_two_edges": true,
+   "G4_a_refusal_is_a_refinement": true,
+   "G5_the_machine_refuses": true,
+   "G6_the_check_is_derived": true,
+   "G7_zero": true
+  }
+ },
+ "wired": {
+  "summary": {
+   "programs_read": 446,
+   "edges": 87,
+   "needs": 13,
+   "needs_served_by_a_machine": 11,
+   "goals_held": 11,
+   "witnessed_goals": 11,
+   "held_out_refused": 2,
+   "paths_of_two_or_more_edges": 3
+  },
+  "verdict": {
+   "G1_a_usage_line_is_a_grammar": {
+    "pages_with_a_usage_line": 446,
+    "programs_read": 446,
+    "pages_with_a_typed_slot_or_flag": 197,
+    "pages_that_name_an_operand": 241,
+    "the_claim": "a usage line parses into slots for at least half the pages read, and a page is never read for a subcommand's contract when it names subcommands",
+    "why_this_number_and_not_that": "the slot is the shape and the argument noun is the typing; a page that prints `[options] command` has a shape and no typed operand, and counting it as a parse failure would be counting the page's content as this reader's defect",
+    "MET": true
+   },
+   "G2_the_grammar_moves_state": {
+    "goals_held": 11,
+    "needs": 11,
+    "held_with_no_repair_at_all": 11,
+    "roster_changed_a_byte": 3,
+    "roster_accepted": 777,
+    "MET": true
+   },
+   "G3_a_path_of_two_edges": {
+    "paths": 3,
+    "MET": true
+   },
+   "G4_a_refusal_is_a_refinement": {
+    "repairs_attempted_by_a_reader": 0,
+    "repairs_that_turned_refusal_into_acceptance": 0,
+    "sample": [],
+    "the_claim": "at least one refusal is read and repaired into acceptance by the flag the program itself named",
+    "drill_a_ghost_object": {
+     "attempted": 8,
+     "repaired_by_a_named_flag": 0,
+     "repaired_by_rebinding_an_object": 2
+    },
+    "drill_b_switch_deleted": {
+     "attempted": 6,
+     "drills": [
+      {
+       "program": "ar",
+       "verb": "create",
+       "switch_removed": "--thin",
+       "argv_after_removal": [
+        "ar",
+        "notes.tar",
+        "change.diff",
+        "notes",
+        "notes/a.txt",
+        "notes/b.txt"
+       ],
+       "sentence": "ar: invalid option -- 'n'\nUsage: ar [emulation options] [-]{dmpqrstx}[abcDfilMNoOPsSTuvV] [--plugin <name>] [member-name] [count] archive-file file...\n       ar -M [<mri-script]\n commands:\n  d            - delete file(s)",
+       "flag_the_program_named": "--thin",
+       "final_status": "REFUSED_NO_REPAIR",
+       "final_argv": [
+        "ar",
+        "--thin",
+        "notes.tar",
+        "change.diff",
+        "notes",
+        "notes/a.txt",
+        "notes/b.txt"
+       ],
+       "repaired_by_a_named_flag": false
+      },
+      {
+       "program": "convert",
+       "verb": "remove",
+       "switch_removed": "-antialias",
+       "argv_after_removal": [
+        "convert",
+        "change.diff",
+        "change.out",
+        "notes/a.txt"
+       ],
+       "sentence": null,
+       "flag_the_program_named": null,
+       "final_status": "REFUSED_NO_REPAIR",
+       "final_argv": [
+        "convert",
+        "notes/a.txt",
+        "change.out",
+        "notes/a.txt"
+       ],
+       "repaired_by_a_named_flag": false
+      },
+      {
+       "program": "convert-im6",
+       "verb": "remove",
+       "switch_removed": "-antialias",
+       "argv_after_removal": [
+        "convert-im6",
+        "change.diff",
+        "change.out",
+        "notes/a.txt"
+       ],
+       "sentence": null,
+       "flag_the_program_named": null,
+       "final_status": "REFUSED_NO_REPAIR",
+       "final_argv": [
+        "convert-im6",
+        "notes/a.txt",
+        "change.out",
+        "notes/a.txt"
+       ],
+       "repaired_by_a_named_flag": false
+      },
+      {
+       "program": "convert-im6.q16",
+       "verb": "remove",
+       "switch_removed": "-antialias",
+       "argv_after_removal": [
+        "convert-im6.q16",
+        "change.diff",
+        "change.out",
+        "notes/a.txt"
+       ],
+       "sentence": null,
+       "flag_the_program_named": null,
+       "final_status": "REFUSED_NO_REPAIR",
+       "final_argv": [
+        "convert-im6.q16",
+        "notes/a.txt",
+        "change.out",
+        "notes/a.txt"
+       ],
+       "repaired_by_a_named_flag": false
+      },
+      {
+       "program": "cp",
+       "verb": "remove",
+       "switch_removed": "--remove-destination",
+       "argv_after_removal": [
+        "cp",
+        "change.diff",
+        "change.out"
+       ],
+       "sentence": null,
+       "flag_the_program_named": null,
+       "final_status": "ACCEPTED_CHANGED",
+       "final_argv": [
+        "cp",
+        "change.diff",
+        "change.out"
+       ],
+       "repaired_by_a_named_flag": false
+      },
+      {
+       "program": "csplit",
+       "verb": "remove",
+       "switch_removed": "-z",
+       "argv_after_removal": [
+        "csplit",
+        "change.diff",
+        "change.out"
+       ],
+       "sentence": null,
+       "flag_the_program_named": null,
+       "final_status": "REFUSED_UNREAD",
+       "final_argv": [
+        "csplit",
+        "change.diff",
+        "change.out"
+       ],
+       "repaired_by_a_named_flag": false
+      }
+     ],
+     "repaired_by_a_named_flag": 0
+    },
+    "what_neither_drill_can_show": "a refusal whose sentence this reader has no form for stays UNREAD and is left in the receipt; a program that exits 0 having done nothing is labelled INERT, never repaired",
+    "the_claim_restated_to_what_was_measured": "a program's own sentence names what it missed, and the machine supplies it from the page -- by putting back the switch the sentence printed, or by binding a different object when the sentence says it could not open one",
+    "MET": true
+   },
+   "G5_the_machine_refuses": {
+    "held_out": 2,
+    "refused": 2,
+    "MET": true
+   },
+   "G6_the_check_is_derived": {
+    "measured_states": 3,
+    "states_where_the_check_says_held_and_the_need_is_not": 1,
+    "spots": [
+     {
+      "what_the_need_meant": "the archive proj.tar is compressed",
+      "what_was_done": [
+       "gzip",
+       "payload.txt"
+      ],
+      "made": [
+       "payload.txt.gz"
+      ],
+      "need_met": false,
+      "check": {
+       "check": "compressed",
+       "says": true,
+       "by": [
+        "gzip",
+        "-t",
+        "payload.txt.gz"
+       ]
+      },
+      "blind": true
+     },
+     {
+      "what_the_need_meant": "a new file holding payload.txt's lines",
+      "what_was_done": [
+       "cp",
+       "notes/a.txt",
+       "impostor.out"
+      ],
+      "made": [
+       "impostor.out"
+      ],
+      "need_met": false,
+      "check": {
+       "check": "contains_text",
+       "says": false,
+       "by": [
+        "grep",
+        "-F",
+        "--",
+        "brown",
+        "impostor.out"
+       ]
+      },
+      "blind": false
+     },
+     {
+      "what_the_need_meant": "an archive of src holding main.py",
+      "what_was_done": [
+       "tar",
+       "-c",
+       "-f",
+       "notes.tar",
+       "notes"
+      ],
+      "made": [
+       "notes.tar"
+      ],
+      "need_met": false,
+      "check": {
+       "check": "archive_contains",
+       "says": false,
+       "by": [
+        "tar",
+        "-tf",
+        "<created archive>"
+       ]
+      },
+      "blind": false
+     }
+    ],
+    "the_claim": "every goal check is a read-only program the machine already had, and the state where it is blind is measured rather than assumed",
+    "what_it_costs": "a check that is blind to WHICH object turns a one-requirement need into a false goal; the needs that could be fooled carry a second requirement on a different surface instead",
+    "MET": true
+   },
+   "G7_zero": {
+    "model_calls": 0,
+    "parameters_stored": 0,
+    "network_calls_at_run_time": 0,
+    "a_need_is_a_sentence": true,
+    "the_claim": "no command, flag or output path is written in this source for any need",
+    "MET": true
+   },
+   "G8_the_goal_is_witnessed_by_the_action": {
+    "goals_held": 11,
+    "witnessed_goals": 11,
+    "needs_served_by_a_machine": 11,
+    "the_claim": "a step is credited only for an object whose bytes it changed; a check holding on an untouched object is an invariant and cannot claim success",
+    "what_it_refuses": "a false done: the goal was already true before the action ran",
+    "MET": true
+   }
+  }
+ },
+ "per_need": [
+  {
+   "need": "N01",
+   "before": "PASS__GOAL_HELD",
+   "after": "PASS__GOAL_HELD",
+   "witness": "WITNESSED"
+  },
+  {
+   "need": "N02",
+   "before": "PASS__GOAL_HELD",
+   "after": "PASS__GOAL_HELD",
+   "witness": "WITNESSED"
+  },
+  {
+   "need": "N03",
+   "before": "PASS__GOAL_HELD",
+   "after": "PASS__GOAL_HELD",
+   "witness": "WITNESSED"
+  },
+  {
+   "need": "N04",
+   "before": "PASS__GOAL_HELD",
+   "after": "PASS__GOAL_HELD",
+   "witness": "WITNESSED"
+  },
+  {
+   "need": "N05",
+   "before": "PASS__GOAL_HELD",
+   "after": "PASS__GOAL_HELD",
+   "witness": "WITNESSED"
+  },
+  {
+   "need": "N06",
+   "before": "PASS__GOAL_HELD",
+   "after": "PASS__GOAL_HELD",
+   "witness": "WITNESSED"
+  },
+  {
+   "need": "N07",
+   "before": "PASS__GOAL_HELD",
+   "after": "PASS__GOAL_HELD",
+   "witness": "WITNESSED"
+  },
+  {
+   "need": "N08",
+   "before": "PASS__GOAL_HELD",
+   "after": "PASS__GOAL_HELD",
+   "witness": "WITNESSED"
+  },
+  {
+   "need": "N09",
+   "before": "PASS__GOAL_HELD",
+   "after": "PASS__GOAL_HELD",
+   "witness": "WITNESSED"
+  },
+  {
+   "need": "N10",
+   "before": "PASS__GOAL_HELD",
+   "after": "PASS__GOAL_HELD",
+   "witness": "WITNESSED"
+  },
+  {
+   "need": "N11",
+   "before": "PASS__GOAL_HELD",
+   "after": "PASS__GOAL_HELD",
+   "witness": "WITNESSED"
+  },
+  {
+   "need": "H01",
+   "before": "REFUSED__NAMES_NOTHING_IN_THIS_WORLD",
+   "after": "REFUSED__NAMES_NOTHING_IN_THIS_WORLD",
+   "witness": null
+  },
+  {
+   "need": "H02",
+   "before": "REFUSED__NAMES_NOTHING_IN_THIS_WORLD",
+   "after": "REFUSED__NAMES_NOTHING_IN_THIS_WORLD",
+   "witness": null
+  }
+ ],
+ "same_per_need_verdicts": true,
+ "g1_to_g7_unchanged": true,
+ "g8_added": "a step is credited only for an object whose bytes it changed",
+ "cost": {
+  "seconds_before": 80.1,
+  "seconds_after": 78.8,
+  "model_calls": 0,
+  "parameters_stored": 0,
+  "network_calls_at_run_time": 0
+ },
+ "what_this_is_not": [
+  "not independent verification: one producer, one machine, no separate verifier",
+  "not a benchmark result: no OSWorld, SWE-bench Pro, FrontierSWE or Terminal-Bench task was run"
+ ]
+}

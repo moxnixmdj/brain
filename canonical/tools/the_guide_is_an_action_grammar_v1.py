@@ -94,6 +94,8 @@ for path in (str(TOOLS), str(REPO)):
     if path not in sys.path:
         sys.path.insert(0, path)
 
+from canonical.runtime import room_witness_v1 as rw  # noqa: E402
+
 SCHEMA = "BRAIN_THE_GUIDE_IS_AN_ACTION_GRAMMAR_V1"
 AUTHORITY = "NONE__PRODUCER_RUN_SANDBOX"
 
@@ -1284,18 +1286,12 @@ def _forms(declared: dict[str, dict[str, Any]], flag: str, value: str) -> list[s
 # --------------------------------------------------------------------------- #
 
 def _digest(root: pathlib.Path) -> dict[str, str]:
-    """Every file in the room, by content. The one comparison a kind map cannot make."""
-    import hashlib
+    """Every file in the room, by content. The one comparison a kind map cannot make.
 
-    out: dict[str, str] = {}
-    for path in sorted(root.rglob("*")):
-        if path.is_file() and not path.is_symlink():
-            rel = path.relative_to(root).as_posix()
-            try:
-                out[rel] = hashlib.sha256(path.read_bytes()).hexdigest()
-            except OSError:
-                out[rel] = "<unreadable>"
-    return out
+    The byte digest is also the witness's substrate; one reader, so `run()` and the goal
+    witness can never disagree about whether a byte moved.
+    """
+    return rw.digest(root)
 
 
 def run(argv: Sequence[str], root: pathlib.Path, *, deadline: float = RUN_DEADLINE) -> dict[str, Any]:
@@ -1929,23 +1925,44 @@ def execute_path(path: Sequence[dict[str, Any]], need: dict[str, Any], root: pat
     log: list[dict[str, Any]] = []
     hand: str | None = None
     for edge in path:
+        before_bytes = _digest(root)
         step = compile_step(edge, need=need["need"], root=root, input_value=hand,
                             exclude=tuple(exclude) + tuple(created_all))
         result = attempt(step, root, need=need["need"],
                          exclude=tuple(exclude) + tuple(created_all), budget=budget,
                          rounds=rounds)
+        after_bytes = _digest(root)
         created = list((result.get("run") or {}).get("created") or [])
         created_all.extend(created)
         goal = goal_holds(need["requires"], root, created_all)
+        # A goal is credited ONLY for an object whose bytes THIS step changed. A check that
+        # holds on a pre-existing object is an invariant, not a witness; without this gate a
+        # path can be declared successful before it did anything (the measured false-done
+        # failure). The witness is derived from the room, never from the page's prose.
+        # See canonical/runtime/room_witness_v1.py and
+        # THE_CHECK_IS_THE_OBJECT_THE_ACTION_PRODUCED_20261124_V1.md.
+        def _reread(rel: str) -> str:
+            import hashlib
+            return hashlib.sha256((root / rel).read_bytes()).hexdigest()
+
+        witness = rw.witness(before_bytes, after_bytes, goal["checks"],
+                             argv=step.get("argv") or [], reread=_reread)
+        held = goal["held"] and witness["held"]
         log.append({"program": step.get("program"), "argv": step.get("argv"),
                     "verb": edge["verb"], "role_source": edge["source"],
                     "in_kind": edge["in_kind"], "out_kind": edge["out_kind"],
                     "in_value": step.get("in_value"), "out_flag": step.get("out_flag"),
                     "status": result["status"], "created": created,
                     "goal": goal, "attempts": result.get("log"),
-                    "check": step.get("check")})
-        if goal["held"]:
+                    "check": step.get("check"),
+                    "witness": {"status": witness["status"], "bound": witness["bound"],
+                                "invariants": witness["invariants"],
+                                "bytes_changed": len(witness["delta"]["changed"]),
+                                "reason": witness["reason"]},
+                    "held": held})
+        if held:
             return {"status": "PASS__GOAL_HELD", "steps": log, "created": created_all,
+                    "witness": witness,
                     "runs_spent": (budget.spent if budget else None),
                     "path": [f"{e['program']}:{e['verb']}" for e in path],
                     "refusals_read": sum(1 for row in log for e in (row["attempts"] or [])
@@ -2085,6 +2102,9 @@ def measure(*, wall_budget: float = PAGE_WALL_BUDGET, depth: int = 2) -> dict[st
                   "the state where it is blind is reported",
             "G7": "zero model calls, zero stored parameters, zero network at run time; no command, "
                   "flag or output path is written in this source for any need",
+            "G8": "every goal claimed as held is bound by the room witness to an object whose "
+                  "bytes that step changed; a check holding on a pre-existing object is an "
+                  "invariant, never a success",
         },
         "survey": {"names_offered": survey_result["names_offered"],
                    "programs_attempted": survey_result["attempted"],
@@ -2132,6 +2152,8 @@ def measure(*, wall_budget: float = PAGE_WALL_BUDGET, depth: int = 2) -> dict[st
             "edges": len(edges), "transitions_set_aside": set_aside,
             "needs": len(rows), "needs_served_by_a_machine": len(served),
             "goals_held": len(held),
+            "witnessed_goals": sum(1 for r in held
+                                   if (r.get("witness") or {}).get("held")),
             "needs_held_out": len(held_out),
             "held_out_refused": sum(1 for r in held_out if r["status"] != "PASS__GOAL_HELD"),
             "refusals_read": sum(r.get("refusals_read", 0) for r in rows),
@@ -2477,6 +2499,15 @@ def _verdict(receipt: dict[str, Any]) -> dict[str, Any]:
             "the_claim": "no command, flag or output path is written in this source for any "
                          "need",
             "MET": receipt["needs_carry_no_program"]},
+        "G8_the_goal_is_witnessed_by_the_action": {
+            "goals_held": summary["goals_held"],
+            "witnessed_goals": summary["witnessed_goals"],
+            "needs_served_by_a_machine": summary["needs_served_by_a_machine"],
+            "the_claim": "a step is credited only for an object whose bytes it changed; a check "
+                         "holding on an untouched object is an invariant and cannot claim success",
+            "what_it_refuses": "a false done: the goal was already true before the action ran",
+            "MET": (summary["witnessed_goals"] == summary["goals_held"]
+                    and summary["goals_held"] == summary["needs_served_by_a_machine"])},
     }
 
 

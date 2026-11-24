@@ -1,0 +1,546 @@
+{
+ "schema": "BRAIN_THE_CHECK_IS_THE_OBJECT_THE_ACTION_PRODUCED_20261124_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "date": "2026-11-24",
+ "mode": "A_CHECK_IS_CREDITED_ONLY_FOR_THE_BYTES_THIS_ACTION_CHANGED",
+ "declared_before_the_run": {
+  "W1_the_check_is_still_blind": "the eight shipped which-object probes still accept a same-kind decoy; this round does not claim to have repaired the check",
+  "W2_the_witness_binds_to_the_action": "on all eight blind probes the witness binds to the object the action produced and credits zero untouched decoys",
+  "W3_false_done_is_refused": "a goal already satisfied before a no-op action is never claimed as that action's success",
+  "W4_all_reject_is_named": "an all-reject verifier is reported as no held check, not as a false done",
+  "W5_no_over_rejection": "a valid alternative producer and a different output name both still witness",
+  "W6_ambiguity_and_wrong_memory_refused": "an action that changes two same-kind objects, and a stored binding that names the untouched decoy, are both refused",
+  "W7_destroyed_bytes_are_changed": "no accepted check that destroys bytes is reported ACCEPTED_INERT",
+  "W8_transfer_to_frozen_out_producers": "the rule binds on at least two producers that were chosen after the rule was frozen",
+  "W9_zero": "zero model calls, zero stored parameters, zero network at measure time"
+ },
+ "verdict": {
+  "W1_the_check_is_still_blind": {
+   "claimed": "the eight shipped which-object probes still accept a same-kind decoy; this round does not claim to have repaired the check",
+   "measured": "8/8 accept both objects",
+   "MET": true
+  },
+  "W2_the_witness_binds_to_the_action": {
+   "claimed": "on all eight blind probes the witness binds to the object the action produced and credits zero untouched decoys",
+   "measured": "8/8 bound to right, 0 decoys credited",
+   "MET": true
+  },
+  "W3_false_done_is_refused": {
+   "claimed": "a goal already satisfied before a no-op action is never claimed as that action's success",
+   "measured": "4/4 refused",
+   "MET": true
+  },
+  "W4_all_reject_is_named": {
+   "claimed": "an all-reject verifier is reported as no held check, not as a false done",
+   "measured": "1/1 named correctly",
+   "MET": true
+  },
+  "W5_no_over_rejection": {
+   "claimed": "a valid alternative producer and a different output name both still witness",
+   "measured": "2/2 witnessed",
+   "MET": true
+  },
+  "W6_ambiguity_and_wrong_memory_refused": {
+   "claimed": "an action that changes two same-kind objects, and a stored binding that names the untouched decoy, are both refused",
+   "measured": "ambiguous 1/1, wrong memory 1/1, drift 1/1",
+   "MET": true
+  },
+  "W7_destroyed_bytes_are_changed": {
+   "claimed": "no accepted check that destroys bytes is reported ACCEPTED_INERT",
+   "measured": "0 of 7 accepted destroyers reported INERT",
+   "MET": true
+  },
+  "W8_transfer_to_frozen_out_producers": {
+   "claimed": "the rule binds on at least two producers that were chosen after the rule was frozen",
+   "measured": "3/3 available producers witnessed",
+   "MET": true
+  },
+  "W9_zero": {
+   "claimed": "zero model calls, zero stored parameters, zero network at measure time",
+   "measured": "0/0/0",
+   "MET": true
+  }
+ },
+ "which_object": {
+  "probes": 8,
+  "checks_still_blind": 8,
+  "witnessed": 8,
+  "bound_to_right": 8,
+  "decoy_credited": 0,
+  "rows": [
+   {
+    "kind": "gzip",
+    "check": "gzip -t",
+    "right": "payload.txt.gz",
+    "decoy": "other.txt.gz",
+    "producer": [
+     "gzip",
+     "-kf",
+     "payload.txt"
+    ],
+    "check_accepts_right": true,
+    "check_accepts_decoy": true,
+    "check_is_blind": true,
+    "witness_status": "WITNESSED",
+    "witness_held": true,
+    "bound": [
+     "payload.txt.gz"
+    ],
+    "decoys_in_delta": [],
+    "invariants": 1,
+    "bound_to_right": true,
+    "decoy_not_credited": true,
+    "bytes_in_delta": [
+     "payload.txt.gz"
+    ]
+   },
+   {
+    "kind": "gzip",
+    "check": "gzip -l",
+    "right": "payload.txt.gz",
+    "decoy": "other.txt.gz",
+    "producer": [
+     "gzip",
+     "-kf",
+     "payload.txt"
+    ],
+    "check_accepts_right": true,
+    "check_accepts_decoy": true,
+    "check_is_blind": true,
+    "witness_status": "WITNESSED",
+    "witness_held": true,
+    "bound": [
+     "payload.txt.gz"
+    ],
+    "decoys_in_delta": [],
+    "invariants": 1,
+    "bound_to_right": true,
+    "decoy_not_credited": true,
+    "bytes_in_delta": [
+     "payload.txt.gz"
+    ]
+   },
+   {
+    "kind": "gzip",
+    "check": "gunzip -t",
+    "right": "payload.txt.gz",
+    "decoy": "other.txt.gz",
+    "producer": [
+     "gzip",
+     "-kf",
+     "payload.txt"
+    ],
+    "check_accepts_right": true,
+    "check_accepts_decoy": true,
+    "check_is_blind": true,
+    "witness_status": "WITNESSED",
+    "witness_held": true,
+    "bound": [
+     "payload.txt.gz"
+    ],
+    "decoys_in_delta": [],
+    "invariants": 1,
+    "bound_to_right": true,
+    "decoy_not_credited": true,
+    "bytes_in_delta": [
+     "payload.txt.gz"
+    ]
+   },
+   {
+    "kind": "tar",
+    "check": "tar -tf",
+    "right": "right.tar",
+    "decoy": "decoy.tar",
+    "producer": [
+     "tar",
+     "-cf",
+     "right.tar",
+     "notes/a.txt"
+    ],
+    "check_accepts_right": true,
+    "check_accepts_decoy": true,
+    "check_is_blind": true,
+    "witness_status": "WITNESSED",
+    "witness_held": true,
+    "bound": [
+     "right.tar"
+    ],
+    "decoys_in_delta": [],
+    "invariants": 1,
+    "bound_to_right": true,
+    "decoy_not_credited": true,
+    "bytes_in_delta": [
+     "right.tar"
+    ]
+   },
+   {
+    "kind": "tar",
+    "check": "tar -tvf",
+    "right": "right.tar",
+    "decoy": "decoy.tar",
+    "producer": [
+     "tar",
+     "-cf",
+     "right.tar",
+     "notes/a.txt"
+    ],
+    "check_accepts_right": true,
+    "check_accepts_decoy": true,
+    "check_is_blind": true,
+    "witness_status": "WITNESSED",
+    "witness_held": true,
+    "bound": [
+     "right.tar"
+    ],
+    "decoys_in_delta": [],
+    "invariants": 1,
+    "bound_to_right": true,
+    "decoy_not_credited": true,
+    "bytes_in_delta": [
+     "right.tar"
+    ]
+   },
+   {
+    "kind": "zip",
+    "check": "unzip -t",
+    "right": "right.zip",
+    "decoy": "decoy.zip",
+    "producer": [
+     "<zipfile fixture>",
+     "right.zip"
+    ],
+    "check_accepts_right": true,
+    "check_accepts_decoy": true,
+    "check_is_blind": true,
+    "witness_status": "WITNESSED",
+    "witness_held": true,
+    "bound": [
+     "right.zip"
+    ],
+    "decoys_in_delta": [],
+    "invariants": 1,
+    "bound_to_right": true,
+    "decoy_not_credited": true,
+    "bytes_in_delta": [
+     "right.zip"
+    ]
+   },
+   {
+    "kind": "zip",
+    "check": "unzip -l",
+    "right": "right.zip",
+    "decoy": "decoy.zip",
+    "producer": [
+     "<zipfile fixture>",
+     "right.zip"
+    ],
+    "check_accepts_right": true,
+    "check_accepts_decoy": true,
+    "check_is_blind": true,
+    "witness_status": "WITNESSED",
+    "witness_held": true,
+    "bound": [
+     "right.zip"
+    ],
+    "decoys_in_delta": [],
+    "invariants": 1,
+    "bound_to_right": true,
+    "decoy_not_credited": true,
+    "bytes_in_delta": [
+     "right.zip"
+    ]
+   },
+   {
+    "kind": "json",
+    "check": "python3 -c import json,sys;json.load(open(sys.argv[1]))",
+    "right": "right.json",
+    "decoy": "decoy.json",
+    "producer": [
+     "<write_text fixture>",
+     "right.json"
+    ],
+    "check_accepts_right": true,
+    "check_accepts_decoy": true,
+    "check_is_blind": true,
+    "witness_status": "WITNESSED",
+    "witness_held": true,
+    "bound": [
+     "right.json"
+    ],
+    "decoys_in_delta": [],
+    "invariants": 1,
+    "bound_to_right": true,
+    "decoy_not_credited": true,
+    "bytes_in_delta": [
+     "right.json"
+    ]
+   }
+  ]
+ },
+ "controls": {
+  "rows": [
+   {
+    "control": "FALSE_DONE",
+    "kind": "gzip",
+    "action_accepted": true,
+    "status": "REFUSED__GOAL_HELD_BEFORE_THE_ACTION",
+    "refused": true,
+    "invariants": 1
+   },
+   {
+    "control": "FALSE_DONE",
+    "kind": "tar",
+    "action_accepted": true,
+    "status": "REFUSED__GOAL_HELD_BEFORE_THE_ACTION",
+    "refused": true,
+    "invariants": 1
+   },
+   {
+    "control": "FALSE_DONE",
+    "kind": "zip",
+    "action_accepted": true,
+    "status": "REFUSED__GOAL_HELD_BEFORE_THE_ACTION",
+    "refused": true,
+    "invariants": 1
+   },
+   {
+    "control": "FALSE_DONE",
+    "kind": "json",
+    "action_accepted": true,
+    "status": "REFUSED__GOAL_HELD_BEFORE_THE_ACTION",
+    "refused": true,
+    "invariants": 1
+   },
+   {
+    "control": "ALL_REJECT",
+    "status": "REFUSED__NO_HELD_CHECK",
+    "refused": true,
+    "names_the_real_defect": true
+   },
+   {
+    "control": "ALTERNATE_PRODUCER",
+    "action_accepted": true,
+    "check_held": true,
+    "status": "WITNESSED",
+    "witnessed": true,
+    "bound": [
+     "payload.txt.gz"
+    ],
+    "bound_to_right": true
+   },
+   {
+    "control": "ALTERNATE_NAME",
+    "action_accepted": true,
+    "check_held": true,
+    "status": "WITNESSED",
+    "witnessed": true,
+    "bound": [
+     "renamed.gz"
+    ],
+    "bound_to_right": true
+   },
+   {
+    "control": "AMBIGUOUS_DECOYS",
+    "status": "REFUSED__AMBIGUOUS_WITNESS",
+    "refused": true,
+    "decoys_in_delta": [
+     "other.txt.gz"
+    ]
+   },
+   {
+    "control": "WRONG_STORED_BINDING",
+    "right": "payload.txt.gz",
+    "decoy": "other.txt.gz",
+    "status": "REFUSED__GOAL_HELD_BEFORE_THE_ACTION",
+    "refused": true,
+    "decoy_credited": false
+   },
+   {
+    "control": "STATE_DRIFT",
+    "status": "REFUSED__STATE_DRIFT",
+    "refused": true,
+    "drift": [
+     "payload.txt.gz"
+    ]
+   }
+  ],
+  "false_done_refused": 4,
+  "false_done_cases": 4,
+  "all_reject_named": 1,
+  "alternatives_witnessed": 2,
+  "alternatives": 2,
+  "ambiguous_refused": 1,
+  "wrong_memory_refused": 1,
+  "drift_refused": 1
+ },
+ "destroyers": {
+  "candidates_measured": 26,
+  "writers_found": 11,
+  "bytes_destroyed_reported_inert": 0,
+  "accepted_destroyers": 7,
+  "rows": [
+   {
+    "check": "shred --verbose",
+    "changed": [
+     "payload.txt"
+    ],
+    "accepted": true,
+    "status": "ACCEPTED_CHANGED",
+    "reason": "a content digest moved"
+   },
+   {
+    "check": "shred -v",
+    "changed": [
+     "payload.txt"
+    ],
+    "accepted": true,
+    "status": "ACCEPTED_CHANGED",
+    "reason": "a content digest moved"
+   },
+   {
+    "check": "split --verbose",
+    "changed": [
+     "xaa"
+    ],
+    "accepted": true,
+    "status": "ACCEPTED_CHANGED",
+    "reason": "a content digest moved"
+   },
+   {
+    "check": "stream -help",
+    "changed": [
+     "payload.txt"
+    ],
+    "accepted": true,
+    "status": "ACCEPTED_CHANGED",
+    "reason": "a content digest moved"
+   },
+   {
+    "check": "stream -verbose",
+    "changed": [
+     "payload.txt"
+    ],
+    "accepted": false,
+    "status": "REFUSED",
+    "reason": "a content digest moved"
+   },
+   {
+    "check": "stream -version",
+    "changed": [
+     "payload.txt"
+    ],
+    "accepted": false,
+    "status": "REFUSED",
+    "reason": "a content digest moved"
+   },
+   {
+    "check": "stream-im6 -help",
+    "changed": [
+     "payload.txt"
+    ],
+    "accepted": true,
+    "status": "ACCEPTED_CHANGED",
+    "reason": "a content digest moved"
+   },
+   {
+    "check": "stream-im6 -verbose",
+    "changed": [
+     "payload.txt"
+    ],
+    "accepted": false,
+    "status": "REFUSED",
+    "reason": "a content digest moved"
+   },
+   {
+    "check": "stream-im6 -version",
+    "changed": [
+     "payload.txt"
+    ],
+    "accepted": false,
+    "status": "REFUSED",
+    "reason": "a content digest moved"
+   },
+   {
+    "check": "wdctl --oneline",
+    "changed": [
+     "payload.txt"
+    ],
+    "accepted": true,
+    "status": "ACCEPTED_CHANGED",
+    "reason": "a content digest moved"
+   },
+   {
+    "check": "wdctl -O",
+    "changed": [
+     "payload.txt"
+    ],
+    "accepted": true,
+    "status": "ACCEPTED_CHANGED",
+    "reason": "a content digest moved"
+   }
+  ]
+ },
+ "transfer": {
+  "producers_tried": 3,
+  "producers_available": 3,
+  "witnessed": 3,
+  "bound_to_right": 3,
+  "rows": [
+   {
+    "producer": "bzip2",
+    "action_accepted": true,
+    "check_held": true,
+    "check_accepts_decoy": true,
+    "status": "WITNESSED",
+    "witnessed": true,
+    "bound": [
+     "payload.txt.bz2"
+    ],
+    "bound_to_right": true
+   },
+   {
+    "producer": "xz",
+    "action_accepted": true,
+    "check_held": true,
+    "check_accepts_decoy": true,
+    "status": "WITNESSED",
+    "witnessed": true,
+    "bound": [
+     "payload.txt.xz"
+    ],
+    "bound_to_right": true
+   },
+   {
+    "producer": "cp",
+    "action_accepted": true,
+    "check_held": true,
+    "check_accepts_decoy": true,
+    "status": "WITNESSED",
+    "witnessed": true,
+    "bound": [
+     "made.out"
+    ],
+    "bound_to_right": true
+   }
+  ]
+ },
+ "cost": {
+  "seconds": 0.5,
+  "model_calls": 0,
+  "parameters_stored": 0,
+  "network_calls_at_run_time": 0
+ },
+ "what_this_is_not": [
+  "not a repaired check: all eight probes still accept an untouched decoy",
+  "not a benchmark result: no OSWorld, SWE-bench Pro, FrontierSWE or Terminal-Bench task was run",
+  "not a claim that a goal naming only a kind can identify its object; a goal that names no object can still be witnessed on whichever object the action produced",
+  "not a blacklist: the destroyer set is found by running flags, not by naming programs in the mechanism",
+  "not independent verification: one producer, one machine, no separate verifier"
+ ],
+ "limits": [
+  "the fixture producers for zip and json are Python stdlib writes, not programs read from a page; the check programs are the machine's own",
+  "delta is over regular files only; a FIFO, a device or a symlink is not an object here",
+  "a check whose target is a directory is bound through the files inside it, not the directory entry itself",
+  "an action that changes only metadata (mode, mtime) changes no content digest and is correctly reported as INERT"
+ ]
+}

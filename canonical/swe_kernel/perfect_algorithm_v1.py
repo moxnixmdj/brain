@@ -491,6 +491,19 @@ def _plan_from_document(text: Any, actions: Sequence[Any], goal: str) -> dict[st
     offered.discard("")
     matched: list[dict[str, Any]] = []
     seen: list[str] = []
+    resolved_sessions = 0
+    questions: list[dict[str, Any]] = []
+    # A fetched document is ONE text. Its author may bind a name in one example and use it in a
+    # later one; `as_sessions` carries consecutive context, but any example that printed
+    # something in between breaks the chain. The answer is still in the document, so the
+    # question is the name the interpreter refused -- not a web fetch and not a model call.
+    pool = [{"guide": "<document>", "block_line": str(index), "_session": [statement]}
+            for index, session in enumerate(sessions)
+            for statement in session["_session"]]
+    try:
+        from canonical.runtime import guide_precondition_v1 as _gp
+    except Exception:  # noqa: BLE001 -- a missing mechanism must refuse, not crash the loop
+        _gp = None
     with _tempfile.TemporaryDirectory(prefix="document-room-") as where:
         room = pathlib.Path(where)
         for session in sessions:
@@ -500,7 +513,26 @@ def _plan_from_document(text: Any, actions: Sequence[Any], goal: str) -> dict[st
             # that is not importable is left alone rather than guessed, and the refusal is counted.
             head = session["_statement"].split("(")[0].strip().split(".")[0].strip()
             namespace = head if _importable(head) else None
-            got = _python_example_ok(session, room, module=namespace)
+
+            def _replay(s: dict[str, Any], ns: str | None = namespace) -> dict[str, Any]:
+                return _python_example_ok(s, room, module=ns)
+
+            got = _replay(session)
+            if not got.get("ok") and _gp is not None:
+                question = _gp.missing_name(" ".join(got.get("stderr") or []))
+                if question:
+                    answer = _gp.resolve(
+                        session, _gp.candidates(pool, question), question=question,
+                        replay=_replay, compare=compare,
+                        separate=lambda b, q=question, s=session: _gp.separates(
+                            b, q, s, replay=_replay, compare=compare))
+                    questions.append({"question": question, "status": answer["status"],
+                                      "candidates": answer["candidates"]})
+                    if answer["resolved"]:
+                        session = dict(session, _session=[answer["binding"],
+                                                          *session["_session"]])
+                        got = _replay(session)
+                        resolved_sessions += 1
             if not got.get("ok"):
                 continue
             verdict = compare(got["got"], session["expected"])
@@ -516,12 +548,15 @@ def _plan_from_document(text: Any, actions: Sequence[Any], goal: str) -> dict[st
         if seen:
             return {"status": "REFUSED__NOTHING_MATCHED_INSIDE_THE_PLAN_SPACE",
                     "gate": "IN_VOCABULARY", "seen_not_permitted": seen[:8],
-                    "sessions": len(sessions)}
+                    "sessions": len(sessions), "resolved_sessions": resolved_sessions,
+                    "questions": questions[:8]}
         return {"status": "REFUSED__NOTHING_REPRODUCED_THE_DOCUMENTS_OUTPUT",
-                "gate": "MATCHED", "sessions": len(sessions)}
+                "gate": "MATCHED", "sessions": len(sessions),
+                "resolved_sessions": resolved_sessions, "questions": questions[:8]}
     return {"status": "PASS__PLAN_FROM_A_DOCUMENT", "gate": "IN_VOCABULARY",
             "plan": [row["statement"] for row in matched],
             "matched": matched[:8], "sessions": len(sessions),
+            "resolved_sessions": resolved_sessions, "questions": questions[:8],
             "authority": "EXTERNAL_DOCUMENT_REPLAYED_AND_SELF_CHECKED",
             "why_this_plan": ("each step is a command the document printed, replayed in a scratch "
                               "room, whose output matched the document's own printed answer")}

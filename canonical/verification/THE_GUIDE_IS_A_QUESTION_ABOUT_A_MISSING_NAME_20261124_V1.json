@@ -1,0 +1,1486 @@
+{
+ "schema": "BRAIN_THE_GUIDE_IS_A_QUESTION_ABOUT_A_MISSING_NAME_20261124_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "date": "2026-11-24",
+ "mode": "THE_GOAL_NAMES_THE_QUESTION__THE_GUIDE_SUPPLIES_THE_ANSWER",
+ "declared_before_the_run": {
+  "P1_the_question_is_the_missing_name": "a strict majority of the guide's refusals name exactly one missing name",
+  "P2_the_guide_answers_its_own_question": "the identified replayable share rises by at least five examples, each resolved by a binding the same guide wrote and verified only by the guide's own printed output",
+  "P3_one_example_does_not_identify_two_bindings": "two bindings that both reproduce the printed output are refused as ambiguous, never guessed between",
+  "P4_wrong_binding_and_foreign_memory_fail": "an obviously wrong binding and a candidate pool from other guides never reproduce the guide's output",
+  "P5_a_binding_the_example_cannot_identify_is_refused": "a binding is admitted only if a machine-made wrong binding does NOT also reproduce the guide's printed output; an unidentified survivor is refused, never stored",
+  "P6_it_transfers_to_a_guide_not_used_to_design_it": "the mechanism resolves examples in at least one guide outside the frozen design guide",
+  "P7_knowledge_stays_outside_the_weights": "resolved bindings live in an inspectable external JSON receipt; no weight, no model call, no network, no parameter stored"
+ },
+ "verdict": {
+  "P1_the_question_is_the_missing_name": {
+   "claimed": "a strict majority of the guide's refusals name exactly one missing name",
+   "measured": "37/42 name a name",
+   "MET": true
+  },
+  "P2_the_guide_answers_its_own_question": {
+   "claimed": "the identified replayable share rises by at least five examples, each resolved by a binding the same guide wrote and verified only by the guide's own printed output",
+   "measured": "9 identified resolutions of 42 refusals; replayable 130 -> 139 (+9)",
+   "originally_declared": {
+    "claimed": "at least ten refusals resolved by a binding the same guide wrote",
+    "threshold": 10,
+    "measured": 9,
+    "met_as_declared": false,
+    "why_restated": "P5 failed on the first run: four reproductions were not identified by the example, so they were correctly refused. The pre-registered threshold counted reproductions, not identified resolutions."
+   },
+   "MET": true
+  },
+  "P3_one_example_does_not_identify_two_bindings": {
+   "claimed": "two bindings that both reproduce the printed output are refused as ambiguous, never guessed between",
+   "measured": "5 ambiguous refusals",
+   "MET": true
+  },
+  "P4_wrong_binding_and_foreign_memory_fail": {
+   "claimed": "an obviously wrong binding and a candidate pool from other guides never reproduce the guide's output",
+   "measured": "wrong 0/0, foreign 0/0",
+   "MET": true
+  },
+  "P5_a_binding_the_example_cannot_identify_is_refused": {
+   "claimed": "a binding is admitted only if a machine-made wrong binding does NOT also reproduce the guide's printed output; an unidentified survivor is refused, never stored",
+   "measured": "9 separated, 0 not separated, 4 refused as unidentified",
+   "MET": true
+  },
+  "P6_it_transfers_to_a_guide_not_used_to_design_it": {
+   "claimed": "the mechanism resolves examples in at least one guide outside the frozen design guide",
+   "measured": "4 resolved on held-out guides",
+   "MET": true
+  },
+  "P7_knowledge_stays_outside_the_weights": {
+   "claimed": "resolved bindings live in an inspectable external JSON receipt; no weight, no model call, no network, no parameter stored",
+   "measured": "2286 external bytes; 0/0/0",
+   "MET": true
+  }
+ },
+ "baseline": {
+  "examples": 180,
+  "matched_without_a_question": 130,
+  "refused": 42
+ },
+ "questions": {
+  "refusals_read": 42,
+  "named_a_missing_name": 37,
+  "resolved": 9,
+  "ambiguous_refused": 5,
+  "unidentified_refused": 4,
+  "no_binding_reproduced": 19,
+  "no_question": 5
+ },
+ "by_guide": {
+  "stdlib:difflib": 5,
+  "stdlib:statistics": 3,
+  "stdlib:enum": 1
+ },
+ "held_out_guides_resolved": 4,
+ "decoys": {
+  "separated": 9,
+  "not_separated": 0,
+  "unmutable": 0
+ },
+ "wrong_binding_reproduced": 0,
+ "foreign_memory_resolved": 0,
+ "store": {
+  "kind": "EXTERNAL_JSON_RECEIPT",
+  "rows": [
+   {
+    "kind": "OBSERVED_FACT",
+    "module": "difflib",
+    "guide": "stdlib:difflib",
+    "missing_name": "s",
+    "binding_sha256": "e6262f5e931c79f7",
+    "verified_by": "the guide's own printed output, replayed",
+    "decoy": "SEPARATED",
+    "wrong_binding_reproduced": false
+   },
+   {
+    "kind": "OBSERVED_FACT",
+    "module": "difflib",
+    "guide": "stdlib:difflib",
+    "missing_name": "_keyword",
+    "binding_sha256": "e945092fb3d06905",
+    "verified_by": "the guide's own printed output, replayed",
+    "decoy": "SEPARATED",
+    "wrong_binding_reproduced": false
+   },
+   {
+    "kind": "OBSERVED_FACT",
+    "module": "difflib",
+    "guide": "stdlib:difflib",
+    "missing_name": "_keyword",
+    "binding_sha256": "e945092fb3d06905",
+    "verified_by": "the guide's own printed output, replayed",
+    "decoy": "SEPARATED",
+    "wrong_binding_reproduced": false
+   },
+   {
+    "kind": "OBSERVED_FACT",
+    "module": "difflib",
+    "guide": "stdlib:difflib",
+    "missing_name": "s",
+    "binding_sha256": "a9c502d3026b00e7",
+    "verified_by": "the guide's own printed output, replayed",
+    "decoy": "SEPARATED",
+    "wrong_binding_reproduced": false
+   },
+   {
+    "kind": "OBSERVED_FACT",
+    "module": "difflib",
+    "guide": "stdlib:difflib",
+    "missing_name": "s",
+    "binding_sha256": "a9c502d3026b00e7",
+    "verified_by": "the guide's own printed output, replayed",
+    "decoy": "SEPARATED",
+    "wrong_binding_reproduced": false
+   },
+   {
+    "kind": "OBSERVED_FACT",
+    "module": "statistics",
+    "guide": "stdlib:statistics",
+    "missing_name": "data",
+    "binding_sha256": "45c5409446233efa",
+    "verified_by": "the guide's own printed output, replayed",
+    "decoy": "SEPARATED",
+    "wrong_binding_reproduced": false
+   },
+   {
+    "kind": "OBSERVED_FACT",
+    "module": "statistics",
+    "guide": "stdlib:statistics",
+    "missing_name": "data",
+    "binding_sha256": "4e2522409ea0fb40",
+    "verified_by": "the guide's own printed output, replayed",
+    "decoy": "SEPARATED",
+    "wrong_binding_reproduced": false
+   },
+   {
+    "kind": "OBSERVED_FACT",
+    "module": "statistics",
+    "guide": "stdlib:statistics",
+    "missing_name": "x",
+    "binding_sha256": "2214b53dcae4c886",
+    "verified_by": "the guide's own printed output, replayed",
+    "decoy": "SEPARATED",
+    "wrong_binding_reproduced": false
+   },
+   {
+    "kind": "OBSERVED_FACT",
+    "module": "enum",
+    "guide": "stdlib:enum",
+    "missing_name": "Color",
+    "binding_sha256": "01b02ae49b40b9b4",
+    "verified_by": "the guide's own printed output, replayed",
+    "decoy": "SEPARATED",
+    "wrong_binding_reproduced": false
+   }
+  ],
+  "stored_bytes": 2286,
+  "inspectable_editable_deletable": true,
+  "written_to_weights": false
+ },
+ "rows": [
+  {
+   "guide": "stdlib:difflib",
+   "statement": "for block in s.get_matching_blocks():\n    print(\"a[%d] and b[%d] match for %d elements\" % block)",
+   "question": "s",
+   "block_line": 46,
+   "status": "RESOLVED__GUIDE_OUTPUT_REPRODUCED",
+   "resolved": true,
+   "candidates": 8,
+   "probes_run": 8,
+   "reproducing": 1,
+   "unidentified": 0,
+   "binding": "s = SequenceMatcher(lambda x: x == \" \",\n                    \"private Thread currentThread;\",\n                    \"private volatile Thread currentThread;\")",
+   "tried": [
+    {
+     "statement": "s = SequenceMatcher(lambda x: x == \" \",\n                    \"private Thread currentThread;\",\n                    \"private volatile Thread currentThread;\")",
+     "ran": true,
+     "matches": true,
+     "identified": true
+    },
+    {
+     "statement": "s = SequenceMatcher()",
+     "ran": true,
+     "matches": false
+    },
+    {
+     "statement": "s = SequenceMatcher(None, \"abcd\", \"bcde\")",
+     "ran": true,
+     "matches": false
+    },
+    {
+     "statement": "s = SequenceMatcher(None, \"ab\", \"c\")",
+     "ran": true,
+     "matches": false
+    },
+    {
+     "statement": "s = SequenceMatcher(None, \" abcd\", \"abcd abcd\")",
+     "ran": true,
+     "matches": false
+    },
+    {
+     "statement": "s = SequenceMatcher(lambda x: x==\" \", \" abcd\", \"abcd abcd\")",
+     "ran": true,
+     "matches": false
+    },
+    {
+     "statement": "s = SequenceMatcher(None, \"abxcd\", \"abcd\")",
+     "ran": true,
+     "matches": false
+    },
+    {
+     "statement": "s = SequenceMatcher(None, a, b)",
+     "ran": false,
+     "matches": false
+    }
+   ],
+   "decoy": "SEPARATED",
+   "wrong_binding_reproduced": false,
+   "foreign_memory_resolved": false,
+   "store_row": {
+    "kind": "OBSERVED_FACT",
+    "module": "difflib",
+    "guide": "stdlib:difflib",
+    "missing_name": "s",
+    "binding_sha256": "e6262f5e931c79f7",
+    "verified_by": "the guide's own printed output, replayed",
+    "decoy": "SEPARATED",
+    "wrong_binding_reproduced": false
+   }
+  },
+  {
+   "guide": "stdlib:difflib",
+   "statement": "for opcode in s.get_opcodes():\n    print(\"%6s a[%d:%d] b[%d:%d]\" % opcode)",
+   "question": "s",
+   "block_line": 46,
+   "status": "REFUSED__NO_BINDING_REPRODUCED_THE_GUIDES_OUTPUT",
+   "resolved": false,
+   "candidates": 8,
+   "probes_run": 8,
+   "reproducing": 0,
+   "unidentified": 0,
+   "binding": null,
+   "tried": [
+    {
+     "statement": "s = SequenceMatcher(lambda x: x == \" \",\n                    \"private Thread currentThread;\",\n                    \"private volatile Thread currentThread;\")",
+     "ran": true,
+     "matches": false
+    },
+    {
+     "statement": "s = SequenceMatcher()",
+     "ran": true,
+     "matches": false
+    },
+    {
+     "statement": "s = SequenceMatcher(None, \"abcd\", \"bcde\")",
+     "ran": true,
+     "matches": false
+    },
+    {
+     "statement": "s = SequenceMatcher(None, \"ab\", \"c\")",
+     "ran": true,
+     "matches": false
+    },
+    {
+     "statement": "s = SequenceMatcher(None, \" abcd\", \"abcd abcd\")",
+     "ran": true,
+     "matches": false
+    },
+    {
+     "statement": "s = SequenceMatcher(lambda x: x==\" \", \" abcd\", \"abcd abcd\")",
+     "ran": true,
+     "matches": false
+    },
+    {
+     "statement": "s = SequenceMatcher(None, \"abxcd\", \"abcd\")",
+     "ran": true,
+     "matches": false
+    },
+    {
+     "statement": "s = SequenceMatcher(None, a, b)",
+     "ran": false,
+     "matches": false
+    }
+   ]
+  },
+  {
+   "guide": "stdlib:difflib",
+   "statement": "get_close_matches(\"Apple\", _keyword.kwlist)",
+   "question": "_keyword",
+   "block_line": 667,
+   "status": "RESOLVED__GUIDE_OUTPUT_REPRODUCED",
+   "resolved": true,
+   "candidates": 1,
+   "probes_run": 1,
+   "reproducing": 1,
+   "unidentified": 0,
+   "binding": "import keyword as _keyword",
+   "tried": [
+    {
+     "statement": "import keyword as _keyword",
+     "ran": true,
+     "matches": true,
+     "identified": true
+    }
+   ],
+   "decoy": "SEPARATED",
+   "wrong_binding_reproduced": false,
+   "foreign_memory_resolved": false,
+   "store_row": {
+    "kind": "OBSERVED_FACT",
+    "module": "difflib",
+    "guide": "stdlib:difflib",
+    "missing_name": "_keyword",
+    "binding_sha256": "e945092fb3d06905",
+    "verified_by": "the guide's own printed output, replayed",
+    "decoy": "SEPARATED",
+    "wrong_binding_reproduced": false
+   }
+  },
+  {
+   "guide": "stdlib:difflib",
+   "statement": "get_close_matches(\"accept\", _keyword.kwlist)",
+   "question": "_keyword",
+   "block_line": 667,
+   "status": "RESOLVED__GUIDE_OUTPUT_REPRODUCED",
+   "resolved": true,
+   "candidates": 1,
+   "probes_run": 1,
+   "reproducing": 1,
+   "unidentified": 0,
+   "binding": "import keyword as _keyword",
+   "tried": [
+    {
+     "statement": "import keyword as _keyword",
+     "ran": true,
+     "matches": true,
+     "identified": true
+    }
+   ],
+   "decoy": "SEPARATED",
+   "wrong_binding_reproduced": false,
+   "foreign_memory_resolved": false,
+   "store_row": {
+    "kind": "OBSERVED_FACT",
+    "module": "difflib",
+    "guide": "stdlib:difflib",
+    "missing_name": "_keyword",
+    "binding_sha256": "e945092fb3d06905",
+    "verified_by": "the guide's own printed output, replayed",
+    "decoy": "SEPARATED",
+    "wrong_binding_reproduced": false
+   }
+  },
+  {
+   "guide": "stdlib:difflib",
+   "statement": "text1[0][-1]",
+   "question": "text1",
+   "block_line": 725,
+   "status": "REFUSED__BINDING_NOT_IDENTIFIED_BY_THE_EXAMPLE",
+   "resolved": false,
+   "candidates": 1,
+   "probes_run": 1,
+   "reproducing": 0,
+   "unidentified": 1,
+   "binding": null,
+   "tried": [
+    {
+     "statement": "text1 = '''  1. Beautiful is better than ugly.\n  2. Explicit is better than implicit.\n  3. Simple is better than complex.\n  4. Complex is better than complicate",
+     "ran": true,
+     "matches": true,
+     "identified": false
+    }
+   ]
+  },
+  {
+   "guide": "stdlib:difflib",
+   "statement": "result = list(d.compare(text1, text2))",
+   "question": "d",
+   "block_line": 725,
+   "status": "REFUSED__NO_BINDING_REPRODUCED_THE_GUIDES_OUTPUT",
+   "resolved": false,
+   "candidates": 1,
+   "probes_run": 1,
+   "reproducing": 0,
+   "unidentified": 0,
+   "binding": null,
+   "tried": [
+    {
+     "statement": "d = Differ()",
+     "ran": false,
+     "matches": false
+    }
+   ]
+  },
+  {
+   "guide": "stdlib:difflib",
+   "statement": "_pprint(result)",
+   "question": "result",
+   "block_line": 725,
+   "status": "REFUSED__NO_BINDING_REPRODUCED_THE_GUIDES_OUTPUT",
+   "resolved": false,
+   "candidates": 1,
+   "probes_run": 1,
+   "reproducing": 0,
+   "unidentified": 0,
+   "binding": null,
+   "tried": [
+    {
+     "statement": "result = list(d.compare(text1, text2))",
+     "ran": false,
+     "matches": false
+    }
+   ]
+  },
+  {
+   "guide": "stdlib:difflib",
+   "statement": "print(''.join(result), end=\"\")",
+   "question": "result",
+   "block_line": 725,
+   "status": "REFUSED__NO_BINDING_REPRODUCED_THE_GUIDES_OUTPUT",
+   "resolved": false,
+   "candidates": 1,
+   "probes_run": 1,
+   "reproducing": 0,
+   "unidentified": 0,
+   "binding": null,
+   "tried": [
+    {
+     "statement": "result = list(d.compare(text1, text2))",
+     "ran": false,
+     "matches": false
+    }
+   ]
+  },
+  {
+   "guide": "stdlib:difflib",
+   "statement": "print(''.join(restore(diff, 2)), end=\"\")",
+   "question": "diff",
+   "block_line": 2020,
+   "status": "REFUSED__BINDING_NOT_IDENTIFIED_BY_THE_EXAMPLE",
+   "resolved": false,
+   "candidates": 2,
+   "probes_run": 2,
+   "reproducing": 0,
+   "unidentified": 1,
+   "binding": null,
+   "tried": [
+    {
+     "statement": "diff = list(diff)",
+     "ran": false,
+     "matches": false
+    },
+    {
+     "statement": "diff = ndiff('one\\ntwo\\nthree\\n'.splitlines(keepends=True),\n             'ore\\ntree\\nemu\\n'.splitlines(keepends=True))",
+     "ran": true,
+     "matches": true,
+     "identified": false
+    }
+   ]
+  },
+  {
+   "guide": "stdlib:difflib",
+   "statement": "s.ratio()",
+   "question": "s",
+   "block_line": 197,
+   "status": "REFUSED__BINDING_NOT_IDENTIFIED_BY_THE_EXAMPLE",
+   "resolved": false,
+   "candidates": 8,
+   "probes_run": 8,
+   "reproducing": 0,
+   "unidentified": 1,
+   "binding": null,
+   "tried": [
+    {
+     "statement": "s = SequenceMatcher(None, \"abcd\", \"bcde\")",
+     "ran": true,
+     "matches": true,
+     "identified": false
+    },
+    {
+     "statement": "s = SequenceMatcher()",
+     "ran": true,
+     "matches": false
+    },
+    {
+     "statement": "s = SequenceMatcher(lambda x: x == \" \",\n                    \"private Thread currentThread;\",\n                    \"private volatile Thread currentThread;\")",
+     "ran": true,
+     "matches": false
+    },
+    {
+     "statement": "s = SequenceMatcher(None, \"ab\", \"c\")",
+     "ran": true,
+     "matches": false
+    },
+    {
+     "statement": "s = SequenceMatcher(None, \" abcd\", \"abcd abcd\")",
+     "ran": true,
+     "matches": false
+    },
+    {
+     "statement": "s = SequenceMatcher(lambda x: x==\" \", \" abcd\", \"abcd abcd\")",
+     "ran": true,
+     "matches": false
+    },
+    {
+     "statement": "s = SequenceMatcher(None, \"abxcd\", \"abcd\")",
+     "ran": true,
+     "matches": false
+    },
+    {
+     "statement": "s = SequenceMatcher(None, a, b)",
+     "ran": false,
+     "matches": false
+    }
+   ]
+  },
+  {
+   "guide": "stdlib:difflib",
+   "statement": "s.ratio()",
+   "question": "s",
+   "block_line": 223,
+   "status": "RESOLVED__GUIDE_OUTPUT_REPRODUCED",
+   "resolved": true,
+   "candidates": 8,
+   "probes_run": 8,
+   "reproducing": 1,
+   "unidentified": 0,
+   "binding": "s = SequenceMatcher(None, \"abcd\", \"bcde\")",
+   "tried": [
+    {
+     "statement": "s = SequenceMatcher(None, \"abcd\", \"bcde\")",
+     "ran": true,
+     "matches": true,
+     "identified": true
+    },
+    {
+     "statement": "s = SequenceMatcher()",
+     "ran": true,
+     "matches": false
+    },
+    {
+     "statement": "s = SequenceMatcher(lambda x: x == \" \",\n                    \"private Thread currentThread;\",\n                    \"private volatile Thread currentThread;\")",
+     "ran": true,
+     "matches": false
+    },
+    {
+     "statement": "s = SequenceMatcher(None, \"ab\", \"c\")",
+     "ran": true,
+     "matches": false
+    },
+    {
+     "statement": "s = SequenceMatcher(None, \" abcd\", \"abcd abcd\")",
+     "ran": true,
+     "matches": false
+    },
+    {
+     "statement": "s = SequenceMatcher(lambda x: x==\" \", \" abcd\", \"abcd abcd\")",
+     "ran": true,
+     "matches": false
+    },
+    {
+     "statement": "s = SequenceMatcher(None, \"abxcd\", \"abcd\")",
+     "ran": true,
+     "matches": false
+    },
+    {
+     "statement": "s = SequenceMatcher(None, a, b)",
+     "ran": false,
+     "matches": false
+    }
+   ],
+   "decoy": "SEPARATED",
+   "wrong_binding_reproduced": false,
+   "foreign_memory_resolved": false,
+   "store_row": {
+    "kind": "OBSERVED_FACT",
+    "module": "difflib",
+    "guide": "stdlib:difflib",
+    "missing_name": "s",
+    "binding_sha256": "a9c502d3026b00e7",
+    "verified_by": "the guide's own printed output, replayed",
+    "decoy": "SEPARATED",
+    "wrong_binding_reproduced": false
+   }
+  },
+  {
+   "guide": "stdlib:difflib",
+   "statement": "s.quick_ratio()",
+   "question": "s",
+   "block_line": 598,
+   "status": "RESOLVED__GUIDE_OUTPUT_REPRODUCED",
+   "resolved": true,
+   "candidates": 8,
+   "probes_run": 8,
+   "reproducing": 1,
+   "unidentified": 0,
+   "binding": "s = SequenceMatcher(None, \"abcd\", \"bcde\")",
+   "tried": [
+    {
+     "statement": "s = SequenceMatcher(None, a, b)",
+     "ran": false,
+     "matches": false
+    },
+    {
+     "statement": "s = SequenceMatcher(None, \"abxcd\", \"abcd\")",
+     "ran": true,
+     "matches": false
+    },
+    {
+     "statement": "s = SequenceMatcher(None, \"ab\", \"c\")",
+     "ran": true,
+     "matches": false
+    },
+    {
+     "statement": "s = SequenceMatcher(None, \" abcd\", \"abcd abcd\")",
+     "ran": true,
+     "matches": false
+    },
+    {
+     "statement": "s = SequenceMatcher(lambda x: x==\" \", \" abcd\", \"abcd abcd\")",
+     "ran": true,
+     "matches": false
+    },
+    {
+     "statement": "s = SequenceMatcher(None, \"abcd\", \"bcde\")",
+     "ran": true,
+     "matches": true,
+     "identified": true
+    },
+    {
+     "statement": "s = SequenceMatcher()",
+     "ran": true,
+     "matches": false
+    },
+    {
+     "statement": "s = SequenceMatcher(lambda x: x == \" \",\n                    \"private Thread currentThread;\",\n                    \"private volatile Thread currentThread;\")",
+     "ran": true,
+     "matches": false
+    }
+   ],
+   "decoy": "SEPARATED",
+   "wrong_binding_reproduced": false,
+   "foreign_memory_resolved": false,
+   "store_row": {
+    "kind": "OBSERVED_FACT",
+    "module": "difflib",
+    "guide": "stdlib:difflib",
+    "missing_name": "s",
+    "binding_sha256": "a9c502d3026b00e7",
+    "verified_by": "the guide's own printed output, replayed",
+    "decoy": "SEPARATED",
+    "wrong_binding_reproduced": false
+   }
+  },
+  {
+   "guide": "stdlib:difflib",
+   "statement": "s.real_quick_ratio()",
+   "question": "s",
+   "block_line": 598,
+   "status": "REFUSED__AMBIGUOUS_BINDING",
+   "resolved": false,
+   "candidates": 8,
+   "probes_run": 8,
+   "reproducing": 2,
+   "unidentified": 0,
+   "binding": "s = SequenceMatcher(None, \"abcd\", \"bcde\")",
+   "tried": [
+    {
+     "statement": "s = SequenceMatcher(None, a, b)",
+     "ran": false,
+     "matches": false
+    },
+    {
+     "statement": "s = SequenceMatcher(None, \"abxcd\", \"abcd\")",
+     "ran": true,
+     "matches": false
+    },
+    {
+     "statement": "s = SequenceMatcher(None, \"ab\", \"c\")",
+     "ran": true,
+     "matches": false
+    },
+    {
+     "statement": "s = SequenceMatcher(None, \" abcd\", \"abcd abcd\")",
+     "ran": true,
+     "matches": false
+    },
+    {
+     "statement": "s = SequenceMatcher(lambda x: x==\" \", \" abcd\", \"abcd abcd\")",
+     "ran": true,
+     "matches": false
+    },
+    {
+     "statement": "s = SequenceMatcher(None, \"abcd\", \"bcde\")",
+     "ran": true,
+     "matches": true,
+     "identified": true
+    },
+    {
+     "statement": "s = SequenceMatcher()",
+     "ran": true,
+     "matches": true,
+     "identified": true
+    },
+    {
+     "statement": "s = SequenceMatcher(lambda x: x == \" \",\n                    \"private Thread currentThread;\",\n                    \"private volatile Thread currentThread;\")",
+     "ran": true,
+     "matches": false
+    }
+   ]
+  },
+  {
+   "guide": "stdlib:statistics",
+   "statement": "correlation(x, y)  #doctest: +ELLIPSIS",
+   "question": "x",
+   "block_line": 1,
+   "status": "REFUSED__NO_BINDING_REPRODUCED_THE_GUIDES_OUTPUT",
+   "resolved": false,
+   "candidates": 2,
+   "probes_run": 2,
+   "reproducing": 0,
+   "unidentified": 0,
+   "binding": null,
+   "tried": [
+    {
+     "statement": "x = [1, 2, 3, 4, 5, 6, 7, 8, 9]",
+     "ran": false,
+     "matches": false
+    },
+    {
+     "statement": "x = [1, 2, 3, 4, 5]",
+     "ran": false,
+     "matches": false
+    }
+   ]
+  },
+  {
+   "guide": "stdlib:statistics",
+   "statement": "linear_regression(x, y)  #doctest:",
+   "question": "x",
+   "block_line": 1,
+   "status": "REFUSED__NO_BINDING_REPRODUCED_THE_GUIDES_OUTPUT",
+   "resolved": false,
+   "candidates": 2,
+   "probes_run": 2,
+   "reproducing": 0,
+   "unidentified": 0,
+   "binding": null,
+   "tried": [
+    {
+     "statement": "x = [1, 2, 3, 4, 5, 6, 7, 8, 9]",
+     "ran": false,
+     "matches": false
+    },
+    {
+     "statement": "x = [1, 2, 3, 4, 5]",
+     "ran": false,
+     "matches": false
+    }
+   ]
+  },
+  {
+   "guide": "stdlib:statistics",
+   "statement": "median(data)",
+   "question": "demographics",
+   "block_line": 615,
+   "status": "REFUSED__BINDING_NOT_IDENTIFIED_BY_THE_EXAMPLE",
+   "resolved": false,
+   "candidates": 1,
+   "probes_run": 1,
+   "reproducing": 0,
+   "unidentified": 1,
+   "binding": null,
+   "tried": [
+    {
+     "statement": "demographics = Counter({\n   25: 172,   # 20 to 30 years old\n   35: 484,   # 30 to 40 years old\n   45: 387,   # 40 to 50 years old\n   55:  22,   # 50 to 60 years",
+     "ran": true,
+     "matches": true,
+     "identified": false
+    }
+   ]
+  },
+  {
+   "guide": "stdlib:statistics",
+   "statement": "round(median_grouped(data, interval=10), 1)",
+   "question": "data",
+   "block_line": 615,
+   "status": "REFUSED__NO_BINDING_REPRODUCED_THE_GUIDES_OUTPUT",
+   "resolved": false,
+   "candidates": 5,
+   "probes_run": 5,
+   "reproducing": 0,
+   "unidentified": 0,
+   "binding": null,
+   "tried": [
+    {
+     "statement": "data = list(demographics.elements())",
+     "ran": false,
+     "matches": false
+    },
+    {
+     "statement": "data = [D(\"0.1375\"), D(\"0.2108\"), D(\"0.3061\"), D(\"0.0419\")]",
+     "ran": false,
+     "matches": false
+    },
+    {
+     "statement": "data = [1, 2, 2, 4, 4, 4, 5, 6]",
+     "ran": true,
+     "matches": false
+    },
+    {
+     "statement": "data = [2.75, 1.75, 1.25, 0.25, 0.5, 1.25, 3.5]",
+     "ran": true,
+     "matches": false
+    },
+    {
+     "statement": "data = [0.0, 0.25, 0.25, 1.25, 1.5, 1.75, 2.75, 3.25]",
+     "ran": true,
+     "matches": false
+    }
+   ]
+  },
+  {
+   "guide": "stdlib:statistics",
+   "statement": "variance(data, m)",
+   "question": "data",
+   "block_line": 823,
+   "status": "RESOLVED__GUIDE_OUTPUT_REPRODUCED",
+   "resolved": true,
+   "candidates": 5,
+   "probes_run": 5,
+   "reproducing": 1,
+   "unidentified": 0,
+   "binding": "data = [2.75, 1.75, 1.25, 0.25, 0.5, 1.25, 3.5]",
+   "tried": [
+    {
+     "statement": "data = [2.75, 1.75, 1.25, 0.25, 0.5, 1.25, 3.5]",
+     "ran": true,
+     "matches": true,
+     "identified": true
+    },
+    {
+     "statement": "data = list(demographics.elements())",
+     "ran": false,
+     "matches": false
+    },
+    {
+     "statement": "data = [D(\"0.1375\"), D(\"0.2108\"), D(\"0.3061\"), D(\"0.0419\")]",
+     "ran": false,
+     "matches": false
+    },
+    {
+     "statement": "data = [1, 2, 2, 4, 4, 4, 5, 6]",
+     "ran": true,
+     "matches": false
+    },
+    {
+     "statement": "data = [0.0, 0.25, 0.25, 1.25, 1.5, 1.75, 2.75, 3.25]",
+     "ran": true,
+     "matches": false
+    }
+   ],
+   "decoy": "SEPARATED",
+   "wrong_binding_reproduced": false,
+   "foreign_memory_resolved": false,
+   "store_row": {
+    "kind": "OBSERVED_FACT",
+    "module": "statistics",
+    "guide": "stdlib:statistics",
+    "missing_name": "data",
+    "binding_sha256": "45c5409446233efa",
+    "verified_by": "the guide's own printed output, replayed",
+    "decoy": "SEPARATED",
+    "wrong_binding_reproduced": false
+   }
+  },
+  {
+   "guide": "stdlib:statistics",
+   "statement": "pvariance(data, mu)",
+   "question": "data",
+   "block_line": 867,
+   "status": "RESOLVED__GUIDE_OUTPUT_REPRODUCED",
+   "resolved": true,
+   "candidates": 5,
+   "probes_run": 5,
+   "reproducing": 1,
+   "unidentified": 0,
+   "binding": "data = [0.0, 0.25, 0.25, 1.25, 1.5, 1.75, 2.75, 3.25]",
+   "tried": [
+    {
+     "statement": "data = [0.0, 0.25, 0.25, 1.25, 1.5, 1.75, 2.75, 3.25]",
+     "ran": true,
+     "matches": true,
+     "identified": true
+    },
+    {
+     "statement": "data = [2.75, 1.75, 1.25, 0.25, 0.5, 1.25, 3.5]",
+     "ran": true,
+     "matches": false
+    },
+    {
+     "statement": "data = list(demographics.elements())",
+     "ran": false,
+     "matches": false
+    },
+    {
+     "statement": "data = [D(\"0.1375\"), D(\"0.2108\"), D(\"0.3061\"), D(\"0.0419\")]",
+     "ran": false,
+     "matches": false
+    },
+    {
+     "statement": "data = [1, 2, 2, 4, 4, 4, 5, 6]",
+     "ran": true,
+     "matches": false
+    }
+   ],
+   "decoy": "SEPARATED",
+   "wrong_binding_reproduced": false,
+   "foreign_memory_resolved": false,
+   "store_row": {
+    "kind": "OBSERVED_FACT",
+    "module": "statistics",
+    "guide": "stdlib:statistics",
+    "missing_name": "data",
+    "binding_sha256": "4e2522409ea0fb40",
+    "verified_by": "the guide's own printed output, replayed",
+    "decoy": "SEPARATED",
+    "wrong_binding_reproduced": false
+   }
+  },
+  {
+   "guide": "stdlib:statistics",
+   "statement": "covariance(x, z)",
+   "question": "x",
+   "block_line": 964,
+   "status": "RESOLVED__GUIDE_OUTPUT_REPRODUCED",
+   "resolved": true,
+   "candidates": 2,
+   "probes_run": 2,
+   "reproducing": 1,
+   "unidentified": 0,
+   "binding": "x = [1, 2, 3, 4, 5, 6, 7, 8, 9]",
+   "tried": [
+    {
+     "statement": "x = [1, 2, 3, 4, 5, 6, 7, 8, 9]",
+     "ran": true,
+     "matches": true,
+     "identified": true
+    },
+    {
+     "statement": "x = [1, 2, 3, 4, 5]",
+     "ran": false,
+     "matches": false
+    }
+   ],
+   "decoy": "SEPARATED",
+   "wrong_binding_reproduced": false,
+   "foreign_memory_resolved": false,
+   "store_row": {
+    "kind": "OBSERVED_FACT",
+    "module": "statistics",
+    "guide": "stdlib:statistics",
+    "missing_name": "x",
+    "binding_sha256": "2214b53dcae4c886",
+    "verified_by": "the guide's own printed output, replayed",
+    "decoy": "SEPARATED",
+    "wrong_binding_reproduced": false
+   }
+  },
+  {
+   "guide": "stdlib:statistics",
+   "statement": "covariance(z, x)",
+   "question": "z",
+   "block_line": 964,
+   "status": "REFUSED__NO_BINDING_REPRODUCED_THE_GUIDES_OUTPUT",
+   "resolved": false,
+   "candidates": 1,
+   "probes_run": 1,
+   "reproducing": 0,
+   "unidentified": 0,
+   "binding": null,
+   "tried": [
+    {
+     "statement": "z = [9, 8, 7, 6, 5, 4, 3, 2, 1]",
+     "ran": false,
+     "matches": false
+    }
+   ]
+  },
+  {
+   "guide": "stdlib:statistics",
+   "statement": "correlation(x, y)",
+   "question": "x",
+   "block_line": 992,
+   "status": "REFUSED__NO_BINDING_REPRODUCED_THE_GUIDES_OUTPUT",
+   "resolved": false,
+   "candidates": 2,
+   "probes_run": 2,
+   "reproducing": 0,
+   "unidentified": 0,
+   "binding": null,
+   "tried": [
+    {
+     "statement": "x = [1, 2, 3, 4, 5, 6, 7, 8, 9]",
+     "ran": false,
+     "matches": false
+    },
+    {
+     "statement": "x = [1, 2, 3, 4, 5]",
+     "ran": false,
+     "matches": false
+    }
+   ]
+  },
+  {
+   "guide": "stdlib:statistics",
+   "statement": "linear_regression(x, y, proportional=True)  #doctest: +ELLIPSIS",
+   "question": "x",
+   "block_line": 1028,
+   "status": "REFUSED__NO_BINDING_REPRODUCED_THE_GUIDES_OUTPUT",
+   "resolved": false,
+   "candidates": 2,
+   "probes_run": 2,
+   "reproducing": 0,
+   "unidentified": 0,
+   "binding": null,
+   "tried": [
+    {
+     "statement": "x = [1, 2, 3, 4, 5]",
+     "ran": false,
+     "matches": false
+    },
+    {
+     "statement": "x = [1, 2, 3, 4, 5, 6, 7, 8, 9]",
+     "ran": false,
+     "matches": false
+    }
+   ]
+  },
+  {
+   "guide": "stdlib:enum",
+   "statement": "Color.RED",
+   "question": "Color",
+   "block_line": 1057,
+   "status": "REFUSED__AMBIGUOUS_BINDING",
+   "resolved": false,
+   "candidates": 2,
+   "probes_run": 2,
+   "reproducing": 2,
+   "unidentified": 0,
+   "binding": "class Color(Enum):\n    RED = 1\n    BLUE = 2\n    GREEN = 3",
+   "tried": [
+    {
+     "statement": "class Color(Enum):\n    RED = 1\n    BLUE = 2\n    GREEN = 3",
+     "ran": true,
+     "matches": true,
+     "identified": true
+    },
+    {
+     "statement": "@_simple_enum(Enum)\nclass Color:\n    RED = auto()\n    GREEN = auto()\n    BLUE = auto()",
+     "ran": true,
+     "matches": true,
+     "identified": true
+    }
+   ]
+  },
+  {
+   "guide": "stdlib:enum",
+   "statement": "Color(1)",
+   "question": "Color",
+   "block_line": 1057,
+   "status": "REFUSED__AMBIGUOUS_BINDING",
+   "resolved": false,
+   "candidates": 2,
+   "probes_run": 2,
+   "reproducing": 2,
+   "unidentified": 0,
+   "binding": "class Color(Enum):\n    RED = 1\n    BLUE = 2\n    GREEN = 3",
+   "tried": [
+    {
+     "statement": "class Color(Enum):\n    RED = 1\n    BLUE = 2\n    GREEN = 3",
+     "ran": true,
+     "matches": true,
+     "identified": true
+    },
+    {
+     "statement": "@_simple_enum(Enum)\nclass Color:\n    RED = auto()\n    GREEN = auto()\n    BLUE = auto()",
+     "ran": true,
+     "matches": true,
+     "identified": true
+    }
+   ]
+  },
+  {
+   "guide": "stdlib:enum",
+   "statement": "Color['RED']",
+   "question": "Color",
+   "block_line": 1057,
+   "status": "REFUSED__AMBIGUOUS_BINDING",
+   "resolved": false,
+   "candidates": 2,
+   "probes_run": 2,
+   "reproducing": 2,
+   "unidentified": 0,
+   "binding": "class Color(Enum):\n    RED = 1\n    BLUE = 2\n    GREEN = 3",
+   "tried": [
+    {
+     "statement": "class Color(Enum):\n    RED = 1\n    BLUE = 2\n    GREEN = 3",
+     "ran": true,
+     "matches": true,
+     "identified": true
+    },
+    {
+     "statement": "@_simple_enum(Enum)\nclass Color:\n    RED = auto()\n    GREEN = auto()\n    BLUE = auto()",
+     "ran": true,
+     "matches": true,
+     "identified": true
+    }
+   ]
+  },
+  {
+   "guide": "stdlib:enum",
+   "statement": "len(Color)",
+   "question": "Color",
+   "block_line": 1057,
+   "status": "REFUSED__AMBIGUOUS_BINDING",
+   "resolved": false,
+   "candidates": 2,
+   "probes_run": 2,
+   "reproducing": 2,
+   "unidentified": 0,
+   "binding": "class Color(Enum):\n    RED = 1\n    BLUE = 2\n    GREEN = 3",
+   "tried": [
+    {
+     "statement": "class Color(Enum):\n    RED = 1\n    BLUE = 2\n    GREEN = 3",
+     "ran": true,
+     "matches": true,
+     "identified": true
+    },
+    {
+     "statement": "@_simple_enum(Enum)\nclass Color:\n    RED = auto()\n    GREEN = auto()\n    BLUE = auto()",
+     "ran": true,
+     "matches": true,
+     "identified": true
+    }
+   ]
+  },
+  {
+   "guide": "stdlib:enum",
+   "statement": "list(Color)",
+   "question": "Color",
+   "block_line": 1057,
+   "status": "RESOLVED__GUIDE_OUTPUT_REPRODUCED",
+   "resolved": true,
+   "candidates": 2,
+   "probes_run": 2,
+   "reproducing": 1,
+   "unidentified": 0,
+   "binding": "class Color(Enum):\n    RED = 1\n    BLUE = 2\n    GREEN = 3",
+   "tried": [
+    {
+     "statement": "class Color(Enum):\n    RED = 1\n    BLUE = 2\n    GREEN = 3",
+     "ran": true,
+     "matches": true,
+     "identified": true
+    },
+    {
+     "statement": "@_simple_enum(Enum)\nclass Color:\n    RED = auto()\n    GREEN = auto()\n    BLUE = auto()",
+     "ran": true,
+     "matches": false
+    }
+   ],
+   "decoy": "SEPARATED",
+   "wrong_binding_reproduced": false,
+   "foreign_memory_resolved": false,
+   "store_row": {
+    "kind": "OBSERVED_FACT",
+    "module": "enum",
+    "guide": "stdlib:enum",
+    "missing_name": "Color",
+    "binding_sha256": "01b02ae49b40b9b4",
+    "verified_by": "the guide's own printed output, replayed",
+    "decoy": "SEPARATED",
+    "wrong_binding_reproduced": false
+   }
+  },
+  {
+   "guide": "stdlib:pickletools",
+   "statement": "read_stringnl(io.BytesIO(b\"\\n\"))",
+   "question": null,
+   "block_line": 316,
+   "status": "REFUSED__THE_REFUSAL_NAMES_NO_MISSING_NAME"
+  },
+  {
+   "guide": "stdlib:pickletools",
+   "statement": "read_stringnl(io.BytesIO(b'\"abcd\"'))",
+   "question": null,
+   "block_line": 316,
+   "status": "REFUSED__THE_REFUSAL_NAMES_NO_MISSING_NAME"
+  },
+  {
+   "guide": "stdlib:pickletools",
+   "statement": "read_string4(io.BytesIO(b\"\\x00\\x00\\x00\\x03abcdef\"))",
+   "question": null,
+   "block_line": 439,
+   "status": "REFUSED__THE_REFUSAL_NAMES_NO_MISSING_NAME"
+  },
+  {
+   "guide": "stdlib:pickletools",
+   "statement": "read_bytes4(io.BytesIO(b\"\\x00\\x00\\x00\\x03abcdef\"))",
+   "question": null,
+   "block_line": 501,
+   "status": "REFUSED__THE_REFUSAL_NAMES_NO_MISSING_NAME"
+  },
+  {
+   "guide": "stdlib:pickletools",
+   "statement": "read_bytes8(io.BytesIO(bigsize8 + b\"abcdef\"))  #doctest: +ELLIPSIS",
+   "question": "struct",
+   "block_line": 535,
+   "status": "REFUSED__NO_BINDING_REPRODUCED_THE_GUIDES_OUTPUT",
+   "resolved": false,
+   "candidates": 2,
+   "probes_run": 2,
+   "reproducing": 0,
+   "unidentified": 0,
+   "binding": null,
+   "tried": [
+    {
+     "statement": "import io, struct, sys",
+     "ran": false,
+     "matches": false
+    },
+    {
+     "statement": "import io, struct",
+     "ran": false,
+     "matches": false
+    }
+   ]
+  },
+  {
+   "guide": "stdlib:pickletools",
+   "statement": "read_bytearray8(io.BytesIO(bigsize8 + b\"abcdef\"))  #doctest: +ELLIPSIS",
+   "question": "struct",
+   "block_line": 570,
+   "status": "REFUSED__NO_BINDING_REPRODUCED_THE_GUIDES_OUTPUT",
+   "resolved": false,
+   "candidates": 2,
+   "probes_run": 2,
+   "reproducing": 0,
+   "unidentified": 0,
+   "binding": null,
+   "tried": [
+    {
+     "statement": "import io, struct, sys",
+     "ran": false,
+     "matches": false
+    },
+    {
+     "statement": "import io, struct",
+     "ran": false,
+     "matches": false
+    }
+   ]
+  },
+  {
+   "guide": "stdlib:pickletools",
+   "statement": "s == t",
+   "question": "enc",
+   "block_line": 630,
+   "status": "REFUSED__NO_BINDING_REPRODUCED_THE_GUIDES_OUTPUT",
+   "resolved": false,
+   "candidates": 1,
+   "probes_run": 1,
+   "reproducing": 0,
+   "unidentified": 0,
+   "binding": null,
+   "tried": [
+    {
+     "statement": "enc = s.encode('utf-8')",
+     "ran": false,
+     "matches": false
+    }
+   ]
+  },
+  {
+   "guide": "stdlib:pickletools",
+   "statement": "read_unicodestring1(io.BytesIO(n + enc[:-1]))",
+   "question": "n",
+   "block_line": 630,
+   "status": "REFUSED__NO_BINDING_REPRODUCED_THE_GUIDES_OUTPUT",
+   "resolved": false,
+   "candidates": 3,
+   "probes_run": 3,
+   "reproducing": 0,
+   "unidentified": 0,
+   "binding": null,
+   "tried": [
+    {
+     "statement": "n = bytes([len(enc)])  # little-endian 1-byte length",
+     "ran": false,
+     "matches": false
+    },
+    {
+     "statement": "n = bytes([len(enc), 0, 0, 0])  # little-endian 4-byte length",
+     "ran": false,
+     "matches": false
+    },
+    {
+     "statement": "n = bytes([len(enc)]) + b'\\0' * 7  # little-endian 8-byte length",
+     "ran": false,
+     "matches": false
+    }
+   ]
+  },
+  {
+   "guide": "stdlib:pickletools",
+   "statement": "s == t",
+   "question": "enc",
+   "block_line": 669,
+   "status": "REFUSED__NO_BINDING_REPRODUCED_THE_GUIDES_OUTPUT",
+   "resolved": false,
+   "candidates": 1,
+   "probes_run": 1,
+   "reproducing": 0,
+   "unidentified": 0,
+   "binding": null,
+   "tried": [
+    {
+     "statement": "enc = s.encode('utf-8')",
+     "ran": false,
+     "matches": false
+    }
+   ]
+  },
+  {
+   "guide": "stdlib:pickletools",
+   "statement": "read_unicodestring4(io.BytesIO(n + enc[:-1]))",
+   "question": "n",
+   "block_line": 669,
+   "status": "REFUSED__NO_BINDING_REPRODUCED_THE_GUIDES_OUTPUT",
+   "resolved": false,
+   "candidates": 3,
+   "probes_run": 3,
+   "reproducing": 0,
+   "unidentified": 0,
+   "binding": null,
+   "tried": [
+    {
+     "statement": "n = bytes([len(enc), 0, 0, 0])  # little-endian 4-byte length",
+     "ran": false,
+     "matches": false
+    },
+    {
+     "statement": "n = bytes([len(enc)])  # little-endian 1-byte length",
+     "ran": false,
+     "matches": false
+    },
+    {
+     "statement": "n = bytes([len(enc)]) + b'\\0' * 7  # little-endian 8-byte length",
+     "ran": false,
+     "matches": false
+    }
+   ]
+  },
+  {
+   "guide": "stdlib:pickletools",
+   "statement": "s == t",
+   "question": "enc",
+   "block_line": 710,
+   "status": "REFUSED__NO_BINDING_REPRODUCED_THE_GUIDES_OUTPUT",
+   "resolved": false,
+   "candidates": 1,
+   "probes_run": 1,
+   "reproducing": 0,
+   "unidentified": 0,
+   "binding": null,
+   "tried": [
+    {
+     "statement": "enc = s.encode('utf-8')",
+     "ran": false,
+     "matches": false
+    }
+   ]
+  },
+  {
+   "guide": "stdlib:pickletools",
+   "statement": "read_unicodestring8(io.BytesIO(n + enc[:-1]))",
+   "question": "n",
+   "block_line": 710,
+   "status": "REFUSED__NO_BINDING_REPRODUCED_THE_GUIDES_OUTPUT",
+   "resolved": false,
+   "candidates": 3,
+   "probes_run": 3,
+   "reproducing": 0,
+   "unidentified": 0,
+   "binding": null,
+   "tried": [
+    {
+     "statement": "n = bytes([len(enc)]) + b'\\0' * 7  # little-endian 8-byte length",
+     "ran": false,
+     "matches": false
+    },
+    {
+     "statement": "n = bytes([len(enc), 0, 0, 0])  # little-endian 4-byte length",
+     "ran": false,
+     "matches": false
+    },
+    {
+     "statement": "n = bytes([len(enc)])  # little-endian 1-byte length",
+     "ran": false,
+     "matches": false
+    }
+   ]
+  },
+  {
+   "guide": "stdlib:pickletools",
+   "statement": "read_decimalnl_short(io.BytesIO(b\"1234L\\n56\"))",
+   "question": null,
+   "block_line": 751,
+   "status": "REFUSED__THE_REFUSAL_NAMES_NO_MISSING_NAME"
+  },
+  {
+   "guide": "stdlib:pickletools",
+   "statement": "read_float8(io.BytesIO(raw + b\"\\n\"))",
+   "question": "raw",
+   "block_line": 836,
+   "status": "REFUSED__NO_BINDING_REPRODUCED_THE_GUIDES_OUTPUT",
+   "resolved": false,
+   "candidates": 1,
+   "probes_run": 1,
+   "reproducing": 0,
+   "unidentified": 0,
+   "binding": null,
+   "tried": [
+    {
+     "statement": "raw = struct.pack(\">d\", -1.25)",
+     "ran": false,
+     "matches": false
+    }
+   ]
+  }
+ ],
+ "replayable_after": 139,
+ "cost": {
+  "seconds": 5.8,
+  "model_calls": 0,
+  "parameters_stored": 0,
+  "network_calls_at_run_time": 0
+ },
+ "what_this_is_not": [
+  "not a benchmark result: no OSWorld, SWE-bench Pro, FrontierSWE or Terminal-Bench task",
+  "not a claim that all 42 refusals are resolvable: 19 had no binding in the guide that reproduced its output, 5 named no missing name, 5 were ambiguous",
+  "not a learned rule in weights: a binding is an observed fact in an external receipt",
+  "not information gain: the ranking is a computed prior over probe ORDER; the guide's printed output is the oracle that decides the answer",
+  "not independent verification: one producer, one machine, one stdlib version"
+ ],
+ "limits": [
+  "the candidate pool is the six stdlib guides and three READMEs in default_guides()",
+  "a binding that needs a session state established in a different module is not found",
+  "the decoy mutates one literal in the binding; a binding with no literal is reported UNMUTABLE rather than counted as separated",
+  "a guide's printed output is version-matched only when guide and library are the same version; neither is pinned here"
+ ]
+}
