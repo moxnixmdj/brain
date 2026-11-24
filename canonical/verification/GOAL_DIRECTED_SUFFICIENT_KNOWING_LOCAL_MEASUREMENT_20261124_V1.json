@@ -10,8 +10,8 @@
       "sha256": "2fce3df5477e5ba7016eebfbcb91d200599b53ce2db8956d57d4a3be61e3d4e4"
     },
     "GOAL_DIRECTED_SUFFICIENT_KNOWING_20261124_V1.md": {
-      "git_blob_sha": "7ca70f4d67f2dc49e51824bbc98d038bec11fd81",
-      "sha256": "cbc90560940e7719d383b94ce4a86c3a116bacb205162be8783825abf4dc2e69"
+      "git_blob_sha": "e611ef4c1e6f9ffe55d2c892a2e41d1a1d162ec5",
+      "sha256": "871d69b086fec9d3ecb272422e94f2fe80e601bbed211cae082bd8c52cf6b8a3"
     },
     "canonical/astra_runtime/state/GOAL_DIRECTED_SUFFICIENT_KNOWLEDGE_STORE_V1.json": {
       "git_blob_sha": "7c9c70db9fa4ec28bc01ff9442108ede2e168c92",
@@ -40,7 +40,13 @@
   },
   "family_credit_delta": 0,
   "final_metadata_gates": {
-    "status": "PENDING",
+    "all_ok": true,
+    "check_count": 20,
+    "checked_at_utc": "2026-11-24T14:03:45Z",
+    "checked_head": "db96c685acc6e423019eaf400ded5702d9c1f434",
+    "git_status_after_gates": "",
+    "note": "The final metadata commit records this pass; a lightweight rerun after that commit is performed before push.",
+    "status": "PASS",
     "wrapper": "/tmp/run_iter13_final_lightweight_gates.py"
   },
   "measurements": {
@@ -84,7 +90,7 @@
     "workflow_run_id": 45408866721
   },
   "schema": "BRAIN_GOAL_DIRECTED_SUFFICIENT_KNOWING_LOCAL_MEASUREMENT_20261124_V1",
-  "status": "LOCAL_TESTS_AND_FROZEN_RUNNER_BLOCK_REPLAY_PASS__DISTINCT_OIDC_RECEIPT_RECORDED__FINAL_METADATA_GATES_PENDING",
+  "status": "LOCAL_TESTS_AND_FROZEN_RUNNER_BLOCK_REPLAY_PASS__DISTINCT_OIDC_RECEIPT_RECORDED__FINAL_LIGHTWEIGHT_GATES_PASSED__ZERO_CREDIT",
   "terminal_credit_delta": 0,
   "truth": {
     "achieved": false,

@@ -1,6 +1,6 @@
 # Goal-directed sufficient knowing — minimal plan, build, and honest boundary
 
-**Date:** 2026-11-24 UTC · **Branch:** `arena/6f8ac9ce-brain` · **Status:** local zero-model contract instrument built, 16 tests passing, runner-owned OIDC finite replay recorded, final metadata gates pending; §6 NOT MET; no capability, family, terminal or truth credit.
+**Date:** 2026-11-24 UTC · **Branch:** `arena/6f8ac9ce-brain` · **Status:** local zero-model contract instrument built, 16 tests passing, runner-owned OIDC finite replay recorded, final lightweight gates 20/20 passed; §6 NOT MET; no capability, family, terminal or truth credit.
 
 ## 0. Requirements read, and §2 contradiction resolved
 
@@ -87,4 +87,4 @@ Sixteen local contract tests pass, including exact EVPI normalization, derived-q
 
 **Fully user/external-authority-dependent blockers, logged once:** owner/gated access to OSWorld 2.1 task classes and complete assets, reachable self-hosted websites, provider VM image, pinned evaluator dependencies, maintainer-style verifier, and official hard-benchmark execution/§6 countersign. I am continuing on all other work and do not ask for them here.
 
-No OSWorld task, reward vector, aggregate score, §6 verification, capability/family/terminal credit, PR, merge or terminal truth change is claimed. Final metadata gates after the runner receipt are pending at this report state; no post-receipt gate result is backdated. `truth.achieved=false`; §6 remains `NOT_MET`.
+No OSWorld task, reward vector, aggregate score, §6 verification, capability/family/terminal credit, PR, merge or terminal truth change is claimed. Final lightweight gates after the runner receipt passed 20/20 on the metadata state, including exact runner-receipt/OIDC binding, 22 legacy gates, 16 contract tests, 29 instrument tests, 31 combined zero-model Harbor tests, OBS/broker/reducer, no raw benchmark tasks and a clean tree. `truth.achieved=false`; §6 remains `NOT_MET`.
