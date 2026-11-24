@@ -106,9 +106,28 @@ class SafeOperator:
         return all(holds(c, state) for c in self.guard)
 
 
+#: DERIVED conditions are computed properties of the raw rows, discovered by
+#: `the_distinction_is_created_v1` because a measured contradiction demanded them. They are
+#: conditions in every other respect -- the table stores them, the planner reads them, and a plan
+#: citing them is judged by execution -- so no second mechanism is introduced. Adding a relation
+#: here is adding a COLUMN, which is the only thing that has ever moved reach in this tree.
+DERIVED: dict[str, Any] = {}
+
+
+def register_derived(name: str, function: Any) -> None:
+    """Make a computed property available as a condition. Registration is explicit so the set of
+    columns in use is always inspectable and removable."""
+    DERIVED[name] = function
+
+
 def holds(condition: Condition, state) -> bool:
     from canonical.swe_kernel import canonical_frame_v1 as cf
     relation, binding, slot, test, value = condition
+    if relation == "DERIVED":
+        function = DERIVED.get(binding)
+        if function is None:
+            raise ValueError(f"DERIVED condition names an unregistered property: {binding}")
+        return function(state) == value
     try:
         return cf.observe((relation, binding), state, slot) == value
     except cf.FrameError:
@@ -139,6 +158,7 @@ def specific_table(observations: Sequence[Observation],
     rows: list[SafeOperator] = []
     conflicted = 0
     for (atom, before), members in sorted(groups.items(), key=lambda kv: (kv[0][0], kv[0][1])):
+        raw_before = members[0].before
         effects = {member.effect for member in members}
         if len(effects) > 1:
             conflicted += 1
@@ -171,6 +191,106 @@ def specific_table(observations: Sequence[Observation],
 # ---------------------------------------------------------------------------------------------
 # 2. safe generalization: drop a guard literal only when no observation objects
 # ---------------------------------------------------------------------------------------------
+
+def minimal_descriptor(observations: Sequence[Observation], conditions: Sequence[Condition],
+                       *, relations: Sequence[str] | None = None) -> list[SafeOperator]:
+    """One operator per (atom, observed pre-state), with the SMALLEST guard that still names it.
+
+    THE DEFECT THIS CLOSES, measured. `specific_table` writes a guard as EVERY condition true in the
+    observed pre-state. On this tree's machines that is 6 to 47 literals per operator, because the
+    five frames are massively redundant: on JOURNAL, 75 conditions are true across 7 states and the
+    IDENT family ALONE already gives 7 distinct signatures out of 7 using 10 conditions, and
+    MULTISET alone does the same with 15. Tagging by `holds` therefore stores each state's identity
+    between three and five times over, in a different frame each time.
+
+    The cost is not disk. It is that a guard built by tagging accepts exactly the states that were
+    tagged -- `generalize` can rarely drop a literal because each one is true of that state by
+    definition -- so the learned table refuses every held-out transition and coverage sits at 0.0 on
+    all nine machines. The guard was a DESCRIPTION OF THE STATE pretending to be a PRECONDITION.
+
+    What a precondition actually needs is a DESCRIPTOR: a conjunction that (a) is true in the
+    observed pre-state, and (b) is false in every other pre-state the model has seen for the same
+    atom -- so it names this context and no other. That is a set cover over the conditions true
+    here, and it is tiny because one relation already separates.
+
+    Ties are broken toward the relation with the fewest literals overall, which is why a machine
+    whose states differ only in membership gets an IDENT guard and never pays for ORDER.
+    """
+    groups: dict[tuple[str, tuple], list[Observation]] = {}
+    for observation in observations:
+        groups.setdefault((observation.atom, tuple(observation.before)), []).append(observation)
+
+    # A key is the RAW pre-state, and `holds` needs rows, so every comparison below is done on the
+    # observation's own `before`, never on a projected condition set. Getting this wrong once already
+    # cost a debugging cycle in the previous round; the fix is to keep the raw form reachable from
+    # the key rather than to project earlier.
+    pool = [c for c in conditions if relations is None or c[0] in relations]
+    raw_of = {key: next(iter(members)).before for key, members in groups.items()}
+
+    # AN ATOM THAT DOES TWO THINGS FROM ONE STATE CANNOT BE DESCRIBED, so its operators are not
+    # emitted at all. Two bugs made this necessary and both were measured:
+    #
+    #   * a pre-state whose effect is EMPTY has no contrasting context -- every context of that atom
+    #     shares the effect -- so the set cover had nothing to rule out, produced no guard, and the
+    #     atom got no operator. It was then refused in states it had been executed in, which is the
+    #     no-op atoms (`JN_A4`, `VAULT_A4`) disappearing from the table.
+    #   * an atom with two effects from ONE pre-state leaves a hole a sibling descriptor can walk
+    #     through, and `apply` then returns another context's effect.
+    #
+    # The first is fixed by emitting an UNCONDITIONAL operator when every context agrees: that is
+    # not a guess, it is the measured statement "no observed context changes this atom's effect".
+    # The second is fixed by refusing the atom entirely: no guard over this vocabulary can separate
+    # two observations of the same state.
+    unreliable = {atom for atom in {key[0] for key in groups}
+                  if any(len({member.effect for member in members}) > 1
+                         for key, members in groups.items() if key[0] == atom)}
+    table: list[SafeOperator] = []
+    for (atom, before), members in sorted(groups.items(), key=lambda kv: (kv[0][0], kv[0][1])):
+        raw_before = members[0].before
+        effects = {member.effect for member in members}
+        if atom in unreliable or len(effects) > 1:
+            continue                      # non-deterministic on this vocabulary: not a descriptor
+        added, deleted = next(iter(effects))
+        if not added and not deleted:
+            # A NO-OP IS A FACT ABOUT THE ENVIRONMENT and it is the one case where an empty guard is
+            # honest: "this atom changed nothing here" holds wherever it changes nothing. It must be
+            # emitted, because a table without it refuses the atom in states where it was really run.
+            table.append(SafeOperator(atom, frozenset(), frozenset(), frozenset(),
+                                      after=tuple(members[0].after), origin=tuple(raw_before),
+                                      evidence=len(members), generalized_from=0))
+            continue
+        atom_effects = {member.effect for key, group in groups.items() if key[0] == atom
+                        for member in group}
+        others = [raw_of[key] for key in groups
+                  if key[0] == atom and key[1] != before
+                  and {member.effect for member in groups[key]} != effects]
+        # conditions true here and false in at least one other observed context
+        candidates = [c for c in pool
+                      if holds(c, raw_before)
+                      and any(not holds(c, other) for other in others)]
+        chosen: list[Condition] = []
+        ruled_out = {other for other in others
+                     if any(not holds(c, other) for c in candidates)}
+        uncovered = {other for other in ruled_out}
+        while uncovered:
+            scored = sorted(
+                ((sum(1 for other in uncovered if not holds(c, other)), c) for c in candidates
+                 if c not in chosen),
+                key=lambda pair: (-pair[0], pair[1][0], str(pair[1])))
+            if not scored or scored[0][0] == 0:
+                break
+            benefit, condition = scored[0]
+            chosen.append(condition)
+            uncovered = {other for other in uncovered if holds(condition, other)}
+        if not chosen:
+            # a contrasting effect exists but nothing separates it from this context: the two are
+            # indistinguishable on this vocabulary, so the operator MUST NOT be citable.
+            continue
+        table.append(SafeOperator(atom, frozenset(chosen), added, deleted,
+                                  after=tuple(members[0].after), origin=tuple(before),
+                                  evidence=len(members), generalized_from=0))
+    return table
+
 
 def generalize(table: Sequence[SafeOperator], observations: Sequence[Observation],
                conditions: Sequence[Condition]) -> tuple[list[SafeOperator], dict[str, Any]]:
