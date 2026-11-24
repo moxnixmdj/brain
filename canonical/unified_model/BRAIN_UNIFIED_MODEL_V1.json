@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "5af0da06faf01fcfc672087237d18c8269b250b5a75a475dde7d348851464176"
+  "value": "af4dc68cff49d08c7e61ba542c5aed8f5da2e303d0dd60d2c16812e878bd4380"
  },
  "engines": [
   {
@@ -275859,7 +275859,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/brokered_workspace_execution_v1.py",
-   "sha256": "c14ad052fbdc0c76133ca320e3d528ea72d55f0634c308aa681ed7b5a46da4d9",
+   "sha256": "8d0fa5f96e5cf60c0270f93f34182471141836a6f84bfb9089eb67d136dfcc97",
    "summary": "Staged read-only namespace + broker execution (`brokered_workspace_execution_v1`).",
    "symbol_count": 10,
    "symbols": [
@@ -343195,7 +343195,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/zero_ambient_namespace_launcher_v1.py",
-   "sha256": "c63f51721027b2833d52a8e83235552b70353de7a7a18abf6b1b8bf185d7c748",
+   "sha256": "6a5c1d8d67667f2f77ca31ea5924c3260b13045347ee36633d6d0d7b274a1bb5",
    "summary": "",
    "symbol_count": 8,
    "symbols": [

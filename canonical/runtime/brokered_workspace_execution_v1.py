@@ -1282,6 +1282,7 @@ class PersistentConfinedZygote:
         self._lock = threading.Lock()
         self._proc: Any = None
         self._sock: Any = None
+        self._watch_pidfd: int | None = None
         self._ns_root: str | None = None
         self._staging_root: pathlib.Path | None = None
         self._seq = 0
@@ -1326,6 +1327,9 @@ class PersistentConfinedZygote:
             except Exception:
                 pass
             self._sock = None
+        if self._watch_pidfd is not None:
+            os.close(self._watch_pidfd)
+            self._watch_pidfd = None
         if self._proc is not None:
             try:
                 os.killpg(self._proc.pid, 9)
@@ -1345,6 +1349,7 @@ class PersistentConfinedZygote:
 
     def _ensure_started(self) -> None:
         import math
+        import shutil
         import socket
         import subprocess
 
@@ -1377,8 +1382,16 @@ class PersistentConfinedZygote:
         required_names = ["unshare", "mount", "python3", "setpriv", "ip", "bash", "env"]
         resolved = {name: ns.resolve_system_binary(name) for name in required_names}
         parent_sock, child_sock = socket.socketpair()
+        try:
+            watch_pidfd = os.pidfd_open(os.getpid(), 0)
+        except (OSError, AttributeError):
+            parent_sock.close(); child_sock.close()
+            shutil.rmtree(ns_root, ignore_errors=True)
+            shutil.rmtree(staging, ignore_errors=True)
+            raise
         cmd = [
             resolved["unshare"], "--user", "--map-root-user", "--mount", "--net", "--pid", "--fork", "--ipc", "--uts",
+            resolved["python3"], "-I", "-c", ns._PID1_GUARD, str(watch_pidfd), str(child_sock.fileno()),
             resolved["bash"], "-c", ns._SETUP, "_",
             ns_root, str(staging), str(child_sock.fileno()),
             str(lim["memory_mb"] * 1024), str(lim["cpu_seconds"]), str(math.ceil(lim["max_file_mb"] * 1024)),
@@ -1392,22 +1405,33 @@ class PersistentConfinedZygote:
             "stdin": subprocess.DEVNULL,
             "stdout": subprocess.DEVNULL,
             "stderr": subprocess.DEVNULL,
-            "pass_fds": (child_sock.fileno(),),
+            "pass_fds": (child_sock.fileno(), watch_pidfd),
             "env": {"PYTHONDONTWRITEBYTECODE": "1"},
             "start_new_session": True,
         }
         if os.geteuid() == 0:
             popen_kw.update(user=p["host_uid"], group=p["host_gid"], extra_groups=[])
-        proc = subprocess.Popen(cmd, **popen_kw)
+        try:
+            proc = subprocess.Popen(cmd, **popen_kw)
+        except BaseException:
+            os.close(watch_pidfd)
+            parent_sock.close(); child_sock.close()
+            shutil.rmtree(ns_root, ignore_errors=True)
+            shutil.rmtree(staging, ignore_errors=True)
+            raise
         child_sock.close()
         self._proc = proc
         self._sock = parent_sock
+        self._watch_pidfd = watch_pidfd
         self._ns_root = ns_root
         self._staging_root = staging
-        ready = self._recv_frame(timeout_s=5.0)
-        if not ready.get("ready"):
+        try:
+            ready = self._recv_frame(timeout_s=5.0)
+            if not ready.get("ready"):
+                raise RuntimeError("ZYGOTE_NOT_READY")
+        except BaseException:
             self.close()
-            raise RuntimeError("ZYGOTE_NOT_READY")
+            raise
 
     def screen_batch(
         self,
