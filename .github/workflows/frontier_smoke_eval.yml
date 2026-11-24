@@ -1,7 +1,7 @@
 name: Frontier 2x2 Docker smoke evaluation
 
-# Triggered by pushing a commit that touches this file; HEAD lowers the specimen
-# letter-density floor to 55% (English prose runs ~76-84%; IoC gate discriminates).
+# Triggered by pushing a commit that touches this file; HEAD adds stride-general
+# interleaved models and a distinct-plaintext confidence margin.
 
 # The push trigger is confined to the current session branch and this file;
 # manual dispatch remains available from the default branch.

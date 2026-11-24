@@ -199,6 +199,16 @@ def _break_vigenere(t: str, lmono: Mapping[str, float], lbg: Mapping[str, Any],
     return out
 
 
+def zlib_margin_hint(cands: list[dict[str, Any]]) -> int:
+    if not cands:
+        return 0
+    best_plain = cands[0].get("plaintext")
+    runner = next((c for c in cands[1:] if c.get("plaintext") != best_plain), None)
+    if runner is None:
+        return 10**9
+    return int(runner.get("zlib_bytes", 10**9)) - int(cands[0].get("zlib_bytes", 10**9))
+
+
 def crack(text: str, *, max_period: int = 40, stats_path: str | pathlib.Path | None = None) -> dict[str, Any]:
     """Crack a classical substitution specimen. Never guesses blindly: reports every tried family."""
     t = _letters(text)
@@ -210,33 +220,46 @@ def crack(text: str, *, max_period: int = 40, stats_path: str | pathlib.Path | N
     # Model class 1 & 2: single straight/Beaufort stream
     for transform in ("straight", "beaufort"):
         candidates.extend(_break_vigenere(t, lmono, lbg, max_period, transform))
-    # Model class 3: two interleaved streams (alternating positions), independent periods
-    streams = [t[0::2], t[1::2]]
-    if min(len(s) for s in streams) >= 40:
+    # Model class 3: N interleaved streams (stride s = letter index mod s), independent periods.
+    for stride in (2, 3, 4, 5, 6):
+        streams = [t[i::stride] for i in range(stride)]
+        if min(len(s) for s in streams) < 60:
+            continue
         sub = []
         for s in streams:
             stream_cands = _break_vigenere(s, lmono, lbg, min(max_period, 30), "straight")
             stream_cands.sort(key=lambda c: (c.get("zlib_bytes") or 10**9, -c["score"]))
-            sub.append(stream_cands[:6])
-        for c0 in sub[0]:
-            for c1 in sub[1]:
-                # interleave plaintexts back in original order
-                joined = []
-                p0, p1 = c0["plaintext"], c1["plaintext"]
-                for i in range(len(t)):
-                    joined.append(p0[i // 2] if i % 2 == 0 else p1[i // 2])
-                plain = "".join(joined)
-                candidates.append({
-                    "variant": "interleaved2", "key": c0["key"] + "|" + c1["key"],
-                    "period": f"{c0['period']}|{c1['period']}", "plaintext": plain,
-                    "score": _score_text(plain, lmono, lbg)})
+            sub.append(stream_cands[:3])
+        import itertools
+        trials = []
+        for combo in itertools.product(*sub):
+            joined = []
+            streams_plain = [c["plaintext"] for c in combo]
+            for pos in range(len(t)):
+                si = pos % stride
+                j = pos // stride
+                joined.append(streams_plain[si][j] if j < len(streams_plain[si]) else "")
+            trials.append((combo, "".join(joined)))
+        trials.sort(key=lambda x: len(zlib.compress(x[1].encode())))
+        for combo, plain in trials[:8]:
+            candidates.append({
+                "variant": f"interleaved{stride}",
+                "key": "|".join(c["key"] for c in combo),
+                "period": "|".join(str(c["period"]) for c in combo),
+                "plaintext": plain,
+                "score": _score_text(plain, lmono, lbg)})
     ct_compressed = zlib.compress(t.encode())
     for c in candidates:
         c["zlib_bytes"] = len(zlib.compress(c["plaintext"].encode()))
     candidates.sort(key=lambda c: (c["zlib_bytes"], -c["score"]))
+    top_diag = [{"variant": c.get("variant"), "zlib_bytes": c.get("zlib_bytes"),
+                 "score": round(c.get("score", 0.0), 1)} for c in candidates[:5]]
     best = candidates[0] if candidates else None
     best_by_score = max(candidates, key=lambda c: c["score"]) if candidates else None
-    second = candidates[1] if len(candidates) > 1 else None
+    # True confidence discriminator: the runner-up with a DIFFERENT plaintext.
+    # (Equivalent-key twins tie at zero and would falsely read as "no margin".)
+    best_plain = (best or {}).get("plaintext")
+    second = next((c for c in candidates[1:] if c.get("plaintext") != best_plain), None)
     margin = (best["score"] - second["score"]) if (best and second) else None
     zlib_margin = ((second["zlib_bytes"] - best["zlib_bytes"])
                    if (best and second) else None)
@@ -256,6 +279,9 @@ def crack(text: str, *, max_period: int = 40, stats_path: str | pathlib.Path | N
         "compressibility_verdict": ("PLAINTEXT_COMPRESSES_BETTER"
                                      if best and len(compressed) < len(ct_compressed)
                                      else "NO_COMPRESSION_GAIN"),
+        "confidence": ("HIGH" if zlib_margin_hint(candidates) >= 10 else
+                       ("LOW" if candidates else "NONE")),
+        "top_candidates_by_zlib": top_diag,
         "candidates_tried": len(candidates),
         "stats_refused": stats.get("refused"),
         "model_calls": 0,
@@ -362,18 +388,29 @@ def crack(t):
     cands = []
     for tr in ("straight", "beaufort"):
         cands += break_vig(t, 40, tr)
-    s0, s1 = t[0::2], t[1::2]
-    if min(len(s0), len(s1)) >= 40:
-        c0 = break_vig(s0, 30, "straight")[:6]
-        c1 = break_vig(s1, 30, "straight")[:6]
-        for a in c0:
-            for b in c1:
-                joined = []
-                for i in range(len(t)):
-                    joined.append(a["plaintext"][i//2] if i % 2 == 0 else b["plaintext"][i//2])
-                plain = "".join(joined)
-                cands.append({"variant": "interleaved2", "key": a["key"]+"|"+b["key"],
-                              "score": score(plain), "plaintext": plain})
+    import itertools
+    for stride in (2, 3, 4, 5, 6):
+        streams = [t[i::stride] for i in range(stride)]
+        if min(len(s) for s in streams) < 60:
+            continue
+        sub = []
+        for s in streams:
+            sub.append(break_vig(s, 30, "straight")[:3])
+        trials = []
+        for combo in itertools.product(*sub):
+            joined = []
+            sp = [c["plaintext"] for c in combo]
+            for pos in range(len(t)):
+                si = pos % stride
+                j = pos // stride
+                joined.append(sp[si][j] if j < len(sp[si]) else "")
+            plain = "".join(joined)
+            trials.append((combo, plain))
+        trials.sort(key=lambda x: len(zlib.compress(x[1].encode())))
+        for combo, plain in trials[:8]:
+            cands.append({"variant": "interleaved" + str(stride),
+                          "key": "|".join(c["key"] for c in combo),
+                          "score": score(plain), "plaintext": plain})
     for c in cands:
         c["zlib_bytes"] = len(zlib.compress(c["plaintext"].encode()))
     cands.sort(key=lambda c: (c["zlib_bytes"], -c["score"]))
@@ -457,15 +494,16 @@ def encrypt(plaintext: str, variant: str, key: str) -> str:
     """Reference encryptor used ONLY by the admission harness (never at decision time)."""
     t = _letters(plaintext)
 
-    if variant == "interleaved2":
-        k0, k1 = (s.upper() for s in key.split("|"))
+    if variant.startswith("interleaved"):
+        stride = int(variant.replace("interleaved", ""))
+        keys = [s.upper() for s in key.split("|")]
+        assert len(keys) == stride, "interleaved variant key count must match stride"
+        counters = [0] * stride
         out = []
-        i0 = i1 = 0
-        for ch in t:
-            if (len(out) % 2) == 0:
-                k = k0[i0 % len(k0)]; i0 += 1
-            else:
-                k = k1[i1 % len(k1)]; i1 += 1
+        for i, ch in enumerate(t):
+            stream = i % stride
+            k = keys[stream][counters[stream] % len(keys[stream])]
+            counters[stream] += 1
             out.append(_ALPH[(ord(ch) - _A + ord(k) - _A) % 26])
         return "".join(out)
     k = key.upper()
