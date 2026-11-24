@@ -80,14 +80,16 @@
   "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
   "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
   "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
-  "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+  "progress_class": "REPAIR_OF_A_PUBLISHED_FALSE_CERTIFICATION_AND_A_NAMED_UNREPAIRED_SLOT",
   "progress_evidence_paths": [
-   "canonical/tools/a_type_you_wrote_is_a_type_you_guess_v1.py",
-   "canonical/verification/A_TYPE_YOU_WROTE_IS_A_TYPE_YOU_GUESS_20261202_V1.json",
-   "A_TYPE_YOU_WROTE_IS_A_TYPE_YOU_GUESS_20261202_V1.md"
+   "canonical/tools/a_check_that_nobody_runs_is_a_check_that_cannot_be_wrong_v1.py",
+   "canonical/verification/A_CHECK_THAT_NOBODY_RUNS_IS_A_CHECK_THAT_CANNOT_BE_WRONG_20261203_V1.json",
+   "A_CHECK_THAT_NOBODY_RUNS_IS_A_CHECK_THAT_CANNOT_BE_WRONG_20261203_V1.md",
+   "canonical/tests/test_a_check_that_nobody_runs_is_a_check_that_cannot_be_wrong_v1.py",
+   ".github/workflows/a-check-that-nobody-runs-is-a-check-that-cannot-be-wrong-20261203.yml"
   ],
   "route_class": "SYNTHESIZE_NEW_PRIMITIVE",
-  "earlier_routes_exhausted_reason": "REUSE was priced first and is the incumbent: the guide's own REFINES table is right on its own room (21 of 21 different pairs) and collapses 11 of 19 producer kinds on the next, so extending it is extending a guess. ADAPT: libmagic is the published answer and it is the same design -- a written table read against bytes. COMPOSE: the checks the machine declares are already there, but nothing selected among them, so the primitive synthesized here is the witness rule (separates, repeats, observes, is content-invariant per kind).",
+  "earlier_routes_exhausted_reason": "REUSE was priced first: patching `check_flags()`'s prose test in place is the incumbent, and it is what the last round's obligation literally asked for -- it is done here and it is measurably insufficient, because a prose test cannot decide whether a flag writes and cannot decide whether a cited check can tell one object from another. ADAPT: a blacklist of destroyers is the obvious published answer and it is the same design (a written list read against a machine nobody has seen), so it is included only as the second line of defence behind an execution test. COMPOSE: the guide already computes object kinds for every step and already runs programs against the room; what did not exist is a certification of a check by RUNNING it, and a status that compares content instead of kinds. Both are composed from what the tree already has.",
   "producer_cognition_model_dependency_count": 0,
   "incremental_spend_usd": 0,
   "conversation_memory_is_authority": false,
@@ -105,7 +107,8 @@
    "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
    "AGENTS.md"
   ],
-  "honest_state_read_live": true
+  "honest_state_read_live": true,
+  "route_class_note": "SYNTHESIZE_NEW_PRIMITIVE applies to `certified_checks` and `_digest`: the repository had no test that a check is read-only, and no status field that could see an overwrite."
  },
  "action_id": "A_TYPE_YOU_WROTE_IS_A_TYPE_YOU_GUESS_20261202",
  "action_intent_id": "A_TYPE_YOU_WROTE_IS_A_TYPE_YOU_GUESS_20261202_V1",
