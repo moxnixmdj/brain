@@ -36,13 +36,41 @@ Three corpora, reported **separately**, because they are not interchangeable kin
 |---|---:|---:|---:|---:|---:|---:|---:|
 | `--help` of the fleet | 37 | 94,098 | 336 | 28 | **16** | 57.1% | 4.76% |
 | Python stdlib docstrings | 6 | 76,760 | 1,179 | **0** | 0 | — | 0% |
-| GNU manuals (texinfo) | 285 | 470,392 | 6,595 | 496 | **107** | 21.9% | 1.62% |
+| GNU manuals (texinfo) | 285 | 470,392 | 6,595 | 496 | **105** | 21.5% | 1.59% |
 
-Transfer to a **third** room, never seen: 57 tested, **51 admitted, 6 refused**. The six are the
+Transfer to a **third** room, never seen: 56 tested, **49 admitted, 7 refused**. The seven are the
 honest part: a relation that held in two rooms and failed in a third was about the rooms.
 
 Operations, not sentences, are the honest denominator: **161 distinct (program, relation) pairs
-are named in the manuals, and 43 are admitted — 26.7% coverage.**
+are named in the manuals, and 42 are admitted — 26.1% coverage.**
+
+### The store as a typed data-flow graph (composition)
+
+A single relation opens one door; a goal is usually a chain of doors (`directory → archives →
+extracts → compresses`). Rather than hand-declaring output types, `induce_signatures()` induces
+each relation's signature `input_kind → output_kind` from the artifact its witness actually
+produced (`PRODUCING_RELATIONS`), while reader relations (`checks`, `compares`, `counts`, `lists`,
+`prints`, `searches`) induce `output_kind = None` and serve as goals rather than intermediate
+steps. Each witnessed `argv` and precondition `pre` is lifted into a role template (`{object}`,
+`{out}`, `{outdir}`, `{other}`), and `run_composed_plan()` executes the entire composed chain in a
+fresh room and checks the goal relation's own predicate on the final artifact or stream.
+
+| metric | value |
+|---|---:|
+| kind nodes | 6 (`archive`, `compressed`, `directory`, `file`, `line`, `text`) |
+| producing edges | 9 |
+| reader relations (goals only) | 6 (`checks`, `compares`, `counts`, `lists`, `prints`, `searches`) |
+| goals composed `(start_kind, goal_relation)` | **66** (18 one-step, 48 multi-step) |
+| multi-step chains executed | **48 / 48** |
+| multi-step chains that ran and met the goal | **33 / 48** (68.8%) |
+| `REFUSED__CHAIN_BROKE_AT_A_STEP` | **5** (`gzip` writes `.gz`; `bzip2 --decompress` expects `.bz2`) |
+| `REFUSED__CHAIN_RAN_BUT_MISSED_THE_GOAL` | **10** (e.g. `sort` reorders lines before `tar` archives/extracts) |
+
+Running the composed chains exposed two defects in single-step admission that two-room testing
+alone had missed: `tar a b` exited 2 on syntax error and had been admitted as `compares` until
+`same_exit == 0` on identical files (`tar a a`) was required; and `tar --test-label` had been
+run without `-f` and against a half-truncated 10,240-byte tar archive whose zero padding left the
+first 512-byte header block intact. Both are now fixed and held by regression tests.
 
 **The one change that moved the number.** 152 claims were refused `NO_PRODUCER_FOR_KIND`, and all
 152 named **no object at all** — `cat normally reads and writes in binary mode` says what cat
@@ -106,7 +134,7 @@ plus the last witness that answered it; the next room re-asks.
 ## 3. The defects this round found in its own instrument
 
 Each was a wrong admission or a wrong refusal, and each is held by a test in
-`canonical/tests/test_the_right_question_is_an_experiment_v1.py` (43 cases).
+`canonical/tests/test_the_right_question_is_an_experiment_v1.py` (55 cases).
 
 | # | Defect | Symptom | Fix |
 |---|---|---|---|
@@ -161,7 +189,7 @@ the user (never).
   re-verified at use. `model_calls: 0`, `parameters: 0`, `spend_usd: 0`.
 
 Receipt: `canonical/verification/THE_RIGHT_QUESTION_IS_AN_EXPERIMENT_20261124_V1.json`.
-Tests: `canonical/tests/test_the_right_question_is_an_experiment_v1.py` — 43 cases, each a defect
+Tests: `canonical/tests/test_the_right_question_is_an_experiment_v1.py` — 55 cases, each a defect
 above; `canonical/tests/test_perfect_algorithm_v1.py` still passes (23).
 Prose corpus: fetched from the upstream manuals by `--fetch-prose`, cached machine-locally, never
 committed; the receipt records each tarball's sha256.

@@ -225,9 +225,11 @@ PREDICATES: dict[str, Callable[[Mapping[str, Any]], bool]] = {
     "exists_after": lambda r: bool(r.get("after_exists")),
     "not_exists_after": lambda r: not bool(r.get("after_exists")),
     "valid_check": lambda r: _code(r.get("after")) == 0,
-    "distinguishes_valid_from_corrupt": lambda r: _code(r.get("after")) == 0
+    "distinguishes_valid_from_corrupt": lambda r: _code(r.get("exit")) in (None, 0)
+    and _code(r.get("after")) == 0
     and _code(r.get("corrupt_exit")) not in (None, 0),
-    "does_not_distinguish": lambda r: not (_code(r.get("after")) == 0
+    "does_not_distinguish": lambda r: not (_code(r.get("exit")) in (None, 0)
+                                           and _code(r.get("after")) == 0
                                            and _code(r.get("corrupt_exit")) not in (None, 0)),
     "invalid_check": lambda r: _code(r.get("after")) != 0,
     "valid_archive": lambda r: _code(r.get("after")) == 0,
@@ -257,7 +259,8 @@ PREDICATES: dict[str, Callable[[Mapping[str, Any]], bool]] = {
                                       and r.get("stdout_numeric") is True),
     "destination_absent_or_source_still_there": lambda r: not (
         bool(r.get("after_exists")) and not bool(r.get("source_exists"))),
-    "exit_nonzero": lambda r: _code(r.get("exit")) not in (None, 0),
+    "exit_nonzero": lambda r: _code(r.get("exit")) not in (None, 0)
+    and _code(r.get("same_exit")) in (None, 0),
 }
 
 INVERSE: dict[str, str] = {
@@ -311,8 +314,8 @@ _assert_distinct_witnesses()
 # directory, `sorts` is a text or a line. A sentence that names a relation with an incompatible
 # object is not a claim about that relation, and the witness refuses it before running.
 RELATION_KINDS: dict[str, tuple[str, ...]] = {
-    "grows": ("text", "file", "compressed", "line"),
-    "compresses": ("text", "file", "compressed", "line"),
+    "grows": ("text", "file", "compressed", "line", "archive", "zip"),
+    "compresses": ("text", "file", "compressed", "line", "archive", "zip"),
     "decompresses": ("compressed",),
     "archives": ("archive", "zip", "directory", "repository", "file", "text"),
     "extracts": ("archive", "zip"),
@@ -357,6 +360,16 @@ RELATION_OUTPUT: dict[str, str] = {
     "compresses": ".gz", "decompresses": "", "archives": ".tar", "extracts": "",
     "sorts": ".sorted", "creates": ".made", "copies": ".copy", "renames": ".moved",
 }
+
+#: The relations that PRODUCE an object. Everything else READS: it consumes an object and writes
+#: a stream, so it moves nothing between kinds. A reader can be a GOAL -- "list this archive" is
+#: a thing you want -- but it cannot be a STEP, because a step's output is the next step's input
+#: and a reader has no output. Treating `lists` as `archive -> archive` because its sensor read
+#: the archive made a graph with edges that do not exist, and every chain through them broke.
+PRODUCING_RELATIONS: frozenset[str] = frozenset({
+    "compresses", "decompresses", "archives", "extracts", "creates", "copies",
+    "renames", "sorts", "reverses", "applies", "reformats",
+})
 
 # --------------------------------------------------------------------------- #
 # 1. READ A DOCUMENT AS SENTENCES
@@ -1247,8 +1260,11 @@ def action_for(claim: Mapping[str, Any], obj: Mapping[str, Any], root: pathlib.P
         return {"argv": argv, "reads": inp, "writes": out, "output_name": inp}
     if relation == "checks":
         flag = role_flag if role_flag is not None else _flag_for("check", help_text)
-        argv = [program] + ([flag] if flag else []) + [inp]
-        return {"argv": argv, "reads": inp, "writes": out, "output_name": inp}
+        operand = (_archive_operand(help_text, program, inp)
+                   if kind in ("archive", "zip") else [inp])
+        argv = [program] + ([flag] if flag else []) + operand
+        return {"argv": argv, "reads": inp, "writes": out, "output_name": inp,
+                "role_flag": flag or ""}
     if relation == "contains":
         return {"argv": [program, "-F", "alpha", inp], "reads": inp, "writes": out,
                 "output_name": inp, "needle": "alpha"}
@@ -1405,11 +1421,22 @@ def _run_witness(claim: Mapping[str, Any], root: pathlib.Path, variant: int,
         source = root / str(output_name or action.get("reads") or "")
         try:
             payload = source.read_bytes()
-            (root / corrupt).write_bytes(payload[: max(1, len(payload) // 2)])
+            # `tar` pads an archive to 10,240 bytes of trailing zeros, so halving a one-member
+            # archive only trims the padding and leaves a valid archive. Cutting inside the
+            # first header block (before `ustar` at offset 257) corrupts the header as well.
+            (root / corrupt).write_bytes(payload[: min(64, max(1, len(payload) // 2))])
         except OSError:
             payload = b""
         argv = [str(x).replace(str(source.name), corrupt) for x in action["argv"]]
         corrupt_exit = _run(argv, root).get("exit")
+    same_exit = None
+    if claim.get("relation") == "compares" and action.get("reads"):
+        # A COMPARISON IS A DISCRIMINATION. `tar a b` exits 2 because `a` is not a mode flag,
+        # and it exits 2 on `tar a a` for the same reason. A program that compares two files
+        # exits zero when handed the file twice and nonzero when handed the file and a modified
+        # copy.
+        same_exit = _run([str(action["argv"][0]), str(action["reads"]), str(action["reads"])],
+                         root).get("exit")
     # The qualifier is an order over what the program PRODUCED. A program that writes a file
     # (`sort -o out`) produces nothing on stdout, so the order is read from the file it named.
     produced = str(run.get("stdout") or "")
@@ -1457,6 +1484,7 @@ def _run_witness(claim: Mapping[str, Any], root: pathlib.Path, variant: int,
         "obj": obj,
         "action": action,
         "corrupt_exit": corrupt_exit,
+        "same_exit": same_exit,
         "sensor_wrote": bool(watched and before_sensor and after_sensor
                              and before_sensor != after_sensor),
     }
@@ -1641,7 +1669,13 @@ def evaluate_claim(claim: Mapping[str, Any], *, actions: Sequence[Any] = (),
         "object_kind": kind,
         "observable": observable,
         "predicate": claim.get("predicate"),
+        # `pre` IS PART OF THE RELATION. `tar --extract --directory out` is a different program
+        # from `tar --extract --directory out` preceded by `mkdir out`: the second runs, the first
+        # exits 2. A witness stored without its precondition is a command that does not run, and
+        # composing with it produces a chain that breaks at exactly that step.
         "witness": {"argv": readings.get("action", {}).get("argv"),
+                    "reads": readings.get("action", {}).get("reads"),
+                    "pre": readings.get("action", {}).get("pre") or [],
                     "role_flag": readings.get("action", {}).get("role_flag") or "",
                     "sensor": OBSERVABLE_SENSOR.get(observable),
                     "output": readings.get("action", {}).get("output_name")},
@@ -1723,7 +1757,7 @@ def relations_for(memory: Mapping[str, Any], program: str | None = None,
 # 6. THE PLAN: a verified relation whose program is in the caller's action space
 # --------------------------------------------------------------------------- #
 
-def _command_for(relation: Mapping[str, Any]) -> str:
+def _command_for(relation: Mapping[str, Any], placeholder: str = "{object}") -> str:
     argv = list((relation.get("witness") or {}).get("argv") or [])
     if not argv:
         return ""
@@ -1733,11 +1767,374 @@ def _command_for(relation: Mapping[str, Any]) -> str:
     # The role flag is the one that selects the relation (`-d` decompresses, `-t` lists); an
     # output flag like `-o` belongs to the witness, not to the command.
     flag = str((relation.get("witness") or {}).get("role_flag") or "")
-    return " ".join([program] + ([flag] if flag else []) + ["{object}"])
+    return " ".join([program] + ([flag] if flag else []) + [placeholder])
 
 
-def plan_from_relations(relations: Sequence[Mapping[str, Any]], actions: Sequence[Any]) -> dict[str, Any]:
-    """A plan is a relation whose program the caller may do, with the object left to the state."""
+#: The kind of an artifact, read from the NAME the program gave it. A suffix is an observation
+#: about what a program wrote in a room, not knowledge about any program: the same `tar` writes
+#: `x.tar` and `x.tar.gz`, and the second is a compressed thing whose inside happens to be a
+#: tape archive. The OUTER container is the kind, because the outer container is what the next
+#: program has to accept.
+def _kind_of_artifact(name: str) -> str | None:
+    """`compressed`, `archive`, `zip`, `directory`, `file` -- or None for nothing."""
+    low = str(name or "").strip().lower()
+    if not low:
+        return None
+    if low.endswith((".tar.gz", ".tgz", ".tar.bz2", ".tar.xz", ".gz", ".bz2", ".xz", ".zst")):
+        return "compressed"
+    if low.endswith(".tar"):
+        return "archive"
+    if low.endswith(".zip"):
+        return "zip"
+    if low.endswith(".dir"):
+        return "directory"
+    return "file"
+
+
+def _template_for(relation: Mapping[str, Any]) -> str:
+    """The command a stored relation stands for, with its SLOTS named.
+
+    The argv in the store is one room's instance: `tar --create -f made-513b99.tar
+    --recursion object-0.dir` is true of one room on one machine. A template replaces each token
+    with the ROLE it played in the witnessed run -- the input object, the artifact the program
+    produced, the directory it produced it into -- and keeps everything else verbatim. Nothing
+    is invented and nothing is trimmed: a template is exactly as durable as its witness, and a
+    template that cannot be run is a defect in the witness, not in the caller.
+    """
+    return " ".join(_slot(token, *_slots(relation)) for token in _witness_argv(relation))
+
+
+def _witness_argv(relation: Mapping[str, Any]) -> list[str]:
+    return [str(x) for x in ((relation.get("witness") or {}).get("argv") or [])]
+
+
+def _slots(relation: Mapping[str, Any]) -> tuple[str, str, str]:
+    """`(reads, out, parent)` -- the three names a witnessed argv played with."""
+    witness = relation.get("witness") or {}
+    out = str(witness.get("output") or "")
+    parent = str(pathlib.PurePosixPath(out).parent) if "/" in out else ""
+    return str(witness.get("reads") or ""), out, parent
+
+
+def _slot(token: str, reads: str, out: str, parent: str) -> str:
+    """One token of a witnessed argv, replaced by the ROLE it played in that run.
+
+    `reads` is tested before `out` because a READER's output IS its input: `tar -tf object-0.tar`
+    has one name playing both roles, and calling it `{out}` left the template with no input slot.
+    """
+    if reads and token == reads:
+        return "{object}"
+    if out and token == out:
+        return "{out}"
+    if parent and token == parent:
+        return "{outdir}"
+    if token.startswith("object-"):
+        return "{object}"
+    if token.startswith("other-"):
+        return "{other}"
+    return token
+
+
+def _pre_templates(relation: Mapping[str, Any]) -> list[str]:
+    """The precondition of a relation as templates, read back from its witness."""
+    witness = relation.get("witness") or {}
+    pre = [str(token) for token in (witness.get("pre") or [])]
+    return [" ".join(_slot(token, *_slots(relation)) for token in pre)] if pre else []
+
+
+def induce_signatures(relations: Sequence[Mapping[str, Any]],
+                      actions: Sequence[Any] = ()) -> dict[str, dict[str, dict[str, Any]]]:
+    """The TYPE of every relation the store can actually vouch for, induced from its witnesses.
+
+    A relation's type is nowhere declared. `gzip compresses` is a door from `file` to
+    `compressed` only because a witness ran it on a file and produced a `.gz`; if the same
+    sentence is witnessed on a directory and the run fails, that edge does not exist and no
+    amount of prose creates it. This is the data-flow graph: nodes are kinds, edges are
+    witnessed runs. Every row carries the relation id that vouches for it.
+    """
+    offered = {str(a).strip() for a in actions if str(a).strip()}
+    offered_programs = {a.split()[0] for a in offered if a.split()}
+    table: dict[str, dict[str, dict[str, Any]]] = {}
+    for relation in sorted(relations, key=lambda r: str(r.get("relation_id") or "")):
+        name = str(relation.get("relation") or "")
+        kind = str(relation.get("object_kind") or "")
+        witness = relation.get("witness") or {}
+        produced = str(witness.get("output") or "")
+        if not name or not kind or not produced:
+            continue
+        if actions:
+            program = str(relation.get("program") or "")
+            if program not in offered and program not in offered_programs:
+                continue
+        row = {"relation": name,
+               "input_kind": kind,
+               "output_kind": (_kind_of_artifact(produced)
+                               if name in PRODUCING_RELATIONS else None),
+               "produced": produced,
+               "relation_id": relation.get("relation_id"),
+               "program": relation.get("program"),
+               "template": _template_for(relation),
+               "pre": _pre_templates(relation),
+               "observable": relation.get("observable"),
+               "predicate": relation.get("predicate")}
+        table.setdefault(name, {}).setdefault(kind, row)
+    return table
+
+
+def compose_plan(relations: Sequence[Mapping[str, Any]], actions: Sequence[Any],
+                 start: str, goal: str, *, max_steps: int = 4) -> dict[str, Any]:
+    """A CHAIN of witnessed relations from an object of kind `start` to the relation `goal`.
+
+    One relation opens one door and a goal is usually two: "I have a directory and I need the
+    files inside it back" is `archives` then `extracts`, and no single relation says it. The
+    search runs over the INDUCED signatures, so it can only walk edges a witness vouched for;
+    an unwitnessed edge is not in the graph and the refusal names the frontier that stopped it.
+
+    The chain is returned as TEMPLATES with named slots, not as commands: step N+1's input is
+    step N's output, which is the whole content of composition.
+    """
+    signatures = induce_signatures(relations, actions)
+    if not signatures:
+        return {"status": "REFUSED__NO_ADMITTED_RELATION"}
+    goal_edges = signatures.get(goal) or {}
+    if not goal_edges:
+        return {"status": "REFUSED__GOAL_IS_NOT_A_WITNESSED_RELATION", "goal": goal,
+                "relations_with_an_edge": sorted(signatures)}
+    frontier: list[tuple[str, list[dict[str, Any]]]] = [(start, [])]
+    seen = {start}
+    while frontier:
+        kind, path = frontier.pop(0)
+        if kind in goal_edges:
+            steps = [*path, goal_edges[kind]]
+            return {"status": "PASS__PLAN_COMPOSED_FROM_VERIFIED_CLAIMS",
+                    "goal": goal, "start": start,
+                    "kinds": [start] + [str(s["output_kind"]) for s in steps],
+                    "plan": [str(s["template"]) for s in steps],
+                    "steps": [{"relation_id": s["relation_id"], "program": s["program"],
+                               "pre": s["pre"],
+                               "relation": s["relation"], "input_kind": s["input_kind"],
+                               "produces": s["output_kind"], "observable": s["observable"],
+                               "check": s["predicate"]} for s in steps],
+                    "authority": "EXTERNAL_DOCUMENT_COMPILED_TO_A_WITNESS",
+                    "why_this_plan": ("every step is a prose claim compiled to a witness that "
+                                      "separated a wrong version and repeated on a second room; "
+                                      "the steps join on the kinds the witnesses produced, and "
+                                      "the whole chain is re-run before it is returned")}
+        if len(path) >= max_steps:
+            continue
+        for name in sorted(signatures):
+            for edge_kind in sorted(signatures[name]):
+                if edge_kind != kind:
+                    continue
+                produced = str(signatures[name][edge_kind]["output_kind"] or "")
+                if not produced or produced in seen:
+                    continue
+                seen.add(produced)
+                frontier.append((produced, [*path, signatures[name][edge_kind]]))
+    reachable = {str(signatures[name][k]["output_kind"])
+                 for name in signatures for k in signatures[name]
+                 if signatures[name][k]["output_kind"]}
+    return {"status": "REFUSED__NO_CHAIN_BETWEEN_THESE_KINDS",
+            "start": start, "goal": goal,
+            "kinds_reachable": sorted(reachable),
+            "goal_needs": sorted(goal_edges),
+            "seen_not_permitted": [r.get("program") for r in relations][:8]}
+
+
+def _first_file(root: pathlib.Path, out: str) -> str:
+    """The first FILE under `out`, read back from the room. A step that produces a directory
+    produced its members; archiving a directory yields a directory inside the archive, so the
+    artifact the next step can consume is a file somewhere inside. The room is the authority."""
+    path = root / out
+    if path.is_file():
+        return out
+    if not path.is_dir():
+        return ""
+    for entry in sorted(path.iterdir()):
+        if entry.is_file():
+            return str(pathlib.PurePosixPath(out) / entry.name)
+    for entry in sorted(path.iterdir()):
+        if entry.is_dir():
+            found = _first_file(root, str(pathlib.PurePosixPath(out) / entry.name))
+            if found:
+                return found
+    return ""
+
+
+def _resolve_produced(root: pathlib.Path, out: str) -> tuple[str, bool]:
+    """The object a step produced: itself if it is a file, else the first file inside it."""
+    found = _first_file(root, out)
+    return found, bool(found)
+
+
+def run_composed_plan(plan: Mapping[str, Any], start_kind: str, *,
+                      variant: int = 0, goal: Mapping[str, Any] | None = None,
+                      original: str | None = None) -> dict[str, Any]:
+    """Run a composed chain in one room and check the GOAL RELATION's witness on the result.
+
+    Each step was verified alone; the chain is a NEW claim -- that step N's artifact is a valid
+    input to step N+1 -- and no witness has checked it. So the chain is executed, each output
+    threaded into the next input, and the goal relation's own predicate decides. A chain that
+    cannot run is refused with the step that broke; a chain that runs and does not satisfy the
+    goal is refused with the reading that failed. This is the counterexample the composition
+    search needs: a returned plan is one that ran, not one that type-checked.
+
+    The goal's observable decides WHERE the answer is read. `content`, `size` and `valid` are
+    read from the artifact the chain produced; `stdout` and `exit` are read from the last run,
+    because a reader produces a stream and not a file -- demanding a file from `tar --list`
+    refused a chain that had in fact succeeded.
+    """
+    steps = list(plan.get("steps") or [])
+    templates = list(plan.get("plan") or [])
+    if not steps or len(steps) != len(templates):
+        return {"status": "REFUSED__NO_PLAN_TO_RUN", "steps": len(steps)}
+    observable = str((goal or {}).get("observable") or "")
+    predicate = str((goal or {}).get("predicate") or "")
+    stream_goal = observable in ("stdout", "exit")
+    reader_goal = stream_goal or str(steps[-1].get("relation") or "") not in PRODUCING_RELATIONS
+    root = pathlib.Path(tempfile.mkdtemp(prefix="compose-"))
+    try:
+        obj = make_object(start_kind, root, variant, program=str(steps[0].get("program") or ""))
+        if not obj.get("ok"):
+            return {"status": "REFUSED__NO_ROOM", "reason": obj.get("reason")}
+        current = str(obj["input"])
+        ran: list[dict[str, Any]] = []
+        final = current
+        goal_input = current
+        before_value = None
+        expected_lines = None
+        last_stdout, last_exit = "", None
+        same_exit = corrupt_exit = None
+        for index, template in enumerate(templates):
+            last = index == len(templates) - 1
+            if "{object}" not in template:
+                return {"status": "REFUSED__TEMPLATE_HAS_NO_INPUT_SLOT", "step": index,
+                        "template": template}
+            out = f"step-{index}.out"
+            other = f"step-{index}-other.txt"
+            if "{other}" in template:
+                try:
+                    body = (root / current).read_text(encoding="utf-8", errors="replace")
+                except OSError:
+                    body = str(obj.get("original") or "")
+                (root / other).write_text(body + "the one line that differs\n", encoding="utf-8")
+            for pre in (steps[index].get("pre") or []):
+                pre_argv = pre.replace("{object}", current).replace("{out}", out) \
+                    .replace("{outdir}", f"step-{index}.dir").replace("{other}", other).split()
+                pre_done = _run(pre_argv, root)
+                if pre_done.get("exit") != 0:
+                    return {"status": "REFUSED__PRECONDITION_FAILED", "step": index,
+                            "pre": pre_argv, "exit": pre_done.get("exit"),
+                            "stderr": str(pre_done.get("stderr") or "")[:200], "ran": ran}
+            if last:
+                # the goal relation is measured on its own input, and it must be read BEFORE the
+                # step runs because an in-place program (`gzip x`) unlinks its input when it
+                # writes `x.gz`
+                goal_input = current
+                if observable and not stream_goal:
+                    before_value = _read(observable, root,
+                                         {"input": goal_input, "output": goal_input, "kind": None})
+                if (root / goal_input).is_file():
+                    try:
+                        expected_lines = len((root / goal_input).read_text(
+                            encoding="utf-8", errors="replace").splitlines())
+                    except OSError:
+                        expected_lines = None
+            before_names = {str(entry.relative_to(root)) for entry in root.rglob("*")}
+            argv = template.replace("{object}", current).replace("{out}", out) \
+                .replace("{outdir}", f"step-{index}.dir").replace("{other}", other).split()
+            done = _run(argv, root)
+            last_stdout, last_exit = str(done.get("stdout") or ""), done.get("exit")
+            ran.append({"index": index, "argv": argv, "exit": done.get("exit"),
+                        "stderr": str(done.get("stderr") or "")[:200]})
+            if last and predicate == "exit_nonzero":
+                same_exit = _run([argv[0], current, current], root).get("exit")
+            elif done.get("exit") != 0:
+                return {"status": "REFUSED__CHAIN_BROKE_AT_A_STEP", "step": index,
+                        "argv": argv, "exit": done.get("exit"),
+                        "stderr": str(done.get("stderr") or "")[:200], "ran": ran}
+            if "{outdir}" in template:
+                produced, present = _resolve_produced(root, f"step-{index}.dir")
+            elif "{out}" in template:
+                produced, present = _resolve_produced(root, out)
+            else:
+                # The program named its own artifact (`gzip x` writes `x.gz`). The room is the
+                # authority on what it wrote: the artifact is what appeared, not a name guessed
+                # from the program. The suffix the relation is known to produce breaks a tie
+                # between the input and its neighbour.
+                suffix = RELATION_OUTPUT.get(str(steps[index].get("relation") or ""), "")
+                created = sorted(str(entry.relative_to(root)) for entry in root.rglob("*")
+                                 if str(entry.relative_to(root)) not in before_names
+                                 and entry.is_file())
+                preferred = [name for name in created if suffix and name.endswith(suffix)]
+                produced = (preferred or created or [""])[0]
+                present = bool(produced)
+            if not present and not (last and reader_goal):
+                return {"status": "REFUSED__STEP_PRODUCED_NOTHING", "step": index,
+                        "argv": argv, "expected": out, "ran": ran}
+            if present:
+                current = produced
+                final = produced
+            if last and predicate == "distinguishes_valid_from_corrupt":
+                corrupt = f"corrupt-{pathlib.PurePosixPath(goal_input).name}"
+                try:
+                    payload = (root / goal_input).read_bytes()
+                    (root / corrupt).write_bytes(payload[: min(64, max(1, len(payload) // 2))])
+                except OSError:
+                    payload = b""
+                corrupt_argv = [corrupt if token == goal_input else token for token in argv]
+                corrupt_exit = _run(corrupt_argv, root).get("exit")
+        if goal is None:
+            return {"status": "PASS__CHAIN_RAN", "ran": ran, "produced": final,
+                    "note": "no goal relation was given, so the chain is only known to run"}
+        needle = None
+        if predicate == "content_equals_member":
+            # the member's BODY, which is what `content_equals_member` compares. An archive room
+            # already knows it (`original`); a directory room must read it back out of the member.
+            needle = obj.get("original") or None
+            if not needle:
+                member = (obj.get("members") or [None])[0]
+                try:
+                    needle = ((root / str(obj["input"]) / str(member)).read_text(
+                        encoding="utf-8", errors="replace") if member else None)
+                except OSError:
+                    needle = None
+        if predicate in ("stdout_contains_member", "stdout_contains"):
+            needle = (obj.get("members") or [None])[0] or obj.get("original")
+        expected = expected_lines if expected_lines is not None else obj.get("expected")
+        if stream_goal:
+            readings = {"after": last_stdout, "before": "", "stdout": last_stdout,
+                        "exit": last_exit, "same_exit": same_exit, "corrupt_exit": corrupt_exit,
+                        "after_exists": True, "needle": needle,
+                        "original": original if original is not None else obj.get("original"),
+                        "expected": expected, "run": {}, "obj": obj, "action": {}}
+            value = last_stdout
+        else:
+            value = _read(observable, root, {"input": final, "output": final, "kind": None})
+            readings = {"after": value, "before": before_value, "stdout": value,
+                        "exit": last_exit, "same_exit": same_exit, "corrupt_exit": corrupt_exit,
+                        "after_exists": bool(final),
+                        "needle": needle,
+                        "original": original if original is not None else obj.get("original"),
+                        "expected": expected, "run": {}, "obj": obj, "action": {}}
+        verdict = _predicate(predicate, readings)
+        return {"status": "PASS__CHAIN_RAN_AND_MET_THE_GOAL" if verdict
+                        else "REFUSED__CHAIN_RAN_BUT_MISSED_THE_GOAL",
+                "goal": predicate, "reading": (value[:200] if isinstance(value, str)
+                                               else value),
+                "needle": needle, "produced": final, "ran": ran}
+    finally:
+        shutil.rmtree(root, ignore_errors=True)
+
+
+def plan_from_relations(relations: Sequence[Mapping[str, Any]], actions: Sequence[Any],
+                        start: str = "", goal: str = "") -> dict[str, Any]:
+    """A plan is a relation whose program the caller may do, with the object left to the state.
+
+    With `start` and `goal`, the plan is a CHAIN of such relations joined on kinds.
+    """
+    if start and goal:
+        return compose_plan(relations, actions, start, goal)
     offered = {str(a).strip() for a in actions if str(a).strip()}
     offered_programs = {a.split()[0] for a in offered if a.split()}
     for relation in relations:
@@ -2045,6 +2442,53 @@ def _document_owner(name: str) -> str:
     return ""
 
 
+def _graph_census(relations: Sequence[Mapping[str, Any]], actions: Sequence[Any],
+                  deadline: float, run_cap: int = 64) -> dict[str, Any]:
+    """What the store is worth AS A GRAPH: nodes, edges, and how many goals composition closes.
+
+    A relation is one door. The question a store has to answer is not "how many doors" but "how
+    many rooms can I get between", so every (start kind, goal relation) pair is composed and the
+    multi-step chains are RUN. A chain that type-checks and does not run is counted as refused,
+    never as a plan: the number reported is the number that ran and met the goal.
+    """
+    signatures = induce_signatures(relations, actions)
+    edges = [(name, kind, str(row["output_kind"]))
+             for name, kinds in signatures.items() for kind, row in kinds.items()
+             if row["output_kind"]]
+    readers = sorted(name for name, kinds in signatures.items()
+                     if not any(row["output_kind"] for row in kinds.values()))
+    nodes = sorted({e[1] for e in edges} | {e[2] for e in edges})
+    composed = one_step = multi_step = ran = met = 0
+    refusals: dict[str, int] = {}
+    for goal in sorted(signatures):
+        for start in nodes:
+            plan = compose_plan(relations, actions, start, goal)
+            if plan.get("status") != "PASS__PLAN_COMPOSED_FROM_VERIFIED_CLAIMS":
+                refusals[str(plan.get("status"))] = refusals.get(str(plan.get("status")), 0) + 1
+                continue
+            composed += 1
+            if len(plan["plan"]) == 1:
+                one_step += 1
+                continue
+            multi_step += 1
+            if ran >= run_cap or time.time() > deadline:
+                continue
+            ran += 1
+            run = run_composed_plan(plan, start,
+                                    goal={"predicate": RELATIONS[goal]["predicate"],
+                                          "observable": RELATIONS[goal]["observable"]})
+            if run.get("status") == "PASS__CHAIN_RAN_AND_MET_THE_GOAL":
+                met += 1
+            else:
+                refusals[str(run.get("status"))] = refusals.get(str(run.get("status")), 0) + 1
+    return {"nodes": nodes, "edges": len(edges), "readers": readers,
+            "relations_with_an_edge": sorted(signatures),
+            "edge_list": [f"{n}:{k}->{o}" for n, k, o in edges],
+            "goals_composed": composed, "one_step": one_step, "multi_step": multi_step,
+            "multi_step_run": ran, "multi_step_met_the_goal": met,
+            "refusals": dict(sorted(refusals.items()))}
+
+
 def measure(*, budget: float = 240.0, fleet: Sequence[str] = FLEET,
             corpus: str = "all") -> dict[str, Any]:
     """The census: how much of each kind of documentation becomes an admitted relation.
@@ -2055,6 +2499,7 @@ def measure(*, budget: float = 240.0, fleet: Sequence[str] = FLEET,
     corpus that is all prose.
     """
     started = time.time()
+    graph: dict[str, Any] = {}
     groups = _corpus_groups(fleet)
     if corpus != "all":
         groups = {corpus: groups[corpus]} if corpus in groups else {}
@@ -2150,6 +2595,11 @@ def measure(*, budget: float = 240.0, fleet: Sequence[str] = FLEET,
         else:
             transfer_failures.append({"relation_id": relation.get("relation_id"),
                                       "verdict": result.verdict, "reason": result.reason})
+    # THE GRAPH THE STORE IS WORTH. Composition is measured, not asserted: every goal relation
+    # is composed from every kind and the multi-step chains are run, so the number reported is
+    # the number that ran and met the goal.
+    if all_relations:
+        graph = _graph_census(all_relations, fleet, deadline=started + budget + 60)
     total_sentences = sum(r["sentences"] for r in rows)
     total_unique = sum(r["unique_claims"] for r in rows)
     total_admitted = sum(r["admitted"] for r in rows)
@@ -2182,6 +2632,7 @@ def measure(*, budget: float = 240.0, fleet: Sequence[str] = FLEET,
         "transfer": {"tested": transfer_total, "admitted": transfer_ok,
                      "failed": transfer_total - transfer_ok,
                      "failures": transfer_failures[:20]},
+        "graph": graph,
         "rows": rows,
         "seconds": round(time.time() - started, 1),
         "cost": {"model_calls": 0, "parameters": 0, "network_at_run_time": 0, "spend_usd": 0},

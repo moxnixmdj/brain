@@ -400,3 +400,152 @@ def test_a_qualifier_is_witnessed_or_contradicted_never_dropped():
 
 
 import tempfile  # noqa: E402
+
+
+# --------------------------------------------------------------------------- #
+# 12. composition: the store as a typed graph
+# --------------------------------------------------------------------------- #
+# A relation is one door. `tar archives a directory` and `tar extracts an archive` are two
+# doors, and "get the files out of this directory" is neither of them -- it is the pair, joined
+# on the fact that the first produces what the second consumes. The defects below are the ones
+# this composition produced, in order, and each one is a chain that type-checked and did not run.
+
+
+def _admitted(program: str, relation: str, kind: str, sentence: str):
+    return _evaluate(program, relation, kind, sentence).relation
+
+
+def _doors():
+    return [relation for relation in (
+        _admitted("tar", "archives", "directory", "tar archives a directory."),
+        _admitted("tar", "archives", "archive", "tar archives an archive."),
+        _admitted("tar", "extracts", "archive", "tar extracts an archive."),
+        _admitted("tar", "lists", "archive", "tar lists an archive."),
+        _admitted("cat", "prints", "file", "cat prints a file."),
+        _admitted("gzip", "compresses", "file", "gzip compresses a file."),
+        _admitted("gzip", "decompresses", "compressed", "gzip decompresses a compressed file."),
+        _admitted("sort", "sorts", "file", "sort sorts a file."),
+    ) if relation]
+
+
+ACTIONS = ("tar", "gzip", "sort", "cat")
+
+
+def test_a_goal_two_doors_away_is_composed_and_runs():
+    "No single relation says `directory -> extracts`; the pair does, and the chain is executed."
+    plan = subject.compose_plan(_doors(), ACTIONS, "directory", "extracts")
+    assert plan["status"] == "PASS__PLAN_COMPOSED_FROM_VERIFIED_CLAIMS"
+    assert plan["kinds"] == ["directory", "archive", "file"]
+    assert plan["plan"] == ["tar --create -f {out} --recursion {object}",
+                            "tar --extract -f {object} --directory {outdir}"]
+    run = subject.run_composed_plan(
+        plan, "directory", goal={"observable": "content", "predicate": "content_equals_member"})
+    assert run["status"] == "PASS__CHAIN_RAN_AND_MET_THE_GOAL"
+    assert len(run["ran"]) == 2
+
+
+def test_a_reader_is_a_goal_and_not_a_step():
+    """`lists` was an edge `archive -> archive` because its sensor read the archive.
+
+    A reader consumes an object and writes a stream: it moves nothing between kinds, so it
+    cannot be a step in a chain. Treating it as one produced chains that broke at that step.
+    """
+    signatures = subject.induce_signatures(_doors(), ACTIONS)
+    assert signatures["lists"]["archive"]["output_kind"] is None
+    assert "lists" not in {name for name, kinds in signatures.items()
+                           if any(row["output_kind"] for row in kinds.values())}
+    # it is still a GOAL: "list this archive" is a thing you want
+    plan = subject.compose_plan(_doors(), ACTIONS, "directory", "lists")
+    assert plan["status"] == "PASS__PLAN_COMPOSED_FROM_VERIFIED_CLAIMS"
+    assert plan["plan"][-1] == "tar --list -f {object}"
+
+
+def test_a_reader_goal_is_read_from_the_stream_not_from_a_file():
+    """`tar --list` produces no artifact, so demanding one refused a chain that had succeeded."""
+    plan = subject.compose_plan(_doors(), ACTIONS, "archive", "lists")
+    run = subject.run_composed_plan(
+        plan, "archive", goal={"observable": "stdout", "predicate": "stdout_contains_member"})
+    assert run["status"] == "PASS__CHAIN_RAN_AND_MET_THE_GOAL"
+
+
+def test_a_template_keeps_the_precondition_it_was_witnessed_with():
+    """`tar --extract --directory out` exits 2 unless `out` exists; the witness ran `mkdir` first.
+
+    The store kept the argv and dropped the `pre`, so every composed chain through `extracts`
+    broke at exactly that step with `Cannot open: No such file or directory`.
+    """
+    door = _admitted("tar", "extracts", "archive", "tar extracts an archive.")
+    assert door["witness"]["pre"] == ["mkdir", "-p", door["witness"]["pre"][-1]]
+    row = subject.induce_signatures([door], ACTIONS)["extracts"]["archive"]
+    assert row["pre"] == ["mkdir -p {outdir}"]
+    plan = subject.compose_plan(_doors(), ACTIONS, "directory", "extracts")
+    run = subject.run_composed_plan(
+        plan, "directory", goal={"observable": "content", "predicate": "content_equals_member"})
+    assert run["status"] == "PASS__CHAIN_RAN_AND_MET_THE_GOAL"
+
+
+def test_a_template_names_its_input_and_output_slots():
+    """A reader's output IS its input, so calling that token `{out}` left no input slot."""
+    reads = subject._template_for(_admitted("tar", "lists", "archive", "tar lists an archive."))
+    assert reads == "tar --list -f {object}"
+    writes = subject._template_for(_admitted("sort", "sorts", "file", "sort sorts a file."))
+    assert writes == "sort {object} -o {out}"
+    assert "{object}" in writes and "{out}" in writes
+
+
+def test_a_chain_that_runs_and_misses_the_goal_is_refused_with_the_reading():
+    """Four doors joined `directory` to `decompresses`; the chain ran and the goal was not met."""
+    plan = subject.compose_plan(_doors(), ACTIONS, "directory", "decompresses")
+    assert plan["status"] == "PASS__PLAN_COMPOSED_FROM_VERIFIED_CLAIMS"
+    run = subject.run_composed_plan(
+        plan, "directory",
+        goal={"observable": "content", "predicate": "content_equals_original"})
+    assert run["status"] == "REFUSED__CHAIN_RAN_BUT_MISSED_THE_GOAL"
+    assert run["goal"] == "content_equals_original"
+
+
+def test_an_unwitnessed_edge_is_not_in_the_graph_and_the_refusal_names_the_frontier():
+    """A relation witnessed on `file` only says nothing about `compressed`."""
+    plan = subject.compose_plan(_doors(), ACTIONS, "compressed", "archives")
+    assert plan["status"] == "REFUSED__NO_CHAIN_BETWEEN_THESE_KINDS"
+    assert plan["start"] == "compressed" and plan["goal"] == "archives"
+    assert plan["goal_needs"] == ["archive", "directory"]
+    assert "file" in plan["kinds_reachable"]
+
+
+def test_the_graph_census_never_counts_a_chain_that_did_not_run():
+    """The census reports edges, readers, and the chains that RAN -- not the chains that composed."""
+    census = subject._graph_census(_doors(), ACTIONS, deadline=float("inf"), run_cap=40)
+    assert census["edges"] == 6 and census["readers"] == ["lists", "prints"]
+    assert census["multi_step"] > 0 and census["multi_step_run"] == census["multi_step"]
+    assert census["multi_step_met_the_goal"] < census["multi_step"]
+    assert census["refusals"]
+
+
+def test_a_plan_with_no_slots_cannot_run():
+    """A template that names no input is not a plan; the refusal says which step."""
+    run = subject.run_composed_plan({"plan": ["tar --list"], "steps": [{"pre": []}]}, "archive")
+    assert run["status"] == "REFUSED__TEMPLATE_HAS_NO_INPUT_SLOT"
+    assert run["step"] == 0
+
+
+def test_a_comparison_exits_zero_on_identical_files_and_nonzero_on_different_ones():
+    """`tar a b` exits 2 because `a` is not a mode flag, and exits 2 on `tar a a` too.
+
+    Checking only `exit != 0` on two different files admitted any command that crashed with a
+    syntax error; the composed chain then ran `tar {object} other.txt` and broke at that step.
+    """
+    assert _evaluate("diff", "compares", "file", "diff compares two files.").verdict == "ADMIT"
+    bogus = _evaluate("tar", "compares", "file", "tar compares two files.")
+    assert bogus.verdict == "REFUSED"
+    assert bogus.reason == "CLAIM_IS_FALSE"
+
+
+def test_an_in_place_goal_step_reads_before_before_the_input_is_unlinked():
+    """`gzip x` unlinks `x` when it writes `x.gz`, so reading `before` after the loop gave None."""
+    plan = subject.compose_plan(_doors(), ACTIONS, "directory", "compresses")
+    assert plan["status"] == "PASS__PLAN_COMPOSED_FROM_VERIFIED_CLAIMS"
+    run = subject.run_composed_plan(
+        plan, "directory", goal={"observable": "size", "predicate": "size_lt"})
+    assert run["status"] == "PASS__CHAIN_RAN_AND_MET_THE_GOAL"
+    assert run["produced"].endswith(".gz")
