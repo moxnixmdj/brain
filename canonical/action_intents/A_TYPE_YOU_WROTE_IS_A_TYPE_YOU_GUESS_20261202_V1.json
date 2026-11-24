@@ -119,7 +119,7 @@
  "stop_condition": "stop when every declared check on this machine has been tested for separation, repetition, observation and content invariance, and every class the survivors cannot separate is listed with its log2 price",
  "expected_parent_change": "an object stops being a name the tool author chose and becomes a set of the machine's own verdicts",
  "expected_parent_frontier_change": "the frontier moves from 'which kind name did I write' to 'which of my declarations are questions and which are writes'",
- "expected_parent_level_state_change": "the frontier moves from 'which kind name did I write' to 'which of the machine's own declared checks can still separate this object, and which of my declarations are not questions at all but writes'",
+ "expected_parent_level_state_change": "the frontier moves from 'which kind name did I write' to 'which of my declarations are questions and which are writes'",
  "progress_class": "VERIFIED_REUSABLE_CAPABILITY_GAIN",
  "progress_evidence_paths": [
   "canonical/tools/a_type_you_wrote_is_a_type_you_guess_v1.py",
@@ -450,7 +450,7 @@
   ],
   "selected_surviving_route": "RUN_THE_DECLARED_CHECKS_AS_WITNESSES_AND_LET_THE_MACHINE_SAY_WHAT_IT_CAN_STILL_SEPARATE",
   "why_selected_route_is_fastest_sufficient": "the machine has already declared 2,319 checks; selecting witnesses costs one survey and two rooms, needs no parameters, and every verdict is an exit code",
-  "expected_parent_level_state_change": "the frontier moves from 'which kind name did I write' to 'which of the machine's own declared checks can still separate this object, and which of my declarations are not questions at all but writes'",
+  "expected_parent_level_state_change": "the frontier moves from 'which kind name did I write' to 'which of my declarations are questions and which are writes'",
   "stop_condition": "stop when every declared check on this machine has been tested for separation, repetition, observation and content invariance, and every class the survivors cannot separate is listed with its log2 price",
   "route_frontier": {
    "canonical_base_commit": "cc8dd71702fc20502793a622addcd474e6524075",

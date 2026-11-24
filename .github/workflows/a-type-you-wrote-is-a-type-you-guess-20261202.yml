@@ -1,0 +1,133 @@
+name: A Type You Wrote Is A Type You Guess 20261202
+
+# One instrument, one receipt, no verdict of its own:
+#   canonical/tools/a_type_you_wrote_is_a_type_you_guess_v1.py
+#     -> canonical/verification/A_TYPE_YOU_WROTE_IS_A_TYPE_YOU_GUESS_20261202_V1.json
+#
+# Everything this workflow says is a SECOND RUN of the same tool on a clean machine, which is
+# the only kind of verification this repository accepts. A re-hash of the producer's own output
+# is not verification.
+#
+# The three numbers the workflow will NOT let this round restate in a friendlier form, because
+# the round's own essay states them the other way round:
+#   * the authored scanner this tree already had separates MORE different pairs than the derived
+#     witness set does (161 against 155 of 189), and the workflow fails if the receipt stops
+#     saying so;
+#   * 45 witnesses are 4 distinctions, so a witness count quoted alone is a misleading number;
+#   * a check that WRITES is not a check, and `shred --verbose` once passed the shipped
+#     read-only test.
+
+on:
+  push:
+    branches:
+      - arena/eaf4537b-brain
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  rerun-the-type-instrument:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: The rule names no program
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import pathlib, sys
+          source = pathlib.Path(
+              "canonical/tools/a_type_you_wrote_is_a_type_you_guess_v1.py").read_text()
+          # the witness rule is the part that must not know what it is looking at
+          rule = source[source.index("def witness_scan("):source.index("def _codes_on(")]
+          offenders = [name for name in
+                       ("gzip", "tar", "unzip", "jq", "sqlite3", "openssl", "node", "perl",
+                        "xz", "bzip2", "ar", "convert", "shred")
+                       if f'"{name}"' in rule]
+          if offenders:
+              print("the witness rule names a program:", offenders)
+              sys.exit(1)
+          print("the witness rule names no program: ok")
+          PY
+
+      - name: The producers the room is built from exist
+        shell: bash
+        run: |
+          set -euo pipefail
+          missing=""
+          for program in tar gzip xz bzip2 zip ar openssl convert cp sqlite3; do
+            command -v "$program" >/dev/null 2>&1 || missing="$missing $program"
+          done
+          if [ -n "$missing" ]; then
+            echo "the unseen room cannot be built without:$missing"
+            exit 1
+          fi
+          python -c "import sqlite3, zipfile; print('python modules present')"
+
+      - name: Run the instrument
+        run: python canonical/tools/a_type_you_wrote_is_a_type_you_guess_v1.py --receipt "$RUNNER_TEMP/receipt.json"
+
+      - name: The gates are the ones that were declared, and the honest numbers stay honest
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - "$RUNNER_TEMP/receipt.json" <<'PY'
+          import json, sys
+          got = json.load(open(sys.argv[1]))
+          for gate, row in got["verdict"].items():
+              print(f"{gate}: {row['MET']}")
+              if row["MET"] is not True:
+                  print(f"  {gate} is not met on this machine; that is a result, not a failure")
+          cost = got["cost"]
+          assert cost["model_calls"] == 0, "a model was called at run time"
+          assert cost["parameters_stored"] == 0, "something was stored between runs"
+          assert cost["network_calls_at_run_time"] == 0, "the run touched the network"
+          assert got["authority"] == "NONE__PRODUCER_RUN_SANDBOX"
+          assert any("not a benchmark result" in line for line in got["what_this_is_not"])
+
+          # THE THREE NUMBERS THIS ROUND MUST NOT ROUND IN ITS OWN FAVOUR.
+          table = got["where_this_loses"]["honest_comparison_on_room_u"]
+          assert table["inherited_scanner_as_written"] > table["this_rounds_derived_witnesses"], (
+              "the authored scanner's advantage has disappeared from the receipt")
+          assert table["this_rounds_derived_witnesses"] > table["written_kind_table"], (
+              "the derived set no longer beats the hand-written kind table, so the round's claim "
+              "is false on this run and must be reported as false")
+          names = got["distinctions"]["room_u"]
+          assert names["distinctions"] < names["witnesses"], (
+              "the aliasing correction has disappeared")
+          assert got["writable_or_destructive_declared_checks"]["count"] >= 1, (
+              "no declared check was shown to write, which contradicts the essay")
+          removed = got["inherited_scanner"]["same_four_tests_applied"]["removed"]
+          assert "python" in removed, "the content-test correction has disappeared"
+
+          print("witnesses:", len(got["witnesses"]["witnesses"]),
+                "distinctions:", names["distinctions"])
+          print("written table:", table["written_kind_table"],
+                "derived:", table["this_rounds_derived_witnesses"],
+                "authored scanner:", table["inherited_scanner_as_written"],
+                "of", table["different_pairs"])
+          print("residual classes:", got["indistinguishable"]["room_u"]["unresolved_count"])
+          PY
+
+      - name: The tests that hold the three defects stay green
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check --no-input pytest
+          python -m pytest -q canonical/tests/test_a_type_you_wrote_is_a_type_you_guess_v1.py
+
+      - name: Upload the second run
+        uses: actions/upload-artifact@v4
+        with:
+          name: a-type-you-wrote-is-a-type-you-guess-20261202-second-run
+          path: ${{ runner.temp }}/receipt.json
+          if-no-files-found: error
