@@ -53,7 +53,7 @@
       },
       "lift": "PASS__OPERATOR_LIFTED",
       "admit": "ADMIT",
-      "duration_s": 0.0666
+      "duration_s": 0.0748
     },
     "held_out": {
       "status": "PASS__REPLAY_FROM_OPERATOR",
@@ -102,23 +102,33 @@
       "plan": null,
       "effect": {
         "schema": "PROJECT_BRAIN_EFFECT_ORACLE_V1",
-        "verdict": "NOT_A_GOAL__NO_SUCH_ARTIFACT",
+        "verdict": "EFFECT_VERIFIED",
         "shape": "state",
         "output": "out.db",
         "source": "report.txt",
-        "shapes_tried": {
-          "bytes": "NOT_A_GOAL__NO_SUCH_ARTIFACT",
-          "state": "NOT_A_GOAL__NO_SUCH_ARTIFACT"
+        "reader": "notes",
+        "reading": {
+          "table": "notes",
+          "column": "body",
+          "how": "rows_newline_final",
+          "rows": 2
         },
-        "binding": {
-          "source": "report.txt",
-          "reason": "the only file here that is not the output",
-          "files": [
-            "report.txt"
-          ]
+        "also_matched": 0,
+        "looked_at": [
+          "notes.body"
+        ],
+        "shapes_tried": {
+          "bytes": "NOT_ASKED__THE_ARTIFACT_IS_A_STORE",
+          "state": "EFFECT_VERIFIED"
         }
       },
-      "duration_s": 0.0091
+      "duration_s": 0.0092
+    },
+    "ablation_empty_store": {
+      "status": "OPEN__NO_PLAN_AFTER_SCAN",
+      "plan": null,
+      "duration_s": 0.185,
+      "act": null
     },
     "judge": {
       "lesson": {

@@ -384,6 +384,18 @@ store, one correct single-row store, one wrong store, one decoy copy) ->
 directory -> `PASS__REPLAY_FROM_OPERATOR`, and the judge outside all of it, plain
 SQL issued by this report's author, returns rows equal to the renamed source.
 
+**Ablation, same held-out world, store versus no store:**
+
+| store | result | time |
+|---|---|---|
+| learned | `PASS__REPLAY_FROM_OPERATOR`, `EFFECT_VERIFIED` | 0.10 s |
+| empty | `OPEN__NO_PLAN_AFTER_SCAN` (fails) | 0.19 s |
+
+So the lesson is load-bearing: without it the agent cannot store the source at
+all, and with it the same lesson transfers to a renamed file in a new directory.
+No raw trace is kept or needed -- the store holds the contract (action identity,
+roles bound, checkable effect), not the episode.
+
 **A defect found on the way, and it is the important one.** The first held-out
 attempt replayed the action, ran it, and the effect came back
 `REFUTED__EFFECT_DID_NOT_HOLD_HERE` -- because the action hardcoded `input.txt`

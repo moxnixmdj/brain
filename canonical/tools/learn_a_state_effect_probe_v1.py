@@ -141,6 +141,17 @@ replay = pa.run(held, "store the input in out.db", held.action_names,
                 memory_path_=memory, budget=8, max_depth=2, seed=11,
                 goal_check=held_check, effect_contract=held_check.contract)
 
+# ---- ablation: the same held-out world with an EMPTY store -------------------
+abl_root = base / "ablated"
+abl = build(abl_root, "report.txt")
+abl_check = oracle.oracle_from_goal("store the input in out.db")
+ablated = pa.run(abl, "store the input in out.db", abl.action_names,
+                 goal_predicate=lambda s: "out.db:" in str(s),
+                 goal_family="store_in_a_database", env_kind="posix_dir",
+                 memory_path_=str(base / "empty_memory.json"), budget=8,
+                 max_depth=2, seed=11, goal_check=abl_check,
+                 effect_contract=abl_check.contract)
+
 # ---- the judge: read the store with plain SQL, knowing nothing we learned ----
 def judge(root, source_name):
     connection = sqlite3.connect(root / "out.db")
@@ -173,6 +184,10 @@ print(json.dumps({
                  "effect": ((replay.get("steps", {}).get("memory_replay") or {})
                             .get("effect") or held_check.last),
                  "duration_s": replay.get("duration_s")},
+    "ablation_empty_store": {"status": ablated.get("status"),
+                             "plan": (ablated.get("steps", {}).get("plan") or {}).get("plan"),
+                             "duration_s": ablated.get("duration_s"),
+                             "act": (ablated.get("steps", {}).get("act") or {}).get("status")},
     "judge": {"lesson": judge(lesson_root, "input.txt"),
               "held_out": judge(held_root, "report.txt")},
     "memory_rules": [(r.get("program"), r.get("goal_family"), r.get("output_name"))
@@ -232,6 +247,10 @@ def main(argv: list[str] | None = None) -> int:
     print("  held out  %s plan=%s effect=%s" % (
         held.get("status"), held.get("plan"),
         (held.get("effect") or {}).get("verdict")))
+    ablate = body.get("ablation_empty_store") or {}
+    print("  no store  %s in %ss (plan=%s)" % (ablate.get("status"),
+                                               ablate.get("duration_s"),
+                                               ablate.get("plan")))
     print("  judge:", json.dumps(body.get("judge"), default=str))
     print("  memory:", body.get("memory_rules"))
     if args.json:
