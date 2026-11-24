@@ -551,4 +551,132 @@ def test_07_pillar4_assertion_block_splitting_and_def_use_early_return_guard() -
         assert ns["parse_suffix_ranges"]("bytes=-0") is None
 
 
+def test_08_backward_witness_ret_transform_and_bool_implication_weaken() -> None:
+    """Proves Iter 81 Pillar 1 Return-Expression Backward Witness Transform +
+    Propositional Conjunction-to-Implication Weakening (`P and Q` -> `not P or Q`)."""
+    from canonical.runtime import causal_angelic_swe_engine_v1 as SWE
+
+    # 1. Return-Expression Backward Witness Transform (`(__ret__).rstrip()`)
+    with tempfile.TemporaryDirectory() as td:
+        root = pathlib.Path(td)
+        (root / "hdr.py").write_text(
+            "def dump_params(params: dict) -> str:\n"
+            "    return ', '.join(f'{k}={v}' for k, v in params.items())\n\n"
+            "def format_challenge(scheme: str, params: dict) -> str:\n"
+            "    return f'{scheme.title()} {dump_params(params)}'\n",
+            encoding="utf-8",
+        )
+        (root / "test_hdr.py").write_text(
+            "import hdr\n\n"
+            "def test_with_params():\n"
+            "    assert hdr.format_challenge('bearer', {'realm': 'api'}) == 'Bearer realm=api'\n\n"
+            "def test_empty_params():\n"
+            "    assert hdr.format_challenge('bearer', {}) == 'Bearer'\n",
+            encoding="utf-8",
+        )
+        res1 = SWE.solve_repository(root, ["test_hdr.py"], python_exe=sys.executable, max_candidates=25)
+        assert res1["status"] == "VERIFIED", res1
+        assert res1["model_calls"] == 0 and res1["parameters_stored"] == 0
+        assert res1["winner"]["tier"] == "TIER3_BACKWARD_WITNESS_RET_TRANSFORM", res1["winner"]
+        assert ".rstrip()" in res1["winner"]["diff"]
+
+    # 2. First-Principles Propositional Implication Weakening (`A and B and C` -> `A and (not B or C)`)
+    with tempfile.TemporaryDirectory() as td:
+        root = pathlib.Path(td)
+        (root / "router.py").write_text(
+            "class Router:\n"
+            "    def __init__(self, sub_match: bool, host_match: bool, host: str, sub: str):\n"
+            "        self.sub_match = sub_match\n"
+            "        self.host_match = host_match\n"
+            "        self.host = host\n"
+            "        self.sub = sub\n\n"
+            "    def build(self, path: str, domain: str, host: str, force_external: bool = False) -> str:\n"
+            "        if (\n"
+            "            not force_external\n"
+            "            and (self.sub_match or self.host_match)\n"
+            "            and (\n"
+            "                (self.sub_match and domain == self.sub)\n"
+            "                or (self.host_match and host == self.host)\n"
+            "            )\n"
+            "        ):\n"
+            "            return f'/{path.lstrip(\"/\")}'\n"
+            "        return f'http://{host}/{path.lstrip(\"/\")}'\n",
+            encoding="utf-8",
+        )
+        (root / "test_router.py").write_text(
+            "import router\n\n"
+            "def test_sub_match_same():\n"
+            "    r = router.Router(True, False, 'app.test', 'api')\n"
+            "    assert r.build('x', 'api', 'app.test') == '/x'\n\n"
+            "def test_sub_match_diff():\n"
+            "    r = router.Router(True, False, 'app.test', 'api')\n"
+            "    assert r.build('x', 'web', 'web.test') == 'http://web.test/x'\n\n"
+            "def test_force_external():\n"
+            "    r = router.Router(False, False, 'app.test', '')\n"
+            "    assert r.build('x', '', 'app.test', force_external=True) == 'http://app.test/x'\n\n"
+            "def test_no_domain_matching_relative():\n"
+            "    r = router.Router(False, False, 'app.test', '')\n"
+            "    assert r.build('', '', 'app.test') == '/'\n",
+            encoding="utf-8",
+        )
+        res2 = SWE.solve_repository(root, ["test_router.py"], python_exe=sys.executable, max_candidates=25)
+        assert res2["status"] == "VERIFIED", res2
+        assert res2["model_calls"] == 0 and res2["parameters_stored"] == 0
+        assert res2["winner"]["tier"] == "TIER3_BOOL_IMPLICATION_WEAKEN", res2["winner"]
+
+
+def test_09_unified_esac_tomography_and_algebraic_composition() -> None:
+    """Proves `epistemic_scan_acquire_compress_v1.solve_unseen_environment_live` unifies
+    Pillar 2 Differential State Tomography (306-step OSWorld-2.0 workflow) + Pillar 3
+    Algebraic Skill Composition into ONE zero-LLM loop."""
+    from canonical.runtime import epistemic_scan_acquire_compress_v1 as ESAC
+    from canonical.runtime import differential_state_tomography_v1 as DST
+
+    gmem = ESAC.new_governed_memory()
+    with tempfile.TemporaryDirectory() as td:
+        ws = pathlib.Path(td)
+        app = _OSWorld2HiddenStateDesktopApp(ws)
+        res_t = ESAC.solve_unseen_environment_live(
+            ws,
+            "discover hidden desktop api and complete 306-step ledger audit",
+            governed_memory=gmem,
+            tomography_env=app,
+            goal_targets=[
+                {"kind": "action", "action_id": "process_item", "repeat": 300},
+                {"kind": "sqlite_changed", "table": "ledger.db:entries"},
+                {"kind": "file_modified", "path": "audit_log.json"},
+                {"kind": "kv", "key": "committed", "value": True},
+            ],
+        )
+        assert res_t["status"] == "VERIFIED", res_t
+        assert res_t["model_calls"] == 0 and res_t["parameters_stored"] == 0
+        assert res_t["tomography"]["executed_steps_count"] == 306
+        assert app.state["committed"] is True
+
+        # Unified Algebraic Skill Composition through ESAC
+        lib = [
+            DST.TypedSkillMorphism("s_decode", "raw_bytes", "text", (), ("decoded",), executor=lambda b: b.decode("utf-8")),
+            DST.TypedSkillMorphism("s_upper", "text", "upper_text", ("decoded",), ("normalized",), executor=lambda s: s.strip().upper()),
+            DST.TypedSkillMorphism("s_wrap", "upper_text", "json_str", ("normalized",), ("wrapped",), executor=lambda s: json.dumps({"ok": s})),
+        ]
+        res_a = ESAC.solve_unseen_environment_live(
+            ws,
+            "compose bytes to json_str",
+            governed_memory=gmem,
+            skill_library=lib,
+            algebraic_spec={
+                "start_type": "raw_bytes",
+                "goal_type": "json_str",
+                "required_goal_facts": ("wrapped",),
+                "input_value": b"  hello world  ",
+                "verifier": lambda out: json.loads(out) == {"ok": "HELLO WORLD"},
+            },
+        )
+        assert res_a["status"] == "VERIFIED", res_a
+        assert res_a["model_calls"] == 0 and res_a["parameters_stored"] == 0
+        assert res_a["algebraic"]["status"] == "VERIFIED_AND_CRYSTALLIZED"
+        assert json.loads(res_a["algebraic"]["output"]) == {"ok": "HELLO WORLD"}
+
+
+
 

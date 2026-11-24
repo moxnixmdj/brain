@@ -4730,6 +4730,183 @@ def _synthesize_static_cone_and_truthiness_repairs(
                 )
                 _erg_cands_added += 1
 
+    # 12b-ret. Pillar 1 Return-Expression Backward Witness Transform
+    # (`TIER3_BACKWARD_WITNESS_RET_TRANSFORM`):
+    # When failing assertion(s) state `assert <actual_lit> == <expected_lit>` (with `actual != expected`),
+    # propagate the output delta backwards directly onto localized `return <E>` expressions via
+    # `backward_witness_synthesizer_v1.backward_propagate_expression("__ret__", ...)` (rstrip/strip/
+    # removeprefix/removesuffix/replace/affine inverses) and emit a surgical 1-line edit.
+    _bwr_pairs: list[tuple[Any, Any]] = []
+    for _ev in (loc.exceptions or {}).values():
+        _emsg = str((_ev.get("msg") if isinstance(_ev, Mapping) else _ev) or "")
+        for _ln_m in _emsg.splitlines():
+            _ln_s = _ln_m.strip()
+            if _ln_s.startswith("assert ") and " == " in _ln_s:
+                _lhs_s, _rhs_s = _ln_s[7:].split(" == ", 1)
+                try:
+                    _lv = ast.literal_eval(_lhs_s.strip())
+                    _rv = ast.literal_eval(_rhs_s.strip())
+                    if type(_lv) is type(_rv) and _lv != _rv:
+                        _bwr_pairs.append((_lv, _rv))
+                except Exception:
+                    pass
+                break
+    if _bwr_pairs:
+        try:
+            from canonical.runtime import backward_witness_synthesizer_v1 as _BWS_RET
+
+            _bwr_examples = [
+                _BWS_RET.WitnessExample(env={"__ret__": _a}, actual=_a, expected=_e, is_failing=True)
+                for _a, _e in _bwr_pairs
+            ]
+            _bwr_transforms = _BWS_RET.backward_propagate_expression("__ret__", _bwr_examples, max_depth=2)
+        except Exception:
+            _bwr_transforms = []
+        # Prefer narrower/safer string trims (`rstrip`/`lstrip`) before broad `strip` when both satisfy
+        _bwr_transforms = sorted(
+            _bwr_transforms,
+            key=lambda s: (
+                0 if ".rstrip()" in s or ".lstrip()" in s else (1 if ".removesuffix(" in s or ".removeprefix(" in s else 2),
+                len(s),
+                s,
+            ),
+        )
+        _bwr_added = 0
+        _bwr_seen: set[tuple[str, int, str]] = set()
+        for s in loc.sites[:16]:
+            if _bwr_added >= 8 or not _bwr_transforms:
+                break
+            loaded_bwr = load_file(s.file)
+            if loaded_bwr is None:
+                continue
+            _src_bwr, _tree_bwr = loaded_bwr
+            _ret_nd: ast.Return | None = None
+            for _nd in ast.walk(_tree_bwr):
+                if isinstance(_nd, ast.Return) and _nd.value is not None and getattr(_nd, "lineno", 0) == s.lineno:
+                    _ret_nd = _nd
+                    break
+            if _ret_nd is None or _ret_nd.value is None:
+                continue
+            _ret_src_lines = _src_bwr.splitlines(keepends=True)
+            if getattr(_ret_nd, "end_lineno", s.lineno) != s.lineno:
+                continue
+            _orig_val_src = ast.get_source_segment(_src_bwr, _ret_nd.value)
+            if not _orig_val_src:
+                continue
+            _rln = _ret_src_lines[s.lineno - 1]
+            _rind = _rln[: len(_rln) - len(_rln.lstrip())]
+            _reol = "\n" if _rln.endswith("\n") else ""
+            for _tr in _bwr_transforms[:3]:
+                _new_expr = _tr.replace("(__ret__)", f"({_orig_val_src})").replace("__ret__", f"({_orig_val_src})")
+                if _new_expr.startswith("((") and _new_expr.endswith("))"):
+                    _new_expr = _new_expr[1:-1]
+                _bkey = (s.file, s.lineno, _new_expr)
+                if _bkey in _bwr_seen:
+                    continue
+                _bwr_seen.add(_bkey)
+                _nc_bwr = (
+                    "".join(_ret_src_lines[: s.lineno - 1])
+                    + f"{_rind}return {_new_expr}{_reol}"
+                    + "".join(_ret_src_lines[s.lineno:])
+                )
+                try:
+                    ast.parse(_nc_bwr)
+                except SyntaxError:
+                    continue
+                add_cand(
+                    s.file,
+                    s.lineno,
+                    "TIER3_BACKWARD_WITNESS_RET_TRANSFORM",
+                    f"backward_witness_ret_transform(L{s.lineno}:{_tr})",
+                    _nc_bwr,
+                )
+                _bwr_added += 1
+
+    # 12b-imp. First-Principles Propositional Conjunction-to-Implication Weakening
+    # (`TIER3_BOOL_IMPLICATION_WEAKEN`):
+    # When a localized failing return statement sits immediately below an early-return
+    # `if (v0 and v1 and ...): return ...` whose conjuncts `(v_i, v_j)` share domain
+    # symbols (e.g. guard `P` and guarded check `Q` that both reference the same flags),
+    # test the propositional implication repair `P and Q` -> `(not P or Q)` (surgical edit).
+    def _expr_symbol_roots(nd: ast.AST) -> set[str]:
+        roots: set[str] = set()
+        for sub in ast.walk(nd):
+            if isinstance(sub, ast.Attribute):
+                roots.add(sub.attr)
+            elif isinstance(sub, ast.Name) and sub.id not in ("self", "cls", "True", "False", "None"):
+                roots.add(sub.id)
+        return roots
+
+    _biw_added = 0
+    _biw_seen: set[tuple[str, int, int, int]] = set()
+    for s in loc.sites[:12]:
+        if _biw_added >= 8:
+            break
+        loaded_biw = load_file(s.file)
+        if loaded_biw is None:
+            continue
+        _src_biw, _tree_biw = loaded_biw
+        _biw_lines = _src_biw.splitlines(keepends=True)
+        for _if_nd in ast.walk(_tree_biw):
+            if _biw_added >= 8:
+                break
+            if not isinstance(_if_nd, ast.If):
+                continue
+            _if_ln = getattr(_if_nd, "lineno", 0)
+            _if_end = getattr(_if_nd, "end_lineno", _if_ln)
+            if not (0 < _if_end < s.lineno <= _if_end + 15):
+                continue
+            if not any(isinstance(_st, ast.Return) for _st in _if_nd.body):
+                continue
+            if not isinstance(_if_nd.test, ast.BoolOp) or not isinstance(_if_nd.test.op, ast.And):
+                continue
+            _vals = list(_if_nd.test.values)
+            if len(_vals) < 2 or len(_vals) > 5:
+                continue
+            _test_end_ln = getattr(_if_nd.test, "end_lineno", _if_ln)
+            # Find closing `:` line of the `if (...) :` header
+            _hdr_end_ln = _test_end_ln
+            while _hdr_end_ln <= len(_biw_lines) and not _biw_lines[_hdr_end_ln - 1].rstrip().endswith(":"):
+                _hdr_end_ln += 1
+            if _hdr_end_ln > len(_biw_lines) or _hdr_end_ln >= _if_end:
+                continue
+            _first_line = _biw_lines[_if_ln - 1]
+            _if_indent = _first_line[: len(_first_line) - len(_first_line.lstrip())]
+            for _ii in range(len(_vals)):
+                for _jj in range(_ii + 1, len(_vals)):
+                    if _biw_added >= 8:
+                        break
+                    _ri = _expr_symbol_roots(_vals[_ii])
+                    _rj = _expr_symbol_roots(_vals[_jj])
+                    if not (_ri & _rj):
+                        continue
+                    _ikey = (s.file, _if_ln, _ii, _jj)
+                    if _ikey in _biw_seen:
+                        continue
+                    _biw_seen.add(_ikey)
+                    _vi_src = ast.unparse(_vals[_ii])
+                    _vj_src = ast.unparse(_vals[_jj])
+                    _imp_expr = f"(not ({_vi_src}) or ({_vj_src}))"
+                    _others = [ast.unparse(_vals[_kk]) for _kk in range(len(_vals)) if _kk not in (_ii, _jj)]
+                    _new_cond = " and ".join(_others + [_imp_expr])
+                    _nc_biw = (
+                        "".join(_biw_lines[: _if_ln - 1])
+                        + f"{_if_indent}if {_new_cond}:\n"
+                        + "".join(_biw_lines[_hdr_end_ln:])
+                    )
+                    try:
+                        ast.parse(_nc_biw)
+                    except SyntaxError:
+                        continue
+                    add_cand(
+                        s.file,
+                        _if_ln,
+                        "TIER3_BOOL_IMPLICATION_WEAKEN",
+                        f"bool_implication_weaken(L{_if_ln}:conj[{_ii},{_jj}]->not P or Q)",
+                        _nc_biw,
+                    )
+                    _biw_added += 1
+
     # 12c. Python Builtin Exception-Hierarchy Widening + Subprocess-Resilient Sibling Repair
     # (`TIER3_EXCEPTION_HIERARCHY_WIDEN`):
     # When a failing test/subprocess output exercises a wider Python builtin exception class
@@ -10365,6 +10542,8 @@ def synthesize_candidates(
         "TIER3_OE_SYGUS_VALIDATION_RAISE",
         "TIER3_OE_SYGUS_LOOP_BRANCH_REFINE",
         "TIER3_OE_SYGUS_EARLY_RETURN_GUARD",
+        "TIER3_BACKWARD_WITNESS_RET_TRANSFORM",
+        "TIER3_BOOL_IMPLICATION_WEAKEN",
         "TIER3_SIBLING_GUARD_CONJUNCT",
         "TIER3_MAP_REPEAT_COMMUTE",
         "TIER3_STATIC_REGEX_FULLMATCH",
