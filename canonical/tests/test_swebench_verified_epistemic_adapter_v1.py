@@ -1,6 +1,8 @@
 """Tests for the SWE-bench Verified predictions adapter (no harness required)."""
 from __future__ import annotations
 
+import contextlib
+import io
 import json
 import subprocess
 import tempfile
@@ -92,6 +94,13 @@ class SwebenchVerifiedEpistemicAdapterTests(unittest.TestCase):
         self.assertEqual(trace["outcome"], "ONESHOT_CARRIER_UNQUALIFIED_NO_FALLBACK")
         self.assertFalse(trace["executed"])
         self.assertEqual(list(self.workdir.iterdir()), [])
+
+    def test_pro_task_disclosure_is_recorded_even_on_refusal(self):
+        row, trace = self.run_one(lambda *args, **kwargs: self.fail('solver called'),
+                                  instance=_instance(self.base, instance_id=adapter.DISCLOSED_ID))
+        self.assertEqual(row['model_patch'], '')
+        self.assertEqual(trace['test_name_disclosure'], adapter.DISCLOSURE)
+        self.assertFalse(trace['executed'])
 
     def test_refusal_precedes_git_checkout_and_repository_hook(self):
         sentinel = self.root / 'hook-ran'
@@ -209,6 +218,25 @@ class SwebenchVerifiedEpistemicAdapterTests(unittest.TestCase):
         self.assertEqual(len(traces), 2)
         self.assertEqual(summary["counts"], {"total": 2, "skipped": 0, "patched": 0, "empty": 2})
         self.assertIn("REQUIRES_OFFICIAL_HARNESS", summary["claim"])
+
+    def test_vm_opt_in_flag_cannot_enable_execution(self):
+        data = self.root / 'input.jsonl'
+        data.write_text(json.dumps(_instance(self.base)) + '\n')
+        out = self.root / 'out.jsonl'
+        report = self.root / 'report.jsonl'
+        stdout = io.StringIO()
+        with contextlib.redirect_stdout(stdout):
+            code = adapter.main(['--dataset-path', str(data), '--repos-root', str(self.root),
+                                 '--workdir', str(self.workdir), '--output', str(out),
+                                 '--report', str(report), '--allow-isolated-vm-eval'])
+        summary = json.loads(stdout.getvalue())
+        trace = json.loads(report.read_text())
+        self.assertEqual(code, 0)
+        self.assertTrue(summary['requested_isolated_vm_eval'])
+        self.assertFalse(summary['execution_authorized'])
+        self.assertFalse(trace['executed'])
+        self.assertEqual(trace['outcome'], 'ONESHOT_CARRIER_UNQUALIFIED_NO_FALLBACK')
+        self.assertEqual(json.loads(out.read_text())['model_patch'], '')
 
     def test_skip_existing_refuses_unverified_nonempty_prediction_before_overwriting(self):
         output = self.root / 'predictions.jsonl'

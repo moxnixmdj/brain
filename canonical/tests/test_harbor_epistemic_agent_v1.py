@@ -123,6 +123,9 @@ class HarborEpistemicAgentTests(unittest.TestCase):
             self.assertEqual(trace["status"], "ONESHOT_CARRIER_UNQUALIFIED_NO_FALLBACK")
             self.assertFalse(trace["task_completion_claimed"])
             self.assertFalse(trace["verified_by_agent"])
+            self.assertFalse(trace["task_identity_verified"])
+            self.assertEqual(trace["benchmark_disclosure_notice"]["instance_id"], agent.DISCLOSED_ID)
+            self.assertEqual(trace["benchmark_disclosure_notice"]["note"], agent.DISCLOSURE)
             self.assertEqual((context.cost_usd, context.input_tokens, context.output_tokens), (99.0, 5, 7))
             self.assertEqual(env.commands, [])
 

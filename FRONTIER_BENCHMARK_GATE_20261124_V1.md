@@ -65,6 +65,23 @@ no external VM, and no independent signing/verifier material has been supplied.
   Do not invent a public self-run dataset, task, harness, or score; request the
   relevant FrontierCode 2.0 evaluation access from Cognition.
 
+## Read-only HARD-51 preflight
+
+`canonical.tools.pro_hard51_preflight_v1` checks the pinned upstream checksum
+manifest, the exact 51-task ID list, and each selected instruction and task
+configuration. It records Task #1's test-name disclosure without reading test
+files, checks declared network mode and image identifiers, and writes only JSON
+metadata; it does not run containers, solver, task code or a verifier. The full
+51-task metadata and five-task subset were checked read-only locally; results
+are in `qualification_results/pro_hard51_full_metadata_preflight_20261124.json`
+and `qualification_results/pro_hard51_metadata_preflight_20261124.json`.
+Checksums establish agreement with the pinned bytes, not authenticated origin,
+runtime isolation, or receipt provenance. Docker and Harbor executable presence
+is reported for information only; even `--allow-isolated-vm-eval` cannot admit
+execution. The legacy adapter similarly records that flag but never acts on it.
+The Harbor refusal trace records the disclosure globally because it cannot bind
+a trustworthy task identity.
+
 ## External Ubuntu VM preparation (not executed here)
 
 These are **preparation and inspection only**, not evaluation commands. Use a
@@ -78,6 +95,9 @@ environments. No task code, container, oracle solution or agent is run here.
 set -euo pipefail
 mkdir -p "$HOME/frontier-eval-prep"
 cd "$HOME/frontier-eval-prep"
+# Clone the session branch after it has been pushed; record its actual HEAD.
+git clone --branch arena/d582a17b-brain --single-branch https://github.com/moxnixmdj/brain.git brain
+git -C brain rev-parse HEAD
 git clone https://github.com/scaleapi/SWE-bench_Pro-os.git swe-pro
 git -C swe-pro checkout --detach 66f92766bba642462d4bbe5479e83f91f9211862
 git clone https://github.com/Proximal-Labs/frontier-swe-v2.git frontier-swe-v2
@@ -89,6 +109,14 @@ python3 --version
 command -v docker || echo 'Docker missing'
 command -v uv || echo 'uv missing'
 command -v harbor || echo 'Harbor missing'
+mkdir -p reports
+(cd brain && python3 -m canonical.tools.pro_hard51_preflight_v1 \
+  --v2-root "$HOME/frontier-eval-prep/swe-pro/v2" --selection smoke5 \
+  --allow-isolated-vm-eval) > reports/pro-smoke5-preflight.json
+(cd brain && python3 -m canonical.tools.pro_hard51_preflight_v1 \
+  --v2-root "$HOME/frontier-eval-prep/swe-pro/v2" --selection hard51 \
+  --allow-isolated-vm-eval) > reports/pro-hard51-preflight.json
+# Both reports intentionally say PREFLIGHT_ONLY_EXECUTION_BLOCKED.
 ```
 
 px-eval specifies Python 3.12+, `uv`, an environment configuration and Modal

@@ -28,6 +28,7 @@ from canonical.runtime.harbor_environment_transport_v2 import (
     HarborEnvironmentTransport,
     HarborTransportError,
 )
+from canonical.tools.pro_hard51_preflight_v1 import DISCLOSED_ID, DISCLOSURE
 
 try:
     from harbor.agents.base import BaseAgent
@@ -318,6 +319,10 @@ class EpistemicBrainAgent(BaseAgent):
             "task_completion_claimed": False,
             "verified_by_agent": False,
             "instruction_sha256": hashlib.sha256(instruction.encode("utf-8")).hexdigest(),
+            # The entry point has no trusted benchmark task identity. Record the
+            # known disclosure globally, not as an assertion about this task.
+            "task_identity_verified": False,
+            "benchmark_disclosure_notice": {"instance_id": DISCLOSED_ID, "note": DISCLOSURE},
         }
         try:
             logs = Path(self.logs_dir)

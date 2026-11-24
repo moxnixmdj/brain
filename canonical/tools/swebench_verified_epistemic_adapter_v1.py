@@ -32,6 +32,8 @@ import tempfile
 from pathlib import Path
 from typing import Any, Callable, Iterable, Mapping, Sequence
 
+from canonical.tools.pro_hard51_preflight_v1 import DISCLOSED_ID, DISCLOSURE
+
 SCHEMA = "PROJECT_BRAIN_SWEBENCH_VERIFIED_EPISTEMIC_ADAPTER_V1"
 DEFAULT_MODEL_NAME = "b81b2217-epistemic-v1"
 DEFAULT_MODE = "EPISTEMIC"
@@ -316,6 +318,7 @@ def solve_one(
     trace: dict[str, Any] = {
         "schema": SCHEMA,
         "instance_id": iid,
+        "test_name_disclosure": DISCLOSURE if iid == DISCLOSED_ID else None,
         "model_name_or_path": model_name,
         "mode_requested": mode,
         "mode_semantics": mode_note(mode),
@@ -428,6 +431,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--workdir", type=Path, default=Path(tempfile.mkdtemp(prefix="brain_swe_")))
     parser.add_argument("--model-name", default=DEFAULT_MODEL_NAME)
     parser.add_argument("--mode", default=DEFAULT_MODE)
+    parser.add_argument("--allow-isolated-vm-eval", action="store_true",
+                        help="record the request only; no execution is admitted")
     parser.add_argument("--limit", type=int, default=None, help="smoke-test size, e.g. 50")
     parser.add_argument("--instance-ids", nargs="*", default=None)
     parser.add_argument("--include-hints", action="store_true")
@@ -457,6 +462,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             skip_existing=args.skip_existing,
         )
         summary["run_id"] = args.run_id
+        summary["requested_isolated_vm_eval"] = args.allow_isolated_vm_eval
+        summary["execution_authorized"] = False
         print(json.dumps(summary, sort_keys=True))
         return 0
     except AdapterError as exc:
