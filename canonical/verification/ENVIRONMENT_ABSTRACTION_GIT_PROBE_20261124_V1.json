@@ -1,0 +1,163 @@
+{
+ "actions": [
+  "checkout main",
+  "checkout feature",
+  "checkout -- .",
+  "stash",
+  "stash pop",
+  "stash drop",
+  "clean -fdq",
+  "add -A",
+  "commit -qm wip",
+  "reset --hard",
+  "merge --abort",
+  "checkout -f main",
+  "status"
+ ],
+ "authority": "NONE__SANDBOX_MEASUREMENT",
+ "model_calls": 0,
+ "result": {
+  "budget_per_start": 300,
+  "controls": {
+   "empty_vocabulary_status": "REFUSED__ABSTRACTION_MIXES_GOAL_AND_NON_GOAL",
+   "raw_single_start_transfers": [
+    {
+     "instance": "tagH1",
+     "root_known": false
+    },
+    {
+     "instance": "tagH2",
+     "root_known": false
+    }
+   ],
+   "raw_single_start_vocab_status": "ACCEPTED__ABSTRACTION_DETERMINISTIC_AND_GOAL_CONSISTENT"
+  },
+  "goals": {
+   "loose": {
+    "abstraction": {
+     "abstract_states": 27,
+     "abstract_transitions": 235,
+     "mixed_goal_states": 0,
+     "nondeterministic_edges": 0,
+     "status": "ACCEPTED__ABSTRACTION_DETERMINISTIC_AND_GOAL_CONSISTENT"
+    },
+    "held_out": [
+     {
+      "edit_survives_true": false,
+      "final": {
+       "a": "main tagH1\n",
+       "dirty": [],
+       "head": "main",
+       "stash": 0
+      },
+      "goal_reached_true": true,
+      "instance": "tagH1",
+      "plan": [
+       "add -A",
+       "checkout -f main"
+      ],
+      "root_known_in_model": true
+     },
+     {
+      "edit_survives_true": false,
+      "final": {
+       "a": "main tagH2\n",
+       "dirty": [],
+       "head": "main",
+       "stash": 0
+      },
+      "goal_reached_true": true,
+      "instance": "tagH2",
+      "plan": [
+       "add -A",
+       "checkout -f main"
+      ],
+      "root_known_in_model": true
+     }
+    ]
+   },
+   "strict": {
+    "abstraction": {
+     "abstract_states": 27,
+     "abstract_transitions": 235,
+     "mixed_goal_states": 0,
+     "nondeterministic_edges": 0,
+     "status": "ACCEPTED__ABSTRACTION_DETERMINISTIC_AND_GOAL_CONSISTENT"
+    },
+    "held_out": [
+     {
+      "edit_survives_true": true,
+      "final": {
+       "a": "main tagH1\n",
+       "dirty": [],
+       "head": "main",
+       "stash": 1
+      },
+      "goal_reached_true": true,
+      "instance": "tagH1",
+      "plan": [
+       "add -A",
+       "checkout main",
+       "stash"
+      ],
+      "root_known_in_model": true
+     },
+     {
+      "edit_survives_true": true,
+      "final": {
+       "a": "main tagH2\n",
+       "dirty": [],
+       "head": "main",
+       "stash": 1
+      },
+      "goal_reached_true": true,
+      "instance": "tagH2",
+      "plan": [
+       "add -A",
+       "checkout main",
+       "stash"
+      ],
+      "root_known_in_model": true
+     }
+    ]
+   }
+  },
+  "raw_tokens_one_start_example": [
+   "??",
+   "A",
+   "M",
+   "a",
+   "a.txt",
+   "dirty",
+   "edit_survives",
+   "feature",
+   "head",
+   "junk_T1.txt",
+   "main",
+   "stash",
+   "tagT1"
+  ],
+  "seconds": 63.5,
+  "seed": 0,
+  "train_starts": [
+   "tagT1",
+   "tagT2",
+   "tagT3"
+  ],
+  "vocab": [
+   "??",
+   "A",
+   "M",
+   "a",
+   "a.txt",
+   "dirty",
+   "edit_survives",
+   "feature",
+   "head",
+   "main",
+   "stash"
+  ]
+ },
+ "schema": "PROJECT_BRAIN_ENVIRONMENT_ABSTRACTION_GIT_PROBE_V1",
+ "stored_parameters": 0
+}

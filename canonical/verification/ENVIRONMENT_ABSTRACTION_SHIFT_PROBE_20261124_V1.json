@@ -1,0 +1,389 @@
+{
+ "actions": [
+  "checkout main",
+  "checkout feature",
+  "checkout -- .",
+  "stash",
+  "stash pop",
+  "stash drop",
+  "clean -fdq",
+  "add -A",
+  "commit -qm wip",
+  "reset --hard",
+  "merge --abort",
+  "checkout -f main",
+  "status"
+ ],
+ "arms": {
+  "one_action": {
+   "closed_loop_success": 1,
+   "open_loop_success": 1,
+   "rows": [
+    {
+     "closed_loop_goal": false,
+     "closed_loop_trail": [
+      "NO_PLAN"
+     ],
+     "open_loop_goal": false,
+     "open_loop_plan": null,
+     "seed": 0
+    },
+    {
+     "closed_loop_goal": false,
+     "closed_loop_trail": [
+      "reset --hard",
+      "add -A",
+      "stash",
+      "stash pop",
+      "stash",
+      "checkout -f main",
+      "stash pop",
+      "NO_PLAN"
+     ],
+     "open_loop_goal": false,
+     "open_loop_plan": [
+      "reset --hard",
+      "add -A",
+      "stash",
+      "stash pop",
+      "add -A",
+      "commit -qm wip",
+      "checkout main"
+     ],
+     "seed": 1
+    },
+    {
+     "closed_loop_goal": false,
+     "closed_loop_trail": [
+      "NO_PLAN"
+     ],
+     "open_loop_goal": false,
+     "open_loop_plan": null,
+     "seed": 2
+    },
+    {
+     "closed_loop_goal": false,
+     "closed_loop_trail": [
+      "reset --hard",
+      "add -A",
+      "stash",
+      "stash pop",
+      "stash",
+      "checkout -f main",
+      "stash pop",
+      "NO_PLAN"
+     ],
+     "open_loop_goal": false,
+     "open_loop_plan": [
+      "reset --hard",
+      "add -A",
+      "stash",
+      "stash pop",
+      "add -A",
+      "commit -qm wip",
+      "checkout main"
+     ],
+     "seed": 3
+    },
+    {
+     "closed_loop_goal": false,
+     "closed_loop_trail": [
+      "NO_PLAN"
+     ],
+     "open_loop_goal": false,
+     "open_loop_plan": null,
+     "seed": 4
+    },
+    {
+     "closed_loop_goal": false,
+     "closed_loop_trail": [
+      "checkout -f main",
+      "add -A",
+      "checkout feature",
+      "stash",
+      "stash pop",
+      "stash",
+      "checkout -f main",
+      "stash pop",
+      "NO_PLAN"
+     ],
+     "open_loop_goal": false,
+     "open_loop_plan": [
+      "checkout -f main",
+      "add -A",
+      "checkout feature",
+      "stash",
+      "stash pop",
+      "add -A",
+      "commit -qm wip",
+      "checkout main"
+     ],
+     "seed": 5
+    },
+    {
+     "closed_loop_goal": true,
+     "closed_loop_trail": [
+      "add -A",
+      "checkout main",
+      "stash"
+     ],
+     "open_loop_goal": true,
+     "open_loop_plan": [
+      "add -A",
+      "checkout main",
+      "stash"
+     ],
+     "seed": 6
+    },
+    {
+     "closed_loop_goal": false,
+     "closed_loop_trail": [
+      "NO_PLAN"
+     ],
+     "open_loop_goal": false,
+     "open_loop_plan": null,
+     "seed": 7
+    },
+    {
+     "closed_loop_goal": false,
+     "closed_loop_trail": [
+      "NO_PLAN"
+     ],
+     "open_loop_goal": false,
+     "open_loop_plan": null,
+     "seed": 8
+    },
+    {
+     "closed_loop_goal": false,
+     "closed_loop_trail": [
+      "reset --hard",
+      "add -A",
+      "stash",
+      "stash pop",
+      "stash",
+      "checkout -f main",
+      "stash pop",
+      "NO_PLAN"
+     ],
+     "open_loop_goal": false,
+     "open_loop_plan": [
+      "reset --hard",
+      "add -A",
+      "stash",
+      "stash pop",
+      "add -A",
+      "commit -qm wip",
+      "checkout main"
+     ],
+     "seed": 9
+    }
+   ]
+  },
+  "one_walk": {
+   "closed_loop_success": 4,
+   "open_loop_success": 4,
+   "rows": [
+    {
+     "closed_loop_goal": true,
+     "closed_loop_trail": [
+      "clean -fdq",
+      "commit -qm wip",
+      "checkout main"
+     ],
+     "open_loop_goal": true,
+     "open_loop_plan": [
+      "clean -fdq",
+      "commit -qm wip",
+      "checkout main"
+     ],
+     "seed": 0
+    },
+    {
+     "closed_loop_goal": false,
+     "closed_loop_trail": [
+      "reset --hard",
+      "add -A",
+      "stash",
+      "stash pop",
+      "stash",
+      "checkout -f main",
+      "stash pop",
+      "NO_PLAN"
+     ],
+     "open_loop_goal": false,
+     "open_loop_plan": [
+      "reset --hard",
+      "add -A",
+      "stash",
+      "stash pop",
+      "add -A",
+      "commit -qm wip",
+      "checkout main"
+     ],
+     "seed": 1
+    },
+    {
+     "closed_loop_goal": false,
+     "closed_loop_trail": [
+      "NO_PLAN"
+     ],
+     "open_loop_goal": false,
+     "open_loop_plan": null,
+     "seed": 2
+    },
+    {
+     "closed_loop_goal": false,
+     "closed_loop_trail": [
+      "reset --hard",
+      "add -A",
+      "stash",
+      "stash pop",
+      "stash",
+      "checkout -f main",
+      "stash pop",
+      "NO_PLAN"
+     ],
+     "open_loop_goal": false,
+     "open_loop_plan": [
+      "reset --hard",
+      "add -A",
+      "stash",
+      "stash pop",
+      "add -A",
+      "commit -qm wip",
+      "checkout main"
+     ],
+     "seed": 3
+    },
+    {
+     "closed_loop_goal": false,
+     "closed_loop_trail": [
+      "NO_PLAN"
+     ],
+     "open_loop_goal": false,
+     "open_loop_plan": null,
+     "seed": 4
+    },
+    {
+     "closed_loop_goal": false,
+     "closed_loop_trail": [
+      "checkout -f main",
+      "add -A",
+      "checkout feature",
+      "stash",
+      "stash pop",
+      "stash",
+      "checkout -f main",
+      "stash pop",
+      "NO_PLAN"
+     ],
+     "open_loop_goal": false,
+     "open_loop_plan": [
+      "checkout -f main",
+      "add -A",
+      "checkout feature",
+      "stash",
+      "stash pop",
+      "add -A",
+      "commit -qm wip",
+      "checkout main"
+     ],
+     "seed": 5
+    },
+    {
+     "closed_loop_goal": true,
+     "closed_loop_trail": [
+      "add -A",
+      "checkout main",
+      "stash"
+     ],
+     "open_loop_goal": true,
+     "open_loop_plan": [
+      "add -A",
+      "checkout main",
+      "stash"
+     ],
+     "seed": 6
+    },
+    {
+     "closed_loop_goal": true,
+     "closed_loop_trail": [
+      "clean -fdq",
+      "commit -qm wip",
+      "checkout main"
+     ],
+     "open_loop_goal": true,
+     "open_loop_plan": [
+      "clean -fdq",
+      "commit -qm wip",
+      "checkout main"
+     ],
+     "seed": 7
+    },
+    {
+     "closed_loop_goal": true,
+     "closed_loop_trail": [
+      "clean -fdq",
+      "commit -qm wip",
+      "checkout main"
+     ],
+     "open_loop_goal": true,
+     "open_loop_plan": [
+      "clean -fdq",
+      "commit -qm wip",
+      "checkout main"
+     ],
+     "seed": 8
+    },
+    {
+     "closed_loop_goal": false,
+     "closed_loop_trail": [
+      "reset --hard",
+      "add -A",
+      "stash",
+      "stash pop",
+      "stash",
+      "checkout -f main",
+      "stash pop",
+      "NO_PLAN"
+     ],
+     "open_loop_goal": false,
+     "open_loop_plan": [
+      "reset --hard",
+      "add -A",
+      "stash",
+      "stash pop",
+      "add -A",
+      "commit -qm wip",
+      "checkout main"
+     ],
+     "seed": 9
+    }
+   ]
+  }
+ },
+ "authority": "NONE__SANDBOX_MEASUREMENT",
+ "model_calls": 0,
+ "schema": "PROJECT_BRAIN_ENVIRONMENT_ABSTRACTION_SHIFT_PROBE_V1",
+ "seeds": 10,
+ "stored_parameters": 0,
+ "train_starts": [
+  [
+   "tagT1",
+   "junk_T1.txt"
+  ],
+  [
+   "tagT2",
+   "junk_T2.txt"
+  ],
+  [
+   "tagT3",
+   "junk_T3.txt"
+  ]
+ ],
+ "zero_experience": {
+  "abstraction_status": "ACCEPTED__ABSTRACTION_DETERMINISTIC_AND_GOAL_CONSISTENT",
+  "plan_without_experience": null,
+  "root_known_without_experience": false
+ }
+}
