@@ -8797,3 +8797,46 @@ only one whose function was still on disk.
     * `_still_real` checks that the function exists, not that it still behaves. A tool whose body
       changed is still offered; whether it still works is the verifier's question at run time.
     * §6 still NOT MET. No OSWorld task, no SWE-bench instance.
+
+### §A146 addendum — meaning read and then thrown away
+
+One more defect, found by putting a **lying** tool in a room: a docstring claiming "Sum a numeric
+column and return the total" over a body that returns a row count.
+
+The forge admitted it (`3/3` cases, `12/12` mutations killed) — correctly, because the forge tests
+**behaviour**, not prose, and behaviour was stable and non-trivial. But the admitted capability carried
+the keywords
+
+    ['summarise']
+
+— the function's name and nothing else. `forge_entry` carried name, params, paths and declares, and
+**dropped `doc`**. The census had read the one sentence that says what the function is for, used it to
+build the entry's keywords, and then thrown it away at the handoff. The forge already had
+`contract["doc"]` waiting for it.
+
+After the fix:
+
+    keywords   ['a','and','column','numeric','return','sum','summarise','the','total']
+
+The liar is now visible to the question it pretends to answer — and it still **loses**, because
+`census.profile` scores 14.3 against it on a goal about profiling columns. That is the right outcome:
+the liar was never blocked from the contest, it simply did not win it. A system that hides a candidate
+because its documentation is suspect has made a judgement about truth it cannot support; a system that
+ranks it and lets the verifier settle it has not.
+
+    (127) Reading meaning and discarding it is the same as never having read it. A pipeline that
+          extracts a description in one stage and does not pass it on has done the expensive part for
+          nothing.
+    (128) Admission tests behaviour; relevance tests claims. Neither settles the other. The liar
+          passed the forge and lost the ranking, which is exactly what each instrument is for.
+
+### A test that learns must also forget
+
+The end-to-end test forges a capability on every run under a fresh name, because the forge persists
+what it admits and a fixed name would be "already known" on the second run. Without cleanup that
+leaves one dead row per run: measured, **11 accumulated** `parcel_count` rows, every one of them
+rechecked at every registry load. The system tolerated them (`_still_real` drops them), but a test that
+litters is a test whose next run measures something slightly different. It now removes its row and its
+room in a `finally`.
+
+Verified after the change: three consecutive runs, 17 passed each time, state file steady at 3 rows.

@@ -286,8 +286,45 @@ def test_the_whole_loop_on_a_room_nobody_registered(monkeypatch):
                                   seed_cases=[{"path": str(data)}])
     assert admitted["admitted"] is True, admitted
 
-    acted = GA.act("count shipped parcels in the logistics manifest %s" % data, root=str(root))
-    assert acted.get("status") == "VERIFIED_ACTION", acted
-    assert acted.get("capability_id") == admitted["capability_id"], acted
-    cols = (acted.get("result") or {})["columns"]
-    assert cols["city"]["fill_rate"] == 1.0 and cols["q1"]["fill_rate"] == 0.5, cols
+    try:
+        acted = GA.act("count shipped parcels in the logistics manifest %s" % data, root=str(root))
+        assert acted.get("status") == "VERIFIED_ACTION", acted
+        assert acted.get("capability_id") == admitted["capability_id"], acted
+        cols = (acted.get("result") or {})["columns"]
+        assert cols["city"]["fill_rate"] == 1.0 and cols["q1"]["fill_rate"] == 0.5, cols
+    finally:
+        # A TEST THAT LEARNS MUST ALSO FORGET, OR THE MACHINE ACCUMULATES A ROW PER RUN.
+        # The forge persists admissions by design; each run uses a fresh name, so without this the
+        # state file grows without bound and every later registry load carries dead rows. The system
+        # tolerates them (`_still_real` drops them at load), but a test that leaves litter is a test
+        # whose next run is measuring something slightly different.
+        _drop_forged(admitted.get("capability_id"))
+        shutil.rmtree(room, ignore_errors=True)
+
+
+def _drop_forged(cid):
+    """Remove one forged row from persistent state, if it is there."""
+    state = ROOT / "canonical" / "runtime" / "state" / "forged_capabilities_v1.json"
+    if not cid or not state.is_file():
+        return
+    data = json.loads(state.read_text(encoding="utf-8"))
+    if data.get("forged", {}).pop(cid, None) is not None:
+        state.write_text(json.dumps(data, indent=1, sort_keys=True) + "\n", encoding="utf-8")
+
+
+def test_the_docstring_survives_the_handoff(room):
+    """The census reads what a function is FOR and must not drop it on the way to the forge.
+
+    Measured 2026-11-23: `forge_entry` carried name, params and paths but not `doc`, so an admitted
+    capability whose docstring read "Sum a numeric column and return the total" carried the keywords
+    `['summarise']` -- the function's name and nothing else. It was then invisible to the one
+    question it existed to answer. Reading meaning and then discarding it is the same as never having
+    read it, and the forge already had a slot (`contract["doc"]`) waiting for it.
+    """
+    found = RC.survey(str(room))
+    row = {f["function"]: f for f in found["functions"]}["profile"]
+    entry = RC.forge_entry(row)
+    assert entry.get("doc"), entry
+    assert "fill rate" in entry["doc"], entry
+    # and the words that describe the work reach the keywords, rather than only the name
+    assert any(w in entry["keywords"] for w in ("csv", "fill", "column")), entry

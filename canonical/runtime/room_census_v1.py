@@ -379,6 +379,11 @@ def forge_entry(row: dict, keywords=None, provides=None, declares=None) -> dict:
         "module": stem,
         "function": str(row.get("function") or ""),
         "source_rel": rel,
+        # THE SENTENCE ITSELF, NOT ONLY THE WORDS DERIVED FROM IT.
+        # Without this the census read the docstring, used it to build keywords, and then dropped
+        # it -- so the admitted capability carried `['summarise']` and nothing said what the function
+        # was for. The forge already has a slot for it (`contract["doc"]`); this hands it over.
+        "doc": str(row.get("doc") or "")[:400],
         "params": list(row.get("params") or []),
         "required": list(row.get("required") or []),
         "provides": list(provides or []) or ["forged." + stem + "::" + str(row.get("function") or "")],
