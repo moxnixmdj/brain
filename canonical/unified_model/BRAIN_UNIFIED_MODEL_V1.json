@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 601,
+  "knowledge_documents": 602,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 7252,
+  "research_index_records": 7254,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 458,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "e3704da2d840cc5b762210d4e8a1820d50b738f04aca7a84504e19d6e21c3ca5"
+  "value": "17cab77cae410736a5124e4567516d707479855421ab1c08bb9872b269ff9be4"
  },
  "engines": [
   {
@@ -47645,6 +47645,84 @@
     "purely",
     "set",
     "statement"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 15422,
+   "headings": [
+    "A type you wrote is a type you guess",
+    "0. The headline, which is a falsification of the round's own claim",
+    "1. The debt this round pays, in the last round's own words",
+    "2. What the hand-written table does on a room it never saw",
+    "3. The tree already had the right shape — with a written table inside it",
+    "4. The rule",
+    "5. What the witnesses actually buy, said plainly",
+    "6. Should a refusal read once be stored?",
+    "7. The gate that fired on the round itself",
+    "8. What is real, what is not",
+    "9. The one line",
+    "10. Next step, pre-registered"
+   ],
+   "kind": "DOCUMENT",
+   "path": "A_TYPE_YOU_WROTE_IS_A_TYPE_YOU_GUESS_20261202_V1.md",
+   "sha256": "c4682df71d94ef6b43f2be1b9299bcf1d26bf3ad4cdcd2d5253a6bf18ca8d870",
+   "summary": "**2026-12-02 · branch `arena/eaf4537b-brain`** **Tool `canonical/tools/a_type_you_wrote_is_a_type_you_guess_v1.py` · receipt `canonical/verification/A_TYPE_YOU_WROTE_IS_A_TYPE_YOU_GUESS_20261202_V1.json` · 0 model calls · 0 parameters · 0 network at run time**",
+   "terms": {
+    "155": 7,
+    "189": 7,
+    "45": 7,
+    "about": 8,
+    "accept": 6,
+    "already": 8,
+    "answer": 9,
+    "because": 7,
+    "check": 11,
+    "checks": 17,
+    "content": 7,
+    "declared": 14,
+    "derived": 11,
+    "four": 7,
+    "gzip": 8,
+    "had": 7,
+    "here": 8,
+    "kind": 11,
+    "kinds": 15,
+    "machine": 27,
+    "met": 8,
+    "name": 11,
+    "named": 8,
+    "names": 8,
+    "no": 9,
+    "not": 24,
+    "nothing": 8,
+    "object": 20,
+    "objects": 7,
+    "one": 20,
+    "own": 8,
+    "room": 18,
+    "round": 21,
+    "rule": 9,
+    "same": 15,
+    "so": 12,
+    "table": 15,
+    "test": 8,
+    "they": 9,
+    "thin": 7,
+    "tree": 9,
+    "two": 8,
+    "type": 16,
+    "validators": 8,
+    "were": 10,
+    "whose": 9,
+    "witnesses": 12,
+    "written": 14
+   },
+   "title": "A type you wrote is a type you guess",
+   "title_terms": [
+    "guess",
+    "type",
+    "wrote"
    ]
   },
   {
@@ -91829,10 +91907,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1403,
+  "included_source_count": 1404,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "46fe8ec3d6fc6c1bf62a2334a57bb834fb541d3712053538da9aca312cc7fa96"
+  "source_tree_digest": "fd49ff01041bd2379374f77aeeff2989c6f2debd7cb10c6a6199d0b7e27b2d7f"
  },
  "research_index": [
   {
@@ -162457,6 +162535,24 @@
     "production": 1,
     "site": 1,
     "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "2026-12-02",
+   "id": "research:canonical/verification/A_TYPE_YOU_WROTE_IS_A_TYPE_YOU_GUESS_20261202_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/A_TYPE_YOU_WROTE_IS_A_TYPE_YOU_GUESS_20261202_V1.json",
+   "schema": "BRAIN_A_TYPE_YOU_WROTE_IS_A_TYPE_YOU_GUESS_V1",
+   "sha256": "c3a1fa45f1467eeaae2f20ec96f7bd55fe7572b002cd337b2ebd5e8241a7eda3",
+   "status": "",
+   "terms": {
+    "20261202": 1,
+    "guess": 1,
+    "type": 2,
+    "v1": 1,
+    "wrote": 1
    }
   },
   {
@@ -247442,6 +247538,51 @@
     "requests": 2,
     "sixteen": 3,
     "were": 3
+   }
+  },
+  {
+   "action_id": "A_TYPE_YOU_WROTE_IS_A_TYPE_YOU_GUESS_20261202",
+   "capability": false,
+   "date": "2026-12-02",
+   "id": "research:canonical/action_intents/A_TYPE_YOU_WROTE_IS_A_TYPE_YOU_GUESS_20261202_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_TYPE_YOU_WROTE_IS_A_TYPE_YOU_GUESS_20261202_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+   "sha256": "bd891a29ee4764c4f64a207a5cea7881c105fe4611157c7a2ddce57cdb718b50",
+   "status": "SHIPPED",
+   "terms": {
+    "11": 1,
+    "19": 1,
+    "20261202": 1,
+    "a_type_you_wrote_is_a_type_you_guess_20261202": 1,
+    "born": 1,
+    "cannot": 1,
+    "collapse": 1,
+    "declarations": 1,
+    "did": 1,
+    "every": 2,
+    "frontier": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "goals": 1,
+    "guess": 1,
+    "guide": 1,
+    "hand-written": 1,
+    "kind": 2,
+    "kinds": 1,
+    "met": 1,
+    "moves": 1,
+    "my": 1,
+    "name": 3,
+    "names": 1,
+    "never": 1,
+    "next": 1,
+    "object": 1,
+    "one": 2,
+    "producer": 1,
+    "questions": 1,
+    "right": 1,
+    "room": 2,
+    "type": 2
    }
   },
   {
