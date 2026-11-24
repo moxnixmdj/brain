@@ -103,6 +103,33 @@ class SwebenchVerifiedEpistemicAdapterTests(unittest.TestCase):
         self.assertNotIn("confinement_admitted", inputs)
         self.assertIsNot(inputs.get("confinement_admitted"), True)
 
+    def test_localization_is_advisory_and_ignores_answer_fields(self):
+        (self.repo / "mod.py").write_text("def fix():\n    pass\n", encoding="utf-8")
+        _git(self.repo, "add", "mod.py")
+        _git(self.repo, "commit", "-qm", "source")
+        base = _git(self.repo, "rev-parse", "HEAD")
+        seen = {}
+
+        def solver(goal, **kwargs):
+            seen.update(kwargs)
+            return {"pass": False, "status": "FAIL_CLOSED"}
+
+        row, trace = self.run_one(solver, instance=_instance(
+            base, problem_statement="mod.py function fix fails",
+            patch="tests/answer.py gold()", test_patch="hidden.py",
+            FAIL_TO_PASS=["test_gold"], hints_text="unused.py function gold",
+        ))
+        loc = trace["issue_localization"]
+        self.assertEqual(loc["target_path"]["value"], "mod.py")
+        self.assertEqual(loc["symbol"]["value"], "fix")
+        self.assertEqual(loc["test_target"]["status"], "MISSING")
+        self.assertNotIn("gold", json.dumps(loc))
+        self.assertNotIn("target_path", seen["inputs"])
+        self.assertNotIn("symbol", seen["inputs"])
+        self.assertNotIn("test_target", seen["inputs"])
+        self.assertNotIn("operation", seen["inputs"])
+        self.assertEqual(row["model_patch"], "")
+
     def test_goal_does_not_contain_answer_fields(self):
         goal = adapter.render_goal(
             _instance(

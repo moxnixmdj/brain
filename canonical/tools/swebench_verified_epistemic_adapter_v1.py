@@ -38,6 +38,8 @@ import tempfile
 from pathlib import Path
 from typing import Any, Callable, Iterable, Mapping, Sequence
 
+from canonical.tools.swebench_issue_localizer_v1 import localize_issue
+
 SCHEMA = "PROJECT_BRAIN_SWEBENCH_VERIFIED_EPISTEMIC_ADAPTER_V1"
 DEFAULT_MODEL_NAME = "b81b2217-epistemic-v1"
 DEFAULT_MODE = "EPISTEMIC"
@@ -337,6 +339,11 @@ def solve_one(
     try:
         goal = render_goal(instance, include_hints=include_hints)
         worktree = make_worktree(repos_root, instance, workdir)
+        # Advisory only: do not put these values into the solver inputs or alter
+        # routing/admission. Existing patch checks do not verify effect receipts.
+        trace["issue_localization"] = localize_issue(
+            str(instance.get("problem_statement") or ""), worktree
+        )
         task_path = workdir / (iid.replace("/", "_") + "__task.txt")
         task_path.write_text(goal + "\n", encoding="utf-8")
         report_path = workdir / (iid.replace("/", "_") + "__model_result.json")
