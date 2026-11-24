@@ -36,3 +36,7 @@ Any byte change requires updating the workflow hashes, rerunning tests and repea
 ## 5. Receipt status
 
 At producer time, the distinct OIDC runner workflow has been authored but no runner-owned receipt for this workflow has been recorded. A local sanitized source/probe replay was executed against pinned public clones: `OSWORLD_V21_SOURCE_VERIFICATION_PASS 27 checks 13 pinned files`, `OSWORLD_V21_RUNNER_PROBE_PASS`, and `OSWORLD_V21_BLOCKER_DECISION_PASS` with 10 blocked reasons, zero tasks consumed and no score authority. The receipt, receipt sidecar and sanitized blocker decision will be landed by the runner itself; local producer metadata will then be reconciled without changing any pinned Brain-owned source bytes. Section 6 remains NOT MET.
+
+## Producer-side full gate record
+
+The iteration-11 local gate wrapper passed `ALL_GATES_OK True` with 30 checks at `2026-11-24T03:52:54Z` on HEAD `79749b58`, including exact two-source binding, seven blocker-policy tests, 22 combined zero-model Harbor tests, a local pinned-release source verification replay with 27 checks and 13 file hashes, a sanitized 10-blocker fail-closed decision, three prior OIDC run references, no raw benchmark task files and 200 selected regression tests. Workflow Git blob `b90715fc5dea7a93aef5ee61d0eb82ecce863f60`. This is local producer authority only; the distinct OIDC runner receipt is still the authority for any public-runner blocker facts. No OSWorld task, score, credit or §6 verification is claimed.
