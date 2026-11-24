@@ -366,7 +366,10 @@ def forge_and_record(entry, root=None, seed_cases=None) -> dict:
                     # and the other converts PDFs. The census read the docstring; losing it here
                     # would throw away the only sentence that says what the function is for.
                     "doc": str(entry.get("doc") or "")[:400],
-                    "declares": list(entry.get("declares") or [])}
+                    "declares": list(entry.get("declares") or []),
+                    # THE VALUE, NOT THE SOURCE TEXT. `${input.delimiter | ','}` handed the function
+                    # a three-character string and killed a correct call; see room_census_v1.
+                    "_defaults": dict(entry.get("default_values") or {})}
         cases = candidate_inputs(params, root,
                                  annotations=signature_of(src, name, root),
                                  source_rel=src, function=name)
@@ -391,6 +394,23 @@ def forge_and_record(entry, root=None, seed_cases=None) -> dict:
         }
     _save(data)
     return report
+
+def _shown_default(contract: dict, param: str) -> str:
+    """The default this contract declares for `param`, as the template can spell it.
+
+    Only values that survive a round trip through the placeholder syntax are used: a scalar with no
+    brace or pipe. Anything else is left to the function's own default, because inventing a spelling
+    for it would put a value on the command line the author never wrote.
+    """
+    defaults = (contract or {}).get("_defaults") or {}
+    value = defaults.get(param)
+    if value is None:
+        return ""
+    text = str(value)
+    if len(text) > 40 or any(ch in text for ch in "{}|\n\r"):
+        return ""
+    return text
+
 
 def register(module: str, contract: dict, cases: list[dict],
           function: str | None = None) -> dict:
@@ -423,10 +443,30 @@ def register(module: str, contract: dict, cases: list[dict],
         # inventing an effect would let them chain on claims nobody made.
         "provides": ["forged." + module + ("::" + function if function else "")],
         "requires": [],
+        # AN OPTIONAL PARAMETER THE DEMONSTRATION NEVER SUPPLIED MUST NOT BLOCK EVERY LATER CALL.
+        #
+        # The contract already knew which parameters were optional (the function declares a default
+        # for them), but `register` did not put that on the row, so the binder saw a placeholder for
+        # `delimiter` and reported it missing. Measured 2026-11-23: a correctly forged
+        # `count_rows(path, delimiter=",")` was rejected as NOT_CALLABLE_WITH_WHAT_GOAL_PROVIDES
+        # missing ['delimiter'] for every sentence that did not happen to mention a delimiter -- the
+        # default is in the function and was never consulted.
+        "optional": [str(p) for p in (contract.get("optional") or [])],
+        # WHAT THE TOOL SAYS IT WORKS ON. Without this, `world_probe.kind_contradiction` has nothing
+        # to compare and a csv row-counter is offered a README. See room_census_v1.forge_entry.
+        "declares": [str(d) for d in (contract.get("declares") or [])],
         "action_template": {
             "type": "invoke_capability",
+            # THE DEFAULT IS DECLARED IN THE PLACEHOLDER, WHICH IS WHERE THE BINDER LOOKS.
+            #
+            # `declared_argument_default_v1` reads `${input.name | default}` -- that is this tree's
+            # one way of saying "this argument may be absent, and here is what to use". Writing an
+            # `optional` list instead created a SECOND vocabulary the binder never consulted, so a
+            # correctly forged `count_rows(path, delimiter=",")` stayed uncallable for any sentence
+            # that did not mention a delimiter. Measured 2026-11-23. Use the convention that exists.
             "args": dict({"_forged_id": cid},
-                         **{p: "${input.%s}" % p
+                         **{p: ("${input.%s | %s}" % (p, _shown_default(contract, p))
+                                if _shown_default(contract, p) != "" else "${input.%s}" % p)
                             for p in contract.get("parameters") or []}),
             # NOTE: every declared parameter is a placeholder. Whether it can be FILLED is the
             # binder's question, and an unfilled one is reported missing rather than silently

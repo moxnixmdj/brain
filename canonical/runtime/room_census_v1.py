@@ -93,12 +93,29 @@ def _signature(node: ast.AST) -> dict[str, Any]:
         positional = positional[1:]
     n_defaults = len(getattr(args, "defaults", []) or [])
     required = names[: len(names) - n_defaults] if n_defaults else list(names)
+    # A DEFAULT HAS TWO FACES, AND THEY ARE NOT INTERCHANGEABLE.
+    #
+    # `ast.unparse` returns SOURCE TEXT: for `delimiter=","` that is the four characters `','` --
+    # quotes included. Declaring that in a placeholder produced `${input.delimiter | ','}` and handed
+    # the function a three-character string, so a correct call died with `TypeError: delimiter must be
+    # a 1-character string`. Measured 2026-11-23.
+    #
+    # A literal's VALUE is available without executing anything (`ast.literal_eval` on a constant
+    # node), so that is what `default_values` carries. `defaults` keeps the source text, which is
+    # still the honest thing to show a person reading the census.
     defaults: dict[str, str] = {}
+    default_values: dict[str, Any] = {}
     for arg, default in zip(positional[len(positional) - n_defaults:], args.defaults if n_defaults else []):
         try:
             defaults[arg.arg] = ast.unparse(default)[:60]
         except Exception:
             defaults[arg.arg] = ""
+        try:
+            default_values[arg.arg] = ast.literal_eval(default)
+        except Exception:
+            # not a literal (a call, a name, an f-string): there is no value to know without running
+            # it, and this census does not run anything
+            pass
     annotations = {}
     for a in positional:
         if a.annotation is not None:
@@ -107,7 +124,7 @@ def _signature(node: ast.AST) -> dict[str, Any]:
             except Exception:
                 annotations[a.arg] = ""
     return {"params": names, "required": required, "defaults": defaults,
-            "annotations": annotations}
+            "default_values": default_values, "annotations": annotations}
 
 
 # CONCATENATED NAMES ARE ONE TOKEN, AND A PERSON DOES NOT SPEAK THAT WAY.
@@ -291,6 +308,7 @@ def functions_in(path: pathlib.Path, root: pathlib.Path) -> list[dict]:
             "params": sig["params"],
             "required": sig["required"],
             "defaults": sig["defaults"],
+            "default_values": sig["default_values"],
             "annotations": sig["annotations"],
             "doc": doc,
             "module_doc": module_doc,
@@ -569,6 +587,25 @@ def closing_plan(census: dict, objective: str, known_ids=(), limit: int = 4) -> 
             "need": need}
 
 
+# THE FILE KINDS A TOOL'S OWN SENTENCE NAMES. Deliberately a short, explicit table rather than a
+# guesser: a wrong declaration would ELIMINATE a working capability, which is worse than declaring
+# nothing (an undeclared kind never causes a rejection).
+_NAMED_FILE_KINDS = ("csv", "tsv", "json", "yaml", "yml", "pdf", "markdown", "md", "html", "xml",
+                     "sqlite", "zip", "tar", "xlsx", "docx", "txt", "png", "jpeg", "jpg")
+
+
+def _declared_file_kinds(text: str) -> list[str]:
+    """File kinds a tool names about itself, as whole words.
+
+    A tool that says "csv" in its docstring is saying what it accepts. Reading that is not an
+    inference about behaviour -- it is the author's own statement -- and it is only ever used to
+    REFUSE a file the tool plainly does not handle.
+    """
+    import re as _re
+    words = set(_re.findall(r"[a-z0-9]+", str(text or "").lower()))
+    return sorted(w for w in _NAMED_FILE_KINDS if w in words)
+
+
 def forge_entry(row: dict, keywords=None, provides=None, declares=None) -> dict:
     """Turn a census row into the `entry` dict `capability_forge_v1` consumes.
 
@@ -602,7 +639,26 @@ def forge_entry(row: dict, keywords=None, provides=None, declares=None) -> dict:
         "doc": str(row.get("doc") or "")[:400],
         "params": list(row.get("params") or []),
         "required": list(row.get("required") or []),
+        # THE FUNCTION'S OWN DEFAULTS, so the forge can declare them in the placeholder the binder
+        # reads. The census already read them from the source; dropping them here is what made a
+        # forged `count_rows(path, delimiter=",")` uncallable whenever the sentence named no
+        # delimiter.
+        "defaults": dict(row.get("defaults") or {}),
+        "default_values": dict(row.get("default_values") or {}),
         "provides": list(provides or []) or ["forged." + stem + "::" + str(row.get("function") or "")],
-        "declares": list(declares or []),
+        # THE KINDS OF FILE THIS TOOL SAYS IT WORKS ON, TAKEN FROM ITS OWN DOCSTRING.
+        #
+        # `world_probe.kind_contradiction` eliminates a capability whose declared kind cannot accept
+        # the file the sentence names -- but it reads only the capability id and the placement names,
+        # and a forged row declared neither. Measured 2026-11-23: `count_rows`, described as counting
+        # "the data rows in a delimited file, excluding the header", was applied to README.md, made
+        # 222 of a true 223 (it subtracted a header that a Markdown file does not have), and reported
+        # VERIFIED_ACTION. The tool knew what it was for; nothing passed that on.
+        #
+        # This is the tool's own sentence, not an inference: the docstring is where the author said
+        # what kind of file they meant.
+        "declares": (list(declares or [])
+                     + _declared_file_kinds(str(row.get("doc") or "")
+                                            + " " + str(row.get("function") or ""))),
         "keywords": sorted(set(words)),
     }

@@ -52,7 +52,9 @@ TASK CODE. Every decision above is decidable by looking.
 from __future__ import annotations
 
 import importlib.util
+import pathlib
 import re as _re
+import re
 import json
 import sys
 import time
@@ -403,6 +405,45 @@ def _independent_artifact_check(result, root):
 #
 # The fix is deliberately narrow: when the request names a file, and the receipt mentions no path at
 # all that relates to that name, the receipt cannot be an answer about that file.
+# The file kinds the source/analysis adapters in this registry actually open. A directory binding is
+# evidence of coverage only for these; for anything else the run looked in the right place and read
+# the wrong stuff.
+# WHICH KINDS OF FILE A CAPABILITY ACTUALLY OPENS, read off its own name and declared provides.
+#   python.source.*   -> python and text sources, never a csv
+#   document.*        -> documents and pdfs
+#   zip/tar/gzip      -> archives
+#   (anything else)   -> unknown, so a directory binding proves nothing
+_KINDS_BY_NAME = (
+    ("python.source", frozenset({".py", ".pyi"})),
+    ("python.tests", frozenset({".py", ".pyi"})),
+    ("python.package", frozenset({".py", ".pyi", ".toml", ".cfg", ".txt"})),
+    ("document.convert", frozenset({".pdf", ".md", ".html", ".docx", ".txt", ".rst"})),
+    ("pdf.", frozenset({".pdf"})),
+    ("archive.", frozenset({".zip", ".tar", ".gz", ".tgz", ".bz2", ".xz"})),
+    ("zip", frozenset({".zip"})),
+    ("tar", frozenset({".tar", ".gz", ".tgz", ".bz2"})),
+    ("csv", frozenset({".csv", ".tsv"})),
+    ("xlsx", frozenset({".xlsx", ".xls", ".csv"})),
+    ("sqlite", frozenset({".sqlite", ".db", ".sqlite3"})),
+)
+
+
+def _capability_reads_this_kind(capability_id, extension) -> bool:
+    """Does this capability's own kind include files like the one named?
+
+    Unknown kinds answer False: a directory binding is only evidence when the capability is known to
+    process files of that kind, and silence is not permission.
+    """
+    cid = str(capability_id or "").lower()
+    for prefix, kinds in _KINDS_BY_NAME:
+        if prefix in cid:
+            return str(extension or "").lower() in kinds
+    return False
+
+
+_ADAPTER_READABLE_EXTENSIONS = frozenset({".py", ".pyi", ".txt", ".json", ".md", ".rst", ".toml",
+                                          ".cfg", ".ini", ".yaml", ".yml", ".csv", ".tsv"})
+
 _PATH_IN_REQUEST = _re.compile(
     r"(?<![\w/.~-])((?:~|/|\.{1,2}/)?[\w./~-]*[\w-]+\.[A-Za-z0-9]{1,8})(?![\w/])")
 
@@ -420,7 +461,8 @@ def _named_paths(goal: str) -> list[str]:
     return out
 
 
-def _receipt_speaks_to_named_path(result, goal, bound_inputs=None) -> tuple[bool, str] | None:
+def _receipt_speaks_to_named_path(result, goal, bound_inputs=None,
+                                  capability_id="") -> tuple[bool, str] | None:
     """Does the receipt mention the file the request named?
 
     Returns None when the request named no file (nothing to check), True when the receipt
@@ -456,13 +498,34 @@ def _receipt_speaks_to_named_path(result, goal, bound_inputs=None) -> tuple[bool
         # demonstrably worked on a set that includes it. Measured 2026-11-23: this test failed an
         # honest audit of 2417 files because its receipt summarised a directory instead of echoing
         # the file. Over-broad is a different complaint from silent, and only SILENT is a false pass.
+        # A DIRECTORY CONTAINS THE FILE, BUT "CONTAINS" IS NOT "WORKED ON".
+        #
+        # Measured 2026-11-23: asked to count rows in csvroom/people.csv, the machine bound
+        # `source_root: .../csvroom`, ran a PYTHON SOURCE analyser over that directory, and reported
+        # VERIFIED_ACTION. The directory does contain people.csv -- and that is precisely why a
+        # directory-level binding is not evidence: it contains everything, including things this
+        # capability cannot read at all. The earlier exemption (added for an honest 2417-file audit)
+        # was too generous and let this false pass through.
+        #
+        # The smaller claim is the safe one. A containing directory counts ONLY when the named file is
+        # of a kind these adapters actually process (their own declared extensions). Otherwise the
+        # run said nothing about the named file, whatever directory it looked in.
         name_low = name.lower().strip("./")
+        named_ext = pathlib.PurePosixPath(name_low).suffix.lower()
         for token in handed.replace('"', " ").replace(",", " ").split():
             tok = token.strip("{}[]:;'").strip("./")
             if not tok or "/" not in tok:
                 continue
             if name_low.startswith(tok.rstrip("/") + "/"):
-                return (True, "BOUND_TO_CONTAINING_DIR:" + tok)
+                # WHAT THIS CAPABILITY PROCESSES IS THE QUESTION -- NOT WHAT EXTENSION THE FILE HAS.
+                # A Python source analyser given a directory of .py files has NOT covered a .csv that
+                # happens to sit in the same folder. The first version of this exemption asked only
+                # whether the extension was one "adapters read", which is a property of the registry
+                # as a whole and never of the thing that actually ran. Measured 2026-11-23: that let
+                # a source analyser certify a row count on a csv, twice.
+                if _capability_reads_this_kind(capability_id, named_ext):
+                    return (True, "BOUND_TO_CONTAINING_DIR:" + tok)
+                return (False, "CONTAINING_DIR_NOT_THIS_CAPABILITY_S_KIND:" + named_ext)
     blob = ""
     try:
         import json as _json
@@ -1003,7 +1066,8 @@ def act(goal, root=None, registry=None, verbose=False, memory=True,
             # consumes; the goal names a file of a different known kind.
             # "run ocr on X.png" cannot be served by a PDF-only extractor.
             # This is a fact, so it eliminates; it does not down-rank.
-            if WP.kind_contradiction(cid, WB.placeholders(entry), own_paths):
+            if WP.kind_contradiction(cid, WB.placeholders(entry), own_paths,
+                                      declared_kinds=entry.get("declares") or ()):
                 rejected.append({"capability_id": cid,
                                  "why": "INPUT_KIND_CONTRADICTS_GOAL_FILE",
                                  "goal_paths": own_paths})
@@ -1155,6 +1219,50 @@ def act(goal, root=None, registry=None, verbose=False, memory=True,
                 if proc_hit and proc_hit.get("capability_id"):
                     for s in survivors:
                         if s["capability_id"] == proc_hit["capability_id"]:
+                            # A REMEMBERED ROUTE MAY NOT OUTRULE A DECISIVELY BETTER ONE.
+                            #
+                            # The rule three paragraphs above applies to `recall_resolution` and was
+                            # not applied here, so this second memory door had exactly the defect it
+                            # was written to close. Measured 2026-11-23, after a false pass was fixed
+                            # at the verdict: the machine had "learned" that
+                            # "count the rows in the csv <path>" was answered by a PYTHON SOURCE
+                            # analyser (it had certified that run before the fix). The corrected
+                            # forge then produced a real `count_rows` at 42.86 against the analyser's
+                            # 17.62 -- and the remembered, wrong, now-failing route won anyway.
+                            #
+                            # Memory is for resolving near-ties and for repeating a good decision. It
+                            # is not evidence, and it must not survive fresh measurement that
+                            # contradicts it by the module's own decisive margin.
+                            # WHY A REMEMBERED ROUTE IS ALLOWED TO SURVIVE A HIGHER-SCORING RIVAL.
+                            #
+                            # I first wrote the opposite rule here: if the top rival outscored the
+                            # remembered route by the module's decisive ratio (1.25), memory would
+                            # yield. Measured, it was wrong in both directions and for the same
+                            # reason -- word agreement is not fit.
+                            #
+                            #   count_rows 42.86 vs source analyser 17.62  (ratio 2.43) -- memory
+                            #     SHOULD yield; the remembered route was a false pass. The ratio
+                            #     suppressed it: right answer, wrong reason.
+                            #   pandoc_weasyprint 36.39 vs pypdf 28.39      (ratio 1.28) -- memory
+                            #     should NOT yield; pypdf is the only route that can extract text
+                            #     from a pdf, and a markdown->pdf converter merely mentions pdf.
+                            #     The ratio suppressed it and broke an honest case.
+                            #   tree_sitter vs python.source.audit.ast (the ast paraphrases) -- the
+                            #     ratio suppressed memory on four rows that memory had been getting
+                            #     right and that no fit argument condemned.
+                            #
+                            # No threshold separates these, because the scores measure how many goal
+                            # words a capability's prose contains, and every one of the bad rivals is
+                            # a capability that PRODUCES the very kind the goal asks to CONSUME.
+                            # That is a fact about fit, and it is now checked directly: the kind
+                            # gate (INPUT_KIND_CONTRADICTS_GOAL_FILE) eliminates a producer offered a
+                            # consumer's job before scoring is consulted at all. Measured with this
+                            # rule removed and the kind gate in place, every case above is correct --
+                            # csv 3 rows, README unresolved, pdf remembered, all ast rows remembered.
+                            #
+                            # So memory keeps the decision, and the fit check does the vetoing. A
+                            # numeric threshold here would be a second, weaker copy of a question
+                            # already answered better elsewhere.
                             chosen, why = s, "REMEMBERED_PROCEDURE"
                             break
             except Exception:
@@ -1411,7 +1519,8 @@ def act(goal, root=None, registry=None, verbose=False, memory=True,
     # person named /tmp/homefile.csv and the machine counted definitions in an unrelated .py file.
     # A capability that never mentions the named file has not answered about it, however well it can
     # prove the bytes it wrote.
-    path_verdict = (_receipt_speaks_to_named_path(result, goal, chosen.get("inputs"))
+    path_verdict = (_receipt_speaks_to_named_path(result, goal, chosen.get("inputs"),
+                                                     chosen.get("capability_id") or "")
                     if invoked else None)
     if path_verdict is not None and path_verdict[0] is False:
         verified = False

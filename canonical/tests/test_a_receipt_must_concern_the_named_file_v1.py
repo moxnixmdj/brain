@@ -80,16 +80,27 @@ def test_a_containing_directory_is_coverage_not_a_miss():
     punished a capability for working on more than it was asked. Over-broad is a different complaint
     from silent.
     """
-    verdict = GA._receipt_speaks_to_named_path(
+    # THE CAPABILITY MUST BE NAMED, and this test originally did not name one. That was the point:
+    # after the tightening, an UNKNOWN capability cannot claim a directory covers a file at all, so
+    # silence is the correct answer for a caller who does not say what ran.
+    unnamed = GA._receipt_speaks_to_named_path(
         {"file_count": 2417},
         "audit the python source canonical/runtime/solve_v1.py",
         {"source_root": "canonical/runtime"})
+    assert unnamed is not None and unnamed[0] is False, unnamed
+
+    # named, and of the right kind, the directory IS coverage
+    verdict = GA._receipt_speaks_to_named_path(
+        {"file_count": 2417},
+        "audit the python source canonical/runtime/solve_v1.py",
+        {"source_root": "canonical/runtime"}, "python.source.audit.ast")
     assert verdict is not None and verdict[0] is True, verdict
     assert "BOUND_TO_CONTAINING_DIR" in verdict[1], verdict
 
     # a directory that does NOT contain it is still silent
     other = GA._receipt_speaks_to_named_path(
-        {"file_count": 3}, "audit /tmp/homefile.csv", {"source_root": "canonical/runtime"})
+        {"file_count": 3}, "audit /tmp/homefile.csv", {"source_root": "canonical/runtime"},
+        "python.source.audit.ast")
     assert other is not None and other[0] is False, other
 
 
@@ -106,3 +117,35 @@ def test_the_verdict_downgrades_and_says_why_in_the_receipt():
     check = acted.get("named_path_check") or {}
     assert check.get("ok") is False, acted
     assert "RECEIPT_SILENT_ON_NAMED_PATH" in (check.get("note") or ""), acted
+
+
+def test_a_containing_directory_only_counts_for_its_own_kind_of_file():
+    """THE HOLE IN THE FIRST EXEMPTION, AND WHY IT NEEDED A SECOND MEASUREMENT.
+
+    A directory-level binding was accepted for any file whose extension appeared somewhere in the
+    registry -- which is a property of the registry, never of the thing that ran. Measured
+    2026-11-23: asked to count the rows of `csvroom/people.csv`, the machine bound
+    `source_root: .../csvroom`, ran a PYTHON SOURCE analyser over that directory, and reported
+    VERIFIED_ACTION. The directory does contain the csv; the capability cannot read it.
+
+    What decides is what the capability processes, read from its own id.
+    """
+    # a python source analyser over a directory does not cover the csv inside it
+    verdict = GA._receipt_speaks_to_named_path(
+        {"function_count": 1}, "count the rows in the csv canonical/astra_runtime/tmp/csvroom/people.csv",
+        {"source_root": "canonical/astra_runtime/tmp/csvroom"},
+        "python.source.definition_count.v1")
+    assert verdict is not None and verdict[0] is False, verdict
+    assert "NOT_THIS_CAPABILITY_S_KIND" in verdict[1], verdict
+
+    # the same analyser over a directory of python DOES cover the named .py
+    ok = GA._receipt_speaks_to_named_path(
+        {"file_count": 2417}, "audit the python source canonical/runtime/solve_v1.py",
+        {"source_root": "canonical/runtime"}, "python.source.audit.ast")
+    assert ok is not None and ok[0] is True, ok
+
+    # an unknown capability over any directory proves nothing
+    unknown = GA._receipt_speaks_to_named_path(
+        {"x": 1}, "summarise canonical/runtime/solve_v1.py",
+        {"source_root": "canonical/runtime"}, "mystery.capability.v1")
+    assert unknown is not None and unknown[0] is False, unknown

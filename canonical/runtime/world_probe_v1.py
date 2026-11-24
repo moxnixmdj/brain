@@ -71,6 +71,7 @@ _FILE_KINDS = {
     "image":                  ((".png", ".jpg", ".jpeg", ".gif", ".bmp",
                                 ".webp", ".tif", ".tiff"), ()),
     "json":                   ((".json",), ()),
+    "csv":                    ((".csv", ".tsv"), ()),
     "structured.json":        ((".json",), ()),
     "trades.json":            ((".json",), ("trade",)),
     "manifest.json":          ((".json",), ("manifest",)),
@@ -584,6 +585,14 @@ _KIND_TOKENS = {
     "png":       (".png",),
     "yaml":      (".yaml", ".yml"),
     "json":      (".json",),
+    # CSV WAS NEVER A KIND IN THIS TREE.
+    # Measured 2026-11-23: `_kinds_of('csv')` returned an empty set, so neither a capability's own
+    # "csv" nor a goal naming `people.csv` announced anything to `kind_contradiction`. That is why a
+    # tool documented as counting csv rows could be handed a README and certify the answer: the gate
+    # could not see either side of the comparison. Tab-separated files are the same shape and are
+    # grouped with them; `tsv` is kept as its own token for a capability that means only that.
+    "csv":       (".csv", ".tsv"),
+    "tsv":       (".tsv",),
     "xlsx":      (".xlsx",),
     "docx":      (".docx",),
     "sqlite":    (".sqlite", ".db"),
@@ -721,14 +730,23 @@ def goal_kind_contradiction(goal, goal_paths=()):
     return None
 
 
-def kind_contradiction(capability_id, placeholder_names=(), goal_paths=()):
+def kind_contradiction(capability_id, placeholder_names=(), goal_paths=(), declared_kinds=()):
     """True when the capability's declared kind cannot accept the goal's file.
 
     Only fires when BOTH sides are known kinds and they are disjoint. An
     unrecognised extension never causes a rejection: not knowing is not
     contradicting.
+
+    `declared_kinds` is the row's own statement of what it works on --
+    `register()` writes it from the tool's docstring. It has to be passed in separately because a
+    forged capability's ID can never carry a kind: the id is `forged.<stem>.<function>`, and no
+    amount of reading it will say "csv". Without this argument a forged csv row-counter was offered a
+    README, made 222 of a true 223 by subtracting a header Markdown does not have, and reported
+    VERIFIED_ACTION (measured 2026-11-23).
     """
-    declared = _kinds_of(capability_id) | _kinds_of(" ".join(placeholder_names or ()))
+    declared = (_kinds_of(capability_id)
+                | _kinds_of(" ".join(placeholder_names or ()))
+                | _kinds_of(" ".join(declared_kinds or ())))
     if not declared:
         return False
     for rel in goal_paths or ():

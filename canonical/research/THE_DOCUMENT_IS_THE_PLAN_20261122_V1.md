@@ -9260,3 +9260,92 @@ you when it stops being right.
     * Importing the module is required to ask it anything, so this is for importable code, not for an
       arbitrary file on disk.
     * §6 NOT MET. No OSWorld task, no SWE-bench instance.
+
+## §A150 — The csv loop, closed; and the threshold I had to delete
+
+*2026-11-23. Branch `arena/4f36ef34-brain`. Closes the chain opened in §A148.*
+
+### What was broken
+
+`count the rows in the csv people.csv` returned a *verified* wrong number, and the
+false pass survived every check I had. It took six distinct defects to hold it up, and
+each one hid the next:
+
+1. `grounded_action_v1` let a remembered route outrank fresh measurement — so a route
+   that had once worked kept winning after it stopped working.
+2. `room_census_v1.function_signature` reported a parameter's default as its **source
+   text** (`','` with the quotes) rather than its **value** (`,`).
+3. `csv` was not a file kind anywhere in the tree — absent from `_KIND_TOKENS` *and*
+   `_FILE_KINDS` — so a kind check could see neither side of its own comparison.
+4. The tool's docstring said what it processes; nothing read it.
+5. `register()` dropped `declares` on the floor between the contract and the row.
+6. `kind_contradiction` had no parameter to receive it, so the surviving declaration
+   was unreadable at the one place that needed it.
+
+Defects 4–6 are the interesting ones, and they are one defect in three places: **a
+declaration that is not carried to where it is read is not a declaration.** Each stage
+looked, in isolation, like "the gate does not work." It was never the gate.
+
+### What now holds
+
+    learn    True   ran 3/3   killed 12/12
+    row      declares ['csv']   default_values {'delimiter': ','}
+    act      count the rows in the csv .../people.csv  -> VERIFIED  {"rows": 3}   truth 3
+             count the rows in the csv .../tiny.csv    -> VERIFIED  {"rows": 1}   truth 1  (never taught)
+             count the lines in README.md              -> UNRESOLVED, INPUT_KIND_CONTRADICTS_GOAL_FILE
+                                                          (was a verified 222; truth is 223)
+
+The README line is the one I am least tempted to tidy away. A wrong answer became an
+honest refusal, and the original "verification" was subtracting a header that Markdown
+does not have.
+
+### The threshold I added and then deleted
+
+Defect 1 above I first fixed with a ratio: if a rival outscored the remembered route by
+the module's own decisive margin (1.25), memory would yield. It worked on the case that
+motivated it. Then it broke an unrelated test, and the measurement says why:
+
+| goal | remembered route | rival | ratio | memory should |
+|---|---|---|---|---|
+| count rows in a csv | source analyser 17.62 | `count_rows` 42.86 | 2.43 | **yield** |
+| read text from a pdf | `pypdf` 28.39 | `pandoc_weasyprint` 36.39 | 1.28 | **keep** |
+| inspect a python file via ast | `audit.ast` | `tree_sitter` | — | **keep** |
+
+No threshold separates these, and the same threshold goes wrong in both directions. The
+scores measure **word agreement**, and every bad rival here is a capability that
+*produces* the kind of file the goal asks to *consume*: a markdown→pdf converter writes
+pdf, it cannot read one. That is a fact about **fit**, and once fit is checked directly —
+`INPUT_KIND_CONTRADICTS_GOAL_FILE`, before scoring is consulted — the ratio guard is not
+merely unnecessary, it had been suppressing **correct** memories on two of three families.
+
+Measured with the guard removed and the kind gate in place: csv 3, README unresolved, pdf
+remembered, all four ast paraphrases remembered. **All correct, with no threshold.**
+
+The general shape, which I had wrong twice: a numeric knob that fixes one measured case
+and breaks another has usually been asked a question it cannot answer. Ask a different
+question, not a better number.
+
+    (144) A default is its value, not its source text. `ast.unparse` and
+          `ast.literal_eval` answer different questions; feeding the first to a binder
+          produces a correct-looking template that dies at the call.
+    (145) A declaration that is not carried to where it is read is not a declaration.
+          Compute it, keep it, pass it, read it — three of four is zero.
+    (146) A remembered route may not outrule decisive evidence — but weight of words is
+          not evidence of fit. Score how well prose matches a goal; decide what a
+          capability can do with what the goal has.
+    (147) When a knob fixes one case and breaks another, the knob is asking the wrong
+          question. Replace the question, not the number.
+
+### Honest limits
+
+    * Fit is decided from extension and declaration only. A `.csv` that is not a csv, or a
+      tool whose docstring understates it, will still be judged shallowly.
+    * An unrecognized extension never contradicts — not knowing is not a contradiction —
+      so this gate is silent on kinds the tree has never been taught.
+    * Expressibility moved 13 → 12 when the README false pass left, and rises when forged
+      capabilities are live. **Both directions are real**, so the test asserts direction
+      and majority rather than an exact count.
+    * `test_a_real_chain_produces_a_real_contrast_across_two_roots` fails, and it is **not**
+      from this work: measured, it fails with all four runtime files reverted to HEAD, and
+      it fails with `forged.rows.count_rows` dropped from state. Recorded, not claimed.
+    * **§6 NOT MET.** No OSWorld task, no SWE-bench instance.

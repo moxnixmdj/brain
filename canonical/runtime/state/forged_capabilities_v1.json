@@ -219,6 +219,80 @@
    "forged_at": 1795489950.3363018,
    "function": "profile",
    "module": "canonical/astra_runtime/tmp/unseen/census.py"
+  },
+  "forged.rows.count_rows": {
+   "contract": {
+    "_defaults": {
+     "delimiter": ","
+    },
+    "declares": [],
+    "doc": "",
+    "function": "count_rows",
+    "module": "canonical/astra_runtime/tmp/fit_not_words_jtw6uiyn/rows.py",
+    "optional": [
+     "delimiter"
+    ],
+    "parameters": [
+     "path",
+     "delimiter"
+    ],
+    "required": [
+     "path"
+    ]
+   },
+   "entry": {
+    "_forged_defaults": {
+     "path": "/home/user/brain/canonical/astra_runtime/tmp/fit_not_words_jtw6uiyn/people.csv"
+    },
+    "action_template": {
+     "args": {
+      "_forged_id": "forged.rows.count_rows",
+      "delimiter": "${input.delimiter | ,}",
+      "path": "${input.path}"
+     },
+     "expect": {
+      "field": "output_sha256",
+      "type": "field_nonempty",
+      "value": null
+     },
+     "type": "invoke_capability"
+    },
+    "adapter_module": "forged_invoker",
+    "capability_id": "forged.rows.count_rows",
+    "cost": 1,
+    "declares": [],
+    "entrypoint": "run",
+    "incremental_spend_usd": 0,
+    "keywords": [
+     "count",
+     "rows"
+    ],
+    "optional": [
+     "delimiter"
+    ],
+    "platforms": [
+     "linux"
+    ],
+    "provides": [
+     "forged.canonical/astra_runtime/tmp/fit_not_words_jtw6uiyn/rows.py::count_rows"
+    ],
+    "requires": [],
+    "source": {
+     "origin": "brain_inventory"
+    },
+    "status": "FORGED__MACHINE_ADMITTED",
+    "verification": {
+     "authority": "MACHINE_ADMITTED__RAN_REPEATEDLY_AND_REFUSED_CORRUPTED_INPUT__NOT_A_SEMANTIC_RECEIPT",
+     "cases": 4,
+     "tier": "FORGED"
+    }
+   },
+   "example_case": {
+    "path": "/home/user/brain/canonical/astra_runtime/tmp/fit_not_words_jtw6uiyn/people.csv"
+   },
+   "forged_at": 1795500473.8304305,
+   "function": "count_rows",
+   "module": "canonical/astra_runtime/tmp/fit_not_words_jtw6uiyn/rows.py"
   }
  },
  "refused": {
@@ -312,6 +386,20 @@
     "NOT_GENERAL"
    ],
    "refused_at": 1795489852.6629043
+  },
+  "rows.py::count_rows": {
+   "checks": {
+    "ran": "0/3"
+   },
+   "function": "count_rows",
+   "module": "rows.py",
+   "reasons": [
+    "case0_FAILED:ModuleInvokeRefused:ResearchToolUnsafe:RESEARCH_TOOL_PATH_INVALID:rows.py",
+    "case1_FAILED:ModuleInvokeRefused:ResearchToolUnsafe:RESEARCH_TOOL_PATH_INVALID:rows.py",
+    "case2_FAILED:ModuleInvokeRefused:ResearchToolUnsafe:RESEARCH_TOOL_PATH_INVALID:rows.py",
+    "NOT_GENERAL"
+   ],
+   "refused_at": 1795500466.5638437
   }
  }
 }
