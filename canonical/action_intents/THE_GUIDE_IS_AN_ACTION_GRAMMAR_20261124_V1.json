@@ -1746,5 +1746,694 @@
    "AGENTS.md"
   ],
   "honest_state_read_live": true
+ },
+ "action_id": "THE_GUIDE_IS_AN_ACTION_GRAMMAR_20261124",
+ "action_intent_id": "THE_GUIDE_IS_AN_ACTION_GRAMMAR_20261124_V1",
+ "action_kind": "FRESH_REUSE",
+ "action_summary": "Read a program's own page as a typed action grammar -- usage line as arity and argument kind, flag as the verb it governs, the summary sentence as the program's own claim -- and answer a need by a path over those transitions, filled from objects typed by their bytes, judged by the machine's own read-only programs.",
+ "status": "SHIPPED",
+ "truth": {
+  "achieved": false,
+  "what_is_real": "446 pages -> 87 stated transitions -> 11 of 11 servable needs held, 3 by a two-edge path, 2 held-out needs refused before any page was read, 0 model calls, 0 parameters, 0 run-time network, 65 s",
+  "what_is_not": "a benchmark result; a claim about GUIs, browsers or unseen environments; single-experience learning; any terminal credit"
+ },
+ "canonical_base_commit": "0514dc57466174bf2f16d6de29e60bfff9a443ef",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "parent_capability": "the_repertoire_is_a_query_v1 (437 programs, 4,621 options, 0 of 80 accepted changed a byte) + the refusal reader as shipped in caefcd5f",
+ "required_capability": "a typed action repertoire: a page read as arity + argument kind + verb, joined to a room typed by bytes, searched as a path and judged by a read-only program",
+ "causal_blocker": "no module in this tree read a program's usage line as arity over KINDS or a flag as the verb it governs, so an option could only be executed alone and 77 of 80 accepted options changed nothing",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::no module in this tree read a program's usage line as arity over KINDS or a flag as the verb it governs, so an option could only be executed alone and 77 of 80 accepted options changed nothing",
+ "stop_condition": "stop when every page this machine can print has been read as a grammar, every transition its own sentence or flag states is in the repertoire, and every need is either answered by a path whose last step a read-only program confirms, or refused before a page is read",
+ "expected_parent_change": "an option stops being a modifier executed alone and becomes the verb half of a typed sentence whose object half comes from the room",
+ "expected_parent_frontier_change": "the frontier moves from 'which option changes a byte' to 'which typed transition, on which object, for which end' -- the missing object the repertoire round named as PURPOSE",
+ "expected_parent_level_state_change": "the repertoire's own rows become typed: each page contributes (in-kind, out-kind, verb, switch) transitions instead of a list of flags that changed nothing",
+ "progress_class": "VERIFIED_REUSABLE_CAPABILITY_GAIN",
+ "progress_evidence_paths": [
+  "canonical/tools/the_guide_is_an_action_grammar_v1.py",
+  "canonical/action_intents/THE_GUIDE_IS_AN_ACTION_GRAMMAR_20261124_V1.json",
+  "THE_GUIDE_IS_AN_ACTION_GRAMMAR_20261124_V1.md"
+ ],
+ "route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+ "selected_route": "READ_THE_PAGE_AS_A_GRAMMAR_AND_SEARCH_THE_TYPED_REPERTOIRE",
+ "selected_surviving_route": "READ_THE_PAGE_AS_A_GRAMMAR_AND_SEARCH_THE_TYPED_REPERTOIRE",
+ "route_order_walk": {
+  "DELETE": "the flag-to-verb interpreter and the whole-page keyword ranker were deleted after measuring what they answered (gzip -k read as delete, ld.gold outranking tar)",
+  "BYPASS": "not used: skipping the goal check would make the pass a claim",
+  "REUSE": "priced and dead: THE_REPERTOIRE_IS_A_QUERY executed 164 printed options on real state and 0 of the 80 accepted changed a byte",
+  "ADAPT": "the demand-language arc (10 rounds, 2 of 75 repairs) was read before anything was written and is not repeated",
+  "SUBSTITUTE": "no model, no shell out to a language model, no borrowed output",
+  "COMPOSE": "the goal compiler cannot compose here because nothing fed it typed transitions",
+  "CONFIGURE": "n/a",
+  "INTEGRATE": "n/a",
+  "SYNTHESIZE_NEW_PRIMITIVE": "SELECTED: a page parsed as (usage shape, declared option nouns, stated verbs) and a search over those transitions against a room typed by bytes, judged by read-only programs. No program, flag or output path is written in it for any need."
+ },
+ "route_order_walk_note": "eight earlier routes were priced and rejected with the measurements above before the ninth was written",
+ "routes_considered": [
+  {
+   "route": "EXECUTE_EVERY_PRINTED_OPTION",
+   "verdict": "REJECTED",
+   "why": "measured last round: 80 accepted, 0 changed a byte"
+  },
+  {
+   "route": "LEARN_A_RANKER_OVER_PAGES",
+   "verdict": "REJECTED",
+   "why": "parameters to compute a lexical score that a declared contract already gives"
+  },
+  {
+   "route": "ASK_A_MODEL_FOR_THE_COMMAND",
+   "verdict": "REJECTED",
+   "why": "producer cognition by a model; forbidden and unverifiable"
+  },
+  {
+   "route": "READ_THE_PAGE_AS_A_GRAMMAR",
+   "verdict": "SELECTED",
+   "why": "11 of 11 servable needs held, 3 by two edges, 0 model calls"
+  }
+ ],
+ "route_frontier": {
+  "canonical_base_commit": "0514dc57466174bf2f16d6de29e60bfff9a443ef",
+  "checked_at_utc": "2026-11-24T03:09:52+00:00",
+  "discovery_required": true,
+  "max_age_hours": 2,
+  "incumbent_route": "PER_OPTION_EXECUTION",
+  "selected_route": "READ_THE_PAGE_AS_A_GRAMMAR_AND_SEARCH_THE_TYPED_REPERTOIRE",
+  "challenger_routes": [
+   {
+    "route": "PER_OPTION_EXECUTION",
+    "resolution": "DISQUALIFIED",
+    "comparison": {
+     "CORRECTNESS": "0 needs answered",
+     "CAPABILITY_STRENGTH": "cannot compose two moves",
+     "WALL_CLOCK": "47 s",
+     "INCREMENTAL_COST": "none",
+     "RELIABILITY": "low",
+     "VERIFIABILITY": "equal"
+    },
+    "evidence": [
+     "THE_REPERTOIRE_IS_A_QUERY_20261129_V1: 164 options executed, 80 accepted, 0 bytes changed"
+    ],
+    "qualification_evidence": [
+     "canonical/action_intents/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json"
+    ],
+    "qualification_evidence_classes": [
+     "DIRECT_PROBE"
+    ]
+   },
+   {
+    "route": "WHOLE_PAGE_KEYWORD_RANKING",
+    "resolution": "DISQUALIFIED",
+    "comparison": {
+     "CORRECTNESS": "answered the wrong program",
+     "CAPABILITY_STRENGTH": "none",
+     "WALL_CLOCK": "equal",
+     "INCREMENTAL_COST": "none",
+     "RELIABILITY": "low",
+     "VERIFIABILITY": "equal"
+    },
+    "evidence": [
+     "this round's first build: zforce, ld.gold and apt-get outranked tar, sort and gzip"
+    ],
+    "qualification_evidence": [
+     "THE_GUIDE_IS_AN_ACTION_GRAMMAR_20261124_V1.md"
+    ],
+    "qualification_evidence_classes": [
+     "DIRECT_PROBE"
+    ]
+   },
+   {
+    "route": "MODEL_GUESSES_THE_COMMAND",
+    "resolution": "DISQUALIFIED",
+    "comparison": {
+     "CORRECTNESS": "unverifiable",
+     "CAPABILITY_STRENGTH": "high",
+     "WALL_CLOCK": "unknown",
+     "INCREMENTAL_COST": "a model call at run time",
+     "RELIABILITY": "unknown",
+     "VERIFIABILITY": "none"
+    },
+    "evidence": [
+     "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md forbids producer cognition by a model"
+    ],
+    "qualification_evidence": [
+     "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md"
+    ],
+    "qualification_evidence_classes": [
+     "INDEPENDENT_VERIFIER"
+    ]
+   },
+   {
+    "route": "READ_THE_PAGE_AS_A_GRAMMAR_AND_SEARCH_THE_TYPED_REPERTOIRE",
+    "resolution": "SELECTED",
+    "comparison": {
+     "CORRECTNESS": "11 of 11 needs held",
+     "CAPABILITY_STRENGTH": "3 paths of two edges",
+     "WALL_CLOCK": "65 s",
+     "INCREMENTAL_COST": "none",
+     "RELIABILITY": "identical verdict over two runs",
+     "VERIFIABILITY": "every goal read by a read-only program"
+    },
+    "evidence": [
+     "446 pages, 87 transitions, 11/11 needs held, 2 held-out refused before any page was read"
+    ],
+    "qualification_evidence": [
+     "canonical/action_intents/THE_GUIDE_IS_AN_ACTION_GRAMMAR_20261124_V1.json"
+    ],
+    "qualification_evidence_classes": [
+     "DIRECT_PROBE"
+    ]
+   }
+  ],
+  "comparison_dimensions": [
+   "CORRECTNESS",
+   "CAPABILITY_STRENGTH",
+   "WALL_CLOCK",
+   "INCREMENTAL_COST",
+   "RELIABILITY",
+   "VERIFIABILITY"
+  ],
+  "query_families": [
+   {
+    "intent": "CAPABILITY_VECTOR",
+    "query": "action grammar from tool help text typed transitions"
+   },
+   {
+    "intent": "SUPPLIER_OR_PRODUCT",
+    "query": "man page usage line argument kinds parse"
+   },
+   {
+    "intent": "IMPLEMENTATION_FORM",
+    "query": "planning over typed tool effects from declared interfaces"
+   },
+   {
+    "intent": "RECENCY_OR_NEW_RELEASE",
+    "query": "2026 computer use agent without a language model action grammar"
+   }
+  ],
+  "refresh_triggers": [
+   "BEFORE_EXPENSIVE_EXECUTION",
+   "AFTER_MATERIAL_ROUTE_FAILURE",
+   "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+   "BEFORE_SCARCE_GATE_SPEND"
+  ],
+  "source_classes_checked": [
+   "BRAIN_INHERITED",
+   "OFFICIAL_PRIMARY",
+   "CODE_OR_PACKAGE_REGISTRY",
+   "BROAD_WEB_OR_COMMUNITY"
+  ],
+  "source_evidence": {
+   "BRAIN_INHERITED": [
+    "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+    "canonical/action_intents/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json"
+   ],
+   "OFFICIAL_PRIMARY": [
+    "the usage line and option block each program prints for --help on this machine"
+   ],
+   "CODE_OR_PACKAGE_REGISTRY": [
+    "the GNU tar, gzip, coreutils and patch pages as installed here (tar 1.34, gzip 1.12)"
+   ],
+   "BROAD_WEB_OR_COMMUNITY": [
+    "the Nov 2026 benchmark and repair literature recorded in the essay's sources"
+   ]
+  },
+  "unresolved_plausible_dominators": [],
+  "negative_search_summary": "no module in this tree read a usage line as arity over kinds or a flag as the verb it governs; the 2026 repair literature (VibeRepair, FixAudit, FormalFixer, ConRAD) all need a model to infer intent from a failing test, which is the step this round removes",
+  "selected_route_preflight": {
+   "checked_at_utc": "2026-11-24T03:09:52+00:00",
+   "max_age_hours": 2,
+   "selected_route": "READ_THE_PAGE_AS_A_GRAMMAR_AND_SEARCH_THE_TYPED_REPERTOIRE",
+   "status": "READY",
+   "all_required_dependencies_ready": true,
+   "execution_dependencies_complete": true,
+   "failed_dependencies": [],
+   "execution_dependencies": [
+    {
+     "dependency": "the local Python 3.11 interpreter that runs the instrument",
+     "kind": "LOCAL_RUNTIME",
+     "required": true,
+     "volatility": "STATIC",
+     "scope": "LOCAL",
+     "evidence_scope": "LOCAL",
+     "status": "READY",
+     "evidence": [
+      "the two runs in this PR"
+     ],
+     "evidence_classes": [
+      "DIRECT_PROBE"
+     ]
+    },
+    {
+     "dependency": "the standard programs whose pages are read (tp://tar etc. on PATH)",
+     "kind": "CODE_ARTIFACT",
+     "required": true,
+     "volatility": "STATIC",
+     "scope": "LOCAL",
+     "evidence_scope": "LOCAL",
+     "status": "READY",
+     "evidence": [
+      "446 pages read, 87 transitions"
+     ],
+     "evidence_classes": [
+      "DIRECT_PROBE"
+     ]
+    },
+    {
+     "dependency": "no network at run time",
+     "kind": "NETWORK_ENDPOINT",
+     "required": false,
+     "volatility": "VOLATILE",
+     "scope": "GLOBAL",
+     "evidence_scope": "GLOBAL",
+     "status": "READY",
+     "evidence": [
+      "network_calls_at_run_time = 0"
+     ],
+     "evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "observed_at_utc": "2026-11-24T03:10:03+00:00"
+    }
+   ]
+  }
+ },
+ "probe_specific": false,
+ "generic_repair_from_single_probe": false,
+ "recursive_obs": {
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "canonical_base_commit": "0514dc57466174bf2f16d6de29e60bfff9a443ef",
+  "real_outcome": "446 pages read, 87 transitions the pages state, 11 of 11 servable needs held, 3 of them by a path of two edges, 2 held-out needs refused before a page was read, 1 named-flag repair and 2 object re-binds in a declared drill, 1 of 3 derived checks shown blind. 0 model calls, 0 parameters, 0 run-time network, 65 s.",
+  "required_capability": "a typed action repertoire read from the machine's own pages, joined to a room typed by bytes",
+  "obs_goal": {
+   "real_outcome": "a need is answered by a path whose last step a read-only program confirms, or refused before any page is read",
+   "proxy_goals_deleted": [
+    "a larger page count",
+    "a larger option count",
+    "a lexical match score"
+   ],
+   "surviving_necessity": "an agent that can only execute options one at a time cannot do anything that needs two moves"
+  },
+  "obs_capability": {
+   "existing_inherited_routes_checked": "the_repertoire_is_a_query_v1, local_guide_v1, ask_the_subcommand_before_you_call_it_unbound_v1, the_corpus_that_can_answer_the_question_v1, the_relation_not_the_value_v1, the_demand_is_learned_from_the_run_v1, a_refusal_is_a_specification_v1, plans_compose_v1 and perfect_algorithm_v1 were read before anything was written; the refusal reader is reused, not rebuilt",
+   "external_existing_routes_checked": "11 Nov 2026 frontier: SWE-bench Pro 61.5% (about 30% broken), Terminal-Bench 4.1 top 71.2%, OSWorld 2.0 20.6% binary / 54.8% partial; the repair literature (VibeRepair, FixAudit, FormalFixer, ConRAD) all need a model to infer intent from a failing test, which is the step this round removes",
+   "capability_work_deleted": [
+    "a learned ranker of pages",
+    "a second discovery pass over the PATH",
+    "whole-page keyword scoring"
+   ],
+   "surviving_gap": "unseen environments, GUI accessibility trees, single-experience learning"
+  },
+  "obs_blocker": {
+   "intrinsic_or_path_specific": "INTRINSIC: the page prints the arity and the argument noun in fixed columns, and no module read them",
+   "delete_bypass_substitute_options": [
+    "execute every option alone (measured: 0 of 80 changed a byte)",
+    "score pages by keyword (measured: the wrong program wins)",
+    "ask a model for the command (forbidden, unverifiable)"
+   ],
+   "surviving_causal_blocker": "without a typed transition there is no object to bind, and an option with no object is a modifier"
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "routes_ranked": [
+    {
+     "route": "READ_THE_PAGE_AS_A_GRAMMAR",
+     "verdict": "SELECTED"
+    },
+    {
+     "route": "PER_OPTION_EXECUTION",
+     "verdict": "REJECTED"
+    },
+    {
+     "route": "WHOLE_PAGE_KEYWORD_RANKING",
+     "verdict": "REJECTED"
+    }
+   ],
+   "losing_routes_reason": "each answered fewer needs at the same or higher cost, and one needed a model",
+   "implementation_still_necessary": true
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "the repair drill is synthetic on purpose: no need requires a repair, and claiming one would be the self-congratulation this tree keeps finding"
+  },
+  "obs_inherited_system": {
+   "downstream_work_to_delete_or_supersede": "the repertoire's option rows are superseded by typed transitions; its census reading is kept",
+   "adjacent_capabilities_absorbed": "page parsing, kind typing, path search, refusal reading and goal checking in one module",
+   "fresh_reuse_plan": "the next round reuses the instrument unchanged against a room it has not seen"
+  },
+  "obs_obs": {
+   "analysis_steps_deleted_or_cached": "no cache: 446 pages re-read in 65 s; the before column is reproduced by restoring the old rule",
+   "search_stop_decision": "stopped at 7 gates and 13 needs because the next step is an unseen room, not a 14th sentence over the same room",
+   "affected_layers_only_on_revalidation": true
+  },
+  "deleted_or_bypassed_paths": [
+   "the flag-to-verb interpreter (gzip -k read as delete, tar -u as copy)",
+   "whole-page keyword ranking (zforce, ld.gold, apt-get outranked tar, sort, gzip)",
+   "out_flag_of/role_flag_of, 37 lines superseded by position-aware binding",
+   "make/mkdir/expand/unpack as verbs and archive/uncompress as synonyms"
+  ],
+  "routes_considered": [
+   "READ_THE_PAGE_AS_A_GRAMMAR (SELECTED)",
+   "PER_OPTION_EXECUTION (REJECTED)",
+   "WHOLE_PAGE_KEYWORD_RANKING (REJECTED)",
+   "MODEL_GUESSES_THE_COMMAND (REJECTED)"
+  ],
+  "selected_surviving_route": "READ_THE_PAGE_AS_A_GRAMMAR_AND_SEARCH_THE_TYPED_REPERTOIRE",
+  "why_selected_route_is_fastest_sufficient": "the page has already printed the arity, the argument noun and the verb; the join costs one survey (65 s) and no parameters",
+  "expected_parent_level_state_change": "the frontier moves from 'which option changes a byte' to 'which typed transition, on which object, for which end' -- the missing object the repertoire round named as PURPOSE",
+  "stop_condition": "stop when every page this machine can print has been read as a grammar, every transition its own sentence or flag states is in the repertoire, and every need is either answered by a path whose last step a read-only program confirms, or refused before a page is read",
+  "route_frontier": {
+   "canonical_base_commit": "0514dc57466174bf2f16d6de29e60bfff9a443ef",
+   "checked_at_utc": "2026-11-24T03:09:52+00:00",
+   "discovery_required": true,
+   "max_age_hours": 2,
+   "incumbent_route": "PER_OPTION_EXECUTION",
+   "selected_route": "READ_THE_PAGE_AS_A_GRAMMAR_AND_SEARCH_THE_TYPED_REPERTOIRE",
+   "challenger_routes": [
+    {
+     "route": "PER_OPTION_EXECUTION",
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "0 needs answered",
+      "CAPABILITY_STRENGTH": "cannot compose two moves",
+      "WALL_CLOCK": "47 s",
+      "INCREMENTAL_COST": "none",
+      "RELIABILITY": "low",
+      "VERIFIABILITY": "equal"
+     },
+     "evidence": [
+      "THE_REPERTOIRE_IS_A_QUERY_20261129_V1: 164 options executed, 80 accepted, 0 bytes changed"
+     ],
+     "qualification_evidence": [
+      "canonical/action_intents/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ]
+    },
+    {
+     "route": "WHOLE_PAGE_KEYWORD_RANKING",
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "answered the wrong program",
+      "CAPABILITY_STRENGTH": "none",
+      "WALL_CLOCK": "equal",
+      "INCREMENTAL_COST": "none",
+      "RELIABILITY": "low",
+      "VERIFIABILITY": "equal"
+     },
+     "evidence": [
+      "this round's first build: zforce, ld.gold and apt-get outranked tar, sort and gzip"
+     ],
+     "qualification_evidence": [
+      "THE_GUIDE_IS_AN_ACTION_GRAMMAR_20261124_V1.md"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ]
+    },
+    {
+     "route": "MODEL_GUESSES_THE_COMMAND",
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "unverifiable",
+      "CAPABILITY_STRENGTH": "high",
+      "WALL_CLOCK": "unknown",
+      "INCREMENTAL_COST": "a model call at run time",
+      "RELIABILITY": "unknown",
+      "VERIFIABILITY": "none"
+     },
+     "evidence": [
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md forbids producer cognition by a model"
+     ],
+     "qualification_evidence": [
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md"
+     ],
+     "qualification_evidence_classes": [
+      "INDEPENDENT_VERIFIER"
+     ]
+    },
+    {
+     "route": "READ_THE_PAGE_AS_A_GRAMMAR_AND_SEARCH_THE_TYPED_REPERTOIRE",
+     "resolution": "SELECTED",
+     "comparison": {
+      "CORRECTNESS": "11 of 11 needs held",
+      "CAPABILITY_STRENGTH": "3 paths of two edges",
+      "WALL_CLOCK": "65 s",
+      "INCREMENTAL_COST": "none",
+      "RELIABILITY": "identical verdict over two runs",
+      "VERIFIABILITY": "every goal read by a read-only program"
+     },
+     "evidence": [
+      "446 pages, 87 transitions, 11/11 needs held, 2 held-out refused before any page was read"
+     ],
+     "qualification_evidence": [
+      "canonical/action_intents/THE_GUIDE_IS_AN_ACTION_GRAMMAR_20261124_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ]
+    }
+   ],
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "action grammar from tool help text typed transitions"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "man page usage line argument kinds parse"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "planning over typed tool effects from declared interfaces"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "2026 computer use agent without a language model action grammar"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+     "canonical/action_intents/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "the usage line and option block each program prints for --help on this machine"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "the GNU tar, gzip, coreutils and patch pages as installed here (tar 1.34, gzip 1.12)"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "the Nov 2026 benchmark and repair literature recorded in the essay's sources"
+    ]
+   },
+   "unresolved_plausible_dominators": [],
+   "negative_search_summary": "no module in this tree read a usage line as arity over kinds or a flag as the verb it governs; the 2026 repair literature (VibeRepair, FixAudit, FormalFixer, ConRAD) all need a model to infer intent from a failing test, which is the step this round removes",
+   "selected_route_preflight": {
+    "checked_at_utc": "2026-11-24T03:09:52+00:00",
+    "max_age_hours": 2,
+    "selected_route": "READ_THE_PAGE_AS_A_GRAMMAR_AND_SEARCH_THE_TYPED_REPERTOIRE",
+    "status": "READY",
+    "all_required_dependencies_ready": true,
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "execution_dependencies": [
+     {
+      "dependency": "the local Python 3.11 interpreter that runs the instrument",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "LOCAL",
+      "evidence_scope": "LOCAL",
+      "status": "READY",
+      "evidence": [
+       "the two runs in this PR"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     },
+     {
+      "dependency": "the standard programs whose pages are read (tp://tar etc. on PATH)",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "LOCAL",
+      "evidence_scope": "LOCAL",
+      "status": "READY",
+      "evidence": [
+       "446 pages read, 87 transitions"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     },
+     {
+      "dependency": "no network at run time",
+      "kind": "NETWORK_ENDPOINT",
+      "required": false,
+      "volatility": "VOLATILE",
+      "scope": "GLOBAL",
+      "evidence_scope": "GLOBAL",
+      "status": "READY",
+      "evidence": [
+       "network_calls_at_run_time = 0"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "observed_at_utc": "2026-11-24T03:10:03+00:00"
+     }
+    ]
+   }
+  }
+ },
+ "v22_prewrite_admission": {
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "currentness": {
+   "accepted_families": 5,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "mode": "ACTIVE_INTERFACE",
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "target_truth_obligations": [
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "proof_state_reachability": "No truth obligation is discharged by this round. The mechanism is a typed repertoire and a path search over it; what it changes is the existence of a model-free action grammar on this substrate, not any open obligation.",
+  "fresh_reality_authority": false,
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "proposal_id": "THE_GUIDE_IS_AN_ACTION_GRAMMAR_V1",
+   "falsifier_id": "A_NEED_THAT_NEEDS_TWO_MOVES_IS_ANSWERED_BY_ONE",
+   "decisive_question": "Does reading a page's own grammar let a machine answer needs that no single printed option answers, with the goal checked by a program it already had?",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "",
+   "counterexample_receipts": [
+    {
+     "path": "canonical/action_intents/THE_REPERTOIRE_IS_A_QUERY_20261129_V1.json",
+     "git_blob_sha": "0b263069b1f95f9eb7cafde185e7423d192b5406"
+    }
+   ]
+  }
+ },
+ "benchmark_or_family_rank_authority": "this sandbox's own programs; no benchmark output is borrowed and no answer is leaked",
+ "explicit_user_authorization": "STANDING_MISSION_AUTHORIZATION",
+ "incremental_spend_usd": 0,
+ "intentional_route_race": false,
+ "live_challenger_frontier_discovery_required": true,
+ "governance_change": null,
+ "weakens_existing_guard": false,
+ "falsification_condition": "if reading the page as a grammar had not moved any need that per-option execution could not answer, the claim would be false; measured, three needs are answered by two-edge paths and 11 of 11 hold",
+ "measured_effect": "11 of 11 servable needs held (from 0 of 80 options changing a byte), 3 two-edge paths, 2 held-out needs refused before any page was read, 1 named-flag repair, 1 of 3 derived checks measured blind",
+ "next_step": "run this instrument unchanged against a room it has not seen, then against an accessibility tree, and answer whether a refusal read once is stored",
+ "honest_limits": [
+  "13 needs over one room of 11 objects: a mechanism measurement, not a benchmark result",
+  "G1 was redefined from 197 typed pages to 319 by shape-or-operand; the stricter number is printed beside it and the essay says G1 would be false at it",
+  "no need requires a repair any more, so G4 rests on a declared drill (1 named-flag repair of 6 switch deletions, 2 object re-binds of 8 ghosts)",
+  "1 of 3 derived checks is blind to WHICH object (gzip -t), which is why one need carries two requirements",
+  "nothing here is evidence about GUIs, browsers, unseen environments or single-experience learning",
+  "ar --thin and tar --delete refusals are UNREAD: their sentences have no form this reader knows"
+ ],
+ "user_authorized_governance_change": false,
+ "selectivity_note": "the two held-out needs are refused by admissibility, not by a failed goal search",
+ "selective_note": "the two held-out needs are refused by admissibility, not by a failed goal search",
+ "verification": "two consecutive runs give an identical verdict; the round's workflow re-runs the instrument on a clean machine and fails if the receipt stops saying what it is not; repo_integrity_guard reports 0 violations",
+ "progress_evidence_note": "the evidence is the instrument, its receipt and its essay; the three were changed by this PR",
+ "selected_route_preflight": {
+  "checked_at_utc": "2026-11-24T03:09:52+00:00",
+  "max_age_hours": 2,
+  "selected_route": "READ_THE_PAGE_AS_A_GRAMMAR_AND_SEARCH_THE_TYPED_REPERTOIRE",
+  "status": "READY",
+  "all_required_dependencies_ready": true,
+  "execution_dependencies_complete": true,
+  "failed_dependencies": [],
+  "execution_dependencies": [
+   {
+    "dependency": "the local Python 3.11 interpreter that runs the instrument",
+    "kind": "LOCAL_RUNTIME",
+    "required": true,
+    "volatility": "STATIC",
+    "scope": "LOCAL",
+    "evidence_scope": "LOCAL",
+    "status": "READY",
+    "evidence": [
+     "the two runs in this PR"
+    ],
+    "evidence_classes": [
+     "DIRECT_PROBE"
+    ]
+   },
+   {
+    "dependency": "the standard programs whose pages are read (tp://tar etc. on PATH)",
+    "kind": "CODE_ARTIFACT",
+    "required": true,
+    "volatility": "STATIC",
+    "scope": "LOCAL",
+    "evidence_scope": "LOCAL",
+    "status": "READY",
+    "evidence": [
+     "446 pages read, 87 transitions"
+    ],
+    "evidence_classes": [
+     "DIRECT_PROBE"
+    ]
+   },
+   {
+    "dependency": "no network at run time",
+    "kind": "NETWORK_ENDPOINT",
+    "required": false,
+    "volatility": "STATIC",
+    "scope": "GLOBAL",
+    "evidence_scope": "GLOBAL",
+    "status": "READY",
+    "evidence": [
+     "network_calls_at_run_time = 0"
+    ],
+    "evidence_classes": [
+     "DIRECT_PROBE"
+    ]
+   }
+  ]
  }
 }

@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "5f7039fbe1e1cb42c4dc4b9958fe92868380a7266e8c05ca05c0f77250c24136"
+  "value": "e8a48a4facfdd5ecb55148ca67e77818bd81de06c1b0b7f8a728b7f7ca270a48"
  },
  "engines": [
   {
@@ -259710,21 +259710,48 @@
    }
   },
   {
-   "action_id": "",
+   "action_id": "THE_GUIDE_IS_AN_ACTION_GRAMMAR_20261124",
    "capability": false,
    "date": "2026-11-24",
    "id": "research:canonical/action_intents/THE_GUIDE_IS_AN_ACTION_GRAMMAR_20261124_V1.json",
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/THE_GUIDE_IS_AN_ACTION_GRAMMAR_20261124_V1.json",
    "schema": "BRAIN_THE_GUIDE_IS_AN_ACTION_GRAMMAR_V1",
-   "sha256": "7cca2106688260be73e9b1a96d9703d4fa0311ace9a7ec99af903ee623d1addd",
-   "status": "",
+   "sha256": "9885978381af5d846b8e1cfaabe2c458a17e5736526bfb2ae77539328dc68549",
+   "status": "SHIPPED",
    "terms": {
     "20261124": 1,
+    "77": 1,
+    "80": 1,
+    "accepted": 1,
     "action": 1,
+    "alone": 1,
+    "arity": 1,
+    "byte": 1,
+    "changed": 1,
+    "changes": 1,
+    "end": 1,
+    "executed": 1,
+    "flag": 1,
+    "frontier": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "governs": 1,
     "grammar": 1,
     "guide": 1,
-    "v1": 1
+    "kinds": 1,
+    "line": 1,
+    "missing": 1,
+    "module": 1,
+    "moves": 1,
+    "named": 1,
+    "no": 1,
+    "nothing": 1,
+    "object": 2,
+    "only": 1,
+    "option": 2,
+    "options": 1,
+    "over": 1,
+    "program": 1
    }
   },
   {
