@@ -183,7 +183,7 @@
   "falsified": "nothing declared was falsified; C4 (the repair removes every writer without naming one) and C9 (the guide reports a destroyed object as untouched) were the two that could have killed it",
   "the_refusal": "the citation cannot be repaired from the page: 8 of 439 surviving flags discriminate, and only 3 of 87 edges have one available"
  },
- "canonical_base_commit": "90cba45afaf6e6f3b3d5c62cd6c569b5cd6d1230",
+ "canonical_base_commit": "982937ca46c38f698c70aa0806078c849f47c149",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
@@ -226,7 +226,7 @@
   "ASK_A_MODEL_TO_NAME_THE_KIND (REJECTED)"
  ],
  "route_frontier": {
-  "canonical_base_commit": "90cba45afaf6e6f3b3d5c62cd6c569b5cd6d1230",
+  "canonical_base_commit": "982937ca46c38f698c70aa0806078c849f47c149",
   "checked_at_utc": "2026-11-24T12:14:53+00:00",
   "discovery_required": true,
   "max_age_hours": 2,
@@ -436,7 +436,7 @@
  "generic_repair_from_single_probe": false,
  "recursive_obs": {
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
-  "canonical_base_commit": "90cba45afaf6e6f3b3d5c62cd6c569b5cd6d1230",
+  "canonical_base_commit": "982937ca46c38f698c70aa0806078c849f47c149",
   "real_outcome": "2,319 checks declared by the shipped rule, run against a room of 20 objects from 19 producer kinds: 16 change bytes, 281 of 370 citations accept every object (249 are --help), 8 of 8 which-object probes accept a decoy of the same kind, 8 accepted destroyers of which 7 are reported ACCEPTED_INERT by the shipped kind comparison. The repair removes 22 citations, adds an executed certification test, makes run() compare content, and changes no verdict of the round's own 13 needs (11 held / 2 refused).",
   "required_capability": "a type system the machine can derive from its own declared checks, on a room whose kinds no written table names",
   "obs_goal": {
@@ -531,7 +531,7 @@
   "expected_parent_level_state_change": "the frontier moves from 'which kind name did I write' to 'which of my declarations are questions and which are writes'",
   "stop_condition": "stop when every declared check on this machine has been tested for separation, repetition, observation and content invariance, and every class the survivors cannot separate is listed with its log2 price",
   "route_frontier": {
-   "canonical_base_commit": "90cba45afaf6e6f3b3d5c62cd6c569b5cd6d1230",
+   "canonical_base_commit": "982937ca46c38f698c70aa0806078c849f47c149",
    "checked_at_utc": "2026-11-24T12:14:53+00:00",
    "discovery_required": true,
    "max_age_hours": 2,
