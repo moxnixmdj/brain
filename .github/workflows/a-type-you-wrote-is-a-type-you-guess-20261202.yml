@@ -59,19 +59,19 @@ jobs:
           print("the witness rule names no program: ok")
           PY
 
-      - name: The producers the room is built from exist
+      - name: Which producers this machine has
         shell: bash
         run: |
           set -euo pipefail
-          missing=""
-          for program in tar gzip xz bzip2 zip ar openssl convert cp sqlite3; do
-            command -v "$program" >/dev/null 2>&1 || missing="$missing $program"
+          # NO PRODUCER IS REQUIRED. The first version of this workflow demanded `convert` and
+          # `zip` and failed on a runner that has neither, before reaching a verdict. The room
+          # is now built from whatever exists and the receipt says what was missing, so a
+          # smaller room is a smaller measurement rather than a broken run.
+          for program in tar gzip xz bzip2 zip ar openssl convert cp; do
+            printf "%-10s %s\n" "$program" "$(command -v "$program" || echo MISSING)"
           done
-          if [ -n "$missing" ]; then
-            echo "the unseen room cannot be built without:$missing"
-            exit 1
-          fi
           python -c "import sqlite3, zipfile; print('python modules present')"
+          command -v tar >/dev/null || { echo "tar is required: it is on every runner"; exit 1; }
 
       - name: Run the instrument
         run: python canonical/tools/a_type_you_wrote_is_a_type_you_guess_v1.py --receipt "$RUNNER_TEMP/receipt.json"
@@ -116,6 +116,10 @@ jobs:
                 "authored scanner:", table["inherited_scanner_as_written"],
                 "of", table["different_pairs"])
           print("residual classes:", got["indistinguishable"]["room_u"]["unresolved_count"])
+          present = {k: v for k, v in got["rooms"]["room_u"]["producers_present"].items()
+                     if v}
+          print("producers present:", sorted(present))
+          assert "tar" in present, "tar is the one producer every runner has"
           PY
 
       - name: The tests that hold the three defects stay green

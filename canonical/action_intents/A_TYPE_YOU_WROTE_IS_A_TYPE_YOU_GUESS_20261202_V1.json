@@ -107,7 +107,7 @@
   "what_is_real": "2319 declared checks -> 45 witnesses -> 4 distinctions that separate 155 of 189 different pairs on a room of 19 producer kinds, against 114 for the hand-written table; 5 residual classes priced in bits; the witness set identical on two rooms",
   "what_is_not": "a type theory; a claim about checks that take arguments; a claim about GUIs; a benchmark result; any terminal credit"
  },
- "canonical_base_commit": "cc8dd71702fc20502793a622addcd474e6524075",
+ "canonical_base_commit": "47ad1c1a3f7237955f1c2767b7a8e69e3555e590",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
@@ -148,8 +148,8 @@
   "ASK_A_MODEL_TO_NAME_THE_KIND (REJECTED)"
  ],
  "route_frontier": {
-  "canonical_base_commit": "cc8dd71702fc20502793a622addcd474e6524075",
-  "checked_at_utc": "2026-11-24T04:37:56+00:00",
+  "canonical_base_commit": "47ad1c1a3f7237955f1c2767b7a8e69e3555e590",
+  "checked_at_utc": "2026-11-24T04:47:56+00:00",
   "discovery_required": true,
   "max_age_hours": 2,
   "incumbent_route": "KEEP_THE_HAND_WRITTEN_KIND_TABLE",
@@ -297,7 +297,7 @@
   "unresolved_plausible_dominators": [],
   "negative_search_summary": "no module in this tree read a program's declared check as a predicate over an object's type; libmagic, the published answer to this problem, is a hand-written table of magic numbers read against bytes, and this round measures exactly what that design costs on objects it was not written for",
   "selected_route_preflight": {
-   "checked_at_utc": "2026-11-24T04:37:56+00:00",
+   "checked_at_utc": "2026-11-24T04:47:56+00:00",
    "max_age_hours": 2,
    "selected_route": "RUN_THE_DECLARED_CHECKS_AS_WITNESSES_AND_LET_THE_MACHINE_SAY_WHAT_IT_CAN_STILL_SEPARATE",
    "status": "READY",
@@ -349,7 +349,7 @@
      "evidence_classes": [
       "DIRECT_PROBE"
      ],
-     "observed_at_utc": "2026-11-24T04:37:56+00:00"
+     "observed_at_utc": "2026-11-24T04:47:56+00:00"
     }
    ]
   }
@@ -358,7 +358,7 @@
  "generic_repair_from_single_probe": false,
  "recursive_obs": {
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
-  "canonical_base_commit": "cc8dd71702fc20502793a622addcd474e6524075",
+  "canonical_base_commit": "47ad1c1a3f7237955f1c2767b7a8e69e3555e590",
   "real_outcome": "2,319 declared checks run against a room of 20 objects from 19 producer kinds: 1338 accept every object, 16 write to it, 19 of 64 contradict themselves on a second room; 45 witnesses remain, they separate 155 of 189 different pairs against the hand-written table's 114, and 41 of the 45 are aliases of 4 distinctions. The witness set is identical on two rooms, so nothing needs storing. 0 model calls, 0 parameters, 0 run-time network, 191.8 s.",
   "required_capability": "a type system the machine can derive from its own declared checks, on a room whose kinds no written table names",
   "obs_goal": {
@@ -453,8 +453,8 @@
   "expected_parent_level_state_change": "the frontier moves from 'which kind name did I write' to 'which of my declarations are questions and which are writes'",
   "stop_condition": "stop when every declared check on this machine has been tested for separation, repetition, observation and content invariance, and every class the survivors cannot separate is listed with its log2 price",
   "route_frontier": {
-   "canonical_base_commit": "cc8dd71702fc20502793a622addcd474e6524075",
-   "checked_at_utc": "2026-11-24T04:37:56+00:00",
+   "canonical_base_commit": "47ad1c1a3f7237955f1c2767b7a8e69e3555e590",
+   "checked_at_utc": "2026-11-24T04:47:56+00:00",
    "discovery_required": true,
    "max_age_hours": 2,
    "incumbent_route": "KEEP_THE_HAND_WRITTEN_KIND_TABLE",
@@ -602,7 +602,7 @@
    "unresolved_plausible_dominators": [],
    "negative_search_summary": "no module in this tree read a program's declared check as a predicate over an object's type; libmagic, the published answer to this problem, is a hand-written table of magic numbers read against bytes, and this round measures exactly what that design costs on objects it was not written for",
    "selected_route_preflight": {
-    "checked_at_utc": "2026-11-24T04:37:56+00:00",
+    "checked_at_utc": "2026-11-24T04:47:56+00:00",
     "max_age_hours": 2,
     "selected_route": "RUN_THE_DECLARED_CHECKS_AS_WITNESSES_AND_LET_THE_MACHINE_SAY_WHAT_IT_CAN_STILL_SEPARATE",
     "status": "READY",
@@ -654,7 +654,7 @@
       "evidence_classes": [
        "DIRECT_PROBE"
       ],
-      "observed_at_utc": "2026-11-24T04:37:56+00:00"
+      "observed_at_utc": "2026-11-24T04:47:56+00:00"
      }
     ]
    }
@@ -722,7 +722,7 @@
  "verification": "two consecutive runs give an identical verdict; the round's workflow re-runs the instrument on a clean machine and fails if the receipt stops saying what it is not; repo_integrity_guard reports 0 violations",
  "progress_evidence_note": "the evidence is the instrument, its receipt and its essay; the three were changed by this PR",
  "selected_route_preflight": {
-  "checked_at_utc": "2026-11-24T04:37:56+00:00",
+  "checked_at_utc": "2026-11-24T04:47:56+00:00",
   "max_age_hours": 2,
   "selected_route": "RUN_THE_DECLARED_CHECKS_AS_WITNESSES_AND_LET_THE_MACHINE_SAY_WHAT_IT_CAN_STILL_SEPARATE",
   "status": "READY",
@@ -774,7 +774,7 @@
     "evidence_classes": [
      "DIRECT_PROBE"
     ],
-    "observed_at_utc": "2026-11-24T04:37:56+00:00"
+    "observed_at_utc": "2026-11-24T04:47:56+00:00"
    }
   ]
  },

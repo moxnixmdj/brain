@@ -137,6 +137,17 @@ PRODUCER_KINDS = ("plain-text", "empty", "random-bytes", "gzip", "xz", "bzip2", 
                   "tar", "tar-gzip", "ar", "sqlite", "x509-cert", "pem-key", "json",
                   "xml", "png", "jpeg", "elf-exec", "elf-object")
 
+# NO PRODUCER IS ASSUMED. The first version of this instrument required `convert` and `zip`,
+# which a GitHub runner may not have, so the room could not be built on a clean machine at all
+# and the second run failed before reaching a single verdict. Every object is now built if its
+# producer exists, and the receipt records which producers were present, so a smaller room is
+# a smaller measurement rather than a quiet failure.
+PRODUCERS = ("tar", "gzip", "xz", "bzip2", "zip", "ar", "openssl", "convert", "cp")
+
+
+def producers_present() -> dict[str, str | None]:
+    return {name: shutil.which(name) for name in PRODUCERS}
+
 
 def _ok(argv: Sequence[str], cwd: pathlib.Path, timeout: float = 120.0) -> bool:
     try:
@@ -193,9 +204,12 @@ def room_unseen(root: pathlib.Path, *, seed: int) -> dict[str, str]:
         labels["line.txt.xz"] = "xz"
     if _ok(["bzip2", "-kf", "line.txt"], root):
         labels["line.txt.bz2"] = "bzip2"
-    with zipfile.ZipFile(root / "bundle.zip", "w") as archive:
-        archive.writestr("m.txt", "hi\n")
-    labels["bundle.zip"] = "zip"
+    try:
+        with zipfile.ZipFile(root / "bundle.zip", "w") as archive:
+            archive.writestr("m.txt", "hi\n")
+        labels["bundle.zip"] = "zip"
+    except Exception:                         # noqa: BLE001 - a producer that cannot run is a datum
+        pass
     if _ok(["tar", "-cf", "one.tar", "line.txt"], root):
         labels["one.tar"] = "tar"
     if _ok(["tar", "-czf", "one.tgz", "line.txt"], root):
@@ -207,11 +221,14 @@ def room_unseen(root: pathlib.Path, *, seed: int) -> dict[str, str]:
                         "-out", "pub.pem", "-days", "1", "-nodes", "-subj", "/CN=x"], root):
         labels["cert.pem"] = "pem-key"
         labels["pub.pem"] = "x509-cert"
-    connection = sqlite3.connect(root / "store.db")
-    connection.execute("create table t(x)")
-    connection.commit()
-    connection.close()
-    labels["store.db"] = "sqlite"
+    try:
+        connection = sqlite3.connect(root / "store.db")
+        connection.execute("create table t(x)")
+        connection.commit()
+        connection.close()
+        labels["store.db"] = "sqlite"
+    except Exception:                         # noqa: BLE001
+        pass
     (root / "data.json").write_text('{"a": [1, 2]}\n', encoding="utf-8")
     labels["data.json"] = "json"
     (root / "doc.xml").write_text("<a><b/></a>\n", encoding="utf-8")
@@ -794,6 +811,9 @@ def _measure(stack: "contextlib.ExitStack", *, budget: float) -> dict[str, Any]:
             "room_b": {"objects": len(names_b), "producer_kinds": sorted(set(labels_b.values()))},
             "room_u": {"objects": len(names_u),
                        "producer_kinds": sorted(set(labels_u.values())),
+                       "producers_present": producers_present(),
+                       "producers_missing": sorted(name for name, path in
+                                                   producers_present().items() if not path),
                        "built_by": "tar, gzip, xz, bzip2, zip, ar, openssl, sqlite3, convert, cp"},
         },
         "written_table": {

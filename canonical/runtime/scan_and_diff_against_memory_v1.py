@@ -80,6 +80,15 @@ SCHEMA = "PROJECT_BRAIN_SCAN_AND_DIFF_AGAINST_MEMORY_V1"
 
 KNOWN = "KNOWN__MEMORY_HAS_THIS_SIGNATURE"
 UNKNOWN = "UNKNOWN__NOTHING_IN_MEMORY_ACCEPTS_THESE_BYTES"
+#: A DIFFERENT VERDICT, AND THE DISTINCTION IS THE WHOLE POINT. Round 10 collapsed these
+#: into UNKNOWN and was wrong: measured on this repository, all 13 files it called UNKNOWN
+#: were accepted by `utf8_text` -- they were only "unknown" because memory had never seen
+#: that exact SUBSET of validators. That is a statement about memory's bookkeeping, not about
+#: the file, and it pointed learning at markdown. UNDERSTOOD means some declared validator
+#: reads these bytes: the machine can work with the file today and simply has not recorded
+#: the subset before. UNREAD means nothing reads it, and that is the only real gap.
+UNDERSTOOD = "UNDERSTOOD__A_DECLARED_VALIDATOR_READS_THESE_BYTES_SUBSET_NOT_RECORDED"
+UNREAD = "UNREAD__NOTHING_ON_THIS_MACHINE_ACCEPTS_THESE_BYTES"
 PROVEN_UNUSABLE = "PROVEN_UNUSABLE__NAMED_AS_ONE_KIND_AND_REFUSED_BY_IT"
 
 
@@ -106,6 +115,12 @@ def _py_test(source: str, path: str) -> int:
 #: Each entry is a KIND, the program that declares it can judge that kind, and the test.
 #: The test must REJECT bytes that are not the kind -- a validator that accepts everything
 #: (`cat`) tells you nothing and is deliberately absent.
+#: ROUND 11: THIS TABLE IS NOW DERIVED, NOT TYPED, where a judge can be earned.
+#: `earn_a_judge_v1` admits a judge only on evidence -- it separates a real file of the kind
+#: from a decoy and repeats the verdict -- and its earned set was measured EQUAL to the seven
+#: below with 0 disagreements across 210 judgements on 30 real files. What remains typed here
+#: is the fallback for a machine where a candidate is unavailable, so the module still works
+#: when a program is missing. The authority is the probe pair, not this dict.
 VALIDATORS: dict[str, Callable[[str], int]] = {
     "json": lambda p: _py_test("import json,sys;json.load(open(sys.argv[1]))", p),
     # `py_compile` WRITES `__pycache__` NEXT TO THE FILE IT JUDGES -- measured: a scan of
@@ -147,6 +162,24 @@ def _possible(kind: str, path: str) -> bool:
         return False
 
 
+def earned_validators() -> dict[str, Callable[[str], int]]:
+    """The judge set EARNED on this machine, falling back to the typed table.
+
+    A judge that could not be earned here (its program is absent) is not silently dropped --
+    the typed entry stays so a scan still reports what it can read, and the receipt records
+    which were earned and which were refused.
+    """
+    try:
+        from canonical.runtime import earn_a_judge_v1 as earner
+        receipt = earner.earn_set()
+        earned = earner.judges_from(receipt)
+    except Exception:  # noqa: BLE001 - a scan must never fail because earning failed
+        return dict(VALIDATORS)
+    merged = dict(VALIDATORS)
+    merged.update(earned)
+    return merged
+
+
 def signature(path: str, validators: Mapping | None = None) -> tuple[str, ...]:
     """WHICH DECLARED VALIDATORS ACCEPT THESE BYTES. The identity of a file, here."""
     chosen = validators if validators is not None else VALIDATORS
@@ -159,16 +192,33 @@ def signature(path: str, validators: Mapping | None = None) -> tuple[str, ...]:
 # --------------------------------------------------------------------------- #
 @dataclass
 class Item:
+    """One file, its signature, and the path that signature was computed from.
+
+    `path` is RELATIVE TO THE SCAN ROOT because that is what belongs in a receipt -- an
+    absolute path binds the record to the machine that made it. But that made the item
+    silently un-re-judgeable: `signature(item.path, judges)` resolves the relative path
+    against the CURRENT working directory, finds nothing, and returns `()`. Measured while
+    auditing this round -- 0% of /usr/share/doc looked readable through that route while the
+    same files read fine by absolute path. Every file would have been reported unreadable by
+    any caller that re-judged what it had been given. So the absolute path is kept ALONGSIDE
+    the relative one, and `rejudge()` uses it.
+    """
+
     path: str
     suffix: str
     size: int
     sig: tuple[str, ...]
     verdict: str = ""
     note: str = ""
+    abspath: str = ""
 
     def as_dict(self) -> dict[str, Any]:
         return {"path": self.path, "suffix": self.suffix, "size": self.size,
                 "signature": list(self.sig), "verdict": self.verdict, "note": self.note}
+
+    def rejudge(self, validators: Mapping | None = None) -> tuple[str, ...]:
+        """Recompute this item's signature, using the path it was actually taken from."""
+        return signature(self.abspath or self.path, validators)
 
 
 def scan(root: str | os.PathLike[str], *, max_files: int = 200,
@@ -189,7 +239,8 @@ def scan(root: str | os.PathLike[str], *, max_files: int = 200,
                 continue
             items.append(Item(path=os.path.relpath(path, root),
                               suffix=os.path.splitext(name)[1].lower(),
-                              size=size, sig=signature(path)))
+                              size=size, sig=signature(path),
+                              abspath=os.path.abspath(path)))
     return items
 
 
@@ -224,15 +275,19 @@ class Memory:
             row["suffixes"][item.suffix] = row["suffixes"].get(item.suffix, 0) + 1
 
     def judge(self, item: Item) -> tuple[str, str]:
+        """KNOWN / UNDERSTOOD / UNREAD -- and the middle one is not a gap.
+
+        An unrecorded SUBSET is memory's bookkeeping. An unread KIND is the file's problem.
+        Reporting the first as unknown made round 10 claim 13 unknown markdown files that a
+        validator had already read, i.e. it aimed the next round's learning at nothing.
+        """
         if not item.sig:
-            return UNKNOWN, "no declared validator accepts these bytes"
+            return UNREAD, "no declared validator accepts these bytes"
         if item.sig in self.seen:
             row = self.seen[item.sig]
             return KNOWN, f"{row['count']} earlier file(s) with this signature"
-        # Nothing accepts these bytes. Not a failure -- the honest gap.
-        if not item.sig:
-            return UNKNOWN, "no declared validator accepts these bytes"
-        return UNKNOWN, f"accepted as {', '.join(item.sig)} but this signature is new"
+        return UNDERSTOOD, (f"read as {', '.join(item.sig)}; this exact subset is new, "
+                            f"the kind is not")
 
     def as_dict(self) -> dict[str, Any]:
         return {"schema": SCHEMA,
@@ -283,15 +338,18 @@ def census(root: str | os.PathLike[str], *, memory: Memory | None = None,
     memory = memory or Memory()
     judged = judge_all(memory, items)
     known = [i for i in judged if i.verdict == KNOWN]
-    unknown = [i for i in judged if i.verdict == UNKNOWN]
-    nothing = [i for i in judged if not i.sig]
+    understood = [i for i in judged if i.verdict == UNDERSTOOD]
+    unread = [i for i in judged if i.verdict == UNREAD]
     return {"schema": SCHEMA, "root": str(root), "files": len(judged),
-            "known": len(known), "unknown": len(unknown),
-            "unknown_with_no_validator": len(nothing),
+            "known": len(known), "understood": len(understood), "unread": len(unread),
+            # kept under the old name for callers, but it now means UNREAD only
+            "unknown": len(unread),
+            "unknown_with_no_validator": len(unread),
             "items": [i.as_dict() for i in judged],
             # WHAT TO GO AND LEARN, ranked: nothing accepts these bytes at all first
-            "learn_next": [i.path for i in sorted(nothing, key=lambda i: -i.size)[:10]] +
-                          [i.path for i in unknown if i.sig][:10],
+            # ONLY UNREAD FILES ARE QUEUED FOR LEARNING. An UNDERSTOOD file teaches the
+            # memory nothing worth a fetch -- the machine can already read it.
+            "learn_next": [i.path for i in sorted(unread, key=lambda i: -i.size)[:20]],
             "signature_histogram": _histogram(judged)}
 
 
