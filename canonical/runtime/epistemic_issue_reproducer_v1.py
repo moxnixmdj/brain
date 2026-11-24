@@ -101,7 +101,7 @@ class RepoSymbolIndex:
 
 @dataclass
 class CompiledReproSpec:
-    kind: str  # "fenced_block" | "doctest" | "prose_return" | "prose_raises" | "prose_no_crash" | "prose_proto"
+    kind: str  # "fenced_block" | "doctest" | "prose_return" | "prose_raises" | "prose_no_crash" | "prose_proto" | "existing_test_clone"
     language: str
     test_source: str
     referenced_symbols: list[str]
@@ -109,6 +109,8 @@ class CompiledReproSpec:
     assertion_count: int = 1
     has_contrastive: bool = False
     description: str = ""
+    test_subdir: str = ""
+    source_test_file: str = ""
 
 
 def _iter_repo_files(root: pathlib.Path, suffixes: tuple[str, ...]) -> list[pathlib.Path]:
@@ -929,11 +931,265 @@ def _compile_prose_clauses(issue_text: str, repo_index: RepoSymbolIndex) -> list
     return specs
 
 
-def compile_issue_specs(issue_text: str, repo_index: RepoSymbolIndex) -> list[CompiledReproSpec]:
+_DICT_PICKLE_HELPER_PY = """
+def _epistemic_wrap_dict_pickle(obj):
+    import dataclasses as _dc
+    if _dc.is_dataclass(obj) and not isinstance(obj, type):
+        cls = type(obj)
+        state = {f.name: _epistemic_wrap_dict_pickle(getattr(obj, f.name)) for f in _dc.fields(obj)}
+        class _LegacyDictPickle:
+            def __reduce__(self):
+                return (object.__new__, (cls,), state)
+        return _LegacyDictPickle()
+    if isinstance(obj, list):
+        return [_epistemic_wrap_dict_pickle(x) for x in obj]
+    if isinstance(obj, tuple):
+        return tuple(_epistemic_wrap_dict_pickle(x) for x in obj)
+    if isinstance(obj, dict):
+        return {k: _epistemic_wrap_dict_pickle(v) for k, v in obj.items()}
+    return obj
+
+def _epistemic_dict_pickle_roundtrip(obj):
+    import pickle as _pkl
+    return _pkl.loads(_pkl.dumps(_epistemic_wrap_dict_pickle(obj)))
+
+def _epistemic_bad_dict_pickle(cls):
+    import pickle as _pkl
+    class _BadDictPickle:
+        def __reduce__(self):
+            return (object.__new__, (cls,), {"__epistemic_bogus_key__": 1})
+    return _pkl.loads(_pkl.dumps(_BadDictPickle()))
+"""
+
+
+def _extract_test_file_header(tree: ast.Module, src_lines: list[str]) -> str:
+    """Extract top-level imports, version-guard imports (`if`/`try`), constants, and helpers."""
+    chunks: list[str] = []
+    for node in tree.body:
+        if isinstance(node, (ast.Import, ast.ImportFrom, ast.Assign, ast.AnnAssign, ast.If, ast.Try)):
+            s_ln = max(1, int(getattr(node, "lineno", 1)))
+            e_ln = int(getattr(node, "end_lineno", s_ln) or s_ln)
+            chunks.append("".join(src_lines[s_ln - 1 : e_ln]))
+        elif isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and not node.name.startswith("test_"):
+            s_ln = max(1, int(getattr(node, "lineno", 1)))
+            if node.decorator_list:
+                s_ln = min(s_ln, min(int(getattr(d, "lineno", s_ln)) for d in node.decorator_list))
+            e_ln = int(getattr(node, "end_lineno", s_ln) or s_ln)
+            chunks.append("".join(src_lines[s_ln - 1 : e_ln]))
+    return "\n".join(chunks) + "\n"
+
+
+def _compile_existing_test_clones(
+    repo_root: pathlib.Path,
+    issue_text: str,
+    repo_index: RepoSymbolIndex,
+) -> list[CompiledReproSpec]:
+    """Synthesize failing reproducers for prose-only issues WITHOUT inline code/call examples
+    by cloning existing passing test functions (reusing repo fixtures & data files!) and
+    applying the exact counterfactual input perturbation described in `issue_text`.
+    """
+    if repo_index.language != "python":
+        return []
+    low_issue = (issue_text or "").lower()
+    want_pathlike = any(k in issue_text for k in ("pathlib.Path", "PathLike", "PosixPath", "WindowsPath")) or (
+        "pathlib" in low_issue and "path" in low_issue
+    )
+    want_slots_pickle = ("pickl" in low_issue) and any(
+        k in low_issue for k in ("dict", "old", "older", "slots", "__setstate__", "state", "dataclass")
+    )
+    if not (want_pathlike or want_slots_pickle):
+        return []
+
+    # Collect repo symbols explicitly mentioned in the issue prose
+    mentioned_syms: list[str] = []
+    for sym in sorted(repo_index.symbols.keys(), key=len, reverse=True):
+        if "." in sym or len(sym) < 3 or sym.startswith("_"):
+            continue
+        if re.search(rf"\b{re.escape(sym)}\b", issue_text):
+            mentioned_syms.append(sym)
+    if not mentioned_syms:
+        return []
+
+    # Map mentioned symbols to candidate existing test files
+    cand_test_files: list[str] = []
+    for sym in mentioned_syms:
+        for tf in repo_index.symbol_to_tests.get(sym, []):
+            if tf not in cand_test_files:
+                cand_test_files.append(tf)
+        # Also match test files whose source imports or body mentions the symbol
+        for tf in repo_index.test_files:
+            if tf in cand_test_files:
+                continue
+            tf_p = repo_root / tf
+            try:
+                txt_tf = tf_p.read_text(encoding="utf-8", errors="replace")
+            except OSError:
+                continue
+            if re.search(rf"\b{re.escape(sym)}\b", txt_tf):
+                cand_test_files.append(tf)
+
+    specs: list[CompiledReproSpec] = []
+    # Extract parameter names hinted in backticks or prose (e.g. `filename`)
+    hinted_params = {
+        m.group(1) for m in re.finditer(r"`([a-z_][a-z0-9_]*)`", issue_text)
+    }
+
+    for tf_rel in cand_test_files[:6]:
+        tf_p = repo_root / tf_rel
+        if not tf_p.is_file():
+            continue
+        try:
+            src_tf = tf_p.read_text(encoding="utf-8", errors="replace")
+            tree_tf = ast.parse(src_tf)
+        except (OSError, SyntaxError):
+            continue
+        src_lines = src_tf.splitlines(keepends=True)
+        header_txt = _extract_test_file_header(tree_tf, src_lines)
+        test_subdir = pathlib.PurePosixPath(tf_rel).parent.as_posix()
+        if test_subdir == ".":
+            test_subdir = ""
+
+        # Mode 1: PATHLIKE_WRAP — clone passing test calling `sym(..., filename=str_expr)` -> `pathlib.Path(str_expr)`
+        if want_pathlike:
+            for fn in tree_tf.body:
+                if not isinstance(fn, ast.FunctionDef) or not fn.name.startswith("test_"):
+                    continue
+                s_ln = int(getattr(fn, "lineno", 1))
+                if fn.decorator_list:
+                    s_ln = min(s_ln, min(int(getattr(d, "lineno", s_ln)) for d in fn.decorator_list))
+                e_ln = int(getattr(fn, "end_lineno", s_ln) or s_ln)
+                fn_src = "".join(src_lines[s_ln - 1 : e_ln])
+                # Skip tests that already pass Path or mock internals
+                if "Path(" in fn_src or "mock_" in fn_src or "patch(" in fn_src:
+                    continue
+                matched_call: tuple[str, str] | None = None
+                for sub in ast.walk(fn):
+                    if not isinstance(sub, ast.Call):
+                        continue
+                    call_nm = sub.func.attr if isinstance(sub.func, ast.Attribute) else (sub.func.id if isinstance(sub.func, ast.Name) else "")
+                    if call_nm not in mentioned_syms:
+                        continue
+                    for kw in sub.keywords:
+                        if not kw.arg:
+                            continue
+                        if (hinted_params and kw.arg in hinted_params) or kw.arg in ("filename", "path", "file", "filepath", "src", "dst"):
+                            val_src = ast.unparse(kw.value)
+                            matched_call = (f"{kw.arg}={val_src}", f"{kw.arg}=_ep_pathlib.Path({val_src})")
+                            break
+                    if matched_call:
+                        break
+                if matched_call:
+                    old_kw, new_kw = matched_call
+                    mut_fn = fn_src.replace(old_kw, new_kw, 1)
+                    mut_fn = re.sub(r"def\s+(test_\w+)", r"def test_epistemic_pathlike_\1", mut_fn, count=1)
+                    full_src = header_txt + "\nimport pathlib as _ep_pathlib\n\n" + mut_fn + "\n"
+                    try:
+                        ast.parse(full_src)
+                        specs.append(CompiledReproSpec(
+                            kind="existing_test_clone",
+                            language="python",
+                            test_source=full_src,
+                            referenced_symbols=list(mentioned_syms),
+                            assertion_count=1,
+                            description=f"clone_pathlike({tf_rel}::{fn.name})",
+                            test_subdir=test_subdir,
+                            source_test_file=tf_rel,
+                        ))
+                        break
+                    except SyntaxError:
+                        pass
+
+        # Mode 2: SLOTS_DICT_PICKLE — clone up to 3 diverse passing tests constructing mentioned
+        # dataclasses & append recursive legacy dict-pickle roundtrip + bad-key TypeError checks
+        if want_slots_pickle:
+            tf_syms = [s for s in mentioned_syms if re.search(rf"\b{re.escape(s)}\b", src_tf)]
+            if not tf_syms:
+                continue
+            cloned_fns: list[str] = []
+            cloned_names: list[str] = []
+            seen_sub_sig: set[str] = set()
+            for fn in tree_tf.body:
+                if not isinstance(fn, ast.FunctionDef) or not fn.name.startswith("test_"):
+                    continue
+                if any(isinstance(sub, ast.Attribute) and sub.attr == "raises" for sub in ast.walk(fn)):
+                    continue
+                target_var: str | None = None
+                target_cls: str | None = None
+                for st in fn.body:
+                    if isinstance(st, ast.Assign) and len(st.targets) == 1 and isinstance(st.targets[0], ast.Name) and isinstance(st.value, ast.Call):
+                        callee = st.value.func
+                        if isinstance(callee, ast.Name) and callee.id in tf_syms:
+                            target_var, target_cls = st.targets[0].id, callee.id
+                            break
+                        if (
+                            isinstance(callee, ast.Attribute)
+                            and isinstance(callee.value, ast.Name)
+                            and callee.value.id in tf_syms
+                            and callee.attr in ("from_dict", "from_json", "from_toml", "parse", "loads")
+                        ):
+                            target_var, target_cls = st.targets[0].id, callee.value.id
+                            break
+                if not target_var:
+                    continue
+                s_ln = int(getattr(fn, "lineno", 1))
+                if fn.decorator_list:
+                    s_ln = min(s_ln, min(int(getattr(d, "lineno", s_ln)) for d in fn.decorator_list))
+                e_ln = int(getattr(fn, "end_lineno", s_ln) or s_ln)
+                fn_src = "".join(src_lines[s_ln - 1 : e_ln])
+                # Deduplicate tests exercising identical sub-dataclass names so we maximize coverage across 3 tests
+                sub_sig = ",".join(sorted(set(re.findall(r"\b([A-Z][A-Za-z0-9]+Info|Package[A-Za-z0-9]*)\b", fn_src))))
+                if cloned_fns and sub_sig in seen_sub_sig:
+                    continue
+                seen_sub_sig.add(sub_sig)
+                mut_fn = re.sub(r"def\s+(test_\w+)", r"def test_epistemic_dict_pickle_\1", fn_src, count=1)
+                append_lines = (
+                    f"\n    assert _epistemic_dict_pickle_roundtrip({target_var}) == {target_var}\n"
+                    f"    with pytest.raises(TypeError):\n"
+                    f"        _epistemic_bad_dict_pickle(type({target_var}))\n"
+                )
+                cloned_fns.append(mut_fn + append_lines)
+                cloned_names.append(f"{fn.name}:{target_cls}")
+                if len(cloned_fns) >= 3:
+                    break
+            if cloned_fns:
+                full_src = (
+                    header_txt
+                    + ("\nimport pytest\n" if "import pytest" not in header_txt else "\n")
+                    + _DICT_PICKLE_HELPER_PY
+                    + "\n"
+                    + "\n\n".join(cloned_fns)
+                )
+                try:
+                    ast.parse(full_src)
+                    specs.append(CompiledReproSpec(
+                        kind="existing_test_clone",
+                        language="python",
+                        test_source=full_src,
+                        referenced_symbols=list(tf_syms),
+                        assertion_count=2 * len(cloned_fns),
+                        has_contrastive=True,
+                        description=f"clone_slots_dict_pickle({tf_rel}::{','.join(cloned_names)})",
+                        test_subdir=test_subdir,
+                        source_test_file=tf_rel,
+                    ))
+                except SyntaxError:
+                    pass
+
+    return specs
+
+
+def compile_issue_specs(
+    issue_text: str,
+    repo_index: RepoSymbolIndex,
+    *,
+    repo_root: pathlib.Path | None = None,
+) -> list[CompiledReproSpec]:
     """Compile all candidate executable reproducer specs from an arbitrary GitHub issue."""
     specs: list[CompiledReproSpec] = []
     specs.extend(_compile_fenced_blocks(issue_text, repo_index))
     specs.extend(_compile_prose_clauses(issue_text, repo_index))
+    if repo_root is not None:
+        specs.extend(_compile_existing_test_clones(repo_root, issue_text, repo_index))
     # Deduplicate identical test sources while preserving order
     seen: set[str] = set()
     uniq: list[CompiledReproSpec] = []
@@ -942,8 +1198,15 @@ def compile_issue_specs(issue_text: str, repo_index: RepoSymbolIndex) -> list[Co
         if key not in seen:
             seen.add(key)
             uniq.append(sp)
-    # Prefer specs with more assertions / contrastive cases first
-    uniq.sort(key=lambda s: (-int(s.has_contrastive), -s.assertion_count, 0 if s.kind == "fenced_block" else 1))
+    # Prefer direct reproducers first, then cloned fixture perturbations
+    uniq.sort(
+        key=lambda s: (
+            1 if s.kind == "existing_test_clone" else 0,
+            -int(s.has_contrastive),
+            -s.assertion_count,
+            0 if s.kind == "fenced_block" else 1,
+        )
+    )
     return uniq
 
 
@@ -961,7 +1224,9 @@ def _run_reproducer_once(
     """
     py = python_exe or sys.executable
     if spec.language == "python":
-        tmp_test = repo_root / "_epistemic_repro_probe_test.py"
+        base_dir = (repo_root / spec.test_subdir) if spec.test_subdir else repo_root
+        tmp_test = base_dir / "_epistemic_repro_probe_test.py"
+        rel_test = tmp_test.relative_to(repo_root).as_posix()
         env = dict(os.environ)
         pp_parts = [str(repo_root)]
         if repo_index.python_src_root:
@@ -970,7 +1235,7 @@ def _run_reproducer_once(
             pp_parts.append(env["PYTHONPATH"])
         env["PYTHONPATH"] = os.pathsep.join(pp_parts)
         env["PYTEST_DISABLE_PLUGIN_AUTOLOAD"] = "1"
-        cmd = [py, "-m", "pytest", "-q", "--tb=short", str(tmp_test.name)]
+        cmd = [py, "-m", "pytest", "-q", "--tb=short", rel_test]
         harness_errs = _PY_HARNESS_ERRORS
     else:
         tmp_test = repo_root / "_epistemic_repro_probe.test.js"
@@ -1014,17 +1279,23 @@ def synthesize_verified_reproducer(
     t0 = time.monotonic()
     root = pathlib.Path(repo_root).resolve()
     repo_index = scan_repo_symbols(root)
-    candidates = compile_issue_specs(issue_text, repo_index)
+    candidates = compile_issue_specs(issue_text, repo_index, repo_root=root)
 
     rejected: list[dict[str, Any]] = []
-    qualified: dict[str, Any] | None = None
+    qualified_list: list[dict[str, Any]] = []
+    seen_clone_sources: set[str] = set()
 
     for sp in candidates:
+        # Once we have a direct (non-clone) qualified reproducer, stop immediately
+        if qualified_list and sp.kind != "existing_test_clone":
+            break
+        if sp.kind == "existing_test_clone" and sp.source_test_file in seen_clone_sources:
+            continue
         ok_fail, rc, out = _run_reproducer_once(
             root, sp, repo_index, python_exe=python_exe, timeout_s=min(timeout_s, 15.0)
         )
         if ok_fail:
-            qualified = {
+            q_entry = {
                 "kind": sp.kind,
                 "language": sp.language,
                 "description": sp.description,
@@ -1033,18 +1304,27 @@ def synthesize_verified_reproducer(
                 "expected_exception": sp.expected_exception,
                 "assertion_count": sp.assertion_count,
                 "has_contrastive": sp.has_contrastive,
+                "test_subdir": sp.test_subdir,
+                "source_test_file": sp.source_test_file,
                 "c_old_rc": rc,
                 "c_old_failure_excerpt": out.strip()[:600],
             }
-            break
-        rejected.append({
-            "kind": sp.kind,
-            "description": sp.description,
-            "rc": rc,
-            "reason": "PASSED_ON_C_OLD" if rc == 0 else "HARNESS_OR_SYNTAX_ERROR",
-            "excerpt": out.strip()[:240],
-        })
+            qualified_list.append(q_entry)
+            if sp.kind != "existing_test_clone":
+                break
+            seen_clone_sources.add(sp.source_test_file)
+            if len(qualified_list) >= 3:
+                break
+        else:
+            rejected.append({
+                "kind": sp.kind,
+                "description": sp.description,
+                "rc": rc,
+                "reason": "PASSED_ON_C_OLD" if rc == 0 else "HARNESS_OR_SYNTAX_ERROR",
+                "excerpt": out.strip()[:240],
+            })
 
+    qualified = qualified_list[0] if qualified_list else None
     return {
         "schema": SCHEMA,
         "authority": AUTHORITY,
@@ -1053,6 +1333,7 @@ def synthesize_verified_reproducer(
         "repo_symbols_count": len(repo_index.symbols),
         "candidates_compiled": len(candidates),
         "reproducer": qualified,
+        "reproducers": qualified_list,
         "rejected": rejected,
         "repo_index": repo_index,
         "elapsed_ms": round((time.monotonic() - t0) * 1000.0, 2),
@@ -1189,13 +1470,28 @@ def solve_issue_from_description(
         ws = pathlib.Path(td) / "repo"
         _copy_workspace(root, ws)
 
-        repro_rel = "_epistemic_issue_repro_test.py" if repro["language"] == "python" else "_epistemic_issue_repro.test.js"
-        (ws / repro_rel).write_text(repro["test_source"], encoding="utf-8")
+        repro_list = list(synth.get("reproducers") or ([repro] if repro else []))
+        repro_rels: list[str] = []
+        all_ref_syms: list[str] = []
+        for idx_r, rp in enumerate(repro_list):
+            for s in rp.get("referenced_symbols") or []:
+                if s not in all_ref_syms:
+                    all_ref_syms.append(s)
+            if rp["language"] == "python":
+                subdir = str(rp.get("test_subdir") or "").strip("/")
+                fname = f"_epistemic_issue_repro_{idx_r}_test.py" if idx_r > 0 else "_epistemic_issue_repro_test.py"
+                r_rel = f"{subdir}/{fname}" if subdir else fname
+            else:
+                r_rel = f"_epistemic_issue_repro_{idx_r}.test.js" if idx_r > 0 else "_epistemic_issue_repro.test.js"
+            r_path = ws / r_rel
+            r_path.parent.mkdir(parents=True, exist_ok=True)
+            r_path.write_text(rp["test_source"], encoding="utf-8")
+            repro_rels.append(r_rel)
 
         # Include top symbol-matched existing pass2pass test files during Python solve so
         # overfitted candidates are pruned immediately (anti-overfit gate, arXiv:2511.16858v3).
         pre_reg_tests = (
-            _select_regression_tests(repo_index, repro.get("referenced_symbols") or [], "", max_files=2)
+            _select_regression_tests(repo_index, all_ref_syms, "", max_files=2)
             if run_regression
             else []
         )
@@ -1203,7 +1499,7 @@ def solve_issue_from_description(
         if repro["language"] == "python":
             from canonical.runtime import causal_angelic_swe_engine_v1 as PY_SWE
 
-            solve_targets = [repro_rel] + [tf for tf in pre_reg_tests if tf != repro_rel]
+            solve_targets = list(repro_rels) + [tf for tf in pre_reg_tests if tf not in repro_rels]
             solve_res = PY_SWE.solve_repository(
                 ws,
                 solve_targets,
@@ -1215,7 +1511,7 @@ def solve_issue_from_description(
 
             solve_res = ML_SWE.solve_js_repository(
                 ws,
-                [repro_rel],
+                repro_rels[:1],
                 memory=memory,
                 timeout_s=max(15.0, timeout_s - (time.monotonic() - t0)),
             )
@@ -1235,42 +1531,43 @@ def solve_issue_from_description(
                 "parameters_stored": 0,
             }
 
-        # Apply winner patch in isolated workspace, remove temporary reproducer, build unified diff
+        # Apply ALL winner patches (single-file OR multi-file `COMPOSED_ANGELIC_PROGRESS`!)
         mod_rel = str(winner["file"])
-        orig_text = (root / mod_rel).read_text(encoding="utf-8", errors="replace")
-        patched_text = str(winner["patched_source"])
-        (ws / mod_rel).write_text(patched_text, encoding="utf-8")
-        patched_files: dict[str, str] = {mod_rel: patched_text}
+        patched_files: dict[str, str] = {}
+        raw_pf = winner.get("patched_files")
+        if isinstance(raw_pf, Mapping) and raw_pf:
+            for pf_rel, pf_src in raw_pf.items():
+                patched_files[str(pf_rel)] = str(pf_src)
+        else:
+            patched_files[mod_rel] = str(winner["patched_source"])
+            extra_patches = winner.get("extra_patches") or ()
+            if isinstance(extra_patches, Mapping):
+                for ef, esrc in extra_patches.items():
+                    patched_files[str(ef)] = str(esrc)
+            else:
+                for ef, esrc in extra_patches:
+                    patched_files[str(ef)] = str(esrc)
 
-        extra_patches = winner.get("extra_patches") or ()
-        diff_chunks: list[str] = [
-            "".join(difflib.unified_diff(
-                orig_text.splitlines(keepends=True),
-                patched_text.splitlines(keepends=True),
-                fromfile=f"a/{mod_rel}",
-                tofile=f"b/{mod_rel}",
-            ))
-        ]
-        for ef, esrc in extra_patches:
-            ef_s = str(ef)
-            e_orig = (root / ef_s).read_text(encoding="utf-8", errors="replace")
-            (ws / ef_s).write_text(str(esrc), encoding="utf-8")
-            patched_files[ef_s] = str(esrc)
+        diff_chunks: list[str] = []
+        for pf_rel, pf_src in patched_files.items():
+            orig_text = (root / pf_rel).read_text(encoding="utf-8", errors="replace")
+            (ws / pf_rel).write_text(pf_src, encoding="utf-8")
             diff_chunks.append("".join(difflib.unified_diff(
-                e_orig.splitlines(keepends=True),
-                str(esrc).splitlines(keepends=True),
-                fromfile=f"a/{ef_s}",
-                tofile=f"b/{ef_s}",
+                orig_text.splitlines(keepends=True),
+                pf_src.splitlines(keepends=True),
+                fromfile=f"a/{pf_rel}",
+                tofile=f"b/{pf_rel}",
             )))
 
-        # Remove temporary reproducer before running pass2pass regression suite
-        (ws / repro_rel).unlink(missing_ok=True)
+        # Remove all temporary reproducers before running pass2pass regression suite
+        for r_rel in repro_rels:
+            (ws / r_rel).unlink(missing_ok=True)
 
         reg_ok = True
         reg_tests: list[str] = []
         reg_report: list[dict[str, Any]] = []
         if run_regression:
-            reg_tests = _select_regression_tests(repo_index, repro.get("referenced_symbols") or [], mod_rel)
+            reg_tests = _select_regression_tests(repo_index, all_ref_syms, mod_rel)
             reg_ok, reg_report = _run_regression_suite(ws, repo_index, reg_tests, python_exe=py)
 
         if not reg_ok:

@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "b3d797031fd995962b4cedafb5a002049285beddd8927c39e4a3cb70855500e0"
+  "value": "d271656e51f3c5a912765a2c531155f99652d6fca681c2da2a27430518d43f3a"
  },
  "engines": [
   {
@@ -164733,7 +164733,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/CAUSAL_ANGELIC_AND_UNIFIED_CU_BENCHMARK_20261121_V1.json",
    "schema": "BRAIN_CAUSAL_ANGELIC_AND_UNIFIED_CU_BENCHMARK_V1",
-   "sha256": "f3e21b041838c712b5a37570a8594abf6708f2160593d282cdaee84f7e1489fe",
+   "sha256": "07ec1a2b27e37e475e86977620b79291ed8906ebe36ef4292b30016701e85a23",
    "status": "",
    "terms": {
     "20261121": 1,
@@ -288015,9 +288015,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/epistemic_issue_reproducer_v1.py",
-   "sha256": "4783697875a9e6709902c849d02fbe17f442f952b74ad9b1059890560ff1d46f",
+   "sha256": "0af2114f09beea66fe2903bd2db801a9e4a768b06c86edc4f47bf9d51a2bb7b9",
    "summary": "Zero-LLM, Zero-Weight Polyglot Epistemic Issue-to-Reproducer & Blind SWE Resolver (v1).",
-   "symbol_count": 25,
+   "symbol_count": 27,
    "symbols": [
     "CompiledReproSpec",
     "RepoSymbolIndex",
@@ -288025,6 +288025,7 @@
     "_build_js_imports",
     "_build_python_imports",
     "_compile_doctest_block",
+    "_compile_existing_test_clones",
     "_compile_fenced_blocks",
     "_compile_prose_clauses",
     "_copy_workspace",
@@ -288032,6 +288033,7 @@
     "_extract_balanced_call",
     "_extract_expected_exception_near",
     "_extract_expected_literal_near",
+    "_extract_test_file_header",
     "_is_test_rel",
     "_iter_repo_files",
     "_py_module_path",
@@ -288040,25 +288042,24 @@
     "_select_regression_tests",
     "_wrap_js_snippet",
     "_wrap_python_snippet",
-    "compile_issue_specs",
-    "scan_repo_symbols",
-    "solve_issue_from_description"
+    "compile_issue_specs"
    ],
    "terms": {
     "blind": 1,
     "build_js_imports": 1,
     "build_python_imports": 1,
     "compile_doctest_block": 1,
+    "compile_existing_test_clones": 1,
     "compile_fenced_blocks": 1,
     "compile_issue_specs": 1,
     "compile_prose_clauses": 1,
     "compiledreprospec": 1,
-    "copy_workspace": 1,
     "detect_repo_language": 1,
     "epistemic": 2,
     "extract_balanced_call": 1,
     "extract_expected_exception_near": 1,
     "extract_expected_literal_near": 1,
+    "extract_test_file_header": 1,
     "is_test_rel": 1,
     "issue": 1,
     "issue-to-reproducer": 1,
@@ -288068,7 +288069,6 @@
     "reposymbolindex": 1,
     "reproducer": 1,
     "resolver": 1,
-    "run_regression_suite": 1,
     "run_reproducer_once": 1,
     "scan_repo_symbols": 1,
     "select_regression_tests": 1,

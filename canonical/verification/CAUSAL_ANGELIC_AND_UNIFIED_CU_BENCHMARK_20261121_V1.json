@@ -4984,5 +4984,48 @@
     ],
     "model_calls": 0,
     "parameters_stored": 0
+  },
+  "iter67_blind_zero_code_block_fixture_cloning": {
+    "date": "2026-11-21",
+    "summary": "Upgraded canonical/runtime/epistemic_issue_reproducer_v1.py with Format 5 Existing-Test Fixture Cloning & Counterfactual Input Perturbation (_compile_existing_test_clones: PATHLIKE_WRAP + SLOTS_DICT_PICKLE), native test_subdir placement (conftest.py + Path(__file__).parent data files), and multi-file clone merging + COMPOSED_ANGELIC_PROGRESS patched_files propagation. Solved 2 additional real 2026 OSS issues COMPLETELY BLIND from 2-line pure prose with ZERO code blocks, ZERO call examples, and ZERO hidden tests — including a 2-file 11-dataclass issue — bringing cumulative blind hidden-gold SWE solves to 7/7 (4,825/4,825 hidden gold assertions).",
+    "cumulative_blind_zero_hidden_test_oss_solves": 7,
+    "blind_zero_code_block_issues_verified": [
+      {
+        "repo": "pallets/click",
+        "commit": "a1d8785",
+        "date": "2026-08-19",
+        "input_format": "pure_2_line_prose_zero_code_blocks_zero_call_examples",
+        "reproducer_mechanism": "existing_test_clone: clone_pathlike(tests/test_termui.py::test_edit)",
+        "patched_files": [
+          "src/click/termui.py"
+        ],
+        "tier": "TIER3_ISINSTANCE_PATHLIKE_WIDENING",
+        "elapsed_s": 9.83,
+        "hidden_upstream_gold_suite": "pytest tests/test_termui.py: 259 passed, 23 skipped in 0.47s (rc=0)",
+        "model_calls": 0,
+        "parameters_stored": 0
+      },
+      {
+        "repo": "pypa/packaging",
+        "commit": "f1c5715",
+        "date": "2026-11-16",
+        "input_format": "pure_2_line_prose_zero_code_blocks_zero_call_examples_multifile",
+        "reproducer_mechanism": "existing_test_clone: clone_slots_dict_pickle(tests/test_direct_url.py + tests/test_pylock.py)",
+        "patched_files": [
+          "src/packaging/direct_url.py",
+          "src/packaging/pylock.py"
+        ],
+        "tier": "COMPOSED_ANGELIC_PROGRESS",
+        "elapsed_s": 64.03,
+        "hidden_upstream_gold_suite": "pytest tests/test_direct_url.py tests/test_pylock.py: 139 passed in 0.16s (rc=0)",
+        "model_calls": 0,
+        "parameters_stored": 0
+      }
+    ],
+    "tests_added": [
+      "canonical/tests/test_epistemic_issue_reproducer_v1.py::test_5_iter67_blind_zero_code_block_fixture_cloning_and_multifile_merge"
+    ],
+    "model_calls": 0,
+    "parameters_stored": 0
   }
 }

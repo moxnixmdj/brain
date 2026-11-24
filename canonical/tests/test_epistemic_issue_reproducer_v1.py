@@ -270,6 +270,127 @@ class TestEpistemicIssueReproducerV1(unittest.TestCase):
             self.assertTrue(diff1["has_recalled_law"], diff1)
             self.assertLess(diff1["epistemic_gap_count"], diff0["epistemic_gap_count"])
 
+    def test_5_iter67_blind_zero_code_block_fixture_cloning_and_multifile_merge(self) -> None:
+        """Blind pure-prose issues WITHOUT any code blocks or `func(args)` examples:
+        (a) PathLike cloning reuses `tests/conftest.py` fixtures & solves blind;
+        (b) Multi-file slotted dataclass dict-pickle cloning merges 2 test files &
+            solves BOTH modules simultaneously via COMPOSED_ANGELIC_PROGRESS.
+        """
+        import pathlib as _pl
+        import pickle as _pkl
+
+        # (a) Fixture-dependent PathLike prose-only issue (zero code blocks, zero call examples)
+        with tempfile.TemporaryDirectory(prefix="ep_clone_path_") as td:
+            ws = pathlib.Path(td)
+            (ws / "src" / "pkg").mkdir(parents=True)
+            (ws / "tests").mkdir()
+            (ws / "src" / "pkg" / "__init__.py").write_text("from .io_ops import edit_file\n", encoding="utf-8")
+            (ws / "src" / "pkg" / "io_ops.py").write_text(
+                "import os\n\n"
+                "def edit_file(filename=None, suffix='.txt'):\n"
+                "    if filename is None:\n"
+                "        return ''\n"
+                "    if not isinstance(filename, str):\n"
+                "        raise TypeError('filename must be str')\n"
+                "    with open(filename, 'r', encoding='utf-8') as fh:\n"
+                "        return fh.read().strip()\n",
+                encoding="utf-8",
+            )
+            (ws / "tests" / "conftest.py").write_text(
+                "import pytest\n\n"
+                "@pytest.fixture\n"
+                "def sample_file(tmp_path):\n"
+                "    p = tmp_path / 'note.txt'\n"
+                "    p.write_text('hello-fixture\\n', encoding='utf-8')\n"
+                "    return str(p)\n",
+                encoding="utf-8",
+            )
+            (ws / "tests" / "test_io_ops.py").write_text(
+                "from pkg.io_ops import edit_file\n\n"
+                "def test_edit_existing(sample_file):\n"
+                "    assert edit_file(filename=sample_file) == 'hello-fixture'\n",
+                encoding="utf-8",
+            )
+            issue_a = (
+                "Accept pathlib.Path for filename in edit_file.\n"
+                "Passing a pathlib.Path object as `filename` to edit_file currently raises TypeError."
+            )
+            res_a = IR.solve_issue_from_description(ws, issue_a, python_exe=sys.executable, timeout_s=45.0)
+            self.assertTrue(res_a["verified"], res_a)
+            self.assertEqual(res_a["reproducer"]["kind"], "existing_test_clone")
+            self.assertEqual(res_a["model_calls"], 0)
+            self.assertEqual(res_a["parameters_stored"], 0)
+            ns_a: dict[str, object] = {}
+            exec(res_a["patched_files"]["src/pkg/io_ops.py"], ns_a)
+            p_check = ws / "check.txt"
+            p_check.write_text("ok-path\n", encoding="utf-8")
+            self.assertEqual(ns_a["edit_file"](filename=_pl.Path(p_check)), "ok-path")
+            self.assertEqual(ns_a["edit_file"](filename=str(p_check)), "ok-path")
+
+        # (b) Multi-file slotted dataclass legacy dict-pickle prose-only issue (zero code blocks)
+        with tempfile.TemporaryDirectory(prefix="ep_clone_slots_") as td:
+            ws = pathlib.Path(td)
+            (ws / "src" / "mylib").mkdir(parents=True)
+            (ws / "tests").mkdir()
+            (ws / "src" / "mylib" / "__init__.py").write_text("", encoding="utf-8")
+            (ws / "src" / "mylib" / "mod_a.py").write_text(
+                "from dataclasses import dataclass\n\n"
+                "@dataclass(slots=True)\n"
+                "class AlphaRec:\n"
+                "    name: str\n"
+                "    val: int = 1\n",
+                encoding="utf-8",
+            )
+            (ws / "src" / "mylib" / "mod_b.py").write_text(
+                "from dataclasses import dataclass\n\n"
+                "@dataclass(slots=True)\n"
+                "class BetaRec:\n"
+                "    tag: str\n"
+                "    count: int = 2\n",
+                encoding="utf-8",
+            )
+            (ws / "tests" / "test_mod_a.py").write_text(
+                "from mylib.mod_a import AlphaRec\n\n"
+                "def test_alpha():\n"
+                "    a = AlphaRec(name='x', val=7)\n"
+                "    assert a.name == 'x'\n",
+                encoding="utf-8",
+            )
+            (ws / "tests" / "test_mod_b.py").write_text(
+                "from mylib.mod_b import BetaRec\n\n"
+                "def test_beta():\n"
+                "    b = BetaRec(tag='y', count=9)\n"
+                "    assert b.tag == 'y'\n",
+                encoding="utf-8",
+            )
+            issue_b = (
+                "Support unpickling legacy dict states on slotted AlphaRec and BetaRec dataclasses.\n"
+                "After enabling slots on AlphaRec and BetaRec, unpickling older dict states fails."
+            )
+            res_b = IR.solve_issue_from_description(ws, issue_b, python_exe=sys.executable, timeout_s=60.0)
+            self.assertTrue(res_b["verified"], res_b)
+            self.assertEqual(res_b["reproducer"]["kind"], "existing_test_clone")
+            self.assertEqual(
+                sorted(res_b["patched_files"].keys()),
+                ["src/mylib/mod_a.py", "src/mylib/mod_b.py"],
+                res_b["patched_files"].keys(),
+            )
+            self.assertEqual(res_b["model_calls"], 0)
+            self.assertEqual(res_b["parameters_stored"], 0)
+            for rel, cls_name, payload in (
+                ("src/mylib/mod_a.py", "AlphaRec", {"name": "old", "val": 42}),
+                ("src/mylib/mod_b.py", "BetaRec", {"tag": "legacy", "count": 99}),
+            ):
+                ns_b: dict[str, object] = {}
+                exec(res_b["patched_files"][rel], ns_b)
+                cls = ns_b[cls_name]
+                inst = object.__new__(cls)
+                inst.__setstate__(payload)
+                for k, v in payload.items():
+                    self.assertEqual(getattr(inst, k), v)
+                with self.assertRaises(TypeError):
+                    object.__new__(cls).__setstate__({"__bogus__": 1})
+
 
 if __name__ == "__main__":
     unittest.main()
