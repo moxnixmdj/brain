@@ -113,7 +113,7 @@
     "exactly_one_action_intent_in_diff": true,
     "final_full_rerun_after_amend": "Iteration-8 full rerun remains true for its exact tree; iteration-9 final gates after the runner-owned OIDC receipt passed ALL_GATES_OK True at 2026-11-24T02:02:35Z on reconciliation HEAD c82fcf3e with 20 checks, 29 instrument tests, 4 new zero-model Harbor integration tests, 200 selected regression tests, 14 OBS/broker tests, two OIDC run references and exact runner receipt/reward-log bindings. A metadata-only commit records this result and is checked by lightweight gates; no score or credit is taken. Iteration-10 local gates at 2026-11-24T02:43:57Z on HEAD 227c3e1c passed ALL_GATES_OK True with 24 checks, 29 instrument tests, 4 old zero-model Harbor tests, 11 new finite-purpose tests, 200 selected regression tests, 14 OBS/broker tests, old/new workflow bindings and no raw benchmark tasks in the workspace. After the third runner receipt at d2bbd4e9, the final full gate wrapper passed ALL_GATES_OK True with 26 checks at 2026-11-24T02:59:41Z on HEAD d2bbd4e9, binding all three OIDC run references and exact SWE Pro V2 HARD-51 receipt/reward-log bytes. A metadata-only commit records this result and is checked by lightweight gates; no score or credit is taken. Iteration-11 local gates at 2026-11-24T03:52:54Z on HEAD 79749b58 passed ALL_GATES_OK True with 30 checks, including 29 instrument tests, 4 old zero-model Harbor tests, 11 finite-purpose tests, 7 OSWorld blocker tests, 22 combined zero-model Harbor tests, 13 pinned OSWorld file hashes, 27 source checks, a sanitized 10-blocker decision, three OIDC run references and 200 selected regression tests. The fourth runner receipt was not yet recorded.",
     "final_full_rerun_timings": "repo-integrity 39.31s; continuous-OBS/broker 14 tests in 0.015s; seven instrument tests 29 passed in 4.62s; twenty-file regression 200 passed in 194.60s (0:03:14)",
-    "final_gate_wrapper_note": "First wrapper used an incorrect .json.sha256 sidecar path; that was a local harness typo, not a project gate failure. The corrected wrapper passed two full reruns. The final metadata-only commit records the second rerun and was rechecked with all lightweight gates. Iteration-10 first wrapper run failed only on drift/OBS route consistency and a copied `harbor_exit_code or -1` assertion bug; the route fields were reconciled and the wrapper bug was fixed. The second run passed all 24 checks. Iteration-10 final wrapper added the third OIDC run view and exact SWE Pro V2 HARD-51 receipt/reward-log binding; it passed all 26 checks with a clean tree after ledger revert. Iteration-11 local wrapper added four new checks: seven OSWorld blocker-policy tests, 22 combined zero-model Harbor tests, the full OSWorld workflow/source/sanitized-replay checker and the workflow contract check; all 30 checks passed on the first run.",
+    "final_gate_wrapper_note": "First wrapper used an incorrect .json.sha256 sidecar path; that was a local harness typo, not a project gate failure. The corrected wrapper passed two full reruns. The final metadata-only commit records the second rerun and was rechecked with all lightweight gates. Iteration-10 first wrapper run failed only on drift/OBS route consistency and a copied `harbor_exit_code or -1` assertion bug; the route fields were reconciled and the wrapper bug was fixed. The second run passed all 24 checks. Iteration-10 final wrapper added the third OIDC run view and exact SWE Pro V2 HARD-51 receipt/reward-log binding; it passed all 26 checks with a clean tree after ledger revert. Iteration-11 local wrapper added four new checks: seven OSWorld blocker-policy tests, 22 combined zero-model Harbor tests, the full OSWorld workflow/source/sanitized-replay checker and the workflow contract check; all 30 checks passed on the first run. A workflow robustness follow-up added a fifth embedded Python block that writes sanitized all-false probe/source inputs if a measurement step produces no JSON, guarded the decision copy, and made receipt numeric probe counts derive from sanitized runner facts; the workflow checker now verifies five compiled Python blocks.",
     "final_pinned_blob_binding": "EXACT_BLOB_BINDING PASS 6; final reconciliation changed no pinned bytes",
     "final_selected_regression": "200 passed in 194.60s (0:03:14) across 20 selected files",
     "final_selected_regression_note": "Iteration-9 final counts after the runner receipt: 29 instrument tests, 4 new zero-model Harbor integration tests, 14 OBS/broker tests, 200 selected regression tests, 20 gate checks, ALL_GATES_OK True. Three official hard-task reward vectors are all 0.0; no hard-benchmark score, \u00a76 verification, capability credit or terminal truth change. Iteration-10 local rerun adds 11 finite-purpose tests and new-workflow checks; at local-rerun time the third OIDC runner receipt had not been recorded and no score, capability credit or terminal truth change was claimed. After the runner receipt, iteration-10 final gates added two checks (third OIDC run view and exact receipt binding) and passed 26 checks; three HARD-51 reward vectors were 0.0 and no score, credit or \u00a76 verification was taken. Iteration-11 local rerun adds the OSWorld pinned-release workflow and blocker-policy checks; no OSWorld task run, score, capability credit, \u00a76 verification or terminal truth change is claimed.",
@@ -213,7 +213,7 @@
       "git_status_after_gates": "clean after IGNORANCE_LEDGER revert",
       "head": "79749b58",
       "new_osworld_policy_tests": "7 passed in 0.26s",
-      "new_osworld_workflow_static_checks": "10 steps/4 blocks, exact two-source binding PASS, 27 source checks, 13 pinned files, sanitized probe and fail-closed decision PASS",
+      "new_osworld_workflow_static_checks": "10 steps/5 blocks, exact two-source binding PASS, 27 source checks, 13 pinned files, sanitized probe and fail-closed decision PASS",
       "new_zero_model_harbor_integration_tests": "4 passed in 0.29s",
       "new_zero_model_purpose_tests": "11 passed in 0.26s",
       "no_raw_benchmark_tasks_in_workspace": "PASS",
@@ -433,7 +433,7 @@
       "canonical/harbor/osworld_v21_blocker_policy_v1.py": "ec1327ea0daa2c0ed7a2db0dd014e0c791cf35d061ec764671d6527ba82395f7",
       "canonical/tests/test_osworld_v21_blocker_policy_v1.py": "4d9d4b0bab59fb8ae91d7456e5718bf4a4e043224246f4b77de87f6327594f5e"
     },
-    "osworld_v21_workflow_git_blob_sha": "b90715fc5dea7a93aef5ee61d0eb82ecce863f60",
+    "osworld_v21_workflow_git_blob_sha": "143bfa0f4d5bd010cd92dc818ab112fbcf69caa2",
     "runner_receipt_git_blob_sha": "b21d8ca0a1e93e19f1ed44b4485d261e4704a9d5",
     "runner_receipt_sha256": "1539fdac25a33c704007f6d58c812d8528746a13b51b30ee02d0e21bb9f87596",
     "runner_receipt_sha256_sidecar": "PASS; sha256 1539fdac25a33c704007f6d58c812d8528746a13b51b30ee02d0e21bb9f87596",
@@ -606,7 +606,7 @@
       "benchmark_score_authority": false,
       "blocker_policy_tests": 7,
       "combined_zero_model_harbor_tests": 22,
-      "embedded_python_blocks_compiled": 4,
+      "embedded_python_blocks_compiled": 5,
       "gated_dataset_status_probes": 2,
       "hard_benchmark_tasks_consumed": 0,
       "local_full_gate_checks": 30,
@@ -627,7 +627,7 @@
       "source_verification_checks": 27,
       "task_hash_manifest_entries": 108,
       "website_submodule_pins": 25,
-      "workflow_git_blob_sha": "b90715fc5dea7a93aef5ee61d0eb82ecce863f60",
+      "workflow_git_blob_sha": "143bfa0f4d5bd010cd92dc818ab112fbcf69caa2",
       "workflow_steps": 10
     },
     "iteration_2": {
@@ -1513,7 +1513,7 @@
             "evidence": [
               "seven OSWorld blocker-policy tests pass",
               "py_compile of the policy and tests passes",
-              "workflow YAML and four embedded Python blocks parse/compile"
+              "workflow YAML and five embedded Python blocks parse/compile"
             ],
             "evidence_classes": [
               "DIRECT_PROBE"

@@ -319,6 +319,65 @@ jobs:
         continue-on-error: true
         run: |
           set -euo pipefail
+          python3 - <<'PY'
+          import json, os, pathlib
+          out = pathlib.Path(os.environ["WORKSPACE"]) / "out"
+          out.mkdir(parents=True, exist_ok=True)
+          probe_path = out / "runner_probe.json"
+          source_path = out / "source_verification.json"
+          if not probe_path.is_file():
+              probe = {
+                  "hf_token_present": False,
+                  "gated_conditions_accepted": False,
+                  "hf_task_metadata_http_status": 0,
+                  "hf_asset_metadata_http_status": 0,
+                  "task_class_directory_present": False,
+                  "complete_asset_directory_present": False,
+                  "osworld_file_base_url_present": False,
+                  "website_host_suffix_present": False,
+                  "websites_deployed": False,
+                  "qcow2_archive_present": False,
+                  "kvm_device_present": False,
+                  "kvm_cpu_flags_count": 0,
+                  "docker_present": False,
+                  "qemu_system_present": False,
+                  "display_present": False,
+                  "xvfb_present": False,
+                  "maintainer_verifier_present": False,
+                  "evaluator_dependencies_installed": False,
+                  "hidden_test_reading": False,
+                  "raw_benchmark_tasks_saved_in_workspace": False,
+                  "borrowed_outputs": False,
+                  "static_source_binding_pass": False,
+                  "external_network_probe_calls": 0,
+                  "runtime_network_calls_in_agent_cognition": 0,
+                  "model_calls": 0,
+                  "raw_task_bodies_downloaded": False,
+                  "raw_asset_bodies_downloaded": False,
+                  "raw_web_pages_saved_in_workspace": False,
+                  "fallback_reason": "RUNNER_PROBE_STEP_DID_NOT_PRODUCE_SANITIZED_JSON",
+              }
+              probe_path.write_text(json.dumps(probe, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+          if not source_path.is_file():
+              names = (
+                  "release_tag", "code_tag_commit", "website_tag_commit", "manifest_sha256",
+                  "task_hash_manifest_sha256", "public_task_id_count", "gated_repositories_declared",
+                  "no_full_agent_evaluation_in_release_notes", "no_hosted_website_deployment_in_release_notes",
+                  "no_raw_task_files_in_workspace",
+              )
+              source = {
+                  "schema": "BRAIN_OSWORLD_V21_SOURCE_VERIFICATION_V1",
+                  "checks": {name: False for name in names},
+                  "raw_benchmark_tasks_saved_in_workspace": False,
+                  "hidden_test_reading": False,
+                  "borrowed_outputs": False,
+                  "model_calls": 0,
+                  "runtime_network_calls_in_agent_cognition": 0,
+                  "fallback_reason": "PINNED_SOURCE_VERIFICATION_STEP_DID_NOT_PRODUCE_SANITIZED_JSON",
+              }
+              source_path.write_text(json.dumps(source, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+          print("OSWORLD_V21_CLASSIFIER_INPUTS_FAIL_CLOSED", probe_path.is_file(), source_path.is_file())
+          PY
           python3 "${WORKSPACE}/canonical/harbor/osworld_v21_blocker_policy_v1.py" \
             --probe "${WORKSPACE}/out/runner_probe.json" \
             --source "${WORKSPACE}/out/source_verification.json" \
@@ -379,9 +438,11 @@ jobs:
           audit = read_json("static_audit.json", {})
           source_verification = read_json("source_verification.json", {})
           probe = read_json("runner_probe.json", {})
-          decision = read_json("OSWORLD_V21_REPRODUCIBILITY_BLOCKER_DECISION_20261124_V1.json", {})
           decision_path = out / "OSWORLD_V21_REPRODUCIBILITY_BLOCKER_DECISION_20261124_V1.json"
-          decision_bytes = decision_path.read_bytes() if decision_path.is_file() else b"{}\n"
+          if not decision_path.is_file():
+              decision_path.write_text("{}\n", encoding="utf-8")
+          decision = read_json("OSWORLD_V21_REPRODUCIBILITY_BLOCKER_DECISION_20261124_V1.json", {})
+          decision_bytes = decision_path.read_bytes()
           decision_sha = hashlib.sha256(decision_bytes).hexdigest()
           decision_blob = subprocess.run(["git", "hash-object", "--stdin"], cwd=root, input=decision_bytes, stdout=subprocess.PIPE, check=True).stdout.decode().strip()
           workflow_blob = subprocess.check_output(["git", "hash-object", workflow_path], cwd=root, text=True).strip()
@@ -389,6 +450,12 @@ jobs:
           verifier_identity = "github-actions-oidc:" + str(claims.get("workflow_ref")) + "#run-" + str(run_id)
           source_checks = source_verification.get("checks") or {}
           failed = list(decision.get("failed") or [])
+          if not source_verification:
+              failed.append("SOURCE_VERIFICATION_JSON_MISSING")
+          if not probe:
+              failed.append("RUNNER_PROBE_JSON_MISSING")
+          if not decision:
+              failed.append("BLOCKER_DECISION_JSON_MISSING_OR_EMPTY")
           if failed_oidc:
               failed.append("OIDC_RUN_REFERENCE_BINDING_FALSE")
           if not bindings.get("equal"):
@@ -415,7 +482,7 @@ jobs:
               "public_task_ids": source_verification.get("public_task_id_count", 0),
               "task_hash_manifest_entries": source_verification.get("task_hash_count", 0),
               "website_submodule_pins": source_verification.get("website_submodule_pin_count", 0),
-              "gated_dataset_status_probes": 2,
+              "gated_dataset_status_probes": int(probe.get("external_network_probe_calls") or 0),
               "external_network_probe_calls": int(probe.get("external_network_probe_calls") or 0),
               "hard_benchmark_tasks_consumed": 0,
               "reward_vectors": 0,
@@ -528,8 +595,10 @@ jobs:
              "canonical/verification/OSWORLD_V21_REPRODUCIBILITY_BLOCKER_RUNNER_RECEIPT_20261124_V1.json"
           cp "out/OSWORLD_V21_REPRODUCIBILITY_BLOCKER_RUNNER_RECEIPT_20261124_V1.sha256" \
              "canonical/verification/OSWORLD_V21_REPRODUCIBILITY_BLOCKER_RUNNER_RECEIPT_20261124_V1.sha256"
-          cp "out/OSWORLD_V21_REPRODUCIBILITY_BLOCKER_DECISION_20261124_V1.json" \
-             "canonical/verification/OSWORLD_V21_REPRODUCIBILITY_BLOCKER_DECISION_20261124_V1.json"
+          if [ -f "out/OSWORLD_V21_REPRODUCIBILITY_BLOCKER_DECISION_20261124_V1.json" ]; then
+            cp "out/OSWORLD_V21_REPRODUCIBILITY_BLOCKER_DECISION_20261124_V1.json" \
+               "canonical/verification/OSWORLD_V21_REPRODUCIBILITY_BLOCKER_DECISION_20261124_V1.json"
+          fi
           git config user.name "project-brain-osworld-v21-blocker-runner"
           git config user.email "project-brain-osworld-v21-blocker-runner@users.noreply.github.com"
           git add "canonical/verification/OSWORLD_V21_REPRODUCIBILITY_BLOCKER_RUNNER_RECEIPT_20261124_V1.json" \
