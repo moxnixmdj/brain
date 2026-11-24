@@ -2012,6 +2012,14 @@ def measure(*, wall_budget: float = PAGE_WALL_BUDGET, depth: int = 2) -> dict[st
             "model_calls": 0, "parameters_stored": 0, "network_calls_at_run_time": 0,
         },
         "needs_carry_no_program": needs_carry_no_program(),
+        # The receipt must keep saying what it is not, or a later reader will quote these
+        # numbers as a benchmark. A second run checks this list the way it checks the gates.
+        "what_this_is_not": [
+            "not a benchmark result: 13 needs over one room of 11 objects",
+            "not a claim about GUIs, browsers or any environment this machine cannot type",
+            "not single-experience learning: the repertoire is read afresh every run",
+            "not terminal credit: the frontier this round touches is one measured mechanism",
+        ],
         "seconds": round(time.time() - started, 1),
     }
     receipt["verdict"] = _verdict(receipt)
