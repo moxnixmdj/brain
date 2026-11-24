@@ -5755,5 +5755,32 @@
     "cumulative_unique_verified_real_oss_commits": 237,
     "model_calls": 0,
     "parameters_stored": 0
+  },
+  "iter80_pillar4_assertion_block_splitting_def_use_early_return_werkzeug_0c419f95": {
+    "date": "2026-11-21",
+    "summary": "Closed the exact multi-assertion contamination + OE-SyGuS separator-collapse + anti-overfit bottleneck exposed by Iter 79's strict audit of Aug 21, 2026 `pallets/werkzeug@0c419f95` with ZERO bug-specific rules: (1) added Pillar 4 `split_multi_assert_test_blocks` (`canonical/runtime/backward_witness_synthesizer_v1.py`) wired into `causal_angelic_swe_engine_v1.py::solve_repository` (Stage 1a-pillar4) to split monolithic multi-assertion pytest methods in a temporary scratch copy for localization only, converting 1 failing blob into `(N-1)` clean passing witnesses + `1` pinpoint failing witness while ALWAYS verifying candidate patches against the 100% unmodified repo test suite; (2) fixed `oe_sygus_synthesizer_v1.py` to emit valid `len(x)` for `__len__:x`, prioritize real locals over auxiliary length keys, and preserve ALL distinct exact single-predicate separators (`exact_single_hits`) instead of collapsing to 1 arbitrary winner; (3) added Def-Use-Locality-Ranked `TIER3_OE_SYGUS_EARLY_RETURN_GUARD` (exact sibling of `TIER3_OE_SYGUS_VALIDATION_RAISE`, requiring freshly defined variables `max_dist <= 6` for single-failing-frame guards — mathematically eliminating stale-accumulator overfits like `last_end == 0`). Re-evaluated on post-training Aug 21, 2026 `pallets/werkzeug@0c419f95` (`disallow range -0`): SOLVED on Attempt #1 in 14.01s (`model_calls == 0`, `parameters_stored == 0`), emitting a surgical 2-line patch (`if (begin >= 0): return None`) at the exact human line (`src/werkzeug/http.py:881`), passing `461/461` core Werkzeug HTTP/datastructures/wrappers/routing tests AND passing the adversarial `parse_range_header('bytes=-100')` check.",
+    "hand_written_repair_rules_added": 0,
+    "verified_real_oss_commits": [
+      {
+        "repo": "pallets/werkzeug",
+        "commit": "0c419f951f3206c89e7c95155f0bd771b02a961f",
+        "date": "2026-08-21",
+        "status": "VERIFIED",
+        "attempt": 1,
+        "seconds": 14.01,
+        "tier": "TIER3_OE_SYGUS_EARLY_RETURN_GUARD",
+        "file": "src/werkzeug/http.py",
+        "lineno": 881,
+        "patch_lines_added": 2,
+        "semantically_equivalent_to_human_fix": true,
+        "adversarial_overfit_check": "PASS (parse_range_header('bytes=-100') == [(-100, None)], 'bytes=-0' is None)",
+        "core_suite_verification": "461 passed, 0 failed in 6.35s (test_http + test_datastructures + test_wrappers + test_routing)",
+        "model_calls": 0,
+        "parameters_stored": 0
+      }
+    ],
+    "cumulative_unique_verified_real_oss_commits": 238,
+    "model_calls": 0,
+    "parameters_stored": 0
   }
 }

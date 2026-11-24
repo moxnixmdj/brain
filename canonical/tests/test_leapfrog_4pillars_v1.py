@@ -468,3 +468,87 @@ def test_06_lookahead_oe_sygus_narrow_if_branch_and_first_case_predicates() -> N
         assert len(removed) == 1 and len(added) == 1, w["diff"]
 
 
+def test_07_pillar4_assertion_block_splitting_and_def_use_early_return_guard() -> None:
+    """Proves Iter 80 Pillar 4 Assertion-Block Witness Splitting + OE-SyGuS Multi-Separator
+    Preservation + Def-Use-Locality-Ranked `TIER3_OE_SYGUS_EARLY_RETURN_GUARD` (anti-overfit)."""
+    from canonical.runtime import backward_witness_synthesizer_v1 as BWS
+    from canonical.runtime import causal_angelic_swe_engine_v1 as SWE
+
+    with tempfile.TemporaryDirectory() as td:
+        root = pathlib.Path(td)
+        (root / "range_parser.py").write_text(
+            "def parse_suffix_ranges(spec: str):\n"
+            "    if not spec or '=' not in spec:\n"
+            "        return None\n"
+            "    out = []\n"
+            "    last_end = 0\n"
+            "    _, _, body = spec.partition('=')\n"
+            "    for item in body.split(','):\n"
+            "        item = item.strip()\n"
+            "        if '-' not in item:\n"
+            "            return None\n"
+            "        if item.startswith('-'):\n"
+            "            if last_end < 0:\n"
+            "                return None\n"
+            "            try:\n"
+            "                begin = int(item)\n"
+            "            except ValueError:\n"
+            "                return None\n"
+            "            end = None\n"
+            "            last_end = -1\n"
+            "        else:\n"
+            "            a, _, b = item.partition('-')\n"
+            "            begin, end = int(a), int(b)\n"
+            "            last_end = end\n"
+            "        out.append((begin, end))\n"
+            "    return out\n",
+            encoding="utf-8",
+        )
+        test_src = (
+            "import range_parser\n\n"
+            "class TestRangeParser:\n"
+            "    def test_all_ranges(self):\n"
+            "        rv = range_parser.parse_suffix_ranges('bytes=52')\n"
+            "        assert rv is None\n\n"
+            "        rv = range_parser.parse_suffix_ranges('bytes=10-20')\n"
+            "        assert rv == [(10, 20)]\n\n"
+            "        rv = range_parser.parse_suffix_ranges('bytes=10-20,-500')\n"
+            "        assert rv == [(10, 20), (-500, None)]\n\n"
+            "        rv = range_parser.parse_suffix_ranges('bytes=-bad')\n"
+            "        assert rv is None\n\n"
+            "        rv = range_parser.parse_suffix_ranges('bytes=-0')\n"
+            "        assert rv is None\n"
+        )
+        (root / "test_range_parser.py").write_text(test_src, encoding="utf-8")
+
+        # 1. Verify Pillar 4 assertion-block splitter isolates all 5 blocks cleanly
+        sp = BWS.split_multi_assert_test_blocks(
+            test_src, "test_all_ranges", failing_class_name="TestRangeParser"
+        )
+        assert sp["split"] is True and sp["blocks"] == 5, sp
+
+        # 2. Verify live SWE solve uses Def-Use Locality to pick `begin` (NOT stale `last_end`) on Attempt #1!
+        res = SWE.solve_repository(
+            root,
+            ["test_range_parser.py"],
+            python_exe=sys.executable,
+            max_candidates=25,
+        )
+        assert res["status"] == "VERIFIED", res
+        assert res["model_calls"] == 0
+        assert res["parameters_stored"] == 0
+        w = res["winner"]
+        assert w["tier"] == "TIER3_OE_SYGUS_EARLY_RETURN_GUARD", w
+        assert w["attempt"] == 1
+        added_txt = "\n".join(
+            ln for ln in w["diff"].splitlines() if ln.startswith("+") and not ln.startswith("+++")
+        )
+        assert "begin" in added_txt and "last_end" not in added_txt, w["diff"]
+        # Verify the synthesized patch also handles adversarial `bytes=-100` (which stale `last_end == 0` breaks!)
+        ns: dict[str, Any] = {}
+        exec(w["patched_source"], ns)
+        assert ns["parse_suffix_ranges"]("bytes=-100") == [(-100, None)]
+        assert ns["parse_suffix_ranges"]("bytes=-0") is None
+
+
+

@@ -592,3 +592,161 @@ def synthesize_function_return_fix(
         "model_calls": 0,
         "parameters_stored": 0,
     }
+
+
+# ---------------------------------------------------------------------------
+# 6. Pillar 4: Assertion-Block Delta-Debugging Splitter for Multi-Assert Tests
+# ---------------------------------------------------------------------------
+
+
+def _assigned_names(stmt: ast.stmt) -> set[str]:
+    names: set[str] = set()
+    if isinstance(stmt, ast.Assign):
+        for tgt in stmt.targets:
+            for nd in ast.walk(tgt):
+                if isinstance(nd, ast.Name):
+                    names.add(nd.id)
+    elif isinstance(stmt, ast.AnnAssign) and isinstance(stmt.target, ast.Name):
+        names.add(stmt.target.id)
+    return names
+
+
+def split_multi_assert_test_blocks(
+    test_source: str,
+    failing_func_name: str,
+    *,
+    failing_class_name: str | None = None,
+    max_blocks: int = 32,
+) -> dict[str, Any]:
+    """Split a monolithic multi-assertion pytest function into independent atomic witness blocks.
+
+    When a failing test function packs 10+ independent input/assert groups into one `def test_*`,
+    standard pytest marks ALL 10 groups as 1 failing test (`ep=0`), contaminating localization
+    and blinding predicate synthesizers. Splitting into scratch sub-tests turns 1 failing blob
+    into `(N-1)` clean passing positive witnesses + `1` pinpoint failing witness — while final
+    verification ALWAYS runs against the unmodified original test file.
+    """
+    try:
+        tree = ast.parse(test_source)
+    except SyntaxError as exc:
+        return {"split": False, "error": str(exc), "blocks": 0, "model_calls": 0, "parameters_stored": 0}
+
+    parent_body: list[ast.stmt] | None = None
+    fn_idx: int = -1
+    target_fn: ast.FunctionDef | None = None
+
+    if failing_class_name:
+        for stmt in tree.body:
+            if isinstance(stmt, ast.ClassDef) and stmt.name == failing_class_name:
+                for idx, sub in enumerate(stmt.body):
+                    if isinstance(sub, ast.FunctionDef) and sub.name == failing_func_name:
+                        parent_body = stmt.body
+                        fn_idx = idx
+                        target_fn = sub
+                        break
+                if target_fn is not None:
+                    break
+    if target_fn is None:
+        for idx, stmt in enumerate(tree.body):
+            if isinstance(stmt, ast.FunctionDef) and stmt.name == failing_func_name:
+                parent_body = tree.body
+                fn_idx = idx
+                target_fn = stmt
+                break
+            if isinstance(stmt, ast.ClassDef):
+                for sidx, sub in enumerate(stmt.body):
+                    if isinstance(sub, ast.FunctionDef) and sub.name == failing_func_name:
+                        parent_body = stmt.body
+                        fn_idx = sidx
+                        target_fn = sub
+                        break
+                if target_fn is not None:
+                    break
+
+    if target_fn is None or parent_body is None:
+        return {"split": False, "reason": "func_not_found", "blocks": 0, "model_calls": 0, "parameters_stored": 0}
+
+    n_asserts = sum(1 for st in target_fn.body if isinstance(st, ast.Assert))
+    if n_asserts < 3:
+        return {"split": False, "reason": "fewer_than_3_asserts", "blocks": 0, "model_calls": 0, "parameters_stored": 0}
+
+    # Partition top-level statements in `target_fn.body` into independent assertion blocks.
+    raw_blocks: list[list[ast.stmt]] = []
+    cur: list[ast.stmt] = []
+    seen_assert = False
+    for st in target_fn.body:
+        if seen_assert and not isinstance(st, ast.Assert):
+            raw_blocks.append(cur)
+            cur = [st]
+            seen_assert = False
+        else:
+            cur.append(st)
+            if isinstance(st, ast.Assert):
+                seen_assert = True
+    if cur:
+        raw_blocks.append(cur)
+
+    # Handle flat list of standalone `assert ...` statements (after optional leading setup).
+    if len(raw_blocks) == 1:
+        lead_setup: list[ast.stmt] = []
+        assert_stmts: list[ast.stmt] = []
+        for st in raw_blocks[0]:
+            if isinstance(st, ast.Assert) or assert_stmts:
+                assert_stmts.append(st)
+            else:
+                lead_setup.append(st)
+        if len(assert_stmts) >= 3 and all(isinstance(s, ast.Assert) for s in assert_stmts):
+            raw_blocks = [[*lead_setup, s] for s in assert_stmts]
+
+    if len(raw_blocks) < 2:
+        return {"split": False, "reason": "single_block", "blocks": len(raw_blocks), "model_calls": 0, "parameters_stored": 0}
+
+    # Detect shared setup statements at the head of block 0 (assigned names NOT reassigned in later blocks).
+    later_reassigned: set[str] = set()
+    for blk in raw_blocks[1:]:
+        for st in blk:
+            if not isinstance(st, ast.Assert):
+                later_reassigned.update(_assigned_names(st))
+
+    shared_setup: list[ast.stmt] = []
+    blk0_rest: list[ast.stmt] = []
+    in_setup = True
+    for st in raw_blocks[0]:
+        if in_setup and not isinstance(st, ast.Assert):
+            anames = _assigned_names(st)
+            if anames and not (anames & later_reassigned):
+                shared_setup.append(st)
+                continue
+        in_setup = False
+        blk0_rest.append(st)
+    if blk0_rest:
+        raw_blocks[0] = blk0_rest
+
+    blocks_to_emit = raw_blocks[:max_blocks]
+    new_fns: list[ast.stmt] = []
+    block_names: list[str] = []
+    for b_idx, blk in enumerate(blocks_to_emit):
+        fn_copy = copy.deepcopy(target_fn)
+        fn_copy.name = f"{target_fn.name}__brain_blk_{b_idx}"
+        fn_copy.body = [copy.deepcopy(s) for s in shared_setup] + [copy.deepcopy(s) for s in blk]
+        new_fns.append(fn_copy)
+        block_names.append(fn_copy.name)
+
+    parent_body[fn_idx : fn_idx + 1] = new_fns
+    ast.fix_missing_locations(tree)
+    try:
+        split_src = ast.unparse(tree) + "\n"
+        ast.parse(split_src)
+    except Exception as exc:
+        return {"split": False, "error": str(exc), "blocks": 0, "model_calls": 0, "parameters_stored": 0}
+
+    return {
+        "split": True,
+        "blocks": len(new_fns),
+        "block_names": block_names,
+        "shared_setup_count": len(shared_setup),
+        "split_source": split_src,
+        "model_calls": 0,
+        "parameters_stored": 0,
+    }
+

@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "e199d70610e7e8e2aa5d960d292e5e42df28745f780277e9c79c30df14363a01"
+  "value": "5e39cb08da58b8378bcc2f1990ec35179093e2b4732c3ba3547d46a9d89d9a88"
  },
  "engines": [
   {
@@ -164733,7 +164733,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/CAUSAL_ANGELIC_AND_UNIFIED_CU_BENCHMARK_20261121_V1.json",
    "schema": "BRAIN_CAUSAL_ANGELIC_AND_UNIFIED_CU_BENCHMARK_V1",
-   "sha256": "008c0a950224e78c26f3ab2337e62f7fab3903540f5182052ed84843036de145",
+   "sha256": "321088c175746b7c36bbd83db099640fc33319fd2be22153ef4b599a206ef21a",
    "status": "",
    "terms": {
     "20261121": 1,
@@ -269554,11 +269554,12 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/backward_witness_synthesizer_v1.py",
-   "sha256": "0350cfe4094a21f850cef4150cffae8928f57f8c0c4d769217c3a9f713985681",
+   "sha256": "fb8b4097536e76313900110e0976b801e739c8547bbf2ba9b2f81d0f7d2f7181",
    "summary": "Backward Deductive Witness Propagation (\"Reverse Execution\" Synthesis) + Minimal Witness Shrinking.",
-   "symbol_count": 10,
+   "symbol_count": 12,
    "symbols": [
     "WitnessExample",
+    "_assigned_names",
     "_const_repr",
     "_deduce_string_replace",
     "_eq_val",
@@ -269567,9 +269568,11 @@
     "backward_propagate_expression",
     "ddmin_shrink",
     "extract_frame_alphabet",
+    "split_multi_assert_test_blocks",
     "synthesize_function_return_fix"
    ],
    "terms": {
+    "assigned_names": 1,
     "backward": 2,
     "backward_propagate_expression": 1,
     "const_repr": 1,
@@ -269585,6 +269588,7 @@
     "propagation": 1,
     "reverse": 1,
     "shrinking": 1,
+    "split_multi_assert_test_blocks": 1,
     "synthesis": 1,
     "synthesize_function_return_fix": 1,
     "synthesizer": 1,
@@ -278336,7 +278340,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/causal_angelic_swe_engine_v1.py",
-   "sha256": "a916ef08c8c1798fd61f26d203d94157415d6fb626adc6c34631b9c1af69361f",
+   "sha256": "ba17ad112f703572c817d0afa76f4f985ef80d22268157fbfaf40cd359ead7aa",
    "summary": "Unified Causal-Angelic Real-Repo SWE Repair Engine (Zero Model Calls, Zero Stored Weights).",
    "symbol_count": 45,
    "symbols": [
@@ -307076,7 +307080,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/oe_sygus_synthesizer_v1.py",
-   "sha256": "d66d35e3ae2a5cb12134db362ec436a02884c2bc0ece0a2703214c501869ea59",
+   "sha256": "31727e1dfefc207cd405c3970aa9084468d5f2876d9c1ae2be68618989254df0",
    "summary": "Unified Multi-Language Observational-Equivalence SyGuS + EUSolver Synthesizer v1.",
    "symbol_count": 11,
    "symbols": [

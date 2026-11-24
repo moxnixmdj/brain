@@ -4601,6 +4601,135 @@ def _synthesize_static_cone_and_truthiness_repairs(
                 except Exception:
                     pass
 
+    # 12b-guard. Def-Use-Locality-Ranked Early-Return Sentinel Guard Synthesis
+    # (`TIER3_OE_SYGUS_EARLY_RETURN_GUARD`):
+    # Exact sibling of `TIER3_OE_SYGUS_VALIDATION_RAISE`: when a localized function already
+    # uses `return None` (or `return False`) as its validation exit contract (2+ such exits)
+    # and the failing assertion expects that sentinel, synthesize a separating predicate `G`
+    # via OE-SyGuS ranked by **Def-Use Locality** (distance from the variable's most recent
+    # definition to the localized site — preferring freshly computed locals like `begin = ...`
+    # over stale outer loop accumulators like `last_end = 0`) and insert surgical
+    # `if G:\n    return None`.
+    _erg_cands_added = 0
+    _erg_seen: set[tuple[str, int, str]] = set()
+    _erg_out_blob = "\n".join(str(v) for v in (loc.exceptions or {}).values())
+    _erg_wants_none = ("is None" in _erg_out_blob) or ("== None" in _erg_out_blob) or ("assert None" in _erg_out_blob) or ("None ==" in _erg_out_blob)
+    if _erg_wants_none:
+        for s in loc.sites[:16]:
+            if _erg_cands_added >= 10:
+                break
+            _ef_envs = [e for e in (_frame_to_oe_env(f) for f in s.failing_frames) if e]
+            _ep_envs = [e for e in (_frame_to_oe_env(f) for f in s.passing_frames) if e]
+            if not _ef_envs or not _ep_envs:
+                continue
+            loaded_erg = load_file(s.file)
+            if loaded_erg is None:
+                continue
+            _src_erg, _tree_erg = loaded_erg
+            # Find enclosing function and check it has >= 2 `return None` validation guards
+            _enc_fn: ast.FunctionDef | ast.AsyncFunctionDef | None = None
+            for _fn in ast.walk(_tree_erg):
+                if isinstance(_fn, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                    _fln = getattr(_fn, "lineno", 0)
+                    _fend = getattr(_fn, "end_lineno", _fln)
+                    if _fln <= s.lineno <= _fend:
+                        if _enc_fn is None or (_fend - _fln) < (getattr(_enc_fn, "end_lineno", 0) - getattr(_enc_fn, "lineno", 0)):
+                            _enc_fn = _fn
+            if _enc_fn is None:
+                continue
+            _none_rets = sum(
+                1
+                for _nd in ast.walk(_enc_fn)
+                if isinstance(_nd, ast.Return)
+                and (_nd.value is None or (isinstance(_nd.value, ast.Constant) and _nd.value.value is None))
+            )
+            if _none_rets < 2:
+                continue
+            # Build def-use locality table: most recent assignment line < s.lineno for each local var
+            _last_def: dict[str, int] = {}
+            for _nd in ast.walk(_enc_fn):
+                _nln = getattr(_nd, "lineno", 0)
+                if _nln <= 0 or _nln >= s.lineno:
+                    continue
+                if isinstance(_nd, ast.Assign):
+                    for _tgt in _nd.targets:
+                        for _tn in ast.walk(_tgt):
+                            if isinstance(_tn, ast.Name):
+                                _last_def[_tn.id] = max(_last_def.get(_tn.id, 0), _nln)
+                elif isinstance(_nd, ast.AnnAssign) and isinstance(_nd.target, ast.Name):
+                    _last_def[_nd.target.id] = max(_last_def.get(_nd.target.id, 0), _nln)
+            try:
+                _erg_preds = OESYGUS.synthesize_separating_predicates(
+                    _ef_envs,
+                    _ep_envs,
+                    lang="python",
+                    max_results=20,
+                )
+            except Exception:
+                _erg_preds = []
+            if not _erg_preds:
+                continue
+            # Rank predicates strictly by Def-Use Locality (smallest distance from last def to s.lineno)
+            _scored_erg: list[tuple[int, int, str]] = []
+            for _idx_p, _pr in enumerate(_erg_preds):
+                _gcode = str(
+                    (_pr.get("code") if isinstance(_pr, Mapping) else getattr(_pr, "code", "")) or ""
+                ).strip()
+                if not _gcode:
+                    continue
+                try:
+                    _g_ast = ast.parse(_gcode, mode="eval")
+                except Exception:
+                    continue
+                _g_vars = [
+                    nd.id
+                    for nd in ast.walk(_g_ast)
+                    if isinstance(nd, ast.Name) and nd.id not in ("len", "any", "all", "abs", "int", "str", "True", "False", "None")
+                ]
+                if not _g_vars:
+                    continue
+                if any(v not in _last_def for v in _g_vars):
+                    continue
+                _dists = [s.lineno - _last_def[v] for v in _g_vars]
+                _max_dist = max(_dists) if _dists else 999
+                # Anti-overfitting Def-Use Locality law: every variable in a single-failing-frame
+                # guard must be freshly defined within <= 6 lines above the site (rejects stale outer accumulators).
+                if len(_ef_envs) < 2 and _max_dist > 6:
+                    continue
+                _scored_erg.append((_max_dist, len(_g_vars), _idx_p, _gcode))
+            _scored_erg.sort(key=lambda t: (t[0], t[1], t[2]))
+            _src_lines_erg = _src_erg.splitlines(keepends=True)
+            if not (1 <= s.lineno <= len(_src_lines_erg)):
+                continue
+            _cur_ln_txt = _src_lines_erg[s.lineno - 1]
+            _cur_strip = _cur_ln_txt.lstrip()
+            if not _cur_strip or _cur_strip.startswith(("#", "elif ", "else:", "except", "finally:")):
+                continue
+            _cur_indent = _cur_ln_txt[: len(_cur_ln_txt) - len(_cur_strip)]
+            for _dist_v, _, _, _gcode in _scored_erg[:3]:
+                _ekey = (s.file, s.lineno, _gcode)
+                if _ekey in _erg_seen:
+                    continue
+                _erg_seen.add(_ekey)
+                _guard_block = f"{_cur_indent}if {_gcode}:\n{_cur_indent}    return None\n"
+                _nc_erg = (
+                    "".join(_src_lines_erg[: s.lineno - 1])
+                    + _guard_block
+                    + "".join(_src_lines_erg[s.lineno - 1 :])
+                )
+                try:
+                    ast.parse(_nc_erg)
+                except SyntaxError:
+                    continue
+                add_cand(
+                    s.file,
+                    s.lineno,
+                    "TIER3_OE_SYGUS_EARLY_RETURN_GUARD",
+                    f"oe_sygus_early_return_none(L{s.lineno}:dist={_dist_v}:if {_gcode}: return None)",
+                    _nc_erg,
+                )
+                _erg_cands_added += 1
+
     # 12c. Python Builtin Exception-Hierarchy Widening + Subprocess-Resilient Sibling Repair
     # (`TIER3_EXCEPTION_HIERARCHY_WIDEN`):
     # When a failing test/subprocess output exercises a wider Python builtin exception class
@@ -10235,6 +10364,7 @@ def synthesize_candidates(
         "TIER3_STRICT_ASCII_DIGIT_INT_GUARD",
         "TIER3_OE_SYGUS_VALIDATION_RAISE",
         "TIER3_OE_SYGUS_LOOP_BRANCH_REFINE",
+        "TIER3_OE_SYGUS_EARLY_RETURN_GUARD",
         "TIER3_SIBLING_GUARD_CONJUNCT",
         "TIER3_MAP_REPEAT_COMMUTE",
         "TIER3_STATIC_REGEX_FULLMATCH",
@@ -11963,6 +12093,79 @@ def solve_repository(
         winner: dict[str, Any] | None = None
         witnesses: list[AngelicWitness] = []
         probes_run = 0
+
+        # Stage 1a-pillar4: Assertion-Block Witness Splitting for Multi-Assertion Failing Tests
+        # Runs ONLY on a temporary sibling test file for sharper frame separation; deletes it
+        # immediately and ALWAYS verifies every candidate patch against the unmodified repo tests.
+        if 1 <= len(loc.failing_tests) <= 2:
+            try:
+                from canonical.runtime import backward_witness_synthesizer_v1 as _BWS_SPLIT
+
+                _nid0 = str(loc.failing_tests[0]).split("[", 1)[0]
+                _parts = _nid0.split("::")
+                if len(_parts) >= 2:
+                    _trel = _parts[0]
+                    _tcls = _parts[1] if len(_parts) >= 3 else None
+                    _tfn = _parts[-1]
+                    _tpath = wt / _trel
+                    if _tpath.is_file():
+                        _sp = _BWS_SPLIT.split_multi_assert_test_blocks(
+                            _tpath.read_text(encoding="utf-8", errors="ignore"),
+                            _tfn,
+                            failing_class_name=_tcls,
+                        )
+                        if _sp.get("split") and _sp.get("split_source") and _sp.get("block_names"):
+                            _scratch_p = _tpath.parent / "_brain_split_loc_tmp.py"
+                            _scratch_rel = str(_scratch_p.relative_to(wt))
+                            _cls_pfx = f"{_tcls}::" if _tcls else ""
+                            _sub_targets = [
+                                f"{_scratch_rel}::{_cls_pfx}{bn}" for bn in _sp["block_names"]
+                            ]
+                            try:
+                                _scratch_p.write_text(_sp["split_source"], encoding="utf-8")
+                                _sloc = localize_faults(
+                                    wt,
+                                    _sub_targets,
+                                    python_exe=python_exe,
+                                    timeout_s=min(timeout_s, 20.0),
+                                )
+                            finally:
+                                if _scratch_p.exists():
+                                    _scratch_p.unlink()
+                            if _sloc.failing_tests and len(_sloc.passing_tests) >= 2 and _sloc.sites:
+                                # Merge sharpened split sites + clean separated frames into loc
+                                _orig_by_key = {(st.file, st.lineno): st for st in loc.sites}
+                                _merged_sites = []
+                                _seen_sk: set[tuple[str, int]] = set()
+                                for _sst in _sloc.sites:
+                                    _k = (_sst.file, _sst.lineno)
+                                    _seen_sk.add(_k)
+                                    _ost = _orig_by_key.get(_k)
+                                    if _ost is not None:
+                                        _merged_sites.append(
+                                            LocalizedSite(
+                                                file=_sst.file,
+                                                lineno=_sst.lineno,
+                                                weight=max(_sst.weight, _ost.weight),
+                                                ochiai=max(_sst.ochiai, _ost.ochiai),
+                                                tb_boost=max(_sst.tb_boost, _ost.tb_boost),
+                                                ef=_sst.ef,
+                                                ep=_sst.ep,
+                                                nf=_sst.nf,
+                                                failing_frames=_sst.failing_frames or _ost.failing_frames,
+                                                passing_frames=list(_sst.passing_frames) + list(_ost.passing_frames),
+                                                exception_types=list(_ost.exception_types or _sst.exception_types),
+                                            )
+                                        )
+                                    else:
+                                        _merged_sites.append(_sst)
+                                for _ost in loc.sites:
+                                    if (_ost.file, _ost.lineno) not in _seen_sk:
+                                        _merged_sites.append(_ost)
+                                _merged_sites.sort(key=lambda x: (-x.ochiai, -x.ef, x.ep, x.file, x.lineno))
+                                loc.sites = _merged_sites
+            except Exception:
+                pass
 
         # Stage 1b: ZERO-PROBE Tier-0 Plotkin AST Rewrite Law Fast-Path
         tier0_ast_cands = _recall_tier0_ast_rewrite_laws(wt, loc, skill_store)

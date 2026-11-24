@@ -344,7 +344,15 @@ def emit_expr(expr: Expr, lang: str = "python") -> str:
     lg = lang.lower()
 
     if op == "var":
-        return str(a[0])
+        vname = str(a[0])
+        if vname.startswith("__len__:"):
+            inner = vname[8:]
+            if lg == "python":
+                return f"len({inner})"
+            if lg == "js":
+                return f"{inner}.length"
+            return f"strlen({inner})"
+        return vname
     if op == "const":
         v = a[0]
         if v is None:
@@ -657,10 +665,13 @@ def synthesize_separating_predicates(
     # (prevents 1 huge non-scalarized passing input from wiping out the primary parameter!)
     _min_p_cov = max(1, int(0.8 * len(p_envs)))
     shared_vars = sorted(
-        k for k in set(f_envs[0].keys())
-        if all(k in e for e in f_envs)
-        and sum(1 for e in p_envs if k in e) >= _min_p_cov
-        and not any(b in k.lower() for b in ("pytest_", "_pytest", "conftest", "unittest", "plugin_name"))
+        (
+            k for k in set(f_envs[0].keys())
+            if all(k in e for e in f_envs)
+            and sum(1 for e in p_envs if k in e) >= _min_p_cov
+            and not any(b in k.lower() for b in ("pytest_", "_pytest", "conftest", "unittest", "plugin_name"))
+        ),
+        key=lambda k: (1 if k.startswith("__len__:") else 0, k),
     )
     if not shared_vars:
         return []
@@ -673,7 +684,11 @@ def synthesize_separating_predicates(
     target_bits = tuple([True] * n_f + [False] * n_p)
 
     # Build OE-pruned atomic boolean predicate pool: bit_tuple -> (rank_tuple, Expr)
+    # Also preserve ALL distinct exact single-predicate separators (`bt == target_bits`)
+    # so downstream Def-Use Locality can pick the freshest variable instead of collapsing to 1!
     pred_pool: dict[tuple[bool, ...], tuple[tuple[int, int, str], Expr]] = {}
+    exact_single_hits: list[tuple[tuple[int, int, str], Expr]] = []
+    exact_single_codes: set[str] = set()
 
     def _add_pred(ex: Expr) -> None:
         bits: list[bool] = []
@@ -688,6 +703,9 @@ def synthesize_separating_predicates(
             return
         code = emit_expr(ex, lang)
         rank = (ex.generality_penalty, ex.size, code)
+        if bt == target_bits and code not in exact_single_codes:
+            exact_single_codes.add(code)
+            exact_single_hits.append((rank, ex))
         if bt not in pred_pool or rank < pred_pool[bt][0]:
             pred_pool[bt] = (rank, ex)
 
@@ -825,10 +843,11 @@ def synthesize_separating_predicates(
             seen_codes.add(code)
             solutions.append(((ex.generality_penalty, ex.size, code), ex))
 
-    # 1. Exact single-predicate separators
+    # 1. Exact single-predicate separators (keep ALL distinct minimal exact separators!)
     if target_bits in pred_pool:
         _record_sol(pred_pool[target_bits][1])
-    # Also collect all distinct single-predicate separators (not just 1!)
+    for _rk_e, _ex_e in sorted(exact_single_hits, key=lambda t: t[0])[: max(16, max_results * 3)]:
+        _record_sol(_ex_e)
     # Check 2-predicate OR / AND combinations (OE-pruned!)
     items = sorted(pred_pool.items(), key=lambda kv: kv[1][0])[:48]
 
