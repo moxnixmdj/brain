@@ -1,0 +1,94 @@
+{
+ "actions": [
+  "checkout main",
+  "checkout feature",
+  "checkout -- .",
+  "stash",
+  "stash pop",
+  "stash drop",
+  "clean -fdq",
+  "add -A",
+  "commit -qm wip",
+  "reset --hard",
+  "merge --abort",
+  "checkout -f main",
+  "status"
+ ],
+ "authority": "NONE__SANDBOX_MEASUREMENT",
+ "model_calls": 0,
+ "runs": [
+  {
+   "A_goal_states": 2,
+   "A_states": 21,
+   "A_transitions": 164,
+   "B_new_actions_before_plan": 0,
+   "B_root_in_A_model": true,
+   "budget_on_A": 300,
+   "goal_reached_on_B": true,
+   "mode": "projected",
+   "plan_on_B": [
+    "clean -fdq",
+    "checkout -f main"
+   ],
+   "seconds": 14.96,
+   "seed": 0
+  },
+  {
+   "A_goal_states": 2,
+   "A_states": 20,
+   "A_transitions": 175,
+   "B_new_actions_before_plan": 0,
+   "B_root_in_A_model": true,
+   "budget_on_A": 300,
+   "goal_reached_on_B": true,
+   "mode": "projected",
+   "plan_on_B": [
+    "add -A",
+    "checkout -f main"
+   ],
+   "seconds": 15.38,
+   "seed": 1
+  },
+  {
+   "A_goal_states": 2,
+   "A_states": 21,
+   "A_transitions": 164,
+   "B_new_actions_before_plan": 0,
+   "B_root_in_A_model": false,
+   "budget_on_A": 300,
+   "goal_reached_on_B": null,
+   "mode": "raw",
+   "plan_on_B": null,
+   "seconds": 15.03,
+   "seed": 0
+  },
+  {
+   "A_goal_states": 2,
+   "A_states": 20,
+   "A_transitions": 175,
+   "B_new_actions_before_plan": 0,
+   "B_root_in_A_model": false,
+   "budget_on_A": 300,
+   "goal_reached_on_B": null,
+   "mode": "raw",
+   "plan_on_B": null,
+   "seconds": 15.55,
+   "seed": 1
+  }
+ ],
+ "schema": "PROJECT_BRAIN_ENVIRONMENT_TRANSFER_GIT_PROBE_V1",
+ "state_key_schema": "PROJECT_BRAIN_ENVIRONMENT_STATE_KEY_V2",
+ "stored_parameters": 0,
+ "summary": {
+  "projected": {
+   "B_root_in_A_model": 2,
+   "runs": 2,
+   "zero_experience_goal_reached_on_B": 2
+  },
+  "raw": {
+   "B_root_in_A_model": 0,
+   "runs": 2,
+   "zero_experience_goal_reached_on_B": 0
+  }
+ }
+}
