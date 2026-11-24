@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "22eb538443a96d4026498fb0af27272ad99411ee08a8acb3afe4f0c9cf6896ae"
+  "value": "630304ba4560b4444a472f801049462c75c2f17f05f46d3ed80e08ba42e2b249"
  },
  "engines": [
   {
@@ -45827,7 +45827,7 @@
    ],
    "kind": "DOCUMENT",
    "path": "A_CHECK_THAT_NOBODY_RUNS_IS_A_CHECK_THAT_CANNOT_BE_WRONG_20261203_V1.md",
-   "sha256": "257abbb8a668f5252ef66228d08f5f0dd80afb6ae7a493af7df2576ee1c54dec",
+   "sha256": "2afe5299e240ff736825f2647a7ac689908577de8ceb97ca86441f4f36d96553",
    "summary": "**Round:** `A_CHECK_THAT_NOBODY_RUNS_IS_A_CHECK_THAT_CANNOT_BE_WRONG_20261203_V1` **Receipt:** `canonical/verification/A_CHECK_THAT_NOBODY_RUNS_IS_A_CHECK_THAT_CANNOT_BE_WRONG_20261203_V1.json` **Instrument:** `canonical/tools/a_check_that_nobody_runs_is_a_check_that_cannot_be_wrong_v1.py` **Date:** 2026-12-03 · **Model calls:** 0 · **Stored parameters:** 0 · **Network at run time:** 0",
    "terms": {
     "13": 5,
@@ -91990,7 +91990,7 @@
   "included_source_count": 1405,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "176784ba2e007f484c060877db61844a67e71c8ca3ee28b4809ceab70a3fba24"
+  "source_tree_digest": "e5be277c613970a41d6b42e8b23fc0a0de9dae0297dbf23ef3962c19d6bf72fc"
  },
  "research_index": [
   {
@@ -242198,7 +242198,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/A_CHECK_THAT_NOBODY_RUNS_IS_A_CHECK_THAT_CANNOT_BE_WRONG_20261203_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
-   "sha256": "ca601c03b4d04624e4a2d69cd94ad644231a15360c21fe54c37860e2bb855f96",
+   "sha256": "496a5bf3961d2df4f3f6cdb2f0d76dab94ed69327d1bc95089d030d5d4abd33a",
    "status": "SHIPPED",
    "terms": {
     "11": 1,
