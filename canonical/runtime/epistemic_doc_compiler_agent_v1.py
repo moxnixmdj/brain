@@ -1058,6 +1058,11 @@ def scan_environment_boundary(
                     local_docs.append(rel)
                 if os.access(entry, os.X_OK) and entry.suffix.lower() not in (".json", ".txt", ".md", ".csv", ".gz", ".tar", ".zip"):
                     local_bins.append(str(entry))
+            elif entry.is_dir() and entry.name in ("bin", "scripts"):
+                for sub in sorted(entry.iterdir()):
+                    if sub.is_file() and not sub.name.startswith(".") and os.access(sub, os.X_OK):
+                        if sub.suffix.lower() not in (".json", ".txt", ".md", ".csv", ".gz", ".tar", ".zip"):
+                            local_bins.append(str(sub))
 
     # Extract concrete file references & key=value bindings from goal
     goal_files: list[str] = []
@@ -1106,7 +1111,15 @@ def scan_environment_boundary(
             discovered_bins.append(resolved)
     # Check tokens in goal that match a real executable on PATH
     for tok in re.findall(r"\b([a-z][a-z0-9_-]{1,20})\b", (goal or "").lower()):
-        if tok in _STOPWORDS or tok in ("test", "true", "false", "file", "json", "text", "read", "write", "make", "link", "join", "head", "tail", "line", "name", "type", "user", "pass", "time", "date", "size", "list", "info", "help", "copy", "move", "open", "send", "post", "call", "dir", "top", "split", "cut", "last", "find", "env", "id", "tr", "nl", "wc", "fmt", "sum", "od", "pr", "yes", "seq", "tee", "who"):
+        if tok in _STOPWORDS or tok in (
+            "test", "true", "false", "file", "json", "text", "read", "write", "make", "link",
+            "join", "head", "tail", "line", "name", "type", "user", "pass", "time", "date",
+            "size", "list", "info", "help", "copy", "move", "open", "send", "post", "call",
+            "dir", "top", "split", "cut", "last", "find", "env", "id", "tr", "nl", "wc", "fmt",
+            "sum", "od", "pr", "yes", "seq", "tee", "who",
+            "convert", "transform", "format", "import", "display", "compare", "identify",
+            "animate", "stream", "fold", "paste", "expand", "rev",
+        ):
             continue
         found = shutil.which(tok)
         if found and found not in discovered_bins:
@@ -1136,6 +1149,43 @@ def scan_environment_boundary(
         "goal_tokens": _tokenize(goal),
         "goal_concepts": sorted(_concept_set(goal)),
         "scan_ms": round((time.monotonic() - t0) * 1000.0, 2),
+    }
+
+
+def compute_memory_epistemic_diff(
+    boundary: Mapping[str, Any],
+    memory: Any | None,
+) -> dict[str, Any]:
+    """Partition scanned environment affordances + goal concepts into KNOWN (recalled
+    abstract laws from `EpistemicMemoryStore`) vs. UNKNOWN epistemic gaps requiring live
+    `--help`/docs/web acquisition (preserving zero concrete leakage in memory).
+    """
+    goal_concepts = set(boundary.get("goal_concepts") or ())
+    recalled_cli: list[dict[str, Any]] = []
+    recalled_http: list[dict[str, Any]] = []
+    if memory is not None and hasattr(memory, "recall"):
+        recalled_cli = list(memory.recall("cli_role_law", goal_concepts))
+        recalled_http = list(memory.recall("http_endpoint_law", goal_concepts))
+
+    matched_laws = recalled_cli + recalled_http
+    known_concepts: set[str] = set()
+    matching_law_ids: list[str] = []
+    for law in matched_laws:
+        lid = str(law.get("law_id") or "")
+        if lid:
+            matching_law_ids.append(lid)
+        known_concepts.update(str(c) for c in (law.get("goal_concepts") or ()))
+
+    covered_concepts = sorted(goal_concepts & known_concepts)
+    unknown_concepts = sorted(goal_concepts - known_concepts)
+    scanned_bins = [str(b) for b in (boundary.get("binaries") or ())]
+    return {
+        "discovered_tools": scanned_bins,
+        "matching_law_ids": matching_law_ids,
+        "known_goal_concepts": covered_concepts,
+        "unknown_goal_concepts": unknown_concepts,
+        "has_recalled_law": bool(matching_law_ids),
+        "epistemic_gap_count": len(unknown_concepts) + (0 if matching_law_ids else max(1, len(scanned_bins))),
     }
 
 
@@ -1319,6 +1369,11 @@ def _synthesize_cli_invocations(
             continue
         s_in = _score_option_for_role(o, in_query)
         s_out = _score_option_for_role(o, out_query)
+        if o.long.lower() in ("--in", "--input", "--infile", "--src", "--source") or o.short == "-i":
+            if "input" in o.description.lower() or "file" in o.description.lower() or "in" in o.long.lower():
+                s_in += 3.0
+        if o.long.lower() in ("--out", "--output", "--outfile", "--dst", "--dest"):
+            s_out += 3.0
         if s_in >= 3.0 and s_in > s_out:
             if in_flag is None or s_in > _score_option_for_role(in_flag, in_query):
                 in_flag = o

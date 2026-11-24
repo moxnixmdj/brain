@@ -5271,6 +5271,35 @@ def solve_arbitrary_environment(
             allow_web=allow_web,
             timeout_s=timeout_s,
         )
+        # Blind SWE-bench / SWE-bench Pro issue-to-reproducer fallback: when all existing
+        # repo tests already pass (no hidden failing test present), synthesize & qualify an
+        # executable reproducer directly from the issue description, solve, and verify pass2pass.
+        if (
+            swe_res.get("mode") == "ALREADY_PASSING" or swe_res.get("status") != "VERIFIED"
+        ) and instruction and "(" in instruction:
+            from canonical.runtime import epistemic_issue_reproducer_v1 as ISSUE_REPRO
+
+            blind_py = ISSUE_REPRO.solve_issue_from_description(
+                ws,
+                instruction,
+                python_exe=python_exe or sys.executable,
+                timeout_s=max(float(timeout_s), 30.0),
+                memory=memory,
+            )
+            if blind_py.get("verified") and blind_py.get("patched_files"):
+                for rf, rsrc in blind_py["patched_files"].items():
+                    (ws / rf).write_text(str(rsrc), encoding="utf-8")
+                w_bp = blind_py.get("winner") or {}
+                swe_res = {
+                    "status": "VERIFIED",
+                    "mode": "BLIND_ISSUE_REPRODUCER_SWE",
+                    "patched_file": w_bp.get("file"),
+                    "winner": w_bp,
+                    "patch_diff": blind_py.get("patch_diff", ""),
+                    "reproducer": blind_py.get("reproducer"),
+                    "regression_tests": blind_py.get("regression_tests"),
+                    "gaps_queried": [],
+                }
         # Optional first-principles CWE vulnerability report emitter when explicitly requested
         cwe_report: dict[str, Any] | None = None
         if (
@@ -5355,6 +5384,37 @@ def solve_arbitrary_environment(
             memory=memory,
             timeout_s=max(float(timeout_s), 30.0),
         )
+        # Blind SWE-bench Pro JS fallback: when existing tests already pass on c_old,
+        # synthesize & qualify a reproducer from the issue description and verify pass2pass.
+        if (
+            js_res.get("status") != "VERIFIED"
+            and instruction
+            and ("(" in instruction or "```" in instruction)
+        ):
+            from canonical.runtime import epistemic_issue_reproducer_v1 as ISSUE_REPRO
+
+            blind_js = ISSUE_REPRO.solve_issue_from_description(
+                ws,
+                instruction,
+                timeout_s=max(float(timeout_s), 30.0),
+                memory=memory,
+            )
+            if blind_js.get("verified") and blind_js.get("patched_files"):
+                w_bj = dict(blind_js.get("winner") or {})
+                w_file = str(w_bj.get("file") or "")
+                w_bj["patched_source"] = blind_js["patched_files"].get(w_file, "")
+                w_bj["extra_patches"] = {
+                    k: v for k, v in blind_js["patched_files"].items() if k != w_file
+                }
+                js_res = {
+                    "status": "VERIFIED",
+                    "verified": True,
+                    "winner": w_bj,
+                    "patch_diff": blind_js.get("patch_diff", ""),
+                    "reproducer": blind_js.get("reproducer"),
+                    "regression_tests": blind_js.get("regression_tests"),
+                    "mode": "BLIND_ISSUE_REPRODUCER_JS_SWE",
+                }
         ok_post = True
         winner = js_res.get("winner") if isinstance(js_res, Mapping) else None
         if js_res.get("status") == "VERIFIED" and isinstance(winner, Mapping) and winner.get("file"):

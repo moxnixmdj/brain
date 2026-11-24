@@ -2643,7 +2643,17 @@ def synthesize_js_candidates(
         for _li_y, _ln_y in enumerate(_out_lines_0y):
             if _ln_y.startswith(("not ok ", "  ---", "FAIL ", "✖")) or "AssertionError" in _ln_y or "not equal" in _ln_y.lower():
                 _not_ok_0y.extend(_out_lines_0y[max(0, _li_y - 2) : min(len(_out_lines_0y), _li_y + 8)])
-        _fail_blob_0y = (_raw_out_0y[:2000] + " " + " ".join(_not_ok_0y[:80]) + " " + _raw_out_0y[-3000:]).lower()
+        _test_src_0y = ""
+        for _tc_tok in (getattr(loc, "test_cmd", None) or ()):
+            _tc_s = str(_tc_tok)
+            if _tc_s.endswith((".js", ".mjs", ".cjs", ".ts")):
+                _tfp = worktree / _tc_s
+                if _tfp.is_file():
+                    try:
+                        _test_src_0y += " " + _tfp.read_text(encoding="utf-8", errors="replace")[:4000]
+                    except OSError:
+                        pass
+        _fail_blob_0y = (_raw_out_0y[:2000] + " " + " ".join(_not_ok_0y[:80]) + " " + _raw_out_0y[-3000:] + " " + _test_src_0y).lower()
         _fail_toks_0y = {
             w for w in re.findall(r"[a-z]{3,}", _fail_blob_0y)
             if w not in {

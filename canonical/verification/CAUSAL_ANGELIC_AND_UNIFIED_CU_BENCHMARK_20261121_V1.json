@@ -4870,5 +4870,64 @@
     ],
     "model_calls": 0,
     "parameters_stored": 0
+  },
+  "iter65_blind_issue_reproducer_and_memory_epistemic_diff": {
+    "description": "Iter 65: Built `canonical/runtime/epistemic_issue_reproducer_v1.py` (stdlib-only, zero-LLM, zero-weight) solving the core real-world SWE-bench / SWE-bench Pro bottleneck where an agent receives ONLY a pre-fix repo `c_old` (where existing tests all pass) and an issue description `d_issue` with ZERO hidden golden tests. Scans Python ASTs & JS exports + proven test imports, compiles fenced/doctest/prose-only reproducers, qualifies them live under the strict F->P Epistemic Gate, feeds pass2pass regression tests into the solver to prevent overfitting, and emits a clean unified diff (`patch_diff`). Verified 4/4 completely blind real 2026 OSS issues against their hidden upstream gold test suites (4,380/4,380 hidden gold assertions passing in 13.25s total). Wired directly into ONE Front Door (`universal_epistemic_kernel_v1.py`) for both Python and JS/TS repos, and upgraded `epistemic_doc_compiler_agent_v1.py` with `./bin/*` + `./scripts/*` local executable discovery and explicit `compute_memory_epistemic_diff` (known vs. unknown gap partitioning).",
+    "cumulative_unique_verified_oss_commits": 210,
+    "blind_hidden_gold_issue_evaluations": [
+      {
+        "repo": "pypa/packaging",
+        "commit": "8c37b04",
+        "language": "python",
+        "issue_format": "prose_only_no_code_block",
+        "hidden_test_given_to_solver": false,
+        "tier": "TIER3_NON_ASCII_VALIDATION_GUARD",
+        "elapsed_s": 9.131,
+        "hidden_gold_test_result": "pytest tests/test_licenses.py: 21 passed in 0.04s (rc=0)",
+        "model_calls": 0,
+        "parameters_stored": 0
+      },
+      {
+        "repo": "ljharb/qs",
+        "commit": "05a8755",
+        "language": "javascript",
+        "issue_format": "prose_only_no_code_block",
+        "hidden_test_given_to_solver": false,
+        "tier": "JS_REGEX_CASE_INSENSITIVE_FLAG",
+        "elapsed_s": 1.523,
+        "hidden_gold_test_result": "node test/{parse,stringify,utils}.js: 1661/1661 pass (rc=0)",
+        "model_calls": 0,
+        "parameters_stored": 0
+      },
+      {
+        "repo": "ljharb/qs",
+        "commit": "ad445aa",
+        "language": "javascript",
+        "issue_format": "fenced_js_reproducer",
+        "hidden_test_given_to_solver": false,
+        "tier": "JS_EARLY_RETURN_SIBLING_WRAPPER_CONSISTENCY",
+        "elapsed_s": 1.298,
+        "hidden_gold_test_result": "node test/{parse,stringify,utils}.js: 1028/1028 pass (rc=0)",
+        "model_calls": 0,
+        "parameters_stored": 0
+      },
+      {
+        "repo": "ljharb/qs",
+        "commit": "a2667af",
+        "language": "javascript",
+        "issue_format": "fenced_js_cwe1321_security_issue",
+        "hidden_test_given_to_solver": false,
+        "tier": "JS_PROTO_SAFE_DEFINE_PROPERTY",
+        "elapsed_s": 1.301,
+        "hidden_gold_test_result": "node test/{parse,stringify,utils}.js: 1670/1670 pass (rc=0)",
+        "model_calls": 0,
+        "parameters_stored": 0
+      }
+    ],
+    "tests_added": [
+      "canonical/tests/test_epistemic_issue_reproducer_v1.py"
+    ],
+    "model_calls": 0,
+    "parameters_stored": 0
   }
 }
