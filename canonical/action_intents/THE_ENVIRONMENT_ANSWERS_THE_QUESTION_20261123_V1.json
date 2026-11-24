@@ -2,17 +2,20 @@
  "action_id": "THE_ENVIRONMENT_ANSWERS_THE_QUESTION_20261123_V1",
  "action_intent_id": "THE_ENVIRONMENT_ANSWERS_THE_QUESTION_20261123_V1",
  "action_kind": "REAL_CAPABILITY_ACQUISITION",
- "action_summary": "Seven measured §5 iterations on the own-weights, zero-model, external-store boundary. Iteration 7 changes the goal/relation grammar from holder-shape to copy-cardinality, carries a hashed declarative descriptor rather than executable predicates, and verifies it in a fresh stdlib-only process: 798 fit runs, 4 exact statements, 2 real judgments, 399/399 and 584/584 held-out predictions, 39/39 pointerless refusals and 12 hard CLI refusals. All 44 unique primary-source pages were read through their declared final chunks (166 distinct chunk reads / 172 invocations). 29 new tests pass; no independent verification, capability credit or §6 completion is claimed.",
+ "action_summary": "Eight measured §5 iterations on the own-weights, zero-model, external-store boundary. Iteration 7 changes the goal/relation grammar from holder-shape to copy-cardinality and verifies a hashed declarative descriptor in a fresh stdlib-only process. Iteration 8 reuses the project's OIDC public-runner mechanism: a distinct GitHub Actions verifier re-ran the exact six pinned blobs under workflow run 45293031532, checked 28 measurements and five adversarial controls, and committed a runner-owned zero-credit receipt. The 52-page primary-source ledger (182 distinct chunk reads / 188 invocations), 29 new tests and 200 selected regressions remain producer-side evidence. No §6 benchmark, capability credit or terminal completion is claimed.",
  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
  "agent_orientation": {
   "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
   "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
   "conversation_memory_is_authority": false,
   "date_checked": "2026-11-23",
-  "earlier_routes_exhausted_reason": "The loop reuses the existing version-space fit, run grammar, quotient projections, separating-run search, completeness gate, external store and stdlib-only fresh-process execution; it composes them into seven measurement instruments, one generic interpreter and a hashed declarative grammar descriptor. A new learner, model, world model, hand-built predicate, hardcoded term family, stored expected verdict, full canonical-trace table or admission primitive would duplicate a mechanism already in the tree or hide a measured failure.",
+  "earlier_routes_exhausted_reason": "The loop reuses the existing version-space fit, run grammar, quotient projections, separating-run search, completeness gate, external store and stdlib-only fresh-process execution; it composes them into seven measurement instruments, one generic interpreter, a hashed declarative grammar descriptor and one OIDC-attested runner replay of the project's existing capability-receipt mechanism. A new learner, model, world model, hand-built predicate, hardcoded term family, stored expected verdict, full canonical-trace table, scan-everything store or locally fabricated independent receipt would duplicate a mechanism already in the tree or hide a measured failure.",
   "incremental_spend_usd": 0,
+  "independent_finite_transport_replay_completed": true,
+  "independent_hard_benchmark_verification_completed": false,
   "independent_verification_completed": false,
-  "independent_verification_note": "Producer-run sandbox only: seven measurement instruments, one generic interpreter, twenty-nine new tests, eight receipts (five all-met, two failed, one superseded), four external relation stores, one raw executor log, a primary-source ledger covering 44 unique pages / 166 distinct chunk reads / 172 invocations and the consolidated report. No independent identity re-ran any of it.",
+  "independent_verification_completed_scope": "SECTION_6_OR_TERMINAL_CAPABILITY_VERIFICATION_ONLY__FINITE_TRANSPORT_REPLAY_IS_A_NARROW_TRUE_EXCEPTION",
+  "independent_verification_note": "Terminal/§6 independent verification remains absent: no independent identity ran OSWorld 2.1, SWE-bench Pro V2 / HARD-51 or Terminal-Bench 4.1. The narrow exception is GitHub Actions OIDC run 45293031532, which re-ran six exact pinned iteration-7 transport blobs, checked 28 measurements and five controls, and committed its own zero-credit receipt. Eight measured rounds, one generic interpreter, twenty-nine new tests, eight producer receipts plus one runner receipt, four external relation stores, one raw executor log, a 52-page primary-source ledger (182 distinct chunk reads / 188 invocations) and the consolidated report are recorded.",
   "laws_read_this_session": [
    "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
    "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
@@ -54,22 +57,25 @@
    "canonical/astra_runtime/state/COMPUTED_CONTENT_POINTER_RELATION_V1.json",
    "canonical/astra_runtime/state/COMPUTED_COPY_GRAMMAR_RELATION_V1.json",
    "PRIMARY_SOURCE_RESEARCH_20261123_V1.md",
-   "THE_ENVIRONMENT_ANSWERS_THE_QUESTION_20261123_V1.md"
+   "THE_ENVIRONMENT_ANSWERS_THE_QUESTION_20261123_V1.md",
+   ".github/workflows/independent-grammar-transport-replay-v1.yml",
+   "canonical/verification/GRAMMAR_TRANSPORT_INDEPENDENT_VERIFICATION_20261123_V1.json",
+   "canonical/verification/GRAMMAR_TRANSPORT_INDEPENDENT_VERIFICATION_20261123_V1.sha256"
   ],
   "route_class": "COMPOSE",
   "scope_complete_discharge": false,
   "terminal_achieved": false
  },
  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
- "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Grammar transport is now measured with a hashed declarative descriptor and a fresh isolated process, but no independent zero-model identity re-ran it; the grammar is finite and typed, arbitrary purpose/authored repair remains unsolved, and §6 hard-benchmark harnesses are unrun.",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A distinct GitHub Actions OIDC verifier re-ran the exact iteration-7 finite grammar-transport bytes, closing only that narrow replay authority gap. No independent zero-model verifier has run any §6 hard benchmark; the grammar remains finite and typed, arbitrary purpose/authored repair remains unsolved, and OSWorld 2.1 / SWE-bench Pro V2 / Terminal-Bench 4.1 harnesses are unrun.",
  "canonical_base_commit": "68bf040064452b740701dd81ad081d6f41f89b57",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
- "causal_blocker": "Grammar transport is now measured with a hashed declarative descriptor and a fresh isolated process, but no independent zero-model identity re-ran it; the grammar is finite and typed, arbitrary purpose/authored repair remains unsolved, and §6 hard-benchmark harnesses are unrun.",
+ "causal_blocker": "A distinct GitHub Actions OIDC verifier re-ran the exact iteration-7 finite grammar-transport bytes, closing only that narrow replay authority gap. No independent zero-model verifier has run any §6 hard benchmark; the grammar remains finite and typed, arbitrary purpose/authored repair remains unsolved, and OSWorld 2.1 / SWE-bench Pro V2 / Terminal-Bench 4.1 harnesses are unrun.",
  "date": "2026-11-23",
- "expected_parent_change": "The agent carries relation texts plus a hashed declarative grammar descriptor; a fresh isolated process recomputes the deictic pointer, all terms and the typed goal verdict from each machine's own raw executor log; deletion-to-unlearn, hash/allowlist, stored-label and control checks fail closed. Independent zero-model verification, arbitrary purpose discovery and §6 remain open.",
- "expected_parent_frontier_change": "The agent carries relation texts plus a hashed declarative grammar descriptor; a fresh isolated process recomputes the deictic pointer, all terms and the typed goal verdict from each machine's own raw executor log; deletion-to-unlearn, hash/allowlist, stored-label and control checks fail closed. Independent zero-model verification, arbitrary purpose discovery and §6 remain open.",
+ "expected_parent_change": "The agent carries relation texts plus a hashed declarative grammar descriptor; a fresh isolated process recomputes the deictic pointer, all terms and the typed goal verdict from each machine's own raw executor log; deletion-to-unlearn, hash/allowlist, stored-label and control checks fail closed. A distinct OIDC-attested runner re-ran those exact frozen bytes and committed its own zero-credit receipt, while independent §6 hard-benchmark verification, arbitrary purpose discovery and terminal completion remain open.",
+ "expected_parent_frontier_change": "The agent carries relation texts plus a hashed declarative grammar descriptor; a fresh isolated process recomputes the deictic pointer, all terms and the typed goal verdict from each machine's own raw executor log; deletion-to-unlearn, hash/allowlist, stored-label and control checks fail closed. A distinct OIDC-attested runner re-ran those exact frozen bytes and committed its own zero-credit receipt, while independent §6 hard-benchmark verification, arbitrary purpose discovery and terminal completion remain open.",
  "explicit_user_authorization": [
   "build our own model with a perfect algorithm as basically the model",
   "enter any arbitrary new computer environment knowing nothing",
@@ -79,33 +85,59 @@
   "our own model only, zero model calls at runtime",
   "hardest open tests as of Nov 2026, merge once when feature complete"
  ],
- "falsification_condition": "FALSIFIED if any receipt is edited into a success after the run; if a shallow fit is reported as portable; if N3, N2 or P3 are hidden; if identity/content literals, a hand-built holder_changed term, a hardcoded term family, stored code, stored expected verdicts or a two-statement/one-judgment C2 design are smuggled into the store or raw log; if the fresh same-identity process is called independent verification; if the three killed iteration-7 prototypes or the 3 false rejects from the iteration-6 store are hidden; if the four exact statements / two judgments are reduced to hide a failed run; if any primary-source score is presented as our system score; or if OSWorld, SWE-bench Pro or Terminal-Bench is claimed done without a zero-model run.",
+ "falsification_condition": "FALSIFIED if any receipt is edited into a success after the run; if the runner-owned receipt is locally fabricated, backdated, or given a workflow_run_id without a real OIDC-attested run; if the narrow finite-transport replay is called §6 verification or a capability score; if a shallow fit is reported as portable; if N3, N2 or P3 are hidden; if identity/content literals, a hand-built holder_changed term, a hardcoded term family, stored code, stored expected verdicts or a two-statement/one-judgment C2 design are smuggled into the store or raw log; if the fresh same-identity process is called independent verification; if the three killed iteration-7 prototypes or the 3 false rejects from the iteration-6 store are hidden; if the four exact statements / two judgments are reduced to hide a failed run; if any primary-source score is presented as our system score; or if OSWorld, SWE-bench Pro or Terminal-Bench is claimed done without a zero-model run.",
  "gate_results": {
-  "authority": "LOCAL_PRODUCER_RUN__NOT_INDEPENDENT_VERIFICATION",
+  "authoritative_workflow_run_id": 45293031532,
+  "authority": "LOCAL_PRODUCER_GATES_PLUS_GITHUB_ACTIONS_OIDC_FOR_FINITE_TRANSPORT_REPLAY_ONLY",
   "base": "68bf040064452b740701dd81ad081d6f41f89b57",
-  "drift_guard": "DRIFT_GUARD_PASS; action_id=THE_ENVIRONMENT_ANSWERS_THE_QUESTION_20261123_V1; non_intent_sensitive_files=0; terminal_objective_sha256=cba32f33e868c580fd395998b1076a04f14c7320b479a911ad056c632decdbc9",
-  "drift_workflow_continuous_obs": "Ran 14 tests OK (7 continuous-OBS + 7 executor-broker); current_state_obs_reducer pass: true, errors: []",
+  "drift_guard": "DRIFT_GUARD_PASS; action_id=THE_ENVIRONMENT_ANSWERS_THE_QUESTION_20261123_V1; sensitive_files=1; terminal_objective_sha256=cba32f33e868c580fd395998b1076a04f14c7320b479a911ad056c632decdbc9",
+  "drift_workflow_continuous_obs": "python3 -m unittest canonical.runtime.test_continuous_obs_runtime canonical.tests.test_executor_broker -v: Ran 14 tests in 0.012s OK",
   "exactly_one_action_intent_in_diff": true,
-  "final_selected_regression": "200 passed in 187.36 s across 20 files",
-  "final_seven_file_test_run": "29 passed in 4.03 s",
+  "final_gate_wrapper_note": "First wrapper used an incorrect .json.sha256 sidecar path; that was a local harness typo, not a project gate failure. The corrected sidecar check passed and all gates were rerun on the amended final HEAD.",
+  "final_pinned_blob_binding": "EXACT_BLOB_BINDING PASS 6; final reconciliation changed no pinned bytes",
+  "final_selected_regression": "200 passed in 199.33s (0:03:19) across 20 selected files",
+  "final_seven_file_test_run": "29 passed in 4.58s",
   "final_six_file_test_run": "23 passed in 2.49 s (iteration-6 historical run)",
-  "fresh_isolated_cli_from_other_cwd": "python3 -I -B from /tmp: PASS; python_isolated_mode=true; authority NONE__PRODUCER_RUN_SANDBOX_FRESH_PROCESS; 5 normal machines + 1 pointerless control; 16 terms/machine; 0 false accepts/rejects",
-  "fresh_process_transport": "PASS; 5 normal machines + 1 pointerless control; 12 hard CLI refusals; separate OS uid denied; independent_verification_completed=false",
+  "fresh_isolated_cli_from_other_cwd": "cd /tmp && python3 -I -B with absolute final-tree paths: PASS; python_isolated_mode=true; authority NONE__PRODUCER_RUN_SANDBOX_FRESH_PROCESS; 5 normal machines + 1 pointerless control; 16 terms/machine; 0 false accepts/rejects",
+  "fresh_process_transport": "PASS; 5 normal machines + 1 pointerless control; 12 hard CLI refusals; separate OS uid denied; same-identity process is not independent verification",
+  "github_run_view": "{\"conclusion\":\"success\",\"headSha\":\"fb65a4612afcbe0cff49475588db8bd792acaaa0\",\"updatedAt\":\"2026-11-23T23:56:48Z\",\"url\":\"https://github.com/moxnixmdj/brain/actions/runs/45293031532\"}",
+  "independent_finite_transport_replay_completed": true,
+  "independent_hard_benchmark_verification_completed": false,
   "independent_verification_completed": false,
+  "independent_verification_completed_scope": "SECTION_6_OR_TERMINAL_CAPABILITY_VERIFICATION_ONLY__FINITE_TRANSPORT_REPLAY_IS_A_NARROW_TRUE_EXCEPTION",
   "iteration_6_receipt": "THE_CONTENT_IS_NOT_A_LITERAL_20261123_V1.json C1-C7 all true, all_criteria_met=True, 11.27 s",
   "iteration_7_receipt": "THE_GRAMMAR_IS_NOT_A_LITERAL_20261123_V1.json D1-D8 all true, all_criteria_met=True, 25.55 s",
   "load_bearing_primary_admission": "LOAD_BEARING_ADMISSION_PASS; open_obligation_count=13; direct_targets=none; constructive_gap_targets=OSWORLD_2_1_PARTIAL_GE_81_8; scope_complete=False; orientation_route_class=COMPOSE",
+  "obs_reducer": "current_state_obs_reducer pass:true, errors:[]",
   "orientation_contract": "verify ok: true, errors: []",
   "orientation_intent_check": "intent-check ok: true, errors: []",
+  "runner_receipt_git_blob_sha": "b21d8ca0a1e93e19f1ed44b4485d261e4704a9d5",
+  "runner_receipt_sha256": "1539fdac25a33c704007f6d58c812d8528746a13b51b30ee02d0e21bb9f87596",
+  "runner_receipt_sha256_sidecar": "PASS; sha256 1539fdac25a33c704007f6d58c812d8528746a13b51b30ee02d0e21bb9f87596",
   "static_ast_audit": "19 local modules; marked model/network imports: []",
-  "status": "PASS"
+  "static_diff_repo_integrity_guard": "repo-integrity-guard: mode=static+diff base=68bf040064452b740701dd81ad081d6f41f89b57 rules=17 violations=0 -> PASS",
+  "status": "PASS",
+  "truth": {
+   "achieved": false,
+   "section_6": "NOT_MET"
+  },
+  "verifier_identity": "github-actions-oidc:moxnixmdj/brain/.github/workflows/independent-grammar-transport-replay-v1.yml@refs/heads/arena/6f8ac9ce-brain#run-45293031532",
+  "workflow_git_blob_sha": "7a8274647f7400efa2f356c58c62a437dd55e13a",
+  "workflow_head_sha": "fb65a4612afcbe0cff49475588db8bd792acaaa0",
+  "workflow_run_attempt": 1,
+  "workflow_run_ids": [
+   45292371946,
+   45293031532
+  ],
+  "workflow_run_url": "https://github.com/moxnixmdj/brain/actions/runs/45293031532"
  },
  "generic_repair_from_single_probe": false,
  "governance_change": false,
  "highest_leverage_now": true,
  "honest_limits": [
-  "authority NONE, producer-run sandbox, no independent verifier",
+  "terminal §6 authority NONE; a distinct OIDC verifier exists only for exact finite grammar-transport replay (run 45293031532)",
   "no OSWorld 2.1, SWE-bench Pro / Pro V2 / HARD-51, Terminal-Bench 2.1 or 4.1 task was run",
+  "first successful workflow run 45292371946 succeeded but this sandbox could not download its artifact or logs; the second run landed a runner-owned receipt instead",
   "iteration 3 N3 falsified and N2 void; iteration 4 P3 failed with 4 false rejects",
   "M4 first run failed and is preserved as a superseded V0 receipt",
   "iteration 5 transfers across identity names but refused a different goal content literal",
@@ -115,8 +147,10 @@
   "iteration 7 descriptor is a finite typed grammar, not free-form purpose understanding or authored repair content",
   "iteration 7 old holder-shape grammar also fits the copy goal and the old content-pointer store false-rejects 3 held-out runs",
   "iteration 7 killed prototypes with 0 separating runs or only true separating verdicts are preserved",
+  "iteration 8 receipt head is fb65a4612afcbe0cff49475588db8bd792acaaa0; final report/ledger/intent reconciliation changes none of the six pinned blobs",
+  "iteration 8 OIDC replay consumed 0 hard-benchmark tasks and grants no capability, family, terminal or truth credit",
   "full canonical-trace table killed by 43/69 abstentions; no model-proposed predicate is used",
-  "no capability registered, no truth changed, no merge"
+  "no capability registered, no truth changed, no PR, no merge"
  ],
  "incremental_spend_usd": 0,
  "intentional_route_race": false,
@@ -126,15 +160,15 @@
   ],
   "expected_obligation_discharge_lcb": "0",
   "expected_obligation_unlock_lcb": "1/81",
-  "interpretation": "No open obligation is discharged or unlocked by this producer-run measurement. Seven measurement instruments plus one generic fresh-process interpreter construct, price, falsify and partially repair the mechanism; no truth obligation moves. The claimed unlock is an honest upper-bound envelope showing the work is obligation-adjacent.",
+  "interpretation": "No open obligation is discharged or unlocked by this measurement. Seven producer instruments, one generic interpreter and one distinct OIDC replay of exact finite bytes construct, price, falsify and partially verify the mechanism; no §6 truth obligation moves. The claimed unlock is an honest upper-bound envelope showing the work is obligation-adjacent.",
   "open_obligation_ids": [],
-  "proof_state_reachability": "Grammar transport is measured locally; independent zero-model verification and OSWorld 2.1 / SWE-bench Pro V2 / Terminal-Bench 4.1 require a real independent verifier and guest/harness run that did not happen. The receipts are causal falsifiers only.",
+  "proof_state_reachability": "A distinct OIDC verifier re-ran exact finite grammar-transport bytes; independent §6 zero-model verification and OSWorld 2.1 / SWE-bench Pro V2 / Terminal-Bench 4.1 require real pinned harnesses and graders that did not run. The receipts are causal falsifiers and one narrow transport replay, not benchmark scores.",
   "scope_complete_discharge": false,
   "success_probability_lcb": "0.5",
   "wall_clock_cost_ub": 3
  },
  "measured_effect": {
-  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "authority": "PRODUCER_RUN_SANDBOX_PLUS_GITHUB_ACTIONS_OIDC_DISTINCT_RUN_FOR_FINITE_TRANSPORT_REPLAY_ONLY",
   "cost": {
    "incremental_spend_usd": 0,
    "model_calls": 0,
@@ -254,7 +288,10 @@
    "held_delta_false_accepts": 0,
    "held_delta_false_rejects": 0,
    "held_delta_runs": 399,
+   "independent_finite_transport_replay_completed_later": true,
+   "independent_hard_benchmark_verification_completed": false,
    "independent_verification_completed": false,
+   "independent_verification_completed_scope": "SECTION_6_OR_TERMINAL_CAPABILITY_VERIFICATION_ONLY__FINITE_TRANSPORT_REPLAY_IS_A_NARROW_TRUE_EXCEPTION",
    "iteration_5_store_status": "REFUSED__GOAL_CONTENT_OR_TERMS_NOT_RECOMPUTED",
    "iteration_6_store_false_rejects": 3,
    "judgment_budget_ceil_log2_class": 2,
@@ -280,6 +317,60 @@
    "truth_mask_popcount": 240,
    "verifier_sha256": "72d532e038eca40aa5cb54db57b299470138bb973b6b0f14388b7a20f2b99333"
   },
+  "iteration_8": {
+   "adversarial_controls": 5,
+   "artifact_host_download": "FAILED__EOF_OUTSIDE_SANDBOX_EGRESS_ALLOWLIST",
+   "capability_credit_delta": 0,
+   "false_accepts": 0,
+   "false_rejects": 0,
+   "family_credit_delta": 0,
+   "final_pinned_blob_binding": "EXACT_BLOB_BINDING PASS 6; final reconciliation changed no pinned bytes",
+   "first_workflow_run_id": 45292371946,
+   "hard_benchmark_tasks_consumed": 0,
+   "hard_cli_cases_in_producer_receipt": 12,
+   "independent_hard_benchmark_verification_completed": false,
+   "independent_verified": true,
+   "measurement_checks": 28,
+   "model_calls": 0,
+   "narrow_transport_replay_met": true,
+   "normal_machines": 5,
+   "normal_runs": 2365,
+   "oidc_jti": "a6bdeaf0-b3b1-4f72-b85b-eb3dc4c6eac3",
+   "parameters_stored": 0,
+   "pinned_blobs": 6,
+   "pointerless_controls": 1,
+   "pointerless_refusals": 39,
+   "producer_identity": "arena-agent:arena/6f8ac9ce-brain",
+   "python_isolated_mode": true,
+   "receipt_git_blob_sha": "b21d8ca0a1e93e19f1ed44b4485d261e4704a9d5",
+   "receipt_path": "canonical/verification/GRAMMAR_TRANSPORT_INDEPENDENT_VERIFICATION_20261123_V1.json",
+   "receipt_schema": "BRAIN_INDEPENDENT_GRAMMAR_TRANSPORT_VERIFICATION_20261123_V1",
+   "receipt_sha256": "1539fdac25a33c704007f6d58c812d8528746a13b51b30ee02d0e21bb9f87596",
+   "receipt_status": "INDEPENDENT_GITHUB_ACTIONS_PASS__OIDC_ATTESTED_TRANSPORT_REPLAY__ZERO_CREDIT",
+   "replayed_status": "PASS",
+   "runner_environment": "github-hosted",
+   "runtime_network_calls": 0,
+   "scope": "ITERATION_7_FINITE_GRAMMAR_TRANSPORT_ONLY",
+   "section_6_completed": false,
+   "sidecar_path": "canonical/verification/GRAMMAR_TRANSPORT_INDEPENDENT_VERIFICATION_20261123_V1.sha256",
+   "term_evaluations": 37840,
+   "terminal_credit_delta": 0,
+   "terms_recomputed_per_machine": 16,
+   "total_runs": 2404,
+   "truth": {
+    "achieved": false,
+    "section_6": "NOT_MET"
+   },
+   "verifier_identity": "github-actions-oidc:moxnixmdj/brain/.github/workflows/independent-grammar-transport-replay-v1.yml@refs/heads/arena/6f8ac9ce-brain#run-45293031532",
+   "workflow_git_blob_sha": "7a8274647f7400efa2f356c58c62a437dd55e13a",
+   "workflow_head_sha": "fb65a4612afcbe0cff49475588db8bd792acaaa0",
+   "workflow_job": "replay",
+   "workflow_path": ".github/workflows/independent-grammar-transport-replay-v1.yml",
+   "workflow_ref": "refs/heads/arena/6f8ac9ce-brain",
+   "workflow_run_attempt": 1,
+   "workflow_run_id": 45293031532,
+   "workflow_run_url": "https://github.com/moxnixmdj/brain/actions/runs/45293031532"
+  },
   "killed_designs": [
    "hand-built 36th form",
    "full canonical-trace isomorphism table",
@@ -288,22 +379,26 @@
    "iteration-6 two-statements/one-judgment C2 (RuntimeError: POINTER_RESIDUAL_IS_NOT_TWO_EXACT_MINIMAL_STATEMENTS)",
    "iteration-7 prototype 1 (516 runs, 0 separating delayed runs)",
    "iteration-7 prototype 2 (9 separating runs all true, class only 4->3)",
-   "iteration-7 old holder-shape grammar also fits copy goal with 3 exact statements"
+   "iteration-7 old holder-shape grammar also fits copy goal with 3 exact statements",
+   "iteration-8 first-workflow artifact-host download (EOF outside sandbox egress allowlist)",
+   "iteration-8 locally self-written 'independent' receipt (rejected; runner-owned OIDC receipt required)",
+   "iteration-8 scan-everything / perfect-web-research idea (rejected; bottleneck is verified authority over unseen hard environments)"
   ],
-  "primary_source_distinct_chunk_reads": 166,
-  "primary_source_fetch_invocations": 172,
-  "primary_source_pages_fetched": 44,
+  "primary_source_distinct_chunk_reads": 182,
+  "primary_source_fetch_invocations": 188,
+  "primary_source_pages_fetched": 52,
   "tests": {
    "earlier_regression_before_iterations_3_to_6": "177 passed in 289.44 s across 14 files",
    "earlier_selected_regression": "194 passed in 186.03 s across 19 files",
-   "final_selected_regression": "200 passed in 187.36 s across 20 files",
-   "final_seven_file_run": "29 passed in 4.03 s",
+   "final_selected_regression": "200 passed in 199.33s (0:03:19) across 20 selected files",
+   "final_seven_file_run": "29 passed in 4.58s",
    "first_six_file_attempt": "3 failed, 20 passed; nested-frame helpers fixed without weakening falsifiers",
    "new_tests": 29,
-   "static_ast_audit": "19 local modules; marked model/network imports: []"
+   "static_ast_audit": "19 local modules; marked model/network imports: []",
+   "static_diff_repo_integrity_guard": "PASS; rules=17 violations=0"
   }
  },
- "next_step": "Obtain an independent zero-model re-run of iteration 6 from a fresh process; then build a seventh iteration that changes the goal / relation grammar itself, not merely literals, while terms are re-derived from the new machine; only then approach OSWorld 2.1, SWE-bench Pro V2 / HARD-51 and Terminal-Bench 4.1 under a real pinned harness.",
+ "next_step": "Obtain an independent zero-model verifier and pinned real harness for OSWorld 2.1, SWE-bench Pro V2 / HARD-51 and Terminal-Bench 4.1 under the benchmark owners' locked task images and graders; only then address purpose-bearing grammar discovery and shipped-agent integration. Do not treat finite grammar-transport replay, fetched leaderboard numbers or a locally written receipt as terminal progress.",
  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
  "probe_specific": false,
  "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
@@ -326,9 +421,12 @@
   "canonical/astra_runtime/state/COMPUTED_HOLDER_RELATION_V1.json",
   "canonical/astra_runtime/state/COMPUTED_CONTENT_POINTER_RELATION_V1.json",
   "PRIMARY_SOURCE_RESEARCH_20261123_V1.md",
-  "THE_ENVIRONMENT_ANSWERS_THE_QUESTION_20261123_V1.md"
+  "THE_ENVIRONMENT_ANSWERS_THE_QUESTION_20261123_V1.md",
+  ".github/workflows/independent-grammar-transport-replay-v1.yml",
+  "canonical/verification/GRAMMAR_TRANSPORT_INDEPENDENT_VERIFICATION_20261123_V1.json",
+  "canonical/verification/GRAMMAR_TRANSPORT_INDEPENDENT_VERIFICATION_20261123_V1.sha256"
  ],
- "real_outcome": "The minimal loop now computes its relation terms and the goal content pointer from each machine's own executed runs and executor call log instead of storing identity or content literals: it fits three literal-free holder-shape statements, asks two real delayed-run judgments, saves first_final_different ∧ max_holders<=1 over content:first_relocation_source, recomputes at replay and refuses when the pointer cannot be recomputed. Iterations 1, 2, 5 and 6 meet all pre-registered criteria; iterations 3 and 4 are preserved as failed receipts. The next bottleneck is independent verification plus grammar transport, not more breadth, more traces, or a model.",
+ "real_outcome": "The minimal loop transports a different goal and relation grammar as a hashed declarative descriptor and recomputes it in a same-identity fresh process. Iteration 8 adds a distinct GitHub-hosted OIDC-attested verifier that bound six exact Git blobs to workflow run 45293031532, re-ran python3 -I -B from /tmp, checked 28 measurements and five adversarial fail-closed controls, and committed its runner-owned zero-credit receipt. The receipt head is fb65a4612afcbe0cff49475588db8bd792acaaa0; the later receipt commit and final documentation/intent reconciliation changed none of the six pinned blobs (EXACT_BLOB_BINDING PASS 6). This closes narrow independent finite-transport replay only, not independent §6 verification, arbitrary purpose discovery, authored repair, shipped-agent integration, capability registration or terminal completion.",
  "recursive_obs": {
   "canonical_base_commit": "68bf040064452b740701dd81ad081d6f41f89b57",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
@@ -348,9 +446,13 @@
    "claiming a fresh same-identity process is independent verification",
    "model-proposed predicate invention",
    "hiding a falsified criterion or a failed held-out prediction",
-   "treating primary-source benchmark numbers as our system capability"
+   "treating primary-source benchmark numbers as our system capability",
+   "a locally self-written independent receipt without a real OIDC run reference",
+   "artifact-host download as the sole independent-receipt channel",
+   "scan-everything web research as a substitute for unseen hard-environment authority",
+   "claiming a finite OIDC transport replay is independent §6 verification"
   ],
-  "expected_parent_level_state_change": "The agent carries relation texts plus a hashed declarative grammar descriptor; a fresh isolated process recomputes the deictic pointer, all terms and the typed goal verdict from each machine's own raw executor log; deletion-to-unlearn, hash/allowlist, stored-label and control checks fail closed. Independent zero-model verification, arbitrary purpose discovery and §6 remain open.",
+  "expected_parent_level_state_change": "The agent carries relation texts plus a hashed declarative grammar descriptor; a fresh isolated process recomputes the deictic pointer, all terms and the typed goal verdict from each machine's own raw executor log; deletion-to-unlearn, hash/allowlist, stored-label and control checks fail closed. A distinct OIDC-attested runner re-ran those exact frozen bytes and committed its own zero-credit receipt, while independent §6 hard-benchmark verification, arbitrary purpose discovery and terminal completion remain open.",
   "obs_blocker": {
    "delete_bypass_substitute_options": [
     "delete the residual by asking the user (rejected: never ask; the machine can answer)",
@@ -361,13 +463,16 @@
     "store a full canonical trace table (rejected: measured 43/69 abstentions)",
     "hardcode a fitted holder-shape grammar (rejected: iteration-7 new copy goal and old-store 3 false rejects)",
     "store expected verdict labels (rejected: fresh-process CLI hard failure)",
-    "claim a fresh same-identity process is independent verification (rejected: honesty law and denied lower-UID probe)"
+    "claim a fresh same-identity process is independent verification (rejected: honesty law and denied lower-UID probe)",
+    "write a local receipt shaped like an independent verifier (rejected: no distinct run reference; runner-owned OIDC receipt used)",
+    "download run 45292371946's artifact through blocked hosts and relabel it (rejected: EOF / HTTP 500; second run landed the receipt in-repo)",
+    "scan every remaining web chunk as a substitute for hard-benchmark authority (rejected: knowledge is cheap; verified authority is expensive)"
    ],
-   "intrinsic_or_path_specific": "path-specific for fitted loops; now localized to independent zero-model verification, arbitrary purpose/grammar discovery and absence of real OSWorld / SWE-bench Pro / Terminal-Bench harnesses",
-   "surviving_causal_blocker": "Grammar transport is now measured with a hashed declarative descriptor and a fresh isolated process, but no independent zero-model identity re-ran it; the grammar is finite and typed, arbitrary purpose/authored repair remains unsolved, and §6 hard-benchmark harnesses are unrun."
+   "intrinsic_or_path_specific": "path-specific for fitted loops; exact finite transport replay is now independently replayed, leaving independent §6 hard-benchmark verification, arbitrary purpose/grammar discovery and absence of real OSWorld / SWE-bench Pro / Terminal-Bench harnesses as the surviving blocker",
+   "surviving_causal_blocker": "A distinct GitHub Actions OIDC verifier re-ran the exact iteration-7 finite grammar-transport bytes, closing only that narrow replay authority gap. No independent zero-model verifier has run any §6 hard benchmark; the grammar remains finite and typed, arbitrary purpose/authored repair remains unsolved, and OSWorld 2.1 / SWE-bench Pro V2 / Terminal-Bench 4.1 harnesses are unrun."
   },
   "obs_capability": {
-   "adjacent_capabilities_absorbed": "the same loop now computes a content-deictic pointer, a hashed declarative grammar descriptor, all finite terms and the typed goal verdict from executor evidence",
+   "adjacent_capabilities_absorbed": "the same loop computes a content-deictic pointer, a hashed declarative grammar descriptor, all finite terms and the typed goal verdict from executor evidence; the project's OIDC runner carrier now supplies distinct-run exact-byte replay authority",
    "capability_work_deleted": [
     "word questions about residual statements",
     "raw exact experience as permanent memory",
@@ -376,7 +481,10 @@
     "content literals in carried relations",
     "hand-built predicate forms",
     "hardcoded term family in interpreter",
-    "stored expected verdict labels"
+    "stored expected verdict labels",
+    "locally fabricated independent verification",
+    "artifact-host download as the sole receipt channel",
+    "scan-everything research as a substitute for hard-benchmark authority"
    ],
    "existing_inherited_routes_checked": [
     "canonical/tools/breadth_buys_what_repetition_cannot_v1.py",
@@ -386,7 +494,9 @@
     "intake/purpose_gate_v1.py",
     "canonical/tools/the_content_is_not_a_literal_v1.py",
     "canonical/tools/recomputed_relation_grammar_v1.py",
-    "canonical/tools/the_grammar_is_not_a_literal_v1.py"
+    "canonical/tools/the_grammar_is_not_a_literal_v1.py",
+    ".github/workflows/capability-receipt-verification.yml",
+    ".github/workflows/independent-grammar-transport-replay-v1.yml"
    ],
    "external_existing_routes_checked": [
     "memory-augmented continual learning: abstract procedural memories beat raw trajectories",
@@ -400,10 +510,16 @@
     "AgentActionBench: chronological raw Read/Write/Execute argument/result logs",
     "CAVA: canonical action fingerprints and meaning-bound receipts",
     "VERITAS: exact hash-constraint verification and incomplete-enumeration failure",
-    "Terminal-Bench 4.1 and SWE-bench Pro V2 pinned harness/verifier release facts"
+    "Terminal-Bench 4.1 and SWE-bench Pro V2 pinned harness/verifier release facts",
+    "GitHub artifact attestation provenance docs: id-token: write, contents: read, attestations: write",
+    "GitHub SLSA v1 Build Level 3 reusable-workflow guide: signer-repo / signer-workflow verification",
+    "HastD/slsa-attester: separate watcher/job/identity signs provenance; verifiers pin signer identity",
+    "GitHub workflow events docs chunk 0: workflow_dispatch requires default-branch workflow; push can run branch workflows",
+    "Terminal-Bench 4.1.0 release and RewardKit isolated verifier facts",
+    "SWE-bench Pro V2 PR #119: 642 Harbor tasks, offline agent phase and pristine-image patch replay"
    ],
-   "fresh_reuse_plan": "the next round reuses the generic interpreter and raw-log/store hashes under an INDEPENDENT zero-model identity and a grammar not authored by this producer",
-   "surviving_gap": "independent zero-model verification, purpose-bearing grammar discovery and real §6 harnesses"
+   "fresh_reuse_plan": "the next round reuses exact blob pinning, OIDC run references and fail-closed replay only as a carrier; it still needs an independent pinned §6 hard-benchmark harness, purpose-bearing grammar discovery and shipped-agent integration",
+   "surviving_gap": "independent §6 hard-benchmark verification, arbitrary purpose-bearing grammar discovery, authored repair, real GUI/browser and SWE harnesses, and shipped-agent integration"
   },
   "obs_goal": {
    "proxy_goals_deleted": [
@@ -411,20 +527,22 @@
     "all-criteria-met on every instrument",
     "an unbroken success narrative",
     "content-pointer portability claimed as independent verification or §6 completion",
-    "claiming fresh-process transport is independent verification or §6 completion"
+    "claiming fresh-process transport is independent verification or §6 completion",
+    "claiming an OIDC-attested finite transport replay is independent §6 verification or terminal completion",
+    "claiming more fetched primary-source pages solve unseen hard-environment authority"
    ],
-   "real_outcome": "The minimal loop now transports a different goal and relation grammar as a hashed declarative descriptor: 798 local CLI fit runs produce four exact copy-cardinality statements, two real delayed-run judgments collapse them to one, and a stdlib-only fresh process recomputes the deictic pointer, 16 terms and goal verdicts from 2,404 raw records on six machines. Held-out replay is 399/399 and 584/584 with zero errors; 39 pointerless runs refuse; 12 hard unseen CLI cases fail closed. Iterations 3 and 4 remain failed receipts. This is same-identity fresh-process transport verification, not independent verification or §6 completion.",
-   "surviving_necessity": "the owner's mission: a model-free agent that carries only what it must, computes deictic relations, content pointers and declarative grammars from arbitrary environments, asks the machine for the decisive run and is honest when the grammar, pointer, verifier or §6 fails"
+   "real_outcome": "The minimal loop transports a different goal and relation grammar as a hashed declarative descriptor and recomputes it in a same-identity fresh process. Iteration 8 adds a distinct GitHub-hosted OIDC-attested verifier that bound six exact Git blobs to workflow run 45293031532, re-ran python3 -I -B from /tmp, checked 28 measurements and five adversarial fail-closed controls, and committed its runner-owned zero-credit receipt. The receipt head is fb65a4612afcbe0cff49475588db8bd792acaaa0; the later receipt commit and final documentation/intent reconciliation changed none of the six pinned blobs (EXACT_BLOB_BINDING PASS 6). This closes narrow independent finite-transport replay only, not independent §6 verification, arbitrary purpose discovery, authored repair, shipped-agent integration, capability registration or terminal completion.",
+   "surviving_necessity": "the owner's mission: a model-free agent that carries only what it must, computes deictic relations, content pointers and declarative grammars from arbitrary environments, asks the machine for the decisive run, and is honest about the difference between exact-byte replay authority, independent §6 verification and terminal completion"
   },
   "obs_inherited_system": {
-   "adjacent_capabilities_absorbed": "minimum-experience pricing, fail-closed refusal, computed deictic terms, a computed content pointer and hashed grammar transport inside the same loop",
-   "downstream_work_to_delete_or_supersede": "the assumption that one fitted goal grammar can be hardcoded, that stored verdict labels can be trusted, and that a fresh same-identity process is independent verification",
-   "fresh_reuse_plan": "iteration 8 starts from the measured descriptor/raw-log boundary and requires an independent zero-model verifier plus a purpose-bearing grammar"
+   "adjacent_capabilities_absorbed": "minimum-experience pricing, fail-closed refusal, computed deictic terms, a computed content pointer, hashed grammar transport and one OIDC-attested distinct-run replay inside the same evidence discipline",
+   "downstream_work_to_delete_or_supersede": "the assumption that one fitted goal grammar can be hardcoded, that stored verdict labels can be trusted, that a fresh same-identity process is independent verification, or that exact finite transport replay is §6 authority",
+   "fresh_reuse_plan": "future work reuses the OIDC receipt pattern with real pinned benchmark harnesses and independent graders; no producer-side score or terminal claim is admitted"
   },
   "obs_obs": {
    "affected_layers_only_on_revalidation": true,
-   "analysis_steps_deleted_or_cached": "the 555-run fit was cited rather than re-run; the cheap 75-run rung, 83-run computed fit, 516-run pointer fit and 798-run grammar fit are the cached results",
-   "search_stop_decision": "stop this round after eight pre-registered receipts, twenty-nine tests, 44 unique primary-source pages / 166 distinct chunks / 172 invocations, the fresh-process transport checks, the drift/load-bearing/orientation gates and the honest failed-round report"
+   "analysis_steps_deleted_or_cached": "the 555-run fit was cited rather than re-run; the cheap 75-run rung, 83-run computed fit, 516-run pointer fit, 798-run grammar fit and runner-owned 2,404-record replay are the cached results",
+   "search_stop_decision": "stop this round after eight pre-registered iterations, twenty-nine tests, 52 unique primary-source pages / 182 distinct chunk reads / 188 invocations, two successful OIDC workflow runs, one runner-owned narrow receipt, the fresh-process transport checks, the repo-integrity / drift / load-bearing / orientation gates and the honest failed-round report; §6 remains NOT MET"
   },
   "obs_solution": {
    "deletion_first_order_applied": [
@@ -438,21 +556,21 @@
     "INTEGRATE"
    ],
    "implementation_still_necessary": true,
-   "losing_routes_reason": "They add parts, break the zero-model boundary, hardcode a fitted grammar, trust labels/display strings, or hide a measured failure and the absence of an independent verifier.",
+   "losing_routes_reason": "They add parts, break the zero-model boundary, hardcode a fitted grammar, trust labels/display strings, fabricate authority, hide a measured failure, or confuse cheap fetched knowledge with verified authority over unseen hard environments.",
    "routes_ranked": [
-    "REUSE + COMPOSE: existing parts plus a stdlib-only fresh interpreter into seven instruments and a hashed declarative grammar (selected)",
-    "BYPASS: human/model sentence choice or grammar invention (rejected)",
-    "SUBSTITUTE: learned proposer, world model, hardcoded grammar or stored verdict labels (rejected)",
-    "SYNTHESIZE_NEW_PRIMITIVE: hand-built holder_changed term, full canonical table or independent-verification claim (rejected by measurement)"
+    "REUSE + COMPOSE: existing OIDC runner carrier, seven instruments, one generic interpreter and a hashed declarative grammar (selected)",
+    "BYPASS: human/model sentence choice, grammar invention or a locally self-written independent receipt (rejected)",
+    "SUBSTITUTE: learned proposer, world model, hardcoded grammar, stored verdict labels or a scan-everything knowledge store (rejected)",
+    "SYNTHESIZE_NEW_PRIMITIVE: hand-built holder_changed term, full canonical table, new verification primitive or independent §6 claim (rejected by measurement)"
    ]
   },
   "obs_verification": {
    "direct_real_effect_verification_considered": true,
    "existing_oracle_considered": true,
-   "synthetic_verification_necessity": "Real mv/cp/rm/ls/sh executions are the oracle: 555 fit runs, 31 held-out runs, 25 refusal runs, 68 second-goal held-out runs, 83 computed-relation fit runs, 68 OVERWRITE runs, 127 third-name runs, 516 pointer-fit runs, 258+258 content-pointer held-out runs, 798 grammar-fit runs and 399+584 grammar held-out runs. A fresh isolated process recomputes 2,404 raw records; 12 hard CLI cases fail closed. 29 new tests plus 200 selected regression tests pin the receipts; no independent verifier exists and none is claimed."
+   "synthetic_verification_necessity": "Real mv/cp/rm/ls/sh executions are the producer oracle: 555 fit runs, 31 held-out runs, 25 refusal runs, 68 second-goal held-out runs, 83 computed-relation fit runs, 68 OVERWRITE runs, 127 third-name runs, 516 pointer-fit runs, 258+258 content-pointer held-out runs, 798 grammar-fit runs and 399+584 grammar held-out runs. A fresh isolated process recomputes 2,404 raw records; 12 hard CLI cases fail closed. A distinct GitHub-hosted OIDC runner then re-ran the exact six pinned blobs, 28 checks and five adversarial controls under run 45293031532 and committed its own receipt. 29 new tests plus 200 selected regression tests pin the producer receipts; no independent verifier ran any §6 hard benchmark and none is claimed."
   },
-  "real_outcome": "The minimal loop now transports a different goal and relation grammar as a hashed declarative descriptor: 798 local CLI fit runs produce four exact copy-cardinality statements, two real delayed-run judgments collapse them to one, and a stdlib-only fresh process recomputes the deictic pointer, 16 terms and goal verdicts from 2,404 raw records on six machines. Held-out replay is 399/399 and 584/584 with zero errors; 39 pointerless runs refuse; 12 hard unseen CLI cases fail closed. Iterations 3 and 4 remain failed receipts. This is same-identity fresh-process transport verification, not independent verification or §6 completion.",
-  "required_capability": "model-free scan + right-question + shortest-plan + verify + admit + persist, with external deletable relation texts, a computed content-deictic pointer and a hashed declarative relation-grammar descriptor re-derived from raw executor evidence in zero runtime model calls",
+  "real_outcome": "The minimal loop transports a different goal and relation grammar as a hashed declarative descriptor and recomputes it in a same-identity fresh process. Iteration 8 adds a distinct GitHub-hosted OIDC-attested verifier that bound six exact Git blobs to workflow run 45293031532, re-ran python3 -I -B from /tmp, checked 28 measurements and five adversarial fail-closed controls, and committed its runner-owned zero-credit receipt. The receipt head is fb65a4612afcbe0cff49475588db8bd792acaaa0; the later receipt commit and final documentation/intent reconciliation changed none of the six pinned blobs (EXACT_BLOB_BINDING PASS 6). This closes narrow independent finite-transport replay only, not independent §6 verification, arbitrary purpose discovery, authored repair, shipped-agent integration, capability registration or terminal completion.",
+  "required_capability": "model-free scan + right-question + shortest-plan + verify + admit + persist, with external deletable relation texts, a computed content-deictic pointer and a hashed declarative relation-grammar descriptor re-derived from raw executor evidence in zero runtime model calls; distinct-run OIDC replay is available only for exact frozen finite-transport bytes",
   "route_frontier": {
    "challenger_routes": [
     {
@@ -505,7 +623,7 @@
       "CORRECTNESS": "identity literal false-rejects 4 named witnesses",
       "INCREMENTAL_COST": "hidden error or 43/69 abstentions",
       "RELIABILITY": "computed deictic relation wins",
-      "VERIFIABILITY": "seven receipts and R6/C6 killed-design fields",
+      "VERIFIABILITY": "seven producer receipts; no independent §6 hard-benchmark verifier",
       "WALL_CLOCK": "fast but wrong or incomplete"
      },
      "evidence": [
@@ -527,10 +645,10 @@
     {
      "comparison": {
       "CAPABILITY_STRENGTH": "no new term family, only a fitted holder-shape grammar",
-      "CORRECTNESS": "content literal refuses 258 runs; producer receipt is not independently verified",
+      "CORRECTNESS": "content literal refuses 258 runs; producer receipt alone is not §6-independent",
       "INCREMENTAL_COST": "hidden refusal or hidden verifier gap",
       "RELIABILITY": "computed content pointer wins inside the sandbox only",
-      "VERIFIABILITY": "seven receipts; no independent identity re-ran any of them",
+      "VERIFIABILITY": "seven producer receipts; no independent §6 hard-benchmark verifier",
       "WALL_CLOCK": "fast but not a §6 measurement"
      },
      "evidence": [
@@ -550,31 +668,62 @@
     },
     {
      "comparison": {
-      "CAPABILITY_STRENGTH": "one changed finite typed grammar and fresh-process replay",
-      "CORRECTNESS": "399/399 and 584/584 held-out predictions; 39/39 pointerless refusals",
-      "INCREMENTAL_COST": "one store, one raw log, one interpreter, one instrument, six tests",
-      "RELIABILITY": "12 hard unseen CLI cases fail closed; no stored expected verdicts",
-      "VERIFIABILITY": "hashed descriptor/raw log, D1-D8 receipt and 29 focused tests",
-      "WALL_CLOCK": "25.55 s producer instrument plus 13 fresh-process CLI runs"
+      "CAPABILITY_STRENGTH": "one changed finite typed grammar, fresh-process replay and distinct-run exact-byte authority; no §6 capability",
+      "CORRECTNESS": "399/399 and 584/584 held-out predictions; 39/39 pointerless refusals; six pinned blobs unchanged in final tree",
+      "INCREMENTAL_COST": "one workflow, two successful runs, one runner-owned receipt and sidecar; zero hard-benchmark tasks",
+      "RELIABILITY": "28 measurement checks, five adversarial controls and 12 hard CLI cases fail closed; no stored expected verdicts",
+      "VERIFIABILITY": "OIDC run 45293031532, receipt sha256 1539fdac...96, Git blob b21d8ca0...a9d5 and D1-D8 producer receipt",
+      "WALL_CLOCK": "25.55 s producer instrument plus two GitHub Actions runs under the 10-minute job timeout"
      },
      "evidence": [
       "iteration 6 holder-shape store false-rejects 3 copy-goal held-out runs",
       "fresh isolated process recomputes 16 terms and typed goal verdict from 2,404 raw records",
-      "lower-UID setpriv probe denied, so transport verification is not independent identity verification"
+      "distinct GitHub Actions OIDC runner re-ran the same exact six blobs under run 45293031532",
+      "final report/ledger/intent reconciliation changed none of the six pinned blobs"
      ],
      "qualification_evidence": [
       "canonical/verification/THE_GRAMMAR_IS_NOT_A_LITERAL_20261123_V1.json",
       "canonical/astra_runtime/state/COMPUTED_COPY_GRAMMAR_RELATION_V1.json",
-      "canonical/verification/GRAMMAR_TRANSPORT_RAW_LOG_20261123_V1.json"
+      "canonical/verification/GRAMMAR_TRANSPORT_RAW_LOG_20261123_V1.json",
+      ".github/workflows/independent-grammar-transport-replay-v1.yml",
+      "canonical/verification/GRAMMAR_TRANSPORT_INDEPENDENT_VERIFICATION_20261123_V1.json"
      ],
      "qualification_evidence_classes": [
-      "DIRECT_PROBE"
+      "DIRECT_PROBE",
+      "INDEPENDENT_VERIFIER",
+      "OFFICIAL_PRIMARY"
      ],
      "resolution": "SELECTED",
-     "route": "RECOMPUTED_RELATION_GRAMMAR_V1"
+     "route": "RECOMPUTED_RELATION_GRAMMAR_V1_WITH_OIDC_EXACT_BYTE_TRANSPORT_REPLAY"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "no distinct authority; producer would certify itself",
+      "CORRECTNESS": "run 45292371946 succeeded but its artifact/logs were unreachable from this sandbox",
+      "INCREMENTAL_COST": "hidden EOF / HTTP 500 dependency or fabricated run reference",
+      "RELIABILITY": "fails AGENTS.md rule 4 and VERIFICATION_IS_SOMEONE_ELSE",
+      "VERIFIABILITY": "no runner-owned receipt at the blocked path; second run fixed it with OIDC run 45293031532",
+      "WALL_CLOCK": "two failed download attempts then one additional successful runner run"
+     },
+     "evidence": [
+      "gh run download failed with EOF from blob.core.windows.net",
+      "gh run view --log failed with EOF from results-receiver.actions.githubusercontent.com",
+      "fetch_page on the signed Azure artifact URL returned HTTP 500",
+      "the local producer did not write the authoritative receipt"
+     ],
+     "qualification_evidence": [
+      ".github/workflows/independent-grammar-transport-replay-v1.yml",
+      "canonical/verification/GRAMMAR_TRANSPORT_INDEPENDENT_VERIFICATION_20261123_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE",
+      "INDEPENDENT_VERIFIER"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "WRITE_A_LOCAL_INDEPENDENT_RECEIPT_OR_DOWNLOAD_ARTIFACT_AND_RELABEL_AS_VERIFICATION"
     }
    ],
-   "checked_at_utc": "2026-11-23T23:27:00+00:00",
+   "checked_at_utc": "2026-11-24T00:10:25+00:00",
    "comparison_dimensions": [
     "CORRECTNESS",
     "CAPABILITY_STRENGTH",
@@ -584,9 +733,9 @@
     "VERIFIABILITY"
    ],
    "discovery_required": true,
-   "incumbent_route": "COMPUTED_CONTENT_POINTER_RELATION_V1_WITH_HARDCODED_HOLDER_SHAPE_GRAMMAR",
-   "max_age_hours": 2,
-   "negative_search_summary": "44 unique primary pages / 166 distinct chunk reads / 172 invocations were read to declared final chunks or selected methodological/result chunks. A hashed declarative grammar and fresh-process transport are measured locally; no independent verifier, arbitrary purpose discovery or §6 hard-benchmark run exists.",
+   "incumbent_route": "RECOMPUTED_RELATION_GRAMMAR_V1_WITH_SAME_IDENTITY_FRESH_PROCESS_ONLY",
+   "max_age_hours": 24,
+   "negative_search_summary": "52 unique primary pages / 182 distinct chunk reads / 188 invocations were read to declared final chunks or selected methodological/result chunks. A distinct OIDC runner replayed exact finite transport bytes under run 45293031532; no independent §6 verifier, arbitrary purpose discovery or hard-benchmark run exists.",
    "query_families": [
     {
      "intent": "CAPABILITY_VECTOR",
@@ -603,6 +752,10 @@
     {
      "intent": "RECENCY_OR_NEW_RELEASE",
      "query": "November 2026 Terminal-Bench 4.1 SWE-bench Pro V2 HARD-51 OSWorld 2.1 independent verifier"
+    },
+    {
+     "intent": "INDEPENDENT_VERIFIER_OR_ATTESTATION",
+     "query": "GitHub Actions OIDC public runner SLSA attestation independent verification frozen bytes workflow run reference"
     }
    ],
    "refresh_triggers": [
@@ -621,7 +774,7 @@
    "selected_route": "RECOMPUTED_RELATION_GRAMMAR_V1",
    "selected_route_preflight": {
     "all_required_dependencies_ready": true,
-    "checked_at_utc": "2026-11-23T23:27:00+00:00",
+    "checked_at_utc": "2026-11-24T00:10:25+00:00",
     "execution_dependencies": [
      {
       "dependency": "local Python 3.11+ runtime with pytest",
@@ -670,6 +823,25 @@
       "scope": "GLOBAL",
       "status": "READY",
       "volatility": "STATIC"
+     },
+     {
+      "dependency": "GitHub Actions OIDC runner workflow for exact finite grammar-transport replay",
+      "evidence": [
+       "workflow run 45293031532 concluded success with runner_environment=github-hosted",
+       "runner-owned receipt records OIDC jti a6bdeaf0-b3b1-4f72-b85b-eb3dc4c6eac3",
+       "28 measurement checks and five adversarial controls passed with zero hard-benchmark tasks"
+      ],
+      "evidence_classes": [
+       "INDEPENDENT_VERIFIER",
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "REMOTE_SERVICE",
+      "observed_at_utc": "2026-11-24T00:10:25+00:00",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "VOLATILE"
      }
     ],
     "execution_dependencies_complete": true,
@@ -691,16 +863,20 @@
      "canonical/tools/the_goal_is_a_quotient_of_the_trace_v1.py",
      "canonical/tools/the_holder_is_not_the_identity_v1.py",
      "canonical/tools/the_content_is_not_a_literal_v1.py",
-     "canonical/tools/the_content_is_not_a_literal_v1.py",
      "canonical/tools/recomputed_relation_grammar_v1.py",
-     "canonical/tools/the_grammar_is_not_a_literal_v1.py"
+     "canonical/tools/the_grammar_is_not_a_literal_v1.py",
+     ".github/workflows/capability-receipt-verification.yml",
+     ".github/workflows/independent-grammar-transport-replay-v1.yml",
+     "canonical/verification/GRAMMAR_TRANSPORT_INDEPENDENT_VERIFICATION_20261123_V1.json"
     ],
     "BROAD_WEB_OR_COMMUNITY": [
      "snorkel.ai OSWorld 2.1 release and leaderboards",
      "labs.scale.com SWE-bench Pro leaderboard",
      "tbench.ai current Terminal-Bench leaderboard",
      "morphllm.com November 2026 SWE-bench Pro split digest",
-     "snorkel.ai Terminal-Bench 4.1 verifier blog"
+     "snorkel.ai Terminal-Bench 4.1 verifier blog",
+     "Snorkel OSWorld 2.1 long-horizon evaluation",
+     "Snorkel Terminal-Bench 4.1 hardened verifiers"
     ],
     "CODE_OR_PACKAGE_REGISTRY": [
      "github.com/xlang-ai/OSWorld-V2",
@@ -710,7 +886,11 @@
      "github.com/scaleapi/SWE-bench_Pro-os v2 tree and PR #119",
      "github.com/besionisrael/assure-harness",
      "github.com/IsThatYou/auto-bench-audit",
-     "github.com/Exgentic/eval-containers issue 733"
+     "github.com/Exgentic/eval-containers issue 733",
+     "actions/attest@v4 provenance mechanism",
+     "HastD/slsa-attester separate signer identity",
+     "harbor-framework/terminal-bench v4.1.0 release",
+     "scaleapi/SWE-bench_Pro-os PR #119 (V2/HARD-51)"
     ],
     "OFFICIAL_PRIMARY": [
      "arXiv:2606.29537 OSWorld 2.0",
@@ -724,48 +904,51 @@
      "arXiv:2609.11117 AgentActionBench action recorder",
      "arXiv:2607.13716 CAVA canonical action receipts",
      "arXiv:2606.22783 VERITAS exact hash constraints",
-     "arXiv:2611.18471 verifier judgments under abstraction"
+     "arXiv:2611.18471 verifier judgments under abstraction",
+     "GitHub artifact attestation provenance guide",
+     "GitHub SLSA v1 Build Level 3 reusable-workflow guide",
+     "GitHub events that trigger workflows docs chunk 0"
     ]
    },
-   "stop_condition": "The seven measurement instruments, one generic fresh-process interpreter, eight receipts, twenty-nine new tests, four external relation stores, one raw executor log, the 44-page primary-source ledger (166 distinct chunk reads / 172 invocations) and the consolidated report exist; all failed rounds and killed designs are preserved; fresh-process transport is not claimed as independent verification; no OSWorld, SWE-bench Pro or Terminal-Bench score is claimed; no capability credit is taken.",
+   "stop_condition": "Eight measured iterations, one generic fresh-process interpreter, eight producer receipts plus one runner-owned independent finite-transport receipt, twenty-nine new tests, four external relation stores, one raw executor log, the 52-page primary-source ledger (182 distinct chunk reads / 188 invocations), one OIDC replay workflow and the consolidated report exist; all failed rounds and killed designs are preserved; same-identity transport is not claimed as independent verification; the OIDC receipt is not claimed as §6 verification; no OSWorld, SWE-bench Pro or Terminal-Bench score is claimed; no capability credit is taken.",
    "unresolved_plausible_dominators": [],
-   "why_selected_route_is_fastest_sufficient": "A hashed allowlisted descriptor removes hardcoded producer-side term families without adding a model, a world fact or stored executable code; a fresh isolated process recomputes every term and the goal verdict from local raw states/commands, and hard byte-hash/label/control failures fail closed. This is cheaper than another broad fit and does not claim independent identity verification."
+   "why_selected_route_is_fastest_sufficient": "A hashed allowlisted descriptor removes hardcoded producer-side term families without adding a model, a world fact or stored executable code; a fresh isolated process recomputes every term and the goal verdict from local raw states/commands, and hard byte-hash/label/control failures fail closed. Reusing the existing OIDC public-runner carrier adds distinct-run authority for those exact frozen bytes with one workflow and zero benchmark tasks; it is cheaper than a new verification primitive and does not claim independent §6 identity verification."
   },
   "routes_considered": [
-   "REUSE: existing version-space fit, quotient projections, separating-run search, external store and raw executor evidence (selected)",
-   "COMPOSE: seven measurement instruments, one generic fresh-process interpreter and a hashed declarative grammar descriptor (selected)",
-   "BYPASS: ask a human or a model to pick the residual sentence or invent a grammar (rejected: forbidden and unnecessary)",
-   "SUBSTITUTE: a new learned proposer, world model, hardcoded term family or stored expected verdict (rejected: measured hard failures)",
-   "SYNTHESIZE_NEW_PRIMITIVE: a hand-built holder_changed term, full canonical table, independent-verification claim or new relation learner (rejected: measured killed designs)"
+   "REUSE: existing version-space fit, quotient, gate, store, raw executor evidence and the project's OIDC public-runner carrier (selected)",
+   "COMPOSE: seven instruments, one stdlib interpreter, a hashed declarative grammar and one independent exact-byte replay workflow (selected)",
+   "BYPASS: ask a human or a model to pick the residual sentence, invent a grammar, or self-write an independent receipt (rejected)",
+   "SUBSTITUTE: learned proposer, world model, hardcoded grammar, stored verdict labels or scan-everything research (rejected)",
+   "SYNTHESIZE_NEW_PRIMITIVE: hand-built holder_changed term, full canonical table, new verification primitive or independent §6 claim (rejected by measurement)"
   ],
   "selected_surviving_route": "RECOMPUTED_RELATION_GRAMMAR_V1",
-  "stop_condition": "The seven measurement instruments, one generic fresh-process interpreter, eight receipts, twenty-nine new tests, four external relation stores, one raw executor log, the 44-page primary-source ledger (166 distinct chunk reads / 172 invocations) and the consolidated report exist; all failed rounds and killed designs are preserved; fresh-process transport is not claimed as independent verification; no OSWorld, SWE-bench Pro or Terminal-Bench score is claimed; no capability credit is taken.",
-  "why_selected_route_is_fastest_sufficient": "A hashed allowlisted descriptor removes hardcoded producer-side term families without adding a model, a world fact or stored executable code; a fresh isolated process recomputes every term and the goal verdict from local raw states/commands, and hard byte-hash/label/control failures fail closed. This is cheaper than another broad fit and does not claim independent identity verification."
+  "stop_condition": "Eight measured iterations, one generic fresh-process interpreter, eight producer receipts plus one runner-owned independent finite-transport receipt, twenty-nine new tests, four external relation stores, one raw executor log, the 52-page primary-source ledger (182 distinct chunk reads / 188 invocations), one OIDC replay workflow and the consolidated report exist; all failed rounds and killed designs are preserved; same-identity transport is not claimed as independent verification; the OIDC receipt is not claimed as §6 verification; no OSWorld, SWE-bench Pro or Terminal-Bench score is claimed; no capability credit is taken.",
+  "why_selected_route_is_fastest_sufficient": "A hashed allowlisted descriptor removes hardcoded producer-side term families without adding a model, a world fact or stored executable code; a fresh isolated process recomputes every term and the goal verdict from local raw states/commands, and hard byte-hash/label/control failures fail closed. Reusing the existing OIDC public-runner carrier adds distinct-run authority for those exact frozen bytes with one workflow and zero benchmark tasks; it is cheaper than a new verification primitive and does not claim independent §6 identity verification."
  },
- "required_capability": "model-free scan + right-question + shortest-plan + verify + admit + persist, with external deletable relation texts, a computed content-deictic pointer and a hashed declarative relation-grammar descriptor re-derived from raw executor evidence in zero runtime model calls",
+ "required_capability": "model-free scan + right-question + shortest-plan + verify + admit + persist, with external deletable relation texts, a computed content-deictic pointer and a hashed declarative relation-grammar descriptor re-derived from raw executor evidence in zero runtime model calls; distinct-run OIDC replay is available only for exact frozen finite-transport bytes",
  "route_class": "COMPOSE",
  "route_id": "RECOMPUTED_RELATION_GRAMMAR_V1",
  "route_order_walk": {
   "ADAPT": "Adapted the external store to a hashed declarative grammar descriptor plus a transient raw executor log.",
   "BYPASS": "Rejected web-first and model-first answers.",
-  "COMPOSE": "Selected: seven measurement instruments, one generic fresh-process interpreter and one recomputed declarative relation grammar from existing parts.",
+  "COMPOSE": "Selected: seven measurement instruments, one generic fresh-process interpreter, one recomputed declarative relation grammar and one OIDC-attested independent replay workflow from existing parts.",
   "CONFIGURE": "No runtime configuration changes.",
-  "DELETE": "Deleted sentence-choice dialogue, raw trace memory, uniform-depth refit, identity literals, content literals, hardcoded term families, stored expected verdicts and model-proposed predicates.",
+  "DELETE": "Deleted sentence-choice dialogue, raw trace memory, uniform-depth refit, identity literals, content literals, hardcoded term families, stored expected verdicts, model-proposed predicates, locally fabricated independent receipts and the blocked artifact-download path.",
   "INTEGRATE": "Not claimed; the shipped agent spine is unchanged.",
-  "REUSE": "Reused version space, quotient projections, run grammar, separating-run search, gate and external store.",
+  "REUSE": "Reused version space, quotient projections, run grammar, separating-run search, gate, external store and the project's existing capability-receipt-verification OIDC carrier.",
   "SUBSTITUTE": "Rejected a model, a world model, a hand-built predicate, a content literal and a full canonical-trace table.",
-  "SYNTHESIZE_NEW_PRIMITIVE": "Not selected: independent verification, arbitrary purpose discovery and §6 hard-benchmark runs remain unmeasured.",
+  "SYNTHESIZE_NEW_PRIMITIVE": "Not selected: independent §6 hard-benchmark verification, arbitrary purpose discovery and real OSWorld / SWE-bench Pro / Terminal-Bench runs remain unmeasured; finite transport replay is a narrow exception with zero credit.",
   "WHITE_BOX_HARVEST": "Not used."
  },
  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
  "selected_route": "TRANSPORT_A_HASHED_DECLARATIVE_RELATION_GRAMMAR_AND_RECOMPUTE_IT_IN_A_FRESH_PROCESS",
  "selected_surviving_route": "RECOMPUTED_RELATION_GRAMMAR_V1",
- "status": "PROPOSED__PRODUCER_MEASURED__SEVEN_ITERATIONS__INDEPENDENT_VERIFICATION_OPEN",
- "stop_condition": "The seven measurement instruments, one generic fresh-process interpreter, eight receipts, twenty-nine new tests, four external relation stores, one raw executor log, the 44-page primary-source ledger (166 distinct chunk reads / 172 invocations) and the consolidated report exist; all failed rounds and killed designs are preserved; fresh-process transport is not claimed as independent verification; no OSWorld, SWE-bench Pro or Terminal-Bench score is claimed; no capability credit is taken.",
+ "status": "PROPOSED__PRODUCER_MEASURED__EIGHT_ITERATIONS__FINITE_TRANSPORT_REPLAY_INDEPENDENT__SECTION_6_OPEN",
+ "stop_condition": "Eight measured iterations, one generic fresh-process interpreter, eight producer receipts plus one runner-owned independent finite-transport receipt, twenty-nine new tests, four external relation stores, one raw executor log, the 52-page primary-source ledger (182 distinct chunk reads / 188 invocations), one OIDC replay workflow and the consolidated report exist; all failed rounds and killed designs are preserved; same-identity transport is not claimed as independent verification; the OIDC receipt is not claimed as §6 verification; no OSWorld, SWE-bench Pro or Terminal-Bench score is claimed; no capability credit is taken.",
  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
  "truth": {
   "achieved": false,
-  "the_law_this_round_adds": "Knowledge is not merely external, recomputed, identity-free or content-pointer-bound: the relation grammar itself must travel as a hashed declarative descriptor whose terms and goal verdict are recomputed from raw executor evidence by a finite interpreter. A fresh same-identity process is transport verification, not independent verification or §6 completion.",
+  "the_law_this_round_adds": "Knowledge is not merely external, recomputed, identity-free or content-pointer-bound: the relation grammar itself must travel as a hashed declarative descriptor whose terms and goal verdict are recomputed from raw executor evidence by a finite interpreter. A fresh same-identity process is transport verification, not independent verification; a distinct OIDC-attested runner can close exact-byte replay authority without closing §6 authority, hard-benchmark verification or terminal completion.",
   "what_is_false_in_the_claim": [
    "that the user must choose between residual sentences",
    "that more fitted environments necessarily buy more correctness",
@@ -779,7 +962,9 @@
    "that one hardcoded holder-shape term family is grammar transport",
    "that a fresh isolated process with the same OS identity is an independent verifier",
    "that a finite allowlisted grammar solves arbitrary purpose or authored repair content",
-   "that primary-source leaderboard numbers are our system results"
+   "that primary-source leaderboard numbers are our system results",
+   "that an OIDC-attested replay of finite grammar-transport bytes is independent §6 verification or a terminal-capability score",
+   "that a producer-written local receipt can substitute for a distinct runner-owned receipt with a real workflow run reference"
   ]
  },
  "user_authorized_governance_change": false,
@@ -799,9 +984,17 @@
    "unresolved_atomic": 22
   },
   "fresh_reality_authority": false,
+  "independent_finite_transport_replay": {
+   "receipt_git_blob_sha": "b21d8ca0a1e93e19f1ed44b4485d261e4704a9d5",
+   "scope": "ITERATION_7_FINITE_GRAMMAR_TRANSPORT_ONLY",
+   "section_6": "NOT_MET",
+   "terminal_credit_delta": 0,
+   "workflow_head_sha": "fb65a4612afcbe0cff49475588db8bd792acaaa0",
+   "workflow_run_id": 45293031532
+  },
   "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
   "mode": "ACTIVE_INTERFACE",
-  "proof_state_reachability": "No truth obligation is discharged. Eight receipts are producer-run causal measurements, three of which intentionally fail or are superseded; no independent identity re-ran them.",
+  "proof_state_reachability": "No truth obligation is discharged. Eight producer receipts are causal measurements, three of which intentionally fail or are superseded; one distinct OIDC-attested runner re-ran exact finite transport bytes with zero hard-benchmark tasks and zero credit, so no fresh §6 reality authority exists.",
   "target_truth_obligations": [
    "OSWORLD_2_1_PARTIAL_GE_81_8"
   ],
@@ -829,7 +1022,8 @@
   }
  },
  "verification": {
-  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "artifact_or_log_download_failure": "EOF from blob.core.windows.net and results-receiver.actions.githubusercontent.com; signed artifact URL returned HTTP 500; no local receipt was fabricated",
+  "authority": "PRODUCER_RUN_SANDBOX_PLUS_GITHUB_ACTIONS_OIDC_DISTINCT_RUN_FOR_FINITE_TRANSPORT_REPLAY_ONLY",
   "commands": [
    "python3 canonical/tools/the_environment_answers_the_question_v1.py --receipt canonical/verification/THE_ENVIRONMENT_ANSWERS_THE_QUESTION_20261123_V1.json --store canonical/astra_runtime/state/CARRIED_RELATION_V1.json",
    "python3 canonical/tools/the_minimum_experience_v1.py --receipt canonical/verification/THE_MINIMUM_EXPERIENCE_20261123_V1.json",
@@ -846,9 +1040,32 @@
    "python3 -I -B canonical/tools/recomputed_relation_grammar_v1.py --store canonical/astra_runtime/state/COMPUTED_COPY_GRAMMAR_RELATION_V1.json --raw-log canonical/verification/GRAMMAR_TRANSPORT_RAW_LOG_20261123_V1.json",
    "PYTHONPATH=/tmp/pylibs python3 -m pytest -q <7 instrument test files including test_the_grammar_is_not_a_literal_v1.py>",
    "python3 -m unittest canonical.runtime.test_continuous_obs_runtime canonical.tests.test_executor_broker -v",
-   "python3 canonical/runtime/current_state_obs_reducer.py"
+   "python3 canonical/runtime/current_state_obs_reducer.py",
+   "python3 execution_guard/repo_integrity_guard_v1.py --root . --base 68bf040064452b740701dd81ad081d6f41f89b57",
+   "gh run view 45293031532 --repo moxnixmdj/brain --json conclusion,updatedAt,headSha,url",
+   "python3 -c \"import hashlib,pathlib; p=pathlib.Path('canonical/verification/GRAMMAR_TRANSPORT_INDEPENDENT_VERIFICATION_20261123_V1.json'); s=pathlib.Path('canonical/verification/GRAMMAR_TRANSPORT_INDEPENDENT_VERIFICATION_20261123_V1.sha256'); assert hashlib.sha256(p.read_bytes()).hexdigest()==s.read_text().strip()\"",
+   "cd /tmp && python3 -I -B /home/user/brain/canonical/tools/recomputed_relation_grammar_v1.py --store /home/user/brain/canonical/astra_runtime/state/COMPUTED_COPY_GRAMMAR_RELATION_V1.json --raw-log /home/user/brain/canonical/verification/GRAMMAR_TRANSPORT_RAW_LOG_20261123_V1.json",
+   "PYTHONPATH=/tmp/pylibs python3 -m pytest -q <20-file selected regression rerun including test_the_grammar_is_not_a_literal_v1.py>"
   ],
-  "independent_verification_completed": false
+  "final_pinned_blob_binding": "EXACT_BLOB_BINDING PASS 6; final report/ledger/intent reconciliation changed none of the six pinned blobs",
+  "first_workflow_run_id": 45292371946,
+  "independent_finite_transport_replay_completed": true,
+  "independent_hard_benchmark_verification_completed": false,
+  "independent_verification_completed": false,
+  "independent_verification_completed_scope": "SECTION_6_OR_TERMINAL_CAPABILITY_VERIFICATION_ONLY__FINITE_TRANSPORT_REPLAY_IS_A_NARROW_TRUE_EXCEPTION",
+  "independent_verification_scope": "ITERATION_7_FINITE_GRAMMAR_TRANSPORT_ONLY__ZERO_CAPABILITY_OR_TERMINAL_CREDIT",
+  "independent_verifier_identity": "github-actions-oidc:moxnixmdj/brain/.github/workflows/independent-grammar-transport-replay-v1.yml@refs/heads/arena/6f8ac9ce-brain#run-45293031532",
+  "oidc_jti": "a6bdeaf0-b3b1-4f72-b85b-eb3dc4c6eac3",
+  "runner_receipt_git_blob_sha": "b21d8ca0a1e93e19f1ed44b4485d261e4704a9d5",
+  "runner_receipt_path": "canonical/verification/GRAMMAR_TRANSPORT_INDEPENDENT_VERIFICATION_20261123_V1.json",
+  "runner_receipt_sha256": "1539fdac25a33c704007f6d58c812d8528746a13b51b30ee02d0e21bb9f87596",
+  "runner_receipt_sidecar_path": "canonical/verification/GRAMMAR_TRANSPORT_INDEPENDENT_VERIFICATION_20261123_V1.sha256",
+  "workflow_git_blob_sha": "7a8274647f7400efa2f356c58c62a437dd55e13a",
+  "workflow_head_sha": "fb65a4612afcbe0cff49475588db8bd792acaaa0",
+  "workflow_path": ".github/workflows/independent-grammar-transport-replay-v1.yml",
+  "workflow_run_attempt": 1,
+  "workflow_run_id": 45293031532,
+  "workflow_run_url": "https://github.com/moxnixmdj/brain/actions/runs/45293031532"
  },
  "weakens_existing_guard": false
 }
