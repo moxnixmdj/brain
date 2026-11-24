@@ -31232,12 +31232,12 @@
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 454,
-  "source_index_modules": 2021
+  "source_index_modules": 2022
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "2a6e6dbe69b624f9d13aae7e5f8982da680420b16dbd31abcb2a87094ab86c0c"
+  "value": "e4f21ac3d6c6cb11608655de5dc53e87e5a6a7b7b4f7ad3444b4318f78536a5e"
  },
  "engines": [
   {
@@ -164733,7 +164733,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/CAUSAL_ANGELIC_AND_UNIFIED_CU_BENCHMARK_20261121_V1.json",
    "schema": "BRAIN_CAUSAL_ANGELIC_AND_UNIFIED_CU_BENCHMARK_V1",
-   "sha256": "a849a87ab0d2b6025d276e8fa569d6aee4e73699e6d39699c1cede7003b09481",
+   "sha256": "6968e4f6801903ac21ec0c79ef994c32d96176e7de07a00a3a619baed3d7fa2c",
    "status": "",
    "terms": {
     "20261121": 1,
@@ -278289,9 +278289,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/causal_angelic_swe_engine_v1.py",
-   "sha256": "6d0e5a542f0bde07d8ffdae887f8dc6d67453ee71c6f07a81115046e62f36ba2",
+   "sha256": "119aa6a964e55c0ab127a1c02fdedb731b6b73eebeadeb236196814fc3c1a2bf",
    "summary": "Unified Causal-Angelic Real-Repo SWE Repair Engine (Zero Model Calls, Zero Stored Weights).",
-   "symbol_count": 43,
+   "symbol_count": 44,
    "symbols": [
     "AngelicWitness",
     "LocalizationReport",
@@ -278300,6 +278300,7 @@
     "_anti_unify_sexpr_pairs",
     "_ast_expr_to_sexpr",
     "_boolean_positions",
+    "_cegis_refine_entry_guard",
     "_collect_pattern_vars",
     "_compress_ast_rewrite_laws",
     "_extract_assertion_constants",
@@ -278315,8 +278316,7 @@
     "_mutate_condition_exprs",
     "_oe_safe_eval_ast",
     "_oe_sig_key",
-    "_pytest_env",
-    "_recall_tier0_ast_rewrite_laws"
+    "_pytest_env"
    ],
    "terms": {
     "angelic": 1,
@@ -305957,7 +305957,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/multilang_causal_swe_engine_v1.py",
-   "sha256": "031b15389bb26112395aabaffb7332c87278ca684bb59b3b8c8126f3813c2eac",
+   "sha256": "7b78e5b444d778bd08b6a1512fe65e08a25112e631d8b36508c6270af1acaa0f",
    "summary": "Multi-Language Causal Angelic SWE Engine v1 (JavaScript / TypeScript / Node.js).",
    "symbol_count": 53,
    "symbols": [
@@ -339238,6 +339238,82 @@
     "v1": 1,
     "zero": 1,
     "zero-credit": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/universal_semantic_ir_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/universal_semantic_ir_v1.py",
+   "sha256": "96971a1e6e75341df7a0f1161ce3b53fe2d4b0a43ceeca65378410d9da900333",
+   "summary": "Universal Semantic Meaning IR, E-Graph Normalizer, Cross-Language Transfer & Inter-Procedural Data-Flow Graph v1.",
+   "symbol_count": 40,
+   "symbols": [
+    "CrossFileDataFlowGraph",
+    "DataFlowNode",
+    "LiftedSpan",
+    "_PrattParser",
+    "_abstract_ir_vars",
+    "_collect_ir_holes",
+    "_flatten_callee",
+    "_instantiate_ir",
+    "_ir_binop",
+    "_ir_call",
+    "_ir_has_key",
+    "_ir_index",
+    "_ir_key",
+    "_ir_len",
+    "_ir_lit",
+    "_ir_prop",
+    "_ir_unop",
+    "_ir_var",
+    "_is_bool_lit",
+    "_is_int_lit",
+    "_is_null_lit",
+    "_lift_c_or_js",
+    "_lift_py_expr",
+    "_lift_python"
+   ],
+   "terms": {
+    "canonicalize_ir": 1,
+    "cross-language": 1,
+    "data-flow": 1,
+    "e-graph": 1,
+    "flatten_callee": 1,
+    "graph": 1,
+    "inter-procedural": 1,
+    "ir": 2,
+    "ir_binop": 1,
+    "ir_call": 1,
+    "ir_has_key": 1,
+    "ir_index": 1,
+    "ir_key": 1,
+    "ir_len": 1,
+    "ir_lit": 1,
+    "ir_prop": 1,
+    "ir_unop": 1,
+    "ir_var": 1,
+    "is_bool_lit": 1,
+    "is_int_lit": 1,
+    "is_null_lit": 1,
+    "lift_c_or_js": 1,
+    "lift_py_expr": 1,
+    "lift_python": 1,
+    "lift_to_ir": 1,
+    "liftedspan": 1,
+    "lower_ir_expr": 1,
+    "meaning": 1,
+    "normalizer": 1,
+    "parse_c_js_expr_tokens": 1,
+    "prattparser": 1,
+    "semantic": 2,
+    "split_top_level": 1,
+    "transfer": 1,
+    "universal": 2,
+    "v1": 2
    }
   },
   {

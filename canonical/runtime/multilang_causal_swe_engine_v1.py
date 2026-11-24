@@ -30,6 +30,7 @@ from urllib.parse import unquote, urlparse
 
 from canonical.runtime import oe_sygus_synthesizer_v1 as OESYGUS
 from canonical.runtime import polyglot_cst_skill_inducer_v1 as CST_SKILLS
+from canonical.runtime import universal_semantic_ir_v1 as SEM_IR
 
 SCHEMA = "BRAIN_MULTILANG_CAUSAL_SWE_ENGINE_V1"
 
@@ -1332,6 +1333,27 @@ def synthesize_js_candidates(
                     f"cst_skill({m_cst['skill_id']},sites={m_cst['sites_patched']})",
                     m_cst["patched_source"],
                     skill_id=m_cst["skill_id"],
+                )
+
+    # 0_sem. Universal Semantic IR Cross-Language Skill Recall (`Python`/`C`/`JS` -> JS/TS!)
+    _sem_js_store = memory.get("universal_semantic_skills") if isinstance(memory, Mapping) else None
+    if isinstance(_sem_js_store, Mapping) and _sem_js_store.get("skills"):
+        for rel in file_order[:4]:
+            p = worktree / rel
+            if not p.is_file():
+                continue
+            orig = p.read_text(encoding="utf-8", errors="replace")
+            lns = lines_by_file_ranked.get(rel) or []
+            for m_sem in SEM_IR.recall_semantic_candidates(
+                _sem_js_store, orig, target_lang="js", target_lines=lns, max_candidates=6
+            ):
+                add_cand(
+                    rel,
+                    int(m_sem["lineno"]),
+                    "JS_SEMANTIC_IR_TIER0_SKILL",
+                    f"semantic_ir({m_sem['skill_id']}:{m_sem['source_lang']}->js)",
+                    m_sem["patched_source"],
+                    skill_id=m_sem["skill_id"],
                 )
 
     # Pass 1: High-precision semantic operators (Ops 1-5) across ranked lines
@@ -3568,6 +3590,7 @@ def synthesize_js_candidates(
     _TIER_PRIO = {
         "JS_TIER0_SKILL_RECALL": -2,
         "JS_CST_TIER0_LEARNED_SKILL": -1,
+        "JS_SEMANTIC_IR_TIER0_SKILL": -1,
         "JS_TYPEOF_STRING_NONEMPTY_GUARD": 0 if _empty_or_range else 1,
         "JS_TYPEERROR_OPTIONAL_MEMBER_GUARD": 1,
         "JS_TS_INTERFACE_S3_GUARD": 1,
@@ -4103,6 +4126,7 @@ def solve_js_repository(
             if oe_cands:
                 _p0_tiers = {
                     "JS_CST_TIER0_LEARNED_SKILL",
+                    "JS_SEMANTIC_IR_TIER0_SKILL",
                     "JS_TIER0_SKILL_RECALL",
                     "JS_TYPEOF_STRING_NONEMPTY_GUARD",
                     "JS_REGEX_DOTALL_NEWLINE_LAW",
@@ -4306,6 +4330,15 @@ def solve_js_repository(
                     )
                     if _adm_js.get("admitted") and not learned_law_id:
                         learned_law_id = _adm_js["skill_id"]
+                    # Also admit into Universal Semantic IR Skill Store for cross-language JS -> Py/C transfer!
+                    _sem_js = memory.setdefault("universal_semantic_skills", SEM_IR.new_semantic_skill_store())
+                    SEM_IR.admit_semantic_skill(
+                        _sem_js,
+                        orig_src,
+                        cand.patched_source,
+                        source_lang="js",
+                        provenance={"file": cand.file, "lineno": cand.lineno, "tier": cand.tier},
+                    )
 
                 if cand.extra_patches:
                     for ef, esrc in cand.extra_patches:
@@ -5682,6 +5715,27 @@ def synthesize_c_candidates(
                     f"cst_skill({m_cst['skill_id']},sites={m_cst['sites_patched']})",
                     m_cst["patched_source"],
                     skill_id=m_cst["skill_id"],
+                )
+
+    # Pass 0_sem (Tier-0 Universal Semantic IR Cross-Language Skill Recall: `Python`/`JS`/`C` -> C!):
+    _sem_c_store = memory.get("universal_semantic_skills") if isinstance(memory, Mapping) else None
+    if isinstance(_sem_c_store, Mapping) and _sem_c_store.get("skills"):
+        for rel_sem in file_order[:4]:
+            p_sem = worktree / rel_sem
+            if not p_sem.is_file():
+                continue
+            orig_sem = p_sem.read_text(encoding="utf-8", errors="replace")
+            lns_sem = lines_by_file_ranked.get(rel_sem) or []
+            for m_sem in SEM_IR.recall_semantic_candidates(
+                _sem_c_store, orig_sem, target_lang="c", target_lines=lns_sem, max_candidates=6
+            ):
+                add_cand(
+                    rel_sem,
+                    int(m_sem["lineno"]),
+                    "C_SEMANTIC_IR_TIER0_SKILL",
+                    f"semantic_ir({m_sem['skill_id']}:{m_sem['source_lang']}->c)",
+                    m_sem["patched_source"],
+                    skill_id=m_sem["skill_id"],
                 )
 
     # Pass 0y (high-precision C linked-list node pointer swap vs shallow field copy):
@@ -7910,6 +7964,15 @@ def solve_c_repository(
                             else:
                                 cstore[lid] = rule
                             learned_law_id = lid
+                    # Also admit into Universal Semantic IR Skill Store for cross-language C -> Py/JS transfer!
+                    _sem_c = memory.setdefault("universal_semantic_skills", SEM_IR.new_semantic_skill_store())
+                    SEM_IR.admit_semantic_skill(
+                        _sem_c,
+                        orig_src,
+                        cand.patched_source,
+                        source_lang="c",
+                        provenance={"file": cand.file, "lineno": cand.lineno, "tier": cand.tier},
+                    )
 
                 winner = {
                     "file": cand.file,

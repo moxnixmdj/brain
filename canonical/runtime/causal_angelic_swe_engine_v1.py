@@ -39,6 +39,7 @@ from typing import Any, Mapping, Sequence
 
 from canonical.runtime import instant_swe_skill_store_v1 as SKILL_STORE
 from canonical.runtime import oe_sygus_synthesizer_v1 as OESYGUS
+from canonical.runtime import universal_semantic_ir_v1 as SEM_IR
 
 SCHEMA = "BRAIN_CAUSAL_ANGELIC_SWE_ENGINE_V1"
 AUTHORITY = "NONE__PRODUCER_RUN_SANDBOX"
@@ -996,6 +997,45 @@ def localize_faults(
                 exception_types=sorted(exc_by_line.get(key, set())),
             )
         )
+
+    # Leap 1: Inter-Procedural Cross-File Backward Causal Data-Flow Slice Boost
+    # Traces failing sink sites backward across intra-procedural def-use AND inter-procedural
+    # caller<-callee return boundaries so upstream producer files rank even without traceback frames.
+    if sites:
+        try:
+            _df_files = sorted({s.file for s in sites[:40]})
+            _dfg = SEM_IR.build_cross_file_dataflow_graph(worktree, rel_files=None if len(_df_files) < 12 else _df_files)
+            _seed_sites = [(s.file, s.lineno) for s in sorted(sites, key=lambda x: (-x.tb_boost, -x.weight))[:6]]
+            _slice_nodes = SEM_IR.backward_causal_slice(_dfg, _seed_sites, max_hops=4, max_nodes=32)
+            _slice_hop = {(sn["file"], int(sn["lineno"])): int(sn["hop"]) for sn in _slice_nodes if int(sn["hop"]) > 0}
+            if _slice_hop:
+                _existing_keys = {(s.file, s.lineno) for s in sites}
+                for s in sites:
+                    _h = _slice_hop.get((s.file, s.lineno))
+                    if _h is not None:
+                        s.weight = round(s.weight + 0.18 / (1.0 + _h), 6)
+                # Also surface cross-file upstream return/producer lines in the slice that were executed by failing tests
+                for (_sf, _sln), _h in _slice_hop.items():
+                    if (_sf, _sln) not in _existing_keys:
+                        _k = f"{_sf}:{_sln}"
+                        if _k in ef_map and ef_map[_k] > 0:
+                            sites.append(
+                                LocalizedSite(
+                                    file=_sf,
+                                    lineno=_sln,
+                                    weight=round(0.22 / (1.0 + _h), 6),
+                                    ochiai=0.0,
+                                    tb_boost=0.0,
+                                    ef=ef_map.get(_k, 0),
+                                    ep=ep_map.get(_k, 0),
+                                    nf=max(0, total_fail - ef_map.get(_k, 0)),
+                                    failing_frames=fail_snaps.get(_k, []),
+                                    passing_frames=pass_snaps.get(_k, []),
+                                    exception_types=sorted(exc_by_line.get(_k, set())),
+                                )
+                            )
+        except Exception:
+            pass
 
     sites.sort(key=lambda s: (-s.weight, -s.tb_boost, -s.ochiai, s.file, s.lineno))
     # Per-file AND per-(file, function) diversity quota: prevent a single helper function or
@@ -9838,6 +9878,7 @@ def synthesize_candidates(
         "TIER3_SIBLING_GUARD_CONJUNCT",
         "TIER3_MAP_REPEAT_COMMUTE",
         "TIER3_STATIC_REGEX_FULLMATCH",
+        "TIER3_STATIC_REGEX_ANCHOR",
         "TIER3_UNWRAP_UNARY_CALL_ON_DIFF",
         "TIER3_DEFAULT_GUARD_BOOL_ATTR",
         "TIER3_REGEX_TABLE_ALIAS_ABDUCT",
@@ -10929,11 +10970,17 @@ def _recall_tier0_ast_rewrite_laws(
     loc: LocalizationReport,
     skill_store: Mapping[str, Any] | None,
 ) -> list[PatchCandidate]:
-    """Recall learned Plotkin AST rewrite laws at Tier 0 BEFORE angelic probing."""
+    """Recall learned Plotkin AST rewrite laws AND Universal Semantic IR cross-language skills at Tier 0."""
     if not skill_store:
         return []
     laws = skill_store.get("ast_rewrite_laws") or {}
-    if not laws:
+    sem_store = (
+        skill_store
+        if skill_store.get("schema") == SEM_IR.SCHEMA
+        else skill_store.get("universal_semantic_skills")
+    )
+    has_sem = isinstance(sem_store, Mapping) and bool(sem_store.get("skills"))
+    if not laws and not has_sem:
         return []
 
     cand_files: list[str] = []
@@ -10993,7 +11040,190 @@ def _recall_tier0_ast_rewrite_laws(
                                 skill_id=law["law_id"],
                             )
                         )
+        # Leap 2: Cross-Language Universal Semantic IR Skill Recall (`C`/`JS`/`Py` -> Python!)
+        if has_sem and isinstance(sem_store, Mapping):
+            _tlines = [s.lineno for s in loc.sites if s.file == rel]
+            for m_sem in SEM_IR.recall_semantic_candidates(
+                sem_store, src, target_lang="python", target_lines=_tlines, max_candidates=6
+            ):
+                code_s = m_sem["patched_source"]
+                if (rel, code_s) not in seen:
+                    seen.add((rel, code_s))
+                    out.append(
+                        PatchCandidate(
+                            file=rel,
+                            lineno=int(m_sem["lineno"]),
+                            tier="TIER0_SEMANTIC_IR_SKILL",
+                            description=f"semantic_ir({m_sem['skill_id']}:{m_sem['source_lang']}->python)",
+                            patched_source=code_s,
+                            ast_position="stmt",
+                            skill_id=str(m_sem["skill_id"]),
+                        )
+                    )
     return out
+
+
+def _cegis_refine_entry_guard(
+    worktree: pathlib.Path,
+    src_root: pathlib.Path,
+    tmp_dir: str,
+    orig_source: str,
+    cand: PatchCandidate,
+    initial_regressions: Sequence[str],
+    loc: LocalizationReport,
+    test_targets: Sequence[str],
+    target_flips: Sequence[str],
+    eval_verdicts_fn: Any,
+    python_exe: str,
+    timeout_s: float,
+    *,
+    max_rounds: int = 2,
+) -> tuple[str, str, dict[str, str], int, int] | None:
+    """Leap 3: Closed-Loop CEGIS Counterexample-Guided Guard Refinement.
+
+    When a synthesized guard fixes ALL failing tests (`all_flipped == True`) but triggers
+    passing regression counterexamples, traces ONLY those exact regression tests (~0.25s),
+    absorbs their runtime states into `p_forbid`, and re-synthesizes a refined predicate
+    via EUSolver (e.g., `x < 0` -> `(x < 0 and not allow_neg)`) until verified airtight!
+    """
+    if not cand.description.startswith("eusolver_entry_guard(") or not initial_regressions:
+        return None
+    m_rv = re.search(r"->\s*(return\s+(.+)|raise\s+ValueError)\)$", cand.description)
+    if not m_rv:
+        return None
+    is_raise = m_rv.group(1).startswith("raise")
+    rv_val: Any = None
+    if not is_raise:
+        try:
+            rv_val = ast.literal_eval(m_rv.group(2).strip())
+        except Exception:
+            return None
+
+    try:
+        tree = ast.parse(orig_source)
+    except SyntaxError:
+        return None
+    enc_fn: ast.FunctionDef | ast.AsyncFunctionDef | None = None
+    for nd in ast.walk(tree):
+        if isinstance(nd, (ast.FunctionDef, ast.AsyncFunctionDef)) and nd.body:
+            lo = getattr(nd, "lineno", 10**9)
+            hi = getattr(nd, "end_lineno", lo) or lo
+            if lo <= cand.lineno <= hi:
+                if enc_fn is None or (hi - lo) < ((getattr(enc_fn, "end_lineno", 0) or 0) - getattr(enc_fn, "lineno", 0)):
+                    enc_fn = nd
+    if enc_fn is None or not enc_fn.body:
+        return None
+    fn_lo = int(getattr(enc_fn, "lineno", 1))
+    fn_hi = int(getattr(enc_fn, "end_lineno", fn_lo) or fn_lo)
+    fn_params = {
+        a.arg for a in (
+            list(getattr(enc_fn.args, "posonlyargs", []))
+            + list(enc_fn.args.args)
+            + list(enc_fn.args.kwonlyargs)
+        )
+    }
+    first_body_idx = 1 if (
+        len(enc_fn.body) > 1
+        and isinstance(enc_fn.body[0], ast.Expr)
+        and isinstance(enc_fn.body[0].value, ast.Constant)
+        and isinstance(enc_fn.body[0].value.value, str)
+    ) else 0
+
+    # Collect baseline failing & passing parameter envs inside `enc_fn`
+    fn_sites = [s for s in loc.sites if s.file == cand.file and fn_lo <= s.lineno <= fn_hi]
+    if not fn_sites:
+        return None
+    base_site = max(fn_sites, key=lambda s: (len(s.passing_frames), len(s.failing_frames)))
+    f_param = [{k: v for k, v in _frame_to_oe_env(f).items() if k in fn_params} for f in base_site.failing_frames[:24]]
+    f_param = [e for e in f_param if e]
+    p_param = [{k: v for k, v in _frame_to_oe_env(f).items() if k in fn_params} for f in base_site.passing_frames[:64]]
+    p_param = [e for e in p_param if e]
+    if not f_param:
+        return None
+
+    cur_regs = [r for r in initial_regressions if "::" in r][:4]
+    absorbed = 0
+    seen_codes: set[str] = set()
+
+    for rnd in range(1, max_rounds + 1):
+        if not cur_regs:
+            break
+        # Trace ONLY the concrete regression counterexample tests on the ORIGINAL source!
+        with tempfile.TemporaryDirectory(prefix="brain_cegis_") as ctmp:
+            cdir = pathlib.Path(ctmp)
+            (cdir / "_brain_trace_plugin.py").write_text(_TRACE_PLUGIN_SOURCE, encoding="utf-8")
+            cout = cdir / "trace.json"
+            kfile = cdir / "keep.json"
+            kfile.write_text(json.dumps(cur_regs), encoding="utf-8")
+            env = _pytest_env(
+                worktree, cdir,
+                {"BRAIN_WT": str(worktree), "BRAIN_TRACE_OUT": str(cout), "BRAIN_KEEP_NODEIDS_FILE": str(kfile)},
+            )
+            try:
+                subprocess.run(
+                    [python_exe, "-m", "pytest", "-o", "addopts=", "-p", "_brain_trace_plugin", "--no-header", "-q", "--tb=no", *list(test_targets)],
+                    cwd=str(worktree), env=env, capture_output=True, text=True, timeout=min(timeout_s, 10.0),
+                )
+            except Exception:
+                break
+            if not cout.is_file():
+                break
+            try:
+                tdata = json.loads(cout.read_text(encoding="utf-8"))
+            except Exception:
+                break
+            for _nid, rec in (tdata.get("tests") or {}).items():
+                snaps = rec.get("snaps") or {}
+                for sk, sn in snaps.items():
+                    if ":" not in sk or not isinstance(sn, Mapping):
+                        continue
+                    sf, sln_s = sk.rsplit(":", 1)
+                    if sf == cand.file and fn_lo <= int(sln_s) <= fn_hi:
+                        ce_env = {k: v for k, v in _frame_to_oe_env(sn).items() if k in fn_params}
+                        if ce_env:
+                            p_param.append(ce_env)
+                            absorbed += 1
+                            break
+
+        # Re-synthesize refined guard separating ALL failing envs from (passing + counterexample) envs!
+        refined = OESYGUS.synthesize_separating_predicates(
+            f_param, p_param, lang="python", extra_consts=(), max_results=4
+        )
+        refined = [g for g in refined if int(g.get("generality_penalty", 99)) <= 1]
+        next_regs: list[str] = []
+        for g in refined[:3]:
+            gcode = str(g.get("code") or "").strip()
+            if not gcode or gcode in seen_codes:
+                continue
+            seen_codes.add(gcode)
+            try:
+                g_test = ast.parse(gcode, mode="eval").body
+            except SyntaxError:
+                continue
+            t_copy = copy.deepcopy(tree)
+            if "math." in gcode:
+                _insert_after_future(t_copy, [ast.Import(names=[ast.alias(name="math", asname=None)])])
+            for n2 in ast.walk(t_copy):
+                if isinstance(n2, (ast.FunctionDef, ast.AsyncFunctionDef)) and n2.name == enc_fn.name and getattr(n2, "lineno", None) == getattr(enc_fn, "lineno", None):
+                    if is_raise:
+                        sbody = [ast.Raise(exc=ast.Call(func=ast.Name(id="ValueError", ctx=ast.Load()), args=[ast.Constant(value="invalid argument")], keywords=[]), cause=None)]
+                    else:
+                        sbody = [ast.Return(value=ast.Constant(value=rv_val))]
+                    n2.body.insert(first_body_idx, ast.If(test=copy.deepcopy(g_test), body=sbody, orelse=[]))
+                    break
+            patched_ce = ast.unparse(t_copy) + "\n"
+            vwt = pathlib.Path(tmp_dir) / f"cegis_verify_{rnd}_{len(seen_codes)}"
+            copy_worktree(src_root, vwt)
+            (vwt / cand.file).write_text(patched_ce, encoding="utf-8")
+            fv, _, _ = run_verdicts(vwt, test_targets, python_exe=python_exe, timeout_s=max(timeout_s, 30.0))
+            ok_fl, regs2, _ = eval_verdicts_fn(fv, vwt, target_flips)
+            shutil.rmtree(vwt, ignore_errors=True)
+            if ok_fl and not regs2:
+                return (patched_ce, f"cegis_refined_r{rnd}({gcode}->{'raise ValueError' if is_raise else f'return {rv_val!r}'})", fv, rnd, absorbed)
+            if ok_fl and regs2 and not next_regs:
+                next_regs = [r for r in regs2 if "::" in r][:4]
+        cur_regs = next_regs
+    return None
 
 
 # ---------------------------------------------------------------------------
@@ -11275,6 +11505,20 @@ def solve_repository(
             )
             all_flipped, regressions, _ = _eval_verdicts(full_verdicts, verify_wt, target_flips)
             shutil.rmtree(verify_wt, ignore_errors=True)
+            if all_flipped and regressions:
+                cegis_win = _cegis_refine_entry_guard(
+                    wt, src_root, tmp_dir, orig_source, cand, regressions,
+                    loc, test_targets, target_flips, _eval_verdicts, python_exe, timeout_s,
+                )
+                if cegis_win is not None:
+                    _ce_src, _ce_desc, _ce_fv, _ce_rnds, _ce_abs = cegis_win
+                    cand = PatchCandidate(
+                        file=cand.file, lineno=cand.lineno,
+                        tier="TIER3_CEGIS_REFINED_SYNTH", description=_ce_desc,
+                        patched_source=_ce_src, ast_position=cand.ast_position,
+                    )
+                    full_verdicts = _ce_fv
+                    all_flipped, regressions = True, []
             if all_flipped and not regressions:
                 diff = "".join(
                     difflib.unified_diff(
@@ -11316,6 +11560,18 @@ def solve_repository(
                         cand.lineno,
                         exc_type,
                         cand.tier,
+                    )
+                    _sem_s = (
+                        skill_store
+                        if skill_store.get("schema") == SEM_IR.SCHEMA
+                        else skill_store.setdefault("universal_semantic_skills", SEM_IR.new_semantic_skill_store())
+                    )
+                    SEM_IR.admit_semantic_skill(
+                        _sem_s,
+                        orig_source,
+                        cand.patched_source,
+                        source_lang="python",
+                        provenance={"file": cand.file, "lineno": cand.lineno, "tier": cand.tier},
                     )
                     if learned_skill is None and learned_ast_law is not None:
                         learned_skill = {"skill_id": learned_ast_law["law_id"]}
@@ -11629,6 +11885,20 @@ def solve_repository(
             )
             all_flipped, regressions, _ = _eval_verdicts(full_verdicts, verify_wt, target_flips)
             shutil.rmtree(verify_wt, ignore_errors=True)
+            if all_flipped and regressions:
+                cegis_win = _cegis_refine_entry_guard(
+                    wt, src_root, tmp_dir, orig_source, cand, regressions,
+                    loc, test_targets, target_flips, _eval_verdicts, python_exe, timeout_s,
+                )
+                if cegis_win is not None:
+                    _ce_src, _ce_desc, _ce_fv, _ce_rnds, _ce_abs = cegis_win
+                    cand = PatchCandidate(
+                        file=cand.file, lineno=cand.lineno,
+                        tier="TIER3_CEGIS_REFINED_SYNTH", description=_ce_desc,
+                        patched_source=_ce_src, ast_position=cand.ast_position,
+                    )
+                    full_verdicts = _ce_fv
+                    all_flipped, regressions = True, []
             if all_flipped and not regressions:
                 diff = "".join(
                     difflib.unified_diff(
@@ -11670,6 +11940,18 @@ def solve_repository(
                         cand.lineno,
                         exc_type,
                         cand.tier,
+                    )
+                    _sem_s = (
+                        skill_store
+                        if skill_store.get("schema") == SEM_IR.SCHEMA
+                        else skill_store.setdefault("universal_semantic_skills", SEM_IR.new_semantic_skill_store())
+                    )
+                    SEM_IR.admit_semantic_skill(
+                        _sem_s,
+                        orig_source,
+                        cand.patched_source,
+                        source_lang="python",
+                        provenance={"file": cand.file, "lineno": cand.lineno, "tier": cand.tier},
                     )
                     if learned_skill is None and learned_ast_law is not None:
                         learned_skill = {"skill_id": learned_ast_law["law_id"]}

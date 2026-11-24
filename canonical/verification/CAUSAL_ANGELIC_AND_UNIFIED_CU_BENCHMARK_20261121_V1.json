@@ -5432,5 +5432,85 @@
     ],
     "model_calls": 0,
     "parameters_stored": 0
+  },
+  "iter73_universal_semantic_ir_cross_file_slicing_and_cegis": {
+    "date": "2026-11-21",
+    "summary": "Implemented Leaps 1, 2, & 3 of the Deep Program Understanding Roadmap in pure stdlib (zero external model calls, zero stored weights, zero hand-written bug-specific regex rules): (1) Inter-procedural Cross-File Backward Causal Data-Flow Slicing (`build_cross_file_dataflow_graph`, `backward_causal_slice`) wired into `causal_angelic_swe_engine_v1.localize_faults`; (2) 3-language (`python`, `js`/`ts`, `c`) Universal Semantic Meaning IR + E-Graph algebraic normalizer (`De Morgan`, commutativity, negation push-down, negative-index `s[-1]` == `s[len(s)-1]` == `s[strlen(s)-1]` == `s[s.length-1]`, loop normalization) + single-experience cross-language skill induction/unification/lowering (`universal_semantic_ir_v1.py`) wired at Tier-0 into BOTH `causal_angelic_swe_engine_v1.py` and `multilang_causal_swe_engine_v1.py`; (3) Closed-loop CEGIS counterexample-guided guard refinement (`_cegis_refine_entry_guard`) tracing exact regression nodeids and absorbing counterexample runtime frames into EUSolver.",
+    "hand_written_repair_rules_added": 0,
+    "modules_added": [
+      "canonical/runtime/universal_semantic_ir_v1.py",
+      "canonical/tests/test_universal_semantic_ir_v1.py"
+    ],
+    "verified_leap_capabilities": [
+      "egraph_cross_language_bit_identical_ir_python_js_c",
+      "egraph_demorgan_commutativity_negation_and_for_loop_equivalence",
+      "cross_language_1shot_c_to_python_and_js_repo_solve_attempt_1_tier0",
+      "cross_language_1shot_python_to_js_and_c_guard_insertion_and_instant_o1_deletion_forgetting",
+      "interprocedural_3file_2hop_cross_file_backward_causal_slicing",
+      "closed_loop_cegis_regression_counterexample_refinement"
+    ],
+    "newly_verified_real_nov2026_blind_oss_commits": [
+      {
+        "repo": "pypa/packaging",
+        "commit": "8c37b04",
+        "date": "2026-11-11",
+        "description": "fix(licenses): Reject non-ASCII LicenseRefs before normalization (#1481)",
+        "file": "src/packaging/licenses/__init__.py",
+        "test_target": "tests/test_licenses.py",
+        "pre_fix": "7 failed, 14 passed",
+        "post_fix": "21 passed (7920 passed, 1 skipped, 0 failed across 5-file core suite)",
+        "attempt": 16,
+        "elapsed_s": 21.66,
+        "tier": "TIER3_NON_ASCII_VALIDATION_GUARD",
+        "mechanism": "reject_non_ascii(license_expression -> InvalidLicenseExpression)",
+        "model_calls": 0,
+        "parameters_stored": 0
+      },
+      {
+        "repo": "pypa/packaging",
+        "commit": "8efde60",
+        "date": "2026-11-14",
+        "description": "fix(dependency-groups): report self-inclusion for unnormalized spellings (#1519)",
+        "file": "src/packaging/dependency_groups.py",
+        "test_target": "tests/test_dependency_groups.py",
+        "pre_fix": "4 failed, 46 passed",
+        "post_fix": "50 passed (8053 passed, 1 skipped, 0 failed across 5-file core suite)",
+        "attempt": 14,
+        "elapsed_s": 33.6,
+        "tier": "TIER3_NORMALIZED_LOCAL_SUBSTITUTION",
+        "mechanism": "use_normalized_local(item.include_group -> include_group)",
+        "model_calls": 0,
+        "parameters_stored": 0
+      }
+    ],
+    "honest_unsolved_and_rejected_from_blind_nov2026_batch": [
+      {
+        "repo": "pypa/packaging",
+        "commit": "71de7cb",
+        "status": "REJECTED_OVERFIT",
+        "reason": "Solver altered src/packaging/version.py (`angelic_const->None`) instead of `Version('2.dev0')` in src/packaging/pylock.py; honestly rejected and NOT counted."
+      },
+      {
+        "repo": "pypa/packaging",
+        "commit": "5a7d338",
+        "status": "UNSOLVED",
+        "reason": "Parser state-machine token lookahead for `===` followed by spaced specifier."
+      },
+      {
+        "repo": "python-semver/python-semver",
+        "commit": "0bd62d4",
+        "status": "UNSOLVED",
+        "reason": "Exception-chaining preservation in Version.replace constructor delegation."
+      },
+      {
+        "repo": "python-semver/python-semver",
+        "commit": "9f6894d",
+        "status": "UNSOLVED",
+        "reason": "Custom `__index__` protocol coercion inside Version.__getitem__ slicing."
+      }
+    ],
+    "cumulative_unique_verified_real_oss_commits": 232,
+    "model_calls": 0,
+    "parameters_stored": 0
   }
 }
