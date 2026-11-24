@@ -126,7 +126,10 @@ def transcripts(blocks: Sequence[dict[str, Any]]) -> list[dict[str, Any]]:
     out: list[dict[str, Any]] = []
     for block in blocks:
         lines = block["text"].splitlines()
-        if not PROMPT.search(block["text"], re.M):
+        # `PROMPT.search(text, re.M)` passes the flag into `pos`, not `flags` -- the pattern was
+        # already compiled with re.M -- so it searched from character 8 onward and silently skipped
+        # any docstring whose only prompt sits near the start. Test the pattern, not the offset.
+        if not PROMPT.search(block["text"]):
             continue
         examples: list[dict[str, Any]] = []
         index = 0
@@ -211,7 +214,9 @@ def _python_example_ok(example: dict[str, Any], cwd: pathlib.Path,
     program = ["import sys", "_real = sys.stdout", "_g = {}"]
     if module:
         program.append(f"import {module} as _m")
-        program.append("_g = dict(vars(_m))")
+        # ...plus the module's own name, so a transcript that writes `statistics.median(...)` and
+        # one that writes `median(...)` are BOTH replayed as the guide meant them.
+        program.append("_g = dict(vars(_m)); _g[" + repr(module) + "] = _m")
     program.append("_g.setdefault('__builtins__', __builtins__)")
     for statement in example["_session"]:
         clean = re.sub(r"\s*#\s*doctest:.*$", "", statement, flags=re.M)

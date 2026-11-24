@@ -15,17 +15,17 @@
  "verdict": {
   "G1_a_real_guide_yields_runnable_examples_without_a_model": {
    "claimed": "at least one real guide contains transcript examples that can be extracted and executed with no model in the loop",
-   "measured": "297 examples in 189 sessions from 9 guides; 136 ran",
+   "measured": "303 examples in 189 sessions from 9 guides; 138 ran",
    "MET": true
   },
   "G2_the_guides_own_printed_output_is_an_oracle": {
    "claimed": "at least half of the examples that run are scored by the output the guide itself printed, and the score is not trivially all-matches",
-   "measured": "128 of 136 run examples matched exactly; 53 were refused by the interpreter",
+   "measured": "130 of 138 run examples matched exactly; 51 were refused by the interpreter",
    "MET": true
   },
   "G3_an_example_can_tell_which_input_it_is_looking_at": {
    "claimed": "at least one matched example separates every machine-produced mutation of its own input -- so the example is a verifier, not decoration",
-   "measured": "71 of 86 mutations separated across 128 examples; 0 blind",
+   "measured": "72 of 88 mutations separated across 130 examples; 0 blind",
    "MET": true
   },
   "G4_a_rule_from_one_example_reaches_an_input_the_guide_never_showed": {
@@ -103,17 +103,17 @@
     "status": "READ",
     "path": "/tmp/real/requests/README.md",
     "blocks": 4,
-    "docstrings_with_a_transcript": 1,
+    "docstrings_with_a_transcript": 2,
     "sessions": 5,
-    "examples": 7
+    "examples": 8
    },
    "click": {
     "status": "READ",
     "path": "/tmp/real/click/README.md",
     "blocks": 2,
-    "docstrings_with_a_transcript": 0,
+    "docstrings_with_a_transcript": 1,
     "sessions": 0,
-    "examples": 0
+    "examples": 1
    },
    "tqdm": {
     "status": "MISSING",
@@ -123,22 +123,50 @@
     "status": "READ",
     "path": "/tmp/real/httpx/README.md",
     "blocks": 5,
-    "docstrings_with_a_transcript": 1,
+    "docstrings_with_a_transcript": 5,
     "sessions": 4,
-    "examples": 6
+    "examples": 10
    }
   },
   "blocks": 82,
-  "examples": 297,
+  "examples": 303,
   "sessions": 189
  },
  "examples": {
   "examples": 189,
-  "ran": 136,
-  "matched": 128,
-  "refused_by_the_interpreter": 53,
+  "ran": 138,
+  "matched": 130,
+  "refused_by_the_interpreter": 51,
   "could_not_run": 0,
   "matched_rows": [
+   {
+    "guide": "stdlib:textwrap",
+    "block_line": 399,
+    "statement": "textwrap.shorten(\"Hello  world!\", width=12)",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        'Hello world!'"
+    ],
+    "got": [
+     "'Hello world!'"
+    ]
+   },
+   {
+    "guide": "stdlib:textwrap",
+    "block_line": 399,
+    "statement": "textwrap.shorten(\"Hello  world!\", width=11)",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        'Hello [...]'"
+    ],
+    "got": [
+     "'Hello [...]'"
+    ]
+   },
    {
     "guide": "stdlib:difflib",
     "block_line": 46,
@@ -2061,17 +2089,29 @@
     "guide": "stdlib:textwrap",
     "block_line": 399,
     "statement": "textwrap.shorten(\"Hello  world!\", width=12)",
-    "ran": false,
-    "verdict": "REFUSED_BY_INTERPRETER",
-    "matches": false
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        'Hello world!'"
+    ],
+    "got": [
+     "'Hello world!'"
+    ]
    },
    {
     "guide": "stdlib:textwrap",
     "block_line": 399,
     "statement": "textwrap.shorten(\"Hello  world!\", width=11)",
-    "ran": false,
-    "verdict": "REFUSED_BY_INTERPRETER",
-    "matches": false
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        'Hello [...]'"
+    ],
+    "got": [
+     "'Hello [...]'"
+    ]
    },
    {
     "guide": "stdlib:difflib",
@@ -4398,14 +4438,46 @@
   ]
  },
  "decoys": {
-  "examples_probed": 128,
-  "mutants": 86,
-  "separated": 71,
+  "examples_probed": 130,
+  "mutants": 88,
+  "separated": 72,
   "blind": 0,
-  "equivalent_unseparable": 15,
-  "examples_fully_separating": 50,
+  "equivalent_unseparable": 16,
+  "examples_fully_separating": 52,
   "examples_untestable": 78,
   "rows": [
+   {
+    "guide": "stdlib:textwrap",
+    "statement": "textwrap.shorten(\"Hello  world!\", width=12)",
+    "mutants": 1,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 1,
+    "rows": [
+     {
+      "change": "12 -> 13",
+      "status": "EXACT",
+      "separates": false,
+      "equivalent_by_construction": true
+     }
+    ]
+   },
+   {
+    "guide": "stdlib:textwrap",
+    "statement": "textwrap.shorten(\"Hello  world!\", width=11)",
+    "mutants": 1,
+    "separated": 1,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": [
+     {
+      "change": "11 -> 12",
+      "status": "MISMATCH_AT_LINE_0",
+      "separates": true,
+      "equivalent_by_construction": false
+     }
+    ]
+   },
    {
     "guide": "stdlib:difflib",
     "statement": "print(round(s.ratio(), 3))",

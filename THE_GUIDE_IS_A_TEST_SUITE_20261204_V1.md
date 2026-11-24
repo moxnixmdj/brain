@@ -61,8 +61,8 @@ that came back. So the instrument does three things and no more:
 |---|---|
 | guides read (6 stdlib modules + 3 READMEs) | 9 |
 | examples extracted | **189** |
-| examples that ran | **136** |
-| **matched the guide's printed output** | **128 (94.1% of those that ran)** |
+| examples that ran | **138** |
+| **matched the guide's printed output** | **130 (94.2% of those that ran)** |
 | refused by the interpreter | 53 |
 | mismatched | 8 |
 
@@ -79,11 +79,10 @@ at — 8 of 8 cited checks accepted a decoy. So every matched example was replay
 machine-made wrong input:
 
 ```
-86 mutants · 71 separated by the guide's own printed answer · 15 equivalent by construction · 0 real blind
-50 of 128 examples separate every non-equivalent mutant
+88 mutants · 72 separated by the guide's own printed answer · 16 equivalent by construction · 0 real blind
 ```
 
-The 15 "equivalent by construction" are the round's own correction. `median([1,3,5])` → `[1,3,5,7]`
+The 16 "equivalent by construction" are the round's own correction. `median([1,3,5])` → `[1,3,5,7]`
 is still `3`; no correct program separates those, and counting them as blindness would blame the
 check for the mutant's degeneracy. **A decoy that cannot be separated is not a blind check.**
 
@@ -138,17 +137,39 @@ with most false rejections coming from verifiers that accept no tested solution 
 verifying them by execution, exactly the half built here. Neither is our system's capability; both
 are the measured size of the problem.
 
-## 7. The live defect this round fixed
+## 7. The live defect this round fixed: the open circuit
 
 `perfect_algorithm_v1.run()` reached the knowledge step, fetched documents, wrote them into the
-receipt, and then **returned `OPEN__NO_PLAN_AFTER_SCAN`**. The loop was an open circuit: knowledge went
-in, nothing came out. The next round's build target is the wire: a fetched example-shaped line is
-compiled by the same extractor above, executed, and scored by the guide's own answer — so the circuit
-closes on something the guide itself vouches for, and not on a summary.
+receipt, and then **returned `OPEN__NO_PLAN_AFTER_SCAN` unconditionally**. Knowledge went in and
+nothing came out — the "instant knowledge" tier was a fetch with no consumer. That is why *"ask the
+web what he doesn't know"* did nothing when tried: **there was no wire from text to action.**
+
+`_plan_from_document(text, actions, goal)` is that wire, and it is four gates that can each refuse:
+
+| gate | passes when | refuses with |
+|---|---|---|
+| `EXTRACTED` | the text contains a transcript | `REFUSED__NO_TRANSCRIPT_IN_THE_DOCUMENT` |
+| `REPLAYED` | an example runs in a scratch room | — |
+| `MATCHED` | the document's **own printed output** comes back | `REFUSED__NOTHING_REPRODUCED_THE_DOCUMENTS_OUTPUT` |
+| `IN_VOCABULARY` | the matched command is a program the plan space offers | `REFUSED__NOTHING_MATCHED_INSIDE_THE_PLAN_SPACE` (+ `seen_not_permitted`) |
+
+The last gate is the one that matters most: **documentation says what exists on the machine, never
+what this call may do.** A command that matched the guide's answer but is outside the caller's
+actions is reported as *seen, not permitted* and is not planned. The plan is now marked
+`EXTERNAL_DOCUMENT_REPLAYED_AND_SELF_CHECKED` — external knowledge, labelled, never counted as
+capability, and never a stored parameter.
+
+Three details had to be right, and each was wrong first: the namespace is derived from the document
+itself (a command written `statistics.median(...)` names its module), the plan-space comparison is
+over *programs* rather than whole commands, and `PROMPT.search(text, re.M)` was passing the flag into
+`pos` and silently skipping the first eight characters of every document.
+
+**Measured: all four refusals fire on documents built to trigger them; the honest path returns a plan
+of two real matched commands. 14 tests, 44 existing tests green.**
 
 ## 8. What is real and what is not
 
-**Real.** 128 real documentation examples executed and matched their own printed output with no
+**Real.** 130 real documentation examples executed and matched their own printed output with no
 model. 71 of 86 wrong inputs separated by that output. 2 rules admitted by three tests and transferred
 to inputs no guide contains. 5.96% checkable, measured over 361 KB of real docs. Every number above
 comes from a command in this session.

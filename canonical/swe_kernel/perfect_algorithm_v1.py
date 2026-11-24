@@ -48,6 +48,8 @@ Spend: $0.
 """
 from __future__ import annotations
 
+import re
+
 import hashlib
 import json
 import os
@@ -437,6 +439,94 @@ def admit(rule: Mapping[str, Any], fresh_instances: Sequence[Any],
 # 6. THE LOOP
 # --------------------------------------------------------------------------- #
 
+def _importable(name: str) -> bool:
+    """Whether a bare name is a module this interpreter can import, asked once and cheaply."""
+    import importlib.util
+
+    if not name.isidentifier():
+        return False
+    try:
+        return importlib.util.find_spec(name) is not None
+    except (ImportError, ValueError, ModuleNotFoundError):
+        return False
+
+
+def _plan_from_document(text: Any, actions: Sequence[Any], goal: str) -> dict[str, Any]:
+    """Turn fetched documentation into a plan, using only what the document itself vouches for.
+
+    Four gates, each of which can refuse, and the refusal is reported with its name:
+      EXTRACTED     the text yielded at least one transcript example;
+      REPLAYED      at least one example ran;
+      MATCHED       at least one example reproduced the output the document printed;
+      IN_VOCABULARY at least one matched command uses a program the plan space already offers.
+
+    The last gate is the one that keeps a guide from widening the action space behind the caller's
+    back: documentation says what EXISTS on a machine, not what this call may DO. A command that
+    matched and is outside the caller's actions is reported as SEEN_NOT_PERMITTED and is not planned.
+    """
+    if isinstance(text, (list, tuple)):
+        text = "\n\n".join(str(x) for x in text)
+    if not isinstance(text, str) or ">>>" not in text:
+        return {"status": "REFUSED__NO_TRANSCRIPT_IN_THE_DOCUMENT",
+                "gate": "EXTRACTED", "examples": 0}
+    import tempfile as _tempfile
+
+    try:
+        from canonical.tools.the_guide_is_a_test_suite_v1 import (
+            _python_example_ok, as_sessions, compare, transcripts)
+    except Exception as error:  # noqa: BLE001
+        return {"status": "REFUSED__EXTRACTOR_UNAVAILABLE", "error": str(error)[:200]}
+    block = {"language": "pycon", "first_line": 1, "text": text, "module_scope": False}
+    sessions = as_sessions(transcripts([block])[0]) if transcripts([block]) else []
+    if not sessions:
+        return {"status": "REFUSED__NO_TRANSCRIPT_IN_THE_DOCUMENT",
+                "gate": "EXTRACTED", "examples": 0}
+    # THE VOCABULARY IS PROGRAMS, NOT WHOLE COMMANDS. `statistics.median([1])` and
+    # `statistics.median([2, 3, 4, 5])` are the same program, and the plan space offers the program.
+    def _program(expression: str) -> str:
+        found = re.match(r"[A-Za-z_][\w.]*", expression.strip())
+        return found.group(0) if found else ""
+
+    offered = {_program(str(action)) for action in actions if str(action).strip()}
+    offered.discard("")
+    matched: list[dict[str, Any]] = []
+    seen: list[str] = []
+    with _tempfile.TemporaryDirectory(prefix="document-room-") as where:
+        room = pathlib.Path(where)
+        for session in sessions:
+            # WHICH NAMESPACE? The document says so. `testmod` knows it because it was handed a
+            # module; a fetched document is not, so it is read off the transcript: a command written
+            # `statistics.median(...)` belongs to a session whose namespace is `statistics`. A name
+            # that is not importable is left alone rather than guessed, and the refusal is counted.
+            head = session["_statement"].split("(")[0].strip().split(".")[0].strip()
+            namespace = head if _importable(head) else None
+            got = _python_example_ok(session, room, module=namespace)
+            if not got.get("ok"):
+                continue
+            verdict = compare(got["got"], session["expected"])
+            if not verdict["matches"]:
+                continue
+            command = session["_statement"]
+            if _program(command) not in offered:
+                seen.append(command[:120])
+                continue
+            matched.append({"statement": command[:200], "expected": session["expected"][:2],
+                            "check": verdict["verdict"]})
+    if not matched:
+        if seen:
+            return {"status": "REFUSED__NOTHING_MATCHED_INSIDE_THE_PLAN_SPACE",
+                    "gate": "IN_VOCABULARY", "seen_not_permitted": seen[:8],
+                    "sessions": len(sessions)}
+        return {"status": "REFUSED__NOTHING_REPRODUCED_THE_DOCUMENTS_OUTPUT",
+                "gate": "MATCHED", "sessions": len(sessions)}
+    return {"status": "PASS__PLAN_FROM_A_DOCUMENT", "gate": "IN_VOCABULARY",
+            "plan": [row["statement"] for row in matched],
+            "matched": matched[:8], "sessions": len(sessions),
+            "authority": "EXTERNAL_DOCUMENT_REPLAYED_AND_SELF_CHECKED",
+            "why_this_plan": ("each step is a command the document printed, replayed in a scratch "
+                              "room, whose output matched the document's own printed answer")}
+
+
 def run(env: Any, goal: str, actions: Sequence[Any],
         *,
         goal_predicate: Callable[[Any], bool],
@@ -640,8 +730,40 @@ def run(env: Any, goal: str, actions: Sequence[Any],
             instant = {"status": "OPEN__INSTANT_KNOWLEDGE_UNAVAILABLE",
                        "query": None, "error": str(e)[:200],
                        "documents_returned": 0, "complete": False}
+        # ---- CLOSE THE CIRCUIT: A DOCUMENT IS A TEST SUITE, AND ITS OWN ANSWER IS THE ORACLE ----
+        #
+        # THIS RETURN WAS THE DEFECT. The step above fetches knowledge and the code below used to
+        # return OPEN__NO_PLAN_AFTER_SCAN unconditionally -- documents went into the receipt and
+        # nothing came out of them. Measured in `the_guide_is_a_test_suite_v1`: a real guide yields
+        # 189 examples of which 136 run and 128 match the guide's own printed output, and the
+        # printed output separates 71 of 86 machine-made wrong inputs. So the fetched text is not
+        # a summary to read; it is a set of commands whose expected output the AUTHOR wrote.
+        #
+        # What happens now, in order, and nothing else:
+        #   1. the fetcher's own returned text is handed to the extractor;
+        #   2. each example is replayed against a scratch room, never the caller's;
+        #   3. only an example that MATCHED the guide's printed output becomes a candidate action;
+        #   4. a candidate becomes a plan only if it is a program the plan's own actions mention,
+        #      so a guide cannot smuggle in an unrelated command;
+        #   5. if nothing survives, the status stays OPEN and says exactly which gate refused.
+        #
+        # The guide is EXTERNAL knowledge and stays labelled so: every plan row carries the
+        # authority of the document it came from, and none of this is counted as capability.
         receipts["steps"]["instant_knowledge"] = instant
+        retrieved = (instant.get("text") or instant.get("documents")
+                     or instant.get("body") or "")
+        closed = _plan_from_document(retrieved, actions, goal)
+        receipts["steps"]["document_as_test_suite"] = closed
+        if closed.get("status") == "PASS__PLAN_FROM_A_DOCUMENT":
+            receipts["plan"] = closed["plan"]
+            receipts["plan_source"] = closed["authority"]
+            receipts["status"] = "PASS__PLAN_FROM_A_DOCUMENT"
+            receipts["pass"] = False  # a plan is not a solved goal; the caller still executes it
+            receipts["authority"] = closed["authority"]
+            receipts["duration_s"] = round(time.time() - started, 4)
+            return receipts
         receipts["status"] = "OPEN__NO_PLAN_AFTER_SCAN"
+        receipts["plan_source"] = None
         receipts["pass"] = False
         receipts["authority"] = "NONE__PLAN_NOT_COMPUTED"
         receipts["duration_s"] = round(time.time() - started, 4)

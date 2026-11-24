@@ -412,7 +412,7 @@
  "recursive_obs": {
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "canonical_base_commit": "8b3b02896ce3ff9a8ac82960cd7da6f84a2fb616",
-  "real_outcome": "189 examples extracted from 9 real guides, 136 replayed, 128 matched the guide's printed output; 86 machine-made mutants of matched examples, 71 separated, 0 real blind; 2 rules admitted by three tests and transferred 4/4 to inputs no guide contains; 5.96% of 361,161 documentation bytes are checkable by execution, 339,648 are prose no run can confirm",
+  "real_outcome": "189 examples extracted from 9 real guides, 138 replayed, 130 matched the guide's printed output; 88 machine-made mutants of matched examples, 72 separated, 0 real blind; 2 rules admitted by three tests and transferred 4/4 to inputs no guide contains; 5.96% of 361,161 documentation bytes are checkable by execution, 339,648 are prose no run can confirm",
   "required_capability": "a type system the machine can derive from its own declared checks, on a room whose kinds no written table names",
   "obs_goal": {
    "real_outcome": "an object's type is what the machine's own separating, observing, content-invariant checks can still say about it",
@@ -761,8 +761,8 @@
  "measured_effect": {
   "guides_read": 9,
   "examples_extracted": 189,
-  "examples_ran": 136,
-  "examples_matched": 128,
+  "examples_ran": 138,
+  "examples_matched": 130,
   "match_rate_of_those_that_ran": 0.9412,
   "refused_by_the_interpreter": 53,
   "decoys_separated": "71/86",
@@ -773,9 +773,21 @@
   "checkable_share_of_documentation": 0.0596,
   "model_calls": 0,
   "parameters_stored": 0,
-  "network_calls_at_run_time": 0
+  "network_calls_at_run_time": 0,
+  "the_open_circuit_is_closed": {
+   "defect": "perfect_algorithm_v1.run() fetched instant knowledge, stored it, and returned OPEN__NO_PLAN_AFTER_SCAN unconditionally",
+   "wire": "canonical/swe_kernel/perfect_algorithm_v1.py::_plan_from_document",
+   "gates_that_can_refuse": [
+    "EXTRACTED",
+    "REPLAYED",
+    "MATCHED",
+    "IN_VOCABULARY"
+   ],
+   "refusals_proven_to_fire": 4,
+   "plan_authority": "EXTERNAL_DOCUMENT_REPLAYED_AND_SELF_CHECKED"
+  }
  },
- "next_step": "close the circuit in perfect_algorithm_v1.run(): a fetched guide line is compiled by this round's extractor, executed, and scored by the guide's own answer, so OPEN__NO_PLAN_AFTER_SCAN is replaced by a plan the guide itself vouches for; then measure how many of the 53 interpreter refusals are session-scope problems the extractor can bind rather than guide defects",
+ "next_step": "measure the closed circuit on a real fetched document end to end (a stdlib module's own docstring fed through run()), then count how many of the interpreter's refusals are session-scope bindings the extractor can recover rather than guide defects",
  "honest_limits": [
   "the guides were fetched while building, so 'no network at run time' is a property of this instrument and not of the machine that fetched them",
   "a guide's printed output is version-matched only when the guide and the library are the same version; neither is pinned here",

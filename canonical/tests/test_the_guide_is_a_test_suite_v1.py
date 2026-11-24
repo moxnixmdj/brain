@@ -139,3 +139,58 @@ def test_zero_model_calls_zero_parameters_zero_network(receipt):
     assert cost["model_calls"] == 0
     assert cost["parameters_stored"] == 0
     assert cost["network_calls_at_run_time"] == 0
+
+
+# --------------------------------------------------------------------------------------------------
+# The circuit the round closed: `perfect_algorithm_v1.run()` used to fetch instant knowledge and then
+# return `OPEN__NO_PLAN_AFTER_SCAN` unconditionally. These tests hold the wire in place, and they
+# hold its four refusals too -- a path that can only succeed is the mistake this project keeps
+# paying for.
+# --------------------------------------------------------------------------------------------------
+
+from canonical.swe_kernel import perfect_algorithm_v1 as algorithm  # noqa: E402
+
+GOOD_DOCUMENT = """
+    >>> statistics.median([2, 3, 4, 5])
+    3.5
+    >>> statistics.median([9, 1, 5])
+    5
+"""
+
+
+def test_a_fetched_document_becomes_a_plan_only_through_its_own_printed_output():
+    result = algorithm._plan_from_document(GOOD_DOCUMENT, ["statistics.median([1])"], "median")
+    assert result["status"] == "PASS__PLAN_FROM_A_DOCUMENT", result
+    assert result["plan"] == ["statistics.median([2, 3, 4, 5])", "statistics.median([9, 1, 5])"]
+    assert "EXTERNAL_DOCUMENT" in result["authority"], result
+
+
+def test_a_document_whose_printed_answer_is_wrong_plans_nothing():
+    """The oracle is the document's own output. A transcript that does not reproduce it is not a
+    plan, and this is the difference between reading a guide and trusting a guide."""
+    wrong = "\n    >>> statistics.median([2, 3])\n    99\n"
+    result = algorithm._plan_from_document(wrong, ["statistics.median([1])"], "median")
+    assert result["status"] == "REFUSED__NOTHING_REPRODUCED_THE_DOCUMENTS_OUTPUT", result
+
+
+def test_a_matched_command_outside_the_plan_space_is_seen_and_not_planned():
+    """Documentation says what EXISTS on the machine, never what this call may DO."""
+    result = algorithm._plan_from_document(GOOD_DOCUMENT, ["unrelated_program --flag"], "median")
+    assert result["status"] == "REFUSED__NOTHING_MATCHED_INSIDE_THE_PLAN_SPACE", result
+    assert result["seen_not_permitted"], result
+    assert "plan" not in result or not result.get("plan")
+
+
+def test_prose_with_no_transcript_is_refused_before_anything_is_run():
+    result = algorithm._plan_from_document("Requests is a simple, yet elegant HTTP library.",
+                                           ["x"], "g")
+    assert result["status"] == "REFUSED__NO_TRANSCRIPT_IN_THE_DOCUMENT", result
+
+
+def test_the_run_loop_reports_which_gate_refused_instead_of_only_opening():
+    """`OPEN__NO_PLAN_AFTER_SCAN` must now carry the reason, not just the verdict."""
+    import inspect
+
+    source = inspect.getsource(algorithm.run)
+    assert "_plan_from_document" in source, "the circuit is not wired into run()"
+    assert '"steps"]["document_as_test_suite"]' in source, "the refusal is not reported"
