@@ -31,9 +31,10 @@
   "producer_cognition_model_dependency_count": 0,
   "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
   "progress_evidence_paths": [
-   "canonical/verification/WHERE_THE_SWE_BENCH_LOSS_IS_20261124_V1.json",
-   "canonical/tests/test_where_the_swe_bench_loss_is_v1.py",
-   "intake/WHERE_THE_SWE_BENCH_LOSS_IS_20261124_V1.md"
+   "canonical/verification/THE_CHECK_THE_LOOP_THROWS_AWAY_20261125_V1.json",
+   "canonical/tests/test_the_check_the_loop_throws_away_v1.py",
+   "canonical/tools/the_content_channel_measured_v1.py",
+   "intake/THE_CHECK_THE_LOOP_THROWS_AWAY_20261125_V1.md"
   ],
   "route_class": "ADAPT",
   "scope_complete_discharge": false,
