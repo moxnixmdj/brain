@@ -406,7 +406,7 @@ async def _cycle_loop(
                     "apply", "diff_bytes", "doc_compiler", "world_model",
                     "workspace", "language_counts", "markers", "marker_errors",
                     "fallback", "doc_compiler_fallback", "fallback_error",
-                    "workspace_diff"):
+                    "workspace_diff", "classical_cipher", "official_verifier_expected"):
             if key in result:
                 diagnostic[key] = result[key]
         if diagnostic:

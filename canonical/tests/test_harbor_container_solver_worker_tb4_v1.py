@@ -10,6 +10,8 @@ from contextlib import redirect_stdout
 import io
 import json
 from pathlib import Path
+import subprocess
+import sys
 import tempfile
 import unittest
 from unittest.mock import patch
@@ -113,3 +115,73 @@ class TerminalBenchCandidatePathTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class CipherCandidateCycleTests(unittest.TestCase):
+    """The general classical-cipher capability fires on cipher-shaped TB4 tasks,
+    never on others, and writes a real, self-contained artifact."""
+
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.root = Path(self.temp.name).resolve()
+        from canonical.runtime import classical_cipher_v1 as cc
+        slice_ = _english_prose_slice(620)
+        self.assertIsNotNone(slice_, 'repo prose fixture unavailable')
+        self.specimen = self.root / "blob.txt"
+        self.specimen.write_text(cc.encrypt(slice_, "vigenere", "BRAINCYPHER"))
+        self.plaintext = slice_
+
+    def tearDown(self):
+        self.temp.cleanup()
+
+    def test_cipher_goal_routes_to_classical_engine_and_writes_cracker(self):
+        request = {"goal": f"Build a Python command-line tool at {self.root}/cracker.py that reads "
+                            f"one ciphertext file and writes English plaintext to stdout. The specimen is a "
+                            f"classical substitution cipher.",
+                   "mode": "EPISTEMIC",
+                   "inputs": {"harbor_suite": "terminal-bench-4",
+                              "harbor_task": f"Write a cracker for the Vigenere-family cipher in {self.root}",
+                              "harbor_repo": str(self.root),
+                              "observations": [],
+                              "experimental_candidate_path": True}}
+        result = run_worker(request)
+        self.assertEqual(result["engine_status"], "CANDIDATE_WRITTEN__UNVERIFIED")
+        self.assertEqual(result["engine"], "classical_cipher_v1")
+        cc_info = result["classical_cipher"]
+        self.assertEqual(cc_info["variant"] in ("vigenere_straight", "interleaved2", "vigenere_beaufort"), True)
+        artifact = Path(cc_info["artifact_path"])
+        self.assertTrue(artifact.is_file())
+        out = subprocess.run([sys.executable, str(artifact), str(self.specimen)],
+                             capture_output=True, text=True, timeout=120)
+        import re as _re
+        recovered = _re.sub(r"[^A-Z]", "", out.stdout.upper())
+        self.assertEqual(recovered, self.plaintext)
+        self.assertFalse(cc_info["official_verifier_invoked"])
+
+    def test_non_cipher_goal_does_not_invoke_engine(self):
+        request = {"goal": "Fix the failing unit tests in the project",
+                   "mode": "EPISTEMIC",
+                   "inputs": {"harbor_suite": "terminal-bench-4",
+                              "harbor_task": "Fix the failing unit tests in the project",
+                              "harbor_repo": str(self.root),
+                              "observations": [],
+                              "experimental_candidate_path": True}}
+        with patch.object(doc_compiler, "solve_multi_step_with_instant_knowledge",
+                          return_value={"status": "FAILED", "mode": "CLI_EXECUTION_UNVERIFIED",
+                                        "elapsed_ms": 1.0, "model_calls": 0, "parameters_stored": 0}), \
+             patch.object(brain, "open_model", side_effect=RuntimeError("no")):
+            result = run_worker(request)
+        self.assertNotEqual(result.get("engine"), "classical_cipher_v1")
+
+
+def _english_prose_slice(min_len: int):
+    root = Path(__file__).resolve().parents[2]
+    for p in sorted(root.rglob("*.md")):
+        try:
+            text = p.read_text(encoding="utf-8", errors="ignore")
+        except Exception:
+            continue
+        letters = "".join(ch for ch in text.upper() if ch.isalpha())
+        if len(letters) >= min_len:
+            return letters[:min_len]
+    return None

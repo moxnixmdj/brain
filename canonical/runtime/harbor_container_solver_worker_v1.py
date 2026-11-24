@@ -13,6 +13,7 @@ import hashlib
 import json
 import os
 import re
+import stat
 import shutil
 import sys
 import tempfile
@@ -190,6 +191,114 @@ def _pro_imported_cycle(inputs, repo: str) -> dict:
         shutil.rmtree(temp_parent, ignore_errors=True)
 
 
+_CIPHER_MARKERS = ("cipher", "ciphertext", "decrypt", "encrypt", "vigenere",
+                   "plaintext", "cryptanalysis", "keystream")
+
+
+def _find_letter_specimen(root: str) -> tuple[str | None, dict[str, int]]:
+    """Locate the one letter-dense regular file that may be a ciphertext specimen.
+
+    Computed from the filesystem at decision time; never assumes a filename.
+    Bounded: skips bloat dirs, caps scanned files and probe bytes.
+    """
+    from canonical.runtime.harbor_pro_worktree_v1 import SKIPPED_DIRS  # reuse inspected constants
+    best: tuple[int, str] | None = None
+    scanned = seen = 0
+    SKIP_SUFFIXES = (".py", ".md", ".json", ".toml", ".yaml", ".yml", ".js", ".ts",
+                     ".css", ".html", ".so", ".a", ".o", ".bin", ".png", ".jpg", ".gif", ".pdf", ".zip")
+    try:
+        for dirpath, dirnames, filenames in os.walk(root):
+            dirnames[:] = [d for d in dirnames if d not in SKIPPED_DIRS and not d.startswith(".")]
+            for name in filenames:
+                if scanned >= 1500:
+                    return (best[1] if best else None), {"scanned": scanned, "seen": seen}
+                scanned += 1
+                path = os.path.join(dirpath, name)
+                try:
+                    if name.lower().endswith(SKIP_SUFFIXES):
+                        continue
+                    st = os.lstat(path)
+                    if not stat.S_ISREG(st.st_mode) or st.st_size < 120 or st.st_size > 512 * 1024:
+                        continue
+                    with open(path, "rb") as handle:
+                        blob = handle.read(8192)
+                    letters = sum(1 for b in blob if (65 <= b <= 90) or (97 <= b <= 122))
+                    frac = letters / max(len(blob), 1)
+                    seen += 1
+                    if frac >= 0.85 and letters >= 100:
+                        score = letters
+                        if best is None or score > best[0]:
+                            best = (score, path)
+                except OSError:
+                    continue
+    except OSError:
+        pass
+    return (best[1] if best else None), {"scanned": scanned, "seen": seen}
+
+
+def _cipher_candidate_cycle(request, inputs, repo: str) -> dict | None:
+    """General classical-cipher capability cycle for TB4-style environments.
+
+    Fires only when the goal names cipher concepts AND the filesystem holds a
+    letter-dense specimen. Writes a self-contained cracker (generic algorithm,
+    admitted on unseen real-prose victims, never tuned to the task). The
+    artifact is a candidate, not a claim of correctness: the official verifier
+    decides. Returns None when this capability does not apply.
+    """
+    instruction = str(inputs.get("harbor_task") or "") + "\n" + str(request.get("goal") or "")
+    goal_hit = any(marker in instruction.lower() for marker in _CIPHER_MARKERS)
+    if not goal_hit:
+        return None
+    workspace = repo if Path(repo).is_absolute() else os.getcwd()
+    specimen, census = _find_letter_specimen(workspace)
+    if specimen is None:
+        return None
+    from canonical.runtime import classical_cipher_v1 as cc
+    try:
+        text = Path(specimen).read_text(encoding="utf-8", errors="ignore")
+    except OSError:
+        return None
+    cracked = cc.crack(text)
+    applied = {"status": "CANDIDATE_EXECUTED_IN_PLACE__UNVERIFIED",
+               "official_verifier_invoked": False}
+    match = re.search(r"(/[A-Za-z0-9_./-]+\.py)\b", str(request.get("goal") or ""))
+    target = None
+    if match:
+        cand = os.path.normpath(match.group(1))
+        if cand.startswith(str(Path(workspace).resolve())) and ".." not in cand:
+            target = cand
+    if target is None:
+        target = str(Path(workspace) / "cracker.py")
+    artifact = cc.emit_cracker(target)
+    best = cracked.get("best") or {}
+    out = _finish(
+        (f"Brain classical-cipher engine analysed the specimen ({os.path.basename(specimen)}): "
+         f"variant={best.get('variant')}, period(s)={best.get('period')}, "
+         f"zlib_margin={cracked.get('zlib_margin_vs_runner_up')}, "
+         f"ioc_ciphertext={cracked.get('ioc_ciphertext')}. General cracker written to "
+         f"{os.path.basename(target)} (admitted on unseen victims only). Official task verifier decides."),
+        engine_status="CANDIDATE_WRITTEN__UNVERIFIED",
+        classical_cipher={
+            "specimen_scanned": census,
+            "ioc_ciphertext": cracked.get("ioc_ciphertext"),
+            "variant": best.get("variant"),
+            "period": best.get("period"),
+            "candidates_tried": cracked.get("candidates_tried"),
+            "compressibility_verdict": cracked.get("compressibility_verdict"),
+            "zlib_margin_vs_runner_up": cracked.get("zlib_margin_vs_runner_up"),
+            "key_recovered_on_specimen": bool(best.get("key")),
+            "stats_refused": cracked.get("stats_refused"),
+            "artifact_path": artifact.get("path"),
+            "artifact_bytes": artifact.get("bytes"),
+            "official_verifier_invoked": False,
+            "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+        },
+        workspace=workspace, apply=applied)
+    out["engine"] = "classical_cipher_v1"
+    out["official_verifier_expected"] = True
+    return out
+
+
 def _terminal_imported_cycle(request, inputs, repo: str) -> dict:
     from canonical.runtime.epistemic_doc_compiler_agent_v1 import (
         solve_multi_step_with_instant_knowledge,
@@ -197,6 +306,9 @@ def _terminal_imported_cycle(request, inputs, repo: str) -> dict:
 
     instruction = str(inputs.get("harbor_task") or "")
     workspace = repo if Path(repo).is_absolute() else os.getcwd()
+    cipher = _cipher_candidate_cycle(request, inputs, repo)
+    if cipher is not None:
+        return cipher
     try:
         doc = solve_multi_step_with_instant_knowledge(
             instruction, workspace=workspace, knowledge_source=None,
