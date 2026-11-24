@@ -9056,3 +9056,74 @@ The test dies, and only that test. Restored: 20 passed.
     * The demonstration still supplies the SHAPE (one path argument). A tool needing two coordinated
       arguments is the next unsolved case.
     * §6 NOT MET. No OSWorld task, no SWE-bench instance.
+
+---
+
+## §A148 — the verdict that certified an answer about a file nobody asked for
+
+This is the worst class of failure the project recognises, and it was found by accident while testing
+something else. Not a refusal, not a wrong answer: **a certification of work that never happened.**
+
+### What happened
+
+    request    "how many rows are in /tmp/homefile.csv"
+    ran        python.source.definition_count.v1   (a Python SOURCE analyser)
+    on         a_capability_that_cannot_know_this_machine_cannot_run_it_20261112.py
+    reported   status VERIFIED_ACTION, ok True, answer 11
+
+The named path could not be bound, so a **default** was substituted. Every existing check passed,
+because every existing check asks *"did this capability produce an artifact it can vouch for"*. None
+asks *"is this artifact about the thing I was told to work on."*
+
+`_independent_artifact_check` — the strongest check in the chain — says so in its own docstring: *"it
+proves the bytes exist and match the hash the adapter declared, not that the work was right."* That
+gap is exactly one answer wide, and a wrong answer walked through it.
+
+### The check, and the two false positives it produced first
+
+    _named_paths(goal)                     the files a request explicitly names
+    _receipt_speaks_to_named_path(...)     does this run's inputs, or its receipt, concern them
+
+Fires only when the request names a file. **Version 1 was wrong twice, and both times on honest work:**
+
+    1. "profile the columns of a csv .../nums.csv"  ->  FAILED the correct capability, because the
+       receipt returned its answer (`{"columns": ...}`) and did not echo the path it was handed.
+       Fix: check what the run was BOUND to before reading what it chose to say. A receipt need not
+       quote its input.
+
+    2. "audit the python source canonical/runtime/solve_v1.py"  ->  FAILED an audit of 2417 files,
+       because it bound `source_root: canonical/runtime` -- the DIRECTORY CONTAINING the named file.
+       Fix: a superset is coverage, not silence.
+
+The regression this caused was not subtle: one test went from 12/12 rescued paraphrases to 8/12, and
+only by running the suite against a stashed baseline was the cause traced to my own downgrade. The
+lesson is recorded as law (138) below, because "my new check is right" is exactly the belief that
+produces this kind of damage.
+
+After both corrections:
+
+    how many rows are in /tmp/homefile.csv      ACTION_FAILED   RECEIPT_SILENT_ON_NAMED_PATH
+    read the text of /tmp/homefile.csv          ACTION_FAILED   RECEIPT_SILENT_ON_NAMED_PATH
+    profile .../unseen/nums.csv                 VERIFIED_ACTION BOUND_TO_NAMED_PATH
+    audit .../solve_v1.py                       VERIFIED_ACTION BOUND_TO_CONTAINING_DIR
+    show me the last five git commits           VERIFIED_ACTION (no file named; no second-guessing)
+
+Two false passes closed, zero honest runs broken. Verified against a stashed baseline: the 20
+pre-existing failures in the affected test set are byte-identical with and without this work.
+
+    (137) Verifying the artifact is not verifying the answer. A capability can prove every byte it
+          wrote and still have written about the wrong thing; the receipt must be checked against the
+          request, not only against itself.
+    (138) A new check is guilty until measured against the suite. Mine failed two honest capabilities
+          and dropped a 12/12 benchmark to 8/12 — found only by running the affected tests with the
+          change stashed. The confidence that a correctness check cannot be harmful is the confidence
+          that ships it.
+
+### Honest limits
+
+    * The check is co-occurrence, not reading. A receipt that mentions the named file while
+      analysing something else would pass. It closes the silent case, not every case.
+    * It cannot repair the binding. When the named path is unbindable the run still fails — correctly,
+      and now honestly, but the capability that *could* have answered (counting rows in a csv) does
+      not exist yet. That gap is the one worth closing next.
+    * §6 NOT MET. No OSWorld task, no SWE-bench instance.

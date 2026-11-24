@@ -1,0 +1,38 @@
+{
+  "cells": [],
+  "compile_errors": [],
+  "compiled_obligation_ids": [],
+  "compiler_payload_sha256": "978f29b353607f71ab30f9dc3532591d655a76d1347c329b857835332774ff57",
+  "coverage_complete": false,
+  "external_general_purpose_model_runtime_dependency_count": 0,
+  "hard_nonclaims": [
+    "SUPPORTED_LINE_GRAMMAR_IS_NOT_GENERAL_NATURAL_LANGUAGE",
+    "UNMATCHED_OR_INVALID_LINES_REMAIN_BLOCKING_RESIDUALS",
+    "CELL_COMPILATION_DOES_NOT_PROVE_THE_CANDIDATE_PASSES",
+    "NO_FRONTIERCODE_SCORE_OR_TERMINAL_AUTHORITY"
+  ],
+  "incremental_spend_usd": 0,
+  "lossless_task_contract_sha256": "05f3f4ee1f8f912e689707df2b17d6aa95f46adde3a558ced14928967ba69029",
+  "model_dependency_count": 0,
+  "pass": false,
+  "required_obligation_ids": [
+    "RAWREQ:a8c8c002979df7f9260722fe83624db44631a123704a489f5adafaa804f6ad8b",
+    "RAWREQ:07805eef3644e4ac8487e2176174a3ea0452b9f07c245fcf2f22ecefdf9d85f5",
+    "RAWREQ:3aa2988a4733f46b609a5350d0addd0acbe903f768c27f82bdca00390d4115aa",
+    "RAWREQ:3e495caec4560a6e88932c444b9a79d72cc0f9e39347267294de7128f3d6c987",
+    "RAWREQ:ffea7822f71202ba332816774a7c19da4a4e59b750b326c49b80d45e6190dda7",
+    "RAWREQ:0de2a3e46c6dc5f2e3adfc91f4abc8d21d5ae2ba013d7c9bc1e14a5cb6a47845"
+  ],
+  "residual_obligation_ids": [
+    "RAWREQ:07805eef3644e4ac8487e2176174a3ea0452b9f07c245fcf2f22ecefdf9d85f5",
+    "RAWREQ:0de2a3e46c6dc5f2e3adfc91f4abc8d21d5ae2ba013d7c9bc1e14a5cb6a47845",
+    "RAWREQ:3aa2988a4733f46b609a5350d0addd0acbe903f768c27f82bdca00390d4115aa",
+    "RAWREQ:3e495caec4560a6e88932c444b9a79d72cc0f9e39347267294de7128f3d6c987",
+    "RAWREQ:a8c8c002979df7f9260722fe83624db44631a123704a489f5adafaa804f6ad8b",
+    "RAWREQ:ffea7822f71202ba332816774a7c19da4a4e59b750b326c49b80d45e6190dda7"
+  ],
+  "schema": "PROJECT_BRAIN_PYTHON_SOFTWARE_REQUEST_SEMANTIC_ACCEPTANCE_V1",
+  "status": "OPEN__SEMANTIC_RESIDUALS",
+  "task_sha256": "99e4c8de2ee999027de1c11be034cd66dd75fb9e758a6daef47bedb69de14693",
+  "terminal_authority": false
+}

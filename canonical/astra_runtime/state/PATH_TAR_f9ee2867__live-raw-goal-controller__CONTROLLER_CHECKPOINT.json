@@ -1,0 +1,354 @@
+{
+  "completed_actions": [
+    {
+      "cycle": 0,
+      "declared_plan": {
+        "args": {
+          "capability_id": "orchestration.verify.bridge_enumeration.v1",
+          "inputs": {
+            "output_path": "tar.gz",
+            "registry": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
+          },
+          "instance_id": "orchestration.verify.bridge_enumeration.v1",
+          "output_path": "tar.gz",
+          "provides": [
+            "orchestration.bridge_table.verified",
+            "orchestration.emits.verified"
+          ],
+          "registry": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+          "requires": [],
+          "result_fields": [
+            "adapter",
+            "output_path",
+            "output_sha256",
+            "output_verified",
+            "emits_verified",
+            "bridge_verified",
+            "counts",
+            "verified",
+            "model_dependency_count",
+            "incremental_spend_usd"
+          ]
+        },
+        "expect": {
+          "field": "pass",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_verified_bound_capability_adapter"
+      },
+      "plan": {
+        "args": {
+          "capability_id": "orchestration.verify.bridge_enumeration.v1",
+          "inputs": {
+            "output_path": "tar.gz",
+            "registry": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
+          },
+          "instance_id": "orchestration.verify.bridge_enumeration.v1",
+          "output_path": "tar.gz",
+          "provides": [
+            "orchestration.bridge_table.verified",
+            "orchestration.emits.verified"
+          ],
+          "registry": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+          "requires": [],
+          "result_fields": [
+            "adapter",
+            "output_path",
+            "output_sha256",
+            "output_verified",
+            "emits_verified",
+            "bridge_verified",
+            "counts",
+            "verified",
+            "model_dependency_count",
+            "incremental_spend_usd"
+          ]
+        },
+        "expect": {
+          "field": "pass",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_verified_bound_capability_adapter"
+      },
+      "result": {
+        "capability_credit_delta": 0,
+        "capability_id": "orchestration.verify.bridge_enumeration.v1",
+        "composition_capsule_head_hash": "f85068c9ad12a187e846eaff97f0fd133f4e0f41e2ac91c8d3ec2bf93d5531b7",
+        "execution_trace": {
+          "trace": [
+            {
+              "cycle": 0,
+              "plan": {
+                "args": {
+                  "capability_id": "orchestration.verify.bridge_enumeration.v1",
+                  "output_path": "tar.gz",
+                  "registry": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
+                },
+                "capability_id": "orchestration.verify.bridge_enumeration.v1",
+                "expect": {
+                  "field": "output_verified",
+                  "type": "field_equals",
+                  "value": true
+                },
+                "type": "invoke_capability"
+              },
+              "result": {
+                "adapter": "orchestration_bridge_enumeration_v1",
+                "bridge_verified": 1,
+                "capability_id": "orchestration.verify.bridge_enumeration.v1",
+                "counts": {
+                  "bridge_verified": 1,
+                  "consumer_file_needs": 43,
+                  "emits_verified": 20,
+                  "execution_failures_classified": 210,
+                  "producer_candidates": 98,
+                  "registry_entries": 146,
+                  "skipped": 80
+                },
+                "dependency": {
+                  "external_dependency": null,
+                  "status": "LOCAL_VERIFIED",
+                  "type": "brain_native_deterministic_composition"
+                },
+                "emits_verified": 20,
+                "incremental_spend_usd": 0,
+                "model_dependency_count": 0,
+                "output_path": "tar.gz",
+                "output_sha256": "e18fa6f6d078fd8e3a3fe7e900fb512b6e1c60dfde3775e06d8717bc2f8147b9",
+                "output_verified": true,
+                "verified": true
+              }
+            },
+            {
+              "cycle": 1,
+              "plan": {
+                "args": {
+                  "summary": "verified promoted bound capability execution"
+                },
+                "type": "finish",
+                "why": "All target effects have an executable minimum-cost capability plan."
+              },
+              "result": {
+                "summary": "verified promoted bound capability execution"
+              }
+            }
+          ]
+        },
+        "execution_verification": {
+          "detail": {
+            "acceptance_credit_delta": 0,
+            "all_declared_runtime_preconditions_have_prior_or_initial_witnesses": true,
+            "all_explicit_cross_role_result_edges_are_backward_and_declared": true,
+            "all_planned_nonfinish_actions_have_runtime_expectation_witnesses": true,
+            "all_target_effects_have_witnesses": true,
+            "capsule": {
+              "genesis_hash": "913f6b7819ac44d5bc897e407c0691de5e45afa1ad796e69d4dbd8adc91ceea8",
+              "head_hash": "f85068c9ad12a187e846eaff97f0fd133f4e0f41e2ac91c8d3ec2bf93d5531b7",
+              "records": [
+                {
+                  "action_ref": "9b149ca274cfc1fb49453a0de24c6059d25b78ad303644a43ae45c217f3598dc",
+                  "evidence_refs": [
+                    "result_sha256:3eac8eeb298149de8860d489aded2d15724cda53d8fb840e2100694082771a48"
+                  ],
+                  "index": 0,
+                  "input_bindings": {},
+                  "lineage": {
+                    "effect:orchestration.bridge_table.verified": [
+                      "evidence:result_sha256:3eac8eeb298149de8860d489aded2d15724cda53d8fb840e2100694082771a48",
+                      "action:9b149ca274cfc1fb49453a0de24c6059d25b78ad303644a43ae45c217f3598dc"
+                    ],
+                    "effect:orchestration.emits.verified": [
+                      "evidence:result_sha256:3eac8eeb298149de8860d489aded2d15724cda53d8fb840e2100694082771a48",
+                      "action:9b149ca274cfc1fb49453a0de24c6059d25b78ad303644a43ae45c217f3598dc"
+                    ]
+                  },
+                  "parent_hash": "913f6b7819ac44d5bc897e407c0691de5e45afa1ad796e69d4dbd8adc91ceea8",
+                  "producer": "orchestration.verify.bridge_enumeration.v1",
+                  "provides": [
+                    "effect:orchestration.bridge_table.verified",
+                    "effect:orchestration.emits.verified"
+                  ],
+                  "record_hash": "f85068c9ad12a187e846eaff97f0fd133f4e0f41e2ac91c8d3ec2bf93d5531b7",
+                  "requires": [],
+                  "value_hashes": {
+                    "effect:orchestration.bridge_table.verified": "04ee6318b0b469135479946f984e699f2c107c8b9b910903172dc2daad66b0c8",
+                    "effect:orchestration.emits.verified": "a731125c827fdbc4a5939be0f3c5595c9955835f13046a29dbeed37dfe108b39"
+                  },
+                  "values": {
+                    "effect:orchestration.bridge_table.verified": {
+                      "capability_id": "orchestration.verify.bridge_enumeration.v1",
+                      "cycle": 0,
+                      "effect": "orchestration.bridge_table.verified",
+                      "expectation": {
+                        "field": "output_verified",
+                        "type": "field_equals",
+                        "value": true
+                      },
+                      "raw_action_sha256": "9b149ca274cfc1fb49453a0de24c6059d25b78ad303644a43ae45c217f3598dc",
+                      "resolved_action_sha256": "9b149ca274cfc1fb49453a0de24c6059d25b78ad303644a43ae45c217f3598dc",
+                      "result_sha256": "3eac8eeb298149de8860d489aded2d15724cda53d8fb840e2100694082771a48"
+                    },
+                    "effect:orchestration.emits.verified": {
+                      "capability_id": "orchestration.verify.bridge_enumeration.v1",
+                      "cycle": 0,
+                      "effect": "orchestration.emits.verified",
+                      "expectation": {
+                        "field": "output_verified",
+                        "type": "field_equals",
+                        "value": true
+                      },
+                      "raw_action_sha256": "9b149ca274cfc1fb49453a0de24c6059d25b78ad303644a43ae45c217f3598dc",
+                      "resolved_action_sha256": "9b149ca274cfc1fb49453a0de24c6059d25b78ad303644a43ae45c217f3598dc",
+                      "result_sha256": "3eac8eeb298149de8860d489aded2d15724cda53d8fb840e2100694082771a48"
+                    }
+                  }
+                }
+              ],
+              "schema": "PROJECT_BRAIN_COMPOSITION_STATE_CAPSULE_V1"
+            },
+            "capsule_head_hash": "f85068c9ad12a187e846eaff97f0fd133f4e0f41e2ac91c8d3ec2bf93d5531b7",
+            "capsule_record_count": 1,
+            "explicit_result_edge_count": 0,
+            "initial_fact_count": 0,
+            "plan_capability_count": 1,
+            "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_TRACE_CAPSULE_V1",
+            "status": "PASS",
+            "target_effect_count": 2,
+            "trace_action_count": 2,
+            "transition_receipts": [
+              {
+                "capability_id": "orchestration.verify.bridge_enumeration.v1",
+                "capsule_head_hash": "f85068c9ad12a187e846eaff97f0fd133f4e0f41e2ac91c8d3ec2bf93d5531b7",
+                "cycle": 0,
+                "explicit_result_edges": [],
+                "provides": [
+                  "orchestration.bridge_table.verified",
+                  "orchestration.emits.verified"
+                ],
+                "raw_action_sha256": "9b149ca274cfc1fb49453a0de24c6059d25b78ad303644a43ae45c217f3598dc",
+                "requirement_witnesses": {},
+                "requires": [],
+                "resolved_action_sha256": "9b149ca274cfc1fb49453a0de24c6059d25b78ad303644a43ae45c217f3598dc",
+                "result_sha256": "3eac8eeb298149de8860d489aded2d15724cda53d8fb840e2100694082771a48"
+              }
+            ]
+          },
+          "execution_authority": false,
+          "pass": true,
+          "proof_digest": "32740e0f7872a813abdcf8313100d7c10c07517c60c7e93dba648cc4827cc1cc",
+          "reason": null,
+          "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_EXECUTION_VERIFIER_V1",
+          "status": "VERIFIED",
+          "terminal_authority": false,
+          "verified_output": {
+            "all_target_effects_have_witnesses": true,
+            "capsule_head_hash": "f85068c9ad12a187e846eaff97f0fd133f4e0f41e2ac91c8d3ec2bf93d5531b7",
+            "capsule_record_count": 1,
+            "plan_capability_count": 1
+          }
+        },
+        "incremental_spend_usd": 0,
+        "inputs_sha256": "a4491ad3c75568352156ed23afb79c4e4e9ddff6d9cd8fc11d6fe8434712123e",
+        "instance_id": "orchestration.verify.bridge_enumeration.v1",
+        "ownership_credit_delta": 0,
+        "pass": true,
+        "provides": [
+          "orchestration.bridge_table.verified",
+          "orchestration.emits.verified"
+        ],
+        "registry_entry_sha256": "ecedc7f713461e9c0e04acad4a8bafbc5c968dd389d407835778dd638e5dd25a",
+        "registry_file_sha256": "f92140307ef51a272132602c45048505f2d0253a90670b53b5f931942079827e",
+        "rendered_action": {
+          "args": {
+            "capability_id": "orchestration.verify.bridge_enumeration.v1",
+            "output_path": "tar.gz",
+            "registry": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
+          },
+          "expect": {
+            "field": "output_verified",
+            "type": "field_equals",
+            "value": true
+          },
+          "type": "invoke_capability"
+        },
+        "rendered_action_sha256": "5aaf6db9947dec86fd0b3a28529dc640f20b0a313796f310c9b0948452d2eddb",
+        "requires": [],
+        "result": {
+          "adapter": "orchestration_bridge_enumeration_v1",
+          "bridge_verified": 1,
+          "capability_id": "orchestration.verify.bridge_enumeration.v1",
+          "counts": {
+            "bridge_verified": 1,
+            "consumer_file_needs": 43,
+            "emits_verified": 20,
+            "execution_failures_classified": 210,
+            "producer_candidates": 98,
+            "registry_entries": 146,
+            "skipped": 80
+          },
+          "dependency": {
+            "external_dependency": null,
+            "status": "LOCAL_VERIFIED",
+            "type": "brain_native_deterministic_composition"
+          },
+          "emits_verified": 20,
+          "incremental_spend_usd": 0,
+          "model_dependency_count": 0,
+          "output_path": "tar.gz",
+          "output_sha256": "e18fa6f6d078fd8e3a3fe7e900fb512b6e1c60dfde3775e06d8717bc2f8147b9",
+          "output_verified": true,
+          "verified": true
+        },
+        "result_fields": [
+          "adapter",
+          "output_path",
+          "output_sha256",
+          "output_verified",
+          "emits_verified",
+          "bridge_verified",
+          "counts",
+          "verified",
+          "model_dependency_count",
+          "incremental_spend_usd"
+        ],
+        "result_sha256": "3eac8eeb298149de8860d489aded2d15724cda53d8fb840e2100694082771a48",
+        "schema": "PROJECT_BRAIN_VERIFIED_BOUND_CAPABILITY_EXECUTION_ADAPTER_V1",
+        "search_or_pending_binding_execution_allowed": false,
+        "semantic_boundary": "PROVES_EXECUTION_OF_THE_PROMOTED_REGISTRY_CONTRACT_AND_DECLARED_EXPECTATION;HIGHER_LEVEL_TASK_EFFECT_MEANING_REQUIRES_SEPARATE_AUTHENTICATION",
+        "status": "PASS__PROMOTED_BOUND_CAPABILITY_EXECUTED_AND_TRACE_VERIFIED",
+        "terminal_authority": false
+      }
+    },
+    {
+      "cycle": 1,
+      "declared_plan": {
+        "args": {
+          "summary": "RAW_GOAL_COMPLETE"
+        },
+        "type": "finish"
+      },
+      "plan": {
+        "args": {
+          "summary": "RAW_GOAL_COMPLETE"
+        },
+        "type": "finish"
+      },
+      "result": {
+        "summary": "RAW_GOAL_COMPLETE",
+        "type": "finish"
+      }
+    }
+  ],
+  "created_at_utc": "2026-11-24T04:16:58.040328+00:00",
+  "mission_id": "PATH_TAR_f9ee2867",
+  "next_action_index": 2,
+  "plan_sha256": "0827a21682fc4d420730cfdfd7ed7bfe13f5b450210e3b61598c0b1b94f4581c",
+  "resume_count": 0,
+  "schema": "PROJECT_BRAIN_CONTROLLER_CHECKPOINT_V1",
+  "status": "COMPLETE",
+  "step_id": "live-raw-goal-controller",
+  "test_interrupt_injected": false,
+  "updated_at_utc": "2026-11-24T04:17:00.181537+00:00"
+}

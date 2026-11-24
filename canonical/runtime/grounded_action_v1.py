@@ -389,6 +389,95 @@ def _independent_artifact_check(result, root):
     return (True, "ARTIFACT_PRESENT_UNHASHED:" + rel)
 
 
+# A RECEIPT THAT NEVER MENTIONS THE FILE THE PERSON NAMED IS ABOUT SOMETHING ELSE.
+#
+# Measured 2026-11-23. The goal was
+#
+#     "how many rows are in /tmp/homefile.csv"
+#
+# and the machine ran `python.source.definition_count.v1` -- a Python SOURCE analyser -- on a
+# completely different file, got 11 definitions, and reported VERIFIED_ACTION. Every check passed,
+# because every check asked "did this capability produce an artifact it can vouch for" and none
+# asked "is this artifact about the thing I was told to work on". The named path was dropped during
+# binding (it could not be bound, so a default was used) and NOTHING DOWNSTREAM NOTICED.
+#
+# The fix is deliberately narrow: when the request names a file, and the receipt mentions no path at
+# all that relates to that name, the receipt cannot be an answer about that file.
+_PATH_IN_REQUEST = _re.compile(
+    r"(?<![\w/.~-])((?:~|/|\.{1,2}/)?[\w./~-]*[\w-]+\.[A-Za-z0-9]{1,8})(?![\w/])")
+
+
+def _named_paths(goal: str) -> list[str]:
+    """File names a request explicitly mentions, as a person would write them."""
+    out = []
+    for hit in _PATH_IN_REQUEST.findall(str(goal or "")):
+        hit = hit.strip()
+        # a bare word with a dot is not a path: version numbers, abbreviations, "e.g"
+        if "/" not in hit and len(hit.split(".")[0]) < 3:
+            continue
+        if hit and hit not in out:
+            out.append(hit)
+    return out
+
+
+def _receipt_speaks_to_named_path(result, goal, bound_inputs=None) -> tuple[bool, str] | None:
+    """Does the receipt mention the file the request named?
+
+    Returns None when the request named no file (nothing to check), True when the receipt
+    demonstrably concerns it, and False with a reason when it plainly does not.
+
+    Deliberately conservative: a receipt is accepted if ANY path-shaped value in it shares the
+    named file's basename. A capability that renames its output (report.json for data.csv) still
+    passes if it records the input it read, which every honest adapter does. This check can only
+    catch a receipt that says nothing about the named file at all -- the case that produced a
+    certified answer about a file nobody asked for.
+    """
+    named = _named_paths(goal)
+    if not named:
+        return None
+    # A RECEIPT NEED NOT QUOTE ITS INPUT -- WHAT IT WAS HANDED IS THE BETTER EVIDENCE.
+    # The first version of this check demanded the receipt mention the named file, and an honest
+    # capability that returns only its answer (`{"columns": ...}`) was failed for not echoing a path
+    # it was correctly given. What actually matters is that the run was BOUND to the named file; a
+    # receipt is then about it by construction. So the inputs are checked first, and the receipt only
+    # decides the case where binding says nothing.
+    handed = ""
+    try:
+        import json as _json2
+        handed = _json2.dumps(bound_inputs or {}, default=str).lower()
+    except Exception:
+        handed = str(bound_inputs or "").lower()
+    for name in named:
+        base = name.rstrip("/").split("/")[-1].lower()
+        if base and (base in handed or name.lower() in handed):
+            return (True, "BOUND_TO_NAMED_PATH:" + base)
+        # A SUPERSET IS COVERAGE. A capability given the DIRECTORY that contains the named file
+        # (`source_root: canonical/runtime` for a goal naming `canonical/runtime/solve_v1.py`) has
+        # demonstrably worked on a set that includes it. Measured 2026-11-23: this test failed an
+        # honest audit of 2417 files because its receipt summarised a directory instead of echoing
+        # the file. Over-broad is a different complaint from silent, and only SILENT is a false pass.
+        name_low = name.lower().strip("./")
+        for token in handed.replace('"', " ").replace(",", " ").split():
+            tok = token.strip("{}[]:;'").strip("./")
+            if not tok or "/" not in tok:
+                continue
+            if name_low.startswith(tok.rstrip("/") + "/"):
+                return (True, "BOUND_TO_CONTAINING_DIR:" + tok)
+    blob = ""
+    try:
+        import json as _json
+        blob = _json.dumps(result or {}, default=str).lower()
+    except Exception:
+        blob = str(result or "").lower()
+    for name in named:
+        base = name.rstrip("/").split("/")[-1].lower()
+        if not base:
+            continue
+        if base in blob or name.lower() in blob:
+            return (True, "RECEIPT_MENTIONS_NAMED_PATH:" + base)
+    return (False, "RECEIPT_SILENT_ON_NAMED_PATH:" + named[0])
+
+
 def _word_tokens(text):
     return {t for t in _re.findall(r"[a-z0-9]+", str(text or "").lower())
             if len(t) >= 3}
@@ -1315,6 +1404,19 @@ def act(goal, root=None, registry=None, verbose=False, memory=True,
                 expect_note = "%s+NOT_DELIVERED_TO:%s(%s)" % (
                     expect_note, _dest, type(_exc).__name__)
 
+    # DID ANY OF THIS CONCERN THE FILE I WAS ASKED ABOUT?
+    #
+    # Every check above asks whether this capability can vouch for its own artifact. None asks
+    # whether the artifact is an answer to the question, and that gap certified a run in which the
+    # person named /tmp/homefile.csv and the machine counted definitions in an unrelated .py file.
+    # A capability that never mentions the named file has not answered about it, however well it can
+    # prove the bytes it wrote.
+    path_verdict = (_receipt_speaks_to_named_path(result, goal, chosen.get("inputs"))
+                    if invoked else None)
+    if path_verdict is not None and path_verdict[0] is False:
+        verified = False
+        expect_note = "%s+%s" % (expect_note, path_verdict[1])
+
     out = {
         "schema": SCHEMA,
         "ok": bool(invoked and verified),
@@ -1327,6 +1429,8 @@ def act(goal, root=None, registry=None, verbose=False, memory=True,
         "decisive_margin_ratio": DECISIVE_MARGIN_RATIO,
         "provides": chosen["provides"],
         "expect": expect_note,
+        "named_path_check": ({"ok": path_verdict[0], "note": path_verdict[1]}
+                             if path_verdict is not None else None),
         "result": result if isinstance(result, dict) else repr(result),
         "error": error,
         "ground_ms": round(ground_ms, 2),
